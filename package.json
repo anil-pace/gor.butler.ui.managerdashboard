@@ -6,13 +6,27 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "json": "echo '=>JSON' && jsonparse src/assets/js/serverMessages/server_messages.json -o dist/assets/js/localization/",
-    "browserify": "echo '=>Browserify' && browserify src/index.js -o ./dist/bundle.js -t [ babelify --presets [ es2015 react ] ]",
-    "build-sass": "echo '=>Build SASS' && node-sass --output-style expanded  src/assets/css/main.scss dist/bundle.css  ",
-    "copy": "echo '=>Copying...' && copy ./src/index.html ./dist/"
+    "browserify": "echo '=>Browserify' && browserify %npm_package_config_srcJs% -o %npm_package_config_destinationJs% -t [ babelify --presets [ es2015 react ] ]",
+    "build-sass": "echo '=>Build SASS' && node-sass --output-style expanded   %npm_package_config_srcCss% %npm_package_config_destinationCss%  ",
+    "watch-sass": "node-sass --output-style expanded  %npm_package_config_watchCssSrc% %npm_package_config_watchCssDist% -v",
+    "copy": "echo '=>Copying...' && copy ./src/index.html ./dist/",
+    "build-js": "npm run browserify ",
+    "watch:css": "onchange 'src/assets/css/**/*.scss' -- npm run build-sass ",
+    "build": "npm run build-sass & npm run build-js",
+    "watch:js": "onchange 'src/**/*.js' -- npm run build-js",
+    "watch:all": "parallelshell 'npm run watch:css' 'npm run watch:js'"
   },
   "repository": {
     "type": "git",
     "url": "git+https://himanshu-saraswat@bitbucket.org/gorcode/gor.butler.ui.managerdashboard.git"
+  },
+  "config": { 
+    "destinationCss" : "dist/bundle.css" ,
+    "srcCss" : "src/assets/css/main.scss",
+    "destinationJs":"./dist/bundle.js",
+    "srcJs":"src/index.js",
+    "watchCssSrc":"src/assets/css/*.scss",
+    "watchCssDist":"dist/bundle.css"
   },
   "keywords": [
     "Manager",
