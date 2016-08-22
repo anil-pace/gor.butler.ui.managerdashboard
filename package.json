@@ -6,9 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "json": "echo '=>JSON' && jsonparse src/assets/js/serverMessages/server_messages.json -o dist/assets/js/localization/",
-    "browserify": "echo '=>Browserify' && browserify %npm_package_config_srcJs% -o %npm_package_config_destinationJs% -t [ babelify --presets [ es2015 react ] ]",
-    "build-sass": "echo '=>Build SASS' && node-sass --output-style expanded  %npm_package_config_srcCss% %npm_package_config_destinationCss%  ",
-    "watch-sass": "node-sass --output-style expanded  %npm_package_config_watchCssSrc% %npm_package_config_watchCssDist% -v",
+    "browserify": "echo '=>Browserify' && browserify $npm_package_config_srcJs -o $npm_package_config_destinationJs -t [ babelify --presets [ es2015 react ] ]",
+    "build-sass": "echo '=>Build SASS' && node-sass --output-style expanded  $npm_package_config_srcCss $npm_package_config_destinationCss  ",
+    "watch-sass": "node-sass --output-style expanded  $npm_package_config_watchCssSrc $npm_package_config_watchCssDist -v",
     "copy": "echo '=>Copying...' && copy ./src/index.html ./dist/",
     "lint":"eslint src/**/*.js",
     "build-js": "npm run lint && npm run browserify ",
