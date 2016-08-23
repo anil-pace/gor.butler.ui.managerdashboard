@@ -10,7 +10,7 @@
     "build-sass": "echo '=>Build SASS' && node-sass --output-style expanded  $npm_package_config_srcCss $npm_package_config_destinationCss  ",
     "watch-sass": "node-sass --output-style expanded  $npm_package_config_watchCssSrc $npm_package_config_watchCssDist -v",
     "copy": "echo '=>Copying...' && copy ./src/index.html ./dist/",
-    "lint":"eslint src/**/*.js",
+    "lint": "eslint src/**/*.js",
     "build-js": "npm run lint && npm run browserify ",
     "watch:css": "onchange 'src/assets/css/**/*.scss' -- npm run build-sass ",
     "build": "npm run build-sass && npm run build-js",
@@ -45,6 +45,7 @@
     "babelify": "^7.3.0",
     "eslint": "^3.3.1",
     "eslint-plugin-react": "^6.1.2",
-    "node-sass": "^3.8.0"
+    "node-sass": "^3.8.0",
+    "parallelshell": "^2.0.0"
   }
 }
