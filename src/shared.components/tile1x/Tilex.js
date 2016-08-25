@@ -7,6 +7,7 @@ class Tilex extends React.Component{
     }	
 	render(){
 		return (
+		
 		<div className="gorTile gorSingle">
 			<div className="gorUp-tile">
 				<div className="gorTile-left">
@@ -21,6 +22,7 @@ class Tilex extends React.Component{
 			 	<span>4 PPS stocking 3,456 items/hr</span>
 			</div>
 		</div> 
+		
 		);
 	}
 };

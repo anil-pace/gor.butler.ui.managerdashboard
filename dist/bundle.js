@@ -20782,10 +20782,18 @@ var App = function (_React$Component) {
 		value: function render() {
 			return _react2.default.createElement(
 				'div',
-				null,
-				_react2.default.createElement(_Tilex2.default, null),
-				_react2.default.createElement(_Tilex2.default, null),
-				_react2.default.createElement(_Tile2x2.default, null)
+				{ className: 'mainContainer' },
+				_react2.default.createElement(
+					'div',
+					{ className: 'section group' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'col span_2_of_4' },
+						_react2.default.createElement(_Tilex2.default, null),
+						_react2.default.createElement(_Tilex2.default, null)
+					),
+					_react2.default.createElement(_Tile2x2.default, null)
+				)
 			);
 		}
 	}]);
@@ -20835,61 +20843,24 @@ var Tile2x = function (_React$Component) {
 		value: function render() {
 			return _react2.default.createElement(
 				'div',
-				{ className: 'gorTile gorDouble' },
+				{ className: 'col span_2_of_4 gorNoML' },
 				_react2.default.createElement(
 					'div',
-					{ className: 'gorTile-one' },
+					{ className: 'gorTile gorDouble' },
 					_react2.default.createElement(
 						'div',
-						{ className: 'gorUp-tile' },
-						_react2.default.createElement(
-							'span',
-							{ className: 'gorHeading' },
-							'Items in stock'
-						),
-						_react2.default.createElement(
-							'p',
-							{ className: 'gorHeading-value' },
-							'4,12,132'
-						),
-						_react2.default.createElement(
-							'p',
-							{ className: 'gorStatus gorSuccess' },
-							_react2.default.createElement(
-								'span',
-								null,
-								_react2.default.createElement('img', { src: 'pick.png', width: 20, height: 20 }),
-								'On Schedule'
-							)
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'gorLow-tile' },
-						_react2.default.createElement(
-							'span',
-							null,
-							'4 PPS stocking 3,456 items/hr'
-						)
-					)
-				),
-				_react2.default.createElement(
-					'div',
-					{ className: 'gorTile-two' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'gorUp-tile' },
+						{ className: 'gorTile-one' },
 						_react2.default.createElement(
 							'div',
-							{ className: 'gorTile-left' },
+							{ className: 'gorUp-tile' },
 							_react2.default.createElement(
 								'span',
-								{ className: 'gorHeading gorBreach' },
+								{ className: 'gorHeading' },
 								'Items in stock'
 							),
 							_react2.default.createElement(
 								'p',
-								{ className: 'gorHeading-value gorRisk' },
+								{ className: 'gorHeading-value' },
 								'4,12,132'
 							),
 							_react2.default.createElement(
@@ -20905,17 +20876,58 @@ var Tile2x = function (_React$Component) {
 						),
 						_react2.default.createElement(
 							'div',
-							{ className: 'gorTile-right' },
-							_react2.default.createElement('img', { src: 'pick.png', width: 50, height: 50 })
+							{ className: 'gorLow-tile' },
+							_react2.default.createElement(
+								'span',
+								null,
+								'4 PPS stocking 3,456 items/hr'
+							)
 						)
 					),
 					_react2.default.createElement(
 						'div',
-						{ className: 'gorLow-tile' },
+						{ className: 'gorTile-two' },
 						_react2.default.createElement(
-							'span',
-							null,
-							'4 PPS stocking 3,456 items/hr'
+							'div',
+							{ className: 'gorUp-tile' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'gorTile-left' },
+								_react2.default.createElement(
+									'span',
+									{ className: 'gorHeading gorBreach' },
+									'Items in stock'
+								),
+								_react2.default.createElement(
+									'p',
+									{ className: 'gorHeading-value gorRisk' },
+									'4,12,132'
+								),
+								_react2.default.createElement(
+									'p',
+									{ className: 'gorStatus gorSuccess' },
+									_react2.default.createElement(
+										'span',
+										null,
+										_react2.default.createElement('img', { src: 'pick.png', width: 20, height: 20 }),
+										'On Schedule'
+									)
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'gorTile-right' },
+								_react2.default.createElement('img', { src: 'pick.png', width: 50, height: 50 })
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'gorLow-tile' },
+							_react2.default.createElement(
+								'span',
+								null,
+								'4 PPS stocking 3,456 items/hr'
+							)
 						)
 					)
 				)
