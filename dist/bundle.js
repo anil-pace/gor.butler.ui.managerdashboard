@@ -20752,6 +20752,18 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _healthTabs = require('./shared.components/health/healthTabs');
+
+var _healthTabs2 = _interopRequireDefault(_healthTabs);
+
+var _tabs = require('./shared.components/tabs/tabs');
+
+var _tabs2 = _interopRequireDefault(_tabs);
+
+var _header = require('./shared.components/header/header');
+
+var _header2 = _interopRequireDefault(_header);
+
 var _Tilex = require('./shared.components/tile1x/Tilex');
 
 var _Tilex2 = _interopRequireDefault(_Tilex);
@@ -20783,9 +20795,12 @@ var App = function (_React$Component) {
 			return _react2.default.createElement(
 				'div',
 				null,
+				_react2.default.createElement(_header2.default, null),
+				_react2.default.createElement(_tabs2.default, null),
 				_react2.default.createElement(_Tilex2.default, null),
 				_react2.default.createElement(_Tilex2.default, null),
-				_react2.default.createElement(_Tile2x2.default, null)
+				_react2.default.createElement(_Tile2x2.default, null),
+				_react2.default.createElement(_healthTabs2.default, null)
 			);
 		}
 	}]);
@@ -20796,7 +20811,528 @@ var App = function (_React$Component) {
 ;
 _reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('container'));
 
-},{"./shared.components/tile1x/Tile2x":173,"./shared.components/tile1x/Tilex":174,"react":171,"react-dom":28}],173:[function(require,module,exports){
+},{"./shared.components/header/header":173,"./shared.components/health/healthTabs":175,"./shared.components/tabs/tabs":176,"./shared.components/tile1x/Tile2x":177,"./shared.components/tile1x/Tilex":178,"react":171,"react-dom":28}],173:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function myFunction() {
+	document.getElementById("myDropdown").classList.toggle("show");
+	//document.getElementById("myDropdown").style.display = "block";
+}
+
+window.addEventListener("onClick", function () {
+	if (!event.target.className.match(/dropbtn|block|upperTextClient|subTextClient/)) {
+
+		var dropdowns = document.getElementsByClassName("dropdown-content");
+		var i;
+		for (i = 0; i < dropdowns.length; i++) {
+			var openDropdown = dropdowns[i];
+			if (openDropdown.classList.contains('show')) {
+				openDropdown.classList.remove('show');
+			}
+		}
+	}
+});
+
+var Header = function (_React$Component) {
+	_inherits(Header, _React$Component);
+
+	function Header(props) {
+		_classCallCheck(this, Header);
+
+		return _possibleConstructorReturn(this, Object.getPrototypeOf(Header).call(this, props));
+	}
+
+	_createClass(Header, [{
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement(
+				'header',
+				{ className: 'gorHeader head' },
+				_react2.default.createElement(
+					'div',
+					{ className: 'mainBlock' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'logo' },
+						_react2.default.createElement('img', { src: 'https://s4.postimg.org/feprdgqe5/logo.png' })
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'blockSystem' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'upperText' },
+							'Butler Management System'
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'subText' },
+							'Start time:09:00:15'
+						)
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'blockLeft' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'logo' },
+						_react2.default.createElement('img', { src: 'https://s3.postimg.io/3t3lohtib/flipkart_logo_detail.jpg' })
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'dropdown', id: 'profile' },
+						_react2.default.createElement(
+							'div',
+							{ onclick: 'myFunction()', className: 'dropbtn' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'block' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'upperTextClient truncate' },
+									'Krishna Gandhi Krishna Gandhi Krishna '
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'subTextClient' },
+									'Manager'
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'block' },
+								_react2.default.createElement('img', { src: 'https://s4.postimg.org/nfi3m33vh/icon.jpg' })
+							),
+							_react2.default.createElement(
+								'div',
+								{ id: 'myDropdown', className: 'dropdown-content' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'horizontalDiv' },
+									_react2.default.createElement(
+										'a',
+										{ href: '#' },
+										'Placeholder option 1'
+									),
+									_react2.default.createElement(
+										'a',
+										{ href: '#' },
+										'Placeholder option 2'
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									null,
+									_react2.default.createElement(
+										'a',
+										{ href: '#' },
+										'Logout'
+									)
+								)
+							)
+						)
+					)
+				)
+			);
+		}
+	}]);
+
+	return Header;
+}(_react2.default.Component);
+
+;
+
+exports.default = Header;
+
+},{"react":171,"react-dom":28}],174:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Health = function (_React$Component) {
+	_inherits(Health, _React$Component);
+
+	function Health(props) {
+		_classCallCheck(this, Health);
+
+		return _possibleConstructorReturn(this, Object.getPrototypeOf(Health).call(this, props));
+	}
+
+	_createClass(Health, [{
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement(
+				'div',
+				{ className: 'health mainBlock' },
+				_react2.default.createElement(
+					'div',
+					{ className: 'block attributes' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'upperText' },
+						'16'
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'subtext' },
+						'PPS'
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'horizontal-line' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'block parameters' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'block paramPositionFront' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'block stoppedState' },
+								_react2.default.createElement(
+									'span',
+									null,
+									'3'
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'status' },
+								'Stopped'
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'block paramPositionMiddle' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'block onState' },
+								_react2.default.createElement(
+									'span',
+									null,
+									'12'
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'status' },
+								'On'
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'block paramPositionBack' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'block errorState' },
+								_react2.default.createElement(
+									'span',
+									null,
+									'1'
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'status' },
+								'Error'
+							)
+						)
+					)
+				)
+			);
+		}
+	}]);
+
+	return Health;
+}(_react2.default.Component);
+
+;
+
+exports.default = Health;
+
+},{"react":171,"react-dom":28}],175:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _health = require('./health');
+
+var _health2 = _interopRequireDefault(_health);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var HealthTabs = function (_React$Component) {
+	_inherits(HealthTabs, _React$Component);
+
+	function HealthTabs(props) {
+		_classCallCheck(this, HealthTabs);
+
+		return _possibleConstructorReturn(this, Object.getPrototypeOf(HealthTabs).call(this, props));
+	}
+
+	_createClass(HealthTabs, [{
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(_health2.default, null),
+				_react2.default.createElement(_health2.default, null),
+				_react2.default.createElement(_health2.default, null)
+			);
+		}
+	}]);
+
+	return HealthTabs;
+}(_react2.default.Component);
+
+;
+exports.default = HealthTabs;
+
+},{"./health":174,"react":171,"react-dom":28}],176:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Tabs = function (_React$Component) {
+	_inherits(Tabs, _React$Component);
+
+	function Tabs(props) {
+		_classCallCheck(this, Tabs);
+
+		return _possibleConstructorReturn(this, Object.getPrototypeOf(Tabs).call(this, props));
+	}
+
+	_createClass(Tabs, [{
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement(
+				'div',
+				{ className: 'gorTab container' },
+				_react2.default.createElement(
+					'div',
+					{ className: 'mainBlock' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'inline' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'upperText' },
+							'OVERVIEW'
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'offline' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'subText' },
+							'Fulfilling orders'
+						)
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'gorTab mainBlock' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'inline' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'upperText' },
+							'SYSTEM'
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'online' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'subText' },
+							'Online'
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'inline' },
+							_react2.default.createElement('img', { src: '' })
+						)
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'gorTab mainBlock' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'inline' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'upperText' },
+							'ORDERS'
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'risk' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'subText' },
+							'More PPS'
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'inline' },
+							_react2.default.createElement('img', { src: '' })
+						)
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'gorTab mainBlock' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'inline' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'upperText' },
+							'INVENTORY'
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'offline' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'subText' },
+							'78% space utilised'
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'inline' },
+							_react2.default.createElement('img', { src: '' })
+						)
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'gorTab mainBlock' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'inline' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'upperText' },
+							'USERS'
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'offline' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'subText' },
+							'35 users logged in'
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'inline' },
+							_react2.default.createElement('img', { src: '' })
+						)
+					)
+				)
+			);
+		}
+	}]);
+
+	return Tabs;
+}(_react2.default.Component);
+
+;
+
+exports.default = Tabs;
+
+},{"react":171,"react-dom":28}],177:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -20906,7 +21442,7 @@ var Tile2x = function (_React$Component) {
 						_react2.default.createElement(
 							'div',
 							{ className: 'gorTile-right' },
-							_react2.default.createElement('img', { src: 'pick.png', width: 50, height: 50 })
+							_react2.default.createElement('img', { src: 'https://s15.postimg.org/nthl9w0q3/pick.png', width: 50, height: 50 })
 						)
 					),
 					_react2.default.createElement(
@@ -20930,7 +21466,7 @@ var Tile2x = function (_React$Component) {
 
 exports.default = Tile2x;
 
-},{"react":171,"react-dom":28}],174:[function(require,module,exports){
+},{"react":171,"react-dom":28}],178:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -20990,7 +21526,7 @@ var Tilex = function (_React$Component) {
 					_react2.default.createElement(
 						'div',
 						{ className: 'gorTile-right' },
-						_react2.default.createElement('img', { src: 'pick.png', width: 50, height: 50 })
+						_react2.default.createElement('img', { src: 'https://s15.postimg.org/nthl9w0q3/pick.png', width: 50, height: 50 })
 					)
 				),
 				_react2.default.createElement(

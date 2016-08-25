@@ -70,14 +70,338 @@ input, select {
   vertical-align: middle;
 }
 
-@font-face {
-  font-family: 'Source Sans Pro';
-  src: url("./Source_Sans_Pro/SourceSansPro-Regular.ttf") format("truetype");
+.health.mainBlock {
+  width: 300px;
+  border: .5px solid #f7f7f7;
 }
 
-body {
-  background: #F2F2F2;
-  font-family: 'Source Sans Pro', sans-serif;
+.health .block {
+  display: inline-block;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.health .attributes {
+  width: 91px;
+}
+
+.health .upperText {
+  font-family: "source sans pro";
+  font-size: 24px;
+}
+
+.health .subtext {
+  font-family: "source sans pro";
+  font-size: 12px;
+}
+
+.health .parameters {
+  width: 204px;
+}
+
+.health .stoppedState {
+  background: #ec1c24;
+  width: 28px;
+  height: 18px;
+  border-radius: 40%;
+  color: #ffffff;
+  font-family: "source sans pro";
+  font-weight: bold;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.health .onState {
+  background: #ffffff;
+  width: 28px;
+  height: 18px;
+  border-radius: 40%;
+  color: #666666;
+  font-family: "source sans pro";
+  border-style: solid;
+  border-width: 1px;
+  border-color: #00a54f;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.health .offState {
+  background: #ffffff;
+  width: 28px;
+  height: 18px;
+  border-radius: 40%;
+  color: #666666;
+  font-family: "source sans pro";
+  border-style: solid;
+  border-width: 1px;
+  border-color: #999999;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.health .errorState {
+  background: #ffffff;
+  width: 30px;
+  height: 18px;
+  border-radius: 40%;
+  color: #666666;
+  font-family: "source sans pro";
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ec1c24;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.health .paramPosition {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.health .paramPositionFront {
+  padding-right: 15px;
+  padding-left: 10px;
+}
+
+.health .paramPositionMiddle {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.health .paramPositionBack {
+  padding-right: 10px;
+  padding-left: 15px;
+}
+
+.health .status {
+  font-family: "source sans pro";
+  font-size: 12px;
+  color: #666666;
+  text-align: center;
+}
+
+.health .horizontal-line {
+  display: inline-block;
+  height: 30px;
+  border-left: 1px solid #f7f7f7;
+  width: 204px;
+}
+
+.gorHeader .dropbtn {
+  background-color: white;
+  color: #4d5055;
+  padding: 0 1em;
+  font-size: 14;
+  border: none;
+  cursor: pointer;
+  width: 188px;
+  font-family: "source sans pro";
+}
+
+.gorHeader .dropbtn:hover, .gorHeader .dropbtn:focus {
+  background-color: #efefef;
+}
+
+.gorHeader .dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.gorHeader .dropdown-content {
+  font-family: "source sans pro";
+  background-color: white;
+  font-size: 14;
+  color: #4d5055;
+  width: 223px;
+  display: none;
+  position: absolute;
+  right: 0;
+  min-width: 5em;
+  box-shadow: 0em 0.1em 0.2em 0em rgba(0, 0, 0, 0.2);
+}
+
+.gorHeader .dropdown-content a {
+  color: #666666;
+  background-color: white;
+  padding: 12px 16px;
+  font-size: .7em;
+  text-decoration: none;
+  padding: 1em 3em;
+  display: block;
+}
+
+.gorHeader .dropdown a:hover {
+  background-color: #efefef;
+}
+
+.gorHeader .show {
+  display: block;
+}
+
+.gorHeader .horizontalDiv {
+  border-bottom: 0.15em solid #e7e7e7;
+}
+
+.gorHeader .logo {
+  display: inline-block;
+  border-right: 0.15em solid #e7e7e7;
+  line-height: 1px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.gorHeader .upperText {
+  font-family: "source sans pro";
+  font-size: 18px;
+  color: #4d5055;
+  font-weight: bold;
+  line-height: 0;
+  display: inline-block;
+  padding: 0px 20px 6px 20px;
+}
+
+.gorHeader .subText {
+  font-family: "source sans pro";
+  font-size: 12px;
+  font-weight: normal;
+  color: #4d5055;
+  line-height: 0px;
+  text-align: left;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 13px;
+}
+
+.gorHeader .subTextClient {
+  font-family: "source sans pro";
+  font-size: 12px;
+  font-weight: normal;
+  color: #4d5055;
+  line-height: 0px;
+  text-align: left;
+  padding-right: 20px;
+  padding-top: 9px;
+}
+
+.gorHeader .block {
+  display: inline-block;
+  position: relative;
+}
+
+.gorHeader .mainBlock {
+  display: inline-block;
+  position: relative;
+}
+
+.gorHeader .blockSystem {
+  display: inline-block;
+  position: relative;
+  vertical-align: sub;
+}
+
+.gorHeader .blockLeft {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+}
+
+.gorHeader .upperTextClient {
+  padding: 10px 20px 6px 0px;
+  font-family: "source sans pro";
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 0;
+  display: inline-block;
+}
+
+div.vertical-line {
+  width: 1px;
+  background-color: black;
+  height: 100%;
+}
+
+.gorHeader .truncate {
+  width: 110px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gorTab.container {
+  background-color: #4d5055;
+  width: auto;
+}
+
+.gorTab .mainBlock:hover {
+  background-color: #323539;
+}
+
+.gorTab .inline {
+  display: inline-block;
+}
+
+.gorTab .mainBlock {
+  width: 120px;
+  padding-right: 20px;
+  padding-left: 20px;
+  height: 60px;
+  display: table-cell;
+  border: .5px solid black;
+  background: #4d5055;
+}
+
+.gorTab .upperText {
+  padding-top: 7px;
+  font-family: "source sans pro";
+  font-size: 18px;
+  font-weight: bold;
+  padding-bottom: 3px;
+  color: #ffffff;
+}
+
+.gorTab .subText {
+  font-size: 14px;
+  padding-top: 0px;
+  font-weight: bold;
+}
+
+.gorTab .overview {
+  font-family: "source sans pro";
+  color: #ffffff;
+}
+
+.gorTab .online {
+  font-family: "source sans pro";
+  color: #10c469;
+}
+
+.gorTab .offline {
+  font-family: "source sans pro";
+  color: #ffffff;
+}
+
+.gorTab .event {
+  font-family: "source sans pro";
+  color: #27aae1;
+}
+
+.gorTab .risk {
+  font-family: "source sans pro";
+  color: #f99405;
+}
+
+.gorTab .error {
+  font-family: "source sans pro";
+  color: #fc3838;
+}
+
+.gorTab .emergency {
+  font-family: "source sans pro";
+  color: #ffffff;
+  background: #fc3838;
 }
 
 .gorTile {
