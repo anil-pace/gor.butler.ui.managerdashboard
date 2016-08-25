@@ -72,7 +72,7 @@ input, select {
 
 @font-face {
   font-family: 'Source Sans Pro';
-  src: url("./Source_Sans_Pro/SourceSansPro-Regular.ttf") format("truetype");
+  src: url("../Source_Sans_Pro/SourceSansPro-Regular.ttf") format("truetype");
 }
 
 body {

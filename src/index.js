@@ -1,7 +1,7 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import Tilex from './shared.components/tile1x/Tilex';
-import Tile2x from './shared.components/tile1x/Tile2x';
+import Tile2x from './shared.components/tile2x/Tile2x';
 
 class App extends React.Component{
 	render(){

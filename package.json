@@ -15,7 +15,8 @@
     "watch:css": "onchange 'src/assets/css/**/*.scss' -- npm run build-sass ",
     "build": "npm run build-sass && npm run build-js",
     "watch:js": "onchange 'src/**/*.js' -- npm run build-js",
-    "watch:all": "parallelshell 'npm run watch:css' 'npm run watch:js'"
+    "watch:all": "parallelshell 'npm run watch:css' 'npm run watch:js'",
+    "test": "./node_modules/jest/bin/jest.js"
   },
   "repository": {
     "type": "git",
@@ -53,6 +54,33 @@
     "onchange": "^2.5.0",
     "parallelshell": "^2.0.0",
     "react": "^15.3.1",
-    "react-dom": "^15.3.1"
+    "react-dom": "^15.3.1",
+    "babel-cli": "^6.11.4",
+    "babel-jest": "^13.2.2",
+    "babel-preset-airbnb": "^2.0.0",
+    "enzyme": "^2.4.1",
+    "jasmine-reporters": "^1.0.0",
+    "jest": "^13.2.3",
+    "react-addons-test-utils": "^15.2.0" ,
+    "babel-plugin-react-transform": "2.0.2",
+    "babel-plugin-transform-decorators-legacy": "1.3.4"
+  },
+  "dependencies": {
+    "react": "^15.2.0",
+    "react-dom": "^15.2.0",
+    "istanbul": "^0.3.0",
+    "jasmine": "^2.4.1",
+    "xmldom": "^0.1.22",
+    "react-i18next": "file:../",
+    "i18next": "3.3.1",
+    "i18next-browser-languagedetector": "0.3.0",
+    "i18next-xhr-backend": "0.6.0"
+  },
+  "jest": {
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react/",
+      "<rootDir>/node_modules/enzyme/",
+      "<rootDir>/node_modules/jasmine-reporters"
+    ]
   }
 }
