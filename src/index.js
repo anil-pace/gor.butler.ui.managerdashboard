@@ -30,6 +30,8 @@ class App extends React.Component{
 			
 			<PerformanceWidget/>
 			</div>
+			</div>
+
 		);
 	}
 };
