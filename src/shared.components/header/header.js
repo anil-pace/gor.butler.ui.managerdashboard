@@ -33,6 +33,7 @@ class Header extends React.Component{
 				<div className="logo">
 					<img src="https://s4.postimg.org/feprdgqe5/logo.png"></img>
 				</div>
+				<div className="horizontal-line"> </div>
 				<div className="blockSystem">
 					<div className="upperText">Butler Management System</div>
 					<div className="subText">Start time:09:00:15</div>
@@ -42,6 +43,7 @@ class Header extends React.Component{
 				<div className="logo">
 					<img src="https://s3.postimg.io/3t3lohtib/flipkart_logo_detail.jpg"></img>
 				</div>
+				<div className="horizontal-line"> </div>
 				<div className="dropdown" id="profile">
 					<div onclick="myFunction()" className="dropbtn">
 						<div className="block">

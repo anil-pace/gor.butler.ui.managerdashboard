@@ -8,6 +8,7 @@
 				cursor: pointer;
 				width :188px; 
 				font-family: "source sans pro";
+				
 			}
 
 			.gorHeader .dropbtn:hover, .gorHeader .dropbtn:focus {
@@ -18,7 +19,7 @@
 				
 				position: relative;
 				display: inline-block;
-				
+
 
 
 			}
@@ -55,7 +56,6 @@
 			}
 			.gorHeader .logo {
 				display: inline-block; 
-				border-right: 0.15em solid #e7e7e7; 
 				line-height: 1px;
 				padding-top: 15px;
 				padding-bottom: 15px;
@@ -131,11 +131,14 @@
 
 			}
 
-			div.vertical-line{
-				width: 1px; 
-				background-color: black; 
-				height: 100%; 
+			.gorHeader .horizontal-line{
+			display: inline-block;
+			height: 30px;
+			border-left: 1px solid #f7f7f7;
+			vertical-align: sub;
 			}
+
+			
 
 			.gorHeader .truncate {
 				width: 110px;

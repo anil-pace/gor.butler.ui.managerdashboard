@@ -20756,6 +20756,10 @@ var _healthTabs = require('./shared.components/health/healthTabs');
 
 var _healthTabs2 = _interopRequireDefault(_healthTabs);
 
+var _health = require('./shared.components/health/health');
+
+var _health2 = _interopRequireDefault(_health);
+
 var _tabs = require('./shared.components/tabs/tabs');
 
 var _tabs2 = _interopRequireDefault(_tabs);
@@ -20771,6 +20775,14 @@ var _Tilex2 = _interopRequireDefault(_Tilex);
 var _Tile2x = require('./shared.components/tile1x/Tile2x');
 
 var _Tile2x2 = _interopRequireDefault(_Tile2x);
+
+var _orderStatsWidget = require('./shared.components/widgetContainer/orderStatsWidget');
+
+var _orderStatsWidget2 = _interopRequireDefault(_orderStatsWidget);
+
+var _performanceWidget = require('./shared.components/widgetContainer/performanceWidget');
+
+var _performanceWidget2 = _interopRequireDefault(_performanceWidget);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20794,13 +20806,22 @@ var App = function (_React$Component) {
 		value: function render() {
 			return _react2.default.createElement(
 				'div',
-				null,
+				{ 'class': 'mainContainer' },
 				_react2.default.createElement(_header2.default, null),
 				_react2.default.createElement(_tabs2.default, null),
-				_react2.default.createElement(_Tilex2.default, null),
-				_react2.default.createElement(_Tilex2.default, null),
-				_react2.default.createElement(_Tile2x2.default, null),
-				_react2.default.createElement(_healthTabs2.default, null)
+				_react2.default.createElement(
+					'div',
+					{ className: 'section group' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'col span_2_of_4' },
+						_react2.default.createElement(_Tilex2.default, null),
+						_react2.default.createElement(_Tilex2.default, null)
+					),
+					_react2.default.createElement(_Tile2x2.default, null)
+				),
+				_react2.default.createElement(_orderStatsWidget2.default, null),
+				_react2.default.createElement(_performanceWidget2.default, null)
 			);
 		}
 	}]);
@@ -20811,7 +20832,7 @@ var App = function (_React$Component) {
 ;
 _reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('container'));
 
-},{"./shared.components/header/header":173,"./shared.components/health/healthTabs":175,"./shared.components/tabs/tabs":176,"./shared.components/tile1x/Tile2x":177,"./shared.components/tile1x/Tilex":178,"react":171,"react-dom":28}],173:[function(require,module,exports){
+},{"./shared.components/header/header":173,"./shared.components/health/health":174,"./shared.components/health/healthTabs":175,"./shared.components/tabs/tabs":176,"./shared.components/tile1x/Tile2x":177,"./shared.components/tile1x/Tilex":178,"./shared.components/widgetContainer/orderStatsWidget":179,"./shared.components/widgetContainer/performanceWidget":180,"react":171,"react-dom":28}],173:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -20880,6 +20901,11 @@ var Header = function (_React$Component) {
 					),
 					_react2.default.createElement(
 						'div',
+						{ className: 'horizontal-line' },
+						' '
+					),
+					_react2.default.createElement(
+						'div',
 						{ className: 'blockSystem' },
 						_react2.default.createElement(
 							'div',
@@ -20900,6 +20926,11 @@ var Header = function (_React$Component) {
 						'div',
 						{ className: 'logo' },
 						_react2.default.createElement('img', { src: 'https://s3.postimg.io/3t3lohtib/flipkart_logo_detail.jpg' })
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'horizontal-line' },
+						' '
 					),
 					_react2.default.createElement(
 						'div',
@@ -21024,6 +21055,11 @@ var Health = function (_React$Component) {
 				_react2.default.createElement(
 					'div',
 					{ className: 'horizontal-line' },
+					' '
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'block' },
 					_react2.default.createElement(
 						'div',
 						{ className: 'block parameters' },
@@ -21371,61 +21407,24 @@ var Tile2x = function (_React$Component) {
 		value: function render() {
 			return _react2.default.createElement(
 				'div',
-				{ className: 'gorTile gorDouble' },
+				{ className: 'col span_2_of_4 gorNoML' },
 				_react2.default.createElement(
 					'div',
-					{ className: 'gorTile-one' },
+					{ className: 'gorTile gorDouble' },
 					_react2.default.createElement(
 						'div',
-						{ className: 'gorUp-tile' },
-						_react2.default.createElement(
-							'span',
-							{ className: 'gorHeading' },
-							'Items in stock'
-						),
-						_react2.default.createElement(
-							'p',
-							{ className: 'gorHeading-value' },
-							'4,12,132'
-						),
-						_react2.default.createElement(
-							'p',
-							{ className: 'gorStatus gorSuccess' },
-							_react2.default.createElement(
-								'span',
-								null,
-								_react2.default.createElement('img', { src: 'pick.png', width: 20, height: 20 }),
-								'On Schedule'
-							)
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'gorLow-tile' },
-						_react2.default.createElement(
-							'span',
-							null,
-							'4 PPS stocking 3,456 items/hr'
-						)
-					)
-				),
-				_react2.default.createElement(
-					'div',
-					{ className: 'gorTile-two' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'gorUp-tile' },
+						{ className: 'gorTile-one' },
 						_react2.default.createElement(
 							'div',
-							{ className: 'gorTile-left' },
+							{ className: 'gorUp-tile' },
 							_react2.default.createElement(
 								'span',
-								{ className: 'gorHeading gorBreach' },
+								{ className: 'gorHeading' },
 								'Items in stock'
 							),
 							_react2.default.createElement(
 								'p',
-								{ className: 'gorHeading-value gorRisk' },
+								{ className: 'gorHeading-value' },
 								'4,12,132'
 							),
 							_react2.default.createElement(
@@ -21441,17 +21440,58 @@ var Tile2x = function (_React$Component) {
 						),
 						_react2.default.createElement(
 							'div',
-							{ className: 'gorTile-right' },
-							_react2.default.createElement('img', { src: 'https://s15.postimg.org/nthl9w0q3/pick.png', width: 50, height: 50 })
+							{ className: 'gorLow-tile' },
+							_react2.default.createElement(
+								'span',
+								null,
+								'4 PPS stocking 3,456 items/hr'
+							)
 						)
 					),
 					_react2.default.createElement(
 						'div',
-						{ className: 'gorLow-tile' },
+						{ className: 'gorTile-two' },
 						_react2.default.createElement(
-							'span',
-							null,
-							'4 PPS stocking 3,456 items/hr'
+							'div',
+							{ className: 'gorUp-tile' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'gorTile-left' },
+								_react2.default.createElement(
+									'span',
+									{ className: 'gorHeading gorBreach' },
+									'Items in stock'
+								),
+								_react2.default.createElement(
+									'p',
+									{ className: 'gorHeading-value gorRisk' },
+									'4,12,132'
+								),
+								_react2.default.createElement(
+									'p',
+									{ className: 'gorStatus gorSuccess' },
+									_react2.default.createElement(
+										'span',
+										null,
+										_react2.default.createElement('img', { src: 'pick.png', width: 20, height: 20 }),
+										'On Schedule'
+									)
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'gorTile-right' },
+								_react2.default.createElement('img', { src: 'https://s15.postimg.org/nthl9w0q3/pick.png', width: 50, height: 50 })
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'gorLow-tile' },
+							_react2.default.createElement(
+								'span',
+								null,
+								'4 PPS stocking 3,456 items/hr'
+							)
 						)
 					)
 				)
@@ -21549,4 +21589,112 @@ var Tilex = function (_React$Component) {
 
 exports.default = Tilex;
 
-},{"react":171,"react-dom":28}]},{},[172]);
+},{"react":171,"react-dom":28}],179:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _healthTabs = require('../health/healthTabs.js');
+
+var _healthTabs2 = _interopRequireDefault(_healthTabs);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var OrderStatsWidget = function (_React$Component) {
+	_inherits(OrderStatsWidget, _React$Component);
+
+	function OrderStatsWidget(props) {
+		_classCallCheck(this, OrderStatsWidget);
+
+		return _possibleConstructorReturn(this, Object.getPrototypeOf(OrderStatsWidget).call(this, props));
+	}
+
+	_createClass(OrderStatsWidget, [{
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement('div', { className: 'orderStatsWidget' });
+		}
+	}]);
+
+	return OrderStatsWidget;
+}(_react2.default.Component);
+
+;
+
+exports.default = OrderStatsWidget;
+
+},{"../health/healthTabs.js":175,"react":171,"react-dom":28}],180:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _healthTabs = require('../health/healthTabs.js');
+
+var _healthTabs2 = _interopRequireDefault(_healthTabs);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var PerformanceWidget = function (_React$Component) {
+	_inherits(PerformanceWidget, _React$Component);
+
+	function PerformanceWidget(props) {
+		_classCallCheck(this, PerformanceWidget);
+
+		return _possibleConstructorReturn(this, Object.getPrototypeOf(PerformanceWidget).call(this, props));
+	}
+
+	_createClass(PerformanceWidget, [{
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement(
+				'div',
+				{ className: 'performanceWidget' },
+				_react2.default.createElement(_healthTabs2.default, null)
+			);
+		}
+	}]);
+
+	return PerformanceWidget;
+}(_react2.default.Component);
+
+;
+
+exports.default = PerformanceWidget;
+
+},{"../health/healthTabs.js":175,"react":171,"react-dom":28}]},{},[172]);

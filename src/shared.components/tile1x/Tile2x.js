@@ -7,6 +7,7 @@ class Tile2x extends React.Component{
     }
 	render(){
 		return (
+		<div className ="col span_2_of_4 gorNoML">
 		<div className="gorTile gorDouble">
 			<div className="gorTile-one">		 
 				<div className="gorUp-tile">
@@ -33,6 +34,7 @@ class Tile2x extends React.Component{
 			 		<span>4 PPS stocking 3,456 items/hr</span>
 				</div>
 		  	</div>
+		  </div>
 		  </div>
 		);
 	}

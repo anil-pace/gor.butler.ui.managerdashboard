@@ -16,7 +16,8 @@ class Health extends React.Component{
 				PPS
 			</div>
 		</div>
-		<div className="horizontal-line">
+		<div className="horizontal-line"> </div>
+		<div className="block">
 			<div className="block parameters">
 				<div className="block paramPositionFront">
 					<div className="block stoppedState" >
