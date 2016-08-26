@@ -1,3 +1,13 @@
+@font-face
+{
+  font-family: 'Source Sans Pro';
+  src: url('../src/assets/Source_Sans_Pro/SourceSansPro-Regular.ttf')  format('truetype')
+}
+body
+{
+	background: #F2F2F2;
+	font-family: 'Source Sans Pro', sans-serif;
+}
 .gorTile
 {
   background: #fff;
@@ -42,12 +52,6 @@
     font-size: 16px;
     font-weight: 600;
     line-height: 46px;
-}
-.gorHeading{
-    font-family: 'Source Sans Pro semibold', sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 36px;
 }
 .gorHeading-value{
     font-family: 'Source Sans Pro regular', sans-serif;
