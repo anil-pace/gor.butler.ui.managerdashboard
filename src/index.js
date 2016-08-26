@@ -1,13 +1,13 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-import HealthTabs from './shared.components/health/healthTabs';
-import Health from './shared.components/health/health';
-import Tabs from './shared.components/tabs/tabs';
-import Header from './shared.components/header/header';
-import Tilex from './shared.components/tile1x/Tilex';
-import Tile2x from './shared.components/tile1x/Tile2x';
-import OrderStatsWidget from './shared.components/widgetContainer/orderStatsWidget'
-import PerformanceWidget from './shared.components/widgetContainer/performanceWidget'
+import HealthTabs from './components/health/healthTabs';
+import Health from './components/health/health';
+import Tabs from './components/tabs/tabs';
+import Header from './components/header/header';
+import Tilex from './components/tile1x/Tilex';
+import Tile2x from './components/tile2x/Tile2x';
+import OrderStatsWidget from './components/widgetContainer/orderStatsWidget'
+import PerformanceWidget from './components/widgetContainer/performanceWidget'
 
 
 class App extends React.Component{

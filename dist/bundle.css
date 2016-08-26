@@ -530,6 +530,16 @@ body {
   background: #fc3838;
 }
 
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: url("../src/assets/Source_Sans_Pro/SourceSansPro-Regular.ttf") format("truetype");
+}
+
+body {
+  background: #F2F2F2;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
 .gorTile {
   background: #fff;
   border-radius: 3px;
@@ -582,13 +592,6 @@ body {
   font-size: 16px;
   font-weight: 600;
   line-height: 46px;
-}
-
-.gorTile .gorHeading {
-  font-family: 'Source Sans Pro semibold', sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 36px;
 }
 
 .gorTile .gorHeading-value {
