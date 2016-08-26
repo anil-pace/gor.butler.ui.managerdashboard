@@ -1,0 +1,74 @@
+.gorTab.container{
+			background-color:#4d5055;
+			width: auto;
+		}
+
+		.gorTab .mainBlock:hover{
+			background-color:#323539;
+		}
+
+		.gorTab .inline{
+			display: inline-block;
+		}
+
+		.gorTab .mainBlock {
+			width: 120px;
+			padding-right: 20px;
+			padding-left: 20px;
+			height: 60px;
+			display: table-cell;
+			border: .5px solid black;
+			background: #4d5055;
+			cursor: pointer;
+		}
+		.gorTab .upperText {
+			padding-top: 7px;
+			font-family: "source sans pro";
+			font-size: 18px;
+			font-weight: bold;
+			padding-bottom: 3px;
+			color: #ffffff;
+		}
+		.gorTab .subText {
+			
+			font-size: 14px;
+			padding-top: 0px;
+			font-weight: bold;
+
+		}	
+		.gorTab .overview{
+			font-family: "source sans pro";
+			color: #ffffff;
+		}
+		.gorTab .online{
+			font-family: "source sans pro";
+			color: #10c469;
+
+		}
+
+		.gorTab .offline{
+			font-family: "source sans pro";
+			color: #ffffff;
+		}
+		
+		.gorTab .event{
+			font-family: "source sans pro";
+			color: #27aae1;
+		}
+
+		.gorTab .risk{
+			font-family: "source sans pro";
+			color: #f99405;
+		}
+
+		.gorTab .error{
+			font-family: "source sans pro";
+			color: #fc3838;
+		}
+		
+
+		.gorTab .emergency{
+			font-family: "source sans pro";
+			color: #ffffff;
+			background: #fc3838;
+		}

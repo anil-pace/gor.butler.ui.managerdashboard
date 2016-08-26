@@ -1,0 +1,24 @@
+@import '../abstracts/variables';
+@import '../abstracts/functions';
+@import '../abstracts/mixins';
+
+/*Default Fonts*/
+
+@font-face
+{
+  font-family: 'Source Sans Pro';
+  src: url('fonts/SourceSansPro-Regular.ttf')  format('truetype'),
+  url('fonts/SourceSansPro-Semibold.ttf')  format('truetype'),
+  url('fonts/SourceSansPro-Regular.ttf')  format('truetype'),
+  url('fonts/SourceSansPro-Regular.ttf')  format('truetype'),
+  url('fonts/SourceSansPro-Regular.ttf')  format('truetype'),
+  url('fonts/SourceSansPro-Regular.ttf')  format('truetype')
+}
+
+*{
+	font-family:Source Sans Pro;
+}
+
+body{
+	background : $gor-body-background;
+}
