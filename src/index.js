@@ -13,7 +13,7 @@ import PerformanceWidget from './shared.components/widgetContainer/performanceWi
 class App extends React.Component{
 	render(){
 		return (
-			<div class="mainContainer">
+			<div className ="mainContainer">
 			<Header/>
 			<Tabs/>
 			<div className="section group">
@@ -30,7 +30,7 @@ class App extends React.Component{
 			
 			<PerformanceWidget/>
 			</div>
-			</div>
+			
 
 		);
 	}

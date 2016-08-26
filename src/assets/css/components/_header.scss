@@ -1,43 +1,49 @@
-.gorHeader.head {}
-			.gorHeader .dropbtn {
-				background-color: white;
-				color: #4d5055;
-				padding: 0 1em;
-				font-size: 14;
-				border: none;
-				cursor: pointer;
-				width :188px; 
-				font-family: "source sans pro";
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+@import '../abstracts/functions';
+
+.gorHeader {
+	&.head{
+		overflow: hidden;
+    	padding: 5px 0;
+    	background:#fff;
+	}
+	.dropbtn{
+		background-color: #fff;
+		color: #4d5055;
+		padding: 0 1em;
+		font-size: 14px;
+		border: none;
+		cursor: pointer;
+		width :188px; 
+		font-family: $gor-font-family;
+		&:hover{
+			background-color: #efefef;
+		}
+		&:focus{
+			background-color: #efefef;
+		}
+		
+		
 				
-			}
-
-			.gorHeader .dropbtn:hover, .gorHeader .dropbtn:focus {
-				background-color: #efefef;
-			}
-
-			.gorHeader .dropdown {
-				
-				position: relative;
-				display: inline-block;
-
-
-
-			}
-
-			.gorHeader .dropdown-content {
-				font-family: "source sans pro";
-				background-color: white;
-				font-size: 14;
-				color: #4d5055;
-				width :223px; 
-				display: none;
-				position: absolute;
-				right: 0;
-				min-width: 5em;
-				box-shadow: 0em .1em .2em 0em rgba(0,0,0,0.2);
-			}
-
-			.gorHeader .dropdown-content a {
+	}
+	.dropdown {
+			
+			display: inline-block;
+			vertical-align: middle;
+		}
+	.dropdown-content {
+			font-family: $gor-font-family;
+			background-color: white;
+			font-size: 14;
+			color: #4d5055;
+			width :223px; 
+			display: none;
+			position: absolute;
+			right: 0;
+			min-width: 5em;
+			box-shadow: 0em .1em .2em 0em rgba(0,0,0,0.2);
+			a{
 				color: #666666;
 				background-color: white;
 				padding: 12px 16px;
@@ -45,49 +51,40 @@
 				text-decoration: none;
 				padding: 1em 3em;
 				display: block;
+				&:hover{
+				 background-color: #efefef
+				}
 			}
-
-			.gorHeader .dropdown a:hover {background-color: #efefef}
-
-			.gorHeader .show {display:block;}
-
-			.gorHeader .horizontalDiv {
-				border-bottom: 0.15em solid #e7e7e7;
-			}
-			.gorHeader .logo {
-				display: inline-block; 
-				line-height: 1px;
-				padding-top: 15px;
-				padding-bottom: 15px;
-				padding-left: 20px;
-				padding-right: 20px;
-			}
-
-			.gorHeader .upperText {
-				font-family: "source sans pro";
-				font-size: 18px;
-				color: #4d5055;
-				font-weight: bold;
-				line-height: 0;  
-				display: inline-block;
-				padding:0px 20px 6px 20px;
-			}
-
-			.gorHeader .subText {
-				font-family: "source sans pro";
-				font-size: 12px;
-				font-weight: normal;
-				color: #4d5055;
-				line-height: 0px; 
-				text-align: left;
-				padding-left: 20px;
-				padding-right: 20px;
-				padding-top: 13px;
-
-			}
-
-			.gorHeader .subTextClient {
-				font-family: "source sans pro";
+		}
+		.show {
+			display:block;
+		}
+		.horizontalDiv {
+			border-bottom: 0.15em solid #e7e7e7;
+		}
+		.logo {
+			display: inline-block; 
+			overflow: hidden;
+    		vertical-align: middle;
+    		border-right: 1px solid black;
+		}
+		.upperText {
+			font-family: $gor-font-family;
+			font-size: 18px;
+			color: #4d5055;
+			font-weight: bold;
+			line-height: 1;  
+			display: inline-block;
+			
+		}
+		.subText {
+			font-family: $gor-font-family;
+			font-size: 12px;
+			font-weight: normal;
+			color: #4d5055;
+		}
+		.subTextClient {
+				font-family: $gor-font-family;
 				font-size: 12px;
 				font-weight: normal;
 				color: #4d5055;
@@ -98,32 +95,32 @@
 
 			}
 
-			.gorHeader .block {
+			.block {
 				display: inline-block;
-				position: relative;
 				
 			}
-			.gorHeader .mainBlock {
+			.mainBlock {
 				display: inline-block;
-				position: relative;
-				
-			}
-
-			.gorHeader .blockSystem {
-				display: inline-block;
-				position: relative;
-				vertical-align: sub;
+				overflow: hidden;
+				padding: 0px 5px;
 				
 			}
 
-			.gorHeader .blockLeft {
+			.blockSystem {
 				display: inline-block;
-				position: absolute;
-				right: 0;
+				overflow: hidden;
+				padding-left:5px;
+				vertical-align: middle;
+				
 			}
-			.gorHeader .upperTextClient {
+
+			.blockLeft{
+				display: inline-block;
+				float:right;
+			}
+			.upperTextClient {
 				padding:10px 20px 6px 0px;
-				font-family: "source sans pro";
+				font-family: $gor-font-family;
 				font-size: 14px;
 				font-weight: 600;
 				line-height: 0;  
@@ -131,18 +128,27 @@
 
 			}
 
-			.gorHeader .horizontal-line{
+			.horizontal-line{
 			display: inline-block;
 			height: 30px;
 			border-left: 1px solid #f7f7f7;
 			vertical-align: sub;
 			}
-
-			
-
-			.gorHeader .truncate {
+			.truncate {
 				width: 110px;
 				white-space: nowrap;
 				overflow: hidden;
 				text-overflow: ellipsis;
 			}
+}
+
+			
+
+			
+
+			
+			
+
+		
+
+			

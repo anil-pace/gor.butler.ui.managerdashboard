@@ -20806,7 +20806,7 @@ var App = function (_React$Component) {
 		value: function render() {
 			return _react2.default.createElement(
 				'div',
-				{ 'class': 'mainContainer' },
+				{ className: 'mainContainer' },
 				_react2.default.createElement(_header2.default, null),
 				_react2.default.createElement(_tabs2.default, null),
 				_react2.default.createElement(
@@ -20857,25 +20857,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-function myFunction() {
-	document.getElementById("myDropdown").classList.toggle("show");
-	//document.getElementById("myDropdown").style.display = "block";
-}
-
-window.addEventListener("onClick", function () {
-	if (!event.target.className.match(/dropbtn|block|upperTextClient|subTextClient/)) {
-
-		var dropdowns = document.getElementsByClassName("dropdown-content");
-		var i;
-		for (i = 0; i < dropdowns.length; i++) {
-			var openDropdown = dropdowns[i];
-			if (openDropdown.classList.contains('show')) {
-				openDropdown.classList.remove('show');
-			}
-		}
-	}
-});
-
 var Header = function (_React$Component) {
 	_inherits(Header, _React$Component);
 
@@ -20894,16 +20875,7 @@ var Header = function (_React$Component) {
 				_react2.default.createElement(
 					'div',
 					{ className: 'mainBlock' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'logo' },
-						_react2.default.createElement('img', { src: 'https://s4.postimg.org/feprdgqe5/logo.png' })
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'horizontal-line' },
-						' '
-					),
+					_react2.default.createElement('div', { className: 'gor-logo logo' }),
 					_react2.default.createElement(
 						'div',
 						{ className: 'blockSystem' },
@@ -20922,22 +20894,13 @@ var Header = function (_React$Component) {
 				_react2.default.createElement(
 					'div',
 					{ className: 'blockLeft' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'logo' },
-						_react2.default.createElement('img', { src: 'https://s3.postimg.io/3t3lohtib/flipkart_logo_detail.jpg' })
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'horizontal-line' },
-						' '
-					),
+					_react2.default.createElement('div', { className: 'logo fk-logo' }),
 					_react2.default.createElement(
 						'div',
 						{ className: 'dropdown', id: 'profile' },
 						_react2.default.createElement(
 							'div',
-							{ onclick: 'myFunction()', className: 'dropbtn' },
+							{ className: 'dropbtn' },
 							_react2.default.createElement(
 								'div',
 								{ className: 'block' },
@@ -20952,11 +20915,7 @@ var Header = function (_React$Component) {
 									'Manager'
 								)
 							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'block' },
-								_react2.default.createElement('img', { src: 'https://s4.postimg.org/nfi3m33vh/icon.jpg' })
-							),
+							_react2.default.createElement('div', { className: 'block user-icon' }),
 							_react2.default.createElement(
 								'div',
 								{ id: 'myDropdown', className: 'dropdown-content' },
