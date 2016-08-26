@@ -12,7 +12,7 @@ class Tile2x extends React.Component{
 				<div className="gorUp-tile">
 					<span className="gorHeading">Items in stock</span>
 					<p className="gorHeading-value">4,12,132</p>
-					<p className="gorStatus gorSuccess"><span><img src="pick.png" width={20} height={20} />On Schedule</span></p>
+					<p className="gorStatus gorSuccess"><span><img src="../src/assets/images/pick.png" width={20} height={20} />On Schedule</span></p>
 			 	</div>
 			 	<div className="gorLow-tile">
 			  		<span>4 PPS stocking 3,456 items/hr</span>
@@ -23,10 +23,10 @@ class Tile2x extends React.Component{
 			  		<div className="gorTile-left">
 						<span className="gorHeading gorBreach">Items in stock</span>
 						<p className="gorHeading-value gorRisk">4,12,132</p>
-						<p className="gorStatus gorSuccess"><span><img src="pick.png" width={20} height={20} />On Schedule</span></p>
+						<p className="gorStatus gorSuccess"><span><img src="../src/assets/images/pick.png" width={20} height={20} />On Schedule</span></p>
 			   		</div>
 					<div className="gorTile-right">
-			 			<img src="pick.png" width={50} height={50} />
+			 			<img src="../src/assets/images/pick.png" width={50} height={50} />
 					</div>
 			 	</div>
 				<div className="gorLow-tile">

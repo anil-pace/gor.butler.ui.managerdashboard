@@ -20742,6 +20742,10 @@ module.exports = require('./lib/React');
 },{"./lib/React":54}],172:[function(require,module,exports){
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
@@ -20752,11 +20756,11 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _Tilex = require('./shared.components/tile1x/Tilex');
+var _Tilex = require('./sharedComponents/tile1x/Tilex');
 
 var _Tilex2 = _interopRequireDefault(_Tilex);
 
-var _Tile2x = require('./shared.components/tile2x/Tile2x');
+var _Tile2x = require('./sharedComponents/tile2x/Tile2x');
 
 var _Tile2x2 = _interopRequireDefault(_Tile2x);
 
@@ -20771,10 +20775,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var App = function (_React$Component) {
 	_inherits(App, _React$Component);
 
-	function App() {
+	function App(props) {
 		_classCallCheck(this, App);
 
-		return _possibleConstructorReturn(this, Object.getPrototypeOf(App).apply(this, arguments));
+		return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 	}
 
 	_createClass(App, [{
@@ -20794,9 +20798,28 @@ var App = function (_React$Component) {
 }(_react2.default.Component);
 
 ;
-_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('container'));
+exports.default = App;
 
-},{"./shared.components/tile1x/Tilex":173,"./shared.components/tile2x/Tile2x":174,"react":171,"react-dom":28}],173:[function(require,module,exports){
+},{"./sharedComponents/tile1x/Tilex":174,"./sharedComponents/tile2x/Tile2x":175,"react":171,"react-dom":28}],173:[function(require,module,exports){
+'use strict';
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _App = require('./App');
+
+var _App2 = _interopRequireDefault(_App);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_reactDom2.default.render(_react2.default.createElement(_App2.default, null), document.getElementById('container'));
+
+},{"./App":172,"react":171,"react-dom":28}],174:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -20827,7 +20850,7 @@ var Tilex = function (_React$Component) {
 	function Tilex(props) {
 		_classCallCheck(this, Tilex);
 
-		return _possibleConstructorReturn(this, Object.getPrototypeOf(Tilex).call(this, props));
+		return _possibleConstructorReturn(this, (Tilex.__proto__ || Object.getPrototypeOf(Tilex)).call(this, props));
 	}
 
 	_createClass(Tilex, [{
@@ -20856,7 +20879,7 @@ var Tilex = function (_React$Component) {
 					_react2.default.createElement(
 						'div',
 						{ className: 'gorTile-right' },
-						_react2.default.createElement('img', { src: 'pick.png', width: 50, height: 50 })
+						_react2.default.createElement('img', { src: '../src/assets/images/pick.png', width: 50, height: 50 })
 					)
 				),
 				_react2.default.createElement(
@@ -20879,7 +20902,7 @@ var Tilex = function (_React$Component) {
 
 exports.default = Tilex;
 
-},{"react":171,"react-dom":28}],174:[function(require,module,exports){
+},{"react":171,"react-dom":28}],175:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -20910,7 +20933,7 @@ var Tile2x = function (_React$Component) {
 	function Tile2x(props) {
 		_classCallCheck(this, Tile2x);
 
-		return _possibleConstructorReturn(this, Object.getPrototypeOf(Tile2x).call(this, props));
+		return _possibleConstructorReturn(this, (Tile2x.__proto__ || Object.getPrototypeOf(Tile2x)).call(this, props));
 	}
 
 	_createClass(Tile2x, [{
@@ -20941,7 +20964,7 @@ var Tile2x = function (_React$Component) {
 							_react2.default.createElement(
 								'span',
 								null,
-								_react2.default.createElement('img', { src: 'pick.png', width: 20, height: 20 }),
+								_react2.default.createElement('img', { src: '../src/assets/images/pick.png', width: 20, height: 20 }),
 								'On Schedule'
 							)
 						)
@@ -20981,7 +21004,7 @@ var Tile2x = function (_React$Component) {
 								_react2.default.createElement(
 									'span',
 									null,
-									_react2.default.createElement('img', { src: 'pick.png', width: 20, height: 20 }),
+									_react2.default.createElement('img', { src: '../src/assets/images/pick.png', width: 20, height: 20 }),
 									'On Schedule'
 								)
 							)
@@ -20989,7 +21012,7 @@ var Tile2x = function (_React$Component) {
 						_react2.default.createElement(
 							'div',
 							{ className: 'gorTile-right' },
-							_react2.default.createElement('img', { src: 'pick.png', width: 50, height: 50 })
+							_react2.default.createElement('img', { src: '../src/assets/images/pick.png', width: 50, height: 50 })
 						)
 					),
 					_react2.default.createElement(
@@ -21013,4 +21036,4 @@ var Tile2x = function (_React$Component) {
 
 exports.default = Tile2x;
 
-},{"react":171,"react-dom":28}]},{},[172]);
+},{"react":171,"react-dom":28}]},{},[173]);

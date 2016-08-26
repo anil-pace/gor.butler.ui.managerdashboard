@@ -14,7 +14,7 @@ class Tilex extends React.Component{
 					<p className="gorHeading-value">4,12,132</p>
 				</div>
 				<div className="gorTile-right">
-			 		<img src="pick.png" width={50} height={50} ></img>
+			 		<img src="../src/assets/images/pick.png" width={50} height={50} ></img>
 				</div>
 			</div>
 			<div className="gorLow-tile">
