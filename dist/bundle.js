@@ -21638,7 +21638,11 @@ var App = function (_React$Component) {
 						_react2.default.createElement(_Tilex2.default, null),
 						_react2.default.createElement(_Tilex2.default, null)
 					),
-					_react2.default.createElement(_Tile2x2.default, null)
+					_react2.default.createElement(
+						'div',
+						{ className: 'col span_2_of_4' },
+						_react2.default.createElement(_Tile2x2.default, null)
+					)
 				),
 				_react2.default.createElement(_orderStatsWidget2.default, null),
 				_react2.default.createElement(_performanceWidget2.default, null)
