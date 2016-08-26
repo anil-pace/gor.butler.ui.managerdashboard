@@ -20742,6 +20742,10 @@ module.exports = require('./lib/React');
 },{"./lib/React":54}],172:[function(require,module,exports){
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
@@ -20752,35 +20756,35 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _healthTabs = require('./shared.components/health/healthTabs');
+var _healthTabs = require('./components/health/healthTabs');
 
 var _healthTabs2 = _interopRequireDefault(_healthTabs);
 
-var _health = require('./shared.components/health/health');
+var _health = require('./components/health/health');
 
 var _health2 = _interopRequireDefault(_health);
 
-var _tabs = require('./shared.components/tabs/tabs');
+var _tabs = require('./components/tabs/tabs');
 
 var _tabs2 = _interopRequireDefault(_tabs);
 
-var _header = require('./shared.components/header/header');
+var _header = require('./components/header/header');
 
 var _header2 = _interopRequireDefault(_header);
 
-var _Tilex = require('./shared.components/tile1x/Tilex');
+var _Tilex = require('./components/tile1x/Tilex');
 
 var _Tilex2 = _interopRequireDefault(_Tilex);
 
-var _Tile2x = require('./shared.components/tile1x/Tile2x');
+var _Tile2x = require('./components/tile2x/Tile2x');
 
 var _Tile2x2 = _interopRequireDefault(_Tile2x);
 
-var _orderStatsWidget = require('./shared.components/widgetContainer/orderStatsWidget');
+var _orderStatsWidget = require('./components/widgetContainer/orderStatsWidget');
 
 var _orderStatsWidget2 = _interopRequireDefault(_orderStatsWidget);
 
-var _performanceWidget = require('./shared.components/widgetContainer/performanceWidget');
+var _performanceWidget = require('./components/widgetContainer/performanceWidget');
 
 var _performanceWidget2 = _interopRequireDefault(_performanceWidget);
 
@@ -20795,10 +20799,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var App = function (_React$Component) {
 	_inherits(App, _React$Component);
 
-	function App() {
+	function App(props) {
 		_classCallCheck(this, App);
 
-		return _possibleConstructorReturn(this, Object.getPrototypeOf(App).apply(this, arguments));
+		return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 	}
 
 	_createClass(App, [{
@@ -20806,7 +20810,7 @@ var App = function (_React$Component) {
 		value: function render() {
 			return _react2.default.createElement(
 				'div',
-				{ 'class': 'mainContainer' },
+				{ className: 'mainContainer' },
 				_react2.default.createElement(_header2.default, null),
 				_react2.default.createElement(_tabs2.default, null),
 				_react2.default.createElement(
@@ -20818,7 +20822,11 @@ var App = function (_React$Component) {
 						_react2.default.createElement(_Tilex2.default, null),
 						_react2.default.createElement(_Tilex2.default, null)
 					),
-					_react2.default.createElement(_Tile2x2.default, null)
+					_react2.default.createElement(
+						'div',
+						{ className: 'col span_2_of_4 gorNoML' },
+						_react2.default.createElement(_Tile2x2.default, null)
+					)
 				),
 				_react2.default.createElement(_orderStatsWidget2.default, null),
 				_react2.default.createElement(_performanceWidget2.default, null)
@@ -20830,9 +20838,9 @@ var App = function (_React$Component) {
 }(_react2.default.Component);
 
 ;
-_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('container'));
+exports.default = App;
 
-},{"./shared.components/header/header":173,"./shared.components/health/health":174,"./shared.components/health/healthTabs":175,"./shared.components/tabs/tabs":176,"./shared.components/tile1x/Tile2x":177,"./shared.components/tile1x/Tilex":178,"./shared.components/widgetContainer/orderStatsWidget":179,"./shared.components/widgetContainer/performanceWidget":180,"react":171,"react-dom":28}],173:[function(require,module,exports){
+},{"./components/header/header":173,"./components/health/health":174,"./components/health/healthTabs":175,"./components/tabs/tabs":176,"./components/tile1x/Tilex":177,"./components/tile2x/Tile2x":178,"./components/widgetContainer/orderStatsWidget":179,"./components/widgetContainer/performanceWidget":180,"react":171,"react-dom":28}],173:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -20882,7 +20890,7 @@ var Header = function (_React$Component) {
 	function Header(props) {
 		_classCallCheck(this, Header);
 
-		return _possibleConstructorReturn(this, Object.getPrototypeOf(Header).call(this, props));
+		return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this, props));
 	}
 
 	_createClass(Header, [{
@@ -21029,7 +21037,7 @@ var Health = function (_React$Component) {
 	function Health(props) {
 		_classCallCheck(this, Health);
 
-		return _possibleConstructorReturn(this, Object.getPrototypeOf(Health).call(this, props));
+		return _possibleConstructorReturn(this, (Health.__proto__ || Object.getPrototypeOf(Health)).call(this, props));
 	}
 
 	_createClass(Health, [{
@@ -21165,7 +21173,7 @@ var HealthTabs = function (_React$Component) {
 	function HealthTabs(props) {
 		_classCallCheck(this, HealthTabs);
 
-		return _possibleConstructorReturn(this, Object.getPrototypeOf(HealthTabs).call(this, props));
+		return _possibleConstructorReturn(this, (HealthTabs.__proto__ || Object.getPrototypeOf(HealthTabs)).call(this, props));
 	}
 
 	_createClass(HealthTabs, [{
@@ -21218,7 +21226,7 @@ var Tabs = function (_React$Component) {
 	function Tabs(props) {
 		_classCallCheck(this, Tabs);
 
-		return _possibleConstructorReturn(this, Object.getPrototypeOf(Tabs).call(this, props));
+		return _possibleConstructorReturn(this, (Tabs.__proto__ || Object.getPrototypeOf(Tabs)).call(this, props));
 	}
 
 	_createClass(Tabs, [{
@@ -21393,151 +21401,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Tile2x = function (_React$Component) {
-	_inherits(Tile2x, _React$Component);
-
-	function Tile2x(props) {
-		_classCallCheck(this, Tile2x);
-
-		return _possibleConstructorReturn(this, Object.getPrototypeOf(Tile2x).call(this, props));
-	}
-
-	_createClass(Tile2x, [{
-		key: 'render',
-		value: function render() {
-			return _react2.default.createElement(
-				'div',
-				{ className: 'col span_2_of_4 gorNoML' },
-				_react2.default.createElement(
-					'div',
-					{ className: 'gorTile gorDouble' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'gorTile-one' },
-						_react2.default.createElement(
-							'div',
-							{ className: 'gorUp-tile' },
-							_react2.default.createElement(
-								'span',
-								{ className: 'gorHeading' },
-								'Items in stock'
-							),
-							_react2.default.createElement(
-								'p',
-								{ className: 'gorHeading-value' },
-								'4,12,132'
-							),
-							_react2.default.createElement(
-								'p',
-								{ className: 'gorStatus gorSuccess' },
-								_react2.default.createElement(
-									'span',
-									null,
-									_react2.default.createElement('img', { src: 'pick.png', width: 20, height: 20 }),
-									'On Schedule'
-								)
-							)
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'gorLow-tile' },
-							_react2.default.createElement(
-								'span',
-								null,
-								'4 PPS stocking 3,456 items/hr'
-							)
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'gorTile-two' },
-						_react2.default.createElement(
-							'div',
-							{ className: 'gorUp-tile' },
-							_react2.default.createElement(
-								'div',
-								{ className: 'gorTile-left' },
-								_react2.default.createElement(
-									'span',
-									{ className: 'gorHeading gorBreach' },
-									'Items in stock'
-								),
-								_react2.default.createElement(
-									'p',
-									{ className: 'gorHeading-value gorRisk' },
-									'4,12,132'
-								),
-								_react2.default.createElement(
-									'p',
-									{ className: 'gorStatus gorSuccess' },
-									_react2.default.createElement(
-										'span',
-										null,
-										_react2.default.createElement('img', { src: 'pick.png', width: 20, height: 20 }),
-										'On Schedule'
-									)
-								)
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'gorTile-right' },
-								_react2.default.createElement('img', { src: 'https://s15.postimg.org/nthl9w0q3/pick.png', width: 50, height: 50 })
-							)
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'gorLow-tile' },
-							_react2.default.createElement(
-								'span',
-								null,
-								'4 PPS stocking 3,456 items/hr'
-							)
-						)
-					)
-				)
-			);
-		}
-	}]);
-
-	return Tile2x;
-}(_react2.default.Component);
-
-;
-
-exports.default = Tile2x;
-
-},{"react":171,"react-dom":28}],178:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactDom = require('react-dom');
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 var Tilex = function (_React$Component) {
 	_inherits(Tilex, _React$Component);
 
 	function Tilex(props) {
 		_classCallCheck(this, Tilex);
 
-		return _possibleConstructorReturn(this, Object.getPrototypeOf(Tilex).call(this, props));
+		return _possibleConstructorReturn(this, (Tilex.__proto__ || Object.getPrototypeOf(Tilex)).call(this, props));
 	}
 
 	_createClass(Tilex, [{
@@ -21566,7 +21436,7 @@ var Tilex = function (_React$Component) {
 					_react2.default.createElement(
 						'div',
 						{ className: 'gorTile-right' },
-						_react2.default.createElement('img', { src: 'https://s15.postimg.org/nthl9w0q3/pick.png', width: 50, height: 50 })
+						_react2.default.createElement('img', { src: '../src/assets/images/pick.png', width: 50, height: 50 })
 					)
 				),
 				_react2.default.createElement(
@@ -21588,6 +21458,140 @@ var Tilex = function (_React$Component) {
 ;
 
 exports.default = Tilex;
+
+},{"react":171,"react-dom":28}],178:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Tile2x = function (_React$Component) {
+	_inherits(Tile2x, _React$Component);
+
+	function Tile2x(props) {
+		_classCallCheck(this, Tile2x);
+
+		return _possibleConstructorReturn(this, (Tile2x.__proto__ || Object.getPrototypeOf(Tile2x)).call(this, props));
+	}
+
+	_createClass(Tile2x, [{
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement(
+				'div',
+				{ className: 'gorTile gorDouble' },
+				_react2.default.createElement(
+					'div',
+					{ className: 'gorTile-one' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'gorUp-tile' },
+						_react2.default.createElement(
+							'span',
+							{ className: 'gorHeading' },
+							'Items in stock'
+						),
+						_react2.default.createElement(
+							'p',
+							{ className: 'gorHeading-value' },
+							'4,12,132'
+						),
+						_react2.default.createElement(
+							'p',
+							{ className: 'gorStatus gorSuccess' },
+							_react2.default.createElement(
+								'span',
+								null,
+								_react2.default.createElement('img', { src: '../src/assets/images/pick.png', width: 20, height: 20 }),
+								'On Schedule'
+							)
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'gorLow-tile' },
+						_react2.default.createElement(
+							'span',
+							null,
+							'4 PPS stocking 3,456 items/hr'
+						)
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'gorTile-two' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'gorUp-tile' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'gorTile-left' },
+							_react2.default.createElement(
+								'span',
+								{ className: 'gorHeading gorBreach' },
+								'Items in stock'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'gorHeading-value gorRisk' },
+								'4,12,132'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'gorStatus gorSuccess' },
+								_react2.default.createElement(
+									'span',
+									null,
+									_react2.default.createElement('img', { src: '../src/assets/images/pick.png', width: 20, height: 20 }),
+									'On Schedule'
+								)
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'gorTile-right' },
+							_react2.default.createElement('img', { src: '../src/assets/images/pick.png', width: 50, height: 50 })
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'gorLow-tile' },
+						_react2.default.createElement(
+							'span',
+							null,
+							'4 PPS stocking 3,456 items/hr'
+						)
+					)
+				)
+			);
+		}
+	}]);
+
+	return Tile2x;
+}(_react2.default.Component);
+
+;
+
+exports.default = Tile2x;
 
 },{"react":171,"react-dom":28}],179:[function(require,module,exports){
 'use strict';
@@ -21624,7 +21628,7 @@ var OrderStatsWidget = function (_React$Component) {
 	function OrderStatsWidget(props) {
 		_classCallCheck(this, OrderStatsWidget);
 
-		return _possibleConstructorReturn(this, Object.getPrototypeOf(OrderStatsWidget).call(this, props));
+		return _possibleConstructorReturn(this, (OrderStatsWidget.__proto__ || Object.getPrototypeOf(OrderStatsWidget)).call(this, props));
 	}
 
 	_createClass(OrderStatsWidget, [{
@@ -21676,7 +21680,7 @@ var PerformanceWidget = function (_React$Component) {
 	function PerformanceWidget(props) {
 		_classCallCheck(this, PerformanceWidget);
 
-		return _possibleConstructorReturn(this, Object.getPrototypeOf(PerformanceWidget).call(this, props));
+		return _possibleConstructorReturn(this, (PerformanceWidget.__proto__ || Object.getPrototypeOf(PerformanceWidget)).call(this, props));
 	}
 
 	_createClass(PerformanceWidget, [{
@@ -21697,4 +21701,23 @@ var PerformanceWidget = function (_React$Component) {
 
 exports.default = PerformanceWidget;
 
-},{"../health/healthTabs.js":175,"react":171,"react-dom":28}]},{},[172]);
+},{"../health/healthTabs.js":175,"react":171,"react-dom":28}],181:[function(require,module,exports){
+'use strict';
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _App = require('./App');
+
+var _App2 = _interopRequireDefault(_App);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_reactDom2.default.render(_react2.default.createElement(_App2.default, null), document.getElementById('container'));
+
+},{"./App":172,"react":171,"react-dom":28}]},{},[181]);
