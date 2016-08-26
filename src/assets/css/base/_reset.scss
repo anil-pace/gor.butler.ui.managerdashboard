@@ -1,7 +1,12 @@
+
 /* 
 Reset Stylesheet v0.0.1
 Author: Himanshu Saraswat
 */
+
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+@import '../abstracts/functions';
 
 html, body, div, span, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -14,13 +19,7 @@ fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, figcaption, figure, 
 footer, header, hgroup, nav, section,video {
-    margin:0;
-    padding:0;
-    border:0;
-    outline:0;
-    font-size:100%;
-    vertical-align:baseline;
-    background:transparent;
+    @include reset-styles;
 }
 
 body {
@@ -67,3 +66,5 @@ button,fieldset,img,input[type=button],input[type=submit] {
 input, select {
     vertical-align:middle;
 }
+
+

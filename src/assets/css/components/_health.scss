@@ -1,0 +1,118 @@
+.health.mainBlock {
+			width: 300px;
+			border: .5px solid #f7f7f7;
+		}
+		.health .block {
+			display: inline-block;
+			text-align: center;
+			padding-top: 10px;
+			padding-bottom: 10px;
+
+		}
+		.health .attributes {
+			width: 91px;
+		}
+
+		.health .upperText {
+			font-family: "source sans pro";
+			font-size: 24px;
+		}
+		.health .subtext {
+			font-family: "source sans pro";
+			font-size: 12px;
+		}
+
+		.health .parameters {
+			width: 204px;
+		}
+
+		.health .stoppedState
+		{
+			background: #ec1c24;
+			width: 28px;
+			height: 18px;
+			border-radius: 40%;
+			color: #ffffff;
+			font-family: "source sans pro";
+			font-weight: bold;
+			padding-top: 0px;
+			padding-bottom: 0px;
+		}
+
+		.health .onState
+		{
+			background: #ffffff;
+			width: 28px;
+			height: 18px;
+			border-radius: 40%;
+			color: #666666;
+			font-family: "source sans pro";
+			border-style: solid;
+			border-width: 1px;
+			border-color: #00a54f;
+			padding-top: 0px;
+			padding-bottom: 0px;
+		}
+
+
+		.health .offState
+		{
+			background: #ffffff;
+			width: 28px;
+			height: 18px;
+			border-radius: 40%;
+			color: #666666;
+			font-family: "source sans pro";
+			border-style: solid;
+			border-width: 1px;
+			border-color: #999999;
+			padding-top: 0px;
+			padding-bottom: 0px;
+		}
+
+		.health .errorState
+		{
+			background: #ffffff;
+			width: 30px;
+			height: 18px;
+			border-radius: 40%;
+			color: #666666;
+			font-family: "source sans pro";
+			border-style: solid;
+			border-width: 1px;
+			border-color: #ec1c24;
+			padding-top: 0px;
+			padding-bottom: 0px;
+		}
+
+		.health .paramPosition {
+			padding-right: 15px;
+			padding-left: 15px;
+		}
+
+		.health .paramPositionFront {
+			padding-right: 15px;
+			padding-left: 10px;
+		}
+
+		.health .paramPositionMiddle {
+			padding-right: 15px;
+			padding-left: 15px;
+		}
+
+		.health .paramPositionBack {
+			padding-right: 10px;
+			padding-left: 15px;
+		}
+
+		.health .status {
+			font-family: "source sans pro";
+			font-size: 12px;
+			color: #666666;
+			text-align: center;
+		}
+		.health .horizontal-line{
+			display: inline-block;
+			height: 30px;
+			border-left: 1px solid #f7f7f7;
+		}
