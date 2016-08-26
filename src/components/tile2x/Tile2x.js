@@ -25,8 +25,8 @@ class Tile2x extends React.Component{
 						<p className="gorHeading-value gorRisk">4,12,132</p>
 						<p className="gorStatus gorSuccess"><span><img src="../src/assets/images/pick.png" width={20} height={20} />On Schedule</span></p>
 			   		</div>
-					<div className="gorTile-right">
-			 			<img src="../src/assets/images/pick.png" width={50} height={50} />
+					<div className="gorTile-right iStock">
+			 			
 					</div>
 			 	</div>
 				<div className="gorLow-tile">

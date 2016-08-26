@@ -21098,7 +21098,7 @@ var Tabs = function (_React$Component) {
 					{ className: 'mainBlock' },
 					_react2.default.createElement(
 						'div',
-						{ className: 'inline' },
+						null,
 						_react2.default.createElement(
 							'div',
 							{ className: 'upperText' },
@@ -21117,15 +21117,16 @@ var Tabs = function (_React$Component) {
 				),
 				_react2.default.createElement(
 					'div',
-					{ className: 'gorTab mainBlock' },
+					{ className: 'mainBlock' },
 					_react2.default.createElement(
 						'div',
 						{ className: 'inline' },
 						_react2.default.createElement(
 							'div',
-							{ className: 'upperText' },
+							{ className: 'upperText system' },
 							'SYSTEM'
-						)
+						),
+						_react2.default.createElement('span', { className: 'statusAl' })
 					),
 					_react2.default.createElement(
 						'div',
@@ -21134,11 +21135,6 @@ var Tabs = function (_React$Component) {
 							'div',
 							{ className: 'subText' },
 							'Online'
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'inline' },
-							_react2.default.createElement('img', { src: '' })
 						)
 					)
 				),
@@ -21152,7 +21148,8 @@ var Tabs = function (_React$Component) {
 							'div',
 							{ className: 'upperText' },
 							'ORDERS'
-						)
+						),
+						_react2.default.createElement('span', { className: 'statusAl' })
 					),
 					_react2.default.createElement(
 						'div',
@@ -21161,11 +21158,6 @@ var Tabs = function (_React$Component) {
 							'div',
 							{ className: 'subText' },
 							'More PPS'
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'inline' },
-							_react2.default.createElement('img', { src: '' })
 						)
 					)
 				),
@@ -21291,11 +21283,7 @@ var Tilex = function (_React$Component) {
 							'4,12,132'
 						)
 					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'gorTile-right' },
-						_react2.default.createElement('img', { src: '../src/assets/images/pick.png', width: 50, height: 50 })
-					)
+					_react2.default.createElement('span', { className: 'gorTile-right iStock' })
 				),
 				_react2.default.createElement(
 					'div',
@@ -21424,11 +21412,7 @@ var Tile2x = function (_React$Component) {
 								)
 							)
 						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'gorTile-right' },
-							_react2.default.createElement('img', { src: '../src/assets/images/pick.png', width: 50, height: 50 })
-						)
+						_react2.default.createElement('div', { className: 'gorTile-right iStock' })
 					),
 					_react2.default.createElement(
 						'div',

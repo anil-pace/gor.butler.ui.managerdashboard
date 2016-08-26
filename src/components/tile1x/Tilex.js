@@ -13,9 +13,9 @@ class Tilex extends React.Component{
 					<span className="gorHeading">Items in stock</span>
 					<p className="gorHeading-value">4,12,132</p>
 				</div>
-				<div className="gorTile-right">
-			 		<img src="../src/assets/images/pick.png" width={50} height={50} ></img>
-				</div>
+				<span className="gorTile-right iStock">
+			 		
+				</span>
 			</div>
 			<div className="gorLow-tile">
 			 	<span>4 PPS stocking 3,456 items/hr</span>

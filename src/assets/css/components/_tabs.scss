@@ -9,6 +9,7 @@
 
 		.gorTab .inline{
 			display: inline-block;
+			width:100%;
 		}
 
 		.gorTab .mainBlock {
@@ -28,7 +29,10 @@
 			font-weight: bold;
 			padding-bottom: 3px;
 			color: #ffffff;
+			display:inline-block;
+			width:75%;
 		}
+		
 		.gorTab .subText {
 			
 			font-size: 14px;

@@ -9,7 +9,7 @@ class Tabs extends React.Component{
 		return (
 		<div className="gorTab container">
 		<div className="mainBlock">
-			<div className="inline">
+			<div >
 				<div className="upperText">
 					OVERVIEW
 				</div>
@@ -22,20 +22,19 @@ class Tabs extends React.Component{
 				
 			</div>	
 		</div>
-		<div className="gorTab mainBlock">
+		<div className="mainBlock">
 			<div className="inline">
-				<div className="upperText">
+				<div className="upperText system">
 					SYSTEM
 				</div>
+				<span className="statusAl"></span>
 			</div>
 			<div className="online"> 
 				<div className="subText">
 					Online
 				</div>
 
-				<div className="inline">
-					<img src=""></img>
-				</div>
+				
 			</div>	
 		</div>
 		<div className="gorTab mainBlock">
@@ -43,15 +42,14 @@ class Tabs extends React.Component{
 				<div className="upperText">
 					ORDERS
 				</div>
+				<span className="statusAl"></span>
 			</div>
 			<div className="risk"> 
 				<div className="subText">
 					More PPS
 				</div>
 
-				<div className="inline">
-					<img src=""></img>
-				</div>
+				
 			</div>	
 		</div>
 		<div className="gorTab mainBlock">

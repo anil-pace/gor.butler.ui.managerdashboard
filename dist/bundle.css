@@ -109,7 +109,7 @@ body {
 .cbs-overview-rejection,
 .cbs-overview-chutes,
 .cbs-overview-casket,
-.cbs-overview-inducts {
+.cbs-overview-inducts, .statusOl, .statusAl, .iStock {
   background-image: url(images/icons.svg);
 }
 
@@ -131,6 +131,25 @@ body {
   background-position: -369px -11px;
   width: 30px;
   height: 30px;
+}
+
+.statusOl, .statusAl {
+  height: 25px;
+  width: 25px;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.statusOl {
+  background-position: -25px -52px;
+}
+
+.statusAl {
+  background-position: -101px -52px;
+}
+
+.iStock {
+  background-position: -210px 0;
 }
 
 /*  SECTIONS  */
@@ -466,6 +485,7 @@ body {
 
 .gorTab .inline {
   display: inline-block;
+  width: 100%;
 }
 
 .gorTab .mainBlock {
@@ -486,6 +506,8 @@ body {
   font-weight: bold;
   padding-bottom: 3px;
   color: #ffffff;
+  display: inline-block;
+  width: 75%;
 }
 
 .gorTab .subText {
@@ -614,9 +636,10 @@ body {
 }
 
 .gorTile .gorTile-right {
-  width: 14%;
+  width: 16%;
   display: inline-block;
   vertical-align: top;
+  height: 55px;
 }
 
 .gorTile .gorLow-tile {
