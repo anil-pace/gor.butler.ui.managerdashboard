@@ -399,7 +399,7 @@ body {
   display: inline-block;
   overflow: hidden;
   vertical-align: middle;
-  border-right: 1px solid black;
+  border-right: 1px solid #F2F2F2;
 }
 
 .gorHeader .upperText {
