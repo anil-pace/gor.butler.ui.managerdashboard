@@ -23,6 +23,7 @@ class App extends React.Component{
 			<div className="mainContainer">
 				<Header/>
 				<Tabs/>
+				<div className="gorWidgetWrap">
 				<div className="section group">
 					<div className="col span_2_of_4">
 						<Tilex items={item1}/>
@@ -37,6 +38,7 @@ class App extends React.Component{
 			
 			
 				<PerformanceWidget/>
+				</div>
 			</div>
 		);
 	}

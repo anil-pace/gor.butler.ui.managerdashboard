@@ -1,3 +1,4 @@
+@import '../abstracts/functions';
 
 @font-face
 {
@@ -12,27 +13,27 @@ body
 .gorTile
 {
   background: #fff;
-  border-radius: 3px;
+  border-radius: calculateRem(3px);
   box-shadow: 0px 2px 3px 3px #EAEAEA;
   display: inline-block;
   margin: 1% 1% 1% 2%;
   font-size: 0;
   &.gorDouble{
-      width:98%;
+      width:96%;
   }
   &.gorSingle{
       width:47%;
   }
   .gorStatus{
     font-family: 'Source Sans Pro semibold', sans-serif;
-    font-size: 16px;
+    font-size: calculateRem(16px);
     padding:0;
     margin:0;
     line-height: 32px;
   }
   .gorUp-tile{
     padding: 15px 20 0px 20px;
-    min-height:125px;
+    min-height:calculateRem(125px);
   }
   .gorTile-left{
     width: 80%;
@@ -50,13 +51,13 @@ body
 }
 .gorHeading{
     font-family: 'Source Sans Pro semibold', sans-serif;
-    font-size: 16px;
+    font-size: calculateRem(16px);
     font-weight: 600;
     line-height: 46px;
 }
 .gorHeading-value{
     font-family: 'Source Sans Pro regular', sans-serif;
-    font-size: 45px;
+    font-size: calculateRem(45px);
     padding:0;
     margin:0;
 }
@@ -77,7 +78,7 @@ body
 }
 .gorLow-tile{
   font-family: 'Source Sans Pro semibold', sans-serif;
-  font-size: 16px;
+  font-size: calculateRem(16px);
   background:#F7F7F7;
   color: #666666;
   padding: 10px 0px 15px 20px;

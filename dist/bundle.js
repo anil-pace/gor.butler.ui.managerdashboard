@@ -20818,21 +20818,25 @@ var App = function (_React$Component) {
 				_react2.default.createElement(_tabs2.default, null),
 				_react2.default.createElement(
 					'div',
-					{ className: 'section group' },
+					{ className: 'gorWidgetWrap' },
 					_react2.default.createElement(
 						'div',
-						{ className: 'col span_2_of_4' },
-						_react2.default.createElement(_Tilex2.default, { items: item1 }),
-						_react2.default.createElement(_Tilex2.default, { items: item1 })
+						{ className: 'section group' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'col span_2_of_4' },
+							_react2.default.createElement(_Tilex2.default, { items: item1 }),
+							_react2.default.createElement(_Tilex2.default, { items: item1 })
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'col span_2_of_4 gorNoML' },
+							_react2.default.createElement(_Tile2x2.default, { items: item2 })
+						)
 					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'col span_2_of_4 gorNoML' },
-						_react2.default.createElement(_Tile2x2.default, { items: item2 })
-					)
-				),
-				_react2.default.createElement(_orderStatsWidget2.default, null),
-				_react2.default.createElement(_performanceWidget2.default, null)
+					_react2.default.createElement(_orderStatsWidget2.default, null),
+					_react2.default.createElement(_performanceWidget2.default, null)
+				)
 			);
 		}
 	}]);
