@@ -9,7 +9,7 @@ describe('Tilex  Tests', () => {
     const wrapper = shallow(<Tilex items={item}/>);
 
 //Structure testing
-	it('Should contain 5 div elements',()=>{
+	it('Should contain 4 div elements',()=>{
    		expect(wrapper.find('div').length).toEqual(4);
 	 });
 
