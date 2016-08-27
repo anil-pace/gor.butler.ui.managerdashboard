@@ -22,9 +22,7 @@ class App extends React.Component{
 			<Tilex/>
 			<Tilex/>
 			</div>
-			<div className="col span_2_of_4">
 			<Tile2x/>
-			</div>
 			</div>
 			<OrderStatsWidget/>
 
