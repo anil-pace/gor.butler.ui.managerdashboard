@@ -70,6 +70,88 @@ input, select {
   vertical-align: middle;
 }
 
+/*Default Fonts*/
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: url("fonts/SourceSansPro-Regular.ttf") format("truetype"), url("fonts/SourceSansPro-Semibold.ttf") format("truetype"), url("fonts/SourceSansPro-Regular.ttf") format("truetype"), url("fonts/SourceSansPro-Regular.ttf") format("truetype"), url("fonts/SourceSansPro-Regular.ttf") format("truetype"), url("fonts/SourceSansPro-Regular.ttf") format("truetype");
+}
+
+* {
+  font-family: Source Sans Pro;
+}
+
+body {
+  background: #F2F2F2;
+}
+
+.fk-logo,
+.gor-logo,
+.dropdown-arrow-icon,
+.searchbox-cross-icon,
+.searchbox-magnifying-glass-icon,
+.checkbox-selected-icon,
+.checkbox-half-selected-icon,
+.checkbox-empty-icon,
+.checkbox-disabled-icon,
+.overview-tile-yellow-alert-icon,
+.overview-tile-red-alert-icon,
+.overview-tile-ontime-icon,
+.header-emergency-icon,
+.header-red-alert-icon,
+.header-yellow-alert-icon,
+.header-event-icon,
+.header-online-icon,
+.header-offline-icon,
+.user-icon,
+.cbs-overview-pick,
+.cbs-overview-audit,
+.cbs-overview-put,
+.cbs-overview-rejection,
+.cbs-overview-chutes,
+.cbs-overview-casket,
+.cbs-overview-inducts, .statusOl, .statusAl, .iStock {
+  background-image: url(images/icons.svg);
+}
+
+.gor-logo {
+  background-position: 4px -126px;
+  width: 181px;
+  height: 14px;
+  padding: 10px;
+}
+
+.fk-logo {
+  background-position: 0px -158px;
+  width: 102px;
+  height: 31px;
+  padding: 0px 20px 0 0;
+}
+
+.user-icon {
+  background-position: -369px -11px;
+  width: 30px;
+  height: 30px;
+}
+
+.statusOl, .statusAl {
+  height: 25px;
+  width: 25px;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.statusOl {
+  background-position: -25px -52px;
+}
+
+.statusAl {
+  background-position: -101px -52px;
+}
+
+.iStock {
+  background-position: -210px 0;
+}
+
 /*  SECTIONS  */
 .section {
   clear: both;
@@ -249,27 +331,33 @@ input, select {
 }
 
 .gorHeader.head {
-  background: #ffffff;
+  overflow: hidden;
+  padding: 5px 0;
+  background: #fff;
 }
 
 .gorHeader .dropbtn {
-  background-color: white;
+  background-color: #fff;
   color: #4d5055;
   padding: 0 1em;
-  font-size: 14;
+  font-size: 14px;
   border: none;
   cursor: pointer;
   width: 188px;
   font-family: "source sans pro";
 }
 
-.gorHeader .dropbtn:hover, .gorHeader .dropbtn:focus {
+.gorHeader .dropbtn:hover {
+  background-color: #efefef;
+}
+
+.gorHeader .dropbtn:focus {
   background-color: #efefef;
 }
 
 .gorHeader .dropdown {
-  position: relative;
   display: inline-block;
+  vertical-align: middle;
 }
 
 .gorHeader .dropdown-content {
@@ -295,7 +383,7 @@ input, select {
   display: block;
 }
 
-.gorHeader .dropdown a:hover {
+.gorHeader .dropdown-content a:hover {
   background-color: #efefef;
 }
 
@@ -309,11 +397,9 @@ input, select {
 
 .gorHeader .logo {
   display: inline-block;
-  line-height: 1px;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  padding-left: 20px;
-  padding-right: 20px;
+  overflow: hidden;
+  vertical-align: middle;
+  border-right: 1px solid #F2F2F2;
 }
 
 .gorHeader .upperText {
@@ -321,9 +407,8 @@ input, select {
   font-size: 18px;
   color: #4d5055;
   font-weight: bold;
-  line-height: 0;
+  line-height: 1;
   display: inline-block;
-  padding: 0px 20px 6px 20px;
 }
 
 .gorHeader .subText {
@@ -331,11 +416,6 @@ input, select {
   font-size: 12px;
   font-weight: normal;
   color: #4d5055;
-  line-height: 0px;
-  text-align: left;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 13px;
 }
 
 .gorHeader .subTextClient {
@@ -351,24 +431,24 @@ input, select {
 
 .gorHeader .block {
   display: inline-block;
-  position: relative;
 }
 
 .gorHeader .mainBlock {
   display: inline-block;
-  position: relative;
+  overflow: hidden;
+  padding: 0px 5px;
 }
 
 .gorHeader .blockSystem {
   display: inline-block;
-  position: relative;
-  vertical-align: sub;
+  overflow: hidden;
+  padding-left: 5px;
+  vertical-align: middle;
 }
 
 .gorHeader .blockLeft {
   display: inline-block;
-  position: absolute;
-  right: 0;
+  float: right;
 }
 
 .gorHeader .upperTextClient {
@@ -405,6 +485,7 @@ input, select {
 
 .gorTab .inline {
   display: inline-block;
+  width: 100%;
 }
 
 .gorTab .mainBlock {
@@ -415,6 +496,7 @@ input, select {
   display: table-cell;
   border: .5px solid black;
   background: #4d5055;
+  cursor: pointer;
 }
 
 .gorTab .upperText {
@@ -424,6 +506,8 @@ input, select {
   font-weight: bold;
   padding-bottom: 3px;
   color: #ffffff;
+  display: inline-block;
+  width: 75%;
 }
 
 .gorTab .subText {
@@ -552,9 +636,10 @@ body {
 }
 
 .gorTile .gorTile-right {
-  width: 14%;
+  width: 16%;
   display: inline-block;
   vertical-align: top;
+  height: 55px;
 }
 
 .gorTile .gorLow-tile {

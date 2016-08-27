@@ -1,0 +1,65 @@
+
+
+.fk-logo,
+.gor-logo,
+.dropdown-arrow-icon,
+.searchbox-cross-icon,
+.searchbox-magnifying-glass-icon,
+.checkbox-selected-icon,
+.checkbox-half-selected-icon,
+.checkbox-empty-icon,
+.checkbox-disabled-icon,
+.overview-tile-yellow-alert-icon,
+.overview-tile-red-alert-icon,
+.overview-tile-ontime-icon,
+.header-emergency-icon,
+.header-red-alert-icon,
+.header-yellow-alert-icon,
+.header-event-icon,
+.header-online-icon,
+.header-offline-icon,
+.user-icon,
+.cbs-overview-pick,
+.cbs-overview-audit,
+.cbs-overview-put,
+.cbs-overview-rejection,
+.cbs-overview-chutes,
+.cbs-overview-casket,
+.cbs-overview-inducts,.statusOl,.statusAl,.iStock {
+    background-image: url(images/icons.svg);
+}
+
+.gor-logo{
+    background-position: 4px -126px;
+    width: 181px;
+    height: 14px;
+    padding: 10px;
+    
+}
+.fk-logo{
+    background-position: 0px -158px;
+    width: 102px;
+    height: 31px;
+    padding: 0px 20px 0 0;
+}
+.user-icon{
+    background-position: -369px -11px;
+    width: 30px;
+    height: 30px;
+}
+.statusOl,.statusAl{
+    height: 25px;
+    width: 25px;
+    vertical-align: middle;
+    display: inline-block;
+
+}
+.statusOl{
+    background-position: -25px -52px;
+}
+.statusAl{
+    background-position: -101px -52px;
+}
+.iStock{
+    background-position: -210px 0;
+}

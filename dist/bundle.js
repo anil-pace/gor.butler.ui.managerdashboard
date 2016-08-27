@@ -20756,38 +20756,6 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _healthTabs = require('./components/health/healthTabs');
-
-var _healthTabs2 = _interopRequireDefault(_healthTabs);
-
-var _health = require('./components/health/health');
-
-var _health2 = _interopRequireDefault(_health);
-
-var _tabs = require('./components/tabs/tabs');
-
-var _tabs2 = _interopRequireDefault(_tabs);
-
-var _header = require('./components/header/header');
-
-var _header2 = _interopRequireDefault(_header);
-
-var _Tilex = require('./components/tile1x/Tilex');
-
-var _Tilex2 = _interopRequireDefault(_Tilex);
-
-var _Tile2x = require('./components/tile2x/Tile2x');
-
-var _Tile2x2 = _interopRequireDefault(_Tile2x);
-
-var _orderStatsWidget = require('./components/widgetContainer/orderStatsWidget');
-
-var _orderStatsWidget2 = _interopRequireDefault(_orderStatsWidget);
-
-var _performanceWidget = require('./components/widgetContainer/performanceWidget');
-
-var _performanceWidget2 = _interopRequireDefault(_performanceWidget);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20795,94 +20763,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var App = function (_React$Component) {
-	_inherits(App, _React$Component);
-
-	function App(props) {
-		_classCallCheck(this, App);
-
-		return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
-	}
-
-	_createClass(App, [{
-		key: 'render',
-		value: function render() {
-			return _react2.default.createElement(
-				'div',
-				{ className: 'mainContainer' },
-				_react2.default.createElement(_header2.default, null),
-				_react2.default.createElement(_tabs2.default, null),
-				_react2.default.createElement(
-					'div',
-					{ className: 'section group' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'col span_2_of_4' },
-						_react2.default.createElement(_Tilex2.default, null),
-						_react2.default.createElement(_Tilex2.default, null)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'col span_2_of_4 gorNoML' },
-						_react2.default.createElement(_Tile2x2.default, null)
-					)
-				),
-				_react2.default.createElement(_orderStatsWidget2.default, null),
-				_react2.default.createElement(_performanceWidget2.default, null)
-			);
-		}
-	}]);
-
-	return App;
-}(_react2.default.Component);
-
-;
-exports.default = App;
-
-},{"./components/header/header":173,"./components/health/health":174,"./components/health/healthTabs":175,"./components/tabs/tabs":176,"./components/tile1x/Tilex":177,"./components/tile2x/Tile2x":178,"./components/widgetContainer/orderStatsWidget":179,"./components/widgetContainer/performanceWidget":180,"react":171,"react-dom":28}],173:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactDom = require('react-dom');
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-function myFunction() {
-	document.getElementById("myDropdown").classList.toggle("show");
-	//document.getElementById("myDropdown").style.display = "block";
-}
-
-window.addEventListener("onClick", function () {
-	if (!event.target.className.match(/dropbtn|block|upperTextClient|subTextClient/)) {
-
-		var dropdowns = document.getElementsByClassName("dropdown-content");
-		var i;
-		for (i = 0; i < dropdowns.length; i++) {
-			var openDropdown = dropdowns[i];
-			if (openDropdown.classList.contains('show')) {
-				openDropdown.classList.remove('show');
-			}
-		}
-	}
-});
 
 var Header = function (_React$Component) {
 	_inherits(Header, _React$Component);
@@ -20902,16 +20782,7 @@ var Header = function (_React$Component) {
 				_react2.default.createElement(
 					'div',
 					{ className: 'mainBlock' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'logo' },
-						_react2.default.createElement('img', { src: 'https://s4.postimg.org/feprdgqe5/logo.png' })
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'horizontal-line' },
-						' '
-					),
+					_react2.default.createElement('div', { className: 'gor-logo logo' }),
 					_react2.default.createElement(
 						'div',
 						{ className: 'blockSystem' },
@@ -20930,22 +20801,13 @@ var Header = function (_React$Component) {
 				_react2.default.createElement(
 					'div',
 					{ className: 'blockLeft' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'logo' },
-						_react2.default.createElement('img', { src: 'https://s3.postimg.io/3t3lohtib/flipkart_logo_detail.jpg' })
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'horizontal-line' },
-						' '
-					),
+					_react2.default.createElement('div', { className: 'logo fk-logo' }),
 					_react2.default.createElement(
 						'div',
 						{ className: 'dropdown', id: 'profile' },
 						_react2.default.createElement(
 							'div',
-							{ onclick: 'myFunction()', className: 'dropbtn' },
+							{ className: 'dropbtn' },
 							_react2.default.createElement(
 								'div',
 								{ className: 'block' },
@@ -20960,11 +20822,7 @@ var Header = function (_React$Component) {
 									'Manager'
 								)
 							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'block' },
-								_react2.default.createElement('img', { src: 'https://s4.postimg.org/nfi3m33vh/icon.jpg' })
-							),
+							_react2.default.createElement('div', { className: 'block user-icon' }),
 							_react2.default.createElement(
 								'div',
 								{ id: 'myDropdown', className: 'dropdown-content' },
@@ -21006,7 +20864,7 @@ var Header = function (_React$Component) {
 
 exports.default = Header;
 
-},{"react":171,"react-dom":28}],174:[function(require,module,exports){
+},{"react":171,"react-dom":28}],173:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -21138,7 +20996,7 @@ var Health = function (_React$Component) {
 
 exports.default = Health;
 
-},{"react":171,"react-dom":28}],175:[function(require,module,exports){
+},{"react":171,"react-dom":28}],174:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -21195,7 +21053,7 @@ var HealthTabs = function (_React$Component) {
 ;
 exports.default = HealthTabs;
 
-},{"./health":174,"react":171,"react-dom":28}],176:[function(require,module,exports){
+},{"./health":173,"react":171,"react-dom":28}],175:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -21240,7 +21098,7 @@ var Tabs = function (_React$Component) {
 					{ className: 'mainBlock' },
 					_react2.default.createElement(
 						'div',
-						{ className: 'inline' },
+						null,
 						_react2.default.createElement(
 							'div',
 							{ className: 'upperText' },
@@ -21259,15 +21117,16 @@ var Tabs = function (_React$Component) {
 				),
 				_react2.default.createElement(
 					'div',
-					{ className: 'gorTab mainBlock' },
+					{ className: 'mainBlock' },
 					_react2.default.createElement(
 						'div',
 						{ className: 'inline' },
 						_react2.default.createElement(
 							'div',
-							{ className: 'upperText' },
+							{ className: 'upperText system' },
 							'SYSTEM'
-						)
+						),
+						_react2.default.createElement('span', { className: 'statusAl' })
 					),
 					_react2.default.createElement(
 						'div',
@@ -21276,11 +21135,6 @@ var Tabs = function (_React$Component) {
 							'div',
 							{ className: 'subText' },
 							'Online'
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'inline' },
-							_react2.default.createElement('img', { src: '' })
 						)
 					)
 				),
@@ -21294,7 +21148,8 @@ var Tabs = function (_React$Component) {
 							'div',
 							{ className: 'upperText' },
 							'ORDERS'
-						)
+						),
+						_react2.default.createElement('span', { className: 'statusAl' })
 					),
 					_react2.default.createElement(
 						'div',
@@ -21303,11 +21158,6 @@ var Tabs = function (_React$Component) {
 							'div',
 							{ className: 'subText' },
 							'More PPS'
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'inline' },
-							_react2.default.createElement('img', { src: '' })
 						)
 					)
 				),
@@ -21376,7 +21226,7 @@ var Tabs = function (_React$Component) {
 
 exports.default = Tabs;
 
-},{"react":171,"react-dom":28}],177:[function(require,module,exports){
+},{"react":171,"react-dom":28}],176:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -21433,11 +21283,7 @@ var Tilex = function (_React$Component) {
 							'4,12,132'
 						)
 					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'gorTile-right' },
-						_react2.default.createElement('img', { src: '../src/assets/images/pick.png', width: 50, height: 50 })
-					)
+					_react2.default.createElement('span', { className: 'gorTile-right iStock' })
 				),
 				_react2.default.createElement(
 					'div',
@@ -21459,7 +21305,7 @@ var Tilex = function (_React$Component) {
 
 exports.default = Tilex;
 
-},{"react":171,"react-dom":28}],178:[function(require,module,exports){
+},{"react":171,"react-dom":28}],177:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -21566,11 +21412,7 @@ var Tile2x = function (_React$Component) {
 								)
 							)
 						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'gorTile-right' },
-							_react2.default.createElement('img', { src: '../src/assets/images/pick.png', width: 50, height: 50 })
-						)
+						_react2.default.createElement('div', { className: 'gorTile-right iStock' })
 					),
 					_react2.default.createElement(
 						'div',
@@ -21593,7 +21435,7 @@ var Tile2x = function (_React$Component) {
 
 exports.default = Tile2x;
 
-},{"react":171,"react-dom":28}],179:[function(require,module,exports){
+},{"react":171,"react-dom":28}],178:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -21645,7 +21487,7 @@ var OrderStatsWidget = function (_React$Component) {
 
 exports.default = OrderStatsWidget;
 
-},{"../health/healthTabs.js":175,"react":171,"react-dom":28}],180:[function(require,module,exports){
+},{"../health/healthTabs.js":174,"react":171,"react-dom":28}],179:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -21701,8 +21543,10 @@ var PerformanceWidget = function (_React$Component) {
 
 exports.default = PerformanceWidget;
 
-},{"../health/healthTabs.js":175,"react":171,"react-dom":28}],181:[function(require,module,exports){
+},{"../health/healthTabs.js":174,"react":171,"react-dom":28}],180:[function(require,module,exports){
 'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
@@ -21712,12 +21556,84 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _App = require('./App');
+var _healthTabs = require('./components/health/healthTabs');
 
-var _App2 = _interopRequireDefault(_App);
+var _healthTabs2 = _interopRequireDefault(_healthTabs);
+
+var _health = require('./components/health/health');
+
+var _health2 = _interopRequireDefault(_health);
+
+var _tabs = require('./components/tabs/tabs');
+
+var _tabs2 = _interopRequireDefault(_tabs);
+
+var _header = require('./components/header/header');
+
+var _header2 = _interopRequireDefault(_header);
+
+var _Tilex = require('./components/tile1x/Tilex');
+
+var _Tilex2 = _interopRequireDefault(_Tilex);
+
+var _Tile2x = require('./components/tile2x/Tile2x');
+
+var _Tile2x2 = _interopRequireDefault(_Tile2x);
+
+var _orderStatsWidget = require('./components/widgetContainer/orderStatsWidget');
+
+var _orderStatsWidget2 = _interopRequireDefault(_orderStatsWidget);
+
+var _performanceWidget = require('./components/widgetContainer/performanceWidget');
+
+var _performanceWidget2 = _interopRequireDefault(_performanceWidget);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_reactDom2.default.render(_react2.default.createElement(_App2.default, null), document.getElementById('container'));
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-},{"./App":172,"react":171,"react-dom":28}]},{},[181]);
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var App = function (_React$Component) {
+	_inherits(App, _React$Component);
+
+	function App() {
+		_classCallCheck(this, App);
+
+		return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+	}
+
+	_createClass(App, [{
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement(
+				'div',
+				{ className: 'mainContainer' },
+				_react2.default.createElement(_header2.default, null),
+				_react2.default.createElement(_tabs2.default, null),
+				_react2.default.createElement(
+					'div',
+					{ className: 'section group' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'col span_2_of_4' },
+						_react2.default.createElement(_Tilex2.default, null),
+						_react2.default.createElement(_Tilex2.default, null)
+					),
+					_react2.default.createElement(_Tile2x2.default, null)
+				),
+				_react2.default.createElement(_orderStatsWidget2.default, null),
+				_react2.default.createElement(_performanceWidget2.default, null)
+			);
+		}
+	}]);
+
+	return App;
+}(_react2.default.Component);
+
+;
+_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('container'));
+
+},{"./components/header/header":172,"./components/health/health":173,"./components/health/healthTabs":174,"./components/tabs/tabs":175,"./components/tile1x/Tilex":176,"./components/tile2x/Tile2x":177,"./components/widgetContainer/orderStatsWidget":178,"./components/widgetContainer/performanceWidget":179,"react":171,"react-dom":28}]},{},[180]);
