@@ -22,5 +22,9 @@ describe('Tilex  Tests', () => {
 		expect(wrapper.find('button').length).toBe(0);
 	});
 
+	it('Should contain 1 image',()=>{
+		expect(wrapper.find('img').length).toEqual(1);
+	});
+
 });
 
