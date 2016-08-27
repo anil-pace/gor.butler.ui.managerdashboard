@@ -39,6 +39,11 @@ describe('Tilex  Tests', () => {
 		expect(wrapper.find('.gorHeading').text()).toBe(item.heading);
 	});
 
+	it('Re-rendering Tilex',()=>{
+    	item.heading='Give error';
+		expect(shallow(<Tilex items={item}/>).find('.gorHeading').text()).toBe(item.heading);
+	});
+
 //Style testing
 	// it('Check Style',()=>{
 	// 	expect(wrapper.find('.gorSingle').style).toBe("width", "47%");

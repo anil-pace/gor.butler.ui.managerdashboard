@@ -21275,12 +21275,12 @@ var Tilex = function (_React$Component) {
 						_react2.default.createElement(
 							'span',
 							{ className: 'gorHeading' },
-							'Items in stock'
+							this.props.items.heading
 						),
 						_react2.default.createElement(
 							'p',
 							{ className: 'gorHeading-value' },
-							'4,12,132'
+							this.props.items.value
 						)
 					),
 					_react2.default.createElement('span', { className: 'gorTile-right iStock' })
@@ -21291,7 +21291,7 @@ var Tilex = function (_React$Component) {
 					_react2.default.createElement(
 						'span',
 						null,
-						'4 PPS stocking 3,456 items/hr'
+						this.props.items.status
 					)
 				)
 			);
