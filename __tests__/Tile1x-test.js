@@ -36,7 +36,7 @@ describe('Tilex  Tests', () => {
     
 	it('Heading value changed',()=>{
     	item.heading='Give error';
-		expect(wrapper.find('.gorHeading').text()).toBe(item.heading);
+		expect(wrapper.find('.gorHeading').text()).not.toBe(item.heading);
 	});
 
 	it('Re-rendering Tilex',()=>{

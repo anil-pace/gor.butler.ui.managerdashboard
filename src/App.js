@@ -16,14 +16,15 @@ class App extends React.Component{
     	super(props);
     }	
 	render(){
+		var item={heading:'Items to Stock', value:'4,74,579', status:'4 PPS stocking 3,546 items/hr'};
 		return (
 			<div className="mainContainer">
 				<Header/>
 				<Tabs/>
 				<div className="section group">
 					<div className="col span_2_of_4">
-						<Tilex/>
-						<Tilex/>
+						<Tilex items={item}/>
+						<Tilex items={item}/>
 					</div>
 					<div className="col span_2_of_4 gorNoML">
 						<Tile2x/>
