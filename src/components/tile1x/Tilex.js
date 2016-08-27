@@ -18,7 +18,7 @@ class Tilex extends React.Component{
 				</span>
 			</div>
 			<div className="gorLow-tile">
-			 	<span>{this.props.items.status}</span>
+			 	<span>{this.props.items.low}</span>
 			</div>
 		</div> 
 		);

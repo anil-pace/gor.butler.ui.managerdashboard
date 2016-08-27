@@ -20808,7 +20808,9 @@ var App = function (_React$Component) {
 	_createClass(App, [{
 		key: 'render',
 		value: function render() {
-			var item = { heading: 'Items to Stock', value: '4,74,579', status: '4 PPS stocking 3,546 items/hr' };
+			var item1 = { heading: 'Items to Stock', value: '4,74,579', low: '4 PPS stocking 3,546 items/hr' };
+			var item2 = { heading1: 'Orders to fulfill', value1: '120', low1: '8 PPS fulfilling per/hr', status1: 'On schedule', heading2: 'Remaining time', value2: '68mins', low2: 'Completing in 8mins', status2: '23:59' };
+
 			return _react2.default.createElement(
 				'div',
 				{ className: 'mainContainer' },
@@ -20820,13 +20822,13 @@ var App = function (_React$Component) {
 					_react2.default.createElement(
 						'div',
 						{ className: 'col span_2_of_4' },
-						_react2.default.createElement(_Tilex2.default, { items: item }),
-						_react2.default.createElement(_Tilex2.default, { items: item })
+						_react2.default.createElement(_Tilex2.default, { items: item1 }),
+						_react2.default.createElement(_Tilex2.default, { items: item1 })
 					),
 					_react2.default.createElement(
 						'div',
 						{ className: 'col span_2_of_4 gorNoML' },
-						_react2.default.createElement(_Tile2x2.default, null)
+						_react2.default.createElement(_Tile2x2.default, { items: item2 })
 					)
 				),
 				_react2.default.createElement(_orderStatsWidget2.default, null),
@@ -21393,7 +21395,7 @@ var Tilex = function (_React$Component) {
 					_react2.default.createElement(
 						'span',
 						null,
-						this.props.items.status
+						this.props.items.low
 					)
 				)
 			);
@@ -21456,12 +21458,12 @@ var Tile2x = function (_React$Component) {
 						_react2.default.createElement(
 							'span',
 							{ className: 'gorHeading' },
-							'Items in stock'
+							this.props.items.heading1
 						),
 						_react2.default.createElement(
 							'p',
 							{ className: 'gorHeading-value' },
-							'4,12,132'
+							this.props.items.value1
 						),
 						_react2.default.createElement(
 							'p',
@@ -21470,7 +21472,7 @@ var Tile2x = function (_React$Component) {
 								'span',
 								null,
 								_react2.default.createElement('img', { src: '../src/assets/images/pick.png', width: 20, height: 20 }),
-								'On Schedule'
+								this.props.items.status1
 							)
 						)
 					),
@@ -21480,7 +21482,7 @@ var Tile2x = function (_React$Component) {
 						_react2.default.createElement(
 							'span',
 							null,
-							'4 PPS stocking 3,456 items/hr'
+							this.props.items.low1
 						)
 					)
 				),
@@ -21496,12 +21498,12 @@ var Tile2x = function (_React$Component) {
 							_react2.default.createElement(
 								'span',
 								{ className: 'gorHeading gorBreach' },
-								'Items in stock'
+								this.props.items.heading2
 							),
 							_react2.default.createElement(
 								'p',
 								{ className: 'gorHeading-value gorRisk' },
-								'4,12,132'
+								this.props.items.value2
 							),
 							_react2.default.createElement(
 								'p',
@@ -21510,7 +21512,7 @@ var Tile2x = function (_React$Component) {
 									'span',
 									null,
 									_react2.default.createElement('img', { src: '../src/assets/images/pick.png', width: 20, height: 20 }),
-									'On Schedule'
+									this.props.items.status2
 								)
 							)
 						),
@@ -21522,7 +21524,7 @@ var Tile2x = function (_React$Component) {
 						_react2.default.createElement(
 							'span',
 							null,
-							'4 PPS stocking 3,456 items/hr'
+							this.props.items.low2
 						)
 					)
 				)

@@ -4,7 +4,7 @@ import { shallow, mount, render } from 'enzyme';
 import Tilex from '../src/components/tile1x/Tilex';
 
 describe('Tilex  Tests', () => {	
-    var item={heading:'This is it', value:'10', status:'These many per/hr'};
+    var item={heading:'This is it', value:'10', low:'These many per/hr'};
     
     const wrapper = shallow(<Tilex items={item}/>);
 
@@ -31,7 +31,7 @@ describe('Tilex  Tests', () => {
 	});
 
 	it('Status should be items.status',()=>{
-		expect(wrapper.find('.gorLow-tile').text()).toBe(item.status);
+		expect(wrapper.find('.gorLow-tile').text()).toBe(item.low);
 	});
     
 	it('Heading value changed',()=>{

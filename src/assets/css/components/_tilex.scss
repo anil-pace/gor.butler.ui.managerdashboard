@@ -1,13 +1,4 @@
-@font-face
-{
-  font-family: 'Source Sans Pro';
-  src: url('../src/assets/Source_Sans_Pro/SourceSansPro-Regular.ttf')  format('truetype')
-}
-body
-{
-	background: #F2F2F2;
-	font-family: 'Source Sans Pro', sans-serif;
-}
+
 .gorTile
 {
   background: #fff;
@@ -17,7 +8,7 @@ body
   margin: 1% 1% 1% 2%;
   font-size: 0;
   &.gorDouble{
-      width:98%;
+      width:98%; 
   }
   &.gorSingle{
       width:47%;
@@ -38,12 +29,12 @@ body
     display:inline-block;
   }
   .gorTile-one{
-    width: 45%;
+    width: 50%;
     display:inline-block;
     margin-right: auto;
   }
   .gorTile-two{
-    width: 55%;
+    width: 50%;
     display:inline-block;
     margin-right: 0;
 }
@@ -52,6 +43,12 @@ body
     font-size: 16px;
     font-weight: 600;
     line-height: 46px;
+}
+.gorHeading{
+    font-family: 'Source Sans Pro semibold', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 36px;
 }
 .gorHeading-value{
     font-family: 'Source Sans Pro regular', sans-serif;
@@ -69,10 +66,9 @@ body
   color:#dd7f03;
 }
 .gorTile-right{
-  width: 16%;
+  width: 14%;
   display:inline-block;
   vertical-align: top;
-  height:55px;
 }
 .gorLow-tile{
   font-family: 'Source Sans Pro semibold', sans-serif;

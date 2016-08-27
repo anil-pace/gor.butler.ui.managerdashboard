@@ -598,13 +598,13 @@ body {
 }
 
 .gorTile .gorTile-one {
-  width: 45%;
+  width: 50%;
   display: inline-block;
   margin-right: auto;
 }
 
 .gorTile .gorTile-two {
-  width: 55%;
+  width: 50%;
   display: inline-block;
   margin-right: 0;
 }
