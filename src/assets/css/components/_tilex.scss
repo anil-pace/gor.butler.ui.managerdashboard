@@ -14,92 +14,87 @@ body
   border-radius: 3px;
   box-shadow: 0px 2px 3px 3px #EAEAEA;
   display: inline-block;
-  margin: 1% 0% 1% 2%;
+  margin: 1% 1% 1% 2%;
   font-size: 0;
-}
-.gorTile.gorSingle
-{
-    width:23%;
-}
-.gorTile.gorDouble
-{
-    width:46%; 
-}
-.gorTile .gorStatus{
+  &.gorDouble{
+      width:98%;
+  }
+  &.gorSingle{
+      width:47%;
+  }
+  .gorStatus{
     font-family: 'Source Sans Pro semibold', sans-serif;
     font-size: 16px;
     padding:0;
     margin:0;
     line-height: 32px;
+  }
+  .gorUp-tile{
+    padding: 15px 20 0px 20px;
+    min-height:125px;
+  }
+  .gorTile-left{
+    width: 80%;
+    display:inline-block;
+  }
+  .gorTile-one{
+    width: 45%;
+    display:inline-block;
+    margin-right: auto;
+  }
+  .gorTile-two{
+    width: 55%;
+    display:inline-block;
+    margin-right: 0;
 }
-.gorTile .gorUp-tile
-{
-  padding: 15px 20 0px 20px;
-  min-height:120px;
-
-}
-.gorTile .gorTile-left
-{
-  width: 80%;
-  display:inline-block;
-  
-}
-.gorTile .gorTile-one
-{
-  width: 45%;
-  display:inline-block;
-  margin-right: auto;
-}
-.gorTile .gorTile-two
-{
-  width: 55%;
-  display:inline-block;
-  margin-right: none;
-}
-.gorSingle .gorHeading
-{
+.gorHeading{
     font-family: 'Source Sans Pro semibold', sans-serif;
     font-size: 16px;
     font-weight: 600;
     line-height: 46px;
 }
-.gorDouble .gorHeading
-{
-    font-family: 'Source Sans Pro semibold', sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 36px;
-}
-.gorTile .gorHeading-value
-{
+.gorHeading-value{
     font-family: 'Source Sans Pro regular', sans-serif;
     font-size: 45px;
     padding:0;
     margin:0;
 }
-.gorTile .gorSuccess
-{
-	color: #00a54f;
+.gorSuccess{
+  color: #00a54f;
 }
-.gorTile .gorBreach
-{
-	color: #ec1c24;
+.gorBreach{
+  color: #ec1c24;
 }
-.gorTile .gorRisk
-{
+.gorRisk{
   color:#dd7f03;
 }
-.gorTile .gorTile-right
-{
+.gorTile-right{
   width: 14%;
   display:inline-block;
   vertical-align: top;
 }
-.gorTile .gorLow-tile
-{
+.gorLow-tile{
   font-family: 'Source Sans Pro semibold', sans-serif;
   font-size: 16px;
-	background:#F7F7F7;
-	color: #666666;
-	padding: 10px 0px 15px 20px;
+  background:#F7F7F7;
+  color: #666666;
+  padding: 10px 0px 15px 20px;
+}
+
+}
+.gorNoML{margin-left:0;}
+
+/*Media queries*/
+@media only screen and (max-width: 480px) {
+    .gorTile{
+       .gorTile-one{
+        width: 100%;
+    }
+    .gorTile-two{
+        width: 100%;
+    }
+      &.gorSingle{
+          width:100%;
+      }
+    }
 }
