@@ -10,15 +10,15 @@ class Tilex extends React.Component{
 		<div className="gorTile gorSingle">
 			<div className="gorUp-tile">
 				<div className="gorTile-left">
-					<span className="gorHeading">Items in stock</span>
-					<p className="gorHeading-value">4,12,132</p>
+					<span className="gorHeading">{this.props.items.heading}</span>
+					<p className="gorHeading-value">{this.props.items.value}</p>
 				</div>
 				<span className="gorTile-right iStock">
 			 		
 				</span>
 			</div>
 			<div className="gorLow-tile">
-			 	<span>4 PPS stocking 3,456 items/hr</span>
+			 	<span>{this.props.items.status}</span>
 			</div>
 		</div> 
 		);
