@@ -9,9 +9,9 @@
 .col {
     display: block;
     float:left;
-    margin: 1% 0 1% 1.6%;
+    margin: 1% 0 1% 1%;
 }
-.col:first-child { margin-left: 0; }
+.col:first-child { }
 
 /*  GROUPING  */
 .group:before,
