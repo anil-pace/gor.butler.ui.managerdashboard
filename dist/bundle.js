@@ -22286,6 +22286,8 @@ var _headerAction = require('./actions/headerAction');
 
 var _reactRedux = require('react-redux');
 
+var _socketMiddleware = require('./middleware/socketMiddleware');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22310,7 +22312,15 @@ var App = function (_React$Component) {
 			var dispatch = _props.dispatch;
 			var type = _props.type;
 
-			console.log(this.props);
+			dispatch((0, _headerAction.getFetchData)(type));
+		}
+	}, {
+		key: 'componentWillMount',
+		value: function componentWillMount() {
+			var _props2 = this.props;
+			var dispatch = _props2.dispatch;
+			var type = _props2.type;
+
 			dispatch((0, _headerAction.getFetchData)(type));
 		}
 	}, {
@@ -22318,6 +22328,9 @@ var App = function (_React$Component) {
 		value: function componentWillReceiveProps(nextProps) {
 			console.log(nextProps);
 		}
+	}, {
+		key: 'processData',
+		value: function processData() {}
 	}, {
 		key: 'render',
 		value: function render() {
@@ -22359,31 +22372,18 @@ var App = function (_React$Component) {
 }(_react2.default.Component);
 
 ;
-function mapStateToProps(state) {
-	var getDummyData = state.getDummyData;
-	var getData = state.getData;
 
-	var _ref = getData[_headerAction.REQUEST_HEADER] || {
-		isFetching: true,
-		data: []
-	};
+function mapStateToProps(state, ownProps) {
 
-	var isFetching = _ref.isFetching;
-	var _ref$type = _ref.type;
-	var type = _ref$type === undefined ? _headerAction.REQUEST_HEADER : _ref$type;
-	var _ref$data = _ref.data;
-	var data = _ref$data === undefined ? [4, 5, 6] : _ref$data;
-
-
-	return {
-		type: type,
-		data: data,
-		isFetching: isFetching
+	return state.getData[state.getData.selectedAction] || {
+		type: 'REQUEST_HEADER',
+		data: [],
+		isFetching: false
 	};
 }
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(App);
 
-},{"./actions/headerAction":196,"./components/header/header":197,"./components/health/health":198,"./components/health/healthTabs":199,"./components/tabs/tabs":200,"./components/tile1x/Tilex":201,"./components/tile2x/Tile2x":202,"./components/widgetContainer/orderStatsWidget":203,"./components/widgetContainer/performanceWidget":204,"react":184,"react-dom":34,"react-redux":37}],196:[function(require,module,exports){
+},{"./actions/headerAction":196,"./components/header/header":197,"./components/health/health":198,"./components/health/healthTabs":199,"./components/tabs/tabs":200,"./components/tile1x/Tilex":201,"./components/tile2x/Tile2x":202,"./components/widgetContainer/orderStatsWidget":203,"./components/widgetContainer/performanceWidget":204,"./middleware/socketMiddleware":207,"react":184,"react-dom":34,"react-redux":37}],196:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -22391,22 +22391,42 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getFetchData = getFetchData;
 var REQUEST_HEADER = exports.REQUEST_HEADER = "REQUEST_HEADER";
+var RECIEVE_HEADER = exports.RECIEVE_HEADER = "RECIEVE_HEADER";
+var RECIEVE_ITEM_TO_STOCK = exports.RECIEVE_ITEM_TO_STOCK = "RECIEVE_ITEM_TO_STOCK";
 
 function fetchData(type) {
   return function (dispatch) {
-    dispatch(getHeaderInfo(type));
+    //dispatch(getHeaderInfo(type))
     return fetch("./dummy.json").then(function (response) {
       return response.json();
     }).then(function (json) {
-      return dispatch(receiveData(type, json));
+      return dispatch(receiveData(json));
     });
   };
 }
-function receiveData(type, json) {
-  return {
-    type: REQUEST_HEADER,
-    data: json.data
-  };
+function receiveData(json) {
+  switch (json.resource_type) {
+    case RECIEVE_ITEM_TO_STOCK:
+      return {
+        type: RECIEVE_ITEM_TO_STOCK,
+        data: json.data
+      };
+    case 'items_to_audit':
+      return {
+        type: RECIEVE_ITEM_TO_AUDIT,
+        data: json.data
+      };
+    case 'orders_to_fulfill':
+      return {
+        type: RECIEVE_ORDERS_TO_FULFILL,
+        data: json.data
+      };
+    default:
+      return {
+        type: RECIEVE_HEADER,
+        data: json.data
+      };
+  }
 }
 function getHeaderInfo(data) {
   return {
@@ -23247,6 +23267,16 @@ var PerformanceWidget = function (_React$Component) {
 exports.default = PerformanceWidget;
 
 },{"../health/healthTabs.js":199,"react":184,"react-dom":34}],205:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+var appConstants = exports.appConstants = {
+	stock: "stock"
+};
+
+},{}],206:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -23277,18 +23307,20 @@ _reactDom2.default.render(_react2.default.createElement(
   _react2.default.createElement(_App2.default, null)
 ), document.getElementById('container'));
 
-_reactDom2.default.render(_react2.default.createElement(_App2.default, null), document.getElementById('container'));
-
-},{"./App":195,"./store":210,"react":184,"react-dom":34,"react-redux":37}],206:[function(require,module,exports){
-"use strict";
+},{"./App":195,"./store":210,"react":184,"react-dom":34,"react-redux":37}],207:[function(require,module,exports){
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _headerAction = require("../actions/headerAction");
+var _headerAction = require('../actions/headerAction');
 
 var _headerAction2 = _interopRequireDefault(_headerAction);
+
+var _appConstants = require('../constants/appConstants');
+
+var _appConstants2 = _interopRequireDefault(_appConstants);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23376,7 +23408,7 @@ var socketMiddleware = function () {
 
 exports.default = socketMiddleware;
 
-},{"../actions/headerAction":196}],207:[function(require,module,exports){
+},{"../actions/headerAction":196,"../constants/appConstants":205}],208:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23387,50 +23419,20 @@ var _redux = require('redux');
 
 var _headerReducer = require('./reducers/headerReducer');
 
-var _headerReducer2 = _interopRequireDefault(_headerReducer);
-
-var _dummyReducer = require('./reducers/dummyReducer');
-
-var _dummyReducer2 = _interopRequireDefault(_dummyReducer);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var rootReducer = (0, _redux.combineReducers)({
-  getData: _headerReducer2.default,
-  getDummyData: _dummyReducer2.default
+  getData: _headerReducer.getData
 });
 
 exports.default = rootReducer;
 
-},{"./reducers/dummyReducer":208,"./reducers/headerReducer":209,"redux":191}],208:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-exports.default = getDummyData;
-function getDummyData() {
-	var state = arguments.length <= 0 || arguments[0] === undefined ? {
-		id: "header",
-		items: []
-	} : arguments[0];
-	var action = arguments[1];
-
-	switch (action.type) {
-		case "GET_DUMMY_DATA":
-			return action.data;
-		default:
-			return state;
-	}
-}
-
-},{}],209:[function(require,module,exports){
+},{"./reducers/headerReducer":209,"redux":191}],209:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = getData;
+exports.selectedAction = selectedAction;
+exports.getData = getData;
 
 var _headerAction = require('../actions/headerAction');
 
@@ -23446,22 +23448,55 @@ function posts() {
   switch (action.type) {
     case _headerAction.REQUEST_HEADER:
       return Object.assign({}, state, {
-        isFetching: false,
+        isFetching: true,
         type: _headerAction.REQUEST_HEADER,
         data: action.data
 
       });
+    case _headerAction.RECIEVE_HEADER:
+      return Object.assign({}, state, {
+        isFetching: false,
+        type: _headerAction.RECIEVE_HEADER,
+        data: action.data
+
+      });
+    case _headerAction.RECIEVE_ITEM_TO_STOCK:
+      return Object.assign({}, state, {
+        isFetching: true,
+        type: _headerAction.RECIEVE_ITEM_TO_STOCK,
+        data: action.data
+
+      });
+
     default:
       return state;
   }
 }
+
+function selectedAction() {
+  var state = arguments.length <= 0 || arguments[0] === undefined ? 'FETCH' : arguments[0];
+  var action = arguments[1];
+
+  switch (action.type) {
+    case 'FETCH':
+      return action.type;
+    default:
+      return state;
+  }
+}
+
 function getData() {
+  var _Object$assign;
+
   var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
   var action = arguments[1];
 
   switch (action.type) {
     case _headerAction.REQUEST_HEADER:
-      return Object.assign({}, state, _defineProperty({}, action.type, posts(state[action.type], action)));
+    case _headerAction.RECIEVE_HEADER:
+    case _headerAction.RECIEVE_ITEM_TO_STOCK:
+      //state.selectedAction = action.type;
+      return Object.assign({}, state, (_Object$assign = {}, _defineProperty(_Object$assign, action.type, posts(state[action.type], action)), _defineProperty(_Object$assign, "selectedAction", action.type), _Object$assign));
     default:
       return state;
   }
@@ -23495,4 +23530,4 @@ function configureStore(preloadedState) {
   return (0, _redux.createStore)(_reducers2.default, preloadedState, (0, _redux.applyMiddleware)(_reduxThunk2.default, _socketMiddleware2.default));
 }
 
-},{"./middleware/socketMiddleware":206,"./reducers":207,"redux":191,"redux-thunk":185}]},{},[205]);
+},{"./middleware/socketMiddleware":207,"./reducers":208,"redux":191,"redux-thunk":185}]},{},[206]);

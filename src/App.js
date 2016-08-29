@@ -11,6 +11,7 @@ import OrderStatsWidget from './components/widgetContainer/orderStatsWidget'
 import PerformanceWidget from './components/widgetContainer/performanceWidget'
 import { REQUEST_HEADER, getFetchData } from './actions/headerAction'
 import { connect } from 'react-redux';
+import {socketMiddleware} from './middleware/socketMiddleware'
 
 
 
@@ -25,15 +26,21 @@ class App extends React.Component{
     }	
     componentDidMount() {
 	    const { dispatch, type } = this.props;
-	    console.log(this.props);
+	    dispatch(getFetchData(type));
+  	}
+  	componentWillMount(){
+  		const { dispatch, type } = this.props;
 	    dispatch(getFetchData(type));
   	}
   	componentWillReceiveProps(nextProps) {
 	    console.log(nextProps);
   	}
+  	processData(){
+
+  	}
     
 	render(){
-
+		
 		var item1={heading:'Items to Stock', value:'4,74,579', low:'4 PPS stocking 3,546 items/hr'};
         var item2={heading1:'Orders to fulfill', value1:'120', low1:'8 PPS fulfilling per/hr', status1:'On schedule', heading2:'Remaining time', value2:'68mins', low2:'Completing in 8mins', status2:'23:59'};
 		
@@ -64,21 +71,15 @@ class App extends React.Component{
 		);
 	}
 };
-function mapStateToProps(state) {
-  const { getDummyData, getData } = state
-  const {
-    isFetching,
-    type=REQUEST_HEADER,
-    data=[4,5,6]
-  } = getData[REQUEST_HEADER] || {
-    isFetching: true,
-    data: []
-  }
 
-  return {
-    type,
-    data,
-    isFetching,
+
+function mapStateToProps(state,ownProps) {
+ 
+  
+  return state.getData[state.getData.selectedAction] || {
+    type:'REQUEST_HEADER',
+    data:[],
+    isFetching:true
   }
 }
 export  default connect(mapStateToProps)(App);

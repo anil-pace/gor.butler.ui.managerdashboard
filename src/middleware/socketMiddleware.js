@@ -1,4 +1,5 @@
 import actions from '../actions/headerAction'
+import constants from '../constants/appConstants'
 
 const socketMiddleware = (function(){ 
   var socket = null;
