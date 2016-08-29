@@ -5,8 +5,18 @@ class Header extends React.Component{
 	constructor(props) 
 	{
     	super(props);
+    }
+    componentDidMount(){
+    	const{store} = this.context;
+    	//console.log(this.props);
+    	
     }	
+    componentWillUnmount(){
+    	
+    }
 	render(){
+		const { headData} = this.props;
+		//console.log(this.props.headData);
 		return (
 		<header className="gorHeader head">
 			<div className="mainBlock">
@@ -14,8 +24,21 @@ class Header extends React.Component{
 				
 				</div>
 				<div className="blockSystem">
+<<<<<<< HEAD
 					<div className="upperText">Butler Management System</div>
 					<div className="subText">Start time:{this.props.user.start}</div>
+=======
+					<div className="upperText">
+					{headData.isFetching &&
+		            <span>Fetching...</span>
+		          	}
+		          	{!headData.isFetching &&
+		            <span>{headData.data}</span>
+		          	}
+		          	
+					</div>
+					<div className="subText">Start time:09:00:15</div>
+>>>>>>> 78d88289eaca9b774df9448e26f05562854a5b42
 				</div>
 			</div>
 			<div className="blockLeft">
@@ -48,5 +71,8 @@ class Header extends React.Component{
 		);
 	}
 };
+
+
+
 
 export default Header ;
