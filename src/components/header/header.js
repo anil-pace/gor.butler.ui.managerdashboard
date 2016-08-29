@@ -15,7 +15,7 @@ class Header extends React.Component{
 				</div>
 				<div className="blockSystem">
 					<div className="upperText">Butler Management System</div>
-					<div className="subText">Start time:09:00:15</div>
+					<div className="subText">Start time:{this.props.user.start}</div>
 				</div>
 			</div>
 			<div className="blockLeft">
@@ -25,8 +25,8 @@ class Header extends React.Component{
 				<div className="dropdown" id="profile">
 					<div  className="dropbtn">
 						<div className="block">
-							<div className="upperTextClient truncate">Krishna Gandhi Krishna Gandhi Krishna </div>
-							<div className="subTextClient">Manager</div>
+							<div className="upperTextClient truncate">{this.props.user.name}</div>
+							<div className="subTextClient">{this.props.user.post}</div>
 						</div>
 						<div className="block user-icon">
 							

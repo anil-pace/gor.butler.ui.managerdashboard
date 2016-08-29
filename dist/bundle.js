@@ -20810,11 +20810,11 @@ var App = function (_React$Component) {
 		value: function render() {
 			var item1 = { heading: 'Items to Stock', value: '4,74,579', low: '4 PPS stocking 3,546 items/hr' };
 			var item2 = { heading1: 'Orders to fulfill', value1: '120', low1: '8 PPS fulfilling per/hr', status1: 'On schedule', heading2: 'Remaining time', value2: '68mins', low2: 'Completing in 8mins', status2: '23:59' };
-
+			var items3 = { start: "09:10:25", name: "Krish verma gandhi sharma", post: "Manager" };
 			return _react2.default.createElement(
 				'div',
 				{ className: 'mainContainer' },
-				_react2.default.createElement(_header2.default, null),
+				_react2.default.createElement(_header2.default, { user: items3 }),
 				_react2.default.createElement(_tabs2.default, null),
 				_react2.default.createElement(
 					'div',
@@ -20902,7 +20902,8 @@ var Header = function (_React$Component) {
 						_react2.default.createElement(
 							'div',
 							{ className: 'subText' },
-							'Start time:09:00:15'
+							'Start time:',
+							this.props.user.start
 						)
 					)
 				),
@@ -20922,12 +20923,12 @@ var Header = function (_React$Component) {
 								_react2.default.createElement(
 									'div',
 									{ className: 'upperTextClient truncate' },
-									'Krishna Gandhi Krishna Gandhi Krishna '
+									this.props.user.name
 								),
 								_react2.default.createElement(
 									'div',
 									{ className: 'subTextClient' },
-									'Manager'
+									this.props.user.post
 								)
 							),
 							_react2.default.createElement('div', { className: 'block user-icon' }),

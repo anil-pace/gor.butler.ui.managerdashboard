@@ -40,7 +40,6 @@ describe('Tilex  Tests', () => {
 	});
 
 	it('Re-rendering Tilex',()=>{
-    	item.heading='Give error';
 		expect(shallow(<Tilex items={item}/>).find('.gorHeading').text()).toBe(item.heading);
 	});
 
