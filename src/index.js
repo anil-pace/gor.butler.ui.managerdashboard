@@ -7,15 +7,9 @@ import socketMiddleware from './middleware/socketMiddleware'
 
 
 const store = configureStore();
-//console.log(socketMiddleware);
-//socketMiddleware(store)(null)({"type":"CONNECT"});
-
 ReactDOM.render(
 	<Provider store={store}>
 		<App />
 	</Provider>,
-	document.getElementById('container'));
-
-
-
-
+	document.getElementById('container')
+	);
