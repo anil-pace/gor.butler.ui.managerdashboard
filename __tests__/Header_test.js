@@ -43,9 +43,5 @@ describe('Header  Tests', () => {
   		expect(shallow(<Header user={items}/>).find('.blockSystem .subText').text()).toBe('Start time:'+items.start);
 	});
 
-//Style testing
-	// it('Check Style',()=>{
-	// 	expect(wrapper.find('.gorSingle').style).toBe("width", "47%");
-	// });
 });
 
