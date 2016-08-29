@@ -43,9 +43,5 @@ describe('Tilex  Tests', () => {
 		expect(shallow(<Tilex items={item}/>).find('.gorHeading').text()).toBe(item.heading);
 	});
 
-//Style testing
-	// it('Check Style',()=>{
-	// 	expect(wrapper.find('.gorSingle').style).toBe("width", "47%");
-	// });
 });
 
