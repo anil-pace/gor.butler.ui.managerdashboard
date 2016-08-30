@@ -4,7 +4,7 @@ export const RECIEVE_ITEM_TO_STOCK = "RECIEVE_ITEM_TO_STOCK";
 
 function fetchData(type) {
   return dispatch => {
-    //dispatch(getHeaderInfo(type))
+    
     return fetch(`./dummy.json`)
       .then(response => response.json())
       .then(json => dispatch(receiveData(json)))

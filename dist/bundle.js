@@ -22286,8 +22286,6 @@ var _headerAction = require('./actions/headerAction');
 
 var _reactRedux = require('react-redux');
 
-var _socketMiddleware = require('./middleware/socketMiddleware');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22299,38 +22297,30 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var App = function (_React$Component) {
 	_inherits(App, _React$Component);
 
-	function App(props) {
+	function App() {
 		_classCallCheck(this, App);
 
-		return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+		return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
 	}
 
 	_createClass(App, [{
-		key: 'componentDidMount',
-		value: function componentDidMount() {
+		key: 'componentWillMount',
+
+		/**
+   * Called once before rendering of component,used to displatch fetch action
+   * @return {[type]}
+   */
+		value: function componentWillMount() {
 			var _props = this.props;
 			var dispatch = _props.dispatch;
 			var type = _props.type;
 
 			dispatch((0, _headerAction.getFetchData)(type));
 		}
-	}, {
-		key: 'componentWillMount',
-		value: function componentWillMount() {
-			var _props2 = this.props;
-			var dispatch = _props2.dispatch;
-			var type = _props2.type;
+		/**Render method called when component react renders
+   * @return {[type]}
+   */
 
-			dispatch((0, _headerAction.getFetchData)(type));
-		}
-	}, {
-		key: 'componentWillReceiveProps',
-		value: function componentWillReceiveProps(nextProps) {
-			console.log(nextProps);
-		}
-	}, {
-		key: 'processData',
-		value: function processData() {}
 	}, {
 		key: 'render',
 		value: function render() {
@@ -22341,7 +22331,7 @@ var App = function (_React$Component) {
 			return _react2.default.createElement(
 				'div',
 				{ className: 'mainContainer' },
-				_react2.default.createElement(_header2.default, { headData: this.props }),
+				_react2.default.createElement(_header2.default, null),
 				_react2.default.createElement(_tabs2.default, null),
 				_react2.default.createElement(
 					'div',
@@ -22378,12 +22368,12 @@ function mapStateToProps(state, ownProps) {
 	return state.getData[state.getData.selectedAction] || {
 		type: 'REQUEST_HEADER',
 		data: [],
-		isFetching: false
+		isFetching: true
 	};
 }
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(App);
 
-},{"./actions/headerAction":196,"./components/header/header":197,"./components/health/health":198,"./components/health/healthTabs":199,"./components/tabs/tabs":200,"./components/tile1x/Tilex":201,"./components/tile2x/Tile2x":202,"./components/widgetContainer/orderStatsWidget":203,"./components/widgetContainer/performanceWidget":204,"./middleware/socketMiddleware":207,"react":184,"react-dom":34,"react-redux":37}],196:[function(require,module,exports){
+},{"./actions/headerAction":196,"./components/header/header":197,"./components/health/health":198,"./components/health/healthTabs":199,"./components/tabs/tabs":200,"./components/tile1x/Tilex":201,"./components/tile2x/Tile2x":202,"./components/widgetContainer/orderStatsWidget":203,"./components/widgetContainer/performanceWidget":204,"react":184,"react-dom":34,"react-redux":37}],196:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -22458,6 +22448,10 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _reactRedux = require('react-redux');
+
+var _headerAction = require('../../actions/headerAction');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22477,9 +22471,12 @@ var Header = function (_React$Component) {
 
 	_createClass(Header, [{
 		key: 'componentDidMount',
-		value: function componentDidMount() {
-			var store = this.context.store;
-			//console.log(this.props);
+		value: function componentDidMount() {}
+	}, {
+		key: 'componentWillMount',
+		value: function componentWillMount() {
+			// this.setState({"asdf":"asdf"});
+			console.log(this.props);
 		}
 	}, {
 		key: 'componentWillUnmount',
@@ -22585,9 +22582,15 @@ var Header = function (_React$Component) {
 
 ;
 
-exports.default = Header;
+function mapStateToProps(state, ownProps) {
+	return {
+		"headData": state.getData[_headerAction.RECIEVE_HEADER] || {}
+	};
+}
 
-},{"react":184,"react-dom":34}],198:[function(require,module,exports){
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(Header);
+
+},{"../../actions/headerAction":196,"react":184,"react-dom":34,"react-redux":37}],198:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23297,17 +23300,23 @@ var _store2 = _interopRequireDefault(_store);
 
 var _reactRedux = require('react-redux');
 
+var _socketMiddleware = require('./middleware/socketMiddleware');
+
+var _socketMiddleware2 = _interopRequireDefault(_socketMiddleware);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var store = (0, _store2.default)();
+//console.log(socketMiddleware);
+//socketMiddleware(store)(null)({"type":"CONNECT"});
 
 _reactDom2.default.render(_react2.default.createElement(
-  _reactRedux.Provider,
-  { store: store },
-  _react2.default.createElement(_App2.default, null)
+	_reactRedux.Provider,
+	{ store: store },
+	_react2.default.createElement(_App2.default, null)
 ), document.getElementById('container'));
 
-},{"./App":195,"./store":210,"react":184,"react-dom":34,"react-redux":37}],207:[function(require,module,exports){
+},{"./App":195,"./middleware/socketMiddleware":207,"./store":210,"react":184,"react-dom":34,"react-redux":37}],207:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23371,10 +23380,10 @@ var socketMiddleware = function () {
               socket.close();
             }
             //Send an action that shows a "connecting..." status for now
-            store.dispatch(_headerAction2.default.connecting());
+            //store.dispatch(actions.connecting());
 
             //Attempt to connect (we could send a 'failed' action on error)
-            socket = new WebSocket(action.url);
+            socket = new WebSocket("wss://192.168.8.118/manager_api/wss");
             socket.onmessage = onMessage(socket, store);
             socket.onclose = onClose(socket, store);
             socket.onopen = onOpen(socket, store, action.token);
@@ -23462,7 +23471,7 @@ function posts() {
       });
     case _headerAction.RECIEVE_ITEM_TO_STOCK:
       return Object.assign({}, state, {
-        isFetching: true,
+        isFetching: false,
         type: _headerAction.RECIEVE_ITEM_TO_STOCK,
         data: action.data
 
@@ -23474,14 +23483,14 @@ function posts() {
 }
 
 function selectedAction() {
-  var state = arguments.length <= 0 || arguments[0] === undefined ? 'FETCH' : arguments[0];
+  var sAction = arguments.length <= 0 || arguments[0] === undefined ? 'FETCH' : arguments[0];
   var action = arguments[1];
 
   switch (action.type) {
     case 'FETCH':
       return action.type;
     default:
-      return state;
+      return sAction;
   }
 }
 

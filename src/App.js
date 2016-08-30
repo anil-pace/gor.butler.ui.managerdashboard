@@ -1,6 +1,5 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-
 import HealthTabs from './components/health/healthTabs';
 import Health from './components/health/health';
 import Tabs from './components/tabs/tabs';
@@ -11,7 +10,7 @@ import OrderStatsWidget from './components/widgetContainer/orderStatsWidget'
 import PerformanceWidget from './components/widgetContainer/performanceWidget'
 import { REQUEST_HEADER, getFetchData } from './actions/headerAction'
 import { connect } from 'react-redux';
-import {socketMiddleware} from './middleware/socketMiddleware'
+
 
 
 
@@ -19,26 +18,17 @@ import {socketMiddleware} from './middleware/socketMiddleware'
 
 
 class App extends React.Component{
-	constructor(props) 
-	{
-    	super(props);
-    	
-    }	
-    componentDidMount() {
-	    const { dispatch, type } = this.props;
-	    dispatch(getFetchData(type));
-  	}
+	/**
+	 * Called once before rendering of component,used to displatch fetch action
+	 * @return {[type]}
+	 */
   	componentWillMount(){
   		const { dispatch, type } = this.props;
 	    dispatch(getFetchData(type));
   	}
-  	componentWillReceiveProps(nextProps) {
-	    console.log(nextProps);
-  	}
-  	processData(){
-
-  	}
-    
+  	/**Render method called when component react renders
+  	 * @return {[type]}
+  	 */
 	render(){
 		
 		var item1={heading:'Items to Stock', value:'4,74,579', low:'4 PPS stocking 3,546 items/hr'};
@@ -48,7 +38,7 @@ class App extends React.Component{
 		return (
 			
 			<div className="mainContainer">
-				<Header headData={this.props}/>
+				<Header />
 				<Tabs/>
 				<div className="gorWidgetWrap">
 				<div className="section group">
@@ -61,9 +51,6 @@ class App extends React.Component{
 					</div>
 				</div>
 				<OrderStatsWidget/>
-
-			
-			
 				<PerformanceWidget/>
 				</div>
 			</div>

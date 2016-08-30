@@ -21,7 +21,7 @@ function posts(state = {
       })
 		case RECIEVE_ITEM_TO_STOCK:
 		return Object.assign({}, state, {
-        isFetching: true,
+        isFetching: false,
         type: RECIEVE_ITEM_TO_STOCK,
         data: action.data
         
@@ -32,12 +32,12 @@ function posts(state = {
 	}
 }
 
-export function selectedAction(state = 'FETCH', action) {
+export function selectedAction(sAction = 'FETCH', action) {
   switch (action.type) {
   case 'FETCH':
     return action.type
   default:
-    return state
+    return sAction
   }
 }
 
