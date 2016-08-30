@@ -1,4 +1,5 @@
 import actions from '../actions/headerAction'
+import constants from '../constants/appConstants'
 
 const socketMiddleware = (function(){ 
   var socket = null;
@@ -39,10 +40,10 @@ const socketMiddleware = (function(){
           socket.close();
         }
         //Send an action that shows a "connecting..." status for now
-        store.dispatch(actions.connecting());
+        //store.dispatch(actions.connecting());
 
         //Attempt to connect (we could send a 'failed' action on error)
-        socket = new WebSocket(action.url);
+        socket = new WebSocket("wss://192.168.8.118/manager_api/wss");
         socket.onmessage = onMessage(socket,store);
         socket.onclose = onClose(socket,store);
         socket.onopen = onOpen(socket,store,action.token);

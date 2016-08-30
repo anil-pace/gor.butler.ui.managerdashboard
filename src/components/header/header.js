@@ -1,5 +1,8 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
+import { connect } from 'react-redux' ;
+import {REQUEST_HEADER,RECIEVE_HEADER,RECIEVE,RECIEVE_ITEM_TO_STOCK} from '../../actions/headerAction';
+
 
 class Header extends React.Component{
 	constructor(props) 
@@ -7,10 +10,12 @@ class Header extends React.Component{
     	super(props);
     }
     componentDidMount(){
-    	const{store} = this.context;
-    	//console.log(this.props);
     	
     }	
+    componentWillMount(){
+    	// this.setState({"asdf":"asdf"});
+    	console.log(this.props)
+    }
     componentWillUnmount(){
     	
     }
@@ -27,7 +32,7 @@ class Header extends React.Component{
 
 
 	render(){
-		const { headData} = this.props;
+		const { headData } = this.props;
 		//console.log(this.props.headData);
 		return (
 		<header className="gorHeader head">
@@ -71,7 +76,12 @@ class Header extends React.Component{
 	}
 };
 
+function mapStateToProps(state, ownProps){
+	return  {
+		"headData":state.getData[RECIEVE_HEADER] || {}
+		}
+		 
 
+}
 
-
-export default Header ;
+export 	default connect(mapStateToProps)(Header);

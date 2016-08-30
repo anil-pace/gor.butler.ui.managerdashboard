@@ -1,11 +1,10 @@
 import { combineReducers } from 'redux';
-import getData  from './reducers/headerReducer'
-import getDummyData  from './reducers/dummyReducer'
+import {getData}  from './reducers/headerReducer'
+
 
 
 const rootReducer = combineReducers({
-  getData,
-  getDummyData
+  getData
 })
 
 export default rootReducer

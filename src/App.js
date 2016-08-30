@@ -1,6 +1,5 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-
 import HealthTabs from './components/health/healthTabs';
 import Health from './components/health/health';
 import Tabs from './components/tabs/tabs';
@@ -17,23 +16,21 @@ import { connect } from 'react-redux';
 
 
 
+
 class App extends React.Component{
-	constructor(props) 
-	{
-    	super(props);
-    	
-    }	
-    componentDidMount() {
-	    const { dispatch, type } = this.props;
-	    console.log(this.props);
+	/**
+	 * Called once before rendering of component,used to displatch fetch action
+	 * @return {[type]}
+	 */
+  	componentWillMount(){
+  		const { dispatch, type } = this.props;
 	    dispatch(getFetchData(type));
   	}
-  	componentWillReceiveProps(nextProps) {
-	    console.log(nextProps);
-  	}
-    
+  	/**Render method called when component react renders
+  	 * @return {[type]}
+  	 */
 	render(){
-
+		
 		var item1={heading:'Items to Stock', value:'4,74,579', low:'4 PPS stocking 3,546 items/hr'};
         var item2={heading1:'Orders to fulfill', value1:'120', low1:'8 PPS fulfilling per/hr', status1:'On schedule', heading2:'Remaining time', value2:'68mins', low2:'Completing in 8mins', status2:'23:59'};
 		var items3={start:"09:10:25", name:"Krish verma gandhi sharma", post:"Manager"}
@@ -57,9 +54,6 @@ class App extends React.Component{
 					</div>
 				</div>
 				<OrderStatsWidget/>
-
-			
-			
 				<PerformanceWidget/>
 				</div>
 			</div>
@@ -67,21 +61,15 @@ class App extends React.Component{
 		);
 	}
 };
-function mapStateToProps(state) {
-  const { getDummyData, getData } = state
-  const {
-    isFetching,
-    type=REQUEST_HEADER,
-    data=[4,5,6]
-  } = getData[REQUEST_HEADER] || {
-    isFetching: true,
-    data: []
-  }
 
-  return {
-    type,
-    data,
-    isFetching,
+
+function mapStateToProps(state,ownProps) {
+ 
+  
+  return state.getData[state.getData.selectedAction] || {
+    type:'REQUEST_HEADER',
+    data:[],
+    isFetching:true
   }
 }
 // export  default connect(mapStateToProps)(App);
