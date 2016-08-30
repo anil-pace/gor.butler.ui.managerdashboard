@@ -1,0 +1,66 @@
+<!doctype html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Manager Dashboard</title>
+<script>
+function handleLogin()
+{
+
+
+    var formData ={
+          "username" : document.getElementById('username').value,
+          "password" : document.getElementById('password').value
+    }
+
+    var loginData=JSON.stringify(formData);
+
+    var httpRequest = new XMLHttpRequest();
+
+    if (!httpRequest) {
+      alert('Giving up :( Cannot create an XMLHTTP instance');
+      return false;
+    }
+    httpRequest.onreadystatechange = function(){
+      if (httpRequest.readyState === XMLHttpRequest.DONE) {
+        if (httpRequest.status === 200) {
+          console.log('Login Successfull');
+          var authData = {
+                'type': 'auth',
+                'data' : {
+                    "auth_token" : httpRequest.auth_token,
+                    "username" : loginData.username
+                }
+          };
+         //console.log(authData.data.auth_token);
+        } 
+        else 
+        {
+            alert('There was a problem with the request.');
+        }
+     }
+    };
+    httpRequest.open('POST', 'https://192.168.8.118/api/auth/token');
+    httpRequest.setRequestHeader('Content-Type', 'application/json');
+    httpRequest.send(loginData);
+}
+</script>
+</head>
+<body class="text-center">
+	<header>
+		<h1><span></span></h1>
+	</header>
+  	<div>
+                  <input type="text" id="username" placeholder="Enter Username" ref='username'/>
+                  <input type="password" id="password" placeholder="Enter Password" ref='password'/>
+    <select ref='language'>
+                  <option value="en-US">English</option>
+                  <option value="ch">Chinese</option>
+    </select>
+    <input type="button" id="loginBtn" onClick="handleLogin()" value="Login" />
+    </div>
+</body>
+</html>
+
+
+

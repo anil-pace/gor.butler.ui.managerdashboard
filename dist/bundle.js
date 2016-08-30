@@ -22245,7 +22245,7 @@ module.exports = function symbolObservablePonyfill(root) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -22282,6 +22282,10 @@ var _Tile2x = require('./components/tile2x/Tile2x');
 
 var _Tile2x2 = _interopRequireDefault(_Tile2x);
 
+var _Login = require('./components/login/Login');
+
+var _Login2 = _interopRequireDefault(_Login);
+
 var _orderStatsWidget = require('./components/widgetContainer/orderStatsWidget');
 
 var _orderStatsWidget2 = _interopRequireDefault(_orderStatsWidget);
@@ -22303,100 +22307,78 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var App = function (_React$Component) {
-	_inherits(App, _React$Component);
+  _inherits(App, _React$Component);
 
-	function App(props) {
-		_classCallCheck(this, App);
+  function App(props) {
+    _classCallCheck(this, App);
 
-		return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
-	}
+    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+  }
 
-	_createClass(App, [{
-		key: 'componentDidMount',
-		value: function componentDidMount() {
-			var _props = this.props;
-			var dispatch = _props.dispatch;
-			var type = _props.type;
+  _createClass(App, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _props = this.props;
+      var dispatch = _props.dispatch;
+      var type = _props.type;
 
-			console.log(this.props);
-			dispatch((0, _headerAction.getFetchData)(type));
-		}
-	}, {
-		key: 'componentWillReceiveProps',
-		value: function componentWillReceiveProps(nextProps) {
-			console.log(nextProps);
-		}
-	}, {
-		key: 'render',
-		value: function render() {
+      console.log(this.props);
+      dispatch((0, _headerAction.getFetchData)(type));
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      console.log(nextProps);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
 
-			var item1 = { heading: 'Items to Stock', value: '4,74,579', low: '4 PPS stocking 3,546 items/hr' };
-			var item2 = { heading1: 'Orders to fulfill', value1: '120', low1: '8 PPS fulfilling per/hr', status1: 'On schedule', heading2: 'Remaining time', value2: '68mins', low2: 'Completing in 8mins', status2: '23:59' };
-			var items3 = { start: "09:10:25", name: "Krish verma gandhi sharma", post: "Manager" };
+      var item1 = { heading: 'Items to Stock', value: '4,74,579', low: '4 PPS stocking 3,546 items/hr' };
+      var item2 = { heading1: 'Orders to fulfill', value1: '120', low1: '8 PPS fulfilling per/hr', status1: 'On schedule', heading2: 'Remaining time', value2: '68mins', low2: 'Completing in 8mins', status2: '23:59' };
+      var items3 = { start: "09:10:25", name: "Krish verma gandhi sharma", post: "Manager" };
 
-			// 				<Header headData={this.props}/>
-			// >>>>>>> 78d88289eaca9b774df9448e26f05562854a5b42
+      // 				<Header headData={this.props}/>
+      // >>>>>>> 78d88289eaca9b774df9448e26f05562854a5b42
 
-			return _react2.default.createElement(
-				'div',
-				{ className: 'mainContainer' },
-				_react2.default.createElement(_header2.default, { user: items3 }),
-				_react2.default.createElement(_tabs2.default, null),
-				_react2.default.createElement(
-					'div',
-					{ className: 'gorWidgetWrap' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'section group' },
-						_react2.default.createElement(
-							'div',
-							{ className: 'col span_2_of_4' },
-							_react2.default.createElement(_Tilex2.default, { items: item1 }),
-							_react2.default.createElement(_Tilex2.default, { items: item1 })
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'col span_2_of_4 gorNoML' },
-							_react2.default.createElement(_Tile2x2.default, { items: item2 })
-						)
-					),
-					_react2.default.createElement(_orderStatsWidget2.default, null),
-					_react2.default.createElement(_performanceWidget2.default, null)
-				)
-			);
-		}
-	}]);
+      return _react2.default.createElement(
+        'div',
+        { className: 'mainContainer' },
+        _react2.default.createElement(_Login2.default, null)
+      );
+    }
+  }]);
 
-	return App;
+  return App;
 }(_react2.default.Component);
 
 ;
 function mapStateToProps(state) {
-	var getDummyData = state.getDummyData;
-	var getData = state.getData;
+  var getDummyData = state.getDummyData;
+  var getData = state.getData;
 
-	var _ref = getData[_headerAction.REQUEST_HEADER] || {
-		isFetching: true,
-		data: []
-	};
+  var _ref = getData[_headerAction.REQUEST_HEADER] || {
+    isFetching: true,
+    data: []
+  };
 
-	var isFetching = _ref.isFetching;
-	var _ref$type = _ref.type;
-	var type = _ref$type === undefined ? _headerAction.REQUEST_HEADER : _ref$type;
-	var _ref$data = _ref.data;
-	var data = _ref$data === undefined ? [4, 5, 6] : _ref$data;
+  var isFetching = _ref.isFetching;
+  var _ref$type = _ref.type;
+  var type = _ref$type === undefined ? _headerAction.REQUEST_HEADER : _ref$type;
+  var _ref$data = _ref.data;
+  var data = _ref$data === undefined ? [4, 5, 6] : _ref$data;
 
 
-	return {
-		type: type,
-		data: data,
-		isFetching: isFetching
-	};
+  return {
+    type: type,
+    data: data,
+    isFetching: isFetching
+  };
 }
 // export  default connect(mapStateToProps)(App);
 exports.default = App;
 
-},{"./actions/headerAction":197,"./components/header/header":198,"./components/health/health":199,"./components/health/healthTabs":200,"./components/tabs/tabs":201,"./components/tile1x/Tilex":202,"./components/tile2x/Tile2x":203,"./components/widgetContainer/orderStatsWidget":204,"./components/widgetContainer/performanceWidget":205,"react":185,"react-dom":35,"react-redux":38}],197:[function(require,module,exports){
+},{"./actions/headerAction":197,"./components/header/header":198,"./components/health/health":199,"./components/health/healthTabs":200,"./components/login/Login":201,"./components/tabs/tabs":202,"./components/tile1x/Tilex":203,"./components/tile2x/Tile2x":204,"./components/widgetContainer/orderStatsWidget":205,"./components/widgetContainer/performanceWidget":206,"react":185,"react-dom":35,"react-redux":38}],197:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -22798,6 +22780,79 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var Login = function (_React$Component) {
+	_inherits(Login, _React$Component);
+
+	function Login(props) {
+		_classCallCheck(this, Login);
+
+		return _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
+	}
+
+	_createClass(Login, [{
+		key: 'handleLogin',
+		value: function handleLogin() {}
+	}, {
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement(
+				'div',
+				null,
+				'Username',
+				_react2.default.createElement('input', { type: 'text', id: 'username', placeholder: 'Enter Username', ref: 'username' }),
+				'Password',
+				_react2.default.createElement('input', { type: 'password', id: 'password', placeholder: 'Enter Password', ref: 'password' }),
+				_react2.default.createElement(
+					'select',
+					{ ref: 'language' },
+					_react2.default.createElement(
+						'option',
+						{ value: 'en-US' },
+						'English'
+					),
+					_react2.default.createElement(
+						'option',
+						{ value: 'ch' },
+						'Chinese'
+					)
+				),
+				_react2.default.createElement('input', { type: 'button', id: 'loginBtn', onClick: this.handleLogin, value: 'Login' })
+			);
+		}
+	}]);
+
+	return Login;
+}(_react2.default.Component);
+
+;
+
+exports.default = Login;
+
+},{"react":185,"react-dom":35}],202:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var Tabs = function (_React$Component) {
 	_inherits(Tabs, _React$Component);
 
@@ -22946,7 +23001,7 @@ var Tabs = function (_React$Component) {
 
 exports.default = Tabs;
 
-},{"react":185,"react-dom":35}],202:[function(require,module,exports){
+},{"react":185,"react-dom":35}],203:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23025,7 +23080,7 @@ var Tilex = function (_React$Component) {
 
 exports.default = Tilex;
 
-},{"react":185,"react-dom":35}],203:[function(require,module,exports){
+},{"react":185,"react-dom":35}],204:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23155,7 +23210,7 @@ var Tile2x = function (_React$Component) {
 
 exports.default = Tile2x;
 
-},{"react":185,"react-dom":35}],204:[function(require,module,exports){
+},{"react":185,"react-dom":35}],205:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23207,7 +23262,7 @@ var OrderStatsWidget = function (_React$Component) {
 
 exports.default = OrderStatsWidget;
 
-},{"../health/healthTabs.js":200,"react":185,"react-dom":35}],205:[function(require,module,exports){
+},{"../health/healthTabs.js":200,"react":185,"react-dom":35}],206:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23263,7 +23318,7 @@ var PerformanceWidget = function (_React$Component) {
 
 exports.default = PerformanceWidget;
 
-},{"../health/healthTabs.js":200,"react":185,"react-dom":35}],206:[function(require,module,exports){
+},{"../health/healthTabs.js":200,"react":185,"react-dom":35}],207:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -23296,7 +23351,7 @@ _reactDom2.default.render(_react2.default.createElement(
 
 _reactDom2.default.render(_react2.default.createElement(_App2.default, null), document.getElementById('container'));
 
-},{"./App":196,"./store":211,"react":185,"react-dom":35,"react-redux":38}],207:[function(require,module,exports){
+},{"./App":196,"./store":212,"react":185,"react-dom":35,"react-redux":38}],208:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23393,7 +23448,7 @@ var socketMiddleware = function () {
 
 exports.default = socketMiddleware;
 
-},{"../actions/headerAction":197}],208:[function(require,module,exports){
+},{"../actions/headerAction":197}],209:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23419,7 +23474,7 @@ var rootReducer = (0, _redux.combineReducers)({
 
 exports.default = rootReducer;
 
-},{"./reducers/dummyReducer":209,"./reducers/headerReducer":210,"redux":192}],209:[function(require,module,exports){
+},{"./reducers/dummyReducer":210,"./reducers/headerReducer":211,"redux":192}],210:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23441,7 +23496,7 @@ function getDummyData() {
 	}
 }
 
-},{}],210:[function(require,module,exports){
+},{}],211:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23484,7 +23539,7 @@ function getData() {
   }
 }
 
-},{"../actions/headerAction":197}],211:[function(require,module,exports){
+},{"../actions/headerAction":197}],212:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23512,4 +23567,4 @@ function configureStore(preloadedState) {
   return (0, _redux.createStore)(_reducers2.default, preloadedState, (0, _redux.applyMiddleware)(_reduxThunk2.default, _socketMiddleware2.default));
 }
 
-},{"./middleware/socketMiddleware":207,"./reducers":208,"redux":192,"redux-thunk":186}]},{},[206]);
+},{"./middleware/socketMiddleware":208,"./reducers":209,"redux":192,"redux-thunk":186}]},{},[207]);

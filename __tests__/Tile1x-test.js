@@ -13,7 +13,7 @@ describe('Tilex  Tests', () => {
    		expect(wrapper.find('div').length).toEqual(4);
 	 });
 
-	it('Should contain 1 div with class "up-tile"',()=>{
+	it('Should contain 1 div with class "gorUp-tile"',()=>{
 		expect(wrapper.find('.gorUp-tile').length).toEqual(1);
 	});
 
