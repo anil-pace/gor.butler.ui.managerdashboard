@@ -1,6 +1,6 @@
 const utils = {
   ajax:function (params,callBack) {
-    var formData = params.formdata || null
+    var formData = params.formdata || null,
     loginData=JSON.stringify(formData || {});
     var httpRequest = new XMLHttpRequest();
 
@@ -14,12 +14,14 @@ const utils = {
               callBack.call(this,xhr);
             }
         } 
+
         
      }
     };
     httpRequest.open(params.method, params.url);
     httpRequest.setRequestHeader('Content-Type', params.contentType || "text/html");
     httpRequest.send(loginData);
+    return httpRequest;
 }
 
 }
