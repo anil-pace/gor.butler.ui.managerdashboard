@@ -38,8 +38,7 @@ class App extends React.Component{
         var item2={heading1:'Orders to fulfill', value1:'120', low1:'8 PPS fulfilling per/hr', status1:'On schedule', heading2:'Remaining time', value2:'68mins', low2:'Completing in 8mins', status2:'23:59'};
 		var items3={start:"09:10:25", name:"Krish verma gandhi sharma", post:"Manager"}
 		
-// 				<Header headData={this.props}/>
-// >>>>>>> 78d88289eaca9b774df9448e26f05562854a5b42
+
 		
 		return (
 			
@@ -75,5 +74,5 @@ function mapStateToProps(state,ownProps) {
     isFetching:true
   }
 }
-// export  default connect(mapStateToProps)(App);
-export default App;
+export  default connect(mapStateToProps)(App);
+

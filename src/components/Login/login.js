@@ -8,31 +8,34 @@ class Login extends React.Component{
 	{
     	super(props);
     }
-    handleLogin(){
+    handleSubmit(e){
+    	e.preventDefault();
     	let formdata={         
-          	'username': document.getElementById('username').value,
-          	'password': document.getElementById('password').value,
+          	'username': this.userName.value,
+          	'password': this.password.value,
          };
     	let loginData={
     		'formdata':formdata,
-    		'url':'https://192.168.8.118/api/auth/token',
+    		'url':'./dummy.json',
         	'method':'POST',
         	'contentType':'application/json'
     	}
-    	const { dispatch} = this.props;
-	    dispatch(authLoginData(loginData));
+    	
+	    this.props.authLoginData(loginData);
     }
 	render(){
 		return (
+			<form action="#" onSubmit={(e) => this.handleSubmit(e)}>
 			<div>
-				<input type="text" id="username"  placeholder="Enter Username" ref='username'/>
-				<input type="password" id="password" placeholder="Enter Password" ref='password'/>
+				<input type="text" id="username"  placeholder="Enter Username" ref={node => { this.userName = node }}/>
+				<input type="password" id="password" placeholder="Enter Password" ref={node => { this.password = node }}/>
 				<select ref='language'>
 					<option value="en-US">English</option>
 					<option value="ch">Chinese</option>
 				</select>
-				<input type="button" id="loginBtn" onClick={this.handleLogin.bind(this)} value="Login" />
+				<input type="submit"  value="Login" />
  			</div>
+ 			</form>
 		);
 	}
 };
@@ -41,4 +44,10 @@ function mapStateToProps(state, ownProps){
 	return state;
 }
 
-export 	default connect(mapStateToProps)(Login);
+var mapDispatchToProps = function(dispatch){
+    return {
+        authLoginData: function(params){ dispatch(authLoginData(params)); }
+    }
+};
+
+export 	default connect(mapStateToProps,mapDispatchToProps)(Login);

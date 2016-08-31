@@ -1,4 +1,6 @@
 import {utils} from '../utilities/ajax'
+import { routerMiddleware, push } from 'react-router-redux'
+
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_REDIRECT = "LOGIN_REDIRECT";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
@@ -30,18 +32,24 @@ function receiveAuthData(data){
 	}
 }
 
-function authData(params) {
+function authData(params){
   return dispatch => {
-    return utils.ajax(params)
-      .then(response => response.json())
+    return fetch('./dummy.json',{
+      method: 'post',
+      body: JSON.stringify({
+        text
+      })
+
+    }).then(response => response.json())
       .then(json => dispatch(receiveAuthData(json)))
   }
 }
 
 export function authLoginData(params) {
-  return (dispatch, getState) => {
-      return dispatch(authData(params))
+  return (dispatch) => {
+      return dispatch(push('/md'))
     
   }
+  
 }
 
