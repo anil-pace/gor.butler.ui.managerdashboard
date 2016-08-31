@@ -470,21 +470,22 @@ body {
   text-overflow: ellipsis;
 }
 
-.gorTab.container {
+.gorTab.gorContainer {
   background-color: #4d5055;
   width: auto;
+  display: inline-block;
 }
 
-.gorTab .mainBlock:hover {
+.gorTab .gorMainBlock:hover {
   background-color: #323539;
 }
 
-.gorTab .inline {
+.gorTab .gorInline {
   display: inline-block;
   width: 100%;
 }
 
-.gorTab .mainBlock {
+.gorTab .gorMainBlock {
   width: 120px;
   padding-right: 20px;
   padding-left: 20px;
@@ -495,7 +496,7 @@ body {
   cursor: pointer;
 }
 
-.gorTab .upperText {
+.gorTab .gorUpperText {
   padding-top: 7px;
   font-family: "source sans pro";
   font-size: 18px;
@@ -506,43 +507,43 @@ body {
   width: 75%;
 }
 
-.gorTab .subText {
+.gorTab .gorSubText {
   font-size: 14px;
   padding-top: 0px;
   font-weight: bold;
 }
 
-.gorTab .overview {
+.gorTab .gorOverview {
   font-family: "source sans pro";
   color: #ffffff;
 }
 
-.gorTab .online {
+.gorTab .gorOnline {
   font-family: "source sans pro";
   color: #10c469;
 }
 
-.gorTab .offline {
+.gorTab .gorOffline {
   font-family: "source sans pro";
   color: #ffffff;
 }
 
-.gorTab .event {
+.gorTab .gorEvent {
   font-family: "source sans pro";
   color: #27aae1;
 }
 
-.gorTab .risk {
+.gorTab .gorRisk {
   font-family: "source sans pro";
   color: #f99405;
 }
 
-.gorTab .error {
+.gorTab .gorError {
   font-family: "source sans pro";
   color: #fc3838;
 }
 
-.gorTab .emergency {
+.gorTab .gorEmergency {
   font-family: "source sans pro";
   color: #ffffff;
   background: #fc3838;
@@ -663,7 +664,7 @@ body {
   }
 }
 
-.orderStatsWidget {
+.gorOrderStatsWidget {
   background: #fff;
   border-radius: 3px;
   box-shadow: 0px 2px 3px 3px #EAEAEA;
@@ -674,7 +675,7 @@ body {
   height: 300px;
 }
 
-.performanceWidget {
+.gorPerformanceWidget {
   background: #fff;
   border-radius: 3px;
   box-shadow: 0px 2px 3px 3px #EAEAEA;
@@ -683,4 +684,8 @@ body {
   font-size: 0;
   width: 25%;
   height: 300px;
+}
+
+.gorTabs.gorMainBlock {
+  background-color: #4d5055;
 }

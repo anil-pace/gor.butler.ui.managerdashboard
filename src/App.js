@@ -2,12 +2,12 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import HealthTabs from './components/health/healthTabs';
 import Health from './components/health/health';
-import Tabs from './components/tabs/tabs';
+import Tabs from './containers/tabs';
 import Header from './components/header/header';
 import Tilex from './components/tile1x/Tilex';
 import Tile2x from './components/tile2x/Tile2x';
-import OrderStatsWidget from './components/widgetContainer/orderStatsWidget'
-import PerformanceWidget from './components/widgetContainer/performanceWidget'
+import OrderStatsWidget from './containers/orderStatsWidget'
+import PerformanceWidget from './containers/performanceWidget'
 import { REQUEST_HEADER, getFetchData } from './actions/headerAction'
 import { connect } from 'react-redux';
 
