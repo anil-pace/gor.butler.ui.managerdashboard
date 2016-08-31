@@ -22,13 +22,12 @@ class App extends React.Component{
 	{
     	super(props)
     }	
-    componentDidMount() {
-	    const { dispatch, type } = this.props;
-	    dispatch(getFetchData(type));
-  	}
+  
   	componentWillMount(){
-  		const { dispatch, type } = this.props;
+  		const { dispatch, type,history } = this.props;
 	    dispatch(getFetchData(type));
+		
+		
   	}
   	/**Render method called when component react renders
   	 * @return {[type]}
@@ -58,6 +57,7 @@ class App extends React.Component{
 				<OrderStatsWidget/>
 				<PerformanceWidget/>
 				</div>
+				{this.props.children}
 			</div>
 			
 		);
@@ -71,8 +71,14 @@ function mapStateToProps(state,ownProps) {
   return state.getData[state.getData.selectedAction] || {
     type:'REQUEST_HEADER',
     data:[],
-    isFetching:true
+    isFetching:true,
+
   }
 }
+function mapDispatchToProps(dispatch){
+    return {
+        initWebSocket: function(params){ dispatch(authLoginData(params)); }
+    }
+};
 export  default connect(mapStateToProps)(App);
 

@@ -3,10 +3,18 @@ import ReactDOM  from 'react-dom';
 import { LOGIN_REQUEST, authLoginData } from '../../actions/loginAction';
 import { connect } from 'react-redux';
 
+
 class Login extends React.Component{
 	constructor(props) 
 	{
     	super(props);
+    }
+    
+    componentWillReceiveProps(nextProps) {
+  
+      if (nextProps.auth_token  && nextProps.userName) {
+           this.props.history.push("/md");
+      }
     }
     handleSubmit(e){
     	e.preventDefault();
@@ -41,7 +49,10 @@ class Login extends React.Component{
 };
 
 function mapStateToProps(state, ownProps){
-	return state;
+	return {
+        auth_token:state.authLogin.auth_token,
+        userName:state.authLogin.username
+    };
 }
 
 var mapDispatchToProps = function(dispatch){

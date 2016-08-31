@@ -1,9 +1,8 @@
 import {utils} from '../utilities/ajax'
 import { routerMiddleware, push } from 'react-router-redux'
+import { LOGIN_REQUEST, LOGIN_REDIRECT, LOGIN_SUCCESS,LOGIN_FAILURE} from '../constants/appConstants'
 
-export const LOGIN_REQUEST = "LOGIN_REQUEST";
-export const LOGIN_REDIRECT = "LOGIN_REDIRECT";
-export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+
 
 /**
  * Action for Login request
@@ -25,20 +24,22 @@ export function loginRedirect(data){
 }
 
 function receiveAuthData(data){
-	
-	return{
-		type: LOGIN_SUCCESS,
-		data
-	}
+	if(!data.auth_token){
+    	return{
+    		type: LOGIN_FAILURE,
+    		data
+    	}
+  }
+  return{
+        type: LOGIN_SUCCESS,
+        data
+      }
 }
 
 function authData(params){
   return dispatch => {
-    return fetch('./dummy.json',{
-      method: 'post',
-      body: JSON.stringify({
-        text
-      })
+    return fetch('./mock/loginJson.json',{
+      method: 'GET'
 
     }).then(response => response.json())
       .then(json => dispatch(receiveAuthData(json)))
@@ -47,7 +48,7 @@ function authData(params){
 
 export function authLoginData(params) {
   return (dispatch) => {
-      return dispatch(push('/md'))
+      return dispatch(authData(params))
     
   }
   
