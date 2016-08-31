@@ -9,25 +9,25 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 
 
 export function loginRequest(data){
-	return {
-		type: LOGIN_REQUEST,
-    	data
-  	}
+  return {
+    type: LOGIN_REQUEST,
+      data
+    }
 }
 
 export function loginRedirect(data){
-	return {
-		type: LOGIN_REDIRECT,
-    	data
-  	}
+  return {
+    type: LOGIN_REDIRECT,
+      data
+    }
 }
 
 function receiveAuthData(data){
-	
-	return{
-		type: LOGIN_SUCCESS,
-		data
-	}
+  
+  return{
+    type: LOGIN_SUCCESS,
+    data
+  }
 }
 
 function authData(params) {
@@ -44,4 +44,3 @@ export function authLoginData(params) {
     
   }
 }
-
