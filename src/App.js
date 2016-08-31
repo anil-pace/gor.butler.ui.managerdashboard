@@ -6,6 +6,7 @@ import Tabs from './containers/tabs';
 import Header from './components/header/header';
 import Tilex from './components/tile1x/Tilex';
 import Tile2x from './components/tile2x/Tile2x';
+import Dropdown from './components/dropdown/dropdown';
 import OrderStatsWidget from './containers/orderStatsWidget'
 import PerformanceWidget from './containers/performanceWidget'
 import { REQUEST_HEADER, getFetchData } from './actions/headerAction'
@@ -53,8 +54,12 @@ class App extends React.Component{
 						<Tile2x items={item2}/>
 					</div>
 				</div>
+				<div>
 				<OrderStatsWidget/>
 				<PerformanceWidget/>
+				</div>
+
+
 				</div>
 			</div>
 			

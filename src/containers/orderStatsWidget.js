@@ -8,7 +8,9 @@ class OrderStatsWidget extends React.Component{
 	render(){
 		return (
 		<div className="gorOrderStatsWidget">
+		<div className="gorDrop">
 			 <Dropdown/>
+			 </div>
 		</div> 
 		);
 	}

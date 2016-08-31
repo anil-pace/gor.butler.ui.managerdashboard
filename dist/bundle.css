@@ -211,7 +211,6 @@ body {
 
 .health.mainBlock {
   width: 300px;
-  border: .5px solid #f7f7f7;
 }
 
 .health .block {
@@ -670,9 +669,13 @@ body {
   box-shadow: 0px 2px 3px 3px #EAEAEA;
   display: inline-block;
   margin: 1% 1% 1% 2%;
-  font-size: 0;
-  width: 60%;
-  height: 300px;
+  width: 65%;
+  height: 500px;
+}
+
+.gorDrop {
+  padding-left: 20px;
+  padding-top: 20px;
 }
 
 .gorPerformanceWidget {
@@ -681,11 +684,106 @@ body {
   box-shadow: 0px 2px 3px 3px #EAEAEA;
   display: inline-block;
   margin: 1% 1% 1% 2%;
-  font-size: 0;
   width: 25%;
-  height: 300px;
+  height: 500px;
 }
 
 .gorTabs.gorMainBlock {
   background-color: #4d5055;
+}
+
+.ddown {
+  width: 290px;
+  min-height: 45px;
+}
+
+.Dropdown-root {
+  position: relative;
+}
+
+.Dropdown-control {
+  position: relative;
+  overflow: hidden;
+  background-color: white;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: #000000;
+  font-family: "source sans pro";
+  font-size: 20px;
+  font-weight: bold;
+  cursor: default;
+  outline: none;
+  padding: 8px 52px 8px 10px;
+  transition: all 200ms ease;
+}
+
+.Dropdown-control:hover {
+  box-shadow: 2px 2px 2px #888888;
+  border: 1px solid #ccc;
+}
+
+.Dropdown-arrow {
+  border-color: #000000 transparent transparent;
+  border-style: solid;
+  border-width: 8px 7px 3px;
+  content: ' ';
+  display: block;
+  height: 0;
+  margin-top: -ceil(2.5);
+  position: absolute;
+  right: 35px;
+  top: 14px;
+}
+
+.is-open .Dropdown-arrow {
+  border-color: #000000 transparent transparent;
+  border-style: solid;
+  border-width: 8px 7px 3px;
+}
+
+.Dropdown-menu {
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
+  margin-top: -1px;
+  max-height: 200px;
+  overflow-y: auto;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  z-index: 1000;
+  -webkit-overflow-scrolling: touch;
+}
+
+.Dropdown-option {
+  box-sizing: border-box;
+  color: #666666;
+  cursor: pointer;
+  display: block;
+  padding: 8px 10px;
+}
+
+.Dropdown-option:last-child {
+  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+.Dropdown-option:hover {
+  background-color: #efefef;
+  color: #333;
+}
+
+.Dropdown-option.is-selected {
+  box-shadow: 2px 2px 2px #888888;
+  background-color: #f2f9fc;
+  color: #333;
+}
+
+.Dropdown-noresults {
+  box-sizing: border-box;
+  color: #ccc;
+  cursor: default;
+  display: block;
+  padding: 8px 10px;
 }

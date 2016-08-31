@@ -1,31 +1,39 @@
-import React  from 'react';
-import ReactDOM  from 'react-dom';
+import React, { Component } from 'react';
+import Ddown from 'react-dropdown';
 
-
-class Dropdown extends React.Component{
-	constructor(props) 
-	{
-    	super(props);
-    	this.state = {selectValue:'SystemHealth'};
-
+class Dropdown extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      selected: { value: 'one', label: 'PPS - pick performance'}
     }
+    this._onSelect = this._onSelect.bind(this)
+  }
 
-    handleChange(e) {
-    	this.setState({selectValue:e.target.value});
-    }	
-	render(){
-		return (
-		<div>
-			<div>
-         		<select value={this.state.selectValue} onChange={this.handleChange} >
-            		<option value="SystemHealth">SystemHealth</option>
-            		<option value="ppsPerformance">PPS - pick performance</option>
-          		</select>
-            </div> 
-		</div> 
-		);
-	}
-};
+  _onSelect (option) {
+    console.log('You selected ', option.label)
+    this.setState({selected: option})
+  }
 
-export default Dropdown ;
+  render () {
+    const options = [
+      { value: 'one', label: 'PPS - pick performance' },
+      { value: 'two', label: 'System health' },
+      { value: 'three', label: 'PPS - pick performance' },
+      { value: 'four', label: 'PPS - audit performance' },
+      
+    ]
 
+    const defaultOption = this.state.selected
+
+
+    return (
+      <div className="ddown">
+        
+        <Ddown options={options} onChange={this._onSelect} value={defaultOption} placeholder="Select an option" />
+      </div>
+    )
+  }
+}
+
+export default Dropdown;
