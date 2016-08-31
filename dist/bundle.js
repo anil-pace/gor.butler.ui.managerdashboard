@@ -22489,9 +22489,6 @@ var _socketMiddleware2 = _interopRequireDefault(_socketMiddleware);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var store = (0, _store2.default)();
-//console.log(socketMiddleware);
-//socketMiddleware(store)(null)({"type":"CONNECT"});
-
 _reactDom2.default.render(_react2.default.createElement(
 	_reactRedux.Provider,
 	{ store: store },

@@ -6,15 +6,15 @@
   "scripts": {
     "test": "./node_modules/jest/bin/jest.js",
     "json": "echo '=>JSON' && jsonparse src/assets/js/serverMessages/server_messages.json -o dist/assets/js/localization/",
-    "browserify": "echo '=>Browserify' && browserify $npm_package_config_srcJs -o $npm_package_config_destinationJs -t [ babelify --presets [ es2015 react ] ]",
+    "browserify": "echo '=>Browserify' && browserify $npm_package_config_srcJs -o $npm_package_config_destinationJs -t [ babelify --presets [ es2015 react ] ] ",
     "build-sass": "echo '=>Build SASS' && node-sass --output-style expanded  $npm_package_config_srcCss $npm_package_config_destinationCss  ",
     "watch-sass": "node-sass --output-style expanded  $npm_package_config_watchCssSrc $npm_package_config_watchCssDist -v",
     "copy": "echo '=>Copying...' && copy ./src/index.html ./dist/",
     "lint": "eslint src/**/*.js",
-    "build-js": "npm run browserify ",
+    "build-js": "npm run browserify --verbose",
     "watch:css": "onchange 'src/assets/css/**/*.scss' -- npm run build-sass ",
     "build": "npm run build-sass && npm run build-js",
-    "watch:js": "onchange 'src/**/*.js' -- npm run build-js",
+    "watch:js": "npm run build && onchange 'src/**/*.js' -- npm run build-js",
     "watch:all": "parallelshell 'npm run watch:css' 'npm run watch:js'"
   },
   "repository": {
@@ -52,8 +52,7 @@
     "enzyme": "^2.4.1",
     "eslint": "^3.3.1",
     "eslint-plugin-react": "^6.1.2",
-    "i": "^0.3.5",
-    "install": "^0.8.1",
+    "jasmine-reporters": "^1.0.0",
     "jest": "^13.2.3",
     "node-sass": "^3.8.0",
     "npm": "^3.10.6",
@@ -68,7 +67,13 @@
   },
   "dependencies": {
     "react": "^15.2.0",
-    "react-dom": "^15.2.0"
+    "react-dom": "^15.2.0",
+    "istanbul": "^0.3.0",
+    "jasmine": "^2.4.1",
+    "react-intl": "^2.1.4",
+    "react-intl-redux": "^0.1.0",
+    "react-redux": "^4.4.5",
+    "xmldom": "^0.1.22"
   },
   "jest": {
     "unmockedModulePathPatterns": [
