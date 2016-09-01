@@ -22,13 +22,12 @@ class App extends React.Component{
 	{
     	super(props)
     }	
-    componentDidMount() {
-	    const { dispatch, type } = this.props;
-	    dispatch(getFetchData(type));
-  	}
+  
   	componentWillMount(){
-  		const { dispatch, type } = this.props;
+  		const { dispatch, type,history } = this.props;
 	    dispatch(getFetchData(type));
+		
+		
   	}
   	/**Render method called when component react renders
   	 * @return {[type]}
@@ -38,8 +37,7 @@ class App extends React.Component{
         var item2={heading1:'Orders to fulfill', value1:'120', low1:'8 PPS fulfilling per/hr', status1:'On schedule', heading2:'Remaining time', value2:'68mins', low2:'Completing in 8mins', status2:'23:59'};
 		var items3={start:"09:10:25", name:"Krish verma gandhi sharma", post:"Manager"}
 		
-// 				<Header headData={this.props}/>
-// >>>>>>> 78d88289eaca9b774df9448e26f05562854a5b42
+
 		
 		return (
 			
@@ -59,6 +57,7 @@ class App extends React.Component{
 				<OrderStatsWidget/>
 				<PerformanceWidget/>
 				</div>
+				{this.props.children}
 			</div>
 			
 		);
@@ -72,8 +71,14 @@ function mapStateToProps(state,ownProps) {
   return state.getData[state.getData.selectedAction] || {
     type:'REQUEST_HEADER',
     data:[],
-    isFetching:true
+    isFetching:true,
+
   }
 }
-// export  default connect(mapStateToProps)(App);
-export default App;
+function mapDispatchToProps(dispatch){
+    return {
+        initWebSocket: function(params){ dispatch(authLoginData(params)); }
+    }
+};
+export  default connect(mapStateToProps)(App);
+
