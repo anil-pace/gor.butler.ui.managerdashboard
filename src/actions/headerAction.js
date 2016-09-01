@@ -1,3 +1,5 @@
+import fetch from 'isomorphic-fetch'
+
 export const REQUEST_HEADER = "REQUEST_HEADER";
 export const RECIEVE_HEADER = "RECIEVE_HEADER";
 export const RECIEVE_ITEM_TO_STOCK = "RECIEVE_ITEM_TO_STOCK";
@@ -5,7 +7,11 @@ export const RECIEVE_ITEM_TO_STOCK = "RECIEVE_ITEM_TO_STOCK";
 function fetchData(type) {
   return dispatch => {
     
-    return fetch(`./dummy.json`)
+    return fetch('https://192.168.8.118/api/auth/token',{
+      'mode':'cors',
+      'method':'post',
+      'body' : document.getElementById('loginForm')
+      })
       .then(response => response.json())
       .then(json => dispatch(receiveData(json)))
   }

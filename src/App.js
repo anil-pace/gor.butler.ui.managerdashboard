@@ -6,9 +6,11 @@ import Tabs from './components/tabs/tabs';
 import Header from './components/header/header';
 import Tilex from './components/tile1x/Tilex';
 import Tile2x from './components/tile2x/Tile2x';
+import {setWsAction } from './actions/socketActions';
 import OrderStatsWidget from './components/widgetContainer/orderStatsWidget'
 import PerformanceWidget from './components/widgetContainer/performanceWidget'
 import { REQUEST_HEADER, getFetchData } from './actions/headerAction'
+import { WS_CONNECT } from './constants/appConstants'
 import { connect } from 'react-redux';
 
 
@@ -24,10 +26,9 @@ class App extends React.Component{
     }	
   
   	componentWillMount(){
-  		const { dispatch, type,history } = this.props;
-	    dispatch(getFetchData(type));
-		
-		
+  		/*Creating Web Socket Connection*/
+  		
+  		this.props.initWebSocket() ;
   	}
   	/**Render method called when component react renders
   	 * @return {[type]}
@@ -63,22 +64,21 @@ class App extends React.Component{
 		);
 	}
 };
-
+/**
+ * Function to pass state values as props
+ */
 
 function mapStateToProps(state,ownProps) {
  
-  
-  return state.getData[state.getData.selectedAction] || {
-    type:'REQUEST_HEADER',
-    data:[],
-    isFetching:true,
-
-  }
+ return state;
 }
+/**
+ * Function to dispatch action values as props
+ */
 function mapDispatchToProps(dispatch){
     return {
-        initWebSocket: function(params){ dispatch(authLoginData(params)); }
+        initWebSocket: function(){ dispatch(setWsAction({type:WS_CONNECT})); }
     }
 };
-export  default connect(mapStateToProps)(App);
+export  default connect(mapStateToProps,mapDispatchToProps)(App);
 
