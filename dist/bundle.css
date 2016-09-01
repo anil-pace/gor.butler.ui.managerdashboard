@@ -210,124 +210,124 @@ body {
 }
 
 .health.mainBlock {
-  width: 300px;
+  width: 18.75rem;
 }
 
 .health .block {
   display: inline-block;
   text-align: center;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
 }
 
 .health .attributes {
-  width: 91px;
+  width: 5.6875rem;
 }
 
 .health .upperText {
   font-family: "source sans pro";
-  font-size: 24px;
+  font-size: 1.5rem;
 }
 
 .health .subtext {
   font-family: "source sans pro";
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 
 .health .parameters {
-  width: 204px;
+  width: 12.75rem;
 }
 
 .health .stoppedState {
   background: #ec1c24;
-  width: 28px;
-  height: 18px;
+  width: 1.75rem;
+  height: 1.125rem;
   border-radius: 40%;
   color: #ffffff;
   font-family: "source sans pro";
   font-weight: bold;
-  padding-top: 0px;
-  padding-bottom: 0px;
+  padding-top: 0rem;
+  padding-bottom: 0rem;
 }
 
 .health .onState {
   background: #ffffff;
-  width: 28px;
-  height: 18px;
+  width: 1.75rem;
+  height: 1.125rem;
   border-radius: 40%;
   color: #666666;
   font-family: "source sans pro";
   border-style: solid;
-  border-width: 1px;
+  border-width: 0.0625rem;
   border-color: #00a54f;
-  padding-top: 0px;
-  padding-bottom: 0px;
+  padding-top: 0rem;
+  padding-bottom: 0rem;
 }
 
 .health .offState {
   background: #ffffff;
-  width: 28px;
-  height: 18px;
+  width: 1.75rem;
+  height: 1.125rem;
   border-radius: 40%;
   color: #666666;
   font-family: "source sans pro";
   border-style: solid;
-  border-width: 1px;
+  border-width: 0.0625rem;
   border-color: #999999;
-  padding-top: 0px;
-  padding-bottom: 0px;
+  padding-top: 0rem;
+  padding-bottom: 0rem;
 }
 
 .health .errorState {
   background: #ffffff;
-  width: 30px;
-  height: 18px;
+  width: 1.875rem;
+  height: 1.125rem;
   border-radius: 40%;
   color: #666666;
   font-family: "source sans pro";
   border-style: solid;
-  border-width: 1px;
+  border-width: 0.0625rem;
   border-color: #ec1c24;
-  padding-top: 0px;
-  padding-bottom: 0px;
+  padding-top: 0rem;
+  padding-bottom: 0rem;
 }
 
 .health .paramPosition {
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: 0.9375rem;
+  padding-left: 0.9375rem;
 }
 
 .health .paramPositionFront {
-  padding-right: 15px;
-  padding-left: 10px;
+  padding-right: 0.9375rem;
+  padding-left: 0.625rem;
 }
 
 .health .paramPositionMiddle {
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: 0.9375rem;
+  padding-left: 0.9375rem;
 }
 
 .health .paramPositionBack {
-  padding-right: 10px;
-  padding-left: 15px;
+  padding-right: 0.625rem;
+  padding-left: 0.9375rem;
 }
 
 .health .status {
   font-family: "source sans pro";
-  font-size: 12px;
+  font-size: 0.75rem;
   color: #666666;
   text-align: center;
 }
 
 .health .horizontal-line {
   display: inline-block;
-  height: 30px;
-  border-left: 1px solid #f7f7f7;
+  height: 1.875rem;
+  border-left: 0.0625rem solid #f7f7f7;
 }
 
 .gorHeader.head {
   overflow: hidden;
-  padding: 5px 0;
+  padding: 0.3125rem 0;
   background: #fff;
 }
 
@@ -335,10 +335,10 @@ body {
   background-color: #fff;
   color: #4d5055;
   padding: 0 1em;
-  font-size: 14px;
+  font-size: 0.875rem;
   border: none;
   cursor: pointer;
-  width: 188px;
+  width: 11.75rem;
   font-family: "source sans pro";
 }
 
@@ -358,9 +358,9 @@ body {
 .gorHeader .dropdown-content {
   font-family: "source sans pro";
   background-color: white;
-  font-size: 14;
+  font-size: 0.875rem;
   color: #4d5055;
-  width: 223px;
+  width: 13.9375rem;
   display: none;
   position: absolute;
   right: 0;
@@ -371,7 +371,7 @@ body {
 .gorHeader .dropdown-content a {
   color: #666666;
   background-color: white;
-  padding: 12px 16px;
+  padding: 0.75rem 1rem;
   font-size: .7em;
   text-decoration: none;
   padding: 1em 3em;
@@ -394,12 +394,12 @@ body {
   display: inline-block;
   overflow: hidden;
   vertical-align: middle;
-  border-right: 1px solid #F2F2F2;
+  border-right: 0.0625rem solid #F2F2F2;
 }
 
 .gorHeader .upperText {
   font-family: "source sans pro";
-  font-size: 18px;
+  font-size: 1.125rem;
   color: #4d5055;
   font-weight: bold;
   line-height: 1;
@@ -408,20 +408,20 @@ body {
 
 .gorHeader .subText {
   font-family: "source sans pro";
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: normal;
   color: #4d5055;
 }
 
 .gorHeader .subTextClient {
   font-family: "source sans pro";
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: normal;
   color: #4d5055;
-  line-height: 0px;
+  line-height: 0rem;
   text-align: left;
-  padding-right: 20px;
-  padding-top: 9px;
+  padding-right: 1.25rem;
+  padding-top: 0.5625rem;
 }
 
 .gorHeader .block {
@@ -431,13 +431,13 @@ body {
 .gorHeader .mainBlock {
   display: inline-block;
   overflow: hidden;
-  padding: 0px 5px;
+  padding: 0rem 0.3125rem;
 }
 
 .gorHeader .blockSystem {
   display: inline-block;
   overflow: hidden;
-  padding-left: 5px;
+  padding-left: 0.3125rem;
   vertical-align: middle;
 }
 
@@ -447,9 +447,9 @@ body {
 }
 
 .gorHeader .upperTextClient {
-  padding: 10px 20px 6px 0px;
+  padding: 10px 1.25rem 0.375rem 0rem;
   font-family: "source sans pro";
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
   line-height: 0;
   display: inline-block;
@@ -457,13 +457,13 @@ body {
 
 .gorHeader .horizontal-line {
   display: inline-block;
-  height: 30px;
+  height: 1.875rem;
   border-left: 1px solid #f7f7f7;
   vertical-align: sub;
 }
 
 .gorHeader .truncate {
-  width: 110px;
+  width: 6.875rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

@@ -38,7 +38,7 @@ class Header extends React.Component{
 		          	}
 		          	
 					</div>
-					<div className="subText">Start time:09:00:15</div>
+					<div className="subText">Start time:09:00:14</div>
 				</div>
 			</div>
 			<div className="blockLeft">

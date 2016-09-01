@@ -11,6 +11,7 @@ import OrderStatsWidget from './containers/orderStatsWidget'
 import PerformanceWidget from './containers/performanceWidget'
 import { REQUEST_HEADER, getFetchData } from './actions/headerAction'
 import { connect } from 'react-redux';
+import Chart from './components/graphd3/graphd3';
 
 
 
