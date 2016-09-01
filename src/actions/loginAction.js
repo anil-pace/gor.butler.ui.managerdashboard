@@ -24,18 +24,18 @@ export function loginRedirect(data){
 
 function receiveAuthData(data){
   
-  return{
+  return {
     type: LOGIN_SUCCESS,
     data
   }
 }
 
 function authData(params) {
-  return dispatch => {
-    return utils.ajax(params)
-      .then(response => response.json())
-      .then(json => dispatch(receiveAuthData(json)))
-  }
+
+  var obj = utils.ajax(params)
+  var oDisp = dispatch(obj);
+
+  return oDisp
 }
 
 export function authLoginData(params) {
