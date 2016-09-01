@@ -16,8 +16,8 @@ class Chart extends React.Component{
    componentDidMount(){
     var component = this;
     var margin = {top: 50, right: 20, bottom: 30, left: 50},
-   width = 960 - margin.left - margin.right,
-   height = 500 - margin.top - margin.bottom;
+   width = 900 - margin.left - margin.right,
+   height = 400 - margin.top - margin.bottom;
    var count=-1;
    var temp=-1;
    var y = d3.scale.linear().range([0, height]);
@@ -52,7 +52,7 @@ class Chart extends React.Component{
 
     var node = document.createElement('div');
 
-    var svg = d3.select("body").append('svg')
+    var svg = d3.select(node).append('svg')
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
@@ -114,7 +114,11 @@ class Chart extends React.Component{
       })
       .attr("width", x.rangeBand())
       .attr("y", function(d) { return y(d.frequency); })
+      .attr("height", 0)
       .attr("height", function(d) { return height - y(d.frequency); })
+     
+
+
       // .on('mouseover', tip.show)
       // .on('mouseout', tip.hide)
 

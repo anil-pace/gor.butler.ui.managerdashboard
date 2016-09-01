@@ -7,12 +7,12 @@ class OrderStatsWidget extends React.Component{
 	
 	render(){
 		return (
-		<div className="gorOrderStatsWidget">
-		<div className="gorDrop">
-			 <Dropdown/>
-			 <Chart/>
-			 </div>
-		</div> 
+			<div className="gorOrderStatsWidget">
+				<div className="gorDrop">
+				<Dropdown/>
+					<Chart/>
+				</div>
+			</div> 
 		);
 	}
 };
