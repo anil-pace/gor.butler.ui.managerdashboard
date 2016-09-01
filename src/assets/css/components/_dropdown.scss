@@ -1,7 +1,7 @@
-
+@import '../abstracts/functions';
 .ddown {
-	width:290px;
-	min-height: 45px;
+	width:calculateRem(290px);
+	min-height: calculateRem(45px);
 }
 
 .Dropdown-root {
@@ -12,51 +12,51 @@
   position: relative;
   overflow: hidden;
   background-color: white;
-  border-radius: 4px;
+  border-radius: calculateRem(4px);
   box-sizing: border-box;
   color: #000000;
   font-family: $gor-font-family;
-  font-size: 20px;
+  font-size: calculateRem(20px);
   font-weight: bold;
   cursor: default;
   outline: none;
-  padding: 8px 52px 8px 10px;
+  padding: calculateRem(8px) calculateRem(52px) calculateRem(8px) calculateRem(10px);
   transition: all 200ms ease;
 }
 
 
 .Dropdown-control:hover {
-  box-shadow: 2px 2px 2px #888888;
-  border: 1px solid #ccc;
+  box-shadow: calculateRem(2px) calculateRem(2px) calculateRem(2px) #888888;
+  border: calculateRem(1px) solid #ccc;
 }
 
 .Dropdown-arrow {
   border-color: #000000 transparent transparent;
   border-style: solid;
-  border-width: 8px 7px 3px;
+  border-width: calculateRem(8px) calculateRem(7px) calculateRem(3px);
   content: ' ';
   display: block;
   height: 0;
   margin-top: -ceil(2.5);
   position: absolute;
-  right: 35px;
-  top: 14px;
+  right: calculateRem(35px);
+  top: calculateRem(14px);
   
 }
 
 .is-open .Dropdown-arrow {
   border-color: #000000 transparent transparent;
   border-style: solid;
-  border-width: 8px 7px 3px;
+  border-width: calculateRem(8px) calculateRem(7px) calculateRem(3px);
 }
 
 .Dropdown-menu {
   background-color: white;
   border: 1px solid #ccc;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+  box-shadow: 0 calculateRem(1px) 0 rgba(0, 0, 0, 0.06);
   box-sizing: border-box;
-  margin-top: -1px;
-  max-height: 200px;
+  margin-top: calculateRem(-1px);
+  max-height: calculateRem(200px);
   overflow-y: auto;
   position: absolute;
   top: 100%;
@@ -72,12 +72,12 @@
   color: #666666;
   cursor: pointer;
   display: block;
-  padding: 8px 10px;
+  padding: calculateRem(8px) calculateRem(10px);
 }
 
 .Dropdown-option:last-child {
-  border-bottom-right-radius: 2px;
-   border-bottom-left-radius: 2px;
+  border-bottom-right-radius: calculateRem(2px);
+   border-bottom-left-radius: calculateRem(2px);
 }
 
 .Dropdown-option:hover {
@@ -87,7 +87,7 @@
 }
 
 .Dropdown-option.is-selected {
-box-shadow: 2px 2px 2px #888888;
+box-shadow: calculateRem(2px) calculateRem(2px) calculateRem(2px) #888888;
   background-color: #f2f9fc;
   color: #333;
 }
@@ -97,5 +97,5 @@ box-shadow: 2px 2px 2px #888888;
   color: #ccc;
   cursor: default;
   display: block;
-  padding: 8px 10px;
+  padding: calculateRem(8px) calculateRem(10px);
 }
