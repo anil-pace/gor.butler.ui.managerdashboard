@@ -210,7 +210,7 @@ body {
 }
 
 .health.mainBlock {
-  width: 18.75rem;
+  width: 100%;
 }
 
 .health .block {
@@ -694,7 +694,7 @@ body {
 }
 
 .ddown {
-  width: 18.125rem;
+  max-width: 18.125rem;
   min-height: 2.8125rem;
 }
 
@@ -802,7 +802,7 @@ body {
 
 .bar:hover {
   stroke: #4d5055;
-  stroke-width: 1px;
+  stroke-width: 0.0625rem;
 }
 
 .x.axis path {
@@ -812,18 +812,18 @@ body {
 .d3-tip {
   line-height: 3;
   font-weight: bold;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-family: sans-serif;
-  padding: 5px;
+  padding: 0.3125rem;
   background: #4d5055;
   color: #ffffff;
-  width: 150px;
+  width: 9.375rem;
   border-radius: 3%;
 }
 
 .d3-tip:after {
   display: inline;
-  font-size: 20px;
+  font-size: 1.25rem;
   width: 100%;
   line-height: 1;
   color: #4d5055;
@@ -833,7 +833,7 @@ body {
 }
 
 .d3-tip.n:after {
-  margin: -60px 0px 0px -80px;
+  margin: -3.75rem 0rem 0rem -5rem;
   top: 100%;
   left: 0;
 }
@@ -844,5 +844,15 @@ body {
 }
 
 .grid path {
-  stroke-width: 1px;
+  stroke-width: 0.0625rem;
+}
+
+.shared, .bar, .label {
+  font-size: 18px;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+}
+
+.malebar {
+  fill: black;
 }

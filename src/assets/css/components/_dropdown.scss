@@ -1,6 +1,6 @@
 @import '../abstracts/functions';
 .ddown {
-	width:calculateRem(290px);
+	max-width:calculateRem(290px);
 	min-height: calculateRem(45px);
 }
 

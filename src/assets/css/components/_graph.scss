@@ -1,3 +1,4 @@
+@import '../abstracts/functions';
 .axis path,
   .axis line {
     fill: none;
@@ -13,7 +14,7 @@
   .bar:hover {
 
     stroke: #4d5055;
-    stroke-width: 1px;
+    stroke-width: calculateRem(1px);
   }
 
   .x.axis path {
@@ -23,12 +24,12 @@
   .d3-tip {
     line-height: 3;
     font-weight: bold;
-    font-size: 12px;
+    font-size: calculateRem(12px);
     font-family: sans-serif;
-    padding: 5px;
+    padding: calculateRem(5px);
     background: #4d5055;
     color: #ffffff;
-    width: 150px;
+    width: calculateRem(150px);
     border-radius: 3%;
 
   }
@@ -37,7 +38,7 @@
   .d3-tip:after {
 
     display: inline;
-    font-size: 20px;
+    font-size: calculateRem(20px);
     width: 100%;
     line-height: 1;
     color: #4d5055;
@@ -50,7 +51,7 @@
 
   
   .d3-tip.n:after {
-    margin: -60px 0px 0px -80px;
+    margin: calculateRem(-60px) calculateRem(0px) calculateRem(0px) calculateRem(-80px);
     top: 100%;
     left: 0;
   }
@@ -60,5 +61,5 @@
     opacity: 0.7;
   }
   .grid path {
-    stroke-width: 1px;
+    stroke-width: calculateRem(1px);
   }

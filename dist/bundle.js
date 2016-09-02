@@ -63743,6 +63743,10 @@ var _graphd = require('./components/graphd3/graphd3');
 
 var _graphd2 = _interopRequireDefault(_graphd);
 
+var _graph_horizontal = require('./components/graphd3/graph_horizontal');
+
+var _graph_horizontal2 = _interopRequireDefault(_graph_horizontal);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -63819,7 +63823,8 @@ var App = function (_React$Component) {
 						'div',
 						null,
 						_react2.default.createElement(_orderStatsWidget2.default, null),
-						_react2.default.createElement(_performanceWidget2.default, null)
+						_react2.default.createElement(_performanceWidget2.default, null),
+						_react2.default.createElement(_graph_horizontal2.default, null)
 					)
 				)
 			);
@@ -63841,7 +63846,7 @@ function mapStateToProps(state, ownProps) {
 }
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(App);
 
-},{"./actions/headerAction":203,"./components/dropdown/dropdown":204,"./components/graphd3/graphd3":205,"./components/header/header":206,"./components/health/health":207,"./components/health/healthTabs":208,"./components/tile1x/Tilex":210,"./components/tile2x/Tile2x":211,"./containers/orderStatsWidget":213,"./containers/performanceWidget":214,"./containers/tabs":215,"react":191,"react-dom":40,"react-redux":44}],203:[function(require,module,exports){
+},{"./actions/headerAction":203,"./components/dropdown/dropdown":204,"./components/graphd3/graph_horizontal":205,"./components/graphd3/graphd3":206,"./components/header/header":207,"./components/health/health":208,"./components/health/healthTabs":209,"./components/tile1x/Tilex":211,"./components/tile2x/Tile2x":212,"./containers/orderStatsWidget":214,"./containers/performanceWidget":215,"./containers/tabs":216,"react":191,"react-dom":40,"react-redux":44}],203:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -64022,12 +64027,15 @@ var Chart = function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       var component = this;
-      var margin = { top: 50, right: 20, bottom: 30, left: 50 },
-          width = 900 - margin.left - margin.right,
+      var widther = document.getElementById("chart_att").offsetWidth;
+      var heighter = document.getElementById("chart_att").offsetHeight;
+
+      var margin = { top: 20, right: 20, bottom: 20, left: 40 },
+          width = widther - margin.left - margin.right,
           height = 400 - margin.top - margin.bottom;
       var count = -1;
       var temp = -1;
-      var y = d3.scale.linear().range([0, height]);
+      var y = d3.scale.linear().range([height, 0]);
       var x = d3.scale.ordinal().rangeRoundBands([0, width], .1);
       var xAxis = d3.svg.axis().scale(x).orient("bottom").tickFormat(function (d) {
         count++;
@@ -64040,9 +64048,9 @@ var Chart = function (_React$Component) {
         return "";
       });
 
-      var yAxis = d3.svg.axis().scale(y).orient("left");
+      var yAxis = d3.svg.axis().scale(y).orient("left").ticks(10);
 
-      // var tip = d3.tip()
+      // const tip = d3.tip()
       // .attr('class', 'd3-tip')
       // .offset([50, 90])
       // .html(function(d) {
@@ -64054,9 +64062,9 @@ var Chart = function (_React$Component) {
 
       var svg = d3.select(node).append('svg').attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-      //  svg.call(tip);
+      //svg.call(tip);
 
-      d3.json("http://www.mocky.io/v2/57c82123120000fc03e76993", function (error, data) {
+      d3.json("http://www.mocky.io/v2/57c921ea120000ee1fe76b04", function (error, data) {
 
         var json = data;
         update(json);
@@ -64064,17 +64072,22 @@ var Chart = function (_React$Component) {
 
       function update(data) {
         console.log(data);
-
+        data.forEach(function (d) {
+          d.frequency = +d.frequency;
+        });
         x.domain(data.map(function (d) {
           return d.letter;
         }));
-        y.domain(data.map(function (d) {
+        y.domain([0, d3.max(data, function (d) {
           return d.frequency;
-        }));
+        })]);
 
         svg.append("g").attr("class", "grid").call(make_y_axis().tickSize(-width, 0, 0).tickFormat(""));
 
         svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis).style("font-size", "12px").style("font-family", "sans-serif").style("fill", "#666666");
+
+        //svg.append("g").text("sample!!!");
+
 
         svg.append("g").attr("class", "y axis").call(yAxis).style("font-size", "12px").style("font-family", "sans-serif").style("fill", "#666666").append("text").attr("transform", "rotate(-90)").attr("y", 6).attr("dy", "4em").style("text-anchor", "end");
 
@@ -64085,9 +64098,25 @@ var Chart = function (_React$Component) {
         }).attr("height", 0).attr("height", function (d) {
           return height - y(d.frequency);
         });
-
         // .on('mouseover', tip.show)
         // .on('mouseout', tip.hide)
+
+        var txt = svg.selectAll(".bar");
+
+        txt.append("g").attr("class", "below").attr("x", function (d) {
+          return x(d.letter);
+        }).attr("y", function (d) {
+          return height - y(d.frequency);
+        }).attr("dy", "1.2em").attr("text-anchor", "right").text("krish").style("fill", "#000000");
+
+        //   txt.append("text")
+        //   .attr("y", function(d) { return y(d.frequency); })
+        // .attr("class", "below")
+        // .attr("x", 12)
+        // .attr("dy", "1.2em")
+        // .attr("text-anchor", "right")
+        // .text("krish")
+        // .style("fill", "#000000");
 
 
         component.setState({ d3: node });
@@ -64125,6 +64154,189 @@ exports.default = Chart;
 //ReactDOM.render(React.createElement(Chart), document.getElementById('chart_dis'))
 
 },{"d3":4,"d3-tip":2,"react":191,"react-d3-library":39,"react-dom":40}],206:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _reactD3Library = require('react-d3-library');
+
+var _reactD3Library2 = _interopRequireDefault(_reactD3Library);
+
+var _d = require('d3');
+
+var d3 = _interopRequireWildcard(_d);
+
+var _d3Tip = require('d3-tip');
+
+var _d3Tip2 = _interopRequireDefault(_d3Tip);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var RD3Component = _reactD3Library2.default.Component;
+
+var Chart = function (_React$Component) {
+  _inherits(Chart, _React$Component);
+
+  function Chart(props) {
+    _classCallCheck(this, Chart);
+
+    var _this = _possibleConstructorReturn(this, (Chart.__proto__ || Object.getPrototypeOf(Chart)).call(this, props));
+
+    _this.state = { d3: '' };
+    return _this;
+  }
+
+  _createClass(Chart, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var component = this;
+      var widther = document.getElementById("chart_att").offsetWidth;
+      var heighter = document.getElementById("chart_att").offsetHeight;
+
+      var margin = { top: 20, right: 20, bottom: 20, left: 40 },
+          width = widther - margin.left - margin.right,
+          height = 400 - margin.top - margin.bottom;
+      var count = -1;
+      var temp = -1;
+      var y = d3.scale.linear().range([height, 0]);
+      var x = d3.scale.ordinal().rangeRoundBands([0, width], .1);
+      var xAxis = d3.svg.axis().scale(x).orient("bottom").tickFormat(function (d) {
+        count++;
+        temp++;
+        if (count === 3 || temp === 0 || temp === 23) {
+          count = 0;
+          d = d.substr(0, d.indexOf(' '));
+          return d;
+        }
+        return "";
+      });
+
+      var yAxis = d3.svg.axis().scale(y).orient("left").ticks(10);
+
+      // const tip = d3.tip()
+      // .attr('class', 'd3-tip')
+      // .offset([50, 90])
+      // .html(function(d) {
+      //   var time=d.letter.split(" ");
+      //   return "<div> Time:"+" " + time[0]+" - "+time[1] +"<div/><div> 27 Jul,2016</div> <div style='color:#ffffff'> Fulfilled:  "+" " + d.frequency + "</div>";
+      // })
+
+      var node = document.createElement('div');
+
+      var svg = d3.select(node).append('svg').attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+      //svg.call(tip);
+
+      d3.json("http://www.mocky.io/v2/57c921ea120000ee1fe76b04", function (error, data) {
+
+        var json = data;
+        update(json);
+      });
+
+      function update(data) {
+        console.log(data);
+        data.forEach(function (d) {
+          d.frequency = +d.frequency;
+        });
+        x.domain(data.map(function (d) {
+          return d.letter;
+        }));
+        y.domain([0, d3.max(data, function (d) {
+          return d.frequency;
+        })]);
+
+        svg.append("g").attr("class", "grid").call(make_y_axis().tickSize(-width, 0, 0).tickFormat(""));
+
+        svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis).style("font-size", "12px").style("font-family", "sans-serif").style("fill", "#666666");
+
+        //svg.append("g").text("sample!!!");
+
+
+        svg.append("g").attr("class", "y axis").call(yAxis).style("font-size", "12px").style("font-family", "sans-serif").style("fill", "#666666").append("text").attr("transform", "rotate(-90)").attr("y", 6).attr("dy", "4em").style("text-anchor", "end");
+
+        svg.selectAll(".bar").data(data).enter().append("rect").attr("rx", 2).attr("ry", 2).attr("class", "bar").attr("x", function (d) {
+          return x(d.letter);
+        }).attr("width", x.rangeBand()).attr("y", function (d) {
+          return y(d.frequency);
+        }).attr("height", 0).attr("height", function (d) {
+          return height - y(d.frequency);
+        });
+        // .on('mouseover', tip.show)
+        // .on('mouseout', tip.hide)
+
+        var txt = svg.selectAll(".bar");
+
+        txt.append("g").attr("class", "below").attr("x", function (d) {
+          return x(d.letter);
+        }).attr("y", function (d) {
+          return height - y(d.frequency);
+        }).attr("dy", "1.2em").attr("text-anchor", "right").text("krish").style("fill", "#000000");
+
+        //   txt.append("text")
+        //   .attr("y", function(d) { return y(d.frequency); })
+        // .attr("class", "below")
+        // .attr("x", 12)
+        // .attr("dy", "1.2em")
+        // .attr("text-anchor", "right")
+        // .text("krish")
+        // .style("fill", "#000000");
+
+
+        component.setState({ d3: node });
+      }
+
+      function type(d) {
+        return d;
+      }
+
+      function make_x_axis() {
+        return d3.svg.axis().scale(x).orient("bottom").ticks(5);
+      }
+
+      function make_y_axis() {
+        return d3.svg.axis().scale(y).orient("left").ticks(5);
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(RD3Component, { data: this.state.d3 })
+      );
+    }
+  }]);
+
+  return Chart;
+}(_react2.default.Component);
+
+;
+exports.default = Chart;
+//ReactDOM.render(React.createElement(Chart), document.getElementById('chart_dis'))
+
+},{"d3":4,"d3-tip":2,"react":191,"react-d3-library":39,"react-dom":40}],207:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -64283,7 +64495,7 @@ function mapStateToProps(state, ownProps) {
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(Header);
 
-},{"../../actions/headerAction":203,"react":191,"react-dom":40,"react-redux":44}],207:[function(require,module,exports){
+},{"../../actions/headerAction":203,"react":191,"react-dom":40,"react-redux":44}],208:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -64350,7 +64562,7 @@ var Health = function (_React$Component) {
 						{ className: 'block parameters' },
 						_react2.default.createElement(
 							'div',
-							{ className: 'block paramPositionFront' },
+							{ className: 'block paramPositionFront ' },
 							_react2.default.createElement(
 								'div',
 								{ className: 'block stoppedState' },
@@ -64368,7 +64580,7 @@ var Health = function (_React$Component) {
 						),
 						_react2.default.createElement(
 							'div',
-							{ className: 'block paramPositionMiddle' },
+							{ className: 'block paramPositionMiddle ' },
 							_react2.default.createElement(
 								'div',
 								{ className: 'block onState' },
@@ -64386,7 +64598,7 @@ var Health = function (_React$Component) {
 						),
 						_react2.default.createElement(
 							'div',
-							{ className: 'block paramPositionBack' },
+							{ className: 'block paramPositionBack ' },
 							_react2.default.createElement(
 								'div',
 								{ className: 'block errorState' },
@@ -64415,7 +64627,7 @@ var Health = function (_React$Component) {
 
 exports.default = Health;
 
-},{"react":191,"react-dom":40}],208:[function(require,module,exports){
+},{"react":191,"react-dom":40}],209:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -64472,7 +64684,7 @@ var HealthTabs = function (_React$Component) {
 ;
 exports.default = HealthTabs;
 
-},{"./health":207,"react":191,"react-dom":40}],209:[function(require,module,exports){
+},{"./health":208,"react":191,"react-dom":40}],210:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -64545,7 +64757,7 @@ var Tab = function (_React$Component) {
 
 exports.default = Tab;
 
-},{"react":191,"react-dom":40}],210:[function(require,module,exports){
+},{"react":191,"react-dom":40}],211:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -64624,7 +64836,7 @@ var Tilex = function (_React$Component) {
 
 exports.default = Tilex;
 
-},{"react":191,"react-dom":40}],211:[function(require,module,exports){
+},{"react":191,"react-dom":40}],212:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -64754,7 +64966,7 @@ var Tile2x = function (_React$Component) {
 
 exports.default = Tile2x;
 
-},{"react":191,"react-dom":40}],212:[function(require,module,exports){
+},{"react":191,"react-dom":40}],213:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -64764,7 +64976,7 @@ var appConstants = exports.appConstants = {
 	stock: "stock"
 };
 
-},{}],213:[function(require,module,exports){
+},{}],214:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -64788,6 +65000,10 @@ var _dropdown2 = _interopRequireDefault(_dropdown);
 var _graphd = require('../components/graphd3/graphd3');
 
 var _graphd2 = _interopRequireDefault(_graphd);
+
+var _graph_horizontal = require('../components/graphd3/graph_horizontal');
+
+var _graph_horizontal2 = _interopRequireDefault(_graph_horizontal);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -64816,7 +65032,11 @@ var OrderStatsWidget = function (_React$Component) {
 					'div',
 					{ className: 'gorDrop' },
 					_react2.default.createElement(_dropdown2.default, null),
-					_react2.default.createElement(_graphd2.default, null)
+					_react2.default.createElement(
+						'div',
+						{ id: 'chart_att' },
+						_react2.default.createElement(_graphd2.default, null)
+					)
 				)
 			);
 		}
@@ -64829,7 +65049,7 @@ var OrderStatsWidget = function (_React$Component) {
 
 exports.default = OrderStatsWidget;
 
-},{"../components/dropdown/dropdown.js":204,"../components/graphd3/graphd3":205,"react":191,"react-dom":40}],214:[function(require,module,exports){
+},{"../components/dropdown/dropdown.js":204,"../components/graphd3/graph_horizontal":205,"../components/graphd3/graphd3":206,"react":191,"react-dom":40}],215:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -64898,7 +65118,7 @@ var PerformanceWidget = function (_React$Component) {
 
 exports.default = PerformanceWidget;
 
-},{"../components/dropdown/dropdown.js":204,"../components/health/healthTabs.js":208,"react":191,"react-dom":40}],215:[function(require,module,exports){
+},{"../components/dropdown/dropdown.js":204,"../components/health/healthTabs.js":209,"react":191,"react-dom":40}],216:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -64958,7 +65178,7 @@ var Tabs = function (_React$Component) {
 
 exports.default = Tabs;
 
-},{"../components/tabs/tab":209,"react":191,"react-dom":40}],216:[function(require,module,exports){
+},{"../components/tabs/tab":210,"react":191,"react-dom":40}],217:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -64992,7 +65212,7 @@ _reactDom2.default.render(_react2.default.createElement(
 	_react2.default.createElement(_App2.default, null)
 ), document.getElementById('container'));
 
-},{"./App":202,"./middleware/socketMiddleware":217,"./store":220,"react":191,"react-dom":40,"react-redux":44}],217:[function(require,module,exports){
+},{"./App":202,"./middleware/socketMiddleware":218,"./store":221,"react":191,"react-dom":40,"react-redux":44}],218:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -65093,7 +65313,7 @@ var socketMiddleware = function () {
 
 exports.default = socketMiddleware;
 
-},{"../actions/headerAction":203,"../constants/appConstants":212}],218:[function(require,module,exports){
+},{"../actions/headerAction":203,"../constants/appConstants":213}],219:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -65110,7 +65330,7 @@ var rootReducer = (0, _redux.combineReducers)({
 
 exports.default = rootReducer;
 
-},{"./reducers/headerReducer":219,"redux":198}],219:[function(require,module,exports){
+},{"./reducers/headerReducer":220,"redux":198}],220:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -65187,7 +65407,7 @@ function getData() {
   }
 }
 
-},{"../actions/headerAction":203}],220:[function(require,module,exports){
+},{"../actions/headerAction":203}],221:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -65215,4 +65435,4 @@ function configureStore(preloadedState) {
   return (0, _redux.createStore)(_reducers2.default, preloadedState, (0, _redux.applyMiddleware)(_reduxThunk2.default, _socketMiddleware2.default));
 }
 
-},{"./middleware/socketMiddleware":217,"./reducers":218,"redux":198,"redux-thunk":192}]},{},[216]);
+},{"./middleware/socketMiddleware":218,"./reducers":219,"redux":198,"redux-thunk":192}]},{},[217]);
