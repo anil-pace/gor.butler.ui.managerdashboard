@@ -23,54 +23,46 @@ export function loginRedirect(data){
     }
 }
 
-function receiveAuthData(data){
-<<<<<<< HEAD
-  
-  return {
-    type: LOGIN_SUCCESS,
-    data
+function receiveAuthData(data){  
+  if(!data.auth_token)
+  {
+      console.log('Login Fail');
+      return{
+        type: LOGIN_FAILURE,
+        data
+      }
   }
-}
-
-function authData(params) {
-
-  var obj = utils.ajax(params)
-  var oDisp = dispatch(obj);
-
-  return oDisp
-=======
-	if(!data.auth_token){
-    	return{
-    		type: LOGIN_FAILURE,
-    		data
-    	}
-  }
+  console.log('Login Pass');
   return{
         type: LOGIN_SUCCESS,
         data
-      }
-}
-
-function authData(params){
-  return dispatch => {
-    return fetch('./mock/loginJson.json',{
-      method: 'GET'
-
-    }).then(response => response.json())
-      .then(json => dispatch(receiveAuthData(json)))
   }
->>>>>>> d9d669e562a493eafbab05b6a65009786157b8e3
 }
+
+
+function authData(params) {
+  return (dispatch) => {
+   utils.ajax(params,receiveAuthData);
+ }
+}
+
+// function authData(params){
+//   var params = {
+//     callBack:authCallBack
+//   }
+//   // return dispatch => {
+//   //   return fetch('./mock/loginJson.json',{
+//   //     method: 'GET'
+
+//   //   }).then(response => response.json())
+//   //     .then(json => dispatch(receiveAuthData(json)))
+//   // }
+// }
 
 export function authLoginData(params) {
   return (dispatch) => {
       return dispatch(authData(params))
-    
   }
-<<<<<<< HEAD
-}
-=======
   
 }
 
->>>>>>> d9d669e562a493eafbab05b6a65009786157b8e3

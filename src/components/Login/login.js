@@ -24,7 +24,7 @@ class Login extends React.Component{
          };
     	let loginData={
     		'formdata':formdata,
-    		'url':'./dummy.json',
+    		'url':'https://192.168.8.118/api/auth/token',
         	'method':'POST',
         	'contentType':'application/json'
     	}
