@@ -28318,7 +28318,7 @@ arguments[4][45][0].apply(exports,arguments)
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -28371,6 +28371,8 @@ var _appConstants = require('./constants/appConstants');
 
 var _reactRedux = require('react-redux');
 
+var _initData = require('./constants/initData.js');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -28380,68 +28382,93 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var App = function (_React$Component) {
-	_inherits(App, _React$Component);
+  _inherits(App, _React$Component);
 
-	/**
-  * Called once before rendering of component,used to displatch fetch action
-  * @return {[type]}
-  */
-	function App(props) {
-		_classCallCheck(this, App);
-
-		return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
-	}
-
-	_createClass(App, [{
-		key: 'componentWillMount',
-		value: function componentWillMount() {
-			/*Creating Web Socket Connection*/
-
-			this.props.initWebSocket();
-		}
-		/**Render method called when component react renders
+  /**
+   * Called once before rendering of component,used to displatch fetch action
    * @return {[type]}
    */
+  function App(props) {
+    _classCallCheck(this, App);
 
-	}, {
-		key: 'render',
-		value: function render() {
-			var item1 = { heading: 'Items to Stock', value: '4,74,579', low: '4 PPS stocking 3,546 items/hr' };
-			var item2 = { heading1: 'Orders to fulfill', value1: '120', low1: '8 PPS fulfilling per/hr', status1: 'On schedule', heading2: 'Remaining time', value2: '68mins', low2: 'Completing in 8mins', status2: '23:59' };
-			var items3 = { start: "09:10:25", name: "Krish verma gandhi sharma", post: "Manager" };
+    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+  }
 
-			return _react2.default.createElement(
-				'div',
-				{ className: 'mainContainer' },
-				_react2.default.createElement(_header2.default, { user: items3 }),
-				_react2.default.createElement(_tabs2.default, null),
-				_react2.default.createElement(
-					'div',
-					{ className: 'gorWidgetWrap' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'section group' },
-						_react2.default.createElement(
-							'div',
-							{ className: 'col span_2_of_4' },
-							_react2.default.createElement(_Tilex2.default, { items: item1 }),
-							_react2.default.createElement(_Tilex2.default, { items: item1 })
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'col span_2_of_4 gorNoML' },
-							_react2.default.createElement(_Tile2x2.default, { items: item2 })
-						)
-					),
-					_react2.default.createElement(_orderStatsWidget2.default, null),
-					_react2.default.createElement(_performanceWidget2.default, null)
-				),
-				this.props.children
-			);
-		}
-	}]);
+  _createClass(App, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      var userName = this.props.userName,
+          authToken = this.props.authToken;
+      /*Creating Web Socket Connection*/
+      if (!authToken && !userName) {
+        this.props.history.push("/");
+      } else {
+        this.props.initWebSocket();
+      }
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      /**
+       * Checking if the user is loggedin 
+       * and redirecting to main page
+       */
+      if (nextProps.socketStatus && !nextProps.socketAuthorized) {
+        var webSocketData = {
+          'type': 'auth',
+          'data': {
+            "auth_token": this.props.authToken
+          }
+        };
+        this.props.sendAuthToSocket(webSocketData);
+      }
+      if (nextProps.socketStatus && nextProps.socketAuthorized && !nextProps.initDataSent) {
+        this.props.initDataSentCall(_initData.wsInitData);
+      }
+    }
+    /**Render method called when component react renders
+     * @return {[type]}
+     */
 
-	return App;
+  }, {
+    key: 'render',
+    value: function render() {
+      var item1 = { heading: 'Items to Stock', value: '4,74,579', low: '4 PPS stocking 3,546 items/hr' };
+      var item2 = { heading1: 'Orders to fulfill', value1: '120', low1: '8 PPS fulfilling per/hr', status1: 'On schedule', heading2: 'Remaining time', value2: '68mins', low2: 'Completing in 8mins', status2: '23:59' };
+      var items3 = { start: "09:10:25", name: "Krish verma gandhi sharma", post: "Manager" };
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'mainContainer' },
+        _react2.default.createElement(_header2.default, { user: items3 }),
+        _react2.default.createElement(_tabs2.default, null),
+        _react2.default.createElement(
+          'div',
+          { className: 'gorWidgetWrap' },
+          _react2.default.createElement(
+            'div',
+            { className: 'section group' },
+            _react2.default.createElement(
+              'div',
+              { className: 'col span_2_of_4' },
+              _react2.default.createElement(_Tilex2.default, { items: item1 }),
+              _react2.default.createElement(_Tilex2.default, { items: item1 })
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'col span_2_of_4 gorNoML' },
+              _react2.default.createElement(_Tile2x2.default, { items: item2 })
+            )
+          ),
+          _react2.default.createElement(_orderStatsWidget2.default, null),
+          _react2.default.createElement(_performanceWidget2.default, null)
+        ),
+        this.props.children
+      );
+    }
+  }]);
+
+  return App;
 }(_react2.default.Component);
 
 ;
@@ -28451,38 +28478,47 @@ var App = function (_React$Component) {
 
 function mapStateToProps(state, ownProps) {
 
-	return state;
+  return {
+    authToken: state.authLogin.auth_token,
+    userName: state.authLogin.username,
+    socketStatus: state.recieveSocketActions.socketConnected,
+    socketAuthorized: state.recieveSocketActions.socketAuthorized,
+    initDataSent: state.recieveSocketActions.initDataSent
+  };
 }
 /**
  * Function to dispatch action values as props
  */
 function mapDispatchToProps(dispatch) {
-	return {
-		initWebSocket: function initWebSocket() {
-			dispatch((0, _socketActions.setWsAction)({ type: _appConstants.WS_CONNECT }));
-		}
-	};
+  return {
+    initWebSocket: function initWebSocket() {
+      dispatch((0, _socketActions.setWsAction)({ type: _appConstants.WS_CONNECT }));
+    },
+    sendAuthToSocket: function sendAuthToSocket(data) {
+      dispatch((0, _socketActions.setWsAction)({ type: _appConstants.WS_ONSEND, data: data }));
+    },
+    initDataSentCall: function initDataSentCall(data) {
+      dispatch((0, _socketActions.setWsAction)({ type: _appConstants.WS_ONSEND, data: data }));
+    }
+  };
 };
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(App);
 
-},{"./actions/headerAction":265,"./actions/socketActions":267,"./components/header/header":269,"./components/health/health":270,"./components/health/healthTabs":271,"./components/tabs/tabs":272,"./components/tile1x/Tilex":273,"./components/tile2x/Tile2x":274,"./components/widgetContainer/orderStatsWidget":275,"./components/widgetContainer/performanceWidget":276,"./constants/appConstants":277,"react":250,"react-dom":57,"react-redux":60}],265:[function(require,module,exports){
-"use strict";
+},{"./actions/headerAction":265,"./actions/socketActions":267,"./components/header/header":269,"./components/health/health":270,"./components/health/healthTabs":271,"./components/tabs/tabs":272,"./components/tile1x/Tilex":273,"./components/tile2x/Tile2x":274,"./components/widgetContainer/orderStatsWidget":275,"./components/widgetContainer/performanceWidget":276,"./constants/appConstants":277,"./constants/initData.js":278,"react":250,"react-dom":57,"react-redux":60}],265:[function(require,module,exports){
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.RECIEVE_ITEM_TO_STOCK = exports.RECIEVE_HEADER = exports.REQUEST_HEADER = undefined;
 exports.getFetchData = getFetchData;
 
-var _isomorphicFetch = require("isomorphic-fetch");
+var _isomorphicFetch = require('isomorphic-fetch');
 
 var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _appConstants = require('../constants/appConstants.js');
 
-var REQUEST_HEADER = exports.REQUEST_HEADER = "REQUEST_HEADER";
-var RECIEVE_HEADER = exports.RECIEVE_HEADER = "RECIEVE_HEADER";
-var RECIEVE_ITEM_TO_STOCK = exports.RECIEVE_ITEM_TO_STOCK = "RECIEVE_ITEM_TO_STOCK";
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function fetchData(type) {
   return function (dispatch) {
@@ -28500,9 +28536,9 @@ function fetchData(type) {
 }
 function receiveData(json) {
   switch (json.resource_type) {
-    case RECIEVE_ITEM_TO_STOCK:
+    case _appConstants.RECIEVE_ITEM_TO_STOCK:
       return {
-        type: RECIEVE_ITEM_TO_STOCK,
+        type: _appConstants.RECIEVE_ITEM_TO_STOCK,
         data: json.data
       };
     case 'items_to_audit':
@@ -28517,14 +28553,14 @@ function receiveData(json) {
       };
     default:
       return {
-        type: RECIEVE_HEADER,
+        type: _appConstants.RECIEVE_HEADER,
         data: json.data
       };
   }
 }
 function getHeaderInfo(data) {
   return {
-    type: REQUEST_HEADER,
+    type: _appConstants.REQUEST_HEADER,
     data: []
   };
 }
@@ -28535,7 +28571,7 @@ function getFetchData(type) {
   };
 }
 
-},{"isomorphic-fetch":48}],266:[function(require,module,exports){
+},{"../constants/appConstants.js":277,"isomorphic-fetch":48}],266:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -28602,34 +28638,55 @@ function authLoginData(params) {
   };
 }
 
-},{"../constants/appConstants":277,"../utilities/ajax":284}],267:[function(require,module,exports){
+},{"../constants/appConstants":277,"../utilities/ajax":286}],267:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
+exports.wsOnMessageAction = wsOnMessageAction;
+exports.wsResponseAction = wsResponseAction;
 exports.setWsAction = setWsAction;
 
 var _appConstants = require('../constants/appConstants');
 
+var _appConstants2 = require('../constants/appConstants.js');
+
 var _socketMiddleware = require('../middleware/socketMiddleware');
+
+//import {getFetchData} from 'headerAction'
 
 /**
  * @return {[type]}
  */
-function openWsConnection(params) {
-  return function (dispatch) {
-    return dispatch({ type: params.type });
-  };
+function recieveWsRequest(params) {
+	return function (dispatch) {
+		return dispatch({ type: params.type, data: params.data });
+	};
+}
+
+function wsOnMessageAction(data) {
+
+	return {
+		type: _appConstants.WS_ONMESSAGE,
+		data: data
+	};
+}
+function wsResponseAction(data) {
+
+	return {
+		type: _appConstants.WS_CONNECTED,
+		data: data
+	};
 }
 
 function setWsAction(params) {
-  return function (dispatch) {
-    return dispatch(openWsConnection(params));
-  };
+	return function (dispatch) {
+		return dispatch(recieveWsRequest(params));
+	};
 }
 
-},{"../constants/appConstants":277,"../middleware/socketMiddleware":279}],268:[function(require,module,exports){
+},{"../constants/appConstants":277,"../constants/appConstants.js":277,"../middleware/socketMiddleware":280}],268:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -28818,20 +28875,10 @@ var Header = function (_React$Component) {
 			console.log(this.props);
 		}
 	}, {
-		key: 'componentWillUnmount',
-		value: function componentWillUnmount() {}
-
-		// <div className="upperText">
-		// {headData.isFetching &&
-		//          <span>Fetching...</span>
-		//        	}
-		//        	{!headData.isFetching &&
-		//          <span>{headData.data}</span>
-		//        	}
-
-		// </div>
-
-
+		key: 'componentWillReceiveProps',
+		value: function componentWillReceiveProps(nextProps) {
+			console.log(nextProps);
+		}
 	}, {
 		key: 'render',
 		value: function render() {
@@ -28927,7 +28974,7 @@ var Header = function (_React$Component) {
 
 function mapStateToProps(state, ownProps) {
 	return {
-		"headData": state.getData[_headerAction.RECIEVE_HEADER] || {}
+		"ppsData": state.recieveSocketActions.ppsData || {}
 	};
 }
 
@@ -29627,12 +29674,90 @@ var LOGOUT = exports.LOGOUT = "LOGOUT";
 
 /*Constants for Web Sockets*/
 var WS_CONNECT = exports.WS_CONNECT = "WS_CONNECT";
+var WS_CONNECTED = exports.WS_CONNECTED = "WS_CONNECTED";
 var WS_DISCONNECT = exports.WS_DISCONNECT = "WS_DISCONNECT";
 var WS_ONMESSAGE = exports.WS_ONMESSAGE = "WS_ONMESSAGE";
 var WS_ONSEND = exports.WS_ONSEND = "WS_ONSEND";
 var WS_URL = exports.WS_URL = "wss://192.168.8.118/manager_api/wss";
 
+/* Header constants */
+
+var REQUEST_HEADER = exports.REQUEST_HEADER = "REQUEST_HEADER";
+var RECIEVE_HEADER = exports.RECIEVE_HEADER = "RECIEVE_HEADER";
+var RECIEVE_ITEM_TO_STOCK = exports.RECIEVE_ITEM_TO_STOCK = "RECIEVE_ITEM_TO_STOCK";
+
 },{}],278:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+var wsInitData = exports.wsInitData = {
+	"type": "subscribe",
+	"data": [{
+		"resource_id": "pps",
+		"details": {
+			"data": "aggregate",
+			"callback": []
+		}
+	}, {
+		"resource_id": "pps",
+		"details": {
+			"data": "complete",
+			"callback": []
+		}
+	}, {
+		"resource_id": "orders",
+		"details": {
+			"data": "aggregate",
+			"callback": []
+		}
+	}, {
+		"resource_id": "butlers",
+		"details": {
+			"data": "aggregate",
+			"callback": []
+		}
+	}, {
+		"resource_id": "users",
+		"details": {
+			"data": "aggregate",
+			"callback": []
+		}
+	}, {
+		"resource_id": "put",
+		"details": {
+			"data": "aggregate",
+			"callback": []
+		}
+	}, {
+		"resource_id": "pick",
+		"details": {
+			"data": "aggregate",
+			"callback": []
+		}
+	}, {
+		"resource_id": "inventory",
+		"details": {
+			"data": "aggregate",
+			"callback": []
+		}
+	}, {
+		"resource_id": "chargers",
+		"details": {
+			"data": "complete",
+			"callback": []
+		}
+	}, {
+		"resource_id": "butlers",
+		"details": {
+			"data": "complete",
+			"callback": []
+		}
+	}]
+};
+
+},{}],279:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -29678,20 +29803,16 @@ _reactDom2.default.render(_react2.default.createElement(
 	)
 ), document.getElementById('container'));
 
-},{"./App":264,"./components/Login/login":268,"./middleware/socketMiddleware":279,"./store":283,"react":250,"react-dom":57,"react-redux":60,"react-router":99}],279:[function(require,module,exports){
+},{"./App":264,"./components/Login/login":268,"./middleware/socketMiddleware":280,"./store":285,"react":250,"react-dom":57,"react-redux":60,"react-router":99}],280:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _headerAction = require('../actions/headerAction');
-
-var _headerAction2 = _interopRequireDefault(_headerAction);
+var _socketActions = require('../actions/socketActions');
 
 var _appConstants = require('../constants/appConstants');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var socketMiddleware = function () {
   var socket = null;
@@ -29701,14 +29822,14 @@ var socketMiddleware = function () {
       //Send a handshake, or authenticate with remote end
 
       //Tell the store we're connected
-      store.dispatch(_headerAction2.default.connected());
+      store.dispatch((0, _socketActions.wsResponseAction)(evt.type));
     };
   };
 
   var onClose = function onClose(ws, store) {
     return function (evt) {
       //Tell the store we've disconnected
-      store.dispatch(_headerAction2.default.disconnected());
+      store.dispatch(actions.disconnected());
     };
   };
 
@@ -29716,15 +29837,7 @@ var socketMiddleware = function () {
     return function (evt) {
       //Parse the JSON message received on the websocket
       var msg = JSON.parse(evt.data);
-      switch (msg.type) {
-        case _appConstants.WS_ONMESSAGE:
-          //Dispatch an action that adds the received message to our state
-          store.dispatch(_headerAction2.default.messageReceived(msg));
-          break;
-        default:
-          console.log("Received unknown message type: '" + msg.type + "'");
-          break;
-      }
+      store.dispatch((0, _socketActions.wsOnMessageAction)(msg));
     };
   };
 
@@ -29758,12 +29871,12 @@ var socketMiddleware = function () {
             socket = null;
 
             //Set our state to disconnected
-            store.dispatch(_headerAction2.default.disconnected());
+            store.dispatch(actions.disconnected());
             break;
 
           //Send the 'SEND_MESSAGE' action down the websocket to the server
           case _appConstants.WS_ONSEND:
-            socket.send(JSON.stringify(action));
+            socket.send(JSON.stringify(action.data));
             break;
 
           //This action is irrelevant to us, pass it on to the next middleware
@@ -29777,7 +29890,7 @@ var socketMiddleware = function () {
 
 exports.default = socketMiddleware;
 
-},{"../actions/headerAction":265,"../constants/appConstants":277}],280:[function(require,module,exports){
+},{"../actions/socketActions":267,"../constants/appConstants":277}],281:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -29790,15 +29903,17 @@ var _headerReducer = require('./reducers/headerReducer');
 
 var _loginReducer = require('./reducers/loginReducer');
 
+var _socketReducer = require('./reducers/socketReducer');
+
 var _reactRouterRedux = require('react-router-redux');
 
 var rootReducer = (0, _redux.combineReducers)({
-  getData: _headerReducer.getData, authLogin: _loginReducer.authLogin, routing: _reactRouterRedux.routerReducer
+  getData: _headerReducer.getData, authLogin: _loginReducer.authLogin, routing: _reactRouterRedux.routerReducer, recieveSocketActions: _socketReducer.recieveSocketActions
 });
 
 exports.default = rootReducer;
 
-},{"./reducers/headerReducer":281,"./reducers/loginReducer":282,"react-router-redux":66,"redux":257}],281:[function(require,module,exports){
+},{"./reducers/headerReducer":282,"./reducers/loginReducer":283,"./reducers/socketReducer":284,"react-router-redux":66,"redux":257}],282:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -29875,7 +29990,7 @@ function getData() {
   }
 }
 
-},{"../actions/headerAction":265}],282:[function(require,module,exports){
+},{"../actions/headerAction":265}],283:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29915,7 +30030,62 @@ function authLogin() {
   }
 }
 
-},{"../constants/appConstants":277}],283:[function(require,module,exports){
+},{"../constants/appConstants":277}],284:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.recieveSocketActions = recieveSocketActions;
+
+var _appConstants = require("../constants/appConstants");
+
+/**
+ * @param  {State Object}
+ * @param  {Action object}
+ * @return {[Object] updated state}
+ */
+function recieveSocketActions() {
+  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+  var action = arguments[1];
+
+  switch (action.type) {
+
+    case _appConstants.WS_CONNECTED:
+      return Object.assign({}, state, {
+        "socketConnected": true
+
+      });
+    case _appConstants.WS_ONMESSAGE:
+      if (action.data.resource_type) {
+        if (action.data.resource_type === "PPS") {
+          return Object.assign({}, state, {
+
+            "ppsData": action.data
+          });
+        } else {
+          return Object.assign({}, state, {
+            "socketConnected": true,
+            "initDataSent": true,
+            "socketData": action.data
+          });
+        }
+      }
+      //need to change this hard coded value
+      else if (action.data.message === "Sucessfully logged in") {
+          return Object.assign({}, state, {
+            "socketAuthorized": true,
+            "initDataSent": false
+          });
+        }
+      break;
+
+    default:
+      return state;
+  }
+}
+
+},{"../constants/appConstants":277}],285:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -29943,7 +30113,7 @@ function configureStore(preloadedState) {
   return (0, _redux.createStore)(_reducers2.default, preloadedState, (0, _redux.applyMiddleware)(_reduxThunk2.default, _socketMiddleware2.default));
 }
 
-},{"./middleware/socketMiddleware":279,"./reducers":280,"redux":257,"redux-thunk":251}],284:[function(require,module,exports){
+},{"./middleware/socketMiddleware":280,"./reducers":281,"redux":257,"redux-thunk":251}],286:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29977,4 +30147,4 @@ var utils = {
 
 exports.utils = utils;
 
-},{}]},{},[278]);
+},{}]},{},[279]);

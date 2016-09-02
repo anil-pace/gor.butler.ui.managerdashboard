@@ -9,9 +9,10 @@ import Tile2x from './components/tile2x/Tile2x';
 import {setWsAction } from './actions/socketActions';
 import OrderStatsWidget from './components/widgetContainer/orderStatsWidget'
 import PerformanceWidget from './components/widgetContainer/performanceWidget'
-import { REQUEST_HEADER, getFetchData } from './actions/headerAction'
-import { WS_CONNECT } from './constants/appConstants'
+import {  getFetchData } from './actions/headerAction'
+import { WS_CONNECT,WS_ONSEND } from './constants/appConstants'
 import { connect } from 'react-redux';
+import { wsInitData } from './constants/initData.js'
 
 
 
@@ -26,10 +27,34 @@ class App extends React.Component{
     }	
   
   	componentWillMount(){
+  		let userName =  this.props.userName,
+  		authToken = this.props.authToken;
   		/*Creating Web Socket Connection*/
-  		
-  		this.props.initWebSocket() ;
+  		if(!authToken && !userName){
+  			this.props.history.push("/");
+  		}
+  		else{
+  			this.props.initWebSocket() ;
+  		}
   	}
+  	componentWillReceiveProps(nextProps) {
+    /**
+     * Checking if the user is loggedin 
+     * and redirecting to main page
+     */
+      if (nextProps.socketStatus && !nextProps.socketAuthorized) {
+           let webSocketData = {
+                'type': 'auth',
+                'data' : {
+                    "auth_token" : this.props.authToken
+                }
+            }
+            this.props.sendAuthToSocket(webSocketData) ;
+      }
+      if(nextProps.socketStatus && nextProps.socketAuthorized && !nextProps.initDataSent){
+      		this.props.initDataSentCall(wsInitData) ;
+      }
+    }
   	/**Render method called when component react renders
   	 * @return {[type]}
   	 */
@@ -70,14 +95,22 @@ class App extends React.Component{
 
 function mapStateToProps(state,ownProps) {
  
- return state;
+ return {
+ 	authToken : state.authLogin.auth_token,
+ 	userName : state.authLogin.username,
+ 	socketStatus: state.recieveSocketActions.socketConnected,
+ 	socketAuthorized:state.recieveSocketActions.socketAuthorized,
+ 	initDataSent:state.recieveSocketActions.initDataSent
+ }
 }
 /**
  * Function to dispatch action values as props
  */
 function mapDispatchToProps(dispatch){
     return {
-        initWebSocket: function(){ dispatch(setWsAction({type:WS_CONNECT})); }
+        initWebSocket: function(){ dispatch(setWsAction({type:WS_CONNECT})); },
+        sendAuthToSocket: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
+        initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); }
     }
 };
 export  default connect(mapStateToProps,mapDispatchToProps)(App);

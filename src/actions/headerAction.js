@@ -1,8 +1,6 @@
 import fetch from 'isomorphic-fetch'
+import {REQUEST_HEADER,RECIEVE_HEADER,RECIEVE_ITEM_TO_STOCK} from '../constants/appConstants.js';
 
-export const REQUEST_HEADER = "REQUEST_HEADER";
-export const RECIEVE_HEADER = "RECIEVE_HEADER";
-export const RECIEVE_ITEM_TO_STOCK = "RECIEVE_ITEM_TO_STOCK";
 
 function fetchData(type) {
   return dispatch => {

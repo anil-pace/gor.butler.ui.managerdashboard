@@ -16,20 +16,9 @@ class Header extends React.Component{
     	// this.setState({"asdf":"asdf"});
     	console.log(this.props)
     }
-    componentWillUnmount(){
-    	
+    componentWillReceiveProps(nextProps){
+    	console.log(nextProps);
     }
-
-					// <div className="upperText">
-					// {headData.isFetching &&
-		   //          <span>Fetching...</span>
-		   //        	}
-		   //        	{!headData.isFetching &&
-		   //          <span>{headData.data}</span>
-		   //        	}
-		          	
-					// </div>
-
 
 	render(){
 		const { headData } = this.props;
@@ -78,7 +67,7 @@ class Header extends React.Component{
 
 function mapStateToProps(state, ownProps){
 	return  {
-		"headData":state.getData[RECIEVE_HEADER] || {}
+		"ppsData":state.recieveSocketActions.ppsData || {}
 		}
 		 
 
