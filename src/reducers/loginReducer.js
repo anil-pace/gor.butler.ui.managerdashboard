@@ -18,8 +18,7 @@ export  function authLogin(state={},action){
     case LOGOUT:
       
       return Object.assign({}, state, {
-          "auth_token": null,
-          "username" :null
+          "auth_token": null
       })
 
 	  default:
