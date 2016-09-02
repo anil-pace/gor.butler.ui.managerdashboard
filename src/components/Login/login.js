@@ -11,11 +11,20 @@ class Login extends React.Component{
     }
     
     componentWillReceiveProps(nextProps) {
-  
+    /**
+     * Checking if the user is loggedin 
+     * and redirecting to main page
+     */
+        
       if (nextProps.auth_token  && nextProps.userName) {
-           this.props.history.push("/md");
+           this.props.history.push("md");
       }
     }
+    /**
+     * @param  {[event]}
+     * @return {[void]}
+     * Function to handle login form submit
+     */
     handleSubmit(e){
     	e.preventDefault();
     	let formdata={         
@@ -23,8 +32,10 @@ class Login extends React.Component{
           	'password': this.password.value,
          };
     	let loginData={
-    		'formdata':formdata,
+
     		'url':'https://192.168.8.118/api/auth/token',
+    		'formdata':this.loginForm,
+    		'url':'./dummy.json',
         	'method':'POST',
         	'contentType':'application/json'
     	}
@@ -33,7 +44,7 @@ class Login extends React.Component{
     }
 	render(){
 		return (
-			<form action="#" onSubmit={(e) => this.handleSubmit(e)}>
+			<form action="#"  id = "loginForm" ref={node => { this.loginForm = node }} onSubmit={(e) => this.handleSubmit(e)}>
 			<div>
 				<input type="text" id="username"  placeholder="Enter Username" ref={node => { this.userName = node }}/>
 				<input type="password" id="password" placeholder="Enter Password" ref={node => { this.password = node }}/>
@@ -54,7 +65,12 @@ function mapStateToProps(state, ownProps){
         userName:state.authLogin.username
     };
 }
-
+/**
+ * @param  {[Function]}
+ * @return {[Object]}
+ * mapping dispatch function to props
+ * so that they could be called from props
+ */
 var mapDispatchToProps = function(dispatch){
     return {
         authLoginData: function(params){ dispatch(authLoginData(params)); }

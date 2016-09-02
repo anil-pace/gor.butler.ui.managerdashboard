@@ -1,5 +1,7 @@
 import actions from '../actions/headerAction'
-import constants from '../constants/appConstants'
+import {WS_CONNECT,WS_DISCONNECT,WS_ONMESSAGE,WS_ONSEND,WS_URL} from '../constants/appConstants'
+
+
 
 const socketMiddleware = (function(){ 
   var socket = null;
@@ -20,7 +22,7 @@ const socketMiddleware = (function(){
     //Parse the JSON message received on the websocket
     var msg = JSON.parse(evt.data);
     switch(msg.type) {
-      case "CHAT_MESSAGE":
+      case WS_ONMESSAGE:
         //Dispatch an action that adds the received message to our state
         store.dispatch(actions.messageReceived(msg));
         break;
@@ -34,7 +36,7 @@ const socketMiddleware = (function(){
     switch(action.type) {
 
       //The user wants us to connect
-      case 'CONNECT':
+      case WS_CONNECT:
         //Start a new connection to the server
         if(socket != null) {
           socket.close();
@@ -43,7 +45,7 @@ const socketMiddleware = (function(){
         //store.dispatch(actions.connecting());
 
         //Attempt to connect (we could send a 'failed' action on error)
-        socket = new WebSocket("wss://192.168.8.118/manager_api/wss");
+        socket = new WebSocket(WS_URL);
         socket.onmessage = onMessage(socket,store);
         socket.onclose = onClose(socket,store);
         socket.onopen = onOpen(socket,store,action.token);
@@ -51,7 +53,7 @@ const socketMiddleware = (function(){
         break;
 
       //The user wants us to disconnect
-      case 'DISCONNECT':
+      case WS_DISCONNECT:
         if(socket != null) {
           socket.close();
         }
@@ -62,7 +64,7 @@ const socketMiddleware = (function(){
         break;
 
       //Send the 'SEND_MESSAGE' action down the websocket to the server
-      case 'SEND_CHAT_MESSAGE':
+      case WS_ONSEND:
         socket.send(JSON.stringify(action));
         break;
 

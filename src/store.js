@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
-import { browserHistory } from 'react-router';
+import socketMiddleware from './middleware/socketMiddleware'
+
 import rootReducer from './reducers'
 
 
@@ -10,6 +11,9 @@ export default function configureStore(preloadedState) {
     preloadedState,
     applyMiddleware(
       thunkMiddleware,
+
+      socketMiddleware
+
     )
   )
 }

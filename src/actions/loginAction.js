@@ -1,11 +1,10 @@
 import {utils} from '../utilities/ajax'
-import { routerMiddleware, push } from 'react-router-redux'
 import { LOGIN_REQUEST, LOGIN_REDIRECT, LOGIN_SUCCESS,LOGIN_FAILURE} from '../constants/appConstants'
 
 
 
 /**
- * Action for Login request
+ * Actions for Login request
  */
 
 
@@ -38,7 +37,6 @@ function receiveAuthData(data){
         data
   }
 }
-
 
 function authData(params) {
   return (dispatch) => {
