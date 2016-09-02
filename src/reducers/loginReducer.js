@@ -11,11 +11,9 @@ export  function authLogin(state={},action){
 	  case LOGIN_SUCCESS:
 	    //state.selectedAction = action.type;
 	    //window.localStore.setItem('auth_token',action.data.auth_token)
-      console.log('Did this');
 
       return Object.assign({}, state, {
-        	"auth_token": action.data.auth_token,
-        	"username" :action.data.username
+        	"auth_token": action.data.auth_token
       })
     case LOGOUT:
       

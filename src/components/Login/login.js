@@ -16,8 +16,9 @@ class Login extends React.Component{
      * and redirecting to main page
      */
         
-      if (nextProps.auth_token  && nextProps.userName) {
-           this.props.history.push("md");
+      if (nextProps.auth_token) {
+      	alert('You are logged in');
+        //   this.props.history.push("md");
       }
     }
     /**
@@ -34,9 +35,9 @@ class Login extends React.Component{
     	let loginData={
 
     		'url':'https://192.168.8.118/api/auth/token',
-    		'formdata':this.loginForm,
-    		'url':'./dummy.json',
+    		'formdata':formdata,
         	'method':'POST',
+        	'cause':'AUTH_LOGIN',
         	'contentType':'application/json'
     	}
     	
@@ -61,8 +62,7 @@ class Login extends React.Component{
 
 function mapStateToProps(state, ownProps){
 	return {
-        auth_token:state.authLogin.auth_token,
-        userName:state.authLogin.username
+        auth_token:state.authLogin.auth_token
     };
 }
 /**

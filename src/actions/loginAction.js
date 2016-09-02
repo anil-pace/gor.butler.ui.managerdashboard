@@ -22,7 +22,7 @@ export function loginRedirect(data){
     }
 }
 
-function receiveAuthData(data){  
+export function receiveAuthData(data){  
   if(!data.auth_token)
   {
       console.log('Login Fail');
@@ -38,13 +38,13 @@ function receiveAuthData(data){
   }
 }
 
-function authData(params) {
-  return (dispatch) => {
-   utils.ajax(params,receiveAuthData);
- }
-}
+// function authData(params) {
+//   return (dispatch) => {
+//    utils.ajax(params,receiveAuthData);
+//  }
+// }
 
-// function authData(params){
+// // function authData(params){
 //   var params = {
 //     callBack:authCallBack
 //   }
@@ -57,10 +57,12 @@ function authData(params) {
 //   // }
 // }
 
+// 
 export function authLoginData(params) {
-  return (dispatch) => {
-      return dispatch(authData(params))
+  return {
+    type: 'AJAX_CALL',
+    params
   }
-  
-}
+ }
+
 
