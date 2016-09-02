@@ -1,5 +1,5 @@
 import {utils} from '../utilities/ajax'
-import { LOGIN_REQUEST, LOGIN_REDIRECT, LOGIN_SUCCESS,LOGIN_FAILURE} from '../constants/appConstants'
+import { LOGIN_REQUEST, LOGIN_REDIRECT, LOGIN_SUCCESS,LOGIN_FAILURE, AJAX_CALL} from '../constants/appConstants'
 
 
 
@@ -38,29 +38,9 @@ export function receiveAuthData(data){
   }
 }
 
-// function authData(params) {
-//   return (dispatch) => {
-//    utils.ajax(params,receiveAuthData);
-//  }
-// }
-
-// // function authData(params){
-//   var params = {
-//     callBack:authCallBack
-//   }
-//   // return dispatch => {
-//   //   return fetch('./mock/loginJson.json',{
-//   //     method: 'GET'
-
-//   //   }).then(response => response.json())
-//   //     .then(json => dispatch(receiveAuthData(json)))
-//   // }
-// }
-
-// 
 export function authLoginData(params) {
   return {
-    type: 'AJAX_CALL',
+    type: AJAX_CALL,
     params
   }
  }

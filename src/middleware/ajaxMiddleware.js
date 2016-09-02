@@ -1,4 +1,5 @@
 import {receiveAuthData} from '../actions/loginAction'
+import {AJAX_CALL, AUTH_LOGIN} from '../constants/appConstants'
 
 const ajaxMiddleware = (function(){ 
 
@@ -6,7 +7,7 @@ const ajaxMiddleware = (function(){
     switch(action.type) {
 
      
-    case 'AJAX_CALL':
+    case AJAX_CALL:
 
     var params=action.params;
 
@@ -21,9 +22,9 @@ const ajaxMiddleware = (function(){
       if (httpRequest.readyState === XMLHttpRequest.DONE) {
         if (httpRequest.status === 200) {
               var response=JSON.parse(httpRequest.response);
-              if(params.cause=='AUTH_LOGIN')
+              if(params.cause==AUTH_LOGIN)
               {
-               store.dispatch(receiveAuthData(response));
+                store.dispatch(receiveAuthData(response));
               }
         } 
         else

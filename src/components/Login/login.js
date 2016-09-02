@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { LOGIN_REQUEST, authLoginData } from '../../actions/loginAction';
 import { connect } from 'react-redux';
-
+import {LOGIN_URL, AUTH_LOGIN} from '../../constants/appConstants'
 
 class Login extends React.Component{
 	constructor(props) 
@@ -34,10 +34,10 @@ class Login extends React.Component{
          };
     	let loginData={
 
-    		'url':'https://192.168.8.118/api/auth/token',
+    		'url':LOGIN_URL,
     		'formdata':formdata,
         	'method':'POST',
-        	'cause':'AUTH_LOGIN',
+        	'cause':AUTH_LOGIN,
         	'contentType':'application/json'
     	}
     	
