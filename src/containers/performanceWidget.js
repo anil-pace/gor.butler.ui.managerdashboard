@@ -2,6 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import Health from '../components/health/healthTabs.js';
 import Dropdown from '../components/dropdown/dropdown.js';
+import ChartHorizontal from '../components/graphd3/graph_horizontal';
 class PerformanceWidget extends React.Component{
 	constructor(props) 
 	{
@@ -14,8 +15,8 @@ class PerformanceWidget extends React.Component{
 			 <Dropdown/>
 			 </div>
 		
-		<div>
-			<Health/>
+		<div id="performanceGraph">
+			<ChartHorizontal/>
 		</div> 
 		</div>
 		);

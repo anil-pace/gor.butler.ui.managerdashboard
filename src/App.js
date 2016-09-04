@@ -59,7 +59,9 @@ class App extends React.Component{
 				<div>
 				<OrderStatsWidget/>
 				<PerformanceWidget/>
-				<ChartHorizontal/>
+				
+
+
 				</div>
 
 

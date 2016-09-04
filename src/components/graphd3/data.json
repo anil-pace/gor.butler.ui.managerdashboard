@@ -1,73 +1,31 @@
 [{
-	"letter": "09:00 10:00",
-	"frequency": 8167
+    "name": "PPS 001",
+    "value": 4
 }, {
-	"letter": "10:00 11:00",
-	"frequency": 1392
+	"name": "PPS 002",
+	"value": 8
 }, {
-	"letter": "11:00 12:00",
-	"frequency": 2780
+	"name": "PPS 003",
+	"value": 15
 }, {
-	"letter": "12:00 13:00",
-	"frequency": 4253
+	"name": "PPS 004",
+	"value": 16
 }, {
-	"letter": "13:00 14:00",
-	"frequency": 2702
+	"name": "PPS 005",
+	"value": 23
 }, {
-	"letter": "14:00 15:00",
-	"frequency": 2288
+	"name": "PPS 006",
+	"value": 22
 }, {
-	"letter": "15:00 16:00",
-	"frequency": 2022
+    "name": "PPS 007",
+	"value": 8
 }, {
-	"letter": "16:00 17:00",
-	"frequency": 6094
+	"name": "PPS 008",
+	"value": 15
 }, {
-	"letter": "17:00 18:00",
-	"frequency": 6973
+	"name": "PPS 009",
+	"value": 16
 }, {
-	"letter": "18:00 19:00",
-	"frequency": 4153
-}, {
-	"letter": "19:00 20:00",
-	"frequency": 4747
-}, {
-	"letter": "20:00 21:00",
-	"frequency": 4025
-}, {
-	"letter": "21:00 22:00",
-	"frequency": 2517
-}, {
-	"letter": "22:00 23:00",
-	"frequency": 6749
-}, {
-	"letter": "23:00 00:00",
-	"frequency": 3507
-}, {
-	"letter": "00:00 01:00",
-	"frequency": 1929
-}, {
-	"letter": "01:00 02:00",
-	"frequency": 3098
-}, {
-	"letter": "02:00 03:00",
-	"frequency": 5987
-}, {
-	"letter": "03:00 04:00",
-	"frequency": 6333
-}, {
-	"letter": "04:00 05:00",
-	"frequency": 9056
-}, {
-	"letter": "05:00 06:00",
-	"frequency": 2758
-}, {
-	"letter": "06:00 07:00",
-	"frequency": 6037
-}, {
-	"letter": "07:00 08:00",
-	"frequency": 2465
-}, {
-	"letter": "08:00 09:00",
-	"frequency": 3465
+	"name": "PPS 010",
+	"value": 23
 }]

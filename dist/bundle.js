@@ -63823,8 +63823,7 @@ var App = function (_React$Component) {
 						'div',
 						null,
 						_react2.default.createElement(_orderStatsWidget2.default, null),
-						_react2.default.createElement(_performanceWidget2.default, null),
-						_react2.default.createElement(_graph_horizontal2.default, null)
+						_react2.default.createElement(_performanceWidget2.default, null)
 					)
 				)
 			);
@@ -64011,127 +64010,88 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var RD3Component = _reactD3Library2.default.Component;
 
-var Chart = function (_React$Component) {
-  _inherits(Chart, _React$Component);
+var ChartHorizontal = function (_React$Component) {
+  _inherits(ChartHorizontal, _React$Component);
 
-  function Chart(props) {
-    _classCallCheck(this, Chart);
+  function ChartHorizontal(props) {
+    _classCallCheck(this, ChartHorizontal);
 
-    var _this = _possibleConstructorReturn(this, (Chart.__proto__ || Object.getPrototypeOf(Chart)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (ChartHorizontal.__proto__ || Object.getPrototypeOf(ChartHorizontal)).call(this, props));
 
     _this.state = { d3: '' };
     return _this;
   }
 
-  _createClass(Chart, [{
+  _createClass(ChartHorizontal, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
       var component = this;
-      var widther = document.getElementById("chart_att").offsetWidth;
-      var heighter = document.getElementById("chart_att").offsetHeight;
-
-      var margin = { top: 20, right: 20, bottom: 20, left: 40 },
-          width = widther - margin.left - margin.right,
-          height = 400 - margin.top - margin.bottom;
-      var count = -1;
-      var temp = -1;
-      var y = d3.scale.linear().range([height, 0]);
-      var x = d3.scale.ordinal().rangeRoundBands([0, width], .1);
-      var xAxis = d3.svg.axis().scale(x).orient("bottom").tickFormat(function (d) {
-        count++;
-        temp++;
-        if (count === 3 || temp === 0 || temp === 23) {
-          count = 0;
-          d = d.substr(0, d.indexOf(' '));
-          return d;
-        }
-        return "";
-      });
-
-      var yAxis = d3.svg.axis().scale(y).orient("left").ticks(10);
-
-      // const tip = d3.tip()
-      // .attr('class', 'd3-tip')
-      // .offset([50, 90])
-      // .html(function(d) {
-      //   var time=d.letter.split(" ");
-      //   return "<div> Time:"+" " + time[0]+" - "+time[1] +"<div/><div> 27 Jul,2016</div> <div style='color:#ffffff'> Fulfilled:  "+" " + d.frequency + "</div>";
-      // })
-
-      var node = document.createElement('div');
-
-      var svg = d3.select(node).append('svg').attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-      //svg.call(tip);
-
-      d3.json("http://www.mocky.io/v2/57c921ea120000ee1fe76b04", function (error, data) {
-
+      var widther = document.getElementById("performanceGraph").offsetWidth;
+      var parentHeight = 370;
+      d3.json("http://www.mocky.io/v2/57cc5b881200001b0cbb77ba", function (error, data) {
         var json = data;
         update(json);
       });
 
       function update(data) {
-        console.log(data);
-        data.forEach(function (d) {
-          d.frequency = +d.frequency;
-        });
-        x.domain(data.map(function (d) {
-          return d.letter;
-        }));
-        y.domain([0, d3.max(data, function (d) {
-          return d.frequency;
+
+        var width = widther - 100;
+        var barHeight = parentHeight / data.length;
+        var left = 20;
+        var top = 20;
+
+        //var margin = {top: 20, right: 20, bottom: 50, left: 100};
+
+        var x = d3.scale.linear().range([0, width]);
+
+        var y = d3.scale.ordinal().rangeRoundBands([0, barHeight], .1);
+        var yAxis = d3.svg.axis().scale(y).orient("right");
+
+        var node = document.createElement('div');
+        var chart = d3.select(node).append('svg').attr("width", widther).attr("height", 400).append("g").attr("transform", "translate(" + left + "," + top + ")");
+
+        x.domain([0, d3.max(data, function (d) {
+          return d.value;
         })]);
 
-        svg.append("g").attr("class", "grid").call(make_y_axis().tickSize(-width, 0, 0).tickFormat(""));
+        //chart.attr("height", barHeight * data.length);
 
-        svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis).style("font-size", "12px").style("font-family", "sans-serif").style("fill", "#666666");
-
-        //svg.append("g").text("sample!!!");
-
-
-        svg.append("g").attr("class", "y axis").call(yAxis).style("font-size", "12px").style("font-family", "sans-serif").style("fill", "#666666").append("text").attr("transform", "rotate(-90)").attr("y", 6).attr("dy", "4em").style("text-anchor", "end");
-
-        svg.selectAll(".bar").data(data).enter().append("rect").attr("rx", 2).attr("ry", 2).attr("class", "bar").attr("x", function (d) {
-          return x(d.letter);
-        }).attr("width", x.rangeBand()).attr("y", function (d) {
-          return y(d.frequency);
-        }).attr("height", 0).attr("height", function (d) {
-          return height - y(d.frequency);
+        var bar = chart.selectAll("g").data(data).enter().append("g").attr("rx", 20).attr("ry", 20).attr("class", "g").attr("y", function (d) {
+          return y(d.name);
+        }).attr("width", y.rangeBand()).attr("transform", function (d, i) {
+          return "translate(0," + i * barHeight + ")";
         });
-        // .on('mouseover', tip.show)
-        // .on('mouseout', tip.hide)
 
-        var txt = svg.selectAll(".bar");
+        bar.append("g").attr("class", "axis").call(yAxis).style("font-size", "30px").style("font-family", "sans-serif").style("fill", "red").append("text").attr("y", 6).attr("dy", "4em").style("text-anchor", "end");
 
-        txt.append("g").attr("class", "below").attr("x", function (d) {
-          return x(d.letter);
-        }).attr("y", function (d) {
-          return height - y(d.frequency);
-        }).attr("dy", "1.2em").attr("text-anchor", "right").text("krish").style("fill", "#000000");
+        bar.append("rect").attr("x", 50).attr("width", function (d) {
+          return x(d.value);
+        }).attr("height", barHeight - 5).style("fill", "#D3D3D3").style("opacity", "0.5");
 
-        //   txt.append("text")
-        //   .attr("y", function(d) { return y(d.frequency); })
-        // .attr("class", "below")
-        // .attr("x", 12)
-        // .attr("dy", "1.2em")
-        // .attr("text-anchor", "right")
-        // .text("krish")
-        // .style("fill", "#000000");
+        bar.append("text").attr("x", function (d) {
+          return x(d.value) + 25;
+        }).attr("y", barHeight / 2).attr("dy", ".35em").text(function (d) {
+          if (d.value === 0) {
+            return "ERROR";
+          } else {
+            return d.value;
+          }
+        }).style("font-size", "12px").style("font-weight", "bold").style("font-family", "sans-serif").style("fill", "#666666");
 
+        bar.append("text").attr("x", -10).attr("y", barHeight / 2).attr("dy", ".35em").text(function (d) {
+          if (d.value === 4) {
+            return d.name;
+          } else {
+            return d.name;
+          }
+        }).style("font-size", "12px").style("font-family", "sans-serif").style("fill", "#666666");
 
         component.setState({ d3: node });
       }
 
       function type(d) {
+        d.value = +d.value; // coerce to number
         return d;
-      }
-
-      function make_x_axis() {
-        return d3.svg.axis().scale(x).orient("bottom").ticks(5);
-      }
-
-      function make_y_axis() {
-        return d3.svg.axis().scale(y).orient("left").ticks(5);
       }
     }
   }, {
@@ -64146,11 +64106,11 @@ var Chart = function (_React$Component) {
     }
   }]);
 
-  return Chart;
+  return ChartHorizontal;
 }(_react2.default.Component);
 
 ;
-exports.default = Chart;
+exports.default = ChartHorizontal;
 //ReactDOM.render(React.createElement(Chart), document.getElementById('chart_dis'))
 
 },{"d3":4,"d3-tip":2,"react":191,"react-d3-library":39,"react-dom":40}],206:[function(require,module,exports){
@@ -65074,6 +65034,10 @@ var _dropdown = require('../components/dropdown/dropdown.js');
 
 var _dropdown2 = _interopRequireDefault(_dropdown);
 
+var _graph_horizontal = require('../components/graphd3/graph_horizontal');
+
+var _graph_horizontal2 = _interopRequireDefault(_graph_horizontal);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -65104,8 +65068,8 @@ var PerformanceWidget = function (_React$Component) {
 				),
 				_react2.default.createElement(
 					'div',
-					null,
-					_react2.default.createElement(_healthTabs2.default, null)
+					{ id: 'performanceGraph' },
+					_react2.default.createElement(_graph_horizontal2.default, null)
 				)
 			);
 		}
@@ -65118,7 +65082,7 @@ var PerformanceWidget = function (_React$Component) {
 
 exports.default = PerformanceWidget;
 
-},{"../components/dropdown/dropdown.js":204,"../components/health/healthTabs.js":209,"react":191,"react-dom":40}],216:[function(require,module,exports){
+},{"../components/dropdown/dropdown.js":204,"../components/graphd3/graph_horizontal":205,"../components/health/healthTabs.js":209,"react":191,"react-dom":40}],216:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
