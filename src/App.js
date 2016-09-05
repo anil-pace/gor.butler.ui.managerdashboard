@@ -7,7 +7,6 @@ import Header from './components/header/header';
 import Tilex from './components/tile1x/Tilex';
 import Tile2x from './components/tile2x/Tile2x';
 import {setWsAction } from './actions/socketActions';
-import {  getFetchData } from './actions/headerAction'
 import { WS_CONNECT,WS_ONSEND } from './constants/appConstants'
 import { wsInitData } from './constants/initData.js'
 import Dropdown from './components/dropdown/dropdown';
