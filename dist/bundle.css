@@ -210,125 +210,124 @@ body {
 }
 
 .health.mainBlock {
-  width: 300px;
-  border: .5px solid #f7f7f7;
+  width: 100%;
 }
 
 .health .block {
   display: inline-block;
   text-align: center;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
 }
 
 .health .attributes {
-  width: 91px;
+  width: 5.6875rem;
 }
 
 .health .upperText {
   font-family: "source sans pro";
-  font-size: 24px;
+  font-size: 1.5rem;
 }
 
 .health .subtext {
   font-family: "source sans pro";
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 
 .health .parameters {
-  width: 204px;
+  width: 12.75rem;
 }
 
 .health .stoppedState {
   background: #ec1c24;
-  width: 28px;
-  height: 18px;
+  width: 1.75rem;
+  height: 1.125rem;
   border-radius: 40%;
   color: #ffffff;
   font-family: "source sans pro";
   font-weight: bold;
-  padding-top: 0px;
-  padding-bottom: 0px;
+  padding-top: 0rem;
+  padding-bottom: 0rem;
 }
 
 .health .onState {
   background: #ffffff;
-  width: 28px;
-  height: 18px;
+  width: 1.75rem;
+  height: 1.125rem;
   border-radius: 40%;
   color: #666666;
   font-family: "source sans pro";
   border-style: solid;
-  border-width: 1px;
+  border-width: 0.0625rem;
   border-color: #00a54f;
-  padding-top: 0px;
-  padding-bottom: 0px;
+  padding-top: 0rem;
+  padding-bottom: 0rem;
 }
 
 .health .offState {
   background: #ffffff;
-  width: 28px;
-  height: 18px;
+  width: 1.75rem;
+  height: 1.125rem;
   border-radius: 40%;
   color: #666666;
   font-family: "source sans pro";
   border-style: solid;
-  border-width: 1px;
+  border-width: 0.0625rem;
   border-color: #999999;
-  padding-top: 0px;
-  padding-bottom: 0px;
+  padding-top: 0rem;
+  padding-bottom: 0rem;
 }
 
 .health .errorState {
   background: #ffffff;
-  width: 30px;
-  height: 18px;
+  width: 1.875rem;
+  height: 1.125rem;
   border-radius: 40%;
   color: #666666;
   font-family: "source sans pro";
   border-style: solid;
-  border-width: 1px;
+  border-width: 0.0625rem;
   border-color: #ec1c24;
-  padding-top: 0px;
-  padding-bottom: 0px;
+  padding-top: 0rem;
+  padding-bottom: 0rem;
 }
 
 .health .paramPosition {
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: 0.9375rem;
+  padding-left: 0.9375rem;
 }
 
 .health .paramPositionFront {
-  padding-right: 15px;
-  padding-left: 10px;
+  padding-right: 0.9375rem;
+  padding-left: 0.625rem;
 }
 
 .health .paramPositionMiddle {
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: 0.9375rem;
+  padding-left: 0.9375rem;
 }
 
 .health .paramPositionBack {
-  padding-right: 10px;
-  padding-left: 15px;
+  padding-right: 0.625rem;
+  padding-left: 0.9375rem;
 }
 
 .health .status {
   font-family: "source sans pro";
-  font-size: 12px;
+  font-size: 0.75rem;
   color: #666666;
   text-align: center;
 }
 
 .health .horizontal-line {
   display: inline-block;
-  height: 30px;
-  border-left: 1px solid #f7f7f7;
+  height: 1.875rem;
+  border-left: 0.0625rem solid #f7f7f7;
 }
 
 .gorHeader.head {
   overflow: hidden;
-  padding: 5px 0;
+  padding: 0.3125rem 0;
   background: #fff;
 }
 
@@ -336,10 +335,10 @@ body {
   background-color: #fff;
   color: #4d5055;
   padding: 0 1em;
-  font-size: 14px;
+  font-size: 0.875rem;
   border: none;
   cursor: pointer;
-  width: 188px;
+  width: 11.75rem;
   font-family: "source sans pro";
 }
 
@@ -359,9 +358,9 @@ body {
 .gorHeader .dropdown-content {
   font-family: "source sans pro";
   background-color: white;
-  font-size: 14;
+  font-size: 0.875rem;
   color: #4d5055;
-  width: 223px;
+  width: 13.9375rem;
   display: none;
   position: absolute;
   right: 0;
@@ -372,7 +371,7 @@ body {
 .gorHeader .dropdown-content a {
   color: #666666;
   background-color: white;
-  padding: 12px 16px;
+  padding: 0.75rem 1rem;
   font-size: .7em;
   text-decoration: none;
   padding: 1em 3em;
@@ -395,12 +394,12 @@ body {
   display: inline-block;
   overflow: hidden;
   vertical-align: middle;
-  border-right: 1px solid #F2F2F2;
+  border-right: 0.0625rem solid #F2F2F2;
 }
 
 .gorHeader .upperText {
   font-family: "source sans pro";
-  font-size: 18px;
+  font-size: 1.125rem;
   color: #4d5055;
   font-weight: bold;
   line-height: 1;
@@ -409,20 +408,20 @@ body {
 
 .gorHeader .subText {
   font-family: "source sans pro";
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: normal;
   color: #4d5055;
 }
 
 .gorHeader .subTextClient {
   font-family: "source sans pro";
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: normal;
   color: #4d5055;
-  line-height: 0px;
+  line-height: 0rem;
   text-align: left;
-  padding-right: 20px;
-  padding-top: 9px;
+  padding-right: 1.25rem;
+  padding-top: 0.5625rem;
 }
 
 .gorHeader .block {
@@ -432,13 +431,13 @@ body {
 .gorHeader .mainBlock {
   display: inline-block;
   overflow: hidden;
-  padding: 0px 5px;
+  padding: 0rem 0.3125rem;
 }
 
 .gorHeader .blockSystem {
   display: inline-block;
   overflow: hidden;
-  padding-left: 5px;
+  padding-left: 0.3125rem;
   vertical-align: middle;
 }
 
@@ -448,9 +447,9 @@ body {
 }
 
 .gorHeader .upperTextClient {
-  padding: 10px 20px 6px 0px;
+  padding: 10px 1.25rem 0.375rem 0rem;
   font-family: "source sans pro";
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
   line-height: 0;
   display: inline-block;
@@ -458,33 +457,34 @@ body {
 
 .gorHeader .horizontal-line {
   display: inline-block;
-  height: 30px;
+  height: 1.875rem;
   border-left: 1px solid #f7f7f7;
   vertical-align: sub;
 }
 
 .gorHeader .truncate {
-  width: 110px;
+  width: 6.875rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.gorTab.container {
+.gorTab.gorContainer {
   background-color: #4d5055;
   width: auto;
+  display: inline-block;
 }
 
-.gorTab .mainBlock:hover {
+.gorTab .gorMainBlock:hover {
   background-color: #323539;
 }
 
-.gorTab .inline {
+.gorTab .gorInline {
   display: inline-block;
   width: 100%;
 }
 
-.gorTab .mainBlock {
+.gorTab .gorMainBlock {
   width: 120px;
   padding-right: 20px;
   padding-left: 20px;
@@ -495,7 +495,7 @@ body {
   cursor: pointer;
 }
 
-.gorTab .upperText {
+.gorTab .gorUpperText {
   padding-top: 7px;
   font-family: "source sans pro";
   font-size: 18px;
@@ -506,43 +506,43 @@ body {
   width: 75%;
 }
 
-.gorTab .subText {
+.gorTab .gorSubText {
   font-size: 14px;
   padding-top: 0px;
   font-weight: bold;
 }
 
-.gorTab .overview {
+.gorTab .gorOverview {
   font-family: "source sans pro";
   color: #ffffff;
 }
 
-.gorTab .online {
+.gorTab .gorOnline {
   font-family: "source sans pro";
   color: #10c469;
 }
 
-.gorTab .offline {
+.gorTab .gorOffline {
   font-family: "source sans pro";
   color: #ffffff;
 }
 
-.gorTab .event {
+.gorTab .gorEvent {
   font-family: "source sans pro";
   color: #27aae1;
 }
 
-.gorTab .risk {
+.gorTab .gorRisk {
   font-family: "source sans pro";
   color: #f99405;
 }
 
-.gorTab .error {
+.gorTab .gorError {
   font-family: "source sans pro";
   color: #fc3838;
 }
 
-.gorTab .emergency {
+.gorTab .gorEmergency {
   font-family: "source sans pro";
   color: #ffffff;
   background: #fc3838;
@@ -663,24 +663,198 @@ body {
   }
 }
 
-.orderStatsWidget {
+.gorOrderStatsWidget {
   background: #fff;
   border-radius: 3px;
   box-shadow: 0px 2px 3px 3px #EAEAEA;
   display: inline-block;
-  margin: 1% 1% 1% 2%;
-  font-size: 0;
-  width: 60%;
-  height: 300px;
+  margin: 1% 0% 1% 2%;
+  vertical-align: bottom;
+  width: 67%;
+  height: 500px;
 }
 
-.performanceWidget {
+.gorDrop {
+  padding-left: 20px;
+  padding-top: 20px;
+}
+
+.gorPerformanceWidget {
   background: #fff;
   border-radius: 3px;
   box-shadow: 0px 2px 3px 3px #EAEAEA;
   display: inline-block;
-  margin: 1% 1% 1% 2%;
-  font-size: 0;
+  margin: 0% 1% 1% 2%;
   width: 25%;
-  height: 300px;
+  height: 500px;
+}
+
+.gorTabs.gorMainBlock {
+  background-color: #4d5055;
+}
+
+.ddown {
+  max-width: 18.125rem;
+  min-height: 2.8125rem;
+}
+
+.Dropdown-root {
+  position: relative;
+}
+
+.Dropdown-control {
+  position: relative;
+  overflow: hidden;
+  background-color: white;
+  border-radius: 0.25rem;
+  box-sizing: border-box;
+  color: #000000;
+  font-family: "source sans pro";
+  font-size: 1.25rem;
+  font-weight: bold;
+  cursor: default;
+  outline: none;
+  padding: 0.5rem 3.25rem 0.5rem 0.625rem;
+  transition: all 200ms ease;
+}
+
+.Dropdown-control:hover {
+  box-shadow: 0.125rem 0.125rem 0.125rem #888888;
+  border: 0.0625rem solid #ccc;
+}
+
+.Dropdown-arrow {
+  border-color: #000000 transparent transparent;
+  border-style: solid;
+  border-width: 0.5rem 0.4375rem 0.1875rem;
+  content: ' ';
+  display: block;
+  height: 0;
+  margin-top: -ceil(2.5);
+  position: absolute;
+  right: 2.1875rem;
+  top: 0.875rem;
+}
+
+.is-open .Dropdown-arrow {
+  border-color: #000000 transparent transparent;
+  border-style: solid;
+  border-width: 0.5rem 0.4375rem 0.1875rem;
+}
+
+.Dropdown-menu {
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 0.0625rem 0 rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
+  margin-top: -0.0625rem;
+  max-height: 12.5rem;
+  overflow-y: auto;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  z-index: 1000;
+  -webkit-overflow-scrolling: touch;
+}
+
+.Dropdown-option {
+  box-sizing: border-box;
+  color: #666666;
+  cursor: pointer;
+  display: block;
+  padding: 0.5rem 0.625rem;
+}
+
+.Dropdown-option:last-child {
+  border-bottom-right-radius: 0.125rem;
+  border-bottom-left-radius: 0.125rem;
+}
+
+.Dropdown-option:hover {
+  background-color: #efefef;
+  color: #333;
+}
+
+.Dropdown-option.is-selected {
+  box-shadow: 0.125rem 0.125rem 0.125rem #888888;
+  background-color: #f2f9fc;
+  color: #333;
+}
+
+.Dropdown-noresults {
+  box-sizing: border-box;
+  color: #ccc;
+  cursor: default;
+  display: block;
+  padding: 0.5rem 0.625rem;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+}
+
+.bar {
+  fill: #D3D3D3;
+  opacity: 0.5;
+  stroke-linejoin: round;
+}
+
+.bar:hover {
+  stroke: #4d5055;
+  stroke-width: 0.0625rem;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.d3-tip {
+  line-height: 3;
+  font-weight: bold;
+  font-size: 0.75rem;
+  font-family: sans-serif;
+  padding: 0.3125rem;
+  background: #4d5055;
+  color: #ffffff;
+  width: 9.375rem;
+  border-radius: 3%;
+}
+
+.d3-tip:after {
+  display: inline;
+  font-size: 1.25rem;
+  width: 100%;
+  line-height: 1;
+  color: #4d5055;
+  content: "\25C0";
+  position: absolute;
+  text-align: center;
+}
+
+.d3-tip.n:after {
+  margin: -3.75rem 0rem 0rem -5rem;
+  top: 100%;
+  left: 0;
+}
+
+.grid .tick {
+  stroke: #f2f2f2;
+  opacity: 0.7;
+}
+
+.grid path {
+  stroke-width: 0.0625rem;
+}
+
+.rect {
+  fill: #ffffff;
+  opacity: 0.5;
+  stroke-linejoin: round;
+}
+
+.text {
+  fill: white;
+  font: 20px sans-serif;
+  text-anchor: end;
 }

@@ -1,4 +1,4 @@
-import actions from '../actions/headerAction'
+import {wsResponseAction,wsOnMessageAction} from '../actions/socketActions'
 import {WS_CONNECT,WS_DISCONNECT,WS_ONMESSAGE,WS_ONSEND,WS_URL} from '../constants/appConstants'
 
 
@@ -10,7 +10,7 @@ const socketMiddleware = (function(){
     //Send a handshake, or authenticate with remote end
 
     //Tell the store we're connected
-    store.dispatch(actions.connected());
+    store.dispatch(wsResponseAction(evt.type));
   }
 
   const onClose = (ws,store) => evt => {
@@ -21,15 +21,8 @@ const socketMiddleware = (function(){
   const onMessage = (ws,store) => evt => {
     //Parse the JSON message received on the websocket
     var msg = JSON.parse(evt.data);
-    switch(msg.type) {
-      case WS_ONMESSAGE:
-        //Dispatch an action that adds the received message to our state
-        store.dispatch(actions.messageReceived(msg));
-        break;
-      default:
-        console.log("Received unknown message type: '" + msg.type + "'");
-        break;
-    }
+    store.dispatch(wsOnMessageAction(msg));
+    
   }
 
   return store => next => action => {
@@ -65,7 +58,7 @@ const socketMiddleware = (function(){
 
       //Send the 'SEND_MESSAGE' action down the websocket to the server
       case WS_ONSEND:
-        socket.send(JSON.stringify(action));
+        socket.send(JSON.stringify(action.data));
         break;
 
       //This action is irrelevant to us, pass it on to the next middleware
