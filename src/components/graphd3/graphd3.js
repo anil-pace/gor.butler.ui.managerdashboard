@@ -76,7 +76,6 @@ class Chart extends React.Component{
     });
 
     function update(data) {
-      console.log(data);
       data.forEach(function(d) {
         d.frequency = +d.frequency;
      });

@@ -53747,7 +53747,7 @@ function mapDispatchToProps(dispatch) {
 };
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(App);
 
-},{"./actions/headerAction":271,"./actions/socketActions":273,"./components/dropdown/dropdown":275,"./components/graphd3/graph_horizontal":276,"./components/graphd3/graphd3":277,"./components/header/header":278,"./components/health/health":279,"./components/health/healthTabs":280,"./components/tile1x/Tilex":282,"./components/tile2x/Tile2x":283,"./constants/appConstants":284,"./constants/initData.js":285,"./containers/orderStatsWidget":286,"./containers/performanceWidget":287,"./containers/tabs":288,"react":255,"react-dom":61,"react-redux":65}],271:[function(require,module,exports){
+},{"./actions/headerAction":271,"./actions/socketActions":274,"./components/dropdown/dropdown":276,"./components/graphd3/graph_horizontal":277,"./components/graphd3/graphd3":278,"./components/header/header":279,"./components/health/health":280,"./components/health/healthTabs":281,"./components/tile1x/Tilex":283,"./components/tile2x/Tile2x":284,"./constants/appConstants":285,"./constants/initData.js":286,"./containers/orderStatsWidget":287,"./containers/performanceWidget":288,"./containers/tabs":289,"react":255,"react-dom":61,"react-redux":65}],271:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -53814,7 +53814,7 @@ function getFetchData(type) {
   };
 }
 
-},{"../constants/appConstants.js":284,"isomorphic-fetch":51}],272:[function(require,module,exports){
+},{"../constants/appConstants.js":285,"isomorphic-fetch":51}],272:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -53881,7 +53881,24 @@ function authLoginData(params) {
   };
 }
 
-},{"../constants/appConstants":284,"../utilities/ajax":296}],273:[function(require,module,exports){
+},{"../constants/appConstants":285,"../utilities/ajax":298}],273:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.renderPerformanceWidget = renderPerformanceWidget;
+
+var _appConstants = require('../constants/appConstants');
+
+function renderPerformanceWidget(data) {
+	return {
+		type: _appConstants.RENDER_WIDGET,
+		data: data
+	};
+}
+
+},{"../constants/appConstants":285}],274:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -53929,7 +53946,7 @@ function setWsAction(params) {
 	};
 }
 
-},{"../constants/appConstants":284,"../constants/appConstants.js":284,"../middleware/socketMiddleware":290}],274:[function(require,module,exports){
+},{"../constants/appConstants":285,"../constants/appConstants.js":285,"../middleware/socketMiddleware":291}],275:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -53999,7 +54016,6 @@ var Login = function (_React$Component) {
         'method': 'POST',
         'contentType': 'application/json'
       };
-
       this.props.authLoginData(loginData);
     }
   }, {
@@ -54070,7 +54086,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Login);
 
-},{"../../actions/loginAction":272,"react":255,"react-dom":61,"react-redux":65}],275:[function(require,module,exports){
+},{"../../actions/loginAction":272,"react":255,"react-dom":61,"react-redux":65}],276:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -54104,7 +54120,7 @@ var Dropdown = function (_Component) {
     var _this = _possibleConstructorReturn(this, (Dropdown.__proto__ || Object.getPrototypeOf(Dropdown)).call(this, props));
 
     _this.state = {
-      selected: { value: 'one', label: 'PPS - pick performance' }
+      selected: { value: props.items[0].value, label: props.items[0].label }
     };
     _this._onSelect = _this._onSelect.bind(_this);
     return _this;
@@ -54113,20 +54129,18 @@ var Dropdown = function (_Component) {
   _createClass(Dropdown, [{
     key: '_onSelect',
     value: function _onSelect(option) {
-      console.log('You selected ', option.label);
+      console.log('You selected ', option.value);
       this.setState({ selected: option });
+      this.props.pf(option.value);
     }
   }, {
     key: 'render',
     value: function render() {
-      var options = [{ value: 'one', label: 'PPS - pick performance' }, { value: 'two', label: 'System health' }, { value: 'three', label: 'PPS - pick performance' }, { value: 'four', label: 'PPS - audit performance' }];
-
       var defaultOption = this.state.selected;
-
       return _react2.default.createElement(
         'div',
         { className: 'ddown' },
-        _react2.default.createElement(_reactDropdown2.default, { options: options, onChange: this._onSelect, value: defaultOption, placeholder: 'Select an option' })
+        _react2.default.createElement(_reactDropdown2.default, { options: this.props.items, onChange: this._onSelect, value: defaultOption, placeholder: 'Select an option' })
       );
     }
   }]);
@@ -54136,7 +54150,7 @@ var Dropdown = function (_Component) {
 
 exports.default = Dropdown;
 
-},{"react":255,"react-dropdown":62}],276:[function(require,module,exports){
+},{"react":255,"react-dropdown":62}],277:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -54280,7 +54294,7 @@ var ChartHorizontal = function (_React$Component) {
 exports.default = ChartHorizontal;
 //ReactDOM.render(React.createElement(Chart), document.getElementById('chart_dis'))
 
-},{"d3":3,"d3-tip":2,"react":255,"react-d3-library":60,"react-dom":61}],277:[function(require,module,exports){
+},{"d3":3,"d3-tip":2,"react":255,"react-d3-library":60,"react-dom":61}],278:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -54384,7 +54398,6 @@ var Chart = function (_React$Component) {
       });
 
       function update(data) {
-        console.log(data);
         data.forEach(function (d) {
           d.frequency = +d.frequency;
         });
@@ -54466,7 +54479,7 @@ var Chart = function (_React$Component) {
 exports.default = Chart;
 //ReactDOM.render(React.createElement(Chart), document.getElementById('chart_dis'))
 
-},{"d3":3,"d3-tip":2,"react":255,"react-d3-library":60,"react-dom":61}],278:[function(require,module,exports){
+},{"d3":3,"d3-tip":2,"react":255,"react-d3-library":60,"react-dom":61}],279:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -54619,7 +54632,7 @@ function mapStateToProps(state, ownProps) {
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(Header);
 
-},{"../../actions/headerAction":271,"react":255,"react-dom":61,"react-redux":65}],279:[function(require,module,exports){
+},{"../../actions/headerAction":271,"react":255,"react-dom":61,"react-redux":65}],280:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -54751,7 +54764,7 @@ var Health = function (_React$Component) {
 
 exports.default = Health;
 
-},{"react":255,"react-dom":61}],280:[function(require,module,exports){
+},{"react":255,"react-dom":61}],281:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -54808,7 +54821,7 @@ var HealthTabs = function (_React$Component) {
 ;
 exports.default = HealthTabs;
 
-},{"./health":279,"react":255,"react-dom":61}],281:[function(require,module,exports){
+},{"./health":280,"react":255,"react-dom":61}],282:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -54881,7 +54894,7 @@ var Tab = function (_React$Component) {
 
 exports.default = Tab;
 
-},{"react":255,"react-dom":61}],282:[function(require,module,exports){
+},{"react":255,"react-dom":61}],283:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -54960,7 +54973,7 @@ var Tilex = function (_React$Component) {
 
 exports.default = Tilex;
 
-},{"react":255,"react-dom":61}],283:[function(require,module,exports){
+},{"react":255,"react-dom":61}],284:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -55090,7 +55103,7 @@ var Tile2x = function (_React$Component) {
 
 exports.default = Tile2x;
 
-},{"react":255,"react-dom":61}],284:[function(require,module,exports){
+},{"react":255,"react-dom":61}],285:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -55117,7 +55130,10 @@ var REQUEST_HEADER = exports.REQUEST_HEADER = "REQUEST_HEADER";
 var RECIEVE_HEADER = exports.RECIEVE_HEADER = "RECIEVE_HEADER";
 var RECIEVE_ITEM_TO_STOCK = exports.RECIEVE_ITEM_TO_STOCK = "RECIEVE_ITEM_TO_STOCK";
 
-},{}],285:[function(require,module,exports){
+/*Constants for performance widget*/
+var RENDER_WIDGET = exports.RENDER_WIDGET = "RENDER_WIDGET";
+
+},{}],286:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -55188,7 +55204,7 @@ var wsInitData = exports.wsInitData = {
 	}]
 };
 
-},{}],286:[function(require,module,exports){
+},{}],287:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -55237,13 +55253,15 @@ var OrderStatsWidget = function (_React$Component) {
 	_createClass(OrderStatsWidget, [{
 		key: 'render',
 		value: function render() {
+
+			var item = [{ value: 'one', label: 'PPS - pick performance' }, { value: 'three', label: 'PPS - pick performance' }, { value: 'four', label: 'PPS - audit performance' }];
 			return _react2.default.createElement(
 				'div',
 				{ className: 'gorOrderStatsWidget' },
 				_react2.default.createElement(
 					'div',
 					{ className: 'gorDrop' },
-					_react2.default.createElement(_dropdown2.default, null),
+					_react2.default.createElement(_dropdown2.default, { items: item }),
 					_react2.default.createElement(
 						'div',
 						{ id: 'chart_att' },
@@ -55261,7 +55279,7 @@ var OrderStatsWidget = function (_React$Component) {
 
 exports.default = OrderStatsWidget;
 
-},{"../components/dropdown/dropdown.js":275,"../components/graphd3/graph_horizontal":276,"../components/graphd3/graphd3":277,"react":255,"react-dom":61}],287:[function(require,module,exports){
+},{"../components/dropdown/dropdown.js":276,"../components/graphd3/graph_horizontal":277,"../components/graphd3/graphd3":278,"react":255,"react-dom":61}],288:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -55290,6 +55308,10 @@ var _graph_horizontal = require('../components/graphd3/graph_horizontal');
 
 var _graph_horizontal2 = _interopRequireDefault(_graph_horizontal);
 
+var _reactRedux = require('react-redux');
+
+var _performanceWidgetActions = require('../actions/performanceWidgetActions');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -55297,6 +55319,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var renderState = "RENDER_SYSTEM_HEALTH";
 
 var PerformanceWidget = function (_React$Component) {
 	_inherits(PerformanceWidget, _React$Component);
@@ -55308,22 +55332,47 @@ var PerformanceWidget = function (_React$Component) {
 	}
 
 	_createClass(PerformanceWidget, [{
+		key: 'componentWillReceiveProps',
+		value: function componentWillReceiveProps(nextProps) {
+			renderState = nextProps.widget;
+		}
+	}, {
 		key: 'render',
 		value: function render() {
-			return _react2.default.createElement(
-				'div',
-				{ className: 'gorPerformanceWidget' },
-				_react2.default.createElement(
+
+			var temp = "health";
+			var item = [{ value: 'RENDER_SYSTEM_HEALTH', label: 'System Health' }, { value: 'RENDER_SYSTEM_PERFORMANCE', label: 'System Performance' }];
+			if (renderState === "RENDER_SYSTEM_HEALTH") {
+				return _react2.default.createElement(
 					'div',
-					{ className: 'gorDrop' },
-					_react2.default.createElement(_dropdown2.default, null)
-				),
-				_react2.default.createElement(
+					{ className: 'gorPerformanceWidget' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'gorDrop' },
+						_react2.default.createElement(_dropdown2.default, { pf: this.props.renderPerformanceWidget, items: item })
+					),
+					_react2.default.createElement(
+						'div',
+						{ id: 'performanceGraph' },
+						_react2.default.createElement(_healthTabs2.default, null)
+					)
+				);
+			} else if (renderState === "RENDER_SYSTEM_PERFORMANCE") {
+				return _react2.default.createElement(
 					'div',
-					{ id: 'performanceGraph' },
-					_react2.default.createElement(_graph_horizontal2.default, null)
-				)
-			);
+					{ className: 'gorPerformanceWidget' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'gorDrop' },
+						_react2.default.createElement(_dropdown2.default, { pf: this.props.renderPerformanceWidget, items: item })
+					),
+					_react2.default.createElement(
+						'div',
+						{ id: 'performanceGraph' },
+						_react2.default.createElement(_graph_horizontal2.default, null)
+					)
+				);
+			}
 		}
 	}]);
 
@@ -55332,9 +55381,25 @@ var PerformanceWidget = function (_React$Component) {
 
 ;
 
-exports.default = PerformanceWidget;
+function mapStateToProps(state, ownProps) {
 
-},{"../components/dropdown/dropdown.js":275,"../components/graphd3/graph_horizontal":276,"../components/health/healthTabs.js":280,"react":255,"react-dom":61}],288:[function(require,module,exports){
+	console.log(state);
+	return {
+		widget: state.performanceWidget.widget || {}
+	};
+}
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	return {
+		renderPerformanceWidget: function renderPerformanceWidget(data) {
+			dispatch((0, _performanceWidgetActions.renderPerformanceWidget)(data));
+		}
+	};
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(PerformanceWidget);
+
+},{"../actions/performanceWidgetActions":273,"../components/dropdown/dropdown.js":276,"../components/graphd3/graph_horizontal":277,"../components/health/healthTabs.js":281,"react":255,"react-dom":61,"react-redux":65}],289:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -55394,7 +55459,7 @@ var Tabs = function (_React$Component) {
 
 exports.default = Tabs;
 
-},{"../components/tabs/tab":281,"react":255,"react-dom":61}],289:[function(require,module,exports){
+},{"../components/tabs/tab":282,"react":255,"react-dom":61}],290:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -55440,7 +55505,7 @@ _reactDom2.default.render(_react2.default.createElement(
 	)
 ), document.getElementById('container'));
 
-},{"./App":270,"./components/Login/login":274,"./middleware/socketMiddleware":290,"./store":295,"react":255,"react-dom":61,"react-redux":65,"react-router":104}],290:[function(require,module,exports){
+},{"./App":270,"./components/Login/login":275,"./middleware/socketMiddleware":291,"./store":297,"react":255,"react-dom":61,"react-redux":65,"react-router":104}],291:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -55527,7 +55592,7 @@ var socketMiddleware = function () {
 
 exports.default = socketMiddleware;
 
-},{"../actions/socketActions":273,"../constants/appConstants":284}],291:[function(require,module,exports){
+},{"../actions/socketActions":274,"../constants/appConstants":285}],292:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -55544,13 +55609,15 @@ var _socketReducer = require('./reducers/socketReducer');
 
 var _reactRouterRedux = require('react-router-redux');
 
+var _performanceWidgetReducer = require('./reducers/performanceWidgetReducer');
+
 var rootReducer = (0, _redux.combineReducers)({
-  getData: _headerReducer.getData, authLogin: _loginReducer.authLogin, routing: _reactRouterRedux.routerReducer, recieveSocketActions: _socketReducer.recieveSocketActions
+  getData: _headerReducer.getData, authLogin: _loginReducer.authLogin, routing: _reactRouterRedux.routerReducer, recieveSocketActions: _socketReducer.recieveSocketActions, performanceWidget: _performanceWidgetReducer.performanceWidget
 });
 
 exports.default = rootReducer;
 
-},{"./reducers/headerReducer":292,"./reducers/loginReducer":293,"./reducers/socketReducer":294,"react-router-redux":71,"redux":262}],292:[function(require,module,exports){
+},{"./reducers/headerReducer":293,"./reducers/loginReducer":294,"./reducers/performanceWidgetReducer":295,"./reducers/socketReducer":296,"react-router-redux":71,"redux":262}],293:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -55627,7 +55694,7 @@ function getData() {
   }
 }
 
-},{"../actions/headerAction":271}],293:[function(require,module,exports){
+},{"../actions/headerAction":271}],294:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -55667,7 +55734,34 @@ function authLogin() {
   }
 }
 
-},{"../constants/appConstants":284}],294:[function(require,module,exports){
+},{"../constants/appConstants":285}],295:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.performanceWidget = performanceWidget;
+
+var _performanceWidgetActions = require("../actions/performanceWidgetActions");
+
+function performanceWidget() {
+	var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	var action = arguments[1];
+
+	//console.log(action);
+	switch (action.type) {
+
+		case "RENDER_WIDGET":
+			return Object.assign({}, state, {
+				"widget": action.data
+			});
+
+		default:
+			return state;
+	}
+}
+
+},{"../actions/performanceWidgetActions":273}],296:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -55722,7 +55816,7 @@ function recieveSocketActions() {
   }
 }
 
-},{"../constants/appConstants":284}],295:[function(require,module,exports){
+},{"../constants/appConstants":285}],297:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -55750,7 +55844,7 @@ function configureStore(preloadedState) {
   return (0, _redux.createStore)(_reducers2.default, preloadedState, (0, _redux.applyMiddleware)(_reduxThunk2.default, _socketMiddleware2.default));
 }
 
-},{"./middleware/socketMiddleware":290,"./reducers":291,"redux":262,"redux-thunk":256}],296:[function(require,module,exports){
+},{"./middleware/socketMiddleware":291,"./reducers":292,"redux":262,"redux-thunk":256}],298:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -55784,4 +55878,4 @@ var utils = {
 
 exports.utils = utils;
 
-},{}]},{},[289]);
+},{}]},{},[290]);
