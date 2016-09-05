@@ -32,6 +32,16 @@ class Header extends React.Component{
 				<div className="blockSystem">
 					<div className="upperText">Butler Management System</div>
 					<div className="subText">Start time:{this.props.user.start}</div>
+					<div className="upperText">
+					{headData.isFetching &&
+		            <span>Fetching...</span>
+		          	}
+		          	{!headData.isFetching &&
+		            <span>{headData.data}</span>
+		          	}
+		          	
+					</div>
+					<div className="subText">Start time:09:00:14</div>
 				</div>
 			</div>
 			<div className="blockLeft">

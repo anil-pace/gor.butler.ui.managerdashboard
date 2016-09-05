@@ -41,6 +41,9 @@
   "homepage": "https://bitbucket.org/arsh_greyOrange/gor.butler.ui.managerdashboard#readme",
   "devDependencies": {
     "babel": "^6.5.2",
+    "d3": "^3.5.6",
+    "d3-tip": "^0.7.1",
+    "react-d3-library": "^1.1.7",
     "babel-cli": "^6.11.4",
     "babel-jest": "^13.2.2",
     "babel-preset-airbnb": "^2.0.0",
@@ -67,6 +70,7 @@
     "react-redux": "^4.4.5",
     "react-router": "^2.7.0",
     "react-router-redux": "^4.0.5",
+    "react-simple-dropdown": "^1.1.4",
     "redux": "^3.5.2",
     "redux-router": "^2.1.2",
     "redux-thunk": "^2.1.0"
@@ -76,9 +80,17 @@
     "react-dom": "^15.2.0",
     "istanbul": "^0.3.0",
     "jasmine": "^2.4.1",
+    "d3-tip": "^0.7.1",
+    "istanbul": "^0.3.0",
+    "jasmine": "^2.4.1",
+    "react": "^15.3.1",
+    "react-dom": "^15.2.0",
+    "react-dropdown": "^1.1.0",
+    "react-faux-dom": "^3.0.0",
     "react-intl": "^2.1.4",
     "react-intl-redux": "^0.1.0",
     "react-redux": "^4.4.5",
+    "react-select": "^1.0.0-beta14",
     "xmldom": "^0.1.22"
   },
   "jest": {

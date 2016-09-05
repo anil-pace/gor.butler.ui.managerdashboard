@@ -6,17 +6,17 @@
 .gorHeader {
 	&.head{
 		overflow: hidden;
-    	padding: 5px 0;
+    	padding: calculateRem(5px) 0;
     	background:#fff;
 	}
 	.dropbtn{
 		background-color: #fff;
 		color: #4d5055;
 		padding: 0 1em;
-		font-size: 14px;
+		font-size: calculateRem(14px);
 		border: none;
 		cursor: pointer;
-		width :188px; 
+		width :calculateRem(188px); 
 		font-family: $gor-font-family;
 		&:hover{
 			background-color: #efefef;
@@ -35,9 +35,9 @@
 	.dropdown-content {
 			font-family: $gor-font-family;
 			background-color: white;
-			font-size: 14;
+			font-size: calculateRem(14px);
 			color: #4d5055;
-			width :223px; 
+			width :calculateRem(223px); 
 			display: none;
 			position: absolute;
 			right: 0;
@@ -46,7 +46,7 @@
 			a{
 				color: #666666;
 				background-color: white;
-				padding: 12px 16px;
+				padding: calculateRem(12px) calculateRem(16px);
 				font-size: .7em;
 				text-decoration: none;
 				padding: 1em 3em;
@@ -66,11 +66,11 @@
 			display: inline-block; 
 			overflow: hidden;
     		vertical-align: middle;
-    		border-right: 1px solid #F2F2F2;
+    		border-right: calculateRem(1px) solid #F2F2F2;
 		}
 		.upperText {
 			font-family: $gor-font-family;
-			font-size: 18px;
+			font-size: calculateRem(18px);
 			color: #4d5055;
 			font-weight: bold;
 			line-height: 1;  
@@ -79,19 +79,19 @@
 		}
 		.subText {
 			font-family: $gor-font-family;
-			font-size: 12px;
+			font-size: calculateRem(12px);
 			font-weight: normal;
 			color: #4d5055;
 		}
 		.subTextClient {
 				font-family: $gor-font-family;
-				font-size: 12px;
+				font-size: calculateRem(12px);
 				font-weight: normal;
 				color: #4d5055;
-				line-height: 0px; 
+				line-height: calculateRem(0px); 
 				text-align: left;
-				padding-right: 20px;
-				padding-top: 9px;
+				padding-right: calculateRem(20px);
+				padding-top: calculateRem(9px);
 
 			}
 
@@ -102,14 +102,14 @@
 			.mainBlock {
 				display: inline-block;
 				overflow: hidden;
-				padding: 0px 5px;
+				padding: calculateRem(0px) calculateRem(5px);
 				
 			}
 
 			.blockSystem {
 				display: inline-block;
 				overflow: hidden;
-				padding-left:5px;
+				padding-left:calculateRem(5px);
 				vertical-align: middle;
 				
 			}
@@ -119,9 +119,9 @@
 				float:right;
 			}
 			.upperTextClient {
-				padding:10px 20px 6px 0px;
+				padding:10px calculateRem(20px) calculateRem(6px) calculateRem(0px);
 				font-family: $gor-font-family;
-				font-size: 14px;
+				font-size: calculateRem(14px);
 				font-weight: 600;
 				line-height: 0;  
 				display: inline-block;
@@ -130,12 +130,12 @@
 
 			.horizontal-line{
 			display: inline-block;
-			height: 30px;
+			height: calculateRem(30px);
 			border-left: 1px solid #f7f7f7;
 			vertical-align: sub;
 			}
 			.truncate {
-				width: 110px;
+				width: calculateRem(110px);
 				white-space: nowrap;
 				overflow: hidden;
 				text-overflow: ellipsis;
