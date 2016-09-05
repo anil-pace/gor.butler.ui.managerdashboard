@@ -12,7 +12,6 @@ export default function configureStore(preloadedState) {
     applyMiddleware(
       ajaxMiddleware,
       socketMiddleware
-
     )
   )
 }

@@ -17,8 +17,8 @@ class Login extends React.Component{
      */
         
       if (nextProps.auth_token) {
-      	alert('You are logged in');
-        //   this.props.history.push("md");
+      	console.log('You are logged in');
+        this.props.history.push("md");
       }
     }
     /**

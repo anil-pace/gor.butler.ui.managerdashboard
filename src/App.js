@@ -110,8 +110,8 @@ function mapStateToProps(state,ownProps) {
  	authToken : state.authLogin.auth_token,
  	userName : state.authLogin.username,
  	socketStatus: state.recieveSocketActions.socketConnected,
- 	socketAuthorized:state.recieveSocketActions.socketAuthorized,
- 	initDataSent:state.recieveSocketActions.initDataSent
+ 	socketAuthorized: state.recieveSocketActions.socketAuthorized,
+ 	initDataSent: state.recieveSocketActions.initDataSent
  }
 }
 /**

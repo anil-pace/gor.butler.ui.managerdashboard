@@ -13,7 +13,8 @@ export  function authLogin(state={},action){
 	    //window.localStore.setItem('auth_token',action.data.auth_token)
 
       return Object.assign({}, state, {
-        	"auth_token": action.data.auth_token
+        	"auth_token": action.data.auth_token,
+          "username":"admin"
       })
     case LOGOUT:
       
