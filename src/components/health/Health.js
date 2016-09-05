@@ -19,19 +19,19 @@ class Health extends React.Component{
 		<div className="horizontal-line"> </div>
 		<div className="block">
 			<div className="block parameters">
-				<div className="block paramPositionFront">
+				<div className="block paramPositionFront ">
 					<div className="block stoppedState" >
 						<span>3</span> 
 					</div>
 					<div className="status">Stopped</div>
 				</div>
-				<div className="block paramPositionMiddle">
+				<div className="block paramPositionMiddle ">
 					<div className="block onState" >
 						<span>12</span>
 					</div>
 					<div className="status">On</div>
 				</div>
-				<div className="block paramPositionBack">
+				<div className="block paramPositionBack ">
 					<div className="block errorState" >
 						<span>1</span>
 					</div>

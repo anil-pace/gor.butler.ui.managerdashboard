@@ -2,17 +2,21 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import HealthTabs from './components/health/healthTabs';
 import Health from './components/health/health';
-import Tabs from './components/tabs/tabs';
+import Tabs from './containers/tabs';
 import Header from './components/header/header';
 import Tilex from './components/tile1x/Tilex';
 import Tile2x from './components/tile2x/Tile2x';
 import {setWsAction } from './actions/socketActions';
-import OrderStatsWidget from './components/widgetContainer/orderStatsWidget'
-import PerformanceWidget from './components/widgetContainer/performanceWidget'
-import {  getFetchData } from './actions/headerAction'
 import { WS_CONNECT,WS_ONSEND } from './constants/appConstants'
-import { connect } from 'react-redux';
 import { wsInitData } from './constants/initData.js'
+import Dropdown from './components/dropdown/dropdown';
+import OrderStatsWidget from './containers/orderStatsWidget'
+import PerformanceWidget from './containers/performanceWidget'
+import { REQUEST_HEADER, getFetchData } from './actions/headerAction'
+import { connect } from 'react-redux';
+import Chart from './components/graphd3/graphd3';
+import ChartHorizontal from './components/graphd3/graph_horizontal';
+
 
 
 
@@ -80,8 +84,15 @@ class App extends React.Component{
 						<Tile2x items={item2}/>
 					</div>
 				</div>
+				<div>
 				<OrderStatsWidget/>
 				<PerformanceWidget/>
+				
+
+
+				</div>
+
+
 				</div>
 				{this.props.children}
 			</div>
