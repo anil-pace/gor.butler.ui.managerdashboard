@@ -46,14 +46,7 @@ class Chart extends React.Component{
     .ticks(10);
     
 
-    // const tip = d3.tip()
-    // .attr('class', 'd3-tip')
-    // .offset([50, 90])
-    // .html(function(d) {
-    //   var time=d.letter.split(" ");
-    //   return "<div> Time:"+" " + time[0]+" - "+time[1] +"<div/><div> 27 Jul,2016</div> <div style='color:#ffffff'> Fulfilled:  "+" " + d.frequency + "</div>";
-    // })
-
+    
     var node = document.createElement('div');
 
     var svg = d3.select(node).append('svg')
@@ -61,7 +54,18 @@ class Chart extends React.Component{
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+      d3.tip=tip;
     
+  // const tip = d3.tip()
+  //   .attr('class', 'd3-tip')
+  //   .offset([50, 90])
+  //   .html(function(d) {
+  //     var time=d.letter.split(" ");
+  //     return "<div> Time:"+" " + time[0]+" - "+time[1] +"<div/><div> 27 Jul,2016</div> <div style='color:#ffffff'> Fulfilled:  "+" " + d.frequency + "</div>";
+  //   })
+
+
       //svg.call(tip);
     
     d3.json("http://www.mocky.io/v2/57c921ea120000ee1fe76b04", function(error,data) {
@@ -124,8 +128,8 @@ class Chart extends React.Component{
       .attr("y", function(d) { return y(d.frequency); })
       .attr("height", 0)
       .attr("height", function(d) { return height - y(d.frequency); })
-      // .on('mouseover', tip.show)
-      // .on('mouseout', tip.hide)
+       // .on('mouseover', tip.show)
+       // .on('mouseout', tip.hide)
 
       var txt = svg.selectAll(".bar");
 
