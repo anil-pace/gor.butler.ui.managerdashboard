@@ -53550,14 +53550,6 @@ var _header = require('./components/header/header');
 
 var _header2 = _interopRequireDefault(_header);
 
-var _Tilex = require('./components/tile1x/Tilex');
-
-var _Tilex2 = _interopRequireDefault(_Tilex);
-
-var _Tile2x = require('./components/tile2x/Tile2x');
-
-var _Tile2x2 = _interopRequireDefault(_Tile2x);
-
 var _socketActions = require('./actions/socketActions');
 
 var _appConstants = require('./constants/appConstants');
@@ -53575,6 +53567,18 @@ var _orderStatsWidget2 = _interopRequireDefault(_orderStatsWidget);
 var _performanceWidget = require('./containers/performanceWidget');
 
 var _performanceWidget2 = _interopRequireDefault(_performanceWidget);
+
+var _auditStatusWidget = require('./containers/auditStatusWidget');
+
+var _auditStatusWidget2 = _interopRequireDefault(_auditStatusWidget);
+
+var _putStatusWidget = require('./containers/putStatusWidget');
+
+var _putStatusWidget2 = _interopRequireDefault(_putStatusWidget);
+
+var _pickStatusWidget = require('./containers/pickStatusWidget');
+
+var _pickStatusWidget2 = _interopRequireDefault(_pickStatusWidget);
 
 var _headerAction = require('./actions/headerAction');
 
@@ -53666,13 +53670,13 @@ var App = function (_React$Component) {
             _react2.default.createElement(
               'div',
               { className: 'col span_2_of_4' },
-              _react2.default.createElement(_Tilex2.default, { items: item1 }),
-              _react2.default.createElement(_Tilex2.default, { items: item1 })
+              _react2.default.createElement(_putStatusWidget2.default, { items: item1 }),
+              _react2.default.createElement(_auditStatusWidget2.default, { items: item1 })
             ),
             _react2.default.createElement(
               'div',
               { className: 'col span_2_of_4 gorNoML' },
-              _react2.default.createElement(_Tile2x2.default, { items: item2 })
+              _react2.default.createElement(_pickStatusWidget2.default, null)
             )
           ),
           _react2.default.createElement(
@@ -53723,7 +53727,7 @@ function mapDispatchToProps(dispatch) {
 };
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(App);
 
-},{"./actions/headerAction":270,"./actions/socketActions":272,"./components/dropdown/dropdown":274,"./components/graphd3/graph_horizontal":275,"./components/graphd3/graphd3":276,"./components/header/header":277,"./components/health/health":278,"./components/health/healthTabs":279,"./components/tile1x/Tilex":281,"./components/tile2x/Tile2x":282,"./constants/appConstants":283,"./constants/initData.js":284,"./containers/orderStatsWidget":285,"./containers/performanceWidget":286,"./containers/tabs":287,"react":255,"react-dom":61,"react-redux":65}],270:[function(require,module,exports){
+},{"./actions/headerAction":270,"./actions/socketActions":272,"./components/dropdown/dropdown":274,"./components/graphd3/graph_horizontal":275,"./components/graphd3/graphd3":276,"./components/header/header":277,"./components/health/health":278,"./components/health/healthTabs":279,"./constants/appConstants":283,"./constants/initData.js":284,"./containers/auditStatusWidget":285,"./containers/orderStatsWidget":286,"./containers/performanceWidget":287,"./containers/pickStatusWidget":288,"./containers/putStatusWidget":289,"./containers/tabs":290,"react":255,"react-dom":61,"react-redux":65}],270:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -53859,7 +53863,7 @@ function authLoginData(params) {
   };
 }
 
-},{"../constants/appConstants":283,"../utilities/ajax":296}],272:[function(require,module,exports){
+},{"../constants/appConstants":283,"../utilities/ajax":299}],272:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -53900,7 +53904,7 @@ function setWsAction(params) {
 	};
 }
 
-},{"../constants/appConstants":283,"../constants/appConstants.js":283,"../middleware/socketMiddleware":290}],273:[function(require,module,exports){
+},{"../constants/appConstants":283,"../constants/appConstants.js":283,"../middleware/socketMiddleware":293}],273:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -54486,12 +54490,12 @@ var Header = function (_React$Component) {
 		key: 'componentWillMount',
 		value: function componentWillMount() {
 			// this.setState({"asdf":"asdf"});
-			console.log(this.props);
+			//console.log(this.props)
 		}
 	}, {
 		key: 'componentWillReceiveProps',
 		value: function componentWillReceiveProps(nextProps) {
-			console.log(nextProps);
+			//console.log(nextProps);
 		}
 	}, {
 		key: 'render',
@@ -54588,7 +54592,7 @@ var Header = function (_React$Component) {
 
 function mapStateToProps(state, ownProps) {
 	return {
-		"ppsData": state.recieveSocketActions.ppsData || {}
+		//	"ordersData":state.recieveSocketActions.ordersData || {}
 	};
 }
 
@@ -54984,12 +54988,12 @@ var Tile2x = function (_React$Component) {
 						_react2.default.createElement(
 							'span',
 							{ className: 'gorHeading' },
-							this.props.items.heading1
+							'Orders to fulfill'
 						),
 						_react2.default.createElement(
 							'p',
 							{ className: 'gorHeading-value' },
-							this.props.items.value1
+							this.props.items.count_pending
 						),
 						_react2.default.createElement(
 							'p',
@@ -54998,7 +55002,7 @@ var Tile2x = function (_React$Component) {
 								'span',
 								null,
 								_react2.default.createElement('img', { src: '../src/assets/images/pick.png', width: 20, height: 20 }),
-								this.props.items.status1
+								this.props.items.status
 							)
 						)
 					),
@@ -55008,7 +55012,7 @@ var Tile2x = function (_React$Component) {
 						_react2.default.createElement(
 							'span',
 							null,
-							this.props.items.low1
+							this.props.items.avg
 						)
 					)
 				),
@@ -55024,12 +55028,12 @@ var Tile2x = function (_React$Component) {
 							_react2.default.createElement(
 								'span',
 								{ className: 'gorHeading gorBreach' },
-								this.props.items.heading2
+								'Remaining time'
 							),
 							_react2.default.createElement(
 								'p',
 								{ className: 'gorHeading-value gorRisk' },
-								this.props.items.value2
+								this.props.items.eta
 							),
 							_react2.default.createElement(
 								'p',
@@ -55038,7 +55042,7 @@ var Tile2x = function (_React$Component) {
 									'span',
 									null,
 									_react2.default.createElement('img', { src: '../src/assets/images/pick.png', width: 20, height: 20 }),
-									this.props.items.status2
+									this.props.items.time_current
 								)
 							)
 						),
@@ -55172,6 +55176,60 @@ var wsInitData = exports.wsInitData = {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _Tilex = require('../components/tile1x/Tilex');
+
+var _Tilex2 = _interopRequireDefault(_Tilex);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AuditStatusWidget = function (_React$Component) {
+  _inherits(AuditStatusWidget, _React$Component);
+
+  /**
+   * Called once before rendering of component,used to displatch fetch action
+   * @return {[type]}
+   */
+  function AuditStatusWidget(props) {
+    _classCallCheck(this, AuditStatusWidget);
+
+    return _possibleConstructorReturn(this, (AuditStatusWidget.__proto__ || Object.getPrototypeOf(AuditStatusWidget)).call(this, props));
+  }
+
+  _createClass(AuditStatusWidget, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(_Tilex2.default, { items: this.props.items });
+    }
+  }]);
+
+  return AuditStatusWidget;
+}(_react2.default.Component);
+
+exports.default = AuditStatusWidget;
+
+},{"../components/tile1x/Tilex":281,"react":255,"react-dom":61}],286:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
@@ -55241,7 +55299,7 @@ var OrderStatsWidget = function (_React$Component) {
 
 exports.default = OrderStatsWidget;
 
-},{"../components/dropdown/dropdown.js":274,"../components/graphd3/graph_horizontal":275,"../components/graphd3/graphd3":276,"react":255,"react-dom":61}],286:[function(require,module,exports){
+},{"../components/dropdown/dropdown.js":274,"../components/graphd3/graph_horizontal":275,"../components/graphd3/graphd3":276,"react":255,"react-dom":61}],287:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -55314,7 +55372,125 @@ var PerformanceWidget = function (_React$Component) {
 
 exports.default = PerformanceWidget;
 
-},{"../components/dropdown/dropdown.js":274,"../components/graphd3/graph_horizontal":275,"../components/health/healthTabs.js":279,"react":255,"react-dom":61}],287:[function(require,module,exports){
+},{"../components/dropdown/dropdown.js":274,"../components/graphd3/graph_horizontal":275,"../components/health/healthTabs.js":279,"react":255,"react-dom":61}],288:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _Tile2x = require('../components/tile2x/Tile2x');
+
+var _Tile2x2 = _interopRequireDefault(_Tile2x);
+
+var _reactRedux = require('react-redux');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var PickStatusWidget = function (_React$Component) {
+  _inherits(PickStatusWidget, _React$Component);
+
+  /**
+   * Called once before rendering of component,used to displatch fetch action
+   * @return {[type]}
+   */
+  function PickStatusWidget(props) {
+    _classCallCheck(this, PickStatusWidget);
+
+    var _this = _possibleConstructorReturn(this, (PickStatusWidget.__proto__ || Object.getPrototypeOf(PickStatusWidget)).call(this, props));
+
+    console.log(_this.props.pickData);
+    return _this;
+  }
+
+  _createClass(PickStatusWidget, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(_Tile2x2.default, { items: this.props.pickData });
+    }
+  }]);
+
+  return PickStatusWidget;
+}(_react2.default.Component);
+
+function mapStateToProps(state, ownProps) {
+  return {
+    "pickData": state.recieveSocketActions.pickData || {}
+  };
+}
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(PickStatusWidget);
+
+},{"../components/tile2x/Tile2x":282,"react":255,"react-dom":61,"react-redux":65}],289:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _Tilex = require('../components/tile1x/Tilex');
+
+var _Tilex2 = _interopRequireDefault(_Tilex);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var PutStatusWidget = function (_React$Component) {
+  _inherits(PutStatusWidget, _React$Component);
+
+  /**
+   * Called once before rendering of component,used to displatch fetch action
+   * @return {[type]}
+   */
+  function PutStatusWidget(props) {
+    _classCallCheck(this, PutStatusWidget);
+
+    return _possibleConstructorReturn(this, (PutStatusWidget.__proto__ || Object.getPrototypeOf(PutStatusWidget)).call(this, props));
+  }
+
+  _createClass(PutStatusWidget, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(_Tilex2.default, { items: this.props.items });
+    }
+  }]);
+
+  return PutStatusWidget;
+}(_react2.default.Component);
+
+exports.default = PutStatusWidget;
+
+},{"../components/tile1x/Tilex":281,"react":255,"react-dom":61}],290:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -55374,7 +55550,7 @@ var Tabs = function (_React$Component) {
 
 exports.default = Tabs;
 
-},{"../components/tabs/tab":280,"react":255,"react-dom":61}],288:[function(require,module,exports){
+},{"../components/tabs/tab":280,"react":255,"react-dom":61}],291:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -55416,7 +55592,7 @@ _reactDom2.default.render(_react2.default.createElement(
 	)
 ), document.getElementById('container'));
 
-},{"./App":269,"./components/Login/login":273,"./store":295,"react":255,"react-dom":61,"react-redux":65,"react-router":104}],289:[function(require,module,exports){
+},{"./App":269,"./components/Login/login":273,"./store":298,"react":255,"react-dom":61,"react-redux":65,"react-router":104}],292:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -55472,7 +55648,7 @@ var ajaxMiddleware = function () {
 
 exports.default = ajaxMiddleware;
 
-},{"../actions/loginAction":271,"../constants/appConstants":283}],290:[function(require,module,exports){
+},{"../actions/loginAction":271,"../constants/appConstants":283}],293:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -55559,7 +55735,7 @@ var socketMiddleware = function () {
 
 exports.default = socketMiddleware;
 
-},{"../actions/socketActions":272,"../constants/appConstants":283}],291:[function(require,module,exports){
+},{"../actions/socketActions":272,"../constants/appConstants":283}],294:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -55582,7 +55758,7 @@ var rootReducer = (0, _redux.combineReducers)({
 
 exports.default = rootReducer;
 
-},{"./reducers/headerReducer":292,"./reducers/loginReducer":293,"./reducers/socketReducer":294,"react-router-redux":71,"redux":261}],292:[function(require,module,exports){
+},{"./reducers/headerReducer":295,"./reducers/loginReducer":296,"./reducers/socketReducer":297,"react-router-redux":71,"redux":261}],295:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -55659,7 +55835,7 @@ function getData() {
   }
 }
 
-},{"../actions/headerAction":270}],293:[function(require,module,exports){
+},{"../actions/headerAction":270}],296:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -55700,11 +55876,11 @@ function authLogin() {
   }
 }
 
-},{"../constants/appConstants":283}],294:[function(require,module,exports){
+},{"../constants/appConstants":283}],297:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 exports.recieveSocketActions = recieveSocketActions;
 
@@ -55716,46 +55892,169 @@ var _appConstants = require("../constants/appConstants");
  * @return {[Object] updated state}
  */
 function recieveSocketActions() {
-  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-  var action = arguments[1];
+    var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+    var action = arguments[1];
 
-  switch (action.type) {
+    switch (action.type) {
 
-    case _appConstants.WS_CONNECTED:
-      return Object.assign({}, state, {
-        "socketConnected": true
+        case _appConstants.WS_CONNECTED:
+            return Object.assign({}, state, {
+                "socketConnected": true
 
-      });
-    case _appConstants.WS_ONMESSAGE:
-      if (action.data.resource_type) {
-        if (action.data.resource_type === "PPS") {
-          return Object.assign({}, state, {
+            });
+        case _appConstants.WS_ONMESSAGE:
+            if (action.data.resource_type) {
+                if (action.data.resource_type === "pps") {
+                    var pick = 0,
+                        put = 0,
+                        audit = 0,
+                        inactive = 0;
+                    if (action.data.hasOwnProperty('data')) {
+                        console.log('Data found');
+                    }
+                    action.data.data.map(function (key, index) {
+                        if (key.pps_mode == 'pick') {
+                            pick = pick + 1;
+                        } else if (key.pps_mode == 'put') {
+                            put = put + 1;
+                        } else if (key.pps_mode == 'audit') {
+                            audit = audit + 1;
+                        }
+                        if (key.pps_active == false) {
+                            inactive = inactive + 1;
+                        }
+                        var key = {
+                            "id": key.pps_id,
+                            "mode": key.pps_mode
+                        };
+                    });
+                    var ppsKey = {
+                        "pick": pick,
+                        "put": put,
+                        "audit": audit,
+                        "inactive": inactive
+                    };
+                    console.log(ppsKey);
+                    return Object.assign({}, state, {
+                        "ppsData": ppsKey
+                    });
+                } else if (action.data.resource_type === "butlers") {
+                    var pick_or_put = 0,
+                        audit = 0,
+                        idle = 0,
+                        dead = 0,
+                        charging = 0;
+                    action.data.data.map(function (key, index) {
 
-            "ppsData": action.data
-          });
-        } else {
-          return Object.assign({}, state, {
-            "socketConnected": true,
-            "initDataSent": true,
-            "socketData": action.data
-          });
-        }
-      }
-      //need to change this hard coded value
-      else if (action.data.message === "Sucessfully logged in") {
-          return Object.assign({}, state, {
-            "socketAuthorized": true,
-            "initDataSent": false
-          });
-        }
-      break;
+                        if (key.status == 'dead' || key.status == 'initializing') {
+                            dead = dead + 1;
+                        } else {
+                            if (key.tasktype == 'null' || key.tasktype == 'movetask') {
+                                idle = idle + 1;
+                            } else if (key.tasktype == 'picktask') {
+                                pick_or_put = pick_or_put + 1;
+                            } else if (key.tasktype == 'audittask') {
+                                audit = audit + 1;
+                            } else if (key.tasktype == 'chargetask') {
+                                charging = charging + 1;
+                            }
+                        }
+                    });
+                    var botKey = {
+                        "Pick / Put": pick_or_put,
+                        "Audit": audit,
+                        "Charging": charging,
+                        "Inactive": dead,
+                        "Idle": idle
+                    };
+                    console.log("Butlers Data");
+                    console.log(botKey);
+                    return Object.assign({}, state, {
+                        "butlersData": botKey
+                    });
+                } else if (action.data.resource_type === "chargers") {
+                    var connected = 0,
+                        disconnected = 0;
+                    action.data.data.map(function (key, index) {
+                        if (key.charger_status == 'disconnected') {
+                            disconnected = disconnected + 1;
+                        } else if (key.charger_status == 'connected') {
+                            connected = connected + 1;
+                        }
+                    });
+                    var chargersKey = {
+                        "Connected": connected,
+                        "Disconnected": disconnected
+                    };
+                    console.log("Chargers Data");
+                    console.log(chargersKey);
+                    return Object.assign({}, state, {
+                        "chargersData": chargersKey
+                    });
+                } else if (action.data.resource_type === "orders") {
+                    var pickData = {};
 
-    default:
-      return state;
-  }
+                    if (action.data.hasOwnProperty('aggregate_data')) {
+
+                        pickData = {
+                            "status": action.data.aggregate_data.status,
+                            "avg": action.data.aggregate_data.avg_per_hr,
+                            "count_pending": action.data.aggregate_data.count_pending,
+                            "eta": action.data.aggregate_data.eta,
+                            "time_current": action.data.aggregate_data.time_current
+                        };
+                    }
+                    console.log('Pick data: ');
+                    console.log(pickData);
+                    return Object.assign({}, state, {
+                        "pickData": pickData
+                    });
+                }
+
+                // else if(action.data.resource_type === "inventory"){
+                //     console.log("Inventory Data "+action.data)
+                //     return Object.assign({}, state, {
+                //     "inventoryData" : action.data
+                // })
+                // }
+
+                // else if(action.data.resource_type === "put"){
+                //     
+                //     console.log("Put Data "+action.data)
+                //     return Object.assign({}, state, {
+                //     "putData" : action.data
+                // })
+                // }
+                // else if(action.data.resource_type === "pick"){
+                //     console.log("Pick Data "+action.data)
+                //     return Object.assign({}, state, {
+                //     "pickData" : action.data
+                // })
+                // }
+
+                else {
+                        return Object.assign({}, state, {
+                            "socketConnected": true,
+                            "initDataSent": true,
+                            "socketData": action.data
+                        });
+                    }
+            }
+            // Handshaking and login successful message.
+            else if (action.data.message === "Sucessfully logged in") {
+                    return Object.assign({}, state, {
+                        "socketAuthorized": true,
+                        "initDataSent": false
+                    });
+                }
+            break;
+
+        default:
+            return state;
+    }
 }
 
-},{"../constants/appConstants":283}],295:[function(require,module,exports){
+},{"../constants/appConstants":283}],298:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -55783,7 +56082,7 @@ function configureStore(preloadedState) {
   return (0, _redux.createStore)(_reducers2.default, preloadedState, (0, _redux.applyMiddleware)(_ajaxMiddleware2.default, _socketMiddleware2.default));
 }
 
-},{"./middleware/ajaxMiddleware":289,"./middleware/socketMiddleware":290,"./reducers":291,"redux":261}],296:[function(require,module,exports){
+},{"./middleware/ajaxMiddleware":292,"./middleware/socketMiddleware":293,"./reducers":294,"redux":261}],299:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -55834,4 +56133,4 @@ var utils = {
 
 exports.utils = utils;
 
-},{}]},{},[288]);
+},{}]},{},[291]);

@@ -95,7 +95,8 @@
   },
   "jest": {
     "unmockedModulePathPatterns": [
-      "<rootDir>/node_modules/react/",
+      "react",
+      "react-redux",
       "<rootDir>/node_modules/enzyme/"
     ]
   }

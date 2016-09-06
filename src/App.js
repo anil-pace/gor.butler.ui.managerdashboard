@@ -4,14 +4,15 @@ import HealthTabs from './components/health/healthTabs';
 import Health from './components/health/health';
 import Tabs from './containers/tabs';
 import Header from './components/header/header';
-import Tilex from './components/tile1x/Tilex';
-import Tile2x from './components/tile2x/Tile2x';
 import {setWsAction } from './actions/socketActions';
 import { WS_CONNECT,WS_ONSEND } from './constants/appConstants'
 import { wsInitData } from './constants/initData.js'
 import Dropdown from './components/dropdown/dropdown';
 import OrderStatsWidget from './containers/orderStatsWidget'
 import PerformanceWidget from './containers/performanceWidget'
+import AuditStatusWidget from './containers/auditStatusWidget'
+import PutStatusWidget from './containers/putStatusWidget'
+import PickStatusWidget from './containers/pickStatusWidget'
 import { REQUEST_HEADER, getFetchData } from './actions/headerAction'
 import { connect } from 'react-redux';
 import Chart from './components/graphd3/graphd3';
@@ -77,11 +78,11 @@ class App extends React.Component{
 				<div className="gorWidgetWrap">
 				<div className="section group">
 					<div className="col span_2_of_4">
-						<Tilex items={item1}/>
-						<Tilex items={item1}/>
+						<PutStatusWidget items={item1}/>
+						<AuditStatusWidget items={item1}/>
 					</div>
 					<div className="col span_2_of_4 gorNoML">
-						<Tile2x items={item2}/>
+						<PickStatusWidget />
 					</div>
 				</div>
 				<div>
