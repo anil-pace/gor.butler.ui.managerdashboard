@@ -11,19 +11,19 @@ class PickStatusWidget extends React.Component{
 	constructor(props) 
 	{
     	super(props);
-        console.log(this.props.pickData);
+        //console.log(this.props.ordersData);
     }	
     render()
     {
     	return (
-			 <Tile2x items={this.props.pickData}/>
+			 <Tile2x items={this.props.ordersData}/>
     	);
     }
 
  }
 function mapStateToProps(state, ownProps){
     return  {
-         "pickData":state.recieveSocketActions.pickData || {}
+         "ordersData":state.recieveSocketActions.ordersData || {}
     }
 }
  export default connect(mapStateToProps)(PickStatusWidget);
