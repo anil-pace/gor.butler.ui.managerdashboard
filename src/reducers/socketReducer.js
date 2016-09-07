@@ -1,5 +1,5 @@
 import {WS_CONNECT,WS_DISCONNECT,WS_CONNECTED,WS_ONMESSAGE,WS_ONSEND,WS_URL} from '../constants/appConstants';
-import {StateGet} from '../utilities/WsMsgParser';
+import {WsParse} from '../utilities/WsMsgParser';
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -15,7 +15,7 @@ export  function recieveSocketActions(state={},action){
       })
     case WS_ONMESSAGE:
       if(action.data.resource_type){
-        return StateGet.WsParse(state,action.data);
+        return WsParse(state,action.data);
       //   if(action.data.resource_type === "pps"){
       //    var pick = 0, put = 0, audit = 0, inactive = 0;
       //    if(action.data.hasOwnProperty('data')){
