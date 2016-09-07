@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { LOGIN_REQUEST, authLoginData } from '../../actions/loginAction';
 import { connect } from 'react-redux';
-
+import {LOGIN_URL, AUTH_LOGIN} from '../../constants/appConstants'
 
 class Login extends React.Component{
 	constructor(props) 
@@ -16,8 +16,9 @@ class Login extends React.Component{
      * and redirecting to main page
      */
         
-      if (nextProps.auth_token  && nextProps.userName) {
-           this.props.history.push("md");
+      if (nextProps.auth_token) {
+      	console.log('You are logged in');
+        this.props.history.push("md");
       }
     }
     /**
@@ -32,9 +33,11 @@ class Login extends React.Component{
           	'password': this.password.value,
          };
     	let loginData={
-    		'formdata':this.loginForm,
-    		'url':'./dummy.json',
+
+    		'url':LOGIN_URL,
+    		'formdata':formdata,
         	'method':'POST',
+        	'cause':AUTH_LOGIN,
         	'contentType':'application/json'
     	}
 	    this.props.authLoginData(loginData);
@@ -58,8 +61,7 @@ class Login extends React.Component{
 
 function mapStateToProps(state, ownProps){
 	return {
-        auth_token:state.authLogin.auth_token,
-        userName:state.authLogin.username
+        auth_token:state.authLogin.auth_token
     };
 }
 /**
