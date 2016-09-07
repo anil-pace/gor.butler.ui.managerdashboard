@@ -14,9 +14,8 @@ export  function recieveSocketActions(state={},action){
       })
     case WS_ONMESSAGE:
       if(action.data.resource_type){
-        if(action.data.resource_type === "PPS"){
+        if(action.data.resource_type === "pps"){
             return Object.assign({}, state, {
-            
             "ppsData" : action.data
         })
         }
