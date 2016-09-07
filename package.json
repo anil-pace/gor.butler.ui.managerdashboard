@@ -76,11 +76,8 @@
     "redux-thunk": "^2.1.0"
   },
   "dependencies": {
-    "react": "^15.2.0",
-    "react-dom": "^15.2.0",
-    "istanbul": "^0.3.0",
-    "jasmine": "^2.4.1",
     "d3-tip": "^0.7.1",
+    "fixed-data-table": "^0.6.3",
     "istanbul": "^0.3.0",
     "jasmine": "^2.4.1",
     "react": "^15.3.1",

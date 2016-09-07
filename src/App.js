@@ -16,6 +16,7 @@ import { REQUEST_HEADER, getFetchData } from './actions/headerAction'
 import { connect } from 'react-redux';
 import Chart from './components/graphd3/graphd3';
 import ChartHorizontal from './components/graphd3/graph_horizontal';
+import SortExample from './components/data_table/data_table';
 
 
 
@@ -87,7 +88,7 @@ class App extends React.Component{
 				<div>
 				<OrderStatsWidget/>
 				<PerformanceWidget/>
-				
+				<SortExample/>
 
 
 				</div>

@@ -1,7 +1,6 @@
 import { RENDER_WIDGET } from '../actions/performanceWidgetActions'
 
 export  function performanceWidget(state={},action){
-//console.log(action);
 	switch (action.type) {
 	  
 	  case "RENDER_WIDGET":

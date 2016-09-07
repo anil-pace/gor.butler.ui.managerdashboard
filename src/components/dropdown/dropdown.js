@@ -12,7 +12,6 @@ class Dropdown extends Component {
   }
 
   _onSelect (option) {
-    console.log('You selected ', option.value)
     this.setState({selected: option})
     this.props.pf(option.value);
 

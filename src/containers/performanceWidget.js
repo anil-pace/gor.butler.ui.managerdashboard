@@ -10,12 +10,10 @@ class PerformanceWidget extends React.Component{
 	constructor(props) 
 	{
 		super(props);
-
 	}	
 
 	componentWillReceiveProps(nextProps){
 		renderState = nextProps.widget;
-
 	}
 
 	render(){
@@ -25,6 +23,7 @@ class PerformanceWidget extends React.Component{
 		{ value: 'RENDER_SYSTEM_HEALTH', label: 'System Health' },
 		{ value: 'RENDER_SYSTEM_PERFORMANCE', label: 'System Performance' },
 		]
+		var wid= "Health"
 		if(renderState === "RENDER_SYSTEM_HEALTH") { return (
 			<div className="gorPerformanceWidget">
 				<div className="gorDrop">
@@ -54,8 +53,6 @@ class PerformanceWidget extends React.Component{
 };
 
 function mapStateToProps(state, ownProps){
-	
-	console.log(state);
 	return {
 		widget:state.performanceWidget.widget || {}
 	};
