@@ -17,7 +17,7 @@ class Login extends React.Component{
      */
         
       if (nextProps.auth_token  && nextProps.userName) {
-           this.props.history.push("md");
+           this.props.history.push("overview");
       }
     }
     /**

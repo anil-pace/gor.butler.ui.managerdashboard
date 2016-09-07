@@ -53558,14 +53558,6 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _healthTabs = require('./components/health/healthTabs');
-
-var _healthTabs2 = _interopRequireDefault(_healthTabs);
-
-var _health = require('./components/health/health');
-
-var _health2 = _interopRequireDefault(_health);
-
 var _tabs = require('./containers/tabs');
 
 var _tabs2 = _interopRequireDefault(_tabs);
@@ -53574,43 +53566,15 @@ var _header = require('./components/header/header');
 
 var _header2 = _interopRequireDefault(_header);
 
-var _Tilex = require('./components/tile1x/Tilex');
-
-var _Tilex2 = _interopRequireDefault(_Tilex);
-
-var _Tile2x = require('./components/tile2x/Tile2x');
-
-var _Tile2x2 = _interopRequireDefault(_Tile2x);
-
 var _socketActions = require('./actions/socketActions');
 
 var _appConstants = require('./constants/appConstants');
 
 var _initData = require('./constants/initData.js');
 
-var _dropdown = require('./components/dropdown/dropdown');
-
-var _dropdown2 = _interopRequireDefault(_dropdown);
-
-var _orderStatsWidget = require('./containers/orderStatsWidget');
-
-var _orderStatsWidget2 = _interopRequireDefault(_orderStatsWidget);
-
-var _performanceWidget = require('./containers/performanceWidget');
-
-var _performanceWidget2 = _interopRequireDefault(_performanceWidget);
-
 var _headerAction = require('./actions/headerAction');
 
 var _reactRedux = require('react-redux');
-
-var _graphd = require('./components/graphd3/graphd3');
-
-var _graphd2 = _interopRequireDefault(_graphd);
-
-var _graph_horizontal = require('./components/graphd3/graph_horizontal');
-
-var _graph_horizontal2 = _interopRequireDefault(_graph_horizontal);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -53618,7 +53582,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Importing the required modules
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
 
 var App = function (_React$Component) {
   _inherits(App, _React$Component);
@@ -53632,6 +53599,10 @@ var App = function (_React$Component) {
 
     return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
   }
+  /**
+   * Called only once before rendering of component
+   */
+
 
   _createClass(App, [{
     key: 'componentWillMount',
@@ -53640,11 +53611,16 @@ var App = function (_React$Component) {
           authToken = this.props.authToken;
       /*Creating Web Socket Connection*/
       if (!authToken && !userName) {
-        this.props.history.push("/");
+        this.props.history.push("/login");
       } else {
         this.props.initWebSocket();
       }
     }
+    /**
+     * Called everytime a prop is changed
+     * Does not get called on first render
+     */
+
   }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
@@ -53672,40 +53648,15 @@ var App = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var item1 = { heading: 'Items to Stock', value: '4,74,579', low: '4 PPS stocking 3,546 items/hr' };
-      var item2 = { heading1: 'Orders to fulfill', value1: '120', low1: '8 PPS fulfilling per/hr', status1: 'On schedule', heading2: 'Remaining time', value2: '68mins', low2: 'Completing in 8mins', status2: '23:59' };
+      /**
+         * Need to remove the hardcoded data
+         */
       var items3 = { start: "09:10:25", name: "Krish verma gandhi sharma", post: "Manager" };
-
       return _react2.default.createElement(
         'div',
         { className: 'mainContainer' },
         _react2.default.createElement(_header2.default, { user: items3 }),
         _react2.default.createElement(_tabs2.default, null),
-        _react2.default.createElement(
-          'div',
-          { className: 'gorWidgetWrap' },
-          _react2.default.createElement(
-            'div',
-            { className: 'section group' },
-            _react2.default.createElement(
-              'div',
-              { className: 'col span_2_of_4' },
-              _react2.default.createElement(_Tilex2.default, { items: item1 }),
-              _react2.default.createElement(_Tilex2.default, { items: item1 })
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'col span_2_of_4 gorNoML' },
-              _react2.default.createElement(_Tile2x2.default, { items: item2 })
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            null,
-            _react2.default.createElement(_orderStatsWidget2.default, null),
-            _react2.default.createElement(_performanceWidget2.default, null)
-          )
-        ),
         this.props.children
       );
     }
@@ -53747,7 +53698,7 @@ function mapDispatchToProps(dispatch) {
 };
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(App);
 
-},{"./actions/headerAction":271,"./actions/socketActions":273,"./components/dropdown/dropdown":275,"./components/graphd3/graph_horizontal":276,"./components/graphd3/graphd3":277,"./components/header/header":278,"./components/health/health":279,"./components/health/healthTabs":280,"./components/tile1x/Tilex":282,"./components/tile2x/Tile2x":283,"./constants/appConstants":284,"./constants/initData.js":285,"./containers/orderStatsWidget":286,"./containers/performanceWidget":287,"./containers/tabs":288,"react":255,"react-dom":61,"react-redux":65}],271:[function(require,module,exports){
+},{"./actions/headerAction":271,"./actions/socketActions":273,"./components/header/header":278,"./constants/appConstants":284,"./constants/initData.js":285,"./containers/tabs":289,"react":255,"react-dom":61,"react-redux":65}],271:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -53864,7 +53815,7 @@ function receiveAuthData(data) {
 
 function authData(params) {
   return function (dispatch) {
-    return fetch('../mock/loginJson.json', {
+    return fetch('../managerDashboard/mock/loginJson.json', {
       method: 'GET'
 
     }).then(function (response) {
@@ -53881,7 +53832,7 @@ function authLoginData(params) {
   };
 }
 
-},{"../constants/appConstants":284,"../utilities/ajax":296}],273:[function(require,module,exports){
+},{"../constants/appConstants":284,"../utilities/ajax":297}],273:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -53929,7 +53880,7 @@ function setWsAction(params) {
 	};
 }
 
-},{"../constants/appConstants":284,"../constants/appConstants.js":284,"../middleware/socketMiddleware":290}],274:[function(require,module,exports){
+},{"../constants/appConstants":284,"../constants/appConstants.js":284,"../middleware/socketMiddleware":291}],274:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -53976,7 +53927,7 @@ var Login = function (_React$Component) {
        */
 
       if (nextProps.auth_token && nextProps.userName) {
-        this.props.history.push("md");
+        this.props.history.push("overview");
       }
     }
     /**
@@ -54825,6 +54776,8 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _reactRouter = require('react-router');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -54846,27 +54799,31 @@ var Tab = function (_React$Component) {
 		key: 'render',
 		value: function render() {
 			return _react2.default.createElement(
-				'div',
-				{ className: 'gorTab gorContainer' },
+				_reactRouter.Link,
+				{ to: '/system' },
 				_react2.default.createElement(
 					'div',
-					{ className: 'gorMainBlock' },
+					{ className: 'gorTab gorContainer' },
 					_react2.default.createElement(
 						'div',
-						null,
+						{ className: 'gorMainBlock' },
 						_react2.default.createElement(
 							'div',
-							{ className: 'gorUpperText' },
-							'OVERVIEW'
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'gorOffline' },
+							null,
+							_react2.default.createElement(
+								'div',
+								{ className: 'gorUpperText' },
+								'OVERVIEW'
+							)
+						),
 						_react2.default.createElement(
 							'div',
-							{ className: 'gorSubText' },
-							'Fulfilling orders'
+							{ className: 'gorOffline' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'gorSubText' },
+								'Fulfilling orders'
+							)
 						)
 					)
 				)
@@ -54881,7 +54838,7 @@ var Tab = function (_React$Component) {
 
 exports.default = Tab;
 
-},{"react":255,"react-dom":61}],282:[function(require,module,exports){
+},{"react":255,"react-dom":61,"react-router":104}],282:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -55205,6 +55162,113 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _healthTabs = require('../components/health/healthTabs');
+
+var _healthTabs2 = _interopRequireDefault(_healthTabs);
+
+var _health = require('../components/health/health');
+
+var _health2 = _interopRequireDefault(_health);
+
+var _Tilex = require('../components/tile1x/Tilex');
+
+var _Tilex2 = _interopRequireDefault(_Tilex);
+
+var _Tile2x = require('../components/tile2x/Tile2x');
+
+var _Tile2x2 = _interopRequireDefault(_Tile2x);
+
+var _orderStatsWidget = require('../containers/orderStatsWidget');
+
+var _orderStatsWidget2 = _interopRequireDefault(_orderStatsWidget);
+
+var _performanceWidget = require('../containers/performanceWidget');
+
+var _performanceWidget2 = _interopRequireDefault(_performanceWidget);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Container for Overview tab
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * This will be switched based on tab click
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+
+var Overview = function (_React$Component) {
+	_inherits(Overview, _React$Component);
+
+	function Overview(props) {
+		_classCallCheck(this, Overview);
+
+		return _possibleConstructorReturn(this, (Overview.__proto__ || Object.getPrototypeOf(Overview)).call(this, props));
+	}
+
+	_createClass(Overview, [{
+		key: 'render',
+		value: function render() {
+			/**
+    * Need to remove these hardcoded variables
+    * 
+    */
+			var item1 = { heading: 'Items to Stock', value: '4,74,579', low: '4 PPS stocking 3,546 items/hr' };
+			var item2 = { heading1: 'Orders to fulfill', value1: '120', low1: '8 PPS fulfilling per/hr', status1: 'On schedule', heading2: 'Remaining time', value2: '68mins', low2: 'Completing in 8mins', status2: '23:59' };
+			var items3 = { start: "09:10:25", name: "Krish verma gandhi sharma", post: "Manager" };
+			return _react2.default.createElement(
+				'div',
+				{ className: 'gorWidgetWrap' },
+				_react2.default.createElement(
+					'div',
+					{ className: 'section group' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'col span_2_of_4' },
+						_react2.default.createElement(_Tilex2.default, { items: item1 }),
+						_react2.default.createElement(_Tilex2.default, { items: item1 })
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'col span_2_of_4 gorNoML' },
+						_react2.default.createElement(_Tile2x2.default, { items: item2 })
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(_orderStatsWidget2.default, null),
+					_react2.default.createElement(_performanceWidget2.default, null)
+				)
+			);
+		}
+	}]);
+
+	return Overview;
+}(_react2.default.Component);
+
+;
+
+exports.default = Overview;
+
+},{"../components/health/health":279,"../components/health/healthTabs":280,"../components/tile1x/Tilex":282,"../components/tile2x/Tile2x":283,"../containers/orderStatsWidget":287,"../containers/performanceWidget":288,"react":255,"react-dom":61}],287:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 var _dropdown = require('../components/dropdown/dropdown.js');
 
 var _dropdown2 = _interopRequireDefault(_dropdown);
@@ -55261,7 +55325,7 @@ var OrderStatsWidget = function (_React$Component) {
 
 exports.default = OrderStatsWidget;
 
-},{"../components/dropdown/dropdown.js":275,"../components/graphd3/graph_horizontal":276,"../components/graphd3/graphd3":277,"react":255,"react-dom":61}],287:[function(require,module,exports){
+},{"../components/dropdown/dropdown.js":275,"../components/graphd3/graph_horizontal":276,"../components/graphd3/graphd3":277,"react":255,"react-dom":61}],288:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -55334,7 +55398,7 @@ var PerformanceWidget = function (_React$Component) {
 
 exports.default = PerformanceWidget;
 
-},{"../components/dropdown/dropdown.js":275,"../components/graphd3/graph_horizontal":276,"../components/health/healthTabs.js":280,"react":255,"react-dom":61}],288:[function(require,module,exports){
+},{"../components/dropdown/dropdown.js":275,"../components/graphd3/graph_horizontal":276,"../components/health/healthTabs.js":280,"react":255,"react-dom":61}],289:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -55394,7 +55458,7 @@ var Tabs = function (_React$Component) {
 
 exports.default = Tabs;
 
-},{"../components/tabs/tab":281,"react":255,"react-dom":61}],289:[function(require,module,exports){
+},{"../components/tabs/tab":281,"react":255,"react-dom":61}],290:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -55413,34 +55477,49 @@ var _App = require('./App');
 
 var _App2 = _interopRequireDefault(_App);
 
+var _Overview = require('./containers/Overview');
+
+var _Overview2 = _interopRequireDefault(_Overview);
+
 var _store = require('./store');
 
 var _store2 = _interopRequireDefault(_store);
 
 var _reactRedux = require('react-redux');
 
-var _socketMiddleware = require('./middleware/socketMiddleware');
-
-var _socketMiddleware2 = _interopRequireDefault(_socketMiddleware);
-
 var _reactRouter = require('react-router');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+/**
+ * Creating a store and passing it to provider
+ */
+/**
+ * Importing required modules
+ */
 var store = (0, _store2.default)();
-
+/**
+ * Configuring Router based on path 
+ */
 _reactDom2.default.render(_react2.default.createElement(
 	_reactRedux.Provider,
 	{ store: store },
 	_react2.default.createElement(
 		_reactRouter.Router,
 		{ history: _reactRouter.hashHistory },
-		_react2.default.createElement(_reactRouter.Route, { name: 'app', path: '/', component: _login2.default }),
-		_react2.default.createElement(_reactRouter.Route, { name: 'app', path: 'md', component: _App2.default })
+		_react2.default.createElement(_reactRouter.Route, { name: 'default', path: '/', component: _App2.default }),
+		_react2.default.createElement(_reactRouter.Route, { name: 'login', path: '/login', component: _login2.default }),
+		_react2.default.createElement(
+			_reactRouter.Route,
+			{ name: 'app', path: '/md', component: _App2.default },
+			_react2.default.createElement(_reactRouter.IndexRoute, { component: _Overview2.default }),
+			_react2.default.createElement(_reactRouter.Route, { name: 'overview', path: '/overview', component: _Overview2.default }),
+			_react2.default.createElement(_reactRouter.Route, { name: 'system', path: '/system', component: _login2.default })
+		)
 	)
 ), document.getElementById('container'));
 
-},{"./App":270,"./components/Login/login":274,"./middleware/socketMiddleware":290,"./store":295,"react":255,"react-dom":61,"react-redux":65,"react-router":104}],290:[function(require,module,exports){
+},{"./App":270,"./components/Login/login":274,"./containers/Overview":286,"./store":296,"react":255,"react-dom":61,"react-redux":65,"react-router":104}],291:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -55527,7 +55606,7 @@ var socketMiddleware = function () {
 
 exports.default = socketMiddleware;
 
-},{"../actions/socketActions":273,"../constants/appConstants":284}],291:[function(require,module,exports){
+},{"../actions/socketActions":273,"../constants/appConstants":284}],292:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -55550,7 +55629,7 @@ var rootReducer = (0, _redux.combineReducers)({
 
 exports.default = rootReducer;
 
-},{"./reducers/headerReducer":292,"./reducers/loginReducer":293,"./reducers/socketReducer":294,"react-router-redux":71,"redux":262}],292:[function(require,module,exports){
+},{"./reducers/headerReducer":293,"./reducers/loginReducer":294,"./reducers/socketReducer":295,"react-router-redux":71,"redux":262}],293:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -55627,7 +55706,7 @@ function getData() {
   }
 }
 
-},{"../actions/headerAction":271}],293:[function(require,module,exports){
+},{"../actions/headerAction":271}],294:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -55667,7 +55746,7 @@ function authLogin() {
   }
 }
 
-},{"../constants/appConstants":284}],294:[function(require,module,exports){
+},{"../constants/appConstants":284}],295:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -55695,9 +55774,8 @@ function recieveSocketActions() {
       });
     case _appConstants.WS_ONMESSAGE:
       if (action.data.resource_type) {
-        if (action.data.resource_type === "PPS") {
+        if (action.data.resource_type === "pps") {
           return Object.assign({}, state, {
-
             "ppsData": action.data
           });
         } else {
@@ -55722,7 +55800,7 @@ function recieveSocketActions() {
   }
 }
 
-},{"../constants/appConstants":284}],295:[function(require,module,exports){
+},{"../constants/appConstants":284}],296:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -55750,7 +55828,7 @@ function configureStore(preloadedState) {
   return (0, _redux.createStore)(_reducers2.default, preloadedState, (0, _redux.applyMiddleware)(_reduxThunk2.default, _socketMiddleware2.default));
 }
 
-},{"./middleware/socketMiddleware":290,"./reducers":291,"redux":262,"redux-thunk":256}],296:[function(require,module,exports){
+},{"./middleware/socketMiddleware":291,"./reducers":292,"redux":262,"redux-thunk":256}],297:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -55784,4 +55862,4 @@ var utils = {
 
 exports.utils = utils;
 
-},{}]},{},[289]);
+},{}]},{},[290]);
