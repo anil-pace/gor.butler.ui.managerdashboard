@@ -20,15 +20,15 @@ export function WsParse(state,res)
                             }                            
                         })
         }
-                        var ppsKey = {
+                        var ppsData= {
                             "pick" : pick,
                             "put": put,
                             "audit" : audit,
                             "inactive" : inactive
                         }
-        console.log(ppsKey);
+        console.log(ppsData);
         return Object.assign({}, state, {
-            "ppsData" : ppsKey
+            "ppsData" : ppsData
         })
         }
          else if(res.resource_type === "butlers"){
