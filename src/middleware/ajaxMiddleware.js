@@ -1,5 +1,16 @@
-const utils = {
-  ajax:function (params,callBack) {
+import {receiveAuthData} from '../actions/loginAction'
+import {AJAX_CALL, AUTH_LOGIN} from '../constants/appConstants'
+
+const ajaxMiddleware = (function(){ 
+
+  return store => next => action => {
+    switch(action.type) {
+
+     
+    case AJAX_CALL:
+
+    var params=action.params;
+
     var formData = params.formdata || null,
     loginData=JSON.stringify(formData || {});
     var httpRequest = new XMLHttpRequest();
@@ -11,22 +22,10 @@ const utils = {
       if (httpRequest.readyState === XMLHttpRequest.DONE) {
         if (httpRequest.status === 200) {
               var response=JSON.parse(httpRequest.response);
-            if(callBack){
-              callBack.call(this,response);
-            }
-          
-            //  var authData = {
-            //     'type': 'auth',
-            //     'data' : {
-            //         "auth_token" :response.auth_token,
-            //         "username" : formData.username
-            //     }
-            // };
-            // console.log(authData);
-            //sessionStorage.setItem('sessionData', JSON.stringify(authData));
-            //Send to web sockets
-            //utils.postToWeb(authData);
-            return response;
+              if(params.cause==AUTH_LOGIN)
+              {
+                store.dispatch(receiveAuthData(response));
+              }
         } 
         else
         {
@@ -37,10 +36,13 @@ const utils = {
     httpRequest.open(params.method, params.url);
     httpRequest.setRequestHeader('Content-Type', params.contentType || "text/html");
     httpRequest.send(loginData);
-   
-    return httpRequest.response;
-}
+    break;
 
-}
+    default:
+        return next(action);
+    }
+  }
 
-export {utils}
+})();
+
+export default ajaxMiddleware

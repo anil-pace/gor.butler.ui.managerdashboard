@@ -4,6 +4,8 @@ export const LOGIN_REDIRECT = "LOGIN_REDIRECT";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 export const LOGOUT = "LOGOUT";
+export const AJAX_CALL = "AJAX_CALL";
+export const LOGIN_URL="https://192.168.8.118/api/auth/token"
 
 /*Constants for Web Sockets*/
 export const WS_CONNECT = "WS_CONNECT";
@@ -20,6 +22,11 @@ export const RECIEVE_HEADER = "RECIEVE_HEADER";
 export const RECIEVE_ITEM_TO_STOCK = "RECIEVE_ITEM_TO_STOCK";
 
 
+
+
+
+/*Constants for type of AJAX call*/
+export const AUTH_LOGIN = "AUTH_LOGIN";
 
 
 

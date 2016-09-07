@@ -13089,7 +13089,7 @@ module.exports = invariant;
 require('whatwg-fetch');
 module.exports = self.fetch.bind(self);
 
-},{"whatwg-fetch":269}],52:[function(require,module,exports){
+},{"whatwg-fetch":268}],52:[function(require,module,exports){
 var overArg = require('./_overArg');
 
 /** Built-in value references. */
@@ -13574,7 +13574,7 @@ exports.stringify = function (obj) {
 	}).join('&') : '';
 };
 
-},{"strict-uri-encode":264}],60:[function(require,module,exports){
+},{"strict-uri-encode":263}],60:[function(require,module,exports){
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -29413,7 +29413,7 @@ function wrapActionCreators(actionCreators) {
     return (0, _redux.bindActionCreators)(actionCreators, dispatch);
   };
 }
-},{"redux":262}],70:[function(require,module,exports){
+},{"redux":261}],70:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -32942,7 +32942,7 @@ function routerWarning(falseToWarn, message) {
 function _resetWarned() {
   warned = {};
 }
-},{"warning":268}],110:[function(require,module,exports){
+},{"warning":267}],110:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -52392,30 +52392,6 @@ module.exports = require('./lib/React');
 'use strict';
 
 exports.__esModule = true;
-function createThunkMiddleware(extraArgument) {
-  return function (_ref) {
-    var dispatch = _ref.dispatch;
-    var getState = _ref.getState;
-    return function (next) {
-      return function (action) {
-        if (typeof action === 'function') {
-          return action(dispatch, getState, extraArgument);
-        }
-
-        return next(action);
-      };
-    };
-  };
-}
-
-var thunk = createThunkMiddleware();
-thunk.withExtraArgument = createThunkMiddleware;
-
-exports['default'] = thunk;
-},{}],257:[function(require,module,exports){
-'use strict';
-
-exports.__esModule = true;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -52471,7 +52447,7 @@ function applyMiddleware() {
     };
   };
 }
-},{"./compose":260}],258:[function(require,module,exports){
+},{"./compose":259}],257:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -52523,7 +52499,7 @@ function bindActionCreators(actionCreators, dispatch) {
   }
   return boundActionCreators;
 }
-},{}],259:[function(require,module,exports){
+},{}],258:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -52668,7 +52644,7 @@ function combineReducers(reducers) {
   };
 }
 }).call(this,require('_process'))
-},{"./createStore":261,"./utils/warning":263,"_process":58,"lodash/isPlainObject":56}],260:[function(require,module,exports){
+},{"./createStore":260,"./utils/warning":262,"_process":58,"lodash/isPlainObject":56}],259:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -52707,7 +52683,7 @@ function compose() {
     }, last.apply(undefined, arguments));
   };
 }
-},{}],261:[function(require,module,exports){
+},{}],260:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -52969,7 +52945,7 @@ function createStore(reducer, preloadedState, enhancer) {
     replaceReducer: replaceReducer
   }, _ref2[_symbolObservable2['default']] = observable, _ref2;
 }
-},{"lodash/isPlainObject":56,"symbol-observable":265}],262:[function(require,module,exports){
+},{"lodash/isPlainObject":56,"symbol-observable":264}],261:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -53018,7 +52994,7 @@ exports.bindActionCreators = _bindActionCreators2['default'];
 exports.applyMiddleware = _applyMiddleware2['default'];
 exports.compose = _compose2['default'];
 }).call(this,require('_process'))
-},{"./applyMiddleware":257,"./bindActionCreators":258,"./combineReducers":259,"./compose":260,"./createStore":261,"./utils/warning":263,"_process":58}],263:[function(require,module,exports){
+},{"./applyMiddleware":256,"./bindActionCreators":257,"./combineReducers":258,"./compose":259,"./createStore":260,"./utils/warning":262,"_process":58}],262:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -53044,7 +53020,7 @@ function warning(message) {
   } catch (e) {}
   /* eslint-enable no-empty */
 }
-},{}],264:[function(require,module,exports){
+},{}],263:[function(require,module,exports){
 'use strict';
 module.exports = function (str) {
 	return encodeURIComponent(str).replace(/[!'()*]/g, function (c) {
@@ -53052,10 +53028,10 @@ module.exports = function (str) {
 	});
 };
 
-},{}],265:[function(require,module,exports){
+},{}],264:[function(require,module,exports){
 module.exports = require('./lib/index');
 
-},{"./lib/index":266}],266:[function(require,module,exports){
+},{"./lib/index":265}],265:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -53080,7 +53056,7 @@ if (typeof global !== 'undefined') {
 var result = (0, _ponyfill2['default'])(root);
 exports['default'] = result;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./ponyfill":267}],267:[function(require,module,exports){
+},{"./ponyfill":266}],266:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -53104,9 +53080,9 @@ function symbolObservablePonyfill(root) {
 
 	return result;
 };
-},{}],268:[function(require,module,exports){
+},{}],267:[function(require,module,exports){
 arguments[4][48][0].apply(exports,arguments)
-},{"_process":58,"dup":48}],269:[function(require,module,exports){
+},{"_process":58,"dup":48}],268:[function(require,module,exports){
 (function(self) {
   'use strict';
 
@@ -53541,7 +53517,7 @@ arguments[4][48][0].apply(exports,arguments)
   self.fetch.polyfill = true
 })(typeof self !== 'undefined' ? self : this);
 
-},{}],270:[function(require,module,exports){
+},{}],269:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -53747,7 +53723,7 @@ function mapDispatchToProps(dispatch) {
 };
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(App);
 
-},{"./actions/headerAction":271,"./actions/socketActions":273,"./components/dropdown/dropdown":275,"./components/graphd3/graph_horizontal":276,"./components/graphd3/graphd3":277,"./components/header/header":278,"./components/health/health":279,"./components/health/healthTabs":280,"./components/tile1x/Tilex":282,"./components/tile2x/Tile2x":283,"./constants/appConstants":284,"./constants/initData.js":285,"./containers/orderStatsWidget":286,"./containers/performanceWidget":287,"./containers/tabs":288,"react":255,"react-dom":61,"react-redux":65}],271:[function(require,module,exports){
+},{"./actions/headerAction":270,"./actions/socketActions":272,"./components/dropdown/dropdown":274,"./components/graphd3/graph_horizontal":275,"./components/graphd3/graphd3":276,"./components/header/header":277,"./components/health/health":278,"./components/health/healthTabs":279,"./components/tile1x/Tilex":281,"./components/tile2x/Tile2x":282,"./constants/appConstants":283,"./constants/initData.js":284,"./containers/orderStatsWidget":285,"./containers/performanceWidget":286,"./containers/tabs":287,"react":255,"react-dom":61,"react-redux":65}],270:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -53814,7 +53790,7 @@ function getFetchData(type) {
   };
 }
 
-},{"../constants/appConstants.js":284,"isomorphic-fetch":51}],272:[function(require,module,exports){
+},{"../constants/appConstants.js":283,"isomorphic-fetch":51}],271:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -53822,6 +53798,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.loginRequest = loginRequest;
 exports.loginRedirect = loginRedirect;
+exports.receiveAuthData = receiveAuthData;
 exports.authLoginData = authLoginData;
 
 var _ajax = require('../utilities/ajax');
@@ -53848,11 +53825,13 @@ function loginRedirect(data) {
 
 function receiveAuthData(data) {
   if (!data.auth_token) {
+    console.log('Login Fail');
     return {
       type: _appConstants.LOGIN_FAILURE,
       data: data
     };
   }
+  console.log('Login Pass');
   return {
     type: _appConstants.LOGIN_SUCCESS,
     data: data
@@ -53862,26 +53841,25 @@ function receiveAuthData(data) {
  * function that sends ajax to authorize user
  */
 
-function authData(params) {
-  return function (dispatch) {
-    return fetch('../mock/loginJson.json', {
-      method: 'GET'
+// function authData(params){
+//   return dispatch => {
+//     return fetch('../mock/loginJson.json',{
+//       method: 'GET'
 
-    }).then(function (response) {
-      return response.json();
-    }).then(function (json) {
-      return dispatch(receiveAuthData(json));
-    });
-  };
-}
+//     }).then(response => response.json())
+//       .then(json => dispatch(receiveAuthData(json)))
+// >>>>>>> develop
+//   }
+// }
 
 function authLoginData(params) {
-  return function (dispatch) {
-    return dispatch(authData(params));
+  return {
+    type: _appConstants.AJAX_CALL,
+    params: params
   };
 }
 
-},{"../constants/appConstants":284,"../utilities/ajax":296}],273:[function(require,module,exports){
+},{"../constants/appConstants":283,"../utilities/ajax":296}],272:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -53899,14 +53877,6 @@ var _socketMiddleware = require('../middleware/socketMiddleware');
 
 //import {getFetchData} from 'headerAction'
 
-/**
- * @return {[type]}
- */
-function recieveWsRequest(params) {
-	return function (dispatch) {
-		return dispatch({ type: params.type, data: params.data });
-	};
-}
 
 function wsOnMessageAction(data) {
 
@@ -53924,12 +53894,13 @@ function wsResponseAction(data) {
 }
 
 function setWsAction(params) {
-	return function (dispatch) {
-		return dispatch(recieveWsRequest(params));
+	return {
+		type: params.type,
+		data: params.data
 	};
 }
 
-},{"../constants/appConstants":284,"../constants/appConstants.js":284,"../middleware/socketMiddleware":290}],274:[function(require,module,exports){
+},{"../constants/appConstants":283,"../constants/appConstants.js":283,"../middleware/socketMiddleware":290}],273:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -53949,6 +53920,8 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 var _loginAction = require('../../actions/loginAction');
 
 var _reactRedux = require('react-redux');
+
+var _appConstants = require('../../constants/appConstants');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -53975,7 +53948,8 @@ var Login = function (_React$Component) {
        * and redirecting to main page
        */
 
-      if (nextProps.auth_token && nextProps.userName) {
+      if (nextProps.auth_token) {
+        console.log('You are logged in');
         this.props.history.push("md");
       }
     }
@@ -53994,9 +53968,11 @@ var Login = function (_React$Component) {
         'password': this.password.value
       };
       var loginData = {
-        'formdata': this.loginForm,
-        'url': './dummy.json',
+
+        'url': _appConstants.LOGIN_URL,
+        'formdata': formdata,
         'method': 'POST',
+        'cause': _appConstants.AUTH_LOGIN,
         'contentType': 'application/json'
       };
 
@@ -54050,8 +54026,7 @@ var Login = function (_React$Component) {
 
 function mapStateToProps(state, ownProps) {
   return {
-    auth_token: state.authLogin.auth_token,
-    userName: state.authLogin.username
+    auth_token: state.authLogin.auth_token
   };
 }
 /**
@@ -54070,7 +54045,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Login);
 
-},{"../../actions/loginAction":272,"react":255,"react-dom":61,"react-redux":65}],275:[function(require,module,exports){
+},{"../../actions/loginAction":271,"../../constants/appConstants":283,"react":255,"react-dom":61,"react-redux":65}],274:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -54136,7 +54111,7 @@ var Dropdown = function (_Component) {
 
 exports.default = Dropdown;
 
-},{"react":255,"react-dropdown":62}],276:[function(require,module,exports){
+},{"react":255,"react-dropdown":62}],275:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -54280,7 +54255,7 @@ var ChartHorizontal = function (_React$Component) {
 exports.default = ChartHorizontal;
 //ReactDOM.render(React.createElement(Chart), document.getElementById('chart_dis'))
 
-},{"d3":3,"d3-tip":2,"react":255,"react-d3-library":60,"react-dom":61}],277:[function(require,module,exports){
+},{"d3":3,"d3-tip":2,"react":255,"react-d3-library":60,"react-dom":61}],276:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -54466,7 +54441,7 @@ var Chart = function (_React$Component) {
 exports.default = Chart;
 //ReactDOM.render(React.createElement(Chart), document.getElementById('chart_dis'))
 
-},{"d3":3,"d3-tip":2,"react":255,"react-d3-library":60,"react-dom":61}],278:[function(require,module,exports){
+},{"d3":3,"d3-tip":2,"react":255,"react-d3-library":60,"react-dom":61}],277:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -54619,7 +54594,7 @@ function mapStateToProps(state, ownProps) {
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(Header);
 
-},{"../../actions/headerAction":271,"react":255,"react-dom":61,"react-redux":65}],279:[function(require,module,exports){
+},{"../../actions/headerAction":270,"react":255,"react-dom":61,"react-redux":65}],278:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -54751,7 +54726,7 @@ var Health = function (_React$Component) {
 
 exports.default = Health;
 
-},{"react":255,"react-dom":61}],280:[function(require,module,exports){
+},{"react":255,"react-dom":61}],279:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -54808,7 +54783,7 @@ var HealthTabs = function (_React$Component) {
 ;
 exports.default = HealthTabs;
 
-},{"./health":279,"react":255,"react-dom":61}],281:[function(require,module,exports){
+},{"./health":278,"react":255,"react-dom":61}],280:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -54881,7 +54856,7 @@ var Tab = function (_React$Component) {
 
 exports.default = Tab;
 
-},{"react":255,"react-dom":61}],282:[function(require,module,exports){
+},{"react":255,"react-dom":61}],281:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -54960,7 +54935,7 @@ var Tilex = function (_React$Component) {
 
 exports.default = Tilex;
 
-},{"react":255,"react-dom":61}],283:[function(require,module,exports){
+},{"react":255,"react-dom":61}],282:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -55090,7 +55065,7 @@ var Tile2x = function (_React$Component) {
 
 exports.default = Tile2x;
 
-},{"react":255,"react-dom":61}],284:[function(require,module,exports){
+},{"react":255,"react-dom":61}],283:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -55102,6 +55077,8 @@ var LOGIN_REDIRECT = exports.LOGIN_REDIRECT = "LOGIN_REDIRECT";
 var LOGIN_SUCCESS = exports.LOGIN_SUCCESS = "LOGIN_SUCCESS";
 var LOGIN_FAILURE = exports.LOGIN_FAILURE = "LOGIN_FAILURE";
 var LOGOUT = exports.LOGOUT = "LOGOUT";
+var AJAX_CALL = exports.AJAX_CALL = "AJAX_CALL";
+var LOGIN_URL = exports.LOGIN_URL = "https://192.168.8.118/api/auth/token";
 
 /*Constants for Web Sockets*/
 var WS_CONNECT = exports.WS_CONNECT = "WS_CONNECT";
@@ -55117,7 +55094,10 @@ var REQUEST_HEADER = exports.REQUEST_HEADER = "REQUEST_HEADER";
 var RECIEVE_HEADER = exports.RECIEVE_HEADER = "RECIEVE_HEADER";
 var RECIEVE_ITEM_TO_STOCK = exports.RECIEVE_ITEM_TO_STOCK = "RECIEVE_ITEM_TO_STOCK";
 
-},{}],285:[function(require,module,exports){
+/*Constants for type of AJAX call*/
+var AUTH_LOGIN = exports.AUTH_LOGIN = "AUTH_LOGIN";
+
+},{}],284:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -55188,7 +55168,7 @@ var wsInitData = exports.wsInitData = {
 	}]
 };
 
-},{}],286:[function(require,module,exports){
+},{}],285:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -55261,7 +55241,7 @@ var OrderStatsWidget = function (_React$Component) {
 
 exports.default = OrderStatsWidget;
 
-},{"../components/dropdown/dropdown.js":275,"../components/graphd3/graph_horizontal":276,"../components/graphd3/graphd3":277,"react":255,"react-dom":61}],287:[function(require,module,exports){
+},{"../components/dropdown/dropdown.js":274,"../components/graphd3/graph_horizontal":275,"../components/graphd3/graphd3":276,"react":255,"react-dom":61}],286:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -55334,7 +55314,7 @@ var PerformanceWidget = function (_React$Component) {
 
 exports.default = PerformanceWidget;
 
-},{"../components/dropdown/dropdown.js":275,"../components/graphd3/graph_horizontal":276,"../components/health/healthTabs.js":280,"react":255,"react-dom":61}],288:[function(require,module,exports){
+},{"../components/dropdown/dropdown.js":274,"../components/graphd3/graph_horizontal":275,"../components/health/healthTabs.js":279,"react":255,"react-dom":61}],287:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -55394,7 +55374,7 @@ var Tabs = function (_React$Component) {
 
 exports.default = Tabs;
 
-},{"../components/tabs/tab":281,"react":255,"react-dom":61}],289:[function(require,module,exports){
+},{"../components/tabs/tab":280,"react":255,"react-dom":61}],288:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -55419,10 +55399,6 @@ var _store2 = _interopRequireDefault(_store);
 
 var _reactRedux = require('react-redux');
 
-var _socketMiddleware = require('./middleware/socketMiddleware');
-
-var _socketMiddleware2 = _interopRequireDefault(_socketMiddleware);
-
 var _reactRouter = require('react-router');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -55440,7 +55416,63 @@ _reactDom2.default.render(_react2.default.createElement(
 	)
 ), document.getElementById('container'));
 
-},{"./App":270,"./components/Login/login":274,"./middleware/socketMiddleware":290,"./store":295,"react":255,"react-dom":61,"react-redux":65,"react-router":104}],290:[function(require,module,exports){
+},{"./App":269,"./components/Login/login":273,"./store":295,"react":255,"react-dom":61,"react-redux":65,"react-router":104}],289:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _loginAction = require('../actions/loginAction');
+
+var _appConstants = require('../constants/appConstants');
+
+var ajaxMiddleware = function () {
+
+  return function (store) {
+    return function (next) {
+      return function (action) {
+        switch (action.type) {
+
+          case _appConstants.AJAX_CALL:
+
+            var params = action.params;
+
+            var formData = params.formdata || null,
+                loginData = JSON.stringify(formData || {});
+            var httpRequest = new XMLHttpRequest();
+
+            if (!httpRequest || !params.url) {
+              return false;
+            }
+            httpRequest.onreadystatechange = function (xhr) {
+              if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                if (httpRequest.status === 200) {
+                  var response = JSON.parse(httpRequest.response);
+                  if (params.cause == _appConstants.AUTH_LOGIN) {
+                    store.dispatch((0, _loginAction.receiveAuthData)(response));
+                  }
+                } else {
+                  console.log('Connection refused');
+                }
+              }
+            };
+            httpRequest.open(params.method, params.url);
+            httpRequest.setRequestHeader('Content-Type', params.contentType || "text/html");
+            httpRequest.send(loginData);
+            break;
+
+          default:
+            return next(action);
+        }
+      };
+    };
+  };
+}();
+
+exports.default = ajaxMiddleware;
+
+},{"../actions/loginAction":271,"../constants/appConstants":283}],290:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -55527,7 +55559,7 @@ var socketMiddleware = function () {
 
 exports.default = socketMiddleware;
 
-},{"../actions/socketActions":273,"../constants/appConstants":284}],291:[function(require,module,exports){
+},{"../actions/socketActions":272,"../constants/appConstants":283}],291:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -55550,7 +55582,7 @@ var rootReducer = (0, _redux.combineReducers)({
 
 exports.default = rootReducer;
 
-},{"./reducers/headerReducer":292,"./reducers/loginReducer":293,"./reducers/socketReducer":294,"react-router-redux":71,"redux":262}],292:[function(require,module,exports){
+},{"./reducers/headerReducer":292,"./reducers/loginReducer":293,"./reducers/socketReducer":294,"react-router-redux":71,"redux":261}],292:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -55627,7 +55659,7 @@ function getData() {
   }
 }
 
-},{"../actions/headerAction":271}],293:[function(require,module,exports){
+},{"../actions/headerAction":270}],293:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -55650,16 +55682,17 @@ function authLogin() {
     case _appConstants.LOGIN_REQUEST:
     case _appConstants.LOGIN_REDIRECT:
     case _appConstants.LOGIN_SUCCESS:
+      //state.selectedAction = action.type;
+      //window.localStore.setItem('auth_token',action.data.auth_token)
 
       return Object.assign({}, state, {
         "auth_token": action.data.auth_token,
-        "username": action.data.username
+        "username": "admin"
       });
     case _appConstants.LOGOUT:
 
       return Object.assign({}, state, {
-        "auth_token": null,
-        "username": null
+        "auth_token": null
       });
 
     default:
@@ -55667,7 +55700,7 @@ function authLogin() {
   }
 }
 
-},{"../constants/appConstants":284}],294:[function(require,module,exports){
+},{"../constants/appConstants":283}],294:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -55722,7 +55755,7 @@ function recieveSocketActions() {
   }
 }
 
-},{"../constants/appConstants":284}],295:[function(require,module,exports){
+},{"../constants/appConstants":283}],295:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -55732,13 +55765,13 @@ exports.default = configureStore;
 
 var _redux = require('redux');
 
-var _reduxThunk = require('redux-thunk');
-
-var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
-
 var _socketMiddleware = require('./middleware/socketMiddleware');
 
 var _socketMiddleware2 = _interopRequireDefault(_socketMiddleware);
+
+var _ajaxMiddleware = require('./middleware/ajaxMiddleware');
+
+var _ajaxMiddleware2 = _interopRequireDefault(_ajaxMiddleware);
 
 var _reducers = require('./reducers');
 
@@ -55747,11 +55780,11 @@ var _reducers2 = _interopRequireDefault(_reducers);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function configureStore(preloadedState) {
-  return (0, _redux.createStore)(_reducers2.default, preloadedState, (0, _redux.applyMiddleware)(_reduxThunk2.default, _socketMiddleware2.default));
+  return (0, _redux.createStore)(_reducers2.default, preloadedState, (0, _redux.applyMiddleware)(_ajaxMiddleware2.default, _socketMiddleware2.default));
 }
 
-},{"./middleware/socketMiddleware":290,"./reducers":291,"redux":262,"redux-thunk":256}],296:[function(require,module,exports){
-"use strict";
+},{"./middleware/ajaxMiddleware":289,"./middleware/socketMiddleware":290,"./reducers":291,"redux":261}],296:[function(require,module,exports){
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -55768,20 +55801,37 @@ var utils = {
     httpRequest.onreadystatechange = function (xhr) {
       if (httpRequest.readyState === XMLHttpRequest.DONE) {
         if (httpRequest.status === 200) {
+          var response = JSON.parse(httpRequest.response);
           if (callBack) {
-            callBack.call(this, xhr);
+            callBack.call(this, response);
           }
+
+          //  var authData = {
+          //     'type': 'auth',
+          //     'data' : {
+          //         "auth_token" :response.auth_token,
+          //         "username" : formData.username
+          //     }
+          // };
+          // console.log(authData);
+          //sessionStorage.setItem('sessionData', JSON.stringify(authData));
+          //Send to web sockets
+          //utils.postToWeb(authData);
+          return response;
+        } else {
+          console.log('Connection refused');
         }
       }
     };
     httpRequest.open(params.method, params.url);
     httpRequest.setRequestHeader('Content-Type', params.contentType || "text/html");
     httpRequest.send(loginData);
-    return httpRequest;
+
+    return httpRequest.response;
   }
 
 };
 
 exports.utils = utils;
 
-},{}]},{},[289]);
+},{}]},{},[288]);

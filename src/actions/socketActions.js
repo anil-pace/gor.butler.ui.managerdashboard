@@ -3,15 +3,6 @@ import {REQUEST_HEADER,RECIEVE_HEADER,RECIEVE_ITEM_TO_STOCK} from '../constants/
 import {socketMiddleware} from '../middleware/socketMiddleware';
 //import {getFetchData} from 'headerAction'
 
-/**
- * @return {[type]}
- */
-function recieveWsRequest(params){
-	return (dispatch) => {
-    	return dispatch({type: params.type,data:params.data})
-    }
-  
-}
 
 export function wsOnMessageAction(data){
 	
@@ -28,9 +19,10 @@ export function wsResponseAction(data){
 	}
 }
 
+
 export function setWsAction(params){
-	return (dispatch) => {
-      return dispatch(recieveWsRequest(params))
-    
-  }
+	return {
+		type: params.type,
+		data: params.data
+	}
 }

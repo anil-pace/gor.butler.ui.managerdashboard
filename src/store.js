@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware } from 'redux'
-import thunkMiddleware from 'redux-thunk'
+
 import socketMiddleware from './middleware/socketMiddleware'
+import ajaxMiddleware from './middleware/ajaxMiddleware'
 import rootReducer from './reducers'
 
 
@@ -9,7 +10,7 @@ export default function configureStore(preloadedState) {
     rootReducer,
     preloadedState,
     applyMiddleware(
-      thunkMiddleware,
+      ajaxMiddleware,
       socketMiddleware
     )
   )
