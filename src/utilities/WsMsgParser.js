@@ -26,7 +26,8 @@ export function WsParse(state,res)
                             "audit" : audit,
                             "inactive" : inactive
                         }
-        console.log(ppsData);
+        // console.log("PPS Data: ");
+        // console.log(ppsData);
         return Object.assign({}, state, {
             "ppsData" : ppsData
         })
@@ -58,8 +59,8 @@ export function WsParse(state,res)
                             "Inactive" : dead,
                             "Idle" : idle
                         }
-           console.log("Butlers Data");
-           console.log(botKey);
+           // console.log("Butlers Data");
+           // console.log(botKey);
            return Object.assign({}, state, {
                "butlersData" : botKey
           })
@@ -79,10 +80,10 @@ export function WsParse(state,res)
                             "Connected" : connected,
                             "Disconnected": disconnected
                         }
-            console.log("Chargers Data");
-            console.log(chargersKey);
+            // console.log("Chargers Data");
+            // console.log(chargersKey);
             return Object.assign({}, state, {
-             "chargersData" : chargersKey
+            "chargersData" : chargersKey
          })
          }
         else if(res.resource_type === "orders"){
@@ -101,8 +102,8 @@ export function WsParse(state,res)
               "eta":eta,
               "time_current":time_current            
             }
-          console.log('Orders data: ');
-          console.log(ordersData);
+          // console.log('Orders data: ');
+          // console.log(ordersData);
             return Object.assign({}, state, {
             "ordersData" : ordersData
             })
@@ -131,8 +132,8 @@ export function WsParse(state,res)
               "open_stock":open_stock                          
             }
 
-          console.log('Inventory data: ');
-          console.log(ivData);
+          // console.log('Inventory data: ');
+          // console.log(ivData);
             return Object.assign({}, state, {
             "inventoryData" : ivData
             })
@@ -143,8 +144,8 @@ export function WsParse(state,res)
           if(res.aggregate_data){
             count_complete=res.aggregate_data.count_complete;
           }
-          console.log("Put Data ");
-          console.log(count_complete);  
+          // console.log("Put Data ");
+          // console.log(count_complete);  
           return Object.assign({}, state, {
             "putData" : count_complete
           })
@@ -155,8 +156,8 @@ export function WsParse(state,res)
           if(res.aggregate_data){
             count_complete=res.aggregate_data.count_complete;
           }
-          console.log("Pick Data ");
-          console.log(count_complete);  
+          // console.log("Pick Data ");
+          // console.log(count_complete);  
           return Object.assign({}, state, {
             "pickData" : count_complete
           })

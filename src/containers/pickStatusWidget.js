@@ -15,8 +15,21 @@ class PickStatusWidget extends React.Component{
     }	
     render()
     {
-    	return (
-			 <Tile2x items={this.props.ordersData}/>
+    	var statusClass='',heading='Orders to fulfill',valueStatus='';
+        if(this.props.ordersData.count_pending=='0')
+        {
+            valueStatus='gorNone';
+        }
+        if(this.props.ordersData.status==='On Schedule')
+        {
+            statusClass='gorSuccess';
+        }
+        else
+        {
+            statusClass='gorBreach';            
+        }
+        return (
+			 <Tile2x items={this.props.ordersData} statusClass={statusClass} heading={heading} valueStatus={valueStatus}/>
     	);
     }
 

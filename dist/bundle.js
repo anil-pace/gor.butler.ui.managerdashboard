@@ -54915,7 +54915,8 @@ var Tilex = function (_React$Component) {
 							'p',
 							{ className: 'gorHeading-value' },
 							this.props.items.value
-						)
+						),
+						_react2.default.createElement('p', { className: 'gorStatus' })
 					),
 					_react2.default.createElement('span', { className: 'gorTile-right iStock' })
 				),
@@ -54988,20 +54989,23 @@ var Tile2x = function (_React$Component) {
 						_react2.default.createElement(
 							'span',
 							{ className: 'gorHeading' },
-							'Orders to fulfill'
+							this.props.heading
 						),
 						_react2.default.createElement(
 							'p',
 							{ className: 'gorHeading-value' },
-							this.props.items.count_pending
+							_react2.default.createElement(
+								'span',
+								{ className: this.props.valueStatus },
+								this.props.items.count_pending
+							)
 						),
 						_react2.default.createElement(
 							'p',
-							{ className: 'gorStatus gorSuccess' },
+							{ className: 'gorStatus' },
 							_react2.default.createElement(
 								'span',
-								null,
-								_react2.default.createElement('img', { src: '../src/assets/images/pick.png', width: 20, height: 20 }),
+								{ className: this.props.statusClass },
 								this.props.items.status
 							)
 						)
@@ -55027,13 +55031,13 @@ var Tile2x = function (_React$Component) {
 							{ className: 'gorTile-left' },
 							_react2.default.createElement(
 								'span',
-								{ className: 'gorHeading gorBreach' },
+								{ className: 'gorHeading' },
 								'Remaining time'
 							),
 							_react2.default.createElement(
 								'p',
 								{ className: 'gorHeading-value gorRisk' },
-								this.props.items.eta
+								'23:51'
 							),
 							_react2.default.createElement(
 								'p',
@@ -55054,7 +55058,7 @@ var Tile2x = function (_React$Component) {
 						_react2.default.createElement(
 							'span',
 							null,
-							this.props.items.low2
+							'Something pr/hr'
 						)
 					)
 				)
@@ -55376,7 +55380,7 @@ exports.default = PerformanceWidget;
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -55404,33 +55408,44 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var PickStatusWidget = function (_React$Component) {
-  _inherits(PickStatusWidget, _React$Component);
+    _inherits(PickStatusWidget, _React$Component);
 
-  /**
-   * Called once before rendering of component,used to displatch fetch action
-   * @return {[type]}
-   */
-  function PickStatusWidget(props) {
-    _classCallCheck(this, PickStatusWidget);
+    /**
+     * Called once before rendering of component,used to displatch fetch action
+     * @return {[type]}
+     */
+    function PickStatusWidget(props) {
+        _classCallCheck(this, PickStatusWidget);
 
-    return _possibleConstructorReturn(this, (PickStatusWidget.__proto__ || Object.getPrototypeOf(PickStatusWidget)).call(this, props));
-    //console.log(this.props.ordersData);
-  }
-
-  _createClass(PickStatusWidget, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(_Tile2x2.default, { items: this.props.ordersData });
+        return _possibleConstructorReturn(this, (PickStatusWidget.__proto__ || Object.getPrototypeOf(PickStatusWidget)).call(this, props));
+        //console.log(this.props.ordersData);
     }
-  }]);
 
-  return PickStatusWidget;
+    _createClass(PickStatusWidget, [{
+        key: 'render',
+        value: function render() {
+            var statusClass = '',
+                heading = 'Orders to fulfill',
+                valueStatus = '';
+            if (this.props.ordersData.count_pending == '0') {
+                valueStatus = 'gorNone';
+            }
+            if (this.props.ordersData.status === 'On Schedule') {
+                statusClass = 'gorSuccess';
+            } else {
+                statusClass = 'gorBreach';
+            }
+            return _react2.default.createElement(_Tile2x2.default, { items: this.props.ordersData, statusClass: statusClass, heading: heading, valueStatus: valueStatus });
+        }
+    }]);
+
+    return PickStatusWidget;
 }(_react2.default.Component);
 
 function mapStateToProps(state, ownProps) {
-  return {
-    "ordersData": state.recieveSocketActions.ordersData || {}
-  };
+    return {
+        "ordersData": state.recieveSocketActions.ordersData || {}
+    };
 }
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(PickStatusWidget);
 
@@ -56148,7 +56163,8 @@ function WsParse(state, res) {
             "audit": audit,
             "inactive": inactive
         };
-        console.log(ppsData);
+        // console.log("PPS Data: ");
+        // console.log(ppsData);
         return Object.assign({}, state, {
             "ppsData": ppsData
         });
@@ -56183,8 +56199,8 @@ function WsParse(state, res) {
             "Inactive": dead,
             "Idle": idle
         };
-        console.log("Butlers Data");
-        console.log(botKey);
+        // console.log("Butlers Data");
+        // console.log(botKey);
         return Object.assign({}, state, {
             "butlersData": botKey
         });
@@ -56204,8 +56220,8 @@ function WsParse(state, res) {
             "Connected": connected,
             "Disconnected": disconnected
         };
-        console.log("Chargers Data");
-        console.log(chargersKey);
+        // console.log("Chargers Data");
+        // console.log(chargersKey);
         return Object.assign({}, state, {
             "chargersData": chargersKey
         });
@@ -56229,8 +56245,8 @@ function WsParse(state, res) {
             "eta": eta,
             "time_current": time_current
         };
-        console.log('Orders data: ');
-        console.log(ordersData);
+        // console.log('Orders data: ');
+        // console.log(ordersData);
         return Object.assign({}, state, {
             "ordersData": ordersData
         });
@@ -56264,8 +56280,8 @@ function WsParse(state, res) {
             "open_stock": open_stock
         };
 
-        console.log('Inventory data: ');
-        console.log(ivData);
+        // console.log('Inventory data: ');
+        // console.log(ivData);
         return Object.assign({}, state, {
             "inventoryData": ivData
         });
@@ -56274,8 +56290,8 @@ function WsParse(state, res) {
         if (res.aggregate_data) {
             count_complete = res.aggregate_data.count_complete;
         }
-        console.log("Put Data ");
-        console.log(count_complete);
+        // console.log("Put Data ");
+        // console.log(count_complete);  
         return Object.assign({}, state, {
             "putData": count_complete
         });
@@ -56284,8 +56300,8 @@ function WsParse(state, res) {
         if (res.aggregate_data) {
             count_complete = res.aggregate_data.count_complete;
         }
-        console.log("Pick Data ");
-        console.log(count_complete);
+        // console.log("Pick Data ");
+        // console.log(count_complete);  
         return Object.assign({}, state, {
             "pickData": count_complete
         });
