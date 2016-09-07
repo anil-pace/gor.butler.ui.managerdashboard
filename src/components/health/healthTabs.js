@@ -8,6 +8,11 @@ class HealthTabs extends React.Component{
     	super(props);
     }	
 	render(){
+		const item = [
+		{ value: 'RENDER_SYSTEM_HEALTH', label: 'System Health' },
+		{ value: 'RENDER_SYSTEM_PERFORMANCE', label: 'System Performance' },
+		]
+		
 		return (
 			<div>
 			<Health />
