@@ -36,7 +36,7 @@ class App extends React.Component{
   		authToken = this.props.authToken;
   		/*Creating Web Socket Connection*/
   		if(!authToken && !userName){
-  			this.props.history.push("/");
+  			this.props.history.push("/login");
   		}
   		else{
   			this.props.initWebSocket() ;

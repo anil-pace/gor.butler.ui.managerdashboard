@@ -1,5 +1,7 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
+import {Link}  from 'react-router';
+
 class Tab extends React.Component{
 	constructor(props) 
 	{
@@ -7,6 +9,7 @@ class Tab extends React.Component{
     }	
 	render(){
 		return (
+		<Link to="/system">
 		<div className="gorTab gorContainer">
 		<div className="gorMainBlock">
 			<div >
@@ -24,6 +27,7 @@ class Tab extends React.Component{
 		</div>
 		
 	</div>
+	</Link>
 		);
 	}
 };

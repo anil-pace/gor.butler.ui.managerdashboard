@@ -181,6 +181,7 @@ export  function recieveSocketActions(state={},action){
       //   }
        }
       // Handshaking and login successful message.
+
       else if(action.data.message === "Sucessfully logged in"){
           return Object.assign({}, state, {
           "socketAuthorized": true,
