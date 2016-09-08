@@ -18,7 +18,7 @@ class Login extends React.Component{
      */
         
       if (nextProps.auth_token  && nextProps.userName) {
-           this.props.history.push("overview");
+           this.props.history.push("/overview");
       }
     }
     /**
@@ -65,7 +65,8 @@ class Login extends React.Component{
 
 function mapStateToProps(state, ownProps){
 	return {
-        auth_token:state.authLogin.auth_token
+        auth_token:state.authLogin.auth_token,
+        userName:state.authLogin.username
     };
 }
 /**
