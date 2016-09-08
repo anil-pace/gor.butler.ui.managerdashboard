@@ -40,7 +40,7 @@ function receiveAuthData(data){
  
 function authData(params){
   return dispatch => {
-    return fetch('../managerDashboard/mock/loginJson.json',{
+    return fetch('../mock/loginJson.json',{
       method: 'GET'
 
     }).then(response => response.json())

@@ -9,7 +9,7 @@ import ReactDOM  from 'react-dom';
 import { Provider,connect } from 'react-redux';
 import {IntlProvider} from 'react-intl-redux';
 import {addLocaleData} from 'react-intl';
-import { Router, Route, hashHistory } from 'react-router';
+import { Router, Route, hashHistory, IndexRoute} from 'react-router';
 
 // Importing our own libraries
 import Login from './components/Login/login';
