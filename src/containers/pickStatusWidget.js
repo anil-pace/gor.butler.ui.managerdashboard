@@ -19,9 +19,9 @@ class PickStatusWidget extends React.Component{
         heading1='Orders to fullfill';
         logo=' iStock';
         text1=this.props.ordersData.count_pending;
-        if(text1=='0')
+        if(text1=='1')
         {
-            valueStatus='gorNone';
+            valueStatus='gor-none';
             text1='NONE';
             low1=this.props.ordersData.avg+'Idle';
         }
@@ -34,13 +34,13 @@ class PickStatusWidget extends React.Component{
             low2='Estimated time 8hr 3min';
             if(this.props.ordersData.status==='On Schedule')
             {
-                statusClass='gorSuccess';
+                statusClass='gor-success';
                 statusLogo='overview-tile-ontime-icon';
                 status1='On Schedule';
             }
             else
             {
-                statusClass='gorBreach';            
+                statusClass='gor-breach';            
                 status1=this.props.ordersData.status;
             }
         }
