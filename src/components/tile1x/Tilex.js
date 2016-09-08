@@ -14,7 +14,7 @@ class Tilex extends React.Component{
 					<p className="gorHeading-value">{this.props.items.value}</p>
 					<p className="gorStatus"></p>
 				</div>
-				<span className="gorTile-right iStock">
+				<span className={"gorTile-right "+this.props.items.logo}>
 			 		
 				</span>
 			</div>

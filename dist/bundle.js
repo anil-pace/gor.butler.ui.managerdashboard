@@ -53652,7 +53652,7 @@ var App = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var item1 = { heading: 'Items to Stock', value: '4,74,579', low: '4 PPS stocking 3,546 items/hr' };
+      var item1 = { heading: 'Items to Stock', value: '4,74,579', low: '4 PPS stocking 3,546 items/hr', logo: 'iStock' };
       var item2 = { heading1: 'Orders to fulfill', value1: '120', low1: '8 PPS fulfilling per/hr', status1: 'On schedule', heading2: 'Remaining time', value2: '68mins', low2: 'Completing in 8mins', status2: '23:59' };
       var items3 = { start: "09:10:25", name: "Krish verma gandhi sharma", post: "Manager" };
 
@@ -54918,7 +54918,7 @@ var Tilex = function (_React$Component) {
 						),
 						_react2.default.createElement('p', { className: 'gorStatus' })
 					),
-					_react2.default.createElement('span', { className: 'gorTile-right iStock' })
+					_react2.default.createElement('span', { className: "gorTile-right " + this.props.items.logo })
 				),
 				_react2.default.createElement(
 					'div',
@@ -54989,24 +54989,25 @@ var Tile2x = function (_React$Component) {
 						_react2.default.createElement(
 							'span',
 							{ className: 'gorHeading' },
-							this.props.heading
+							this.props.items.headingleft
 						),
 						_react2.default.createElement(
 							'p',
 							{ className: 'gorHeading-value' },
 							_react2.default.createElement(
 								'span',
-								{ className: this.props.valueStatus },
-								this.props.items.count_pending
+								{ className: this.props.items.valueStatus },
+								this.props.items.textleft
 							)
 						),
 						_react2.default.createElement(
 							'p',
 							{ className: 'gorStatus' },
+							_react2.default.createElement('div', { className: this.props.items.statusLogo }),
 							_react2.default.createElement(
 								'span',
-								{ className: this.props.statusClass },
-								this.props.items.status
+								{ className: this.props.items.statusClass },
+								this.props.items.statusleft
 							)
 						)
 					),
@@ -55016,7 +55017,7 @@ var Tile2x = function (_React$Component) {
 						_react2.default.createElement(
 							'span',
 							null,
-							this.props.items.avg
+							this.props.items.lowleft
 						)
 					)
 				),
@@ -55032,25 +55033,24 @@ var Tile2x = function (_React$Component) {
 							_react2.default.createElement(
 								'span',
 								{ className: 'gorHeading' },
-								'Remaining time'
+								this.props.items.headingright
 							),
 							_react2.default.createElement(
 								'p',
 								{ className: 'gorHeading-value gorRisk' },
-								'23:51'
+								this.props.items.textright
 							),
 							_react2.default.createElement(
 								'p',
-								{ className: 'gorStatus gorSuccess' },
+								{ className: 'gorStatus' },
 								_react2.default.createElement(
 									'span',
 									null,
-									_react2.default.createElement('img', { src: '../src/assets/images/pick.png', width: 20, height: 20 }),
-									this.props.items.time_current
+									this.props.items.statusright
 								)
 							)
 						),
-						_react2.default.createElement('div', { className: 'gorTile-right iStock' })
+						_react2.default.createElement('div', { className: "gorTile-right " + this.props.items.logo })
 					),
 					_react2.default.createElement(
 						'div',
@@ -55058,7 +55058,7 @@ var Tile2x = function (_React$Component) {
 						_react2.default.createElement(
 							'span',
 							null,
-							'Something pr/hr'
+							this.props.items.lowright
 						)
 					)
 				)
@@ -55425,17 +55425,43 @@ var PickStatusWidget = function (_React$Component) {
         key: 'render',
         value: function render() {
             var statusClass = '',
-                heading = 'Orders to fulfill',
-                valueStatus = '';
-            if (this.props.ordersData.count_pending == '0') {
+                statusLogo = '',
+                heading1 = '',
+                valueStatus = '',
+                text1 = '',
+                heading2 = '',
+                text2 = '',
+                text2Class = '',
+                status1 = '',
+                status2 = '',
+                low1 = '',
+                low2 = '',
+                logo = '',
+                items = {};
+            heading1 = 'Orders to fullfill';
+            logo = ' iStock';
+            text1 = this.props.ordersData.count_pending;
+            if (text1 == '0') {
                 valueStatus = 'gorNone';
-            }
-            if (this.props.ordersData.status === 'On Schedule') {
-                statusClass = 'gorSuccess';
+                text1 = 'NONE';
+                low1 = this.props.ordersData.avg + 'Idle';
             } else {
-                statusClass = 'gorBreach';
+                heading2 = 'Remaining time';
+                text2 = 'something';
+                low1 = 'PPS Opertaing ' + this.props.ordersData.avg + ' per/hr';
+                status2 = this.props.ordersData.time_current;
+                low2 = 'Estimated time 8hr 3min';
+                if (this.props.ordersData.status === 'On Schedule') {
+                    statusClass = 'gorSuccess';
+                    statusLogo = 'overview-tile-ontime-icon';
+                    status1 = 'On Schedule';
+                } else {
+                    statusClass = 'gorBreach';
+                    status1 = this.props.ordersData.status;
+                }
             }
-            return _react2.default.createElement(_Tile2x2.default, { items: this.props.ordersData, statusClass: statusClass, heading: heading, valueStatus: valueStatus });
+            items = { headingleft: heading1, headingright: heading2, textleft: text1, valueStatus: valueStatus, textright: text2, statusleft: status1, statusClass: statusClass, statusLogo: statusLogo, statusright: status2, lowleft: low1, lowright: low2, logo: logo };
+            return _react2.default.createElement(_Tile2x2.default, { items: items });
         }
     }]);
 

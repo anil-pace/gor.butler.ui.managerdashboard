@@ -95,7 +95,6 @@ body {
 .checkbox-disabled-icon,
 .overview-tile-yellow-alert-icon,
 .overview-tile-red-alert-icon,
-.overview-tile-ontime-icon,
 .header-emergency-icon,
 .header-red-alert-icon,
 .header-yellow-alert-icon,
@@ -109,6 +108,7 @@ body {
 .cbs-overview-rejection,
 .cbs-overview-chutes,
 .cbs-overview-casket,
+.overview-tile-ontime-icon,
 .cbs-overview-inducts, .statusOl, .statusAl, .iStock {
   background-image: url(images/icons.svg);
 }
@@ -150,6 +150,14 @@ body {
 
 .iStock {
   background-position: -210px 0;
+}
+
+.overview-tile-ontime-icon {
+  background-position: -1px -77px;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  margin-right: 8px;
 }
 
 /*  SECTIONS  */
@@ -563,6 +571,7 @@ body {
   border-radius: 0.1875rem;
   box-shadow: 0px 2px 3px 3px #EAEAEA;
   display: inline-block;
+  min-height: 10.625rem;
   margin: 1% 1% 1% 2%;
   font-size: 0;
 }
@@ -577,6 +586,7 @@ body {
 
 .gorTile .gorStatus {
   font-family: 'Source Sans Pro semibold', sans-serif;
+  color: #666666;
   font-size: 1rem;
   padding: 0;
   margin: 0;
@@ -594,13 +604,13 @@ body {
 }
 
 .gorTile .gorTile-one {
-  width: 50%;
+  width: 45%;
   display: inline-block;
   margin-right: auto;
 }
 
 .gorTile .gorTile-two {
-  width: 50%;
+  width: 55%;
   display: inline-block;
   margin-right: 0;
 }
@@ -631,6 +641,10 @@ body {
   color: #dd7f03;
 }
 
+.gorTile .gorNone {
+  color: #aaaaaa;
+}
+
 .gorTile .gorTile-right {
   width: 16%;
   display: inline-block;
@@ -644,6 +658,7 @@ body {
   background: #F7F7F7;
   color: #666666;
   padding: 10px 0px 15px 20px;
+  min-height: 1.25rem;
 }
 
 .gorNoML {

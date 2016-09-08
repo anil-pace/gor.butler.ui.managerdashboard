@@ -16,6 +16,7 @@ body
   border-radius: calculateRem(3px);
   box-shadow: 0px 2px 3px 3px #EAEAEA;
   display: inline-block;
+  min-height:calculateRem(170px);
   margin: 1% 1% 1% 2%;
   font-size: 0;
   &.gorDouble{
@@ -26,6 +27,7 @@ body
   }
   .gorStatus{
     font-family: 'Source Sans Pro semibold', sans-serif;
+    color: #666666;
     font-size: calculateRem(16px);
     padding:0;
     margin:0;
@@ -40,12 +42,12 @@ body
     display:inline-block;
   }
   .gorTile-one{
-    width: 50%;
+    width: 45%;
     display:inline-block;
     margin-right: auto;
   }
   .gorTile-two{
-    width: 50%;
+    width: 55%;
     display:inline-block;
     margin-right: 0;
 }
@@ -70,6 +72,9 @@ body
 .gorRisk{
   color:#dd7f03;
 }
+.gorNone{
+  color:#aaaaaa;
+}
 .gorTile-right{
   width: 16%;
   display:inline-block;
@@ -82,6 +87,7 @@ body
   background:#F7F7F7;
   color: #666666;
   padding: 10px 0px 15px 20px;
+  min-height:calculateRem(20px);
 }
 
 }

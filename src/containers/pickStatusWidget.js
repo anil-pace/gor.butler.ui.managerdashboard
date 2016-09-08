@@ -15,21 +15,38 @@ class PickStatusWidget extends React.Component{
     }	
     render()
     {
-    	var statusClass='',heading='Orders to fulfill',valueStatus='';
-        if(this.props.ordersData.count_pending=='0')
+    	var statusClass='', statusLogo='', heading1='',valueStatus='',text1='',heading2='',text2='', text2Class='', status1='',status2='',low1='',low2='',logo='',items={};
+        heading1='Orders to fullfill';
+        logo=' iStock';
+        text1=this.props.ordersData.count_pending;
+        if(text1=='0')
         {
             valueStatus='gorNone';
-        }
-        if(this.props.ordersData.status==='On Schedule')
-        {
-            statusClass='gorSuccess';
+            text1='NONE';
+            low1=this.props.ordersData.avg+'Idle';
         }
         else
         {
-            statusClass='gorBreach';            
+            heading2='Remaining time';
+            text2='something';
+            low1='PPS Opertaing '+this.props.ordersData.avg+' per/hr';
+            status2=this.props.ordersData.time_current;
+            low2='Estimated time 8hr 3min';
+            if(this.props.ordersData.status==='On Schedule')
+            {
+                statusClass='gorSuccess';
+                statusLogo='overview-tile-ontime-icon';
+                status1='On Schedule';
+            }
+            else
+            {
+                statusClass='gorBreach';            
+                status1=this.props.ordersData.status;
+            }
         }
+        items={headingleft:heading1, headingright:heading2, textleft:text1, valueStatus:valueStatus, textright:text2, statusleft:status1, statusClass:statusClass, statusLogo:statusLogo, statusright:status2, lowleft:low1, lowright:low2, logo:logo};
         return (
-			 <Tile2x items={this.props.ordersData} statusClass={statusClass} heading={heading} valueStatus={valueStatus}/>
+			 <Tile2x items={items}/>
     	);
     }
 
