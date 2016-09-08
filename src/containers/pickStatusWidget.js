@@ -19,11 +19,11 @@ class PickStatusWidget extends React.Component{
         heading1='Orders to fullfill';
         logo=' iStock';
         text1=this.props.ordersData.count_pending;
-        if(text1=='1')
+        if(!text1||text1=='0')
         {
             valueStatus='gor-none';
             text1='NONE';
-            low1=this.props.ordersData.avg+'Idle';
+            low1=this.props.ordersData.avg+' Idle';
         }
         else
         {
@@ -52,6 +52,7 @@ class PickStatusWidget extends React.Component{
 
  }
 function mapStateToProps(state, ownProps){
+    console.log(state);
     return  {
          "ordersData":state.recieveSocketActions.ordersData || {}
     }
