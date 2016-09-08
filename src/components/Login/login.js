@@ -3,6 +3,7 @@ import ReactDOM  from 'react-dom';
 import { LOGIN_REQUEST, authLoginData } from '../../actions/loginAction';
 import { connect } from 'react-redux';
 import {LOGIN_URL, AUTH_LOGIN} from '../../constants/appConstants'
+import {FormattedMessage} from 'react-intl';
 
 class Login extends React.Component{
 	constructor(props) 
@@ -52,6 +53,9 @@ class Login extends React.Component{
 					<option value="en-US">English</option>
 					<option value="ch">Chinese</option>
 				</select>
+                <p>
+                <FormattedMessage id="boilerplate.components.Footer.author.message" defaultMessage ="arshd"/>
+                </p>
 				<input type="submit"  value="Login" />
  			</div>
  			</form>

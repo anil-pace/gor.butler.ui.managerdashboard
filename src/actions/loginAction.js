@@ -41,12 +41,6 @@ export function receiveAuthData(data){
  * function that sends ajax to authorize user
  */
 
-//     }).then(response => response.json())
-//       .then(json => dispatch(receiveAuthData(json)))
-// >>>>>>> develop
-//   }
-// }
-
 export function authLoginData(params) {
   return {
     type: AJAX_CALL,
