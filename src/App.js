@@ -76,25 +76,7 @@ class App extends React.Component{
 			<div className="mainContainer">
 				<Header user={items3}/>
 				<Tabs/>
-				<div className="gorWidgetWrap">
-				<div className="section group">
-					<div className="col span_2_of_4">
-						<PutStatusWidget items={item1}/>
-						<AuditStatusWidget items={item1}/>
-					</div>
-					<div className="col span_2_of_4 gorNoML">
-						<PickStatusWidget />
-					</div>
-				</div>
-				<div>
-				<OrderStatsWidget/>
-        <PerformanceWidget/>
-        <SortExample/>
-
-				</div>
-
-
-				</div>
+				
 				{this.props.children}
 			</div>
 			
