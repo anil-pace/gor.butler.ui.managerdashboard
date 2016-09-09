@@ -15,7 +15,11 @@ import { Router, Route, hashHistory, IndexRoute} from 'react-router';
 // Importing our own libraries
 import Login from './components/Login/login';
 import App from './App';
-import Overview from './containers/Overview';
+import Overview from './containers/OverviewTab';
+import SystemTab from './containers/systemTab';
+import OrdersTab from './containers/ordersTab';
+import InventoryTab from './containers/inventoryTab';
+import UsersTab from './containers/usersTab';
 import configureStore from './store';
 import socketMiddleware from './middleware/socketMiddleware';
 import enTranslations from './translations/en.json'
@@ -37,8 +41,11 @@ ReactDOM.render(
 		<Route name="login" path="/login"  component={Login} />
 		<Route name="app" path="/md"  component={App} >
 			<IndexRoute component={ Overview } />
+			<Route name="system" path="/system"  component={SystemTab} />
+			<Route name="orders" path="/orders"  component={OrdersTab} />
+			<Route name="inventory" path="/inventory"  component={InventoryTab} />
+			<Route name="users" path="/users"  component={UsersTab} />
 			<Route name="overview" path="/overview"  component={Overview} />
-			<Route name="system" path="/system"  component={Login} />
 		</Route>
 		</Router>
     </IntlProvider>

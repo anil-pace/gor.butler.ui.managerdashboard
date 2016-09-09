@@ -22,6 +22,11 @@ export const RECIEVE_HEADER = "RECIEVE_HEADER";
 export const RECIEVE_ITEM_TO_STOCK = "RECIEVE_ITEM_TO_STOCK";
 
 
+/*Constants for performance widget*/
+export const RENDER_WIDGET = "RENDER_WIDGET";
+
+
+
 
 
 

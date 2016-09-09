@@ -41,7 +41,6 @@ class Login extends React.Component{
         	'cause':AUTH_LOGIN,
         	'contentType':'application/json'
     	}
-    	
 	    this.props.authLoginData(loginData);
     }
 	render(){
@@ -83,3 +82,4 @@ var mapDispatchToProps = function(dispatch){
 };
 
 export 	default connect(mapStateToProps,mapDispatchToProps)(Login);
+

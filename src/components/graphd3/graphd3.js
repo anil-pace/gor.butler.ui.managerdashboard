@@ -68,7 +68,7 @@ class Chart extends React.Component{
 
       //svg.call(tip);
     
-    d3.json("http://www.mocky.io/v2/57c921ea120000ee1fe76b04", function(error,data) {
+    d3.json("http://www.mocky.io/v2/57d27c9a100000c01432817f", function(error,data) {
 
       var json=data;
         update(json);
@@ -76,7 +76,6 @@ class Chart extends React.Component{
     });
 
     function update(data) {
-      console.log(data);
       data.forEach(function(d) {
         d.frequency = +d.frequency;
      });

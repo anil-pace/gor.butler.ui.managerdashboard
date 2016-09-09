@@ -7,10 +7,17 @@ import ChartHorizontal from '../components/graphd3/graph_horizontal';
 class OrderStatsWidget extends React.Component{
 	
 	render(){
-		return (
+
+		const item = [
+      { value: 'one', label: 'PPS - pick performance' },
+      { value: 'three', label: 'PPS - pick performance' },
+      { value: 'four', label: 'PPS - audit performance' },
+      
+    ]
+	return (
 			<div className="gorOrderStatsWidget">
 				<div className="gorDrop">
-				<Dropdown/>
+				<Dropdown items={item}/>
 				<div id="chart_att">
 					<Chart/>
 					</div>

@@ -9,26 +9,22 @@ class Tab extends React.Component{
     }	
 	render(){
 		return (
-		<Link to="/system">
 		<div className="gorTab gorContainer">
 		<div className="gorMainBlock">
 			<div >
 				<div className="gor-upperText">
-					OVERVIEW
+					{this.props.items[0].tab}
 				</div>
 			</div>
 			<div className="gorOffline"> 
-				<div className="gorSubText">
-					Fulfilling orders
+				<div className={this.props.items[0].currentState}>
+					{this.props.items[0].Status}
 				</div>
-
-				
 			</div>	
 		</div>
 		
 	</div>
-	</Link>
-		);
+	);
 	}
 };
 
