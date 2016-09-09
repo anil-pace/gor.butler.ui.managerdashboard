@@ -19,7 +19,7 @@ class OrderStatsWidget extends React.Component{
 				<div className="gorDrop">
 				<Dropdown items={item}/>
 				<div id="chart_att">
-					<Chart/>
+					
 					</div>
 				</div>
 			</div> 

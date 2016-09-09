@@ -32,6 +32,8 @@
   white-space: normal;
 }
 
+
+
 .fixedDataTableCellLayout_lastChild {
   border-width: 0 1px 1px 0;
 }
@@ -375,8 +377,40 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   background-color: #f4f4f4;
 }
 
-.public_fixedDataTableCell_cellContent {
-  padding: 8px;
+.table_status_stopped1 .public_fixedDataTableCell_cellContent{
+
+  background: #ec1c24;
+  border-radius: 40%;
+  text-align: center;
+  width:50%;
+
+}
+
+.table_status_stopped2 .public_fixedDataTableCell_cellContent{
+
+  background: blue;
+  border-radius: 40%;
+  text-align: center;
+  width:50%;
+
+}
+
+.table_status_stopped3 .public_fixedDataTableCell_cellContent{
+
+  background: red;
+  border-radius: 40%;
+  text-align: center;
+  width:50%;
+
+}
+
+.table_status_stopped .public_fixedDataTableCell_cellContent{
+
+  background: grey;
+  border-radius: 40%;
+  text-align: center;
+  width:50%;
+
 }
 
 .public_fixedDataTableCell_columnResizerKnob {

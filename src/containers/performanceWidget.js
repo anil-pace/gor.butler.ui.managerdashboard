@@ -44,7 +44,7 @@ class PerformanceWidget extends React.Component{
 				</div>
 
 				<div id="performanceGraph">
-					{<ChartHorizontal/>}
+					<ChartHorizontal/>
 				</div> 
 			</div>  
 			);

@@ -45,7 +45,19 @@ class SortHeaderCell extends React.Component {
 
 const TextCell = ({rowIndex, data, columnKey, ...props}) => (
   <Cell {...props}>
+    {data.getObjectAt(rowIndex)[columnKey]}
+  </Cell>
+);
 
+const ComponentCell = ({rowIndex, data, columnKey, ...props}) => (
+  <Cell {...props}>
+  <input type="checkbox" />
+    {data.getObjectAt(rowIndex)[columnKey]}
+  </Cell>
+);
+
+const StatusCell = ({rowIndex, data, columnKey, ...props}) => (
+  <Cell {...props} className={data.getObjectAt(rowIndex)[columnKey]}>
     {data.getObjectAt(rowIndex)[columnKey]}
   </Cell>
 );
@@ -71,8 +83,8 @@ class SortExample extends React.Component {
   constructor(props) {
     super(props);
 
-    this._dataList = new FakeObjectDataListStore(40);
-
+    this._dataList = new FakeObjectDataListStore(4);
+    console.log(this._dataList);
     this._defaultSortIndexes = [];
     var size = this._dataList.getSize();
     for (var index = 0; index < size; index++) {
@@ -85,15 +97,31 @@ class SortExample extends React.Component {
     };
 
     this._onSortChange = this._onSortChange.bind(this);
+    this._onFilterChange = this._onFilterChange.bind(this);
   }
 
-  renderCheckbox(cellData, cellDataKey, rowData, rowIndex) {
-    return (
-      <input type="checkbox"
-        onChange={this.toggleItem.bind(this, rowData)}
-        checked={cellData}/>
-    )
+  _onFilterChange(e) {
+    if (!e.target.value) {
+      this.setState({
+        sortedDataList: this._dataList,
+      });
+    }
+     var filterBy = e.target.value.toLowerCase();
+     var size = this._dataList.getSize();
+     var filteredIndexes = [];
+    for (var index = 0; index < size; index++) {
+      var {firstName} = this._dataList.getObjectAt(index);
+      if (firstName.toLowerCase().indexOf(filterBy) !== -1) {
+        filteredIndexes.push(index);
+      }
+    }
+
+    this.setState({
+      sortedDataList: new DataListWrapper(filteredIndexes, this._dataList),
+    });
   }
+
+  
 
   _onSortChange(columnKey, sortDir) {
     var sortIndexes = this._defaultSortIndexes.slice();
@@ -124,7 +152,13 @@ class SortExample extends React.Component {
 
   render() {
     var {sortedDataList, colSortDirs} = this.state;
+    var data_temp= ['a', 'b', 'c', 'd'];
     return (
+      <div>
+      <input
+          onChange={this._onFilterChange}
+          placeholder="Filter by First Name"
+      />
       <Table
         rowHeight={50}
         rowsCount={sortedDataList.getSize()}
@@ -141,27 +175,23 @@ class SortExample extends React.Component {
               id
             </SortHeaderCell>
           }
-          cell={<TextCell data={sortedDataList} />}
+          cell={<ComponentCell data={sortedDataList} > </ComponentCell>}
           width={100}
         />
         <Column
           columnKey="firstName"
           header={
-            <SortHeaderCell
-              onSortChange={this._onSortChange}
-              sortDir={colSortDirs.firstName}>
+            <SortHeaderCell>
               First Name
             </SortHeaderCell>
           }
-          cell={<TextCell data={sortedDataList} />}
-          width={200}
+          cell={<StatusCell data={sortedDataList} >{this.sortedDataList}</StatusCell>}
+          width={100}
         />
         <Column
           columnKey="lastName"
           header={
-            <SortHeaderCell
-              onSortChange={this._onSortChange}
-              sortDir={colSortDirs.lastName}>
+            <SortHeaderCell>
               Last Name
             </SortHeaderCell>
           }
@@ -171,9 +201,7 @@ class SortExample extends React.Component {
         <Column
           columnKey="city"
           header={
-            <SortHeaderCell
-              onSortChange={this._onSortChange}
-              sortDir={colSortDirs.city}>
+            <SortHeaderCell>
               City
             </SortHeaderCell>
           }
@@ -183,16 +211,15 @@ class SortExample extends React.Component {
         <Column
           columnKey="companyName"
           header={
-            <SortHeaderCell
-              onSortChange={this._onSortChange}
-              sortDir={colSortDirs.companyName}>
+            <SortHeaderCell >
               Company Name
             </SortHeaderCell>
           }
-          cell={<TextCell data={sortedDataList} />}
+          cell={<TextCell data={sortedDataList}  />}
           width={200}
         />
       </Table>
+      </div>
     );
   }
 }

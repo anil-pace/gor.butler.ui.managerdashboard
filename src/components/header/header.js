@@ -14,10 +14,10 @@ class Header extends React.Component{
     }	
     componentWillMount(){
     	// this.setState({"asdf":"asdf"});
-    	console.log(this.props)
+    	//console.log(this.props)
     }
     componentWillReceiveProps(nextProps){
-    	console.log(nextProps);
+    	//console.log(nextProps);
     }
 
 	render(){

@@ -1,20 +1,25 @@
-jest.unmock('../src/components/tile1x/Tilex');
+jest.unmock('../src/components/health/Health');
 import React  from 'react';
 import { shallow, mount, render } from 'enzyme';
 import Health from '../src/components/health/Health';
 
 describe('Health tab  Tests', () => {	
-    var item={heading:'This is it', value:'10', low:'These many per/hr'};
-    
-    const wrapper = shallow(<Tilex items={item}/>);
+    var item = [
+		{ component:{componentNumber: '16', componentType: 'PPS'}, states:{stoppedState:'3', onState:'12', errorState:'1'} }
+		]
+    const wrapper = shallow(<Health items={item}/>);
 
 //Structure testing
-	it('Should contain 4 div elements',()=>{
-   		expect(wrapper.find('div').length).toEqual(4);
+	it('Should contain 16 div elements',()=>{
+   		expect(wrapper.find('div').length).toEqual(16);
 	 });
 
-	it('Should contain 1 div with class "gorUp-tile"',()=>{
-		expect(wrapper.find('.gorUp-tile').length).toEqual(1);
+	it('Should contain 1 div with class "upperText"',()=>{
+		expect(wrapper.find('.upperText').length).toEqual(1);
+	});
+
+	it('Should contain 1 div with class "subtext"',()=>{
+		expect(wrapper.find('.subtext').length).toEqual(1);
 	});
 
 	it('Expect no buttons',()=>{
@@ -22,26 +27,12 @@ describe('Health tab  Tests', () => {
 	});
 
 //Content testing
-	it('Should contain "This is it" in heading',()=>{
-		expect(wrapper.find('.gorHeading').text()).toBe(item.heading);
+	it('Should contain "16" in heading',()=>{
+		expect(wrapper.find('.upperText').text()).toBe(item[0].component.componentNumber);
 	});
 
-	it('Should contain 10 as value',()=>{
-		expect(wrapper.find('.gorHeading-value').text()).toEqual(item.value);
+	it('Should contain "PPS" in heading',()=>{
+		expect(wrapper.find('.subtext').text()).toBe(item[0].component.componentType);
 	});
-
-	it('Status should be items.status',()=>{
-		expect(wrapper.find('.gorLow-tile').text()).toBe(item.low);
-	});
-    
-	it('Heading value changed',()=>{
-    	item.heading='Give error';
-		expect(wrapper.find('.gorHeading').text()).not.toBe(item.heading);
-	});
-
-	it('Re-rendering Tilex',()=>{
-		expect(shallow(<Tilex items={item}/>).find('.gorHeading').text()).toBe(item.heading);
-	});
-
 });
 

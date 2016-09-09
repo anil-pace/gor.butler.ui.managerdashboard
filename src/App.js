@@ -87,9 +87,8 @@ class App extends React.Component{
 				</div>
 				<div>
 				<OrderStatsWidget/>
-				<PerformanceWidget/>
-				<SortExample/>
-
+        <PerformanceWidget/>
+        <SortExample/>
 
 				</div>
 
