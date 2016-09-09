@@ -22,14 +22,12 @@ class Overview extends React.Component{
 		 * Need to remove these hardcoded variables
 		 * 
 		 */
-		var item1={heading:'Items to Stock', value:'4,74,579', low:'4 PPS stocking 3,546 items/hr', logo:'iStock'};
-		var items3={start:"09:10:25", name:"Krish verma gandhi sharma", post:"Manager"};
 
 		return (
 		<div className="gorWidgetWrap">
 				<div className="section group">
 					<div className="col span_2_of_4">
-						<PutStatusWidget items={item1}/>
+						<PutStatusWidget items={''}/>
 						<AuditStatusWidget items={''}/>
 					</div>
 					<div className="col span_2_of_4 gorNoML">

@@ -6,7 +6,7 @@
   },
   {
     "id": "boilerplate.components.Footer.author.message",
-    "defaultMessage": "Made with love by {author}.",
+    "defaultMessage": "Made with hate by {author}.",
     "message": "Made with love by {author}."
   }
 ]
