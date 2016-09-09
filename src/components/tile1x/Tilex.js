@@ -7,7 +7,7 @@ class Tilex extends React.Component{
     }	
 	render(){
 		return (
-		<div className="gor-tile gorSingle">
+		<div className="gor-tile gor-single">
 			<div className="gor-up-tile">
 				<div className="gor-tile-left">
 					<span className="gor-heading">{this.props.items.heading}</span>

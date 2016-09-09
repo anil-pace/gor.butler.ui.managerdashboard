@@ -22,7 +22,7 @@ body
   &.gor-double{
       width:96%;
   }
-  &.gorSingle{
+  &.gor-single{
       width:47%;
   }
   .gor-status{
@@ -88,6 +88,7 @@ body
   color: #666666;
   padding: 10px 0px 15px 20px;
   min-height:calculateRem(20px);
+  overflow:hidden;
 }
 
 }
@@ -102,7 +103,7 @@ body
     .gor-tile-two{
         width: 100%;
     }
-      &.gorSingle{
+      &.gor-single{
           width:100%;
       }
     }
