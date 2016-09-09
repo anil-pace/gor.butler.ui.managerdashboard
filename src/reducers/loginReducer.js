@@ -9,16 +9,17 @@ export  function authLogin(state={},action){
 	  case LOGIN_REQUEST:
 	  case LOGIN_REDIRECT:
 	  case LOGIN_SUCCESS:
-	    
+	    //state.selectedAction = action.type;
+	    //window.localStore.setItem('auth_token',action.data.auth_token)
+
       return Object.assign({}, state, {
         	"auth_token": action.data.auth_token,
-        	"username" :action.data.username
+          "username":"admin"
       })
     case LOGOUT:
       
       return Object.assign({}, state, {
-          "auth_token": null,
-          "username" :null
+          "auth_token": null
       })
 
 	  default:

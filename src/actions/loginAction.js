@@ -1,5 +1,5 @@
 import {utils} from '../utilities/ajax'
-import { LOGIN_REQUEST, LOGIN_REDIRECT, LOGIN_SUCCESS,LOGIN_FAILURE} from '../constants/appConstants'
+import { LOGIN_REQUEST, LOGIN_REDIRECT, LOGIN_SUCCESS,LOGIN_FAILURE, AJAX_CALL} from '../constants/appConstants'
 
 
 
@@ -9,26 +9,29 @@ import { LOGIN_REQUEST, LOGIN_REDIRECT, LOGIN_SUCCESS,LOGIN_FAILURE} from '../co
 
 
 export function loginRequest(data){
-	return {
-		type: LOGIN_REQUEST,
-    	data
-  	}
+  return {
+    type: LOGIN_REQUEST,
+      data
+    }
 }
 
 export function loginRedirect(data){
-	return {
-		type: LOGIN_REDIRECT,
-    	data
-  	}
+  return {
+    type: LOGIN_REDIRECT,
+      data
+    }
 }
 
-function receiveAuthData(data){
-	if(!data.auth_token){
-    	return{
-    		type: LOGIN_FAILURE,
-    		data
-    	}
+export function receiveAuthData(data){  
+  if(!data.auth_token)
+  {
+      console.log('Login Fail');
+      return{
+        type: LOGIN_FAILURE,
+        data
+      }
   }
+  console.log('Login Pass');
   return{
         type: LOGIN_SUCCESS,
         data
@@ -37,22 +40,12 @@ function receiveAuthData(data){
 /**
  * function that sends ajax to authorize user
  */
- 
-function authData(params){
-  return dispatch => {
-    return fetch('../mock/loginJson.json',{
-      method: 'GET'
-
-    }).then(response => response.json())
-      .then(json => dispatch(receiveAuthData(json)))
-  }
-}
 
 export function authLoginData(params) {
-  return (dispatch) => {
-      return dispatch(authData(params))
-    
+  return {
+    type: AJAX_CALL,
+    params
   }
-  
-}
+ }
+
 

@@ -2,6 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { LOGIN_REQUEST, authLoginData } from '../../actions/loginAction';
 import { connect } from 'react-redux';
+import {LOGIN_URL, AUTH_LOGIN} from '../../constants/appConstants'
 import {FormattedMessage} from 'react-intl';
 
 class Login extends React.Component{
@@ -17,7 +18,7 @@ class Login extends React.Component{
      */
         
       if (nextProps.auth_token  && nextProps.userName) {
-           this.props.history.push("overview");
+           this.props.history.push("/overview");
       }
     }
     /**
@@ -32,9 +33,11 @@ class Login extends React.Component{
           	'password': this.password.value,
          };
     	let loginData={
-    		'formdata':this.loginForm,
-    		'url':'./dummy.json',
+
+    		'url':LOGIN_URL,
+    		'formdata':formdata,
         	'method':'POST',
+        	'cause':AUTH_LOGIN,
         	'contentType':'application/json'
     	}
     	
@@ -50,9 +53,6 @@ class Login extends React.Component{
 					<option value="en-US">English</option>
 					<option value="ch">Chinese</option>
 				</select>
-                <p>
-                <FormattedMessage id="boilerplate.components.Footer.author.message" defaultMessage ="arshd"/>
-                </p>
 				<input type="submit"  value="Login" />
  			</div>
  			</form>

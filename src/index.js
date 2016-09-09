@@ -17,7 +17,6 @@ import App from './App';
 import Overview from './containers/Overview';
 import configureStore from './store';
 import socketMiddleware from './middleware/socketMiddleware';
-
 import enTranslations from './translations/en.json'
 
 
@@ -41,8 +40,6 @@ ReactDOM.render(
 			<Route name="overview" path="/overview"  component={Overview} />
 			<Route name="system" path="/system"  component={Login} />
 		</Route>
-		<Route name="app" path="/"  component={Login} />
-		<Route name="app" path="md"  component={App} />
 		</Router>
 	</IntlProvider>
 	</Provider>,

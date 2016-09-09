@@ -95,7 +95,6 @@ body {
 .checkbox-disabled-icon,
 .overview-tile-yellow-alert-icon,
 .overview-tile-red-alert-icon,
-.overview-tile-ontime-icon,
 .header-emergency-icon,
 .header-red-alert-icon,
 .header-yellow-alert-icon,
@@ -109,6 +108,7 @@ body {
 .cbs-overview-rejection,
 .cbs-overview-chutes,
 .cbs-overview-casket,
+.overview-tile-ontime-icon,
 .cbs-overview-inducts, .statusOl, .statusAl, .iStock {
   background-image: url(images/icons.svg);
 }
@@ -150,6 +150,14 @@ body {
 
 .iStock {
   background-position: -210px 0;
+}
+
+.overview-tile-ontime-icon {
+  background-position: -1px -77px;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  margin-right: 8px;
 }
 
 /*  SECTIONS  */
@@ -495,7 +503,7 @@ body {
   cursor: pointer;
 }
 
-.gorTab .gorUpperText {
+.gorTab .gor-upperText {
   padding-top: 7px;
   font-family: "source sans pro";
   font-size: 18px;
@@ -558,92 +566,99 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
-.gorTile {
+.gor-tile {
   background: #fff;
   border-radius: 0.1875rem;
   box-shadow: 0px 2px 3px 3px #EAEAEA;
   display: inline-block;
+  min-height: 10.625rem;
   margin: 1% 1% 1% 2%;
   font-size: 0;
 }
 
-.gorTile.gorDouble {
+.gor-tile.gor-double {
   width: 96%;
 }
 
-.gorTile.gorSingle {
+.gor-tile.gorSingle {
   width: 47%;
 }
 
-.gorTile .gorStatus {
+.gor-tile .gor-status {
   font-family: 'Source Sans Pro semibold', sans-serif;
+  color: #666666;
   font-size: 1rem;
   padding: 0;
   margin: 0;
   line-height: 30px;
 }
 
-.gorTile .gorUp-tile {
+.gor-tile .gor-up-tile {
   padding: 15px 20px 0px 20px;
   min-height: 7.8125rem;
 }
 
-.gorTile .gorTile-left {
+.gor-tile .gor-tile-left {
   width: 80%;
   display: inline-block;
 }
 
-.gorTile .gorTile-one {
-  width: 50%;
+.gor-tile .gor-tile-one {
+  width: 45%;
   display: inline-block;
   margin-right: auto;
 }
 
-.gorTile .gorTile-two {
-  width: 50%;
+.gor-tile .gor-tile-two {
+  width: 55%;
   display: inline-block;
   margin-right: 0;
 }
 
-.gorTile .gorHeading {
+.gor-tile .gor-heading {
   font-family: 'Source Sans Pro semibold', sans-serif;
   font-size: 1rem;
   font-weight: 600;
   line-height: 46px;
 }
 
-.gorTile .gorHeading-value {
+.gor-tile .gor-heading-value {
   font-family: 'Source Sans Pro regular', sans-serif;
   font-size: 2.8125rem;
   padding: 0;
   margin: 0;
 }
 
-.gorTile .gorSuccess {
+.gor-tile .gor-success {
   color: #00a54f;
 }
 
-.gorTile .gorBreach {
+.gor-tile .gor-breach {
   color: #ec1c24;
 }
 
-.gorTile .gorRisk {
+.gor-tile .gorRisk {
   color: #dd7f03;
 }
 
-.gorTile .gorTile-right {
+.gor-tile .gor-none {
+  color: #aaaaaa;
+}
+
+.gor-tile .gor-tile-right {
   width: 16%;
   display: inline-block;
   vertical-align: top;
   height: 55px;
 }
 
-.gorTile .gorLow-tile {
+.gor-tile .gor-low-tile {
   font-family: 'Source Sans Pro semibold', sans-serif;
   font-size: 1rem;
   background: #F7F7F7;
   color: #666666;
   padding: 10px 0px 15px 20px;
+  min-height: 1.25rem;
 }
 
 .gorNoML {
@@ -652,13 +667,13 @@ body {
 
 /*Media queries*/
 @media only screen and (max-width: 480px) {
-  .gorTile .gorTile-one {
+  .gor-tile .gor-tile-one {
     width: 100%;
   }
-  .gorTile .gorTile-two {
+  .gor-tile .gor-tile-two {
     width: 100%;
   }
-  .gorTile.gorSingle {
+  .gor-tile.gorSingle {
     width: 100%;
   }
 }

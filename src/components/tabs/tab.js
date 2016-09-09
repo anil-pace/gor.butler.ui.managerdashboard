@@ -13,7 +13,7 @@ class Tab extends React.Component{
 		<div className="gorTab gorContainer">
 		<div className="gorMainBlock">
 			<div >
-				<div className="gorUpperText">
+				<div className="gor-upperText">
 					OVERVIEW
 				</div>
 			</div>
