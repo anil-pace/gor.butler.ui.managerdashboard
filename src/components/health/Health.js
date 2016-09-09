@@ -7,7 +7,7 @@ class Health extends React.Component{
     }	
 	render(){
 
-	console.log(this.props.items[0])
+	
 		return (
 		<div className="health mainBlock">
 		<div className="block attributes">

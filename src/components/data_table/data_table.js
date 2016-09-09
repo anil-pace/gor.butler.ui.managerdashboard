@@ -84,7 +84,6 @@ class SortExample extends React.Component {
     super(props);
 
     this._dataList = new FakeObjectDataListStore(4);
-    console.log(this._dataList);
     this._defaultSortIndexes = [];
     var size = this._dataList.getSize();
     for (var index = 0; index < size; index++) {
