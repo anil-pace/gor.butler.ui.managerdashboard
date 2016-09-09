@@ -27,7 +27,7 @@ class PickStatusWidget extends React.Component{
         }
         else
         {
-            heading2='Remaining time';
+            heading2='Time to cut-off';
             text2='something';
             low1='PPS Opertaing '+this.props.ordersData.avg+' per/hr';
             status2=this.props.ordersData.time_current;

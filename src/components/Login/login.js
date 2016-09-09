@@ -53,6 +53,7 @@ class Login extends React.Component{
 					<option value="en-US">English</option>
 					<option value="ch">Chinese</option>
 				</select>
+                <FormattedMessage id="boilerplate.components.Footer.author.message" defaultMessage ="arshd"/>
 				<input type="submit"  value="Login" />
  			</div>
  			</form>
