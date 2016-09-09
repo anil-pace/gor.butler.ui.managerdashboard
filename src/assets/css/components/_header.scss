@@ -1,0 +1,154 @@
+
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+@import '../abstracts/functions';
+
+.gorHeader {
+	&.head{
+		overflow: hidden;
+    	padding: calculateRem(5px) 0;
+    	background:#fff;
+	}
+	.dropbtn{
+		background-color: #fff;
+		color: #4d5055;
+		padding: 0 1em;
+		font-size: calculateRem(14px);
+		border: none;
+		cursor: pointer;
+		width :calculateRem(188px); 
+		font-family: $gor-font-family;
+		&:hover{
+			background-color: #efefef;
+		}
+		&:focus{
+			background-color: #efefef;
+		}
+		
+		
+	}
+	.dropdown {
+			
+			display: inline-block;
+			vertical-align: middle;
+		}
+	.dropdown-content {
+			font-family: $gor-font-family;
+			background-color: white;
+			font-size: calculateRem(14px);
+			color: #4d5055;
+			width :calculateRem(223px); 
+			display: none;
+			position: absolute;
+			right: 0;
+			min-width: 5em;
+			box-shadow: 0em .1em .2em 0em rgba(0,0,0,0.2);
+			a{
+				color: #666666;
+				background-color: white;
+				padding: calculateRem(12px) calculateRem(16px);
+				font-size: .7em;
+				text-decoration: none;
+				padding: 1em 3em;
+				display: block;
+				&:hover{
+				 background-color: #efefef
+				}
+			}
+		}
+		.show {
+			display:block;
+		}
+		.horizontalDiv {
+			border-bottom: 0.15em solid #e7e7e7;
+		}
+		.logo {
+			display: inline-block; 
+			overflow: hidden;
+    		vertical-align: middle;
+    		border-right: calculateRem(1px) solid #F2F2F2;
+		}
+		.upperText {
+			font-family: $gor-font-family;
+			font-size: calculateRem(18px);
+			color: #4d5055;
+			font-weight: bold;
+			line-height: 1;  
+			display: inline-block;
+			
+		}
+		.subText {
+			font-family: $gor-font-family;
+			font-size: calculateRem(12px);
+			font-weight: normal;
+			color: #4d5055;
+		}
+		.subTextClient {
+				font-family: $gor-font-family;
+				font-size: calculateRem(12px);
+				font-weight: normal;
+				color: #4d5055;
+				line-height: calculateRem(0px); 
+				text-align: left;
+				padding-right: calculateRem(20px);
+				padding-top: calculateRem(9px);
+
+			}
+
+			.block {
+				display: inline-block;
+				
+			}
+			.mainBlock {
+				display: inline-block;
+				overflow: hidden;
+				padding: calculateRem(0px) calculateRem(5px);
+				
+			}
+
+			.blockSystem {
+				display: inline-block;
+				overflow: hidden;
+				padding-left:calculateRem(5px);
+				vertical-align: middle;
+				
+			}
+
+			.blockLeft{
+				display: inline-block;
+				float:right;
+			}
+			.upperTextClient {
+				padding:10px calculateRem(20px) calculateRem(6px) calculateRem(0px);
+				font-family: $gor-font-family;
+				font-size: calculateRem(14px);
+				font-weight: 600;
+				line-height: 0;  
+				display: inline-block;
+
+			}
+
+			.horizontal-line{
+			display: inline-block;
+			height: calculateRem(30px);
+			border-left: 1px solid #f7f7f7;
+			vertical-align: sub;
+			}
+			.truncate {
+				width: calculateRem(110px);
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+}
+
+			
+
+			
+
+			
+			
+
+		
+
+			

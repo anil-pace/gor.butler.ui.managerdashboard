@@ -1,0 +1,70 @@
+
+/* 
+Reset Stylesheet v0.0.1
+Author: Himanshu Saraswat
+*/
+
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+@import '../abstracts/functions';
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, 
+del, dfn, em, img, ins, a,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure, 
+footer, header, hgroup, nav, section,video {
+    @include reset-styles;
+}
+
+body {
+    line-height:1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+article,aside,details,figcaption,figure,
+footer,header,nav,section { 
+    display:block;
+}
+q:before, q:after {
+    content:'';
+    content:none;
+}
+
+a {    
+    text-decoration:none;
+}
+
+del {
+    text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+    border-bottom:1px dotted;
+    cursor:help;
+}
+
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+textarea {
+    resize: vertical
+}
+button,fieldset,img,input[type=button],input[type=submit] {
+    border: 0
+}
+
+input, select {
+    vertical-align:middle;
+}
+
+

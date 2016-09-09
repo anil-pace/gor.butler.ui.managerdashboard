@@ -1,0 +1,12 @@
+[
+  {
+    "id": "app.components.LocaleToggle.de",
+    "defaultMessage": "de",
+    "message": ""
+  },
+  {
+    "id": "boilerplate.components.Footer.author.message",
+    "defaultMessage": "Made with hate by {author}.",
+    "message": "Made with love by {author}."
+  }
+]

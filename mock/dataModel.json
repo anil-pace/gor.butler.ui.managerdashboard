@@ -1,0 +1,97 @@
+{   "userData": {
+      "fullName": "Naveenranju gajam", //not available
+      "role": "Manager" //not available
+   },
+
+   "applicationStatus": {
+      "startTime": "09:00:00", //not available
+      "overview": "Fulfilling Orders", //not available
+      "system": "Online", //not available
+      "orders": "60% fulfilled", //(total-pending/total)/100
+      "inventory": "78% space utilized", //perentage present
+      "users": "35 users logged in" //count_active --  users
+   },
+   "butlerSummary": {
+      "put": {
+         "items": "1,23,454",//pending number of items is not supplied 	--- ask karthi
+//for the concept of goal for the day
+         "text": "4 PPS stocking 3,456 items/hr" //
+      },
+      "audit": {
+         "items": "1,23,454",//pending number of items is not supplied 	--- ask karthi
+         "text": "4 PPS stocking 3,456 items/hr"
+      },
+      "orders": {
+         "toFulfill": "completed",
+         "status": "On Shcedule",
+         "timeToCutOff": {
+            "time": "1 hr 20 min",
+            "currentTime": "27 July - 14:00 (IST)",
+            "text": "Estimated to complete in 1h 05 m"
+         },
+         "text": "10 PPS fulfilling 2,400 orders/hr"
+      }
+   },
+   "systemHealth": {
+      "pps": {
+	//check for inactive in current MD
+         "total": "12",
+         "error": "0",
+         "on": "3",
+         "off": "0"
+      },
+      "bots": {
+         "total": "340",
+         "error": "20",
+         "on": "320",
+         "off": "0"
+      },
+      "chargingStations": {
+         "total": "20", //connected + disconnected
+         "error": "0", // need to check with Paul -- check with Karhik... error 
+//should be on + off
+         "on": "17",
+         "off": "3"
+      }
+   },
+	"butlerPrgressChart" : [
+		{
+			"time" : "09:00:00",
+			"noOfOrders" :"200"
+		},
+		{
+			"time" : "09:00:10",
+			"noOfOrders" :"300"
+		},
+		{
+			"time" : "09:00:30",
+			"noOfOrders" :"100"
+		},
+		{
+			"time" : "09:00:40",
+			"noOfOrders" :"50"
+		},
+		{
+			"time" : "09:00:50",
+			"noOfOrders" :"100"
+		},
+		{
+			"time" : "09:00:60",
+			"noOfOrders" :"400"
+		}
+		],
+			"componentPerformance" : {
+				"ppsPick":{
+					"pps007" : "error",
+					"pps005" : "233",
+					"pps005" : "233",
+					"pps005" : "233",
+					"pps005" : "233",
+					"pps005" : "233",
+					"pps005" : "233",
+					"pps005" : "233",
+					"pps005" : "233",
+				}
+		}
+
+}
