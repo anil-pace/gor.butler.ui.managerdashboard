@@ -4,6 +4,7 @@ import { LOGIN_REQUEST, authLoginData } from '../../actions/loginAction';
 import { connect } from 'react-redux';
 import {LOGIN_URL, AUTH_LOGIN} from '../../constants/appConstants'
 import {FormattedMessage} from 'react-intl';
+import messages from './messages';
 
 class Login extends React.Component{
 	constructor(props) 
@@ -44,7 +45,7 @@ class Login extends React.Component{
     }
 	render(){
 		return (
-			<form action="#"  id = "loginForm" ref={node => { this.loginForm = node }} onSubmit={(e) => this.handleSubmit(e)}>
+            <form action="#"  id = "loginForm" ref={node => { this.loginForm = node }} onSubmit={(e) => this.handleSubmit(e)}>
 			<div>
 				<input type="text" id="username"  placeholder="Enter Username" ref={node => { this.userName = node }}/>
 				<input type="password" id="password" placeholder="Enter Password" ref={node => { this.password = node }}/>
@@ -54,6 +55,9 @@ class Login extends React.Component{
 				</select>
 				<input type="submit"  value="Login" />
  			</div>
+            <div>
+                <FormattedMessage {...messages.authorMessage} values={{author: 'Max Stoiber'}}/>
+            </div>
  			</form>
 		);
 	}

@@ -8,8 +8,10 @@ import {setWsAction } from './actions/socketActions';
 import { WS_CONNECT,WS_ONSEND } from './constants/appConstants'
 import { wsInitData } from './constants/initData.js'
 import Dropdown from './components/dropdown/dropdown';
+
 import OrderStatsWidget from './containers/orderStatsWidget'
 import PerformanceWidget from './containers/performanceWidget'
+
 import { REQUEST_HEADER, getFetchData } from './actions/headerAction'
 import { connect } from 'react-redux';
 import Chart from './components/graphd3/graphd3';
@@ -73,7 +75,6 @@ class App extends React.Component{
 			<div className="mainContainer">
 				<Header user={items3}/>
 				<Tabs/>
-				
 				{this.props.children}
 			</div>
 			
