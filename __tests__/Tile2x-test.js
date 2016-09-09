@@ -14,7 +14,7 @@ describe('Tile2x  Tests', () => {
 	 });
 
 	it('Should contain 1 div with class "up-tile"',()=>{
-		expect(wrapper.find('.gorTile-one').length).toEqual(1);
+		expect(wrapper.find('.gor-tile-one').length).toEqual(1);
 	});
 
 	it('Expect no buttons',()=>{
@@ -23,31 +23,31 @@ describe('Tile2x  Tests', () => {
 
 //Content testing
 	it('Should contain "This is it" in heading 1',()=>{
-		expect(wrapper.find('.gorTile-one .gorHeading').text()).toBe(item.heading1);
+		expect(wrapper.find('.gor-tile-one .gor-heading').text()).toBe(item.heading1);
 	});
 
 	it('Should contain 10 as value 1',()=>{
-		expect(wrapper.find('.gorTile-one .gorHeading-value').text()).toEqual(item.value1);
+		expect(wrapper.find('.gor-tile-one .gor-heading-value').text()).toEqual(item.value1);
 	});
 
 	it('Status should be items.status1',()=>{
-		expect(wrapper.find('.gorTile-one .gorLow-tile').text()).toBe(item.low1);
+		expect(wrapper.find('.gor-tile-one .gor-low-tile').text()).toBe(item.low1);
 	});
 
 	it('Should contain "This is it" in heading 1',()=>{
-		expect(wrapper.find('.gorTile-two .gorHeading').text()).toBe(item.heading2);
+		expect(wrapper.find('.gor-tile-two .gor-heading').text()).toBe(item.heading2);
 	});
 
 	it('Should contain 10 as value 1',()=>{
-		expect(wrapper.find('.gorTile-two .gorHeading-value').text()).toEqual(item.value2);
+		expect(wrapper.find('.gor-tile-two .gor-heading-value').text()).toEqual(item.value2);
 	});
 
 	it('Status should be items.status1',()=>{
-		expect(wrapper.find('.gorTile-two .gorLow-tile').text()).toBe(item.low2);
+		expect(wrapper.find('.gor-tile-two .gor-low-tile').text()).toBe(item.low2);
 	});
 
 	it('Test progress value',()=>{
-		expect(wrapper.find('.gorTile-two .gorStatus').text()).not.toBe(item.status1);
+		expect(wrapper.find('.gor-tile-two .gor-status').text()).not.toBe(item.status1);
 	});
     
 });

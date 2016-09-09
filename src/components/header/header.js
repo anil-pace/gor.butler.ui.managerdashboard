@@ -67,7 +67,7 @@ class Header extends React.Component{
 
 function mapStateToProps(state, ownProps){
 	return  {
-		"ppsData":state.recieveSocketActions.ppsData || {}
+	//	"ordersData":state.recieveSocketActions.ordersData || {}
 		}
 		 
 

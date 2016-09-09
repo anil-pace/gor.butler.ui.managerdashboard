@@ -40,17 +40,6 @@ export function receiveAuthData(data){
 /**
  * function that sends ajax to authorize user
  */
- 
-// function authData(params){
-//   return dispatch => {
-//     return fetch('../mock/loginJson.json',{
-//       method: 'GET'
-
-//     }).then(response => response.json())
-//       .then(json => dispatch(receiveAuthData(json)))
-// >>>>>>> develop
-//   }
-// }
 
 export function authLoginData(params) {
   return {

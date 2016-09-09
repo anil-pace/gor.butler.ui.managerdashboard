@@ -7,17 +7,18 @@ class Tilex extends React.Component{
     }	
 	render(){
 		return (
-		<div className="gorTile gorSingle">
-			<div className="gorUp-tile">
-				<div className="gorTile-left">
-					<span className="gorHeading">{this.props.items.heading}</span>
-					<p className="gorHeading-value">{this.props.items.value}</p>
+		<div className="gor-tile gorSingle">
+			<div className="gor-up-tile">
+				<div className="gor-tile-left">
+					<span className="gor-heading">{this.props.items.heading}</span>
+					<p className="gor-heading-value">{this.props.items.value}</p>
+					<p className="gor-status"></p>
 				</div>
-				<span className="gorTile-right iStock">
+				<span className={"gor-tile-right "+this.props.items.logo}>
 			 		
 				</span>
 			</div>
-			<div className="gorLow-tile">
+			<div className="gor-low-tile">
 			 	<span>{this.props.items.low}</span>
 			</div>
 		</div> 

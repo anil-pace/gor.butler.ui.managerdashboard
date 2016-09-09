@@ -10,78 +10,84 @@ body
   background: #F2F2F2;
   font-family: 'Source Sans Pro', sans-serif;
 }
-.gorTile
+.gor-tile
 {
   background: #fff;
   border-radius: calculateRem(3px);
   box-shadow: 0px 2px 3px 3px #EAEAEA;
   display: inline-block;
+  min-height:calculateRem(170px);
   margin: 1% 1% 1% 2%;
   font-size: 0;
-  &.gorDouble{
+  &.gor-double{
       width:96%;
   }
   &.gorSingle{
       width:47%;
   }
-  .gorStatus{
+  .gor-status{
     font-family: 'Source Sans Pro semibold', sans-serif;
+    color: #666666;
     font-size: calculateRem(16px);
     padding:0;
     margin:0;
     line-height: 30px;
   }
-  .gorUp-tile{
+  .gor-up-tile{
     padding: 15px 20px 0px 20px;
     min-height:calculateRem(125px);
   }
-  .gorTile-left{
+  .gor-tile-left{
     width: 80%;
     display:inline-block;
   }
-  .gorTile-one{
-    width: 50%;
+  .gor-tile-one{
+    width: 45%;
     display:inline-block;
     margin-right: auto;
   }
-  .gorTile-two{
-    width: 50%;
+  .gor-tile-two{
+    width: 55%;
     display:inline-block;
     margin-right: 0;
 }
-.gorHeading{
+.gor-heading{
     font-family: 'Source Sans Pro semibold', sans-serif;
     font-size: calculateRem(16px);
     font-weight: 600;
     line-height: 46px;
 }
-.gorHeading-value{
+.gor-heading-value{
     font-family: 'Source Sans Pro regular', sans-serif;
     font-size: calculateRem(45px);
     padding:0;
     margin:0;
 }
-.gorSuccess{
+.gor-success{
   color: #00a54f;
 }
-.gorBreach{
+.gor-breach{
   color: #ec1c24;
 }
 .gorRisk{
   color:#dd7f03;
 }
-.gorTile-right{
+.gor-none{
+  color:#aaaaaa;
+}
+.gor-tile-right{
   width: 16%;
   display:inline-block;
   vertical-align: top;
   height:55px;
 }
-.gorLow-tile{
+.gor-low-tile{
   font-family: 'Source Sans Pro semibold', sans-serif;
   font-size: calculateRem(16px);
   background:#F7F7F7;
   color: #666666;
   padding: 10px 0px 15px 20px;
+  min-height:calculateRem(20px);
 }
 
 }
@@ -89,11 +95,11 @@ body
 
 /*Media queries*/
 @media only screen and (max-width: 480px) {
-    .gorTile{
-       .gorTile-one{
+    .gor-tile{
+       .gor-tile-one{
         width: 100%;
     }
-    .gorTile-two{
+    .gor-tile-two{
         width: 100%;
     }
       &.gorSingle{

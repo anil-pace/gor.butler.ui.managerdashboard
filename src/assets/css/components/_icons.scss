@@ -11,7 +11,6 @@
 .checkbox-disabled-icon,
 .overview-tile-yellow-alert-icon,
 .overview-tile-red-alert-icon,
-.overview-tile-ontime-icon,
 .header-emergency-icon,
 .header-red-alert-icon,
 .header-yellow-alert-icon,
@@ -25,6 +24,7 @@
 .cbs-overview-rejection,
 .cbs-overview-chutes,
 .cbs-overview-casket,
+.overview-tile-ontime-icon,
 .cbs-overview-inducts,.statusOl,.statusAl,.iStock {
     background-image: url(images/icons.svg);
 }
@@ -62,4 +62,11 @@
 }
 .iStock{
     background-position: -210px 0;
+}
+.overview-tile-ontime-icon{
+    background-position: -1px -77px;    
+    width: 16px;
+    height: 16px;
+    display:inline-block;
+    margin-right:8px;   
 }

@@ -81,7 +81,7 @@
     "react": "^15.3.1",
     "react-dom": "^15.2.0",
     "react-dropdown": "^1.1.0",
-    "react-intl": "^2.1.4",
+    "react-intl": "^2.1.5",
     "react-intl-redux": "^0.1.0",
     "react-redux": "^4.4.5",
     "react-select": "^1.0.0-beta14",
@@ -89,7 +89,8 @@
   },
   "jest": {
     "unmockedModulePathPatterns": [
-      "<rootDir>/node_modules/react/",
+      "react",
+      "react-redux",
       "<rootDir>/node_modules/enzyme/"
     ]
   }

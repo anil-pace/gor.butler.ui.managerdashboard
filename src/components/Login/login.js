@@ -3,6 +3,7 @@ import ReactDOM  from 'react-dom';
 import { LOGIN_REQUEST, authLoginData } from '../../actions/loginAction';
 import { connect } from 'react-redux';
 import {LOGIN_URL, AUTH_LOGIN} from '../../constants/appConstants'
+import {FormattedMessage} from 'react-intl';
 
 class Login extends React.Component{
 	constructor(props) 
@@ -16,9 +17,8 @@ class Login extends React.Component{
      * and redirecting to main page
      */
         
-      if (nextProps.auth_token) {
-      	console.log('You are logged in');
-        this.props.history.push("md");
+      if (nextProps.auth_token  && nextProps.userName) {
+           this.props.history.push("/overview");
       }
     }
     /**
@@ -61,7 +61,8 @@ class Login extends React.Component{
 
 function mapStateToProps(state, ownProps){
 	return {
-        auth_token:state.authLogin.auth_token
+        auth_token:state.authLogin.auth_token,
+        userName:state.authLogin.username
     };
 }
 /**
