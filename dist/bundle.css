@@ -109,7 +109,7 @@ body {
 .cbs-overview-chutes,
 .cbs-overview-casket,
 .overview-tile-ontime-icon,
-.cbs-overview-inducts, .statusOl, .statusAl, .iStock {
+.cbs-overview-inducts, .statusOl, .statusAl, .iStock, .iAudit, .iPick {
   background-image: url(images/icons.svg);
 }
 
@@ -149,9 +149,16 @@ body {
 }
 
 .iStock {
-  background-position: -210px 0;
-  width: 50px;
-  height: 50px;
+  background-position: -206px 0;
+  width: 45px;
+}
+
+.iAudit {
+  background-position: -256px -5px;
+}
+
+.iPick {
+  background-position: -308px -1px;
 }
 
 .overview-tile-ontime-icon {
@@ -639,7 +646,7 @@ body {
   color: #ec1c24;
 }
 
-.gor-tile .gorRisk {
+.gor-tile .gor-risk {
   color: #dd7f03;
 }
 
@@ -648,7 +655,7 @@ body {
 }
 
 .gor-tile .gor-tile-right {
-  width: 16%;
+  width: 50px;
   display: inline-block;
   vertical-align: top;
   height: 55px;
@@ -875,4 +882,48 @@ body {
   fill: white;
   font: 20px sans-serif;
   text-anchor: end;
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: url("../src/assets/Source_Sans_Pro/SourceSansPro-Regular.ttf") format("truetype");
+}
+
+body {
+  background: #4D5055;
+  color: #A6A7A9;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.login-form {
+  text-align: center;
+}
+
+.login-form .login-mid {
+  background: #FFFFFF;
+  border: 1px solid;
+  border-radius: 5px;
+  color: #B6B7B7;
+  width: 300px;
+  height: 300px;
+  margin-top: 10%;
+  margin-left: 40%;
+}
+
+.login-form .login-mid .upper-box {
+  color: #4D5055;
+}
+
+.login-form .login-mid .login-field {
+  margin: 5px;
+  padding: 2%;
+  width: 200px;
+  background-color: #FFFFFF;
+}
+
+.login-form .login-mid .login-btn {
+  background: #F36F36;
+  color: #FFFFFF;
+  width: 208px;
+  font-weight: bold;
 }

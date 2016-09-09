@@ -1,0 +1,50 @@
+@import '../abstracts/functions';
+
+@font-face
+{
+  font-family: 'Source Sans Pro';
+  src: url('../src/assets/Source_Sans_Pro/SourceSansPro-Regular.ttf')  format('truetype')
+}
+body
+{
+  background: #4D5055;
+  color:#A6A7A9;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+.login-form
+{
+	text-align:center;
+
+	.login-mid
+	{
+		background:#FFFFFF;
+        border: 1px solid;
+        border-radius:5px;
+		color: #B6B7B7;
+		width:300px;
+		height:300px;
+		margin-top:10%;
+		margin-left:40%;
+
+		.upper-box
+		{
+			
+			 color:#4D5055;
+		
+		}
+		.login-field
+		{
+			margin:5px;
+			padding:2%;
+			width:200px;
+			background-color:#FFFFFF;
+		}
+		.login-btn
+		{
+ 			background: #F36F36;
+ 			color: #FFFFFF;
+ 			width:208px;
+ 			font-weight:bold;
+		}	
+	}
+}

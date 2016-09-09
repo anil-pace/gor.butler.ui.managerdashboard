@@ -47,17 +47,29 @@ class Login extends React.Component{
 	render(){
 		return (
             <form action="#"  id = "loginForm" ref={node => { this.loginForm = node }} onSubmit={(e) => this.handleSubmit(e)}>
-			<div>
-				<input type="text" id="username"  placeholder="Enter Username" ref={node => { this.userName = node }}/>
-				<input type="password" id="password" placeholder="Enter Password" ref={node => { this.password = node }}/>
-				<select ref='language'>
-					<option value="en-US">English</option>
-					<option value="ch">Chinese</option>
-				</select>
-				<input type="submit"  value="Login" />
- 			</div>
+			<div className='login-form'>
+                Language:
+                <select ref='language'>
+                    <option value="en-US">English</option>
+                    <option value="ch">Chinese</option>
+                </select>
+                <div className='login-mid'>
+                <div className='upper-box'>
+                    <h1>Butler</h1>
+                    Management Interface   
+                </div>
+                <p>
+				    <input className='login-field' type="text" id="username"  placeholder="Username" ref={node => { this.userName = node }}/>
+				</p>
+                <p>
+                    <input className='login-field' type="password" id="password" placeholder="Password" ref={node => { this.password = node }}/>
+				</p>
+                <p>
+                    <input type="submit" className='login-btn'  value="Login" />
+ 			    </p>
+                </div>
+            </div>
             <div>
-                <FormattedMessage {...messages.authorMessage} values={{author: 'Max Stoiber'}}/>
             </div>
  			</form>
 		);

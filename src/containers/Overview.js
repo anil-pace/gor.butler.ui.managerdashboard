@@ -22,13 +22,15 @@ class Overview extends React.Component{
 		 * Need to remove these hardcoded variables
 		 * 
 		 */
+		 var items1={logo:'iStock'};
+		 var items2={logo:'iAudit'};
 
 		return (
 		<div className="gorWidgetWrap">
 				<div className="section group">
 					<div className="col span_2_of_4">
-						<PutStatusWidget items={''}/>
-						<AuditStatusWidget items={''}/>
+						<PutStatusWidget items={items1}/>
+						<AuditStatusWidget items={items2}/>
 					</div>
 					<div className="col span_2_of_4 gorNoML">
 						<PickStatusWidget />
