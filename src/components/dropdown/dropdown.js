@@ -1,27 +1,36 @@
 import React, { Component } from 'react';
 import Ddown from 'react-dropdown';
 
-
 class Dropdown extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      selected: { value: props.items[0].value, label: props.items[0].label}
+      selected: { value: 'one', label: 'PPS - pick performance'}
     }
     this._onSelect = this._onSelect.bind(this)
   }
 
   _onSelect (option) {
+    console.log('You selected ', option.label)
     this.setState({selected: option})
-    this.props.pf(option.value);
-
   }
 
   render () {
+    const options = [
+      { value: 'one', label: 'PPS - pick performance' },
+      { value: 'two', label: 'System health' },
+      { value: 'three', label: 'PPS - pick performance' },
+      { value: 'four', label: 'PPS - audit performance' },
+      
+    ]
+
     const defaultOption = this.state.selected
+
+
     return (
       <div className="ddown">
-        <Ddown options={this.props.items} onChange={this._onSelect} value={defaultOption} placeholder="Select an option" />
+        
+        <Ddown options={options} onChange={this._onSelect} value={defaultOption} placeholder="Select an option" />
       </div>
     )
   }

@@ -46,16 +46,18 @@ class Login extends React.Component{
     }
 	render(){
 		return (
+            <div className='login-form'>
             <form action="#"  id = "loginForm" ref={node => { this.loginForm = node }} onSubmit={(e) => this.handleSubmit(e)}>
-			<div className='login-form'>
-                Language:
-                <select ref='language'>
-                    <option value="en-US">English</option>
-                    <option value="ch">Chinese</option>
-                </select>
+                <div className='login-lang'>
+                    Language:
+                    <select ref='language'>
+                        <option value="en-US">English</option>
+                        <option value="ch">Chinese</option>
+                    </select>
+                </div>
                 <div className='login-mid'>
                 <div className='upper-box'>
-                    <h1>Butler</h1>
+                    <div className='login-head'>Butler</div>
                     Management Interface   
                 </div>
                 <p>
@@ -67,11 +69,10 @@ class Login extends React.Component{
                 <p>
                     <input type="submit" className='login-btn'  value="Login" />
  			    </p>
+                <a>Forgot password?</a>
                 </div>
+                </form>
             </div>
-            <div>
-            </div>
- 			</form>
 		);
 	}
 };

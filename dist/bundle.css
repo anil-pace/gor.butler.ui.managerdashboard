@@ -889,41 +889,54 @@ body {
   src: url("../src/assets/Source_Sans_Pro/SourceSansPro-Regular.ttf") format("truetype");
 }
 
-body {
+.login-form {
   background: #4D5055;
   color: #A6A7A9;
   font-family: 'Source Sans Pro', sans-serif;
+  height: 725px;
 }
 
-.login-form {
-  text-align: center;
+.login-form .login-lang {
+  text-align: right;
+  padding: 1%;
 }
 
 .login-form .login-mid {
+  text-align: center;
   background: #FFFFFF;
   border: 1px solid;
   border-radius: 5px;
-  color: #B6B7B7;
-  width: 300px;
-  height: 300px;
-  margin-top: 10%;
-  margin-left: 40%;
+  color: #979797;
+  width: 450px;
+  height: 400px;
+  margin-top: 11%;
+  margin-left: 33%;
+  padding-top: 2%;
 }
 
 .login-form .login-mid .upper-box {
+  padding-bottom: 5%;
+}
+
+.login-form .login-mid .upper-box .login-head {
   color: #4D5055;
+  font-size: 45px;
+  font-weight: bold;
 }
 
 .login-form .login-mid .login-field {
   margin: 5px;
   padding: 2%;
-  width: 200px;
+  width: 300px;
   background-color: #FFFFFF;
+  font-size: 20px;
 }
 
 .login-form .login-mid .login-btn {
   background: #F36F36;
   color: #FFFFFF;
-  width: 208px;
-  font-weight: bold;
+  width: 320px;
+  padding: 3%;
+  margin: 40px;
+  font-size: 20px;
 }

@@ -52,6 +52,7 @@ class PickStatusWidget extends React.Component{
 
  }
 function mapStateToProps(state, ownProps){
+    //console.log(state);
     return  {
          "ordersData":state.recieveSocketActions.ordersData || {}
     }
