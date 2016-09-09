@@ -68,7 +68,7 @@ class Chart extends React.Component{
 
       //svg.call(tip);
     
-    d3.json("./data.json", function(error,data) {
+    d3.json("http://www.mocky.io/v2/57d27c9a100000c01432817f", function(error,data) {
 
       var json=data;
         update(json);

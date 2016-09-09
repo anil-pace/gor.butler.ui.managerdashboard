@@ -24,19 +24,8 @@ class PerformanceWidget extends React.Component{
 		{ value: 'RENDER_SYSTEM_PERFORMANCE', label: 'System Performance' },
 		]
 		var wid= "Health"
-		if(renderState === "RENDER_SYSTEM_HEALTH") { return (
-			<div className="gorPerformanceWidget">
-				<div className="gorDrop">
-					<Dropdown pf={this.props.renderPerformanceWidget} items={item}/>
-				</div>
-
-				<div id="performanceGraph">
-					{<Health/>}
-				</div> 
-			</div> 
-			);
-	}
-	else if(renderState === "RENDER_SYSTEM_PERFORMANCE"){
+		
+	if(renderState === "RENDER_SYSTEM_PERFORMANCE"){
 		return (
 			<div className="gorPerformanceWidget">
 				<div className="gorDrop">
@@ -49,6 +38,21 @@ class PerformanceWidget extends React.Component{
 			</div>  
 			);
 	}
+
+	else { 
+		return (
+			<div className="gorPerformanceWidget">
+				<div className="gorDrop">
+					<Dropdown pf={this.props.renderPerformanceWidget} items={item}/>
+				</div>
+
+				<div id="performanceGraph">
+					{<Health/>}
+				</div> 
+			</div> 
+			);
+	}
+
 }
 };
 

@@ -10,14 +10,11 @@ import { wsInitData } from './constants/initData.js'
 import Dropdown from './components/dropdown/dropdown';
 import OrderStatsWidget from './containers/orderStatsWidget'
 import PerformanceWidget from './containers/performanceWidget'
-import AuditStatusWidget from './containers/auditStatusWidget'
-import PutStatusWidget from './containers/putStatusWidget'
-import PickStatusWidget from './containers/pickStatusWidget'
 import { REQUEST_HEADER, getFetchData } from './actions/headerAction'
 import { connect } from 'react-redux';
 import Chart from './components/graphd3/graphd3';
 import ChartHorizontal from './components/graphd3/graph_horizontal';
-import SortExample from './components/data_table/data_table';
+
 
 
 
