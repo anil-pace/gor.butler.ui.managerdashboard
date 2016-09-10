@@ -7,10 +7,10 @@ import {FormattedMessage} from 'react-intl';
 import messages from './messages';
 
 class Login extends React.Component{
-	constructor(props,context) 
+	constructor(props) 
 	{
     	super(props);
-        context.router
+       
     }
 
     

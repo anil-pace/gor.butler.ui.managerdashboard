@@ -26,10 +26,9 @@ class App extends React.Component{
 	 * Called once before rendering of component,used to displatch fetch action
 	 * @return {[type]}
 	 */
-	constructor(props,context) 
-	{
+	constructor(props) 
+	{  
     	super(props);
-      context.router
   }	
   
   	componentWillMount(){
