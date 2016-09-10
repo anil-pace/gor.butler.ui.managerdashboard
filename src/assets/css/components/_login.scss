@@ -11,12 +11,12 @@
   	background: #4D5055;
   	color:#A6A7A9;
   	font-family: 'Source Sans Pro', sans-serif;
-  	height:725px;
+  	height:calculateRem(800px);
 
   	.login-lang
   	{
   		text-align:right;
-  		padding:1%;
+  		padding:calculateRem(20px);
   	}
 	.login-mid
 	{
@@ -26,40 +26,53 @@
         border: 1px solid;
         border-radius:5px;
 		color: #979797;
-		width:450px;
-		height:400px;
+		width:calculateRem(490px);
+		height:calculateRem(392px);
 
-		margin-top:11%;
+		margin-top:calculateRem(50px);
 		margin-left:33%;
 
-		padding-top:2%;
+		padding-top:calculateRem(40px);
 
 		.upper-box
 		{
-			 padding-bottom:5%;
+			 margin-bottom:calculateRem(20px);
 			 .login-head
 			 {
 				color:#4D5055;
-			 	font-size:45px;
+			 	font-size:calculateRem(45px);
 			 	font-weight:bold;
 			 }
 		}
 		.login-field
 		{
-			margin:5px;
-			padding:2%;
-			width:300px;
+			margin-top:calculateRem(20px);
+			padding:calculateRem(10px);
+			width:calculateRem(320px);
 			background-color:#FFFFFF;
-			font-size:20px;
+			font-size:18px;
+			border-radius:3px;
+			border:1px solid #AAAAAA; 
 		}
 		.login-btn
 		{
  			background: #F36F36;
  			color: #FFFFFF;
- 			width:320px;
- 			padding:3%;
- 			margin:40px;
- 			font-size:20px;
+ 			width:calculateRem(350px);
+ 			padding:calculateRem(10px);
+ 			margin:calculateRem(40px);
+ 			font-size:calculateRem(20px);
+			border-radius:3px;
 		}	
+	}
+	a
+	{
+		text-decoration:underline;
+		margin-bottom:calculateRem(40px);
+	}
+	.box-bottom
+	{
+		margin-left:33%;
+		margin-top:calculateRem(10px);
 	}
 }

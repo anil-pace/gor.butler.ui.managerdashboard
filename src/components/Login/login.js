@@ -60,17 +60,12 @@ class Login extends React.Component{
                     <div className='login-head'>Butler</div>
                     Management Interface   
                 </div>
-                <p>
-				    <input className='login-field' type="text" id="username"  placeholder="Username" ref={node => { this.userName = node }}/>
-				</p>
-                <p>
-                    <input className='login-field' type="password" id="password" placeholder="Password" ref={node => { this.password = node }}/>
-				</p>
-                <p>
-                    <input type="submit" className='login-btn'  value="Login" />
- 			    </p>
+				    <input className='login-field' type="text" id="username"  placeholder="Username" ref={node => { this.userName = node }}/><br />
+                    <input className='login-field' type="password" id="password" placeholder="Password" ref={node => { this.password = node }}/><br />
+                    <input type="submit" className='login-btn'  value="Login" /><br />
                 <a>Forgot password?</a>
                 </div>
+                <div className='box-bottom'>Current time: 09:00:15(IST)</div>
                 </form>
             </div>
 		);
