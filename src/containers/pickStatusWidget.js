@@ -17,9 +17,9 @@ class PickStatusWidget extends React.Component{
     {
     	var statusClass='', statusLogo='', headingleft='',valueStatus='',textleft='',headingright='',textright='', statusleft='',statusright='',lowleft='',lowright='',logo='',items={};
         headingleft='Orders to fullfill';
-        logo=' iStock';
+        logo=' iPick';
         textleft=this.props.ordersData.count_pending;
-        if(!textleft||textleft=='0')
+        if(!textleft)
         {
             valueStatus='gor-none';
             textleft='NONE';
@@ -52,6 +52,7 @@ class PickStatusWidget extends React.Component{
 
  }
 function mapStateToProps(state, ownProps){
+    //console.log(state);
     return  {
          "ordersData":state.recieveSocketActions.ordersData || {}
     }

@@ -27,7 +27,7 @@ class Overview extends React.Component{
 		 */
 
 		var item1={heading:'Items to Stock', value:'4,74,579', low:'4 PPS stocking 3,546 items/hr', logo:'iStock'};
-        var item2={heading1:'Orders to fulfill', value1:'120', low1:'8 PPS fulfilling per/hr', status1:'On schedule', heading2:'Remaining time', value2:'68mins', low2:'Completing in 8mins', status2:'23:59'};
+        var item2={heading:'Items to Audit', value:'3,74,519', low:'4 PPS auditing 1,546 items/hr', logo:'iAudit'};;
 
 		return (
 			<div className="gorWidgetWrap">
@@ -35,7 +35,7 @@ class Overview extends React.Component{
 					<div className="col span_2_of_4">
 
 						<PutStatusWidget items={item1}/>
-						<AuditStatusWidget items={item1}/>
+						<AuditStatusWidget items={item2}/>
 
 					</div>
 					<div className="col span_2_of_4 gorNoML">
