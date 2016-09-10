@@ -11,6 +11,7 @@ import PerformanceWidget from '../containers/performanceWidget'
 import AuditStatusWidget from '../containers/auditStatusWidget'
 import PutStatusWidget from '../containers/putStatusWidget'
 import PickStatusWidget from '../containers/pickStatusWidget'
+import SortExample from '../components/data_table/data_table';
 
 class SystemTab extends React.Component{
 	constructor(props) 

@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { connect } from 'react-redux' ;
 import {REQUEST_HEADER,RECIEVE_HEADER,RECIEVE,RECIEVE_ITEM_TO_STOCK} from '../../actions/headerAction';
-
+import Dropdown from '../dropdown/dropdown';
 
 class Header extends React.Component{
 	constructor(props) 
@@ -22,6 +22,11 @@ class Header extends React.Component{
 
 	render(){
 		const { headData } = this.props;
+
+		const item = [
+		{ value: 'RENDER_SYSTEM_HEALTH', label: 'System Health' },
+		{ value: 'RENDER_SYSTEM_PERFORMANCE', label: 'System Performance' },
+		]
 		//console.log(this.props.headData);
 		return (
 		<header className="gorHeader head">

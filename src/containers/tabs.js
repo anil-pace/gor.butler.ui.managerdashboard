@@ -2,12 +2,16 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import Tab from '../components/tabs/tab';
 import {Link}  from 'react-router';
+import { connect } from 'react-redux' ;
+
 class Tabs extends React.Component{
 	constructor(props) 
 	{
     	super(props);
+
     }	
 	render(){
+		
 
 		const item1 = [
       { tab: 'OVERVIEW', Status: 'Fulfiling orders', currentState:'gorOffline' }
@@ -48,6 +52,13 @@ class Tabs extends React.Component{
 	</div>
 		);
 	}
-};
+}
 
-export default Tabs ;
+function mapStateToProps(state, ownProps){
+    
+    return  {
+         "ppsData":state.recieveSocketActions.ppsData || {}
+    }
+}
+
+export default connect(mapStateToProps)(Tabs) ;
