@@ -33,6 +33,18 @@ class Login extends React.Component{
           	'username': this.userName.value,
           	'password': this.password.value,
          };
+        if(!formdata.username||!formdata.password)
+        {
+            if(!formdata.username)
+            {
+                document.getElementsByClassName('login-usr-error')[0].style.display='block';
+            }
+            else
+            {
+             document.getElementsByClassName('login-usr-error')[1].style.display='block';
+            }
+            return;
+        }
     	let loginData={
 
     		'url':LOGIN_URL,
@@ -60,11 +72,14 @@ class Login extends React.Component{
                     Management Interface   
                 </div>
 				    <input className='login-field' type="text" id="username"  placeholder="Username" ref={node => { this.userName = node }}/><br />
+                    <div className=' login-usr-error'>Please enter your username</div>
                     <input className='login-field' type="password" id="password" placeholder="Password" ref={node => { this.password = node }}/><br />
+                    <div className='login-usr-error'>Please enter your password</div>
                     <input type="submit" className='login-btn'  value="Login" /><br />
                 <a>Forgot password?</a>
                 </div>
-                <div className='box-bottom'>Current time: 09:00:15(IST)</div>
+                <div className='box-bottom-left'>Current time: 09:00:15(IST)</div>
+                <div className='box-bottom-right'>V 1.0</div>
                 </form>
             </div>
 		);

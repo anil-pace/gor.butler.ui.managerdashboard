@@ -11,12 +11,26 @@
   	background: #4D5055;
   	color:#A6A7A9;
   	font-family: 'Source Sans Pro', sans-serif;
-  	height:calculateRem(800px);
+  	height:calculateRem(825px);
+  	padding:calculateRem(20px);
 
   	.login-lang
   	{
   		text-align:right;
-  		padding:calculateRem(20px);
+  		select
+  		{
+  			width:calculateRem(174px);
+  			height:calculateRem(30px);
+  			color:#cccccc;
+  			margin-left:10px;
+  			background:transparent;
+  			border-radius: 1px;
+  			border:1px solid;
+  			select:hover
+  			{
+  				color:#FFFFFF;  			
+  			}
+  		}
   	}
 	.login-mid
 	{
@@ -54,6 +68,14 @@
 			border-radius:3px;
 			border:1px solid #AAAAAA; 
 		}
+		.login-usr-error
+		{
+			display:none;
+			text-align:left;
+			color:#EC1C24;
+			margin-top:10px;
+			margin-left:calculateRem(75px);
+		}
 		.login-btn
 		{
  			background: #F36F36;
@@ -70,9 +92,17 @@
 		text-decoration:underline;
 		margin-bottom:calculateRem(40px);
 	}
-	.box-bottom
+	.box-bottom-left
 	{
 		margin-left:33%;
 		margin-top:calculateRem(10px);
+		display:inline;
 	}
+	.box-bottom-right
+	{
+		margin-left:33%;
+		margin-top:calculateRem(10px);
+		display:inline;
+	}
+
 }

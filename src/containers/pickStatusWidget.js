@@ -19,7 +19,7 @@ class PickStatusWidget extends React.Component{
         headingleft='Orders to fullfill';
         logo=' iPick';
         textleft=this.props.ordersData.count_pending;
-        if(textleft||textleft=='p0')
+        if(!textleft)
         {
             valueStatus='gor-none';
             textleft='NONE';
