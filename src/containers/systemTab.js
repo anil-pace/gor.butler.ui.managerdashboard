@@ -27,7 +27,7 @@ class SystemTab extends React.Component{
 		return (
 			<div >
 				SystemTab
-				
+				<SortExample/>
 			</div>
 		);
 	}
