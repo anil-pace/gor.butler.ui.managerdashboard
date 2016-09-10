@@ -74,11 +74,11 @@ class Login extends React.Component{
                 <section>
 				    <input className='login-field' type="text" id="username"  placeholder="Username" ref={node => { this.userName = node }}/>
                 </section>
-                    <i className=' login-usr-error' ref={node => { this.userError = node }} >Please enter your username</i>
+                    <div className=' login-usr-error' ref={node => { this.userError = node }} >Please enter your username</div>
                 <section>
                     <input className='login-field' type="password" id="password" placeholder="Password" ref={node => { this.password = node }}/>
                 </section>
-                    <i className='login-usr-error' ref={node => { this.passError = node }} >Please enter your password</i>
+                    <div className='login-usr-error' ref={node => { this.passError = node }} >Please enter your password</div>
                 <section>
                     <input type="submit" className='login-btn'  value="Login" /><br />
                 </section>
