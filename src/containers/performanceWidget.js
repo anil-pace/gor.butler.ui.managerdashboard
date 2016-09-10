@@ -5,7 +5,7 @@ import Dropdown from '../components/dropdown/dropdown.js';
 import ChartHorizontal from '../components/graphd3/graph_horizontal';
 import { connect } from 'react-redux';
 import {renderPerformanceWidget} from '../actions/performanceWidgetActions'
-var renderState = "RENDER_SYSTEM_HEALTH";
+
 
 function _getPPSdata(link) {
 		let ppsPickState = link.props.ppsData.pick;
@@ -87,10 +87,12 @@ class PerformanceWidget extends React.Component{
 	constructor(props) 
 	{
 		super(props);
+		this.state = { renderState:"RENDER_SYSTEM_HEALTH"}
+		
 	}	
 
 	componentWillReceiveProps(nextProps){
-		renderState = nextProps.widget;
+		this.setState({renderState: nextProps.widget})
 	}
 
 	render(){
@@ -102,7 +104,7 @@ class PerformanceWidget extends React.Component{
 		]
 		var wid= "Health"
 		
-	if(renderState === "RENDER_SYSTEM_PERFORMANCE"){
+	if(this.state.renderState === "RENDER_SYSTEM_PERFORMANCE"){
 		return (
 			<div className="gorPerformanceWidget">
 				<div className="gorDrop">
@@ -117,7 +119,6 @@ class PerformanceWidget extends React.Component{
 	}
 
 	else { 
-		console.log(this.props)
 		var link = this;
 		var pps_data = _getPPSdata(link);
 		var butler_data = _getButlerdata(link);

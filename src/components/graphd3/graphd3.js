@@ -55,7 +55,7 @@ class Chart extends React.Component{
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-      console.log(d3tip);
+      //console.log(d3tip);
   const tip = d3tip()
     .attr('class', 'd3-tip')
     .offset([100, 90])
