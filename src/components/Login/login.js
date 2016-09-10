@@ -37,11 +37,11 @@ class Login extends React.Component{
         {
             if(!formdata.username)
             {
-                document.getElementsByClassName('login-usr-error')[0].style.display='block';
+                this.userError.style.display='block';
             }
             else
             {
-             document.getElementsByClassName('login-usr-error')[1].style.display='block';
+                this.passError.style.display='block';
             }
             return;
         }
@@ -69,13 +69,19 @@ class Login extends React.Component{
                 <div className='login-mid'>
                 <div className='upper-box'>
                     <div className='login-head'>Butler</div>
-                    Management Interface   
+                    <p>Management Interface</p>   
                 </div>
-				    <input className='login-field' type="text" id="username"  placeholder="Username" ref={node => { this.userName = node }}/><br />
-                    <div className=' login-usr-error'>Please enter your username</div>
-                    <input className='login-field' type="password" id="password" placeholder="Password" ref={node => { this.password = node }}/><br />
-                    <div className='login-usr-error'>Please enter your password</div>
+                <section>
+				    <input className='login-field' type="text" id="username"  placeholder="Username" ref={node => { this.userName = node }}/>
+                </section>
+                    <div className=' login-usr-error' ref={node => { this.userError = node }} >Please enter your username</div>
+                <section>
+                    <input className='login-field' type="password" id="password" placeholder="Password" ref={node => { this.password = node }}/>
+                </section>
+                    <div className='login-usr-error' ref={node => { this.passError = node }} >Please enter your password</div>
+                <section>
                     <input type="submit" className='login-btn'  value="Login" /><br />
+                </section>
                 <a>Forgot password?</a>
                 </div>
                 <div className='box-bottom-left'>Current time: 09:00:15(IST)</div>

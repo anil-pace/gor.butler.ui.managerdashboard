@@ -11,9 +11,9 @@
   	background: #4D5055;
   	color:#A6A7A9;
   	font-family: 'Source Sans Pro', sans-serif;
-  	height:calculateRem(825px);
+  	height:calculateRem(800px);
   	padding:calculateRem(20px);
-
+  	
   	.login-lang
   	{
   		text-align:right;
@@ -40,12 +40,10 @@
         border: 1px solid;
         border-radius:5px;
 		color: #979797;
-		width:calculateRem(490px);
+		width:36%;
 		height:calculateRem(392px);
-
-		margin-top:calculateRem(50px);
-		margin-left:33%;
-
+		margin:auto;
+		margin-top:calculateRem(40px);
 		padding-top:calculateRem(40px);
 
 		.upper-box
@@ -90,17 +88,18 @@
 	a
 	{
 		text-decoration:underline;
-		margin-bottom:calculateRem(40px);
 	}
 	.box-bottom-left
 	{
-		margin-left:33%;
+		margin:auto;
+		margin-left:32%;
 		margin-top:calculateRem(10px);
 		display:inline;
 	}
 	.box-bottom-right
 	{
-		margin-left:33%;
+		margin:auto;
+		margin-left:19%;
 		margin-top:calculateRem(10px);
 		display:inline;
 	}
