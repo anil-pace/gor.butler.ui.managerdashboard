@@ -63,7 +63,7 @@ class Login extends React.Component{
             <div className='login-form'>
             <form action="#"  id = "loginForm" ref={node => { this.loginForm = node }} onSubmit={(e) => this.handleSubmit(e)}>
                 <div className='login-lang'>
-                    Language:
+                    <span>Language:</span>
                     <select ref='language'>
                         <option value="en-US">English</option>
                         <option value="ch">Chinese</option>
@@ -85,10 +85,12 @@ class Login extends React.Component{
                 <section>
                     <input type="submit" className='login-btn'  value="Login" /><br />
                 </section>
-                <a>Forgot password?</a>
+                <div className='login-fgt'>
+                    <a>Forgot password?</a>
                 </div>
-                <div className='box-bottom-left'>Current time: 09:00:15(IST)</div>
-                <div className='box-bottom-right'>V 1.0</div>
+                </div>
+                <div className='box-bottom-left'><span>Current time: 09:00:15(IST)</span></div>
+                <div className='box-bottom-right'><span>v 1.0</span></div>
                 </form>
             </div>
 		);

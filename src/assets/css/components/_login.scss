@@ -11,7 +11,7 @@
   	background: #4D5055;
   	color:#A6A7A9;
   	font-family: 'Source Sans Pro', sans-serif;
-  	height:calculateRem(800px);
+  	min-height:calculateRem(800px);
   	padding:calculateRem(20px);
   	
   	.login-lang
@@ -41,14 +41,14 @@
         border-radius:5px;
 		color: #979797;
 		width:36%;
-		height:calculateRem(392px);
+		min-height:calculateRem(392px);
 		margin:auto;
 		margin-top:calculateRem(40px);
-		padding-top:calculateRem(40px);
 
 		.upper-box
 		{
 			 margin-bottom:calculateRem(20px);
+			 padding-top:calculateRem(40px);
 			 .login-head
 			 {
 				color:#4D5055;
@@ -60,7 +60,7 @@
 		{
 			margin-top:calculateRem(20px);
 			padding:calculateRem(10px);
-			width:calculateRem(320px);
+			width:70%;
 			background-color:#FFFFFF;
 			font-size:18px;
 			border-radius:3px;
@@ -72,18 +72,22 @@
 			text-align:left;
 			color:#EC1C24;
 			margin-top:10px;
-			margin-left:calculateRem(75px);
+			margin-left:calculateRem(65px);
 		}
 		.login-btn
 		{
  			background: #F36F36;
  			color: #FFFFFF;
- 			width:calculateRem(350px);
+ 			width:75%;
  			padding:calculateRem(10px);
  			margin:calculateRem(40px);
  			font-size:calculateRem(20px);
 			border-radius:3px;
 		}	
+		.login-fgt
+		{
+		 padding-bottom:40px;
+		}
 	}
 	a
 	{

@@ -4,13 +4,13 @@ import { shallow, mount, render } from 'enzyme';
 import Tile2x from '../src/components/tile2x/Tile2x';
 
 describe('Tile2x  Tests', () => {	
-    var item={heading1:'This is it', value1:'10', low1:'These many per/hr', status1:'On schedule', heading2:'This is it', value2:'687', low2:'These many per/hr', status2:'23:59'};
+    var item={headingleft:'This is it', valueleft:'10', lowleft:'These many per/hr', statusleft:'On schedule', headingright:'This is it', valueright:'687', lowright:'These many per/hr', statusright:'23:59'};
     
     const wrapper = shallow(<Tile2x items={item}/>);
 
 //Structure testing
-	it('Should contain 9 div elements',()=>{
-   		expect(wrapper.find('div').length).toEqual(9);
+	it('Should contain 10 div elements',()=>{
+   		expect(wrapper.find('div').length).toEqual(10);
 	 });
 
 	it('Should contain 1 div with class "up-tile"',()=>{
@@ -23,31 +23,31 @@ describe('Tile2x  Tests', () => {
 
 //Content testing
 	it('Should contain "This is it" in heading 1',()=>{
-		expect(wrapper.find('.gor-tile-one .gor-heading').text()).toBe(item.heading1);
+		expect(wrapper.find('.gor-tile-one .gor-heading').text()).toBe(item.headingleft);
 	});
 
 	it('Should contain 10 as value 1',()=>{
-		expect(wrapper.find('.gor-tile-one .gor-heading-value').text()).toEqual(item.value1);
+		expect(wrapper.find('.gor-tile-one .gor-heading-value').text()).toEqual(item.valueleft);
 	});
 
-	it('Status should be items.status1',()=>{
-		expect(wrapper.find('.gor-tile-one .gor-low-tile').text()).toBe(item.low1);
+	it('Status should be items.statusleft',()=>{
+		expect(wrapper.find('.gor-tile-one .gor-low-tile').text()).toBe(item.lowleft);
 	});
 
 	it('Should contain "This is it" in heading 1',()=>{
-		expect(wrapper.find('.gor-tile-two .gor-heading').text()).toBe(item.heading2);
+		expect(wrapper.find('.gor-tile-two .gor-heading').text()).toBe(item.headingright);
 	});
 
 	it('Should contain 10 as value 1',()=>{
-		expect(wrapper.find('.gor-tile-two .gor-heading-value').text()).toEqual(item.value2);
+		expect(wrapper.find('.gor-tile-two .gor-heading-value').text()).toEqual(item.valueright);
 	});
 
-	it('Status should be items.status1',()=>{
-		expect(wrapper.find('.gor-tile-two .gor-low-tile').text()).toBe(item.low2);
+	it('Status should be items.statusleft',()=>{
+		expect(wrapper.find('.gor-tile-two .gor-low-tile').text()).toBe(item.lowright);
 	});
 
 	it('Test progress value',()=>{
-		expect(wrapper.find('.gor-tile-two .gor-status').text()).not.toBe(item.status1);
+		expect(wrapper.find('.gor-tile-two .gor-status').text()).not.toBe(item.statusleft);
 	});
     
 });
