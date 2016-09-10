@@ -53,7 +53,7 @@
     "d3": "^3.5.6",
     "d3-tip": "^0.7.1",
     "enzyme": "^2.4.1",
-    "eslint": "^3.3.1",
+    "eslint": "^3.5.0",
     "eslint-plugin-react": "^6.1.2",
     "faker": "^3.1.0",
     "jasmine-reporters": "^1.0.0",
