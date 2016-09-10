@@ -7,10 +7,13 @@ import {FormattedMessage} from 'react-intl';
 import messages from './messages';
 
 class Login extends React.Component{
-	constructor(props) 
+	constructor(props,context) 
 	{
     	super(props);
+        context.router
     }
+
+    
     
     componentWillReceiveProps(nextProps) {
     /**
@@ -19,7 +22,7 @@ class Login extends React.Component{
      */
         
       if (nextProps.auth_token  && nextProps.userName) {
-           this.props.history.push("/overview");
+           this.context.router.push("/overview");
       }
     }
     /**
@@ -61,7 +64,16 @@ class Login extends React.Component{
  			</form>
 		);
 	}
+
 };
+/**
+ * [Passing Router to component through context]
+ * @type {Object}
+ */
+Login.contextTypes = {
+        router: React.PropTypes.object.isRequired
+}
+
 
 function mapStateToProps(state, ownProps){
 	return {

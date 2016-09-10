@@ -26,17 +26,18 @@ class App extends React.Component{
 	 * Called once before rendering of component,used to displatch fetch action
 	 * @return {[type]}
 	 */
-	constructor(props) 
+	constructor(props,context) 
 	{
-    	super(props)
-    }	
+    	super(props);
+      context.router
+  }	
   
   	componentWillMount(){
   		let userName =  this.props.userName,
   		authToken = this.props.authToken;
   		/*Creating Web Socket Connection*/
   		if(!authToken && !userName){
-  			this.props.history.push("/login");
+  			this.context.router.push("/login");
   		}
   		else{
   			this.props.initWebSocket() ;
@@ -81,6 +82,13 @@ class App extends React.Component{
 		);
 	}
 };
+/**
+ * [Passing Router to component through context]
+ * @type {Object}
+ */
+App.contextTypes = {
+        router: React.PropTypes.object.isRequired
+}
 /**
  * Function to pass state values as props
  */
