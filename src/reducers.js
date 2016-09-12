@@ -7,6 +7,11 @@ import {intlReducer} from 'react-intl-redux'
 import {performanceWidget}  from './reducers/performanceWidgetReducer'
 
 const rootReducer = combineReducers({
-  intl:intlReducer,getData,authLogin,routing,recieveSocketActions,performanceWidget})
+  intl:intlReducer,
+  getData,
+  authLogin,
+  routing,
+  recieveSocketActions,
+  performanceWidget})
 
 export default rootReducer

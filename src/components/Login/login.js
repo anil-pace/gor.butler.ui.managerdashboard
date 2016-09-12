@@ -3,8 +3,9 @@ import ReactDOM  from 'react-dom';
 import { LOGIN_REQUEST, authLoginData } from '../../actions/loginAction';
 import { connect } from 'react-redux';
 import {LOGIN_URL, AUTH_LOGIN} from '../../constants/appConstants'
-import {FormattedMessage} from 'react-intl';
-import messages from './messages';
+import { FormattedMessage } from 'react-intl';
+import { updateIntl } from 'react-intl-redux';
+import { translationMessages } from '../../i18n';
 
 class Login extends React.Component{
 	constructor(props) 
@@ -13,8 +14,6 @@ class Login extends React.Component{
        
     }
 
-    
-    
     componentWillReceiveProps(nextProps) {
     /**
      * Checking if the user is loggedin 
@@ -24,6 +23,16 @@ class Login extends React.Component{
       if (nextProps.auth_token  && nextProps.userName) {
            this.context.router.push("/overview");
       }
+    }
+
+    handleSelectionChange(e){
+        let sLocale = this.locale.value;
+        let sParentLocale = sLocale.split('-')[0];
+        let data = {
+            locale : this.locale.value,
+            messages: translationMessages[sParentLocale]
+        }
+        this.props.updateIntl(data);
     }
     /**
      * @param  {[event]}
@@ -61,12 +70,19 @@ class Login extends React.Component{
 	render(){
 		return (
             <div className='login-form'>
-            <form action="#"  id = "loginForm" ref={node => { this.loginForm = node }} onSubmit={(e) => this.handleSubmit(e)}>
+            <form action="#"  id = "loginForm" ref={node => { this.loginForm = node }} 
+                onSubmit={(e) => this.handleSubmit(e)}>
                 <div className='login-lang'>
                     <span>Language:</span>
-                    <select ref='language'>
-                        <option value="en-US">English</option>
-                        <option value="ch">Chinese</option>
+                    <select ref='language' onChange={(e) => this.handleSelectionChange(e)}
+                          ref={node => { this.locale = node }}>
+                        <option value="en-US">
+                            <FormattedMessage id='login.lang.english' defaultMessage="English"
+                            description="English option in the language drop down"/>
+                        </option>
+                        <option value="ja-JP">
+                        <FormattedMessage id='login.lang.japanese' defaultMessage="Japanese"
+                            description="Japanese option in the language drop down"/></option>
                     </select>
                 </div>
                 <div className='login-mid'>
@@ -108,8 +124,8 @@ Login.contextTypes = {
 
 function mapStateToProps(state, ownProps){
 	return {
-        auth_token:state.authLogin.auth_token,
-        userName:state.authLogin.username
+        auth_token: state.authLogin.auth_token,
+        userName: state.authLogin.username
     };
 }
 /**
@@ -120,7 +136,8 @@ function mapStateToProps(state, ownProps){
  */
 var mapDispatchToProps = function(dispatch){
     return {
-        authLoginData: function(params){ dispatch(authLoginData(params)); }
+        authLoginData: function(params){ dispatch(authLoginData(params)); },
+        updateIntl: function(params){ dispatch(updateIntl(params));}
     }
 };
 
