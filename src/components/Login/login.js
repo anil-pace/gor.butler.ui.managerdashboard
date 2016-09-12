@@ -21,9 +21,9 @@ class Login extends React.Component{
      * and redirecting to main page
      */
         
-      if (nextProps.auth_token  && nextProps.userName) {
+      //if (nextProps.auth_token  && nextProps.userName) {
            this.context.router.push("/overview");
-      }
+     // }
     }
     /**
      * @param  {[event]}
