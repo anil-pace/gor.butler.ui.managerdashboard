@@ -88,7 +88,10 @@ class Login extends React.Component{
                 <div className='login-mid'>
                 <div className='upper-box'>
                     <div className='login-head'>Butler</div>
-                    <p>Management Interface</p>   
+                    <p>
+                    <FormattedMessage id='login.manageInterface' 
+                    defaultMessage="Management Interface"
+                            description="Text for Management Interface"/></p>   
                 </div>
                 <section>
 				    <input className='login-field' type="text" id="username"  placeholder="Username" ref={node => { this.userName = node }}/>
