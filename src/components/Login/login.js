@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import {LOGIN_URL, AUTH_LOGIN} from '../../constants/appConstants'
 import { FormattedMessage } from 'react-intl';
 import { updateIntl } from 'react-intl-redux';
-import { translationMessages } from '../../i18n';
+import { translationMessages } from '../../utilities/i18n';
 
 class Login extends React.Component{
 	constructor(props) 
