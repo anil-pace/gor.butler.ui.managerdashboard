@@ -27,16 +27,16 @@ class App extends React.Component{
 	 * @return {[type]}
 	 */
 	constructor(props) 
-	{
-    	super(props)
-    }	
+	{  
+    	super(props);
+  }	
   
   	componentWillMount(){
   		let userName =  this.props.userName,
   		authToken = this.props.authToken;
   		/*Creating Web Socket Connection*/
   		if(!authToken && !userName){
-  			this.props.history.push("/login");
+  			this.context.router.push("/login");
   		}
   		else{
   			this.props.initWebSocket() ;
@@ -81,6 +81,13 @@ class App extends React.Component{
 		);
 	}
 };
+/**
+ * [Passing Router to component through context]
+ * @type {Object}
+ */
+App.contextTypes = {
+        router: React.PropTypes.object.isRequired
+}
 /**
  * Function to pass state values as props
  */

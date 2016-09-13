@@ -7,8 +7,7 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { Provider,connect } from 'react-redux';
-import {IntlProvider} from 'react-intl-redux';
-import { translationMessages } from './i18n';
+import { IntlProvider } from 'react-intl-redux';
 import {addLocaleData} from 'react-intl';
 import { Router, Route, hashHistory, IndexRoute} from 'react-router';
 
@@ -22,8 +21,7 @@ import InventoryTab from './containers/inventoryTab';
 import UsersTab from './containers/usersTab';
 import configureStore from './store';
 import socketMiddleware from './middleware/socketMiddleware';
-import enTranslations from './translations/en.json'
-
+import { translationMessages } from './i18n';
 
 
 /**
@@ -35,7 +33,7 @@ const store = configureStore();
  */
 ReactDOM.render(
 	<Provider store={store}>
-	<IntlProvider locale="en" messages={translationMessages}>
+	<IntlProvider locale="en" messages={ translationMessages.en }>
 		<Router history={hashHistory}>
 		<Route name="default" path="/"  component={App} />
 		<Route name="login" path="/login"  component={Login} />

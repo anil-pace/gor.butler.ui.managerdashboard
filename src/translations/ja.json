@@ -2,16 +2,17 @@
   {
     "id": "login.lang.english",
     "description": "Text for English Language",
-    "message": "English"
+    "message" :"English"
   },
-   {
+  {
     "id": "login.lang.japanese",
     "description": "Text for japanese Language",
-    "message": "ホーム"
+    "message" :"ホーム"
   },
   {
     "id": "login.manageInterface",
     "description": "Text for Management Interface",
-    "message": "Management Interface"
+    "message": "ホーム"
   }
 ]
+
