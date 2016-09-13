@@ -19,7 +19,7 @@ class PickStatusWidget extends React.Component{
         headingleft='Orders to fullfill';
         logo=' iPick';
         textleft=this.props.ordersData.count_pending;
-        if(!textleft)
+        if(textleft)
         {
             valueStatus='gor-none';
             textleft='NONE';
@@ -44,7 +44,7 @@ class PickStatusWidget extends React.Component{
                 statusleft=this.props.ordersData.status;
             }
         }
-        items={headingleft:headingleft, headingright:headingright, textleft:textleft, valueStatus:valueStatus, textright:textright, statusleft:statusleft, statusClass:statusClass, statusLogo:statusLogo, statusright:statusright, lowleft:lowleft, lowright:lowright, logo:logo};
+        items={headingleft:headingleft, headingright:headingright, textleft:'21312', valueStatus:valueStatus, textright:textright, statusleft:statusleft, statusClass:statusClass, statusLogo:statusLogo, statusright:statusright, lowleft:lowleft, lowright:lowright, logo:logo};
         return (
 			 <Tile2x items={items}/>
     	);
