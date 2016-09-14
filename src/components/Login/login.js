@@ -2,7 +2,8 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { authLoginData } from '../../actions/loginAction';
 import { connect } from 'react-redux';
-import {LOGIN_URL, AUTH_LOGIN} from '../../constants/appConstants'
+import {AUTH_LOGIN} from '../../constants/appConstants'; 
+import {LOGIN_URL} from '../../constants/configConstants'; 
 import { FormattedMessage } from 'react-intl';
 import { updateIntl } from 'react-intl-redux';
 import { translationMessages } from '../../i18n';

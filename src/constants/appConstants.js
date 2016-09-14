@@ -15,6 +15,7 @@ export const WS_ONMESSAGE = "WS_ONMESSAGE";
 export const WS_ONSEND = "WS_ONSEND";
 export const WS_URL = "wss://192.168.8.118/manager_api/wss";
 export const WS_INIT = "WS_INIT";
+export const WS_SUCCESS="Sucessfully logged in";
 /* Header constants */
 
 export const REQUEST_HEADER = "REQUEST_HEADER";
