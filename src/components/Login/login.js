@@ -137,7 +137,6 @@ Login.contextTypes = {
 
 
 function mapStateToProps(state, ownProps){
-    console.log(state);
 	return {
         auth_token: state.authLogin.auth_token,
         userName: state.authLogin.username,

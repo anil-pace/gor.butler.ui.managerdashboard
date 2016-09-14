@@ -1,6 +1,6 @@
-jest.unmock('../../src/actions/loginAction');
-import * as actions from '../../src/actions/loginAction';
-import { LOGIN_REQUEST, LOGIN_REDIRECT, LOGIN_SUCCESS,LOGIN_FAILURE, AJAX_CALL} from '../../src/constants/appConstants';
+jest.unmock('../../../src/actions/loginAction');
+import * as actions from '../../../src/actions/loginAction';
+import { LOGIN_REQUEST, LOGIN_REDIRECT, LOGIN_SUCCESS,LOGIN_FAILURE, AJAX_CALL} from '../../../src/constants/appConstants';
 
 describe ('Login actions',()=>{
 	it('Action for login request',()=>{
