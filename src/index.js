@@ -8,7 +8,6 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { Provider,connect } from 'react-redux';
 import { IntlProvider } from 'react-intl-redux';
-import {addLocaleData} from 'react-intl';
 import { Router, Route, hashHistory, IndexRoute} from 'react-router';
 
 // Importing our own libraries
@@ -21,7 +20,7 @@ import InventoryTab from './containers/inventoryTab';
 import UsersTab from './containers/usersTab';
 import configureStore from './store';
 import socketMiddleware from './middleware/socketMiddleware';
-import { translationMessages } from './i18n';
+import { translationMessages } from './utilities/i18n';
 
 
 /**

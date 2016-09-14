@@ -13,8 +13,8 @@ addLocaleData(enLocaleData);
 addLocaleData(jaLocaleData);
 
 
-import enTranslationMessages from './translations/en.json';
-import jaTranslationMessages from './translations/ja.json';
+import enTranslationMessages from '../translations/en.json';
+import jaTranslationMessages from '../translations/ja.json';
 addLocaleData([...enTranslationMessages, ...jaTranslationMessages]);
 
 export const formatTranslationMessages = (messages) => {

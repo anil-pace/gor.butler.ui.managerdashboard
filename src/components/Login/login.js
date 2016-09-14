@@ -6,8 +6,9 @@ import {AUTH_LOGIN} from '../../constants/appConstants';
 import {LOGIN_URL} from '../../constants/configConstants'; 
 import { FormattedMessage } from 'react-intl';
 import { updateIntl } from 'react-intl-redux';
-import { translationMessages } from '../../i18n';
 import Dropdown from '../../components/dropdown/dropdown.js';
+import { translationMessages } from '../../utilities/i18n';
+
 
 class Login extends React.Component{
 	constructor(props) 
