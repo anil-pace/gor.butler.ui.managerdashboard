@@ -9,8 +9,8 @@ describe('Tile2x  Tests', () => {
     const wrapper = shallow(<Tile2x items={item}/>);
 
 //Structure testing
-	it('Should contain 10 div elements',()=>{
-   		expect(wrapper.find('div').length).toEqual(10);
+	it('Should contain 9 div elements',()=>{
+   		expect(wrapper.find('div').length).toEqual(9);
 	 });
 
 	it('Should contain 1 div with class "up-tile"',()=>{
@@ -27,7 +27,7 @@ describe('Tile2x  Tests', () => {
 	});
 
 	it('Should contain 10 as value 1',()=>{
-		expect(wrapper.find('.gor-tile-one .gor-heading-value').text()).toBe(item.valueleft);
+		expect(wrapper.find('.gor-tile-one .gor-heading-value').text()).toBe(item.textleft);
 	});
 
 	it('Status should be items.statusleft',()=>{
@@ -39,7 +39,7 @@ describe('Tile2x  Tests', () => {
 	});
 
 	it('Should contain 10 as value 1',()=>{
-		expect(wrapper.find('.gor-tile-two .gor-heading-value').text()).toEqual(item.valueright);
+		expect(wrapper.find('.gor-tile-two .gor-heading-value').text()).toBe(item.textright);
 	});
 
 	it('Status should be items.statusleft',()=>{

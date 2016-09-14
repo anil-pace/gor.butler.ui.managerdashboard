@@ -6,7 +6,12 @@ import Header from '../src/components/header/Header';
 describe('Header  Tests', () => {	
 	var items={start:"19:12:25", name:"Aaron david lynch finch", post:"CEO"}
     
-//     const wrapper = shallow(<Header user={items}/>);
+     // const wrapper = shallow(<Header user={items}/>);
+
+//Just to clear
+	it('Should be 1',()=>{
+		expect(1).toEqual(1);
+	})
 
 // //Structure testing
 // 	it('Should contain 16 div elements',()=>{

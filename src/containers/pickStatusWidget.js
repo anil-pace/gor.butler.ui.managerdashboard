@@ -13,8 +13,12 @@ class PickStatusWidget extends React.Component{
     	super(props);
         //console.log(this.props.ordersData);
     }	
+    _parseProps (){
+
+    }
     render()
     {
+        
     	var statusClass='', statusLogo='', headingleft='',valueStatus='',textleft='',headingright='',textright='', statusleft='',statusright='',lowleft='',lowright='',logo='',items={};
         headingleft='Orders to fullfill';
         logo=' iPick';

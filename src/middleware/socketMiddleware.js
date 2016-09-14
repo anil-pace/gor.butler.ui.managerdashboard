@@ -21,6 +21,7 @@ const socketMiddleware = (function(){
   const onMessage = (ws,store) => evt => {
     //Parse the JSON message received on the websocket
     var msg = JSON.parse(evt.data);
+    //Dispatch action based on msg.resource type or msg.message
     store.dispatch(wsOnMessageAction(msg));
     
   }

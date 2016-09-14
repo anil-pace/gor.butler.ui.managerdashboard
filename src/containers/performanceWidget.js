@@ -108,7 +108,7 @@ class PerformanceWidget extends React.Component{
 		return (
 			<div className="gorPerformanceWidget">
 				<div className="gorDrop">
-					<Dropdown pf={this.props.renderPerformanceWidget} items={item}/>
+					<Dropdown pf={this.props.renderPerformanceWidget} items={item} styleClass={'ddown'}/>
 				</div>
 
 				<div id="performanceGraph">
@@ -126,7 +126,7 @@ class PerformanceWidget extends React.Component{
 		return (
 			<div className="gorPerformanceWidget">
 				<div className="gorDrop">
-					<Dropdown pf={this.props.renderPerformanceWidget} items={item}/>
+					<Dropdown pf={this.props.renderPerformanceWidget} items={item} styleClass={'ddown'}/>
 				</div>
 
 				<div id="performanceGraph">
