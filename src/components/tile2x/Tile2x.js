@@ -23,7 +23,7 @@ class Tile2x extends React.Component{
 			  		<div className="gor-tile-left">
 						<span className="gor-heading">{this.props.items.headingright}</span>
 						<p className="gor-heading-value gorRisk">{this.props.items.textright}</p>
-						<p className="gor-status"><span>{this.props.items.statusright}</span></p>
+						<p className="gor-status">{this.props.items.statusright}</p>
 			   		</div>
 					<div className={"gor-tile-right "+this.props.items.logo}>
 			 			

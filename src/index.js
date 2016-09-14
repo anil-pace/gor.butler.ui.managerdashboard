@@ -30,10 +30,11 @@ const store = configureStore();
 /**
  * Configuring Router based on path 
  */
+
 ReactDOM.render(
 	<Provider store={store}>
-	<IntlProvider locale="en" messages={ translationMessages.en }>
-		<Router history={hashHistory}>
+	<IntlProvider messages={ translationMessages.en }>
+		<Router history={ hashHistory }>
 		<Route name="default" path="/"  component={App} />
 		<Route name="login" path="/login"  component={Login} />
 		<Route name="app" path="/md"  component={App} >

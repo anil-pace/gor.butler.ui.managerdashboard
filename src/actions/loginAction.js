@@ -1,4 +1,3 @@
-import {utils} from '../utilities/ajax'
 import { LOGIN_REQUEST, LOGIN_REDIRECT, LOGIN_SUCCESS,LOGIN_FAILURE, AJAX_CALL} from '../constants/appConstants'
 
 
