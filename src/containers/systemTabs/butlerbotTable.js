@@ -1,6 +1,6 @@
 import React from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
-import DropdownTemp from '../dropdown/dropdownTemp'
+import DropdownTemp from '../../components/dropdown/dropdownTemp'
 import Dimensions from 'react-dimensions'
 var SortTypes = {
   ASC: 'ASC',
@@ -106,7 +106,7 @@ class DataListWrapper {
   }
 }
 
-class SortExample extends React.Component {
+class ButlerBotTable extends React.Component {
   constructor(props) {
     super(props);
     this._dataList = new tableRenderer(this.props.items.length);
@@ -315,4 +315,4 @@ class SortExample extends React.Component {
   }
 }
 
-export default Dimensions()(SortExample);
+export default Dimensions()(ButlerBotTable);

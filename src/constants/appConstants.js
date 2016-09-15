@@ -25,6 +25,9 @@ export const RECIEVE_ITEM_TO_STOCK = "RECIEVE_ITEM_TO_STOCK";
 /*Constants for performance widget*/
 export const RENDER_WIDGET = "RENDER_WIDGET";
 
+/*Constants for stats widget*/
+export const RENDER_STATSWIDGET = "RENDER_STATSWIDGET";
+
 
 /*Constants for response type */
 export const PPS_DATA = "PPS_DATA";

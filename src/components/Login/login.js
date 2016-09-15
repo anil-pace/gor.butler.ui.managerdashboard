@@ -88,14 +88,14 @@ class Login extends React.Component{
             if(item[i].value===this.props.sLang)
                 sel=i;
         }
+        console.log(item[sel]);
 		return (
             <div className='login-form'>
             <form action="#"  id = "loginForm" ref={node => { this.loginForm = node }} 
                 onSubmit={(e) => this.handleSubmit(e)}>
                 <div className='login-lang'>
                     <div className='lang-text'>Language:</div>
-                    <Dropdown 
-                     pf={(e) => this.handleSelectionChange(e)} items={item} styleClass={'lang-drop'}/>
+                    <Dropdown optionDispatch={(e) => this.handleSelectionChange(e)} items={item} styleClass={'lang-drop'} currentState={item[sel]} />
                 </div>
                 <div className='login-logo alt-gor-logo'>
                 </div>
@@ -138,6 +138,7 @@ Login.contextTypes = {
 
 
 function mapStateToProps(state, ownProps){
+    console.log(state);
 	return {
         auth_token: state.authLogin.auth_token,
         userName: state.authLogin.username,

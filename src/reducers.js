@@ -13,6 +13,8 @@ import {putInfo}  from './reducers/putReducer'
 import {inventoryInfo}  from './reducers/inventoryReducer'
 import {ordersInfo}  from './reducers/ordersReducer'
 import {throughputInfo}  from './reducers/throughputReducer'
+import {statsWidget} from './reducers/statsWidgetReducer'
+
 
 const rootReducer = combineReducers({
   intl:intlReducer,
@@ -28,6 +30,7 @@ const rootReducer = combineReducers({
   throughputInfo,
   inventoryInfo,
   ordersInfo,
-  performanceWidget})
+  performanceWidget,
+  statsWidget })
 
 export default rootReducer
