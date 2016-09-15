@@ -25,10 +25,22 @@
 .cbs-overview-chutes,
 .cbs-overview-casket,
 .overview-tile-ontime-icon,
-.cbs-overview-inducts,.statusOl,.statusAl,.iStock ,.iAudit,.iPick,{
+.cbs-overview-inducts,.statusOl,.statusAl,.iStock ,.iAudit,.iPick,.login-user{
     background-image: url(images/icons.svg);
 }
-
+.login-user{
+    background-position:-205px -77px;
+    width:16px;
+    height:16px;    
+}
+.alt-gor-logo{
+    background-image: url(images/Logos.svg);    
+}
+.alt-gor-logo{
+    background-position:-212px -1px;
+    width:200px;
+    height:25px;
+}
 .gor-logo{
     background-position: 4px -126px;
     width: 181px;

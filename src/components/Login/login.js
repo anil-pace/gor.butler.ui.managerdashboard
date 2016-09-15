@@ -97,6 +97,8 @@ class Login extends React.Component{
                     <Dropdown 
                      pf={(e) => this.handleSelectionChange(e)} items={item} styleClass={'lang-drop'}/>
                 </div>
+                <div className='login-logo alt-gor-logo'>
+                </div>
                 <div className='login-mid'>
                 <div className='upper-box'>
                     <div className='login-head'>Butler</div>
@@ -117,9 +119,6 @@ class Login extends React.Component{
                 <section>
                     <input type="submit" className='login-btn'  value="Login" /><br />
                 </section>
-                <div className='login-fgt'>
-                    <a>Forgot password?</a>
-                </div>
                 </div>
                 <div className='box-bottom-left'><span>Current time: 09:00:15(IST)</span></div>
                 <div className='box-bottom-right'><span>v 1.0</span></div>

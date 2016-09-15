@@ -13,6 +13,11 @@
   	font-family: 'Source Sans Pro', sans-serif;
   	overflow:hidden;
   	padding:calculateRem(20px);
+  	.login-logo
+  	{
+  		margin:auto;
+  		margin-top:65px;
+  	}
   	.login-lang:hover {
 			color:#FFFFFF;
 	}  	
