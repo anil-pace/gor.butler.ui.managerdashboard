@@ -7,8 +7,6 @@ import {INVENTORY_DATA} from '../constants/appConstants';
 export  function inventoryInfo(state={},action){
   switch (action.type) {
     case INVENTORY_DATA:
-      //state.selectedAction = action.type;
-      //window.localStore.setItem('auth_token',action.data.auth_token)
           var avail_volume=0,count_put=0,util_perc=0,util_vol=0,count_pick=0,avail_sku=0,stock_current=0,open_stock=0,res;
           res=action.data;
           if(res.aggregate_data){
@@ -32,8 +30,6 @@ export  function inventoryInfo(state={},action){
               "open_stock":open_stock                          
             }
 
-          // console.log('Inventory data: ');
-          // console.log(ivData);
             return Object.assign({}, state, {
             "inventoryData" : ivData
             })

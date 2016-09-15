@@ -7,8 +7,6 @@ import {PPS_DATA} from '../constants/appConstants';
 export  function ppsInfo(state={},action){
   switch (action.type) {
     case PPS_DATA:
-      //state.selectedAction = action.type;
-      //window.localStore.setItem('auth_token',action.data.auth_token)
          var pick = 0, put = 0, audit = 0, inactive = 0,res;
          res=action.data;
          if(res.data){
@@ -35,8 +33,6 @@ export  function ppsInfo(state={},action){
                             "audit" : audit,
                             "inactive" : inactive
                         }
-        // console.log("PPS Data: ");
-        // console.log(ppsData);
         return Object.assign({}, state, {
             "ppsData" : ppsData
         })

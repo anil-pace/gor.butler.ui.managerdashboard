@@ -7,8 +7,6 @@ import {BUTLERS_DATA} from '../constants/appConstants';
 export  function butlersInfo(state={},action){
 	switch (action.type) {
 	  case BUTLERS_DATA:
-	    //state.selectedAction = action.type;
-	    //window.localStore.setItem('auth_token',action.data.auth_token)
          var pick_or_put = 0, audit = 0, idle = 0, dead = 0, charging= 0,res;
          res=action.data;
          if(res.data){
@@ -36,8 +34,6 @@ export  function butlersInfo(state={},action){
                             "Inactive" : dead,
                             "Idle" : idle
                         }
-           // console.log("Butlers Data");
-           // console.log(botKey);
            return Object.assign({}, state, {
                "butlersData" : botKey
           })
