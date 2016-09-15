@@ -5,7 +5,6 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 export const LOGOUT = "LOGOUT";
 export const AJAX_CALL = "AJAX_CALL";
-export const LOGIN_URL="https://192.168.8.118/api/auth/token"
 
 /*Constants for Web Sockets*/
 export const WS_CONNECT = "WS_CONNECT";

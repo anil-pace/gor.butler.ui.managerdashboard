@@ -7,8 +7,6 @@ import {CHARGERS_DATA} from '../constants/appConstants';
 export  function chargerInfo(state={},action){
 	switch (action.type) {
 	  case CHARGERS_DATA:
-	    //state.selectedAction = action.type;
-	    //window.localStore.setItem('auth_token',action.data.auth_token)
               var connected = 0, disconnected = 0,res;
               res=action.data;
               if(res.data){
@@ -24,8 +22,6 @@ export  function chargerInfo(state={},action){
                             "Connected" : connected,
                             "Disconnected": disconnected
                         }
-            // console.log("Chargers Data");
-            // console.log(chargersKey);
             return Object.assign({}, state, {
             "chargersData" : chargersKey
          })

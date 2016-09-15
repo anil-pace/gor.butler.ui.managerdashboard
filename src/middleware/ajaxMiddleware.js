@@ -1,5 +1,5 @@
 import {AJAX_CALL} from '../constants/appConstants'
-import {AjaxParse} from '../utilities/AjaxParser';
+import {AjaxParse} from '../utilities/ajaxParser';
 
 const ajaxMiddleware = (function(){ 
 

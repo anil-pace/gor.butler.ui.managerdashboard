@@ -7,8 +7,6 @@ import {ORDERS_DATA} from '../constants/appConstants';
 export  function ordersInfo(state={},action){
   switch (action.type) {
     case ORDERS_DATA:
-      //state.selectedAction = action.type;
-      //window.localStore.setItem('auth_token',action.data.auth_token)
           var status='',avg=0,count_pending=0,eta='',time_current='',res;
           res=action.data;
           if(res.aggregate_data){
@@ -25,8 +23,6 @@ export  function ordersInfo(state={},action){
               "eta":eta,
               "time_current":time_current            
             }
-          // console.log('Orders data: ');
-          // console.log(ordersData);
             return Object.assign({}, state, {
             "ordersData" : ordersData
             })
