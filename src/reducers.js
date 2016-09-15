@@ -5,8 +5,28 @@ import {recieveSocketActions}  from './reducers/socketReducer'
 import { routerReducer as routing } from 'react-router-redux';
 import {intlReducer} from 'react-intl-redux'
 import {performanceWidget}  from './reducers/performanceWidgetReducer'
+import {butlersInfo}  from './reducers/butlerReducer'
+import {chargerInfo}  from './reducers/chargerReducer'
+import {pickInfo}  from './reducers/pickReducer'
+import {ppsInfo}  from './reducers/ppsReducer'
+import {putInfo}  from './reducers/putReducer'
+import {inventoryInfo}  from './reducers/inventoryReducer'
+import {ordersInfo}  from './reducers/ordersReducer'
+
 
 const rootReducer = combineReducers({
-  intl:intlReducer,getData,authLogin,routing,recieveSocketActions,performanceWidget})
+  intl:intlReducer,
+  getData,
+  authLogin,
+  routing,
+  recieveSocketActions,
+  butlersInfo,
+  chargerInfo,
+  pickInfo,
+  putInfo,
+  ppsInfo,
+  inventoryInfo,
+  ordersInfo,
+  performanceWidget})
 
 export default rootReducer

@@ -7,9 +7,7 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { Provider,connect } from 'react-redux';
-import {IntlProvider} from 'react-intl-redux';
-import { translationMessages } from './i18n';
-import {addLocaleData} from 'react-intl';
+import { IntlProvider } from 'react-intl-redux';
 import { Router, Route, hashHistory, IndexRoute} from 'react-router';
 
 // Importing our own libraries
@@ -27,6 +25,10 @@ import ButlerBot from './containers/butlerbotTab'
 import Notifications from './containers/notificationTab'
 import PPS from './containers/ppsTab'
 import ChargingStations from './containers/chargingStationsTab'
+import { translationMessages } from './utilities/i18n';
+
+
+
 /**
  * Creating a store and passing it to provider
  */
@@ -34,10 +36,11 @@ const store = configureStore();
 /**
  * Configuring Router based on path 
  */
+
 ReactDOM.render(
 	<Provider store={store}>
-	<IntlProvider locale="en" messages={translationMessages}>
-		<Router history={hashHistory}>
+	<IntlProvider messages={ translationMessages.en }>
+		<Router history={ hashHistory }>
 		<Route name="default" path="/"  component={App} />
 		<Route name="login" path="/login"  component={Login} />
 		<Route name="app" path="/md"  component={App} >
