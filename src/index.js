@@ -23,9 +23,10 @@ import UsersTab from './containers/usersTab';
 import configureStore from './store';
 import socketMiddleware from './middleware/socketMiddleware';
 import enTranslations from './translations/en.json'
-
-
-
+import ButlerBot from './containers/butlerbotTab'
+import Notifications from './containers/notificationTab'
+import PPS from './containers/ppsTab'
+import ChargingStations from './containers/chargingStationsTab'
 /**
  * Creating a store and passing it to provider
  */
@@ -41,7 +42,13 @@ ReactDOM.render(
 		<Route name="login" path="/login"  component={Login} />
 		<Route name="app" path="/md"  component={App} >
 			<IndexRoute component={ Overview } />
-			<Route name="system" path="/system"  component={SystemTab} />
+			<Route name="system" path="/system"  component={SystemTab}>
+				<IndexRoute component={ Notifications } />
+				<Route name="butlerbots" path="/butlerbots"  component={ButlerBot}/>
+				<Route name="pps" path="/pps"  component={PPS}/>
+				<Route name="chargingstations" path="/chargingstations"  component={ChargingStations}/>
+				<Route name="notification" path="/notification"  component={Notifications}/>
+			</Route>
 			<Route name="orders" path="/orders"  component={OrdersTab} />
 			<Route name="inventory" path="/inventory"  component={InventoryTab} />
 			<Route name="users" path="/users"  component={UsersTab} />

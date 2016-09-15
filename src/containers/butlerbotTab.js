@@ -14,17 +14,13 @@ import PickStatusWidget from '../containers/pickStatusWidget'
 import SortExample from '../components/data_table/data_table';
 import SubTabs from '../components/subtab/SubTabs';
 
-
-class SystemTab extends React.Component{
+class ButlerBot extends React.Component{
 	constructor(props) 
 	{
     	super(props);
     }	
 	render(){
-		var item1=[{tabContent:"Notification"}]
-		var item2=[{tabContent:"Butler Bots"}]
-		var item3=[{tabContent:"PPS"}]
-		var item4=[{tabContent:"Charging Station"}]
+	console.log("call")
 		/**
 		 * Need to remove these hardcoded variables
 		 * 
@@ -70,12 +66,13 @@ class SystemTab extends React.Component{
 		return (
 			<div>
 				<div>
-					<SubTabs/>
+					<div className="gorTesting">
+						<SortExample items={temp_data} itemNumber={itemNumber}/>
+					</div>
 				</div>
-        {this.props.children}
 			</div>
 		);
 	}
 };
 
-export default SystemTab ;
+export default ButlerBot ;

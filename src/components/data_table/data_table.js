@@ -1,7 +1,7 @@
 import React from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
-import FakeObjectDataListStore from './fake'
-
+import DropdownTemp from '../dropdown/dropdownTemp'
+import Dimensions from 'react-dimensions'
 var SortTypes = {
   ASC: 'ASC',
   DESC: 'DESC',
@@ -9,6 +9,33 @@ var SortTypes = {
 
 function reverseSortDirection(sortDir) {
   return sortDir === SortTypes.DESC ? SortTypes.ASC : SortTypes.DESC;
+}
+
+class tableRenderer {
+  constructor(size){
+    this.size = size;
+    this.newData = [];
+  }
+
+  getObjectAt(index)  {
+    if (index < 0 || index > this.size){
+      return undefined;
+    }
+    return this.newData[index];
+  }
+
+  getAll() {
+    if (this.newData.length < this.size) {
+      for (var i = 0; i < this.size; i++) {
+        this.getObjectAt(i);
+      }
+    }
+    return this.newData.slice();
+  }
+
+  getSize() {
+    return this.size;
+  }
 }
 
 class SortHeaderCell extends React.Component {
@@ -49,9 +76,9 @@ const TextCell = ({rowIndex, data, columnKey, ...props}) => (
   </Cell>
 );
 
-const ComponentCell = ({rowIndex, data, columnKey, ...props}) => (
-  <Cell {...props}>
-  <input type="checkbox" />
+const ComponentCell = ({rowIndex, data, columnKey,checkState, ...props}) => (
+  
+  <Cell {...props}> <input type="checkbox" onChange={checkState.bind(this,columnKey,rowIndex)}/>
     {data.getObjectAt(rowIndex)[columnKey]}
   </Cell>
 );
@@ -82,9 +109,9 @@ class DataListWrapper {
 class SortExample extends React.Component {
   constructor(props) {
     super(props);
-
-    this._dataList = new FakeObjectDataListStore(4);
+    this._dataList = new tableRenderer(this.props.items.length);
     this._defaultSortIndexes = [];
+    this._dataList.newData=this.props.items;
     var size = this._dataList.getSize();
     for (var index = 0; index < size; index++) {
       this._defaultSortIndexes.push(index);
@@ -93,10 +120,27 @@ class SortExample extends React.Component {
     this.state = {
       sortedDataList: this._dataList,
       colSortDirs: {},
+      columnWidths: {
+        id: 240,
+        status: 150,
+        msu: 140,
+        location: 60,
+        direction: 60
+      },
     };
 
     this._onSortChange = this._onSortChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
+    this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+  }
+
+   _onColumnResizeEndCallback(newColumnWidth, columnKey) {
+    this.setState(({columnWidths}) => ({
+      columnWidths: {
+        ...columnWidths,
+        [columnKey]: newColumnWidth,
+      }
+    }));
   }
 
   _onFilterChange(e) {
@@ -109,8 +153,8 @@ class SortExample extends React.Component {
      var size = this._dataList.getSize();
      var filteredIndexes = [];
     for (var index = 0; index < size; index++) {
-      var {firstName} = this._dataList.getObjectAt(index);
-      if (firstName.toLowerCase().indexOf(filterBy) !== -1) {
+      var {status} = this._dataList.getObjectAt(index);
+      if (status.toLowerCase().indexOf(filterBy) !== -1) {
         filteredIndexes.push(index);
       }
     }
@@ -120,13 +164,19 @@ class SortExample extends React.Component {
     });
   }
 
-  
+  handleChange(columnKey,rowIndex) {
+    console.log("checked");
+    console.log(columnKey)
+    console.log(rowIndex)
+  }
 
   _onSortChange(columnKey, sortDir) {
     var sortIndexes = this._defaultSortIndexes.slice();
     sortIndexes.sort((indexA, indexB) => {
       var valueA = this._dataList.getObjectAt(indexA)[columnKey];
       var valueB = this._dataList.getObjectAt(indexB)[columnKey];
+      console.log(valueB)
+      console.log(valueA)
       var sortVal = 0;
       if (valueA > valueB) {
         sortVal = 1;
@@ -150,72 +200,114 @@ class SortExample extends React.Component {
   }
 
   render() {
-    var {sortedDataList, colSortDirs} = this.state;
-    var data_temp= ['a', 'b', 'c', 'd'];
+    
+
+    var {sortedDataList, colSortDirs,columnWidths} = this.state;
+    console.log(sortedDataList)
+    var columnWidth= (this.props.containerWidth/this.props.itemNumber)
+    const item = [
+    { value: 'on/off', label: 'ON/OFF' },
+    { value: 'on', label: 'ON' },
+    { value: 'off', label: 'OFF' },
+    ];
+    var checkState = this.handleChange.bind(this);
     return (
+     
       <div>
-      <input
-          onChange={this._onFilterChange}
-          placeholder="Filter by First Name"
-      />
+
+        <div className="gorToolBar">
+          <div className="gorToolBarElements">
+            <div className="gorToolBarElements">
+              BUTLER BOTS
+            </div>
+            <div className="gorToolBarElements">
+              <DropdownTemp items={item}/>
+            </div>
+          </div>
+          <div className="gorToolBarElements">
+            <input className="gorFilter"
+              onChange={this._onFilterChange}
+              placeholder="Filter by status"
+            />
+          </div>
+       </div>
       <Table
-        rowHeight={50}
+        rowHeight={66}
         rowsCount={sortedDataList.getSize()}
-        headerHeight={50}
-        width={1000}
+        headerHeight={70}
+        onColumnResizeEndCallback={this._onColumnResizeEndCallback}
+        isColumnResizing={false}
+        width={this.props.containerWidth}
         height={500}
         {...this.props}>
         <Column
           columnKey="id"
           header={
-            <SortHeaderCell
-              onSortChange={this._onSortChange}
-              sortDir={colSortDirs.id}>
-              id
+            <SortHeaderCell onSortChange={this._onSortChange}
+              sortDir={colSortDirs.id}> <input type="checkbox" />
+              <div className="gorToolHeaderEl">
+              <div className="gorToolHeaderEl"> {sortedDataList.getSize()} BOT </div>
+              <div className="gorToolHeaderSubText"> Total:{sortedDataList.getSize()} </div>
+              </div>
             </SortHeaderCell>
           }
-          cell={<ComponentCell data={sortedDataList} > </ComponentCell>}
-          width={100}
+
+          cell={  <ComponentCell data={sortedDataList} checkState={checkState} />}
+          width={250}
         />
         <Column
-          columnKey="firstName"
-          header={
-            <SortHeaderCell>
-              First Name
-            </SortHeaderCell>
-          }
-          cell={<StatusCell data={sortedDataList} >{this.sortedDataList}</StatusCell>}
-          width={100}
-        />
-        <Column
-          columnKey="lastName"
-          header={
-            <SortHeaderCell>
-              Last Name
-            </SortHeaderCell>
-          }
-          cell={<TextCell data={sortedDataList} />}
-          width={200}
-        />
-        <Column
-          columnKey="city"
-          header={
-            <SortHeaderCell>
-              City
-            </SortHeaderCell>
-          }
-          cell={<TextCell data={sortedDataList} />}
-          width={200}
-        />
-        <Column
-          columnKey="companyName"
+          columnKey="status"
           header={
             <SortHeaderCell >
-              Company Name
+              <div>STATUS </div>
+              <div>
+              <div className="header-red-alert-icon gorToolHeaderEl"/>
+              <div className="gorToolHeaderEl"> 3 Alerts</div>
+              </div>
+            </SortHeaderCell>
+          }
+          cell={<StatusCell data={sortedDataList} ></StatusCell>}
+          width={columnWidth}
+        />
+        <Column
+          columnKey="current"
+          header={
+            <SortHeaderCell>
+              CURRENT TASK
+            </SortHeaderCell>
+          }
+          cell={<TextCell data={sortedDataList} />}
+          width={columnWidth}
+        />
+        <Column
+          columnKey="msu"
+          header={
+            <SortHeaderCell>
+              MSU
+            </SortHeaderCell>
+          }
+          cell={<TextCell data={sortedDataList} />}
+          width={columnWidth}
+        />
+        <Column
+          columnKey="location"
+          header={
+            <SortHeaderCell>
+              LOCATION
+            </SortHeaderCell>
+          }
+          cell={<TextCell data={sortedDataList} />}
+          width={columnWidth}
+        />
+        <Column
+          columnKey="direction"
+          header={
+            <SortHeaderCell >
+              DIRECTION
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList}  />}
-          width={200}
+          width={columnWidth}
         />
       </Table>
       </div>
@@ -223,4 +315,4 @@ class SortExample extends React.Component {
   }
 }
 
-export default SortExample;
+export default Dimensions()(SortExample);
