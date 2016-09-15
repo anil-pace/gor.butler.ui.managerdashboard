@@ -7,26 +7,32 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { Provider,connect } from 'react-redux';
-import { IntlProvider } from 'react-intl-redux';
-import {addLocaleData} from 'react-intl';
-import { Router, Route, hashHistory, IndexRoute} from 'react-router';
+
+/**
+ * Had to comment out intl code as 
+ * it was giving iterator error in web pack
+ * Need to work on this
+ */
+//import {IntlProvider} from 'react-intl-redux';
+//import { translationMessages } from './i18n';
+//import {addLocaleData} from 'react-intl';
+
+
 
 // Importing our own libraries
-import Login from './components/Login/login';
-import App from './App';
-import Overview from './containers/OverviewTab';
-import SystemTab from './containers/systemTab';
-import OrdersTab from './containers/ordersTab';
-import InventoryTab from './containers/inventoryTab';
-import UsersTab from './containers/usersTab';
+
 import configureStore from './store';
 import socketMiddleware from './middleware/socketMiddleware';
-import { translationMessages } from './i18n';
+//import enTranslations from './translations/en.json';
+import Routes from './components/Router';
+
+
 
 
 /**
  * Creating a store and passing it to provider
  */
+
 
 const preLoadedState = {
 	authLogin : {
@@ -34,28 +40,19 @@ const preLoadedState = {
 	}
 }
 const store = configureStore(preLoadedState); 
+
+
+
 /**
  * Configuring Router based on path 
  */
+
 ReactDOM.render(
 	<Provider store={store}>
-	<IntlProvider locale="en" messages={ translationMessages.en }>
-		<Router history={hashHistory}>
-		<Route name="default" path="/"  component={App} />
-		<Route name="login" path="/login"  component={Login} />
-		<Route name="app" path="/md"  component={App} >
-			<IndexRoute component={ Overview } />
-			<Route name="system" path="/system"  component={SystemTab} />
-			<Route name="orders" path="/orders"  component={OrdersTab} />
-			<Route name="inventory" path="/inventory"  component={InventoryTab} />
-			<Route name="users" path="/users"  component={UsersTab} />
-			<Route name="overview" path="/overview"  component={Overview} />
-		</Route>
-		</Router>
-    </IntlProvider>
-	</Provider>,
-	document.getElementById('container')
-);
+	<Routes />
+	</Provider>
+,document.getElementById('container'))
+
 
 
 
