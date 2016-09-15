@@ -7,12 +7,12 @@ import {intlReducer} from 'react-intl-redux'
 import {performanceWidget}  from './reducers/performanceWidgetReducer'
 import {butlersInfo}  from './reducers/butlerReducer'
 import {chargerInfo}  from './reducers/chargerReducer'
-import {pickInfo}  from './reducers/pickReducer'
+import {auditInfo}  from './reducers/auditReducer'
 import {ppsInfo}  from './reducers/ppsReducer'
 import {putInfo}  from './reducers/putReducer'
 import {inventoryInfo}  from './reducers/inventoryReducer'
 import {ordersInfo}  from './reducers/ordersReducer'
-
+import {throughputInfo}  from './reducers/throughputReducer'
 
 const rootReducer = combineReducers({
   intl:intlReducer,
@@ -22,9 +22,10 @@ const rootReducer = combineReducers({
   recieveSocketActions,
   butlersInfo,
   chargerInfo,
-  pickInfo,
+  auditInfo,
   putInfo,
   ppsInfo,
+  throughputInfo,
   inventoryInfo,
   ordersInfo,
   performanceWidget})

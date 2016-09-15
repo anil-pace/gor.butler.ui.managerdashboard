@@ -95,7 +95,7 @@ class Login extends React.Component{
                 <div className='login-lang'>
                     <div className='lang-text'>Language:</div>
                     <Dropdown 
-                     pf={(e) => this.handleSelectionChange(e)} items={item} styleClass={'lang-drop'} defSel={sel} />
+                     pf={(e) => this.handleSelectionChange(e)} items={item} styleClass={'lang-drop'}/>
                 </div>
                 <div className='login-mid'>
                 <div className='upper-box'>

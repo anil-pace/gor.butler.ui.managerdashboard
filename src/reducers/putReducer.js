@@ -10,7 +10,8 @@ export  function putInfo(state={},action){
           var count_complete=0,res;
           res=action.data;
           if(res.aggregate_data){
-            count_complete=res.aggregate_data.count_complete;
+            if(res.aggregate_data.items_put)
+              count_complete=parseInt(res.aggregate_data.items_put);
           }
           return Object.assign({}, state, {
             "putData" : count_complete

@@ -7,32 +7,13 @@ import {BUTLERS_DATA} from '../constants/appConstants';
 export  function butlersInfo(state={},action){
 	switch (action.type) {
 	  case BUTLERS_DATA:
-         var pick_or_put = 0, audit = 0, idle = 0, dead = 0, charging= 0,res;
+         var count_active= 0,res;
          res=action.data;
-         if(res.data){
-                        res.data.map(function(key, index){
-                           
-                            if(key.status == 'dead' || key.status == 'initializing'){
-                                dead = dead + 1
-                            }else{
-                                if(key.tasktype == 'null' || key.tasktype == 'movetask'){
-                                    idle = idle + 1;
-                                }else if(key.tasktype == 'picktask'){
-                                    pick_or_put = pick_or_put + 1;
-                                }else if(key.tasktype == 'audittask'){
-                                    audit = audit + 1
-                                }else if(key.tasktype == 'chargetask'){
-                                    charging = charging + 1
-                                }
-                            }
-                        })
+         if(res.aggregate_data){
+          count_active=res.aggregate_data.count_active;
           }
                         var botKey = {
-                            "Pick / Put" : pick_or_put,
-                            "Audit": audit,
-                            "Charging" : charging,
-                            "Inactive" : dead,
-                            "Idle" : idle
+                            "count_active" : count_active
                         }
            return Object.assign({}, state, {
                "butlersData" : botKey

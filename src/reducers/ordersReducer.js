@@ -7,21 +7,26 @@ import {ORDERS_DATA} from '../constants/appConstants';
 export  function ordersInfo(state={},action){
   switch (action.type) {
     case ORDERS_DATA:
-          var status='',avg=0,count_pending=0,eta='',time_current='',res;
+          var count_pending=0,cut_off=0,eta=0,count_risk=0,wave_end='',res;
           res=action.data;
           if(res.aggregate_data){
-              status=res.aggregate_data.status;
-              avg=res.aggregate_data.avg_per_hr;
-              count_pending=res.aggregate_data.count_pending;
-              eta=res.aggregate_data.eta;
-              time_current=res.aggregate_data.time_current;            
+            if(res.aggregate_data.cut_off_time)
+              cut_off=parseInt(res.aggregate_data.cut_off_time);
+            if(res.aggregate_data.pending_orders)
+              count_pending=parseInt(res.aggregate_data.pending_orders);
+            if(res.aggregate_data.estimated_completion_time)
+              eta=parseInt(res.aggregate_data.estimated_completion_time);
+            if(res.aggregate_data.orders_at_risk)
+              count_risk=parseInt(res.aggregate_data.orders_at_risk);
+            if(res.aggregate_data.Wave_ending_time)
+              wave_end=res.aggregate_data.Wave_ending_time;            
           }
             var ordersData={
-              "status":status,
-              "avg":avg,
+              "cut_off":cut_off,
               "count_pending":count_pending,
+              "count_risk":count_risk,
               "eta":eta,
-              "time_current":time_current            
+              "wave_end":wave_end            
             }
             return Object.assign({}, state, {
             "ordersData" : ordersData
