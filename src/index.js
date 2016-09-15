@@ -21,10 +21,10 @@ import UsersTab from './containers/usersTab';
 import configureStore from './store';
 import socketMiddleware from './middleware/socketMiddleware';
 import enTranslations from './translations/en.json'
-import ButlerBot from './containers/butlerbotTab'
-import Notifications from './containers/notificationTab'
-import PPS from './containers/ppsTab'
-import ChargingStations from './containers/chargingStationsTab'
+import ButlerBot from './containers/systemTabs/butlerbotTab'
+import Notifications from './containers/systemTabs/notificationTab'
+import PPS from './containers/systemTabs/ppsTab'
+import ChargingStations from './containers/systemTabs/chargingStationsTab'
 import { translationMessages } from './utilities/i18n';
 
 

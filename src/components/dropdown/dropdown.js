@@ -7,6 +7,8 @@ import Ddown from 'react-dropdown';
 class Dropdown extends Component {
   constructor (props) {
     super(props)
+    console.log("props")
+    console.log(this.props)
     this.state = {selected: { value: props.items[0].value, label: props.items[0].label}
     }
     this._onSelect = this._onSelect.bind(this)

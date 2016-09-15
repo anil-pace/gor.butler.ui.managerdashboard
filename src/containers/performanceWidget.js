@@ -97,18 +97,18 @@ class PerformanceWidget extends React.Component{
 
 	render(){
 		
-		var temp = "health";
+		
 		const item = [
 		{ value: 'RENDER_SYSTEM_HEALTH', label: 'System Health' },
 		{ value: 'RENDER_SYSTEM_PERFORMANCE', label: 'System Performance' },
 		]
-		var wid= "Health"
+		
 		
 	if(this.state.renderState === "RENDER_SYSTEM_PERFORMANCE"){
 		return (
 			<div className="gorPerformanceWidget">
 				<div className="gorDrop">
-					<Dropdown pf={this.props.renderPerformanceWidget} items={item} styleClass={'ddown'}/>
+					<Dropdown pf={this.props.renderPerformanceWidget} items={item} styleClass={'ddown'} currentState={item[0]}/>
 				</div>
 
 				<div id="performanceGraph">
@@ -126,7 +126,7 @@ class PerformanceWidget extends React.Component{
 		return (
 			<div className="gorPerformanceWidget">
 				<div className="gorDrop">
-					<Dropdown pf={this.props.renderPerformanceWidget} items={item} styleClass={'ddown'}/>
+					<Dropdown pf={this.props.renderPerformanceWidget} items={item} styleClass={'ddown'} currentState={item[1]}/>
 				</div>
 
 				<div id="performanceGraph">

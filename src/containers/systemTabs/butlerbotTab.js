@@ -4,15 +4,8 @@
  */
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-import HealthTabs from '../components/health/healthTabs';
-import Health from '../components/health/health';
-import OrderStatsWidget from '../containers/orderStatsWidget'
-import PerformanceWidget from '../containers/performanceWidget'
-import AuditStatusWidget from '../containers/auditStatusWidget'
-import PutStatusWidget from '../containers/putStatusWidget'
-import PickStatusWidget from '../containers/pickStatusWidget'
-import SortExample from '../components/data_table/data_table';
-import SubTabs from '../components/subtab/SubTabs';
+import SortExample from '../../components/data_table/data_table';
+import SubTabs from '../../components/subtab/SubTabs';
 
 class ButlerBot extends React.Component{
 	constructor(props) 
