@@ -12,7 +12,7 @@ import {ppsInfo}  from './reducers/ppsReducer'
 import {putInfo}  from './reducers/putReducer'
 import {inventoryInfo}  from './reducers/inventoryReducer'
 import {ordersInfo}  from './reducers/ordersReducer'
-
+import {statsWidget} from './reducers/statsWidgetReducer'
 
 const rootReducer = combineReducers({
   intl:intlReducer,
@@ -27,6 +27,7 @@ const rootReducer = combineReducers({
   ppsInfo,
   inventoryInfo,
   ordersInfo,
-  performanceWidget})
+  performanceWidget,
+  statsWidget })
 
 export default rootReducer

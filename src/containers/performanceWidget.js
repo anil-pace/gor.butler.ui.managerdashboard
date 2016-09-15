@@ -87,8 +87,6 @@ class PerformanceWidget extends React.Component{
 	constructor(props) 
 	{
 		super(props);
-		this.state = { renderState:"RENDER_SYSTEM_HEALTH"}
-		
 	}	
 
 	componentWillReceiveProps(nextProps){
@@ -96,19 +94,17 @@ class PerformanceWidget extends React.Component{
 	}
 
 	render(){
-		
-		
 		const item = [
 		{ value: 'RENDER_SYSTEM_HEALTH', label: 'System Health' },
 		{ value: 'RENDER_SYSTEM_PERFORMANCE', label: 'System Performance' },
 		]
 		
 		
-	if(this.state.renderState === "RENDER_SYSTEM_PERFORMANCE"){
+	if(this.props.widget === "RENDER_SYSTEM_PERFORMANCE"){
 		return (
 			<div className="gorPerformanceWidget">
 				<div className="gorDrop">
-					<Dropdown pf={this.props.renderPerformanceWidget} items={item} styleClass={'ddown'} currentState={item[0]}/>
+					<Dropdown pf={this.props.renderPerformanceWidget} items={item} styleClass={'ddown'} currentState={item[1]}/>
 				</div>
 
 				<div id="performanceGraph">
@@ -126,7 +122,7 @@ class PerformanceWidget extends React.Component{
 		return (
 			<div className="gorPerformanceWidget">
 				<div className="gorDrop">
-					<Dropdown pf={this.props.renderPerformanceWidget} items={item} styleClass={'ddown'} currentState={item[1]}/>
+					<Dropdown pf={this.props.renderPerformanceWidget} items={item} styleClass={'ddown'} currentState={item[0]}/>
 				</div>
 
 				<div id="performanceGraph">
@@ -140,6 +136,7 @@ class PerformanceWidget extends React.Component{
 };
 
 function mapStateToProps(state, ownProps){
+	console.log(state)
 	return {
 		widget: state.performanceWidget.widget || {},
 		ppsData: state.recieveSocketActions.ppsData || {},

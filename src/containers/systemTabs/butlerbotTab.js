@@ -4,8 +4,7 @@
  */
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-import SortExample from '../../components/data_table/data_table';
-import SubTabs from '../../components/subtab/SubTabs';
+import ButlerBotTable from './butlerbotTable';
 
 class ButlerBot extends React.Component{
 	constructor(props) 
@@ -60,7 +59,7 @@ class ButlerBot extends React.Component{
 			<div>
 				<div>
 					<div className="gorTesting">
-						<SortExample items={temp_data} itemNumber={itemNumber}/>
+						<ButlerBotTable items={temp_data} itemNumber={itemNumber}/>
 					</div>
 				</div>
 			</div>
