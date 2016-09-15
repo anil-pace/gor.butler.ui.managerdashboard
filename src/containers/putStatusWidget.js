@@ -20,4 +20,6 @@ class PutStatusWidget extends React.Component{
 
  }
 
+ 
+
  export default PutStatusWidget;

@@ -4,6 +4,7 @@
  */
 import React  from 'react';
 import ReactDOM  from 'react-dom';
+import { connect } from 'react-redux';
 import HealthTabs from '../components/health/healthTabs';
 import Health from '../components/health/health';
 import OrderStatsWidget from '../containers/orderStatsWidget'
@@ -25,8 +26,8 @@ class Overview extends React.Component{
 		 * Need to remove these hardcoded variables
 		 * 
 		 */
-
-		var item1={heading:'Items to Stock', value:'4,74,579', low:'4 PPS stocking 3,546 items/hr', logo:'iStock'};
+		
+		var item1=this.props.putData ? this.props.putData : {};//{heading:'Items to Stock', value:'4,74,579', low:'4 PPS stocking 3,546 items/hr', logo:'iStock'};
         var item2={heading:'Items to Audit', value:'3,74,519', low:'4 PPS auditing 1,546 items/hr', logo:'iAudit'};;
 
 		return (
@@ -51,4 +52,11 @@ class Overview extends React.Component{
 	}
 };
 
-export default Overview ;
+function mapStateToProps(state, ownProps){
+	return {
+        putData: state.recieveSocketActions.putData
+        
+    };
+}
+
+export 	default connect(mapStateToProps)(Overview);

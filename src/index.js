@@ -27,7 +27,13 @@ import { translationMessages } from './i18n';
 /**
  * Creating a store and passing it to provider
  */
-const store = configureStore(); 
+
+const preLoadedState = {
+	authLogin : {
+		shouldMock : process.env.shouldMock
+	}
+}
+const store = configureStore(preLoadedState); 
 /**
  * Configuring Router based on path 
  */

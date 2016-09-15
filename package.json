@@ -6,14 +6,17 @@
   "scripts": {
     "test": "./node_modules/jest/bin/jest.js",
     "json": "echo '=>JSON' && jsonparse src/assets/js/serverMessages/server_messages.json -o dist/assets/js/localization/",
-    "browserify": "echo '=>Browserify' && browserify $npm_package_config_srcJs -o $npm_package_config_destinationJs -t [ babelify --presets [ es2015 react ] ] ",
+    "browserify": "echo '=>Browserify' && browserify $npm_package_config_srcJs -g [envify purge --shouldMock false] > $npm_package_config_destinationJs -t [  babelify --presets [ es2015 react ] ]  ",
+    "browserify:mock": "echo '=>Browserify' && browserify $npm_package_config_srcJs -g [envify purge --shouldMock true] > $npm_package_config_destinationJs -t [  babelify --presets [ es2015 react ] ]  ",
     "build-sass": "echo '=>Build SASS' && node-sass --output-style expanded  $npm_package_config_srcCss $npm_package_config_destinationCss  ",
     "watch-sass": "node-sass --output-style expanded  $npm_package_config_watchCssSrc $npm_package_config_watchCssDist -v",
     "copy": "echo '=>Copying...' && copy ./src/index.html ./dist/",
     "lint": "eslint src/**/*.js",
     "build-js": "npm run browserify --verbose",
+    "build-js:mock": "npm run browserify:mock --verbose",
     "watch:css": "onchange 'src/assets/css/**/*.scss' -- npm run build-sass ",
     "build": "npm run build-sass && npm run build-js",
+    "build:mock": "npm run build-sass && npm run build-js:mock",
     "watch:js": "npm run build && onchange 'src/**/*.js' -- npm run build-js",
     "watch:all": "parallelshell 'npm run watch:css' 'npm run watch:js'"
   },
@@ -40,6 +43,7 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/arsh_greyOrange/gor.butler.ui.managerdashboard#readme",
   "devDependencies": {
+    "argv": "0.0.2",
     "babel": "^6.5.2",
     "babel-cli": "^6.11.4",
     "babel-jest": "^13.2.2",

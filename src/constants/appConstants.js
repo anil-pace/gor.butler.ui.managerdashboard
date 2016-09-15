@@ -25,6 +25,15 @@ export const RECIEVE_ITEM_TO_STOCK = "RECIEVE_ITEM_TO_STOCK";
 /*Constants for performance widget*/
 export const RENDER_WIDGET = "RENDER_WIDGET";
 
+/*Parsing Constants*/
+export const PARSE_PPS = "pps";
+export const PARSE_BUTLERS = "butlers";
+export const PARSE_CHARGERS = "chargers";
+export const PARSE_ORDERS = "orders";
+export const PARSE_INVENTORY = "inventory";
+export const PARSE_PUT = "put";
+export const PARSE_PICK = "pick";
+
 
 
 
