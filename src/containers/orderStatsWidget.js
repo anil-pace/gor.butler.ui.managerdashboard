@@ -20,7 +20,7 @@ class OrderStatsWidget extends React.Component{
 	return (
 			<div className="gorOrderStatsWidget">
 				<div className="gorDrop">
-				<Dropdown pf={this.props.renderStatsWidget} items={item} styleClass={'ddown'} currentState={item[0]}/>
+				<Dropdown optionDispatch={this.props.renderStatsWidget} items={item} styleClass={'ddown'} currentState={item[0]}/>
 				<div id="chart_att">
 					<Chart/>
 					</div>

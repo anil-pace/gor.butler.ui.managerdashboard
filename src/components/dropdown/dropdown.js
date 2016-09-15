@@ -13,7 +13,7 @@ class Dropdown extends Component {
   }
   _onSelect (option) {
     this.setState({selected: option})
-    this.props.pf(option.value);
+    this.props.optionDispatch(option.value);
   }
   render () {
     const defaultOption = this.state.selected
