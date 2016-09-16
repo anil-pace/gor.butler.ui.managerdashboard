@@ -1,4 +1,4 @@
-import {LOGIN_REQUEST,LOGIN_REDIRECT,LOGIN_SUCCESS,LOGOUT} from '../constants/appConstants';
+import {LOGIN_REQUEST,LOGIN_REDIRECT,LOGIN_SUCCESS,LOGIN_FAILURE,LOGOUT} from '../constants/appConstants';
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -10,16 +10,24 @@ export  function authLogin(state={},action){
 	  case LOGIN_REDIRECT:
 	  case LOGIN_SUCCESS:
 	    //state.selectedAction = action.type;
-	    //window.localStore.setItem('auth_token',action.data.auth_token)
-
+	   sessionStorage.setItem('auth_token', action.data.auth_token);
       return Object.assign({}, state, {
+          "loginAuthorized":true,
         	"auth_token": action.data.auth_token,
           "username":"admin"
       })
-    case LOGOUT:
-      
+
+    case LOGIN_FAILURE:
       return Object.assign({}, state, {
-          "auth_token": null
+          "loginAuthorized":false
+      })
+
+    case LOGOUT:
+     sessionStorage.setItem('auth_token', null);      
+      return Object.assign({}, state, {
+          "loginAuthorized":false,
+          "auth_token": null,
+          "username":null
       })
 
 	  default:

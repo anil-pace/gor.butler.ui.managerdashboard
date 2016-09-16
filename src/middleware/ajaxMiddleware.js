@@ -1,5 +1,6 @@
 import {AJAX_CALL} from '../constants/appConstants'
 import {AjaxParse} from '../utilities/ajaxParser';
+import {ShowError} from '../utilities/showError';
 
 const ajaxMiddleware = (function(){ 
 
@@ -27,6 +28,7 @@ const ajaxMiddleware = (function(){
         else
         {
           console.log('Connection refused');
+          ShowError(store,params.cause);
         }        
      }
     };

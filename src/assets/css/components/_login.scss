@@ -5,10 +5,12 @@
   font-family: 'Source Sans Pro';
   src: url('../src/assets/Source_Sans_Pro/SourceSansPro-Regular.ttf')  format('truetype')
 }
-
+.fill-back
+{
+  	background: #4D5055;	
+}
 .login-form
 {
-  	background: #4D5055;
   	color:#A6A7A9;
   	font-family: 'Source Sans Pro', sans-serif;
   	overflow:hidden;
@@ -153,21 +155,39 @@
 		}
 		.login-field
 		{
+			margin:auto;
+			text-align:left;
 			margin-top:calculateRem(20px);
 			padding:calculateRem(10px);
+			padding-left:calculateRem(15px);
 			width:70%;
 			background-color:#FFFFFF;
-			font-size:18px;
 			border-radius:3px;
 			border:1px solid #AAAAAA; 
+			.field{
+				border:none;
+				font-size:18px;
+				margin-left:calculateRem(10px);
+				width:80%;
+			}
+		}
+		.login-auth-error
+		{
+			display:none;
+			text-align:left;
+			color:#EC1C24;
+			font-size:18px;
+			text-align:center;
+			margin-top:10px;
 		}
 		.login-usr-error
 		{
 			display:none;
 			text-align:left;
 			color:#EC1C24;
+			font-size:18px;			
 			margin-top:10px;
-			margin-left:calculateRem(65px);
+			margin-left:calculateRem(62px);
 		}
 		.login-btn
 		{

@@ -10,6 +10,11 @@
     "defaultMessage": "Japanese"
   },
   {
+    "id": "login.butler",
+    "description": "Text for butler",
+    "defaultMessage": "BUTLER"
+  },
+  {
     "id": "login.manageInterface",
     "description": "Text for Management Interface",
     "defaultMessage": "Management Interface"
