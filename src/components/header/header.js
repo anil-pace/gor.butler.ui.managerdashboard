@@ -27,14 +27,13 @@ class Header extends React.Component{
     }
 
     openDropdown() {
-    	console.log("worked");
     	dropdownFlag = 1;
     	temp="dropdown-content-afterClick";
 
     }
 
     appLogout() {
-    	console.log("worked again");
+
     }
 
 

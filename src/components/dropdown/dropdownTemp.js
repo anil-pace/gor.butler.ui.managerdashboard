@@ -13,7 +13,7 @@ class DropdownTemp extends Component {
 
   _onSelect (option) {
     this.setState({selected: option})
-    console.log("this is selected")
+    
 
   }
 

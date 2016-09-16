@@ -1,4 +1,4 @@
-
+@import '../abstracts/functions';
 
 .fixedDataTableCellGroupLayout_cellGroup {
   -webkit-backface-visibility: hidden;
@@ -8,6 +8,9 @@
   position: absolute;
   top: 0;
   white-space: nowrap;
+  border-bottom: solid;
+  border-width: 1px;
+  border-color: #dedede;
 }
 
 .fixedDataTableCellGroupLayout_cellGroup > .public_fixedDataTableCell_main {
@@ -201,7 +204,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .ScrollbarLayout_main {
   box-sizing: border-box;
   outline: none;
-  overflow: hidden;
+  overflow-x: hidden;
   position: absolute;
   -webkit-transition-duration: 250ms;
           transition-duration: 250ms;
@@ -243,7 +246,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 
 .ScrollbarLayout_face {
   left: 0;
-  overflow: hidden;
+  overflow-x: hidden;
   position: absolute;
   z-index: 1;
 }
@@ -330,6 +333,11 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 
 .public_fixedDataTable_header,
 .public_fixedDataTable_header .public_fixedDataTableCell_main {
+border-bottom-style: solid;
+border-color: #dedede;
+border-width: 3px;
+border-right-style: solid;
+
   
 }
 
@@ -383,59 +391,92 @@ background-color: #FFFFFF;
 
 .Stopped .public_fixedDataTableCell_cellContent{
 
-  background: red;
-  border-radius: 33%;
+  background: #fc3838;
+  border-radius: 24%;
   text-align: center;
-  width:60px;
+  width:52px;
   color: #ffffff;
   font-size: 12px;
+  max-height: 9px;
 }
 
 .Error .public_fixedDataTableCell_cellContent{
 
-  background: red;
-  border-radius: 33%;
+  background: #fc3838;
+  border-radius: 24%;
   text-align: center;
-  width:60px;
+  width:52px;
   color: #ffffff;
   font-size: 12px;
+  max-height: 9px;
 
 }
 
 .Warning .public_fixedDataTableCell_cellContent{
 
   background: #f99405;
-  border-radius: 33%;
+  border-radius: 24%;
   text-align: center;
-  width:60px;
+  width:52px;
   font-size: 12px;
+  max-height: 9px;
 
 }
 
 .On .public_fixedDataTableCell_cellContent{
 
   
-  border-radius: 33%;
+  border-radius: 24%;
   text-align: center;
-  width:60px;
+  width:52px;
   border-style: solid;
   border-width: 1px;
   border-color: #00a54f;
   color: #00a54f;
   font-size: 12px;
+  max-height: 9px;
 
 }
 
 .Off .public_fixedDataTableCell_cellContent{
 
-  border-radius: 33%;
+  border-radius: 24%;
   text-align: center;
-  width:60px;
+  width:52px;
   border-style: solid;
   border-width: 1px;
   border-color: #aaaaaa;
   color: #aaaaaa;
   font-size: 12px;
+  max-height: 9px;
+
+}
+.Online .public_fixedDataTableCell_cellContent{
+
+  
+  border-radius: 24%;
+  text-align: center;
+  width:52px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #00a54f;
+  color: #00a54f;
+  font-size: 12px;
+  max-height: 9px;
+
+}
+
+.Offline .public_fixedDataTableCell_cellContent{
+
+  border-radius: 24%;
+  text-align: center;
+  width:52px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #aaaaaa;
+  color: #aaaaaa;
+  font-size: 12px;
+  max-height: 9px;
 
 }
 
@@ -779,18 +820,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
  */
 
 .ScrollbarLayout_main {
-  box-sizing: border-box;
-  outline: none;
-  overflow: hidden;
-  position: absolute;
-  -webkit-transition-duration: 250ms;
-          transition-duration: 250ms;
-  -webkit-transition-timing-function: ease;
-          transition-timing-function: ease;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  
 }
 
 .ScrollbarLayout_mainVertical {
@@ -1037,7 +1067,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
       height: 68px;
       background: #FFFFFF;
       box-shadow: inset 0 5px 5px -5px #888888;
-      position: relative;
       font-family: "source sans pro";
       font-size: 20px;
       color: #000000;
@@ -1045,29 +1074,49 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 
 .gorFilter {
   float: right;
-  width: 30%;
   vertical-align: middle;
   box-sizing: border-box;
     border: 1px solid #aaaaaa;
     border-radius: 4px;
-    font-size: 14px;
     background-color: white;
     font-family: "source sans pro";
     color: #aaaaaa;
     height: 35px;
     width: 260px;
+    padding-left: 40px;
 
 }
-.gorToolBarElements {
-font-family: "source sans pro";
-font-size: 20px;
+
+.gorToolBarFilter {
+
 font-weight: bold;
 color: #000000;
 padding-top: 6px;
   display: inline-block;
-  width: 30%;
+  width: 50%;
   vertical-align: middle;
 }
+
+.gorToolBarElements {
+  display: inline-block;
+  vertical-align: super;
+  padding-right: 10px;
+}
+.gorToolBarDropDown {
+padding-left: 10px;
+  display: inline-block;
+  padding-top:10px;
+}
+
+.gorToolBarWrap {
+width: 49%;
+font-weight: bold;
+color: #000000;
+padding-top: 6px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
 
 .gorToolHeaderEl {
   display: inline-block;
@@ -1082,7 +1131,9 @@ padding-top: 6px;
 
 .gorTesting {
   width: 100%;
-  height: 400px;
+  height: calculateRem(480px);
 }
 
-
+.gorTableMainContainer {
+  overflow-x: hidden;
+}

@@ -88,7 +88,6 @@ class Login extends React.Component{
             if(item[i].value===this.props.sLang)
                 sel=i;
         }
-        console.log(item[sel]);
 		return (
             <div className='login-form'>
             <form action="#"  id = "loginForm" ref={node => { this.loginForm = node }} 
@@ -140,7 +139,7 @@ Login.contextTypes = {
 
 
 function mapStateToProps(state, ownProps){
-    console.log(state);
+    
 	return {
         auth_token: state.authLogin.auth_token,
         userName: state.authLogin.username,

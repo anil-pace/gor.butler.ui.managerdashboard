@@ -13,5 +13,10 @@
     "id": "login.manageInterface",
     "description": "Japanese Management Interface",
     "defaultMessage": "管理インターフェース"
+  },
+  {
+    "id": "user.table.heading",
+    "description": "Japanese Management Interface",
+    "defaultMessage": "管理インターフェース"
   }
 ]

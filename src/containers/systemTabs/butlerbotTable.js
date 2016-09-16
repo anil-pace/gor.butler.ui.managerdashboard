@@ -2,6 +2,7 @@ import React from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
 import DropdownTemp from '../../components/dropdown/dropdownTemp'
 import Dimensions from 'react-dimensions'
+import { FormattedMessage } from 'react-intl';
 var SortTypes = {
   ASC: 'ASC',
   DESC: 'DESC',
@@ -116,16 +117,17 @@ class ButlerBotTable extends React.Component {
     for (var index = 0; index < size; index++) {
       this._defaultSortIndexes.push(index);
     }
-
+    var columnWidth= (this.props.containerWidth/this.props.itemNumber)
     this.state = {
       sortedDataList: this._dataList,
       colSortDirs: {},
       columnWidths: {
-        id: 240,
-        status: 150,
-        msu: 140,
-        location: 60,
-        direction: 60
+        id: columnWidth,
+        status: columnWidth,
+        current: columnWidth,
+        msu: columnWidth,
+        location: columnWidth,
+        direction: columnWidth
       },
     };
 
@@ -204,31 +206,34 @@ class ButlerBotTable extends React.Component {
 
     var {sortedDataList, colSortDirs,columnWidths} = this.state;
     console.log(sortedDataList)
-    var columnWidth= (this.props.containerWidth/this.props.itemNumber)
+    
     const item = [
     { value: 'on/off', label: 'ON/OFF' },
     { value: 'on', label: 'ON' },
     { value: 'off', label: 'OFF' },
     ];
     var checkState = this.handleChange.bind(this);
+    console.log(this.props.containerHeight)
     return (
      
       <div>
 
         <div className="gorToolBar">
-          <div className="gorToolBarElements">
+          <div className="gorToolBarWrap">
             <div className="gorToolBarElements">
-              BUTLER BOTS
+               <FormattedMessage id="butlerBot.table.heading" description="Heading for butlerbot" 
+              defaultMessage ="BUTLER BOTS"/>
             </div>
-            <div className="gorToolBarElements">
+            <div className="gorToolBarDropDown">
               <DropdownTemp items={item}/>
             </div>
           </div>
-          <div className="gorToolBarElements">
+          <div className="gorToolBarWrap">
             <input className="gorFilter"
               onChange={this._onFilterChange}
-              placeholder="Filter by status"
-            />
+              placeholder="Filter by status">
+              </input>
+
           </div>
        </div>
       <Table
@@ -238,7 +243,7 @@ class ButlerBotTable extends React.Component {
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
         width={this.props.containerWidth}
-        height={500}
+        height={this.props.containerHeight}
         {...this.props}>
         <Column
           columnKey="id"
@@ -253,13 +258,19 @@ class ButlerBotTable extends React.Component {
           }
 
           cell={  <ComponentCell data={sortedDataList} checkState={checkState} />}
-          width={250}
+          fixed={true}
+          width={columnWidths.id}
+          isResizable={true}
+          
         />
         <Column
           columnKey="status"
           header={
             <SortHeaderCell >
-              <div>STATUS </div>
+              <div>
+                 <FormattedMessage id="butlerBot.table.status" description="Status for butlerbot" 
+              defaultMessage ="STATUS"/> 
+              </div>
               <div>
               <div className="header-red-alert-icon gorToolHeaderEl"/>
               <div className="gorToolHeaderEl"> 3 Alerts</div>
@@ -267,47 +278,61 @@ class ButlerBotTable extends React.Component {
             </SortHeaderCell>
           }
           cell={<StatusCell data={sortedDataList} ></StatusCell>}
-          width={columnWidth}
+          fixed={true}
+          width={columnWidths.status}
+          isResizable={true}
         />
         <Column
           columnKey="current"
           header={
             <SortHeaderCell>
-              CURRENT TASK
+              <FormattedMessage id="butlerBot.table.currentTask" description="Current task for butlerbot" 
+              defaultMessage ="CURRENT TASK"/>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
-          width={columnWidth}
+          fixed={true}
+          width={columnWidths.current}
+          isResizable={true}
         />
         <Column
           columnKey="msu"
           header={
             <SortHeaderCell>
-              MSU
+               <FormattedMessage id="butlerBot.table.msu" description="MSU Status for butlerbot" 
+              defaultMessage ="MSU"/> 
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
-          width={columnWidth}
+          fixed={true}
+          width={columnWidths.msu}
+          isResizable={true}
         />
         <Column
           columnKey="location"
           header={
             <SortHeaderCell>
-              LOCATION
+               <FormattedMessage id="butlerBot.table.location" description="Location for butlerbot" 
+              defaultMessage ="LOCATION"/> 
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
-          width={columnWidth}
+          fixed={true}
+          width={columnWidths.location}
+          isResizable={true}
         />
         <Column
           columnKey="direction"
           header={
             <SortHeaderCell >
-              DIRECTION
+               <FormattedMessage id="butlerBot.table.direction" description="Direction for butlerbot" 
+              defaultMessage ="DIRECTION"/> 
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList}  />}
-          width={columnWidth}
+          fixed={true}
+          width={columnWidths.direction}
+          isResizable={true}
         />
       </Table>
       </div>
