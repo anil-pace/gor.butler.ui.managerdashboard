@@ -1,4 +1,4 @@
-jest.unmock('../../../src/actions/loginAction');
+ jest.unmock('../../../src/actions/loginAction');
 import * as actions from '../../../src/actions/loginAction';
 import { LOGIN_REQUEST, LOGIN_REDIRECT, LOGIN_SUCCESS,LOGIN_FAILURE, AJAX_CALL} from '../../../src/constants/appConstants';
 
@@ -12,7 +12,7 @@ describe ('Login actions',()=>{
 		expect(actions.loginRequest(data)).toEqual(expectedLogin);
 
 	});
-	it('Action for succesful login authentication',()=>{
+	it('Action for succesfull login authentication',()=>{
 		const data={auth_token:'sdasdasd'};
 		const expectedLogin={
 		 type:LOGIN_SUCCESS,

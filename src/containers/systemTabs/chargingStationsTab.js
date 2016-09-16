@@ -1,27 +1,34 @@
+
 /**
  * Container for Overview tab
  * This will be switched based on tab click
  */
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-import SubTabs from '../components/subtab/SubTabs';
 
-
-class SystemTab extends React.Component{
+class ChargingStations extends React.Component{
 	constructor(props) 
 	{
     	super(props);
     }	
 	render(){
+	console.log("call")
+		/**
+		 * Need to remove these hardcoded variables
+		 * 
+		 */
+    
+		
 		return (
 			<div>
 				<div>
-					<SubTabs/>
+					<div>
+						ChargingStations info
+					</div>
 				</div>
-        {this.props.children}
 			</div>
 		);
 	}
 };
 
-export default SystemTab ;
+export default ChargingStations ;

@@ -2,12 +2,18 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { connect } from 'react-redux' ;
 import {REQUEST_HEADER,RECIEVE_HEADER,RECIEVE,RECIEVE_ITEM_TO_STOCK} from '../../actions/headerAction';
-import Dropdown from '../dropdown/dropdown';
+var dropdownFlag=0;
+var temp;
 
 class Header extends React.Component{
 	constructor(props) 
 	{
     	super(props);
+    	if(dropdownFlag === 0) {
+    		temp="dropdown-content";
+    	}
+    	
+    	 
     }
     componentDidMount(){
     	
@@ -20,12 +26,26 @@ class Header extends React.Component{
     	//console.log(nextProps);
     }
 
+    openDropdown() {
+    	console.log("worked");
+    	dropdownFlag = 1;
+    	temp="dropdown-content-afterClick";
+
+    }
+
+    appLogout() {
+    	console.log("worked again");
+    }
+
+
 	render(){
 		const { headData } = this.props;
+		
 
 		const item = [
-		{ value: 'RENDER_SYSTEM_HEALTH', label: 'System Health' },
-		{ value: 'RENDER_SYSTEM_PERFORMANCE', label: 'System Performance' },
+		{ value: 'Placeholder_option_1', label: 'Placeholder option 1' },
+		{ value: 'Placeholder_option_2', label: 'Placeholder option 2' },
+		{ value: 'logout', label: 'Logout' }
 		]
 		//console.log(this.props.headData);
 		return (
@@ -43,8 +63,8 @@ class Header extends React.Component{
 				<div className="logo fk-logo">
 					
 				</div>
-				<div className="dropdown" id="profile">
-					<div  className="dropbtn">
+				<div className="dropdown" id="profile"  >
+					<div  className="dropbtn" onClick={this.openDropdown}>
 						<div className="block">
 							<div className="upperTextClient truncate">{this.props.user.name}</div>
 							<div className="subTextClient">{this.props.user.post}</div>
@@ -59,7 +79,7 @@ class Header extends React.Component{
 								<a href="#">Placeholder option 2</a>
 							</div>
 							<div>
-								<a href="#">Logout</a>
+								<a onClick={this.appLogout}>Logout</a>
 							</div>
 						</div>
 					</div>

@@ -22,14 +22,13 @@
 }
 
 .fixedDataTableCellLayout_main {
-  border-right-style: solid;
-  border-right-width: 1px;
   border-width: 0 1px 0 0;
   box-sizing: border-box;
   display: block;
   overflow: hidden;
   position: absolute;
   white-space: normal;
+  background: grey;
 }
 
 
@@ -89,8 +88,6 @@
 }
 
 .fixedDataTableColumnResizerLineLayout_main {
-  border-right-style: solid;
-  border-right-width: 1px;
   box-sizing: border-box;
   position: absolute;
   z-index: 10;
@@ -333,13 +330,11 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 
 .public_fixedDataTable_header,
 .public_fixedDataTable_header .public_fixedDataTableCell_main {
-  background-color: #ffffff;
-  background-image: -webkit-linear-gradient(#fff, #efefef);
-  background-image: linear-gradient(#fff, #efefef);
+  
 }
 
 .public_fixedDataTable_footer .public_fixedDataTableCell_main {
-  background-color: #ffffff;
+  
   border-color: #d3d3d3;
 }
 
@@ -377,39 +372,70 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   background-color: #f4f4f4;
 }
 
-.table_status_stopped1 .public_fixedDataTableCell_cellContent{
-
-  background: #ec1c24;
-  border-radius: 40%;
-  text-align: center;
-  width:50%;
-
+.fixedDataTableRowLayout_rowWrapper:hover .public_fixedDataTableCell_main {
+  background-color: #e6e6e6;
 }
 
-.table_status_stopped2 .public_fixedDataTableCell_cellContent{
+.public_fixedDataTable_header:hover .public_fixedDataTableCell_main {
 
-  background: blue;
-  border-radius: 40%;
-  text-align: center;
-  width:50%;
-
+background-color: #FFFFFF;
 }
 
-.table_status_stopped3 .public_fixedDataTableCell_cellContent{
+.Stopped .public_fixedDataTableCell_cellContent{
 
   background: red;
-  border-radius: 40%;
+  border-radius: 33%;
   text-align: center;
-  width:50%;
+  width:60px;
+  color: #ffffff;
+  font-size: 12px;
+}
+
+.Error .public_fixedDataTableCell_cellContent{
+
+  background: red;
+  border-radius: 33%;
+  text-align: center;
+  width:60px;
+  color: #ffffff;
+  font-size: 12px;
 
 }
 
-.table_status_stopped .public_fixedDataTableCell_cellContent{
+.Warning .public_fixedDataTableCell_cellContent{
 
-  background: grey;
-  border-radius: 40%;
+  background: #f99405;
+  border-radius: 33%;
   text-align: center;
-  width:50%;
+  width:60px;
+  font-size: 12px;
+
+}
+
+.On .public_fixedDataTableCell_cellContent{
+
+  
+  border-radius: 33%;
+  text-align: center;
+  width:60px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #00a54f;
+  color: #00a54f;
+  font-size: 12px;
+
+}
+
+.Off .public_fixedDataTableCell_cellContent{
+
+  border-radius: 33%;
+  text-align: center;
+  width:60px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #aaaaaa;
+  color: #aaaaaa;
+  font-size: 12px;
 
 }
 
@@ -538,6 +564,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   display: inline-block;
   vertical-align: top;
   white-space: normal;
+  background: #f7f7f7;
 }
 
 .fixedDataTableCellGroupLayout_cellGroupWrapper {
@@ -556,8 +583,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
  */
 
 .fixedDataTableCellLayout_main {
-  border-right-style: solid;
-  border-right-width: 1px;
   border-width: 0 1px 0 0;
   box-sizing: border-box;
   display: block;
@@ -631,8 +656,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 }
 
 .fixedDataTableColumnResizerLineLayout_main {
-  border-right-style: solid;
-  border-right-width: 1px;
   box-sizing: border-box;
   position: absolute;
   z-index: 10;
@@ -876,8 +899,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .public_fixedDataTable_header,
 .public_fixedDataTable_header .public_fixedDataTableCell_main {
   background-color: #ffffff;
-  background-image: -webkit-linear-gradient(#fff, #efefef);
-  background-image: linear-gradient(#fff, #efefef);
 }
 
 .public_fixedDataTable_footer .public_fixedDataTableCell_main {
@@ -964,7 +985,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 
 .public_fixedDataTableRow_highlighted,
 .public_fixedDataTableRow_highlighted .public_fixedDataTableCell_main {
-  background-color: #ffffff;
+  background-color: #f7f7f7;
 }
 
 .public_fixedDataTableRow_fixedColumnsDivider {
@@ -1011,4 +1032,57 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .public_Scrollbar_faceActive:after {
   background-color: #7d7d7d;
 }
+.gorToolBar {
+  width: 100%;
+      height: 68px;
+      background: #FFFFFF;
+      box-shadow: inset 0 5px 5px -5px #888888;
+      position: relative;
+      font-family: "source sans pro";
+      font-size: 20px;
+      color: #000000;
+      }
+
+.gorFilter {
+  float: right;
+  width: 30%;
+  vertical-align: middle;
+  box-sizing: border-box;
+    border: 1px solid #aaaaaa;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: white;
+    font-family: "source sans pro";
+    color: #aaaaaa;
+    height: 35px;
+    width: 260px;
+
+}
+.gorToolBarElements {
+font-family: "source sans pro";
+font-size: 20px;
+font-weight: bold;
+color: #000000;
+padding-top: 6px;
+  display: inline-block;
+  width: 30%;
+  vertical-align: middle;
+}
+
+.gorToolHeaderEl {
+  display: inline-block;
+  padding-bottom: 4px;
+}
+
+.gorToolHeaderSubText{
+  font-family: "source sans pro";
+  font-size: 12px;
+  color: #666666;
+}
+
+.gorTesting {
+  width: 100%;
+  height: 400px;
+}
+
 

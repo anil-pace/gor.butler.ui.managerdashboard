@@ -4,24 +4,31 @@
  */
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-import SubTabs from '../components/subtab/SubTabs';
 
 
-class SystemTab extends React.Component{
+class Notifications extends React.Component{
 	constructor(props) 
 	{
     	super(props);
     }	
 	render(){
+	console.log("call")
+		/**
+		 * Need to remove these hardcoded variables
+		 * 
+		 */
+    
+		
 		return (
 			<div>
 				<div>
-					<SubTabs/>
+					<div>
+						Notifications
+					</div>
 				</div>
-        {this.props.children}
 			</div>
 		);
 	}
 };
 
-export default SystemTab ;
+export default Notifications ;

@@ -7,6 +7,16 @@
   {
     "id": "login.lang.japanese",
     "description": "Japanese option in the language drop down",
+    "defaultMessage": "受注は気力します"
+  },
+  {
+    "id": "login.manageInterface",
+    "description": "Text for Management Interface",
+    "defaultMessage": "受注は気力します"
+  },
+  {
+    "id": "pickWidget.heading",
+    "description": "heading for pick status widget",
     "defaultMessage": "管理インターフェース"
   },
   {
