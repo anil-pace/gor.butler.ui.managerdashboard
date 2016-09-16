@@ -12,14 +12,14 @@ export  function ppsInfo(state={},action){
          if(res.data){
           res.data.map(function(key, index){
                             if(key.pps_mode == 'pick'){
-                                pick = pick + 1;
+                                pick++;
                             }else if(key.pps_mode == 'put'){
-                                put = put + 1;
+                                put++;
                             }else if(key.pps_mode == 'audit'){
-                                audit = audit + 1
+                                audit++;
                             }
                             if(key.pps_active == false){
-                                inactive = inactive + 1;
+                                inactive++;
                             }
                             var key = {
                                 "id" : key.pps_id,

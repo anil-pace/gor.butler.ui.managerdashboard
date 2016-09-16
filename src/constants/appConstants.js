@@ -32,12 +32,12 @@ export const RENDER_STATSWIDGET = "RENDER_STATSWIDGET";
 /*Constants for response type */
 export const PPS_DATA = "PPS_DATA";
 export const BUTLERS_DATA = "BUTLERS_DATA";
-export const PICK_DATA = "PICK_DATA";
+export const AUDIT_DATA = "AUDIT_DATA";
 export const PUT_DATA = "PUT_DATA";
 export const ORDERS_DATA = "ORDERS_DATA";
 export const INVENTORY_DATA = "INVENTORY_DATA";
 export const CHARGERS_DATA = "CHARGERS_DATA";
-
+export const THROUGHPUT_DATA="THROUGHPUT_DATA";
 
 /*Constants for type of AJAX call*/
 export const AUTH_LOGIN = "AUTH_LOGIN";

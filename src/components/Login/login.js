@@ -13,17 +13,26 @@ import { translationMessages } from '../../utilities/i18n';
 class Login extends React.Component{
 	constructor(props) 
 	{
-    	super(props);
-       
+    	super(props);      
     }
-
+    componentWillMount()
+    {
+        document.body.className='fill-back';
+    }
     componentWillReceiveProps(nextProps) {
     /**
      * Checking if the user is loggedin 
      * and redirecting to main page
      */
-        
-      if (nextProps.auth_token  && nextProps.userName) {
+      if(!nextProps.loginAuthorized)  
+      {
+         this.authError.style.display='block';
+         this.userError.style.display='none';
+         this.passError.style.display='none';
+      }
+      else
+      {
+           document.body.className='';
            this.context.router.push("/overview");
       }
     }
@@ -60,10 +69,14 @@ class Login extends React.Component{
             if(!formdata.username)
             {
                 this.userError.style.display='block';
+                this.authError.style.display='none';
+                this.passError.style.display='none';
             }
             else
             {
                 this.passError.style.display='block';
+                this.authError.style.display='none';
+                this.userError.style.display='none';
             }
             return;
         }
@@ -94,32 +107,38 @@ class Login extends React.Component{
                 onSubmit={(e) => this.handleSubmit(e)}>
                 <div className='login-lang'>
                     <div className='lang-text'>Language:</div>
-                    <Dropdown 
-                     optionDispatch={(e) => this.handleSelectionChange(e)} items={item} styleClass={'lang-drop'} currentState={item[sel]} />
+                    <Dropdown optionDispatch={(e) => this.handleSelectionChange(e)} items={item} styleClass={'lang-drop'} currentState={item[sel]} />
+                </div>
+                <div className='login-logo alt-gor-logo'>
                 </div>
                 <div className='login-mid'>
                 <div className='upper-box'>
-                    <div className='login-head'>Butler</div>
+                    <div className='login-head'><FormattedMessage id='login.butler' 
+                        defaultMessage="BUTLER" description="Text for butler"/>
+                    </div>
                     <p>
                     <FormattedMessage id='login.manageInterface' 
                     defaultMessage="Management Interface"
                             description="Text for Management Interface"/></p>   
                 </div>
+                <div className=' login-auth-error' 
+                    ref={node => { this.authError = node }}><div className='login-error'></div>Invalid username and/or password, please try again</div>
                 <section>
-				    <input className='login-field' type="text" id="username"  placeholder="Username" ref={node => { this.userName = node }}/>
+                <div className='login-field'>
+				        <div className='login-user'></div><input className='field' type="text" id="username"  placeholder="Username" ref={node => { this.userName = node }}/>
+                </div>
                 </section>
                     <div className=' login-usr-error' 
                     ref={node => { this.userError = node }}>Please enter your username</div>
                 <section>
-                    <input className='login-field' type="password" id="password" placeholder="Password" ref={node => { this.password = node }}/>
+                <div className='login-field'>
+                        <div className='login-password'></div><input className='field' type="password" id="password" placeholder="Password" ref={node => { this.password = node }}/>
+                </div>
                 </section>
                     <div className='login-usr-error' ref={node => { this.passError = node }} >Please enter your password</div>
                 <section>
                     <input type="submit" className='login-btn'  value="Login" /><br />
                 </section>
-                <div className='login-fgt'>
-                    <a>Forgot password?</a>
-                </div>
                 </div>
                 <div className='box-bottom-left'><span>Current time: 09:00:15(IST)</span></div>
                 <div className='box-bottom-right'><span>v 1.0</span></div>
@@ -139,8 +158,8 @@ Login.contextTypes = {
 
 
 function mapStateToProps(state, ownProps){
-    
 	return {
+        loginAuthorized:state.authLogin.loginAuthorized,
         auth_token: state.authLogin.auth_token,
         userName: state.authLogin.username,
         sLang: state.intl.locale
