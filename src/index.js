@@ -26,7 +26,7 @@ import Notifications from './containers/systemTabs/notificationTab'
 import PPS from './containers/systemTabs/ppsTab'
 import ChargingStations from './containers/systemTabs/chargingStationsTab'
 import { translationMessages } from './utilities/i18n';
-
+import {loginRequest} from './actions/loginAction';
 
 
 /**
@@ -36,13 +36,23 @@ const store = configureStore();
 /**
  * Configuring Router based on path 
  */
+function requireAuth(nextState, replaceState ) {
+  if (sessionStorage.getItem('auth_token')) 
+  {
+  	let state = store.getState()
+  	store.dispatch(loginRequest());
+    replaceState({ nextPathname: nextState.location.pathname }, '/overview',nextState.location.query)
+  }
+  
+  
+}
 
 ReactDOM.render(
 	<Provider store={store}>
 	<IntlProvider messages={ translationMessages.en }>
 		<Router history={ hashHistory }>
-		<Route name="default" path="/"  component={App} />
-		<Route name="login" path="/login"  component={Login} />
+		<Route name="default" path="/"  component={App}  />
+		<Route name="login" path="/login"  component={Login}  onEnter={requireAuth}/>
 		<Route name="app" path="/md"  component={App} >
 			<IndexRoute component={ Overview } />
 			<Route name="system" path="/system"  component={SystemTab}>
@@ -57,6 +67,7 @@ ReactDOM.render(
 			<Route name="users" path="/users"  component={UsersTab} />
 			<Route name="overview" path="/overview"  component={Overview} />
 		</Route>
+		
 		</Router>
     </IntlProvider>
 	</Provider>,

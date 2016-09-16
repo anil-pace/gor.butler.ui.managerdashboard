@@ -4,11 +4,20 @@ import {LOGIN_REQUEST,LOGIN_REDIRECT,LOGIN_SUCCESS,LOGIN_FAILURE,LOGOUT} from '.
  * @param  {Action object}
  * @return {[Object] updated state}
  */
+
 export  function authLogin(state={},action){
 	switch (action.type) {
-	  case LOGIN_REQUEST:
+	
+    case LOGIN_REQUEST:
+      return Object.assign({}, state, {
+          "loginAuthorized":true,
+          "auth_token": sessionStorage.getItem('auth_token'),
+          "username":"admin"
+      })    
+
 	  case LOGIN_REDIRECT:
-	  case LOGIN_SUCCESS:
+	
+    case LOGIN_SUCCESS:
 	    //state.selectedAction = action.type;
 	   sessionStorage.setItem('auth_token', action.data.auth_token);
       return Object.assign({}, state, {

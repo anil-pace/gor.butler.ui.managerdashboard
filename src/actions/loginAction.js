@@ -7,10 +7,9 @@ import { LOGIN_REQUEST, LOGIN_REDIRECT, LOGIN_SUCCESS,LOGIN_FAILURE, AJAX_CALL} 
  */
 
 
-export function loginRequest(data){
+export function loginRequest(){
   return {
-    type: LOGIN_REQUEST,
-      data
+    type: LOGIN_REQUEST
     }
 }
 

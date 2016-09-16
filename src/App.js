@@ -32,26 +32,27 @@ class App extends React.Component{
   }	
   
   	componentWillMount(){
-  		let userName =  this.props.userName,
-  		authToken = this.props.authToken;
-  		/*Creating Web Socket Connection*/
-  		if(!authToken && !userName){
-  			this.context.router.push("/login");
-  		}
-  		else{
-  			this.props.initWebSocket() ;
-  		}
+      
+        this.context.router.push("/login");
+            
   	}
   	componentWillReceiveProps(nextProps) {
     /**
      * Checking if the user is loggedin 
      * and redirecting to main page
      */
+      let userName =  nextProps.userName,
+      authToken = nextProps.authToken,
+      socketStatus = nextProps.socketStatus;
+
+      if(authToken && userName && !socketStatus)
+          this.props.initWebSocket() ; 
+
       if (nextProps.socketStatus && !nextProps.socketAuthorized) {
            let webSocketData = {
                 'type': 'auth',
                 'data' : {
-                    "auth_token" : this.props.authToken
+                    "auth_token" : authToken
                 }
             }
             this.props.sendAuthToSocket(webSocketData) ;

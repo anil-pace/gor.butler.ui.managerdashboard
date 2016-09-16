@@ -33,7 +33,7 @@ class Login extends React.Component{
       else
       {
            document.body.className='';
-           this.context.router.push("/overview");
+           this.context.router.push("/md");
       }
     }
 
@@ -71,12 +71,16 @@ class Login extends React.Component{
                 this.userError.style.display='block';
                 this.authError.style.display='none';
                 this.passError.style.display='none';
+                this.userField.style.borderColor='#EC1C24';
+                this.passField.style.borderColor='';
             }
             else
             {
                 this.passError.style.display='block';
                 this.authError.style.display='none';
                 this.userError.style.display='none';
+                this.userField.style.borderColor='';                
+                this.passField.style.borderColor='#EC1C24';
             }
             return;
         }
@@ -101,7 +105,6 @@ class Login extends React.Component{
             if(item[i].value===this.props.sLang)
                 sel=i;
         }
-        console.log(item[sel]);
 		return (
             <div className='login-form'>
             <form action="#"  id = "loginForm" ref={node => { this.loginForm = node }} 
@@ -125,14 +128,14 @@ class Login extends React.Component{
                 <div className=' login-auth-error' 
                     ref={node => { this.authError = node }}><div className='login-error'></div>Invalid username and/or password, please try again</div>
                 <section>
-                <div className='login-field'>
+                <div className='login-field' ref={node => { this.userField = node }}>
 				        <div className='login-user'></div><input className='field' type="text" id="username"  placeholder="Username" ref={node => { this.userName = node }}/>
                 </div>
                 </section>
                     <div className=' login-usr-error' 
                     ref={node => { this.userError = node }}>Please enter your username</div>
                 <section>
-                <div className='login-field'>
+                <div className='login-field'  ref={node => { this.passField = node }}>
                         <div className='login-password'></div><input className='field' type="password" id="password" placeholder="Password" ref={node => { this.password = node }}/>
                 </div>
                 </section>
