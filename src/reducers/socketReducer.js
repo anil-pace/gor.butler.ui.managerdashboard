@@ -1,5 +1,5 @@
-import {WS_CONNECT,WS_DISCONNECT,WS_CONNECTED,WS_ONMESSAGE,WS_ONSEND,WS_URL} from '../constants/appConstants';
-import {WsParse} from '../utilities/WsMsgParser';
+import {WS_CONNECT,WS_SUCCESS,WS_DISCONNECT,WS_CONNECTED,WS_ONMESSAGE,WS_ONSEND,WS_URL,WS_INIT} from '../constants/appConstants';
+
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -14,19 +14,21 @@ export  function recieveSocketActions(state={},action){
         	
       })
     case WS_ONMESSAGE:
-      if(action.data.resource_type){
-        return WsParse(state,action.data);
-       }
       // Handshaking and login successful message.
-
-      else if(action.data.message === "Sucessfully logged in"){
+      if(action.data.message === WS_SUCCESS){
           return Object.assign({}, state, {
           "socketAuthorized": true,
           "initDataSent":false
         })
       }
       break;
-
+    case WS_INIT:
+          return Object.assign({}, state, {
+            "socketConnected": true,
+            "initDataSent":true
+        })
+      break;
+    
 	  default:
 	    return state
   }

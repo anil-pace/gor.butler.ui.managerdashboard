@@ -27,7 +27,7 @@ class Overview extends React.Component{
 		 * 
 		 */
 		
-		var item1=this.props.putData ? this.props.putData : {};//{heading:'Items to Stock', value:'4,74,579', low:'4 PPS stocking 3,546 items/hr', logo:'iStock'};
+		var putData=this.props.putData ? this.props.putData : {};//{heading:'Items to Stock', value:'4,74,579', low:'4 PPS stocking 3,546 items/hr', logo:'iStock'};
         var item2={heading:'Items to Audit', value:'3,74,519', low:'4 PPS auditing 1,546 items/hr', logo:'iAudit'};;
 
 		return (
@@ -35,7 +35,7 @@ class Overview extends React.Component{
 				<div className="section group">
 					<div className="col span_2_of_4">
 
-						<PutStatusWidget items={item1}/>
+						<PutStatusWidget items={putData}/>
 						<AuditStatusWidget items={item2}/>
 
 					</div>
@@ -54,7 +54,7 @@ class Overview extends React.Component{
 
 function mapStateToProps(state, ownProps){
 	return {
-        putData: state.recieveSocketActions.putData
+        putData: state.putInfo.putData
         
     };
 }

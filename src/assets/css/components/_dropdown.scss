@@ -2,9 +2,7 @@
 .ddown {
 	max-width:calculateRem(290px);
 	min-height: calculateRem(45px);
-}
-
-.Dropdown-root {
+  .Dropdown-root {
   position: relative;
 }
 
@@ -99,3 +97,6 @@ box-shadow: calculateRem(2px) calculateRem(2px) calculateRem(2px) #888888;
   display: block;
   padding: calculateRem(8px) calculateRem(10px);
 }
+
+}
+

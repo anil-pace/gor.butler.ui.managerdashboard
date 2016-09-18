@@ -1,71 +1,45 @@
-const resTypePPS = {
-	"data": [{
-		"pps_id": "1",
-		"pps_requested_mode": null,
-		"pps_mode": "audit"
-	}, {
-		"pps_id": "2",
-		"pps_requested_mode": null,
-		"pps_mode": "audit"
-	}, {
-		"pps_id": "3",
-		"pps_requested_mode": null,
-		"pps_mode": "audit"
-	}, {
-		"pps_id": "4",
-		"pps_requested_mode": null,
-		"pps_mode": "put"
-	}, {
-		"pps_id": "5",
-		"pps_requested_mode": null,
-		"pps_mode": "put"
+
+
+export const resTypePut = {
+	"aggregate_data": {
+		"items_put": 20687
+	},
+	"resource_type": "put_details"
+};
+
+export const resTypePPS = {
+	"aggregate_data": [{
+		"pps_id": 1,
+        "time_unit": "per_hour",
+		"orders_picked": 500,
+		"items_picked": 1000, 
+		"items_put": 2400,
+		"items_audited": "need_to_be_decided_per_item_or_per_audit",
+		"pps_mode": "put",
+		"active": "true/false"
+	},{
+		"pps_id": 2,
+        "time_unit": "per_hour",
+		"orders_picked": 500,
+		"items_picked": 1000,
+		"items_put": 2400,
+		"items_audited": "need_to_be_decided_per_item_or_per_audit",
+		"pps_mode": "put",
+		"active": "true/false"
 	}],
-	"resource_type": "pps"
+	"resource_type": "pps_details"
 }
 
-const resTypeOrders = {
-	"aggregate_data": {
-		"status": "On Schedule",
-		"avg_per_hr": 0,
-		"count_pending": 0,
-		"count_total": 0,
-		"eta": "Coming Soon",
-		"count_pending_today": 0,
-		"time_current": "2016-09-13 15:20:38"
-	},
-	"resource_type": "orders"
-}
 
-const resTypeButlers = {
-	"aggregate_data": {
-		"count_active": 15
-	},
-	"resource_type": "butlers"
-}
-
-const resTypeUsers = {
-	"aggregate_data": {
-		"count_active": 1
-	},
-	"resource_type": "users"
-}
-
-const resTypePut = {
-	"aggregate_data": {
-		"count_complete": 0
-	},
-	"resource_type": "put"
-}
-
-const resTypePick ={
+export const resTypePick ={
 	"aggregate_data": {
 		"count_complete": 0
 	},
 	"resource_type": "pick"
-}
+};
 
 
-const resTypeInventory1 = {
+export const resTypeInventory1 = {
 	"aggregate_data": {
 		"total_available_volume": 0,
 		"count_put": 0,
@@ -79,7 +53,7 @@ const resTypeInventory1 = {
 	"resource_type": "inventory"
 }
 
-const resTypeChargers = {
+export const resTypeChargers = {
 	"data": [{
 		"charger_mode": "manual",
 		"charger_id": "1",
@@ -108,7 +82,7 @@ const resTypeChargers = {
 	"resource_type": "chargers"
 }
 
-const resTypeButlersData = {
+export const resTypeButlersData = {
 	"data": [{
 		"status": "ready",
 		"display_id": "undefined",
@@ -351,11 +325,11 @@ const resTypeButlersData = {
 		"butler_id": "15"
 	}],
 	"resource_type": "butlers"
-}
+};
 
 
 
-const resTypeInventory2 = {
+export const resTypeInventory2 = {
 	"aggregate_data": {
 		"total_available_volume": 0,
 		"count_put": 0,
@@ -367,6 +341,6 @@ const resTypeInventory2 = {
 		"open_stock": 15
 	},
 	"resource_type": "inventory"
-}
+};
 
-export {resTypePPS,resTypeInventory1,resTypeButlersData,resTypeChargers,resTypeInventory2,resTypePick,resTypePut,resTypeUsers,resTypeButlers,resTypeOrders}
+//export {resTypePPS,resTypeInventory1,resTypeButlersData,resTypeChargers,resTypeInventory2,resTypePick,resTypePut,resTypeUsers,resTypeButlers,resTypeOrders};

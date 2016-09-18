@@ -8,22 +8,25 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { Provider,connect } from 'react-redux';
 
+
 /**
  * Had to comment out intl code as 
  * it was giving iterator error in web pack
  * Need to work on this
  */
-//import {IntlProvider} from 'react-intl-redux';
-//import { translationMessages } from './i18n';
-//import {addLocaleData} from 'react-intl';
+import {IntlProvider} from 'react-intl-redux';
+import { translationMessages } from './utilities/i18n';
 
+
+import { Router, Route, hashHistory, IndexRoute} from 'react-router';
 
 
 // Importing our own libraries
 
 import configureStore from './store';
 import socketMiddleware from './middleware/socketMiddleware';
-//import enTranslations from './translations/en.json';
+
+
 import Routes from './components/Router';
 
 
@@ -34,12 +37,8 @@ import Routes from './components/Router';
  */
 
 
-const preLoadedState = {
-	authLogin : {
-		shouldMock : process.env.shouldMock
-	}
-}
-const store = configureStore(preLoadedState); 
+
+const store = configureStore(); 
 
 
 
@@ -48,10 +47,14 @@ const store = configureStore(preLoadedState);
  */
 
 ReactDOM.render(
+	
 	<Provider store={store}>
+	<IntlProvider messages={ translationMessages.en }>
 	<Routes />
+	</IntlProvider>
 	</Provider>
 ,document.getElementById('container'))
+
 
 
 

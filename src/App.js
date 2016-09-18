@@ -4,8 +4,8 @@ import HealthTabs from './components/health/healthTabs';
 import Health from './components/health/health';
 import Tabs from './containers/tabs';
 import Header from './components/header/header';
-import {setWsAction } from './actions/socketActions';
-import { WS_CONNECT,WS_ONSEND } from './constants/appConstants'
+import {setWsAction ,setMockAction} from './actions/socketActions';
+import { WS_CONNECT,WS_ONSEND,WS_MOCK } from './constants/appConstants'
 import { wsInitData } from './constants/initData.js'
 import Dropdown from './components/dropdown/dropdown';
 
@@ -34,30 +34,40 @@ class App extends React.Component{
   	componentWillMount(){
   		let userName =  this.props.userName,
   		authToken = this.props.authToken;
-  		/*Creating Web Socket Connection*/
-  		if(!authToken && !userName){
-  			this.context.router.push("/login");
-  		}
-  		else{
-  			this.props.initWebSocket() ;
-  		}
+  		if(MOCK === false){
+        /*Creating Web Socket Connection*/
+    		if(!authToken && !userName){
+    			this.context.router.push("/login");
+    		}
+    		else{
+    			this.props.initWebSocket() ;
+    		}
+      }
+      else{
+          this.props.initMockData(wsInitData) ;
+      }
   	}
   	componentWillReceiveProps(nextProps) {
     /**
      * Checking if the user is loggedin 
      * and redirecting to main page
      */
-      if (nextProps.socketStatus && !nextProps.socketAuthorized) {
-           let webSocketData = {
-                'type': 'auth',
-                'data' : {
-                    "auth_token" : this.props.authToken
-                }
-            }
-            this.props.sendAuthToSocket(webSocketData) ;
-      }
-      if(nextProps.socketStatus && nextProps.socketAuthorized && !nextProps.initDataSent){
-      		this.props.initDataSentCall(wsInitData) ;
+    if(MOCK === false){
+        if (nextProps.socketStatus && !nextProps.socketAuthorized) {
+             let webSocketData = {
+                  'type': 'auth',
+                  'data' : {
+                      "auth_token" : this.props.authToken
+                  }
+              }
+              this.props.sendAuthToSocket(webSocketData) ;
+        }
+        if(nextProps.socketStatus && nextProps.socketAuthorized && !nextProps.initDataSent){
+        		this.props.initDataSentCall(wsInitData) ;
+        }
+    }
+    else{
+          this.props.initMockData(wsInitData) ;
       }
     }
   	/**Render method called when component react renders
@@ -99,7 +109,8 @@ function mapStateToProps(state,ownProps) {
  	userName : state.authLogin.username,
  	socketStatus: state.recieveSocketActions.socketConnected,
  	socketAuthorized: state.recieveSocketActions.socketAuthorized,
- 	initDataSent: state.recieveSocketActions.initDataSent
+ 	initDataSent: state.recieveSocketActions.initDataSent,
+  intl: state.intl
  }
 }
 /**
@@ -109,7 +120,8 @@ function mapDispatchToProps(dispatch){
     return {
         initWebSocket: function(){ dispatch(setWsAction({type:WS_CONNECT})); },
         sendAuthToSocket: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
-        initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); }
+        initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
+        initMockData: function(data){dispatch(setMockAction({type:WS_MOCK,data:data}));}
     }
 };
 export  default connect(mapStateToProps,mapDispatchToProps)(App);

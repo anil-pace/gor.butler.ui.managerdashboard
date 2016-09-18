@@ -18,11 +18,18 @@ export function wsResponseAction(data){
 		data
 	}
 }
-
-
 export function setWsAction(params){
 	return {
 		type: params.type,
 		data: params.data
 	}
 }
+
+export function setMockAction(params){
+	return {
+		type: params.type,
+		data: params.data
+	}
+}
+
+

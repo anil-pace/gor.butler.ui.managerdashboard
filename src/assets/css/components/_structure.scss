@@ -15,10 +15,8 @@
   url('fonts/SourceSansPro-Regular.ttf')  format('truetype')
 }
 
-*{
-	font-family:Source Sans Pro;
-}
 
 body{
 	background : $gor-body-background;
+	font-family:Source Sans Pro;
 }
