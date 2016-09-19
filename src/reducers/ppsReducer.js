@@ -7,9 +7,11 @@ import {PPS_DATA} from '../constants/appConstants';
 export  function ppsInfo(state={},action){
   switch (action.type) {
     case PPS_DATA:
+
          let ppsData={};
          ppsData.totalPut  = processPPSData(action.data);
          processPPSData(action.data);
+
         return Object.assign({}, state, {
             "ppsData" : ppsData
         })

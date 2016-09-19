@@ -12,6 +12,7 @@ export  function putInfo(state={},action){
           totalPut = 5;//state.ppsInfo.ppsData.totalPut;
           
           if(res.aggregate_data){
+
               if(!res.aggregate_data.items_put){
                 putObj.value = "None";
                 putObj.heading = "Items to Stock"
@@ -25,6 +26,7 @@ export  function putInfo(state={},action){
               putObj.heading = "Items to Stock";
               putObj.logo = "iStock";
             
+
           }
           return Object.assign({}, state, {
             "putData" : putObj

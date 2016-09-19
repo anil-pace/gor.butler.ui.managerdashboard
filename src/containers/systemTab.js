@@ -4,14 +4,8 @@
  */
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-import HealthTabs from '../components/health/healthTabs';
-import Health from '../components/health/health';
-import OrderStatsWidget from '../containers/orderStatsWidget'
-import PerformanceWidget from '../containers/performanceWidget'
-import AuditStatusWidget from '../containers/auditStatusWidget'
-import PutStatusWidget from '../containers/putStatusWidget'
-import PickStatusWidget from '../containers/pickStatusWidget'
-import SortExample from '../components/data_table/data_table';
+import SubTabs from '../components/subtab/SubTabs';
+
 
 class SystemTab extends React.Component{
 	constructor(props) 
@@ -19,15 +13,12 @@ class SystemTab extends React.Component{
     	super(props);
     }	
 	render(){
-		/**
-		 * Need to remove these hardcoded variables
-		 * 
-		 */
-		
 		return (
-			<div >
-				SystemTab
-				
+			<div>
+				<div>
+					<SubTabs/>
+				</div>
+        {this.props.children}
 			</div>
 		);
 	}

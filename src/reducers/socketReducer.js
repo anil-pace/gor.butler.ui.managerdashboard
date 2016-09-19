@@ -23,6 +23,7 @@ export  function recieveSocketActions(state={},action){
       }
       break;
     case WS_INIT:
+      // Initiate data sending
           return Object.assign({}, state, {
             "socketConnected": true,
             "initDataSent":true

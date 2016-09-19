@@ -22,7 +22,16 @@ export function loginRedirect(data){
 }
 
 export function receiveAuthData(data){  
-  if(!data.auth_token)
+  if(data && data.auth_token)
+  {
+      console.log('Login Pass');
+      return{
+        type: LOGIN_SUCCESS,
+        data
+      }
+
+  }
+ else
   {
       console.log('Login Fail');
       return{
@@ -30,11 +39,6 @@ export function receiveAuthData(data){
         data
       }
   }
-  console.log('Login Pass');
-  return{
-        type: LOGIN_SUCCESS,
-        data
-      }
 }
 /**
  * function that sends ajax to authorize user

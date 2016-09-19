@@ -7,13 +7,13 @@ import Ddown from 'react-dropdown';
 class Dropdown extends Component {
   constructor (props) {
     super(props)
-    this.state = {selected: { value: props.items[0].value, label: props.items[0].label}
+    this.state = {selected: { value: props.currentState.value, label: props.currentState.label}
     }
     this._onSelect = this._onSelect.bind(this)
   }
   _onSelect (option) {
     this.setState({selected: option})
-    this.props.pf(option.value);
+    this.props.optionDispatch(option.value);
   }
   render () {
     const defaultOption = this.state.selected

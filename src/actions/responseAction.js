@@ -1,4 +1,4 @@
-import {WS_INIT,BUTLERS_DATA,PPS_DATA,PUT_DATA,PICK_DATA,INVENTORY_DATA,ORDERS_DATA,CHARGERS_DATA} from '../constants/appConstants'
+import {WS_INIT,BUTLERS_DATA,PPS_DATA,PUT_DATA,AUDIT_DATA,INVENTORY_DATA,ORDERS_DATA,CHARGERS_DATA,THROUGHPUT_DATA} from '../constants/appConstants'
 //import {getFetchData} from 'headerAction'
 
 export function receivePpsData(data){
@@ -28,10 +28,10 @@ export function receiveChargersData(data){
 		data
 	}
 }
-export function receivePickData(data){
+export function receiveAuditData(data){
 	
 	return{
-		type:PICK_DATA,
+		type:AUDIT_DATA,
 		data
 	}
 }
@@ -51,6 +51,14 @@ export function receiveOrdersData(data){
 		type:ORDERS_DATA,
 		data
 	}
+}
+export function receiveThroughputData(data){
+
+	return{
+		type:THROUGHPUT_DATA,
+		data
+	}
+
 }
 export function initData(data){
 	return {

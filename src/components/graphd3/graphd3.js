@@ -16,7 +16,7 @@ class Chart extends React.Component{
    componentDidMount(){
     var component = this;
     var widther = document.getElementById("chart_att").offsetWidth;
-    var heighter = document.getElementById("chart_att").offsetHeight;
+    //var heighter = document.getElementById("chart_att").offsetHeight;
 
     var margin = {top: 20, right: 20, bottom: 20, left: 40},
     width = widther - margin.left - margin.right,
@@ -128,10 +128,13 @@ class Chart extends React.Component{
       .attr("y", function(d) { return y(d.frequency); })
       .attr("height", 0)
       .attr("height", function(d) { return height - y(d.frequency); })
-      .on('mouseover', tip.show)
-      .on('mouseout', tip.hide)
+      // .on('mouseover', tip.show)
+      // .on('mouseout', tip.hide)
 
       var txt = svg.selectAll(".bar");
+
+
+      
 
 
        txt.append("g")

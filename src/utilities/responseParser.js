@@ -1,11 +1,15 @@
-import {receivePpsData,receiveButlersData,receivePickData,receivePutData,receiveChargersData,receiveInventoryData,receiveOrdersData,initData} from '../actions/responseAction';
+import {receivePpsData,receiveButlersData,receiveAuditData,receiveThroughputData,receivePutData,receiveChargersData,receiveInventoryData,receiveOrdersData,initData} from '../actions/responseAction';
 import {wsOnMessageAction} from '../actions/socketActions'
 
 export function ResponseParse(store,res)
 {
-	//console.log('In Message Parser');
-	if(res.resource_type)
-	{
+
+	console.log('In Message Parser');
+	if (!res.resource_type) {
+		store.dispatch(wsOnMessageAction(res));
+	}
+	
+
 		switch(res.resource_type)
 		{
 			case "pps_details":
@@ -14,8 +18,8 @@ export function ResponseParse(store,res)
 			case "butlers":
 				store.dispatch(receiveButlersData(res));
 				break;
-			case "pick":
-				store.dispatch(receivePickData(res));
+			case "audit_details":
+				store.dispatch(receiveAuditData(res));
 				break;
 			case "put_details":
 				store.dispatch(receivePutData(res));
@@ -26,16 +30,14 @@ export function ResponseParse(store,res)
 			case "inventory":		
 				store.dispatch(receiveInventoryData(res));
 				break;
-			case "orders":		
+			case "order_details":		
 				store.dispatch(receiveOrdersData(res));
 				break;
+		    case "put_pick_audit_throughput":
+				store.dispatch(receiveThroughputData(res));
+				break;		    
 			default:
 				store.dispatch(initData(res));
-				break;			
+			break;			
 	}
-  }
-  else
-  {
-  	 store.dispatch(wsOnMessageAction(res));
-  }
 }  

@@ -15,8 +15,10 @@
     "defaultMessage": "Management Interface"
   },
   {
-    "id" : "putwidget.heading",
-    "description" : "Title text for put widget heading",
-    "defaultMessage" : "Items to Stock"
+
+    "id": "pickWidget.heading",
+    "description": "heading for pick status widget",
+    "defaultMessage": "Orders to fullfill"
+
   }
 ]

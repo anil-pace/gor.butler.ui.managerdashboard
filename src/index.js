@@ -25,26 +25,14 @@ import { Router, Route, hashHistory, IndexRoute} from 'react-router';
 
 import configureStore from './store';
 import socketMiddleware from './middleware/socketMiddleware';
-
-
 import Routes from './components/Router';
-
-
-
 
 /**
  * Creating a store and passing it to provider
  */
 
+const store = configureStore();
 
-
-const store = configureStore(); 
-
-
-
-/**
- * Configuring Router based on path 
- */
 
 ReactDOM.render(
 	
@@ -54,6 +42,7 @@ ReactDOM.render(
 	</IntlProvider>
 	</Provider>
 ,document.getElementById('container'))
+
 
 
 
