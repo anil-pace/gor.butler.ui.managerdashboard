@@ -2,6 +2,9 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { connect } from 'react-redux' ;
 import {REQUEST_HEADER,RECIEVE_HEADER,RECIEVE,RECIEVE_ITEM_TO_STOCK} from '../../actions/headerAction';
+import { logoutRequest } from '../../actions/loginAction';
+import { endWsAction } from '../../actions/socketActions';
+
 var dropdownFlag=0;
 var temp;
 
@@ -27,14 +30,14 @@ class Header extends React.Component{
     }
 
     openDropdown() {
-    	console.log("worked");
     	dropdownFlag = 1;
     	temp="dropdown-content-afterClick";
 
     }
 
     appLogout() {
-    	console.log("worked again");
+    	this.props.userLogout();
+    	this.props.endConnect();
     }
 
 
@@ -79,7 +82,7 @@ class Header extends React.Component{
 								<a href="#">Placeholder option 2</a>
 							</div>
 							<div>
-								<a onClick={this.appLogout}>Logout</a>
+								<a href="javascript:void(0)" onClick={this.appLogout.bind(this)}>Logout</a>
 							</div>
 						</div>
 					</div>
@@ -91,11 +94,18 @@ class Header extends React.Component{
 };
 
 function mapStateToProps(state, ownProps){
+	console.log(state);
 	return  {
 	//	"ordersData":state.recieveSocketActions.ordersData || {}
 		}
 		 
 
 }
+function mapDispatchToProps(dispatch){
+    return {
+    	endConnect: function(){ dispatch(endWsAction()); },
+        userLogout: function(){ dispatch(logoutRequest()); }
+    }
+};
 
-export 	default connect(mapStateToProps)(Header);
+export 	default connect(mapStateToProps,mapDispatchToProps)(Header);

@@ -6,6 +6,7 @@ export function ResponseParse(store,res)
 	console.log('In Message Parser');
 	if (!res.resource_type) {
 		store.dispatch(wsOnMessageAction(res));
+		return;
 	}
 	
 		switch(res.resource_type)

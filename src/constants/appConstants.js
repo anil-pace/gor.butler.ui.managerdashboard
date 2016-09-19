@@ -12,9 +12,10 @@ export const WS_CONNECTED = "WS_CONNECTED";
 export const WS_DISCONNECT = "WS_DISCONNECT";
 export const WS_ONMESSAGE = "WS_ONMESSAGE";
 export const WS_ONSEND = "WS_ONSEND";
-export const WS_URL = "wss://192.168.8.118/manager_api/wss";
+export const WS_URL = "ws://192.168.8.118/manager_api/ws";
 export const WS_INIT = "WS_INIT";
 export const WS_SUCCESS="Sucessfully logged in";
+export const WS_END="WS_END";
 /* Header constants */
 
 export const REQUEST_HEADER = "REQUEST_HEADER";

@@ -1,5 +1,6 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
+import Footer from '../Footer/Footer';
 import { authLoginData } from '../../actions/loginAction';
 import { connect } from 'react-redux';
 import {AUTH_LOGIN} from '../../constants/appConstants'; 
@@ -147,6 +148,7 @@ class Login extends React.Component{
                 <div className='box-bottom-left'><span>Current time: 09:00:15(IST)</span></div>
                 <div className='box-bottom-right'><span>v 1.0</span></div>
                 </form>
+                <Footer />
             </div>
 		);
 	}

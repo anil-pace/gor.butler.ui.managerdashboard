@@ -1,4 +1,4 @@
-import {wsResponseAction,wsOnMessageAction} from '../actions/socketActions'
+import {wsResponseAction,wsOnMessageAction,wsEndConnection} from '../actions/socketActions'
 import {WS_CONNECT,WS_DISCONNECT,WS_ONMESSAGE,WS_ONSEND,WS_URL} from '../constants/appConstants'
 import {ResponseParse} from '../utilities/responseParser';
 
@@ -15,7 +15,8 @@ const socketMiddleware = (function(){
 
   const onClose = (ws,store) => evt => {
     //Tell the store we've disconnected
-    store.dispatch(actions.disconnected());
+    console.log('Ws closed');
+    store.dispatch(wsEndConnection());
   }
 
   const onMessage = (ws,store) => evt => {
@@ -53,7 +54,7 @@ const socketMiddleware = (function(){
         socket = null;
 
         //Set our state to disconnected
-        store.dispatch(actions.disconnected());
+       
         break;
 
       //Send the 'SEND_MESSAGE' action down the websocket to the server
