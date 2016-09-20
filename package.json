@@ -9,7 +9,7 @@
     "webpack": "echo '=>Web-Pack' && webpack  --optimize-dedupe --display-error-details",
     "build-sass": "echo '=>Build SASS' && node-sass --output-style expanded  $npm_package_config_srcCss $npm_package_config_destinationCss  ",
     "watch-sass": "node-sass --output-style expanded  $npm_package_config_watchCssSrc $npm_package_config_watchCssDist -v",
-    "copy": "echo '=>Copying...' && copy ./src/index.html ./dist/",
+    "copy": "echo '=>Copying...' && copy ./index.html ./dist/",
     "lint": "eslint src/**/*.js",
     "build-js": "npm run webpack",
     "watch:css": "onchange 'src/assets/css/**/*.scss' -- npm run build-sass ",
