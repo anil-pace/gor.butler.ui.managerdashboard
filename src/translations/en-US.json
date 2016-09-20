@@ -15,8 +15,10 @@
     "defaultMessage": "Management Interface"
   },
   {
+
     "id": "pickWidget.heading",
     "description": "heading for pick status widget",
     "defaultMessage": "Orders to fullfill"
+
   }
 ]

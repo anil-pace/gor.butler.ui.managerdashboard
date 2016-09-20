@@ -7,32 +7,11 @@ import {PPS_DATA} from '../constants/appConstants';
 export  function ppsInfo(state={},action){
   switch (action.type) {
     case PPS_DATA:
-         var pick = 0, put = 0, audit = 0, inactive = 0,res;
-         res=action.data;
-         if(res.data){
-          res.data.map(function(key, index){
-                            if(key.pps_mode == 'pick'){
-                                pick++;
-                            }else if(key.pps_mode == 'put'){
-                                put++;
-                            }else if(key.pps_mode == 'audit'){
-                                audit++;
-                            }
-                            if(key.pps_active == false){
-                                inactive++;
-                            }
-                            var key = {
-                                "id" : key.pps_id,
-                                "mode" : key.pps_mode
-                            }                            
-                        })
-        }
-                        var ppsData= {
-                            "pick" : pick,
-                            "put": put,
-                            "audit" : audit,
-                            "inactive" : inactive
-                        }
+
+         let ppsData={};
+         ppsData.totalPut  = processPPSData(action.data);
+         processPPSData(action.data);
+
         return Object.assign({}, state, {
             "ppsData" : ppsData
         })
@@ -40,4 +19,15 @@ export  function ppsInfo(state={},action){
     default:
       return state
   }
+}
+
+function processPPSData(response){
+      var aggData = response["aggregate_data"] || [],
+      totalPut = 0;
+      for(let i = 0; i < aggData.length ; i++ ){
+        if(aggData[i].hasOwnProperty("pps_mode") && aggData[i]["pps_mode"] === "put"){
+          totalPut++;
+        }
+      }
+      return totalPut
 }

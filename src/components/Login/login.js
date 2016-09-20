@@ -43,7 +43,7 @@ class Login extends React.Component{
      * and dispatches the corresponding action.
      * @param  {String} sLocale sLocale has to be of pattern 'en-US'
      */
-    handleSelectionChange(sLocale){
+    _handleSelectionChange(sLocale){
         if (!sLocale){
             return ;
         }
@@ -59,7 +59,7 @@ class Login extends React.Component{
      * @return {[void]}
      * Function to handle login form submit
      */
-    handleSubmit(e){
+    _handleSubmit(e){
     	e.preventDefault();
     	let formdata={         
           	'username': this.userName.value,
@@ -103,23 +103,23 @@ class Login extends React.Component{
         ];
         for (let i = 0; i < item.length; i++) 
         { 
-            if(item[i].value===this.props.sLang)
+            if(item[i].value === this.props.sLang)
                 sel=i;
         }
 		return (
             <div className='gor-login-form'>
             <form action="#"  id = "loginForm" ref={node => { this.loginForm = node }} 
-                onSubmit={(e) => this.handleSubmit(e)}>
+                onSubmit={(e) => this._handleSubmit(e)}>
                 <div className='gor-login-lang'>
                     <div className='gor-lang-text'>Language:</div>
-                    <Dropdown optionDispatch={(e) => this.handleSelectionChange(e)} items={item} styleClass={'gor-lang-drop'} currentState={item[sel]} />
+                    <Dropdown optionDispatch={(e) => this._handleSelectionChange(e)} items={item} styleClass={'gor-lang-drop'} currentState={item[sel]} />
                 </div>
                 <div className='gor-login-logo alt-gor-logo'>
                 </div>
                 <div className='gor-login-mid'>
                 <div className='gor-upper-box'>
                     <div className='gor-login-head'><FormattedMessage id='login.butler' 
-                        defaultMessage="BUTLER" description="Text for butler"/>
+                        defaultMessage="BUTLER" description="Text for butler management Login form title"/>
                     </div>
                     <p>
                     <FormattedMessage id='login.manageInterface' 

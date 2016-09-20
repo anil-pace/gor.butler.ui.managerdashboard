@@ -7,17 +7,22 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { Provider,connect } from 'react-redux';
-import { IntlProvider } from 'react-intl-redux';
+
+
+/**
+ * Had to comment out intl code as 
+ * it was giving iterator error in web pack
+ * Need to work on this
+ */
+import {IntlProvider} from 'react-intl-redux';
+import { translationMessages } from './utilities/i18n';
+
+
 import { Router, Route, hashHistory, IndexRoute} from 'react-router';
 
+
 // Importing our own libraries
-import Login from './components/Login/login';
-import App from './App';
-import Overview from './containers/OverviewTab';
-import SystemTab from './containers/systemTab';
-import OrdersTab from './containers/ordersTab';
-import InventoryTab from './containers/inventoryTab';
-import UsersTab from './containers/usersTab';
+
 import configureStore from './store';
 import socketMiddleware from './middleware/socketMiddleware';
 import enTranslations from './translations/en.json'
@@ -25,9 +30,8 @@ import ButlerBot from './containers/systemTabs/butlerbotTab'
 import Notifications from './containers/systemTabs/notificationTab'
 import PPS from './containers/systemTabs/ppsTab'
 import ChargingStations from './containers/systemTabs/chargingStationsTab'
-import { translationMessages } from './utilities/i18n';
 import {loginRequest} from './actions/loginAction';
-
+import Routes from './components/Router';
 
 /**
  * Creating a store and passing it to provider
@@ -48,6 +52,7 @@ function requireAuth(nextState, replaceState ) {
 }
 
 ReactDOM.render(
+	
 	<Provider store={store}>
 	<IntlProvider messages={ translationMessages.en }>
 		<Router history={ hashHistory }>

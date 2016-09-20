@@ -3,15 +3,17 @@ import {wsOnMessageAction} from '../actions/socketActions'
 
 export function ResponseParse(store,res)
 {
+
 	console.log('In Message Parser');
 	if (!res.resource_type) {
 		store.dispatch(wsOnMessageAction(res));
 		return;
 	}
 	
+
 		switch(res.resource_type)
 		{
-			case "pps":
+			case "pps_details":
 				store.dispatch(receivePpsData(res));
 				break;
 			case "butlers":

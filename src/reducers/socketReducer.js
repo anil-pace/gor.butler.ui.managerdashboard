@@ -1,4 +1,5 @@
 import {WS_CONNECT,WS_SUCCESS,WS_DISCONNECT,WS_CONNECTED,WS_ONMESSAGE,WS_ONSEND,WS_URL,WS_INIT,WS_END} from '../constants/appConstants';
+
 /**
  * @param  {State Object}
  * @param  {Action object}

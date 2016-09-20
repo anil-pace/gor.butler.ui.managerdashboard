@@ -5,18 +5,15 @@
  *
  */
 import { addLocaleData } from 'react-intl';
-
 import enLocaleData from 'react-intl/locale-data/en';
 import jaLocaleData from 'react-intl/locale-data/ja';
 
-addLocaleData(enLocaleData);
-addLocaleData(jaLocaleData);
-
-
 import enTranslationMessages from '../translations/en-US.json';
 import jaTranslationMessages from '../translations/ja-JP.json';
-addLocaleData([...enTranslationMessages, ...jaTranslationMessages]);
 
+addLocaleData([...enLocaleData, ...jaLocaleData,
+	...enTranslationMessages, ...jaTranslationMessages]);
+console.log(enTranslationMessages);
 export const formatTranslationMessages = (messages) => {
   const formattedMessages = {};
   for (const message of messages) {

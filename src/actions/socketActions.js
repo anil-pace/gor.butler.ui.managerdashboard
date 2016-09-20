@@ -34,4 +34,11 @@ export function wsEndConnection()
 		type:WS_END
 	}
 }
+export function setMockAction(params){
+	return {
+		type: params.type,
+		data: params.data
+	}
+}
+
 
