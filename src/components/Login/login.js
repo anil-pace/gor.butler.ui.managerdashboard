@@ -97,50 +97,79 @@ class Login extends React.Component{
     }
 	render(){
         let sel=0;
-        const item =[
+        const items =[
         { value: 'en', label: (<FormattedMessage id='login.lang.english' defaultMessage="English" description="English option in the language drop down"/>) },
         { value: 'ja', label: (<FormattedMessage id='login.lang.japanese' defaultMessage="Japanese" description="Japanese option in the language drop down"/>) },
         ];
-        for (let i = 0; i < item.length; i++) 
+        for (let i = 0; i < items.length; i++) 
         { 
-            if(item[i].value === this.props.sLang)
+            if(items[i].value === this.props.sLang)
                 sel=i;
         }
-		return (
+        let usernamePlace=(<FormattedMessage id='login.placeholder.username' defaultMessage="Username" description="Placeholder for username input field"/>);
+        let passwordPlace=(<FormattedMessage id='login.placeholder.password' defaultMessage="Password" description="Placeholder for password input field"/>);
+
+        return (
             <div className='gor-login-form'>
             <form action="#"  id = "loginForm" ref={node => { this.loginForm = node }} 
                 onSubmit={(e) => this._handleSubmit(e)}>
                 <div className='gor-login-lang'>
-                    <div className='gor-lang-text'>Language:</div>
-                    <Dropdown optionDispatch={(e) => this._handleSelectionChange(e)} items={item} styleClass={'gor-lang-drop'} currentState={item[sel]} />
+                    <div className='gor-lang-text'>
+                    
+                    <FormattedMessage id='login.butler.language' 
+                        defaultMessage="Language" description="Text for language"/>
+                
+                    </div>
+                    <Dropdown optionDispatch={(e) => this._handleSelectionChange(e)} items={items} styleClass={'gor-lang-drop'} currentState={items[sel]} />
                 </div>
                 <div className='gor-login-logo alt-gor-logo'>
                 </div>
                 <div className='gor-login-mid'>
                 <div className='gor-upper-box'>
-                    <div className='gor-login-head'><FormattedMessage id='login.butler' 
+                    <div className='gor-login-head'>
+
+                    <FormattedMessage id='login.butler.title' 
                         defaultMessage="BUTLER" description="Text for butler management Login form title"/>
+                    
                     </div>
                     <p>
-                    <FormattedMessage id='login.manageInterface' 
+
+                    <FormattedMessage id='login.butler.manageInterface' 
                     defaultMessage="Management Interface"
-                            description="Text for Management Interface"/></p>   
+                            description="Text for Management Interface"/>
+
+                    </p>   
                 </div>
                 <div className='gor-login-auth-error' 
-                    ref={node => { this.authError = node }}><div className='gor-login-error'></div>Invalid username and/or password, please try again</div>
+                    ref={node => { this.authError = node }}><div className='gor-login-error'></div>
+
+                    <FormattedMessage id='login.butler.fail' 
+                        defaultMessage="Invalid username and/or password" description="Text for login failure"/>
+
+                </div>
                 <section>
                 <div className='gor-login-field' ref={node => { this.userField = node }}>
-				        <div className='gor-login-user'></div><input className='field' type="text" id="username"  placeholder="Username" ref={node => { this.userName = node }}/>
+				        <div className='gor-login-user'></div><input className='field' type="text" id="username"  placeholder={usernamePlace} ref={node => { this.userName = node }}/>
                 </div>
                 </section>
                     <div className='gor-login-usr-error' 
-                    ref={node => { this.userError = node }}>Please enter your username</div>
+                    ref={node => { this.userError = node }}>
+
+                    <FormattedMessage id='login.butler.error.username' 
+                        defaultMessage="Please enter your username" description="Text for missing username error"/>
+
+                    </div>
                 <section>
                 <div className='gor-login-field'  ref={node => { this.passField = node }}>
-                        <div className='gor-login-password'></div><input className='field' type="password" id="password" placeholder="Password" ref={node => { this.password = node }}/>
+                        <div className='gor-login-password'></div><input className='field' type="password" id="password" placeholder={passwordPlace} ref={node => { this.password = node }}/>
                 </div>
                 </section>
-                    <div className='gor-login-usr-error' ref={node => { this.passError = node }} >Please enter your password</div>
+                    <div className='gor-login-usr-error' ref={node => { this.passError = node }} >
+
+                    <FormattedMessage id='login.butler.error.password' 
+                        defaultMessage="Please enter your password" description="Text for missing password error"/>
+
+                    </div>
                 <section>
                     <input type="submit" className='gor-login-btn'  value="Login" /><br />
                 </section>
