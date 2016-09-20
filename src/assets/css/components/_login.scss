@@ -5,35 +5,35 @@
   font-family: 'Source Sans Pro';
   src: url('../src/assets/Source_Sans_Pro/SourceSansPro-Regular.ttf')  format('truetype')
 }
-.fill-back
+.gor-fill-back
 {
   	background: #4D5055;	
 }
-.login-form
+.gor-login-form
 {
   	color:#A6A7A9;
   	font-family: 'Source Sans Pro', sans-serif;
   	overflow:hidden;
   	padding:calculateRem(20px);
-  	.login-logo
+  	.gor-login-logo
   	{
   		margin:auto;
-  		margin-top:65px;
+  		margin-top:calculateRem(100px);
   	}
-  	.login-lang:hover {
+  	.gor-login-lang:hover {
 			color:#FFFFFF;
 	}  	
-  	.login-lang
+  	.gor-login-lang
   	{
   		text-align:right;
-  		.lang-text
+  		.gor-lang-text
   		{
   			margin-right:10px;
   			display:inline-block;
   			margin-top:10px;
   			vertical-align:top;
   		}
-		.lang-drop {
+		.gor-lang-drop {
   			display:inline-block;
   			width:calculateRem(174px);
   			height:calculateRem(30px);
@@ -129,7 +129,7 @@
   			}
   		}
   	}
-	.login-mid
+	.gor-login-mid
 	{
 		
 		text-align:center;
@@ -137,23 +137,23 @@
         border: 1px solid;
         border-radius:5px;
 		color: #979797;
-		width:36%;
-		min-height:calculateRem(392px);
+		width:30%;
+		min-height:calculateRem(352px);
 		margin:auto;
 		margin-top:calculateRem(40px);
 
-		.upper-box
+		.gor-upper-box
 		{
 			 margin-bottom:calculateRem(20px);
 			 padding-top:calculateRem(40px);
-			 .login-head
+			 .gor-login-head
 			 {
 				color:#4D5055;
 			 	font-size:calculateRem(45px);
 			 	font-weight:bold;
 			 }
 		}
-		.login-field
+		.gor-login-field
 		{
 			margin:auto;
 			text-align:left;
@@ -171,7 +171,7 @@
 				width:80%;
 			}
 		}
-		.login-auth-error
+		.gor-login-auth-error
 		{
 			display:none;
 			text-align:left;
@@ -180,7 +180,7 @@
 			text-align:center;
 			margin-top:10px;
 		}
-		.login-usr-error
+		.gor-login-usr-error
 		{
 			display:none;
 			text-align:left;
@@ -189,7 +189,7 @@
 			margin-top:10px;
 			margin-left:calculateRem(62px);
 		}
-		.login-btn
+		.gor-login-btn
 		{
  			background: #F36F36;
  			color: #FFFFFF;
@@ -199,23 +199,19 @@
  			font-size:calculateRem(20px);
 			border-radius:3px;
 		}	
-		.login-fgt
-		{
-		 padding-bottom:40px;
-		}
 	}
 	a
 	{
 		text-decoration:underline;
 	}
-	.box-bottom-left
+	.gor-box-bottom-left
 	{
 		margin:auto;
-		margin-left:32%;
+		margin-left:35%;
 		margin-top:calculateRem(10px);
 		display:inline;
 	}
-	.box-bottom-right
+	.gor-box-bottom-right
 	{
 		margin:auto;
 		margin-left:19%;

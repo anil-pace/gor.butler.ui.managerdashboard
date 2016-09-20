@@ -18,7 +18,7 @@ class Login extends React.Component{
     }
     componentWillMount()
     {
-        document.body.className='fill-back';
+        document.body.className='gor-fill-back';
     }
     componentWillReceiveProps(nextProps) {
     /**
@@ -107,18 +107,18 @@ class Login extends React.Component{
                 sel=i;
         }
 		return (
-            <div className='login-form'>
+            <div className='gor-login-form'>
             <form action="#"  id = "loginForm" ref={node => { this.loginForm = node }} 
                 onSubmit={(e) => this.handleSubmit(e)}>
-                <div className='login-lang'>
-                    <div className='lang-text'>Language:</div>
-                    <Dropdown optionDispatch={(e) => this.handleSelectionChange(e)} items={item} styleClass={'lang-drop'} currentState={item[sel]} />
+                <div className='gor-login-lang'>
+                    <div className='gor-lang-text'>Language:</div>
+                    <Dropdown optionDispatch={(e) => this.handleSelectionChange(e)} items={item} styleClass={'gor-lang-drop'} currentState={item[sel]} />
                 </div>
-                <div className='login-logo alt-gor-logo'>
+                <div className='gor-login-logo alt-gor-logo'>
                 </div>
-                <div className='login-mid'>
-                <div className='upper-box'>
-                    <div className='login-head'><FormattedMessage id='login.butler' 
+                <div className='gor-login-mid'>
+                <div className='gor-upper-box'>
+                    <div className='gor-login-head'><FormattedMessage id='login.butler' 
                         defaultMessage="BUTLER" description="Text for butler"/>
                     </div>
                     <p>
@@ -126,27 +126,27 @@ class Login extends React.Component{
                     defaultMessage="Management Interface"
                             description="Text for Management Interface"/></p>   
                 </div>
-                <div className=' login-auth-error' 
-                    ref={node => { this.authError = node }}><div className='login-error'></div>Invalid username and/or password, please try again</div>
+                <div className='gor-login-auth-error' 
+                    ref={node => { this.authError = node }}><div className='gor-login-error'></div>Invalid username and/or password, please try again</div>
                 <section>
-                <div className='login-field' ref={node => { this.userField = node }}>
-				        <div className='login-user'></div><input className='field' type="text" id="username"  placeholder="Username" ref={node => { this.userName = node }}/>
+                <div className='gor-login-field' ref={node => { this.userField = node }}>
+				        <div className='gor-login-user'></div><input className='field' type="text" id="username"  placeholder="Username" ref={node => { this.userName = node }}/>
                 </div>
                 </section>
-                    <div className=' login-usr-error' 
+                    <div className='gor-login-usr-error' 
                     ref={node => { this.userError = node }}>Please enter your username</div>
                 <section>
-                <div className='login-field'  ref={node => { this.passField = node }}>
-                        <div className='login-password'></div><input className='field' type="password" id="password" placeholder="Password" ref={node => { this.password = node }}/>
+                <div className='gor-login-field'  ref={node => { this.passField = node }}>
+                        <div className='gor-login-password'></div><input className='field' type="password" id="password" placeholder="Password" ref={node => { this.password = node }}/>
                 </div>
                 </section>
-                    <div className='login-usr-error' ref={node => { this.passError = node }} >Please enter your password</div>
+                    <div className='gor-login-usr-error' ref={node => { this.passError = node }} >Please enter your password</div>
                 <section>
-                    <input type="submit" className='login-btn'  value="Login" /><br />
+                    <input type="submit" className='gor-login-btn'  value="Login" /><br />
                 </section>
                 </div>
-                <div className='box-bottom-left'><span>Current time: 09:00:15(IST)</span></div>
-                <div className='box-bottom-right'><span>v 1.0</span></div>
+                <div className='gor-box-bottom-left'><span>Current time: 09:00:15(IST)</span></div>
+                <div className='gor-box-bottom-right'></div>
                 </form>
                 <Footer />
             </div>
