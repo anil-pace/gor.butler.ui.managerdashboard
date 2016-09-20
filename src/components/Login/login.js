@@ -118,7 +118,7 @@ class Login extends React.Component{
                         defaultMessage="BUTLER" description="Text for butler"/>
                     </div>
                     <p>
-                    <FormattedMessage id='login.manageInterface' 
+                    <FormattedMessage id='login.title.manageInterface' 
                     defaultMessage="Management Interface"
                             description="Text for Management Interface"/></p>   
                 </div>

@@ -2,10 +2,27 @@
 
 export const resTypePut = {
 	"aggregate_data": {
-		"items_put": 20687
+		"items_put": 0
 	},
 	"resource_type": "put_details"
 };
+
+export const resTypeThroughPut = {
+	"aggregate_data": {
+		"put_throughput": 3556,
+		"pick_throughput": 3546,
+		"audit_throughput": 2400 // to get clarification for audit 
+	},
+	"resource_type": "put_pick_audit_throughput"
+}
+
+export const resTypeAudit = {
+	"aggregate_data": {
+			"audit_type":null,		
+			"total_audited": 20687
+			},
+	"resource_type": "audit_details"
+}
 
 export const resTypePPS = {
 	"aggregate_data": [{
@@ -24,7 +41,7 @@ export const resTypePPS = {
 		"items_picked": 1000,
 		"items_put": 2400,
 		"items_audited": "need_to_be_decided_per_item_or_per_audit",
-		"pps_mode": "put",
+		"pps_mode": "audit",
 		"active": "true/false"
 	}],
 	"resource_type": "pps_details"

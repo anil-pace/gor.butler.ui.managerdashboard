@@ -34,9 +34,9 @@ export const PARSE_CHARGERS = "chargers";
 export const PARSE_ORDERS = "orders";
 export const PARSE_INVENTORY = "inventory";
 export const PARSE_PUT = "put_details";
-export const PARSE_PICK = "pick";
+export const PARSE_PICK = "pick_details";
 export const PARSE_PPA_THROUGHPUT = "put_pick_audit_throughput";
-
+export const PARSE_AUDIT = "audit_details";
 /*Constants for stats widget*/
 export const RENDER_STATSWIDGET = "RENDER_STATSWIDGET";
 

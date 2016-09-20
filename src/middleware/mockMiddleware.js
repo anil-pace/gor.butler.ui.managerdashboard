@@ -10,7 +10,10 @@ const mockMiddleware = (function(){
       case WS_MOCK:
         //var msg = JSON.parse(evt.data);
         ResponseParse(store,mockData.resTypePPS); 
-        ResponseParse(store,mockData.resTypePut);  
+        ResponseParse(store,mockData.resTypePut); 
+        ResponseParse(store,mockData.resTypeThroughPut);
+        ResponseParse(store,mockData.resTypeAudit);
+
         break;
       //This action is irrelevant to us, pass it on to the next middleware
       default:

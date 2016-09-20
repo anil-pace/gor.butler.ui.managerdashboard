@@ -1,5 +1,8 @@
 import {receivePpsData,receiveButlersData,receiveAuditData,receiveThroughputData,receivePutData,receiveChargersData,receiveInventoryData,receiveOrdersData,initData} from '../actions/responseAction';
 import {wsOnMessageAction} from '../actions/socketActions'
+import {PARSE_PPS,PARSE_PUT,PARSE_PICK,PARSE_PPA_THROUGHPUT,PARSE_AUDIT} from '../constants/appConstants'
+
+
 
 export function ResponseParse(store,res)
 {
@@ -12,16 +15,16 @@ export function ResponseParse(store,res)
 
 		switch(res.resource_type)
 		{
-			case "pps_details":
+			case PARSE_PPS:
 				store.dispatch(receivePpsData(res));
 				break;
 			case "butlers":
 				store.dispatch(receiveButlersData(res));
 				break;
-			case "audit_details":
+			case PARSE_AUDIT:
 				store.dispatch(receiveAuditData(res));
 				break;
-			case "put_details":
+			case PARSE_PUT:
 				store.dispatch(receivePutData(res));
 				break;
 			case "chargers":

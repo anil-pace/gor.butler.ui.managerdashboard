@@ -4,7 +4,6 @@
  */
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-import { connect } from 'react-redux';
 import HealthTabs from '../components/health/healthTabs';
 import Health from '../components/health/health';
 import OrderStatsWidget from '../containers/orderStatsWidget'
@@ -20,22 +19,28 @@ class Overview extends React.Component{
 	{
     	super(props);
     }	
+
+
+
 	render(){
 		/**
 		 * Need to remove these hardcoded variables
 		 * 
 		 */
 		
-		var putData=this.props.putData ? this.props.putData : {};//{heading:'Items to Stock', value:'4,74,579', low:'4 PPS stocking 3,546 items/hr', logo:'iStock'};
-        var item2={heading:'Items to Audit', value:'3,74,519', low:'4 PPS auditing 1,546 items/hr', logo:'iAudit'};;
+		
+		//this.formatContainerData('put');
+		//this.formatContainerData('audit');
+		//var putData=this.props.putData ;
+        //var auditData=this.props.auditData;//{heading:'Items to Audit', value:'3,74,519', low:'4 PPS auditing 1,546 items/hr', logo:'iAudit'};;
 
 		return (
 			<div className="gorWidgetWrap">
 				<div className="section group">
 					<div className="col span_2_of_4">
 
-						<PutStatusWidget items={putData}/>
-						<AuditStatusWidget items={item2}/>
+						<PutStatusWidget />
+						<AuditStatusWidget />
 
 					</div>
 					<div className="col span_2_of_4 gorNoML">
@@ -50,12 +55,14 @@ class Overview extends React.Component{
 		);
 	}
 };
-
-function mapStateToProps(state, ownProps){
+ 
+/*function mapStateToProps(state, ownProps){
 	return {
-        putData: state.putInfo.putData
-        
+        putData: state.putInfo.putData,
+        ppsData:state.ppsInfo.ppsData,
+        throughputData : state.throughputInfo.throughputData,
+        auditData: state.auditInfo.auditData
     };
-}
+}*/
 
-export 	default connect(mapStateToProps)(Overview);
+export 	default Overview;
