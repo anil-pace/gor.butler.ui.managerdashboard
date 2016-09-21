@@ -32,7 +32,7 @@ module.exports = {
       query: {
         presets: ['es2015', 'stage-1', 'react'],
         plugins: ['transform-runtime',["react-intl", {
-                "enforceDescriptions": false
+                "enforceDescriptions": true
           }]
         ]
       }

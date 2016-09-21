@@ -8,8 +8,6 @@ case "$1" in
 	mkdir butler_md_alpha-$RELVSN
 	install -d butler_md_alpha-$RELVSN/opt/butler_md_alpha
 	cp index.html butler_md_alpha-$RELVSN/opt/butler_md_alpha
-	cp -r src butler_md_alpha-$RELVSN/opt/butler_md_alpha
-	cp -r mock butler_md_alpha-$RELVSN/opt/butler_md_alpha
 	install -d butler_md_alpha-$RELVSN/var/log/butler_md_alpha
 	install -d butler_md_alpha-$RELVSN/usr/local/bin/
 	install -d butler_md_alpha-$RELVSN/etc/butler_md_alpha
