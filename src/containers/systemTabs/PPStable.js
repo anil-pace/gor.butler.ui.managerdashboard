@@ -5,7 +5,7 @@ import Dimensions from 'react-dimensions'
 import { FormattedMessage } from 'react-intl';
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from './commonCom';
 
-class ButlerBotTable extends React.Component {
+class PPStable extends React.Component {
   constructor(props) {
     super(props);
     var temp = new Array(this.props.items.length).fill(false);
@@ -23,10 +23,9 @@ class ButlerBotTable extends React.Component {
       columnWidths: {
         id: columnWidth,
         status: columnWidth,
-        current: columnWidth,
-        msu: columnWidth,
-        location: columnWidth,
-        direction: columnWidth
+        operatingMode: columnWidth,
+        performance: columnWidth,
+        operatorAssigned: columnWidth
       },
       isChecked:temp,
       renderDropD: false,
@@ -73,11 +72,7 @@ class ButlerBotTable extends React.Component {
     this.setState({isChecked:checkedState});
     this.setState({renderDropD:showDropdown});    
   }
-  handlChange(columnKey,rowIndex) {
-    console.log("checked");
-    console.log(columnKey)
-    console.log(rowIndex)
-  }
+  
   _onSortChange(columnKey, sortDir) {
     var sortIndexes = this._defaultSortIndexes.slice();
     this.setState({
@@ -112,8 +107,8 @@ class ButlerBotTable extends React.Component {
         <div className="gorToolBar">
           <div className="gorToolBarWrap">
             <div className="gorToolBarElements">
-               <FormattedMessage id="butlerBot.table.heading" description="Heading for butlerbot" 
-              defaultMessage ="BUTLER BOTS"/>
+               <FormattedMessage id="pps.table.heading" description="Heading for PPS" 
+              defaultMessage ="PPS"/>
               <div className="gorToolHeaderSubText"> 2 selected </div>
             </div>
             <div className="gorToolBarDropDown">
@@ -130,6 +125,7 @@ class ButlerBotTable extends React.Component {
         </div>
         </div>
        </div>
+
       <Table
         rowHeight={66}
         rowsCount={sortedDataList.getSize()}
@@ -137,7 +133,7 @@ class ButlerBotTable extends React.Component {
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
         width={this.props.containerWidth}
-        height={this.props.containerHeight}
+        height={500}
         {...this.props}>
         <Column
           columnKey="id"
@@ -145,7 +141,7 @@ class ButlerBotTable extends React.Component {
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.id}> <input type="checkbox" onChange={this.handlChange} />
               <div className="gorToolHeaderEl">
-              <div className="gorToolHeaderEl"> {sortedDataList.getSize()} BOT </div>
+              <div className="gorToolHeaderEl"> {sortedDataList.getSize()} PPS </div>
               <div className="gorToolHeaderSubText"> Total:{sortedDataList.getSize()} </div>
               </div>
             </SortHeaderCell>
@@ -160,7 +156,7 @@ class ButlerBotTable extends React.Component {
           header={
             <SortHeaderCell >
               <div>
-                 <FormattedMessage id="butlerBot.table.status" description="Status for butlerbot" 
+                 <FormattedMessage id="PPS.table.status" description="Status for PPS" 
               defaultMessage ="STATUS"/> 
               </div>
               <div>
@@ -177,57 +173,43 @@ class ButlerBotTable extends React.Component {
           isResizable={true}
         />
         <Column
-          columnKey="current"
+          columnKey="operatingMode"
           header={
             <SortHeaderCell>
-              <FormattedMessage id="butlerBot.table.currentTask" description="Current task for butlerbot" 
-              defaultMessage ="CURRENT TASK"/>
-              <div className="gorToolHeaderSubText"> 2 Pick, 1 Put, 2 charging, 1 Idle</div>
+              <FormattedMessage id="PPS.table.operatingMode" description="operatingMode for PPS" 
+              defaultMessage ="OPERATING MODE"/>
+              <div className="gorToolHeaderSubText"> 3 Not set, 4 Audit, 3 Pick, 2 Put</div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
           fixed={true}
-          width={columnWidths.current}
+          width={columnWidths.operatingMode}
           isResizable={true}
         />
         <Column
-          columnKey="msu"
+          columnKey="performance"
           header={
             <SortHeaderCell>
-               <FormattedMessage id="butlerBot.table.msu" description="MSU Status for butlerbot" 
-              defaultMessage ="MSU"/> 
-              <div className="gorToolHeaderSubText">10 Mounted</div>
+               <FormattedMessage id="PPS.table.performance" description="performance Status for PPS" 
+              defaultMessage ="PERFORMANCE"/> 
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
           fixed={true}
-          width={columnWidths.msu}
+          width={columnWidths.performance}
           isResizable={true}
         />
         <Column
-          columnKey="location"
+          columnKey="operatorAssigned"
           header={
             <SortHeaderCell>
-               <FormattedMessage id="butlerBot.table.location" description="Location for butlerbot" 
-              defaultMessage ="LOCATION"/> 
+               <FormattedMessage id="PPS.table.operatorAssigned" description="operatorAssigned for PPS" 
+              defaultMessage ="OPERATOR ASSIGNED"/> 
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
           fixed={true}
-          width={columnWidths.location}
-          isResizable={true}
-        />
-        <Column
-          columnKey="direction"
-          header={
-            <SortHeaderCell >
-               <FormattedMessage id="butlerBot.table.direction" description="Direction for butlerbot" 
-              defaultMessage ="DIRECTION"/> 
-            </SortHeaderCell>
-          }
-          cell={<TextCell data={sortedDataList}  />}
-          fixed={true}
-          width={columnWidths.direction}
+          width={columnWidths.operatorAssigned}
           isResizable={true}
         />
       </Table>
@@ -235,4 +217,4 @@ class ButlerBotTable extends React.Component {
     );
   }
 }
-export default Dimensions()(ButlerBotTable);
+export default Dimensions()(PPStable);

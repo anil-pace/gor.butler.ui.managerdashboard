@@ -50,8 +50,9 @@ class Header extends React.Component{
 		return (
 		<header className="gorHeader head">
 			<div className="mainBlock">
-				<div className="gor-logo logo">
-				
+				<div className="logoWrap">
+					<div className="gor-logo logo">
+				</div>
 				</div>
 				<div className="blockSystem">
 					<div className="upperText">Butler Management System</div>
@@ -59,7 +60,10 @@ class Header extends React.Component{
 				</div>
 			</div>
 			<div className="blockLeft">
-				<div className="logo fk-logo">
+				<div className="logoWrap">
+					<div className="logo fk-logo">
+				</div>
+				
 					
 				</div>
 				<div className="dropdown" id="profile"  >

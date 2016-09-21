@@ -1,7 +1,6 @@
 
 
-.fk-logo,
-.gor-logo,
+
 .dropdown-arrow-icon,
 .searchbox-cross-icon,
 .searchbox-magnifying-glass-icon,
@@ -28,6 +27,13 @@
 .cbs-overview-inducts,.statusOl,.statusAl,.iStock ,.iAudit,.iPick,.login-user,.login-password,.login-error{
     background-image: url(images/icons.svg);
 }
+
+.fk-logo,
+.gor-logo{
+    background-image: url(images/Logos.svg);
+}
+
+
 .login-user{
     background-position:-205px -77px;
     width:16px;
@@ -55,14 +61,14 @@
     height:25px;
 }
 .gor-logo{
-    background-position: 4px -126px;
-    width: 181px;
-    height: 14px;
+    background-position: 11px -112px;
+    width: 173px;
+    height: 7px;
     padding: 10px;
     
 }
 .fk-logo{
-    background-position: 0px -158px;
+    background-position: 3px -138px;
     width: 102px;
     height: 31px;
     padding: 0px 20px 0 0;
@@ -103,12 +109,14 @@
     margin-right:8px;   
 }
 .header-red-alert-icon{
-    background-position: -18px -75px;
+    background-position: -17px -75px;
     width:17px;
     height:13px;       
 }
 .searchbox-magnifying-glass-icon{
-    background-position: -18px -75px;
+    background-position: -0px -94px;
     width:17px;
-    height:13px;
+    height:15px;
+    display: inline-block;
+    vertical-align: middle;
 }

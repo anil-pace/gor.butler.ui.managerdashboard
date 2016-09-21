@@ -5,7 +5,7 @@ import Dimensions from 'react-dimensions'
 import { FormattedMessage } from 'react-intl';
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from './commonCom';
 
-class ButlerBotTable extends React.Component {
+class ChargingStationsTable extends React.Component {
   constructor(props) {
     super(props);
     var temp = new Array(this.props.items.length).fill(false);
@@ -23,10 +23,7 @@ class ButlerBotTable extends React.Component {
       columnWidths: {
         id: columnWidth,
         status: columnWidth,
-        current: columnWidth,
-        msu: columnWidth,
-        location: columnWidth,
-        direction: columnWidth
+        dockedBots: columnWidth
       },
       isChecked:temp,
       renderDropD: false,
@@ -73,11 +70,7 @@ class ButlerBotTable extends React.Component {
     this.setState({isChecked:checkedState});
     this.setState({renderDropD:showDropdown});    
   }
-  handlChange(columnKey,rowIndex) {
-    console.log("checked");
-    console.log(columnKey)
-    console.log(rowIndex)
-  }
+  
   _onSortChange(columnKey, sortDir) {
     var sortIndexes = this._defaultSortIndexes.slice();
     this.setState({
@@ -101,19 +94,20 @@ class ButlerBotTable extends React.Component {
     console.log(this.state);
     var drop;
     if(this.state.renderDropD===true) {
-      drop= <DropdownTemp items={item}/>;
+      drop = <DropdownTemp items={item}/>;
     }
 
     else {
       drop = <div/>;
     }
+
     return (
       <div className="gorTableMainContainer">
         <div className="gorToolBar">
           <div className="gorToolBarWrap">
             <div className="gorToolBarElements">
-               <FormattedMessage id="butlerBot.table.heading" description="Heading for butlerbot" 
-              defaultMessage ="BUTLER BOTS"/>
+               <FormattedMessage id="ChargingStations.table.heading" description="Heading for ChargingStations" 
+              defaultMessage ="CHARGING STATIONS"/>
               <div className="gorToolHeaderSubText"> 2 selected </div>
             </div>
             <div className="gorToolBarDropDown">
@@ -130,6 +124,7 @@ class ButlerBotTable extends React.Component {
         </div>
         </div>
        </div>
+
       <Table
         rowHeight={66}
         rowsCount={sortedDataList.getSize()}
@@ -137,7 +132,7 @@ class ButlerBotTable extends React.Component {
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
         width={this.props.containerWidth}
-        height={this.props.containerHeight}
+        height={500}
         {...this.props}>
         <Column
           columnKey="id"
@@ -145,7 +140,7 @@ class ButlerBotTable extends React.Component {
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.id}> <input type="checkbox" onChange={this.handlChange} />
               <div className="gorToolHeaderEl">
-              <div className="gorToolHeaderEl"> {sortedDataList.getSize()} BOT </div>
+              <div className="gorToolHeaderEl"> {sortedDataList.getSize()} STATION ID </div>
               <div className="gorToolHeaderSubText"> Total:{sortedDataList.getSize()} </div>
               </div>
             </SortHeaderCell>
@@ -160,7 +155,7 @@ class ButlerBotTable extends React.Component {
           header={
             <SortHeaderCell >
               <div>
-                 <FormattedMessage id="butlerBot.table.status" description="Status for butlerbot" 
+                 <FormattedMessage id="ChargingStations.table.status" description="Status for ChargingStations" 
               defaultMessage ="STATUS"/> 
               </div>
               <div>
@@ -177,57 +172,17 @@ class ButlerBotTable extends React.Component {
           isResizable={true}
         />
         <Column
-          columnKey="current"
+          columnKey="dockedBots"
           header={
             <SortHeaderCell>
-              <FormattedMessage id="butlerBot.table.currentTask" description="Current task for butlerbot" 
-              defaultMessage ="CURRENT TASK"/>
-              <div className="gorToolHeaderSubText"> 2 Pick, 1 Put, 2 charging, 1 Idle</div>
+              <FormattedMessage id="ChargingStations.table.operatingMode" description="operatingMode for ChargingStations" 
+              defaultMessage ="OPERATING MODE"/>
+              <div className="gorToolHeaderSubText"> 15 bots connected</div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
           fixed={true}
-          width={columnWidths.current}
-          isResizable={true}
-        />
-        <Column
-          columnKey="msu"
-          header={
-            <SortHeaderCell>
-               <FormattedMessage id="butlerBot.table.msu" description="MSU Status for butlerbot" 
-              defaultMessage ="MSU"/> 
-              <div className="gorToolHeaderSubText">10 Mounted</div>
-            </SortHeaderCell>
-          }
-          cell={<TextCell data={sortedDataList} />}
-          fixed={true}
-          width={columnWidths.msu}
-          isResizable={true}
-        />
-        <Column
-          columnKey="location"
-          header={
-            <SortHeaderCell>
-               <FormattedMessage id="butlerBot.table.location" description="Location for butlerbot" 
-              defaultMessage ="LOCATION"/> 
-            </SortHeaderCell>
-          }
-          cell={<TextCell data={sortedDataList} />}
-          fixed={true}
-          width={columnWidths.location}
-          isResizable={true}
-        />
-        <Column
-          columnKey="direction"
-          header={
-            <SortHeaderCell >
-               <FormattedMessage id="butlerBot.table.direction" description="Direction for butlerbot" 
-              defaultMessage ="DIRECTION"/> 
-            </SortHeaderCell>
-          }
-          cell={<TextCell data={sortedDataList}  />}
-          fixed={true}
-          width={columnWidths.direction}
+          width={columnWidths.dockedBots}
           isResizable={true}
         />
       </Table>
@@ -235,4 +190,4 @@ class ButlerBotTable extends React.Component {
     );
   }
 }
-export default Dimensions()(ButlerBotTable);
+export default Dimensions()(ChargingStationsTable);

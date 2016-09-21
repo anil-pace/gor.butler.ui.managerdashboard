@@ -49,7 +49,7 @@ ReactDOM.render(
 				<IndexRoute component={ Notifications } />
 				<Route name="butlerbots" path="/butlerbots"  component={ButlerBot}/>
 				<Route name="pps" path="/pps"  component={PPS}/>
-				<Route name="chargingstations" path="/chargingstations"  component={ChargingStations}/>
+				<Route name="chargingstation" path="/chargingstation"  component={ChargingStations}/>
 				<Route name="notification" path="/notification"  component={Notifications}/>
 			</Route>
 			<Route name="orders" path="/orders"  component={OrdersTab} />

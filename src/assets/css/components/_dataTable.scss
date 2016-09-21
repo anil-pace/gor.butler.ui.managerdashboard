@@ -50,6 +50,7 @@
 
 .fixedDataTableCellLayout_wrap1 {
   display: table;
+  padding-left: 15px;
 }
 
 .fixedDataTableCellLayout_wrap2 {
@@ -84,7 +85,6 @@
 }
 
 .fixedDataTableColumnResizerLineLayout_mouseArea {
-  cursor: ew-resize;
   position: absolute;
   right: -5px;
   width: 12px;
@@ -335,7 +335,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .public_fixedDataTable_header .public_fixedDataTableCell_main {
 border-bottom-style: solid;
 border-color: #dedede;
-border-width: 3px;
+border-bottom-width: 3px;
 border-right-style: solid;
 
   
@@ -392,7 +392,7 @@ background-color: #FFFFFF;
 .Stopped .public_fixedDataTableCell_cellContent{
 
   background: #fc3838;
-  border-radius: 24%;
+  border-radius: 15px;
   text-align: center;
   width:52px;
   color: #ffffff;
@@ -403,7 +403,7 @@ background-color: #FFFFFF;
 .Error .public_fixedDataTableCell_cellContent{
 
   background: #fc3838;
-  border-radius: 24%;
+  border-radius: 15px;
   text-align: center;
   width:52px;
   color: #ffffff;
@@ -415,9 +415,10 @@ background-color: #FFFFFF;
 .Warning .public_fixedDataTableCell_cellContent{
 
   background: #f99405;
-  border-radius: 24%;
+  border-radius: 15px;
   text-align: center;
   width:52px;
+  color: #ffffff;
   font-size: 12px;
   max-height: 9px;
 
@@ -426,7 +427,7 @@ background-color: #FFFFFF;
 .On .public_fixedDataTableCell_cellContent{
 
   
-  border-radius: 24%;
+  border-radius: 15px;
   text-align: center;
   width:52px;
   border-style: solid;
@@ -440,7 +441,7 @@ background-color: #FFFFFF;
 
 .Off .public_fixedDataTableCell_cellContent{
 
-  border-radius: 24%;
+  border-radius: 15px;
   text-align: center;
   width:52px;
   border-style: solid;
@@ -454,7 +455,7 @@ background-color: #FFFFFF;
 .Online .public_fixedDataTableCell_cellContent{
 
   
-  border-radius: 24%;
+  border-radius: 15px;
   text-align: center;
   width:52px;
   border-style: solid;
@@ -468,7 +469,7 @@ background-color: #FFFFFF;
 
 .Offline .public_fixedDataTableCell_cellContent{
 
-  border-radius: 24%;
+  border-radius: 15px;
   text-align: center;
   width:52px;
   border-style: solid;
@@ -972,6 +973,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 
 .public_fixedDataTableCell_cellContent {
   padding: 8px;
+  padding-right: 9px;
 }
 
 .public_fixedDataTableCell_columnResizerKnob {
@@ -1070,6 +1072,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
       font-family: "source sans pro";
       font-size: 20px;
       color: #000000;
+      padding-left: 20px;
       }
 
 .gorFilter {
@@ -1082,8 +1085,9 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
     font-family: "source sans pro";
     color: #aaaaaa;
     height: 35px;
-    width: 260px;
-    padding-left: 40px;
+    width: 200px;
+    padding-left: 9px;
+    
 
 }
 
@@ -1099,20 +1103,20 @@ padding-top: 6px;
 
 .gorToolBarElements {
   display: inline-block;
-  vertical-align: super;
+  vertical-align: sub;
   padding-right: 10px;
+  padding-top: 18px;
 }
 .gorToolBarDropDown {
 padding-left: 10px;
   display: inline-block;
-  padding-top:10px;
+  vertical-align: 12px;
 }
 
 .gorToolBarWrap {
 width: 49%;
 font-weight: bold;
 color: #000000;
-padding-top: 6px;
   display: inline-block;
   vertical-align: middle;
 }
@@ -1127,6 +1131,7 @@ padding-top: 6px;
   font-family: "source sans pro";
   font-size: 12px;
   color: #666666;
+  padding-top: 4px;
 }
 
 .gorTesting {
@@ -1137,3 +1142,112 @@ padding-top: 6px;
 .gorTableMainContainer {
   overflow-x: hidden;
 }
+
+.gorInputFilter {
+  height:31px;
+  border-width: 0px;
+  border-color: #ffffff;
+  padding-left: 9px;
+  width: 80%;
+}
+
+.filterWrapper {
+  float: right;
+  padding-top: 16px;
+  padding-right: 40px;
+}
+
+input[type="checkbox"]{
+  width: 30px; 
+  height: 15px;
+  zoom: 1.1; 
+}
+
+.statuslogoWrap {
+  display: inline-block;
+  padding-right: 4px;
+}
+
+.alertState {
+  color: #fc3838;
+}
+
+.gorDataTableDrop {
+        display:inline-block;
+        width:calculateRem(174px);
+        height:calculateRem(30px);
+        background:transparent;
+        text-align:left;    
+      .Dropdown-root 
+      {
+          position: relative;
+    }
+    .Dropdown-control {
+      position: relative;
+      overflow: hidden;
+      border:1px solid;
+      border-radius: calculateRem(3px);
+      box-sizing: border-box;
+      cursor: default;
+      outline: none;
+      padding: calculateRem(8px) calculateRem(52px) calculateRem(8px) calculateRem(10px);
+      transition: all 200ms ease;
+    }
+    .Dropdown-arrow {
+            border-color: #A6A7A9 transparent transparent;
+        border-style: solid;
+        border-width: calculateRem(8px) calculateRem(7px) calculateRem(3px);
+        content: ' ';
+        display: block;
+        height: 0;
+        margin-top: -ceil(2.5);
+        position: absolute;
+        right: calculateRem(15px);
+        top: calculateRem(14px);
+    }
+    .Dropdown-control:hover {
+        box-shadow: calculateRem(2px) calculateRem(2px) calculateRem(2px) #888888;
+        border: calculateRem(1px) solid #ccc;
+        color:#FFFFFF;
+    }
+    .is-open .Dropdown-arrow {
+        border-color: #FFFFFF transparent transparent;
+        border-style: solid;
+        border-width: calculateRem(8px) calculateRem(7px) calculateRem(3px);
+    }
+    .Dropdown-menu {
+        border: 1px solid;
+        border-radius:3px;
+        box-shadow: 0 calculateRem(1px) 0 rgba(0, 0, 0, 0.06);
+        box-sizing: border-box;
+        margin-top: calculateRem(-1px);
+        max-height: calculateRem(200px);
+        overflow-y: auto;
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        z-index: 1000;
+      -webkit-overflow-scrolling: touch;
+    }
+    .Dropdown-option {
+        box-sizing: border-box;
+      color: #A6A7A9;;
+        cursor: pointer;
+            display: block;
+            padding: calculateRem(8px) calculateRem(10px);    
+    }
+    .Dropdown-option.is-selected {
+        font-weight:bold;
+    }
+    .Dropdown-option:hover {
+        color: #FFFFFF;
+    }
+    .Dropdown-noresults {
+      box-sizing: border-box; 
+      color: #ccc;
+      cursor: default;
+      display: block;
+      padding: calculateRem(8px) calculateRem(10px);
+    }
+
+    }
