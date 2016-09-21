@@ -23,7 +23,7 @@ class AuditStatusWidget extends React.Component{
 	 	auditData = Object.assign({},this.props.auditData),
 	 	totalAudit = this.props.ppsData ? this.props.ppsData.totalAudit : null,
 		auditThroughput = this.props.throughputData ? this.props.throughputData.audit_throughput : null,
-		value = auditData.value ? auditData.value : null ;
+		value = auditData.total_audited ? auditData.total_audited : null ;
 
 		//Setting display values based on server values/mock
 		if (!value){
@@ -49,6 +49,7 @@ class AuditStatusWidget extends React.Component{
         defaultMessage='Items to Audit'/>;
         auditData.value = value;
 		auditData.low = lowStr; 
+        auditData.logo = "iAudit";
 
 		return auditData
     		

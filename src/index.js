@@ -26,12 +26,13 @@ import { Router, Route, hashHistory, IndexRoute} from 'react-router';
 import configureStore from './store';
 import socketMiddleware from './middleware/socketMiddleware';
 import Routes from './components/Router';
+import {preloadedState} from './utilities/intialData';
 
 /**
  * Creating a store and passing it to provider
  */
-
-const store = configureStore();
+const initState = preloadedState;
+const store = configureStore(initState);
 
 
 ReactDOM.render(

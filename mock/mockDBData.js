@@ -35,6 +35,15 @@ export const resTypePPS = {
 		"pps_mode": "put",
 		"active": "true/false"
 	},{
+		"pps_id": 5,
+        "time_unit": "per_hour",
+		"orders_picked": 500,
+		"items_picked": 1000, 
+		"items_put": 2400,
+		"items_audited": "need_to_be_decided_per_item_or_per_audit",
+		"pps_mode": "pick",
+		"active": "true/false"
+	},{
 		"pps_id": 2,
         "time_unit": "per_hour",
 		"orders_picked": 500,
@@ -74,7 +83,7 @@ export const resTypeOrders={
         "pending_orders": 100,   
         "cut_off_time": 100,   
         "estimated_completion_time": 200, 
-        "orders_at_risk":1,   
+        "orders_at_risk":10,   
         "Wave_ending_time":'21-30-57' 
     },
     "resource_type": "order_details"

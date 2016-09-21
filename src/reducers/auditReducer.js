@@ -11,10 +11,8 @@ export  function auditInfo(state={},action){
           res=action.data;
           if(res.aggregate_data){
             if(res.aggregate_data.total_audited)
-              auditData.value=parseInt(res.aggregate_data.total_audited);
+              auditData.total_audited=parseInt(res.aggregate_data.total_audited);
           }
-          auditData.heading = "Items to Audit";
-          auditData.logo = "iAudit";
           return Object.assign({}, state, {
             "auditData" : auditData
           })

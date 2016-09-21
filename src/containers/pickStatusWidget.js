@@ -28,11 +28,13 @@ class PickStatusWidget extends React.Component{
         lowleft='',
         lowright='',
         logo='',
+        ppsCount=0,
         items={};
         
         headingleft=<FormattedMessage id="widget.pick.headingleft" description='Heading for pick status widget' 
             defaultMessage='Orders to fullfill'/>;
         logo=' iPick';
+        ppsCount=this.props.ppsData.totalPick;
 
         textleft=this.props.ordersData.count_pending;
         
@@ -45,7 +47,7 @@ class PickStatusWidget extends React.Component{
             lowleft=<FormattedMessage id="widget.pick.status.idle" description='Throughput message' 
                             defaultMessage='{count} PPS idle'
                             values={{
-                                count: this.props.ppsData.totalAudit
+                                count: ppsCount
                             }}/>;
         }
         else
@@ -60,10 +62,10 @@ class PickStatusWidget extends React.Component{
 
 
             lowleft=<FormattedMessage id="widget.pick.throughput" description='Throughput message' 
-                            defaultMessage='{count} PPS picking {throughput} items/hr'
+                            defaultMessage='{count} PPS fullfilling at {throughput} items/hr'
                             values={{
-                                count: this.props.ppsData.totalAudit,
-                                throughput:this.props.throughputData.audit_throughput
+                                count: ppsCount,
+                                throughput:this.props.throughputData.pick_throughput
                             }}/>;            
             
             lowright=<FormattedMessage id="widget.pick.lowright" description='Estimated time' 
@@ -80,8 +82,9 @@ class PickStatusWidget extends React.Component{
             {
                 statusClass='gor-risk';  
                 statusLogo='header-yellow-alert-icon';
-                statusleft=<FormattedPlural id="widget.pick.statusRight" description='Heading for pick status widget' 
-            value={1} one='order at risk' other='orders at risk'/>
+                statusleft=<FormattedMessage id="widget.pick.statusRight" description='Heading for pick status widget' 
+                defaultMessage='{count_risk} {count_risk,plural, one {order} other {orders}} at risk'
+            values={{count_risk:this.props.ordersData.count_risk}}/>
                 valueLeftStatus='gor-risk';          
                 valueRightStatus='gor-risk';
             }
@@ -99,7 +102,6 @@ class PickStatusWidget extends React.Component{
 
  }
 function mapStateToProps(state, ownProps){
-    
     return  {
         ordersData:state.ordersInfo.ordersData || {},
         ppsData:state.ppsInfo.ppsData|| {},
