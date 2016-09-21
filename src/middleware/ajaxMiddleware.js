@@ -1,5 +1,6 @@
-import {receiveAuthData} from '../actions/loginAction'
-import {AJAX_CALL, AUTH_LOGIN} from '../constants/appConstants'
+import {AJAX_CALL} from '../constants/appConstants'
+import {AjaxParse} from '../utilities/ajaxParser';
+import {ShowError} from '../utilities/showError';
 
 const ajaxMiddleware = (function(){ 
 
@@ -22,14 +23,12 @@ const ajaxMiddleware = (function(){
       if (httpRequest.readyState === XMLHttpRequest.DONE) {
         if (httpRequest.status === 200) {
               var response=JSON.parse(httpRequest.response);
-              if(params.cause==AUTH_LOGIN)
-              {
-                store.dispatch(receiveAuthData(response));
-              }
+              AjaxParse(store,response,params.cause);
         } 
         else
         {
           console.log('Connection refused');
+          ShowError(store,params.cause);
         }        
      }
     };

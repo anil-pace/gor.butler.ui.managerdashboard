@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import rd3 from 'react-d3-library';
 import * as d3 from 'd3';
-import tip from 'd3-tip';
+import d3tip from 'd3-tip';
 
 const RD3Component = rd3.Component;
 
@@ -16,7 +16,7 @@ class Chart extends React.Component{
    componentDidMount(){
     var component = this;
     var widther = document.getElementById("chart_att").offsetWidth;
-    var heighter = document.getElementById("chart_att").offsetHeight;
+    //var heighter = document.getElementById("chart_att").offsetHeight;
 
     var margin = {top: 20, right: 20, bottom: 20, left: 40},
     width = widther - margin.left - margin.right,
@@ -55,20 +55,19 @@ class Chart extends React.Component{
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-      d3.tip=tip;
-    
-  // const tip = d3.tip()
-  //   .attr('class', 'd3-tip')
-  //   .offset([50, 90])
-  //   .html(function(d) {
-  //     var time=d.letter.split(" ");
-  //     return "<div> Time:"+" " + time[0]+" - "+time[1] +"<div/><div> 27 Jul,2016</div> <div style='color:#ffffff'> Fulfilled:  "+" " + d.frequency + "</div>";
-  //   })
+      //console.log(d3tip);
+  const tip = d3tip()
+    .attr('class', 'd3-tip')
+    .offset([100, 90])
+    .html(function(d) {
+      var time=d.letter.split(" ");
+      return "<div> Time:"+" " + time[0]+" - "+time[1] +"<div/><div> 27 Jul,2016</div> <div style='color:#ffffff'> Fulfilled:  "+" " + d.frequency + "</div>";
+    })
 
 
-      //svg.call(tip);
+      svg.call(tip);
     
-    d3.json("http://www.mocky.io/v2/57c921ea120000ee1fe76b04", function(error,data) {
+    d3.json("http://www.mocky.io/v2/57d27c9a100000c01432817f", function(error,data) {
 
       var json=data;
         update(json);
@@ -76,7 +75,8 @@ class Chart extends React.Component{
     });
 
     function update(data) {
-      console.log(data);
+      
+
       data.forEach(function(d) {
         d.frequency = +d.frequency;
      });
@@ -128,10 +128,13 @@ class Chart extends React.Component{
       .attr("y", function(d) { return y(d.frequency); })
       .attr("height", 0)
       .attr("height", function(d) { return height - y(d.frequency); })
-       // .on('mouseover', tip.show)
-       // .on('mouseout', tip.hide)
+      // .on('mouseover', tip.show)
+      // .on('mouseout', tip.hide)
 
       var txt = svg.selectAll(".bar");
+
+
+      
 
 
        txt.append("g")
@@ -153,10 +156,6 @@ class Chart extends React.Component{
     // .attr("text-anchor", "right")
     // .text("krish")
     // .style("fill", "#000000");
-
-
-
-    
       component.setState({d3: node});
 
     }

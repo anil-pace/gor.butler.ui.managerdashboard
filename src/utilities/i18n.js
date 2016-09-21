@@ -5,19 +5,15 @@
  *
  */
 import { addLocaleData } from 'react-intl';
-
 import enLocaleData from 'react-intl/locale-data/en';
+import jaLocaleData from 'react-intl/locale-data/ja';
 
+import enTranslationMessages from '../translations/en-US.json';
+import jaTranslationMessages from '../translations/ja-JP.json';
 
-addLocaleData(enLocaleData);
-
-export const appLocales = [
-  'en',
-  'de',
-];
-
-import enTranslationMessages from './translations/en.json';
-
+addLocaleData([...enLocaleData, ...jaLocaleData,
+	...enTranslationMessages, ...jaTranslationMessages]);
+console.log(enTranslationMessages);
 export const formatTranslationMessages = (messages) => {
   const formattedMessages = {};
   for (const message of messages) {
@@ -28,5 +24,6 @@ export const formatTranslationMessages = (messages) => {
 };
 
 export const translationMessages = {
-  en: formatTranslationMessages(enTranslationMessages)
+  en: formatTranslationMessages(enTranslationMessages),
+  ja: formatTranslationMessages(jaTranslationMessages),
 };

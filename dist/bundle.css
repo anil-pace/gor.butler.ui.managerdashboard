@@ -24,6 +24,7 @@ footer, header, hgroup, nav, section, video {
 
 body {
   line-height: 1;
+  font-weight: none;
 }
 
 ol, ul {
@@ -76,12 +77,9 @@ input, select {
   src: url("fonts/SourceSansPro-Regular.ttf") format("truetype"), url("fonts/SourceSansPro-Semibold.ttf") format("truetype"), url("fonts/SourceSansPro-Regular.ttf") format("truetype"), url("fonts/SourceSansPro-Regular.ttf") format("truetype"), url("fonts/SourceSansPro-Regular.ttf") format("truetype"), url("fonts/SourceSansPro-Regular.ttf") format("truetype");
 }
 
-* {
-  font-family: Source Sans Pro;
-}
-
 body {
   background: #F2F2F2;
+  font-family: Source Sans Pro;
 }
 
 .fk-logo,
@@ -109,8 +107,39 @@ body {
 .cbs-overview-chutes,
 .cbs-overview-casket,
 .overview-tile-ontime-icon,
-.cbs-overview-inducts, .statusOl, .statusAl, .iStock {
+.cbs-overview-inducts, .statusOl, .statusAl, .iStock, .iAudit, .iPick, .login-user, .login-password, .login-error {
   background-image: url(images/icons.svg);
+}
+
+.login-user {
+  background-position: -205px -77px;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+}
+
+.login-password {
+  background-position: -223px -77px;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+}
+
+.login-error {
+  background-position: -18px -78px;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+}
+
+.alt-gor-logo {
+  background-image: url(images/Logos.svg);
+}
+
+.alt-gor-logo {
+  background-position: -212px -1px;
+  width: 200px;
+  height: 25px;
 }
 
 .gor-logo {
@@ -149,9 +178,16 @@ body {
 }
 
 .iStock {
-  background-position: -210px 0;
-  width: 50px;
-  height: 50px;
+  background-position: -206px 0;
+  width: 45px;
+}
+
+.iAudit {
+  background-position: -256px -5px;
+}
+
+.iPick {
+  background-position: -308px -1px;
 }
 
 .overview-tile-ontime-icon {
@@ -160,6 +196,12 @@ body {
   height: 16px;
   display: inline-block;
   margin-right: 8px;
+}
+
+.header-red-alert-icon {
+  background-position: -18px -78px;
+  width: 16px;
+  height: 14px;
 }
 
 /*  SECTIONS  */
@@ -231,7 +273,7 @@ body {
 }
 
 .health .attributes {
-  width: 5.6875rem;
+  width: 5.5625rem;
 }
 
 .health .upperText {
@@ -356,6 +398,10 @@ body {
   background-color: #efefef;
 }
 
+.gorHeader .dropbtn:hover .dropdown-content {
+  display: block;
+}
+
 .gorHeader .dropbtn:focus {
   background-color: #efefef;
 }
@@ -389,6 +435,33 @@ body {
 }
 
 .gorHeader .dropdown-content a:hover {
+  background-color: #efefef;
+}
+
+.gorHeader .dropdown-content-afterClick {
+  font-family: "source sans pro";
+  background-color: white;
+  font-size: 0.875rem;
+  color: #4d5055;
+  width: 13.9375rem;
+  display: block;
+  position: absolute;
+  right: 0;
+  min-width: 5em;
+  box-shadow: 0em 0.1em 0.2em 0em rgba(0, 0, 0, 0.2);
+}
+
+.gorHeader .dropdown-content-afterClick a {
+  color: #666666;
+  background-color: white;
+  padding: 0.75rem 1rem;
+  font-size: .7em;
+  text-decoration: none;
+  padding: 1em 3em;
+  display: block;
+}
+
+.gorHeader .dropdown-content-afterClick a:hover {
   background-color: #efefef;
 }
 
@@ -597,7 +670,7 @@ body {
 
 .gor-tile .gor-up-tile {
   padding: 15px 20px 0px 20px;
-  min-height: 7.8125rem;
+  min-height: 8.75rem;
 }
 
 .gor-tile .gor-tile-left {
@@ -639,7 +712,7 @@ body {
   color: #ec1c24;
 }
 
-.gor-tile .gorRisk {
+.gor-tile .gor-risk {
   color: #dd7f03;
 }
 
@@ -648,7 +721,7 @@ body {
 }
 
 .gor-tile .gor-tile-right {
-  width: 16%;
+  width: 50px;
   display: inline-block;
   vertical-align: top;
   height: 55px;
@@ -716,11 +789,11 @@ body {
   min-height: 2.8125rem;
 }
 
-.Dropdown-root {
+.ddown .Dropdown-root {
   position: relative;
 }
 
-.Dropdown-control {
+.ddown .Dropdown-control {
   position: relative;
   overflow: hidden;
   background-color: white;
@@ -736,12 +809,12 @@ body {
   transition: all 200ms ease;
 }
 
-.Dropdown-control:hover {
+.ddown .Dropdown-control:hover {
   box-shadow: 0.125rem 0.125rem 0.125rem #888888;
   border: 0.0625rem solid #ccc;
 }
 
-.Dropdown-arrow {
+.ddown .Dropdown-arrow {
   border-color: #000000 transparent transparent;
   border-style: solid;
   border-width: 0.5rem 0.4375rem 0.1875rem;
@@ -754,13 +827,13 @@ body {
   top: 0.875rem;
 }
 
-.is-open .Dropdown-arrow {
+.ddown .is-open .Dropdown-arrow {
   border-color: #000000 transparent transparent;
   border-style: solid;
   border-width: 0.5rem 0.4375rem 0.1875rem;
 }
 
-.Dropdown-menu {
+.ddown .Dropdown-menu {
   background-color: white;
   border: 1px solid #ccc;
   box-shadow: 0 0.0625rem 0 rgba(0, 0, 0, 0.06);
@@ -775,7 +848,7 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
-.Dropdown-option {
+.ddown .Dropdown-option {
   box-sizing: border-box;
   color: #666666;
   cursor: pointer;
@@ -783,23 +856,23 @@ body {
   padding: 0.5rem 0.625rem;
 }
 
-.Dropdown-option:last-child {
+.ddown .Dropdown-option:last-child {
   border-bottom-right-radius: 0.125rem;
   border-bottom-left-radius: 0.125rem;
 }
 
-.Dropdown-option:hover {
+.ddown .Dropdown-option:hover {
   background-color: #efefef;
   color: #333;
 }
 
-.Dropdown-option.is-selected {
+.ddown .Dropdown-option.is-selected {
   box-shadow: 0.125rem 0.125rem 0.125rem #888888;
   background-color: #f2f9fc;
   color: #333;
 }
 
-.Dropdown-noresults {
+.ddown .Dropdown-noresults {
   box-sizing: border-box;
   color: #ccc;
   cursor: default;
@@ -875,4 +948,1336 @@ body {
   fill: white;
   font: 20px sans-serif;
   text-anchor: end;
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: url("../src/assets/Source_Sans_Pro/SourceSansPro-Regular.ttf") format("truetype");
+}
+
+.fill-back {
+  background: #4D5055;
+}
+
+.login-form {
+  color: #A6A7A9;
+  font-family: 'Source Sans Pro', sans-serif;
+  overflow: hidden;
+  padding: 1.25rem;
+}
+
+.login-form .login-logo {
+  margin: auto;
+  margin-top: 65px;
+}
+
+.login-form .login-lang:hover {
+  color: #FFFFFF;
+}
+
+.login-form .login-lang {
+  text-align: right;
+}
+
+.login-form .login-lang .lang-text {
+  margin-right: 10px;
+  display: inline-block;
+  margin-top: 10px;
+  vertical-align: top;
+}
+
+.login-form .login-lang .lang-drop {
+  display: inline-block;
+  width: 10.875rem;
+  height: 1.875rem;
+  background: transparent;
+  text-align: left;
+}
+
+.login-form .login-lang .lang-drop .Dropdown-root {
+  position: relative;
+}
+
+.login-form .login-lang .lang-drop .Dropdown-control {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid;
+  border-radius: 0.1875rem;
+  box-sizing: border-box;
+  cursor: default;
+  outline: none;
+  padding: 0.5rem 3.25rem 0.5rem 0.625rem;
+  transition: all 200ms ease;
+}
+
+.login-form .login-lang .lang-drop .Dropdown-arrow {
+  border-color: #A6A7A9 transparent transparent;
+  border-style: solid;
+  border-width: 0.5rem 0.4375rem 0.1875rem;
+  content: ' ';
+  display: block;
+  height: 0;
+  margin-top: -ceil(2.5);
+  position: absolute;
+  right: 0.9375rem;
+  top: 0.875rem;
+}
+
+.login-form .login-lang .lang-drop .Dropdown-control:hover {
+  box-shadow: 0.125rem 0.125rem 0.125rem #888888;
+  border: 0.0625rem solid #ccc;
+  color: #FFFFFF;
+}
+
+.login-form .login-lang .lang-drop .is-open .Dropdown-arrow {
+  border-color: #FFFFFF transparent transparent;
+  border-style: solid;
+  border-width: 0.5rem 0.4375rem 0.1875rem;
+}
+
+.login-form .login-lang .lang-drop .Dropdown-menu {
+  border: 1px solid;
+  border-radius: 3px;
+  box-shadow: 0 0.0625rem 0 rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
+  margin-top: -0.0625rem;
+  max-height: 12.5rem;
+  overflow-y: auto;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  z-index: 1000;
+  -webkit-overflow-scrolling: touch;
+}
+
+.login-form .login-lang .lang-drop .Dropdown-option {
+  box-sizing: border-box;
+  color: #A6A7A9;
+  cursor: pointer;
+  display: block;
+  padding: 0.5rem 0.625rem;
+}
+
+.login-form .login-lang .lang-drop .Dropdown-option.is-selected {
+  font-weight: bold;
+}
+
+.login-form .login-lang .lang-drop .Dropdown-option:hover {
+  color: #FFFFFF;
+}
+
+.login-form .login-lang .lang-drop .Dropdown-noresults {
+  box-sizing: border-box;
+  color: #ccc;
+  cursor: default;
+  display: block;
+  padding: 0.5rem 0.625rem;
+}
+
+.login-form .login-lang select {
+  width: 10.875rem;
+  height: 1.875rem;
+  color: #cccccc;
+  margin-left: 10px;
+  background: transparent;
+  border-radius: 1px;
+  border: 1px solid;
+}
+
+.login-form .login-lang select select:hover {
+  color: #FFFFFF;
+}
+
+.login-form .login-mid {
+  text-align: center;
+  background: #FFFFFF;
+  border: 1px solid;
+  border-radius: 5px;
+  color: #979797;
+  width: 36%;
+  min-height: 24.5rem;
+  margin: auto;
+  margin-top: 2.5rem;
+}
+
+.login-form .login-mid .upper-box {
+  margin-bottom: 1.25rem;
+  padding-top: 2.5rem;
+}
+
+.login-form .login-mid .upper-box .login-head {
+  color: #4D5055;
+  font-size: 2.8125rem;
+  font-weight: bold;
+}
+
+.login-form .login-mid .login-field {
+  margin: auto;
+  text-align: left;
+  margin-top: 1.25rem;
+  padding: 0.625rem;
+  padding-left: 0.9375rem;
+  width: 70%;
+  background-color: #FFFFFF;
+  border-radius: 3px;
+  border: 1px solid #AAAAAA;
+}
+
+.login-form .login-mid .login-field .field {
+  border: none;
+  font-size: 18px;
+  margin-left: 0.625rem;
+  width: 80%;
+}
+
+.login-form .login-mid .login-auth-error {
+  display: none;
+  text-align: left;
+  color: #EC1C24;
+  font-size: 18px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.login-form .login-mid .login-usr-error {
+  display: none;
+  text-align: left;
+  color: #EC1C24;
+  font-size: 18px;
+  margin-top: 10px;
+  margin-left: 3.875rem;
+}
+
+.login-form .login-mid .login-btn {
+  background: #F36F36;
+  color: #FFFFFF;
+  width: 75%;
+  padding: 0.625rem;
+  margin: 2.5rem;
+  font-size: 1.25rem;
+  border-radius: 3px;
+}
+
+.login-form .login-mid .login-fgt {
+  padding-bottom: 40px;
+}
+
+.login-form a {
+  text-decoration: underline;
+}
+
+.login-form .box-bottom-left {
+  margin: auto;
+  margin-left: 32%;
+  margin-top: 0.625rem;
+  display: inline;
+}
+
+.login-form .box-bottom-right {
+  margin: auto;
+  margin-left: 19%;
+  margin-top: 0.625rem;
+  display: inline;
+}
+
+.fixedDataTableCellGroupLayout_cellGroup {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+}
+
+.fixedDataTableCellGroupLayout_cellGroup > .public_fixedDataTableCell_main {
+  display: inline-block;
+  vertical-align: top;
+  white-space: normal;
+}
+
+.fixedDataTableCellGroupLayout_cellGroupWrapper {
+  position: absolute;
+  top: 0;
+}
+
+.fixedDataTableCellLayout_main {
+  border-width: 0 1px 0 0;
+  box-sizing: border-box;
+  display: block;
+  overflow: hidden;
+  position: absolute;
+  white-space: normal;
+  background: grey;
+}
+
+.fixedDataTableCellLayout_lastChild {
+  border-width: 0 1px 1px 0;
+}
+
+.fixedDataTableCellLayout_alignRight {
+  text-align: right;
+}
+
+.fixedDataTableCellLayout_alignCenter {
+  text-align: center;
+}
+
+.fixedDataTableCellLayout_wrap1 {
+  display: table;
+}
+
+.fixedDataTableCellLayout_wrap2 {
+  display: table-row;
+}
+
+.fixedDataTableCellLayout_wrap3 {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.fixedDataTableCellLayout_columnResizerContainer {
+  position: absolute;
+  right: 0px;
+  width: 6px;
+  z-index: 1;
+}
+
+.fixedDataTableCellLayout_columnResizerContainer:hover {
+  cursor: ew-resize;
+}
+
+.fixedDataTableCellLayout_columnResizerContainer:hover .fixedDataTableCellLayout_columnResizerKnob {
+  visibility: visible;
+}
+
+.fixedDataTableCellLayout_columnResizerKnob {
+  position: absolute;
+  right: 0px;
+  visibility: hidden;
+  width: 4px;
+}
+
+.fixedDataTableColumnResizerLineLayout_mouseArea {
+  cursor: ew-resize;
+  position: absolute;
+  right: -5px;
+  width: 12px;
+}
+
+.fixedDataTableColumnResizerLineLayout_main {
+  box-sizing: border-box;
+  position: absolute;
+  z-index: 10;
+}
+
+body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
+  display: none !important;
+}
+
+.fixedDataTableColumnResizerLineLayout_hiddenElem {
+  display: none !important;
+}
+
+.fixedDataTableLayout_main {
+  border-style: solid;
+  border-width: 1px;
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+}
+
+.fixedDataTableLayout_header,
+.fixedDataTableLayout_hasBottomBorder {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+}
+
+.fixedDataTableLayout_footer .public_fixedDataTableCell_main {
+  border-top-style: solid;
+  border-top-width: 1px;
+}
+
+.fixedDataTableLayout_topShadow,
+.fixedDataTableLayout_bottomShadow {
+  height: 4px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  z-index: 1;
+}
+
+.fixedDataTableLayout_bottomShadow {
+  margin-top: -4px;
+}
+
+.fixedDataTableLayout_rowsContainer {
+  overflow: hidden;
+  position: relative;
+}
+
+.fixedDataTableLayout_horizontalScrollbar {
+  bottom: 0;
+  position: absolute;
+}
+
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule fixedDataTableRowLayout
+ */
+.fixedDataTableRowLayout_main {
+  box-sizing: border-box;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+}
+
+.fixedDataTableRowLayout_body {
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+
+.fixedDataTableRowLayout_fixedColumnsDivider {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-left-style: solid;
+  border-left-width: 1px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 0;
+}
+
+.fixedDataTableRowLayout_columnsShadow {
+  width: 4px;
+}
+
+.fixedDataTableRowLayout_rowWrapper {
+  position: absolute;
+  top: 0;
+}
+
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule ScrollbarLayout
+ */
+.ScrollbarLayout_main {
+  box-sizing: border-box;
+  outline: none;
+  overflow: hidden;
+  position: absolute;
+  -webkit-transition-duration: 250ms;
+  transition-duration: 250ms;
+  -webkit-transition-timing-function: ease;
+  transition-timing-function: ease;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.ScrollbarLayout_mainVertical {
+  bottom: 0;
+  right: 0;
+  top: 0;
+  -webkit-transition-property: background-color width;
+  transition-property: background-color width;
+  width: 15px;
+}
+
+.ScrollbarLayout_mainVertical.public_Scrollbar_mainActive,
+.ScrollbarLayout_mainVertical:hover {
+  width: 17px;
+}
+
+.ScrollbarLayout_mainHorizontal {
+  bottom: 0;
+  height: 15px;
+  left: 0;
+  -webkit-transition-property: background-color height;
+  transition-property: background-color height;
+}
+
+/* Touching the scroll-track directly makes the scroll-track bolder */
+.ScrollbarLayout_mainHorizontal.public_Scrollbar_mainActive,
+.ScrollbarLayout_mainHorizontal:hover {
+  height: 17px;
+}
+
+.ScrollbarLayout_face {
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: 1;
+}
+
+/**
+ * This selector renders the "nub" of the scrollface. The nub must
+ * be rendered as pseudo-element so that it won't receive any UI events then
+ * we can get the correct `event.offsetX` and `event.offsetY` from the
+ * scrollface element while dragging it.
+ */
+.ScrollbarLayout_face:after {
+  border-radius: 6px;
+  content: '';
+  display: block;
+  position: absolute;
+  -webkit-transition: background-color 250ms ease;
+  transition: background-color 250ms ease;
+}
+
+.ScrollbarLayout_faceHorizontal {
+  bottom: 0;
+  left: 0;
+  top: 0;
+}
+
+.ScrollbarLayout_faceHorizontal:after {
+  bottom: 4px;
+  left: 0;
+  top: 4px;
+  width: 100%;
+}
+
+.ScrollbarLayout_faceVertical {
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+.ScrollbarLayout_faceVertical:after {
+  height: 100%;
+  left: 4px;
+  right: 4px;
+  top: 0;
+}
+
+/**
+ * FixedDataTable v0.6.3 
+ *
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule fixedDataTable
+ *
+ */
+/**
+ * Table.
+ */
+.public_fixedDataTable_main {
+  border-color: #d3d3d3;
+}
+
+.public_fixedDataTable_header,
+.public_fixedDataTable_hasBottomBorder {
+  border-color: #d3d3d3;
+}
+
+.public_fixedDataTable_header .public_fixedDataTableCell_main {
+  font-weight: bold;
+}
+
+.public_fixedDataTable_footer .public_fixedDataTableCell_main {
+  border-color: #d3d3d3;
+}
+
+.public_fixedDataTable_topShadow {
+  background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAF0lEQVR4AWPUkNeSBhHCjJoK2twgFisAFagCCp3pJlAAAAAASUVORK5CYII=) repeat-x;
+}
+
+.public_fixedDataTable_bottomShadow {
+  background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAHElEQVQI12MwNjZmZdAT1+Nm0JDWEGZQk1GTBgAWkwIeAEp52AAAAABJRU5ErkJggg==) repeat-x;
+}
+
+.public_fixedDataTable_horizontalScrollbar .public_Scrollbar_mainHorizontal {
+  background-color: #fff;
+}
+
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule fixedDataTableCell
+ */
+/**
+ * Table cell.
+ */
+.public_fixedDataTableCell_main {
+  background-color: #fff;
+  border-color: #d3d3d3;
+}
+
+.public_fixedDataTableCell_highlighted {
+  background-color: #f4f4f4;
+}
+
+.fixedDataTableRowLayout_rowWrapper:hover .public_fixedDataTableCell_main {
+  background-color: #e6e6e6;
+}
+
+.public_fixedDataTable_header:hover .public_fixedDataTableCell_main {
+  background-color: #FFFFFF;
+}
+
+.Stopped .public_fixedDataTableCell_cellContent {
+  background: red;
+  border-radius: 33%;
+  text-align: center;
+  width: 60px;
+  color: #ffffff;
+  font-size: 12px;
+}
+
+.Error .public_fixedDataTableCell_cellContent {
+  background: red;
+  border-radius: 33%;
+  text-align: center;
+  width: 60px;
+  color: #ffffff;
+  font-size: 12px;
+}
+
+.Warning .public_fixedDataTableCell_cellContent {
+  background: #f99405;
+  border-radius: 33%;
+  text-align: center;
+  width: 60px;
+  font-size: 12px;
+}
+
+.On .public_fixedDataTableCell_cellContent {
+  border-radius: 33%;
+  text-align: center;
+  width: 60px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #00a54f;
+  color: #00a54f;
+  font-size: 12px;
+}
+
+.Off .public_fixedDataTableCell_cellContent {
+  border-radius: 33%;
+  text-align: center;
+  width: 60px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #aaaaaa;
+  color: #aaaaaa;
+  font-size: 12px;
+}
+
+.public_fixedDataTableCell_columnResizerKnob {
+  background-color: #0284ff;
+}
+
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule fixedDataTableColumnResizerLine
+ *
+ */
+/**
+ * Column resizer line.
+ */
+.public_fixedDataTableColumnResizerLine_main {
+  border-color: #0284ff;
+}
+
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule fixedDataTableRow
+ */
+/**
+ * Table row.
+ */
+.public_fixedDataTableRow_main {
+  background-color: #fff;
+}
+
+.public_fixedDataTableRow_highlighted,
+.public_fixedDataTableRow_highlighted .public_fixedDataTableCell_main {
+  background-color: #ffffff;
+}
+
+.public_fixedDataTableRow_fixedColumnsDivider {
+  border-color: #d3d3d3;
+}
+
+.public_fixedDataTableRow_columnsShadow {
+  background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAABCAYAAAD5PA/NAAAAFklEQVQIHWPSkNeSBmJhTQVtbiDNCgASagIIuJX8OgAAAABJRU5ErkJggg==) repeat-y;
+}
+
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule Scrollbar
+ *
+ */
+/**
+ * Scrollbars.
+ */
+/* Touching the scroll-track directly makes the scroll-track bolder */
+.public_Scrollbar_main.public_Scrollbar_mainActive,
+.public_Scrollbar_main:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.public_Scrollbar_mainOpaque,
+.public_Scrollbar_mainOpaque.public_Scrollbar_mainActive,
+.public_Scrollbar_mainOpaque:hover {
+  background-color: #fff;
+}
+
+.public_Scrollbar_face:after {
+  background-color: #c2c2c2;
+}
+
+.public_Scrollbar_main:hover .public_Scrollbar_face:after,
+.public_Scrollbar_mainActive .public_Scrollbar_face:after,
+.public_Scrollbar_faceActive:after {
+  background-color: #7d7d7d;
+}
+
+/**
+ * FixedDataTable v0.6.3 
+ *
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule fixedDataTableCellGroupLayout
+ */
+.fixedDataTableCellGroupLayout_cellGroup {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+}
+
+.fixedDataTableCellGroupLayout_cellGroup > .public_fixedDataTableCell_main {
+  display: inline-block;
+  vertical-align: top;
+  white-space: normal;
+  background: #f7f7f7;
+}
+
+.fixedDataTableCellGroupLayout_cellGroupWrapper {
+  position: absolute;
+  top: 0;
+}
+
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule fixedDataTableCellLayout
+ */
+.fixedDataTableCellLayout_main {
+  border-width: 0 1px 0 0;
+  box-sizing: border-box;
+  display: block;
+  overflow: hidden;
+  position: absolute;
+  white-space: normal;
+}
+
+.fixedDataTableCellLayout_lastChild {
+  border-width: 0 1px 1px 0;
+}
+
+.fixedDataTableCellLayout_alignRight {
+  text-align: right;
+}
+
+.fixedDataTableCellLayout_alignCenter {
+  text-align: center;
+}
+
+.fixedDataTableCellLayout_wrap1 {
+  display: table;
+}
+
+.fixedDataTableCellLayout_wrap2 {
+  display: table-row;
+}
+
+.fixedDataTableCellLayout_wrap3 {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.fixedDataTableCellLayout_columnResizerContainer {
+  position: absolute;
+  right: 0px;
+  width: 6px;
+  z-index: 1;
+}
+
+.fixedDataTableCellLayout_columnResizerContainer:hover {
+  cursor: ew-resize;
+}
+
+.fixedDataTableCellLayout_columnResizerContainer:hover .fixedDataTableCellLayout_columnResizerKnob {
+  visibility: visible;
+}
+
+.fixedDataTableCellLayout_columnResizerKnob {
+  position: absolute;
+  right: 0px;
+  visibility: hidden;
+  width: 4px;
+}
+
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule fixedDataTableColumnResizerLineLayout
+ */
+.fixedDataTableColumnResizerLineLayout_mouseArea {
+  cursor: ew-resize;
+  position: absolute;
+  right: -5px;
+  width: 12px;
+}
+
+.fixedDataTableColumnResizerLineLayout_main {
+  box-sizing: border-box;
+  position: absolute;
+  z-index: 10;
+}
+
+body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
+  /* the resizer line is in the wrong position in RTL with no easy fix.
+   * Disabling is more useful than displaying it.
+   * #167 (github) should look into this and come up with a permanent fix.
+   */
+  display: none !important;
+}
+
+.fixedDataTableColumnResizerLineLayout_hiddenElem {
+  display: none !important;
+}
+
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule fixedDataTableLayout
+ */
+.fixedDataTableLayout_main {
+  border-style: solid;
+  border-width: 1px;
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+}
+
+.fixedDataTableLayout_header,
+.fixedDataTableLayout_hasBottomBorder {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+}
+
+.fixedDataTableLayout_footer .public_fixedDataTableCell_main {
+  border-top-style: solid;
+  border-top-width: 1px;
+}
+
+.fixedDataTableLayout_topShadow,
+.fixedDataTableLayout_bottomShadow {
+  height: 4px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  z-index: 1;
+}
+
+.fixedDataTableLayout_bottomShadow {
+  margin-top: -4px;
+}
+
+.fixedDataTableLayout_rowsContainer {
+  overflow: hidden;
+  position: relative;
+}
+
+.fixedDataTableLayout_horizontalScrollbar {
+  bottom: 0;
+  position: absolute;
+}
+
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule fixedDataTableRowLayout
+ */
+.fixedDataTableRowLayout_main {
+  box-sizing: border-box;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+}
+
+.fixedDataTableRowLayout_body {
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+
+.fixedDataTableRowLayout_fixedColumnsDivider {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-left-style: solid;
+  border-left-width: 1px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 0;
+}
+
+.fixedDataTableRowLayout_columnsShadow {
+  width: 4px;
+}
+
+.fixedDataTableRowLayout_rowWrapper {
+  position: absolute;
+  top: 0;
+}
+
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule ScrollbarLayout
+ */
+.ScrollbarLayout_main {
+  box-sizing: border-box;
+  outline: none;
+  overflow: hidden;
+  position: absolute;
+  -webkit-transition-duration: 250ms;
+  transition-duration: 250ms;
+  -webkit-transition-timing-function: ease;
+  transition-timing-function: ease;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.ScrollbarLayout_mainVertical {
+  bottom: 0;
+  right: 0;
+  top: 0;
+  -webkit-transition-property: background-color width;
+  transition-property: background-color width;
+  width: 15px;
+}
+
+.ScrollbarLayout_mainVertical.public_Scrollbar_mainActive,
+.ScrollbarLayout_mainVertical:hover {
+  width: 17px;
+}
+
+.ScrollbarLayout_mainHorizontal {
+  bottom: 0;
+  height: 15px;
+  left: 0;
+  -webkit-transition-property: background-color height;
+  transition-property: background-color height;
+}
+
+/* Touching the scroll-track directly makes the scroll-track bolder */
+.ScrollbarLayout_mainHorizontal.public_Scrollbar_mainActive,
+.ScrollbarLayout_mainHorizontal:hover {
+  height: 17px;
+}
+
+.ScrollbarLayout_face {
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: 1;
+}
+
+/**
+ * This selector renders the "nub" of the scrollface. The nub must
+ * be rendered as pseudo-element so that it won't receive any UI events then
+ * we can get the correct `event.offsetX` and `event.offsetY` from the
+ * scrollface element while dragging it.
+ */
+.ScrollbarLayout_face:after {
+  border-radius: 6px;
+  content: '';
+  display: block;
+  position: absolute;
+  -webkit-transition: background-color 250ms ease;
+  transition: background-color 250ms ease;
+}
+
+.ScrollbarLayout_faceHorizontal {
+  bottom: 0;
+  left: 0;
+  top: 0;
+}
+
+.ScrollbarLayout_faceHorizontal:after {
+  bottom: 4px;
+  left: 0;
+  top: 4px;
+  width: 100%;
+}
+
+.ScrollbarLayout_faceVertical {
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+.ScrollbarLayout_faceVertical:after {
+  height: 100%;
+  left: 4px;
+  right: 4px;
+  top: 0;
+}
+
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule fixedDataTable
+ *
+ */
+/**
+ * Table.
+ */
+.public_fixedDataTable_main {
+  border-color: #d3d3d3;
+}
+
+.public_fixedDataTable_header,
+.public_fixedDataTable_hasBottomBorder {
+  border-color: #d3d3d3;
+}
+
+.public_fixedDataTable_header .public_fixedDataTableCell_main {
+  font-weight: bold;
+}
+
+.public_fixedDataTable_header,
+.public_fixedDataTable_header .public_fixedDataTableCell_main {
+  background-color: #ffffff;
+}
+
+.public_fixedDataTable_footer .public_fixedDataTableCell_main {
+  background-color: #ffffff;
+  border-color: #d3d3d3;
+}
+
+.public_fixedDataTable_topShadow {
+  background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAF0lEQVR4AWPUkNeSBhHCjJoK2twgFisAFagCCp3pJlAAAAAASUVORK5CYII=) repeat-x;
+}
+
+.public_fixedDataTable_bottomShadow {
+  background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAHElEQVQI12MwNjZmZdAT1+Nm0JDWEGZQk1GTBgAWkwIeAEp52AAAAABJRU5ErkJggg==) repeat-x;
+}
+
+.public_fixedDataTable_horizontalScrollbar .public_Scrollbar_mainHorizontal {
+  background-color: #fff;
+}
+
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule fixedDataTableCell
+ */
+/**
+ * Table cell.
+ */
+.public_fixedDataTableCell_main {
+  background-color: #fff;
+  border-color: #d3d3d3;
+}
+
+.public_fixedDataTableCell_highlighted {
+  background-color: #f4f4f4;
+}
+
+.public_fixedDataTableCell_cellContent {
+  padding: 8px;
+}
+
+.public_fixedDataTableCell_columnResizerKnob {
+  background-color: #0284ff;
+}
+
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule fixedDataTableColumnResizerLine
+ *
+ */
+/**
+ * Column resizer line.
+ */
+.public_fixedDataTableColumnResizerLine_main {
+  border-color: #0284ff;
+}
+
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule fixedDataTableRow
+ */
+/**
+ * Table row.
+ */
+.public_fixedDataTableRow_main {
+  background-color: #fff;
+}
+
+.public_fixedDataTableRow_highlighted,
+.public_fixedDataTableRow_highlighted .public_fixedDataTableCell_main {
+  background-color: #f7f7f7;
+}
+
+.public_fixedDataTableRow_fixedColumnsDivider {
+  border-color: #ffffff;
+}
+
+.public_fixedDataTableRow_columnsShadow {
+  background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAABCAYAAAD5PA/NAAAAFklEQVQIHWPSkNeSBmJhTQVtbiDNCgASagIIuJX8OgAAAABJRU5ErkJggg==) repeat-y;
+}
+
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule Scrollbar
+ *
+ */
+/**
+ * Scrollbars.
+ */
+/* Touching the scroll-track directly makes the scroll-track bolder */
+.public_Scrollbar_main.public_Scrollbar_mainActive,
+.public_Scrollbar_main:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.public_Scrollbar_mainOpaque,
+.public_Scrollbar_mainOpaque.public_Scrollbar_mainActive,
+.public_Scrollbar_mainOpaque:hover {
+  background-color: #fff;
+}
+
+.public_Scrollbar_face:after {
+  background-color: #c2c2c2;
+}
+
+.public_Scrollbar_main:hover .public_Scrollbar_face:after,
+.public_Scrollbar_mainActive .public_Scrollbar_face:after,
+.public_Scrollbar_faceActive:after {
+  background-color: #7d7d7d;
+}
+
+.gorToolBar {
+  width: 100%;
+  height: 68px;
+  background: #FFFFFF;
+  box-shadow: inset 0 5px 5px -5px #888888;
+  position: relative;
+  font-family: "source sans pro";
+  font-size: 20px;
+  color: #000000;
+}
+
+.gorFilter {
+  float: right;
+  width: 30%;
+  vertical-align: middle;
+  box-sizing: border-box;
+  border: 1px solid #aaaaaa;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: white;
+  font-family: "source sans pro";
+  color: #aaaaaa;
+  height: 35px;
+  width: 260px;
+}
+
+.gorToolBarElements {
+  font-family: "source sans pro";
+  font-size: 20px;
+  font-weight: bold;
+  color: #000000;
+  padding-top: 6px;
+  display: inline-block;
+  width: 30%;
+  vertical-align: middle;
+}
+
+.gorToolHeaderEl {
+  display: inline-block;
+  padding-bottom: 4px;
+}
+
+.gorToolHeaderSubText {
+  font-family: "source sans pro";
+  font-size: 12px;
+  color: #666666;
+}
+
+.gorTesting {
+  width: 100%;
+  height: 400px;
+}
+
+.gorSubTab.gorContainer {
+  background-color: #F8F8F8;
+  width: auto;
+  display: inline-block;
+}
+
+.gorSubTab .gorMainBlock:hover {
+  background-color: #999999;
+  color: #ffffff;
+}
+
+.gorSubTab .gorInline {
+  display: inline-block;
+  width: 100%;
+}
+
+.gorSubTab .gorMainBlock {
+  padding-right: 20px;
+  padding-left: 20px;
+  height: 50px;
+  display: table-cell;
+  background: #F8F8F8;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.gorSubTab .gor-upperText {
+  font-family: "source sans pro";
+  font-size: 18px;
+  font-weight: bold;
+  display: inline-block;
+  width: 100%;
+  color: #4d5055;
+  font-weight: bold;
+}
+
+.gorMainSubtab {
+  background-color: #F8F8F8;
+  width: 100%;
+  vertical-align: middle;
+  height: 50px;
 }

@@ -1,7 +1,40 @@
-export function WsParse(state,res)
+/**
+ * Importing mock data and constants for data parcing
+ */
+import {PARSE_PPS,PARSE_PPA_THROUGHPUT,PARSE_BUTLERS,PARSE_CHARGERS,PARSE_ORDERS,PARSE_INVENTORY,PARSE_PUT,PARSE_PICK} from '../constants/appConstants'
+
+
+
+/**
+ * [Function for parsing]
+ * @param {[Object]} res [Response recieved from Mock/WS]
+ */
+export function WsParse(res)
   {     
-        if(res.resource_type === "pps"){
-         var pick = 0, put = 0, audit = 0, inactive = 0;
+        //Shared data variable initialization
+        var throughput = {},totalPut = 0;
+        
+        function processPPSData(response){
+            var aggData = response["aggregate_data"] || [];
+            for(let i = 0;i<aggData.length ; i++ ){
+              if(aggData[i].hasOwnProperty("pps_mode") && aggData[i]["pps_mode"] === "put"){
+                totalPut++;
+              }
+            }
+        }
+        
+        if(res.resource_type === PARSE_PPA_THROUGHPUT){
+          if(res.aggregate_data){
+            throughput["put_throughput"] = res.aggregate_data["put_throughput"];
+            throughput["pick_throughput"] = res.aggregate_data["pick_throughput"];
+            throughput["audit_throughput"] = res.aggregate_data["audit_throughput"];
+          }
+        }
+        else if(res.resource_type === PARSE_PPS){
+         let ppsData={};
+         processPPSData(res);
+         /*let pick = 0, put = 0, audit = 0, inactive = 0;
+         res.data = mockData.resTypePPS.data;
          if(res.data){
           res.data.map(function(key, index){
                             if(key.pps_mode == 'pick'){
@@ -25,22 +58,22 @@ export function WsParse(state,res)
                             "put": put,
                             "audit" : audit,
                             "inactive" : inactive
-                        }
-        // console.log("PPS Data: ");
-        // console.log(ppsData);
-        return Object.assign({}, state, {
-            "ppsData" : ppsData
-        })
+                        }*/
+
+       
+            return ppsData
+      
         }
-         else if(res.resource_type === "butlers"){
-                        var pick_or_put = 0, audit = 0, idle = 0, dead = 0, charging= 0;
+         else if(res.resource_name === PARSE_BUTLERS){
+        let pick_or_put = 0, audit = 0, idle = 0, dead = 0, charging= 0;
+         res.data = mockData.resTypeButlers.data;
          if(res.data){
                         res.data.map(function(key, index){
                            
-                            if(key.status == 'dead' || key.status == 'initializing'){
+                            if(key.status === 'dead' || key.status === 'initializing'){
                                 dead = dead + 1
                             }else{
-                                if(key.tasktype == 'null' || key.tasktype == 'movetask'){
+                                if(key.tasktype === 'null' || key.tasktype === 'movetask'){
                                     idle = idle + 1;
                                 }else if(key.tasktype == 'picktask'){
                                     pick_or_put = pick_or_put + 1;
@@ -52,21 +85,21 @@ export function WsParse(state,res)
                             }
                         })
           }
-                        var botKey = {
+                        let botKey = {
                             "Pick / Put" : pick_or_put,
                             "Audit": audit,
                             "Charging" : charging,
                             "Inactive" : dead,
                             "Idle" : idle
                         }
-           // console.log("Butlers Data");
-           // console.log(botKey);
+           
            return Object.assign({}, state, {
                "butlersData" : botKey
           })
          }
-        else if(res.resource_type === "chargers"){
-              var connected = 0, disconnected = 0;
+        else if(res.resource_name === PARSE_CHARGERS){
+              let connected = 0, disconnected = 0;
+              res.data = mockData.resTypeChargers.data;
               if(res.data){
                         res.data.map(function(key, index){
                             if(key.charger_status == 'disconnected' ){
@@ -86,8 +119,9 @@ export function WsParse(state,res)
             "chargersData" : chargersKey
          })
          }
-        else if(res.resource_type === "orders"){
-          var status='',avg=0,count_pending=0,eta='',time_current='';
+        else if(res.resource_name === PARSE_ORDERS){
+          let status='',avg=0,count_pending=0,eta='',time_current='';
+          res.aggregate_data = mockData.resTypeOrders.aggregate_data;
           if(res.aggregate_data){
               status=res.aggregate_data.status;
               avg=res.aggregate_data.avg_per_hr;
@@ -102,15 +136,15 @@ export function WsParse(state,res)
               "eta":eta,
               "time_current":time_current            
             }
-          // console.log('Orders data: ');
-          // console.log(ordersData);
+          
             return Object.assign({}, state, {
             "ordersData" : ordersData
             })
         }
 
-         else if(res.resource_type === "inventory"){
-          var avail_volume=0,count_put=0,util_perc=0,util_vol=0,count_pick=0,avail_sku=0,stock_current=0,open_stock=0;
+         else if(res.resource_name === PARSE_INVENTORY){
+          let avail_volume=0,count_put=0,util_perc=0,util_vol=0,count_pick=0,avail_sku=0,stock_current=0,open_stock=0;
+          res.aggregate_data = mockData.resTypeInventory1.aggregate_data;
           if(res.aggregate_data){
               avail_volume=res.aggregate_data.total_available_volume;
               count_put=res.aggregate_data.count_put;
@@ -121,7 +155,7 @@ export function WsParse(state,res)
               stock_current=res.aggregate_data.stock_current;
               open_stock=res.aggregate_data.open_stock;                          
           }
-            var ivData={
+            let ivData={
               "avail_volume":avail_volume,
               "count_put":count_put,
               "util_perc":util_perc,
@@ -132,43 +166,52 @@ export function WsParse(state,res)
               "open_stock":open_stock                          
             }
 
-          // console.log('Inventory data: ');
-          // console.log(ivData);
+          
             return Object.assign({}, state, {
             "inventoryData" : ivData
             })
          }
 
-        else if(res.resource_type === "put"){
-          var count_complete=0;
+        else if(res.resource_name === PARSE_PUT){
+          let putObj={};
+          
           if(res.aggregate_data){
-            count_complete=res.aggregate_data.count_complete;
+              if(!res.aggregate_data.items_put){
+                putObj.value = "None";
+                putObj.heading = "Items to Stock"
+                putObj.low="Offline"
+              }
+              else{
+                putObj.value = res.aggregate_data.items_put;
+                putObj.low= totalPut ? totalPut+ "PPS stocking 342 items/hr" : "Starting...";
+              }
+              putObj.count_complete=res.aggregate_data.count_complete;
+              putObj.heading = "Items to Stock";
+              putObj.logo = "iStock";
+            
           }
-          // console.log("Put Data ");
-          // console.log(count_complete);  
-          return Object.assign({}, state, {
-            "putData" : count_complete
-          })
+          
+          return putObj;
         }
 
-        else if(res.resource_type === "pick"){
-          var count_complete=0;
+        else if(res.resource_name === PARSE_PICK){
+          let count_complete=0;
+          res.aggregate_data = mockData.resTypePick.aggregate_data;
           if(res.aggregate_data){
             count_complete=res.aggregate_data.count_complete;
           }
-          // console.log("Pick Data ");
-          // console.log(count_complete);  
+            
           return Object.assign({}, state, {
             "pickData" : count_complete
           })
         }
 
         else{
-          return Object.assign({}, state, {
+          return  {
             "socketConnected": true,
             "initDataSent":true,
             "socketData" : res
-        })
+        }
         }
   }
 

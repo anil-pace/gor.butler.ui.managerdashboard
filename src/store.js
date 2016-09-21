@@ -1,8 +1,9 @@
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware } from 'redux';
 
-import socketMiddleware from './middleware/socketMiddleware'
-import ajaxMiddleware from './middleware/ajaxMiddleware'
-import rootReducer from './reducers'
+import socketMiddleware from './middleware/socketMiddleware';
+import ajaxMiddleware from './middleware/ajaxMiddleware';
+import mockMiddleware from './middleware/mockMiddleware'
+import rootReducer from './reducers';
 
 
 export default function configureStore(preloadedState) {
@@ -11,7 +12,8 @@ export default function configureStore(preloadedState) {
     preloadedState,
     applyMiddleware(
       ajaxMiddleware,
-      socketMiddleware
+      socketMiddleware,
+      mockMiddleware
     )
   )
 }

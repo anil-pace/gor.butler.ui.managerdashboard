@@ -10,9 +10,9 @@ class HealthTabs extends React.Component{
 	render(){
 		return (
 			<div>
-			<Health />
-			<Health />
-			<Health />
+			<Health items={this.props.ppsData} />
+			<Health items={this.props.butlerData} />
+			<Health items={this.props.chargingData} />
 			</div>
 		);
 	}

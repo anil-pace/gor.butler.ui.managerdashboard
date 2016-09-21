@@ -35,7 +35,7 @@ body
   }
   .gor-up-tile{
     padding: 15px 20px 0px 20px;
-    min-height:calculateRem(125px);
+    min-height:calculateRem(140px);
   }
   .gor-tile-left{
     width: 80%;
@@ -69,14 +69,14 @@ body
 .gor-breach{
   color: #ec1c24;
 }
-.gorRisk{
+.gor-risk{
   color:#dd7f03;
 }
 .gor-none{
   color:#aaaaaa;
 }
 .gor-tile-right{
-  width: 16%;
+  width: 50px;
   display:inline-block;
   vertical-align: top;
   height:55px;
@@ -84,6 +84,7 @@ body
 .gor-low-tile{
   font-family: 'Source Sans Pro semibold', sans-serif;
   font-size: calculateRem(16px);
+//  font-weight:bold;
   background:#F7F7F7;
   color: #666666;
   padding: 10px 0px 15px 20px;

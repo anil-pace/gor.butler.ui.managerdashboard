@@ -1,6 +1,6 @@
 import {wsResponseAction,wsOnMessageAction} from '../actions/socketActions'
 import {WS_CONNECT,WS_DISCONNECT,WS_ONMESSAGE,WS_ONSEND,WS_URL} from '../constants/appConstants'
-
+import {ResponseParse} from '../utilities/responseParser';
 
 
 const socketMiddleware = (function(){ 
@@ -21,8 +21,8 @@ const socketMiddleware = (function(){
   const onMessage = (ws,store) => evt => {
     //Parse the JSON message received on the websocket
     var msg = JSON.parse(evt.data);
-    store.dispatch(wsOnMessageAction(msg));
-    
+
+      ResponseParse(store,msg);    
   }
 
   return store => next => action => {

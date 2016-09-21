@@ -25,10 +25,35 @@
 .cbs-overview-chutes,
 .cbs-overview-casket,
 .overview-tile-ontime-icon,
-.cbs-overview-inducts,.statusOl,.statusAl,.iStock {
+.cbs-overview-inducts,.statusOl,.statusAl,.iStock ,.iAudit,.iPick,.login-user,.login-password,.login-error{
     background-image: url(images/icons.svg);
 }
-
+.login-user{
+    background-position:-205px -77px;
+    width:16px;
+    height:16px;    
+    display:inline-block;
+}
+.login-password{
+    background-position:-223px -77px;
+    width:16px;
+    height:16px;    
+    display:inline-block;
+}
+.login-error{
+    background-position:-18px -78px;
+    width:16px;
+    height:16px;    
+    display:inline-block;
+}
+.alt-gor-logo{
+    background-image: url(images/Logos.svg);    
+}
+.alt-gor-logo{
+    background-position:-212px -1px;
+    width:200px;
+    height:25px;
+}
 .gor-logo{
     background-position: 4px -126px;
     width: 181px;
@@ -61,9 +86,14 @@
     background-position: -101px -52px;
 }
 .iStock{
-    background-position: -210px 0;
-    width:50px;
-    height:50px;
+    background-position: -206px 0;
+    width:45px;
+}
+.iAudit{
+    background-position: -256px -5px;   
+}
+.iPick{
+    background-position: -308px -1px;       
 }
 .overview-tile-ontime-icon{
     background-position: -1px -77px;    
@@ -71,4 +101,9 @@
     height: 16px;
     display:inline-block;
     margin-right:8px;   
+}
+.header-red-alert-icon{
+    background-position: -18px -78px;
+    width:16px;
+    height:14px;       
 }

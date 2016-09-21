@@ -20,6 +20,9 @@
 		font-family: $gor-font-family;
 		&:hover{
 			background-color: #efefef;
+			.dropdown-content{
+				display:block;
+			}
 		}
 		&:focus{
 			background-color: #efefef;
@@ -32,6 +35,7 @@
 			display: inline-block;
 			vertical-align: middle;
 		}
+		
 	.dropdown-content {
 			font-family: $gor-font-family;
 			background-color: white;
@@ -39,6 +43,31 @@
 			color: #4d5055;
 			width :calculateRem(223px); 
 			display: none;
+			position: absolute;
+			right: 0;
+			min-width: 5em;
+			box-shadow: 0em .1em .2em 0em rgba(0,0,0,0.2);
+			a{
+				color: #666666;
+				background-color: white;
+				padding: calculateRem(12px) calculateRem(16px);
+				font-size: .7em;
+				text-decoration: none;
+				padding: 1em 3em;
+				display: block;
+				&:hover{
+				 background-color: #efefef
+				}
+			}
+		}
+
+		.dropdown-content-afterClick {
+			font-family: $gor-font-family;
+			background-color: white;
+			font-size: calculateRem(14px);
+			color: #4d5055;
+			width :calculateRem(223px); 
+			display: block;
 			position: absolute;
 			right: 0;
 			min-width: 5em;

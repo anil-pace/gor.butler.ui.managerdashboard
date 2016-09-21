@@ -1,0 +1,226 @@
+@import '../abstracts/functions';
+
+@font-face
+{
+  font-family: 'Source Sans Pro';
+  src: url('../src/assets/Source_Sans_Pro/SourceSansPro-Regular.ttf')  format('truetype')
+}
+.fill-back
+{
+  	background: #4D5055;	
+}
+.login-form
+{
+  	color:#A6A7A9;
+  	font-family: 'Source Sans Pro', sans-serif;
+  	overflow:hidden;
+  	padding:calculateRem(20px);
+  	.login-logo
+  	{
+  		margin:auto;
+  		margin-top:65px;
+  	}
+  	.login-lang:hover {
+			color:#FFFFFF;
+	}  	
+  	.login-lang
+  	{
+  		text-align:right;
+  		.lang-text
+  		{
+  			margin-right:10px;
+  			display:inline-block;
+  			margin-top:10px;
+  			vertical-align:top;
+  		}
+		.lang-drop {
+  			display:inline-block;
+  			width:calculateRem(174px);
+  			height:calculateRem(30px);
+  			background:transparent;
+  			text-align:left; 		
+  		.Dropdown-root 
+  		{
+  	      position: relative;
+ 		}
+		.Dropdown-control {
+		  position: relative;
+		  overflow: hidden;
+		  border:1px solid;
+		  border-radius: calculateRem(3px);
+		  box-sizing: border-box;
+		  cursor: default;
+		  outline: none;
+		  padding: calculateRem(8px) calculateRem(52px) calculateRem(8px) calculateRem(10px);
+ 		  transition: all 200ms ease;
+		}
+		.Dropdown-arrow {
+	  	  	  border-color: #A6A7A9 transparent transparent;
+			  border-style: solid;
+			  border-width: calculateRem(8px) calculateRem(7px) calculateRem(3px);
+			  content: ' ';
+			  display: block;
+			  height: 0;
+			  margin-top: -ceil(2.5);
+			  position: absolute;
+			  right: calculateRem(15px);
+			  top: calculateRem(14px);
+		}
+		.Dropdown-control:hover {
+  			box-shadow: calculateRem(2px) calculateRem(2px) calculateRem(2px) #888888;
+  			border: calculateRem(1px) solid #ccc;
+  			color:#FFFFFF;
+		}
+		.is-open .Dropdown-arrow {
+		    border-color: #FFFFFF transparent transparent;
+  			border-style: solid;
+  			border-width: calculateRem(8px) calculateRem(7px) calculateRem(3px);
+		}
+		.Dropdown-menu {
+  			border: 1px solid;
+  			border-radius:3px;
+  			box-shadow: 0 calculateRem(1px) 0 rgba(0, 0, 0, 0.06);
+  			box-sizing: border-box;
+  			margin-top: calculateRem(-1px);
+  			max-height: calculateRem(200px);
+  			overflow-y: auto;
+  			position: absolute;
+  			top: 100%;
+  			width: 100%;
+  			z-index: 1000;
+ 			-webkit-overflow-scrolling: touch;
+		}
+		.Dropdown-option {
+  			box-sizing: border-box;
+			color: #A6A7A9;;
+		    cursor: pointer;
+            display: block;
+            padding: calculateRem(8px) calculateRem(10px);		
+		}
+		.Dropdown-option.is-selected {
+		    font-weight:bold;
+		}
+		.Dropdown-option:hover {
+  			color: #FFFFFF;
+		}
+		.Dropdown-noresults {
+		  box-sizing: border-box;	
+		  color: #ccc;
+		  cursor: default;
+		  display: block;
+		  padding: calculateRem(8px) calculateRem(10px);
+		}
+
+		}
+
+  		
+		select
+  		{
+  			width:calculateRem(174px);
+  			height:calculateRem(30px);
+  			color:#cccccc;
+  			margin-left:10px;
+  			background:transparent;
+  			border-radius: 1px;
+  			border:1px solid;
+  			select:hover
+  			{
+  				color:#FFFFFF;  			
+  			}
+  		}
+  	}
+	.login-mid
+	{
+		
+		text-align:center;
+		background:#FFFFFF;
+        border: 1px solid;
+        border-radius:5px;
+		color: #979797;
+		width:36%;
+		min-height:calculateRem(392px);
+		margin:auto;
+		margin-top:calculateRem(40px);
+
+		.upper-box
+		{
+			 margin-bottom:calculateRem(20px);
+			 padding-top:calculateRem(40px);
+			 .login-head
+			 {
+				color:#4D5055;
+			 	font-size:calculateRem(45px);
+			 	font-weight:bold;
+			 }
+		}
+		.login-field
+		{
+			margin:auto;
+			text-align:left;
+			margin-top:calculateRem(20px);
+			padding:calculateRem(10px);
+			padding-left:calculateRem(15px);
+			width:70%;
+			background-color:#FFFFFF;
+			border-radius:3px;
+			border:1px solid #AAAAAA; 
+			.field{
+				border:none;
+				font-size:18px;
+				margin-left:calculateRem(10px);
+				width:80%;
+			}
+		}
+		.login-auth-error
+		{
+			display:none;
+			text-align:left;
+			color:#EC1C24;
+			font-size:18px;
+			text-align:center;
+			margin-top:10px;
+		}
+		.login-usr-error
+		{
+			display:none;
+			text-align:left;
+			color:#EC1C24;
+			font-size:18px;			
+			margin-top:10px;
+			margin-left:calculateRem(62px);
+		}
+		.login-btn
+		{
+ 			background: #F36F36;
+ 			color: #FFFFFF;
+ 			width:75%;
+ 			padding:calculateRem(10px);
+ 			margin:calculateRem(40px);
+ 			font-size:calculateRem(20px);
+			border-radius:3px;
+		}	
+		.login-fgt
+		{
+		 padding-bottom:40px;
+		}
+	}
+	a
+	{
+		text-decoration:underline;
+	}
+	.box-bottom-left
+	{
+		margin:auto;
+		margin-left:32%;
+		margin-top:calculateRem(10px);
+		display:inline;
+	}
+	.box-bottom-right
+	{
+		margin:auto;
+		margin-left:19%;
+		margin-top:calculateRem(10px);
+		display:inline;
+	}
+
+}
