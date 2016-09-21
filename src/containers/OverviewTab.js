@@ -19,22 +19,28 @@ class Overview extends React.Component{
 	{
     	super(props);
     }	
+
+
+
 	render(){
 		/**
 		 * Need to remove these hardcoded variables
 		 * 
 		 */
-
-		var item1={heading:'Items to Stock', value:'4,74,579', low:'4 PPS stocking 3,546 items/hr', logo:'iStock'};
-        var item2={heading:'Items to Audit', value:'3,74,519', low:'4 PPS auditing 1,546 items/hr', logo:'iAudit'};;
+		
+		
+		//this.formatContainerData('put');
+		//this.formatContainerData('audit');
+		//var putData=this.props.putData ;
+        //var auditData=this.props.auditData;//{heading:'Items to Audit', value:'3,74,519', low:'4 PPS auditing 1,546 items/hr', logo:'iAudit'};;
 
 		return (
 			<div className="gorWidgetWrap">
 				<div className="section group">
 					<div className="col span_2_of_4">
 
-						<PutStatusWidget items={item1}/>
-						<AuditStatusWidget items={item2}/>
+						<PutStatusWidget />
+						<AuditStatusWidget />
 
 					</div>
 					<div className="col span_2_of_4 gorNoML">
@@ -49,5 +55,14 @@ class Overview extends React.Component{
 		);
 	}
 };
+ 
+/*function mapStateToProps(state, ownProps){
+	return {
+        putData: state.putInfo.putData,
+        ppsData:state.ppsInfo.ppsData,
+        throughputData : state.throughputInfo.throughputData,
+        auditData: state.auditInfo.auditData
+    };
+}*/
 
-export default Overview ;
+export 	default Overview;

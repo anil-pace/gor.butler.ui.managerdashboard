@@ -15,6 +15,7 @@ export const WS_ONSEND = "WS_ONSEND";
 export const WS_URL = "wss://192.168.8.118/manager_api/wss";
 export const WS_INIT = "WS_INIT";
 export const WS_SUCCESS="Sucessfully logged in";
+export const WS_MOCK="WS_MOCK";
 /* Header constants */
 
 export const REQUEST_HEADER = "REQUEST_HEADER";
@@ -25,8 +26,20 @@ export const RECIEVE_ITEM_TO_STOCK = "RECIEVE_ITEM_TO_STOCK";
 /*Constants for performance widget*/
 export const RENDER_WIDGET = "RENDER_WIDGET";
 
+
+/*Parsing Constants*/
+export const PARSE_PPS = "pps_details";
+export const PARSE_BUTLERS = "butlers";
+export const PARSE_CHARGERS = "chargers";
+export const PARSE_ORDERS = "orders";
+export const PARSE_INVENTORY = "inventory";
+export const PARSE_PUT = "put_details";
+export const PARSE_PICK = "pick_details";
+export const PARSE_PPA_THROUGHPUT = "put_pick_audit_throughput";
+export const PARSE_AUDIT = "audit_details";
 /*Constants for stats widget*/
 export const RENDER_STATSWIDGET = "RENDER_STATSWIDGET";
+
 
 
 /*Constants for response type */

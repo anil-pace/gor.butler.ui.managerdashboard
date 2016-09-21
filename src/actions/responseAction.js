@@ -28,7 +28,7 @@ export function receiveChargersData(data){
 		data
 	}
 }
-export function receiveAuditData(data){
+export function receiveAuditData(data) {
 	
 	return{
 		type:AUDIT_DATA,
@@ -42,6 +42,9 @@ export function receivePutData(data){
 		data
 	}
 }
+
+
+
 export function receiveOrdersData(data){
 
 	return{

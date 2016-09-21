@@ -25,4 +25,11 @@ export function setWsAction(params){
 	}
 }
 
+export function setMockAction(params){
+	return {
+		type: params.type,
+		data: params.data
+	}
+}
+
 
