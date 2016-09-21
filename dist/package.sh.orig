@@ -8,7 +8,11 @@ case "$1" in
 	mkdir butler_md_alpha-$RELVSN
 	install -d butler_md_alpha-$RELVSN/opt/butler_md_alpha
 	# copying all the resources from the dist folder 
+<<<<<<< 3633d4864d371f07c7e42cc4db551b532ef11ae8
+	cp -R butler_md_alpha-$RELVSN/opt/butler_md_alpha
+=======
 	cp -R ./ butler_md_alpha-$RELVSN/opt/butler_md_alpha
+>>>>>>> For testing the new build on debian
 	install -d butler_md_alpha-$RELVSN/var/log/butler_md_alpha
 	install -d butler_md_alpha-$RELVSN/usr/local/bin/
 	install -d butler_md_alpha-$RELVSN/etc/butler_md_alpha
