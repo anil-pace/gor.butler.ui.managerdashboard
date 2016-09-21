@@ -3,7 +3,7 @@ import {Table, Column, Cell} from 'fixed-data-table';
 import DropdownTemp from '../../components/dropdown/dropdownTemp'
 import Dimensions from 'react-dimensions'
 import { FormattedMessage } from 'react-intl';
-import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from './commonCom';
+import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
 
 class PPStable extends React.Component {
   constructor(props) {

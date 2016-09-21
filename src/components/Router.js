@@ -48,8 +48,54 @@ class Routes extends React.Component{
 				        callback(null, require('../containers/systemTab').default);
 				      });
 				    }}
+					 > 
+					 <IndexRoute 
+					getComponent={(location, callback) => {
+				      require.ensure([], function (require) {
+				        callback(null, require('../containers/systemTabs/notificationTab').default);
+				      });
+				    }}
 					 />
-					
+					 	<Route name="butlerbots" path="/butlerbots"  
+						 getComponent={(location, callback) => {
+					      require.ensure([], function (require) {
+					        callback(null, require('../containers/systemTabs/butlerbotTab').default);
+					      });
+					    }}
+						 />
+
+						 <Route name="pps" path="/pps"  
+						 getComponent={(location, callback) => {
+					      require.ensure([], function (require) {
+					        callback(null, require('../containers/systemTabs/ppsTab').default);
+					      });
+					    }}
+						 />
+
+						 <Route name="chargingstation" path="/chargingstation"  
+						 getComponent={(location, callback) => {
+					      require.ensure([], function (require) {
+					        callback(null, require('../containers/systemTabs/chargingStationsTab').default);
+					      });
+					    }}
+						 />
+						 <Route name="notification" path="/notification"  
+						 getComponent={(location, callback) => {
+					      require.ensure([], function (require) {
+					        callback(null, require('../containers/systemTabs/notificationTab').default);
+					      });
+					    }}
+						 />
+					 </Route>
+
+					<Route name="users" path="/users"  
+					 getComponent={(location, callback) => {
+				      require.ensure([], function (require) {
+				        callback(null, require('../containers/usersTab').default);
+				      });
+				    }}
+					 />
+
 					<Route name="overview" path="/overview"  
 					 getComponent={(location, callback) => {
 				      require.ensure([], function (require) {

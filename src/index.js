@@ -38,28 +38,13 @@ ReactDOM.render(
 	
 	<Provider store={store}>
 	<IntlProvider messages={ translationMessages.en }>
-		<Router history={ hashHistory }>
-		<Route name="default" path="/"  component={App} />
-		<Route name="login" path="/login"  component={Login} />
-		<Route name="app" path="/md"  component={App} >
-			<IndexRoute component={ Overview } />
-			<Route name="system" path="/system"  component={SystemTab}>
-				<IndexRoute component={ Notifications } />
-				<Route name="butlerbots" path="/butlerbots"  component={ButlerBot}/>
-				<Route name="pps" path="/pps"  component={PPS}/>
-				<Route name="chargingstation" path="/chargingstation"  component={ChargingStations}/>
-				<Route name="notification" path="/notification"  component={Notifications}/>
-			</Route>
-			<Route name="orders" path="/orders"  component={OrdersTab} />
-			<Route name="inventory" path="/inventory"  component={InventoryTab} />
-			<Route name="users" path="/users"  component={UsersTab} />
-			<Route name="overview" path="/overview"  component={Overview} />
-		</Route>
-		</Router>
-    </IntlProvider>
-	</Provider>,
-	document.getElementById('container')
-);
+	<Routes />
+	</IntlProvider>
+	</Provider>
+,document.getElementById('container'))
+
+
+
 
 
 
