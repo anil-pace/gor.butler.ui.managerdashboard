@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import Tile2x from '../components/tile2x/Tile2x';
 import { connect } from 'react-redux' ;
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage,FormattedNumber,FormattedPlural } from 'react-intl';
 
 class PickStatusWidget extends React.Component{
 	/**
@@ -15,7 +15,20 @@ class PickStatusWidget extends React.Component{
         //console.log(this.props.ordersData);
     }	
     _parseProps (){
-        let statusClass='', statusLogo='', headingleft='',valueLeftStatus='',valueRightStatus='',textleft='',headingright='',textright='', statusleft='',statusright='',lowleft='',lowright='',logo='',items={};
+        let statusClass='', 
+        statusLogo='', 
+        headingleft='',
+        valueLeftStatus='',
+        valueRightStatus='',
+        textleft='',
+        headingright='',
+        textright='', 
+        statusleft='',
+        statusright='',
+        lowleft='',
+        lowright='',
+        logo='',
+        items={};
         
         headingleft=<FormattedMessage id="widget.pick.headingleft" description='Heading for pick status widget' 
             defaultMessage='Orders to fullfill'/>;
@@ -29,7 +42,11 @@ class PickStatusWidget extends React.Component{
             textleft=<FormattedMessage id="widget.pick.completed" description='Heading for pick status widget' 
             defaultMessage='Completed'/>;
 
-            lowleft=this.props.ordersData.avg+' Idle';
+            lowleft=<FormattedMessage id="widget.pick.status.idle" description='Throughput message' 
+                            defaultMessage='{count} PPS idle'
+                            values={{
+                                count: this.props.ppsData.totalAudit
+                            }}/>;
         }
         else
         {
@@ -39,13 +56,15 @@ class PickStatusWidget extends React.Component{
             defaultMessage='Time to cut-off'/>;
             
             textright=<FormattedMessage id="widget.pick.textright" description='Time remaining' 
-            defaultMessage='{wave_end}' values={{wave_end:this.props.ordersData.wave_end}}/>;
+            defaultMessage=' {wave_end}' values={{wave_end:this.props.ordersData.wave_end}}/>;
 
 
-            lowleft=<FormattedMessage id="pickWidget.lowleft" description='Heading for pick status widget' 
-            defaultMessage='{pps_count} PPS Opertaing at {pick_throughput} per/hr' values={{pps_count:10, pick_throughput:10}}/> 
-            
-            //statusright=this.props.ordersData.time_current;
+            lowleft=<FormattedMessage id="widget.pick.throughput" description='Throughput message' 
+                            defaultMessage='{count} PPS picking {throughput} items/hr'
+                            values={{
+                                count: this.props.ppsData.totalAudit,
+                                throughput:this.props.throughputData.audit_throughput
+                            }}/>;            
             
             lowright=<FormattedMessage id="widget.pick.lowright" description='Estimated time' 
             defaultMessage='Completing in {eta}' values={{eta:this.props.ordersData.eta}}/>;
@@ -60,9 +79,10 @@ class PickStatusWidget extends React.Component{
             else
             {
                 statusClass='gor-risk';  
+                statusLogo='header-yellow-alert-icon';
+                statusleft=<FormattedPlural id="widget.pick.statusRight" description='Heading for pick status widget' 
+            value={1} one='order at risk' other='orders at risk'/>
                 valueLeftStatus='gor-risk';          
-                statusleft=<FormattedMessage id="widget.pick.statusRight" description='Heading for pick status widget' 
-            defaultMessage='{count_risk} orders at risk' values={{count_risk:this.props.ordersData.count_risk}}/>
                 valueRightStatus='gor-risk';
             }
         }
@@ -81,7 +101,9 @@ class PickStatusWidget extends React.Component{
 function mapStateToProps(state, ownProps){
     
     return  {
-         "ordersData":state.ordersInfo.ordersData || {}
+        ordersData:state.ordersInfo.ordersData || {},
+        ppsData:state.ppsInfo.ppsData|| {},
+        throughputData : state.throughputInfo.throughputData|| {}
     }
 }
  export default connect(mapStateToProps)(PickStatusWidget);

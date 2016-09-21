@@ -55,5 +55,5 @@ plugins: [
   })
 ]
 }
-
+/*Note: Hot Reloading,webpack should not run on all files*/
 

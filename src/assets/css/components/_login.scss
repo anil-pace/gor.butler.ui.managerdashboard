@@ -18,7 +18,7 @@
   	.gor-login-logo
   	{
   		margin:auto;
-  		margin-top:calculateRem(100px);
+  		margin-top:calculateRem(50px);
   	}
   	.gor-login-lang:hover {
 			color:#FFFFFF;
@@ -149,8 +149,9 @@
 			 .gor-login-head
 			 {
 				color:#4D5055;
-			 	font-size:calculateRem(45px);
-			 	font-weight:bold;
+				opacity:100%;
+			 	font-size:calculateRem(48px);
+			 	font-family:'Source Sans Pro Bold', sans-serif;
 			 }
 		}
 		.gor-login-field

@@ -106,8 +106,8 @@ class Login extends React.Component{
             if(items[i].value === this.props.sLang)
                 sel=i;
         }
-        let usernamePlace=(<FormattedMessage id='login.placeholder.username' defaultMessage="Username" description="Placeholder for username input field"/>);
-        let passwordPlace=(<FormattedMessage id='login.placeholder.password' defaultMessage="Password" description="Placeholder for password input field"/>);
+        let usernamePlace=<FormattedMessage id='login.placeholder.username' defaultMessage="Username" description="Placeholder for username input field"/>;
+        let passwordPlace=<FormattedMessage id='login.placeholder.password' defaultMessage="Password" description="Placeholder for password input field"/>;
 
         return (
             <div className='gor-login-form'>
@@ -129,12 +129,12 @@ class Login extends React.Component{
                     <div className='gor-login-head'>
 
                     <FormattedMessage id='login.butler.title' 
-                        defaultMessage="BUTLER" description="Text for butler management Login form title"/>
+                        defaultMessage="Butler" description="Text for butler management Login form title"/>
                     
                     </div>
                     <p>
-
                     <FormattedMessage id='login.butler.manageInterface' 
+
                     defaultMessage="Management Interface"
                             description="Text for Management Interface"/>
 
