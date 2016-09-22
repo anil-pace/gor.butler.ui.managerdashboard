@@ -34,7 +34,7 @@ fi
 #
 do_start()
 {
-	 /opt/butler_md_alpha/bin/butler-md start
+	 /opt/butler_md_alpha/bin/butler-md-alpha start
 }
 
 #
@@ -42,7 +42,7 @@ do_start()
 #
 do_stop()
 {
-	 /opt/butler_md_alpha/bin/butler-md stop
+	 /opt/butler_md_alpha/bin/butler-md-alpha stop
 }
 
 
