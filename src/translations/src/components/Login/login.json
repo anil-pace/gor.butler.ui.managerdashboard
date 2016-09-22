@@ -15,7 +15,7 @@
     "defaultMessage": "BUTLER"
   },
   {
-    "id": "login.manageInterface",
+    "id": "login.title.manageInterface",
     "description": "Text for Management Interface",
     "defaultMessage": "Management Interface"
   }

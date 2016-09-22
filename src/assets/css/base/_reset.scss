@@ -20,7 +20,9 @@ table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, figcaption, figure, 
 footer, header, hgroup, nav, section,video {
     @include reset-styles;
+
 }
+
 
 body {
     line-height:1;

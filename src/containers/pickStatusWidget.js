@@ -10,7 +10,7 @@ class PickStatusWidget extends React.Component{
 	 * @return {[type]}
 	 */
 	constructor(props) 
-	{
+	{ 
     	super(props);
         //console.log(this.props.ordersData);
     }	

@@ -5,15 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/jest/bin/jest.js",
-    "json": "echo '=>JSON' && jsonparse src/assets/js/serverMessages/server_messages.json -o dist/assets/js/localization/",
     "webpack": "echo '=>Web-Pack' && webpack  --optimize-dedupe --display-error-details",
-    "build-sass": "echo '=>Build SASS' && node-sass --output-style expanded  $npm_package_config_srcCss $npm_package_config_destinationCss  ",
+    "build-sass": "echo '=>Build SASS' && node-sass  --output-style expanded $npm_package_config_srcCss  $npm_package_config_destinationCss  ",
     "watch-sass": "node-sass --output-style expanded  $npm_package_config_watchCssSrc $npm_package_config_watchCssDist -v",
     "copy": "echo '=>Copying...' && copy ./index.html ./dist/",
     "lint": "eslint src/**/*.js",
     "build-js": "npm run webpack",
     "watch:css": "onchange 'src/assets/css/**/*.scss' -- npm run build-sass ",
-    "build": "npm run build-sass && npm run build-js",
+    "build": " npm run build-js && npm run build-sass",
     "watch:js": "npm run build && onchange 'src/**/*.js' -- npm run build-js",
     "watch:all": "parallelshell 'npm run watch:css' 'npm run watch:js'"
   },
@@ -22,12 +21,12 @@
     "url": "git+https://himanshu-saraswat@bitbucket.org/gorcode/gor.butler.ui.managerdashboard.git"
   },
   "config": {
-    "destinationCss": "dist/bundle.css",
+    "destinationCss": "dist/assets/bundle.css",
     "srcCss": "src/assets/css/main.scss",
-    "destinationJs": "./dist/bundle.js",
+    "destinationJs": "./dist/assets/bundle.js",
     "srcJs": "src/index.js",
     "watchCssSrc": "src/assets/css/*.scss",
-    "watchCssDist": "dist/bundle.css"
+    "watchCssDist": "dist/assets/bundle.css"
   },
   "keywords": [
     "Manager",
@@ -53,7 +52,9 @@
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-2": "^6.13.0",
     "babelify": "^7.3.0",
+    "clean-webpack-plugin": "^0.1.10",
     "copy": "^0.3.0",
+    "copy-webpack-plugin": "^3.0.1",
     "d3": "^3.5.6",
     "d3-tip": "^0.7.1",
     "enzyme": "^2.4.1",
@@ -67,7 +68,7 @@
     "jest": "^13.2.3",
     "json-loader": "^0.5.4",
     "mkdirp": "^0.5.1",
-    "node-sass": "^3.8.0",
+    "node-sass": "^3.10.0",
     "npm": "^3.10.6",
     "onchange": "^2.5.0",
     "parallelshell": "^2.0.0",
