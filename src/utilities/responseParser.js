@@ -41,7 +41,7 @@ export function ResponseParse(store,res)
 				store.dispatch(receiveThroughputData(res));
 				break;		    
 			default:
-				store.dispatch(initData(res));
+				store.dispatch(initData(res));          //Default action
 			break;			
 	}
 }  

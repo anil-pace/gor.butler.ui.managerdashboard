@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import Tile2x from '../components/tile2x/Tile2x';
 import { connect } from 'react-redux' ;
-import { FormattedMessage,FormattedNumber,FormattedPlural } from 'react-intl';
+import { FormattedMessage,FormattedNumber,FormattedPlural,FormattedRelative } from 'react-intl';
 
 class PickStatusWidget extends React.Component{
 	/**
@@ -13,6 +13,9 @@ class PickStatusWidget extends React.Component{
 	{
     	super(props);
         //console.log(this.props.ordersData);
+    }
+    _tomillisecs(m){
+     
     }	
     _parseProps (){
         let statusClass='', 
@@ -20,7 +23,7 @@ class PickStatusWidget extends React.Component{
         headingleft='',
         valueLeftStatus='',
         valueRightStatus='',
-        textleft='',
+        textleft=0,
         headingright='',
         textright='', 
         statusleft='',
@@ -29,13 +32,14 @@ class PickStatusWidget extends React.Component{
         lowright='',
         logo='',
         ppsCount=0,
+        remTime=0,
+        eta=0,
         items={};
         
         headingleft=<FormattedMessage id="widget.pick.headingleft" description='Heading for pick status widget' 
             defaultMessage='Orders to fullfill'/>;
         logo=' iPick';
         ppsCount=this.props.ppsData.totalPick;
-
         textleft=this.props.ordersData.count_pending;
         
         if(!textleft)
@@ -57,8 +61,10 @@ class PickStatusWidget extends React.Component{
             headingright=<FormattedMessage id="widget.pick.headingright" description='Heading for pick status widget' 
             defaultMessage='Time to cut-off'/>;
             
+            remTime=this._tomillisecs(this.props.ordersData.cut_off);
+
             textright=<FormattedMessage id="widget.pick.textright" description='Time remaining' 
-            defaultMessage=' {wave_end}' values={{wave_end:this.props.ordersData.wave_end}}/>;
+            defaultMessage='{cut_off}' values={{cut_off:remTime}} />;
 
 
             lowleft=<FormattedMessage id="widget.pick.throughput" description='Throughput message' 
@@ -67,7 +73,7 @@ class PickStatusWidget extends React.Component{
                                 count: ppsCount,
                                 throughput:this.props.throughputData.pick_throughput
                             }}/>;            
-            
+            eta=this._tomillisecs(this.props.ordersData.eta);
             lowright=<FormattedMessage id="widget.pick.lowright" description='Estimated time' 
             defaultMessage='Completing in {eta}' values={{eta:this.props.ordersData.eta}}/>;
 
