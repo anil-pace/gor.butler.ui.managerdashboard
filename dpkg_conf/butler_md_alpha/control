@@ -1,0 +1,8 @@
+Package: butler-md
+Version: 1.0-4
+Section: base
+Priority: optional
+Architecture: all
+Maintainer: Grey Orange <support@greyorange.sg>
+Description:Manager Dashboard
+
