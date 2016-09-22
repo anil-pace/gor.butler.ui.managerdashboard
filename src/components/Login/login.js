@@ -111,6 +111,7 @@ class Login extends React.Component{
 
         return (
             <div className='gor-login-form'>
+
             <form action="#"  id = "loginForm" ref={node => { this.loginForm = node }} 
                 onSubmit={(e) => this._handleSubmit(e)}>
                 <div className='gor-login-lang'>

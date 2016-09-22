@@ -3,6 +3,7 @@ import ReactDOM  from 'react-dom';
 import rd3 from 'react-d3-library';
 import * as d3 from 'd3';
 import d3tip from 'd3-tip';
+import Dimensions from 'react-dimensions'
 
 const RD3Component = rd3.Component;
 
@@ -15,9 +16,7 @@ class Chart extends React.Component{
    }
    componentDidMount(){
     var component = this;
-    var widther = document.getElementById("chart_att").offsetWidth;
-    //var heighter = document.getElementById("chart_att").offsetHeight;
-
+    var widther = this.props.containerWidth;
     var margin = {top: 20, right: 20, bottom: 20, left: 40},
     width = widther - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
@@ -187,6 +186,6 @@ class Chart extends React.Component{
    )
  }
 };
-export default Chart ;
-//ReactDOM.render(React.createElement(Chart), document.getElementById('chart_dis'))
+export default Dimensions()(Chart) ;
+
 

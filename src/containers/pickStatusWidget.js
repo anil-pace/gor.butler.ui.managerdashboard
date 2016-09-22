@@ -15,7 +15,15 @@ class PickStatusWidget extends React.Component{
         //console.log(this.props.ordersData);
     }
     _tomillisecs(m){
-     
+     let hh=0,mm=0,timestr='';
+     hh=parseInt(m/60,10);
+     mm=m-(hh*60);
+
+     if(hh)
+        timestr+=hh+ 'h ';
+     timestr+=mm+ 'm ';   
+
+     return timestr;     
     }	
     _parseProps (){
         let statusClass='', 
@@ -75,7 +83,7 @@ class PickStatusWidget extends React.Component{
                             }}/>;            
             eta=this._tomillisecs(this.props.ordersData.eta);
             lowright=<FormattedMessage id="widget.pick.lowright" description='Estimated time' 
-            defaultMessage='Completing in {eta}' values={{eta:this.props.ordersData.eta}}/>;
+            defaultMessage='Completing in {eta}' values={{eta:eta}}/>;
 
             if(!this.props.ordersData.count_risk)
             {
