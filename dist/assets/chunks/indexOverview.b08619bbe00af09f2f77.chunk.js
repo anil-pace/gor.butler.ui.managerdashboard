@@ -1,6 +1,6 @@
 webpackJsonp([2,5],{
 
-/***/ 361:
+/***/ 363:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19,31 +19,31 @@ webpackJsonp([2,5],{
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _healthTabs = __webpack_require__(343);
+	var _healthTabs = __webpack_require__(344);
 
 	var _healthTabs2 = _interopRequireDefault(_healthTabs);
 
-	var _health = __webpack_require__(344);
+	var _health = __webpack_require__(345);
 
 	var _health2 = _interopRequireDefault(_health);
 
-	var _orderStatsWidget = __webpack_require__(352);
+	var _orderStatsWidget = __webpack_require__(353);
 
 	var _orderStatsWidget2 = _interopRequireDefault(_orderStatsWidget);
 
-	var _performanceWidget = __webpack_require__(358);
+	var _performanceWidget = __webpack_require__(360);
 
 	var _performanceWidget2 = _interopRequireDefault(_performanceWidget);
 
-	var _auditStatusWidget = __webpack_require__(362);
+	var _auditStatusWidget = __webpack_require__(364);
 
 	var _auditStatusWidget2 = _interopRequireDefault(_auditStatusWidget);
 
-	var _putStatusWidget = __webpack_require__(364);
+	var _putStatusWidget = __webpack_require__(366);
 
 	var _putStatusWidget2 = _interopRequireDefault(_putStatusWidget);
 
-	var _pickStatusWidget = __webpack_require__(365);
+	var _pickStatusWidget = __webpack_require__(367);
 
 	var _pickStatusWidget2 = _interopRequireDefault(_pickStatusWidget);
 
@@ -127,7 +127,7 @@ webpackJsonp([2,5],{
 
 /***/ },
 
-/***/ 362:
+/***/ 364:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -146,13 +146,13 @@ webpackJsonp([2,5],{
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _Tilex = __webpack_require__(363);
+	var _Tilex = __webpack_require__(365);
 
 	var _Tilex2 = _interopRequireDefault(_Tilex);
 
 	var _reactRedux = __webpack_require__(191);
 
-	var _reactIntl = __webpack_require__(217);
+	var _reactIntl = __webpack_require__(218);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -239,7 +239,7 @@ webpackJsonp([2,5],{
 
 /***/ },
 
-/***/ 363:
+/***/ 365:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -323,7 +323,7 @@ webpackJsonp([2,5],{
 
 /***/ },
 
-/***/ 364:
+/***/ 366:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -342,13 +342,13 @@ webpackJsonp([2,5],{
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _Tilex = __webpack_require__(363);
+	var _Tilex = __webpack_require__(365);
 
 	var _Tilex2 = _interopRequireDefault(_Tilex);
 
 	var _reactRedux = __webpack_require__(191);
 
-	var _reactIntl = __webpack_require__(217);
+	var _reactIntl = __webpack_require__(218);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -436,7 +436,7 @@ webpackJsonp([2,5],{
 
 /***/ },
 
-/***/ 365:
+/***/ 367:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -455,13 +455,13 @@ webpackJsonp([2,5],{
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _Tile2x = __webpack_require__(366);
+	var _Tile2x = __webpack_require__(368);
 
 	var _Tile2x2 = _interopRequireDefault(_Tile2x);
 
 	var _reactRedux = __webpack_require__(191);
 
-	var _reactIntl = __webpack_require__(217);
+	var _reactIntl = __webpack_require__(218);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -562,7 +562,7 @@ webpackJsonp([2,5],{
 
 /***/ },
 
-/***/ 366:
+/***/ 368:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

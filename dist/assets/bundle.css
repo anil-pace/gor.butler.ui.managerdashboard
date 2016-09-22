@@ -74,7 +74,7 @@ input, select {
 /*Default Fonts*/
 @font-face {
   font-family: 'Source Sans Pro';
-  src: url("fonts/SourceSansPro-Regular.ttf") format("truetype"), url("fonts/SourceSansPro-Semibold.ttf") format("truetype"), url("fonts/SourceSansPro-Regular.ttf") format("truetype"), url("fonts/SourceSansPro-Regular.ttf") format("truetype"), url("fonts/SourceSansPro-Regular.ttf") format("truetype"), url("fonts/SourceSansPro-Regular.ttf") format("truetype");
+  src: url("fonts/source-sans-pro/SourceSansPro-Regular.ttf") format("truetype"), url("fonts/source-sans-pro/SourceSansPro-Semibold.ttf") format("truetype"), url("fonts/source-sans-pro/SourceSansPro-Regular.ttf") format("truetype"), url("fonts/source-sans-pro/SourceSansPro-Regular.ttf") format("truetype"), url("fonts/source-sans-pro/SourceSansPro-Regular.ttf") format("truetype"), url("fonts/source-sans-pro/SourceSansPro-Regular.ttf") format("truetype");
 }
 
 body {
@@ -631,11 +631,6 @@ body {
   background: #fc3838;
 }
 
-@font-face {
-  font-family: 'Source Sans Pro';
-  src: url("../src/assets/Source_Sans_Pro/SourceSansPro-Regular.ttf") format("truetype");
-}
-
 body {
   background: #F2F2F2;
   font-family: 'Source Sans Pro', sans-serif;
@@ -948,11 +943,6 @@ body {
   fill: white;
   font: 20px sans-serif;
   text-anchor: end;
-}
-
-@font-face {
-  font-family: 'Source Sans Pro';
-  src: url("../src/assets/Source_Sans_Pro/SourceSansPro-Regular.ttf") format("truetype");
 }
 
 .fill-back {

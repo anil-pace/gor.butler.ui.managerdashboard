@@ -11,9 +11,9 @@ module.exports = {
     vendor: ["react", "react-dom","react-redux","react-intl-redux","redux","react-d3-library","d3","d3-tip"]
   },
   output: { 
-    path: __dirname, 
-    filename: 'dist/assets/bundle.[hash].js',
-    chunkFilename: 'dist/assets/chunks/[name].[hash].chunk.js'
+    path: __dirname+"/dist", 
+    filename: 'assets/bundle.[hash].js',
+    chunkFilename: 'assets/chunks/[name].[hash].chunk.js'
    },
   module: {
   loaders: [
@@ -45,7 +45,7 @@ module.exports = {
 },
 plugins: [
   // Do not change the sequence
-  new webpack.optimize.CommonsChunkPlugin('vendor',"dist/assets/vendor.bundle.js"),
+  new webpack.optimize.CommonsChunkPlugin('vendor',"assets/vendor.bundle.js"),
   new webpack.optimize.CommonsChunkPlugin('common.js'),
   //End
   new webpack.DefinePlugin({
@@ -56,15 +56,16 @@ plugins: [
     template: 'index.template.html',
     inject: 'body',
   }),
-  new CleanWebpackPlugin(['dist/assets'], {
+  new CleanWebpackPlugin(['assets'], {
       root: '/',
       verbose: true, 
       dry: false
     }),
   new CopyWebpackPlugin([
 
-      { from: 'src/assets/images', to: 'dist/assets/images' },
-      { from: 'src/assets/css/fonts', to: 'dist/assets/fonts' }
+      { from: 'src/assets/images', to: 'assets/images' },
+      { from: 'src/assets/css/fonts', to: 'assets/fonts' },
+      { from: 'index.html', to: '' }
 
     ])
 ]
