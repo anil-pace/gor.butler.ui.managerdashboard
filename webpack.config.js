@@ -1,6 +1,8 @@
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var CleanWebpackPlugin = require('clean-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
 
@@ -10,8 +12,8 @@ module.exports = {
   },
   output: { 
     path: __dirname, 
-    filename: 'dist/bundle.[hash].js',
-    chunkFilename: 'dist/chunks/[name].[hash].chunk.js'
+    filename: 'dist/assets/bundle.[hash].js',
+    chunkFilename: 'dist/assets/chunks/[name].[hash].chunk.js'
    },
   module: {
   loaders: [
@@ -31,9 +33,10 @@ module.exports = {
       // Options to configure babel with
       query: {
         presets: ['es2015', 'stage-1', 'react'],
-        plugins: ['transform-runtime',["react-intl", {
-                "enforceDescriptions": false
-          }]
+        plugins:[
+                  ['react-intl', {
+                  'messagesDir': './src/translations/'
+             }]
         ]
       }
     },
@@ -42,7 +45,7 @@ module.exports = {
 },
 plugins: [
   // Do not change the sequence
-  new webpack.optimize.CommonsChunkPlugin('vendor',"dist/vendor.bundle.js"),
+  new webpack.optimize.CommonsChunkPlugin('vendor',"dist/assets/vendor.bundle.js"),
   new webpack.optimize.CommonsChunkPlugin('common.js'),
   //End
   new webpack.DefinePlugin({
@@ -52,7 +55,18 @@ plugins: [
   new HtmlWebpackPlugin({
     template: 'index.template.html',
     inject: 'body',
-  })
+  }),
+  new CleanWebpackPlugin(['dist/assets'], {
+      root: '/',
+      verbose: true, 
+      dry: false
+    }),
+  new CopyWebpackPlugin([
+
+      { from: 'src/assets/images', to: 'dist/assets/images' },
+      { from: 'src/assets/css/fonts', to: 'dist/assets/fonts' }
+
+    ])
 ]
 }
 /*Note: Hot Reloading,webpack should not run on all files*/
