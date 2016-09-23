@@ -16,9 +16,7 @@
     "watch:js": "npm run build && onchange 'src/**/*.js' -- npm run build-js",
     "watch:all": "parallelshell 'npm run watch:css' 'npm run watch:js'"
   },
-  "pre-commit": [
-    "lint","test"
-  ],
+  
   "repository": {
     "type": "git",
     "url": "git+https://himanshu-saraswat@bitbucket.org/gorcode/gor.butler.ui.managerdashboard.git"
@@ -75,7 +73,6 @@
     "npm": "^3.10.6",
     "onchange": "^2.5.0",
     "parallelshell": "^2.0.0",
-    "pre-commit": "^1.1.3",
     "react": "^15.3.1",
     "react-addons-test-utils": "^15.2.0",
     "react-d3-library": "^1.1.7",
