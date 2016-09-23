@@ -1,6 +1,6 @@
 import React from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
-import DropdownTemp from '../../components/dropdown/dropdownTemp'
+import DropdownTable from '../../components/dropdown/dropdownTable'
 import Dimensions from 'react-dimensions'
 import { FormattedMessage } from 'react-intl';
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
@@ -87,16 +87,16 @@ class PPStable extends React.Component {
     var {sortedDataList, colSortDirs,columnWidths,isChecked,renderDropD} = this.state;
     console.log(this.state)
     const item = [
-    { value: 'on/off', label: 'On/Off' },
-    { value: 'on', label: 'On' },
-    { value: 'off', label: 'Off' },
+    { value: 'put', label: 'Put' },
+    { value: 'pick', label: 'Pick' },
+    { value: 'audit', label: 'Audit' }
     ];
     var checkState = this.handleChange.bind(this);
     console.log(this.props.containerHeight)
     console.log(this.state);
     var drop;
     if(this.state.renderDropD===true) {
-      drop= <DropdownTemp items={item}/>;
+      drop = <DropdownTable  styleClass={'gorDataTableDrop'} placeholder="Change PPS mode" items={item}/>;
     }
 
     else {
@@ -178,7 +178,7 @@ class PPStable extends React.Component {
             <SortHeaderCell>
               <FormattedMessage id="PPS.table.operatingMode" description="operatingMode for PPS" 
               defaultMessage ="OPERATING MODE"/>
-              <div className="gorToolHeaderSubText"> 3 Not set, 4 Audit, 3 Pick, 2 Put</div>
+              <div className="gorToolHeaderSubText"> 0 Not set, 1 Audit, 1 Pick, 0 Put</div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}

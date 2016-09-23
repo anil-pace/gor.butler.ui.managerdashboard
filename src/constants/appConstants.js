@@ -37,6 +37,7 @@ export const PARSE_PUT = "put_details";
 export const PARSE_PICK = "pick_details";
 export const PARSE_PPA_THROUGHPUT = "put_pick_audit_throughput";
 export const PARSE_AUDIT = "audit_details";
+export const SYSTEM_CHARGERS_DETAILS = "system_chargers_details";
 /*Constants for stats widget*/
 export const RENDER_STATSWIDGET = "RENDER_STATSWIDGET";
 
@@ -51,6 +52,10 @@ export const ORDERS_DATA = "ORDERS_DATA";
 export const INVENTORY_DATA = "INVENTORY_DATA";
 export const CHARGERS_DATA = "CHARGERS_DATA";
 export const THROUGHPUT_DATA="THROUGHPUT_DATA";
+export const HISTOGRAM_DATA = "HISTOGRAM_DATA";
+export const CHARGERS_DETAIL = "CHARGERS_DETAIL";
+export const BUTLERS_DETAIL = "BUTLERS_DETAIL";
+export const PPS_DETAIL  = "PPS_DETAIL";
 
 /*Constants for type of AJAX call*/
 export const AUTH_LOGIN = "AUTH_LOGIN";

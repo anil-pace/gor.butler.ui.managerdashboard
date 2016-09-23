@@ -1,6 +1,6 @@
 import React from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
-import DropdownTemp from '../../components/dropdown/dropdownTemp'
+import DropdownTable from '../../components/dropdown/dropdownTable'
 import Dimensions from 'react-dimensions'
 import { FormattedMessage } from 'react-intl';
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
@@ -25,8 +25,7 @@ class ChargingStationsTable extends React.Component {
         status: columnWidth,
         dockedBots: columnWidth
       },
-      isChecked:temp,
-      renderDropD: false,
+      
     };
     this._onSortChange = this._onSortChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
@@ -50,26 +49,7 @@ class ChargingStationsTable extends React.Component {
       sortedDataList: new DataListWrapper(filterIndex(e,this._dataList), this._dataList),
     });
   }
-  handleChange(columnKey,rowIndex) {
-    console.log("checked");
-    console.log(columnKey)
-    console.log(rowIndex)
-    var showDropdown=false;
-    var checkedState=this.state.isChecked;
-    if(checkedState[rowIndex] === true) {
-      checkedState[rowIndex] = false;
-    }
-    else {
-      checkedState[rowIndex] = true;
-    }
-    for (var i = checkedState.length - 1; i >= 0; i--) {
-      if(checkedState[i]===true) {
-        showDropdown=true;
-      }
-    }
-    this.setState({isChecked:checkedState});
-    this.setState({renderDropD:showDropdown});    
-  }
+  
   
   _onSortChange(columnKey, sortDir) {
     var sortIndexes = this._defaultSortIndexes.slice();
@@ -82,24 +62,11 @@ class ChargingStationsTable extends React.Component {
   }
   render() {
     
-    var {sortedDataList, colSortDirs,columnWidths,isChecked,renderDropD} = this.state;
-    console.log(this.state)
+    var {sortedDataList, colSortDirs,columnWidths} = this.state;
     const item = [
-    { value: 'on/off', label: 'On/Off' },
     { value: 'on', label: 'On' },
     { value: 'off', label: 'Off' },
     ];
-    var checkState = this.handleChange.bind(this);
-    console.log(this.props.containerHeight)
-    console.log(this.state);
-    var drop;
-    if(this.state.renderDropD===true) {
-      drop = <DropdownTemp items={item}/>;
-    }
-
-    else {
-      drop = <div/>;
-    }
 
     return (
       <div className="gorTableMainContainer">
@@ -109,9 +76,6 @@ class ChargingStationsTable extends React.Component {
                <FormattedMessage id="ChargingStations.table.heading" description="Heading for ChargingStations" 
               defaultMessage ="CHARGING STATIONS"/>
               <div className="gorToolHeaderSubText"> 2 selected </div>
-            </div>
-            <div className="gorToolBarDropDown">
-              {drop}
             </div>
           </div>
         <div className="filterWrapper">  
@@ -138,14 +102,14 @@ class ChargingStationsTable extends React.Component {
           columnKey="id"
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
-              sortDir={colSortDirs.id}> <input type="checkbox" onChange={this.handlChange} />
+              sortDir={colSortDirs.id}>
               <div className="gorToolHeaderEl">
               <div className="gorToolHeaderEl"> {sortedDataList.getSize()} STATION ID </div>
               <div className="gorToolHeaderSubText"> Total:{sortedDataList.getSize()} </div>
               </div>
             </SortHeaderCell>
           }
-          cell={  <ComponentCell data={sortedDataList} checkState={checkState} />}
+          cell={  <TextCell data={sortedDataList}/>}
           fixed={true}
           width={columnWidths.id}
           isResizable={true}
@@ -159,10 +123,7 @@ class ChargingStationsTable extends React.Component {
               defaultMessage ="STATUS"/> 
               </div>
               <div>
-              <div className="statuslogoWrap">
-              <div className="header-red-alert-icon gorToolHeaderEl"/>
-              </div>
-              <div className="gorToolHeaderEl alertState"> 3 Alerts</div>
+              <div className="gorToolHeaderSubText"> {this.props.items.length} Online</div>
               </div>
             </SortHeaderCell>
           }
@@ -177,7 +138,7 @@ class ChargingStationsTable extends React.Component {
             <SortHeaderCell>
               <FormattedMessage id="ChargingStations.table.operatingMode" description="operatingMode for ChargingStations" 
               defaultMessage ="OPERATING MODE"/>
-              <div className="gorToolHeaderSubText"> 15 bots connected</div>
+              <div className="gorToolHeaderSubText"> {this.props.connectedBots} bots connected</div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}

@@ -972,8 +972,8 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 }
 
 .public_fixedDataTableCell_cellContent {
-  padding: 8px;
-  padding-right: 9px;
+  padding: 5px 8px 8px 8px;
+  
 }
 
 .public_fixedDataTableCell_columnResizerKnob {
@@ -1110,7 +1110,7 @@ padding-top: 6px;
 .gorToolBarDropDown {
 padding-left: 10px;
   display: inline-block;
-  vertical-align: 12px;
+  vertical-align: 8px;
 }
 
 .gorToolBarWrap {
@@ -1160,7 +1160,7 @@ color: #000000;
 input[type="checkbox"]{
   width: 30px; 
   height: 15px;
-  zoom: 1.1; 
+  zoom: 1.4; 
 }
 
 .statuslogoWrap {
@@ -1174,7 +1174,7 @@ input[type="checkbox"]{
 
 .gorDataTableDrop {
         display:inline-block;
-        width:calculateRem(174px);
+        width:auto;
         height:calculateRem(30px);
         background:transparent;
         text-align:left;    
@@ -1184,7 +1184,6 @@ input[type="checkbox"]{
     }
     .Dropdown-control {
       position: relative;
-      overflow: hidden;
       border:1px solid;
       border-radius: calculateRem(3px);
       box-sizing: border-box;
@@ -1192,6 +1191,7 @@ input[type="checkbox"]{
       outline: none;
       padding: calculateRem(8px) calculateRem(52px) calculateRem(8px) calculateRem(10px);
       transition: all 200ms ease;
+      border-color: #aaaaaa;
     }
     .Dropdown-arrow {
             border-color: #A6A7A9 transparent transparent;
@@ -1208,8 +1208,7 @@ input[type="checkbox"]{
     .Dropdown-control:hover {
         box-shadow: calculateRem(2px) calculateRem(2px) calculateRem(2px) #888888;
         border: calculateRem(1px) solid #ccc;
-        color:#FFFFFF;
-    }
+     }
     .is-open .Dropdown-arrow {
         border-color: #FFFFFF transparent transparent;
         border-style: solid;
@@ -1249,5 +1248,4 @@ input[type="checkbox"]{
       display: block;
       padding: calculateRem(8px) calculateRem(10px);
     }
-
-    }
+}

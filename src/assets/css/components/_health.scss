@@ -34,7 +34,7 @@
 			background: #ec1c24;
 			width: calculateRem(28px);
 			height: calculateRem(18px);
-			border-radius: 40%;
+			border-radius: calculateRem(15px);
 			color: #ffffff;
 			font-family: "source sans pro";
 			font-weight: bold;
@@ -47,7 +47,7 @@
 			background: #ffffff;
 			width: calculateRem(28px);
 			height: calculateRem(18px);
-			border-radius: 40%;
+			border-radius:calculateRem(15px);
 			color: #666666;
 			font-family: "source sans pro";
 			border-style: solid;
@@ -63,7 +63,7 @@
 			background: #ffffff;
 			width: calculateRem(28px);
 			height: calculateRem(18px);
-			border-radius: 40%;
+			border-radius: calculateRem(15px);
 			color: #666666;
 			font-family: "source sans pro";
 			border-style: solid;
@@ -78,7 +78,7 @@
 			background: #ffffff;
 			width: calculateRem(30px);
 			height: calculateRem(18px);
-			border-radius: 40%;
+			border-radius: calculateRem(15px);
 			color: #666666;
 			font-family: "source sans pro";
 			border-style: solid;

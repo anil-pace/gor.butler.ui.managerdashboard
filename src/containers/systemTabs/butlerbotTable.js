@@ -1,6 +1,6 @@
 import React from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
-import DropdownTemp from '../../components/dropdown/dropdownTemp'
+import DropdownTable from '../../components/dropdown/dropdownTable'
 import Dimensions from 'react-dimensions'
 import { FormattedMessage } from 'react-intl';
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
@@ -26,10 +26,8 @@ class ButlerBotTable extends React.Component {
         current: columnWidth,
         msu: columnWidth,
         location: columnWidth,
-        direction: columnWidth
+        voltage: columnWidth
       },
-      isChecked:temp,
-      renderDropD: false,
     };
     this._onSortChange = this._onSortChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
@@ -53,26 +51,7 @@ class ButlerBotTable extends React.Component {
       sortedDataList: new DataListWrapper(filterIndex(e,this._dataList), this._dataList),
     });
   }
-  handleChange(columnKey,rowIndex) {
-    console.log("checked");
-    console.log(columnKey)
-    console.log(rowIndex)
-    var showDropdown=false;
-    var checkedState=this.state.isChecked;
-    if(checkedState[rowIndex] === true) {
-      checkedState[rowIndex] = false;
-    }
-    else {
-      checkedState[rowIndex] = true;
-    }
-    for (var i = checkedState.length - 1; i >= 0; i--) {
-      if(checkedState[i]===true) {
-        showDropdown=true;
-      }
-    }
-    this.setState({isChecked:checkedState});
-    this.setState({renderDropD:showDropdown});    
-  }
+  
   handlChange(columnKey,rowIndex) {
     console.log("checked");
     console.log(columnKey)
@@ -89,24 +68,7 @@ class ButlerBotTable extends React.Component {
   }
   render() {
     
-    var {sortedDataList, colSortDirs,columnWidths,isChecked,renderDropD} = this.state;
-    console.log(this.state)
-    const item = [
-    { value: 'on/off', label: 'On/Off' },
-    { value: 'on', label: 'On' },
-    { value: 'off', label: 'Off' },
-    ];
-    var checkState = this.handleChange.bind(this);
-    console.log(this.props.containerHeight)
-    console.log(this.state);
-    var drop;
-    if(this.state.renderDropD===true) {
-      drop= <DropdownTemp items={item}/>;
-    }
-
-    else {
-      drop = <div/>;
-    }
+    var {sortedDataList, colSortDirs,columnWidths} = this.state;  
     return (
       <div className="gorTableMainContainer">
         <div className="gorToolBar">
@@ -115,9 +77,6 @@ class ButlerBotTable extends React.Component {
                <FormattedMessage id="butlerBot.table.heading" description="Heading for butlerbot" 
               defaultMessage ="BUTLER BOTS"/>
               <div className="gorToolHeaderSubText"> 2 selected </div>
-            </div>
-            <div className="gorToolBarDropDown">
-              {drop}
             </div>
           </div>
         <div className="filterWrapper">  
@@ -137,20 +96,20 @@ class ButlerBotTable extends React.Component {
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
         width={this.props.containerWidth}
-        height={this.props.containerHeight}
+        height={500}
         {...this.props}>
         <Column
           columnKey="id"
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
-              sortDir={colSortDirs.id}> <input type="checkbox" onChange={this.handlChange} />
+              sortDir={colSortDirs.id}> 
               <div className="gorToolHeaderEl">
               <div className="gorToolHeaderEl"> {sortedDataList.getSize()} BOT </div>
               <div className="gorToolHeaderSubText"> Total:{sortedDataList.getSize()} </div>
               </div>
             </SortHeaderCell>
           }
-          cell={  <ComponentCell data={sortedDataList} checkState={checkState} />}
+          cell={  <TextCell data={sortedDataList}/>}
           fixed={true}
           width={columnWidths.id}
           isResizable={true}
@@ -218,16 +177,16 @@ class ButlerBotTable extends React.Component {
           isResizable={true}
         />
         <Column
-          columnKey="direction"
+          columnKey="voltage"
           header={
             <SortHeaderCell >
-               <FormattedMessage id="butlerBot.table.direction" description="Direction for butlerbot" 
-              defaultMessage ="DIRECTION"/> 
+               <FormattedMessage id="butlerBot.table.voltage" description="voltage for butlerbot" 
+              defaultMessage ="VOLTAGE"/> 
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList}  />}
           fixed={true}
-          width={columnWidths.direction}
+          width={columnWidths.voltage}
           isResizable={true}
         />
       </Table>

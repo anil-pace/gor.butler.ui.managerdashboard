@@ -305,7 +305,7 @@ body {
   background: #ec1c24;
   width: 1.75rem;
   height: 1.125rem;
-  border-radius: 40%;
+  border-radius: 0.9375rem;
   color: #ffffff;
   font-family: "source sans pro";
   font-weight: bold;
@@ -317,7 +317,7 @@ body {
   background: #ffffff;
   width: 1.75rem;
   height: 1.125rem;
-  border-radius: 40%;
+  border-radius: 0.9375rem;
   color: #666666;
   font-family: "source sans pro";
   border-style: solid;
@@ -331,7 +331,7 @@ body {
   background: #ffffff;
   width: 1.75rem;
   height: 1.125rem;
-  border-radius: 40%;
+  border-radius: 0.9375rem;
   color: #666666;
   font-family: "source sans pro";
   border-style: solid;
@@ -345,7 +345,7 @@ body {
   background: #ffffff;
   width: 1.875rem;
   height: 1.125rem;
-  border-radius: 40%;
+  border-radius: 0.9375rem;
   color: #666666;
   font-family: "source sans pro";
   border-style: solid;
@@ -2138,8 +2138,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 }
 
 .public_fixedDataTableCell_cellContent {
-  padding: 8px;
-  padding-right: 9px;
+  padding: 5px 8px 8px 8px;
 }
 
 .public_fixedDataTableCell_columnResizerKnob {
@@ -2274,7 +2273,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .gorToolBarDropDown {
   padding-left: 10px;
   display: inline-block;
-  vertical-align: 12px;
+  vertical-align: 8px;
 }
 
 .gorToolBarWrap {
@@ -2323,7 +2322,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 input[type="checkbox"] {
   width: 30px;
   height: 15px;
-  zoom: 1.1;
+  zoom: 1.4;
 }
 
 .statuslogoWrap {
@@ -2337,7 +2336,7 @@ input[type="checkbox"] {
 
 .gorDataTableDrop {
   display: inline-block;
-  width: 10.875rem;
+  width: auto;
   height: 1.875rem;
   background: transparent;
   text-align: left;
@@ -2349,7 +2348,6 @@ input[type="checkbox"] {
 
 .gorDataTableDrop .Dropdown-control {
   position: relative;
-  overflow: hidden;
   border: 1px solid;
   border-radius: 0.1875rem;
   box-sizing: border-box;
@@ -2357,6 +2355,7 @@ input[type="checkbox"] {
   outline: none;
   padding: 0.5rem 3.25rem 0.5rem 0.625rem;
   transition: all 200ms ease;
+  border-color: #aaaaaa;
 }
 
 .gorDataTableDrop .Dropdown-arrow {
@@ -2375,7 +2374,6 @@ input[type="checkbox"] {
 .gorDataTableDrop .Dropdown-control:hover {
   box-shadow: 0.125rem 0.125rem 0.125rem #888888;
   border: 0.0625rem solid #ccc;
-  color: #FFFFFF;
 }
 
 .gorDataTableDrop .is-open .Dropdown-arrow {

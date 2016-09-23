@@ -29,7 +29,7 @@ function _getPPSdata(link) {
 		let ppsStopped = ppsInactiveState;
 		let ppsError = 0;
 		const pps_data = [
-		{ component:{componentNumber: ppsTotal, componentType: 'PPS'}, states:{stoppedState: ppsError, onState: ppsOn, errorState: ppsError} }
+		{ component:{componentNumber: ppsTotal, componentType: 'PPS'}, states:{offState: ppsError, onState: ppsOn, errorState: ppsError} }
 		]
 		return pps_data;
 } 
@@ -60,7 +60,7 @@ function _getButlerdata(link) {
 		let butlerError = 0;
 		let butlerOn = butlerPickPutState + butlerIdleState +  butlerAuditState;
 		const butler_data = [
-		{ component:{componentNumber: butlerTotal, componentType: 'Butler bots'}, states:{stoppedState: butlerStopped, onState: butlerOn, errorState: butlerError} }
+		{ component:{componentNumber: butlerTotal, componentType: 'Butler bots'}, states:{offState: butlerStopped, onState: butlerOn, errorState: butlerError} }
 		]
 		return butler_data;
 } 
@@ -78,7 +78,7 @@ function _getChargingdata(link) {
 		let chargersStopped = disconnected;
 		let chargersError = 0;
 		const charging_data = [
-		{ component:{componentNumber: totalChargers, componentType: 'Charging Stations'}, states:{stoppedState: chargersError , onState: connected, errorState: disconnected} }
+		{ component:{componentNumber: totalChargers, componentType: 'Charging Stations'}, states:{offState: chargersError , onState: connected, errorState: disconnected} }
 		]
 		return charging_data;
 } 

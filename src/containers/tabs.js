@@ -28,10 +28,11 @@ class Tabs extends React.Component{
     const item5 = [
       { tab: 'USERS', Status: '35 users logged in', currentState:'gorOffline' }
     ]
+     var temp = "krishna";
 		return (
 		<div className="gorTabs gorMainBlock">
 		<Link to="/overview">
-			<Tab items={item1}/>
+			<Tab items={item1} temp={temp}/>
 		</Link>
 
 		<Link to="/system">
