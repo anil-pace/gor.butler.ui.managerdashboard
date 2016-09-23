@@ -45,8 +45,13 @@ module.exports = {
 },
 plugins: [
   // Do not change the sequence
+<<<<<<< 24bf160441fe8669fea7e3efd11957367495e961
+  new webpack.optimize.CommonsChunkPlugin('vendor',"assets/vendor.bundle.js", Infinity),
+  new webpack.optimize.CommonsChunkPlugin('common.js', Infinity),
+=======
   new webpack.optimize.CommonsChunkPlugin('vendor',"assets/vendor.bundle.js"),
   new webpack.optimize.CommonsChunkPlugin('common.js',"assets/"),
+>>>>>>> - fixing webpackJsonp issue in production build -2
   //End
   new webpack.DefinePlugin({
     MOCK: true
