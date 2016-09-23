@@ -16,7 +16,6 @@
     "watch:js": "npm run build && onchange 'src/**/*.js' -- npm run build-js",
     "watch:all": "parallelshell 'npm run watch:css' 'npm run watch:js'"
   },
-  
   "repository": {
     "type": "git",
     "url": "git+https://himanshu-saraswat@bitbucket.org/gorcode/gor.butler.ui.managerdashboard.git"
