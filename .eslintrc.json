@@ -1,4 +1,4 @@
-module.exports = {
+{
     "env": {
         "browser": true,
         "commonjs": true,
@@ -16,21 +16,18 @@ module.exports = {
         "react"
     ],
     "rules": {
-        "indent": [
-            "error",
-            "tab"
-        ],
+       
         "linebreak-style": [
             "error",
             "unix"
         ],
-        "quotes": [
-            "error",
-            "double"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ]
+        "quotes":"off",
+        "semi": "off",
+        "indent":"off",
+        "no-console": "error",
+        "no-debugger": "error",
+        "no-unused-vars": "error",
+        "no-undefined": "error"
+
     }
-};
+}
