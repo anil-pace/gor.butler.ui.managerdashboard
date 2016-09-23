@@ -46,7 +46,7 @@ module.exports = {
 plugins: [
   // Do not change the sequence
   new webpack.optimize.CommonsChunkPlugin('vendor',"assets/vendor.bundle.js"),
-  new webpack.optimize.CommonsChunkPlugin('common.js',"assets/"),
+  new webpack.optimize.CommonsChunkPlugin('common.js',"assets/common.js"),
   //End
   new webpack.DefinePlugin({
     MOCK: true
