@@ -1,6 +1,6 @@
 webpackJsonp([2,5],{
 
-/***/ 363:
+/***/ 469:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9,7 +9,25 @@ webpackJsonp([2,5],{
 		value: true
 	});
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	var _getPrototypeOf = __webpack_require__(416);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(420);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(421);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(422);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(441);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
 
 	var _react = __webpack_require__(20);
 
@@ -19,56 +37,45 @@ webpackJsonp([2,5],{
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _healthTabs = __webpack_require__(344);
+	var _healthTabs = __webpack_require__(450);
 
 	var _healthTabs2 = _interopRequireDefault(_healthTabs);
 
-	var _health = __webpack_require__(345);
+	var _health = __webpack_require__(451);
 
 	var _health2 = _interopRequireDefault(_health);
 
-	var _orderStatsWidget = __webpack_require__(353);
+	var _orderStatsWidget = __webpack_require__(459);
 
 	var _orderStatsWidget2 = _interopRequireDefault(_orderStatsWidget);
 
-	var _performanceWidget = __webpack_require__(360);
+	var _performanceWidget = __webpack_require__(466);
 
 	var _performanceWidget2 = _interopRequireDefault(_performanceWidget);
 
-	var _auditStatusWidget = __webpack_require__(364);
+	var _auditStatusWidget = __webpack_require__(470);
 
 	var _auditStatusWidget2 = _interopRequireDefault(_auditStatusWidget);
 
-	var _putStatusWidget = __webpack_require__(366);
+	var _putStatusWidget = __webpack_require__(472);
 
 	var _putStatusWidget2 = _interopRequireDefault(_putStatusWidget);
 
-	var _pickStatusWidget = __webpack_require__(367);
+	var _pickStatusWidget = __webpack_require__(473);
 
 	var _pickStatusWidget2 = _interopRequireDefault(_pickStatusWidget);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Container for Overview tab
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * This will be switched based on tab click
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
-
-
 	var Overview = function (_React$Component) {
-		_inherits(Overview, _React$Component);
+		(0, _inherits3.default)(Overview, _React$Component);
 
 		function Overview(props) {
-			_classCallCheck(this, Overview);
-
-			return _possibleConstructorReturn(this, (Overview.__proto__ || Object.getPrototypeOf(Overview)).call(this, props));
+			(0, _classCallCheck3.default)(this, Overview);
+			return (0, _possibleConstructorReturn3.default)(this, (Overview.__proto__ || (0, _getPrototypeOf2.default)(Overview)).call(this, props));
 		}
 
-		_createClass(Overview, [{
+		(0, _createClass3.default)(Overview, [{
 			key: 'render',
 			value: function render() {
 				/**
@@ -108,9 +115,12 @@ webpackJsonp([2,5],{
 				);
 			}
 		}]);
-
 		return Overview;
-	}(_react2.default.Component);
+	}(_react2.default.Component); /**
+	                               * Container for Overview tab
+	                               * This will be switched based on tab click
+	                               */
+
 
 	;
 
@@ -127,7 +137,7 @@ webpackJsonp([2,5],{
 
 /***/ },
 
-/***/ 364:
+/***/ 470:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -136,7 +146,29 @@ webpackJsonp([2,5],{
 		value: true
 	});
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	var _assign = __webpack_require__(387);
+
+	var _assign2 = _interopRequireDefault(_assign);
+
+	var _getPrototypeOf = __webpack_require__(416);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(420);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(421);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(422);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(441);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
 
 	var _react = __webpack_require__(20);
 
@@ -146,7 +178,7 @@ webpackJsonp([2,5],{
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _Tilex = __webpack_require__(365);
+	var _Tilex = __webpack_require__(471);
 
 	var _Tilex2 = _interopRequireDefault(_Tilex);
 
@@ -156,23 +188,16 @@ webpackJsonp([2,5],{
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 	var AuditStatusWidget = function (_React$Component) {
-		_inherits(AuditStatusWidget, _React$Component);
+		(0, _inherits3.default)(AuditStatusWidget, _React$Component);
 
 		/**
 	  * Called once before rendering of component,used to displatch fetch action
 	  * @return {[type]}
 	  */
 		function AuditStatusWidget(props) {
-			_classCallCheck(this, AuditStatusWidget);
-
-			return _possibleConstructorReturn(this, (AuditStatusWidget.__proto__ || Object.getPrototypeOf(AuditStatusWidget)).call(this, props));
+			(0, _classCallCheck3.default)(this, AuditStatusWidget);
+			return (0, _possibleConstructorReturn3.default)(this, (AuditStatusWidget.__proto__ || (0, _getPrototypeOf2.default)(AuditStatusWidget)).call(this, props));
 		}
 
 		/**
@@ -181,11 +206,11 @@ webpackJsonp([2,5],{
 	  */
 
 
-		_createClass(AuditStatusWidget, [{
+		(0, _createClass3.default)(AuditStatusWidget, [{
 			key: 'formatContainerData',
 			value: function formatContainerData() {
 				var lowStr,
-				    auditData = Object.assign({}, this.props.auditData),
+				    auditData = (0, _assign2.default)({}, this.props.auditData),
 				    totalAudit = this.props.ppsData ? this.props.ppsData.totalAudit : null,
 				    auditThroughput = this.props.throughputData ? this.props.throughputData.audit_throughput : null,
 				    value = auditData.value ? auditData.value : null;
@@ -223,7 +248,6 @@ webpackJsonp([2,5],{
 				return _react2.default.createElement(_Tilex2.default, { items: auditData });
 			}
 		}]);
-
 		return AuditStatusWidget;
 	}(_react2.default.Component);
 
@@ -239,7 +263,7 @@ webpackJsonp([2,5],{
 
 /***/ },
 
-/***/ 365:
+/***/ 471:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -248,7 +272,25 @@ webpackJsonp([2,5],{
 		value: true
 	});
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	var _getPrototypeOf = __webpack_require__(416);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(420);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(421);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(422);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(441);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
 
 	var _react = __webpack_require__(20);
 
@@ -260,22 +302,15 @@ webpackJsonp([2,5],{
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 	var Tilex = function (_React$Component) {
-		_inherits(Tilex, _React$Component);
+		(0, _inherits3.default)(Tilex, _React$Component);
 
 		function Tilex(props) {
-			_classCallCheck(this, Tilex);
-
-			return _possibleConstructorReturn(this, (Tilex.__proto__ || Object.getPrototypeOf(Tilex)).call(this, props));
+			(0, _classCallCheck3.default)(this, Tilex);
+			return (0, _possibleConstructorReturn3.default)(this, (Tilex.__proto__ || (0, _getPrototypeOf2.default)(Tilex)).call(this, props));
 		}
 
-		_createClass(Tilex, [{
+		(0, _createClass3.default)(Tilex, [{
 			key: 'render',
 			value: function render() {
 				return _react2.default.createElement(
@@ -313,7 +348,6 @@ webpackJsonp([2,5],{
 				);
 			}
 		}]);
-
 		return Tilex;
 	}(_react2.default.Component);
 
@@ -323,7 +357,7 @@ webpackJsonp([2,5],{
 
 /***/ },
 
-/***/ 366:
+/***/ 472:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -332,7 +366,29 @@ webpackJsonp([2,5],{
 	        value: true
 	});
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	var _assign = __webpack_require__(387);
+
+	var _assign2 = _interopRequireDefault(_assign);
+
+	var _getPrototypeOf = __webpack_require__(416);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(420);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(421);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(422);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(441);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
 
 	var _react = __webpack_require__(20);
 
@@ -342,7 +398,7 @@ webpackJsonp([2,5],{
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _Tilex = __webpack_require__(365);
+	var _Tilex = __webpack_require__(471);
 
 	var _Tilex2 = _interopRequireDefault(_Tilex);
 
@@ -352,23 +408,16 @@ webpackJsonp([2,5],{
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 	var PutStatusWidget = function (_React$Component) {
-	        _inherits(PutStatusWidget, _React$Component);
+	        (0, _inherits3.default)(PutStatusWidget, _React$Component);
 
 	        /**
 	         * Called once before rendering of component,used to displatch fetch action
 	         * @return {[type]}
 	         */
 	        function PutStatusWidget(props) {
-	                _classCallCheck(this, PutStatusWidget);
-
-	                return _possibleConstructorReturn(this, (PutStatusWidget.__proto__ || Object.getPrototypeOf(PutStatusWidget)).call(this, props));
+	                (0, _classCallCheck3.default)(this, PutStatusWidget);
+	                return (0, _possibleConstructorReturn3.default)(this, (PutStatusWidget.__proto__ || (0, _getPrototypeOf2.default)(PutStatusWidget)).call(this, props));
 	        }
 	        /**
 	         * [function to format display data coming from server/mock]
@@ -376,12 +425,12 @@ webpackJsonp([2,5],{
 	         */
 
 
-	        _createClass(PutStatusWidget, [{
+	        (0, _createClass3.default)(PutStatusWidget, [{
 	                key: '_formatContainerData',
 	                value: function _formatContainerData() {
 	                        var lowStr,
 	                            totalPut = this.props.ppsData ? this.props.ppsData.totalPut : null,
-	                            putData = Object.assign({}, this.props.putData),
+	                            putData = (0, _assign2.default)({}, this.props.putData),
 	                            putThroughput = this.props.throughputData ? this.props.throughputData.put_throughput : null,
 	                            value = putData ? putData.value : null,
 	                            heading;
@@ -419,7 +468,6 @@ webpackJsonp([2,5],{
 	                        return _react2.default.createElement(_Tilex2.default, { items: putData });
 	                }
 	        }]);
-
 	        return PutStatusWidget;
 	}(_react2.default.Component);
 
@@ -436,7 +484,7 @@ webpackJsonp([2,5],{
 
 /***/ },
 
-/***/ 367:
+/***/ 473:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -445,7 +493,25 @@ webpackJsonp([2,5],{
 	    value: true
 	});
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	var _getPrototypeOf = __webpack_require__(416);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(420);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(421);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(422);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(441);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
 
 	var _react = __webpack_require__(20);
 
@@ -455,7 +521,7 @@ webpackJsonp([2,5],{
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _Tile2x = __webpack_require__(368);
+	var _Tile2x = __webpack_require__(474);
 
 	var _Tile2x2 = _interopRequireDefault(_Tile2x);
 
@@ -465,27 +531,20 @@ webpackJsonp([2,5],{
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 	var PickStatusWidget = function (_React$Component) {
-	    _inherits(PickStatusWidget, _React$Component);
+	    (0, _inherits3.default)(PickStatusWidget, _React$Component);
 
 	    /**
 	     * Called once before rendering of component,used to displatch fetch action
 	     * @return {[type]}
 	     */
 	    function PickStatusWidget(props) {
-	        _classCallCheck(this, PickStatusWidget);
-
-	        return _possibleConstructorReturn(this, (PickStatusWidget.__proto__ || Object.getPrototypeOf(PickStatusWidget)).call(this, props));
+	        (0, _classCallCheck3.default)(this, PickStatusWidget);
+	        return (0, _possibleConstructorReturn3.default)(this, (PickStatusWidget.__proto__ || (0, _getPrototypeOf2.default)(PickStatusWidget)).call(this, props));
 	        //console.log(this.props.ordersData);
 	    }
 
-	    _createClass(PickStatusWidget, [{
+	    (0, _createClass3.default)(PickStatusWidget, [{
 	        key: '_parseProps',
 	        value: function _parseProps() {
 	            var statusClass = '',
@@ -548,7 +607,6 @@ webpackJsonp([2,5],{
 	            return _react2.default.createElement(_Tile2x2.default, { items: items });
 	        }
 	    }]);
-
 	    return PickStatusWidget;
 	}(_react2.default.Component);
 
@@ -562,7 +620,7 @@ webpackJsonp([2,5],{
 
 /***/ },
 
-/***/ 368:
+/***/ 474:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -571,7 +629,25 @@ webpackJsonp([2,5],{
 		value: true
 	});
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	var _getPrototypeOf = __webpack_require__(416);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(420);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(421);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(422);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(441);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
 
 	var _react = __webpack_require__(20);
 
@@ -583,22 +659,15 @@ webpackJsonp([2,5],{
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 	var Tile2x = function (_React$Component) {
-		_inherits(Tile2x, _React$Component);
+		(0, _inherits3.default)(Tile2x, _React$Component);
 
 		function Tile2x(props) {
-			_classCallCheck(this, Tile2x);
-
-			return _possibleConstructorReturn(this, (Tile2x.__proto__ || Object.getPrototypeOf(Tile2x)).call(this, props));
+			(0, _classCallCheck3.default)(this, Tile2x);
+			return (0, _possibleConstructorReturn3.default)(this, (Tile2x.__proto__ || (0, _getPrototypeOf2.default)(Tile2x)).call(this, props));
 		}
 
-		_createClass(Tile2x, [{
+		(0, _createClass3.default)(Tile2x, [{
 			key: 'render',
 			value: function render() {
 				return _react2.default.createElement(
@@ -685,7 +754,6 @@ webpackJsonp([2,5],{
 				);
 			}
 		}]);
-
 		return Tile2x;
 	}(_react2.default.Component);
 
