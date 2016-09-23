@@ -13,7 +13,7 @@ class ButlerBot extends React.Component{
     }	
 	render(){
    console.log("this should work") 
-	console.log(this.props)
+	console.log(this.props.routes)
   var itemNumber = 6;
 		return (
 			<div>

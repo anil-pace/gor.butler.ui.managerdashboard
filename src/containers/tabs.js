@@ -10,8 +10,11 @@ class Tabs extends React.Component{
     	super(props);
 
     }	
+
+    handleTabClick(){
+    	this.refs.sysTab.className = "adasda";
+    }
 	render(){
-		
 
 		const item1 = [
       { tab: 'OVERVIEW', Status: 'Fulfiling orders', currentState:'gorOffline' }
@@ -35,7 +38,7 @@ class Tabs extends React.Component{
 			<Tab items={item1} temp={temp}/>
 		</Link>
 
-		<Link to="/system">
+		<Link to="/system" onClick = {this.handleTabClick.bind(this)} ref="sysTab">
 			<Tab items={item2}/>
 		</Link>
 
@@ -61,5 +64,7 @@ function mapStateToProps(state, ownProps){
          "ppsData":state.recieveSocketActions.ppsData || {}
     }
 }
+
+
 
 export default connect(mapStateToProps)(Tabs) ;

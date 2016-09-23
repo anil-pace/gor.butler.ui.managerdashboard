@@ -11,7 +11,7 @@ import PerformanceWidget from '../containers/performanceWidget'
 import AuditStatusWidget from '../containers/auditStatusWidget'
 import PutStatusWidget from '../containers/putStatusWidget'
 import PickStatusWidget from '../containers/pickStatusWidget'
-
+import { connect } from 'react-redux';
 
 
 class Overview extends React.Component{
@@ -27,7 +27,8 @@ class Overview extends React.Component{
 		 * Need to remove these hardcoded variables
 		 * 
 		 */
-		
+console.log("this should work") 
+	console.log(this.props.routes)
 		
 		//this.formatContainerData('put');
 		//this.formatContainerData('audit');
@@ -56,13 +57,15 @@ class Overview extends React.Component{
 	}
 };
  
-/*function mapStateToProps(state, ownProps){
-	return {
-        putData: state.putInfo.putData,
-        ppsData:state.ppsInfo.ppsData,
-        throughputData : state.throughputInfo.throughputData,
-        auditData: state.auditInfo.auditData
-    };
-}*/
+ 
+
+// function mapStateToProps(state, ownProps){
+// 	return {
+//         putData: state.putInfo.putData,
+//         ppsData:state.ppsInfo.ppsData,
+//         throughputData : state.throughputInfo.throughputData,
+//         auditData: state.auditInfo.auditData
+//     };
+// }
 
 export 	default Overview;
