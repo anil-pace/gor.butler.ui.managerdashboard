@@ -1,6 +1,6 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-import {Link}  from 'react-router';
+
 
 class Tab extends React.Component{
 	constructor(props) 
@@ -8,9 +8,10 @@ class Tab extends React.Component{
     	super(props);
     }	
 	render(){
+
 		return (
 		<div className="gorTab gorContainer">
-		<div className="gorMainBlock">
+		<div className={this.props.changeClass}>
 			<div >
 				<div className="gor-upperText">
 					{this.props.items[0].tab}

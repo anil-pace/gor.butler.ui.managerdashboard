@@ -53,9 +53,7 @@ class PPStable extends React.Component {
     });
   }
   handleChange(columnKey,rowIndex) {
-    console.log("checked");
-    console.log(columnKey)
-    console.log(rowIndex)
+    
     var showDropdown=false;
     var checkedState=this.state.isChecked;
     if(checkedState[rowIndex] === true) {
@@ -85,15 +83,12 @@ class PPStable extends React.Component {
   render() {
     
     var {sortedDataList, colSortDirs,columnWidths,isChecked,renderDropD} = this.state;
-    console.log(this.state)
     const item = [
     { value: 'put', label: 'Put' },
     { value: 'pick', label: 'Pick' },
     { value: 'audit', label: 'Audit' }
     ];
     var checkState = this.handleChange.bind(this);
-    console.log(this.props.containerHeight)
-    console.log(this.state);
     var drop;
     if(this.state.renderDropD===true) {
       drop = <DropdownTable  styleClass={'gorDataTableDrop'} placeholder="Change PPS mode" items={item}/>;

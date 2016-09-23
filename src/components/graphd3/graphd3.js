@@ -32,7 +32,7 @@ class Chart extends React.Component{
       temp++;
       if (count === 3 || temp ===0 || temp ===23){
         count = 0;
-        d=d.substr(0,d.indexOf(' '));
+        //d=d.substr(0,d.indexOf(' '));
         return d;
       }
       return "";
@@ -54,7 +54,7 @@ class Chart extends React.Component{
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-      //console.log(d3tip);
+      
   const tip = d3tip()
     .attr('class', 'd3-tip')
     .offset([100, 90])

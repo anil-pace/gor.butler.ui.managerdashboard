@@ -1,6 +1,7 @@
 import {PPS_DETAIL} from '../constants/appConstants';
 
 function processPPSData(data) {
+  //TODO: codes need to be replaced after checking with backend
   var PPSData=[];
   var ppsStatus = ["Off", "On"];
   var current_task = ["Pick", "Put", "Audit"];

@@ -12,7 +12,7 @@ class Notifications extends React.Component{
     	super(props);
     }	
 	render(){
-	console.log("call")
+	
 		/**
 		 * Need to remove these hardcoded variables
 		 * 

@@ -25,7 +25,8 @@ export const RECIEVE_ITEM_TO_STOCK = "RECIEVE_ITEM_TO_STOCK";
 
 /*Constants for performance widget*/
 export const RENDER_WIDGET = "RENDER_WIDGET";
-
+export const TAB_SELECTED = "TAB_SELECTED";
+export const SUB_TAB_SELECTED = "SUB_TAB_SELECTED";
 
 /*Parsing Constants*/
 export const PARSE_PPS = "pps_details";

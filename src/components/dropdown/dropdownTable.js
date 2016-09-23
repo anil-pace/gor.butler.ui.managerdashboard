@@ -12,7 +12,6 @@ class DropdownTable extends Component {
   }
 
   _onSelect (option) {
-    console.log(option);
     this.setState({selected: option})
     
 

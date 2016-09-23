@@ -18,6 +18,8 @@ import {histogramData} from './reducers/orderstatsReducer'
 import {chargersDetail} from './reducers/chargersDetailReducer'
 import {butlerDetail} from './reducers/butlerDetailReducer'
 import {PPSDetail} from './reducers/ppsDetailReducer'
+import {tabSelected} from './reducers/tabSelectReducer'
+import {subTabSelected} from './reducers/subTabSelectReducer'
 
 const rootReducer = combineReducers({
   intl:intlReducer,
@@ -38,6 +40,9 @@ const rootReducer = combineReducers({
   histogramData,
   chargersDetail,
   butlerDetail,
-  PPSDetail })
+  PPSDetail,
+  tabSelected,
+  subTabSelected
+   })
 
 export default rootReducer

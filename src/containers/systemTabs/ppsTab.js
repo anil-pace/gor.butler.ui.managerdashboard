@@ -16,8 +16,7 @@ class PPS extends React.Component{
     	super(props);
     }	
 	render(){
-		console.log("this should work") 
-	console.log(this.props.history)
+		
     var data = this.props.PPSDetail.PPStypeDetail;
 	var itemNumber = 5;
   

@@ -88,6 +88,22 @@ class Routes extends React.Component{
 						 />
 					 </Route>
 
+					 <Route name="orders" path="/orders"  
+					 getComponent={(location, callback) => {
+				      require.ensure([], function (require) {
+				        callback(null, require('../containers/ordersTab').default);
+				      });
+				    }}
+					 />
+
+					 <Route name="inventory" path="/inventory"  
+					 getComponent={(location, callback) => {
+				      require.ensure([], function (require) {
+				        callback(null, require('../containers/inventoryTab').default);
+				      });
+				    }}
+					 />
+
 					<Route name="users" path="/users"  
 					 getComponent={(location, callback) => {
 				      require.ensure([], function (require) {

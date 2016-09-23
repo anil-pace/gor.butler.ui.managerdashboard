@@ -13,8 +13,7 @@ class ChargingStations extends React.Component{
     	super(props);
     }	
 	render(){
-	console.log("this should work") 
-	console.log(this.props.history)
+	
 		var itemNumber = 3;
     var connectedBots = 0;
     var onState = 0;

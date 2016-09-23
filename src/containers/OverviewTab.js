@@ -27,8 +27,7 @@ class Overview extends React.Component{
 		 * Need to remove these hardcoded variables
 		 * 
 		 */
-console.log("this should work") 
-	console.log(this.props.routes)
+
 		
 		//this.formatContainerData('put');
 		//this.formatContainerData('audit');

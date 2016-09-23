@@ -53,9 +53,7 @@ class ButlerBotTable extends React.Component {
   }
   
   handlChange(columnKey,rowIndex) {
-    console.log("checked");
-    console.log(columnKey)
-    console.log(rowIndex)
+    
   }
   _onSortChange(columnKey, sortDir) {
     var sortIndexes = this._defaultSortIndexes.slice();
