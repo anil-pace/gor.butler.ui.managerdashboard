@@ -14,7 +14,7 @@ class ChargingStations extends React.Component{
     }	
 	render(){
 	
-		var itemNumber = 3;
+		var itemNumber = 2;
     var connectedBots = 0;
     var onState = 0;
     var chargersData =  this.props.chargersDetail.chargersDetail;

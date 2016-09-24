@@ -34,12 +34,7 @@ class Health extends React.Component{
 					<div className="status">Off</div>
 				</div>
 				
-				<div className="block paramPositionBack ">
-					<div className="block errorState" >
-						<span>{this.props.items[0].states.errorState}</span>
-					</div>
-					<div className="status">Error</div>
-				</div>
+				
 			</div>
 		</div>
 	</div>

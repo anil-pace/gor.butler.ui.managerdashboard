@@ -114,24 +114,7 @@ class ChargingStationsTable extends React.Component {
           width={columnWidths.id}
           isResizable={true}
         />
-        <Column
-          columnKey="status"
-          header={
-            <SortHeaderCell >
-              <div>
-                 <FormattedMessage id="ChargingStations.table.status" description="Status for ChargingStations" 
-              defaultMessage ="STATUS"/> 
-              </div>
-              <div>
-              <div className="gorToolHeaderSubText"> {this.props.items.length} Online</div>
-              </div>
-            </SortHeaderCell>
-          }
-          cell={<StatusCell data={sortedDataList} ></StatusCell>}
-          fixed={true}
-          width={columnWidths.status}
-          isResizable={true}
-        />
+        
         <Column
           columnKey="dockedBots"
           header={
