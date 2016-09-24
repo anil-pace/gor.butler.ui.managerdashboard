@@ -8,7 +8,7 @@ import SubTab from './subTab';
 import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
 import {subTabSelected} from '../../actions/subTabSelectAction'
-import {NOTIFICATION,BUTLERBOTS,PPS,CHARGING} from '../../constants/appConstants'
+import {NOTIFICATION,BUTLERBOTS,PPS,CHARGING,NOTIFICATION_TAB,BUTLERBOTS_TAB,PPS_TAB,CHARGING_TAB} from '../../constants/appConstants'
 
 class SystemTab extends React.Component{
 	constructor(props) 
@@ -33,28 +33,23 @@ class SystemTab extends React.Component{
     }
     
 	render(){
-
-		var item1=[{tabContent:"Notification"}];
-		var item2=[{tabContent:"Butler Bots"}];
-		var item3=[{tabContent:"PPS"}];
-		var item4=[{tabContent:"Charging Station"}];
-		 var selectClass = {NOTIFICATION:"gorMainBlock", BUTLERBOTS:"gorMainBlock", PPS:"gorMainBlock", CHARGING:"gorMainBlock"};
+		var selectClass = {NOTIFICATION:"gorMainBlock", BUTLERBOTS:"gorMainBlock", PPS:"gorMainBlock", CHARGING:"gorMainBlock"};
      	selectClass[this.props.subTab.subTab] = "gorMainBlockSelect";
 		
 		return (
 			<div>
 				<div className="gorMainSubtab">
 					<Link to="/notification" onClick = {this.handleNotificationClick.bind(this)}>
-						<SubTab item={item1} changeClass={selectClass["NOTIFICATION"]}/> 
+						<SubTab item={NOTIFICATION_TAB} changeClass={selectClass[NOTIFICATION]}/> 
 					</Link>
 					<Link to="/butlerbots" onClick = {this.handleButlerbotsClick.bind(this)}>
-						<SubTab item={item2} changeClass={selectClass["BUTLERBOTS"]}/> 
+						<SubTab item={BUTLERBOTS_TAB} changeClass={selectClass[BUTLERBOTS]}/> 
 					</Link>
 					<Link to="/pps" onClick = {this.handlePpsClick.bind(this)}>
-						<SubTab item={item3} changeClass={selectClass["PPS"]}/> 
+						<SubTab item={PPS_TAB} changeClass={selectClass[PPS]}/> 
 					</Link>
 					<Link to="/chargingstation" onClick = {this.handleChargingstationClick.bind(this)}>
-						<SubTab item={item4} changeClass={selectClass["CHARGING"]}/> 
+						<SubTab item={CHARGING_TAB} changeClass={selectClass[CHARGING]}/> 
 					</Link>
 				</div>
 			</div>

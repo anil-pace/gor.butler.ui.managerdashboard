@@ -52,6 +52,11 @@ export const SYSTEM = "SYSTEM";
 export const ORDERS = "ORDERS";
 export const INVENTORY = "INVENTORY";
 export const USERS = "USERS";
+export const NOTIFICATION_TAB = "Notification";
+export const BUTLERBOTS_TAB = "Butler Bots";
+export const CHARGING_TAB = "Charging Station";
+export const PPS_TAB = "PPS";
+
 
 
 /*Constants for response type */

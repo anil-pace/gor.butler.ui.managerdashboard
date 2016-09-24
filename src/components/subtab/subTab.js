@@ -12,7 +12,7 @@ class SubTab extends React.Component{
 		<div className="gorSubTab gorContainer">
 			<div className={this.props.changeClass}>
 			<div className="gor-upperText">
-				{this.props.item[0].tabContent}
+				{this.props.item}
 				</div>
 			</div>
 		</div>
