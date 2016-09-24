@@ -46,7 +46,7 @@ class PutStatusWidget extends React.Component{
     		}
 
     		putData.heading = <FormattedMessage id="widget.put.heading" description='Put Item Heading' 
-            					defaultMessage='Items to Stock'/>;
+            					defaultMessage='Items stocked'/>;
             putData.value = value;
             putData.low = lowStr;
     		
