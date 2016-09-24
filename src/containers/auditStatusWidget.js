@@ -29,6 +29,7 @@ class AuditStatusWidget extends React.Component{
 		if (!value){
 			value = <FormattedMessage id="widget.audit.heading.value" description='Total Items Audited' 
         				defaultMessage='None'/>;
+        				
 			lowStr = <FormattedMessage id="widget.audit.status.offline" description='Offline Status' 
         				defaultMessage='Offline'/>;
 		}

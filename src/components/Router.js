@@ -27,35 +27,35 @@ class Routes extends React.Component{
 			 getComponent={(location, callback) => {
 		      require.ensure([], function (require) {
 		        callback(null, require('../App').default);
-		      });
+		      },"defaultApp");
 		    }}
 			 />
 			 <Route name="login" path="/login"   onEnter={this.requireAuth.bind(this)} 
 			 getComponent={(location, callback) => {
 		      require.ensure([], function (require) {
 		        callback(null, require('./Login/login').default);
-		      });
+		      },"login");
 		    }}
 			  />
 			<Route name="app" path="/md"  
 			getComponent={(location, callback) => {
 		      require.ensure([], function (require) {
 		        callback(null, require('../App').default);
-		      });
+		      },"app");
 		    }}
 			 >
 					<IndexRoute 
 					getComponent={(location, callback) => {
 				      require.ensure([], function (require) {
 				        callback(null, require('../containers/OverviewTab').default);
-				      });
+				      },"indexOverview");
 				    }}
 					 />
 					<Route name="system" path="/system"  
 					 getComponent={(location, callback) => {
 				      require.ensure([], function (require) {
 				        callback(null, require('../containers/systemTab').default);
-				      });
+				      },"system");
 				    }}
 					 > 
 					 <IndexRoute 
@@ -109,7 +109,7 @@ class Routes extends React.Component{
 					 getComponent={(location, callback) => {
 				      require.ensure([], function (require) {
 				        callback(null, require('../containers/OverviewTab').default);
-				      });
+				      },"overview");
 				    }}
 					 />
 				</Route>

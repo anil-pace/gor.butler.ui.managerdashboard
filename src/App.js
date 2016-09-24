@@ -15,7 +15,7 @@ import PerformanceWidget from './containers/performanceWidget'
 import { REQUEST_HEADER, getFetchData } from './actions/headerAction'
 import { connect } from 'react-redux';
 import Chart from './components/graphd3/graphd3';
-import ChartHorizontal from './components/graphd3/graph_horizontal';
+import ChartHorizontal from './components/graphd3/graph_horizontal'; 
 
 
 
@@ -104,7 +104,6 @@ App.contextTypes = {
  */
 
 function mapStateToProps(state,ownProps) {
- console.log(state);
  return {
   authToken: state.authLogin.auth_token,
  	loginAuthorized : state.authLogin.loginAuthorized,
