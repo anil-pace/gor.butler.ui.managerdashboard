@@ -10,7 +10,7 @@ export  function auditInfo(state={},action){
           var res,auditData={};
           res=action.data;
           if(res.aggregate_data){
-            if(res.aggregate_data.total_audited){
+            if(res.aggregate_data.total_audited){ 
               auditData.value=parseInt(res.aggregate_data.total_audited);
             }
           }

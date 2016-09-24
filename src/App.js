@@ -21,7 +21,7 @@ import ChartHorizontal from './components/graphd3/graph_horizontal';
 
 
 
-class App extends React.Component{
+class App extends React.Component{ 
 	/**
 	 * Called once before rendering of component,used to displatch fetch action
 	 * @return {[type]}
