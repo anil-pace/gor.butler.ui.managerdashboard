@@ -13,6 +13,10 @@ const mockMiddleware = (function(){
         ResponseParse(store,mockData.resTypePut); 
         ResponseParse(store,mockData.resTypeThroughPut);
         ResponseParse(store,mockData.resTypeAudit);
+        ResponseParse(store,mockData.resTypeHistogram);
+        ResponseParse(store,mockData.resTypeChargersDetail);
+        ResponseParse(store,mockData.resTypeButlerDetail);
+        ResponseParse(store,mockData.resTypePPSdetail);  
         ResponseParse(store,mockData.resTypeOrders);
 
         break;

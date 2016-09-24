@@ -3,16 +3,38 @@ import ReactDOM  from 'react-dom';
 import Tab from '../components/tabs/tab';
 import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
-
+import {tabSelected} from '../actions/tabSelectAction';
+import {OVERVIEW,SYSTEM,ORDERS,INVENTORY,USERS} from '../constants/appConstants';
 class Tabs extends React.Component{
 	constructor(props) 
 	{
     	super(props);
-
     }	
-	render(){
-		
+    handleOverviewClick(data){
+    	var temp = OVERVIEW;
+    	this.props.tabSelected(temp)
+    }
 
+    handleSystemClick(data){
+    	var temp = SYSTEM;
+    	this.props.tabSelected(temp)
+    }
+    handleOrdersClick(data){
+    	var temp = ORDERS;
+    	this.props.tabSelected(temp)
+    }
+    handleInvenClick(data){
+    	var temp = INVENTORY;
+    	this.props.tabSelected(temp)
+    }
+    handleUsersClick(data){
+    	var temp = USERS;
+    	this.props.tabSelected(temp)
+    }
+    
+	render(){
+
+        
 		const item1 = [
       { tab: 'OVERVIEW', Status: 'Fulfiling orders', currentState:'gorOffline' }
     ]
@@ -28,26 +50,29 @@ class Tabs extends React.Component{
     const item5 = [
       { tab: 'USERS', Status: '35 users logged in', currentState:'gorOffline' }
     ]
+    var selectClass = {OVERVIEW:"gorMainBlock", SYSTEM:"gorMainBlock",ORDERS:"gorMainBlock", INVENTORY:"gorMainBlock", USERS:"gorMainBlock"};
+    selectClass[this.props.tab] = "gorMainBlockSelect";
+
 		return (
 		<div className="gorTabs gorMainBlock">
-		<Link to="/overview">
-			<Tab items={item1}/>
+		<Link to="/overview" onClick = {this.handleOverviewClick.bind(this)}>
+			<Tab items={item1} changeClass={selectClass["OVERVIEW"]} subIcons={false}/>
 		</Link>
 
-		<Link to="/system">
-			<Tab items={item2}/>
+		<Link to="/system" onClick = {this.handleSystemClick.bind(this)}>
+			<Tab items={item2} changeClass={selectClass["SYSTEM"]} subIcons={true}/>
 		</Link>
 
-		<Link to="/orders">
-			<Tab items={item3}/>
+		<Link to="/orders" onClick = {this.handleOrdersClick.bind(this)}>
+			<Tab items={item3} changeClass={selectClass["ORDERS"]} subIcons={true}/>
 		</Link>
 		
-		<Link to="/inventory">
-			<Tab items={item4}/>
+		<Link to="/inventory" onClick = {this.handleInvenClick.bind(this)}>
+			<Tab items={item4} changeClass={selectClass["INVENTORY"]} subIcons={false}/>
 		</Link>
 		
-		<Link to="/users">
-			<Tab items={item5}/>
+		<Link to="/users" onClick = {this.handleUsersClick.bind(this)}>
+			<Tab items={item5} changeClass={selectClass["USERS"]} subIcons={false}/>
 		</Link>
 	</div>
 		);
@@ -57,8 +82,16 @@ class Tabs extends React.Component{
 function mapStateToProps(state, ownProps){
     
     return  {
-         "ppsData":state.recieveSocketActions.ppsData || {}
+         tab:state.tabSelected.tab || {},
     }
 }
 
-export default connect(mapStateToProps)(Tabs) ;
+var mapDispatchToProps = function(dispatch){
+	return {
+		tabSelected: function(data){ dispatch(tabSelected(data)); }
+	}
+};
+
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(Tabs) ;

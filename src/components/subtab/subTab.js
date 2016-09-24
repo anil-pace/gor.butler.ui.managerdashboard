@@ -1,6 +1,6 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-import {Link}  from 'react-router';
+
 
 class SubTab extends React.Component{
 	constructor(props) 
@@ -8,11 +8,12 @@ class SubTab extends React.Component{
     	super(props);
     }	
 	render(){
-		console.log(this.props.item)
 		return (
 		<div className="gorSubTab gorContainer">
-			<div className="gorMainBlock gor-upperText">
-				{this.props.item[0].tabContent}
+			<div className={this.props.changeClass}>
+			<div className="gor-upperText">
+				{this.props.item}
+				</div>
 			</div>
 		</div>
 	);
