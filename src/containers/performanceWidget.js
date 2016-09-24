@@ -94,43 +94,47 @@ class PerformanceWidget extends React.Component{
 	}
 
 	render(){
+		
 		const item = [
 		{ value: 'RENDER_SYSTEM_HEALTH', label: 'System Health' },
-		{ value: 'RENDER_SYSTEM_PERFORMANCE', label: 'System Performance' },
+		{ value: 'PICK_PPS_PERFORMANCE', label: 'PPS Pick Performance' },
+		{ value: 'PUT_PPS_PERFORMANCE', label: 'PPS Put Performance' },
+		{ value: 'AUDIT_PPS_PERFORMANCE', label: 'PPS Audit Performance' }
 		]
-		
-		
-	if(this.props.widget === "RENDER_SYSTEM_PERFORMANCE"){
-		return (
-			<div className="gorPerformanceWidget">
-				<div className="gorDrop">
-					<Dropdown optionDispatch={this.props.renderPerformanceWidget} items={item} styleClass={'ddown'} currentState={item[1]}/>
-				</div>
 
-				<div id="performanceGraph">
-					<ChartHorizontal/>
-				</div> 
-			</div>  
-			);
-	}
-
-	else { 
 		var link = this;
 		var pps_data = _getPPSdata(link);
 		var butler_data = _getButlerdata(link);
 		var charging_data=_getChargingdata(link);
-		return (
+		
+	var itemRender;	
+	if(this.props.widget === "PICK_PPS_PERFORMANCE"){
+		itemRender = <ChartHorizontal data={this.props.ppsPerformance} type="items_picked"/>
+	}
+
+	else if(this.props.widget === "PUT_PPS_PERFORMANCE"){
+		itemRender = <ChartHorizontal data={this.props.ppsPerformance} type="items_put"/>
+	}
+
+	else if(this.props.widget === "AUDIT_PPS_PERFORMANCE"){
+		itemRender = <ChartHorizontal data={this.props.ppsPerformance} type="items_audited"/>
+	}
+	else {
+		itemRender = <Health ppsData={pps_data} butlerData={butler_data} chargingData={charging_data}/>
+	}
+	
+	return (
 			<div className="gorPerformanceWidget">
 				<div className="gorDrop">
 					<Dropdown optionDispatch={this.props.renderPerformanceWidget} items={item} styleClass={'ddown'} currentState={item[0]}/>
 				</div>
 
 				<div id="performanceGraph">
-					{<Health ppsData={pps_data} butlerData={butler_data} chargingData={charging_data}/>}
+					{itemRender}
 				</div> 
 			</div> 
 			);
-	}
+	
 
 }
 };
@@ -140,7 +144,8 @@ function mapStateToProps(state, ownProps){
 		widget: state.performanceWidget.widget || {},
 		ppsData: state.recieveSocketActions.ppsData || {},
 		butlersData:state.recieveSocketActions.butlersData || {},
-		chargersData:state.recieveSocketActions.chargersData || {}
+		chargersData:state.recieveSocketActions.chargersData || {},
+		ppsPerformance: state.PPSperformance || {}
 	};
 }
 

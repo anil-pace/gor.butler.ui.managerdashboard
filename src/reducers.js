@@ -21,6 +21,7 @@ import {PPSDetail} from './reducers/ppsDetailReducer'
 import {tabSelected} from './reducers/tabSelectReducer'
 import {subTabSelected} from './reducers/subTabSelectReducer'
 import {reducer as modalReducer} from 'react-redux-modal'
+import {PPSperformance} from './reducers/ppsPerformanceReducer'
 
 
 const rootReducer = combineReducers({
@@ -45,7 +46,8 @@ const rootReducer = combineReducers({
   butlerDetail,
   PPSDetail,
   tabSelected,
-  subTabSelected
+  subTabSelected,
+  PPSperformance
    })
 
 export default rootReducer

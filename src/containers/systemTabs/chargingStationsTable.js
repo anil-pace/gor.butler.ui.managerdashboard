@@ -75,7 +75,7 @@ class ChargingStationsTable extends React.Component {
             <div className="gorToolBarElements">
                <FormattedMessage id="ChargingStations.table.heading" description="Heading for ChargingStations" 
               defaultMessage ="CHARGING STATIONS"/>
-              <div className="gorToolHeaderSubText"> 2 selected </div>
+              
             </div>
           </div>
         <div className="filterWrapper">  

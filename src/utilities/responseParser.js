@@ -1,4 +1,4 @@
-import {receivePpsData,receiveButlersData,receiveAuditData,receiveThroughputData,receivePutData,receiveChargersData,receiveInventoryData,receiveOrdersData,initData,recieveHistogramData,recieveChargersDetail,recieveButlersDetail,recievePPSDetail} from '../actions/responseAction';
+import {receivePpsData,receiveButlersData,receiveAuditData,receiveThroughputData,receivePutData,receiveChargersData,receiveInventoryData,receiveOrdersData,initData,recieveHistogramData,recieveChargersDetail,recieveButlersDetail,recievePPSDetail,recievePPSperformance} from '../actions/responseAction';
 import {wsOnMessageAction} from '../actions/socketActions'
 import {PARSE_PPS,PARSE_PUT,PARSE_PICK,PARSE_PPA_THROUGHPUT,PARSE_AUDIT,HISTOGRAM_DATA,SYSTEM_CHARGERS_DETAILS} from '../constants/appConstants'
 
@@ -7,7 +7,7 @@ import {PARSE_PPS,PARSE_PUT,PARSE_PICK,PARSE_PPA_THROUGHPUT,PARSE_AUDIT,HISTOGRA
 export function ResponseParse(store,res)
 {
 
-	console.log('In Message Parser');
+	
 	if (!res.resource_type) {
 		store.dispatch(wsOnMessageAction(res));
 		return;
@@ -51,7 +51,10 @@ export function ResponseParse(store,res)
 				break;
 			case "system_pps_details":
 				store.dispatch(recievePPSDetail(res));
-				break;				    
+				break;	
+			case "pps_detail":
+				store.dispatch(recievePPSperformance(res));
+				break;	 			    
 			default:
 				store.dispatch(initData(res));          //Default action
 			break;			

@@ -478,6 +478,60 @@ export const resTypeChargersDetail = {
    	 }, {
    		 "charger_id": 13,
       		 "docked_butler_id": null
+   	 }, {
+   		 "charger_id": 10,
+      		 "docked_butler_id": 2
+   	 }, {
+   		 "charger_id": 12,
+      		 "docked_butler_id": 7
+   	 }, {
+   		 "charger_id": 13,
+      		 "docked_butler_id": null
+   	 }, {
+   		 "charger_id": 10,
+      		 "docked_butler_id": 2
+   	 }, {
+   		 "charger_id": 12,
+      		 "docked_butler_id": 7
+   	 }, {
+   		 "charger_id": 13,
+      		 "docked_butler_id": null
+   	 }, {
+   		 "charger_id": 10,
+      		 "docked_butler_id": 2
+   	 }, {
+   		 "charger_id": 12,
+      		 "docked_butler_id": 7
+   	 }, {
+   		 "charger_id": 13,
+      		 "docked_butler_id": null
+   	 }, {
+   		 "charger_id": 10,
+      		 "docked_butler_id": 2
+   	 }, {
+   		 "charger_id": 12,
+      		 "docked_butler_id": 7
+   	 }, {
+   		 "charger_id": 13,
+      		 "docked_butler_id": null
+   	 }, {
+   		 "charger_id": 10,
+      		 "docked_butler_id": 2
+   	 }, {
+   		 "charger_id": 12,
+      		 "docked_butler_id": 7
+   	 }, {
+   		 "charger_id": 13,
+      		 "docked_butler_id": null
+   	 }, {
+   		 "charger_id": 10,
+      		 "docked_butler_id": 2
+   	 }, {
+   		 "charger_id": 12,
+      		 "docked_butler_id": 7
+   	 }, {
+   		 "charger_id": 13,
+      		 "docked_butler_id": null
    	 }],
    	 "resource_type": "system_chargers_details"
 }
@@ -502,7 +556,134 @@ export const resTypeButlerDetail = {
                         "charger_id": 11, 
    		 "location": "028.022",
    		 "voltage": 240.5
-   	 }],
+   	 }, {
+   		 "butler_id": 9,
+   		  "current_task": 0, 
+          "current_subtask": 0, 
+   		 "msu_id": 12,
+                        "pps_id": 19,
+                        "charger_id": 2, 
+   		 "location": "018.012",
+   		 "voltage": 29.7
+   	 }, {
+   		 "butler_id": 110,
+   		 "current_task": 1, 
+                        "current_subtask": 1, 
+   		 "msu_id": 10,
+                        "pps_id": 17,
+                        "charger_id": 11, 
+   		 "location": "028.022",
+   		 "voltage": 240.5
+   	 }, {
+   		 "butler_id": 9,
+   		  "current_task": 0, 
+          "current_subtask": 0, 
+   		 "msu_id": 12,
+                        "pps_id": 19,
+                        "charger_id": 2, 
+   		 "location": "018.012",
+   		 "voltage": 29.7
+   	 }, {
+   		 "butler_id": 110,
+   		 "current_task": 1, 
+                        "current_subtask": 1, 
+   		 "msu_id": 10,
+                        "pps_id": 17,
+                        "charger_id": 11, 
+   		 "location": "028.022",
+   		 "voltage": 240.5
+   	 }, {
+   		 "butler_id": 9,
+   		  "current_task": 0, 
+          "current_subtask": 0, 
+   		 "msu_id": 12,
+                        "pps_id": 19,
+                        "charger_id": 2, 
+   		 "location": "018.012",
+   		 "voltage": 29.7
+   	 }, {
+   		 "butler_id": 110,
+   		 "current_task": 1, 
+                        "current_subtask": 1, 
+   		 "msu_id": 10,
+                        "pps_id": 17,
+                        "charger_id": 11, 
+   		 "location": "028.022",
+   		 "voltage": 240.5
+   	 }, {
+   		 "butler_id": 9,
+   		  "current_task": 0, 
+          "current_subtask": 0, 
+   		 "msu_id": 12,
+                        "pps_id": 19,
+                        "charger_id": 2, 
+   		 "location": "018.012",
+   		 "voltage": 29.7
+   	 }, {
+   		 "butler_id": 110,
+   		 "current_task": 1, 
+                        "current_subtask": 1, 
+   		 "msu_id": 10,
+                        "pps_id": 17,
+                        "charger_id": 11, 
+   		 "location": "028.022",
+   		 "voltage": 240.5
+   	 }, {
+   		 "butler_id": 9,
+   		  "current_task": 0, 
+          "current_subtask": 0, 
+   		 "msu_id": 12,
+                        "pps_id": 19,
+                        "charger_id": 2, 
+   		 "location": "018.012",
+   		 "voltage": 29.7
+   	 }, {
+   		 "butler_id": 110,
+   		 "current_task": 1, 
+                        "current_subtask": 1, 
+   		 "msu_id": 10,
+                        "pps_id": 17,
+                        "charger_id": 11, 
+   		 "location": "028.022",
+   		 "voltage": 240.5
+   	 }, {
+   		 "butler_id": 9,
+   		  "current_task": 0, 
+          "current_subtask": 0, 
+   		 "msu_id": 12,
+                        "pps_id": 19,
+                        "charger_id": 2, 
+   		 "location": "018.012",
+   		 "voltage": 29.7
+   	 }, {
+   		 "butler_id": 110,
+   		 "current_task": 1, 
+                        "current_subtask": 1, 
+   		 "msu_id": 10,
+                        "pps_id": 17,
+                        "charger_id": 11, 
+   		 "location": "028.022",
+   		 "voltage": 240.5
+   	 }, {
+   		 "butler_id": 9,
+   		  "current_task": 0, 
+          "current_subtask": 0, 
+   		 "msu_id": 12,
+                        "pps_id": 19,
+                        "charger_id": 2, 
+   		 "location": "018.012",
+   		 "voltage": 29.7
+   	 }, {
+   		 "butler_id": 110,
+   		 "current_task": 1, 
+                        "current_subtask": 1, 
+   		 "msu_id": 10,
+                        "pps_id": 17,
+                        "charger_id": 11, 
+   		 "location": "028.022",
+   		 "voltage": 240.5
+   	 }
+   	 ],
    	 "resource_type": "system_butlers_details"
  }
 
@@ -519,9 +700,198 @@ export const resTypePPSdetail = {
    		 "current_task": 2, 
    		 "performance": 320, 
    		 "operators_assigned": ["Aarush Tulip, ", "Ajay singh "]
-   	 }, ],
+   	 }, {
+   		 "pps_id": 10,
+   		 "pps_status": 1,
+   		 "current_task": 0,
+   		 "performance": 120,  
+   		 "operators_assigned": ["Aarush Tulip, ", "Aman Sharma "]
+   	 }, {
+   		 "pps_id": 13,
+   		 "pps_status": 0,
+   		 "current_task": 2, 
+   		 "performance": 320, 
+   		 "operators_assigned": ["Aarush Tulip, ", "Ajay singh "]
+   	 }, {
+   		 "pps_id": 10,
+   		 "pps_status": 1,
+   		 "current_task": 0,
+   		 "performance": 120,  
+   		 "operators_assigned": ["Aarush Tulip, ", "Aman Sharma "]
+   	 }, {
+   		 "pps_id": 13,
+   		 "pps_status": 0,
+   		 "current_task": 2, 
+   		 "performance": 320, 
+   		 "operators_assigned": ["Aarush Tulip, ", "Ajay singh "]
+   	 }, {
+   		 "pps_id": 10,
+   		 "pps_status": 1,
+   		 "current_task": 0,
+   		 "performance": 120,  
+   		 "operators_assigned": ["Aarush Tulip, ", "Aman Sharma "]
+   	 }, {
+   		 "pps_id": 13,
+   		 "pps_status": 0,
+   		 "current_task": 2, 
+   		 "performance": 320, 
+   		 "operators_assigned": ["Aarush Tulip, ", "Ajay singh "]
+   	 }, {
+   		 "pps_id": 10,
+   		 "pps_status": 1,
+   		 "current_task": 0,
+   		 "performance": 120,  
+   		 "operators_assigned": ["Aarush Tulip, ", "Aman Sharma "]
+   	 }, {
+   		 "pps_id": 13,
+   		 "pps_status": 0,
+   		 "current_task": 2, 
+   		 "performance": 320, 
+   		 "operators_assigned": ["Aarush Tulip, ", "Ajay singh "]
+   	 }, {
+   		 "pps_id": 10,
+   		 "pps_status": 1,
+   		 "current_task": 0,
+   		 "performance": 120,  
+   		 "operators_assigned": ["Aarush Tulip, ", "Aman Sharma "]
+   	 }, {
+   		 "pps_id": 13,
+   		 "pps_status": 0,
+   		 "current_task": 2, 
+   		 "performance": 320, 
+   		 "operators_assigned": ["Aarush Tulip, ", "Ajay singh "]
+   	 }, {
+   		 "pps_id": 10,
+   		 "pps_status": 1,
+   		 "current_task": 0,
+   		 "performance": 120,  
+   		 "operators_assigned": ["Aarush Tulip, ", "Aman Sharma "]
+   	 }, {
+   		 "pps_id": 13,
+   		 "pps_status": 0,
+   		 "current_task": 2, 
+   		 "performance": 320, 
+   		 "operators_assigned": ["Aarush Tulip, ", "Ajay singh "]
+   	 },
+   	  ],
    	 "resource_type": "system_pps_details"
  }
+
+ export const resTypePPSperformance = { 
+	"aggregate_data": [{
+		"pps_id": 1,
+                	"time_unit": "per_hour",
+		"orders_picked": 500,
+		"items_picked": 1000, 
+		"items_put": 2400,
+		"items_audited": 400,
+		"pps_mode": "put",
+		"active": "true"
+	},{
+		"pps_id": 2,
+                	"time_unit": "per_hour",
+		"orders_picked": 500,
+		"items_picked": 900,
+		"items_put": 2400,
+		"items_audited": 470,
+		"pps_mode": "put",
+		"active": "true"
+	}, {
+		"pps_id": 3,
+                	"time_unit": "per_hour",
+		"orders_picked": 500,
+		"items_picked": 800,
+		"items_put": 2400,
+		"items_audited": 470,
+		"pps_mode": "put",
+		"active": "true"
+	}, {
+		"pps_id": 4,
+                	"time_unit": "per_hour",
+		"orders_picked": 500,
+		"items_picked": 900,
+		"items_put": 2400,
+		"items_audited": 470,
+		"pps_mode": "put",
+		"active": "true"
+	},{
+		"pps_id": 5,
+                	"time_unit": "per_hour",
+		"orders_picked": 500,
+		"items_picked": 800,
+		"items_put": 2400,
+		"items_audited": 470,
+		"pps_mode": "put",
+		"active": "true"
+	},{
+		"pps_id": 6,
+                	"time_unit": "per_hour",
+		"orders_picked": 500,
+		"items_picked": 700,
+		"items_put": 2400,
+		"items_audited": 470,
+		"pps_mode": "put",
+		"active": "true"
+	},{
+		"pps_id": 7,
+                	"time_unit": "per_hour",
+		"orders_picked": 500,
+		"items_picked": 600,
+		"items_put": 2400,
+		"items_audited": 470,
+		"pps_mode": "put",
+		"active": "true"
+	},{
+		"pps_id": 8,
+                	"time_unit": "per_hour",
+		"orders_picked": 500,
+		"items_picked": 300,
+		"items_put": 2400,
+		"items_audited": 470,
+		"pps_mode": "put",
+		"active": "true"
+	},{
+		"pps_id": 1,
+                	"time_unit": "per_hour",
+		"orders_picked": 500,
+		"items_picked": 200, 
+		"items_put": 2400,
+		"items_audited": 400,
+		"pps_mode": "put",
+		"active": "true"
+	},{
+		"pps_id": 2,
+                	"time_unit": "per_hour",
+		"orders_picked": 500,
+		"items_picked": 300,
+		"items_put": 2400,
+		"items_audited": 470,
+		"pps_mode": "put",
+		"active": "true"
+	}, {
+		"pps_id": 3,
+                	"time_unit": "per_hour",
+		"orders_picked": 500,
+		"items_picked": 400,
+		"items_put": 2400,
+		"items_audited": 470,
+		"pps_mode": "put",
+		"active": "true"
+	}, {
+		"pps_id": 4,
+                	"time_unit": "per_hour",
+		"orders_picked": 500,
+		"items_picked": 500,
+		"items_put": 2400,
+		"items_audited": 470,
+		"pps_mode": "put",
+		"active": "true"
+	}
+	],
+	"resource_type": "pps_detail"
+}
+
+
 
 
 

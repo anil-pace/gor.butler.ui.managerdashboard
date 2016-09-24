@@ -1,4 +1,4 @@
-import {WS_INIT,BUTLERS_DATA,PPS_DATA,PUT_DATA,AUDIT_DATA,INVENTORY_DATA,ORDERS_DATA,CHARGERS_DATA,THROUGHPUT_DATA,HISTOGRAM_DATA,CHARGERS_DETAIL,BUTLERS_DETAIL,PPS_DETAIL} from '../constants/appConstants'
+import {WS_INIT,BUTLERS_DATA,PPS_DATA,PUT_DATA,AUDIT_DATA,INVENTORY_DATA,ORDERS_DATA,CHARGERS_DATA,THROUGHPUT_DATA,HISTOGRAM_DATA,CHARGERS_DETAIL,BUTLERS_DETAIL,PPS_DETAIL,PPS_PERFORMANCE} from '../constants/appConstants'
 //import {getFetchData} from 'headerAction'
 
 export function receivePpsData(data){
@@ -89,6 +89,13 @@ export function recieveButlersDetail(data){
 export function recievePPSDetail(data){
 	return {
 		type: PPS_DETAIL,
+		data
+	}
+}
+
+export function recievePPSperformance(data){
+	return {
+		type: PPS_PERFORMANCE,
 		data
 	}
 }

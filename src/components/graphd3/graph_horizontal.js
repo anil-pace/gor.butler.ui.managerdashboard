@@ -13,15 +13,23 @@ class ChartHorizontal extends React.Component{
    super(props);
    this.state = {d3: ''}
  }
- componentDidMount(){
+ componentWillReceiveProps(nextProps){
   var component = this;
   var widther = document.getElementById("performanceGraph").offsetWidth;
-  var parentHeight = 370;
-  d3.json("http://www.mocky.io/v2/57cc5b881200001b0cbb77ba", function(error,data) {
-    var json=data;
-    update(json);
+  var parentHeight = 300;
+  
+    var json=this.props.data.ppsPerformance.aggregate_data;
+     var data = [];
+      var barData = {}; 
+       for (var i = 0; i < json.length; i++) {
+        barData.pps_id = json[i].pps_id;
+        barData.type = json[i][nextProps.type]
+        data.push(barData);
+        barData = {};
+       }
+    update(data);
 
-  });
+  
 
   function update(data) {
 
@@ -47,7 +55,7 @@ var chart = d3.select(node).append('svg')
   .append("g")
    .attr("transform", "translate(" + left + "," + top + ")")
 
-   x.domain([0, d3.max(data, function(d) { return d.value; })]);
+   x.domain([0, d3.max(data, function(d) { return d.type; })]);
 
    //chart.attr("height", barHeight * data.length);
 
@@ -58,7 +66,7 @@ var chart = d3.select(node).append('svg')
    .attr("ry", 20)
    .attr("class", "g")
       .attr("y", function(d) { 
-        return y(d.name); 
+        return y(d.pps_id); 
       })
       .attr("width", y.rangeBand())
    .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
@@ -76,22 +84,22 @@ var chart = d3.select(node).append('svg')
 
    bar.append("rect")
    .attr("x" , 50)
-   .attr("width", function(d) { return x(d.value); })
+   .attr("width", function(d) { return x(d.type); })
    .attr("height", barHeight - 5)
    .style("fill","#D3D3D3")
    .style("opacity", "0.5");
 
    bar.append("text")
-   .attr("x", function(d) { return x(d.value) + 25; })
+   .attr("x", function(d) { return x(d.type) + 25; })
    .attr("y", barHeight / 2)
    .attr("dy", ".35em")
    .text(function(d) { 
-      if(d.value === 0){ 
+      if(d.type === 0){ 
         return "ERROR"; 
       }
 
       else{
-        return d.value;
+        return d.type;
       }
       })
    .style("font-size","12px")
@@ -105,12 +113,12 @@ var chart = d3.select(node).append('svg')
    .attr("y", barHeight / 2)
    .attr("dy", ".35em")
    .text(function(d) { 
-      if(d.value === 4){ 
-        return d.name; 
+      if(d.type === 4){ 
+        return "PPS " + d.pps_id; 
       }
 
       else{
-        return d.name;
+        return "PPS " + d.pps_id;
       }
       })
    .style("font-size","12px")
@@ -122,7 +130,7 @@ var chart = d3.select(node).append('svg')
  }
 
  function type(d) {
-  d.value = +d.value; // coerce to number
+  d.type = +d.type; // coerce to number
   return d;
 }
 
