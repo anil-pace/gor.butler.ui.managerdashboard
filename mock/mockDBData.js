@@ -81,8 +81,8 @@ export const resTypeInventory1 = {
 export const resTypeOrders={
     "aggregate_data": {
         "pending_orders": 100,   
-        "cut_off_time": 100,   
-        "estimated_completion_time": 200, 
+        "cut_off_time": 170,   
+        "estimated_completion_time": 20, 
         "orders_at_risk":10,   
         "Wave_ending_time":'21-30-57' 
     },
