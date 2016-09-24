@@ -60,13 +60,14 @@
         }
     }
      .gor-usr-details{
-        padding-left:40%;
+        width:33%;
+        margin:auto;
         margin-top:40px;
         .gor-role{
             margin-top:25px;
         }
         .gor-choose{
-            margin-left:2%;
+            margin-left:25px;
         }
         .gor-usr-hdlg{
             font-family:'Source Sans Pro Semibold', sans-serif;
@@ -84,14 +85,14 @@
                 text-align:left;
                 margin-top:calculateRem(10px);
                 padding:calculateRem(10px);
-                width:30%;
+                width:70%;
                 background-color:#FFFFFF;
                 border-radius:3px;
                 border:1px solid #AAAAAA; 
         }
         .gor-usr-field{
             display:inline-block;
-            width:23%;
+            width:40%;
             .gor-usr-fdsm{
                 margin:auto;
                 text-align:left;
@@ -106,8 +107,19 @@
 
     }
     .gor-submit{
+        width:33%;
+        margin:auto;
         margin-top:25px;
-        margin-left:40%;
+        .gor-add-btn{
+            font-family:'Source Sans Pro Bold', sans-serif; 
+            width:113px;
+            height:35px;
+            font-size:14px;
+            background:#f36f36;
+            color:#ffffff;
+            border-radius:3px;
+            margin-left:0px;
+        }
     }
 }
 
