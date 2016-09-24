@@ -32,7 +32,6 @@ class Chart extends React.Component{
       temp++;
       if (count === 3 || temp ===0 || temp ===23){
         count = 0;
-        d=d.substr(0,d.indexOf(' '));
         return d;
       }
       return "";
@@ -54,33 +53,25 @@ class Chart extends React.Component{
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-      //console.log(d3tip);
+      
   const tip = d3tip()
     .attr('class', 'd3-tip')
     .offset([100, 90])
     .html(function(d) {
-      var time=d.letter.split(" ");
-      return "<div> Time:"+" " + time[0]+" - "+time[1] +"<div/><div> 27 Jul,2016</div> <div style='color:#ffffff'> Fulfilled:  "+" " + d.frequency + "</div>";
+      var time=d.timeInterval.split(" ");
+      return "<div> Time:"+" " + time[0]+" - "+time[1] +"<div/><div> 27 Jul,2016</div> <div style='color:#ffffff'> Fulfilled:  "+" " + d.pick + "</div>";
     })
 
 
       svg.call(tip);
-    
-    d3.json("http://www.mocky.io/v2/57d27c9a100000c01432817f", function(error,data) {
-
-      var json=data;
+       var json = this.props.tableData.histData;
         update(json);
-      
-    });
-
     function update(data) {
-      
-
       data.forEach(function(d) {
-        d.frequency = +d.frequency;
+        d.pick = +d.pick;
      });
-      x.domain(data.map(function(d) { return d.letter; }));
-      y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
+      x.domain(data.map(function(d) { return d.timeInterval; }));
+      y.domain([0, d3.max(data, function(d) { return d.pick; })]);
 
       svg.append("g")         
       .attr("class", "grid")
@@ -121,12 +112,12 @@ class Chart extends React.Component{
       .attr("ry", 2)
       .attr("class", "bar")
       .attr("x", function(d) { 
-        return x(d.letter); 
+        return x(d.timeInterval); 
       })
       .attr("width", x.rangeBand())
-      .attr("y", function(d) { return y(d.frequency); })
+      .attr("y", function(d) { return y(d.pick); })
       .attr("height", 0)
-      .attr("height", function(d) { return height - y(d.frequency); })
+      .attr("height", function(d) { return height - y(d.pick); })
       // .on('mouseover', tip.show)
       // .on('mouseout', tip.hide)
 
@@ -139,16 +130,16 @@ class Chart extends React.Component{
        txt.append("g")
     .attr("class", "below")
     .attr("x", function(d) { 
-        return x(d.letter); 
+        return x(d.timeInterval); 
       })
-    .attr("y", function(d) { return height-y(d.frequency); })
+    .attr("y", function(d) { return height-y(d.pick); })
     .attr("dy", "1.2em")
     .attr("text-anchor", "right")
     .text("krish")
     .style("fill", "#000000"); 
 
     //   txt.append("text")
-    //   .attr("y", function(d) { return y(d.frequency); })
+    //   .attr("y", function(d) { return y(d.pick); })
     // .attr("class", "below")
     // .attr("x", 12)
     // .attr("dy", "1.2em")

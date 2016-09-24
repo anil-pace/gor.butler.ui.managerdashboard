@@ -26,7 +26,8 @@ export const RECIEVE_ITEM_TO_STOCK = "RECIEVE_ITEM_TO_STOCK";
 
 /*Constants for performance widget*/
 export const RENDER_WIDGET = "RENDER_WIDGET";
-
+export const TAB_SELECTED = "TAB_SELECTED";
+export const SUB_TAB_SELECTED = "SUB_TAB_SELECTED";
 
 /*Parsing Constants*/
 export const PARSE_PPS = "pps_details";
@@ -38,8 +39,24 @@ export const PARSE_PUT = "put_details";
 export const PARSE_PICK = "pick_details";
 export const PARSE_PPA_THROUGHPUT = "put_pick_audit_throughput";
 export const PARSE_AUDIT = "audit_details";
+export const SYSTEM_CHARGERS_DETAILS = "system_chargers_details";
+export const NOTIFICATION = "NOTIFICATION";
+export const BUTLERBOTS = "BUTLERBOTS";
+export const CHARGING = "CHARGING";
+export const PPS = "PPS";
 /*Constants for stats widget*/
 export const RENDER_STATSWIDGET = "RENDER_STATSWIDGET";
+
+/*Constants for main tab*/
+export const OVERVIEW = "OVERVIEW";
+export const SYSTEM = "SYSTEM";
+export const ORDERS = "ORDERS";
+export const INVENTORY = "INVENTORY";
+export const USERS = "USERS";
+export const NOTIFICATION_TAB = "Notification";
+export const BUTLERBOTS_TAB = "Butler Bots";
+export const CHARGING_TAB = "Charging Station";
+export const PPS_TAB = "PPS";
 
 
 
@@ -52,6 +69,10 @@ export const ORDERS_DATA = "ORDERS_DATA";
 export const INVENTORY_DATA = "INVENTORY_DATA";
 export const CHARGERS_DATA = "CHARGERS_DATA";
 export const THROUGHPUT_DATA="THROUGHPUT_DATA";
+export const HISTOGRAM_DATA = "HISTOGRAM_DATA";
+export const CHARGERS_DETAIL = "CHARGERS_DETAIL";
+export const BUTLERS_DETAIL = "BUTLERS_DETAIL";
+export const PPS_DETAIL  = "PPS_DETAIL";
 
 /*Constants for type of AJAX call*/
 export const AUTH_LOGIN = "AUTH_LOGIN";

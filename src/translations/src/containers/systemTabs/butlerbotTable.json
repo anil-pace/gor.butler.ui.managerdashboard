@@ -25,8 +25,8 @@
     "defaultMessage": "LOCATION"
   },
   {
-    "id": "butlerBot.table.direction",
-    "description": "Direction for butlerbot",
-    "defaultMessage": "DIRECTION"
+    "id": "butlerBot.table.voltage",
+    "description": "voltage for butlerbot",
+    "defaultMessage": "VOLTAGE"
   }
 ]

@@ -378,4 +378,155 @@ export const resTypeInventory2 = {
 	"resource_type": "inventory"
 };
 
+export const resTypeHistogram = {
+	"aggregate_data": [{
+		"start_time": 10, 
+		"end_time": 11,
+		"orders_completed": 200,
+		"items_audited": 1000,
+		"items_put": 2400
+	}, {
+		"start_time": 11, 
+		"end_time": 12,
+		"orders_completed": 300,
+		"items_audited": 1000,
+		"items_put": 2400
+	}, {
+		"start_time": 12,
+		"end_time": 13,
+		"orders_completed": 200,
+		"items_audited": 1000,
+		"items_put": 2400
+	}, {
+		"start_time": 13, 
+		"end_time": 14,
+		"orders_completed": 300,
+		"items_audited": 1000,
+		"items_put": 2400
+	}, {
+		"start_time": 14, 
+		"end_time": 15,
+		"orders_completed": 350,
+		"items_audited": 1000,
+		"items_put": 2400
+	}, {
+		"start_time": 15, 
+		"end_time": 16,
+		"orders_completed": 400,
+		"items_audited": 1000,
+		"items_put": 2400
+	}, {
+		"start_time": 16, 
+		"end_time": 17,
+		"orders_completed": 420,
+		"items_audited": 1000,
+		"items_put": 2400
+	}, {
+		"start_time": 17, 
+		"end_time": 18,
+		"orders_completed": 200,
+		"items_audited": 1000,
+		"items_put": 2400
+	}, {
+		"start_time": 18, 
+		"end_time": 19,
+		"orders_completed": 300,
+		"items_audited": 1000,
+		"items_put": 2400
+	}, {
+		"start_time": 19,
+		"end_time": 20,
+		"orders_completed": 200,
+		"items_audited": 1000,
+		"items_put": 2400
+	}, {
+		"start_time": 20, 
+		"end_time": 21,
+		"orders_completed": 300,
+		"items_audited": 1000,
+		"items_put": 2400
+	}, {
+		"start_time": 21, 
+		"end_time": 22,
+		"orders_completed": 350,
+		"items_audited": 1000,
+		"items_put": 2400
+	}, {
+		"start_time": 22, 
+		"end_time": 23,
+		"orders_completed": 400,
+		"items_audited": 1000,
+		"items_put": 2400
+	}, {
+		"start_time": 23, 
+		"end_time": 24,
+		"orders_completed": 420,
+		"items_audited": 1000,
+		"items_put": 2400
+	}
+	],
+	"resource_type": "histogram_details"
+}
+
+export const resTypeChargersDetail = {
+   	 "aggregate_data": [{
+   		 "charger_id": 10,
+      		 "docked_butler_id": 2
+   	 }, {
+   		 "charger_id": 12,
+      		 "docked_butler_id": 7
+   	 }, {
+   		 "charger_id": 13,
+      		 "docked_butler_id": null
+   	 }],
+   	 "resource_type": "system_chargers_details"
+}
+
+export const resTypeButlerDetail = {
+   	 
+   	 "aggregate_data": [{
+   		 "butler_id": 9,
+   		  "current_task": 0, 
+          "current_subtask": 0, 
+   		 "msu_id": 12,
+                        "pps_id": 19,
+                        "charger_id": 2, 
+   		 "location": "018.012",
+   		 "voltage": 29.7
+   	 }, {
+   		 "butler_id": 110,
+   		 "current_task": 1, 
+                        "current_subtask": 1, 
+   		 "msu_id": 10,
+                        "pps_id": 17,
+                        "charger_id": 11, 
+   		 "location": "028.022",
+   		 "voltage": 240.5
+   	 }],
+   	 "resource_type": "system_butlers_details"
+ }
+
+export const resTypePPSdetail = { 
+   	 "aggregate_data": [{
+   		 "pps_id": 10,
+   		 "pps_status": 1,
+   		 "current_task": 0,
+   		 "performance": 120,  
+   		 "operators_assigned": ["Aarush Tulip, ", "Aman Sharma "]
+   	 }, {
+   		 "pps_id": 13,
+   		 "pps_status": 0,
+   		 "current_task": 2, 
+   		 "performance": 320, 
+   		 "operators_assigned": ["Aarush Tulip, ", "Ajay singh "]
+   	 }, ],
+   	 "resource_type": "system_pps_details"
+ }
+
+
+
+
+
+
+
 //export {resTypePPS,resTypeInventory1,resTypeButlersData,resTypeChargers,resTypeInventory2,resTypePick,resTypePut,resTypeUsers,resTypeButlers,resTypeOrders};

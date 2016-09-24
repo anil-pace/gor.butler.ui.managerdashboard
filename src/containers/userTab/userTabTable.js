@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import {Table, Column, Cell} from 'fixed-data-table';
-import DropdownTemp from '../../components/dropdown/dropdownTemp'
 import Dimensions from 'react-dimensions';
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
 import {modal} from 'react-redux-modal';
@@ -46,11 +45,7 @@ class UserDataTable extends React.Component {
     });
   }
 
-  handleChange(columnKey,rowIndex) {
-    console.log("checked");
-    console.log(columnKey)
-    console.log(rowIndex)
-  }
+  
 
   _onSortChange(columnKey, sortDir) {
     var sortIndexes = this._defaultSortIndexes.slice();
@@ -84,7 +79,7 @@ class UserDataTable extends React.Component {
   render() {
     var {sortedDataList, colSortDirs,columnWidths} = this.state;
     var columnWidth= (this.props.containerWidth/this.props.itemNumber)
-    var checkState = this.handleChange.bind(this);
+    
     return (
       <div>
         <div className="gorToolBar">
@@ -130,7 +125,7 @@ class UserDataTable extends React.Component {
               </div>
             </SortHeaderCell>
           }
-          cell={  <ComponentCell data={sortedDataList} checkState={checkState}/>}
+          cell={  <TextCell data={sortedDataList} />}
           width={columnWidth}
         />
         <Column
