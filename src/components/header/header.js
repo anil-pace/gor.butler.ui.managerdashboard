@@ -47,8 +47,6 @@ class Header extends React.Component{
 		
 
 		const item = [
-		{ value: 'Placeholder_option_1', label: 'Placeholder option 1' },
-		{ value: 'Placeholder_option_2', label: 'Placeholder option 2' },
 		{ value: 'logout', label: 'Logout' }
 		]
 		//console.log(this.props.headData);
@@ -83,8 +81,6 @@ class Header extends React.Component{
 
 						<div id="myDropdown" className="dropdown-content">
 							<div className="horizontalDiv">	
-								<a href="#">Placeholder option 1</a>
-								<a href="#">Placeholder option 2</a>
 							</div>
 							<div>
 								<a href="javascript:void(0)" onClick={this.appLogout.bind(this)}>Logout</a>
