@@ -15,4 +15,13 @@ else
 	exit 0
 fi
 }
+
+function runtests(){
+  OUTPUT=$(npm run test)
+  a=("${(f)OUTPUT}")
+  echo a
+  exit 1
+}
+
 lintit
+runtests

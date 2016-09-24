@@ -27,7 +27,19 @@
         "no-console": "error",
         "no-debugger": "error",
         "no-unused-vars": "error",
-        "no-undefined": "error"
+        "no-undefined": "error",
+        "eqeqeq":"error",
+        "guard-for-in": "error",
+        "no-alert": "error",
+        "no-else-return": "error",
+        "no-empty-function": "error",
+        "no-empty-pattern": "error",
+        "eslint no-eq-null": "error",
+        "no-eval": "error",
+        "no-extra-bind": "error",
+        "yoda": ["error", "never", { "exceptRange": true }],
+        "no-redeclare": "error",
+        "curly": "error"
 
     }
 }
