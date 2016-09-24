@@ -1,6 +1,6 @@
-webpackJsonp([1,5],{
+webpackJsonp([1,10],{
 
-/***/ 467:
+/***/ 478:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9,23 +9,23 @@ webpackJsonp([1,5],{
 	    value: true
 	});
 
-	var _getPrototypeOf = __webpack_require__(416);
+	var _getPrototypeOf = __webpack_require__(426);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(420);
+	var _classCallCheck2 = __webpack_require__(430);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(421);
+	var _createClass2 = __webpack_require__(431);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(422);
+	var _possibleConstructorReturn2 = __webpack_require__(432);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(441);
+	var _inherits2 = __webpack_require__(451);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -37,23 +37,27 @@ webpackJsonp([1,5],{
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _loginAction = __webpack_require__(377);
+	var _Footer = __webpack_require__(479);
+
+	var _Footer2 = _interopRequireDefault(_Footer);
+
+	var _loginAction = __webpack_require__(387);
 
 	var _reactRedux = __webpack_require__(191);
 
-	var _appConstants = __webpack_require__(372);
+	var _appConstants = __webpack_require__(381);
 
-	var _configConstants = __webpack_require__(468);
+	var _configConstants = __webpack_require__(382);
 
-	var _reactIntl = __webpack_require__(218);
+	var _reactIntl = __webpack_require__(217);
 
-	var _reactIntlRedux = __webpack_require__(215);
+	var _reactIntlRedux = __webpack_require__(214);
 
-	var _dropdown = __webpack_require__(456);
+	var _dropdown = __webpack_require__(466);
 
 	var _dropdown2 = _interopRequireDefault(_dropdown);
 
-	var _i18n = __webpack_require__(241);
+	var _i18n = __webpack_require__(240);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -68,7 +72,7 @@ webpackJsonp([1,5],{
 	    (0, _createClass3.default)(Login, [{
 	        key: 'componentWillMount',
 	        value: function componentWillMount() {
-	            document.body.className = 'fill-back';
+	            document.body.className = 'gor-fill-back';
 	        }
 	    }, {
 	        key: 'componentWillReceiveProps',
@@ -83,7 +87,7 @@ webpackJsonp([1,5],{
 	                this.passError.style.display = 'none';
 	            } else {
 	                document.body.className = '';
-	                this.context.router.push("/overview");
+	                this.context.router.push("/md");
 	            }
 	        }
 
@@ -94,8 +98,8 @@ webpackJsonp([1,5],{
 	         */
 
 	    }, {
-	        key: 'handleSelectionChange',
-	        value: function handleSelectionChange(sLocale) {
+	        key: '_handleSelectionChange',
+	        value: function _handleSelectionChange(sLocale) {
 	            if (!sLocale) {
 	                return;
 	            }
@@ -113,8 +117,8 @@ webpackJsonp([1,5],{
 	         */
 
 	    }, {
-	        key: 'handleSubmit',
-	        value: function handleSubmit(e) {
+	        key: '_handleSubmit',
+	        value: function _handleSubmit(e) {
 	            e.preventDefault();
 	            var formdata = {
 	                'username': this.userName.value,
@@ -125,10 +129,14 @@ webpackJsonp([1,5],{
 	                    this.userError.style.display = 'block';
 	                    this.authError.style.display = 'none';
 	                    this.passError.style.display = 'none';
+	                    this.userField.style.borderColor = '#EC1C24';
+	                    this.passField.style.borderColor = '';
 	                } else {
 	                    this.passError.style.display = 'block';
 	                    this.authError.style.display = 'none';
 	                    this.userError.style.display = 'none';
+	                    this.userField.style.borderColor = '';
+	                    this.passField.style.borderColor = '#EC1C24';
 	                }
 	                return;
 	            }
@@ -148,129 +156,133 @@ webpackJsonp([1,5],{
 	            var _this2 = this;
 
 	            var sel = 0;
-	            var item = [{ value: 'en', label: _react2.default.createElement(_reactIntl.FormattedMessage, { id: 'login.lang.english', defaultMessage: 'English' }) }, { value: 'ja', label: _react2.default.createElement(_reactIntl.FormattedMessage, { id: 'login.lang.japanese', defaultMessage: 'Japanese' }) }];
-	            for (var i = 0; i < item.length; i++) {
-	                if (item[i].value === this.props.sLang) sel = i;
+	            var items = [{ value: 'en', label: _react2.default.createElement(_reactIntl.FormattedMessage, { id: 'login.lang.english', defaultMessage: 'English' }) }, { value: 'ja', label: _react2.default.createElement(_reactIntl.FormattedMessage, { id: 'login.lang.japanese', defaultMessage: 'Japanese' }) }];
+	            for (var i = 0; i < items.length; i++) {
+	                if (items[i].value === this.props.sLang) sel = i;
 	            }
-	            console.log(item[sel]);
+	            var usernamePlace = _react2.default.createElement(_reactIntl.FormattedMessage, { id: 'login.placeholder.username', defaultMessage: 'Username' });
+	            var passwordPlace = _react2.default.createElement(_reactIntl.FormattedMessage, { id: 'login.placeholder.password', defaultMessage: 'Password' });
+
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'login-form' },
+	                { className: 'gor-login-form' },
 	                _react2.default.createElement(
 	                    'form',
 	                    { action: '#', id: 'loginForm', ref: function ref(node) {
 	                            _this2.loginForm = node;
 	                        },
 	                        onSubmit: function onSubmit(e) {
-	                            return _this2.handleSubmit(e);
+	                            return _this2._handleSubmit(e);
 	                        } },
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'login-lang' },
+	                        { className: 'gor-login-lang' },
 	                        _react2.default.createElement(
 	                            'div',
-	                            { className: 'lang-text' },
-	                            'Language:'
+	                            { className: 'gor-lang-text' },
+	                            _react2.default.createElement(_reactIntl.FormattedMessage, { id: 'login.butler.language',
+	                                defaultMessage: 'Language' })
 	                        ),
 	                        _react2.default.createElement(_dropdown2.default, { optionDispatch: function optionDispatch(e) {
-	                                return _this2.handleSelectionChange(e);
-	                            }, items: item, styleClass: 'lang-drop', currentState: item[sel] })
+	                                return _this2._handleSelectionChange(e);
+	                            }, items: items, styleClass: 'gor-lang-drop', currentState: items[sel] })
 	                    ),
-	                    _react2.default.createElement('div', { className: 'login-logo alt-gor-logo' }),
+	                    _react2.default.createElement('div', { className: 'gor-login-logo alt-gor-logo' }),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'login-mid' },
+	                        { className: 'gor-login-mid' },
 	                        _react2.default.createElement(
 	                            'div',
-	                            { className: 'upper-box' },
+	                            { className: 'gor-upper-box' },
 	                            _react2.default.createElement(
 	                                'div',
-	                                { className: 'login-head' },
-	                                _react2.default.createElement(_reactIntl.FormattedMessage, { id: 'login.butler',
-	                                    defaultMessage: 'BUTLER' })
+	                                { className: 'gor-login-head' },
+	                                _react2.default.createElement(_reactIntl.FormattedMessage, { id: 'login.butler.title',
+	                                    defaultMessage: 'Butler' })
 	                            ),
 	                            _react2.default.createElement(
 	                                'p',
 	                                null,
-	                                _react2.default.createElement(_reactIntl.FormattedMessage, { id: 'login.title.manageInterface',
+	                                _react2.default.createElement(_reactIntl.FormattedMessage, { id: 'login.butler.manageInterface',
+
 	                                    defaultMessage: 'Management Interface'
 	                                })
 	                            )
 	                        ),
 	                        _react2.default.createElement(
 	                            'div',
-	                            { className: ' login-auth-error',
+	                            { className: 'gor-login-auth-error',
 	                                ref: function ref(node) {
 	                                    _this2.authError = node;
 	                                } },
-	                            _react2.default.createElement('div', { className: 'login-error' }),
-	                            'Invalid username and/or password, please try again'
+	                            _react2.default.createElement('div', { className: 'gor-login-error' }),
+	                            _react2.default.createElement(_reactIntl.FormattedMessage, { id: 'login.butler.fail',
+	                                defaultMessage: 'Invalid username and/or password' })
 	                        ),
 	                        _react2.default.createElement(
 	                            'section',
 	                            null,
 	                            _react2.default.createElement(
 	                                'div',
-	                                { className: 'login-field' },
-	                                _react2.default.createElement('div', { className: 'login-user' }),
-	                                _react2.default.createElement('input', { className: 'field', type: 'text', id: 'username', placeholder: 'Username', ref: function ref(node) {
+	                                { className: 'gor-login-field', ref: function ref(node) {
+	                                        _this2.userField = node;
+	                                    } },
+	                                _react2.default.createElement('div', { className: 'gor-login-user' }),
+	                                _react2.default.createElement('input', { className: 'field', type: 'text', id: 'username', placeholder: usernamePlace, ref: function ref(node) {
 	                                        _this2.userName = node;
 	                                    } })
 	                            )
 	                        ),
 	                        _react2.default.createElement(
 	                            'div',
-	                            { className: ' login-usr-error',
+	                            { className: 'gor-login-usr-error',
 	                                ref: function ref(node) {
 	                                    _this2.userError = node;
 	                                } },
-	                            'Please enter your username'
+	                            _react2.default.createElement(_reactIntl.FormattedMessage, { id: 'login.butler.error.username',
+	                                defaultMessage: 'Please enter your username' })
 	                        ),
 	                        _react2.default.createElement(
 	                            'section',
 	                            null,
 	                            _react2.default.createElement(
 	                                'div',
-	                                { className: 'login-field' },
-	                                _react2.default.createElement('div', { className: 'login-password' }),
-	                                _react2.default.createElement('input', { className: 'field', type: 'password', id: 'password', placeholder: 'Password', ref: function ref(node) {
+	                                { className: 'gor-login-field', ref: function ref(node) {
+	                                        _this2.passField = node;
+	                                    } },
+	                                _react2.default.createElement('div', { className: 'gor-login-password' }),
+	                                _react2.default.createElement('input', { className: 'field', type: 'password', id: 'password', placeholder: passwordPlace, ref: function ref(node) {
 	                                        _this2.password = node;
 	                                    } })
 	                            )
 	                        ),
 	                        _react2.default.createElement(
 	                            'div',
-	                            { className: 'login-usr-error', ref: function ref(node) {
+	                            { className: 'gor-login-usr-error', ref: function ref(node) {
 	                                    _this2.passError = node;
 	                                } },
-	                            'Please enter your password'
+	                            _react2.default.createElement(_reactIntl.FormattedMessage, { id: 'login.butler.error.password',
+	                                defaultMessage: 'Please enter your password' })
 	                        ),
 	                        _react2.default.createElement(
 	                            'section',
 	                            null,
-	                            _react2.default.createElement('input', { type: 'submit', className: 'login-btn', value: 'Login' }),
+	                            _react2.default.createElement('input', { type: 'submit', className: 'gor-login-btn', value: 'Login' }),
 	                            _react2.default.createElement('br', null)
 	                        )
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'box-bottom-left' },
+	                        { className: 'gor-box-bottom-left' },
 	                        _react2.default.createElement(
 	                            'span',
 	                            null,
 	                            'Current time: 09:00:15(IST)'
 	                        )
 	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'box-bottom-right' },
-	                        _react2.default.createElement(
-	                            'span',
-	                            null,
-	                            'v 1.0'
-	                        )
-	                    )
-	                )
+	                    _react2.default.createElement('div', { className: 'gor-box-bottom-right' })
+	                ),
+	                _react2.default.createElement(_Footer2.default, null)
 	            );
 	        }
 	    }]);
@@ -315,16 +327,69 @@ webpackJsonp([1,5],{
 
 /***/ },
 
-/***/ 468:
-/***/ function(module, exports) {
+/***/ 479:
+/***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+		value: true
 	});
-	var WS_URL = exports.WS_URL = "wss://192.168.8.118/manager_api/wss";
-	var LOGIN_URL = exports.LOGIN_URL = "https://192.168.8.118/api/auth/token";
+
+	var _getPrototypeOf = __webpack_require__(426);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(430);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(431);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(432);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(451);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _react = __webpack_require__(20);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(53);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Footer = function (_React$Component) {
+		(0, _inherits3.default)(Footer, _React$Component);
+
+		function Footer(props) {
+			(0, _classCallCheck3.default)(this, Footer);
+			return (0, _possibleConstructorReturn3.default)(this, (Footer.__proto__ || (0, _getPrototypeOf2.default)(Footer)).call(this, props));
+		}
+
+		(0, _createClass3.default)(Footer, [{
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'div',
+					{ className: 'gor-footer' },
+					'Copyright @ 2016 GreyOrange Pte Ltd'
+				);
+			}
+		}]);
+		return Footer;
+	}(_react2.default.Component);
+
+	;
+
+	exports.default = Footer;
 
 /***/ }
 

@@ -14,6 +14,7 @@ import {inventoryInfo}  from './reducers/inventoryReducer'
 import {ordersInfo}  from './reducers/ordersReducer'
 import {throughputInfo}  from './reducers/throughputReducer'
 import {statsWidget} from './reducers/statsWidgetReducer'
+import {reducer as modalReducer} from 'react-redux-modal'
 
 
 const rootReducer = combineReducers({
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   recieveSocketActions,
   butlersInfo,
   chargerInfo,
+  modals: modalReducer,
   auditInfo,
   putInfo,
   ppsInfo,

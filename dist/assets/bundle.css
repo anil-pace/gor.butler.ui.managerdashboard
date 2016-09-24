@@ -82,8 +82,6 @@ body {
   font-family: Source Sans Pro;
 }
 
-.fk-logo,
-.gor-logo,
 .dropdown-arrow-icon,
 .searchbox-cross-icon,
 .searchbox-magnifying-glass-icon,
@@ -107,25 +105,30 @@ body {
 .cbs-overview-chutes,
 .cbs-overview-casket,
 .overview-tile-ontime-icon,
-.cbs-overview-inducts, .statusOl, .statusAl, .iStock, .iAudit, .iPick, .login-user, .login-password, .login-error {
+.cbs-overview-inducts, .statusOl, .statusAl, .iStock, .iAudit, .iPick, .gor-login-user, .gor-login-password, .gor-login-error {
   background-image: url(images/icons.svg);
 }
 
-.login-user {
+.fk-logo,
+.gor-logo {
+  background-image: url(images/Logos.svg);
+}
+
+.gor-login-user {
   background-position: -205px -77px;
   width: 16px;
   height: 16px;
   display: inline-block;
 }
 
-.login-password {
+.gor-login-password {
   background-position: -223px -77px;
   width: 16px;
   height: 16px;
   display: inline-block;
 }
 
-.login-error {
+.gor-login-error {
   background-position: -18px -78px;
   width: 16px;
   height: 16px;
@@ -137,20 +140,20 @@ body {
 }
 
 .alt-gor-logo {
-  background-position: -212px -1px;
-  width: 200px;
+  background-position: -182px -1px;
+  width: 235px;
   height: 25px;
 }
 
 .gor-logo {
-  background-position: 4px -126px;
-  width: 181px;
-  height: 14px;
+  background-position: 11px -112px;
+  width: 173px;
+  height: 7px;
   padding: 10px;
 }
 
 .fk-logo {
-  background-position: 0px -158px;
+  background-position: 3px -138px;
   width: 102px;
   height: 31px;
   padding: 0px 20px 0 0;
@@ -199,9 +202,24 @@ body {
 }
 
 .header-red-alert-icon {
-  background-position: -18px -78px;
+  background-position: -17px -75px;
+  width: 17px;
+  height: 13px;
+}
+
+.searchbox-magnifying-glass-icon {
+  background-position: -0px -94px;
+  width: 17px;
+  height: 15px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.header-yellow-alert-icon {
+  background-position: -35px -78px;
   width: 16px;
   height: 14px;
+  display: inline-block;
 }
 
 /*  SECTIONS  */
@@ -473,11 +491,17 @@ body {
   border-bottom: 0.15em solid #e7e7e7;
 }
 
+.gorHeader .logoWrap {
+  border-right: 0.0625rem solid #F2F2F2;
+  display: inline-block;
+  padding-right: 9px;
+}
+
 .gorHeader .logo {
   display: inline-block;
   overflow: hidden;
   vertical-align: middle;
-  border-right: 0.0625rem solid #F2F2F2;
+  padding-right: 10px;
 }
 
 .gorHeader .upperText {
@@ -520,7 +544,7 @@ body {
 .gorHeader .blockSystem {
   display: inline-block;
   overflow: hidden;
-  padding-left: 0.3125rem;
+  padding-left: 0.625rem;
   vertical-align: middle;
 }
 
@@ -556,6 +580,7 @@ body {
   background-color: #4d5055;
   width: auto;
   display: inline-block;
+  height: 60px;
 }
 
 .gorTab .gorMainBlock:hover {
@@ -568,7 +593,7 @@ body {
 }
 
 .gorTab .gorMainBlock {
-  width: 120px;
+  width: 124px;
   padding-right: 20px;
   padding-left: 20px;
   height: 60px;
@@ -665,7 +690,7 @@ body {
 
 .gor-tile .gor-up-tile {
   padding: 15px 20px 0px 20px;
-  min-height: 8.75rem;
+  min-height: 8.4375rem;
 }
 
 .gor-tile .gor-tile-left {
@@ -790,7 +815,6 @@ body {
 
 .ddown .Dropdown-control {
   position: relative;
-  overflow: hidden;
   background-color: white;
   border-radius: 0.25rem;
   box-sizing: border-box;
@@ -945,38 +969,43 @@ body {
   text-anchor: end;
 }
 
-.fill-back {
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: url("../src/assets/Source_Sans_Pro/SourceSansPro-Regular.ttf") format("truetype");
+}
+
+.gor-fill-back {
   background: #4D5055;
 }
 
-.login-form {
+.gor-login-form {
   color: #A6A7A9;
   font-family: 'Source Sans Pro', sans-serif;
   overflow: hidden;
   padding: 1.25rem;
 }
 
-.login-form .login-logo {
+.gor-login-form .gor-login-logo {
   margin: auto;
-  margin-top: 65px;
+  margin-top: 3.125rem;
 }
 
-.login-form .login-lang:hover {
+.gor-login-form .gor-login-lang:hover {
   color: #FFFFFF;
 }
 
-.login-form .login-lang {
+.gor-login-form .gor-login-lang {
   text-align: right;
 }
 
-.login-form .login-lang .lang-text {
+.gor-login-form .gor-login-lang .gor-lang-text {
   margin-right: 10px;
   display: inline-block;
   margin-top: 10px;
   vertical-align: top;
 }
 
-.login-form .login-lang .lang-drop {
+.gor-login-form .gor-login-lang .gor-lang-drop {
   display: inline-block;
   width: 10.875rem;
   height: 1.875rem;
@@ -984,11 +1013,11 @@ body {
   text-align: left;
 }
 
-.login-form .login-lang .lang-drop .Dropdown-root {
+.gor-login-form .gor-login-lang .gor-lang-drop .Dropdown-root {
   position: relative;
 }
 
-.login-form .login-lang .lang-drop .Dropdown-control {
+.gor-login-form .gor-login-lang .gor-lang-drop .Dropdown-control {
   position: relative;
   overflow: hidden;
   border: 1px solid;
@@ -1000,7 +1029,7 @@ body {
   transition: all 200ms ease;
 }
 
-.login-form .login-lang .lang-drop .Dropdown-arrow {
+.gor-login-form .gor-login-lang .gor-lang-drop .Dropdown-arrow {
   border-color: #A6A7A9 transparent transparent;
   border-style: solid;
   border-width: 0.5rem 0.4375rem 0.1875rem;
@@ -1013,19 +1042,19 @@ body {
   top: 0.875rem;
 }
 
-.login-form .login-lang .lang-drop .Dropdown-control:hover {
+.gor-login-form .gor-login-lang .gor-lang-drop .Dropdown-control:hover {
   box-shadow: 0.125rem 0.125rem 0.125rem #888888;
   border: 0.0625rem solid #ccc;
   color: #FFFFFF;
 }
 
-.login-form .login-lang .lang-drop .is-open .Dropdown-arrow {
+.gor-login-form .gor-login-lang .gor-lang-drop .is-open .Dropdown-arrow {
   border-color: #FFFFFF transparent transparent;
   border-style: solid;
   border-width: 0.5rem 0.4375rem 0.1875rem;
 }
 
-.login-form .login-lang .lang-drop .Dropdown-menu {
+.gor-login-form .gor-login-lang .gor-lang-drop .Dropdown-menu {
   border: 1px solid;
   border-radius: 3px;
   box-shadow: 0 0.0625rem 0 rgba(0, 0, 0, 0.06);
@@ -1040,7 +1069,7 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
-.login-form .login-lang .lang-drop .Dropdown-option {
+.gor-login-form .gor-login-lang .gor-lang-drop .Dropdown-option {
   box-sizing: border-box;
   color: #A6A7A9;
   cursor: pointer;
@@ -1048,15 +1077,15 @@ body {
   padding: 0.5rem 0.625rem;
 }
 
-.login-form .login-lang .lang-drop .Dropdown-option.is-selected {
+.gor-login-form .gor-login-lang .gor-lang-drop .Dropdown-option.is-selected {
   font-weight: bold;
 }
 
-.login-form .login-lang .lang-drop .Dropdown-option:hover {
+.gor-login-form .gor-login-lang .gor-lang-drop .Dropdown-option:hover {
   color: #FFFFFF;
 }
 
-.login-form .login-lang .lang-drop .Dropdown-noresults {
+.gor-login-form .gor-login-lang .gor-lang-drop .Dropdown-noresults {
   box-sizing: border-box;
   color: #ccc;
   cursor: default;
@@ -1064,7 +1093,7 @@ body {
   padding: 0.5rem 0.625rem;
 }
 
-.login-form .login-lang select {
+.gor-login-form .gor-login-lang select {
   width: 10.875rem;
   height: 1.875rem;
   color: #cccccc;
@@ -1074,34 +1103,35 @@ body {
   border: 1px solid;
 }
 
-.login-form .login-lang select select:hover {
+.gor-login-form .gor-login-lang select select:hover {
   color: #FFFFFF;
 }
 
-.login-form .login-mid {
+.gor-login-form .gor-login-mid {
   text-align: center;
   background: #FFFFFF;
   border: 1px solid;
   border-radius: 5px;
   color: #979797;
-  width: 36%;
-  min-height: 24.5rem;
+  width: 30%;
+  min-height: 22rem;
   margin: auto;
   margin-top: 2.5rem;
 }
 
-.login-form .login-mid .upper-box {
+.gor-login-form .gor-login-mid .gor-upper-box {
   margin-bottom: 1.25rem;
   padding-top: 2.5rem;
 }
 
-.login-form .login-mid .upper-box .login-head {
+.gor-login-form .gor-login-mid .gor-upper-box .gor-login-head {
   color: #4D5055;
-  font-size: 2.8125rem;
-  font-weight: bold;
+  opacity: 100%;
+  font-size: 3rem;
+  font-family: 'Source Sans Pro Bold', sans-serif;
 }
 
-.login-form .login-mid .login-field {
+.gor-login-form .gor-login-mid .gor-login-field {
   margin: auto;
   text-align: left;
   margin-top: 1.25rem;
@@ -1113,14 +1143,14 @@ body {
   border: 1px solid #AAAAAA;
 }
 
-.login-form .login-mid .login-field .field {
+.gor-login-form .gor-login-mid .gor-login-field .field {
   border: none;
   font-size: 18px;
   margin-left: 0.625rem;
   width: 80%;
 }
 
-.login-form .login-mid .login-auth-error {
+.gor-login-form .gor-login-mid .gor-login-auth-error {
   display: none;
   text-align: left;
   color: #EC1C24;
@@ -1129,7 +1159,7 @@ body {
   margin-top: 10px;
 }
 
-.login-form .login-mid .login-usr-error {
+.gor-login-form .gor-login-mid .gor-login-usr-error {
   display: none;
   text-align: left;
   color: #EC1C24;
@@ -1138,7 +1168,7 @@ body {
   margin-left: 3.875rem;
 }
 
-.login-form .login-mid .login-btn {
+.gor-login-form .gor-login-mid .gor-login-btn {
   background: #F36F36;
   color: #FFFFFF;
   width: 75%;
@@ -1148,22 +1178,18 @@ body {
   border-radius: 3px;
 }
 
-.login-form .login-mid .login-fgt {
-  padding-bottom: 40px;
-}
-
-.login-form a {
+.gor-login-form a {
   text-decoration: underline;
 }
 
-.login-form .box-bottom-left {
+.gor-login-form .gor-box-bottom-left {
   margin: auto;
-  margin-left: 32%;
+  margin-left: 35%;
   margin-top: 0.625rem;
   display: inline;
 }
 
-.login-form .box-bottom-right {
+.gor-login-form .gor-box-bottom-right {
   margin: auto;
   margin-left: 19%;
   margin-top: 0.625rem;
@@ -1178,6 +1204,9 @@ body {
   position: absolute;
   top: 0;
   white-space: nowrap;
+  border-bottom: solid;
+  border-width: 1px;
+  border-color: #dedede;
 }
 
 .fixedDataTableCellGroupLayout_cellGroup > .public_fixedDataTableCell_main {
@@ -1215,6 +1244,7 @@ body {
 
 .fixedDataTableCellLayout_wrap1 {
   display: table;
+  padding-left: 15px;
 }
 
 .fixedDataTableCellLayout_wrap2 {
@@ -1249,7 +1279,6 @@ body {
 }
 
 .fixedDataTableColumnResizerLineLayout_mouseArea {
-  cursor: ew-resize;
   position: absolute;
   right: -5px;
   width: 12px;
@@ -1367,7 +1396,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .ScrollbarLayout_main {
   box-sizing: border-box;
   outline: none;
-  overflow: hidden;
+  overflow-x: hidden;
   position: absolute;
   -webkit-transition-duration: 250ms;
   transition-duration: 250ms;
@@ -1409,7 +1438,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 
 .ScrollbarLayout_face {
   left: 0;
-  overflow: hidden;
+  overflow-x: hidden;
   position: absolute;
   z-index: 1;
 }
@@ -1492,6 +1521,14 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   font-weight: bold;
 }
 
+.public_fixedDataTable_header,
+.public_fixedDataTable_header .public_fixedDataTableCell_main {
+  border-bottom-style: solid;
+  border-color: #dedede;
+  border-bottom-width: 3px;
+  border-right-style: solid;
+}
+
 .public_fixedDataTable_footer .public_fixedDataTableCell_main {
   border-color: #d3d3d3;
 }
@@ -1539,51 +1576,81 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 }
 
 .Stopped .public_fixedDataTableCell_cellContent {
-  background: red;
-  border-radius: 33%;
+  background: #fc3838;
+  border-radius: 15px;
   text-align: center;
-  width: 60px;
+  width: 52px;
   color: #ffffff;
   font-size: 12px;
+  max-height: 9px;
 }
 
 .Error .public_fixedDataTableCell_cellContent {
-  background: red;
-  border-radius: 33%;
+  background: #fc3838;
+  border-radius: 15px;
   text-align: center;
-  width: 60px;
+  width: 52px;
   color: #ffffff;
   font-size: 12px;
+  max-height: 9px;
 }
 
 .Warning .public_fixedDataTableCell_cellContent {
   background: #f99405;
-  border-radius: 33%;
+  border-radius: 15px;
   text-align: center;
-  width: 60px;
+  width: 52px;
+  color: #ffffff;
   font-size: 12px;
+  max-height: 9px;
 }
 
 .On .public_fixedDataTableCell_cellContent {
-  border-radius: 33%;
+  border-radius: 15px;
   text-align: center;
-  width: 60px;
+  width: 52px;
   border-style: solid;
   border-width: 1px;
   border-color: #00a54f;
   color: #00a54f;
   font-size: 12px;
+  max-height: 9px;
 }
 
 .Off .public_fixedDataTableCell_cellContent {
-  border-radius: 33%;
+  border-radius: 15px;
   text-align: center;
-  width: 60px;
+  width: 52px;
   border-style: solid;
   border-width: 1px;
   border-color: #aaaaaa;
   color: #aaaaaa;
   font-size: 12px;
+  max-height: 9px;
+}
+
+.Online .public_fixedDataTableCell_cellContent {
+  border-radius: 15px;
+  text-align: center;
+  width: 52px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #00a54f;
+  color: #00a54f;
+  font-size: 12px;
+  max-height: 9px;
+}
+
+.Offline .public_fixedDataTableCell_cellContent {
+  border-radius: 15px;
+  text-align: center;
+  width: 52px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #aaaaaa;
+  color: #aaaaaa;
+  font-size: 12px;
+  max-height: 9px;
 }
 
 .public_fixedDataTableCell_columnResizerKnob {
@@ -1922,21 +1989,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
  *
  * @providesModule ScrollbarLayout
  */
-.ScrollbarLayout_main {
-  box-sizing: border-box;
-  outline: none;
-  overflow: hidden;
-  position: absolute;
-  -webkit-transition-duration: 250ms;
-  transition-duration: 250ms;
-  -webkit-transition-timing-function: ease;
-  transition-timing-function: ease;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
 .ScrollbarLayout_mainVertical {
   bottom: 0;
   right: 0;
@@ -2086,6 +2138,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 
 .public_fixedDataTableCell_cellContent {
   padding: 8px;
+  padding-right: 9px;
 }
 
 .public_fixedDataTableCell_columnResizerKnob {
@@ -2181,35 +2234,53 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   height: 68px;
   background: #FFFFFF;
   box-shadow: inset 0 5px 5px -5px #888888;
-  position: relative;
   font-family: "source sans pro";
   font-size: 20px;
   color: #000000;
+  padding-left: 20px;
 }
 
 .gorFilter {
   float: right;
-  width: 30%;
   vertical-align: middle;
   box-sizing: border-box;
   border: 1px solid #aaaaaa;
   border-radius: 4px;
-  font-size: 14px;
   background-color: white;
   font-family: "source sans pro";
   color: #aaaaaa;
   height: 35px;
-  width: 260px;
+  width: 200px;
+  padding-left: 9px;
 }
 
-.gorToolBarElements {
-  font-family: "source sans pro";
-  font-size: 20px;
+.gorToolBarFilter {
   font-weight: bold;
   color: #000000;
   padding-top: 6px;
   display: inline-block;
-  width: 30%;
+  width: 50%;
+  vertical-align: middle;
+}
+
+.gorToolBarElements {
+  display: inline-block;
+  vertical-align: sub;
+  padding-right: 10px;
+  padding-top: 18px;
+}
+
+.gorToolBarDropDown {
+  padding-left: 10px;
+  display: inline-block;
+  vertical-align: 12px;
+}
+
+.gorToolBarWrap {
+  width: 49%;
+  font-weight: bold;
+  color: #000000;
+  display: inline-block;
   vertical-align: middle;
 }
 
@@ -2222,11 +2293,133 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   font-family: "source sans pro";
   font-size: 12px;
   color: #666666;
+  padding-top: 4px;
 }
 
 .gorTesting {
   width: 100%;
-  height: 400px;
+  height: 30rem;
+}
+
+.gorTableMainContainer {
+  overflow-x: hidden;
+}
+
+.gorInputFilter {
+  height: 31px;
+  border-width: 0px;
+  border-color: #ffffff;
+  padding-left: 9px;
+  width: 80%;
+}
+
+.filterWrapper {
+  float: right;
+  padding-top: 16px;
+  padding-right: 40px;
+}
+
+input[type="checkbox"] {
+  width: 30px;
+  height: 15px;
+  zoom: 1.1;
+}
+
+.statuslogoWrap {
+  display: inline-block;
+  padding-right: 4px;
+}
+
+.alertState {
+  color: #fc3838;
+}
+
+.gorDataTableDrop {
+  display: inline-block;
+  width: 10.875rem;
+  height: 1.875rem;
+  background: transparent;
+  text-align: left;
+}
+
+.gorDataTableDrop .Dropdown-root {
+  position: relative;
+}
+
+.gorDataTableDrop .Dropdown-control {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid;
+  border-radius: 0.1875rem;
+  box-sizing: border-box;
+  cursor: default;
+  outline: none;
+  padding: 0.5rem 3.25rem 0.5rem 0.625rem;
+  transition: all 200ms ease;
+}
+
+.gorDataTableDrop .Dropdown-arrow {
+  border-color: #A6A7A9 transparent transparent;
+  border-style: solid;
+  border-width: 0.5rem 0.4375rem 0.1875rem;
+  content: ' ';
+  display: block;
+  height: 0;
+  margin-top: -ceil(2.5);
+  position: absolute;
+  right: 0.9375rem;
+  top: 0.875rem;
+}
+
+.gorDataTableDrop .Dropdown-control:hover {
+  box-shadow: 0.125rem 0.125rem 0.125rem #888888;
+  border: 0.0625rem solid #ccc;
+  color: #FFFFFF;
+}
+
+.gorDataTableDrop .is-open .Dropdown-arrow {
+  border-color: #FFFFFF transparent transparent;
+  border-style: solid;
+  border-width: 0.5rem 0.4375rem 0.1875rem;
+}
+
+.gorDataTableDrop .Dropdown-menu {
+  border: 1px solid;
+  border-radius: 3px;
+  box-shadow: 0 0.0625rem 0 rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
+  margin-top: -0.0625rem;
+  max-height: 12.5rem;
+  overflow-y: auto;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  z-index: 1000;
+  -webkit-overflow-scrolling: touch;
+}
+
+.gorDataTableDrop .Dropdown-option {
+  box-sizing: border-box;
+  color: #A6A7A9;
+  cursor: pointer;
+  display: block;
+  padding: 0.5rem 0.625rem;
+}
+
+.gorDataTableDrop .Dropdown-option.is-selected {
+  font-weight: bold;
+}
+
+.gorDataTableDrop .Dropdown-option:hover {
+  color: #FFFFFF;
+}
+
+.gorDataTableDrop .Dropdown-noresults {
+  box-sizing: border-box;
+  color: #ccc;
+  cursor: default;
+  display: block;
+  padding: 0.5rem 0.625rem;
 }
 
 .gorSubTab.gorContainer {
@@ -2259,7 +2452,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   font-family: "source sans pro";
   font-size: 18px;
   font-weight: bold;
-  display: inline-block;
   width: 100%;
   color: #4d5055;
   font-weight: bold;
@@ -2268,6 +2460,250 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .gorMainSubtab {
   background-color: #F8F8F8;
   width: 100%;
-  vertical-align: middle;
-  height: 50px;
+}
+
+.gor-add-btn {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  width: 113px;
+  height: 35px;
+  font-size: 14px;
+  background: #f36f36;
+  color: #ffffff;
+  border-radius: 3px;
+  margin-left: 50px;
+}
+
+.gor-usr-add {
+  display: inline-block;
+  width: 70%;
+}
+
+.gor-usr-form {
+  margin-top: 120px;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  width: 100%;
+}
+
+.modal-content .gor-sub-head {
+  font-family: 'Source Sans Pro Regular', sans-serif;
+  font-size: 12px;
+  color: #000000;
+  margin-top: 10px;
+}
+
+.modal-content .gor-modal-head {
+  font-family: 'Source Sans Pro Regular', sans-serif;
+  font-size: 26px;
+  border-bottom: 1px solid #AAAAAA;
+  min-height: 3.75rem;
+  width: 92%;
+  padding-top: 40px;
+  margin: auto;
+  margin-left: 30px;
+  margin-right: 30px;
+  position: fixed;
+  top: 0;
+  background: #ffffff;
+}
+
+.modal-content .gor-modal-head .close {
+  background: #f2f2f2;
+  color: #AAAAAA;
+  float: right;
+  text-align: center;
+  font-size: 28px;
+  width: 30px;
+  height: 30px;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.modal-content .gor-modal-head .close:hover {
+  color: #333333;
+}
+
+.modal-content .gor-modal-head .close:focus {
+  color: #666666;
+}
+
+.modal-content .gor-usr-details {
+  padding-left: 40%;
+  margin-top: 40px;
+}
+
+.modal-content .gor-usr-details .gor-role {
+  margin-top: 25px;
+}
+
+.modal-content .gor-usr-details .gor-choose {
+  margin-left: 2%;
+}
+
+.modal-content .gor-usr-details .gor-usr-hdlg {
+  font-family: 'Source Sans Pro Semibold', sans-serif;
+  font-size: 20px;
+  color: #000000;
+}
+
+.modal-content .gor-usr-details .gor-usr-hdsm {
+  font-family: 'Source Sans Pro Semibold', sans-serif;
+  font-size: 14px;
+  color: #000000;
+  margin-top: 25px;
+}
+
+.modal-content .gor-usr-details .gor-usr-fdlg {
+  margin: auto;
+  text-align: left;
+  margin-top: 0.625rem;
+  padding: 0.625rem;
+  width: 30%;
+  background-color: #FFFFFF;
+  border-radius: 3px;
+  border: 1px solid #AAAAAA;
+}
+
+.modal-content .gor-usr-details .gor-usr-field {
+  display: inline-block;
+  width: 23%;
+}
+
+.modal-content .gor-usr-details .gor-usr-field .gor-usr-fdsm {
+  margin: auto;
+  text-align: left;
+  margin-top: 0.625rem;
+  padding: 0.625rem;
+  width: 75%;
+  background-color: #FFFFFF;
+  border-radius: 3px;
+  border: 1px solid #AAAAAA;
+}
+
+.modal-content .gor-submit {
+  margin-top: 25px;
+  margin-left: 40%;
+}
+
+.gor-footer {
+  background: #4D5055;
+  color: #A6A7A9;
+  border-top: solid 1px #cccccc;
+  text-align: center;
+  min-height: 0.625rem;
+  width: 92%;
+  padding: 1%;
+  position: fixed;
+  bottom: 0;
+}
+
+.react-redux-modal button:focus {
+  outline: 0;
+}
+
+.react-redux-modal .rrm-holder {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.react-redux-modal .rrm-holder .scroll {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow-y: auto;
+  z-index: 1;
+}
+
+.react-redux-modal .rrm-holder .scroll .rrm-content {
+  z-index: 1;
+  overflow: hidden;
+}
+
+.react-redux-modal .rrm-holder .scroll .rrm-content.m-small {
+  width: 300px;
+}
+
+.react-redux-modal .rrm-holder .scroll .rrm-content.m-small .rrm-title h2 {
+  width: 140px;
+}
+
+.react-redux-modal .rrm-holder .scroll .rrm-content.m-medium {
+  width: 500px;
+}
+
+.react-redux-modal .rrm-holder .scroll .rrm-content.m-medium .rrm-title h2 {
+  width: 340px;
+}
+
+.react-redux-modal .rrm-holder .scroll .rrm-content.m-large {
+  width: 100%;
+}
+
+.react-redux-modal .rrm-holder .scroll .rrm-content.m-large .rrm-title h2 {
+  width: 640px;
+}
+
+.react-redux-modal .rrm-holder .scroll .rrm-content .rrm-title h2 {
+  height: 60px;
+  padding: 0 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1.4em;
+  margin: 0;
+  line-height: 60px;
+  float: left;
+  box-sizing: content-box;
+}
+
+.react-redux-modal .rrm-holder .scroll .rrm-content .rrm-title .rr-title-actions {
+  width: 120px;
+  height: 100%;
+  text-align: center;
+  float: left;
+}
+
+.react-redux-modal .rrm-holder .scroll .rrm-content .rrm-title .rr-title-actions button {
+  width: 40px;
+  height: 40px;
+  margin: 10px 8px;
+  line-height: 40px;
+  position: relative;
+  border: 1px solid transparent;
+  float: right;
+  background-color: transparent;
+  text-align: center;
+  padding: 0;
+  color: #666;
+  font-size: 1.2em;
+  border-radius: 50%;
+}
+
+.react-redux-modal .rrm-holder .scroll .rrm-content .rrm-title .rr-title-actions button:hover {
+  color: #4186bf;
+  cursor: pointer;
+  background-color: rgba(65, 134, 191, 0.1);
+  border-color: rgba(65, 134, 191, 0.2);
+  box-shadow: 2px 2px 3px #f0f0f0;
+}
+
+.react-redux-modal .rrm-holder .scroll .rrm-content .rrm-body {
+  width: 100%;
+}
+
+.react-redux-modal .rrm-holder .rrm-shadow {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(50, 58, 68, 0.8);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
 }

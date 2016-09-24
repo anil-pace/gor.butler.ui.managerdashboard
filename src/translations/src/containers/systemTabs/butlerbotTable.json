@@ -1,0 +1,32 @@
+[
+  {
+    "id": "butlerBot.table.heading",
+    "description": "Heading for butlerbot",
+    "defaultMessage": "BUTLER BOTS"
+  },
+  {
+    "id": "butlerBot.table.status",
+    "description": "Status for butlerbot",
+    "defaultMessage": "STATUS"
+  },
+  {
+    "id": "butlerBot.table.currentTask",
+    "description": "Current task for butlerbot",
+    "defaultMessage": "CURRENT TASK"
+  },
+  {
+    "id": "butlerBot.table.msu",
+    "description": "MSU Status for butlerbot",
+    "defaultMessage": "MSU"
+  },
+  {
+    "id": "butlerBot.table.location",
+    "description": "Location for butlerbot",
+    "defaultMessage": "LOCATION"
+  },
+  {
+    "id": "butlerBot.table.direction",
+    "description": "Direction for butlerbot",
+    "defaultMessage": "DIRECTION"
+  }
+]

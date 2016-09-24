@@ -100,6 +100,7 @@
     "react-intl": "^2.1.5",
     "react-intl-redux": "^0.1.0",
     "react-redux": "^4.4.5",
+    "react-redux-modal": "^0.4.3",
     "react-select": "^1.0.0-beta14",
     "xmldom": "^0.1.22"
   },

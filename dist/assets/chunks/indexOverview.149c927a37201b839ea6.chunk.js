@@ -1,6 +1,6 @@
-webpackJsonp([2,5],{
+webpackJsonp([2,10],{
 
-/***/ 469:
+/***/ 480:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9,23 +9,23 @@ webpackJsonp([2,5],{
 		value: true
 	});
 
-	var _getPrototypeOf = __webpack_require__(416);
+	var _getPrototypeOf = __webpack_require__(426);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(420);
+	var _classCallCheck2 = __webpack_require__(430);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(421);
+	var _createClass2 = __webpack_require__(431);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(422);
+	var _possibleConstructorReturn2 = __webpack_require__(432);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(441);
+	var _inherits2 = __webpack_require__(451);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -37,31 +37,31 @@ webpackJsonp([2,5],{
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _healthTabs = __webpack_require__(450);
+	var _healthTabs = __webpack_require__(460);
 
 	var _healthTabs2 = _interopRequireDefault(_healthTabs);
 
-	var _health = __webpack_require__(451);
+	var _health = __webpack_require__(461);
 
 	var _health2 = _interopRequireDefault(_health);
 
-	var _orderStatsWidget = __webpack_require__(459);
+	var _orderStatsWidget = __webpack_require__(468);
 
 	var _orderStatsWidget2 = _interopRequireDefault(_orderStatsWidget);
 
-	var _performanceWidget = __webpack_require__(466);
+	var _performanceWidget = __webpack_require__(477);
 
 	var _performanceWidget2 = _interopRequireDefault(_performanceWidget);
 
-	var _auditStatusWidget = __webpack_require__(470);
+	var _auditStatusWidget = __webpack_require__(481);
 
 	var _auditStatusWidget2 = _interopRequireDefault(_auditStatusWidget);
 
-	var _putStatusWidget = __webpack_require__(472);
+	var _putStatusWidget = __webpack_require__(483);
 
 	var _putStatusWidget2 = _interopRequireDefault(_putStatusWidget);
 
-	var _pickStatusWidget = __webpack_require__(473);
+	var _pickStatusWidget = __webpack_require__(484);
 
 	var _pickStatusWidget2 = _interopRequireDefault(_pickStatusWidget);
 
@@ -137,7 +137,7 @@ webpackJsonp([2,5],{
 
 /***/ },
 
-/***/ 470:
+/***/ 481:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -146,27 +146,27 @@ webpackJsonp([2,5],{
 		value: true
 	});
 
-	var _assign = __webpack_require__(387);
+	var _assign = __webpack_require__(397);
 
 	var _assign2 = _interopRequireDefault(_assign);
 
-	var _getPrototypeOf = __webpack_require__(416);
+	var _getPrototypeOf = __webpack_require__(426);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(420);
+	var _classCallCheck2 = __webpack_require__(430);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(421);
+	var _createClass2 = __webpack_require__(431);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(422);
+	var _possibleConstructorReturn2 = __webpack_require__(432);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(441);
+	var _inherits2 = __webpack_require__(451);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -178,13 +178,13 @@ webpackJsonp([2,5],{
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _Tilex = __webpack_require__(471);
+	var _Tilex = __webpack_require__(482);
 
 	var _Tilex2 = _interopRequireDefault(_Tilex);
 
 	var _reactRedux = __webpack_require__(191);
 
-	var _reactIntl = __webpack_require__(218);
+	var _reactIntl = __webpack_require__(217);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -213,7 +213,7 @@ webpackJsonp([2,5],{
 				    auditData = (0, _assign2.default)({}, this.props.auditData),
 				    totalAudit = this.props.ppsData ? this.props.ppsData.totalAudit : null,
 				    auditThroughput = this.props.throughputData ? this.props.throughputData.audit_throughput : null,
-				    value = auditData.value ? auditData.value : null;
+				    value = auditData.total_audited ? auditData.total_audited : null;
 
 				//Setting display values based on server values/mock
 				if (!value) {
@@ -238,6 +238,7 @@ webpackJsonp([2,5],{
 					defaultMessage: 'Items to Audit' });
 				auditData.value = value;
 				auditData.low = lowStr;
+				auditData.logo = "iAudit";
 
 				return auditData;
 			}
@@ -263,7 +264,7 @@ webpackJsonp([2,5],{
 
 /***/ },
 
-/***/ 471:
+/***/ 482:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -272,23 +273,23 @@ webpackJsonp([2,5],{
 		value: true
 	});
 
-	var _getPrototypeOf = __webpack_require__(416);
+	var _getPrototypeOf = __webpack_require__(426);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(420);
+	var _classCallCheck2 = __webpack_require__(430);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(421);
+	var _createClass2 = __webpack_require__(431);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(422);
+	var _possibleConstructorReturn2 = __webpack_require__(432);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(441);
+	var _inherits2 = __webpack_require__(451);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -357,7 +358,7 @@ webpackJsonp([2,5],{
 
 /***/ },
 
-/***/ 472:
+/***/ 483:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -366,27 +367,27 @@ webpackJsonp([2,5],{
 	        value: true
 	});
 
-	var _assign = __webpack_require__(387);
+	var _assign = __webpack_require__(397);
 
 	var _assign2 = _interopRequireDefault(_assign);
 
-	var _getPrototypeOf = __webpack_require__(416);
+	var _getPrototypeOf = __webpack_require__(426);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(420);
+	var _classCallCheck2 = __webpack_require__(430);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(421);
+	var _createClass2 = __webpack_require__(431);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(422);
+	var _possibleConstructorReturn2 = __webpack_require__(432);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(441);
+	var _inherits2 = __webpack_require__(451);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -398,13 +399,13 @@ webpackJsonp([2,5],{
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _Tilex = __webpack_require__(471);
+	var _Tilex = __webpack_require__(482);
 
 	var _Tilex2 = _interopRequireDefault(_Tilex);
 
 	var _reactRedux = __webpack_require__(191);
 
-	var _reactIntl = __webpack_require__(218);
+	var _reactIntl = __webpack_require__(217);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -484,7 +485,7 @@ webpackJsonp([2,5],{
 
 /***/ },
 
-/***/ 473:
+/***/ 484:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -493,23 +494,23 @@ webpackJsonp([2,5],{
 	    value: true
 	});
 
-	var _getPrototypeOf = __webpack_require__(416);
+	var _getPrototypeOf = __webpack_require__(426);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(420);
+	var _classCallCheck2 = __webpack_require__(430);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(421);
+	var _createClass2 = __webpack_require__(431);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(422);
+	var _possibleConstructorReturn2 = __webpack_require__(432);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(441);
+	var _inherits2 = __webpack_require__(451);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -521,13 +522,13 @@ webpackJsonp([2,5],{
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _Tile2x = __webpack_require__(474);
+	var _Tile2x = __webpack_require__(485);
 
 	var _Tile2x2 = _interopRequireDefault(_Tile2x);
 
 	var _reactRedux = __webpack_require__(191);
 
-	var _reactIntl = __webpack_require__(218);
+	var _reactIntl = __webpack_require__(217);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -545,13 +546,28 @@ webpackJsonp([2,5],{
 	    }
 
 	    (0, _createClass3.default)(PickStatusWidget, [{
+	        key: '_tomillisecs',
+	        value: function _tomillisecs(m) {
+	            var hh = 0,
+	                mm = 0,
+	                timestr = '';
+	            hh = parseInt(m / 60, 10);
+	            mm = m - hh * 60;
+
+	            if (hh) timestr += hh + 'h ';
+	            timestr += mm + 'm ';
+
+	            return timestr;
+	        }
+	    }, {
 	        key: '_parseProps',
 	        value: function _parseProps() {
 	            var statusClass = '',
 	                statusLogo = '',
 	                headingleft = '',
-	                valueStatus = '',
-	                textleft = '',
+	                valueLeftStatus = '',
+	                valueRightStatus = '',
+	                textleft = 0,
 	                headingright = '',
 	                textright = '',
 	                statusleft = '',
@@ -559,45 +575,64 @@ webpackJsonp([2,5],{
 	                lowleft = '',
 	                lowright = '',
 	                logo = '',
+	                ppsCount = 0,
+	                remTime = 0,
+	                eta = 0,
 	                items = {};
-	            headingleft = _react2.default.createElement(_reactIntl.FormattedMessage, { id: 'pickWidget.headingleft',
+
+	            headingleft = _react2.default.createElement(_reactIntl.FormattedMessage, { id: 'widget.pick.headingleft',
 	                defaultMessage: 'Orders to fullfill' });
 	            logo = ' iPick';
-
+	            ppsCount = this.props.ppsData.totalPick;
 	            textleft = this.props.ordersData.count_pending;
-	            if (!textleft) {
-	                valueStatus = 'gor-none';
-	                textleft = _react2.default.createElement(_reactIntl.FormattedMessage, { id: 'pickWidget.textleft',
-	                    defaultMessage: 'NONE' });
 
-	                lowleft = this.props.ordersData.avg + ' Idle';
+	            if (!textleft) {
+	                valueLeftStatus = 'gor-none';
+	                textleft = _react2.default.createElement(_reactIntl.FormattedMessage, { id: 'widget.pick.completed',
+	                    defaultMessage: 'Completed' });
+
+	                lowleft = _react2.default.createElement(_reactIntl.FormattedMessage, { id: 'widget.pick.status.idle',
+	                    defaultMessage: '{count} PPS idle',
+	                    values: {
+	                        count: ppsCount
+	                    } });
 	            } else {
-	                headingright = _react2.default.createElement(_reactIntl.FormattedMessage, { id: 'pickWidget.headingright',
+	                textleft = _react2.default.createElement(_reactIntl.FormattedNumber, { id: 'widget.pick.textleft', value: this.props.ordersData.count_pending });
+
+	                headingright = _react2.default.createElement(_reactIntl.FormattedMessage, { id: 'widget.pick.headingright',
 	                    defaultMessage: 'Time to cut-off' });
 
-	                textright = 'something';
+	                remTime = this._tomillisecs(this.props.ordersData.cut_off);
 
-	                lowleft = _react2.default.createElement(_reactIntl.FormattedMessage, { id: 'pickWidget.lowleft',
-	                    defaultMessage: 'PPS Opertaing' }) + this.props.ordersData.avg + _react2.default.createElement(_reactIntl.FormattedMessage, { id: 'pickWidget.heading',
-	                    defaultMessage: 'per/hr' });
+	                textright = _react2.default.createElement(_reactIntl.FormattedMessage, { id: 'widget.pick.textright',
+	                    defaultMessage: '{cut_off}', values: { cut_off: remTime } });
 
-	                statusright = this.props.ordersData.time_current;
+	                lowleft = _react2.default.createElement(_reactIntl.FormattedMessage, { id: 'widget.pick.throughput',
+	                    defaultMessage: '{count} PPS fullfilling at {throughput} items/hr',
+	                    values: {
+	                        count: ppsCount,
+	                        throughput: this.props.throughputData.pick_throughput
+	                    } });
+	                eta = this._tomillisecs(this.props.ordersData.eta);
+	                lowright = _react2.default.createElement(_reactIntl.FormattedMessage, { id: 'widget.pick.lowright',
+	                    defaultMessage: 'Completing in {eta}', values: { eta: eta } });
 
-	                lowright = _react2.default.createElement(_reactIntl.FormattedMessage, { id: 'pickWidget.lowright',
-	                    defaultMessage: 'Estimated time' }) + '8hr 3min';
-
-	                if (this.props.ordersData.status === 'On Schedule') {
+	                if (!this.props.ordersData.count_risk) {
 	                    statusClass = 'gor-success';
 	                    statusLogo = 'overview-tile-ontime-icon';
-
-	                    statusleft = _react2.default.createElement(_reactIntl.FormattedMessage, { id: 'pickWidget.statusleft',
+	                    statusleft = _react2.default.createElement(_reactIntl.FormattedMessage, { id: 'widget.pick.statusleft',
 	                        defaultMessage: 'On Schedule' });
 	                } else {
-	                    statusClass = 'gor-breach';
-	                    statusleft = this.props.ordersData.status;
+	                    statusClass = 'gor-risk';
+	                    statusLogo = 'header-yellow-alert-icon';
+	                    statusleft = _react2.default.createElement(_reactIntl.FormattedMessage, { id: 'widget.pick.statusRight',
+	                        defaultMessage: '{count_risk} {count_risk,plural, one {order} other {orders}} at risk',
+	                        values: { count_risk: this.props.ordersData.count_risk } });
+	                    valueLeftStatus = 'gor-risk';
+	                    valueRightStatus = 'gor-risk';
 	                }
 	            }
-	            items = { headingleft: headingleft, headingright: headingright, textleft: textleft, valueStatus: valueStatus, textright: textright, statusleft: statusleft, statusClass: statusClass, statusLogo: statusLogo, statusright: statusright, lowleft: lowleft, lowright: lowright, logo: logo };
+	            items = { headingleft: headingleft, headingright: headingright, textleft: textleft, valueLeftStatus: valueLeftStatus, valueRightStatus: valueRightStatus, textright: textright, statusleft: statusleft, statusClass: statusClass, statusLogo: statusLogo, statusright: statusright, lowleft: lowleft, lowright: lowright, logo: logo };
 	            return items;
 	        }
 	    }, {
@@ -611,16 +646,17 @@ webpackJsonp([2,5],{
 	}(_react2.default.Component);
 
 	function mapStateToProps(state, ownProps) {
-
 	    return {
-	        "ordersData": state.ordersInfo.ordersData || {}
+	        ordersData: state.ordersInfo.ordersData || {},
+	        ppsData: state.ppsInfo.ppsData || {},
+	        throughputData: state.throughputInfo.throughputData || {}
 	    };
 	}
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(PickStatusWidget);
 
 /***/ },
 
-/***/ 474:
+/***/ 485:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -629,23 +665,23 @@ webpackJsonp([2,5],{
 		value: true
 	});
 
-	var _getPrototypeOf = __webpack_require__(416);
+	var _getPrototypeOf = __webpack_require__(426);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(420);
+	var _classCallCheck2 = __webpack_require__(430);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(421);
+	var _createClass2 = __webpack_require__(431);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(422);
+	var _possibleConstructorReturn2 = __webpack_require__(432);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(441);
+	var _inherits2 = __webpack_require__(451);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -689,7 +725,7 @@ webpackJsonp([2,5],{
 								{ className: 'gor-heading-value' },
 								_react2.default.createElement(
 									'span',
-									{ className: this.props.items.valueStatus },
+									{ className: this.props.items.valueLeftStatus },
 									this.props.items.textleft
 								)
 							),
@@ -730,7 +766,7 @@ webpackJsonp([2,5],{
 								),
 								_react2.default.createElement(
 									'p',
-									{ className: 'gor-heading-value gorRisk' },
+									{ className: "gor-heading-value " + this.props.items.valueRightStatus },
 									this.props.items.textright
 								),
 								_react2.default.createElement(

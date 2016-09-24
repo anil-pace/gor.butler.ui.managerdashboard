@@ -21,12 +21,7 @@ class Health extends React.Component{
 		<div className="horizontal-line"> </div>
 		<div className="block">
 			<div className="block parameters">
-				<div className="block paramPositionFront ">
-					<div className="block stoppedState" >
-						<span>{this.props.items[0].states.stoppedState}</span> 
-					</div>
-					<div className="status">Stopped</div>
-				</div>
+				
 				<div className="block paramPositionMiddle ">
 					<div className="block onState" >
 						<span>{this.props.items[0].states.onState}</span>

@@ -1,37 +1,47 @@
 [
   {
-    "id": "pickWidget.headingleft",
+    "id": "widget.pick.headingleft",
     "description": "Heading for pick status widget",
     "defaultMessage": "Orders to fullfill"
   },
   {
-    "id": "pickWidget.textleft",
+    "id": "widget.pick.completed",
     "description": "Heading for pick status widget",
-    "defaultMessage": "NONE"
+    "defaultMessage": "Completed"
   },
   {
-    "id": "pickWidget.headingright",
+    "id": "widget.pick.status.idle",
+    "description": "Throughput message",
+    "defaultMessage": "{count} PPS idle"
+  },
+  {
+    "id": "widget.pick.headingright",
     "description": "Heading for pick status widget",
     "defaultMessage": "Time to cut-off"
   },
   {
-    "id": "pickWidget.lowleft",
-    "description": "Heading for pick status widget",
-    "defaultMessage": "PPS Opertaing"
+    "id": "widget.pick.textright",
+    "description": "Time remaining",
+    "defaultMessage": "{cut_off}"
   },
   {
-    "id": "pickWidget.heading",
-    "description": "Heading for pick status widget",
-    "defaultMessage": "per/hr"
+    "id": "widget.pick.throughput",
+    "description": "Throughput message",
+    "defaultMessage": "{count} PPS fullfilling at {throughput} items/hr"
   },
   {
-    "id": "pickWidget.lowright",
-    "description": "Heading for pick status widget",
-    "defaultMessage": "Estimated time"
+    "id": "widget.pick.lowright",
+    "description": "Estimated time",
+    "defaultMessage": "Completing in {eta}"
   },
   {
-    "id": "pickWidget.statusleft",
+    "id": "widget.pick.statusleft",
     "description": "Heading for pick status widget",
     "defaultMessage": "On Schedule"
+  },
+  {
+    "id": "widget.pick.statusRight",
+    "description": "Heading for pick status widget",
+    "defaultMessage": "{count_risk} {count_risk, plural, one {order} other {orders}} at risk"
   }
 ]
