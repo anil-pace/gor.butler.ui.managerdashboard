@@ -8,33 +8,32 @@ import SubTab from './subTab';
 import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
 import {subTabSelected} from '../../actions/subTabSelectAction'
+import {NOTIFICATION,BUTLERBOTS,PPS,CHARGING} from '../../constants/appConstants'
 
 class SystemTab extends React.Component{
 	constructor(props) 
 	{
     	super(props);
     }
-
     handleNotificationClick(data){
-    	var temp = "NOTIFICATION";
+    	var temp = NOTIFICATION;
     	this.props.subTabSelected(temp)
     }
-
     handleButlerbotsClick(data){
-    	var temp = "BUTLERBOTS";
+    	var temp = BUTLERBOTS;
     	this.props.subTabSelected(temp)
     }
     handlePpsClick(data){
-    	var temp = "PPS";
+    	var temp = PPS;
     	this.props.subTabSelected(temp)
     }
     handleChargingstationClick(data){
-    	var temp = "CHARGING";
+    	var temp = CHARGING;
     	this.props.subTabSelected(temp)
     }
     
 	render(){
-		
+
 		var item1=[{tabContent:"Notification"}];
 		var item2=[{tabContent:"Butler Bots"}];
 		var item3=[{tabContent:"PPS"}];
@@ -66,7 +65,7 @@ class SystemTab extends React.Component{
 function mapStateToProps(state, ownProps){
     
     return  {
-         subTab:state.subTabSelected|| {},
+         subTab:state.subTabSelected || {},
          mainTab:state.tabSelected.tab || {}
     }
 }

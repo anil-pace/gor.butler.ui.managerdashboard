@@ -39,9 +39,19 @@ export const PARSE_PICK = "pick_details";
 export const PARSE_PPA_THROUGHPUT = "put_pick_audit_throughput";
 export const PARSE_AUDIT = "audit_details";
 export const SYSTEM_CHARGERS_DETAILS = "system_chargers_details";
+export const NOTIFICATION = "NOTIFICATION";
+export const BUTLERBOTS = "BUTLERBOTS";
+export const CHARGING = "CHARGING";
+export const PPS = "PPS";
 /*Constants for stats widget*/
 export const RENDER_STATSWIDGET = "RENDER_STATSWIDGET";
 
+/*Constants for main tab*/
+export const OVERVIEW = "OVERVIEW";
+export const SYSTEM = "SYSTEM";
+export const ORDERS = "ORDERS";
+export const INVENTORY = "INVENTORY";
+export const USERS = "USERS";
 
 
 /*Constants for response type */

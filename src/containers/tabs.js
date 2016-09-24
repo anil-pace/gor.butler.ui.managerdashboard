@@ -3,32 +3,32 @@ import ReactDOM  from 'react-dom';
 import Tab from '../components/tabs/tab';
 import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
-import {tabSelected} from '../actions/tabSelectAction'
-
+import {tabSelected} from '../actions/tabSelectAction';
+import {OVERVIEW,SYSTEM,ORDERS,INVENTORY,USERS} from '../constants/appConstants';
 class Tabs extends React.Component{
 	constructor(props) 
 	{
     	super(props);
     }	
     handleOverviewClick(data){
-    	var temp = "OVERVIEW";
+    	var temp = OVERVIEW;
     	this.props.tabSelected(temp)
     }
 
     handleSystemClick(data){
-    	var temp = "SYSTEM";
+    	var temp = SYSTEM;
     	this.props.tabSelected(temp)
     }
     handleOrdersClick(data){
-    	var temp = "ORDERS";
+    	var temp = ORDERS;
     	this.props.tabSelected(temp)
     }
     handleInvenClick(data){
-    	var temp = "INVENTORY";
+    	var temp = INVENTORY;
     	this.props.tabSelected(temp)
     }
     handleUsersClick(data){
-    	var temp = "USERS";
+    	var temp = USERS;
     	this.props.tabSelected(temp)
     }
     
@@ -80,7 +80,7 @@ class Tabs extends React.Component{
 function mapStateToProps(state, ownProps){
     
     return  {
-         tab:state.tabSelected.tab || {}
+         tab:state.tabSelected.tab || {},
     }
 }
 

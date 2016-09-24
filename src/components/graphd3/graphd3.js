@@ -32,7 +32,6 @@ class Chart extends React.Component{
       temp++;
       if (count === 3 || temp ===0 || temp ===23){
         count = 0;
-        //d=d.substr(0,d.indexOf(' '));
         return d;
       }
       return "";
