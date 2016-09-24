@@ -34,7 +34,7 @@
         "no-else-return": "error",
         "no-empty-function": "error",
         "no-empty-pattern": "error",
-        "eslint no-eq-null": "error",
+        "no-eq-null": "error",
         "no-eval": "error",
         "no-extra-bind": "error",
         "yoda": ["error", "never", { "exceptRange": true }],

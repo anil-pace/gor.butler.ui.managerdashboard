@@ -1,4 +1,3 @@
-/*eslint no-eq-null: "error"*/
 import {AUDIT_DATA} from '../constants/appConstants'; 
 /**
  * @param  {State Object}
