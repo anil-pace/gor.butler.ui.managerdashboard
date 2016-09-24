@@ -15,7 +15,7 @@ import PerformanceWidget from './containers/performanceWidget'
 import { REQUEST_HEADER, getFetchData } from './actions/headerAction'
 import { connect } from 'react-redux';
 import Chart from './components/graphd3/graphd3';
-import ChartHorizontal from './components/graphd3/graph_horizontal';
+import ChartHorizontal from './components/graphd3/graph_horizontal'; 
 
 
 
