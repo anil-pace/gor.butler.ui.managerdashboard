@@ -1,8 +1,11 @@
 import React from 'react';
+import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import {Table, Column, Cell} from 'fixed-data-table';
 import Dimensions from 'react-dimensions';
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
+import {modal} from 'react-redux-modal';
+import AddUser from './addNewUser';
 
 class UserDataTable extends React.Component {
   constructor(props) {
@@ -54,6 +57,25 @@ class UserDataTable extends React.Component {
     });
   } 
 
+  addModal() {
+    modal.add(AddUser, {
+      title: '',
+      size: 'large', // large, medium or small,
+      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: true // (optional) if you don't wanna show the top right close button
+      //.. all what you put in here you will get access in the modal props ;)
+    });
+  }
+ //  _showModal(){
+ // //    this.myModal.style.display = "block";
+ //       this.refs.modal.style.display = "block";   
+ //  }
+ //  _hideModal(){
+ // //    this.myModal.style.display = "none";    
+ //       this.refs.modal.style.display = "none";   
+ 
+ //  }
+
   render() {
     var {sortedDataList, colSortDirs,columnWidths} = this.state;
     var columnWidth= (this.props.containerWidth/this.props.itemNumber)
@@ -66,6 +88,9 @@ class UserDataTable extends React.Component {
               <FormattedMessage id="user.table.heading" description="Heading for users table" 
               defaultMessage ="USERS"/>
             </div>
+            <div className="gorToolBarElements">
+                <button className="gor-add-btn" onClick={this.addModal.bind(this)}>Add new user</button>
+            </div>            
           </div>
           <div className="filterWrapper">  
         <div className="gorFilter">

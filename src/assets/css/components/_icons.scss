@@ -24,29 +24,27 @@
 .cbs-overview-chutes,
 .cbs-overview-casket,
 .overview-tile-ontime-icon,
-.cbs-overview-inducts,.statusOl,.statusAl,.iStock ,.iAudit,.iPick,.login-user,.login-password,.login-error{
+.cbs-overview-inducts,.statusOl,.statusAl,.iStock ,.iAudit,.iPick,.gor-login-user,.gor-login-password,.gor-login-error{
     background-image: url(images/icons.svg);
 }
-
 .fk-logo,
 .gor-logo{
     background-image: url(images/Logos.svg);
 }
 
-
-.login-user{
+.gor-login-user{
     background-position:-205px -77px;
     width:16px;
     height:16px;    
     display:inline-block;
 }
-.login-password{
+.gor-login-password{
     background-position:-223px -77px;
     width:16px;
     height:16px;    
     display:inline-block;
 }
-.login-error{
+.gor-login-error{
     background-position:-18px -78px;
     width:16px;
     height:16px;    
@@ -56,8 +54,8 @@
     background-image: url(images/Logos.svg);    
 }
 .alt-gor-logo{
-    background-position:-212px -1px;
-    width:200px;
+    background-position:-182px -1px;
+    width:235px;
     height:25px;
 }
 .gor-logo{
@@ -125,4 +123,10 @@
     height:15px;
     display: inline-block;
     vertical-align: middle;
+}
+.header-yellow-alert-icon{
+    background-position: -35px -78px;
+    width:16px;
+    height:14px;           
+    display:inline-block; 
 }

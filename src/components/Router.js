@@ -3,7 +3,9 @@
  */
 import React  from 'react';
 import ReactDOM  from 'react-dom';
+import { connect } from 'react-redux';
 import { Router, Route, hashHistory, IndexRoute} from 'react-router';
+import {loginRequest} from '../actions/loginAction';
 
 class Routes extends React.Component{
 	constructor(props) 
@@ -11,6 +13,13 @@ class Routes extends React.Component{
     	super(props);
        
     }
+   requireAuth(nextState, replaceState ) {
+  		if (sessionStorage.getItem('auth_token')) 
+  		{
+  			this.props.loginRequest();
+    		replaceState({ nextPathname: nextState.location.pathname }, '/overview',nextState.location.query)
+ 	 	}
+	}
     render(){
 		return (
 		<Router history={hashHistory}>
@@ -21,7 +30,7 @@ class Routes extends React.Component{
 		      },"defaultApp");
 		    }}
 			 />
-			 <Route name="login" path="/login"  
+			 <Route name="login" path="/login"   onEnter={this.requireAuth.bind(this)} 
 			 getComponent={(location, callback) => {
 		      require.ensure([], function (require) {
 		        callback(null, require('./Login/login').default);
@@ -124,5 +133,13 @@ class Routes extends React.Component{
 		)}
 
 }
-
-export default Routes
+function mapStateToProps(state, ownProps){
+	return {
+    };
+}
+var mapDispatchToProps = function(dispatch){
+    return {
+        loginRequest: function(){ dispatch(loginRequest()); }
+    }
+};
+export default connect(mapStateToProps,mapDispatchToProps)(Routes);

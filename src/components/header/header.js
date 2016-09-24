@@ -2,6 +2,9 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { connect } from 'react-redux' ;
 import {REQUEST_HEADER,RECIEVE_HEADER,RECIEVE,RECIEVE_ITEM_TO_STOCK} from '../../actions/headerAction';
+import { logoutRequest } from '../../actions/loginAction';
+import { endWsAction } from '../../actions/socketActions';
+
 var dropdownFlag=0;
 var temp;
 
@@ -33,6 +36,8 @@ class Header extends React.Component{
     }
 
     appLogout() {
+    	this.props.userLogout();
+    	this.props.endConnect();
 
     }
 
@@ -42,8 +47,6 @@ class Header extends React.Component{
 		
 
 		const item = [
-		{ value: 'Placeholder_option_1', label: 'Placeholder option 1' },
-		{ value: 'Placeholder_option_2', label: 'Placeholder option 2' },
 		{ value: 'logout', label: 'Logout' }
 		]
 		//console.log(this.props.headData);
@@ -78,11 +81,9 @@ class Header extends React.Component{
 
 						<div id="myDropdown" className="dropdown-content">
 							<div className="horizontalDiv">	
-								<a href="#">Placeholder option 1</a>
-								<a href="#">Placeholder option 2</a>
 							</div>
 							<div>
-								<a onClick={this.appLogout}>Logout</a>
+								<a href="javascript:void(0)" onClick={this.appLogout.bind(this)}>Logout</a>
 							</div>
 						</div>
 					</div>
@@ -100,5 +101,11 @@ function mapStateToProps(state, ownProps){
 		 
 
 }
+function mapDispatchToProps(dispatch){
+    return {
+    	endConnect: function(){ dispatch(endWsAction()); },
+        userLogout: function(){ dispatch(logoutRequest()); }
+    }
+};
 
-export 	default connect(mapStateToProps)(Header);
+export 	default connect(mapStateToProps,mapDispatchToProps)(Header);

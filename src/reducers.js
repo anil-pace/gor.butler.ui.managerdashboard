@@ -20,6 +20,8 @@ import {butlerDetail} from './reducers/butlerDetailReducer'
 import {PPSDetail} from './reducers/ppsDetailReducer'
 import {tabSelected} from './reducers/tabSelectReducer'
 import {subTabSelected} from './reducers/subTabSelectReducer'
+import {reducer as modalReducer} from 'react-redux-modal'
+
 
 const rootReducer = combineReducers({
   intl:intlReducer,
@@ -29,6 +31,7 @@ const rootReducer = combineReducers({
   recieveSocketActions,
   butlersInfo,
   chargerInfo,
+  modals: modalReducer,
   auditInfo,
   putInfo,
   ppsInfo,

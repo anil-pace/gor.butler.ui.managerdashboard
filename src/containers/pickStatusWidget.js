@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import Tile2x from '../components/tile2x/Tile2x';
 import { connect } from 'react-redux' ;
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage,FormattedNumber,FormattedPlural,FormattedRelative } from 'react-intl';
 
 class PickStatusWidget extends React.Component{
 	/**
@@ -13,55 +13,97 @@ class PickStatusWidget extends React.Component{
 	{ 
     	super(props);
         //console.log(this.props.ordersData);
+    }
+    _tomillisecs(m){
+     let hh=0,mm=0,timestr='';
+     hh=parseInt(m/60,10);
+     mm=m-(hh*60);
+
+     if(hh)
+        timestr+=hh+ 'h ';
+     timestr+=mm+ 'm ';   
+
+     return timestr;     
     }	
     _parseProps (){
-        let statusClass='', statusLogo='', headingleft='',valueStatus='',textleft='',headingright='',textright='', statusleft='',statusright='',lowleft='',lowright='',logo='',items={};
-        headingleft=<FormattedMessage id="pickWidget.headingleft" description='Heading for pick status widget' 
+        let statusClass='', 
+        statusLogo='', 
+        headingleft='',
+        valueLeftStatus='',
+        valueRightStatus='',
+        textleft=0,
+        headingright='',
+        textright='', 
+        statusleft='',
+        statusright='',
+        lowleft='',
+        lowright='',
+        logo='',
+        ppsCount=0,
+        remTime=0,
+        eta=0,
+        items={};
+        
+        headingleft=<FormattedMessage id="widget.pick.headingleft" description='Heading for pick status widget' 
             defaultMessage='Orders to fullfill'/>;
         logo=' iPick';
-
+        ppsCount=this.props.ppsData.totalPick;
         textleft=this.props.ordersData.count_pending;
+        
         if(!textleft)
         {
-            valueStatus='gor-none';
-            textleft=<FormattedMessage id="pickWidget.textleft" description='Heading for pick status widget' 
-            defaultMessage='NONE'/>;
+            valueLeftStatus='gor-none';
+            textleft=<FormattedMessage id="widget.pick.completed" description='Heading for pick status widget' 
+            defaultMessage='Completed'/>;
 
-            lowleft=this.props.ordersData.avg+' Idle';
+            lowleft=<FormattedMessage id="widget.pick.status.idle" description='Throughput message' 
+                            defaultMessage='{count} PPS idle'
+                            values={{
+                                count: ppsCount
+                            }}/>;
         }
         else
         {
-            headingright=<FormattedMessage id="pickWidget.headingright" description='Heading for pick status widget' 
+            textleft=<FormattedNumber id='widget.pick.textleft' value={this.props.ordersData.count_pending} />;
+
+            headingright=<FormattedMessage id="widget.pick.headingright" description='Heading for pick status widget' 
             defaultMessage='Time to cut-off'/>;
             
-            textright='something';
+            remTime=this._tomillisecs(this.props.ordersData.cut_off);
+
+            textright=<FormattedMessage id="widget.pick.textright" description='Time remaining' 
+            defaultMessage='{cut_off}' values={{cut_off:remTime}} />;
 
 
-            lowleft=<FormattedMessage id="pickWidget.lowleft" description='Heading for pick status widget' 
-            defaultMessage='PPS Opertaing' /> + this.props.ordersData.avg + 
-            <FormattedMessage id="pickWidget.heading" description='Heading for pick status widget' 
-            defaultMessage='per/hr'/>;
-            
-            statusright=this.props.ordersData.time_current;
-            
-            lowright=<FormattedMessage id="pickWidget.lowright" description='Heading for pick status widget' 
-            defaultMessage='Estimated time' />+'8hr 3min';
+            lowleft=<FormattedMessage id="widget.pick.throughput" description='Throughput message' 
+                            defaultMessage='{count} PPS fullfilling at {throughput} items/hr'
+                            values={{
+                                count: ppsCount,
+                                throughput:this.props.throughputData.pick_throughput
+                            }}/>;            
+            eta=this._tomillisecs(this.props.ordersData.eta);
+            lowright=<FormattedMessage id="widget.pick.lowright" description='Estimated time' 
+            defaultMessage='Completing in {eta}' values={{eta:eta}}/>;
 
-            if(this.props.ordersData.status==='On Schedule')
+            if(!this.props.ordersData.count_risk)
             {
                 statusClass='gor-success';
                 statusLogo='overview-tile-ontime-icon';
-
-                statusleft=<FormattedMessage id="pickWidget.statusleft" description='Heading for pick status widget' 
+                statusleft=<FormattedMessage id="widget.pick.statusleft" description='Heading for pick status widget' 
             defaultMessage='On Schedule'/>
             }
             else
             {
-                statusClass='gor-breach';            
-                statusleft=this.props.ordersData.status;
+                statusClass='gor-risk';  
+                statusLogo='header-yellow-alert-icon';
+                statusleft=<FormattedMessage id="widget.pick.statusRight" description='Heading for pick status widget' 
+                defaultMessage='{count_risk} {count_risk,plural, one {order} other {orders}} at risk'
+            values={{count_risk:this.props.ordersData.count_risk}}/>
+                valueLeftStatus='gor-risk';          
+                valueRightStatus='gor-risk';
             }
         }
-        items={headingleft:headingleft, headingright:headingright, textleft:textleft, valueStatus:valueStatus, textright:textright, statusleft:statusleft, statusClass:statusClass, statusLogo:statusLogo, statusright:statusright, lowleft:lowleft, lowright:lowright, logo:logo};
+        items={headingleft:headingleft, headingright:headingright, textleft:textleft, valueLeftStatus:valueLeftStatus, valueRightStatus:valueRightStatus, textright:textright, statusleft:statusleft, statusClass:statusClass, statusLogo:statusLogo, statusright:statusright, lowleft:lowleft, lowright:lowright, logo:logo};
         return items;
     }
     render()
@@ -74,9 +116,10 @@ class PickStatusWidget extends React.Component{
 
  }
 function mapStateToProps(state, ownProps){
-    
     return  {
-         "ordersData":state.ordersInfo.ordersData || {}
+        ordersData:state.ordersInfo.ordersData || {},
+        ppsData:state.ppsInfo.ppsData|| {},
+        throughputData : state.throughputInfo.throughputData|| {}
     }
 }
  export default connect(mapStateToProps)(PickStatusWidget);

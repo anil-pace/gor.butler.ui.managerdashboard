@@ -10,6 +10,7 @@ export function ResponseParse(store,res)
 	console.log('In Message Parser');
 	if (!res.resource_type) {
 		store.dispatch(wsOnMessageAction(res));
+		return;
 	}
 	
 
@@ -52,7 +53,7 @@ export function ResponseParse(store,res)
 				store.dispatch(recievePPSDetail(res));
 				break;				    
 			default:
-				store.dispatch(initData(res));
+				store.dispatch(initData(res));          //Default action
 			break;			
 	}
 }  
