@@ -47,7 +47,7 @@ class AuditStatusWidget extends React.Component{
 		}
 
 		auditData.heading = <FormattedMessage id="widget.audit.heading" description='Audit Item Heading' 
-        defaultMessage='Items to audit'/>;
+        defaultMessage='Items audited'/>;
         auditData.value = value;
 		auditData.low = lowStr; 
         auditData.logo = "iAudit";
