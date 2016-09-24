@@ -56,23 +56,23 @@ class Tabs extends React.Component{
 		return (
 		<div className="gorTabs gorMainBlock">
 		<Link to="/overview" onClick = {this.handleOverviewClick.bind(this)}>
-			<Tab items={item1} changeClass={selectClass["OVERVIEW"]}/>
+			<Tab items={item1} changeClass={selectClass["OVERVIEW"]} subIcons={false}/>
 		</Link>
 
 		<Link to="/system" onClick = {this.handleSystemClick.bind(this)}>
-			<Tab items={item2} changeClass={selectClass["SYSTEM"]}/>
+			<Tab items={item2} changeClass={selectClass["SYSTEM"]} subIcons={true}/>
 		</Link>
 
 		<Link to="/orders" onClick = {this.handleOrdersClick.bind(this)}>
-			<Tab items={item3} changeClass={selectClass["ORDERS"]}/>
+			<Tab items={item3} changeClass={selectClass["ORDERS"]} subIcons={true}/>
 		</Link>
 		
 		<Link to="/inventory" onClick = {this.handleInvenClick.bind(this)}>
-			<Tab items={item4} changeClass={selectClass["INVENTORY"]}/>
+			<Tab items={item4} changeClass={selectClass["INVENTORY"]} subIcons={false}/>
 		</Link>
 		
 		<Link to="/users" onClick = {this.handleUsersClick.bind(this)}>
-			<Tab items={item5} changeClass={selectClass["USERS"]}/>
+			<Tab items={item5} changeClass={selectClass["USERS"]} subIcons={false}/>
 		</Link>
 	</div>
 		);

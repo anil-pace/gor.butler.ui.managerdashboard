@@ -66,7 +66,6 @@ class Chart extends React.Component{
       svg.call(tip);
        var json = this.props.tableData.histData;
         update(json);
-
     function update(data) {
       data.forEach(function(d) {
         d.pick = +d.pick;

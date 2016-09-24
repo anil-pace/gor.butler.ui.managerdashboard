@@ -10,16 +10,18 @@ class OrderStatsWidget extends React.Component{
 	render(){
 		const item = [
       { value: 'one', label: 'PPS - pick performance' },
-      { value: 'three', label: 'PPS - pick performance' },
+      { value: 'three', label: 'PPS - put performance' },
       { value: 'four', label: 'PPS - audit performance' },
       
     ]
+    
+
 	return (
 			<div className="gorOrderStatsWidget">
 				<div className="gorDrop">
-				<Dropdown optionDispatch={this.props.renderStatsWidget} pick={item} styleClass={'ddown'} currentState={item[0]}/>
+				<Dropdown optionDispatch={this.props.renderStatsWidget} items={item} styleClass={'ddown'} currentState={item[0]}/>
 				<div id="chart_att">
-					<Chart tableData={this.props.histdata}/>
+					<Chart tableData={this.props.histdata} pick={"pick"}/>
 					</div>
 				</div>
 			</div> 
