@@ -20,6 +20,8 @@ import { translationMessages } from './utilities/i18n';
 
 import { Router, Route, hashHistory, IndexRoute} from 'react-router';
 
+//Import redux modal
+import ReduxModal from 'react-redux-modal';
 
 // Importing our own libraries
 
@@ -38,8 +40,11 @@ const store = configureStore(initState);
 ReactDOM.render(
 	
 	<Provider store={store}>
+	<div>
 	<IntlProvider messages={ translationMessages.en }>
 	<Routes />
 	</IntlProvider>
+	<ReduxModal />
+	</div>
 	</Provider>
 ,document.getElementById('container'))
