@@ -18,7 +18,7 @@ const mockMiddleware = (function(){
         ResponseParse(store,mockData.resTypeButlerDetail);
         ResponseParse(store,mockData.resTypePPSdetail);  
         ResponseParse(store,mockData.resTypeOrders);
-
+        ResponseParse(store,mockData.resTypePPSperformance);
         break;
       //This action is irrelevant to us, pass it on to the next middleware
       default:

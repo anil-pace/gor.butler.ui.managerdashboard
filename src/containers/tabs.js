@@ -39,7 +39,7 @@ class Tabs extends React.Component{
       { tab: 'OVERVIEW', Status: 'Fulfiling orders', currentState:'gorOffline' }
     ]
     const item2 = [
-      { tab: 'SYSTEM', Status: '2 alerts', currentState:'gorOnline' }
+      { tab: 'SYSTEM', Status: 'Online', currentState:'gorOnline' }
     ]
     const item3 = [
       { tab: 'ORDERS', Status: '70% fulfilled', currentState:'gorError' }

@@ -8,11 +8,14 @@ class Tab extends React.Component{
     	super(props);
     }	
 	render(){
-		var icon;
-		if(this.props.subIcons === true) {
+		var icon={};
+		console.log(this.props)
+		if(this.props.subIcons === true && this.props.items[0].currentState === "gorError") {
+			icon = <div className="overview-tile-red-alert-icon"/>
+		}
+		else if(this.props.subIcons === true && this.props.items[0].currentState === "gorOnline" ) {
 			icon = <div className="overview-tile-ontime-icon"/>
 		}
-
 		else {
 			icon = <div/>
 		}

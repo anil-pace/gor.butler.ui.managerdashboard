@@ -44,6 +44,7 @@ export const NOTIFICATION = "NOTIFICATION";
 export const BUTLERBOTS = "BUTLERBOTS";
 export const CHARGING = "CHARGING";
 export const PPS = "PPS";
+export const PPS_PERFORMANCE = "PPS_PERFORMANCE";
 /*Constants for stats widget*/
 export const RENDER_STATSWIDGET = "RENDER_STATSWIDGET";
 

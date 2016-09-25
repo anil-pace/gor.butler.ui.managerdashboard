@@ -16,7 +16,7 @@
 		font-size: calculateRem(14px);
 		border: none;
 		cursor: pointer;
-		width :calculateRem(188px); 
+		width :auto; 
 		font-family: $gor-font-family;
 		&:hover{
 			background-color: #efefef;
@@ -41,7 +41,7 @@
 			background-color: white;
 			font-size: calculateRem(14px);
 			color: #4d5055;
-			width :calculateRem(223px); 
+			width :calculateRem(188px); 
 			display: none;
 			position: absolute;
 			right: 0;

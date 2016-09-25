@@ -74,7 +74,7 @@ class ButlerBotTable extends React.Component {
             <div className="gorToolBarElements">
                <FormattedMessage id="butlerBot.table.heading" description="Heading for butlerbot" 
               defaultMessage ="BUTLER BOTS"/>
-              <div className="gorToolHeaderSubText"> 2 selected </div>
+              
             </div>
           </div>
         <div className="filterWrapper">  
