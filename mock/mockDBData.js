@@ -384,85 +384,85 @@ export const resTypeHistogram = {
 		"end_time": 11,
 		"orders_completed": 200,
 		"items_audited": 1000,
-		"items_put": 2400
+		"items_put": 800
 	}, {
 		"start_time": 11, 
 		"end_time": 12,
 		"orders_completed": 300,
-		"items_audited": 1000,
-		"items_put": 2400
+		"items_audited": 900,
+		"items_put": 600
 	}, {
 		"start_time": 12,
 		"end_time": 13,
 		"orders_completed": 200,
-		"items_audited": 1000,
-		"items_put": 2400
+		"items_audited": 800,
+		"items_put": 900
 	}, {
 		"start_time": 13, 
 		"end_time": 14,
 		"orders_completed": 300,
-		"items_audited": 1000,
-		"items_put": 2400
+		"items_audited": 700,
+		"items_put": 800
 	}, {
 		"start_time": 14, 
 		"end_time": 15,
 		"orders_completed": 350,
-		"items_audited": 1000,
-		"items_put": 2400
+		"items_audited": 800,
+		"items_put": 1200
 	}, {
 		"start_time": 15, 
 		"end_time": 16,
 		"orders_completed": 400,
-		"items_audited": 1000,
-		"items_put": 2400
+		"items_audited": 900,
+		"items_put": 1000
 	}, {
 		"start_time": 16, 
 		"end_time": 17,
 		"orders_completed": 420,
 		"items_audited": 1000,
-		"items_put": 2400
+		"items_put": 800
 	}, {
 		"start_time": 17, 
 		"end_time": 18,
 		"orders_completed": 200,
-		"items_audited": 1000,
-		"items_put": 2400
+		"items_audited": 1100,
+		"items_put": 900
 	}, {
 		"start_time": 18, 
 		"end_time": 19,
 		"orders_completed": 300,
-		"items_audited": 1000,
-		"items_put": 2400
+		"items_audited": 700,
+		"items_put": 800
 	}, {
 		"start_time": 19,
 		"end_time": 20,
 		"orders_completed": 200,
-		"items_audited": 1000,
-		"items_put": 2400
+		"items_audited": 500,
+		"items_put": 700
 	}, {
 		"start_time": 20, 
 		"end_time": 21,
 		"orders_completed": 300,
-		"items_audited": 1000,
-		"items_put": 2400
+		"items_audited": 600,
+		"items_put": 500
 	}, {
 		"start_time": 21, 
 		"end_time": 22,
 		"orders_completed": 350,
-		"items_audited": 1000,
-		"items_put": 2400
+		"items_audited": 800,
+		"items_put": 600
 	}, {
 		"start_time": 22, 
 		"end_time": 23,
 		"orders_completed": 400,
-		"items_audited": 1000,
-		"items_put": 2400
+		"items_audited": 500,
+		"items_put": 500
 	}, {
 		"start_time": 23, 
 		"end_time": 24,
 		"orders_completed": 420,
-		"items_audited": 1000,
-		"items_put": 2400
+		"items_audited": 900,
+		"items_put": 400
 	}
 	],
 	"resource_type": "histogram_details"
@@ -782,9 +782,9 @@ export const resTypePPSdetail = {
 		"pps_id": 1,
                 	"time_unit": "per_hour",
 		"orders_picked": 500,
-		"items_picked": 1000, 
-		"items_put": 2400,
-		"items_audited": 400,
+		"items_picked": 800, 
+		"items_put": 400,
+		"items_audited": 300,
 		"pps_mode": "put",
 		"active": "true"
 	},{
@@ -792,8 +792,8 @@ export const resTypePPSdetail = {
                 	"time_unit": "per_hour",
 		"orders_picked": 500,
 		"items_picked": 900,
-		"items_put": 2400,
-		"items_audited": 470,
+		"items_put": 500,
+		"items_audited": 570,
 		"pps_mode": "put",
 		"active": "true"
 	}, {
@@ -801,8 +801,8 @@ export const resTypePPSdetail = {
                 	"time_unit": "per_hour",
 		"orders_picked": 500,
 		"items_picked": 800,
-		"items_put": 2400,
-		"items_audited": 470,
+		"items_put": 600,
+		"items_audited": 770,
 		"pps_mode": "put",
 		"active": "true"
 	}, {
@@ -810,8 +810,8 @@ export const resTypePPSdetail = {
                 	"time_unit": "per_hour",
 		"orders_picked": 500,
 		"items_picked": 900,
-		"items_put": 2400,
-		"items_audited": 470,
+		"items_put": 700,
+		"items_audited": 870,
 		"pps_mode": "put",
 		"active": "true"
 	},{
@@ -819,7 +819,7 @@ export const resTypePPSdetail = {
                 	"time_unit": "per_hour",
 		"orders_picked": 500,
 		"items_picked": 800,
-		"items_put": 2400,
+		"items_put": 600,
 		"items_audited": 470,
 		"pps_mode": "put",
 		"active": "true"
@@ -828,8 +828,8 @@ export const resTypePPSdetail = {
                 	"time_unit": "per_hour",
 		"orders_picked": 500,
 		"items_picked": 700,
-		"items_put": 2400,
-		"items_audited": 470,
+		"items_put": 700,
+		"items_audited": 370,
 		"pps_mode": "put",
 		"active": "true"
 	},{
@@ -837,8 +837,8 @@ export const resTypePPSdetail = {
                 	"time_unit": "per_hour",
 		"orders_picked": 500,
 		"items_picked": 600,
-		"items_put": 2400,
-		"items_audited": 470,
+		"items_put": 800,
+		"items_audited": 270,
 		"pps_mode": "put",
 		"active": "true"
 	},{
@@ -846,44 +846,26 @@ export const resTypePPSdetail = {
                 	"time_unit": "per_hour",
 		"orders_picked": 500,
 		"items_picked": 300,
-		"items_put": 2400,
-		"items_audited": 470,
+		"items_put": 300,
+		"items_audited": 770,
 		"pps_mode": "put",
 		"active": "true"
 	},{
-		"pps_id": 1,
+		"pps_id": 9,
                 	"time_unit": "per_hour",
 		"orders_picked": 500,
 		"items_picked": 200, 
-		"items_put": 2400,
-		"items_audited": 400,
+		"items_put": 400,
+		"items_audited": 600,
 		"pps_mode": "put",
 		"active": "true"
 	},{
-		"pps_id": 2,
+		"pps_id": 10,
                 	"time_unit": "per_hour",
 		"orders_picked": 500,
 		"items_picked": 300,
-		"items_put": 2400,
-		"items_audited": 470,
-		"pps_mode": "put",
-		"active": "true"
-	}, {
-		"pps_id": 3,
-                	"time_unit": "per_hour",
-		"orders_picked": 500,
-		"items_picked": 400,
-		"items_put": 2400,
-		"items_audited": 470,
-		"pps_mode": "put",
-		"active": "true"
-	}, {
-		"pps_id": 4,
-                	"time_unit": "per_hour",
-		"orders_picked": 500,
-		"items_picked": 500,
-		"items_put": 2400,
-		"items_audited": 470,
+		"items_put": 500,
+		"items_audited": 570,
 		"pps_mode": "put",
 		"active": "true"
 	}

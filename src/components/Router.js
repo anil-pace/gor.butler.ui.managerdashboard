@@ -61,7 +61,7 @@ class Routes extends React.Component{
 					 <IndexRoute 
 					getComponent={(location, callback) => {
 				      require.ensure([], function (require) {
-				        callback(null, require('../containers/systemTabs/notificationTab').default);
+				        callback(null, require('../containers/systemTabs/butlerbotTab').default);
 				      });
 				    }}
 					 />

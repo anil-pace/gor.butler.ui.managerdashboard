@@ -1,6 +1,6 @@
 @import '../abstracts/functions';
 .ddown {
-	max-width:calculateRem(290px);
+  width:auto;
 	min-height: calculateRem(45px);
   .Dropdown-root {
   position: relative;
@@ -19,14 +19,18 @@
   font-weight: bold;
   cursor: default;
   outline: none;
-  padding: calculateRem(8px) calculateRem(52px) calculateRem(8px) calculateRem(10px);
+  padding: calculateRem(12px) calculateRem(52px) calculateRem(8px) calculateRem(10px);
   transition: all 200ms ease;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  height: 45px;
 }
 
 
 .Dropdown-control:hover {
-  box-shadow: calculateRem(2px) calculateRem(2px) calculateRem(2px) #888888;
+  box-shadow: 0px 0px 3px 0px #888888;
   border: calculateRem(1px) solid #ccc;
+
 }
 
 .Dropdown-arrow {
@@ -38,8 +42,8 @@
   height: 0;
   margin-top: -ceil(2.5);
   position: absolute;
-  right: calculateRem(35px);
-  top: calculateRem(14px);
+  right: calculateRem(15px);
+  top: calculateRem(18px);
   
 }
 
@@ -48,17 +52,23 @@
   border-style: solid;
   border-width: calculateRem(8px) calculateRem(7px) calculateRem(3px);
 }
-
-.Dropdown-menu {
+.is-open .Dropdown-control{
+  box-shadow: 0px 0px 3px 0px #888888;
+  border: calculateRem(1px) solid #ccc;
+}
+ .Dropdown-menu {
+ border-radius: calculateRem(4px);
+ border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
   background-color: white;
   border: 1px solid #ccc;
-  box-shadow: 0 calculateRem(1px) 0 rgba(0, 0, 0, 0.06);
+  box-shadow: 0px 0px 3px 0px #888888;
   box-sizing: border-box;
   margin-top: calculateRem(-1px);
   max-height: calculateRem(200px);
   overflow-y: auto;
   position: absolute;
-  top: 100%;
+  top: 105%;
   width: 100%;
   z-index: 1000;
   -webkit-overflow-scrolling: touch;
@@ -71,7 +81,9 @@
   color: #666666;
   cursor: pointer;
   display: block;
-  padding: calculateRem(8px) calculateRem(10px);
+  height: 45px;
+  padding-left: 10px;
+  padding-top: 12px;
 }
 
 .Dropdown-option:last-child {
@@ -99,5 +111,12 @@ box-shadow: calculateRem(2px) calculateRem(2px) calculateRem(2px) #888888;
   padding: calculateRem(8px) calculateRem(10px);
 }
 
+}
+.Order-Stats-Drop {
+  width: 32%;
+}
+
+.Performance-Widget-Drop {
+  width: 74%;
 }
 

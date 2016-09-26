@@ -4,8 +4,6 @@
  */
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-import HealthTabs from '../components/health/healthTabs';
-import Health from '../components/health/health';
 import OrderStatsWidget from '../containers/orderStatsWidget'
 import PerformanceWidget from '../containers/performanceWidget'
 import AuditStatusWidget from '../containers/auditStatusWidget'
@@ -19,21 +17,7 @@ class Overview extends React.Component{
 	{
     	super(props);
     }	
-
-
-
 	render(){
-		/**
-		 * Need to remove these hardcoded variables
-		 * 
-		 */
-
-		
-		//this.formatContainerData('put');
-		//this.formatContainerData('audit');
-		//var putData=this.props.putData ;
-        //var auditData=this.props.auditData;//{heading:'Items to Audit', value:'3,74,519', low:'4 PPS auditing 1,546 items/hr', logo:'iAudit'};;
-
 		return (
 			<div className="gorWidgetWrap">
 				<div className="section group">
