@@ -32,41 +32,45 @@ class App extends React.Component{
   }	
   
   	componentWillMount(){
-  		let userName =  this.props.userName,
-  		authToken = this.props.authToken;
-  		if(MOCK === false){
-        /*Creating Web Socket Connection*/
-    		if(!authToken && !userName){
-    			this.context.router.push("/login");
-    		}
-    		else{
-    			this.props.initWebSocket() ;
-    		}
-      }
-      else{
-          this.props.initMockData(wsInitData) ;
-      }
+      
+        this.context.router.push("/login");
+
   	}
   	componentWillReceiveProps(nextProps) {
     /**
      * Checking if the user is loggedin 
      * and redirecting to main page
      */
-    if(MOCK === false){
-        if (nextProps.socketStatus && !nextProps.socketAuthorized) {
+      let loginAuthorized= nextProps.loginAuthorized,
+      authToken=nextProps.authToken,
+      socketStatus = nextProps.socketStatus;
+
+      if(!loginAuthorized)
+                 this.context.router.push("/login");
+
+      if(MOCK === false){
+        if(loginAuthorized && !socketStatus)
+            this.props.initWebSocket() ; 
+      }
+      else{
+        this.props.initMockData(wsInitData) ;
+      }
+      
+      if(MOCK === false){
+        if (loginAuthorized &&socketStatus && !nextProps.socketAuthorized) {
              let webSocketData = {
                   'type': 'auth',
                   'data' : {
-                      "auth_token" : this.props.authToken
+                      "auth_token" : authToken
                   }
               }
               this.props.sendAuthToSocket(webSocketData) ;
         }
-        if(nextProps.socketStatus && nextProps.socketAuthorized && !nextProps.initDataSent){
-        		this.props.initDataSentCall(wsInitData) ;
+        if(loginAuthorized &&socketStatus && nextProps.socketAuthorized && !nextProps.initDataSent){
+      	   	this.props.initDataSentCall(wsInitData) ;
         }
-    }
-    else{
+      }
+      else{
           this.props.initMockData(wsInitData) ;
       }
     }
@@ -74,11 +78,8 @@ class App extends React.Component{
   	 * @return {[type]}
   	 */
 	render(){
-		var item1={heading:'Items to Stock', value:'4,74,579', low:'4 PPS stocking 3,546 items/hr', logo:'iStock'};
-        var item2={heading1:'Orders to fulfill', value1:'120', low1:'8 PPS fulfilling per/hr', status1:'On schedule', heading2:'Remaining time', value2:'68mins', low2:'Completing in 8mins', status2:'23:59'};
 		var items3={start:"09:10:25", name:"Krish verma gandhi sharma", post:"Manager"}
 		
-
 		
 		return (
 			
@@ -103,10 +104,9 @@ App.contextTypes = {
  */
 
 function mapStateToProps(state,ownProps) {
- 
  return {
- 	authToken : state.authLogin.auth_token,
- 	userName : state.authLogin.username,
+  authToken: state.authLogin.auth_token,
+ 	loginAuthorized : state.authLogin.loginAuthorized,
  	socketStatus: state.recieveSocketActions.socketConnected,
  	socketAuthorized: state.recieveSocketActions.socketAuthorized,
  	initDataSent: state.recieveSocketActions.initDataSent,

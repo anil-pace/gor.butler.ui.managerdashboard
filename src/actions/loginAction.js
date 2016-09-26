@@ -1,4 +1,4 @@
-import { LOGIN_REQUEST, LOGIN_REDIRECT, LOGIN_SUCCESS,LOGIN_FAILURE, AJAX_CALL} from '../constants/appConstants'
+import { LOGIN_REQUEST, LOGIN_REDIRECT, LOGIN_SUCCESS,LOGIN_FAILURE, AJAX_CALL, LOGOUT, WS_DISCONNECT} from '../constants/appConstants'
 
 
 
@@ -7,11 +7,16 @@ import { LOGIN_REQUEST, LOGIN_REDIRECT, LOGIN_SUCCESS,LOGIN_FAILURE, AJAX_CALL} 
  */
 
 
-export function loginRequest(data){
+export function loginRequest(){
   return {
-    type: LOGIN_REQUEST,
-      data
+      type: LOGIN_REQUEST
     }
+}
+
+export function logoutRequest(){
+
+    return { type: LOGOUT }
+  
 }
 
 export function loginRedirect(data){

@@ -9,7 +9,7 @@ module.exports = {
   devtool: "eval",
   entry: {
     app:['es6-symbol','./src/index.js'],
-    vendor: ["react", "react-dom","react-redux","react-intl-redux","redux","react-d3-library","d3","d3-tip"]
+    vendor: ["react", "react-dom","react-redux","react-intl-redux","redux","react-d3-library","d3","d3-tip","react-redux-modal"]
   },
   output: { 
     path: __dirname+"/dist", 

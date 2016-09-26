@@ -136,7 +136,6 @@ class PerformanceWidget extends React.Component{
 };
 
 function mapStateToProps(state, ownProps){
-	console.log(state)
 	return {
 		widget: state.performanceWidget.widget || {},
 		ppsData: state.recieveSocketActions.ppsData || {},

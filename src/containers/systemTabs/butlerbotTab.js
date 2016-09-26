@@ -53,7 +53,43 @@ class ButlerBot extends React.Component{
   "msu": "msu008",
   "location": "004.00",
   "direction": "down"
-}];
+}, {
+  "id": "bot 1001",
+  "status": "Stopped",
+  "current": "pick moving",
+  "msu": "msu007",
+  "location": "002.00",
+  "direction": "up"
+}, {
+  "id": "bot 1002",
+  "status": "Error",
+  "current": "put moving",
+  "msu": "msu008",
+  "location": "004.00",
+  "direction": "down"
+}, {
+  "id": "bot 1003",
+  "status": "Warning",
+  "current": "audit moving",
+  "msu": "msu005",
+  "location": "044.00",
+  "direction": "right"
+}, {
+  "id": "bot 1009",
+  "status": "On",
+  "current": "put moving",
+  "msu": "msu008",
+  "location": "004.00",
+  "direction": "down"
+}, {
+  "id": "bot 1001",
+  "status": "Off",
+  "current": "put moving",
+  "msu": "msu008",
+  "location": "004.00",
+  "direction": "down"
+}
+];
 		
 		return (
 			<div>

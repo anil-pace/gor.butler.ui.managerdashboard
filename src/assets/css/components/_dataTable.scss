@@ -1,4 +1,4 @@
-
+@import '../abstracts/functions';
 
 .fixedDataTableCellGroupLayout_cellGroup {
   -webkit-backface-visibility: hidden;
@@ -8,6 +8,9 @@
   position: absolute;
   top: 0;
   white-space: nowrap;
+  border-bottom: solid;
+  border-width: 1px;
+  border-color: #dedede;
 }
 
 .fixedDataTableCellGroupLayout_cellGroup > .public_fixedDataTableCell_main {
@@ -47,6 +50,7 @@
 
 .fixedDataTableCellLayout_wrap1 {
   display: table;
+  padding-left: 15px;
 }
 
 .fixedDataTableCellLayout_wrap2 {
@@ -81,7 +85,6 @@
 }
 
 .fixedDataTableColumnResizerLineLayout_mouseArea {
-  cursor: ew-resize;
   position: absolute;
   right: -5px;
   width: 12px;
@@ -201,7 +204,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .ScrollbarLayout_main {
   box-sizing: border-box;
   outline: none;
-  overflow: hidden;
+  overflow-x: hidden;
   position: absolute;
   -webkit-transition-duration: 250ms;
           transition-duration: 250ms;
@@ -243,7 +246,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 
 .ScrollbarLayout_face {
   left: 0;
-  overflow: hidden;
+  overflow-x: hidden;
   position: absolute;
   z-index: 1;
 }
@@ -330,6 +333,11 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 
 .public_fixedDataTable_header,
 .public_fixedDataTable_header .public_fixedDataTableCell_main {
+border-bottom-style: solid;
+border-color: #dedede;
+border-bottom-width: 3px;
+border-right-style: solid;
+
   
 }
 
@@ -383,59 +391,93 @@ background-color: #FFFFFF;
 
 .Stopped .public_fixedDataTableCell_cellContent{
 
-  background: red;
-  border-radius: 33%;
+  background: #fc3838;
+  border-radius: 15px;
   text-align: center;
-  width:60px;
+  width:52px;
   color: #ffffff;
   font-size: 12px;
+  max-height: 9px;
 }
 
 .Error .public_fixedDataTableCell_cellContent{
 
-  background: red;
-  border-radius: 33%;
+  background: #fc3838;
+  border-radius: 15px;
   text-align: center;
-  width:60px;
+  width:52px;
   color: #ffffff;
   font-size: 12px;
+  max-height: 9px;
 
 }
 
 .Warning .public_fixedDataTableCell_cellContent{
 
   background: #f99405;
-  border-radius: 33%;
+  border-radius: 15px;
   text-align: center;
-  width:60px;
+  width:52px;
+  color: #ffffff;
   font-size: 12px;
+  max-height: 9px;
 
 }
 
 .On .public_fixedDataTableCell_cellContent{
 
   
-  border-radius: 33%;
+  border-radius: 15px;
   text-align: center;
-  width:60px;
+  width:52px;
   border-style: solid;
   border-width: 1px;
   border-color: #00a54f;
   color: #00a54f;
   font-size: 12px;
+  max-height: 9px;
 
 }
 
 .Off .public_fixedDataTableCell_cellContent{
 
-  border-radius: 33%;
+  border-radius: 15px;
   text-align: center;
-  width:60px;
+  width:52px;
   border-style: solid;
   border-width: 1px;
   border-color: #aaaaaa;
   color: #aaaaaa;
   font-size: 12px;
+  max-height: 9px;
+
+}
+.Online .public_fixedDataTableCell_cellContent{
+
+  
+  border-radius: 15px;
+  text-align: center;
+  width:52px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #00a54f;
+  color: #00a54f;
+  font-size: 12px;
+  max-height: 9px;
+
+}
+
+.Offline .public_fixedDataTableCell_cellContent{
+
+  border-radius: 15px;
+  text-align: center;
+  width:52px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #aaaaaa;
+  color: #aaaaaa;
+  font-size: 12px;
+  max-height: 9px;
 
 }
 
@@ -779,18 +821,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
  */
 
 .ScrollbarLayout_main {
-  box-sizing: border-box;
-  outline: none;
-  overflow: hidden;
-  position: absolute;
-  -webkit-transition-duration: 250ms;
-          transition-duration: 250ms;
-  -webkit-transition-timing-function: ease;
-          transition-timing-function: ease;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  
 }
 
 .ScrollbarLayout_mainVertical {
@@ -942,6 +973,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 
 .public_fixedDataTableCell_cellContent {
   padding: 8px;
+  padding-right: 9px;
 }
 
 .public_fixedDataTableCell_columnResizerKnob {
@@ -1037,37 +1069,58 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
       height: 68px;
       background: #FFFFFF;
       box-shadow: inset 0 5px 5px -5px #888888;
-      position: relative;
       font-family: "source sans pro";
       font-size: 20px;
       color: #000000;
+      padding-left: 20px;
       }
 
 .gorFilter {
   float: right;
-  width: 30%;
   vertical-align: middle;
   box-sizing: border-box;
     border: 1px solid #aaaaaa;
     border-radius: 4px;
-    font-size: 14px;
     background-color: white;
     font-family: "source sans pro";
     color: #aaaaaa;
     height: 35px;
-    width: 260px;
+    width: 200px;
+    padding-left: 9px;
+    
 
 }
-.gorToolBarElements {
-font-family: "source sans pro";
-font-size: 20px;
+
+.gorToolBarFilter {
+
 font-weight: bold;
 color: #000000;
 padding-top: 6px;
   display: inline-block;
-  width: 30%;
+  width: 50%;
   vertical-align: middle;
 }
+
+.gorToolBarElements {
+  display: inline-block;
+  vertical-align: sub;
+  padding-right: 10px;
+  padding-top: 18px;
+}
+.gorToolBarDropDown {
+padding-left: 10px;
+  display: inline-block;
+  vertical-align: 12px;
+}
+
+.gorToolBarWrap {
+width: 49%;
+font-weight: bold;
+color: #000000;
+  display: inline-block;
+  vertical-align: middle;
+}
+
 
 .gorToolHeaderEl {
   display: inline-block;
@@ -1078,11 +1131,123 @@ padding-top: 6px;
   font-family: "source sans pro";
   font-size: 12px;
   color: #666666;
+  padding-top: 4px;
 }
 
 .gorTesting {
   width: 100%;
-  height: 400px;
+  height: calculateRem(480px);
 }
 
+.gorTableMainContainer {
+  overflow-x: hidden;
+}
 
+.gorInputFilter {
+  height:31px;
+  border-width: 0px;
+  border-color: #ffffff;
+  padding-left: 9px;
+  width: 80%;
+}
+
+.filterWrapper {
+  float: right;
+  padding-top: 16px;
+  padding-right: 40px;
+}
+
+input[type="checkbox"]{
+  width: 30px; 
+  height: 15px;
+  zoom: 1.1; 
+}
+
+.statuslogoWrap {
+  display: inline-block;
+  padding-right: 4px;
+}
+
+.alertState {
+  color: #fc3838;
+}
+
+.gorDataTableDrop {
+        display:inline-block;
+        width:calculateRem(174px);
+        height:calculateRem(30px);
+        background:transparent;
+        text-align:left;    
+      .Dropdown-root 
+      {
+          position: relative;
+    }
+    .Dropdown-control {
+      position: relative;
+      overflow: hidden;
+      border:1px solid;
+      border-radius: calculateRem(3px);
+      box-sizing: border-box;
+      cursor: default;
+      outline: none;
+      padding: calculateRem(8px) calculateRem(52px) calculateRem(8px) calculateRem(10px);
+      transition: all 200ms ease;
+    }
+    .Dropdown-arrow {
+            border-color: #A6A7A9 transparent transparent;
+        border-style: solid;
+        border-width: calculateRem(8px) calculateRem(7px) calculateRem(3px);
+        content: ' ';
+        display: block;
+        height: 0;
+        margin-top: -ceil(2.5);
+        position: absolute;
+        right: calculateRem(15px);
+        top: calculateRem(14px);
+    }
+    .Dropdown-control:hover {
+        box-shadow: calculateRem(2px) calculateRem(2px) calculateRem(2px) #888888;
+        border: calculateRem(1px) solid #ccc;
+        color:#FFFFFF;
+    }
+    .is-open .Dropdown-arrow {
+        border-color: #FFFFFF transparent transparent;
+        border-style: solid;
+        border-width: calculateRem(8px) calculateRem(7px) calculateRem(3px);
+    }
+    .Dropdown-menu {
+        border: 1px solid;
+        border-radius:3px;
+        box-shadow: 0 calculateRem(1px) 0 rgba(0, 0, 0, 0.06);
+        box-sizing: border-box;
+        margin-top: calculateRem(-1px);
+        max-height: calculateRem(200px);
+        overflow-y: auto;
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        z-index: 1000;
+      -webkit-overflow-scrolling: touch;
+    }
+    .Dropdown-option {
+        box-sizing: border-box;
+      color: #A6A7A9;;
+        cursor: pointer;
+            display: block;
+            padding: calculateRem(8px) calculateRem(10px);    
+    }
+    .Dropdown-option.is-selected {
+        font-weight:bold;
+    }
+    .Dropdown-option:hover {
+        color: #FFFFFF;
+    }
+    .Dropdown-noresults {
+      box-sizing: border-box; 
+      color: #ccc;
+      cursor: default;
+      display: block;
+      padding: calculateRem(8px) calculateRem(10px);
+    }
+
+    }

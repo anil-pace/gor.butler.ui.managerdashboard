@@ -91,11 +91,17 @@
 		.horizontalDiv {
 			border-bottom: 0.15em solid #e7e7e7;
 		}
+
+		.logoWrap{
+			border-right: calculateRem(1px) solid #F2F2F2;
+			display: inline-block;
+			padding-right:9px;
+		}
 		.logo {
 			display: inline-block; 
 			overflow: hidden;
     		vertical-align: middle;
-    		border-right: calculateRem(1px) solid #F2F2F2;
+    		padding-right: 10px;
 		}
 		.upperText {
 			font-family: $gor-font-family;
@@ -138,7 +144,7 @@
 			.blockSystem {
 				display: inline-block;
 				overflow: hidden;
-				padding-left:calculateRem(5px);
+				padding-left:calculateRem(10px);
 				vertical-align: middle;
 				
 			}

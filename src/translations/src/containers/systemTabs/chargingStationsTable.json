@@ -1,0 +1,17 @@
+[
+  {
+    "id": "ChargingStations.table.heading",
+    "description": "Heading for ChargingStations",
+    "defaultMessage": "CHARGING STATIONS"
+  },
+  {
+    "id": "ChargingStations.table.status",
+    "description": "Status for ChargingStations",
+    "defaultMessage": "STATUS"
+  },
+  {
+    "id": "ChargingStations.table.operatingMode",
+    "description": "operatingMode for ChargingStations",
+    "defaultMessage": "OPERATING MODE"
+  }
+]

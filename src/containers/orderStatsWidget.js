@@ -31,7 +31,6 @@ class OrderStatsWidget extends React.Component{
 };
 
 function mapStateToProps(state, ownProps){
-	console.log(state)
 	return {
 		widget: state.statsWidget.widget || {}
 	};
