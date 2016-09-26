@@ -10,16 +10,6 @@
     "defaultMessage": "Japanese"
   },
   {
-    "id": "login.placeholder.username",
-    "description": "Placeholder for username input field",
-    "defaultMessage": "Username"
-  },
-  {
-    "id": "login.placeholder.password",
-    "description": "Placeholder for password input field",
-    "defaultMessage": "Password"
-  },
-  {
     "id": "login.butler.language",
     "description": "Text for language",
     "defaultMessage": "Language"

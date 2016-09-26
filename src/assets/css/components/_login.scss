@@ -150,8 +150,14 @@
 			 {
 				color:#4D5055;
 				opacity:100%;
-			 	font-size:calculateRem(48px);
 			 	font-family:'Source Sans Pro Bold', sans-serif;
+			 	.gor-lg-txt{
+			 		font-size:calculateRem(48px);
+			 	}
+			 	sup{
+			 		 vertical-align: top;
+			 		 font-size:calculateRem(10px);
+			 	}
 			 }
 		}
 		.gor-login-field
@@ -208,9 +214,9 @@
 	.gor-box-bottom-left
 	{
 		margin:auto;
-		margin-left:35%;
+		width:30%;
+		text-align:left;
 		margin-top:calculateRem(10px);
-		display:inline;
 	}
 	.gor-box-bottom-right
 	{
