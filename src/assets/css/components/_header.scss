@@ -46,12 +46,14 @@
 			position: absolute;
 			right: 0;
 			min-width: 5em;
+			height: 35px;
+			top: calculateRem(39px);
 			box-shadow: 0em .1em .2em 0em rgba(0,0,0,0.2);
 			a{
 				color: #666666;
 				background-color: white;
 				padding: calculateRem(12px) calculateRem(16px);
-				font-size: .7em;
+				font-size: 10px;
 				text-decoration: none;
 				padding: 1em 3em;
 				display: block;

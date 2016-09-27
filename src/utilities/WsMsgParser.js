@@ -113,8 +113,7 @@ export function WsParse(res)
                             "Connected" : connected,
                             "Disconnected": disconnected
                         }
-            // console.log("Chargers Data");
-            // console.log(chargersKey);
+            
             return Object.assign({}, state, {
             "chargersData" : chargersKey
          })

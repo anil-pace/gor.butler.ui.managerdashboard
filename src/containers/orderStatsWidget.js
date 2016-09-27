@@ -12,9 +12,17 @@ class OrderStatsWidget extends React.Component{
       { value: 'PPS_PICK_PERFORMANCE', label: 'PPS - pick performance' },
       { value: 'PPS_PUT_PERFORMANCE', label: 'PPS - put performance' },
       { value: 'PPS_AUDIT_PERFORMANCE', label: 'PPS - audit performance' },
-      
     ]
-    var renderWidget = this.props.statsWidget.statsWidget, chartRender;
+ 	var renderWidget = this.props.statsWidget.statsWidget, chartRender;
+    var currentState = item[0], index = 0;
+		if(renderWidget !== undefined || renderWidget !== null) {
+			for (var i = 0; i < item.length; i++) {
+				if(item[i].value === renderWidget) {
+					index = i;
+				}
+			}
+		}
+    
     if(renderWidget === "PPS_PUT_PERFORMANCE") {
     	chartRender = <Chart tableData={this.props.histdata} type={"put"}/>
     }
@@ -31,7 +39,9 @@ class OrderStatsWidget extends React.Component{
 	return (
 			<div className="gorOrderStatsWidget">
 				<div className="gorDrop">
-				<Dropdown optionDispatch={this.props.renderStatsWidget} items={item} styleClass={'ddown'} currentState={item[0]}/>
+				<div className="Order-Stats-Drop">
+				<Dropdown optionDispatch={this.props.renderStatsWidget} items={item} styleClass={'ddown'} currentState={item[index]}/>
+				</div>	
 					<div id="chart_att">
 						{chartRender}
 					</div>
@@ -42,7 +52,6 @@ class OrderStatsWidget extends React.Component{
 };
 
 function mapStateToProps(state, ownProps){
-	console.log(state)
 	return {
 		histdata: state.histogramData || {},
 		statsWidget: state.statsWidget || {}
