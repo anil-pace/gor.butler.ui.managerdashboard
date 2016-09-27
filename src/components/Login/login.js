@@ -106,6 +106,8 @@ class Login extends React.Component{
             if(items[i].value === this.props.sLang)
                 sel=i;
         }
+        let usr=(<FormattedMessage id='login.form.username' defaultMessage="Username" description="Text for username"/>);
+        let pwd=(<FormattedMessage id='login.form.password' defaultMessage="Password" description="Text for password"/>);
 
         return (
             <div className='gor-login-form'>
@@ -149,7 +151,8 @@ class Login extends React.Component{
                 </div>
                 <section>
                 <div className='gor-login-field' ref={node => { this.userField = node }}>
-				        <div className='gor-login-user'></div><input className='field' type="text" id="username"  placeholder="Username" ref={node => { this.userName = node }}/>
+				        <div className='gor-login-user'></div><input className='field' type="text" id="username"  
+                        placeholder={usr.props.defaultMessage} ref={node => { this.userName = node }}/>
                 </div>
                 </section>
                     <div className='gor-login-usr-error' 
@@ -161,7 +164,7 @@ class Login extends React.Component{
                     </div>
                 <section>
                 <div className='gor-login-field'  ref={node => { this.passField = node }}>
-                        <div className='gor-login-password'></div><input className='field' type="password" id="password" placeholder="Password" ref={node => { this.password = node }}/>
+                        <div className='gor-login-password'></div><input className='field' type="password" id="password" placeholder={pwd.props.defaultMessage} ref={node => { this.password = node }}/>
                 </div>
                 </section>
                     <div className='gor-login-usr-error' ref={node => { this.passError = node }} >
@@ -174,8 +177,9 @@ class Login extends React.Component{
                     <input type="submit" className='gor-login-btn'  value="Login" /><br />
                 </section>
                 </div>
-                <div className='gor-box-bottom-left'><span>Current time: 09:00:15(IST)</span></div>
-                <div className='gor-box-bottom-right'></div>
+                <div className='gor-box-bottom'><span className='gor-box-bottom-left'>Current time: 09:00:15(IST)</span>
+                    <span className='gor-box-bottom-right'></span>
+                </div>
                 </form>
                 <Footer />
             </div>
