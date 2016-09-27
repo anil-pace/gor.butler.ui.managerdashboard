@@ -179,7 +179,8 @@ class ButlerBotTable extends React.Component {
           header={
             <SortHeaderCell >
                <FormattedMessage id="butlerBot.table.voltage" description="voltage for butlerbot" 
-              defaultMessage ="VOLTAGE"/> 
+              defaultMessage ="VOLTAGE"/>
+              <div className="gorToolHeaderSubText"> Avg. Voltage  {this.props.avgVoltage}  </div> 
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList}  />}

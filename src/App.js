@@ -1,27 +1,14 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-import HealthTabs from './components/health/healthTabs';
-import Health from './components/health/health';
 import Tabs from './containers/tabs';
 import Header from './components/header/header';
 import {setWsAction ,setMockAction} from './actions/socketActions';
 import { WS_CONNECT,WS_ONSEND,WS_MOCK } from './constants/appConstants'
 import { wsInitData } from './constants/initData.js'
-import Dropdown from './components/dropdown/dropdown';
-
-import OrderStatsWidget from './containers/orderStatsWidget'
-import PerformanceWidget from './containers/performanceWidget'
-
 import { REQUEST_HEADER, getFetchData } from './actions/headerAction'
 import { connect } from 'react-redux';
-import Chart from './components/graphd3/graphd3';
-import ChartHorizontal from './components/graphd3/graph_horizontal'; 
 
-
-
-
-
-class App extends React.Component{
+class App extends React.Component{ 
 	/**
 	 * Called once before rendering of component,used to displatch fetch action
 	 * @return {[type]}

@@ -1,10 +1,12 @@
 #!/bin/zsh
-
+#currently running Eslint on all files irrespective of 
+#whether changes are made or not
+#Later on we will run it in the modified files only
 function lintit () {
-  OUTPUT=$(git diff HEAD --name-only | grep -E '(.js)$')
-  a=("${(f)OUTPUT}")
-  if [[ "$a" != "" ]];then
-  e=$(node_modules/.bin/eslint $a)
+  #OUTPUT=$(git diff HEAD --name-only | grep -E '(.js)$')
+  #a=("${(f)OUTPUT}")
+  #if [[ "$a" != "" ]];then
+  e=$(node_modules/.bin/eslint ./src/** -c .eslintrc.json)
   echo "$e"
   if [[ "$e" != *"0 problems"* && "$e" != "" ]]; then
     echo "ERROR: Check eslint hints."
@@ -12,10 +14,10 @@ function lintit () {
   else
     runtests
   fi
-else
-	echo "No JS file modified"
-	runtests
-fi
+#else
+	#echo "No JS file modified"
+	#runtests
+#fi
 }
 
 function runtests(){

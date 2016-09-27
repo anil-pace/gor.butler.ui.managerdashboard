@@ -94,14 +94,20 @@ class PerformanceWidget extends React.Component{
 	}
 
 	render(){
-		
 		const item = [
 		{ value: 'RENDER_SYSTEM_HEALTH', label: 'System Health' },
 		{ value: 'PICK_PPS_PERFORMANCE', label: 'PPS Pick Performance' },
 		{ value: 'PUT_PPS_PERFORMANCE', label: 'PPS Put Performance' },
 		{ value: 'AUDIT_PPS_PERFORMANCE', label: 'PPS Audit Performance' }
 		]
-
+		var currentState = item[0], index = 0;
+		if(this.props.widget !== undefined || this.props.widget !== null) {
+			for (var i = 0; i < item.length; i++) {
+				if(item[i].value === this.props.widget) {
+					index = i;
+				}
+			}
+		}
 		var link = this;
 		var pps_data = _getPPSdata(link);
 		var butler_data = _getButlerdata(link);
@@ -125,8 +131,8 @@ class PerformanceWidget extends React.Component{
 	
 	return (
 			<div className="gorPerformanceWidget">
-				<div className="gorDrop">
-					<Dropdown optionDispatch={this.props.renderPerformanceWidget} items={item} styleClass={'ddown'} currentState={item[0]}/>
+				<div className="gorDrop Performance-Widget-Drop">
+					<Dropdown optionDispatch={this.props.renderPerformanceWidget} items={item} styleClass={'ddown'} currentState={item[index]}/>
 				</div>
 
 				<div id="performanceGraph">

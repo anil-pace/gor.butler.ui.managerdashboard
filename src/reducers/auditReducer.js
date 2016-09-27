@@ -12,8 +12,9 @@ export  function auditInfo(state={},action){
           if(res.aggregate_data){
             if(res.aggregate_data.total_audited)
               auditData.total_audited=parseInt(res.aggregate_data.total_audited);
+
           }
-          return Object.assign({}, state, {
+          return Object.assign({}, state, { 
             "auditData" : auditData
           })
 

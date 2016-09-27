@@ -13,7 +13,7 @@ import jaTranslationMessages from '../translations/ja-JP.json';
 
 addLocaleData([...enLocaleData, ...jaLocaleData,
 	...enTranslationMessages, ...jaTranslationMessages]);
-console.log(enTranslationMessages);
+
 export const formatTranslationMessages = (messages) => {
   const formattedMessages = {};
   for (const message of messages) {

@@ -12,7 +12,6 @@ class PickStatusWidget extends React.Component{
 	constructor(props) 
 	{ 
     	super(props);
-        //console.log(this.props.ordersData);
     }
     _tomillisecs(m){
      let hh=0,mm=0,timestr='';

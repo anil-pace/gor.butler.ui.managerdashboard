@@ -70,6 +70,16 @@ class PPStable extends React.Component {
     this.setState({isChecked:checkedState});
     this.setState({renderDropD:showDropdown});    
   }
+
+  headerCheckChange() {
+    var checkedAllState=this.state.isChecked,showDropdown;
+    for (var i = checkedAllState.length - 1; i >= 0; i--) {
+      checkedAllState[i] = true;
+    }
+    showDropdown=true;
+    this.setState({isChecked:checkedAllState});
+    this.setState({renderDropD:showDropdown});    
+  }
   
   _onSortChange(columnKey, sortDir) {
     var sortIndexes = this._defaultSortIndexes.slice();
@@ -134,7 +144,7 @@ class PPStable extends React.Component {
           columnKey="id"
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
-              sortDir={colSortDirs.id}> <input type="checkbox" onChange={this.handlChange} />
+              sortDir={colSortDirs.id}> <input type="checkbox" onChange={this.headerCheckChange.bind(this)} />
               <div className="gorToolHeaderEl">
               <div className="gorToolHeaderEl"> {sortedDataList.getSize()} PPS </div>
               <div className="gorToolHeaderSubText"> Total:{sortedDataList.getSize()} </div>

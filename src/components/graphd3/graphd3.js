@@ -15,7 +15,7 @@ class Chart extends React.Component{
        this.state = {d3: ''}
    }
 
-  something(containerWidth,tData,nextP){
+  graphRender(containerWidth,tData,nextP){
     var component = this;
     var widther = containerWidth;
     var margin = {top: 20, right: 20, bottom: 20, left: 40},
@@ -55,16 +55,16 @@ class Chart extends React.Component{
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
       
-  const tip = d3tip()
-    .attr('class', 'd3-tip')
-    .offset([100, 90])
-    .html(function(d) {
-      var time=d.timeInterval.split(" ");
-      return "<div> Time:"+" " + time[0]+" - "+time[1] +"<div/><div> 27 Jul,2016</div> <div style='color:#ffffff'> Fulfilled:  "+" " + d.type + "</div>";
-    })
+  // const tip = d3tip()
+  //   .attr('class', 'd3-tip')
+  //   .offset([100, 90])
+  //   .html(function(d) {
+  //     //var time=d.timeInterval.split(" ");
+  //     return "<div> Time:<div/><div> 27 Jul,2016</div> <div style='color:#ffffff'> Fulfilled:    </div>";
+  //   })
 
 
-      svg.call(tip);
+      //svg.call(tip);
       var data = [];
       var barData = {};
        var json = tData; 
@@ -97,7 +97,6 @@ class Chart extends React.Component{
       .style("font-family","sans-serif")
       .style("fill","#666666");
 
-        //svg.append("g").text("sample!!!");
 
       
 
@@ -127,21 +126,21 @@ class Chart extends React.Component{
       .attr("y", function(d) { return y(d.type); })
       .attr("height", 0)
       .attr("height", function(d) { return height - y(d.type); })
+      
       // .on('mouseover', tip.show)
       // .on('mouseout', tip.hide)
 
-      var txt = svg.selectAll(".bar");
+    //   var txt = svg.selectAll(".bar");
 
-       txt.append("g")
-    .attr("class", "below")
-    .attr("x", function(d) { 
-        return x(d.timeInterval); 
-      })
-    .attr("y", function(d) { return height-y(d.type); })
-    .attr("dy", "1.2em")
-    .attr("text-anchor", "right")
-    .text("krish")
-    .style("fill", "#000000"); 
+    //    txt.append("g")
+    // .attr("class", "below")
+    // .attr("x", function(d) { 
+    //     return x(d.timeInterval); 
+    //   })
+    // .attr("y", function(d) { return height-y(d.type); })
+    // .attr("dy", "1.2em")
+    // .attr("text-anchor", "right")
+    // .style("fill", "#000000"); 
     component.setState({d3: node});
 
     }
@@ -166,15 +165,14 @@ class Chart extends React.Component{
   }
 
    componentDidMount(){
-    this.something(this.props.containerWidth,this.props.tableData.histData,this.props.type);
+    this.graphRender(this.props.containerWidth,this.props.tableData.histData,this.props.type);
   }
 
    componentWillReceiveProps(nextProps){
-    this.something(nextProps.containerWidth,nextProps.tableData.histData,nextProps.type);
+    this.graphRender(nextProps.containerWidth,nextProps.tableData.histData,nextProps.type);
   }
 
    render() {
-    console.log(this.props)
    return (
      <div>
        <RD3Component data={this.state.d3} />

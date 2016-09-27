@@ -5,7 +5,8 @@ var CleanWebpackPlugin = require('clean-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-
+  cache:true,
+  
   entry: {
     app:['es6-symbol','./src/index.js'],
     vendor: ["react", "react-dom","react-redux","react-intl-redux","redux","react-d3-library","d3","d3-tip","react-redux-modal"]
@@ -33,6 +34,7 @@ module.exports = {
       // Options to configure babel with
       query: {
         presets: ['es2015', 'stage-1', 'react'],
+        cacheDirectory: true,
         plugins:[
                   ['react-intl', {
                   'messagesDir': './src/translations/'

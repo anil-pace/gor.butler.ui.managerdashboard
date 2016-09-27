@@ -1,7 +1,7 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import Footer from '../Footer/Footer';
-import { authLoginData } from '../../actions/loginAction';
+import { authLoginData,mockLoginAuth } from '../../actions/loginAction';
 import { connect } from 'react-redux';
 import {AUTH_LOGIN} from '../../constants/appConstants'; 
 import {LOGIN_URL} from '../../constants/configConstants'; 
@@ -85,15 +85,19 @@ class Login extends React.Component{
             }
             return;
         }
-    	let loginData={
-
-    		'url':LOGIN_URL,
-    		'formdata':formdata,
-        	'method':'POST',
-        	'cause':AUTH_LOGIN,
-        	'contentType':'application/json'
-    	}
-	    this.props.authLoginData(loginData);
+        let loginData={
+                'url':LOGIN_URL,
+                'formdata':formdata,
+                'method':'POST',
+                'cause':AUTH_LOGIN,
+                'contentType':'application/json'
+            }
+        if(MOCK === false){
+    	    this.props.authLoginData(loginData);
+        }
+        else{
+            this.props.mockLoginAuth(loginData);
+        }
     }
 	render(){
         let sel=0;
@@ -213,7 +217,8 @@ function mapStateToProps(state, ownProps){
 var mapDispatchToProps = function(dispatch){
     return {
         authLoginData: function(params){ dispatch(authLoginData(params)); },
-        updateIntl: function(params){ dispatch(updateIntl(params));}
+        updateIntl: function(params){ dispatch(updateIntl(params));},
+        mockLoginAuth: function(params){ dispatch(mockLoginAuth(params)); }
     }
 };
 

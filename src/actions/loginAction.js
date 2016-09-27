@@ -1,4 +1,4 @@
-import { LOGIN_REQUEST, LOGIN_REDIRECT, LOGIN_SUCCESS,LOGIN_FAILURE, AJAX_CALL, LOGOUT, WS_DISCONNECT} from '../constants/appConstants'
+import { MOCK_LOGIN,LOGIN_REQUEST, LOGIN_REDIRECT, LOGIN_SUCCESS,LOGIN_FAILURE, AJAX_CALL, LOGOUT, WS_DISCONNECT} from '../constants/appConstants'
 
 
 
@@ -45,6 +45,15 @@ export function receiveAuthData(data){
       }
   }
 }
+/**
+ * Mock login module
+ */
+export function mockLoginAuth(params) {
+  return {
+    type: MOCK_LOGIN,
+    params
+  }
+ }
 /**
  * function that sends ajax to authorize user
  */
