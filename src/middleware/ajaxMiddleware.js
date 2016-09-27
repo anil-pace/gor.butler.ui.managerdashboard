@@ -1,4 +1,4 @@
-import {AJAX_CALL} from '../constants/appConstants'
+import {AJAX_CALL,MOCK_LOGIN} from '../constants/appConstants'
 import {AjaxParse} from '../utilities/ajaxParser';
 import {ShowError} from '../utilities/showError';
 
@@ -7,7 +7,15 @@ const ajaxMiddleware = (function(){
   return store => next => action => {
     switch(action.type) {
 
-     
+    case MOCK_LOGIN:
+      /**
+       * Sending arbitrary auth-token to emulate login
+       */
+      AjaxParse(store,{
+                  "auth_token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTQ3NTAwNjc0OCwiaWF0IjoxNDc0OTc0MzQ4fQ.eyJpZCI6MX0.VUCUA1kqq5Robxbu_LzyLD2yrptvBEN6zVQ2DsP7uSE",
+                  "duration": 32400
+                },action.params.cause);
+      break;
     case AJAX_CALL:
 
     var params=action.params;

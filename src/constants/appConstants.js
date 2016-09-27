@@ -5,6 +5,7 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 export const LOGOUT = "LOGOUT";
 export const AJAX_CALL = "AJAX_CALL";
+export const MOCK_LOGIN = "MOCK_LOGIN";
 
 /*Constants for Web Sockets*/
 export const WS_CONNECT = "WS_CONNECT";
