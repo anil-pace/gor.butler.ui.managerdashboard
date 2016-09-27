@@ -12,11 +12,6 @@ class OrdersTab extends React.Component{
     	super(props);
     }	
 	render(){
-		/**
-		 * Need to remove these hardcoded variables
-		 * 
-		 */
-		
 		return (
 			<div >
 				Orders

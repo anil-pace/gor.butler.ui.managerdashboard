@@ -1145,7 +1145,7 @@ color: #000000;
 }
 
 .gorInputFilter {
-  height:31px;
+  height:30px;
   border-width: 0px;
   border-color: #ffffff;
   padding-left: 9px;
@@ -1159,7 +1159,7 @@ color: #000000;
 }
 
 input[type="checkbox"]{
-  width: 30px; 
+  width: 15px; 
   height: 15px;
   zoom: 1.4; 
 }
@@ -1193,18 +1193,21 @@ input[type="checkbox"]{
       padding: calculateRem(8px) calculateRem(52px) calculateRem(8px) calculateRem(10px);
       transition: all 200ms ease;
       border-color: #aaaaaa;
+      font-size: 14px;
+      font-weight: 100;
+      color: #aaaaaa;
     }
     .Dropdown-arrow {
             border-color: #A6A7A9 transparent transparent;
         border-style: solid;
-        border-width: calculateRem(8px) calculateRem(7px) calculateRem(3px);
+        border-width: calculateRem(8px) calculateRem(5px) calculateRem(2px);
         content: ' ';
         display: block;
         height: 0;
         margin-top: -ceil(2.5);
         position: absolute;
         right: calculateRem(15px);
-        top: calculateRem(14px);
+        top: calculateRem(11px);
     }
     .Dropdown-control:hover {
         box-shadow: calculateRem(2px) calculateRem(2px) calculateRem(2px) #888888;
@@ -1228,6 +1231,11 @@ input[type="checkbox"]{
         width: 100%;
         z-index: 1000;
       -webkit-overflow-scrolling: touch;
+      border-color: #aaaaaa;
+      font-size: 14px;
+      font-weight: 100;
+      color: #aaaaaa;
+      background: #ffffff; 
     }
     .Dropdown-option {
         box-sizing: border-box;
@@ -1240,7 +1248,8 @@ input[type="checkbox"]{
         font-weight:bold;
     }
     .Dropdown-option:hover {
-        color: #FFFFFF;
+        color: #aaaaaa;
+        background: #F8F8F8;
     }
     .Dropdown-noresults {
       box-sizing: border-box; 
