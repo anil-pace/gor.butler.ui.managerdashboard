@@ -25,8 +25,6 @@ export function sortData (columnKey, sortDir,sortIndexes,_dataList) {
 	 sortIndexes.sort((indexA, indexB) => {
       var valueA = _dataList.getObjectAt(indexA)[columnKey];
       var valueB = _dataList.getObjectAt(indexB)[columnKey];
-      console.log(valueB)
-      console.log(valueA)
       var sortVal = 0;
       if (valueA > valueB) {
         sortVal = 1;

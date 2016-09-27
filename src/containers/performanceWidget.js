@@ -29,7 +29,7 @@ function _getPPSdata(link) {
 		let ppsStopped = ppsInactiveState;
 		let ppsError = 0;
 		const pps_data = [
-		{ component:{componentNumber: ppsTotal, componentType: 'PPS'}, states:{stoppedState: ppsError, onState: ppsOn, errorState: ppsError} }
+		{ component:{componentNumber: ppsTotal, componentType: 'PPS'}, states:{offState: ppsError, onState: ppsOn, errorState: ppsError} }
 		]
 		return pps_data;
 } 
@@ -60,7 +60,7 @@ function _getButlerdata(link) {
 		let butlerError = 0;
 		let butlerOn = butlerPickPutState + butlerIdleState +  butlerAuditState;
 		const butler_data = [
-		{ component:{componentNumber: butlerTotal, componentType: 'Butler bots'}, states:{stoppedState: butlerStopped, onState: butlerOn, errorState: butlerError} }
+		{ component:{componentNumber: butlerTotal, componentType: 'Butler bots'}, states:{offState: butlerStopped, onState: butlerOn, errorState: butlerError} }
 		]
 		return butler_data;
 } 
@@ -78,7 +78,7 @@ function _getChargingdata(link) {
 		let chargersStopped = disconnected;
 		let chargersError = 0;
 		const charging_data = [
-		{ component:{componentNumber: totalChargers, componentType: 'Charging Stations'}, states:{stoppedState: chargersError , onState: connected, errorState: disconnected} }
+		{ component:{componentNumber: totalChargers, componentType: 'Charging Stations'}, states:{offState: chargersError , onState: connected, errorState: disconnected} }
 		]
 		return charging_data;
 } 
@@ -94,43 +94,47 @@ class PerformanceWidget extends React.Component{
 	}
 
 	render(){
+		
 		const item = [
 		{ value: 'RENDER_SYSTEM_HEALTH', label: 'System Health' },
-		{ value: 'RENDER_SYSTEM_PERFORMANCE', label: 'System Performance' },
+		{ value: 'PICK_PPS_PERFORMANCE', label: 'PPS Pick Performance' },
+		{ value: 'PUT_PPS_PERFORMANCE', label: 'PPS Put Performance' },
+		{ value: 'AUDIT_PPS_PERFORMANCE', label: 'PPS Audit Performance' }
 		]
-		
-		
-	if(this.props.widget === "RENDER_SYSTEM_PERFORMANCE"){
-		return (
-			<div className="gorPerformanceWidget">
-				<div className="gorDrop">
-					<Dropdown optionDispatch={this.props.renderPerformanceWidget} items={item} styleClass={'ddown'} currentState={item[1]}/>
-				</div>
 
-				<div id="performanceGraph">
-					<ChartHorizontal/>
-				</div> 
-			</div>  
-			);
-	}
-
-	else { 
 		var link = this;
 		var pps_data = _getPPSdata(link);
 		var butler_data = _getButlerdata(link);
 		var charging_data=_getChargingdata(link);
-		return (
+		
+	var itemRender;	
+	if(this.props.widget === "PICK_PPS_PERFORMANCE"){
+		itemRender = <ChartHorizontal data={this.props.ppsPerformance} type="items_picked"/>
+	}
+
+	else if(this.props.widget === "PUT_PPS_PERFORMANCE"){
+		itemRender = <ChartHorizontal data={this.props.ppsPerformance} type="items_put"/>
+	}
+
+	else if(this.props.widget === "AUDIT_PPS_PERFORMANCE"){
+		itemRender = <ChartHorizontal data={this.props.ppsPerformance} type="items_audited"/>
+	}
+	else {
+		itemRender = <Health ppsData={pps_data} butlerData={butler_data} chargingData={charging_data}/>
+	}
+	
+	return (
 			<div className="gorPerformanceWidget">
 				<div className="gorDrop">
 					<Dropdown optionDispatch={this.props.renderPerformanceWidget} items={item} styleClass={'ddown'} currentState={item[0]}/>
 				</div>
 
 				<div id="performanceGraph">
-					{<Health ppsData={pps_data} butlerData={butler_data} chargingData={charging_data}/>}
+					{itemRender}
 				</div> 
 			</div> 
 			);
-	}
+	
 
 }
 };
@@ -140,7 +144,8 @@ function mapStateToProps(state, ownProps){
 		widget: state.performanceWidget.widget || {},
 		ppsData: state.recieveSocketActions.ppsData || {},
 		butlersData:state.recieveSocketActions.butlersData || {},
-		chargersData:state.recieveSocketActions.chargersData || {}
+		chargersData:state.recieveSocketActions.chargersData || {},
+		ppsPerformance: state.PPSperformance || {}
 	};
 }
 

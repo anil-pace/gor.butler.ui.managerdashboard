@@ -24,6 +24,7 @@
         "quotes":"off",
         "semi": "off",
         "indent":"off",
+        "no-mixed-spaces-and-tabs": "off",
         "no-console": "error",
         "no-debugger": "error",
         "no-unused-vars": "error",

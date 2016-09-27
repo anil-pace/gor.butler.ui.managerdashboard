@@ -14,6 +14,8 @@
 		}
 		.health .attributes {
 			width: calculateRem(89px);
+			padding-right: 15px;
+			padding-left: 15px;
 		}
 
 		.health .upperText {
@@ -23,10 +25,11 @@
 		.health .subtext {
 			font-family: "source sans pro";
 			font-size: calculateRem(12px);
+			width: 99%;
 		}
 
 		.health .parameters {
-			width: calculateRem(204px);
+			width: auto;
 		}
 
 		.health .stoppedState
@@ -34,7 +37,7 @@
 			background: #ec1c24;
 			width: calculateRem(28px);
 			height: calculateRem(18px);
-			border-radius: 40%;
+			border-radius: calculateRem(15px);
 			color: #ffffff;
 			font-family: "source sans pro";
 			font-weight: bold;
@@ -47,7 +50,7 @@
 			background: #ffffff;
 			width: calculateRem(28px);
 			height: calculateRem(18px);
-			border-radius: 40%;
+			border-radius:calculateRem(15px);
 			color: #666666;
 			font-family: "source sans pro";
 			border-style: solid;
@@ -63,7 +66,7 @@
 			background: #ffffff;
 			width: calculateRem(28px);
 			height: calculateRem(18px);
-			border-radius: 40%;
+			border-radius: calculateRem(15px);
 			color: #666666;
 			font-family: "source sans pro";
 			border-style: solid;
@@ -78,7 +81,7 @@
 			background: #ffffff;
 			width: calculateRem(30px);
 			height: calculateRem(18px);
-			border-radius: 40%;
+			border-radius: calculateRem(15px);
 			color: #666666;
 			font-family: "source sans pro";
 			border-style: solid;
@@ -91,21 +94,25 @@
 		.health .paramPosition {
 			padding-right: calculateRem(15px);
 			padding-left: calculateRem(15px);
+			width: auto;
 		}
 
 		.health .paramPositionFront {
 			padding-right: calculateRem(15px);
 			padding-left: calculateRem(10px);
+			width: auto;
 		}
 
 		.health .paramPositionMiddle {
 			padding-right: calculateRem(15px);
 			padding-left: calculateRem(15px);
+			width: auto;
 		}
 
 		.health .paramPositionBack {
 			padding-right: calculateRem(10px);
 			padding-left: calculateRem(15px);
+			width: auto;
 		}
 
 		.health .status {

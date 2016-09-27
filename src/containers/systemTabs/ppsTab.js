@@ -6,82 +6,25 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import PPStable from './PPStable';
+import { connect } from 'react-redux';
+
+
+
 class PPS extends React.Component{
 	constructor(props) 
 	{
     	super(props);
     }	
 	render(){
-	var itemNumber = 5;
-		 var temp_data=[{
-  "id": "PPS 001",
-  "status": "Stopped",
-  "operatingMode": "Pick",
-  "performance": "MSU007",
-  "operatorAssigned": "Adnan F."
-}, {
-  "id": "PPS 002",
-  "status": "Error",
-  "operatingMode": "Put",
-  "performance": "MSU008",
-  "operatorAssigned": "Adnan F."
-}, {
-  "id": "PPS 003",
-  "status": "Warning",
-  "operatingMode": "Audit",
-  "performance": "MSU009",
-  "operatorAssigned": "Adnan F."
-}, {
-  "id": "PPS 004",
-  "status": "On",
-  "operatingMode": "Pick",
-  "performance": "MSU001",
-  "operatorAssigned": "Adnan F."
-}, {
-  "id": "PPS 005",
-  "status": "Off",
-  "operatingMode": "Pick",
-  "performance": "MSU007",
-  "operatorAssigned": "Adnan F."
-}, {
-  "id": "PPS 001",
-  "status": "Stopped",
-  "operatingMode": "Pick",
-  "performance": "MSU007",
-  "operatorAssigned": "Adnan F."
-}, {
-  "id": "PPS 001",
-  "status": "Stopped",
-  "operatingMode": "Pick",
-  "performance": "MSU007",
-  "operatorAssigned": "Adnan F."
-}, {
-  "id": "PPS 001",
-  "status": "Stopped",
-  "operatingMode": "Pick",
-  "performance": "MSU007",
-  "operatorAssigned": "Adnan F."
-}, {
-  "id": "PPS 001",
-  "status": "Stopped",
-  "operatingMode": "Pick",
-  "performance": "MSU007",
-  "operatorAssigned": "Adnan F."
-}, {
-  "id": "PPS 001",
-  "status": "Stopped",
-  "operatingMode": "Pick",
-  "performance": "MSU007",
-  "operatorAssigned": "Adnan F."
-}
-];
-    
 		
+    var data = this.props.PPSDetail.PPStypeDetail;
+	var itemNumber = 5;
+  
 		return (
 			<div>
 				<div>
 					<div>
-						<PPStable items={temp_data} itemNumber={itemNumber}/>
+						<PPStable items={this.props.PPSDetail.PPStypeDetail} itemNumber={itemNumber}/>
 					</div>
 				</div>
 			</div>
@@ -89,4 +32,10 @@ class PPS extends React.Component{
 	}
 };
 
-export default PPS ;
+function mapStateToProps(state, ownProps){
+  return {
+    PPSDetail: state.PPSDetail || {}
+  };
+}
+
+export default connect(mapStateToProps)(PPS) ;

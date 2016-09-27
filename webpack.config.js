@@ -6,7 +6,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   cache:true,
-  devtool: "eval",
+  
   entry: {
     app:['es6-symbol','./src/index.js'],
     vendor: ["react", "react-dom","react-redux","react-intl-redux","redux","react-d3-library","d3","d3-tip","react-redux-modal"]
@@ -51,7 +51,7 @@ plugins: [
   new webpack.optimize.CommonsChunkPlugin('common.js',"assets/common.js"),
   //End
   new webpack.DefinePlugin({
-    MOCK: true
+    MOCK: false
 }),
   new webpack.optimize.DedupePlugin(),
   new HtmlWebpackPlugin({

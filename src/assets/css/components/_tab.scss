@@ -14,8 +14,9 @@
 			width:100%;
 		}
 
+
 		.gorTab .gorMainBlock {
-			width: 124px;
+			width: 140px;
 			padding-right: 20px;
 			padding-left: 20px;
 			height: 60px;
@@ -23,9 +24,9 @@
 			border: .5px solid black;
 			background: #4d5055;
 			cursor: pointer;
+			vertical-align: middle;
 		}
 		.gorTab .gor-upperText {
-			padding-top: 7px;
 			font-family: "source sans pro";
 			font-size: 18px;
 			font-weight: bold;
@@ -54,7 +55,7 @@
 
 		.gorTab .gorOffline{
 			font-family: "source sans pro";
-			color: #ffffff;
+			color: #9C9FA0;
 		}
 		
 		.gorTab .gorEvent{
@@ -77,4 +78,25 @@
 			font-family: "source sans pro";
 			color: #ffffff;
 			background: #fc3838;
+		}
+
+		.gorTab .gorMainBlockSelect{
+			width: 140px;
+			padding-right: 20px;
+			padding-left: 20px;
+			height: 60px;
+			display: table-cell;
+			border: .5px solid black;
+			cursor: pointer;
+			background-color:#323539;
+			vertical-align: middle;
+		}
+		.gorTab .gorIconsInline{
+			display: inline-block;
+			vertical-align: super;
+		}
+
+		.gorTab .gorInlineDisplay{
+			display: inline-block;
+			padding-right: 15px;
 		}

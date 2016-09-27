@@ -14,12 +14,13 @@ class Chart extends React.Component{
      super(props);
        this.state = {d3: ''}
    }
-   componentDidMount(){
+
+  something(containerWidth,tData,nextP){
     var component = this;
-    var widther = this.props.containerWidth;
+    var widther = containerWidth;
     var margin = {top: 20, right: 20, bottom: 20, left: 40},
     width = widther - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+    height = 300 - margin.top - margin.bottom;
    var count=-1;
    var temp=-1;
    var y = d3.scale.linear().range([height, 0]);
@@ -32,7 +33,6 @@ class Chart extends React.Component{
       temp++;
       if (count === 3 || temp ===0 || temp ===23){
         count = 0;
-        d=d.substr(0,d.indexOf(' '));
         return d;
       }
       return "";
@@ -54,33 +54,33 @@ class Chart extends React.Component{
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-      //console.log(d3tip);
+      
   const tip = d3tip()
     .attr('class', 'd3-tip')
     .offset([100, 90])
     .html(function(d) {
-      var time=d.letter.split(" ");
-      return "<div> Time:"+" " + time[0]+" - "+time[1] +"<div/><div> 27 Jul,2016</div> <div style='color:#ffffff'> Fulfilled:  "+" " + d.frequency + "</div>";
+      var time=d.timeInterval.split(" ");
+      return "<div> Time:"+" " + time[0]+" - "+time[1] +"<div/><div> 27 Jul,2016</div> <div style='color:#ffffff'> Fulfilled:  "+" " + d.type + "</div>";
     })
 
 
       svg.call(tip);
-    
-    d3.json("http://www.mocky.io/v2/57d27c9a100000c01432817f", function(error,data) {
-
-      var json=data;
-        update(json);
-      
-    });
-
+      var data = [];
+      var barData = {};
+       var json = tData; 
+       for (var i = 0; i < json.length; i++) {
+        barData.timeInterval = json[i].timeInterval;
+        barData.type = json[i][nextP]
+        data.push(barData);
+        barData = {};
+       }
+        update(data);
     function update(data) {
-      
-
       data.forEach(function(d) {
-        d.frequency = +d.frequency;
+        d.type = +d.type;
      });
-      x.domain(data.map(function(d) { return d.letter; }));
-      y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
+      x.domain(data.map(function(d) { return d.timeInterval; }));
+      y.domain([0, d3.max(data, function(d) { return d.type; })]);
 
       svg.append("g")         
       .attr("class", "grid")
@@ -121,41 +121,28 @@ class Chart extends React.Component{
       .attr("ry", 2)
       .attr("class", "bar")
       .attr("x", function(d) { 
-        return x(d.letter); 
+        return x(d.timeInterval); 
       })
       .attr("width", x.rangeBand())
-      .attr("y", function(d) { return y(d.frequency); })
+      .attr("y", function(d) { return y(d.type); })
       .attr("height", 0)
-      .attr("height", function(d) { return height - y(d.frequency); })
+      .attr("height", function(d) { return height - y(d.type); })
       // .on('mouseover', tip.show)
       // .on('mouseout', tip.hide)
 
       var txt = svg.selectAll(".bar");
 
-
-      
-
-
        txt.append("g")
     .attr("class", "below")
     .attr("x", function(d) { 
-        return x(d.letter); 
+        return x(d.timeInterval); 
       })
-    .attr("y", function(d) { return height-y(d.frequency); })
+    .attr("y", function(d) { return height-y(d.type); })
     .attr("dy", "1.2em")
     .attr("text-anchor", "right")
     .text("krish")
     .style("fill", "#000000"); 
-
-    //   txt.append("text")
-    //   .attr("y", function(d) { return y(d.frequency); })
-    // .attr("class", "below")
-    // .attr("x", 12)
-    // .attr("dy", "1.2em")
-    // .attr("text-anchor", "right")
-    // .text("krish")
-    // .style("fill", "#000000");
-      component.setState({d3: node});
+    component.setState({d3: node});
 
     }
 
@@ -177,8 +164,17 @@ class Chart extends React.Component{
       .ticks(5)
     }
   }
-   render() {
 
+   componentDidMount(){
+    this.something(this.props.containerWidth,this.props.tableData.histData,this.props.type);
+  }
+
+   componentWillReceiveProps(nextProps){
+    this.something(nextProps.containerWidth,nextProps.tableData.histData,nextProps.type);
+  }
+
+   render() {
+    console.log(this.props)
    return (
      <div>
        <RD3Component data={this.state.d3} />

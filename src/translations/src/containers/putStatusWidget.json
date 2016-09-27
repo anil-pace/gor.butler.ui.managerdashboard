@@ -17,11 +17,11 @@
   {
     "id": "widget.put.throughput",
     "description": "Throughput message",
-    "defaultMessage": "{count} PPS stocking {throughput} items/hr"
+    "defaultMessage": "{count} {pluralMsg} stocking {throughput} items/hr"
   },
   {
     "id": "widget.put.heading",
     "description": "Put Item Heading",
-    "defaultMessage": "Items to Stock"
+    "defaultMessage": "Items stocked"
   }
 ]
