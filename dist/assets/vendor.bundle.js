@@ -7,17 +7,10 @@ webpackJsonp([11,12],[
 	__webpack_require__(191);
 	__webpack_require__(215);
 	__webpack_require__(198);
-<<<<<<< c150fd18fd7dbc642e3b3a977d731bfebfd8106a
-	__webpack_require__(480);
-	__webpack_require__(481);
-	__webpack_require__(482);
-	module.exports = __webpack_require__(366);
-=======
 	__webpack_require__(481);
 	__webpack_require__(482);
 	__webpack_require__(483);
 	module.exports = __webpack_require__(367);
->>>>>>> pushing the current build for demo
 
 
 /***/ },
@@ -28972,12 +28965,8 @@ webpackJsonp([11,12],[
 /* 477 */,
 /* 478 */,
 /* 479 */,
-<<<<<<< c150fd18fd7dbc642e3b3a977d731bfebfd8106a
-/* 480 */
-=======
 /* 480 */,
 /* 481 */
->>>>>>> pushing the current build for demo
 /***/ function(module, exports, __webpack_require__) {
 
 	(function webpackUniversalModuleDefinition(root, factory) {
@@ -44036,11 +44025,7 @@ webpackJsonp([11,12],[
 	;
 
 /***/ },
-<<<<<<< c150fd18fd7dbc642e3b3a977d731bfebfd8106a
-/* 481 */
-=======
 /* 482 */
->>>>>>> pushing the current build for demo
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;!function() {
@@ -53599,11 +53584,7 @@ webpackJsonp([11,12],[
 	}();
 
 /***/ },
-<<<<<<< c150fd18fd7dbc642e3b3a977d731bfebfd8106a
-/* 482 */
-=======
 /* 483 */
->>>>>>> pushing the current build for demo
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// d3.tip
@@ -53614,11 +53595,7 @@ webpackJsonp([11,12],[
 	(function (root, factory) {
 	  if (true) {
 	    // AMD. Register as an anonymous module with d3 as a dependency.
-<<<<<<< c150fd18fd7dbc642e3b3a977d731bfebfd8106a
-	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(483)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__))
-=======
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(484)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__))
->>>>>>> pushing the current build for demo
 	  } else if (typeof module === 'object' && module.exports) {
 	    // CommonJS
 	    var d3 = require('d3')
@@ -53936,11 +53913,7 @@ webpackJsonp([11,12],[
 
 
 /***/ },
-<<<<<<< c150fd18fd7dbc642e3b3a977d731bfebfd8106a
-/* 483 */
-=======
 /* 484 */
->>>>>>> pushing the current build for demo
 /***/ function(module, exports, __webpack_require__) {
 
 	// https://d3js.org Version 4.2.2. Copyright 2016 Mike Bostock.
@@ -70173,10 +70146,6 @@ webpackJsonp([11,12],[
 	})));
 
 /***/ },
-<<<<<<< c150fd18fd7dbc642e3b3a977d731bfebfd8106a
-/* 484 */,
-=======
->>>>>>> pushing the current build for demo
 /* 485 */,
 /* 486 */,
 /* 487 */,
