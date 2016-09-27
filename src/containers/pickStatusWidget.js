@@ -52,7 +52,7 @@ class PickStatusWidget extends React.Component{
         if(!textleft)
         {
             valueLeftStatus='gor-none';
-            textleft=<FormattedMessage id="widget.pick.completed" description='Heading for pick status widget' 
+            textleft=<FormattedMessage id="widget.pick.completed" description='Text for completed' 
             defaultMessage='Completed'/>;
 
             lowleft=<FormattedMessage id="widget.pick.status.idle" description='Throughput message' 
@@ -65,7 +65,7 @@ class PickStatusWidget extends React.Component{
         {
             textleft=<FormattedNumber id='widget.pick.textleft' value={this.props.ordersData.count_pending} />;
 
-            headingright=<FormattedMessage id="widget.pick.headingright" description='Heading for pick status widget' 
+            headingright=<FormattedMessage id="widget.pick.headingright" description='Heading for cut-off time' 
             defaultMessage='Time to cut-off'/>;
             
             remTime=this._tomillisecs(this.props.ordersData.cut_off);
@@ -88,14 +88,14 @@ class PickStatusWidget extends React.Component{
             {
                 statusClass='gor-success';
                 statusLogo='overview-tile-ontime-icon';
-                statusleft=<FormattedMessage id="widget.pick.statusleft" description='Heading for pick status widget' 
+                statusleft=<FormattedMessage id="widget.pick.statusleft" description='Text for on schedule' 
             defaultMessage='On Schedule'/>
             }
             else
             {
                 statusClass='gor-risk';  
                 statusLogo='header-yellow-alert-icon';
-                statusleft=<FormattedMessage id="widget.pick.statusRight" description='Heading for pick status widget' 
+                statusleft=<FormattedMessage id="widget.pick.statusRight" description='Text for orders at risk' 
                 defaultMessage='{count_risk} {count_risk,plural, one {order} other {orders}} at risk'
             values={{count_risk:this.props.ordersData.count_risk}}/>
                 valueLeftStatus='gor-risk';          

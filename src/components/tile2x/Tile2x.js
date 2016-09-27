@@ -12,7 +12,7 @@ class Tile2x extends React.Component{
 				<div className="gor-up-tile">
 					<span className="gor-heading">{this.props.items.headingleft}</span>
 					<p className="gor-heading-value"><span className={this.props.items.valueLeftStatus}>{this.props.items.textleft}</span></p>
-					<p className="gor-status"><span className={this.props.items.statusLogo}></span><span className={this.props.items.statusClass}>{this.props.items.statusleft}</span></p>
+					<p className="gor-status"><span className={this.props.items.statusLogo}></span><span className={this.props.items.statusClass}>{  this.props.items.statusleft}</span></p>
 			 	</div>
 			 	<div className="gor-low-tile">
 			  		<span>{this.props.items.lowleft}</span>

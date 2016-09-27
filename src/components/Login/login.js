@@ -110,8 +110,8 @@ class Login extends React.Component{
             if(items[i].value === this.props.sLang)
                 sel=i;
         }
-        let usernamePlace=(<FormattedMessage id='login.placeholder.username' defaultMessage="Username" description="Placeholder for username input field"/>);
-        let passwordPlace=(<FormattedMessage id='login.placeholder.password' defaultMessage="Password" description="Placeholder for password input field"/>);
+        let usr=(<FormattedMessage id='login.form.username' defaultMessage="Username" description="Text for username"/>);
+        let pwd=(<FormattedMessage id='login.form.password' defaultMessage="Password" description="Text for password"/>);
 
         return (
             <div className='gor-login-form'>
@@ -132,10 +132,11 @@ class Login extends React.Component{
                 <div className='gor-login-mid'>
                 <div className='gor-upper-box'>
                     <div className='gor-login-head'>
-
-                    <FormattedMessage id='login.butler.title' 
+                      <span className='gor-lg-txt'>
+                       <FormattedMessage id='login.butler.title' 
                         defaultMessage="Butler" description="Text for butler management Login form title"/>
-                    
+                       </span>
+                       <sup>TM</sup>
                     </div>
                     <p>
                     <FormattedMessage id='login.butler.manageInterface' 
@@ -154,7 +155,8 @@ class Login extends React.Component{
                 </div>
                 <section>
                 <div className='gor-login-field' ref={node => { this.userField = node }}>
-				        <div className='gor-login-user'></div><input className='field' type="text" id="username"  placeholder={usernamePlace} ref={node => { this.userName = node }}/>
+				        <div className='gor-login-user'></div><input className='field' type="text" id="username"  
+                        placeholder={usr.props.defaultMessage} ref={node => { this.userName = node }}/>
                 </div>
                 </section>
                     <div className='gor-login-usr-error' 
@@ -166,7 +168,7 @@ class Login extends React.Component{
                     </div>
                 <section>
                 <div className='gor-login-field'  ref={node => { this.passField = node }}>
-                        <div className='gor-login-password'></div><input className='field' type="password" id="password" placeholder={passwordPlace} ref={node => { this.password = node }}/>
+                        <div className='gor-login-password'></div><input className='field' type="password" id="password" placeholder={pwd.props.defaultMessage} ref={node => { this.password = node }}/>
                 </div>
                 </section>
                     <div className='gor-login-usr-error' ref={node => { this.passError = node }} >
@@ -179,8 +181,9 @@ class Login extends React.Component{
                     <input type="submit" className='gor-login-btn'  value="Login" /><br />
                 </section>
                 </div>
-                <div className='gor-box-bottom-left'><span>Current time: 09:00:15(IST)</span></div>
-                <div className='gor-box-bottom-right'></div>
+                <div className='gor-box-bottom'><span className='gor-box-bottom-left'>Current time: 09:00:15(IST)</span>
+                    <span className='gor-box-bottom-right'></span>
+                </div>
                 </form>
                 <Footer />
             </div>

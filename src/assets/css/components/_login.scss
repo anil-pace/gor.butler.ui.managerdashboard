@@ -1,10 +1,5 @@
 @import '../abstracts/functions';
 
-@font-face
-{
-  font-family: 'Source Sans Pro';
-  src: url('fonts/source-sans-pro/SourceSansPro-Regular.ttf')  format('truetype')
-}
 .gor-fill-back
 {
   	background: #4D5055;	
@@ -150,8 +145,14 @@
 			 {
 				color:#4D5055;
 				opacity:100%;
-			 	font-size:calculateRem(48px);
 			 	font-family:'Source Sans Pro Bold', sans-serif;
+			 	.gor-lg-txt{
+			 		font-size:calculateRem(48px);
+			 	}
+			 	sup{
+			 		 vertical-align: top;
+			 		 font-size:calculateRem(10px);
+			 	}
 			 }
 		}
 		.gor-login-field
@@ -165,12 +166,22 @@
 			background-color:#FFFFFF;
 			border-radius:3px;
 			border:1px solid #AAAAAA; 
+			&:hover{
+				border:1px solid #333333; 
+			 	color:#333333;
+			}
 			.field{
 				border:none;
 				font-size:18px;
 				margin-left:calculateRem(10px);
 				width:80%;
 			}
+			.gor-login-user{
+				vertical-align:middle;
+			}
+			.gor-login-password{
+				vertical-align:middle;
+			}			
 		}
 		.gor-login-auth-error
 		{
@@ -199,25 +210,28 @@
  			margin:calculateRem(40px);
  			font-size:calculateRem(20px);
 			border-radius:3px;
+			font-family:'Source Sans Pro Bold', sans-serif;
 		}	
 	}
 	a
 	{
 		text-decoration:underline;
 	}
-	.gor-box-bottom-left
+	.gor-box-bottom
 	{
 		margin:auto;
-		margin-left:35%;
+		width:30%;
 		margin-top:calculateRem(10px);
-		display:inline;
-	}
-	.gor-box-bottom-right
-	{
-		margin:auto;
-		margin-left:19%;
-		margin-top:calculateRem(10px);
-		display:inline;
+		.gor-box-bottom-left
+		{
+			width:50%;
+			text-align:left;
+		}
+		.gor-box-bottom-right
+		{
+			width:50%;
+			text-align:right;
+		}
 	}
 
 }
