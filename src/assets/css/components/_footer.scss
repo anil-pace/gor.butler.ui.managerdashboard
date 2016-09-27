@@ -1,0 +1,12 @@
+@import '../abstracts/functions';
+.gor-footer{
+	background:#4D5055;
+	color:#A6A7A9;
+	border-top:solid 1px #cccccc;
+	text-align:center;
+	position:fixed;
+	bottom:0;
+	min-height:calculateRem(10px);
+	padding:1%;
+	width:95%;
+}

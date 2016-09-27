@@ -1,9 +1,14 @@
+
 /**
  * Container for Overview tab
  * This will be switched based on tab click
  */
 import React  from 'react';
 import ReactDOM  from 'react-dom';
+import PPStable from './PPStable';
+import { connect } from 'react-redux';
+
+
 
 class PPS extends React.Component{
 	constructor(props) 
@@ -11,18 +16,15 @@ class PPS extends React.Component{
     	super(props);
     }	
 	render(){
-	console.log("call")
-		/**
-		 * Need to remove these hardcoded variables
-		 * 
-		 */
-    
 		
+    var data = this.props.PPSDetail.PPStypeDetail;
+	var itemNumber = 5;
+  
 		return (
 			<div>
 				<div>
 					<div>
-						PPS info
+						<PPStable items={this.props.PPSDetail.PPStypeDetail} itemNumber={itemNumber}/>
 					</div>
 				</div>
 			</div>
@@ -30,4 +32,10 @@ class PPS extends React.Component{
 	}
 };
 
-export default PPS ;
+function mapStateToProps(state, ownProps){
+  return {
+    PPSDetail: state.PPSDetail || {}
+  };
+}
+
+export default connect(mapStateToProps)(PPS) ;

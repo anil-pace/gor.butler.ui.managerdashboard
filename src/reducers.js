@@ -14,6 +14,14 @@ import {inventoryInfo}  from './reducers/inventoryReducer'
 import {ordersInfo}  from './reducers/ordersReducer'
 import {throughputInfo}  from './reducers/throughputReducer'
 import {statsWidget} from './reducers/statsWidgetReducer'
+import {histogramData} from './reducers/orderstatsReducer'
+import {chargersDetail} from './reducers/chargersDetailReducer'
+import {butlerDetail} from './reducers/butlerDetailReducer'
+import {PPSDetail} from './reducers/ppsDetailReducer'
+import {tabSelected} from './reducers/tabSelectReducer'
+import {subTabSelected} from './reducers/subTabSelectReducer'
+import {reducer as modalReducer} from 'react-redux-modal'
+import {PPSperformance} from './reducers/ppsPerformanceReducer'
 
 
 const rootReducer = combineReducers({
@@ -24,6 +32,7 @@ const rootReducer = combineReducers({
   recieveSocketActions,
   butlersInfo,
   chargerInfo,
+  modals: modalReducer,
   auditInfo,
   putInfo,
   ppsInfo,
@@ -31,6 +40,14 @@ const rootReducer = combineReducers({
   inventoryInfo,
   ordersInfo,
   performanceWidget,
-  statsWidget })
+  statsWidget,
+  histogramData,
+  chargersDetail,
+  butlerDetail,
+  PPSDetail,
+  tabSelected,
+  subTabSelected,
+  PPSperformance
+   })
 
 export default rootReducer

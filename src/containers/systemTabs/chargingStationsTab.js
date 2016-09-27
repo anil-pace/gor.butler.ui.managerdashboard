@@ -5,25 +5,30 @@
  */
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-
+import ChargingStationsTable from './chargingStationsTable';
+import { connect } from 'react-redux';
 class ChargingStations extends React.Component{
 	constructor(props) 
 	{
     	super(props);
     }	
 	render(){
-	console.log("call")
-		/**
-		 * Need to remove these hardcoded variables
-		 * 
-		 */
+	
+		var itemNumber = 2;
+    var connectedBots = 0;
+    var onState = 0;
+    var chargersData =  this.props.chargersDetail.chargersDetail;
+    for (var i = chargersData.length - 1; i >= 0; i--) {
+      if(chargersData[i].dockedBots) {
+        connectedBots++;
+      }
     
-		
+    }
 		return (
 			<div>
 				<div>
 					<div>
-						ChargingStations info
+						<ChargingStationsTable items={this.props.chargersDetail.chargersDetail} itemNumber={itemNumber} connectedBots={connectedBots}/>
 					</div>
 				</div>
 			</div>
@@ -31,4 +36,10 @@ class ChargingStations extends React.Component{
 	}
 };
 
-export default ChargingStations ;
+function mapStateToProps(state, ownProps){
+  return {
+    chargersDetail: state.chargersDetail || {}
+  };
+}
+
+export default connect(mapStateToProps)(ChargingStations) ;

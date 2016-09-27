@@ -18,7 +18,7 @@ class SystemTab extends React.Component{
 				<div>
 					<SubTabs/>
 				</div>
-        {this.props.children}
+        	{this.props.children}
 			</div>
 		);
 	}

@@ -3,7 +3,9 @@
  */
 import React  from 'react';
 import ReactDOM  from 'react-dom';
+import { connect } from 'react-redux';
 import { Router, Route, hashHistory, IndexRoute} from 'react-router';
+import {loginRequest} from '../actions/loginAction';
 
 class Routes extends React.Component{
 	constructor(props) 
@@ -11,6 +13,13 @@ class Routes extends React.Component{
     	super(props);
        
     }
+   requireAuth(nextState, replaceState ) {
+  		if (sessionStorage.getItem('auth_token')) 
+  		{
+  			this.props.loginRequest();
+    		replaceState({ nextPathname: nextState.location.pathname }, '/overview',nextState.location.query)
+ 	 	}
+	}
     render(){
 		return (
 		<Router history={hashHistory}>
@@ -21,7 +30,7 @@ class Routes extends React.Component{
 		      },"defaultApp");
 		    }}
 			 />
-			 <Route name="login" path="/login"  
+			 <Route name="login" path="/login"   onEnter={this.requireAuth.bind(this)} 
 			 getComponent={(location, callback) => {
 		      require.ensure([], function (require) {
 		        callback(null, require('./Login/login').default);
@@ -48,8 +57,70 @@ class Routes extends React.Component{
 				        callback(null, require('../containers/systemTab').default);
 				      },"system");
 				    }}
+					 > 
+					 <IndexRoute 
+					getComponent={(location, callback) => {
+				      require.ensure([], function (require) {
+				        callback(null, require('../containers/systemTabs/butlerbotTab').default);
+				      });
+				    }}
 					 />
-					
+					 	<Route name="butlerbots" path="/butlerbots"  
+						 getComponent={(location, callback) => {
+					      require.ensure([], function (require) {
+					        callback(null, require('../containers/systemTabs/butlerbotTab').default);
+					      });
+					    }}
+						 />
+
+						 <Route name="pps" path="/pps"  
+						 getComponent={(location, callback) => {
+					      require.ensure([], function (require) {
+					        callback(null, require('../containers/systemTabs/ppsTab').default);
+					      });
+					    }}
+						 />
+
+						 <Route name="chargingstation" path="/chargingstation"  
+						 getComponent={(location, callback) => {
+					      require.ensure([], function (require) {
+					        callback(null, require('../containers/systemTabs/chargingStationsTab').default);
+					      });
+					    }}
+						 />
+						 <Route name="notification" path="/notification"  
+						 getComponent={(location, callback) => {
+					      require.ensure([], function (require) {
+					        callback(null, require('../containers/systemTabs/notificationTab').default);
+					      });
+					    }}
+						 />
+					 </Route>
+
+					 <Route name="orders" path="/orders"  
+					 getComponent={(location, callback) => {
+				      require.ensure([], function (require) {
+				        callback(null, require('../containers/ordersTab').default);
+				      });
+				    }}
+					 />
+
+					 <Route name="inventory" path="/inventory"  
+					 getComponent={(location, callback) => {
+				      require.ensure([], function (require) {
+				        callback(null, require('../containers/inventoryTab').default);
+				      });
+				    }}
+					 />
+
+					<Route name="users" path="/users"  
+					 getComponent={(location, callback) => {
+				      require.ensure([], function (require) {
+				        callback(null, require('../containers/usersTab').default);
+				      });
+				    }}
+					 />
+
 					<Route name="overview" path="/overview"  
 					 getComponent={(location, callback) => {
 				      require.ensure([], function (require) {
@@ -62,5 +133,13 @@ class Routes extends React.Component{
 		)}
 
 }
-
-export default Routes
+function mapStateToProps(state, ownProps){
+	return {
+    };
+}
+var mapDispatchToProps = function(dispatch){
+    return {
+        loginRequest: function(){ dispatch(loginRequest()); }
+    }
+};
+export default connect(mapStateToProps,mapDispatchToProps)(Routes);

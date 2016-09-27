@@ -12,7 +12,7 @@ export  function ppsInfo(state={},action){
          totalCount = processPPSData(action.data);
          ppsData.totalPut  = totalCount.totalPut;
          ppsData.totalAudit  = totalCount.totalAudit;
-         
+         ppsData.totalPick =totalCount.totalPick;
 
         return Object.assign({}, state, {
             "ppsData" : ppsData
@@ -25,7 +25,7 @@ export  function ppsInfo(state={},action){
 
 function processPPSData(response){
       var aggData = response["aggregate_data"] || [],
-      totalPut = 0,totalAudit = 0;
+      totalPut = 0,totalAudit = 0,totalPick=0;
       for(let i = 0; i < aggData.length ; i++ ){
         if(aggData[i].hasOwnProperty("pps_mode") && aggData[i]["pps_mode"] === "put"){
           totalPut++;
@@ -33,9 +33,13 @@ function processPPSData(response){
         else if(aggData[i].hasOwnProperty("pps_mode") && aggData[i]["pps_mode"] === "audit"){
             totalAudit++;
         }
+        else if(aggData[i].hasOwnProperty("pps_mode") && aggData[i]["pps_mode"] === "pick"){
+            totalPick++;
+        }        
       }
       return {
         "totalPut":totalPut,
-        "totalAudit" : totalAudit
+        "totalAudit" : totalAudit,
+        "totalPick": totalPick
       }
 }

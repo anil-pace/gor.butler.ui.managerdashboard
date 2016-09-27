@@ -5,7 +5,7 @@ export  function statsWidget(state={},action){
 	  
 	  case "RENDER_STATSWIDGET":
 	    return Object.assign({}, state, {
-	    	"widget":action.data
+	    	"statsWidget":action.data
       })
 	    
 	  default:

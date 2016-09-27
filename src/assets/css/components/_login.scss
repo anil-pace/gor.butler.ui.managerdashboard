@@ -1,35 +1,34 @@
 @import '../abstracts/functions';
 
-
-.fill-back
+.gor-fill-back
 {
   	background: #4D5055;	
 }
-.login-form
+.gor-login-form
 {
   	color:#A6A7A9;
   	font-family: 'Source Sans Pro', sans-serif;
   	overflow:hidden;
   	padding:calculateRem(20px);
-  	.login-logo
+  	.gor-login-logo
   	{
   		margin:auto;
-  		margin-top:65px;
+  		margin-top:calculateRem(50px);
   	}
-  	.login-lang:hover {
+  	.gor-login-lang:hover {
 			color:#FFFFFF;
 	}  	
-  	.login-lang
+  	.gor-login-lang
   	{
   		text-align:right;
-  		.lang-text
+  		.gor-lang-text
   		{
   			margin-right:10px;
   			display:inline-block;
   			margin-top:10px;
   			vertical-align:top;
   		}
-		.lang-drop {
+		.gor-lang-drop {
   			display:inline-block;
   			width:calculateRem(174px);
   			height:calculateRem(30px);
@@ -125,7 +124,7 @@
   			}
   		}
   	}
-	.login-mid
+	.gor-login-mid
 	{
 		
 		text-align:center;
@@ -133,23 +132,30 @@
         border: 1px solid;
         border-radius:5px;
 		color: #979797;
-		width:36%;
-		min-height:calculateRem(392px);
+		width:30%;
+		min-height:calculateRem(352px);
 		margin:auto;
 		margin-top:calculateRem(40px);
 
-		.upper-box
+		.gor-upper-box
 		{
 			 margin-bottom:calculateRem(20px);
 			 padding-top:calculateRem(40px);
-			 .login-head
+			 .gor-login-head
 			 {
 				color:#4D5055;
-			 	font-size:calculateRem(45px);
-			 	font-weight:bold;
+				opacity:100%;
+			 	font-family:'Source Sans Pro Bold', sans-serif;
+			 	.gor-lg-txt{
+			 		font-size:calculateRem(48px);
+			 	}
+			 	sup{
+			 		 vertical-align: top;
+			 		 font-size:calculateRem(10px);
+			 	}
 			 }
 		}
-		.login-field
+		.gor-login-field
 		{
 			margin:auto;
 			text-align:left;
@@ -160,14 +166,24 @@
 			background-color:#FFFFFF;
 			border-radius:3px;
 			border:1px solid #AAAAAA; 
+			&:hover{
+				border:1px solid #333333; 
+			 	color:#333333;
+			}
 			.field{
 				border:none;
 				font-size:18px;
 				margin-left:calculateRem(10px);
 				width:80%;
 			}
+			.gor-login-user{
+				vertical-align:middle;
+			}
+			.gor-login-password{
+				vertical-align:middle;
+			}			
 		}
-		.login-auth-error
+		.gor-login-auth-error
 		{
 			display:none;
 			text-align:left;
@@ -176,7 +192,7 @@
 			text-align:center;
 			margin-top:10px;
 		}
-		.login-usr-error
+		.gor-login-usr-error
 		{
 			display:none;
 			text-align:left;
@@ -185,7 +201,7 @@
 			margin-top:10px;
 			margin-left:calculateRem(62px);
 		}
-		.login-btn
+		.gor-login-btn
 		{
  			background: #F36F36;
  			color: #FFFFFF;
@@ -194,29 +210,28 @@
  			margin:calculateRem(40px);
  			font-size:calculateRem(20px);
 			border-radius:3px;
+			font-family:'Source Sans Pro Bold', sans-serif;
 		}	
-		.login-fgt
-		{
-		 padding-bottom:40px;
-		}
 	}
 	a
 	{
 		text-decoration:underline;
 	}
-	.box-bottom-left
+	.gor-box-bottom
 	{
 		margin:auto;
-		margin-left:32%;
+		width:30%;
 		margin-top:calculateRem(10px);
-		display:inline;
-	}
-	.box-bottom-right
-	{
-		margin:auto;
-		margin-left:19%;
-		margin-top:calculateRem(10px);
-		display:inline;
+		.gor-box-bottom-left
+		{
+			width:50%;
+			text-align:left;
+		}
+		.gor-box-bottom-right
+		{
+			width:50%;
+			text-align:right;
+		}
 	}
 
 }

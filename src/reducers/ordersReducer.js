@@ -8,6 +8,7 @@ export  function ordersInfo(state={},action){
   switch (action.type) {
     case ORDERS_DATA:
           var count_pending=0,cut_off=0,eta=0,count_risk=0,wave_end='',res;
+          
           res=action.data;
           if(res.aggregate_data){
             if(res.aggregate_data.cut_off_time)

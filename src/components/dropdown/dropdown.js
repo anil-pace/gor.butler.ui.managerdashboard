@@ -20,7 +20,7 @@ class Dropdown extends Component {
 
     return (
       <div className={this.props.styleClass}>
-        <Ddown options={this.props.items} onChange={this._onSelect} value={defaultOption} placeholder="Select an option" />
+        <Ddown options={this.props.items} onChange={this._onSelect} value={defaultOption}  />
       </div>
     )
   }

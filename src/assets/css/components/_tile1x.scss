@@ -13,7 +13,7 @@ body
   box-shadow: 0px 2px 3px 3px #EAEAEA;
   display: inline-block;
   min-height:calculateRem(170px);
-  margin: 1% 1% 1% 2%;
+  margin: 1% 1% 0% 2%;
   font-size: 0;
   &.gor-double{
       width:96%;
@@ -27,11 +27,11 @@ body
     font-size: calculateRem(16px);
     padding:0;
     margin:0;
-    line-height: 30px;
+    line-height: calculateRem(30px);
   }
   .gor-up-tile{
-    padding: 15px 20px 0px 20px;
-    min-height:calculateRem(140px);
+    padding: 15px 10px 0px 20px;
+    min-height:calculateRem(135px);
   }
   .gor-tile-left{
     width: 80%;
@@ -74,18 +74,19 @@ body
 .gor-tile-right{
   width: 50px;
   display:inline-block;
-  vertical-align: top;
+  vertical-align: sub;
   height:55px;
 }
 .gor-low-tile{
   font-family: 'Source Sans Pro semibold', sans-serif;
   font-size: calculateRem(16px);
-//  font-weight:bold;
   background:#F7F7F7;
   color: #666666;
-  padding: 10px 0px 15px 20px;
-  min-height:calculateRem(20px);
+  padding: 10px 0px 10px 20px;
+  min-height:calculateRem(16px);
   overflow:hidden;
+  vertical-align:middle;
+  border-radius:3px;
 }
 
 }

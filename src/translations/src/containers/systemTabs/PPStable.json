@@ -1,0 +1,27 @@
+[
+  {
+    "id": "pps.table.heading",
+    "description": "Heading for PPS",
+    "defaultMessage": "PPS"
+  },
+  {
+    "id": "PPS.table.status",
+    "description": "Status for PPS",
+    "defaultMessage": "STATUS"
+  },
+  {
+    "id": "PPS.table.operatingMode",
+    "description": "operatingMode for PPS",
+    "defaultMessage": "OPERATING MODE"
+  },
+  {
+    "id": "PPS.table.performance",
+    "description": "performance Status for PPS",
+    "defaultMessage": "PERFORMANCE"
+  },
+  {
+    "id": "PPS.table.operatorAssigned",
+    "description": "operatorAssigned for PPS",
+    "defaultMessage": "OPERATOR ASSIGNED"
+  }
+]

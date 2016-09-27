@@ -8,7 +8,6 @@
     "webpack": "echo '=>Web-Pack' && webpack  --optimize-dedupe --display-error-details",
     "build-sass": "echo '=>Build SASS' && node-sass  --output-style expanded $npm_package_config_srcCss  $npm_package_config_destinationCss  ",
     "watch-sass": "node-sass --output-style expanded  $npm_package_config_watchCssSrc $npm_package_config_watchCssDist -v",
-    "copy": "echo '=>Copying...' && copy ./index.html ./dist/",
     "lint": "eslint src/**/*.js --cache --ignore-pattern .gitignore",
     "build-js": "npm run webpack",
     "watch:css": "onchange 'src/assets/css/**/*.scss' -- npm run build-sass ",
@@ -16,9 +15,6 @@
     "watch:js": "npm run build && onchange 'src/**/*.js' -- npm run build-js",
     "watch:all": "parallelshell 'npm run watch:css' 'npm run watch:js'"
   },
-  "pre-commit": [
-    "lint","test"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://himanshu-saraswat@bitbucket.org/gorcode/gor.butler.ui.managerdashboard.git"
@@ -56,14 +52,16 @@
     "babel-preset-stage-2": "^6.13.0",
     "babelify": "^7.3.0",
     "clean-webpack-plugin": "^0.1.10",
-    "copy": "^0.3.0",
     "copy-webpack-plugin": "^3.0.1",
     "d3": "^3.5.6",
     "d3-tip": "^0.7.1",
     "enzyme": "^2.4.1",
     "es6-symbol": "^3.1.0",
     "eslint": "^3.5.0",
+    "eslint-config-standard": "^6.0.1",
+    "eslint-plugin-promise": "^2.0.1",
     "eslint-plugin-react": "^6.1.2",
+    "eslint-plugin-standard": "^2.0.0",
     "fs": "0.0.1-security",
     "glob": "^7.0.6",
     "html-webpack-plugin": "^2.22.0",
@@ -75,7 +73,6 @@
     "npm": "^3.10.6",
     "onchange": "^2.5.0",
     "parallelshell": "^2.0.0",
-    "pre-commit": "^1.1.3",
     "react": "^15.3.1",
     "react-addons-test-utils": "^15.2.0",
     "react-d3-library": "^1.1.7",
@@ -87,7 +84,8 @@
     "react-simple-dropdown": "^1.1.4",
     "redux": "^3.5.2",
     "redux-router": "^2.1.2",
-    "webpack": "^1.13.2"
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.1"
   },
   "dependencies": {
     "d3-tip": "^0.7.1",
@@ -101,6 +99,7 @@
     "react-intl": "^2.1.5",
     "react-intl-redux": "^0.1.0",
     "react-redux": "^4.4.5",
+    "react-redux-modal": "^0.4.3",
     "react-select": "^1.0.0-beta14",
     "xmldom": "^0.1.22"
   },

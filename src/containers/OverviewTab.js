@@ -4,14 +4,12 @@
  */
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-import HealthTabs from '../components/health/healthTabs';
-import Health from '../components/health/health';
 import OrderStatsWidget from '../containers/orderStatsWidget'
 import PerformanceWidget from '../containers/performanceWidget'
 import AuditStatusWidget from '../containers/auditStatusWidget'
 import PutStatusWidget from '../containers/putStatusWidget'
 import PickStatusWidget from '../containers/pickStatusWidget'
-
+import { connect } from 'react-redux';
 
 
 class Overview extends React.Component{
@@ -19,21 +17,7 @@ class Overview extends React.Component{
 	{
     	super(props);
     }	
-
-
-
 	render(){
-		/**
-		 * Need to remove these hardcoded variables
-		 * 
-		 */
-		
-		
-		//this.formatContainerData('put');
-		//this.formatContainerData('audit');
-		//var putData=this.props.putData ;
-        //var auditData=this.props.auditData;//{heading:'Items to Audit', value:'3,74,519', low:'4 PPS auditing 1,546 items/hr', logo:'iAudit'};;
-
 		return (
 			<div className="gorWidgetWrap">
 				<div className="section group">
@@ -56,13 +40,15 @@ class Overview extends React.Component{
 	}
 };
  
-/*function mapStateToProps(state, ownProps){
-	return {
-        putData: state.putInfo.putData,
-        ppsData:state.ppsInfo.ppsData,
-        throughputData : state.throughputInfo.throughputData,
-        auditData: state.auditInfo.auditData
-    };
-}*/
+ 
+
+// function mapStateToProps(state, ownProps){
+// 	return {
+//         putData: state.putInfo.putData,
+//         ppsData:state.ppsInfo.ppsData,
+//         throughputData : state.throughputInfo.throughputData,
+//         auditData: state.auditInfo.auditData
+//     };
+// }
 
 export 	default Overview;

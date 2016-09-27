@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import Tilex from '../components/tile1x/Tilex';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage,FormattedNumber,FormattedPlural } from 'react-intl';
 
 class AuditStatusWidget extends React.Component{
 	/**
@@ -23,7 +23,8 @@ class AuditStatusWidget extends React.Component{
 	 	auditData = Object.assign({},this.props.auditData),
 	 	totalAudit = this.props.ppsData ? this.props.ppsData.totalAudit : null,
 		auditThroughput = this.props.throughputData ? this.props.throughputData.audit_throughput : null,
-		value = auditData.value ? auditData.value : null ;
+		value = auditData.total_audited ? auditData.total_audited : null ,
+		pluralMsg;
 
 		//Setting display values based on server values/mock
 		if (!value){
@@ -38,18 +39,27 @@ class AuditStatusWidget extends React.Component{
         					defaultMessage='Starting...'/>;
 		}
 		else{
+			value = <FormattedNumber value={value}/>
+			auditThroughput = <FormattedNumber value={auditThroughput}/>
+			pluralMsg = <FormattedPlural
+						    value={totalAudit}
+						    one='PPS'
+						    other='PPS'
+						/>
 			lowStr = <FormattedMessage id="widget.audit.throughput" description='Throughput message' 
-        					defaultMessage='{count} PPS auditing {throughput} items/hr'
+        					defaultMessage='{count} {pluralMsg} auditing {throughput} items/hr'
         					values={{
 						        count: totalAudit,
+						        pluralMsg:pluralMsg,
 						        throughput:auditThroughput
 						    }}/>;
 		}
 
 		auditData.heading = <FormattedMessage id="widget.audit.heading" description='Audit Item Heading' 
-        defaultMessage='Items to Audit'/>;
+        defaultMessage='Items audited'/>;
         auditData.value = value;
 		auditData.low = lowStr; 
+        auditData.logo = "iAudit";
 
 		return auditData
     		
