@@ -66,7 +66,7 @@ plugins: [
   new CopyWebpackPlugin([
 
       { from: 'src/assets/images', to: 'assets/images' },
-      { from: 'src/assets/css/fonts', to: 'assets/fonts' },
+      { from: 'src/assets/fonts', to: 'assets/fonts' },
       { from: 'index.html', to: '' }
 
     ])
