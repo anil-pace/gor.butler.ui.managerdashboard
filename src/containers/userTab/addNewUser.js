@@ -32,8 +32,9 @@ class AddUser extends React.Component{
             
              <div className='gor-usr-hdsm'><FormattedMessage id="users.add.userdetails.userid" description='Text for user id' 
             defaultMessage='User ID'/></div>
-              <input className='gor-usr-fdlg' type="text" placeholder="User Id" id="userid"  ref={node => { this.userId = node }}/>
-            <p></p>
+              <input className='gor-usr-fdlg' type="text" placeholder="User Id" id="userid"  ref={node => { this.userId = node }}/><div className='gor-id-val iTick' />
+                <div className='gor-add-id-error' ref={node => { this.passError = node }} ><div className='gor-login-error'></div> Invalid user ID, please try again</div>
+
               <div className='gor-usr-field'>
                 <div className='gor-usr-hdsm'><FormattedMessage id="users.add.userdetails.firstname" description='Text for first name' 
             defaultMessage='First Name'/></div>
@@ -43,8 +44,9 @@ class AddUser extends React.Component{
                 <div className='gor-usr-hdsm'><FormattedMessage id="users.add.userdetails.lastname" description='Text for last name' 
             defaultMessage='Last Name'/></div>
                 <input className='gor-usr-fdsm' type="text" placeholder="Last Name" id="lastname"  ref={node => { this.lastName = node }}/>
-              </div>
+              </div><div className='gor-name-val iTick' />
             </div>
+                <div className='gor-add-name-error' ref={node => { this.passError = node }} ><div className='gor-login-error'></div> Please enter user name</div>
 
             <div className='gor-usr-details'>
             <div className='gor-usr-hdlg'><FormattedMessage id="users.add.roledetails.heading" description='Heading for role' 
@@ -101,10 +103,14 @@ class AddUser extends React.Component{
 
               <div className='gor-usr-hdsm'><FormattedMessage id="users.add.password.field1" description='Text for password' 
             defaultMessage='Password'/></div>
-              <input className='gor-usr-fdlg' type="password" id="password1"  ref={node => { this.password1 = node }}/>
+              <input className='gor-usr-fdlg' type="password" id="password1"  ref={node => { this.password1 = node }}/><div className='gor-pass-val iTick' />
+                <div className='gor-add-pass-error' ref={node => { this.passError = node }} ><div className='gor-login-error'></div> Password do not match</div>
+
               <div className='gor-usr-hdsm'><FormattedMessage id="users.add.password.field2" description='Text for confirm password' 
             defaultMessage='Confirm Password'/></div>
-              <input className='gor-usr-fdlg' type="password" id="password2"  ref={node => { this.password2 = node }}/>
+              <input className='gor-usr-fdlg' type="password" id="password2"  ref={node => { this.password2 = node }}/><div className='gor-pass-val iTick' />
+                <div className='gor-add-pass-error' ref={node => { this.passError = node }} ><div className='gor-login-error'></div> Password do not match</div>
+
             </div>
             <p className='gor-submit'>
              <button className="gor-add-btn"><FormattedMessage id="users.add.password.button" description='Text for add new user button' 

@@ -1,0 +1,37 @@
+.gor-logout{
+	width:40%;
+	min-height:260px;
+	margin:auto;
+	background:#ffffff;
+	border-radius:3px;
+	.gor-logout-text{
+		margin:auto;
+		margin-top:40px;
+	}
+	.gor-logout-bottom{
+		vertical-align:bottom;
+		text-align:right;
+		margin-bottom:20px;
+	}
+	.gor-logout-btn{
+		font-family:'Source Sans Pro Bold', sans-serif;
+	    width:113px;
+	    height:35px;
+	    font-size:14px;
+	    background:#f36f36;
+	    color:#ffffff;
+	    border-radius:3px;
+	    display:inline-block;
+	}
+}
+.gor-cancel-btn{
+	font-family:'Source Sans Pro Bold', sans-serif;
+    width:113px;
+    height:35px;
+    font-size:14px;
+    background:#4D5055;
+    color:#ffffff;
+    border-radius:3px;
+    margin-right:10px;
+	display:inline-block;
+}

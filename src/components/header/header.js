@@ -4,7 +4,9 @@ import { connect } from 'react-redux' ;
 import {REQUEST_HEADER,RECIEVE_HEADER,RECIEVE,RECIEVE_ITEM_TO_STOCK} from '../../actions/headerAction';
 import { logoutRequest } from '../../actions/loginAction';
 import { endWsAction } from '../../actions/socketActions';
-
+import {modal} from 'react-redux-modal';
+import LogOut from '../../containers/logoutTab';
+ 
 var dropdownFlag=0;
 var temp;
 
@@ -40,7 +42,15 @@ class Header extends React.Component{
     	this.props.endConnect();
 
     }
-
+   addModal() {
+    modal.add(LogOut, {
+      title: '',
+      size: 'large', // large, medium or small,
+      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: true // (optional) if you don't wanna show the top right close button
+      //.. all what you put in here you will get access in the modal props ;)
+    });
+   }
 
 	render(){
 		const { headData } = this.props;
@@ -83,7 +93,7 @@ class Header extends React.Component{
 							<div className="horizontalDiv">	
 							</div>
 							<div>
-								<a href="javascript:void(0)" onClick={this.appLogout.bind(this)}>Logout</a>
+								<a href="javascript:void(0)" onClick={this.addModal.bind(this)}>Logout</a>
 							</div>
 						</div>
 					</div>
