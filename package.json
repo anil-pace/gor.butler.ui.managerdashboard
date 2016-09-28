@@ -8,7 +8,6 @@
     "webpack": "echo '=>Web-Pack' && webpack  --optimize-dedupe --display-error-details",
     "build-sass": "echo '=>Build SASS' && node-sass  --output-style expanded $npm_package_config_srcCss  $npm_package_config_destinationCss  ",
     "watch-sass": "node-sass --output-style expanded  $npm_package_config_watchCssSrc $npm_package_config_watchCssDist -v",
-    "copy": "echo '=>Copying...' && copy ./index.html ./dist/",
     "lint": "eslint src/**/*.js --cache --ignore-pattern .gitignore",
     "build-js": "npm run webpack",
     "watch:css": "onchange 'src/assets/css/**/*.scss' -- npm run build-sass ",
@@ -53,7 +52,6 @@
     "babel-preset-stage-2": "^6.13.0",
     "babelify": "^7.3.0",
     "clean-webpack-plugin": "^0.1.10",
-    "copy": "^0.3.0",
     "copy-webpack-plugin": "^3.0.1",
     "d3": "^3.5.6",
     "d3-tip": "^0.7.1",
@@ -86,7 +84,8 @@
     "react-simple-dropdown": "^1.1.4",
     "redux": "^3.5.2",
     "redux-router": "^2.1.2",
-    "webpack": "^1.13.2"
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.1"
   },
   "dependencies": {
     "d3-tip": "^0.7.1",

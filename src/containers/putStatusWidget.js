@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import Tilex from '../components/tile1x/Tilex';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage,FormattedNumber ,FormattedPlural} from 'react-intl';
 
 class PutStatusWidget extends React.Component{
 	/**
@@ -21,7 +21,7 @@ class PutStatusWidget extends React.Component{
     		var lowStr,totalPut = this.props.ppsData ? this.props.ppsData.totalPut : null,
     		putData = Object.assign({},this.props.putData),
     		putThroughput = this.props.throughputData ? this.props.throughputData.put_throughput : null,
-    		value = putData ? putData.value : null,
+    		value = putData ? putData.value : null,pluralMsg,
     		heading;
 
     		//Setting display values based on server values/mock
@@ -37,10 +37,18 @@ class PutStatusWidget extends React.Component{
             					defaultMessage='Starting...'/>;
     		}
     		else{
-    			lowStr = <FormattedMessage id="widget.put.throughput" description='Throughput message' 
-            					defaultMessage='{count} PPS stocking {throughput} items/hr'
+    			value = <FormattedNumber value={value}/>
+                putThroughput = <FormattedNumber value={putThroughput}/>
+                pluralMsg = <FormattedPlural
+                            value={totalPut}
+                            one='PPS'
+                            other='PPS'
+                        />
+                lowStr = <FormattedMessage id="widget.put.throughput" description='Throughput message' 
+            					defaultMessage='{count} {pluralMsg} stocking {throughput} items/hr'
             					values={{
 							        count: totalPut,
+                                    pluralMsg: pluralMsg,
 							        throughput:putThroughput
 							    }}/>;
     		}
@@ -49,6 +57,7 @@ class PutStatusWidget extends React.Component{
             					defaultMessage='Items stocked'/>;
             putData.value = value;
             putData.low = lowStr;
+            putData.logo = "iStock";
     		
     		return putData
     		

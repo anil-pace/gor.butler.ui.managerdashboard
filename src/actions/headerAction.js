@@ -2,18 +2,7 @@ import fetch from 'isomorphic-fetch'
 import {REQUEST_HEADER,RECIEVE_HEADER,RECIEVE_ITEM_TO_STOCK} from '../constants/appConstants.js';
 
 
-function fetchData(type) {
-  return dispatch => {
-    
-    return fetch('https://192.168.8.118/api/auth/token',{
-      'mode':'cors',
-      'method':'post',
-      'body' : document.getElementById('loginForm')
-      })
-      .then(response => response.json())
-      .then(json => dispatch(receiveData(json)))
-  }
-}
+
 function receiveData(json) {
   switch (json.resource_type){
     case RECIEVE_ITEM_TO_STOCK:
@@ -46,10 +35,5 @@ function getHeaderInfo(data){
   	}
 }
 
-export function getFetchData(type) {
-  return (dispatch, getState) => {
-      return dispatch(fetchData(type))
-    
-  }
-}
+
 

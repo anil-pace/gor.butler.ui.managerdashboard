@@ -89,6 +89,13 @@
                 background-color:#FFFFFF;
                 border-radius:3px;
                 border:1px solid #AAAAAA; 
+                &:hover{
+                    border:1px solid #666666;  
+                }
+                &:disabled{
+                    border:1px solid #cccccc;
+                    background:#f7f7f7;
+                }
         }
         .gor-usr-field{
             display:inline-block;
@@ -102,6 +109,9 @@
                 background-color:#FFFFFF;
                 border-radius:3px;
                 border:1px solid #AAAAAA; 
+                &:hover{
+                    border:1px solid #666666;  
+                }
             }
         }
 

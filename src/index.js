@@ -40,11 +40,12 @@ const store = configureStore(initState);
 ReactDOM.render(
 	
 	<Provider store={store}>
-	<div>
 	<IntlProvider messages={ translationMessages.en }>
+	<div>
 	<Routes />
-	</IntlProvider>
-	<ReduxModal />
+		<ReduxModal />
 	</div>
+	</IntlProvider>
+
 	</Provider>
 ,document.getElementById('container'))

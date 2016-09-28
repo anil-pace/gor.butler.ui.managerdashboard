@@ -2,7 +2,7 @@
 
 export const resTypePut = {
 	"aggregate_data": {
-		"items_put": 0
+		"items_put": 256789
 	},
 	"resource_type": "put_details"
 };
@@ -41,7 +41,7 @@ export const resTypePPS = {
 		"items_picked": 1000, 
 		"items_put": 2400,
 		"items_audited": "need_to_be_decided_per_item_or_per_audit",
-		"pps_mode": "pick",
+		"pps_mode": "audit",
 		"active": "true/false"
 	},{
 		"pps_id": 2,

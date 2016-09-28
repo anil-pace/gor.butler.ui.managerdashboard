@@ -10,13 +10,13 @@
     "defaultMessage": "Japanese"
   },
   {
-    "id": "login.placeholder.username",
-    "description": "Placeholder for username input field",
+    "id": "login.form.username",
+    "description": "Text for username",
     "defaultMessage": "Username"
   },
   {
-    "id": "login.placeholder.password",
-    "description": "Placeholder for password input field",
+    "id": "login.form.password",
+    "description": "Text for password",
     "defaultMessage": "Password"
   },
   {

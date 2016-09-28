@@ -8,7 +8,7 @@ import { wsInitData } from './constants/initData.js'
 import { REQUEST_HEADER, getFetchData } from './actions/headerAction'
 import { connect } from 'react-redux';
 
-class App extends React.Component{
+class App extends React.Component{ 
 	/**
 	 * Called once before rendering of component,used to displatch fetch action
 	 * @return {[type]}

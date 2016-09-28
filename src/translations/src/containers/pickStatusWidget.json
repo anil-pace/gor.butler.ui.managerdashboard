@@ -6,7 +6,7 @@
   },
   {
     "id": "widget.pick.completed",
-    "description": "Heading for pick status widget",
+    "description": "Text for completed",
     "defaultMessage": "Completed"
   },
   {
@@ -16,7 +16,7 @@
   },
   {
     "id": "widget.pick.headingright",
-    "description": "Heading for pick status widget",
+    "description": "Heading for cut-off time",
     "defaultMessage": "Time to cut-off"
   },
   {
@@ -36,12 +36,12 @@
   },
   {
     "id": "widget.pick.statusleft",
-    "description": "Heading for pick status widget",
+    "description": "Text for on schedule",
     "defaultMessage": "On Schedule"
   },
   {
     "id": "widget.pick.statusRight",
-    "description": "Heading for pick status widget",
+    "description": "Text for orders at risk",
     "defaultMessage": "{count_risk} {count_risk, plural, one {order} other {orders}} at risk"
   }
 ]

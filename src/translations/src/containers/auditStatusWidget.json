@@ -17,7 +17,7 @@
   {
     "id": "widget.audit.throughput",
     "description": "Throughput message",
-    "defaultMessage": "{count} PPS auditing {throughput} items/hr"
+    "defaultMessage": "{count} {pluralMsg} auditing {throughput} items/hr"
   },
   {
     "id": "widget.audit.heading",
