@@ -4,7 +4,7 @@ import Tab from '../components/tabs/tab';
 import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
 import {tabSelected} from '../actions/tabSelectAction';
-import {OVERVIEW,SYSTEM,ORDERS,INVENTORY,USERS} from '../constants/appConstants';
+import {OVERVIEW,SYSTEM,ORDERS,USERS} from '../constants/appConstants';
 class Tabs extends React.Component{
 	constructor(props) 
 	{
@@ -23,10 +23,7 @@ class Tabs extends React.Component{
     	var temp = ORDERS;
     	this.props.tabSelected(temp)
     }
-    handleInvenClick(data){
-    	var temp = INVENTORY;
-    	this.props.tabSelected(temp)
-    }
+    
     handleUsersClick(data){
     	var temp = USERS;
     	this.props.tabSelected(temp)
@@ -44,9 +41,7 @@ class Tabs extends React.Component{
     const item3 = [
       { tab: 'ORDERS', Status: '70% fulfilled', currentState:'gorError' }
     ]
-    const item4 = [
-      { tab: 'INVENTORY', Status: '78% space utilised', currentState:'gorOffline' }
-    ]
+    
     const item5 = [
       { tab: 'USERS', Status: '35 users logged in', currentState:'gorOffline' }
     ]
@@ -68,10 +63,6 @@ class Tabs extends React.Component{
 
 		<Link to="/orders" onClick = {this.handleOrdersClick.bind(this)}>
 			<Tab items={item3} changeClass={selectClass["ORDERS"]} subIcons={true}/>
-		</Link>
-		
-		<Link to="/inventory" onClick = {this.handleInvenClick.bind(this)}>
-			<Tab items={item4} changeClass={selectClass["INVENTORY"]} subIcons={false}/>
 		</Link>
 		
 		<Link to="/users" onClick = {this.handleUsersClick.bind(this)}>
