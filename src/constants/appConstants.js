@@ -73,7 +73,10 @@ export const THROUGHPUT_DATA="THROUGHPUT_DATA";
 export const HISTOGRAM_DATA = "HISTOGRAM_DATA";
 export const CHARGERS_DETAIL = "CHARGERS_DETAIL";
 export const BUTLERS_DETAIL = "BUTLERS_DETAIL";
-export const PPS_DETAIL  = "PPS_DETAIL";
+export const PPS_DETAIL  = "pps_detail";
+export const SYSTEM_PPS_DETAILS = "system_pps_details";
+export const SYSTEM_BUTLERS_DETAILS = "system_butlers_details";
+export const HISTOGRAM_DETAILS = "histogram_details";
 
 /*Constants for type of AJAX call*/
 export const AUTH_LOGIN = "AUTH_LOGIN";

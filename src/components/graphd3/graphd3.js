@@ -54,17 +54,17 @@ class Chart extends React.Component{
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-      
-  // const tip = d3tip()
-  //   .attr('class', 'd3-tip')
-  //   .offset([100, 90])
-  //   .html(function(d) {
-  //     //var time=d.timeInterval.split(" ");
-  //     return "<div> Time:<div/><div> 27 Jul,2016</div> <div style='color:#ffffff'> Fulfilled:    </div>";
-  //   })
+       d3.tip=tip;
+  const tip = d3tip()
+    .attr('class', 'd3-tip')
+    .offset([100, 90])
+    .html(function(d) {
+      //var time=d.timeInterval.split(" ");
+      return "<div> Time:<div/><div> 27 Jul,2016</div> <div style='color:#ffffff'> Fulfilled:    </div>";
+    })
 
 
-      //svg.call(tip);
+      svg.call(tip);
       var data = [];
       var barData = {};
        var json = tData; 
@@ -126,9 +126,8 @@ class Chart extends React.Component{
       .attr("y", function(d) { return y(d.type); })
       .attr("height", 0)
       .attr("height", function(d) { return height - y(d.type); })
-      
-      // .on('mouseover', tip.show)
-      // .on('mouseout', tip.hide)
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide)
 
     //   var txt = svg.selectAll(".bar");
 
