@@ -5,10 +5,7 @@ import {PARSE_PPS,PARSE_PPA_THROUGHPUT,PARSE_BUTLERS,PARSE_CHARGERS,PARSE_ORDERS
 
 
 
-/**
- * [Function for parsing]
- * @param {[Object]} res [Response recieved from Mock/WS]
- */
+
 export function WsParse(res)
   {     
         //Shared data variable initialization

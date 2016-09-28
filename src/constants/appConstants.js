@@ -57,7 +57,7 @@ export const USERS = "USERS";
 export const NOTIFICATION_TAB = "Notification";
 export const BUTLERBOTS_TAB = "Butler Bots";
 export const CHARGING_TAB = "Charging Station";
-export const PPS_TAB = "PPS";
+export const PPS_TAB = "Pick Put Stations";
 
 
 

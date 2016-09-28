@@ -210,6 +210,7 @@ class PPStable extends React.Component {
             <SortHeaderCell>
                <FormattedMessage id="PPS.table.operatorAssigned" description="operatorAssigned for PPS" 
               defaultMessage ="OPERATOR ASSIGNED"/> 
+              <div className="gorToolHeaderSubText"> {this.props.operatorNum} operator</div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}

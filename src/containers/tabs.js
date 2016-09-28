@@ -51,8 +51,11 @@ class Tabs extends React.Component{
       { tab: 'USERS', Status: '35 users logged in', currentState:'gorOffline' }
     ]
     var selectClass = {OVERVIEW:"gorMainBlock", SYSTEM:"gorMainBlock",ORDERS:"gorMainBlock", INVENTORY:"gorMainBlock", USERS:"gorMainBlock"};
-    selectClass[this.props.tab] = "gorMainBlockSelect";
+    
 
+    selectClass[this.props.tab] = "gorMainBlockSelect";
+    
+    
 		return (
 		<div className="gorTabs gorMainBlock">
 		<Link to="/overview" onClick = {this.handleOverviewClick.bind(this)}>
@@ -82,7 +85,7 @@ class Tabs extends React.Component{
 function mapStateToProps(state, ownProps){
     
     return  {
-         tab:state.tabSelected.tab || {},
+         tab:state.tabSelected.tab || "OVERVIEW",
     }
 }
 

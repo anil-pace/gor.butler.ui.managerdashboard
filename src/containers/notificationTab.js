@@ -4,9 +4,9 @@
  */
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-import ButlerBotTable from './butlerbotTable';
+import NotificationTable from './notificationTab/notificationTable';
 import { connect } from 'react-redux';
-class ButlerBot extends React.Component{
+class NotificationTab extends React.Component{
 	constructor(props) 
 	{
     	super(props);
@@ -24,7 +24,7 @@ class ButlerBot extends React.Component{
 			<div>
 				<div>
 					<div className="gorTesting">
-						<ButlerBotTable items={butlerData} itemNumber={itemNumber} avgVoltage={avgVoltage}/>
+						<NotificationTable items={butlerData} itemNumber={itemNumber} avgVoltage={avgVoltage}/>
 					</div>
 				</div>
 			</div>
@@ -38,6 +38,6 @@ function mapStateToProps(state, ownProps){
   };
 }
 
-export default connect(mapStateToProps)(ButlerBot) ;
+export default connect(mapStateToProps)(NotificationTab) ;
 
 

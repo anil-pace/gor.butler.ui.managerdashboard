@@ -1,0 +1,27 @@
+[
+  {
+    "id": "NotificationTable.table.heading",
+    "description": "Heading for NotificationTable",
+    "defaultMessage": "Notifications"
+  },
+  {
+    "id": "Notifications.table.status",
+    "description": "Status for NotificationTable",
+    "defaultMessage": "EVENT TYPE"
+  },
+  {
+    "id": "NotificationTable.table.description",
+    "description": "description for current component",
+    "defaultMessage": "DESCRIPTION"
+  },
+  {
+    "id": "NotificationTable.table.remark",
+    "description": "remark for component",
+    "defaultMessage": "REMARKS"
+  },
+  {
+    "id": "NotificationTable.table.location",
+    "description": "Starting Time for Component",
+    "defaultMessage": "LOCATION"
+  }
+]

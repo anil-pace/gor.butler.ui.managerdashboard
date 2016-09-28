@@ -4,6 +4,7 @@ import { connect } from 'react-redux' ;
 import {REQUEST_HEADER,RECIEVE_HEADER,RECIEVE,RECIEVE_ITEM_TO_STOCK} from '../../actions/headerAction';
 import { logoutRequest } from '../../actions/loginAction';
 import { endWsAction } from '../../actions/socketActions';
+import { FormattedMessage } from 'react-intl';
 
 var dropdownFlag=0;
 var temp;
@@ -22,11 +23,10 @@ class Header extends React.Component{
     	
     }	
     componentWillMount(){
-    	// this.setState({"asdf":"asdf"});
-    	//console.log(this.props)
+    	
     }
     componentWillReceiveProps(nextProps){
-    	//console.log(nextProps);
+    	
     }
 
     openDropdown() {
@@ -49,7 +49,6 @@ class Header extends React.Component{
 		const item = [
 		{ value: 'logout', label: 'Logout' }
 		]
-		//console.log(this.props.headData);
 		return (
 		<header className="gorHeader head">
 			<div className="mainBlock">
@@ -58,8 +57,18 @@ class Header extends React.Component{
 				</div>
 				</div>
 				<div className="blockSystem">
-					<div className="upperText">Butler Management System</div>
-					<div className="subText">Start time:{this.props.user.start}</div>
+
+					<div className="upperText">
+						<FormattedMessage id="header.description" description="Header description" 
+              			defaultMessage ="Butler Management System"/> 
+					</div>
+					<div className="subText">
+					<FormattedMessage id="header.start_time" description='Start time ' 
+        					defaultMessage='Start time:{time} '
+        					values={{
+						        time: this.props.user.start,
+						    }}/>
+					</div>
 				</div>
 			</div>
 			<div className="blockLeft">
@@ -72,8 +81,20 @@ class Header extends React.Component{
 				<div className="dropdown" id="profile"  >
 					<div  className="dropbtn" onClick={this.openDropdown}>
 						<div className="block">
-							<div className="upperTextClient truncate">{this.props.user.name}</div>
-							<div className="subTextClient">{this.props.user.post}</div>
+							<div className="upperTextClient truncate">
+								<FormattedMessage id="header.user_name" description='User name' 
+        					defaultMessage='{user_name}'
+        					values={{
+						        user_name: this.props.user.name,
+						    }}/>
+							</div>
+							<div className="subTextClient">
+								<FormattedMessage id="header.user_post" description='User post' 
+        					defaultMessage='{user_post}'
+        					values={{
+						        user_post: this.props.user.post,
+						    }}/>
+							</div>
 						</div>
 						<div className="block user-icon">
 							

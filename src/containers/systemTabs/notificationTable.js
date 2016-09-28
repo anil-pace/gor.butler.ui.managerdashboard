@@ -5,7 +5,7 @@ import Dimensions from 'react-dimensions'
 import { FormattedMessage } from 'react-intl';
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
 
-class ButlerBotTable extends React.Component {
+class NotificationTable extends React.Component {
   constructor(props) {
     super(props);
     var temp = new Array(this.props.items.length).fill(false);
@@ -21,14 +21,15 @@ class ButlerBotTable extends React.Component {
       sortedDataList: this._dataList,
       colSortDirs: {},
       columnWidths: {
-        id: columnWidth,
+        component: columnWidth,
         status: columnWidth,
-        current: columnWidth,
-        msu: columnWidth,
-        location: columnWidth,
-        voltage: columnWidth
+        description: columnWidth,
+        remark: columnWidth,
+        time: columnWidth,
+        
       },
     };
+
     this._onSortChange = this._onSortChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
@@ -72,8 +73,8 @@ class ButlerBotTable extends React.Component {
         <div className="gorToolBar">
           <div className="gorToolBarWrap">
             <div className="gorToolBarElements">
-               <FormattedMessage id="butlerBot.table.heading" description="Heading for butlerbot" 
-              defaultMessage ="BUTLER BOTS"/>
+               <FormattedMessage id="NotificationTable.table.heading" description="Heading for NotificationTable" 
+              defaultMessage ="Notifications"/>
               
             </div>
           </div>
@@ -97,19 +98,19 @@ class ButlerBotTable extends React.Component {
         height={500}
         {...this.props}>
         <Column
-          columnKey="id"
+          columnKey="component"
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
-              sortDir={colSortDirs.id}> 
+              sortDir={colSortDirs.component}> 
               <div className="gorToolHeaderEl">
-              <div className="gorToolHeaderEl"> {sortedDataList.getSize()} BOT </div>
-              <div className="gorToolHeaderSubText"> Total:{sortedDataList.getSize()} </div>
+              <div className="gorToolHeaderEl">  COMPONENT </div>
+              
               </div>
             </SortHeaderCell>
           }
           cell={  <TextCell data={sortedDataList}/>}
           fixed={true}
-          width={columnWidths.id}
+          width={columnWidths.component}
           isResizable={true}
         />
         <Column
@@ -117,14 +118,8 @@ class ButlerBotTable extends React.Component {
           header={
             <SortHeaderCell >
               <div>
-                 <FormattedMessage id="butlerBot.table.status" description="Status for butlerbot" 
-              defaultMessage ="STATUS"/> 
-              </div>
-              <div>
-              <div className="statuslogoWrap">
-              <div className="header-red-alert-icon gorToolHeaderEl"/>
-              </div>
-              <div className="gorToolHeaderEl alertState"> 3 Alerts</div>
+                 <FormattedMessage id="Notifications.table.status" description="Status for NotificationTable" 
+              defaultMessage ="EVENT TYPE"/> 
               </div>
             </SortHeaderCell>
           }
@@ -133,60 +128,46 @@ class ButlerBotTable extends React.Component {
           width={columnWidths.status}
           isResizable={true}
         />
+        
         <Column
-          columnKey="current"
+          columnKey="description"
           header={
             <SortHeaderCell>
-              <FormattedMessage id="butlerBot.table.currentTask" description="Current task for butlerbot" 
-              defaultMessage ="CURRENT TASK"/>
-              <div className="gorToolHeaderSubText"> 2 Pick, 1 Put, 2 charging, 1 Idle</div>
+              <FormattedMessage id="NotificationTable.table.description" description="description for current component" 
+              defaultMessage ="DESCRIPTION"/>
+             
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
           fixed={true}
-          width={columnWidths.current}
+          width={columnWidths.description}
           isResizable={true}
         />
         <Column
-          columnKey="msu"
+          columnKey="remark"
           header={
             <SortHeaderCell>
-               <FormattedMessage id="butlerBot.table.msu" description="MSU Status for butlerbot" 
-              defaultMessage ="MSU"/> 
-              <div className="gorToolHeaderSubText">10 Mounted</div>
+               <FormattedMessage id="NotificationTable.table.remark" description="remark for component" 
+              defaultMessage ="REMARKS"/> 
+              
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
           fixed={true}
-          width={columnWidths.msu}
+          width={columnWidths.remark}
           isResizable={true}
         />
         <Column
-          columnKey="location"
+          columnKey="time"
           header={
             <SortHeaderCell>
-               <FormattedMessage id="butlerBot.table.location" description="Location for butlerbot" 
+               <FormattedMessage id="NotificationTable.table.location" description="Starting Time for Component" 
               defaultMessage ="LOCATION"/> 
-              <div className="gorToolHeaderSubText"> {sortedDataList.getSize()} locations</div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
           fixed={true}
-          width={columnWidths.location}
-          isResizable={true}
-        />
-        <Column
-          columnKey="voltage"
-          header={
-            <SortHeaderCell >
-               <FormattedMessage id="butlerBot.table.voltage" description="voltage for butlerbot" 
-              defaultMessage ="VOLTAGE"/>
-              <div className="gorToolHeaderSubText"> Avg. Voltage  {this.props.avgVoltage}  </div> 
-            </SortHeaderCell>
-          }
-          cell={<TextCell data={sortedDataList}  />}
-          fixed={true}
-          width={columnWidths.voltage}
+          width={columnWidths.time}
           isResizable={true}
         />
       </Table>
@@ -194,4 +175,4 @@ class ButlerBotTable extends React.Component {
     );
   }
 }
-export default Dimensions()(ButlerBotTable);
+export default Dimensions()(NotificationTable);
