@@ -1,9 +1,6 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-import { connect } from 'react-redux' ;
 import {REQUEST_HEADER,RECIEVE_HEADER,RECIEVE,RECIEVE_ITEM_TO_STOCK} from '../../actions/headerAction';
-import { logoutRequest } from '../../actions/loginAction';
-import { endWsAction } from '../../actions/socketActions';
 import {modal} from 'react-redux-modal';
 import LogOut from '../../containers/logoutTab';
  
@@ -37,11 +34,6 @@ class Header extends React.Component{
 
     }
 
-    appLogout() {
-    	this.props.userLogout();
-    	this.props.endConnect();
-
-    }
    addModal() {
     modal.add(LogOut, {
       title: '',
@@ -104,18 +96,5 @@ class Header extends React.Component{
 	}
 };
 
-function mapStateToProps(state, ownProps){
-	return  {
-	//	"ordersData":state.recieveSocketActions.ordersData || {}
-		}
-		 
 
-}
-function mapDispatchToProps(dispatch){
-    return {
-    	endConnect: function(){ dispatch(endWsAction()); },
-        userLogout: function(){ dispatch(logoutRequest()); }
-    }
-};
-
-export 	default connect(mapStateToProps,mapDispatchToProps)(Header);
+export 	default Header;
