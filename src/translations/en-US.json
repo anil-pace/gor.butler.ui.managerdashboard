@@ -10,15 +10,358 @@
     "defaultMessage": "Japanese"
   },
   {
-    "id": "login.manageInterface",
+    "id": "login.form.username",
+    "description": "Text for username",
+    "defaultMessage": "Username"
+  },
+  {
+    "id": "login.form.password",
+    "description": "Text for password",
+    "defaultMessage": "Password"
+  },
+  {
+    "id": "login.butler.language",
+    "description": "Text for language",
+    "defaultMessage": "Language"
+  },
+  {
+    "id": "login.butler.title",
+    "description": "Text for butler management Login form title",
+    "defaultMessage": "Butler"
+  },
+  {
+    "id": "login.butler.manageInterface",
     "description": "Text for Management Interface",
     "defaultMessage": "Management Interface"
   },
   {
-
-    "id": "pickWidget.heading",
-    "description": "heading for pick status widget",
+    "id": "login.butler.fail",
+    "description": "Text for login failure",
+    "defaultMessage": "Invalid username and/or password"
+  },
+  {
+    "id": "login.butler.error.username",
+    "description": "Text for missing username error",
+    "defaultMessage": "Please enter your username"
+  },
+  {
+    "id": "login.butler.error.password",
+    "description": "Text for missing password error",
+    "defaultMessage": "Please enter your password"
+  },
+  {
+    "id": "widget.audit.heading.value",
+    "description": "Total Items Audited",
+    "defaultMessage": "None"
+  },
+  {
+    "id": "widget.audit.status.offline",
+    "description": "Offline Status",
+    "defaultMessage": "Offline"
+  },
+  {
+    "id": "widget.audit.status.starting",
+    "description": "Awaiting throughput data",
+    "defaultMessage": "Starting..."
+  },
+  {
+    "id": "widget.audit.throughput",
+    "description": "Throughput message",
+    "defaultMessage": "{count} {pluralMsg} auditing {throughput} items/hr"
+  },
+  {
+    "id": "widget.audit.heading",
+    "description": "Audit Item Heading",
+    "defaultMessage": "Items audited"
+  },
+  {
+    "id": "widget.pick.headingleft",
+    "description": "Heading for pick status widget",
     "defaultMessage": "Orders to fullfill"
-
+  },
+  {
+    "id": "widget.pick.completed",
+    "description": "Text for completed",
+    "defaultMessage": "Completed"
+  },
+  {
+    "id": "widget.pick.status.idle",
+    "description": "Throughput message",
+    "defaultMessage": "{count} PPS idle"
+  },
+  {
+    "id": "widget.pick.headingright",
+    "description": "Heading for cut-off time",
+    "defaultMessage": "Time to cut-off"
+  },
+  {
+    "id": "widget.pick.textright",
+    "description": "Time remaining",
+    "defaultMessage": "{cut_off}"
+  },
+  {
+    "id": "widget.pick.throughput",
+    "description": "Throughput message",
+    "defaultMessage": "{count} PPS fullfilling at {throughput} items/hr"
+  },
+  {
+    "id": "widget.pick.lowright",
+    "description": "Estimated time",
+    "defaultMessage": "Completing in {eta}"
+  },
+  {
+    "id": "widget.pick.statusleft",
+    "description": "Text for on schedule",
+    "defaultMessage": "On Schedule"
+  },
+  {
+    "id": "widget.pick.statusRight",
+    "description": "Text for orders at risk",
+    "defaultMessage": "{count_risk} {count_risk, plural, one {order} other {orders}} at risk"
+  },
+  {
+    "id": "widget.put.heading.value",
+    "description": "Total Items Stocked",
+    "defaultMessage": "None"
+  },
+  {
+    "id": "widget.put.status.offline",
+    "description": "Offline Status",
+    "defaultMessage": "Offline"
+  },
+  {
+    "id": "widget.put.status.starting",
+    "description": "Awaiting throughput data",
+    "defaultMessage": "Starting..."
+  },
+  {
+    "id": "widget.put.throughput",
+    "description": "Throughput message",
+    "defaultMessage": "{count} {pluralMsg} stocking {throughput} items/hr"
+  },
+  {
+    "id": "widget.put.heading",
+    "description": "Put Item Heading",
+    "defaultMessage": "Items stocked"
+  },
+  {
+    "id": "butlerBot.table.heading",
+    "description": "Heading for butlerbot",
+    "defaultMessage": "BUTLER BOTS"
+  },
+  {
+    "id": "butlerBot.table.status",
+    "description": "Status for butlerbot",
+    "defaultMessage": "STATUS"
+  },
+  {
+    "id": "butlerBot.table.currentTask",
+    "description": "Current task for butlerbot",
+    "defaultMessage": "CURRENT TASK"
+  },
+  {
+    "id": "butlerBot.table.msu",
+    "description": "MSU Status for butlerbot",
+    "defaultMessage": "MSU"
+  },
+  {
+    "id": "butlerBot.table.location",
+    "description": "Location for butlerbot",
+    "defaultMessage": "LOCATION"
+  },
+  {
+    "id": "butlerBot.table.voltage",
+    "description": "voltage for butlerbot",
+    "defaultMessage": "VOLTAGE"
+  },
+  {
+    "id": "ChargingStations.table.heading",
+    "description": "Heading for ChargingStations",
+    "defaultMessage": "CHARGING STATIONS"
+  },
+  {
+    "id": "ChargingStations.table.operatingMode",
+    "description": "operatingMode for ChargingStations",
+    "defaultMessage": "OPERATING MODE"
+  },
+  {
+    "id": "pps.table.heading",
+    "description": "Heading for PPS",
+    "defaultMessage": "PPS"
+  },
+  {
+    "id": "PPS.table.status",
+    "description": "Status for PPS",
+    "defaultMessage": "STATUS"
+  },
+  {
+    "id": "PPS.table.operatingMode",
+    "description": "operatingMode for PPS",
+    "defaultMessage": "OPERATING MODE"
+  },
+  {
+    "id": "PPS.table.performance",
+    "description": "performance Status for PPS",
+    "defaultMessage": "PERFORMANCE"
+  },
+  {
+    "id": "PPS.table.operatorAssigned",
+    "description": "operatorAssigned for PPS",
+    "defaultMessage": "OPERATOR ASSIGNED"
+  },
+  {
+    "id": "users.add.heading",
+    "description": "Heading for Add new user",
+    "defaultMessage": "Add new user"
+  },
+  {
+    "id": "users.add.subheading",
+    "description": "Subheading for add new user",
+    "defaultMessage": "All the fields are mandatory"
+  },
+  {
+    "id": "users.add.userdetails.heading",
+    "description": "Text for user details heading",
+    "defaultMessage": "Enter User details"
+  },
+  {
+    "id": "users.add.userdetails.subheading",
+    "description": "Text for user details subheading",
+    "defaultMessage": "A User ID will be required to log into the system"
+  },
+  {
+    "id": "users.add.userdetails.userid",
+    "description": "Text for user id",
+    "defaultMessage": "User ID"
+  },
+  {
+    "id": "users.add.userdetails.firstname",
+    "description": "Text for first name",
+    "defaultMessage": "First Name"
+  },
+  {
+    "id": "users.add.userdetails.lastname",
+    "description": "Text for last name",
+    "defaultMessage": "Last Name"
+  },
+  {
+    "id": "users.add.roledetails.heading",
+    "description": "Heading for role",
+    "defaultMessage": "Choose a role"
+  },
+  {
+    "id": "users.add.roledetails.subheading",
+    "description": "Subheading for role",
+    "defaultMessage": "User will be given a specific level of control over the Butler system depending on the designated role"
+  },
+  {
+    "id": "users.add.roledetails.operator",
+    "description": "Text for operator",
+    "defaultMessage": "Operator"
+  },
+  {
+    "id": "users.add.roledetails.operatortext",
+    "description": "Subtext for operator",
+    "defaultMessage": "Grant access to the Operator Interface at each Pick Put Station in the Butler system"
+  },
+  {
+    "id": "users.add.roledetails.pick",
+    "description": "Text for pick operator",
+    "defaultMessage": "Pick Operator"
+  },
+  {
+    "id": "users.add.roledetails.put",
+    "description": "Text for put operator",
+    "defaultMessage": "Put Operator"
+  },
+  {
+    "id": "users.add.roledetails.audit",
+    "description": "Text for audit",
+    "defaultMessage": "Audit"
+  },
+  {
+    "id": "users.add.roledetails.supervisor",
+    "description": "Text for supervisor",
+    "defaultMessage": "Supervisor"
+  },
+  {
+    "id": "users.add.roledetails.supervisortext",
+    "description": "Subtext for supervisor",
+    "defaultMessage": "Grant access to the Management Interface and Operator Interface for the Butler system"
+  },
+  {
+    "id": "users.add.roledetails.manager",
+    "description": "Text for manager",
+    "defaultMessage": "Manager"
+  },
+  {
+    "id": "users.add.roledetails.managertext",
+    "description": "Subtext for manager",
+    "defaultMessage": "Grant access to the Management Interface and Operator Interface to all systems"
+  },
+  {
+    "id": "users.add.password.heading",
+    "description": "Heading for create password",
+    "defaultMessage": "Create password"
+  },
+  {
+    "id": "sers.add.password.subheading",
+    "description": "Subheading for create password",
+    "defaultMessage": "Min of 6 digits will be required for logging into the Operator Interface"
+  },
+  {
+    "id": "users.add.password.field1",
+    "description": "Text for password",
+    "defaultMessage": "Password"
+  },
+  {
+    "id": "users.add.password.field2",
+    "description": "Text for confirm password",
+    "defaultMessage": "Confirm Password"
+  },
+  {
+    "id": "users.add.password.button",
+    "description": "Text for add new user button",
+    "defaultMessage": "Add new user"
+  },
+  {
+    "id": "user.table.heading",
+    "description": "Heading for users table",
+    "defaultMessage": "USERS"
+  },
+  {
+    "id": "user.table.users",
+    "description": "Users Column",
+    "defaultMessage": "USERS"
+  },
+  {
+    "id": "user.table.status",
+    "description": "Users Status",
+    "defaultMessage": "STATUS"
+  },
+  {
+    "id": "user.table.role",
+    "description": "User Role",
+    "defaultMessage": "ROLE"
+  },
+  {
+    "id": "user.table.workMode",
+    "description": "User Workmode",
+    "defaultMessage": "WORKMODE"
+  },
+  {
+    "id": "user.table.location",
+    "description": "User location",
+    "defaultMessage": "LOCATION"
+  },
+  {
+    "id": "user.table.productivity",
+    "description": "User productivity",
+    "defaultMessage": "PRODUCTIVITY"
+  },
+  {
+    "id": "user.table.logInTime",
+    "description": "User log in time",
+    "defaultMessage": "LOG IN TIME"
   }
 ]

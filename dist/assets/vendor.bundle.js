@@ -7,10 +7,17 @@ webpackJsonp([11,12],[
 	__webpack_require__(191);
 	__webpack_require__(214);
 	__webpack_require__(198);
+<<<<<<< 9be09c02e11bed4f4525a4d560a5a9ddd37184e6
 	__webpack_require__(473);
 	__webpack_require__(474);
 	__webpack_require__(475);
 	module.exports = __webpack_require__(366);
+=======
+	__webpack_require__(375);
+	__webpack_require__(376);
+	__webpack_require__(377);
+	module.exports = __webpack_require__(306);
+>>>>>>> finding the internationalization issues
 
 
 /***/ },
@@ -25098,6 +25105,11 @@ webpackJsonp([11,12],[
 /* 220 */
 [570, 221, 227],
 /* 221 */
+<<<<<<< 9be09c02e11bed4f4525a4d560a5a9ddd37184e6
+=======
+[459, 222, 228],
+/* 222 */
+>>>>>>> finding the internationalization issues
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -27081,6 +27093,11 @@ webpackJsonp([11,12],[
 /* 230 */
 [570, 231, 234],
 /* 231 */
+<<<<<<< 9be09c02e11bed4f4525a4d560a5a9ddd37184e6
+=======
+[459, 232, 235],
+/* 232 */
+>>>>>>> finding the internationalization issues
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -27813,6 +27830,7 @@ webpackJsonp([11,12],[
 /* 303 */,
 /* 304 */,
 /* 305 */,
+<<<<<<< 9be09c02e11bed4f4525a4d560a5a9ddd37184e6
 /* 306 */,
 /* 307 */,
 /* 308 */,
@@ -27874,6 +27892,9 @@ webpackJsonp([11,12],[
 /* 364 */,
 /* 365 */,
 /* 366 */
+=======
+/* 306 */
+>>>>>>> finding the internationalization issues
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27883,6 +27904,7 @@ webpackJsonp([11,12],[
 	});
 	exports.modal = exports.actions = exports.reducer = undefined;
 
+<<<<<<< 9be09c02e11bed4f4525a4d560a5a9ddd37184e6
 	var _ReduxModal = __webpack_require__(367);
 
 	var _ReduxModal2 = _interopRequireDefault(_ReduxModal);
@@ -27892,6 +27914,17 @@ webpackJsonp([11,12],[
 	var modalActions = _interopRequireWildcard(_redux);
 
 	var _emitter = __webpack_require__(368);
+=======
+	var _ReduxModal = __webpack_require__(307);
+
+	var _ReduxModal2 = _interopRequireDefault(_ReduxModal);
+
+	var _redux = __webpack_require__(310);
+
+	var modalActions = _interopRequireWildcard(_redux);
+
+	var _emitter = __webpack_require__(308);
+>>>>>>> finding the internationalization issues
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -27903,7 +27936,11 @@ webpackJsonp([11,12],[
 	var modal = exports.modal = _emitter.modalEmitter;
 
 /***/ },
+<<<<<<< 9be09c02e11bed4f4525a4d560a5a9ddd37184e6
 /* 367 */
+=======
+/* 307 */
+>>>>>>> finding the internationalization issues
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27922,6 +27959,7 @@ webpackJsonp([11,12],[
 
 	var _reactRedux = __webpack_require__(191);
 
+<<<<<<< 9be09c02e11bed4f4525a4d560a5a9ddd37184e6
 	var _emitter = __webpack_require__(368);
 
 	var _redux = __webpack_require__(370);
@@ -27929,6 +27967,15 @@ webpackJsonp([11,12],[
 	var actions = _interopRequireWildcard(_redux);
 
 	var _Modal = __webpack_require__(374);
+=======
+	var _emitter = __webpack_require__(308);
+
+	var _redux = __webpack_require__(310);
+
+	var actions = _interopRequireWildcard(_redux);
+
+	var _Modal = __webpack_require__(314);
+>>>>>>> finding the internationalization issues
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
@@ -28002,7 +28049,11 @@ webpackJsonp([11,12],[
 	exports.default = ReduxModal;
 
 /***/ },
+<<<<<<< 9be09c02e11bed4f4525a4d560a5a9ddd37184e6
 /* 368 */
+=======
+/* 308 */
+>>>>>>> finding the internationalization issues
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28012,7 +28063,11 @@ webpackJsonp([11,12],[
 	});
 	exports.modalEmitter = exports.EE = undefined;
 
+<<<<<<< 9be09c02e11bed4f4525a4d560a5a9ddd37184e6
 	var _eventemitter = __webpack_require__(369);
+=======
+	var _eventemitter = __webpack_require__(309);
+>>>>>>> finding the internationalization issues
 
 	var _eventemitter2 = _interopRequireDefault(_eventemitter);
 
@@ -28034,7 +28089,11 @@ webpackJsonp([11,12],[
 	};
 
 /***/ },
+<<<<<<< 9be09c02e11bed4f4525a4d560a5a9ddd37184e6
 /* 369 */
+=======
+/* 309 */
+>>>>>>> finding the internationalization issues
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28329,7 +28388,11 @@ webpackJsonp([11,12],[
 
 
 /***/ },
+<<<<<<< 9be09c02e11bed4f4525a4d560a5a9ddd37184e6
 /* 370 */
+=======
+/* 310 */
+>>>>>>> finding the internationalization issues
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28347,11 +28410,19 @@ webpackJsonp([11,12],[
 	exports.removeModal = removeModal;
 	exports.clearAll = clearAll;
 
+<<<<<<< 9be09c02e11bed4f4525a4d560a5a9ddd37184e6
 	var _uuid = __webpack_require__(371);
 
 	var _uuid2 = _interopRequireDefault(_uuid);
 
 	var _utils = __webpack_require__(373);
+=======
+	var _uuid = __webpack_require__(311);
+
+	var _uuid2 = _interopRequireDefault(_uuid);
+
+	var _utils = __webpack_require__(313);
+>>>>>>> finding the internationalization issues
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28405,7 +28476,11 @@ webpackJsonp([11,12],[
 	}
 
 /***/ },
+<<<<<<< 9be09c02e11bed4f4525a4d560a5a9ddd37184e6
 /* 371 */
+=======
+/* 311 */
+>>>>>>> finding the internationalization issues
 /***/ function(module, exports, __webpack_require__) {
 
 	//     uuid.js
@@ -28416,7 +28491,11 @@ webpackJsonp([11,12],[
 	// Unique ID creation requires a high quality random # generator.  We feature
 	// detect to determine the best RNG source, normalizing to a function that
 	// returns 128-bits of randomness, since that's what's usually required
+<<<<<<< 9be09c02e11bed4f4525a4d560a5a9ddd37184e6
 	var _rng = __webpack_require__(372);
+=======
+	var _rng = __webpack_require__(312);
+>>>>>>> finding the internationalization issues
 
 	// Maps for number <-> hex string conversion
 	var _byteToHex = [];
@@ -28594,7 +28673,11 @@ webpackJsonp([11,12],[
 
 
 /***/ },
+<<<<<<< 9be09c02e11bed4f4525a4d560a5a9ddd37184e6
 /* 372 */
+=======
+/* 312 */
+>>>>>>> finding the internationalization issues
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -28633,7 +28716,11 @@ webpackJsonp([11,12],[
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
+<<<<<<< 9be09c02e11bed4f4525a4d560a5a9ddd37184e6
 /* 373 */
+=======
+/* 313 */
+>>>>>>> finding the internationalization issues
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28655,7 +28742,11 @@ webpackJsonp([11,12],[
 	}
 
 /***/ },
+<<<<<<< 9be09c02e11bed4f4525a4d560a5a9ddd37184e6
 /* 374 */
+=======
+/* 314 */
+>>>>>>> finding the internationalization issues
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28670,7 +28761,11 @@ webpackJsonp([11,12],[
 
 	var _react2 = _interopRequireDefault(_react);
 
+<<<<<<< 9be09c02e11bed4f4525a4d560a5a9ddd37184e6
 	var _classnames = __webpack_require__(375);
+=======
+	var _classnames = __webpack_require__(315);
+>>>>>>> finding the internationalization issues
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -28775,7 +28870,11 @@ webpackJsonp([11,12],[
 	exports.default = Modal;
 
 /***/ },
+<<<<<<< 9be09c02e11bed4f4525a4d560a5a9ddd37184e6
 /* 375 */
+=======
+/* 315 */
+>>>>>>> finding the internationalization issues
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -28829,6 +28928,7 @@ webpackJsonp([11,12],[
 
 
 /***/ },
+<<<<<<< 9be09c02e11bed4f4525a4d560a5a9ddd37184e6
 /* 376 */,
 /* 377 */,
 /* 378 */,
@@ -28927,6 +29027,68 @@ webpackJsonp([11,12],[
 /* 471 */,
 /* 472 */,
 /* 473 */
+=======
+/* 316 */,
+/* 317 */,
+/* 318 */,
+/* 319 */,
+/* 320 */,
+/* 321 */,
+/* 322 */,
+/* 323 */,
+/* 324 */,
+/* 325 */,
+/* 326 */,
+/* 327 */,
+/* 328 */,
+/* 329 */,
+/* 330 */,
+/* 331 */,
+/* 332 */,
+/* 333 */,
+/* 334 */,
+/* 335 */,
+/* 336 */,
+/* 337 */,
+/* 338 */,
+/* 339 */,
+/* 340 */,
+/* 341 */,
+/* 342 */,
+/* 343 */,
+/* 344 */,
+/* 345 */,
+/* 346 */,
+/* 347 */,
+/* 348 */,
+/* 349 */,
+/* 350 */,
+/* 351 */,
+/* 352 */,
+/* 353 */,
+/* 354 */,
+/* 355 */,
+/* 356 */,
+/* 357 */,
+/* 358 */,
+/* 359 */,
+/* 360 */,
+/* 361 */,
+/* 362 */,
+/* 363 */,
+/* 364 */,
+/* 365 */,
+/* 366 */,
+/* 367 */,
+/* 368 */,
+/* 369 */,
+/* 370 */,
+/* 371 */,
+/* 372 */,
+/* 373 */,
+/* 374 */,
+/* 375 */
+>>>>>>> finding the internationalization issues
 /***/ function(module, exports, __webpack_require__) {
 
 	(function webpackUniversalModuleDefinition(root, factory) {
@@ -43985,7 +44147,11 @@ webpackJsonp([11,12],[
 	;
 
 /***/ },
+<<<<<<< 9be09c02e11bed4f4525a4d560a5a9ddd37184e6
 /* 474 */
+=======
+/* 376 */
+>>>>>>> finding the internationalization issues
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;!function() {
@@ -53544,7 +53710,11 @@ webpackJsonp([11,12],[
 	}();
 
 /***/ },
+<<<<<<< 9be09c02e11bed4f4525a4d560a5a9ddd37184e6
 /* 475 */
+=======
+/* 377 */
+>>>>>>> finding the internationalization issues
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// d3.tip
@@ -53555,7 +53725,11 @@ webpackJsonp([11,12],[
 	(function (root, factory) {
 	  if (true) {
 	    // AMD. Register as an anonymous module with d3 as a dependency.
+<<<<<<< 9be09c02e11bed4f4525a4d560a5a9ddd37184e6
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(476)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__))
+=======
+	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(378)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__))
+>>>>>>> finding the internationalization issues
 	  } else if (typeof module === 'object' && module.exports) {
 	    // CommonJS
 	    var d3 = require('d3')
@@ -53873,7 +54047,11 @@ webpackJsonp([11,12],[
 
 
 /***/ },
+<<<<<<< 9be09c02e11bed4f4525a4d560a5a9ddd37184e6
 /* 476 */
+=======
+/* 378 */
+>>>>>>> finding the internationalization issues
 /***/ function(module, exports, __webpack_require__) {
 
 	// https://d3js.org Version 4.2.6. Copyright 2016 Mike Bostock.
@@ -70163,6 +70341,7 @@ webpackJsonp([11,12],[
 
 
 /***/ },
+<<<<<<< 9be09c02e11bed4f4525a4d560a5a9ddd37184e6
 /* 477 */,
 /* 478 */,
 /* 479 */,
@@ -70258,6 +70437,90 @@ webpackJsonp([11,12],[
 /* 569 */
 [570],
 /* 570 */
+=======
+/* 379 */,
+/* 380 */,
+/* 381 */,
+/* 382 */,
+/* 383 */,
+/* 384 */,
+/* 385 */,
+/* 386 */,
+/* 387 */,
+/* 388 */,
+/* 389 */,
+/* 390 */,
+/* 391 */,
+/* 392 */,
+/* 393 */,
+/* 394 */,
+/* 395 */,
+/* 396 */,
+/* 397 */,
+/* 398 */,
+/* 399 */,
+/* 400 */,
+/* 401 */,
+/* 402 */,
+/* 403 */,
+/* 404 */,
+/* 405 */,
+/* 406 */,
+/* 407 */,
+/* 408 */,
+/* 409 */,
+/* 410 */,
+/* 411 */,
+/* 412 */,
+/* 413 */,
+/* 414 */,
+/* 415 */,
+/* 416 */,
+/* 417 */,
+/* 418 */,
+/* 419 */,
+/* 420 */,
+/* 421 */,
+/* 422 */,
+/* 423 */,
+/* 424 */,
+/* 425 */,
+/* 426 */,
+/* 427 */,
+/* 428 */,
+/* 429 */,
+/* 430 */,
+/* 431 */,
+/* 432 */,
+/* 433 */,
+/* 434 */,
+/* 435 */,
+/* 436 */,
+/* 437 */,
+/* 438 */,
+/* 439 */,
+/* 440 */,
+/* 441 */,
+/* 442 */,
+/* 443 */,
+/* 444 */,
+/* 445 */,
+/* 446 */,
+/* 447 */,
+/* 448 */,
+/* 449 */,
+/* 450 */,
+/* 451 */,
+/* 452 */,
+/* 453 */,
+/* 454 */,
+/* 455 */,
+/* 456 */,
+/* 457 */,
+/* 458 */
+[459],
+/* 459 */
+>>>>>>> finding the internationalization issues
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__, __webpack_module_template_argument_1__) {
 
 	/* jslint esnext: true */
