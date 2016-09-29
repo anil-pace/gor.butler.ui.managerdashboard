@@ -7,11 +7,12 @@ import {AUDIT_DATA} from '../constants/appConstants';
 export  function auditInfo(state={},action){
   switch (action.type) {
     case AUDIT_DATA:
+    
           var res,auditData={};
           res=action.data;
           if(res.aggregate_data){
             if(res.aggregate_data.total_audited)
-              auditData.total_audited=parseInt(res.aggregate_data.total_audited);
+              auditData.total_audited=Number(res.aggregate_data.total_audited);
 
           }
           return Object.assign({}, state, { 
