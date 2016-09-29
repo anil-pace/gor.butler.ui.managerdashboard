@@ -4,24 +4,25 @@
  */
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-import OrdersSubTab from '../components/subtab/ordersTabs';
 
 
-class OrdersTab extends React.Component{
+class OrderListTab extends React.Component{
 	constructor(props) 
 	{
     	super(props);
     }	
 	render(){
+		/**
+		 * Need to remove these hardcoded variables
+		 * 
+		 */
+		
 		return (
 			<div >
-				<div>
-					<OrdersSubTab/>
-				</div>
-				{this.props.children}
+				OrderListTab
 			</div>
 		);
 	}
 };
 
-export default OrdersTab ;
+export default OrderListTab ;

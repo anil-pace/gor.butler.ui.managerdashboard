@@ -48,29 +48,32 @@ class Chart extends React.Component{
     
     var node = document.createElement('div');
 
+     
+  const tip = d3tip()
+    .attr('class', 'd3-tip')
+    .offset([100, 90])
+    .html(function(d) {
+      return "<div> Time:<div/><div> 27 Jul,2016</div> <div style='color:#ffffff'> Fulfilled:    </div>";
+    })
+
+    //d3.tip=tip;
+
     var svg = d3.select(node).append('svg')
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+      .call(tip);
+      
+
 
       
-  // const tip = d3tip()
-  //   .attr('class', 'd3-tip')
-  //   .offset([100, 90])
-  //   .html(function(d) {
-  //     //var time=d.timeInterval.split(" ");
-  //     return "<div> Time:<div/><div> 27 Jul,2016</div> <div style='color:#ffffff'> Fulfilled:    </div>";
-  //   })
-
-
-      //svg.call(tip);
       var data = [];
       var barData = {};
        var json = tData; 
        for (var i = 0; i < json.length; i++) {
         barData.timeInterval = json[i].timeInterval;
-        barData.type = json[i][nextP]
+        barData.type = json[i][nextP];
         data.push(barData);
         barData = {};
        }
@@ -125,22 +128,16 @@ class Chart extends React.Component{
       .attr("width", x.rangeBand())
       .attr("y", function(d) { return y(d.type); })
       .attr("height", 0)
-      .attr("height", function(d) { return height - y(d.type); })
+      .attr("height", function(d) { return height - y(d.type); });
       
-      // .on('mouseover', tip.show)
-      // .on('mouseout', tip.hide)
+      //Not a dead code still working on this
+      //.on('mouseover', tip.show)
+      //.on('mouseout', tip.hide)
 
-    //   var txt = svg.selectAll(".bar");
 
-    //    txt.append("g")
-    // .attr("class", "below")
-    // .attr("x", function(d) { 
-    //     return x(d.timeInterval); 
-    //   })
-    // .attr("y", function(d) { return height-y(d.type); })
-    // .attr("dy", "1.2em")
-    // .attr("text-anchor", "right")
-    // .style("fill", "#000000"); 
+      console.log(d3)
+    // d3.event.target = event.target;
+      
     component.setState({d3: node});
 
     }

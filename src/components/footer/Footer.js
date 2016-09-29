@@ -1,5 +1,6 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
+import { FormattedMessage } from 'react-intl';
 class Footer extends React.Component{
 	constructor(props) 
 	{
@@ -8,7 +9,8 @@ class Footer extends React.Component{
 	render(){
 		return (
 		<div className="gor-footer">
-			Copyright @ 2016 GreyOrange Pte Ltd
+			<FormattedMessage id="footer.description" description="Footer description" 
+              			defaultMessage ="Copyright @ 2016 GreyOrange Pte Ltd"/>
 		</div> 
 		);
 	}
