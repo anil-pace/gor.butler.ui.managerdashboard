@@ -109,6 +109,7 @@
       "react-redux",
       "<rootDir>/node_modules/enzyme/",
       "<rootDir>/node_modules/babel-runtime/"
+
     ]
   }
 }

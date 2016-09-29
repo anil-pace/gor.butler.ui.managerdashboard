@@ -36,7 +36,7 @@ module.exports = {
         cacheDirectory: true,
         plugins:[
                   ['react-intl', {
-                  'messagesDir': './src/translations/'
+                  'messagesDir': './src/formattedMessages/'
              }]
         ]
       }

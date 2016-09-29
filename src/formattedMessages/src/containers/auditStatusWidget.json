@@ -1,0 +1,27 @@
+[
+  {
+    "id": "widget.audit.heading.value",
+    "description": "Total Items Audited",
+    "defaultMessage": "None"
+  },
+  {
+    "id": "widget.audit.status.offline",
+    "description": "Offline Status",
+    "defaultMessage": "Offline"
+  },
+  {
+    "id": "widget.audit.status.starting",
+    "description": "Awaiting throughput data",
+    "defaultMessage": "Starting..."
+  },
+  {
+    "id": "widget.audit.throughput",
+    "description": "Throughput message",
+    "defaultMessage": "{count} {pluralMsg} auditing {throughput} items/hr"
+  },
+  {
+    "id": "widget.audit.heading",
+    "description": "Audit Item Heading",
+    "defaultMessage": "Items audited"
+  }
+]

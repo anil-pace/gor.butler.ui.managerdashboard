@@ -3,7 +3,7 @@ import {sync as globSync} from 'glob';
 import {sync as mkdirpSync} from 'mkdirp';
 
 const MESSAGES_PATTERN = '../src/translations/**/*.json';
-const LANG_DIR         = '../src/translations/src/';
+const LANG_DIR         = '../src/translations/';
 
 // Aggregates the default messages that were extracted from the example app's
 // React components via the React Intl Babel plugin. An error will be thrown if
@@ -19,7 +19,7 @@ let defaultMessages = globSync(MESSAGES_PATTERN)
                 throw new Error(`Duplicate message id: ${id}`);
             }
 
-            collection[id] = defaultMessage;
+            // collection[id] = defaultMessage;
         });
 
         return collection;
