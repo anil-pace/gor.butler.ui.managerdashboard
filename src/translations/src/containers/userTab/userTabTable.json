@@ -30,11 +30,6 @@
     "defaultMessage": "LOCATION"
   },
   {
-    "id": "user.table.productivity",
-    "description": "User productivity",
-    "defaultMessage": "PRODUCTIVITY"
-  },
-  {
     "id": "user.table.logInTime",
     "description": "User log in time",
     "defaultMessage": "LOG IN TIME"

@@ -175,17 +175,6 @@ class UserDataTable extends React.Component {
           width={columnWidth}
         />
         <Column
-          columnKey="productivity"
-          header={
-            <SortHeaderCell >
-               <FormattedMessage id="user.table.productivity" description="User productivity" 
-              defaultMessage ="PRODUCTIVITY"/>
-            </SortHeaderCell>
-          }
-          cell={<TextCell data={sortedDataList}  />}
-          width={columnWidth}
-        />
-        <Column
           columnKey="logInTime"
           header={
             <SortHeaderCell >

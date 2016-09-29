@@ -874,6 +874,170 @@ export const resTypePPSdetail = {
 }
 
 
+export const resTypeUsersDetails = {
+    
+    "aggregate_data": [{
+   	 "name": "mahesh Kumar",
+     "user_id": 12,
+   	 "status": 0, 
+   	 "role": 0, //(0/1/2 === operator/manager/supervisor)
+   	 "work_mode": 0,  //(pick_back/ pick_front/ put_back/ put_front/ audit),
+   	 "location": "Head office",
+   	 "login_time": "11:12:03", 
+    }, {
+   	 "name": "Ajay yadav",
+     "user_id": 13,
+   	 "status": 1, //(0/1 === offline/online)
+   	 "role": 1, //(0/1/2 === operator/manager/supervisor)
+   	 "work_mode":  1,  //(pick_back/ pick_front/ put_back/ put_front/ audit),
+   	 "location": "pps 002",
+   	 "login_time": "11:12:03"
+             
+    }, {
+   	 "name": "Sachdeva",
+     "user_id": 14,
+   	 "status": 1, //(0/1 === offline/online)
+   	 "role": 2, //(0/1/2 === operator/manager/supervisor)
+   	 "work_mode":  2,  //(pick_back/ pick_front/ put_back/ put_front/ audit),
+   	 "location": "pps 003",
+   	 "login_time": "11:12:03"
+             
+    }, {
+   	 "name": "mahesh Kumar",
+     "user_id": 12,
+   	 "status": 0, 
+   	 "role": 0, //(0/1/2 === operator/manager/supervisor)
+   	 "work_mode": 0,  //(pick_back/ pick_front/ put_back/ put_front/ audit),
+   	 "location": "Head office",
+   	 "login_time": "11:12:03", 
+    }, {
+   	 "name": "Ajay yadav",
+     "user_id": 13,
+   	 "status": 1, //(0/1 === offline/online)
+   	 "role": 1, //(0/1/2 === operator/manager/supervisor)
+   	 "work_mode":  1,  //(pick_back/ pick_front/ put_back/ put_front/ audit),
+   	 "location": "pps 002",
+   	 "login_time": "11:12:03"
+             
+    }, {
+   	 "name": "Sachdeva",
+     "user_id": 14,
+   	 "status": 1, //(0/1 === offline/online)
+   	 "role": 2, //(0/1/2 === operator/manager/supervisor)
+   	 "work_mode":  2,  //(pick_back/ pick_front/ put_back/ put_front/ audit),
+   	 "location": "pps 003",
+   	 "login_time": "11:12:03"
+             
+    }, {
+   	 "name": "mahesh Kumar",
+     "user_id": 12,
+   	 "status": 0, 
+   	 "role": 0, //(0/1/2 === operator/manager/supervisor)
+   	 "work_mode": 0,  //(pick_back/ pick_front/ put_back/ put_front/ audit),
+   	 "location": "Head office",
+   	 "login_time": "11:12:03", 
+    }, {
+   	 "name": "Ajay yadav",
+     "user_id": 13,
+   	 "status": 1, //(0/1 === offline/online)
+   	 "role": 1, //(0/1/2 === operator/manager/supervisor)
+   	 "work_mode":  1,  //(pick_back/ pick_front/ put_back/ put_front/ audit),
+   	 "location": "pps 002",
+   	 "login_time": "11:12:03"
+             
+    }, {
+   	 "name": "Sachdeva",
+     "user_id": 14,
+   	 "status": 1, //(0/1 === offline/online)
+   	 "role": 2, //(0/1/2 === operator/manager/supervisor)
+   	 "work_mode":  2,  //(pick_back/ pick_front/ put_back/ put_front/ audit),
+   	 "location": "pps 003",
+   	 "login_time": "11:12:03"
+             
+    }, {
+   	 "name": "mahesh Kumar",
+     "user_id": 12,
+   	 "status": 0, 
+   	 "role": 0, //(0/1/2 === operator/manager/supervisor)
+   	 "work_mode": 0,  //(pick_back/ pick_front/ put_back/ put_front/ audit),
+   	 "location": "Head office",
+   	 "login_time": "11:12:03", 
+    }, {
+   	 "name": "Ajay yadav",
+     "user_id": 13,
+   	 "status": 1, //(0/1 === offline/online)
+   	 "role": 1, //(0/1/2 === operator/manager/supervisor)
+   	 "work_mode":  1,  //(pick_back/ pick_front/ put_back/ put_front/ audit),
+   	 "location": "pps 002",
+   	 "login_time": "11:12:03"
+             
+    }, {
+   	 "name": "Sachdeva",
+     "user_id": 14,
+   	 "status": 1, //(0/1 === offline/online)
+   	 "role": 2, //(0/1/2 === operator/manager/supervisor)
+   	 "work_mode":  2,  //(pick_back/ pick_front/ put_back/ put_front/ audit),
+   	 "location": "pps 003",
+   	 "login_time": "11:12:03"
+             
+    }, {
+   	 "name": "mahesh Kumar",
+     "user_id": 12,
+   	 "status": 0, 
+   	 "role": 0, //(0/1/2 === operator/manager/supervisor)
+   	 "work_mode": 0,  //(pick_back/ pick_front/ put_back/ put_front/ audit),
+   	 "location": "Head office",
+   	 "login_time": "11:12:03", 
+    }, {
+   	 "name": "Ajay yadav",
+     "user_id": 13,
+   	 "status": 1, //(0/1 === offline/online)
+   	 "role": 1, //(0/1/2 === operator/manager/supervisor)
+   	 "work_mode":  1,  //(pick_back/ pick_front/ put_back/ put_front/ audit),
+   	 "location": "pps 002",
+   	 "login_time": "11:12:03"
+             
+    }, {
+   	 "name": "Sachdeva",
+     "user_id": 14,
+   	 "status": 1, //(0/1 === offline/online)
+   	 "role": 2, //(0/1/2 === operator/manager/supervisor)
+   	 "work_mode":  2,  //(pick_back/ pick_front/ put_back/ put_front/ audit),
+   	 "location": "pps 003",
+   	 "login_time": "11:12:03"
+             
+    }, {
+   	 "name": "mahesh Kumar",
+     "user_id": 12,
+   	 "status": 0, 
+   	 "role": 0, //(0/1/2 === operator/manager/supervisor)
+   	 "work_mode": 0,  //(pick_back/ pick_front/ put_back/ put_front/ audit),
+   	 "location": "Head office",
+   	 "login_time": "11:12:03", 
+    }, {
+   	 "name": "Ajay yadav",
+     "user_id": 13,
+   	 "status": 1, //(0/1 === offline/online)
+   	 "role": 1, //(0/1/2 === operator/manager/supervisor)
+   	 "work_mode":  1,  //(pick_back/ pick_front/ put_back/ put_front/ audit),
+   	 "location": "pps 002",
+   	 "login_time": "11:12:03"
+             
+    }, {
+   	 "name": "Sachdeva",
+     "user_id": 14,
+   	 "status": 1, //(0/1 === offline/online)
+   	 "role": 2, //(0/1/2 === operator/manager/supervisor)
+   	 "work_mode":  2,  //(pick_back/ pick_front/ put_back/ put_front/ audit),
+   	 "location": "pps 003",
+   	 "login_time": "11:12:03"
+             
+    }],
+    "resource_type": "users"
+}
+
+
+
 
 
 
