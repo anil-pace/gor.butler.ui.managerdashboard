@@ -1,0 +1,42 @@
+[
+  {
+    "id": "overview.tab.heading",
+    "description": "overview tab",
+    "defaultMessage": "OVERVIEW"
+  },
+  {
+    "id": "system.tab.heading",
+    "description": "system tab",
+    "defaultMessage": "SYSTEM"
+  },
+  {
+    "id": "orders.tab.heading",
+    "description": "orders tab",
+    "defaultMessage": "ORDERS"
+  },
+  {
+    "id": "users.tab.heading",
+    "description": "users tab",
+    "defaultMessage": "USERS"
+  },
+  {
+    "id": "overviewStatus.tab.heading",
+    "description": "overview Status",
+    "defaultMessage": "Fulfiling orders"
+  },
+  {
+    "id": "systemStatus.tab.heading",
+    "description": "system Status",
+    "defaultMessage": "Online"
+  },
+  {
+    "id": "ordersStatus.tab.heading",
+    "description": "orders Status",
+    "defaultMessage": "70% fulfilled"
+  },
+  {
+    "id": "usersStatus.tab.heading",
+    "description": "users Status",
+    "defaultMessage": "35 users logged in"
+  }
+]

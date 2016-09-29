@@ -363,5 +363,79 @@
     "id": "user.table.logInTime",
     "description": "User log in time",
     "defaultMessage": "LOG IN TIME"
+  },
+   {
+    "id": "overview.tab.heading",
+    "description": "overview tab",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "system.tab.heading",
+    "description": "system tab",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "orders.tab.heading",
+    "description": "orders tab",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "users.tab.heading",
+    "description": "users tab",
+    "defaultMessage": "日本語"
+  }, {
+    "id": "overviewStatus.tab.heading",
+    "description": "overview Status",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "systemStatus.tab.heading",
+    "description": "system Status",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "ordersStatus.tab.heading",
+    "description": "orders Status",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "usersStatus.tab.heading",
+    "description": "users Status",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "pickPerformance.dropdown",
+    "description": "pickPerformance dropdown label",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "putPerformance.dropdown",
+    "description": "putPerformance dropdown label",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "auditPerformance.dropdown",
+    "description": "auditPerformance dropdown label",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "systemHealth.dropdown",
+    "description": "systemHealth dropdown label",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "PPSpickPerformance.dropdown",
+    "description": "PPSpickPerformance dropdown label",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "PPSputPerformance.dropdown",
+    "description": "PPSputPerformance dropdown label",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "PPSauditPerformance.dropdown",
+    "description": "PPSauditPerformance dropdown label",
+    "defaultMessage": "日本語"
   }
 ]

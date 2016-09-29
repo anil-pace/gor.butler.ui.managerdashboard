@@ -1,0 +1,22 @@
+[
+  {
+    "id": "systemHealth.dropdown",
+    "description": "systemHealth dropdown label",
+    "defaultMessage": "System Health"
+  },
+  {
+    "id": "PPSpickPerformance.dropdown",
+    "description": "PPSpickPerformance dropdown label",
+    "defaultMessage": "PPS Pick Performance"
+  },
+  {
+    "id": "PPSputPerformance.dropdown",
+    "description": "PPSputPerformance dropdown label",
+    "defaultMessage": "PPS Put Performance"
+  },
+  {
+    "id": "PPSauditPerformance.dropdown",
+    "description": "PPSauditPerformance dropdown label",
+    "defaultMessage": "PPS Audit Performance"
+  }
+]

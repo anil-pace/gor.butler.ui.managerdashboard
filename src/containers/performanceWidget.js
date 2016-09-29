@@ -4,7 +4,8 @@ import Health from '../components/health/healthTabs.js';
 import Dropdown from '../components/dropdown/dropdown.js';
 import ChartHorizontal from '../components/graphd3/graph_horizontal';
 import { connect } from 'react-redux';
-import {renderPerformanceWidget} from '../actions/performanceWidgetActions'
+import {renderPerformanceWidget} from '../actions/performanceWidgetActions';
+import { FormattedMessage } from 'react-intl';
 
 
 function _getPPSdata(link) {
@@ -94,11 +95,24 @@ class PerformanceWidget extends React.Component{
 	}
 
 	render(){
+
+		let systemHealth = <FormattedMessage id="systemHealth.dropdown" description="systemHealth dropdown label" 
+              defaultMessage ="System Health"/>
+
+        let pickPerformance = <FormattedMessage id="PPSpickPerformance.dropdown" description="PPSpickPerformance dropdown label" 
+              defaultMessage ="PPS Pick Performance"/>
+
+        let putPerformance = <FormattedMessage id="PPSputPerformance.dropdown" description="PPSputPerformance dropdown label" 
+              defaultMessage ="PPS Put Performance"/>
+
+        let auditPerformance = <FormattedMessage id="PPSauditPerformance.dropdown" description="PPSauditPerformance dropdown label" 
+              defaultMessage ="PPS Audit Performance"/>      
+
 		const item = [
-		{ value: 'RENDER_SYSTEM_HEALTH', label: 'System Health' },
-		{ value: 'PICK_PPS_PERFORMANCE', label: 'PPS Pick Performance' },
-		{ value: 'PUT_PPS_PERFORMANCE', label: 'PPS Put Performance' },
-		{ value: 'AUDIT_PPS_PERFORMANCE', label: 'PPS Audit Performance' }
+		{ value: 'RENDER_SYSTEM_HEALTH', label: systemHealth },
+		{ value: 'PICK_PPS_PERFORMANCE', label: pickPerformance },
+		{ value: 'PUT_PPS_PERFORMANCE', label: putPerformance },
+		{ value: 'AUDIT_PPS_PERFORMANCE', label: auditPerformance }
 		]
 		var currentState = item[0], index = 0;
 		if(this.props.widget !== undefined || this.props.widget !== null) {
