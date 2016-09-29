@@ -2572,6 +2572,38 @@ input[type="checkbox"] {
   padding-left: 10px;
 }
 
+progress {
+  background-color: #ffffff;
+  height: 9px;
+  border-radius: 15px;
+  border-width: 1px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #ffffff;
+  height: 9px;
+  border-radius: 15px;
+  border-width: 1px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
+progress::-webkit-progress-value {
+  background-color: #ffffff;
+  height: 9px;
+  border-radius: 15px;
+  border-width: 1px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
+progress::-moz-progress-bar {
+  background-color: #ffffff;
+  height: 9px;
+  border-radius: 15px;
+  border-width: 1px;
+  box-shadow: 0 2px 5px grey inset;
+}
+
 .gorSubTab.gorContainer {
   background-color: #F8F8F8;
   width: auto;
