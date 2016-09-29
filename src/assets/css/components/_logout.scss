@@ -1,0 +1,41 @@
+@import '../abstracts/functions';
+
+.gor-logout{
+	width:40%;
+	min-height:calculateRem(260px);
+	background:#ffffff;
+	border-radius:3px;
+	font-size:20px;
+	.gor-logout-text{
+		margin:auto;
+		margin-top:calculateRem(40px);
+		margin-left:calculateRem(40px);
+		margin-right:calculateRem(40px);
+	}
+	.gor-logout-bottom{
+		text-align:right;
+		margin-right:calculateRem(20px);
+		margin-top:calculateRem(135px);
+	}
+	.gor-logout-btn{
+		font-family:'Source Sans Pro Bold', sans-serif;
+	    width:calculateRem(113px);
+	    height:calculateRem(35px);
+	    font-size:14px;
+	    background:#f36f36;
+	    color:#ffffff;
+	    border-radius:3px;
+	    display:inline-block;
+	}
+}
+.gor-cancel-btn{
+	font-family:'Source Sans Pro Bold', sans-serif;
+    width:calculateRem(113px);
+    height:calculateRem(35px);
+    font-size:14px;
+    background:#4D5055;
+    color:#ffffff;
+    border-radius:3px;
+    margin-right:calculateRem(10px);
+	display:inline-block;
+}
