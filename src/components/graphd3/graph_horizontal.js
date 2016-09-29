@@ -137,6 +137,14 @@ var chart = d3.select(node).append('svg')
    .style("font-size","12px")
    .style("font-family","sans-serif")
    .style("fill","#666666");
+
+   chart.append("text")
+            .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+            .attr("transform", "translate("+ (width/2+30) +","+(-7)+")")  // centre below axis
+            .text("Orders/hr")
+            .style("font-size","12px")
+            .style("font-family","sans-serif")
+            .style("fill","#666666");
    
 
    component.setState({d3: node});

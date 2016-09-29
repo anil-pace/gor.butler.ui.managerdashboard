@@ -15,16 +15,18 @@ class PPS extends React.Component{
 	{
     	super(props);
     }	
-	render(){
-		
-    var data = this.props.PPSDetail.PPStypeDetail;
-	var itemNumber = 5;
-  
+	render(){	
+    var data = this.props.PPSDetail.PPStypeDetail, operatorNum = 0, itemNumber = 5;
+    if(data.length) {
+    	for (var i = data.length - 1; i >= 0; i--) {
+    		operatorNum = data[i].operatorAssigned.length + operatorNum;
+ 	   }
+	}
 		return (
 			<div>
 				<div>
 					<div>
-						<PPStable items={this.props.PPSDetail.PPStypeDetail} itemNumber={itemNumber}/>
+						<PPStable items={this.props.PPSDetail.PPStypeDetail} itemNumber={itemNumber} operatorNum={operatorNum}/>
 					</div>
 				</div>
 			</div>
