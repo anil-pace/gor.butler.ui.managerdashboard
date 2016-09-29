@@ -20,11 +20,12 @@ class OrderSubTab extends React.Component{
 		return (
 			<div>
 				<div className="gorMainSubtab">
-					<Link to="/orderlist">
-						<SubTab item={ORDER_LIST} changeClass={selectClass["ORDER_LIST"]}/> 
-					</Link>
+					
 					<Link to="/waves">
 						<SubTab item={WAVES} changeClass={selectClass["WAVES"]}/> 
+					</Link>
+					<Link to="/orderlist">
+						<SubTab item={ORDER_LIST} changeClass={selectClass["ORDER_LIST"]}/> 
 					</Link>
 				</div>
 			</div>

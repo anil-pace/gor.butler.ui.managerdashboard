@@ -64,6 +64,13 @@ export const TextCell = ({rowIndex, data, columnKey, ...props}) => (
   </Cell>
 );
 
+export const ProgressCell = ({rowIndex, data, columnKey, ...props}) => (
+  <Cell {...props}>
+  <progress className="gorProgressBar" max="100" value={data.getObjectAt(rowIndex)[columnKey]}/>
+    <div className="gorProgressBarLabel">{ data.getObjectAt(rowIndex)[columnKey]}% </div>
+  </Cell>
+);
+
 export const ComponentCell = ({rowIndex, data, columnKey,checkState, ...props}) => (
   
   <Cell {...props}> <input type="checkbox" onChange={checkState.bind(this,columnKey,rowIndex)}/>

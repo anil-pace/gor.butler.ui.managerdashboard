@@ -2563,6 +2563,15 @@ input[type="checkbox"] {
   padding: 0.5rem 0.625rem;
 }
 
+.gorProgressBar {
+  width: 70%;
+}
+
+.gorProgressBarLabel {
+  display: inline-block;
+  padding-left: 10px;
+}
+
 .gorSubTab.gorContainer {
   background-color: #F8F8F8;
   width: auto;

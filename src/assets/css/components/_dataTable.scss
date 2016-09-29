@@ -1259,3 +1259,12 @@ input[type="checkbox"]{
       padding: calculateRem(8px) calculateRem(10px);
     }
 }
+
+.gorProgressBar {
+  width: 70%;
+}
+
+.gorProgressBarLabel {
+  display: inline-block;
+  padding-left: 10px;
+}
