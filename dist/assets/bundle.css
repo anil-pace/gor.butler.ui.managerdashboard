@@ -564,6 +564,7 @@ body {
   font-size: 0.75rem;
   font-weight: normal;
   color: #4d5055;
+  padding-top: 2px;
 }
 
 .gorHeader .subTextClient {
@@ -984,11 +985,11 @@ body {
 }
 
 .Order-Stats-Drop {
-  width: 32%;
+  width: 33%;
 }
 
 .Performance-Widget-Drop {
-  width: 74%;
+  width: 75%;
 }
 
 .axis path,

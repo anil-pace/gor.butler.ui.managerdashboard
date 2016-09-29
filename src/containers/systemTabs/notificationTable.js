@@ -152,7 +152,7 @@ class NotificationTable extends React.Component {
               
             </SortHeaderCell>
           }
-          cell={<TextCell data={sortedDataList} />}
+          cell={<textarea rows="3" cols="30"/>}
           fixed={true}
           width={columnWidths.remark}
           isResizable={true}
@@ -162,7 +162,7 @@ class NotificationTable extends React.Component {
           header={
             <SortHeaderCell>
                <FormattedMessage id="NotificationTable.table.location" description="Starting Time for Component" 
-              defaultMessage ="LOCATION"/> 
+              defaultMessage ="TIME"/> 
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}

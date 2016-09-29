@@ -22,6 +22,6 @@
   {
     "id": "NotificationTable.table.location",
     "description": "Starting Time for Component",
-    "defaultMessage": "LOCATION"
+    "defaultMessage": "TIME"
   }
 ]

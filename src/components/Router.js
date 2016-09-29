@@ -104,7 +104,31 @@ class Routes extends React.Component{
 				        callback(null, require('../containers/ordersTab').default);
 				      });
 				    }}
+					 >
+					 		 <IndexRoute 
+					getComponent={(location, callback) => {
+				      require.ensure([], function (require) {
+				        callback(null, require('../containers/orderTab/orderListTab').default);
+				      });
+				    }}
 					 />
+
+							 <Route name="waves" path="/waves"  
+						 	getComponent={(location, callback) => {
+				      		require.ensure([], function (require) {
+				        	callback(null, require('../containers/orderTab/waveTab').default);
+				      		});
+				   			 }}
+							 />
+
+							 <Route name="orderlist" path="/orderlist"  
+						 	getComponent={(location, callback) => {
+				      		require.ensure([], function (require) {
+				        	callback(null, require('../containers/orderTab/orderListTab').default);
+				      		});
+				   			 }}
+							 />
+					 </Route>
 
 					
 
