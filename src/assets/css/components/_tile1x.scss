@@ -86,7 +86,8 @@ body
   min-height:calculateRem(16px);
   overflow:hidden;
   vertical-align:middle;
-  border-radius:3px;
+  border-bottom-left-radius:3px;
+  border-bottom-right-radius:3px;  
 }
 
 }

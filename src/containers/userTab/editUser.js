@@ -101,10 +101,14 @@ class EditUser extends React.Component{
 
               <div className='gor-usr-hdsm'><FormattedMessage id="users.edit.password.field1" description='Text for password' 
             defaultMessage='Password'/></div>
-              <input className='gor-usr-fdlg' type="password" id="password1"  ref={node => { this.password1 = node }}/>
+              <input className='gor-usr-fdlg' type="password" id="password1"  ref={node => { this.password1 = node }}/><div className='gor-pass-val iTick' />
+                <div className='gor-add-pass-error' ref={node => { this.passError = node }} ><div className='gor-login-error'></div> Password do not match</div>
+
               <div className='gor-usr-hdsm'><FormattedMessage id="users.edit.password.field2" description='Text for confirm password' 
             defaultMessage='Confirm Password'/></div>
-              <input className='gor-usr-fdlg' type="password" id="password2"  ref={node => { this.password2 = node }}/>
+              <input className='gor-usr-fdlg' type="password" id="password2"  ref={node => { this.password2 = node }}/><div className='gor-pass-val iTick' />
+                <div className='gor-add-pass-error' ref={node => { this.passError = node }} ><div className='gor-login-error'></div> Password do not match</div>
+
             </div>
             <p className='gor-submit'>
              <button className="gor-add-btn"><FormattedMessage id="users.edit.password.button" description='Text for edit user button' 

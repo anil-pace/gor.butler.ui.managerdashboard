@@ -122,7 +122,7 @@ body {
 .cbs-overview-chutes,
 .cbs-overview-casket,
 .overview-tile-ontime-icon,
-.cbs-overview-inducts, .statusOl, .statusAl, .iStock, .iAudit, .iPick, .gor-login-user, .gor-login-password, .gor-login-error {
+.cbs-overview-inducts, .statusOl, .statusAl, .iStock, .iAudit, .iPick, .gor-login-user, .gor-login-password, .gor-login-error, .iTick, .iQuestion {
   background-image: url(images/icons.svg);
 }
 
@@ -150,6 +150,7 @@ body {
   width: 16px;
   height: 16px;
   display: inline-block;
+  vertical-align: middle;
 }
 
 .alt-gor-logo {
@@ -208,6 +209,7 @@ body {
 
 .iPick {
   background-position: -308px -1px;
+  margin-bottom: 33px;
 }
 
 .overview-tile-ontime-icon {
@@ -257,6 +259,24 @@ body {
   width: 24px;
   height: 24px;
   display: inline-block;
+}
+
+.iTick {
+  background-position: -26px -52px;
+  width: 24px;
+  height: 24px;
+  margin-left: 20px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.iQuestion {
+  background-position: -409px -1px;
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 /*  SECTIONS  */
@@ -825,7 +845,8 @@ body {
   min-height: 1rem;
   overflow: hidden;
   vertical-align: middle;
-  border-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
 }
 
 .gorNoML {
@@ -2663,6 +2684,42 @@ input[type="checkbox"] {
   color: #666666;
 }
 
+.modal-content .gor-id-val {
+  display: none;
+}
+
+.modal-content .gor-name-val {
+  display: none;
+}
+
+.modal-content .gor-pass-val {
+  display: none;
+}
+
+.modal-content .gor-add-id-error {
+  display: none;
+  text-align: left;
+  color: #EC1C24;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.modal-content .gor-add-name-error {
+  display: none;
+  text-align: left;
+  color: #EC1C24;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.modal-content .gor-add-pass-error {
+  display: none;
+  text-align: left;
+  color: #EC1C24;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
 .modal-content .gor-usr-details {
   width: 33%;
   margin: auto;
@@ -2712,7 +2769,7 @@ input[type="checkbox"] {
 
 .modal-content .gor-usr-details .gor-usr-field {
   display: inline-block;
-  width: 40%;
+  width: 37%;
 }
 
 .modal-content .gor-usr-details .gor-usr-field .gor-usr-fdsm {
@@ -2864,4 +2921,48 @@ input[type="checkbox"] {
   top: 0;
   left: 0;
   z-index: 0;
+}
+
+.gor-logout {
+  width: 40%;
+  min-height: 16.25rem;
+  background: #ffffff;
+  border-radius: 3px;
+  font-size: 20px;
+}
+
+.gor-logout .gor-logout-text {
+  margin: auto;
+  margin-top: 2.5rem;
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
+}
+
+.gor-logout .gor-logout-bottom {
+  text-align: right;
+  margin-right: 1.25rem;
+  margin-top: 8.4375rem;
+}
+
+.gor-logout .gor-logout-btn {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  width: 7.0625rem;
+  height: 2.1875rem;
+  font-size: 14px;
+  background: #f36f36;
+  color: #ffffff;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.gor-cancel-btn {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  width: 7.0625rem;
+  height: 2.1875rem;
+  font-size: 14px;
+  background: #4D5055;
+  color: #ffffff;
+  border-radius: 3px;
+  margin-right: 0.625rem;
+  display: inline-block;
 }

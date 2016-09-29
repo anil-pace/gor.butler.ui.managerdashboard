@@ -1,11 +1,9 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-import { connect } from 'react-redux' ;
 import {REQUEST_HEADER,RECIEVE_HEADER,RECIEVE,RECIEVE_ITEM_TO_STOCK} from '../../actions/headerAction';
-import { logoutRequest } from '../../actions/loginAction';
-import { endWsAction } from '../../actions/socketActions';
+import {modal} from 'react-redux-modal';
+import LogOut from '../../containers/logoutTab'; 
 import { FormattedMessage } from 'react-intl';
-
 var dropdownFlag=0;
 var temp;
 
@@ -35,12 +33,15 @@ class Header extends React.Component{
 
     }
 
-    appLogout() {
-    	this.props.userLogout();
-    	this.props.endConnect();
-
-    }
-
+   addModal() {
+    modal.add(LogOut, {
+      title: '',
+      size: 'large', // large, medium or small,
+      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: true // (optional) if you don't wanna show the top right close button
+      //.. all what you put in here you will get access in the modal props ;)
+    });
+   }
 
 	render(){
 		const { headData } = this.props;
@@ -104,7 +105,7 @@ class Header extends React.Component{
 							<div className="horizontalDiv">	
 							</div>
 							<div>
-								<a href="javascript:void(0)" onClick={this.appLogout.bind(this)}>Logout</a>
+								<a href="javascript:void(0)" onClick={this.addModal.bind(this)}>Logout</a>
 							</div>
 						</div>
 					</div>
@@ -115,18 +116,5 @@ class Header extends React.Component{
 	}
 };
 
-function mapStateToProps(state, ownProps){
-	return  {
-	//	"ordersData":state.recieveSocketActions.ordersData || {}
-		}
-		 
 
-}
-function mapDispatchToProps(dispatch){
-    return {
-    	endConnect: function(){ dispatch(endWsAction()); },
-        userLogout: function(){ dispatch(logoutRequest()); }
-    }
-};
-
-export 	default connect(mapStateToProps,mapDispatchToProps)(Header);
+export 	default Header;

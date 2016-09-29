@@ -41,13 +41,14 @@ class PickStatusWidget extends React.Component{
         ppsCount=0,
         remTime=0,
         eta=0,
-        items={};
+        items={},
+        ordersData= Object.assign({},this.props.ordersData);
         
         headingleft=<FormattedMessage id="widget.pick.headingleft" description='Heading for pick status widget' 
             defaultMessage='Orders to fullfill'/>;
         logo=' iPick';
         ppsCount=this.props.ppsData.totalPick;
-        textleft=this.props.ordersData.count_pending;
+        textleft=ordersData.count_pending;
         
         if(!textleft)
         {
@@ -63,12 +64,12 @@ class PickStatusWidget extends React.Component{
         }
         else
         {
-            textleft=<FormattedNumber id='widget.pick.textleft' value={this.props.ordersData.count_pending} />;
+            textleft=<FormattedNumber id='widget.pick.textleft' value={ordersData.count_pending} />;
 
             headingright=<FormattedMessage id="widget.pick.headingright" description='Heading for cut-off time' 
             defaultMessage='Time to cut-off'/>;
             
-            remTime=this._tomillisecs(this.props.ordersData.cut_off);
+            remTime=this._tomillisecs(ordersData.cut_off);
 
             textright=<FormattedMessage id="widget.pick.textright" description='Time remaining' 
             defaultMessage='{cut_off}' values={{cut_off:remTime}} />;
@@ -80,24 +81,26 @@ class PickStatusWidget extends React.Component{
                                 count: ppsCount,
                                 throughput:this.props.throughputData.pick_throughput
                             }}/>;            
-            eta=this._tomillisecs(this.props.ordersData.eta);
+            eta=this._tomillisecs(ordersData.eta);
             lowright=<FormattedMessage id="widget.pick.lowright" description='Estimated time' 
             defaultMessage='Completing in {eta}' values={{eta:eta}}/>;
 
-            if(!this.props.ordersData.count_risk)
+            if(!ordersData.count_risk)
             {
                 statusClass='gor-success';
                 statusLogo='overview-tile-ontime-icon';
-                statusleft=<FormattedMessage id="widget.pick.statusleft" description='Text for on schedule' 
+                statusleft=<FormattedMessage id="widget.pick.statusleft.onschedule" description='Text for on schedule' 
             defaultMessage='On Schedule'/>
             }
             else
             {
                 statusClass='gor-risk';  
                 statusLogo='header-yellow-alert-icon';
-                statusleft=<FormattedMessage id="widget.pick.statusRight" description='Text for orders at risk' 
+                statusleft=<FormattedMessage id="widget.pick.statusleft.atrisk" description='Text for orders at risk' 
                 defaultMessage='{count_risk} {count_risk,plural, one {order} other {orders}} at risk'
-            values={{count_risk:this.props.ordersData.count_risk}}/>
+            values={{count_risk:ordersData.count_risk}}/>
+                statusright=<FormattedMessage id="widget.pick.statusright" description='Text for on schedule' 
+            defaultMessage='{wave_end}' values={{wave_end:ordersData.wave_end}}/>
                 valueLeftStatus='gor-risk';          
                 valueRightStatus='gor-risk';
             }
