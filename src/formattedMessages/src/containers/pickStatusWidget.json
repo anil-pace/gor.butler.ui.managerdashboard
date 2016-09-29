@@ -1,0 +1,47 @@
+[
+  {
+    "id": "widget.pick.headingleft",
+    "description": "Heading for pick status widget",
+    "defaultMessage": "Orders to fullfill"
+  },
+  {
+    "id": "widget.pick.completed",
+    "description": "Text for completed",
+    "defaultMessage": "Completed"
+  },
+  {
+    "id": "widget.pick.status.idle",
+    "description": "Throughput message",
+    "defaultMessage": "{count} PPS idle"
+  },
+  {
+    "id": "widget.pick.headingright",
+    "description": "Heading for cut-off time",
+    "defaultMessage": "Time to cut-off"
+  },
+  {
+    "id": "widget.pick.textright",
+    "description": "Time remaining",
+    "defaultMessage": "{cut_off}"
+  },
+  {
+    "id": "widget.pick.throughput",
+    "description": "Throughput message",
+    "defaultMessage": "{count} PPS fullfilling at {throughput} items/hr"
+  },
+  {
+    "id": "widget.pick.lowright",
+    "description": "Estimated time",
+    "defaultMessage": "Completing in {eta}"
+  },
+  {
+    "id": "widget.pick.statusleft",
+    "description": "Text for on schedule",
+    "defaultMessage": "On Schedule"
+  },
+  {
+    "id": "widget.pick.statusRight",
+    "description": "Text for orders at risk",
+    "defaultMessage": "{count_risk} {count_risk, plural, one {order} other {orders}} at risk"
+  }
+]
