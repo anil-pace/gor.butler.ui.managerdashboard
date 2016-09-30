@@ -1,6 +1,6 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-class TopNotify extends React.Component{
+class TopNotifications extends React.Component{
 	constructor(props) 
 	{
     	super(props);
@@ -14,4 +14,4 @@ class TopNotify extends React.Component{
 	}
 };
 
-export default TopNotify ;
+export default TopNotifications ;
