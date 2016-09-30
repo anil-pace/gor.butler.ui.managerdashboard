@@ -17,7 +17,7 @@ class EditUser extends React.Component{
   {
       return (
         <div>
-          <div className="modal-content">
+          <div className="gor-modal-content">
             <div className='gor-modal-head'>
               <div className='gor-usr-add'><FormattedMessage id="users.edit.heading" description='Heading for Add new user' 
             defaultMessage='Edit user'/>
