@@ -217,6 +217,8 @@ body {
   width: 16px;
   height: 16px;
   display: inline-block;
+  vertical-align: sub;
+  margin-right: 8px;
 }
 
 .overview-tile-red-alert-icon {
@@ -245,6 +247,7 @@ body {
   width: 16px;
   height: 14px;
   display: inline-block;
+  margin-right: 8px;
 }
 
 .tab-online-icon {
@@ -2940,19 +2943,19 @@ input[type="checkbox"] {
   background: #ffffff;
   border-radius: 3px;
   font-size: 20px;
+  margin: auto;
+  clear: both;
 }
 
 .gor-logout .gor-logout-text {
   margin: auto;
-  margin-top: 2.5rem;
-  margin-left: 2.5rem;
-  margin-right: 2.5rem;
+  padding: 1.875rem;
+  min-height: 9.375rem;
 }
 
 .gor-logout .gor-logout-bottom {
   text-align: right;
   margin-right: 1.25rem;
-  margin-top: 8.4375rem;
 }
 
 .gor-logout .gor-logout-btn {

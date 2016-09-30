@@ -13,7 +13,7 @@ class PickStatusWidget extends React.Component{
 	{ 
     	super(props);
     }
-    _tomillisecs(m){
+    _toTime(m){
      let hh=0,mm=0,timestr='';
      hh=parseInt(m/60,10);
      mm=m-(hh*60);
@@ -77,15 +77,19 @@ class PickStatusWidget extends React.Component{
             headingright=<FormattedMessage id="widget.pick.headingright" description='Heading for cut-off time' 
             defaultMessage='Time to cut-off'/>;
             
-            remTime=this._tomillisecs(ordersData.cut_off);
+            remTime=this._toTime(ordersData.cut_off);
 
             textright=<FormattedMessage id="widget.pick.textright" description='Time remaining' 
             defaultMessage='{cut_off}' values={{cut_off:remTime}} />;
 
 
-            eta=this._tomillisecs(ordersData.eta);
+            eta=this._toTime(ordersData.eta);
             lowright=<FormattedMessage id="widget.pick.lowright" description='Estimated time' 
             defaultMessage='Completing in {eta}' values={{eta:eta}}/>;
+
+            statusright=<FormattedMessage id="widget.pick.statusright" description='Text for on schedule' 
+            defaultMessage='{wave_end}' values={{wave_end:ordersData.wave_end}}/>
+
 
             if(!ordersData.count_risk)
             {
@@ -93,6 +97,7 @@ class PickStatusWidget extends React.Component{
                 statusLogo='overview-tile-ontime-icon';
                 statusleft=<FormattedMessage id="widget.pick.statusleft.onschedule" description='Text for on schedule' 
             defaultMessage='On Schedule'/>
+
             }
             else
             {
@@ -101,8 +106,6 @@ class PickStatusWidget extends React.Component{
                 statusleft=<FormattedMessage id="widget.pick.statusleft.atrisk" description='Text for orders at risk' 
                 defaultMessage='{count_risk} {count_risk,plural, one {order} other {orders}} at risk'
             values={{count_risk:ordersData.count_risk}}/>
-                statusright=<FormattedMessage id="widget.pick.statusright" description='Text for on schedule' 
-            defaultMessage='{wave_end}' values={{wave_end:ordersData.wave_end}}/>
                 valueLeftStatus='gor-risk';          
                 valueRightStatus='gor-risk';
             }

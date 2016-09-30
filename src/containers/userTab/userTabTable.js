@@ -5,7 +5,7 @@ import {Table, Column, Cell} from 'fixed-data-table';
 import Dimensions from 'react-dimensions';
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
 import {modal} from 'react-redux-modal';
-import EditUser from './editUser';
+import AddUser from './addNewUser';
 
 class UserDataTable extends React.Component {
   constructor(props) {
@@ -58,7 +58,7 @@ class UserDataTable extends React.Component {
   } 
 
   addModal() {
-    modal.add(EditUser, {
+    modal.add(AddUser, {
       title: '',
       size: 'large', // large, medium or small,
       closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
