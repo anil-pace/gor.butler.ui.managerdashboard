@@ -1,12 +1,11 @@
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var CleanWebpackPlugin = require('clean-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var WebpackCleanupPlugin= require('webpack-cleanup-plugin');
 
 module.exports = {
   cache:true,
-  
   entry: {
     app:['es6-symbol','./src/index.js'],
     vendor: ["react", "react-dom","react-redux","react-intl-redux","redux","react-d3-library","d3","d3-tip","react-redux-modal"]
@@ -37,7 +36,7 @@ module.exports = {
         cacheDirectory: true,
         plugins:[
                   ['react-intl', {
-                  'messagesDir': './src/translations/'
+                  'messagesDir': './src/formattedMessages/'
              }]
         ]
       }
@@ -58,11 +57,9 @@ plugins: [
     template: 'index.template.html',
     inject: 'body',
   }),
-  new CleanWebpackPlugin(['assets'], {
-      root: '/',
-      verbose: true, 
-      dry: false
-    }),
+ new WebpackCleanupPlugin({
+    exclude:["package.sh","index.html"]
+ }),
   new CopyWebpackPlugin([
 
       { from: 'src/assets/images', to: 'assets/images' },

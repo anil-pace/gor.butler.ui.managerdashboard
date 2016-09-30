@@ -1,0 +1,22 @@
+[
+  {
+    "id": "header.description",
+    "description": "Header description",
+    "defaultMessage": "Butler Management System"
+  },
+  {
+    "id": "header.start_time",
+    "description": "Start time",
+    "defaultMessage": "Start time:{time}"
+  },
+  {
+    "id": "header.user_name",
+    "description": "User name",
+    "defaultMessage": "{user_name}"
+  },
+  {
+    "id": "header.user_post",
+    "description": "User post",
+    "defaultMessage": "{user_post}"
+  }
+]

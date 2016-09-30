@@ -2,35 +2,366 @@
   {
     "id": "login.lang.english",
     "description": "English option in the language drop down",
-
-    "defaultMessage": "䩵囤詞訊"
-
+    "defaultMessage": "日本語"
   },
   {
     "id": "login.lang.japanese",
     "description": "Japanese option in the language drop down",
-    "defaultMessage": "受注は気力します"
-
+    "defaultMessage": "日本語"
   },
   {
-    "id": "login.manageInterface",
+    "id": "login.form.username",
+    "description": "Text for username",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "login.form.password",
+    "description": "Text for password",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "login.butler.language",
+    "description": "Text for language",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "login.butler.title",
+    "description": "Text for butler management Login form title",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "login.butler.manageInterface",
     "description": "Text for Management Interface",
-
-    "defaultMessage": "受注は気力します"
+    "defaultMessage": "日本語"
   },
   {
-    "id": "pickWidget.heading",
-    "description": "heading for pick status widget",
-    "defaultMessage": "管理インターフェース"
+    "id": "login.butler.fail",
+    "description": "Text for login failure",
+    "defaultMessage": "日本語"
   },
   {
-    "id": "login.manageInterface",
-    "description": "Japanese Management Interface",
-    "defaultMessage": "管理インターフェース"
+    "id": "login.butler.error.username",
+    "description": "Text for missing username error",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "login.butler.error.password",
+    "description": "Text for missing password error",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "widget.audit.heading.value",
+    "description": "Total Items Audited",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "widget.audit.status.offline",
+    "description": "Offline Status",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "widget.audit.status.starting",
+    "description": "Awaiting throughput data",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "widget.audit.throughput",
+    "description": "Throughput message",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "widget.audit.heading",
+    "description": "Audit Item Heading",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "widget.pick.headingleft",
+    "description": "Heading for pick status widget",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "widget.pick.completed",
+    "description": "Text for completed",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "widget.pick.status.idle",
+    "description": "Throughput message",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "widget.pick.headingright",
+    "description": "Heading for cut-off time",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "widget.pick.textright",
+    "description": "Time remaining",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "widget.pick.throughput",
+    "description": "Throughput message",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "widget.pick.lowright",
+    "description": "Estimated time",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "widget.pick.statusleft",
+    "description": "Text for on schedule",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "widget.pick.statusRight",
+    "description": "Text for orders at risk",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "widget.put.heading.value",
+    "description": "Total Items Stocked",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "widget.put.status.offline",
+    "description": "Offline Status",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "widget.put.status.starting",
+    "description": "Awaiting throughput data",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "widget.put.throughput",
+    "description": "Throughput message",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "widget.put.heading",
+    "description": "Put Item Heading",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "butlerBot.table.heading",
+    "description": "Heading for butlerbot",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "butlerBot.table.status",
+    "description": "Status for butlerbot",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "butlerBot.table.currentTask",
+    "description": "Current task for butlerbot",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "butlerBot.table.msu",
+    "description": "MSU Status for butlerbot",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "butlerBot.table.location",
+    "description": "Location for butlerbot",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "butlerBot.table.voltage",
+    "description": "voltage for butlerbot",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "ChargingStations.table.heading",
+    "description": "Heading for ChargingStations",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "ChargingStations.table.operatingMode",
+    "description": "operatingMode for ChargingStations",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "pps.table.heading",
+    "description": "Heading for PPS",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "PPS.table.status",
+    "description": "Status for PPS",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "PPS.table.operatingMode",
+    "description": "operatingMode for PPS",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "PPS.table.performance",
+    "description": "performance Status for PPS",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "PPS.table.operatorAssigned",
+    "description": "operatorAssigned for PPS",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "users.add.heading",
+    "description": "Heading for Add new user",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "users.add.subheading",
+    "description": "Subheading for add new user",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "users.add.userdetails.heading",
+    "description": "Text for user details heading",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "users.add.userdetails.subheading",
+    "description": "Text for user details subheading",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "users.add.userdetails.userid",
+    "description": "Text for user id",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "users.add.userdetails.firstname",
+    "description": "Text for first name",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "users.add.userdetails.lastname",
+    "description": "Text for last name",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "users.add.roledetails.heading",
+    "description": "Heading for role",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "users.add.roledetails.subheading",
+    "description": "Subheading for role",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "users.add.roledetails.operator",
+    "description": "Text for operator",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "users.add.roledetails.operatortext",
+    "description": "Subtext for operator",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "users.add.roledetails.pick",
+    "description": "Text for pick operator",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "users.add.roledetails.put",
+    "description": "Text for put operator",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "users.add.roledetails.audit",
+    "description": "Text for audit",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "users.add.roledetails.supervisor",
+    "description": "Text for supervisor",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "users.add.roledetails.supervisortext",
+    "description": "Subtext for supervisor",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "users.add.roledetails.manager",
+    "description": "Text for manager",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "users.add.roledetails.managertext",
+    "description": "Subtext for manager",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "users.add.password.heading",
+    "description": "Heading for create password",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "sers.add.password.subheading",
+    "description": "Subheading for create password",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "users.add.password.field1",
+    "description": "Text for password",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "users.add.password.field2",
+    "description": "Text for confirm password",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "users.add.password.button",
+    "description": "Text for add new user button",
+    "defaultMessage": "日本語"
   },
   {
     "id": "user.table.heading",
-    "description": "Japanese Management Interface",
-    "defaultMessage": "管理インターフェース"
+    "description": "Heading for users table",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "user.table.users",
+    "description": "Users Column",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "user.table.status",
+    "description": "Users Status",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "user.table.role",
+    "description": "User Role",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "user.table.workMode",
+    "description": "User Workmode",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "user.table.location",
+    "description": "User location",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "user.table.productivity",
+    "description": "User productivity",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "user.table.logInTime",
+    "description": "User log in time",
+    "defaultMessage": "日本語"
   }
 ]
