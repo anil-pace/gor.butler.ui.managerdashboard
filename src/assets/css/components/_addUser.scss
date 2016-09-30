@@ -17,7 +17,7 @@
 .gor-usr-form{
     margin-top:120px;
 }
-.modal-content {
+.gor-modal-content {
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
@@ -113,6 +113,10 @@
             color:#000000;   
             margin-top:25px; 
         }
+        :a{
+            margin-top:10px;
+            text-decoration:none;
+        }
         .gor-usr-fdlg{
                 margin:auto;
                 text-align:left;
@@ -148,6 +152,9 @@
             }
         }
 
+    }
+    .gor-pass-view1{
+        display:none
     }
     .gor-submit{
         width:33%;

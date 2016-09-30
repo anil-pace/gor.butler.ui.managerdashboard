@@ -15,6 +15,11 @@
     "defaultMessage": "{count} PPS idle"
   },
   {
+    "id": "widget.pick.throughput",
+    "description": "Throughput message",
+    "defaultMessage": "{count} PPS fullfilling at {throughput} items/hr"
+  },
+  {
     "id": "widget.pick.headingright",
     "description": "Heading for cut-off time",
     "defaultMessage": "Time to cut-off"
@@ -25,14 +30,14 @@
     "defaultMessage": "{cut_off}"
   },
   {
-    "id": "widget.pick.throughput",
-    "description": "Throughput message",
-    "defaultMessage": "{count} PPS fullfilling at {throughput} items/hr"
-  },
-  {
     "id": "widget.pick.lowright",
     "description": "Estimated time",
     "defaultMessage": "Completing in {eta}"
+  },
+  {
+    "id": "widget.pick.statusright",
+    "description": "Text for on schedule",
+    "defaultMessage": "{wave_end}"
   },
   {
     "id": "widget.pick.statusleft.onschedule",
@@ -43,10 +48,5 @@
     "id": "widget.pick.statusleft.atrisk",
     "description": "Text for orders at risk",
     "defaultMessage": "{count_risk} {count_risk, plural, one {order} other {orders}} at risk"
-  },
-  {
-    "id": "widget.pick.statusright",
-    "description": "Text for on schedule",
-    "defaultMessage": "{wave_end}"
   }
 ]
