@@ -9,6 +9,10 @@ class EditUser extends React.Component{
   removeThisModal() {
     this.props.removeModal();
   }
+  _handleAnchorClick(){
+    this.view1.style.display='block';
+    this.view2.style.display='none';
+  }
   render()
   {
       return (
@@ -94,25 +98,37 @@ class EditUser extends React.Component{
             </div>
 
             <div className='gor-usr-details'>
-            <div className='gor-usr-hdlg'><FormattedMessage id="users.edit.password.heading" description='Heading for create password' 
-            defaultMessage='Create password'/></div>
-            <div className='gor-sub-head'><FormattedMessage id="sers.edit.password.subheading" description='Subheading for create password' 
-            defaultMessage='Min of 6 digits will be required for logging into the Operator Interface'/></div>
+            <div className='gor-pass-view1'  ref={node => { this.view1 = node }}>
+              <div className='gor-usr-hdlg'><FormattedMessage id="users.edit.changepassword.heading" description='Heading for Change password' 
+               defaultMessage='Change password'/></div>
+              <div className='gor-sub-head'><FormattedMessage id="users.edit.changepassword.subheading" description='Subheading for create password' 
+              defaultMessage='Min of 6 digits will be required for logging into the Operator Interface'/></div>
 
-              <div className='gor-usr-hdsm'><FormattedMessage id="users.edit.password.field1" description='Text for password' 
-            defaultMessage='Password'/></div>
+              <div className='gor-usr-hdsm'><FormattedMessage id="users.edit.changepassword.field1" description='Text for password' 
+              defaultMessage='Password'/></div>
               <input className='gor-usr-fdlg' type="password" id="password1"  ref={node => { this.password1 = node }}/><div className='gor-pass-val iTick' />
                 <div className='gor-add-pass-error' ref={node => { this.passError = node }} ><div className='gor-login-error'></div> Password do not match</div>
 
-              <div className='gor-usr-hdsm'><FormattedMessage id="users.edit.password.field2" description='Text for confirm password' 
-            defaultMessage='Confirm Password'/></div>
+              <div className='gor-usr-hdsm'><FormattedMessage id="users.edit.changepassword.field2" description='Text for confirm password' 
+              defaultMessage='Confirm Password'/></div>
               <input className='gor-usr-fdlg' type="password" id="password2"  ref={node => { this.password2 = node }}/><div className='gor-pass-val iTick' />
                 <div className='gor-add-pass-error' ref={node => { this.passError = node }} ><div className='gor-login-error'></div> Password do not match</div>
-
             </div>
+            </div>
+
+            <div className='gor-usr-details'>
+            <div className='gor-pass-view2'  ref={node => { this.view2 = node }}>
+              <div className='gor-usr-hdlg'><FormattedMessage id="users.edit.password." description='Heading for Password' 
+              defaultMessage='Password'/></div>
+
+              <a href="javascript:void(0)" onClick={(e) => this._handleAnchorClick(e)}><FormattedMessage id="users.edit.password.query" description='Text for change password' 
+              defaultMessage='Change Password?'/></a>
+              </div>
+            </div>
+
             <p className='gor-submit'>
              <button className="gor-add-btn"><FormattedMessage id="users.edit.password.button" description='Text for edit user button' 
-            defaultMessage='Edit user'/></button>
+            defaultMessage='Save'/></button>
             </p>
             </div>
             </div>

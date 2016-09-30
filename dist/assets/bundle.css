@@ -752,8 +752,10 @@ body {
 
 .gor-tile {
   background: #fff;
+  -webkit-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2);
   border-radius: 0.1875rem;
-  box-shadow: 0px 2px 3px 3px #EAEAEA;
   display: inline-block;
   min-height: 10.625rem;
   margin: 1% 1% 0% 2%;
@@ -2747,6 +2749,11 @@ input[type="checkbox"] {
   margin-top: 25px;
 }
 
+.modal-content .gor-usr-details :a {
+  margin-top: 10px;
+  text-decoration: none;
+}
+
 .modal-content .gor-usr-details .gor-usr-fdlg {
   margin: auto;
   text-align: left;
@@ -2785,6 +2792,10 @@ input[type="checkbox"] {
 
 .modal-content .gor-usr-details .gor-usr-field .gor-usr-fdsm:hover {
   border: 1px solid #666666;
+}
+
+.modal-content .gor-pass-view1 {
+  display: none;
 }
 
 .modal-content .gor-submit {
