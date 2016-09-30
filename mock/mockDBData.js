@@ -50,7 +50,7 @@ export const resTypePPS = {
 		"items_picked": 1000,
 		"items_put": 2400,
 		"items_audited": "need_to_be_decided_per_item_or_per_audit",
-		"pps_mode": "audit",
+		"pps_mode": "pick",
 		"active": "true/false"
 	}],
 	"resource_type": "pps_details"

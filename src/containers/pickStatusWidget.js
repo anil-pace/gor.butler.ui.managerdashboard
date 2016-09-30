@@ -25,29 +25,29 @@ class PickStatusWidget extends React.Component{
      return timestr;     
     }	
     _parseProps (){
-        let statusClass='', 
-        statusLogo='', 
-        headingleft='',
-        valueLeftStatus='',
-        valueRightStatus='',
+        let statusClass, 
+        statusLogo, 
+        headingleft,
+        valueLeftStatus,
+        valueRightStatus,
         textleft=0,
-        headingright='',
-        textright='', 
-        statusleft='',
-        statusright='',
-        lowleft='',
-        lowright='',
-        logo='',
-        ppsCount=0,
+        headingright,
+        textright, 
+        statusleft,
+        statusright,
+        lowleft,
+        lowright,
+        logo,
         remTime=0,
         eta=0,
         items={},
-        ordersData= Object.assign({},this.props.ordersData);
+        ordersData= Object.assign({},this.props.ordersData),
+        ppsCount=this.props.ppsData?this.props.ppsData.totalPick:null,
+        pickThroughput=this.props.throughputData?this.props.throughputData.pick_throughput:null;
         
         headingleft=<FormattedMessage id="widget.pick.headingleft" description='Heading for pick status widget' 
             defaultMessage='Orders to fullfill'/>;
         logo=' iPick';
-        ppsCount=this.props.ppsData.totalPick;
         textleft=ordersData.count_pending;
         
         if(!textleft)
@@ -64,7 +64,15 @@ class PickStatusWidget extends React.Component{
         }
         else
         {
+
             textleft=<FormattedNumber id='widget.pick.textleft' value={ordersData.count_pending} />;
+
+            lowleft=<FormattedMessage id="widget.pick.throughput" description='Throughput message' 
+                            defaultMessage='{count} PPS fullfilling at {throughput} items/hr'
+                            values={{
+                                count: ppsCount,
+                                throughput:pickThroughput
+                            }}/>;            
 
             headingright=<FormattedMessage id="widget.pick.headingright" description='Heading for cut-off time' 
             defaultMessage='Time to cut-off'/>;
@@ -75,12 +83,6 @@ class PickStatusWidget extends React.Component{
             defaultMessage='{cut_off}' values={{cut_off:remTime}} />;
 
 
-            lowleft=<FormattedMessage id="widget.pick.throughput" description='Throughput message' 
-                            defaultMessage='{count} PPS fullfilling at {throughput} items/hr'
-                            values={{
-                                count: ppsCount,
-                                throughput:this.props.throughputData.pick_throughput
-                            }}/>;            
             eta=this._tomillisecs(ordersData.eta);
             lowright=<FormattedMessage id="widget.pick.lowright" description='Estimated time' 
             defaultMessage='Completing in {eta}' values={{eta:eta}}/>;
@@ -119,9 +121,9 @@ class PickStatusWidget extends React.Component{
  }
 function mapStateToProps(state, ownProps){
     return  {
-        ordersData:state.ordersInfo.ordersData || {},
-        ppsData:state.ppsInfo.ppsData|| {},
-        throughputData : state.throughputInfo.throughputData|| {}
+        ordersData:state.ordersInfo.ordersData,
+        ppsData:state.ppsInfo.ppsData,
+        throughputData : state.throughputInfo.throughputData
     }
 }
  export default connect(mapStateToProps)(PickStatusWidget);
