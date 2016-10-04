@@ -33,7 +33,7 @@ export const SUB_TAB_SELECTED = "SUB_TAB_SELECTED";
 export const PARSE_PPS = "pps_details";
 export const PARSE_BUTLERS = "butlers";
 export const PARSE_CHARGERS = "chargers";
-export const PARSE_ORDERS = "orders";
+export const PARSE_ORDERS = "order_details";
 export const PARSE_INVENTORY = "inventory";
 export const PARSE_PUT = "put_details";
 export const PARSE_PICK = "pick_details";
@@ -57,7 +57,9 @@ export const USERS = "USERS";
 export const NOTIFICATION_TAB = "Notification";
 export const BUTLERBOTS_TAB = "Butler Bots";
 export const CHARGING_TAB = "Charging Station";
-export const PPS_TAB = "PPS";
+export const PPS_TAB = "Pick Put Stations";
+export const ORDER_LIST = "Order List";
+export const WAVES = "Waves";
 
 
 
@@ -73,7 +75,10 @@ export const THROUGHPUT_DATA="THROUGHPUT_DATA";
 export const HISTOGRAM_DATA = "HISTOGRAM_DATA";
 export const CHARGERS_DETAIL = "CHARGERS_DETAIL";
 export const BUTLERS_DETAIL = "BUTLERS_DETAIL";
-export const PPS_DETAIL  = "PPS_DETAIL";
+export const PPS_DETAIL  = "pps_detail";
+export const SYSTEM_PPS_DETAILS = "system_pps_details";
+export const SYSTEM_BUTLERS_DETAILS = "system_butlers_details";
+export const HISTOGRAM_DETAILS = "histogram_details";
 
 /*Constants for type of AJAX call*/
 export const AUTH_LOGIN = "AUTH_LOGIN";

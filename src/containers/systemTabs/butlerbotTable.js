@@ -167,6 +167,7 @@ class ButlerBotTable extends React.Component {
             <SortHeaderCell>
                <FormattedMessage id="butlerBot.table.location" description="Location for butlerbot" 
               defaultMessage ="LOCATION"/> 
+              <div className="gorToolHeaderSubText"> {sortedDataList.getSize()} locations</div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}

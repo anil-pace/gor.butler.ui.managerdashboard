@@ -6,6 +6,7 @@ import ReactDOM  from 'react-dom';
 import { connect } from 'react-redux';
 import { Router, Route, hashHistory, IndexRoute} from 'react-router';
 import {loginRequest} from '../actions/loginAction';
+import Overview from '../containers/OverviewTab'; 
 
 class Routes extends React.Component{
 	constructor(props) 
@@ -61,7 +62,7 @@ class Routes extends React.Component{
 					 <IndexRoute 
 					getComponent={(location, callback) => {
 				      require.ensure([], function (require) {
-				        callback(null, require('../containers/systemTabs/butlerbotTab').default);
+				        callback(null, require('../containers/systemTabs/notificationTab').default);
 				      });
 				    }}
 					 />
@@ -103,15 +104,33 @@ class Routes extends React.Component{
 				        callback(null, require('../containers/ordersTab').default);
 				      });
 				    }}
-					 />
-
-					 <Route name="inventory" path="/inventory"  
-					 getComponent={(location, callback) => {
+					 >
+					 		 <IndexRoute 
+					getComponent={(location, callback) => {
 				      require.ensure([], function (require) {
-				        callback(null, require('../containers/inventoryTab').default);
+				        callback(null, require('../containers/orderTab/orderListTab').default);
 				      });
 				    }}
 					 />
+
+							 <Route name="waves" path="/waves"  
+						 	getComponent={(location, callback) => {
+				      		require.ensure([], function (require) {
+				        	callback(null, require('../containers/orderTab/waveTab').default);
+				      		});
+				   			 }}
+							 />
+
+							 <Route name="orderlist" path="/orderlist"  
+						 	getComponent={(location, callback) => {
+				      		require.ensure([], function (require) {
+				        	callback(null, require('../containers/orderTab/orderListTab').default);
+				      		});
+				   			 }}
+							 />
+					 </Route>
+
+					
 
 					<Route name="users" path="/users"  
 					 getComponent={(location, callback) => {

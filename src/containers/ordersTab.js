@@ -4,6 +4,7 @@
  */
 import React  from 'react';
 import ReactDOM  from 'react-dom';
+import OrdersSubTab from '../components/subtab/ordersTabs';
 
 
 class OrdersTab extends React.Component{
@@ -14,7 +15,10 @@ class OrdersTab extends React.Component{
 	render(){
 		return (
 			<div >
-				Orders
+				<div>
+					<OrdersSubTab/>
+				</div>
+				{this.props.children}
 			</div>
 		);
 	}

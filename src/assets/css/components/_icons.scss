@@ -26,7 +26,7 @@
 .cbs-overview-chutes,
 .cbs-overview-casket,
 .overview-tile-ontime-icon,
-.cbs-overview-inducts,.statusOl,.statusAl,.iStock ,.iAudit,.iPick,.gor-login-user,.gor-login-password,.gor-login-error{
+.cbs-overview-inducts,.statusOl,.statusAl,.iStock ,.iAudit,.iPick,.gor-login-user,.gor-login-password,.gor-login-error,.iTick,.iQuestion{
     background-image: url(images/icons.svg);
 }
 .fk-logo,
@@ -51,6 +51,7 @@
     width:16px;
     height:16px;    
     display:inline-block;
+    vertical-align:middle;
 }
 .alt-gor-logo{
     background-image: url(images/Logos.svg);    
@@ -99,14 +100,16 @@
     background-position: -256px -5px;   
 }
 .iPick{
-    background-position: -308px -1px;       
+    background-position: -308px -1px; 
+    margin-bottom:33px;      
 }
 .overview-tile-ontime-icon{
     background-position: -1px -77px;    
     width: 16px;
     height: 16px;
     display:inline-block;
-     
+    vertical-align:sub;
+    margin-right:8px;     
 }
 .overview-tile-red-alert-icon{
     background-position: -18px -77px;    
@@ -131,6 +134,7 @@
     width:16px;
     height:14px;           
     display:inline-block; 
+    margin-right:8px;    
 }
 
 .tab-online-icon {
@@ -147,4 +151,20 @@ background-position: -101px -52px;
     height: 24px;
     display:inline-block;
     
+}
+.iTick{
+ background-position: -26px -52px;
+    width:24px;
+    height:24px;
+    margin-left:20px;
+    display:inline-block;
+    vertical-align:middle;
+}
+.iQuestion{
+    background-position: -409px -1px;
+    width:50px;
+    height:50px;
+    margin-right:20px;
+    display:inline-block;
+    vertical-align:middle;
 }

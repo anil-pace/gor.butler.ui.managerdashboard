@@ -1,0 +1,41 @@
+@import '../abstracts/functions';
+
+.gor-logout{
+	width:40%;
+	min-height:calculateRem(260px);
+	background:#ffffff;
+	border-radius:3px;
+	font-size:20px;
+	margin:auto;
+	clear:both;
+	.gor-logout-text{
+		margin:auto;
+		padding:calculateRem(30px);
+		min-height:calculateRem(150px);
+	}
+	.gor-logout-bottom{
+		text-align:right;
+		margin-right:calculateRem(20px);
+	}
+	.gor-logout-btn{
+		font-family:'Source Sans Pro Bold', sans-serif;
+	    width:calculateRem(113px);
+	    height:calculateRem(35px);
+	    font-size:14px;
+	    background:#f36f36;
+	    color:#ffffff;
+	    border-radius:3px;
+	    display:inline-block;
+	}
+}
+.gor-cancel-btn{
+	font-family:'Source Sans Pro Bold', sans-serif;
+    width:calculateRem(113px);
+    height:calculateRem(35px);
+    font-size:14px;
+    background:#4D5055;
+    color:#ffffff;
+    border-radius:3px;
+    margin-right:calculateRem(10px);
+	display:inline-block;
+}

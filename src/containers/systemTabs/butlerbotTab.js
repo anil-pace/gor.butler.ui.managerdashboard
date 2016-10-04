@@ -13,16 +13,18 @@ class ButlerBot extends React.Component{
     }	
 	render(){
   var itemNumber = 6;
-  var claculateVol = this.props.butlerDetail.butlerDetail, avgVoltage = 0;
-  for (var i = claculateVol.length - 1; i >= 0; i--) {
-  	avgVoltage = claculateVol[i].voltage + avgVoltage;
+  var butlerData = this.props.butlerDetail.butlerDetail, avgVoltage = 0;
+  if(butlerData.length) {
+  	for (var i = butlerData.length - 1; i >= 0; i--) {
+  		avgVoltage = butlerData[i].voltage + avgVoltage;
+  	}
+  	avgVoltage = ((avgVoltage/(butlerData.length)).toFixed(2));
   }
-  avgVoltage = ((avgVoltage/(claculateVol.length)).toFixed(2));
 		return (
 			<div>
 				<div>
 					<div className="gorTesting">
-						<ButlerBotTable items={this.props.butlerDetail.butlerDetail} itemNumber={itemNumber} avgVoltage={avgVoltage}/>
+						<ButlerBotTable items={butlerData} itemNumber={itemNumber} avgVoltage={avgVoltage}/>
 					</div>
 				</div>
 			</div>

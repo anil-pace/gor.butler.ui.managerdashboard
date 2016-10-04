@@ -1,0 +1,52 @@
+[
+  {
+    "id": "login.lang.english",
+    "description": "English option in the language drop down",
+    "defaultMessage": "English"
+  },
+  {
+    "id": "login.lang.japanese",
+    "description": "Japanese option in the language drop down",
+    "defaultMessage": "Japanese"
+  },
+  {
+    "id": "login.form.username",
+    "description": "Text for username",
+    "defaultMessage": "Username"
+  },
+  {
+    "id": "login.form.password",
+    "description": "Text for password",
+    "defaultMessage": "Password"
+  },
+  {
+    "id": "login.butler.language",
+    "description": "Text for language",
+    "defaultMessage": "Language"
+  },
+  {
+    "id": "login.butler.title",
+    "description": "Text for butler management Login form title",
+    "defaultMessage": "Butler"
+  },
+  {
+    "id": "login.butler.manageInterface",
+    "description": "Text for Management Interface",
+    "defaultMessage": "Management Interface"
+  },
+  {
+    "id": "login.butler.fail",
+    "description": "Text for login failure",
+    "defaultMessage": "Invalid username and/or password"
+  },
+  {
+    "id": "login.butler.error.username",
+    "description": "Text for missing username error",
+    "defaultMessage": "Please enter your username"
+  },
+  {
+    "id": "login.butler.error.password",
+    "description": "Text for missing password error",
+    "defaultMessage": "Please enter your password"
+  }
+]
