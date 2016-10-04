@@ -2,7 +2,6 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import rd3 from 'react-d3-library';
 import * as d3 from 'd3';
-import d3tip from 'd3-tip';
 import Dimensions from 'react-dimensions'
 
 const RD3Component = rd3.Component;
@@ -49,22 +48,22 @@ class Chart extends React.Component{
     var node = document.createElement('div');
 
      
-  const tip = d3tip()
-    .attr('class', 'd3-tip')
-    .offset([100, 90])
-    .html(function(d) {
-      return "<div> Time:<div/><div> 27 Jul,2016</div> <div style='color:#ffffff'> Fulfilled:    </div>";
-    })
-
-    //d3.tip=tip;
+  // const tip = d3tip()
+  //   .attr('class', 'd3-tip')
+  //   .offset([100, 90])
+  //   .html(function(d) {
+  //     return "<div> Time:<div/><div> 27 Jul,2016</div> <div style='color:#ffffff'> Fulfilled:    </div>";
+  //   })
 
     var svg = d3.select(node).append('svg')
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-      .call(tip);
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+      //.call(tip); 
       
+
 
 
       
@@ -84,6 +83,8 @@ class Chart extends React.Component{
      });
       x.domain(data.map(function(d) { return d.timeInterval; }));
       y.domain([0, d3.max(data, function(d) { return d.type; })]);
+
+      
 
       svg.append("g")         
       .attr("class", "grid")
@@ -128,18 +129,56 @@ class Chart extends React.Component{
       .attr("width", x.rangeBand())
       .attr("y", function(d) { return y(d.type); })
       .attr("height", 0)
-      .attr("height", function(d) { return height - y(d.type); });
+      .attr("height", function(d) {return height - y(d.type);})
+      .attr("opacity", 1)
+      .on("mouseover", function(d, i) {
+        d3.selectAll(".bar").transition()
+        .duration(250)
+        .attr("opacity", function(d, j) {
+          return j != i ? 0.6 : 1;
+        });
+      })
+      .on("mousemove", function(d, i) {
+        d3.select(this)
+        .classed("hover", true)
+        .attr("stroke", "#045A8D")
+        .attr("stroke-width", "0.5px");
+        d3.select('.remove').html( "<div style='background: grey'> Time:<div/><div> 27 Jul,2016</div> <div style='color: black'> Fulfilled:</div>" ).style("visibility", "visible");
+      })
+      .on("mouseout", function(d, i) {
+       d3.selectAll(".layer")
+        .transition()
+        .duration(250)
+        .attr("opacity", "1");
+        d3.select(this)
+        .classed("hover", false)
+        .attr("stroke-width", "0px");
+        d3.select('.remove').html( "<p></p>" ).style("visibility", "hidden");
+      });
       
-      //Not a dead code still working on this
-      //.on('mouseover', tip.show)
-      //.on('mouseout', tip.hide)
-
-
-      console.log(d3)
-    // d3.event.target = event.target;
-      
+      var tooltip=d3.select(node).append("div")
+      .attr("class", "remove")
+      .style("position", "absolute")
+      .style("z-index", "20")
+      .style("visibility", "hidden")
+      .style("top", "100px")
+      .style("left", "55px");
+    
+      d3.select(node).selectAll('svg')
+        .data(data)
+        .on("mousemove", function(){  
+           var mouse = d3.mouse(this);
+           var mousex = mouse[0] + 10;
+           var mousey =  mouse[1] + 200; 
+           d3.selectAll('.remove').style("left", mousex + "px" );
+           d3.selectAll('.remove').style("top", + mousey + "px" );
+         })
+        .on("mouseover", function(){  
+           var mousex = d3.mouse(this);
+           mousex = mousex[0] + 10;
+           d3.selectAll('.remove').style("left", mousex + "px");
+         });
     component.setState({d3: node});
-
     }
 
     function type(d) {

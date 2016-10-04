@@ -437,5 +437,40 @@
     "id": "PPSauditPerformance.dropdown",
     "description": "PPSauditPerformance dropdown label",
     "defaultMessage": "日本語"
+  },
+  {
+    "id": "health.pps",
+    "description": "pps health",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "health.Butler",
+    "description": "Butler bots health",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "health.ChargingStation",
+    "description": "Charging Stations health",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "notification.tab.heading",
+    "description": "notification tab",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "butlerBot.tab.heading",
+    "description": "butler bot tab",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "pps.tab.heading",
+    "description": "pps tab",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "chargingstation.tab.heading",
+    "description": "charging station tab",
+    "defaultMessage": "日本語"
   }
 ]

@@ -103,7 +103,8 @@ class NotificationTable extends React.Component {
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.component}> 
               <div className="gorToolHeaderEl">
-              <div className="gorToolHeaderEl">  COMPONENT </div>
+              <div className="gorToolHeaderEl"> <FormattedMessage id="NotificationTable.table.component" description="component for NotificationTable" 
+              defaultMessage ="COMPONENT"/> </div>
               
               </div>
             </SortHeaderCell>

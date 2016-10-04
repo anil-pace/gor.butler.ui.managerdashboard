@@ -1,5 +1,20 @@
 [
   {
+    "id": "health.pps",
+    "description": "pps health",
+    "defaultMessage": "PPS"
+  },
+  {
+    "id": "health.Butler",
+    "description": "Butler bots health",
+    "defaultMessage": "Butler bots"
+  },
+  {
+    "id": "health.ChargingStation",
+    "description": "Charging Stations health",
+    "defaultMessage": "Charging Stations"
+  },
+  {
     "id": "systemHealth.dropdown",
     "description": "systemHealth dropdown label",
     "defaultMessage": "System Health"

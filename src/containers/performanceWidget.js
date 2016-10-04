@@ -9,6 +9,9 @@ import { FormattedMessage } from 'react-intl';
 
 
 function _getPPSdata(link) {
+		let Component = <FormattedMessage id="health.pps" description="pps health" 
+              defaultMessage ="PPS"/>
+
 		let ppsPickState = link.props.ppsData.pick;
 		if(ppsPickState === undefined || ppsPickState === null) {
 			ppsPickState = 0;
@@ -30,12 +33,16 @@ function _getPPSdata(link) {
 		let ppsStopped = ppsInactiveState;
 		let ppsError = 0;
 		const pps_data = [
-		{ component:{componentNumber: ppsTotal, componentType: 'PPS'}, states:{offState: ppsError, onState: ppsOn, errorState: ppsError} }
+		{ component:{componentNumber: ppsTotal, componentType: Component}, states:{offState: ppsError, onState: ppsOn, errorState: ppsError} }
 		]
 		return pps_data;
 } 
 
 function _getButlerdata(link) {
+
+		let Component = <FormattedMessage id="health.Butler" description="Butler bots health" 
+              defaultMessage ="Butler bots"/>
+
 		let butlerAuditState = link.props.butlersData.Audit;
 		if(butlerAuditState === undefined || butlerAuditState === null) {
 			butlerAuditState = 0;
@@ -61,12 +68,16 @@ function _getButlerdata(link) {
 		let butlerError = 0;
 		let butlerOn = butlerPickPutState + butlerIdleState +  butlerAuditState;
 		const butler_data = [
-		{ component:{componentNumber: butlerTotal, componentType: 'Butler bots'}, states:{offState: butlerStopped, onState: butlerOn, errorState: butlerError} }
+		{ component:{componentNumber: butlerTotal, componentType: Component}, states:{offState: butlerStopped, onState: butlerOn, errorState: butlerError} }
 		]
 		return butler_data;
 } 
 
 function _getChargingdata(link) {
+
+		let Component = <FormattedMessage id="health.ChargingStation" description="Charging Stations health" 
+              defaultMessage ="Charging Stations"/>
+
 		let connected = link.props.chargersData.Connected;
 		if(connected === undefined || connected === null) {
 			connected = 0;
@@ -79,7 +90,7 @@ function _getChargingdata(link) {
 		let chargersStopped = disconnected;
 		let chargersError = 0;
 		const charging_data = [
-		{ component:{componentNumber: totalChargers, componentType: 'Charging Stations'}, states:{offState: chargersError , onState: connected, errorState: disconnected} }
+		{ component:{componentNumber: totalChargers, componentType: Component}, states:{offState: chargersError , onState: connected, errorState: disconnected} }
 		]
 		return charging_data;
 } 
