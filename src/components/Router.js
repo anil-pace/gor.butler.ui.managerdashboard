@@ -6,7 +6,7 @@ import ReactDOM  from 'react-dom';
 import { connect } from 'react-redux';
 import { Router, Route, hashHistory, IndexRoute} from 'react-router';
 import {loginRequest} from '../actions/loginAction';
-import Overview from '../containers/OverviewTab';
+import Overview from '../containers/OverviewTab'; 
 
 class Routes extends React.Component{
 	constructor(props) 

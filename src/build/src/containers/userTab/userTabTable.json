@@ -33,5 +33,10 @@
     "id": "user.table.logInTime",
     "description": "User log in time",
     "defaultMessage": "LOG IN TIME"
+  },
+  {
+    "id": "user.table.actions",
+    "description": "Actions for users",
+    "defaultMessage": "ACTIONS"
   }
 ]

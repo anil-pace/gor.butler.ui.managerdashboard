@@ -13,9 +13,6 @@ export  function putInfo(state={},action) {
           
           if(res.aggregate_data){
             putObj.value = res.aggregate_data.items_put;
-	        putObj.count_complete=res.aggregate_data.count_complete;
-	        
-            
 
           }
           return Object.assign({}, state, {
