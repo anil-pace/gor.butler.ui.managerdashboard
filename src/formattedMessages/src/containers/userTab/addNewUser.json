@@ -55,21 +55,6 @@
     "defaultMessage": "Grant access to the Operator Interface at each Pick Put Station in the Butler system"
   },
   {
-    "id": "users.add.roledetails.pick",
-    "description": "Text for pick operator",
-    "defaultMessage": "Pick Operator"
-  },
-  {
-    "id": "users.add.roledetails.put",
-    "description": "Text for put operator",
-    "defaultMessage": "Put Operator"
-  },
-  {
-    "id": "users.add.roledetails.audit",
-    "description": "Text for audit",
-    "defaultMessage": "Audit"
-  },
-  {
     "id": "users.add.roledetails.supervisor",
     "description": "Text for supervisor",
     "defaultMessage": "Supervisor"
