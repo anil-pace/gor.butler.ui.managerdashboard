@@ -74,22 +74,22 @@ input, select {
 /*Default Fonts*/
 @font-face {
   font-family: 'Source Sans Pro';
-  src: url("fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf") format("truetype");
+  src: url(/fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf) format("truetype");
 }
 
 @font-face {
   font-family: 'Source Sans Pro Bold';
-  src: url("fonts/Source_Sans_Pro/SourceSansPro-Bold.ttf") format("truetype");
+  src: url(/fonts/Source_Sans_Pro/SourceSansPro-Bold.ttf) format("truetype");
 }
 
 @font-face {
   font-family: 'Source Sans Pro Semibold';
-  src: url("fonts/Source_Sans_Pro/SourceSansPro-Semibold.ttf") format("truetype");
+  src: url(/fonts/Source_Sans_Pro/SourceSansPro-Semibold.ttf) format("truetype");
 }
 
 @font-face {
   font-family: 'Source Sans Pro Regular';
-  src: url("fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf") format("truetype");
+  src: url(/fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf) format("truetype");
 }
 
 body {
@@ -115,20 +115,14 @@ body {
 .header-online-icon,
 .header-offline-icon,
 .user-icon,
-.cbs-overview-pick,
-.cbs-overview-audit,
-.cbs-overview-put,
-.cbs-overview-rejection,
-.cbs-overview-chutes,
-.cbs-overview-casket,
 .overview-tile-ontime-icon,
-.cbs-overview-inducts, .statusOl, .statusAl, .iStock, .iAudit, .iPick, .gor-login-user, .gor-login-password, .gor-login-error, .iTick, .iQuestion {
-  background-image: url(images/icons.svg);
+.statusOl, .statusAl, .iStock, .iAudit, .iPick, .gor-login-user, .gor-login-password, .gor-login-error, .iTick, .iQuestion {
+  background-image: url(/images/icons.svg);
 }
 
 .fk-logo,
 .gor-logo {
-  background-image: url(images/Logos.svg);
+  background-image: url(/images/Logos.svg);
 }
 
 .gor-login-user {

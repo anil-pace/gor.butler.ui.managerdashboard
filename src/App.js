@@ -1,3 +1,4 @@
+
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import Tabs from './containers/tabs';
@@ -6,16 +7,17 @@ import {setWsAction ,setMockAction} from './actions/socketActions';
 import { WS_CONNECT,WS_ONSEND,WS_MOCK } from './constants/appConstants'
 import { wsInitData } from './constants/initData.js'
 import { REQUEST_HEADER, getFetchData } from './actions/headerAction'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'; 
+
 
 class App extends React.Component{ 
 	/**
 	 * Called once before rendering of component,used to displatch fetch action
 	 * @return {[type]}
-	 */
+	 */ 
 	constructor(props) 
 	{  
-    	super(props);
+    	super(props); 
   }	
   
   	componentWillMount(){
@@ -34,16 +36,11 @@ class App extends React.Component{
 
       if(!loginAuthorized)
                  this.context.router.push("/login");
-
-      if(MOCK === false){
-        if(loginAuthorized && !socketStatus)
-            this.props.initWebSocket() ; 
-      }
-      else{
-        this.props.initMockData(wsInitData) ;
-      }
       
       if(MOCK === false){
+        if(loginAuthorized && !socketStatus){
+            this.props.initWebSocket() ; 
+          }
         if (loginAuthorized &&socketStatus && !nextProps.socketAuthorized) {
              let webSocketData = {
                   'type': 'auth',
@@ -99,7 +96,7 @@ function mapStateToProps(state,ownProps) {
  	initDataSent: state.recieveSocketActions.initDataSent,
   intl: state.intl
  }
-}
+} 
 /**
  * Function to dispatch action values as props
  */
