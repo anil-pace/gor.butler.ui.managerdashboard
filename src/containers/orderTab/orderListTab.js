@@ -3,7 +3,7 @@
  * This will be switched based on tab click
  */
 import React  from 'react';
-import ReactDOM  from 'react-dom';
+
 
 
 class OrderListTab extends React.Component{
@@ -23,6 +23,6 @@ class OrderListTab extends React.Component{
 			</div>
 		);
 	}
-};
+}
 
 export default OrderListTab ;

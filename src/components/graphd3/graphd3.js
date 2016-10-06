@@ -1,5 +1,4 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import rd3 from 'react-d3-library';
 import * as d3 from 'd3';
 import Dimensions from 'react-dimensions'
@@ -135,7 +134,7 @@ class Chart extends React.Component{
         d3.selectAll(".bar").transition()
         .duration(250)
         .attr("opacity", function(d, j) {
-          return j != i ? 0.6 : 1;
+          return j !== i ? 0.6 : 1;
         });
       })
       .on("mousemove", function(d, i) {
@@ -181,16 +180,9 @@ class Chart extends React.Component{
     component.setState({d3: node});
     }
 
-    function type(d) {
-      return d;
-    }
+    
 
-    function make_x_axis() {        
-      return d3.svg.axis()
-      .scale(x)
-      .orient("bottom")
-      .ticks(5)
-    }
+    
 
     function make_y_axis() {        
       return d3.svg.axis()

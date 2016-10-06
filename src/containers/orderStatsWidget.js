@@ -1,5 +1,4 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import Dropdown from '../components/dropdown/dropdown.js';
 import { connect } from 'react-redux';
 import Chart from '../components/graphd3/graphd3';
@@ -27,7 +26,7 @@ class OrderStatsWidget extends React.Component{
       { value: 'PPS_AUDIT_PERFORMANCE', label: auditPerformance },
     ]
  	var renderWidget = this.props.statsWidget.statsWidget, chartRender;
-    var currentState = item[0], index = 0;
+    var index = 0;
 		if(renderWidget !== undefined || renderWidget !== null) {
 			for (var i = 0; i < item.length; i++) {
 				if(item[i].value === renderWidget) {

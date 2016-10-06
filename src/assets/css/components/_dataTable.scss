@@ -1270,7 +1270,11 @@ input[type="checkbox"]{
 
 }
 
-
+.gor-user-Logo-wrap {
+  display: inline-block;
+  padding-left: 24px;
+  padding-right: 24px;
+}
 
 
 
@@ -1303,3 +1307,4 @@ progress::-moz-progress-bar {
   border-width: 1px;
   box-shadow: 0 2px 5px grey inset;
 }
+

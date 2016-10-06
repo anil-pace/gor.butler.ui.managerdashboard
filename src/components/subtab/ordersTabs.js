@@ -3,7 +3,6 @@
  * This will be switched based on tab click
  */
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import SubTab from './subTab';
 import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
@@ -31,7 +30,7 @@ class OrderSubTab extends React.Component{
 			</div>
 		);
 	}
-};
+}
 
 function mapStateToProps(state, ownProps){
     

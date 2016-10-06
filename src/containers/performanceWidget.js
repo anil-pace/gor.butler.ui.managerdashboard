@@ -1,5 +1,4 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import Health from '../components/health/healthTabs.js';
 import Dropdown from '../components/dropdown/dropdown.js';
 import ChartHorizontal from '../components/graphd3/graph_horizontal';
@@ -9,32 +8,31 @@ import { FormattedMessage } from 'react-intl';
 
 
 function _getPPSdata(link) {
+	console.log("link")
+		console.log(link);
+		
 		let Component = <FormattedMessage id="health.pps" description="pps health" 
               defaultMessage ="PPS"/>
-
-		let ppsPickState = link.props.ppsData.pick;
-		if(ppsPickState === undefined || ppsPickState === null) {
-			ppsPickState = 0;
-		}
-		let ppsPutState = link.props.ppsData.put;
-		if(ppsPutState === undefined || ppsPutState === null) {
-			ppsPutState = 0;
-		}
-		let ppsAuditState = link.props.ppsData.audit;
-		if(ppsAuditState === undefined || ppsAuditState === null) {
-			ppsAuditState = 0;
-		}
-		let ppsInactiveState = link.props.ppsData.inactive;
-		if(ppsInactiveState === undefined || ppsInactiveState === null) {
-			ppsInactiveState = 0;
-		}
-		let ppsTotal = ppsPickState + ppsPutState + ppsAuditState + ppsInactiveState;
-		let ppsOn = ppsPickState + ppsPutState + ppsAuditState ;
-		let ppsStopped = ppsInactiveState;
-		let ppsError = 0;
-		const pps_data = [
-		{ component:{componentNumber: ppsTotal, componentType: Component}, states:{offState: ppsError, onState: ppsOn, errorState: ppsError} }
+		let ppsOn = 0, ppsOff = 0, ppsTotal = 0;
+		var pps_data = [
+		{ component:{componentNumber: ppsTotal, componentType: Component}, states:{offState: ppsOff, onState: ppsOn} }
 		]
+		if(link.ppsPerformance) {
+			link = link.ppsPerformance.aggregate_data;
+		for (var i = link.length - 1; i >= 0; i--) {
+			if(link[i].active === false) {
+				ppsOff++;
+			}
+
+			else {
+				ppsOn++;
+			}
+		}
+		ppsTotal = ppsOn + ppsOff;
+		pps_data = [
+		{ component:{componentNumber: ppsTotal, componentType: Component}, states:{offState: ppsOff, onState: ppsOn} }
+		]
+	}
 		return pps_data;
 } 
 
@@ -45,23 +43,23 @@ function _getButlerdata(link) {
 
 		let butlerAuditState = link.props.butlersData.Audit;
 		if(butlerAuditState === undefined || butlerAuditState === null) {
-			butlerAuditState = 0;
+			butlerAuditState = 0
 		}
 		let butlerChargingState = link.props.butlersData.Charging;
 		if(butlerChargingState === undefined || butlerChargingState === null) {
-			butlerChargingState = 0;
+			butlerChargingState = 0
 		}
 		let butlerIdleState = link.props.butlersData.Idle;
 		if(butlerIdleState === undefined || butlerIdleState === null) {
-			butlerIdleState = 0;
+			butlerIdleState = 0
 		}
 		let butlerInactiveState = link.props.butlersData.Inactive;
 		if(butlerInactiveState === undefined || butlerInactiveState === null) {
-			butlerInactiveState = 0;
+			butlerInactiveState = 0
 		}
 		let butlerPickPutState = link.props.butlersData["Pick / Put"];
 		if(butlerPickPutState === undefined || butlerPickPutState === null) {
-			butlerPickPutState = 0;
+			butlerPickPutState = 0
 		}
 		let butlerTotal = butlerAuditState + butlerChargingState + butlerIdleState + butlerInactiveState + butlerPickPutState;
 		let butlerStopped = butlerInactiveState;
@@ -106,7 +104,7 @@ class PerformanceWidget extends React.Component{
 	}
 
 	render(){
-
+		
 		let systemHealth = <FormattedMessage id="systemHealth.dropdown" description="systemHealth dropdown label" 
               defaultMessage ="System Health"/>
 
@@ -134,13 +132,13 @@ class PerformanceWidget extends React.Component{
 			}
 		}
 		var link = this;
-		var pps_data = _getPPSdata(link);
+		var pps_data = _getPPSdata(this.props.ppsPerformance);
 		var butler_data = _getButlerdata(link);
 		var charging_data=_getChargingdata(link);
 		
 	var itemRender;	
 	if(this.props.widget === "PICK_PPS_PERFORMANCE"){
-		itemRender = <ChartHorizontal data={this.props.ppsPerformance} type="items_picked"/>
+		itemRender = <ChartHorizontal data={this.props.ppsPerformance} type="orders_picked"/>
 	}
 
 	else if(this.props.widget === "PUT_PPS_PERFORMANCE"){

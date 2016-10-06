@@ -3,7 +3,6 @@
  * This will be switched based on tab click
  */
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import WavesTable from './waveTable';
 
 class WaveTab extends React.Component{
@@ -102,6 +101,6 @@ class WaveTab extends React.Component{
 			</div>
 		);
 	}
-};
+}
 
 export default WaveTab ;

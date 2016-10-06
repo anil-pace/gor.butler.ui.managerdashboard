@@ -2,7 +2,6 @@ import {WS_INIT,BUTLERS_DATA,PPS_DATA,PUT_DATA,AUDIT_DATA,INVENTORY_DATA,ORDERS_
 //import {getFetchData} from 'headerAction'
 
 export function receivePpsData(data){
-	
 	return{
 		type:PPS_DATA,
 		data

@@ -3,7 +3,6 @@
  * This will be switched based on tab click
  */
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import OrderStatsWidget from '../containers/orderStatsWidget'
 import PerformanceWidget from '../containers/performanceWidget'
 import AuditStatusWidget from '../containers/auditStatusWidget'
@@ -38,17 +37,6 @@ class Overview extends React.Component{
 			</div>
 		);
 	}
-};
+}
  
- 
-
-// function mapStateToProps(state, ownProps){
-// 	return {
-//         putData: state.putInfo.putData,
-//         ppsData:state.ppsInfo.ppsData,
-//         throughputData : state.throughputInfo.throughputData,
-//         auditData: state.auditInfo.auditData
-//     };
-// }
-
 export 	default Overview;

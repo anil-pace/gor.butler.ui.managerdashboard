@@ -37,7 +37,7 @@ class Tabs extends React.Component{
     let system = <FormattedMessage id="system.tab.heading" description="system tab" 
               defaultMessage ="SYSTEM"/>
               
-    let orders = <FormattedMessage id="orders.tab.heading" description="orders tab" 
+    let order = <FormattedMessage id="orders.tab.heading" description="orders tab" 
               defaultMessage ="ORDERS"/>
               
     let users = <FormattedMessage id="users.tab.heading" description="users tab" 
@@ -62,7 +62,7 @@ class Tabs extends React.Component{
       { tab: system, Status: systemStatus, currentState:'gorOnline' }
     ]
     const item3 = [
-      { tab: orders, Status: ordersStatus, currentState:'gorError' }
+      { tab: order, Status: ordersStatus, currentState:'gorError' }
     ]
     
     const item5 = [

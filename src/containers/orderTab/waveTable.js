@@ -8,7 +8,6 @@ import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell
 class WavesTable extends React.Component {
   constructor(props) {
     super(props);
-    var temp = new Array(this.props.items.length).fill(false);
     this._dataList = new tableRenderer(this.props.items.length);
     this._defaultSortIndexes = [];
     this._dataList.newData=this.props.items;
@@ -53,9 +52,6 @@ class WavesTable extends React.Component {
     });
   }
   
-  handlChange(columnKey,rowIndex) {
-    
-  }
   _onSortChange(columnKey, sortDir) {
     var sortIndexes = this._defaultSortIndexes.slice();
     this.setState({

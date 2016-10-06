@@ -35,13 +35,11 @@
     "defaultMessage": "Completing in {eta}"
   },
   {
-
     "id": "widget.pick.statusright",
     "description": "Text for on schedule",
     "defaultMessage": "{wave_end}"
   },
   {
-
     "id": "widget.pick.statusleft.onschedule",
     "description": "Text for on schedule",
     "defaultMessage": "On Schedule"
@@ -50,10 +48,5 @@
     "id": "widget.pick.statusleft.atrisk",
     "description": "Text for orders at risk",
     "defaultMessage": "{count_risk} {count_risk, plural, one {order} other {orders}} at risk"
-  },
-  {
-    "id": "widget.pick.statusright",
-    "description": "Text for on schedule",
-    "defaultMessage": "{wave_end}"
   }
 ]

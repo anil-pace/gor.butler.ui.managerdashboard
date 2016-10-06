@@ -57,6 +57,17 @@ export class DataListWrapper {
     );
   }
 }
+ 
+export const ActionCell = ({rowIndex, data, columnKey, ...props}) => (
+  <Cell {...props}>
+    <div className="gor-user-Logo-wrap">
+      <div className="user-edit-icon"/>
+    </div>
+    <div className="gor-user-Logo-wrap">
+      <div className="user-del-icon"/>
+    </div>  
+  </Cell>
+);
 
 export const TextCell = ({rowIndex, data, columnKey, ...props}) => (
   <Cell {...props}>

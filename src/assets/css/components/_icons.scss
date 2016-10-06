@@ -1,6 +1,7 @@
 
 
-
+.user-edit-icon,
+.user-del-icon,
 .dropdown-arrow-icon,
 .searchbox-cross-icon,
 .searchbox-magnifying-glass-icon,
@@ -167,4 +168,15 @@ background-position: -101px -52px;
     margin-right:20px;
     display:inline-block;
     vertical-align:middle;
+}
+
+.user-edit-icon {
+    background-position: -171px 42px;
+    width: 16px;
+    height: 16px;
+}
+.user-del-icon {
+    background-position: -188px -75px;
+    width: 16px;
+    height: 18px;
 }

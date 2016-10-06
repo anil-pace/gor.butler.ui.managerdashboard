@@ -50,7 +50,7 @@ plugins: [
   new webpack.optimize.CommonsChunkPlugin('common.js',"assets/common.js"),
   //End
   new webpack.DefinePlugin({
-    MOCK: true
+    MOCK: false
 }),
   new webpack.optimize.DedupePlugin(),
   new HtmlWebpackPlugin({

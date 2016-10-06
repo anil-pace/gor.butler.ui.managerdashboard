@@ -3,32 +3,31 @@
  * This will be switched based on tab click
  */
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import SubTab from './subTab';
 import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
 import { FormattedMessage } from 'react-intl';
 import {subTabSelected} from '../../actions/subTabSelectAction'
-import {NOTIFICATION,BUTLERBOTS,PPS,CHARGING,NOTIFICATION_TAB,BUTLERBOTS_TAB,PPS_TAB,CHARGING_TAB} from '../../constants/appConstants'
+import {NOTIFICATION,BUTLERBOTS,PPS,CHARGING} from '../../constants/appConstants'
 
 class SystemTab extends React.Component{
 	constructor(props) 
 	{
     	super(props);
     }
-    handleNotificationClick(data){
+    handleNotificationClick(){
     	var temp = NOTIFICATION;
     	this.props.subTabSelected(temp)
     }
-    handleButlerbotsClick(data){
+    handleButlerbotsClick(){
     	var temp = BUTLERBOTS;
     	this.props.subTabSelected(temp)
     }
-    handlePpsClick(data){
+    handlePpsClick(){
     	var temp = PPS;
     	this.props.subTabSelected(temp)
     }
-    handleChargingstationClick(data){
+    handleChargingstationClick(){
     	var temp = CHARGING;
     	this.props.subTabSelected(temp)
     }
@@ -69,7 +68,7 @@ class SystemTab extends React.Component{
 			</div>
 		);
 	}
-};
+}
 
 function mapStateToProps(state, ownProps){
     

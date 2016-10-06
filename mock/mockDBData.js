@@ -876,7 +876,7 @@ export const resTypePPSdetail = {
 
 export const resTypeUsersDetails = {
     
-    "aggregate_data": [{
+    "data": [{
    	 "name": "mahesh Kumar",
      "user_id": 12,
    	 "status": 0, 
