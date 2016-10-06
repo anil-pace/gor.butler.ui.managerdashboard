@@ -83,5 +83,10 @@ export const HISTOGRAM_DETAILS = "histogram_details";
 /*Constants for type of AJAX call*/
 export const AUTH_LOGIN = "AUTH_LOGIN";
 
+/*Constants for Error checking*/
+export const ID_DATA = "ID_DATA";
+export const NAME_DATA = "NAME_DATA";
+export const PASSWORD_DATA = "PASSWORD_DATA";
+export const INFO_RESET = "ERROR_RESET";
 
 

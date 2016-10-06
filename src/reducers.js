@@ -22,6 +22,7 @@ import {tabSelected} from './reducers/tabSelectReducer'
 import {subTabSelected} from './reducers/subTabSelectReducer'
 import {reducer as modalReducer} from 'react-redux-modal'
 import {PPSperformance} from './reducers/ppsPerformanceReducer'
+import {appInfo} from './reducers/infoReducer'
 
 
 const rootReducer = combineReducers({
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
   butlersInfo,
   chargerInfo,
   modals: modalReducer,
+  appInfo,
   auditInfo,
   putInfo,
   ppsInfo,

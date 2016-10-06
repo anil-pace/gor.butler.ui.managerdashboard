@@ -1,58 +1,36 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-import { FormattedMessage,FormattedPlural } from 'react-intl';        
+import { FormattedMessage,FormattedPlural } from 'react-intl'; 
+import {validateID, validateName, validatePassword, resetForm} from '../../actions/validationActions';
+import { connect } from 'react-redux';
+import FieldError from '../../components/fielderror/fielderror';
+
 class AddUser extends React.Component{
   constructor(props) 
   {
-      super(props);  
+      super(props); 
   }
   removeThisModal() {
+    this.props.resetForm();
     this.props.removeModal();
   }
   _checkId(){
-        let userid=this.userId.value;
-        if(!userid)
-        {
-          this.idError.style.display='block';
-          this.idPass.style.display='none';          
-        }
-        else
-        {
-          this.idError.style.display='none';
-          this.idPass.style.display='inline-block';          
-        }     
+    let data1={userid:this.userId.value};
+    this.props.validateID(data1);
   }
   _checkName(){
-     let firstname=this.firstName.value,
-        lastname=this.lastName.value;
-     if(!firstname||!lastname||firstname.length>50||lastname.length>50)
-      {
-          this.nameError.style.display='block';
-          this.namePass.style.display='none';          
-      }
-      else
-      {
-          this.nameError.style.display='none';
-          this.namePass.style.display='inline-block';                  
-      }
-
-  }
+     let data2={
+        firstname:this.firstName.value,
+        lastname:this.lastName.value
+     };
+     this.props.validateName(data2);
+   }
   _checkPwd(){
-    let pwd1,pwd2;
-    pwd1=this.password1.value;
-    pwd2=this.password2.value;   
-    if(pwd1!==pwd2)
-    {
-          this.passError.style.display='block';      
-          this.pwdPass1.style.display='none';
-          this.pwdPass2.style.display='none';
-    }
-    else
-    {
-          this.passError.style.display='none';      
-          this.pwdPass1.style.display='inline-block';
-          this.pwdPass2.style.display='inline-block';
-    }
+    let data3={
+    pwd1:this.password1.value,
+    pwd2:this.password2.value
+    };   
+    this.props.validatePassword(data3);
   }
   _handleAddUser(e){
         e.preventDefault();
@@ -88,6 +66,8 @@ class AddUser extends React.Component{
   }
   render()
   {
+      let tick=(<div className='iTick'/>);
+
       return (
         <div>
           <div className="gor-modal-content">
@@ -112,20 +92,22 @@ class AddUser extends React.Component{
             
              <div className='gor-usr-hdsm'><FormattedMessage id="users.add.userdetails.userid" description='Text for user id' 
             defaultMessage='User ID'/></div>
-              <input className='gor-usr-fdlg' type="text" onChange={this._checkId.bind(this)} placeholder="User Id" id="userid"  ref={node => { this.userId = node }}/><div className='gor-id-val iTick'  ref={node => { this.idPass = node }}/>
-                <div className='gor-add-id-error' ref={node => { this.idError = node }} ><div className='gor-login-error'></div> Invalid user ID, please try again</div>
+              <input className={"gor-usr-fdlg"+(this.props.idCheck.isValid===false?' gor-input-error':' gor-input-ok')} type="text" onBlur={this._checkId.bind(this)} placeholder="User Id" id="userid"  ref={node => { this.userId = node }} />
+              {this.props.idCheck.isValid?tick:((this.props.idCheck.isValid===false)?<FieldError txt={this.props.idCheck.msg} />:'')}
+          
        
               <div className='gor-usr-field'>
                 <div className='gor-usr-hdsm'><FormattedMessage id="users.add.userdetails.firstname" description='Text for first name' 
             defaultMessage='First Name'/></div>
-                <input className='gor-usr-fdsm' onChange={this._checkName.bind(this)} type="text" placeholder="First Name" id="firstname"  ref={node => { this.firstName = node }}/>
+                <input className={"gor-usr-fdsm"+(this.props.nameCheck.isValid==false?' gor-input-error':' gor-input-ok')}  onBlur={this._checkName.bind(this)} type="text" placeholder="First Name" id="firstname"  ref={node => { this.firstName = node }}/>
               </div>
               <div className='gor-usr-field'>              
                 <div className='gor-usr-hdsm'><FormattedMessage id="users.add.userdetails.lastname" description='Text for last name' 
             defaultMessage='Last Name'/></div>
-                <input className='gor-usr-fdsm'  onChange={this._checkName.bind(this)} type="text" placeholder="Last Name" id="lastname"  ref={node => { this.lastName = node }}/>
-              </div><div className='gor-name-val iTick'  ref={node => { this.namePass = node }}/>
-                <div className='gor-add-name-error' ref={node => { this.nameError = node }} ><div className='gor-login-error'></div> Please enter valid user name</div>
+                <input className={"gor-usr-fdsm"+(this.props.nameCheck.isValid===false?' gor-input-error':' gor-input-ok')}  onBlur={this._checkName.bind(this)} type="text" placeholder="Last Name" id="lastname"  ref={node => { this.lastName = node }}/>
+              </div>
+              {this.props.nameCheck.isValid?tick:((this.props.nameCheck.isValid===false)?<FieldError txt={this.props.nameCheck.msg} />:'')}
+
             </div>
 
             <div className='gor-usr-details'>
@@ -174,13 +156,13 @@ class AddUser extends React.Component{
 
               <div className='gor-usr-hdsm'><FormattedMessage id="users.add.password.field1" description='Text for password' 
             defaultMessage='Password'/></div>
-              <input className='gor-usr-fdlg' onChange={this._checkPwd.bind(this)} type="password" id="password1"  ref={node => { this.password1 = node }}/><div className='gor-pass-val iTick'  ref={node => { this.pwdPass1 = node }}/>
-                <div className='gor-add-pass-error' ref={node => { this.passError = node }} ><div className='gor-login-error'></div> Password do not match</div>
+              <input className={"gor-usr-fdlg"+(this.props.passwordCheck.isValid===false?' gor-input-error':' gor-input-ok')} onBlur={this._checkPwd.bind(this)} type="password" id="password1"  ref={node => { this.password1 = node }}/>     
+              {this.props.passwordCheck.isValid?tick:''}
 
               <div className='gor-usr-hdsm'><FormattedMessage id="users.add.password.field2" description='Text for confirm password' 
             defaultMessage='Confirm Password'/></div>
-              <input className='gor-usr-fdlg' onChange={this._checkPwd.bind(this)} type="password" id="password2"  ref={node => { this.password2 = node }}/><div className='gor-pass-val iTick'  ref={node => { this.pwdPass2 = node }} />
-                <div className='gor-add-pass-error' ref={node => { this.passError = node }} ><div className='gor-login-error'></div> Password do not match</div>
+              <input className={"gor-usr-fdlg"+(this.props.passwordCheck.isValid===false?' gor-input-error':' gor-input-ok')} onBlur={this._checkPwd.bind(this)} type="password" id="password2"  ref={node => { this.password2 = node }}/>
+              {this.props.passwordCheck.isValid?tick:((this.props.passwordCheck.isValid===false)?<FieldError txt={this.props.passwordCheck.msg} />:'')}
 
             </div>
             <p className='gor-submit'>
@@ -196,4 +178,23 @@ class AddUser extends React.Component{
       );
     }
   }
-export default AddUser;
+
+function mapStateToProps(state, ownProps){
+  console.log(state);
+  return {
+      idCheck: state.appInfo.idInfo || {},
+      nameCheck: state.appInfo.nameInfo || {},
+      passwordCheck: state.appInfo.passwordInfo || {}      
+  };
+}
+
+var mapDispatchToProps = function(dispatch){
+  return {
+    validateID: function(data){ dispatch(validateID(data)); },
+    validateName: function(data){ dispatch(validateName(data)); },
+    validatePassword: function(data){ dispatch(validatePassword(data)); },
+    resetForm:   function(){ dispatch(resetForm()); }
+  }
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(AddUser) ;

@@ -42,6 +42,7 @@ const ajaxMiddleware = (function(){
     };
     httpRequest.open(params.method, params.url);
     httpRequest.setRequestHeader('Content-Type', params.contentType || "text/html");
+    httpRequest.setRequestHeader('Accept', params.accept || "text/html");
     httpRequest.send(loginData);
     break;
 
