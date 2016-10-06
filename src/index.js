@@ -4,9 +4,9 @@
 
 // Importing third party libraries
 
-import React  from 'react';
+import React  from 'react'; 
 import ReactDOM  from 'react-dom';
-import { Provider,connect } from 'react-redux';
+import { Provider,connect } from 'react-redux'; 
 
 
 /**

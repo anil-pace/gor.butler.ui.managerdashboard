@@ -32,7 +32,7 @@ const socketMiddleware = (function(){
       //The user wants us to connect
       case WS_CONNECT:
         //Start a new connection to the server
-        if(socket != null) {
+        if(socket !== null) {
           socket.close();
         }
         //Send an action that shows a "connecting..." status for now
@@ -48,7 +48,7 @@ const socketMiddleware = (function(){
 
       //The user wants us to disconnect
       case WS_DISCONNECT:
-        if(socket != null) {
+        if(socket !== null) {
           socket.close();
         }
         socket = null;

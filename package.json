@@ -5,13 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/jest/bin/jest.js",
-    "webpack": "echo '=>Web-Pack' && webpack  --optimize-dedupe --display-error-details",
+    "webpack": "echo '=>Web-Pack' && TARGET=$npm_package_config_TARGET  MOCK=$npm_package_config_MOCK webpack  --optimize-dedupe --display-error-details --optimize-minimize",
     "build-sass": "echo '=>Build SASS' && node-sass  --output-style expanded $npm_package_config_srcCss  $npm_package_config_destinationCss  ",
     "watch-sass": "node-sass --output-style expanded  $npm_package_config_watchCssSrc $npm_package_config_watchCssDist -v",
     "lint": "eslint src/**/*.js --cache --ignore-pattern .gitignore",
     "build-js": "npm run webpack",
     "watch:css": "onchange 'src/assets/css/**/*.scss' -- npm run build-sass ",
-    "build": " npm run build-js && npm run build-sass",
+    "build:dev:unmock": " npm config set butlerui-manager-dashboard:TARGET DEV && npm config set butlerui-manager-dashboard:MOCK false && npm run build-js && npm run build-sass && webpack-dev-server",
+    "build:dev:mock": " npm config set butlerui-manager-dashboard:TARGET DEV && npm config set butlerui-manager-dashboard:MOCK true && npm run build-js && npm run build-sass && webpack-dev-server",
+    "build:prod:unmock": "npm config set butlerui-manager-dashboard:TARGET PROD  && npm config set butlerui-manager-dashboard:MOCK false && npm run build-js && npm run build-sass ",
+    "build:prod:mock": "npm config set butlerui-manager-dashboard:TARGET PROD && npm config set butlerui-manager-dashboard:MOCK true && npm run build-js && npm run build-sass ",
     "watch:js": "npm run build && onchange 'src/**/*.js' -- npm run build-js",
     "watch:all": "parallelshell 'npm run watch:css' 'npm run watch:js'"
   },
@@ -25,7 +28,9 @@
     "destinationJs": "./dist/assets/bundle.js",
     "srcJs": "src/index.js",
     "watchCssSrc": "src/assets/css/*.scss",
-    "watchCssDist": "dist/assets/bundle.css"
+    "watchCssDist": "dist/assets/bundle.css",
+    "TARGET":"DEV",
+    "MOCK":"false"
   },
   "keywords": [
     "Manager",
@@ -36,6 +41,9 @@
   ],
   "author": "GOR Butler UI Team",
   "license": "ISC",
+  "bin": {
+    "build-md": "bin/npmCommands.sh"
+  },
   "homepage": "https://bitbucket.org/arsh_greyOrange/gor.butler.ui.managerdashboard#readme",
   "devDependencies": {
     "argv": "0.0.2",
@@ -61,6 +69,7 @@
     "eslint-plugin-promise": "^2.0.1",
     "eslint-plugin-react": "^6.1.2",
     "eslint-plugin-standard": "^2.0.0",
+    "extract-text-webpack-plugin": "^1.0.1",
     "fs": "0.0.1-security",
     "glob": "^7.0.6",
     "html-webpack-plugin": "^2.22.0",
@@ -76,6 +85,7 @@
     "react-addons-test-utils": "^15.2.0",
     "react-d3-library": "^1.1.7",
     "react-dom": "^15.3.1",
+    "react-hot-loader": "^3.0.0-beta.5",
     "react-intl-webpack-plugin": "0.0.3",
     "react-redux": "^4.4.5",
     "react-router": "^2.7.0",
@@ -111,4 +121,5 @@
       "<rootDir>/node_modules/babel-runtime/"
     ]
   }
+ 
 }

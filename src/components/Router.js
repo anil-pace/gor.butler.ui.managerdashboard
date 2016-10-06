@@ -13,12 +13,13 @@ class Routes extends React.Component{
     	super(props);
        
     }
-   requireAuth(nextState, replaceState ) {
+   requireAuth(nextState, replace ) {
   		if (sessionStorage.getItem('auth_token')) 
   		{
   			this.props.loginRequest();
-    		replaceState({ nextPathname: nextState.location.pathname }, '/overview',nextState.location.query)
+    		replace({ nextPathname: nextState.location.pathname }, '/overview',nextState.location.query)
  	 	}
+ 	 	
 	}
     render(){
 		return (
