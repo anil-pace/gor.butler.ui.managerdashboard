@@ -4,8 +4,8 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var isDev = process.env.TARGET === "DEV" ? true :false;
-var isMock = process.env.MOCK === "true" ? true :false;
+var isDev = (process.env.TARGET === "DEV" ? true :false);
+var isMock = (process.env.MOCK === "true" ? true :false);
 
 console.log("Environment:"+process.env.TARGET);
 console.log("Mocking:"+process.env.MOCK);
@@ -56,7 +56,8 @@ function getPlugins(){
                     from: 'index.html',
                     to: ''
                 }
-            ])
+            ]),
+            new webpack.HotModuleReplacementPlugin()
         ]
     if(!isDev){
         plugins.push(new webpack.optimize.UglifyJsPlugin({
@@ -69,7 +70,7 @@ function getPlugins(){
                 },
                 sourceMap: true
             }));
-        plugins.push(new webpack.HotModuleReplacementPlugin());
+        
     }
     return plugins;
 }
