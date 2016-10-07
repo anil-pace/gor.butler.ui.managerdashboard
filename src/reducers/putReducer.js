@@ -4,7 +4,7 @@ import {PUT_DATA} from '../constants/appConstants';
  * @param  {Action object}
  * @return {[Object] updated state}
  */
-export  function putInfo(state={},action) {
+export  function putInfo(state={},action) { 
   switch (action.type) {
     case PUT_DATA:
           let putObj={},
@@ -12,7 +12,7 @@ export  function putInfo(state={},action) {
           totalPut = 5;//state.ppsInfo.ppsData.totalPut;
           
           if(res.aggregate_data){
-            putObj.value = res.aggregate_data.items_put;
+            putObj.value = res.aggregate_data.items_put; 
 
           }
           return Object.assign({}, state, {

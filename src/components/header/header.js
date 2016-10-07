@@ -12,19 +12,10 @@ class Header extends React.Component{
 	{
     	super(props);
     	if(dropdownFlag === 0) {
-    		temp="dropdown-content";
+    		temp="dropdown-content"; 
     	}
     	
     	 
-    }
-    componentDidMount(){
-    	
-    }	
-    componentWillMount(){
-    	
-    }
-    componentWillReceiveProps(nextProps){
-    	
     }
 
     openDropdown() {
