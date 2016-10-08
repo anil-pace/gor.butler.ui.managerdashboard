@@ -1,6 +1,8 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-import UserDataTable from './userTab/userTabTable'
+import UserDataTable from './userTab/userTabTable';
+import Loader from '../components/loader/Loader';
+import { connect } from 'react-redux'; 
 
 class UsersTab extends React.Component{
 	constructor(props) 
@@ -97,15 +99,19 @@ class UsersTab extends React.Component{
 		 */
 		
 		return (
-			<div>
-				<div>
 					<div className="gorTesting">
+          <Loader isLoading={this.props.isLoading} />
 						<UserDataTable items={temp_data} itemNumber={itemNumber}/>
 					</div>
-				</div>
-			</div>
 		);
 	}
 };
 
-export default UsersTab ;
+function mapStateToProps(state,ownProps) {
+ return {
+  isLoading:state.loader.isLoading
+ }
+} 
+
+export  default connect(mapStateToProps)(UsersTab);
+

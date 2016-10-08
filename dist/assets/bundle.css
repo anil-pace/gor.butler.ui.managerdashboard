@@ -71,6 +71,22 @@ input, select {
   vertical-align: middle;
 }
 
+.loader {
+  background-image: url(../images/loading.gif);
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: none;
+  z-index: 998;
+  height: 100vh;
+  top: 0px;
+}
+
 /*Default Fonts*/
 @font-face {
   font-family: 'Source Sans Pro';
@@ -2433,6 +2449,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .gorTesting {
   width: 100%;
   height: 30rem;
+  position: relative;
 }
 
 .gorTableMainContainer {

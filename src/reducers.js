@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import {getData}  from './reducers/headerReducer'
 import {authLogin}  from './reducers/loginReducer'
+import {loader}  from './reducers/loaderReducer'
 import {recieveSocketActions}  from './reducers/socketReducer'
 import { routerReducer as routing } from 'react-router-redux';
 import {intlReducer} from 'react-intl-redux'
@@ -49,7 +50,8 @@ const rootReducer = combineReducers({
   PPSDetail,
   tabSelected,
   subTabSelected,
-  PPSperformance
+  PPSperformance,
+  loader
    })
 
 export default rootReducer

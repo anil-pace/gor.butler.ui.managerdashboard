@@ -39,16 +39,5 @@ class Overview extends React.Component{
 		);
 	}
 };
- 
- 
-
-// function mapStateToProps(state, ownProps){
-// 	return {
-//         putData: state.putInfo.putData,
-//         ppsData:state.ppsInfo.ppsData,
-//         throughputData : state.throughputInfo.throughputData,
-//         auditData: state.auditInfo.auditData
-//     };
-// }
 
 export 	default Overview;

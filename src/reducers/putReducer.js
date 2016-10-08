@@ -8,8 +8,7 @@ export  function putInfo(state={},action) {
   switch (action.type) {
     case PUT_DATA:
           let putObj={},
-          res = action.data,
-          totalPut = 5;//state.ppsInfo.ppsData.totalPut;
+          res = action.data
           
           if(res.aggregate_data){
             putObj.value = res.aggregate_data.items_put; 
