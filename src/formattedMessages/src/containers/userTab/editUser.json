@@ -45,7 +45,7 @@
     "defaultMessage": "User will be given a specific level of control over the Butler system depending on the designated role"
   },
   {
-    "id": "users.edit.roledetails.operator",
+    "id": "users.add.roledetails.operator",
     "description": "Text for operator",
     "defaultMessage": "Operator"
   },
@@ -55,22 +55,7 @@
     "defaultMessage": "Grant access to the Operator Interface at each Pick Put Station in the Butler system"
   },
   {
-    "id": "users.edit.roledetails.pick",
-    "description": "Text for pick operator",
-    "defaultMessage": "Pick Operator"
-  },
-  {
-    "id": "users.edit.roledetails.put",
-    "description": "Text for put operator",
-    "defaultMessage": "Put Operator"
-  },
-  {
-    "id": "users.edit.roledetails.audit",
-    "description": "Text for audit",
-    "defaultMessage": "Audit"
-  },
-  {
-    "id": "users.edit.roledetails.supervisor",
+    "id": "users.add.roledetails.supervisor",
     "description": "Text for supervisor",
     "defaultMessage": "Supervisor"
   },
@@ -85,7 +70,7 @@
     "defaultMessage": "Manager"
   },
   {
-    "id": "users.edit.roledetails.managertext",
+    "id": "users.add.roledetails.managertext",
     "description": "Subtext for manager",
     "defaultMessage": "Grant access to the Management Interface and Operator Interface to all systems"
   },
@@ -100,12 +85,12 @@
     "defaultMessage": "Min of 6 digits will be required for logging into the Operator Interface"
   },
   {
-    "id": "users.edit.changepassword.field1",
+    "id": "users.edit.password.field1",
     "description": "Text for password",
     "defaultMessage": "Password"
   },
   {
-    "id": "users.edit.changepassword.field2",
+    "id": "users.edit.password.field2",
     "description": "Text for confirm password",
     "defaultMessage": "Confirm Password"
   },

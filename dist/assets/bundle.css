@@ -145,6 +145,7 @@ body {
   height: 16px;
   display: inline-block;
   vertical-align: middle;
+  margin-right: 10px;
 }
 
 .alt-gor-logo {
@@ -262,7 +263,8 @@ body {
   background-position: -26px -52px;
   width: 24px;
   height: 24px;
-  margin-left: 20px;
+  margin-top: 9px;
+  margin-left: 15px;
   display: inline-block;
   vertical-align: middle;
 }
@@ -2625,6 +2627,21 @@ input[type="checkbox"] {
   margin-left: 50px;
 }
 
+.gor-field-error {
+  text-align: left;
+  color: #EC1C24;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.gor-input-error {
+  border: 1px solid #EC1C24;
+}
+
+.gor-input-ok {
+  border: 1px solid #AAAAAA;
+}
+
 .gor-usr-add {
   display: inline-block;
   width: 70%;
@@ -2683,42 +2700,6 @@ input[type="checkbox"] {
   color: #666666;
 }
 
-.gor-modal-content .gor-id-val {
-  display: none;
-}
-
-.gor-modal-content .gor-name-val {
-  display: none;
-}
-
-.gor-modal-content .gor-pass-val {
-  display: none;
-}
-
-.gor-modal-content .gor-add-id-error {
-  display: none;
-  text-align: left;
-  color: #EC1C24;
-  font-size: 18px;
-  margin-top: 10px;
-}
-
-.gor-modal-content .gor-add-name-error {
-  display: none;
-  text-align: left;
-  color: #EC1C24;
-  font-size: 18px;
-  margin-top: 10px;
-}
-
-.gor-modal-content .gor-add-pass-error {
-  display: none;
-  text-align: left;
-  color: #EC1C24;
-  font-size: 18px;
-  margin-top: 10px;
-}
-
 .gor-modal-content .gor-usr-details {
   width: 33%;
   margin: auto;
@@ -2759,7 +2740,6 @@ input[type="checkbox"] {
   width: 70%;
   background-color: #FFFFFF;
   border-radius: 3px;
-  border: 1px solid #AAAAAA;
 }
 
 .gor-modal-content .gor-usr-details .gor-usr-fdlg:hover {
@@ -2773,7 +2753,7 @@ input[type="checkbox"] {
 
 .gor-modal-content .gor-usr-details .gor-usr-field {
   display: inline-block;
-  width: 37%;
+  width: 38%;
 }
 
 .gor-modal-content .gor-usr-details .gor-usr-field .gor-usr-fdsm {
@@ -2781,10 +2761,8 @@ input[type="checkbox"] {
   text-align: left;
   margin-top: 0.625rem;
   padding: 0.625rem;
-  width: 75%;
   background-color: #FFFFFF;
   border-radius: 3px;
-  border: 1px solid #AAAAAA;
 }
 
 .gor-modal-content .gor-usr-details .gor-usr-field .gor-usr-fdsm:hover {
@@ -2978,4 +2956,54 @@ input[type="checkbox"] {
 .gor-notify-top {
   min-height: 40px;
   text-align: center;
+  top: 0;
+  position: fixed;
+}
+
+.gor-align-middle {
+  vertical-align: middle;
+}
+
+.gor-align-sub {
+  vertical-align: sub;
+}
+
+.gor-delete {
+  width: 50%;
+  min-height: 16.25rem;
+  background: #ffffff;
+  border-radius: 3px;
+  font-size: 20px;
+  margin: auto;
+  clear: both;
+}
+
+.gor-delete .gor-delete-text {
+  margin: auto;
+  padding: 1.875rem;
+  min-height: 9.375rem;
+}
+
+.gor-delete .gor-delete-text .gor-delete-line {
+  display: inline-block;
+}
+
+.gor-delete .gor-delete-text .gor-delete-line .gor-delete-query {
+  display: inline;
+}
+
+.gor-delete .gor-delete-bottom {
+  text-align: right;
+  margin-right: 1.25rem;
+}
+
+.gor-delete .gor-delete-btn {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  width: 7.0625rem;
+  height: 2.1875rem;
+  font-size: 14px;
+  background: #f36f36;
+  color: #ffffff;
+  border-radius: 3px;
+  display: inline-block;
 }

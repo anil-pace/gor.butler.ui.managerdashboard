@@ -1,4 +1,6 @@
-import {ID_DATA,NAME_DATA,PASSWORD_DATA,INFO_RESET} from '../constants/appConstants'; 
+import {ID_DATA,NAME_DATA,PASSWORD_DATA,INFO_RESET,ID_BACKEND,ERROR,SUCCESS,INFO} from '../constants/appConstants'; 
+import {US001,US002,UE001} from '../constants/messageConstants'; 
+
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -6,19 +8,21 @@ import {ID_DATA,NAME_DATA,PASSWORD_DATA,INFO_RESET} from '../constants/appConsta
  */
 export  function appInfo(state={},action){
   switch (action.type) {
+    case ID_BACKEND:
+
     case ID_DATA:
           let userid=action.data.userid, idInfo;
           if(userid.length<1)
           {
             idInfo={
-              isValid:false,
+              type:ERROR,
               msg:'Please enter a valid User ID'           
             }
           }
           else
           {
             idInfo={
-              isValid:true,
+              type:SUCCESS,
               msg:'Succesfull'               
             };            
           }
@@ -32,21 +36,21 @@ export  function appInfo(state={},action){
           if(firstname.length<1||lastname.length<1||firstname.length>50||lastname.length>50)
           {
             nameInfo={
-              isValid:false,
+              type:ERROR,
               msg:'Please enter a valid User Name'           
             }
           }
           else if(format.test(firstname)||format.test(lastname))
           {
             nameInfo={
-              isValid:false,
+              type:ERROR,
               msg:'Special characters "~","@" and "%" are not allowed'           
             }            
           }
           else
           {
             nameInfo={
-              isValid:true,
+              type:SUCCESS,
               msg:'Succesfull'               
             };            
           }
@@ -61,21 +65,21 @@ export  function appInfo(state={},action){
           if(pwd1.length<6||pwd2.length<6)
           {
             passwordInfo={
-              isValid:false,
+              type:ERROR,
               msg:'Minimum 6 characters required'           
             };            
           }
           else if(pwd1!=pwd2)
           {
             passwordInfo={
-              isValid:false,
+              type:ERROR,
               msg:'Passwords do not match'           
             };            
           }
           else
           {
             passwordInfo={
-              isValid:true,
+              type:SUCCESS,
               msg:'Succesfull'               
             };            
           }

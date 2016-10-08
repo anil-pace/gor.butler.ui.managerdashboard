@@ -1,6 +1,12 @@
-import {ID_DATA,NAME_DATA,PASSWORD_DATA,INFO_RESET} from '../constants/appConstants'
+import {ID_DATA,NAME_DATA,PASSWORD_DATA,INFO_RESET,ID_BACKEND} from '../constants/appConstants'
 //import {getFetchData} from 'headerAction'
+export function backendID(data){
 
+	return{
+		type:ID_BACKEND,
+		data
+	}
+}
 export function validateID(data){
 	
 	return{
@@ -21,8 +27,7 @@ export function validatePassword(data){
 		data
 	}
 }
-export function resetForm(){
-	
+export function resetForm(){	
 	return{
 		type:INFO_RESET,
 	}

@@ -1,6 +1,11 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-import { FormattedMessage,FormattedPlural } from 'react-intl';        
+import { FormattedMessage,FormattedPlural } from 'react-intl';  
+import {validateName, validatePassword, resetForm} from '../../actions/validationActions';
+import { connect } from 'react-redux';
+import {ERROR} from '../../constants/appConstants';
+import FieldError from '../../components/fielderror/fielderror';
+
 class EditUser extends React.Component{
   constructor(props) 
   {
@@ -10,40 +15,22 @@ class EditUser extends React.Component{
     this.props.removeModal();
   }
   _checkName(){
-     let firstname=this.firstName.value,
-        lastname=this.lastName.value;
-     if(!firstname||!lastname||firstname.length>50||lastname.length>50)
-      {
-          this.nameError.style.display='block';
-          this.namePass.style.display='none';          
-      }
-      else
-      {
-          this.nameError.style.display='none';
-          this.namePass.style.display='inline-block';                  
-      }
-
+     let data2={
+        firstname:this.firstName.value,
+        lastname:this.lastName.value
+     };
+     this.props.validateName(data2);
   }
   _handleAnchorClick(){
     this.view1.style.display='block';
     this.view2.style.display='none';
   }
-    _checkPwd(){
-    let pwd1,pwd2;
-    pwd1=this.password1.value;
-    pwd2=this.password2.value;   
-    if(pwd1!==pwd2)
-    {
-          this.passError.style.display='block';      
-          this.pwdPass1.style.display='none';
-          this.pwdPass2.style.display='none';
-    }
-    else
-    {
-          this.passError.style.display='none';      
-          this.pwdPass1.style.display='inline-block';
-          this.pwdPass2.style.display='inline-block';
-    }
+  _checkPwd(){
+    let data3={
+    pwd1:this.password1.value,
+    pwd2:this.password2.value
+    };   
+    this.props.validatePassword(data3);
   }
   _handleEditUser(e){
         e.preventDefault();
@@ -79,6 +66,7 @@ class EditUser extends React.Component{
   }
   render()
   {
+      let tick=(<div className='iTick'/>);  
       return (
         <div>
           <div className="gor-modal-content">
@@ -106,22 +94,22 @@ class EditUser extends React.Component{
               <input className='gor-usr-fdlg' type="text" placeholder="User Id" id="userid"  ref={node => { this.userId = node }} disabled/>
             <p></p>
               <div className='gor-usr-field'>
-                <div className='gor-usr-hdsm'><FormattedMessage id="users.add.userdetails.firstname" description='Text for first name' 
+               <div className='gor-usr-hdsm'><FormattedMessage id="users.edit.userdetails.firstname" description='Text for first name' 
             defaultMessage='First Name'/></div>
-                <input className='gor-usr-fdsm' onChange={this._checkName.bind(this)} type="text" placeholder="First Name" id="firstname"  ref={node => { this.firstName = node }}/>
+                <input className={"gor-usr-fdsm"+(this.props.nameCheck.type===ERROR?' gor-input-error':' gor-input-ok')}  onBlur={this._checkName.bind(this)} type="text" placeholder="First Name" id="firstname"  ref={node => { this.firstName = node }}/>
               </div>
               <div className='gor-usr-field'>              
-                <div className='gor-usr-hdsm'><FormattedMessage id="users.add.userdetails.lastname" description='Text for last name' 
+                <div className='gor-usr-hdsm'><FormattedMessage id="users.edit.userdetails.lastname" description='Text for last name' 
             defaultMessage='Last Name'/></div>
-                <input className='gor-usr-fdsm'  onChange={this._checkName.bind(this)} type="text" placeholder="Last Name" id="lastname"  ref={node => { this.lastName = node }}/>
-              </div><div className='gor-name-val iTick'  ref={node => { this.namePass = node }}/>
-                <div className='gor-add-name-error' ref={node => { this.nameError = node }} ><div className='gor-login-error'></div> Please enter valid user name</div>
-            </div>
+                <input className={"gor-usr-fdsm"+(this.props.nameCheck.type===ERROR?' gor-input-error':' gor-input-ok')}  onBlur={this._checkName.bind(this)} type="text" placeholder="Last Name" id="lastname"  ref={node => { this.lastName = node }}/>
+              </div>
+                            {this.props.nameCheck.type?tick:((this.props.nameCheck.type===ERROR)?<FieldError txt={this.props.nameCheck.msg} />:'')}
 
+              </div>
             <div className='gor-usr-details'>
-            <div className='gor-usr-hdlg'><FormattedMessage id="users.add.roledetails.heading" description='Heading for role' 
+            <div className='gor-usr-hdlg'><FormattedMessage id="users.edit.roledetails.heading" description='Heading for role' 
             defaultMessage='Choose a role'/></div>
-            <div className='gor-sub-head'><FormattedMessage id="users.add.roledetails.subheading" description='Subheading for role' 
+            <div className='gor-sub-head'><FormattedMessage id="users.edit.roledetails.subheading" description='Subheading for role' 
             defaultMessage='User will be given a specific level of control over the Butler system depending on the designated role'/></div>
                 
                 <div className='gor-role'>
@@ -130,7 +118,7 @@ class EditUser extends React.Component{
             defaultMessage='Operator'/> </span>
                 </div>
                 <div className='gor-choose'>
-                  <div className='gor-sub-head'><FormattedMessage id="users.add.roledetails.operatortext" description='Subtext for operator' 
+                  <div className='gor-sub-head'><FormattedMessage id="users.edit.roledetails.operatortext" description='Subtext for operator' 
             defaultMessage='Grant access to the Operator Interface at each Pick Put Station in the Butler system'/></div>
                 </div>
 
@@ -141,13 +129,13 @@ class EditUser extends React.Component{
                 </div>
                 <div className='gor-choose'>
                 <div className='gor-sub-head'>
-                <FormattedMessage id="users.add.roledetails.supervisortext" description='Subtext for supervisor' 
+                <FormattedMessage id="users.edit.roledetails.supervisortext" description='Subtext for supervisor' 
             defaultMessage='Grant access to the Management Interface and Operator Interface for the Butler system'/></div>
                 </div>
 
                 <div className='gor-role'>
                 <input type="radio"value="manager" id='userRole' name="role" ref={node => { this.manager = node }} /><span className='gor-usr-hdsm'>
-                <FormattedMessage id="users.add.roledetails.manager" description='Text for manager' 
+                <FormattedMessage id="users.edit.roledetails.manager" description='Text for manager' 
             defaultMessage=' Manager'/></span>
                 </div>
                 <div className='gor-choose'>
@@ -163,15 +151,15 @@ class EditUser extends React.Component{
               <div className='gor-sub-head'><FormattedMessage id="users.edit.changepassword.subheading" description='Subheading for create password' 
               defaultMessage='Min of 6 digits will be required for logging into the Operator Interface'/></div>
 
-              <div className='gor-usr-hdsm'><FormattedMessage id="users.edit.changepassword.field1" description='Text for password' 
-              defaultMessage='Password'/></div>
-              <input className='gor-usr-fdlg' onChange={this._checkPwd.bind(this)} type="password" id="password1"  ref={node => { this.password1 = node }}/><div className='gor-pass-val iTick'  ref={node => { this.pwdPass1 = node }}/>
-                <div className='gor-add-pass-error' ref={node => { this.passError = node }} ><div className='gor-login-error'></div> Password do not match</div>
+              <div className='gor-usr-hdsm'><FormattedMessage id="users.edit.password.field1" description='Text for password' 
+            defaultMessage='Password'/></div>
+              <input className={"gor-usr-fdlg"+(this.props.passwordCheck.type===ERROR?' gor-input-error':' gor-input-ok')} onBlur={this._checkPwd.bind(this)} type="password" id="password1"  ref={node => { this.password1 = node }}/>     
+              {this.props.passwordCheck.type?tick:''}
 
-              <div className='gor-usr-hdsm'><FormattedMessage id="users.edit.changepassword.field2" description='Text for confirm password' 
-              defaultMessage='Confirm Password'/></div>
-              <input className='gor-usr-fdlg' onChange={this._checkPwd.bind(this)} type="password" id="password2"  ref={node => { this.password2 = node }}/><div className='gor-pass-val iTick'  ref={node => { this.pwdPass2 = node }} />
-                <div className='gor-add-pass-error' ref={node => { this.passError = node }} ><div className='gor-login-error'></div> Password do not match</div>
+              <div className='gor-usr-hdsm'><FormattedMessage id="users.edit.password.field2" description='Text for confirm password' 
+            defaultMessage='Confirm Password'/></div>
+              <input className={"gor-usr-fdlg"+(this.props.passwordCheck.type===ERROR?' gor-input-error':' gor-input-ok')} onBlur={this._checkPwd.bind(this)} type="password" id="password2"  ref={node => { this.password2 = node }}/>
+              {this.props.passwordCheck.type?tick:((this.props.passwordCheck.type===ERROR)?<FieldError txt={this.props.passwordCheck.msg} />:'')}
             </div>
             </div>
 
@@ -197,4 +185,20 @@ class EditUser extends React.Component{
       );
     }
   }
-export default EditUser;
+function mapStateToProps(state, ownProps){
+  console.log(state);
+  return {
+      nameCheck: state.appInfo.nameInfo || {},
+      passwordCheck: state.appInfo.passwordInfo || {}      
+  };
+}
+
+var mapDispatchToProps = function(dispatch){
+  return {
+    validateName: function(data){ dispatch(validateName(data)); },
+    validatePassword: function(data){ dispatch(validatePassword(data)); },
+    resetForm:   function(){ dispatch(resetForm()); }
+  }
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(EditUser);
