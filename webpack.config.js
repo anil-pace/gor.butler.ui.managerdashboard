@@ -8,7 +8,7 @@ var isDev = (process.env.TARGET === "DEV" ? true :false);
 var isMock = (process.env.MOCK === "true" ? true :false);
 
 console.log("Environment:"+process.env.TARGET);
-console.log("Mocking:"+process.env.MOCK);
+console.log("Mocking:"+isMock);
 /**
  * [appGetEntry get array of entry points based on TARGET]
  * @return {[Array]} [Array of enrty strings]

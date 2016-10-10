@@ -81,13 +81,21 @@ export const BUTLERS_DETAIL = "BUTLERS_DETAIL";
 export const PPS_DETAIL  = "pps";
 export const SYSTEM_PPS_DETAILS = "system_pps_details";
 export const SYSTEM_BUTLERS_DETAILS = "system_butlers_details";
-export const HISTOGRAM_DETAILS = "histogram";
+export const HISTOGRAM_DETAILS = "histogram_details";
+export const USER_DATA = "users";
+
 
 /*Constants for type of AJAX call*/
 export const AUTH_LOGIN = "AUTH_LOGIN";
 
+
 /*Constants for pagination*/
 export const PAGE_DATA = "PAGE_DATA";
+
+/*Constants for Loader*/
+
+export const DISPLAY_LOADER = "DISPLAY_LOADER";
+
 
 
 

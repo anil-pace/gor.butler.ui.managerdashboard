@@ -1,7 +1,8 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-import UserDataTable from './userTab/userTabTable'
-import { connect } from 'react-redux';
+import UserDataTable from './userTab/userTabTable';
+import Loader from '../components/loader/Loader';
+import { connect } from 'react-redux'; 
 
 class UsersTab extends React.Component{
 	constructor(props) 
@@ -11,10 +12,12 @@ class UsersTab extends React.Component{
 	render(){
 		var itemNumber = 7;		
 		return (
+
 			<div>
 				<div>
 					<div className="gorUserTable">
-						<UserDataTable items={this.props.userDetails} itemNumber={itemNumber}/>
+          				<Loader isLoading={this.props.isLoading} />
+						<UserDataTable items={temp_data} itemNumber={itemNumber}/>
 					</div>
 				</div>
 			</div>
@@ -24,10 +27,16 @@ class UsersTab extends React.Component{
 	}
 };
 
+
 function mapStateToProps(state, ownProps){
   return {
     userDetails: state.userDetails.userDetails || {},
+    isLoading:state.loader.isLoading
   };
 }
 
-export default connect(mapStateToProps)(UsersTab) ;
+
+
+export  default connect(mapStateToProps)(UsersTab);
+
+

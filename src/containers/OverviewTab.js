@@ -35,9 +35,11 @@ class Overview extends React.Component{
 					<OrderStatsWidget/>
         			<PerformanceWidget/>
 				</div>
-			</div>
+			</div>    
 		);
 	}
+
 }
  
 export 	default Dimensions()(Overview);
+

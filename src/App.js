@@ -77,7 +77,7 @@ class App extends React.Component{
 		return (
 			
 			<div className="mainContainer">
-				<Header user={items3}/>
+        <Header user={items3}/>
 				<Tabs/>
 				{this.props.children}
 			</div>
