@@ -50,11 +50,8 @@ const rootReducer = combineReducers({
   tabSelected,
   subTabSelected,
   PPSperformance,
-<<<<<<< HEAD
-  userDetails
-=======
+  userDetails,
   loader
->>>>>>> develop
    })
 
 export default rootReducer

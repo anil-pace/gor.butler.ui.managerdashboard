@@ -17,7 +17,7 @@ class UsersTab extends React.Component{
 				<div>
 					<div className="gorUserTable">
           				<Loader isLoading={this.props.isLoading} />
-						<UserDataTable items={temp_data} itemNumber={itemNumber}/>
+						<UserDataTable items={this.props.userDetails} itemNumber={itemNumber}/>
 					</div>
 				</div>
 			</div>

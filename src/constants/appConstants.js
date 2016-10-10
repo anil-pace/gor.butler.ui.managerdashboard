@@ -46,7 +46,6 @@ export const CHARGING = "CHARGING";
 export const PPS = "PPS";
 export const PPS_PERFORMANCE = "PPS_PERFORMANCE";
 export const USER_DETAILS = "USER_DETAILS";
-export const USER_DATA = "users";
 
 /*Constants for stats widget*/
 export const RENDER_STATSWIDGET = "RENDER_STATSWIDGET";
