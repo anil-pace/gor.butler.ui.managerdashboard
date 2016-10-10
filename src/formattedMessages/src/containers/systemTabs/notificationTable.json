@@ -5,6 +5,11 @@
     "defaultMessage": "Notifications"
   },
   {
+    "id": "NotificationTable.table.component",
+    "description": "component for NotificationTable",
+    "defaultMessage": "COMPONENT"
+  },
+  {
     "id": "Notifications.table.status",
     "description": "Status for NotificationTable",
     "defaultMessage": "EVENT TYPE"

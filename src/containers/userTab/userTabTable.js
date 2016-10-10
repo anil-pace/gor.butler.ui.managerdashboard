@@ -3,7 +3,7 @@ import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import {Table, Column, Cell} from 'fixed-data-table';
 import Dimensions from 'react-dimensions';
-import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
+import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData,ActionCell} from '../../components/commonFunctionsDataTable';
 import {modal} from 'react-redux-modal';
 import AddUser from './addNewUser';
 
@@ -79,6 +79,10 @@ class UserDataTable extends React.Component {
   render() {
     var {sortedDataList, colSortDirs,columnWidths} = this.state;
     var columnWidth= (this.props.containerWidth/this.props.itemNumber)
+    var heightRes = 500;
+    if(this.props.containerHeight !== 0) {
+      heightRes = this.props.containerHeight;
+    }
     
     return (
       <div>
@@ -109,7 +113,7 @@ class UserDataTable extends React.Component {
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
         width={this.props.containerWidth}
-        height={500}
+        height={heightRes}
         {...this.props}>
         <Column
           columnKey="name"
@@ -175,17 +179,6 @@ class UserDataTable extends React.Component {
           width={columnWidth}
         />
         <Column
-          columnKey="productivity"
-          header={
-            <SortHeaderCell >
-               <FormattedMessage id="user.table.productivity" description="User productivity" 
-              defaultMessage ="PRODUCTIVITY"/>
-            </SortHeaderCell>
-          }
-          cell={<TextCell data={sortedDataList}  />}
-          width={columnWidth}
-        />
-        <Column
           columnKey="logInTime"
           header={
             <SortHeaderCell >
@@ -203,6 +196,7 @@ class UserDataTable extends React.Component {
                ACTIONS
             </SortHeaderCell>
           }
+          cell={<ActionCell/>}
           width={columnWidth}
         />
       </Table>

@@ -45,7 +45,9 @@ class Header extends React.Component{
 		<header className="gorHeader head">
 			<div className="mainBlock">
 				<div className="logoWrap">
-					<div className="gor-logo logo">
+					<div>
+						<div className="gor-logo logo">
+					</div>
 				</div>
 				</div>
 				<div className="blockSystem">
@@ -65,7 +67,9 @@ class Header extends React.Component{
 			</div>
 			<div className="blockLeft">
 				<div className="logoWrap">
-					<div className="logo fk-logo">
+					<div>
+						<div className="logo fk-logo">
+					</div>
 				</div>
 				
 					

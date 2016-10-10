@@ -8,26 +8,41 @@ function processPPSData(data) {
   for (var i = data.length - 1; i >= 0; i--) {
     var detail = {};
     detail.id = "PPS " + data[i].pps_id;
-    detail.status = ppsStatus[data[i].pps_status];
-    detail.operatingMode = current_task[data[i].current_task];
+    if(data[i].pps_status = "on") {
+      detail.status = "On";
+    }
+    else {
+      detail.status = "Off";
+    }
+    detail.operatingMode = data[i].current_task;
     detail.performance = data[i].performance + " orders/hr";
-    detail.operatorAssigned = data[i].operators_assigned;
+    if(detail.operatorAssigned === null) {
+      detail.operatorAssigned = "--";
+    }
+    else {
+      detail.operatorAssigned = data[i].operators_assigned;
+    }
     PPSData.push(detail);
   }
+  
   return PPSData;
 }
 
 export  function PPSDetail(state={},action) {
   switch (action.type) {
     case PPS_DETAIL:
-         var res;
          res=action.data;
-         if(res.aggregate_data){
-           var PPSDetail = processPPSData(res.aggregate_data)
-          }
+         if(res.complete_data !== undefined){
+          var res, PPSDetail;
+           PPSDetail = processPPSData(res.complete_data)
+
+          
+          console.log("hsdcjhsdgjch")
+          console.log(PPSDetail)
            return Object.assign({}, state, {
                "PPStypeDetail" : PPSDetail
           })
+         }
 
     default:
       return state

@@ -1,5 +1,4 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 
 
 class Tab extends React.Component{
@@ -41,6 +40,6 @@ class Tab extends React.Component{
 	</div>
 	);
 	}
-};
+}
 
 export default Tab ;
