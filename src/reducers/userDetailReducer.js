@@ -6,7 +6,7 @@ function processUserDetails(data) {
   //var status = ["Offline", "Online"];
   var userDetails = [], userData = {};
   for (var i = data.length - 1; i >= 0; i--) {
-    userData.name = data[i].user_name;
+    userData.name = (data[i].first_name || null) + " " + (data[i].last_name || null);
     if(data[i].status){
       userData.status = "Online";
     }
@@ -29,8 +29,8 @@ export  function userDetails(state={},action){
 	  case USER_DETAILS:
          var res, userData;
          res=action.data;
-         if(res.data){
-           userData = processUserDetails(res.data);
+         if(res.complete_data){
+           userData = processUserDetails(res.complete_data);
           }
            return Object.assign({}, state, {
                "userDetails" : userData

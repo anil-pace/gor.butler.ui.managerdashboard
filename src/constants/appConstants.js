@@ -30,7 +30,7 @@ export const TAB_SELECTED = "TAB_SELECTED";
 export const SUB_TAB_SELECTED = "SUB_TAB_SELECTED";
 
 /*Parsing Constants*/
-export const PARSE_PPS = "pps_details";
+export const PARSE_PPS = "pps";
 export const PARSE_BUTLERS = "butlers";
 export const PARSE_CHARGERS = "chargers";
 export const PARSE_ORDERS = "order_details";
@@ -67,7 +67,7 @@ export const WAVES = "Waves";
 
 
 /*Constants for response type */
-export const PPS_DATA = "PPS_DATA";
+export const PPS_DATA = "pps";
 export const BUTLERS_DATA = "BUTLERS_DATA";
 export const AUDIT_DATA = "AUDIT_DATA";
 export const PUT_DATA = "PUT_DATA";
@@ -78,13 +78,16 @@ export const THROUGHPUT_DATA="THROUGHPUT_DATA";
 export const HISTOGRAM_DATA = "HISTOGRAM_DATA";
 export const CHARGERS_DETAIL = "CHARGERS_DETAIL";
 export const BUTLERS_DETAIL = "BUTLERS_DETAIL";
-export const PPS_DETAIL  = "pps_detail";
+export const PPS_DETAIL  = "pps";
 export const SYSTEM_PPS_DETAILS = "system_pps_details";
 export const SYSTEM_BUTLERS_DETAILS = "system_butlers_details";
-export const HISTOGRAM_DETAILS = "histogram_details";
+export const HISTOGRAM_DETAILS = "histogram";
 
 /*Constants for type of AJAX call*/
 export const AUTH_LOGIN = "AUTH_LOGIN";
+
+/*Constants for pagination*/
+export const PAGE_DATA = "PAGE_DATA";
 
 
 

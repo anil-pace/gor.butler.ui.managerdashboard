@@ -7,16 +7,19 @@ import {BUTLERS_DATA} from '../constants/appConstants';
 export  function butlersInfo(state={},action){
 	switch (action.type) {
 	  case BUTLERS_DATA:
+          console.log("butelr----")
+          console.log(action.data)
          var count_active= 0,res;
          res=action.data;
-         if(res.aggregate_data){
-          count_active=res.aggregate_data.count_active;
-          }
-                        var botKey = {
-                            "count_active" : count_active
-                        }
+         var butlersKey = {"active" : 0, "inactive": 0};
+              
+              butlersKey = {
+               "active" : action.data.aggregate_data.active_butlers,
+               "inactive": action.data.aggregate_data.inactive_butlers
+             
+           }
            return Object.assign({}, state, {
-               "butlersData" : botKey
+               "butlersData" : butlersKey
           })
 
 	  default:

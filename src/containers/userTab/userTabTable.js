@@ -79,6 +79,10 @@ class UserDataTable extends React.Component {
   render() {
     var {sortedDataList, colSortDirs,columnWidths} = this.state;
     var columnWidth= (this.props.containerWidth/this.props.itemNumber)
+    var heightRes = 500;
+    if(this.props.containerHeight !== 0) {
+      heightRes = this.props.containerHeight;
+    }
     
     return (
       <div>
@@ -109,7 +113,7 @@ class UserDataTable extends React.Component {
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
         width={this.props.containerWidth}
-        height={500}
+        height={heightRes}
         {...this.props}>
         <Column
           columnKey="name"

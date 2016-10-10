@@ -5,7 +5,7 @@ import Tabs from './containers/tabs';
 import Header from './components/header/header';
 import {setWsAction ,setMockAction} from './actions/socketActions';
 import { WS_CONNECT,WS_ONSEND,WS_MOCK } from './constants/appConstants'
-import { wsInitData } from './constants/initData.js'
+import { wsOverviewData, wsUsersData } from './constants/initData.js'
 import { REQUEST_HEADER, getFetchData } from './actions/headerAction'
 import { connect } from 'react-redux'; 
 
@@ -30,6 +30,15 @@ class App extends React.Component{
      * Checking if the user is loggedin 
      * and redirecting to main page
      */
+    let subscribeData = wsOverviewData;
+    if(nextProps.tab === "USERS") {
+      subscribeData = wsUsersData;
+    }
+
+    else {
+      subscribeData = wsOverviewData;
+    }
+    console.log(subscribeData)
       let loginAuthorized= nextProps.loginAuthorized,
       authToken=nextProps.authToken,
       socketStatus = nextProps.socketStatus;
@@ -51,11 +60,11 @@ class App extends React.Component{
               this.props.sendAuthToSocket(webSocketData) ;
         }
         if(loginAuthorized &&socketStatus && nextProps.socketAuthorized && !nextProps.initDataSent){
-      	   	this.props.initDataSentCall(wsInitData) ;
+      	   	this.props.initDataSentCall(wsOverviewData) ;
         }
       }
       else{
-          this.props.initMockData(wsInitData) ;
+          this.props.initMockData(wsOverviewData) ;
       }
     }
   	/**Render method called when component react renders
@@ -94,7 +103,8 @@ function mapStateToProps(state,ownProps) {
  	socketStatus: state.recieveSocketActions.socketConnected,
  	socketAuthorized: state.recieveSocketActions.socketAuthorized,
  	initDataSent: state.recieveSocketActions.initDataSent,
-  intl: state.intl
+  intl: state.intl,
+  tab:state.tabSelected.tab
  }
 } 
 /**

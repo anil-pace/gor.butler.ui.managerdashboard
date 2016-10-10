@@ -9,6 +9,7 @@ import AuditStatusWidget from '../containers/auditStatusWidget'
 import PutStatusWidget from '../containers/putStatusWidget'
 import PickStatusWidget from '../containers/pickStatusWidget'
 import { connect } from 'react-redux';
+import Dimensions from 'react-dimensions'
 
 
 class Overview extends React.Component{
@@ -39,4 +40,4 @@ class Overview extends React.Component{
 	}
 }
  
-export 	default Overview;
+export 	default Dimensions()(Overview);

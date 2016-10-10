@@ -64,6 +64,10 @@ class WavesTable extends React.Component {
   render() {
     
     var {sortedDataList, colSortDirs,columnWidths} = this.state;  
+    var heightRes = 500;
+    if(this.props.containerHeight !== 0) {
+      heightRes = this.props.containerHeight;
+    }
     return (
       <div className="gorTableMainContainer">
         <div className="gorToolBar">
@@ -91,7 +95,7 @@ class WavesTable extends React.Component {
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
         width={this.props.containerWidth}
-        height={500}
+        height={heightRes}
         {...this.props}>
         <Column
           columnKey="waves"

@@ -13,12 +13,14 @@ class UsersTab extends React.Component{
 		return (
 			<div>
 				<div>
-					<div className="gorTesting">
+					<div className="gorUserTable">
 						<UserDataTable items={this.props.userDetails} itemNumber={itemNumber}/>
 					</div>
 				</div>
 			</div>
 		);
+
+		
 	}
 };
 

@@ -52,7 +52,7 @@ class Routes extends React.Component{
 				      },"indexOverview");
 				    }}
 					 />
-					<Route name="system" path="/system"  
+					<Route name="system" path="/system" className="gorResponsive"  
 					 getComponent={(location, callback) => {
 				      require.ensure([], function (require) {
 				        callback(null, require('../containers/systemTab').default);
