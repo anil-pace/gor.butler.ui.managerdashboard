@@ -14,8 +14,8 @@ class OrderListTab extends React.Component{
   }	
 
     handlePageClick () {
-      console.log(this.props)
-      //this.props.getPageData(this.pageNum);
+      console.log(this)
+      this.props.getPageData("g");
     }
 	render(){
 		return (
