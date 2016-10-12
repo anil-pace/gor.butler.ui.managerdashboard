@@ -46,6 +46,7 @@ export const CHARGING = "CHARGING";
 export const PPS = "PPS";
 export const PPS_PERFORMANCE = "PPS_PERFORMANCE";
 export const USER_DETAILS = "USER_DETAILS";
+export const ORDER_RECIEVED = "ORDER_RECIEVED";
 
 /*Constants for stats widget*/
 export const RENDER_STATSWIDGET = "RENDER_STATSWIDGET";
@@ -86,6 +87,7 @@ export const USER_DATA = "users";
 
 /*Constants for type of AJAX call*/
 export const AUTH_LOGIN = "AUTH_LOGIN";
+export const ORDERS_RETRIEVE = "ORDERS_RETRIEVE";
 
 
 /*Constants for pagination*/

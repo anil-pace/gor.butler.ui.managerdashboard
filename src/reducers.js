@@ -24,7 +24,7 @@ import {subTabSelected} from './reducers/subTabSelectReducer';
 import {reducer as modalReducer} from 'react-redux-modal';
 import {PPSperformance} from './reducers/ppsPerformanceReducer';
 import {userDetails} from './reducers/userDetailReducer';
-
+import {getOrderDetail} from './reducers/orderDetailReducer';
 
 const rootReducer = combineReducers({
   intl:intlReducer,
@@ -51,7 +51,8 @@ const rootReducer = combineReducers({
   subTabSelected,
   PPSperformance,
   userDetails,
-  loader
+  loader,
+  getOrderDetail
    })
 
 export default rootReducer

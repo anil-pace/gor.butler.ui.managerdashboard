@@ -12,7 +12,9 @@ class DropdownTable extends Component {
   }
 
   _onSelect (option) {
+    console.log("selected")
     this.setState({selected: option})
+    this.props.changeMode(option);
     
 
   }

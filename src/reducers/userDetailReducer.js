@@ -21,12 +21,16 @@ function processUserDetails(data) {
     userDetails.push(userData);
     userData = {};
   }
+
   return userDetails;
 }
 
 export  function userDetails(state={},action){
+  console.log("users red")
+  console.log(action.type)
 	switch (action.type) {
 	  case USER_DETAILS:
+
          var res, userData;
          res=action.data;
          if(res.complete_data){

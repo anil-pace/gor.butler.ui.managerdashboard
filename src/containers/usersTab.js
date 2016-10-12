@@ -12,11 +12,11 @@ class UsersTab extends React.Component{
 	render(){
 		var itemNumber = 7;		
 		return (
-
+//<Loader isLoading={this.props.isLoading} />
 			<div>
 				<div>
 					<div className="gorUserTable">
-          				<Loader isLoading={this.props.isLoading} />
+          				
 						<UserDataTable items={this.props.userDetails} itemNumber={itemNumber}/>
 					</div>
 				</div>
@@ -37,6 +37,6 @@ function mapStateToProps(state, ownProps){
 
 
 
-export  default connect(mapStateToProps)(UsersTab);
+export  default connect(null,mapStateToProps)(UsersTab);
 
 

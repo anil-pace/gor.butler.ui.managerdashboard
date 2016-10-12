@@ -6,21 +6,52 @@ import React  from 'react';
 import ReactPaginate from 'react-paginate';
 import { connect } from 'react-redux';
 import {getPageData} from '../../actions/paginationAction';
-
+import {ORDERS_RETRIEVE} from '../../constants/appConstants';
+import {BASE_URL, ORDERS_URL} from '../../constants/configConstants';
+import OrderListTable from './orderListTable';
 class OrderListTab extends React.Component{
-	constructor(props) 
-	{
-    	super(props);
-  }	
+  constructor(props) 
+  {
+      super(props);
+  } 
+  componentDidMount() {
+    var data = {};
+    data.selected = 0;
+    this.handlePageClick(data);
+  }
 
-    handlePageClick () {
-      console.log(this)
-      this.props.getPageData("g");
+    handlePageClick = (data) => {
+    var url = BASE_URL + ORDERS_URL + "?page=" + (data.selected+1) + "&PAGE_SIZE=8";
+    let paginationData={
+              'url':url,
+              'method':'GET',
+              'cause': ORDERS_RETRIEVE,
+              'Authentication-Token': sessionStorage.getItem('auth_token'),
+              'contentType':'application/json'
+          } 
+         this.props.getPageData(paginationData);
     }
-	render(){
-		return (
-			<div id={"react-paginate"}>
-				<ReactPaginate previousLabel={"previous"}
+
+    
+  render(){
+    var itemNumber = 3;
+    var temp_data=[{
+  "id": "Wave-009",
+  "status": "Online",
+  "recievedTime": "Today, 09:15"
+}, {
+  "id": "Wave-009",
+  "status": "Online",
+  "recievedTime": "Today, 09:15"
+}];
+
+//<OrderListTable items={this.props.orderData.ordersDetail} itemNumber={itemNumber}/>
+    return (
+      <div>
+      <OrderListTable items={this.props.orderData.ordersDetail} itemNumber={itemNumber}/>
+ 
+      <div id={"react-paginate"}>
+        <ReactPaginate previousLabel={"previous"}
                        nextLabel={"next"}
                        breakLabel={<a href="">...</a>}
                        breakClassName={"break-me"}
@@ -31,9 +62,16 @@ class OrderListTab extends React.Component{
                        containerClassName={"pagination"}
                        subContainerClassName={"pages pagination"}
                        activeClassName={"active"} />
-			</div>
-		);
-	}
+     </div>
+      </div>
+    );
+  }
+}
+
+function mapStateToProps(state, ownProps){
+  return {
+    orderData: state.getOrderDetail || {},
+  };
 }
 
 var mapDispatchToProps = function(dispatch){
@@ -42,4 +80,4 @@ var mapDispatchToProps = function(dispatch){
   }
 };
 
-export default connect(mapDispatchToProps)(OrderListTab) ;
+export default connect(mapStateToProps,mapDispatchToProps)(OrderListTab) ;

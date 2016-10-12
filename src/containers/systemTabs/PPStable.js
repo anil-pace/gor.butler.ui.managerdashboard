@@ -3,7 +3,10 @@ import {Table, Column, Cell} from 'fixed-data-table';
 import DropdownTable from '../../components/dropdown/dropdownTable'
 import Dimensions from 'react-dimensions'
 import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
+import {changePPSmode} from '../../actions/ppsModeChangeAction'
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
+import {BASE_URL, PPS_MODE_CHANGE_URL} from '../../constants/configConstants';
 
 class PPStable extends React.Component {
   constructor(props) {
@@ -16,7 +19,7 @@ class PPStable extends React.Component {
     for (var index = 0; index < size; index++) {
       this._defaultSortIndexes.push(index);
     }
-    var columnWidth= (this.props.containerWidth/this.props.itemNumber)
+    var columnWidth= (600/this.props.itemNumber)
     this.state = {
       sortedDataList: this._dataList,
       colSortDirs: {},
@@ -52,9 +55,10 @@ class PPStable extends React.Component {
       sortedDataList: new DataListWrapper(filterIndex(e,this._dataList), this._dataList),
     });
   }
-  handleChange(columnKey,rowIndex) {
+  handleChange(columnKey,rowIndex,data) {
     
-    var showDropdown=false;
+    var showDropdown=false, ppsSelected;
+    
     var checkedState=this.state.isChecked;
     if(checkedState[rowIndex] === true) {
       checkedState[rowIndex] = false;
@@ -67,6 +71,7 @@ class PPStable extends React.Component {
         showDropdown=true;
       }
     }
+
     this.setState({isChecked:checkedState});
     this.setState({renderDropD:showDropdown});    
   }
@@ -90,23 +95,55 @@ class PPStable extends React.Component {
       },
     });
   }
+
+  handleModeChange(data) {
+    var checkedPPS=[], j=0;
+    for (var i = this.state.isChecked.length - 1; i >= 0; i--) {
+      if(this.state.isChecked[i] === true) {
+        checkedPPS[j] = this.state.sortedDataList.newData[i].id
+        checkedPPS[j] = checkedPPS[j].slice(4);
+        var url = BASE_URL + PPS_MODE_CHANGE_URL + checkedPPS[j] + "/pps_mode";
+        let ppsModeChange={
+              'url':url,
+               'method':'PUT',
+               'Authentication-Token': sessionStorage.getItem('auth_token'),
+              'contentType':'application/json'
+         } 
+         this.props.changePPSmode(ppsModeChange);
+        j++;
+      }
+    }
+    console.log(checkedPPS)
+    
+    
+
+  }
+
+  
   render() {
     
-    var {sortedDataList, colSortDirs,columnWidths,isChecked,renderDropD} = this.state;
-    const item = [
+    var {sortedDataList, colSortDirs,columnWidths,isChecked,renderDropD, ppsSelected} = this.state, checkedPPS = [];
+    const modes = [
     { value: 'put', label: 'Put' },
     { value: 'pick', label: 'Pick' },
     { value: 'audit', label: 'Audit' }
     ];
     var checkState = this.handleChange.bind(this);
-    var drop;
+    var drop, selected =0;
     if(this.state.renderDropD===true) {
-      drop = <DropdownTable  styleClass={'gorDataTableDrop'} placeholder="Change PPS mode" items={item}/>;
+      drop = <DropdownTable  styleClass={'gorDataTableDrop'} placeholder="Change PPS mode" items={modes} changeMode={this.handleModeChange.bind(this)}/>;
     }
 
     else {
       drop = <div/>;
     }
+    var j=1;
+    for (var i = this.state.isChecked.length - 1; i >= 0; i--) {
+      if(this.state.isChecked[i] === true) {
+        selected = selected + 1;
+      }
+    }
+
     return (
       <div className="gorTableMainContainer">
         <div className="gorToolBar">
@@ -114,7 +151,7 @@ class PPStable extends React.Component {
             <div className="gorToolBarElements">
                <FormattedMessage id="pps.table.heading" description="Heading for PPS" 
               defaultMessage ="PPS"/>
-              <div className="gorToolHeaderSubText"> 2 selected </div>
+              <div className="gorToolHeaderSubText"> {selected} selected </div>
             </div>
             <div className="gorToolBarDropDown">
               {drop}
@@ -137,7 +174,7 @@ class PPStable extends React.Component {
         headerHeight={70}
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
-        width={this.props.containerWidth}
+        width={600}
         height={500}
         {...this.props}>
         <Column
@@ -183,7 +220,7 @@ class PPStable extends React.Component {
             <SortHeaderCell>
               <FormattedMessage id="PPS.table.operatingMode" description="operatingMode for PPS" 
               defaultMessage ="OPERATING MODE"/>
-              <div className="gorToolHeaderSubText"> 0 Not set, 1 Audit, 1 Pick, 0 Put</div>
+              <div className="gorToolHeaderSubText"> 0 Not set, {this.props.operationMode.audit} Audit, {this.props.operationMode.pick} Pick, {this.props.operationMode.put} Put</div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
@@ -223,4 +260,11 @@ class PPStable extends React.Component {
     );
   }
 }
-export default Dimensions()(PPStable);
+
+var mapDispatchToProps = function(dispatch){
+  return {
+    changePPSmode: function(data){ dispatch(changePPSmode(data)); }
+  }
+};
+
+export default connect(null,mapDispatchToProps)(PPStable);

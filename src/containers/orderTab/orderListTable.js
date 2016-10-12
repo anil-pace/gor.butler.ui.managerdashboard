@@ -1,14 +1,13 @@
 import React from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
-import DropdownTable from '../../components/dropdown/dropdownTable'
+import Dropdown from '../../components/dropdown/dropdown'
 import Dimensions from 'react-dimensions'
 import { FormattedMessage } from 'react-intl';
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
 
-class NotificationTable extends React.Component {
+class OrderListTable extends React.Component {
   constructor(props) {
     super(props);
-    var temp = new Array(this.props.items.length).fill(false);
     this._dataList = new tableRenderer(this.props.items.length);
     this._defaultSortIndexes = [];
     this._dataList.newData=this.props.items;
@@ -21,19 +20,17 @@ class NotificationTable extends React.Component {
       sortedDataList: this._dataList,
       colSortDirs: {},
       columnWidths: {
-        component: columnWidth,
+        id: columnWidth,
         status: columnWidth,
-        description: columnWidth,
-        remark: columnWidth,
-        time: columnWidth,
-        
+        recievedTime: columnWidth,
       },
     };
-
     this._onSortChange = this._onSortChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
   }
+
+  
    _onColumnResizeEndCallback(newColumnWidth, columnKey) {
     this.setState(({columnWidths}) => ({
       columnWidths: {
@@ -53,9 +50,7 @@ class NotificationTable extends React.Component {
     });
   }
   
-  handlChange(columnKey,rowIndex) {
-    
-  }
+  
   _onSortChange(columnKey, sortDir) {
     var sortIndexes = this._defaultSortIndexes.slice();
     this.setState({
@@ -66,24 +61,44 @@ class NotificationTable extends React.Component {
     });
   }
   render() {
-    var heightRes = 500;
-    if(this.props.containerHeight !== 0) {
-      heightRes = this.props.containerHeight;
-    }
     
+    var {sortedDataList, colSortDirs,columnWidths} = this.state;
+    const ordersByStatus = [
+    { value: 'breached', label: 'Breached orders' },
+    { value: 'exception', label: 'Orders with exception' },
+    { value: 'pending', label: 'Pending orders' },
+    { value: 'completed', label: 'Completed orders' },
+    { value: 'all', label: 'All orders' }
+    ];
+
+    const ordersByTime = [
+    { value: 'oneHourOrders', label: 'Last 1 hours' },
+    { value: 'twoHourOrders', label: 'Last 2 hours' },
+    { value: 'sixHourOrders', label: 'Last 6 hours' },
+    { value: 'twelveHourOrders', label: 'Last 12 hours' },
+    { value: 'oneDayOrders', label: 'Last 1 day' },
+    { value: 'allOrders', label: 'All' }
+    ];
     
-    var {sortedDataList, colSortDirs,columnWidths} = this.state;  
     return (
       <div className="gorTableMainContainer">
         <div className="gorToolBar">
           <div className="gorToolBarWrap">
             <div className="gorToolBarElements">
-               <FormattedMessage id="NotificationTable.table.heading" description="Heading for NotificationTable" 
-              defaultMessage ="Notifications"/>
-              
+               <FormattedMessage id="order.table.heading" description="Heading for order list" 
+              defaultMessage ="OrderList"/>
             </div>
+            <button className="gor-refresh-btn" >Refresh Data</button>
           </div>
-        <div className="filterWrapper">  
+        <div className="filterWrapper"> 
+        <div className="gorToolBarDropDown">
+          <div className="gor-dropDown-firstInnerElement">
+              <Dropdown  styleClass={'gorDataTableDrop'}  items={ordersByStatus} currentState={ordersByStatus[4]}/>
+          </div>
+          <div className="gor-dropDown-secondInnerElement">   
+              <Dropdown  styleClass={'gorDataTableDrop'}  items={ordersByTime} currentState={ordersByTime[4]}/>
+            </div>
+            </div> 
         <div className="gorFilter">
             <div className="searchbox-magnifying-glass-icon"/>
             <input className="gorInputFilter"
@@ -93,6 +108,7 @@ class NotificationTable extends React.Component {
         </div>
         </div>
        </div>
+
       <Table
         rowHeight={66}
         rowsCount={sortedDataList.getSize()}
@@ -100,23 +116,22 @@ class NotificationTable extends React.Component {
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
         width={this.props.containerWidth}
-        height={heightRes}
+        height={500}
         {...this.props}>
         <Column
-          columnKey="component"
+          columnKey="id"
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
-              sortDir={colSortDirs.component}> 
+              sortDir={colSortDirs.id}> 
               <div className="gorToolHeaderEl">
-              <div className="gorToolHeaderEl"> <FormattedMessage id="NotificationTable.table.component" description="component for NotificationTable" 
-              defaultMessage ="COMPONENT"/> </div>
-              
+              <div className="gorToolHeaderEl"> {sortedDataList.getSize()} Order List </div>
+              <div className="gorToolHeaderSubText"> Total:{sortedDataList.getSize()} </div>
               </div>
             </SortHeaderCell>
           }
           cell={  <TextCell data={sortedDataList}/>}
           fixed={true}
-          width={columnWidths.component}
+          width={columnWidths.id}
           isResizable={true}
         />
         <Column
@@ -124,8 +139,14 @@ class NotificationTable extends React.Component {
           header={
             <SortHeaderCell >
               <div>
-                 <FormattedMessage id="Notifications.table.status" description="Status for NotificationTable" 
-              defaultMessage ="EVENT TYPE"/> 
+                 <FormattedMessage id="orderList.table.status" description="Status for orders" 
+              defaultMessage ="STATUS"/> 
+              </div>
+              <div>
+              <div className="statuslogoWrap">
+              <div className="header-red-alert-icon gorToolHeaderEl"/>
+              </div>
+              <div className="gorToolHeaderEl alertState"> 3 Alerts</div>
               </div>
             </SortHeaderCell>
           }
@@ -134,46 +155,18 @@ class NotificationTable extends React.Component {
           width={columnWidths.status}
           isResizable={true}
         />
-        
         <Column
-          columnKey="description"
+          columnKey="recievedTime"
           header={
             <SortHeaderCell>
-              <FormattedMessage id="NotificationTable.table.description" description="description for current component" 
-              defaultMessage ="DESCRIPTION"/>
-             
+              <FormattedMessage id="orderlist.table.operatingMode" description="recievedTime for Orders" 
+              defaultMessage ="RECIEVED TIME"/>
+              <div className="gorToolHeaderSubText"> 0 Not set, 1 Audit, 1 Pick, 0 Put</div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
           fixed={true}
-          width={columnWidths.description}
-          isResizable={true}
-        />
-        <Column
-          columnKey="remark"
-          header={
-            <SortHeaderCell>
-               <FormattedMessage id="NotificationTable.table.remark" description="remark for component" 
-              defaultMessage ="REMARKS"/> 
-              
-            </SortHeaderCell>
-          }
-          cell={<textarea rows="3" cols="30"/>}
-          fixed={true}
-          width={columnWidths.remark}
-          isResizable={true}
-        />
-        <Column
-          columnKey="time"
-          header={
-            <SortHeaderCell>
-               <FormattedMessage id="NotificationTable.table.location" description="Starting Time for Component" 
-              defaultMessage ="TIME"/> 
-            </SortHeaderCell>
-          }
-          cell={<TextCell data={sortedDataList} />}
-          fixed={true}
-          width={columnWidths.time}
+          width={columnWidths.recievedTime}
           isResizable={true}
         />
       </Table>
@@ -181,4 +174,4 @@ class NotificationTable extends React.Component {
     );
   }
 }
-export default Dimensions()(NotificationTable);
+export default Dimensions()(OrderListTable);

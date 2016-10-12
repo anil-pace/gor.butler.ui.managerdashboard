@@ -20,8 +20,8 @@ const ajaxMiddleware = (function(){
 
     var params=action.params;
 
-    var formData = params.formdata || null,
-    loginData=JSON.stringify(formData || {});
+    var formData = params.formdata || params || null,
+    loginData= params.formdata? JSON.stringify(params.formdata):null;
     var httpRequest = new XMLHttpRequest();
 
     if (!httpRequest || !params.url) {
@@ -42,6 +42,9 @@ const ajaxMiddleware = (function(){
     };
     httpRequest.open(params.method, params.url);
     httpRequest.setRequestHeader('Content-Type', params.contentType || "text/html");
+    if (formData['Authentication-Token']){
+      httpRequest.setRequestHeader('Authentication-Token', formData['Authentication-Token']);
+    }
     httpRequest.send(loginData);
     break;
 

@@ -7,8 +7,6 @@ import {BUTLERS_DATA} from '../constants/appConstants';
 export  function butlersInfo(state={},action){
 	switch (action.type) {
 	  case BUTLERS_DATA:
-          console.log("butelr----")
-          console.log(action.data)
          var count_active= 0,res;
          res=action.data;
          var butlersKey = {"active" : 0, "inactive": 0};
