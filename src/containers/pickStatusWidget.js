@@ -56,11 +56,12 @@ class PickStatusWidget extends React.Component{
             textleft=<FormattedMessage id="widget.pick.completed" description='Text for completed' 
             defaultMessage='Completed'/>;
 
-            lowleft=<FormattedMessage id="widget.pick.status.idle" description='Throughput message' 
-                            defaultMessage='{count} PPS idle'
-                            values={{
-                                count: ppsCount
-                            }}/>;
+            lowleft=<FormattedMessage id="widget.pick.status.idle" description='PPS Offline' 
+                            defaultMessage='Offline'/>;
+        }
+        else if(!ppsCount){
+            lowleft = <FormattedMessage id="widget.pick.status.starting" description='Awaiting throughput data' 
+                            defaultMessage='Starting...'/>;
         }
         else
         {

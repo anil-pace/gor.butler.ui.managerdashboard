@@ -8,7 +8,7 @@ class TopNotifications extends React.Component{
 	render(){
 		return (
 		<div className="gor-notify-top">
-			<span className=''></span><span>{this.props.items.text}</span>
+			<span className={this.props.items.notStyle}></span><span>{this.props.items.text}</span>
 		</div> 
 		);
 	}

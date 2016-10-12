@@ -4,7 +4,7 @@ export const resTypePut = {
 	"aggregate_data": {
 		"items_put": 256789
 	},
-	"resource_type": "put_details"
+	"resource_type": "put"
 };
 
 export const resTypeThroughPut = {
@@ -21,7 +21,7 @@ export const resTypeAudit = {
 			"audit_type":null,		
 			"total_audited": 20687
 			},
-	"resource_type": "audit_details"
+	"resource_type": "audit"
 }
 
 export const resTypePPS = {
@@ -86,7 +86,7 @@ export const resTypeOrders={
         "orders_at_risk":0,   
         "Wave_ending_time":'21-30-57 (IST)' 
     },
-    "resource_type": "order_details"
+    "resource_type": "orders"
 }
 export const resTypeChargers = {
 	"data": [{
@@ -870,7 +870,7 @@ export const resTypePPSdetail = {
 		"active": "true"
 	}
 	],
-	"resource_type": "pps_detail"
+	"resource_type": "pps"
 }
 
 
