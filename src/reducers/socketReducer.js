@@ -14,6 +14,7 @@ export  function recieveSocketActions(state={},action){
         	
       })
     case WS_END:
+      
       return Object.assign({}, state, {
           "socketConnected": false,      
           "socketAuthorized": false,

@@ -5,7 +5,7 @@ import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
 import {tabSelected} from '../actions/tabSelectAction';
 import {displayLoader} from '../actions/loaderAction';
-import {OVERVIEW,SYSTEM,ORDERS,USERS} from '../constants/appConstants';
+import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP} from '../constants/appConstants';
 class Tabs extends React.Component{
 	constructor(props) 
 	{
@@ -18,13 +18,20 @@ class Tabs extends React.Component{
      * @return {[none]}        
      */
     handleTabClick(selTab){
-    	if(selTab === USERS){
-            this.props.displayLoader(true)
+    	/**
+         * Displaying loader currently for User tab
+         * only
+         */
+        if(selTab === USERS){
+            this.props.displayLoader(true);
         }
         else{
             this.props.displayLoader(false)
         }
-        this.props.tabSelected(selTab)
+        
+        this.props.tabSelected(selTab);
+        sessionStorage.setItem('nextView', TAB_ROUTE_MAP[selTab]);
+        sessionStorage.setItem('selTab', selTab);
     }
     
 	render(){

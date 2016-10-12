@@ -88,5 +88,16 @@ export const AUTH_LOGIN = "AUTH_LOGIN";
 
 export const DISPLAY_LOADER = "DISPLAY_LOADER";
 
+/*Map for routes of tab*/
+
+export const TAB_ROUTE_MAP = {
+		[OVERVIEW] : "overview",
+		[SYSTEM] : "system",
+		[ORDERS] : "orders",
+		[INVENTORY] : "inventory",
+		[USERS] : "users"
+	}
+
+
 
 

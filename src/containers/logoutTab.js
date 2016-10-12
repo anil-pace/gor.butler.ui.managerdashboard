@@ -16,6 +16,7 @@ class LogOut extends React.Component{
       this.props.removeModal();
       this.props.userLogout();
       this.props.endConnect();
+      sessionStorage.removeItem("nextView");
   }  
   render()
   {
@@ -34,10 +35,7 @@ class LogOut extends React.Component{
       );
     }
   };
- function mapStateToProps(state, ownProps){
-  return  {
-    }
-} 
+ 
 function mapDispatchToProps(dispatch){
     return {
       endConnect: function(){ dispatch(endWsAction()); },
@@ -45,4 +43,4 @@ function mapDispatchToProps(dispatch){
     }
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(LogOut);
+export default connect(null,mapDispatchToProps)(LogOut);
