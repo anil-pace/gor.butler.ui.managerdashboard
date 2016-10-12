@@ -92,6 +92,7 @@ class AddUser extends React.Component{
                 'token':sessionStorage.getItem('auth_token')
             }
         this.props.userRequest(userData);
+        this.removeThisModal();
   }
   render()
   {

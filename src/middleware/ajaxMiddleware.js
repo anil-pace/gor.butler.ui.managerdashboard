@@ -1,5 +1,5 @@
 import {AJAX_CALL,MOCK_LOGIN,AUTH_LOGIN} from '../constants/appConstants'
-import {AjaxParse} from '../utilities/ajaxParser';
+import {AjaxParse} from '../utilities/AjaxParser';
 import {ShowError} from '../utilities/showError';
 
 const ajaxMiddleware = (function(){ 

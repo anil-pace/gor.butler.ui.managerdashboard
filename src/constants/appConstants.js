@@ -98,7 +98,10 @@ export const INFO_RESET = "ERROR_RESET";
 export const ERROR=0;
 export const SUCCESS=1;
 export const INFO=2;
-
+export const HIDE=3;
+export const NOTIFY_PASS='NOTIFY_PASS';
+export const NOTIFY_FAIL='NOTIFY_FAIL';
+export const NOTIFY_HIDE='NOTIFY_HIDE';
 
 /*Constants for pagination*/
 export const PAGE_DATA = "PAGE_DATA";

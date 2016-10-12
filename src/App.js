@@ -4,10 +4,11 @@ import ReactDOM  from 'react-dom';
 import Tabs from './containers/tabs';
 import Header from './components/header/header';
 import {setWsAction ,setMockAction} from './actions/socketActions';
-import { WS_CONNECT,WS_ONSEND,WS_MOCK } from './constants/appConstants'
+import { WS_CONNECT,WS_ONSEND,WS_MOCK, HIDE } from './constants/appConstants'
 import { wsOverviewData, wsUsersData } from './constants/initData.js'
 import { REQUEST_HEADER, getFetchData } from './actions/headerAction'
 import { connect } from 'react-redux'; 
+import TopNotifications from './components/topnotify/topnotify';
 
 
 class App extends React.Component{ 
@@ -71,12 +72,13 @@ class App extends React.Component{
   	 * @return {[type]}
   	 */
 	render(){
-		var items3={start:"09:10:25", name:"Krish verma gandhi sharma", post:"Manager"}
+		var items3={start:"09:00:25", name:"Krish verma gandhi sharma", post:"Manager"}
 		
 		
 		return (
 			
 			<div className="mainContainer">
+        <TopNotifications />
         <Header user={items3}/>
 				<Tabs/>
 				{this.props.children}

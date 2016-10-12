@@ -1,5 +1,5 @@
 import {receiveAuthData} from '../actions/loginAction';
-import {backendID} from '../actions/validationActions';
+import {backendID,notifySuccess, notifyFail} from '../actions/validationActions';
 import {AUTH_LOGIN, ADD_USER, CHECK_ID,DELETE_USER} from '../constants/appConstants';
 import {US001,US002,UE001,UE002,UE003,UE004,UE005,UE006} from '../constants/messageConstants'; 
 
@@ -18,28 +18,28 @@ export function AjaxParse(store,res,cause)
 		    	switch(res.alert_data[0].code)
 		    	{
 		    		case 'us001':
-		    			console.log(US001);
+						store.dispatch(notifySuccess(US001));
 		    			break;
 		    		case 'us002':
-		    			console.log(US002);
+						store.dispatch(notifySuccess(US002));
 		    			break;
 		    		case 'ue001':
-		    			console.log(UE001);
+						store.dispatch(notifyFail(UE001));
 		    			break;
 		    		case 'ue002':
-		    			console.log(UE002);
+						store.dispatch(notifyFail(UE002));		 
 		    			break;
 		    		case 'ue003':
-		    			console.log(UE003);
+						store.dispatch(notifyFail(UE003));		    		
 		    			break;
 		    		case 'ue004':
-		    			console.log(UE004);
+						store.dispatch(notifyFail(UE004));		    		
 		    			break;
 		    		case 'ue005':
-		    			console.log(UE005);
+						store.dispatch(notifyFail(UE005));		    				    		
 		    			break;
 		    		case 'ue006':
-		    			console.log(UE006);
+						store.dispatch(notifyFail(UE006));		    				    		
 		    			break;
 		    		default:
 		    			console.log('Error in adding user');

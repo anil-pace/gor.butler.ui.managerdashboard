@@ -1,4 +1,4 @@
-import {ID_DATA,NAME_DATA,PASSWORD_DATA,INFO_RESET,ID_BACKEND,ERROR,SUCCESS,INFO} from '../constants/appConstants'; 
+import {ID_DATA,NAME_DATA,PASSWORD_DATA,INFO_RESET,ID_BACKEND,ERROR,SUCCESS,INFO,HIDE,NOTIFY_PASS,NOTIFY_HIDE,NOTIFY_FAIL} from '../constants/appConstants'; 
 import {US001,US002,UE001} from '../constants/messageConstants'; 
 
 /**
@@ -95,6 +95,38 @@ export  function appInfo(state={},action){
             "passwordInfo":null
           })
           break;
+
+    case NOTIFY_PASS:
+         let notifyMsg=action.data, notifyInfo;
+         notifyInfo={
+          type:SUCCESS,
+          msg:notifyMsg
+         };
+         return Object.assign({}, state, { 
+            "notifyInfo":notifyInfo
+         })
+         break;
+
+    case NOTIFY_FAIL:
+         let notifyErr=action.data, notifyErrInfo;
+         notifyErrInfo={
+          type:ERROR,
+          msg:notifyErr
+         };
+         return Object.assign({}, state, { 
+            "notifyInfo":notifyErrInfo
+         })
+         break;
+
+    case NOTIFY_HIDE:
+         let notifyHide;
+         notifyHide={
+          type:HIDE
+         }
+         return Object.assign({}, state, { 
+            "notifyInfo":notifyHide
+         })
+         break;
 
     default:
       return state
