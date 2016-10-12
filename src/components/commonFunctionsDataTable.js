@@ -57,10 +57,28 @@ export class DataListWrapper {
     );
   }
 }
+ 
+export const ActionCell = ({rowIndex, data, columnKey, ...props}) => (
+  <Cell {...props}>
+    <div className="gor-user-Logo-wrap">
+      <div className="user-edit-icon"/>
+    </div>
+    <div className="gor-user-Logo-wrap">
+      <div className="user-del-icon"/>
+    </div>  
+  </Cell>
+);
 
 export const TextCell = ({rowIndex, data, columnKey, ...props}) => (
   <Cell {...props}>
     {data.getObjectAt(rowIndex)[columnKey]}
+  </Cell>
+);
+
+export const ProgressCell = ({rowIndex, data, columnKey, ...props}) => (
+  <Cell {...props}>
+  <progress className="gorProgressBar" max="100" value={data.getObjectAt(rowIndex)[columnKey]}/>
+    <div className="gorProgressBarLabel">{ data.getObjectAt(rowIndex)[columnKey]}% </div>
   </Cell>
 );
 

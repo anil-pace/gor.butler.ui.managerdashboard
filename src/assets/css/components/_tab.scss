@@ -16,12 +16,12 @@
 
 
 		.gorTab .gorMainBlock {
-			width: 140px;
+			width: 150px;
 			padding-right: 20px;
 			padding-left: 20px;
-			height: 60px;
+			height: 62px;
 			display: table-cell;
-			border: .5px solid black;
+			border-right: .5px solid black;
 			background: #4d5055;
 			cursor: pointer;
 			vertical-align: middle;
@@ -81,12 +81,12 @@
 		}
 
 		.gorTab .gorMainBlockSelect{
-			width: 140px;
+			width: 150px;
 			padding-right: 20px;
 			padding-left: 20px;
-			height: 60px;
+			height: 62px;
 			display: table-cell;
-			border: .5px solid black;
+			border-right: .5px solid black;
 			cursor: pointer;
 			background-color:#323539;
 			vertical-align: middle;

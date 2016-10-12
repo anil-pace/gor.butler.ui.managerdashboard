@@ -7,21 +7,13 @@ import {CHARGERS_DATA} from '../constants/appConstants';
 export  function chargerInfo(state={},action){
 	switch (action.type) {
 	  case CHARGERS_DATA:
-              var connected = 0, disconnected = 0,res;
-              res=action.data;
-              if(res.data){
-                        res.data.map(function(key, index){
-                            if(key.charger_status == 'disconnected' ){
-                                disconnected = disconnected + 1;
-                            }else if(key.charger_status == 'connected'){
-                                connected = connected + 1;
-                            }
-                        })
-              }
-                        var chargersKey = {
-                            "Connected" : connected,
-                            "Disconnected": disconnected
-                        }
+              var chargersKey = {"Connected" : 0, "Disconnected": 0};
+              
+              chargersKey = {
+               "Connected" : action.data.aggregate_data.active_chargers,
+               "Disconnected": action.data.aggregate_data.inactive_chargers
+             
+           }
             return Object.assign({}, state, {
             "chargersData" : chargersKey
          })

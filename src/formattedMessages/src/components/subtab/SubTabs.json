@@ -1,0 +1,22 @@
+[
+  {
+    "id": "notification.tab.heading",
+    "description": "notification tab",
+    "defaultMessage": "Notification"
+  },
+  {
+    "id": "butlerBot.tab.heading",
+    "description": "butler bot tab",
+    "defaultMessage": "Butler Bots"
+  },
+  {
+    "id": "pps.tab.heading",
+    "description": "pps tab",
+    "defaultMessage": "Pick Put Stations"
+  },
+  {
+    "id": "chargingstation.tab.heading",
+    "description": "charging station tab",
+    "defaultMessage": "Charging Station"
+  }
+]

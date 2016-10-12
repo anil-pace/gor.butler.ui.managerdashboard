@@ -1,4 +1,4 @@
-import {AJAX_CALL,MOCK_LOGIN} from '../constants/appConstants'
+import {AJAX_CALL,MOCK_LOGIN,AUTH_LOGIN} from '../constants/appConstants'
 import {AjaxParse} from '../utilities/ajaxParser';
 import {ShowError} from '../utilities/showError';
 
@@ -32,7 +32,12 @@ const ajaxMiddleware = (function(){
         if (httpRequest.status === 200) {
               var response=JSON.parse(httpRequest.response);
               AjaxParse(store,response,params.cause);
-        } 
+        }
+        else if(httpRequest.status === 400){
+          console.log('Request not processed');
+          var response=JSON.parse(httpRequest.response);
+          AjaxParse(store,response,params.cause);          
+        }
         else
         {
           console.log('Connection refused');
@@ -42,6 +47,9 @@ const ajaxMiddleware = (function(){
     };
     httpRequest.open(params.method, params.url);
     httpRequest.setRequestHeader('Content-Type', params.contentType || "text/html");
+    httpRequest.setRequestHeader('Accept', params.accept || "text/html");
+    if(params.cause!==AUTH_LOGIN)
+      httpRequest.setRequestHeader('Authentication-Token', params.token);
     httpRequest.send(loginData);
     break;
 

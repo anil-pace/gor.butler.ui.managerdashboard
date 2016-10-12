@@ -91,7 +91,8 @@ class Login extends React.Component{
                 'formdata':formdata,
                 'method':'POST',
                 'cause':AUTH_LOGIN,
-                'contentType':'application/json'
+                'contentType':'application/json',
+                'accept':'application/json'
             }
         sessionStorage.setItem('nextView', 'md');
         if(MOCK === false){

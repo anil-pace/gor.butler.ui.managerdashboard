@@ -2,12 +2,12 @@
  * Importing Router dependencies
  */
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import { connect } from 'react-redux';
 import { Router, Route, hashHistory, IndexRoute} from 'react-router';
 import {loginRequest} from '../actions/loginAction';
 import Overview from '../containers/OverviewTab'; 
 import {tabSelected} from '../actions/tabSelectAction';
+
 
 class Routes extends React.Component{
 	constructor(props) 
@@ -57,7 +57,7 @@ class Routes extends React.Component{
 				      },"indexOverview");
 				    }}
 					 />
-					<Route name="system" path="/system"  
+					<Route name="system" path="/system" className="gorResponsive"  
 					 getComponent={(location, callback) => {
 				      require.ensure([], function (require) {
 				        callback(null, require('../containers/systemTab').default);

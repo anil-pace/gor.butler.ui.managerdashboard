@@ -10,6 +10,19 @@
     border-radius:3px;
     margin-left:50px;
 }
+.gor-field-error
+{
+            text-align:left;
+            color:#EC1C24;
+            font-size:18px;         
+            margin-top:10px;
+}
+.gor-input-error {
+            border:1px solid #EC1C24;
+}
+.gor-input-ok{
+            border:1px solid #AAAAAA;    
+}
 .gor-usr-add{
     display:inline-block;
     width:70%;
@@ -59,39 +72,6 @@
             color: #666666;
         }
     }
-        .gor-id-val{
-            display:none;
-        }
-        .gor-name-val{
-            display:none;
-        }
-        .gor-pass-val{
-            display:none;
-        }
-        .gor-add-id-error
-        {
-            display:none;
-            text-align:left;
-            color:#EC1C24;
-            font-size:18px;         
-            margin-top:10px;
-        }
-        .gor-add-name-error
-        {
-            display:none;        
-            text-align:left;
-            color:#EC1C24;
-            font-size:18px;         
-            margin-top:10px;
-        }
-        .gor-add-pass-error
-        {
-            display:none;        
-            text-align:left;
-            color:#EC1C24;
-            font-size:18px;         
-            margin-top:10px;
-        }
      .gor-usr-details{
         width:33%;
         margin:auto;
@@ -125,7 +105,6 @@
                 width:70%;
                 background-color:#FFFFFF;
                 border-radius:3px;
-                border:1px solid #AAAAAA; 
                 &:hover{
                     border:1px solid #666666;  
                 }
@@ -136,16 +115,14 @@
         }
         .gor-usr-field{
             display:inline-block;
-            width:37%;
+            width:38%;
             .gor-usr-fdsm{
                 margin:auto;
                 text-align:left;
                 margin-top:calculateRem(10px);
                 padding:calculateRem(10px);
-                width:75%;
                 background-color:#FFFFFF;
                 border-radius:3px;
-                border:1px solid #AAAAAA; 
                 &:hover{
                     border:1px solid #666666;  
                 }

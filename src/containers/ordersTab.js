@@ -3,7 +3,6 @@
  * This will be switched based on tab click
  */
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import OrdersSubTab from '../components/subtab/ordersTabs';
 
 
@@ -22,6 +21,6 @@ class OrdersTab extends React.Component{
 			</div>
 		);
 	}
-};
+}
 
 export default OrdersTab ;

@@ -30,21 +30,23 @@ export const TAB_SELECTED = "TAB_SELECTED";
 export const SUB_TAB_SELECTED = "SUB_TAB_SELECTED";
 
 /*Parsing Constants*/
-export const PARSE_PPS = "pps_details";
+export const PARSE_PPS = "pps";
 export const PARSE_BUTLERS = "butlers";
 export const PARSE_CHARGERS = "chargers";
-export const PARSE_ORDERS = "order_details";
+export const PARSE_ORDERS = "orders";
 export const PARSE_INVENTORY = "inventory";
-export const PARSE_PUT = "put_details";
-export const PARSE_PICK = "pick_details";
+export const PARSE_PUT = "put";
+export const PARSE_PICK = "pick";
 export const PARSE_PPA_THROUGHPUT = "put_pick_audit_throughput";
-export const PARSE_AUDIT = "audit_details";
+export const PARSE_AUDIT = "audit";
 export const SYSTEM_CHARGERS_DETAILS = "system_chargers_details";
 export const NOTIFICATION = "NOTIFICATION";
 export const BUTLERBOTS = "BUTLERBOTS";
 export const CHARGING = "CHARGING";
 export const PPS = "PPS";
 export const PPS_PERFORMANCE = "PPS_PERFORMANCE";
+export const USER_DETAILS = "USER_DETAILS";
+
 /*Constants for stats widget*/
 export const RENDER_STATSWIDGET = "RENDER_STATSWIDGET";
 
@@ -64,7 +66,7 @@ export const WAVES = "Waves";
 
 
 /*Constants for response type */
-export const PPS_DATA = "PPS_DATA";
+export const PPS_DATA = "pps";
 export const BUTLERS_DATA = "BUTLERS_DATA";
 export const AUDIT_DATA = "AUDIT_DATA";
 export const PUT_DATA = "PUT_DATA";
@@ -75,14 +77,31 @@ export const THROUGHPUT_DATA="THROUGHPUT_DATA";
 export const HISTOGRAM_DATA = "HISTOGRAM_DATA";
 export const CHARGERS_DETAIL = "CHARGERS_DETAIL";
 export const BUTLERS_DETAIL = "BUTLERS_DETAIL";
-export const PPS_DETAIL  = "pps_detail";
+export const PPS_DETAIL  = "pps";
 export const SYSTEM_PPS_DETAILS = "system_pps_details";
 export const SYSTEM_BUTLERS_DETAILS = "system_butlers_details";
 export const HISTOGRAM_DETAILS = "histogram_details";
 export const USER_DATA = "users";
 
+
 /*Constants for type of AJAX call*/
 export const AUTH_LOGIN = "AUTH_LOGIN";
+export const ADD_USER='ADD_USER';
+export const CHECK_ID='CHECK_ID';
+export const DELETE_USER='DELETE_USER';
+
+/*Constants for Error checking*/
+export const ID_DATA = "ID_DATA";
+export const NAME_DATA = "NAME_DATA";
+export const PASSWORD_DATA = "PASSWORD_DATA";
+export const INFO_RESET = "ERROR_RESET";
+export const ERROR=0;
+export const SUCCESS=1;
+export const INFO=2;
+
+
+/*Constants for pagination*/
+export const PAGE_DATA = "PAGE_DATA";
 
 /*Constants for Loader*/
 
@@ -97,6 +116,7 @@ export const TAB_ROUTE_MAP = {
 		[INVENTORY] : "inventory",
 		[USERS] : "users"
 	}
+
 
 
 

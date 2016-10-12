@@ -3,13 +3,13 @@
  * This will be switched based on tab click
  */
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import OrderStatsWidget from '../containers/orderStatsWidget'
 import PerformanceWidget from '../containers/performanceWidget'
 import AuditStatusWidget from '../containers/auditStatusWidget'
 import PutStatusWidget from '../containers/putStatusWidget'
 import PickStatusWidget from '../containers/pickStatusWidget'
 import { connect } from 'react-redux';
+import Dimensions from 'react-dimensions'
 
 
 class Overview extends React.Component{
@@ -35,9 +35,11 @@ class Overview extends React.Component{
 					<OrderStatsWidget/>
         			<PerformanceWidget/>
 				</div>
-			</div>
+			</div>    
 		);
 	}
-};
 
-export 	default Overview;
+}
+ 
+export 	default Dimensions()(Overview);
+

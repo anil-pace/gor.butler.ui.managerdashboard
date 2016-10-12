@@ -1,0 +1,17 @@
+[
+  {
+    "id": "pickPerformance.dropdown",
+    "description": "pickPerformance dropdown label",
+    "defaultMessage": "PPS - pick performance"
+  },
+  {
+    "id": "putPerformance.dropdown",
+    "description": "putPerformance dropdown label",
+    "defaultMessage": "PPS - put performance"
+  },
+  {
+    "id": "auditPerformance.dropdown",
+    "description": "auditPerformance dropdown label",
+    "defaultMessage": "PPS - audit performance"
+  }
+]

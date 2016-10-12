@@ -1,5 +1,4 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 class Health extends React.Component{
 	constructor(props) 
 	{
@@ -40,6 +39,6 @@ class Health extends React.Component{
 	</div>
 		);
 	}
-};
+}
 
 export default Health ;

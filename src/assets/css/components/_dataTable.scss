@@ -1137,7 +1137,7 @@ color: #000000;
 
 .gorTesting {
   width: 100%;
-  height: calculateRem(480px);
+  height: 80vh;
   position:relative;
 }
 
@@ -1260,3 +1260,55 @@ input[type="checkbox"]{
       padding: calculateRem(8px) calculateRem(10px);
     }
 }
+
+.gorProgressBar {
+  width: 70%;
+}
+
+.gorProgressBarLabel {
+  display: inline-block;
+  padding-left: 10px;
+
+}
+
+.gor-user-Logo-wrap {
+  display: inline-block;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.gorUserTable {
+  height: 85vh;
+}
+
+
+
+progress {
+  background-color: #ffffff;
+  height: 9px;
+  border-radius: 15px;
+  border-width: 1px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+progress::-webkit-progress-bar {
+  background-color: #ffffff;
+  height: 9px;
+  border-radius: 15px;
+  border-width: 1px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+progress::-webkit-progress-value {
+  background-color: #ffffff;
+  height: 9px;
+  border-radius: 15px;
+  border-width: 1px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+progress::-moz-progress-bar {
+  background-color: #ffffff;
+  height: 9px;
+  border-radius: 15px;
+  border-width: 1px;
+  box-shadow: 0 2px 5px grey inset;
+}
+
