@@ -22,7 +22,7 @@ class App extends React.Component{
   }	
   
   	componentWillMount(){
-      
+        
         this.context.router.push("/login");
 
   	}
@@ -51,7 +51,7 @@ class App extends React.Component{
         if(loginAuthorized && !socketStatus){
             this.props.initWebSocket() ; 
           }
-        if (loginAuthorized &&socketStatus && !nextProps.socketAuthorized) {
+        if (loginAuthorized && socketStatus && !nextProps.socketAuthorized) {
              let webSocketData = {
                   'type': 'auth',
                   'data' : {

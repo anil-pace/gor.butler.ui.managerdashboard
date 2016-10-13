@@ -5,10 +5,12 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var isDev = (process.env.TARGET === "DEV" ? true :false);
+var reactNodeEnv = isDev ? 'dev' : 'production';
 var isMock = (process.env.MOCK === "true" ? true :false);
 
 console.log("Environment:"+process.env.TARGET);
 console.log("Mocking:"+isMock);
+console.log("React Environment: "+reactNodeEnv);
 /**
  * [appGetEntry get array of entry points based on TARGET]
  * @return {[Array]} [Array of enrty strings]
@@ -34,7 +36,10 @@ function getPlugins(){
             new webpack.optimize.CommonsChunkPlugin('common.js', "assets/common.js"),
             //End
             new webpack.DefinePlugin({
-                MOCK: isMock
+                MOCK: JSON.stringify(isMock),
+                "process.env": {
+                        NODE_ENV: JSON.stringify(reactNodeEnv)
+                }
             }),
             new webpack.optimize.DedupePlugin(),
             new HtmlWebpackPlugin({
@@ -62,7 +67,9 @@ function getPlugins(){
     if(!isDev){
         plugins.push(new webpack.optimize.UglifyJsPlugin({
                 compress: {
-                    warnings: false
+                    warnings: false,
+                    unused:true,
+                    dead_code:true
                 },
                 output: {
                     comments: false,

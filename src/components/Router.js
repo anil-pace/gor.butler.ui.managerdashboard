@@ -5,6 +5,8 @@ import React  from 'react';
 import { connect } from 'react-redux';
 import { Router, Route, hashHistory, IndexRoute} from 'react-router';
 import {loginRequest} from '../actions/loginAction';
+import Overview from '../containers/OverviewTab'; 
+import {tabSelected} from '../actions/tabSelectAction';
 
 
 class Routes extends React.Component{
@@ -16,8 +18,11 @@ class Routes extends React.Component{
    requireAuth(nextState, replace ) {
   		if (sessionStorage.getItem('auth_token')) 
   		{
+  			let nextView ='/'+ (sessionStorage.getItem('nextView') || 'md');
+  			let selTab =(sessionStorage.getItem('selTab') || 'OVERVIEW');
   			this.props.loginRequest();
-    		replace({ nextPathname: nextState.location.pathname }, '/overview',nextState.location.query)
+  			this.props.tabSelected(selTab);
+    		replace(nextView)
  	 	}
  	 	
 	}
@@ -152,13 +157,11 @@ class Routes extends React.Component{
 		)}
 
 }
-function mapStateToProps(state, ownProps){
-	return {
-    };
-}
+
 var mapDispatchToProps = function(dispatch){
     return {
-        loginRequest: function(){ dispatch(loginRequest()); }
+        loginRequest: function(){ dispatch(loginRequest()); },
+        tabSelected: function(data){ dispatch(tabSelected(data)) }
     }
 };
-export default connect(mapStateToProps,mapDispatchToProps)(Routes);
+export default connect(null,mapDispatchToProps)(Routes);

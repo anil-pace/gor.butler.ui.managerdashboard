@@ -34,6 +34,7 @@ class Login extends React.Component{
       else
       {
            document.body.className='';
+
            this.context.router.push("/md");
       }
     }
@@ -93,6 +94,7 @@ class Login extends React.Component{
                 'contentType':'application/json',
                 'accept':'application/json'
             }
+        sessionStorage.setItem('nextView', 'md');
         if(MOCK === false){
     	    this.props.authLoginData(loginData);
         }
