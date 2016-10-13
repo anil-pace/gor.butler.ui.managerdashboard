@@ -1,4 +1,4 @@
-import {ID_DATA,NAME_DATA,PASSWORD_DATA,INFO_RESET,ID_BACKEND,ERROR,SUCCESS,INFO,HIDE,NOTIFY_PASS,NOTIFY_HIDE,NOTIFY_FAIL} from '../constants/appConstants'; 
+import {ID_DATA,NAME_DATA,PASSWORD_DATA,INFO_RESET,ID_BACKEND,ERROR,SUCCESS,INFO,HIDE,NOTIFY_PASS,NOTIFY_HIDE,NOTIFY_FAIL,PASS_DATA,MD_ID,SET_ROLE} from '../constants/appConstants'; 
 import {US001,US002,UE001} from '../constants/messageConstants'; 
 
 /**
@@ -9,6 +9,25 @@ import {US001,US002,UE001} from '../constants/messageConstants';
 export  function appInfo(state={},action){
   switch (action.type) {
     case ID_BACKEND:
+          let idExist;
+          if(action.data===true)
+          {
+           idExist={
+              type:SUCCESS,
+              msg:'Succesfull'               
+            };            
+          }
+          else
+          {
+           idExist={
+              type:ERROR,
+              msg:'Username already exists'             
+            };                        
+          }
+          return Object.assign({}, state, { 
+            "idInfo" : idExist
+          })
+          break;
 
     case ID_DATA:
           let userid=action.data.userid, idInfo;
@@ -30,7 +49,28 @@ export  function appInfo(state={},action){
             "idInfo" : idInfo
           })
           break;
-          
+    
+    case PASS_DATA:
+          let password=action.data.password, loginPassInfo;
+          if(password.length<1)
+          {
+            loginPassInfo={
+              type:ERROR,
+              msg:'Please enter a password'           
+            }
+          }
+          else
+          {
+            loginPassInfo={
+              type:SUCCESS,
+              msg:'Succesfull'               
+            };            
+          }
+          return Object.assign({}, state, { 
+            "loginPassInfo" : loginPassInfo
+          })
+    
+          break;
     case NAME_DATA:
           let firstname=action.data.firstname, lastname=action.data.lastname, format=  /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, nameInfo;
           if(firstname.length<1||lastname.length<1||firstname.length>50||lastname.length>50)
@@ -92,7 +132,9 @@ export  function appInfo(state={},action){
           return Object.assign({}, state, { 
             "idInfo" : null,
             "nameInfo":null,
-            "passwordInfo":null
+            "passwordInfo":null,
+            "loginPassInfo":null,
+            "roleSet":null
           })
           break;
 
@@ -128,6 +170,27 @@ export  function appInfo(state={},action){
          })
          break;
 
+
+    case MD_ID:
+        let roleInfo;
+        roleInfo={
+          type:INFO,
+          msg:action.data
+        }
+         return Object.assign({}, state, { 
+            "roleInfo":roleInfo
+         })
+        break;
+
+    case SET_ROLE:
+        let roleSet;
+        roleSet={
+          type:INFO,
+          msg:action.data
+        }
+         return Object.assign({}, state, { 
+            "roleSet":roleSet
+         })      
     default:
       return state
   }

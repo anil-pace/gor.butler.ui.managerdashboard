@@ -66,6 +66,12 @@ class UserDataTable extends React.Component {
       //.. all what you put in here you will get access in the modal props ;),
     });
   }
+  handleEdit(columnKey,rowIndex) {
+    console.log('Editing');
+  }
+  handleDel(columnKey,rowIndex) {
+    console.log('Deleting');
+  }
  //  _showModal(){
  // //    this.myModal.style.display = "block";
  //       this.refs.modal.style.display = "block";   
@@ -83,7 +89,8 @@ class UserDataTable extends React.Component {
     if(this.props.containerHeight !== 0) {
       heightRes = this.props.containerHeight;
     }
-    
+    var selEdit = this.handleEdit.bind(this);
+    var selDel= this.handleDel.bind(this); 
     return (
       <div>
         <div className="gorToolBar">
@@ -196,7 +203,7 @@ class UserDataTable extends React.Component {
                ACTIONS
             </SortHeaderCell>
           }
-          cell={<ActionCell/>}
+          cell={<ActionCell selEdit={selEdit} selDel={selDel}/>}
           width={columnWidth}
         />
       </Table>

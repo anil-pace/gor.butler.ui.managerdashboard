@@ -1,6 +1,7 @@
 import {receiveAuthData} from '../actions/loginAction';
+import {assignRole} from '../actions/userActions';
 import {backendID,notifySuccess, notifyFail} from '../actions/validationActions';
-import {AUTH_LOGIN, ADD_USER, CHECK_ID,DELETE_USER} from '../constants/appConstants';
+import {AUTH_LOGIN, ADD_USER, CHECK_ID,DELETE_USER,GET_ROLES} from '../constants/appConstants';
 import {US001,US002,UE001,UE002,UE003,UE004,UE005,UE006} from '../constants/messageConstants'; 
 
 export function AjaxParse(store,res,cause)
@@ -10,7 +11,35 @@ export function AjaxParse(store,res,cause)
 		case AUTH_LOGIN:
 			store.dispatch(receiveAuthData(res));
 			break;
+		case GET_ROLES:
+			let i,rolesArr,k={};
+			rolesArr=res.roles;
+			for(i=0;i<rolesArr.length;i++)
+			{
+				if(rolesArr[i].name==="butler_ui")
+				{
+					k.operator=rolesArr[i].id;
+				}
+				else
+				{
+					k.manager=rolesArr[i].id;					
+				}
+			}
+			store.dispatch(assignRole(k));
+			break;
+
 		case CHECK_ID:
+			let isAuth;
+			if(res.status)
+			{
+				isAuth=true;
+			}
+			else
+			{
+				isAuth=false;
+			}
+			store.dispatch(backendID(isAuth));			
+			break;
 		case DELETE_USER:
 		case ADD_USER:
 			if(res.alert_data)
@@ -42,16 +71,16 @@ export function AjaxParse(store,res,cause)
 						store.dispatch(notifyFail(UE006));		    				    		
 		    			break;
 		    		default:
-		    			console.log('Error in adding user');
+		    			store.dispatch(notifyFail('Error in updating user'));		    				    		
 
 		    	}			
 		    }
 			else
 			{
-						console.log('Error in response');
+		    			store.dispatch(notifyFail('Error in response'));		
 			}
 			break;
 		default:
-			console.log('Call cause unknown');
+		    			store.dispatch(notifyFail('API response not registered'));	
 	}
 }  
