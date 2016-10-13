@@ -14,10 +14,12 @@ function processUserDetails(data) {
     else {
       userData.status = "Offline";
     }
+    userData.uid = data[i].user_id
     userData.role = data[i].role;
     userData.workMode = data[i].pps.pps_mode;
     userData.location = "PPS " + data[i].pps.pps_id ;
     userData.logInTime = data[i].login_time;
+    userData.userName= data[i].user_name;
     userDetails.push(userData);
     userData = {};
   }
