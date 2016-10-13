@@ -13,7 +13,7 @@ class TopNotifications extends React.Component{
     	if(nextProps.notifyInfo){
     		if(nextProps.notifyInfo.type!==HIDE)
     		{
-   		 	 setTimeout(this.props.notifyHide.bind(this), 5000);    	
+   		 	 setTimeout(this.props.notifyHide.bind(this), 3000);    	
     		}
     	}
     }
