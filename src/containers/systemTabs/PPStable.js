@@ -11,8 +11,15 @@ import {BASE_URL, PPS_MODE_CHANGE_URL} from '../../constants/configConstants';
 class PPStable extends React.Component {
   constructor(props) {
     super(props);
-    var temp = new Array(this.props.items.length).fill(false);
-    this._dataList = new tableRenderer(this.props.items.length);
+    var temp;
+    if(this.props.items === undefined) {
+      this._dataList = new tableRenderer(0);
+      temp = new Array(0).fill(false);
+    }
+    else {
+      this._dataList = new tableRenderer(this.props.items.length);
+      temp = new Array(this.props.items.length).fill(false);
+    }
     this._defaultSortIndexes = [];
     this._dataList.newData=this.props.items;
     var size = this._dataList.getSize();
@@ -268,4 +275,4 @@ var mapDispatchToProps = function(dispatch){
   }
 };
 
-export default connect(null,mapDispatchToProps)(PPStable);
+export default (connect(null,mapDispatchToProps)(PPStable));

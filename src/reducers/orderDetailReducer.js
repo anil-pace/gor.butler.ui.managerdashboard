@@ -5,8 +5,31 @@ function processOrders(data) {
   if(data.length !== undefined) {
     for (var i = data.length - 1; i >= 0; i--) {
       orderData.id = data[i].order_id;
-      orderData.status = data[i].warehouse_status;
+
+      if(data[i].breached === false) {
+        orderData.status = data[i].status;
+      }
+
+      else {
+        orderData.status = "breached";
+      }
       orderData.recievedTime = data[i].create_time;
+      if(data[i].pick_before_time === null) {
+        orderData.pickBy = "--";
+      }
+      else {
+        orderData.pickBy = data[i].pick_before_time;
+      }
+
+      if(data[i].completed_orderlines === 0) {
+        orderData.orderLine = data[i].total_orderlines;
+      }
+      else {
+        total_orderlines = data[i].completed_orderlines + "/" + data[i].total_orderlines;
+        orderData.orderLine = total_orderlines;
+      }
+      orderData.completedTime = data[i].update_time;
+
       renderOrderData.push(orderData);
       orderData = {};
     }

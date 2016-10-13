@@ -8,7 +8,12 @@ import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell
 class OrderListTable extends React.Component {
   constructor(props) {
     super(props);
-    this._dataList = new tableRenderer(this.props.items.length);
+    if(this.props.items === undefined) {
+      this._dataList = new tableRenderer(0);
+    }
+    else {
+      this._dataList = new tableRenderer(this.props.items.length);
+    }
     this._defaultSortIndexes = [];
     this._dataList.newData=this.props.items;
     var size = this._dataList.getSize();
@@ -23,6 +28,35 @@ class OrderListTable extends React.Component {
         id: columnWidth,
         status: columnWidth,
         recievedTime: columnWidth,
+        completedTime: columnWidth,
+        pickBy: columnWidth,
+        orderLine: columnWidth
+      },
+    };
+    this._onSortChange = this._onSortChange.bind(this);
+    this._onFilterChange = this._onFilterChange.bind(this);
+    this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps){
+    this._dataList = new tableRenderer(nextProps.items.length);
+    this._defaultSortIndexes = [];
+    this._dataList.newData=nextProps.items;
+    var size = this._dataList.getSize();
+    for (var index = 0; index < size; index++) {
+      this._defaultSortIndexes.push(index);
+    }
+    var columnWidth= (nextProps.containerWidth/nextProps.itemNumber)
+    this.state = {
+      sortedDataList: this._dataList,
+      colSortDirs: {},
+      columnWidths: {
+        id: columnWidth,
+        status: columnWidth,
+        recievedTime: columnWidth,
+        completedTime: columnWidth,
+        pickBy: columnWidth,
+        orderLine: columnWidth
       },
     };
     this._onSortChange = this._onSortChange.bind(this);
@@ -60,24 +94,25 @@ class OrderListTable extends React.Component {
       },
     });
   }
+
+  
   render() {
     
     var {sortedDataList, colSortDirs,columnWidths} = this.state;
     const ordersByStatus = [
+    { value: 'all', label: 'All orders' },
     { value: 'breached', label: 'Breached orders' },
-    { value: 'exception', label: 'Orders with exception' },
     { value: 'pending', label: 'Pending orders' },
-    { value: 'completed', label: 'Completed orders' },
-    { value: 'all', label: 'All orders' }
+    { value: 'completed', label: 'Completed orders' }
     ];
 
     const ordersByTime = [
+    { value: 'allOrders', label: 'All' },
     { value: 'oneHourOrders', label: 'Last 1 hours' },
     { value: 'twoHourOrders', label: 'Last 2 hours' },
     { value: 'sixHourOrders', label: 'Last 6 hours' },
     { value: 'twelveHourOrders', label: 'Last 12 hours' },
-    { value: 'oneDayOrders', label: 'Last 1 day' },
-    { value: 'allOrders', label: 'All' }
+    { value: 'oneDayOrders', label: 'Last 1 day' }
     ];
     
     return (
@@ -88,15 +123,15 @@ class OrderListTable extends React.Component {
                <FormattedMessage id="order.table.heading" description="Heading for order list" 
               defaultMessage ="OrderList"/>
             </div>
-            <button className="gor-refresh-btn" >Refresh Data</button>
+            <button className="gor-refresh-btn" onClick={this.props.refreshOption.bind(this)} >Refresh Data</button>
           </div>
         <div className="filterWrapper"> 
         <div className="gorToolBarDropDown">
           <div className="gor-dropDown-firstInnerElement">
-              <Dropdown  styleClass={'gorDataTableDrop'}  items={ordersByStatus} currentState={ordersByStatus[4]}/>
+              <Dropdown  styleClass={'gorDataTableDrop'}  items={ordersByStatus} currentState={ordersByStatus[0]} optionDispatch={this.props.statusFilter}/>
           </div>
-          <div className="gor-dropDown-secondInnerElement">   
-              <Dropdown  styleClass={'gorDataTableDrop'}  items={ordersByTime} currentState={ordersByTime[4]}/>
+          <div className="gor-dropDown-secondInnerElement">                                                                  
+              <Dropdown  styleClass={'gorDataTableDrop'}  items={ordersByTime} currentState={ordersByTime[0]}  optionDispatch={this.props.timeFilter}/>
             </div>
             </div> 
         <div className="gorFilter">
@@ -156,12 +191,26 @@ class OrderListTable extends React.Component {
           isResizable={true}
         />
         <Column
+          columnKey="pickBy"
+          header={
+            <SortHeaderCell>
+              <FormattedMessage id="waves.table.pickBy" description="pick by for waves" 
+              defaultMessage ="PICK BY"/>
+              <div className="gorToolHeaderSubText"> </div>
+            </SortHeaderCell>
+          }
+          cell={<TextCell data={sortedDataList} />}
+          fixed={true}
+          width={columnWidths.pickBy}
+          isResizable={true}
+        />
+        <Column
           columnKey="recievedTime"
           header={
             <SortHeaderCell>
               <FormattedMessage id="orderlist.table.operatingMode" description="recievedTime for Orders" 
               defaultMessage ="RECIEVED TIME"/>
-              <div className="gorToolHeaderSubText"> 0 Not set, 1 Audit, 1 Pick, 0 Put</div>
+              <div className="gorToolHeaderSubText"> </div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
@@ -169,9 +218,42 @@ class OrderListTable extends React.Component {
           width={columnWidths.recievedTime}
           isResizable={true}
         />
+        <Column
+          columnKey="completedTime"
+          header={
+            <SortHeaderCell>
+              <FormattedMessage id="waves.table.completedTime" description="completedTime for waves" 
+              defaultMessage ="COMPLETED"/>
+              <div className="gorToolHeaderSubText"> </div>
+            </SortHeaderCell>
+          }
+          cell={<TextCell data={sortedDataList} />}
+          fixed={true}
+          width={columnWidths.completedTime}
+          isResizable={true}
+        />
+        <Column
+          columnKey="orderLine"
+          header={
+            <SortHeaderCell>
+              <FormattedMessage id="waves.table.orderLine" description="orderLine for waves" 
+              defaultMessage ="ORDER LINE"/>
+              <div className="gorToolHeaderSubText"> </div>
+            </SortHeaderCell>
+          }
+          cell={<TextCell data={sortedDataList} />}
+          fixed={true}
+          width={columnWidths.orderLine}
+          isResizable={true}
+        />
       </Table>
       </div>
     );
   }
 }
+
+
+
+//export default connect(null,mapDispatchToProps)(OrderListTable) ;
+
 export default Dimensions()(OrderListTable);

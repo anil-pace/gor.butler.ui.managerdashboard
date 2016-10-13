@@ -186,7 +186,6 @@ class EditUser extends React.Component{
     }
   }
 function mapStateToProps(state, ownProps){
-  console.log(state);
   return {
       nameCheck: state.appInfo.nameInfo || {},
       passwordCheck: state.appInfo.passwordInfo || {}      

@@ -38,6 +38,13 @@ export const wsOverviewData = {
                 }
               },
               {
+                "resource_id": "orders",
+                "details": {
+                  "data": "complete",
+                  "callback": []
+                }
+              },
+              {
                 "resource_id": "chargers",
                 "details": {
                   "data": "complete",
@@ -45,7 +52,7 @@ export const wsOverviewData = {
                 }
               },
               {
-                "resource_id": "butler",  
+                "resource_id": "butlers",  
                 "details": {
                   "data": "complete",
                   "callback": []

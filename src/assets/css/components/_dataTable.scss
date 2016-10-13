@@ -467,6 +467,33 @@ background-color: #FFFFFF;
 
 }
 
+.Completed .public_fixedDataTableCell_cellContent{
+
+  
+  border-radius: 15px;
+  text-align: center;
+  width:52px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #00a54f;
+  color: #00a54f;
+  font-size: 12px;
+  max-height: 9px;
+
+}
+
+.Breached .public_fixedDataTableCell_cellContent{
+
+  background: #fc3838;
+  border-radius: 15px;
+  text-align: center;
+  width:52px;
+  color: #ffffff;
+  font-size: 12px;
+  max-height: 9px;
+
+}
+
 .Offline .public_fixedDataTableCell_cellContent{
 
   border-radius: 15px;

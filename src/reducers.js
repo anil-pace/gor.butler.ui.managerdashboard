@@ -26,7 +26,8 @@ import {PPSperformance} from './reducers/ppsPerformanceReducer'
 import {userDetails} from './reducers/userDetailReducer';
 import {getOrderDetail} from './reducers/orderDetailReducer';
 import {appInfo} from './reducers/infoReducer';
-
+import {filterOptions} from './reducers/orderFilterReducer'
+import {waveInfo} from './reducers/waveDetailReducer';
 
 
 const rootReducer = combineReducers({
@@ -56,7 +57,9 @@ const rootReducer = combineReducers({
   PPSperformance,
   userDetails,
   loader,
-  getOrderDetail
+  getOrderDetail,
+  filterOptions,
+  waveInfo
    })
 
 export default rootReducer

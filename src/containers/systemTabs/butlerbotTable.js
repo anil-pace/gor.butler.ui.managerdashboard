@@ -139,7 +139,7 @@ class ButlerBotTable extends React.Component {
             <SortHeaderCell>
               <FormattedMessage id="butlerBot.table.currentTask" description="Current task for butlerbot" 
               defaultMessage ="CURRENT TASK"/>
-              <div className="gorToolHeaderSubText"> 2 Pick, 1 Put, 2 charging, 1 Idle</div>
+              <div className="gorToolHeaderSubText"> {this.props.parameters.pick} Pick, {this.props.parameters.put} Put, {this.props.parameters.charging} charging, {this.props.parameters.idle} Idle</div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
@@ -153,7 +153,7 @@ class ButlerBotTable extends React.Component {
             <SortHeaderCell>
                <FormattedMessage id="butlerBot.table.msu" description="MSU Status for butlerbot" 
               defaultMessage ="MSU"/> 
-              <div className="gorToolHeaderSubText">10 Mounted</div>
+              <div className="gorToolHeaderSubText">{this.props.parameters.msuMounted} Mounted</div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
@@ -167,7 +167,7 @@ class ButlerBotTable extends React.Component {
             <SortHeaderCell>
                <FormattedMessage id="butlerBot.table.location" description="Location for butlerbot" 
               defaultMessage ="LOCATION"/> 
-              <div className="gorToolHeaderSubText"> {sortedDataList.getSize()} locations</div>
+              <div className="gorToolHeaderSubText"> {this.props.parameters.location} locations</div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
@@ -181,7 +181,7 @@ class ButlerBotTable extends React.Component {
             <SortHeaderCell >
                <FormattedMessage id="butlerBot.table.voltage" description="voltage for butlerbot" 
               defaultMessage ="VOLTAGE"/>
-              <div className="gorToolHeaderSubText"> Avg. Voltage  {this.props.avgVoltage}  </div> 
+              <div className="gorToolHeaderSubText"> Avg. Voltage  {this.props.parameters.avgVoltage}  </div> 
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList}  />}

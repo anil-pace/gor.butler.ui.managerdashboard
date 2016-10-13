@@ -23,6 +23,7 @@ class ChargingStationsTable extends React.Component {
       columnWidths: {
         id: columnWidth,
         status: columnWidth,
+        mode: columnWidth,
         dockedBots: columnWidth
       },
       
@@ -114,7 +115,35 @@ class ChargingStationsTable extends React.Component {
           width={columnWidths.id}
           isResizable={true}
         />
-        
+        <Column
+          columnKey="status"
+          header={
+            <SortHeaderCell>
+              <FormattedMessage id="ChargingStations.table.STATUS" description="STATUS for ChargingStations" 
+              defaultMessage ="STATUS"/>
+              <div className="gorToolHeaderSubText">  </div>
+            </SortHeaderCell>
+          }
+          cell={<TextCell data={sortedDataList} />}
+          fixed={true}
+          width={columnWidths.status}
+          isResizable={true}
+        />
+
+         <Column
+          columnKey="mode"
+          header={
+            <SortHeaderCell>
+              <FormattedMessage id="ChargingStations.table.operatingMode" description="operatingMode for ChargingStations" 
+              defaultMessage ="OPERATING MODE"/>
+              <div className="gorToolHeaderSubText"> MODE </div>
+            </SortHeaderCell>
+          }
+          cell={<TextCell data={sortedDataList} />}
+          fixed={true}
+          width={columnWidths.mode}
+          isResizable={true}
+        />
         <Column
           columnKey="dockedBots"
           header={

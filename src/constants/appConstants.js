@@ -80,7 +80,7 @@ export const CHARGERS_DETAIL = "CHARGERS_DETAIL";
 export const BUTLERS_DETAIL = "BUTLERS_DETAIL";
 export const PPS_DETAIL  = "pps";
 export const SYSTEM_PPS_DETAILS = "system_pps_details";
-export const SYSTEM_BUTLERS_DETAILS = "system_butlers_details";
+export const SYSTEM_BUTLERS_DETAILS = "butlers";
 export const HISTOGRAM_DETAILS = "histogram";
 export const USER_DATA = "users";
 
@@ -105,7 +105,9 @@ export const INFO=2;
 
 /*Constants for pagination*/
 export const PAGE_DATA = "PAGE_DATA";
-
+export const STATUS_FILTER = "STATUS_FILTER";
+export const TIME_FILTER = "TIME_FILTER"
+;
 /*Constants for Loader*/
 
 export const DISPLAY_LOADER = "DISPLAY_LOADER";

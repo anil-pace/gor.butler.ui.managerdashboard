@@ -9,15 +9,20 @@ function processUserDetails(data) {
     userData.name = (data[i].first_name || null) + " " + (data[i].last_name || null);
     if(data[i].status){
       userData.status = "Online";
+      userData.role = data[i].role;
+    userData.workMode = data[i].pps.pps_mode;
+    userData.location = "PPS " + data[i].pps.pps_id ;
+    userData.logInTime = data[i].login_time;
     }
 
     else {
       userData.status = "Offline";
+      userData.role = "--";
+    userData.workMode = "--";
+    userData.location = "--" ;
+    userData.logInTime = "--";
     }
-    userData.role = data[i].role;
-    userData.workMode = data[i].pps.pps_mode;
-    userData.location = "PPS " + data[i].pps.pps_id ;
-    userData.logInTime = data[i].login_time;
+    
     userDetails.push(userData);
     userData = {};
   }
@@ -33,10 +38,11 @@ export  function userDetails(state={},action){
          res=action.data;
          if(res.complete_data){
            userData = processUserDetails(res.complete_data);
-          }
+          
            return Object.assign({}, state, {
                "userDetails" : userData
           })
+         }
 
 	  default:
 	    return state
