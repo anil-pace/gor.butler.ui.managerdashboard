@@ -14,7 +14,7 @@ class DeleteUser extends React.Component{
       this.props.removeModal();
   }
   userDelete() {
-    let delurl="https://192.168.8.118/api/user/"+(this.props.id?this.props.id:'6');
+    let delurl="https://192.168.8.118/api/user/"+(this.props.id?this.props.id:'');
     let userData={
                 'url':delurl,
                 'method':'DELETE',
@@ -34,7 +34,7 @@ class DeleteUser extends React.Component{
             <div className='gor-delete-text'>
               <div className='iQuestion gor-align-sub'></div>
               <div className='gor-delete-line'>
-               <div className='gor-delete-query'><span>{"Are you sure you would like to delete "+(this.props.name?this.props.name:'')+"?"}</span>
+               <div className='gor-delete-query'><span>{'Are you sure you would like to delete "'+(this.props.name?this.props.name:'')+'"?'}</span>
                          <div className='gor-sub-head'>Information related to the user will be lost</div></div>
               </div>
            </div>

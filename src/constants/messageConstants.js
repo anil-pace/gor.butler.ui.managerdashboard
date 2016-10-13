@@ -1,7 +1,7 @@
 //success codes related to user management
 export const US001 = "User successfully added";
 export const US002 = "User successfully deleted";
-
+export const US004 = "User successfully edited";
 //error codes related to user management
 export const UE002 = "Username already registered!";
 export const UE003= "Password not provided!";

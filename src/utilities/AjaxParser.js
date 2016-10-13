@@ -1,8 +1,8 @@
 import {receiveAuthData} from '../actions/loginAction';
 import {assignRole} from '../actions/userActions';
 import {backendID,notifySuccess, notifyFail} from '../actions/validationActions';
-import {AUTH_LOGIN, ADD_USER, CHECK_ID,DELETE_USER,GET_ROLES} from '../constants/appConstants';
-import {US001,US002,UE001,UE002,UE003,UE004,UE005,UE006} from '../constants/messageConstants'; 
+import {AUTH_LOGIN, ADD_USER, CHECK_ID,DELETE_USER,GET_ROLES,EDIT_USER} from '../constants/appConstants';
+import {US001,US002,US004,UE001,UE002,UE003,UE004,UE005,UE006} from '../constants/messageConstants'; 
 
 export function AjaxParse(store,res,cause)
 {
@@ -41,6 +41,7 @@ export function AjaxParse(store,res,cause)
 			store.dispatch(backendID(isAuth));			
 			break;
 		case DELETE_USER:
+		case EDIT_USER:
 		case ADD_USER:
 			if(res.alert_data)
 		    {	
@@ -51,6 +52,9 @@ export function AjaxParse(store,res,cause)
 		    			break;
 		    		case 'us002':
 						store.dispatch(notifySuccess(US002));
+		    			break;
+		    		case 'us004':
+						store.dispatch(notifySuccess(US004));
 		    			break;
 		    		case 'ue001':
 						store.dispatch(notifyFail(UE001));

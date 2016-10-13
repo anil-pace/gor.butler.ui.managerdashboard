@@ -4,7 +4,7 @@ import { FormattedMessage,FormattedPlural } from 'react-intl';
 import {userRequest} from '../../actions/userActions';
 import {validateName, validatePassword, resetForm} from '../../actions/validationActions';
 import { connect } from 'react-redux';
-import {ERROR,GET_ROLES} from '../../constants/appConstants';
+import {ERROR,GET_ROLES,EDIT_USER} from '../../constants/appConstants';
 import FieldError from '../../components/fielderror/fielderror';
 import RadioGroup from './radioGroup';
 
@@ -15,7 +15,7 @@ class EditUser extends React.Component{
   }
   componentDidMount(){
         let userData={
-                'url':'https://192.168.8.118/api/user/role',
+                'url':'https://192.168.8.118/api/role',
                 'method':'GET',
                 'cause':GET_ROLES,
                 'contentType':'application/json',
@@ -61,16 +61,33 @@ class EditUser extends React.Component{
         {
           return;
         }
-
+        if(!pwd1)
+        {
+          pwd1="__unchanged__";
+          pwd2="__unchanged__";
+        }
         role=this.props.roleSet?this.props.roleSet.msg:this.props.roleInfo.msg.operator;
 
-        let userdata={         
-            'userid': userid,
-            'firstname':firstname,
-            'lastname':lastname,
-            'role':role,
-            'password': pwd1
+        let formdata={         
+                    "first_name": firstname,
+                    "last_name": lastname,
+                    "role_id":role,
+                    "password": pwd1,
+                    "password_confirm": pwd2     
+
          };
+        let editurl="https://192.168.8.118/api/user/"+this.props.id+"/edit";
+        let userData={
+                'url':editurl,
+                'formdata':formdata,
+                'method':'POST',
+                'cause':EDIT_USER,
+                'contentType':'application/json',
+                'accept':'application/json',
+                'token':sessionStorage.getItem('auth_token')
+            }
+        this.props.userRequest(userData);
+        this.removeThisModal();
   }
   render()
   {
@@ -99,7 +116,7 @@ class EditUser extends React.Component{
             
              <div className='gor-usr-hdsm'><FormattedMessage id="users.edit.userdetails.userid" description='Text for user id' 
             defaultMessage='User ID'/></div>
-              <input className='gor-usr-fdlg' type="text" placeholder="User Id" id="userid"  ref={node => { this.userId = node }} disabled/>
+              <input className='gor-usr-fdlg' type="text" placeholder={this.props.userName} id="userid"  ref={node => { this.userId = node }} disabled/>
             <p></p>
               <div className='gor-usr-field'>
                <div className='gor-usr-hdsm'><FormattedMessage id="users.edit.userdetails.firstname" description='Text for first name' 

@@ -13,15 +13,15 @@ export  function appInfo(state={},action){
           if(action.data===true)
           {
            idExist={
-              type:SUCCESS,
-              msg:'Succesfull'               
-            };            
+              type:ERROR,
+              msg:'Username already exists'             
+            };                        
           }
           else
           {
            idExist={
-              type:ERROR,
-              msg:'Username already exists'             
+              type:SUCCESS,
+              msg:'Succesfull'               
             };                        
           }
           return Object.assign({}, state, { 

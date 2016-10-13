@@ -90,6 +90,7 @@ export const ADD_USER='ADD_USER';
 export const CHECK_ID='CHECK_ID';
 export const DELETE_USER='DELETE_USER';
 export const GET_ROLES='GET_ROLES';
+export const EDIT_USER='EDIT_USER';
 
 /*Constants for app info checking*/
 export const ID_DATA = "ID_DATA";

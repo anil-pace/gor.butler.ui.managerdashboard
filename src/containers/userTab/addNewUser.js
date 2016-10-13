@@ -19,7 +19,7 @@ class AddUser extends React.Component{
   }
   componentDidMount(){
         let userData={
-                'url':'https://192.168.8.118/api/user/role',
+                'url':'https://192.168.8.118/api/role',
                 'method':'GET',
                 'cause':GET_ROLES,
                 'contentType':'application/json',
@@ -31,16 +31,18 @@ class AddUser extends React.Component{
   _checkId(){
     let data1={userid:this.userId.value};
     this.props.validateID(data1);
-
-    let userData={
+    if(this.props.idCheck.type)
+    {
+      let userData={
                 'url':'https://192.168.8.118/api/user_exits/'+data1,
                 'method':'GET',
                 'cause':CHECK_ID,
                 'contentType':'application/json',
                 'accept':'application/json',
                 'token':sessionStorage.getItem('auth_token')
+      }
+      this.props.userRequest(userData);
     }
-    this.props.userRequest(userData);
   }
   _checkName(){
      let data2={

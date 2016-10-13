@@ -69,26 +69,28 @@ class UserDataTable extends React.Component {
     });
   }
   handleEdit(columnKey,rowIndex) {
-    modal.add(AddUser, {
+    let uid=this.state.sortedDataList.newData[rowIndex].uid,uname=this.state.sortedDataList.newData[rowIndex].userName;
+    console.log(uname); 
+    modal.add(EditUser, {
       title: '',
       size: 'large', // large, medium or small,
       closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-      hideCloseButton: true // (optional) if you don't wanna show the top right close button
-      //.. all what you put in here you will get access in the modal props ;),
+      hideCloseButton: true,
+      id:uid,
+      userName:uname
     });
 
     console.log(this.state.sortedDataList.newData[rowIndex].userName)
   }
   handleDel(columnKey,rowIndex) {
+    let id=this.state.sortedDataList.newData[rowIndex].uid,name=this.state.sortedDataList.newData[rowIndex].name;
     modal.add(DeleteUser, {
       title: '',
       size: 'large', // large, medium or small,
       closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: true,
-      id:
-       // (optional) if you don't wanna show the top right close button
-      //.. all what you put in here you will get access in the modal props ;),
-    });
+      id:id,
+      name:name    });
     console.log(this.state.sortedDataList.newData[rowIndex].uid)
   }
  //  _showModal(){
