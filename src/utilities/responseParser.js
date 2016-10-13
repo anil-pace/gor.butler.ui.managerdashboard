@@ -14,8 +14,6 @@ export function ResponseParse(store,res)
 		store.dispatch(wsOnMessageAction(res));
 		return;
 	}
-		
-
 		switch(res.resource_type)
 		{
 			case PARSE_PPS:

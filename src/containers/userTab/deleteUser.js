@@ -1,0 +1,60 @@
+import React  from 'react';
+import ReactDOM  from 'react-dom';
+import { connect } from 'react-redux' ;
+import {userRequest} from '../../actions/userActions';
+import {DELETE_USER} from '../../constants/appConstants';
+import { FormattedMessage,FormattedPlural } from 'react-intl';        
+
+class DeleteUser extends React.Component{
+  constructor(props) 
+  {
+      super(props);  
+  }
+  removeThisModal() {
+      this.props.removeModal();
+  }
+  userDelete() {
+    let delurl="https://192.168.8.118/api/user/"+(this.props.id?this.props.id:'6');
+    let userData={
+                'url':delurl,
+                'method':'DELETE',
+                'cause':DELETE_USER,
+                'contentType':'application/json',
+                'accept':'application/json',
+                'token':sessionStorage.getItem('auth_token')
+    }
+    this.props.userRequest(userData);
+    this.props.removeModal();
+  }  
+  render()
+  {
+      return (
+        <div>
+          <div className='gor-delete gor-modal-content'>
+            <div className='gor-delete-text'>
+              <div className='iQuestion gor-align-sub'></div>
+              <div className='gor-delete-line'>
+               <div className='gor-delete-query'><span>{"Are you sure you would like to delete "+(this.props.name?this.props.name:'')+"?"}</span>
+                         <div className='gor-sub-head'>Information related to the user will be lost</div></div>
+              </div>
+           </div>
+              <div className='gor-delete-bottom'>
+                <button className='gor-cancel-btn' onClick={this.removeThisModal.bind(this)}>Cancel</button>
+                <button className='gor-delete-btn' onClick={this.userDelete.bind(this)}>Delete</button>
+              </div> 
+          </div>
+        </div>
+      );
+    }
+  };
+ function mapStateToProps(state, ownProps){
+  return  {
+    }
+} 
+function mapDispatchToProps(dispatch){
+    return {
+      userRequest: function(data){ dispatch(userRequest(data)); }
+    }
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(DeleteUser);

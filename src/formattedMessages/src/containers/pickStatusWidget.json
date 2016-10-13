@@ -11,8 +11,13 @@
   },
   {
     "id": "widget.pick.status.idle",
-    "description": "Throughput message",
-    "defaultMessage": "{count} PPS idle"
+    "description": "PPS Offline",
+    "defaultMessage": "Offline"
+  },
+  {
+    "id": "widget.pick.status.starting",
+    "description": "Awaiting throughput data",
+    "defaultMessage": "Starting..."
   },
   {
     "id": "widget.pick.throughput",

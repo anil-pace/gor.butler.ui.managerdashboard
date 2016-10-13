@@ -26,8 +26,6 @@ function processUserDetails(data) {
 }
 
 export  function userDetails(state={},action){
-  console.log("users red")
-  console.log(action.type)
 	switch (action.type) {
 	  case USER_DETAILS:
 

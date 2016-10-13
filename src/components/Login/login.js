@@ -34,6 +34,7 @@ class Login extends React.Component{
       else
       {
            document.body.className='';
+
            this.context.router.push("/md");
       }
     }
@@ -90,8 +91,10 @@ class Login extends React.Component{
                 'formdata':formdata,
                 'method':'POST',
                 'cause':AUTH_LOGIN,
-                'contentType':'application/json'
+                'contentType':'application/json',
+                'accept':'application/json'
             }
+        sessionStorage.setItem('nextView', 'md');
         if(MOCK === false){
     	    this.props.authLoginData(loginData);
         }

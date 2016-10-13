@@ -1,7 +1,10 @@
-import { AJAX_CALL ,ORDER_RECIEVED} from '../constants/appConstants'
+import {  AJAX_CALL} from '../constants/appConstants'
 
 export function changePPSmode(params){
-	console.log(params)
+	return {
+    type: AJAX_CALL,
+    params
+  }
 }
 
 

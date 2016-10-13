@@ -37,7 +37,6 @@ for (var i = endIndex; i < 24; i++) {
 }
 
 export  function histogramData(state={},action){
-  console.log(action.type)
 	switch (action.type) {
 	  case HISTOGRAM_DATA:
          var res, histData;

@@ -19,7 +19,7 @@ class PPStable extends React.Component {
     for (var index = 0; index < size; index++) {
       this._defaultSortIndexes.push(index);
     }
-    var columnWidth= (600/this.props.itemNumber)
+    var columnWidth= (1280/this.props.itemNumber)
     this.state = {
       sortedDataList: this._dataList,
       colSortDirs: {},
@@ -97,26 +97,27 @@ class PPStable extends React.Component {
   }
 
   handleModeChange(data) {
-    var checkedPPS=[], j=0;
+    var checkedPPS=[], j=0, mode=data.value;
     for (var i = this.state.isChecked.length - 1; i >= 0; i--) {
       if(this.state.isChecked[i] === true) {
         checkedPPS[j] = this.state.sortedDataList.newData[i].id
         checkedPPS[j] = checkedPPS[j].slice(4);
+        let formdata={         
+                    "requested_pps_mode": mode
+         };
         var url = BASE_URL + PPS_MODE_CHANGE_URL + checkedPPS[j] + "/pps_mode";
         let ppsModeChange={
-              'url':url,
+               'url':url,
+               'formdata':formdata,
                'method':'PUT',
-               'Authentication-Token': sessionStorage.getItem('auth_token'),
+               'token': sessionStorage.getItem('auth_token'),
               'contentType':'application/json'
          } 
+         
          this.props.changePPSmode(ppsModeChange);
         j++;
       }
     }
-    console.log(checkedPPS)
-    
-    
-
   }
 
   
@@ -174,7 +175,7 @@ class PPStable extends React.Component {
         headerHeight={70}
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
-        width={600}
+        width={1280}
         height={500}
         {...this.props}>
         <Column

@@ -26,36 +26,27 @@ class OrderListTab extends React.Component{
               'url':url,
               'method':'GET',
               'cause': ORDERS_RETRIEVE,
-              'Authentication-Token': sessionStorage.getItem('auth_token'),
+              'token': sessionStorage.getItem('auth_token'),
               'contentType':'application/json'
           } 
          this.props.getPageData(paginationData);
     }
 
+
     
   render(){
     var itemNumber = 3;
-    var temp_data=[{
-  "id": "Wave-009",
-  "status": "Online",
-  "recievedTime": "Today, 09:15"
-}, {
-  "id": "Wave-009",
-  "status": "Online",
-  "recievedTime": "Today, 09:15"
-}];
-
-//<OrderListTable items={this.props.orderData.ordersDetail} itemNumber={itemNumber}/>
+    console.log(this.props.orderData.ordersDetail)
+    var table = <OrderListTable items={this.props.orderData.ordersDetail} itemNumber={itemNumber}/>
     return (
       <div>
-      <OrderListTable items={this.props.orderData.ordersDetail} itemNumber={itemNumber}/>
- 
+      {table}
       <div id={"react-paginate"}>
         <ReactPaginate previousLabel={"previous"}
                        nextLabel={"next"}
                        breakLabel={<a href="">...</a>}
                        breakClassName={"break-me"}
-                       pageNum={5}
+                       pageNum={this.props.orderData.totalPage}
                        marginPagesDisplayed={2}
                        pageRangeDisplayed={50}
                        clickCallback={this.handlePageClick.bind(this)}
@@ -69,6 +60,7 @@ class OrderListTab extends React.Component{
 }
 
 function mapStateToProps(state, ownProps){
+  console.log(state)
   return {
     orderData: state.getOrderDetail || {},
   };

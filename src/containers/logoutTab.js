@@ -11,11 +11,13 @@ class LogOut extends React.Component{
       super(props);  
   }
   removeThisModal() {
+      this.props.removeModal();
   }
   appLogout() {
       this.props.removeModal();
       this.props.userLogout();
       this.props.endConnect();
+      sessionStorage.removeItem("nextView");
   }  
   render()
   {
@@ -23,7 +25,7 @@ class LogOut extends React.Component{
         <div>
           <div className='gor-logout'>
             <div className='gor-logout-text'>
-              <div className='iQuestion'></div><span>Are you sure you would like to log out now?</span>
+              <div className='iQuestion gor-align-middle'></div><span>Are you sure you would like to log out now?</span>
            </div>
               <div className='gor-logout-bottom'>
                 <button className='gor-cancel-btn' onClick={this.removeThisModal.bind(this)}>Cancel</button>
@@ -34,10 +36,7 @@ class LogOut extends React.Component{
       );
     }
   };
- function mapStateToProps(state, ownProps){
-  return  {
-    }
-} 
+ 
 function mapDispatchToProps(dispatch){
     return {
       endConnect: function(){ dispatch(endWsAction()); },
@@ -45,4 +44,4 @@ function mapDispatchToProps(dispatch){
     }
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(LogOut);
+export default connect(null,mapDispatchToProps)(LogOut);

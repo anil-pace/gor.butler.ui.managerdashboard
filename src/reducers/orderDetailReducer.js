@@ -18,13 +18,15 @@ export  function getOrderDetail(state={},action){
   switch (action.type) {
     case ORDER_RECIEVED:
 
-          var res, processedData;
+          var res, processedData,totalPage;
           res=action.data;
           if(res.orders) {
+             totalPage = res.total_pages;
              processedData = processOrders(res.orders);
           }
           return Object.assign({}, state, { 
-            "ordersDetail" : processedData
+            "ordersDetail" : processedData,
+            "totalPage" : totalPage
           })
 
     default:
