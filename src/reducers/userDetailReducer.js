@@ -20,6 +20,8 @@ function processUserDetails(data) {
     userData.location = "PPS " + data[i].pps.pps_id ;
     userData.logInTime = data[i].login_time;
     userData.userName= data[i].user_name;
+    userData.first=data[i].first_name;
+    userData.last=data[i].last_name;  
     userDetails.push(userData);
     userData = {};
   }

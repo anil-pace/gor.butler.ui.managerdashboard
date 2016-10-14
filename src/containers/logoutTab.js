@@ -18,6 +18,8 @@ class LogOut extends React.Component{
       this.props.userLogout();
       this.props.endConnect();
       sessionStorage.removeItem("nextView");
+      sessionStorage.removeItem("subTab");
+      sessionStorage.removeItem("selTab");
   }  
   render()
   {

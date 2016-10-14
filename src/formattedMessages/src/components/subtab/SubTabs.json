@@ -1,10 +1,5 @@
 [
   {
-    "id": "notification.tab.heading",
-    "description": "notification tab",
-    "defaultMessage": "Notification"
-  },
-  {
     "id": "butlerBot.tab.heading",
     "description": "butler bot tab",
     "defaultMessage": "Butler Bots"

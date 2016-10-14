@@ -35,7 +35,8 @@ class DeleteUser extends React.Component{
               <div className='iQuestion gor-align-sub'></div>
               <div className='gor-delete-line'>
                <div className='gor-delete-query'><span>{'Are you sure you would like to delete "'+(this.props.name?this.props.name:'')+'"?'}</span>
-                         <div className='gor-sub-head'>Information related to the user will be lost</div></div>
+                         <div className='gor-sub-head'><FormattedMessage id="users.delete.heading" description='Text for user delete heading' 
+            defaultMessage='Information related to the user will be lost'/></div></div>
               </div>
            </div>
               <div className='gor-delete-bottom'>

@@ -27,6 +27,7 @@ export const RECIEVE_ITEM_TO_STOCK = "RECIEVE_ITEM_TO_STOCK";
 /*Constants for performance widget*/
 export const RENDER_WIDGET = "RENDER_WIDGET";
 export const TAB_SELECTED = "TAB_SELECTED";
+export const PREV_TAB_SELECTED = "PREV_TAB_SELECTED";
 export const SUB_TAB_SELECTED = "SUB_TAB_SELECTED";
 
 /*Parsing Constants*/
@@ -126,7 +127,13 @@ export const TAB_ROUTE_MAP = {
 		[INVENTORY] : "inventory",
 		[USERS] : "users"
 	}
+export const SYS_SUB_TAB_ROUTE_MAP={
+	[NOTIFICATION] : "notification",
+	[BUTLERBOTS]:"butlerbots",
+	[PPS]:"pps",
+	[CHARGING]:"chargingstation"
 
+}
 /*Constants for api response codes*/
 export const CODE_US001='us001';
 export const CODE_US002='us002';
@@ -137,7 +144,4 @@ export const CODE_UE003='ue003';
 export const CODE_UE004='ue004';
 export const CODE_UE005='ue005';
 export const CODE_UE006='ue006';
-
-
-
 

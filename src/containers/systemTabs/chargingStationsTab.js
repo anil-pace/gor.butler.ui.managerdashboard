@@ -16,7 +16,7 @@ class ChargingStations extends React.Component{
 	
 	var itemNumber = 2, connectedBots = 0;
     var chargersData =  this.props.chargersDetail.chargersDetail;
-    if(chargersData.length) {
+    if(chargersData && chargersData.length) {
     	for (var i = chargersData.length - 1; i >= 0; i--) {
         	if(chargersData[i].dockedBots) {
         		connectedBots++;

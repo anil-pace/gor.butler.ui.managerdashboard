@@ -6,7 +6,8 @@ import { connect } from 'react-redux';
 import { Router, Route, hashHistory, IndexRoute} from 'react-router';
 import {loginRequest} from '../actions/loginAction';
 import Overview from '../containers/OverviewTab'; 
-import {tabSelected} from '../actions/tabSelectAction';
+import {tabSelected,subTabSelected} from '../actions/tabSelectAction';
+import {OVERVIEW,TAB_ROUTE_MAP} from '../constants/appConstants';
 
 
 class Routes extends React.Component{
@@ -18,10 +19,13 @@ class Routes extends React.Component{
    requireAuth(nextState, replace ) {
   		if (sessionStorage.getItem('auth_token')) 
   		{
-  			let nextView ='/'+ (sessionStorage.getItem('nextView') || 'md');
-  			let selTab =(sessionStorage.getItem('selTab') || 'OVERVIEW');
+  			let subTab =(sessionStorage.getItem('subTab') || null);
+  			let nextView ='/'+ (subTab || sessionStorage.getItem('nextView') || 'md');
+  			let selTab =(sessionStorage.getItem('selTab') || TAB_ROUTE_MAP[OVERVIEW]);
+  			
   			this.props.loginRequest();
   			this.props.tabSelected(selTab);
+  			this.props.subTabSelected(subTab);
     		replace(nextView)
  	 	}
  	 	
@@ -161,7 +165,8 @@ class Routes extends React.Component{
 var mapDispatchToProps = function(dispatch){
     return {
         loginRequest: function(){ dispatch(loginRequest()); },
-        tabSelected: function(data){ dispatch(tabSelected(data)) }
+        tabSelected: function(data){ dispatch(tabSelected(data)) },
+        subTabSelected: function(data){ dispatch(subTabSelected(data)) }
     }
 };
 export default connect(null,mapDispatchToProps)(Routes);

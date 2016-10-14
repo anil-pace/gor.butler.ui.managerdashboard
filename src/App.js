@@ -4,9 +4,10 @@ import ReactDOM  from 'react-dom';
 import Tabs from './containers/tabs';
 import Header from './components/header/header';
 import {setWsAction ,setMockAction} from './actions/socketActions';
-import { WS_CONNECT,WS_ONSEND,WS_MOCK, HIDE } from './constants/appConstants'
-import { wsOverviewData, wsUsersData } from './constants/initData.js'
-import { REQUEST_HEADER, getFetchData } from './actions/headerAction'
+import { WS_CONNECT,WS_ONSEND,WS_MOCK,USERS,TAB_ROUTE_MAP,OVERVIEW ,SYSTEM,ORDERS,INVENTORY} from './constants/appConstants'
+import { wsOverviewData} from './constants/initData.js';
+import { REQUEST_HEADER, getFetchData } from './actions/headerAction';
+import {prevTabSelected} from './actions/tabSelectAction';
 import { connect } from 'react-redux'; 
 import TopNotifications from './components/topnotify/topnotify';
 
@@ -15,7 +16,8 @@ class App extends React.Component{
 	/**
 	 * Called once before rendering of component,used to displatch fetch action
 	 * @return {[type]}
-	 */ 
+	 */
+  
 	constructor(props) 
 	{  
     	super(props); 
@@ -26,47 +28,61 @@ class App extends React.Component{
         this.context.router.push("/login");
 
   	}
+    
   	componentWillReceiveProps(nextProps) {
     /**
      * Checking if the user is loggedin 
      * and redirecting to main page
      */
-    let subscribeData = wsOverviewData;
-    if(nextProps.tab === "USERS") {
-      subscribeData = wsUsersData;
-    }
-
-    else {
-      subscribeData = wsOverviewData;
-    }
-    console.log(subscribeData)
+   
+    
       let loginAuthorized= nextProps.loginAuthorized,
       authToken=nextProps.authToken,
-      socketStatus = nextProps.socketStatus;
+      socketStatus = nextProps.socketStatus,
+      currTab = nextProps.subTab || nextProps.tab || null;
 
-      if(!loginAuthorized)
+      if(!loginAuthorized){
                  this.context.router.push("/login");
+      }
       
       if(MOCK === false){
-        if(loginAuthorized && !socketStatus){
-            this.props.initWebSocket() ; 
-          }
-        if (loginAuthorized && socketStatus && !nextProps.socketAuthorized) {
-             let webSocketData = {
+         let subscribeData;
+        if(currTab) {
+          subscribeData = (wsOverviewData[currTab] || wsOverviewData["default"]);
+        }
+
+        else {
+          subscribeData = wsOverviewData["default"];
+        }
+
+        if(loginAuthorized){
+            if(!socketStatus){
+              this.props.initWebSocket() ; 
+            }
+            else if(!nextProps.socketAuthorized){
+              let webSocketData = {
                   'type': 'auth',
                   'data' : {
                       "auth_token" : authToken
                   }
               }
               this.props.sendAuthToSocket(webSocketData) ;
+            }
+            else if(nextProps.prevTab !== currTab){
+              this.props.initDataSentCall(subscribeData) ;
+              this.props.prevTabSelected(currTab || TAB_ROUTE_MAP[OVERVIEW]) ;
+            }
         }
-        if(loginAuthorized &&socketStatus && nextProps.socketAuthorized && !nextProps.initDataSent){
-      	   	this.props.initDataSentCall(wsOverviewData) ;
-        }
-      }
+        
+      
+      
+      
+    }
       else{
-          this.props.initMockData(wsOverviewData) ;
+          this.props.initMockData(wsOverviewData["DEFAULT"]);
       }
+    
+    
     }
   	/**Render method called when component react renders
   	 * @return {[type]}
@@ -104,9 +120,11 @@ function mapStateToProps(state,ownProps) {
  	loginAuthorized : state.authLogin.loginAuthorized,
  	socketStatus: state.recieveSocketActions.socketConnected,
  	socketAuthorized: state.recieveSocketActions.socketAuthorized,
- 	initDataSent: state.recieveSocketActions.initDataSent,
+ 	
   intl: state.intl,
-  tab:state.tabSelected.tab
+  tab:state.tabSelected.tab,
+  subTab:state.tabSelected.subTab,
+  prevTab:state.tabSelected.prevTab
  }
 } 
 /**
@@ -117,7 +135,8 @@ function mapDispatchToProps(dispatch){
         initWebSocket: function(){ dispatch(setWsAction({type:WS_CONNECT})); },
         sendAuthToSocket: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
         initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
-        initMockData: function(data){dispatch(setMockAction({type:WS_MOCK,data:data}));}
+        initMockData: function(data){dispatch(setMockAction({type:WS_MOCK,data:data}));},
+        prevTabSelected: function(data){ dispatch(prevTabSelected(data)) }
     }
 };
 export  default connect(mapStateToProps,mapDispatchToProps)(App);

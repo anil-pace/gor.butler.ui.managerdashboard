@@ -17,7 +17,7 @@ class PPS extends React.Component{
     }	
 	render(){	
     var data = this.props.PPSDetail.PPStypeDetail, operatorNum = 0, itemNumber = 5;
-    if(data.length) {
+    if(data && data.length) {
     	for (var i = data.length - 1; i >= 0; i--) {
     		if(data[i].operatorAssigned !== null) {
     		operatorNum = data[i].operatorAssigned.length + operatorNum;

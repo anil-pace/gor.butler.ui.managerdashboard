@@ -69,7 +69,7 @@ class UserDataTable extends React.Component {
     });
   }
   handleEdit(columnKey,rowIndex) {
-    let uid=this.state.sortedDataList.newData[rowIndex].uid,uname=this.state.sortedDataList.newData[rowIndex].userName;
+    let uid=this.state.sortedDataList.newData[rowIndex].uid,uname=this.state.sortedDataList.newData[rowIndex].userName,fname=this.state.sortedDataList.newData[rowIndex].first,lname=this.state.sortedDataList.newData[rowIndex].last;
     console.log(uname); 
     modal.add(EditUser, {
       title: '',
@@ -77,7 +77,9 @@ class UserDataTable extends React.Component {
       closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: true,
       id:uid,
-      userName:uname
+      userName:uname,
+      first:fname,
+      last:lname
     });
 
     console.log(this.state.sortedDataList.newData[rowIndex].userName)

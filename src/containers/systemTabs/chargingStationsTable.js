@@ -8,10 +8,11 @@ import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell
 class ChargingStationsTable extends React.Component {
   constructor(props) {
     super(props);
-    var temp = new Array(this.props.items.length).fill(false);
-    this._dataList = new tableRenderer(this.props.items.length);
+    var items = this.props.items || [];
+    var temp = new Array(items ? items.length : 0).fill(false);
+    this._dataList = new tableRenderer(items ? items.length : 0);
     this._defaultSortIndexes = [];
-    this._dataList.newData=this.props.items;
+    this._dataList.newData=items;
     var size = this._dataList.getSize();
     for (var index = 0; index < size; index++) {
       this._defaultSortIndexes.push(index);

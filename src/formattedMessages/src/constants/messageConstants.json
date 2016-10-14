@@ -1,0 +1,42 @@
+[
+  {
+    "id": "notify.success.add",
+    "description": "Text for successfull user addition",
+    "defaultMessage": "User successfully added"
+  },
+  {
+    "id": "notify.success.delete",
+    "description": "Text for successfull user deletion",
+    "defaultMessage": "User successfully deleted"
+  },
+  {
+    "id": "notify.success.edit",
+    "description": "Text for successfully editing user",
+    "defaultMessage": "User successfully edited"
+  },
+  {
+    "id": "notify.error.usernameExists",
+    "description": "Text for already registered username",
+    "defaultMessage": "Username already registered!"
+  },
+  {
+    "id": "notify.error.passwordMissing",
+    "description": "Text for passwords missing",
+    "defaultMessage": "Password not provided!"
+  },
+  {
+    "id": "notify.error.passwordMatch",
+    "description": "Text for passwords not matching",
+    "defaultMessage": "Passwords do not match!"
+  },
+  {
+    "id": "notify.error.username",
+    "description": "Text for missing username",
+    "defaultMessage": "Username is a required field!"
+  },
+  {
+    "id": "notify.error.role",
+    "description": "Text for missing roles",
+    "defaultMessage": "Role is a required field!"
+  }
+]
