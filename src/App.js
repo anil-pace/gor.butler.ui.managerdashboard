@@ -5,10 +5,11 @@ import Tabs from './containers/tabs';
 import Header from './components/header/header';
 import {setWsAction ,setMockAction} from './actions/socketActions';
 import { WS_CONNECT,WS_ONSEND,WS_MOCK,USERS,TAB_ROUTE_MAP,OVERVIEW ,SYSTEM,ORDERS,INVENTORY} from './constants/appConstants'
-import { wsOverviewData} from './constants/initData.js'
-import { REQUEST_HEADER, getFetchData } from './actions/headerAction'
-import {prevTabSelected} from './actions/tabSelectAction'
+import { wsOverviewData} from './constants/initData.js';
+import { REQUEST_HEADER, getFetchData } from './actions/headerAction';
+import {prevTabSelected} from './actions/tabSelectAction';
 import { connect } from 'react-redux'; 
+import TopNotifications from './components/topnotify/topnotify';
 
 
 class App extends React.Component{ 
@@ -87,12 +88,13 @@ class App extends React.Component{
   	 * @return {[type]}
   	 */
 	render(){
-		var items3={start:"09:10:25", name:"Krish verma gandhi sharma", post:"Manager"}
+		var items3={start:"09:00:25", name:"Krish verma gandhi sharma", post:"Manager"}
 		
 		
 		return (
 			
 			<div className="mainContainer">
+        <TopNotifications />
         <Header user={items3}/>
 				<Tabs/>
 				{this.props.children}

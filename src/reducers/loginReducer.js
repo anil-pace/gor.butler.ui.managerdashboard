@@ -31,7 +31,7 @@ export  function authLogin(state={},action){
     case LOGOUT:
      sessionStorage.removeItem('auth_token');      
       return Object.assign({}, state, {
-          "loginAuthorized":false,
+          "loginAuthorized":null,
           "auth_token":null
       })
 

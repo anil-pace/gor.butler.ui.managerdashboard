@@ -90,16 +90,23 @@ export const AUTH_LOGIN = "AUTH_LOGIN";
 export const ADD_USER='ADD_USER';
 export const CHECK_ID='CHECK_ID';
 export const DELETE_USER='DELETE_USER';
+export const GET_ROLES='GET_ROLES';
 
-/*Constants for Error checking*/
+/*Constants for app info checking*/
 export const ID_DATA = "ID_DATA";
 export const NAME_DATA = "NAME_DATA";
 export const PASSWORD_DATA = "PASSWORD_DATA";
+export const PASS_DATA = "PASS_DATA";
 export const INFO_RESET = "ERROR_RESET";
 export const ERROR=0;
 export const SUCCESS=1;
 export const INFO=2;
-
+export const HIDE=3;
+export const NOTIFY_PASS='NOTIFY_PASS';
+export const NOTIFY_FAIL='NOTIFY_FAIL';
+export const NOTIFY_HIDE='NOTIFY_HIDE';
+export const MD_ID='MD_ID';
+export const SET_ROLE='SET_ROLE';
 
 /*Constants for pagination*/
 export const PAGE_DATA = "PAGE_DATA";
