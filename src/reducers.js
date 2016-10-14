@@ -20,7 +20,6 @@ import {chargersDetail} from './reducers/chargersDetailReducer'
 import {butlerDetail} from './reducers/butlerDetailReducer'
 import {PPSDetail} from './reducers/ppsDetailReducer'
 import {tabSelected} from './reducers/tabSelectReducer'
-import {subTabSelected} from './reducers/subTabSelectReducer'
 import {reducer as modalReducer} from 'react-redux-modal'
 import {PPSperformance} from './reducers/ppsPerformanceReducer'
 import {userDetails} from './reducers/userDetailReducer';
@@ -50,7 +49,6 @@ const rootReducer = combineReducers({
   butlerDetail,
   PPSDetail,
   tabSelected,
-  subTabSelected,
   PPSperformance,
   userDetails,
   loader

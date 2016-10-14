@@ -3,7 +3,7 @@ import ReactDOM  from 'react-dom';
 import Tab from '../components/tabs/tab';
 import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
-import {tabSelected} from '../actions/tabSelectAction';
+import {tabSelected,subTabSelected} from '../actions/tabSelectAction';
 import {displayLoader} from '../actions/loaderAction';
 import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP} from '../constants/appConstants';
 import { FormattedMessage } from 'react-intl';
@@ -24,16 +24,18 @@ class Tabs extends React.Component{
          * Displaying loader currently for User tab
          * only
          */
-        if(selTab === USERS){
+        if(selTab !== OVERVIEW){
             this.props.displayLoader(true);
         }
         else{
             this.props.displayLoader(false)
         }
         
-        this.props.tabSelected(selTab);
+        this.props.tabSelected(TAB_ROUTE_MAP[selTab]);
+        this.props.subTabSelected(null);
         sessionStorage.setItem('nextView', TAB_ROUTE_MAP[selTab]);
-        sessionStorage.setItem('selTab', selTab);
+        sessionStorage.setItem('selTab', TAB_ROUTE_MAP[selTab]);
+        sessionStorage.setItem('subTab', '');
     }
     
 	render(){
@@ -105,13 +107,14 @@ class Tabs extends React.Component{
 function mapStateToProps(state, ownProps){
     
     return  {
-         tab:state.tabSelected.tab || "OVERVIEW"
+         tab:state.tabSelected.tab || TAB_ROUTE_MAP[OVERVIEW]
     }
 }
 
 var mapDispatchToProps = function(dispatch){
 	return {
 		tabSelected: function(data){ dispatch(tabSelected(data)); },
+        subTabSelected: function(data){ dispatch(subTabSelected(data)); },
         displayLoader:function(data){dispatch(displayLoader(data));}
 	}
 };

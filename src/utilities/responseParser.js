@@ -61,7 +61,7 @@ export function ResponseParse(store,res)
 				//store.dispatch(recieveUserDetails(res));	  
 				break;	 			    
 			default:
-				store.dispatch(initData(res));          //Default action
+				//store.dispatch(initData(res));          //Default action
 			break;			
 	}
 }  

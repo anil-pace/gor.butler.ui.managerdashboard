@@ -14,7 +14,7 @@ class ButlerBot extends React.Component{
 	render(){
   var itemNumber = 6;
   var butlerData = this.props.butlerDetail.butlerDetail, avgVoltage = 0;
-  if(butlerData.length) {
+  if(butlerData && butlerData.length) {
   	for (var i = butlerData.length - 1; i >= 0; i--) {
   		avgVoltage = butlerData[i].voltage + avgVoltage;
   	}
