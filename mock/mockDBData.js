@@ -50,7 +50,7 @@ export const resTypeOrders={
         "cut_off_time": 170,   
         "estimated_completion_time": 20, 
         "orders_at_risk":0,   
-        "Wave_ending_time":'21-30-57 (IST)' 
+        "wave_ending_time":'21-30-57 (IST)' 
     },
     "resource_type": "orders"
 }
