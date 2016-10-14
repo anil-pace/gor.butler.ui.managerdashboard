@@ -3,9 +3,10 @@ import ReactDOM  from 'react-dom';
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
 import {validateID, validateName, validatePassword, resetForm} from '../../actions/validationActions';
 import {userRequest} from '../../actions/userActions';
-import {ADD_USER,CHECK_ID,ERROR,SUCCESS,INFO} from '../../constants/appConstants';
+import {ADD_USER,CHECK_ID,ERROR,SUCCESS,INFO,GET_ROLES} from '../../constants/appConstants';
 import { connect } from 'react-redux';
 import FieldError from '../../components/fielderror/fielderror';
+import RadioGroup from './radioGroup';
 
 class AddUser extends React.Component{
   constructor(props) 
@@ -16,22 +17,30 @@ class AddUser extends React.Component{
     this.props.resetForm();
     this.props.removeModal();
   }
+  componentDidMount(){
+        let userData={
+                'url':'https://192.168.8.118/api/user/role',
+                'method':'GET',
+                'cause':GET_ROLES,
+                'contentType':'application/json',
+                'accept':'application/json',
+                'token':sessionStorage.getItem('auth_token')
+            }
+        this.props.userRequest(userData);
+  }
   _checkId(){
     let data1={userid:this.userId.value};
     this.props.validateID(data1);
-    // let formdata={         
-    //                 "username": data1,
-    // };
-    // let userData={
-    //             'url':'https://192.168.8.118/api/user',
-    //             'formdata':formdata,
-    //             'method':'POST',
-    //             'cause':CHECK_ID,
-    //             'contentType':'application/json',
-    //             'accept':'application/json',
-    //             'token':sessionStorage.getItem('auth_token')
-    // }
-    // this.props.userRequest(userData);
+
+    let userData={
+                'url':'https://192.168.8.118/api/user_exits/'+data1,
+                'method':'GET',
+                'cause':CHECK_ID,
+                'contentType':'application/json',
+                'accept':'application/json',
+                'token':sessionStorage.getItem('auth_token')
+    }
+    this.props.userRequest(userData);
   }
   _checkName(){
      let data2={
@@ -49,7 +58,7 @@ class AddUser extends React.Component{
   }
   _handleAddUser(e){
         e.preventDefault();
-        let pwd1,pwd2,role,radBtn,opt,userid,firstName,lastname;
+        let pwd1,pwd2,role,opt,userid,firstName,lastname;
 
         userid=this.userId.value;
         firstname=this.firstName.value;
@@ -64,14 +73,7 @@ class AddUser extends React.Component{
           return;
         }
 
-        // radBtn=document.getElementsByName('role');
-
-        // for(let i=0;i<radBtn.length;i++)
-        // {
-        //   if(radBtn[i].checked)
-        //     role=radBtn[i].value;
-        // }
-        role=2;
+        role=this.props.roleSet?this.props.roleSet.msg:this.props.roleInfo.msg.operator;
 
         let formdata={         
                     "first_name": firstname,
@@ -92,6 +94,7 @@ class AddUser extends React.Component{
                 'token':sessionStorage.getItem('auth_token')
             }
         this.props.userRequest(userData);
+        this.removeThisModal();
   }
   render()
   {
@@ -139,44 +142,8 @@ class AddUser extends React.Component{
 
             </div>
 
-            <div className='gor-usr-details'>
-            <div className='gor-usr-hdlg'><FormattedMessage id="users.add.roledetails.heading" description='Heading for role' 
-            defaultMessage='Choose a role'/></div>
-            <div className='gor-sub-head'><FormattedMessage id="users.add.roledetails.subheading" description='Subheading for role' 
-            defaultMessage='User will be given a specific level of control over the Butler system depending on the designated role'/></div>
-                
-                <div className='gor-role'>
-                <input type="radio"  name='role' defaultChecked value="operator" ref={node => { this.operator = node }} /><span className='gor-usr-hdsm'>
-                <FormattedMessage id="users.add.roledetails.operator" description='Text for operator' 
-            defaultMessage='Operator'/> </span>
-                </div>
-                <div className='gor-choose'>
-                  <div className='gor-sub-head'><FormattedMessage id="users.add.roledetails.operatortext" description='Subtext for operator' 
-            defaultMessage='Grant access to the Operator Interface at each Pick Put Station in the Butler system'/></div>
-                </div>
-
-                <div className='gor-role'>
-                <input type="radio" value="supervisor" id='userRole' name="role" ref={node => { this.supervisor = node }} /><span className='gor-usr-hdsm'>
-                <FormattedMessage id="users.add.roledetails.supervisor" description='Text for supervisor' 
-            defaultMessage=' Supervisor'/></span>
-                </div>
-                <div className='gor-choose'>
-                <div className='gor-sub-head'>
-                <FormattedMessage id="users.add.roledetails.supervisortext" description='Subtext for supervisor' 
-            defaultMessage='Grant access to the Management Interface and Operator Interface for the Butler system'/></div>
-                </div>
-
-                <div className='gor-role'>
-                <input type="radio"value="manager" id='userRole' name="role" ref={node => { this.manager = node }} /><span className='gor-usr-hdsm'>
-                <FormattedMessage id="users.add.roledetails.manager" description='Text for manager' 
-            defaultMessage=' Manager'/></span>
-                </div>
-                <div className='gor-choose'>
-                <div className='gor-sub-head'><FormattedMessage id="users.add.roledetails.managertext" description='Subtext for manager' 
-            defaultMessage='Grant access to the Management Interface and Operator Interface to all systems'/></div>
-                </div>
-            </div>
-
+          {this.props.roleInfo?(<RadioGroup operator={this.props.roleInfo.msg.operator} manager={this.props.roleInfo.msg.manager} />):''}
+            
             <div className='gor-usr-details'>
             <div className='gor-usr-hdlg'><FormattedMessage id="users.add.password.heading" description='Heading for create password' 
             defaultMessage='Create password'/></div>
@@ -209,11 +176,12 @@ class AddUser extends React.Component{
   }
 
 function mapStateToProps(state, ownProps){
-  console.log(state);
   return {
       idCheck: state.appInfo.idInfo || {},
       nameCheck: state.appInfo.nameInfo || {},
-      passwordCheck: state.appInfo.passwordInfo || {}      
+      passwordCheck: state.appInfo.passwordInfo || {},
+      roleInfo: state.appInfo.roleInfo || null,
+      roleSet:  state.appInfo.roleSet  || null  
   };
 }
 

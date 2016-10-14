@@ -2,8 +2,9 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import Footer from '../Footer/Footer';
 import { authLoginData,mockLoginAuth } from '../../actions/loginAction';
+import {validateID, validatePass, resetForm} from '../../actions/validationActions';
 import { connect } from 'react-redux';
-import {AUTH_LOGIN} from '../../constants/appConstants'; 
+import {AUTH_LOGIN,ERROR} from '../../constants/appConstants'; 
 import {LOGIN_URL} from '../../constants/configConstants'; 
 import { FormattedMessage } from 'react-intl';
 import { updateIntl } from 'react-intl-redux';
@@ -25,20 +26,21 @@ class Login extends React.Component{
      * Checking if the user is loggedin 
      * and redirecting to main page
      */
-      if(!nextProps.loginAuthorized)  
+      if(nextProps.loginAuthorized)  
       {
-         this.authError.style.display='block';
-         this.userError.style.display='none';
-         this.passError.style.display='none';
-      }
-      else
-      {
+           this.props.resetForm();
            document.body.className='';
-
            this.context.router.push("/md");
       }
     }
-
+    _checkUser(){
+            let data1={userid:this.userName.value};
+            this.props.validateID(data1);
+    }
+    _checkPass(){
+            let data1={password:this.password.value};
+            this.props.validatePass(data1);
+    }
     /**
      * Checks for the changes in the language selection
      * and dispatches the corresponding action.
@@ -68,22 +70,6 @@ class Login extends React.Component{
          };
         if(!formdata.username||!formdata.password)
         {
-            if(!formdata.username)
-            {
-                this.userError.style.display='block';
-                this.authError.style.display='none';
-                this.passError.style.display='none';
-                this.userField.style.borderColor='#EC1C24';
-                this.passField.style.borderColor='';
-            }
-            else
-            {
-                this.passError.style.display='block';
-                this.authError.style.display='none';
-                this.userError.style.display='none';
-                this.userField.style.borderColor='';                
-                this.passField.style.borderColor='#EC1C24';
-            }
             return;
         }
         let loginData={
@@ -149,37 +135,40 @@ class Login extends React.Component{
 
                     </p>   
                 </div>
-                <div className='gor-login-auth-error' 
-                    ref={node => { this.authError = node }}><div className='gor-login-error'></div>
+                {(this.props.loginAuthorized===false)?(<div className='gor-login-auth-error'><div className='gor-login-error'></div>
 
                     <FormattedMessage id='login.butler.fail' 
                         defaultMessage="Invalid username and/or password" description="Text for login failure"/>
 
-                </div>
+                 </div>):''
+                }
                 <section>
-                <div className='gor-login-field' ref={node => { this.userField = node }}>
-				        <div className='gor-login-user'></div><input className='field' type="text" id="username"  
+                <div className={'gor-login-field'+(this.props.idInfo.type===ERROR?' gor-input-error':' gor-input-ok')} ref={node => { this.userField = node }}>
+				        <div className='gor-login-user'></div><input className="field" onBlur={this._checkUser.bind(this)} type="text" id="username"  
                         placeholder={usr.props.defaultMessage} ref={node => { this.userName = node }}/>
                 </div>
                 </section>
-                    <div className='gor-login-usr-error' 
-                    ref={node => { this.userError = node }}>
+                {this.props.idInfo?(this.props.idInfo.type===ERROR?(
+                    <div className='gor-login-usr-error' >
 
                     <FormattedMessage id='login.butler.error.username' 
                         defaultMessage="Please enter your username" description="Text for missing username error"/>
 
-                    </div>
+                    </div>):''):''
+                }
                 <section>
-                <div className='gor-login-field'  ref={node => { this.passField = node }}>
-                        <div className='gor-login-password'></div><input className='field' type="password" id="password" placeholder={pwd.props.defaultMessage} ref={node => { this.password = node }}/>
+                <div className={'gor-login-field'+(this.props.loginPassCheck.type===ERROR?' gor-input-error':' gor-input-ok')}  ref={node => { this.passField = node }}>
+                        <div className='gor-login-password'></div><input className='field' onBlur={this._checkPass.bind(this)} type="password" id="password" placeholder={pwd.props.defaultMessage} ref={node => { this.password = node }}/>
                 </div>
                 </section>
-                    <div className='gor-login-usr-error' ref={node => { this.passError = node }} >
+                {this.props.loginPassCheck?(this.props.loginPassCheck.type===ERROR?(
+                    <div className='gor-login-usr-error' >
 
                     <FormattedMessage id='login.butler.error.password' 
                         defaultMessage="Please enter your password" description="Text for missing password error"/>
 
-                    </div>
+                    </div>):''):''
+                }
                 <section>
                     <input type="submit" className='gor-login-btn'  value="Login" /><br />
                 </section>
@@ -208,7 +197,9 @@ function mapStateToProps(state, ownProps){
         loginAuthorized:state.authLogin.loginAuthorized,
         auth_token: state.authLogin.auth_token,
         userName: state.authLogin.username,
-        sLang: state.intl.locale
+        sLang: state.intl.locale,
+        idInfo: state.appInfo.idInfo||{},
+        loginPassCheck: state.appInfo.loginPassInfo||{}              
     };
 }
 /**
@@ -221,7 +212,10 @@ var mapDispatchToProps = function(dispatch){
     return {
         authLoginData: function(params){ dispatch(authLoginData(params)); },
         updateIntl: function(params){ dispatch(updateIntl(params));},
-        mockLoginAuth: function(params){ dispatch(mockLoginAuth(params)); }
+        mockLoginAuth: function(params){ dispatch(mockLoginAuth(params)); },
+        validateID: function(data){ dispatch(validateID(data)); },        
+        validatePass: function(data){ dispatch(validatePass(data)); },        
+        resetForm:   function(){ dispatch(resetForm()); }
     }
 };
 
