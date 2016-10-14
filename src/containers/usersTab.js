@@ -12,26 +12,21 @@ class UsersTab extends React.Component{
 	render(){
 		var itemNumber = 7;		
 		return (
-
 			<div>
 				<div>
 					<div className="gorUserTable">
-          				<Loader isLoading={this.props.isLoading} />
-						<UserDataTable items={this.props.userDetails} itemNumber={itemNumber}/>
+						<UserDataTable items={this.props.userdetails} itemNumber={itemNumber}/>
 					</div>
 				</div>
 			</div>
 		);
-
-		
 	}
 };
 
 
 function mapStateToProps(state, ownProps){
   return {
-    userDetails: state.userDetails.userDetails || {},
-    isLoading:state.loader.isLoading
+    userdetails: state.userDetails.userDetails || {},
   };
 }
 

@@ -1,7 +1,8 @@
 import {receiveAuthData} from '../actions/loginAction';
+import {recieveOrdersData} from '../actions/paginationAction';
 import {assignRole} from '../actions/userActions';
 import {backendID,notifySuccess, notifyFail} from '../actions/validationActions';
-import {AUTH_LOGIN, ADD_USER, CHECK_ID,DELETE_USER,GET_ROLES,EDIT_USER,BUTLER_UI,CODE_US001,CODE_US002,CODE_US004,CODE_UE001,CODE_UE002,CODE_UE003,CODE_UE004,CODE_UE005,CODE_UE006} from '../constants/appConstants';
+import {AUTH_LOGIN, ADD_USER, CHECK_ID,DELETE_USER,GET_ROLES,ORDERS_RETRIEVE,EDIT_USER,BUTLER_UI,CODE_US001,CODE_US002,CODE_US004,CODE_UE001,CODE_UE002,CODE_UE003,CODE_UE004,CODE_UE005,CODE_UE006} from '../constants/appConstants';
 import {US001,US002,US004,UE001,UE002,UE003,UE004,UE005,UE006} from '../constants/messageConstants'; 
 
 export function AjaxParse(store,res,cause)
@@ -11,6 +12,12 @@ export function AjaxParse(store,res,cause)
 		case AUTH_LOGIN:
 			store.dispatch(receiveAuthData(res));
 			break;
+
+
+		case ORDERS_RETRIEVE:
+			store.dispatch(recieveOrdersData(res));
+			break;
+			
 		case GET_ROLES:
 			let i,rolesArr,k={};
 			rolesArr=res.roles;
@@ -27,6 +34,7 @@ export function AjaxParse(store,res,cause)
 			}
 			store.dispatch(assignRole(k));
 			break;
+
 
 		case CHECK_ID:
 			let isAuth;
@@ -83,6 +91,7 @@ export function AjaxParse(store,res,cause)
 			{
 		    			store.dispatch(notifyFail('Error in response'));		
 			}
+
 			break;
 		default:
 		    			store.dispatch(notifyFail('API response not registered'));	

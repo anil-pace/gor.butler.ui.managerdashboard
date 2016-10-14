@@ -1,0 +1,17 @@
+[
+  {
+    "id": "order.table.heading",
+    "description": "Heading for order list",
+    "defaultMessage": "OrderList"
+  },
+  {
+    "id": "orderList.table.status",
+    "description": "Status for orders",
+    "defaultMessage": "STATUS"
+  },
+  {
+    "id": "orderlist.table.operatingMode",
+    "description": "recievedTime for Orders",
+    "defaultMessage": "RECIEVED TIME"
+  }
+]

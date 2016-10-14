@@ -35,10 +35,6 @@ export  function PPSDetail(state={},action) {
          if(res.complete_data !== undefined){
           var res, PPSDetail;
            PPSDetail = processPPSData(res.complete_data)
-
-          
-          console.log("hsdcjhsdgjch")
-          console.log(PPSDetail)
            return Object.assign({}, state, {
                "PPStypeDetail" : PPSDetail
           })

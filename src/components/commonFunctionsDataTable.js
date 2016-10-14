@@ -85,7 +85,7 @@ export const ProgressCell = ({rowIndex, data, columnKey, ...props}) => (
 
 export const ComponentCell = ({rowIndex, data, columnKey,checkState, ...props}) => (
   
-  <Cell {...props}> <input type="checkbox" onChange={checkState.bind(this,columnKey,rowIndex)}/>
+  <Cell {...props}> <input type="checkbox" onChange={checkState.bind(this,columnKey,rowIndex,data.getObjectAt(rowIndex)[columnKey])}/>
     {data.getObjectAt(rowIndex)[columnKey]}
   </Cell>
 );

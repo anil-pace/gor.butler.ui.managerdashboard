@@ -1,37 +1,49 @@
-import {BUTLERS_DETAIL} from '../constants/appConstants';
+import {BUTLERS_DATA} from '../constants/appConstants';
 
 
 function processButlersData(data) {
-  var butlerData=[];
-  var task = ["Pick - ", "Put - ", "Audit - ", "Charging - ", "move - "];
-  var subTask = ["Moving", "Mounting", "Dismounting", "Docked"];
-  var detail={"id": "","status": "","current": "", "msu": "", "location": "", "voltage": ""};
+  var butlerData=[], butlerDetail = {};
+  var currentTask = {"pick":"Pick", "put":"Put", "audit":"Audit", "charging":"Charging"};
+  var currentState = {"online":"Online", "offline":"Offline"};
   for (var i = data.length - 1; i >= 0; i--) {
-    var detail = {};
-    detail.id = "BOT " + data[i].butler_id;
-    detail.status = "On";
-    var currentTask = task[data[i].current_task];
-    var currentSubTask = subTask[data[i].current_subtask];
-    detail.current = currentTask + currentSubTask + " MSU "+ data[i].msu_id;
-    detail.msu = "MSU " + data[i].msu_id;
-    detail.location = data[i].location;
-    detail.voltage = data[i].voltage;
-    butlerData.push(detail);
+    butlerDetail = {}
+    butlerDetail.id = "BOT " + data[i].butler_id;
+    butlerDetail.status = currentState[data[i].state];
+    butlerDetail.location = data[i].position;
+    butlerDetail.voltage = data[i].voltage;
+    butlerDetail.taskType = data[i].current_task;
+    if(data[i].msu_id === null) {
+      butlerDetail.msu = "--";
+    }
+    else{
+      butlerDetail.msu = "MSU " + data[i].msu_id;
+    }
+    if(data[i].current_task !== null) {
+      butlerDetail.current = currentTask[data[i].current_task];
+    }
+    else {
+      butlerDetail.current = "--";
+    }
+    butlerData.push(butlerDetail);
   }
+  
   return butlerData;
 }
 
 export  function butlerDetail(state={},action){
+
 	switch (action.type) {
-	  case BUTLERS_DETAIL:
-         var res;
+	  case BUTLERS_DATA:
+         var res, butlers ;
          res=action.data;
-         if(res.aggregate_data){
-          var butlers = processButlersData(res.aggregate_data);
-          }
+         if(res.complete_data){
+             butlers = processButlersData(res.complete_data);
+
+          
            return Object.assign({}, state, {
                "butlerDetail" : butlers
           })
+         }
 
 	  default:
 	    return state

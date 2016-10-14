@@ -70,7 +70,7 @@ class NotificationTable extends React.Component {
     if(this.props.containerHeight !== 0) {
       heightRes = this.props.containerHeight;
     }
-    console.log(this.props)
+    
     
     var {sortedDataList, colSortDirs,columnWidths} = this.state;  
     return (

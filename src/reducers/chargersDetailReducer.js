@@ -1,4 +1,4 @@
-import {CHARGERS_DETAIL} from '../constants/appConstants';
+import {CHARGERS_DETAIL,CHARGERS_DATA} from '../constants/appConstants';
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -6,19 +6,20 @@ import {CHARGERS_DETAIL} from '../constants/appConstants';
  */
 
 function processChargersData(data) {
-  var chargerData=[];
-  var detail={"id": "","status": "","dockedBots": ""};
+  var chargerData=[],detail = {};
+  var status = {"connected":"Manual", "disconnected":"Disconnected"}, mode = {"manual":"Manual", "auto":"Auto"}
   for (var i = data.length - 1; i >= 0; i--) {
-    var detail = {};
+    detail = {}
     detail.id = "Charging Station " + data[i].charger_id;
-    detail.status = "On";
-    if(data[i].docked_butler_id !== null) {
-      detail.dockedBots = "Butler " + data[i].docked_butler_id;
-    }
+    detail.status = status[data[i].charger_status];
+    detail.mode = mode[data[i].charger_mode];
+    if(data[i].docked_butler_id !== null ) {
+       detail.dockedBots = "Butler " + data[i].docked_butler_id;
+     }
 
-    else {
-      detail.dockedBots = null;
-    }
+     else {
+       detail.dockedBots = "--";
+     }
     chargerData.push(detail); 
   }
   return chargerData;
@@ -26,15 +27,17 @@ function processChargersData(data) {
 
 export  function chargersDetail(state={},action) {
   switch (action.type) {
-    case CHARGERS_DETAIL:
+    case CHARGERS_DATA:
          var res;
          res=action.data;
-         if(res.aggregate_data){
-          var chargers = processChargersData(res.aggregate_data);
-          }
+         var chargers;
+         if(res.complete_data){
+          chargers = processChargersData(res.complete_data);
+          
            return Object.assign({}, state, {
                "chargersDetail" : chargers
           })
+         }
 
     default:
       return state
