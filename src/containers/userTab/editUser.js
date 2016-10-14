@@ -48,20 +48,19 @@ class EditUser extends React.Component{
   }
   _handleEditUser(e){
         e.preventDefault();
-        let pwd1,pwd2,role,opt,userid,firstName,lastname;
+        let pwd1,pwd2,role,opt,firstName,lastname;
 
-        userid=this.userId.value;
         firstname=this.firstName.value;
         lastname=this.lastName.value;
         pwd1=this.password1.value;
         pwd2=this.password2.value;
 
 
-        if(!userid||!firstname||!lastname||firstname.length>50||lastname.length>50||pwd1!==pwd2)
+        if(!firstname||!lastname||firstname.length>50||lastname.length>50||this.props.passwordCheck.type===ERROR)
         {
           return;
         }
-        if(!pwd1)
+        if(!this.props.passwordCheck.type)
         {
           pwd1="__unchanged__";
           pwd2="__unchanged__";

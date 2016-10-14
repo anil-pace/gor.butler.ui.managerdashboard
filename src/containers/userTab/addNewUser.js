@@ -31,10 +31,10 @@ class AddUser extends React.Component{
   _checkId(){
     let data1={userid:this.userId.value};
     this.props.validateID(data1);
-    if(this.props.idCheck.type)
+    if(data1.userid)
     {
       let userData={
-                'url':'https://192.168.8.118/api/user_exits/'+data1,
+                'url':'https://192.168.8.118/api/user?username='+data1.userid,
                 'method':'GET',
                 'cause':CHECK_ID,
                 'contentType':'application/json',
