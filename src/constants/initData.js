@@ -1,4 +1,5 @@
 export const wsOverviewData = {
+	"default":{
           "type": "subscribe",
         "data": [
          
@@ -38,41 +39,6 @@ export const wsOverviewData = {
                 }
               },
               {
-                "resource_id": "orders",
-                "details": {
-                  "data": "complete",
-                  "callback": []
-                }
-              },
-              {
-                "resource_id": "chargers",
-                "details": {
-                  "data": "complete",
-                  "callback": []
-                }
-              },
-              {
-                "resource_id": "butlers",  
-                "details": {
-                  "data": "complete",
-                  "callback": []
-                }
-              },
-              {
-                "resource_id": "pps",
-                "details": {
-                  "data": "complete",
-                  "callback": []
-                }
-              },
-              {
-                "resource_id": "users",
-                "details": {
-                  "data": "complete",
-                  "callback": []
-                }
-              },
-              {
                 "resource_id": "overview",
                 "details": {
                   "data": "pps_performance",
@@ -85,11 +51,10 @@ export const wsOverviewData = {
                   "data": "pps_throughput",
                   "callback": []
                 }
-              },
+              }
         ]
-}
-
-export const wsUsersData = {
+},
+"users":{
           "type": "subscribe",
           "data": [
                 {
@@ -101,6 +66,96 @@ export const wsUsersData = {
                 },
                 
           ]
+},
+"system":{
+          "type": "subscribe",
+          "data": [
+                {
+                  "resource_id": "butlers",
+                  "details": {
+                    "data": "complete",
+                    "callback": []
+                  }
+                }
+          ]
+},
+"pps":{
+          "type": "subscribe",
+          "data": [
+                {
+                  "resource_id": "pps",
+                  "details": {
+                    "data": "complete",
+                    "callback": []
+                  }
+                }
+          ]
+},
+"chargingstation":{
+	"type": "subscribe",
+		"data":[
+			{
+                  "resource_id": "chargers",
+                  "details": {
+                    "data": "complete",
+                    "callback": []
+                  }
+            }
+		]
+},
+"notification":{
+		"type": "subscribe",
+		"data":[
+			{
+                  "resource_id": "notification",
+                  "details": {
+                    "data": "complete",
+                    "callback": []
+                  }
+            }
+		]
+},
+"butlerbots":{
+		"type": "subscribe",
+		"data":[
+			{
+                  "resource_id": "butlers",
+                  "details": {
+                    "data": "complete",
+                    "callback": []
+                  }
+            }
+		]
+},
+
+"inventory":{
+          "type": "subscribe",
+          "data": [
+                {
+                  "resource_id": "inventory",
+                  "details": {
+                    "data": "complete",
+                    "callback": []
+                  }
+                },
+                
+          ]
+},
+"orders":{
+          "type": "subscribe",
+          "data": [
+                {
+                  "resource_id": "orders",
+                  "details": {
+                    "data": "complete",
+                    "callback": []
+                  }
+                },
+                
+          ]
 }
+}
+
+
 
 

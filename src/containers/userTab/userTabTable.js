@@ -45,6 +45,42 @@ class UserDataTable extends React.Component {
     });
   }
 
+  componentWillReceiveProps(nextProps){
+    this._dataList = new tableRenderer(nextProps.items.length);
+    this._defaultSortIndexes = [];
+    this._dataList.newData=nextProps.items;
+    var size = this._dataList.getSize();
+    for (var index = 0; index < size; index++) {
+      this._defaultSortIndexes.push(index);
+    }
+    this.state = {
+      sortedDataList: this._dataList,
+      },
+    this._onSortChange = this._onSortChange.bind(this);
+    this._onFilterChange = this._onFilterChange.bind(this);
+    this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+  }
+
+   _onColumnResizeEndCallback(newColumnWidth, columnKey) {
+    this.setState(({columnWidths}) => ({
+      columnWidths: {
+        ...columnWidths,
+        [columnKey]: newColumnWidth,
+      }
+    }));
+  }
+
+  _onFilterChange(e) {
+    if (!e.target.value) {
+      this.setState({
+        sortedDataList: this._dataList,
+      });
+    }
+    this.setState({
+      sortedDataList: new DataListWrapper(filterIndex(e,this._dataList), this._dataList),
+    });
+  }
+
   
 
   _onSortChange(columnKey, sortDir) {
@@ -66,6 +102,12 @@ class UserDataTable extends React.Component {
       //.. all what you put in here you will get access in the modal props ;),
     });
   }
+  handleEdit(columnKey,rowIndex) {
+    console.log('Editing');
+  }
+  handleDel(columnKey,rowIndex) {
+    console.log('Deleting');
+  }
  //  _showModal(){
  // //    this.myModal.style.display = "block";
  //       this.refs.modal.style.display = "block";   
@@ -83,7 +125,8 @@ class UserDataTable extends React.Component {
     if(this.props.containerHeight !== 0) {
       heightRes = this.props.containerHeight;
     }
-    
+    var selEdit = this.handleEdit.bind(this);
+    var selDel= this.handleDel.bind(this); 
     return (
       <div>
         <div className="gorToolBar">
@@ -196,7 +239,7 @@ class UserDataTable extends React.Component {
                ACTIONS
             </SortHeaderCell>
           }
-          cell={<ActionCell/>}
+          cell={<ActionCell selEdit={selEdit} selDel={selDel}/>}
           width={columnWidth}
         />
       </Table>

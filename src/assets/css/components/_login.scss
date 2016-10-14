@@ -165,7 +165,6 @@
 			width:70%;
 			background-color:#FFFFFF;
 			border-radius:3px;
-			border:1px solid #AAAAAA; 
 			&:hover{
 				border:1px solid #333333; 
 			 	color:#333333;
@@ -185,7 +184,6 @@
 		}
 		.gor-login-auth-error
 		{
-			display:none;
 			text-align:left;
 			color:#EC1C24;
 			font-size:18px;
@@ -194,7 +192,6 @@
 		}
 		.gor-login-usr-error
 		{
-			display:none;
 			text-align:left;
 			color:#EC1C24;
 			font-size:18px;			

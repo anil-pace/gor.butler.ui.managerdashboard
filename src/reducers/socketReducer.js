@@ -28,8 +28,12 @@ export  function recieveSocketActions(state={},action){
           "initDataSent":false
         })
       }
-      else
-        return state;
+      else{
+        return Object.assign({}, state, {
+          "socketAuthorized": true,
+          "initDataSent":true
+        })
+      }
     case WS_INIT:
       // Initiate data sending
           return Object.assign({}, state, {

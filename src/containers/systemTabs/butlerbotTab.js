@@ -13,9 +13,9 @@ class ButlerBot extends React.Component{
     }	
 	render(){
   var itemNumber = 6;
-  var butlerData = this.props.butlerDetail.butlerDetail, avgVoltage = 0, totalPick=0,totalPut=0,totalCharging=0,totalIdle=0;
+  var butlerData = this.props.butlerDetail.butlerDetail, avgVoltage =0;
   var taskDetail = {"put":0, "pick":0, "charging":0, "idle":0, "avgVoltage":0, "msuMounted":0, "location":0};
-  if(butlerData) {
+  if(butlerData && butlerData.length) {
   	for (var i = butlerData.length - 1; i >= 0; i--) {
   		avgVoltage = butlerData[i].voltage + avgVoltage;
   		if(butlerData[i].taskType === null) {

@@ -1,17 +1,31 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage,FormattedPlural } from 'react-intl';  
+import {userRequest} from '../../actions/userActions';
 import {validateName, validatePassword, resetForm} from '../../actions/validationActions';
 import { connect } from 'react-redux';
-import {ERROR} from '../../constants/appConstants';
+import {ERROR,GET_ROLES} from '../../constants/appConstants';
 import FieldError from '../../components/fielderror/fielderror';
+import RadioGroup from './radioGroup';
 
 class EditUser extends React.Component{
   constructor(props) 
   {
       super(props);  
   }
+  componentDidMount(){
+        let userData={
+                'url':'https://192.168.8.118/api/user/role',
+                'method':'GET',
+                'cause':GET_ROLES,
+                'contentType':'application/json',
+                'accept':'application/json',
+                'token':sessionStorage.getItem('auth_token')
+            }
+        this.props.userRequest(userData);
+  }
   removeThisModal() {
+    this.props.resetForm();
     this.props.removeModal();
   }
   _checkName(){
@@ -34,7 +48,7 @@ class EditUser extends React.Component{
   }
   _handleEditUser(e){
         e.preventDefault();
-        let pwd1,pwd2,role,radBtn,opt,userid,firstName,lastname;
+        let pwd1,pwd2,role,opt,userid,firstName,lastname;
 
         userid=this.userId.value;
         firstname=this.firstName.value;
@@ -43,18 +57,12 @@ class EditUser extends React.Component{
         pwd2=this.password2.value;
 
 
-        if(!userid||!firstname||!lastname||firstname.length>50||lastname.length>50||!pwd1||!pwd2||pwd1!==pwd2)
+        if(!userid||!firstname||!lastname||firstname.length>50||lastname.length>50||pwd1!==pwd2)
         {
           return;
         }
 
-        radBtn=document.getElementsByName('role');
-
-        for(let i=0;i<radBtn.length;i++)
-        {
-          if(radBtn[i].checked)
-            role=radBtn[i].value;
-        }
+        role=this.props.roleSet?this.props.roleSet.msg:this.props.roleInfo.msg.operator;
 
         let userdata={         
             'userid': userid,
@@ -106,43 +114,8 @@ class EditUser extends React.Component{
                             {this.props.nameCheck.type?tick:((this.props.nameCheck.type===ERROR)?<FieldError txt={this.props.nameCheck.msg} />:'')}
 
               </div>
-            <div className='gor-usr-details'>
-            <div className='gor-usr-hdlg'><FormattedMessage id="users.edit.roledetails.heading" description='Heading for role' 
-            defaultMessage='Choose a role'/></div>
-            <div className='gor-sub-head'><FormattedMessage id="users.edit.roledetails.subheading" description='Subheading for role' 
-            defaultMessage='User will be given a specific level of control over the Butler system depending on the designated role'/></div>
-                
-                <div className='gor-role'>
-                <input type="radio"  name='role' defaultChecked value="operator" ref={node => { this.operator = node }} /><span className='gor-usr-hdsm'>
-                <FormattedMessage id="users.add.roledetails.operator" description='Text for operator' 
-            defaultMessage='Operator'/> </span>
-                </div>
-                <div className='gor-choose'>
-                  <div className='gor-sub-head'><FormattedMessage id="users.edit.roledetails.operatortext" description='Subtext for operator' 
-            defaultMessage='Grant access to the Operator Interface at each Pick Put Station in the Butler system'/></div>
-                </div>
-
-                <div className='gor-role'>
-                <input type="radio" value="supervisor" id='userRole' name="role" ref={node => { this.supervisor = node }} /><span className='gor-usr-hdsm'>
-                <FormattedMessage id="users.add.roledetails.supervisor" description='Text for supervisor' 
-            defaultMessage=' Supervisor'/></span>
-                </div>
-                <div className='gor-choose'>
-                <div className='gor-sub-head'>
-                <FormattedMessage id="users.edit.roledetails.supervisortext" description='Subtext for supervisor' 
-            defaultMessage='Grant access to the Management Interface and Operator Interface for the Butler system'/></div>
-                </div>
-
-                <div className='gor-role'>
-                <input type="radio"value="manager" id='userRole' name="role" ref={node => { this.manager = node }} /><span className='gor-usr-hdsm'>
-                <FormattedMessage id="users.edit.roledetails.manager" description='Text for manager' 
-            defaultMessage=' Manager'/></span>
-                </div>
-                <div className='gor-choose'>
-                <div className='gor-sub-head'><FormattedMessage id="users.add.roledetails.managertext" description='Subtext for manager' 
-            defaultMessage='Grant access to the Management Interface and Operator Interface to all systems'/></div>
-                </div>
-            </div>
+           
+          {this.props.roleInfo?(<RadioGroup operator={this.props.roleInfo.msg.operator} manager={this.props.roleInfo.msg.manager} />):''}
 
             <div className='gor-usr-details'>
             <div className='gor-pass-view1'  ref={node => { this.view1 = node }}>
@@ -188,12 +161,15 @@ class EditUser extends React.Component{
 function mapStateToProps(state, ownProps){
   return {
       nameCheck: state.appInfo.nameInfo || {},
-      passwordCheck: state.appInfo.passwordInfo || {}      
+      passwordCheck: state.appInfo.passwordInfo || {},
+      roleInfo: state.appInfo.roleInfo || null,
+      roleSet:  state.appInfo.roleSet  || null  
   };
 }
 
 var mapDispatchToProps = function(dispatch){
   return {
+    userRequest: function(data){ dispatch(userRequest(data)); },    
     validateName: function(data){ dispatch(validateName(data)); },
     validatePassword: function(data){ dispatch(validatePassword(data)); },
     resetForm:   function(){ dispatch(resetForm()); }

@@ -1,5 +1,6 @@
 import React from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
+import {modal} from 'react-redux-modal';
 
 export var SortTypes = {
   ASC: 'ASC',
@@ -58,13 +59,13 @@ export class DataListWrapper {
   }
 }
  
-export const ActionCell = ({rowIndex, data, columnKey, ...props}) => (
+export const ActionCell = ({rowIndex, data, columnKey,selEdit,selDel, ...props}) => (
   <Cell {...props}>
     <div className="gor-user-Logo-wrap">
-      <div className="user-edit-icon"/>
+      <button className="user-edit-icon" onClick={selEdit.bind(this,columnKey,rowIndex)}/>
     </div>
     <div className="gor-user-Logo-wrap">
-      <div className="user-del-icon"/>
+      <button className="user-del-icon" onClick={selDel.bind(this,columnKey,rowIndex)} />
     </div>  
   </Cell>
 );

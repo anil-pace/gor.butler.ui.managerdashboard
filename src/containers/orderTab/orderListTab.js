@@ -66,15 +66,14 @@ class OrderListTab extends React.Component{
        appendStatusUrl = "&warehouse_status=" + (this.props.filterOptions.statusFilter);
     }
 
-    // if(timeOut !== undefined && timeOut !== "allOrders") {
-    //    currentTime = new Date();
-    //    prevTime = new Date();
-    //    prevTime = prevTime.setHours(prevTime.getHours() - convertTime[timeOut]);
-    //    prevTime = prevTime.toISOString();
-    //    currentTime = currentTime.toISOString();
-      
-    //   appendTimeUrl = 'update_time<='+ currentTime +'&update_time>='+ prevTime;
-    // }
+     if(timeOut !== undefined && timeOut !== "allOrders") {
+        currentTime = new Date();
+        prevTime = new Date();
+        prevTime = new Date(prevTime.setHours(prevTime.getHours() - convertTime[timeOut]));
+        prevTime = prevTime.toISOString();
+       currentTime = currentTime.toISOString();
+       appendTimeUrl = '&update_time<='+ currentTime +'&update_time>='+ prevTime;
+     }
     data.url = data.url + appendStatusUrl+appendTimeUrl;
     this.handlePageClick(data)
   }

@@ -16,6 +16,7 @@ const socketMiddleware = (function(){
 
   const onClose = (ws,store) => evt => {
     //Tell the store we've disconnected
+    
     store.dispatch(wsEndConnection());
   }
 

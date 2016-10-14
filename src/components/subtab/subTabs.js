@@ -7,34 +7,22 @@ import SubTab from './subTab';
 import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
 import { FormattedMessage } from 'react-intl';
-import {subTabSelected} from '../../actions/subTabSelectAction'
-import {NOTIFICATION,BUTLERBOTS,PPS,CHARGING} from '../../constants/appConstants'
+import {subTabSelected} from '../../actions/tabSelectAction'
+import {NOTIFICATION,BUTLERBOTS,PPS,CHARGING,SYS_SUB_TAB_ROUTE_MAP} from '../../constants/appConstants'
 
 class SystemTab extends React.Component{
 	constructor(props) 
 	{
     	super(props);
     }
-    handleNotificationClick(){
-    	var temp = NOTIFICATION;
-    	this.props.subTabSelected(temp)
-    }
-    handleButlerbotsClick(){
-    	var temp = BUTLERBOTS;
-    	this.props.subTabSelected(temp)
-    }
-    handlePpsClick(){
-    	var temp = PPS;
-    	this.props.subTabSelected(temp)
-    }
-    handleChargingstationClick(){
-    	var temp = CHARGING;
-    	this.props.subTabSelected(temp)
+   
+    handleSysSubTabClick(tabName){
+      this.props.subTabSelected(SYS_SUB_TAB_ROUTE_MAP[tabName]);
+      sessionStorage.setItem("subTab",SYS_SUB_TAB_ROUTE_MAP[tabName])
     }
     
 	render(){
-		let notification = <FormattedMessage id="notification.tab.heading" description="notification tab" 
-              defaultMessage ="Notification"/>
+
 
         let butlerBots = <FormattedMessage id="butlerBot.tab.heading" description="butler bot tab" 
               defaultMessage ="Butler Bots"/>
@@ -52,16 +40,14 @@ class SystemTab extends React.Component{
 		return (
 			<div>
 				<div className="gorMainSubtab">
-					<Link to="/notification" onClick = {this.handleNotificationClick.bind(this)}>
-						<SubTab item={notification} changeClass={selectClass[NOTIFICATION]}/> 
-					</Link>
-					<Link to="/butlerbots" onClick = {this.handleButlerbotsClick.bind(this)}>
+				
+					<Link to="/butlerbots" onClick = {this.handleSysSubTabClick.bind(this,BUTLERBOTS)}>
 						<SubTab item={butlerBots} changeClass={selectClass[BUTLERBOTS]}/> 
 					</Link>
-					<Link to="/pps" onClick = {this.handlePpsClick.bind(this)}>
+					<Link to="/pps" onClick = {this.handleSysSubTabClick.bind(this,PPS)}>
 						<SubTab item={pps} changeClass={selectClass[PPS]}/> 
 					</Link>
-					<Link to="/chargingstation" onClick = {this.handleChargingstationClick.bind(this)}>
+					<Link to="/chargingstation" onClick = {this.handleSysSubTabClick.bind(this,CHARGING)}>
 						<SubTab item={chargingStation} changeClass={selectClass[CHARGING]}/> 
 					</Link>
 				</div>
@@ -73,8 +59,8 @@ class SystemTab extends React.Component{
 function mapStateToProps(state, ownProps){
     
     return  {
-         subTab:state.subTabSelected || {},
-         tab:state.tabSelected.tab
+         subTab:state.tabSelected.subTab || {},
+         tab:state.tabSelected.tab || {}
     }
 }
 

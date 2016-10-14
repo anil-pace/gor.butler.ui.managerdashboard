@@ -27,6 +27,7 @@ export const RECIEVE_ITEM_TO_STOCK = "RECIEVE_ITEM_TO_STOCK";
 /*Constants for performance widget*/
 export const RENDER_WIDGET = "RENDER_WIDGET";
 export const TAB_SELECTED = "TAB_SELECTED";
+export const PREV_TAB_SELECTED = "PREV_TAB_SELECTED";
 export const SUB_TAB_SELECTED = "SUB_TAB_SELECTED";
 
 /*Parsing Constants*/
@@ -91,16 +92,23 @@ export const ORDERS_RETRIEVE = "ORDERS_RETRIEVE";
 export const ADD_USER='ADD_USER';
 export const CHECK_ID='CHECK_ID';
 export const DELETE_USER='DELETE_USER';
+export const GET_ROLES='GET_ROLES';
 
-/*Constants for Error checking*/
+/*Constants for app info checking*/
 export const ID_DATA = "ID_DATA";
 export const NAME_DATA = "NAME_DATA";
 export const PASSWORD_DATA = "PASSWORD_DATA";
+export const PASS_DATA = "PASS_DATA";
 export const INFO_RESET = "ERROR_RESET";
 export const ERROR=0;
 export const SUCCESS=1;
 export const INFO=2;
-
+export const HIDE=3;
+export const NOTIFY_PASS='NOTIFY_PASS';
+export const NOTIFY_FAIL='NOTIFY_FAIL';
+export const NOTIFY_HIDE='NOTIFY_HIDE';
+export const MD_ID='MD_ID';
+export const SET_ROLE='SET_ROLE';
 
 
 /*Constants for pagination*/
@@ -121,8 +129,10 @@ export const TAB_ROUTE_MAP = {
 		[INVENTORY] : "inventory",
 		[USERS] : "users"
 	}
+export const SYS_SUB_TAB_ROUTE_MAP={
+	[NOTIFICATION] : "notification",
+	[BUTLERBOTS]:"butlerbots",
+	[PPS]:"pps",
+	[CHARGING]:"chargingstation"
 
-
-
-
-
+}

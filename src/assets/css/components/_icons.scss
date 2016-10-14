@@ -21,7 +21,7 @@
 .header-offline-icon,
 .user-icon,
 .overview-tile-ontime-icon,
-.statusOl,.statusAl,.iStock ,.iAudit,.iPick,.gor-login-user,.gor-login-password,.gor-login-error,.iTick,.iQuestion{
+.statusOl,.statusAl,.iStock ,.iAudit,.iPick,.gor-login-user,.gor-login-password,.gor-login-error,.iTick,.iQuestion,.iTick-white,.iError-white{
     background-image: url(images/icons.svg);
 }
 .fk-logo,
@@ -156,6 +156,22 @@ background-position: -101px -52px;
     margin-left:15px;
     display:inline-block;
     vertical-align:middle;
+}
+.iTick-white{
+    background-position: -151px -52px;
+    width:24px;
+    height:24px;
+    margin-right:15px;
+    display:inline-block;
+    vertical-align:middle;    
+}
+.iError-white{
+    background-position: -126px -52px;
+    width:24px;
+    height:24px;
+    margin-right:15px;
+    display:inline-block;
+    vertical-align:middle;        
 }
 .iQuestion{
     background-position: -409px -1px;
