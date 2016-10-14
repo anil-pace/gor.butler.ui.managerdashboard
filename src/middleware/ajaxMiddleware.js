@@ -20,8 +20,8 @@ const ajaxMiddleware = (function(){
 
     var params=action.params;
 
-    var formData = params.formdata || null,
-    loginData=JSON.stringify(formData || {});
+    var formData = params.formdata || params || null,
+    loginData= params.formdata? JSON.stringify(params.formdata):null;
     var httpRequest = new XMLHttpRequest();
 
     if (!httpRequest || !params.url) {

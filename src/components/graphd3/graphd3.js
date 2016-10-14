@@ -69,6 +69,7 @@ class Chart extends React.Component{
       var data = [];
       var barData = {};
        var json = tData; 
+       if(json !== undefined) {
        for (var i = 0; i < json.length; i++) {
         barData.timeInterval = json[i].timeInterval;
         barData.type = json[i][nextP];
@@ -76,6 +77,7 @@ class Chart extends React.Component{
         barData = {};
        }
         update(data);
+      }
     function update(data) {
       data.forEach(function(d) {
         d.type = +d.type;

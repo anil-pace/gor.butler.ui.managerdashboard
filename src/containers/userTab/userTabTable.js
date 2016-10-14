@@ -45,6 +45,42 @@ class UserDataTable extends React.Component {
     });
   }
 
+  componentWillReceiveProps(nextProps){
+    this._dataList = new tableRenderer(nextProps.items.length);
+    this._defaultSortIndexes = [];
+    this._dataList.newData=nextProps.items;
+    var size = this._dataList.getSize();
+    for (var index = 0; index < size; index++) {
+      this._defaultSortIndexes.push(index);
+    }
+    this.state = {
+      sortedDataList: this._dataList,
+      },
+    this._onSortChange = this._onSortChange.bind(this);
+    this._onFilterChange = this._onFilterChange.bind(this);
+    this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+  }
+
+   _onColumnResizeEndCallback(newColumnWidth, columnKey) {
+    this.setState(({columnWidths}) => ({
+      columnWidths: {
+        ...columnWidths,
+        [columnKey]: newColumnWidth,
+      }
+    }));
+  }
+
+  _onFilterChange(e) {
+    if (!e.target.value) {
+      this.setState({
+        sortedDataList: this._dataList,
+      });
+    }
+    this.setState({
+      sortedDataList: new DataListWrapper(filterIndex(e,this._dataList), this._dataList),
+    });
+  }
+
   
 
   _onSortChange(columnKey, sortDir) {

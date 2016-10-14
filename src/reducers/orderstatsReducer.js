@@ -39,10 +39,10 @@ for (var i = endIndex; i < 24; i++) {
 export  function histogramData(state={},action){
 	switch (action.type) {
 	  case HISTOGRAM_DATA:
-         var res;
+         var res, histData;
          res=action.data;
          if(res.aggregate_data){
-          var histData = processHistogramData(res.aggregate_data)
+         histData = processHistogramData(res.aggregate_data)
           }
            return Object.assign({}, state, {
                "histData" : histData

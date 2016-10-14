@@ -71,7 +71,7 @@ export const wsOverviewData = {
           "type": "subscribe",
           "data": [
                 {
-                  "resource_id": "butlerbots",
+                  "resource_id": "butlers",
                   "details": {
                     "data": "complete",
                     "callback": []
@@ -95,7 +95,7 @@ export const wsOverviewData = {
 	"type": "subscribe",
 		"data":[
 			{
-                  "resource_id": "chargingstation",
+                  "resource_id": "chargers",
                   "details": {
                     "data": "complete",
                     "callback": []
@@ -119,7 +119,7 @@ export const wsOverviewData = {
 		"type": "subscribe",
 		"data":[
 			{
-                  "resource_id": "butlerbots",
+                  "resource_id": "butlers",
                   "details": {
                     "data": "complete",
                     "callback": []

@@ -37,7 +37,7 @@ function _getPPSdata(link) {
 } 
 
 function _getButlerdata(link) {
-		console.log(link)
+
 		let Component = <FormattedMessage id="health.Butler" description="Butler bots health" 
               defaultMessage ="Butler bots"/>
         let butlerTotal = 0, butlerOn = 0, butlerOff = 0;      
@@ -58,8 +58,7 @@ function _getButlerdata(link) {
 		{ component:{componentNumber: butlerTotal, componentType: Component}, states:{offState: butlerOff , onState: butlerOn} }
 		]
 	}
-		console.log("butler ka data--------------")
-		console.log(butler_data)
+
 		return butler_data;
 } 
 

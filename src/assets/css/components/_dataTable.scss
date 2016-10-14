@@ -424,6 +424,18 @@ background-color: #FFFFFF;
 
 }
 
+.Risk .public_fixedDataTableCell_cellContent{
+
+  background: #f99405;
+  border-radius: 15px;
+  text-align: center;
+  width:52px;
+  color: #ffffff;
+  font-size: 12px;
+  max-height: 9px;
+
+}
+
 .On .public_fixedDataTableCell_cellContent{
 
   
@@ -467,6 +479,34 @@ background-color: #FFFFFF;
 
 }
 
+.Completed .public_fixedDataTableCell_cellContent{
+
+  
+  border-radius: 15px;
+  text-align: center;
+  width:52px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #00a54f;
+  color: #ffffff;
+  font-size: 12px;
+  max-height: 9px;
+  background: #00a54f;
+
+}
+
+.Breached .public_fixedDataTableCell_cellContent{
+
+  background: #fc3838;
+  border-radius: 15px;
+  text-align: center;
+  width:52px;
+  color: #ffffff;
+  font-size: 12px;
+  max-height: 9px;
+
+}
+
 .Offline .public_fixedDataTableCell_cellContent{
 
   border-radius: 15px;
@@ -476,6 +516,35 @@ background-color: #FFFFFF;
   border-width: 1px;
   border-color: #aaaaaa;
   color: #aaaaaa;
+  font-size: 12px;
+  max-height: 9px;
+
+}
+
+.Pending .public_fixedDataTableCell_cellContent{
+
+  border-radius: 15px;
+  text-align: center;
+  width:52px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #aaaaaa;
+  color: #aaaaaa;
+  font-size: 12px;
+  max-height: 9px;
+
+}
+
+.Progress .public_fixedDataTableCell_cellContent{
+
+  
+  border-radius: 15px;
+  text-align: center;
+  width:52px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #00a54f;
+  color: #00a54f;
   font-size: 12px;
   max-height: 9px;
 
@@ -1114,7 +1183,7 @@ padding-left: 10px;
 }
 
 .gorToolBarWrap {
-width: 49%;
+width: 33%;
 font-weight: bold;
 color: #000000;
   display: inline-block;
@@ -1176,7 +1245,7 @@ input[type="checkbox"]{
 
 .gorDataTableDrop {
         display:inline-block;
-        width:auto;
+        width:100%;
         height:calculateRem(30px);
         background:transparent;
         text-align:left;    
@@ -1312,3 +1381,27 @@ progress::-moz-progress-bar {
   box-shadow: 0 2px 5px grey inset;
 }
 
+.gor-refresh-btn{
+    font-family:'Source Sans Pro Bold', sans-serif;
+    width:113px;
+    height:35px;
+    font-size:14px;
+    background:#4d5055;
+    color:#ffffff;
+    border-radius:3px;
+    margin-left:30px;
+    vertical-align: sub;
+
+}
+
+.gor-dropDown-firstInnerElement {
+  display: inline-block;
+  padding-right: 15px;
+  width:193px;
+}
+
+.gor-dropDown-secondInnerElement {
+  display: inline-block;
+  padding-right: 15px;
+  width:143px;
+}

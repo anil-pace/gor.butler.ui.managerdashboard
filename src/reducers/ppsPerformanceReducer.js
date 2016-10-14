@@ -10,8 +10,6 @@ export  function PPSperformance(state={},action){
   
 	switch (action.type) {
 	  case PARSE_PPS:
-    console.log("pps detail")
-          console.log(action.data)
          var res;
          res=action.data;
          if(res.aggregate_data){
