@@ -7,6 +7,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import PPStable from './PPStable';
 import { connect } from 'react-redux';
+import {changePPSmode} from '../../actions/ppsModeChangeAction'
 
 
 
@@ -34,7 +35,7 @@ class PPS extends React.Component{
 			<div>
 				<div>
 					<div>
-						<PPStable items={this.props.PPSDetail.PPStypeDetail} itemNumber={itemNumber} operatorNum={operatorNum} operationMode={operationMode}/>
+						<PPStable items={this.props.PPSDetail.PPStypeDetail} itemNumber={itemNumber} operatorNum={operatorNum} operationMode={operationMode} modeChange={this.props.changePPSmode}/>
 					</div>
 				</div>
 			</div>
@@ -44,8 +45,14 @@ class PPS extends React.Component{
 
 function mapStateToProps(state, ownProps){
   return {
-    PPSDetail: state.PPSDetail || {}
+    PPSDetail: state.PPSDetail || [],
   };
 }
 
-export default connect(mapStateToProps)(PPS) ;
+var mapDispatchToProps = function(dispatch){
+  return {
+    changePPSmode: function(data){ dispatch(changePPSmode(data)); }
+  }
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(PPS) ;

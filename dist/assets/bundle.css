@@ -1799,6 +1799,16 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   max-height: 9px;
 }
 
+.Risk .public_fixedDataTableCell_cellContent {
+  background: #f99405;
+  border-radius: 15px;
+  text-align: center;
+  width: 52px;
+  color: #ffffff;
+  font-size: 12px;
+  max-height: 9px;
+}
+
 .On .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
@@ -1842,9 +1852,10 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   border-style: solid;
   border-width: 1px;
   border-color: #00a54f;
-  color: #00a54f;
+  color: #ffffff;
   font-size: 12px;
   max-height: 9px;
+  background: #00a54f;
 }
 
 .Breached .public_fixedDataTableCell_cellContent {
@@ -1865,6 +1876,30 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   border-width: 1px;
   border-color: #aaaaaa;
   color: #aaaaaa;
+  font-size: 12px;
+  max-height: 9px;
+}
+
+.Pending .public_fixedDataTableCell_cellContent {
+  border-radius: 15px;
+  text-align: center;
+  width: 52px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #aaaaaa;
+  color: #aaaaaa;
+  font-size: 12px;
+  max-height: 9px;
+}
+
+.Progress .public_fixedDataTableCell_cellContent {
+  border-radius: 15px;
+  text-align: center;
+  width: 52px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #00a54f;
+  color: #00a54f;
   font-size: 12px;
   max-height: 9px;
 }

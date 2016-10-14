@@ -33,6 +33,34 @@ class WavesTable extends React.Component {
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
   }
+
+  componentWillReceiveProps(nextProps) {
+    this._dataList = new tableRenderer(nextProps.items.length);
+    this._defaultSortIndexes = [];
+    this._dataList.newData=nextProps.items;
+    var size = this._dataList.getSize();
+    for (var index = 0; index < size; index++) {
+      this._defaultSortIndexes.push(index);
+    }
+    var columnWidth= (nextProps.containerWidth/nextProps.itemNumber)
+    this.state = {
+      sortedDataList: this._dataList,
+      colSortDirs: {},
+      columnWidths: {
+        waves: columnWidth,
+        status: columnWidth,
+        startTime: columnWidth,
+        cutOffTime: columnWidth,
+        ordersToFulfill: columnWidth,
+        progress: columnWidth,
+        totalOrders: columnWidth
+      },
+    };
+    this._onSortChange = this._onSortChange.bind(this);
+    this._onFilterChange = this._onFilterChange.bind(this);
+    this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+
+   } 
    _onColumnResizeEndCallback(newColumnWidth, columnKey) {
     this.setState(({columnWidths}) => ({
       columnWidths: {

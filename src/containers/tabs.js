@@ -76,28 +76,29 @@ class Tabs extends React.Component{
     const item5 = [
       { tab: users, Status: usersStatus, currentState:'gorOffline' }
     ]
-    var selectClass = {OVERVIEW:"gorMainBlock", SYSTEM:"gorMainBlock",ORDERS:"gorMainBlock", INVENTORY:"gorMainBlock", USERS:"gorMainBlock"};
+    var selectClass = {overview:"gorMainBlock", system:"gorMainBlock",orders:"gorMainBlock", inventory:"gorMainBlock", users:"gorMainBlock"};
     
 
     selectClass[this.props.tab] = "gorMainBlockSelect";
+    console.log(this.props.tab)
     
     
 		return (
 		<div className="gorTabs gorMainBlock">
 		<Link to="/overview" onClick = {this.handleTabClick.bind(this,OVERVIEW)}>
-			<Tab items={item1} changeClass={selectClass["OVERVIEW"]} subIcons={false}/>
+			<Tab items={item1} changeClass={selectClass["overview"]} subIcons={false}/>
 		</Link>
 
 		<Link to="/system" onClick = {this.handleTabClick.bind(this,SYSTEM)}>
-			<Tab items={item2} changeClass={selectClass["SYSTEM"]} subIcons={true}/>
+			<Tab items={item2} changeClass={selectClass["system"]} subIcons={true}/>
 		</Link>
 
 		<Link to="/orders" onClick = {this.handleTabClick.bind(this,ORDERS)}>
-			<Tab items={item3} changeClass={selectClass["ORDERS"]} subIcons={true}/>
+			<Tab items={item3} changeClass={selectClass["orders"]} subIcons={true}/>
 		</Link>
 		
 		<Link to="/users" onClick = {this.handleTabClick.bind(this,USERS)}>
-			<Tab items={item5} changeClass={selectClass["USERS"]} subIcons={false}/>
+			<Tab items={item5} changeClass={selectClass["users"]} subIcons={false}/>
 		</Link>
 	</div>
 		);

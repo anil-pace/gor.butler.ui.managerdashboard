@@ -212,7 +212,7 @@ class Notification extends React.Component{
 
 function mapStateToProps(state, ownProps){
   return {
-    butlerDetail: state.butlerDetail || {},
+    butlerDetail: state.butlerDetail || [],
   };
 }
 

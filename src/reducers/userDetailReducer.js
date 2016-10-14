@@ -1,7 +1,7 @@
 import {USER_DETAILS} from '../constants/appConstants';
 
 function processUserDetails(data) {
-  //var role = ["Operator", "Manager", "Supervisor"];
+  var role = {"butler_ui":"Operator", "butler_supervisor":"Manager"};
   var work_mode = ["Pick Back", "Pick Front", "Put Back", "Put Front", "Audit"];
   //var status = ["Offline", "Online"];
   var userDetails = [], userData = {};
@@ -15,17 +15,18 @@ function processUserDetails(data) {
     }
 
     else {
-      userData.status = "Offline";
+    userData.status = "Offline";
     userData.workMode = "--";
     userData.location = "--" ;
     userData.logInTime = "--";
     }
 
+
     userData.uid = data[i].user_id
-    userData.role = data[i].role;
     userData.userName= data[i].user_name;
     userData.first=data[i].first_name;
     userData.last=data[i].last_name;  
+    userData.role = role[data[i].role];
     userDetails.push(userData);
     userData = {};
   }

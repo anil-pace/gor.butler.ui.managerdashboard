@@ -48,7 +48,7 @@ class EditUser extends React.Component{
   }
   _handleEditUser(e){
         e.preventDefault();
-        let pwd1,pwd2,role,opt,firstName,lastname;
+        let pwd1,pwd2,role,opt,firstname,lastname;
 
         firstname=this.firstName.value;
         lastname=this.lastName.value;

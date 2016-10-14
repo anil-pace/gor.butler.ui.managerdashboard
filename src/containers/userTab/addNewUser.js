@@ -60,7 +60,7 @@ class AddUser extends React.Component{
   }
   _handleAddUser(e){
         e.preventDefault();
-        let pwd1,pwd2,role,opt,userid,firstName,lastname;
+        let pwd1,pwd2,role,opt,userid,firstname,lastname;
 
         userid=this.userId.value;
         firstname=this.firstName.value;
