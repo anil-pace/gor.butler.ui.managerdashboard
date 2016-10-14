@@ -26,7 +26,7 @@ class UsersTab extends React.Component{
 
 function mapStateToProps(state, ownProps){
   return {
-    userdetails: state.userDetails.userDetails || {},
+    userdetails: state.userDetails.userDetails || [],
   };
 }
 

@@ -38,7 +38,7 @@ class ChargingStations extends React.Component{
 
 function mapStateToProps(state, ownProps){
   return {
-    chargersDetail: state.chargersDetail || {}
+    chargersDetail: state.chargersDetail || [],
   };
 }
 

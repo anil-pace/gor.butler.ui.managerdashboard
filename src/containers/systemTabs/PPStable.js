@@ -44,6 +44,42 @@ class PPStable extends React.Component {
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
   }
+
+  componentWillReceiveProps(nextProps) {
+    var temp;
+    if(nextProps.items === undefined) {
+      this._dataList = new tableRenderer(0);
+      temp = new Array(0).fill(false);
+    }
+    else {
+      this._dataList = new tableRenderer(nextProps.items.length);
+      temp = new Array(nextProps.items.length).fill(false);
+    }
+    this._defaultSortIndexes = [];
+    this._dataList.newData=nextProps.items;
+    var size = this._dataList.getSize();
+    for (var index = 0; index < size; index++) {
+      this._defaultSortIndexes.push(index);
+    }
+    var columnWidth= (1280/nextProps.itemNumber)
+    this.state = {
+      sortedDataList: this._dataList,
+      colSortDirs: {},
+      columnWidths: {
+        id: columnWidth,
+        status: columnWidth,
+        operatingMode: columnWidth,
+        performance: columnWidth,
+        operatorAssigned: columnWidth
+      },
+      isChecked:temp,
+      renderDropD: false,
+    };
+    this._onSortChange = this._onSortChange.bind(this);
+    this._onFilterChange = this._onFilterChange.bind(this);
+    this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+  }
+
    _onColumnResizeEndCallback(newColumnWidth, columnKey) {
     this.setState(({columnWidths}) => ({
       columnWidths: {
@@ -121,10 +157,11 @@ class PPStable extends React.Component {
               'contentType':'application/json'
          } 
          
-         this.props.changePPSmode(ppsModeChange);
+         this.props.modeChange(ppsModeChange);
         j++;
       }
     }
+
   }
 
   
@@ -211,9 +248,9 @@ class PPStable extends React.Component {
               </div>
               <div>
               <div className="statuslogoWrap">
-              <div className="header-red-alert-icon gorToolHeaderEl"/>
+            
               </div>
-              <div className="gorToolHeaderEl alertState"> 3 Alerts</div>
+              
               </div>
             </SortHeaderCell>
           }
@@ -242,6 +279,12 @@ class PPStable extends React.Component {
             <SortHeaderCell>
                <FormattedMessage id="PPS.table.performance" description="performance Status for PPS" 
               defaultMessage ="PERFORMANCE"/> 
+               <div>
+              <div className="statuslogoWrap">
+            
+              </div>
+              
+              </div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
