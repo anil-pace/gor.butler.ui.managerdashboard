@@ -1,5 +1,5 @@
 import {ID_DATA,NAME_DATA,PASSWORD_DATA,INFO_RESET,ID_BACKEND,ERROR,SUCCESS,INFO,HIDE,NOTIFY_PASS,NOTIFY_HIDE,NOTIFY_FAIL,PASS_DATA,MD_ID,SET_ROLE} from '../constants/appConstants'; 
-import {US001,US002,UE001} from '../constants/messageConstants'; 
+import {US001,US002,UE001,UE002,INVALID_ID,EMPTY_PWD,EMPTY_NAME,INVALID_NAME,INVALID_PWD,MATCH_PWD,TYPE_SUCCESS} from '../constants/messageConstants'; 
 
 /**
  * @param  {State Object}
@@ -14,14 +14,14 @@ export  function appInfo(state={},action){
           {
            idExist={
               type:ERROR,
-              msg:'Username already exists'             
+              msg:UE002             
             };                        
           }
           else
           {
            idExist={
               type:SUCCESS,
-              msg:'Succesfull'               
+              msg:TYPE_SUCCESS               
             };                        
           }
           return Object.assign({}, state, { 
@@ -35,14 +35,14 @@ export  function appInfo(state={},action){
           {
             idInfo={
               type:ERROR,
-              msg:'Please enter a valid User ID'           
+              msg:INVALID_ID           
             }
           }
           else
           {
             idInfo={
               type:SUCCESS,
-              msg:'Succesfull'               
+              msg:TYPE_SUCCESS               
             };            
           }
           return Object.assign({}, state, { 
@@ -56,14 +56,14 @@ export  function appInfo(state={},action){
           {
             loginPassInfo={
               type:ERROR,
-              msg:'Please enter a password'           
+              msg:EMPTY_PWD           
             }
           }
           else
           {
             loginPassInfo={
               type:SUCCESS,
-              msg:'Succesfull'               
+              msg:TYPE_SUCCESS               
             };            
           }
           return Object.assign({}, state, { 
@@ -77,21 +77,21 @@ export  function appInfo(state={},action){
           {
             nameInfo={
               type:ERROR,
-              msg:'Please enter a valid User Name'           
+              msg:EMPTY_NAME         
             }
           }
           else if(format.test(firstname)||format.test(lastname))
           {
             nameInfo={
               type:ERROR,
-              msg:'Special characters "~","@" and "%" are not allowed'           
+              msg:INVALID_NAME           
             }            
           }
           else
           {
             nameInfo={
               type:SUCCESS,
-              msg:'Succesfull'               
+              msg:TYPE_SUCCESS               
             };            
           }
           return Object.assign({}, state, { 
@@ -106,21 +106,21 @@ export  function appInfo(state={},action){
           {
             passwordInfo={
               type:ERROR,
-              msg:'Minimum 6 characters required'           
+              msg:INVALID_PWD           
             };            
           }
           else if(pwd1!=pwd2)
           {
             passwordInfo={
               type:ERROR,
-              msg:'Passwords do not match'           
+              msg:MATCH_PWD           
             };            
           }
           else
           {
             passwordInfo={
               type:SUCCESS,
-              msg:'Succesfull'               
+              msg:TYPE_SUCCESS               
             };            
           }
           return Object.assign({}, state, { 

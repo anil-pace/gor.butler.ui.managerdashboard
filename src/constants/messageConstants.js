@@ -24,3 +24,25 @@ export const UE005= (<FormattedMessage id="notify.error.username" description='T
 
 export const UE006= (<FormattedMessage id="notify.error.role" description='Text for missing roles' 
             defaultMessage="Role is a required field!"/>);
+
+//errors for info reducer
+export const TYPE_SUCCESS= (<FormattedMessage id="appInfo.success" description='Text for success' 
+            defaultMessage="Successfull"/>);
+
+export const INVALID_ID= (<FormattedMessage id="user.invalid.id" description='Text for invalid user ID' 
+            defaultMessage="Please enter a valid User ID"/>);
+
+export const EMPTY_PWD= (<FormattedMessage id="login.empty.password" description='Text for empty password' 
+            defaultMessage="Please enter a password"/>);
+
+export const EMPTY_NAME= (<FormattedMessage id="user.empty.name" description='Text for empty user name' 
+            defaultMessage="Minimum 6 characters required"/>);
+
+export const INVALID_NAME= (<FormattedMessage id="user.invalid.name" description='Text for invalid user name' 
+            defaultMessage='Special characters "~","@" and "%" are not allowed'/>);
+
+export const INVALID_PWD= (<FormattedMessage id="user.invalid.password" description='Text for invalid password' 
+            defaultMessage="Minimum 6 characters required"/>);
+
+export const MATCH_PWD= (<FormattedMessage id="user.match.password" description='Text for passwords not matching' 
+            defaultMessage="Passwords do not match"/>);
