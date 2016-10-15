@@ -150,11 +150,19 @@ body {
   display: inline-block;
 }
 
+.gor-login-user:hover {
+  background-position: -273px -77px;
+}
+
 .gor-login-password {
   background-position: -223px -77px;
   width: 16px;
   height: 16px;
   display: inline-block;
+}
+
+.gor-login-password:hover {
+  background-position: -291px -77px;
 }
 
 .gor-login-error {
@@ -832,12 +840,11 @@ body {
   font-size: 1rem;
   padding: 0;
   margin: 0;
-  line-height: 1.875rem;
 }
 
 .gor-tile .gor-up-tile {
   padding: 15px 10px 0px 20px;
-  min-height: 8.4375rem;
+  min-height: 7.5rem;
 }
 
 .gor-tile .gor-tile-left {
@@ -899,7 +906,7 @@ body {
   font-size: 1rem;
   background: #F7F7F7;
   color: #666666;
-  padding: 10px 0px 10px 20px;
+  padding: 15px 0px 15px 20px;
   min-height: 1rem;
   overflow: hidden;
   vertical-align: middle;
@@ -1283,7 +1290,6 @@ body {
 .gor-login-form .gor-login-mid {
   text-align: center;
   background: #FFFFFF;
-  border: 1px solid;
   border-radius: 5px;
   color: #979797;
   width: 30%;
@@ -2697,6 +2703,10 @@ input[type="checkbox"] {
   padding-right: 24px;
 }
 
+.gor-user-Logo-wrap button {
+  background: none;
+}
+
 .gorUserTable {
   height: 85vh;
 }
@@ -2985,7 +2995,7 @@ progress::-moz-progress-bar {
 
 .gor-footer {
   background: #4D5055;
-  color: #A6A7A9;
+  color: #CCCCCC;
   border-top: solid 1px #cccccc;
   text-align: center;
   position: fixed;
@@ -2993,6 +3003,8 @@ progress::-moz-progress-bar {
   min-height: 0.625rem;
   padding: 1%;
   width: 95%;
+  font-family: 'Source Sans Pro Regular', sans-serif;
+  font-size: 14px;
 }
 
 .react-redux-modal button:focus {

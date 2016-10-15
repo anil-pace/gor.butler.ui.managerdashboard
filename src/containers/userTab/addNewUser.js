@@ -45,11 +45,11 @@ class AddUser extends React.Component{
     }
   }
   _checkName(){
-     let data2={
+      let data2={
         firstname:this.firstName.value,
         lastname:this.lastName.value
-     };
-     this.props.validateName(data2);
+      };   
+      this.props.validateName(data2);
    }
   _checkPwd(){
     let data3={
@@ -68,10 +68,19 @@ class AddUser extends React.Component{
         pwd1=this.password1.value;
         pwd2=this.password2.value;
 
-
-        if(!this.props.idCheck.type||!this.props.nameCheck.type||!this.props.passwordCheck.type)
+        if(!this.props.idCheck.type)
         {
-          console.log('Form not valid');
+          this._checkId();
+          return;
+        }
+        else if(!this.props.nameCheck.type)
+        {
+          this._checkName();
+          return;
+        }
+        else if(!this.props.passwordCheck.type)
+        {
+          this._checkPwd();
           return;
         }
 
@@ -133,7 +142,7 @@ class AddUser extends React.Component{
               <div className='gor-usr-field'>
                 <div className='gor-usr-hdsm'><FormattedMessage id="users.add.userdetails.firstname" description='Text for first name' 
             defaultMessage='First Name'/></div>
-                <input className={"gor-usr-fdsm"+(this.props.nameCheck.type===ERROR?' gor-input-error':' gor-input-ok')}  onBlur={this._checkName.bind(this)} type="text" placeholder="First Name" id="firstname"  ref={node => { this.firstName = node }}/>
+                <input className={"gor-usr-fdsm"+(this.props.nameCheck.type===ERROR?' gor-input-error':' gor-input-ok')}  onBlur={(this.props.nameCheck.type===ERROR||this.props.nameCheck.type===SUCCESS)?this._checkName.bind(this):''} type="text" placeholder="First Name" id="firstname"  ref={node => { this.firstName = node }}/>
               </div>
               <div className='gor-usr-field'>              
                 <div className='gor-usr-hdsm'><FormattedMessage id="users.add.userdetails.lastname" description='Text for last name' 
@@ -154,13 +163,13 @@ class AddUser extends React.Component{
 
               <div className='gor-usr-hdsm'><FormattedMessage id="users.add.password.field1" description='Text for password' 
             defaultMessage='Password'/></div>
-              <input className={"gor-usr-fdlg"+(this.props.passwordCheck.type===ERROR?' gor-input-error':' gor-input-ok')} onBlur={this._checkPwd.bind(this)} type="password" id="password1"  ref={node => { this.password1 = node }}/>     
+              <input className={"gor-usr-fdlg"+(this.props.passwordCheck.type===ERROR?' gor-input-error':' gor-input-ok')} onBlur={(this.props.passwordCheck.type===ERROR||this.props.passwordCheck.type===SUCCESS)?this._checkPwd.bind(this):''} type="password" id="password1"  ref={node => { this.password1 = node }}/>     
               {this.props.passwordCheck.type?tick:''}
 
               <div className='gor-usr-hdsm'><FormattedMessage id="users.add.password.field2" description='Text for confirm password' 
             defaultMessage='Confirm Password'/></div>
               <input className={"gor-usr-fdlg"+(this.props.passwordCheck.type===ERROR?' gor-input-error':' gor-input-ok')} onBlur={this._checkPwd.bind(this)} type="password" id="password2"  ref={node => { this.password2 = node }}/>
-              {this.props.passwordCheck.type?tick:((this.props.passwordCheck.type===ERROR)?<FieldError txt={this.props.passwordCheck.msg} />:'')}
+              {this.props.passwordCheck.type===SUCCESS?tick:((this.props.passwordCheck.type===ERROR)?<FieldError txt={this.props.passwordCheck.msg} />:'')}
 
             </div>
             <p className='gor-submit'>

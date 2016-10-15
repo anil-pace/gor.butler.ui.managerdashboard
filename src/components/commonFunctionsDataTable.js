@@ -62,10 +62,14 @@ export class DataListWrapper {
 export const ActionCell = ({rowIndex, data, columnKey,selEdit,selDel, ...props}) => (
   <Cell {...props}>
     <div className="gor-user-Logo-wrap">
-      <button className="user-edit-icon" onClick={selEdit.bind(this,columnKey,rowIndex)}/>
+      <button onClick={selEdit.bind(this,columnKey,rowIndex)}>
+        <div className="user-edit-icon" />
+      </button>
     </div>
     <div className="gor-user-Logo-wrap">
-      <button className="user-del-icon" onClick={selDel.bind(this,columnKey,rowIndex)} />
+      <button onClick={selDel.bind(this,columnKey,rowIndex)} >
+        <div className="user-del-icon" />
+      </button>
     </div>  
   </Cell>
 );

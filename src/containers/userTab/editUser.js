@@ -4,7 +4,7 @@ import { FormattedMessage,FormattedPlural } from 'react-intl';
 import {userRequest} from '../../actions/userActions';
 import {validateName, validatePassword, resetForm} from '../../actions/validationActions';
 import { connect } from 'react-redux';
-import {ERROR,GET_ROLES,EDIT_USER} from '../../constants/appConstants';
+import {ERROR,GET_ROLES,EDIT_USER,SUCCESS} from '../../constants/appConstants';
 import FieldError from '../../components/fielderror/fielderror';
 import RadioGroup from './radioGroup';
 
@@ -55,12 +55,12 @@ class EditUser extends React.Component{
         pwd1=this.password1.value;
         pwd2=this.password2.value;
 
-
-        if(!firstname||!lastname||firstname.length>50||lastname.length>50||this.props.passwordCheck.type===ERROR)
+        if(!this.props.nameCheck.type)
         {
+          this._checkName();
           return;
         }
-        if(!this.props.passwordCheck.type)
+        else if(!this.props.passwordCheck.type)
         {
           pwd1="__unchanged__";
           pwd2="__unchanged__";
@@ -120,7 +120,7 @@ class EditUser extends React.Component{
               <div className='gor-usr-field'>
                <div className='gor-usr-hdsm'><FormattedMessage id="users.edit.userdetails.firstname" description='Text for first name' 
             defaultMessage='First Name'/></div>
-                <input className={"gor-usr-fdsm"+(this.props.nameCheck.type===ERROR?' gor-input-error':' gor-input-ok')}  onBlur={this._checkName.bind(this)} type="text" placeholder="First Name" defaultValue={this.props.first} id="firstname"  ref={node => { this.firstName = node }}/>
+                <input className={"gor-usr-fdsm"+(this.props.nameCheck.type===ERROR?' gor-input-error':' gor-input-ok')}  onBlur={(this.props.nameCheck.type===ERROR||this.props.nameCheck.type===SUCCESS)?this._checkName.bind(this):''} type="text" placeholder="First Name" defaultValue={this.props.first} id="firstname"  ref={node => { this.firstName = node }}/>
               </div>
               <div className='gor-usr-field'>              
                 <div className='gor-usr-hdsm'><FormattedMessage id="users.edit.userdetails.lastname" description='Text for last name' 
@@ -142,7 +142,7 @@ class EditUser extends React.Component{
 
               <div className='gor-usr-hdsm'><FormattedMessage id="users.edit.password.field1" description='Text for password' 
             defaultMessage='Password'/></div>
-              <input className={"gor-usr-fdlg"+(this.props.passwordCheck.type===ERROR?' gor-input-error':' gor-input-ok')} onBlur={this._checkPwd.bind(this)} type="password" id="password1"  ref={node => { this.password1 = node }}/>     
+              <input className={"gor-usr-fdlg"+(this.props.passwordCheck.type===ERROR?' gor-input-error':' gor-input-ok')} onBlur={(this.props.passwordCheck.type===ERROR||this.props.passwordCheck.type===SUCCESS)?this._checkPwd.bind(this):''} type="password" id="password1"  ref={node => { this.password1 = node }}/>     
               {this.props.passwordCheck.type?tick:''}
 
               <div className='gor-usr-hdsm'><FormattedMessage id="users.edit.password.field2" description='Text for confirm password' 

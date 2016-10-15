@@ -102,7 +102,7 @@ export  function appInfo(state={},action){
     case PASSWORD_DATA:
           let pwd1=action.data.pwd1,pwd2=action.data.pwd2, passwordInfo;
 
-          if(pwd1.length<6||pwd2.length<6)
+          if(pwd1.length<6)
           {
             passwordInfo={
               type:ERROR,
