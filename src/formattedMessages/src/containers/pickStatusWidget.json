@@ -42,7 +42,7 @@
   {
     "id": "widget.pick.statusright",
     "description": "Text for on schedule",
-    "defaultMessage": "{wave_end}"
+    "defaultMessage": "{wave_end} ghng"
   },
   {
     "id": "widget.pick.statusleft.onschedule",

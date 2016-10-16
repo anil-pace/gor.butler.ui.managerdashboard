@@ -4,7 +4,7 @@ import { FormattedMessage,FormattedPlural } from 'react-intl';
 import {userRequest} from '../../actions/userActions';
 import {validateName, validatePassword, resetForm} from '../../actions/validationActions';
 import { connect } from 'react-redux';
-import {ERROR,GET_ROLES} from '../../constants/appConstants';
+import {ERROR,GET_ROLES,EDIT_USER,SUCCESS} from '../../constants/appConstants';
 import FieldError from '../../components/fielderror/fielderror';
 import RadioGroup from './radioGroup';
 
@@ -15,7 +15,7 @@ class EditUser extends React.Component{
   }
   componentDidMount(){
         let userData={
-                'url':'https://192.168.8.118/api/user/role',
+                'url':'https://192.168.8.118/api/role',
                 'method':'GET',
                 'cause':GET_ROLES,
                 'contentType':'application/json',
@@ -48,29 +48,45 @@ class EditUser extends React.Component{
   }
   _handleEditUser(e){
         e.preventDefault();
-        let pwd1,pwd2,role,opt,userid,firstName,lastname;
+        let pwd1,pwd2,role,opt,firstname,lastname;
 
-        userid=this.userId.value;
         firstname=this.firstName.value;
         lastname=this.lastName.value;
         pwd1=this.password1.value;
         pwd2=this.password2.value;
 
-
-        if(!userid||!firstname||!lastname||firstname.length>50||lastname.length>50||pwd1!==pwd2)
+        if(!this.props.nameCheck.type)
         {
+          this._checkName();
           return;
         }
-
+        else if(!this.props.passwordCheck.type)
+        {
+          pwd1="__unchanged__";
+          pwd2="__unchanged__";
+        }
         role=this.props.roleSet?this.props.roleSet.msg:this.props.roleInfo.msg.operator;
 
-        let userdata={         
-            'userid': userid,
-            'firstname':firstname,
-            'lastname':lastname,
-            'role':role,
-            'password': pwd1
+        let formdata={         
+                    "first_name": firstname,
+                    "last_name": lastname,
+                    "role_id":role,
+                    "password": pwd1,
+                    "password_confirm": pwd2     
+
          };
+        let editurl="https://192.168.8.118/api/user/"+this.props.id+"/edit";
+        let userData={
+                'url':editurl,
+                'formdata':formdata,
+                'method':'POST',
+                'cause':EDIT_USER,
+                'contentType':'application/json',
+                'accept':'application/json',
+                'token':sessionStorage.getItem('auth_token')
+            }
+        this.props.userRequest(userData);
+        this.removeThisModal();
   }
   render()
   {
@@ -99,17 +115,17 @@ class EditUser extends React.Component{
             
              <div className='gor-usr-hdsm'><FormattedMessage id="users.edit.userdetails.userid" description='Text for user id' 
             defaultMessage='User ID'/></div>
-              <input className='gor-usr-fdlg' type="text" placeholder="User Id" id="userid"  ref={node => { this.userId = node }} disabled/>
+              <input className='gor-usr-fdlg' type="text" placeholder={this.props.userName} id="userid"  ref={node => { this.userId = node }} disabled/>
             <p></p>
               <div className='gor-usr-field'>
                <div className='gor-usr-hdsm'><FormattedMessage id="users.edit.userdetails.firstname" description='Text for first name' 
             defaultMessage='First Name'/></div>
-                <input className={"gor-usr-fdsm"+(this.props.nameCheck.type===ERROR?' gor-input-error':' gor-input-ok')}  onBlur={this._checkName.bind(this)} type="text" placeholder="First Name" id="firstname"  ref={node => { this.firstName = node }}/>
+                <input className={"gor-usr-fdsm"+(this.props.nameCheck.type===ERROR?' gor-input-error':' gor-input-ok')}  onBlur={(this.props.nameCheck.type===ERROR||this.props.nameCheck.type===SUCCESS)?this._checkName.bind(this):''} type="text" placeholder="First Name" defaultValue={this.props.first} id="firstname"  ref={node => { this.firstName = node }}/>
               </div>
               <div className='gor-usr-field'>              
                 <div className='gor-usr-hdsm'><FormattedMessage id="users.edit.userdetails.lastname" description='Text for last name' 
             defaultMessage='Last Name'/></div>
-                <input className={"gor-usr-fdsm"+(this.props.nameCheck.type===ERROR?' gor-input-error':' gor-input-ok')}  onBlur={this._checkName.bind(this)} type="text" placeholder="Last Name" id="lastname"  ref={node => { this.lastName = node }}/>
+                <input className={"gor-usr-fdsm"+(this.props.nameCheck.type===ERROR?' gor-input-error':' gor-input-ok')}  onBlur={this._checkName.bind(this)} type="text" placeholder="Last Name" defaultValue={this.props.last} id="lastname"  ref={node => { this.lastName = node }}/>
               </div>
                             {this.props.nameCheck.type?tick:((this.props.nameCheck.type===ERROR)?<FieldError txt={this.props.nameCheck.msg} />:'')}
 
@@ -126,7 +142,7 @@ class EditUser extends React.Component{
 
               <div className='gor-usr-hdsm'><FormattedMessage id="users.edit.password.field1" description='Text for password' 
             defaultMessage='Password'/></div>
-              <input className={"gor-usr-fdlg"+(this.props.passwordCheck.type===ERROR?' gor-input-error':' gor-input-ok')} onBlur={this._checkPwd.bind(this)} type="password" id="password1"  ref={node => { this.password1 = node }}/>     
+              <input className={"gor-usr-fdlg"+(this.props.passwordCheck.type===ERROR?' gor-input-error':' gor-input-ok')} onBlur={(this.props.passwordCheck.type===ERROR||this.props.passwordCheck.type===SUCCESS)?this._checkPwd.bind(this):''} type="password" id="password1"  ref={node => { this.password1 = node }}/>     
               {this.props.passwordCheck.type?tick:''}
 
               <div className='gor-usr-hdsm'><FormattedMessage id="users.edit.password.field2" description='Text for confirm password' 

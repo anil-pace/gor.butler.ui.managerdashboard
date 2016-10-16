@@ -1344,6 +1344,9 @@ input[type="checkbox"]{
   display: inline-block;
   padding-left: 24px;
   padding-right: 24px;
+  button{
+    background:none;
+  }
 }
 
 .gorUserTable {

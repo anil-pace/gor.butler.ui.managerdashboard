@@ -29,11 +29,10 @@ body
     font-size: calculateRem(16px);
     padding:0;
     margin:0;
-    line-height: calculateRem(30px);
   }
   .gor-up-tile{
     padding: 15px 10px 0px 20px;
-    min-height:calculateRem(135px);
+    min-height:calculateRem(120px);
   }
   .gor-tile-left{
     width: 80%;
@@ -84,7 +83,7 @@ body
   font-size: calculateRem(16px);
   background:#F7F7F7;
   color: #666666;
-  padding: 10px 0px 10px 20px;
+  padding: 15px 0px 15px 20px;
   min-height:calculateRem(16px);
   overflow:hidden;
   vertical-align:middle;
