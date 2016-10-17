@@ -4,9 +4,8 @@ import ReactDOM  from 'react-dom';
 import Tabs from './containers/tabs';
 import Header from './components/header/header';
 import {setWsAction ,setMockAction} from './actions/socketActions';
-import { WS_CONNECT,WS_ONSEND,WS_MOCK,USERS,TAB_ROUTE_MAP,OVERVIEW ,SYSTEM,ORDERS,INVENTORY} from './constants/appConstants'
+import {RECIEVE_HEADER, WS_CONNECT,WS_ONSEND,WS_MOCK,USERS,TAB_ROUTE_MAP,OVERVIEW ,SYSTEM,ORDERS,INVENTORY} from './constants/appConstants'
 import { wsOverviewData} from './constants/initData.js';
-import { REQUEST_HEADER, getFetchData } from './actions/headerAction';
 import {prevTabSelected} from './actions/tabSelectAction';
 import { connect } from 'react-redux'; 
 import TopNotifications from './components/topnotify/topnotify';
@@ -56,6 +55,7 @@ class App extends React.Component{
         }
 
         if(loginAuthorized){
+            
             if(!socketStatus){
               this.props.initWebSocket() ; 
             }
@@ -88,14 +88,14 @@ class App extends React.Component{
   	 * @return {[type]}
   	 */
 	render(){
-		var items3={start:"09:00:25", name:"Krish verma gandhi sharma", post:"Manager"}
+		//var items3={start:"09:00:25", name:"Krish verma gandhi sharma", post:"Manager"}
 		
 		
 		return (
 			
 			<div className="mainContainer">
         <TopNotifications />
-        <Header user={items3}/>
+        <Header />
 				<Tabs/>
 				{this.props.children}
 			</div>
@@ -120,7 +120,7 @@ function mapStateToProps(state,ownProps) {
  	loginAuthorized : state.authLogin.loginAuthorized,
  	socketStatus: state.recieveSocketActions.socketConnected,
  	socketAuthorized: state.recieveSocketActions.socketAuthorized,
- 	
+ 	headerInfo:state.headerData.headerInfo,
   intl: state.intl,
   tab:state.tabSelected.tab,
   subTab:state.tabSelected.subTab,
@@ -136,7 +136,8 @@ function mapDispatchToProps(dispatch){
         sendAuthToSocket: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
         initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
         initMockData: function(data){dispatch(setMockAction({type:WS_MOCK,data:data}));},
-        prevTabSelected: function(data){ dispatch(prevTabSelected(data)) }
+        prevTabSelected: function(data){ dispatch(prevTabSelected(data)) },
+        getHeaderInfo: function(data){ dispatch(getHeaderInfo(data)) }
     }
 };
 export  default connect(mapStateToProps,mapDispatchToProps)(App);

@@ -1,4 +1,4 @@
-import { MOCK_LOGIN,LOGIN_REQUEST, LOGIN_REDIRECT, LOGIN_SUCCESS,LOGIN_FAILURE, AJAX_CALL, LOGOUT, WS_DISCONNECT} from '../constants/appConstants'
+import { MOCK_LOGIN,LOGIN_REQUEST, SET_USERNAME,LOGIN_REDIRECT, LOGIN_SUCCESS,LOGIN_FAILURE, AJAX_CALL, LOGOUT, WS_DISCONNECT} from '../constants/appConstants'
 
 
 
@@ -62,6 +62,17 @@ export function authLoginData(params) {
   return {
     type: AJAX_CALL,
     params
+  }
+ }
+
+ /**
+  * Action to set username that will be used to get role data
+  */
+ 
+ export function setUsername(data){
+  return {
+    type: SET_USERNAME,
+    data
   }
  }
 

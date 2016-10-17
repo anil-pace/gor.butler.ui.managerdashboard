@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import {getData}  from './reducers/headerReducer'
+import {headerData}  from './reducers/headerReducer'
 import {authLogin}  from './reducers/loginReducer'
 import {loader}  from './reducers/loaderReducer'
 import {recieveSocketActions}  from './reducers/socketReducer'
@@ -31,7 +31,7 @@ import {waveInfo} from './reducers/waveDetailReducer';
 
 const rootReducer = combineReducers({
   intl:intlReducer,
-  getData,
+  headerData,
   authLogin,
   routing,
   recieveSocketActions,

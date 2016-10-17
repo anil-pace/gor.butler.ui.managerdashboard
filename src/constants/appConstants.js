@@ -6,6 +6,7 @@ export const LOGIN_FAILURE = "LOGIN_FAILURE";
 export const LOGOUT = "LOGOUT";
 export const AJAX_CALL = "AJAX_CALL";
 export const MOCK_LOGIN = "MOCK_LOGIN";
+export const SET_USERNAME = "SET_USERNAME";
 
 /*Constants for Web Sockets*/
 export const WS_CONNECT = "WS_CONNECT";
@@ -21,7 +22,7 @@ export const WS_MOCK="WS_MOCK";
 
 export const REQUEST_HEADER = "REQUEST_HEADER";
 export const RECIEVE_HEADER = "RECIEVE_HEADER";
-export const RECIEVE_ITEM_TO_STOCK = "RECIEVE_ITEM_TO_STOCK";
+
 
 
 /*Constants for performance widget*/
@@ -93,11 +94,10 @@ export const ADD_USER='ADD_USER';
 export const CHECK_ID='CHECK_ID';
 export const DELETE_USER='DELETE_USER';
 export const GET_ROLES='GET_ROLES';
-
 export const PPS_MODE_CHANGE = 'PPS_MODE_CHANGE';
-
+export const GET_HEADER_INFO = 'GET_HEADER_INFO';
 export const EDIT_USER='EDIT_USER';
-export const BUTLER_UI="butler_ui";
+
 
 
 /*Constants for app info checking*/
@@ -159,4 +159,13 @@ export const CODE_UE003='ue003';
 export const CODE_UE004='ue004';
 export const CODE_UE005='ue005';
 export const CODE_UE006='ue006';
+
+/*User roles map*/
+export const BUTLER_SUPERVISOR = 'butler_supervisor';
+export const BUTLER_UI = 'butler_ui';
+export const USER_ROLE_MAP ={
+	[BUTLER_SUPERVISOR] : "Manager",
+	[BUTLER_UI] : "Operator"
+
+}
 
