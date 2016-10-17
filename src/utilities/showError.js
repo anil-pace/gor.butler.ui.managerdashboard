@@ -8,7 +8,7 @@ export function ShowError(store,cause)
 	{
 		case AUTH_LOGIN:
 			console.log('In Error utility');
-			store.dispatch(receiveAuthData(''));
+			store.dispatch(receiveAuthData());
 			break;
 		default:
           store.dispatch(notifyFail('Connection refused'));
