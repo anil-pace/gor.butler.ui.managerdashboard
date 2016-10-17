@@ -2,11 +2,12 @@ import {PPS_DETAIL} from '../constants/appConstants';
 
 function processPPSData(data) {
   //TODO: codes need to be replaced after checking with backend
-  var PPSData=[];
+  var PPSData=[], detail = {};;
   var ppsStatus = ["Off", "On"];
-  var current_task = ["Pick", "Put", "Audit"];
+  var currentTask = {"pick":"Pick", "put":"Put", "audit":"Audit"};
+  detail.totalOperator = 0;
   for (var i = data.length - 1; i >= 0; i--) {
-    var detail = {};
+    detail = {};
     detail.id = "PPS " + data[i].pps_id;
     if(data[i].pps_status === "on") {
       detail.status = "On";
@@ -14,13 +15,23 @@ function processPPSData(data) {
     else {
       detail.status = "Off";
     }
-    detail.operatingMode = data[i].current_task;
+    detail.statusClass = data[i].pps_status;
+    detail.operatingMode = currentTask[data[i].current_task];
     detail.performance = data[i].performance + " orders/hr";///  orders /items
-    if(detail.operatorAssigned === null) {
+    if(data[i].operators_assigned === null) {
       detail.operatorAssigned = "--";
     }
     else {
-      detail.operatorAssigned = data[i].operators_assigned;
+      for (var j = data[i].operators_assigned.length - 1; j >= 0; j--) {
+        if(detail.operatorAssigned) {
+          detail.operatorAssigned = detail.operatorAssigned + ", " + data[i].operators_assigned[j];
+        }
+        else {
+          detail.operatorAssigned =  data[i].operators_assigned[j];
+        }
+      }
+      detail.totalOperator = detail.totalOperator + data[i].operators_assigned.length;
+      
     }
     PPSData.push(detail);
   }

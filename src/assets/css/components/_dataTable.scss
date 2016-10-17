@@ -335,7 +335,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .public_fixedDataTable_header .public_fixedDataTableCell_main {
 border-bottom-style: solid;
 border-color: #dedede;
-border-bottom-width: 3px;
+border-bottom-width: 0px;
 border-right-style: solid;
 
   
@@ -394,7 +394,7 @@ background-color: #FFFFFF;
   background: #fc3838;
   border-radius: 15px;
   text-align: center;
-  width:52px;
+  width:70px;
   color: #ffffff;
   font-size: 12px;
   max-height: 9px;
@@ -405,7 +405,7 @@ background-color: #FFFFFF;
   background: #fc3838;
   border-radius: 15px;
   text-align: center;
-  width:52px;
+  width:70px;
   color: #ffffff;
   font-size: 12px;
   max-height: 9px;
@@ -417,7 +417,7 @@ background-color: #FFFFFF;
   background: #f99405;
   border-radius: 15px;
   text-align: center;
-  width:52px;
+  width:70px;
   color: #ffffff;
   font-size: 12px;
   max-height: 9px;
@@ -429,7 +429,7 @@ background-color: #FFFFFF;
   background: #f99405;
   border-radius: 15px;
   text-align: center;
-  width:52px;
+  width:70px;
   color: #ffffff;
   font-size: 12px;
   max-height: 9px;
@@ -441,47 +441,81 @@ background-color: #FFFFFF;
   background: #f99405;
   border-radius: 15px;
   text-align: center;
-  width:52px;
+  width:70px;
   color: #ffffff;
   font-size: 12px;
   max-height: 9px;
 
 }
 
-.On .public_fixedDataTableCell_cellContent{
+.on .public_fixedDataTableCell_cellContent{
 
   
   border-radius: 15px;
   text-align: center;
-  width:52px;
+  width:70px;
   border-style: solid;
   border-width: 1px;
   border-color: #00a54f;
   color: #00a54f;
   font-size: 12px;
   max-height: 9px;
+  background: #ffffff;
 
 }
 
-.Off .public_fixedDataTableCell_cellContent{
+.off .public_fixedDataTableCell_cellContent{
 
   border-radius: 15px;
   text-align: center;
-  width:52px;
+  width:70px;
   border-style: solid;
   border-width: 1px;
   border-color: #aaaaaa;
   color: #aaaaaa;
   font-size: 12px;
   max-height: 9px;
+  background: #ffffff;
 
 }
-.Online .public_fixedDataTableCell_cellContent{
+.online .public_fixedDataTableCell_cellContent{
 
   
   border-radius: 15px;
   text-align: center;
-  width:52px;
+  width:70px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #00a54f;
+  color: #00a54f;
+  font-size: 12px;
+  max-height: 9px;
+  background: #ffffff;
+
+}
+
+.connected .public_fixedDataTableCell_cellContent{
+
+  
+  border-radius: 15px;
+  text-align: center;
+  width:70px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #00a54f;
+  color: #00a54f;
+  font-size: 12px;
+  max-height: 9px;
+  background: #ffffff;
+
+}
+
+.completed .public_fixedDataTableCell_cellContent{
+
+  
+  border-radius: 15px;
+  text-align: center;
+  width:70px;
   border-style: solid;
   border-width: 1px;
   border-color: #00a54f;
@@ -489,81 +523,82 @@ background-color: #FFFFFF;
   font-size: 12px;
   max-height: 9px;
 
-}
-
-.Completed .public_fixedDataTableCell_cellContent{
-
-  
-  border-radius: 15px;
-  text-align: center;
-  width:52px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #00a54f;
-  color: #ffffff;
-  font-size: 12px;
-  max-height: 9px;
-  background: #00a54f;
 
 }
 
-.Breached .public_fixedDataTableCell_cellContent{
+.breached .public_fixedDataTableCell_cellContent{
 
   background: #fc3838;
   border-radius: 15px;
   text-align: center;
-  width:52px;
+  width:70px;
   color: #ffffff;
   font-size: 12px;
   max-height: 9px;
-
 }
 
-.Offline .public_fixedDataTableCell_cellContent{
+.offline .public_fixedDataTableCell_cellContent{
 
   border-radius: 15px;
   text-align: center;
-  width:52px;
+  width:70px;
   border-style: solid;
   border-width: 1px;
   border-color: #aaaaaa;
   color: #aaaaaa;
   font-size: 12px;
   max-height: 9px;
+  background: #ffffff;
 
 }
 
-.Pending .public_fixedDataTableCell_cellContent{
+.disconnected .public_fixedDataTableCell_cellContent{
 
   border-radius: 15px;
   text-align: center;
-  width:52px;
+  width:70px;
   border-style: solid;
   border-width: 1px;
   border-color: #aaaaaa;
   color: #aaaaaa;
   font-size: 12px;
   max-height: 9px;
+  background: #ffffff;
+}
+
+.pending .public_fixedDataTableCell_cellContent{
+
+  border-radius: 15px;
+  text-align: center;
+  width:70px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #aaaaaa;
+  color: #aaaaaa;
+  font-size: 12px;
+  max-height: 9px;
+  background: #ffffff;
 
 }
 
-.Progress .public_fixedDataTableCell_cellContent{
+.progress .public_fixedDataTableCell_cellContent{
 
   
   border-radius: 15px;
   text-align: center;
-  width:52px;
+  width:70px;
   border-style: solid;
   border-width: 1px;
   border-color: #00a54f;
   color: #00a54f;
   font-size: 12px;
   max-height: 9px;
+  background: #ffffff;
 
 }
 
 .public_fixedDataTableCell_columnResizerKnob {
-  background-color: #0284ff;
+  background-color: #aaaaaa;
 }
 /**
  * Copyright (c) 2015, Facebook, Inc.

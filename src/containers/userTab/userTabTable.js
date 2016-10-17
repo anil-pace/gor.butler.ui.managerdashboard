@@ -106,7 +106,6 @@ class UserDataTable extends React.Component {
   }
   handleEdit(columnKey,rowIndex) {
     let uid=this.state.sortedDataList.newData[rowIndex].uid,uname=this.state.sortedDataList.newData[rowIndex].userName,fname=this.state.sortedDataList.newData[rowIndex].first,lname=this.state.sortedDataList.newData[rowIndex].last;
-    console.log(uname); 
     modal.add(EditUser, {
       title: '',
       size: 'large', // large, medium or small,
@@ -118,7 +117,7 @@ class UserDataTable extends React.Component {
       last:lname
     });
 
-    console.log(this.state.sortedDataList.newData[rowIndex].userName)
+   
   }
   handleDel(columnKey,rowIndex) {
     let id=this.state.sortedDataList.newData[rowIndex].uid,name=this.state.sortedDataList.newData[rowIndex].name;
@@ -129,7 +128,7 @@ class UserDataTable extends React.Component {
       hideCloseButton: true,
       id:id,
       name:name    });
-    console.log(this.state.sortedDataList.newData[rowIndex].uid)
+   
   }
  //  _showModal(){
  // //    this.myModal.style.display = "block";
@@ -182,7 +181,7 @@ class UserDataTable extends React.Component {
         height={heightRes}
         {...this.props}>
         <Column
-          columnKey="name"
+          columnKey="id"
           header={
             <SortHeaderCell >
               <div className="gorToolHeaderEl">
@@ -208,7 +207,7 @@ class UserDataTable extends React.Component {
               </div>
             </SortHeaderCell>
           }
-          cell={<StatusCell data={sortedDataList} ></StatusCell>}
+          cell={<StatusCell data={sortedDataList} statusKey="statusClass" ></StatusCell>}
           width={columnWidth}
         />
         <Column

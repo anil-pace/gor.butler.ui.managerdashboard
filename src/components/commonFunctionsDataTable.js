@@ -95,8 +95,8 @@ export const ComponentCell = ({rowIndex, data, columnKey,checkState,checked, ...
   </Cell>
 );
 
-export const StatusCell = ({rowIndex, data, columnKey, ...props}) => (
-  <Cell {...props} className={data.getObjectAt(rowIndex)[columnKey]}>
+export const StatusCell = ({rowIndex, data, columnKey,statusKey, ...props}) => (
+  <Cell {...props} className={data.getObjectAt(rowIndex)[statusKey]}>
     {data.getObjectAt(rowIndex)[columnKey]}
   </Cell>
 );

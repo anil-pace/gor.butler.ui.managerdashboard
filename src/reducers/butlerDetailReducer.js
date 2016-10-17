@@ -8,6 +8,7 @@ function processButlersData(data) {
   for (var i = data.length - 1; i >= 0; i--) {
     butlerDetail = {}
     butlerDetail.id = "BOT " + data[i].butler_id;
+    butlerDetail.statusClass = data[i].state;
     butlerDetail.status = currentState[data[i].state];
     butlerDetail.location = data[i].position;
     butlerDetail.voltage = data[i].voltage;
