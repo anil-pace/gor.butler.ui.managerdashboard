@@ -851,8 +851,8 @@ body {
 }
 
 .gor-tile .gor-up-tile {
-  padding: 15px 10px 0px 20px;
-  min-height: 7.5rem;
+  padding: 20px 10px 10px 20px;
+  min-height: 6.25rem;
 }
 
 .gor-tile .gor-tile-left {
@@ -876,7 +876,7 @@ body {
   font-family: 'Source Sans Pro semibold', sans-serif;
   font-size: 1rem;
   font-weight: 600;
-  line-height: 46px;
+  line-height: 33px;
 }
 
 .gor-tile .gor-heading-value {
@@ -1195,7 +1195,7 @@ body {
 
 .gor-login-form .gor-login-lang .gor-lang-drop {
   display: inline-block;
-  width: 10%;
+  width: 18%;
   height: 1.875rem;
   background: transparent;
   text-align: left;

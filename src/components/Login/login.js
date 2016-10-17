@@ -174,7 +174,7 @@ class Login extends React.Component{
                     <input type="submit" className='gor-login-btn'  value="Login" /><br />
                 </section>
                 </div>
-                <div className='gor-box-bottom'><span className='gor-box-bottom-left'>Current time: 09:00:15(IST)</span>
+                <div className='gor-box-bottom'><span className='gor-box-bottom-left'></span>
                     <span className='gor-box-bottom-right'></span>
                 </div>
                 </form>
