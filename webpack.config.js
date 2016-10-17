@@ -69,7 +69,8 @@ function getPlugins(){
                 compress: {
                     warnings: false,
                     unused:true,
-                    dead_code:true
+                    dead_code:true,
+                    drop_console: true
                 },
                 output: {
                     comments: false,
