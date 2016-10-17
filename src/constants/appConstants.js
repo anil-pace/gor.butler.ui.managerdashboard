@@ -21,7 +21,7 @@ export const WS_MOCK="WS_MOCK";
 
 export const REQUEST_HEADER = "REQUEST_HEADER";
 export const RECIEVE_HEADER = "RECIEVE_HEADER";
-export const RECIEVE_ITEM_TO_STOCK = "RECIEVE_ITEM_TO_STOCK";
+
 
 
 /*Constants for performance widget*/
@@ -91,6 +91,7 @@ export const ADD_USER='ADD_USER';
 export const CHECK_ID='CHECK_ID';
 export const DELETE_USER='DELETE_USER';
 export const GET_ROLES='GET_ROLES';
+export const GET_HEADER_INFO = 'GET_HEADER_INFO';
 
 /*Constants for app info checking*/
 export const ID_DATA = "ID_DATA";

@@ -1,9 +1,11 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-import {REQUEST_HEADER,RECIEVE_HEADER,RECIEVE,RECIEVE_ITEM_TO_STOCK} from '../../actions/headerAction';
+import {RECIEVE_HEADER,REQUEST_HEADER,RECIEVE,RECIEVE_ITEM_TO_STOCK} from '../../constants/appConstants';
 import {modal} from 'react-redux-modal';
+import { getHeaderInfo } from '../../actions/headerAction';
 import LogOut from '../../containers/logoutTab'; 
 import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux'; 
 var dropdownFlag=0;
 var temp;
 
@@ -17,6 +19,17 @@ class Header extends React.Component{
     	
     	 
     }
+    componentDidMount(){
+              if(this.props.authToken){
+              let headerData={
+                'url':'https://192.168.8.118/api/user?username=admin',
+                'method':'GET',
+                'cause':RECIEVE_HEADER,
+                'token':this.props.authToken
+            }
+              this.props.getHeaderInfo(headerData)
+          }
+  	}
 
     openDropdown() {
     	dropdownFlag = 1;
@@ -33,14 +46,19 @@ class Header extends React.Component{
       //.. all what you put in here you will get access in the modal props ;)
     });
    }
+  _processData(){
+  	var headerInfo;
+  	if(this.props.headerInfo && this.props.headerInfo.users.length){
+  		 headerInfo= Object.assign({},this.props.headerInfo)
+  		headerInfo.fullName = headerInfo.users[0].first_name + headerInfo.users[0].last_name;
+  		headerInfo.designation = 'Manager';
+  	}
+  	return headerInfo
+  }
 
 	render(){
-		const { headData } = this.props;
-		
-
-		const item = [
-		{ value: 'logout', label: 'Logout' }
-		]
+		console.log("Header:"+this.props.headerInfo);
+		var headerInfo = this._processData()
 		return (
 		<header className="gorHeader head">
 			<div className="mainBlock">
@@ -60,7 +78,7 @@ class Header extends React.Component{
 					<FormattedMessage id="header.start_time" description='Start time ' 
         					defaultMessage='Start time:{time} '
         					values={{
-						        time: this.props.user.start,
+						        time: 'fsfsf',
 						    }}/>
 					</div>
 				</div>
@@ -78,17 +96,15 @@ class Header extends React.Component{
 					<div  className="dropbtn" onClick={this.openDropdown}>
 						<div className="block">
 							<div className="upperTextClient truncate">
-								<FormattedMessage id="header.user_name" description='User name' 
-        					defaultMessage='{user_name}'
-        					values={{
-						        user_name: this.props.user.name,
-						    }}/>
+								{
+						         headerInfo ? headerInfo.fullName : 'Fetching...'
+						    }
 							</div>
 							<div className="subTextClient">
 								<FormattedMessage id="header.user_post" description='User post' 
         					defaultMessage='{user_post}'
         					values={{
-						        user_post: this.props.user.post,
+						        user_post: headerInfo ? headerInfo.designation : '',
 						    }}/>
 							</div>
 						</div>
@@ -110,6 +126,24 @@ class Header extends React.Component{
 		);
 	}
 };
+/**
+ * Function to pass state values as props
+ */
 
+function mapStateToProps(state,ownProps) {
+ return {
+  headerInfo:state.headerData.headerInfo,
+  authToken : state.authLogin.auth_token
+ }
+} 
+/**
+ * Function to dispatch action values as props
+ */
+function mapDispatchToProps(dispatch){
+    return {
+        getHeaderInfo: function(data){ dispatch(getHeaderInfo(data)); }
+    }
+};
 
-export 	default Header;
+export  default connect(mapStateToProps,mapDispatchToProps)(Header);
+

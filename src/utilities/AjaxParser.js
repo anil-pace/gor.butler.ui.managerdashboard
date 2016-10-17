@@ -1,7 +1,8 @@
 import {receiveAuthData} from '../actions/loginAction';
 import {assignRole} from '../actions/userActions';
+import {recieveHeaderInfo} from '../actions/headerAction';
 import {backendID,notifySuccess, notifyFail} from '../actions/validationActions';
-import {AUTH_LOGIN, ADD_USER, CHECK_ID,DELETE_USER,GET_ROLES} from '../constants/appConstants';
+import {AUTH_LOGIN, ADD_USER, RECIEVE_HEADER,CHECK_ID,DELETE_USER,GET_ROLES} from '../constants/appConstants';
 import {US001,US002,UE001,UE002,UE003,UE004,UE005,UE006} from '../constants/messageConstants'; 
 
 export function AjaxParse(store,res,cause)
@@ -80,6 +81,9 @@ export function AjaxParse(store,res,cause)
 		    			store.dispatch(notifyFail('Error in response'));		
 			}
 			break;
+		case RECIEVE_HEADER:
+						store.dispatch(recieveHeaderInfo(res));
+						break;
 		default:
 		    			store.dispatch(notifyFail('API response not registered'));	
 	}
