@@ -130,6 +130,7 @@ export const GET_LAST_REFRESH_TIME = "GET_LAST_REFRESH_TIME";
 /*Constants for Loader*/
 
 export const DISPLAY_LOADER = "DISPLAY_LOADER";
+export const DISPLAY_LOGIN_LOADER = "DISPLAY_LOGIN_LOADER";
 
 /*Map for routes of tab*/
 
