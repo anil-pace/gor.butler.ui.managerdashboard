@@ -124,6 +124,7 @@ export const TIME_FILTER = "TIME_FILTER"
 /*Constants for Loader*/
 
 export const DISPLAY_LOADER = "DISPLAY_LOADER";
+export const DISPLAY_LOGIN_LOADER = "DISPLAY_LOGIN_LOADER";
 
 /*Map for routes of tab*/
 

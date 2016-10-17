@@ -1,9 +1,9 @@
-import {receiveAuthData} from '../actions/loginAction';
+import {receiveAuthData,setLoginLoader} from '../actions/loginAction';
 import {recieveOrdersData} from '../actions/paginationAction';
 import {assignRole} from '../actions/userActions';
 import {recieveHeaderInfo} from '../actions/headerAction';
 import {backendID,notifySuccess, notifyFail} from '../actions/validationActions';
-import {AUTH_LOGIN, ADD_USER, EDIT_USER,ORDERS_RETRIEVE,RECIEVE_HEADER,CHECK_ID,DELETE_USER,GET_ROLES} from '../constants/appConstants';
+import {AUTH_LOGIN, ADD_USER, BUTLER_UI,EDIT_USER,ORDERS_RETRIEVE,RECIEVE_HEADER,CHECK_ID,DELETE_USER,GET_ROLES} from '../constants/appConstants';
 import {US001,US002,UE001,UE002,UE003,UE004,UE005,UE006} from '../constants/messageConstants'; 
 
 
@@ -13,7 +13,9 @@ export function AjaxParse(store,res,cause)
 	switch(cause)
 	{
 		case AUTH_LOGIN:
+			
 			store.dispatch(receiveAuthData(res));
+			store.dispatch(setLoginLoader(false));
 			break;
 
 
