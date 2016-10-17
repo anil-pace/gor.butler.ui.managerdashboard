@@ -1,5 +1,5 @@
 
-const BASE_URL = '192.168.8.118';
+export const BASE_URL = '192.168.8.118';
 const PORT = '8888';
 const PROTOCOL = 'https://';
 const WS_PROTOCOL ="ws://";

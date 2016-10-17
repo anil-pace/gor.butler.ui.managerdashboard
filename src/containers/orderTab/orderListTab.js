@@ -29,9 +29,11 @@ class OrderListTab extends React.Component{
       url = BASE_URL + ORDERS_URL + "?page=" + (data.selected+1) + "&PAGE_SIZE=25";
     }
 
+
     else {
       url = data.url;
     }
+    console.log(data.url)
     let paginationData={
               'url':url,
               'method':'GET',

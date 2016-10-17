@@ -208,7 +208,7 @@ class UserDataTable extends React.Component {
               </div>
             </SortHeaderCell>
           }
-          cell={<StatusCell data={sortedDataList} ></StatusCell>}
+          cell={<StatusCell data={sortedDataList} statusKey="statusClass" ></StatusCell>}
           width={columnWidth}
         />
         <Column

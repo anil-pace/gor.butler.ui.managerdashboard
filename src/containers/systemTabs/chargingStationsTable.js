@@ -156,7 +156,7 @@ class ChargingStationsTable extends React.Component {
               </div>
             </SortHeaderCell>
           }
-          cell={<TextCell data={sortedDataList} />}
+           cell={<StatusCell data={sortedDataList} statusKey="statusClass" ></StatusCell>}
           fixed={true}
           width={columnWidths.status}
           isResizable={true}

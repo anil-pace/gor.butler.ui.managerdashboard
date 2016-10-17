@@ -102,6 +102,7 @@ class WavesTable extends React.Component {
   render() {
     
     var {sortedDataList, colSortDirs,columnWidths} = this.state;  
+    console.log(this.state.sortedDataList.newData[0].statusClass)
     var heightRes = 500;
     if(this.props.containerHeight !== 0) {
       heightRes = this.props.containerHeight;
@@ -167,7 +168,7 @@ class WavesTable extends React.Component {
               </div>
             </SortHeaderCell>
           }
-          cell={<StatusCell data={sortedDataList} ></StatusCell>}
+          cell={<StatusCell data={sortedDataList} statusKey="statusClass" ></StatusCell>}
           fixed={true}
           width={columnWidths.status}
           isResizable={true}

@@ -7,11 +7,14 @@ import {ORDERS_DATA} from '../constants/appConstants';
 
 function processWaveData(data) {
   var waveData = [], waveDetail = {};
+  var status = {"In progress":"progress", "Completed":"completed", "Breached":"breached", "Pending":"pending" };
   if(data) {
      for (var i =data.length - 1; i >= 0; i--) {
       waveDetail = {};
       waveDetail.id = "WAVE-" + data[i].wave_id;
+      waveDetail.statusClass = status[data[i].status];
       waveDetail.status = data[i].status;
+      
       if(data[i].start_time === "") {
         waveDetail.startTime = "--";
       }

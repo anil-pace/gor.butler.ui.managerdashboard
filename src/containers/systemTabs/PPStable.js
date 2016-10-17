@@ -276,7 +276,7 @@ class PPStable extends React.Component {
               </div>
             </SortHeaderCell>
           }
-          cell={<StatusCell data={sortedDataList} ></StatusCell>}
+          cell={<StatusCell data={sortedDataList} statusKey="statusClass" ></StatusCell>}
           fixed={true}
           width={columnWidths.status}
           isResizable={true}
@@ -287,7 +287,7 @@ class PPStable extends React.Component {
             <SortHeaderCell>
               <FormattedMessage id="PPS.table.operatingMode" description="operatingMode for PPS" 
               defaultMessage ="OPERATING MODE"/>
-              <div className="gorToolHeaderSubText">Pick ({this.props.operationMode.pick}) . Put ({this.props.operationMode.put}) . Audit ({this.props.operationMode.audit}) . Not set ({this.props.operationMode.notSet})</div>
+              <div className="gorToolHeaderSubText">Pick ({this.props.operationMode.Pick}) . Put ({this.props.operationMode.Put}) . Audit ({this.props.operationMode.Audit}) . Not set ({this.props.operationMode.NotSet})</div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
