@@ -1,10 +1,10 @@
 #react-paginate{
+	display: inline-block;
 	box-sizing: border-box;
 	ul{
 		display: inline-block;
 	    padding-left: 15px;
 	    padding-right: 15px;
-		margin: 20px 0;
     	border-radius: 4px;
 	}
 	li{
@@ -29,7 +29,7 @@
 	    padding: 6px 12px;
 	    margin-left: -1px;
 	    line-height: 1.42857143;
-	    color: #337ab7;
+	    color: #A6A7A9;
 	    text-decoration: none;
 	    background-color: #fff;
 	    border: 1px solid #ddd;
@@ -47,4 +47,127 @@
 #react-paginate .break a {
     cursor: default;
 }
+
+.gor-paginate {
+	display: inline-block;
+	float: right;
+	padding-right: 30px;
+	padding-top: 10px;
+}
+
+.gor-pageNum {
+	display: inline-block;
+	padding-left: 30px;
+	padding-top: 10px;
+	}
+	.gor-Page-Drop {
+        display:inline-block;
+        width:100%;
+        height:calculateRem(30px);
+        background:transparent;
+        text-align:left;    
+      .Dropdown-root 
+      {
+          position: relative;
+    }
+    .Dropdown-control {
+      position: relative;
+      border:1px solid;
+      border-radius: calculateRem(3px);
+      box-sizing: border-box;
+      cursor: default;
+      outline: none;
+      padding: calculateRem(8px) calculateRem(52px) calculateRem(8px) calculateRem(10px);
+      transition: all 200ms ease;
+      border-color: #aaaaaa;
+      font-size: 14px;
+      font-weight: 100;
+      color: #aaaaaa;
+    }
+    .Dropdown-arrow {
+            border-color: #A6A7A9 transparent transparent;
+        border-style: solid;
+        border-width: calculateRem(8px) calculateRem(5px) calculateRem(2px);
+        content: ' ';
+        display: block;
+        height: 0;
+        margin-top: -ceil(2.5);
+        position: absolute;
+        right: calculateRem(15px);
+        top: calculateRem(11px);
+    }
+    .Dropdown-control:hover {
+        box-shadow: calculateRem(2px) calculateRem(2px) calculateRem(2px) #888888;
+        border: calculateRem(1px) solid #ccc;
+     }
+    .is-open .Dropdown-arrow {
+        border-color: #FFFFFF transparent transparent;
+        border-style: solid;
+        border-width: calculateRem(8px) calculateRem(7px) calculateRem(3px);
+    }
+    .Dropdown-menu {
+        border: 1px solid;
+        border-radius:3px;
+        box-shadow: 0 calculateRem(1px) 0 rgba(0, 0, 0, 0.06);
+        box-sizing: border-box;
+        margin-top: calculateRem(-1px);
+        max-height: calculateRem(200px);
+        overflow-y: auto;
+        position: absolute;
+        bottom: 100%;
+        width: 100%;
+        z-index: 1000;
+      -webkit-overflow-scrolling: touch;
+      border-color: #aaaaaa;
+      font-size: 14px;
+      font-weight: 100;
+      color: #aaaaaa;
+      background: #ffffff; 
+    }
+    .Dropdown-option {
+        box-sizing: border-box;
+      color: #A6A7A9;;
+        cursor: pointer;
+            display: block;
+            padding: calculateRem(8px) calculateRem(10px);    
+    }
+    .Dropdown-option.is-selected {
+        font-weight:bold;
+    }
+    .Dropdown-option:hover {
+        color: #aaaaaa;
+        background: #F8F8F8;
+    }
+    .Dropdown-noresults {
+      box-sizing: border-box; 
+      color: #ccc;
+      cursor: default;
+      display: block;
+      padding: calculateRem(8px) calculateRem(10px);
+    }
+}
+
+.gor-paginate-state {
+	display: inline-block;
+	vertical-align: top;
+	padding-top: 11px;
+	color: #666666;
+}
+
+.gor-button-wrap {
+  display: inline-block;
+}
+
+.gor-button-sub-status {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 100;
+  color: #aaaaaa;
+  vertical-align: sub;
+    padding-left: 10px;
+
+}
+
+
+
 

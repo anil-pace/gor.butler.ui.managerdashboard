@@ -12,10 +12,26 @@ class WaveTab extends React.Component{
     	super(props);
     }	
 	render(){
-		var itemNumber = 7;		
+		var itemNumber = 7, waveData = this.props.waveDetail.waveData, waveState = {"pendingWave":"--", "progressWave":"--", "orderRemaining":"--", "completedWaves":"--", "totalOrders":"--"};	
+		var totalOrders = 0, orderToFulfill = 0, completedWaves = 0;
+		if(waveData && waveData.length) {
+  		for (var i = waveData.length - 1; i >= 0; i--) {
+  				if(waveData[i].totalOrders) {
+  					totalOrders = waveData[i].totalOrders + totalOrders;
+  				}
+  				if(waveData[i].ordersToFulfill) {
+  					orderToFulfill = waveData[i].ordersToFulfill + orderToFulfill;
+  				}
+
+  				if(waveData[i].progress === 100) {
+  					completedWaves++;
+  				}
+  			}
+  			waveState = {"pendingWave":waveData.length - completedWaves, "progressWave":"--", "orderRemaining":orderToFulfill, "completedWaves":completedWaves, "totalOrders":totalOrders};	
+  		}
 		return (
 			<div className="gorTesting">
-				<WavesTable items={this.props.waveDetail.waveData} itemNumber={itemNumber}/>
+				<WavesTable items={waveData} itemNumber={itemNumber} waveState={waveState}/>
 			</div>
 		);
 	}

@@ -39,7 +39,13 @@ class OrderListTable extends React.Component {
   }
 
   componentWillReceiveProps(nextProps){
-    this._dataList = new tableRenderer(nextProps.items.length);
+    if(nextProps.items === undefined) {
+      this._dataList = new tableRenderer(0);
+    }
+    else {
+      this._dataList = new tableRenderer(nextProps.items.length);
+    }
+
     this._defaultSortIndexes = [];
     this._dataList.newData=nextProps.items;
     var size = this._dataList.getSize();
@@ -123,7 +129,10 @@ class OrderListTable extends React.Component {
                <FormattedMessage id="order.table.heading" description="Heading for order list" 
               defaultMessage ="OrderList"/>
             </div>
+            <div className="gor-button-wrap">
             <button className="gor-refresh-btn" onClick={this.props.refreshOption.bind(this)} >Refresh Data</button>
+            </div>
+            <div className="gor-button-sub-status"> {this.props.lastUpdated} </div>
           </div>
         <div className="filterWrapper"> 
         <div className="gorToolBarDropDown">
@@ -179,9 +188,9 @@ class OrderListTable extends React.Component {
               </div>
               <div>
               <div className="statuslogoWrap">
-              <div className="header-red-alert-icon gorToolHeaderEl"/>
+              <div className=" gorToolHeaderEl"/>
               </div>
-              <div className="gorToolHeaderEl alertState"> 3 Alerts</div>
+              <div className="gorToolHeaderEl alertState"> </div>
               </div>
             </SortHeaderCell>
           }

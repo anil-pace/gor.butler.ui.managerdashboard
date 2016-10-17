@@ -5,10 +5,11 @@
 import React  from 'react';
 import ReactPaginate from 'react-paginate';
 import { connect } from 'react-redux';
-import {getPageData, getStatusFilter, getTimeFilter} from '../../actions/paginationAction';
+import {getPageData, getStatusFilter, getTimeFilter,getPageSize,currentPage,lastRefreshTime} from '../../actions/paginationAction';
 import {ORDERS_RETRIEVE} from '../../constants/appConstants';
-import {BASE_URL, ORDERS_URL} from '../../constants/configConstants';
+import {BASE_URL, ORDERS_URL,PAGE_SIZE_URL} from '../../constants/configConstants';
 import OrderListTable from './orderListTable';
+import Dropdown from '../../components/dropdown/dropdown'
 
 
 class OrderListTab extends React.Component{
@@ -25,7 +26,7 @@ class OrderListTab extends React.Component{
     handlePageClick = (data) => {
     var url;
     if(data.url === undefined) {
-      url = BASE_URL + ORDERS_URL + "?page=" + (data.selected+1) + "&PAGE_SIZE=8";
+      url = BASE_URL + ORDERS_URL + "?page=" + (data.selected+1) + "&PAGE_SIZE=25";
     }
 
     else {
@@ -38,20 +39,27 @@ class OrderListTab extends React.Component{
               'token': sessionStorage.getItem('auth_token'),
               'contentType':'application/json'
           } 
+          this.props.currentPage(data.selected+1);
          this.props.getPageData(paginationData);
     }
 
-    filter(data) {
-  }
-//d.setHours(d.getHours() - 2);
 
    refresh() {
     var convertTime = {"oneHourOrders": 1, "twoHourOrders": 2, "sixHourOrders": 6, "twelveHourOrders": 12, "oneDayOrders": 24};
     var status = this.props.filterOptions.statusFilter, timeOut = this.props.filterOptions.timeFilter,currentTime,prevTime;
-    var data = {}, appendStatusUrl="", appendTimeUrl="";
+    var data = {}, appendStatusUrl="", appendTimeUrl="", appendPageSize="";
     data.selected = 0;
     data.url = "";
-    data.url = BASE_URL + ORDERS_URL + "?page=" + (data.selected+1) + "&PAGE_SIZE=8"
+    data.url = BASE_URL + ORDERS_URL + "?page=" + (data.selected+1);
+
+    if(this.props.filterOptions.pageSize === undefined) {
+      appendPageSize = PAGE_SIZE_URL + "25";
+    }
+
+    else {
+      appendPageSize = PAGE_SIZE_URL + this.props.filterOptions.pageSize ;
+    }
+
     if((status === undefined || status === "all")) {
       appendStatusUrl = "";
      }
@@ -74,35 +82,65 @@ class OrderListTab extends React.Component{
        currentTime = currentTime.toISOString();
        appendTimeUrl = '&update_time<='+ currentTime +'&update_time>='+ prevTime;
      }
-    data.url = data.url + appendStatusUrl+appendTimeUrl;
+    data.url = data.url + appendStatusUrl+appendTimeUrl+appendPageSize;
+    this.props.lastRefreshTime((new Date()));
     this.handlePageClick(data)
   }
+
+
     
   render(){
+    var updateStatus;
+    if(this.props.filterOptions.lastUpdatedOn) {
+      var diff = (new Date())-this.props.filterOptions.lastUpdatedOn;
+      if (diff > 60e3) {
+       updateStatus = "Last Updated " + Math.floor(diff / 60e3) + " minutes ago";
+      }
+      else {
+        updateStatus = "Last Updated " + Math.floor(diff / 1e3) + " seconds ago";
+      }
+
+  }
+  
+    
     var itemNumber = 6, table, pages;
-    var table = <OrderListTable items={this.props.orderData.ordersDetail} itemNumber={itemNumber} statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter} refreshOption={this.refresh.bind(this)}/>
+     const ordersByStatus = [
+    { value: '25', label: '25' },
+    { value: '50', label: '50' },
+    { value: '100', label: '100' },
+    { value: '250', label: '250' },
+    { value: '500', label: '500' },
+    { value: '1000', label: '1000' }
+    ];
+    var table = <OrderListTable items={this.props.orderData.ordersDetail} itemNumber={itemNumber} statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter} refreshOption={this.refresh.bind(this)} lastUpdated={updateStatus}/>
     return (
       <div>
       {table}
+      <div className="gor-pageNum">
+        <Dropdown  styleClass={'gor-Page-Drop'}  items={ordersByStatus} currentState={ordersByStatus[0]} optionDispatch={this.props.getPageSize}/>
+      </div>
+      <div className="gor-paginate">
+      <div className = "gor-paginate-state"> Page {this.props.filterOptions.currentPage} of {this.props.orderData.totalPage} </div>
       <div id={"react-paginate"}>
-        <ReactPaginate previousLabel={"previous"}
-                       nextLabel={"next"}
-                       breakLabel={<a href="">...</a>}
+        <ReactPaginate previousLabel={"<<"}
+                       nextLabel={">>"}
                        breakClassName={"break-me"}
                        pageNum={this.props.orderData.totalPage}
-                       marginPagesDisplayed={2}
-                       pageRangeDisplayed={50}
+                       marginPagesDisplayed={1}
+                       pageRangeDisplayed={1}
                        clickCallback={this.handlePageClick.bind(this)}
                        containerClassName={"pagination"}
                        subContainerClassName={"pages pagination"}
                        activeClassName={"active"} />
      </div>
       </div>
+      </div>
     );
   }
 }
 
 function mapStateToProps(state, ownProps){
+  console.log(state)
   return {
     filterOptions: state.filterOptions || {},
     orderData: state.getOrderDetail || {},
@@ -113,7 +151,10 @@ var mapDispatchToProps = function(dispatch){
   return {
     getPageData: function(data){ dispatch(getPageData(data)); },
     getStatusFilter: function(data){ dispatch(getStatusFilter(data)); },
-    getTimeFilter: function(data){ dispatch(getTimeFilter(data)); }
+    getTimeFilter: function(data){ dispatch(getTimeFilter(data)); },
+    getPageSize: function(data){ dispatch(getPageSize(data));},
+    currentPage: function(data){ dispatch(currentPage(data));},
+    lastRefreshTime: function(data){ dispatch(lastRefreshTime(data));}
   }
 };
 

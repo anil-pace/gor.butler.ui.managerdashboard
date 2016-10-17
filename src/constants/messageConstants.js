@@ -10,6 +10,15 @@ export const US002 =(<FormattedMessage id="notify.success.delete" description='T
 export const US004 = (<FormattedMessage id="notify.success.edit" description='Text for successfully editing user' 
             defaultMessage="User successfully edited"/>);
 //error codes related to user management
+
+
+//success realted to pps mode change
+export const MODE_REQUESTED = "PPS Mode Change Request Processed"
+
+//error related to pps mode change
+export const E028 = "Pps is already in requested mode";
+export const E029 = "Previous request of changing mode is already pending, Please try later!";
+
 export const UE002 = (<FormattedMessage id="notify.error.usernameExists" description='Text for already registered username' 
             defaultMessage="Username already registered!"/>);
 
@@ -46,3 +55,4 @@ export const INVALID_PWD= (<FormattedMessage id="user.invalid.password" descript
 
 export const MATCH_PWD= (<FormattedMessage id="user.match.password" description='Text for passwords not matching' 
             defaultMessage="Passwords do not match"/>);
+

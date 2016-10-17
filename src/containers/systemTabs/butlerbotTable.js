@@ -95,8 +95,7 @@ class ButlerBotTable extends React.Component {
     });
   }
   render() {
-    
-    var {sortedDataList, colSortDirs,columnWidths} = this.state;  
+    var {sortedDataList, colSortDirs,columnWidths} = this.state;
     return (
       <div className="gorTableMainContainer">
         <div className="gorToolBar">
@@ -112,7 +111,7 @@ class ButlerBotTable extends React.Component {
             <div className="searchbox-magnifying-glass-icon"/>
             <input className="gorInputFilter"
               onChange={this._onFilterChange}
-              placeholder="Filter by keywords">
+              placeholder="Filter by status and Bot id">
             </input>
         </div>
         </div>
@@ -129,7 +128,7 @@ class ButlerBotTable extends React.Component {
         <Column
           columnKey="id"
           header={
-            <SortHeaderCell onSortChange={this._onSortChange}
+            <SortHeaderCell onClick={this._onSortChange}
               sortDir={colSortDirs.id}> 
               <div className="gorToolHeaderEl">
               <div className="gorToolHeaderEl"> {sortedDataList.getSize()} BOT </div>
@@ -169,7 +168,7 @@ class ButlerBotTable extends React.Component {
             <SortHeaderCell>
               <FormattedMessage id="butlerBot.table.currentTask" description="Current task for butlerbot" 
               defaultMessage ="CURRENT TASK"/>
-              <div className="gorToolHeaderSubText"> {this.props.parameters.pick} Pick, {this.props.parameters.put} Put, {this.props.parameters.charging} charging, {this.props.parameters.idle} Idle</div>
+              <div className="gorToolHeaderSubText"> Pick ({this.props.parameters.pick}) . Put ({this.props.parameters.put}) . Charging ({this.props.parameters.charging}) . Idle ({this.props.parameters.idle}) </div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
