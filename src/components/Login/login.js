@@ -11,6 +11,7 @@ import { FormattedMessage } from 'react-intl';
 import { updateIntl } from 'react-intl-redux';
 import Dropdown from '../../components/dropdown/dropdown.js';
 import { translationMessages } from '../../utilities/i18n';
+import { messages } from './messages'
 
 
 class Login extends React.Component{
@@ -102,11 +103,8 @@ class Login extends React.Component{
             if(items[i].value === this.props.sLang)
                 sel=i;
         }
-        let usr=(<FormattedMessage id='login.form.username' defaultMessage="Username" description="Text for username"/>);
-        let pwd=(<FormattedMessage id='login.form.password' defaultMessage="Password" description="Text for password"/>);
-
         return (
-            
+               
             <div className='gor-login-form'>
             <Loader isLoading={this.props.loginLoading} />
             <form action="#"  id = "loginForm" ref={node => { this.loginForm = node }} 
@@ -148,8 +146,11 @@ class Login extends React.Component{
                 }
                 <section>
                 <div className={'gor-login-field'+(this.props.idInfo.type===ERROR||this.props.loginAuthorized===false?' gor-input-error':' gor-input-ok')} ref={node => { this.userField = node }}>
-				        <div className={this.props.idInfo.type===ERROR||this.props.loginAuthorized===false?'gor-login-user-error':'gor-login-user'}></div><input className="field" onBlur={this._checkUser.bind(this)} type="text" id="username"  
-                        placeholder={usr.props.defaultMessage} ref={node => { this.userName = node }}/>
+				        <div className={this.props.idInfo.type===ERROR||this.props.loginAuthorized===false?'gor-login-user-error':'gor-login-user'}></div>
+                        <input className="field" onBlur={this._checkUser.bind(this)} type="text" id="username"  
+                        placeholder={this.props.intlMessages["login.form.username"]}
+                         ref={node => { this.userName = node }}/>
+                        
                 </div>
                 </section>
                 {this.props.idInfo?(this.props.idInfo.type===ERROR?(
@@ -162,7 +163,10 @@ class Login extends React.Component{
                 }
                 <section>
                 <div className={'gor-login-field'+(this.props.loginPassCheck.type===ERROR||this.props.loginAuthorized===false?' gor-input-error':' gor-input-ok')}  ref={node => { this.passField = node }}>
-                        <div className={this.props.idInfo.type===ERROR||this.props.loginAuthorized===false?'gor-login-password-error':'gor-login-password'}></div><input className='field' onBlur={this._checkPass.bind(this)} type="password" id="password" placeholder={pwd.props.defaultMessage} ref={node => { this.password = node }}/>
+                        <div className={this.props.idInfo.type===ERROR||this.props.loginAuthorized===false?'gor-login-password-error':'gor-login-password'}></div>
+                        <input className='field' onBlur={this._checkPass.bind(this)} type="password" id="password" 
+                        placeholder={this.props.intlMessages["login.form.password"]}
+                         ref={node => { this.password = node }}/>
                 </div>
                 </section>
                 {this.props.loginPassCheck?(this.props.loginPassCheck.type===ERROR?(
@@ -202,6 +206,7 @@ function mapStateToProps(state, ownProps){
         auth_token: state.authLogin.auth_token,
         userName: state.authLogin.username,
         sLang: state.intl.locale,
+        intlMessages: state.intl.messages,
         idInfo: state.appInfo.idInfo||{},
         loginPassCheck: state.appInfo.loginPassInfo||{},
         loginLoading:state.loader.loginLoader           
@@ -214,6 +219,7 @@ function mapStateToProps(state, ownProps){
  * so that they could be called from props
  */
 var mapDispatchToProps = function(dispatch){
+
     return {
         authLoginData: function(params){ dispatch(authLoginData(params)); },
         updateIntl: function(params){ dispatch(updateIntl(params));},
