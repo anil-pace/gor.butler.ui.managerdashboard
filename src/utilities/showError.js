@@ -1,4 +1,4 @@
-import {receiveAuthData} from '../actions/loginAction';
+import {receiveAuthData,setLoginLoader} from '../actions/loginAction';
 import {AUTH_LOGIN} from '../constants/appConstants';
 import {notifyFail} from '../actions/validationActions';
 
