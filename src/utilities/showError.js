@@ -1,4 +1,4 @@
-import {receiveAuthData} from '../actions/loginAction';
+import {receiveAuthData,setLoginLoader} from '../actions/loginAction';
 import {AUTH_LOGIN} from '../constants/appConstants';
 import {notifyFail} from '../actions/validationActions';
 
@@ -8,6 +8,7 @@ export function ShowError(store,cause)
 	{
 		case AUTH_LOGIN:
 			console.log('In Error utility');
+			store.dispatch(setLoginLoader(false));
 			store.dispatch(receiveAuthData(''));
 			break;
 		default:
