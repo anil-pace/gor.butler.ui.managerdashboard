@@ -3,6 +3,7 @@ import ReactDOM  from 'react-dom';
 import { connect } from 'react-redux' ;
 import {userRequest} from '../../actions/userActions';
 import {DELETE_USER} from '../../constants/appConstants';
+import {HEADER_URL} from '../../constants/configConstants';
 import { FormattedMessage,FormattedPlural } from 'react-intl';        
 
 class DeleteUser extends React.Component{
@@ -14,7 +15,7 @@ class DeleteUser extends React.Component{
       this.props.removeModal();
   }
   userDelete() {
-    let delurl="https://192.168.8.118/api/user/"+(this.props.id?this.props.id:'');
+    let delurl=HEADER_URL+'/'+(this.props.id?this.props.id:'');
     let userData={
                 'url':delurl,
                 'method':'DELETE',

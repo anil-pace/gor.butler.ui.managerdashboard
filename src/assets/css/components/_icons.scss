@@ -21,7 +21,7 @@
 .header-offline-icon,
 .user-icon,
 .overview-tile-ontime-icon,
-.statusOl,.statusAl,.iStock ,.iAudit,.iPick,.gor-login-user,.gor-login-password,.gor-login-error,.iTick,.iQuestion,.iTick-white,.iError-white{
+.statusOl,.statusAl,.iStock ,.iAudit,.iPick,.gor-login-user,.gor-login-password,.gor-login-error,.iTick,.iQuestion,.iTick-white,.iError-white,.gor-login-user-error,.gor-login-password-error{
     background-image: url(images/icons.svg);
 }
 .fk-logo,
@@ -34,18 +34,26 @@
     width:16px;
     height:16px;    
     display:inline-block;
-    &:hover{
-    background-position:-273px -77px;    
-    }
+}
+.gor-login-user-error{
+    background-position:-307px -77px;
+    width:16px;
+    height:16px;    
+    display:inline-block;
+    vertical-align:middle;    
 }
 .gor-login-password{
     background-position:-223px -77px;
     width:16px;
     height:16px;    
     display:inline-block;
-    &:hover{
-    background-position:-291px -77px;    
-    }
+}
+.gor-login-password-error{
+    background-position:-325px -77px;
+    width:16px;
+    height:16px;    
+    display:inline-block;
+    vertical-align:middle;
 }
 .gor-login-error{
     background-position:-18px -78px;

@@ -134,7 +134,7 @@ body {
 .header-offline-icon,
 .user-icon,
 .overview-tile-ontime-icon,
-.statusOl, .statusAl, .iStock, .iAudit, .iPick, .gor-login-user, .gor-login-password, .gor-login-error, .iTick, .iQuestion, .iTick-white, .iError-white {
+.statusOl, .statusAl, .iStock, .iAudit, .iPick, .gor-login-user, .gor-login-password, .gor-login-error, .iTick, .iQuestion, .iTick-white, .iError-white, .gor-login-user-error, .gor-login-password-error {
   background-image: url(images/icons.svg);
 }
 
@@ -150,8 +150,12 @@ body {
   display: inline-block;
 }
 
-.gor-login-user:hover {
-  background-position: -273px -77px;
+.gor-login-user-error {
+  background-position: -307px -77px;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .gor-login-password {
@@ -161,8 +165,12 @@ body {
   display: inline-block;
 }
 
-.gor-login-password:hover {
-  background-position: -291px -77px;
+.gor-login-password-error {
+  background-position: -325px -77px;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .gor-login-error {
@@ -843,8 +851,8 @@ body {
 }
 
 .gor-tile .gor-up-tile {
-  padding: 15px 10px 0px 20px;
-  min-height: 7.5rem;
+  padding: 20px 10px 10px 20px;
+  min-height: 6.25rem;
 }
 
 .gor-tile .gor-tile-left {
@@ -868,7 +876,7 @@ body {
   font-family: 'Source Sans Pro semibold', sans-serif;
   font-size: 1rem;
   font-weight: 600;
-  line-height: 46px;
+  line-height: 33px;
 }
 
 .gor-tile .gor-heading-value {
@@ -1187,7 +1195,7 @@ body {
 
 .gor-login-form .gor-login-lang .gor-lang-drop {
   display: inline-block;
-  width: 10.875rem;
+  width: 18%;
   height: 1.875rem;
   background: transparent;
   text-align: left;
@@ -1327,6 +1335,7 @@ body {
   width: 70%;
   background-color: #FFFFFF;
   border-radius: 3px;
+  color: #666666;
 }
 
 .gor-login-form .gor-login-mid .gor-login-field:hover {
@@ -1334,11 +1343,27 @@ body {
   color: #333333;
 }
 
+.gor-login-form .gor-login-mid .gor-login-field:hover .gor-login-user {
+  background-position: -273px -77px;
+}
+
+.gor-login-form .gor-login-mid .gor-login-field:hover .gor-login-password {
+  background-position: -291px -77px;
+}
+
 .gor-login-form .gor-login-mid .gor-login-field .field {
+  font-family: 'Source Sans Pro Regular', sans-serif;
   border: none;
   font-size: 18px;
   margin-left: 0.625rem;
   width: 80%;
+  color: #F36F36;
+  text-shadow: 0px 0px 0px #AAAAAA;
+  -webkit-text-fill-color: transparent;
+}
+
+.gor-login-form .gor-login-mid .gor-login-field .field:focus {
+  text-shadow: 0px 0px 0px #666666;
 }
 
 .gor-login-form .gor-login-mid .gor-login-field .gor-login-user {
@@ -1361,8 +1386,9 @@ body {
   text-align: left;
   color: #EC1C24;
   font-size: 18px;
+  margin: auto;
   margin-top: 10px;
-  margin-left: 3.875rem;
+  width: 70%;
 }
 
 .gor-login-form .gor-login-mid .gor-login-btn {
@@ -2715,6 +2741,7 @@ input[type="checkbox"] {
 
 .gor-user-Logo-wrap button {
   background: none;
+  cursor: pointer;
 }
 
 .gorUserTable {

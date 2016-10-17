@@ -147,8 +147,8 @@ class Login extends React.Component{
                  </div>):''
                 }
                 <section>
-                <div className={'gor-login-field'+(this.props.idInfo.type===ERROR?' gor-input-error':' gor-input-ok')} ref={node => { this.userField = node }}>
-				        <div className='gor-login-user'></div><input className="field" onBlur={this._checkUser.bind(this)} type="text" id="username"  
+                <div className={'gor-login-field'+(this.props.idInfo.type===ERROR||this.props.loginAuthorized===false?' gor-input-error':' gor-input-ok')} ref={node => { this.userField = node }}>
+				        <div className={this.props.idInfo.type===ERROR||this.props.loginAuthorized===false?'gor-login-user-error':'gor-login-user'}></div><input className="field" onBlur={this._checkUser.bind(this)} type="text" id="username"  
                         placeholder={usr.props.defaultMessage} ref={node => { this.userName = node }}/>
                 </div>
                 </section>
@@ -161,8 +161,8 @@ class Login extends React.Component{
                     </div>):''):''
                 }
                 <section>
-                <div className={'gor-login-field'+(this.props.loginPassCheck.type===ERROR?' gor-input-error':' gor-input-ok')}  ref={node => { this.passField = node }}>
-                        <div className='gor-login-password'></div><input className='field' onBlur={this._checkPass.bind(this)} type="password" id="password" placeholder={pwd.props.defaultMessage} ref={node => { this.password = node }}/>
+                <div className={'gor-login-field'+(this.props.loginPassCheck.type===ERROR||this.props.loginAuthorized===false?' gor-input-error':' gor-input-ok')}  ref={node => { this.passField = node }}>
+                        <div className={this.props.idInfo.type===ERROR||this.props.loginAuthorized===false?'gor-login-password-error':'gor-login-password'}></div><input className='field' onBlur={this._checkPass.bind(this)} type="password" id="password" placeholder={pwd.props.defaultMessage} ref={node => { this.password = node }}/>
                 </div>
                 </section>
                 {this.props.loginPassCheck?(this.props.loginPassCheck.type===ERROR?(
@@ -177,7 +177,7 @@ class Login extends React.Component{
                     <input type="submit" className='gor-login-btn'  value="Login" /><br />
                 </section>
                 </div>
-                <div className='gor-box-bottom'><span className='gor-box-bottom-left'>Current time: 09:00:15(IST)</span>
+                <div className='gor-box-bottom'><span className='gor-box-bottom-left'></span>
                     <span className='gor-box-bottom-right'></span>
                 </div>
                 </form>

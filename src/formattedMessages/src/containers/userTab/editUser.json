@@ -1,12 +1,12 @@
 [
   {
     "id": "users.edit.heading",
-    "description": "Heading for Add new user",
+    "description": "Heading for Edit user",
     "defaultMessage": "Edit user"
   },
   {
     "id": "users.edit.subheading",
-    "description": "Subheading for add new user",
+    "description": "Subheading for Edit user",
     "defaultMessage": "All the fields are mandatory"
   },
   {
