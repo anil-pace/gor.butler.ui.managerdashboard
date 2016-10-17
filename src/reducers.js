@@ -23,7 +23,10 @@ import {tabSelected} from './reducers/tabSelectReducer'
 import {reducer as modalReducer} from 'react-redux-modal'
 import {PPSperformance} from './reducers/ppsPerformanceReducer'
 import {userDetails} from './reducers/userDetailReducer';
+import {getOrderDetail} from './reducers/orderDetailReducer';
 import {appInfo} from './reducers/infoReducer';
+import {filterOptions} from './reducers/orderFilterReducer'
+import {waveInfo} from './reducers/waveDetailReducer';
 
 
 const rootReducer = combineReducers({
@@ -51,7 +54,10 @@ const rootReducer = combineReducers({
   tabSelected,
   PPSperformance,
   userDetails,
-  loader
+  loader,
+  getOrderDetail,
+  filterOptions,
+  waveInfo
    })
 
 export default rootReducer

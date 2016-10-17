@@ -43,7 +43,6 @@ export function receivePutData(data){
 }
 
 export function receiveOrdersData(data){
-
 	return{
 		type:ORDERS_DATA,
 		data

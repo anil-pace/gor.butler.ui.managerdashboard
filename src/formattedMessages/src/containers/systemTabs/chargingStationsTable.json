@@ -5,6 +5,11 @@
     "defaultMessage": "CHARGING STATIONS"
   },
   {
+    "id": "ChargingStations.table.STATUS",
+    "description": "STATUS for ChargingStations",
+    "defaultMessage": "STATUS"
+  },
+  {
     "id": "ChargingStations.table.operatingMode",
     "description": "operatingMode for ChargingStations",
     "defaultMessage": "OPERATING MODE"

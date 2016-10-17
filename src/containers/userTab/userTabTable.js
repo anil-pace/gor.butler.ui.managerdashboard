@@ -6,6 +6,8 @@ import Dimensions from 'react-dimensions';
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData,ActionCell} from '../../components/commonFunctionsDataTable';
 import {modal} from 'react-redux-modal';
 import AddUser from './addNewUser';
+import EditUser from './editUser';
+import DeleteUser from './deleteUser';
 
 class UserDataTable extends React.Component {
   constructor(props) {
@@ -13,6 +15,42 @@ class UserDataTable extends React.Component {
     this._dataList = new tableRenderer(this.props.items.length);
     this._defaultSortIndexes = [];
     this._dataList.newData=this.props.items;
+    var size = this._dataList.getSize();
+    for (var index = 0; index < size; index++) {
+      this._defaultSortIndexes.push(index);
+    }
+    this.state = {
+      sortedDataList: this._dataList,
+      },
+    this._onSortChange = this._onSortChange.bind(this);
+    this._onFilterChange = this._onFilterChange.bind(this);
+    this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+  }
+
+   _onColumnResizeEndCallback(newColumnWidth, columnKey) {
+    this.setState(({columnWidths}) => ({
+      columnWidths: {
+        ...columnWidths,
+        [columnKey]: newColumnWidth,
+      }
+    }));
+  }
+
+  _onFilterChange(e) {
+    if (!e.target.value) {
+      this.setState({
+        sortedDataList: this._dataList,
+      });
+    }
+    this.setState({
+      sortedDataList: new DataListWrapper(filterIndex(e,this._dataList), this._dataList),
+    });
+  }
+
+  componentWillReceiveProps(nextProps){
+    this._dataList = new tableRenderer(nextProps.items.length);
+    this._defaultSortIndexes = [];
+    this._dataList.newData=nextProps.items;
     var size = this._dataList.getSize();
     for (var index = 0; index < size; index++) {
       this._defaultSortIndexes.push(index);
@@ -67,10 +105,31 @@ class UserDataTable extends React.Component {
     });
   }
   handleEdit(columnKey,rowIndex) {
-    console.log('Editing');
+    let uid=this.state.sortedDataList.newData[rowIndex].uid,uname=this.state.sortedDataList.newData[rowIndex].userName,fname=this.state.sortedDataList.newData[rowIndex].first,lname=this.state.sortedDataList.newData[rowIndex].last;
+    console.log(uname); 
+    modal.add(EditUser, {
+      title: '',
+      size: 'large', // large, medium or small,
+      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: true,
+      id:uid,
+      userName:uname,
+      first:fname,
+      last:lname
+    });
+
+    console.log(this.state.sortedDataList.newData[rowIndex].userName)
   }
   handleDel(columnKey,rowIndex) {
-    console.log('Deleting');
+    let id=this.state.sortedDataList.newData[rowIndex].uid,name=this.state.sortedDataList.newData[rowIndex].name;
+    modal.add(DeleteUser, {
+      title: '',
+      size: 'large', // large, medium or small,
+      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: true,
+      id:id,
+      name:name    });
+    console.log(this.state.sortedDataList.newData[rowIndex].uid)
   }
  //  _showModal(){
  // //    this.myModal.style.display = "block";
@@ -203,7 +262,7 @@ class UserDataTable extends React.Component {
                ACTIONS
             </SortHeaderCell>
           }
-          cell={<ActionCell selEdit={selEdit} selDel={selDel}/>}
+          cell={<ActionCell data={sortedDataList} selEdit={selEdit} selDel={selDel}/>}
           width={columnWidth}
         />
       </Table>

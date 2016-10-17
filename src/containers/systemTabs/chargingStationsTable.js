@@ -24,6 +24,34 @@ class ChargingStationsTable extends React.Component {
       columnWidths: {
         id: columnWidth,
         status: columnWidth,
+        mode: columnWidth,
+        dockedBots: columnWidth
+      },
+      
+    };
+    this._onSortChange = this._onSortChange.bind(this);
+    this._onFilterChange = this._onFilterChange.bind(this);
+    this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    var items = nextProps.items || [];
+    var temp = new Array(items ? items.length : 0).fill(false);
+    this._dataList = new tableRenderer(items ? items.length : 0);
+    this._defaultSortIndexes = [];
+    this._dataList.newData=items;
+    var size = this._dataList.getSize();
+    for (var index = 0; index < size; index++) {
+      this._defaultSortIndexes.push(index);
+    }
+    var columnWidth= (nextProps.containerWidth/nextProps.itemNumber)
+    this.state = {
+      sortedDataList: this._dataList,
+      colSortDirs: {},
+      columnWidths: {
+        id: columnWidth,
+        status: columnWidth,
+        mode: columnWidth,
         dockedBots: columnWidth
       },
       
@@ -115,7 +143,39 @@ class ChargingStationsTable extends React.Component {
           width={columnWidths.id}
           isResizable={true}
         />
-        
+        <Column
+          columnKey="status"
+          header={
+            <SortHeaderCell>
+              <FormattedMessage id="ChargingStations.table.STATUS" description="STATUS for ChargingStations" 
+              defaultMessage ="STATUS"/>
+              <div className="gorToolHeaderSubText">  </div>
+               <div>
+              <div className="statuslogoWrap">
+              </div>
+              </div>
+            </SortHeaderCell>
+          }
+          cell={<TextCell data={sortedDataList} />}
+          fixed={true}
+          width={columnWidths.status}
+          isResizable={true}
+        />
+
+         <Column
+          columnKey="mode"
+          header={
+            <SortHeaderCell>
+              <FormattedMessage id="ChargingStations.table.operatingMode" description="operatingMode for ChargingStations" 
+              defaultMessage ="OPERATING MODE"/>
+              <div className="gorToolHeaderSubText"> MODE </div>
+            </SortHeaderCell>
+          }
+          cell={<TextCell data={sortedDataList} />}
+          fixed={true}
+          width={columnWidths.mode}
+          isResizable={true}
+        />
         <Column
           columnKey="dockedBots"
           header={

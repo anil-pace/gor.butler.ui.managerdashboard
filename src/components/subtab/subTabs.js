@@ -34,8 +34,9 @@ class SystemTab extends React.Component{
               defaultMessage ="Charging Station"/>
 
 
-		var selectClass = {NOTIFICATION:"gorMainBlock", BUTLERBOTS:"gorMainBlock", PPS:"gorMainBlock", CHARGING:"gorMainBlock"};
-		selectClass[this.props.subTab.subTab] = "gorMainBlockSelect";
+		var selectClass = {notification:"gorMainBlock", butlerbots:"gorMainBlock", pps:"gorMainBlock", chargingstation:"gorMainBlock"};
+		selectClass[this.props.subTab] = "gorMainBlockSelect";
+		console.log(this.props.subTab)
 
 		return (
 			<div>
@@ -57,7 +58,7 @@ class SystemTab extends React.Component{
 }
 
 function mapStateToProps(state, ownProps){
-    
+    console.log(state)
     return  {
          subTab:state.tabSelected.subTab || {},
          tab:state.tabSelected.tab || {}

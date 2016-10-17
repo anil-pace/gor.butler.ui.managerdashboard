@@ -6,6 +6,7 @@ export const LOGIN_FAILURE = "LOGIN_FAILURE";
 export const LOGOUT = "LOGOUT";
 export const AJAX_CALL = "AJAX_CALL";
 export const MOCK_LOGIN = "MOCK_LOGIN";
+export const SET_USERNAME = "SET_USERNAME";
 
 /*Constants for Web Sockets*/
 export const WS_CONNECT = "WS_CONNECT";
@@ -40,13 +41,14 @@ export const PARSE_PUT = "put";
 export const PARSE_PICK = "pick";
 export const PARSE_PPA_THROUGHPUT = "put_pick_audit_throughput";
 export const PARSE_AUDIT = "audit";
-export const SYSTEM_CHARGERS_DETAILS = "system_chargers_details";
+export const SYSTEM_CHARGERS_DETAILS = "chargers";
 export const NOTIFICATION = "NOTIFICATION";
-export const BUTLERBOTS = "BUTLERBOTS";
-export const CHARGING = "CHARGING";
-export const PPS = "PPS";
+export const BUTLERBOTS = "butlerbots";
+export const CHARGING = "chargingstation";
+export const PPS = "pps";
 export const PPS_PERFORMANCE = "PPS_PERFORMANCE";
 export const USER_DETAILS = "USER_DETAILS";
+export const ORDER_RECIEVED = "ORDER_RECIEVED";
 
 /*Constants for stats widget*/
 export const RENDER_STATSWIDGET = "RENDER_STATSWIDGET";
@@ -80,21 +82,25 @@ export const CHARGERS_DETAIL = "CHARGERS_DETAIL";
 export const BUTLERS_DETAIL = "BUTLERS_DETAIL";
 export const PPS_DETAIL  = "pps";
 export const SYSTEM_PPS_DETAILS = "system_pps_details";
-export const SYSTEM_BUTLERS_DETAILS = "system_butlers_details";
-export const HISTOGRAM_DETAILS = "histogram_details";
+export const SYSTEM_BUTLERS_DETAILS = "butlers";
+export const HISTOGRAM_DETAILS = "histogram";
 export const USER_DATA = "users";
 
 
 /*Constants for type of AJAX call*/
 export const AUTH_LOGIN = "AUTH_LOGIN";
+export const ORDERS_RETRIEVE = "ORDERS_RETRIEVE";
 export const ADD_USER='ADD_USER';
 export const CHECK_ID='CHECK_ID';
 export const DELETE_USER='DELETE_USER';
 export const GET_ROLES='GET_ROLES';
 export const GET_HEADER_INFO = 'GET_HEADER_INFO';
+export const EDIT_USER='EDIT_USER';
+
 
 /*Constants for app info checking*/
 export const ID_DATA = "ID_DATA";
+export const ID_BACKEND = "ID_BACKEND";
 export const NAME_DATA = "NAME_DATA";
 export const PASSWORD_DATA = "PASSWORD_DATA";
 export const PASS_DATA = "PASS_DATA";
@@ -109,9 +115,12 @@ export const NOTIFY_HIDE='NOTIFY_HIDE';
 export const MD_ID='MD_ID';
 export const SET_ROLE='SET_ROLE';
 
+
 /*Constants for pagination*/
 export const PAGE_DATA = "PAGE_DATA";
-
+export const STATUS_FILTER = "STATUS_FILTER";
+export const TIME_FILTER = "TIME_FILTER"
+;
 /*Constants for Loader*/
 
 export const DISPLAY_LOADER = "DISPLAY_LOADER";
@@ -132,3 +141,23 @@ export const SYS_SUB_TAB_ROUTE_MAP={
 	[CHARGING]:"chargingstation"
 
 }
+/*Constants for api response codes*/
+export const CODE_US001='us001';
+export const CODE_US002='us002';
+export const CODE_US004='us004';
+export const CODE_UE001='ue001';
+export const CODE_UE002='ue002';
+export const CODE_UE003='ue003';
+export const CODE_UE004='ue004';
+export const CODE_UE005='ue005';
+export const CODE_UE006='ue006';
+
+/*User roles map*/
+export const BUTLER_SUPERVISOR = 'butler_supervisor';
+export const BUTLER_UI = 'butler_ui';
+export const USER_ROLE_MAP ={
+	[BUTLER_SUPERVISOR] : "Manager",
+	[BUTLER_UI] : "Operator"
+
+}
+

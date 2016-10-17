@@ -62,10 +62,14 @@ export class DataListWrapper {
 export const ActionCell = ({rowIndex, data, columnKey,selEdit,selDel, ...props}) => (
   <Cell {...props}>
     <div className="gor-user-Logo-wrap">
-      <button className="user-edit-icon" onClick={selEdit.bind(this,columnKey,rowIndex)}/>
+      <button onClick={selEdit.bind(this,columnKey,rowIndex)}>
+        <div className="user-edit-icon" />
+      </button>
     </div>
     <div className="gor-user-Logo-wrap">
-      <button className="user-del-icon" onClick={selDel.bind(this,columnKey,rowIndex)} />
+      <button onClick={selDel.bind(this,columnKey,rowIndex)} >
+        <div className="user-del-icon" />
+      </button>
     </div>  
   </Cell>
 );
@@ -85,7 +89,7 @@ export const ProgressCell = ({rowIndex, data, columnKey, ...props}) => (
 
 export const ComponentCell = ({rowIndex, data, columnKey,checkState, ...props}) => (
   
-  <Cell {...props}> <input type="checkbox" onChange={checkState.bind(this,columnKey,rowIndex)}/>
+  <Cell {...props}> <input type="checkbox" onChange={checkState.bind(this,columnKey,rowIndex,data.getObjectAt(rowIndex)[columnKey])}/>
     {data.getObjectAt(rowIndex)[columnKey]}
   </Cell>
 );

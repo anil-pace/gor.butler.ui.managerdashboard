@@ -1,6 +1,7 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-import {RECIEVE_HEADER,REQUEST_HEADER,RECIEVE,RECIEVE_ITEM_TO_STOCK} from '../../constants/appConstants';
+import {RECIEVE_HEADER,REQUEST_HEADER,RECIEVE,RECIEVE_ITEM_TO_STOCK,USER_ROLE_MAP} from '../../constants/appConstants';
+import {HEADER_URL} from '../../constants/configConstants'
 import {modal} from 'react-redux-modal';
 import { getHeaderInfo } from '../../actions/headerAction';
 import LogOut from '../../containers/logoutTab'; 
@@ -20,9 +21,10 @@ class Header extends React.Component{
     	 
     }
     componentDidMount(){
-              if(this.props.authToken){
+              var username = this.props.username;
+              if(username && this.props.authToken){
               let headerData={
-                'url':'https://192.168.8.118/api/user?username=admin',
+                'url':HEADER_URL+'?username='+username,
                 'method':'GET',
                 'cause':RECIEVE_HEADER,
                 'token':this.props.authToken
@@ -50,14 +52,13 @@ class Header extends React.Component{
   	var headerInfo;
   	if(this.props.headerInfo && this.props.headerInfo.users.length){
   		 headerInfo= Object.assign({},this.props.headerInfo)
-  		headerInfo.fullName = headerInfo.users[0].first_name + headerInfo.users[0].last_name;
-  		headerInfo.designation = 'Manager';
+  		headerInfo.fullName = headerInfo.users[0].first_name +' '+ headerInfo.users[0].last_name;
+  		headerInfo.designation = USER_ROLE_MAP[headerInfo.users[0].roles[0]] || '';
   	}
   	return headerInfo
   }
 
 	render(){
-		console.log("Header:"+this.props.headerInfo);
 		var headerInfo = this._processData()
 		return (
 		<header className="gorHeader head">
@@ -133,7 +134,8 @@ class Header extends React.Component{
 function mapStateToProps(state,ownProps) {
  return {
   headerInfo:state.headerData.headerInfo,
-  authToken : state.authLogin.auth_token
+  authToken : state.authLogin.auth_token,
+  username:state.authLogin.username
  }
 } 
 /**

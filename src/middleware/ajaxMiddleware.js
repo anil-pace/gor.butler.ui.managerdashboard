@@ -1,4 +1,4 @@
-import {AJAX_CALL,MOCK_LOGIN,AUTH_LOGIN} from '../constants/appConstants'
+import {AJAX_CALL,MOCK_LOGIN,AUTH_LOGIN} from '../constants/appConstants';
 import {AjaxParse} from '../utilities/AjaxParser';
 import {ShowError} from '../utilities/showError';
 
@@ -20,8 +20,8 @@ const ajaxMiddleware = (function(){
 
     var params=action.params;
 
-    var formData = params.formdata || null,
-    loginData=JSON.stringify(formData || {});
+    var formData = params.formdata || params || null,
+    loginData= params.formdata? JSON.stringify(params.formdata):null;
     var httpRequest = new XMLHttpRequest();
 
     if (!httpRequest || !params.url) {
@@ -40,7 +40,6 @@ const ajaxMiddleware = (function(){
         }
         else
         {
-          console.log('Connection refused');
           ShowError(store,params.cause);
         }        
      }

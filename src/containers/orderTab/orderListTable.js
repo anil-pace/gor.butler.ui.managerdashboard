@@ -1,14 +1,19 @@
 import React from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
-import DropdownTable from '../../components/dropdown/dropdownTable'
+import Dropdown from '../../components/dropdown/dropdown'
 import Dimensions from 'react-dimensions'
 import { FormattedMessage } from 'react-intl';
-import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData,ProgressCell} from '../../components/commonFunctionsDataTable';
+import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
 
-class WavesTable extends React.Component {
+class OrderListTable extends React.Component {
   constructor(props) {
     super(props);
-    this._dataList = new tableRenderer(this.props.items.length);
+    if(this.props.items === undefined) {
+      this._dataList = new tableRenderer(0);
+    }
+    else {
+      this._dataList = new tableRenderer(this.props.items.length);
+    }
     this._defaultSortIndexes = [];
     this._dataList.newData=this.props.items;
     var size = this._dataList.getSize();
@@ -20,13 +25,12 @@ class WavesTable extends React.Component {
       sortedDataList: this._dataList,
       colSortDirs: {},
       columnWidths: {
-        waves: columnWidth,
+        id: columnWidth,
         status: columnWidth,
-        startTime: columnWidth,
-        cutOffTime: columnWidth,
-        ordersToFulfill: columnWidth,
-        progress: columnWidth,
-        totalOrders: columnWidth
+        recievedTime: columnWidth,
+        completedTime: columnWidth,
+        pickBy: columnWidth,
+        orderLine: columnWidth
       },
     };
     this._onSortChange = this._onSortChange.bind(this);
@@ -34,7 +38,7 @@ class WavesTable extends React.Component {
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps){
     this._dataList = new tableRenderer(nextProps.items.length);
     this._defaultSortIndexes = [];
     this._dataList.newData=nextProps.items;
@@ -47,20 +51,20 @@ class WavesTable extends React.Component {
       sortedDataList: this._dataList,
       colSortDirs: {},
       columnWidths: {
-        waves: columnWidth,
+        id: columnWidth,
         status: columnWidth,
-        startTime: columnWidth,
-        cutOffTime: columnWidth,
-        ordersToFulfill: columnWidth,
-        progress: columnWidth,
-        totalOrders: columnWidth
+        recievedTime: columnWidth,
+        completedTime: columnWidth,
+        pickBy: columnWidth,
+        orderLine: columnWidth
       },
     };
     this._onSortChange = this._onSortChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+  }
 
-   } 
+  
    _onColumnResizeEndCallback(newColumnWidth, columnKey) {
     this.setState(({columnWidths}) => ({
       columnWidths: {
@@ -80,6 +84,7 @@ class WavesTable extends React.Component {
     });
   }
   
+  
   _onSortChange(columnKey, sortDir) {
     var sortIndexes = this._defaultSortIndexes.slice();
     this.setState({
@@ -89,24 +94,46 @@ class WavesTable extends React.Component {
       },
     });
   }
+
+  
   render() {
     
-    var {sortedDataList, colSortDirs,columnWidths} = this.state;  
-    var heightRes = 500;
-    if(this.props.containerHeight !== 0) {
-      heightRes = this.props.containerHeight;
-    }
+    var {sortedDataList, colSortDirs,columnWidths} = this.state;
+    const ordersByStatus = [
+    { value: 'all', label: 'All orders' },
+    { value: 'breached', label: 'Breached orders' },
+    { value: 'pending', label: 'Pending orders' },
+    { value: 'completed', label: 'Completed orders' }
+    ];
+
+    const ordersByTime = [
+    { value: 'allOrders', label: 'All' },
+    { value: 'oneHourOrders', label: 'Last 1 hours' },
+    { value: 'twoHourOrders', label: 'Last 2 hours' },
+    { value: 'sixHourOrders', label: 'Last 6 hours' },
+    { value: 'twelveHourOrders', label: 'Last 12 hours' },
+    { value: 'oneDayOrders', label: 'Last 1 day' }
+    ];
+    
     return (
       <div className="gorTableMainContainer">
         <div className="gorToolBar">
           <div className="gorToolBarWrap">
             <div className="gorToolBarElements">
-               <FormattedMessage id="waves.table.heading" description="Heading for waves" 
-              defaultMessage ="Waves"/>
-              
+               <FormattedMessage id="order.table.heading" description="Heading for order list" 
+              defaultMessage ="OrderList"/>
             </div>
+            <button className="gor-refresh-btn" onClick={this.props.refreshOption.bind(this)} >Refresh Data</button>
           </div>
-        <div className="filterWrapper">  
+        <div className="filterWrapper"> 
+        <div className="gorToolBarDropDown">
+          <div className="gor-dropDown-firstInnerElement">
+              <Dropdown  styleClass={'gorDataTableDrop'}  items={ordersByStatus} currentState={ordersByStatus[0]} optionDispatch={this.props.statusFilter}/>
+          </div>
+          <div className="gor-dropDown-secondInnerElement">                                                                  
+              <Dropdown  styleClass={'gorDataTableDrop'}  items={ordersByTime} currentState={ordersByTime[0]}  optionDispatch={this.props.timeFilter}/>
+            </div>
+            </div> 
         <div className="gorFilter">
             <div className="searchbox-magnifying-glass-icon"/>
             <input className="gorInputFilter"
@@ -116,6 +143,7 @@ class WavesTable extends React.Component {
         </div>
         </div>
        </div>
+
       <Table
         rowHeight={66}
         rowsCount={sortedDataList.getSize()}
@@ -123,22 +151,22 @@ class WavesTable extends React.Component {
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
         width={this.props.containerWidth}
-        height={heightRes}
+        height={500}
         {...this.props}>
         <Column
-          columnKey="waves"
+          columnKey="id"
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.id}> 
               <div className="gorToolHeaderEl">
-              <div className="gorToolHeaderEl"> WAVES </div>
+              <div className="gorToolHeaderEl"> {sortedDataList.getSize()} Order List </div>
               <div className="gorToolHeaderSubText"> Total:{sortedDataList.getSize()} </div>
               </div>
             </SortHeaderCell>
           }
           cell={  <TextCell data={sortedDataList}/>}
           fixed={true}
-          width={columnWidths.waves}
+          width={columnWidths.id}
           isResizable={true}
         />
         <Column
@@ -146,7 +174,7 @@ class WavesTable extends React.Component {
           header={
             <SortHeaderCell >
               <div>
-                 <FormattedMessage id="waves.table.status" description="Status for waves" 
+                 <FormattedMessage id="orderList.table.status" description="Status for orders" 
               defaultMessage ="STATUS"/> 
               </div>
               <div>
@@ -163,73 +191,59 @@ class WavesTable extends React.Component {
           isResizable={true}
         />
         <Column
-          columnKey="startTime"
+          columnKey="pickBy"
           header={
             <SortHeaderCell>
-              <FormattedMessage id="butlerBot.table.startTime" description="StartTime for butlerbot" 
-              defaultMessage ="START TIME"/>
-              <div className="gorToolHeaderSubText"> 4 waves pending</div>
+              <FormattedMessage id="waves.table.pickBy" description="pick by for waves" 
+              defaultMessage ="PICK BY"/>
+              <div className="gorToolHeaderSubText"> </div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
           fixed={true}
-          width={columnWidths.startTime}
+          width={columnWidths.pickBy}
           isResizable={true}
         />
         <Column
-          columnKey="cutOffTime"
+          columnKey="recievedTime"
           header={
             <SortHeaderCell>
-               <FormattedMessage id="waves.table.cutOffTime" description="cutOffTime for waves" 
-              defaultMessage ="CUT-OFF TIME"/> 
-              <div className="gorToolHeaderSubText">2 waves in progress</div>
+              <FormattedMessage id="orderlist.table.operatingMode" description="recievedTime for Orders" 
+              defaultMessage ="RECIEVED TIME"/>
+              <div className="gorToolHeaderSubText"> </div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
           fixed={true}
-          width={columnWidths.cutOffTime}
+          width={columnWidths.recievedTime}
           isResizable={true}
         />
         <Column
-          columnKey="ordersToFulfill"
+          columnKey="completedTime"
           header={
             <SortHeaderCell>
-               <FormattedMessage id="butlerBot.table.ordersToFulfill" description="orders to fulfill for waves" 
-              defaultMessage ="ORDERS TO FULFILL"/> 
-              <div className="gorToolHeaderSubText"> 11,013 remaining</div>
+              <FormattedMessage id="waves.table.completedTime" description="completedTime for waves" 
+              defaultMessage ="COMPLETED"/>
+              <div className="gorToolHeaderSubText"> </div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
           fixed={true}
-          width={columnWidths.ordersToFulfill}
+          width={columnWidths.completedTime}
           isResizable={true}
         />
         <Column
-          columnKey="progress"
+          columnKey="orderLine"
           header={
-            <SortHeaderCell >
-               <FormattedMessage id="waves.table.progress" description="progress for waves" 
-              defaultMessage ="PROGRESS(%)"/>
-              <div className="gorToolHeaderSubText"> 6 waves completed </div> 
+            <SortHeaderCell>
+              <FormattedMessage id="waves.table.orderLine" description="orderLine for waves" 
+              defaultMessage ="ORDER LINE"/>
+              <div className="gorToolHeaderSubText"> </div>
             </SortHeaderCell>
           }
-          cell={<ProgressCell data={sortedDataList}  />}
+          cell={<TextCell data={sortedDataList} />}
           fixed={true}
-          width={columnWidths.progress}
-          isResizable={true}
-        />
-        <Column
-          columnKey="totalOrders"
-          header={
-            <SortHeaderCell >
-               <FormattedMessage id="waves.table.totalOrders" description="totalOrders for waves" 
-              defaultMessage ="TOTAL ORDERS"/>
-              <div className="gorToolHeaderSubText"> 42,615 orders </div> 
-            </SortHeaderCell>
-          }
-          cell={<TextCell data={sortedDataList}  />}
-          fixed={true}
-          width={columnWidths.totalOrders}
+          width={columnWidths.orderLine}
           isResizable={true}
         />
       </Table>
@@ -237,4 +251,9 @@ class WavesTable extends React.Component {
     );
   }
 }
-export default Dimensions()(WavesTable);
+
+
+
+//export default connect(null,mapDispatchToProps)(OrderListTable) ;
+
+export default Dimensions()(OrderListTable);
