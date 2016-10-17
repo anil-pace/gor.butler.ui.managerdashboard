@@ -20,6 +20,11 @@
     "defaultMessage": "Password"
   },
   {
+    "id": "login.form.button",
+    "description": "Text for login button",
+    "defaultMessage": "Login"
+  },
+  {
     "id": "login.butler.language",
     "description": "Text for language",
     "defaultMessage": "Language"

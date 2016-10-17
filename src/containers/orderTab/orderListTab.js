@@ -7,7 +7,7 @@ import ReactPaginate from 'react-paginate';
 import { connect } from 'react-redux';
 import {getPageData, getStatusFilter, getTimeFilter,getPageSize,currentPage,lastRefreshTime} from '../../actions/paginationAction';
 import {ORDERS_RETRIEVE} from '../../constants/appConstants';
-import {BASE_URL, ORDERS_URL,PAGE_SIZE_URL} from '../../constants/configConstants';
+import {BASE_URL, ORDERS_URL,PAGE_SIZE_URL,PROTOCOL} from '../../constants/configConstants';
 import OrderListTable from './orderListTable';
 import Dropdown from '../../components/dropdown/dropdown'
 
@@ -26,7 +26,7 @@ class OrderListTab extends React.Component{
     handlePageClick = (data) => {
     var url;
     if(data.url === undefined) {
-      url = BASE_URL + ORDERS_URL + "?page=" + (data.selected+1) + "&PAGE_SIZE=25";
+      url = PROTOCOL+BASE_URL + ORDERS_URL + "?page=" + (data.selected+1) + "&PAGE_SIZE=25";
     }
 
     else {
@@ -50,7 +50,7 @@ class OrderListTab extends React.Component{
     var data = {}, appendStatusUrl="", appendTimeUrl="", appendPageSize="";
     data.selected = 0;
     data.url = "";
-    data.url = BASE_URL + ORDERS_URL + "?page=" + (data.selected+1);
+    data.url = PROTOCOL+BASE_URL + ORDERS_URL + "?page=" + (data.selected+1);
 
     if(this.props.filterOptions.pageSize === undefined) {
       appendPageSize = PAGE_SIZE_URL + "25";

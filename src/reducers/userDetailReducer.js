@@ -7,7 +7,7 @@ function processUserDetails(data) {
   var userDetails = [], userData = {};
   for (var i = data.length - 1; i >= 0; i--) {
     userData.name = (data[i].first_name || null) + " " + (data[i].last_name || null);
-    if(data[i].status){
+    if(data[i].logged_in){
       userData.status = "Online";
     userData.workMode = data[i].pps.pps_mode;
     userData.location = "PPS " + data[i].pps.pps_id ;
