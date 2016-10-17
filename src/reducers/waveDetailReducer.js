@@ -7,11 +7,14 @@ import {ORDERS_DATA} from '../constants/appConstants';
 
 function processWaveData(data) {
   var waveData = [], waveDetail = {};
+  var status = {"In progress":"progress", "Completed":"completed", "Breached":"breached", "Pending":"pending" };
   if(data) {
      for (var i =data.length - 1; i >= 0; i--) {
       waveDetail = {};
       waveDetail.id = "WAVE-" + data[i].wave_id;
+      waveDetail.statusClass = status[data[i].status];
       waveDetail.status = data[i].status;
+      
       if(data[i].start_time === "") {
         waveDetail.startTime = "--";
       }
@@ -46,7 +49,6 @@ export  function waveInfo(state={},action){
           var res=action.data, waveData;
           if(res.complete_data){
             waveData = processWaveData(res.complete_data)
-            console.log(waveData);
             return Object.assign({}, state, {
             "waveData" : waveData
             })

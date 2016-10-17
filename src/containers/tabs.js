@@ -80,8 +80,7 @@ class Tabs extends React.Component{
     
 
     selectClass[this.props.tab] = "gorMainBlockSelect";
-    console.log(this.props.tab)
-    
+   
     
 		return (
 		<div className="gorTabs gorMainBlock">
