@@ -5,6 +5,7 @@ import {userRequest} from '../../actions/userActions';
 import {validateName, validatePassword, resetForm} from '../../actions/validationActions';
 import { connect } from 'react-redux';
 import {ERROR,GET_ROLES,EDIT_USER,SUCCESS} from '../../constants/appConstants';
+import {ROLE_URL,HEADER_URL} from '../../constants/configConstants';
 import FieldError from '../../components/fielderror/fielderror';
 import RadioGroup from './radioGroup';
 
@@ -15,7 +16,7 @@ class EditUser extends React.Component{
   }
   componentDidMount(){
         let userData={
-                'url':'https://192.168.8.118/api/role',
+                'url':ROLE_URL,
                 'method':'GET',
                 'cause':GET_ROLES,
                 'contentType':'application/json',
@@ -75,7 +76,7 @@ class EditUser extends React.Component{
                     "password_confirm": pwd2     
 
          };
-        let editurl="https://192.168.8.118/api/user/"+this.props.id+"/edit";
+        let editurl=HEADER_URL+'/'+this.props.id+"/edit";
         let userData={
                 'url':editurl,
                 'formdata':formdata,

@@ -4,6 +4,7 @@ import { FormattedMessage,FormattedPlural } from 'react-intl';
 import {validateID, validateName, validatePassword, resetForm} from '../../actions/validationActions';
 import {userRequest} from '../../actions/userActions';
 import {ADD_USER,CHECK_ID,ERROR,SUCCESS,INFO,GET_ROLES} from '../../constants/appConstants';
+import {ROLE_URL,CHECK_USER,HEADER_URL} from '../../constants/configConstants';
 import { connect } from 'react-redux';
 import FieldError from '../../components/fielderror/fielderror';
 import RadioGroup from './radioGroup';
@@ -19,7 +20,7 @@ class AddUser extends React.Component{
   }
   componentDidMount(){
         let userData={
-                'url':'https://192.168.8.118/api/role',
+                'url':ROLE_URL,
                 'method':'GET',
                 'cause':GET_ROLES,
                 'contentType':'application/json',
@@ -34,7 +35,7 @@ class AddUser extends React.Component{
     if(data1.userid)
     {
       let userData={
-                'url':'https://192.168.8.118/api/user?username='+data1.userid,
+                'url':CHECK_USER+data1.userid,
                 'method':'GET',
                 'cause':CHECK_ID,
                 'contentType':'application/json',
@@ -96,7 +97,7 @@ class AddUser extends React.Component{
 
          };
         let userData={
-                'url':'https://192.168.8.118/api/user',
+                'url':HEADER_URL,
                 'formdata':formdata,
                 'method':'POST',
                 'cause':ADD_USER,
