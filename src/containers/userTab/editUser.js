@@ -95,9 +95,9 @@ class EditUser extends React.Component{
         <div>
           <div className="gor-modal-content">
             <div className='gor-modal-head'>
-              <div className='gor-usr-add'><FormattedMessage id="users.edit.heading" description='Heading for Add new user' 
+              <div className='gor-usr-add'><FormattedMessage id="users.edit.heading" description='Heading for Edit user' 
             defaultMessage='Edit user'/>
-                          <div className='gor-sub-head'><FormattedMessage id="users.edit.subheading" description='Subheading for add new user' 
+                          <div className='gor-sub-head'><FormattedMessage id="users.edit.subheading" description='Subheading for Edit user' 
             defaultMessage='All the fields are mandatory'/></div>
               </div>
               <span className="close" onClick={this.removeThisModal.bind(this)}>×</span>

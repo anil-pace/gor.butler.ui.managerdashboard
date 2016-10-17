@@ -12,13 +12,13 @@ export  function ordersInfo(state={},action){
           res=action.data;
           if(res.aggregate_data){
             if(res.aggregate_data.cut_off_time)
-              cut_off=parseInt(res.aggregate_data.cut_off_time);
+              cut_off=parseInt(res.aggregate_data.cut_off_time,10);
             if(res.aggregate_data.pending_orders)
-              count_pending=parseInt(res.aggregate_data.pending_orders);
+              count_pending=parseInt(res.aggregate_data.pending_orders,10);
             if(res.aggregate_data.estimated_completion_time)
-              eta=parseInt(res.aggregate_data.estimated_completion_time);
+              eta=parseInt(res.aggregate_data.estimated_completion_time,10);
             if(res.aggregate_data.orders_at_risk)
-              count_risk=parseInt(res.aggregate_data.orders_at_risk);
+              count_risk=parseInt(res.aggregate_data.orders_at_risk,10);
             if(res.aggregate_data.wave_ending_time)
               wave_end=res.aggregate_data.wave_ending_time;            
           }
