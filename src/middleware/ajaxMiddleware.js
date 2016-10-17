@@ -1,4 +1,4 @@
-import {AJAX_CALL,MOCK_LOGIN,AUTH_LOGIN} from '../constants/appConstants'
+import {AJAX_CALL,MOCK_LOGIN,AUTH_LOGIN} from '../constants/appConstants';
 import {AjaxParse} from '../utilities/AjaxParser';
 import {ShowError} from '../utilities/showError';
 
@@ -40,7 +40,6 @@ const ajaxMiddleware = (function(){
         }
         else
         {
-          console.log('Connection refused');
           ShowError(store,params.cause);
         }        
      }

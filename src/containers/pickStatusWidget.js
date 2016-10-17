@@ -43,7 +43,7 @@ class PickStatusWidget extends React.Component{
         items={},
         ordersData= Object.assign({},this.props.ordersData),
         ppsCount=this.props.ppsData?this.props.ppsData.totalPick:null,
-        pickThroughput=this.props.throughputData?this.props.throughputData.pick_throughput:null;
+        pickThroughput=this.props.throughputData? this.props.throughputData.pick_throughput:null;
         
         headingleft=<FormattedMessage id="widget.pick.headingleft" description='Heading for pick status widget' 
             defaultMessage='Orders to fullfill'/>;

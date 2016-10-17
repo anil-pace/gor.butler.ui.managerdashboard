@@ -93,10 +93,16 @@ export const ADD_USER='ADD_USER';
 export const CHECK_ID='CHECK_ID';
 export const DELETE_USER='DELETE_USER';
 export const GET_ROLES='GET_ROLES';
+
 export const PPS_MODE_CHANGE = 'PPS_MODE_CHANGE';
+
+export const EDIT_USER='EDIT_USER';
+export const BUTLER_UI="butler_ui";
+
 
 /*Constants for app info checking*/
 export const ID_DATA = "ID_DATA";
+export const ID_BACKEND = "ID_BACKEND";
 export const NAME_DATA = "NAME_DATA";
 export const PASSWORD_DATA = "PASSWORD_DATA";
 export const PASS_DATA = "PASS_DATA";
@@ -143,3 +149,14 @@ export const SYS_SUB_TAB_ROUTE_MAP={
 	[ORDER_LIST]:"orderlist"
 
 }
+/*Constants for api response codes*/
+export const CODE_US001='us001';
+export const CODE_US002='us002';
+export const CODE_US004='us004';
+export const CODE_UE001='ue001';
+export const CODE_UE002='ue002';
+export const CODE_UE003='ue003';
+export const CODE_UE004='ue004';
+export const CODE_UE005='ue005';
+export const CODE_UE006='ue006';
+

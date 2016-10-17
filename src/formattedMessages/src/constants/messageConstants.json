@@ -1,0 +1,77 @@
+[
+  {
+    "id": "notify.success.add",
+    "description": "Text for successfull user addition",
+    "defaultMessage": "User successfully added"
+  },
+  {
+    "id": "notify.success.delete",
+    "description": "Text for successfull user deletion",
+    "defaultMessage": "User successfully deleted"
+  },
+  {
+    "id": "notify.success.edit",
+    "description": "Text for successfully editing user",
+    "defaultMessage": "User successfully edited"
+  },
+  {
+    "id": "notify.error.usernameExists",
+    "description": "Text for already registered username",
+    "defaultMessage": "Username already registered!"
+  },
+  {
+    "id": "notify.error.passwordMissing",
+    "description": "Text for passwords missing",
+    "defaultMessage": "Password not provided!"
+  },
+  {
+    "id": "notify.error.passwordMatch",
+    "description": "Text for passwords not matching",
+    "defaultMessage": "Passwords do not match!"
+  },
+  {
+    "id": "notify.error.username",
+    "description": "Text for missing username",
+    "defaultMessage": "Username is a required field!"
+  },
+  {
+    "id": "notify.error.role",
+    "description": "Text for missing roles",
+    "defaultMessage": "Role is a required field!"
+  },
+  {
+    "id": "appInfo.success",
+    "description": "Text for success",
+    "defaultMessage": "Successfull"
+  },
+  {
+    "id": "user.invalid.id",
+    "description": "Text for invalid user ID",
+    "defaultMessage": "Please enter a valid User ID"
+  },
+  {
+    "id": "login.empty.password",
+    "description": "Text for empty password",
+    "defaultMessage": "Please enter a password"
+  },
+  {
+    "id": "user.empty.name",
+    "description": "Text for empty user name",
+    "defaultMessage": "Minimum 6 characters required"
+  },
+  {
+    "id": "user.invalid.name",
+    "description": "Text for invalid user name",
+    "defaultMessage": "Special characters \"~\",\"@\" and \"%\" are not allowed"
+  },
+  {
+    "id": "user.invalid.password",
+    "description": "Text for invalid password",
+    "defaultMessage": "Minimum 6 characters required"
+  },
+  {
+    "id": "user.match.password",
+    "description": "Text for passwords not matching",
+    "defaultMessage": "Passwords do not match"
+  }
+]
