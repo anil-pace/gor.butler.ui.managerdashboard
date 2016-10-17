@@ -8,7 +8,7 @@ function processUserDetails(data) {
   //var status = ["Offline", "Online"];
   var userDetails = [], userData = {};
   for (var i = data.length - 1; i >= 0; i--) {
-    userData.name = (data[i].first_name || null) + " " + (data[i].last_name || null);
+    userData.id = (data[i].first_name || null) + " " + (data[i].last_name || null);
     if(data[i].status){
       userData.status = "Online";
       userData.statusClass = "online";

@@ -11,9 +11,18 @@ class Dropdown extends Component {
     }
     this._onSelect = this._onSelect.bind(this)
   }
+
+
   _onSelect (option) {
     this.setState({selected: option})
     this.props.optionDispatch(option.value);
+    var _this = this;
+    setTimeout(function(){
+      if(_this.props.refreshList) {
+      _this.props.refreshList();
+    }
+    },0)
+    
   }
   render () {
     const defaultOption = this.state.selected

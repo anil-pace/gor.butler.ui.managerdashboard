@@ -49,7 +49,6 @@ export  function waveInfo(state={},action){
           var res=action.data, waveData;
           if(res.complete_data){
             waveData = processWaveData(res.complete_data)
-            console.log(waveData);
             return Object.assign({}, state, {
             "waveData" : waveData
             })

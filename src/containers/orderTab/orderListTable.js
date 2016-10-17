@@ -137,10 +137,10 @@ class OrderListTable extends React.Component {
         <div className="filterWrapper"> 
         <div className="gorToolBarDropDown">
           <div className="gor-dropDown-firstInnerElement">
-              <Dropdown  styleClass={'gorDataTableDrop'}  items={ordersByStatus} currentState={ordersByStatus[0]} optionDispatch={this.props.statusFilter}/>
+              <Dropdown  styleClass={'gorDataTableDrop'}  items={ordersByStatus} currentState={ordersByStatus[0]} optionDispatch={this.props.statusFilter} refreshList={this.props.refreshList}/>
           </div>
           <div className="gor-dropDown-secondInnerElement">                                                                  
-              <Dropdown  styleClass={'gorDataTableDrop'}  items={ordersByTime} currentState={ordersByTime[0]}  optionDispatch={this.props.timeFilter}/>
+              <Dropdown  styleClass={'gorDataTableDrop'}  items={ordersByTime} currentState={ordersByTime[0]}  optionDispatch={this.props.timeFilter} refreshList={this.props.refreshList}/>
             </div>
             </div> 
         <div className="gorFilter">
@@ -194,7 +194,7 @@ class OrderListTable extends React.Component {
               </div>
             </SortHeaderCell>
           }
-          cell={<StatusCell data={sortedDataList} ></StatusCell>}
+          cell={<StatusCell data={sortedDataList} statusKey="statusClass" ></StatusCell>}
           fixed={true}
           width={columnWidths.status}
           isResizable={true}

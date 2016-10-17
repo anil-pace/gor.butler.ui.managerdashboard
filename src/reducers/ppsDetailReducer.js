@@ -32,7 +32,6 @@ function processPPSData(data) {
       }
       detail.totalOperator = detail.totalOperator + data[i].operators_assigned.length;
       
-      console.log(data[i].operators_assigned)
     }
     PPSData.push(detail);
   }

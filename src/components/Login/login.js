@@ -1,7 +1,8 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import Footer from '../Footer/Footer';
-import { authLoginData,mockLoginAuth,setUsername } from '../../actions/loginAction';
+import Loader from '../../components/loader/Loader'
+import { authLoginData,mockLoginAuth,setUsername,setLoginLoader } from '../../actions/loginAction';
 import {validateID, validatePass, resetForm} from '../../actions/validationActions';
 import { connect } from 'react-redux';
 import {AUTH_LOGIN,ERROR} from '../../constants/appConstants'; 
@@ -83,6 +84,7 @@ class Login extends React.Component{
         sessionStorage.setItem('nextView', 'md');
         if(MOCK === false){
     	    this.props.setUsername(formdata.username);
+            this.props.setLoginLoader(true);
             this.props.authLoginData(loginData);
         }
         else{
@@ -104,8 +106,9 @@ class Login extends React.Component{
         let pwd=(<FormattedMessage id='login.form.password' defaultMessage="Password" description="Text for password"/>);
 
         return (
+            
             <div className='gor-login-form'>
-
+            <Loader isLoading={this.props.loginLoading} />
             <form action="#"  id = "loginForm" ref={node => { this.loginForm = node }} 
                 onSubmit={(e) => this._handleSubmit(e)}>
                 <div className='gor-login-lang'>
@@ -200,7 +203,8 @@ function mapStateToProps(state, ownProps){
         userName: state.authLogin.username,
         sLang: state.intl.locale,
         idInfo: state.appInfo.idInfo||{},
-        loginPassCheck: state.appInfo.loginPassInfo||{}              
+        loginPassCheck: state.appInfo.loginPassInfo||{},
+        loginLoading:state.loader.loginLoader           
     };
 }
 /**
@@ -217,7 +221,8 @@ var mapDispatchToProps = function(dispatch){
         validateID: function(data){ dispatch(validateID(data)); }, 
         setUsername: function(data){ dispatch(setUsername(data)); },        
         validatePass: function(data){ dispatch(validatePass(data)); },        
-        resetForm:   function(){ dispatch(resetForm()); }
+        resetForm:   function(){ dispatch(resetForm()); },
+        setLoginLoader:   function(data){ dispatch(setLoginLoader(data)); }
     }
 };
 

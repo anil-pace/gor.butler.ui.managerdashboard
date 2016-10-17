@@ -1,4 +1,4 @@
-import { DISPLAY_LOADER} from '../constants/appConstants'
+import { DISPLAY_LOADER,DISPLAY_LOGIN_LOADER} from '../constants/appConstants'
 /**
  * [loader reducer function to set isLoading state]
  * @param  {Object} state  [state tree of the current reducer]
@@ -11,6 +11,10 @@ export  function loader(state={},action){
 	  case DISPLAY_LOADER:
 	    return Object.assign({}, state, {
 	    	"isLoading":action.data
+      })
+	   case DISPLAY_LOGIN_LOADER:
+	    return Object.assign({}, state, {
+	    	"loginLoader":action.data
       })
 	    
 	  default:

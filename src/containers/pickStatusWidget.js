@@ -89,7 +89,7 @@ class PickStatusWidget extends React.Component{
             defaultMessage='Completing in {eta}' values={{eta:eta}}/>;
 
             statusright=<FormattedMessage id="widget.pick.statusright" description='Text for on schedule' 
-            defaultMessage='{wave_end}' values={{wave_end:ordersData.wave_end}}/>
+            defaultMessage='{wave_end}' values={{wave_end:ordersData.wave_end || ''}}/>
 
 
             if(!ordersData.count_risk)

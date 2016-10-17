@@ -22,10 +22,13 @@ class OrderSubTab extends React.Component{
     
 	render(){
 		var selectClass = {orderlist:"gorMainBlock", waves:"gorMainBlock"};
-		selectClass[this.props.subTab] = "gorMainBlockSelect";
-		console.log("sub tab --------")
+		if(this.props.subTab.length) {
+			selectClass[this.props.subTab] = "gorMainBlockSelect";
+		}
 
-		console.log(this.props.subTab)
+		else {
+			selectClass["waves"] = "gorMainBlockSelect";
+		}
 		return (
 			<div>
 				<div className="gorMainSubtab">

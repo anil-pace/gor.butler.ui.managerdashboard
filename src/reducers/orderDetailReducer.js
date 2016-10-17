@@ -8,10 +8,12 @@ function processOrders(data) {
 
       if(data[i].breached === false) {
         orderData.status = ordersStatus[data[i].status];
+        orderData.statusClass = data[i].status;
       }
 
       else {
-        orderData.status = "Breached";
+        orderData.status = ordersStatus[data[i].status];
+        orderData.statusClass = "breached";
       }
       orderData.recievedTime = data[i].create_time;
       if(data[i].pick_before_time === null) {

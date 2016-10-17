@@ -1,4 +1,4 @@
-import {receiveAuthData} from '../actions/loginAction';
+import {receiveAuthData,setLoginLoader} from '../actions/loginAction';
 import {recieveOrdersData} from '../actions/paginationAction';
 import {assignRole} from '../actions/userActions';
 import {recieveHeaderInfo} from '../actions/headerAction';
@@ -8,12 +8,15 @@ import {US001,US002,UE001,UE002,UE003,UE004,UE005,UE006,E028,E029,MODE_REQUESTED
 
 
 
+
 export function AjaxParse(store,res,cause)
 {
 	switch(cause)
 	{
 		case AUTH_LOGIN:
+			
 			store.dispatch(receiveAuthData(res));
+			store.dispatch(setLoginLoader(false));
 			break;
 
 
