@@ -75,36 +75,7 @@ class PickStatusWidget extends React.Component{
                                 throughput:pickThroughput
                             }}/>;            
 
-<<<<<<< e21d35aedf7bace3b7dae457bddef6b762ea96fc
-            headingright=<FormattedMessage id="widget.pick.headingright" description='Heading for cut-off time' 
-            defaultMessage='Time to cut-off'/>;
-            
-            remTime=this._toTime(ordersData.cut_off);
-
-            textright=<FormattedMessage id="widget.pick.textright" description='Time remaining' 
-            defaultMessage='{cut_off}' values={{cut_off:remTime}} />;
-
-
-            eta=this._toTime(ordersData.eta);
-            lowright=<FormattedMessage id="widget.pick.lowright" description='Estimated time' 
-            defaultMessage='Completing in {eta}' values={{eta:eta}}/>;
-
-            statusright=<FormattedMessage id="widget.pick.statusright" description='Text for on schedule' 
-            defaultMessage='{wave_end}' values={{wave_end:ordersData.wave_end || ''}}/>
-
-
-            if(!ordersData.count_risk)
-            {
-                statusClass='gor-success';
-                statusLogo='overview-tile-ontime-icon';
-                statusleft=<FormattedMessage id="widget.pick.statusleft.onschedule" description='Text for on schedule' 
-            defaultMessage='On Schedule'/>
-
-            }
-            else
-=======
             if(ordersData.wave_end)
->>>>>>> Tile2x bug fixes, constants used for URL
             {
                 headingright=<FormattedMessage id="widget.pick.headingright" description='Heading for cut-off time' 
                 defaultMessage='Time to cut-off'/>;
