@@ -25,17 +25,17 @@ class ButlerBot extends React.Component{
   			taskDetail[butlerData[i].taskType]++;
   		}
 
-  		if(taskDetail["msuMounted"] !== null) {
+  		if(butlerData[i].msu !== "--") {
   			taskDetail["msuMounted"]++;
   		}
 
-  		if(taskDetail["location"] !== null) {
+  		if(butlerData[i].location !== null) {
   			taskDetail["location"]++;
   		}
 
   	}
   	avgVoltage = ((avgVoltage/(butlerData.length)).toFixed(2));
-  	taskDetail["avgVoltage"]=avgVoltage;
+  	taskDetail["avgVoltage"]=avgVoltage + "V";
   }
   else {
   	taskDetail = {"put":"--", "pick":"--", "charging":"--", "idle":"--", "avgVoltage":"--", "msuMounted":"--", "location":"--"};

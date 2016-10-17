@@ -112,7 +112,7 @@ class ChargingStationsTable extends React.Component {
             <div className="searchbox-magnifying-glass-icon"/>
             <input className="gorInputFilter"
               onChange={this._onFilterChange}
-              placeholder="Filter by keywords">
+              placeholder="Filter by status and id">
             </input>
         </div>
         </div>
@@ -168,7 +168,7 @@ class ChargingStationsTable extends React.Component {
             <SortHeaderCell>
               <FormattedMessage id="ChargingStations.table.operatingMode" description="operatingMode for ChargingStations" 
               defaultMessage ="OPERATING MODE"/>
-              <div className="gorToolHeaderSubText"> MODE </div>
+              <div className="gorToolHeaderSubText"> Manual ({this.props.chargersState.manualMode}) . Auto ({this.props.chargersState.automaticMode}) </div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
@@ -180,9 +180,9 @@ class ChargingStationsTable extends React.Component {
           columnKey="dockedBots"
           header={
             <SortHeaderCell>
-              <FormattedMessage id="ChargingStations.table.operatingMode" description="operatingMode for ChargingStations" 
-              defaultMessage ="OPERATING MODE"/>
-              <div className="gorToolHeaderSubText"> {this.props.connectedBots} bots connected</div>
+              <FormattedMessage id="ChargingStations.table.connectedBots" description="connectedBots for ChargingStations" 
+              defaultMessage ="BOTS CONNECTED"/>
+              <div className="gorToolHeaderSubText"> {this.props.chargersState.connectedBots} bots connected</div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}

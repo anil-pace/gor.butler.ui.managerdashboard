@@ -20,6 +20,7 @@ class LogOut extends React.Component{
       sessionStorage.removeItem("nextView");
       sessionStorage.removeItem("subTab");
       sessionStorage.removeItem("selTab");
+      sessionStorage.removeItem("username");
   }  
   render()
   {

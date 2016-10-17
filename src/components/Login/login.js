@@ -1,7 +1,7 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import Footer from '../Footer/Footer';
-import { authLoginData,mockLoginAuth } from '../../actions/loginAction';
+import { authLoginData,mockLoginAuth,setUsername } from '../../actions/loginAction';
 import {validateID, validatePass, resetForm} from '../../actions/validationActions';
 import { connect } from 'react-redux';
 import {AUTH_LOGIN,ERROR} from '../../constants/appConstants'; 
@@ -82,7 +82,8 @@ class Login extends React.Component{
             }
         sessionStorage.setItem('nextView', 'md');
         if(MOCK === false){
-    	    this.props.authLoginData(loginData);
+    	    this.props.setUsername(formdata.username);
+            this.props.authLoginData(loginData);
         }
         else{
             this.props.mockLoginAuth(loginData);
@@ -213,7 +214,8 @@ var mapDispatchToProps = function(dispatch){
         authLoginData: function(params){ dispatch(authLoginData(params)); },
         updateIntl: function(params){ dispatch(updateIntl(params));},
         mockLoginAuth: function(params){ dispatch(mockLoginAuth(params)); },
-        validateID: function(data){ dispatch(validateID(data)); },        
+        validateID: function(data){ dispatch(validateID(data)); }, 
+        setUsername: function(data){ dispatch(setUsername(data)); },        
         validatePass: function(data){ dispatch(validatePass(data)); },        
         resetForm:   function(){ dispatch(resetForm()); }
     }

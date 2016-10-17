@@ -15,8 +15,8 @@ export function filterIndex(e,_dataList) {
      var size = _dataList.getSize();
      var filteredIndexes = [];
     for (var index = 0; index < size; index++) {
-      var {status} = _dataList.getObjectAt(index);
-      if (status.toLowerCase().indexOf(filterBy) !== -1) {
+      var {id,status} = _dataList.getObjectAt(index);
+      if (id.toLowerCase().indexOf(filterBy) !== -1 || status.toLowerCase().indexOf(filterBy) !== -1 ) {
         filteredIndexes.push(index);
       }
     }
@@ -87,9 +87,9 @@ export const ProgressCell = ({rowIndex, data, columnKey, ...props}) => (
   </Cell>
 );
 
-export const ComponentCell = ({rowIndex, data, columnKey,checkState, ...props}) => (
+export const ComponentCell = ({rowIndex, data, columnKey,checkState,checked, ...props}) => (
   
-  <Cell {...props}> <input type="checkbox" onChange={checkState.bind(this,columnKey,rowIndex,data.getObjectAt(rowIndex)[columnKey])}/>
+  <Cell {...props}> <input type="checkbox" checked={checked[rowIndex]} onChange={checkState.bind(this,columnKey,rowIndex,data.getObjectAt(rowIndex)[columnKey])}/>
     {data.getObjectAt(rowIndex)[columnKey]}
   </Cell>
 );
@@ -148,13 +148,13 @@ export class SortHeaderCell extends React.Component {
   _onSortChange(e) {
     e.preventDefault();
 
-    if (this.props.onSortChange) {
-      this.props.onSortChange(
+    // if (this.props.onClick) {
+      this.props.onClick(
         this.props.columnKey,
         this.props.sortDir ?
           reverseSortDirection(this.props.sortDir) :
           SortTypes.DESC
       );
-    }
+    // }
   }
 }

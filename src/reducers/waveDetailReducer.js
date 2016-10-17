@@ -10,7 +10,7 @@ function processWaveData(data) {
   if(data) {
      for (var i =data.length - 1; i >= 0; i--) {
       waveDetail = {};
-      waveDetail.waves = "WAVE-" + data[i].wave_id;
+      waveDetail.id = "WAVE-" + data[i].wave_id;
       waveDetail.status = data[i].status;
       if(data[i].start_time === "") {
         waveDetail.startTime = "--";
