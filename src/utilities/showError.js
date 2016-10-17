@@ -8,6 +8,7 @@ export function ShowError(store,cause)
 	{
 		case AUTH_LOGIN:
 			console.log('In Error utility');
+			store.dispatch(setLoginLoader(false));
 			store.dispatch(receiveAuthData());
 			break;
 		default:
