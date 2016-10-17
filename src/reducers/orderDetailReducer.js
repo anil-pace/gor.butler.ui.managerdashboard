@@ -1,17 +1,17 @@
 import {ORDER_RECIEVED} from '../constants/appConstants'; 
 
 function processOrders(data) {
-  var renderOrderData = [], orderData = {};
+  var renderOrderData = [], ordersStatus = {'pending':"Progress", "fulfillable": "Progress", "completed":"Completed", "not_fulfillable":"Unfulfillable"},orderData = {};
   if(data.length !== undefined) {
-    for (var i = data.length - 1; i >= 0; i--) {
+    for (var i =0; i < data.length; i++) {
       orderData.id = data[i].order_id;
 
       if(data[i].breached === false) {
-        orderData.status = data[i].status;
+        orderData.status = ordersStatus[data[i].status];
       }
 
       else {
-        orderData.status = "breached";
+        orderData.status = "Breached";
       }
       orderData.recievedTime = data[i].create_time;
       if(data[i].pick_before_time === null) {

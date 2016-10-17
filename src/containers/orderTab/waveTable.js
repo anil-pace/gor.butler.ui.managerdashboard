@@ -8,9 +8,14 @@ import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell
 class WavesTable extends React.Component {
   constructor(props) {
     super(props);
-    this._dataList = new tableRenderer(this.props.items.length);
+    if(this.props.items && this.props.items.length) {
+      this._dataList = new tableRenderer(this.props.items.length);
+    }
+    else {
+      this._dataList = new tableRenderer(0);
+    }
     this._defaultSortIndexes = [];
-    this._dataList.newData=this.props.items;
+    this._dataList.newData=this.props.items || [];
     var size = this._dataList.getSize();
     for (var index = 0; index < size; index++) {
       this._defaultSortIndexes.push(index);
@@ -20,7 +25,7 @@ class WavesTable extends React.Component {
       sortedDataList: this._dataList,
       colSortDirs: {},
       columnWidths: {
-        waves: columnWidth,
+        id: columnWidth,
         status: columnWidth,
         startTime: columnWidth,
         cutOffTime: columnWidth,
@@ -35,7 +40,12 @@ class WavesTable extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this._dataList = new tableRenderer(nextProps.items.length);
+    if(nextProps.items && nextProps.items.length) {
+      this._dataList = new tableRenderer(nextProps.items.length);
+    }
+    else {
+      this._dataList = new tableRenderer(0);
+    }
     this._defaultSortIndexes = [];
     this._dataList.newData=nextProps.items;
     var size = this._dataList.getSize();
@@ -47,7 +57,7 @@ class WavesTable extends React.Component {
       sortedDataList: this._dataList,
       colSortDirs: {},
       columnWidths: {
-        waves: columnWidth,
+        id: columnWidth,
         status: columnWidth,
         startTime: columnWidth,
         cutOffTime: columnWidth,
@@ -126,7 +136,7 @@ class WavesTable extends React.Component {
         height={heightRes}
         {...this.props}>
         <Column
-          columnKey="waves"
+          columnKey="id"
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.id}> 
@@ -138,7 +148,7 @@ class WavesTable extends React.Component {
           }
           cell={  <TextCell data={sortedDataList}/>}
           fixed={true}
-          width={columnWidths.waves}
+          width={columnWidths.id}
           isResizable={true}
         />
         <Column
@@ -151,9 +161,9 @@ class WavesTable extends React.Component {
               </div>
               <div>
               <div className="statuslogoWrap">
-              <div className="header-red-alert-icon gorToolHeaderEl"/>
+              <div className=" gorToolHeaderEl"/>
               </div>
-              <div className="gorToolHeaderEl alertState"> 3 Alerts</div>
+              <div className="gorToolHeaderEl alertState"> </div>
               </div>
             </SortHeaderCell>
           }
@@ -168,7 +178,7 @@ class WavesTable extends React.Component {
             <SortHeaderCell>
               <FormattedMessage id="butlerBot.table.startTime" description="StartTime for butlerbot" 
               defaultMessage ="START TIME"/>
-              <div className="gorToolHeaderSubText"> 4 waves pending</div>
+              <div className="gorToolHeaderSubText"> {this.props.waveState.pendingWave} waves pending</div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
@@ -182,7 +192,7 @@ class WavesTable extends React.Component {
             <SortHeaderCell>
                <FormattedMessage id="waves.table.cutOffTime" description="cutOffTime for waves" 
               defaultMessage ="CUT-OFF TIME"/> 
-              <div className="gorToolHeaderSubText">2 waves in progress</div>
+              <div className="gorToolHeaderSubText">{this.props.waveState.progressWave} waves in progress</div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
@@ -196,7 +206,7 @@ class WavesTable extends React.Component {
             <SortHeaderCell>
                <FormattedMessage id="butlerBot.table.ordersToFulfill" description="orders to fulfill for waves" 
               defaultMessage ="ORDERS TO FULFILL"/> 
-              <div className="gorToolHeaderSubText"> 11,013 remaining</div>
+              <div className="gorToolHeaderSubText"> {this.props.waveState.orderRemaining.toLocaleString()} remaining</div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
@@ -210,7 +220,7 @@ class WavesTable extends React.Component {
             <SortHeaderCell >
                <FormattedMessage id="waves.table.progress" description="progress for waves" 
               defaultMessage ="PROGRESS(%)"/>
-              <div className="gorToolHeaderSubText"> 6 waves completed </div> 
+              <div className="gorToolHeaderSubText"> {this.props.waveState.completedWaves} waves completed </div> 
             </SortHeaderCell>
           }
           cell={<ProgressCell data={sortedDataList}  />}
@@ -224,7 +234,7 @@ class WavesTable extends React.Component {
             <SortHeaderCell >
                <FormattedMessage id="waves.table.totalOrders" description="totalOrders for waves" 
               defaultMessage ="TOTAL ORDERS"/>
-              <div className="gorToolHeaderSubText"> 42,615 orders </div> 
+              <div className="gorToolHeaderSubText"> {this.props.waveState.totalOrders.toLocaleString()} orders </div> 
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList}  />}

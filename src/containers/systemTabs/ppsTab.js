@@ -17,7 +17,7 @@ class PPS extends React.Component{
     	super(props);
     }	
 	render(){	
-	var operationMode = {"pick":0, "put":0, "audit":0};
+	var operationMode = {"pick":0, "put":0, "audit":0,"notSet":0};
     var data = this.props.PPSDetail.PPStypeDetail, operatorNum = 0, itemNumber = 5;
     if(data && data.length) {
     	for (var i = data.length - 1; i >= 0; i--) {
@@ -30,6 +30,10 @@ class PPS extends React.Component{
     		operationMode[data[i].operatingMode] = operationMode[data[i].operatingMode] +1;
  	   }
  	}
+	}
+	else {
+		operationMode = {"pick":"--", "put":"--", "audit":"--","notSet":"--"};
+		operatorNum = "--";
 	}
 		return (
 			<div>

@@ -13,7 +13,7 @@ function processChargersData(data) {
     detail.id = "Charging Station " + data[i].charger_id;
     detail.status = status[data[i].charger_status];
     detail.mode = mode[data[i].charger_mode];
-    if(data[i].docked_butler_id !== null ) {
+    if(data[i].docked_butler_id !== null && data[i].docked_butler_id.length !== 0 ) {
        detail.dockedBots = "Butler " + data[i].docked_butler_id;
      }
 

@@ -1069,12 +1069,12 @@ body {
 
 .Order-Stats-Drop {
   width: 33%;
-  max-width: 268px;
+  max-width: 276px;
 }
 
 .Performance-Widget-Drop {
   width: 75%;
-  max-width: 260px;
+  max-width: 267px;
 }
 
 .axis path,
@@ -1800,6 +1800,16 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 }
 
 .Risk .public_fixedDataTableCell_cellContent {
+  background: #f99405;
+  border-radius: 15px;
+  text-align: center;
+  width: 52px;
+  color: #ffffff;
+  font-size: 12px;
+  max-height: 9px;
+}
+
+.Unfulfillable .public_fixedDataTableCell_cellContent {
   background: #f99405;
   border-radius: 15px;
   text-align: center;
@@ -3163,6 +3173,7 @@ progress::-moz-progress-bar {
 }
 
 #react-paginate {
+  display: inline-block;
   box-sizing: border-box;
 }
 
@@ -3170,7 +3181,6 @@ progress::-moz-progress-bar {
   display: inline-block;
   padding-left: 15px;
   padding-right: 15px;
-  margin: 20px 0;
   border-radius: 4px;
 }
 
@@ -3192,7 +3202,7 @@ progress::-moz-progress-bar {
   padding: 6px 12px;
   margin-left: -1px;
   line-height: 1.42857143;
-  color: #337ab7;
+  color: #A6A7A9;
   text-decoration: none;
   background-color: #fff;
   border: 1px solid #ddd;
@@ -3205,6 +3215,135 @@ progress::-moz-progress-bar {
 
 #react-paginate .break a {
   cursor: default;
+}
+
+.gor-paginate {
+  display: inline-block;
+  float: right;
+  padding-right: 30px;
+  padding-top: 10px;
+}
+
+.gor-pageNum {
+  display: inline-block;
+  padding-left: 30px;
+  padding-top: 10px;
+}
+
+.gor-Page-Drop {
+  display: inline-block;
+  width: 100%;
+  height: 1.875rem;
+  background: transparent;
+  text-align: left;
+}
+
+.gor-Page-Drop .Dropdown-root {
+  position: relative;
+}
+
+.gor-Page-Drop .Dropdown-control {
+  position: relative;
+  border: 1px solid;
+  border-radius: 0.1875rem;
+  box-sizing: border-box;
+  cursor: default;
+  outline: none;
+  padding: 0.5rem 3.25rem 0.5rem 0.625rem;
+  transition: all 200ms ease;
+  border-color: #aaaaaa;
+  font-size: 14px;
+  font-weight: 100;
+  color: #aaaaaa;
+}
+
+.gor-Page-Drop .Dropdown-arrow {
+  border-color: #A6A7A9 transparent transparent;
+  border-style: solid;
+  border-width: 0.5rem 0.3125rem 0.125rem;
+  content: ' ';
+  display: block;
+  height: 0;
+  margin-top: -ceil(2.5);
+  position: absolute;
+  right: 0.9375rem;
+  top: 0.6875rem;
+}
+
+.gor-Page-Drop .Dropdown-control:hover {
+  box-shadow: 0.125rem 0.125rem 0.125rem #888888;
+  border: 0.0625rem solid #ccc;
+}
+
+.gor-Page-Drop .is-open .Dropdown-arrow {
+  border-color: #FFFFFF transparent transparent;
+  border-style: solid;
+  border-width: 0.5rem 0.4375rem 0.1875rem;
+}
+
+.gor-Page-Drop .Dropdown-menu {
+  border: 1px solid;
+  border-radius: 3px;
+  box-shadow: 0 0.0625rem 0 rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
+  margin-top: -0.0625rem;
+  max-height: 12.5rem;
+  overflow-y: auto;
+  position: absolute;
+  bottom: 100%;
+  width: 100%;
+  z-index: 1000;
+  -webkit-overflow-scrolling: touch;
+  border-color: #aaaaaa;
+  font-size: 14px;
+  font-weight: 100;
+  color: #aaaaaa;
+  background: #ffffff;
+}
+
+.gor-Page-Drop .Dropdown-option {
+  box-sizing: border-box;
+  color: #A6A7A9;
+  cursor: pointer;
+  display: block;
+  padding: 0.5rem 0.625rem;
+}
+
+.gor-Page-Drop .Dropdown-option.is-selected {
+  font-weight: bold;
+}
+
+.gor-Page-Drop .Dropdown-option:hover {
+  color: #aaaaaa;
+  background: #F8F8F8;
+}
+
+.gor-Page-Drop .Dropdown-noresults {
+  box-sizing: border-box;
+  color: #ccc;
+  cursor: default;
+  display: block;
+  padding: 0.5rem 0.625rem;
+}
+
+.gor-paginate-state {
+  display: inline-block;
+  vertical-align: top;
+  padding-top: 11px;
+  color: #666666;
+}
+
+.gor-button-wrap {
+  display: inline-block;
+}
+
+.gor-button-sub-status {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 100;
+  color: #aaaaaa;
+  vertical-align: sub;
+  padding-left: 10px;
 }
 
 .gor-align-middle {

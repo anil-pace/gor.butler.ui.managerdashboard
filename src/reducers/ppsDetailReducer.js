@@ -8,14 +8,14 @@ function processPPSData(data) {
   for (var i = data.length - 1; i >= 0; i--) {
     var detail = {};
     detail.id = "PPS " + data[i].pps_id;
-    if(data[i].pps_status = "on") {
+    if(data[i].pps_status === "on") {
       detail.status = "On";
     }
     else {
       detail.status = "Off";
     }
     detail.operatingMode = data[i].current_task;
-    detail.performance = data[i].performance + " orders/hr";
+    detail.performance = data[i].performance + " orders/hr";///  orders /items
     if(detail.operatorAssigned === null) {
       detail.operatorAssigned = "--";
     }

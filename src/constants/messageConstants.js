@@ -8,3 +8,10 @@ export const UE003= "Password not provided!";
 export const UE004= "Passwords do not match!";
 export const UE005= "Username is a required field!";
 export const UE006= "Role is a required field!";
+
+//success realted to pps mode change
+export const MODE_REQUESTED = "PPS Mode Change Request Processed"
+
+//error related to pps mode change
+export const E028 = "Pps is already in requested mode";
+export const E029 = "Previous request of changing mode is already pending, Please try later!";
