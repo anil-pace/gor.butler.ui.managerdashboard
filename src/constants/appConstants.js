@@ -94,8 +94,10 @@ export const ADD_USER='ADD_USER';
 export const CHECK_ID='CHECK_ID';
 export const DELETE_USER='DELETE_USER';
 export const GET_ROLES='GET_ROLES';
+export const PPS_MODE_CHANGE = 'PPS_MODE_CHANGE';
 export const GET_HEADER_INFO = 'GET_HEADER_INFO';
 export const EDIT_USER='EDIT_USER';
+
 
 
 /*Constants for app info checking*/
@@ -120,7 +122,11 @@ export const SET_ROLE='SET_ROLE';
 export const PAGE_DATA = "PAGE_DATA";
 export const STATUS_FILTER = "STATUS_FILTER";
 export const TIME_FILTER = "TIME_FILTER"
-;
+export const GET_PAGE_SIZE = "GET_PAGE_SIZE";
+export const DEFAULT_PAGE_SIZE = "25";
+export const PAGE_FIELD = "?page=";
+export const GET_CURRENT_PAGE = "GET_CURRENT_PAGE";
+export const GET_LAST_REFRESH_TIME = "GET_LAST_REFRESH_TIME";
 /*Constants for Loader*/
 
 export const DISPLAY_LOADER = "DISPLAY_LOADER";
@@ -139,7 +145,9 @@ export const SYS_SUB_TAB_ROUTE_MAP={
 	[NOTIFICATION] : "notification",
 	[BUTLERBOTS]:"butlerbots",
 	[PPS]:"pps",
-	[CHARGING]:"chargingstation"
+	[CHARGING]:"chargingstation",
+	[WAVES]:"waves",
+	[ORDER_LIST]:"orderlist"
 
 }
 /*Constants for api response codes*/

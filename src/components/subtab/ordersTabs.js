@@ -6,25 +6,35 @@ import React  from 'react';
 import SubTab from './subTab';
 import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
-import {ORDER_LIST, WAVES} from '../../constants/appConstants';
+import {subTabSelected} from '../../actions/tabSelectAction'
+import {ORDER_LIST, WAVES,SYS_SUB_TAB_ROUTE_MAP} from '../../constants/appConstants';
 
 class OrderSubTab extends React.Component{
 	constructor(props) 
 	{
     	super(props);
     }
+
+    handleSysSubTabClick(tabName){
+      this.props.subTabSelected(SYS_SUB_TAB_ROUTE_MAP[tabName]);
+      sessionStorage.setItem("subTab",SYS_SUB_TAB_ROUTE_MAP[tabName])
+    }
     
 	render(){
-		var selectClass = {ORDER_LIST:"gorMainBlock", WAVES:"gorMainBlock"};
+		var selectClass = {orderlist:"gorMainBlock", waves:"gorMainBlock"};
+		selectClass[this.props.subTab] = "gorMainBlockSelect";
+		console.log("sub tab --------")
+
+		console.log(this.props.subTab)
 		return (
 			<div>
 				<div className="gorMainSubtab">
 					
-					<Link to="/waves">
-						<SubTab item={WAVES} changeClass={selectClass["WAVES"]}/> 
+					<Link to="/waves" onClick = {this.handleSysSubTabClick.bind(this,WAVES)}>
+						<SubTab item={WAVES} changeClass={selectClass["waves"]}/> 
 					</Link>
-					<Link to="/orderlist">
-						<SubTab item={ORDER_LIST} changeClass={selectClass["ORDER_LIST"]}/> 
+					<Link to="/orderlist" onClick = {this.handleSysSubTabClick.bind(this,ORDER_LIST)}>
+						<SubTab item={ORDER_LIST} changeClass={selectClass["orderlist"]}/> 
 					</Link>
 				</div>
 			</div>
@@ -35,10 +45,16 @@ class OrderSubTab extends React.Component{
 function mapStateToProps(state, ownProps){
     
     return  {
-         subTab:state.subTabSelected || {},
+         subTab:state.tabSelected.subTab || {},
          tab:state.tabSelected.tab
     }
 }
 
-export default (OrderSubTab) ;
+var mapDispatchToProps = function(dispatch){
+	return {
+		subTabSelected: function(data){ dispatch(subTabSelected(data)); }
+	}
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(OrderSubTab) ;
 

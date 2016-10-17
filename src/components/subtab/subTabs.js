@@ -58,7 +58,7 @@ class SystemTab extends React.Component{
 }
 
 function mapStateToProps(state, ownProps){
-    console.log(state)
+    // console.log(state)
     return  {
          subTab:state.tabSelected.subTab || {},
          tab:state.tabSelected.tab || {}

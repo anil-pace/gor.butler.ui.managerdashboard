@@ -13,5 +13,10 @@
     "id": "ChargingStations.table.operatingMode",
     "description": "operatingMode for ChargingStations",
     "defaultMessage": "OPERATING MODE"
+  },
+  {
+    "id": "ChargingStations.table.connectedBots",
+    "description": "connectedBots for ChargingStations",
+    "defaultMessage": "BOTS CONNECTED"
   }
 ]
