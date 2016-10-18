@@ -8,5 +8,10 @@
     "id": "login.form.password",
     "description": "Placeholder text for password",
     "defaultMessage": "Password"
+  },
+  {
+    "id": "login.form.button",
+    "description": "Text for button",
+    "defaultMessage": "Login"
   }
 ]
