@@ -13,7 +13,7 @@ class ChartHorizontal extends React.Component{
    this.state = {d3: ''}
  }
  
-graphRender(containerWidth,tData,nextP){
+graphRender(containerWidth,tData,nextP,performanceParam){
 var component = this;
   var widther = containerWidth;
   var parentHeight = 300;
@@ -140,7 +140,7 @@ var chart = d3.select(node).append('svg')
    chart.append("text")
             .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
             .attr("transform", "translate("+ (width/2+30) +","+(-7)+")")  // centre below axis
-            .text("Orders/hr")
+            .text(performanceParam)
             .style("font-size","12px")
             .style("font-family","sans-serif")
             .style("fill","#666666");
@@ -152,11 +152,11 @@ var chart = d3.select(node).append('svg')
  
 }
 componentDidMount(){
-    this.graphRender(this.props.containerWidth,this.props.data.ppsPerformance.aggregate_data,this.props.type);
+    this.graphRender(this.props.containerWidth,this.props.data.ppsPerformance.aggregate_data,this.props.type,this.props.performanceParam);
   }
 
    componentWillReceiveProps(nextProps){
-    this.graphRender(nextProps.containerWidth,nextProps.data.ppsPerformance.aggregate_data,nextProps.type);
+    this.graphRender(nextProps.containerWidth,nextProps.data.ppsPerformance.aggregate_data,nextProps.type,nextProps.performanceParam);
   }
 render() {
  return (

@@ -850,7 +850,7 @@ export const resTypeUsersDetails = {
 		"user_name": "Ajay Singh",
 		"login_time": "2016-10-05 18:20:33.372221",
 		"role": "manager",
-		"status": true,
+		"logged_in": true,
 		"pps": {
 			"pps_id": 1,
 			"seat_type": "back",

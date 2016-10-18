@@ -1,6 +1,7 @@
 import React from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
 import {modal} from 'react-redux-modal';
+import { FormattedMessage } from 'react-intl';
 
 export var SortTypes = {
   ASC: 'ASC',
@@ -63,12 +64,12 @@ export const ActionCell = ({rowIndex, data, columnKey,selEdit,selDel, ...props})
   <Cell {...props}>
     <div className="gor-user-Logo-wrap">
       <button onClick={selEdit.bind(this,columnKey,rowIndex)}>
-        <div className="user-edit-icon" />
+        <div className="user-edit-icon" /><span>Edit</span>
       </button>
     </div>
     <div className="gor-user-Logo-wrap">
       <button onClick={selDel.bind(this,columnKey,rowIndex)} >
-        <div className="user-del-icon" />
+        <div className="user-del-icon" /><span>Delete</span>
       </button>
     </div>  
   </Cell>
@@ -148,13 +149,13 @@ export class SortHeaderCell extends React.Component {
   _onSortChange(e) {
     e.preventDefault();
 
-    // if (this.props.onClick) {
-      this.props.onClick(
+    
+      this.props.onSortChange(
         this.props.columnKey,
         this.props.sortDir ?
           reverseSortDirection(this.props.sortDir) :
           SortTypes.DESC
       );
-    // }
+    
   }
 }
