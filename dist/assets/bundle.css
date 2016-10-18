@@ -1152,6 +1152,14 @@ body {
   stroke-width: 0.0625rem;
 }
 
+.gor-tip-wrap {
+  background: #323539;
+  color: #ffffff;
+  padding: 10px 30px 10px 10px;
+  border-radius: 5%;
+  font-size: 14px;
+}
+
 .rect {
   fill: #ffffff;
   opacity: 0.5;

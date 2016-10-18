@@ -125,7 +125,7 @@ class ChargingStationsTable extends React.Component {
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
         width={this.props.containerWidth}
-        height={500}
+        height={560}
         {...this.props}>
         <Column
           columnKey="id"
@@ -146,7 +146,8 @@ class ChargingStationsTable extends React.Component {
         <Column
           columnKey="status"
           header={
-            <SortHeaderCell>
+            <SortHeaderCell onSortChange={this._onSortChange}
+              sortDir={colSortDirs.status}>
               <FormattedMessage id="ChargingStations.table.STATUS" description="STATUS for ChargingStations" 
               defaultMessage ="STATUS"/>
               <div className="gorToolHeaderSubText">  </div>
