@@ -1,6 +1,6 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-import {RECIEVE_HEADER,REQUEST_HEADER,RECIEVE,RECIEVE_ITEM_TO_STOCK,USER_ROLE_MAP} from '../../constants/appConstants';
+import {RECIEVE_HEADER,HEADER_START_TIME,REQUEST_HEADER,RECIEVE,RECIEVE_ITEM_TO_STOCK,USER_ROLE_MAP} from '../../constants/appConstants';
 import {HEADER_URL} from '../../constants/configConstants'
 import {modal} from 'react-redux-modal';
 import { getHeaderInfo } from '../../actions/headerAction';
@@ -49,12 +49,13 @@ class Header extends React.Component{
     });
    }
   _processData(){
-  	var headerInfo;
+  	var headerInfo={};
   	if(this.props.headerInfo && this.props.headerInfo.users.length){
   		 headerInfo= Object.assign({},this.props.headerInfo)
   		headerInfo.fullName = headerInfo.users[0].first_name +' '+ headerInfo.users[0].last_name;
   		headerInfo.designation = USER_ROLE_MAP[headerInfo.users[0].roles[0]] || '';
   	}
+  	headerInfo.start= HEADER_START_TIME
   	return headerInfo
   }
 
@@ -79,7 +80,7 @@ class Header extends React.Component{
 					<FormattedMessage id="header.start_time" description='Start time ' 
         					defaultMessage='Start time:{time} '
         					values={{
-						        time: 'fsfsf',
+						        time: headerInfo.start,
 						    }}/>
 					</div>
 				</div>

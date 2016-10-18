@@ -5,6 +5,7 @@ import {userRequest} from '../../actions/userActions';
 import {validateName, validatePassword, resetForm} from '../../actions/validationActions';
 import { connect } from 'react-redux';
 import {ERROR,GET_ROLES,EDIT_USER,SUCCESS} from '../../constants/appConstants';
+import {ROLE_URL,HEADER_URL} from '../../constants/configConstants';
 import FieldError from '../../components/fielderror/fielderror';
 import RadioGroup from './radioGroup';
 
@@ -15,7 +16,7 @@ class EditUser extends React.Component{
   }
   componentDidMount(){
         let userData={
-                'url':'https://192.168.8.118/api/role',
+                'url':ROLE_URL,
                 'method':'GET',
                 'cause':GET_ROLES,
                 'contentType':'application/json',
@@ -75,7 +76,7 @@ class EditUser extends React.Component{
                     "password_confirm": pwd2     
 
          };
-        let editurl="https://192.168.8.118/api/user/"+this.props.id+"/edit";
+        let editurl=HEADER_URL+'/'+this.props.id+"/edit";
         let userData={
                 'url':editurl,
                 'formdata':formdata,
@@ -95,9 +96,9 @@ class EditUser extends React.Component{
         <div>
           <div className="gor-modal-content">
             <div className='gor-modal-head'>
-              <div className='gor-usr-add'><FormattedMessage id="users.edit.heading" description='Heading for Add new user' 
+              <div className='gor-usr-add'><FormattedMessage id="users.edit.heading" description='Heading for Edit user' 
             defaultMessage='Edit user'/>
-                          <div className='gor-sub-head'><FormattedMessage id="users.edit.subheading" description='Subheading for add new user' 
+                          <div className='gor-sub-head'><FormattedMessage id="users.edit.subheading" description='Subheading for Edit user' 
             defaultMessage='All the fields are mandatory'/></div>
               </div>
               <span className="close" onClick={this.removeThisModal.bind(this)}>×</span>

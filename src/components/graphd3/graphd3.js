@@ -79,6 +79,10 @@ class Chart extends React.Component{
         update(data);
       }
     function update(data) {
+
+      var m_names = new Array("Jan", "Feb", "March", 
+"April", "May", "June", "July", "Aug", "Sep", 
+"Oct", "Nov", "Dec"); 
       data.forEach(function(d) {
         d.type = +d.type;
      });
@@ -144,7 +148,7 @@ class Chart extends React.Component{
         .classed("hover", true)
         .attr("stroke", "#045A8D")
         .attr("stroke-width", "0.5px");
-        d3.select('.remove').html( "<div style='background: grey'> Time:<div/><div> 27 Jul,2016</div> <div style='color: black'> Fulfilled:</div>" ).style("visibility", "visible");
+        d3.select('.remove').html( "<div style='background:#4d5055; color:#ffffff; padding:10px 30px 10px 10px; border-radius:5%; font-size:14px;'> <div/>"+ d.timeInterval + ":00 - " + (d.timeInterval+1) +":00 <div style='color: #ffffff; padding-top:2px;'> "+ (new Date()).getDate() + " " + m_names[(new Date()).getMonth()] +",2016</div> <div style='color: #ffffff; display:inline-block; padding-top:10px; font-size:14px;'> Fulfilled:" + d.type.toLocaleString() + "</div>" ).style("visibility", "visible");
       })
       .on("mouseout", function(d, i) {
        d3.selectAll(".layer")
@@ -167,10 +171,10 @@ class Chart extends React.Component{
     
       d3.select(node).selectAll('svg')
         .data(data)
-        .on("mousemove", function(){  
+        .on("mousemove", function(d,i){  
            var mouse = d3.mouse(this);
            var mousex = mouse[0] + 10;
-           var mousey =  mouse[1] + 200; 
+           var mousey =  mouse[1] + 300; 
            d3.selectAll('.remove').style("left", mousex + "px" );
            d3.selectAll('.remove').style("top", + mousey + "px" );
          })

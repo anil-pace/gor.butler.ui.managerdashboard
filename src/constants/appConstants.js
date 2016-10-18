@@ -170,3 +170,6 @@ export const USER_ROLE_MAP ={
 
 }
 
+/*Constant for time on header*/
+export const HEADER_START_TIME = '09:00 AM'
+
