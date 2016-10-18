@@ -1,0 +1,37 @@
+[
+  {
+    "id": "waves.table.heading",
+    "description": "Heading for waves",
+    "defaultMessage": "Waves"
+  },
+  {
+    "id": "waves.table.status",
+    "description": "Status for waves",
+    "defaultMessage": "STATUS"
+  },
+  {
+    "id": "butlerBot.table.startTime",
+    "description": "StartTime for butlerbot",
+    "defaultMessage": "START TIME"
+  },
+  {
+    "id": "waves.table.cutOffTime",
+    "description": "cutOffTime for waves",
+    "defaultMessage": "CUT-OFF TIME"
+  },
+  {
+    "id": "butlerBot.table.ordersToFulfill",
+    "description": "orders to fulfill for waves",
+    "defaultMessage": "ORDERS TO FULFILL"
+  },
+  {
+    "id": "waves.table.progress",
+    "description": "progress for waves",
+    "defaultMessage": "PROGRESS(%)"
+  },
+  {
+    "id": "waves.table.totalOrders",
+    "description": "totalOrders for waves",
+    "defaultMessage": "TOTAL ORDERS"
+  }
+]

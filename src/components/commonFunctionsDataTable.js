@@ -1,5 +1,7 @@
 import React from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
+import {modal} from 'react-redux-modal';
+import { FormattedMessage } from 'react-intl';
 
 export var SortTypes = {
   ASC: 'ASC',
@@ -14,8 +16,8 @@ export function filterIndex(e,_dataList) {
      var size = _dataList.getSize();
      var filteredIndexes = [];
     for (var index = 0; index < size; index++) {
-      var {status} = _dataList.getObjectAt(index);
-      if (status.toLowerCase().indexOf(filterBy) !== -1) {
+      var {id,status} = _dataList.getObjectAt(index);
+      if (id.toLowerCase().indexOf(filterBy) !== -1 || status.toLowerCase().indexOf(filterBy) !== -1 ) {
         filteredIndexes.push(index);
       }
     }
@@ -57,6 +59,21 @@ export class DataListWrapper {
     );
   }
 }
+ 
+export const ActionCell = ({rowIndex, data, columnKey,selEdit,selDel, ...props}) => (
+  <Cell {...props}>
+    <div className="gor-user-Logo-wrap">
+      <button onClick={selEdit.bind(this,columnKey,rowIndex)}>
+        <div className="user-edit-icon" /><span>Edit</span>
+      </button>
+    </div>
+    <div className="gor-user-Logo-wrap">
+      <button onClick={selDel.bind(this,columnKey,rowIndex)} >
+        <div className="user-del-icon" /><span>Delete</span>
+      </button>
+    </div>  
+  </Cell>
+);
 
 export const TextCell = ({rowIndex, data, columnKey, ...props}) => (
   <Cell {...props}>
@@ -64,15 +81,22 @@ export const TextCell = ({rowIndex, data, columnKey, ...props}) => (
   </Cell>
 );
 
-export const ComponentCell = ({rowIndex, data, columnKey,checkState, ...props}) => (
+export const ProgressCell = ({rowIndex, data, columnKey, ...props}) => (
+  <Cell {...props}>
+  <progress className="gorProgressBar" max="100" value={data.getObjectAt(rowIndex)[columnKey]}/>
+    <div className="gorProgressBarLabel">{ data.getObjectAt(rowIndex)[columnKey]}% </div>
+  </Cell>
+);
+
+export const ComponentCell = ({rowIndex, data, columnKey,checkState,checked, ...props}) => (
   
-  <Cell {...props}> <input type="checkbox" onChange={checkState.bind(this,columnKey,rowIndex)}/>
+  <Cell {...props}> <input type="checkbox" checked={checked[rowIndex]} onChange={checkState.bind(this,columnKey,rowIndex,data.getObjectAt(rowIndex)[columnKey])}/>
     {data.getObjectAt(rowIndex)[columnKey]}
   </Cell>
 );
 
-export const StatusCell = ({rowIndex, data, columnKey, ...props}) => (
-  <Cell {...props} className={data.getObjectAt(rowIndex)[columnKey]}>
+export const StatusCell = ({rowIndex, data, columnKey,statusKey, ...props}) => (
+  <Cell {...props} className={data.getObjectAt(rowIndex)[statusKey]}>
     {data.getObjectAt(rowIndex)[columnKey]}
   </Cell>
 );
@@ -125,13 +149,13 @@ export class SortHeaderCell extends React.Component {
   _onSortChange(e) {
     e.preventDefault();
 
-    if (this.props.onSortChange) {
+    
       this.props.onSortChange(
         this.props.columnKey,
         this.props.sortDir ?
           reverseSortDirection(this.props.sortDir) :
           SortTypes.DESC
       );
-    }
+    
   }
 }

@@ -1,5 +1,4 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import Health from './health';
 
 class HealthTabs extends React.Component{
@@ -16,5 +15,5 @@ class HealthTabs extends React.Component{
 			</div>
 		);
 	}
-};
+}
 export default HealthTabs ;

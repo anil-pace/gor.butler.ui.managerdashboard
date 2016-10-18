@@ -1,7 +1,7 @@
 @import '../abstracts/functions';
 .gor-footer{
 	background:#4D5055;
-	color:#A6A7A9;
+	color:#CCCCCC;
 	border-top:solid 1px #cccccc;
 	text-align:center;
 	position:fixed;
@@ -9,4 +9,6 @@
 	min-height:calculateRem(10px);
 	padding:1%;
 	width:95%;
+	font-family:'Source Sans Pro Regular', sans-serif;
+	font-size:14px;
 }

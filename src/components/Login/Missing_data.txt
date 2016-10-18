@@ -1,6 +1,0 @@
-#Login page
--> GOR logo
--> Butler logo
--> Username logo
--> Password logo
--> Version

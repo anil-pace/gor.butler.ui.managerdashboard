@@ -1,6 +1,7 @@
 import * as mockData from '../../mock/mockDBData';
-import {WS_MOCK} from '../constants/appConstants';
+import {WS_MOCK,ADD_USER} from '../constants/appConstants';
 import {ResponseParse} from '../utilities/responseParser';
+import {AjaxParse} from '../utilities/AjaxParser';
 
 
 const mockMiddleware = (function(){ 
@@ -9,7 +10,6 @@ const mockMiddleware = (function(){
       
       case WS_MOCK:
         //var msg = JSON.parse(evt.data);
-        ResponseParse(store,mockData.resTypePPS); 
         ResponseParse(store,mockData.resTypePut); 
         ResponseParse(store,mockData.resTypeThroughPut);
         ResponseParse(store,mockData.resTypeAudit);
@@ -19,6 +19,8 @@ const mockMiddleware = (function(){
         ResponseParse(store,mockData.resTypePPSdetail);  
         ResponseParse(store,mockData.resTypeOrders);
         ResponseParse(store,mockData.resTypePPSperformance);
+        ResponseParse(store,mockData.resTypeUsersDetails);
+        AjaxParse(store,mockData.resTypeNotify,ADD_USER);
         break;
       //This action is irrelevant to us, pass it on to the next middleware
       default:

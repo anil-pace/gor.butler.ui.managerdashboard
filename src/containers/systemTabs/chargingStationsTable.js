@@ -8,10 +8,11 @@ import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell
 class ChargingStationsTable extends React.Component {
   constructor(props) {
     super(props);
-    var temp = new Array(this.props.items.length).fill(false);
-    this._dataList = new tableRenderer(this.props.items.length);
+    var items = this.props.items || [];
+    var temp = new Array(items ? items.length : 0).fill(false);
+    this._dataList = new tableRenderer(items ? items.length : 0);
     this._defaultSortIndexes = [];
-    this._dataList.newData=this.props.items;
+    this._dataList.newData=items;
     var size = this._dataList.getSize();
     for (var index = 0; index < size; index++) {
       this._defaultSortIndexes.push(index);
@@ -23,6 +24,34 @@ class ChargingStationsTable extends React.Component {
       columnWidths: {
         id: columnWidth,
         status: columnWidth,
+        mode: columnWidth,
+        dockedBots: columnWidth
+      },
+      
+    };
+    this._onSortChange = this._onSortChange.bind(this);
+    this._onFilterChange = this._onFilterChange.bind(this);
+    this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    var items = nextProps.items || [];
+    var temp = new Array(items ? items.length : 0).fill(false);
+    this._dataList = new tableRenderer(items ? items.length : 0);
+    this._defaultSortIndexes = [];
+    this._dataList.newData=items;
+    var size = this._dataList.getSize();
+    for (var index = 0; index < size; index++) {
+      this._defaultSortIndexes.push(index);
+    }
+    var columnWidth= (nextProps.containerWidth/nextProps.itemNumber)
+    this.state = {
+      sortedDataList: this._dataList,
+      colSortDirs: {},
+      columnWidths: {
+        id: columnWidth,
+        status: columnWidth,
+        mode: columnWidth,
         dockedBots: columnWidth
       },
       
@@ -83,7 +112,7 @@ class ChargingStationsTable extends React.Component {
             <div className="searchbox-magnifying-glass-icon"/>
             <input className="gorInputFilter"
               onChange={this._onFilterChange}
-              placeholder="Filter by keywords">
+              placeholder="Filter by status and id">
             </input>
         </div>
         </div>
@@ -96,7 +125,7 @@ class ChargingStationsTable extends React.Component {
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
         width={this.props.containerWidth}
-        height={500}
+        height={560}
         {...this.props}>
         <Column
           columnKey="id"
@@ -114,14 +143,47 @@ class ChargingStationsTable extends React.Component {
           width={columnWidths.id}
           isResizable={true}
         />
-        
         <Column
-          columnKey="dockedBots"
+          columnKey="status"
+          header={
+            <SortHeaderCell onSortChange={this._onSortChange}
+              sortDir={colSortDirs.status}>
+              <FormattedMessage id="ChargingStations.table.STATUS" description="STATUS for ChargingStations" 
+              defaultMessage ="STATUS"/>
+              <div className="gorToolHeaderSubText">  </div>
+               <div>
+              <div className="statuslogoWrap">
+              </div>
+              </div>
+            </SortHeaderCell>
+          }
+           cell={<StatusCell data={sortedDataList} statusKey="statusClass" ></StatusCell>}
+          fixed={true}
+          width={columnWidths.status}
+          isResizable={true}
+        />
+
+         <Column
+          columnKey="mode"
           header={
             <SortHeaderCell>
               <FormattedMessage id="ChargingStations.table.operatingMode" description="operatingMode for ChargingStations" 
               defaultMessage ="OPERATING MODE"/>
-              <div className="gorToolHeaderSubText"> {this.props.connectedBots} bots connected</div>
+              <div className="gorToolHeaderSubText"> Manual ({this.props.chargersState.manualMode}) . Auto ({this.props.chargersState.automaticMode}) </div>
+            </SortHeaderCell>
+          }
+          cell={<TextCell data={sortedDataList} />}
+          fixed={true}
+          width={columnWidths.mode}
+          isResizable={true}
+        />
+        <Column
+          columnKey="dockedBots"
+          header={
+            <SortHeaderCell>
+              <FormattedMessage id="ChargingStations.table.connectedBots" description="connectedBots for ChargingStations" 
+              defaultMessage ="BOTS CONNECTED"/>
+              <div className="gorToolHeaderSubText"> {this.props.chargersState.connectedBots} bots connected</div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}

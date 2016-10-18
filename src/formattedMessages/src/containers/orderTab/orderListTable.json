@@ -1,0 +1,32 @@
+[
+  {
+    "id": "order.table.heading",
+    "description": "Heading for order list",
+    "defaultMessage": "OrderList"
+  },
+  {
+    "id": "orderList.table.status",
+    "description": "Status for orders",
+    "defaultMessage": "STATUS"
+  },
+  {
+    "id": "waves.table.pickBy",
+    "description": "pick by for waves",
+    "defaultMessage": "PICK BY"
+  },
+  {
+    "id": "orderlist.table.operatingMode",
+    "description": "recievedTime for Orders",
+    "defaultMessage": "RECIEVED TIME"
+  },
+  {
+    "id": "waves.table.completedTime",
+    "description": "completedTime for waves",
+    "defaultMessage": "COMPLETED"
+  },
+  {
+    "id": "waves.table.orderLine",
+    "description": "orderLine for waves",
+    "defaultMessage": "ORDER LINE"
+  }
+]

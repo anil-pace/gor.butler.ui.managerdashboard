@@ -1,6 +1,7 @@
 
 
-
+.user-edit-icon,
+.user-del-icon,
 .dropdown-arrow-icon,
 .searchbox-cross-icon,
 .searchbox-magnifying-glass-icon,
@@ -19,14 +20,8 @@
 .header-online-icon,
 .header-offline-icon,
 .user-icon,
-.cbs-overview-pick,
-.cbs-overview-audit,
-.cbs-overview-put,
-.cbs-overview-rejection,
-.cbs-overview-chutes,
-.cbs-overview-casket,
 .overview-tile-ontime-icon,
-.cbs-overview-inducts,.statusOl,.statusAl,.iStock ,.iAudit,.iPick,.gor-login-user,.gor-login-password,.gor-login-error,.iTick,.iQuestion{
+.statusOl,.statusAl,.iStock ,.iAudit,.iPick,.gor-login-user,.gor-login-password,.gor-login-error,.iTick,.iQuestion,.iTick-white,.iError-white,.gor-login-user-error,.gor-login-password-error{
     background-image: url(images/icons.svg);
 }
 .fk-logo,
@@ -40,11 +35,25 @@
     height:16px;    
     display:inline-block;
 }
+.gor-login-user-error{
+    background-position:-307px -77px;
+    width:16px;
+    height:16px;    
+    display:inline-block;
+    vertical-align:middle;    
+}
 .gor-login-password{
     background-position:-223px -77px;
     width:16px;
     height:16px;    
     display:inline-block;
+}
+.gor-login-password-error{
+    background-position:-325px -77px;
+    width:16px;
+    height:16px;    
+    display:inline-block;
+    vertical-align:middle;
 }
 .gor-login-error{
     background-position:-18px -78px;
@@ -52,6 +61,7 @@
     height:16px;    
     display:inline-block;
     vertical-align:middle;
+    margin-right:10px;
 }
 .alt-gor-logo{
     background-image: url(images/Logos.svg);    
@@ -156,9 +166,26 @@ background-position: -101px -52px;
  background-position: -26px -52px;
     width:24px;
     height:24px;
-    margin-left:20px;
+    margin-top:9px;
+    margin-left:15px;
     display:inline-block;
     vertical-align:middle;
+}
+.iTick-white{
+    background-position: -151px -52px;
+    width:24px;
+    height:24px;
+    margin-right:15px;
+    display:inline-block;
+    vertical-align:middle;    
+}
+.iError-white{
+    background-position: -126px -52px;
+    width:24px;
+    height:24px;
+    margin-right:15px;
+    display:inline-block;
+    vertical-align:middle;        
 }
 .iQuestion{
     background-position: -409px -1px;
@@ -166,5 +193,19 @@ background-position: -101px -52px;
     height:50px;
     margin-right:20px;
     display:inline-block;
-    vertical-align:middle;
+}
+
+.user-edit-icon {
+    background-position: -171px 42px;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    display:inline-block;
+}
+.user-del-icon {
+    background-position: -188px -75px;
+    width: 16px;
+    height: 18px;
+    cursor: pointer;
+    display:inline-block;
 }

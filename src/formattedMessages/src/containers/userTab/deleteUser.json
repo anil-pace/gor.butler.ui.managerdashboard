@@ -1,0 +1,7 @@
+[
+  {
+    "id": "users.delete.heading",
+    "description": "Text for user delete heading",
+    "defaultMessage": "Information related to the user will be lost"
+  }
+]

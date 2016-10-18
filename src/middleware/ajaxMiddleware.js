@@ -1,5 +1,5 @@
-import {AJAX_CALL,MOCK_LOGIN} from '../constants/appConstants'
-import {AjaxParse} from '../utilities/ajaxParser';
+import {AJAX_CALL,MOCK_LOGIN,AUTH_LOGIN} from '../constants/appConstants';
+import {AjaxParse} from '../utilities/AjaxParser';
 import {ShowError} from '../utilities/showError';
 
 const ajaxMiddleware = (function(){ 
@@ -20,8 +20,8 @@ const ajaxMiddleware = (function(){
 
     var params=action.params;
 
-    var formData = params.formdata || null,
-    loginData=JSON.stringify(formData || {});
+    var formData = params.formdata || params || null,
+    loginData= params.formdata? JSON.stringify(params.formdata):null;
     var httpRequest = new XMLHttpRequest();
 
     if (!httpRequest || !params.url) {
@@ -32,16 +32,23 @@ const ajaxMiddleware = (function(){
         if (httpRequest.status === 200) {
               var response=JSON.parse(httpRequest.response);
               AjaxParse(store,response,params.cause);
-        } 
+        }
+        else if(httpRequest.status === 400){
+          console.log('Request not processed');
+          var response=JSON.parse(httpRequest.response);
+          AjaxParse(store,response,params.cause);          
+        }
         else
         {
-          console.log('Connection refused');
           ShowError(store,params.cause);
         }        
      }
     };
     httpRequest.open(params.method, params.url);
     httpRequest.setRequestHeader('Content-Type', params.contentType || "text/html");
+    httpRequest.setRequestHeader('Accept', params.accept || "text/html");
+    if(params.cause!==AUTH_LOGIN)
+      httpRequest.setRequestHeader('Authentication-Token', params.token);
     httpRequest.send(loginData);
     break;
 

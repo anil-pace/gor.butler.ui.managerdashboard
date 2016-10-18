@@ -11,8 +11,13 @@
   },
   {
     "id": "widget.pick.status.idle",
-    "description": "Throughput message",
-    "defaultMessage": "{count} PPS idle"
+    "description": "PPS Offline",
+    "defaultMessage": "Offline"
+  },
+  {
+    "id": "widget.pick.status.starting",
+    "description": "Awaiting throughput data",
+    "defaultMessage": "Starting..."
   },
   {
     "id": "widget.pick.throughput",
@@ -36,7 +41,7 @@
   },
   {
     "id": "widget.pick.statusright",
-    "description": "Text for on schedule",
+    "description": "Text for wave end time",
     "defaultMessage": "{wave_end}"
   },
   {

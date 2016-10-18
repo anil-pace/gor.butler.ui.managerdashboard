@@ -14,20 +14,28 @@ class ChargingStations extends React.Component{
     }	
 	render(){
 	
-	var itemNumber = 2, connectedBots = 0;
+	var itemNumber = 4, connectedBots = 0, manualMode = 0, automaticMode = 0, chargersState = {"connectedBots": "--","manualMode": "--", "automaticMode":"--"};
     var chargersData =  this.props.chargersDetail.chargersDetail;
-    if(chargersData.length) {
+    if(chargersData && chargersData.length) {
     	for (var i = chargersData.length - 1; i >= 0; i--) {
-        	if(chargersData[i].dockedBots) {
+        	if(chargersData[i].dockedBots !== "--") {
         		connectedBots++;
       		}
+
+      		if(chargersData[i].mode === "Manual") {
+      			manualMode++;
+      		}
+      		else{
+      			automaticMode++;
+      		}
     	}
+    	chargersState = {"connectedBots": connectedBots,"manualMode": manualMode, "automaticMode":automaticMode};
 	}
 		return (
 			<div>
 				<div>
 					<div>
-						<ChargingStationsTable items={this.props.chargersDetail.chargersDetail} itemNumber={itemNumber} connectedBots={connectedBots}/>
+						<ChargingStationsTable items={this.props.chargersDetail.chargersDetail} itemNumber={itemNumber} chargersState={chargersState}/>
 					</div>
 				</div>
 			</div>
@@ -37,7 +45,7 @@ class ChargingStations extends React.Component{
 
 function mapStateToProps(state, ownProps){
   return {
-    chargersDetail: state.chargersDetail || {}
+    chargersDetail: state.chargersDetail || [],
   };
 }
 

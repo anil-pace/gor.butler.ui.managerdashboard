@@ -1,20 +1,32 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import Dropdown from '../components/dropdown/dropdown.js';
 import { connect } from 'react-redux';
 import Chart from '../components/graphd3/graphd3';
-import {renderStatsWidget} from '../actions/statsWidgetActions'
+import {renderStatsWidget} from '../actions/statsWidgetActions';
+import { FormattedMessage } from 'react-intl';
+
 
 class OrderStatsWidget extends React.Component{
 	
 	render(){
+
+		let pickPerformance = <FormattedMessage id="pickPerformance.dropdown" description="pickPerformance dropdown label" 
+              defaultMessage ="PPS - pick performance"/>
+
+         let putPerformance = <FormattedMessage id="putPerformance.dropdown" description="putPerformance dropdown label" 
+              defaultMessage ="PPS - put performance"/>
+              
+        let auditPerformance = <FormattedMessage id="auditPerformance.dropdown" description="auditPerformance dropdown label" 
+              defaultMessage ="PPS - audit performance"/>
+              
+
 		const item = [
-      { value: 'PPS_PICK_PERFORMANCE', label: 'PPS - pick performance' },
-      { value: 'PPS_PUT_PERFORMANCE', label: 'PPS - put performance' },
-      { value: 'PPS_AUDIT_PERFORMANCE', label: 'PPS - audit performance' },
+      { value: 'PPS_PICK_PERFORMANCE', label: pickPerformance },
+      { value: 'PPS_PUT_PERFORMANCE', label: putPerformance },
+      { value: 'PPS_AUDIT_PERFORMANCE', label: auditPerformance },
     ]
  	var renderWidget = this.props.statsWidget.statsWidget, chartRender;
-    var currentState = item[0], index = 0;
+    var index = 0;
 		if(renderWidget !== undefined || renderWidget !== null) {
 			for (var i = 0; i < item.length; i++) {
 				if(item[i].value === renderWidget) {

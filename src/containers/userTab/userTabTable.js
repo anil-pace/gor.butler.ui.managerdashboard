@@ -3,9 +3,11 @@ import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import {Table, Column, Cell} from 'fixed-data-table';
 import Dimensions from 'react-dimensions';
-import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
+import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData,ActionCell} from '../../components/commonFunctionsDataTable';
 import {modal} from 'react-redux-modal';
 import AddUser from './addNewUser';
+import EditUser from './editUser';
+import DeleteUser from './deleteUser';
 
 class UserDataTable extends React.Component {
   constructor(props) {
@@ -13,6 +15,42 @@ class UserDataTable extends React.Component {
     this._dataList = new tableRenderer(this.props.items.length);
     this._defaultSortIndexes = [];
     this._dataList.newData=this.props.items;
+    var size = this._dataList.getSize();
+    for (var index = 0; index < size; index++) {
+      this._defaultSortIndexes.push(index);
+    }
+    this.state = {
+      sortedDataList: this._dataList,
+      },
+    this._onSortChange = this._onSortChange.bind(this);
+    this._onFilterChange = this._onFilterChange.bind(this);
+    this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+  }
+
+   _onColumnResizeEndCallback(newColumnWidth, columnKey) {
+    this.setState(({columnWidths}) => ({
+      columnWidths: {
+        ...columnWidths,
+        [columnKey]: newColumnWidth,
+      }
+    }));
+  }
+
+  _onFilterChange(e) {
+    if (!e.target.value) {
+      this.setState({
+        sortedDataList: this._dataList,
+      });
+    }
+    this.setState({
+      sortedDataList: new DataListWrapper(filterIndex(e,this._dataList), this._dataList),
+    });
+  }
+
+  componentWillReceiveProps(nextProps){
+    this._dataList = new tableRenderer(nextProps.items.length);
+    this._defaultSortIndexes = [];
+    this._dataList.newData=nextProps.items;
     var size = this._dataList.getSize();
     for (var index = 0; index < size; index++) {
       this._defaultSortIndexes.push(index);
@@ -63,8 +101,34 @@ class UserDataTable extends React.Component {
       size: 'large', // large, medium or small,
       closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: true // (optional) if you don't wanna show the top right close button
-      //.. all what you put in here you will get access in the modal props ;)
+      //.. all what you put in here you will get access in the modal props ;),
     });
+  }
+  handleEdit(columnKey,rowIndex) {
+    let uid=this.state.sortedDataList.newData[rowIndex].uid,uname=this.state.sortedDataList.newData[rowIndex].userName,fname=this.state.sortedDataList.newData[rowIndex].first,lname=this.state.sortedDataList.newData[rowIndex].last;
+    modal.add(EditUser, {
+      title: '',
+      size: 'large', // large, medium or small,
+      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: true,
+      id:uid,
+      userName:uname,
+      first:fname,
+      last:lname
+    });
+
+   
+  }
+  handleDel(columnKey,rowIndex) {
+    let id=this.state.sortedDataList.newData[rowIndex].uid,name=this.state.sortedDataList.newData[rowIndex].name;
+    modal.add(DeleteUser, {
+      title: '',
+      size: 'large', // large, medium or small,
+      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: true,
+      id:id,
+      name:name    });
+   
   }
  //  _showModal(){
  // //    this.myModal.style.display = "block";
@@ -79,7 +143,12 @@ class UserDataTable extends React.Component {
   render() {
     var {sortedDataList, colSortDirs,columnWidths} = this.state;
     var columnWidth= (this.props.containerWidth/this.props.itemNumber)
-    
+    var heightRes = 560;
+    if(this.props.containerHeight !== 0) {
+      heightRes = this.props.containerHeight;
+    }
+    var selEdit = this.handleEdit.bind(this);
+    var selDel= this.handleDel.bind(this); 
     return (
       <div>
         <div className="gorToolBar">
@@ -109,10 +178,10 @@ class UserDataTable extends React.Component {
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
         width={this.props.containerWidth}
-        height={500}
+        height={heightRes}
         {...this.props}>
         <Column
-          columnKey="name"
+          columnKey="id"
           header={
             <SortHeaderCell >
               <div className="gorToolHeaderEl">
@@ -138,7 +207,7 @@ class UserDataTable extends React.Component {
               </div>
             </SortHeaderCell>
           }
-          cell={<StatusCell data={sortedDataList} ></StatusCell>}
+          cell={<StatusCell data={sortedDataList} statusKey="statusClass" ></StatusCell>}
           width={columnWidth}
         />
         <Column
@@ -175,17 +244,6 @@ class UserDataTable extends React.Component {
           width={columnWidth}
         />
         <Column
-          columnKey="productivity"
-          header={
-            <SortHeaderCell >
-               <FormattedMessage id="user.table.productivity" description="User productivity" 
-              defaultMessage ="PRODUCTIVITY"/>
-            </SortHeaderCell>
-          }
-          cell={<TextCell data={sortedDataList}  />}
-          width={columnWidth}
-        />
-        <Column
           columnKey="logInTime"
           header={
             <SortHeaderCell >
@@ -203,6 +261,7 @@ class UserDataTable extends React.Component {
                ACTIONS
             </SortHeaderCell>
           }
+          cell={<ActionCell data={sortedDataList} selEdit={selEdit} selDel={selDel}/>}
           width={columnWidth}
         />
       </Table>

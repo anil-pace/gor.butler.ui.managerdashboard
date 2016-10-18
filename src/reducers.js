@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
-import {getData}  from './reducers/headerReducer'
+import {headerData}  from './reducers/headerReducer'
 import {authLogin}  from './reducers/loginReducer'
+import {loader}  from './reducers/loaderReducer'
 import {recieveSocketActions}  from './reducers/socketReducer'
 import { routerReducer as routing } from 'react-router-redux';
 import {intlReducer} from 'react-intl-redux'
@@ -19,20 +20,25 @@ import {chargersDetail} from './reducers/chargersDetailReducer'
 import {butlerDetail} from './reducers/butlerDetailReducer'
 import {PPSDetail} from './reducers/ppsDetailReducer'
 import {tabSelected} from './reducers/tabSelectReducer'
-import {subTabSelected} from './reducers/subTabSelectReducer'
 import {reducer as modalReducer} from 'react-redux-modal'
 import {PPSperformance} from './reducers/ppsPerformanceReducer'
+import {userDetails} from './reducers/userDetailReducer';
+import {getOrderDetail} from './reducers/orderDetailReducer';
+import {appInfo} from './reducers/infoReducer';
+import {filterOptions} from './reducers/orderFilterReducer'
+import {waveInfo} from './reducers/waveDetailReducer';
 
 
 const rootReducer = combineReducers({
   intl:intlReducer,
-  getData,
+  headerData,
   authLogin,
   routing,
   recieveSocketActions,
   butlersInfo,
   chargerInfo,
   modals: modalReducer,
+  appInfo,
   auditInfo,
   putInfo,
   ppsInfo,
@@ -46,8 +52,12 @@ const rootReducer = combineReducers({
   butlerDetail,
   PPSDetail,
   tabSelected,
-  subTabSelected,
-  PPSperformance
+  PPSperformance,
+  userDetails,
+  loader,
+  getOrderDetail,
+  filterOptions,
+  waveInfo
    })
 
 export default rootReducer

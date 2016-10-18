@@ -1,8 +1,6 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import rd3 from 'react-d3-library';
 import * as d3 from 'd3';
-import tip from 'd3-tip';
 import Dimensions from 'react-dimensions'
 
 const RD3Component = rd3.Component;
@@ -15,7 +13,7 @@ class ChartHorizontal extends React.Component{
    this.state = {d3: ''}
  }
  
-graphRender(containerWidth,tData,nextP){
+graphRender(containerWidth,tData,nextP,performanceParam){
 var component = this;
   var widther = containerWidth;
   var parentHeight = 300;
@@ -107,14 +105,15 @@ var chart = d3.select(node).append('svg')
    .attr("x", function(d) { return x(d.type) + 25; })
    .attr("y", (barHeight / 2) - 3)
    .attr("dy", ".35em")
-   .text(function(d) { 
-      if(d.type === 0){ 
-        return "ERROR"; 
-      }
+   .text(function(d) {
+        if(d.type === 0) {
+          return ;
+        }
 
-      else{
-        return d.type;
-      }
+        else {   
+          return d.type;
+        }
+      
       })
    .style("font-size","12px")
    .style("font-weight", "bold")
@@ -130,9 +129,9 @@ var chart = d3.select(node).append('svg')
         return "PPS " + d.pps_id; 
       }
 
-      else{
+      
         return "PPS " + d.pps_id;
-      }
+      
       })
    .style("font-size","12px")
    .style("font-family","sans-serif")
@@ -141,7 +140,7 @@ var chart = d3.select(node).append('svg')
    chart.append("text")
             .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
             .attr("transform", "translate("+ (width/2+30) +","+(-7)+")")  // centre below axis
-            .text("Orders/hr")
+            .text(performanceParam)
             .style("font-size","12px")
             .style("font-family","sans-serif")
             .style("fill","#666666");
@@ -150,17 +149,14 @@ var chart = d3.select(node).append('svg')
    component.setState({d3: node});
  }
 
- function type(d) {
-  d.type = +d.type; 
-  return d;
-}
+ 
 }
 componentDidMount(){
-    this.graphRender(this.props.containerWidth,this.props.data.ppsPerformance.aggregate_data,this.props.type);
+    this.graphRender(this.props.containerWidth,this.props.data.ppsPerformance.aggregate_data,this.props.type,this.props.performanceParam);
   }
 
    componentWillReceiveProps(nextProps){
-    this.graphRender(nextProps.containerWidth,nextProps.data.ppsPerformance.aggregate_data,nextProps.type);
+    this.graphRender(nextProps.containerWidth,nextProps.data.ppsPerformance.aggregate_data,nextProps.type,nextProps.performanceParam);
   }
 render() {
  return (

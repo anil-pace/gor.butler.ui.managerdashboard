@@ -114,9 +114,11 @@ box-shadow: calculateRem(2px) calculateRem(2px) calculateRem(2px) #888888;
 }
 .Order-Stats-Drop {
   width: 33%;
+  max-width: 276px;
 }
 
 .Performance-Widget-Drop {
   width: 75%;
+  max-width: 267px;
 }
 

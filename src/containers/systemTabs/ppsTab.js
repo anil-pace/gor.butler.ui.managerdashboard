@@ -7,6 +7,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import PPStable from './PPStable';
 import { connect } from 'react-redux';
+import {changePPSmode} from '../../actions/ppsModeChangeAction'
 
 
 
@@ -16,17 +17,26 @@ class PPS extends React.Component{
     	super(props);
     }	
 	render(){	
+	var operationMode = {"Pick":0, "Put":0, "Audit":0,"NotSet":0};
     var data = this.props.PPSDetail.PPStypeDetail, operatorNum = 0, itemNumber = 5;
-    if(data.length) {
-    	for (var i = data.length - 1; i >= 0; i--) {
-    		operatorNum = data[i].operatorAssigned.length + operatorNum;
- 	   }
+    if(data && data.length) {
+ 		for (var i = data.length - 1; i >= 0; i--) {
+    		if(data[i].operatingMode !== null) {
+
+    		operationMode[data[i].operatingMode] = operationMode[data[i].operatingMode] +1;
+
+ 	   		}
+ 		}
+	}
+	else {
+		operationMode = {"Pick":"--", "Put":"--", "Audit":"--","NotSet":"--"};
+		operatorNum = "--";
 	}
 		return (
 			<div>
 				<div>
 					<div>
-						<PPStable items={this.props.PPSDetail.PPStypeDetail} itemNumber={itemNumber} operatorNum={operatorNum}/>
+						<PPStable items={this.props.PPSDetail.PPStypeDetail} itemNumber={itemNumber} operatorNum={operatorNum} operationMode={operationMode} modeChange={this.props.changePPSmode}/>
 					</div>
 				</div>
 			</div>
@@ -36,8 +46,14 @@ class PPS extends React.Component{
 
 function mapStateToProps(state, ownProps){
   return {
-    PPSDetail: state.PPSDetail || {}
+    PPSDetail: state.PPSDetail || [],
   };
 }
 
-export default connect(mapStateToProps)(PPS) ;
+var mapDispatchToProps = function(dispatch){
+  return {
+    changePPSmode: function(data){ dispatch(changePPSmode(data)); }
+  }
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(PPS) ;

@@ -2,11 +2,13 @@
  * Importing Router dependencies
  */
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import { connect } from 'react-redux';
 import { Router, Route, hashHistory, IndexRoute} from 'react-router';
 import {loginRequest} from '../actions/loginAction';
 import Overview from '../containers/OverviewTab'; 
+import {tabSelected,subTabSelected} from '../actions/tabSelectAction';
+import {OVERVIEW,TAB_ROUTE_MAP} from '../constants/appConstants';
+
 
 class Routes extends React.Component{
 	constructor(props) 
@@ -14,12 +16,19 @@ class Routes extends React.Component{
     	super(props);
        
     }
-   requireAuth(nextState, replaceState ) {
+   requireAuth(nextState, replace ) {
   		if (sessionStorage.getItem('auth_token')) 
   		{
+  			let subTab =(sessionStorage.getItem('subTab') || null);
+  			let nextView ='/'+ (subTab || sessionStorage.getItem('nextView') || 'md');
+  			let selTab =(sessionStorage.getItem('selTab') || TAB_ROUTE_MAP[OVERVIEW]);
+  			
   			this.props.loginRequest();
-    		replaceState({ nextPathname: nextState.location.pathname }, '/overview',nextState.location.query)
+  			this.props.tabSelected(selTab);
+  			this.props.subTabSelected(subTab);
+    		replace(nextView)
  	 	}
+ 	 	
 	}
     render(){
 		return (
@@ -52,7 +61,7 @@ class Routes extends React.Component{
 				      },"indexOverview");
 				    }}
 					 />
-					<Route name="system" path="/system"  
+					<Route name="system" path="/system" className="gorResponsive"  
 					 getComponent={(location, callback) => {
 				      require.ensure([], function (require) {
 				        callback(null, require('../containers/systemTab').default);
@@ -62,7 +71,7 @@ class Routes extends React.Component{
 					 <IndexRoute 
 					getComponent={(location, callback) => {
 				      require.ensure([], function (require) {
-				        callback(null, require('../containers/systemTabs/notificationTab').default);
+				        callback(null, require('../containers/systemTabs/butlerbotTab').default);
 				      });
 				    }}
 					 />
@@ -89,13 +98,6 @@ class Routes extends React.Component{
 					      });
 					    }}
 						 />
-						 <Route name="notification" path="/notification"  
-						 getComponent={(location, callback) => {
-					      require.ensure([], function (require) {
-					        callback(null, require('../containers/systemTabs/notificationTab').default);
-					      });
-					    }}
-						 />
 					 </Route>
 
 					 <Route name="orders" path="/orders"  
@@ -108,7 +110,7 @@ class Routes extends React.Component{
 					 		 <IndexRoute 
 					getComponent={(location, callback) => {
 				      require.ensure([], function (require) {
-				        callback(null, require('../containers/orderTab/orderListTab').default);
+				        callback(null, require('../containers/orderTab/waveTab').default);
 				      });
 				    }}
 					 />
@@ -152,13 +154,12 @@ class Routes extends React.Component{
 		)}
 
 }
-function mapStateToProps(state, ownProps){
-	return {
-    };
-}
+
 var mapDispatchToProps = function(dispatch){
     return {
-        loginRequest: function(){ dispatch(loginRequest()); }
+        loginRequest: function(){ dispatch(loginRequest()); },
+        tabSelected: function(data){ dispatch(tabSelected(data)) },
+        subTabSelected: function(data){ dispatch(subTabSelected(data)) }
     }
 };
-export default connect(mapStateToProps,mapDispatchToProps)(Routes);
+export default connect(null,mapDispatchToProps)(Routes);

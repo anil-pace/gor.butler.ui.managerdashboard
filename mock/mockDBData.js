@@ -4,7 +4,7 @@ export const resTypePut = {
 	"aggregate_data": {
 		"items_put": 256789
 	},
-	"resource_type": "put_details"
+	"resource_type": "put"
 };
 
 export const resTypeThroughPut = {
@@ -15,47 +15,13 @@ export const resTypeThroughPut = {
 	},
 	"resource_type": "put_pick_audit_throughput"
 }
-
 export const resTypeAudit = {
 	"aggregate_data": {
 			"audit_type":null,		
 			"total_audited": 20687
 			},
-	"resource_type": "audit_details"
+	"resource_type": "audit"
 }
-
-export const resTypePPS = {
-	"aggregate_data": [{
-		"pps_id": 1,
-        "time_unit": "per_hour",
-		"orders_picked": 500,
-		"items_picked": 1000, 
-		"items_put": 2400,
-		"items_audited": "need_to_be_decided_per_item_or_per_audit",
-		"pps_mode": "put",
-		"active": "true/false"
-	},{
-		"pps_id": 5,
-        "time_unit": "per_hour",
-		"orders_picked": 500,
-		"items_picked": 1000, 
-		"items_put": 2400,
-		"items_audited": "need_to_be_decided_per_item_or_per_audit",
-		"pps_mode": "audit",
-		"active": "true/false"
-	},{
-		"pps_id": 2,
-        "time_unit": "per_hour",
-		"orders_picked": 500,
-		"items_picked": 1000,
-		"items_put": 2400,
-		"items_audited": "need_to_be_decided_per_item_or_per_audit",
-		"pps_mode": "pick",
-		"active": "true/false"
-	}],
-	"resource_type": "pps_details"
-}
-
 
 export const resTypePick ={
 	"aggregate_data": {
@@ -84,9 +50,9 @@ export const resTypeOrders={
         "cut_off_time": 170,   
         "estimated_completion_time": 20, 
         "orders_at_risk":0,   
-        "Wave_ending_time":'21-30-57 (IST)' 
+        "wave_ending_time":'21-30-57 (IST)' 
     },
-    "resource_type": "order_details"
+    "resource_type": "orders"
 }
 export const resTypeChargers = {
 	"data": [{
@@ -848,7 +814,7 @@ export const resTypePPSdetail = {
 		"items_picked": 300,
 		"items_put": 300,
 		"items_audited": 770,
-		"pps_mode": "put",
+		"pps_mode": "pick",
 		"active": "true"
 	},{
 		"pps_id": 9,
@@ -857,7 +823,7 @@ export const resTypePPSdetail = {
 		"items_picked": 200, 
 		"items_put": 400,
 		"items_audited": 600,
-		"pps_mode": "put",
+		"pps_mode": "audit",
 		"active": "true"
 	},{
 		"pps_id": 10,
@@ -870,8 +836,40 @@ export const resTypePPSdetail = {
 		"active": "true"
 	}
 	],
-	"resource_type": "pps_detail"
+	"resource_type": "pps"
 }
+
+
+export const resTypeUsersDetails = {
+    
+    "resource_type": "users",
+	"complete_data": [{
+
+
+		"user_id": 10,
+		"user_name": "Ajay Singh",
+		"login_time": "2016-10-05 18:20:33.372221",
+		"role": "manager",
+		"logged_in": true,
+		"pps": {
+			"pps_id": 1,
+			"seat_type": "back",
+			"pps_mode": "put"
+		}
+	}] 
+
+}
+
+export const resTypeNotify = {
+  "alert_data": [
+    {
+      "code": "us001",
+      "description": "Username already registered",
+      "details": [],
+      "level": "error"
+    }]
+};
+
 
 
 

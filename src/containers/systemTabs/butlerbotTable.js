@@ -8,10 +8,11 @@ import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell
 class ButlerBotTable extends React.Component {
   constructor(props) {
     super(props);
-    var temp = new Array(this.props.items.length).fill(false);
-    this._dataList = new tableRenderer(this.props.items.length);
+    var items = this.props.items || [];
+    var temp = new Array(items ? items.length : 0).fill(false);
+    this._dataList = new tableRenderer(items ? items.length : 0);
     this._defaultSortIndexes = [];
-    this._dataList.newData=this.props.items;
+    this._dataList.newData=items;
     var size = this._dataList.getSize();
     for (var index = 0; index < size; index++) {
       this._defaultSortIndexes.push(index);
@@ -33,6 +34,35 @@ class ButlerBotTable extends React.Component {
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
   }
+
+  componentWillReceiveProps(nextProps) {
+    var items = nextProps.items || [];
+    var temp = new Array(items ? items.length : 0).fill(false);
+    this._dataList = new tableRenderer(items ? items.length : 0);
+    this._defaultSortIndexes = [];
+    this._dataList.newData=items;
+    var size = this._dataList.getSize();
+    for (var index = 0; index < size; index++) {
+      this._defaultSortIndexes.push(index);
+    }
+    var columnWidth= (nextProps.containerWidth/nextProps.itemNumber)
+    this.state = {
+      sortedDataList: this._dataList,
+      colSortDirs: {},
+      columnWidths: {
+        id: columnWidth,
+        status: columnWidth,
+        current: columnWidth,
+        msu: columnWidth,
+        location: columnWidth,
+        voltage: columnWidth
+      },
+    };
+    this._onSortChange = this._onSortChange.bind(this);
+    this._onFilterChange = this._onFilterChange.bind(this);
+    this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+  }
+  
    _onColumnResizeEndCallback(newColumnWidth, columnKey) {
     this.setState(({columnWidths}) => ({
       columnWidths: {
@@ -65,8 +95,7 @@ class ButlerBotTable extends React.Component {
     });
   }
   render() {
-    
-    var {sortedDataList, colSortDirs,columnWidths} = this.state;  
+    var {sortedDataList, colSortDirs,columnWidths} = this.state;
     return (
       <div className="gorTableMainContainer">
         <div className="gorToolBar">
@@ -82,7 +111,7 @@ class ButlerBotTable extends React.Component {
             <div className="searchbox-magnifying-glass-icon"/>
             <input className="gorInputFilter"
               onChange={this._onFilterChange}
-              placeholder="Filter by keywords">
+              placeholder="Filter by status and Bot id">
             </input>
         </div>
         </div>
@@ -94,7 +123,7 @@ class ButlerBotTable extends React.Component {
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
         width={this.props.containerWidth}
-        height={500}
+        height={560}
         {...this.props}>
         <Column
           columnKey="id"
@@ -115,20 +144,21 @@ class ButlerBotTable extends React.Component {
         <Column
           columnKey="status"
           header={
-            <SortHeaderCell >
+            <SortHeaderCell onSortChange={this._onSortChange}
+              sortDir={colSortDirs.status} >
               <div>
                  <FormattedMessage id="butlerBot.table.status" description="Status for butlerbot" 
               defaultMessage ="STATUS"/> 
               </div>
               <div>
               <div className="statuslogoWrap">
-              <div className="header-red-alert-icon gorToolHeaderEl"/>
+              <div className=" gorToolHeaderEl"/>
               </div>
-              <div className="gorToolHeaderEl alertState"> 3 Alerts</div>
+              
               </div>
             </SortHeaderCell>
           }
-          cell={<StatusCell data={sortedDataList} ></StatusCell>}
+          cell={<StatusCell data={sortedDataList} statusKey="statusClass" ></StatusCell>}
           fixed={true}
           width={columnWidths.status}
           isResizable={true}
@@ -139,7 +169,7 @@ class ButlerBotTable extends React.Component {
             <SortHeaderCell>
               <FormattedMessage id="butlerBot.table.currentTask" description="Current task for butlerbot" 
               defaultMessage ="CURRENT TASK"/>
-              <div className="gorToolHeaderSubText"> 2 Pick, 1 Put, 2 charging, 1 Idle</div>
+              <div className="gorToolHeaderSubText"> Pick ({this.props.parameters.pick}) . Put ({this.props.parameters.put}) . Charging ({this.props.parameters.charging}) . Idle ({this.props.parameters.idle}) </div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
@@ -153,7 +183,7 @@ class ButlerBotTable extends React.Component {
             <SortHeaderCell>
                <FormattedMessage id="butlerBot.table.msu" description="MSU Status for butlerbot" 
               defaultMessage ="MSU"/> 
-              <div className="gorToolHeaderSubText">10 Mounted</div>
+              <div className="gorToolHeaderSubText">{this.props.parameters.msuMounted} Mounted</div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
@@ -167,7 +197,7 @@ class ButlerBotTable extends React.Component {
             <SortHeaderCell>
                <FormattedMessage id="butlerBot.table.location" description="Location for butlerbot" 
               defaultMessage ="LOCATION"/> 
-              <div className="gorToolHeaderSubText"> {sortedDataList.getSize()} locations</div>
+              <div className="gorToolHeaderSubText"> {this.props.parameters.location} locations</div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
@@ -181,7 +211,7 @@ class ButlerBotTable extends React.Component {
             <SortHeaderCell >
                <FormattedMessage id="butlerBot.table.voltage" description="voltage for butlerbot" 
               defaultMessage ="VOLTAGE"/>
-              <div className="gorToolHeaderSubText"> Avg. Voltage  {this.props.avgVoltage}  </div> 
+              <div className="gorToolHeaderSubText"> Avg. Voltage  {this.props.parameters.avgVoltage}  </div> 
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList}  />}

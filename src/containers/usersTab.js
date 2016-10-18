@@ -1,6 +1,8 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-import UserDataTable from './userTab/userTabTable'
+import UserDataTable from './userTab/userTabTable';
+import Loader from '../components/loader/Loader';
+import { connect } from 'react-redux'; 
 
 class UsersTab extends React.Component{
 	constructor(props) 
@@ -8,99 +10,12 @@ class UsersTab extends React.Component{
     	super(props);
     }	
 	render(){
-		var itemNumber = 8;
-		var temp_data=[{
-  "name": "xyz",
-  "status": "Online",
-  "role": "Manager",
-  "workMode": "Management",
-  "location": "PPS 001",
-  "productivity": "300 packet/hr",
-  "logInTime": "09:00:25(4h 10m)"
-}, {
-  "name": "xyz",
-  "status": "Online",
-  "role": "Supevisor",
-  "workMode": "Management",
-  "location": "PPS 001",
-  "productivity": "300 packet/hr",
-  "logInTime": "09:00:25(4h 10m)"
-}, {
-  "name": "xyz",
-  "status": "Online",
-  "role": "Operator",
-  "workMode": "Pick Back",
-  "location": "PPS 001",
-  "productivity": "300 packet/hr",
-  "logInTime": "09:00:25(4h 10m)"
-}, {
-  "name": "xyz",
-  "status": "Offline",
-  "role": "Operator",
-  "workMode": "Pick back",
-  "location": "PPS 001",
-  "productivity": "300 packet/hr",
-  "logInTime": "09:00:25(4h 10m)"
-}, {
-  "name": "xyz",
-  "status": "Offline",
-  "role": "Operator",
-  "workMode": "Pick back",
-  "location": "PPS 001",
-  "productivity": "300 packet/hr",
-  "logInTime": "09:00:25(4h 10m)"
-}, {
-  "name": "xyz",
-  "status": "Online",
-  "role": "Manager",
-  "workMode": "Management",
-  "location": "PPS 001",
-  "productivity": "300 packet/hr",
-  "logInTime": "09:00:25(4h 10m)"
-}, {
-  "name": "xyz",
-  "status": "Online",
-  "role": "Supevisor",
-  "workMode": "Management",
-  "location": "PPS 001",
-  "productivity": "300 packet/hr",
-  "logInTime": "09:00:25(4h 10m)"
-}, {
-  "name": "xyz",
-  "status": "Online",
-  "role": "Operator",
-  "workMode": "Pick Back",
-  "location": "PPS 001",
-  "productivity": "300 packet/hr",
-  "logInTime": "09:00:25(4h 10m)"
-}, {
-  "name": "xyz",
-  "status": "Offline",
-  "role": "Operator",
-  "workMode": "Pick back",
-  "location": "PPS 001",
-  "productivity": "300 packet/hr",
-  "logInTime": "09:00:25(4h 10m)"
-}, {
-  "name": "xyz",
-  "status": "Offline",
-  "role": "Operator",
-  "workMode": "Pick back",
-  "location": "PPS 001",
-  "productivity": "300 packet/hr",
-  "logInTime": "09:00:25(4h 10m)"
-}
-];
-		/**
-		 * Need to remove these hardcoded variables
-		 * 
-		 */
-		
+		var itemNumber = 7;		
 		return (
 			<div>
 				<div>
-					<div className="gorTesting">
-						<UserDataTable items={temp_data} itemNumber={itemNumber}/>
+					<div className="gorUserTable">
+						<UserDataTable items={this.props.userdetails} itemNumber={itemNumber}/>
 					</div>
 				</div>
 			</div>
@@ -108,4 +23,15 @@ class UsersTab extends React.Component{
 	}
 };
 
-export default UsersTab ;
+
+function mapStateToProps(state, ownProps){
+  return {
+    userdetails: state.userDetails.userDetails || [],
+  };
+}
+
+
+
+export  default connect(mapStateToProps)(UsersTab);
+
+

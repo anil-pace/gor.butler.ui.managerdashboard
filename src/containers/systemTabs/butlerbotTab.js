@@ -13,18 +13,38 @@ class ButlerBot extends React.Component{
     }	
 	render(){
   var itemNumber = 6;
-  var butlerData = this.props.butlerDetail.butlerDetail, avgVoltage = 0;
-  if(butlerData.length) {
+  var butlerData = this.props.butlerDetail.butlerDetail, avgVoltage =0;
+  var taskDetail = {"put":0, "pick":0, "charging":0, "idle":0, "avgVoltage":0, "msuMounted":0, "location":0};
+  if(butlerData && butlerData.length) {
   	for (var i = butlerData.length - 1; i >= 0; i--) {
   		avgVoltage = butlerData[i].voltage + avgVoltage;
+  		if(butlerData[i].taskType === null) {
+  			taskDetail["idle"]++;
+  		}
+  		else{
+  			taskDetail[butlerData[i].taskType]++;
+  		}
+
+  		if(butlerData[i].msu !== "--") {
+  			taskDetail["msuMounted"]++;
+  		}
+
+  		if(butlerData[i].location !== null) {
+  			taskDetail["location"]++;
+  		}
+
   	}
   	avgVoltage = ((avgVoltage/(butlerData.length)).toFixed(2));
+  	taskDetail["avgVoltage"]=avgVoltage + "V";
+  }
+  else {
+  	taskDetail = {"put":"--", "pick":"--", "charging":"--", "idle":"--", "avgVoltage":"--", "msuMounted":"--", "location":"--"};
   }
 		return (
 			<div>
 				<div>
 					<div className="gorTesting">
-						<ButlerBotTable items={butlerData} itemNumber={itemNumber} avgVoltage={avgVoltage}/>
+						<ButlerBotTable items={butlerData} itemNumber={itemNumber} parameters={taskDetail}/>
 					</div>
 				</div>
 			</div>
@@ -34,7 +54,7 @@ class ButlerBot extends React.Component{
 
 function mapStateToProps(state, ownProps){
   return {
-    butlerDetail: state.butlerDetail || {},
+    butlerDetail: state.butlerDetail || [],
   };
 }
 

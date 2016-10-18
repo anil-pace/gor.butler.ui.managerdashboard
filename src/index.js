@@ -4,9 +4,9 @@
 
 // Importing third party libraries
 
-import React  from 'react';
+import React  from 'react'; 
 import ReactDOM  from 'react-dom';
-import { Provider,connect } from 'react-redux';
+import { Provider,connect } from 'react-redux'; 
 
 
 /**
@@ -15,9 +15,6 @@ import { Provider,connect } from 'react-redux';
  * Need to work on this
  */
 import {IntlProvider} from 'react-intl-redux';
-import { translationMessages } from './utilities/i18n';
-
-
 import { Router, Route, hashHistory, IndexRoute} from 'react-router';
 
 //Import redux modal
@@ -36,11 +33,10 @@ import {preloadedState} from './utilities/intialData';
 const initState = preloadedState;
 const store = configureStore(initState);
 
-
 ReactDOM.render(
 	
 	<Provider store={store}>
-	<IntlProvider messages={ translationMessages.en }>
+	<IntlProvider messages={ initState.intl.messages }>
 	<div>
 	<Routes />
 		<ReduxModal />
