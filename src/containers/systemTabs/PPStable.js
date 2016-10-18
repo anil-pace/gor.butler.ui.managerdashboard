@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import {changePPSmode} from '../../actions/ppsModeChangeAction'
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
-import {BASE_URL, PPS_MODE_CHANGE_URL} from '../../constants/configConstants';
+import {BASE_URL, PPS_MODE_CHANGE_URL,PROTOCOL,API_URL} from '../../constants/configConstants';
 import {PPS_MODE_CHANGE} from '../../constants/appConstants';
 
 class PPStable extends React.Component {
@@ -166,7 +166,7 @@ class PPStable extends React.Component {
         let formdata={         
                     "requested_pps_mode": mode
          };
-        var url = BASE_URL + PPS_MODE_CHANGE_URL + checkedPPS[j] + "/pps_mode";
+        var url = API_URL + PPS_MODE_CHANGE_URL + checkedPPS[j] + "/pps_mode";
         let ppsModeChange={
                'url':url,
                'formdata':formdata,
