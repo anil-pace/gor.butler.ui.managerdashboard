@@ -168,7 +168,7 @@ class Login extends React.Component{
                 }
                 <section>
                 <div className={'gor-login-field'+(this.props.loginPassCheck.type===ERROR||this.props.loginAuthorized===false?' gor-input-error':' gor-input-ok')}  ref={node => { this.passField = node }}>
-                        <div className={this.props.idInfo.type===ERROR||this.props.loginAuthorized===false?'gor-login-password-error':'gor-login-password'}></div>
+                        <div className={this.props.loginPassCheck.type===ERROR||this.props.loginAuthorized===false?'gor-login-password-error':'gor-login-password'}></div>
                         <input className='field' onBlur={this._checkPass.bind(this)} type="password" id="password" 
                         placeholder={this.props.intlMessages["login.form.password"]}
                          ref={node => { this.password = node }}/>
