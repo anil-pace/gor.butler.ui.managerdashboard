@@ -10,6 +10,7 @@ class TopNotifications extends React.Component{
     	super(props);
     }
     componentWillReceiveProps(nextProps){
+        window.scrollTo(0,0);
     	if(nextProps.notifyInfo){
     		if(nextProps.notifyInfo.type!==HIDE)
     		{

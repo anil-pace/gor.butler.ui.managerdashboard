@@ -1,6 +1,7 @@
 import React from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
 import {modal} from 'react-redux-modal';
+import { FormattedMessage } from 'react-intl';
 
 export var SortTypes = {
   ASC: 'ASC',
@@ -63,12 +64,12 @@ export const ActionCell = ({rowIndex, data, columnKey,selEdit,selDel, ...props})
   <Cell {...props}>
     <div className="gor-user-Logo-wrap">
       <button onClick={selEdit.bind(this,columnKey,rowIndex)}>
-        <div className="user-edit-icon" />
+        <div className="user-edit-icon" /><span>Edit</span>
       </button>
     </div>
     <div className="gor-user-Logo-wrap">
       <button onClick={selDel.bind(this,columnKey,rowIndex)} >
-        <div className="user-del-icon" />
+        <div className="user-del-icon" /><span>Delete</span>
       </button>
     </div>  
   </Cell>

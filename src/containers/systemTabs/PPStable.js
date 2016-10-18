@@ -210,7 +210,7 @@ class PPStable extends React.Component {
         selected = selected + 1;
       }
     }
-    console.log(this.state.headerChecked)
+   
     return (
       <div className="gorTableMainContainer">
         <div className="gorToolBar">
