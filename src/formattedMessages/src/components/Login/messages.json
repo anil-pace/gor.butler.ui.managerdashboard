@@ -1,0 +1,12 @@
+[
+  {
+    "id": "login.form.username",
+    "description": "Placeholder text for username",
+    "defaultMessage": "Username"
+  },
+  {
+    "id": "login.form.password",
+    "description": "Placeholder text for password",
+    "defaultMessage": "Password"
+  }
+]
