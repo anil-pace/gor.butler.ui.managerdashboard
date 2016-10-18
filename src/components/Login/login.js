@@ -11,7 +11,6 @@ import { FormattedMessage } from 'react-intl';
 import { updateIntl } from 'react-intl-redux';
 import Dropdown from '../../components/dropdown/dropdown.js';
 import { translationMessages } from '../../utilities/i18n';
-import { messages } from './messages'
 
 
 class Login extends React.Component{
@@ -70,8 +69,14 @@ class Login extends React.Component{
           	'username': this.userName.value,
           	'password': this.password.value,
          };
-        if(!formdata.username||!formdata.password)
+        if(!this.props.idInfo.type)
         {
+            this._checkUser();
+            return;
+        }
+        if(!this.props.loginPassCheck.type)
+        {
+            this._checkPass();
             return;
         }
         let loginData={
@@ -140,7 +145,7 @@ class Login extends React.Component{
                 {(this.props.loginAuthorized===false)?(<div className='gor-login-auth-error'><div className='gor-login-error'></div>
 
                     <FormattedMessage id='login.butler.fail' 
-                        defaultMessage="Invalid username and/or password" description="Text for login failure"/>
+                        defaultMessage="Invalid username and/or password, please try again" description="Text for login failure"/>
 
                  </div>):''
                 }
@@ -178,7 +183,7 @@ class Login extends React.Component{
                     </div>):''):''
                 }
                 <section>
-                    <input type="submit" className='gor-login-btn'  value="Login" /><br />
+                    <input type="submit" className='gor-login-btn'  value={this.props.intlMessages["login.form.button"]} /><br />
                 </section>
                 </div>
                 <div className='gor-box-bottom'><span className='gor-box-bottom-left'></span>

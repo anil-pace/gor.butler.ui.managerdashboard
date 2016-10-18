@@ -10,7 +10,11 @@ export const messages = defineMessages({
     	id: 'login.form.password',
         description: 'Placeholder text for password',
         defaultMessage: 'Password'
+    },
+    placeholderBtn:{
+        id: 'login.form.button',
+        description: 'Text for button',
+        defaultMessage: 'Login'
     }
-
 });
 

@@ -1310,8 +1310,8 @@ body {
   background: #FFFFFF;
   border-radius: 5px;
   color: #979797;
-  width: 30%;
-  min-height: 22rem;
+  width: 38%;
+  min-height: 22.5rem;
   margin: auto;
   margin-top: 2.5rem;
 }
@@ -3074,13 +3074,14 @@ progress::-moz-progress-bar {
   color: #CCCCCC;
   border-top: solid 1px #cccccc;
   text-align: center;
-  position: fixed;
   bottom: 0;
-  min-height: 0.625rem;
-  padding: 1%;
-  width: 95%;
+  padding: 20px 0 20px 0;
+  width: 97%;
   font-family: 'Source Sans Pro Regular', sans-serif;
   font-size: 14px;
+  position: absolute;
+  margin: auto;
+  margin-top: 50px;
 }
 
 .react-redux-modal button:focus {

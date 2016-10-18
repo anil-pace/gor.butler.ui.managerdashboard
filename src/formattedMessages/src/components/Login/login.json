@@ -27,7 +27,7 @@
   {
     "id": "login.butler.fail",
     "description": "Text for login failure",
-    "defaultMessage": "Invalid username and/or password"
+    "defaultMessage": "Invalid username and/or password, please try again"
   },
   {
     "id": "login.butler.error.username",
