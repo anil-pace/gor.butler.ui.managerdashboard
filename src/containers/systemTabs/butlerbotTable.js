@@ -123,12 +123,12 @@ class ButlerBotTable extends React.Component {
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
         width={this.props.containerWidth}
-        height={500}
+        height={560}
         {...this.props}>
         <Column
           columnKey="id"
           header={
-            <SortHeaderCell onClick={this._onSortChange}
+            <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.id}> 
               <div className="gorToolHeaderEl">
               <div className="gorToolHeaderEl"> {sortedDataList.getSize()} BOT </div>
@@ -144,7 +144,8 @@ class ButlerBotTable extends React.Component {
         <Column
           columnKey="status"
           header={
-            <SortHeaderCell >
+            <SortHeaderCell onSortChange={this._onSortChange}
+              sortDir={colSortDirs.status} >
               <div>
                  <FormattedMessage id="butlerBot.table.status" description="Status for butlerbot" 
               defaultMessage ="STATUS"/> 

@@ -149,13 +149,13 @@ export class SortHeaderCell extends React.Component {
   _onSortChange(e) {
     e.preventDefault();
 
-    // if (this.props.onClick) {
-      this.props.onClick(
+    
+      this.props.onSortChange(
         this.props.columnKey,
         this.props.sortDir ?
           reverseSortDirection(this.props.sortDir) :
           SortTypes.DESC
       );
-    // }
+    
   }
 }

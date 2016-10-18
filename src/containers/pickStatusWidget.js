@@ -74,7 +74,6 @@ class PickStatusWidget extends React.Component{
                                 count: ppsCount,
                                 throughput:pickThroughput
                             }}/>;            
-
             if(ordersData.wave_end)
             {
                 headingright=<FormattedMessage id="widget.pick.headingright" description='Heading for cut-off time' 

@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import {changePPSmode} from '../../actions/ppsModeChangeAction'
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
-import {BASE_URL, PPS_MODE_CHANGE_URL} from '../../constants/configConstants';
+import {BASE_URL, PPS_MODE_CHANGE_URL,PROTOCOL,API_URL} from '../../constants/configConstants';
 import {PPS_MODE_CHANGE} from '../../constants/appConstants';
 
 class PPStable extends React.Component {
@@ -166,7 +166,7 @@ class PPStable extends React.Component {
         let formdata={         
                     "requested_pps_mode": mode
          };
-        var url = BASE_URL + PPS_MODE_CHANGE_URL + checkedPPS[j] + "/pps_mode";
+        var url = API_URL + PPS_MODE_CHANGE_URL + checkedPPS[j] + "/pps_mode";
         let ppsModeChange={
                'url':url,
                'formdata':formdata,
@@ -210,7 +210,7 @@ class PPStable extends React.Component {
         selected = selected + 1;
       }
     }
-    console.log(this.state.headerChecked)
+   
     return (
       <div className="gorTableMainContainer">
         <div className="gorToolBar">
@@ -242,7 +242,7 @@ class PPStable extends React.Component {
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
         width={this.props.containerWidth}
-        height={500}
+        height={560}
         {...this.props}>
         <Column
           columnKey="id"
@@ -263,7 +263,8 @@ class PPStable extends React.Component {
         <Column
           columnKey="status"
           header={
-            <SortHeaderCell >
+            <SortHeaderCell onSortChange={this._onSortChange}
+              sortDir={colSortDirs.status} >
               <div>
                  <FormattedMessage id="PPS.table.status" description="Status for PPS" 
               defaultMessage ="STATUS"/> 
