@@ -35,7 +35,7 @@ class PPS extends React.Component{
 		return (
 			<div>
 				<div>
-					<div>
+					<div className="gorTesting">
 						<PPStable items={this.props.PPSDetail.PPStypeDetail} itemNumber={itemNumber} operatorNum={operatorNum} operationMode={operationMode} modeChange={this.props.changePPSmode}/>
 					</div>
 				</div>

@@ -120,7 +120,7 @@ class OrderListTab extends React.Component{
     ];
     var table = <OrderListTable items={this.props.orderData.ordersDetail} itemNumber={itemNumber} statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter} refreshOption={this.refresh.bind(this)} lastUpdated={updateStatus} refreshList={this.refresh.bind(this)}/>
     return (
-      <div>
+      <div >  
       {table}
       <div className="gor-pageNum">
         <Dropdown  styleClass={'gor-Page-Drop'}  items={ordersByStatus} currentState={ordersByStatus[0]} optionDispatch={this.props.getPageSize} refreshList={this.refresh.bind(this)}/>

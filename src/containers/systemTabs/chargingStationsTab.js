@@ -34,7 +34,7 @@ class ChargingStations extends React.Component{
 		return (
 			<div>
 				<div>
-					<div>
+					<div className="gorTesting">
 						<ChargingStationsTable items={this.props.chargersDetail.chargersDetail} itemNumber={itemNumber} chargersState={chargersState}/>
 					</div>
 				</div>

@@ -4,12 +4,13 @@ import { connect } from 'react-redux';
 import Chart from '../components/graphd3/graphd3';
 import {renderStatsWidget} from '../actions/statsWidgetActions';
 import { FormattedMessage } from 'react-intl';
+import Dimensions from 'react-dimensions';
 
 
 class OrderStatsWidget extends React.Component{
 	
 	render(){
-
+		console.log(this.props)
 		let pickPerformance = <FormattedMessage id="pickPerformance.dropdown" description="pickPerformance dropdown label" 
               defaultMessage ="PPS - pick performance"/>
 
@@ -64,6 +65,7 @@ class OrderStatsWidget extends React.Component{
 };
 
 function mapStateToProps(state, ownProps){
+	console.log(state)
 	return {
 		histdata: state.histogramData || {},
 		statsWidget: state.statsWidget || {}
@@ -76,5 +78,5 @@ var mapDispatchToProps = function(dispatch){
 	}
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(OrderStatsWidget) ;
+export default (Dimensions(),connect(mapStateToProps,mapDispatchToProps)(OrderStatsWidget)) ;
 
