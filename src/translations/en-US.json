@@ -1,5 +1,25 @@
 [
   {
+    "id": "footer.description",
+    "description": "Footer description",
+    "defaultMessage": "Copyright @ 2016 GreyOrange Pte Ltd"
+  },
+  {
+    "id": "header.description",
+    "description": "Header description",
+    "defaultMessage": "Butler Management System"
+  },
+  {
+    "id": "header.start_time",
+    "description": "Start time",
+    "defaultMessage": "Start time:{time}"
+  },
+  {
+    "id": "header.user_post",
+    "description": "User post",
+    "defaultMessage": "{user_post}"
+  },
+  {
     "id": "login.lang.english",
     "description": "English option in the language drop down",
     "defaultMessage": "English"
@@ -8,16 +28,6 @@
     "id": "login.lang.japanese",
     "description": "Japanese option in the language drop down",
     "defaultMessage": "Japanese"
-  },
-  {
-    "id": "login.form.username",
-    "description": "Text for username",
-    "defaultMessage": "Username"
-  },
-  {
-    "id": "login.form.password",
-    "description": "Text for password",
-    "defaultMessage": "Password"
   },
   {
     "id": "login.butler.language",
@@ -50,6 +60,111 @@
     "defaultMessage": "Please enter your password"
   },
   {
+    "id": "login.form.username",
+    "description": "Placeholder text for username",
+    "defaultMessage": "Username"
+  },
+  {
+    "id": "login.form.password",
+    "description": "Placeholder text for password",
+    "defaultMessage": "Password"
+  },
+  {
+    "id": "login.form.button",
+    "description": "Text for button",
+    "defaultMessage": "Login"
+  },
+  {
+    "id": "butlerBot.tab.heading",
+    "description": "butler bot tab",
+    "defaultMessage": "Butler Bots"
+  },
+  {
+    "id": "pps.tab.heading",
+    "description": "pps tab",
+    "defaultMessage": "Pick Put Stations"
+  },
+  {
+    "id": "chargingstation.tab.heading",
+    "description": "charging station tab",
+    "defaultMessage": "Charging Station"
+  },
+  {
+    "id": "notify.success.add",
+    "description": "Text for successfull user addition",
+    "defaultMessage": "User successfully added"
+  },
+  {
+    "id": "notify.success.delete",
+    "description": "Text for successfull user deletion",
+    "defaultMessage": "User successfully deleted"
+  },
+  {
+    "id": "notify.success.edit",
+    "description": "Text for successfully editing user",
+    "defaultMessage": "User successfully edited"
+  },
+  {
+    "id": "notify.error.usernameExists",
+    "description": "Text for already registered username",
+    "defaultMessage": "Username already registered!"
+  },
+  {
+    "id": "notify.error.passwordMissing",
+    "description": "Text for passwords missing",
+    "defaultMessage": "Password not provided!"
+  },
+  {
+    "id": "notify.error.passwordMatch",
+    "description": "Text for passwords not matching",
+    "defaultMessage": "Passwords do not match!"
+  },
+  {
+    "id": "notify.error.username",
+    "description": "Text for missing username",
+    "defaultMessage": "Username is a required field!"
+  },
+  {
+    "id": "notify.error.role",
+    "description": "Text for missing roles",
+    "defaultMessage": "Role is a required field!"
+  },
+  {
+    "id": "appInfo.success",
+    "description": "Text for success",
+    "defaultMessage": "Successfull"
+  },
+  {
+    "id": "user.invalid.id",
+    "description": "Text for invalid user ID",
+    "defaultMessage": "Please enter a valid User ID"
+  },
+  {
+    "id": "login.empty.password",
+    "description": "Text for empty password",
+    "defaultMessage": "Please enter a password"
+  },
+  {
+    "id": "user.empty.name",
+    "description": "Text for empty user name",
+    "defaultMessage": "Minimum 6 characters required"
+  },
+  {
+    "id": "user.invalid.name",
+    "description": "Text for invalid user name",
+    "defaultMessage": "Special characters \"~\",\"@\" and \"%\" are not allowed"
+  },
+  {
+    "id": "user.invalid.password",
+    "description": "Text for invalid password",
+    "defaultMessage": "Minimum 6 characters required"
+  },
+  {
+    "id": "user.match.password",
+    "description": "Text for passwords not matching",
+    "defaultMessage": "Passwords do not match"
+  },
+  {
     "id": "widget.audit.heading.value",
     "description": "Total Items Audited",
     "defaultMessage": "None"
@@ -75,6 +190,136 @@
     "defaultMessage": "Items audited"
   },
   {
+    "id": "pickPerformance.dropdown",
+    "description": "pickPerformance dropdown label",
+    "defaultMessage": "PPS - pick performance"
+  },
+  {
+    "id": "putPerformance.dropdown",
+    "description": "putPerformance dropdown label",
+    "defaultMessage": "PPS - put performance"
+  },
+  {
+    "id": "auditPerformance.dropdown",
+    "description": "auditPerformance dropdown label",
+    "defaultMessage": "PPS - audit performance"
+  },
+  {
+    "id": "order.table.heading",
+    "description": "Heading for order list",
+    "defaultMessage": "OrderList"
+  },
+  {
+    "id": "orderList.table.status",
+    "description": "Status for orders",
+    "defaultMessage": "STATUS"
+  },
+  {
+    "id": "orderlist.table.operatingMode",
+    "description": "recievedTime for Orders",
+    "defaultMessage": "RECIEVED TIME"
+  },
+  {
+    "id": "order.table.heading",
+    "description": "Heading for order list",
+    "defaultMessage": "OrderList"
+  },
+  {
+    "id": "orderList.table.status",
+    "description": "Status for orders",
+    "defaultMessage": "STATUS"
+  },
+  {
+    "id": "waves.table.pickBy",
+    "description": "pick by for waves",
+    "defaultMessage": "PICK BY"
+  },
+  {
+    "id": "orderlist.table.operatingMode",
+    "description": "recievedTime for Orders",
+    "defaultMessage": "RECIEVED TIME"
+  },
+  {
+    "id": "waves.table.completedTime",
+    "description": "completedTime for waves",
+    "defaultMessage": "COMPLETED"
+  },
+  {
+    "id": "waves.table.orderLine",
+    "description": "orderLine for waves",
+    "defaultMessage": "ORDER LINE"
+  },
+  {
+    "id": "waves.table.heading",
+    "description": "Heading for waves",
+    "defaultMessage": "Waves"
+  },
+  {
+    "id": "waves.table.status",
+    "description": "Status for waves",
+    "defaultMessage": "STATUS"
+  },
+  {
+    "id": "butlerBot.table.startTime",
+    "description": "StartTime for butlerbot",
+    "defaultMessage": "START TIME"
+  },
+  {
+    "id": "waves.table.cutOffTime",
+    "description": "cutOffTime for waves",
+    "defaultMessage": "CUT-OFF TIME"
+  },
+  {
+    "id": "butlerBot.table.ordersToFulfill",
+    "description": "orders to fulfill for waves",
+    "defaultMessage": "ORDERS TO FULFILL"
+  },
+  {
+    "id": "waves.table.progress",
+    "description": "progress for waves",
+    "defaultMessage": "PROGRESS(%)"
+  },
+  {
+    "id": "waves.table.totalOrders",
+    "description": "totalOrders for waves",
+    "defaultMessage": "TOTAL ORDERS"
+  },
+  {
+    "id": "health.pps",
+    "description": "pps health",
+    "defaultMessage": "PPS"
+  },
+  {
+    "id": "health.Butler",
+    "description": "Butler bots health",
+    "defaultMessage": "Butler bots"
+  },
+  {
+    "id": "health.ChargingStation",
+    "description": "Charging Stations health",
+    "defaultMessage": "Charging Stations"
+  },
+  {
+    "id": "systemHealth.dropdown",
+    "description": "systemHealth dropdown label",
+    "defaultMessage": "System Health"
+  },
+  {
+    "id": "PPSpickPerformance.dropdown",
+    "description": "PPSpickPerformance dropdown label",
+    "defaultMessage": "PPS Pick Performance"
+  },
+  {
+    "id": "PPSputPerformance.dropdown",
+    "description": "PPSputPerformance dropdown label",
+    "defaultMessage": "PPS Put Performance"
+  },
+  {
+    "id": "PPSauditPerformance.dropdown",
+    "description": "PPSauditPerformance dropdown label",
+    "defaultMessage": "PPS Audit Performance"
+  },
+  {
     "id": "widget.pick.headingleft",
     "description": "Heading for pick status widget",
     "defaultMessage": "Orders to fullfill"
@@ -86,8 +331,18 @@
   },
   {
     "id": "widget.pick.status.idle",
+    "description": "PPS Offline",
+    "defaultMessage": "Offline"
+  },
+  {
+    "id": "widget.pick.status.starting",
+    "description": "Awaiting throughput data",
+    "defaultMessage": "Starting..."
+  },
+  {
+    "id": "widget.pick.throughput",
     "description": "Throughput message",
-    "defaultMessage": "{count} PPS idle"
+    "defaultMessage": "{count} PPS fullfilling at {throughput} items/hr"
   },
   {
     "id": "widget.pick.headingright",
@@ -100,22 +355,22 @@
     "defaultMessage": "{cut_off}"
   },
   {
-    "id": "widget.pick.throughput",
-    "description": "Throughput message",
-    "defaultMessage": "{count} PPS fullfilling at {throughput} items/hr"
-  },
-  {
     "id": "widget.pick.lowright",
     "description": "Estimated time",
     "defaultMessage": "Completing in {eta}"
   },
   {
-    "id": "widget.pick.statusleft",
+    "id": "widget.pick.statusright",
+    "description": "Text for wave end time",
+    "defaultMessage": "{wave_end}"
+  },
+  {
+    "id": "widget.pick.statusleft.onschedule",
     "description": "Text for on schedule",
     "defaultMessage": "On Schedule"
   },
   {
-    "id": "widget.pick.statusRight",
+    "id": "widget.pick.statusleft.atrisk",
     "description": "Text for orders at risk",
     "defaultMessage": "{count_risk} {count_risk, plural, one {order} other {orders}} at risk"
   },
@@ -180,9 +435,49 @@
     "defaultMessage": "CHARGING STATIONS"
   },
   {
+    "id": "ChargingStations.table.STATUS",
+    "description": "STATUS for ChargingStations",
+    "defaultMessage": "STATUS"
+  },
+  {
     "id": "ChargingStations.table.operatingMode",
     "description": "operatingMode for ChargingStations",
     "defaultMessage": "OPERATING MODE"
+  },
+  {
+    "id": "ChargingStations.table.connectedBots",
+    "description": "connectedBots for ChargingStations",
+    "defaultMessage": "BOTS CONNECTED"
+  },
+  {
+    "id": "NotificationTable.table.heading",
+    "description": "Heading for NotificationTable",
+    "defaultMessage": "Notifications"
+  },
+  {
+    "id": "NotificationTable.table.component",
+    "description": "component for NotificationTable",
+    "defaultMessage": "COMPONENT"
+  },
+  {
+    "id": "Notifications.table.status",
+    "description": "Status for NotificationTable",
+    "defaultMessage": "EVENT TYPE"
+  },
+  {
+    "id": "NotificationTable.table.description",
+    "description": "description for current component",
+    "defaultMessage": "DESCRIPTION"
+  },
+  {
+    "id": "NotificationTable.table.remark",
+    "description": "remark for component",
+    "defaultMessage": "REMARKS"
+  },
+  {
+    "id": "NotificationTable.table.location",
+    "description": "Starting Time for Component",
+    "defaultMessage": "TIME"
   },
   {
     "id": "pps.table.heading",
@@ -208,6 +503,46 @@
     "id": "PPS.table.operatorAssigned",
     "description": "operatorAssigned for PPS",
     "defaultMessage": "OPERATOR ASSIGNED"
+  },
+  {
+    "id": "overview.tab.heading",
+    "description": "overview tab",
+    "defaultMessage": "OVERVIEW"
+  },
+  {
+    "id": "system.tab.heading",
+    "description": "system tab",
+    "defaultMessage": "SYSTEM"
+  },
+  {
+    "id": "orders.tab.heading",
+    "description": "orders tab",
+    "defaultMessage": "ORDERS"
+  },
+  {
+    "id": "users.tab.heading",
+    "description": "users tab",
+    "defaultMessage": "USERS"
+  },
+  {
+    "id": "overviewStatus.tab.heading",
+    "description": "overview Status",
+    "defaultMessage": "Fulfiling orders"
+  },
+  {
+    "id": "systemStatus.tab.heading",
+    "description": "system Status",
+    "defaultMessage": "Online"
+  },
+  {
+    "id": "ordersStatus.tab.heading",
+    "description": "orders Status",
+    "defaultMessage": "70% fulfilled"
+  },
+  {
+    "id": "usersStatus.tab.heading",
+    "description": "users Status",
+    "defaultMessage": "35 users logged in"
   },
   {
     "id": "users.add.heading",
@@ -245,61 +580,6 @@
     "defaultMessage": "Last Name"
   },
   {
-    "id": "users.add.roledetails.heading",
-    "description": "Heading for role",
-    "defaultMessage": "Choose a role"
-  },
-  {
-    "id": "users.add.roledetails.subheading",
-    "description": "Subheading for role",
-    "defaultMessage": "User will be given a specific level of control over the Butler system depending on the designated role"
-  },
-  {
-    "id": "users.add.roledetails.operator",
-    "description": "Text for operator",
-    "defaultMessage": "Operator"
-  },
-  {
-    "id": "users.add.roledetails.operatortext",
-    "description": "Subtext for operator",
-    "defaultMessage": "Grant access to the Operator Interface at each Pick Put Station in the Butler system"
-  },
-  {
-    "id": "users.add.roledetails.pick",
-    "description": "Text for pick operator",
-    "defaultMessage": "Pick Operator"
-  },
-  {
-    "id": "users.add.roledetails.put",
-    "description": "Text for put operator",
-    "defaultMessage": "Put Operator"
-  },
-  {
-    "id": "users.add.roledetails.audit",
-    "description": "Text for audit",
-    "defaultMessage": "Audit"
-  },
-  {
-    "id": "users.add.roledetails.supervisor",
-    "description": "Text for supervisor",
-    "defaultMessage": "Supervisor"
-  },
-  {
-    "id": "users.add.roledetails.supervisortext",
-    "description": "Subtext for supervisor",
-    "defaultMessage": "Grant access to the Management Interface and Operator Interface for the Butler system"
-  },
-  {
-    "id": "users.add.roledetails.manager",
-    "description": "Text for manager",
-    "defaultMessage": "Manager"
-  },
-  {
-    "id": "users.add.roledetails.managertext",
-    "description": "Subtext for manager",
-    "defaultMessage": "Grant access to the Management Interface and Operator Interface to all systems"
-  },
-  {
     "id": "users.add.password.heading",
     "description": "Heading for create password",
     "defaultMessage": "Create password"
@@ -323,6 +603,116 @@
     "id": "users.add.password.button",
     "description": "Text for add new user button",
     "defaultMessage": "Add new user"
+  },
+  {
+    "id": "users.delete.heading",
+    "description": "Text for user delete heading",
+    "defaultMessage": "Information related to the user will be lost"
+  },
+  {
+    "id": "users.edit.heading",
+    "description": "Heading for Edit user",
+    "defaultMessage": "Edit user"
+  },
+  {
+    "id": "users.edit.subheading",
+    "description": "Subheading for Edit user",
+    "defaultMessage": "All the fields are mandatory"
+  },
+  {
+    "id": "users.edit.userdetails.heading",
+    "description": "Text for user details heading",
+    "defaultMessage": "Enter User details"
+  },
+  {
+    "id": "users.edit.userdetails.subheading",
+    "description": "Text for user details subheading",
+    "defaultMessage": "A User ID will be required to log into the system"
+  },
+  {
+    "id": "users.edit.userdetails.userid",
+    "description": "Text for user id",
+    "defaultMessage": "User ID"
+  },
+  {
+    "id": "users.edit.userdetails.firstname",
+    "description": "Text for first name",
+    "defaultMessage": "First Name"
+  },
+  {
+    "id": "users.edit.userdetails.lastname",
+    "description": "Text for last name",
+    "defaultMessage": "Last Name"
+  },
+  {
+    "id": "users.edit.changepassword.heading",
+    "description": "Heading for Change password",
+    "defaultMessage": "Change password"
+  },
+  {
+    "id": "users.edit.changepassword.subheading",
+    "description": "Subheading for create password",
+    "defaultMessage": "Min of 6 digits will be required for logging into the Operator Interface"
+  },
+  {
+    "id": "users.edit.password.field1",
+    "description": "Text for password",
+    "defaultMessage": "Password"
+  },
+  {
+    "id": "users.edit.password.field2",
+    "description": "Text for confirm password",
+    "defaultMessage": "Confirm Password"
+  },
+  {
+    "id": "users.edit.password.",
+    "description": "Heading for Password",
+    "defaultMessage": "Password"
+  },
+  {
+    "id": "users.edit.password.query",
+    "description": "Text for change password",
+    "defaultMessage": "Change Password?"
+  },
+  {
+    "id": "users.edit.password.button",
+    "description": "Text for edit user button",
+    "defaultMessage": "Save"
+  },
+  {
+    "id": "users.add.roledetails.heading",
+    "description": "Heading for role",
+    "defaultMessage": "Choose a role"
+  },
+  {
+    "id": "users.add.roledetails.subheading",
+    "description": "Subheading for role",
+    "defaultMessage": "User will be given a specific level of control over the Butler system depending on the designated role"
+  },
+  {
+    "id": "users.add.roledetails.operator",
+    "description": "Text for operator",
+    "defaultMessage": "Operator"
+  },
+  {
+    "id": "users.add.roledetails.operatortext",
+    "description": "Subtext for operator",
+    "defaultMessage": "Grant access to the Operator Interface at each Pick Put Station in the Butler system"
+  },
+  {
+    "id": "users.add.roledetails.supervisortext",
+    "description": "Subtext for supervisor",
+    "defaultMessage": "Grant access to the Management Interface and Operator Interface for the Butler system"
+  },
+  {
+    "id": "users.add.roledetails.manager",
+    "description": "Text for manager",
+    "defaultMessage": "Manager"
+  },
+  {
+    "id": "users.add.roledetails.managertext",
+    "description": "Subtext for manager",
+    "defaultMessage": "Grant access to the Management Interface and Operator Interface to all systems"
   },
   {
     "id": "user.table.heading",
@@ -355,122 +745,8 @@
     "defaultMessage": "LOCATION"
   },
   {
-    "id": "user.table.productivity",
-    "description": "User productivity",
-    "defaultMessage": "PRODUCTIVITY"
-  },
-  {
     "id": "user.table.logInTime",
     "description": "User log in time",
     "defaultMessage": "LOG IN TIME"
-  },
-   {
-    "id": "overview.tab.heading",
-    "description": "overview tab",
-    "defaultMessage": "日本語"
-  },
-  {
-    "id": "system.tab.heading",
-    "description": "system tab",
-    "defaultMessage": "日本語"
-  },
-  {
-    "id": "orders.tab.heading",
-    "description": "orders tab",
-    "defaultMessage": "日本語"
-  },
-  {
-    "id": "users.tab.heading",
-    "description": "users tab",
-    "defaultMessage": "日本語"
-  }, {
-    "id": "overviewStatus.tab.heading",
-    "description": "overview Status",
-    "defaultMessage": "日本語"
-  },
-  {
-    "id": "systemStatus.tab.heading",
-    "description": "system Status",
-    "defaultMessage": "日本語"
-  },
-  {
-    "id": "ordersStatus.tab.heading",
-    "description": "orders Status",
-    "defaultMessage": "日本語"
-  },
-  {
-    "id": "usersStatus.tab.heading",
-    "description": "users Status",
-    "defaultMessage": "日本語"
-  },
-  {
-    "id": "pickPerformance.dropdown",
-    "description": "pickPerformance dropdown label",
-    "defaultMessage": "日本語"
-  },
-  {
-    "id": "putPerformance.dropdown",
-    "description": "putPerformance dropdown label",
-    "defaultMessage": "日本語"
-  },
-  {
-    "id": "auditPerformance.dropdown",
-    "description": "auditPerformance dropdown label",
-    "defaultMessage": "日本語"
-  },
-  {
-    "id": "systemHealth.dropdown",
-    "description": "systemHealth dropdown label",
-    "defaultMessage": "日本語"
-  },
-  {
-    "id": "PPSpickPerformance.dropdown",
-    "description": "PPSpickPerformance dropdown label",
-    "defaultMessage": "日本語"
-  },
-  {
-    "id": "PPSputPerformance.dropdown",
-    "description": "PPSputPerformance dropdown label",
-    "defaultMessage": "日本語"
-  },
-  {
-    "id": "PPSauditPerformance.dropdown",
-    "description": "PPSauditPerformance dropdown label",
-    "defaultMessage": "日本語"
-  },
-  {
-    "id": "health.pps",
-    "description": "pps health",
-    "defaultMessage": "日本語"
-  },
-  {
-    "id": "health.Butler",
-    "description": "Butler bots health",
-    "defaultMessage": "日本語"
-  },
-  {
-    "id": "health.ChargingStation",
-    "description": "Charging Stations health",
-    "defaultMessage": "日本語"
-  },
-  {
-    "id": "notification.tab.heading",
-    "description": "notification tab",
-    "defaultMessage": "日本語"
-  },
-  {
-    "id": "butlerBot.tab.heading",
-    "description": "butler bot tab",
-    "defaultMessage": "日本語"
-  },
-  {
-    "id": "pps.tab.heading",
-    "description": "pps tab",
-    "defaultMessage": "日本語"
-  },
-  {
-    "id": "chargingstation.tab.heading",
-    "description": "charging station tab",
-    "defaultMessage": "日本語"
   }
 ]

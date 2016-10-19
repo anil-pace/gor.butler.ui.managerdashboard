@@ -4,11 +4,12 @@
 	color:#CCCCCC;
 	border-top:solid 1px #cccccc;
 	text-align:center;
-	position:fixed;
 	bottom:0;
-	min-height:calculateRem(10px);
-	padding:1%;
-	width:95%;
+	padding:20px 0 20px 0;
+	width:97%;
 	font-family:'Source Sans Pro Regular', sans-serif;
 	font-size:14px;
+	position:absolute;
+	margin:auto;
+	margin-top:50px;
 }

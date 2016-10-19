@@ -160,7 +160,7 @@ class OrderListTable extends React.Component {
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
         width={this.props.containerWidth}
-        height={500}
+        height={this.props.containerHeight*0.9}
         {...this.props}>
         <Column
           columnKey="id"
