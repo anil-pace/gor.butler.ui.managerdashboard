@@ -5,7 +5,7 @@ import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
 import {tabSelected,subTabSelected} from '../actions/tabSelectAction';
 import {displayLoader} from '../actions/loaderAction';
-import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP} from '../constants/appConstants';
+import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP,INVENTORY} from '../constants/appConstants';
 import { FormattedMessage } from 'react-intl';
 
 class Tabs extends React.Component{
@@ -39,6 +39,9 @@ class Tabs extends React.Component{
     }
     
 	render(){
+    /**
+     * This needs to be cleaned up when data is coming from server
+     */
     let overview = <FormattedMessage id="overview.tab.heading" description="overview tab" 
               defaultMessage ="OVERVIEW"/>
 
@@ -50,6 +53,8 @@ class Tabs extends React.Component{
               
     let users = <FormattedMessage id="users.tab.heading" description="users tab" 
               defaultMessage ="USERS"/> 
+    let inventory = <FormattedMessage id="inventory.tab.heading" description="inventory tab" 
+              defaultMessage ="INVENTORY"/> 
 
     let overviewStatus = <FormattedMessage id="overviewStatus.tab.heading" description="overview Status " 
               defaultMessage ="Fulfiling orders"/>  
@@ -61,7 +66,9 @@ class Tabs extends React.Component{
               defaultMessage ="70% fulfilled"/>  
 
     let usersStatus = <FormattedMessage id="usersStatus.tab.heading" description="users Status " 
-              defaultMessage ="35 users logged in"/>          
+              defaultMessage ="35 users logged in"/>  
+    let inventoryStatus = <FormattedMessage id="inventoryStatus.tab.heading" description="inventory Status " 
+              defaultMessage ="78% space utilized"/>            
               
 	const item1 = [
       { tab: overview, Status: overviewStatus, currentState:'gorOffline' }
@@ -76,28 +83,33 @@ class Tabs extends React.Component{
     const item5 = [
       { tab: users, Status: usersStatus, currentState:'gorOffline' }
     ]
-    var selectClass = {overview:"gorMainBlock", system:"gorMainBlock",orders:"gorMainBlock", inventory:"gorMainBlock", users:"gorMainBlock"};
     
-
-    selectClass[this.props.tab] = "gorMainBlockSelect";
+    const item6 = [
+      { tab: inventory, Status: inventoryStatus, currentState:'gorOffline' }
+    ]
+    
+   
    
     
 		return (
 		<div className="gorTabs gorMainBlock">
 		<Link to="/overview" onClick = {this.handleTabClick.bind(this,OVERVIEW)}>
-			<Tab items={item1} changeClass={selectClass["overview"]} subIcons={false}/>
+			<Tab items={item1} changeClass={(this.props.tab.toUpperCase() === OVERVIEW ? 'sel' :"")} subIcons={false}/>
 		</Link>
 
 		<Link to="/system" onClick = {this.handleTabClick.bind(this,SYSTEM)}>
-			<Tab items={item2} changeClass={selectClass["system"]} subIcons={true}/>
+			<Tab items={item2} changeClass={(this.props.tab.toUpperCase() === SYSTEM ? 'sel' :"")} subIcons={true}/>
 		</Link>
 
 		<Link to="/orders" onClick = {this.handleTabClick.bind(this,ORDERS)}>
-			<Tab items={item3} changeClass={selectClass["orders"]} subIcons={true}/>
+			<Tab items={item3} changeClass={(this.props.tab.toUpperCase() === ORDERS ? 'sel' :"")} subIcons={true}/>
 		</Link>
+    <Link to="/inventory" onClick = {this.handleTabClick.bind(this,INVENTORY)}>
+      <Tab items={item6} changeClass={(this.props.tab.toUpperCase() === INVENTORY ? 'sel' :"")} subIcons={true}/>
+    </Link>
 		
 		<Link to="/users" onClick = {this.handleTabClick.bind(this,USERS)}>
-			<Tab items={item5} changeClass={selectClass["users"]} subIcons={false}/>
+			<Tab items={item5} changeClass={(this.props.tab.toUpperCase() === USERS ? 'sel' :"")} subIcons={false}/>
 		</Link>
 	</div>
 		);

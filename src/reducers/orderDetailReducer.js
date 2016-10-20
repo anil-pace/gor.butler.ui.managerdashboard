@@ -15,12 +15,14 @@ function processOrders(data) {
         orderData.status = ordersStatus[data[i].status];
         orderData.statusClass = "breached";
       }
-      orderData.recievedTime = data[i].create_time;
+      orderData.recievedTime = (data[i].create_time.substring(4));
+      orderData.recievedTime = orderData.recievedTime.substring(0, orderData.recievedTime.length - 4)
       if(data[i].pick_before_time === null) {
         orderData.pickBy = "--";
       }
       else {
-        orderData.pickBy = data[i].pick_before_time;
+        orderData.pickBy = data[i].pick_before_time.substring(4);
+        orderData.pickBy = orderData.pickBy.substring(0, orderData.pickBy.length - 4)
       }
 
       if(data[i].completed_orderlines === 0) {
@@ -30,7 +32,8 @@ function processOrders(data) {
         total_orderlines = data[i].completed_orderlines + "/" + data[i].total_orderlines;
         orderData.orderLine = total_orderlines;
       }
-      orderData.completedTime = data[i].update_time;
+      orderData.completedTime = data[i].update_time.substring(4);
+      orderData.completedTime = orderData.completedTime.substring(0, orderData.completedTime.length - 4);
 
       renderOrderData.push(orderData);
       orderData = {};

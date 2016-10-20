@@ -178,7 +178,7 @@ class UserDataTable extends React.Component {
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
         width={this.props.containerWidth}
-        height={heightRes}
+        height={this.props.containerHeight}
         {...this.props}>
         <Column
           columnKey="id"

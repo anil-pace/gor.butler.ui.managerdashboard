@@ -52,6 +52,7 @@ export const ORDER_RECIEVED = "ORDER_RECIEVED";
 
 /*Constants for stats widget*/
 export const RENDER_STATSWIDGET = "RENDER_STATSWIDGET";
+export const BAR_D3_COMPONENT = "BAR_D3_COMPONENT";
 
 /*Constants for main tab*/
 export const OVERVIEW = "OVERVIEW";
@@ -65,7 +66,13 @@ export const CHARGING_TAB = "Charging Station";
 export const PPS_TAB = "Pick Put Stations";
 export const ORDER_LIST = "Order List";
 export const WAVES = "Waves";
-
+export const TAB_CLASS = {
+	overview:"gorMainBlock", 
+	system:"gorMainBlock",
+	orders:"gorMainBlock", 
+	inventory:"gorMainBlock", 
+	users:"gorMainBlock"
+};
 
 
 /*Constants for response type */

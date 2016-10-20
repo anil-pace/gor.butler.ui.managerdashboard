@@ -242,7 +242,7 @@ class PPStable extends React.Component {
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
         width={this.props.containerWidth}
-        height={560}
+        height={this.props.containerHeight}
         {...this.props}>
         <Column
           columnKey="id"

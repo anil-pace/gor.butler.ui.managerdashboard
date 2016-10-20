@@ -1,0 +1,24 @@
+@import '../abstracts/mixins';
+@import '../abstracts/functions';
+
+.gorInventory{
+	background:#fff;
+	.head{
+		padding: 25px 20px;
+		border-bottom: 1px solid #aaaaaa;
+	}
+	.labelCnt{
+		display: inline-block;
+	    width: 50%;
+	    overflow: hidden;
+	}
+	.dwnLoadCnt{
+		width: 50%;
+    	display: inline-block;
+    	overflow: hidden;
+	}
+	.gorBtn{
+		@include gor-btn(Source Sans Pro Bold,10px,14px,#4d5055,#ffffff,3px);
+		float:right;
+	}
+}

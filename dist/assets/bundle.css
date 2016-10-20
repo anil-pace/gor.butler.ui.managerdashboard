@@ -716,23 +716,14 @@ body {
   height: 100vh;
 }
 
-.gorTab.gorContainer {
+.gorTabs .gorTab.gorContainer {
   background-color: #4d5055;
   width: auto;
   display: inline-block;
   height: 60px;
 }
 
-.gorTab .gorMainBlock:hover {
-  background-color: #323539;
-}
-
-.gorTab .gorInline {
-  display: inline-block;
-  width: 100%;
-}
-
-.gorTab .gorMainBlock {
+.gorTabs .gorTab .gorMainBlock {
   width: 150px;
   padding-right: 20px;
   padding-left: 20px;
@@ -744,7 +735,20 @@ body {
   vertical-align: middle;
 }
 
-.gorTab .gor-upperText {
+.gorTabs .gorTab .gorMainBlock:hover {
+  background-color: #323539;
+}
+
+.gorTabs .gorTab .gorMainBlock.sel {
+  background-color: #323539;
+}
+
+.gorTabs .gorTab .gorInline {
+  display: inline-block;
+  width: 100%;
+}
+
+.gorTabs .gorTab .gor-upperText {
   font-family: "source sans pro";
   font-size: 18px;
   font-weight: bold;
@@ -754,66 +758,54 @@ body {
   width: 75%;
 }
 
-.gorTab .gorSubText {
+.gorTabs .gorTab .gorSubText {
   font-size: 14px;
   padding-top: 0px;
   font-weight: bold;
 }
 
-.gorTab .gorOverview {
+.gorTabs .gorTab .gorOverview {
   font-family: "source sans pro";
   color: #ffffff;
 }
 
-.gorTab .gorOnline {
+.gorTabs .gorTab .gorOnline {
   font-family: "source sans pro";
   color: #10c469;
 }
 
-.gorTab .gorOffline {
+.gorTabs .gorTab .gorOffline {
   font-family: "source sans pro";
   color: #9C9FA0;
 }
 
-.gorTab .gorEvent {
+.gorTabs .gorTab .gorEvent {
   font-family: "source sans pro";
   color: #27aae1;
 }
 
-.gorTab .gorRisk {
+.gorTabs .gorTab .gorRisk {
   font-family: "source sans pro";
   color: #f99405;
 }
 
-.gorTab .gorError {
+.gorTabs .gorTab .gorError {
   font-family: "source sans pro";
   color: #fc3838;
 }
 
-.gorTab .gorEmergency {
+.gorTabs .gorTab .gorEmergency {
   font-family: "source sans pro";
   color: #ffffff;
   background: #fc3838;
 }
 
-.gorTab .gorMainBlockSelect {
-  width: 150px;
-  padding-right: 20px;
-  padding-left: 20px;
-  height: 62px;
-  display: table-cell;
-  border-right: .5px solid black;
-  cursor: pointer;
-  background-color: #323539;
-  vertical-align: middle;
-}
-
-.gorTab .gorIconsInline {
+.gorTabs .gorTab .gorIconsInline {
   display: inline-block;
   vertical-align: super;
 }
 
-.gorTab .gorInlineDisplay {
+.gorTabs .gorTab .gorInlineDisplay {
   display: inline-block;
   padding-right: 16px;
 }
@@ -2631,7 +2623,13 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 
 .gorTesting {
   width: 100%;
-  height: 80vh;
+  height: 76vh;
+  position: relative;
+}
+
+.gor-Orderlist-table {
+  width: 100%;
+  height: 79vh;
   position: relative;
 }
 
@@ -3429,6 +3427,12 @@ progress::-moz-progress-bar {
   padding-left: 10px;
 }
 
+.gor-Pagination {
+  width: 100%;
+  height: 70vh;
+  position: relative;
+}
+
 .gor-align-middle {
   vertical-align: middle;
 }
@@ -3475,4 +3479,35 @@ progress::-moz-progress-bar {
   color: #ffffff;
   border-radius: 3px;
   display: inline-block;
+}
+
+.gorInventory {
+  background: #fff;
+}
+
+.gorInventory .head {
+  padding: 25px 20px;
+  border-bottom: 1px solid #aaaaaa;
+}
+
+.gorInventory .labelCnt {
+  display: inline-block;
+  width: 50%;
+  overflow: hidden;
+}
+
+.gorInventory .dwnLoadCnt {
+  width: 50%;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.gorInventory .gorBtn {
+  font-family: Source Sans Pro Bold, sans-serif;
+  padding: 10px;
+  font-size: 14px;
+  background: #4d5055;
+  color: #ffffff;
+  border-radius: 3px;
+  float: right;
 }
