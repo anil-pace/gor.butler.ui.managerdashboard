@@ -73,7 +73,12 @@ class PickStatusWidget extends React.Component{
                             values={{
                                 count: ppsCount,
                                 throughput:pickThroughput
-                            }}/>;            
+                            }}/>;     
+  
+            eta=this._toTime(ordersData.eta);
+            lowright=<FormattedMessage id="widget.pick.lowright" description='Estimated time' 
+            defaultMessage='Completing in {eta}' values={{eta:eta}}/>;
+
             if(ordersData.wave_end)
             {
                 headingright=<FormattedMessage id="widget.pick.headingright" description='Heading for cut-off time' 
@@ -83,11 +88,6 @@ class PickStatusWidget extends React.Component{
 
                 textright=<FormattedMessage id="widget.pick.textright" description='Time remaining' 
                 defaultMessage='{cut_off}' values={{cut_off:remTime}} />;
-
-
-                eta=this._toTime(ordersData.eta);
-                lowright=<FormattedMessage id="widget.pick.lowright" description='Estimated time' 
-                defaultMessage='Completing in {eta}' values={{eta:eta}}/>;
 
                 statusright=<FormattedMessage id="widget.pick.statusright" description='Text for wave end time' 
                 defaultMessage='{wave_end}' values={{wave_end:ordersData.wave_end}}/>

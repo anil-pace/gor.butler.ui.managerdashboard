@@ -72,14 +72,14 @@ class Routes extends React.Component{
 					getComponent={(location, callback) => {
 				      require.ensure([], function (require) {
 				        callback(null, require('../containers/systemTabs/butlerbotTab').default);
-				      });
+				      },"indexButBot");
 				    }}
 					 />
 					 	<Route name="butlerbots" path="/butlerbots"  
 						 getComponent={(location, callback) => {
 					      require.ensure([], function (require) {
 					        callback(null, require('../containers/systemTabs/butlerbotTab').default);
-					      });
+					      },"butlerBots");
 					    }}
 						 />
 
@@ -87,7 +87,7 @@ class Routes extends React.Component{
 						 getComponent={(location, callback) => {
 					      require.ensure([], function (require) {
 					        callback(null, require('../containers/systemTabs/ppsTab').default);
-					      });
+					      },"pps");
 					    }}
 						 />
 
@@ -95,7 +95,7 @@ class Routes extends React.Component{
 						 getComponent={(location, callback) => {
 					      require.ensure([], function (require) {
 					        callback(null, require('../containers/systemTabs/chargingStationsTab').default);
-					      });
+					      },"chargingStation");
 					    }}
 						 />
 					 </Route>
@@ -104,14 +104,14 @@ class Routes extends React.Component{
 					 getComponent={(location, callback) => {
 				      require.ensure([], function (require) {
 				        callback(null, require('../containers/ordersTab').default);
-				      });
+				      },"orders");
 				    }}
 					 >
 					 		 <IndexRoute 
 					getComponent={(location, callback) => {
 				      require.ensure([], function (require) {
 				        callback(null, require('../containers/orderTab/waveTab').default);
-				      });
+				      },"indexWave");
 				    }}
 					 />
 
@@ -119,7 +119,7 @@ class Routes extends React.Component{
 						 	getComponent={(location, callback) => {
 				      		require.ensure([], function (require) {
 				        	callback(null, require('../containers/orderTab/waveTab').default);
-				      		});
+				      		},"waveTab");
 				   			 }}
 							 />
 
@@ -127,7 +127,7 @@ class Routes extends React.Component{
 						 	getComponent={(location, callback) => {
 				      		require.ensure([], function (require) {
 				        	callback(null, require('../containers/orderTab/orderListTab').default);
-				      		});
+				      		},"orderList");
 				   			 }}
 							 />
 					 </Route>
@@ -138,7 +138,7 @@ class Routes extends React.Component{
 					 getComponent={(location, callback) => {
 				      require.ensure([], function (require) {
 				        callback(null, require('../containers/usersTab').default);
-				      });
+				      },"users");
 				    }}
 					 />
 

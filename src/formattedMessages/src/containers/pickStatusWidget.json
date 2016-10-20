@@ -25,6 +25,11 @@
     "defaultMessage": "{count} PPS fullfilling at {throughput} items/hr"
   },
   {
+    "id": "widget.pick.lowright",
+    "description": "Estimated time",
+    "defaultMessage": "Completing in {eta}"
+  },
+  {
     "id": "widget.pick.headingright",
     "description": "Heading for cut-off time",
     "defaultMessage": "Time to cut-off"
@@ -33,11 +38,6 @@
     "id": "widget.pick.textright",
     "description": "Time remaining",
     "defaultMessage": "{cut_off}"
-  },
-  {
-    "id": "widget.pick.lowright",
-    "description": "Estimated time",
-    "defaultMessage": "Completing in {eta}"
   },
   {
     "id": "widget.pick.statusright",

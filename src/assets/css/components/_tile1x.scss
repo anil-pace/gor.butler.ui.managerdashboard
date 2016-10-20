@@ -14,7 +14,7 @@ body
   box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.2);
   border-radius: calculateRem(3px);
   display: inline-block;
-  min-height:calculateRem(170px);
+  min-height:calculateRem(150px);
   margin: 1% 1% 0% 2%;
   font-size: 0;
   &.gor-double{
@@ -31,8 +31,8 @@ body
     margin:0;
   }
   .gor-up-tile{
-    padding: 20px 10px 10px 20px;
-    min-height:calculateRem(100px);
+    padding: 27px 10px 10px 20px;
+    min-height:calculateRem(80px);
   }
   .gor-tile-left{
     width: 80%;
@@ -52,7 +52,7 @@ body
     font-family: 'Source Sans Pro semibold', sans-serif;
     font-size: calculateRem(16px);
     font-weight: 600;
-    line-height: 33px;
+    line-height: 15px;
 }
 .gor-heading-value{
     font-family: 'Source Sans Pro regular', sans-serif;
@@ -75,7 +75,7 @@ body
 .gor-tile-right{
   width: 50px;
   display:inline-block;
-  vertical-align: sub;
+  vertical-align: top;
   height:55px;
 }
 .gor-low-tile{

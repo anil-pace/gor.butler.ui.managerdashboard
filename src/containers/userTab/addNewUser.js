@@ -5,6 +5,7 @@ import {validateID, validateName, validatePassword, resetForm} from '../../actio
 import {userRequest} from '../../actions/userActions';
 import {ADD_USER,CHECK_ID,ERROR,SUCCESS,INFO,GET_ROLES} from '../../constants/appConstants';
 import {ROLE_URL,CHECK_USER,HEADER_URL} from '../../constants/configConstants';
+import {INVALID_ID,EMPTY_PWD,TYPE_SUCCESS,EMPTY_NAME,INVALID_NAME,INVALID_PWD,MATCH_PWD} from '../../constants/messageConstants';
 import { connect } from 'react-redux';
 import FieldError from '../../components/fielderror/fielderror';
 import RadioGroup from './radioGroup';
@@ -30,12 +31,26 @@ class AddUser extends React.Component{
         this.props.userRequest(userData);
   }
   _checkId(){
-    let data1={userid:this.userId.value};
-    this.props.validateID(data1);
-    if(data1.userid)
-    {
-      let userData={
-                'url':CHECK_USER+data1.userid,
+    let userid=this.userId.value, idInfo;
+    if(userid.length<1)
+      {
+            idInfo={
+              type:ERROR,
+              msg:INVALID_ID           
+            }
+      }
+      else
+      {
+            idInfo={
+              type:SUCCESS,
+              msg:TYPE_SUCCESS               
+            };            
+      }
+      this.props.validateID(idInfo);
+      if(idInfo.type)
+      {
+       let userData={
+                'url':CHECK_USER+userid,
                 'method':'GET',
                 'cause':CHECK_ID,
                 'contentType':'application/json',
@@ -44,20 +59,57 @@ class AddUser extends React.Component{
       }
       this.props.userRequest(userData);
     }
-  }
+   }
   _checkName(){
-      let data2={
-        firstname:this.firstName.value,
-        lastname:this.lastName.value
-      };   
-      this.props.validateName(data2);
+      let firstname=this.firstName.value, lastname=this.lastName.value, format=  /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, nameInfo;
+          if(firstname.length<1||lastname.length<1||firstname.length>50||lastname.length>50)
+          {
+            nameInfo={
+              type:ERROR,
+              msg:EMPTY_NAME         
+            }
+          }
+          else if(format.test(firstname)||format.test(lastname))
+          {
+            nameInfo={
+              type:ERROR,
+              msg:INVALID_NAME           
+            }            
+          }
+          else
+          {
+            nameInfo={
+              type:SUCCESS,
+              msg:TYPE_SUCCESS               
+            };            
+          };   
+      this.props.validateName(nameInfo);
    }
   _checkPwd(){
-    let data3={
-    pwd1:this.password1.value,
-    pwd2:this.password2.value
-    };   
-    this.props.validatePassword(data3);
+    let pwd1=this.password1.value,pwd2=this.password2.value, passwordInfo;
+          if(pwd1.length<6||!pwd1.replace(/\s/g, '').length)
+          {
+            passwordInfo={
+              type:ERROR,
+              msg:INVALID_PWD           
+            };            
+          }
+          else if(pwd1!=pwd2)
+          {
+            passwordInfo={
+              type:ERROR,
+              msg:MATCH_PWD           
+            };            
+          }
+          else
+          {
+            passwordInfo={
+              type:SUCCESS,
+              msg:TYPE_SUCCESS               
+            };            
+          };   
+    this.props.validatePassword(passwordInfo);
+    return passwordInfo.type;
   }
   _handleAddUser(e){
         e.preventDefault();
@@ -81,8 +133,8 @@ class AddUser extends React.Component{
         }
         else if(!this.props.passwordCheck.type)
         {
-          this._checkPwd();
-          return;
+          if(!this._checkPwd())
+            return;
         }
 
         role=this.props.roleSet?this.props.roleSet.msg:this.props.roleInfo.msg.operator;

@@ -27,7 +27,7 @@ import {getOrderDetail} from './reducers/orderDetailReducer';
 import {appInfo} from './reducers/infoReducer';
 import {filterOptions} from './reducers/orderFilterReducer'
 import {waveInfo} from './reducers/waveDetailReducer';
-
+import {d3barChart} from './reducers/barChartReducer';
 
 const rootReducer = combineReducers({
   intl:intlReducer,
@@ -57,7 +57,8 @@ const rootReducer = combineReducers({
   loader,
   getOrderDetail,
   filterOptions,
-  waveInfo
+  waveInfo,
+  d3barChart
    })
 
 export default rootReducer
