@@ -22,10 +22,10 @@ class ChargingStationsTable extends React.Component {
       sortedDataList: this._dataList,
       colSortDirs: {},
       columnWidths: {
-        id: columnWidth,
-        status: columnWidth,
-        mode: columnWidth,
-        dockedBots: columnWidth
+        id: this.props.containerWidth*0.15,
+        status: this.props.containerWidth*0.1,
+        mode: this.props.containerWidth*0.15,
+        dockedBots: this.props.containerWidth*0.6
       },
       
     };
@@ -49,10 +49,10 @@ class ChargingStationsTable extends React.Component {
       sortedDataList: this._dataList,
       colSortDirs: {},
       columnWidths: {
-        id: columnWidth,
-        status: columnWidth,
-        mode: columnWidth,
-        dockedBots: columnWidth
+       id: nextProps.containerWidth*0.15,
+        status: nextProps.containerWidth*0.15,
+        mode: nextProps.containerWidth*0.15,
+        dockedBots: nextProps.containerWidth*0.55
       },
       
     };

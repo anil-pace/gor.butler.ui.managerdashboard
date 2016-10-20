@@ -13,28 +13,28 @@ export const wsOverviewData = {
               {
                 "resource_id": "put",
                 "details": {
-                  "data": "aggregate",
+                  "data": "aggregate_v2",
                   "callback": []
                 }
               },
               {
                 "resource_id": "butlers",
                 "details": {
-                  "data": "aggregate",
+                  "data": "aggregate_v2",
                   "callback": []
                 }
               },
               {
                 "resource_id": "chargers",
                 "details": {
-                  "data": "aggregate",
+                  "data": "aggregate_v2",
                   "callback": []
                 }
               },
               {
                 "resource_id": "orders",
                 "details": {
-                  "data": "aggregate",
+                  "data": "aggregate_v2",
                   "callback": []
                 }
               },
@@ -60,7 +60,7 @@ export const wsOverviewData = {
                 {
                   "resource_id": "users",
                   "details": {
-                    "data": "complete",
+                    "data": "complete_v2",
                     "callback": []
                   }
                 },
@@ -73,7 +73,7 @@ export const wsOverviewData = {
                 {
                   "resource_id": "butlers",
                   "details": {
-                    "data": "complete",
+                    "data": "complete_v2",
                     "callback": []
                   }
                 }
@@ -85,7 +85,7 @@ export const wsOverviewData = {
                 {
                   "resource_id": "pps",
                   "details": {
-                    "data": "complete",
+                    "data": "complete_v2",
                     "callback": []
                   }
                 }
@@ -97,7 +97,7 @@ export const wsOverviewData = {
 			{
                   "resource_id": "chargers",
                   "details": {
-                    "data": "complete",
+                    "data": "complete_v2",
                     "callback": []
                   }
             }
@@ -109,7 +109,7 @@ export const wsOverviewData = {
 			{
                   "resource_id": "notification",
                   "details": {
-                    "data": "complete",
+                    "data": "complete_v2",
                     "callback": []
                   }
             }
@@ -121,7 +121,7 @@ export const wsOverviewData = {
 			{
                   "resource_id": "butlers",
                   "details": {
-                    "data": "complete",
+                    "data": "complete_v2",
                     "callback": []
                   }
             }
@@ -134,7 +134,7 @@ export const wsOverviewData = {
                 {
                   "resource_id": "inventory",
                   "details": {
-                    "data": "complete",
+                    "data": "complete_v2",
                     "callback": []
                   }
                 },
@@ -147,7 +147,7 @@ export const wsOverviewData = {
                 {
                   "resource_id": "orders",
                   "details": {
-                    "data": "complete",
+                    "data": "complete_v2",
                     "callback": []
                   }
                 },
