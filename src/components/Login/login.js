@@ -3,15 +3,15 @@ import ReactDOM  from 'react-dom';
 import Footer from '../Footer/Footer';
 import Loader from '../../components/loader/Loader'
 import { authLoginData,mockLoginAuth,setUsername,setLoginLoader } from '../../actions/loginAction';
-import {validateID, validatePass, resetForm} from '../../actions/validationActions';
+import {validateID, validatePassword, resetForm} from '../../actions/validationActions';
 import { connect } from 'react-redux';
-import {AUTH_LOGIN,ERROR} from '../../constants/appConstants'; 
+import {AUTH_LOGIN,ERROR,SUCCESS} from '../../constants/appConstants'; 
+import {INVALID_ID,EMPTY_PWD,TYPE_SUCCESS} from '../../constants/messageConstants'; 
 import {LOGIN_URL} from '../../constants/configConstants'; 
 import { FormattedMessage } from 'react-intl';
 import { updateIntl } from 'react-intl-redux';
 import Dropdown from '../../components/dropdown/dropdown.js';
 import { translationMessages } from '../../utilities/i18n';
-import { messages } from './messages'
 
 
 class Login extends React.Component{
@@ -36,12 +36,42 @@ class Login extends React.Component{
       }
     }
     _checkUser(){
-            let data1={userid:this.userName.value};
-            this.props.validateID(data1);
+          let userid=this.userName.value, idInfo;
+          if(userid.length<1)
+          {
+            idInfo={
+              type:ERROR,
+              msg:INVALID_ID           
+            }
+          }
+          else
+          {
+            idInfo={
+              type:SUCCESS,
+              msg:TYPE_SUCCESS               
+            };            
+          }
+         this.props.validateID(idInfo);
+         return idInfo.type;
     }
     _checkPass(){
-            let data1={password:this.password.value};
-            this.props.validatePass(data1);
+          let password=this.password.value.trim(), loginPassInfo;
+          if(password.length<1)
+          {
+            loginPassInfo={
+              type:ERROR,
+              msg:EMPTY_PWD           
+            }
+          }
+          else
+          {
+            loginPassInfo={
+              type:SUCCESS,
+              msg:TYPE_SUCCESS               
+            };            
+          };
+          this.props.validatePass(loginPassInfo);
+          return loginPassInfo.type;    
     }
     /**
      * Checks for the changes in the language selection
@@ -70,9 +100,15 @@ class Login extends React.Component{
           	'username': this.userName.value,
           	'password': this.password.value,
          };
-        if(!formdata.username||!formdata.password)
+        if(!this.props.idInfo.type)
         {
-            return;
+            if(!this._checkUser())
+                return;
+        }
+        if(!this.props.loginPassCheck.type)
+        {
+            if(!this._checkPass())
+                return;
         }
         let loginData={
                 'url':LOGIN_URL,
@@ -140,7 +176,7 @@ class Login extends React.Component{
                 {(this.props.loginAuthorized===false)?(<div className='gor-login-auth-error'><div className='gor-login-error'></div>
 
                     <FormattedMessage id='login.butler.fail' 
-                        defaultMessage="Invalid username and/or password" description="Text for login failure"/>
+                        defaultMessage="Invalid username and/or password, please try again" description="Text for login failure"/>
 
                  </div>):''
                 }
@@ -163,7 +199,7 @@ class Login extends React.Component{
                 }
                 <section>
                 <div className={'gor-login-field'+(this.props.loginPassCheck.type===ERROR||this.props.loginAuthorized===false?' gor-input-error':' gor-input-ok')}  ref={node => { this.passField = node }}>
-                        <div className={this.props.idInfo.type===ERROR||this.props.loginAuthorized===false?'gor-login-password-error':'gor-login-password'}></div>
+                        <div className={this.props.loginPassCheck.type===ERROR||this.props.loginAuthorized===false?'gor-login-password-error':'gor-login-password'}></div>
                         <input className='field' onBlur={this._checkPass.bind(this)} type="password" id="password" 
                         placeholder={this.props.intlMessages["login.form.password"]}
                          ref={node => { this.password = node }}/>
@@ -178,7 +214,7 @@ class Login extends React.Component{
                     </div>):''):''
                 }
                 <section>
-                    <input type="submit" className='gor-login-btn'  value="Login" /><br />
+                    <input type="submit" className='gor-login-btn'  value={this.props.intlMessages["login.form.button"]} /><br />
                 </section>
                 </div>
                 <div className='gor-box-bottom'><span className='gor-box-bottom-left'></span>
@@ -208,7 +244,7 @@ function mapStateToProps(state, ownProps){
         sLang: state.intl.locale,
         intlMessages: state.intl.messages,
         idInfo: state.appInfo.idInfo||{},
-        loginPassCheck: state.appInfo.loginPassInfo||{},
+        loginPassCheck: state.appInfo.passwordInfo||{},
         loginLoading:state.loader.loginLoader           
     };
 }
@@ -226,7 +262,7 @@ var mapDispatchToProps = function(dispatch){
         mockLoginAuth: function(params){ dispatch(mockLoginAuth(params)); },
         validateID: function(data){ dispatch(validateID(data)); }, 
         setUsername: function(data){ dispatch(setUsername(data)); },        
-        validatePass: function(data){ dispatch(validatePass(data)); },        
+        validatePass: function(data){ dispatch(validatePassword(data)); },        
         resetForm:   function(){ dispatch(resetForm()); },
         setLoginLoader:   function(data){ dispatch(setLoginLoader(data)); }
     }

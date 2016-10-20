@@ -18,22 +18,25 @@ class ButlerBotTable extends React.Component {
       this._defaultSortIndexes.push(index);
     }
     var columnWidth= (this.props.containerWidth/this.props.itemNumber)
+    //var columnWidth = 10;
     this.state = {
       sortedDataList: this._dataList,
       colSortDirs: {},
       columnWidths: {
-        id: columnWidth,
-        status: columnWidth,
-        current: columnWidth,
-        msu: columnWidth,
-        location: columnWidth,
-        voltage: columnWidth
+        id: this.props.containerWidth*0.15,
+        status: this.props.containerWidth*0.1,
+        current: this.props.containerWidth*0.25,
+        msu: this.props.containerWidth*0.1,
+        location: this.props.containerWidth*0.1,
+        voltage: this.props.containerWidth*0.3
       },
     };
     this._onSortChange = this._onSortChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
   }
+
+  
 
   componentWillReceiveProps(nextProps) {
     var items = nextProps.items || [];
@@ -50,12 +53,12 @@ class ButlerBotTable extends React.Component {
       sortedDataList: this._dataList,
       colSortDirs: {},
       columnWidths: {
-        id: columnWidth,
-        status: columnWidth,
-        current: columnWidth,
-        msu: columnWidth,
-        location: columnWidth,
-        voltage: columnWidth
+        id: nextProps.containerWidth*0.1,
+        status: nextProps.containerWidth*0.1,
+        current: nextProps.containerWidth*0.25,
+        msu: nextProps.containerWidth*0.1,
+        location: nextProps.containerWidth*0.1,
+        voltage: nextProps.containerWidth*0.35
       },
     };
     this._onSortChange = this._onSortChange.bind(this);
@@ -123,7 +126,7 @@ class ButlerBotTable extends React.Component {
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
         width={this.props.containerWidth}
-        height={560}
+        height={this.props.containerHeight}
         {...this.props}>
         <Column
           columnKey="id"
@@ -169,7 +172,7 @@ class ButlerBotTable extends React.Component {
             <SortHeaderCell>
               <FormattedMessage id="butlerBot.table.currentTask" description="Current task for butlerbot" 
               defaultMessage ="CURRENT TASK"/>
-              <div className="gorToolHeaderSubText"> Pick ({this.props.parameters.pick}) . Put ({this.props.parameters.put}) . Charging ({this.props.parameters.charging}) . Idle ({this.props.parameters.idle}) </div>
+              <div className="gorToolHeaderSubText"> Pick ({this.props.parameters.Pick}) . Put ({this.props.parameters.Put}) . Charging ({this.props.parameters.Charging}) . Idle ({this.props.parameters.Idle}) </div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}

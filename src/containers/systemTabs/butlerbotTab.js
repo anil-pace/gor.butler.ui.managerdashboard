@@ -14,15 +14,16 @@ class ButlerBot extends React.Component{
 	render(){
   var itemNumber = 6;
   var butlerData = this.props.butlerDetail.butlerDetail, avgVoltage =0;
-  var taskDetail = {"put":0, "pick":0, "charging":0, "idle":0, "avgVoltage":0, "msuMounted":0, "location":0};
+  var taskDetail = {"Put":0, "Pick":0, "Charging":0, "Idle":0,"Audit":0, "avgVoltage":0, "msuMounted":0, "location":0};
   if(butlerData && butlerData.length) {
   	for (var i = butlerData.length - 1; i >= 0; i--) {
   		avgVoltage = butlerData[i].voltage + avgVoltage;
-  		if(butlerData[i].taskType === null) {
-  			taskDetail["idle"]++;
+  		if(butlerData[i].taskNum === null || butlerData[i].taskNum === undefined) {
+  			taskDetail["Idle"]++;
   		}
   		else{
-  			taskDetail[butlerData[i].taskType]++;
+      
+  			taskDetail[butlerData[i].taskNum]++;
   		}
 
   		if(butlerData[i].msu !== "--") {
@@ -36,9 +37,17 @@ class ButlerBot extends React.Component{
   	}
   	avgVoltage = ((avgVoltage/(butlerData.length)).toFixed(2));
   	taskDetail["avgVoltage"]=avgVoltage + "V";
+
+
+      butlerData = butlerData.sort(function(a, b) {
+        if(a.id < b.id) return -1;
+        if(a.id > b.id) return 1;
+        return 0;
+      });
+
   }
   else {
-  	taskDetail = {"put":"--", "pick":"--", "charging":"--", "idle":"--", "avgVoltage":"--", "msuMounted":"--", "location":"--"};
+  	taskDetail = {"Put":"--", "Pick":"--", "Charging":"--", "Idle":"--","Audit":"--", "avgVoltage":"--", "msuMounted":"--", "location":"--"};
   }
 		return (
 			<div>

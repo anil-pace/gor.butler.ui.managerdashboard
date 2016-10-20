@@ -238,7 +238,6 @@ body {
 
 .iPick {
   background-position: -308px -1px;
-  margin-bottom: 33px;
 }
 
 .overview-tile-ontime-icon {
@@ -831,7 +830,7 @@ body {
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2);
   border-radius: 0.1875rem;
   display: inline-block;
-  min-height: 10.625rem;
+  min-height: 9.375rem;
   margin: 1% 1% 0% 2%;
   font-size: 0;
 }
@@ -853,8 +852,8 @@ body {
 }
 
 .gor-tile .gor-up-tile {
-  padding: 20px 10px 10px 20px;
-  min-height: 6.25rem;
+  padding: 27px 10px 10px 20px;
+  min-height: 5rem;
 }
 
 .gor-tile .gor-tile-left {
@@ -878,7 +877,7 @@ body {
   font-family: 'Source Sans Pro semibold', sans-serif;
   font-size: 1rem;
   font-weight: 600;
-  line-height: 33px;
+  line-height: 15px;
 }
 
 .gor-tile .gor-heading-value {
@@ -907,7 +906,7 @@ body {
 .gor-tile .gor-tile-right {
   width: 50px;
   display: inline-block;
-  vertical-align: sub;
+  vertical-align: top;
   height: 55px;
 }
 
@@ -1310,8 +1309,8 @@ body {
   background: #FFFFFF;
   border-radius: 5px;
   color: #979797;
-  width: 30%;
-  min-height: 22rem;
+  width: 38%;
+  min-height: 22.5rem;
   margin: auto;
   margin-top: 2.5rem;
 }
@@ -1591,6 +1590,9 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   overflow: hidden;
   position: absolute;
   top: 0;
+  border-bottom: #e6e6e6;
+  border-style: solid;
+  border-bottom-width: 0.1px;
 }
 
 .fixedDataTableRowLayout_body {
@@ -1762,7 +1764,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   border-bottom-style: solid;
   border-color: #dedede;
   border-bottom-width: 0px;
-  border-right-style: solid;
 }
 
 .public_fixedDataTable_footer .public_fixedDataTableCell_main {
@@ -2023,7 +2024,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
  * Table row.
  */
 .public_fixedDataTableRow_main {
-  background-color: #fff;
+  background-color: #f8f8f8;
 }
 
 .public_fixedDataTableRow_highlighted,
@@ -2632,7 +2633,13 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 
 .gorTesting {
   width: 100%;
-  height: 80vh;
+  height: 76vh;
+  position: relative;
+}
+
+.gor-Orderlist-table {
+  width: 100%;
+  height: 79vh;
   position: relative;
 }
 
@@ -2841,6 +2848,27 @@ progress::-moz-progress-bar {
   display: inline-block;
   padding-right: 15px;
   width: 143px;
+}
+
+.gor-progressBar {
+  background-color: #4d5055;
+  border-style: solid;
+  border-color: #4d5055;
+  border-radius: 15px;
+  height: 100%;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.gor-progressBar-wrap {
+  border-style: solid;
+  border-color: #4d5055;
+  background: #ffffff;
+  border-width: 1px;
+  border-radius: 15px;
+  height: 10px;
+  width: 100px;
+  display: inline-block;
 }
 
 .gorSubTab.gorContainer {
@@ -3074,13 +3102,14 @@ progress::-moz-progress-bar {
   color: #CCCCCC;
   border-top: solid 1px #cccccc;
   text-align: center;
-  position: fixed;
   bottom: 0;
-  min-height: 0.625rem;
-  padding: 1%;
-  width: 95%;
+  padding: 20px 0 20px 0;
+  width: 97%;
   font-family: 'Source Sans Pro Regular', sans-serif;
   font-size: 14px;
+  position: absolute;
+  margin: auto;
+  margin-top: 50px;
 }
 
 .react-redux-modal button:focus {
@@ -3263,15 +3292,15 @@ progress::-moz-progress-bar {
 }
 
 .pagination .active {
-  background: #337ab7;
+  background: #4d5055;
 }
 
 .pagination .active a {
   z-index: 3;
   color: #fff;
   cursor: default;
-  background-color: #337ab7;
-  border-color: #337ab7;
+  background-color: #4d5055;
+  border-color: #4d5055;
 }
 
 .pagination li {
@@ -3427,6 +3456,12 @@ progress::-moz-progress-bar {
   color: #aaaaaa;
   vertical-align: sub;
   padding-left: 10px;
+}
+
+.gor-Pagination {
+  width: 100%;
+  height: 70vh;
+  position: relative;
 }
 
 .gor-align-middle {

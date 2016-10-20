@@ -52,6 +52,7 @@ export const ORDER_RECIEVED = "ORDER_RECIEVED";
 
 /*Constants for stats widget*/
 export const RENDER_STATSWIDGET = "RENDER_STATSWIDGET";
+export const BAR_D3_COMPONENT = "BAR_D3_COMPONENT";
 
 /*Constants for main tab*/
 export const OVERVIEW = "OVERVIEW";
@@ -102,10 +103,8 @@ export const EDIT_USER='EDIT_USER';
 
 /*Constants for app info checking*/
 export const ID_DATA = "ID_DATA";
-export const ID_BACKEND = "ID_BACKEND";
 export const NAME_DATA = "NAME_DATA";
 export const PASSWORD_DATA = "PASSWORD_DATA";
-export const PASS_DATA = "PASS_DATA";
 export const INFO_RESET = "ERROR_RESET";
 export const ERROR=0;
 export const SUCCESS=1;

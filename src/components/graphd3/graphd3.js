@@ -2,6 +2,8 @@ import React  from 'react';
 import rd3 from 'react-d3-library';
 import * as d3 from 'd3';
 import Dimensions from 'react-dimensions'
+import { connect } from 'react-redux';
+import {barD3Component} from '../../actions/graphAction';
 
 const RD3Component = rd3.Component;
 
@@ -46,25 +48,11 @@ class Chart extends React.Component{
     
     var node = document.createElement('div');
 
-     
-  // const tip = d3tip()
-  //   .attr('class', 'd3-tip')
-  //   .offset([100, 90])
-  //   .html(function(d) {
-  //     return "<div> Time:<div/><div> 27 Jul,2016</div> <div style='color:#ffffff'> Fulfilled:    </div>";
-  //   })
-
     var svg = d3.select(node).append('svg')
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-      //.call(tip); 
-      
-
-
-
       
       var data = [];
       var barData = {};
@@ -148,7 +136,7 @@ class Chart extends React.Component{
         .classed("hover", true)
         .attr("stroke", "#045A8D")
         .attr("stroke-width", "0.5px");
-        d3.select('.remove').html( "<div style='background:#4d5055; color:#ffffff; padding:10px 30px 10px 10px; border-radius:5%; font-size:14px;'> <div/>"+ d.timeInterval + ":00 - " + (d.timeInterval+1) +":00 <div style='color: #ffffff; padding-top:2px;'> "+ (new Date()).getDate() + " " + m_names[(new Date()).getMonth()] +",2016</div> <div style='color: #ffffff; display:inline-block; padding-top:10px; font-size:14px;'> Fulfilled:" + d.type.toLocaleString() + "</div>" ).style("visibility", "visible");
+        d3.select('.remove').html( "<div style='background:#4d5055; color:#ffffff; padding:10px 30px 10px 10px; border-radius:5%; font-size:14px;'> "+ d.timeInterval + ":00 - " + (d.timeInterval+1) +":00 <div style='color: #ffffff; padding-top:2px;'> "+ (new Date()).getDate() + " " + m_names[(new Date()).getMonth()] +",2016</div> <div style='color: #ffffff; display:inline-block; padding-top:10px; font-size:14px;'> Fulfilled:  " + d.type.toLocaleString() + "</div>" ).style("visibility", "visible");
       })
       .on("mouseout", function(d, i) {
        d3.selectAll(".layer")
@@ -183,6 +171,7 @@ class Chart extends React.Component{
            mousex = mousex[0] + 10;
            d3.selectAll('.remove').style("left", mousex + "px");
          });
+    //component.props.barD3Component(node);    
     component.setState({d3: node});
     }
 
@@ -214,6 +203,21 @@ class Chart extends React.Component{
    )
  }
 };
+
+function mapStateToProps(state, ownProps){
+  return {
+    barData: state.filterOptions || {}
+  };
+}
+
+var mapDispatchToProps = function(dispatch){
+  return {
+    barD3Component: function(data){ dispatch(barD3Component(data)); }
+  }
+};
+
 export default Dimensions()(Chart) ;
+
+
 
 

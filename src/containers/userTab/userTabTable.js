@@ -120,7 +120,7 @@ class UserDataTable extends React.Component {
    
   }
   handleDel(columnKey,rowIndex) {
-    let id=this.state.sortedDataList.newData[rowIndex].uid,name=this.state.sortedDataList.newData[rowIndex].name;
+    let id=this.state.sortedDataList.newData[rowIndex].uid,name=this.state.sortedDataList.newData[rowIndex].id;
     modal.add(DeleteUser, {
       title: '',
       size: 'large', // large, medium or small,
@@ -178,7 +178,7 @@ class UserDataTable extends React.Component {
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
         width={this.props.containerWidth}
-        height={heightRes}
+        height={this.props.containerHeight}
         {...this.props}>
         <Column
           columnKey="id"
