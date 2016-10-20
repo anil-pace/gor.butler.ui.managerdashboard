@@ -123,7 +123,7 @@ class ButlerBotTable extends React.Component {
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
         width={this.props.containerWidth}
-        height={560}
+        height={this.props.containerHeight}
         {...this.props}>
         <Column
           columnKey="id"
@@ -169,7 +169,7 @@ class ButlerBotTable extends React.Component {
             <SortHeaderCell>
               <FormattedMessage id="butlerBot.table.currentTask" description="Current task for butlerbot" 
               defaultMessage ="CURRENT TASK"/>
-              <div className="gorToolHeaderSubText"> Pick ({this.props.parameters.pick}) . Put ({this.props.parameters.put}) . Charging ({this.props.parameters.charging}) . Idle ({this.props.parameters.idle}) </div>
+              <div className="gorToolHeaderSubText"> Pick ({this.props.parameters.Pick}) . Put ({this.props.parameters.Put}) . Charging ({this.props.parameters.Charging}) . Idle ({this.props.parameters.Idle}) </div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}

@@ -52,6 +52,7 @@ export const ORDER_RECIEVED = "ORDER_RECIEVED";
 
 /*Constants for stats widget*/
 export const RENDER_STATSWIDGET = "RENDER_STATSWIDGET";
+export const BAR_D3_COMPONENT = "BAR_D3_COMPONENT";
 
 /*Constants for main tab*/
 export const OVERVIEW = "OVERVIEW";

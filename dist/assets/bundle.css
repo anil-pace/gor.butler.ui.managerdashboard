@@ -2631,7 +2631,13 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 
 .gorTesting {
   width: 100%;
-  height: 80vh;
+  height: 76vh;
+  position: relative;
+}
+
+.gor-Orderlist-table {
+  width: 100%;
+  height: 79vh;
   position: relative;
 }
 
@@ -3422,6 +3428,12 @@ progress::-moz-progress-bar {
   color: #aaaaaa;
   vertical-align: sub;
   padding-left: 10px;
+}
+
+.gor-Pagination {
+  width: 100%;
+  height: 70vh;
+  position: relative;
 }
 
 .gor-align-middle {
