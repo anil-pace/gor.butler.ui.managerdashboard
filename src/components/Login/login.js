@@ -3,9 +3,10 @@ import ReactDOM  from 'react-dom';
 import Footer from '../Footer/Footer';
 import Loader from '../../components/loader/Loader'
 import { authLoginData,mockLoginAuth,setUsername,setLoginLoader } from '../../actions/loginAction';
-import {validateID, validatePass, resetForm} from '../../actions/validationActions';
+import {validateID, validatePassword, resetForm} from '../../actions/validationActions';
 import { connect } from 'react-redux';
-import {AUTH_LOGIN,ERROR} from '../../constants/appConstants'; 
+import {AUTH_LOGIN,ERROR,SUCCESS} from '../../constants/appConstants'; 
+import {INVALID_ID,EMPTY_PWD,TYPE_SUCCESS} from '../../constants/messageConstants'; 
 import {LOGIN_URL} from '../../constants/configConstants'; 
 import { FormattedMessage } from 'react-intl';
 import { updateIntl } from 'react-intl-redux';
@@ -35,12 +36,42 @@ class Login extends React.Component{
       }
     }
     _checkUser(){
-            let data1={userid:this.userName.value};
-            this.props.validateID(data1);
+          let userid=this.userName.value, idInfo;
+          if(userid.length<1)
+          {
+            idInfo={
+              type:ERROR,
+              msg:INVALID_ID           
+            }
+          }
+          else
+          {
+            idInfo={
+              type:SUCCESS,
+              msg:TYPE_SUCCESS               
+            };            
+          }
+         this.props.validateID(idInfo);
+         return idInfo.type;
     }
     _checkPass(){
-            let data1={password:this.password.value};
-            this.props.validatePass(data1);
+          let password=this.password.value.trim(), loginPassInfo;
+          if(password.length<1)
+          {
+            loginPassInfo={
+              type:ERROR,
+              msg:EMPTY_PWD           
+            }
+          }
+          else
+          {
+            loginPassInfo={
+              type:SUCCESS,
+              msg:TYPE_SUCCESS               
+            };            
+          };
+          this.props.validatePass(loginPassInfo);
+          return loginPassInfo.type;    
     }
     /**
      * Checks for the changes in the language selection
@@ -71,13 +102,13 @@ class Login extends React.Component{
          };
         if(!this.props.idInfo.type)
         {
-            this._checkUser();
-            return;
+            if(!this._checkUser())
+                return;
         }
         if(!this.props.loginPassCheck.type)
         {
-            this._checkPass();
-            return;
+            if(!this._checkPass())
+                return;
         }
         let loginData={
                 'url':LOGIN_URL,
@@ -213,7 +244,7 @@ function mapStateToProps(state, ownProps){
         sLang: state.intl.locale,
         intlMessages: state.intl.messages,
         idInfo: state.appInfo.idInfo||{},
-        loginPassCheck: state.appInfo.loginPassInfo||{},
+        loginPassCheck: state.appInfo.passwordInfo||{},
         loginLoading:state.loader.loginLoader           
     };
 }
@@ -231,7 +262,7 @@ var mapDispatchToProps = function(dispatch){
         mockLoginAuth: function(params){ dispatch(mockLoginAuth(params)); },
         validateID: function(data){ dispatch(validateID(data)); }, 
         setUsername: function(data){ dispatch(setUsername(data)); },        
-        validatePass: function(data){ dispatch(validatePass(data)); },        
+        validatePass: function(data){ dispatch(validatePassword(data)); },        
         resetForm:   function(){ dispatch(resetForm()); },
         setLoginLoader:   function(data){ dispatch(setLoginLoader(data)); }
     }
