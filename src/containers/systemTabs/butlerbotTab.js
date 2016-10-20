@@ -22,7 +22,7 @@ class ButlerBot extends React.Component{
   			taskDetail["Idle"]++;
   		}
   		else{
-        console.log(butlerData[i].taskNum)
+      
   			taskDetail[butlerData[i].taskNum]++;
   		}
 
@@ -37,6 +37,14 @@ class ButlerBot extends React.Component{
   	}
   	avgVoltage = ((avgVoltage/(butlerData.length)).toFixed(2));
   	taskDetail["avgVoltage"]=avgVoltage + "V";
+
+
+      butlerData = butlerData.sort(function(a, b) {
+        if(a.id < b.id) return -1;
+        if(a.id > b.id) return 1;
+        return 0;
+      });
+
   }
   else {
   	taskDetail = {"Put":"--", "Pick":"--", "Charging":"--", "Idle":"--","Audit":"--", "avgVoltage":"--", "msuMounted":"--", "location":"--"};

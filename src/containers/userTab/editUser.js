@@ -76,11 +76,11 @@ class EditUser extends React.Component{
                     "password_confirm": pwd2     
 
          };
-        let editurl=HEADER_URL+'/'+this.props.id+"/edit";
+        let editurl=HEADER_URL+'/'+this.props.id;
         let userData={
                 'url':editurl,
                 'formdata':formdata,
-                'method':'POST',
+                'method':'PUT',
                 'cause':EDIT_USER,
                 'contentType':'application/json',
                 'accept':'application/json',
