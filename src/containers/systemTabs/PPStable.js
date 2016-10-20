@@ -32,11 +32,11 @@ class PPStable extends React.Component {
       sortedDataList: this._dataList,
       colSortDirs: {},
       columnWidths: {
-        id: columnWidth,
-        status: columnWidth,
-        operatingMode: columnWidth,
-        performance: columnWidth,
-        operatorAssigned: columnWidth
+        id: this.props.containerWidth*0.15,
+        status: this.props.containerWidth*0.1,
+        operatingMode: this.props.containerWidth*0.2,
+        performance: this.props.containerWidth*0.2,
+        operatorAssigned: this.props.containerWidth*0.35
       },
       headerChecked: false,
       isChecked:temp,
@@ -68,11 +68,11 @@ class PPStable extends React.Component {
       sortedDataList: this._dataList,
       colSortDirs: {},
       columnWidths: {
-        id: columnWidth,
-        status: columnWidth,
-        operatingMode: columnWidth,
-        performance: columnWidth,
-        operatorAssigned: columnWidth
+         id: nextProps.containerWidth*0.15,
+        status: nextProps.containerWidth*0.1,
+        operatingMode: nextProps.containerWidth*0.2,
+        performance: nextProps.containerWidth*0.15,
+        operatorAssigned: nextProps.containerWidth*0.4
       },
       headerChecked: false,
       isChecked:temp,
