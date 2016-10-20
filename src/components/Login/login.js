@@ -55,8 +55,8 @@ class Login extends React.Component{
          return idInfo.type;
     }
     _checkPass(){
-          let password=this.password.value, loginPassInfo;
-          if(password.length<1||!password.replace(/\s/g, '').length)
+          let password=this.password.value.trim(), loginPassInfo;
+          if(password.length<1)
           {
             loginPassInfo={
               type:ERROR,
