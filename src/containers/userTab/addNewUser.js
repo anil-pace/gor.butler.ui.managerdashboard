@@ -88,12 +88,12 @@ class AddUser extends React.Component{
           this._checkId();
           return;
         }
-        else if(!this.props.nameCheck.type)
+        if(!this.props.nameCheck.type)
         {
           if(!this._checkName())
             return;
         }
-        else if(!this.props.passwordCheck.type)
+        if(!this.props.passwordCheck.type)
         {
           if(!this._checkPwd())
             return;

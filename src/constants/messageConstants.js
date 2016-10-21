@@ -56,3 +56,8 @@ export const INVALID_PWD= (<FormattedMessage id="user.invalid.password" descript
 export const MATCH_PWD= (<FormattedMessage id="user.match.password" description='Text for passwords not matching' 
             defaultMessage="Passwords do not match"/>);
 
+export const INVALID_SKUID= (<FormattedMessage id="audit.invalid.sku" description='Text for invalid SKU ID' 
+            defaultMessage="Please enter a valid SKU Number"/>);
+
+export const INVALID_LOCID= (<FormattedMessage id="audit.invalid.location" description='Text for invalid location ID' 
+            defaultMessage="Please enter a valid location Number"/>);

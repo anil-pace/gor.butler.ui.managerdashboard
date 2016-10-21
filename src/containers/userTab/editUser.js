@@ -61,7 +61,7 @@ class EditUser extends React.Component{
           if(!this._checkName())
             return;
         }
-        else if(!this.props.passwordCheck.type)
+        if(!this.props.passwordCheck.type)
         {
           pwd1="__unchanged__";
           pwd2="__unchanged__";

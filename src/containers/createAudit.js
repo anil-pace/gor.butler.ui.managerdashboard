@@ -1,9 +1,12 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-import { FormattedMessage,FormattedPlural } from 'react-intl';  
+import { FormattedMessage,FormattedPlural } from 'react-intl'; 
+import { resetForm,validateID,validateName } from '../actions/validationActions'; 
 import {setAuditType} from '../actions/auditActions';
 import {userRequest} from '../actions/userActions';
 import { connect } from 'react-redux';
+import {INVALID_SKUID,INVALID_LOCID,TYPE_SUCCESS} from '../constants/messageConstants';
+import { ERROR,SUCCESS,SKU,LOCATION } from '../constants/appConstants';
 import FieldError from '../components/fielderror/fielderror';
 
 class CreateAudit extends React.Component{
@@ -12,8 +15,47 @@ class CreateAudit extends React.Component{
       super(props);  
   }
   removeThisModal() {
+    this.props.resetForm();    
     this.props.removeModal();
   }
+  _checkSku(skuId){
+    let skuInfo;
+    if(skuId.length<1)
+      {
+            skuInfo={
+              type:ERROR,
+              msg:INVALID_SKUID           
+            }
+      }
+      else
+      {
+            skuInfo={
+              type:SUCCESS,
+              msg:TYPE_SUCCESS               
+            };            
+      }
+      this.props.validateSKU(skuInfo);
+      return skuInfo.type;
+   }  
+  _checkLocation(locId){
+    let locInfo;
+    if(locId.length<1)
+      {
+            locInfo={
+              type:ERROR,
+              msg:INVALID_LOCID           
+            }
+      }
+      else
+      {
+            locInfo={
+              type:SUCCESS,
+              msg:TYPE_SUCCESS               
+            };            
+      }
+      this.props.validateLoc(locInfo);
+      return locInfo.type;
+   }  
   _checkType(){
     let op,md;
     op=this.sku;
@@ -33,15 +75,17 @@ class CreateAudit extends React.Component{
     let op,md,sku,loc,formdata;
     op=this.sku;
     md=this.location;
-    sku=this.sku.value;
-    loc=this.location.value;
+    sku=this.skuId.value;
+    loc=this.locationId.value;
     if(op.checked)
     {
-      
+      if(!this._checkSku(sku))
+        return;
     } 
     else
     {
-
+      if(!this._checkLocation(loc))
+        return;
     } 
     let userData={
                 'url':'',
@@ -52,7 +96,7 @@ class CreateAudit extends React.Component{
                 'accept':'application/json',
                 'token':sessionStorage.getItem('auth_token')
     }
-    this.props.userRequest(userData);
+    this.props.removeModal();
   }
   render()
   {
@@ -86,7 +130,7 @@ class CreateAudit extends React.Component{
               </div>
             
                 <div className='gor-role'>
-                <input type="radio"  name='role' onChange={this._checkType.bind(this)} defaultChecked value='sku' ref={node => { this.sku = node }} /><span className='gor-usr-hdsm'>
+                <input type="radio"  name='role' onChange={this._checkType.bind(this)} defaultChecked value={SKU} ref={node => { this.sku = node }} /><span className='gor-usr-hdsm'>
                 <FormattedMessage id="audit.add.typedetails.sku" description='Text for sku' 
             defaultMessage='SKU'/> </span>
                 </div>
@@ -96,7 +140,7 @@ class CreateAudit extends React.Component{
                 </div>
 
                 <div className='gor-role'>
-                <input type="radio" value='location' onChange={this._checkType.bind(this)} name="role" ref={node => { this.location = node }} /><span className='gor-usr-hdsm'>
+                <input type="radio" value={LOCATION} onChange={this._checkType.bind(this)} name="role" ref={node => { this.location = node }} /><span className='gor-usr-hdsm'>
                 <FormattedMessage id="audit.add.typedetails.location" description='Text for location' 
             defaultMessage='Location'/></span>
                 </div>
@@ -107,20 +151,22 @@ class CreateAudit extends React.Component{
             </div>
             
             <div className='gor-usr-details'>
-            <div style={{'display':this.props.auditType==2?'none':'block'}}>
+            <div style={{'display':this.props.auditType==LOCATION?'none':'block'}}>
              <div className='gor-usr-hdsm'><FormattedMessage id="audit.add.sku.heading" description='Text for SKU heading' 
             defaultMessage='Enter SKU'/></div>
               <div className='gor-sub-head'><FormattedMessage id="audit.add.sku.subheading" description='Subtext for enter sku' 
             defaultMessage='Enter the 9 digit SKU number below'/></div>
-              <input className={"gor-usr-fdlg gor-input-ok"} placeholder="e.g. 46978072" id="skuid"  ref={node => { this.skuId = node }} />
+              <input className={"gor-usr-fdlg"+(this.props.skuCheck.type===ERROR?' gor-input-error':' gor-input-ok')} placeholder="e.g. 46978072" id="skuid"  ref={node => { this.skuId = node }} />
+              {this.props.skuCheck.type===ERROR?<FieldError txt={this.props.skuCheck.msg} />:''}
             </div>
 
-            <div style={{'display':this.props.auditType==2?'block':'none'}}>
+            <div style={{'display':this.props.auditType==LOCATION?'block':'none'}}>
              <div className='gor-usr-hdsm'><FormattedMessage id="audit.add.location.heading" description='Text for location heading' 
             defaultMessage='Enter Location'/></div>
               <div className='gor-sub-head'><FormattedMessage id="audit.add.location.subheading" description='Subtext for enter location' 
             defaultMessage='Enter the location in its given format'/></div>
-              <input className={"gor-usr-fdlg gor-input-ok"} placeholder="e.g. 132.0.A.47" id="locationid"  ref={node => { this.locationId = node }} />
+              <input className={"gor-usr-fdlg"+(this.props.locCheck.type===ERROR?' gor-input-error':' gor-input-ok')} placeholder="e.g. 132.0.A.47" id="locationid"  ref={node => { this.locationId = node }} />
+              {this.props.locCheck.type===ERROR?<FieldError txt={this.props.locCheck.msg} />:''}
             </div>
             </div>
      
@@ -138,13 +184,18 @@ class CreateAudit extends React.Component{
   }
 function mapStateToProps(state, ownProps){
   return {
-      auditType:  state.auditInfo.auditType  || {}  
+      auditType:  state.auditInfo.auditType  || {},
+      skuCheck: state.appInfo.idInfo || {},
+      locCheck: state.appInfo.nameInfo || {}
   };
 }
 
 var mapDispatchToProps = function(dispatch){
   return {
-    setAuditType: function(data){ dispatch(setAuditType(data)); }
+    setAuditType: function(data){ dispatch(setAuditType(data)); },
+    validateSKU: function(data){ dispatch(validateID(data)); },
+    validateLoc: function(data){ dispatch(validateName(data)); },            
+    resetForm:   function(){ dispatch(resetForm()); }
   }
 };
 

@@ -83,8 +83,12 @@ export const TextCell = ({rowIndex, data, columnKey, ...props}) => (
 
 export const ProgressCell = ({rowIndex, data, columnKey, ...props}) => (
   <Cell {...props}>
-  <progress className="gorProgressBar" max="100" value={data.getObjectAt(rowIndex)[columnKey]}/>
-    <div className="gorProgressBarLabel">{ data.getObjectAt(rowIndex)[columnKey]}% </div>
+  <div className="gor-progressBar-wrap">
+    <div className="gor-progressBar" style={{width:data.getObjectAt(rowIndex)[columnKey]}} />
+  </div>
+    <div className="gorProgressBarLabel">
+      { data.getObjectAt(rowIndex)[columnKey]}% 
+    </div>
   </Cell>
 );
 
