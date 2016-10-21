@@ -62,9 +62,14 @@ class EditUser extends React.Component{
             return;
         }
         if(!this.props.passwordCheck.type)
-        {
-          pwd1="__unchanged__";
-          pwd2="__unchanged__";
+        {          
+          if(!pwd1&&!pwd2)
+          {
+            pwd1="__unchanged__";
+            pwd2="__unchanged__";
+          }
+          else if(!this._checkPwd())
+            return;
         }
         role=this.props.roleSet?this.props.roleSet.msg:this.props.roleInfo.msg.operator;
 
