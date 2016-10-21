@@ -7,10 +7,10 @@ class DataList extends React.Component{
     	super(props);
     }
 	render(){
-        var opt=[{v:1},{v:2},{v:3},{v:4}],temp='';
+        var opt=[{v:1},{v:2},{v:3},{v:4}],temp=[];
         for(let i=0;i<opt.length;i++)
         {
-            temp+='<option value='+opt[i].v+' >';
+            temp.push(<option value={opt[i].v} key={i}></option>);
         }
 		return (
 		<div>

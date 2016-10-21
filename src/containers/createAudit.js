@@ -2,6 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage,FormattedPlural } from 'react-intl';  
 import {setAuditType} from '../actions/auditActions';
+import {userRequest} from '../actions/userActions';
 import { connect } from 'react-redux';
 import FieldError from '../components/fielderror/fielderror';
 
@@ -25,7 +26,34 @@ class CreateAudit extends React.Component{
     {
             this.props.setAuditType(md.value);
     }
+  }
+  _handleAddaudit(e)
+  {
+    e.preventDefault();
+    let op,md,sku,loc,formdata;
+    op=this.sku;
+    md=this.location;
+    sku=this.sku.value;
+    loc=this.location.value;
+    if(op.checked)
+    {
+      
+    } 
+    else
+    {
+
+    } 
+    let userData={
+                'url':'',
+                'formdata':formdata,
+                'method':'POST',
+                'cause':'',
+                'contentType':'application/json',
+                'accept':'application/json',
+                'token':sessionStorage.getItem('auth_token')
     }
+    this.props.userRequest(userData);
+  }
   render()
   {
       let tick=(<div className='iTick'/>);  
@@ -58,9 +86,9 @@ class CreateAudit extends React.Component{
               </div>
             
                 <div className='gor-role'>
-                <input type="radio"  name='role' onChange={this._checkType.bind(this)} defaultChecked value='1' ref={node => { this.sku = node }} /><span className='gor-usr-hdsm'>
+                <input type="radio"  name='role' onChange={this._checkType.bind(this)} defaultChecked value='sku' ref={node => { this.sku = node }} /><span className='gor-usr-hdsm'>
                 <FormattedMessage id="audit.add.typedetails.sku" description='Text for sku' 
-            defaultMessage=' SKU'/> </span>
+            defaultMessage='SKU'/> </span>
                 </div>
                 <div className='gor-choose'>
                   <div className='gor-sub-head'><FormattedMessage id="audit.add.typedetails.skutext" description='Subtext for sku' 
@@ -68,9 +96,9 @@ class CreateAudit extends React.Component{
                 </div>
 
                 <div className='gor-role'>
-                <input type="radio" value='2' onChange={this._checkType.bind(this)} name="role" ref={node => { this.location = node }} /><span className='gor-usr-hdsm'>
+                <input type="radio" value='location' onChange={this._checkType.bind(this)} name="role" ref={node => { this.location = node }} /><span className='gor-usr-hdsm'>
                 <FormattedMessage id="audit.add.typedetails.location" description='Text for location' 
-            defaultMessage=' Location'/></span>
+            defaultMessage='Location'/></span>
                 </div>
                 <div className='gor-choose'>
                 <div className='gor-sub-head'><FormattedMessage id="audit.add.typedetails.locationtext" description='Subtext for manager' 

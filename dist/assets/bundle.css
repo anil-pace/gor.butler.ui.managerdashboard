@@ -41,6 +41,10 @@ q:before, q:after {
   content: none;
 }
 
+input[type="radio"] {
+  margin-right: 12px;
+}
+
 a {
   text-decoration: none;
 }
@@ -2947,7 +2951,7 @@ progress::-moz-progress-bar {
   font-family: 'Source Sans Pro Regular', sans-serif;
   font-size: 12px;
   color: #000000;
-  margin-top: 10px;
+  margin-top: 0.3125rem;
 }
 
 .gor-modal-content .gor-modal-head {
@@ -2996,7 +3000,7 @@ progress::-moz-progress-bar {
 }
 
 .gor-modal-content .gor-usr-details .gor-choose {
-  margin-left: 25px;
+  margin-left: 30px;
 }
 
 .gor-modal-content .gor-usr-details .gor-usr-hdlg {

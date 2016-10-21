@@ -1,57 +1,62 @@
 [
   {
-    "id": "audit.add.heading",
-    "description": "Heading for add audit",
-    "defaultMessage": "Create new audit task"
+    "id": "users.add.heading",
+    "description": "Heading for Add new user",
+    "defaultMessage": "Add new user"
   },
   {
-    "id": "audit.add.subheading",
-    "description": "Subheading for add audit",
-    "defaultMessage": "Select and enter details below to create a new audit task"
+    "id": "users.add.subheading",
+    "description": "Subheading for add new user",
+    "defaultMessage": "All the fields are mandatory"
   },
   {
-    "id": "audit.add.auditdetails.heading",
-    "description": "Text for audit details heading",
-    "defaultMessage": "Select the type of audit task"
+    "id": "users.add.userdetails.heading",
+    "description": "Text for user details heading",
+    "defaultMessage": "Enter User details"
   },
   {
-    "id": "audit.add.auditdetails.subheading",
-    "description": "Text for audit details subheading",
-    "defaultMessage": "Select the audit type and enter details accordingly"
+    "id": "users.add.userdetails.subheading",
+    "description": "Text for user details subheading",
+    "defaultMessage": "A User ID will be required to log into the system"
   },
   {
-    "id": "audit.add.auditdetails.fields",
-    "description": "Text for field information",
-    "defaultMessage": "All fields are required"
+    "id": "users.add.userdetails.userid",
+    "description": "Text for user id",
+    "defaultMessage": "User ID"
   },
   {
-    "id": "audit.add.type.heading",
-    "description": "Text for Audit type",
-    "defaultMessage": "Audit type"
+    "id": "users.add.userdetails.firstname",
+    "description": "Text for first name",
+    "defaultMessage": "First Name"
   },
   {
-    "id": "audit.add.typedetails.sku",
-    "description": "Text for sku",
-    "defaultMessage": "SKU"
+    "id": "users.add.userdetails.lastname",
+    "description": "Text for last name",
+    "defaultMessage": "Last Name"
   },
   {
-    "id": "audit.add.typedetails.skutext",
-    "description": "Subtext for sku",
-    "defaultMessage": "Choose an audit based on SKU number"
+    "id": "users.add.password.heading",
+    "description": "Heading for create password",
+    "defaultMessage": "Create password"
   },
   {
-    "id": "audit.add.typedetails.location",
-    "description": "Text for location",
-    "defaultMessage": "Location"
+    "id": "sers.add.password.subheading",
+    "description": "Subheading for create password",
+    "defaultMessage": "Min of 6 digits will be required for logging into the Operator Interface"
   },
   {
-    "id": "audit.add.typedetails.locationtext",
-    "description": "Subtext for manager",
-    "defaultMessage": "Choose an audit based on the warehouse floor"
+    "id": "users.add.password.field1",
+    "description": "Text for password",
+    "defaultMessage": "Password"
   },
   {
-    "id": "audits.add.password.button",
-    "description": "Text for add audit button",
-    "defaultMessage": "Save"
+    "id": "users.add.password.field2",
+    "description": "Text for confirm password",
+    "defaultMessage": "Confirm Password"
+  },
+  {
+    "id": "users.add.password.button",
+    "description": "Text for add new user button",
+    "defaultMessage": "Add new user"
   }
 ]
