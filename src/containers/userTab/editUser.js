@@ -8,7 +8,7 @@ import {ERROR,GET_ROLES,EDIT_USER,SUCCESS} from '../../constants/appConstants';
 import {EMPTY_PWD,TYPE_SUCCESS,EMPTY_NAME,INVALID_NAME,INVALID_PWD,MATCH_PWD} from '../../constants/messageConstants';
 import {ROLE_URL,HEADER_URL} from '../../constants/configConstants';
 import FieldError from '../../components/fielderror/fielderror';
-import RadioGroup from './radioGroup';
+import RoleGroup from './roleGroup';
 
 class EditUser extends React.Component{
   constructor(props) 
@@ -169,7 +169,7 @@ class EditUser extends React.Component{
 
               </div>
            
-          {this.props.roleInfo?(<RadioGroup operator={this.props.roleInfo.msg.operator} manager={this.props.roleInfo.msg.manager} />):''}
+          {this.props.roleInfo?(<RoleGroup operator={this.props.roleInfo.msg.operator} manager={this.props.roleInfo.msg.manager} />):''}
 
             <div className='gor-usr-details'>
             <div className='gor-pass-view1'  ref={node => { this.view1 = node }}>

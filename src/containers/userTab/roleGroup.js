@@ -5,7 +5,7 @@ import {setRole} from '../../actions/userActions';
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
 
 
-class RadioGroup extends React.Component{
+class RoleGroup extends React.Component{
 	constructor(props) 
 	{
     	super(props);
@@ -63,4 +63,4 @@ function mapDispatchToProps(dispatch){
     setRole: function(data){ dispatch(setRole(data)); },        
     }
 }
-export default connect(mapStateToProps,mapDispatchToProps)(RadioGroup);
+export default connect(mapStateToProps,mapDispatchToProps)(RoleGroup);

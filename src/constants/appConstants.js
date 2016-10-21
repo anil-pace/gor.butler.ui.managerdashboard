@@ -172,3 +172,6 @@ export const USER_ROLE_MAP ={
 /*Constant for time on header*/
 export const HEADER_START_TIME = '09:00 AM'
 
+
+/*Constants for Audit tab */
+export const SET_AUDIT='AUDIT_TYPE';
