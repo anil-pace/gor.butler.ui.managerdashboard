@@ -2631,7 +2631,13 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 
 .gorTesting {
   width: 100%;
-  height: 80vh;
+  height: 76vh;
+  position: relative;
+}
+
+.gor-Orderlist-table {
+  width: 100%;
+  height: 79vh;
   position: relative;
 }
 
@@ -2927,6 +2933,7 @@ progress::-moz-progress-bar {
 
 .gor-usr-form {
   margin-top: 120px;
+  margin-bottom: 120px;
 }
 
 .gor-modal-content {
@@ -3055,6 +3062,7 @@ progress::-moz-progress-bar {
   width: 33%;
   margin: auto;
   margin-top: 25px;
+  margin-bottom: 50px;
 }
 
 .gor-modal-content .gor-submit .gor-add-btn {
@@ -3422,6 +3430,12 @@ progress::-moz-progress-bar {
   color: #aaaaaa;
   vertical-align: sub;
   padding-left: 10px;
+}
+
+.gor-Pagination {
+  width: 100%;
+  height: 70vh;
+  position: relative;
 }
 
 .gor-align-middle {

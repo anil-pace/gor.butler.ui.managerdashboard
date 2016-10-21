@@ -50,8 +50,28 @@
     "defaultMessage": "Choose an audit based on the warehouse floor"
   },
   {
+    "id": "audit.add.sku.heading",
+    "description": "Text for SKU heading",
+    "defaultMessage": "Enter SKU"
+  },
+  {
+    "id": "audit.add.sku.subheading",
+    "description": "Subtext for enter sku",
+    "defaultMessage": "Enter the 9 digit SKU number below"
+  },
+  {
+    "id": "audit.add.location.heading",
+    "description": "Text for location heading",
+    "defaultMessage": "Enter Location"
+  },
+  {
+    "id": "audit.add.location.subheading",
+    "description": "Subtext for enter location",
+    "defaultMessage": "Enter the location in its given format"
+  },
+  {
     "id": "audits.add.password.button",
     "description": "Text for add audit button",
-    "defaultMessage": "Save"
+    "defaultMessage": "Create audit"
   }
 ]
