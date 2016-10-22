@@ -1,5 +1,5 @@
 import {ERROR,SUCCESS} from '../constants/appConstants';
-import {EMPTY_PWD,TYPE_SUCCESS,EMPTY_NAME,INVALID_NAME,INVALID_PWD,MATCH_PWD} from '../constants/messageConstants';
+import {EMPTY_PWD,TYPE_SUCCESS,EMPTY_NAME,INVALID_NAME,INVALID_PWD,MATCH_PWD,INVALID_LOCID,INVALID_SKUID} from '../constants/messageConstants';
 
 export function nameStatus(firstname,lastname){
           let nameInfo, format=  /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
@@ -50,4 +50,41 @@ export function passwordStatus(pwd1,pwd2){
             };            
           };   
           return passwordInfo;
+}
+export function locationStatus(locId){
+    let locInfo;
+    if(locId.length<1)
+      {
+            locInfo={
+              type:ERROR,
+              msg:INVALID_LOCID           
+            }
+      }
+      else
+      {
+            locInfo={
+              type:SUCCESS,
+              msg:TYPE_SUCCESS               
+            };            
+      }
+      return locInfo;
+}  
+export function skuStatus(skuId) 
+{
+   let skuInfo;
+   if(skuId.length<1)
+      {
+            skuInfo={
+              type:ERROR,
+              msg:INVALID_SKUID           
+            }
+      }
+      else
+      {
+            skuInfo={
+              type:SUCCESS,
+              msg:TYPE_SUCCESS               
+            };            
+      }
+      return skuInfo;
 }

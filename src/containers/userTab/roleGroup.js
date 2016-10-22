@@ -44,7 +44,7 @@ class RoleGroup extends React.Component{
                 <div className='gor-role'>
                 <input type="radio" value={this.props.manager} onChange={this._checkRole.bind(this)} id='userRole' name="role" ref={node => { this.manager = node }} /><span className='gor-usr-hdsm'>
                 <FormattedMessage id="users.add.roledetails.manager" description='Text for manager' 
-            defaultMessage=' Manager'/></span>
+            defaultMessage='Manager'/></span>
                 </div>
                 <div className='gor-choose'>
                 <div className='gor-sub-head'><FormattedMessage id="users.add.roledetails.managertext" description='Subtext for manager' 

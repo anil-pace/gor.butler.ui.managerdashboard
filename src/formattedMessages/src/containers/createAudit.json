@@ -32,32 +32,32 @@
   {
     "id": "audit.add.typedetails.sku",
     "description": "Text for sku",
-    "defaultMessage": "SKU"
+    "defaultMessage": "Audit by SKU code"
   },
   {
     "id": "audit.add.typedetails.skutext",
     "description": "Subtext for sku",
-    "defaultMessage": "Choose an audit based on SKU number"
+    "defaultMessage": "Create an audit task based on the SKU code of an item"
   },
   {
     "id": "audit.add.typedetails.location",
     "description": "Text for location",
-    "defaultMessage": "Location"
+    "defaultMessage": "Audit by Location code"
   },
   {
     "id": "audit.add.typedetails.locationtext",
     "description": "Subtext for manager",
-    "defaultMessage": "Choose an audit based on the warehouse floor"
+    "defaultMessage": "Create an audit task based on the location of a MSU"
   },
   {
     "id": "audit.add.sku.heading",
     "description": "Text for SKU heading",
-    "defaultMessage": "Enter SKU"
+    "defaultMessage": "Enter SKU code"
   },
   {
     "id": "audit.add.sku.subheading",
     "description": "Subtext for enter sku",
-    "defaultMessage": "Enter the 9 digit SKU number below"
+    "defaultMessage": "Enter alphanumeric SKU code of the item to be audited"
   },
   {
     "id": "audit.add.location.heading",
@@ -67,7 +67,17 @@
   {
     "id": "audit.add.location.subheading",
     "description": "Subtext for enter location",
-    "defaultMessage": "Enter the location in its given format"
+    "defaultMessage": "Format: (XXX.X.X.XX)"
+  },
+  {
+    "id": "audit.add.tips.heading",
+    "description": "Text for tips heading",
+    "defaultMessage": "Tips:"
+  },
+  {
+    "id": "audit.add.tips.subheading",
+    "description": "Subtext for tips",
+    "defaultMessage": "Once an audit task has been created, please click on the \"Assign PPS\" button in the audit listing to start the audit task."
   },
   {
     "id": "audits.add.password.button",

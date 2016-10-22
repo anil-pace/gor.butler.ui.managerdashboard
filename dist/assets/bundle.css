@@ -42,7 +42,7 @@ q:before, q:after {
 }
 
 input[type="radio"] {
-  margin-right: 12px;
+  margin-right: 15px;
 }
 
 a {
@@ -834,13 +834,13 @@ body {
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2);
   border-radius: 0.1875rem;
   display: inline-block;
-  min-height: 9.375rem;
-  margin: 1% 1% 0% 2%;
+  min-height: 10.625rem;
+  margin: 1% 1% 0% 1%;
   font-size: 0;
 }
 
 .gor-tile.gor-double {
-  width: 96%;
+  width: 97%;
 }
 
 .gor-tile.gor-single {
@@ -856,7 +856,7 @@ body {
 }
 
 .gor-tile .gor-up-tile {
-  padding: 27px 10px 10px 20px;
+  padding: 30px 10px 10px 20px;
   min-height: 5rem;
 }
 
@@ -919,7 +919,7 @@ body {
   font-size: 1rem;
   background: #F7F7F7;
   color: #666666;
-  padding: 15px 0px 15px 20px;
+  padding: 17px 0px 17px 20px;
   min-height: 1rem;
   overflow: hidden;
   vertical-align: middle;
@@ -1311,7 +1311,7 @@ body {
 .gor-login-form .gor-login-mid {
   text-align: center;
   background: #FFFFFF;
-  border-radius: 5px;
+  border-radius: 3px;
   color: #979797;
   width: 38%;
   min-height: 22.5rem;
@@ -1351,17 +1351,25 @@ body {
   color: #666666;
 }
 
+.gor-login-form .gor-login-mid .gor-login-field:focus .gor-login-user {
+  background-position: -273px -77px;
+}
+
+.gor-login-form .gor-login-mid .gor-login-field:focus .gor-login-password {
+  background-position: -291px -77px;
+}
+
 .gor-login-form .gor-login-mid .gor-login-field:hover {
   border: 1px solid #333333;
   color: #333333;
 }
 
 .gor-login-form .gor-login-mid .gor-login-field:hover .gor-login-user {
-  background-position: -273px -77px;
+  background-position: -205px -77px;
 }
 
 .gor-login-form .gor-login-mid .gor-login-field:hover .gor-login-password {
-  background-position: -291px -77px;
+  background-position: -307px -77px;
 }
 
 .gor-login-form .gor-login-mid .gor-login-field .field {
@@ -1401,7 +1409,7 @@ body {
   font-size: 18px;
   margin: auto;
   margin-top: 10px;
-  width: 70%;
+  width: 75%;
 }
 
 .gor-login-form .gor-login-mid .gor-login-btn {
@@ -2968,6 +2976,7 @@ progress::-moz-progress-bar {
   margin: auto;
   padding: 20px;
   width: 100%;
+  min-height: 100vh;
 }
 
 .gor-modal-content .gor-sub-head {
@@ -2975,6 +2984,7 @@ progress::-moz-progress-bar {
   font-size: 12px;
   color: #000000;
   margin-top: 0.3125rem;
+  width: 75%;
 }
 
 .gor-modal-content .gor-modal-head {
@@ -3039,11 +3049,6 @@ progress::-moz-progress-bar {
   margin-top: 25px;
 }
 
-.gor-modal-content .gor-usr-details :a {
-  margin-top: 10px;
-  text-decoration: none;
-}
-
 .gor-modal-content .gor-usr-details .gor-usr-fdlg {
   margin: auto;
   text-align: left;
@@ -3061,6 +3066,12 @@ progress::-moz-progress-bar {
 .gor-modal-content .gor-usr-details .gor-usr-fdlg:disabled {
   border: 1px solid #cccccc;
   background: #f7f7f7;
+}
+
+.gor-modal-content .gor-usr-details a {
+  line-height: 25px;
+  color: #27aae1;
+  font-size: 14px;
 }
 
 .gor-modal-content .gor-usr-details .gor-usr-field {
@@ -3089,7 +3100,6 @@ progress::-moz-progress-bar {
   width: 33%;
   margin: auto;
   margin-top: 25px;
-  margin-bottom: 50px;
 }
 
 .gor-modal-content .gor-submit .gor-add-btn {
@@ -3113,8 +3123,9 @@ progress::-moz-progress-bar {
   width: 97%;
   font-family: 'Source Sans Pro Regular', sans-serif;
   font-size: 14px;
-  position: absolute;
-  margin: auto;
+  position: fixed;
+  left: 20px;
+  right: 20px;
   margin-top: 50px;
 }
 
@@ -3474,10 +3485,6 @@ progress::-moz-progress-bar {
   vertical-align: middle;
 }
 
-.gor-align-sub {
-  vertical-align: sub;
-}
-
 .gor-delete {
   width: 50%;
   min-height: 16.25rem;
@@ -3486,6 +3493,7 @@ progress::-moz-progress-bar {
   font-size: 20px;
   margin: auto;
   clear: both;
+  margin-top: 30vh;
 }
 
 .gor-delete .gor-delete-text {
@@ -3496,6 +3504,7 @@ progress::-moz-progress-bar {
 
 .gor-delete .gor-delete-text .gor-delete-line {
   display: inline-block;
+  width: 75%;
 }
 
 .gor-delete .gor-delete-text .gor-delete-line .gor-delete-query {

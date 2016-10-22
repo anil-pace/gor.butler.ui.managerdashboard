@@ -1,4 +1,4 @@
-import {AUDIT_DATA,SET_AUDIT} from '../constants/appConstants'; 
+import {AUDIT_DATA,SET_AUDIT,RESET_AUDIT} from '../constants/appConstants'; 
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -25,6 +25,13 @@ export  function auditInfo(state={},action){
             "auditType" : action.data
           })
           break;
+
+    case RESET_AUDIT:
+          return Object.assign({}, state, { 
+            "auditType" : null
+          })
+          break;
+
     default:
       return state
   }
