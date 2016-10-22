@@ -41,6 +41,10 @@ q:before, q:after {
   content: none;
 }
 
+input[type="radio"] {
+  margin-right: 12px;
+}
+
 a {
   text-decoration: none;
 }
@@ -2855,7 +2859,7 @@ progress::-moz-progress-bar {
   border-style: solid;
   border-color: #4d5055;
   border-radius: 15px;
-  height: 10px;
+  height: 100%;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
 }
@@ -2956,6 +2960,7 @@ progress::-moz-progress-bar {
 
 .gor-usr-form {
   margin-top: 120px;
+  margin-bottom: 120px;
 }
 
 .gor-modal-content {
@@ -2969,7 +2974,7 @@ progress::-moz-progress-bar {
   font-family: 'Source Sans Pro Regular', sans-serif;
   font-size: 12px;
   color: #000000;
-  margin-top: 10px;
+  margin-top: 0.3125rem;
 }
 
 .gor-modal-content .gor-modal-head {
@@ -3018,7 +3023,7 @@ progress::-moz-progress-bar {
 }
 
 .gor-modal-content .gor-usr-details .gor-choose {
-  margin-left: 25px;
+  margin-left: 30px;
 }
 
 .gor-modal-content .gor-usr-details .gor-usr-hdlg {
@@ -3084,6 +3089,7 @@ progress::-moz-progress-bar {
   width: 33%;
   margin: auto;
   margin-top: 25px;
+  margin-bottom: 50px;
 }
 
 .gor-modal-content .gor-submit .gor-add-btn {

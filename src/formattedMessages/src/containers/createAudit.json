@@ -1,0 +1,77 @@
+[
+  {
+    "id": "audit.add.heading",
+    "description": "Heading for add audit",
+    "defaultMessage": "Create new audit task"
+  },
+  {
+    "id": "audit.add.subheading",
+    "description": "Subheading for add audit",
+    "defaultMessage": "Select and enter details below to create a new audit task"
+  },
+  {
+    "id": "audit.add.auditdetails.heading",
+    "description": "Text for audit details heading",
+    "defaultMessage": "Select the type of audit task"
+  },
+  {
+    "id": "audit.add.auditdetails.subheading",
+    "description": "Text for audit details subheading",
+    "defaultMessage": "Select the audit type and enter details accordingly"
+  },
+  {
+    "id": "audit.add.auditdetails.fields",
+    "description": "Text for field information",
+    "defaultMessage": "All fields are required"
+  },
+  {
+    "id": "audit.add.type.heading",
+    "description": "Text for Audit type",
+    "defaultMessage": "Audit type"
+  },
+  {
+    "id": "audit.add.typedetails.sku",
+    "description": "Text for sku",
+    "defaultMessage": "SKU"
+  },
+  {
+    "id": "audit.add.typedetails.skutext",
+    "description": "Subtext for sku",
+    "defaultMessage": "Choose an audit based on SKU number"
+  },
+  {
+    "id": "audit.add.typedetails.location",
+    "description": "Text for location",
+    "defaultMessage": "Location"
+  },
+  {
+    "id": "audit.add.typedetails.locationtext",
+    "description": "Subtext for manager",
+    "defaultMessage": "Choose an audit based on the warehouse floor"
+  },
+  {
+    "id": "audit.add.sku.heading",
+    "description": "Text for SKU heading",
+    "defaultMessage": "Enter SKU"
+  },
+  {
+    "id": "audit.add.sku.subheading",
+    "description": "Subtext for enter sku",
+    "defaultMessage": "Enter the 9 digit SKU number below"
+  },
+  {
+    "id": "audit.add.location.heading",
+    "description": "Text for location heading",
+    "defaultMessage": "Enter Location"
+  },
+  {
+    "id": "audit.add.location.subheading",
+    "description": "Subtext for enter location",
+    "defaultMessage": "Enter the location in its given format"
+  },
+  {
+    "id": "audits.add.password.button",
+    "description": "Text for add audit button",
+    "defaultMessage": "Create audit"
+  }
+]
