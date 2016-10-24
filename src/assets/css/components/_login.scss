@@ -168,6 +168,8 @@
 			&:hover{
 				border:1px solid #333333; 
 			 	color:#333333;
+			}
+			&.gor-input-typing{
 			 	.gor-login-user{
 				    background-position:-273px -77px;    
 
@@ -175,6 +177,10 @@
 				.gor-login-password{
        				background-position:-291px -77px;    
 				}
+				color:#666666;
+				&:focus{
+					color:#333333;
+				}			
 			}
 			.field{
 				font-family:'Source Sans Pro Regular', sans-serif;
@@ -223,6 +229,7 @@
  			font-size:calculateRem(20px);
 			border-radius:3px;
 			font-family:'Source Sans Pro Bold', sans-serif;
+			cursor:pointer;
 		}	
 	}
 	a

@@ -54,6 +54,12 @@ class Login extends React.Component{
          this.props.validateID(idInfo);
          return idInfo.type;
     }
+    _typing(ele){
+      if(ele===1)
+        this.userField.className='gor-login-field gor-input-ok gor-input-typing';
+      else
+        this.passField.className='gor-login-field gor-input-ok gor-input-typing';
+    }
     _checkPass(){
           let password=this.password.value.trim(), loginPassInfo;
           if(password.length<1)
@@ -183,7 +189,7 @@ class Login extends React.Component{
                 <section>
                 <div className={'gor-login-field'+(this.props.idInfo.type===ERROR||this.props.loginAuthorized===false?' gor-input-error':' gor-input-ok')} ref={node => { this.userField = node }}>
 				        <div className={this.props.idInfo.type===ERROR||this.props.loginAuthorized===false?'gor-login-user-error':'gor-login-user'}></div>
-                        <input className="field" onBlur={this._checkUser.bind(this)} type="text" id="username"  
+                        <input className="field" onInput={this._typing.bind(this,1)} onBlur={this._checkUser.bind(this)} type="text" id="username"  
                         placeholder={this.props.intlMessages["login.form.username"]}
                          ref={node => { this.userName = node }}/>
                         
@@ -200,7 +206,7 @@ class Login extends React.Component{
                 <section>
                 <div className={'gor-login-field'+(this.props.loginPassCheck.type===ERROR||this.props.loginAuthorized===false?' gor-input-error':' gor-input-ok')}  ref={node => { this.passField = node }}>
                         <div className={this.props.loginPassCheck.type===ERROR||this.props.loginAuthorized===false?'gor-login-password-error':'gor-login-password'}></div>
-                        <input className='field' onBlur={this._checkPass.bind(this)} type="password" id="password" 
+                        <input className='field' onInput={this._typing.bind(this,2)} onBlur={this._checkPass.bind(this)} type="password" id="password" 
                         placeholder={this.props.intlMessages["login.form.password"]}
                          ref={node => { this.password = node }}/>
                 </div>

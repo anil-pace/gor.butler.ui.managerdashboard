@@ -69,3 +69,17 @@ export const G015 = (<FormattedMessage id="notify.error.audit.g015" description=
             defaultMessage="Input not a sku or location"/>);
 export const AS001 = (<FormattedMessage id="notify.error.audit.success" description='Text for successfull audit creation' 
             defaultMessage="Audit created successfully"/>);
+
+
+//Codes for Ajax Parser
+export const ERR_USR=(<FormattedMessage id="notify.error.user.fail" description='Text for error in updating user' 
+            defaultMessage="Error in updating user"/>);
+export const ERR_RES=(<FormattedMessage id="notify.error.user.response" description='Text for error in response' 
+            defaultMessage="Error in response"/>);
+export const ERR_AUDIT=(<FormattedMessage id="notify.error.audit.create" description='Text for error in creating audit' 
+            defaultMessage="Error in creating audit"/>);
+export const ERR_API=(<FormattedMessage id="notify.error.api" description='Text for unregistered API response' 
+            defaultMessage="API response not registered"/>);
+export const ERR_CONNECT=(<FormattedMessage id="notify.error.connection" description='Text for connection refused' 
+            defaultMessage="Connection refused"/>);
+
