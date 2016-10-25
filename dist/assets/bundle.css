@@ -232,16 +232,16 @@ body {
 }
 
 .iStock {
-  background-position: -206px 0;
+  background-position: -206px 4px;
   width: 45px;
 }
 
 .iAudit {
-  background-position: -256px -5px;
+  background-position: -256px 4px;
 }
 
 .iPick {
-  background-position: -308px -1px;
+  background-position: -308px 4px;
 }
 
 .overview-tile-ontime-icon {
@@ -860,6 +860,12 @@ body {
   min-height: 5rem;
 }
 
+.gor-tile .gor-up-tile .gor-tile-right {
+  width: 50px;
+  display: inline-block;
+  height: 55px;
+}
+
 .gor-tile .gor-tile-left {
   width: 80%;
   display: inline-block;
@@ -905,13 +911,6 @@ body {
 
 .gor-tile .gor-none {
   color: #aaaaaa;
-}
-
-.gor-tile .gor-tile-right {
-  width: 50px;
-  display: inline-block;
-  vertical-align: top;
-  height: 55px;
 }
 
 .gor-tile .gor-low-tile {

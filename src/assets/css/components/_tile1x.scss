@@ -33,6 +33,11 @@ body
   .gor-up-tile{
     padding: 30px 10px 10px 20px;
     min-height:calculateRem(80px);
+    .gor-tile-right{
+      width: 50px;
+      display:inline-block;
+      height:55px;
+    }
   }
   .gor-tile-left{
     width: 80%;
@@ -71,12 +76,6 @@ body
 }
 .gor-none{
   color:#aaaaaa;
-}
-.gor-tile-right{
-  width: 50px;
-  display:inline-block;
-  vertical-align: top;
-  height:55px;
 }
 .gor-low-tile{
   font-family: 'Source Sans Pro semibold', sans-serif;

@@ -5,7 +5,7 @@ import {Table, Column, Cell} from 'fixed-data-table';
 import Dimensions from 'react-dimensions';
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData,ActionCell} from '../../components/commonFunctionsDataTable';
 import {modal} from 'react-redux-modal';
-import AddUser from './addNewUser';
+import CreateAudit from '../createAudit';
 import EditUser from './editUser';
 import DeleteUser from './deleteUser';
 
@@ -96,7 +96,7 @@ class UserDataTable extends React.Component {
   } 
 
   addModal() {
-    modal.add(AddUser, {
+    modal.add(CreateAudit, {
       title: '',
       size: 'large', // large, medium or small,
       closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
@@ -261,7 +261,7 @@ class UserDataTable extends React.Component {
                ACTIONS
             </SortHeaderCell>
           }
-          cell={<ActionCell data={sortedDataList} selEdit={selEdit} selDel={selDel}/>}
+          cell={<ActionCell data={sortedDataList} selEdit={selEdit} selDel={selDel} mid={this.props.mid}/>}
           width={columnWidth}
         />
       </Table>

@@ -15,13 +15,26 @@ import { translationMessages } from '../../utilities/i18n';
 
 
 class Login extends React.Component{
-	constructor(props) 
-	{
+	 constructor(props) 
+	 {
     	super(props);      
+      this.state={sel:0, items :[
+        { value: 'en', label: (<FormattedMessage id='login.lang.english' defaultMessage="English" description="English option in the language drop down"/>) },
+        { value: 'ja', label: (<FormattedMessage id='login.lang.japanese' defaultMessage="Japanese" description="Japanese option in the language drop down"/>) },
+      ]};
     }
     componentWillMount()
     {
         document.body.className='gor-fill-back';
+        this._changeDropdown();
+    } 
+    _changeDropdown()
+    {
+        for (let i = 0; i < this.state.items.length; i++) 
+        { 
+            if(this.state.items[i].value === this.props.sLang)
+                this.setState({sel:i});
+        }      
     }
     componentWillReceiveProps(nextProps) {
     /**
@@ -88,12 +101,12 @@ class Login extends React.Component{
         if (!sLocale){
             return ;
         }
-
         let data = {
             locale : sLocale,
             messages: translationMessages[sLocale]
         }
         this.props.updateIntl(data);
+        this._changeDropdown();
     }
     /**
      * @param  {[event]}
@@ -135,16 +148,6 @@ class Login extends React.Component{
         }
     }
 	render(){
-        let sel=0;
-        const items =[
-        { value: 'en', label: (<FormattedMessage id='login.lang.english' defaultMessage="English" description="English option in the language drop down"/>) },
-        { value: 'ja', label: (<FormattedMessage id='login.lang.japanese' defaultMessage="Japanese" description="Japanese option in the language drop down"/>) },
-        ];
-        for (let i = 0; i < items.length; i++) 
-        { 
-            if(items[i].value === this.props.sLang)
-                sel=i;
-        }
         return (
                
             <div className='gor-login-form'>
@@ -158,7 +161,7 @@ class Login extends React.Component{
                         defaultMessage="Language" description="Text for language"/>
                 
                     </div>
-                    <Dropdown optionDispatch={(e) => this._handleSelectionChange(e)} items={items} styleClass={'gor-lang-drop'} currentState={items[sel]} />
+                    <Dropdown optionDispatch={(e) => this._handleSelectionChange(e)} items={this.state.items} styleClass={'gor-lang-drop'} currentState={this.state.items[this.state.sel]} />
                 </div>
                 <div className='gor-login-logo alt-gor-logo'>
                 </div>

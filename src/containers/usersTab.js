@@ -15,7 +15,7 @@ class UsersTab extends React.Component{
 			<div>
 				<div>
 					<div className="gorUserTable">
-						<UserDataTable items={this.props.userdetails} itemNumber={itemNumber}/>
+						<UserDataTable items={this.props.userdetails} itemNumber={itemNumber} mid={this.props.manager.id}/>
 					</div>
 				</div>
 			</div>
@@ -27,6 +27,7 @@ class UsersTab extends React.Component{
 function mapStateToProps(state, ownProps){
   return {
     userdetails: state.userDetails.userDetails || [],
+    manager:state.headerData.headerInfo.users[0]||[],
   };
 }
 

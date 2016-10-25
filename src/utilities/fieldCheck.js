@@ -2,7 +2,7 @@ import {ERROR,SUCCESS} from '../constants/appConstants';
 import {EMPTY_PWD,TYPE_SUCCESS,EMPTY_NAME,INVALID_NAME,INVALID_PWD,MATCH_PWD,INVALID_LOCID,INVALID_SKUID} from '../constants/messageConstants';
 
 export function nameStatus(firstname,lastname){
-          let nameInfo, format=  /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+          let nameInfo, format=  /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
           if(firstname.length<1||lastname.length<1||firstname.length>50||lastname.length>50)
           {
             nameInfo={
