@@ -12,7 +12,7 @@ import FieldError from '../components/fielderror/fielderror';
 import { locationStatus, skuStatus } from '../utilities/fieldCheck';
 
 
-class CreateAudit extends React.Component{
+class StartAudit extends React.Component{
   constructor(props) 
   {
       super(props);  
@@ -25,7 +25,18 @@ class CreateAudit extends React.Component{
   removeThisModal() {
     this.props.removeModal();
   }
-  _handleAddaudit(e)
+  componentDidMount(){
+        let userData={
+                'url':'',
+                'method':'GET',
+                'cause':'',
+                'contentType':'application/json',
+                'accept':'application/json',
+                'token':sessionStorage.getItem('auth_token')
+            }
+        this.props.userRequest(userData);
+  }
+  _handlestartaudit(e)
   {
     e.preventDefault();
     let op,md,sku,loc,formdata;
@@ -70,36 +81,30 @@ class CreateAudit extends React.Component{
         <div>
           <div className="gor-modal-content">
             <div className='gor-modal-head'>
-              <div className='gor-usr-add'><FormattedMessage id="audit.add.heading" description='Heading for add audit' 
-            defaultMessage='Create new audit task'/>
-                          <div className='gor-sub-head'><FormattedMessage id="audit.add.subheading" description='Subheading for add audit' 
-            defaultMessage='Select and enter details below to create a new audit task'/></div>
+              <div className='gor-usr-add'><FormattedMessage id="audit.start.heading" description='Heading for start audit' 
+            defaultMessage='Start audit task'/>
+                          <div className='gor-sub-head'><FormattedMessage id="audit.start.subheading" description='Subheading for start audit' 
+            defaultMessage='Assign one or more PPS and start the audit task.'/></div>
               </div>
               <span className="close" onClick={this.removeThisModal.bind(this)}>×</span>
             </div>
             <div className='gor-modal-body'>
-            <form action="#"  id = "createauditForm" ref={node => { this.startauditForm = node }} 
-                onSubmit={(e) => this._handleAddaudit(e)}>
+            <form action="#"  id = "startauditForm" ref={node => { this.startauditForm = node }} 
+                onSubmit={(e) => this._handlestartaudit(e)}>
 
             <div className='gor-usr-form'>
             <div className='gor-usr-details'>
-            <div className='gor-usr-hdlg'><FormattedMessage id="audit.add.auditdetails.heading" description='Text for audit details heading' 
-            defaultMessage='Select the type of audit task'/></div>
-            <div className='gor-sub-head'><FormattedMessage id="audit.add.auditdetails.subheading" description='Text for audit details subheading' 
-            defaultMessage='Select the audit type and enter details accordingly'/><p><FormattedMessage id="audit.add.auditdetails.fields" description='Text for field information' 
-            defaultMessage='All fields are required'/></p></div>
-
-              <div className='gor-usr-field'>              
-                <div className='gor-usr-hdsm'><FormattedMessage id="audit.add.type.heading" description='Text for Audit type' 
-            defaultMessage='Audit type'/></div>
-              </div>
+            <div className='gor-usr-hdsm'><FormattedMessage id="audit.start.auditdetails.heading" description='Text for audit details heading' 
+            defaultMessage='Assign PPS for Location'/></div>
+            <div className='gor-sub-head'><FormattedMessage id="audit.start.auditdetails.subheading" description='Text for audit details subheading' 
+            defaultMessage='All PPS below are currently in the audit mode.'/></div>
             
             </div>
             
      
             <p className='gor-submit'>
-             <button className="gor-add-btn"><FormattedMessage id="audits.add.password.button" description='Text for add audit button' 
-            defaultMessage='Create audit'/></button>
+             <button className="gor-add-btn"><FormattedMessage id="audit.start.password.button" description='Text for start audit button' 
+            defaultMessage='Start task now'/></button>
             </p>
             </div>
             </form>
@@ -129,4 +134,4 @@ var mapDispatchToProps = function(dispatch){
   }
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(CreateAudit);
+export default connect(mapStateToProps,mapDispatchToProps)(StartAudit);
