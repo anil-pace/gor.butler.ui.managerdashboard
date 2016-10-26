@@ -748,5 +748,409 @@
     "id": "user.table.logInTime",
     "description": "User log in time",
     "defaultMessage": "LOG IN TIME"
+  },
+  {
+    "id": "butlerDetail.name.prefix",
+    "description": "prefix for butler id",
+    "defaultMessage": "BOT - {botId}"
+  },
+  {
+    "id": "pps.name.prefix",
+    "description": "prefix for pps id",
+    "defaultMessage": "PPS - {ppsId}"
+  },
+  {
+    "id": "charger.name.prefix",
+    "description": "prefix for charger id",
+    "defaultMessage": "CS - {csId}"
+  },
+  {
+    "id": "msu.name.prefix",
+    "description": "prefix for msu id",
+    "defaultMessage": "MSU - {msuId}"
+  },
+  {
+    "id": "ppsDetail.pick.status",
+    "description": "pick status for pps",
+    "defaultMessage": "Pick"
+  },
+  {
+    "id": "ppsDetail.put.status",
+    "description": "put status for pps",
+    "defaultMessage": "Put"
+  },
+  {
+    "id": "ppsDetail.audit.status",
+    "description": "audit status for pps",
+    "defaultMessage": "Audit"
+  },
+  {
+    "id": "ppsDetail.name.prefix",
+    "description": "prefix for pps id in ppsDetail",
+    "defaultMessage": "PPS - {ppsId}"
+  },
+  {
+    "id": "ppsDetail.on.status",
+    "description": "on status for pps",
+    "defaultMessage": "On"
+  },
+  {
+    "id": "ppsDetail.off.prefix",
+    "description": "off status for pps",
+    "defaultMessage": "Off"
+  },
+  {
+    "id": "ppsDetail.performance.prefix",
+    "description": "performance for pps id in ppsDetail",
+    "defaultMessage": "{performance} - orders/hr"
+  },
+  {
+    "id": "chargersDetail.connected.status",
+    "description": "connected status for chargersDetail",
+    "defaultMessage": "Connected"
+  },
+  {
+    "id": "chargersDetail.disconnected.status",
+    "description": "disconnected status for chargersDetail",
+    "defaultMessage": "Disconnected"
+  },
+  {
+    "id": "chargersDetail.manual.mode",
+    "description": "manual mode for chargersDetail",
+    "defaultMessage": "Manual"
+  },
+  {
+    "id": "chargersDetail.auto.mode",
+    "description": "Auto mode for chargersDetail",
+    "defaultMessage": "Auto"
+  },
+  {
+    "id": "chargersDetail.name.prefix",
+    "description": "prefix for cs id in chargersDetail",
+    "defaultMessage": "Charging Stations - {csId}"
+  },
+  {
+    "id": "chargersDetail.butler.prefix",
+    "description": "prefix for butler id in chargersDetail",
+    "defaultMessage": "Butler - {botId}"
+  },
+  {
+    "id": "butlerDetail.online.status",
+    "description": "online status for butlerDetail",
+    "defaultMessage": "Online"
+  },
+  {
+    "id": "butlerDetail.offline.status",
+    "description": "offline status for butlerDetail",
+    "defaultMessage": "Offline"
+  },
+  {
+    "id": "ButlerBotTable.botState",
+    "description": "bot state for ButlerBotTable",
+    "defaultMessage": "Pick ({pick}) . Put ({put}) . Charging ({charging}) . Idle ({idle})"
+  },{
+    "id": "ButlerBotTable.TotalBot",
+    "description": "total bot for ButlerBotTable",
+    "defaultMessage": "{totalBot} BOT"
+  },
+  {
+    "id": "ButlerBotTable.subTotalBot",
+    "description": "sub text for totalbot ButlerBotTable",
+    "defaultMessage": "Total: {totalBot}"
+  },
+  {
+    "id": "PPS.table.pickDrop",
+    "description": "pick dropdown option for PPS",
+    "defaultMessage": "Put"
+  },
+  {
+    "id": "PPS.table.putDrop",
+    "description": "put dropdown option for PPS",
+    "defaultMessage": "Pick"
+  },
+  {
+    "id": "PPS.table.auditDrop",
+    "description": "audit dropdown option for PPS",
+    "defaultMessage": "Audit"
+  },
+  {
+    "id": "waveDetail.progress.status",
+    "description": "progress status for wave",
+    "defaultMessage": "In Progress"
+  },
+  {
+    "id": "waveDetail.completed.status",
+    "description": "completed status for wave",
+    "defaultMessage": "Completed"
+  },
+  {
+    "id": "waveDetail.breached.status",
+    "description": "breached status for wave",
+    "defaultMessage": "Breached"
+  },
+  {
+    "id": "waveDetail.pending.status",
+    "description": "pending status for wave",
+    "defaultMessage": "Pending"
+  },
+  {
+    "id": "waveDetail.id.prefix",
+    "description": "waveDetail id prefix",
+    "defaultMessage": "WAVE-{waveId}"
+  },
+  {
+    "id": "waves.table.heading",
+    "description": "Heading for waves",
+    "defaultMessage": "Waves"
+  },
+  {
+    "id": "WavesTable.heading",
+    "description": "heading for WavesTable",
+    "defaultMessage": "Waves"
+  },
+  {
+    "id": "WavesTable.Totalwaves",
+    "description": "total waves for WavesTable",
+    "defaultMessage": "Total:{totalwave}"
+  },
+  {
+    "id": "waves.table.status",
+    "description": "Status for waves",
+    "defaultMessage": "STATUS"
+  },
+  {
+    "id": "waves.table.startTime",
+    "description": "StartTime for butlerbot",
+    "defaultMessage": "START TIME"
+  },
+  {
+    "id": "WavesTable.pending.status",
+    "description": "pending status for WavesTable",
+    "defaultMessage": "{pendingWave} waves pending"
+  },
+  {
+    "id": "waves.table.cutOffTime",
+    "description": "cutOffTime for waves",
+    "defaultMessage": "CUT-OFF TIME"
+  },
+  {
+    "id": "WavesTable.progress.status",
+    "description": "progress status for WavesTable",
+    "defaultMessage": "{progressWave} waves in progress"
+  },
+  {
+    "id": "waves.table.ordersToFulfill",
+    "description": "orders to fulfill for waves",
+    "defaultMessage": "ORDERS TO FULFILL"
+  },
+  {
+    "id": "WavesTable.orderRemaining.status",
+    "description": "orderRemaining status for WavesTable",
+    "defaultMessage": "{orderRemaining} remaining"
+  },
+  {
+    "id": "waves.table.progress",
+    "description": "progress for waves",
+    "defaultMessage": "PROGRESS(%)"
+  },
+  {
+    "id": "WavesTable.completed.status",
+    "description": "completed status for WavesTable",
+    "defaultMessage": "{completedWaves} waves completed"
+  },
+  {
+    "id": "waves.table.totalOrders",
+    "description": "totalOrders for waves",
+    "defaultMessage": "TOTAL ORDERS"
+  },
+  {
+    "id": "WavesTable.totalOrders.status",
+    "description": "totalOrders status for WavesTable",
+    "defaultMessage": "{totalOrders} orders"
+  },
+  {
+    "id": "orderlist.table.allDrop",
+    "description": "allOrders dropdown option for orderlist",
+    "defaultMessage": "All orders"
+  },
+  {
+    "id": "orderlist.table.breachedDrop",
+    "description": "breached dropdown option for orderlist",
+    "defaultMessage": "Breached orders"
+  },
+  {
+    "id": "pendingDrop.table.allDrop",
+    "description": "pending dropdown option for orderlist",
+    "defaultMessage": "Pending orders"
+  },
+  {
+    "id": "completedDrop.table.allDrop",
+    "description": "completed dropdown option for orderlist",
+    "defaultMessage": "Completed orders"
+  },
+  {
+    "id": "orderlist.table.allTimeDrop",
+    "description": "allTime dropdown option for orderlist",
+    "defaultMessage": "All"
+  },
+  {
+    "id": "orderlist.table.oneHrDrop",
+    "description": "oneHr dropdown option for orderlist",
+    "defaultMessage": "Last 1 hours"
+  },
+  {
+    "id": "pendingDrop.table.twoHrDrop",
+    "description": "twoHr dropdown option for orderlist",
+    "defaultMessage": "Last 2 hours"
+  },
+  {
+    "id": "completedDrop.table.sixHrDrop",
+    "description": "sixHr dropdown option for orderlist",
+    "defaultMessage": "Last 6 hours"
+  },
+  {
+    "id": "pendingDrop.table.twelveHrDrop",
+    "description": "twelveHr dropdown option for orderlist",
+    "defaultMessage": "Last 12 hours"
+  },
+  {
+    "id": "completedDrop.table.oneDayDrop",
+    "description": "oneDay dropdown option for orderlist",
+    "defaultMessage": "Last 1 day"
+  },
+  {
+    "id": "order.table.heading",
+    "description": "Heading for order list",
+    "defaultMessage": "OrderList"
+  },
+  {
+    "id": "orderlist.Totalorder",
+    "description": "total order for ordertable",
+    "defaultMessage": "{totalOrder} Order List"
+  },
+  {
+    "id": "orderlist.subTotalorder",
+    "description": "subtotal order for ordertable",
+    "defaultMessage": "Total:{totalOrder}"
+  },
+  {
+    "id": "orderList.table.status",
+    "description": "Status for orders",
+    "defaultMessage": "STATUS"
+  },
+  {
+    "id": "orderlist.table.pickBy",
+    "description": "pick by for orderlist",
+    "defaultMessage": "PICK BY"
+  },
+  {
+    "id": "orderlist.table.operatingMode",
+    "description": "recievedTime for Orders",
+    "defaultMessage": "RECIEVED TIME"
+  },
+  {
+    "id": "orderlist.table.completedTime",
+    "description": "completedTime for orderlist",
+    "defaultMessage": "COMPLETED"
+  },
+  {
+    "id": "orderlist.table.orderLine",
+    "description": "orderLine for orderlist",
+    "defaultMessage": "ORDER LINE"
+  },
+  {
+    "id": "orderList.progress.status",
+    "description": "progress status for orderList",
+    "defaultMessage": "In Progress"
+  },
+  {
+    "id": "orderList.completed.status",
+    "description": "completed status for orderList",
+    "defaultMessage": "Completed"
+  },
+  {
+    "id": "orderList.Unfulfillable.status",
+    "description": "Unfulfillable status for orderList",
+    "defaultMessage": "Unfulfillable"
+  },
+  {
+    "id": "OrderSubTab.waves",
+    "description": "waves tab for OrderSubTab",
+    "defaultMessage": "Waves"
+  },
+  {
+    "id": "OrderSubTab.orderlist",
+    "description": "orderlist tab for OrderSubTab",
+    "defaultMessage": "Order List"
+  },
+  {
+    "id": "orderlistTab.refreshStatusMinutes",
+    "description": "refresh status for orderlist",
+    "defaultMessage": "Last Updated {updateStatus} minutes ago"
+  },
+  {
+    "id": "orderlistTab.refreshStatusSeconds",
+    "description": "refresh status for orderlist",
+    "defaultMessage": "Last Updated {updateStatus} seconds ago"
+  },
+  {
+    "id":"pps.dropdown.placeholder",
+    "description": "placeholder for pps mode change",
+    "defaultMessage": "Change PPS mode"
+  },
+  {
+        "id": "table.filter.placeholder",
+        "description": "placeholder for table filter",
+        "defaultMessage": "Filter by keywords"
+  },
+  {
+    "id": "order.table.buttonLable",
+    "description": "button label for refresh",
+    "defaultMessage": "Refresh Data"
+  },
+  {
+    "id": "userDetails.operator",
+    "description": "operator user",
+    "defaultMessage": "Operator"
+  },
+  {
+    "id": "userDetails.manager",
+    "description": "manager user",
+    "defaultMessage": "Manager"
+  },
+  {
+    "id": "userDetails.pick.status",
+    "description": "pick status for userDetails",
+    "defaultMessage": "Pick"
+  },
+  {
+    "id": "userDetails.put.status",
+    "description": "put status for userDetails",
+    "defaultMessage": "Put"
+  },
+  {
+    "id": "userDetails.audit.status",
+    "description": "audit status for userDetails",
+    "defaultMessage": "Audit"
+  },
+  {
+    "id": "userDetails.front.status",
+    "description": "front status for userDetails",
+    "defaultMessage": "Front"
+  },
+  {
+    "id": "userDetails.back.status",
+    "description": "back status for userDetails",
+    "defaultMessage": "Back"
+  },
+  {
+    "id": "userDetails.online.status",
+    "description": "online status for userDetails",
+    "defaultMessage": "Online"
+  },
+  {
+    "id": "userDetails.Offline.status",
+    "description": "Offline status for userDetails",
+    "defaultMessage": "Offline"
   }
 ]

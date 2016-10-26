@@ -15,7 +15,7 @@ class UsersTab extends React.Component{
 			<div>
 				<div>
 					<div className="gorUserTable">
-						<UserDataTable items={this.props.userdetails} itemNumber={itemNumber}/>
+						<UserDataTable items={this.props.userdetails} itemNumber={itemNumber} intlMessg={this.props.intlMessages}/>
 					</div>
 				</div>
 			</div>
@@ -25,8 +25,10 @@ class UsersTab extends React.Component{
 
 
 function mapStateToProps(state, ownProps){
+	console.log(state)
   return {
     userdetails: state.userDetails.userDetails || [],
+    intlMessages: state.intl.messages
   };
 }
 

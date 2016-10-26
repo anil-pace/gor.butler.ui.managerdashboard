@@ -20,6 +20,9 @@ export const WS_END="WS_END";
 export const WS_MOCK="WS_MOCK";
 /* Header constants */
 
+/* Constants for fixed-data-table */
+export const TABLE_STATE = "TABLE_STATE";
+
 export const REQUEST_HEADER = "REQUEST_HEADER";
 export const RECIEVE_HEADER = "RECIEVE_HEADER";
 
@@ -60,6 +63,7 @@ export const SYSTEM = "SYSTEM";
 export const ORDERS = "ORDERS";
 export const INVENTORY = "INVENTORY";
 export const USERS = "USERS";
+export const AUDIT = "AUDIT";
 export const NOTIFICATION_TAB = "Notification";
 export const BUTLERBOTS_TAB = "Butler Bots";
 export const CHARGING_TAB = "Charging Station";
@@ -98,15 +102,15 @@ export const GET_ROLES='GET_ROLES';
 export const PPS_MODE_CHANGE = 'PPS_MODE_CHANGE';
 export const GET_HEADER_INFO = 'GET_HEADER_INFO';
 export const EDIT_USER='EDIT_USER';
+export const AUDIT_RETRIEVE = "AUDIT_RETRIEVE";
+export const RECIEVE_AUDIT_DATA = "RECIEVE_AUDIT_DATA";
 
 
 
 /*Constants for app info checking*/
 export const ID_DATA = "ID_DATA";
-export const ID_BACKEND = "ID_BACKEND";
 export const NAME_DATA = "NAME_DATA";
 export const PASSWORD_DATA = "PASSWORD_DATA";
-export const PASS_DATA = "PASS_DATA";
 export const INFO_RESET = "ERROR_RESET";
 export const ERROR=0;
 export const SUCCESS=1;

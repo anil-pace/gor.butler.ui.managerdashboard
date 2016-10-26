@@ -10,6 +10,7 @@ import {ORDERS_RETRIEVE} from '../../constants/appConstants';
 import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL} from '../../constants/configConstants';
 import OrderListTable from './orderListTable';
 import Dropdown from '../../components/dropdown/dropdown'
+import { FormattedMessage } from 'react-intl';
 
 
 class OrderListTab extends React.Component{
@@ -97,16 +98,24 @@ class OrderListTab extends React.Component{
     
   render(){
     var updateStatus;
+    let updateStatusIntl;
     if(this.props.filterOptions.lastUpdatedOn) {
       var diff = (new Date())-this.props.filterOptions.lastUpdatedOn;
       if (diff > 60e3) {
-       updateStatus = "Last Updated " + Math.floor(diff / 60e3) + " minutes ago";
+       updateStatus =  Math.floor(diff / 60e3) ;
+        updateStatusIntl = <FormattedMessage id="orderlistTab.refreshStatusMinutes" description='refresh status for orderlist' defaultMessage='Last Updated {updateStatus} minutes ago' values={{updateStatus: updateStatus?updateStatus:'0'}}/>
+      
       }
       else {
-        updateStatus = "Last Updated " + Math.floor(diff / 1e3) + " seconds ago";
+        updateStatus = Math.floor(diff / 1e3) ;
+        updateStatusIntl = <FormattedMessage id="orderlistTab.refreshStatusSeconds" description='refresh status for orderlist' defaultMessage='Last Updated {updateStatus} seconds ago' values={{updateStatus: updateStatus?updateStatus:'0'}}/>
+      
       }
 
   }
+
+  //let updateStatusIntl = <FormattedMessage id="orderlistTab.refreshStatus" description='refresh status for orderlist' defaultMessage='Last Updated {} seconds ago' values={{totalOrder: totalOrder?totalOrder:'0'}}/>
+               
   
     
     var itemNumber = 6, table, pages;
@@ -118,18 +127,22 @@ class OrderListTab extends React.Component{
     { value: '500', label: '500' },
     { value: '1000', label: '1000' }
     ];
-    
+    var currentPage = this.props.filterOptions.currentPage, totalPage = this.props.orderData.totalPage;
+
     return (
       <div>
       <div className="gor-Orderlist-table" >  
 
-      <OrderListTable items={this.props.orderData.ordersDetail} itemNumber={itemNumber} statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter} refreshOption={this.refresh.bind(this)} lastUpdated={updateStatus} refreshList={this.refresh.bind(this)}/>
+      <OrderListTable items={this.props.orderData.ordersDetail} itemNumber={itemNumber} statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter} refreshOption={this.refresh.bind(this)} lastUpdated={updateStatusIntl} refreshList={this.refresh.bind(this)} intlMessg={this.props.intlMessages}/>
       
       <div className="gor-pageNum">
         <Dropdown  styleClass={'gor-Page-Drop'}  items={ordersByStatus} currentState={ordersByStatus[0]} optionDispatch={this.props.getPageSize} refreshList={this.refresh.bind(this)}/>
       </div>
       <div className="gor-paginate">
-        <div className = "gor-paginate-state"> Page {this.props.filterOptions.currentPage} of {this.props.orderData.totalPage} </div>
+        <div className = "gor-paginate-state"> 
+         <FormattedMessage id="orderlistTab.pageNum" description='page num orderlist' defaultMessage='Page {currentPage} of {totalPage}' values={{currentPage: currentPage?currentPage:'0', totalPage: totalPage?totalPage:'0'}}/>
+      
+        </div>
         <div id={"react-paginate"}>
           <ReactPaginate previousLabel={"<<"}
                        nextLabel={">>"}
@@ -154,7 +167,8 @@ function mapStateToProps(state, ownProps){
   return {
     filterOptions: state.filterOptions || {},
     orderData: state.getOrderDetail || {},
-    statusFilter : state.filterOptions.statusFilter || null
+    statusFilter : state.filterOptions.statusFilter || null,
+    intlMessages: state.intl.messages
   };
 }
 

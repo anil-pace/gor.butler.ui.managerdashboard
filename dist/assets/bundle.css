@@ -2855,7 +2855,7 @@ progress::-moz-progress-bar {
   border-style: solid;
   border-color: #4d5055;
   border-radius: 15px;
-  height: 10px;
+  height: 100%;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
 }
@@ -2869,6 +2869,15 @@ progress::-moz-progress-bar {
   height: 10px;
   width: 100px;
   display: inline-block;
+}
+
+.gor-audit-actions-button {
+  display: inline-block;
+}
+
+.gor-audit-actions-drop {
+  display: inline-block;
+  width: 150px;
 }
 
 .gorSubTab.gorContainer {

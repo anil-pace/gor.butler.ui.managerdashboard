@@ -56,3 +56,16 @@ export const INVALID_PWD= (<FormattedMessage id="user.invalid.password" descript
 export const MATCH_PWD= (<FormattedMessage id="user.match.password" description='Text for passwords not matching' 
             defaultMessage="Passwords do not match"/>);
 
+
+export const MSU = (<FormattedMessage id="msu.name.prefix" description='prefix for msu name' 
+            defaultMessage="MSU"/>);
+
+export const CS = (<FormattedMessage id="chargingStation.name.prefix" description='prefix for charging station name' 
+            defaultMessage="CS"/>);
+
+export const PPS = (<FormattedMessage id="pps.name.prefix" description='prefix for pps name' 
+            defaultMessage="PPS"/>);
+
+
+
+

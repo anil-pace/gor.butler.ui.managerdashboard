@@ -73,5 +73,20 @@
     "id": "user.match.password",
     "description": "Text for passwords not matching",
     "defaultMessage": "Passwords do not match"
+  },
+  {
+    "id": "msu.name.prefix",
+    "description": "prefix for msu name",
+    "defaultMessage": "MSU"
+  },
+  {
+    "id": "chargingStation.name.prefix",
+    "description": "prefix for charging station name",
+    "defaultMessage": "CS"
+  },
+  {
+    "id": "pps.name.prefix",
+    "description": "prefix for pps name",
+    "defaultMessage": "PPS"
   }
 ]

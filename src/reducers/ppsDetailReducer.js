@@ -1,23 +1,37 @@
 import {PPS_DETAIL} from '../constants/appConstants';
+import React  from 'react';
+import { FormattedMessage } from 'react-intl';
+
 
 function processPPSData(data) {
   //TODO: codes need to be replaced after checking with backend
-  var PPSData=[], detail = {};;
+  var PPSData=[], detail = {}, ppsId, performance;
   var ppsStatus = ["Off", "On"];
-  var currentTask = {"pick":"Pick", "put":"Put", "audit":"Audit"};
+  let PPS, ON, OFF, PERFORMANCE;
+  let pick = <FormattedMessage id="ppsDetail.pick.status" description='pick status for pps' defaultMessage='Pick'/>;
+  let put = <FormattedMessage id="ppsDetail.put.status" description='put status for pps' defaultMessage='Put'/>;
+  let audit = <FormattedMessage id="ppsDetail.audit.status" description='audit status for pps' defaultMessage='Audit'/>;
+  var currentTask = {"pick":pick, "put":put, "audit":audit};
+
   detail.totalOperator = 0;
   for (var i = data.length - 1; i >= 0; i--) {
     detail = {};
-    detail.id = "PPS " + data[i].pps_id;
+    ppsId = data[i].pps_id;
+    performance = data[i].performance;
+    PPS = <FormattedMessage id="ppsDetail.name.prefix" description='prefix for pps id in ppsDetail' defaultMessage='PPS - {ppsId}' values={{ppsId: ppsId}}/>;
+    ON = <FormattedMessage id="ppsDetail.on.status" description='on status for pps' defaultMessage='On'/>;
+    OFF = <FormattedMessage id="ppsDetail.off.prefix" description='off status for pps' defaultMessage='Off'/>;
+    PERFORMANCE = <FormattedMessage id="ppsDetail.performance.prefix" description='performance for pps id in ppsDetail' defaultMessage='{performance} - orders/hr' values={{performance: performance}}/>;
+    detail.id =  PPS;
     if(data[i].pps_status === "on") {
-      detail.status = "On";
+      detail.status = ON;
     }
     else {
-      detail.status = "Off";
+      detail.status = OFF;
     }
     detail.statusClass = data[i].pps_status;
     detail.operatingMode = currentTask[data[i].current_task];
-    detail.performance = data[i].performance + " orders/hr";///  orders /items
+    detail.performance = PERFORMANCE;///  orders /items
     if(data[i].operators_assigned === null) {
       detail.operatorAssigned = "--";
     }

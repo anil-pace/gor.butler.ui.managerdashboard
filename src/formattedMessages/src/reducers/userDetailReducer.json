@@ -1,0 +1,47 @@
+[
+  {
+    "id": "userDetails.operator",
+    "description": "operator user",
+    "defaultMessage": "Operator"
+  },
+  {
+    "id": "userDetails.manager",
+    "description": "manager user",
+    "defaultMessage": "Manager"
+  },
+  {
+    "id": "userDetails.pick.status",
+    "description": "pick status for userDetails",
+    "defaultMessage": "Pick"
+  },
+  {
+    "id": "userDetails.put.status",
+    "description": "put status for userDetails",
+    "defaultMessage": "Put"
+  },
+  {
+    "id": "userDetails.audit.status",
+    "description": "audit status for userDetails",
+    "defaultMessage": "Audit"
+  },
+  {
+    "id": "userDetails.front.status",
+    "description": "front status for userDetails",
+    "defaultMessage": "Front"
+  },
+  {
+    "id": "userDetails.back.status",
+    "description": "back status for userDetails",
+    "defaultMessage": "Back"
+  },
+  {
+    "id": "userDetails.online.status",
+    "description": "online status for userDetails",
+    "defaultMessage": "Online"
+  },
+  {
+    "id": "userDetails.Offline.status",
+    "description": "Offline status for userDetails",
+    "defaultMessage": "Offline"
+  }
+]

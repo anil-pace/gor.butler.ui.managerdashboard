@@ -5,9 +5,9 @@ import Dimensions from 'react-dimensions'
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import {currentTableState} from '../../actions/tableDataAction'
-import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
+import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData, ProgressCell,ActionCellAudit} from '../../components/commonFunctionsDataTable';
 
-class ChargingStationsTable extends React.Component {
+class AuditTable extends React.Component {
   constructor(props) {
     super(props);
     this.tableState(this.props,this);
@@ -37,9 +37,12 @@ class ChargingStationsTable extends React.Component {
       colSortDirs: {},
       columnWidths: {
         id: nProps.containerWidth*0.15,
+        auditTypeValue: nProps.containerWidth*0.15,
         status: nProps.containerWidth*0.1,
-        mode: nProps.containerWidth*0.15,
-        dockedBots: nProps.containerWidth*0.6
+        startTime: nProps.containerWidth*0.1,
+        progress: nProps.containerWidth*0.1,
+         completedTime: nProps.containerWidth*0.1,
+        actions: nProps.containerWidth*0.3
       }};
       return tableData;
   }
@@ -78,8 +81,12 @@ class ChargingStationsTable extends React.Component {
     };
     this.props.currentTableState(tableData)
   }
+
+  startAudit() {
+    console.log("started")
+  }
+
   render() {
-    console.log(this.props)
     var sortedDataList = this._dataList
     if(this.props.tableData.sortedDataList !== undefined && this.props.tableData.sortedDataList._data !== undefined) {
       sortedDataList = this.props.tableData.sortedDataList;
@@ -87,10 +94,11 @@ class ChargingStationsTable extends React.Component {
     var colSortDirs = this.props.tableData.colSortDirs;
     var columnWidths = this.props.tableData.columnWidths;
     var rowsCount = sortedDataList.getSize();
-    let manual = this.props.chargersState.manualMode;
-    let auto = this.props.chargersState.automaticMode;
-    let totalBots = this.props.chargersState.connectedBots;
-    console.log(this.props.chargersState)
+     const tasks = [
+    { value: 'duplicateTask', label: 'Duplicate task' },
+    { value: 'deleteRecord', label: 'Delete record' }
+    ];
+    
 
     var tableRenderer = <div/>
     if(this.props.tableData.length !== 0) {
@@ -98,8 +106,8 @@ class ChargingStationsTable extends React.Component {
         <div className="gorToolBar">
           <div className="gorToolBarWrap">
             <div className="gorToolBarElements">
-               <FormattedMessage id="ChargingStations.table.heading" description="Heading for ChargingStations" 
-              defaultMessage ="Charging Stations"/>
+               <FormattedMessage id="audit.table.heading" description="Heading for audit table" 
+              defaultMessage ="Audit Tasks"/>
               
             </div>
           </div>
@@ -130,12 +138,12 @@ class ChargingStationsTable extends React.Component {
               sortDir={colSortDirs.id}>
               <div className="gorToolHeaderEl">
               <div className="gorToolHeaderEl"> 
-                 <FormattedMessage id="ChargingStationsTable.stationID" description='total stationID for ChargingStationsTable' 
-                defaultMessage='{rowsCount} STATION ID' 
+                 <FormattedMessage id="auditTable.stationID" description='total audit ID for auditTable' 
+                defaultMessage='{rowsCount} AUDIT ID' 
                 values={{rowsCount:rowsCount?rowsCount:'0'}}/>
               </div>
               <div className="gorToolHeaderSubText">
-               <FormattedMessage id="ChargingStationsTable.SubstationID" description='total SubStationID for ChargingStationsTable' 
+               <FormattedMessage id="auditTable.SubAuditID" description='total Sub auditID for auditTable' 
                 defaultMessage='Total:{rowsCount}' 
                 values={{rowsCount:rowsCount?rowsCount:'0'}}/> 
               </div>
@@ -147,17 +155,32 @@ class ChargingStationsTable extends React.Component {
           width={columnWidths.id}
           isResizable={true}
         />
+
+        <Column
+          columnKey="auditTypeValue"
+          header={
+            <SortHeaderCell onSortChange={this._onSortChange}
+              sortDir={colSortDirs.auditTypeValue}>
+              <FormattedMessage id="audit.table.type" description="audit type for audit table" 
+              defaultMessage ="AUDIT TYPE"/>
+              <div className="gorToolHeaderSubText">  </div>
+            </SortHeaderCell>
+          }
+           cell={<TextCell data={sortedDataList} ></TextCell>}
+          fixed={true}
+          width={columnWidths.auditTypeValue}
+          isResizable={true}
+        />
         <Column
           columnKey="status"
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.status}>
-              <FormattedMessage id="ChargingStations.table.STATUS" description="STATUS for ChargingStations" 
+              <FormattedMessage id="audit.table.STATUS" description="STATUS for audit" 
               defaultMessage ="STATUS"/>
               <div className="gorToolHeaderSubText">  </div>
                <div>
-              <div className="statuslogoWrap">
-              </div>
+             
               </div>
             </SortHeaderCell>
           }
@@ -168,42 +191,69 @@ class ChargingStationsTable extends React.Component {
         />
 
          <Column
-          columnKey="mode"
+          columnKey="startTime"
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.mode}>
-              <FormattedMessage id="ChargingStations.table.operatingMode" description="operatingMode for ChargingStations" 
-              defaultMessage ="OPERATING MODE"/>
+              <FormattedMessage id="audit.table.startTime" description="startTime for audit" 
+              defaultMessage ="START TIME"/>
               <div className="gorToolHeaderSubText"> 
-                <FormattedMessage id="ChargingStationsTable.mode" description='cs mode for ChargingStationsTable' 
-                defaultMessage='Manual ({manual}) . Auto ({auto})' 
-                values={{manual:manual?manual:'0', auto:auto?auto:'0'}}/>
+                
               </div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
           fixed={true}
-          width={columnWidths.mode}
+          width={columnWidths.startTime}
           isResizable={true}
         />
         <Column
-          columnKey="dockedBots"
+          columnKey="progress"
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
-              sortDir={colSortDirs.dockedBots}>
-              <FormattedMessage id="ChargingStations.table.connectedBots" description="connectedBots for ChargingStations" 
-              defaultMessage ="BOTS CONNECTED"/>
-              <div className="gorToolHeaderSubText">
-                <FormattedMessage id="ChargingStationsTable.totalBots" description='total bots ChargingStationsTable' 
-                defaultMessage='{totalBots} bots connected' 
-                values={{totalBots:totalBots?totalBots:'0'}}/>
+              sortDir={colSortDirs.progress} >
+               <FormattedMessage id="audit.table.progress" description="progress for audit task" 
+              defaultMessage ="PROGRESS(%)"/>
+              <div className="gorToolHeaderSubText">   
+              </div> 
+            </SortHeaderCell>
+          }
+          cell={<ProgressCell data={sortedDataList}  />}
+          fixed={true}
+          width={columnWidths.progress}
+          isResizable={true}
+        />
+
+        <Column
+          columnKey="completedTime"
+          header={
+            <SortHeaderCell onSortChange={this._onSortChange}
+              sortDir={colSortDirs.completedTime}>
+              <FormattedMessage id="audit.table.timeCompleted" description="timeCompleted for audit" 
+              defaultMessage ="TIME COMPLETED"/>
+              <div className="gorToolHeaderSubText"> 
+                
               </div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
           fixed={true}
-          width={columnWidths.dockedBots}
+          width={columnWidths.completedTime}
           isResizable={true}
+        />
+
+        <Column
+          columnKey="actions"
+          header={
+            <SortHeaderCell >
+               
+               <FormattedMessage id="audit.table.action" description="action Column" 
+              defaultMessage ="ACTIONS"/> 
+              <div className="gorToolHeaderSubText">  </div>
+            </SortHeaderCell>
+          }
+          cell={<ActionCellAudit data={sortedDataList} handleAudit={this.startAudit.bind(this)} tasks={tasks}/>}
+          width={columnWidths.actions}
         />
       </Table>
       </div>
@@ -228,4 +278,4 @@ var mapDispatchToProps = function(dispatch){
   }
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(Dimensions()(ChargingStationsTable));
+export default connect(mapStateToProps,mapDispatchToProps)(Dimensions()(AuditTable));

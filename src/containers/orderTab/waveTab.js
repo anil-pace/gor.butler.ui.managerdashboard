@@ -38,7 +38,7 @@ class WaveTab extends React.Component{
   		}
 		return (
 			<div className="gorTesting">
-				<WavesTable items={waveData} itemNumber={itemNumber} waveState={waveState}/>
+				<WavesTable items={waveData} itemNumber={itemNumber} waveState={waveState} intlMessg={this.props.intlMessages}/>
 			</div>
 		);
 	}
@@ -46,7 +46,8 @@ class WaveTab extends React.Component{
 
 function mapStateToProps(state, ownProps){
   return {
-      waveDetail: state.waveInfo || {}
+      waveDetail: state.waveInfo || {},
+      intlMessages: state.intl.messages
   };
 };
 
