@@ -1,5 +1,6 @@
 import {receiveAuthData,setLoginLoader} from '../actions/loginAction';
 import {AUTH_LOGIN} from '../constants/appConstants';
+import {ERR_CONNECT} from '../constants/messageConstants';
 import {notifyFail} from '../actions/validationActions';
 
 export function ShowError(store,cause)
@@ -12,6 +13,6 @@ export function ShowError(store,cause)
 			store.dispatch(receiveAuthData());
 			break;
 		default:
-          store.dispatch(notifyFail('Connection refused'));
+          store.dispatch(notifyFail(ERR_CONNECT));
 	}
 }  

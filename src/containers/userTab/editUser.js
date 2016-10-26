@@ -164,7 +164,7 @@ class EditUser extends React.Component{
               defaultMessage='Password'/></div>
 
               <a href="javascript:void(0)" onClick={(e) => this._handleAnchorClick(e)}><FormattedMessage id="users.edit.password.query" description='Text for change password' 
-              defaultMessage='Change Password?'/></a>
+              defaultMessage='Change Password'/></a>
               </div>
             </div>
 

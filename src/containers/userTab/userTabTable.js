@@ -261,7 +261,7 @@ class UserDataTable extends React.Component {
                ACTIONS
             </SortHeaderCell>
           }
-          cell={<ActionCell data={sortedDataList} selEdit={selEdit} selDel={selDel}/>}
+          cell={<ActionCell data={sortedDataList} selEdit={selEdit} selDel={selDel} mid={this.props.mid}/>}
           width={columnWidth}
         />
       </Table>
