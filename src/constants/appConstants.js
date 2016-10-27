@@ -148,7 +148,8 @@ export const TAB_ROUTE_MAP = {
 		[SYSTEM] : "system",
 		[ORDERS] : "orders",
 		[INVENTORY] : "inventory",
-		[USERS] : "users"
+		[USERS] : "users",
+		[AUDIT]:"audit"
 	}
 export const SYS_SUB_TAB_ROUTE_MAP={
 	[NOTIFICATION] : "notification",

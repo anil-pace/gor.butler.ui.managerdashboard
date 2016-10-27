@@ -5,7 +5,6 @@ import {assignRole} from '../actions/userActions';
 import {recieveHeaderInfo} from '../actions/headerAction';
 import {getPPSAudit} from '../actions/auditActions';
 import {notifySuccess, notifyFail,validateID} from '../actions/validationActions';
-<<<<<<< HEAD
 import {ERROR,AUTH_LOGIN, ADD_USER, CHECK_ID,DELETE_USER,GET_ROLES,ORDERS_RETRIEVE,PPS_MODE_CHANGE,EDIT_USER,BUTLER_UI,CODE_US001,CODE_US002,CODE_US004,CODE_UE001,CODE_UE002,CODE_UE003,CODE_UE004,CODE_UE005,CODE_UE006,RECIEVE_HEADER,SUCCESS,CREATE_AUDIT,AUDIT_RETRIEVE,CODE_E025,CODE_G015,GET_PPSLIST,START_AUDIT,CODE_AE001,CODE_AE002,CODE_AE006} from '../constants/appConstants';
 import {US001,US002,US004,UE001,UE002,UE003,UE004,UE005,UE006,E028,E029,MODE_REQUESTED,TYPE_SUCCESS,E025,G015,AS001,ERR_API,ERR_USR,ERR_RES,ERR_AUDIT,AE001,AE002,AE006,AS002} from '../constants/messageConstants'; 
 

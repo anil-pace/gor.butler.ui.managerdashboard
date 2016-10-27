@@ -1,7 +1,7 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { connect } from 'react-redux' ;
-import {userRequest} from '../actions/userActions';
+import {userRequest} from '../../actions/userActions';
 import { FormattedMessage,FormattedPlural } from 'react-intl';        
 
 class DuplicateAudit extends React.Component{

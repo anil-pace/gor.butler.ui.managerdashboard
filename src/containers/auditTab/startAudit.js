@@ -1,15 +1,15 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
-import { resetForm,validateID,validateName } from '../actions/validationActions'; 
-import {setAuditType,resetAuditType} from '../actions/auditActions';
-import {userRequest} from '../actions/userActions';
+import { resetForm,validateID,validateName } from '../../actions/validationActions'; 
+import {setAuditType,resetAuditType} from '../../actions/auditActions';
+import {userRequest} from '../../actions/userActions';
 import { connect } from 'react-redux';
-import {INVALID_SKUID,INVALID_LOCID,TYPE_SUCCESS} from '../constants/messageConstants';
-import { ERROR,SUCCESS,SKU,LOCATION,CREATE_AUDIT,GET_PPSLIST,START_AUDIT } from '../constants/appConstants';
-import { AUDIT_URL,PPSLIST_URL } from '../constants/configConstants';
-import FieldError from '../components/fielderror/fielderror';
-import { locationStatus, skuStatus } from '../utilities/fieldCheck';
+import {INVALID_SKUID,INVALID_LOCID,TYPE_SUCCESS} from '../../constants/messageConstants';
+import { ERROR,SUCCESS,SKU,LOCATION,CREATE_AUDIT,GET_PPSLIST,START_AUDIT } from '../../constants/appConstants';
+import { AUDIT_URL,PPSLIST_URL } from '../../constants/configConstants';
+import FieldError from '../../components/fielderror/fielderror';
+import { locationStatus, skuStatus } from '../../utilities/fieldCheck';
 import NoPPS from './noPPS';
 
 
