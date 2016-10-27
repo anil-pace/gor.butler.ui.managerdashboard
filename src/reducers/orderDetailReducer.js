@@ -1,7 +1,12 @@
 import {ORDER_RECIEVED} from '../constants/appConstants'; 
+import React  from 'react';
+import { FormattedMessage } from 'react-intl';
 
 function processOrders(data) {
-  var renderOrderData = [], ordersStatus = {'pending':"Progress", "fulfillable": "Progress", "completed":"Completed", "not_fulfillable":"Unfulfillable"},orderData = {};
+  let progress = <FormattedMessage id="orderList.progress.status" description='progress status for orderList' defaultMessage='In Progress'/>;
+  let completed = <FormattedMessage id="orderList.completed.status" description='completed status for orderList' defaultMessage='Completed'/>;
+  let unfulfillable = <FormattedMessage id="orderList.Unfulfillable.status" description='Unfulfillable status for orderList' defaultMessage='Unfulfillable'/>;
+  var renderOrderData = [], ordersStatus = {'pending':progress, "fulfillable": progress, "completed":completed, "not_fulfillable":unfulfillable},orderData = {};
   if(data.length !== undefined) {
     for (var i =0; i < data.length; i++) {
       orderData.id = data[i].order_id;

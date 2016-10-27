@@ -1,8 +1,18 @@
-import { SET_AUDIT,RESET_AUDIT} from '../constants/appConstants'
+import { AJAX_CALL,AUDIT_RETRIEVE, RECIEVE_AUDIT_DATA,SET_AUDIT,RESET_AUDIT,SETAUDIT_PPS} from '../constants/appConstants'
 
-/**
- * Actions for users page
- */
+export function getAuditData(params){
+	return {
+    type: AJAX_CALL,
+    params
+  }
+}
+
+export function recieveAuditData(data){
+	return {
+		type: RECIEVE_AUDIT_DATA,
+		data
+	}
+}
 
 export function setAuditType(data){
   return {
@@ -16,4 +26,9 @@ export function resetAuditType(data){
     data
     }
 }
-
+export function getPPSAudit(data){
+	return {
+		type: SETAUDIT_PPS,
+		data
+	}
+}

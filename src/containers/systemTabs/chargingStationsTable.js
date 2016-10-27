@@ -3,64 +3,48 @@ import {Table, Column, Cell} from 'fixed-data-table';
 import DropdownTable from '../../components/dropdown/dropdownTable'
 import Dimensions from 'react-dimensions'
 import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
+import {currentTableState} from '../../actions/tableDataAction'
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
 
 class ChargingStationsTable extends React.Component {
   constructor(props) {
     super(props);
-    var items = this.props.items || [];
-    var temp = new Array(items ? items.length : 0).fill(false);
-    this._dataList = new tableRenderer(items ? items.length : 0);
-    this._defaultSortIndexes = [];
-    this._dataList.newData=items;
-    var size = this._dataList.getSize();
-    for (var index = 0; index < size; index++) {
-      this._defaultSortIndexes.push(index);
-    }
-    var columnWidth= (this.props.containerWidth/this.props.itemNumber)
-    this.state = {
-      sortedDataList: this._dataList,
-      colSortDirs: {},
-      columnWidths: {
-        id: this.props.containerWidth*0.15,
-        status: this.props.containerWidth*0.1,
-        mode: this.props.containerWidth*0.15,
-        dockedBots: this.props.containerWidth*0.6
-      },
-      
-    };
+    this.tableState(this.props,this);
     this._onSortChange = this._onSortChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    var items = nextProps.items || [];
-    var temp = new Array(items ? items.length : 0).fill(false);
-    this._dataList = new tableRenderer(items ? items.length : 0);
-    this._defaultSortIndexes = [];
-    this._dataList.newData=items;
-    var size = this._dataList.getSize();
+      this.tableState(nextProps,this);
+  }
+
+  componentDidMount() {
+      this.props.currentTableState(this.tableState(this.props, this));    
+  }
+
+  tableState(nProps, current) {
+    var items = nProps.items || [];
+    current._dataList = new tableRenderer(items ? items.length : 0);
+    current._defaultSortIndexes = [];
+    current._dataList.newData=items;
+    var size = current._dataList.getSize();
     for (var index = 0; index < size; index++) {
-      this._defaultSortIndexes.push(index);
+      current._defaultSortIndexes.push(index);
     }
-    var columnWidth= (nextProps.containerWidth/nextProps.itemNumber)
-    this.state = {
-      sortedDataList: this._dataList,
+    var tableData = {sortedDataList: current._dataList,
       colSortDirs: {},
       columnWidths: {
-       id: nextProps.containerWidth*0.15,
-        status: nextProps.containerWidth*0.15,
-        mode: nextProps.containerWidth*0.15,
-        dockedBots: nextProps.containerWidth*0.55
-      },
-      
-    };
-    this._onSortChange = this._onSortChange.bind(this);
-    this._onFilterChange = this._onFilterChange.bind(this);
-    this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+        id: nProps.containerWidth*0.15,
+        status: nProps.containerWidth*0.1,
+        mode: nProps.containerWidth*0.15,
+        dockedBots: nProps.containerWidth*0.6
+      }};
+      return tableData;
   }
-   _onColumnResizeEndCallback(newColumnWidth, columnKey) {
+
+     _onColumnResizeEndCallback(newColumnWidth, columnKey) {
     this.setState(({columnWidths}) => ({
       columnWidths: {
         ...columnWidths,
@@ -70,40 +54,52 @@ class ChargingStationsTable extends React.Component {
   }
   _onFilterChange(e) {
     if (!e.target.value) {
-      this.setState({
-        sortedDataList: this._dataList,
-      });
+      var tableData={
+      sortedDataList: this._dataList,
+      colSortDirs: this.props.tableData.colSortDirs,
+      columnWidths: this.props.tableData.columnWidths,
+      };
     }
-    this.setState({
+    var tableData={
       sortedDataList: new DataListWrapper(filterIndex(e,this._dataList), this._dataList),
-    });
+      colSortDirs: this.props.tableData.colSortDirs,
+      columnWidths: this.props.tableData.columnWidths,
+      };
+    this.props.currentTableState(tableData);
   }
   
   
   _onSortChange(columnKey, sortDir) {
     var sortIndexes = this._defaultSortIndexes.slice();
-    this.setState({
+    var tableData={
       sortedDataList: new DataListWrapper(sortData(columnKey, sortDir,sortIndexes,this._dataList), this._dataList),
-      colSortDirs: {
-        [columnKey]: sortDir,
-      },
-    });
+      colSortDirs: {[columnKey]: sortDir,},
+      columnWidths: this.props.tableData.columnWidths,
+    };
+    this.props.currentTableState(tableData)
   }
   render() {
-    
-    var {sortedDataList, colSortDirs,columnWidths} = this.state;
-    const item = [
-    { value: 'on', label: 'On' },
-    { value: 'off', label: 'Off' },
-    ];
+    console.log(this.props)
+    var sortedDataList = this._dataList
+    if(this.props.tableData.sortedDataList !== undefined && this.props.tableData.sortedDataList._data !== undefined) {
+      sortedDataList = this.props.tableData.sortedDataList;
+    }
+    var colSortDirs = this.props.tableData.colSortDirs;
+    var columnWidths = this.props.tableData.columnWidths;
+    var rowsCount = sortedDataList.getSize();
+    let manual = this.props.chargersState.manualMode;
+    let auto = this.props.chargersState.automaticMode;
+    let totalBots = this.props.chargersState.connectedBots;
+    console.log(this.props.chargersState)
 
-    return (
-      <div className="gorTableMainContainer">
+    var tableRenderer = <div/>
+    if(this.props.tableData.length !== 0) {
+       tableRenderer = <div className="gorTableMainContainer">
         <div className="gorToolBar">
           <div className="gorToolBarWrap">
             <div className="gorToolBarElements">
                <FormattedMessage id="ChargingStations.table.heading" description="Heading for ChargingStations" 
-              defaultMessage ="CHARGING STATIONS"/>
+              defaultMessage ="Charging Stations"/>
               
             </div>
           </div>
@@ -112,7 +108,7 @@ class ChargingStationsTable extends React.Component {
             <div className="searchbox-magnifying-glass-icon"/>
             <input className="gorInputFilter"
               onChange={this._onFilterChange}
-              placeholder="Filter by status and id">
+              placeholder={this.props.intlMessg["table.filter.placeholder"]}>
             </input>
         </div>
         </div>
@@ -120,7 +116,7 @@ class ChargingStationsTable extends React.Component {
 
       <Table
         rowHeight={66}
-        rowsCount={sortedDataList.getSize()}
+        rowsCount={rowsCount}
         headerHeight={70}
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
@@ -133,8 +129,16 @@ class ChargingStationsTable extends React.Component {
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.id}>
               <div className="gorToolHeaderEl">
-              <div className="gorToolHeaderEl"> {sortedDataList.getSize()} STATION ID </div>
-              <div className="gorToolHeaderSubText"> Total:{sortedDataList.getSize()} </div>
+              <div className="gorToolHeaderEl"> 
+                 <FormattedMessage id="ChargingStationsTable.stationID" description='total stationID for ChargingStationsTable' 
+                defaultMessage='{rowsCount} STATION ID' 
+                values={{rowsCount:rowsCount?rowsCount:'0'}}/>
+              </div>
+              <div className="gorToolHeaderSubText">
+               <FormattedMessage id="ChargingStationsTable.SubstationID" description='total SubStationID for ChargingStationsTable' 
+                defaultMessage='Total:{rowsCount}' 
+                values={{rowsCount:rowsCount?rowsCount:'0'}}/> 
+              </div>
               </div>
             </SortHeaderCell>
           }
@@ -166,10 +170,15 @@ class ChargingStationsTable extends React.Component {
          <Column
           columnKey="mode"
           header={
-            <SortHeaderCell>
+            <SortHeaderCell onSortChange={this._onSortChange}
+              sortDir={colSortDirs.mode}>
               <FormattedMessage id="ChargingStations.table.operatingMode" description="operatingMode for ChargingStations" 
               defaultMessage ="OPERATING MODE"/>
-              <div className="gorToolHeaderSubText"> Manual ({this.props.chargersState.manualMode}) . Auto ({this.props.chargersState.automaticMode}) </div>
+              <div className="gorToolHeaderSubText"> 
+                <FormattedMessage id="ChargingStationsTable.mode" description='cs mode for ChargingStationsTable' 
+                defaultMessage='Manual ({manual}) . Auto ({auto})' 
+                values={{manual:manual?manual:'0', auto:auto?auto:'0'}}/>
+              </div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
@@ -180,10 +189,15 @@ class ChargingStationsTable extends React.Component {
         <Column
           columnKey="dockedBots"
           header={
-            <SortHeaderCell>
+            <SortHeaderCell onSortChange={this._onSortChange}
+              sortDir={colSortDirs.dockedBots}>
               <FormattedMessage id="ChargingStations.table.connectedBots" description="connectedBots for ChargingStations" 
               defaultMessage ="BOTS CONNECTED"/>
-              <div className="gorToolHeaderSubText"> {this.props.chargersState.connectedBots} bots connected</div>
+              <div className="gorToolHeaderSubText">
+                <FormattedMessage id="ChargingStationsTable.totalBots" description='total bots ChargingStationsTable' 
+                defaultMessage='{totalBots} bots connected' 
+                values={{totalBots:totalBots?totalBots:'0'}}/>
+              </div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
@@ -193,7 +207,25 @@ class ChargingStationsTable extends React.Component {
         />
       </Table>
       </div>
+    
+  }
+    return (
+      <div> {tableRenderer} </div>
     );
   }
 }
-export default Dimensions()(ChargingStationsTable);
+
+function mapStateToProps(state, ownProps){
+  return {
+    tableData: state.currentTableState.currentTableState || [],
+  };
+}
+
+
+var mapDispatchToProps = function(dispatch){
+  return {
+    currentTableState: function(data){ dispatch(currentTableState(data)); }
+  }
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(Dimensions()(ChargingStationsTable));

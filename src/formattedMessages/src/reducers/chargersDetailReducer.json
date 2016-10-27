@@ -1,0 +1,32 @@
+[
+  {
+    "id": "chargersDetail.connected.status",
+    "description": "connected status for chargersDetail",
+    "defaultMessage": "Connected"
+  },
+  {
+    "id": "chargersDetail.disconnected.status",
+    "description": "disconnected status for chargersDetail",
+    "defaultMessage": "Disconnected"
+  },
+  {
+    "id": "chargersDetail.manual.mode",
+    "description": "manual mode for chargersDetail",
+    "defaultMessage": "Manual"
+  },
+  {
+    "id": "chargersDetail.auto.mode",
+    "description": "Auto mode for chargersDetail",
+    "defaultMessage": "Auto"
+  },
+  {
+    "id": "chargersDetail.name.prefix",
+    "description": "prefix for cs id in chargersDetail",
+    "defaultMessage": "Charging Stations - {csId}"
+  },
+  {
+    "id": "chargersDetail.butler.prefix",
+    "description": "prefix for butler id in chargersDetail",
+    "defaultMessage": "Butler - {botId}"
+  }
+]

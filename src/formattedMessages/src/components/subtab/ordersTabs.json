@@ -1,0 +1,12 @@
+[
+  {
+    "id": "OrderSubTab.waves",
+    "description": "waves tab for OrderSubTab",
+    "defaultMessage": "Waves"
+  },
+  {
+    "id": "OrderSubTab.orderlist",
+    "description": "orderlist tab for OrderSubTab",
+    "defaultMessage": "Order List"
+  }
+]

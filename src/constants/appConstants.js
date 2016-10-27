@@ -20,6 +20,9 @@ export const WS_END="WS_END";
 export const WS_MOCK="WS_MOCK";
 /* Header constants */
 
+/* Constants for fixed-data-table */
+export const TABLE_STATE = "TABLE_STATE";
+
 export const REQUEST_HEADER = "REQUEST_HEADER";
 export const RECIEVE_HEADER = "RECIEVE_HEADER";
 
@@ -60,6 +63,7 @@ export const SYSTEM = "SYSTEM";
 export const ORDERS = "ORDERS";
 export const INVENTORY = "INVENTORY";
 export const USERS = "USERS";
+export const AUDIT = "AUDIT";
 export const NOTIFICATION_TAB = "Notification";
 export const BUTLERBOTS_TAB = "Butler Bots";
 export const CHARGING_TAB = "Charging Station";
@@ -99,6 +103,11 @@ export const PPS_MODE_CHANGE = 'PPS_MODE_CHANGE';
 export const GET_HEADER_INFO = 'GET_HEADER_INFO';
 export const EDIT_USER='EDIT_USER';
 export const CREATE_AUDIT='CREATE_AUDIT';
+export const GET_PPSLIST='GET_PPSLIST';
+export const START_AUDIT='START_AUDIT';
+export const AUDIT_RETRIEVE = "AUDIT_RETRIEVE";
+export const RECIEVE_AUDIT_DATA = "RECIEVE_AUDIT_DATA";
+
 
 
 /*Constants for app info checking*/
@@ -139,7 +148,8 @@ export const TAB_ROUTE_MAP = {
 		[SYSTEM] : "system",
 		[ORDERS] : "orders",
 		[INVENTORY] : "inventory",
-		[USERS] : "users"
+		[USERS] : "users",
+		[AUDIT]:"audit"
 	}
 export const SYS_SUB_TAB_ROUTE_MAP={
 	[NOTIFICATION] : "notification",
@@ -162,6 +172,9 @@ export const CODE_UE005='ue005';
 export const CODE_UE006='ue006';
 export const CODE_E025='e025';
 export const CODE_G015='g015';
+export const CODE_AE001='ae001';
+export const CODE_AE002='ae002';
+export const CODE_AE006='ae006';
 
 /*User roles map*/
 export const BUTLER_SUPERVISOR = 'butler_supervisor';
@@ -179,5 +192,6 @@ export const HEADER_START_TIME = '09:00 AM'
 /*Constants for Audit tab */
 export const SET_AUDIT='SET_AUDIT';
 export const RESET_AUDIT='RESET_AUDIT';
-export const SKU='sku';
+export const SKU='SKU';
 export const LOCATION='location';
+export const SETAUDIT_PPS='SETAUDIT_PPS';

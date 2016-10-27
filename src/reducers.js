@@ -28,7 +28,8 @@ import {appInfo} from './reducers/infoReducer';
 import {filterOptions} from './reducers/orderFilterReducer'
 import {waveInfo} from './reducers/waveDetailReducer';
 import {d3barChart} from './reducers/barChartReducer';
-
+import {currentTableState} from './reducers/tableStateReducer';
+import {recieveAuditDetail} from './reducers/auditDetailReducer';
 const rootReducer = combineReducers({
   intl:intlReducer,
   headerData,
@@ -58,7 +59,9 @@ const rootReducer = combineReducers({
   getOrderDetail,
   filterOptions,
   waveInfo,
-  d3barChart
+  d3barChart,
+  currentTableState,
+  recieveAuditDetail
    })
 
 export default rootReducer

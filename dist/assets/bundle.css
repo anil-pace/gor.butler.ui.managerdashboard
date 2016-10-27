@@ -31,6 +31,13 @@ ol, ul {
   list-style: none;
 }
 
+li {
+  font-family: 'Source Sans Pro Semibold', sans-serif;
+  font-size: 14px;
+  color: #000000;
+  margin-top: 20px;
+}
+
 article, aside, details, figcaption, figure,
 footer, header, nav, section {
   display: block;
@@ -41,7 +48,7 @@ q:before, q:after {
   content: none;
 }
 
-input[type="radio"] {
+input[type="radio"], input[type="checkbox"] {
   margin-right: 15px;
 }
 
@@ -2883,6 +2890,16 @@ progress::-moz-progress-bar {
   display: inline-block;
 }
 
+.gor-audit-actions-button {
+  display: inline-block;
+  padding-right: 70px;
+}
+
+.gor-audit-actions-drop {
+  display: inline-block;
+  width: 150px;
+}
+
 .gorSubTab.gorContainer {
   background-color: #F8F8F8;
   width: auto;
@@ -2943,7 +2960,6 @@ progress::-moz-progress-bar {
   background: #f36f36;
   color: #ffffff;
   border-radius: 3px;
-  margin-left: 50px;
 }
 
 .gor-field-error {
@@ -2951,6 +2967,7 @@ progress::-moz-progress-bar {
   color: #EC1C24;
   font-size: 18px;
   margin-top: 10px;
+  width: 75%;
 }
 
 .gor-input-error {
@@ -3111,6 +3128,10 @@ progress::-moz-progress-bar {
   color: #ffffff;
   border-radius: 3px;
   margin-left: 0px;
+}
+
+.gor-modal-content .gor-submit .gor-add-btn:disabled {
+  background: #dddddd;
 }
 
 .gor-footer {

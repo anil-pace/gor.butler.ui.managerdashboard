@@ -5,7 +5,7 @@ import {Table, Column, Cell} from 'fixed-data-table';
 import Dimensions from 'react-dimensions';
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData,ActionCell} from '../../components/commonFunctionsDataTable';
 import {modal} from 'react-redux-modal';
-import AddUser from './addNewUser';
+import AddNewUser from './addNewUser';
 import EditUser from './editUser';
 import DeleteUser from './deleteUser';
 
@@ -96,7 +96,7 @@ class UserDataTable extends React.Component {
   } 
 
   addModal() {
-    modal.add(AddUser, {
+    modal.add(AddNewUser, {
       title: '',
       size: 'large', // large, medium or small,
       closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
@@ -105,13 +105,14 @@ class UserDataTable extends React.Component {
     });
   }
   handleEdit(columnKey,rowIndex) {
-    let uid=this.state.sortedDataList.newData[rowIndex].uid,uname=this.state.sortedDataList.newData[rowIndex].userName,fname=this.state.sortedDataList.newData[rowIndex].first,lname=this.state.sortedDataList.newData[rowIndex].last;
+    let uid=this.state.sortedDataList.newData[rowIndex].uid,uname=this.state.sortedDataList.newData[rowIndex].userName,fname=this.state.sortedDataList.newData[rowIndex].first,lname=this.state.sortedDataList.newData[rowIndex].last,roleId=this.state.sortedDataList.newData[rowIndex].roleId;
     modal.add(EditUser, {
       title: '',
       size: 'large', // large, medium or small,
       closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: true,
       id:uid,
+      roleId:roleId,
       userName:uname,
       first:fname,
       last:lname
@@ -143,7 +144,7 @@ class UserDataTable extends React.Component {
   render() {
     var {sortedDataList, colSortDirs,columnWidths} = this.state;
     var columnWidth= (this.props.containerWidth/this.props.itemNumber)
-    var heightRes = 560;
+    var heightRes = 560 ,rowsCount = sortedDataList.getSize();
     if(this.props.containerHeight !== 0) {
       heightRes = this.props.containerHeight;
     }
@@ -155,10 +156,14 @@ class UserDataTable extends React.Component {
           <div className="gorToolBarWrap">
             <div className="gorToolBarElements">
               <FormattedMessage id="user.table.heading" description="Heading for users table" 
-              defaultMessage ="USERS"/>
+              defaultMessage ="Users"/>
             </div>
             <div className="gorToolBarElements">
-                <button className="gor-add-btn" onClick={this.addModal.bind(this)}>Add new user</button>
+                <button className="gor-add-btn" onClick={this.addModal.bind(this)}>
+                  
+                  <FormattedMessage id="user.button.heading" description="button heading for users table" 
+              defaultMessage ="Add new user"/>
+              </button>
             </div>            
           </div>
           <div className="filterWrapper">  
@@ -166,7 +171,7 @@ class UserDataTable extends React.Component {
             <div className="searchbox-magnifying-glass-icon"/>
             <input className="gorInputFilter"
               onChange={this._onFilterChange}
-              placeholder="Filter by status">
+              placeholder={this.props.intlMessg["table.filter.placeholder"]}>
             </input>
         </div>
         </div>
@@ -183,14 +188,18 @@ class UserDataTable extends React.Component {
         <Column
           columnKey="id"
           header={
-            <SortHeaderCell >
+            <SortHeaderCell onSortChange={this._onSortChange}>
               <div className="gorToolHeaderEl">
               <div className="gorToolHeaderEl">
                 {sortedDataList.getSize()} 
                 <FormattedMessage id="user.table.users" description="Users Column" 
               defaultMessage =" USERS"/> 
               </div>
-              <div className="gorToolHeaderSubText"> Total:{sortedDataList.getSize()} </div>
+              <div className="gorToolHeaderSubText">
+                 <FormattedMessage id="user.table.totaluser" description='total user' 
+                defaultMessage='Total:{rowsCount}' 
+                values={{rowsCount:rowsCount?rowsCount:'0'}}/>
+              </div>
               </div>
             </SortHeaderCell>
           }
@@ -258,7 +267,9 @@ class UserDataTable extends React.Component {
           columnKey="actions"
           header={
             <SortHeaderCell >
-               ACTIONS
+               
+               <FormattedMessage id="user.table.action" description="action Column" 
+              defaultMessage ="ACTIONS"/> 
             </SortHeaderCell>
           }
           cell={<ActionCell data={sortedDataList} selEdit={selEdit} selDel={selDel} mid={this.props.mid}/>}

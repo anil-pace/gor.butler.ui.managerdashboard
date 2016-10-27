@@ -3,7 +3,7 @@ import {EMPTY_PWD,TYPE_SUCCESS,EMPTY_NAME,INVALID_NAME,INVALID_PWD,MATCH_PWD,INV
 
 export function nameStatus(firstname,lastname){
           let nameInfo, format=  /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
-          if(firstname.length<1||lastname.length<1||firstname.length>50||lastname.length>50)
+          if(!firstname.length||!lastname.length||firstname.length>50||lastname.length>50)
           {
             nameInfo={
               type:ERROR,
@@ -28,6 +28,13 @@ export function nameStatus(firstname,lastname){
 }
 export function passwordStatus(pwd1,pwd2){
           let passwordInfo;
+          if(!pwd1.length)
+          {
+            passwordInfo={
+              type:ERROR,
+              msg:EMPTY_PWD           
+            };            
+          }
           if(pwd1.length<6)
           {
             passwordInfo={

@@ -2,7 +2,17 @@
   {
     "id": "butlerBot.table.heading",
     "description": "Heading for butlerbot",
-    "defaultMessage": "BUTLER BOTS"
+    "defaultMessage": "Butler Bots"
+  },
+  {
+    "id": "ButlerBotTable.TotalBot",
+    "description": "total bot for ButlerBotTable",
+    "defaultMessage": "{totalBot} BOT"
+  },
+  {
+    "id": "ButlerBotTable.subTotalBot",
+    "description": "sub text for totalbot ButlerBotTable",
+    "defaultMessage": "Total: {totalBot}"
   },
   {
     "id": "butlerBot.table.status",
@@ -15,9 +25,19 @@
     "defaultMessage": "CURRENT TASK"
   },
   {
+    "id": "ButlerBotTable.botState",
+    "description": "bot state for ButlerBotTable",
+    "defaultMessage": "Pick ({pick}) . Put ({put}) . Charging ({charging}) . Idle ({idle})"
+  },
+  {
     "id": "butlerBot.table.msu",
     "description": "MSU Status for butlerbot",
     "defaultMessage": "MSU"
+  },
+  {
+    "id": "ButlerBotTable.mounted",
+    "description": "msu mounted for ButlerBotTable",
+    "defaultMessage": "{msuMounted} Mounted"
   },
   {
     "id": "butlerBot.table.location",
@@ -25,8 +45,18 @@
     "defaultMessage": "LOCATION"
   },
   {
+    "id": "ButlerBotTable.locations",
+    "description": "msu mounted for ButlerBotTable",
+    "defaultMessage": "{locations} Mounted"
+  },
+  {
     "id": "butlerBot.table.voltage",
     "description": "voltage for butlerbot",
     "defaultMessage": "VOLTAGE"
+  },
+  {
+    "id": "ButlerBotTable.avgVoltage",
+    "description": "avgVoltage for ButlerBotTable",
+    "defaultMessage": "Avg. Voltage {voltage}"
   }
 ]

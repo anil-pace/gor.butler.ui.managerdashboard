@@ -148,6 +148,9 @@ class PPStable extends React.Component {
   }
   
   _onSortChange(columnKey, sortDir) {
+    if(columnKey === undefined) {
+      columnKey = "id"
+    }
     var sortIndexes = this._defaultSortIndexes.slice();
     this.setState({
       sortedDataList: new DataListWrapper(sortData(columnKey, sortDir,sortIndexes,this._dataList), this._dataList),
@@ -188,17 +191,26 @@ class PPStable extends React.Component {
 
   
   render() {
-    
+    console.log(this.props)
     var {sortedDataList, colSortDirs,columnWidths,isChecked,renderDropD, ppsSelected,headerChecked} = this.state, checkedPPS = [];
+    let pickDrop = <FormattedMessage id="PPS.table.pickDrop" description="pick dropdown option for PPS" defaultMessage ="Put"/> 
+    let putDrop = <FormattedMessage id="PPS.table.putDrop" description="put dropdown option for PPS" defaultMessage ="Pick"/> 
+    let auditDrop = <FormattedMessage id="PPS.table.auditDrop" description="audit dropdown option for PPS" defaultMessage ="Audit"/> 
+    
     const modes = [
-    { value: 'put', label: 'Put' },
-    { value: 'pick', label: 'Pick' },
-    { value: 'audit', label: 'Audit' }
+    { value: 'put', label: pickDrop },
+    { value: 'pick', label: putDrop },
+    { value: 'audit', label: auditDrop }
     ];
     var checkState = this.handleChange.bind(this);
-    var drop, selected =0;
+    var drop, selected =0, ppsTotal = sortedDataList.getSize();
+    let pick = this.props.operationMode.Pick;
+    let put = this.props.operationMode.Put;
+    let audit = this.props.operationMode.Audit;
+    let notSet = this.props.operationMode.NotSet;
+    let operatorNum =  this.props.operatorNum;
     if(this.state.renderDropD===true) {
-      drop = <DropdownTable  styleClass={'gorDataTableDrop'} placeholder="Change PPS mode" items={modes} changeMode={this.handleModeChange.bind(this)}/>;
+      drop = <DropdownTable  styleClass={'gorDataTableDrop'} placeholder={this.props.intlMessg["pps.dropdown.placeholder"]} items={modes} changeMode={this.handleModeChange.bind(this)}/>;
     }
 
     else {
@@ -218,7 +230,11 @@ class PPStable extends React.Component {
             <div className="gorToolBarElements">
                <FormattedMessage id="pps.table.heading" description="Heading for PPS" 
               defaultMessage ="PPS"/>
-              <div className="gorToolHeaderSubText"> {selected} selected </div>
+              <div className="gorToolHeaderSubText"> 
+                <FormattedMessage id="PPStable.selected" description='selected pps for ppsSelected' 
+                defaultMessage='{selected} selected' 
+                values={{selected:selected?selected:'0'}}/> 
+              </div>
             </div>
             <div className="gorToolBarDropDown">
               {drop}
@@ -229,7 +245,7 @@ class PPStable extends React.Component {
             <div className="searchbox-magnifying-glass-icon"/>
             <input className="gorInputFilter"
               onChange={this._onFilterChange}
-              placeholder="Filter by status and PPS id">
+              placeholder={this.props.intlMessg["table.filter.placeholder"]}>
             </input>
         </div>
         </div>
@@ -247,13 +263,28 @@ class PPStable extends React.Component {
         <Column
           columnKey="id"
           header={
-            <SortHeaderCell onSortChange={this._onSortChange}
-              sortDir={colSortDirs.id}> <input type="checkbox" checked={this.state.headerChecked} onChange={this.headerCheckChange.bind(this)} />
-              <div className="gorToolHeaderEl">
-              <div className="gorToolHeaderEl"> {sortedDataList.getSize()} PPS </div>
-              <div className="gorToolHeaderSubText"> Total:{sortedDataList.getSize()} </div>
+            <div>
+            <div className="gor-header-check">
+              <input type="checkbox" checked={this.state.headerChecked} onChange={this.headerCheckChange.bind(this)}/>
+            </div>
+            <div>
+              <SortHeaderCell onSortChange={this._onSortChange}
+                sortDir={colSortDirs.id}>  
+                <div className="gorToolHeaderEl">
+                <div className="gorToolHeaderEl"> 
+                  <FormattedMessage id="PPStable.Totalpps" description='total pps' 
+                  defaultMessage='{ppsTotal} PPS' 
+                  values={{ppsTotal:ppsTotal?ppsTotal:'0'}}/> 
+                </div>
+                <div className="gorToolHeaderSubText"> 
+                  <FormattedMessage id="PPStable.Subpps" description='sub pps' 
+                  defaultMessage='Total: {ppsTotal}' 
+                  values={{ppsTotal:ppsTotal?ppsTotal:'0'}}/>
+              </div>
               </div>
             </SortHeaderCell>
+            </div>
+            </div>
           }
           cell={  <ComponentCell data={sortedDataList} checkState={checkState} checked={this.state.isChecked} />}
           fixed={true}
@@ -285,10 +316,15 @@ class PPStable extends React.Component {
         <Column
           columnKey="operatingMode"
           header={
-            <SortHeaderCell>
+            <SortHeaderCell onSortChange={this._onSortChange}
+              sortDir={colSortDirs.operatingMode}>
               <FormattedMessage id="PPS.table.operatingMode" description="operatingMode for PPS" 
               defaultMessage ="OPERATING MODE"/>
-              <div className="gorToolHeaderSubText">Pick ({this.props.operationMode.Pick}) . Put ({this.props.operationMode.Put}) . Audit ({this.props.operationMode.Audit}) . Not set ({this.props.operationMode.NotSet})</div>
+              <div className="gorToolHeaderSubText">
+                <FormattedMessage id="PPStable.ppsState" description='pps state for PPStable' 
+                defaultMessage='Pick ({pick}) . Put ({put}) . Audit ({audit}) . Not set ({notSet})' 
+                values={{pick: pick?pick:'0', put:put?put:'0', audit:audit?audit:'0', notSet:notSet?notSet:'0'}}/>
+              </div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
@@ -299,7 +335,8 @@ class PPStable extends React.Component {
         <Column
           columnKey="performance"
           header={
-            <SortHeaderCell>
+            <SortHeaderCell onSortChange={this._onSortChange}
+              sortDir={colSortDirs.performance}>
                <FormattedMessage id="PPS.table.performance" description="performance Status for PPS" 
               defaultMessage ="PERFORMANCE"/> 
                <div>
@@ -318,10 +355,15 @@ class PPStable extends React.Component {
         <Column
           columnKey="operatorAssigned"
           header={
-            <SortHeaderCell>
+            <SortHeaderCell onSortChange={this._onSortChange}
+              sortDir={colSortDirs.operatorAssigned}>
                <FormattedMessage id="PPS.table.operatorAssigned" description="operatorAssigned for PPS" 
               defaultMessage ="OPERATOR ASSIGNED"/> 
-              <div className="gorToolHeaderSubText"> {this.props.operatorNum} operator</div>
+              <div className="gorToolHeaderSubText"> 
+                <FormattedMessage id="PPStable.totalOperator" description='totalOperator for PPStable' 
+                defaultMessage='{operatorNum} operator' 
+                values={{operatorNum: operatorNum?operatorNum:'0'}}/>
+              </div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}

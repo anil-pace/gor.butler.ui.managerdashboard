@@ -1,5 +1,10 @@
 [
   {
+    "id": "audit.start.ppscheckbox",
+    "description": "Text for PPS",
+    "defaultMessage": "PPS {eta}"
+  },
+  {
     "id": "audit.start.heading",
     "description": "Heading for start audit",
     "defaultMessage": "Start audit task"
@@ -15,13 +20,18 @@
     "defaultMessage": "Assign PPS for Location"
   },
   {
-    "id": "audit.start.auditdetails.subheading",
-    "description": "Text for audit details subheading",
+    "id": "audit.start.auditdetails.subheading1",
+    "description": "Text for audit details subheading when pps present",
     "defaultMessage": "All PPS below are currently in the audit mode."
   },
   {
-    "id": "audit.start.password.button",
+    "id": "audit.start.button",
     "description": "Text for start audit button",
     "defaultMessage": "Start task now"
+  },
+  {
+    "id": "audit.back.button",
+    "description": "Text for go back button",
+    "defaultMessage": "Go Back"
   }
 ]

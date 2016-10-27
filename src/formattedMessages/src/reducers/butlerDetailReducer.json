@@ -1,0 +1,32 @@
+[
+  {
+    "id": "butlerDetail.online.status",
+    "description": "online status for butlerDetail",
+    "defaultMessage": "Online"
+  },
+  {
+    "id": "butlerDetail.offline.status",
+    "description": "offline status for butlerDetail",
+    "defaultMessage": "Offline"
+  },
+  {
+    "id": "butlerDetail.name.prefix",
+    "description": "prefix for butler id",
+    "defaultMessage": "BOT - {botId}"
+  },
+  {
+    "id": "pps.name.prefix",
+    "description": "prefix for pps id",
+    "defaultMessage": "PPS - {ppsId}"
+  },
+  {
+    "id": "charger.name.prefix",
+    "description": "prefix for charger id",
+    "defaultMessage": "CS - {csId}"
+  },
+  {
+    "id": "msu.name.prefix",
+    "description": "prefix for msu id",
+    "defaultMessage": "MSU - {msuId}"
+  }
+]

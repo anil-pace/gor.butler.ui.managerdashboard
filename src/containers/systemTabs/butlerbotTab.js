@@ -53,7 +53,7 @@ class ButlerBot extends React.Component{
 			<div>
 				<div>
 					<div className="gorTesting">
-						<ButlerBotTable items={butlerData} itemNumber={itemNumber} parameters={taskDetail}/>
+						<ButlerBotTable items={butlerData} itemNumber={itemNumber} parameters={taskDetail} intlMessg={this.props.intlMessages}/>
 					</div>
 				</div>
 			</div>
@@ -64,6 +64,7 @@ class ButlerBot extends React.Component{
 function mapStateToProps(state, ownProps){
   return {
     butlerDetail: state.butlerDetail || [],
+    intlMessages: state.intl.messages
   };
 }
 

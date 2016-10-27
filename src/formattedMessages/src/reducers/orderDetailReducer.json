@@ -1,0 +1,17 @@
+[
+  {
+    "id": "orderList.progress.status",
+    "description": "progress status for orderList",
+    "defaultMessage": "In Progress"
+  },
+  {
+    "id": "orderList.completed.status",
+    "description": "completed status for orderList",
+    "defaultMessage": "Completed"
+  },
+  {
+    "id": "orderList.Unfulfillable.status",
+    "description": "Unfulfillable status for orderList",
+    "defaultMessage": "Unfulfillable"
+  }
+]
