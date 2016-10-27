@@ -20,6 +20,9 @@ export const WS_END="WS_END";
 export const WS_MOCK="WS_MOCK";
 /* Header constants */
 
+/* Constants for fixed-data-table */
+export const TABLE_STATE = "TABLE_STATE";
+
 export const REQUEST_HEADER = "REQUEST_HEADER";
 export const RECIEVE_HEADER = "RECIEVE_HEADER";
 
@@ -60,6 +63,7 @@ export const SYSTEM = "SYSTEM";
 export const ORDERS = "ORDERS";
 export const INVENTORY = "INVENTORY";
 export const USERS = "USERS";
+export const AUDIT = "AUDIT";
 export const NOTIFICATION_TAB = "Notification";
 export const BUTLERBOTS_TAB = "Butler Bots";
 export const CHARGING_TAB = "Charging Station";
@@ -101,6 +105,9 @@ export const EDIT_USER='EDIT_USER';
 export const CREATE_AUDIT='CREATE_AUDIT';
 export const GET_PPSLIST='GET_PPSLIST';
 export const START_AUDIT='START_AUDIT';
+export const AUDIT_RETRIEVE = "AUDIT_RETRIEVE";
+export const RECIEVE_AUDIT_DATA = "RECIEVE_AUDIT_DATA";
+
 
 
 /*Constants for app info checking*/

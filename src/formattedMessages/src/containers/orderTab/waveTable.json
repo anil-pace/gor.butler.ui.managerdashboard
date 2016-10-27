@@ -5,14 +5,29 @@
     "defaultMessage": "Waves"
   },
   {
+    "id": "WavesTable.heading",
+    "description": "heading for WavesTable",
+    "defaultMessage": "Waves"
+  },
+  {
+    "id": "WavesTable.Totalwaves",
+    "description": "total waves for WavesTable",
+    "defaultMessage": "Total:{totalwave}"
+  },
+  {
     "id": "waves.table.status",
     "description": "Status for waves",
     "defaultMessage": "STATUS"
   },
   {
-    "id": "butlerBot.table.startTime",
+    "id": "waves.table.startTime",
     "description": "StartTime for butlerbot",
     "defaultMessage": "START TIME"
+  },
+  {
+    "id": "WavesTable.pending.status",
+    "description": "pending status for WavesTable",
+    "defaultMessage": "{pendingWave} waves pending"
   },
   {
     "id": "waves.table.cutOffTime",
@@ -20,9 +35,19 @@
     "defaultMessage": "CUT-OFF TIME"
   },
   {
-    "id": "butlerBot.table.ordersToFulfill",
+    "id": "WavesTable.progress.status",
+    "description": "progress status for WavesTable",
+    "defaultMessage": "{progressWave} waves in progress"
+  },
+  {
+    "id": "waves.table.ordersToFulfill",
     "description": "orders to fulfill for waves",
     "defaultMessage": "ORDERS TO FULFILL"
+  },
+  {
+    "id": "WavesTable.orderRemaining.status",
+    "description": "orderRemaining status for WavesTable",
+    "defaultMessage": "{orderRemaining} remaining"
   },
   {
     "id": "waves.table.progress",
@@ -30,8 +55,18 @@
     "defaultMessage": "PROGRESS(%)"
   },
   {
+    "id": "WavesTable.completed.status",
+    "description": "completed status for WavesTable",
+    "defaultMessage": "{completedWaves} waves completed"
+  },
+  {
     "id": "waves.table.totalOrders",
     "description": "totalOrders for waves",
     "defaultMessage": "TOTAL ORDERS"
+  },
+  {
+    "id": "WavesTable.totalOrders.status",
+    "description": "totalOrders status for WavesTable",
+    "defaultMessage": "{totalOrders} orders"
   }
 ]

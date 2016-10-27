@@ -80,6 +80,21 @@
     "defaultMessage": "Both password entered do not match. Please try again"
   },
   {
+    "id": "msu.name.prefix",
+    "description": "prefix for msu name",
+    "defaultMessage": "MSU"
+  },
+  {
+    "id": "chargingStation.name.prefix",
+    "description": "prefix for charging station name",
+    "defaultMessage": "CS"
+  },
+  {
+    "id": "pps.name.prefix",
+    "description": "prefix for pps name",
+    "defaultMessage": "PPS"
+  },
+  {
     "id": "audit.invalid.sku",
     "description": "Text for invalid SKU ID",
     "defaultMessage": "Please enter a valid SKU Number"

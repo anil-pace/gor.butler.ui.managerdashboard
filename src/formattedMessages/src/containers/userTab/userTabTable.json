@@ -2,12 +2,22 @@
   {
     "id": "user.table.heading",
     "description": "Heading for users table",
-    "defaultMessage": "USERS"
+    "defaultMessage": "Users"
+  },
+  {
+    "id": "user.button.heading",
+    "description": "button heading for users table",
+    "defaultMessage": "Add new user"
   },
   {
     "id": "user.table.users",
     "description": "Users Column",
     "defaultMessage": "USERS"
+  },
+  {
+    "id": "user.table.totaluser",
+    "description": "total user",
+    "defaultMessage": "Total:{rowsCount}"
   },
   {
     "id": "user.table.status",
@@ -33,5 +43,10 @@
     "id": "user.table.logInTime",
     "description": "User log in time",
     "defaultMessage": "LOG IN TIME"
+  },
+  {
+    "id": "user.table.action",
+    "description": "action Column",
+    "defaultMessage": "ACTIONS"
   }
 ]

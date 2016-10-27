@@ -59,6 +59,21 @@ export const INVALID_PWD= (<FormattedMessage id="user.invalid.password" descript
 export const MATCH_PWD= (<FormattedMessage id="user.match.password" description='Text for passwords not matching' 
             defaultMessage="Both password entered do not match. Please try again"/>);
 
+
+
+export const MSU = (<FormattedMessage id="msu.name.prefix" description='prefix for msu name' 
+            defaultMessage="MSU"/>);
+
+export const CS = (<FormattedMessage id="chargingStation.name.prefix" description='prefix for charging station name' 
+            defaultMessage="CS"/>);
+
+export const PPS = (<FormattedMessage id="pps.name.prefix" description='prefix for pps name' 
+            defaultMessage="PPS"/>);
+
+
+
+
+
 export const INVALID_SKUID= (<FormattedMessage id="audit.invalid.sku" description='Text for invalid SKU ID' 
             defaultMessage="Please enter a valid SKU Number"/>);
 

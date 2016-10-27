@@ -5,7 +5,7 @@ import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
 import {tabSelected,subTabSelected} from '../actions/tabSelectAction';
 import {displayLoader} from '../actions/loaderAction';
-import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP} from '../constants/appConstants';
+import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP,AUDIT} from '../constants/appConstants';
 import { FormattedMessage } from 'react-intl';
 
 class Tabs extends React.Component{
@@ -51,6 +51,9 @@ class Tabs extends React.Component{
     let users = <FormattedMessage id="users.tab.heading" description="users tab" 
               defaultMessage ="USERS"/> 
 
+    let audit = <FormattedMessage id="audit.tab.heading" description="audit tab" 
+              defaultMessage ="AUDIT"/>           
+
     let overviewStatus = <FormattedMessage id="overviewStatus.tab.heading" description="overview Status " 
               defaultMessage ="Fulfiling orders"/>  
 
@@ -72,11 +75,13 @@ class Tabs extends React.Component{
     const item3 = [
       { tab: order, Status: ordersStatus, currentState:'gorError' }
     ]
-    
+    const item4 = [
+      { tab: audit, Status: ordersStatus, currentState:'gorError' }
+    ]
     const item5 = [
       { tab: users, Status: usersStatus, currentState:'gorOffline' }
     ]
-    var selectClass = {overview:"gorMainBlock", system:"gorMainBlock",orders:"gorMainBlock", inventory:"gorMainBlock", users:"gorMainBlock"};
+    var selectClass = {overview:"gorMainBlock", system:"gorMainBlock",orders:"gorMainBlock", audit:"gorMainBlock", users:"gorMainBlock"};
     
 
     selectClass[this.props.tab] = "gorMainBlockSelect";
@@ -95,6 +100,10 @@ class Tabs extends React.Component{
 		<Link to="/orders" onClick = {this.handleTabClick.bind(this,ORDERS)}>
 			<Tab items={item3} changeClass={selectClass["orders"]} subIcons={true}/>
 		</Link>
+
+    <Link to="/audit" onClick = {this.handleTabClick.bind(this,AUDIT)}>
+      <Tab items={item4} changeClass={selectClass["audit"]} subIcons={true}/>
+    </Link>
 		
 		<Link to="/users" onClick = {this.handleTabClick.bind(this,USERS)}>
 			<Tab items={item5} changeClass={selectClass["users"]} subIcons={false}/>

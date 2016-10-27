@@ -23,7 +23,7 @@ class PPS extends React.Component{
  		for (var i = data.length - 1; i >= 0; i--) {
     		if(data[i].operatingMode !== null) {
 
-    		operationMode[data[i].operatingMode] = operationMode[data[i].operatingMode] +1;
+    		operationMode[data[i].operatingMode.props.defaultMessage] = operationMode[data[i].operatingMode.props.defaultMessage] +1;
 
  	   		}
  		}
@@ -36,7 +36,7 @@ class PPS extends React.Component{
 			<div>
 				<div>
 					<div className="gorTesting">
-						<PPStable items={this.props.PPSDetail.PPStypeDetail} itemNumber={itemNumber} operatorNum={operatorNum} operationMode={operationMode} modeChange={this.props.changePPSmode}/>
+						<PPStable items={this.props.PPSDetail.PPStypeDetail} itemNumber={itemNumber} operatorNum={operatorNum} operationMode={operationMode} modeChange={this.props.changePPSmode} intlMessg={this.props.intlMessages}/>
 					</div>
 				</div>
 			</div>
@@ -45,8 +45,10 @@ class PPS extends React.Component{
 };
 
 function mapStateToProps(state, ownProps){
+	console.log(state)
   return {
     PPSDetail: state.PPSDetail || [],
+    intlMessages: state.intl.messages
   };
 }
 

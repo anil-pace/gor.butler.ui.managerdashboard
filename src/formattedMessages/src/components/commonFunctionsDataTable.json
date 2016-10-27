@@ -1,0 +1,17 @@
+[
+  {
+    "id": "commonDataTable.edit.button",
+    "description": "edit button",
+    "defaultMessage": "Edit"
+  },
+  {
+    "id": "commonDataTable.Delete.button",
+    "description": "Delete button",
+    "defaultMessage": "Delete"
+  },
+  {
+    "id": "commonDataTable.startAudit.button",
+    "description": "edit button",
+    "defaultMessage": "Start audit"
+  }
+]

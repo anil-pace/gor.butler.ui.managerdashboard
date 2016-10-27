@@ -1,0 +1,32 @@
+[
+  {
+    "id": "ppsDetail.pick.status",
+    "description": "pick status for pps",
+    "defaultMessage": "Pick"
+  },
+  {
+    "id": "ppsDetail.put.status",
+    "description": "put status for pps",
+    "defaultMessage": "Put"
+  },
+  {
+    "id": "ppsDetail.audit.status",
+    "description": "audit status for pps",
+    "defaultMessage": "Audit"
+  },
+  {
+    "id": "ppsDetail.on.status",
+    "description": "on status for pps",
+    "defaultMessage": "On"
+  },
+  {
+    "id": "ppsDetail.off.prefix",
+    "description": "off status for pps",
+    "defaultMessage": "Off"
+  },
+  {
+    "id": "ppsDetail.performance.prefix",
+    "description": "performance for pps id in ppsDetail",
+    "defaultMessage": "{performance} - orders/hr"
+  }
+]

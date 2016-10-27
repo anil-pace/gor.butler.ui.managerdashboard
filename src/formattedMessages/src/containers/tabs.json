@@ -20,6 +20,11 @@
     "defaultMessage": "USERS"
   },
   {
+    "id": "audit.tab.heading",
+    "description": "audit tab",
+    "defaultMessage": "AUDIT"
+  },
+  {
     "id": "overviewStatus.tab.heading",
     "description": "overview Status",
     "defaultMessage": "Fulfiling orders"
