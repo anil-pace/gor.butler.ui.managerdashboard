@@ -20,6 +20,8 @@ const mockMiddleware = (function(){
         ResponseParse(store,mockData.resTypeOrders);
         ResponseParse(store,mockData.resTypePPSperformance);
         ResponseParse(store,mockData.resTypeUsersDetails);
+        ResponseParse(store,mockData.resTypeSnapShotHistory);
+        ResponseParse(store,mockData.resTypeSnapShotToday);
         AjaxParse(store,mockData.resTypeNotify,ADD_USER);
         break;
       //This action is irrelevant to us, pass it on to the next middleware
