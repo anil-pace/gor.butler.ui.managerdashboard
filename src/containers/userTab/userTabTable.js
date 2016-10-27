@@ -5,7 +5,7 @@ import {Table, Column, Cell} from 'fixed-data-table';
 import Dimensions from 'react-dimensions';
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData,ActionCell} from '../../components/commonFunctionsDataTable';
 import {modal} from 'react-redux-modal';
-import AddUser from './addNewUser';
+import AddNewUser from './addNewUser';
 import EditUser from './editUser';
 import DeleteUser from './deleteUser';
 
@@ -96,7 +96,7 @@ class UserDataTable extends React.Component {
   } 
 
   addModal() {
-    modal.add(AddUser, {
+    modal.add(AddNewUser, {
       title: '',
       size: 'large', // large, medium or small,
       closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
@@ -105,13 +105,14 @@ class UserDataTable extends React.Component {
     });
   }
   handleEdit(columnKey,rowIndex) {
-    let uid=this.state.sortedDataList.newData[rowIndex].uid,uname=this.state.sortedDataList.newData[rowIndex].userName,fname=this.state.sortedDataList.newData[rowIndex].first,lname=this.state.sortedDataList.newData[rowIndex].last;
+    let uid=this.state.sortedDataList.newData[rowIndex].uid,uname=this.state.sortedDataList.newData[rowIndex].userName,fname=this.state.sortedDataList.newData[rowIndex].first,lname=this.state.sortedDataList.newData[rowIndex].last,roleId=this.state.sortedDataList.newData[rowIndex].roleId;
     modal.add(EditUser, {
       title: '',
       size: 'large', // large, medium or small,
       closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: true,
       id:uid,
+      roleId:roleId,
       userName:uname,
       first:fname,
       last:lname

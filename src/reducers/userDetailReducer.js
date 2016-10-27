@@ -17,7 +17,7 @@ function processUserDetails(data) {
   var work_mode = {"pick":pick,"put": put,"audit": audit};
   var work_place = {"front": front, "back":back};
 
-  
+
   var userDetails = [], userData = {};
   for (var i = data.length - 1; i >= 0; i--) {
 
@@ -49,6 +49,7 @@ function processUserDetails(data) {
     userData.userName= data[i].user_name;
     userData.first=data[i].first_name;
     userData.last=data[i].last_name;  
+    userData.roleId=data[i].role;
     userData.role = role[data[i].role];
     userDetails.push(userData);
     userData = {};

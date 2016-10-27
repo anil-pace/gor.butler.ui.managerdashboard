@@ -5,7 +5,7 @@ import {validateID, validateName, validatePassword, resetForm} from '../../actio
 import {userRequest} from '../../actions/userActions';
 import {ADD_USER,CHECK_ID,ERROR,SUCCESS,INFO,GET_ROLES} from '../../constants/appConstants';
 import {ROLE_URL,CHECK_USER,HEADER_URL} from '../../constants/configConstants';
-import {INVALID_ID,TYPE_SUCCESS} from '../../constants/messageConstants';
+import {INVALID_ID,INVALID_FORMAT,TYPE_SUCCESS} from '../../constants/messageConstants';
 import { connect } from 'react-redux';
 import FieldError from '../../components/fielderror/fielderror';
 import RoleGroup from './roleGroup';
@@ -32,15 +32,22 @@ class AddUser extends React.Component{
         this.props.userRequest(userData);
   }
   _checkId(){
-    let userid=this.userId.value, idInfo;
-    if(userid.length<1)
-      {
+    let userid=this.userId.value, idInfo,format=  /[!@#$%^&*()_+\-=\[\]{};':"\\|,<>\/?]/;
+    if(userid.length<1||userid.length>30)
+    {
             idInfo={
               type:ERROR,
               msg:INVALID_ID           
             }
-      }
-      else
+    }
+    else if(format.test(userid))
+    {
+            idInfo={
+              type:ERROR,
+              msg:INVALID_FORMAT           
+            }
+    }
+    else
       {
             idInfo={
               type:SUCCESS,
@@ -188,7 +195,7 @@ class AddUser extends React.Component{
 
             </div>
             <p className='gor-submit'>
-             <button className="gor-add-btn"><FormattedMessage id="users.add.password.button" description='Text for add new user button' 
+             <button type="submit" className="gor-add-btn"><FormattedMessage id="users.add.password.button" description='Text for add new user button' 
             defaultMessage='Add new user'/></button>
             </p>
             </div>

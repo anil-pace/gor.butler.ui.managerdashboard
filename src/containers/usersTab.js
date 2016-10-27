@@ -30,6 +30,7 @@ function mapStateToProps(state, ownProps){
     userdetails: state.userDetails.userDetails || [],
     intlMessages: state.intl.messages,
     manager:state.headerData.headerInfo||[]
+
   };
 }
 
