@@ -154,6 +154,7 @@ export function AjaxParse(store,res,cause)
 		    			break;
 		    		case CODE_G015:
 						store.dispatch(notifyFail(G015));
+						break;
 					default:
 		    			store.dispatch(notifyFail(ERR_AUDIT));		    				    									    				    				    		
 		    	}
