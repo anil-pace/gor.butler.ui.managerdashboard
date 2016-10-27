@@ -1,0 +1,22 @@
+[
+  {
+    "id": "audit.start.auditdetails.subheading2",
+    "description": "Text for audit details subheading when no pps",
+    "defaultMessage": "There are currently no PPS in audit mode."
+  },
+  {
+    "id": "audit.start.auditdetails.noPPS1",
+    "description": "Text please",
+    "defaultMessage": "Please"
+  },
+  {
+    "id": "audit.start.auditdetails.noPPS2",
+    "description": "Text hyperlink",
+    "defaultMessage": "go to the PPS mode"
+  },
+  {
+    "id": "audit.start.auditdetails.noPPS3",
+    "description": "Text change operation",
+    "defaultMessage": "change PPS operations."
+  }
+]

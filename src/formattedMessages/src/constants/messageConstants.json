@@ -50,6 +50,11 @@
     "defaultMessage": "Please enter a valid User ID"
   },
   {
+    "id": "user.invalid.format",
+    "description": "Text for invalid user ID format",
+    "defaultMessage": "Please use only letters (a-z), numbers, and periods"
+  },
+  {
     "id": "login.empty.password",
     "description": "Text for empty password",
     "defaultMessage": "Please enter a password"
@@ -57,22 +62,22 @@
   {
     "id": "user.empty.name",
     "description": "Text for empty user name",
-    "defaultMessage": "Minimum 6 characters required"
+    "defaultMessage": "Please enter a name"
   },
   {
     "id": "user.invalid.name",
     "description": "Text for invalid user name",
-    "defaultMessage": "Special characters \"~\",\"@\" and \"%\" are not allowed"
+    "defaultMessage": "Special characters like \"~\",\"@\" and \"%\" are not allowed"
   },
   {
     "id": "user.invalid.password",
     "description": "Text for invalid password",
-    "defaultMessage": "Minimum 6 characters required"
+    "defaultMessage": "Please enter a password of at least 8 alphanumeric characters"
   },
   {
     "id": "user.match.password",
     "description": "Text for passwords not matching",
-    "defaultMessage": "Passwords do not match"
+    "defaultMessage": "Both password entered do not match. Please try again"
   },
   {
     "id": "audit.invalid.sku",
@@ -95,9 +100,29 @@
     "defaultMessage": "Input not a sku or location"
   },
   {
-    "id": "notify.error.audit.success",
+    "id": "notify.error.audit.AE001",
+    "description": "Text for invalid audit ID",
+    "defaultMessage": "Audit Id does not exists"
+  },
+  {
+    "id": "notify.error.audit.AE002",
+    "description": "Text for invalid PPS",
+    "defaultMessage": "Valid PPS not found for Audit"
+  },
+  {
+    "id": "notify.error.audit.AE006",
+    "description": "Text for already processed audit",
+    "defaultMessage": "Audit ID already processed"
+  },
+  {
+    "id": "notify.create.audit.success",
     "description": "Text for successfull audit creation",
     "defaultMessage": "Audit created successfully"
+  },
+  {
+    "id": "notify.start.audit.success",
+    "description": "Text for successfull audit creation",
+    "defaultMessage": "Audit started successfully"
   },
   {
     "id": "notify.error.user.fail",

@@ -6,6 +6,7 @@ function processUserDetails(data) {
   var work_place = {"front": "Front", "back":"Back"};
 
   //var status = ["Offline", "Online"];
+  console.log(data[0]);
   var userDetails = [], userData = {};
   for (var i = data.length - 1; i >= 0; i--) {
 
@@ -37,6 +38,7 @@ function processUserDetails(data) {
     userData.userName= data[i].user_name;
     userData.first=data[i].first_name;
     userData.last=data[i].last_name;  
+    userData.roleId=data[i].role;
     userData.role = role[data[i].role];
     userDetails.push(userData);
     userData = {};

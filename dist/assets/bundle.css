@@ -31,6 +31,13 @@ ol, ul {
   list-style: none;
 }
 
+li {
+  font-family: 'Source Sans Pro Semibold', sans-serif;
+  font-size: 14px;
+  color: #000000;
+  margin-top: 20px;
+}
+
 article, aside, details, figcaption, figure,
 footer, header, nav, section {
   display: block;
@@ -41,7 +48,7 @@ q:before, q:after {
   content: none;
 }
 
-input[type="radio"] {
+input[type="radio"], input[type="checkbox"] {
   margin-right: 15px;
 }
 
@@ -2951,6 +2958,7 @@ progress::-moz-progress-bar {
   color: #EC1C24;
   font-size: 18px;
   margin-top: 10px;
+  width: 75%;
 }
 
 .gor-input-error {
@@ -3076,7 +3084,7 @@ progress::-moz-progress-bar {
 
 .gor-modal-content .gor-usr-details .gor-usr-field {
   display: inline-block;
-  width: 38%;
+  width: 40%;
 }
 
 .gor-modal-content .gor-usr-details .gor-usr-field .gor-usr-fdsm {
@@ -3111,6 +3119,10 @@ progress::-moz-progress-bar {
   color: #ffffff;
   border-radius: 3px;
   margin-left: 0px;
+}
+
+.gor-modal-content .gor-submit .gor-add-btn:disabled {
+  background: #dddddd;
 }
 
 .gor-footer {
