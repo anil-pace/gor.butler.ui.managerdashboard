@@ -268,7 +268,7 @@ class PPStable extends React.Component {
               <input type="checkbox" checked={this.state.headerChecked} onChange={this.headerCheckChange.bind(this)}/>
             </div>
             <div>
-              <SortHeaderCell onSortChange={this._onSortChange}
+              <SortHeaderCell onSortChange={this._onSortChange} 
                 sortDir={colSortDirs.id}>  
                 <div className="gorToolHeaderEl">
                 <div className="gorToolHeaderEl"> 

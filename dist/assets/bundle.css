@@ -2857,6 +2857,18 @@ progress::-moz-progress-bar {
   vertical-align: sub;
 }
 
+.gor-auditCreate-btn {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  width: 125px;
+  height: 35px;
+  font-size: 14px;
+  background: #4d5055;
+  color: #ffffff;
+  border-radius: 3px;
+  margin-left: 30px;
+  vertical-align: sub;
+}
+
 .gor-dropDown-firstInnerElement {
   display: inline-block;
   padding-right: 15px;
@@ -2892,7 +2904,7 @@ progress::-moz-progress-bar {
 
 .gor-audit-actions-button {
   display: inline-block;
-  padding-right: 70px;
+  padding-right: 20px;
 }
 
 .gor-audit-actions-drop {

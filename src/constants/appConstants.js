@@ -102,11 +102,10 @@ export const GET_ROLES='GET_ROLES';
 export const PPS_MODE_CHANGE = 'PPS_MODE_CHANGE';
 export const GET_HEADER_INFO = 'GET_HEADER_INFO';
 export const EDIT_USER='EDIT_USER';
-export const CREATE_AUDIT='CREATE_AUDIT';
-export const GET_PPSLIST='GET_PPSLIST';
-export const START_AUDIT='START_AUDIT';
+
 export const AUDIT_RETRIEVE = "AUDIT_RETRIEVE";
 export const RECIEVE_AUDIT_DATA = "RECIEVE_AUDIT_DATA";
+export const CREATE_AUDIT='CREATE_AUDIT';
 
 
 
@@ -149,7 +148,7 @@ export const TAB_ROUTE_MAP = {
 		[ORDERS] : "orders",
 		[INVENTORY] : "inventory",
 		[USERS] : "users",
-		[AUDIT]:"audit"
+		[AUDIT] : "audit"
 	}
 export const SYS_SUB_TAB_ROUTE_MAP={
 	[NOTIFICATION] : "notification",
