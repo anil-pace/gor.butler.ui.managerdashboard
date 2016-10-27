@@ -121,6 +121,7 @@ export const NOTIFY_FAIL='NOTIFY_FAIL';
 export const NOTIFY_HIDE='NOTIFY_HIDE';
 export const MD_ID='MD_ID';
 export const SET_ROLE='SET_ROLE';
+export const SKU_INFO='SKU_INFO';
 
 
 /*Constants for pagination*/
@@ -178,3 +179,8 @@ export const USER_ROLE_MAP ={
 /*Constant for time on header*/
 export const HEADER_START_TIME = '09:00 AM'
 
+
+/*Constants for Audit tab */
+export const SET_AUDIT='AUDIT_TYPE';
+export const SKU='sku';
+export const LOCATION='location';

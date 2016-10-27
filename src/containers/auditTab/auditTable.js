@@ -41,8 +41,8 @@ class AuditTable extends React.Component {
         status: nProps.containerWidth*0.1,
         startTime: nProps.containerWidth*0.1,
         progress: nProps.containerWidth*0.1,
-         completedTime: nProps.containerWidth*0.1,
-        actions: nProps.containerWidth*0.3
+         completedTime: nProps.containerWidth*0.15,
+        actions: nProps.containerWidth*0.25
       }};
       return tableData;
   }

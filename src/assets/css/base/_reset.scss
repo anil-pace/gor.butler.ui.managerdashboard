@@ -41,7 +41,9 @@ q:before, q:after {
     content:'';
     content:none;
 }
-
+input[type="radio"]{
+    margin-right:15px;
+}
 a {    
     text-decoration:none;
 }

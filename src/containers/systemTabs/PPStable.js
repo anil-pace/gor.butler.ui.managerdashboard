@@ -148,6 +148,9 @@ class PPStable extends React.Component {
   }
   
   _onSortChange(columnKey, sortDir) {
+    if(columnKey === undefined) {
+      columnKey = "id"
+    }
     var sortIndexes = this._defaultSortIndexes.slice();
     this.setState({
       sortedDataList: new DataListWrapper(sortData(columnKey, sortDir,sortIndexes,this._dataList), this._dataList),
@@ -260,22 +263,28 @@ class PPStable extends React.Component {
         <Column
           columnKey="id"
           header={
-            <SortHeaderCell onSortChange={this._onSortChange}
-              sortDir={colSortDirs.id}> <input type="checkbox" checked={this.state.headerChecked} onChange={this.headerCheckChange.bind(this)} />
-              <div className="gorToolHeaderEl">
-              <div className="gorToolHeaderEl"> 
-                <FormattedMessage id="PPStable.Totalpps" description='total pps' 
-                defaultMessage='{ppsTotal} PPS' 
-                values={{ppsTotal:ppsTotal?ppsTotal:'0'}}/> 
-              </div>
-              <div className="gorToolHeaderSubText"> 
-                <FormattedMessage id="PPStable.Subpps" description='sub pps' 
-                defaultMessage='Total: {ppsTotal}' 
-                values={{ppsTotal:ppsTotal?ppsTotal:'0'}}/>
-
+            <div>
+            <div className="gor-header-check">
+              <input type="checkbox" checked={this.state.headerChecked} onChange={this.headerCheckChange.bind(this)}/>
+            </div>
+            <div>
+              <SortHeaderCell onSortChange={this._onSortChange}
+                sortDir={colSortDirs.id}>  
+                <div className="gorToolHeaderEl">
+                <div className="gorToolHeaderEl"> 
+                  <FormattedMessage id="PPStable.Totalpps" description='total pps' 
+                  defaultMessage='{ppsTotal} PPS' 
+                  values={{ppsTotal:ppsTotal?ppsTotal:'0'}}/> 
+                </div>
+                <div className="gorToolHeaderSubText"> 
+                  <FormattedMessage id="PPStable.Subpps" description='sub pps' 
+                  defaultMessage='Total: {ppsTotal}' 
+                  values={{ppsTotal:ppsTotal?ppsTotal:'0'}}/>
               </div>
               </div>
             </SortHeaderCell>
+            </div>
+            </div>
           }
           cell={  <ComponentCell data={sortedDataList} checkState={checkState} checked={this.state.isChecked} />}
           fixed={true}

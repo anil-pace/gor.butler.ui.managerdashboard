@@ -57,6 +57,7 @@ export const MATCH_PWD= (<FormattedMessage id="user.match.password" description=
             defaultMessage="Passwords do not match"/>);
 
 
+
 export const MSU = (<FormattedMessage id="msu.name.prefix" description='prefix for msu name' 
             defaultMessage="MSU"/>);
 
@@ -68,4 +69,11 @@ export const PPS = (<FormattedMessage id="pps.name.prefix" description='prefix f
 
 
 
+
+
+export const INVALID_SKUID= (<FormattedMessage id="audit.invalid.sku" description='Text for invalid SKU ID' 
+            defaultMessage="Please enter a valid SKU Number"/>);
+
+export const INVALID_LOCID= (<FormattedMessage id="audit.invalid.location" description='Text for invalid location ID' 
+            defaultMessage="Please enter a valid location Number"/>);
 

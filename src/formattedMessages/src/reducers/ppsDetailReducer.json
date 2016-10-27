@@ -15,11 +15,6 @@
     "defaultMessage": "Audit"
   },
   {
-    "id": "ppsDetail.name.prefix",
-    "description": "prefix for pps id in ppsDetail",
-    "defaultMessage": "PPS - {ppsId}"
-  },
-  {
     "id": "ppsDetail.on.status",
     "description": "on status for pps",
     "defaultMessage": "On"

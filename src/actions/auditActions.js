@@ -1,3 +1,4 @@
+
 import { AJAX_CALL,AUDIT_RETRIEVE, RECIEVE_AUDIT_DATA} from '../constants/appConstants'
 
 
@@ -14,3 +15,18 @@ export function recieveAuditData(data){
 		data
 	}
 }
+
+import { SET_AUDIT} from '../constants/appConstants'
+
+/**
+ * Actions for users page
+ */
+
+export function setAuditType(data){
+  return {
+    type: SET_AUDIT,
+    data
+    }
+}
+
+
