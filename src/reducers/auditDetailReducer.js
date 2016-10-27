@@ -21,6 +21,13 @@ function processAuditData(data) {
     if(data[i].audit_status) {
       auditData.status = data[i].audit_status; //needs to be done
       auditData.statusClass = data[i].audit_status;
+      if(data[i].audit_status === "audit_created") {
+        auditData.startAudit = true;
+      }
+
+      else {
+        auditData.startAudit = false;
+      }
     }
 
     if(data[i].start_request_time) {

@@ -107,7 +107,7 @@ class AuditTable extends React.Component {
  }
 
  manageAuditTask(rowIndex,option) {
- console.log(option,rowIndex)
+ 
   
   if(option.value === "duplicateTask"){
     var auditType = this.props.tableData.sortedDataList.newData[rowIndex].auditType;
@@ -304,7 +304,7 @@ class AuditTable extends React.Component {
               <div className="gorToolHeaderSubText">  </div>
             </SortHeaderCell>
           }
-          cell={<ActionCellAudit data={sortedDataList} handleAudit={this.startAudit.bind(this)} tasks={tasks} manageAuditTask={this.manageAuditTask.bind(this)}/>}
+          cell={<ActionCellAudit data={sortedDataList} handleAudit={this.startAudit.bind(this)} tasks={tasks} manageAuditTask={this.manageAuditTask.bind(this)} showBox="startAudit"/>}
           width={columnWidths.actions}
         />
       </Table>
