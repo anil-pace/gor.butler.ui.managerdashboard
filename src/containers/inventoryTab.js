@@ -3,7 +3,8 @@
  * This will be switched based on tab click
  */
 import React  from 'react';
-import Legend from '../components/legend/legend';
+import shallowCompare from 'react-addons-shallow-compare' ;
+import Inventory from '../components/inventory/inventory';
 import { connect } from 'react-redux'; 
 
 
@@ -13,29 +14,37 @@ class InventoryTab extends React.Component{
     	super(props);
 
     }	
-   
+
+   shouldComponentUpdate(nextProps, nextState) {
+    return shallowCompare(this, nextProps, nextState);
+  }
 	render(){
 		/**
 		 * Need to remove these hardcoded variables
 		 * 
 		 */
-		var legendData = [{"name":"Pick","color":"#C69332"},{"name":"Pick","color":"#B2B535"}]
+		
+		var label = "Stock level history"
 		return (
 			<div className="gorInventory wrapper">
-				<div className="head">
-				<div className="labelCnt"><span>Inventory</span></div>
-				<div className="dwnLoadCnt"><a href="javascript:void(0)" className="gorBtn">Download</a></div>
-				</div>
-				<div>
-					<div>
-						<Legend legendData={legendData}/>
-						<div></div>
-					</div>
-					<div></div>
-				</div>
+				<Inventory data={this.props.inventoryData.legendData || {}} label={label} stackData={this.props.stackData}/>
 			</div>
 		);
 	}
 };
 
-export default InventoryTab ;
+InventoryTab.propTypes={
+	inventoryData:React.PropTypes.object,
+	stackData:React.PropTypes.array
+}
+
+function mapStateToProps(state,ownProps){
+    return {
+      "inventoryData": state.inventoryInfo.inventoryData || {},
+      "stackData":state.inventoryInfo.inventoryDataToday || []
+    }
+};
+
+export default connect(mapStateToProps)(InventoryTab);
+
+

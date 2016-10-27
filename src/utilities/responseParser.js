@@ -1,9 +1,9 @@
 
-import {receivePpsData,receiveButlersData,receiveAuditData,receiveThroughputData,receivePutData,receiveChargersData,receiveInventoryData,receiveOrdersData,initData,recieveHistogramData,recieveChargersDetail,recieveButlersDetail,recievePPSDetail,recievePPSperformance,recieveUserDetails} from '../actions/responseAction';
+import {receivePpsData,receiveButlersData,receiveAuditData,receiveThroughputData,receivePutData,receiveChargersData,receiveInventoryTodayData,receiveInventoryHistoryData,receiveOrdersData,initData,recieveHistogramData,recieveChargersDetail,recieveButlersDetail,recievePPSDetail,recievePPSperformance,recieveUserDetails} from '../actions/responseAction';
 import {displayLoader} from '../actions/loaderAction';
 import {wsOnMessageAction} from '../actions/socketActions'
-import {PARSE_PPS,PARSE_BUTLERS,PARSE_CHARGERS,PARSE_INVENTORY,PARSE_ORDERS,PARSE_PUT,PARSE_PICK,PARSE_PPA_THROUGHPUT,PARSE_AUDIT,HISTOGRAM_DATA,SYSTEM_CHARGERS_DETAILS,PPS_DETAIL,SYSTEM_PPS_DETAILS,SYSTEM_BUTLERS_DETAILS,HISTOGRAM_DETAILS,USER_DATA} from '../constants/appConstants'
-
+import {PARSE_PPS,PARSE_BUTLERS,PARSE_CHARGERS,PARSE_INVENTORY_HISTORY,PARSE_INVENTORY_TODAY,PARSE_INVENTORY,PARSE_ORDERS,PARSE_PUT,PARSE_PICK,PARSE_PPA_THROUGHPUT,PARSE_AUDIT,HISTOGRAM_DATA,SYSTEM_CHARGERS_DETAILS,PPS_DETAIL,SYSTEM_PPS_DETAILS,SYSTEM_BUTLERS_DETAILS,HISTOGRAM_DETAILS,USER_DATA} from '../constants/appConstants'
+import {resTypeSnapShotToday,resTypeSnapShotHistory} from '../../mock/mockDBData';
 
 
 export function ResponseParse(store,res)
@@ -31,17 +31,21 @@ export function ResponseParse(store,res)
 			case PARSE_CHARGERS:
 				store.dispatch(receiveChargersData(res));
 				break;
-			case PARSE_INVENTORY:		
-				store.dispatch(receiveInventoryData(res));
+			case PARSE_INVENTORY_HISTORY:
+				store.dispatch(receiveInventoryHistoryData(res));
+			case PARSE_INVENTORY_TODAY:		
+				store.dispatch(receiveInventoryTodayData(res));
 				break;
 			case PARSE_ORDERS:		
 				store.dispatch(receiveOrdersData(res));
+				store.dispatch(receiveInventoryTodayData(resTypeSnapShotToday));
 				break;
 		    case PARSE_PPA_THROUGHPUT:
 				store.dispatch(receiveThroughputData(res));
 				break;	
 			case HISTOGRAM_DETAILS:
 				store.dispatch(recieveHistogramData(res));
+				
 				break;
 			case SYSTEM_CHARGERS_DETAILS:
 				store.dispatch(recieveChargersDetail(res));
@@ -59,7 +63,8 @@ export function ResponseParse(store,res)
 				store.dispatch(recieveUserDetails(res));	
 				store.dispatch(displayLoader(false));
 				//store.dispatch(recieveUserDetails(res));	  
-				break;	 			    
+				break;
+			 			    
 			default:
 				//store.dispatch(initData(res));          //Default action
 			break;			

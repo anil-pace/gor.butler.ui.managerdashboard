@@ -52,7 +52,7 @@ class Header extends React.Component{
   	var headerInfo={};
   	if(this.props.headerInfo && this.props.headerInfo.users.length){
   		 headerInfo= Object.assign({},this.props.headerInfo)
-  		headerInfo.fullName = headerInfo.users[0].first_name +' '+ headerInfo.users[0].last_name;
+  		headerInfo.fullName = (headerInfo.users[0].first_name || '--') +' '+ (headerInfo.users[0].last_name || '--');
   		headerInfo.designation = USER_ROLE_MAP[headerInfo.users[0].roles[0]] || '';
   	}
   	headerInfo.start= HEADER_START_TIME
@@ -104,7 +104,7 @@ class Header extends React.Component{
 							</div>
 							<div className="subTextClient">
 								<FormattedMessage id="header.user_post" description='User post' 
-        					defaultMessage='{user_post}'
+        					defaultMessage='--'
         					values={{
 						        user_post: headerInfo ? headerInfo.designation : '',
 						    }}/>

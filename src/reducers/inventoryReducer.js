@@ -1,38 +1,40 @@
-import {INVENTORY_DATA} from '../constants/appConstants';
+import {INVENTORY_DATA_HISTORY,INVENTORY_DATA_TODAY,PARSE_INVENTORY_TODAY,CATEGORY_COLOR_MAP,CATEGORY_DEFAULT,CATEGORY_UNUSED,PARSE_INVENTORY_HISTORY } from '../constants/appConstants';
+
+
 /**
  * @param  {State Object}
  * @param  {Action object}
  * @return {[Object] updated state}
  */
+function parseInvData(state,action){
+  //Parsing logic goes here
+  var inventoryObj,inventory,isHistory,invToday,completeData,categoryData,invHistory,calculatedInvData={};
+
+  isHistory = (action.type === INVENTORY_DATA_HISTORY ? "inventoryDataHistory" : "inventoryDataToday")
+  
+  /*Cannot use object.assign as it does not support deep cloning*/
+  inventoryObj = JSON.parse(JSON.stringify(action.data));
+  inventory = inventoryObj.complete_data
+
+  for(let i = 0 ; i < inventory.length ; i++){
+    calculatedInvData.unusedSpace = 100 - inventory[i]["warehouse_utilization"];
+    calculatedInvData.colorCode = CATEGORY_COLOR_MAP[CATEGORY_UNUSED];
+    categoryData = inventory[i]["category_data"];
+    for(let j = 0 ; j < categoryData.length ; j++){
+      categoryData[j].colorCode = CATEGORY_COLOR_MAP[categoryData[j]["category_type"]] || CATEGORY_COLOR_MAP[CATEGORY_DEFAULT]
+    }
+    categoryData.push(calculatedInvData)
+  }
+  return Object.assign({}, state, {
+            [isHistory] : inventory || null
+  })
+
+}
 export  function inventoryInfo(state={},action){
   switch (action.type) {
-    case INVENTORY_DATA:
-          var avail_volume=0,count_put=0,util_perc=0,util_vol=0,count_pick=0,avail_sku=0,stock_current=0,open_stock=0,res;
-          res=action.data;
-          if(res.aggregate_data){
-              avail_volume=res.aggregate_data.total_available_volume;
-              count_put=res.aggregate_data.count_put;
-              util_perc=res.aggregate_data.total_utilized_percentage;
-              util_vol=res.aggregate_data.total_utilized_volume;
-              count_pick=res.aggregate_data.count_pick;
-              avail_sku=res.aggregate_data.available_skus;
-              stock_current=res.aggregate_data.stock_current;
-              open_stock=res.aggregate_data.open_stock;                          
-          }
-            var ivData={
-              "avail_volume":avail_volume,
-              "count_put":count_put,
-              "util_perc":util_perc,
-              "util_vol":util_vol,
-              "count_pick":count_pick,
-              "avail_sku":avail_sku,
-              "stock_current":stock_current,
-              "open_stock":open_stock                          
-            }
-
-            return Object.assign({}, state, {
-            "inventoryData" : ivData
-            })
+    case INVENTORY_DATA_HISTORY:
+    case INVENTORY_DATA_TODAY:
+            return parseInvData(state,action);
 
     default:
       return state

@@ -14,10 +14,11 @@ class Legend extends React.Component{
     }	
     
     _processData(){
-    	var data = this.props.legendData
+    	var data = this.props.legendData.data || [];
+    	var config = this.props.legendData.config || {};
     	var elements = data.map(function(item, i){
 	      return (
-	        <LegendElement color={item.color} xpos="0" ypos={100+i*20} data={item.name} key={i} ikey={i}/>
+	        <LegendElement color={item.color} xpos={config.xpos+i*config.xIncrement} ypos={config.ypos} name={item.name} key={i}/>
 	      )
 	    })
     return elements;
@@ -26,13 +27,13 @@ class Legend extends React.Component{
 	render(){
 		var elements = this._processData();
 		return (
-			<div className="histogram">
-				 <svg className="legend" width={this.props.width} >
+				 <svg className="legend" width="50%" height="60" style={{"float":"right"}}>
 				 	{elements}
 				 </svg>
-			</div>
 		);
 	}
 };
-
+Legend.propTypes={
+	legendData:React.PropTypes.object
+}
 export default Legend ;

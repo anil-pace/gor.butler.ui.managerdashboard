@@ -136,7 +136,7 @@ class Routes extends React.Component{
 					 getComponent={(location, callback) => {
 				      require.ensure([], function (require) {
 				        callback(null, require('../containers/inventoryTab').default);
-				      },"users");
+				      },"inventory");
 				    }}
 					 />
 
