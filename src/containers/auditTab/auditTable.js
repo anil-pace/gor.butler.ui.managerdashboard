@@ -108,7 +108,13 @@ class AuditTable extends React.Component {
             <div className="gorToolBarElements">
                <FormattedMessage id="audit.table.heading" description="Heading for audit table" 
               defaultMessage ="Audit Tasks"/>
+            </div>
+            <div className="gor-button-wrap">
+            <button className="gor-auditCreate-btn" >
               
+              <FormattedMessage id="audit.table.buttonLable" description="button label for audit create" 
+              defaultMessage ="Create New Task"/>
+            </button>
             </div>
           </div>
         <div className="filterWrapper">  

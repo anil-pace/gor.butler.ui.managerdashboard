@@ -1,5 +1,6 @@
 
-import { AJAX_CALL,AUDIT_RETRIEVE, RECIEVE_AUDIT_DATA} from '../constants/appConstants'
+
+import { AJAX_CALL,AUDIT_RETRIEVE, RECIEVE_AUDIT_DATA,SET_AUDIT,RESET_AUDIT} from '../constants/appConstants'
 
 
 export function getAuditData(params){
@@ -16,7 +17,6 @@ export function recieveAuditData(data){
 	}
 }
 
-import { SET_AUDIT} from '../constants/appConstants'
 
 /**
  * Actions for users page
@@ -25,6 +25,12 @@ import { SET_AUDIT} from '../constants/appConstants'
 export function setAuditType(data){
   return {
     type: SET_AUDIT,
+    data
+    }
+}
+export function resetAuditType(data){
+  return {
+    type: RESET_AUDIT,
     data
     }
 }

@@ -36,11 +36,13 @@
     margin: auto;
     padding: 20px;
     width: 100%;
+    min-height:100vh;
     .gor-sub-head{
         font-family:'Source Sans Pro Regular', sans-serif;
         font-size:12px;
         color:#000000; 
         margin-top:calculateRem(5px);  
+        width:75%;
     }
     .gor-modal-head{
         font-family:'Source Sans Pro Regular', sans-serif;
@@ -94,10 +96,6 @@
             color:#000000;   
             margin-top:25px; 
         }
-        :a{
-            margin-top:10px;
-            text-decoration:none;
-        }
         .gor-usr-fdlg{
                 margin:auto;
                 text-align:left;
@@ -113,6 +111,11 @@
                     border:1px solid #cccccc;
                     background:#f7f7f7;
                 }
+        }
+        a{
+            line-height:25px;
+            color:#27aae1;
+            font-size:14px;
         }
         .gor-usr-field{
             display:inline-block;
@@ -138,7 +141,6 @@
         width:33%;
         margin:auto;
         margin-top:25px;
-        margin-bottom:50px;
         .gor-add-btn{
             font-family:'Source Sans Pro Bold', sans-serif; 
             width:113px;
