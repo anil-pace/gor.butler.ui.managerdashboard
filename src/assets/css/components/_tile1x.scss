@@ -14,11 +14,11 @@ body
   box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.2);
   border-radius: calculateRem(3px);
   display: inline-block;
-  min-height:calculateRem(150px);
-  margin: 1% 1% 0% 2%;
+  min-height:calculateRem(170px);
+  margin: 1% 2% 0% 1%;
   font-size: 0;
   &.gor-double{
-      width:96%;
+      width:97%;
   }
   &.gor-single{
       width:47%;
@@ -31,8 +31,13 @@ body
     margin:0;
   }
   .gor-up-tile{
-    padding: 27px 10px 10px 20px;
+    padding: 30px 10px 10px 20px;
     min-height:calculateRem(80px);
+    .gor-tile-right{
+      width: 50px;
+      display:inline-block;
+      height:55px;
+    }
   }
   .gor-tile-left{
     width: 80%;
@@ -72,18 +77,12 @@ body
 .gor-none{
   color:#aaaaaa;
 }
-.gor-tile-right{
-  width: 50px;
-  display:inline-block;
-  vertical-align: top;
-  height:55px;
-}
 .gor-low-tile{
   font-family: 'Source Sans Pro semibold', sans-serif;
   font-size: calculateRem(16px);
   background:#F7F7F7;
   color: #666666;
-  padding: 15px 0px 15px 20px;
+  padding: 17px 0px 17px 20px;
   min-height:calculateRem(16px);
   overflow:hidden;
   vertical-align:middle;

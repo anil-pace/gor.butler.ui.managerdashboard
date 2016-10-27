@@ -2,6 +2,11 @@
   {
     "id": "users.delete.heading",
     "description": "Text for user delete heading",
+    "defaultMessage": "Are you sure you would like to delete \"{user_name}\" ?"
+  },
+  {
+    "id": "users.delete.subheading",
+    "description": "Text for user delete subheading",
     "defaultMessage": "Information related to the user will be lost"
   }
 ]

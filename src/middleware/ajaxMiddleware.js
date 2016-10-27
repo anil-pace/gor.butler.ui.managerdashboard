@@ -1,6 +1,8 @@
 import {AJAX_CALL,MOCK_LOGIN,AUTH_LOGIN} from '../constants/appConstants';
 import {AjaxParse} from '../utilities/AjaxParser';
 import {ShowError} from '../utilities/showError';
+import {logoutRequest} from '../actions/loginAction'
+
 
 const ajaxMiddleware = (function(){ 
 
@@ -29,7 +31,7 @@ const ajaxMiddleware = (function(){
     }
     httpRequest.onreadystatechange = function(xhr){
       if (httpRequest.readyState === XMLHttpRequest.DONE) {
-        if (httpRequest.status === 200) {
+        if (httpRequest.status === 200 || httpRequest.status === 201) {
               var response=JSON.parse(httpRequest.response);
               AjaxParse(store,response,params.cause);
         }
@@ -37,6 +39,11 @@ const ajaxMiddleware = (function(){
           console.log('Request not processed');
           var response=JSON.parse(httpRequest.response);
           AjaxParse(store,response,params.cause);          
+        }
+        else if(httpRequest.status === 401&&params.cause!==AUTH_LOGIN)
+        {
+          console.log('Not Authorized');  
+          store.dispatch(logoutRequest());        
         }
         else
         {

@@ -56,3 +56,30 @@ export const INVALID_PWD= (<FormattedMessage id="user.invalid.password" descript
 export const MATCH_PWD= (<FormattedMessage id="user.match.password" description='Text for passwords not matching' 
             defaultMessage="Passwords do not match"/>);
 
+export const INVALID_SKUID= (<FormattedMessage id="audit.invalid.sku" description='Text for invalid SKU ID' 
+            defaultMessage="Please enter a valid SKU Number"/>);
+
+export const INVALID_LOCID= (<FormattedMessage id="audit.invalid.location" description='Text for invalid location ID' 
+            defaultMessage="Please enter a valid location Number"/>);
+
+// Codes for audit management
+export const E025 = (<FormattedMessage id="notify.error.audit.e025" description='Text for invalid sku number or location' 
+            defaultMessage="Either location or sku does not exist"/>);
+export const G015 = (<FormattedMessage id="notify.error.audit.g015" description='Text for type other than sku and location' 
+            defaultMessage="Input not a sku or location"/>);
+export const AS001 = (<FormattedMessage id="notify.error.audit.success" description='Text for successfull audit creation' 
+            defaultMessage="Audit created successfully"/>);
+
+
+//Codes for Ajax Parser
+export const ERR_USR=(<FormattedMessage id="notify.error.user.fail" description='Text for error in updating user' 
+            defaultMessage="Error in updating user"/>);
+export const ERR_RES=(<FormattedMessage id="notify.error.user.response" description='Text for error in response' 
+            defaultMessage="Error in response"/>);
+export const ERR_AUDIT=(<FormattedMessage id="notify.error.audit.create" description='Text for error in creating audit' 
+            defaultMessage="Error in creating audit"/>);
+export const ERR_API=(<FormattedMessage id="notify.error.api" description='Text for unregistered API response' 
+            defaultMessage="API response not registered"/>);
+export const ERR_CONNECT=(<FormattedMessage id="notify.error.connection" description='Text for connection refused' 
+            defaultMessage="Connection refused"/>);
+

@@ -62,7 +62,7 @@
   {
     "id": "users.edit.password.query",
     "description": "Text for change password",
-    "defaultMessage": "Change Password?"
+    "defaultMessage": "Change Password"
   },
   {
     "id": "users.edit.password.button",

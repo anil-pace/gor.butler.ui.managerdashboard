@@ -2,9 +2,6 @@
 .gor-align-middle{
 	vertical-align:middle;
 }
-.gor-align-sub{
-	vertical-align:sub;
-}
 .gor-delete{
 	width:50%;
 	min-height:calculateRem(260px);
@@ -13,12 +10,14 @@
 	font-size:20px;
 	margin:auto;
 	clear:both;
+	margin-top:30vh;
 	.gor-delete-text{
 		margin:auto;
 		padding:calculateRem(30px);
 		min-height:calculateRem(150px);
 		.gor-delete-line{
 			display:inline-block;
+			width:75%;
 			.gor-delete-query{
 				display:inline;
 			}

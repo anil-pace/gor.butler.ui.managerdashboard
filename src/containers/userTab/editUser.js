@@ -5,10 +5,11 @@ import {userRequest} from '../../actions/userActions';
 import {validateName, validatePassword, resetForm} from '../../actions/validationActions';
 import { connect } from 'react-redux';
 import {ERROR,GET_ROLES,EDIT_USER,SUCCESS} from '../../constants/appConstants';
-import {EMPTY_PWD,TYPE_SUCCESS,EMPTY_NAME,INVALID_NAME,INVALID_PWD,MATCH_PWD} from '../../constants/messageConstants';
+import {TYPE_SUCCESS} from '../../constants/messageConstants';
 import {ROLE_URL,HEADER_URL} from '../../constants/configConstants';
 import FieldError from '../../components/fielderror/fielderror';
-import RadioGroup from './radioGroup';
+import RoleGroup from './roleGroup';
+import { nameStatus, passwordStatus } from '../../utilities/fieldCheck';
 
 class EditUser extends React.Component{
   constructor(props) 
@@ -31,29 +32,10 @@ class EditUser extends React.Component{
     this.props.removeModal();
   }
   _checkName(){
-      let firstname=this.firstName.value, lastname=this.lastName.value, format=  /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, nameInfo;
-          if(firstname.length<1||lastname.length<1||firstname.length>50||lastname.length>50)
-          {
-            nameInfo={
-              type:ERROR,
-              msg:EMPTY_NAME         
-            }
-          }
-          else if(format.test(firstname)||format.test(lastname))
-          {
-            nameInfo={
-              type:ERROR,
-              msg:INVALID_NAME           
-            }            
-          }
-          else
-          {
-            nameInfo={
-              type:SUCCESS,
-              msg:TYPE_SUCCESS               
-            };            
-          };   
+      let firstname=this.firstName.value, lastname=this.lastName.value, nameInfo;
+      nameInfo=nameStatus(firstname,lastname);
       this.props.validateName(nameInfo);
+      return nameInfo.type;
   }
   _handleAnchorClick(){
     this.view1.style.display='block';
@@ -61,28 +43,9 @@ class EditUser extends React.Component{
   }
   _checkPwd(){
     let pwd1=this.password1.value,pwd2=this.password2.value, passwordInfo;
-          if(pwd1.length<6||!pwd1.replace(/\s/g, '').length)
-          {
-            passwordInfo={
-              type:ERROR,
-              msg:INVALID_PWD           
-            };            
-          }
-          else if(pwd1!=pwd2)
-          {
-            passwordInfo={
-              type:ERROR,
-              msg:MATCH_PWD           
-            };            
-          }
-          else
-          {
-            passwordInfo={
-              type:SUCCESS,
-              msg:TYPE_SUCCESS               
-            };            
-          };   
+    passwordInfo=passwordStatus(pwd1,pwd2);   
     this.props.validatePassword(passwordInfo);
+    return passwordInfo.type;
   }
   _handleEditUser(e){
         e.preventDefault();
@@ -95,13 +58,18 @@ class EditUser extends React.Component{
 
         if(!this.props.nameCheck.type)
         {
-          this._checkName();
-          return;
+          if(!this._checkName())
+            return;
         }
-        else if(!this.props.passwordCheck.type)
-        {
-          pwd1="__unchanged__";
-          pwd2="__unchanged__";
+        if(!this.props.passwordCheck.type)
+        {          
+          if(!pwd1&&!pwd2)
+          {
+            pwd1="__unchanged__";
+            pwd2="__unchanged__";
+          }
+          else if(!this._checkPwd())
+            return;
         }
         role=this.props.roleSet?this.props.roleSet.msg:this.props.roleInfo.msg.operator;
 
@@ -169,7 +137,7 @@ class EditUser extends React.Component{
 
               </div>
            
-          {this.props.roleInfo?(<RadioGroup operator={this.props.roleInfo.msg.operator} manager={this.props.roleInfo.msg.manager} />):''}
+          {this.props.roleInfo?(<RoleGroup operator={this.props.roleInfo.msg.operator} manager={this.props.roleInfo.msg.manager} />):''}
 
             <div className='gor-usr-details'>
             <div className='gor-pass-view1'  ref={node => { this.view1 = node }}>
@@ -196,7 +164,7 @@ class EditUser extends React.Component{
               defaultMessage='Password'/></div>
 
               <a href="javascript:void(0)" onClick={(e) => this._handleAnchorClick(e)}><FormattedMessage id="users.edit.password.query" description='Text for change password' 
-              defaultMessage='Change Password?'/></a>
+              defaultMessage='Change Password'/></a>
               </div>
             </div>
 
