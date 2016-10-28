@@ -1,0 +1,17 @@
+[
+  {
+    "id": "itemTable.categoryType.category",
+    "description": "Category Name",
+    "defaultMessage": "Category"
+  },
+  {
+    "id": "itemTable.cbmUsed.cbm",
+    "description": "CBM Used field",
+    "defaultMessage": "CBM Used"
+  },
+  {
+    "id": "itemTable.daysInHand.count",
+    "description": "Days in Hand",
+    "defaultMessage": "Days in Hand"
+  }
+]

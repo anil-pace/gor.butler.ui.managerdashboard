@@ -960,6 +960,12 @@ export const resTypeSnapShotToday = {
 			"days_on_hand": 4.5,
 			"warehouse_utilization": 10
 		},
+		{
+			"category_type": "shoes",
+			"cbm_used": 100,
+			"days_on_hand": 4.5,
+			"warehouse_utilization": 20
+		},
 		
 		{
 			"category_type": "others",

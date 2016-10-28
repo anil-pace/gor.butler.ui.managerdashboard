@@ -4,11 +4,11 @@
  */
 import React  from 'react';
 import Legend from '../legend/legend';
-import Chart from '../graphd3/graphd3';
 import InventoryStacked from '../../containers/inventoryTab/inventoryStacked';
-import { connect } from 'react-redux'; 
-import StackedChartHorizontal from '../graphd3/stackedChartHorizontal'
-import { resTypeHistogram } from '../../../mock/mockDBData'; 
+import SnapShot from './snapShot';
+import ItemCategoryTable from './ItemCategoryTable';
+
+
 
 
 class Inventory extends React.Component{
@@ -19,8 +19,7 @@ class Inventory extends React.Component{
     }	
    
 	render(){
-		var tableData={};
-		tableData["histData"] = resTypeHistogram.aggregate_data;
+		
 		
 		return (
 			<div>
@@ -35,14 +34,16 @@ class Inventory extends React.Component{
 						<span>{this.props.label}</span>
 						</div>
 						<div className="legendCnt">
-						<Legend legendData={this.props.data || null}/>
+						
 						</div>
 						
 						</div>
 					</div>
 					<div className = "stkSnapSht">
 					<div className = "snapShtWrap">
-						<InventoryStacked stackData={this.props.stackData}/>
+					<SnapShot snapshotTabData={this.props.snapshotData[0] || {}}/>
+					<InventoryStacked snapshotData={this.props.snapshotData[0] }/>
+					<ItemCategoryTable snapshotData={this.props.snapshotData[0] || {}}/>
 					</div>
 					</div>
 				</div>
@@ -55,6 +56,6 @@ class Inventory extends React.Component{
 Inventory.propTypes={
 	data:React.PropTypes.object,
 	label:React.PropTypes.string,
-	stackData:React.PropTypes.array
+	snapshotData:React.PropTypes.array
 }
 export default Inventory;

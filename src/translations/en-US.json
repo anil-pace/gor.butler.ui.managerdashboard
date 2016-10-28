@@ -750,6 +750,11 @@
     "defaultMessage": "LOG IN TIME"
   },
   {
+    "id": "snapshot.inventory.usedSpace",
+    "description": "Space utilised message",
+    "defaultMessage": "{utilisedSpace}% space utilized"
+  },
+  {
     "id": "butlerDetail.name.prefix",
     "description": "prefix for butler id",
     "defaultMessage": "BOT - {botId}"

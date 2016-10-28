@@ -27,7 +27,7 @@ class InventoryTab extends React.Component{
 		var label = "Stock level history"
 		return (
 			<div className="gorInventory wrapper">
-				<Inventory data={this.props.inventoryData.legendData || {}} label={label} stackData={this.props.stackData}/>
+				<Inventory data={this.props.inventoryData.legendData || {}} label={label} snapshotData={this.props.snapshotData}/>
 			</div>
 		);
 	}
@@ -35,13 +35,13 @@ class InventoryTab extends React.Component{
 
 InventoryTab.propTypes={
 	inventoryData:React.PropTypes.object,
-	stackData:React.PropTypes.array
+	snapshotData:React.PropTypes.array
 }
 
 function mapStateToProps(state,ownProps){
     return {
-      "inventoryData": state.inventoryInfo.inventoryData || {},
-      "stackData":state.inventoryInfo.inventoryDataToday || []
+      "inventoryData": state.inventoryInfo.inventoryDataHistory || {},
+      "snapshotData":state.inventoryInfo.inventoryDataToday || []
     }
 };
 
