@@ -3,7 +3,9 @@ import React  from 'react';
 import { FormattedMessage } from 'react-intl';
 
 function processAuditData(data) {
-
+  var auditStatus = {"audit_created":"Created", "audit_pending":"Pending", "audit_waiting":"Pending", "audit_conflicting":"Pending", "audit_started":"In progress", "audit_tasked":"In progress", "audit_aborted":"Completed", "audit_completed":"Completed"};
+  var statusClass = {"Pending": "pending", "Completed":"completed", "In progress":"progress", "Created":"pending"}
+  var auditType = {"sku":"SKU", "location":"Location"};
   var auditDetails = [], auditData = {};
   for (var i = data.length - 1; i >= 0; i--) {
     if(data[i].audit_id) {
@@ -14,13 +16,13 @@ function processAuditData(data) {
       auditData.auditType = data[i].audit_param_type;
       if(data[i].audit_param_value) {
         auditData.auditValue = data[i].audit_param_value;
-        auditData.auditTypeValue = data[i].audit_param_type + "-" + data[i].audit_param_value;
+        auditData.auditTypeValue = auditType[data[i].audit_param_type] + "-" + data[i].audit_param_value;
       }
     }
 
     if(data[i].audit_status) {
-      auditData.status = data[i].audit_status; //needs to be done
-      auditData.statusClass = data[i].audit_status;
+      auditData.status = auditStatus[data[i].audit_status]; 
+      auditData.statusClass = statusClass[auditData.status];
       if(data[i].audit_status === "audit_created") {
         auditData.startAudit = true;
       }
@@ -41,7 +43,7 @@ function processAuditData(data) {
       auditData.progress = (data[i].completed_quantity)/(data[i].expected_quantity);
     }
     else {
-      auditData.progress = 100; //needs to be done
+      auditData.progress = 50; //needs to be done
     }
 
     if(data[i].completion_time) {

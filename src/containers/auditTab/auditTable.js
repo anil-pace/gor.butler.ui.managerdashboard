@@ -20,7 +20,9 @@ class AuditTable extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log("we are here")
       this.tableState(nextProps,this);
+      //this.props.refreshData();
   }
 
   componentDidMount() {
@@ -93,6 +95,7 @@ class AuditTable extends React.Component {
       hideCloseButton: true // (optional) if you don't wanna show the top right close button
       //.. all what you put in here you will get access in the modal props ;),
     });
+
   }
 
   startAudit(columnKey,rowIndex) {
@@ -121,7 +124,8 @@ class AuditTable extends React.Component {
       hideCloseButton: true,
       auditType:auditType,
       auditTypeParam:auditTypeParam,
-      auditComplete:auditComplete
+      auditComplete:auditComplete,
+      refreshData:this.props.refreshData
   });
 
   }
@@ -175,7 +179,7 @@ class AuditTable extends React.Component {
        </div>
 
       <Table
-        rowHeight={100}
+        rowHeight={60}
         rowsCount={rowsCount}
         headerHeight={70}
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
@@ -318,6 +322,7 @@ class AuditTable extends React.Component {
 }
 
 function mapStateToProps(state, ownProps){
+  console.log(state);
   return {
     tableData: state.currentTableState.currentTableState || [],
   };

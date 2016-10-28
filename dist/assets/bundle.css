@@ -3293,7 +3293,7 @@ progress::-moz-progress-bar {
 
 .gor-logout .gor-logout-btn {
   font-family: 'Source Sans Pro Bold', sans-serif;
-  width: 7.0625rem;
+  min-width: 7.0625rem;
   height: 2.1875rem;
   font-size: 14px;
   background: #f36f36;
@@ -3519,6 +3519,10 @@ progress::-moz-progress-bar {
   vertical-align: middle;
 }
 
+.gor-align-top {
+  vertical-align: top;
+}
+
 .gor-delete {
   width: 50%;
   min-height: 16.25rem;
@@ -3552,7 +3556,7 @@ progress::-moz-progress-bar {
 
 .gor-delete .gor-delete-btn {
   font-family: 'Source Sans Pro Bold', sans-serif;
-  width: 7.0625rem;
+  min-width: 7.0625rem;
   height: 2.1875rem;
   font-size: 14px;
   background: #f36f36;

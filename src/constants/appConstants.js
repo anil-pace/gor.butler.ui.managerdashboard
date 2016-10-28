@@ -191,6 +191,6 @@ export const HEADER_START_TIME = '09:00 AM'
 /*Constants for Audit tab */
 export const SET_AUDIT='SET_AUDIT';
 export const RESET_AUDIT='RESET_AUDIT';
-export const SKU='SKU';
+export const SKU='sku';
 export const LOCATION='location';
 export const SETAUDIT_PPS='SETAUDIT_PPS';

@@ -15,8 +15,12 @@ class AuditTab extends React.Component{
     }
 
     componentDidMount() {
-    	let url = AUDIT_URL;
-    	let auditData={
+    	this.getPageData();
+    }
+
+    getPageData() {
+      let url = AUDIT_URL;
+      let auditData={
               'url':url,
               'method':'GET',
               'cause': AUDIT_RETRIEVE,
@@ -28,9 +32,8 @@ class AuditTab extends React.Component{
 
 	render(){
     var itemNumber = 7, renderTab = <div/>;
-    console.log(this.props)
     if(this.props.auditDetail.length !== 0) {
-      renderTab = <AuditTable items={this.props.auditDetail} itemNumber={itemNumber}  intlMessg={this.props.intlMessages}/>
+      renderTab = <AuditTable items={this.props.auditDetail} itemNumber={itemNumber}  intlMessg={this.props.intlMessages} refreshData={this.getPageData.bind(this)}/>
     }
 				
 		return (

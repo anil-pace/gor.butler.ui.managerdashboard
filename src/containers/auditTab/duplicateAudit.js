@@ -3,6 +3,9 @@ import ReactDOM  from 'react-dom';
 import { connect } from 'react-redux' ;
 import {userRequest} from '../../actions/userActions';
 import { FormattedMessage,FormattedPlural } from 'react-intl';        
+import {INVALID_SKUID,INVALID_LOCID,TYPE_SUCCESS} from '../../constants/messageConstants';
+import { ERROR,SUCCESS,SKU,LOCATION,CREATE_AUDIT } from '../../constants/appConstants';
+import { AUDIT_URL } from '../../constants/configConstants';
 
 class DuplicateAudit extends React.Component{
   constructor(props) 
@@ -11,19 +14,25 @@ class DuplicateAudit extends React.Component{
   }
   removeThisModal() {
       this.props.removeModal();
+      this.props.refreshData();
   }
-  userDelete() {
-    let delurl='';
+  userDup() {
+    let formdata={
+         audit_param_type: this.props.auditType,
+         audit_param_value: this.props.auditTypeParam
+      };
     let userData={
-                'url':'',
-                'method':'DELETE',
-                'cause':'',
+                'url':AUDIT_URL,
+                'formdata':formdata,
+                'method':'POST',
+                'cause':CREATE_AUDIT,
                 'contentType':'application/json',
                 'accept':'application/json',
                 'token':sessionStorage.getItem('auth_token')
     }
     this.props.userRequest(userData);
-    this.props.removeModal();
+    this.removeThisModal();
+
   }  
   render()
   {
@@ -31,15 +40,15 @@ class DuplicateAudit extends React.Component{
         <div>
           <div className='gor-delete gor-modal-content'>
             <div className='gor-delete-text'>
-              <div className='iQuestion gor-align-sub'></div>
+              <div className='iQuestion gor-align-top'></div>
               <div className='gor-delete-line'>
                <div className='gor-delete-query'><FormattedMessage id="audit.duplicate.heading" description='Text for audit duplicate heading' 
-            defaultMessage='Are you sure you would like to duplicate audit task {task_name} ?' values={{task_name:(this.props.name?this.props.name:'')}}/></div>
+            defaultMessage='Are you sure you would like to duplicate audit task {task_name} ?' values={{task_name:(this.props.auditComplete?this.props.auditComplete:'')}}/></div>
               </div>
            </div>
               <div className='gor-delete-bottom'>
-                <button className='gor-cancel-btn' onClick={this.removeThisModal.bind(this)}>Cancel</button>
-                <button className='gor-delete-btn' onClick={this.userDelete.bind(this)}>Delete</button>
+                <button className='gor-cancel-btn' onClick={this.removeThisModal.bind(this)}>Close</button>
+                <button className='gor-delete-btn' onClick={this.userDup.bind(this)}>Duplicate audit task</button>
               </div> 
           </div>
         </div>
