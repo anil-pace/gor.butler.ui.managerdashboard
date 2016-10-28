@@ -2,6 +2,7 @@ import React  from 'react';
 import StackedChartHorizontal from '../../components/graphd3/stackedChartHorizontal'
 import { connect } from 'react-redux'; 
 import * as d3 from 'd3';
+import { FormattedMessage } from 'react-intl';
 
 
 class InventoryStacked extends React.Component{
@@ -17,23 +18,28 @@ class InventoryStacked extends React.Component{
       .attr("height", "100")
       .append("g")
       .attr("transform", "translate(" + 0 + "," + 20 + ")");
-    var data = this.props.stackData[0] ? this.props.stackData[0].category_data : [];
-    var x = 0;
+    var data = this.props.snapshotData ? this.props.snapshotData.category_data : [];
+    var x = 0,utilisedSpace=0;
 
     for(let i = 0 ; i< data.length ; i++){
     
     if(!data[i].warehouse_utilization && data[i].unusedSpace){
-      	svg.append("line")
+      	//TODO -Need to pass parameters in arguments
+        svg.append("line")
       	.attr("x1",x+"%")
       	.attr("x2",x+"%")
-      	.attr("y1","-18")
+      	.attr("y1","-8")
       	.attr("y2","50")
       	.style("stroke",d3.rgb("#BFBFBF"))
       	.style("stroke-width","1")
       	svg.append("text")
-      	.attr("x",x+"%")
-      	.attr("y","-18")
-      	.text("78% space utilised")
+      	.attr("x",(x-14)+"%")
+      	.attr("y","-8")
+      	.text(this.context.intl.formatMessage({id:"snapshot.inventory.usedSpace", defaultMessage: utilisedSpace+"% space utilized"}))
+
+      }
+      else{
+        utilisedSpace+=data[i].warehouse_utilization;
       }
     	svg.append("rect")
     	.attr("x",x+"%")
@@ -61,7 +67,10 @@ class InventoryStacked extends React.Component{
 };
 
 InventoryStacked.propTypes={
-  stackData:React.PropTypes.array
+  snapshotData:React.PropTypes.object
+}
+InventoryStacked.contextTypes ={
+ intl:React.PropTypes.object.isRequired
 }
 
 

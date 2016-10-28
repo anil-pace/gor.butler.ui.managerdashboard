@@ -748,5 +748,10 @@
     "id": "user.table.logInTime",
     "description": "User log in time",
     "defaultMessage": "日本語"
+  },
+  {
+    "id": "snapshot.inventory.usedSpace",
+    "description": "Space utilised message",
+    "defaultMessage": "日本語"
   }
 ]
