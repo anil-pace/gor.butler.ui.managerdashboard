@@ -27,7 +27,6 @@ class AuditTab extends React.Component{
 
 	render(){
     var itemNumber = 7, renderTab = <div/>;
-    console.log(this.props)
     if(this.props.auditDetail.length !== 0) {
       renderTab = <AuditTable items={this.props.auditDetail} itemNumber={itemNumber}  intlMessg={this.props.intlMessages}/>
     }

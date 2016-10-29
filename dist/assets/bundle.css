@@ -3524,7 +3524,7 @@ progress::-moz-progress-bar {
 
 .gor-delete {
   width: 50%;
-  min-height: 16.25rem;
+  min-height: 15rem;
   background: #ffffff;
   border-radius: 3px;
   font-size: 20px;
@@ -3550,7 +3550,6 @@ progress::-moz-progress-bar {
 
 .gor-delete .gor-delete-bottom {
   text-align: right;
-  margin-right: 1.25rem;
 }
 
 .gor-delete .gor-delete-btn {

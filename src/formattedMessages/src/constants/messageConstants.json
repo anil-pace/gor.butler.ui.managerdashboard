@@ -110,6 +110,11 @@
     "defaultMessage": "Either location or sku does not exist"
   },
   {
+    "id": "notify.error.audit.g016",
+    "description": "Text for unsuccessful audit deletion",
+    "defaultMessage": "Given audit does not exists"
+  },
+  {
     "id": "notify.error.audit.g015",
     "description": "Text for type other than sku and location",
     "defaultMessage": "Input not a sku or location"
@@ -132,12 +137,22 @@
   {
     "id": "notify.create.audit.success",
     "description": "Text for successfull audit creation",
-    "defaultMessage": "Audit created successfully"
+    "defaultMessage": "New audit task created successfully"
   },
   {
     "id": "notify.start.audit.success",
     "description": "Text for successfull audit creation",
     "defaultMessage": "Audit started successfully"
+  },
+  {
+    "id": "notify.delete.audit.success",
+    "description": "Text for successfull audit deletion",
+    "defaultMessage": "Audit deleted successfully"
+  },
+  {
+    "id": "notify.delete.audit.processed",
+    "description": "Text for already processed audit",
+    "defaultMessage": "Audit already processed. Cannot delete"
   },
   {
     "id": "notify.error.user.fail",

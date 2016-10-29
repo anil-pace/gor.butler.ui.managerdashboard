@@ -9,7 +9,9 @@ import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell
 import {modal} from 'react-redux-modal';
 import CreateAudit from './createAudit';
 import StartAudit from './startAudit';
+import DeleteAudit from './deleteAudit';
 import DuplicateAudit from './duplicateAudit';
+
 class AuditTable extends React.Component {
   constructor(props) {
     super(props);
@@ -107,12 +109,11 @@ class AuditTable extends React.Component {
  }
 
  manageAuditTask(rowIndex,option) {
- console.log(option,rowIndex)
+ var auditComplete = this.props.tableData.sortedDataList.newData[rowIndex].auditTypeValue;
   
   if(option.value === "duplicateTask"){
     var auditType = this.props.tableData.sortedDataList.newData[rowIndex].auditType;
     var auditTypeParam = this.props.tableData.sortedDataList.newData[rowIndex].auditValue;
-    var auditComplete = this.props.tableData.sortedDataList.newData[rowIndex].auditTypeValue;
     
     modal.add(DuplicateAudit, {
       title: '',
@@ -127,7 +128,15 @@ class AuditTable extends React.Component {
   }
 
   else if(option.value === "deleteRecord"){
-
+    var auditId = this.props.tableData.sortedDataList.newData[rowIndex].id;
+    modal.add(DeleteAudit, {
+      title: '',
+      size: 'large', // large, medium or small,
+      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: true,
+      auditId:auditId,
+      auditComplete:auditComplete
+    });
   }
  }
   

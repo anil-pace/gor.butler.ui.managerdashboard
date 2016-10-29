@@ -1,0 +1,7 @@
+[
+  {
+    "id": "audit.delete.heading",
+    "description": "Text for audit delete heading",
+    "defaultMessage": "Are you sure you would like to delete audit task {task_name} ?"
+  }
+]

@@ -22,7 +22,7 @@ class CreateAudit extends React.Component{
     this.props.resetAuditType();
     this.props.resetForm();            
   }
-  removeThisModal() {
+  _removeThisModal() {
     this.props.removeModal();
   }
   _checkSku(skuId){
@@ -100,7 +100,7 @@ class CreateAudit extends React.Component{
                           <div className='gor-sub-head'><FormattedMessage id="audit.add.subheading" description='Subheading for add audit' 
             defaultMessage='Select and enter details below to create a new audit task'/></div>
               </div>
-              <span className="close" onClick={this.removeThisModal.bind(this)}>×</span>
+              <span className="close" onClick={this._removeThisModal.bind(this)}>×</span>
             </div>
             <div className='gor-modal-body'>
             <form action="#"  id = "createauditForm" ref={node => { this.addauditForm = node }} 
