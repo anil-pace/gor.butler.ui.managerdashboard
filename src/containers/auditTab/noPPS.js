@@ -22,13 +22,13 @@ class NoPPS extends React.Component{
    	<FormattedMessage id="audit.start.auditdetails.subheading2" description='Text for audit details subheading when no pps'  
             defaultMessage='There are currently no PPS in audit mode.'/>
             <p>
-            <FormattedMessage id="audit.start.auditdetails.part_1" description='Text for please'  
+            <FormattedMessage id="audit.start.auditdetails.please" description='Text for please'  
             defaultMessage='Please '/>
             <a href="#/pps" onClick = {this.handleSysSubTabClick.bind(this,PPS)}>
-            <FormattedMessage id="audit.start.auditdetails.part_2" description='Text for hyperlink'  
+            <FormattedMessage id="audit.start.auditdetails.hyperlink" description='Text for hyperlink'  
             defaultMessage='go to the PPS mode '/>
             </a>
-            <FormattedMessage id="audit.start.auditdetails.part_3" description='Text change operation'  
+            <FormattedMessage id="audit.start.auditdetails.operations" description='Text change operation'  
             defaultMessage='change PPS operations.'/>
             </p>
      </div>

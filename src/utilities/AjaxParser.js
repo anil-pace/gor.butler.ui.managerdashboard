@@ -100,7 +100,7 @@ export function AjaxParse(store,res,cause)
 		case EDIT_USER:
 
 		case ADD_USER:
-			if(res.alert_data)
+			try
 		    {	
 		    	switch(res.alert_data[0].code)
 		    	{
@@ -136,9 +136,9 @@ export function AjaxParse(store,res,cause)
 
 		    	}			
 		    }
-			else
+			catch(e)
 			{
-		    			store.dispatch(notifyFail(ERR_RES));		
+		    			store.dispatch(notifyFail(e.message));		
 			}
 
 			break;
@@ -194,7 +194,7 @@ export function AjaxParse(store,res,cause)
 			}
 			break;
 		case DELETE_AUDIT:
-			if(res.alert_data)
+			try
 		    {	
 		    	switch(res.alert_data[0].code)
 		    	{
@@ -212,9 +212,10 @@ export function AjaxParse(store,res,cause)
 
 		    	}			
 		    }
-			else
+			catch(e)
 			{
-		    			store.dispatch(notifyFail(ERR_RES));		
+		    			store.dispatch(notifyFail(ERR_RES));
+		    			throw e;		
 			}
 			break;
 		case RECIEVE_HEADER:
