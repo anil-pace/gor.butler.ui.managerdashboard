@@ -2857,6 +2857,18 @@ progress::-moz-progress-bar {
   vertical-align: sub;
 }
 
+.gor-auditCreate-btn {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  width: 125px;
+  height: 35px;
+  font-size: 14px;
+  background: #4d5055;
+  color: #ffffff;
+  border-radius: 3px;
+  margin-left: 30px;
+  vertical-align: sub;
+}
+
 .gor-dropDown-firstInnerElement {
   display: inline-block;
   padding-right: 15px;
@@ -2892,7 +2904,7 @@ progress::-moz-progress-bar {
 
 .gor-audit-actions-button {
   display: inline-block;
-  padding-right: 70px;
+  padding-right: 20px;
 }
 
 .gor-audit-actions-drop {
@@ -3280,7 +3292,7 @@ progress::-moz-progress-bar {
 
 .gor-logout .gor-logout-btn {
   font-family: 'Source Sans Pro Bold', sans-serif;
-  width: 7.0625rem;
+  min-width: 7.0625rem;
   height: 2.1875rem;
   font-size: 14px;
   background: #f36f36;
@@ -3506,9 +3518,13 @@ progress::-moz-progress-bar {
   vertical-align: middle;
 }
 
+.gor-align-top {
+  vertical-align: top;
+}
+
 .gor-delete {
   width: 50%;
-  min-height: 16.25rem;
+  min-height: 15rem;
   background: #ffffff;
   border-radius: 3px;
   font-size: 20px;
@@ -3534,12 +3550,11 @@ progress::-moz-progress-bar {
 
 .gor-delete .gor-delete-bottom {
   text-align: right;
-  margin-right: 1.25rem;
 }
 
 .gor-delete .gor-delete-btn {
   font-family: 'Source Sans Pro Bold', sans-serif;
-  width: 7.0625rem;
+  min-width: 7.0625rem;
   height: 2.1875rem;
   font-size: 14px;
   background: #f36f36;

@@ -24,7 +24,7 @@ class StartAudit extends React.Component{
     this.props.resetAuditType();
     this.props.resetForm();            
   }
-  removeThisModal() {
+  _removeThisModal() {
     this.props.removeModal();
   }
   componentDidMount(){
@@ -58,7 +58,7 @@ class StartAudit extends React.Component{
     this.props.userRequest(userData);
     this.props.removeModal();
   }
-   handleChange(event) 
+   _handleChange(event) 
    {
     let val = event.target.value;
     let checked = this.state.checked.slice(); 
@@ -74,7 +74,7 @@ class StartAudit extends React.Component{
       let checkList=[],items=this.props.ppsList;
       for(let i=0;i<items.length;i++)
       {
-        checkList.push(<li key={items[i]}><input type="checkbox" value={items[i]} onChange={this.handleChange.bind(this)} /><FormattedMessage id="audit.start.ppscheckbox" description='Text for PPS' 
+        checkList.push(<li key={items[i]}><input type="checkbox" value={items[i]} onChange={this._handleChange.bind(this)} /><FormattedMessage id="audit.start.ppscheckbox" description='Text for PPS' 
             defaultMessage='PPS {eta}' values={{eta:items[i]}}/></li>);
       }
 
@@ -87,7 +87,7 @@ class StartAudit extends React.Component{
                           <div className='gor-sub-head'><FormattedMessage id="audit.start.subheading" description='Subheading for start audit' 
             defaultMessage='Assign one or more PPS and start the audit task.'/></div>
               </div>
-              <span className="close" onClick={this.removeThisModal.bind(this)}>×</span>
+              <span className="close" onClick={this._removeThisModal.bind(this)}>×</span>
             </div>
             <div className='gor-modal-body'>
             <form action="#"  id = "startauditForm" ref={node => { this.startauditForm = node }} 
@@ -98,7 +98,7 @@ class StartAudit extends React.Component{
             <div className='gor-usr-hdsm'><FormattedMessage id="audit.start.auditdetails.heading" description='Text for audit details heading' 
             defaultMessage='Assign PPS for Location'/></div>
             <div className='gor-sub-head'>{checkList.length>0?(<FormattedMessage id="audit.start.auditdetails.subheading1" description='Text for audit details subheading when pps present' 
-            defaultMessage='All PPS below are currently in the audit mode.'/>):<NoPPS removeFn={this.removeThisModal.bind(this)} />}</div>
+            defaultMessage='All PPS below are currently in the audit mode.'/>):<NoPPS removeFn={this._removeThisModal.bind(this)} />}</div>
             <ul>
             {checkList.length>0?checkList:''}
             </ul>
@@ -107,7 +107,7 @@ class StartAudit extends React.Component{
      
             <p className='gor-submit'>
              {checkList.length>0?(<button type="submit" className="gor-add-btn" disabled={(!this.state.checked.length)?true:false} onClick={this._handlestartaudit.bind(this)}><FormattedMessage id="audit.start.button" description='Text for start audit button' 
-            defaultMessage='Start task now'/></button>):(<button className="gor-add-btn" type="button"><FormattedMessage id="audit.back.button" description='Text for go back button' 
+            defaultMessage='Start task now'/></button>):(<button className="gor-add-btn" type="button" onClick={this._removeThisModal.bind(this)}><FormattedMessage id="audit.back.button" description='Text for go back button' 
             defaultMessage='Go Back'/></button>)}
             </p>
             </div>

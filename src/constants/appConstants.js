@@ -102,11 +102,11 @@ export const GET_ROLES='GET_ROLES';
 export const PPS_MODE_CHANGE = 'PPS_MODE_CHANGE';
 export const GET_HEADER_INFO = 'GET_HEADER_INFO';
 export const EDIT_USER='EDIT_USER';
-export const CREATE_AUDIT='CREATE_AUDIT';
-export const GET_PPSLIST='GET_PPSLIST';
-export const START_AUDIT='START_AUDIT';
+
 export const AUDIT_RETRIEVE = "AUDIT_RETRIEVE";
 export const RECIEVE_AUDIT_DATA = "RECIEVE_AUDIT_DATA";
+export const CREATE_AUDIT='CREATE_AUDIT';
+export const DELETE_AUDIT='DELETE_AUDIT';
 
 
 
@@ -149,7 +149,7 @@ export const TAB_ROUTE_MAP = {
 		[ORDERS] : "orders",
 		[INVENTORY] : "inventory",
 		[USERS] : "users",
-		[AUDIT]:"audit"
+		[AUDIT] : "audit"
 	}
 export const SYS_SUB_TAB_ROUTE_MAP={
 	[NOTIFICATION] : "notification",
@@ -175,7 +175,9 @@ export const CODE_G015='g015';
 export const CODE_AE001='ae001';
 export const CODE_AE002='ae002';
 export const CODE_AE006='ae006';
-
+export const CODE_AS002='as002';
+export const CODE_AS003='as003';
+export const CODE_G016='g016';
 /*User roles map*/
 export const BUTLER_SUPERVISOR = 'butler_supervisor';
 export const BUTLER_UI = 'butler_ui';
@@ -192,6 +194,6 @@ export const HEADER_START_TIME = '09:00 AM'
 /*Constants for Audit tab */
 export const SET_AUDIT='SET_AUDIT';
 export const RESET_AUDIT='RESET_AUDIT';
-export const SKU='SKU';
+export const SKU='sku';
 export const LOCATION='location';
 export const SETAUDIT_PPS='SETAUDIT_PPS';

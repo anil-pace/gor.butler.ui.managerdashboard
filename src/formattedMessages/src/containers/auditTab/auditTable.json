@@ -5,6 +5,11 @@
     "defaultMessage": "Audit Tasks"
   },
   {
+    "id": "audit.table.buttonLable",
+    "description": "button label for audit create",
+    "defaultMessage": "Create New Task"
+  },
+  {
     "id": "auditTable.stationID",
     "description": "total audit ID for auditTable",
     "defaultMessage": "{rowsCount} AUDIT ID"

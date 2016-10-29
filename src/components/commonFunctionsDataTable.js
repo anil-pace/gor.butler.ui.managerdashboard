@@ -90,8 +90,10 @@ export const ActionCell = ({rowIndex, data, columnKey,selEdit,selDel,mid, ...pro
       </button>
     </div>
     <div className="gor-user-Logo-wrap">
+
       <button disabled={(mid===data.getObjectAt(rowIndex).uid)?true:false} onClick={selDel.bind(this,columnKey,rowIndex)} >
         <div className="user-del-icon" /><span><FormattedMessage id="commonDataTable.Delete.button" description='Delete button' defaultMessage='Delete'/></span>
+
       </button>
     </div>  
   </Cell>
@@ -127,15 +129,15 @@ export const StatusCell = ({rowIndex, data, columnKey,statusKey, ...props}) => (
   </Cell>
 );
 
-export const ActionCellAudit = ({rowIndex, data, columnKey, tasks, handleAudit, ...props}) => (
+export const ActionCellAudit = ({rowIndex, data, columnKey, tasks, handleAudit,manageAuditTask, ...props}) => (
   <Cell {...props}>
     <div className="gor-audit-actions-button">
-      <button className="gor-add-btn" onClick={handleAudit.bind(this)}>
+      <button className="gor-add-btn" onClick={handleAudit.bind(this,columnKey,rowIndex)}>
           <FormattedMessage id="commonDataTable.startAudit.button" description='edit button' defaultMessage='Start audit'/>
       </button>
     </div>
     <div className="gor-audit-actions-drop">
-      <DropdownTable  styleClass={'gorDataTableDrop'} placeholder="Manage Tasks" items={tasks}/>
+      <DropdownTable  styleClass={'gorDataTableDrop'} placeholder="Manage Tasks" items={tasks} changeMode={manageAuditTask.bind(this,rowIndex)}/>
     </div>
   </Cell>
 );

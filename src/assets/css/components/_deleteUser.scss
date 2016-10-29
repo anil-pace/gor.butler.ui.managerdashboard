@@ -2,9 +2,12 @@
 .gor-align-middle{
 	vertical-align:middle;
 }
+.gor-align-top{
+	vertical-align:top;
+}
 .gor-delete{
 	width:50%;
-	min-height:calculateRem(260px);
+	min-height:calculateRem(240px);
 	background:#ffffff;
 	border-radius:3px;
 	font-size:20px;
@@ -25,11 +28,10 @@
 	}
 	.gor-delete-bottom{
 		text-align:right;
-		margin-right:calculateRem(20px);
 	}
 	.gor-delete-btn{
 		font-family:'Source Sans Pro Bold', sans-serif;
-	    width:calculateRem(113px);
+	    min-width:calculateRem(113px);
 	    height:calculateRem(35px);
 	    font-size:14px;
 	    background:#f36f36;

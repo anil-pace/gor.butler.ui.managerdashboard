@@ -6,6 +6,11 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import {currentTableState} from '../../actions/tableDataAction'
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData, ProgressCell,ActionCellAudit} from '../../components/commonFunctionsDataTable';
+import {modal} from 'react-redux-modal';
+import CreateAudit from './createAudit';
+import StartAudit from './startAudit';
+import DeleteAudit from './deleteAudit';
+import DuplicateAudit from './duplicateAudit';
 
 class AuditTable extends React.Component {
   constructor(props) {
@@ -82,12 +87,62 @@ class AuditTable extends React.Component {
     this.props.currentTableState(tableData)
   }
 
-  startAudit() {
-    console.log("started")
+  createAudit() { 
+      modal.add(CreateAudit, {
+      title: '',
+      size: 'large', 
+      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: true // (optional) if you don't wanna show the top right close button
+      //.. all what you put in here you will get access in the modal props ;),
+    });
   }
 
+  startAudit(columnKey,rowIndex) {
+    var auditId = this.props.tableData.sortedDataList.newData[rowIndex].id;
+    modal.add(StartAudit, {
+      title: '',
+      size: 'large', // large, medium or small,
+      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: true,
+      auditId:auditId
+  });
+ }
+
+ manageAuditTask(rowIndex,option) {
+ var auditComplete = this.props.tableData.sortedDataList.newData[rowIndex].auditTypeValue;
+  
+  if(option.value === "duplicateTask"){
+    var auditType = this.props.tableData.sortedDataList.newData[rowIndex].auditType;
+    var auditTypeParam = this.props.tableData.sortedDataList.newData[rowIndex].auditValue;
+    
+    modal.add(DuplicateAudit, {
+      title: '',
+      size: 'large', // large, medium or small,
+      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: true,
+      auditType:auditType,
+      auditTypeParam:auditTypeParam,
+      auditComplete:auditComplete
+  });
+
+  }
+
+  else if(option.value === "deleteRecord"){
+    var auditId = this.props.tableData.sortedDataList.newData[rowIndex].id;
+    modal.add(DeleteAudit, {
+      title: '',
+      size: 'large', // large, medium or small,
+      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: true,
+      auditId:auditId,
+      auditComplete:auditComplete
+    });
+  }
+ }
+  
+
   render() {
-    var sortedDataList = this._dataList
+    var sortedDataList = this._dataList;
     if(this.props.tableData.sortedDataList !== undefined && this.props.tableData.sortedDataList._data !== undefined) {
       sortedDataList = this.props.tableData.sortedDataList;
     }
@@ -108,7 +163,13 @@ class AuditTable extends React.Component {
             <div className="gorToolBarElements">
                <FormattedMessage id="audit.table.heading" description="Heading for audit table" 
               defaultMessage ="Audit Tasks"/>
+            </div>
+            <div className="gor-button-wrap">
+            <button className="gor-auditCreate-btn" onClick={this.createAudit.bind(this)}>
               
+              <FormattedMessage id="audit.table.buttonLable" description="button label for audit create" 
+              defaultMessage ="Create New Task"/>
+            </button>
             </div>
           </div>
         <div className="filterWrapper">  
@@ -123,7 +184,7 @@ class AuditTable extends React.Component {
        </div>
 
       <Table
-        rowHeight={66}
+        rowHeight={100}
         rowsCount={rowsCount}
         headerHeight={70}
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
@@ -252,7 +313,7 @@ class AuditTable extends React.Component {
               <div className="gorToolHeaderSubText">  </div>
             </SortHeaderCell>
           }
-          cell={<ActionCellAudit data={sortedDataList} handleAudit={this.startAudit.bind(this)} tasks={tasks}/>}
+          cell={<ActionCellAudit data={sortedDataList} handleAudit={this.startAudit.bind(this)} tasks={tasks} manageAuditTask={this.manageAuditTask.bind(this)}/>}
           width={columnWidths.actions}
         />
       </Table>
