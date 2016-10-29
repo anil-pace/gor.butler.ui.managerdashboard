@@ -107,7 +107,7 @@ class StartAudit extends React.Component{
      
             <p className='gor-submit'>
              {checkList.length>0?(<button type="submit" className="gor-add-btn" disabled={(!this.state.checked.length)?true:false} onClick={this._handlestartaudit.bind(this)}><FormattedMessage id="audit.start.button" description='Text for start audit button' 
-            defaultMessage='Start task now'/></button>):(<button className="gor-add-btn" type="button"><FormattedMessage id="audit.back.button" description='Text for go back button' 
+            defaultMessage='Start task now'/></button>):(<button className="gor-add-btn" type="button" onClick={this.removeThisModal.bind(this)}><FormattedMessage id="audit.back.button" description='Text for go back button' 
             defaultMessage='Go Back'/></button>)}
             </p>
             </div>
