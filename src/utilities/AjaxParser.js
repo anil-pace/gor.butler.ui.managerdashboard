@@ -143,7 +143,7 @@ export function AjaxParse(store,res,cause)
 
 			break;
 		case CREATE_AUDIT:
-			if(res.alert_data)
+			if(res.alert_data)								//Can't use try-catch here
 		    {	
 		    	switch(res.alert_data[0].code)
 		    	{
