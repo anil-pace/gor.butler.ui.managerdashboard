@@ -5,7 +5,7 @@ import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
 import {tabSelected,subTabSelected} from '../actions/tabSelectAction';
 import {displayLoader} from '../actions/loaderAction';
-import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP,AUDIT} from '../constants/appConstants';
+import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP,INVENTORY,AUDIT} from '../constants/appConstants';
 import { FormattedMessage } from 'react-intl';
 
 class Tabs extends React.Component{

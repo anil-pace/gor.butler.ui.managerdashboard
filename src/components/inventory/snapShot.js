@@ -25,29 +25,29 @@ class SnapShotDetails extends React.Component{
 					<tr>
 						<td>
 						<p>Opening Stock</p>
-						<p>{this.props.snapshotTabData.opening_stock}</p>
+						<p>{this.props.snapshotData.opening_stock}</p>
 						</td>
 						<td>
 						<p>Items Put</p>
-						<p>{this.props.snapshotTabData.items_put}</p>
+						<p>{this.props.snapshotData.items_put}</p>
 						</td>
 						<td>
 						<p>Items Pick</p>
-						<p>{this.props.snapshotTabData.items_picked}</p>
+						<p>{this.props.snapshotData.items_picked}</p>
 						</td>
 					</tr>
 					<tr>
 						<td>
 							<p>Current Stock</p>
-						<p>{this.props.snapshotTabData.current_stock}</p>
+						<p>{this.props.snapshotData.current_stock}</p>
 						</td>
 						<td>
 							<p>SKUs</p>
-						<p>{this.props.snapshotTabData.total_skus}</p>
+						<p>{this.props.snapshotData.total_skus}</p>
 						</td>
 						<td>
 							<p>CBM Used</p>
-						<p>{this.props.snapshotTabData.cbm_used}</p>
+						<p>{this.props.snapshotData.cbm_used}</p>
 						</td>
 					</tr>
 					</tbody>
@@ -60,6 +60,6 @@ class SnapShotDetails extends React.Component{
 	}
 };
 SnapShotDetails.propTypes={
-	snapshotTabData:React.PropTypes.object
+	snapshotData:React.PropTypes.object
 }
 export default SnapShotDetails;
