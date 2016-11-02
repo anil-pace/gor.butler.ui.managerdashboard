@@ -750,11 +750,7 @@
     "defaultMessage": "LOG IN TIME"
   },
   {
-    "id": "snapshot.inventory.usedSpace",
-    "description": "Space utilised message",
-    "defaultMessage": "{utilisedSpace}% space utilized"
-  },
-  {
+<<<<<<< a4c11e1f686d7e9602df6aa5bf1e1cd8db13b988
     "id": "butlerDetail.name.prefix",
     "description": "prefix for butler id",
     "defaultMessage": "BOT - {botId}"
@@ -1157,11 +1153,10 @@
     "id": "userDetails.Offline.status",
     "description": "Offline status for userDetails",
     "defaultMessage": "Offline"
-},
-{
+=======
     "id": "snapshot.inventory.usedSpace",
     "description": "Space utilised message",
     "defaultMessage": "{utilisedSpace}% space utilized"
-
+>>>>>>> Inventroy Snapshot done
   }
 ]

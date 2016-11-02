@@ -22,9 +22,12 @@
 @import 'components/notify';
 @import 'components/paginate';
 @import 'components/deleteUser';
+<<<<<<< 911101bd1b78eee01c449c20e4f61e9b41218f71
+=======
 @import 'components/inventory';
+@import 'components/dropdown';
 @import 'components/pickPutLineGraph'
-
+>>>>>>> temp
 
 
 

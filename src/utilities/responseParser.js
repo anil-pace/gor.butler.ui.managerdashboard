@@ -33,6 +33,8 @@ export function ResponseParse(store,res)
 				break;
 			case PARSE_INVENTORY_HISTORY:
 				store.dispatch(receiveInventoryHistoryData(res));
+				break;
+
 			case PARSE_INVENTORY_TODAY:		
 				store.dispatch(receiveInventoryTodayData(res));
 				break;

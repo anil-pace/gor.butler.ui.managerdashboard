@@ -5,8 +5,8 @@ import {assignRole} from '../actions/userActions';
 import {recieveHeaderInfo} from '../actions/headerAction';
 import {getPPSAudit} from '../actions/auditActions';
 import {notifySuccess, notifyFail,validateID} from '../actions/validationActions';
-import {ERROR,AUTH_LOGIN, ADD_USER, CHECK_ID,DELETE_USER,GET_ROLES,ORDERS_RETRIEVE,PPS_MODE_CHANGE,EDIT_USER,BUTLER_UI,CODE_US001,CODE_US002,CODE_US004,CODE_UE001,CODE_UE002,CODE_UE003,CODE_UE004,CODE_UE005,CODE_UE006,RECIEVE_HEADER,SUCCESS,CREATE_AUDIT,AUDIT_RETRIEVE,CODE_E025,CODE_G015,GET_PPSLIST,START_AUDIT,CODE_AE001,CODE_AE002,CODE_AE006} from '../constants/appConstants';
-import {US001,US002,US004,UE001,UE002,UE003,UE004,UE005,UE006,E028,E029,MODE_REQUESTED,TYPE_SUCCESS,E025,G015,AS001,ERR_API,ERR_USR,ERR_RES,ERR_AUDIT,AE001,AE002,AE006,AS002} from '../constants/messageConstants';
+import {ERROR,AUTH_LOGIN, ADD_USER, CHECK_ID,DELETE_USER,GET_ROLES,ORDERS_RETRIEVE,PPS_MODE_CHANGE,EDIT_USER,BUTLER_UI,CODE_US001,CODE_US002,CODE_US004,CODE_UE001,CODE_UE002,CODE_UE003,CODE_UE004,CODE_UE005,CODE_UE006,RECIEVE_HEADER,SUCCESS,CREATE_AUDIT,AUDIT_RETRIEVE,CODE_E025,CODE_G015,GET_PPSLIST,START_AUDIT,CODE_AE001,CODE_AE002,CODE_AE006,DELETE_AUDIT,CODE_AS002,CODE_AS003,CODE_G016} from '../constants/appConstants';
+import {US001,US002,US004,UE001,UE002,UE003,UE004,UE005,UE006,E028,E029,MODE_REQUESTED,TYPE_SUCCESS,E025,G015,AS001,ERR_API,ERR_USR,ERR_RES,ERR_AUDIT,AE001,AE002,AE006,AS00A,AS002,AS003,G016} from '../constants/messageConstants';
 
 export function AjaxParse(store,res,cause)
 {
@@ -100,7 +100,7 @@ export function AjaxParse(store,res,cause)
 		case EDIT_USER:
 
 		case ADD_USER:
-			if(res.alert_data)
+			try
 		    {	
 		    	switch(res.alert_data[0].code)
 		    	{
@@ -136,14 +136,14 @@ export function AjaxParse(store,res,cause)
 
 		    	}			
 		    }
-			else
+			catch(e)
 			{
-		    			store.dispatch(notifyFail(ERR_RES));		
+		    			store.dispatch(notifyFail(e.message));		
 			}
 
 			break;
 		case CREATE_AUDIT:
-			if(res.alert_data)
+			if(res.alert_data)								//Can't use try-catch here
 		    {	
 		    	switch(res.alert_data[0].code)
 		    	{
@@ -173,7 +173,7 @@ export function AjaxParse(store,res,cause)
 		case START_AUDIT:
 			if(res.successful.length)
 			{
-		    		store.dispatch(notifySuccess(AS002));				   		
+		    		store.dispatch(notifySuccess(AS00A));				   		
 			}
 			else
 			{
@@ -191,6 +191,31 @@ export function AjaxParse(store,res,cause)
 					default:
 		    				store.dispatch(notifyFail(ERR_RES));		
 				}
+			}
+			break;
+		case DELETE_AUDIT:
+			try
+		    {	
+		    	switch(res.alert_data[0].code)
+		    	{
+		    		case CODE_AS002:
+						store.dispatch(notifySuccess(AS002));
+		    			break;
+		    		case CODE_AS003:
+						store.dispatch(notifyFail(AS003));
+		    			break;
+		    		case CODE_G016:
+						store.dispatch(notifyFail(G016));
+		    			break;
+		    		default:
+		    			store.dispatch(notifyFail(ERR_RES));		    				    		
+
+		    	}			
+		    }
+			catch(e)
+			{
+		    			store.dispatch(notifyFail(ERR_RES));
+		    			throw e;		
 			}
 			break;
 		case RECIEVE_HEADER:

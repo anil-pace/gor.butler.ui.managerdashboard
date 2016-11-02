@@ -1,53 +1,59 @@
 /**
- * Container for Inventory tab
+ * Container for Overview tab
  * This will be switched based on tab click
  */
 import React  from 'react';
+<<<<<<< 6117226f7c7c52afd8ae862fe3e0293a41bbceca
+
+=======
 import shallowCompare from 'react-addons-shallow-compare' ;
 import Inventory from '../components/inventory/inventory';
 import { connect } from 'react-redux'; 
+>>>>>>> Stacked bar chart module
 
 
 class InventoryTab extends React.Component{
 	constructor(props) 
 	{
     	super(props);
-
     }	
+<<<<<<< 6117226f7c7c52afd8ae862fe3e0293a41bbceca
+=======
 
    shouldComponentUpdate(nextProps, nextState) {
     return shallowCompare(this, nextProps, nextState);
-
- 	 }
-
+  }
+>>>>>>> Stacked bar chart module
 	render(){
 		/**
 		 * Need to remove these hardcoded variables
 		 * 
 		 */
 		
+<<<<<<< 6117226f7c7c52afd8ae862fe3e0293a41bbceca
+		return (
+			<div >
+				Inventory
+=======
 		var label = "Stock level history"
 		return (
 			<div className="gorInventory wrapper">
-
-				<Inventory inventoryData={this.props.inventoryData} label={label} snapshotData={this.props.snapshotData}/>
-
+				<Inventory data={this.props.inventoryData.legendData || {}} label={label} stackData={this.props.stackData}/>
+>>>>>>> Stacked bar chart module
 			</div>
 		);
 	}
 };
 
 InventoryTab.propTypes={
-
-	inventoryData:React.PropTypes.array,
-	snapshotData:React.PropTypes.array
+	inventoryData:React.PropTypes.object,
+	stackData:React.PropTypes.array
 }
 
 function mapStateToProps(state,ownProps){
     return {
-
-      "inventoryData": state.inventoryInfo.inventoryDataHistory || [],
-      "snapshotData":state.inventoryInfo.inventoryDataToday || []
+      "inventoryData": state.inventoryInfo.inventoryData || {},
+      "stackData":state.inventoryInfo.inventoryDataToday || []
     }
 };
 

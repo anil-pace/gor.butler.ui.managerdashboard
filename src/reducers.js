@@ -4,7 +4,7 @@ import {authLogin}  from './reducers/loginReducer'
 import {loader}  from './reducers/loaderReducer'
 import {recieveSocketActions}  from './reducers/socketReducer'
 import { routerReducer as routing } from 'react-router-redux';
-import {intlReducer} from 'react-intl-redux'
+import { intlReducer } from 'react-intl-redux'
 import {performanceWidget}  from './reducers/performanceWidgetReducer'
 import {butlersInfo}  from './reducers/butlerReducer'
 import {chargerInfo}  from './reducers/chargerReducer'
