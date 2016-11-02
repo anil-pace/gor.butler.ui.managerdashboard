@@ -54,6 +54,7 @@ class InventoryStacked extends React.Component{
     
     return node;
       
+
    }
    render() {
    var node = this._processData();

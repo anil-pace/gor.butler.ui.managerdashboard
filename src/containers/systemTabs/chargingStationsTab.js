@@ -7,22 +7,55 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import ChargingStationsTable from './chargingStationsTable';
 import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
+
+function processChargersData(data, nProps) {
+  var chargerData=[],detail = {};
+  let CS, csId, botId, BUTLER;
+  let connected  = nProps.context.intl.formatMessage({id:"chargersDetail.connected.status", defaultMessage: "Connected"});
+  let disconnected  = nProps.context.intl.formatMessage({id:"chargersDetail.disconnected.status", defaultMessage: "Disconnected"});
+  let manual  = nProps.context.intl.formatMessage({id:"chargersDetail.manual.mode", defaultMessage: "Manual"});
+  let auto  = nProps.context.intl.formatMessage({id:"chargersDetail.auto.mode", defaultMessage: "Auto"});
+  var status = {"connected":connected, "disconnected":disconnected}, mode = {"manual":manual, "auto":auto}
+  for (var i = data.length - 1; i >= 0; i--) {
+    detail = {}
+    csId = data[i].charger_id;
+    botId = data[i].docked_butler_id;
+    CS = nProps.context.intl.formatMessage({id:"chargersDetail.name.prefix", description:"prefix for cs id in chargersDetail", defaultMessage:"Charging Stations - {csId}"},{"csId":csId});
+    BUTLER = nProps.context.intl.formatMessage({id:"chargersDetail.butler.prefix", description:"prefix for butler id in chargersDetail", defaultMessage:"Butler - {botId}"},{"botId":botId});
+    detail.id = CS;
+    detail.status = status[data[i].charger_status];
+    detail.statusClass = data[i].charger_status;
+    detail.mode = mode[data[i].charger_mode];
+    if(data[i].docked_butler_id !== null && data[i].docked_butler_id.length !== 0 ) {
+       detail.dockedBots = BUTLER;
+     }
+
+     else {
+       detail.dockedBots = "--";
+     }
+    chargerData.push(detail); 
+  }
+  return chargerData;
+}
+
 class ChargingStations extends React.Component{
 	constructor(props) 
 	{
     	super(props);
     }	
 	render(){
-	console.log("this props", this.props)
-	var itemNumber = 4, connectedBots = 0, manualMode = 0, automaticMode = 0, chargersState = {"connectedBots": "--","manualMode": "--", "automaticMode":"--"};
-    var chargersData =  this.props.chargersDetail.chargersDetail;
+	
+	var itemNumber = 4, connectedBots = 0, manualMode = 0, automaticMode = 0, chargersState = {"connectedBots": "--","manualMode": "--", "automaticMode":"--"}, chargersData;
+    if(this.props.chargersDetail.chargersDetail !== undefined) {
+     chargersData =  processChargersData(this.props.chargersDetail.chargersDetail, this);
     if(chargersData && chargersData.length) {
     	for (var i = chargersData.length - 1; i >= 0; i--) {
         	if(chargersData[i].dockedBots !== "--") {
         		connectedBots++;
       		}
 
-      		if(chargersData[i].mode.props.defaultMessage === "Manual") {
+      		if(chargersData[i].mode === "Manual") {
       			manualMode++;
       		}
       		else{
@@ -31,11 +64,13 @@ class ChargingStations extends React.Component{
     	}
     	chargersState = {"connectedBots": connectedBots,"manualMode": manualMode, "automaticMode":automaticMode};
 	}
+}
+
 		return (
 			<div>
 				<div>
 					<div className="gorTesting">
-						<ChargingStationsTable items={this.props.chargersDetail.chargersDetail} itemNumber={itemNumber} chargersState={chargersState} intlMessg={this.props.intlMessages}/>
+						<ChargingStationsTable items={chargersData} itemNumber={itemNumber} chargersState={chargersState} intlMessg={this.props.intlMessages}/>
 					</div>
 				</div>
 			</div>
@@ -49,5 +84,10 @@ function mapStateToProps(state, ownProps){
     intlMessages: state.intl.messages
   };
 }
+
+ChargingStations.contextTypes ={
+ intl:React.PropTypes.object.isRequired
+}
+
 
 export default connect(mapStateToProps)(ChargingStations) ;

@@ -71,7 +71,13 @@ export const CHARGING_TAB = "Charging Station";
 export const PPS_TAB = "Pick Put Stations";
 export const ORDER_LIST = "Order List";
 export const WAVES = "Waves";
-
+export const TAB_CLASS = {
+	overview:"gorMainBlock", 
+	system:"gorMainBlock",
+	orders:"gorMainBlock", 
+	inventory:"gorMainBlock", 
+	users:"gorMainBlock"
+};
 
 
 /*Constants for response type */
@@ -194,12 +200,14 @@ export const USER_ROLE_MAP ={
 export const HEADER_START_TIME = '09:00 AM'
 
 
+
 /*Constants for Audit tab */
 export const SET_AUDIT='SET_AUDIT';
 export const RESET_AUDIT='RESET_AUDIT';
 export const SKU='sku';
 export const LOCATION='location';
 export const SETAUDIT_PPS='SETAUDIT_PPS';
+  
 /*Inventory parsing constants*/
 export const INVENTORY_DATA_TODAY = 'INVENTORY_DATA_TODAY'
 export const INVENTORY_DATA_HISTORY = 'INVENTORY_DATA_HISTORY'

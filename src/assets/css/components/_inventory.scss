@@ -23,6 +23,11 @@
     	vertical-align: middle;
 	}
 
+	.gorBtn{
+		@include gor-btn(Source Sans Pro Bold,10px,14px,#4d5055,#ffffff,3px);
+		float:right;
+	}
+
 	.histLbl{
 		width: 44%;
     	display: inline-block;

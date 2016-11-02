@@ -2,6 +2,7 @@
  * Container for Inventory tab
  * This will be switched based on tab click
  */
+
  import React  from 'react';
  import Legend from '../legend/legend';
  import InventoryStacked from '../../containers/inventoryTab/inventoryStacked';
@@ -61,3 +62,4 @@
  	inventoryData: React.PropTypes.array
  }
  export default Inventory;
+

@@ -164,8 +164,8 @@ class PPStable extends React.Component {
     var checkedPPS=[], j=0, mode=data.value;
     for (var i = this.state.isChecked.length - 1; i >= 0; i--) {
       if(this.state.isChecked[i] === true) {
-        checkedPPS[j] = this.state.sortedDataList.newData[i].id
-        checkedPPS[j] = checkedPPS[j].slice(4);
+        checkedPPS[j] = this.state.sortedDataList.newData[i].ppsId
+        //checkedPPS[j] = checkedPPS[j].slice(6);
         let formdata={         
                     "requested_pps_mode": mode
          };
@@ -191,7 +191,6 @@ class PPStable extends React.Component {
 
   
   render() {
-    console.log(this.props)
     var {sortedDataList, colSortDirs,columnWidths,isChecked,renderDropD, ppsSelected,headerChecked} = this.state, checkedPPS = [];
     let pickDrop = <FormattedMessage id="PPS.table.pickDrop" description="pick dropdown option for PPS" defaultMessage ="Put"/> 
     let putDrop = <FormattedMessage id="PPS.table.putDrop" description="put dropdown option for PPS" defaultMessage ="Pick"/> 

@@ -20,6 +20,11 @@
     "defaultMessage": "USERS"
   },
   {
+    "id": "inventory.tab.heading",
+    "description": "inventory tab",
+    "defaultMessage": "INVENTORY"
+  },
+  {
     "id": "audit.tab.heading",
     "description": "audit tab",
     "defaultMessage": "AUDIT"
@@ -43,5 +48,10 @@
     "id": "usersStatus.tab.heading",
     "description": "users Status",
     "defaultMessage": "35 users logged in"
+  },
+  {
+    "id": "inventoryStatus.tab.heading",
+    "description": "inventory Status",
+    "defaultMessage": "78% space utilized"
   }
 ]

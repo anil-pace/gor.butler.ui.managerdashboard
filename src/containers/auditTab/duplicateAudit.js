@@ -14,6 +14,7 @@ class DuplicateAudit extends React.Component{
   }
   _removeThisModal() {
       this.props.removeModal();
+      this.props.refreshData();
   }
   _userDup() {
     let formdata={
@@ -30,7 +31,7 @@ class DuplicateAudit extends React.Component{
                 'token':sessionStorage.getItem('auth_token')
     }
     this.props.userRequest(userData);
-    this.props.removeModal();
+    this.removeThisModal();
 
   }  
   render()

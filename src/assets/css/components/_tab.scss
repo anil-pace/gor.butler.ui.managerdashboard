@@ -1,32 +1,33 @@
-.gorTab.gorContainer{
+.gorTabs{
+	.gorTab{
+		&.gorContainer{
 			background-color:#4d5055;
 			width: auto;
 			display: inline-block;
 			height: 60px;
 		}
-
-		.gorTab .gorMainBlock:hover{
-			background-color:#323539;
-		}
-
-		.gorTab .gorInline{
+		.gorMainBlock{
+				width: 150px;
+				padding-right: 20px;
+				padding-left: 20px;
+				height: 62px;
+				display: table-cell;
+				border-right: .5px solid black;
+				background: #4d5055;
+				cursor: pointer;
+				vertical-align: middle;
+				&:hover{
+					background-color:#323539;
+				}
+				&.sel{
+					background-color:#323539;
+				}
+			}
+		.gorInline{
 			display: inline-block;
 			width:100%;
 		}
-
-
-		.gorTab .gorMainBlock {
-			width: 150px;
-			padding-right: 20px;
-			padding-left: 20px;
-			height: 62px;
-			display: table-cell;
-			border-right: .5px solid black;
-			background: #4d5055;
-			cursor: pointer;
-			vertical-align: middle;
-		}
-		.gorTab .gor-upperText {
+		.gor-upperText {
 			font-family: "source sans pro";
 			font-size: 18px;
 			font-weight: bold;
@@ -35,68 +36,51 @@
 			display:inline-block;
 			width:75%;
 		}
-		
-		.gorTab .gorSubText {
-			
+		.gorSubText {
 			font-size: 14px;
 			padding-top: 0px;
 			font-weight: bold;
-
-		}	
-		.gorTab .gorOverview{
+		}
+		.gorOverview{
 			font-family: "source sans pro";
 			color: #ffffff;
 		}
-		.gorTab .gorOnline{
+		.gorOnline{
 			font-family: "source sans pro";
 			color: #10c469;
 
 		}
-
-		.gorTab .gorOffline{
+		.gorOffline{
 			font-family: "source sans pro";
 			color: #9C9FA0;
 		}
-		
-		.gorTab .gorEvent{
+		.gorEvent{
 			font-family: "source sans pro";
 			color: #27aae1;
 		}
-
-		.gorTab .gorRisk{
+		.gorRisk{
 			font-family: "source sans pro";
 			color: #f99405;
 		}
-
-		.gorTab .gorError{
+		.gorError{
 			font-family: "source sans pro";
 			color: #fc3838;
 		}
-		
-
-		.gorTab .gorEmergency{
+		.gorEmergency{
 			font-family: "source sans pro";
 			color: #ffffff;
 			background: #fc3838;
 		}
-
-		.gorTab .gorMainBlockSelect{
-			width: 150px;
-			padding-right: 20px;
-			padding-left: 20px;
-			height: 62px;
-			display: table-cell;
-			border-right: .5px solid black;
-			cursor: pointer;
-			background-color:#323539;
-			vertical-align: middle;
-		}
-		.gorTab .gorIconsInline{
+		.gorIconsInline{
 			display: inline-block;
 			vertical-align: super;
 		}
-
-		.gorTab .gorInlineDisplay{
+		.gorInlineDisplay{
 			display: inline-block;
 			padding-right: 16px;
 		}
+	}
+}
+
+
+

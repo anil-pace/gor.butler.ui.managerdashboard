@@ -26,12 +26,14 @@ import {INVENTORY_DATA_HISTORY,INVENTORY_DATA_TODAY,PARSE_INVENTORY_TODAY,CATEGO
     }
     categoryData.push(calculatedInvData)
   }
+
   if (isHistory === 'inventoryDataHistory'){
     // Since history would also have today's date.
     inventory.push(...state.inventoryDataToday);
   }
   return Object.assign({}, state, {
     [isHistory] : inventory || []
+
   })
 
 }
@@ -39,7 +41,9 @@ export  function inventoryInfo(state={},action){
   switch (action.type) {
     case INVENTORY_DATA_HISTORY:
     case INVENTORY_DATA_TODAY:
+
     return parseInvData(state, action);
+
 
     default:
     return state

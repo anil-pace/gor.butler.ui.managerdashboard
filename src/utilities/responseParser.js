@@ -34,17 +34,20 @@ export function ResponseParse(store,res)
 			case PARSE_INVENTORY_HISTORY:
 				store.dispatch(receiveInventoryHistoryData(res));
 				break;
+
 			case PARSE_INVENTORY_TODAY:		
 				store.dispatch(receiveInventoryTodayData(res));
 				break;
 			case PARSE_ORDERS:		
 				store.dispatch(receiveOrdersData(res));
+				store.dispatch(receiveInventoryTodayData(resTypeSnapShotToday));
 				break;
 		    case PARSE_PPA_THROUGHPUT:
 				store.dispatch(receiveThroughputData(res));
 				break;	
 			case HISTOGRAM_DETAILS:
 				store.dispatch(recieveHistogramData(res));
+				
 				break;
 			case SYSTEM_CHARGERS_DETAILS:
 				store.dispatch(recieveChargersDetail(res));
