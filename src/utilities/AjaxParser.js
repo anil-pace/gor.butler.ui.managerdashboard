@@ -138,7 +138,8 @@ export function AjaxParse(store,res,cause)
 		    }
 			catch(e)
 			{
-		    			store.dispatch(notifyFail(e.message));		
+		    			store.dispatch(notifyFail(ERR_RES));
+		    			throw e;		
 			}
 
 			break;
