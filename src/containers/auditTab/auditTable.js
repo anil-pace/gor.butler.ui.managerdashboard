@@ -98,13 +98,14 @@ class AuditTable extends React.Component {
   }
 
   startAudit(columnKey,rowIndex) {
-    var auditId = this.props.tableData.sortedDataList.newData[rowIndex].id;
+    var auditId = this.props.tableData.sortedDataList.newData[rowIndex].id,task = this.props.tableData.sortedDataList.newData[rowIndex].auditTypeValue;
     modal.add(StartAudit, {
       title: '',
       size: 'large', // large, medium or small,
       closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: true,
-      auditId:auditId
+      auditId:auditId,
+      task:task
   });
  }
 

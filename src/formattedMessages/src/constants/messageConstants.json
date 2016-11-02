@@ -115,11 +115,6 @@
     "defaultMessage": "Given audit does not exists"
   },
   {
-    "id": "notify.error.audit.g015",
-    "description": "Text for type other than sku and location",
-    "defaultMessage": "Input not a sku or location"
-  },
-  {
     "id": "notify.error.audit.AE001",
     "description": "Text for invalid audit ID",
     "defaultMessage": "Audit Id does not exists"
