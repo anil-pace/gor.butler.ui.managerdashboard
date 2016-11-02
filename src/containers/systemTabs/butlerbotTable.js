@@ -97,6 +97,7 @@ class ButlerBotTable extends React.Component {
       },
     });
   }
+  
   render() {
     var {sortedDataList, colSortDirs,columnWidths} = this.state;
     var totalBot = sortedDataList.getSize();

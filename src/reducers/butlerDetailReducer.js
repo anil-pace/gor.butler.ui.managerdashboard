@@ -71,7 +71,7 @@ export  function butlerDetail(state={},action){
 
           
            return Object.assign({}, state, {
-               "butlerDetail" : butlers
+               "butlerDetail" : res.complete_data
           })
          }
 

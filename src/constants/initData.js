@@ -141,7 +141,7 @@ export const wsOverviewData = {
                 
           ]
 },
-"orders":{
+"waves":{
           "type": "subscribe",
           "data": [
                 {

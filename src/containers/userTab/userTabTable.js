@@ -20,6 +20,7 @@ class UserDataTable extends React.Component {
       this._defaultSortIndexes.push(index);
     }
     this.state = {
+       colSortDirs: {},
       sortedDataList: this._dataList,
       },
     this._onSortChange = this._onSortChange.bind(this);
@@ -56,6 +57,7 @@ class UserDataTable extends React.Component {
       this._defaultSortIndexes.push(index);
     }
     this.state = {
+       colSortDirs: {},
       sortedDataList: this._dataList,
       },
     this._onSortChange = this._onSortChange.bind(this);
@@ -94,6 +96,8 @@ class UserDataTable extends React.Component {
       },
     });
   } 
+
+
 
   addModal() {
     modal.add(AddUser, {
@@ -188,7 +192,8 @@ class UserDataTable extends React.Component {
         <Column
           columnKey="id"
           header={
-            <SortHeaderCell onSortChange={this._onSortChange}>
+            <SortHeaderCell onSortChange={this._onSortChange}
+              sortDir={colSortDirs.id}>
               <div className="gorToolHeaderEl">
               <div className="gorToolHeaderEl">
                 {sortedDataList.getSize()} 
@@ -209,7 +214,8 @@ class UserDataTable extends React.Component {
         <Column
           columnKey="status"
           header={
-            <SortHeaderCell >
+            <SortHeaderCell onSortChange={this._onSortChange}
+              sortDir={colSortDirs.status}>
               <div>
               <FormattedMessage id="user.table.status" description="Users Status" 
               defaultMessage ="STATUS"/> 
@@ -222,7 +228,8 @@ class UserDataTable extends React.Component {
         <Column
           columnKey="role"
           header={
-            <SortHeaderCell>
+            <SortHeaderCell onSortChange={this._onSortChange}
+              sortDir={colSortDirs.role}> 
                <FormattedMessage id="user.table.role" description="User Role" 
               defaultMessage ="ROLE"/>
             </SortHeaderCell>
@@ -233,7 +240,8 @@ class UserDataTable extends React.Component {
         <Column
           columnKey="workMode"
           header={
-            <SortHeaderCell>
+            <SortHeaderCell  onSortChange={this._onSortChange}
+              sortDir={colSortDirs.workMode}>
                <FormattedMessage id="user.table.workMode" description="User Workmode" 
               defaultMessage ="WORKMODE"/>
             </SortHeaderCell>
@@ -244,7 +252,8 @@ class UserDataTable extends React.Component {
         <Column
           columnKey="location"
           header={
-            <SortHeaderCell>
+            <SortHeaderCell onSortChange={this._onSortChange}
+              sortDir={colSortDirs.location}>
                <FormattedMessage id="user.table.location" description="User location" 
               defaultMessage ="LOCATION"/>
             </SortHeaderCell>
@@ -255,7 +264,8 @@ class UserDataTable extends React.Component {
         <Column
           columnKey="logInTime"
           header={
-            <SortHeaderCell >
+            <SortHeaderCell onSortChange={this._onSortChange}
+              sortDir={colSortDirs.logInTime}>
                <FormattedMessage id="user.table.logInTime" description="User log in time" 
               defaultMessage ="LOG IN TIME"/>
             </SortHeaderCell>

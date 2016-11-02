@@ -39,7 +39,8 @@ export const PARSE_PPS = "pps";
 export const PARSE_BUTLERS = "butlers";
 export const PARSE_CHARGERS = "chargers";
 export const PARSE_ORDERS = "orders";
-export const PARSE_INVENTORY = "inventory";
+export const PARSE_INVENTORY_TODAY = "inventory_today";
+export const PARSE_INVENTORY_HISTORY = "inventory_history";
 export const PARSE_PUT = "put";
 export const PARSE_PICK = "pick";
 export const PARSE_PPA_THROUGHPUT = "put_pick_audit_throughput";
@@ -70,7 +71,13 @@ export const CHARGING_TAB = "Charging Station";
 export const PPS_TAB = "Pick Put Stations";
 export const ORDER_LIST = "Order List";
 export const WAVES = "Waves";
-
+export const TAB_CLASS = {
+	overview:"gorMainBlock", 
+	system:"gorMainBlock",
+	orders:"gorMainBlock", 
+	inventory:"gorMainBlock", 
+	users:"gorMainBlock"
+};
 
 
 /*Constants for response type */
@@ -188,9 +195,27 @@ export const USER_ROLE_MAP ={
 export const HEADER_START_TIME = '09:00 AM'
 
 
+
 /*Constants for Audit tab */
 export const SET_AUDIT='SET_AUDIT';
 export const RESET_AUDIT='RESET_AUDIT';
 export const SKU='sku';
 export const LOCATION='location';
 export const SETAUDIT_PPS='SETAUDIT_PPS';
+
+/*Inventory parsing constants*/
+export const INVENTORY_DATA_TODAY = 'INVENTORY_DATA_TODAY'
+export const INVENTORY_DATA_HISTORY = 'INVENTORY_DATA_HISTORY'
+export const CATEGORY_APPAREL ='apparel' 
+export const CATEGORY_OTHERS ='others'
+export const CATEGORY_SHOES ='shoes' 
+export const CATEGORY_DEFAULT ='default'
+export const CATEGORY_UNUSED ='unused'
+export const CATEGORY_COLOR_MAP = {
+	[CATEGORY_APPAREL] : "#7893EC",
+	[CATEGORY_OTHERS] : "#C1C1C1",
+	[CATEGORY_SHOES] : "#89AE51",
+	[CATEGORY_UNUSED] : "#F7F7F7",
+	[CATEGORY_DEFAULT] : "#A44550"
+}
+

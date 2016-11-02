@@ -1152,5 +1152,11 @@
     "id": "userDetails.Offline.status",
     "description": "Offline status for userDetails",
     "defaultMessage": "Offline"
+},
+{
+    "id": "snapshot.inventory.usedSpace",
+    "description": "Space utilised message",
+    "defaultMessage": "{utilisedSpace}% space utilized"
+
   }
 ]

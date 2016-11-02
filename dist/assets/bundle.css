@@ -727,23 +727,14 @@ body {
   height: 100vh;
 }
 
-.gorTab.gorContainer {
+.gorTabs .gorTab.gorContainer {
   background-color: #4d5055;
   width: auto;
   display: inline-block;
   height: 60px;
 }
 
-.gorTab .gorMainBlock:hover {
-  background-color: #323539;
-}
-
-.gorTab .gorInline {
-  display: inline-block;
-  width: 100%;
-}
-
-.gorTab .gorMainBlock {
+.gorTabs .gorTab .gorMainBlock {
   width: 150px;
   padding-right: 20px;
   padding-left: 20px;
@@ -755,7 +746,20 @@ body {
   vertical-align: middle;
 }
 
-.gorTab .gor-upperText {
+.gorTabs .gorTab .gorMainBlock:hover {
+  background-color: #323539;
+}
+
+.gorTabs .gorTab .gorMainBlock.sel {
+  background-color: #323539;
+}
+
+.gorTabs .gorTab .gorInline {
+  display: inline-block;
+  width: 100%;
+}
+
+.gorTabs .gorTab .gor-upperText {
   font-family: "source sans pro";
   font-size: 18px;
   font-weight: bold;
@@ -765,66 +769,54 @@ body {
   width: 75%;
 }
 
-.gorTab .gorSubText {
+.gorTabs .gorTab .gorSubText {
   font-size: 14px;
   padding-top: 0px;
   font-weight: bold;
 }
 
-.gorTab .gorOverview {
+.gorTabs .gorTab .gorOverview {
   font-family: "source sans pro";
   color: #ffffff;
 }
 
-.gorTab .gorOnline {
+.gorTabs .gorTab .gorOnline {
   font-family: "source sans pro";
   color: #10c469;
 }
 
-.gorTab .gorOffline {
+.gorTabs .gorTab .gorOffline {
   font-family: "source sans pro";
   color: #9C9FA0;
 }
 
-.gorTab .gorEvent {
+.gorTabs .gorTab .gorEvent {
   font-family: "source sans pro";
   color: #27aae1;
 }
 
-.gorTab .gorRisk {
+.gorTabs .gorTab .gorRisk {
   font-family: "source sans pro";
   color: #f99405;
 }
 
-.gorTab .gorError {
+.gorTabs .gorTab .gorError {
   font-family: "source sans pro";
   color: #fc3838;
 }
 
-.gorTab .gorEmergency {
+.gorTabs .gorTab .gorEmergency {
   font-family: "source sans pro";
   color: #ffffff;
   background: #fc3838;
 }
 
-.gorTab .gorMainBlockSelect {
-  width: 150px;
-  padding-right: 20px;
-  padding-left: 20px;
-  height: 62px;
-  display: table-cell;
-  border-right: .5px solid black;
-  cursor: pointer;
-  background-color: #323539;
-  vertical-align: middle;
-}
-
-.gorTab .gorIconsInline {
+.gorTabs .gorTab .gorIconsInline {
   display: inline-block;
   vertical-align: super;
 }
 
-.gorTab .gorInlineDisplay {
+.gorTabs .gorTab .gorInlineDisplay {
   display: inline-block;
   padding-right: 16px;
 }
@@ -3563,4 +3555,85 @@ progress::-moz-progress-bar {
   color: #ffffff;
   border-radius: 3px;
   display: inline-block;
+}
+
+.gorInventory {
+  background: #fff;
+}
+
+.gorInventory .head {
+  padding: 15px 15px 15px 20px;
+  border-bottom: 1px solid #aaaaaa;
+}
+
+.gorInventory .labelCnt {
+  display: inline-block;
+  width: 50%;
+  overflow: hidden;
+  font-family: 'Source Sans Pro Semibold';
+  font-size: 1.25rem;
+  color: #000000;
+  vertical-align: middle;
+}
+
+.gorInventory .dwnLoadCnt {
+  width: 50%;
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+.gorInventory .gorBtn {
+  font-family: Source Sans Pro Bold, sans-serif;
+  padding: 10px;
+  font-size: 14px;
+  background: #4d5055;
+  color: #ffffff;
+  border-radius: 3px;
+  float: right;
+}
+
+.gorInventory .histLbl {
+  width: 44%;
+  display: inline-block;
+  font-family: 'Source Sans Pro Semibold';
+  font-size: 1.25rem;
+  color: #000000;
+  padding: 0.3125rem 1.125rem;
+}
+
+.gorInventory .histCnt {
+  width: 70%;
+  display: inline-block;
+  vertical-align: middle;
+  height: 100vh;
+}
+
+.gorInventory .legendCnt {
+  width: 50%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.gorInventory .stkSnapSht {
+  width: 28%;
+  display: inline-block;
+  vertical-align: middle;
+  height: 100vh;
+  padding: 1.25rem 0.625rem;
+}
+
+.gorInventory .snapShtWrap {
+  height: 100%;
+  border-radius: 0.1875rem;
+  box-shadow: 0px 0px 2px 2px #ECECEC;
+}
+
+.gorInventory .catColor {
+  display: inline-block;
+  width: 1.25rem;
+  height: 1.25rem;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
 }

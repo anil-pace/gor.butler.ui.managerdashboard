@@ -1,0 +1,12 @@
+[
+  {
+    "id": "chargersDetail.name.prefix",
+    "description": "prefix for cs id in chargersDetail",
+    "defaultMessage": "Charging Stations - {csId}"
+  },
+  {
+    "id": "chargersDetail.butler.prefix",
+    "description": "prefix for butler id in chargersDetail",
+    "defaultMessage": "Butler - {botId}"
+  }
+]

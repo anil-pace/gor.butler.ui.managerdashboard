@@ -1,0 +1,17 @@
+[
+  {
+    "id": "pps.name.prefix",
+    "description": "prefix for pps id",
+    "defaultMessage": "PPS - {ppsId}"
+  },
+  {
+    "id": "charger.name.prefix",
+    "description": "prefix for charger id",
+    "defaultMessage": "CS - {csId}"
+  },
+  {
+    "id": "msu.name.prefix",
+    "description": "prefix for msu id",
+    "defaultMessage": "MSU - {msuId}"
+  }
+]

@@ -346,92 +346,115 @@ export const resTypeInventory2 = {
 
 export const resTypeHistogram = {
 	"aggregate_data": [{
-		"start_time": 10, 
-		"end_time": 11,
-		"orders_completed": 200,
-		"items_audited": 1000,
-		"items_put": 800
+		"start_time": "0",
+		"items_audited": 0,
+		"end_time": "1",
+		"orders_completed": 0,
+		"items_put": null
 	}, {
-		"start_time": 11, 
-		"end_time": 12,
-		"orders_completed": 300,
-		"items_audited": 900,
-		"items_put": 600
+		"start_time": "1",
+		"items_audited": 0,
+		"end_time": "2",
+		"orders_completed": 0,
+		"items_put": null
 	}, {
-		"start_time": 12,
-		"end_time": 13,
-		"orders_completed": 200,
-		"items_audited": 800,
-		"items_put": 900
+		"start_time": "2",
+		"items_audited": 0,
+		"end_time": "3",
+		"orders_completed": 0,
+		"items_put": null
 	}, {
-		"start_time": 13, 
-		"end_time": 14,
-		"orders_completed": 300,
-		"items_audited": 700,
-		"items_put": 800
+		"start_time": "3",
+		"items_audited": 0,
+		"end_time": "4",
+		"orders_completed": 0,
+		"items_put": null
 	}, {
-		"start_time": 14, 
-		"end_time": 15,
-		"orders_completed": 350,
-		"items_audited": 800,
-		"items_put": 1200
+		"start_time": "4",
+		"items_audited": 0,
+		"end_time": "5",
+		"orders_completed": 0,
+		"items_put": null
 	}, {
-		"start_time": 15, 
-		"end_time": 16,
-		"orders_completed": 400,
-		"items_audited": 900,
-		"items_put": 1000
+		"start_time": "5",
+		"items_audited": 0,
+		"end_time": "6",
+		"orders_completed": 0,
+		"items_put": null
 	}, {
-		"start_time": 16, 
-		"end_time": 17,
-		"orders_completed": 420,
-		"items_audited": 1000,
-		"items_put": 800
+		"start_time": "6",
+		"items_audited": 0,
+		"end_time": "7",
+		"orders_completed": 0,
+		"items_put": null
 	}, {
-		"start_time": 17, 
-		"end_time": 18,
-		"orders_completed": 200,
-		"items_audited": 1100,
-		"items_put": 900
+		"start_time": "7",
+		"items_audited": 0,
+		"end_time": "8",
+		"orders_completed": 0,
+		"items_put": null
 	}, {
-		"start_time": 18, 
-		"end_time": 19,
-		"orders_completed": 300,
-		"items_audited": 700,
-		"items_put": 800
+		"start_time": "8",
+		"items_audited": 0,
+		"end_time": "9",
+		"orders_completed": 0,
+		"items_put": null
 	}, {
-		"start_time": 19,
-		"end_time": 20,
-		"orders_completed": 200,
-		"items_audited": 500,
-		"items_put": 700
+		"start_time": "9",
+		"items_audited": 0,
+		"end_time": "10",
+		"orders_completed": 0,
+		"items_put": null
 	}, {
-		"start_time": 20, 
-		"end_time": 21,
-		"orders_completed": 300,
-		"items_audited": 600,
-		"items_put": 500
+		"start_time": "10",
+		"items_audited": 0,
+		"end_time": "11",
+		"orders_completed": 0,
+		"items_put": null
 	}, {
-		"start_time": 21, 
-		"end_time": 22,
-		"orders_completed": 350,
-		"items_audited": 800,
-		"items_put": 600
+		"start_time": "11",
+		"items_audited": 0,
+		"end_time": "12",
+		"orders_completed": 0,
+		"items_put": null
 	}, {
-		"start_time": 22, 
-		"end_time": 23,
-		"orders_completed": 400,
-		"items_audited": 500,
-		"items_put": 500
+		"start_time": "12",
+		"items_audited": 0,
+		"end_time": "13",
+		"orders_completed": 0,
+		"items_put": null
 	}, {
-		"start_time": 23, 
-		"end_time": 24,
-		"orders_completed": 420,
-		"items_audited": 900,
-		"items_put": 400
-	}
-	],
-	"resource_type": "histogram_details"
+		"start_time": "13",
+		"items_audited": 0,
+		"end_time": "14",
+		"orders_completed": 0,
+		"items_put": null
+	}, {
+		"start_time": "14",
+		"items_audited": 0,
+		"end_time": "15",
+		"orders_completed": 7,
+		"items_put": null
+	}, {
+		"start_time": "15",
+		"items_audited": 0,
+		"end_time": "16",
+		"orders_completed": 1,
+		"items_put": null
+	}, {
+		"start_time": "16",
+		"items_audited": 0,
+		"end_time": "17",
+		"orders_completed": 0,
+		"items_put": 1
+	}, {
+		"start_time": "17",
+		"items_audited": 0,
+		"end_time": "18",
+		"orders_completed": 0,
+		"items_put": null
+	}],
+	"resource_type": "histogram"
 }
 
 export const resTypeChargersDetail = {
@@ -869,6 +892,127 @@ export const resTypeNotify = {
       "level": "error"
     }]
 };
+
+export const resTypeSnapShot = {
+  "categories": [
+    {
+      "colorCode": "#7983E6",
+      "name":"Apparel",
+      "cbm": 10,
+      "daysHand": 1.4
+    },
+    {
+      "colorCode": "#89AE51",
+      "name":"Shoes",
+      "cbm": 10,
+      "daysHand": 1.4
+    },
+    {
+      "colorCode": "#D2BA3F",
+      "name":"Cosmetics",
+      "cbm": 10,
+      "daysHand": 1.4
+    },
+    {
+      "colorCode": "#A44550",
+      "name":"Books",
+      "cbm": 10,
+      "daysHand": 1.4
+    },
+    {
+      "colorCode": "#8F39EC",
+      "name":"Electronics",
+      "cbm": 10,
+      "daysHand": 1.4
+    },
+    {
+      "colorCode": "#C1C1C1",
+      "name":"Others",
+      "cbm": 10,
+      "daysHand": 1.4
+    }],
+    "legendData" : {
+		"data":[{"name":"Pick","color":"#C69332"},{"name":"Put","color":"#5B62BC"}],
+		"config":{
+			"ypos":10,
+			"xpos":20,
+			"xIncrement":80
+		}
+	},
+    "total_space":1000,
+    "remaining_space":40,
+    "resource_type": "inventory"
+};
+
+export const resTypeSnapShotToday = {
+	"resource_type": "inventory_today",
+	"complete_data": [{
+		"date": "2016-10-25",
+		"opening_stock": 100000,
+		"items_put": 4976,
+		"items_picked": 11098,
+		"cbm_used": 780,
+		"total_skus": 1112,
+		"warehouse_utilization": 43,
+		"category_data": [{
+			"category_type": "apparel",
+			"cbm_used": 100,
+			"days_on_hand": 4.5,
+			"warehouse_utilization": 10
+		},
+		{
+			"category_type": "shoes",
+			"cbm_used": 100,
+			"days_on_hand": 4.5,
+			"warehouse_utilization": 20
+		},
+		
+		{
+			"category_type": "others",
+			"cbm_used": 207,
+			"days_on_hand": 2,
+			"warehouse_utilization": 13
+		}]
+	}]
+}
+
+export const resTypeSnapShotHistory = {
+	"resource_type": "inventory_history",
+	"complete_data": [{
+		"date": "2016-10-25",
+		"opening_stock": 100000,
+		"items_put": 4976,
+		"items_picked": 11098,
+		"cbm_used": 780,
+		"total_skus": 1112,
+		"warehouse_utilization": 43,
+		"category_data": [{
+			"category_type": "apparel",
+			"cbm_used": 100,
+			"days_on_hand": 4.5,
+			"warehouse_utilization": 10
+		}, {
+			"category_type": "others",
+			"cbm_used": 207,
+			"days_on_hand": 2,
+			"warehouse_utilization": 33
+		}]
+	}, {
+		"date": "2016-10-24",
+		"opening_stock": 47000,
+		"items_put": 20040,
+		"items_picked": 400,
+		"cbm_used": 408,
+		"total_skus": 780,
+		"warehouse_utilization": 23,
+		"category_data": [{
+			"category_type": "others",
+			"cbm_used": 77,
+			"days_on_hand": 1,
+			"warehouse_utilization": 23
+		}]
+	}]
+}
 
 
 

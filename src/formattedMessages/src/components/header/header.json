@@ -12,6 +12,6 @@
   {
     "id": "header.user_post",
     "description": "User post",
-    "defaultMessage": "{user_post}"
+    "defaultMessage": "--"
   }
 ]

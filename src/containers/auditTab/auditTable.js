@@ -20,7 +20,7 @@ class AuditTable extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("we are here")
+    
       this.tableState(nextProps,this);
       //this.props.refreshData();
   }
@@ -322,7 +322,7 @@ class AuditTable extends React.Component {
 }
 
 function mapStateToProps(state, ownProps){
-  console.log(state);
+  
   return {
     tableData: state.currentTableState.currentTableState || [],
   };
