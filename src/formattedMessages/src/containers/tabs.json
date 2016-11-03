@@ -43,10 +43,5 @@
     "id": "usersStatus.tab.heading",
     "description": "users Status",
     "defaultMessage": "35 users logged in"
-  },
-  {
-    "id": "inventoryStatus.tab.heading",
-    "description": "inventory Status",
-    "defaultMessage": "78% space utilized"
   }
 ]

@@ -68,8 +68,8 @@ class Tabs extends React.Component{
 
     let usersStatus = <FormattedMessage id="usersStatus.tab.heading" description="users Status " 
               defaultMessage ="35 users logged in"/>  
-    let inventoryStatus = <FormattedMessage id="inventoryStatus.tab.heading" description="inventory Status " 
-              defaultMessage ="78% space utilized"/>            
+    // let inventoryStatus = <FormattedMessage id="inventoryStatus.tab.heading" description="inventory Status " 
+    //           defaultMessage ="78% space utilized"/>            
               
 	const item1 = [
       { tab: overview, Status: overviewStatus, currentState:'gorOffline' }
@@ -87,9 +87,9 @@ class Tabs extends React.Component{
       { tab: users, Status: usersStatus, currentState:'gorOffline' }
     ]
     
-    const item6 = [
-      { tab: inventory, Status: inventoryStatus, currentState:'gorOffline' }
-    ]
+    // const item6 = [
+    //   { tab: inventory, Status: inventoryStatus, currentState:'gorOffline' }
+    // ]
     
     var selectClass = {overview:"gorMainBlock", system:"gorMainBlock",orders:"gorMainBlock", audit:"gorMainBlock", users:"gorMainBlock"};
 
@@ -115,9 +115,9 @@ class Tabs extends React.Component{
       <Tab items={item4} changeClass={(this.props.tab.toUpperCase() === AUDIT ? 'sel' :"")} subIcons={true}/>
       </Link>
 
-    <Link to="/inventory" onClick = {this.handleTabClick.bind(this,INVENTORY)}>
-      <Tab items={item6} changeClass={(this.props.tab.toUpperCase() === INVENTORY ? 'sel' :"")} subIcons={true}/>
-    </Link>
+    // <Link to="/inventory" onClick = {this.handleTabClick.bind(this,INVENTORY)}>
+    //   <Tab items={item6} changeClass={(this.props.tab.toUpperCase() === INVENTORY ? 'sel' :"")} subIcons={true}/>
+    // </Link>
 		
 		<Link to="/users" onClick = {this.handleTabClick.bind(this,USERS)}>
 			<Tab items={item5} changeClass={(this.props.tab.toUpperCase() === USERS ? 'sel' :"")} subIcons={false}/>
