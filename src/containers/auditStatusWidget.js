@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import Tilex from '../components/tile1x/Tilex';
 import { connect } from 'react-redux';
-import { FormattedMessage,FormattedNumber,FormattedPlural } from 'react-intl';
+import { FormattedMessage,FormattedNumber } from 'react-intl';
 
 class AuditStatusWidget extends React.Component{
 	/**
@@ -41,16 +41,15 @@ class AuditStatusWidget extends React.Component{
 		else{
 			value = <FormattedNumber value={value}/>
 			auditThroughput = <FormattedNumber value={auditThroughput}/>
-			pluralMsg = <FormattedPlural
-						    value={totalAudit}
-						    one='PPS'
-						    other='PPS'
-						/>
+			
+			
 			lowStr = <FormattedMessage id="widget.audit.throughput" description='Throughput message' 
-        					defaultMessage='{count} {pluralMsg} auditing {throughput} items/hr'
+        					defaultMessage='{count,number} {count, plural,
+                      one {PPS}
+                      other {PPS}
+                    } auditing {throughput} items/hr'
         					values={{
 						        count: totalAudit,
-						        pluralMsg:pluralMsg,
 						        throughput:auditThroughput
 						    }}/>;
 		}

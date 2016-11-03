@@ -42,7 +42,7 @@
   {
     "id": "users.edit.changepassword.subheading",
     "description": "Subheading for create password",
-    "defaultMessage": "Min of 6 digits will be required for logging into the Operator Interface"
+    "defaultMessage": "New password will be effective when user log-in next time"
   },
   {
     "id": "users.edit.password.field1",
@@ -62,7 +62,7 @@
   {
     "id": "users.edit.password.query",
     "description": "Text for change password",
-    "defaultMessage": "Change Password?"
+    "defaultMessage": "Change Password"
   },
   {
     "id": "users.edit.password.button",

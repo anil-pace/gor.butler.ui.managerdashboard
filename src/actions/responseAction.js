@@ -1,4 +1,4 @@
-import {WS_INIT,BUTLERS_DATA,PPS_DATA,PUT_DATA,AUDIT_DATA,INVENTORY_DATA,ORDERS_DATA,CHARGERS_DATA,THROUGHPUT_DATA,HISTOGRAM_DATA,CHARGERS_DETAIL,BUTLERS_DETAIL,PPS_DETAIL,PPS_PERFORMANCE, USER_DETAILS,PARSE_PPS} from '../constants/appConstants'
+import {WS_INIT,BUTLERS_DATA,PPS_DATA,PUT_DATA,AUDIT_DATA,INVENTORY_DATA_TODAY,INVENTORY_DATA_HISTORY,ORDERS_DATA,CHARGERS_DATA,THROUGHPUT_DATA,HISTOGRAM_DATA,CHARGERS_DETAIL,BUTLERS_DETAIL,PPS_DETAIL,PPS_PERFORMANCE, USER_DETAILS,PARSE_PPS} from '../constants/appConstants'
 //import {getFetchData} from 'headerAction'
 
 export function receivePpsData(data){
@@ -14,9 +14,15 @@ export function receiveButlersData(data){
 		data
 	}
 }
-export function receiveInventoryData(data){
+export function receiveInventoryTodayData(data){
 	return {
-		type:INVENTORY_DATA,
+		type:INVENTORY_DATA_TODAY,
+		data
+	}
+}
+export function receiveInventoryHistoryData(data){
+	return {
+		type:INVENTORY_DATA_HISTORY,
 		data
 	}
 }
@@ -101,6 +107,13 @@ export function recievePPSperformance(data){
 export function recieveUserDetails(data){
 	return {
 		type: USER_DETAILS,
+		data
+	}
+}
+
+export function recieveInventoryDetails(data){
+	return {
+		type:INVENTORY_DATA,
 		data
 	}
 }

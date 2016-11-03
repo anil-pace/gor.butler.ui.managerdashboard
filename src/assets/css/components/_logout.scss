@@ -19,7 +19,7 @@
 	}
 	.gor-logout-btn{
 		font-family:'Source Sans Pro Bold', sans-serif;
-	    width:calculateRem(113px);
+	    min-width:calculateRem(113px);
 	    height:calculateRem(35px);
 	    font-size:14px;
 	    background:#f36f36;

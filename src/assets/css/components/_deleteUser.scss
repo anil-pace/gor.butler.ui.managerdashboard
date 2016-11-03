@@ -2,23 +2,25 @@
 .gor-align-middle{
 	vertical-align:middle;
 }
-.gor-align-sub{
-	vertical-align:sub;
+.gor-align-top{
+	vertical-align:top;
 }
 .gor-delete{
 	width:50%;
-	min-height:calculateRem(260px);
+	min-height:calculateRem(240px);
 	background:#ffffff;
 	border-radius:3px;
 	font-size:20px;
 	margin:auto;
 	clear:both;
+	margin-top:30vh;
 	.gor-delete-text{
 		margin:auto;
 		padding:calculateRem(30px);
 		min-height:calculateRem(150px);
 		.gor-delete-line{
 			display:inline-block;
+			width:75%;
 			.gor-delete-query{
 				display:inline;
 			}
@@ -26,11 +28,10 @@
 	}
 	.gor-delete-bottom{
 		text-align:right;
-		margin-right:calculateRem(20px);
 	}
 	.gor-delete-btn{
 		font-family:'Source Sans Pro Bold', sans-serif;
-	    width:calculateRem(113px);
+	    min-width:calculateRem(113px);
 	    height:calculateRem(35px);
 	    font-size:14px;
 	    background:#f36f36;

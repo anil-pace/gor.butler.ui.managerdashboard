@@ -132,7 +132,14 @@ export const wsOverviewData = {
           "type": "subscribe",
           "data": [
                 {
-                  "resource_id": "inventory",
+                  "resource_id": "inventory_history",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "inventory_today",
                   "details": {
                     "data": "complete_v2",
                     "callback": []
@@ -141,7 +148,7 @@ export const wsOverviewData = {
                 
           ]
 },
-"orders":{
+"waves":{
           "type": "subscribe",
           "data": [
                 {

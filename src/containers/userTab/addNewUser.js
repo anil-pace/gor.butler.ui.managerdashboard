@@ -5,10 +5,11 @@ import {validateID, validateName, validatePassword, resetForm} from '../../actio
 import {userRequest} from '../../actions/userActions';
 import {ADD_USER,CHECK_ID,ERROR,SUCCESS,INFO,GET_ROLES} from '../../constants/appConstants';
 import {ROLE_URL,CHECK_USER,HEADER_URL} from '../../constants/configConstants';
-import {INVALID_ID,EMPTY_PWD,TYPE_SUCCESS,EMPTY_NAME,INVALID_NAME,INVALID_PWD,MATCH_PWD} from '../../constants/messageConstants';
+import {INVALID_ID,INVALID_FORMAT,TYPE_SUCCESS} from '../../constants/messageConstants';
 import { connect } from 'react-redux';
 import FieldError from '../../components/fielderror/fielderror';
-import RadioGroup from './radioGroup';
+import RoleGroup from './roleGroup';
+import { nameStatus, passwordStatus } from '../../utilities/fieldCheck';
 
 class AddUser extends React.Component{
   constructor(props) 
@@ -31,15 +32,22 @@ class AddUser extends React.Component{
         this.props.userRequest(userData);
   }
   _checkId(){
-    let userid=this.userId.value, idInfo;
-    if(userid.length<1)
-      {
+    let userid=this.userId.value, idInfo,format=  /[!@#$%^&*()_+\-=\[\]{};':"\\|,<>\/?]/;
+    if(userid.length<1||userid.length>30)
+    {
             idInfo={
               type:ERROR,
               msg:INVALID_ID           
             }
-      }
-      else
+    }
+    else if(format.test(userid))
+    {
+            idInfo={
+              type:ERROR,
+              msg:INVALID_FORMAT           
+            }
+    }
+    else
       {
             idInfo={
               type:SUCCESS,
@@ -61,53 +69,14 @@ class AddUser extends React.Component{
     }
    }
   _checkName(){
-      let firstname=this.firstName.value, lastname=this.lastName.value, format=  /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, nameInfo;
-          if(firstname.length<1||lastname.length<1||firstname.length>50||lastname.length>50)
-          {
-            nameInfo={
-              type:ERROR,
-              msg:EMPTY_NAME         
-            }
-          }
-          else if(format.test(firstname)||format.test(lastname))
-          {
-            nameInfo={
-              type:ERROR,
-              msg:INVALID_NAME           
-            }            
-          }
-          else
-          {
-            nameInfo={
-              type:SUCCESS,
-              msg:TYPE_SUCCESS               
-            };            
-          };   
+      let firstname=this.firstName.value, lastname=this.lastName.value, nameInfo;
+      nameInfo=nameStatus(firstname,lastname);
       this.props.validateName(nameInfo);
+      return nameInfo.type;
    }
   _checkPwd(){
     let pwd1=this.password1.value,pwd2=this.password2.value, passwordInfo;
-          if(pwd1.length<6||!pwd1.replace(/\s/g, '').length)
-          {
-            passwordInfo={
-              type:ERROR,
-              msg:INVALID_PWD           
-            };            
-          }
-          else if(pwd1!=pwd2)
-          {
-            passwordInfo={
-              type:ERROR,
-              msg:MATCH_PWD           
-            };            
-          }
-          else
-          {
-            passwordInfo={
-              type:SUCCESS,
-              msg:TYPE_SUCCESS               
-            };            
-          };   
+    passwordInfo=passwordStatus(pwd1,pwd2);
     this.props.validatePassword(passwordInfo);
     return passwordInfo.type;
   }
@@ -126,12 +95,12 @@ class AddUser extends React.Component{
           this._checkId();
           return;
         }
-        else if(!this.props.nameCheck.type)
+        if(!this.props.nameCheck.type)
         {
-          this._checkName();
-          return;
+          if(!this._checkName())
+            return;
         }
-        else if(!this.props.passwordCheck.type)
+        if(!this.props.passwordCheck.type)
         {
           if(!this._checkPwd())
             return;
@@ -206,7 +175,7 @@ class AddUser extends React.Component{
 
             </div>
 
-          {this.props.roleInfo?(<RadioGroup operator={this.props.roleInfo.msg.operator} manager={this.props.roleInfo.msg.manager} />):''}
+          {this.props.roleInfo?(<RoleGroup operator={this.props.roleInfo.msg.operator} manager={this.props.roleInfo.msg.manager} />):''}
             
             <div className='gor-usr-details'>
             <div className='gor-usr-hdlg'><FormattedMessage id="users.add.password.heading" description='Heading for create password' 
@@ -226,7 +195,7 @@ class AddUser extends React.Component{
 
             </div>
             <p className='gor-submit'>
-             <button className="gor-add-btn"><FormattedMessage id="users.add.password.button" description='Text for add new user button' 
+             <button type="submit" className="gor-add-btn"><FormattedMessage id="users.add.password.button" description='Text for add new user button' 
             defaultMessage='Add new user'/></button>
             </p>
             </div>

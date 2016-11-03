@@ -1,0 +1,17 @@
+[
+  {
+    "id": "itemCat.category.heading",
+    "description": "Item category table's column category heading",
+    "defaultMessage": "Category"
+  },
+  {
+    "id": "itemCat.CBM.heading",
+    "description": "Item category table's column CBM heading",
+    "defaultMessage": "CBM Used"
+  },
+  {
+    "id": "itemCat.daysOnHand.heading",
+    "description": "Item category table's column days On Hand heading",
+    "defaultMessage": "Days on Hand"
+  }
+]

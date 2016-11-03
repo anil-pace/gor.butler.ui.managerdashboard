@@ -15,6 +15,17 @@ export const messages = defineMessages({
         id: 'login.form.button',
         description: 'Text for button',
         defaultMessage: 'Login'
+    },
+    placeholderDropDownPPS:{
+        id: 'pps.dropdown.placeholder',
+        description: 'placeholder for pps mode change',
+        defaultMessage: 'Change PPS mode'
+    },
+    placeholderFilter:{
+        id: 'table.filter.placeholder',
+        description: 'placeholder for table filter',
+        defaultMessage: 'Filter by keywords'
     }
+
 });
 

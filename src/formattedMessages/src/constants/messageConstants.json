@@ -50,6 +50,11 @@
     "defaultMessage": "Please enter a valid User ID"
   },
   {
+    "id": "user.invalid.format",
+    "description": "Text for invalid user ID format",
+    "defaultMessage": "Please use only letters (a-z), numbers, and periods"
+  },
+  {
     "id": "login.empty.password",
     "description": "Text for empty password",
     "defaultMessage": "Please enter a password"
@@ -57,21 +62,121 @@
   {
     "id": "user.empty.name",
     "description": "Text for empty user name",
-    "defaultMessage": "Minimum 6 characters required"
+    "defaultMessage": "Please enter a name"
   },
   {
     "id": "user.invalid.name",
     "description": "Text for invalid user name",
-    "defaultMessage": "Special characters \"~\",\"@\" and \"%\" are not allowed"
+    "defaultMessage": "Special characters like \"~\",\"@\" and \"%\" are not allowed"
   },
   {
     "id": "user.invalid.password",
     "description": "Text for invalid password",
-    "defaultMessage": "Minimum 6 characters required"
+    "defaultMessage": "Please enter a password of at least 8 alphanumeric characters"
   },
   {
     "id": "user.match.password",
     "description": "Text for passwords not matching",
-    "defaultMessage": "Passwords do not match"
+    "defaultMessage": "Both password entered do not match. Please try again"
+  },
+  {
+    "id": "msu.name.prefix",
+    "description": "prefix for msu name",
+    "defaultMessage": "MSU"
+  },
+  {
+    "id": "chargingStation.name.prefix",
+    "description": "prefix for charging station name",
+    "defaultMessage": "CS"
+  },
+  {
+    "id": "pps.name.prefix",
+    "description": "prefix for pps name",
+    "defaultMessage": "PPS"
+  },
+  {
+    "id": "audit.invalid.sku",
+    "description": "Text for invalid SKU ID",
+    "defaultMessage": "Please enter a valid SKU Number"
+  },
+  {
+    "id": "audit.invalid.location",
+    "description": "Text for invalid location ID",
+    "defaultMessage": "Please enter a valid location Number"
+  },
+  {
+    "id": "notify.error.audit.e025",
+    "description": "Text for invalid sku number or location",
+    "defaultMessage": "Either location or sku does not exist"
+  },
+  {
+    "id": "notify.error.audit.g016",
+    "description": "Text for unsuccessful audit deletion",
+    "defaultMessage": "Given audit does not exists"
+  },
+  {
+    "id": "notify.error.audit.g015",
+    "description": "Text for type other than sku and location",
+    "defaultMessage": "Input not a sku or location"
+  },
+  {
+    "id": "notify.error.audit.AE001",
+    "description": "Text for invalid audit ID",
+    "defaultMessage": "Audit Id does not exists"
+  },
+  {
+    "id": "notify.error.audit.AE002",
+    "description": "Text for invalid PPS",
+    "defaultMessage": "Valid PPS not found for Audit"
+  },
+  {
+    "id": "notify.error.audit.AE006",
+    "description": "Text for already processed audit",
+    "defaultMessage": "Audit ID already processed"
+  },
+  {
+    "id": "notify.create.audit.success",
+    "description": "Text for successfull audit creation",
+    "defaultMessage": "New audit task created successfully"
+  },
+  {
+    "id": "notify.start.audit.success",
+    "description": "Text for successfull audit creation",
+    "defaultMessage": "Audit started successfully"
+  },
+  {
+    "id": "notify.delete.audit.success",
+    "description": "Text for successfull audit deletion",
+    "defaultMessage": "Audit deleted successfully"
+  },
+  {
+    "id": "notify.delete.audit.processed",
+    "description": "Text for already processed audit",
+    "defaultMessage": "Audit already processed. Cannot delete"
+  },
+  {
+    "id": "notify.error.user.fail",
+    "description": "Text for error in updating user",
+    "defaultMessage": "Error in updating user"
+  },
+  {
+    "id": "notify.error.user.response",
+    "description": "Text for error in response",
+    "defaultMessage": "Error in response"
+  },
+  {
+    "id": "notify.error.audit.create",
+    "description": "Text for error in creating audit",
+    "defaultMessage": "Error in creating audit"
+  },
+  {
+    "id": "notify.error.api",
+    "description": "Text for unregistered API response",
+    "defaultMessage": "API response not registered"
+  },
+  {
+    "id": "notify.error.connection",
+    "description": "Text for connection refused",
+    "defaultMessage": "Connection refused"
   }
 ]

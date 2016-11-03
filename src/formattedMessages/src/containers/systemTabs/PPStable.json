@@ -1,8 +1,38 @@
 [
   {
+    "id": "PPS.table.pickDrop",
+    "description": "pick dropdown option for PPS",
+    "defaultMessage": "Put"
+  },
+  {
+    "id": "PPS.table.putDrop",
+    "description": "put dropdown option for PPS",
+    "defaultMessage": "Pick"
+  },
+  {
+    "id": "PPS.table.auditDrop",
+    "description": "audit dropdown option for PPS",
+    "defaultMessage": "Audit"
+  },
+  {
     "id": "pps.table.heading",
     "description": "Heading for PPS",
     "defaultMessage": "PPS"
+  },
+  {
+    "id": "PPStable.selected",
+    "description": "selected pps for ppsSelected",
+    "defaultMessage": "{selected} selected"
+  },
+  {
+    "id": "PPStable.Totalpps",
+    "description": "total pps",
+    "defaultMessage": "{ppsTotal} PPS"
+  },
+  {
+    "id": "PPStable.Subpps",
+    "description": "sub pps",
+    "defaultMessage": "Total: {ppsTotal}"
   },
   {
     "id": "PPS.table.status",
@@ -15,6 +45,11 @@
     "defaultMessage": "OPERATING MODE"
   },
   {
+    "id": "PPStable.ppsState",
+    "description": "pps state for PPStable",
+    "defaultMessage": "Pick ({pick}) . Put ({put}) . Audit ({audit}) . Not set ({notSet})"
+  },
+  {
     "id": "PPS.table.performance",
     "description": "performance Status for PPS",
     "defaultMessage": "PERFORMANCE"
@@ -23,5 +58,10 @@
     "id": "PPS.table.operatorAssigned",
     "description": "operatorAssigned for PPS",
     "defaultMessage": "OPERATOR ASSIGNED"
+  },
+  {
+    "id": "PPStable.totalOperator",
+    "description": "totalOperator for PPStable",
+    "defaultMessage": "{operatorNum} operator"
   }
 ]

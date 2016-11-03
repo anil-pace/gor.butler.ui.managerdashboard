@@ -1,4 +1,4 @@
-import {AUDIT_DATA} from '../constants/appConstants'; 
+import {AUDIT_DATA,SET_AUDIT,RESET_AUDIT,SETAUDIT_PPS} from '../constants/appConstants'; 
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -18,7 +18,24 @@ export  function auditInfo(state={},action){
           return Object.assign({}, state, { 
             "auditData" : auditData
           })
+          break;
 
+    case SET_AUDIT:
+          return Object.assign({}, state, { 
+            "auditType" : action.data
+          })
+          break;
+
+    case RESET_AUDIT:
+          return Object.assign({}, state, { 
+            "auditType" : null
+          })
+          break;
+    case SETAUDIT_PPS:
+          return Object.assign({}, state, { 
+            "ppsList" : action.data
+          })
+          break;        
     default:
       return state
   }

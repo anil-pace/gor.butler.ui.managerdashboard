@@ -1,0 +1,27 @@
+[
+  {
+    "id": "waveDetail.progress.status",
+    "description": "progress status for wave",
+    "defaultMessage": "In Progress"
+  },
+  {
+    "id": "waveDetail.completed.status",
+    "description": "completed status for wave",
+    "defaultMessage": "Completed"
+  },
+  {
+    "id": "waveDetail.breached.status",
+    "description": "breached status for wave",
+    "defaultMessage": "Breached"
+  },
+  {
+    "id": "waveDetail.pending.status",
+    "description": "pending status for wave",
+    "defaultMessage": "Pending"
+  },
+  {
+    "id": "waveDetail.id.prefix",
+    "description": "waveDetail id prefix",
+    "defaultMessage": "WAVE-{waveId}"
+  }
+]

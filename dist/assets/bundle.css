@@ -31,6 +31,13 @@ ol, ul {
   list-style: none;
 }
 
+li {
+  font-family: 'Source Sans Pro Semibold', sans-serif;
+  font-size: 14px;
+  color: #000000;
+  margin-top: 20px;
+}
+
 article, aside, details, figcaption, figure,
 footer, header, nav, section {
   display: block;
@@ -39,6 +46,10 @@ footer, header, nav, section {
 q:before, q:after {
   content: '';
   content: none;
+}
+
+input[type="radio"], input[type="checkbox"] {
+  margin-right: 15px;
 }
 
 a {
@@ -228,16 +239,16 @@ body {
 }
 
 .iStock {
-  background-position: -206px 0;
+  background-position: -206px 4px;
   width: 45px;
 }
 
 .iAudit {
-  background-position: -256px -5px;
+  background-position: -256px 4px;
 }
 
 .iPick {
-  background-position: -308px -1px;
+  background-position: -308px 4px;
 }
 
 .overview-tile-ontime-icon {
@@ -716,23 +727,14 @@ body {
   height: 100vh;
 }
 
-.gorTab.gorContainer {
+.gorTabs .gorTab.gorContainer {
   background-color: #4d5055;
   width: auto;
   display: inline-block;
   height: 60px;
 }
 
-.gorTab .gorMainBlock:hover {
-  background-color: #323539;
-}
-
-.gorTab .gorInline {
-  display: inline-block;
-  width: 100%;
-}
-
-.gorTab .gorMainBlock {
+.gorTabs .gorTab .gorMainBlock {
   width: 150px;
   padding-right: 20px;
   padding-left: 20px;
@@ -744,7 +746,20 @@ body {
   vertical-align: middle;
 }
 
-.gorTab .gor-upperText {
+.gorTabs .gorTab .gorMainBlock:hover {
+  background-color: #323539;
+}
+
+.gorTabs .gorTab .gorMainBlock.sel {
+  background-color: #323539;
+}
+
+.gorTabs .gorTab .gorInline {
+  display: inline-block;
+  width: 100%;
+}
+
+.gorTabs .gorTab .gor-upperText {
   font-family: "source sans pro";
   font-size: 18px;
   font-weight: bold;
@@ -754,66 +769,54 @@ body {
   width: 75%;
 }
 
-.gorTab .gorSubText {
+.gorTabs .gorTab .gorSubText {
   font-size: 14px;
   padding-top: 0px;
   font-weight: bold;
 }
 
-.gorTab .gorOverview {
+.gorTabs .gorTab .gorOverview {
   font-family: "source sans pro";
   color: #ffffff;
 }
 
-.gorTab .gorOnline {
+.gorTabs .gorTab .gorOnline {
   font-family: "source sans pro";
   color: #10c469;
 }
 
-.gorTab .gorOffline {
+.gorTabs .gorTab .gorOffline {
   font-family: "source sans pro";
   color: #9C9FA0;
 }
 
-.gorTab .gorEvent {
+.gorTabs .gorTab .gorEvent {
   font-family: "source sans pro";
   color: #27aae1;
 }
 
-.gorTab .gorRisk {
+.gorTabs .gorTab .gorRisk {
   font-family: "source sans pro";
   color: #f99405;
 }
 
-.gorTab .gorError {
+.gorTabs .gorTab .gorError {
   font-family: "source sans pro";
   color: #fc3838;
 }
 
-.gorTab .gorEmergency {
+.gorTabs .gorTab .gorEmergency {
   font-family: "source sans pro";
   color: #ffffff;
   background: #fc3838;
 }
 
-.gorTab .gorMainBlockSelect {
-  width: 150px;
-  padding-right: 20px;
-  padding-left: 20px;
-  height: 62px;
-  display: table-cell;
-  border-right: .5px solid black;
-  cursor: pointer;
-  background-color: #323539;
-  vertical-align: middle;
-}
-
-.gorTab .gorIconsInline {
+.gorTabs .gorTab .gorIconsInline {
   display: inline-block;
   vertical-align: super;
 }
 
-.gorTab .gorInlineDisplay {
+.gorTabs .gorTab .gorInlineDisplay {
   display: inline-block;
   padding-right: 16px;
 }
@@ -830,13 +833,13 @@ body {
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2);
   border-radius: 0.1875rem;
   display: inline-block;
-  min-height: 9.375rem;
-  margin: 1% 1% 0% 2%;
+  min-height: 10.625rem;
+  margin: 1% 2% 0% 1%;
   font-size: 0;
 }
 
 .gor-tile.gor-double {
-  width: 96%;
+  width: 97%;
 }
 
 .gor-tile.gor-single {
@@ -852,8 +855,14 @@ body {
 }
 
 .gor-tile .gor-up-tile {
-  padding: 27px 10px 10px 20px;
+  padding: 30px 10px 10px 20px;
   min-height: 5rem;
+}
+
+.gor-tile .gor-up-tile .gor-tile-right {
+  width: 50px;
+  display: inline-block;
+  height: 55px;
 }
 
 .gor-tile .gor-tile-left {
@@ -903,19 +912,12 @@ body {
   color: #aaaaaa;
 }
 
-.gor-tile .gor-tile-right {
-  width: 50px;
-  display: inline-block;
-  vertical-align: top;
-  height: 55px;
-}
-
 .gor-tile .gor-low-tile {
   font-family: 'Source Sans Pro semibold', sans-serif;
   font-size: 1rem;
   background: #F7F7F7;
   color: #666666;
-  padding: 15px 0px 15px 20px;
+  padding: 17px 0px 17px 20px;
   min-height: 1rem;
   overflow: hidden;
   vertical-align: middle;
@@ -1307,7 +1309,7 @@ body {
 .gor-login-form .gor-login-mid {
   text-align: center;
   background: #FFFFFF;
-  border-radius: 5px;
+  border-radius: 3px;
   color: #979797;
   width: 38%;
   min-height: 22.5rem;
@@ -1352,12 +1354,20 @@ body {
   color: #333333;
 }
 
-.gor-login-form .gor-login-mid .gor-login-field:hover .gor-login-user {
+.gor-login-form .gor-login-mid .gor-login-field.gor-input-typing {
+  color: #666666;
+}
+
+.gor-login-form .gor-login-mid .gor-login-field.gor-input-typing .gor-login-user {
   background-position: -273px -77px;
 }
 
-.gor-login-form .gor-login-mid .gor-login-field:hover .gor-login-password {
+.gor-login-form .gor-login-mid .gor-login-field.gor-input-typing .gor-login-password {
   background-position: -291px -77px;
+}
+
+.gor-login-form .gor-login-mid .gor-login-field.gor-input-typing:focus {
+  color: #333333;
 }
 
 .gor-login-form .gor-login-mid .gor-login-field .field {
@@ -1397,7 +1407,7 @@ body {
   font-size: 18px;
   margin: auto;
   margin-top: 10px;
-  width: 70%;
+  width: 75%;
 }
 
 .gor-login-form .gor-login-mid .gor-login-btn {
@@ -1409,6 +1419,7 @@ body {
   font-size: 1.25rem;
   border-radius: 3px;
   font-family: 'Source Sans Pro Bold', sans-serif;
+  cursor: pointer;
 }
 
 .gor-login-form a {
@@ -2838,6 +2849,18 @@ progress::-moz-progress-bar {
   vertical-align: sub;
 }
 
+.gor-auditCreate-btn {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  width: 125px;
+  height: 35px;
+  font-size: 14px;
+  background: #4d5055;
+  color: #ffffff;
+  border-radius: 3px;
+  margin-left: 30px;
+  vertical-align: sub;
+}
+
 .gor-dropDown-firstInnerElement {
   display: inline-block;
   padding-right: 15px;
@@ -2869,6 +2892,17 @@ progress::-moz-progress-bar {
   height: 10px;
   width: 100px;
   display: inline-block;
+}
+
+.gor-audit-actions-button {
+  display: inline-block;
+  padding-right: 20px;
+  width: 110px;
+}
+
+.gor-audit-actions-drop {
+  display: inline-block;
+  width: 150px;
 }
 
 .gorSubTab.gorContainer {
@@ -2931,7 +2965,6 @@ progress::-moz-progress-bar {
   background: #f36f36;
   color: #ffffff;
   border-radius: 3px;
-  margin-left: 50px;
 }
 
 .gor-field-error {
@@ -2939,6 +2972,7 @@ progress::-moz-progress-bar {
   color: #EC1C24;
   font-size: 18px;
   margin-top: 10px;
+  width: 75%;
 }
 
 .gor-input-error {
@@ -2956,6 +2990,7 @@ progress::-moz-progress-bar {
 
 .gor-usr-form {
   margin-top: 120px;
+  margin-bottom: 120px;
 }
 
 .gor-modal-content {
@@ -2963,13 +2998,15 @@ progress::-moz-progress-bar {
   margin: auto;
   padding: 20px;
   width: 100%;
+  min-height: 100vh;
 }
 
 .gor-modal-content .gor-sub-head {
   font-family: 'Source Sans Pro Regular', sans-serif;
   font-size: 12px;
   color: #000000;
-  margin-top: 10px;
+  margin-top: 0.3125rem;
+  width: 75%;
 }
 
 .gor-modal-content .gor-modal-head {
@@ -3018,7 +3055,7 @@ progress::-moz-progress-bar {
 }
 
 .gor-modal-content .gor-usr-details .gor-choose {
-  margin-left: 25px;
+  margin-left: 30px;
 }
 
 .gor-modal-content .gor-usr-details .gor-usr-hdlg {
@@ -3032,11 +3069,6 @@ progress::-moz-progress-bar {
   font-size: 14px;
   color: #000000;
   margin-top: 25px;
-}
-
-.gor-modal-content .gor-usr-details :a {
-  margin-top: 10px;
-  text-decoration: none;
 }
 
 .gor-modal-content .gor-usr-details .gor-usr-fdlg {
@@ -3056,6 +3088,12 @@ progress::-moz-progress-bar {
 .gor-modal-content .gor-usr-details .gor-usr-fdlg:disabled {
   border: 1px solid #cccccc;
   background: #f7f7f7;
+}
+
+.gor-modal-content .gor-usr-details a {
+  line-height: 25px;
+  color: #27aae1;
+  font-size: 14px;
 }
 
 .gor-modal-content .gor-usr-details .gor-usr-field {
@@ -3097,18 +3135,23 @@ progress::-moz-progress-bar {
   margin-left: 0px;
 }
 
+.gor-modal-content .gor-submit .gor-add-btn:disabled {
+  background: #dddddd;
+}
+
 .gor-footer {
   background: #4D5055;
   color: #CCCCCC;
-  border-top: solid 1px #cccccc;
+  border-top: solid 1px #AAAAAA;
   text-align: center;
   bottom: 0;
   padding: 20px 0 20px 0;
   width: 97%;
   font-family: 'Source Sans Pro Regular', sans-serif;
   font-size: 14px;
-  position: absolute;
-  margin: auto;
+  position: fixed;
+  left: 20px;
+  right: 20px;
   margin-top: 50px;
 }
 
@@ -3242,7 +3285,7 @@ progress::-moz-progress-bar {
 
 .gor-logout .gor-logout-btn {
   font-family: 'Source Sans Pro Bold', sans-serif;
-  width: 7.0625rem;
+  min-width: 7.0625rem;
   height: 2.1875rem;
   font-size: 14px;
   background: #f36f36;
@@ -3468,18 +3511,19 @@ progress::-moz-progress-bar {
   vertical-align: middle;
 }
 
-.gor-align-sub {
-  vertical-align: sub;
+.gor-align-top {
+  vertical-align: top;
 }
 
 .gor-delete {
   width: 50%;
-  min-height: 16.25rem;
+  min-height: 15rem;
   background: #ffffff;
   border-radius: 3px;
   font-size: 20px;
   margin: auto;
   clear: both;
+  margin-top: 30vh;
 }
 
 .gor-delete .gor-delete-text {
@@ -3490,6 +3534,7 @@ progress::-moz-progress-bar {
 
 .gor-delete .gor-delete-text .gor-delete-line {
   display: inline-block;
+  width: 75%;
 }
 
 .gor-delete .gor-delete-text .gor-delete-line .gor-delete-query {
@@ -3498,16 +3543,110 @@ progress::-moz-progress-bar {
 
 .gor-delete .gor-delete-bottom {
   text-align: right;
-  margin-right: 1.25rem;
 }
 
 .gor-delete .gor-delete-btn {
   font-family: 'Source Sans Pro Bold', sans-serif;
-  width: 7.0625rem;
+  min-width: 7.0625rem;
   height: 2.1875rem;
   font-size: 14px;
   background: #f36f36;
   color: #ffffff;
   border-radius: 3px;
   display: inline-block;
+}
+
+.gorInventory {
+  background: #fff;
+}
+
+.gorInventory .head {
+  padding: 15px 15px 15px 20px;
+  border-bottom: 1px solid #aaaaaa;
+}
+
+.gorInventory .labelCnt {
+  display: inline-block;
+  width: 50%;
+  overflow: hidden;
+  font-family: 'Source Sans Pro Semibold';
+  font-size: 1.25rem;
+  color: #000000;
+  vertical-align: middle;
+}
+
+.gorInventory .dwnLoadCnt {
+  width: 50%;
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+.gorInventory .gorBtn {
+  font-family: Source Sans Pro Bold, sans-serif;
+  padding: 10px;
+  font-size: 14px;
+  background: #4d5055;
+  color: #ffffff;
+  border-radius: 3px;
+  float: right;
+}
+
+.gorInventory .histLbl {
+  width: 44%;
+  display: inline-block;
+  font-family: 'Source Sans Pro Semibold';
+  font-size: 1.25rem;
+  color: #000000;
+  padding: 0.3125rem 1.125rem;
+}
+
+.gorInventory .histCnt {
+  width: 70%;
+  display: inline-block;
+  vertical-align: middle;
+  height: 100vh;
+}
+
+.gorInventory .legendCnt {
+  width: 50%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.gorInventory .stkSnapSht {
+  width: 28%;
+  display: inline-block;
+  vertical-align: middle;
+  height: 100vh;
+  padding: 1.25rem 0.625rem;
+}
+
+.gorInventory .snapShtWrap {
+  height: 100%;
+  border-radius: 0.1875rem;
+  box-shadow: 0px 0px 2px 2px #ECECEC;
+}
+
+.gorInventory .catColor {
+  display: inline-block;
+  width: 1.25rem;
+  height: 1.25rem;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+
+path {
+  stroke: steelblue;
+  stroke-width: 2;
+  fill: none;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: grey;
+  stroke-width: 1;
+  shape-rendering: crispEdges;
 }

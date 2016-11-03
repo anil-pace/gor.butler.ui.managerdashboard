@@ -8,7 +8,7 @@
     background:#f36f36;
     color:#ffffff;
     border-radius:3px;
-    margin-left:50px;
+    
 }
 .gor-field-error
 {
@@ -16,6 +16,7 @@
             color:#EC1C24;
             font-size:18px;         
             margin-top:10px;
+            width:75%;
 }
 .gor-input-error {
             border:1px solid #EC1C24;
@@ -29,17 +30,20 @@
 }
 .gor-usr-form{
     margin-top:120px;
+    margin-bottom:120px;
 }
 .gor-modal-content {
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
     width: 100%;
+    min-height:100vh;
     .gor-sub-head{
         font-family:'Source Sans Pro Regular', sans-serif;
         font-size:12px;
         color:#000000; 
-        margin-top:10px;  
+        margin-top:calculateRem(5px);  
+        width:75%;
     }
     .gor-modal-head{
         font-family:'Source Sans Pro Regular', sans-serif;
@@ -80,7 +84,7 @@
             margin-top:25px;
         }
         .gor-choose{
-            margin-left:25px;
+            margin-left:30px;
         }
         .gor-usr-hdlg{
             font-family:'Source Sans Pro Semibold', sans-serif;
@@ -92,10 +96,6 @@
             font-size:14px;
             color:#000000;   
             margin-top:25px; 
-        }
-        :a{
-            margin-top:10px;
-            text-decoration:none;
         }
         .gor-usr-fdlg{
                 margin:auto;
@@ -112,6 +112,11 @@
                     border:1px solid #cccccc;
                     background:#f7f7f7;
                 }
+        }
+        a{
+            line-height:25px;
+            color:#27aae1;
+            font-size:14px;
         }
         .gor-usr-field{
             display:inline-block;
@@ -146,6 +151,9 @@
             color:#ffffff;
             border-radius:3px;
             margin-left:0px;
+            &:disabled{
+                background:#dddddd;
+            }
         }
     }
 }

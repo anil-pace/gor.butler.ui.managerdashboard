@@ -1,0 +1,7 @@
+[
+  {
+    "id": "ppsDetail.performance.prefix",
+    "description": "performance for pps id in ppsDetail",
+    "defaultMessage": "{performance} - orders/hr"
+  }
+]
