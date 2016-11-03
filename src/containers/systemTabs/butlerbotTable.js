@@ -80,8 +80,9 @@ class ButlerBotTable extends React.Component {
         sortedDataList: this._dataList,
       });
     }
+    var filterField = ["current","id","status","msu","location"];
     this.setState({
-      sortedDataList: new DataListWrapper(filterIndex(e,this._dataList), this._dataList),
+      sortedDataList: new DataListWrapper(filterIndex(e,this._dataList,filterField), this._dataList),
     });
   }
   

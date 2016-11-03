@@ -26,7 +26,7 @@ function _processPPSData(data, nProps) {
     detail = {};
     ppsId = data[i].pps_id;
     performance = data[i].performance;
-    PPS =  nProps.context.intl.formatMessage({id:"ppsDetail.name.prefix", description:"prefix for pps id in ppsDetail", defaultMessage:"PPS - {ppsId}"},{"ppsId":ppsId});
+    PPS =  nProps.context.intl.formatMessage({id:"ppsDetail.name.prefix", description:"prefix for pps id in ppsDetail", defaultMessage:"PPS-{ppsId}"},{"ppsId":ppsId});
     ON = nProps.context.intl.formatMessage({id:"ppsDetail.on.status", defaultMessage: "On"});
     OFF = nProps.context.intl.formatMessage({id:"ppsDetail.off.status", defaultMessage: "Off"});
     PERFORMANCE =  nProps.context.intl.formatMessage({id:"ppsDetail.performance.prefix", description:"prefix for pps id in ppsDetail", defaultMessage:"{performance} orders/hr"},{"performance":performance?performance:"0"});
