@@ -60,7 +60,7 @@ export class DataListWrapper {
   }
 }
  
-export const ActionCell = ({rowIndex, data, columnKey,selEdit,selDel, ...props}) => (
+export const ActionCell = ({rowIndex, data, columnKey,selEdit,selDel,mid, ...props}) => (
   <Cell {...props}>
     <div className="gor-user-Logo-wrap">
       <button onClick={selEdit.bind(this,columnKey,rowIndex)}>
@@ -68,7 +68,7 @@ export const ActionCell = ({rowIndex, data, columnKey,selEdit,selDel, ...props})
       </button>
     </div>
     <div className="gor-user-Logo-wrap">
-      <button onClick={selDel.bind(this,columnKey,rowIndex)} >
+      <button disabled={(mid===data.getObjectAt(rowIndex).uid)?true:false} onClick={selDel.bind(this,columnKey,rowIndex)} >
         <div className="user-del-icon" /><span>Delete</span>
       </button>
     </div>  
@@ -83,8 +83,12 @@ export const TextCell = ({rowIndex, data, columnKey, ...props}) => (
 
 export const ProgressCell = ({rowIndex, data, columnKey, ...props}) => (
   <Cell {...props}>
-  <progress className="gorProgressBar" max="100" value={data.getObjectAt(rowIndex)[columnKey]}/>
-    <div className="gorProgressBarLabel">{ data.getObjectAt(rowIndex)[columnKey]}% </div>
+  <div className="gor-progressBar-wrap">
+    <div className="gor-progressBar" style={{width:data.getObjectAt(rowIndex)[columnKey]}} />
+  </div>
+    <div className="gorProgressBarLabel">
+      { data.getObjectAt(rowIndex)[columnKey]}% 
+    </div>
   </Cell>
 );
 

@@ -7,7 +7,7 @@ import {HISTOGRAM_DATA} from '../constants/appConstants';
 function processHistogramData(data) {
 var graphData = [],barData = {},j = 0;
 var startIndex = data[0].start_time;
-var endIndex  = data[data.length - 1].start_time;
+var endIndex  = data[data.length - 1].end_time;
 for (var i = 0; i < startIndex; i++) {
   barData.timeInterval = (i)%24
   barData.put = 0;
@@ -25,7 +25,7 @@ for (var i = startIndex; i < endIndex; i++) {
   j++; 
   barData = {};
 }
-for (var i = endIndex; i < 24; i++) {
+for (var i = endIndex ; i < 24; i++) {
   barData.timeInterval = (i)%24
   barData.put = 0;
   barData.pick = 0;

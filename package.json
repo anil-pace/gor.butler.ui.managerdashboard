@@ -13,6 +13,7 @@
     "watch:css": "onchange 'src/assets/css/**/*.scss' -- npm run build-sass ",
     "build:dev:unmock": " npm config set butlerui-manager-dashboard:TARGET DEV && npm config set butlerui-manager-dashboard:MOCK false && npm run build-js && npm run build-sass && npm config set butlerui-manager-dashboard:TARGET DEV && npm config set butlerui-manager-dashboard:MOCK false && TARGET=$npm_package_config_TARGET MOCK=$npm_package_config_MOCK webpack-dev-server",
     "build:dev:mock": " npm config set butlerui-manager-dashboard:TARGET DEV && npm config set butlerui-manager-dashboard:MOCK true && npm run build-js && npm run build-sass  && npm config set butlerui-manager-dashboard:TARGET DEV && npm config set butlerui-manager-dashboard:MOCK true && TARGET=$npm_package_config_TARGET MOCK=$npm_package_config_MOCK webpack-dev-server ",
+
     "build:prod:unmock": "npm config set butlerui-manager-dashboard:TARGET PROD  && npm config set butlerui-manager-dashboard:MOCK false && npm run build-js && npm run build-sass ",
     "build:prod:mock": "npm config set butlerui-manager-dashboard:TARGET PROD && npm config set butlerui-manager-dashboard:MOCK true && npm run build-js && npm run build-sass ",
     "watch:js": "npm run build && onchange 'src/**/*.js' -- npm run build-js",
@@ -61,8 +62,6 @@
     "babelify": "^7.3.0",
     "copy-webpack-plugin": "^3.0.1",
     "d3": "^4.0.0",
-    "d3-axis": "^1.0.3",
-    "d3-scale": "^1.0.3",
     "d3-tip": "^0.7.1",
     "enzyme": "^2.4.1",
     "es6-symbol": "^3.1.0",

@@ -5,9 +5,11 @@ import {userRequest} from '../../actions/userActions';
 import {validateName, validatePassword, resetForm} from '../../actions/validationActions';
 import { connect } from 'react-redux';
 import {ERROR,GET_ROLES,EDIT_USER,SUCCESS} from '../../constants/appConstants';
+import {TYPE_SUCCESS} from '../../constants/messageConstants';
 import {ROLE_URL,HEADER_URL} from '../../constants/configConstants';
 import FieldError from '../../components/fielderror/fielderror';
-import RadioGroup from './radioGroup';
+import RoleGroup from './roleGroup';
+import { nameStatus, passwordStatus } from '../../utilities/fieldCheck';
 
 class EditUser extends React.Component{
   constructor(props) 
@@ -30,22 +32,20 @@ class EditUser extends React.Component{
     this.props.removeModal();
   }
   _checkName(){
-     let data2={
-        firstname:this.firstName.value,
-        lastname:this.lastName.value
-     };
-     this.props.validateName(data2);
+      let firstname=this.firstName.value, lastname=this.lastName.value, nameInfo;
+      nameInfo=nameStatus(firstname,lastname);
+      this.props.validateName(nameInfo);
+      return nameInfo.type;
   }
   _handleAnchorClick(){
     this.view1.style.display='block';
     this.view2.style.display='none';
   }
   _checkPwd(){
-    let data3={
-    pwd1:this.password1.value,
-    pwd2:this.password2.value
-    };   
-    this.props.validatePassword(data3);
+    let pwd1=this.password1.value,pwd2=this.password2.value, passwordInfo;
+    passwordInfo=passwordStatus(pwd1,pwd2);   
+    this.props.validatePassword(passwordInfo);
+    return passwordInfo.type;
   }
   _handleEditUser(e){
         e.preventDefault();
@@ -58,13 +58,18 @@ class EditUser extends React.Component{
 
         if(!this.props.nameCheck.type)
         {
-          this._checkName();
-          return;
+          if(!this._checkName())
+            return;
         }
-        else if(!this.props.passwordCheck.type)
-        {
-          pwd1="__unchanged__";
-          pwd2="__unchanged__";
+        if(!this.props.passwordCheck.type)
+        {          
+          if(!pwd1&&!pwd2)
+          {
+            pwd1="__unchanged__";
+            pwd2="__unchanged__";
+          }
+          else if(!this._checkPwd())
+            return;
         }
         role=this.props.roleSet?this.props.roleSet.msg:this.props.roleInfo.msg.operator;
 
@@ -76,11 +81,11 @@ class EditUser extends React.Component{
                     "password_confirm": pwd2     
 
          };
-        let editurl=HEADER_URL+'/'+this.props.id+"/edit";
+        let editurl=HEADER_URL+'/'+this.props.id;
         let userData={
                 'url':editurl,
                 'formdata':formdata,
-                'method':'POST',
+                'method':'PUT',
                 'cause':EDIT_USER,
                 'contentType':'application/json',
                 'accept':'application/json',
@@ -132,7 +137,7 @@ class EditUser extends React.Component{
 
               </div>
            
-          {this.props.roleInfo?(<RadioGroup operator={this.props.roleInfo.msg.operator} manager={this.props.roleInfo.msg.manager} />):''}
+          {this.props.roleInfo?(<RoleGroup operator={this.props.roleInfo.msg.operator} manager={this.props.roleInfo.msg.manager} />):''}
 
             <div className='gor-usr-details'>
             <div className='gor-pass-view1'  ref={node => { this.view1 = node }}>
@@ -159,7 +164,7 @@ class EditUser extends React.Component{
               defaultMessage='Password'/></div>
 
               <a href="javascript:void(0)" onClick={(e) => this._handleAnchorClick(e)}><FormattedMessage id="users.edit.password.query" description='Text for change password' 
-              defaultMessage='Change Password?'/></a>
+              defaultMessage='Change Password'/></a>
               </div>
             </div>
 

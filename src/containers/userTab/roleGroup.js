@@ -5,7 +5,7 @@ import {setRole} from '../../actions/userActions';
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
 
 
-class RadioGroup extends React.Component{
+class RoleGroup extends React.Component{
 	constructor(props) 
 	{
     	super(props);
@@ -41,16 +41,10 @@ class RadioGroup extends React.Component{
             defaultMessage='Grant access to the Operator Interface at each Pick Put Station in the Butler system'/></div>
                 </div>
 
-                <div className='gor-choose'>
-                <div className='gor-sub-head'>
-                <FormattedMessage id="users.add.roledetails.supervisortext" description='Subtext for supervisor' 
-            defaultMessage='Grant access to the Management Interface and Operator Interface for the Butler system'/></div>
-                </div>
-
                 <div className='gor-role'>
                 <input type="radio" value={this.props.manager} onChange={this._checkRole.bind(this)} id='userRole' name="role" ref={node => { this.manager = node }} /><span className='gor-usr-hdsm'>
                 <FormattedMessage id="users.add.roledetails.manager" description='Text for manager' 
-            defaultMessage=' Manager'/></span>
+            defaultMessage='Manager'/></span>
                 </div>
                 <div className='gor-choose'>
                 <div className='gor-sub-head'><FormattedMessage id="users.add.roledetails.managertext" description='Subtext for manager' 
@@ -69,4 +63,4 @@ function mapDispatchToProps(dispatch){
     setRole: function(data){ dispatch(setRole(data)); },        
     }
 }
-export default connect(mapStateToProps,mapDispatchToProps)(RadioGroup);
+export default connect(mapStateToProps,mapDispatchToProps)(RoleGroup);

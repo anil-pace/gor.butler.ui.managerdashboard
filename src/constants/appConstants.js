@@ -105,15 +105,13 @@ export const GET_ROLES='GET_ROLES';
 export const PPS_MODE_CHANGE = 'PPS_MODE_CHANGE';
 export const GET_HEADER_INFO = 'GET_HEADER_INFO';
 export const EDIT_USER='EDIT_USER';
-
+export const CREATE_AUDIT='CREATE_AUDIT';
 
 
 /*Constants for app info checking*/
 export const ID_DATA = "ID_DATA";
-export const ID_BACKEND = "ID_BACKEND";
 export const NAME_DATA = "NAME_DATA";
 export const PASSWORD_DATA = "PASSWORD_DATA";
-export const PASS_DATA = "PASS_DATA";
 export const INFO_RESET = "ERROR_RESET";
 export const ERROR=0;
 export const SUCCESS=1;
@@ -124,6 +122,7 @@ export const NOTIFY_FAIL='NOTIFY_FAIL';
 export const NOTIFY_HIDE='NOTIFY_HIDE';
 export const MD_ID='MD_ID';
 export const SET_ROLE='SET_ROLE';
+export const SKU_INFO='SKU_INFO';
 
 
 /*Constants for pagination*/
@@ -168,6 +167,8 @@ export const CODE_UE003='ue003';
 export const CODE_UE004='ue004';
 export const CODE_UE005='ue005';
 export const CODE_UE006='ue006';
+export const CODE_E025='e025';
+export const CODE_G015='g015';
 
 /*User roles map*/
 export const BUTLER_SUPERVISOR = 'butler_supervisor';
@@ -180,6 +181,7 @@ export const USER_ROLE_MAP ={
 
 /*Constant for time on header*/
 export const HEADER_START_TIME = '09:00 AM'
+
 
 /*Inventory parsing constants*/
 export const INVENTORY_DATA_TODAY = 'INVENTORY_DATA_TODAY'
@@ -222,4 +224,12 @@ export const SCH_CONFIG ={
 }
 	
 }
+
+
+
+/*Constants for Audit tab */
+export const SET_AUDIT='SET_AUDIT';
+export const RESET_AUDIT='RESET_AUDIT';
+export const SKU='sku';
+export const LOCATION='location';
 

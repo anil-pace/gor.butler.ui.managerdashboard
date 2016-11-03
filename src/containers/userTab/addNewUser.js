@@ -5,9 +5,11 @@ import {validateID, validateName, validatePassword, resetForm} from '../../actio
 import {userRequest} from '../../actions/userActions';
 import {ADD_USER,CHECK_ID,ERROR,SUCCESS,INFO,GET_ROLES} from '../../constants/appConstants';
 import {ROLE_URL,CHECK_USER,HEADER_URL} from '../../constants/configConstants';
+import {INVALID_ID,TYPE_SUCCESS} from '../../constants/messageConstants';
 import { connect } from 'react-redux';
 import FieldError from '../../components/fielderror/fielderror';
-import RadioGroup from './radioGroup';
+import RoleGroup from './roleGroup';
+import { nameStatus, passwordStatus } from '../../utilities/fieldCheck';
 
 class AddUser extends React.Component{
   constructor(props) 
@@ -30,12 +32,26 @@ class AddUser extends React.Component{
         this.props.userRequest(userData);
   }
   _checkId(){
-    let data1={userid:this.userId.value};
-    this.props.validateID(data1);
-    if(data1.userid)
-    {
-      let userData={
-                'url':CHECK_USER+data1.userid,
+    let userid=this.userId.value, idInfo;
+    if(userid.length<1)
+      {
+            idInfo={
+              type:ERROR,
+              msg:INVALID_ID           
+            }
+      }
+      else
+      {
+            idInfo={
+              type:SUCCESS,
+              msg:TYPE_SUCCESS               
+            };            
+      }
+      this.props.validateID(idInfo);
+      if(idInfo.type)
+      {
+       let userData={
+                'url':CHECK_USER+userid,
                 'method':'GET',
                 'cause':CHECK_ID,
                 'contentType':'application/json',
@@ -44,20 +60,18 @@ class AddUser extends React.Component{
       }
       this.props.userRequest(userData);
     }
-  }
+   }
   _checkName(){
-      let data2={
-        firstname:this.firstName.value,
-        lastname:this.lastName.value
-      };   
-      this.props.validateName(data2);
+      let firstname=this.firstName.value, lastname=this.lastName.value, nameInfo;
+      nameInfo=nameStatus(firstname,lastname);
+      this.props.validateName(nameInfo);
+      return nameInfo.type;
    }
   _checkPwd(){
-    let data3={
-    pwd1:this.password1.value,
-    pwd2:this.password2.value
-    };   
-    this.props.validatePassword(data3);
+    let pwd1=this.password1.value,pwd2=this.password2.value, passwordInfo;
+    passwordInfo=passwordStatus(pwd1,pwd2);
+    this.props.validatePassword(passwordInfo);
+    return passwordInfo.type;
   }
   _handleAddUser(e){
         e.preventDefault();
@@ -74,15 +88,15 @@ class AddUser extends React.Component{
           this._checkId();
           return;
         }
-        else if(!this.props.nameCheck.type)
+        if(!this.props.nameCheck.type)
         {
-          this._checkName();
-          return;
+          if(!this._checkName())
+            return;
         }
-        else if(!this.props.passwordCheck.type)
+        if(!this.props.passwordCheck.type)
         {
-          this._checkPwd();
-          return;
+          if(!this._checkPwd())
+            return;
         }
 
         role=this.props.roleSet?this.props.roleSet.msg:this.props.roleInfo.msg.operator;
@@ -154,7 +168,7 @@ class AddUser extends React.Component{
 
             </div>
 
-          {this.props.roleInfo?(<RadioGroup operator={this.props.roleInfo.msg.operator} manager={this.props.roleInfo.msg.manager} />):''}
+          {this.props.roleInfo?(<RoleGroup operator={this.props.roleInfo.msg.operator} manager={this.props.roleInfo.msg.manager} />):''}
             
             <div className='gor-usr-details'>
             <div className='gor-usr-hdlg'><FormattedMessage id="users.add.password.heading" description='Heading for create password' 

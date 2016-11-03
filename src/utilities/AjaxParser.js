@@ -2,11 +2,9 @@ import {receiveAuthData,setLoginLoader} from '../actions/loginAction';
 import {recieveOrdersData} from '../actions/paginationAction';
 import {assignRole} from '../actions/userActions';
 import {recieveHeaderInfo} from '../actions/headerAction';
-import {backendID,notifySuccess, notifyFail} from '../actions/validationActions';
-import {AUTH_LOGIN, ADD_USER, CHECK_ID,DELETE_USER,GET_ROLES,ORDERS_RETRIEVE,PPS_MODE_CHANGE,EDIT_USER,BUTLER_UI,CODE_US001,CODE_US002,CODE_US004,CODE_UE001,CODE_UE002,CODE_UE003,CODE_UE004,CODE_UE005,CODE_UE006,RECIEVE_HEADER} from '../constants/appConstants';
-import {US001,US002,US004,UE001,UE002,UE003,UE004,UE005,UE006,E028,E029,MODE_REQUESTED} from '../constants/messageConstants'; 
-
-
+import {notifySuccess, notifyFail,validateID} from '../actions/validationActions';
+import {ERROR,SUCCESS,AUTH_LOGIN, ADD_USER, CHECK_ID,DELETE_USER,GET_ROLES,ORDERS_RETRIEVE,PPS_MODE_CHANGE,EDIT_USER,BUTLER_UI,CODE_US001,CODE_US002,CODE_US004,CODE_UE001,CODE_UE002,CODE_UE003,CODE_UE004,CODE_UE005,CODE_UE006,RECIEVE_HEADER,CREATE_AUDIT,CODE_E025,CODE_G015} from '../constants/appConstants';
+import {US001,US002,US004,UE001,UE002,UE003,UE004,UE005,UE006,E028,E029,MODE_REQUESTED,TYPE_SUCCESS,E025,G015,AS001,ERR_API,ERR_USR,ERR_RES,ERR_AUDIT} from '../constants/messageConstants'; 
 
 
 export function AjaxParse(store,res,cause)
@@ -28,6 +26,8 @@ export function AjaxParse(store,res,cause)
 			{
 
 			}
+			break;
+
 		case GET_ROLES:
 			let i,rolesArr,k={};
 			rolesArr=res.roles;
@@ -47,16 +47,22 @@ export function AjaxParse(store,res,cause)
 
 
 		case CHECK_ID:
-			let isAuth;
+			let idExist;
 			if(res.users.length)
 			{
-				isAuth=true;
+	          idExist={
+	              type:ERROR,
+	              msg:UE002             
+	            };                        
+ 	         }
+	        else
+            {
+              idExist={
+              	type:SUCCESS,
+              	msg:TYPE_SUCCESS               
+              };               
 			}
-			else
-			{
-				isAuth=false;
-			}
-			store.dispatch(backendID(isAuth));			
+			store.dispatch(validateID(idExist));			
 			break;
 
 
@@ -114,20 +120,39 @@ export function AjaxParse(store,res,cause)
 						store.dispatch(notifyFail(UE006));		    				    		
 		    			break;
 		    		default:
-		    			store.dispatch(notifyFail('Error in updating user'));		    				    		
+		    			store.dispatch(notifyFail(ERR_USR));		    				    		
 
 		    	}			
 		    }
 			else
 			{
-		    			store.dispatch(notifyFail('Error in response'));		
+		    			store.dispatch(notifyFail(ERR_RES));		
 			}
 
+			break;
+		case CREATE_AUDIT:
+			if(res.alert_data)
+		    {	
+		    	switch(res.alert_data[0].code)
+		    	{
+		    		case CODE_E025:
+						store.dispatch(notifyFail(E025));		    		
+		    			break;
+		    		case CODE_G015:
+						store.dispatch(notifyFail(G015));
+					default:
+		    			store.dispatch(notifyFail(ERR_AUDIT));		    				    									    				    				    		
+		    	}
+		   	}
+		   	else
+		   	{
+		    			store.dispatch(notifySuccess(AS001));				   		
+		   	}
 			break;
 		case RECIEVE_HEADER:
 						store.dispatch(recieveHeaderInfo(res));
 						break;
 		default:
-		    			store.dispatch(notifyFail('API response not registered'));	
+		    			store.dispatch(notifyFail(ERR_API));	
 	}
 }  

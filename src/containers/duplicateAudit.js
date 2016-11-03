@@ -1,12 +1,10 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { connect } from 'react-redux' ;
-import {userRequest} from '../../actions/userActions';
-import {DELETE_USER} from '../../constants/appConstants';
-import {HEADER_URL} from '../../constants/configConstants';
+import {userRequest} from '../actions/userActions';
 import { FormattedMessage,FormattedPlural } from 'react-intl';        
 
-class DeleteUser extends React.Component{
+class DuplicateAudit extends React.Component{
   constructor(props) 
   {
       super(props);  
@@ -15,11 +13,11 @@ class DeleteUser extends React.Component{
       this.props.removeModal();
   }
   userDelete() {
-    let delurl=HEADER_URL+'/'+(this.props.id?this.props.id:'');
+    let delurl='';
     let userData={
-                'url':delurl,
+                'url':'',
                 'method':'DELETE',
-                'cause':DELETE_USER,
+                'cause':'',
                 'contentType':'application/json',
                 'accept':'application/json',
                 'token':sessionStorage.getItem('auth_token')
@@ -33,12 +31,10 @@ class DeleteUser extends React.Component{
         <div>
           <div className='gor-delete gor-modal-content'>
             <div className='gor-delete-text'>
-              <div className='iQuestion'></div>
+              <div className='iQuestion gor-align-sub'></div>
               <div className='gor-delete-line'>
-               <div className='gor-delete-query'><FormattedMessage id="users.delete.heading" description='Text for user delete heading' 
-            defaultMessage='Are you sure you would like to delete "{user_name}" ?' values={{user_name:(this.props.name?this.props.name:'')}}/>
-                         <div className='gor-sub-head'><FormattedMessage id="users.delete.subheading" description='Text for user delete subheading' 
-            defaultMessage='Information related to the user will be lost'/></div></div>
+               <div className='gor-delete-query'><FormattedMessage id="audit.duplicate.heading" description='Text for audit duplicate heading' 
+            defaultMessage='Are you sure you would like to duplicate audit task {task_name} ?' values={{task_name:(this.props.name?this.props.name:'')}}/></div>
               </div>
            </div>
               <div className='gor-delete-bottom'>
@@ -60,4 +56,4 @@ function mapDispatchToProps(dispatch){
     }
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(DeleteUser);
+export default connect(mapStateToProps,mapDispatchToProps)(DuplicateAudit);

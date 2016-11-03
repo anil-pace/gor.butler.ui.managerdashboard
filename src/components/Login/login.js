@@ -3,9 +3,11 @@ import ReactDOM  from 'react-dom';
 import Footer from '../Footer/Footer';
 import Spinner from '../../components/spinner/Spinner'
 import { authLoginData,mockLoginAuth,setUsername,setLoginSpinner } from '../../actions/loginAction';
-import {validateID, validatePass, resetForm} from '../../actions/validationActions';
+import {validateID, validatePassword, resetForm} from '../../actions/validationActions';
+
 import { connect } from 'react-redux';
-import {AUTH_LOGIN,ERROR} from '../../constants/appConstants'; 
+import {AUTH_LOGIN,ERROR,SUCCESS} from '../../constants/appConstants'; 
+import {INVALID_ID,EMPTY_PWD,TYPE_SUCCESS} from '../../constants/messageConstants'; 
 import {LOGIN_URL} from '../../constants/configConstants'; 
 import { FormattedMessage } from 'react-intl';
 import { updateIntl } from 'react-intl-redux';
@@ -14,13 +16,26 @@ import { translationMessages } from '../../utilities/i18n';
 
 
 class Login extends React.Component{
-	constructor(props) 
-	{
+	 constructor(props) 
+	 {
     	super(props);      
+      this.state={sel:0, items :[
+        { value: 'en', label: (<FormattedMessage id='login.lang.english' defaultMessage="English" description="English option in the language drop down"/>) },
+        { value: 'ja', label: (<FormattedMessage id='login.lang.japanese' defaultMessage="Japanese" description="Japanese option in the language drop down"/>) },
+      ]};
     }
     componentWillMount()
     {
         document.body.className='gor-fill-back';
+        this._changeDropdown();
+    } 
+    _changeDropdown()
+    {
+        for (let i = 0; i < this.state.items.length; i++) 
+        { 
+            if(this.state.items[i].value === this.props.sLang)
+                this.setState({sel:i});
+        }      
     }
     componentWillReceiveProps(nextProps) {
     /**
@@ -35,12 +50,48 @@ class Login extends React.Component{
       }
     }
     _checkUser(){
-            let data1={userid:this.userName.value};
-            this.props.validateID(data1);
+          let userid=this.userName.value, idInfo;
+          if(userid.length<1)
+          {
+            idInfo={
+              type:ERROR,
+              msg:INVALID_ID           
+            }
+          }
+          else
+          {
+            idInfo={
+              type:SUCCESS,
+              msg:TYPE_SUCCESS               
+            };            
+          }
+         this.props.validateID(idInfo);
+         return idInfo.type;
+    }
+    _typing(ele){
+      if(ele===1)
+        this.userField.className='gor-login-field gor-input-ok gor-input-typing';
+      else
+        this.passField.className='gor-login-field gor-input-ok gor-input-typing';
     }
     _checkPass(){
-            let data1={password:this.password.value};
-            this.props.validatePass(data1);
+          let password=this.password.value.trim(), loginPassInfo;
+          if(password.length<1)
+          {
+            loginPassInfo={
+              type:ERROR,
+              msg:EMPTY_PWD           
+            }
+          }
+          else
+          {
+            loginPassInfo={
+              type:SUCCESS,
+              msg:TYPE_SUCCESS               
+            };            
+          };
+          this.props.validatePass(loginPassInfo);
+          return loginPassInfo.type;    
     }
     /**
      * Checks for the changes in the language selection
@@ -51,12 +102,12 @@ class Login extends React.Component{
         if (!sLocale){
             return ;
         }
-
         let data = {
             locale : sLocale,
             messages: translationMessages[sLocale]
         }
         this.props.updateIntl(data);
+        this._changeDropdown();
     }
     /**
      * @param  {[event]}
@@ -71,13 +122,13 @@ class Login extends React.Component{
          };
         if(!this.props.idInfo.type)
         {
-            this._checkUser();
-            return;
+            if(!this._checkUser())
+                return;
         }
         if(!this.props.loginPassCheck.type)
         {
-            this._checkPass();
-            return;
+            if(!this._checkPass())
+                return;
         }
         let loginData={
                 'url':LOGIN_URL,
@@ -98,16 +149,6 @@ class Login extends React.Component{
         }
     }
 	render(){
-        let sel=0;
-        const items =[
-        { value: 'en', label: (<FormattedMessage id='login.lang.english' defaultMessage="English" description="English option in the language drop down"/>) },
-        { value: 'ja', label: (<FormattedMessage id='login.lang.japanese' defaultMessage="Japanese" description="Japanese option in the language drop down"/>) },
-        ];
-        for (let i = 0; i < items.length; i++) 
-        { 
-            if(items[i].value === this.props.sLang)
-                sel=i;
-        }
         return (
                
             <div className='gor-login-form'>
@@ -121,7 +162,7 @@ class Login extends React.Component{
                         defaultMessage="Language" description="Text for language"/>
                 
                     </div>
-                    <Dropdown optionDispatch={(e) => this._handleSelectionChange(e)} items={items} styleClass={'gor-lang-drop'} currentState={items[sel]} />
+                    <Dropdown optionDispatch={(e) => this._handleSelectionChange(e)} items={this.state.items} styleClass={'gor-lang-drop'} currentState={this.state.items[this.state.sel]} />
                 </div>
                 <div className='gor-login-logo alt-gor-logo'>
                 </div>
@@ -152,7 +193,7 @@ class Login extends React.Component{
                 <section>
                 <div className={'gor-login-field'+(this.props.idInfo.type===ERROR||this.props.loginAuthorized===false?' gor-input-error':' gor-input-ok')} ref={node => { this.userField = node }}>
 				        <div className={this.props.idInfo.type===ERROR||this.props.loginAuthorized===false?'gor-login-user-error':'gor-login-user'}></div>
-                        <input className="field" onBlur={this._checkUser.bind(this)} type="text" id="username"  
+                        <input className="field" onInput={this._typing.bind(this,1)} onBlur={this._checkUser.bind(this)} type="text" id="username"  
                         placeholder={this.props.intlMessages["login.form.username"]}
                          ref={node => { this.userName = node }}/>
                         
@@ -169,7 +210,7 @@ class Login extends React.Component{
                 <section>
                 <div className={'gor-login-field'+(this.props.loginPassCheck.type===ERROR||this.props.loginAuthorized===false?' gor-input-error':' gor-input-ok')}  ref={node => { this.passField = node }}>
                         <div className={this.props.loginPassCheck.type===ERROR||this.props.loginAuthorized===false?'gor-login-password-error':'gor-login-password'}></div>
-                        <input className='field' onBlur={this._checkPass.bind(this)} type="password" id="password" 
+                        <input className='field' onInput={this._typing.bind(this,2)} onBlur={this._checkPass.bind(this)} type="password" id="password" 
                         placeholder={this.props.intlMessages["login.form.password"]}
                          ref={node => { this.password = node }}/>
                 </div>
@@ -213,8 +254,9 @@ function mapStateToProps(state, ownProps){
         sLang: state.intl.locale,
         intlMessages: state.intl.messages,
         idInfo: state.appInfo.idInfo||{},
-        loginPassCheck: state.appInfo.loginPassInfo||{},
+        loginPassCheck: state.appInfo.passwordInfo||{},
         loginSpinner:state.spinner.loginSpinner         
+
     };
 }
 /**
@@ -231,7 +273,7 @@ var mapDispatchToProps = function(dispatch){
         mockLoginAuth: function(params){ dispatch(mockLoginAuth(params)); },
         validateID: function(data){ dispatch(validateID(data)); }, 
         setUsername: function(data){ dispatch(setUsername(data)); },        
-        validatePass: function(data){ dispatch(validatePass(data)); },        
+        validatePass: function(data){ dispatch(validatePassword(data)); },        
         resetForm:   function(){ dispatch(resetForm()); },
         setLoginSpinner:   function(data){ dispatch(setLoginSpinner(data)); }
     }

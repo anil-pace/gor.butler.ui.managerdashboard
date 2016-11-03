@@ -205,7 +205,6 @@ class Chart extends React.Component{
 };
 
 function mapStateToProps(state, ownProps){
-  console.log(state)
   return {
     barData: state.filterOptions || {}
   };
