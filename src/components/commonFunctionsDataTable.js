@@ -14,15 +14,22 @@ export var SortTypes = {
 function reverseSortDirection(sortDir) {
   return sortDir === SortTypes.DESC ? SortTypes.ASC : SortTypes.DESC;
 }
-export function filterIndex(e,_dataList) {
+export function filterIndex(e,_dataList,filterField) {
 	var filterBy = e.target.value.toLowerCase();
-     var size = _dataList.getSize();
+     var size = _dataList.getSize(), data = [];
      var filteredIndexes = [];
     for (var index = 0; index < size; index++) {
-      var {id,status} = _dataList.getObjectAt(index);
-      if (id.toLowerCase().indexOf(filterBy) !== -1 || status.toLowerCase().indexOf(filterBy) !== -1 ) {
-        filteredIndexes.push(index);
+      var getData = _dataList.getObjectAt(index);
+      for (var i = filterField.length - 1; i >= 0; i--) {
+        data[i] = getData[filterField[i]];
+
+        if (data[i].toLowerCase().indexOf(filterBy) !== -1) {
+          filteredIndexes.push(index);
+          break;
+        }
       }
+      
+      
     }
     return filteredIndexes;
 }
@@ -43,7 +50,7 @@ export function sortData (columnKey, sortDir,sortIndexes,_dataList) {
             var bN = parseInt(_dataList.getObjectAt(indexB)[columnKey].replace(reN, ""), 10);
             sortVal =  aN === bN ? 0 : aN > bN ? 1 : -1;
         } else {
-            sortVal =  aA > bA ? 1 : -1;
+            sortVal =  aA.localeCompare(bA);
         }
     }else if(isNaN(AInt)){
         sortVal =  1;

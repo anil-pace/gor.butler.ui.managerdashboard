@@ -60,8 +60,9 @@ class ChargingStationsTable extends React.Component {
       columnWidths: this.props.tableData.columnWidths,
       };
     }
+    var filterField = ["mode","id","status","dockedBots"];
     var tableData={
-      sortedDataList: new DataListWrapper(filterIndex(e,this._dataList), this._dataList),
+      sortedDataList: new DataListWrapper(filterIndex(e,this._dataList,filterField), this._dataList),
       colSortDirs: this.props.tableData.colSortDirs,
       columnWidths: this.props.tableData.columnWidths,
       };

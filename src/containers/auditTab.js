@@ -52,11 +52,11 @@ function processAuditData(data, nProps ) {
       auditData.startTime = "--";
     }
 
-    if(data[i].expected_quantity !== 0) {
+    if(data[i].expected_quantity !== 0 && completed_quantity !== null) {
       auditData.progress = (data[i].completed_quantity)/(data[i].expected_quantity);
     }
     else {
-      auditData.progress = 50; //needs to be done
+      auditData.progress = 0; //needs to be done
     }
 
     if(data[i].completion_time) {
