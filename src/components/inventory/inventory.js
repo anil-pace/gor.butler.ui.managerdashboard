@@ -6,6 +6,7 @@ import React  from 'react';
 import Legend from '../legend/legend';
 import InventoryStacked from '../../containers/inventoryTab/inventoryStacked';
 import SnapShot from './snapShot';
+import InventoryHistogram from '../../containers/inventoryTab/inventoryHistogram';
 import ItemCategoryTable from './ItemCategoryTable';
 
 
@@ -36,6 +37,9 @@ class Inventory extends React.Component{
 						<div className="legendCnt">
 						
 						</div>
+						<div className="histogram">
+						<InventoryHistogram histogramData={this.props.data}/>
+						</div>
 						
 						</div>
 					</div>
@@ -54,7 +58,7 @@ class Inventory extends React.Component{
 	}
 };
 Inventory.propTypes={
-	data:React.PropTypes.object,
+	data:React.PropTypes.array,
 	label:React.PropTypes.string,
 	snapshotData:React.PropTypes.array
 }

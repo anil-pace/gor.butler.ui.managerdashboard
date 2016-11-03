@@ -135,10 +135,10 @@ export const DEFAULT_PAGE_SIZE = "25";
 export const PAGE_FIELD = "?page=";
 export const GET_CURRENT_PAGE = "GET_CURRENT_PAGE";
 export const GET_LAST_REFRESH_TIME = "GET_LAST_REFRESH_TIME";
-/*Constants for Loader*/
+/*Constants for Spinner*/
 
-export const DISPLAY_LOADER = "DISPLAY_LOADER";
-export const DISPLAY_LOGIN_LOADER = "DISPLAY_LOGIN_LOADER";
+export const DISPLAY_SPINNER = "DISPLAY_SPINNER";
+export const DISPLAY_LOGIN_SPINNER = "DISPLAY_LOGIN_SPINNER";
 
 /*Map for routes of tab*/
 
@@ -184,9 +184,10 @@ export const HEADER_START_TIME = '09:00 AM'
 /*Inventory parsing constants*/
 export const INVENTORY_DATA_TODAY = 'INVENTORY_DATA_TODAY'
 export const INVENTORY_DATA_HISTORY = 'INVENTORY_DATA_HISTORY'
-export const CATEGORY_APPAREL ='apparel' 
+export const CATEGORY_APPAREL ='apparels' 
 export const CATEGORY_OTHERS ='others'
 export const CATEGORY_SHOES ='shoes' 
+export const CATEGORY_ELECTRONICS ='electronics'
 export const CATEGORY_DEFAULT ='default'
 export const CATEGORY_UNUSED ='unused'
 export const CATEGORY_COLOR_MAP = {
@@ -194,6 +195,31 @@ export const CATEGORY_COLOR_MAP = {
 	[CATEGORY_OTHERS] : "#C1C1C1",
 	[CATEGORY_SHOES] : "#89AE51",
 	[CATEGORY_UNUSED] : "#F7F7F7",
-	[CATEGORY_DEFAULT] : "#A44550"
+	[CATEGORY_DEFAULT] : "#A44550",
+	[CATEGORY_ELECTRONICS] : "#8F39EC"
+}
+
+export const SCH_CONFIG ={
+"svgInfo":{
+	"height":"100",
+	"width":"100%",
+	"x":0,
+	"y":20,
+	"lineInfo":{
+		"y1":"-8",
+		"y2":"50",
+		"stroke":"#BFBFBF",
+		"stroke-width":"1"
+	},
+	"textInfo":{
+		"message":"{utilisedSpace}% space utilized",
+		"y":"-8"
+	},
+	"rectInfo":{
+		"y":"20",
+		"height":"50"
+	}
+}
+	
 }
 

@@ -1,14 +1,14 @@
-import { DISPLAY_LOADER} from '../constants/appConstants'
+import { DISPLAY_SPINNER} from '../constants/appConstants'
 
 /**
  * [showLoader Action function for showing loader]
  * @param  {[Boolean]} data [true]
  * @return {[type]}      [description]
  */
-export function displayLoader(data){
+export function displaySpinner(data){
 	
 	return {
-		type: DISPLAY_LOADER,
+		type: DISPLAY_SPINNER,
 		data
   	}
 }

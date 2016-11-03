@@ -8,7 +8,7 @@ import {INVENTORY_DATA_HISTORY,INVENTORY_DATA_TODAY,PARSE_INVENTORY_TODAY,CATEGO
  */
  function parseInvData(state,action){
   //Parsing logic goes here
-  var inventoryObj,inventory,isHistory,invToday,completeData,categoryData,invHistory,calculatedInvData={};
+  var inventoryObj,inventory,recreatedData={},isHistory,completeData,categoryData,calculatedInvData={};
 
   isHistory = (action.type === INVENTORY_DATA_HISTORY ? "inventoryDataHistory" : "inventoryDataToday")
   
@@ -24,10 +24,17 @@ import {INVENTORY_DATA_HISTORY,INVENTORY_DATA_TODAY,PARSE_INVENTORY_TODAY,CATEGO
     for(let j = 0,len2=categoryData.length ; j < len2 ; j++){
       categoryData[j].colorCode = CATEGORY_COLOR_MAP[categoryData[j]["category_type"]] || CATEGORY_COLOR_MAP[CATEGORY_DEFAULT]
     }
-    categoryData.push(calculatedInvData)
+    categoryData.push(calculatedInvData);
+    recreatedData[Date.parse(inventory[i].date)] = inventory[i];
+  }
+  //Adding the inventory today to inventory history
+  if(state.inventoryDataToday && state.inventoryDataToday.length){
+      inventory.unshift(state.inventoryDataToday[0]);
+      recreatedData[Date.parse(inventory[0].date)] = inventory[0];
   }
   return Object.assign({}, state, {
-    [isHistory] : inventory || null
+    [isHistory] : inventory || null,
+    "recreatedData": recreatedData || null
   })
 
 }

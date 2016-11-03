@@ -25,18 +25,17 @@ class ItemCategoryTable extends React.Component{
         		return (
         			<tr key={i}>
         				<td>
-        				<span className="catColor" style={{"background":{color}}}></span>
-        				<span>{object.category_type}</span>
+        				<span className="catColor" style={{"background":color}}></span>
+        				<span className="catText">{object.category_type}</span>
         				</td>
-        				<td>{object.cbm_used}</td>
-        				<td>{object.days_on_hand}</td>
+        				<td><span className="catText">{object.cbm_used}</span></td>
+        				<td><span className = "catText">{object.days_on_hand}</span></td>
         			</tr>
         			)
     })
 		}
 		return (
 			<div className="gorSnapShot">
-				<div className="gorSnapShotCont">
 					<table width="100%">
 					<thead>
 					<tr>
@@ -55,7 +54,6 @@ class ItemCategoryTable extends React.Component{
 						{structure}
 					</tbody>
 					</table>
-				</div>
 			</div>
 
 						

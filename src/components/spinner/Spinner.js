@@ -4,7 +4,7 @@ import ReactDOM  from 'react-dom';
 
 
 
-class Loader extends React.Component{ 
+class Spinner extends React.Component{ 
 	/**
 	 * Called once before rendering of component,used to displatch fetch action
 	 * @return {[type]}
@@ -30,4 +30,4 @@ class Loader extends React.Component{
  * @type {Object}
  */
 
-export  default Loader;
+export  default Spinner;

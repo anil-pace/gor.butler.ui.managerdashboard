@@ -5,6 +5,7 @@
 import React  from 'react';
 import shallowCompare from 'react-addons-shallow-compare' ;
 import Inventory from '../components/inventory/inventory';
+
 import { connect } from 'react-redux'; 
 
 
@@ -27,20 +28,20 @@ class InventoryTab extends React.Component{
 		var label = "Stock level history"
 		return (
 			<div className="gorInventory wrapper">
-				<Inventory data={this.props.inventoryData.legendData || {}} label={label} snapshotData={this.props.snapshotData}/>
+				<Inventory data={this.props.inventoryData } label={label} snapshotData={this.props.snapshotData}/>
 			</div>
 		);
 	}
 };
 
 InventoryTab.propTypes={
-	inventoryData:React.PropTypes.object,
+	inventoryData:React.PropTypes.array,
 	snapshotData:React.PropTypes.array
 }
 
 function mapStateToProps(state,ownProps){
     return {
-      "inventoryData": state.inventoryInfo.inventoryDataHistory || {},
+      "inventoryData": state.inventoryInfo.inventoryDataHistory || [],
       "snapshotData":state.inventoryInfo.inventoryDataToday || []
     }
 };

@@ -4,7 +4,7 @@ import Tab from '../components/tabs/tab';
 import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
 import {tabSelected,subTabSelected} from '../actions/tabSelectAction';
-import {displayLoader} from '../actions/loaderAction';
+import {displaySpinner} from '../actions/spinnerAction';
 import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP,INVENTORY} from '../constants/appConstants';
 import { FormattedMessage } from 'react-intl';
 
@@ -25,10 +25,10 @@ class Tabs extends React.Component{
          * only
          */
         if(selTab !== OVERVIEW){
-            this.props.displayLoader(true);
+            this.props.displaySpinner(true);
         }
         else{
-            this.props.displayLoader(false)
+            this.props.displaySpinner(false)
         }
         
         this.props.tabSelected(TAB_ROUTE_MAP[selTab]);
@@ -127,7 +127,7 @@ var mapDispatchToProps = function(dispatch){
 	return {
 		tabSelected: function(data){ dispatch(tabSelected(data)); },
         subTabSelected: function(data){ dispatch(subTabSelected(data)); },
-        displayLoader:function(data){dispatch(displayLoader(data));}
+        displaySpinner:function(data){dispatch(displaySpinner(data));}
 	}
 };
 

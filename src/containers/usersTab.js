@@ -1,7 +1,6 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import UserDataTable from './userTab/userTabTable';
-import Loader from '../components/loader/Loader';
 import { connect } from 'react-redux'; 
 
 class UsersTab extends React.Component{

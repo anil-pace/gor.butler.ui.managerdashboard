@@ -1,4 +1,4 @@
-import { MOCK_LOGIN,LOGIN_REQUEST,DISPLAY_LOGIN_LOADER, SET_USERNAME,LOGIN_REDIRECT, LOGIN_SUCCESS,LOGIN_FAILURE, AJAX_CALL, LOGOUT, WS_DISCONNECT} from '../constants/appConstants'
+import { MOCK_LOGIN,LOGIN_REQUEST,DISPLAY_LOGIN_SPINNER, SET_USERNAME,LOGIN_REDIRECT, LOGIN_SUCCESS,LOGIN_FAILURE, AJAX_CALL, LOGOUT, WS_DISCONNECT} from '../constants/appConstants'
 
 
 
@@ -78,9 +78,9 @@ export function authLoginData(params) {
  /**
   * Action to set login loader on/off
   */
- export function setLoginLoader(data){
+ export function setLoginSpinner(data){
   return{
-    type:DISPLAY_LOGIN_LOADER,
+    type:DISPLAY_LOGIN_SPINNER,
     data
   }
  }
