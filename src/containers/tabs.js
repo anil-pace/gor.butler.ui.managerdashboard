@@ -87,10 +87,6 @@ class Tabs extends React.Component{
       { tab: users, Status: usersStatus, currentState:'gorOffline' }
     ]
     
-    // const item6 = [
-    //   { tab: inventory, Status: inventoryStatus, currentState:'gorOffline' }
-    // ]
-    
     var selectClass = {overview:"gorMainBlock", system:"gorMainBlock",orders:"gorMainBlock", audit:"gorMainBlock", users:"gorMainBlock"};
 
    
@@ -114,10 +110,6 @@ class Tabs extends React.Component{
     <Link to="/audit" onClick = {this.handleTabClick.bind(this,AUDIT)}>
       <Tab items={item4} changeClass={(this.props.tab.toUpperCase() === AUDIT ? 'sel' :"")} subIcons={true}/>
       </Link>
-
-    // <Link to="/inventory" onClick = {this.handleTabClick.bind(this,INVENTORY)}>
-    //   <Tab items={item6} changeClass={(this.props.tab.toUpperCase() === INVENTORY ? 'sel' :"")} subIcons={true}/>
-    // </Link>
 		
 		<Link to="/users" onClick = {this.handleTabClick.bind(this,USERS)}>
 			<Tab items={item5} changeClass={(this.props.tab.toUpperCase() === USERS ? 'sel' :"")} subIcons={false}/>
