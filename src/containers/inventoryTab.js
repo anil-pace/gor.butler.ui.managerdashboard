@@ -17,7 +17,9 @@ class InventoryTab extends React.Component{
 
    shouldComponentUpdate(nextProps, nextState) {
     return shallowCompare(this, nextProps, nextState);
+
  	 }
+
 	render(){
 		/**
 		 * Need to remove these hardcoded variables
@@ -27,19 +29,23 @@ class InventoryTab extends React.Component{
 		var label = "Stock level history"
 		return (
 			<div className="gorInventory wrapper">
+
 				<Inventory inventoryData={this.props.inventoryData} label={label} snapshotData={this.props.snapshotData}/>
+
 			</div>
 		);
 	}
 };
 
 InventoryTab.propTypes={
+
 	inventoryData:React.PropTypes.array,
 	snapshotData:React.PropTypes.array
 }
 
 function mapStateToProps(state,ownProps){
     return {
+
       "inventoryData": state.inventoryInfo.inventoryDataHistory || [],
       "snapshotData":state.inventoryInfo.inventoryDataToday || []
     }

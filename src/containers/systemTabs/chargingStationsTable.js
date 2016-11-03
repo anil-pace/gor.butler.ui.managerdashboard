@@ -79,7 +79,7 @@ class ChargingStationsTable extends React.Component {
     this.props.currentTableState(tableData)
   }
   render() {
-    console.log(this.props)
+    
     var sortedDataList = this._dataList
     if(this.props.tableData.sortedDataList !== undefined && this.props.tableData.sortedDataList._data !== undefined) {
       sortedDataList = this.props.tableData.sortedDataList;
@@ -90,7 +90,7 @@ class ChargingStationsTable extends React.Component {
     let manual = this.props.chargersState.manualMode;
     let auto = this.props.chargersState.automaticMode;
     let totalBots = this.props.chargersState.connectedBots;
-    console.log(this.props.chargersState)
+    
 
     var tableRenderer = <div/>
     if(this.props.tableData.length !== 0) {

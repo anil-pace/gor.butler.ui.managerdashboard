@@ -25,6 +25,7 @@ class SnapShotDetails extends React.Component{
 					<tr>
 						<td>
 						<p>Opening Stock</p>
+
 						<p>{this.props.snapshotData.opening_stock}</p>
 						</td>
 						<td>
@@ -34,11 +35,13 @@ class SnapShotDetails extends React.Component{
 						<td>
 						<p>Items Pick</p>
 						<p>{this.props.snapshotData.items_picked}</p>
+
 						</td>
 					</tr>
 					<tr>
 						<td>
 							<p>Current Stock</p>
+
 						<p>{this.props.snapshotData.current_stock}</p>
 						</td>
 						<td>
@@ -48,6 +51,7 @@ class SnapShotDetails extends React.Component{
 						<td>
 							<p>CBM Used</p>
 						<p>{this.props.snapshotData.cbm_used}</p>
+
 						</td>
 					</tr>
 					</tbody>
@@ -60,6 +64,8 @@ class SnapShotDetails extends React.Component{
 	}
 };
 SnapShotDetails.propTypes={
+
 	snapshotData:React.PropTypes.object
+
 }
 export default SnapShotDetails;

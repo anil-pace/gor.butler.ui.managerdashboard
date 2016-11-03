@@ -22,7 +22,9 @@ class AuditTable extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    
       this.tableState(nextProps,this);
+      //this.props.refreshData();
   }
 
   componentDidMount() {
@@ -95,6 +97,7 @@ class AuditTable extends React.Component {
       hideCloseButton: true // (optional) if you don't wanna show the top right close button
       //.. all what you put in here you will get access in the modal props ;),
     });
+
   }
 
   startAudit(columnKey,rowIndex) {
@@ -110,7 +113,9 @@ class AuditTable extends React.Component {
  }
 
  manageAuditTask(rowIndex,option) {
+
  var auditComplete = this.props.tableData.sortedDataList.newData[rowIndex].auditTypeValue;
+
   
   if(option.value === "duplicateTask"){
     var auditType = this.props.tableData.sortedDataList.newData[rowIndex].auditType;
@@ -123,7 +128,8 @@ class AuditTable extends React.Component {
       hideCloseButton: true,
       auditType:auditType,
       auditTypeParam:auditTypeParam,
-      auditComplete:auditComplete
+      auditComplete:auditComplete,
+      refreshData:this.props.refreshData
   });
 
   }
@@ -185,7 +191,7 @@ class AuditTable extends React.Component {
        </div>
 
       <Table
-        rowHeight={100}
+        rowHeight={60}
         rowsCount={rowsCount}
         headerHeight={70}
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
@@ -314,7 +320,7 @@ class AuditTable extends React.Component {
               <div className="gorToolHeaderSubText">  </div>
             </SortHeaderCell>
           }
-          cell={<ActionCellAudit data={sortedDataList} handleAudit={this.startAudit.bind(this)} tasks={tasks} manageAuditTask={this.manageAuditTask.bind(this)}/>}
+          cell={<ActionCellAudit data={sortedDataList} handleAudit={this.startAudit.bind(this)} tasks={tasks} manageAuditTask={this.manageAuditTask.bind(this)} showBox="startAudit"/>}
           width={columnWidths.actions}
         />
       </Table>
@@ -328,6 +334,7 @@ class AuditTable extends React.Component {
 }
 
 function mapStateToProps(state, ownProps){
+  
   return {
     tableData: state.currentTableState.currentTableState || [],
   };

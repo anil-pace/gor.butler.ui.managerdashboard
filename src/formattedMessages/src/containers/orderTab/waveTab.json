@@ -1,0 +1,7 @@
+[
+  {
+    "id": "waveDetail.id.prefix",
+    "description": "waveDetail id prefix",
+    "defaultMessage": "WAVE-{waveId}"
+  }
+]

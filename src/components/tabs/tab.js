@@ -19,7 +19,7 @@ class Tab extends React.Component{
 		}
 		return (
 		<div className="gorTab gorContainer">
-		<div className={this.props.changeClass}>
+		<div className={this.props.changeClass + " gorMainBlock"} >
 			<div className="gorInlineDisplay">
 			<div>
 				<div className="gor-upperText">
