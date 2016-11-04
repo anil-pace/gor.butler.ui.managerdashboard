@@ -6,7 +6,9 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import {currentTableState} from '../../actions/tableDataAction'
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
+ 
 
+  var tempGlobal = 0;
 class ChargingStationsTable extends React.Component {
   constructor(props) {
     super(props);
@@ -17,11 +19,22 @@ class ChargingStationsTable extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-      this.tableState(nextProps,this);
+    this.tableState(nextProps,this);
+    if(nextProps.items !== undefined && tempGlobal === 0) {
+      tempGlobal = 1;
+      this._onSortChange("id","DESC");
+    }
+      //this._onSortChange("id","DESC");
+      
+
   }
 
   componentDidMount() {
-      this.props.currentTableState(this.tableState(this.props, this));    
+
+      this.props.currentTableState(this.tableState(this.props, this));
+      //this._onSortChange("id","DESC");
+
+      //    
   }
 
   tableState(nProps, current) {

@@ -34,6 +34,8 @@ class ButlerBotTable extends React.Component {
     this._onSortChange = this._onSortChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+    //this._onSortChange("id","DESC");
+
   }
 
   
@@ -64,6 +66,7 @@ class ButlerBotTable extends React.Component {
     this._onSortChange = this._onSortChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+    //this._onSortChange("id","DESC");
   }
   
    _onColumnResizeEndCallback(newColumnWidth, columnKey) {
