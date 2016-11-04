@@ -160,6 +160,20 @@ export const wsOverviewData = {
                 },
                 
           ]
+},
+
+"orders":{
+          "type": "subscribe",
+          "data": [
+                {
+                  "resource_id": "orders",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
+                },
+                
+          ]
 }
 }
 

@@ -80,8 +80,9 @@ class UserDataTable extends React.Component {
         sortedDataList: this._dataList,
       });
     }
+    var filterField = ["role","id","status","workMode","location","logInTime"];
     this.setState({
-      sortedDataList: new DataListWrapper(filterIndex(e,this._dataList), this._dataList),
+      sortedDataList: new DataListWrapper(filterIndex(e,this._dataList,filterField), this._dataList),
     });
   }
 
