@@ -1446,7 +1446,7 @@ body {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   left: 0;
-  overflow: hidden;
+  /*overflow: hidden;*/
   position: absolute;
   top: 0;
   white-space: nowrap;
@@ -1598,7 +1598,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
  */
 .fixedDataTableRowLayout_main {
   box-sizing: border-box;
-  overflow: hidden;
+  /*overflow: hidden;*/
   position: absolute;
   top: 0;
   border-bottom: #e6e6e6;
@@ -1630,6 +1630,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .fixedDataTableRowLayout_rowWrapper {
   position: absolute;
   top: 0;
+  z-index: 20;
 }
 
 /**
@@ -2143,7 +2144,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   border-width: 0 1px 0 0;
   box-sizing: border-box;
   display: block;
-  overflow: hidden;
+  /*overflow: hidden;*/
   position: absolute;
   white-space: normal;
 }
@@ -2273,7 +2274,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 }
 
 .fixedDataTableLayout_rowsContainer {
-  overflow: hidden;
+  /*overflow: hidden;*/
   position: relative;
 }
 
@@ -2323,6 +2324,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .fixedDataTableRowLayout_rowWrapper {
   position: absolute;
   top: 0;
+  z-index: 20;
 }
 
 /**
@@ -2903,6 +2905,10 @@ progress::-moz-progress-bar {
 .gor-audit-actions-drop {
   display: inline-block;
   width: 150px;
+}
+
+.gor-header-check {
+  display: inline-block;
 }
 
 .gorSubTab.gorContainer {

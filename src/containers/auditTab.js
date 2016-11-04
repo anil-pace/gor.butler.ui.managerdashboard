@@ -52,11 +52,11 @@ function processAuditData(data, nProps ) {
       auditData.startTime = "--";
     }
 
-    if(data[i].expected_quantity !== 0) {
+    if(data[i].expected_quantity !== 0 && completed_quantity !== null) {
       auditData.progress = (data[i].completed_quantity)/(data[i].expected_quantity);
     }
     else {
-      auditData.progress = 50; //needs to be done
+      auditData.progress = 0; //needs to be done
     }
 
     if(data[i].completion_time) {
@@ -75,42 +75,43 @@ function processAuditData(data, nProps ) {
 class AuditTab extends React.Component{
 	constructor(props) 
 	{
-    	super(props);
-    }
+   super(props);
+ }
 
-    componentDidMount() {
-    	this.getPageData();
-    }
+ componentDidMount() {
+   this.getPageData();
+ }
 
-    getPageData() {
-      let url = AUDIT_URL;
-      let auditData={
-              'url':url,
-              'method':'GET',
-              'cause': AUDIT_RETRIEVE,
-              'token': sessionStorage.getItem('auth_token'),
-              'contentType':'application/json'
-          } 
-        this.props.getAuditData(auditData);  
-    }
+ getPageData() {
+  let url = AUDIT_URL;
+  let auditData={
+    'url':url,
+    'method':'GET',
+    'cause': AUDIT_RETRIEVE,
+    'token': sessionStorage.getItem('auth_token'),
+    'contentType':'application/json'
+  } 
+  this.props.getAuditData(auditData);  
+}
 
-	render(){
-    var itemNumber = 7, renderTab = <div/>;
-    if(this.props.auditDetail.length !== 0) {
-      var auditData = processAuditData(this.props.auditDetail, this);
-      renderTab = <AuditTable items={auditData} itemNumber={itemNumber}  intlMessg={this.props.intlMessages} refreshData={this.getPageData.bind(this)}/>
-    }
-				
-		return (
-			<div>
-				<div>
-					<div className="gorUserTable">
-						{renderTab}
-					</div>
-				</div>
-			</div>
-		);
-	}
+render(){
+  var itemNumber = 7, renderTab = <div/>;
+  
+    var auditData = processAuditData(this.props.auditDetail, this);
+    renderTab = <AuditTable items={auditData} itemNumber={itemNumber}  
+    intlMessg={this.props.intlMessages} refreshData={this.getPageData.bind(this)}/>
+  
+  
+  return (
+   <div>
+   <div>
+   <div className="gorUserTable">
+   {renderTab}
+   </div>
+   </div>
+   </div>
+   );
+}
 };
 
 
