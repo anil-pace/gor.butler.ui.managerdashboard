@@ -31,8 +31,7 @@ class DuplicateAudit extends React.Component{
                 'token':sessionStorage.getItem('auth_token')
     }
     this.props.userRequest(userData);
-    this.removeThisModal();
-
+    this._removeThisModal();
   }  
   render()
   {
