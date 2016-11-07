@@ -18,7 +18,6 @@ class StartAudit extends React.Component{
   {
       super(props);  
       this.state={checked:[]};
-      console.log(props);
   }
   componentWillUnmount()
   {
