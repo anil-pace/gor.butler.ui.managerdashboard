@@ -7,6 +7,9 @@ function processOrders(data) {
   let completed = <FormattedMessage id="orderList.completed.status" description='completed status for orderList' defaultMessage='Completed'/>;
   let unfulfillable = <FormattedMessage id="orderList.Unfulfillable.status" description='Unfulfillable status for orderList' defaultMessage='Unfulfillable'/>;
   var renderOrderData = [], ordersStatus = {'pending':progress, "fulfillable": progress, "completed":completed, "not_fulfillable":unfulfillable},orderData = {};
+  var breachedStatus = {'pending':1, "fulfillable": 1, "completed":3, "not_fulfillable":2};
+  var unBreachedStatus = {'pending':4, "fulfillable": 4, "completed":6, "not_fulfillable":5};
+  
   if(data.length !== undefined) {
     for (var i =0; i < data.length; i++) {
       orderData.id = data[i].order_id;
@@ -14,11 +17,13 @@ function processOrders(data) {
       if(data[i].breached === false) {
         orderData.status = ordersStatus[data[i].status];
         orderData.statusClass = data[i].status;
+        orderData.statusPriority = unBreachedStatus[data[i].status];
       }
 
       else {
         orderData.status = ordersStatus[data[i].status];
         orderData.statusClass = "breached";
+        orderData.statusPriority = breachedStatus[data[i].status];
       }
       orderData.recievedTime = (data[i].create_time.substring(4));
       orderData.recievedTime = orderData.recievedTime.substring(0, orderData.recievedTime.length - 4)

@@ -93,6 +93,10 @@ class ButlerBotTable extends React.Component {
     
   }
   _onSortChange(columnKey, sortDir) {
+    console.log(this._dataList)
+     if(columnKey === "status") {
+      columnKey = "statusPriority";
+    }
     var sortIndexes = this._defaultSortIndexes.slice();
     this.setState({
       sortedDataList: new DataListWrapper(sortData(columnKey, sortDir,sortIndexes,this._dataList), this._dataList),
@@ -166,7 +170,7 @@ class ButlerBotTable extends React.Component {
           columnKey="status"
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
-              sortDir={colSortDirs.status} >
+              sortDir={colSortDirs.statusPriority} >
               <div>
                  <FormattedMessage id="butlerBot.table.status" description="Status for butlerbot" 
               defaultMessage ="STATUS"/> 

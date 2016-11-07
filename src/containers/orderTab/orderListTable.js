@@ -93,6 +93,9 @@ class OrderListTable extends React.Component {
   
   
   _onSortChange(columnKey, sortDir) {
+     if(columnKey === "status") {
+      columnKey = "statusPriority";
+    }
     var sortIndexes = this._defaultSortIndexes.slice();
     this.setState({
       sortedDataList: new DataListWrapper(sortData(columnKey, sortDir,sortIndexes,this._dataList), this._dataList),
@@ -205,7 +208,7 @@ class OrderListTable extends React.Component {
           columnKey="status"
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
-              sortDir={colSortDirs.status}>
+              sortDir={colSortDirs.statusPriority}>
               <div>
                  <FormattedMessage id="orderList.table.status" description="Status for orders" 
               defaultMessage ="STATUS"/> 

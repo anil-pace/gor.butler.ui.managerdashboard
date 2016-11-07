@@ -30,12 +30,17 @@ class ChargingStationsTable extends React.Component {
   }
 
   componentDidMount() {
-
+      //tempGlobal = 0;
       this.props.currentTableState(this.tableState(this.props, this));
       //this._onSortChange("id","DESC");
 
       //    
   }
+
+   componentWillUnmount() {
+    tempGlobal = 1;
+     console.log("components unmounted")
+   }
 
   tableState(nProps, current) {
     var items = nProps.items || [];
@@ -84,6 +89,10 @@ class ChargingStationsTable extends React.Component {
   
   
   _onSortChange(columnKey, sortDir) {
+    
+    if(columnKey === "status") {
+      columnKey = "statusPriority";
+    }
     var sortIndexes = this._defaultSortIndexes.slice();
     var tableData={
       sortedDataList: new DataListWrapper(sortData(columnKey, sortDir,sortIndexes,this._dataList), this._dataList),
@@ -165,7 +174,7 @@ class ChargingStationsTable extends React.Component {
           columnKey="status"
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
-              sortDir={colSortDirs.status}>
+              sortDir={colSortDirs.statusPriority}>
               <FormattedMessage id="ChargingStations.table.STATUS" description="STATUS for ChargingStations" 
               defaultMessage ="STATUS"/>
               <div className="gorToolHeaderSubText">  </div>
@@ -230,6 +239,7 @@ class ChargingStationsTable extends React.Component {
 }
 
 function mapStateToProps(state, ownProps){
+  console.log(state)
   return {
     tableData: state.currentTableState.currentTableState || [],
   };

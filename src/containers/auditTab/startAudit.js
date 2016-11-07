@@ -43,7 +43,7 @@ class StartAudit extends React.Component{
     e.preventDefault();
     let formdata;
     formdata={
-      audit_id_list: ["LN8iEcyGRF"], 
+      audit_id_list: this.props.auditId, 
       pps_list: this.state.checked
     }
     let userData={

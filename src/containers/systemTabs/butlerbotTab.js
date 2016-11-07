@@ -16,6 +16,7 @@ function processButlersData(data, nProps) {
   var currentTask = {0:"Pick", 1:"Put", 2:"Audit", 3:"Charging", 4:"Move"};
   var currentSubtask = {0:"Moving to",1:"Moving to mount",2:"Moving to dismount",3:"Docked at"};
   var currentState = {"online":online, "offline":offline};
+  var priStatus = {"online": 1, "offline": 2};
   let BOT, PPS, CS, MSU ;
 
   for (var i = data.length - 1; i >= 0; i--) {
@@ -28,6 +29,7 @@ function processButlersData(data, nProps) {
     butlerDetail.id =  BOT;
     butlerDetail.statusClass = data[i].state;
     butlerDetail.status = currentState[data[i].state];
+    butlerDetail.statusPriority = priStatus[data[i].state];
     butlerDetail.location = data[i].location;
     butlerDetail.voltage = data[i].voltage;
     butlerDetail.taskNum = currentTask[data[i].current_task];

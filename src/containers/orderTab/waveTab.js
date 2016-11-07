@@ -12,6 +12,7 @@ function processWaveData(data, nProps) {
   let pending  = nProps.context.intl.formatMessage({id:"waveDetail.pending.status", defaultMessage: "Pending"});
   var intlStatus = {"In Progress":progress, "Completed":completed, "Breached":breached, "Pending":pending };
   var status = {"In Progress":"progress", "Completed":"completed", "Breached":"breached", "Pending":"pending" };
+  var priStatus = {"In Progress": 2, "Completed": 4, "Breached":1 ,"Pending":3};
   if(data) {
      for (var i =data.length - 1; i >= 0; i--) {
       waveId = data[i].wave_id;
@@ -19,6 +20,7 @@ function processWaveData(data, nProps) {
       waveDetail = {};
       waveDetail.id = WAVE ;
       waveDetail.statusClass = status[data[i].status];
+      waveDetail.statusPriority = priStatus[data[i].status];
       waveDetail.status = intlStatus[data[i].status];
       
       if(data[i].start_time === "") {
@@ -46,6 +48,7 @@ function processWaveData(data, nProps) {
       waveData.push(waveDetail);
      }
   }
+  console.log("wavedata",waveData)
   return waveData;
 }
 

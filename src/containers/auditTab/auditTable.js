@@ -102,25 +102,38 @@ class AuditTable extends React.Component {
   }
 
   startAudit(columnKey,rowIndex) {
-    var auditId = this.props.tableData.sortedDataList.newData[rowIndex].id;
-    modal.add(StartAudit, {
-      title: '',
-      size: 'large', // large, medium or small,
-      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-      hideCloseButton: true,
-      auditId:auditId
-  });
- }
+    var auditId, sortedIndex;
+    if(this.props.tableData.sortedDataList._data !== undefined) {
+      sortedIndex = this.props.tableData.sortedDataList._indexMap[rowIndex];
+      auditId = this.props.tableData.sortedDataList._data.newData[sortedIndex].id;
+   }
+   else {
+    auditId = this.props.items[rowIndex].id;
+   }
+   modal.add(StartAudit, {
+        title: '',
+        size: 'large', // large, medium or small,
+        closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+        hideCloseButton: true,
+        auditId:auditId
+    });
+  }
 
- manageAuditTask(rowIndex,option) {
-
- var auditComplete = this.props.tableData.sortedDataList.newData[rowIndex].auditTypeValue;
-
-  
+ manageAuditTask(rowIndex,option) { 
   if(option.value === "duplicateTask"){
-    var auditType = this.props.tableData.sortedDataList.newData[rowIndex].auditType;
-    var auditTypeParam = this.props.tableData.sortedDataList.newData[rowIndex].auditValue;
-    
+    var auditType, auditTypeValue, auditComplete,auditTypeParam;
+    if(this.props.tableData.sortedDataList._data !== undefined) {
+      sortedIndex = this.props.tableData.sortedDataList._indexMap[rowIndex];
+      auditType = this.props.tableData.sortedDataList.newData[sortedIndex].auditType;
+      auditTypeParam = this.props.tableData.sortedDataList.newData[sortedIndex].auditValue;
+      auditComplete = this.props.tableData.sortedDataList.newData[sortedIndex].auditTypeValue;
+    }
+    else {
+    auditType = this.props.items[rowIndex].auditType;
+    auditTypeParam = this.props.items[rowIndex].auditValue;
+    auditComplete = this.props.items[rowIndex].auditTypeValue;
+   }
+      
     modal.add(DuplicateAudit, {
       title: '',
       size: 'large', // large, medium or small,
@@ -135,7 +148,14 @@ class AuditTable extends React.Component {
   }
 
   else if(option.value === "deleteRecord"){
-    var auditId = this.props.tableData.sortedDataList.newData[rowIndex].id;
+    var auditId;
+    if(this.props.tableData.sortedDataList._data !== undefined) {
+      sortedIndex = this.props.tableData.sortedDataList._indexMap[rowIndex];
+      auditId = this.props.tableData.sortedDataList._data.newData[sortedIndex].id;
+   }
+   else {
+    auditId = this.props.items[rowIndex].id;
+   }
     modal.add(DeleteAudit, {
       title: '',
       size: 'large', // large, medium or small,
