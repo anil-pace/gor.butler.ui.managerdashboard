@@ -91,6 +91,10 @@ export const AE001 = (<FormattedMessage id="notify.error.audit.AE001" descriptio
             defaultMessage="Audit Id does not exists"/>);
 export const AE002 = (<FormattedMessage id="notify.error.audit.AE002" description='Text for invalid PPS' 
             defaultMessage="Valid PPS not found for Audit"/>);
+export const AE004 = (<FormattedMessage id="notify.error.audit.AE004" description='Text for already processed location' 
+            defaultMessage="Audit of location already under process"/>);
+export const AE005 = (<FormattedMessage id="notify.error.audit.AE005" description='Text for already processed sku' 
+            defaultMessage="Audit of sku already under process"/>);
 export const AE006 = (<FormattedMessage id="notify.error.audit.AE006" description='Text for already processed audit' 
             defaultMessage="Audit ID already processed"/>);
 export const AS001 = (<FormattedMessage id="notify.create.audit.success" description='Text for successfull audit creation' 

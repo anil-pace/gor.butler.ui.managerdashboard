@@ -125,6 +125,16 @@
     "defaultMessage": "Valid PPS not found for Audit"
   },
   {
+    "id": "notify.error.audit.AE004",
+    "description": "Text for already processed location",
+    "defaultMessage": "Audit of location already under process"
+  },
+  {
+    "id": "notify.error.audit.AE005",
+    "description": "Text for already processed sku",
+    "defaultMessage": "Audit of sku already under process"
+  },
+  {
     "id": "notify.error.audit.AE006",
     "description": "Text for already processed audit",
     "defaultMessage": "Audit ID already processed"

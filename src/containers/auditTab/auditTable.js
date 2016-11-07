@@ -101,53 +101,72 @@ class AuditTable extends React.Component {
 
   }
 
-  startAudit(columnKey,rowIndex) {
-    var auditId = this.props.tableData.sortedDataList.newData[rowIndex].id,task = this.props.tableData.sortedDataList.newData[rowIndex].auditTypeValue;
-    modal.add(StartAudit, {
-      title: '',
-      size: 'large', // large, medium or small,
-      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-      hideCloseButton: true,
-      auditId:auditId,
-      task:task
-  });
+startAudit(columnKey,rowIndex) {
+   var auditId=[], sortedIndex;
+   if(this.props.tableData.sortedDataList._data !== undefined) {
+     sortedIndex = this.props.tableData.sortedDataList._indexMap[rowIndex];
+     auditId.push(this.props.tableData.sortedDataList._data.newData[sortedIndex].id);
+  }
+  else {
+   auditId.push(this.props.items[rowIndex].id);
+  }
+  modal.add(StartAudit, {
+       title: '',
+       size: 'large', // large, medium or small,
+       closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+       hideCloseButton: true,
+       auditId:auditId
+   });
  }
 
- manageAuditTask(rowIndex,option) {
+manageAuditTask(rowIndex,option) {
+ if(option.value === "duplicateTask"){
+   var auditType, auditTypeValue, auditComplete,auditTypeParam;
+   if(this.props.tableData.sortedDataList._data !== undefined) {
+     sortedIndex = this.props.tableData.sortedDataList._indexMap[rowIndex];
+     auditType = this.props.tableData.sortedDataList.newData[sortedIndex].auditType;
+     auditTypeParam = this.props.tableData.sortedDataList.newData[sortedIndex].auditValue;
+     auditComplete = this.props.tableData.sortedDataList.newData[sortedIndex].auditTypeValue;
+   }
+   else {
+   auditType = this.props.items[rowIndex].auditType;
+   auditTypeParam = this.props.items[rowIndex].auditValue;
+   auditComplete = this.props.items[rowIndex].auditTypeValue;
+  }
+     
+   modal.add(DuplicateAudit, {
+     title: '',
+     size: 'large', // large, medium or small,
+     closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+     hideCloseButton: true,
+     auditType:auditType,
+     auditTypeParam:auditTypeParam,
+     auditComplete:auditComplete,
+     refreshData:this.props.refreshData
+ });
 
- var auditComplete = this.props.tableData.sortedDataList.newData[rowIndex].auditTypeValue;
+ }
 
-  
-  if(option.value === "duplicateTask"){
-    var auditType = this.props.tableData.sortedDataList.newData[rowIndex].auditType;
-    var auditTypeParam = this.props.tableData.sortedDataList.newData[rowIndex].auditValue;
+ else if(option.value === "deleteRecord"){
+   var auditId;
+   if(this.props.tableData.sortedDataList._data !== undefined) {
+     sortedIndex = this.props.tableData.sortedDataList._indexMap[rowIndex];
+     auditId = this.props.tableData.sortedDataList._data.newData[sortedIndex].id;
+  }
+  else {
+   auditId = this.props.items[rowIndex].id;
+  }
+   modal.add(DeleteAudit, {
+     title: '',
+     size: 'large', // large, medium or small,
+     closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+     hideCloseButton: true,
+     auditId:auditId,
+     auditComplete:auditComplete
+   });
+ }
+}
     
-    modal.add(DuplicateAudit, {
-      title: '',
-      size: 'large', // large, medium or small,
-      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-      hideCloseButton: true,
-      auditType:auditType,
-      auditTypeParam:auditTypeParam,
-      auditComplete:auditComplete,
-      refreshData:this.props.refreshData
-  });
-
-  }
-
-  else if(option.value === "deleteRecord"){
-    var auditId = this.props.tableData.sortedDataList.newData[rowIndex].id;
-    modal.add(DeleteAudit, {
-      title: '',
-      size: 'large', // large, medium or small,
-      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-      hideCloseButton: true,
-      auditId:auditId,
-      auditComplete:auditComplete
-    });
-  }
- }
-  
 
   render() {
     var sortedDataList = this._dataList;

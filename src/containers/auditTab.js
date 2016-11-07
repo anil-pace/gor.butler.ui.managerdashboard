@@ -17,7 +17,7 @@ function processAuditData(data, nProps ) {
   let location  = nProps.context.intl.formatMessage({id:"auditdetail.location.prefix", defaultMessage: "Location"});
   
   var auditStatus = {"audit_created":created, "audit_pending":pending, "audit_waiting":pending, "audit_conflicting":pending, "audit_started":progress, "audit_tasked":progress, "audit_aborted":completed, "audit_completed":completed};
-  var statusClass = {"Pending": "pending", "Completed":"completed", "In progress":"progress", "Created":"pending"}
+  var statusClass = {"Pending": "pending", "Completed":"completed", "In Progress":"progress", "Created":"pending"}
   var auditType = {"sku":sku, "location":location};
   var auditDetails = [], auditData = {};
   for (var i = data.length - 1; i >= 0; i--) {
