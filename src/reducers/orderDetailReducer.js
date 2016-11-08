@@ -35,12 +35,11 @@ function processOrders(data) {
         orderData.pickBy = orderData.pickBy.substring(0, orderData.pickBy.length - 4)
       }
 
-      if(data[i].completed_orderlines === 0) {
+      if(data[i].completed_orderlines === data[i].total_orderlines) {
         orderData.orderLine = data[i].total_orderlines;
       }
       else {
-        total_orderlines = data[i].completed_orderlines + "/" + data[i].total_orderlines;
-        orderData.orderLine = total_orderlines;
+        orderData.orderLine = data[i].completed_orderlines + "/" + data[i].total_orderlines;
       }
       orderData.completedTime = data[i].update_time.substring(4);
       orderData.completedTime = orderData.completedTime.substring(0, orderData.completedTime.length - 4);

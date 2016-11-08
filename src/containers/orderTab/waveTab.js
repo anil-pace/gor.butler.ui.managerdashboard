@@ -48,7 +48,6 @@ function processWaveData(data, nProps) {
       waveData.push(waveDetail);
      }
   }
-  console.log("wavedata",waveData)
   return waveData;
 }
 
@@ -96,7 +95,6 @@ class WaveTab extends React.Component{
 }
 
 function mapStateToProps(state, ownProps){
- console.log(state)
   return {
       waveDetail: state.waveInfo || {},
       intlMessages: state.intl.messages

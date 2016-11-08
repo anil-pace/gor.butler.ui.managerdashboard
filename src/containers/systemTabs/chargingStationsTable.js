@@ -39,7 +39,6 @@ class ChargingStationsTable extends React.Component {
 
    componentWillUnmount() {
     tempGlobal = 1;
-     console.log("components unmounted")
    }
 
   tableState(nProps, current) {
@@ -239,7 +238,6 @@ class ChargingStationsTable extends React.Component {
 }
 
 function mapStateToProps(state, ownProps){
-  console.log(state)
   return {
     tableData: state.currentTableState.currentTableState || [],
   };

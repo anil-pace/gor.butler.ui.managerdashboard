@@ -204,9 +204,8 @@ body {
 }
 
 .gor-logo {
-  background-position: 11px -112px;
+  background-position: 11px -117px;
   width: 173px;
-  height: 7px;
   padding: 10px;
 }
 
@@ -633,10 +632,16 @@ body {
   border-bottom: 0.15em solid #e7e7e7;
 }
 
-.gorHeader .logoWrap {
+.gorHeader .gor-border {
   border-right: 0.0625rem solid #F2F2F2;
   display: inline-block;
-  padding-right: 9px;
+  height: 1.625rem;
+  vertical-align: middle;
+}
+
+.gorHeader .logoWrap {
+  display: inline-block;
+  padding-right: 10px;
 }
 
 .gorHeader .logo {
@@ -681,7 +686,7 @@ body {
 .gorHeader .mainBlock {
   display: inline-block;
   overflow: hidden;
-  padding: 0rem 0.3125rem;
+  padding: 0rem 0rem;
 }
 
 .gorHeader .blockSystem {

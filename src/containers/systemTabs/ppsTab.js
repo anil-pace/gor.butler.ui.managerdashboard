@@ -61,7 +61,6 @@ function _processPPSData(data, nProps) {
       
     }
     detail.totalUser = totalUser;
-    console.log(detail.totalUser)
     PPSData.push(detail);
   }
   return PPSData;

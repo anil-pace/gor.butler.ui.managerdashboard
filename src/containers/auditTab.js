@@ -35,7 +35,6 @@ function processAuditData(data, nProps ) {
 
     if(data[i].audit_status) {
       auditData.status = auditStatus[data[i].audit_status]; 
-      console.log( auditData.status)
       auditData.statusClass = statusClass[auditData.status];
       if(data[i].audit_status === "audit_created") {
         auditData.startAudit = true;

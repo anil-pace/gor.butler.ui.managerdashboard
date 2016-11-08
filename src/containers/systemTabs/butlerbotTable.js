@@ -93,7 +93,6 @@ class ButlerBotTable extends React.Component {
     
   }
   _onSortChange(columnKey, sortDir) {
-    console.log(this._dataList)
      if(columnKey === "status") {
       columnKey = "statusPriority";
     }
