@@ -97,10 +97,11 @@ class AuditTab extends React.Component{
 
 render(){
   var itemNumber = 7, renderTab = <div/>;
-  if(this.props.auditDetail.length !== undefined) {
+  
     var auditData = processAuditData(this.props.auditDetail, this);
-    renderTab = <AuditTable items={auditData} itemNumber={itemNumber}  intlMessg={this.props.intlMessages} refreshData={this.getPageData.bind(this)}/>
-  }
+    renderTab = <AuditTable items={auditData} itemNumber={itemNumber}  
+    intlMessg={this.props.intlMessages} refreshData={this.getPageData.bind(this)}/>
+  
   
   return (
    <div>

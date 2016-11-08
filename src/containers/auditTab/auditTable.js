@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM  from 'react-dom';
 import {Table, Column, Cell} from 'fixed-data-table';
 import DropdownTable from '../../components/dropdown/dropdownTable'
 import Dimensions from 'react-dimensions'
@@ -101,14 +102,15 @@ class AuditTable extends React.Component {
 
   }
 
+
   startAudit(columnKey,rowIndex) {
-    var auditId, sortedIndex;
+    var auditId = [], sortedIndex;
     if(this.props.tableData.sortedDataList._data !== undefined) {
       sortedIndex = this.props.tableData.sortedDataList._indexMap[rowIndex];
-      auditId = this.props.tableData.sortedDataList._data.newData[sortedIndex].id;
+      auditId.push(this.props.tableData.sortedDataList._data.newData[sortedIndex].id);
    }
    else {
-    auditId = this.props.items[rowIndex].id;
+    auditId.push(this.props.items[rowIndex].id);
    }
    modal.add(StartAudit, {
         title: '',
@@ -119,9 +121,11 @@ class AuditTable extends React.Component {
     });
   }
 
- manageAuditTask(rowIndex,option) { 
+ manageAuditTask(rowIndex,option ){
   if(option.value === "duplicateTask"){
     var auditType, auditTypeValue, auditComplete,auditTypeParam;
+
+
     if(this.props.tableData.sortedDataList._data !== undefined) {
       sortedIndex = this.props.tableData.sortedDataList._indexMap[rowIndex];
       auditType = this.props.tableData.sortedDataList.newData[sortedIndex].auditType;
@@ -145,17 +149,16 @@ class AuditTable extends React.Component {
       refreshData:this.props.refreshData
   });
 
-  }
-
+}
   else if(option.value === "deleteRecord"){
     var auditId;
     if(this.props.tableData.sortedDataList._data !== undefined) {
       sortedIndex = this.props.tableData.sortedDataList._indexMap[rowIndex];
       auditId = this.props.tableData.sortedDataList._data.newData[sortedIndex].id;
-   }
-   else {
-    auditId = this.props.items[rowIndex].id;
-   }
+    }
+    else {
+      auditId = this.props.items[rowIndex].id;
+     }
     modal.add(DeleteAudit, {
       title: '',
       size: 'large', // large, medium or small,
@@ -164,9 +167,9 @@ class AuditTable extends React.Component {
       auditId:auditId,
       auditComplete:auditComplete
     });
-  }
  }
-  
+}
+    
 
   render() {
     var sortedDataList = this._dataList;
@@ -192,7 +195,7 @@ class AuditTable extends React.Component {
               defaultMessage ="Audit Tasks"/>
             </div>
             <div className="gor-button-wrap">
-            <button className="gor-auditCreate-btn" onClick={this.createAudit.bind(this)}>
+            <button className="gor-auditCreate-btn" onClick={this.createAudit.bind(this)} >
               
               <FormattedMessage id="audit.table.buttonLable" description="button label for audit create" 
               defaultMessage ="Create New Task"/>
@@ -210,7 +213,7 @@ class AuditTable extends React.Component {
         </div>
        </div>
 
-      <Table
+      <Table 
         rowHeight={60}
         rowsCount={rowsCount}
         headerHeight={70}
@@ -245,6 +248,7 @@ class AuditTable extends React.Component {
         />
 
         <Column
+
           columnKey="auditTypeValue"
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
@@ -254,7 +258,7 @@ class AuditTable extends React.Component {
               <div className="gorToolHeaderSubText">  </div>
             </SortHeaderCell>
           }
-           cell={<TextCell data={sortedDataList} ></TextCell>}
+          cell={<TextCell data={sortedDataList} ></TextCell>}
           fixed={true}
           width={columnWidths.auditTypeValue}
           isResizable={true}
@@ -340,8 +344,10 @@ class AuditTable extends React.Component {
               <div className="gorToolHeaderSubText">  </div>
             </SortHeaderCell>
           }
-          cell={<ActionCellAudit data={sortedDataList} handleAudit={this.startAudit.bind(this)} tasks={tasks} manageAuditTask={this.manageAuditTask.bind(this)} showBox="startAudit"/>}
+          cell={<ActionCellAudit data={sortedDataList} handleAudit={this.startAudit.bind(this)} tasks={tasks} 
+          manageAuditTask={this.manageAuditTask.bind(this)} showBox="startAudit"/>}
           width={columnWidths.actions}
+          
         />
       </Table>
       </div>

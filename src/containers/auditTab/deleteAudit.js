@@ -26,7 +26,6 @@ class DeleteAudit extends React.Component{
     }
     this.props.userRequest(userData);
     this.props.removeModal();
-
   }  
   render()
   {

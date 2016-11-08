@@ -85,7 +85,7 @@ class StartAudit extends React.Component{
               <div className='gor-usr-add'><FormattedMessage id="audit.start.heading" description='Heading for start audit' 
             defaultMessage='Start audit task'/>
                           <div className='gor-sub-head'><FormattedMessage id="audit.start.subheading" description='Subheading for start audit' 
-            defaultMessage='Assign one or more PPS and start the audit task.'/></div>
+            defaultMessage='Assign one or more PPS and start the audit task'/></div>
               </div>
               <span className="close" onClick={this._removeThisModal.bind(this)}>×</span>
             </div>
@@ -96,7 +96,7 @@ class StartAudit extends React.Component{
             <div className='gor-usr-form'>
             <div className='gor-usr-details'>
             <div className='gor-usr-hdsm'><FormattedMessage id="audit.start.auditdetails.heading" description='Text for audit details heading' 
-            defaultMessage='Assign PPS for Location'/></div>
+            defaultMessage='Assign PPS for {task}' values={{task:this.props.task?this.props.task:''}}/></div>
             <div className='gor-sub-head'>{checkList.length>0?(<FormattedMessage id="audit.start.auditdetails.subheading1" description='Text for audit details subheading when pps present' 
             defaultMessage='All PPS below are currently in the audit mode.'/>):<NoPPS removeFn={this._removeThisModal.bind(this)} />}</div>
             <ul>

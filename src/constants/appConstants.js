@@ -114,7 +114,7 @@ export const AUDIT_RETRIEVE = "AUDIT_RETRIEVE";
 export const RECIEVE_AUDIT_DATA = "RECIEVE_AUDIT_DATA";
 export const CREATE_AUDIT='CREATE_AUDIT';
 export const DELETE_AUDIT='DELETE_AUDIT';
-
+export const GET_PPSLIST='GET_PPSLIST';
 
 
 /*Constants for app info checking*/
@@ -183,6 +183,8 @@ export const CODE_E025='e025';
 export const CODE_G015='g015';
 export const CODE_AE001='ae001';
 export const CODE_AE002='ae002';
+export const CODE_AE004='ae004';
+export const CODE_AE005='ae005';
 export const CODE_AE006='ae006';
 export const CODE_AS002='as002';
 export const CODE_AS003='as003';

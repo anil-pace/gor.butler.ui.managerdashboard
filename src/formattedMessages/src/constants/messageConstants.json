@@ -115,11 +115,6 @@
     "defaultMessage": "Given audit does not exists"
   },
   {
-    "id": "notify.error.audit.g015",
-    "description": "Text for type other than sku and location",
-    "defaultMessage": "Input not a sku or location"
-  },
-  {
     "id": "notify.error.audit.AE001",
     "description": "Text for invalid audit ID",
     "defaultMessage": "Audit Id does not exists"
@@ -128,6 +123,16 @@
     "id": "notify.error.audit.AE002",
     "description": "Text for invalid PPS",
     "defaultMessage": "Valid PPS not found for Audit"
+  },
+  {
+    "id": "notify.error.audit.AE004",
+    "description": "Text for already processed location",
+    "defaultMessage": "Audit of location already under process"
+  },
+  {
+    "id": "notify.error.audit.AE005",
+    "description": "Text for already processed sku",
+    "defaultMessage": "Audit of sku already under process"
   },
   {
     "id": "notify.error.audit.AE006",

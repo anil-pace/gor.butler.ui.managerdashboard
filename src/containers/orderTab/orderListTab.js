@@ -7,7 +7,7 @@ import ReactPaginate from 'react-paginate';
 import { connect } from 'react-redux';
 import {getPageData, getStatusFilter, getTimeFilter,getPageSize,currentPage,lastRefreshTime} from '../../actions/paginationAction';
 import {ORDERS_RETRIEVE} from '../../constants/appConstants';
-import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL} from '../../constants/configConstants';
+import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,ORDER_PAGE, PICK_BEFORE_ORDER_URL, BREACHED_URL} from '../../constants/configConstants';
 import OrderListTable from './orderListTable';
 import Dropdown from '../../components/dropdown/dropdown'
 import { FormattedMessage } from 'react-intl';
@@ -31,7 +31,7 @@ class OrderListTab extends React.Component{
     handlePageClick = (data) => {
     var url;
     if(data.url === undefined) {
-      url = API_URL + ORDERS_URL + "?page=" + (data.selected+1) + "&PAGE_SIZE=25";
+      url = API_URL + ORDERS_URL + ORDER_PAGE + (data.selected+1) + "&PAGE_SIZE=25";
     }
 
 
@@ -57,7 +57,7 @@ class OrderListTab extends React.Component{
     var data = {}, appendStatusUrl="", appendTimeUrl="", appendPageSize="";
     data.selected = 0;
     data.url = "";
-    data.url = API_URL + ORDERS_URL + "?page=" + (data.selected+1);
+    data.url = API_URL + ORDERS_URL + ORDER_PAGE + (data.selected+1);
 
     if(this.props.filterOptions.pageSize === undefined) {
       appendPageSize = PAGE_SIZE_URL + "25";
@@ -74,7 +74,7 @@ class OrderListTab extends React.Component{
     else if(this.props.filterOptions.statusFilter === "breached") {
       currentTime = new Date();
       currentTime = currentTime.toISOString();
-      appendStatusUrl = '&pick_before_time<='+currentTime+'&warehouse_status=["pending","fulfillable"]' ;
+      appendStatusUrl = PICK_BEFORE_ORDER_URL + currentTime + BREACHED_URL ;
     }
      
     else {
