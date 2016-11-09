@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM  from 'react-dom';
 import {Table, Column, Cell} from 'fixed-data-table';
 import DropdownTable from '../../components/dropdown/dropdownTable'
 import Dimensions from 'react-dimensions'
@@ -101,69 +102,71 @@ class AuditTable extends React.Component {
 
   }
 
-startAudit(columnKey,rowIndex) {
-   var auditId=[], sortedIndex;
-   if(this.props.tableData.sortedDataList._data !== undefined) {
-     sortedIndex = this.props.tableData.sortedDataList._indexMap[rowIndex];
-     auditId.push(this.props.tableData.sortedDataList._data.newData[sortedIndex].id);
-  }
-  else {
-   auditId.push(this.props.items[rowIndex].id);
-  }
-  modal.add(StartAudit, {
-       title: '',
-       size: 'large', // large, medium or small,
-       closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-       hideCloseButton: true,
-       auditId:auditId
-   });
- }
 
-manageAuditTask(rowIndex,option) {
- if(option.value === "duplicateTask"){
-   var auditType, auditTypeValue, auditComplete,auditTypeParam;
-   if(this.props.tableData.sortedDataList._data !== undefined) {
-     sortedIndex = this.props.tableData.sortedDataList._indexMap[rowIndex];
-     auditType = this.props.tableData.sortedDataList.newData[sortedIndex].auditType;
-     auditTypeParam = this.props.tableData.sortedDataList.newData[sortedIndex].auditValue;
-     auditComplete = this.props.tableData.sortedDataList.newData[sortedIndex].auditTypeValue;
+  startAudit(columnKey,rowIndex) {
+    var auditId = [], sortedIndex;
+    if(this.props.tableData.sortedDataList._data !== undefined) {
+      sortedIndex = this.props.tableData.sortedDataList._indexMap[rowIndex];
+      auditId.push(this.props.tableData.sortedDataList._data.newData[sortedIndex].id);
    }
    else {
-   auditType = this.props.items[rowIndex].auditType;
-   auditTypeParam = this.props.items[rowIndex].auditValue;
-   auditComplete = this.props.items[rowIndex].auditTypeValue;
+    auditId.push(this.props.items[rowIndex].id);
+   }
+   modal.add(StartAudit, {
+        title: '',
+        size: 'large', // large, medium or small,
+        closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+        hideCloseButton: true,
+        auditId:auditId
+    });
   }
-     
-   modal.add(DuplicateAudit, {
-     title: '',
-     size: 'large', // large, medium or small,
-     closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-     hideCloseButton: true,
-     auditType:auditType,
-     auditTypeParam:auditTypeParam,
-     auditComplete:auditComplete,
-     refreshData:this.props.refreshData
- });
 
- }
+ manageAuditTask(rowIndex,option ){
+  if(option.value === "duplicateTask"){
+    var auditType, auditTypeValue, auditComplete,auditTypeParam;
 
- else if(option.value === "deleteRecord"){
-   var auditId;
-   if(this.props.tableData.sortedDataList._data !== undefined) {
-     sortedIndex = this.props.tableData.sortedDataList._indexMap[rowIndex];
-     auditId = this.props.tableData.sortedDataList._data.newData[sortedIndex].id;
-  }
-  else {
-   auditId = this.props.items[rowIndex].id;
-  }
-   modal.add(DeleteAudit, {
-     title: '',
-     size: 'large', // large, medium or small,
-     closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-     hideCloseButton: true,
-     auditId:auditId,
-     auditComplete:auditComplete
-   });
+
+    if(this.props.tableData.sortedDataList._data !== undefined) {
+      sortedIndex = this.props.tableData.sortedDataList._indexMap[rowIndex];
+      auditType = this.props.tableData.sortedDataList.newData[sortedIndex].auditType;
+      auditTypeParam = this.props.tableData.sortedDataList.newData[sortedIndex].auditValue;
+      auditComplete = this.props.tableData.sortedDataList.newData[sortedIndex].auditTypeValue;
+    }
+    else {
+    auditType = this.props.items[rowIndex].auditType;
+    auditTypeParam = this.props.items[rowIndex].auditValue;
+    auditComplete = this.props.items[rowIndex].auditTypeValue;
+   }
+      
+    modal.add(DuplicateAudit, {
+      title: '',
+      size: 'large', // large, medium or small,
+      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: true,
+      auditType:auditType,
+      auditTypeParam:auditTypeParam,
+      auditComplete:auditComplete,
+      refreshData:this.props.refreshData
+  });
+
+}
+  else if(option.value === "deleteRecord"){
+    var auditId;
+    if(this.props.tableData.sortedDataList._data !== undefined) {
+      sortedIndex = this.props.tableData.sortedDataList._indexMap[rowIndex];
+      auditId = this.props.tableData.sortedDataList._data.newData[sortedIndex].id;
+    }
+    else {
+      auditId = this.props.items[rowIndex].id;
+     }
+    modal.add(DeleteAudit, {
+      title: '',
+      size: 'large', // large, medium or small,
+      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: true,
+      auditId:auditId,
+      auditComplete:auditComplete
+    });
  }
 }
     
@@ -192,7 +195,7 @@ manageAuditTask(rowIndex,option) {
               defaultMessage ="Audit Tasks"/>
             </div>
             <div className="gor-button-wrap">
-            <button className="gor-auditCreate-btn" onClick={this.createAudit.bind(this)}>
+            <button className="gor-auditCreate-btn" onClick={this.createAudit.bind(this)} >
               
               <FormattedMessage id="audit.table.buttonLable" description="button label for audit create" 
               defaultMessage ="Create New Task"/>
@@ -210,7 +213,7 @@ manageAuditTask(rowIndex,option) {
         </div>
        </div>
 
-      <Table
+      <Table 
         rowHeight={60}
         rowsCount={rowsCount}
         headerHeight={70}
@@ -245,6 +248,7 @@ manageAuditTask(rowIndex,option) {
         />
 
         <Column
+
           columnKey="auditTypeValue"
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
@@ -254,7 +258,7 @@ manageAuditTask(rowIndex,option) {
               <div className="gorToolHeaderSubText">  </div>
             </SortHeaderCell>
           }
-           cell={<TextCell data={sortedDataList} ></TextCell>}
+          cell={<TextCell data={sortedDataList} ></TextCell>}
           fixed={true}
           width={columnWidths.auditTypeValue}
           isResizable={true}
@@ -340,8 +344,10 @@ manageAuditTask(rowIndex,option) {
               <div className="gorToolHeaderSubText">  </div>
             </SortHeaderCell>
           }
-          cell={<ActionCellAudit data={sortedDataList} handleAudit={this.startAudit.bind(this)} tasks={tasks} manageAuditTask={this.manageAuditTask.bind(this)} showBox="startAudit"/>}
+          cell={<ActionCellAudit data={sortedDataList} handleAudit={this.startAudit.bind(this)} tasks={tasks} 
+          manageAuditTask={this.manageAuditTask.bind(this)} showBox="startAudit"/>}
           width={columnWidths.actions}
+          
         />
       </Table>
       </div>
