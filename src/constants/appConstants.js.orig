@@ -132,10 +132,10 @@ export const SKU_INFO='SKU_INFO';
 export const PAGE_DATA = "PAGE_DATA";
 export const STATUS_FILTER = "STATUS_FILTER";
 export const TIME_FILTER = "TIME_FILTER"
-export const GET_PAGE_SIZE = "GET_PAGE_SIZE";
+export const GET_PAGE_SIZE_ORDERS = "GET_PAGE_SIZE_ORDERS";
 export const DEFAULT_PAGE_SIZE = "25";
 export const PAGE_FIELD = "?page=";
-export const GET_CURRENT_PAGE = "GET_CURRENT_PAGE";
+export const GET_CURRENT_PAGE_ORDERS = "GET_CURRENT_PAGE_ORDERS";
 export const GET_LAST_REFRESH_TIME = "GET_LAST_REFRESH_TIME";
 /*Constants for Loader*/
 

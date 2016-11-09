@@ -22,7 +22,7 @@ class DeleteAudit extends React.Component{
                 'cause':DELETE_AUDIT,
                 'contentType':'application/json',
                 'accept':'application/json',
-                'token':sessionStorage.getItem('auth_token')
+                'token':this.props.auth_token
     }
     this.props.userRequest(userData);
     this.props.removeModal();
@@ -50,6 +50,7 @@ class DeleteAudit extends React.Component{
   };
  function mapStateToProps(state, ownProps){
   return  {
+      auth_token:state.authLogin.auth_token
     }
 } 
 function mapDispatchToProps(dispatch){

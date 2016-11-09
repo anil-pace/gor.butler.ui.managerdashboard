@@ -1,4 +1,4 @@
-import { STATUS_FILTER, TIME_FILTER ,GET_PAGE_SIZE,GET_CURRENT_PAGE,GET_LAST_REFRESH_TIME} from '../constants/appConstants'
+import { STATUS_FILTER, TIME_FILTER ,GET_PAGE_SIZE_ORDERS,GET_CURRENT_PAGE_ORDERS,GET_LAST_REFRESH_TIME} from '../constants/appConstants'
 export  function filterOptions(state={},action){
 	switch (action.type) {
 	  
@@ -12,12 +12,12 @@ export  function filterOptions(state={},action){
 	    	"timeFilter":action.data
       })  
 
-	  case GET_PAGE_SIZE:
+	  case GET_PAGE_SIZE_ORDERS:
 	  	return Object.assign({}, state, {
 	    	"pageSize":action.data
       }) 
 
-	  case GET_CURRENT_PAGE:
+	  case GET_CURRENT_PAGE_ORDERS:
 	  	return Object.assign({}, state, {
 	    	"currentPage":action.data
       })

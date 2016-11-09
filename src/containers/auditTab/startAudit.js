@@ -53,7 +53,7 @@ class StartAudit extends React.Component{
                 'cause':START_AUDIT,
                 'contentType':'application/json',
                 'accept':'application/json',
-                'token':sessionStorage.getItem('auth_token')
+                'token':this.props.auth_token
     }
     this.props.userRequest(userData);
     this.props.removeModal();
@@ -121,7 +121,8 @@ class StartAudit extends React.Component{
 function mapStateToProps(state, ownProps){
   return {
       auditType:  state.auditInfo.auditType  || {},
-      ppsList: state.auditInfo.ppsList  || []
+      ppsList: state.auditInfo.ppsList  || [],
+      auth_token:state.authLogin.auth_token
   };
 }
 

@@ -217,7 +217,7 @@ manageAuditTask(rowIndex,option) {
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
         width={this.props.containerWidth}
-        height={this.props.containerHeight}
+        height={this.props.containerHeight*0.9}
         {...this.props}>
         <Column
           columnKey="id"

@@ -140,11 +140,14 @@ export const SKU_INFO='SKU_INFO';
 export const PAGE_DATA = "PAGE_DATA";
 export const STATUS_FILTER = "STATUS_FILTER";
 export const TIME_FILTER = "TIME_FILTER"
-export const GET_PAGE_SIZE = "GET_PAGE_SIZE";
+export const GET_PAGE_SIZE_ORDERS = "GET_PAGE_SIZE_ORDERS";
 export const DEFAULT_PAGE_SIZE = "25";
 export const PAGE_FIELD = "?page=";
-export const GET_CURRENT_PAGE = "GET_CURRENT_PAGE";
+export const GET_CURRENT_PAGE_ORDERS = "GET_CURRENT_PAGE_ORDERS";
 export const GET_LAST_REFRESH_TIME = "GET_LAST_REFRESH_TIME";
+export const GET_PAGE_SIZE_AUDIT = "GET_PAGE_SIZE_AUDIT";
+export const GET_CURRENT_PAGE_AUDIT = "GET_CURRENT_PAGE_AUDIT";
+
 /*Constants for Loader*/
 
 export const DISPLAY_LOADER = "DISPLAY_LOADER";
@@ -179,7 +182,8 @@ export const CODE_UE003='ue003';
 export const CODE_UE004='ue004';
 export const CODE_UE005='ue005';
 export const CODE_UE006='ue006';
-export const CODE_E025='e025';
+export const CODE_E026='e026';
+export const CODE_E027='e027';
 export const CODE_G015='g015';
 export const CODE_AE001='ae001';
 export const CODE_AE002='ae002';

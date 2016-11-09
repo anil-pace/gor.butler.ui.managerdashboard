@@ -83,8 +83,10 @@ export const INVALID_LOCID= (<FormattedMessage id="audit.invalid.location" descr
 
 
 // Codes for audit management
-export const E025 = (<FormattedMessage id="notify.error.audit.e025" description='Text for invalid sku number or location' 
-            defaultMessage="Either location or sku does not exist"/>);
+export const E026 = (<FormattedMessage id="notify.error.audit.location" description='Text for invalid location' 
+            defaultMessage="Location does not exist"/>);
+export const E027 = (<FormattedMessage id="notify.error.audit.sku" description='Text for invalid sku' 
+            defaultMessage="SKU does not exist"/>);
 export const G016 = (<FormattedMessage id="notify.error.audit.g016" description='Text for unsuccessful audit deletion' 
             defaultMessage="Given audit does not exists"/>);
 export const AE001 = (<FormattedMessage id="notify.error.audit.AE001" description='Text for invalid audit ID' 

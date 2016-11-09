@@ -5,7 +5,7 @@
 import React  from 'react';
 import ReactPaginate from 'react-paginate';
 import { connect } from 'react-redux';
-import {getPageData, getStatusFilter, getTimeFilter,getPageSize,currentPage,lastRefreshTime} from '../../actions/paginationAction';
+import {getPageData, getStatusFilter, getTimeFilter,getPageSizeOrders,currentPageOrders,lastRefreshTime} from '../../actions/paginationAction';
 import {ORDERS_RETRIEVE} from '../../constants/appConstants';
 import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL} from '../../constants/configConstants';
 import OrderListTable from './orderListTable';
@@ -136,7 +136,7 @@ class OrderListTab extends React.Component{
       <OrderListTable items={this.props.orderData.ordersDetail} itemNumber={itemNumber} statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter} refreshOption={this.refresh.bind(this)} lastUpdated={updateStatusIntl} refreshList={this.refresh.bind(this)} intlMessg={this.props.intlMessages}/>
       
       <div className="gor-pageNum">
-        <Dropdown  styleClass={'gor-Page-Drop'}  items={ordersByStatus} currentState={ordersByStatus[0]} optionDispatch={this.props.getPageSize} refreshList={this.refresh.bind(this)}/>
+        <Dropdown  styleClass={'gor-Page-Drop'}  items={ordersByStatus} currentState={ordersByStatus[0]} optionDispatch={this.props.getPageSizeOrders} refreshList={this.refresh.bind(this)}/>
       </div>
       <div className="gor-paginate">
         <div className = "gor-paginate-state"> 
@@ -177,8 +177,8 @@ var mapDispatchToProps = function(dispatch){
     getPageData: function(data){ dispatch(getPageData(data)); },
     getStatusFilter: function(data){ dispatch(getStatusFilter(data)); },
     getTimeFilter: function(data){ dispatch(getTimeFilter(data)); },
-    getPageSize: function(data){ dispatch(getPageSize(data));},
-    currentPage: function(data){ dispatch(currentPage(data));},
+    getPageSizeOrders: function(data){ dispatch(getPageSizeOrders(data));},
+    currentPage: function(data){ dispatch(currentPageOrders(data));},
     lastRefreshTime: function(data){ dispatch(lastRefreshTime(data));}
   }
 };

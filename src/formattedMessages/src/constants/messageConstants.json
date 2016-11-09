@@ -105,9 +105,14 @@
     "defaultMessage": "Please enter a valid location Number"
   },
   {
-    "id": "notify.error.audit.e025",
-    "description": "Text for invalid sku number or location",
-    "defaultMessage": "Either location or sku does not exist"
+    "id": "notify.error.audit.location",
+    "description": "Text for invalid location",
+    "defaultMessage": "Location does not exist"
+  },
+  {
+    "id": "notify.error.audit.sku",
+    "description": "Text for invalid sku",
+    "defaultMessage": "SKU does not exist"
   },
   {
     "id": "notify.error.audit.g016",

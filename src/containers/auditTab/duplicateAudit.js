@@ -28,7 +28,7 @@ class DuplicateAudit extends React.Component{
                 'cause':CREATE_AUDIT,
                 'contentType':'application/json',
                 'accept':'application/json',
-                'token':sessionStorage.getItem('auth_token')
+                'token':this.props.auth_token
     }
     this.props.userRequest(userData);
     this._removeThisModal();
@@ -56,6 +56,7 @@ class DuplicateAudit extends React.Component{
   };
  function mapStateToProps(state, ownProps){
   return  {
+      auth_token:state.authLogin.auth_token
     }
 } 
 function mapDispatchToProps(dispatch){
