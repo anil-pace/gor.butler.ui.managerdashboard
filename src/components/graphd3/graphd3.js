@@ -1,4 +1,4 @@
-  import React  from 'react';
+import React  from 'react';
 import rd3 from 'react-d3-library';
 import * as d3 from 'd3';
 import Dimensions from 'react-dimensions'
@@ -67,16 +67,28 @@ class Chart extends React.Component{
         update(data);
       }
     function update(data) {
-
+      var noDataFlag = true;
       var m_names = new Array("Jan", "Feb", "March", 
 "April", "May", "June", "July", "Aug", "Sep", 
 "Oct", "Nov", "Dec"); 
       data.forEach(function(d) {
         d.type = +d.type;
      });
+      
+      for (var i = data.length - 1; i >= 0; i--) {
+        if(data[i].type !== 0) {
+          noDataFlag = false;
+          break;
+        }
+      }
+      if(noDataFlag === false) {
+        y.domain([0, d3.max(data, function(d) { return d.type; })]);
+      }
+      else {
+        y.domain([0,100]);
+      }
+      
       x.domain(data.map(function(d) { return d.timeInterval; }));
-      y.domain([0, d3.max(data, function(d) { return d.type; })]);
-
       
 
       svg.append("g")         
@@ -171,7 +183,10 @@ class Chart extends React.Component{
            mousex = mousex[0] + 10;
            d3.selectAll('.remove').style("left", mousex + "px");
          });
-    //component.props.barD3Component(node);    
+    if(noDataFlag === true) {
+      svg.insert("text",":first-child").attr("x",width/2).attr("y",height/2).text("No Data"|| "");
+    }
+
     component.setState({d3: node});
     }
 

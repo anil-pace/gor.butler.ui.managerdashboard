@@ -12,6 +12,54 @@ import OrderListTable from './orderListTable';
 import Dropdown from '../../components/dropdown/dropdown'
 import { FormattedMessage } from 'react-intl';
 
+function processOrders(data, nProps) {
+  let progress  = nProps.context.intl.formatMessage({id:"orderList.progress.status", defaultMessage: "In Progress"});
+  let completed  = nProps.context.intl.formatMessage({id:"orderList.completed.status", defaultMessage: "Completed"});
+  let unfulfillable  = nProps.context.intl.formatMessage({id:"orderList.Unfulfillable.status", defaultMessage: "Unfulfillable"});
+  var renderOrderData = [], ordersStatus = {'pending':progress, "fulfillable": progress, "completed":completed, "not_fulfillable":unfulfillable},orderData = {};
+  var breachedStatus = {'pending':1, "fulfillable": 1, "completed":3, "not_fulfillable":2};
+  var unBreachedStatus = {'pending':4, "fulfillable": 4, "completed":6, "not_fulfillable":5};
+  
+  if(data.length !== undefined) {
+    for (var i =0; i < data.length; i++) {
+      orderData.id = data[i].order_id;
+
+      if(data[i].breached === false) {
+        orderData.status = ordersStatus[data[i].status];
+        orderData.statusClass = data[i].status;
+        orderData.statusPriority = unBreachedStatus[data[i].status];
+      }
+
+      else {
+        orderData.status = ordersStatus[data[i].status];
+        orderData.statusClass = "breached";
+        orderData.statusPriority = breachedStatus[data[i].status];
+      }
+      orderData.recievedTime = (data[i].create_time.substring(4));
+      orderData.recievedTime = orderData.recievedTime.substring(0, orderData.recievedTime.length - 4)
+      if(data[i].pick_before_time === null) {
+        orderData.pickBy = "--";
+      }
+      else {
+        orderData.pickBy = data[i].pick_before_time.substring(4);
+        orderData.pickBy = orderData.pickBy.substring(0, orderData.pickBy.length - 4)
+      }
+
+      if(data[i].completed_orderlines === data[i].total_orderlines) {
+        orderData.orderLine = data[i].total_orderlines;
+      }
+      else {
+        orderData.orderLine = data[i].completed_orderlines + "/" + data[i].total_orderlines;
+      }
+      orderData.completedTime = data[i].update_time.substring(4);
+      orderData.completedTime = orderData.completedTime.substring(0, orderData.completedTime.length - 4);
+
+      renderOrderData.push(orderData);
+      orderData = {};
+    }
+  }
+  return renderOrderData;
+}
 
 class OrderListTab extends React.Component{
   constructor(props) 
@@ -128,12 +176,15 @@ class OrderListTab extends React.Component{
     { value: '1000', label: '1000' }
     ];
     var currentPage = this.props.filterOptions.currentPage, totalPage = this.props.orderData.totalPage;
-
+    var orderDetail;
+    if(this.props.orderData.ordersDetail !== undefined) {
+      orderDetail = processOrders(this.props.orderData.ordersDetail, this);
+    }
     return (
       <div>
       <div className="gor-Orderlist-table" >  
 
-      <OrderListTable items={this.props.orderData.ordersDetail} itemNumber={itemNumber} statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter} refreshOption={this.refresh.bind(this)} lastUpdated={updateStatusIntl} refreshList={this.refresh.bind(this)} intlMessg={this.props.intlMessages}/>
+      <OrderListTable items={orderDetail} itemNumber={itemNumber} statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter} refreshOption={this.refresh.bind(this)} lastUpdated={updateStatusIntl} refreshList={this.refresh.bind(this)} intlMessg={this.props.intlMessages}/>
       
       <div className="gor-pageNum">
         <Dropdown  styleClass={'gor-Page-Drop'}  items={ordersByStatus} currentState={ordersByStatus[0]} optionDispatch={this.props.getPageSize} refreshList={this.refresh.bind(this)}/>
@@ -182,5 +233,9 @@ var mapDispatchToProps = function(dispatch){
     lastRefreshTime: function(data){ dispatch(lastRefreshTime(data));}
   }
 };
+
+OrderListTab.contextTypes = {
+ intl:React.PropTypes.object.isRequired
+}
 
 export default connect(mapStateToProps,mapDispatchToProps)(OrderListTab) ;

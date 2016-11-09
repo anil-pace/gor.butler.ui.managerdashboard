@@ -23,18 +23,11 @@ class ChargingStationsTable extends React.Component {
     if(nextProps.items !== undefined && tempGlobal === 0) {
       tempGlobal = 1;
       this._onSortChange("id","DESC");
-    }
-      //this._onSortChange("id","DESC");
-      
-
+    } 
   }
 
   componentDidMount() {
-      //tempGlobal = 0;
-      this.props.currentTableState(this.tableState(this.props, this));
-      //this._onSortChange("id","DESC");
-
-      //    
+    this.props.currentTableState(this.tableState(this.props, this));    
   }
 
    componentWillUnmount() {

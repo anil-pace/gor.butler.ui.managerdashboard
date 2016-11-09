@@ -2916,6 +2916,15 @@ progress::-moz-progress-bar {
 
 .gor-header-check {
   display: inline-block;
+  padding-left: 22px;
+  vertical-align: middle;
+  padding-top: 10px;
+}
+
+.gor-header-id {
+  display: inline-block;
+  vertical-align: middle;
+  padding-top: 10px;
 }
 
 .gorSubTab.gorContainer {
@@ -3395,7 +3404,7 @@ progress::-moz-progress-bar {
 .gor-pageNum {
   display: inline-block;
   padding-left: 30px;
-  padding-top: 10px;
+  padding-top: 32px;
 }
 
 .gor-Page-Drop {
@@ -3496,7 +3505,7 @@ progress::-moz-progress-bar {
 
 .gor-paginate-state {
   display: inline-block;
-  vertical-align: top;
+  vertical-align: super;
   padding-top: 11px;
   color: #666666;
 }

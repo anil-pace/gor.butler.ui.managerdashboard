@@ -1518,5 +1518,14 @@ progress::-moz-progress-bar {
 
 .gor-header-check {
   display: inline-block;
+  padding-left: 22px;
+  vertical-align: middle;
+  padding-top: 10px;
+}
+
+.gor-header-id {
+  display: inline-block;
+  vertical-align: middle;
+  padding-top: 10px;
 }
 

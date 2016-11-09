@@ -87,7 +87,7 @@ class OrderListTable extends React.Component {
     }
     var filterField = ["recievedTime","id","status","completedTime","pickBy","orderLine"];
     this.setState({
-      sortedDataList: new DataListWrapper(filterIndex(e,this._dataList), this._dataList),
+      sortedDataList: new DataListWrapper(filterIndex(e,this._dataList,filterField), this._dataList),
     });
   }
   

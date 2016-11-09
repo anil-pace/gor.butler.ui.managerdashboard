@@ -104,11 +104,11 @@ render(){
   
   return (
    <div>
-   <div>
-   <div className="gorUserTable">
-   {renderTab}
-   </div>
-   </div>
+    <div>
+      <div className="gorUserTable">
+        {renderTab}
+      </div>
+    </div>
    </div>
    );
 }
