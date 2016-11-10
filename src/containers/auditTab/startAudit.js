@@ -43,7 +43,7 @@ class StartAudit extends React.Component{
     e.preventDefault();
     let formdata;
     formdata={
-      audit_id_list: ["LN8iEcyGRF"], 
+      audit_id_list: this.props.auditId, 
       pps_list: this.state.checked
     }
     let userData={
@@ -53,7 +53,7 @@ class StartAudit extends React.Component{
                 'cause':START_AUDIT,
                 'contentType':'application/json',
                 'accept':'application/json',
-                'token':sessionStorage.getItem('auth_token')
+                'token':this.props.auth_token
     }
     this.props.userRequest(userData);
     this.props.removeModal();
@@ -85,7 +85,7 @@ class StartAudit extends React.Component{
               <div className='gor-usr-add'><FormattedMessage id="audit.start.heading" description='Heading for start audit' 
             defaultMessage='Start audit task'/>
                           <div className='gor-sub-head'><FormattedMessage id="audit.start.subheading" description='Subheading for start audit' 
-            defaultMessage='Assign one or more PPS and start the audit task.'/></div>
+            defaultMessage='Assign one or more PPS and start the audit task'/></div>
               </div>
               <span className="close" onClick={this._removeThisModal.bind(this)}>×</span>
             </div>
@@ -96,7 +96,7 @@ class StartAudit extends React.Component{
             <div className='gor-usr-form'>
             <div className='gor-usr-details'>
             <div className='gor-usr-hdsm'><FormattedMessage id="audit.start.auditdetails.heading" description='Text for audit details heading' 
-            defaultMessage='Assign PPS for Location'/></div>
+            defaultMessage='Assign PPS for {task}' values={{task:this.props.task?this.props.task:''}}/></div>
             <div className='gor-sub-head'>{checkList.length>0?(<FormattedMessage id="audit.start.auditdetails.subheading1" description='Text for audit details subheading when pps present' 
             defaultMessage='All PPS below are currently in the audit mode.'/>):<NoPPS removeFn={this._removeThisModal.bind(this)} />}</div>
             <ul>
@@ -121,7 +121,8 @@ class StartAudit extends React.Component{
 function mapStateToProps(state, ownProps){
   return {
       auditType:  state.auditInfo.auditType  || {},
-      ppsList: state.auditInfo.ppsList  || []
+      ppsList: state.auditInfo.ppsList  || [],
+      auth_token:state.authLogin.auth_token
   };
 }
 

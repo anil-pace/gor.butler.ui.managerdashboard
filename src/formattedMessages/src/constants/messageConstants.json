@@ -105,19 +105,19 @@
     "defaultMessage": "Please enter a valid location Number"
   },
   {
-    "id": "notify.error.audit.e025",
-    "description": "Text for invalid sku number or location",
-    "defaultMessage": "Either location or sku does not exist"
+    "id": "notify.error.audit.location",
+    "description": "Text for invalid location",
+    "defaultMessage": "Location does not exist"
+  },
+  {
+    "id": "notify.error.audit.sku",
+    "description": "Text for invalid sku",
+    "defaultMessage": "SKU does not exist"
   },
   {
     "id": "notify.error.audit.g016",
     "description": "Text for unsuccessful audit deletion",
     "defaultMessage": "Given audit does not exists"
-  },
-  {
-    "id": "notify.error.audit.g015",
-    "description": "Text for type other than sku and location",
-    "defaultMessage": "Input not a sku or location"
   },
   {
     "id": "notify.error.audit.AE001",
@@ -128,6 +128,16 @@
     "id": "notify.error.audit.AE002",
     "description": "Text for invalid PPS",
     "defaultMessage": "Valid PPS not found for Audit"
+  },
+  {
+    "id": "notify.error.audit.AE004",
+    "description": "Text for already processed location",
+    "defaultMessage": "Audit of location already under process"
+  },
+  {
+    "id": "notify.error.audit.AE005",
+    "description": "Text for already processed sku",
+    "defaultMessage": "Audit of sku already under process"
   },
   {
     "id": "notify.error.audit.AE006",

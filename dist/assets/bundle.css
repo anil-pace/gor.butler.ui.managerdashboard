@@ -204,9 +204,8 @@ body {
 }
 
 .gor-logo {
-  background-position: 11px -112px;
+  background-position: 11px -117px;
   width: 173px;
-  height: 7px;
   padding: 10px;
 }
 
@@ -633,10 +632,16 @@ body {
   border-bottom: 0.15em solid #e7e7e7;
 }
 
-.gorHeader .logoWrap {
+.gorHeader .gor-border {
   border-right: 0.0625rem solid #F2F2F2;
   display: inline-block;
-  padding-right: 9px;
+  height: 1.625rem;
+  vertical-align: middle;
+}
+
+.gorHeader .logoWrap {
+  display: inline-block;
+  padding-right: 10px;
 }
 
 .gorHeader .logo {
@@ -681,7 +686,7 @@ body {
 .gorHeader .mainBlock {
   display: inline-block;
   overflow: hidden;
-  padding: 0rem 0.3125rem;
+  padding: 0rem 0rem;
 }
 
 .gorHeader .blockSystem {
@@ -2629,6 +2634,12 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   position: relative;
 }
 
+.gor-Auditlist-table {
+  width: 100%;
+  height: 79vh;
+  position: relative;
+}
+
 .gorTableMainContainer {
   overflow-x: hidden;
 }
@@ -2882,6 +2893,15 @@ progress::-moz-progress-bar {
 
 .gor-header-check {
   display: inline-block;
+  padding-left: 22px;
+  vertical-align: middle;
+  padding-top: 10px;
+}
+
+.gor-header-id {
+  display: inline-block;
+  vertical-align: middle;
+  padding-top: 10px;
 }
 
 .gorSubTab.gorContainer {
@@ -3361,7 +3381,7 @@ progress::-moz-progress-bar {
 .gor-pageNum {
   display: inline-block;
   padding-left: 30px;
-  padding-top: 10px;
+  padding-top: 32px;
 }
 
 .gor-Page-Drop {
@@ -3462,7 +3482,7 @@ progress::-moz-progress-bar {
 
 .gor-paginate-state {
   display: inline-block;
-  vertical-align: top;
+  vertical-align: super;
   padding-top: 11px;
   color: #666666;
 }

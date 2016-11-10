@@ -66,10 +66,10 @@ class Header extends React.Component{
 			<div className="mainBlock">
 				<div className="logoWrap">
 					<div>
-						<div className="gor-logo logo">
+						<div className="gor-logo logo"> </div>
 					</div>
 				</div>
-				</div>
+				<div className="gor-border"/>
 				<div className="blockSystem">
 
 					<div className="upperText">
@@ -88,12 +88,10 @@ class Header extends React.Component{
 			<div className="blockLeft">
 				<div className="logoWrap">
 					<div>
-						<div className="logo fk-logo">
+						<div className="logo fk-logo"></div>
 					</div>
 				</div>
-				
-					
-				</div>
+				<div className="gor-border"/>
 				<div className="dropdown" id="profile"  >
 					<div  className="dropbtn" onClick={this.openDropdown}>
 						<div className="block">

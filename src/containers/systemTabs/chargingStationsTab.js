@@ -10,13 +10,14 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 
 function processChargersData(data, nProps) {
-  var chargerData=[],detail = {};
+  var chargerData=[],detail = {},count = 0;
   let CS, csId, botId, BUTLER;
   let connected  = nProps.context.intl.formatMessage({id:"chargersDetail.connected.status", defaultMessage: "Connected"});
   let disconnected  = nProps.context.intl.formatMessage({id:"chargersDetail.disconnected.status", defaultMessage: "Disconnected"});
   let manual  = nProps.context.intl.formatMessage({id:"chargersDetail.manual.mode", defaultMessage: "Manual"});
   let auto  = nProps.context.intl.formatMessage({id:"chargersDetail.auto.mode", defaultMessage: "Auto"});
-  var status = {"connected":connected, "disconnected":disconnected}, mode = {"manual":manual, "auto":auto}
+  var status = {"connected":connected, "disconnected":disconnected}, mode = {"manual":manual, "auto":auto};
+  var priStatus = {"connectd": 1, "disconnected": 2};
   for (var i = data.length - 1; i >= 0; i--) {
     detail = {}
     csId = data[i].charger_id;
@@ -26,6 +27,7 @@ function processChargersData(data, nProps) {
     detail.id = CS;
     detail.status = status[data[i].charger_status];
     detail.statusClass = data[i].charger_status;
+    detail.statusPriority = priStatus[data[i].charger_status];
     detail.mode = mode[data[i].charger_mode];
     if(data[i].docked_butler_id !== null && data[i].docked_butler_id.length !== 0 ) {
        detail.dockedBots = BUTLER;

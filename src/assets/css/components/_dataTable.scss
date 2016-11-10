@@ -1246,6 +1246,12 @@ color: #000000;
   position:relative;
 }
 
+.gor-Auditlist-table {
+  width: 100%;
+  height: 79vh;
+  position:relative;
+}
+
 .gorTableMainContainer {
   overflow-x: hidden;
 }
@@ -1491,5 +1497,14 @@ progress::-moz-progress-bar {
 
 .gor-header-check {
   display: inline-block;
+  padding-left: 22px;
+  vertical-align: middle;
+  padding-top: 10px;
+}
+
+.gor-header-id {
+  display: inline-block;
+  vertical-align: middle;
+  padding-top: 10px;
 }
 

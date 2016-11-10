@@ -7,11 +7,13 @@ export  function recieveAuditDetail(state={},action){
   switch (action.type) {
     case RECIEVE_AUDIT_DATA:
 
-          var res, auditDetail;
+          var res, auditDetail, totalPage;
           res=action.data;
+          totalPage=res.total_pages;
           if(res.audit) {
           return Object.assign({}, state, { 
-            "auditDetail" : res.audit
+            "auditDetail" : res.audit,
+            "totalPage" : totalPage
           })
           }
 

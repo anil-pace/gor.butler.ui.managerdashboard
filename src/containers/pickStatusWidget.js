@@ -69,7 +69,7 @@ class PickStatusWidget extends React.Component{
             textleft=<FormattedNumber id='widget.pick.textleft' value={ordersData.count_pending} />;
             pickThroughput = <FormattedNumber value={pickThroughput}/>
             lowleft=<FormattedMessage id="widget.pick.throughput" description='Throughput message' 
-                            defaultMessage='{count} PPS fullfilling at {throughput} orders/hr'
+                            defaultMessage='{count} PPS fullfilling at {throughput} items/hr'
                             values={{
                                 count: ppsCount,
                                 throughput:pickThroughput
