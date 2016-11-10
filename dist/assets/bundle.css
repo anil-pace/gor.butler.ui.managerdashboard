@@ -1446,7 +1446,6 @@ body {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   left: 0;
-  /*overflow: hidden;*/
   position: absolute;
   top: 0;
   white-space: nowrap;
@@ -1470,7 +1469,6 @@ body {
   border-width: 0 1px 0 0;
   box-sizing: border-box;
   display: block;
-  overflow: hidden;
   position: absolute;
   white-space: normal;
   background: grey;
@@ -1544,14 +1542,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   display: none !important;
 }
 
-.fixedDataTableLayout_main {
-  border-style: solid;
-  border-width: 1px;
-  box-sizing: border-box;
-  overflow: hidden;
-  position: relative;
-}
-
 .fixedDataTableLayout_header,
 .fixedDataTableLayout_hasBottomBorder {
   border-bottom-style: solid;
@@ -1577,7 +1567,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 }
 
 .fixedDataTableLayout_rowsContainer {
-  overflow: hidden;
   position: relative;
 }
 
@@ -1598,7 +1587,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
  */
 .fixedDataTableRowLayout_main {
   box-sizing: border-box;
-  /*overflow: hidden;*/
   position: absolute;
   top: 0;
   border-bottom: #e6e6e6;
@@ -1625,12 +1613,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 
 .fixedDataTableRowLayout_columnsShadow {
   width: 4px;
-}
-
-.fixedDataTableRowLayout_rowWrapper {
-  position: absolute;
-  top: 0;
-  z-index: 20;
 }
 
 /**
@@ -2112,7 +2094,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   left: 0;
-  overflow: hidden;
   position: absolute;
   top: 0;
   white-space: nowrap;
@@ -2144,7 +2125,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   border-width: 0 1px 0 0;
   box-sizing: border-box;
   display: block;
-  /*overflow: hidden;*/
   position: absolute;
   white-space: normal;
 }
@@ -2245,7 +2225,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   border-style: solid;
   border-width: 1px;
   box-sizing: border-box;
-  overflow: hidden;
   position: relative;
 }
 
@@ -2273,11 +2252,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   margin-top: -4px;
 }
 
-.fixedDataTableLayout_rowsContainer {
-  /*overflow: hidden;*/
-  position: relative;
-}
-
 .fixedDataTableLayout_horizontalScrollbar {
   bottom: 0;
   position: absolute;
@@ -2295,7 +2269,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
  */
 .fixedDataTableRowLayout_main {
   box-sizing: border-box;
-  overflow: hidden;
   position: absolute;
   top: 0;
 }

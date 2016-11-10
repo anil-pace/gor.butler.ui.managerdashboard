@@ -136,16 +136,17 @@ export const StatusCell = ({rowIndex, data, columnKey,statusKey, ...props}) => (
   </Cell>
 );
 
-export const ActionCellAudit = ({rowIndex, data, columnKey, tasks, handleAudit,manageAuditTask,showBox, ...props}) => (
+export const ActionCellAudit = ({rowIndex, data, columnKey, tasks, handleAudit,manageAuditTask, clickDropDown, showBox, ...props}) => (
   <Cell {...props}>
-    <div className="gor-audit-actions-button">
+    <div className="gor-audit-actions-button" >
      {data.getObjectAt(rowIndex)[showBox]?(
       <button className="gor-add-btn" onClick={handleAudit.bind(this,columnKey,rowIndex)}>
           <FormattedMessage id="commonDataTable.startAudit.button" description='edit button' defaultMessage='Start audit'/>
       </button>):''}
     </div>
-    <div className="gor-audit-actions-drop">
-      <DropdownTable  styleClass={'gorDataTableDrop'} placeholder="Manage Tasks" items={tasks} changeMode={manageAuditTask.bind(this,rowIndex)}/>
+    <div className="gor-audit-actions-drop" onClick={clickDropDown.bind(this,rowIndex)}>
+      <DropdownTable  styleClass={'gorDataTableDrop'} placeholder="Manage Tasks" items={tasks} 
+      changeMode={manageAuditTask.bind(this,rowIndex)}/>
     </div>
   </Cell>
 );
