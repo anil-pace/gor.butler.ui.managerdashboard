@@ -374,120 +374,19 @@ class AuditTable extends React.Component {
     return (
     <div> {tableRenderer} </div>
     );
+  }}
+
+  function mapStateToProps(state, ownProps){
+    return {
+      tableData: state.currentTableState.currentTableState || [],
+    };
   }
-  cell={<TextCell data={sortedDataList} ></TextCell>}
-  fixed={true}
-  width={columnWidths.auditTypeValue}
-  isResizable={true}
-  />
-  <Column
-  columnKey="status"
-  header={
-    <SortHeaderCell onSortChange={this._onSortChange}
-    sortDir={colSortDirs.status}>
-    <FormattedMessage id="audit.table.STATUS" description="STATUS for audit" 
-    defaultMessage ="STATUS"/>
-    <div className="gorToolHeaderSubText">  </div>
-    <div>
 
-    </div>
-    </SortHeaderCell>
-  }
-  cell={<StatusCell data={sortedDataList} statusKey="statusClass" ></StatusCell>}
-  fixed={true}
-  width={columnWidths.status}
-  isResizable={true}
-  />
 
-  <Column
-  columnKey="startTime"
-  header={
-    <SortHeaderCell onSortChange={this._onSortChange}
-    sortDir={colSortDirs.mode}>
-    <FormattedMessage id="audit.table.startTime" description="startTime for audit" 
-    defaultMessage ="START TIME"/>
-    <div className="gorToolHeaderSubText"> 
-
-    </div>
-    </SortHeaderCell>
-  }
-  cell={<TextCell data={sortedDataList} />}
-  fixed={true}
-  width={columnWidths.startTime}
-  isResizable={true}
-  />
-  <Column
-  columnKey="progress"
-  header={
-    <SortHeaderCell onSortChange={this._onSortChange}
-    sortDir={colSortDirs.progress} >
-    <FormattedMessage id="audit.table.progress" description="progress for audit task" 
-    defaultMessage ="PROGRESS(%)"/>
-    <div className="gorToolHeaderSubText">   
-    </div> 
-    </SortHeaderCell>
-  }
-  cell={<ProgressCell data={sortedDataList}  />}
-  fixed={true}
-  width={columnWidths.progress}
-  isResizable={true}
-  />
-
-  <Column
-  columnKey="completedTime"
-  header={
-    <SortHeaderCell onSortChange={this._onSortChange}
-    sortDir={colSortDirs.completedTime}>
-    <FormattedMessage id="audit.table.timeCompleted" description="timeCompleted for audit" 
-    defaultMessage ="TIME COMPLETED"/>
-    <div className="gorToolHeaderSubText"> 
-
-    </div>
-    </SortHeaderCell>
-  }
-  cell={<TextCell data={sortedDataList} />}
-  fixed={true}
-  width={columnWidths.completedTime}
-  isResizable={true}
-  />
-
-  <Column
-  columnKey="actions"
-  header={
-    <SortHeaderCell >
-
-    <FormattedMessage id="audit.table.action" description="action Column" 
-    defaultMessage ="ACTIONS"/> 
-    <div className="gorToolHeaderSubText">  </div>
-    </SortHeaderCell>
-  }
-  cell={<ActionCellAudit data={sortedDataList} handleAudit={this.startAudit.bind(this)} tasks={tasks}
-  manageAuditTask={this.manageAuditTask.bind(this)} showBox="startAudit" 
-  clickDropDown={this._handleOnClickDropdown.bind(this)}/>}
-  width={columnWidths.actions} 
-  />
-  </Table>
-  </div>
-
-}
-return (
-<div> {tableRenderer} </div>
-);
-}
-}
-
-function mapStateToProps(state, ownProps){
-
-  return {
-    tableData: state.currentTableState.currentTableState || [],
+  var mapDispatchToProps = function(dispatch){
+    return {
+      currentTableState: function(data){ dispatch(currentTableState(data)); }
+    }
   };
-}
 
-
-var mapDispatchToProps = function(dispatch){
-  return {
-    currentTableState: function(data){ dispatch(currentTableState(data)); }
-  }
-};
-
-export default connect(mapStateToProps,mapDispatchToProps)(Dimensions()(AuditTable));
+  export default connect(mapStateToProps,mapDispatchToProps)(Dimensions()(AuditTable));
