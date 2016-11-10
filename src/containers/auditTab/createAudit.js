@@ -83,7 +83,7 @@ class CreateAudit extends React.Component{
                 'cause':CREATE_AUDIT,
                 'contentType':'application/json',
                 'accept':'application/json',
-                'token':sessionStorage.getItem('auth_token')
+                'token':this.props.auth_token
     }
     this.props.userRequest(userData);
     this.props.removeModal();
@@ -180,11 +180,11 @@ class CreateAudit extends React.Component{
     }
   }
 function mapStateToProps(state, ownProps){
-  
   return {
       auditType:  state.auditInfo.auditType  || {},
       skuCheck: state.appInfo.idInfo || {},
-      locCheck: state.appInfo.nameInfo || {}
+      locCheck: state.appInfo.nameInfo || {},
+      auth_token:state.authLogin.auth_token
   };
 }
 

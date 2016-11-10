@@ -6,5 +6,8 @@ export const preloadedState = {
  {"ordersData":{cut_off:null, count_pending:null, count_risk:null, eta:null, wave_end:null}},
  "intl":{
  	"messages": translationMessages.en
- } 
+ } ,
+ "appInfo":{
+ 	"notifyInfo":null
+ }
 }; 

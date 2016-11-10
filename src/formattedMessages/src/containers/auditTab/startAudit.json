@@ -12,12 +12,12 @@
   {
     "id": "audit.start.subheading",
     "description": "Subheading for start audit",
-    "defaultMessage": "Assign one or more PPS and start the audit task."
+    "defaultMessage": "Assign one or more PPS and start the audit task"
   },
   {
     "id": "audit.start.auditdetails.heading",
     "description": "Text for audit details heading",
-    "defaultMessage": "Assign PPS for Location"
+    "defaultMessage": "Assign PPS for {task}"
   },
   {
     "id": "audit.start.auditdetails.subheading1",

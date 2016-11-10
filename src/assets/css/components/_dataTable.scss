@@ -28,7 +28,7 @@
   border-width: 0 1px 0 0;
   box-sizing: border-box;
   display: block;
-  overflow: hidden;
+  /*overflow: hidden;*/
   position: absolute;
   white-space: normal;
   background: grey;
@@ -110,7 +110,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   border-style: solid;
   border-width: 1px;
   box-sizing: border-box;
-  overflow: hidden;
+  /*overflow: hidden;*/
   position: relative;
 }
 
@@ -139,7 +139,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 }
 
 .fixedDataTableLayout_rowsContainer {
-  overflow: hidden;
+  /*overflow: hidden;*/
   position: relative;
 }
 
@@ -387,6 +387,7 @@ border-bottom-width: 0px;
 
 .fixedDataTableRowLayout_rowWrapper:hover .public_fixedDataTableCell_main {
   background-color: #e6e6e6;
+  z-index:20;
 }
 
 
@@ -443,7 +444,7 @@ background-color: #FFFFFF;
 
 }
 
-.Unfulfillable .public_fixedDataTableCell_cellContent{
+.not_fulfillable .public_fixedDataTableCell_cellContent{
 
   background: #f99405;
   border-radius: 15px;
@@ -526,9 +527,10 @@ background-color: #FFFFFF;
   border-style: solid;
   border-width: 1px;
   border-color: #00a54f;
-  color: #00a54f;
+  color: #ffffff;
   font-size: 12px;
   max-height: 9px;
+  background-color: #00a54f;
 
 
 }
@@ -719,7 +721,7 @@ background-color: #FFFFFF;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
   left: 0;
-  overflow: hidden;
+  /*overflow: hidden;*/
   position: absolute;
   top: 0;
   white-space: nowrap;
@@ -852,7 +854,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   border-style: solid;
   border-width: 1px;
   box-sizing: border-box;
-  overflow: hidden;
+  /*overflow: hidden;*/
   position: relative;
 }
 
@@ -902,7 +904,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 
 .fixedDataTableRowLayout_main {
   box-sizing: border-box;
-  overflow: hidden;
+  /*overflow: hidden;*/
   position: absolute;
   top: 0;
 }
@@ -1271,6 +1273,12 @@ color: #000000;
   position:relative;
 }
 
+.gor-Auditlist-table {
+  width: 100%;
+  height: 79vh;
+  position:relative;
+}
+
 .gorTableMainContainer {
   overflow-x: hidden;
 }
@@ -1516,5 +1524,14 @@ progress::-moz-progress-bar {
 
 .gor-header-check {
   display: inline-block;
+  padding-left: 22px;
+  vertical-align: middle;
+  padding-top: 10px;
+}
+
+.gor-header-id {
+  display: inline-block;
+  vertical-align: middle;
+  padding-top: 10px;
 }
 
