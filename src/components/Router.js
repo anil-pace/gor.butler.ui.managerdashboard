@@ -153,6 +153,14 @@ class Routes extends React.Component{
 				    }}
 					 />
 
+					<Route name="audit" path="/audit"  
+					 getComponent={(location, callback) => {
+				      require.ensure([], function (require) {
+				        callback(null, require('../containers/auditTab').default);
+				      },"audit");
+				    }}
+					 />
+
 					<Route name="users" path="/users"  
 					 getComponent={(location, callback) => {
 				      require.ensure([], function (require) {

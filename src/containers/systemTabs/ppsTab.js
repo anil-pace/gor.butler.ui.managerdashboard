@@ -13,13 +13,14 @@ import { FormattedMessage } from 'react-intl';
 
 function _processPPSData(data, nProps) {
   //TODO: codes need to be replaced after checking with backend
-  var PPSData=[], detail = {}, ppsId, performance;
+  var PPSData=[], detail = {}, ppsId, performance,totalUser = 0;
   var ppsStatus = ["Off", "On"];
   let PPS, ON, OFF, PERFORMANCE;
   let pick  = nProps.context.intl.formatMessage({id:"ppsDetail.pick.status", defaultMessage: "Pick"});
   let put = nProps.context.intl.formatMessage({id:"ppsDetail.put.status", defaultMessage: "Put"});
   let audit = nProps.context.intl.formatMessage({id:"ppsDetail.audit.status", defaultMessage: "Audit"});
   var currentTask = {"pick":pick, "put":put, "audit":audit};
+  var priStatus = {"on": 1, "off": 2};
 
   detail.totalOperator = 0;
   for (var i = data.length - 1; i >= 0; i--) {
@@ -34,9 +35,11 @@ function _processPPSData(data, nProps) {
     detail.ppsId = ppsId;
     if(data[i].pps_status === "on") {
       detail.status = ON;
+      detail.statusPriority = priStatus[data[i].pps_status];
     }
     else {
       detail.status = OFF;
+      detail.statusPriority = 2;
     }
     detail.statusClass = data[i].pps_status;
     detail.operatingMode = currentTask[data[i].current_task];
@@ -45,6 +48,7 @@ function _processPPSData(data, nProps) {
       detail.operatorAssigned = "--";
     }
     else {
+      totalUser = totalUser + data[i].operators_assigned.length;
       for (var j = data[i].operators_assigned.length - 1; j >= 0; j--) {
         if(detail.operatorAssigned) {
           detail.operatorAssigned = detail.operatorAssigned + ", " + data[i].operators_assigned[j];
@@ -56,6 +60,7 @@ function _processPPSData(data, nProps) {
       detail.totalOperator = detail.totalOperator + data[i].operators_assigned.length;
       
     }
+    detail.totalUser = totalUser;
     PPSData.push(detail);
   }
   return PPSData;
@@ -81,7 +86,13 @@ class PPS extends React.Component{
           operationMode = {"Pick":"--", "Put":"--", "Audit":"--","NotSet":"--"};
           operatorNum = "--";
        }
+       
+    if (operatorNum < data[i].totalUser) {
+      operatorNum = data[i].totalUser
     }
+    }
+    
+
     }
 	
 		return (

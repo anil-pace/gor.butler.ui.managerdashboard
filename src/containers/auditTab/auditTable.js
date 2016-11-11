@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM  from 'react-dom';
 import {Table, Column, Cell} from 'fixed-data-table';
 import DropdownTable from '../../components/dropdown/dropdownTable'
 import Dimensions from 'react-dimensions'
@@ -22,13 +23,29 @@ class AuditTable extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    
-      this.tableState(nextProps,this);
-      //this.props.refreshData();
+
+    this.tableState(nextProps,this);
   }
 
   componentDidMount() {
-      this.props.currentTableState(this.tableState(this.props, this));    
+    this.props.currentTableState(this.tableState(this.props, this));    
+  }  
+  /**
+   * Hack for fixing the bug https://work.greyorange.com/jira/browse/BSS-656
+   * This has to be removed once we get rid of the fixedDataTable
+   * @param  {Number} rowIndex rowindex on which the click was initiated
+   */
+   _handleOnClickDropdown(rowIndex) {
+    if (rowIndex.constructor === Number && rowIndex >= 0){    
+      let domArray = document.querySelectorAll('.fixedDataTableRowLayout_rowWrapper');
+      let DOMObj = domArray[rowIndex+1];
+      DOMObj.style.zIndex = "30";
+      for(var i = domArray.length-1; i>=0;i--){
+        if (domArray[i] !== DOMObj){
+          domArray[i].style.zIndex = "0";
+        }
+      }
+    }
   }
 
   tableState(nProps, current) {
@@ -48,81 +65,97 @@ class AuditTable extends React.Component {
         status: nProps.containerWidth*0.1,
         startTime: nProps.containerWidth*0.1,
         progress: nProps.containerWidth*0.1,
-         completedTime: nProps.containerWidth*0.15,
+        completedTime: nProps.containerWidth*0.15,
         actions: nProps.containerWidth*0.25
       }};
       return tableData;
-  }
-
-     _onColumnResizeEndCallback(newColumnWidth, columnKey) {
-    this.setState(({columnWidths}) => ({
-      columnWidths: {
-        ...columnWidths,
-        [columnKey]: newColumnWidth,
-      }
-    }));
-  }
-  _onFilterChange(e) {
-    if (!e.target.value) {
-      var tableData={
-      sortedDataList: this._dataList,
-      colSortDirs: this.props.tableData.colSortDirs,
-      columnWidths: this.props.tableData.columnWidths,
-      };
     }
-    var filterField = ["auditTypeValue","id","status"];
-    var tableData={
-      sortedDataList: new DataListWrapper(filterIndex(e,this._dataList,filterField), this._dataList),
-      colSortDirs: this.props.tableData.colSortDirs,
-      columnWidths: this.props.tableData.columnWidths,
-      };
-    this.props.currentTableState(tableData);
-  }
-  
-  
-  _onSortChange(columnKey, sortDir) {
-    var sortIndexes = this._defaultSortIndexes.slice();
-    var tableData={
-      sortedDataList: new DataListWrapper(sortData(columnKey, sortDir,sortIndexes,this._dataList), this._dataList),
-      colSortDirs: {[columnKey]: sortDir,},
-      columnWidths: this.props.tableData.columnWidths,
-    };
-    this.props.currentTableState(tableData)
-  }
 
-  createAudit() { 
+    _onColumnResizeEndCallback(newColumnWidth, columnKey) {
+      this.setState(({columnWidths}) => ({
+        columnWidths: {
+          ...columnWidths,
+          [columnKey]: newColumnWidth,
+        }
+      }));
+    }
+    _onFilterChange(e) {
+      if (!e.target.value) {
+        var tableData={
+          sortedDataList: this._dataList,
+          colSortDirs: this.props.tableData.colSortDirs,
+          columnWidths: this.props.tableData.columnWidths,
+        };
+      }
+      var filterField = ["auditTypeValue","id","status"];
+      var tableData={
+        sortedDataList: new DataListWrapper(filterIndex(e,this._dataList,filterField), this._dataList),
+        colSortDirs: this.props.tableData.colSortDirs,
+        columnWidths: this.props.tableData.columnWidths,
+      };
+      this.props.currentTableState(tableData);
+    }
+
+
+    _onSortChange(columnKey, sortDir) {
+      var sortIndexes = this._defaultSortIndexes.slice();
+      var tableData={
+        sortedDataList: new DataListWrapper(sortData(columnKey, sortDir,sortIndexes,this._dataList), this._dataList),
+        colSortDirs: {[columnKey]: sortDir,},
+        columnWidths: this.props.tableData.columnWidths,
+      };
+      this.props.currentTableState(tableData)
+    }
+
+    createAudit() { 
       modal.add(CreateAudit, {
-      title: '',
-      size: 'large', 
+        title: '',
+        size: 'large', 
       closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: true // (optional) if you don't wanna show the top right close button
       //.. all what you put in here you will get access in the modal props ;),
     });
 
-  }
+    }
 
-  startAudit(columnKey,rowIndex) {
-    var auditId = this.props.tableData.sortedDataList.newData[rowIndex].id;
-    modal.add(StartAudit, {
-      title: '',
-      size: 'large', // large, medium or small,
-      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-      hideCloseButton: true,
-      auditId:auditId
-  });
- }
 
- manageAuditTask(rowIndex,option) {
+    startAudit(columnKey,rowIndex) {
+      var auditId = [], sortedIndex;
+      if(this.props.tableData.sortedDataList._data !== undefined) {
+        sortedIndex = this.props.tableData.sortedDataList._indexMap[rowIndex];
+        auditId.push(this.props.tableData.sortedDataList._data.newData[sortedIndex].id);
+      }
+      else {
+        auditId.push(this.props.items[rowIndex].id);
+      }
+      modal.add(StartAudit, {
+        title: '',
+        size: 'large', // large, medium or small,
+        closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+        hideCloseButton: true,
+        auditId:auditId
+      });
+    }
 
- var auditComplete = this.props.tableData.sortedDataList.newData[rowIndex].auditTypeValue;
+    manageAuditTask(rowIndex,option ){
+      if(option.value === "duplicateTask"){
+        var auditType, auditTypeValue, auditComplete,auditTypeParam;
 
-  
-  if(option.value === "duplicateTask"){
-    var auditType = this.props.tableData.sortedDataList.newData[rowIndex].auditType;
-    var auditTypeParam = this.props.tableData.sortedDataList.newData[rowIndex].auditValue;
-    
-    modal.add(DuplicateAudit, {
-      title: '',
+
+        if(this.props.tableData.sortedDataList._data !== undefined) {
+          sortedIndex = this.props.tableData.sortedDataList._indexMap[rowIndex];
+          auditType = this.props.tableData.sortedDataList.newData[sortedIndex].auditType;
+          auditTypeParam = this.props.tableData.sortedDataList.newData[sortedIndex].auditValue;
+          auditComplete = this.props.tableData.sortedDataList.newData[sortedIndex].auditTypeValue;
+        }
+        else {
+          auditType = this.props.items[rowIndex].auditType;
+          auditTypeParam = this.props.items[rowIndex].auditValue;
+          auditComplete = this.props.items[rowIndex].auditTypeValue;
+        }
+
+        modal.add(DuplicateAudit, {
+          title: '',
       size: 'large', // large, medium or small,
       closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: true,
@@ -130,211 +163,222 @@ class AuditTable extends React.Component {
       auditTypeParam:auditTypeParam,
       auditComplete:auditComplete,
       refreshData:this.props.refreshData
-  });
+    });
 
-  }
-
-  else if(option.value === "deleteRecord"){
-    var auditId = this.props.tableData.sortedDataList.newData[rowIndex].id;
-    modal.add(DeleteAudit, {
-      title: '',
+      }
+      else if(option.value === "deleteRecord"){
+        var auditId;
+        if(this.props.tableData.sortedDataList._data !== undefined) {
+          sortedIndex = this.props.tableData.sortedDataList._indexMap[rowIndex];
+          auditId = this.props.tableData.sortedDataList._data.newData[sortedIndex].id;
+        }
+        else {
+          auditId = this.props.items[rowIndex].id;
+        }
+        modal.add(DeleteAudit, {
+          title: '',
       size: 'large', // large, medium or small,
       closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: true,
       auditId:auditId,
       auditComplete:auditComplete
     });
-  }
- }
-  
-
-  render() {
-    var sortedDataList = this._dataList;
-    if(this.props.tableData.sortedDataList !== undefined && this.props.tableData.sortedDataList._data !== undefined) {
-      sortedDataList = this.props.tableData.sortedDataList;
+      }
     }
-    var colSortDirs = this.props.tableData.colSortDirs;
-    var columnWidths = this.props.tableData.columnWidths;
-    var rowsCount = sortedDataList.getSize();
-     const tasks = [
-    { value: 'duplicateTask', label: 'Duplicate task' },
-    { value: 'deleteRecord', label: 'Delete record' }
-    ];
-    
 
-    var tableRenderer = <div/>
-    if(this.props.tableData.length !== 0) {
+
+    render() {
+      var sortedDataList = this._dataList;
+      if(this.props.tableData.sortedDataList !== undefined && this.props.tableData.sortedDataList._data !== undefined) {
+        sortedDataList = this.props.tableData.sortedDataList;
+      }
+      var colSortDirs = this.props.tableData.colSortDirs;
+      var columnWidths = this.props.tableData.columnWidths;
+      var rowsCount = sortedDataList.getSize();
+      const tasks = [
+      { value: 'duplicateTask', label: 'Duplicate task' },
+      { value: 'deleteRecord', label: 'Delete record' }
+      ];
+
+
+      var tableRenderer = <div/>
+      if(this.props.tableData.length !== 0) {
        tableRenderer = <div className="gorTableMainContainer">
-        <div className="gorToolBar">
-          <div className="gorToolBarWrap">
-            <div className="gorToolBarElements">
-               <FormattedMessage id="audit.table.heading" description="Heading for audit table" 
-              defaultMessage ="Audit Tasks"/>
-            </div>
-            <div className="gor-button-wrap">
-            <button className="gor-auditCreate-btn" onClick={this.createAudit.bind(this)}>
-              
-              <FormattedMessage id="audit.table.buttonLable" description="button label for audit create" 
-              defaultMessage ="Create New Task"/>
-            </button>
-            </div>
-          </div>
-        <div className="filterWrapper">  
-        <div className="gorFilter">
-            <div className="searchbox-magnifying-glass-icon"/>
-            <input className="gorInputFilter"
-              onChange={this._onFilterChange}
-              placeholder={this.props.intlMessg["table.filter.placeholder"]}>
-            </input>
-        </div>
-        </div>
+       <div className="gorToolBar">
+       <div className="gorToolBarWrap">
+       <div className="gorToolBarElements">
+       <FormattedMessage id="audit.table.heading" description="Heading for audit table" 
+       defaultMessage ="Audit Tasks"/>
+       </div>
+       <div className="gor-button-wrap">
+       <button className="gor-auditCreate-btn" onClick={this.createAudit.bind(this)} >
+
+       <FormattedMessage id="audit.table.buttonLable" description="button label for audit create" 
+       defaultMessage ="Create New Task"/>
+       </button>
+       </div>
+       </div>
+       <div className="filterWrapper">  
+       <div className="gorFilter">
+       <div className="searchbox-magnifying-glass-icon"/>
+       <input className="gorInputFilter"
+       onChange={this._onFilterChange}
+       placeholder={this.props.intlMessg["table.filter.placeholder"]}>
+       </input>
+       </div>
+       </div>
        </div>
 
-      <Table
-        rowHeight={60}
-        rowsCount={rowsCount}
-        headerHeight={70}
-        onColumnResizeEndCallback={this._onColumnResizeEndCallback}
-        isColumnResizing={false}
-        width={this.props.containerWidth}
-        height={this.props.containerHeight}
-        {...this.props}>
-        <Column
-          columnKey="id"
-          header={
-            <SortHeaderCell onSortChange={this._onSortChange}
-              sortDir={colSortDirs.id}>
-              <div className="gorToolHeaderEl">
-              <div className="gorToolHeaderEl"> 
-                 <FormattedMessage id="auditTable.stationID" description='total audit ID for auditTable' 
-                defaultMessage='{rowsCount} AUDIT ID' 
-                values={{rowsCount:rowsCount?rowsCount:'0'}}/>
-              </div>
-              <div className="gorToolHeaderSubText">
-               <FormattedMessage id="auditTable.SubAuditID" description='total Sub auditID for auditTable' 
-                defaultMessage='Total:{rowsCount}' 
-                values={{rowsCount:rowsCount?rowsCount:'0'}}/> 
-              </div>
-              </div>
-            </SortHeaderCell>
-          }
-          cell={  <TextCell data={sortedDataList}/>}
-          fixed={true}
-          width={columnWidths.id}
-          isResizable={true}
-        />
+       <Table 
+       rowHeight={60}
+       rowsCount={rowsCount}
+       headerHeight={70}
+       onColumnResizeEndCallback={this._onColumnResizeEndCallback}
+       isColumnResizing={false}
+       width={this.props.containerWidth}
+       height={this.props.containerHeight*0.9}
+       {...this.props}>
+       <Column
+       columnKey="id"
+       header={
+        <SortHeaderCell onSortChange={this._onSortChange}
+        sortDir={colSortDirs.id}>
+        <div className="gorToolHeaderEl">
+        <div className="gorToolHeaderEl"> 
+        <FormattedMessage id="auditTable.stationID" description='total audit ID for auditTable' 
+        defaultMessage='{rowsCount} AUDIT ID' 
+        values={{rowsCount:rowsCount?rowsCount:'0'}}/>
+        </div>
+        <div className="gorToolHeaderSubText">
+        <FormattedMessage id="auditTable.SubAuditID" description='total Sub auditID for auditTable' 
+        defaultMessage='Total:{rowsCount}' 
+        values={{rowsCount:rowsCount?rowsCount:'0'}}/> 
+        </div>
+        </div>
+        </SortHeaderCell>
+      }
+      cell={  <TextCell data={sortedDataList}/>}
+      fixed={true}
+      width={columnWidths.id}
+      isResizable={true}
+      />
 
-        <Column
-          columnKey="auditTypeValue"
-          header={
-            <SortHeaderCell onSortChange={this._onSortChange}
-              sortDir={colSortDirs.auditTypeValue}>
-              <FormattedMessage id="audit.table.type" description="audit type for audit table" 
-              defaultMessage ="AUDIT TYPE"/>
-              <div className="gorToolHeaderSubText">  </div>
-            </SortHeaderCell>
-          }
-           cell={<TextCell data={sortedDataList} ></TextCell>}
-          fixed={true}
-          width={columnWidths.auditTypeValue}
-          isResizable={true}
-        />
-        <Column
-          columnKey="status"
-          header={
-            <SortHeaderCell onSortChange={this._onSortChange}
-              sortDir={colSortDirs.status}>
-              <FormattedMessage id="audit.table.STATUS" description="STATUS for audit" 
-              defaultMessage ="STATUS"/>
-              <div className="gorToolHeaderSubText">  </div>
-               <div>
-             
-              </div>
-            </SortHeaderCell>
-          }
-           cell={<StatusCell data={sortedDataList} statusKey="statusClass" ></StatusCell>}
-          fixed={true}
-          width={columnWidths.status}
-          isResizable={true}
-        />
+      <Column
 
-         <Column
-          columnKey="startTime"
-          header={
-            <SortHeaderCell onSortChange={this._onSortChange}
-              sortDir={colSortDirs.mode}>
-              <FormattedMessage id="audit.table.startTime" description="startTime for audit" 
-              defaultMessage ="START TIME"/>
-              <div className="gorToolHeaderSubText"> 
-                
-              </div>
-            </SortHeaderCell>
-          }
-          cell={<TextCell data={sortedDataList} />}
-          fixed={true}
-          width={columnWidths.startTime}
-          isResizable={true}
-        />
-        <Column
-          columnKey="progress"
-          header={
-            <SortHeaderCell onSortChange={this._onSortChange}
-              sortDir={colSortDirs.progress} >
-               <FormattedMessage id="audit.table.progress" description="progress for audit task" 
-              defaultMessage ="PROGRESS(%)"/>
-              <div className="gorToolHeaderSubText">   
-              </div> 
-            </SortHeaderCell>
-          }
-          cell={<ProgressCell data={sortedDataList}  />}
-          fixed={true}
-          width={columnWidths.progress}
-          isResizable={true}
-        />
+      columnKey="auditTypeValue"
+      header={
+        <SortHeaderCell onSortChange={this._onSortChange}
+        sortDir={colSortDirs.auditTypeValue}>
+        <FormattedMessage id="audit.table.type" description="audit type for audit table" 
+        defaultMessage ="AUDIT TYPE"/>
+        <div className="gorToolHeaderSubText">  </div>
+        </SortHeaderCell>
+      }
+      cell={<TextCell data={sortedDataList} ></TextCell>}
+      fixed={true}
+      width={columnWidths.auditTypeValue}
+      isResizable={true}
+      />
+      <Column
+      columnKey="status"
+      header={
+        <SortHeaderCell onSortChange={this._onSortChange}
+        sortDir={colSortDirs.status}>
+        <FormattedMessage id="audit.table.STATUS" description="STATUS for audit" 
+        defaultMessage ="STATUS"/>
+        <div className="gorToolHeaderSubText">  </div>
+        <div>
 
-        <Column
-          columnKey="completedTime"
-          header={
-            <SortHeaderCell onSortChange={this._onSortChange}
-              sortDir={colSortDirs.completedTime}>
-              <FormattedMessage id="audit.table.timeCompleted" description="timeCompleted for audit" 
-              defaultMessage ="TIME COMPLETED"/>
-              <div className="gorToolHeaderSubText"> 
-                
-              </div>
-            </SortHeaderCell>
-          }
-          cell={<TextCell data={sortedDataList} />}
-          fixed={true}
-          width={columnWidths.completedTime}
-          isResizable={true}
-        />
+        </div>
+        </SortHeaderCell>
+      }
+      cell={<StatusCell data={sortedDataList} statusKey="statusClass" ></StatusCell>}
+      fixed={true}
+      width={columnWidths.status}
+      isResizable={true}
+      />
 
-        <Column
-          columnKey="actions"
-          header={
-            <SortHeaderCell >
-               
-               <FormattedMessage id="audit.table.action" description="action Column" 
-              defaultMessage ="ACTIONS"/> 
-              <div className="gorToolHeaderSubText">  </div>
-            </SortHeaderCell>
-          }
-          cell={<ActionCellAudit data={sortedDataList} handleAudit={this.startAudit.bind(this)} tasks={tasks} manageAuditTask={this.manageAuditTask.bind(this)} showBox="startAudit"/>}
-          width={columnWidths.actions}
-        />
+      <Column
+      columnKey="startTime"
+      header={
+        <SortHeaderCell onSortChange={this._onSortChange}
+        sortDir={colSortDirs.mode}>
+        <FormattedMessage id="audit.table.startTime" description="startTime for audit" 
+        defaultMessage ="START TIME"/>
+        <div className="gorToolHeaderSubText"> 
+
+        </div>
+        </SortHeaderCell>
+      }
+      cell={<TextCell data={sortedDataList} />}
+      fixed={true}
+      width={columnWidths.startTime}
+      isResizable={true}
+      />
+      <Column
+      columnKey="progress"
+      header={
+        <SortHeaderCell onSortChange={this._onSortChange}
+        sortDir={colSortDirs.progress} >
+        <FormattedMessage id="audit.table.progress" description="progress for audit task" 
+        defaultMessage ="PROGRESS(%)"/>
+        <div className="gorToolHeaderSubText">   
+        </div> 
+        </SortHeaderCell>
+      }
+      cell={<ProgressCell data={sortedDataList}  />}
+      fixed={true}
+      width={columnWidths.progress}
+      isResizable={true}
+      />
+
+      <Column
+      columnKey="completedTime"
+      header={
+        <SortHeaderCell onSortChange={this._onSortChange}
+        sortDir={colSortDirs.completedTime}>
+        <FormattedMessage id="audit.table.timeCompleted" description="timeCompleted for audit" 
+        defaultMessage ="TIME COMPLETED"/>
+        <div className="gorToolHeaderSubText"> 
+
+        </div>
+        </SortHeaderCell>
+      }
+      cell={<TextCell data={sortedDataList} />}
+      fixed={true}
+      width={columnWidths.completedTime}
+      isResizable={true}
+      />
+
+      <Column
+      columnKey="actions"
+      header={
+        <SortHeaderCell >
+
+        <FormattedMessage id="audit.table.action" description="action Column" 
+        defaultMessage ="ACTIONS"/> 
+        <div className="gorToolHeaderSubText">  </div>
+        </SortHeaderCell>
+      }
+      cell={<ActionCellAudit data={sortedDataList} handleAudit={this.startAudit.bind(this)} tasks={tasks} 
+      manageAuditTask={this.manageAuditTask.bind(this)} showBox="startAudit"
+      clickDropDown={this._handleOnClickDropdown.bind(this)}
+      />}
+      width={columnWidths.actions}
+
+      />
       </Table>
       </div>
-    
-  }
+
+    }
     return (
-      <div> {tableRenderer} </div>
+    <div> {tableRenderer} </div>
     );
   }
 }
 
 function mapStateToProps(state, ownProps){
-  
+
   return {
     tableData: state.currentTableState.currentTableState || [],
   };

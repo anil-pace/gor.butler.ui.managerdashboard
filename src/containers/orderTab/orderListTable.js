@@ -87,12 +87,15 @@ class OrderListTable extends React.Component {
     }
     var filterField = ["recievedTime","id","status","completedTime","pickBy","orderLine"];
     this.setState({
-      sortedDataList: new DataListWrapper(filterIndex(e,this._dataList), this._dataList),
+      sortedDataList: new DataListWrapper(filterIndex(e,this._dataList,filterField), this._dataList),
     });
   }
   
   
   _onSortChange(columnKey, sortDir) {
+     if(columnKey === "status") {
+      columnKey = "statusPriority";
+    }
     var sortIndexes = this._defaultSortIndexes.slice();
     this.setState({
       sortedDataList: new DataListWrapper(sortData(columnKey, sortDir,sortIndexes,this._dataList), this._dataList),
@@ -111,7 +114,8 @@ class OrderListTable extends React.Component {
     let breachedDrop = <FormattedMessage id="orderlist.table.breachedDrop" description="breached dropdown option for orderlist" defaultMessage ="Breached orders"/> 
     let pendingDrop = <FormattedMessage id="pendingDrop.table.allDrop" description="pending dropdown option for orderlist" defaultMessage ="Pending orders"/> 
     let completedDrop = <FormattedMessage id="completedDrop.table.allDrop" description="completed dropdown option for orderlist" defaultMessage ="Completed orders"/> 
-    
+    let exception = <FormattedMessage id="exceptionDrop.table" description="exception order dropdown for orderlist" defaultMessage="Exception"/>
+
     let allTimeDrop = <FormattedMessage id="orderlist.table.allTimeDrop" description="allTime dropdown option for orderlist" defaultMessage ="All"/> 
     let oneHrDrop = <FormattedMessage id="orderlist.table.oneHrDrop" description="oneHr dropdown option for orderlist" defaultMessage ="Last 1 hours"/> 
     let twoHrDrop = <FormattedMessage id="pendingDrop.table.twoHrDrop" description="twoHr dropdown option for orderlist" defaultMessage ="Last 2 hours"/> 
@@ -123,7 +127,8 @@ class OrderListTable extends React.Component {
     { value: 'all', label: allDrop },
     { value: 'breached', label: breachedDrop },
     { value: 'pending', label: pendingDrop },
-    { value: 'completed', label: completedDrop }
+    { value: 'completed', label: completedDrop },
+    { value: 'exception', label: exception}
     ];
 
     const ordersByTime = [
@@ -137,9 +142,7 @@ class OrderListTable extends React.Component {
     
     return (
       <div className="gorTableMainContainer">
-      <FormattedTime value = '2016-11-04T14:50:36.787237+00:00'
-      timeZone='Asia/Kolkata'
-      />
+      
       
         <div className="gorToolBar">
           <div className="gorToolBarWrap">
@@ -209,7 +212,7 @@ class OrderListTable extends React.Component {
           columnKey="status"
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
-              sortDir={colSortDirs.status}>
+              sortDir={colSortDirs.statusPriority}>
               <div>
                  <FormattedMessage id="orderList.table.status" description="Status for orders" 
               defaultMessage ="STATUS"/> 

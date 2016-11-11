@@ -63,7 +63,7 @@ class AddUser extends React.Component{
                 'cause':CHECK_ID,
                 'contentType':'application/json',
                 'accept':'application/json',
-                'token':sessionStorage.getItem('auth_token')
+                'token':this.props.auth_token
       }
       this.props.userRequest(userData);
     }
@@ -124,7 +124,7 @@ class AddUser extends React.Component{
                 'cause':ADD_USER,
                 'contentType':'application/json',
                 'accept':'application/json',
-                'token':sessionStorage.getItem('auth_token')
+                'token':this.props.auth_token
             }
         this.props.userRequest(userData);
         this.removeThisModal();
@@ -214,7 +214,8 @@ function mapStateToProps(state, ownProps){
       nameCheck: state.appInfo.nameInfo || {},
       passwordCheck: state.appInfo.passwordInfo || {},
       roleInfo: state.appInfo.roleInfo || null,
-      roleSet:  state.appInfo.roleSet  || null  
+      roleSet:  state.appInfo.roleSet  || null,
+      auth_token: state.authLogin.auth_token  
   };
 }
 

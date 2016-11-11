@@ -6,7 +6,12 @@ import { connect } from 'react-redux';
 import {AUDIT_RETRIEVE} from '../constants/appConstants';
 import {AUDIT_URL} from '../constants/configConstants';
 import {getAuditData} from '../actions/auditActions';
-import AuditTable from './auditTab/auditTable'
+import AuditTable from './auditTab/auditTable';
+import ReactPaginate from 'react-paginate';
+import {getPageData, getStatusFilter, getTimeFilter,getPageSizeAudit,currentPageAudit,lastRefreshTime} from '../actions/paginationAction';
+import {ORDERS_RETRIEVE} from '../constants/appConstants';
+import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL} from '../constants/configConstants';
+
 
 function processAuditData(data, nProps ) {
   let created  = nProps.context.intl.formatMessage({id:"auditdetail.created.status", defaultMessage: "Created"});
@@ -17,7 +22,7 @@ function processAuditData(data, nProps ) {
   let location  = nProps.context.intl.formatMessage({id:"auditdetail.location.prefix", defaultMessage: "Location"});
   
   var auditStatus = {"audit_created":created, "audit_pending":pending, "audit_waiting":pending, "audit_conflicting":pending, "audit_started":progress, "audit_tasked":progress, "audit_aborted":completed, "audit_completed":completed};
-  var statusClass = {"Pending": "pending", "Completed":"completed", "In progress":"progress", "Created":"pending"}
+  var statusClass = {"Pending": "pending", "Completed":"completed", "In Progress":"progress", "Created":"pending"}
   var auditType = {"sku":sku, "location":location};
   var auditDetails = [], auditData = {};
   for (var i = data.length - 1; i >= 0; i--) {
@@ -75,42 +80,75 @@ function processAuditData(data, nProps ) {
 class AuditTab extends React.Component{
 	constructor(props) 
 	{
-    	super(props);
+   super(props);
+ }
+
+ componentDidMount() {
+   this.getTableData();
+ }
+  handlePageClick = (data) => {
+    var url;
+    if(data.url === undefined) {
+      url = API_URL + ORDERS_URL + "?page=" + (data.selected+1) + "&PAGE_SIZE=25";
     }
 
-    componentDidMount() {
-    	this.getPageData();
-    }
 
-    getPageData() {
-      let url = AUDIT_URL;
-      let auditData={
+    else {
+      url = data.url;
+    }
+   
+    let paginationData={
               'url':url,
               'method':'GET',
-              'cause': AUDIT_RETRIEVE,
+              'cause': ORDERS_RETRIEVE,
               'token': sessionStorage.getItem('auth_token'),
               'contentType':'application/json'
           } 
-        this.props.getAuditData(auditData);  
-    }
+          this.props.currentPage(data.selected+1);
+         this.props.getPageData(paginationData);
+ }
+ getTableData() {
+  let url = AUDIT_URL;
+  let auditData={
+    'url':url,
+    'method':'GET',
+    'cause': AUDIT_RETRIEVE,
+    'token': sessionStorage.getItem('auth_token'),
+    'contentType':'application/json'
+  } 
+  this.props.getAuditData(auditData);  
+}
 
-	render(){
-    var itemNumber = 7, renderTab = <div/>;
-    if(this.props.auditDetail.length !== 0) {
-      var auditData = processAuditData(this.props.auditDetail, this);
-      renderTab = <AuditTable items={auditData} itemNumber={itemNumber}  intlMessg={this.props.intlMessages} refreshData={this.getPageData.bind(this)}/>
-    }
-				
-		return (
-			<div>
-				<div>
-					<div className="gorUserTable">
-						{renderTab}
-					</div>
-				</div>
-			</div>
-		);
-	}
+render(){
+  var itemNumber = 7, renderTab = <div/>;
+  
+    var auditData = processAuditData(this.props.auditDetail, this);
+    renderTab = <AuditTable items={auditData} itemNumber={itemNumber}  
+    intlMessg={this.props.intlMessages} refreshData={this.getTableData.bind(this)}/>
+  
+  
+  return (
+   <div>
+   <div>
+   <div className="gor-Auditlist-table">
+   {renderTab}
+   </div>
+   </div>
+        <div id={"react-paginate"}>
+          <ReactPaginate previousLabel={"<<"}
+                       nextLabel={">>"}
+                       breakClassName={"break-me"}
+                       pageNum={this.props.orderData.totalPage}
+                       marginPagesDisplayed={1}
+                       pageRangeDisplayed={1}
+                       clickCallback={this.handlePageClick.bind(this)}
+                       containerClassName={"pagination"}
+                       subContainerClassName={"pages pagination"}
+                       activeClassName={"active"} />
+        </div>   
+   </div>
+   );
+}
 };
 
 
@@ -118,13 +156,17 @@ function mapStateToProps(state, ownProps){
   
   return {
     auditDetail: state.recieveAuditDetail.auditDetail || [],
+    orderData: state.getOrderDetail || {},    
     intlMessages: state.intl.messages
   };
 }
 
 var mapDispatchToProps = function(dispatch){
   return {
-    getAuditData: function(data){ dispatch(getAuditData(data)); }
+    getAuditData: function(data){ dispatch(getAuditData(data)); },
+    getPageData: function(data){ dispatch(getPageData(data)); },
+    getPageSizeOrders: function(data){ dispatch(getPageSizeAudit(data));},
+    currentPage: function(data){ dispatch(currentPageAudit(data));}
   }
 };
 

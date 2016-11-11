@@ -116,7 +116,7 @@ export const AUDIT_RETRIEVE = "AUDIT_RETRIEVE";
 export const RECIEVE_AUDIT_DATA = "RECIEVE_AUDIT_DATA";
 export const CREATE_AUDIT='CREATE_AUDIT';
 export const DELETE_AUDIT='DELETE_AUDIT';
-
+export const GET_PPSLIST='GET_PPSLIST';
 
 
 /*Constants for app info checking*/
@@ -142,13 +142,17 @@ export const SKU_INFO='SKU_INFO';
 export const PAGE_DATA = "PAGE_DATA";
 export const STATUS_FILTER = "STATUS_FILTER";
 export const TIME_FILTER = "TIME_FILTER"
-export const GET_PAGE_SIZE = "GET_PAGE_SIZE";
+export const GET_PAGE_SIZE_ORDERS = "GET_PAGE_SIZE_ORDERS";
 export const DEFAULT_PAGE_SIZE = "25";
 export const PAGE_FIELD = "?page=";
-export const GET_CURRENT_PAGE = "GET_CURRENT_PAGE";
+export const GET_CURRENT_PAGE_ORDERS = "GET_CURRENT_PAGE_ORDERS";
 export const GET_LAST_REFRESH_TIME = "GET_LAST_REFRESH_TIME";
-/*Constants for Spinner*/
 
+export const GET_PAGE_SIZE_AUDIT = "GET_PAGE_SIZE_AUDIT";
+export const GET_CURRENT_PAGE_AUDIT = "GET_CURRENT_PAGE_AUDIT";
+
+
+/*Constants for Spinner*/
 export const DISPLAY_SPINNER = "DISPLAY_SPINNER";
 export const DISPLAY_LOGIN_SPINNER = "DISPLAY_LOGIN_SPINNER";
 
@@ -181,10 +185,13 @@ export const CODE_UE003='ue003';
 export const CODE_UE004='ue004';
 export const CODE_UE005='ue005';
 export const CODE_UE006='ue006';
-export const CODE_E025='e025';
+export const CODE_E026='e026';
+export const CODE_E027='e027';
 export const CODE_G015='g015';
 export const CODE_AE001='ae001';
 export const CODE_AE002='ae002';
+export const CODE_AE004='ae004';
+export const CODE_AE005='ae005';
 export const CODE_AE006='ae006';
 export const CODE_AS002='as002';
 export const CODE_AS003='as003';

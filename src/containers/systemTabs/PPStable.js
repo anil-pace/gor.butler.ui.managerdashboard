@@ -162,11 +162,16 @@ class PPStable extends React.Component {
   }
 
   handleModeChange(data) {
-    var checkedPPS=[], j=0, mode=data.value;
+    var checkedPPS=[], j=0, mode=data.value, sortedIndex;
     for (var i = this.state.isChecked.length - 1; i >= 0; i--) {
       if(this.state.isChecked[i] === true) {
-        checkedPPS[j] = this.state.sortedDataList.newData[i].ppsId
-        //checkedPPS[j] = checkedPPS[j].slice(6);
+        if(this.state.sortedDataList.newData !== undefined) {
+         checkedPPS[j] = this.state.sortedDataList.newData[i].ppsId;
+        }
+        else {
+          sortedIndex = this.state.sortedDataList._indexMap[j];
+          checkedPPS[j] = this.state.sortedDataList._data.newData[sortedIndex].ppsId;
+        }
         let formdata={         
                     "requested_pps_mode": mode
          };
@@ -267,7 +272,7 @@ class PPStable extends React.Component {
             <div className="gor-header-check">
               <input type="checkbox" checked={this.state.headerChecked} onChange={this.headerCheckChange.bind(this)}/>
             </div>
-            <div>
+            <div className="gor-header-id">
               <SortHeaderCell onSortChange={this._onSortChange} 
                 sortDir={colSortDirs.id}>  
                 <div className="gorToolHeaderEl">

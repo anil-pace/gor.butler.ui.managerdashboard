@@ -20,6 +20,11 @@
     "defaultMessage": "Completed orders"
   },
   {
+    "id": "exceptionDrop.table",
+    "description": "exception order dropdown for orderlist",
+    "defaultMessage": "Exception"
+  },
+  {
     "id": "orderlist.table.allTimeDrop",
     "description": "allTime dropdown option for orderlist",
     "defaultMessage": "All"

@@ -6,7 +6,9 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import {currentTableState} from '../../actions/tableDataAction'
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
+ 
 
+  var tempGlobal = 0;
 class ChargingStationsTable extends React.Component {
   constructor(props) {
     super(props);
@@ -17,12 +19,20 @@ class ChargingStationsTable extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-      this.tableState(nextProps,this);
+    this.tableState(nextProps,this);
+    if(nextProps.items !== undefined && tempGlobal === 0) {
+      tempGlobal = 1;
+      this._onSortChange("id","DESC");
+    } 
   }
 
   componentDidMount() {
-      this.props.currentTableState(this.tableState(this.props, this));    
+    this.props.currentTableState(this.tableState(this.props, this));    
   }
+
+   componentWillUnmount() {
+    tempGlobal = 1;
+   }
 
   tableState(nProps, current) {
     var items = nProps.items || [];
@@ -71,6 +81,10 @@ class ChargingStationsTable extends React.Component {
   
   
   _onSortChange(columnKey, sortDir) {
+    
+    if(columnKey === "status") {
+      columnKey = "statusPriority";
+    }
     var sortIndexes = this._defaultSortIndexes.slice();
     var tableData={
       sortedDataList: new DataListWrapper(sortData(columnKey, sortDir,sortIndexes,this._dataList), this._dataList),
@@ -152,7 +166,7 @@ class ChargingStationsTable extends React.Component {
           columnKey="status"
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
-              sortDir={colSortDirs.status}>
+              sortDir={colSortDirs.statusPriority}>
               <FormattedMessage id="ChargingStations.table.STATUS" description="STATUS for ChargingStations" 
               defaultMessage ="STATUS"/>
               <div className="gorToolHeaderSubText">  </div>

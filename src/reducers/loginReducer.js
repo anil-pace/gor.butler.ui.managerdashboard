@@ -43,7 +43,7 @@ export  function authLogin(state={},action){
     case SET_TIME_OFFSET:
       sessionStorage.setItem('timeOffset', action.data.warehouse_time_zone || action.data);
       return Object.assign({}, state, {
-          "timeOffset":action.data.warehouse_time_zone
+          "timeOffset":action.data.warehouse_time_zone || action.data
       })
 	  default:
 	    return state

@@ -94,10 +94,17 @@
 			border-bottom: 0.15em solid #e7e7e7;
 		}
 
-		.logoWrap{
+		.gor-border {
 			border-right: calculateRem(1px) solid #F2F2F2;
 			display: inline-block;
-			padding-right:9px;
+			height: calculateRem(26px);
+			vertical-align: middle;
+
+		}
+
+		.logoWrap{
+			display: inline-block;
+			padding-right:10px;
 		}
 		.logo {
 			display: inline-block; 
@@ -140,7 +147,7 @@
 			.mainBlock {
 				display: inline-block;
 				overflow: hidden;
-				padding: calculateRem(0px) calculateRem(5px);
+				padding: calculateRem(0px) calculateRem(0px);
 				
 			}
 

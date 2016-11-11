@@ -34,6 +34,8 @@ class ButlerBotTable extends React.Component {
     this._onSortChange = this._onSortChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+    //this._onSortChange("id","DESC");
+
   }
 
   
@@ -64,6 +66,7 @@ class ButlerBotTable extends React.Component {
     this._onSortChange = this._onSortChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+    //this._onSortChange("id","DESC");
   }
   
    _onColumnResizeEndCallback(newColumnWidth, columnKey) {
@@ -90,6 +93,9 @@ class ButlerBotTable extends React.Component {
     
   }
   _onSortChange(columnKey, sortDir) {
+     if(columnKey === "status") {
+      columnKey = "statusPriority";
+    }
     var sortIndexes = this._defaultSortIndexes.slice();
     this.setState({
       sortedDataList: new DataListWrapper(sortData(columnKey, sortDir,sortIndexes,this._dataList), this._dataList),
@@ -163,7 +169,7 @@ class ButlerBotTable extends React.Component {
           columnKey="status"
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
-              sortDir={colSortDirs.status} >
+              sortDir={colSortDirs.statusPriority} >
               <div>
                  <FormattedMessage id="butlerBot.table.status" description="Status for butlerbot" 
               defaultMessage ="STATUS"/> 
