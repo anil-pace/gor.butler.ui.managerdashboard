@@ -20,28 +20,28 @@ export  function tabsData(state={},action){
       break;
       case GET_USERS:
       let users_online=0;
-      users_online=action.data.header_data.users_logged_in;
+      users_online=Number(action.data.header_data.users_logged_in);
       return Object.assign({}, state, {
         "users_online":users_online
       })
       break;
       case GET_AUDIT:
       let audit_count=0;
-      audit_count=action.data.header_data.audits_in_progress;
+      audit_count=Number(action.data.header_data.audits_in_progress);
       return Object.assign({}, state, {
         "audit_count":audit_count
       })      
       break;
       case GET_INVENTORY:
       let space_utilized=0;
-      space_utilized=action.data.header_data.space_utilized;
+      space_utilized=Number(action.data.header_data.space_utilized);
       return Object.assign({}, state, {
         "space_utilized":space_utilized
       })      
       break;
       case GET_ORDERS:
       let orders_completed=0;
-      orders_completed=action.data.header_data.percentage_completed;
+      orders_completed=Number(action.data.header_data.percentage_completed);
       return Object.assign({}, state, {
         "orders_completed":orders_completed
       })      

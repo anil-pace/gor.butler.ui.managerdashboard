@@ -138,12 +138,7 @@ class Tabs extends React.Component{
     const item6 = [
       { tab: items.inventory, Status: items.inventoryStatus, currentState:'' }
     ]
-    
-    var selectClass = {system:this.props.system_emergency?"fail":'gor-normal-tab'};
-
-   
-   
-    
+        
 		return (
 		<div className="gorTabs gorMainBlock">
 		<Link to="/overview" onClick = {this.handleTabClick.bind(this,OVERVIEW)}>
@@ -151,7 +146,7 @@ class Tabs extends React.Component{
 		</Link>
 
 		<Link to="/system" onClick = {this.handleTabClick.bind(this,SYSTEM)}>
-			<Tab items={item2} changeClass={(this.props.tab.toUpperCase() === SYSTEM ? 'sel' :selectClass.system)} subIcons={true}/>
+			<Tab items={item2} changeClass={(!this.props.system_emergency?(this.props.tab.toUpperCase() === SYSTEM ? 'sel' :'gor-normal-tab'):'fail')} subIcons={true}/>
 		</Link>
 
 		<Link to="/orders" onClick = {this.handleTabClick.bind(this,ORDERS)}>
@@ -182,10 +177,10 @@ function mapStateToProps(state, ownProps){
          overview_status:state.tabsData.overview_status||null,
          system_emergency:state.tabsData.system_emergency||null,
          system_data:state.tabsData.system_data||{},
-         users_online:state.tabsData.users_online||null,
-         audit_count:state.tabsData.audit_count||null,
-         space_utilized:state.tabsData.space_utilized||null,
-         orders_completed:state.tabsData.orders_completed||null,
+         users_online:state.tabsData.users_online||0,
+         audit_count:state.tabsData.audit_count||0,
+         space_utilized:state.tabsData.space_utilized||0,
+         orders_completed:state.tabsData.orders_completed||0,
          system_status:state.tabsData.status||null
     }
 }
