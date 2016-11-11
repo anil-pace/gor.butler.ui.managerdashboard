@@ -13,7 +13,6 @@
 				height: 62px;
 				display: table-cell;
 				border-right: .5px solid black;
-				background: #4d5055;
 				cursor: pointer;
 				vertical-align: middle;
 				&:hover{
@@ -21,6 +20,10 @@
 				}
 				&.sel{
 					background-color:#323539;
+				}
+				.gor-normal-tab
+				{
+				 background: #4d5055;
 				}
 			}
 		.gorInline{
@@ -49,6 +52,9 @@
 			font-family: "source sans pro";
 			color: #10c469;
 
+		}
+		.gor-alert{
+		    color:#ffffff;
 		}
 		.gorOffline{
 			font-family: "source sans pro";

@@ -3,13 +3,12 @@ import ReactDOM  from 'react-dom';
 import UserDataTable from './userTab/userTabTable';
 import Loader from '../components/loader/Loader';
 import { connect } from 'react-redux'; 
-import {AUDIT_RETRIEVE} from '../constants/appConstants';
 import {AUDIT_URL} from '../constants/configConstants';
 import {getAuditData} from '../actions/auditActions';
 import AuditTable from './auditTab/auditTable';
 import ReactPaginate from 'react-paginate';
 import {getPageData, getStatusFilter, getTimeFilter,getPageSizeAudit,currentPageAudit,lastRefreshTime} from '../actions/paginationAction';
-import {ORDERS_RETRIEVE} from '../constants/appConstants';
+import {AUDIT_RETRIEVE} from '../constants/appConstants';
 import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL} from '../constants/configConstants';
 
 
@@ -86,10 +85,14 @@ class AuditTab extends React.Component{
  componentDidMount() {
    this.getTableData();
  }
-  handlePageClick = (data) => {
+ handlePageClick = (data) => {
     var url;
+    var makeDate = new Date();
+    makeDate.setDate(makeDate.getDate() - 30)
+    makeDate = makeDate.getFullYear()+'-'+makeDate.getMonth()+'-'+makeDate.getDate();  
+ 
     if(data.url === undefined) {
-      url = API_URL + ORDERS_URL + "?page=" + (data.selected+1) + "&PAGE_SIZE=25";
+      url = AUDIT_URL + "?start_time="+makeDate+"&page="+(data.selected+1)+"&PAGE_SIZE=25";
     }
 
 
@@ -100,7 +103,7 @@ class AuditTab extends React.Component{
     let paginationData={
               'url':url,
               'method':'GET',
-              'cause': ORDERS_RETRIEVE,
+              'cause': AUDIT_RETRIEVE,
               'token': sessionStorage.getItem('auth_token'),
               'contentType':'application/json'
           } 

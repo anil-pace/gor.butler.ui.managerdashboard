@@ -6,7 +6,7 @@ import { connect } from 'react-redux' ;
 import {tabSelected,subTabSelected} from '../actions/tabSelectAction';
 import {displayLoader} from '../actions/loaderAction';
 import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP,INVENTORY,AUDIT} from '../constants/appConstants';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage,FormattedNumber } from 'react-intl';
 
 class Tabs extends React.Component{
 	constructor(props) 
@@ -37,63 +37,109 @@ class Tabs extends React.Component{
         sessionStorage.setItem('selTab', TAB_ROUTE_MAP[selTab]);
         sessionStorage.setItem('subTab', '');
     }
-    
+  _parseStatus()
+  {
+    let overview,system,order,ordersvalue,users,usersvalue,inventoryvalue,inventory,audit,overviewStatus,systemStatus,ordersStatus,usersStatus,auditStatus,inventoryStatus,offline,systemClass,ordersClass,auditClass,items={};
+
+    offline = <FormattedMessage id="tabs.offline" description="offline" 
+              defaultMessage ="Offline"/>;
+
+    overview = <FormattedMessage id="overview.tab.heading" description="overview tab" 
+              defaultMessage ="OVERVIEW"/>;
+
+    system = <FormattedMessage id="system.tab.heading" description="system tab" 
+              defaultMessage ="SYSTEM"/>;
+              
+    order = <FormattedMessage id="orders.tab.heading" description="orders tab" 
+              defaultMessage ="ORDERS"/>;
+              
+    users = <FormattedMessage id="users.tab.heading" description="users tab" 
+              defaultMessage ="USERS"/> ;
+    inventory = <FormattedMessage id="inventory.tab.heading" description="inventory tab" 
+              defaultMessage ="INVENTORY"/>; 
+
+    audit = <FormattedMessage id="audit.tab.heading" description="audit tab" 
+              defaultMessage ="AUDIT"/>;           
+
+    if(this.props.systemStatus)
+    {
+     overviewStatus=offline;
+     systemStatus=offline;
+     ordersStatus=offline;
+     usersStatus=offline;
+     inventoryStatus=offline; 
+     auditStatus=offline;
+     systemClass='gorOffline';
+    }
+    else
+    {
+      overviewStatus = <FormattedMessage id="overviewStatus.tab.heading" description="overview Status " 
+              defaultMessage ="Fulfilling orders"/>;  
+
+      if(!this.props.system_emergency)
+      {
+        systemStatus = <FormattedMessage id="systemStatus.tab.online" description="system Status online" 
+              defaultMessage ="Online"/>;  
+        systemClass='gorOnline';
+      }
+      else
+      {
+        systemStatus = <FormattedMessage id="systemStatus.tab.emergency" description="system Status emergency" 
+              defaultMessage ="Emergency"/>;  
+        systemClass='gor-alert';        
+        overviewStatus = <FormattedMessage id="overviewStatus.tab.emergency" description="overview Status emergency" 
+              defaultMessage ="Butlers stopped"/>;  
+      }
+      ordersvalue = <FormattedNumber value={this.props.orders_completed}/>
+      ordersStatus = <FormattedMessage id="ordersStatus.tab.heading" description="orders Status " 
+              defaultMessage ="{count}% fulfilled" values={{count:ordersvalue}}/>;  
+      ordersClass='gorOnline';
+      usersvalue = <FormattedNumber value={this.props.users_online}/>
+      usersStatus = <FormattedMessage id="usersStatus.tab.heading" description="users Status " 
+              defaultMessage ="{count} users online" values={{count:usersvalue}}/>;  
+      inventoryvalue = <FormattedNumber value={this.props.space_utilized}/>
+      inventoryStatus = <FormattedMessage id="inventoryStatus.tab.heading" description="inventory Status " 
+              defaultMessage ="{count}% space utilized" values={{count:inventoryvalue}}/>;            
+      auditStatus=<FormattedMessage id="auditStatus.tab.heading" description="audit Status " 
+              defaultMessage ="{count} in progress" values={{count:this.props.audit_count?this.props.audit_count:'None'}}/>;          
+      if(this.props.audit_count)
+      {
+        auditClass='gorOnline';
+      }
+      else
+      {
+        auditClass='gorOffline';
+      }
+    }
+
+    items={overview:overview,system:system,order:order,users:users,inventory:inventory,audit:audit,overviewStatus:overviewStatus,systemStatus:systemStatus,ordersStatus:ordersStatus,auditStatus:auditStatus,usersStatus:usersStatus,inventoryStatus:inventoryStatus,systemClass:systemClass,ordersClass:ordersClass,auditClass:auditClass};
+    return items;
+  }
 	render(){
-    /**
-     * This needs to be cleaned up when data is coming from server
-     */
-    let overview = <FormattedMessage id="overview.tab.heading" description="overview tab" 
-              defaultMessage ="OVERVIEW"/>
 
-    let system = <FormattedMessage id="system.tab.heading" description="system tab" 
-              defaultMessage ="SYSTEM"/>
-              
-    let order = <FormattedMessage id="orders.tab.heading" description="orders tab" 
-              defaultMessage ="ORDERS"/>
-              
-    let users = <FormattedMessage id="users.tab.heading" description="users tab" 
-              defaultMessage ="USERS"/> 
-    let inventory = <FormattedMessage id="inventory.tab.heading" description="inventory tab" 
-              defaultMessage ="INVENTORY"/> 
-
-    let audit = <FormattedMessage id="audit.tab.heading" description="audit tab" 
-              defaultMessage ="AUDIT"/>           
-
-    let overviewStatus = <FormattedMessage id="overviewStatus.tab.heading" description="overview Status " 
-              defaultMessage ="Fulfiling orders"/>  
-
-    let systemStatus = <FormattedMessage id="systemStatus.tab.heading" description="system Status" 
-              defaultMessage ="Online"/>  
-
-    let ordersStatus = <FormattedMessage id="ordersStatus.tab.heading" description="orders Status " 
-              defaultMessage ="70% fulfilled"/>  
-
-    let usersStatus = <FormattedMessage id="usersStatus.tab.heading" description="users Status " 
-              defaultMessage ="35 users logged in"/>  
-    let inventoryStatus = <FormattedMessage id="inventoryStatus.tab.heading" description="inventory Status " 
-              defaultMessage ="78% space utilized"/>            
+  let items=this._parseStatus();
               
 	const item1 = [
-      { tab: overview, Status: overviewStatus, currentState:'gorOffline' }
+      { tab: items.overview, Status: items.overviewStatus, currentState:'' }
     ]
     const item2 = [
-      { tab: system, Status: systemStatus, currentState:'gorOnline' }
+      { tab: items.system, Status: items.systemStatus, currentState:items.systemClass }
     ]
     const item3 = [
-      { tab: order, Status: ordersStatus, currentState:'gorError' }
+      { tab: items.order, Status: items.ordersStatus, currentState:items.ordersClass }
     ]
     const item4 = [
-      { tab: audit, Status: ordersStatus, currentState:'gorError' }
+      { tab: items.audit, Status: items.auditStatus, currentState:items.auditClass }
     ]
     const item5 = [
-      { tab: users, Status: usersStatus, currentState:'gorOffline' }
+      { tab: items.users, Status: items.usersStatus, currentState:'' }
     ]
     
     const item6 = [
-      { tab: inventory, Status: inventoryStatus, currentState:'gorOffline' }
+      { tab: items.inventory, Status: items.inventoryStatus, currentState:'' }
     ]
     
-    var selectClass = {overview:"gorMainBlock", system:"gorMainBlock",orders:"gorMainBlock", audit:"gorMainBlock", users:"gorMainBlock"};
+    var selectClass = {system:this.props.system_emergency?"fail":'gor-normal-tab'};
 
    
    
@@ -101,28 +147,28 @@ class Tabs extends React.Component{
 		return (
 		<div className="gorTabs gorMainBlock">
 		<Link to="/overview" onClick = {this.handleTabClick.bind(this,OVERVIEW)}>
-			<Tab items={item1} changeClass={(this.props.tab.toUpperCase() === OVERVIEW ? 'sel' :"")} subIcons={false}/>
+			<Tab items={item1} changeClass={(this.props.tab.toUpperCase() === OVERVIEW ? 'sel' :'gor-normal-tab')} subIcons={false}/>
 		</Link>
 
 		<Link to="/system" onClick = {this.handleTabClick.bind(this,SYSTEM)}>
-			<Tab items={item2} changeClass={(this.props.tab.toUpperCase() === SYSTEM ? 'sel' :"")} subIcons={true}/>
+			<Tab items={item2} changeClass={(this.props.tab.toUpperCase() === SYSTEM ? 'sel' :selectClass.system)} subIcons={true}/>
 		</Link>
 
 		<Link to="/orders" onClick = {this.handleTabClick.bind(this,ORDERS)}>
-			<Tab items={item3} changeClass={(this.props.tab.toUpperCase() === ORDERS ? 'sel' :"")} subIcons={true}/>
+			<Tab items={item3} changeClass={(this.props.tab.toUpperCase() === ORDERS ? 'sel' :'gor-normal-tab')} subIcons={false}/>
 		</Link>
 
 
     <Link to="/audit" onClick = {this.handleTabClick.bind(this,AUDIT)}>
-      <Tab items={item4} changeClass={(this.props.tab.toUpperCase() === AUDIT ? 'sel' :"")} subIcons={true}/>
+      <Tab items={item4} changeClass={(this.props.tab.toUpperCase() === AUDIT ? 'sel' :'gor-normal-tab')} subIcons={false}/>
       </Link>
 
     <Link to="/inventory" onClick = {this.handleTabClick.bind(this,INVENTORY)}>
-      <Tab items={item6} changeClass={(this.props.tab.toUpperCase() === INVENTORY ? 'sel' :"")} subIcons={true}/>
+      <Tab items={item6} changeClass={(this.props.tab.toUpperCase() === INVENTORY ? 'sel' :'gor-normal-tab')} subIcons={false}/>
     </Link>
 		
 		<Link to="/users" onClick = {this.handleTabClick.bind(this,USERS)}>
-			<Tab items={item5} changeClass={(this.props.tab.toUpperCase() === USERS ? 'sel' :"")} subIcons={false}/>
+			<Tab items={item5} changeClass={(this.props.tab.toUpperCase() === USERS ? 'sel' :'gor-normal-tab')} subIcons={false}/>
 		</Link>
 	</div>
 		);
@@ -132,7 +178,15 @@ class Tabs extends React.Component{
 function mapStateToProps(state, ownProps){
     
     return  {
-         tab:state.tabSelected.tab || TAB_ROUTE_MAP[OVERVIEW]
+         tab:state.tabSelected.tab || TAB_ROUTE_MAP[OVERVIEW],
+         overview_status:state.tabsData.overview_status||null,
+         system_emergency:state.tabsData.system_emergency||null,
+         system_data:state.tabsData.system_data||{},
+         users_online:state.tabsData.users_online||null,
+         audit_count:state.tabsData.audit_count||null,
+         space_utilized:state.tabsData.space_utilized||null,
+         orders_completed:state.tabsData.orders_completed||null,
+         system_status:state.tabsData.status||null
     }
 }
 
