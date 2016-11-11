@@ -1,0 +1,52 @@
+[
+  {
+    "id": "audit.table.heading",
+    "description": "Heading for audit table",
+    "defaultMessage": "Audit Tasks"
+  },
+  {
+    "id": "audit.table.buttonLable",
+    "description": "button label for audit create",
+    "defaultMessage": "Create New Task"
+  },
+  {
+    "id": "auditTable.stationID",
+    "description": "total audit ID for auditTable",
+    "defaultMessage": "{rowsCount} AUDIT ID"
+  },
+  {
+    "id": "auditTable.SubAuditID",
+    "description": "total Sub auditID for auditTable",
+    "defaultMessage": "Total:{rowsCount}"
+  },
+  {
+    "id": "audit.table.type",
+    "description": "audit type for audit table",
+    "defaultMessage": "AUDIT TYPE"
+  },
+  {
+    "id": "audit.table.STATUS",
+    "description": "STATUS for audit",
+    "defaultMessage": "STATUS"
+  },
+  {
+    "id": "audit.table.startTime",
+    "description": "startTime for audit",
+    "defaultMessage": "START TIME"
+  },
+  {
+    "id": "audit.table.progress",
+    "description": "progress for audit task",
+    "defaultMessage": "PROGRESS(%)"
+  },
+  {
+    "id": "audit.table.timeCompleted",
+    "description": "timeCompleted for audit",
+    "defaultMessage": "TIME COMPLETED"
+  },
+  {
+    "id": "audit.table.action",
+    "description": "action Column",
+    "defaultMessage": "ACTIONS"
+  }
+]

@@ -13,18 +13,20 @@ class InventoryStacked extends React.Component{
     
    }
    
+
    render() {
    
    return (
      <div>
-       <StackedChartHorizontal snapshotData = {this.props.snapshotData} config = {SCH_CONFIG}/>
+       <StackedChartHorizontal hasDataChanged= {this.props.hasDataChanged} snapshotData = {this.props.snapshotData} config = {SCH_CONFIG}/>
      </div>
    )
  }
 };
 
 InventoryStacked.propTypes={
-  snapshotData:React.PropTypes.object
+  snapshotData:React.PropTypes.object,
+  hasDataChanged:React.PropTypes.number
 }
 
 

@@ -24,6 +24,7 @@ class StackedChartHorizontal extends React.Component{
     this._processData(nextProps.snapshotData,nextProps.config);
   }
 
+ 
    
   _processData(data,config){
     var config = this.props.config;
@@ -82,7 +83,8 @@ class StackedChartHorizontal extends React.Component{
 
 StackedChartHorizontal.propTypes={
   snapshotData:React.PropTypes.object,
-  config:React.PropTypes.object
+  config:React.PropTypes.object,
+  hasDataChanged:React.PropTypes.number
 }
 StackedChartHorizontal.contextTypes ={
  intl:React.PropTypes.object.isRequired

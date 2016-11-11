@@ -8,6 +8,7 @@ import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
 import {subTabSelected} from '../../actions/tabSelectAction'
 import {ORDER_LIST, WAVES,SYS_SUB_TAB_ROUTE_MAP} from '../../constants/appConstants';
+import { FormattedMessage } from 'react-intl';
 
 class OrderSubTab extends React.Component{
 	constructor(props) 
@@ -29,15 +30,18 @@ class OrderSubTab extends React.Component{
 		else {
 			selectClass["waves"] = "gorMainBlockSelect";
 		}
+		let waves = <FormattedMessage id="OrderSubTab.waves" description="waves tab for OrderSubTab" defaultMessage ="Waves"/> 
+    	let orderlist = <FormattedMessage id="OrderSubTab.orderlist" description="orderlist tab for OrderSubTab" defaultMessage ="Order List"/> 
+    
 		return (
 			<div>
 				<div className="gorMainSubtab">
 					
 					<Link to="/waves" onClick = {this.handleSysSubTabClick.bind(this,WAVES)}>
-						<SubTab item={WAVES} changeClass={selectClass["waves"]}/> 
+						<SubTab item={waves} changeClass={selectClass["waves"]}/> 
 					</Link>
 					<Link to="/orderlist" onClick = {this.handleSysSubTabClick.bind(this,ORDER_LIST)}>
-						<SubTab item={ORDER_LIST} changeClass={selectClass["orderlist"]}/> 
+						<SubTab item={orderlist} changeClass={selectClass["orderlist"]}/> 
 					</Link>
 				</div>
 			</div>

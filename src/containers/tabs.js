@@ -4,8 +4,9 @@ import Tab from '../components/tabs/tab';
 import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
 import {tabSelected,subTabSelected} from '../actions/tabSelectAction';
-import {displaySpinner} from '../actions/spinnerAction';
-import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP,INVENTORY} from '../constants/appConstants';
+import {setInventorySpinner} from '../actions/inventoryActions';
+import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP,INVENTORY,AUDIT} from '../constants/appConstants';
+
 import { FormattedMessage } from 'react-intl';
 
 class Tabs extends React.Component{
@@ -24,12 +25,14 @@ class Tabs extends React.Component{
          * Displaying loader currently for User tab
          * only
          */
-        if(selTab !== OVERVIEW){
-            this.props.displaySpinner(true);
+        switch(selTab){
+          case INVENTORY:
+          this.props.setInventorySpinner(true);
+          break;
+          default:
+          this.props.setInventorySpinner(false);
         }
-        else{
-            this.props.displaySpinner(false)
-        }
+        
         
         this.props.tabSelected(TAB_ROUTE_MAP[selTab]);
         this.props.subTabSelected(null);
@@ -56,6 +59,9 @@ class Tabs extends React.Component{
     let inventory = <FormattedMessage id="inventory.tab.heading" description="inventory tab" 
               defaultMessage ="INVENTORY"/> 
 
+    let audit = <FormattedMessage id="audit.tab.heading" description="audit tab" 
+              defaultMessage ="AUDIT"/>           
+
     let overviewStatus = <FormattedMessage id="overviewStatus.tab.heading" description="overview Status " 
               defaultMessage ="Fulfiling orders"/>  
 
@@ -79,7 +85,9 @@ class Tabs extends React.Component{
     const item3 = [
       { tab: order, Status: ordersStatus, currentState:'gorError' }
     ]
-    
+    const item4 = [
+      { tab: audit, Status: ordersStatus, currentState:'gorError' }
+    ]
     const item5 = [
       { tab: users, Status: usersStatus, currentState:'gorOffline' }
     ]
@@ -88,6 +96,8 @@ class Tabs extends React.Component{
       { tab: inventory, Status: inventoryStatus, currentState:'gorOffline' }
     ]
     
+    var selectClass = {overview:"gorMainBlock", system:"gorMainBlock",orders:"gorMainBlock", audit:"gorMainBlock", users:"gorMainBlock"};
+
    
    
     
@@ -104,6 +114,12 @@ class Tabs extends React.Component{
 		<Link to="/orders" onClick = {this.handleTabClick.bind(this,ORDERS)}>
 			<Tab items={item3} changeClass={(this.props.tab.toUpperCase() === ORDERS ? 'sel' :"")} subIcons={true}/>
 		</Link>
+
+
+    <Link to="/audit" onClick = {this.handleTabClick.bind(this,AUDIT)}>
+      <Tab items={item4} changeClass={(this.props.tab.toUpperCase() === AUDIT ? 'sel' :"")} subIcons={true}/>
+      </Link>
+
     <Link to="/inventory" onClick = {this.handleTabClick.bind(this,INVENTORY)}>
       <Tab items={item6} changeClass={(this.props.tab.toUpperCase() === INVENTORY ? 'sel' :"")} subIcons={true}/>
     </Link>
@@ -127,7 +143,7 @@ var mapDispatchToProps = function(dispatch){
 	return {
 		tabSelected: function(data){ dispatch(tabSelected(data)); },
         subTabSelected: function(data){ dispatch(subTabSelected(data)); },
-        displaySpinner:function(data){dispatch(displaySpinner(data));}
+        setInventorySpinner:function(data){dispatch(setInventorySpinner(data));}
 	}
 };
 

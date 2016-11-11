@@ -22,12 +22,14 @@
     	overflow: hidden;
     	vertical-align: middle;
 	}
+
 	.gorBtn{
 		@include gor-btn(Source Sans Pro Bold,10px,14px,#4d5055,#ffffff,3px);
 		float:right;
 	}
+
 	.histLbl{
-		width: 44%;
+		width: 70%;
     	display: inline-block;
     	font-family: 'Source Sans Pro Semibold';
 	    font-size: calculateRem(20px);
@@ -41,7 +43,7 @@
     	height:100vh
 	}
 	.legendCnt{
-		width: 50%;
+		width: 25%;
     	display: inline-block;
     	vertical-align: middle;
 	}
@@ -132,19 +134,35 @@
 	}
 
 }
-.inventoryHist{
-	.axis--y{
+.lineGraph{
+	.bar{
+		cursor:pointer;
+	}
+	.y{
 		path{
 			&.domain{
 				display:none;
 			}
 		}
+		.tick{
+			line{
+				display:none;
+			}
+		}
 	}
-	.axis--x{
+	.axis{
+		&.x{
+			.domain{
+				display:block;
+			}
+		}
+	}
+	.x{
 		path{
 			&.domain{
 				stroke-width:2;
 				stroke:#666666;
+				display:block;
 			}
 		}
 		line{
@@ -158,6 +176,93 @@
 	.tick{
 		text{
 			fill:#666666;
+			font-size:12px;
+		}
+
+	}
+	.grid{
+		.domain{
+			display:none;
+		}
+		.tick{
+			opacity:1;
+			stroke:none;
+			line{
+				stroke:#CCCCCC;
+			}
+		}
+		.tick:nth-child(1){
+			line{
+				stroke:#666666;
+				stroke-width:2;
+			}
+		}
+		path{
+			&.line{
+				stroke-width:2;
+				stroke:#7ED321;
+			}
+			&.line:nth-child(1){
+				stroke:#D0021B
+			}
+		}
+	}
+}
+.inventoryHist{
+	.bar{
+		cursor:pointer;
+	}
+	.axis--y{
+		path{
+			&.domain{
+				display:none;
+			}
+		}
+		.tick{
+			line{
+				display:none;
+			}
+		}
+	}
+	.axis--x{
+		path{
+			&.domain{
+				stroke-width:2;
+				stroke:#666666;
+				display:block;
+			}
+		}
+		line{
+			display:none;
+		}
+	}
+	.bar{
+		fill:#498BD8;
+		opacity: 1;
+	}
+	.tick{
+		text{
+			fill:#666666;
+			font-size:12px;
+		}
+
+	}
+	.grid{
+		.domain{
+			display:none;
+		}
+		.tick{
+			opacity:1;
+			stroke:none;
+			line{
+				stroke:#CCCCCC;
+			}
+		}
+		.tick:nth-child(1){
+			line{
+				stroke:#666666;
+				stroke-width:2;
+			}
 		}
 	}
 }

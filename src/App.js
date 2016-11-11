@@ -4,8 +4,10 @@ import ReactDOM  from 'react-dom';
 import Tabs from './containers/tabs';
 import Header from './components/header/header';
 import {setWsAction ,setMockAction} from './actions/socketActions';
-import {RECIEVE_HEADER, WS_CONNECT,WS_ONSEND,WS_MOCK,USERS,TAB_ROUTE_MAP,OVERVIEW ,SYSTEM,ORDERS,INVENTORY} from './constants/appConstants'
+import {getTimeOffSetData,setTimeOffSetData} from './actions/loginAction';
+import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,WS_MOCK,USERS,TAB_ROUTE_MAP,OVERVIEW ,SYSTEM,ORDERS,INVENTORY} from './constants/appConstants'
 import { wsOverviewData} from './constants/initData.js';
+import {TIME_ZONE_URL} from './constants/configConstants'
 import {prevTabSelected} from './actions/tabSelectAction';
 import { connect } from 'react-redux'; 
 import TopNotifications from './components/topnotify/topnotify';
@@ -27,6 +29,20 @@ class App extends React.Component{
         this.context.router.push("/login");
 
   	}
+    componentDidMount(){
+      var timeOffset =  sessionStorage.getItem("timeOffset");
+      if(!timeOffset){
+          let timeOffsetParams={
+                'url':TIME_ZONE_URL,
+                'method':'GET',
+                'cause':RECIEVE_TIME_OFFSET
+            }
+            this.props.getTimeOffSetData(timeOffsetParams);
+      }
+      else{
+            this.props.setTimeOffSetData(timeOffset);
+      }
+    }
     
   	componentWillReceiveProps(nextProps) {
     /**
@@ -137,7 +153,8 @@ function mapDispatchToProps(dispatch){
         initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
         initMockData: function(data){dispatch(setMockAction({type:WS_MOCK,data:data}));},
         prevTabSelected: function(data){ dispatch(prevTabSelected(data)) },
-        getHeaderInfo: function(data){ dispatch(getHeaderInfo(data)) }
+        getTimeOffSetData:function(data){ dispatch(getTimeOffSetData(data)); },
+        setTimeOffSetData:function(data){ dispatch(setTimeOffSetData(data)); }
     }
 };
 export  default connect(mapStateToProps,mapDispatchToProps)(App);

@@ -1,0 +1,7 @@
+[
+  {
+    "id": "audit.duplicate.heading",
+    "description": "Text for audit duplicate heading",
+    "defaultMessage": "Are you sure you would like to duplicate audit task {task_name} ?"
+  }
+]

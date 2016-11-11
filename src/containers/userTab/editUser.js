@@ -137,14 +137,14 @@ class EditUser extends React.Component{
 
               </div>
            
-          {this.props.roleInfo?(<RoleGroup operator={this.props.roleInfo.msg.operator} manager={this.props.roleInfo.msg.manager} />):''}
+          {this.props.roleInfo?(<RoleGroup operator={this.props.roleInfo.msg.operator} manager={this.props.roleInfo.msg.manager} roleId={this.props.roleId} />):''}
 
             <div className='gor-usr-details'>
             <div className='gor-pass-view1'  ref={node => { this.view1 = node }}>
               <div className='gor-usr-hdlg'><FormattedMessage id="users.edit.changepassword.heading" description='Heading for Change password' 
                defaultMessage='Change password'/></div>
               <div className='gor-sub-head'><FormattedMessage id="users.edit.changepassword.subheading" description='Subheading for create password' 
-              defaultMessage='Min of 6 digits will be required for logging into the Operator Interface'/></div>
+              defaultMessage='New password will be effective when user log-in next time'/></div>
 
               <div className='gor-usr-hdsm'><FormattedMessage id="users.edit.password.field1" description='Text for password' 
             defaultMessage='Password'/></div>
@@ -169,7 +169,7 @@ class EditUser extends React.Component{
             </div>
 
             <p className='gor-submit'>
-             <button className="gor-add-btn"><FormattedMessage id="users.edit.password.button" description='Text for edit user button' 
+             <button type="submit" className="gor-add-btn"><FormattedMessage id="users.edit.password.button" description='Text for edit user button' 
             defaultMessage='Save'/></button>
             </p>
             </div>

@@ -13,6 +13,8 @@ class SnapShotDetails extends React.Component{
     	super(props);
 
     }	
+
+  
    
 	render(){
 		
@@ -49,6 +51,7 @@ class SnapShotDetails extends React.Component{
 						<td className="stkParam">
 							<p><FormattedMessage id='inventory.snaphot.cbmUsed' defaultMessage="CBM Used" description="Snapshot table header"/></p>
 						<p><FormattedNumber value={this.props.snapshotTabData.cbm_used || 0} /></p>
+
 						</td>
 					</tr>
 					</tbody>
@@ -61,6 +64,9 @@ class SnapShotDetails extends React.Component{
 	}
 };
 SnapShotDetails.propTypes={
-	snapshotTabData:React.PropTypes.object
+
+	snapshotData:React.PropTypes.object,
+	hasDataChanged:React.PropTypes.number
+
 }
 export default SnapShotDetails;

@@ -2,6 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { connect } from 'react-redux';
 import {setRole} from '../../actions/userActions';
+import {BUTLER_SUPERVISOR,BUTLER_UI} from '../../constants/appConstants'
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
 
 
@@ -32,7 +33,7 @@ class RoleGroup extends React.Component{
             defaultMessage='User will be given a specific level of control over the Butler system depending on the designated role'/></div>
                 
                 <div className='gor-role'>
-                <input type="radio"  name='role' onChange={this._checkRole.bind(this)} defaultChecked value={this.props.operator} ref={node => { this.operator = node }} /><span className='gor-usr-hdsm'>
+                <input type="radio"  name='role' onChange={this._checkRole.bind(this)} defaultChecked={this.props.roleId?(this.props.roleId===BUTLER_UI?true:false):true} value={this.props.operator} ref={node => { this.operator = node }} /><span className='gor-usr-hdsm'>
                 <FormattedMessage id="users.add.roledetails.operator" description='Text for operator' 
             defaultMessage='Operator'/> </span>
                 </div>
@@ -42,7 +43,7 @@ class RoleGroup extends React.Component{
                 </div>
 
                 <div className='gor-role'>
-                <input type="radio" value={this.props.manager} onChange={this._checkRole.bind(this)} id='userRole' name="role" ref={node => { this.manager = node }} /><span className='gor-usr-hdsm'>
+                <input type="radio" value={this.props.manager} defaultChecked={this.props.roleId?(this.props.roleId===BUTLER_SUPERVISOR?true:false):false} onChange={this._checkRole.bind(this)} id='userRole' name="role" ref={node => { this.manager = node }} /><span className='gor-usr-hdsm'>
                 <FormattedMessage id="users.add.roledetails.manager" description='Text for manager' 
             defaultMessage='Manager'/></span>
                 </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
 import Dropdown from '../../components/dropdown/dropdown'
 import Dimensions from 'react-dimensions'
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, FormattedDate, FormattedTime,FormattedRelative } from 'react-intl';
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
 
 class OrderListTable extends React.Component {
@@ -85,6 +85,7 @@ class OrderListTable extends React.Component {
         sortedDataList: this._dataList,
       });
     }
+    var filterField = ["recievedTime","id","status","completedTime","pickBy","orderLine"];
     this.setState({
       sortedDataList: new DataListWrapper(filterIndex(e,this._dataList), this._dataList),
     });
@@ -105,24 +106,41 @@ class OrderListTable extends React.Component {
   render() {
     
     var {sortedDataList, colSortDirs,columnWidths} = this.state;
+    var totalOrder = sortedDataList.getSize();
+    let allDrop = <FormattedMessage id="orderlist.table.allDrop" description="allOrders dropdown option for orderlist" defaultMessage ="All orders"/> 
+    let breachedDrop = <FormattedMessage id="orderlist.table.breachedDrop" description="breached dropdown option for orderlist" defaultMessage ="Breached orders"/> 
+    let pendingDrop = <FormattedMessage id="pendingDrop.table.allDrop" description="pending dropdown option for orderlist" defaultMessage ="Pending orders"/> 
+    let completedDrop = <FormattedMessage id="completedDrop.table.allDrop" description="completed dropdown option for orderlist" defaultMessage ="Completed orders"/> 
+    
+    let allTimeDrop = <FormattedMessage id="orderlist.table.allTimeDrop" description="allTime dropdown option for orderlist" defaultMessage ="All"/> 
+    let oneHrDrop = <FormattedMessage id="orderlist.table.oneHrDrop" description="oneHr dropdown option for orderlist" defaultMessage ="Last 1 hours"/> 
+    let twoHrDrop = <FormattedMessage id="pendingDrop.table.twoHrDrop" description="twoHr dropdown option for orderlist" defaultMessage ="Last 2 hours"/> 
+    let sixHrDrop = <FormattedMessage id="completedDrop.table.sixHrDrop" description="sixHr dropdown option for orderlist" defaultMessage ="Last 6 hours"/> 
+    let twelveHrDrop = <FormattedMessage id="pendingDrop.table.twelveHrDrop" description="twelveHr dropdown option for orderlist" defaultMessage ="Last 12 hours"/> 
+    let oneDayDrop = <FormattedMessage id="completedDrop.table.oneDayDrop" description="oneDay dropdown option for orderlist" defaultMessage ="Last 1 day"/> 
+    
     const ordersByStatus = [
-    { value: 'all', label: 'All orders' },
-    { value: 'breached', label: 'Breached orders' },
-    { value: 'pending', label: 'Pending orders' },
-    { value: 'completed', label: 'Completed orders' }
+    { value: 'all', label: allDrop },
+    { value: 'breached', label: breachedDrop },
+    { value: 'pending', label: pendingDrop },
+    { value: 'completed', label: completedDrop }
     ];
 
     const ordersByTime = [
-    { value: 'allOrders', label: 'All' },
-    { value: 'oneHourOrders', label: 'Last 1 hours' },
-    { value: 'twoHourOrders', label: 'Last 2 hours' },
-    { value: 'sixHourOrders', label: 'Last 6 hours' },
-    { value: 'twelveHourOrders', label: 'Last 12 hours' },
-    { value: 'oneDayOrders', label: 'Last 1 day' }
+    { value: 'allOrders', label: allTimeDrop },
+    { value: 'oneHourOrders', label: oneHrDrop },
+    { value: 'twoHourOrders', label: twoHrDrop },
+    { value: 'sixHourOrders', label: sixHrDrop },
+    { value: 'twelveHourOrders', label: twelveHrDrop },
+    { value: 'oneDayOrders', label: oneDayDrop }
     ];
     
     return (
       <div className="gorTableMainContainer">
+      <FormattedTime value = '2016-11-04T14:50:36.787237+00:00'
+      timeZone='Asia/Kolkata'
+      />
+      
         <div className="gorToolBar">
           <div className="gorToolBarWrap">
             <div className="gorToolBarElements">
@@ -130,7 +148,11 @@ class OrderListTable extends React.Component {
               defaultMessage ="OrderList"/>
             </div>
             <div className="gor-button-wrap">
-            <button className="gor-refresh-btn" onClick={this.props.refreshOption.bind(this)} >Refresh Data</button>
+            <button className="gor-refresh-btn" onClick={this.props.refreshOption.bind(this)} >
+              
+              <FormattedMessage id="order.table.buttonLable" description="button label for refresh" 
+              defaultMessage ="Refresh Data"/>
+            </button>
             </div>
             <div className="gor-button-sub-status"> {this.props.lastUpdated} </div>
           </div>
@@ -147,7 +169,7 @@ class OrderListTable extends React.Component {
             <div className="searchbox-magnifying-glass-icon"/>
             <input className="gorInputFilter"
               onChange={this._onFilterChange}
-              placeholder="Filter by keywords">
+              placeholder={this.props.intlMessg["table.filter.placeholder"]}>
             </input>
         </div>
         </div>
@@ -168,8 +190,13 @@ class OrderListTable extends React.Component {
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.id}> 
               <div className="gorToolHeaderEl">
-              <div className="gorToolHeaderEl"> {sortedDataList.getSize()} Order List </div>
-              <div className="gorToolHeaderSubText"> Total:{sortedDataList.getSize()} </div>
+              <div className="gorToolHeaderEl">
+               <FormattedMessage id="orderlist.Totalorder" description='total order for ordertable' defaultMessage='{totalOrder} Order List' values={{totalOrder: totalOrder?totalOrder:'0'}}/>
+                </div>
+              <div className="gorToolHeaderSubText">
+               <FormattedMessage id="orderlist.subTotalorder" description='subtotal order for ordertable' defaultMessage='Total:{totalOrder}' values={{totalOrder: totalOrder?totalOrder:'0'}}/>
+               
+               </div>
               </div>
             </SortHeaderCell>
           }
@@ -203,8 +230,9 @@ class OrderListTable extends React.Component {
         <Column
           columnKey="pickBy"
           header={
-            <SortHeaderCell>
-              <FormattedMessage id="waves.table.pickBy" description="pick by for waves" 
+            <SortHeaderCell onSortChange={this._onSortChange}
+              sortDir={colSortDirs.pickBy}>
+              <FormattedMessage id="orderlist.table.pickBy" description="pick by for orderlist" 
               defaultMessage ="PICK BY"/>
               <div className="gorToolHeaderSubText"> </div>
             </SortHeaderCell>
@@ -217,7 +245,8 @@ class OrderListTable extends React.Component {
         <Column
           columnKey="recievedTime"
           header={
-            <SortHeaderCell>
+            <SortHeaderCell onSortChange={this._onSortChange}
+              sortDir={colSortDirs.recievedTime}>
               <FormattedMessage id="orderlist.table.operatingMode" description="recievedTime for Orders" 
               defaultMessage ="RECIEVED TIME"/>
               <div className="gorToolHeaderSubText"> </div>
@@ -231,8 +260,9 @@ class OrderListTable extends React.Component {
         <Column
           columnKey="completedTime"
           header={
-            <SortHeaderCell>
-              <FormattedMessage id="waves.table.completedTime" description="completedTime for waves" 
+            <SortHeaderCell onSortChange={this._onSortChange}
+              sortDir={colSortDirs.completedTime}>
+              <FormattedMessage id="orderlist.table.completedTime" description="completedTime for orderlist" 
               defaultMessage ="COMPLETED"/>
               <div className="gorToolHeaderSubText"> </div>
             </SortHeaderCell>
@@ -245,8 +275,9 @@ class OrderListTable extends React.Component {
         <Column
           columnKey="orderLine"
           header={
-            <SortHeaderCell>
-              <FormattedMessage id="waves.table.orderLine" description="orderLine for waves" 
+            <SortHeaderCell onSortChange={this._onSortChange}
+              sortDir={colSortDirs.orderLine}>
+              <FormattedMessage id="orderlist.table.orderLine" description="orderLine for orderlist" 
               defaultMessage ="ORDER LINE"/>
               <div className="gorToolHeaderSubText"> </div>
             </SortHeaderCell>

@@ -22,7 +22,7 @@
   {
     "id": "widget.pick.throughput",
     "description": "Throughput message",
-    "defaultMessage": "{count} PPS fullfilling at {throughput} items/hr"
+    "defaultMessage": "{count} PPS fullfilling at {throughput} orders/hr"
   },
   {
     "id": "widget.pick.lowright",

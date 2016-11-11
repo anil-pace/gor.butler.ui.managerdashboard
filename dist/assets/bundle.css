@@ -31,6 +31,13 @@ ol, ul {
   list-style: none;
 }
 
+li {
+  font-family: 'Source Sans Pro Semibold', sans-serif;
+  font-size: 14px;
+  color: #000000;
+  margin-top: 20px;
+}
+
 article, aside, details, figcaption, figure,
 footer, header, nav, section {
   display: block;
@@ -41,7 +48,7 @@ q:before, q:after {
   content: none;
 }
 
-input[type="radio"] {
+input[type="radio"], input[type="checkbox"] {
   margin-right: 15px;
 }
 
@@ -2842,6 +2849,18 @@ progress::-moz-progress-bar {
   vertical-align: sub;
 }
 
+.gor-auditCreate-btn {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  width: 125px;
+  height: 35px;
+  font-size: 14px;
+  background: #4d5055;
+  color: #ffffff;
+  border-radius: 3px;
+  margin-left: 30px;
+  vertical-align: sub;
+}
+
 .gor-dropDown-firstInnerElement {
   display: inline-block;
   padding-right: 15px;
@@ -2873,6 +2892,17 @@ progress::-moz-progress-bar {
   height: 10px;
   width: 100px;
   display: inline-block;
+}
+
+.gor-audit-actions-button {
+  display: inline-block;
+  padding-right: 20px;
+  width: 110px;
+}
+
+.gor-audit-actions-drop {
+  display: inline-block;
+  width: 150px;
 }
 
 .gorSubTab.gorContainer {
@@ -2935,7 +2965,6 @@ progress::-moz-progress-bar {
   background: #f36f36;
   color: #ffffff;
   border-radius: 3px;
-  margin-left: 50px;
 }
 
 .gor-field-error {
@@ -2943,6 +2972,7 @@ progress::-moz-progress-bar {
   color: #EC1C24;
   font-size: 18px;
   margin-top: 10px;
+  width: 75%;
 }
 
 .gor-input-error {
@@ -3105,6 +3135,10 @@ progress::-moz-progress-bar {
   margin-left: 0px;
 }
 
+.gor-modal-content .gor-submit .gor-add-btn:disabled {
+  background: #dddddd;
+}
+
 .gor-footer {
   background: #4D5055;
   color: #CCCCCC;
@@ -3251,7 +3285,7 @@ progress::-moz-progress-bar {
 
 .gor-logout .gor-logout-btn {
   font-family: 'Source Sans Pro Bold', sans-serif;
-  width: 7.0625rem;
+  min-width: 7.0625rem;
   height: 2.1875rem;
   font-size: 14px;
   background: #f36f36;
@@ -3477,9 +3511,13 @@ progress::-moz-progress-bar {
   vertical-align: middle;
 }
 
+.gor-align-top {
+  vertical-align: top;
+}
+
 .gor-delete {
   width: 50%;
-  min-height: 16.25rem;
+  min-height: 15rem;
   background: #ffffff;
   border-radius: 3px;
   font-size: 20px;
@@ -3505,12 +3543,11 @@ progress::-moz-progress-bar {
 
 .gor-delete .gor-delete-bottom {
   text-align: right;
-  margin-right: 1.25rem;
 }
 
 .gor-delete .gor-delete-btn {
   font-family: 'Source Sans Pro Bold', sans-serif;
-  width: 7.0625rem;
+  min-width: 7.0625rem;
   height: 2.1875rem;
   font-size: 14px;
   background: #f36f36;
@@ -3556,7 +3593,7 @@ progress::-moz-progress-bar {
 }
 
 .gorInventory .histLbl {
-  width: 44%;
+  width: 70%;
   display: inline-block;
   font-family: 'Source Sans Pro Semibold';
   font-size: 1.25rem;
@@ -3572,7 +3609,7 @@ progress::-moz-progress-bar {
 }
 
 .gorInventory .legendCnt {
-  width: 50%;
+  width: 25%;
   display: inline-block;
   vertical-align: middle;
 }
@@ -3666,13 +3703,85 @@ progress::-moz-progress-bar {
   border-bottom: 0;
 }
 
+.lineGraph .bar {
+  cursor: pointer;
+}
+
+.lineGraph .y path.domain {
+  display: none;
+}
+
+.lineGraph .y .tick line {
+  display: none;
+}
+
+.lineGraph .axis.x .domain {
+  display: block;
+}
+
+.lineGraph .x path.domain {
+  stroke-width: 2;
+  stroke: #666666;
+  display: block;
+}
+
+.lineGraph .x line {
+  display: none;
+}
+
+.lineGraph .bar {
+  fill: #498BD8;
+  opacity: 1;
+}
+
+.lineGraph .tick text {
+  fill: #666666;
+  font-size: 12px;
+}
+
+.lineGraph .grid .domain {
+  display: none;
+}
+
+.lineGraph .grid .tick {
+  opacity: 1;
+  stroke: none;
+}
+
+.lineGraph .grid .tick line {
+  stroke: #CCCCCC;
+}
+
+.lineGraph .grid .tick:nth-child(1) line {
+  stroke: #666666;
+  stroke-width: 2;
+}
+
+.lineGraph .grid path.line {
+  stroke-width: 2;
+  stroke: #7ED321;
+}
+
+.lineGraph .grid path.line:nth-child(1) {
+  stroke: #D0021B;
+}
+
+.inventoryHist .bar {
+  cursor: pointer;
+}
+
 .inventoryHist .axis--y path.domain {
+  display: none;
+}
+
+.inventoryHist .axis--y .tick line {
   display: none;
 }
 
 .inventoryHist .axis--x path.domain {
   stroke-width: 2;
   stroke: #666666;
+  display: block;
 }
 
 .inventoryHist .axis--x line {
@@ -3686,4 +3795,37 @@ progress::-moz-progress-bar {
 
 .inventoryHist .tick text {
   fill: #666666;
+  font-size: 12px;
+}
+
+.inventoryHist .grid .domain {
+  display: none;
+}
+
+.inventoryHist .grid .tick {
+  opacity: 1;
+  stroke: none;
+}
+
+.inventoryHist .grid .tick line {
+  stroke: #CCCCCC;
+}
+
+.inventoryHist .grid .tick:nth-child(1) line {
+  stroke: #666666;
+  stroke-width: 2;
+}
+
+path {
+  stroke: steelblue;
+  stroke-width: 2;
+  fill: none;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: grey;
+  stroke-width: 1;
+  shape-rendering: crispEdges;
 }

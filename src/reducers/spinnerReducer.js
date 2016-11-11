@@ -1,4 +1,4 @@
-import { DISPLAY_SPINNER,DISPLAY_LOGIN_SPINNER} from '../constants/appConstants'
+import { DISPLAY_SPINNER,DISPLAY_LOGIN_SPINNER,DISPLAY_INVENTORY_SPINNER} from '../constants/appConstants'
 /**
  * [loader reducer function to set isLoading state]
  * @param  {Object} state  [state tree of the current reducer]
@@ -16,7 +16,10 @@ export  function spinner(state={},action){
 	    return Object.assign({}, state, {
 	    	"loginSpinner":action.data
       })
-	    
+	    case DISPLAY_INVENTORY_SPINNER:
+	    return Object.assign({}, state, {
+	    	"inventorySpinner":action.data
+      })
 	  default:
 	    return state
   }
