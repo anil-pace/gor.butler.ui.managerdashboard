@@ -54,7 +54,7 @@ export const INVALID_NAME= (<FormattedMessage id="user.invalid.name" description
             defaultMessage='Special characters like "~","@" and "%" are not allowed'/>);
 
 export const INVALID_PWD= (<FormattedMessage id="user.invalid.password" description='Text for invalid password' 
-            defaultMessage="Please enter a password of at least 8 alphanumeric characters"/>);
+            defaultMessage="Please enter a password of at least 6 alphanumeric characters"/>);
 
 export const MATCH_PWD= (<FormattedMessage id="user.match.password" description='Text for passwords not matching' 
             defaultMessage="Both password entered do not match. Please try again"/>);

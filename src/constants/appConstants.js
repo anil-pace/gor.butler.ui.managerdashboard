@@ -156,8 +156,6 @@ export const DEFAULT_PAGE_SIZE = "25";
 export const PAGE_FIELD = "?page=";
 export const GET_CURRENT_PAGE_ORDERS = "GET_CURRENT_PAGE_ORDERS";
 export const GET_LAST_REFRESH_TIME = "GET_LAST_REFRESH_TIME";
-export const GET_PAGE_SIZE_AUDIT = "GET_PAGE_SIZE_AUDIT";
-export const GET_CURRENT_PAGE_AUDIT = "GET_CURRENT_PAGE_AUDIT";
 
 /*Constants for Loader*/
 

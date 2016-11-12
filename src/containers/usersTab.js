@@ -72,7 +72,7 @@ class UsersTab extends React.Component{
 			<div>
 				<div>
 					<div className="gorUserTable">
-						<UserDataTable items={userData} itemNumber={itemNumber} intlMessg={this.props.intlMessages} mid={this.props.manager.length?this.props.manager.users[0].id:''}/>
+						<UserDataTable items={userData} itemNumber={itemNumber} intlMessg={this.props.intlMessages} mid={this.props.manager.users?this.props.manager.users[0].id:''}/>
 					</div>
 				</div>
 			</div>

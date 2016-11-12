@@ -8,11 +8,11 @@ export  function recieveAuditDetail(state={},action){
     case RECIEVE_AUDIT_DATA:
 
           var res, auditDetail, totalPage;
-          res=action.data;
+          res=action.data.data[0];
           totalPage=res.total_pages;
-          if(res.audit) {
+          if(res.audit_list) {
           return Object.assign({}, state, { 
-            "auditDetail" : res.audit,
+            "auditDetail" : res.audit_list,
             "totalPage" : totalPage
           })
           }

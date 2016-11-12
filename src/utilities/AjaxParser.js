@@ -6,7 +6,7 @@ import {recieveHeaderInfo} from '../actions/headerAction';
 import {getPPSAudit} from '../actions/auditActions';
 import {codeToString} from './codeToString';
 import {notifySuccess, notifyFail,validateID} from '../actions/validationActions';
-import {ERROR,AUTH_LOGIN, ADD_USER, CHECK_ID,DELETE_USER,GET_ROLES,ORDERS_RETRIEVE,PPS_MODE_CHANGE,EDIT_USER,BUTLER_UI,CODE_UE002,RECIEVE_HEADER,SUCCESS,CREATE_AUDIT,AUDIT_RETRIEVE,GET_PPSLIST,START_AUDIT,DELETE_AUDIT} from '../constants/appConstants';
+import {ERROR,AUTH_LOGIN, ADD_USER, CHECK_ID,DELETE_USER,GET_ROLES,ORDERS_RETRIEVE,PPS_MODE_CHANGE,EDIT_USER,BUTLER_UI,CODE_UE002,RECIEVE_HEADER,SUCCESS,CREATE_AUDIT,AUDIT_RETRIEVE,GET_PPSLIST,START_AUDIT,DELETE_AUDIT,BUTLER_SUPERVISOR} from '../constants/appConstants';
 import {UE002,E028,E029,MODE_REQUESTED,TYPE_SUCCESS,AS001,ERR_API,ERR_USR,ERR_RES,ERR_AUDIT,AS00A} from '../constants/messageConstants';
 
 export function AjaxParse(store,res,cause)
@@ -31,11 +31,11 @@ export function AjaxParse(store,res,cause)
 			{
 				if(rolesArr[i].name===BUTLER_UI)
 				{
-					k.operator=rolesArr[i].id;
+					k.BUTLER_UI=rolesArr[i].id;
 				}
 				else
 				{
-					k.manager=rolesArr[i].id;					
+					k.BUTLER_SUPERVISOR=rolesArr[i].id;					
 				}
 			}
 			store.dispatch(assignRole(k));

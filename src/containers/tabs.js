@@ -61,7 +61,7 @@ class Tabs extends React.Component{
     audit = <FormattedMessage id="audit.tab.heading" description="audit tab" 
               defaultMessage ="AUDIT"/>;           
 
-    if(this.props.systemStatus)
+    if(!this.props.system_status)
     {
      overviewStatus=offline;
      systemStatus=offline;
@@ -118,52 +118,32 @@ class Tabs extends React.Component{
 	render(){
 
   let items=this._parseStatus();
-              
-	const item1 = [
-      { tab: items.overview, Status: items.overviewStatus, currentState:'' }
-    ]
-    const item2 = [
-      { tab: items.system, Status: items.systemStatus, currentState:items.systemClass }
-    ]
-    const item3 = [
-      { tab: items.order, Status: items.ordersStatus, currentState:items.ordersClass }
-    ]
-    const item4 = [
-      { tab: items.audit, Status: items.auditStatus, currentState:items.auditClass }
-    ]
-    const item5 = [
-      { tab: items.users, Status: items.usersStatus, currentState:'' }
-    ]
-    
-    const item6 = [
-      { tab: items.inventory, Status: items.inventoryStatus, currentState:'' }
-    ]
-        
+                      
 		return (
 		<div className="gorTabs gorMainBlock">
 		<Link to="/overview" onClick = {this.handleTabClick.bind(this,OVERVIEW)}>
-			<Tab items={item1} changeClass={(this.props.tab.toUpperCase() === OVERVIEW ? 'sel' :'gor-normal-tab')} subIcons={false}/>
+			<Tab items={{ tab: items.overview, Status: items.overviewStatus, currentState:'' }} changeClass={(this.props.tab.toUpperCase() === OVERVIEW ? 'sel' :'gor-normal-tab')} subIcons={false}/>
 		</Link>
 
 		<Link to="/system" onClick = {this.handleTabClick.bind(this,SYSTEM)}>
-			<Tab items={item2} changeClass={(!this.props.system_emergency?(this.props.tab.toUpperCase() === SYSTEM ? 'sel' :'gor-normal-tab'):'fail')} subIcons={true}/>
+			<Tab items={{ tab: items.system, Status: items.systemStatus, currentState:items.systemClass }} changeClass={(!this.props.system_emergency?(this.props.tab.toUpperCase() === SYSTEM ? 'sel' :'gor-normal-tab'):'fail')} subIcons={true}/>
 		</Link>
 
 		<Link to="/orders" onClick = {this.handleTabClick.bind(this,ORDERS)}>
-			<Tab items={item3} changeClass={(this.props.tab.toUpperCase() === ORDERS ? 'sel' :'gor-normal-tab')} subIcons={false}/>
+			<Tab items={{ tab: items.order, Status: items.ordersStatus, currentState:items.ordersClass }} changeClass={(this.props.tab.toUpperCase() === ORDERS ? 'sel' :'gor-normal-tab')} subIcons={false}/>
 		</Link>
 
 
     <Link to="/audit" onClick = {this.handleTabClick.bind(this,AUDIT)}>
-      <Tab items={item4} changeClass={(this.props.tab.toUpperCase() === AUDIT ? 'sel' :'gor-normal-tab')} subIcons={false}/>
+      <Tab items={{ tab: items.audit, Status: items.auditStatus, currentState:items.auditClass }} changeClass={(this.props.tab.toUpperCase() === AUDIT ? 'sel' :'gor-normal-tab')} subIcons={false}/>
       </Link>
 
     <Link to="/inventory" onClick = {this.handleTabClick.bind(this,INVENTORY)}>
-      <Tab items={item6} changeClass={(this.props.tab.toUpperCase() === INVENTORY ? 'sel' :'gor-normal-tab')} subIcons={false}/>
+      <Tab items={{ tab: items.inventory, Status: items.inventoryStatus, currentState:'' }} changeClass={(this.props.tab.toUpperCase() === INVENTORY ? 'sel' :'gor-normal-tab')} subIcons={false}/>
     </Link>
 		
 		<Link to="/users" onClick = {this.handleTabClick.bind(this,USERS)}>
-			<Tab items={item5} changeClass={(this.props.tab.toUpperCase() === USERS ? 'sel' :'gor-normal-tab')} subIcons={false}/>
+			<Tab items={{ tab: items.users, Status: items.usersStatus, currentState:'' }} changeClass={(this.props.tab.toUpperCase() === USERS ? 'sel' :'gor-normal-tab')} subIcons={false}/>
 		</Link>
 	</div>
 		);
@@ -171,7 +151,6 @@ class Tabs extends React.Component{
 }
 
 function mapStateToProps(state, ownProps){
-    
     return  {
          tab:state.tabSelected.tab || TAB_ROUTE_MAP[OVERVIEW],
          overview_status:state.tabsData.overview_status||null,
