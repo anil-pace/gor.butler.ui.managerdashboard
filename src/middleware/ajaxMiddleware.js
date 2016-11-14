@@ -31,11 +31,11 @@ const ajaxMiddleware = (function(){
       }
       httpRequest.onreadystatechange = function(xhr){
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
-          if (httpRequest.status === 200 || httpRequest.status === 201|| httpRequest.status === 202) {
+          if (httpRequest.status >= 200 && httpRequest.status <= 300) {
             var response=JSON.parse(httpRequest.response);
             AjaxParse(store,response,params.cause);
           }
-          else if(httpRequest.status >= 400 ){
+          else if(httpRequest.status >= 400 &&  httpRequest.status <= 500){
             console.log('Request not processed');
             if(httpRequest.status === 401 && params.cause!==AUTH_LOGIN)
             {

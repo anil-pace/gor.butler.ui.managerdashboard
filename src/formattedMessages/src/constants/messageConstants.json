@@ -72,7 +72,7 @@
   {
     "id": "user.invalid.password",
     "description": "Text for invalid password",
-    "defaultMessage": "Please enter a password of at least 8 alphanumeric characters"
+    "defaultMessage": "Please enter a password of at least 6 alphanumeric characters"
   },
   {
     "id": "user.match.password",

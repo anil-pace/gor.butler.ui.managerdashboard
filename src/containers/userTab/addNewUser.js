@@ -3,7 +3,7 @@ import ReactDOM  from 'react-dom';
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
 import {validateID, validateName, validatePassword, resetForm} from '../../actions/validationActions';
 import {userRequest} from '../../actions/userActions';
-import {ADD_USER,CHECK_ID,ERROR,SUCCESS,INFO,GET_ROLES} from '../../constants/appConstants';
+import {ADD_USER,CHECK_ID,ERROR,SUCCESS,INFO,GET_ROLES,BUTLER_SUPERVISOR,BUTLER_UI} from '../../constants/appConstants';
 import {ROLE_URL,CHECK_USER,HEADER_URL} from '../../constants/configConstants';
 import {INVALID_ID,INVALID_FORMAT,TYPE_SUCCESS} from '../../constants/messageConstants';
 import { connect } from 'react-redux';
@@ -106,7 +106,7 @@ class AddUser extends React.Component{
             return;
         }
 
-        role=this.props.roleSet?this.props.roleSet.msg:this.props.roleInfo.msg.operator;
+        role=this.props.roleSet?this.props.roleSet.msg:this.props.roleInfo.msg.BUTLER_UI;
 
         let formdata={         
                     "first_name": firstname,
@@ -175,7 +175,7 @@ class AddUser extends React.Component{
 
             </div>
 
-          {this.props.roleInfo?(<RoleGroup operator={this.props.roleInfo.msg.operator} manager={this.props.roleInfo.msg.manager} />):''}
+          {this.props.roleInfo?(<RoleGroup operator={this.props.roleInfo.msg.BUTLER_UI} manager={this.props.roleInfo.msg.BUTLER_SUPERVISOR} />):''}
             
             <div className='gor-usr-details'>
             <div className='gor-usr-hdlg'><FormattedMessage id="users.add.password.heading" description='Heading for create password' 

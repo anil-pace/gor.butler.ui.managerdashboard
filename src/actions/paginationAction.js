@@ -48,19 +48,6 @@ export function currentPageOrders(data) {
   }
 }
 
-export function getPageSizeAudit(data) {
-  return {
-    type: GET_PAGE_SIZE_AUDIT,
-    data
-  }
-}
-
-export function currentPageAudit(data) {
-  return {
-    type: GET_CURRENT_PAGE_AUDIT,
-    data
-  }
-}
 
 export function lastRefreshTime(data) {
   return {
