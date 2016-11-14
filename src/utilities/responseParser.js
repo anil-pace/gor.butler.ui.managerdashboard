@@ -1,9 +1,11 @@
 
-import {receivePpsData,receiveButlersData,receiveAuditData,receiveThroughputData,receivePutData,receiveChargersData,receiveInventoryTodayData,receiveInventoryHistoryData,receiveOrdersData,initData,recieveHistogramData,recieveChargersDetail,recieveButlersDetail,recievePPSDetail,recievePPSperformance,recieveUserDetails} from '../actions/responseAction';
-import {displayLoader} from '../actions/loaderAction';
+import {receivePpsData,receiveButlersData,receiveAuditData,receiveThroughputData,receivePutData,receiveChargersData,receiveOrdersData,initData,recieveHistogramData,recieveChargersDetail,recieveButlersDetail,recievePPSDetail,recievePPSperformance,recieveUserDetails} from '../actions/responseAction';
+import {PARSE_PPS,PARSE_BUTLERS,PARSE_CHARGERS,PARSE_INVENTORY_HISTORY,PARSE_INVENTORY_TODAY,PARSE_INVENTORY,PARSE_ORDERS,PARSE_PUT,PARSE_PICK,PARSE_PPA_THROUGHPUT,PARSE_AUDIT,HISTOGRAM_DATA,SYSTEM_CHARGERS_DETAILS,PPS_DETAIL,SYSTEM_PPS_DETAILS,SYSTEM_BUTLERS_DETAILS,HISTOGRAM_DETAILS,USER_DATA,PARSE_OVERVIEW,PARSE_SYSTEM,PARSE_STATUS} from '../constants/appConstants';
 import {wsOnMessageAction} from '../actions/socketActions';
 import {recieveOverviewStatus,recieveSystemStatus,recieveAuditStatus,recieveOrdersStatus,recieveUsersStatus,recieveInventoryStatus,recieveStatus} from '../actions/tabActions';
-import {PARSE_PPS,PARSE_BUTLERS,PARSE_CHARGERS,PARSE_INVENTORY_HISTORY,PARSE_INVENTORY_TODAY,PARSE_INVENTORY,PARSE_ORDERS,PARSE_PUT,PARSE_PICK,PARSE_PPA_THROUGHPUT,PARSE_AUDIT,HISTOGRAM_DATA,SYSTEM_CHARGERS_DETAILS,PPS_DETAIL,SYSTEM_PPS_DETAILS,SYSTEM_BUTLERS_DETAILS,HISTOGRAM_DETAILS,USER_DATA,PARSE_OVERVIEW,PARSE_SYSTEM,PARSE_STATUS} from '../constants/appConstants';
+import {displaySpinner} from '../actions/spinnerAction';
+import {setInventorySpinner} from '../actions/inventoryActions';
+import {receiveInventoryTodayData,receiveInventoryHistoryData} from '../actions/inventoryActions';
 import {resTypeSnapShotToday,resTypeSnapShotHistory} from '../../mock/mockDBData';
 
 
@@ -41,10 +43,11 @@ export function ResponseParse(store,res)
 				break;
 			case PARSE_INVENTORY_HISTORY:
 				store.dispatch(receiveInventoryHistoryData(res));
+				store.dispatch(setInventorySpinner(false));
 				break;
-
 			case PARSE_INVENTORY_TODAY:		
 				store.dispatch(receiveInventoryTodayData(res));
+				store.dispatch(setInventorySpinner(false));
 				break;
 			case PARSE_ORDERS:	
 				if(res.header_data)
@@ -84,8 +87,9 @@ export function ResponseParse(store,res)
 				else
 				{
 					store.dispatch(recieveUserDetails(res));	
-					store.dispatch(displayLoader(false));
+					store.dispatch(displaySpinner(false));
 				}
+
 				//store.dispatch(recieveUserDetails(res));	  
 				break;
 			case PARSE_OVERVIEW:

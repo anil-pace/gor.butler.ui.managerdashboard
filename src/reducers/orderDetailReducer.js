@@ -1,8 +1,4 @@
 import {ORDER_RECIEVED} from '../constants/appConstants'; 
-import React  from 'react';
-import { FormattedMessage } from 'react-intl';
-
-
 
 export  function getOrderDetail(state={},action){
   switch (action.type) {

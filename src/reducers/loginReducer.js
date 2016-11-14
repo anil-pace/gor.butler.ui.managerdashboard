@@ -1,4 +1,4 @@
-import {LOGIN_REQUEST,SET_USERNAME,LOGIN_REDIRECT,LOGIN_SUCCESS,LOGIN_FAILURE,LOGOUT} from '../constants/appConstants';
+import {LOGIN_REQUEST,SET_USERNAME,SET_TIME_OFFSET,LOGIN_REDIRECT,LOGIN_SUCCESS,LOGIN_FAILURE,LOGOUT} from '../constants/appConstants';
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -30,7 +30,7 @@ export  function authLogin(state={},action){
       })
 
     case LOGOUT:
-     sessionStorage.removeItem('auth_token');      
+     //sessionStorage.removeItem('auth_token');      
       return Object.assign({}, state, {
           "loginAuthorized":null,
           "auth_token":null
@@ -40,7 +40,11 @@ export  function authLogin(state={},action){
       return Object.assign({}, state, {
           "username":action.data
       })
-
+    case SET_TIME_OFFSET:
+      sessionStorage.setItem('timeOffset', action.data.warehouse_time_zone || action.data);
+      return Object.assign({}, state, {
+          "timeOffset":action.data.warehouse_time_zone || action.data
+      })
 	  default:
 	    return state
   }

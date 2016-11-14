@@ -27,7 +27,7 @@ for (var i = startIndex; i < endIndex; i++) {
 }
 for (var i = endIndex ; i < 24; i++) {
   barData.timeInterval = (i)%24
-  barData.put = 0;
+  barData.put = 10;
   barData.pick = 0;
   barData.audit = 0;
   graphData.push(barData);

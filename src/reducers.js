@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import {headerData}  from './reducers/headerReducer'
 import {authLogin}  from './reducers/loginReducer'
-import {loader}  from './reducers/loaderReducer'
+import {spinner}  from './reducers/spinnerReducer'
 import {recieveSocketActions}  from './reducers/socketReducer'
 import { routerReducer as routing } from 'react-router-redux';
 import { intlReducer } from 'react-intl-redux'
@@ -58,7 +58,7 @@ const rootReducer = combineReducers({
   tabSelected,
   PPSperformance,
   userDetails,
-  loader,
+  spinner,
   getOrderDetail,
   filterOptions,
   waveInfo,

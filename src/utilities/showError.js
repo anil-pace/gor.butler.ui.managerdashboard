@@ -1,4 +1,4 @@
-import {receiveAuthData,setLoginLoader} from '../actions/loginAction';
+import {receiveAuthData,setLoginSpinner} from '../actions/loginAction';
 import {AUTH_LOGIN} from '../constants/appConstants';
 import {ERR_CONNECT} from '../constants/messageConstants';
 import {notifyFail} from '../actions/validationActions';
@@ -9,7 +9,7 @@ export function ShowError(store,cause)
 	{
 		case AUTH_LOGIN:
 			console.log('In Error utility');
-			store.dispatch(setLoginLoader(false));
+			store.dispatch(setLoginSpinner(false));
 			store.dispatch(receiveAuthData());
 			break;
 		default:

@@ -1,4 +1,4 @@
-import {receiveAuthData,setLoginLoader} from '../actions/loginAction';
+import {receiveAuthData,setLoginSpinner,setTimeOffSetData} from '../actions/loginAction';
 import {recieveOrdersData} from '../actions/paginationAction';
 import {recieveAuditData} from '../actions/auditActions';
 import {assignRole} from '../actions/userActions';
@@ -6,7 +6,7 @@ import {recieveHeaderInfo} from '../actions/headerAction';
 import {getPPSAudit} from '../actions/auditActions';
 import {codeToString} from './codeToString';
 import {notifySuccess, notifyFail,validateID} from '../actions/validationActions';
-import {ERROR,AUTH_LOGIN, ADD_USER, CHECK_ID,DELETE_USER,GET_ROLES,ORDERS_RETRIEVE,PPS_MODE_CHANGE,EDIT_USER,BUTLER_UI,CODE_UE002,RECIEVE_HEADER,SUCCESS,CREATE_AUDIT,AUDIT_RETRIEVE,GET_PPSLIST,START_AUDIT,DELETE_AUDIT,BUTLER_SUPERVISOR} from '../constants/appConstants';
+import {ERROR,AUTH_LOGIN, ADD_USER, RECIEVE_TIME_OFFSET,CHECK_ID,DELETE_USER,GET_ROLES,ORDERS_RETRIEVE,PPS_MODE_CHANGE,EDIT_USER,BUTLER_UI,CODE_UE002,RECIEVE_HEADER,SUCCESS,CREATE_AUDIT,AUDIT_RETRIEVE,GET_PPSLIST,START_AUDIT,DELETE_AUDIT,BUTLER_SUPERVISOR} from '../constants/appConstants';
 import {UE002,E028,E029,MODE_REQUESTED,TYPE_SUCCESS,AS001,ERR_API,ERR_USR,ERR_RES,ERR_AUDIT,AS00A} from '../constants/messageConstants';
 
 export function AjaxParse(store,res,cause)
@@ -16,7 +16,7 @@ export function AjaxParse(store,res,cause)
 	{
 		case AUTH_LOGIN:			
 			store.dispatch(receiveAuthData(res));
-			store.dispatch(setLoginLoader(false));
+			store.dispatch(setLoginSpinner(false));
 			break;
 		case ORDERS_RETRIEVE:
 			store.dispatch(recieveOrdersData(res));
@@ -139,8 +139,12 @@ export function AjaxParse(store,res,cause)
 			}
 			break;
 		case RECIEVE_HEADER:
-			store.dispatch(recieveHeaderInfo(res));
-			break;
+						store.dispatch(recieveHeaderInfo(res));
+						break;
+		case RECIEVE_TIME_OFFSET:
+						store.dispatch(setTimeOffSetData(res));
+						break;
+
 		default:
 		    store.dispatch(notifyFail(ERR_API));	
 	}

@@ -1162,6 +1162,6 @@
   {
     "id": "snapshot.inventory.usedSpace",
     "description": "Space utilised message",
-    "defaultMessage": "日本語"
+    "defaultMessage": "{utilisedSpace} 日本語"
   }
 ]

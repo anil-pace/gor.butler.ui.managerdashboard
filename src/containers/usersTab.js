@@ -1,7 +1,6 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import UserDataTable from './userTab/userTabTable';
-import Loader from '../components/loader/Loader';
 import { connect } from 'react-redux'; 
 function processUserDetails(data, nProps) {
   let operator  = nProps.context.intl.formatMessage({id:"userDetails.operator", defaultMessage: "Operator"});

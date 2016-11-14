@@ -2,7 +2,7 @@ import React from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
 import Dropdown from '../../components/dropdown/dropdown'
 import Dimensions from 'react-dimensions'
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, FormattedDate, FormattedTime,FormattedRelative } from 'react-intl';
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
 
 class OrderListTable extends React.Component {
@@ -142,6 +142,8 @@ class OrderListTable extends React.Component {
     
     return (
       <div className="gorTableMainContainer">
+      
+      
         <div className="gorToolBar">
           <div className="gorToolBarWrap">
             <div className="gorToolBarElements">

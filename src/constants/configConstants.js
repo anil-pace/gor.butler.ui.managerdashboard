@@ -1,4 +1,3 @@
-
 export const BASE_URL = '192.168.8.120';
 export const PORT = '8888';
 export const PROTOCOL = 'https://';
@@ -17,3 +16,5 @@ export const PPSLIST_URL = API_URL+"/pps/pps_mode"
 export const ORDER_PAGE = "?page=";
 export const PICK_BEFORE_ORDER_URL = "&pick_before_time<=";
 export const BREACHED_URL = "&warehouse_status=['pending','fulfillable']";
+export const TIME_ZONE_URL = PROTOCOL+BASE_URL+"/api/components/get_time_zone"
+

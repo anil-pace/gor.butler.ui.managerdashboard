@@ -1,9 +1,10 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import Footer from '../Footer/Footer';
-import Loader from '../../components/loader/Loader'
-import { authLoginData,mockLoginAuth,setUsername,setLoginLoader } from '../../actions/loginAction';
+import Spinner from '../../components/spinner/Spinner'
+import { authLoginData,mockLoginAuth,setUsername,setLoginSpinner } from '../../actions/loginAction';
 import {validateID, validatePassword, resetForm} from '../../actions/validationActions';
+
 import { connect } from 'react-redux';
 import {AUTH_LOGIN,ERROR,SUCCESS} from '../../constants/appConstants'; 
 import {INVALID_ID,EMPTY_PWD,TYPE_SUCCESS} from '../../constants/messageConstants'; 
@@ -140,7 +141,7 @@ class Login extends React.Component{
         sessionStorage.setItem('nextView', 'md');
         if(MOCK === false){
     	    this.props.setUsername(formdata.username);
-            this.props.setLoginLoader(true);
+            this.props.setLoginSpinner(true);
             this.props.authLoginData(loginData);
         }
         else{
@@ -151,7 +152,7 @@ class Login extends React.Component{
         return (
                
             <div className='gor-login-form'>
-            <Loader isLoading={this.props.loginLoading} />
+            <Spinner isLoading={this.props.loginSpinner} />
             <form action="#"  id = "loginForm" ref={node => { this.loginForm = node }} 
                 onSubmit={(e) => this._handleSubmit(e)}>
                 <div className='gor-login-lang'>
@@ -254,7 +255,8 @@ function mapStateToProps(state, ownProps){
         intlMessages: state.intl.messages,
         idInfo: state.appInfo.idInfo||{},
         loginPassCheck: state.appInfo.passwordInfo||{},
-        loginLoading:state.loader.loginLoader           
+        loginSpinner:state.spinner.loginSpinner         
+
     };
 }
 /**
@@ -273,7 +275,7 @@ var mapDispatchToProps = function(dispatch){
         setUsername: function(data){ dispatch(setUsername(data)); },        
         validatePass: function(data){ dispatch(validatePassword(data)); },        
         resetForm:   function(){ dispatch(resetForm()); },
-        setLoginLoader:   function(data){ dispatch(setLoginLoader(data)); }
+        setLoginSpinner:   function(data){ dispatch(setLoginSpinner(data)); }
     }
 };
 

@@ -1,7 +1,7 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import UserDataTable from './userTab/userTabTable';
-import Loader from '../components/loader/Loader';
+import Spinner from '../components/spinner/Spinner';
 import { connect } from 'react-redux'; 
 import {AUDIT_URL} from '../constants/configConstants';
 import {getAuditData} from '../actions/auditActions';

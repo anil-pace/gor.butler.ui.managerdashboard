@@ -4,7 +4,7 @@ import Tab from '../components/tabs/tab';
 import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
 import {tabSelected,subTabSelected} from '../actions/tabSelectAction';
-import {displayLoader} from '../actions/loaderAction';
+import {setInventorySpinner} from '../actions/inventoryActions';
 import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP,INVENTORY,AUDIT} from '../constants/appConstants';
 import { FormattedMessage,FormattedNumber } from 'react-intl';
 
@@ -24,12 +24,14 @@ class Tabs extends React.Component{
          * Displaying loader currently for User tab
          * only
          */
-        if(selTab !== OVERVIEW){
-            this.props.displayLoader(true);
+        switch(selTab){
+          case INVENTORY:
+          this.props.setInventorySpinner(true);
+          break;
+          default:
+          this.props.setInventorySpinner(false);
         }
-        else{
-            this.props.displayLoader(false)
-        }
+        
         
         this.props.tabSelected(TAB_ROUTE_MAP[selTab]);
         this.props.subTabSelected(null);
@@ -168,7 +170,7 @@ var mapDispatchToProps = function(dispatch){
 	return {
 		tabSelected: function(data){ dispatch(tabSelected(data)); },
         subTabSelected: function(data){ dispatch(subTabSelected(data)); },
-        displayLoader:function(data){dispatch(displayLoader(data));}
+        setInventorySpinner:function(data){dispatch(setInventorySpinner(data));}
 	}
 };
 

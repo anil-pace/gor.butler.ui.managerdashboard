@@ -10,16 +10,29 @@ import {ORDERS_RETRIEVE} from '../../constants/appConstants';
 import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,ORDER_PAGE, PICK_BEFORE_ORDER_URL, BREACHED_URL} from '../../constants/configConstants';
 import OrderListTable from './orderListTable';
 import Dropdown from '../../components/dropdown/dropdown'
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage ,FormattedTime,FormattedDate} from 'react-intl';
 
-function processOrders(data, nProps) {
+
+
+class OrderListTab extends React.Component{
+  constructor(props) 
+  {
+      super(props);
+  } 
+  componentDidMount() {
+    var data = {};
+    data.selected = 0;
+    this.handlePageClick(data);
+  }
+
+  processOrders(data, nProps) {
   let progress  = nProps.context.intl.formatMessage({id:"orderList.progress.status", defaultMessage: "In Progress"});
   let completed  = nProps.context.intl.formatMessage({id:"orderList.completed.status", defaultMessage: "Completed"});
   let unfulfillable  = nProps.context.intl.formatMessage({id:"orderList.Unfulfillable.status", defaultMessage: "Unfulfillable"});
   var renderOrderData = [], ordersStatus = {'pending':progress, "fulfillable": progress, "completed":completed, "not_fulfillable":unfulfillable},orderData = {};
   var breachedStatus = {'pending':1, "fulfillable": 1, "completed":3, "not_fulfillable":2};
   var unBreachedStatus = {'pending':4, "fulfillable": 4, "completed":6, "not_fulfillable":5};
-  
+  var timeOffset=this.props.timeOffset;
   if(data.length !== undefined) {
     for (var i =0; i < data.length; i++) {
       orderData.id = data[i].order_id;
@@ -35,8 +48,17 @@ function processOrders(data, nProps) {
         orderData.statusClass = "breached";
         orderData.statusPriority = breachedStatus[data[i].status];
       }
-      orderData.recievedTime = (data[i].create_time.substring(4));
-      orderData.recievedTime = orderData.recievedTime.substring(0, orderData.recievedTime.length - 4)
+      //orderData.recievedTime = (data[i].create_time.substring(4));
+      orderData.recievedTime = <FormattedDate value = {data[i].create_time}
+                                timeZone={timeOffset}
+                                 year='numeric'
+                                  month='short'
+                                  day='2-digit'
+                                  hour="2-digit"
+                                  minute="2-digit"
+                                  second="2-digit"
+                                  timeZoneName="long"
+                                />;//orderData.recievedTime.substring(0, orderData.recievedTime.length - 4)
       if(data[i].pick_before_time === null) {
         orderData.pickBy = "--";
       }
@@ -51,8 +73,18 @@ function processOrders(data, nProps) {
       else {
         orderData.orderLine = data[i].completed_orderlines + "/" + data[i].total_orderlines;
       }
-      orderData.completedTime = data[i].update_time.substring(4);
-      orderData.completedTime = orderData.completedTime.substring(0, orderData.completedTime.length - 4);
+      console.log(timeOffset);
+      orderData.completedTime = <FormattedDate value = {data[i].update_time}
+                                timeZone={timeOffset}
+                                 year='numeric'
+                                  month='short'
+                                  day='2-digit'
+                                  hour="2-digit"
+                                  minute="2-digit"
+                                  second="2-digit"
+                                  timeZoneName="long"
+                                  
+                                />;
 
       renderOrderData.push(orderData);
       orderData = {};
@@ -60,18 +92,6 @@ function processOrders(data, nProps) {
   }
   return renderOrderData;
 }
-
-class OrderListTab extends React.Component{
-  constructor(props) 
-  {
-      super(props);
-  } 
-  componentDidMount() {
-    var data = {};
-    data.selected = 0;
-    this.handlePageClick(data);
-  }
-
    // componentWillReceiveProps(nextProps) {
    //   this.refresh();
    // }
@@ -178,7 +198,7 @@ class OrderListTab extends React.Component{
     var currentPage = this.props.filterOptions.currentPage, totalPage = this.props.orderData.totalPage;
     var orderDetail;
     if(this.props.orderData.ordersDetail !== undefined) {
-      orderDetail = processOrders(this.props.orderData.ordersDetail, this);
+      orderDetail = this.processOrders(this.props.orderData.ordersDetail, this);
     }
     return (
       <div>
@@ -219,7 +239,8 @@ function mapStateToProps(state, ownProps){
     filterOptions: state.filterOptions || {},
     orderData: state.getOrderDetail || {},
     statusFilter : state.filterOptions.statusFilter || null,
-    intlMessages: state.intl.messages
+    intlMessages: state.intl.messages,
+    timeOffset: state.authLogin.timeOffset
   };
 }
 
