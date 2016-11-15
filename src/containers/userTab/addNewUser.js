@@ -75,8 +75,8 @@ class AddUser extends React.Component{
       return nameInfo.type;
    }
   _checkPwd(){
-    let pwd1=this.password1.value,pwd2=this.password2.value, passwordInfo;
-    passwordInfo=passwordStatus(pwd1,pwd2);
+    let pwd1=this.password1.value,pwd2=this.password2.value, passwordInfo, roleSelected=this.props.roleSet, roleSupervisor=this.props.roleInfo.BUTLER_SUPERVISOR;
+    passwordInfo=passwordStatus(pwd1,pwd2,roleSelected,roleSupervisor);
     this.props.validatePassword(passwordInfo);
     return passwordInfo.type;
   }
@@ -106,7 +106,7 @@ class AddUser extends React.Component{
             return;
         }
 
-        role=this.props.roleSet?this.props.roleSet.msg:this.props.roleInfo.msg.BUTLER_UI;
+        role=this.props.roleSet?this.props.roleSet:this.props.roleInfo.BUTLER_UI;
 
         let formdata={         
                     "first_name": firstname,
@@ -175,7 +175,7 @@ class AddUser extends React.Component{
 
             </div>
 
-          {this.props.roleInfo?(<RoleGroup operator={this.props.roleInfo.msg.BUTLER_UI} manager={this.props.roleInfo.msg.BUTLER_SUPERVISOR} />):''}
+          {this.props.roleInfo?(<RoleGroup operator={this.props.roleInfo.BUTLER_UI} manager={this.props.roleInfo.BUTLER_SUPERVISOR} />):''}
             
             <div className='gor-usr-details'>
             <div className='gor-usr-hdlg'><FormattedMessage id="users.add.password.heading" description='Heading for create password' 

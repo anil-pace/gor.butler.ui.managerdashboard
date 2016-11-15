@@ -17,11 +17,11 @@ class RoleGroup extends React.Component{
         md=this.manager;
         if(op.checked)
         {
-            this.props.setRole(op.value);
+            this.props.setRole(Number(op.value));
         }
         else if(md.checked)
         {
-            this.props.setRole(md.value);
+            this.props.setRole(Number(md.value));
         }
     }
 	render(){

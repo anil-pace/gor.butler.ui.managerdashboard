@@ -41,17 +41,17 @@ const ajaxMiddleware = (function(){
             {
              console.log('Not Authorized');  
              store.dispatch(logoutRequest());        
-           }
-           else
-           {
-             var response=JSON.parse(httpRequest.response);
-             AjaxParse(store,response,params.cause);          
-           }
+            }
+            else
+            {
+               var response=JSON.parse(httpRequest.response);
+               AjaxParse(store,response,params.cause);          
+            }
          } 
          else
-         {
-          ShowError(store,params.cause);
-        }        
+         {    
+               ShowError(store,params.cause);
+         }        
       }
     };
     httpRequest.open(params.method, params.url);

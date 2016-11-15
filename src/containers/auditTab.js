@@ -4,7 +4,7 @@ import UserDataTable from './userTab/userTabTable';
 import Spinner from '../components/spinner/Spinner';
 import { connect } from 'react-redux'; 
 import {AUDIT_URL} from '../constants/configConstants';
-import {getAuditData} from '../actions/auditActions';
+import {getAuditData,setAuditRefresh} from '../actions/auditActions';
 import AuditTable from './auditTab/auditTable';
 import ReactPaginate from 'react-paginate';
 import {getPageData} from '../actions/paginationAction';
@@ -81,7 +81,16 @@ class AuditTab extends React.Component{
 	{
    super(props);
  }
-
+ componentWillReceiveProps(nextProps)
+ {
+  if(nextProps.auditRefresh)
+  {
+     var data = {};
+     data.selected = 0;
+     this.handlePageClick(data);
+     nextProps.setAuditRefresh(false);
+  }
+ }
  componentDidMount() {
   var data = {};
   data.selected = 0;
@@ -148,7 +157,8 @@ render(){
 function mapStateToProps(state, ownProps){
   return {
     auditDetail: state.recieveAuditDetail.auditDetail || [],
-    totalPage: state.recieveAuditDetail.totalPage || 0,  
+    totalPage: state.recieveAuditDetail.totalPage || 0,
+    auditRefresh:state.recieveAuditDetail.auditRefresh || null,  
     intlMessages: state.intl.messages,
     auth_token: state.authLogin.auth_token
   };
@@ -157,7 +167,8 @@ function mapStateToProps(state, ownProps){
 var mapDispatchToProps = function(dispatch){
   return {
     getAuditData: function(data){ dispatch(getAuditData(data)); },
-    getPageData: function(data){ dispatch(getPageData(data)); }
+    getPageData: function(data){ dispatch(getPageData(data)); },
+    setAuditRefresh: function(){dispatch(setAuditRefresh());}
   }
 };
 

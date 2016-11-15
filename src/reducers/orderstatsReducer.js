@@ -19,7 +19,7 @@ for (var i = 0; i < startIndex; i++) {
 for (var i = startIndex; i < endIndex; i++) {
   barData.timeInterval = (i)%24
   barData.put = data[j].items_put || 0;
-  barData.pick = data[j].orders_completed;
+  barData.pick = data[j].items_picked;
   barData.audit = data[j].items_audited;
   graphData.push(barData);
   j++; 

@@ -1,4 +1,4 @@
-import {RECIEVE_AUDIT_DATA} from '../constants/appConstants'; 
+import {RECIEVE_AUDIT_DATA,REFRESH_AUDIT} from '../constants/appConstants'; 
 import React  from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -16,8 +16,12 @@ export  function recieveAuditDetail(state={},action){
             "totalPage" : totalPage
           })
           }
-
-
+          break;
+    case REFRESH_AUDIT:
+          return Object.assign({}, state, { 
+            "auditRefresh" : action.data
+          })
+          break;
     default:
       return state
   }

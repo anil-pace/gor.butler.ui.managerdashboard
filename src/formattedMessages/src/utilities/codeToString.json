@@ -1,0 +1,17 @@
+[
+  {
+    "id": "notify.success.add",
+    "description": "Text for successfull user addition",
+    "defaultMessage": "New user \"{first} {last}\" added successfully"
+  },
+  {
+    "id": "notify.success.delete",
+    "description": "Text for successfull user deletion",
+    "defaultMessage": "User \"{first} {last}\" deleted successfully"
+  },
+  {
+    "id": "notify.delete.audit.success",
+    "description": "Text for successfull audit deletion",
+    "defaultMessage": "Audit task {audit_id} has been deleted"
+  }
+]
