@@ -144,7 +144,10 @@ class OrderListTab extends React.Component{
       currentTime = currentTime.toISOString();
       appendStatusUrl = PICK_BEFORE_ORDER_URL + currentTime + BREACHED_URL ;
     }
-     
+    else if(this.props.filterOptions.statusFilter=== "exception")
+    {
+      appendStatusUrl = "&exception=true" ;      
+    }
     else {
        appendStatusUrl = "&warehouse_status=" + (this.props.filterOptions.statusFilter);
     }

@@ -1,4 +1,4 @@
-import {LOGIN_REQUEST,SET_USERNAME,SET_TIME_OFFSET,LOGIN_REDIRECT,LOGIN_SUCCESS,LOGIN_FAILURE,LOGOUT} from '../constants/appConstants';
+import {LOGIN_REQUEST,SET_USERNAME,SET_TIME_OFFSET,LOGIN_REDIRECT,LOGIN_SUCCESS,LOGIN_FAILURE,LOGOUT,CONNECTION_FAILURE} from '../constants/appConstants';
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -11,6 +11,7 @@ export  function authLogin(state={},action){
     case LOGIN_REQUEST:
       return Object.assign({}, state, {
           "loginAuthorized":true,
+          "connectionActive":true,
           "auth_token": sessionStorage.getItem('auth_token'),
           "username":sessionStorage.getItem('username')
       })    
@@ -21,18 +22,27 @@ export  function authLogin(state={},action){
 	   sessionStorage.setItem('auth_token', action.data.auth_token);
       return Object.assign({}, state, {
           "loginAuthorized":true,
+          "connectionActive":true,
         	"auth_token": action.data.auth_token
       })
 
     case LOGIN_FAILURE:
       return Object.assign({}, state, {
+          "connectionActive":true,
           "loginAuthorized":false
       })
+
+    case CONNECTION_FAILURE:
+      return Object.assign({}, state, {
+          "connectionActive":false,
+          "loginAuthorized":null
+      })    
 
     case LOGOUT:
      //sessionStorage.removeItem('auth_token');      
       return Object.assign({}, state, {
           "loginAuthorized":null,
+          "connectionActive":null,
           "auth_token":null
       })
     case SET_USERNAME:

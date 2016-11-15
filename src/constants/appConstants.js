@@ -5,6 +5,7 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 export const LOGOUT = "LOGOUT";
 export const AJAX_CALL = "AJAX_CALL";
+export const CONNECTION_FAILURE="CONNECTION_FAILURE";
 export const MOCK_LOGIN = "MOCK_LOGIN";
 export const SET_USERNAME = "SET_USERNAME";
 export const SET_TIME_OFFSET = "SET_TIME_OFFSET";
@@ -141,7 +142,9 @@ export const ERROR=0;
 export const SUCCESS=1;
 export const INFO=2;
 export const HIDE=3;
+export const DELETION=4;
 export const NOTIFY_PASS='NOTIFY_PASS';
+export const NOTIFY_DELETE='NOTIFY_DELETE';
 export const NOTIFY_FAIL='NOTIFY_FAIL';
 export const NOTIFY_HIDE='NOTIFY_HIDE';
 export const MD_ID='MD_ID';
@@ -222,6 +225,7 @@ export const RESET_AUDIT='RESET_AUDIT';
 export const SKU='sku';
 export const LOCATION='location';
 export const SETAUDIT_PPS='SETAUDIT_PPS';
+export const REFRESH_AUDIT='REFRESH_AUDIT';
   
 
 /*Inventory parsing constants*/

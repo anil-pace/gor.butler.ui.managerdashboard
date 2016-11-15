@@ -43,8 +43,17 @@ class EditUser extends React.Component{
     this.view2.style.display='none';
   }
   _checkPwd(){
-    let pwd1=this.password1.value,pwd2=this.password2.value, passwordInfo;
-    passwordInfo=passwordStatus(pwd1,pwd2);   
+    let pwd1=this.password1.value,pwd2=this.password2.value, givenRole,passwordInfo, roleSelected, roleSupervisor=this.props.roleInfo.BUTLER_SUPERVISOR;
+    if(this.props.roleId == BUTLER_SUPERVISOR)
+    {
+      givenRole=this.props.roleInfo.BUTLER_SUPERVISOR;
+    }
+    else
+    {
+      givenRole=this.props.roleInfo.BUTLER_UI;
+    }
+    roleSelected=this.props.roleSet?this.props.roleSet:givenRole;
+    passwordInfo=passwordStatus(pwd1,pwd2,roleSelected,roleSupervisor);   
     this.props.validatePassword(passwordInfo);
     return passwordInfo.type;
   }
@@ -74,13 +83,13 @@ class EditUser extends React.Component{
         }
         if(this.props.roleId == BUTLER_SUPERVISOR)
         {
-          givenRole=this.props.roleInfo.msg.BUTLER_SUPERVISOR;
+          givenRole=this.props.roleInfo.BUTLER_SUPERVISOR;
         }
         else
         {
-          givenRole=this.props.roleInfo.msg.BUTLER_UI;
+          givenRole=this.props.roleInfo.BUTLER_UI;
         }
-        role=this.props.roleSet?this.props.roleSet.msg:givenRole;
+        role=this.props.roleSet?this.props.roleSet:givenRole;
         let formdata={         
                     "first_name": firstname,
                     "last_name": lastname,
@@ -145,7 +154,7 @@ class EditUser extends React.Component{
 
               </div>
            
-          {this.props.roleInfo?(<RoleGroup operator={this.props.roleInfo.msg.BUTLER_UI} manager={this.props.roleInfo.msg.BUTLER_SUPERVISOR} roleId={this.props.roleId} />):''}
+          {this.props.roleInfo?(<RoleGroup operator={this.props.roleInfo.BUTLER_UI} manager={this.props.roleInfo.BUTLER_SUPERVISOR} roleId={this.props.roleId} />):''}
 
             <div className='gor-usr-details'>
             <div className='gor-pass-view1'  ref={node => { this.view1 = node }}>

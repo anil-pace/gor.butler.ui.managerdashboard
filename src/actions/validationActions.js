@@ -1,4 +1,4 @@
-import {ID_DATA,NAME_DATA,PASSWORD_DATA,INFO_RESET,ID_BACKEND,NOTIFY_PASS,NOTIFY_HIDE,NOTIFY_FAIL} from '../constants/appConstants'
+import {ID_DATA,NAME_DATA,PASSWORD_DATA,INFO_RESET,ID_BACKEND,NOTIFY_PASS,NOTIFY_HIDE,NOTIFY_FAIL,NOTIFY_DELETE} from '../constants/appConstants'
 //import {getFetchData} from 'headerAction'
 
 export function validateID(data){
@@ -29,6 +29,12 @@ export function resetForm(){
 export function notifySuccess(data){	
 	return{
 		type:NOTIFY_PASS,
+		data
+	}
+}
+export function notifyDelete(data){	
+	return{
+		type:NOTIFY_DELETE,
 		data
 	}
 }
