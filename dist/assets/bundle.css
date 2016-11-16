@@ -1603,7 +1603,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 }
 
 .fixedDataTableLayout_rowsContainer {
-  /*overflow: hidden;*/
+  overflow: hidden;
   position: relative;
 }
 

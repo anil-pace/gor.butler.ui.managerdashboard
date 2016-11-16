@@ -23,24 +23,26 @@ function processWaveData(data, nProps) {
       waveDetail.statusPriority = priStatus[data[i].status];
       waveDetail.status = intlStatus[data[i].status];
       
-      if(data[i].start_time === "") {
+      if(data[i].start_time === null || data[i].start_time === undefined || data[i].start_time.constructor !== Date ) {
         waveDetail.startTime = "--";
       }
       else {
-        waveDetail.startTime = data[i].start_time;
+        waveDetail.startTime = nProps.context.intl.formatRelative(data[i].start_time, {units:'day'}) +', '+
+       nProps.context.intl.formatTime(data[i].start_time);
       }
 
-      if(data[i].cut_off_time === "") {
+      if(data[i].cut_off_time === null || data[i].cut_off_time === undefined || data[i].cut_off_time.constructor !== Date ) {
         waveDetail.cutOffTime = "--";
       }
       else {
-        waveDetail.cutOffTime = data[i].cut_off_time;
+        waveDetail.cutOffTime = nProps.context.intl.formatRelative(data[i].cut_off_time, {units:'day'}) +', '+
+       nProps.context.intl.formatTime(data[i].cut_off_time);
       }
-      waveDetail.cutOffTime = data[i].cut_off_time;
-      waveDetail.ordersToFulfill = data[i].orders_to_fulfill;
-      waveDetail.totalOrders = data[i].total_orders;
+      
+      waveDetail.ordersToFulfill = parseInt(data[i].orders_to_fulfill,10);
+      waveDetail.totalOrders = parseInt(data[i].total_orders,10);
       if(waveDetail.totalOrders) {
-        waveDetail.progress = parseInt(((waveDetail.totalOrders-waveDetail.ordersToFulfill)/waveDetail.totalOrders)*100);
+        waveDetail.progress = parseInt(((waveDetail.totalOrders-waveDetail.ordersToFulfill)/waveDetail.totalOrders)*100,10);
       }
       else {
         waveDetail.progress = 0;

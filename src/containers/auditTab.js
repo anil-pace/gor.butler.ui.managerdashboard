@@ -10,6 +10,7 @@ import ReactPaginate from 'react-paginate';
 import {getPageData} from '../actions/paginationAction';
 import {AUDIT_RETRIEVE} from '../constants/appConstants';
 import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL} from '../constants/configConstants';
+import { FormattedTime ,FormattedRelative} from 'react-intl';
 
 
 function processAuditData(data, nProps ) {
@@ -50,21 +51,23 @@ function processAuditData(data, nProps ) {
     }
 
     if(data[i].start_request_time) {
-      auditData.startTime = data[i].start_request_time;
+      auditData.startTime = nProps.context.intl.formatRelative(data[i].start_request_time, {units:'day'}) +', '+
+       nProps.context.intl.formatTime(data[i].start_request_time);
     }
     else {
       auditData.startTime = "--";
     }
 
     if(data[i].expected_quantity !== 0 && completed_quantity !== null) {
-      auditData.progress = (data[i].completed_quantity)/(data[i].expected_quantity);
+      auditData.progress = (data[i].completed_quantity)/(data[i].expected_quantity) * 100;
     }
     else {
-      auditData.progress = 0; //needs to be done
+      auditData.progress = 0; 
     }
 
     if(data[i].completion_time) {
-      auditData.completedTime = data[i].completion_time;
+      auditData.completedTime = nProps.context.intl.formatRelative(data[i].completion_time, {units:'day'}) +', '+
+       nProps.context.intl.formatTime(data[i].completion_time);;
     }
     else {
       auditData.completedTime = "--";
@@ -130,9 +133,10 @@ render(){
   
   
   return (
+  
    <div>
    <div>
-   <div className="gor-Auditlist-table">
+   <div className="gor-Auditlist-table" >
    {renderTab}
    </div>
    </div>
