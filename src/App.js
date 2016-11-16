@@ -15,21 +15,21 @@ import TopNotifications from './components/topnotify/topnotify';
 
 
 class App extends React.Component{ 
-	/**
-	 * Called once before rendering of component,used to displatch fetch action
-	 * @return {[type]}
-	 */
+  /**
+   * Called once before rendering of component,used to displatch fetch action
+   * @return {[type]}
+   */
   
-	constructor(props) 
-	{  
-    	super(props); 
-  }	
+  constructor(props) 
+  {  
+      super(props); 
+  } 
   
-  	componentWillMount(){
+    componentWillMount(){
         
         this.context.router.push("/login");
 
-  	}
+    }
     componentDidMount(){
       var timeOffset =  sessionStorage.getItem("timeOffset");
       if(!timeOffset){
@@ -45,7 +45,7 @@ class App extends React.Component{
       }
     }
     
-  	componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps) {
     /**
      * Checking if the user is loggedin 
      * and redirecting to main page
@@ -106,24 +106,24 @@ class App extends React.Component{
     
     
     }
-  	/**Render method called when component react renders
-  	 * @return {[type]}
-  	 */
-	render(){
-		//var items3={start:"09:00:25", name:"Krish verma gandhi sharma", post:"Manager"}
-		
-		
-		return (
-			
-			<div className="mainContainer">
+    /**Render method called when component react renders
+     * @return {[type]}
+     */
+  render(){
+    //var items3={start:"09:00:25", name:"Krish verma gandhi sharma", post:"Manager"}
+    
+    
+    return (
+      
+      <div className="mainContainer">
         <TopNotifications />
         <Header />
-				<Tabs/>
-				{this.props.children}
-			</div>
-			
-		);
-	}
+        <Tabs/>
+        {this.props.children}
+      </div>
+      
+    );
+  }
 };
 /**
  * [Passing Router to component through context]
@@ -139,11 +139,11 @@ App.contextTypes = {
 function mapStateToProps(state,ownProps) {
  return {
   authToken: state.authLogin.auth_token,
- 	loginAuthorized : state.authLogin.loginAuthorized,
- 	socketStatus: state.recieveSocketActions.socketConnected,
- 	socketAuthorized: state.recieveSocketActions.socketAuthorized,
+  loginAuthorized : state.authLogin.loginAuthorized,
+  socketStatus: state.recieveSocketActions.socketConnected,
+  socketAuthorized: state.recieveSocketActions.socketAuthorized,
   initDataSent: state.recieveSocketActions.initDataSent,
- 	headerInfo:state.headerData.headerInfo,
+  headerInfo:state.headerData.headerInfo,
   intl: state.intl,
   tab:state.tabSelected.tab,
   subTab:state.tabSelected.subTab,
