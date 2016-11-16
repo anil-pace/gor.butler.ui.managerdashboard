@@ -1,20 +1,17 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+### Quick Summary ###
 
-### What is this repository for? ###
-
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+This is the repo for the 'Manager Dashboard V3.0' for Butler Management System.
 
 ### How do I get set up? ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
+* git clone this repo to your local folder
+* cd into the repo folder
+* execute 'git install -g' from the repo folder
+* execute 'build-md -t DEV -m false' for dev build
+* in browser open up 'http://localhost:8080/' (Note: if you have any other webserver installed, you might have to stop the webserver)
+
 * Deployment instructions
 
 ### Contribution guidelines ###
@@ -25,5 +22,5 @@ This README would normally document whatever steps are necessary to get your app
 
 ### Who do I talk to? ###
 
-* Repo owner or admin
-* Other community or team contact
+* Repo owner or admin - Arshdeep.m@greyorange.sg, himanshu.s@greyorange.sg
+* Team: Sourabh.j@greyorange.sg, Krishna.g@greyorange.sg
