@@ -51,10 +51,9 @@ export function receiveThroughputData(data){
 	}
 
 }
-export function initData(data){
+export function setInitData(){
 	return {
-		type: WS_INIT,
-		data
+		type: WS_INIT
 	}
 }
 

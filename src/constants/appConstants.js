@@ -29,6 +29,7 @@ export const GET_AUDIT="get_audit";
 export const GET_USERS="get_users";
 export const GET_INVENTORY="get_inventory";
 export const GET_STATUS="get_status";
+export const FULFILLING_ORDERS="fulfilling_orders";
 
 /* Constants for fixed-data-table */
 export const TABLE_STATE = "TABLE_STATE";
