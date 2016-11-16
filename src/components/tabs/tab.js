@@ -18,7 +18,7 @@ class Tab extends React.Component{
 			icon = <div className="tab-offline-icon"/>
 		}
 		else if(this.props.subIcons === true && this.props.items.currentState === "gor-alert" ) {
-			icon = <div className="iError-white"/>
+			icon = <div className="gor-error-white"/>
 		}
 		else {
 			icon = <div/>

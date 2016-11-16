@@ -26,25 +26,25 @@ export function nameStatus(firstname,lastname){
           };   
           return nameInfo;
 }
-export function passwordStatus(pwd1,pwd2,role1,role2){
+export function passwordStatus(pswd,confirmPswd,selectedRole,managerRole){
           let passwordInfo;
-          if(!pwd1.length)
+          if(!pswd.length)
           {
             passwordInfo={
               type:ERROR,
               msg:EMPTY_PWD           
             };            
           }
-          else if(pwd1.length<8)
+          else if(pswd.length<8)
           {
-            if(role1===role2)
+            if(selectedRole===managerRole)
             {
               passwordInfo={
               type:ERROR,
               msg:INVALID_PWD_MG           
               };
             }
-            else if(pwd1.length<6)
+            else if(pswd.length<6)
             {
               passwordInfo={
               type:ERROR,
@@ -59,7 +59,7 @@ export function passwordStatus(pwd1,pwd2,role1,role2){
               };            
             }
           }
-          else if(pwd1!=pwd2)
+          else if(pswd!=confirmPswd)
           {
             passwordInfo={
               type:ERROR,

@@ -25,7 +25,7 @@ class LogOut extends React.Component{
         <div>
           <div className='gor-logout'>
             <div className='gor-logout-text'>
-              <div className='iQuestion gor-align-middle'></div><span>Are you sure you would like to log out now?</span>
+              <div className='gor-question gor-align-middle'></div><span>Are you sure you would like to log out now?</span>
            </div>
               <div className='gor-logout-bottom'>
                 <button className='gor-cancel-btn' onClick={this.removeThisModal.bind(this)}>Cancel</button>

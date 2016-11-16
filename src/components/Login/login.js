@@ -116,9 +116,14 @@ class Login extends React.Component{
      */
     _handleSubmit(e){
     	e.preventDefault();
-      if(window.navigator.onLine)
+      if(!window.navigator.onLine)
       {
-    	 let formdata={         
+        this.props.connectionFault();
+    	   return;
+      }
+      else
+      {
+       let formdata={         
           	'username': this.userName.value,
           	'password': this.password.value,
          };
@@ -149,10 +154,6 @@ class Login extends React.Component{
         else{
             this.props.mockLoginAuth(loginData);
         }
-      }
-      else
-      {
-        this.props.connectionFault();
       }
     }
 	render(){

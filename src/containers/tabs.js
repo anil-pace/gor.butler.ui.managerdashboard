@@ -5,7 +5,7 @@ import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
 import {tabSelected,subTabSelected} from '../actions/tabSelectAction';
 import {setInventorySpinner} from '../actions/inventoryActions';
-import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP,INVENTORY,AUDIT} from '../constants/appConstants';
+import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP,INVENTORY,AUDIT,FULFILLING_ORDERS} from '../constants/appConstants';
 import { FormattedMessage,FormattedNumber } from 'react-intl';
 
 class Tabs extends React.Component{
@@ -75,9 +75,15 @@ class Tabs extends React.Component{
     }
     else
     {
-      overviewStatus = <FormattedMessage id="overviewStatus.tab.heading" description="overview Status " 
+      if(this.props.overview_status === FULFILLING_ORDERS)
+      {
+        overviewStatus = <FormattedMessage id="overviewStatus.tab.heading" description="overview Status fulfilling orders" 
               defaultMessage ="Fulfilling orders"/>;  
-
+      }
+      else
+      {
+        overviewStatus = '';          
+      }
       if(!this.props.system_emergency)
       {
         systemStatus = <FormattedMessage id="systemStatus.tab.online" description="system Status online" 

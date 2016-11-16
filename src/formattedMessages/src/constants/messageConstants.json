@@ -150,11 +150,6 @@
     "defaultMessage": "Audit started successfully"
   },
   {
-    "id": "notify.delete.audit.success",
-    "description": "Text for successfull audit deletion",
-    "defaultMessage": "Audit deleted successfully"
-  },
-  {
     "id": "notify.delete.audit.processed",
     "description": "Text for already processed audit",
     "defaultMessage": "Audit already processed. Cannot delete"
