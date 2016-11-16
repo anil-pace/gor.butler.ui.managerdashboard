@@ -1,9 +1,10 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import Footer from '../Footer/Footer';
-import Loader from '../../components/loader/Loader'
-import { authLoginData,mockLoginAuth,setUsername,setLoginLoader } from '../../actions/loginAction';
+import Spinner from '../../components/spinner/Spinner'
+import { authLoginData,mockLoginAuth,setUsername,setLoginSpinner,connectionFault } from '../../actions/loginAction';
 import {validateID, validatePassword, resetForm} from '../../actions/validationActions';
+
 import { connect } from 'react-redux';
 import {AUTH_LOGIN,ERROR,SUCCESS} from '../../constants/appConstants'; 
 import {INVALID_ID,EMPTY_PWD,TYPE_SUCCESS} from '../../constants/messageConstants'; 
@@ -115,7 +116,9 @@ class Login extends React.Component{
      */
     _handleSubmit(e){
     	e.preventDefault();
-    	let formdata={         
+      if(window.navigator.onLine)
+      {
+    	 let formdata={         
           	'username': this.userName.value,
           	'password': this.password.value,
          };
@@ -140,18 +143,23 @@ class Login extends React.Component{
         sessionStorage.setItem('nextView', 'md');
         if(MOCK === false){
     	    this.props.setUsername(formdata.username);
-            this.props.setLoginLoader(true);
+            this.props.setLoginSpinner(true);
             this.props.authLoginData(loginData);
         }
         else{
             this.props.mockLoginAuth(loginData);
         }
+      }
+      else
+      {
+        this.props.connectionFault();
+      }
     }
 	render(){
         return (
                
             <div className='gor-login-form'>
-            <Loader isLoading={this.props.loginLoading} />
+            <Spinner isLoading={this.props.loginSpinner} />
             <form action="#"  id = "loginForm" ref={node => { this.loginForm = node }} 
                 onSubmit={(e) => this._handleSubmit(e)}>
                 <div className='gor-login-lang'>
@@ -186,6 +194,13 @@ class Login extends React.Component{
 
                     <FormattedMessage id='login.butler.fail' 
                         defaultMessage="Invalid username and/or password, please try again" description="Text for login failure"/>
+
+                 </div>):''
+                }
+                {(this.props.connectionActive===false)?(<div className='gor-login-auth-error'><div className='gor-login-error'></div>
+
+                    <FormattedMessage id='login.butler.connection.fail' 
+                        defaultMessage="Connection failure" description="Text for connection failure"/>
 
                  </div>):''
                 }
@@ -248,13 +263,15 @@ Login.contextTypes = {
 function mapStateToProps(state, ownProps){
 	return {
         loginAuthorized:state.authLogin.loginAuthorized,
+        connectionActive:state.authLogin.connectionActive,
         auth_token: state.authLogin.auth_token,
         userName: state.authLogin.username,
         sLang: state.intl.locale,
         intlMessages: state.intl.messages,
         idInfo: state.appInfo.idInfo||{},
         loginPassCheck: state.appInfo.passwordInfo||{},
-        loginLoading:state.loader.loginLoader           
+        loginSpinner:state.spinner.loginSpinner         
+
     };
 }
 /**
@@ -273,7 +290,8 @@ var mapDispatchToProps = function(dispatch){
         setUsername: function(data){ dispatch(setUsername(data)); },        
         validatePass: function(data){ dispatch(validatePassword(data)); },        
         resetForm:   function(){ dispatch(resetForm()); },
-        setLoginLoader:   function(data){ dispatch(setLoginLoader(data)); }
+        setLoginSpinner:   function(data){ dispatch(setLoginSpinner(data)); },
+        connectionFault: function(){dispatch(connectionFault()); }
     }
 };
 

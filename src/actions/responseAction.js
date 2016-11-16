@@ -14,18 +14,7 @@ export function receiveButlersData(data){
 		data
 	}
 }
-export function receiveInventoryTodayData(data){
-	return {
-		type:INVENTORY_DATA_TODAY,
-		data
-	}
-}
-export function receiveInventoryHistoryData(data){
-	return {
-		type:INVENTORY_DATA_HISTORY,
-		data
-	}
-}
+
 export function receiveChargersData(data){
 	
 	return{

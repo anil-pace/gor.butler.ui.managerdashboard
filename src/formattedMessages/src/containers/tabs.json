@@ -1,5 +1,10 @@
 [
   {
+    "id": "tabs.offline",
+    "description": "offline",
+    "defaultMessage": "Offline"
+  },
+  {
     "id": "overview.tab.heading",
     "description": "overview tab",
     "defaultMessage": "OVERVIEW"
@@ -20,6 +25,11 @@
     "defaultMessage": "USERS"
   },
   {
+    "id": "inventory.tab.heading",
+    "description": "inventory tab",
+    "defaultMessage": "INVENTORY"
+  },
+  {
     "id": "audit.tab.heading",
     "description": "audit tab",
     "defaultMessage": "AUDIT"
@@ -27,21 +37,41 @@
   {
     "id": "overviewStatus.tab.heading",
     "description": "overview Status",
-    "defaultMessage": "Fulfiling orders"
+    "defaultMessage": "Fulfilling orders"
   },
   {
-    "id": "systemStatus.tab.heading",
-    "description": "system Status",
+    "id": "systemStatus.tab.online",
+    "description": "system Status online",
     "defaultMessage": "Online"
+  },
+  {
+    "id": "systemStatus.tab.emergency",
+    "description": "system Status emergency",
+    "defaultMessage": "Emergency"
+  },
+  {
+    "id": "overviewStatus.tab.emergency",
+    "description": "overview Status emergency",
+    "defaultMessage": "Butlers stopped"
   },
   {
     "id": "ordersStatus.tab.heading",
     "description": "orders Status",
-    "defaultMessage": "70% fulfilled"
+    "defaultMessage": "{count}% fulfilled"
   },
   {
     "id": "usersStatus.tab.heading",
     "description": "users Status",
-    "defaultMessage": "35 users logged in"
+    "defaultMessage": "{count} users online"
+  },
+  {
+    "id": "inventoryStatus.tab.heading",
+    "description": "inventory Status",
+    "defaultMessage": "{count}% space utilized"
+  },
+  {
+    "id": "auditStatus.tab.heading",
+    "description": "audit Status",
+    "defaultMessage": "{count} in progress"
   }
 ]

@@ -27,7 +27,7 @@ class Legend extends React.Component{
 	render(){
 		var elements = this._processData();
 		return (
-				 <svg className="legend" width="50%" height="60" style={{"float":"right"}}>
+				 <svg className="legend" width="100%" height="60" style={{"float":"right"}}>
 				 	{elements}
 				 </svg>
 		);

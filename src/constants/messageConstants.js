@@ -1,14 +1,9 @@
 import React  from 'react';
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
 //success codes related to user management
-export const US001 = (<FormattedMessage id="notify.success.add" description='Text for successfull user addition' 
-            defaultMessage="User successfully added"/>);
-
-export const US002 =(<FormattedMessage id="notify.success.delete" description='Text for successfull user deletion' 
-            defaultMessage="User successfully deleted"/>);
 
 export const US004 = (<FormattedMessage id="notify.success.edit" description='Text for successfully editing user' 
-            defaultMessage="User successfully edited"/>);
+            defaultMessage="User details updated successfully"/>);
 //error codes related to user management
 
 
@@ -20,7 +15,7 @@ export const E028 = "Pps is already in requested mode";
 export const E029 = "Previous request of changing mode is already pending, Please try later!";
 
 export const UE002 = (<FormattedMessage id="notify.error.usernameExists" description='Text for already registered username' 
-            defaultMessage="Username already registered!"/>);
+            defaultMessage="An account has already been created with this User ID"/>);
 
 export const UE003= (<FormattedMessage id="notify.error.passwordMissing" description='Text for passwords missing' 
             defaultMessage="Password not provided!"/>);
@@ -53,7 +48,10 @@ export const EMPTY_NAME= (<FormattedMessage id="user.empty.name" description='Te
 export const INVALID_NAME= (<FormattedMessage id="user.invalid.name" description='Text for invalid user name' 
             defaultMessage='Special characters like "~","@" and "%" are not allowed'/>);
 
-export const INVALID_PWD= (<FormattedMessage id="user.invalid.password" description='Text for invalid password' 
+export const INVALID_PWD_OP= (<FormattedMessage id="user.invalid.password.operator" description='Text for invalid password for operator' 
+            defaultMessage="Please enter a password of at least 6 alphanumeric characters"/>);
+
+export const INVALID_PWD_MG= (<FormattedMessage id="user.invalid.password.manager" description='Text for invalid password for manager' 
             defaultMessage="Please enter a password of at least 8 alphanumeric characters"/>);
 
 export const MATCH_PWD= (<FormattedMessage id="user.match.password" description='Text for passwords not matching' 

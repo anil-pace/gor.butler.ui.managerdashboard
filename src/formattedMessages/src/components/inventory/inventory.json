@@ -1,0 +1,7 @@
+[
+  {
+    "id": "inventory.header",
+    "description": "Inventory Header Message",
+    "defaultMessage": "Inventory"
+  }
+]

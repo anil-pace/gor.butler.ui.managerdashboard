@@ -161,8 +161,7 @@ class AuditTable extends React.Component {
       hideCloseButton: true,
       auditType:auditType,
       auditTypeParam:auditTypeParam,
-      auditComplete:auditComplete,
-      refreshData:this.props.refreshData
+      auditComplete:auditComplete
     });
 
       }

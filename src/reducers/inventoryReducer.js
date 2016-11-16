@@ -1,4 +1,4 @@
-import {INVENTORY_DATA_HISTORY,INVENTORY_DATA_TODAY,PARSE_INVENTORY_TODAY,CATEGORY_COLOR_MAP,CATEGORY_DEFAULT,CATEGORY_UNUSED,PARSE_INVENTORY_HISTORY } from '../constants/appConstants';
+import {INVENTORY_DATA_HISTORY,DISPLAY_INVENTORY_HISTORY,INVENTORY_DATA_TODAY,PARSE_INVENTORY_TODAY,CATEGORY_COLOR_MAP,CATEGORY_DEFAULT,CATEGORY_UNUSED,PARSE_INVENTORY_HISTORY } from '../constants/appConstants';
 
 
 /**
@@ -8,12 +8,15 @@ import {INVENTORY_DATA_HISTORY,INVENTORY_DATA_TODAY,PARSE_INVENTORY_TODAY,CATEGO
  */
  function parseInvData(state,action){
   //Parsing logic goes here
-  var inventoryObj,inventory,isHistory,invToday,completeData,categoryData,invHistory,calculatedInvData={};
+  var inventoryObj,inventory,currentDate,stateObj,hasDataChanged,recreatedData={},isHistory,completeData,categoryData,calculatedInvData={};
 
   isHistory = (action.type === INVENTORY_DATA_HISTORY ? "inventoryDataHistory" : "inventoryDataToday")
   
   /*Cannot use object.assign as it does not support deep cloning*/
   inventoryObj = JSON.parse(JSON.stringify(action.data));
+  stateObj = JSON.parse(JSON.stringify(state));
+  hasDataChanged = stateObj.hasDataChanged === 0 ? 1 : 0;
+  
   inventory = inventoryObj.complete_data
 
   for(let i = 0 ,len=inventory.length; i < len ; i++){
@@ -24,18 +27,41 @@ import {INVENTORY_DATA_HISTORY,INVENTORY_DATA_TODAY,PARSE_INVENTORY_TODAY,CATEGO
     for(let j = 0,len2=categoryData.length ; j < len2 ; j++){
       categoryData[j].colorCode = CATEGORY_COLOR_MAP[categoryData[j]["category_type"]] || CATEGORY_COLOR_MAP[CATEGORY_DEFAULT]
     }
-    categoryData.push(calculatedInvData)
+    categoryData.push(calculatedInvData);
+    recreatedData[Date.parse(inventory[i].date)] = inventory[i];
+  }
+  //Adding the inventory today to inventory history
+  if(state.inventoryDataToday && state.inventoryDataToday.length){
+      //currentDate = state.inventoryDataToday[0]
+      inventory.unshift(state.inventoryDataToday[0]);
+      recreatedData[Date.parse(inventory[inventory.length -1].date)] = inventory[inventory.length -1];
+      currentDate = state.currentDate;
+  }
+  else{
+    currentDate = Date.parse(inventory[0].date)
   }
 
-  if (isHistory === 'inventoryDataHistory'){
-    // Since history would also have today's date.
-    inventory.push(...state.inventoryDataToday);
-  }
+  
   return Object.assign({}, state, {
-    [isHistory] : inventory || []
+
+    [isHistory] : inventory || null,
+    "recreatedData": recreatedData || null,
+    "currentDate" : currentDate || null,
+    "hasDataChanged":hasDataChanged
 
   })
 
+}
+function displayHistorySnapShot(state,action){
+  var selectedData;
+  if(state.currentDate !== action.data){
+    selectedData = state.recreatedData[action.data]
+  }
+
+  return Object.assign({}, state, {
+    "inventoryDataPrevious": selectedData || null,
+    "isPrevDateSelected":selectedData ? true : false
+  })
 }
 export  function inventoryInfo(state={},action){
   switch (action.type) {
@@ -43,7 +69,8 @@ export  function inventoryInfo(state={},action){
     case INVENTORY_DATA_TODAY:
 
     return parseInvData(state, action);
-
+    case DISPLAY_INVENTORY_HISTORY:
+    return displayHistorySnapShot(state,action)
 
     default:
     return state
