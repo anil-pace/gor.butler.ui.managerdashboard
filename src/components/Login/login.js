@@ -13,6 +13,7 @@ import { FormattedMessage } from 'react-intl';
 import { updateIntl } from 'react-intl-redux';
 import Dropdown from '../../components/dropdown/dropdown.js';
 import { translationMessages } from '../../utilities/i18n';
+import { idStatus } from '../../utilities/fieldCheck';
 
 
 class Login extends React.Component{
@@ -50,23 +51,10 @@ class Login extends React.Component{
       }
     }
     _checkUser(){
-          let userid=this.userName.value, idInfo;
-          if(userid.length<1)
-          {
-            idInfo={
-              type:ERROR,
-              msg:INVALID_ID           
-            }
-          }
-          else
-          {
-            idInfo={
-              type:SUCCESS,
-              msg:TYPE_SUCCESS               
-            };            
-          }
-         this.props.validateID(idInfo);
-         return idInfo.type;
+        let userid=this.userName.value, idInfo;
+        idInfo=idStatus(userid);
+        this.props.validateID(idInfo);
+        return idInfo.type;
     }
     _typing(ele){
       if(ele===1)
@@ -146,14 +134,9 @@ class Login extends React.Component{
                 'accept':'application/json'
             }
         sessionStorage.setItem('nextView', 'md');
-        if(MOCK === false){
     	    this.props.setUsername(formdata.username);
             this.props.setLoginSpinner(true);
             this.props.authLoginData(loginData);
-        }
-        else{
-            this.props.mockLoginAuth(loginData);
-        }
       }
     }
 	render(){

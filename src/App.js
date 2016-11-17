@@ -60,10 +60,10 @@ class App extends React.Component{
 
       if(!loginAuthorized){
                  this.context.router.push("/login");
+                 return ;
       }
       
-      if(MOCK === false){
-         let subscribeData;
+        let subscribeData;
         if(currTab) {
           subscribeData = (wsOverviewData[currTab] || wsOverviewData["default"]);
         }
@@ -71,8 +71,6 @@ class App extends React.Component{
         else {
           subscribeData = wsOverviewData["default"];
         }
-
-        if(loginAuthorized){
             
             if(!socketStatus){
               this.props.initWebSocket() ; 
@@ -94,16 +92,6 @@ class App extends React.Component{
                 this.props.setInitData();
               }
             }
-        }
-        
-      
-      
-      
-    }
-      else{
-          this.props.initMockData(wsOverviewData["DEFAULT"]);
-      }
-    
     
     }
   	/**Render method called when component react renders
