@@ -107,7 +107,13 @@ g.attr("class", "grid")
   }
   if(config.showMonthBreak && data.length){
     var abc= g.selectAll("g.axis--x");//.append("text").text("himanshu");//.append("text");//attr("fill","red")
-    abc.select("g:nth-child("+data.length+")").append("text").attr("x","-20").attr("y","2.5em").text(config.today)
+    abc
+    .select("g:nth-child("+data.length+")")
+    .append("text")
+    .attr("x","-20")
+    .attr("y","2.5em")
+    .text(config.today);
+    
     var monthBreak = abc.select("g:nth-child("+(data.length - data[data.length-1].xAxisData)+")");
     monthBreak.append("line").attr("class","month-break").attr("x1","15").attr("x2","15").attr("y1","0").attr("y2","25");
     abc.select("g:nth-child("+(data.length - data[data.length-2].xAxisData)+")").append("text").attr("x","-5").attr("y","30").text(config.breakMonth);

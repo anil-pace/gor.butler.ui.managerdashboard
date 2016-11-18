@@ -1,15 +1,5 @@
 [
   {
-    "id": "orderlistTab.refreshStatusMinutes",
-    "description": "refresh status for orderlist",
-    "defaultMessage": "Last Updated {updateStatus} minutes ago"
-  },
-  {
-    "id": "orderlistTab.refreshStatusSeconds",
-    "description": "refresh status for orderlist",
-    "defaultMessage": "Last Updated {updateStatus} seconds ago"
-  },
-  {
     "id": "orderlistTab.pageNum",
     "description": "page num orderlist",
     "defaultMessage": "Page {currentPage} of {totalPage}"

@@ -10,6 +10,7 @@ import ReactPaginate from 'react-paginate';
 import {getPageData} from '../actions/paginationAction';
 import {AUDIT_RETRIEVE} from '../constants/appConstants';
 import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,SEARCH_AUDIT_URL,GIVEN_PAGE,GIVEN_PAGE_SIZE} from '../constants/configConstants';
+import { FormattedDate } from 'react-intl';
 
 
 function processAuditData(data, nProps ) {
@@ -19,6 +20,7 @@ function processAuditData(data, nProps ) {
   let completed  = nProps.context.intl.formatMessage({id:"auditdetail.completed.status", defaultMessage: "Completed"});
   let sku  = nProps.context.intl.formatMessage({id:"auditdetail.sku.prefix", defaultMessage: "SKU"});
   let location  = nProps.context.intl.formatMessage({id:"auditdetail.location.prefix", defaultMessage: "Location"});
+  let timeOffset: state.authLogin.timeOffset;
   
   var auditStatus = {"audit_created":created, "audit_pending":pending, "audit_waiting":pending, "audit_conflicting":pending, "audit_started":progress, "audit_tasked":progress, "audit_aborted":completed, "audit_completed":completed};
   var statusClass = {"Pending": "pending", "Completed":"completed", "In Progress":"progress", "Created":"pending"}
@@ -50,7 +52,14 @@ function processAuditData(data, nProps ) {
     }
 
     if(data[i].start_request_time) {
-      auditData.startTime = data[i].start_request_time;
+      auditData.startTime = <FormattedDate value = {data[i].start_request_time}
+                                timeZone={timeOffset}
+                                 year='numeric'
+                                  month='short'
+                                  day='2-digit'
+                                  hour="2-digit"
+                                  minute="2-digit"
+                                />
     }
     else {
       auditData.startTime = "--";
@@ -64,7 +73,14 @@ function processAuditData(data, nProps ) {
     }
 
     if(data[i].completion_time) {
-      auditData.completedTime = data[i].completion_time;
+      auditData.completedTime = <FormattedDate value = {data[i].completion_time}
+                                timeZone={timeOffset}
+                                 year='numeric'
+                                  month='short'
+                                  day='2-digit'
+                                  hour="2-digit"
+                                  minute="2-digit"
+                                />;
     }
     else {
       auditData.completedTime = "--";
@@ -160,6 +176,7 @@ function mapStateToProps(state, ownProps){
     totalPage: state.recieveAuditDetail.totalPage || 0,
     auditRefresh:state.recieveAuditDetail.auditRefresh || null,  
     intlMessages: state.intl.messages,
+    timeOffset: state.authLogin.timeOffset,
     auth_token: state.authLogin.auth_token
   };
 }
