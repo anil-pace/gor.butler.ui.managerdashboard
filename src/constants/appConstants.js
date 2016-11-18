@@ -5,6 +5,7 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 export const LOGOUT = "LOGOUT";
 export const AJAX_CALL = "AJAX_CALL";
+export const CONNECTION_FAILURE="CONNECTION_FAILURE";
 export const MOCK_LOGIN = "MOCK_LOGIN";
 export const SET_USERNAME = "SET_USERNAME";
 export const SET_TIME_OFFSET = "SET_TIME_OFFSET";
@@ -21,6 +22,14 @@ export const WS_SUCCESS="Sucessfully logged in";
 export const WS_END="WS_END";
 export const WS_MOCK="WS_MOCK";
 /* Header constants */
+export const GET_OVERVIEW="get_overview";
+export const GET_SYSTEM="get_system";
+export const GET_ORDERS="get_orders";
+export const GET_AUDIT="get_audit";
+export const GET_USERS="get_users";
+export const GET_INVENTORY="get_inventory";
+export const GET_STATUS="get_status";
+export const FULFILLING_ORDERS="fulfilling_orders";
 
 /* Constants for fixed-data-table */
 export const TABLE_STATE = "TABLE_STATE";
@@ -41,12 +50,16 @@ export const PARSE_PPS = "pps";
 export const PARSE_BUTLERS = "butlers";
 export const PARSE_CHARGERS = "chargers";
 export const PARSE_ORDERS = "orders";
+export const PARSE_OVERVIEW="overview";
+export const PARSE_SYSTEM="system";
+export const PARSE_INVENTORY= "inventory";
 export const PARSE_INVENTORY_TODAY = "inventory_today";
 export const PARSE_INVENTORY_HISTORY = "inventory_history";
 export const PARSE_PUT = "put";
 export const PARSE_PICK = "pick";
 export const PARSE_PPA_THROUGHPUT = "put_pick_audit_throughput";
 export const PARSE_AUDIT = "audit";
+export const PARSE_STATUS = "status";
 export const SYSTEM_CHARGERS_DETAILS = "chargers";
 export const NOTIFICATION = "NOTIFICATION";
 export const BUTLERBOTS = "butlerbots";
@@ -130,7 +143,9 @@ export const ERROR=0;
 export const SUCCESS=1;
 export const INFO=2;
 export const HIDE=3;
+export const DELETION=4;
 export const NOTIFY_PASS='NOTIFY_PASS';
+export const NOTIFY_DELETE='NOTIFY_DELETE';
 export const NOTIFY_FAIL='NOTIFY_FAIL';
 export const NOTIFY_HIDE='NOTIFY_HIDE';
 export const MD_ID='MD_ID';
@@ -147,10 +162,6 @@ export const DEFAULT_PAGE_SIZE = "25";
 export const PAGE_FIELD = "?page=";
 export const GET_CURRENT_PAGE_ORDERS = "GET_CURRENT_PAGE_ORDERS";
 export const GET_LAST_REFRESH_TIME = "GET_LAST_REFRESH_TIME";
-
-export const GET_PAGE_SIZE_AUDIT = "GET_PAGE_SIZE_AUDIT";
-export const GET_CURRENT_PAGE_AUDIT = "GET_CURRENT_PAGE_AUDIT";
-
 
 /*Constants for Spinner*/
 export const DISPLAY_SPINNER = "DISPLAY_SPINNER";
@@ -215,6 +226,7 @@ export const RESET_AUDIT='RESET_AUDIT';
 export const SKU='sku';
 export const LOCATION='location';
 export const SETAUDIT_PPS='SETAUDIT_PPS';
+export const REFRESH_AUDIT='REFRESH_AUDIT';
   
 
 /*Inventory parsing constants*/

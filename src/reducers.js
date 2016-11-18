@@ -30,6 +30,8 @@ import {waveInfo} from './reducers/waveDetailReducer';
 import {d3barChart} from './reducers/barChartReducer';
 import {currentTableState} from './reducers/tableStateReducer';
 import {recieveAuditDetail} from './reducers/auditDetailReducer';
+import {tabsData} from './reducers/tabDataReducer';
+
 const rootReducer = combineReducers({
   intl:intlReducer,
   headerData,
@@ -52,6 +54,7 @@ const rootReducer = combineReducers({
   chargersDetail,
   butlerDetail,
   PPSDetail,
+  tabsData,
   tabSelected,
   PPSperformance,
   userDetails,

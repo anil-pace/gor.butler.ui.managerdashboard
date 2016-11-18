@@ -28,8 +28,9 @@ class OrderListTab extends React.Component{
   processOrders(data, nProps) {
   let progress  = nProps.context.intl.formatMessage({id:"orderList.progress.status", defaultMessage: "In Progress"});
   let completed  = nProps.context.intl.formatMessage({id:"orderList.completed.status", defaultMessage: "Completed"});
+  let exception = nProps.context.intl.formatMessage({id:"orderList.exception.status", defaultMessage: "Exception"});
   let unfulfillable  = nProps.context.intl.formatMessage({id:"orderList.Unfulfillable.status", defaultMessage: "Unfulfillable"});
-  var renderOrderData = [], ordersStatus = {'pending':progress, "fulfillable": progress, "completed":completed, "not_fulfillable":unfulfillable},orderData = {};
+  var renderOrderData = [], ordersStatus = {'pending':progress, "fulfillable": progress, "completed":completed, "not_fulfillable":unfulfillable, "exception":exception},orderData = {};
   var breachedStatus = {'pending':1, "fulfillable": 1, "completed":3, "not_fulfillable":2};
   var unBreachedStatus = {'pending':4, "fulfillable": 4, "completed":6, "not_fulfillable":5};
   var timeOffset=this.props.timeOffset;
@@ -37,16 +38,20 @@ class OrderListTab extends React.Component{
     for (var i =0; i < data.length; i++) {
       orderData.id = data[i].order_id;
 
-      if(data[i].breached === false) {
-        orderData.status = ordersStatus[data[i].status];
-        orderData.statusClass = data[i].status;
-        orderData.statusPriority = unBreachedStatus[data[i].status];
-      }
-
-      else {
+      if(data[i].breached === true) {
         orderData.status = ordersStatus[data[i].status];
         orderData.statusClass = "breached";
         orderData.statusPriority = breachedStatus[data[i].status];
+      }
+      if(data[i].exception === true) {
+        orderData.status = ordersStatus[data[i].status];
+        orderData.statusClass = "gor-exception";
+        orderData.statusPriority = breachedStatus[data[i].status];
+      }      
+      else {
+        orderData.status = ordersStatus[data[i].status];
+        orderData.statusClass = data[i].status;
+        orderData.statusPriority = unBreachedStatus[data[i].status];
       }
       //orderData.recievedTime = (data[i].create_time.substring(4));
       orderData.recievedTime = <FormattedDate value = {data[i].create_time}
@@ -111,7 +116,7 @@ class OrderListTab extends React.Component{
               'url':url,
               'method':'GET',
               'cause': ORDERS_RETRIEVE,
-              'token': sessionStorage.getItem('auth_token'),
+              'token': this.props.auth_token,
               'contentType':'application/json'
           } 
           this.props.currentPage(data.selected+1);
@@ -144,7 +149,10 @@ class OrderListTab extends React.Component{
       currentTime = currentTime.toISOString();
       appendStatusUrl = PICK_BEFORE_ORDER_URL + currentTime + BREACHED_URL ;
     }
-     
+    else if(this.props.filterOptions.statusFilter=== "exception")
+    {
+      appendStatusUrl = "&exception=true" ;      
+    }
     else {
        appendStatusUrl = "&warehouse_status=" + (this.props.filterOptions.statusFilter);
     }
@@ -240,7 +248,8 @@ function mapStateToProps(state, ownProps){
     orderData: state.getOrderDetail || {},
     statusFilter : state.filterOptions.statusFilter || null,
     intlMessages: state.intl.messages,
-    timeOffset: state.authLogin.timeOffset
+    timeOffset: state.authLogin.timeOffset,
+    auth_token: state.authLogin.auth_token  
   };
 }
 

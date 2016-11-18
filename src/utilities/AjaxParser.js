@@ -1,12 +1,12 @@
 import {receiveAuthData,setLoginSpinner,setTimeOffSetData} from '../actions/loginAction';
 import {recieveOrdersData} from '../actions/paginationAction';
-import {recieveAuditData} from '../actions/auditActions';
+import {recieveAuditData,setAuditRefresh} from '../actions/auditActions';
 import {assignRole} from '../actions/userActions';
 import {recieveHeaderInfo} from '../actions/headerAction';
 import {getPPSAudit} from '../actions/auditActions';
 import {codeToString} from './codeToString';
-import {notifySuccess, notifyFail,validateID} from '../actions/validationActions';
-import {ERROR,AUTH_LOGIN, ADD_USER, RECIEVE_TIME_OFFSET,CHECK_ID,DELETE_USER,GET_ROLES,ORDERS_RETRIEVE,PPS_MODE_CHANGE,EDIT_USER,BUTLER_UI,CODE_UE002,RECIEVE_HEADER,SUCCESS,CREATE_AUDIT,AUDIT_RETRIEVE,GET_PPSLIST,START_AUDIT,DELETE_AUDIT} from '../constants/appConstants';
+import {notifySuccess, notifyFail,validateID,notifyDelete} from '../actions/validationActions';
+import {ERROR,AUTH_LOGIN, ADD_USER, RECIEVE_TIME_OFFSET,CHECK_ID,DELETE_USER,GET_ROLES,ORDERS_RETRIEVE,PPS_MODE_CHANGE,EDIT_USER,BUTLER_UI,CODE_UE002,RECIEVE_HEADER,SUCCESS,CREATE_AUDIT,AUDIT_RETRIEVE,GET_PPSLIST,START_AUDIT,DELETE_AUDIT,BUTLER_SUPERVISOR} from '../constants/appConstants';
 import {UE002,E028,E029,MODE_REQUESTED,TYPE_SUCCESS,AS001,ERR_API,ERR_USR,ERR_RES,ERR_AUDIT,AS00A} from '../constants/messageConstants';
 
 export function AjaxParse(store,res,cause)
@@ -31,11 +31,11 @@ export function AjaxParse(store,res,cause)
 			{
 				if(rolesArr[i].name===BUTLER_UI)
 				{
-					k.operator=rolesArr[i].id;
+					k.BUTLER_UI=rolesArr[i].id;
 				}
 				else
 				{
-					k.manager=rolesArr[i].id;					
+					k.BUTLER_SUPERVISOR=rolesArr[i].id;					
 				}
 			}
 			store.dispatch(assignRole(k));
@@ -79,11 +79,9 @@ export function AjaxParse(store,res,cause)
 		case DELETE_USER:
 
 		case EDIT_USER:
-		
-		case DELETE_AUDIT:
 			try
 		    {	
-		    	stringInfo=codeToString(res.alert_data[0].code);
+		    	stringInfo=codeToString(res.alert_data[0]);
 		    	if(stringInfo.type)
 		    	{
 		    		store.dispatch(notifySuccess(stringInfo.msg));
@@ -102,14 +100,38 @@ export function AjaxParse(store,res,cause)
 		case CREATE_AUDIT:
 			if(res.alert_data)								//Can't use try-catch here
 		    {	
-		    	stringInfo=codeToString(res.alert_data[0].code);
+		    	stringInfo=codeToString(res.alert_data[0]);
 		    	store.dispatch(notifyFail(stringInfo.msg));
+		    	store.dispatch(setAuditRefresh(false));//reset refresh flag			   		
 		   	}
 		   	else
 		   	{
-		    			store.dispatch(notifySuccess(AS001));				   		
+		    			store.dispatch(notifySuccess(AS001));	
+		    			store.dispatch(setAuditRefresh(true));//set refresh flag			   		
 		   	}
 			break;
+		case DELETE_AUDIT:
+			try
+		    {	
+		    	stringInfo=codeToString(res.alert_data[0]);
+		    	if(stringInfo.type)
+		    	{
+		    		store.dispatch(notifyDelete(stringInfo.msg));
+		    		store.dispatch(setAuditRefresh(true));//set refresh flag
+		    	}
+		    	else
+		    	{
+		    		store.dispatch(notifyFail(stringInfo.msg));	
+		    		store.dispatch(setAuditRefresh(false));//reset refresh flag			   			
+		    	}
+		    }
+			catch(e)
+			{
+		    			store.dispatch(notifyFail(ERR_RES));
+		    			throw e;		
+			}
+			break;
+
 		case GET_PPSLIST:
 			let auditpps=[];
 			if(res.data.audit)
@@ -121,7 +143,8 @@ export function AjaxParse(store,res,cause)
 		case START_AUDIT:
 			if(res.successful.length)
 			{
-		    		store.dispatch(notifySuccess(AS00A));				   		
+		    		store.dispatch(notifySuccess(AS00A));
+		    		store.dispatch(setAuditRefresh(true));//set refresh flag				   		
 			}
 			else
 			{
@@ -129,6 +152,7 @@ export function AjaxParse(store,res,cause)
 				{
 					stringInfo=codeToString(res.unsuccessful[0].alert_data[0].code);
 					store.dispatch(notifyFail(stringInfo.msg));
+					store.dispatch(setAuditRefresh(false));//reset refresh flag			   		
 				}
 				catch(e)
 				{

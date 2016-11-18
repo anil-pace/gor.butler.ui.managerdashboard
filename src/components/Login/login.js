@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import Footer from '../Footer/Footer';
 import Spinner from '../../components/spinner/Spinner'
-import { authLoginData,mockLoginAuth,setUsername,setLoginSpinner } from '../../actions/loginAction';
+import { authLoginData,mockLoginAuth,setUsername,setLoginSpinner,connectionFault } from '../../actions/loginAction';
 import {validateID, validatePassword, resetForm} from '../../actions/validationActions';
 
 import { connect } from 'react-redux';
@@ -116,7 +116,14 @@ class Login extends React.Component{
      */
     _handleSubmit(e){
     	e.preventDefault();
-    	let formdata={         
+      if(!window.navigator.onLine)
+      {
+        this.props.connectionFault();
+    	   return;
+      }
+      else
+      {
+       let formdata={         
           	'username': this.userName.value,
           	'password': this.password.value,
          };
@@ -147,6 +154,7 @@ class Login extends React.Component{
         else{
             this.props.mockLoginAuth(loginData);
         }
+      }
     }
 	render(){
         return (
@@ -187,6 +195,13 @@ class Login extends React.Component{
 
                     <FormattedMessage id='login.butler.fail' 
                         defaultMessage="Invalid username and/or password, please try again" description="Text for login failure"/>
+
+                 </div>):''
+                }
+                {(this.props.connectionActive===false)?(<div className='gor-login-auth-error'><div className='gor-login-error'></div>
+
+                    <FormattedMessage id='login.butler.connection.fail' 
+                        defaultMessage="Connection failure" description="Text for connection failure"/>
 
                  </div>):''
                 }
@@ -249,6 +264,7 @@ Login.contextTypes = {
 function mapStateToProps(state, ownProps){
 	return {
         loginAuthorized:state.authLogin.loginAuthorized,
+        connectionActive:state.authLogin.connectionActive,
         auth_token: state.authLogin.auth_token,
         userName: state.authLogin.username,
         sLang: state.intl.locale,
@@ -275,7 +291,8 @@ var mapDispatchToProps = function(dispatch){
         setUsername: function(data){ dispatch(setUsername(data)); },        
         validatePass: function(data){ dispatch(validatePassword(data)); },        
         resetForm:   function(){ dispatch(resetForm()); },
-        setLoginSpinner:   function(data){ dispatch(setLoginSpinner(data)); }
+        setLoginSpinner:   function(data){ dispatch(setLoginSpinner(data)); },
+        connectionFault: function(){dispatch(connectionFault()); }
     }
 };
 

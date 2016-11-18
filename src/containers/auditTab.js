@@ -3,13 +3,12 @@ import ReactDOM  from 'react-dom';
 import UserDataTable from './userTab/userTabTable';
 import Spinner from '../components/spinner/Spinner';
 import { connect } from 'react-redux'; 
-import {AUDIT_RETRIEVE} from '../constants/appConstants';
 import {AUDIT_URL} from '../constants/configConstants';
-import {getAuditData} from '../actions/auditActions';
+import {getAuditData,setAuditRefresh} from '../actions/auditActions';
 import AuditTable from './auditTab/auditTable';
 import ReactPaginate from 'react-paginate';
-import {getPageData, getStatusFilter, getTimeFilter,getPageSizeAudit,currentPageAudit,lastRefreshTime} from '../actions/paginationAction';
-import {ORDERS_RETRIEVE} from '../constants/appConstants';
+import {getPageData} from '../actions/paginationAction';
+import {AUDIT_RETRIEVE} from '../constants/appConstants';
 import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL} from '../constants/configConstants';
 
 
@@ -82,14 +81,29 @@ class AuditTab extends React.Component{
 	{
    super(props);
  }
-
- componentDidMount() {
-   this.getTableData();
+ componentWillReceiveProps(nextProps)
+ {
+  if(nextProps.auditRefresh)
+  {
+     var data = {};
+     data.selected = 0;
+     this.handlePageClick(data);
+     nextProps.setAuditRefresh(false);
+  }
  }
-  handlePageClick = (data) => {
+ componentDidMount() {
+  var data = {};
+  data.selected = 0;
+  this.handlePageClick(data);
+ }
+ handlePageClick(data){
     var url;
+    var makeDate = new Date();
+    makeDate.setDate(makeDate.getDate() - 30)
+    makeDate = makeDate.getFullYear()+'-'+makeDate.getMonth()+'-'+makeDate.getDate();  
+ 
     if(data.url === undefined) {
-      url = API_URL + ORDERS_URL + "?page=" + (data.selected+1) + "&PAGE_SIZE=25";
+      url = AUDIT_URL + "/search?start_time="+makeDate+"&page="+(data.selected+1)+"&PAGE_SIZE=10";
     }
 
 
@@ -100,31 +114,19 @@ class AuditTab extends React.Component{
     let paginationData={
               'url':url,
               'method':'GET',
-              'cause': ORDERS_RETRIEVE,
-              'token': sessionStorage.getItem('auth_token'),
+              'cause': AUDIT_RETRIEVE,
+              'token': this.props.auth_token,
               'contentType':'application/json'
           } 
-          this.props.currentPage(data.selected+1);
          this.props.getPageData(paginationData);
  }
- getTableData() {
-  let url = AUDIT_URL;
-  let auditData={
-    'url':url,
-    'method':'GET',
-    'cause': AUDIT_RETRIEVE,
-    'token': sessionStorage.getItem('auth_token'),
-    'contentType':'application/json'
-  } 
-  this.props.getAuditData(auditData);  
-}
 
 render(){
-  var itemNumber = 7, renderTab = <div/>;
+  var renderTab = <div/>;
   
     var auditData = processAuditData(this.props.auditDetail, this);
-    renderTab = <AuditTable items={auditData} itemNumber={itemNumber}  
-    intlMessg={this.props.intlMessages} refreshData={this.getTableData.bind(this)}/>
+    renderTab = <AuditTable items={auditData}
+    intlMessg={this.props.intlMessages} />
   
   
   return (
@@ -138,7 +140,7 @@ render(){
           <ReactPaginate previousLabel={"<<"}
                        nextLabel={">>"}
                        breakClassName={"break-me"}
-                       pageNum={this.props.orderData.totalPage}
+                       pageNum={this.props.totalPage}
                        marginPagesDisplayed={1}
                        pageRangeDisplayed={1}
                        clickCallback={this.handlePageClick.bind(this)}
@@ -153,11 +155,12 @@ render(){
 
 
 function mapStateToProps(state, ownProps){
-  
   return {
     auditDetail: state.recieveAuditDetail.auditDetail || [],
-    orderData: state.getOrderDetail || {},    
-    intlMessages: state.intl.messages
+    totalPage: state.recieveAuditDetail.totalPage || 0,
+    auditRefresh:state.recieveAuditDetail.auditRefresh || null,  
+    intlMessages: state.intl.messages,
+    auth_token: state.authLogin.auth_token
   };
 }
 
@@ -165,8 +168,7 @@ var mapDispatchToProps = function(dispatch){
   return {
     getAuditData: function(data){ dispatch(getAuditData(data)); },
     getPageData: function(data){ dispatch(getPageData(data)); },
-    getPageSizeOrders: function(data){ dispatch(getPageSizeAudit(data));},
-    currentPage: function(data){ dispatch(currentPageAudit(data));}
+    setAuditRefresh: function(){dispatch(setAuditRefresh());}
   }
 };
 

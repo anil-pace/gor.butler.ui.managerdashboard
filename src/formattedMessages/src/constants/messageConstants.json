@@ -1,23 +1,13 @@
 [
   {
-    "id": "notify.success.add",
-    "description": "Text for successfull user addition",
-    "defaultMessage": "User successfully added"
-  },
-  {
-    "id": "notify.success.delete",
-    "description": "Text for successfull user deletion",
-    "defaultMessage": "User successfully deleted"
-  },
-  {
     "id": "notify.success.edit",
     "description": "Text for successfully editing user",
-    "defaultMessage": "User successfully edited"
+    "defaultMessage": "User details updated successfully"
   },
   {
     "id": "notify.error.usernameExists",
     "description": "Text for already registered username",
-    "defaultMessage": "Username already registered!"
+    "defaultMessage": "An account has already been created with this User ID"
   },
   {
     "id": "notify.error.passwordMissing",
@@ -70,8 +60,13 @@
     "defaultMessage": "Special characters like \"~\",\"@\" and \"%\" are not allowed"
   },
   {
-    "id": "user.invalid.password",
-    "description": "Text for invalid password",
+    "id": "user.invalid.password.operator",
+    "description": "Text for invalid password for operator",
+    "defaultMessage": "Please enter a password of at least 6 alphanumeric characters"
+  },
+  {
+    "id": "user.invalid.password.manager",
+    "description": "Text for invalid password for manager",
     "defaultMessage": "Please enter a password of at least 8 alphanumeric characters"
   },
   {
@@ -153,11 +148,6 @@
     "id": "notify.start.audit.success",
     "description": "Text for successfull audit creation",
     "defaultMessage": "Audit started successfully"
-  },
-  {
-    "id": "notify.delete.audit.success",
-    "description": "Text for successfull audit deletion",
-    "defaultMessage": "Audit deleted successfully"
   },
   {
     "id": "notify.delete.audit.processed",

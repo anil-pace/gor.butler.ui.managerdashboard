@@ -5,6 +5,7 @@ import Tabs from './containers/tabs';
 import Header from './components/header/header';
 import {setWsAction ,setMockAction} from './actions/socketActions';
 import {getTimeOffSetData,setTimeOffSetData} from './actions/loginAction';
+import {setInitData} from './actions/responseAction';
 import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,WS_MOCK,USERS,TAB_ROUTE_MAP,OVERVIEW ,SYSTEM,ORDERS,INVENTORY} from './constants/appConstants'
 import { wsOverviewData} from './constants/initData.js';
 import {TIME_ZONE_URL} from './constants/configConstants'
@@ -54,6 +55,7 @@ class App extends React.Component{
       let loginAuthorized= nextProps.loginAuthorized,
       authToken=nextProps.authToken,
       socketStatus = nextProps.socketStatus,
+      initDataSent=nextProps.initDataSent,
       currTab = nextProps.subTab || nextProps.tab || null;
 
       if(!loginAuthorized){
@@ -84,9 +86,13 @@ class App extends React.Component{
               }
               this.props.sendAuthToSocket(webSocketData) ;
             }
-            else if(nextProps.prevTab !== currTab){
+            else if(!initDataSent || nextProps.prevTab !== currTab){
               this.props.initDataSentCall(subscribeData) ;
               this.props.prevTabSelected(currTab || TAB_ROUTE_MAP[OVERVIEW]) ;
+              if(!initDataSent)
+              {
+                this.props.setInitData();
+              }
             }
         }
         
@@ -136,6 +142,7 @@ function mapStateToProps(state,ownProps) {
  	loginAuthorized : state.authLogin.loginAuthorized,
  	socketStatus: state.recieveSocketActions.socketConnected,
  	socketAuthorized: state.recieveSocketActions.socketAuthorized,
+  initDataSent: state.recieveSocketActions.initDataSent,
  	headerInfo:state.headerData.headerInfo,
   intl: state.intl,
   tab:state.tabSelected.tab,
@@ -152,6 +159,7 @@ function mapDispatchToProps(dispatch){
         sendAuthToSocket: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
         initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
         initMockData: function(data){dispatch(setMockAction({type:WS_MOCK,data:data}));},
+        setInitData: function(){dispatch(setInitData());},
         prevTabSelected: function(data){ dispatch(prevTabSelected(data)) },
         getTimeOffSetData:function(data){ dispatch(getTimeOffSetData(data)); },
         setTimeOffSetData:function(data){ dispatch(setTimeOffSetData(data)); }
