@@ -7,7 +7,8 @@ import { Router, Route, hashHistory, IndexRoute} from 'react-router';
 import {loginRequest} from '../actions/loginAction';
 import Overview from '../containers/OverviewTab'; 
 import {tabSelected,subTabSelected} from '../actions/tabSelectAction';
-import {OVERVIEW,TAB_ROUTE_MAP} from '../constants/appConstants';
+import {setInventorySpinner} from '../actions/inventoryActions';
+import {OVERVIEW,TAB_ROUTE_MAP,INVENTORY} from '../constants/appConstants';
 
 
 class Routes extends React.Component{
@@ -26,6 +27,14 @@ class Routes extends React.Component{
   			this.props.loginRequest();
   			this.props.tabSelected(selTab);
   			this.props.subTabSelected(subTab);
+  			switch(selTab.toUpperCase()){
+  				case INVENTORY:
+  				this.props.setInventorySpinner(true);
+  				break;
+  				default:
+  				this.props.setInventorySpinner(false);
+
+  			}
     		replace(nextView)
  	 	}
  	 	
@@ -186,7 +195,8 @@ var mapDispatchToProps = function(dispatch){
     return {
         loginRequest: function(){ dispatch(loginRequest()); },
         tabSelected: function(data){ dispatch(tabSelected(data)) },
-        subTabSelected: function(data){ dispatch(subTabSelected(data)) }
+        subTabSelected: function(data){ dispatch(subTabSelected(data)) },
+        setInventorySpinner:function(data){dispatch(setInventorySpinner(data));}
     }
 };
 export default connect(null,mapDispatchToProps)(Routes);

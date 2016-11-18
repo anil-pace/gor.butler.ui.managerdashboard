@@ -1976,7 +1976,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   max-height: 9px;
 }
 
-.exception .public_fixedDataTableCell_cellContent {
+.gor-exception .public_fixedDataTableCell_cellContent {
   background: #EC1C24;
   border-radius: 15px;
   text-align: center;
@@ -3665,7 +3665,7 @@ progress::-moz-progress-bar {
   width: 70%;
   display: inline-block;
   vertical-align: middle;
-  height: 100vh;
+  height: 70vh;
 }
 
 .gorInventory .legendCnt {
@@ -3677,8 +3677,8 @@ progress::-moz-progress-bar {
 .gorInventory .stkSnapSht {
   width: 28%;
   display: inline-block;
-  vertical-align: middle;
-  height: 100vh;
+  vertical-align: top;
+  height: 70vh;
   padding: 1.25rem 0.625rem;
 }
 
@@ -3846,6 +3846,10 @@ progress::-moz-progress-bar {
 
 .inventoryHist .axis--x line {
   display: none;
+}
+
+.inventoryHist .axis--x line.month-break {
+  display: block;
 }
 
 .inventoryHist .bar {

@@ -31,82 +31,42 @@ class MultiLineGraph extends React.Component{
         // if (this.props.inventoryData.length  <= 0){
         //   return;
         // }
+        let config =  this.props.config;
         let node = document.createElement('div');
-        let width = 900;
-        let height = 200;
-        let margin ={top: 20, right: 20, bottom: 30, left: 60};
+        let width = config.width;
+        let height = config.height;
+        let margin =config.margin;
         let component = this;
         // let dataArray = this.props.inventoryData;
         width= width - margin.left - margin.right;
 
         let jsonArray= invData
-        /*let jsonArray = [{
-          "total_skus": 495,
-          "opening_stock": 5165,
-          "cbm_used": 31.16,
-          "warehouse_utilization": 5.65,
-          "date": "2016-10-1",
-          "items_picked": 200,
-          "items_put": 340,
-          "current_stock": 5165
-        }, {
-          "total_skus": 495,
-          "opening_stock": 5165,
-          "cbm_used": 31.16,
-          "warehouse_utilization": 5.65,
-          "date": "2016-10-2",
-          "items_picked": 100,
-          "items_put": 200,
-          "current_stock": 5165
-        }, {
-          "total_skus": 495,
-          "opening_stock": 5165,
-          "cbm_used": 31.16,
-          "warehouse_utilization": 5.65,
-          "date": "2016-10-3",
-          "items_picked": 200,
-          "items_put": 233,
-          "current_stock": 5165
-        }, {
-          "total_skus": 495,
-          "opening_stock": 5165,
-          "cbm_used": 31.16,
-          "warehouse_utilization": 5.65,
-          "date": "2016-10-4",
-          "items_picked": 150,
-          "items_put": 223,
-          "current_stock": 5165
-        }, {
-          "total_skus": 495,
-          "opening_stock": 5165,
-          "cbm_used": 31.16,
-          "warehouse_utilization": 5.65,
-          "date": "2016-10-5",
-          "items_picked": 400,
-          "items_put": 300,
-          "current_stock": 5165
-        }];*/
+        
         //setting the initial 
-        var parseDate = d3.time.format("%Y-%m-%d").parse;
-        let dataArray = jsonArray.map(function(obj){
+        //var parseDate = d3.time.format("%Y-%m-%d").parse;
+        let noData = jsonArray[jsonArray.length-1] ? jsonArray[jsonArray.length-1].noData : false;
+       let dataArray = jsonArray.map(function(obj){
           let rObj = {};
-          rObj.date = parseDate(obj.date);
+          rObj.date = new Date(obj.date);
           rObj.items_put = obj.items_put;
           rObj.items_picked = obj.items_picked;
 
           return rObj;
         })
+        //let dataArray = jsonArray;
         //setting scale
+        
         var x = d3.time.scale().range([0, width]);
         var y = d3.scale.linear().range([height, 0]);
         var xx = function(e)  { return x(function(d) { return x(d.date);}) };
         var yy = function(e)  { return y(function(d) { return y(d.items_put); }) };
 
         // setting axis
-        var xAxis = d3.svg.axis().scale(x).orient("bottom")
-        .outerTickSize(0);
+        
+        var xAxis = d3.svg.axis().scale(x).orient("bottom").tickFormat(d3.time.format("%d")).ticks(dataArray.length-1)
+        .outerTickSize(config.outerTickSize);
         var yAxis = d3.svg.axis().scale(y).orient("left")
-        .ticks(3).outerTickSize(0);
+        .ticks(config.ticks).outerTickSize(config.outerTickSize);
 
         var pickLine = d3.svg.line()
         .x(function(d) { return x(d.date);})
@@ -127,7 +87,13 @@ class MultiLineGraph extends React.Component{
         x.domain(d3.extent(dataArray, function(d) {
          return d.date;
           }));
-        y.domain([0, d3.max(dataArray, function(d) { return Math.max(d.items_put, d.items_picked); })]);
+        if(noData){
+          y.domain([0, d3.max(dataArray, function(d) { return config.defaultMaxYAxis })]);
+        }
+        else{
+          y.domain([0, d3.max(dataArray, function(d) { return Math.max(d.items_put, d.items_picked); })]);
+        }
+        
 
         g.attr("class", "grid")
       .call(d3.svg.axis()
@@ -138,6 +104,7 @@ class MultiLineGraph extends React.Component{
             .tickFormat("")
       )  
         // Add the valueline path.
+        if(!noData){
         g.append("path")    
         .attr("class", "line")
         .attr("d", putLine(dataArray));
@@ -147,6 +114,7 @@ class MultiLineGraph extends React.Component{
         .attr("class", "line")
         .style("stroke", "red")
         .attr("d", pickLine(dataArray));
+      }
 
         // Add the X Axis
         g.append("g")     
@@ -158,7 +126,7 @@ class MultiLineGraph extends React.Component{
         g.append("g")     
         .attr("class", "y axis")
         .call(yAxis);
-
+        if(!noData){
         g.selectAll("circle.line")
         .data(dataArray)
         .enter().append("svg:circle")
@@ -176,9 +144,11 @@ class MultiLineGraph extends React.Component{
         .attr("cx", putLine.x())
         .attr("cy", putLine.y())
         .attr("r", 3.5);  
-
+    }
+    else{
+      svg.insert("text",":first-child").attr("x",width/2).attr("y",height/2).text("No Item Movement" || "");
+    }
         
-
         this.setState({d3: node});
       }
       catch(error){

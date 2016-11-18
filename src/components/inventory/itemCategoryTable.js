@@ -18,11 +18,11 @@ class ItemCategoryTable extends React.Component{
    
    
 	render(){
-		let structure;
+		var structure;
 		if(this.props.snapshotData.category_data){
 			structure = this.props.snapshotData.category_data.map(function(object, i){
-        		var color = CATEGORY_COLOR_MAP[object.category_type];
-        		if(object.category_type)
+        		var color = object.category_type ? CATEGORY_COLOR_MAP[i] : "";
+        		
         		return (
         			<tr key={i}>
         				<td>
@@ -33,8 +33,9 @@ class ItemCategoryTable extends React.Component{
         				<td><span className = "catText">{object.days_on_hand || "--"}</span></td>
         			</tr>
         			)
-    })
+    		})
 		}
+	
 		return (
 			<div className="gorSnapShot">
 					<table width="100%">

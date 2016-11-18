@@ -45,6 +45,9 @@ class InventoryHistogram extends React.Component{
    
 	return processedData;
    }
+   shouldComponentUpdate(nextProps){
+    return this.props.hasDataChanged !== nextProps.hasDataChanged
+  }
    _onClickCallBack(data){
    			this.props.setInventoryDate(data.customData);
    }
@@ -56,7 +59,7 @@ class InventoryHistogram extends React.Component{
    config.noDataText=config.noData ? "No Stock Found" : "" ;
    return (
      <div>
-       <Histogram hasDataChanged = {this.props.hasDataChanged} config={config} histogramData = {histogramData} onClickCallBack={this._onClickCallBack.bind(this)}/>
+       <Histogram  config={config} histogramData = {histogramData} onClickCallBack={this._onClickCallBack.bind(this)}/>
      </div>
    )
  }

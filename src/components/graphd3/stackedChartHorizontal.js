@@ -42,7 +42,8 @@ class StackedChartHorizontal extends React.Component{
     
     if(!data[i].warehouse_utilization && data[i].unusedSpace){
         
-        values.utilisedSpace = utilisedSpace;
+        values.utilisedSpace = ""+utilisedSpace;
+        if(utilisedSpace){
         svg.append("line")
         .attr("x1",x+"%")
         .attr("x2",x+"%")
@@ -54,6 +55,8 @@ class StackedChartHorizontal extends React.Component{
         .attr("x",(x-14 < 0 ? 0 : x-14)+"%")
         .attr("y",config.svgInfo.textInfo.y)
         .text(this.context.intl.formatMessage({id:"snapshot.inventory.usedSpace", defaultMessage: config.svgInfo.textInfo.message},values))
+      }
+      
 
       }
       else{
@@ -65,6 +68,13 @@ class StackedChartHorizontal extends React.Component{
       .attr("width",""+(data[i].warehouse_utilization || data[i].unusedSpace)+"%")
       .attr("height",config.svgInfo.rectInfo.height)
       .style("fill",d3.rgb(data[i].colorCode))
+
+      if(!utilisedSpace){
+        svg.append("text")
+        .attr("x",(config.svgInfo.width/2)-44)
+        .attr("y",Number(config.svgInfo.height)/2)
+        .text(this.context.intl.formatMessage({id:"snapshot.inventory.usedSpace", defaultMessage: config.svgInfo.textInfo.message},values))
+      }
 
       x+=(data[i].warehouse_utilization || data[i].unusedSpace)
     }

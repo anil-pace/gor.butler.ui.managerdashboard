@@ -19,8 +19,8 @@ class legendElement extends React.Component{
     	switch(type){
     		case LEGEND_ROUND:
     		structure =  <g transform={position}>
-			    		<circle cx="33" cy="15" r="8" stroke={this.props.color}  fill="#fff" style={{"strokeWidth":5}}/>
-						        <text x={this.props.xpos} y={this.props.ypos}  >
+			    		<circle cx="20" cy="20" r="4" stroke={this.props.color}  fill={this.props.color} style={{"strokeWidth":5}}/>
+						        <text x="30" y="25"  >
 								    {this.props.name}
 								  </text>
 								  </g>
@@ -28,7 +28,7 @@ class legendElement extends React.Component{
 			case LEGEND_RECT:
 			structure = <g transform={position}>
 						<rect    fill={this.props.color} width="20" height="20"/>
-				        <text x={this.props.xpos +10} y={this.props.ypos - 15}  >
+				        <text x={this.props.xpos +15} y={this.props.ypos - 5}  >
 						    {this.props.name}
 						  </text>
 						  </g>
@@ -36,7 +36,7 @@ class legendElement extends React.Component{
 			default:
 			structure = <g transform={position}>
 						<rect    fill={this.props.color} width="20" height="20"/>
-				        <text x={this.props.xpos+10} y={this.props.ypos - 15}    >
+				        <text x={this.props.xpos+25} y={this.props.ypos - 5}    >
 						    {this.props.name}
 						  </text>
 						  </g>

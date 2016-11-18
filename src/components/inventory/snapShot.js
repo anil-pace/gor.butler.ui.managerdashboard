@@ -3,7 +3,7 @@
  * This will be switched based on tab click
  */
 import React  from 'react';
-import { FormattedMessage,FormattedNumber} from 'react-intl';
+import { FormattedMessage,FormattedNumber,FormattedDate} from 'react-intl';
 
 
 
@@ -18,16 +18,25 @@ class SnapShotDetails extends React.Component{
    
 	render(){
 		
-		
+		var isToday = this.props.currentDate === Date.parse(this.props.snapshotTabData.date) ? true :false,
+		dt,openingStock;
+		if(isToday){
+			dt = <FormattedMessage id='inventory.snaphot.date' defaultMessage="Today's" description="Snapshot date string"/>
+			openingStock = <FormattedMessage id='inventory.snaphot.openingStock' defaultMessage="Opening Stock" description="Snapshot table header"/>
+		}
+		else{
+			dt = <FormattedDate year='numeric' month='short' day='2-digit' value={new Date(Date.parse(this.props.snapshotTabData.date))}/>
+			openingStock = <FormattedMessage id='inventory.snaphot.closingStock' defaultMessage="Closing Stock" description="Snapshot table header"/>
+		}
 		return (
 			<div className="gorSnapShot">
-				<h1><FormattedMessage id='inventory.snaphot.header' defaultMessage="Today's stock snapshot" description="Snapshot header"/> </h1>
+				<h1>{dt}<FormattedMessage id='inventory.snaphot.header' defaultMessage=" stock snapshot" description="Snapshot header"/> </h1>
 				<div className="gorSnapShotCont">
 					<table width="100%">
 					<tbody>
 					<tr>
 						<td className="stkParam">
-						<p><FormattedMessage id='inventory.snaphot.openingStock' defaultMessage="Opening Stock" description="Snapshot table header"/></p>
+						<p>{openingStock}</p>
 						<p><FormattedNumber value={this.props.snapshotTabData.opening_stock || 0}/></p>
 						</td>
 						<td className="stkParam">
@@ -64,7 +73,7 @@ class SnapShotDetails extends React.Component{
 	}
 };
 SnapShotDetails.propTypes={
-
+	currentDate:React.PropTypes.number,
 	snapshotData:React.PropTypes.object,
 	hasDataChanged:React.PropTypes.number
 
