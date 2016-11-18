@@ -3,6 +3,7 @@ import ReactDOM  from 'react-dom';
 import Tilex from '../components/tile1x/Tilex';
 import { connect } from 'react-redux';
 import { FormattedMessage,FormattedNumber ,FormattedPlural} from 'react-intl';
+import {STOCK_ICON} from '../constants/appConstants';
 
 class PutStatusWidget extends React.Component{
 	/**
@@ -57,7 +58,7 @@ class PutStatusWidget extends React.Component{
             					defaultMessage='Items stocked'/>;
             putData.value = value;
             putData.low = lowStr;
-            putData.logo = "iStock";
+            putData.logo = STOCK_ICON;
     		
     		return putData
     		

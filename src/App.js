@@ -62,7 +62,6 @@ class App extends React.Component{
                  this.context.router.push("/login");
                  return ;
       }
-      
         let subscribeData;
         if(currTab) {
           subscribeData = (wsOverviewData[currTab] || wsOverviewData["default"]);
@@ -92,7 +91,6 @@ class App extends React.Component{
                 this.props.setInitData();
               }
             }
-    
     }
   	/**Render method called when component react renders
   	 * @return {[type]}

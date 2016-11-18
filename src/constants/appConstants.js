@@ -290,3 +290,22 @@ export const LEGEND_ROUND= "ROUND";
 export const LEGEND_RECT= "RECTANGLE";
 export const LEGEND_DEFAULT = LEGEND_RECT;
 
+
+
+export const EN='en';
+export const JP='ja';
+// Style class constants
+export const TYPING='gor-login-field gor-input-ok gor-input-typing';
+export const FILL_BACK='gor-fill-back';
+export const GET='GET';
+export const GOR_RISK='gor-risk';
+export const GOR_NONE='gor-none';
+export const GOR_SUCCESS='gor-success';
+export const GOR_PENDING="pending";
+export const GOR_PROGRESS="progress";
+//Icons
+export const PICK_ICON=' iPick';
+export const STOCK_ICON="iStock";
+export const AUDIT_ICON="iAudit";
+export const TILE_ONTIME='overview-tile-ontime-icon';
+export const TILE_ALERT='header-yellow-alert-icon';

@@ -6,7 +6,7 @@ import { authLoginData,mockLoginAuth,setUsername,setLoginSpinner,connectionFault
 import {validateID, validatePassword, resetForm} from '../../actions/validationActions';
 
 import { connect } from 'react-redux';
-import {AUTH_LOGIN,ERROR,SUCCESS} from '../../constants/appConstants'; 
+import {AUTH_LOGIN,ERROR,SUCCESS,TYPING,EN,JA,FILL_BACK} from '../../constants/appConstants'; 
 import {INVALID_ID,EMPTY_PWD,TYPE_SUCCESS} from '../../constants/messageConstants'; 
 import {LOGIN_URL} from '../../constants/configConstants'; 
 import { FormattedMessage } from 'react-intl';
@@ -21,13 +21,13 @@ class Login extends React.Component{
 	 {
     	super(props);      
       this.state={sel:0, items :[
-        { value: 'en', label: (<FormattedMessage id='login.lang.english' defaultMessage="English" description="English option in the language drop down"/>) },
-        { value: 'ja', label: (<FormattedMessage id='login.lang.japanese' defaultMessage="Japanese" description="Japanese option in the language drop down"/>) },
+        { value: EN, label: (<FormattedMessage id='login.lang.english' defaultMessage="English" description="English option in the language drop down"/>) },
+        { value: JA, label: (<FormattedMessage id='login.lang.japanese' defaultMessage="Japanese" description="Japanese option in the language drop down"/>) },
       ]};
     }
     componentWillMount()
     {
-        document.body.className='gor-fill-back';
+        document.body.className=FILL_BACK;
         this._changeDropdown();
     } 
     _changeDropdown()
@@ -58,9 +58,9 @@ class Login extends React.Component{
     }
     _typing(ele){
       if(ele===1)
-        this.userField.className='gor-login-field gor-input-ok gor-input-typing';
+        this.userField.className=TYPING;
       else
-        this.passField.className='gor-login-field gor-input-ok gor-input-typing';
+        this.passField.className=TYPING;
     }
     _checkPass(){
           let password=this.password.value.trim(), loginPassInfo;
@@ -164,7 +164,10 @@ class Login extends React.Component{
                        <FormattedMessage id='login.butler.title' 
                         defaultMessage="Butler" description="Text for butler management Login form title"/>
                        </span>
-                       <sup>TM</sup>
+                       <sup><FormattedMessage id='login.butler.trademark' 
+
+                    defaultMessage="TM"
+                            description="Trademark"/></sup>
                     </div>
                     <p>
                     <FormattedMessage id='login.butler.manageInterface' 
