@@ -10,9 +10,34 @@
  import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,ORDER_PAGE, PICK_BEFORE_ORDER_URL, BREACHED_URL} from '../../constants/configConstants';
  import OrderListTable from './orderListTable';
  import Dropdown from '../../components/dropdown/dropdown'
- import { FormattedMessage ,FormattedTime,FormattedDate} from 'react-intl';
+ import { FormattedMessage ,defineMessages,FormattedDate} from 'react-intl';
 
+const messages = defineMessages ({
+    inProgressStatus:{
+      id: 'orderList.progress.status',
+      description: "In 'progress message' for orders",
+      defaultMessage: "In Progress"},
 
+    completedStatus:{
+      id:"orderList.completed.status",
+      description:" 'Completed' status",
+     defaultMessage: "Completed"},
+
+    exceptionStatus:{
+      id:"orderList.exception.status",
+      description:" 'Exception' status",
+     defaultMessage: "Exception"},
+
+    unfulfillableStatus:{
+      id:"orderList.Unfulfillable.status", 
+      description:" 'Unfulfillable' status",
+      defaultMessage: "Unfulfillable"},
+
+      orderListRefreshedat:{
+        id:'orderlist.Refreshed.at', 
+        description:" 'Refreshed' status",
+        defaultMessage:'Refreshed at: '}
+   });
 
  class OrderListTab extends React.Component{
   constructor(props) 
@@ -26,10 +51,10 @@
   }
 
   processOrders(data, nProps) {
-    let progress  = nProps.context.intl.formatMessage({id:"orderList.progress.status", defaultMessage: "In Progress"});
-    let completed  = nProps.context.intl.formatMessage({id:"orderList.completed.status", defaultMessage: "Completed"});
-    let exception = nProps.context.intl.formatMessage({id:"orderList.exception.status", defaultMessage: "Exception"});
-    let unfulfillable  = nProps.context.intl.formatMessage({id:"orderList.Unfulfillable.status", defaultMessage: "Unfulfillable"});
+   let progress  = nProps.context.intl.formatMessage(messages.inProgressStatus);
+    let completed  = nProps.context.intl.formatMessage(messages.completedStatus);
+    let exception = nProps.context.intl.formatMessage(messages.exceptionStatus);
+    let unfulfillable  = nProps.context.intl.formatMessage(messages.unfulfillableStatus); 
     var renderOrderData = [], ordersStatus = {'pending':progress, "fulfillable": progress, "completed":completed, "not_fulfillable":unfulfillable, "exception":exception},orderData = {};
     var breachedStatus = {'pending':1, "fulfillable": 1, "completed":3, "not_fulfillable":2};
     var unBreachedStatus = {'pending':4, "fulfillable": 4, "completed":6, "not_fulfillable":5};
@@ -97,28 +122,8 @@
         orderData.completedTime = "--";
       }
 
-        if(data[i].completed_orderlines === data[i].total_orderlines) {
-          orderData.orderLine = data[i].total_orderlines;
-        }
-        else {
-          orderData.orderLine = data[i].completed_orderlines + "/" + data[i].total_orderlines;
-        }
-        if (data[i].status === "completed"){
-          orderData.completedTime = <FormattedDate value = {data[i].update_time}
-          timeZone={timeOffset}
-          year='numeric'
-          month='short'
-          day='2-digit'
-          hour="2-digit"
-          minute="2-digit"
-          />;  
-        }else{
-          orderData.completedTime  ='--'
-        }
-        
-        renderOrderData.push(orderData);
-        orderData = {};
-      }
+      renderOrderData.push(orderData);
+      orderData = {};
     }
     
     return renderOrderData;
@@ -127,9 +132,11 @@
 
   handlePageClick = (data) => {
     var url;
-    if(! data.url) {
+    if(data.url === undefined) {
       url = API_URL + ORDERS_URL + ORDER_PAGE + (data.selected+1) + "&PAGE_SIZE=25";
     }
+
+
     else {
       url = data.url;
     }
@@ -145,16 +152,6 @@
     this.props.getPageData(paginationData);
   }
 
-    let paginationData={
-      'url':url,
-      'method':'GET',
-      'cause': ORDERS_RETRIEVE,
-      'token': this.props.auth_token,
-      'contentType':'application/json'
-    } 
-    this.props.currentPage(data.selected+1);
-    this.props.getPageData(paginationData);
-  }
 
   refresh() {
     var convertTime = {"oneHourOrders": 1, "twoHourOrders": 2, "sixHourOrders": 6, "twelveHourOrders": 12, "oneDayOrders": 24};
@@ -206,14 +203,13 @@
 
 render(){
   var updateStatus;
-  let updateStatusIntl;
+  
+   let updateStatusIntl;
   if(this.props.filterOptions.lastUpdatedOn) {
-    updateStatusIntl = 
-    this
-    .context
+    updateStatusIntl = this
+    .context 
     .intl
-    .formatMessage({id:'text.if', defaultMessage:'Refreshed at: '})+ 
-    this
+    .formatMessage(messages.orderListRefreshedat)+ ' ' +this
     .context
     .intl
     .formatDate(this.props.filterOptions.lastUpdatedOn, 

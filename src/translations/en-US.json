@@ -20,6 +20,11 @@
     "defaultMessage": "Copyright @ 2016 GreyOrange Pte Ltd"
   },
   {
+    "id": "app.greeting",
+    "description": "Greeting to welcome the user to the app",
+    "defaultMessage": "Hello, {name}!"
+  },
+  {
     "id": "header.description",
     "description": "Header description",
     "defaultMessage": "Butler Management System"
@@ -370,6 +375,11 @@
     "defaultMessage": "Connection refused"
   },
   {
+    "id": "inventory.histogram.noDataText",
+    "description": "Inventory Histogram No Data Text",
+    "defaultMessage": "No Stock Found"
+  },
+  {
     "id": "widget.audit.heading.value",
     "description": "Total Items Audited",
     "defaultMessage": "None"
@@ -685,6 +695,21 @@
     "defaultMessage": "Are you sure you would like to duplicate audit task {task_name} ?"
   },
   {
+    "id": "inventory.histogram.header",
+    "description": "Inventory Histogram Header Message",
+    "defaultMessage": "Stock level history"
+  },
+  {
+    "id": "inventory.linechart.header",
+    "description": "Inventory Line Chart Header Message",
+    "defaultMessage": "Item Movements"
+  },
+  {
+    "id": "inventory.histogram.noDataText",
+    "description": "Message for No stock",
+    "defaultMessage": "No Stock Found"
+  },
+  {
     "id": "snapshot.inventory.usedSpace",
     "description": "Space utilised message",
     "defaultMessage": "{utilisedSpace}% space utilized"
@@ -745,14 +770,29 @@
     "defaultMessage": "PPS - audit performance"
   },
   {
-    "id": "orderlistTab.refreshStatusMinutes",
-    "description": "refresh status for orderlist",
-    "defaultMessage": "Last Updated {updateStatus} minutes ago"
+    "id": "orderList.progress.status",
+    "description": "In 'progress message' for orders",
+    "defaultMessage": "In Progress"
   },
   {
-    "id": "orderlistTab.refreshStatusSeconds",
-    "description": "refresh status for orderlist",
-    "defaultMessage": "Last Updated {updateStatus} seconds ago"
+    "id": "orderList.completed.status",
+    "description": "'Completed' status",
+    "defaultMessage": "Completed"
+  },
+  {
+    "id": "orderList.exception.status",
+    "description": "'Exception' status",
+    "defaultMessage": "Exception"
+  },
+  {
+    "id": "orderList.Unfulfillable.status",
+    "description": "'Unfulfillable' status",
+    "defaultMessage": "Unfulfillable"
+  },
+  {
+    "id": "orderlist.Refreshed.at",
+    "description": "'Refreshed' status",
+    "defaultMessage": "Refreshed at:"
   },
   {
     "id": "orderlistTab.pageNum",
@@ -847,7 +887,7 @@
   {
     "id": "orderlist.table.operatingMode",
     "description": "recievedTime for Orders",
-    "defaultMessage": "RECIEVED TIME"
+    "defaultMessage": "RECEIVED TIME"
   },
   {
     "id": "orderlist.table.completedTime",
