@@ -117,4 +117,8 @@ export const ERR_API=(<FormattedMessage id="notify.error.api" description='Text 
 export const ERR_CONNECT=(<FormattedMessage id="notify.error.connection" description='Text for connection refused' 
             defaultMessage="Connection refused"/>);
 
+//Inventory Tab messages
+export const HISTOGRAM_NO_DATA_TEXT = (<FormattedMessage id="inventory.histogram.noDataText" description="Inventory Histogram No Data Text" 
+                    defaultMessage ="No Stock Found"/>);
+
 

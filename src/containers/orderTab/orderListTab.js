@@ -34,43 +34,68 @@
     var breachedStatus = {'pending':1, "fulfillable": 1, "completed":3, "not_fulfillable":2};
     var unBreachedStatus = {'pending':4, "fulfillable": 4, "completed":6, "not_fulfillable":5};
     var timeOffset=this.props.timeOffset;
-    if(data.length !== undefined) {
-      for (var i =0; i < data.length; i++) {
-        orderData.id = data[i].order_id;
+    if(!data.length) {
+      //..no data;
+      return;
+    }
+    for (var i =0; i < data.length; i++) {
+      orderData.id = data[i].order_id;
 
-        if(data[i].breached === true) {
-          orderData.status = ordersStatus[data[i].status];
-          orderData.statusClass = "breached";
-          orderData.statusPriority = breachedStatus[data[i].status];
-        }
-        if(data[i].exception === true) {
-          orderData.status = ordersStatus[data[i].status];
-          orderData.statusClass = "gor-exception";
-          orderData.statusPriority = breachedStatus[data[i].status];
-        }      
-        else {
-          orderData.status = ordersStatus[data[i].status];
-          orderData.statusClass = data[i].status;
-          orderData.statusPriority = unBreachedStatus[data[i].status];
-        }
-        orderData.recievedTime = <FormattedDate value = {data[i].create_time}
+      if(data[i].breached === true) {
+        orderData.status = ordersStatus[data[i].status];
+        orderData.statusClass = "breached";
+        orderData.statusPriority = breachedStatus[data[i].status];
+      }
+      if(data[i].exception === true) {
+        orderData.status = ordersStatus[data[i].status];
+        orderData.statusClass = "gor-exception";
+        orderData.statusPriority = breachedStatus[data[i].status];
+      }      
+      else {
+        orderData.status = ordersStatus[data[i].status];
+        orderData.statusClass = data[i].status;
+        orderData.statusPriority = unBreachedStatus[data[i].status];
+      }
+      orderData.recievedTime = <FormattedDate value = {data[i].create_time}
+      timeZone={timeOffset}
+      year='numeric'
+      month='short'
+      day='2-digit'
+      hour="2-digit"
+      minute="2-digit"
+      />
+      if(data[i].pick_before_time === null) {
+        orderData.pickBy = "--";
+      }
+      else {
+        orderData.pickBy =<FormattedDate value = {data[i].pick_before_time}
         timeZone={timeOffset}
         year='numeric'
         month='short'
         day='2-digit'
         hour="2-digit"
         minute="2-digit"
-        second="2-digit"
-        timeZoneName="long"
         />;
+      }
 
-        if(data[i].pick_before_time== null || data[i].pick_before_time == undefined || data[i].pick_before_time.constructor !== Date ) {
-          orderData.pickBy = "--";
-        }
-        else {
-          orderData.pickBy = nProps.context.intl.formatRelative(data[i].pick_before_time, {units:'day'}) +', '+
-          nProps.context.intl.formatTime(data[i].pick_before_time, {timeZone:timeOffset});
-        }
+      if(data[i].completed_orderlines === data[i].total_orderlines) {
+        orderData.orderLine = data[i].total_orderlines;
+      }
+      else {
+        orderData.orderLine = data[i].completed_orderlines + "/" + data[i].total_orderlines;
+      }
+      if (data[i].status === "completed"){
+        orderData.completedTime = <FormattedDate value = {data[i].update_time}
+        timeZone={timeOffset}
+        year='numeric'
+        month='short'
+        day='2-digit'
+        hour="2-digit"
+        minute="2-digit"
+        />;
+      }else{
+        orderData.completedTime = "--";
+      }
 
         if(data[i].completed_orderlines === data[i].total_orderlines) {
           orderData.orderLine = data[i].total_orderlines;
@@ -95,10 +120,12 @@
         orderData = {};
       }
     }
+    
     return renderOrderData;
   }
 
-  handlePageClick (data) {
+
+  handlePageClick = (data) => {
     var url;
     if(! data.url) {
       url = API_URL + ORDERS_URL + ORDER_PAGE + (data.selected+1) + "&PAGE_SIZE=25";
@@ -106,6 +133,17 @@
     else {
       url = data.url;
     }
+
+    let paginationData={
+      'url':url,
+      'method':'GET',
+      'cause': ORDERS_RETRIEVE,
+      'token': this.props.auth_token,
+      'contentType':'application/json'
+    } 
+    this.props.currentPage(data.selected+1);
+    this.props.getPageData(paginationData);
+  }
 
     let paginationData={
       'url':url,
@@ -170,65 +208,64 @@ render(){
   var updateStatus;
   let updateStatusIntl;
   if(this.props.filterOptions.lastUpdatedOn) {
-    var diff = (new Date())-this.props.filterOptions.lastUpdatedOn;
-    if (diff > 60e3) {
-     updateStatus =  Math.floor(diff / 60e3) ;
-     updateStatusIntl = <FormattedMessage id="orderlistTab.refreshStatusMinutes" description='refresh status for orderlist' defaultMessage='Last Updated {updateStatus} minutes ago' values={{updateStatus: updateStatus?updateStatus:'0'}}/>
+    updateStatusIntl = 
+    this
+    .context
+    .intl
+    .formatMessage({id:'text.if', defaultMessage:'Refreshed at: '})+ 
+    this
+    .context
+    .intl
+    .formatDate(this.props.filterOptions.lastUpdatedOn, 
+      { hour: 'numeric',minute: 'numeric'});
+  }           
 
-   }
-   else {
-    updateStatus = Math.floor(diff / 1e3) ;
-    updateStatusIntl = <FormattedMessage id="orderlistTab.refreshStatusSeconds" description='refresh status for orderlist' defaultMessage='Last Updated {updateStatus} seconds ago' values={{updateStatus: updateStatus?updateStatus:'0'}}/>
 
+  var itemNumber = 6, table, pages;
+  const ordersByStatus = [
+  { value: '25', label: '25' },
+  { value: '50', label: '50' },
+  { value: '100', label: '100' },
+  { value: '250', label: '250' },
+  { value: '500', label: '500' },
+  { value: '1000', label: '1000' }
+  ];
+  var currentPage = this.props.filterOptions.currentPage, totalPage = this.props.orderData.totalPage;
+  var orderDetail;
+  if(this.props.orderData.ordersDetail !== undefined) {
+    orderDetail = this.processOrders(this.props.orderData.ordersDetail, this);
   }
+  return (
+  <div>
+  <div className="gor-Orderlist-table" >  
 
-}
+  <OrderListTable items={orderDetail} itemNumber={itemNumber} statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter} refreshOption={this.refresh.bind(this)} lastUpdated={updateStatusIntl} refreshList={this.refresh.bind(this)} intlMessg={this.props.intlMessages}/>
 
-var itemNumber = 6, table, pages;
-const ordersByStatus = [
-{ value: '25', label: '25' },
-{ value: '50', label: '50' },
-{ value: '100', label: '100' },
-{ value: '250', label: '250' },
-{ value: '500', label: '500' },
-{ value: '1000', label: '1000' }
-];
-var currentPage = this.props.filterOptions.currentPage, totalPage = this.props.orderData.totalPage;
-var orderDetail;
-if(this.props.orderData.ordersDetail !== undefined) {
-  orderDetail = this.processOrders(this.props.orderData.ordersDetail, this);
-}
-return (
-<div>
-<div className="gor-Orderlist-table" >  
+  <div className="gor-pageNum">
+  <Dropdown  styleClass={'gor-Page-Drop'}  items={ordersByStatus} currentState={ordersByStatus[0]} optionDispatch={this.props.getPageSizeOrders} refreshList={this.refresh.bind(this)}/>
+  </div>
+  <div className="gor-paginate">
+  <div className = "gor-paginate-state"> 
+  <FormattedMessage id="orderlistTab.pageNum" description='page num orderlist' defaultMessage='Page {currentPage} of {totalPage}' values={{currentPage: currentPage?currentPage:'0', totalPage: totalPage?totalPage:'0'}}/>
 
-<OrderListTable items={orderDetail} itemNumber={itemNumber} statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter} refreshOption={this.refresh.bind(this)} lastUpdated={updateStatusIntl} refreshList={this.refresh.bind(this)} intlMessg={this.props.intlMessages}/>
+  </div>
+  <div id={"react-paginate"}>
+  <ReactPaginate previousLabel={"<<"}
+  nextLabel={">>"}
+  breakClassName={"break-me"}
+  pageNum={this.props.orderData.totalPage}
+  marginPagesDisplayed={1}
+  pageRangeDisplayed={1}
+  clickCallback={this.handlePageClick.bind(this)}
+  containerClassName={"pagination"}
+  subContainerClassName={"pages pagination"}
+  activeClassName={"active"} />
+  </div>
+  </div>
+  </div>
+  </div>
 
-<div className="gor-pageNum">
-<Dropdown  styleClass={'gor-Page-Drop'}  items={ordersByStatus} currentState={ordersByStatus[0]} optionDispatch={this.props.getPageSizeOrders} refreshList={this.refresh.bind(this)}/>
-</div>
-<div className="gor-paginate">
-<div className = "gor-paginate-state"> 
-<FormattedMessage id="orderlistTab.pageNum" description='page num orderlist' defaultMessage='Page {currentPage} of {totalPage}' values={{currentPage: currentPage?currentPage:'0', totalPage: totalPage?totalPage:'0'}}/>
-
-</div>
-<div id={"react-paginate"}>
-<ReactPaginate previousLabel={"<<"}
-nextLabel={">>"}
-breakClassName={"break-me"}
-pageNum={this.props.orderData.totalPage}
-marginPagesDisplayed={1}
-pageRangeDisplayed={1}
-clickCallback={this.handlePageClick.bind(this)}
-containerClassName={"pagination"}
-subContainerClassName={"pages pagination"}
-activeClassName={"active"} />
-</div>
-</div>
-</div>
-</div>
-
-);
+  );
 }
 }
 

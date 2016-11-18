@@ -267,14 +267,14 @@ export const INV_HIST_LEGEND_CONFIG = {
 				xpos:0,
 				xIncrement:20,
 				ypos:20,
-				containerWidth:"45%",
+				containerWidth:"55%",
 				containerHeight:"60px"
 			}
 export const INV_LINE_LEGEND_CONFIG = {
 				xpos:0,
 				xIncrement:105,
 				ypos:25,
-				containerWidth:"72%",
+				containerWidth:"90%",
 				containerHeight:"60px"
 			}
 
@@ -287,7 +287,8 @@ export const INVENTORY_HISTOGRAM_CONFIG = {
 	outerTickSize:0,
 	defaultMaxYAxis:100000,
 	ticks:3,
-	showMonthBreak:true
+	showMonthBreak:true,
+	noDataText:'No Stock Found'
 }
 export const INVENTORY_LINE_CONFIG = {
 	height:200,
@@ -297,7 +298,8 @@ export const INVENTORY_LINE_CONFIG = {
 	outerTickSize:0,
 	defaultMaxYAxis:100000,
 	ticks:3,
-	showMonthBreak:true
+	showMonthBreak:true,
+	noDataText:'No Item Movement'
 }
 export const DISPLAY_INVENTORY_SPINNER = 'DISPLAY_INVENTORY_SPINNER';
 export const DISPLAY_INVENTORY_HISTORY = 'DISPLAY_INVENTORY_HISTORY';
@@ -332,3 +334,22 @@ export const LEGEND_ROUND= "ROUND";
 export const LEGEND_RECT= "RECTANGLE";
 export const LEGEND_DEFAULT = LEGEND_RECT;
 
+
+
+export const EN='en';
+export const JP='ja';
+// Style class constants
+export const TYPING='gor-login-field gor-input-ok gor-input-typing';
+export const FILL_BACK='gor-fill-back';
+export const GET='GET';
+export const GOR_RISK='gor-risk';
+export const GOR_NONE='gor-none';
+export const GOR_SUCCESS='gor-success';
+export const GOR_PENDING="pending";
+export const GOR_PROGRESS="progress";
+//Icons
+export const PICK_ICON=' iPick';
+export const STOCK_ICON="iStock";
+export const AUDIT_ICON="iAudit";
+export const TILE_ONTIME='overview-tile-ontime-icon';
+export const TILE_ALERT='header-yellow-alert-icon';

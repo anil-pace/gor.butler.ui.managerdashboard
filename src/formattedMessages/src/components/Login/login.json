@@ -20,6 +20,11 @@
     "defaultMessage": "Butler"
   },
   {
+    "id": "login.butler.trademark",
+    "description": "Trademark",
+    "defaultMessage": "TM"
+  },
+  {
     "id": "login.butler.manageInterface",
     "description": "Text for Management Interface",
     "defaultMessage": "Management Interface"

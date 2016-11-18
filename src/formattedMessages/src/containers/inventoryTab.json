@@ -1,0 +1,12 @@
+[
+  {
+    "id": "inventory.histogram.header",
+    "description": "Inventory Histogram Header Message",
+    "defaultMessage": "Stock level history"
+  },
+  {
+    "id": "inventory.linechart.header",
+    "description": "Inventory Line Chart Header Message",
+    "defaultMessage": "Item Movements"
+  }
+]

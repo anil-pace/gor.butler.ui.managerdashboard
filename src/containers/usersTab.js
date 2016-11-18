@@ -33,8 +33,8 @@ function processUserDetails(data, nProps) {
       userData.workMode = work_mode[data[i].pps.pps_mode];
     }
     userData.location = nProps.context.intl.formatMessage({id:"userDetails.location", defaultMessage: "PPS {ppsId}"},{"ppsId":data[i].pps.pps_id});
-    userData.logInTime = nProps.context.intl.formatTime(data[i].login_time, {timeZone:timeOffset}) +' ('+
-    nProps.context.intl.formatRelative(data[i].login_time) +')';
+    userData.logInTime = nProps.context.intl.formatTime(data[i].login_time,{hour: 'numeric',minute: 'numeric'}) +
+    "(" + nProps.context.intl.formatRelative(data[i].login_time) +")";
     }
 
     else {

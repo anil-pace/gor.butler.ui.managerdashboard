@@ -58,21 +58,18 @@ class App extends React.Component{
       initDataSent=nextProps.initDataSent,
       currTab = nextProps.subTab || nextProps.tab || null;
 
-     if(!loginAuthorized){
-       this.context.router.push("/login");
-     }
-     
-     if(MOCK === false){
-       let subscribeData;
-       if(currTab) {
-        subscribeData = (wsOverviewData[currTab] || wsOverviewData["default"]);
+      if(!loginAuthorized){
+                 this.context.router.push("/login");
+                 return ;
       }
+        let subscribeData;
+        if(currTab) {
+          subscribeData = (wsOverviewData[currTab] || wsOverviewData["default"]);
+        }
 
-      else {
-        subscribeData = wsOverviewData["default"];
-      }
-
-        if(loginAuthorized){
+        else {
+          subscribeData = wsOverviewData["default"];
+        }
             
             if(!socketStatus){
               this.props.initWebSocket() ; 
@@ -94,24 +91,6 @@ class App extends React.Component{
                 this.props.setInitData();
               }
             }
-          }
-          this.props.sendAuthToSocket(webSocketData) ;
-        }
-        else if(nextProps.prevTab !== currTab){
-          this.props.initDataSentCall(subscribeData) ;
-          this.props.prevTabSelected(currTab || TAB_ROUTE_MAP[OVERVIEW]) ;
-        }
-      }
-      
-      
-      
-      
-    }
-    else{
-      this.props.initMockData(wsOverviewData["DEFAULT"]);
-    }
-    
-    
     }
     /**Render method called when component react renders
      * @return {[type]}

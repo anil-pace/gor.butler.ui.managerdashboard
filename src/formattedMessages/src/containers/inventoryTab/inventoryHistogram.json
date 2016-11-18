@@ -1,0 +1,7 @@
+[
+  {
+    "id": "inventory.histogram.noDataText",
+    "description": "Message for No stock",
+    "defaultMessage": "No Stock Found"
+  }
+]

@@ -1568,6 +1568,14 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   display: none !important;
 }
 
+.fixedDataTableLayout_main {
+  border-style: solid;
+  border-width: 1px;
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+}
+
 .fixedDataTableLayout_header,
 .fixedDataTableLayout_hasBottomBorder {
   border-bottom-style: solid;
@@ -3650,7 +3658,7 @@ progress::-moz-progress-bar {
   width: 28%;
   display: inline-block;
   vertical-align: top;
-  height: 70vh;
+  height: 90vh;
   padding: 1.25rem 0.625rem;
 }
 
