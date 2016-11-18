@@ -234,7 +234,11 @@
 		}
 		line{
 			display:none;
+			&.month-break{
+				display:block;
+			}
 		}
+
 	}
 	.bar{
 		fill:#498BD8;

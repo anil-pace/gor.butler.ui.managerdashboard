@@ -3,7 +3,7 @@
  * This will be switched based on tab click
  */
 import React  from 'react';
-import shallowCompare from 'react-addons-shallow-compare' ;
+
 import Inventory from '../components/inventory/inventory';
 import Spinner from '../components/spinner/Spinner';
 
@@ -25,12 +25,13 @@ class InventoryTab extends React.Component{
 		 * 
 		 */
 		
-		var label = "Stock level history",
+		var histogramLabel = "Stock level history",
+		linechartLabel = "Item Movements",
 		snapshotData = this.props.isPrevDateSelected ? this.props.inventoryDataPrevious : this.props.snapshotData
 		return (
 			<div className="gorInventory wrapper">
 				<Spinner isLoading={this.props.inventorySpinner} />
-				<Inventory  hasDataChanged = {this.props.hasDataChanged} inventoryData={this.props.inventoryData} label={label} isPrevDateSelected = {this.props.isPrevDateSelected} inventoryDataPrevious = {this.props.inventoryDataPrevious} snapshotData={this.props.snapshotData}/>
+				<Inventory  currentDate = {this.props.currentDate} hasDataChanged = {this.props.hasDataChanged} inventoryData={this.props.inventoryData} histogramLabel={histogramLabel} linechartLabel={linechartLabel} isPrevDateSelected = {this.props.isPrevDateSelected} inventoryDataPrevious = {this.props.inventoryDataPrevious} snapshotData={this.props.snapshotData}/>
 			</div>
 		);
 	}
@@ -42,8 +43,9 @@ InventoryTab.propTypes={
 	snapshotData:React.PropTypes.array,
 	inventorySpinner:React.PropTypes.bool,
 	isPrevDateSelected:React.PropTypes.bool,
-	inventoryDataPrevious:React.PropTypes.array ,
-	hasDataChanged:React.PropTypes.number
+	inventoryDataPrevious:React.PropTypes.object ,
+	hasDataChanged:React.PropTypes.number,
+	currentDate:React.PropTypes.number
 }
 
 function mapStateToProps(state,ownProps){
@@ -54,7 +56,8 @@ function mapStateToProps(state,ownProps){
       "inventorySpinner":state.spinner.inventorySpinner || false,
       "isPrevDateSelected":state.inventoryInfo.isPrevDateSelected || false,
       "inventoryDataPrevious":state.inventoryInfo.inventoryDataPrevious || [],
-      "hasDataChanged":state.inventoryInfo.hasDataChanged 
+      "hasDataChanged":state.inventoryInfo.hasDataChanged ,
+      "currentDate":state.inventoryInfo.currentDate
     }
 };
 

@@ -1,13 +1,23 @@
 [
   {
-    "id": "inventory.snaphot.header",
-    "description": "Snapshot header",
-    "defaultMessage": "Today's stock snapshot"
+    "id": "inventory.snaphot.date",
+    "description": "Snapshot date string",
+    "defaultMessage": "Today's"
   },
   {
     "id": "inventory.snaphot.openingStock",
     "description": "Snapshot table header",
     "defaultMessage": "Opening Stock"
+  },
+  {
+    "id": "inventory.snaphot.closingStock",
+    "description": "Snapshot table header",
+    "defaultMessage": "Closing Stock"
+  },
+  {
+    "id": "inventory.snaphot.header",
+    "description": "Snapshot header",
+    "defaultMessage": "stock snapshot"
   },
   {
     "id": "inventory.snaphot.itemsPut",

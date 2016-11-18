@@ -226,16 +226,58 @@ export const CATEGORY_SHOES ='shoes'
 export const CATEGORY_ELECTRONICS ='electronics'
 export const CATEGORY_DEFAULT ='default'
 export const CATEGORY_UNUSED ='unused'
-export const CATEGORY_COLOR_MAP = {
-	[CATEGORY_APPAREL] : "#7893EC",
-	[CATEGORY_OTHERS] : "#C1C1C1",
-	[CATEGORY_SHOES] : "#89AE51",
-	[CATEGORY_UNUSED] : "#F7F7F7",
-	[CATEGORY_DEFAULT] : "#A44550",
-	[CATEGORY_ELECTRONICS] : "#8F39EC"
+export const CATEGORY_COLOR_MAP = [
+	"#7893EC",
+	"#C1C1C1",
+	"#89AE51",
+	"#F7F7F7",
+	"#A44550",
+	"#8F39EC",
+	"#EEEEEE"
+]
+export const INV_HIST_LEGEND_COLOR = "#498BD8";
+export const INV_LINE_LEGEND_IPICKED_COLOR = "#D0021B";
+export const INV_LINE_LEGEND_IPUT_COLOR = "#7ED321";
+export const INV_HIST_LEGEND_DATA = [{
+	color:INV_HIST_LEGEND_COLOR,
+	name:'Items Stocked'
+}]
+export const INV_LINE_LEGEND_DATA = [{
+	color:INV_LINE_LEGEND_IPICKED_COLOR,
+	name:'Items Picked'
+},
+{
+	color:INV_LINE_LEGEND_IPUT_COLOR,
+	name:'Items Put'
 }
+]
+export const INV_HIST_LEGEND_CONFIG = {
+				xpos:0,
+				xIncrement:20,
+				ypos:20,
+				containerWidth:"60%",
+				containerHeight:"60px"
+			}
+export const INV_LINE_LEGEND_CONFIG = {
+				xpos:0,
+				xIncrement:100,
+				ypos:25,
+				containerWidth:"90%",
+				containerHeight:"60px"
+			}
+
 export const INVENTORY_HISTORY_DAYS_COUNT = 30;
 export const INVENTORY_HISTOGRAM_CONFIG = {
+	height:200,
+	width:(70/100) * screen.width,
+	margin:{top: 20, right: 20, bottom: 30, left: 60},
+	bandPadding:0.05,
+	outerTickSize:0,
+	defaultMaxYAxis:100000,
+	ticks:3,
+	showMonthBreak:true
+}
+export const INVENTORY_LINE_CONFIG = {
 	height:200,
 	width:(70/100) * screen.width,
 	margin:{top: 20, right: 20, bottom: 30, left: 60},
@@ -251,7 +293,7 @@ export const DISPLAY_INVENTORY_HISTORY = 'DISPLAY_INVENTORY_HISTORY';
 export const SCH_CONFIG ={
 "svgInfo":{
 	"height":"100",
-	"width":"100%",
+	"width":(28/100 * screen.width),
 	"x":0,
 	"y":20,
 	"lineInfo":{

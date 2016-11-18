@@ -3816,6 +3816,10 @@ progress::-moz-progress-bar {
   display: none;
 }
 
+.inventoryHist .axis--x line.month-break {
+  display: block;
+}
+
 .inventoryHist .bar {
   fill: #498BD8;
   opacity: 1;
