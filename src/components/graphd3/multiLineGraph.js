@@ -146,7 +146,12 @@ class MultiLineGraph extends React.Component{
         .attr("r", 3.5);  
     }
     else{
-      svg.insert("text",":first-child").attr("x",width/2).attr("y",height/2).text("No Item Movement" || "");
+      svg
+      .insert("text",":first-child")
+      .attr("x",width/2)
+      .attr("y",height/2)
+      .text(this.context.intl
+        .formatMessage({id:"inventory.linechart.noDataText", defaultMessage: config.noDataText}));
     }
         
         this.setState({d3: node});
@@ -180,6 +185,7 @@ class MultiLineGraph extends React.Component{
 MultiLineGraph.contextTypes = {
   intl: React.PropTypes.object.isRequired
 }
+
 
 
 export default Dimensions()(MultiLineGraph) ;

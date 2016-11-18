@@ -53,10 +53,11 @@ class InventoryHistogram extends React.Component{
    }
    
    render() {
-   var histogramData = this._processData();
+    var _this = this;
+   var histogramData = _this._processData();
    var config = Object.assign({},INVENTORY_HISTOGRAM_CONFIG)
    config.noData = histogramData.length ? histogramData[histogramData.length-1].noData : false;
-   config.noDataText=config.noData ? "No Stock Found" : "" ;
+   config.noDataText=config.noData ? config.noDataText : "" ;
    return (
      <div>
        <Histogram  config={config} histogramData = {histogramData} onClickCallBack={this._onClickCallBack.bind(this)}/>

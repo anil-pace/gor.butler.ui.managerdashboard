@@ -287,7 +287,8 @@ export const INVENTORY_HISTOGRAM_CONFIG = {
 	outerTickSize:0,
 	defaultMaxYAxis:100000,
 	ticks:3,
-	showMonthBreak:true
+	showMonthBreak:true,
+	noDataText:'No Stock Found'
 }
 export const INVENTORY_LINE_CONFIG = {
 	height:200,
@@ -297,7 +298,8 @@ export const INVENTORY_LINE_CONFIG = {
 	outerTickSize:0,
 	defaultMaxYAxis:100000,
 	ticks:3,
-	showMonthBreak:true
+	showMonthBreak:true,
+	noDataText:'No Item Movement'
 }
 export const DISPLAY_INVENTORY_SPINNER = 'DISPLAY_INVENTORY_SPINNER';
 export const DISPLAY_INVENTORY_HISTORY = 'DISPLAY_INVENTORY_HISTORY';

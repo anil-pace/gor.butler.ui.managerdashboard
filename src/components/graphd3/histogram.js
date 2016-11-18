@@ -103,11 +103,11 @@ g.attr("class", "grid")
       	event.stopImmediatePropagation();
       })
   if(config.noData && config.noData === true){
-      svg.insert("text",":first-child").attr("x",width/2).attr("y",height/2).text(config.noDataText || "");
+      svg.insert("text",":first-child").attr("x",width/2).attr("y",height/2).text(this.context.intl.formatMessage({id:"inventory.histogram.noDataText", defaultMessage: config.noDataText}) || "");
   }
   if(config.showMonthBreak && data.length){
     var abc= g.selectAll("g.axis--x");//.append("text").text("himanshu");//.append("text");//attr("fill","red")
-    abc.select("g:nth-child("+data.length+")").append("text").attr("x","-20").attr("y","2.5em").text("Today")
+    abc.select("g:nth-child("+data.length+")").append("text").attr("x","-20").attr("y","2.5em").text(this.context.intl.formatMessage({id:"inventory.histogram.today", defaultMessage: "Today's"}))
     var monthBreak = abc.select("g:nth-child("+(data.length - data[data.length-1].xAxisData)+")");
     monthBreak.append("line").attr("class","month-break").attr("x1","15").attr("x2","15").attr("y1","0").attr("y2","25");
     abc.select("g:nth-child("+(data.length - data[data.length-2].xAxisData)+")").append("text").attr("x","-5").attr("y","30").text((new Date()).toLocaleString(navigator.language,{month:'short'}));
@@ -134,6 +134,9 @@ Histogram.propTypes={
   noDataText:React.PropTypes.string,
   noData:React.PropTypes.bool,
   hasDataChanged:React.PropTypes.number
+}
+Histogram.contextTypes ={
+ intl:React.PropTypes.object.isRequired
 }
 
 
