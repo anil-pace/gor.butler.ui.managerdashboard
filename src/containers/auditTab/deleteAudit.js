@@ -4,7 +4,7 @@ import { connect } from 'react-redux' ;
 import {userRequest} from '../../actions/userActions';
 import { FormattedMessage,FormattedPlural } from 'react-intl';        
 import { DELETE_AUDIT } from '../../constants/appConstants';
-import { AUDIT_URL } from '../../constants/configConstants';
+import { AUDIT_URL,DELETE_AUDIT_URL } from '../../constants/configConstants';
 
 class DeleteAudit extends React.Component{
   constructor(props) 
@@ -17,7 +17,7 @@ class DeleteAudit extends React.Component{
   _userDel() {
     let auditId=this.props.auditId;
     let userData={
-                'url':AUDIT_URL+'/delete/'+auditId,
+                'url':DELETE_AUDIT_URL+auditId,
                 'method':'DELETE',
                 'cause':DELETE_AUDIT,
                 'contentType':'application/json',

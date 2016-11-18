@@ -7,7 +7,7 @@ import {userRequest} from '../../actions/userActions';
 import { connect } from 'react-redux';
 import {INVALID_SKUID,INVALID_LOCID,TYPE_SUCCESS} from '../../constants/messageConstants';
 import { ERROR,SUCCESS,SKU,LOCATION,CREATE_AUDIT,GET_PPSLIST,START_AUDIT } from '../../constants/appConstants';
-import { AUDIT_URL,PPSLIST_URL } from '../../constants/configConstants';
+import { AUDIT_URL,PPSLIST_URL,START_AUDIT_URL } from '../../constants/configConstants';
 import FieldError from '../../components/fielderror/fielderror';
 import { locationStatus, skuStatus } from '../../utilities/fieldCheck';
 import NoPPS from './noPPS';
@@ -47,7 +47,7 @@ class StartAudit extends React.Component{
       pps_list: this.state.checked
     }
     let userData={
-                'url':AUDIT_URL+'/start',
+                'url':START_AUDIT_URL,
                 'formdata':formdata,
                 'method':'POST',
                 'cause':START_AUDIT,

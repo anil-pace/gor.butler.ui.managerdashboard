@@ -1,5 +1,5 @@
 import {ERROR,SUCCESS} from '../constants/appConstants';
-import {EMPTY_PWD,TYPE_SUCCESS,EMPTY_NAME,INVALID_NAME,INVALID_PWD_OP,INVALID_PWD_MG,MATCH_PWD,INVALID_LOCID,INVALID_SKUID} from '../constants/messageConstants';
+import {EMPTY_PWD,TYPE_SUCCESS,EMPTY_NAME,INVALID_NAME,INVALID_PWD_OP,INVALID_PWD_MG,MATCH_PWD,INVALID_LOCID,INVALID_SKUID,INVALID_ID,INVALID_FORMAT} from '../constants/messageConstants';
 
 export function nameStatus(firstname,lastname){
           let nameInfo, format=  /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
@@ -111,4 +111,30 @@ export function skuStatus(skuId)
             };            
       }
       return skuInfo;
+}
+export function idStatus(userid)
+{
+    let idInfo,format=  /[!@#$%^&*()_+\-=\[\]{};':"\\|,<>\/?]/;
+    if(userid.length<1||userid.length>30)
+    {
+            idInfo={
+              type:ERROR,
+              msg:INVALID_ID           
+            }
+    }
+    else if(format.test(userid))
+    {
+            idInfo={
+              type:ERROR,
+              msg:INVALID_FORMAT           
+            }
+    }
+    else
+      {
+            idInfo={
+              type:SUCCESS,
+              msg:TYPE_SUCCESS               
+            };            
+      }
+    return idInfo;
 }

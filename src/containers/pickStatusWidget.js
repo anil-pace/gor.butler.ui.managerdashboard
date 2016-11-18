@@ -3,7 +3,7 @@ import ReactDOM  from 'react-dom';
 import Tile2x from '../components/tile2x/Tile2x';
 import { connect } from 'react-redux' ;
 import { FormattedMessage,FormattedNumber,FormattedPlural,FormattedRelative } from 'react-intl';
-
+import {PICK_ICON,GOR_RISK,GOR_NONE,GOR_SUCCESS,TILE_ONTIME,TILE_ALERT} from '../constants/appConstants';
 class PickStatusWidget extends React.Component{
 	/**
 	 * Called once before rendering of component,used to displatch fetch action
@@ -47,12 +47,12 @@ class PickStatusWidget extends React.Component{
         
         headingleft=<FormattedMessage id="widget.pick.headingleft" description='Heading for pick status widget' 
             defaultMessage='Orders to fullfill'/>;
-        logo=' iPick';
+        logo=PICK_ICON;
         textleft=ordersData.count_pending;
         
         if(!textleft)
         {
-            valueLeftStatus='gor-none';
+            valueLeftStatus=GOR_NONE;
             textleft=<FormattedMessage id="widget.pick.completed" description='Text for completed' 
             defaultMessage='Completed'/>;
 
@@ -95,19 +95,19 @@ class PickStatusWidget extends React.Component{
 
                 if(!ordersData.count_risk)
                 {
-                    statusClass='gor-success';
-                    statusLogo='overview-tile-ontime-icon';
+                    statusClass=GOR_SUCCESS;
+                    statusLogo=TILE_ONTIME;
                     statusleft=<FormattedMessage id="widget.pick.statusleft.onschedule" description='Text for on schedule' 
                 defaultMessage='On Schedule'/>
 
                 }
                 else
                 {
-                    statusClass='gor-risk';  
-                    statusLogo='header-yellow-alert-icon';
+                    statusClass=GOR_RISK;  
+                    statusLogo=TILE_ALERT;
                     statusleft=<FormattedMessage id="widget.pick.statusleft.atrisk" description='Text for orders at risk' 
                 defaultMessage='{count_risk} {count_risk,plural, one {order} other {orders}} at risk' values={{count_risk:ordersData.count_risk}}/>
-                    valueLeftStatus='gor-risk';          
+                    valueLeftStatus=GOR_RISK;          
                  }
             }
         }

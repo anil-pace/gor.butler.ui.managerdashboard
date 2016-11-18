@@ -2,6 +2,7 @@ import React  from 'react';
 import WavesTable from './waveTable';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+import {GOR_PENDING,GOR_PROGRESS} from '../../constants/appConstants';
 
 function processWaveData(data, nProps) {
   var waveData = [], waveDetail = {};
@@ -75,11 +76,11 @@ class WaveTab extends React.Component{
   				if(waveData[i].progress === 100) {
   					completedWaves++;
   				}
-          if(waveData[i].statusClass === "pending") {
+          if(waveData[i].statusClass === GOR_PENDING) {
               pendingWaves++;
           }
 
-          if(waveData[i].statusClass === "progress") {
+          if(waveData[i].statusClass === GOR_PROGRESS) {
               progressWave++;
           }
   			}
