@@ -90,7 +90,7 @@ class CreateAudit extends React.Component{
   }
   render()
   {
-      let tick=(<div className='iTick'/>);  
+      let tick=(<div className='gor-tick'/>);  
       return (
         <div>
           <div className="gor-modal-content">

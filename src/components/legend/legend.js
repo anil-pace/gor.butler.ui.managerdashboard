@@ -12,13 +12,18 @@ class Legend extends React.Component{
     	super(props);
 
     }	
+    shouldComponentUpdate(nextProps){
+    	return this.props.hasDataChanged !== nextProps.hasDataChanged
+    }
     
     _processData(){
-    	var data = this.props.legendData.data || [];
-    	var config = this.props.legendData.config || {};
+    	var _this = this;
+    	var data = _this.props.legendData.data || [];
+    	var config = _this.props.legendData.config || {};
     	var elements = data.map(function(item, i){
+	      var name = _this.context.intl.formatMessage({id:"inventory.histogram.legend", defaultMessage: item.name});
 	      return (
-	        <LegendElement color={item.color} xpos={config.xpos+i*config.xIncrement} ypos={config.ypos} name={item.name} key={i}/>
+	        <LegendElement legendType={_this.props.legendType} color={item.color} xpos={config.xpos+i*config.xIncrement} ypos={config.ypos} name={name} key={i}/>
 	      )
 	    })
     return elements;
@@ -27,7 +32,7 @@ class Legend extends React.Component{
 	render(){
 		var elements = this._processData();
 		return (
-				 <svg className="legend" width="100%" height="60" style={{"float":"right"}}>
+				 <svg className="legend" width={this.props.legendData.config.containerWidth} height={this.props.legendData.config.containerHeight} style={{"float":"right"}}>
 				 	{elements}
 				 </svg>
 		);
@@ -35,5 +40,8 @@ class Legend extends React.Component{
 };
 Legend.propTypes={
 	legendData:React.PropTypes.object
+}
+Legend.contextTypes ={
+ intl:React.PropTypes.object.isRequired
 }
 export default Legend ;

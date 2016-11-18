@@ -75,20 +75,20 @@ class AddUser extends React.Component{
       return nameInfo.type;
    }
   _checkPwd(){
-    let pwd1=this.password1.value,pwd2=this.password2.value, passwordInfo, roleSelected=this.props.roleSet, roleSupervisor=this.props.roleInfo.BUTLER_SUPERVISOR;
-    passwordInfo=passwordStatus(pwd1,pwd2,roleSelected,roleSupervisor);
+    let pswd=this.password1.value,confirmPswd=this.password2.value, passwordInfo, roleSelected=this.props.roleSet, roleSupervisor=this.props.roleInfo.BUTLER_SUPERVISOR;
+    passwordInfo=passwordStatus(pswd,confirmPswd,roleSelected,roleSupervisor);
     this.props.validatePassword(passwordInfo);
     return passwordInfo.type;
   }
   _handleAddUser(e){
         e.preventDefault();
-        let pwd1,pwd2,role,opt,userid,firstname,lastname;
+        let pswd,confirmPswd,role,opt,userid,firstname,lastname;
 
         userid=this.userId.value;
         firstname=this.firstName.value;
         lastname=this.lastName.value;
-        pwd1=this.password1.value;
-        pwd2=this.password2.value;
+        pswd=this.password1.value;
+        confirmPswd=this.password2.value;
 
         if(!this.props.idCheck.type)
         {
@@ -113,8 +113,8 @@ class AddUser extends React.Component{
                     "last_name": lastname,
                     "username": userid,
                     "role_id":role,
-                    "password": pwd1,
-                    "password_confirm": pwd2     
+                    "password": pswd,
+                    "password_confirm": confirmPswd     
 
          };
         let userData={
@@ -131,7 +131,7 @@ class AddUser extends React.Component{
   }
   render()
   {
-      let tick=(<div className='iTick'/>);
+      let tick=(<div className='gor-tick'/>);
 
       return (
         <div>

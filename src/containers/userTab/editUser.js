@@ -43,7 +43,7 @@ class EditUser extends React.Component{
     this.view2.style.display='none';
   }
   _checkPwd(){
-    let pwd1=this.password1.value,pwd2=this.password2.value, givenRole,passwordInfo, roleSelected, roleSupervisor=this.props.roleInfo.BUTLER_SUPERVISOR;
+    let pswd=this.password1.value,confirmPswd=this.password2.value, givenRole,passwordInfo, roleSelected, roleSupervisor=this.props.roleInfo.BUTLER_SUPERVISOR;
     if(this.props.roleId == BUTLER_SUPERVISOR)
     {
       givenRole=this.props.roleInfo.BUTLER_SUPERVISOR;
@@ -53,18 +53,18 @@ class EditUser extends React.Component{
       givenRole=this.props.roleInfo.BUTLER_UI;
     }
     roleSelected=this.props.roleSet?this.props.roleSet:givenRole;
-    passwordInfo=passwordStatus(pwd1,pwd2,roleSelected,roleSupervisor);   
+    passwordInfo=passwordStatus(pswd,confirmPswd,roleSelected,roleSupervisor);   
     this.props.validatePassword(passwordInfo);
     return passwordInfo.type;
   }
   _handleEditUser(e){
         e.preventDefault();
-        let pwd1,pwd2,role,opt,firstname,lastname,givenRole;
+        let pswd,confirmPswd,role,opt,firstname,lastname,givenRole;
 
         firstname=this.firstName.value;
         lastname=this.lastName.value;
-        pwd1=this.password1.value;
-        pwd2=this.password2.value;
+        pswd=this.password1.value;
+        confirmPswd=this.password2.value;
 
         if(!this.props.nameCheck.type)
         {
@@ -73,10 +73,10 @@ class EditUser extends React.Component{
         }
         if(!this.props.passwordCheck.type)
         {          
-          if(!pwd1&&!pwd2)
+          if(!pswd&&!confirmPswd)
           {
-            pwd1="__unchanged__";
-            pwd2="__unchanged__";
+            pswd="__unchanged__";
+            confirmPswd="__unchanged__";
           }
           else if(!this._checkPwd())
             return;
@@ -94,8 +94,8 @@ class EditUser extends React.Component{
                     "first_name": firstname,
                     "last_name": lastname,
                     "role_id":role,
-                    "password": pwd1,
-                    "password_confirm": pwd2     
+                    "password": pswd,
+                    "password_confirm": confirmPswd     
 
          };
         let editurl=HEADER_URL+'/'+this.props.id;
@@ -113,7 +113,7 @@ class EditUser extends React.Component{
   }
   render()
   {
-      let tick=(<div className='iTick'/>);  
+      let tick=(<div className='gor-tick'/>);  
       return (
         <div>
           <div className="gor-modal-content">

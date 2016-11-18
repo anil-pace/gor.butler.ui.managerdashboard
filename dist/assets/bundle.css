@@ -124,8 +124,8 @@ body {
   font-family: Source Sans Pro;
 }
 
-.user-edit-icon,
-.user-del-icon,
+.gor-edit-icon,
+.gor-del-icon,
 .dropdown-arrow-icon,
 .searchbox-cross-icon,
 .searchbox-magnifying-glass-icon,
@@ -146,7 +146,7 @@ body {
 .header-offline-icon,
 .user-icon,
 .overview-tile-ontime-icon,
-.statusOl, .statusAl, .iStock, .iAudit, .iPick, .gor-login-user, .gor-login-password, .gor-login-error, .iTick, .iQuestion, .iTick-white, .iRemove-white, .iError-white, .gor-login-user-error, .gor-login-password-error {
+.statusOl, .statusAl, .iStock, .iAudit, .iPick, .gor-login-user, .gor-login-password, .gor-login-error, .gor-tick, .gor-question, .gor-tick-white, .gor-remove-white, .gor-error-white, .gor-login-user-error, .gor-login-password-error {
   background-image: url(images/icons.svg);
 }
 
@@ -310,7 +310,7 @@ body {
   display: inline-block;
 }
 
-.iTick {
+.gor-tick {
   background-position: -26px -52px;
   width: 24px;
   height: 24px;
@@ -320,7 +320,7 @@ body {
   vertical-align: middle;
 }
 
-.iTick-white {
+.gor-tick-white {
   background-position: -151px -52px;
   width: 24px;
   height: 24px;
@@ -328,7 +328,7 @@ body {
   display: inline-block;
 }
 
-.iRemove-white {
+.gor-remove-white {
   background-position: -189px -77px;
   width: 14px;
   height: 16px;
@@ -336,7 +336,7 @@ body {
   display: inline-block;
 }
 
-.iError-white {
+.gor-error-white {
   background-position: -126px -52px;
   width: 24px;
   height: 24px;
@@ -344,7 +344,7 @@ body {
   display: inline-block;
 }
 
-.iQuestion {
+.gor-question {
   background-position: -409px -1px;
   width: 50px;
   height: 50px;
@@ -352,7 +352,7 @@ body {
   display: inline-block;
 }
 
-.user-edit-icon {
+.gor-edit-icon {
   background-position: -171px 42px;
   width: 16px;
   height: 16px;
@@ -360,7 +360,7 @@ body {
   display: inline-block;
 }
 
-.user-del-icon {
+.gor-del-icon {
   background-position: -188px -75px;
   width: 16px;
   height: 18px;
@@ -1949,6 +1949,16 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 
 .breached .public_fixedDataTableCell_cellContent {
   background: #fc3838;
+  border-radius: 15px;
+  text-align: center;
+  width: 70px;
+  color: #ffffff;
+  font-size: 12px;
+  max-height: 9px;
+}
+
+.gor-exception .public_fixedDataTableCell_cellContent {
+  background: #EC1C24;
   border-radius: 15px;
   text-align: center;
   width: 70px;
@@ -3808,6 +3818,10 @@ progress::-moz-progress-bar {
 
 .inventoryHist .axis--x line {
   display: none;
+}
+
+.inventoryHist .axis--x line.month-break {
+  display: block;
 }
 
 .inventoryHist .bar {
