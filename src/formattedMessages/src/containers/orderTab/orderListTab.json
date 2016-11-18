@@ -1,5 +1,30 @@
 [
   {
+    "id": "orderList.progress.status",
+    "description": "In 'progress message' for orders",
+    "defaultMessage": "In Progress"
+  },
+  {
+    "id": "orderList.completed.status",
+    "description": "'Completed' status",
+    "defaultMessage": "Completed"
+  },
+  {
+    "id": "orderList.exception.status",
+    "description": "'Exception' status",
+    "defaultMessage": "Exception"
+  },
+  {
+    "id": "orderList.Unfulfillable.status",
+    "description": "'Unfulfillable' status",
+    "defaultMessage": "Unfulfillable"
+  },
+  {
+    "id": "orderlist.Refreshed.at",
+    "description": "'Refreshed' status",
+    "defaultMessage": "Refreshed at:"
+  },
+  {
     "id": "orderlistTab.pageNum",
     "description": "page num orderlist",
     "defaultMessage": "Page {currentPage} of {totalPage}"
