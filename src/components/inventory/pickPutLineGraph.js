@@ -55,9 +55,11 @@ class PickPutLineGraph extends React.Component{
   }
     render(){
         var processedData = this._processData();
+        var config = Object.assign({},INVENTORY_LINE_CONFIG)
+        config.noDataText = this.context.intl.formatMessage({id:"inventory.linechart.noDataText", defaultMessage: "No Item Movement"})
         return (
             <div>
-                <MultiLineGraph config ={INVENTORY_LINE_CONFIG} inventoryData={processedData || []}/>
+                <MultiLineGraph config ={config} inventoryData={processedData || []}/>
             </div>
             );
     }

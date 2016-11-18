@@ -178,5 +178,10 @@
     "id": "notify.error.connection",
     "description": "Text for connection refused",
     "defaultMessage": "Connection refused"
+  },
+  {
+    "id": "inventory.histogram.noDataText",
+    "description": "Inventory Histogram No Data Text",
+    "defaultMessage": "No Stock Found"
   }
 ]

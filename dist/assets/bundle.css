@@ -3678,7 +3678,7 @@ progress::-moz-progress-bar {
   width: 28%;
   display: inline-block;
   vertical-align: top;
-  height: 70vh;
+  height: 90vh;
   padding: 1.25rem 0.625rem;
 }
 

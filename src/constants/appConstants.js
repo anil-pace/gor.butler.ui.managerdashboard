@@ -267,14 +267,14 @@ export const INV_HIST_LEGEND_CONFIG = {
 				xpos:0,
 				xIncrement:20,
 				ypos:20,
-				containerWidth:"45%",
+				containerWidth:"55%",
 				containerHeight:"60px"
 			}
 export const INV_LINE_LEGEND_CONFIG = {
 				xpos:0,
 				xIncrement:105,
 				ypos:25,
-				containerWidth:"72%",
+				containerWidth:"90%",
 				containerHeight:"60px"
 			}
 

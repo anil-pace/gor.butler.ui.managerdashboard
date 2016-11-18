@@ -126,7 +126,8 @@ class MultiLineGraph extends React.Component{
         g.append("g")     
         .attr("class", "y axis")
         .call(yAxis);
-        if(!noData){
+        
+    if(!noData){
         g.selectAll("circle.line")
         .data(dataArray)
         .enter().append("svg:circle")
@@ -150,7 +151,7 @@ class MultiLineGraph extends React.Component{
       .insert("text",":first-child")
       .attr("x",width/2)
       .attr("y",height/2)
-      .text(this.context.intl.formatMessage({id:"inventory.linechart.noDataText", defaultMessage: config.noDataText}));
+      .text(config.noDataText);
     }
         
         this.setState({d3: node});
