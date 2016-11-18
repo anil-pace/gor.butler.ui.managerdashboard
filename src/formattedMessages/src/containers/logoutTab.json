@@ -1,0 +1,7 @@
+[
+  {
+    "id": "logout.question",
+    "description": "Text for logout question",
+    "defaultMessage": "Are you sure you would like to log out now?"
+  }
+]

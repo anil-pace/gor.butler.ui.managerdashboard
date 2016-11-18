@@ -2,6 +2,7 @@ import {AJAX_CALL,MOCK_LOGIN,AUTH_LOGIN} from '../constants/appConstants';
 import {AjaxParse} from '../utilities/AjaxParser';
 import {ShowError} from '../utilities/showError';
 import {logoutRequest} from '../actions/loginAction'
+import { endWsAction } from '../actions/socketActions';
 
 
 const ajaxMiddleware = (function(){ 
@@ -39,8 +40,10 @@ const ajaxMiddleware = (function(){
             console.log('Request not processed');
             if(httpRequest.status === 401 && params.cause!==AUTH_LOGIN)
             {
-             console.log('Not Authorized');  
-             store.dispatch(logoutRequest());        
+              console.log('Not Authorized'); 
+              sessionStorage.clear();        
+              store.dispatch(logoutRequest());
+              store.dispatch(endWsAction()); 
             }
             else
             {

@@ -9,7 +9,7 @@ import AuditTable from './auditTab/auditTable';
 import ReactPaginate from 'react-paginate';
 import {getPageData} from '../actions/paginationAction';
 import {AUDIT_RETRIEVE} from '../constants/appConstants';
-import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL} from '../constants/configConstants';
+import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,SEARCH_AUDIT_URL,GIVEN_PAGE,GIVEN_PAGE_SIZE} from '../constants/configConstants';
 
 
 function processAuditData(data, nProps ) {
@@ -103,7 +103,7 @@ class AuditTab extends React.Component{
     makeDate = makeDate.getFullYear()+'-'+makeDate.getMonth()+'-'+makeDate.getDate();  
  
     if(data.url === undefined) {
-      url = AUDIT_URL + "/search?start_time="+makeDate+"&page="+(data.selected+1)+"&PAGE_SIZE=10";
+      url = SEARCH_AUDIT_URL+makeDate+GIVEN_PAGE+(data.selected+1)+GIVEN_PAGE_SIZE;
     }
 
 
