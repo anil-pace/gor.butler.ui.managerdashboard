@@ -7,7 +7,7 @@ import {validateID, validatePassword, resetForm} from '../../actions/validationA
 
 import { connect } from 'react-redux';
 import {AUTH_LOGIN,ERROR,SUCCESS,TYPING,EN,JA,FILL_BACK} from '../../constants/appConstants'; 
-import {INVALID_ID,EMPTY_PWD,TYPE_SUCCESS} from '../../constants/messageConstants'; 
+import {INVALID_ID,EMPTY_PWD,TYPE_SUCCESS,ENG,JAP} from '../../constants/messageConstants'; 
 import {LOGIN_URL} from '../../constants/configConstants'; 
 import { FormattedMessage } from 'react-intl';
 import { updateIntl } from 'react-intl-redux';
@@ -21,8 +21,8 @@ class Login extends React.Component{
 	 {
     	super(props);      
       this.state={sel:0, items :[
-        { value: EN, label: (<FormattedMessage id='login.lang.english' defaultMessage="English" description="English option in the language drop down"/>) },
-        { value: JA, label: (<FormattedMessage id='login.lang.japanese' defaultMessage="Japanese" description="Japanese option in the language drop down"/>) },
+        { value: EN, label: ENG },
+        { value: JA, label: JAP },
       ]};
     }
     componentWillMount()
@@ -165,7 +165,6 @@ class Login extends React.Component{
                         defaultMessage="Butler" description="Text for butler management Login form title"/>
                        </span>
                        <sup><FormattedMessage id='login.butler.trademark' 
-
                     defaultMessage="TM"
                             description="Trademark"/></sup>
                     </div>

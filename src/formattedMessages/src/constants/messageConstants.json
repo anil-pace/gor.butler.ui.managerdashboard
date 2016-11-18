@@ -1,5 +1,15 @@
 [
   {
+    "id": "login.lang.english",
+    "description": "English option in the language drop down",
+    "defaultMessage": "English"
+  },
+  {
+    "id": "login.lang.japanese",
+    "description": "Japanese option in the language drop down",
+    "defaultMessage": "Japanese"
+  },
+  {
     "id": "notify.success.edit",
     "description": "Text for successfully editing user",
     "defaultMessage": "User details updated successfully"

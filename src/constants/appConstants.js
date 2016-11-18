@@ -345,6 +345,8 @@ export const GOR_NONE='gor-none';
 export const GOR_SUCCESS='gor-success';
 export const GOR_PENDING="pending";
 export const GOR_PROGRESS="progress";
+export const GOR_BREACHED="breached";
+export const GOR_EXCEPTION="gor-exception";
 //Icons
 export const PICK_ICON=' iPick';
 export const STOCK_ICON="iStock";

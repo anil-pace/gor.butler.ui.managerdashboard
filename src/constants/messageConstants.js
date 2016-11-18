@@ -1,5 +1,9 @@
 import React  from 'react';
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
+
+//Login page
+export const ENG=(<FormattedMessage id='login.lang.english' defaultMessage="English" description="English option in the language drop down"/>);
+export const JAP=(<FormattedMessage id='login.lang.japanese' defaultMessage="Japanese" description="Japanese option in the language drop down"/>);
 //success codes related to user management
 
 export const US004 = (<FormattedMessage id="notify.success.edit" description='Text for successfully editing user' 

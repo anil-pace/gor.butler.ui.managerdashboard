@@ -6,8 +6,8 @@ import React  from 'react';
 import ReactPaginate from 'react-paginate';
 import { connect } from 'react-redux';
 import {getPageData, getStatusFilter, getTimeFilter,getPageSizeOrders,currentPageOrders,lastRefreshTime} from '../../actions/paginationAction';
-import {ORDERS_RETRIEVE} from '../../constants/appConstants';
-import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,ORDER_PAGE, PICK_BEFORE_ORDER_URL, BREACHED_URL} from '../../constants/configConstants';
+import {ORDERS_RETRIEVE,GOR_BREACHED,GOR_EXCEPTION} from '../../constants/appConstants';
+import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,ORDER_PAGE, PICK_BEFORE_ORDER_URL, BREACHED_URL,UPDATE_TIME_HIGH,UPDATE_TIME_LOW,EXCEPTION_TRUE} from '../../constants/configConstants';
 import OrderListTable from './orderListTable';
 import Dropdown from '../../components/dropdown/dropdown'
 import { FormattedMessage ,FormattedTime,FormattedDate} from 'react-intl';
@@ -40,12 +40,12 @@ class OrderListTab extends React.Component{
 
       if(data[i].breached === true) {
         orderData.status = ordersStatus[data[i].status];
-        orderData.statusClass = "breached";
+        orderData.statusClass = GOR_BREACHED;
         orderData.statusPriority = breachedStatus[data[i].status];
       }
       if(data[i].exception === true) {
         orderData.status = ordersStatus[data[i].status];
-        orderData.statusClass = "gor-exception";
+        orderData.statusClass = GOR_EXCEPTION;
         orderData.statusPriority = breachedStatus[data[i].status];
       }      
       else {
@@ -151,10 +151,10 @@ class OrderListTab extends React.Component{
     }
     else if(this.props.filterOptions.statusFilter=== "exception")
     {
-      appendStatusUrl = "&exception=true" ;      
+      appendStatusUrl = EXCEPTION_TRUE ;      
     }
     else {
-       appendStatusUrl = "&warehouse_status=" + (this.props.filterOptions.statusFilter);
+       appendStatusUrl = WAREHOUSE_STATUS + (this.props.filterOptions.statusFilter);
     }
 
      if(timeOut !== undefined && timeOut !== "allOrders") {
@@ -163,7 +163,7 @@ class OrderListTab extends React.Component{
         prevTime = new Date(prevTime.setHours(prevTime.getHours() - convertTime[timeOut]));
         prevTime = prevTime.toISOString();
        currentTime = currentTime.toISOString();
-       appendTimeUrl = '&update_time<='+ currentTime +'&update_time>='+ prevTime;
+       appendTimeUrl = UPDATE_TIME_LOW+ currentTime +UPDATE_TIME_HIGH+ prevTime;
      }
     data.url = data.url + appendStatusUrl+appendTimeUrl+appendPageSize;
     this.props.lastRefreshTime((new Date()));

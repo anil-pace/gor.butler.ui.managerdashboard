@@ -46,8 +46,8 @@ function processUserDetails(data, nProps) {
 
     userData.uid = data[i].user_id
     userData.userName= data[i].user_name;
-    userData.first=data[i].first_name;
-    userData.last=data[i].last_name;  
+    userData.first=data[i].first_name || "--";
+    userData.last=data[i].last_name || "--";  
     userData.roleId=data[i].role;
     userData.role = role[data[i].role];
     userDetails.push(userData);
