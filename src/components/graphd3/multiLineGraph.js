@@ -150,8 +150,7 @@ class MultiLineGraph extends React.Component{
       .insert("text",":first-child")
       .attr("x",width/2)
       .attr("y",height/2)
-      .text(this.context.intl
-        .formatMessage({id:"inventory.linechart.noDataText", defaultMessage: config.noDataText}));
+      .text(this.context.intl.formatMessage({id:"inventory.linechart.noDataText", defaultMessage: config.noDataText}));
     }
         
         this.setState({d3: node});

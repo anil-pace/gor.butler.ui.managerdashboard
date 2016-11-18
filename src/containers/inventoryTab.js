@@ -6,7 +6,7 @@ import React  from 'react';
 
 import Inventory from '../components/inventory/inventory';
 import Spinner from '../components/spinner/Spinner';
-
+import { FormattedMessage} from 'react-intl';
 import { connect } from 'react-redux'; 
 
 
@@ -25,8 +25,10 @@ class InventoryTab extends React.Component{
 		 * 
 		 */
 		
-		var histogramLabel = "Stock level history",
-		linechartLabel = "Item Movements",
+		var histogramLabel =<FormattedMessage id="inventory.histogram.header" description="Inventory Histogram Header Message" 
+              			defaultMessage ="Stock level history"/>  ,
+		linechartLabel = <FormattedMessage id="inventory.linechart.header" description="Inventory Line Chart Header Message" 
+              			defaultMessage ="Item Movements"/>,
 		snapshotData = this.props.isPrevDateSelected ? this.props.inventoryDataPrevious : this.props.snapshotData
 		return (
 			<div className="gorInventory wrapper">
