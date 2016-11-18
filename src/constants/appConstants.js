@@ -351,6 +351,7 @@ export const GOR_EXCEPTION="gor-exception";
 export const GOR_OFFLINE='gor-offline';
 export const GOR_ONLINE='gor-online';
 export const GOR_NORMAL_TAB='gor-normal-tab';
+
 //Icons
 export const PICK_ICON=' iPick';
 export const STOCK_ICON="iStock";

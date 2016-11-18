@@ -21,8 +21,9 @@ class Login extends React.Component{
 	 {
     	super(props);      
       this.state={sel:0, items :[
-        { value: EN, label: (<FormattedMessage id='login.lang.english' defaultMessage="English" description="English option in the language drop down"/>) },
-        { value: JA, label: (<FormattedMessage id='login.lang.japanese' defaultMessage="日本語" description="Japanese option in the language drop down"/>) },
+        { value: EN, label: ENG },
+        { value: JA, label: JAP },
+
 
       ]};
     }
