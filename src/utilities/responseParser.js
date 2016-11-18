@@ -57,7 +57,7 @@ export function ResponseParse(store,res)
 				else
 				{
 					store.dispatch(receiveOrdersData(res));
-					store.dispatch(receiveInventoryTodayData(resTypeSnapShotToday));
+					
 				}
 				break;
 		    case PARSE_PPA_THROUGHPUT:
