@@ -3665,7 +3665,7 @@ progress::-moz-progress-bar {
   width: 70%;
   display: inline-block;
   vertical-align: middle;
-  height: 100vh;
+  height: 70vh;
 }
 
 .gorInventory .legendCnt {
@@ -3677,8 +3677,8 @@ progress::-moz-progress-bar {
 .gorInventory .stkSnapSht {
   width: 28%;
   display: inline-block;
-  vertical-align: middle;
-  height: 100vh;
+  vertical-align: top;
+  height: 70vh;
   padding: 1.25rem 0.625rem;
 }
 

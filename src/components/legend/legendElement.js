@@ -20,7 +20,7 @@ class legendElement extends React.Component{
     		case LEGEND_ROUND:
     		structure =  <g transform={position}>
 			    		<circle cx="20" cy="20" r="4" stroke={this.props.color}  fill={this.props.color} style={{"strokeWidth":5}}/>
-						        <text x="25" y="25"  >
+						        <text x="30" y="25"  >
 								    {this.props.name}
 								  </text>
 								  </g>
