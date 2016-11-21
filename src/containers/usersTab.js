@@ -21,7 +21,7 @@ function processUserDetails(data, nProps) {
   var userDetails = [], userData = {};
   for (var i = data.length - 1; i >= 0; i--) {
 
-    userData.id = (data[i].first_name || null) + " " + (data[i].last_name || null);
+    userData.id = (data[i].first_name ||  "--") + " " + (data[i].last_name ||  "--");
     if(data[i].logged_in){
       userData.status = online;
       userData.statusClass = "online";
@@ -68,7 +68,8 @@ class UsersTab extends React.Component{
 		var itemNumber = 7, userData;	
 		if(this.props.userdetails !== undefined) {
 			userData = processUserDetails(this.props.userdetails, this);
-		}	
+		}
+    console.log(userData)	
 		return (
 			<div>
 				<div>

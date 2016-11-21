@@ -192,42 +192,42 @@
   {
     "id": "notify.error.400",
     "description": "Text for bad request",
-    "defaultMessage": "400 Bad Request"
+    "defaultMessage": "Network error: 400 Bad Request"
   },
   {
     "id": "notify.error.401",
     "description": "Text for Unauthorizedun",
-    "defaultMessage": "401 Unauthorized"
+    "defaultMessage": "Network error: 401 Unauthorized"
   },
   {
     "id": "notify.error.403",
     "description": "Text for Forbidden",
-    "defaultMessage": "403 Forbidden"
+    "defaultMessage": "Network error: 403 Forbidden"
   },
   {
     "id": "notify.error.405",
     "description": "Text for method not allowed",
-    "defaultMessage": "405 Method Not Allowed"
+    "defaultMessage": "Network error: 405 Method Not Allowed"
   },
   {
     "id": "notify.error.408",
     "description": "Text for request timeout",
-    "defaultMessage": "408 Request Time-out"
+    "defaultMessage": "Network error: 408 Request Time-out"
   },
   {
     "id": "notify.error.409",
     "description": "Text for conflict",
-    "defaultMessage": "409 Conflict"
+    "defaultMessage": "Network error: 409 Conflict"
   },
   {
     "id": "notify.error.500",
     "description": "Text for internal server error",
-    "defaultMessage": "500 Internal Servor Error"
+    "defaultMessage": "Network error: 500 Internal Servor Error"
   },
   {
     "id": "notify.error.502",
     "description": "Text for bad gateway",
-    "defaultMessage": "502 Bad Gateway"
+    "defaultMessage": "Network error: 502 Bad Gateway"
   },
   {
     "id": "inventory.histogram.noDataText",
