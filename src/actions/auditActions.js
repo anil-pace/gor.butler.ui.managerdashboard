@@ -1,5 +1,5 @@
 
-import { AJAX_CALL,AUDIT_RETRIEVE, RECIEVE_AUDIT_DATA,SET_AUDIT,RESET_AUDIT,SETAUDIT_PPS,REFRESH_AUDIT} from '../constants/appConstants'
+import { AJAX_CALL,AUDIT_RETRIEVE, RECIEVE_AUDIT_DATA,SET_AUDIT,RESET_AUDIT,SETAUDIT_PPS,REFRESH_AUDIT} from '../constants/frontEndConstants'
 
 
 export function getAuditData(params){

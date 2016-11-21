@@ -4,7 +4,8 @@ import { FormattedMessage,FormattedPlural } from 'react-intl';
 import {userRequest} from '../../actions/userActions';
 import {validateName, validatePassword, resetForm} from '../../actions/validationActions';
 import { connect } from 'react-redux';
-import {ERROR,GET_ROLES,EDIT_USER,SUCCESS,BUTLER_SUPERVISOR,BUTLER_UI} from '../../constants/appConstants';
+import {ERROR,GET_ROLES,EDIT_USER,SUCCESS} from '../../constants/frontEndConstants';
+import {BUTLER_SUPERVISOR,BUTLER_UI} from '../../constants/backEndConstants'
 import {TYPE_SUCCESS} from '../../constants/messageConstants';
 import {ROLE_URL,HEADER_URL} from '../../constants/configConstants';
 import FieldError from '../../components/fielderror/fielderror';

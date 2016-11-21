@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import {changePPSmode} from '../../actions/ppsModeChangeAction'
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
 import {BASE_URL, PPS_MODE_CHANGE_URL,PROTOCOL,API_URL} from '../../constants/configConstants';
-import {PPS_MODE_CHANGE} from '../../constants/appConstants';
+import {PPS_MODE_CHANGE} from '../../constants/frontEndConstants';
 
 class PPStable extends React.Component {
   constructor(props) {

@@ -1,4 +1,4 @@
-import {PPS_DETAIL} from '../constants/appConstants';
+import {PPS_DETAIL} from '../constants/backEndConstants';
 import React  from 'react';
 import { FormattedMessage } from 'react-intl';
 

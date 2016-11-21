@@ -1,4 +1,4 @@
-import {BUTLERS_DATA} from '../constants/appConstants';
+import {BUTLERS_DATA} from '../constants/frontEndConstants';
 import React  from 'react';
 import { FormattedMessage } from 'react-intl';
 

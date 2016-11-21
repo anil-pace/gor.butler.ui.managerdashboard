@@ -1,4 +1,5 @@
-import {BUTLERS_DATA, PARSE_BUTLERS} from '../constants/appConstants';
+import {BUTLERS_DATA} from '../constants/frontEndConstants';
+import {PARSE_BUTLERS} from '../constants/backEndConstants'
 /**
  * @param  {State Object}
  * @param  {Action object}

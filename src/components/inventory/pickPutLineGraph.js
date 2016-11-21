@@ -4,7 +4,7 @@
  */
 import React  from 'react';
 import MultiLineGraph from '../graphd3/multiLineGraph';
-import {INVENTORY_HISTORY_DAYS_COUNT,INVENTORY_LINE_CONFIG} from  '../../constants/appConstants'
+import {INVENTORY_HISTORY_DAYS_COUNT,INVENTORY_LINE_CONFIG} from  '../../constants/frontEndConstants'
 
 
 

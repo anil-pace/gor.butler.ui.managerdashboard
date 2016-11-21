@@ -7,7 +7,7 @@ import SubTab from './subTab';
 import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
 import {subTabSelected} from '../../actions/tabSelectAction'
-import {ORDER_LIST, WAVES,SYS_SUB_TAB_ROUTE_MAP} from '../../constants/appConstants';
+import {ORDER_LIST, WAVES,SYS_SUB_TAB_ROUTE_MAP} from '../../constants/frontEndConstants';
 import { FormattedMessage } from 'react-intl';
 
 class OrderSubTab extends React.Component{

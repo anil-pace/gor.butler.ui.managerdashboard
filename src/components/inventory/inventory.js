@@ -9,7 +9,7 @@ import InventoryStacked from '../../containers/inventoryTab/inventoryStacked';
 import SnapShot from './snapShot';
 import InventoryHistogram from '../../containers/inventoryTab/inventoryHistogram';
 import ItemCategoryTable from './ItemCategoryTable';
-import {LEGEND_ROUND,INV_LINE_LEGEND_IPICKED_COLOR,INV_LINE_LEGEND_DATA,INV_LINE_LEGEND_CONFIG,INV_LINE_LEGEND_IPUT_COLOR,INV_HIST_LEGEND_DATA,INV_HIST_LEGEND_COLOR,INV_HIST_LEGEND_CONFIG} from '../../constants/appConstants'
+import {LEGEND_ROUND,INV_LINE_LEGEND_IPICKED_COLOR,INV_LINE_LEGEND_DATA,INV_LINE_LEGEND_CONFIG,INV_LINE_LEGEND_IPUT_COLOR,INV_HIST_LEGEND_DATA,INV_HIST_LEGEND_COLOR,INV_HIST_LEGEND_CONFIG} from '../../constants/frontEndConstants'
 import PickPutLineGraph from './PickPutLineGraph';
 import { FormattedMessage ,FormattedDate} from 'react-intl';
 

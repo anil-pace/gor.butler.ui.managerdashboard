@@ -2,7 +2,7 @@ import React  from 'react';
 import WavesTable from './waveTable';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import {GOR_PENDING,GOR_PROGRESS} from '../../constants/appConstants';
+import {GOR_PENDING,GOR_PROGRESS} from '../../constants/frontEndConstants';
 
 function processWaveData(data, nProps) {
   var waveData = [], waveDetail = {};

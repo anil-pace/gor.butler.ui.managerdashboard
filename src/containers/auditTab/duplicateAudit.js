@@ -4,7 +4,7 @@ import { connect } from 'react-redux' ;
 import {userRequest} from '../../actions/userActions';
 import { FormattedMessage,FormattedPlural } from 'react-intl';        
 import {INVALID_SKUID,INVALID_LOCID,TYPE_SUCCESS} from '../../constants/messageConstants';
-import { ERROR,SUCCESS,SKU,LOCATION,CREATE_AUDIT } from '../../constants/appConstants';
+import { ERROR,SUCCESS,SKU,LOCATION,CREATE_AUDIT } from '../../constants/frontEndConstants';
 import { AUDIT_URL } from '../../constants/configConstants';
 
 class DuplicateAudit extends React.Component{

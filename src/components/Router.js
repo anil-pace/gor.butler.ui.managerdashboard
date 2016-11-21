@@ -8,7 +8,7 @@ import {loginRequest} from '../actions/loginAction';
 import Overview from '../containers/OverviewTab'; 
 import {tabSelected,subTabSelected} from '../actions/tabSelectAction';
 import {setInventorySpinner} from '../actions/inventoryActions';
-import {OVERVIEW,TAB_ROUTE_MAP,INVENTORY} from '../constants/appConstants';
+import {OVERVIEW,TAB_ROUTE_MAP,INVENTORY} from '../constants/frontEndConstants';
 
 
 class Routes extends React.Component{

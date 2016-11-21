@@ -1,5 +1,5 @@
 import {connectionFault,setLoginSpinner} from '../actions/loginAction';
-import {AUTH_LOGIN} from '../constants/appConstants';
+import {AUTH_LOGIN} from '../constants/frontEndConstants';
 import {ERR_CONNECT} from '../constants/messageConstants';
 import {notifyFail} from '../actions/validationActions';
 

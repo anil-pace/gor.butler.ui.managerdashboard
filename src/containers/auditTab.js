@@ -8,7 +8,7 @@ import {getAuditData,setAuditRefresh} from '../actions/auditActions';
 import AuditTable from './auditTab/auditTable';
 import ReactPaginate from 'react-paginate';
 import {getPageData} from '../actions/paginationAction';
-import {AUDIT_RETRIEVE} from '../constants/appConstants';
+import {AUDIT_RETRIEVE} from '../constants/frontEndConstants';
 import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,SEARCH_AUDIT_URL,GIVEN_PAGE,GIVEN_PAGE_SIZE} from '../constants/configConstants';
 
 

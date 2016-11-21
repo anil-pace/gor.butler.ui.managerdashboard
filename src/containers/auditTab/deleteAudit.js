@@ -3,7 +3,7 @@ import ReactDOM  from 'react-dom';
 import { connect } from 'react-redux' ;
 import {userRequest} from '../../actions/userActions';
 import { FormattedMessage,FormattedPlural } from 'react-intl';        
-import { DELETE_AUDIT } from '../../constants/appConstants';
+import { DELETE_AUDIT } from '../../constants/frontEndConstants';
 import { AUDIT_URL,DELETE_AUDIT_URL } from '../../constants/configConstants';
 
 class DeleteAudit extends React.Component{

@@ -1,4 +1,4 @@
-import {GET_OVERVIEW,GET_SYSTEM,GET_INVENTORY,GET_AUDIT,GET_USERS,GET_ORDERS,GET_STATUS} from '../constants/appConstants.js';
+import {GET_OVERVIEW,GET_SYSTEM,GET_INVENTORY,GET_AUDIT,GET_USERS,GET_ORDERS,GET_STATUS} from '../constants/frontEndConstants.js';
 
 export function recieveOverviewStatus(data){
   return {

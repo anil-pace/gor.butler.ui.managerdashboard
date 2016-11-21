@@ -1,4 +1,4 @@
-import { DISPLAY_SPINNER} from '../constants/appConstants'
+import { DISPLAY_SPINNER} from '../constants/frontEndConstants'
 
 /**
  * [showLoader Action function for showing loader]

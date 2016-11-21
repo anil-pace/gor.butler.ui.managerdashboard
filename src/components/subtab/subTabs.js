@@ -8,7 +8,8 @@ import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
 import { FormattedMessage } from 'react-intl';
 import {subTabSelected} from '../../actions/tabSelectAction'
-import {NOTIFICATION,BUTLERBOTS,PPS,CHARGING,SYS_SUB_TAB_ROUTE_MAP} from '../../constants/appConstants'
+import {NOTIFICATION,SYS_SUB_TAB_ROUTE_MAP} from '../../constants/frontEndConstants'
+import {BUTLERBOTS,PPS,CHARGING} from '../../constants/backEndConstants'
 
 class SystemTab extends React.Component{
 	constructor(props) 

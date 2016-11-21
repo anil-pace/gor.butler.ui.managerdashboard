@@ -6,7 +6,7 @@ import { authLoginData,mockLoginAuth,setUsername,setLoginSpinner,connectionFault
 import {validateID, validatePassword, resetForm} from '../../actions/validationActions';
 
 import { connect } from 'react-redux';
-import {AUTH_LOGIN,ERROR,SUCCESS,TYPING,EN,JA,FILL_BACK} from '../../constants/appConstants'; 
+import {AUTH_LOGIN,ERROR,SUCCESS,TYPING,EN,JA,FILL_BACK} from '../../constants/frontEndConstants'; 
 import {INVALID_ID,EMPTY_PWD,TYPE_SUCCESS} from '../../constants/messageConstants'; 
 import {LOGIN_URL} from '../../constants/configConstants'; 
 import { FormattedMessage } from 'react-intl';

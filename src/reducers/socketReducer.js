@@ -1,4 +1,4 @@
-import {WS_CONNECTED,WS_ONMESSAGE,WS_INIT,WS_END} from '../constants/appConstants';
+import {WS_CONNECTED,WS_ONMESSAGE,WS_INIT,WS_END} from '../constants/frontEndConstants';
 
 /**
  * @param  {State Object}

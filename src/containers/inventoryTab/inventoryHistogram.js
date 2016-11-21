@@ -1,7 +1,7 @@
 import React  from 'react';
 import Histogram from '../../components/graphd3/histogram';
 import {setInventoryDate} from '../../actions/inventoryActions';
-import {INVENTORY_HISTORY_DAYS_COUNT,INVENTORY_HISTOGRAM_CONFIG} from '../../constants/appConstants';
+import {INVENTORY_HISTORY_DAYS_COUNT,INVENTORY_HISTOGRAM_CONFIG} from '../../constants/frontEndConstants';
 import { connect } from 'react-redux'; 
 
 

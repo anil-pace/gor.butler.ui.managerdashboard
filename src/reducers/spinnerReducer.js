@@ -1,4 +1,4 @@
-import { DISPLAY_SPINNER,DISPLAY_LOGIN_SPINNER,DISPLAY_INVENTORY_SPINNER} from '../constants/appConstants'
+import { DISPLAY_SPINNER,DISPLAY_LOGIN_SPINNER,DISPLAY_INVENTORY_SPINNER} from '../constants/frontEndConstants'
 /**
  * [loader reducer function to set isLoading state]
  * @param  {Object} state  [state tree of the current reducer]

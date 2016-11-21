@@ -1,4 +1,4 @@
-import { AJAX_CALL, MD_ID, SET_ROLE} from '../constants/appConstants'
+import { AJAX_CALL, MD_ID, SET_ROLE} from '../constants/frontEndConstants'
 
 /**
  * Actions for users page

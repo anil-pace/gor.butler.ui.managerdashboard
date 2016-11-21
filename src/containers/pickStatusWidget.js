@@ -3,7 +3,7 @@ import ReactDOM  from 'react-dom';
 import Tile2x from '../components/tile2x/Tile2x';
 import { connect } from 'react-redux' ;
 import { FormattedMessage,FormattedNumber,FormattedPlural,FormattedRelative } from 'react-intl';
-import {PICK_ICON,GOR_RISK,GOR_NONE,GOR_SUCCESS,TILE_ONTIME,TILE_ALERT} from '../constants/appConstants';
+import {PICK_ICON,GOR_RISK,GOR_NONE,GOR_SUCCESS,TILE_ONTIME,TILE_ALERT} from '../constants/frontEndConstants';
 class PickStatusWidget extends React.Component{
 	/**
 	 * Called once before rendering of component,used to displatch fetch action

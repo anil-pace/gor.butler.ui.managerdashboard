@@ -1,4 +1,4 @@
-import {PPS_DATA} from '../constants/appConstants';
+import {PPS_DATA} from '../constants/frontEndConstants';
 /**
  * @param  {State Object}
  * @param  {Action object}

@@ -1,4 +1,4 @@
-import { ITEM_CATEGORY } from '../constants/appConstants'; 
+import { ITEM_CATEGORY } from '../constants/frontEndConstants'; 
 /**
  * @param  {State Object}
  * @param  {Action object}

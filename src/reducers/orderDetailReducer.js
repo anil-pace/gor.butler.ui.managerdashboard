@@ -1,4 +1,4 @@
-import {ORDER_RECIEVED} from '../constants/appConstants'; 
+import {ORDER_RECIEVED} from '../constants/frontEndConstants'; 
 
 export  function getOrderDetail(state={},action){
   switch (action.type) {
