@@ -82,6 +82,9 @@ class AuditTable extends React.Component {
   
   
   _onSortChange(columnKey, sortDir) {
+      if(columnKey === "status") {
+      columnKey = "statusPriority";
+    }
     var sortIndexes = this._defaultSortIndexes.slice();
     var tableData={
       sortedDataList: new DataListWrapper(sortData(columnKey, sortDir,sortIndexes,this._dataList), this._dataList),
@@ -267,7 +270,7 @@ class AuditTable extends React.Component {
           columnKey="status"
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
-              sortDir={colSortDirs.status}>
+              sortDir={colSortDirs.statusPriority}>
               <FormattedMessage id="audit.table.STATUS" description="STATUS for audit" 
               defaultMessage ="STATUS"/>
               <div className="gorToolHeaderSubText">  </div>

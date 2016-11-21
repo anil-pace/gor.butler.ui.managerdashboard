@@ -11,6 +11,7 @@ import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,ORDER_PAGE, PICK_BEF
 import OrderListTable from './orderListTable';
 import Dropdown from '../../components/dropdown/dropdown'
 import { FormattedMessage } from 'react-intl';
+import Loader from '../../components/loader/Loader'
 
 function processOrders(data, nProps) {
   let progress  = nProps.context.intl.formatMessage({id:"orderList.progress.status", defaultMessage: "In Progress"});
@@ -94,6 +95,7 @@ class OrderListTab extends React.Component{
               'token': sessionStorage.getItem('auth_token'),
               'contentType':'application/json'
           } 
+          this.props.setOrderSpinner(true);
           this.props.currentPage(data.selected+1);
          this.props.getPageData(paginationData);
     }
@@ -182,6 +184,7 @@ class OrderListTab extends React.Component{
     }
     return (
       <div>
+      <Loader isLoading={false} />
       <div className="gor-Orderlist-table" >  
 
       <OrderListTable items={orderDetail} itemNumber={itemNumber} statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter} refreshOption={this.refresh.bind(this)} lastUpdated={updateStatusIntl} refreshList={this.refresh.bind(this)} intlMessg={this.props.intlMessages}/>
@@ -230,6 +233,7 @@ var mapDispatchToProps = function(dispatch){
     getTimeFilter: function(data){ dispatch(getTimeFilter(data)); },
     getPageSize: function(data){ dispatch(getPageSize(data));},
     currentPage: function(data){ dispatch(currentPage(data));},
+    lastRefreshTime: function(data){ dispatch(lastRefreshTime(data));},
     lastRefreshTime: function(data){ dispatch(lastRefreshTime(data));}
   }
 };

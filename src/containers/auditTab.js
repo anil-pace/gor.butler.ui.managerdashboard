@@ -15,7 +15,7 @@ function processAuditData(data, nProps ) {
   let completed  = nProps.context.intl.formatMessage({id:"auditdetail.completed.status", defaultMessage: "Completed"});
   let sku  = nProps.context.intl.formatMessage({id:"auditdetail.sku.prefix", defaultMessage: "SKU"});
   let location  = nProps.context.intl.formatMessage({id:"auditdetail.location.prefix", defaultMessage: "Location"});
-  
+  var priStatus = {"audit_created":2, "audit_pending":3, "audit_waiting":3, "audit_conflicting":3, "audit_started":1, "audit_tasked":1, "audit_aborted":4, "audit_completed":4};
   var auditStatus = {"audit_created":created, "audit_pending":pending, "audit_waiting":pending, "audit_conflicting":pending, "audit_started":progress, "audit_tasked":progress, "audit_aborted":completed, "audit_completed":completed};
   var statusClass = {"Pending": "pending", "Completed":"completed", "In Progress":"progress", "Created":"pending"}
   var auditType = {"sku":sku, "location":location};
@@ -34,6 +34,7 @@ function processAuditData(data, nProps ) {
     }
 
     if(data[i].audit_status) {
+      auditData.statusPriority = priStatus[data[i].audit_status];
       auditData.status = auditStatus[data[i].audit_status]; 
       auditData.statusClass = statusClass[auditData.status];
       if(data[i].audit_status === "audit_created") {
