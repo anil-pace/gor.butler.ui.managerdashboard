@@ -2,17 +2,44 @@
  * Container for Overview tab
  * This will be switched based on tab click
  */
-import React  from 'react';
-import ReactPaginate from 'react-paginate';
-import { connect } from 'react-redux';
-import {getPageData, getStatusFilter, getTimeFilter,getPageSizeOrders,currentPageOrders,lastRefreshTime} from '../../actions/paginationAction';
-import {ORDERS_RETRIEVE} from '../../constants/appConstants';
-import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,ORDER_PAGE, PICK_BEFORE_ORDER_URL, BREACHED_URL} from '../../constants/configConstants';
-import OrderListTable from './orderListTable';
-import Dropdown from '../../components/dropdown/dropdown'
-import { FormattedMessage ,FormattedTime,FormattedDate} from 'react-intl';
+
+ import React  from 'react';
+ import ReactPaginate from 'react-paginate';
+ import { connect } from 'react-redux';
+ import {getPageData, getStatusFilter, getTimeFilter,getPageSizeOrders,currentPageOrders,lastRefreshTime} from '../../actions/paginationAction';
+ import {ORDERS_RETRIEVE} from '../../constants/appConstants';
+ import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,ORDER_PAGE, PICK_BEFORE_ORDER_URL, BREACHED_URL} from '../../constants/configConstants';
+ import OrderListTable from './orderListTable';
+ import Dropdown from '../../components/dropdown/dropdown'
+ import { FormattedMessage ,defineMessages,FormattedDate} from 'react-intl';
 
 
+const messages = defineMessages ({
+    inProgressStatus:{
+      id: 'orderList.progress.status',
+      description: "In 'progress message' for orders",
+      defaultMessage: "In Progress"},
+
+    completedStatus:{
+      id:"orderList.completed.status",
+      description:" 'Completed' status",
+     defaultMessage: "Completed"},
+
+    exceptionStatus:{
+      id:"orderList.exception.status",
+      description:" 'Exception' status",
+     defaultMessage: "Exception"},
+
+    unfulfillableStatus:{
+      id:"orderList.Unfulfillable.status", 
+      description:" 'Unfulfillable' status",
+      defaultMessage: "Unfulfillable"},
+
+      orderListRefreshedat:{
+        id:'orderlist.Refreshed.at', 
+        description:" 'Refreshed' status",
+        defaultMessage:'Refreshed at: '}
+   });
 
 class OrderListTab extends React.Component{
   constructor(props) 
@@ -26,15 +53,21 @@ class OrderListTab extends React.Component{
   }
 
   processOrders(data, nProps) {
-  let progress  = nProps.context.intl.formatMessage({id:"orderList.progress.status", defaultMessage: "In Progress"});
-  let completed  = nProps.context.intl.formatMessage({id:"orderList.completed.status", defaultMessage: "Completed"});
-  let exception = nProps.context.intl.formatMessage({id:"orderList.exception.status", defaultMessage: "Exception"});
-  let unfulfillable  = nProps.context.intl.formatMessage({id:"orderList.Unfulfillable.status", defaultMessage: "Unfulfillable"});
-  var renderOrderData = [], ordersStatus = {'pending':progress, "fulfillable": progress, "completed":completed, "not_fulfillable":unfulfillable, "exception":exception},orderData = {};
-  var breachedStatus = {'pending':1, "fulfillable": 1, "completed":3, "not_fulfillable":2};
-  var unBreachedStatus = {'pending':4, "fulfillable": 4, "completed":6, "not_fulfillable":5};
-  var timeOffset=this.props.timeOffset;
-  if(data.length !== undefined) {
+    var nProps = this;
+    var data = nProps.props.orderData.ordersDetail;
+   let progress  = nProps.context.intl.formatMessage(messages.inProgressStatus);
+    let completed  = nProps.context.intl.formatMessage(messages.completedStatus);
+    let exception = nProps.context.intl.formatMessage(messages.exceptionStatus);
+    let unfulfillable  = nProps.context.intl.formatMessage(messages.unfulfillableStatus); 
+    var renderOrderData = [], ordersStatus = {'pending':progress, "fulfillable": progress, "completed":completed, "not_fulfillable":unfulfillable, "exception":exception},orderData = {};
+    var breachedStatus = {'pending':1, "fulfillable": 1, "completed":3, "not_fulfillable":2};
+    var unBreachedStatus = {'pending':4, "fulfillable": 4, "completed":6, "not_fulfillable":5};
+    var timeOffset=nProps.props.timeOffset;
+    if(!data.length) {
+      //..no data;
+      return;
+    }
+
     for (var i =0; i < data.length; i++) {
       orderData.id = data[i].order_id;
 
@@ -93,7 +126,7 @@ class OrderListTab extends React.Component{
 
       renderOrderData.push(orderData);
       orderData = {};
-    }
+    
   }
   return renderOrderData;
 }
@@ -169,24 +202,19 @@ class OrderListTab extends React.Component{
     this.props.lastRefreshTime((new Date()));
     this.handlePageClick(data)
   }
-
-
     
   render(){
     var updateStatus;
     let updateStatusIntl;
     if(this.props.filterOptions.lastUpdatedOn) {
-      var diff = (new Date())-this.props.filterOptions.lastUpdatedOn;
-      if (diff > 60e3) {
-       updateStatus =  Math.floor(diff / 60e3) ;
-        updateStatusIntl = <FormattedMessage id="orderlistTab.refreshStatusMinutes" description='refresh status for orderlist' defaultMessage='Last Updated {updateStatus} minutes ago' values={{updateStatus: updateStatus?updateStatus:'0'}}/>
-      
-      }
-      else {
-        updateStatus = Math.floor(diff / 1e3) ;
-        updateStatusIntl = <FormattedMessage id="orderlistTab.refreshStatusSeconds" description='refresh status for orderlist' defaultMessage='Last Updated {updateStatus} seconds ago' values={{updateStatus: updateStatus?updateStatus:'0'}}/>
-      
-      }
+      updateStatusIntl = this
+      .context 
+      .intl
+      .formatMessage(messages.orderListRefreshedat)+ ' ' +this
+      .context
+      .intl
+      .formatDate(this.props.filterOptions.lastUpdatedOn, 
+        { hour: 'numeric',minute: 'numeric'});
 
   }
 
