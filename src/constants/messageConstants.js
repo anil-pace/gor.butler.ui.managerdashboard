@@ -119,6 +119,26 @@ export const ERR_AUDIT=(<FormattedMessage id="notify.error.audit.create" descrip
 export const ERR_API=(<FormattedMessage id="notify.error.api" description='Text for unregistered API response' 
             defaultMessage="API response not registered"/>);
 export const ERR_CONNECT=(<FormattedMessage id="notify.error.connection" description='Text for connection refused' 
-            defaultMessage="Connection refused"/>);
+            defaultMessage="Network Failure"/>);
+
+export const ERR_400=(<FormattedMessage id="notify.error.400" description='Text for bad request' 
+            defaultMessage="400 Bad Request"/>);
+export const ERR_401=(<FormattedMessage id="notify.error.401" description='Text for Unauthorizedun' 
+            defaultMessage="401 Unauthorized"/>);
+export const ERR_403=(<FormattedMessage id="notify.error.403" description='Text for Forbidden' 
+            defaultMessage="403 Forbidden"/>);
+export const ERR_405=(<FormattedMessage id="notify.error.405" description='Text for method not allowed' 
+            defaultMessage="405 Method Not Allowed"/>);
+export const ERR_408=(<FormattedMessage id="notify.error.408" description='Text for request timeout' 
+            defaultMessage="408 Request Time-out"/>);
+export const ERR_409=(<FormattedMessage id="notify.error.409" description='Text for conflict' 
+            defaultMessage="409 Conflict"/>);
+export const ERR_500=(<FormattedMessage id="notify.error.500" description='Text for internal server error' 
+            defaultMessage="500 Internal Servor Error"/>);
+export const ERR_502=(<FormattedMessage id="notify.error.502" description='Text for bad gateway' 
+            defaultMessage="502 Bad Gateway"/>);
+//Inventory Tab messages
+export const HISTOGRAM_NO_DATA_TEXT = (<FormattedMessage id="inventory.histogram.noDataText" description="Inventory Histogram No Data Text" 
+                    defaultMessage ="No Stock Found"/>);
 
 

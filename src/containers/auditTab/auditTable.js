@@ -373,21 +373,19 @@ class AuditTable extends React.Component {
     return (
     <div> {tableRenderer} </div>
     );
+  }}
+
+  function mapStateToProps(state, ownProps){
+    return {
+      tableData: state.currentTableState.currentTableState || [],
+    };
   }
-}
 
-function mapStateToProps(state, ownProps){
 
-  return {
-    tableData: state.currentTableState.currentTableState || [],
+  var mapDispatchToProps = function(dispatch){
+    return {
+      currentTableState: function(data){ dispatch(currentTableState(data)); }
+    }
   };
-}
 
-
-var mapDispatchToProps = function(dispatch){
-  return {
-    currentTableState: function(data){ dispatch(currentTableState(data)); }
-  }
-};
-
-export default connect(mapStateToProps,mapDispatchToProps)(Dimensions()(AuditTable));
+  export default connect(mapStateToProps,mapDispatchToProps)(Dimensions()(AuditTable));

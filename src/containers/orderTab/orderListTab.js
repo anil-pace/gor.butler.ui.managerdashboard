@@ -10,14 +10,39 @@ import {ORDERS_RETRIEVE,GOR_BREACHED,GOR_EXCEPTION} from '../../constants/appCon
 import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,ORDER_PAGE, PICK_BEFORE_ORDER_URL, BREACHED_URL,UPDATE_TIME_HIGH,UPDATE_TIME_LOW,EXCEPTION_TRUE} from '../../constants/configConstants';
 import OrderListTable from './orderListTable';
 import Dropdown from '../../components/dropdown/dropdown'
-import { FormattedMessage ,FormattedTime,FormattedDate} from 'react-intl';
+import { FormattedMessage ,defineMessages,FormattedDate} from 'react-intl';
 
+const messages = defineMessages ({
+    inProgressStatus:{
+      id: 'orderList.progress.status',
+      description: "In 'progress message' for orders",
+      defaultMessage: "In Progress"},
 
+    completedStatus:{
+      id:"orderList.completed.status",
+      description:" 'Completed' status",
+     defaultMessage: "Completed"},
 
-class OrderListTab extends React.Component{
+    exceptionStatus:{
+      id:"orderList.exception.status",
+      description:" 'Exception' status",
+     defaultMessage: "Exception"},
+
+    unfulfillableStatus:{
+      id:"orderList.Unfulfillable.status", 
+      description:" 'Unfulfillable' status",
+      defaultMessage: "Unfulfillable"},
+
+      orderListRefreshedat:{
+        id:'orderlist.Refreshed.at', 
+        description:" 'Refreshed' status",
+        defaultMessage:'Refreshed at: '}
+   });
+
+ class OrderListTab extends React.Component{
   constructor(props) 
   {
-      super(props);
+    super(props);
   } 
   componentDidMount() {
     var data = {};
@@ -26,15 +51,18 @@ class OrderListTab extends React.Component{
   }
 
   processOrders(data, nProps) {
-  let progress  = nProps.context.intl.formatMessage({id:"orderList.progress.status", defaultMessage: "In Progress"});
-  let completed  = nProps.context.intl.formatMessage({id:"orderList.completed.status", defaultMessage: "Completed"});
-  let exception = nProps.context.intl.formatMessage({id:"orderList.exception.status", defaultMessage: "Exception"});
-  let unfulfillable  = nProps.context.intl.formatMessage({id:"orderList.Unfulfillable.status", defaultMessage: "Unfulfillable"});
-  var renderOrderData = [], ordersStatus = {'pending':progress, "fulfillable": progress, "completed":completed, "not_fulfillable":unfulfillable, "exception":exception},orderData = {};
-  var breachedStatus = {'pending':1, "fulfillable": 1, "completed":3, "not_fulfillable":2};
-  var unBreachedStatus = {'pending':4, "fulfillable": 4, "completed":6, "not_fulfillable":5};
-  var timeOffset=this.props.timeOffset;
-  if(data.length !== undefined) {
+   let progress  = nProps.context.intl.formatMessage(messages.inProgressStatus);
+    let completed  = nProps.context.intl.formatMessage(messages.completedStatus);
+    let exception = nProps.context.intl.formatMessage(messages.exceptionStatus);
+    let unfulfillable  = nProps.context.intl.formatMessage(messages.unfulfillableStatus); 
+    var renderOrderData = [], ordersStatus = {'pending':progress, "fulfillable": progress, "completed":completed, "not_fulfillable":unfulfillable, "exception":exception},orderData = {};
+    var breachedStatus = {'pending':1, "fulfillable": 1, "completed":3, "not_fulfillable":2};
+    var unBreachedStatus = {'pending':4, "fulfillable": 4, "completed":6, "not_fulfillable":5};
+    var timeOffset=this.props.timeOffset;
+    if(!data.length) {
+      //..no data;
+      return;
+    }
     for (var i =0; i < data.length; i++) {
       orderData.id = data[i].order_id;
 
@@ -53,23 +81,26 @@ class OrderListTab extends React.Component{
         orderData.statusClass = data[i].status;
         orderData.statusPriority = unBreachedStatus[data[i].status];
       }
-      //orderData.recievedTime = (data[i].create_time.substring(4));
       orderData.recievedTime = <FormattedDate value = {data[i].create_time}
-                                timeZone={timeOffset}
-                                 year='numeric'
-                                  month='short'
-                                  day='2-digit'
-                                  hour="2-digit"
-                                  minute="2-digit"
-                                  second="2-digit"
-                                  timeZoneName="long"
-                                />;//orderData.recievedTime.substring(0, orderData.recievedTime.length - 4)
+      timeZone={timeOffset}
+      year='numeric'
+      month='short'
+      day='2-digit'
+      hour="2-digit"
+      minute="2-digit"
+      />
       if(data[i].pick_before_time === null) {
         orderData.pickBy = "--";
       }
       else {
-        orderData.pickBy = data[i].pick_before_time.substring(4);
-        orderData.pickBy = orderData.pickBy.substring(0, orderData.pickBy.length - 4)
+        orderData.pickBy =<FormattedDate value = {data[i].pick_before_time}
+        timeZone={timeOffset}
+        year='numeric'
+        month='short'
+        day='2-digit'
+        hour="2-digit"
+        minute="2-digit"
+        />;
       }
 
       if(data[i].completed_orderlines === data[i].total_orderlines) {
@@ -78,30 +109,28 @@ class OrderListTab extends React.Component{
       else {
         orderData.orderLine = data[i].completed_orderlines + "/" + data[i].total_orderlines;
       }
-      console.log(timeOffset);
-      orderData.completedTime = <FormattedDate value = {data[i].update_time}
-                                timeZone={timeOffset}
-                                 year='numeric'
-                                  month='short'
-                                  day='2-digit'
-                                  hour="2-digit"
-                                  minute="2-digit"
-                                  second="2-digit"
-                                  timeZoneName="long"
-                                  
-                                />;
+      if (data[i].status === "completed"){
+        orderData.completedTime = <FormattedDate value = {data[i].update_time}
+        timeZone={timeOffset}
+        year='numeric'
+        month='short'
+        day='2-digit'
+        hour="2-digit"
+        minute="2-digit"
+        />;
+      }else{
+        orderData.completedTime = "--";
+      }
 
       renderOrderData.push(orderData);
       orderData = {};
     }
+    
+    return renderOrderData;
   }
-  return renderOrderData;
-}
-   // componentWillReceiveProps(nextProps) {
-   //   this.refresh();
-   // }
 
-    handlePageClick = (data) => {
+
+  handlePageClick = (data) => {
     var url;
     if(data.url === undefined) {
       url = API_URL + ORDERS_URL + ORDER_PAGE + (data.selected+1) + "&PAGE_SIZE=25";
@@ -111,20 +140,20 @@ class OrderListTab extends React.Component{
     else {
       url = data.url;
     }
-   
+
     let paginationData={
-              'url':url,
-              'method':'GET',
-              'cause': ORDERS_RETRIEVE,
-              'token': this.props.auth_token,
-              'contentType':'application/json'
-          } 
-          this.props.currentPage(data.selected+1);
-         this.props.getPageData(paginationData);
-    }
+      'url':url,
+      'method':'GET',
+      'cause': ORDERS_RETRIEVE,
+      'token': this.props.auth_token,
+      'contentType':'application/json'
+    } 
+    this.props.currentPage(data.selected+1);
+    this.props.getPageData(paginationData);
+  }
 
 
-   refresh() {
+  refresh() {
     var convertTime = {"oneHourOrders": 1, "twoHourOrders": 2, "sixHourOrders": 6, "twelveHourOrders": 12, "oneDayOrders": 24};
     var status = this.props.filterOptions.statusFilter, timeOut = this.props.filterOptions.timeFilter,currentTime,prevTime;
     var data = {}, appendStatusUrl="", appendTimeUrl="", appendPageSize="";
@@ -142,7 +171,7 @@ class OrderListTab extends React.Component{
 
     if((status === undefined || status === "all")) {
       appendStatusUrl = "";
-     }
+    }
 
     else if(this.props.filterOptions.statusFilter === "breached") {
       currentTime = new Date();
@@ -168,78 +197,73 @@ class OrderListTab extends React.Component{
     data.url = data.url + appendStatusUrl+appendTimeUrl+appendPageSize;
     this.props.lastRefreshTime((new Date()));
     this.handlePageClick(data)
-  }
+
+}
 
 
-    
-  render(){
-    var updateStatus;
-    let updateStatusIntl;
-    if(this.props.filterOptions.lastUpdatedOn) {
-      var diff = (new Date())-this.props.filterOptions.lastUpdatedOn;
-      if (diff > 60e3) {
-       updateStatus =  Math.floor(diff / 60e3) ;
-        updateStatusIntl = <FormattedMessage id="orderlistTab.refreshStatusMinutes" description='refresh status for orderlist' defaultMessage='Last Updated {updateStatus} minutes ago' values={{updateStatus: updateStatus?updateStatus:'0'}}/>
-      
-      }
-      else {
-        updateStatus = Math.floor(diff / 1e3) ;
-        updateStatusIntl = <FormattedMessage id="orderlistTab.refreshStatusSeconds" description='refresh status for orderlist' defaultMessage='Last Updated {updateStatus} seconds ago' values={{updateStatus: updateStatus?updateStatus:'0'}}/>
-      
-      }
 
-  }
-
-  //let updateStatusIntl = <FormattedMessage id="orderlistTab.refreshStatus" description='refresh status for orderlist' defaultMessage='Last Updated {} seconds ago' values={{totalOrder: totalOrder?totalOrder:'0'}}/>
-               
+render(){
+  var updateStatus;
   
-    
-    var itemNumber = 6, table, pages;
-     const ordersByStatus = [
-    { value: '25', label: '25' },
-    { value: '50', label: '50' },
-    { value: '100', label: '100' },
-    { value: '250', label: '250' },
-    { value: '500', label: '500' },
-    { value: '1000', label: '1000' }
-    ];
-    var currentPage = this.props.filterOptions.currentPage, totalPage = this.props.orderData.totalPage;
-    var orderDetail;
-    if(this.props.orderData.ordersDetail !== undefined) {
-      orderDetail = this.processOrders(this.props.orderData.ordersDetail, this);
-    }
-    return (
-      <div>
-      <div className="gor-Orderlist-table" >  
+   let updateStatusIntl;
+  if(this.props.filterOptions.lastUpdatedOn) {
+    updateStatusIntl = this
+    .context 
+    .intl
+    .formatMessage(messages.orderListRefreshedat)+ ' ' +this
+    .context
+    .intl
+    .formatDate(this.props.filterOptions.lastUpdatedOn, 
+      { hour: 'numeric',minute: 'numeric'});
+  }           
 
-      <OrderListTable items={orderDetail} itemNumber={itemNumber} statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter} refreshOption={this.refresh.bind(this)} lastUpdated={updateStatusIntl} refreshList={this.refresh.bind(this)} intlMessg={this.props.intlMessages}/>
-      
-      <div className="gor-pageNum">
-        <Dropdown  styleClass={'gor-Page-Drop'}  items={ordersByStatus} currentState={ordersByStatus[0]} optionDispatch={this.props.getPageSizeOrders} refreshList={this.refresh.bind(this)}/>
-      </div>
-      <div className="gor-paginate">
-        <div className = "gor-paginate-state"> 
-         <FormattedMessage id="orderlistTab.pageNum" description='page num orderlist' defaultMessage='Page {currentPage} of {totalPage}' values={{currentPage: currentPage?currentPage:'0', totalPage: totalPage?totalPage:'0'}}/>
-      
-        </div>
-        <div id={"react-paginate"}>
-          <ReactPaginate previousLabel={"<<"}
-                       nextLabel={">>"}
-                       breakClassName={"break-me"}
-                       pageNum={this.props.orderData.totalPage}
-                       marginPagesDisplayed={1}
-                       pageRangeDisplayed={1}
-                       clickCallback={this.handlePageClick.bind(this)}
-                       containerClassName={"pagination"}
-                       subContainerClassName={"pages pagination"}
-                       activeClassName={"active"} />
-        </div>
-      </div>
-      </div>
-      </div>
-      
-    );
+
+  var itemNumber = 6, table, pages;
+  const ordersByStatus = [
+  { value: '25', label: '25' },
+  { value: '50', label: '50' },
+  { value: '100', label: '100' },
+  { value: '250', label: '250' },
+  { value: '500', label: '500' },
+  { value: '1000', label: '1000' }
+  ];
+  var currentPage = this.props.filterOptions.currentPage, totalPage = this.props.orderData.totalPage;
+  var orderDetail;
+  if(this.props.orderData.ordersDetail !== undefined) {
+    orderDetail = this.processOrders(this.props.orderData.ordersDetail, this);
   }
+  return (
+  <div>
+  <div className="gor-Orderlist-table" >  
+
+  <OrderListTable items={orderDetail} itemNumber={itemNumber} statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter} refreshOption={this.refresh.bind(this)} lastUpdated={updateStatusIntl} refreshList={this.refresh.bind(this)} intlMessg={this.props.intlMessages}/>
+
+  <div className="gor-pageNum">
+  <Dropdown  styleClass={'gor-Page-Drop'}  items={ordersByStatus} currentState={ordersByStatus[0]} optionDispatch={this.props.getPageSizeOrders} refreshList={this.refresh.bind(this)}/>
+  </div>
+  <div className="gor-paginate">
+  <div className = "gor-paginate-state"> 
+  <FormattedMessage id="orderlistTab.pageNum" description='page num orderlist' defaultMessage='Page {currentPage} of {totalPage}' values={{currentPage: currentPage?currentPage:'0', totalPage: totalPage?totalPage:'0'}}/>
+
+  </div>
+  <div id={"react-paginate"}>
+  <ReactPaginate previousLabel={"<<"}
+  nextLabel={">>"}
+  breakClassName={"break-me"}
+  pageNum={this.props.orderData.totalPage}
+  marginPagesDisplayed={1}
+  pageRangeDisplayed={1}
+  clickCallback={this.handlePageClick.bind(this)}
+  containerClassName={"pagination"}
+  subContainerClassName={"pages pagination"}
+  activeClassName={"active"} />
+  </div>
+  </div>
+  </div>
+  </div>
+
+  );
+}
 }
 
 function mapStateToProps(state, ownProps){

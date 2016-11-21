@@ -20,7 +20,7 @@ class Emergency extends React.Component{
               <span className='gor-error-white'></span><span>Systemwide emergency stop</span>
            </div>
               <div className='gor-emergency-body'>
-                <span>The butler system is now stopped by a hard emergency.</span>
+                <span>The butler system is now stopped by a {this.props.emergency_data} emergency.</span>
                 <div>System reset required before returning to operation</div>
                 <div className='gor-emergency-details'>
                   <div>Stoppped:</div>

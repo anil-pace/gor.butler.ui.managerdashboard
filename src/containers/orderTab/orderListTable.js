@@ -251,7 +251,7 @@ class OrderListTable extends React.Component {
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.recievedTime}>
               <FormattedMessage id="orderlist.table.operatingMode" description="recievedTime for Orders" 
-              defaultMessage ="RECIEVED TIME"/>
+              defaultMessage ="RECEIVED TIME"/>
               <div className="gorToolHeaderSubText"> </div>
             </SortHeaderCell>
           }

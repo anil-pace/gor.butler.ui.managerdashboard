@@ -34,7 +34,7 @@ const ajaxMiddleware = (function(){
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
           if (httpRequest.status >= 200 && httpRequest.status <= 300) {
             var response=JSON.parse(httpRequest.response);
-            AjaxParse(store,response,params.cause);
+            AjaxParse(store,response,params.cause,httpRequest.status);
           }
           else if(httpRequest.status >= 400 &&  httpRequest.status <= 500){
             console.log('Request not processed');
@@ -47,16 +47,19 @@ const ajaxMiddleware = (function(){
             }
             else
             {
-               var response=JSON.parse(httpRequest.response);
-               AjaxParse(store,response,params.cause);          
+               var response=JSON.parse(httpRequest.response,httpRequest.status);
+               AjaxParse(store,response,params.cause,httpRequest.status);          
             }
          } 
          else
          {    
-               ShowError(store,params.cause);
+               ShowError(store,params.cause,httpRequest.status);
          }        
       }
     };
+    httpRequest.onerror = function (err){
+               ShowError(store,params.cause,httpRequest.status);
+    }
     httpRequest.open(params.method, params.url);
     httpRequest.setRequestHeader('Content-Type', params.contentType || "text/html");
     httpRequest.setRequestHeader('Accept', params.accept || "text/html");

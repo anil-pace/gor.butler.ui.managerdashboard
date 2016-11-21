@@ -247,13 +247,13 @@ Login.contextTypes = {
 
 
 function mapStateToProps(state, ownProps){
+  console.log(state);
 	return {
-        loginAuthorized:state.authLogin.loginAuthorized,
+        loginAuthorized:state.authLogin.loginAuthorized ,
         connectionActive:state.authLogin.connectionActive,
-        auth_token: state.authLogin.auth_token,
-        userName: state.authLogin.username,
-        sLang: state.intl.locale,
-        intlMessages: state.intl.messages,
+        auth_token: state.authLogin.auth_token || null,
+        sLang: state.intl.locale || null,
+        intlMessages: state.intl.messages || {},
         idInfo: state.appInfo.idInfo||{},
         loginPassCheck: state.appInfo.passwordInfo||{},
         loginSpinner:state.spinner.loginSpinner         

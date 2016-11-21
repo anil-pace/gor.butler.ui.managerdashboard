@@ -3,6 +3,18 @@ import Histogram from '../../components/graphd3/histogram';
 import {setInventoryDate} from '../../actions/inventoryActions';
 import {INVENTORY_HISTORY_DAYS_COUNT,INVENTORY_HISTOGRAM_CONFIG} from '../../constants/appConstants';
 import { connect } from 'react-redux'; 
+import { defineMessages } from 'react-intl';
+
+const messages = defineMessages({
+    noStock: {
+        id: 'inventory.histogram.noDataText',
+        description: 'Message for No stock',
+        defaultMessage: 'No Stock Found',
+    },
+
+
+});
+
 
 class InventoryHistogram extends React.Component{
   constructor(props) 
@@ -53,10 +65,13 @@ class InventoryHistogram extends React.Component{
    }
    
    render() {
-   var histogramData = this._processData();
+    var _this = this;
+   var histogramData = _this._processData();//this.context.intl.formatMessage({id:"inventory.histogram.noDataText", defaultMessage: config.noDataText}
    var config = Object.assign({},INVENTORY_HISTOGRAM_CONFIG)
    config.noData = histogramData.length ? histogramData[histogramData.length-1].noData : false;
-   config.noDataText=config.noData ? "No Stock Found" : "" ;
+   config.noDataText= _this.context.intl.formatMessage({id:"inventory.histogram.noDataText", defaultMessage: 'No Stock Found'});
+   config.today = _this.context.intl.formatRelative(Date.now()- 1000 * 60 * 60 ,'day');
+   config.breakMonth = _this.context.intl.formatDate(Date.now(), {month: 'short'}); 
    return (
      <div>
        <Histogram  config={config} histogramData = {histogramData} onClickCallBack={this._onClickCallBack.bind(this)}/>
@@ -69,6 +84,9 @@ InventoryHistogram.propTypes={
   histogramData:React.PropTypes.array,
   currentDate:React.PropTypes.number,
   hasDataChanged:React.PropTypes.number
+}
+InventoryHistogram.contextTypes ={
+ intl:React.PropTypes.object.isRequired
 }
 
 function mapDispatchToProps(dispatch){

@@ -126,7 +126,8 @@ class MultiLineGraph extends React.Component{
         g.append("g")     
         .attr("class", "y axis")
         .call(yAxis);
-        if(!noData){
+        
+    if(!noData){
         g.selectAll("circle.line")
         .data(dataArray)
         .enter().append("svg:circle")
@@ -146,7 +147,11 @@ class MultiLineGraph extends React.Component{
         .attr("r", 3.5);  
     }
     else{
-      svg.insert("text",":first-child").attr("x",width/2).attr("y",height/2).text("No Item Movement" || "");
+      svg
+      .insert("text",":first-child")
+      .attr("x",width/2)
+      .attr("y",height/2)
+      .text(config.noDataText);
     }
         
         this.setState({d3: node});
@@ -180,6 +185,7 @@ class MultiLineGraph extends React.Component{
 MultiLineGraph.contextTypes = {
   intl: React.PropTypes.object.isRequired
 }
+
 
 
 export default Dimensions()(MultiLineGraph) ;

@@ -17,7 +17,6 @@ export const WS_CONNECTED = "WS_CONNECTED";
 export const WS_DISCONNECT = "WS_DISCONNECT";
 export const WS_ONMESSAGE = "WS_ONMESSAGE";
 export const WS_ONSEND = "WS_ONSEND";
-export const WS_INIT = "WS_INIT";
 export const WS_SUCCESS="Sucessfully logged in";
 export const WS_END="WS_END";
 export const WS_MOCK="WS_MOCK";
@@ -87,11 +86,11 @@ export const PPS_TAB = "Pick Put Stations";
 export const ORDER_LIST = "Order List";
 export const WAVES = "Waves";
 export const TAB_CLASS = {
-	overview:"gorMainBlock", 
-	system:"gorMainBlock",
-	orders:"gorMainBlock", 
-	inventory:"gorMainBlock", 
-	users:"gorMainBlock"
+	overview:"gor-main-block", 
+	system:"gor-main-block",
+	orders:"gor-main-block", 
+	inventory:"gor-main-block", 
+	users:"gor-main-block"
 };
 
 
@@ -267,14 +266,14 @@ export const INV_HIST_LEGEND_CONFIG = {
 				xpos:0,
 				xIncrement:20,
 				ypos:20,
-				containerWidth:"45%",
+				containerWidth:"55%",
 				containerHeight:"60px"
 			}
 export const INV_LINE_LEGEND_CONFIG = {
 				xpos:0,
 				xIncrement:105,
 				ypos:25,
-				containerWidth:"72%",
+				containerWidth:"90%",
 				containerHeight:"60px"
 			}
 
@@ -287,7 +286,8 @@ export const INVENTORY_HISTOGRAM_CONFIG = {
 	outerTickSize:0,
 	defaultMaxYAxis:100000,
 	ticks:3,
-	showMonthBreak:true
+	showMonthBreak:true,
+	noDataText:'No Stock Found'
 }
 export const INVENTORY_LINE_CONFIG = {
 	height:200,
@@ -297,7 +297,8 @@ export const INVENTORY_LINE_CONFIG = {
 	outerTickSize:0,
 	defaultMaxYAxis:100000,
 	ticks:3,
-	showMonthBreak:true
+	showMonthBreak:true,
+	noDataText:'No Item Movement'
 }
 export const DISPLAY_INVENTORY_SPINNER = 'DISPLAY_INVENTORY_SPINNER';
 export const DISPLAY_INVENTORY_HISTORY = 'DISPLAY_INVENTORY_HISTORY';
@@ -335,7 +336,7 @@ export const LEGEND_DEFAULT = LEGEND_RECT;
 
 
 export const EN='en';
-export const JP='ja';
+export const JA='ja';
 // Style class constants
 export const TYPING='gor-login-field gor-input-ok gor-input-typing';
 export const FILL_BACK='gor-fill-back';
@@ -347,6 +348,9 @@ export const GOR_PENDING="pending";
 export const GOR_PROGRESS="progress";
 export const GOR_BREACHED="breached";
 export const GOR_EXCEPTION="gor-exception";
+export const GOR_OFFLINE='gor-offline';
+export const GOR_ONLINE='gor-online';
+export const GOR_NORMAL_TAB='gor-normal-tab';
 //Icons
 export const PICK_ICON=' iPick';
 export const STOCK_ICON="iStock";
