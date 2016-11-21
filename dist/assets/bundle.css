@@ -746,14 +746,14 @@ body {
   height: 100vh;
 }
 
-.gorTabs .gorTab.gorContainer {
+.gor-tabs .gorTab.gorContainer {
   background-color: #4d5055;
   width: auto;
   display: inline-block;
   height: 60px;
 }
 
-.gorTabs .gorTab .gorMainBlock {
+.gor-tabs .gorTab .gor-main-block {
   width: 150px;
   padding-right: 20px;
   padding-left: 20px;
@@ -764,24 +764,24 @@ body {
   vertical-align: middle;
 }
 
-.gorTabs .gorTab .gorMainBlock:hover {
+.gor-tabs .gorTab .gor-main-block:hover {
   background-color: #323539;
 }
 
-.gorTabs .gorTab .gorMainBlock.sel {
+.gor-tabs .gorTab .gor-main-block.sel {
   background-color: #323539;
 }
 
-.gorTabs .gorTab .gorMainBlock .gor-normal-tab {
+.gor-tabs .gorTab .gor-main-block .gor-normal-tab {
   background: #4d5055;
 }
 
-.gorTabs .gorTab .gorInline {
+.gor-tabs .gorTab .gorInline {
   display: inline-block;
   width: 100%;
 }
 
-.gorTabs .gorTab .gor-upperText {
+.gor-tabs .gorTab .gor-upperText {
   font-family: "source sans pro";
   font-size: 18px;
   font-weight: bold;
@@ -791,58 +791,58 @@ body {
   width: 75%;
 }
 
-.gorTabs .gorTab .gorSubText {
+.gor-tabs .gorTab .gorSubText {
   font-size: 14px;
   padding-top: 0px;
   font-weight: bold;
 }
 
-.gorTabs .gorTab .gorOverview {
+.gor-tabs .gorTab .gorOverview {
   font-family: "source sans pro";
   color: #ffffff;
 }
 
-.gorTabs .gorTab .gorOnline {
+.gor-tabs .gorTab .gor-online {
   font-family: "source sans pro";
   color: #10c469;
 }
 
-.gorTabs .gorTab .gor-alert {
+.gor-tabs .gorTab .gor-alert {
   color: #ffffff;
 }
 
-.gorTabs .gorTab .gorOffline {
+.gor-tabs .gorTab .gor-offline {
   font-family: "source sans pro";
   color: #9C9FA0;
 }
 
-.gorTabs .gorTab .gorEvent {
+.gor-tabs .gorTab .gorEvent {
   font-family: "source sans pro";
   color: #27aae1;
 }
 
-.gorTabs .gorTab .gorRisk {
+.gor-tabs .gorTab .gorRisk {
   font-family: "source sans pro";
   color: #f99405;
 }
 
-.gorTabs .gorTab .gorError {
+.gor-tabs .gorTab .gorError {
   font-family: "source sans pro";
   color: #fc3838;
 }
 
-.gorTabs .gorTab .gorEmergency {
+.gor-tabs .gorTab .gorEmergency {
   font-family: "source sans pro";
   color: #ffffff;
   background: #fc3838;
 }
 
-.gorTabs .gorTab .gorIconsInline {
+.gor-tabs .gorTab .gorIconsInline {
   display: inline-block;
   vertical-align: super;
 }
 
-.gorTabs .gorTab .gorInlineDisplay {
+.gor-tabs .gorTab .gorInlineDisplay {
   display: inline-block;
   padding-right: 16px;
 }
@@ -999,7 +999,7 @@ body {
   height: 90%;
 }
 
-.gorTabs.gorMainBlock {
+.gor-tabs.gor-main-block {
   background-color: #4d5055;
 }
 
@@ -2971,7 +2971,7 @@ progress::-moz-progress-bar {
   color: #4d5055;
 }
 
-.gorSubTab .gorMainBlock:hover {
+.gorSubTab .gor-main-block:hover {
   background-color: #999999;
   color: #ffffff;
 }
@@ -2981,7 +2981,7 @@ progress::-moz-progress-bar {
   width: 100%;
 }
 
-.gorSubTab .gorMainBlock {
+.gorSubTab .gor-main-block {
   padding-right: 20px;
   padding-left: 20px;
   height: 50px;
@@ -2999,7 +2999,7 @@ progress::-moz-progress-bar {
   font-weight: bold;
 }
 
-.gorSubTab .gorMainBlockSelect {
+.gorSubTab .gor-main-blockSelect {
   padding-right: 20px;
   padding-left: 20px;
   height: 50px;
@@ -3892,4 +3892,48 @@ path {
   stroke: grey;
   stroke-width: 1;
   shape-rendering: crispEdges;
+}
+
+.gor-emergency {
+  width: 60%;
+  min-height: 31.25rem;
+  background: #ffffff;
+  border-radius: 10px;
+  font-size: 20px;
+  margin: auto;
+  clear: both;
+}
+
+.gor-emergency .gor-emergency-heading {
+  font-family: 'Source Sans Pro Regular', sans-serif;
+  font-size: 30px;
+  background: #fc3838;
+  color: #ffffff;
+  padding: 2.5rem;
+  min-height: 2.5rem;
+}
+
+.gor-emergency .gor-emergency-body {
+  width: 70%;
+  padding: 2.5rem;
+  font-family: 'Source Sans Pro Regular', sans-serif;
+  font-size: 22px;
+  color: #000000;
+  line-height: 1.875rem;
+}
+
+.gor-emergency .gor-emergency-body .gor-emergency-details {
+  padding-top: 1.875rem;
+  padding-bottom: 1.875rem;
+}
+
+.gor-emergency .gor-emergency-close {
+  font-family: 'Source Sans Pro Semibold', sans-serif;
+  background: #efefef;
+  min-width: 20%;
+  height: 2.8125rem;
+  font-size: 18px;
+  border-radius: 3px;
+  border: 1px solid #AAAAAA;
+  margin-left: 40%;
 }

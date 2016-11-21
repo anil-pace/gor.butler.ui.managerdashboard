@@ -1,4 +1,4 @@
-import {WS_CONNECTED,WS_ONMESSAGE,WS_INIT,WS_END} from '../constants/appConstants';
+import {WS_CONNECTED,WS_ONMESSAGE,WS_END} from '../constants/appConstants';
 
 /**
  * @param  {State Object}
@@ -26,14 +26,7 @@ export  function recieveSocketActions(state={},action){
       // Handshaking and login successful message.
           return Object.assign({}, state, {
           "socketAuthorized": true,
-          "initDataSent":false
-        })
-      break;
-    case WS_INIT:
-      // Initiate data sending
-          return Object.assign({}, state, {
-            "socketConnected": true,
-            "initDataSent":true
+          "initDataSent":true
         })
       break;
 	  default:

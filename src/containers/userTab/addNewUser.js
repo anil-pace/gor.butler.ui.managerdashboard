@@ -27,7 +27,7 @@ class AddUser extends React.Component{
                 'cause':GET_ROLES,
                 'contentType':'application/json',
                 'accept':'application/json',
-                'token':sessionStorage.getItem('auth_token')
+                'token':this.props.auth_token
             }
         this.props.userRequest(userData);
   }

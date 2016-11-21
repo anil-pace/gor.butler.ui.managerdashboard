@@ -1,0 +1,41 @@
+@import '../abstracts/functions';
+
+.gor-emergency{
+	width:60%;
+	min-height:calculateRem(500px);
+	background:#ffffff;
+	border-radius:10px;
+	font-size:20px;
+	margin:auto;
+	clear:both;
+	.gor-emergency-heading{
+		font-family:'Source Sans Pro Regular', sans-serif;
+	    font-size:30px;
+		background:#fc3838;
+		color:#ffffff;
+		padding:calculateRem(40px);
+		min-height:calculateRem(40px);
+	}
+	.gor-emergency-body{
+		width:70%;
+		padding:calculateRem(40px);
+		font-family:'Source Sans Pro Regular', sans-serif;
+	    font-size:22px;		
+		color:#000000;
+		line-height:calculateRem(30px);
+		.gor-emergency-details{
+		 	padding-top:calculateRem(30px);
+		 	padding-bottom:calculateRem(30px);
+		}
+	}
+	.gor-emergency-close{
+		font-family:'Source Sans Pro Semibold', sans-serif;
+	    background:#efefef;
+	    min-width:20%;
+	    height:calculateRem(45px);
+	    font-size:18px;
+	    border-radius:3px;
+	    border:1px solid #AAAAAA;
+		margin-left:40%;
+	}
+}

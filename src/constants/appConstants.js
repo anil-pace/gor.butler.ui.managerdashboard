@@ -17,7 +17,6 @@ export const WS_CONNECTED = "WS_CONNECTED";
 export const WS_DISCONNECT = "WS_DISCONNECT";
 export const WS_ONMESSAGE = "WS_ONMESSAGE";
 export const WS_ONSEND = "WS_ONSEND";
-export const WS_INIT = "WS_INIT";
 export const WS_SUCCESS="Sucessfully logged in";
 export const WS_END="WS_END";
 export const WS_MOCK="WS_MOCK";
@@ -87,11 +86,11 @@ export const PPS_TAB = "Pick Put Stations";
 export const ORDER_LIST = "Order List";
 export const WAVES = "Waves";
 export const TAB_CLASS = {
-	overview:"gorMainBlock", 
-	system:"gorMainBlock",
-	orders:"gorMainBlock", 
-	inventory:"gorMainBlock", 
-	users:"gorMainBlock"
+	overview:"gor-main-block", 
+	system:"gor-main-block",
+	orders:"gor-main-block", 
+	inventory:"gor-main-block", 
+	users:"gor-main-block"
 };
 
 
@@ -337,7 +336,7 @@ export const LEGEND_DEFAULT = LEGEND_RECT;
 
 
 export const EN='en';
-export const JP='ja';
+export const JA='ja';
 // Style class constants
 export const TYPING='gor-login-field gor-input-ok gor-input-typing';
 export const FILL_BACK='gor-fill-back';
@@ -347,6 +346,11 @@ export const GOR_NONE='gor-none';
 export const GOR_SUCCESS='gor-success';
 export const GOR_PENDING="pending";
 export const GOR_PROGRESS="progress";
+export const GOR_BREACHED="breached";
+export const GOR_EXCEPTION="gor-exception";
+export const GOR_OFFLINE='gor-offline';
+export const GOR_ONLINE='gor-online';
+export const GOR_NORMAL_TAB='gor-normal-tab';
 //Icons
 export const PICK_ICON=' iPick';
 export const STOCK_ICON="iStock";
