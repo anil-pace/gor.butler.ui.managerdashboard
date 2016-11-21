@@ -9,7 +9,7 @@ This is the repo for the 'Manager Dashboard V3.0' for Butler Management System.
 * git clone this repo to your local folder
 * cd into the repo folder
 * execute 'git install -g' from the repo folder
-* execute 'build-md -t DEV -m false' for dev build
+* execute 'build-md -t DEV' for dev build
 * in browser open up 'http://localhost:8080/webpack-dev-server/' (Note: if you have any other webserver installed, you might have to stop the webserver)
 
 * Deployment instructions
