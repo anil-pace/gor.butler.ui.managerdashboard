@@ -4,7 +4,6 @@
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
   left: 0;
-  /*overflow: hidden;*/
   position: absolute;
   top: 0;
   white-space: nowrap;
@@ -28,7 +27,10 @@
   border-width: 0 1px 0 0;
   box-sizing: border-box;
   display: block;
+<<<<<<< 6c4b1d4e072cf76101469e9c232c5a74086bb116
   /*overflow: hidden;*/
+=======
+>>>>>>> temp
   position: absolute;
   white-space: normal;
   background: grey;
@@ -106,6 +108,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 }
 
 
+<<<<<<< 6c4b1d4e072cf76101469e9c232c5a74086bb116
 .fixedDataTableLayout_main {
   border-style: solid;
   border-width: 1px;
@@ -114,6 +117,8 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   position: relative;
 }
 
+=======
+>>>>>>> temp
 .fixedDataTableLayout_header,
 .fixedDataTableLayout_hasBottomBorder {
   border-bottom-style: solid;
@@ -139,7 +144,10 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 }
 
 .fixedDataTableLayout_rowsContainer {
+<<<<<<< 6c4b1d4e072cf76101469e9c232c5a74086bb116
   /*overflow: hidden;*/
+=======
+>>>>>>> temp
   position: relative;
 }
 
@@ -160,7 +168,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 
 .fixedDataTableRowLayout_main {
   box-sizing: border-box;
-  /*overflow: hidden;*/
   position: absolute;
   top: 0;
   border-bottom: #e6e6e6;
@@ -190,11 +197,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   width: 4px;
 }
 
-.fixedDataTableRowLayout_rowWrapper {
-  position: absolute;
-  top: 0;
-  z-index:20;
-}
 /**
  * Copyright (c) 2015, Facebook, Inc.
  * All rights reserved.
@@ -546,17 +548,6 @@ background-color: #FFFFFF;
   max-height: 9px;
 }
 
-.gor-exception .public_fixedDataTableCell_cellContent{
-
-  background: #EC1C24;
-  border-radius: 15px;
-  text-align: center;
-  width:70px;
-  color: #ffffff;
-  font-size: 12px;
-  max-height: 9px;
-}
-
 .offline .public_fixedDataTableCell_cellContent{
 
   border-radius: 15px;
@@ -732,7 +723,10 @@ background-color: #FFFFFF;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
   left: 0;
+<<<<<<< 6c4b1d4e072cf76101469e9c232c5a74086bb116
   /*overflow: hidden;*/
+=======
+>>>>>>> temp
   position: absolute;
   top: 0;
   white-space: nowrap;
@@ -764,7 +758,6 @@ background-color: #FFFFFF;
   border-width: 0 1px 0 0;
   box-sizing: border-box;
   display: block;
-  /*overflow: hidden;*/
   position: absolute;
   white-space: normal;
 }
@@ -865,7 +858,10 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   border-style: solid;
   border-width: 1px;
   box-sizing: border-box;
+<<<<<<< 6c4b1d4e072cf76101469e9c232c5a74086bb116
   /*overflow: hidden;*/
+=======
+>>>>>>> temp
   position: relative;
 }
 
@@ -893,10 +889,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   margin-top: -4px;
 }
 
-.fixedDataTableLayout_rowsContainer {
-  /*overflow: hidden;*/
-  position: relative;
-}
 
 .fixedDataTableLayout_horizontalScrollbar {
   bottom: 0;
@@ -915,7 +907,10 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 
 .fixedDataTableRowLayout_main {
   box-sizing: border-box;
+<<<<<<< 6c4b1d4e072cf76101469e9c232c5a74086bb116
   /*overflow: hidden;*/
+=======
+>>>>>>> temp
   position: absolute;
   top: 0;
 }

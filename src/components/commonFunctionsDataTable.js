@@ -138,7 +138,7 @@ export const StatusCell = ({rowIndex, data, columnKey,statusKey, ...props}) => (
 
 export const ActionCellAudit = ({rowIndex, data, columnKey, tasks, handleAudit,manageAuditTask, clickDropDown,showBox, ...props}) => (
   <Cell {...props}>
-    <div className="gor-audit-actions-button" >
+    <div className="gor-audit-actions-button">
      {data.getObjectAt(rowIndex)[showBox]?(
       <button className="gor-add-btn" onClick={handleAudit.bind(this,columnKey,rowIndex)}>
           <FormattedMessage id="commonDataTable.startAudit.button" description='edit button' defaultMessage='Start audit'/>

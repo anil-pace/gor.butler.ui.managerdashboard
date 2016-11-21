@@ -1,17 +1,20 @@
 # README #
 
-### Quick Summary ###
+This README would normally document whatever steps are necessary to get your application up and running.
 
-This is the repo for the 'Manager Dashboard V3.0' for Butler Management System.
+### What is this repository for? ###
+
+* Quick summary
+* Version
+* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 
 ### How do I get set up? ###
 
-* git clone this repo to your local folder
-* cd into the repo folder
-* execute 'git install -g' from the repo folder
-* execute 'build-md -t DEV -m false' for dev build
-* in browser open up 'http://localhost:8080/webpack-dev-server/' (Note: if you have any other webserver installed, you might have to stop the webserver)
-
+* Summary of set up
+* Configuration
+* Dependencies
+* Database configuration
+* How to run tests
 * Deployment instructions
 
 ### Contribution guidelines ###
@@ -22,5 +25,5 @@ This is the repo for the 'Manager Dashboard V3.0' for Butler Management System.
 
 ### Who do I talk to? ###
 
-* Repo owner or admin - Arshdeep.m@greyorange.sg, himanshu.s@greyorange.sg
-* Team: Sourabh.j@greyorange.sg, Krishna.g@greyorange.sg
+* Repo owner or admin
+* Other community or team contact

@@ -3,17 +3,7 @@ import Histogram from '../../components/graphd3/histogram';
 import {setInventoryDate} from '../../actions/inventoryActions';
 import {INVENTORY_HISTORY_DAYS_COUNT,INVENTORY_HISTOGRAM_CONFIG} from '../../constants/appConstants';
 import { connect } from 'react-redux'; 
-import { defineMessages } from 'react-intl';
 
-const messages = defineMessages({
-    noStock: {
-        id: 'inventory.histogram.noDataText',
-        description: 'Message for No stock',
-        defaultMessage: 'No Stock Found',
-    },
-
-
-});
 
 
 class InventoryHistogram extends React.Component{
@@ -70,7 +60,7 @@ class InventoryHistogram extends React.Component{
    var config = Object.assign({},INVENTORY_HISTOGRAM_CONFIG)
    config.noData = histogramData.length ? histogramData[histogramData.length-1].noData : false;
    config.noDataText= _this.context.intl.formatMessage({id:"inventory.histogram.noDataText", defaultMessage: 'No Stock Found'});
-   config.today = _this.context.intl.formatRelative(Date.now()- 1000 * 60 * 60 ,'day');
+   config.today = _this.context.intl.formatMessage({id:"inventory.histogram.today", defaultMessage: "Today's"});
    config.breakMonth = _this.context.intl.formatDate(Date.now(), {month: 'short'}); 
    return (
      <div>

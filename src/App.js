@@ -14,21 +14,21 @@ import TopNotifications from './components/topnotify/topnotify';
 
 
 class App extends React.Component{ 
-  /**
-   * Called once before rendering of component,used to displatch fetch action
-   * @return {[type]}
-   */
+	/**
+	 * Called once before rendering of component,used to displatch fetch action
+	 * @return {[type]}
+	 */
   
-  constructor(props) 
-  {  
-      super(props); 
-  } 
+	constructor(props) 
+	{  
+    	super(props); 
+  }	
   
-    componentWillMount(){
+  	componentWillMount(){
         
         this.context.router.push("/login");
 
-    }
+  	}
     componentDidMount(){
       var timeOffset =  sessionStorage.getItem("timeOffset");
       if(!timeOffset){
@@ -44,7 +44,7 @@ class App extends React.Component{
       }
     }
     
-    componentWillReceiveProps(nextProps) {
+  	componentWillReceiveProps(nextProps) {
     /**
      * Checking if the user is loggedin 
      * and redirecting to main page
@@ -99,23 +99,23 @@ class App extends React.Component{
       <div className="mainContainer">
         <TopNotifications />
         <Header />
-        <Tabs/>
-        {this.props.children}
-      </div>
-      
-    );
-  }
+				<Tabs/>
+				{this.props.children}
+			</div>
+			
+		);
+	}
 };
 /**
-* [Passing Router to component through context]
-* @type {Object}
-*/
+ * [Passing Router to component through context]
+ * @type {Object}
+ */
 App.contextTypes = {
-  router: React.PropTypes.object.isRequired
+        router: React.PropTypes.object.isRequired
 }
 /**
-* Function to pass state values as props
-*/
+ * Function to pass state values as props
+ */
 
 
 function mapStateToProps(state,ownProps) {
@@ -129,11 +129,11 @@ function mapStateToProps(state,ownProps) {
   tab:state.tabSelected.tab,
   subTab:state.tabSelected.subTab,
   prevTab:state.tabSelected.prevTab
-}
+ }
 } 
 /**
-* Function to dispatch action values as props
-*/
+ * Function to dispatch action values as props
+ */
 function mapDispatchToProps(dispatch){
     return {
         initWebSocket: function(){ dispatch(setWsAction({type:WS_CONNECT})); },

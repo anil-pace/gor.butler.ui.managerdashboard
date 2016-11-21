@@ -15,7 +15,6 @@ function processUserDetails(data, nProps) {
   var role = {"butler_ui":operator, "butler_supervisor":manager};
   var work_mode = {"pick":pick,"put": put,"audit": audit};
   var work_place = {"front": front, "back":back};
-  var timeOffset=nProps.props.timeOffset;
 
 
   var userDetails = [], userData = {};
@@ -33,8 +32,7 @@ function processUserDetails(data, nProps) {
       userData.workMode = work_mode[data[i].pps.pps_mode];
     }
     userData.location = nProps.context.intl.formatMessage({id:"userDetails.location", defaultMessage: "PPS {ppsId}"},{"ppsId":data[i].pps.pps_id});
-    userData.logInTime = nProps.context.intl.formatTime(data[i].login_time,{hour: 'numeric',minute: 'numeric'}) +
-    "(" + nProps.context.intl.formatRelative(data[i].login_time) +")";
+    userData.logInTime = data[i].login_time;
     }
 
     else {
@@ -88,8 +86,7 @@ function mapStateToProps(state, ownProps){
   return {
     userdetails: state.userDetails.userDetails || [],
     intlMessages: state.intl.messages,
-    manager:state.headerData.headerInfo||[],
-    timeOffset: state.authLogin.timeOffset
+    manager:state.headerData.headerInfo||[]
 
   };
 }

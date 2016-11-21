@@ -11,9 +11,18 @@ import {changePPSmode} from '../../actions/ppsModeChangeAction'
 import { FormattedMessage } from 'react-intl';
 
 
-function _processPPSData(data, nProps) {
+
+class PPS extends React.Component{
+	constructor(props) 
+	{
+    	super(props);
+    }	
+
+  _processPPSData() {
   //TODO: codes need to be replaced after checking with backend
   var PPSData=[], detail = {}, ppsId, performance,totalUser = 0;
+  var nProps = this;
+  var data = nProps.props.PPSDetail.PPStypeDetail;
   var ppsStatus = ["Off", "On"];
   let PPS, ON, OFF, PERFORMANCE;
   let pick  = nProps.context.intl.formatMessage({id:"ppsDetail.pick.status", defaultMessage: "Pick"});
@@ -66,18 +75,12 @@ function _processPPSData(data, nProps) {
   return PPSData;
 
 }
-
-class PPS extends React.Component{
-	constructor(props) 
-	{
-    	super(props);
-    }	
 	render(){	
 
 	var operationMode = {"Pick":0, "Put":0, "Audit":0,"NotSet":0};
     var data , operatorNum = 0, itemNumber = 5;
     if(this.props.PPSDetail.PPStypeDetail !== undefined) {
-    	data = _processPPSData(this.props.PPSDetail.PPStypeDetail, this);
+    	data = this._processPPSData();
       for (var i = data.length - 1; i >= 0; i--) {
         if(data[i].operatingMode !== null) {
            operationMode[data[i].operatingMode] = operationMode[data[i].operatingMode] +1;
