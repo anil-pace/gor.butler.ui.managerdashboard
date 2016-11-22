@@ -1,4 +1,4 @@
-import {receiveAuthData,setLoginSpinner,setTimeOffSetData} from '../actions/loginAction';
+import {receiveAuthData,setLoginSpinner,setTimeOffSetData,loginFail} from '../actions/loginAction';
 import {recieveOrdersData} from '../actions/paginationAction';
 import {recieveAuditData,setAuditRefresh} from '../actions/auditActions';
 import {assignRole} from '../actions/userActions';
@@ -15,8 +15,15 @@ export function AjaxParse(store,res,cause,status)
 	let stringInfo={};
 	switch(cause)
 	{
-		case AUTH_LOGIN:			
-			store.dispatch(receiveAuthData(res));
+		case AUTH_LOGIN:	
+			if(res.auth_token)
+			{		
+				store.dispatch(receiveAuthData(res));
+			}
+			else
+			{
+				store.dispatch(loginFail());
+			}
 			store.dispatch(setLoginSpinner(false));
 			break;
 		case ORDERS_RETRIEVE:

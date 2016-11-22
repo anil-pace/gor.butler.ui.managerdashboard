@@ -27,24 +27,17 @@ export function loginRedirect(data){
 }
 
 export function receiveAuthData(data){  
-  if(data && data.auth_token)
-  {
-      console.log('Login Pass');
       return{
         type: LOGIN_SUCCESS,
         data
       }
-
-  }
- else
-  {
-      console.log('Login Fail');
+}
+ export function loginFail(){
       return{
-        type: LOGIN_FAILURE,
-        data
+        type: LOGIN_FAILURE
       }
   }
-}
+
 /**
  * function that sends ajax to authorize user
  */
