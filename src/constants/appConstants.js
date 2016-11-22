@@ -351,9 +351,14 @@ export const GOR_EXCEPTION="gor-exception";
 export const GOR_OFFLINE='gor-offline';
 export const GOR_ONLINE='gor-online';
 export const GOR_NORMAL_TAB='gor-normal-tab';
+export const GOR_PASS='pass';
+export const GOR_FAILURE='fail';
 //Icons
 export const PICK_ICON=' iPick';
 export const STOCK_ICON="iStock";
 export const AUDIT_ICON="iAudit";
 export const TILE_ONTIME='overview-tile-ontime-icon';
 export const TILE_ALERT='header-yellow-alert-icon';
+export const TICK_WHITE='gor-tick-white';
+export const REMOVE_ICON='gor-remove-white';
+export const ERROR_WHITE='gor-error-white';

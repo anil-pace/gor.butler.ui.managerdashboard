@@ -46,15 +46,6 @@ export function receiveAuthData(data){
   }
 }
 /**
- * Mock login module
- */
-export function mockLoginAuth(params) {
-  return {
-    type: MOCK_LOGIN,
-    params
-  }
- }
-/**
  * function that sends ajax to authorize user
  */
 

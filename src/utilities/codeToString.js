@@ -11,14 +11,14 @@ export function codeToString(res){
               stringInfo={
                 type:SUCCESS,
                 msg:(<FormattedMessage id="notify.success.add" description='Text for successfull user addition' 
-            defaultMessage='New user "{first} {last}" added successfully' values={{first:res.details[0],last:res.details[1]}}/>)   //Make string for addition
+            defaultMessage='New user "{first} {last}" added successfully' values={{first:res.details[0]||"--",last:res.details[1]||"--"}}/>)   //Make string for addition
               }
               break;
             case CODE_US002:
               stringInfo={
                 type:SUCCESS,
                 msg:(<FormattedMessage id="notify.success.delete" description='Text for successfull user deletion' 
-            defaultMessage='User "{first} {last}" deleted successfully' values={{first:res.details[0],last:res.details[1]}}/>)    //Make string for deletion
+            defaultMessage='User "{first} {last}" deleted successfully' values={{first:res.details[0]||"--",last:res.details[1]||"--"}}/>)    //Make string for deletion
               }
               break;
             case CODE_US004:
@@ -31,7 +31,7 @@ export function codeToString(res){
               stringInfo={
                 type:SUCCESS,
                 msg:(<FormattedMessage id="notify.delete.audit.success" description='Text for successfull audit deletion' 
-            defaultMessage="Audit task {audit_id} has been deleted" values={{audit_id:res.details}}/>)
+            defaultMessage="Audit task {audit_id} has been deleted" values={{audit_id:res.details||"--"}}/>)
               }
               break;              
             case CODE_UE001:

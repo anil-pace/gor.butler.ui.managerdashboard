@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import Footer from '../Footer/Footer';
 import Spinner from '../../components/spinner/Spinner'
-import { authLoginData,mockLoginAuth,setUsername,setLoginSpinner,connectionFault } from '../../actions/loginAction';
+import { authLoginData,setUsername,setLoginSpinner,connectionFault } from '../../actions/loginAction';
 import {validateID, validatePassword, resetForm} from '../../actions/validationActions';
 
 import { connect } from 'react-redux';
@@ -247,7 +247,6 @@ Login.contextTypes = {
 
 
 function mapStateToProps(state, ownProps){
-  console.log(state);
 	return {
         loginAuthorized:state.authLogin.loginAuthorized ,
         connectionActive:state.authLogin.connectionActive,
@@ -271,7 +270,6 @@ var mapDispatchToProps = function(dispatch){
     return {
         authLoginData: function(params){ dispatch(authLoginData(params)); },
         updateIntl: function(params){ dispatch(updateIntl(params));},
-        mockLoginAuth: function(params){ dispatch(mockLoginAuth(params)); },
         validateID: function(data){ dispatch(validateID(data)); }, 
         setUsername: function(data){ dispatch(setUsername(data)); },        
         validatePass: function(data){ dispatch(validatePassword(data)); },        

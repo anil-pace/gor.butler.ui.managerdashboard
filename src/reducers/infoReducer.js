@@ -1,4 +1,4 @@
-import {ID_DATA,NAME_DATA,PASSWORD_DATA,INFO_RESET,ERROR,SUCCESS,INFO,HIDE,NOTIFY_PASS,NOTIFY_HIDE,NOTIFY_FAIL,PASS_DATA,MD_ID,SET_ROLE,NOTIFY_DELETE,DELETION} from '../constants/appConstants'; 
+import {ID_DATA,NAME_DATA,PASSWORD_DATA,INFO_RESET,ERROR,SUCCESS,INFO,HIDE,NOTIFY_PASS,NOTIFY_HIDE,NOTIFY_FAIL,PASS_DATA,MD_ID,SET_ROLE,NOTIFY_DELETE,DELETION,GOR_PASS,GOR_FAIL,TICK_WHITE,REMOVE_ICON,ERROR_WHITE} from '../constants/appConstants'; 
 import {US001,US002,UE001,UE002,INVALID_ID,EMPTY_PWD,EMPTY_NAME,INVALID_NAME,INVALID_PWD,MATCH_PWD,TYPE_SUCCESS} from '../constants/messageConstants'; 
 
 /**
@@ -41,7 +41,8 @@ export  function appInfo(state={},action){
     case NOTIFY_PASS:
          let notifyMsg=action.data, notifyInfo;
          notifyInfo={
-          type:SUCCESS,
+          type:GOR_PASS,
+          icon:TICK_WHITE,
           msg:notifyMsg
          };
          return Object.assign({}, state, { 
@@ -52,7 +53,8 @@ export  function appInfo(state={},action){
     case NOTIFY_DELETE:
          let notifyDel=action.data, notifyDelInfo;
          notifyDelInfo={
-          type:DELETION,
+          type:GOR_PASS,
+          icon:REMOVE_ICON,
           msg:notifyDel
          };
          return Object.assign({}, state, { 
@@ -63,7 +65,8 @@ export  function appInfo(state={},action){
     case NOTIFY_FAIL:
          let notifyErr=action.data, notifyErrInfo;
          notifyErrInfo={
-          type:ERROR,
+          type:GOR_FAIL,
+          icon:ERROR_WHITE,
           msg:notifyErr
          };
          return Object.assign({}, state, { 
