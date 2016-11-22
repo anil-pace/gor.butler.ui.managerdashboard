@@ -14,21 +14,21 @@ import TopNotifications from './components/topnotify/topnotify';
 
 
 class App extends React.Component{ 
-	/**
-	 * Called once before rendering of component,used to displatch fetch action
-	 * @return {[type]}
-	 */
+  /**
+   * Called once before rendering of component,used to displatch fetch action
+   * @return {[type]}
+   */
   
-	constructor(props) 
-	{  
-    	super(props); 
-  }	
+  constructor(props) 
+  {  
+      super(props); 
+  } 
   
-  	componentWillMount(){
+    componentWillMount(){
         
         this.context.router.push("/login");
 
-  	}
+    }
     componentDidMount(){
       var timeOffset =  sessionStorage.getItem("timeOffset");
       if(!timeOffset){
@@ -44,7 +44,7 @@ class App extends React.Component{
       }
     }
     
-  	componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps) {
     /**
      * Checking if the user is loggedin 
      * and redirecting to main page
@@ -99,12 +99,12 @@ class App extends React.Component{
       <div className="mainContainer">
         <TopNotifications />
         <Header />
-				<Tabs/>
-				{this.props.children}
-			</div>
-			
-		);
-	}
+        <Tabs/>
+        {this.props.children}
+      </div>
+      
+    );
+  }
 };
 /**
  * [Passing Router to component through context]

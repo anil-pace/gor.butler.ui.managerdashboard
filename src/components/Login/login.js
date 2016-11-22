@@ -21,8 +21,9 @@ class Login extends React.Component{
 	 {
     	super(props);      
       this.state={sel:0, items :[
-        { value: EN, label: ENG },
-        { value: JA, label: JAP },
+        { value: EN, label: (<FormattedMessage id='login.lang.english' defaultMessage="English" description="English option in the language drop down"/>) },
+        { value: JA, label: (<FormattedMessage id='login.lang.japanese' defaultMessage="日本語" description="Japanese option in the language drop down"/>) },
+
       ]};
     }
     componentWillMount()
@@ -49,6 +50,10 @@ class Login extends React.Component{
            document.body.className='';
            this.context.router.push("/md");
       }
+    }
+
+    componentDidMount(nextProps){
+      
     }
     _checkUser(){
         let userid=this.userName.value, idInfo;
@@ -95,6 +100,7 @@ class Login extends React.Component{
             messages: translationMessages[sLocale]
         }
         this.props.updateIntl(data);
+        sessionStorage.setItem('localLanguage', sLocale);
         this._changeDropdown();
     }
     /**
