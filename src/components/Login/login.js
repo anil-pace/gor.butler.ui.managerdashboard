@@ -254,7 +254,6 @@ Login.contextTypes = {
 
 
 function mapStateToProps(state, ownProps){
-  console.log(state);
 	return {
         loginAuthorized:state.authLogin.loginAuthorized ,
         connectionActive:state.authLogin.connectionActive,
