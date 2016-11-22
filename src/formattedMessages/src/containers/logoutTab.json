@@ -3,5 +3,15 @@
     "id": "logout.question",
     "description": "Text for logout question",
     "defaultMessage": "Are you sure you would like to log out now?"
+  },
+  {
+    "id": "logout.cancel",
+    "description": "Text for cancel",
+    "defaultMessage": "Cancel"
+  },
+  {
+    "id": "logout.done",
+    "description": "Text for logout button",
+    "defaultMessage": "Log out now"
   }
 ]

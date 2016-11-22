@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import {changePPSmode} from '../../actions/ppsModeChangeAction'
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
 import {BASE_URL, PPS_MODE_CHANGE_URL,PROTOCOL,API_URL} from '../../constants/configConstants';
-import {PPS_MODE_CHANGE} from '../../constants/appConstants';
+import {PPS_MODE_CHANGE,APP_JSON} from '../../constants/appConstants';
 
 class PPStable extends React.Component {
   constructor(props) {
@@ -182,7 +182,7 @@ class PPStable extends React.Component {
                'method':'PUT',
                'cause': PPS_MODE_CHANGE,
                'token': sessionStorage.getItem('auth_token'),
-              'contentType':'application/json'
+              'contentType':APP_JSON
          } 
          
          this.props.modeChange(ppsModeChange);

@@ -6,7 +6,7 @@ import { authLoginData,setUsername,setLoginSpinner,connectionFault } from '../..
 import {validateID, validatePassword, resetForm} from '../../actions/validationActions';
 
 import { connect } from 'react-redux';
-import {AUTH_LOGIN,ERROR,SUCCESS,TYPING,EN,JA,FILL_BACK} from '../../constants/appConstants'; 
+import {AUTH_LOGIN,ERROR,SUCCESS,TYPING,EN,JA,FILL_BACK,APP_JSON,POST} from '../../constants/appConstants'; 
 import {INVALID_ID,EMPTY_PWD,TYPE_SUCCESS,ENG,JAP} from '../../constants/messageConstants'; 
 import {LOGIN_URL} from '../../constants/configConstants'; 
 import { FormattedMessage } from 'react-intl';
@@ -128,10 +128,10 @@ class Login extends React.Component{
         let loginData={
                 'url':LOGIN_URL,
                 'formdata':formdata,
-                'method':'POST',
+                'method':POST,
                 'cause':AUTH_LOGIN,
-                'contentType':'application/json',
-                'accept':'application/json'
+                'contentType':APP_JSON,
+                'accept':APP_JSON
             }
         sessionStorage.setItem('nextView', 'md');
     	    this.props.setUsername(formdata.username);

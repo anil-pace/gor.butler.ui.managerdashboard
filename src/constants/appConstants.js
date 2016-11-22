@@ -337,10 +337,14 @@ export const LEGEND_DEFAULT = LEGEND_RECT;
 
 export const EN='en';
 export const JA='ja';
+export const HR='h ';
+export const MM='m ';
 // Style class constants
 export const TYPING='gor-login-field gor-input-ok gor-input-typing';
 export const FILL_BACK='gor-fill-back';
 export const GET='GET';
+export const POST='POST';
+export const APP_JSON='application/json';
 export const GOR_RISK='gor-risk';
 export const GOR_NONE='gor-none';
 export const GOR_SUCCESS='gor-success';

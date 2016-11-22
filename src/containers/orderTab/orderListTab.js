@@ -6,7 +6,7 @@ import React  from 'react';
 import ReactPaginate from 'react-paginate';
 import { connect } from 'react-redux';
 import {getPageData, getStatusFilter, getTimeFilter,getPageSizeOrders,currentPageOrders,lastRefreshTime} from '../../actions/paginationAction';
-import {ORDERS_RETRIEVE,GOR_BREACHED,GOR_EXCEPTION} from '../../constants/appConstants';
+import {ORDERS_RETRIEVE,GOR_BREACHED,GOR_EXCEPTION,GET,APP_JSON} from '../../constants/appConstants';
 import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,ORDER_PAGE, PICK_BEFORE_ORDER_URL, BREACHED_URL,UPDATE_TIME_HIGH,UPDATE_TIME_LOW,EXCEPTION_TRUE} from '../../constants/configConstants';
 import OrderListTable from './orderListTable';
 import Dropdown from '../../components/dropdown/dropdown'
@@ -146,10 +146,10 @@ class OrderListTab extends React.Component{
    
     let paginationData={
               'url':url,
-              'method':'GET',
+              'method':GET,
               'cause': ORDERS_RETRIEVE,
               'token': this.props.auth_token,
-              'contentType':'application/json'
+              'contentType':APP_JSON
           } 
           this.props.currentPage(data.selected+1);
          this.props.getPageData(paginationData);

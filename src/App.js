@@ -5,7 +5,7 @@ import Tabs from './containers/tabs';
 import Header from './components/header/header';
 import {setWsAction ,setMockAction} from './actions/socketActions';
 import {getTimeOffSetData,setTimeOffSetData} from './actions/loginAction';
-import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,WS_MOCK,USERS,TAB_ROUTE_MAP,OVERVIEW ,SYSTEM,ORDERS,INVENTORY} from './constants/appConstants'
+import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,WS_MOCK,USERS,TAB_ROUTE_MAP,OVERVIEW ,SYSTEM,ORDERS,INVENTORY,GET} from './constants/appConstants'
 import { wsOverviewData} from './constants/initData.js';
 import {TIME_ZONE_URL} from './constants/configConstants'
 import {prevTabSelected} from './actions/tabSelectAction';
@@ -34,7 +34,7 @@ class App extends React.Component{
       if(!timeOffset){
           let timeOffsetParams={
                 'url':TIME_ZONE_URL,
-                'method':'GET',
+                'method':GET,
                 'cause':RECIEVE_TIME_OFFSET
             }
             this.props.getTimeOffSetData(timeOffsetParams);
