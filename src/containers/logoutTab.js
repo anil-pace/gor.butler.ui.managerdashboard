@@ -14,17 +14,12 @@ class LogOut extends React.Component{
     this.props.removeModal();
   }
   appLogout() {
-      // since we need the language even after logout so 
-      // need to temp store the langauge before clearing the session storage
-      let sessionLocale = sessionStorage.getItem('localLanguage');
-      
+     
       this.props.removeModal();
       sessionStorage.clear();
       this.props.userLogout();
       this.props.endConnect();
-      if (sessionLocale){
-        sessionStorage.setItem('localLanguage', sessionLocale);
-      }
+     
     }  
     render()
     {
