@@ -7,7 +7,7 @@
   {
     "id": "login.lang.japanese",
     "description": "Japanese option in the language drop down",
-    "defaultMessage": "Japanese"
+    "defaultMessage": "日本語"
   },
   {
     "id": "notify.success.edit",

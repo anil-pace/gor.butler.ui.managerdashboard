@@ -102,7 +102,7 @@
   {
     "id": "login.lang.english",
     "description": "English option in the language drop down",
-    "defaultMessage": "日本語"
+    "defaultMessage": "English"
   },
   {
     "id": "login.lang.japanese",

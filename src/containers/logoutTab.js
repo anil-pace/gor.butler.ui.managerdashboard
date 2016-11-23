@@ -8,19 +8,26 @@ import { FormattedMessage } from 'react-intl';
 class LogOut extends React.Component{
   constructor(props) 
   {
-      super(props);  
+    super(props);  
   }
   removeThisModal() {
-      this.props.removeModal();
+    this.props.removeModal();
   }
   appLogout() {
+      // since we need the language even after logout so 
+      // need to temp store the langauge before clearing the session storage
+      let sessionLocale = sessionStorage.getItem('localLanguage');
+      
       this.props.removeModal();
       sessionStorage.clear();
       this.props.userLogout();
       this.props.endConnect();
-  }  
-  render()
-  {
+      if (sessionLocale){
+        sessionStorage.setItem('localLanguage', sessionLocale);
+      }
+    }  
+    render()
+    {
       return (
         <div>
           <div className='gor-logout'>
@@ -36,15 +43,15 @@ class LogOut extends React.Component{
               </div> 
           </div>
         </div>
-      );
-    }
-  };
- 
-function mapDispatchToProps(dispatch){
-    return {
-      endConnect: function(){ dispatch(endWsAction()); },
-        userLogout: function(){ dispatch(logoutRequest()); }
-    }
-};
+        );
+      }
+    };
 
-export default connect(null,mapDispatchToProps)(LogOut);
+    function mapDispatchToProps(dispatch){
+      return {
+        endConnect: function(){ dispatch(endWsAction()); },
+        userLogout: function(){ dispatch(logoutRequest()); }
+      }
+    };
+
+    export default connect(null,mapDispatchToProps)(LogOut);
