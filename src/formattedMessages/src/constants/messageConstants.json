@@ -1,23 +1,13 @@
 [
   {
-    "id": "notify.success.add",
-    "description": "Text for successfull user addition",
-    "defaultMessage": "User successfully added"
-  },
-  {
-    "id": "notify.success.delete",
-    "description": "Text for successfull user deletion",
-    "defaultMessage": "User successfully deleted"
-  },
-  {
     "id": "notify.success.edit",
     "description": "Text for successfully editing user",
-    "defaultMessage": "User successfully edited"
+    "defaultMessage": "User details updated successfully"
   },
   {
     "id": "notify.error.usernameExists",
     "description": "Text for already registered username",
-    "defaultMessage": "Username already registered!"
+    "defaultMessage": "An account has already been created with this User ID"
   },
   {
     "id": "notify.error.passwordMissing",
@@ -70,8 +60,13 @@
     "defaultMessage": "Special characters like \"~\",\"@\" and \"%\" are not allowed"
   },
   {
-    "id": "user.invalid.password",
-    "description": "Text for invalid password",
+    "id": "user.invalid.password.operator",
+    "description": "Text for invalid password for operator",
+    "defaultMessage": "Please enter a password of at least 6 alphanumeric characters"
+  },
+  {
+    "id": "user.invalid.password.manager",
+    "description": "Text for invalid password for manager",
     "defaultMessage": "Please enter a password of at least 8 alphanumeric characters"
   },
   {
@@ -105,9 +100,14 @@
     "defaultMessage": "Please enter a valid location Number"
   },
   {
-    "id": "notify.error.audit.e025",
-    "description": "Text for invalid sku number or location",
-    "defaultMessage": "Either location or sku does not exist"
+    "id": "notify.error.audit.location",
+    "description": "Text for invalid location",
+    "defaultMessage": "Location does not exist"
+  },
+  {
+    "id": "notify.error.audit.sku",
+    "description": "Text for invalid sku",
+    "defaultMessage": "SKU does not exist"
   },
   {
     "id": "notify.error.audit.g016",
@@ -150,11 +150,6 @@
     "defaultMessage": "Audit started successfully"
   },
   {
-    "id": "notify.delete.audit.success",
-    "description": "Text for successfull audit deletion",
-    "defaultMessage": "Audit deleted successfully"
-  },
-  {
     "id": "notify.delete.audit.processed",
     "description": "Text for already processed audit",
     "defaultMessage": "Audit already processed. Cannot delete"
@@ -183,5 +178,10 @@
     "id": "notify.error.connection",
     "description": "Text for connection refused",
     "defaultMessage": "Connection refused"
+  },
+  {
+    "id": "inventory.histogram.noDataText",
+    "description": "Inventory Histogram No Data Text",
+    "defaultMessage": "No Stock Found"
   }
 ]

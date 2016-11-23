@@ -124,12 +124,13 @@ body {
   font-family: Source Sans Pro;
 }
 
-.user-edit-icon,
-.user-del-icon,
+.gor-edit-icon,
+.gor-del-icon,
 .dropdown-arrow-icon,
 .searchbox-cross-icon,
 .searchbox-magnifying-glass-icon,
 .tab-online-icon,
+.tab-offline-icon,
 .tab-alert-icon,
 .checkbox-selected-icon,
 .checkbox-half-selected-icon,
@@ -145,7 +146,7 @@ body {
 .header-offline-icon,
 .user-icon,
 .overview-tile-ontime-icon,
-.statusOl, .statusAl, .iStock, .iAudit, .iPick, .gor-login-user, .gor-login-password, .gor-login-error, .iTick, .iQuestion, .iTick-white, .iError-white, .gor-login-user-error, .gor-login-password-error {
+.statusOl, .statusAl, .iStock, .iAudit, .iPick, .gor-login-user, .gor-login-password, .gor-login-error, .gor-tick, .gor-question, .gor-tick-white, .gor-remove-white, .gor-error-white, .gor-login-user-error, .gor-login-password-error {
   background-image: url(images/icons.svg);
 }
 
@@ -295,6 +296,13 @@ body {
   display: inline-block;
 }
 
+.tab-offline-icon {
+  background-position: -1px -52px;
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+}
+
 .tab-alert-icon {
   background-position: -101px -52px;
   width: 24px;
@@ -302,7 +310,7 @@ body {
   display: inline-block;
 }
 
-.iTick {
+.gor-tick {
   background-position: -26px -52px;
   width: 24px;
   height: 24px;
@@ -312,25 +320,31 @@ body {
   vertical-align: middle;
 }
 
-.iTick-white {
+.gor-tick-white {
   background-position: -151px -52px;
   width: 24px;
   height: 24px;
   margin-right: 15px;
   display: inline-block;
-  vertical-align: middle;
 }
 
-.iError-white {
+.gor-remove-white {
+  background-position: -189px -77px;
+  width: 14px;
+  height: 16px;
+  margin-right: 15px;
+  display: inline-block;
+}
+
+.gor-error-white {
   background-position: -126px -52px;
   width: 24px;
   height: 24px;
   margin-right: 15px;
   display: inline-block;
-  vertical-align: middle;
 }
 
-.iQuestion {
+.gor-question {
   background-position: -409px -1px;
   width: 50px;
   height: 50px;
@@ -338,7 +352,7 @@ body {
   display: inline-block;
 }
 
-.user-edit-icon {
+.gor-edit-icon {
   background-position: -171px 42px;
   width: 16px;
   height: 16px;
@@ -346,7 +360,7 @@ body {
   display: inline-block;
 }
 
-.user-del-icon {
+.gor-del-icon {
   background-position: -188px -75px;
   width: 16px;
   height: 18px;
@@ -746,7 +760,6 @@ body {
   height: 62px;
   display: table-cell;
   border-right: .5px solid black;
-  background: #4d5055;
   cursor: pointer;
   vertical-align: middle;
 }
@@ -757,6 +770,10 @@ body {
 
 .gorTabs .gorTab .gorMainBlock.sel {
   background-color: #323539;
+}
+
+.gorTabs .gorTab .gorMainBlock .gor-normal-tab {
+  background: #4d5055;
 }
 
 .gorTabs .gorTab .gorInline {
@@ -788,6 +805,10 @@ body {
 .gorTabs .gorTab .gorOnline {
   font-family: "source sans pro";
   color: #10c469;
+}
+
+.gorTabs .gorTab .gor-alert {
+  color: #ffffff;
 }
 
 .gorTabs .gorTab .gorOffline {
@@ -1451,7 +1472,6 @@ body {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   left: 0;
-  /*overflow: hidden;*/
   position: absolute;
   top: 0;
   white-space: nowrap;
@@ -1475,7 +1495,6 @@ body {
   border-width: 0 1px 0 0;
   box-sizing: border-box;
   display: block;
-  /*overflow: hidden;*/
   position: absolute;
   white-space: normal;
   background: grey;
@@ -1553,7 +1572,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   border-style: solid;
   border-width: 1px;
   box-sizing: border-box;
-  /*overflow: hidden;*/
+  overflow: hidden;
   position: relative;
 }
 
@@ -1582,7 +1601,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 }
 
 .fixedDataTableLayout_rowsContainer {
-  /*overflow: hidden;*/
+  overflow: hidden;
   position: relative;
 }
 
@@ -1603,7 +1622,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
  */
 .fixedDataTableRowLayout_main {
   box-sizing: border-box;
-  /*overflow: hidden;*/
   position: absolute;
   top: 0;
   border-bottom: #e6e6e6;
@@ -1630,12 +1648,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 
 .fixedDataTableRowLayout_columnsShadow {
   width: 4px;
-}
-
-.fixedDataTableRowLayout_rowWrapper {
-  position: absolute;
-  top: 0;
-  z-index: 20;
 }
 
 /**
@@ -1823,7 +1835,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 
 .fixedDataTableRowLayout_rowWrapper:hover .public_fixedDataTableCell_main {
   background-color: #e6e6e6;
-  z-index: 20;
 }
 
 .public_fixedDataTable_header:hover .public_fixedDataTableCell_main {
@@ -1870,7 +1881,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   max-height: 9px;
 }
 
-.not_fulfillable .public_fixedDataTableCell_cellContent {
+.Unfulfillable .public_fixedDataTableCell_cellContent {
   background: #f99405;
   border-radius: 15px;
   text-align: center;
@@ -1939,14 +1950,23 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   border-style: solid;
   border-width: 1px;
   border-color: #00a54f;
-  color: #ffffff;
+  color: #00a54f;
   font-size: 12px;
   max-height: 9px;
-  background-color: #00a54f;
 }
 
 .breached .public_fixedDataTableCell_cellContent {
   background: #fc3838;
+  border-radius: 15px;
+  text-align: center;
+  width: 70px;
+  color: #ffffff;
+  font-size: 12px;
+  max-height: 9px;
+}
+
+.gor-exception .public_fixedDataTableCell_cellContent {
+  background: #EC1C24;
   border-radius: 15px;
   text-align: center;
   width: 70px;
@@ -2119,7 +2139,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   left: 0;
-  /*overflow: hidden;*/
   position: absolute;
   top: 0;
   white-space: nowrap;
@@ -2151,7 +2170,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   border-width: 0 1px 0 0;
   box-sizing: border-box;
   display: block;
-  /*overflow: hidden;*/
   position: absolute;
   white-space: normal;
 }
@@ -2252,7 +2270,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   border-style: solid;
   border-width: 1px;
   box-sizing: border-box;
-  /*overflow: hidden;*/
   position: relative;
 }
 
@@ -2280,11 +2297,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   margin-top: -4px;
 }
 
-.fixedDataTableLayout_rowsContainer {
-  /*overflow: hidden;*/
-  position: relative;
-}
-
 .fixedDataTableLayout_horizontalScrollbar {
   bottom: 0;
   position: absolute;
@@ -2302,7 +2314,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
  */
 .fixedDataTableRowLayout_main {
   box-sizing: border-box;
-  /*overflow: hidden;*/
   position: absolute;
   top: 0;
 }
@@ -2658,6 +2669,12 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 }
 
 .gor-Orderlist-table {
+  width: 100%;
+  height: 79vh;
+  position: relative;
+}
+
+.gor-Auditlist-table {
   width: 100%;
   height: 79vh;
   position: relative;
@@ -3333,15 +3350,16 @@ progress::-moz-progress-bar {
   text-align: center;
   font-size: 20px;
   line-height: 50px;
+}
+
+.pass {
+  background: #00a54f;
   color: #ffffff;
 }
 
-.gor-notify-top.pass {
-  background: #00a54f;
-}
-
-.gor-notify-top.fail {
+.fail {
   background: #EC1C24;
+  color: #ffffff;
 }
 
 #react-paginate {
@@ -3615,7 +3633,7 @@ progress::-moz-progress-bar {
 }
 
 .gorInventory .histLbl {
-  width: 44%;
+  width: 70%;
   display: inline-block;
   font-family: 'Source Sans Pro Semibold';
   font-size: 1.25rem;
@@ -3627,11 +3645,11 @@ progress::-moz-progress-bar {
   width: 70%;
   display: inline-block;
   vertical-align: middle;
-  height: 100vh;
+  height: 70vh;
 }
 
 .gorInventory .legendCnt {
-  width: 50%;
+  width: 25%;
   display: inline-block;
   vertical-align: middle;
 }
@@ -3639,8 +3657,8 @@ progress::-moz-progress-bar {
 .gorInventory .stkSnapSht {
   width: 28%;
   display: inline-block;
-  vertical-align: middle;
-  height: 100vh;
+  vertical-align: top;
+  height: 90vh;
   padding: 1.25rem 0.625rem;
 }
 
@@ -3648,15 +3666,198 @@ progress::-moz-progress-bar {
   height: 100%;
   border-radius: 0.1875rem;
   box-shadow: 0px 0px 2px 2px #ECECEC;
+  overflow: hidden;
 }
 
 .gorInventory .catColor {
   display: inline-block;
-  width: 1.25rem;
-  height: 1.25rem;
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
-  border-radius: 50%;
+  width: 0.9375rem;
+  height: 0.9375rem;
+  margin-right: 0.3125rem;
+  vertical-align: middle;
+}
+
+.gorInventory .catText {
+  vertical-align: middle;
+}
+
+.gorInventory .stkParam {
+  padding: 0.625rem;
+  text-align: center;
+}
+
+.gorInventory .stkParam p:nth-child(1) {
+  font-family: 'Source Sans Pro Regular';
+  font-size: 0.75rem;
+  color: #000000;
+  line-height: 1.25rem;
+}
+
+.gorInventory .stkParam p:nth-child(2) {
+  font-family: 'Source Sans Pro Semibold';
+  font-size: 1.0625rem;
+  color: #000000;
+}
+
+.gorInventory .gorSnapShot {
+  padding: 1.5625rem 1.25rem;
+}
+
+.gorInventory .gorSnapShot h1 {
+  font-family: 'Source Sans Pro Semibold';
+  font-size: 1.25rem;
+  color: #000000;
+}
+
+.gorInventory .gorSnapShot table td {
+  padding-bottom: 1.25rem;
+  text-transform: capitalize;
+}
+
+.gorInventory .gorSnapShot table th {
+  text-align: left;
+  padding-bottom: 1.25rem;
+}
+
+.gorInventory .gorSnapShotCont {
+  margin-top: 1.875rem;
+}
+
+.gorInventory .gorSnapShotCont table tr td:nth-child(1) {
+  border-bottom: 1px solid #C9C9C9;
+  border-right: 1px solid #C9C9C9;
+}
+
+.gorInventory .gorSnapShotCont table tr td:nth-child(2) {
+  border-bottom: 1px solid #C9C9C9;
+  border-right: 1px solid #C9C9C9;
+  border-left: 1px solid #C9C9C9;
+}
+
+.gorInventory .gorSnapShotCont table tr td:nth-child(3) {
+  border-bottom: 1px solid #C9C9C9;
+  border-left: 1px solid #C9C9C9;
+}
+
+.gorInventory .gorSnapShotCont table tr:nth-child(2) td {
+  border-bottom: 0;
+}
+
+.lineGraph .bar {
+  cursor: pointer;
+}
+
+.lineGraph .y path.domain {
+  display: none;
+}
+
+.lineGraph .y .tick line {
+  display: none;
+}
+
+.lineGraph .axis.x .domain {
+  display: block;
+}
+
+.lineGraph .x path.domain {
+  stroke-width: 2;
+  stroke: #666666;
+  display: block;
+}
+
+.lineGraph .x line {
+  display: none;
+}
+
+.lineGraph .bar {
+  fill: #498BD8;
+  opacity: 1;
+}
+
+.lineGraph .tick text {
+  fill: #666666;
+  font-size: 12px;
+}
+
+.lineGraph .grid .domain {
+  display: none;
+}
+
+.lineGraph .grid .tick {
+  opacity: 1;
+  stroke: none;
+}
+
+.lineGraph .grid .tick line {
+  stroke: #CCCCCC;
+}
+
+.lineGraph .grid .tick:nth-child(1) line {
+  stroke: #666666;
+  stroke-width: 2;
+}
+
+.lineGraph .grid path.line {
+  stroke-width: 2;
+  stroke: #7ED321;
+}
+
+.lineGraph .grid path.line:nth-child(1) {
+  stroke: #D0021B;
+}
+
+.inventoryHist .bar {
+  cursor: pointer;
+}
+
+.inventoryHist .axis--y path.domain {
+  display: none;
+}
+
+.inventoryHist .axis--y .tick line {
+  display: none;
+}
+
+.inventoryHist .axis--x path.domain {
+  stroke-width: 2;
+  stroke: #666666;
+  display: block;
+}
+
+.inventoryHist .axis--x line {
+  display: none;
+}
+
+.inventoryHist .axis--x line.month-break {
+  display: block;
+}
+
+.inventoryHist .bar {
+  fill: #498BD8;
+  opacity: 1;
+}
+
+.inventoryHist .tick text {
+  fill: #666666;
+  font-size: 12px;
+}
+
+.inventoryHist .grid .domain {
+  display: none;
+}
+
+.inventoryHist .grid .tick {
+  opacity: 1;
+  stroke: none;
+}
+
+.inventoryHist .grid .tick line {
+  stroke: #CCCCCC;
+}
+
+.inventoryHist .grid .tick:nth-child(1) line {
+  stroke: #666666;
+  stroke-width: 2;
 }
 
 path {

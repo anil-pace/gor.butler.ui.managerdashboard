@@ -25,6 +25,13 @@ export const wsOverviewData = {
                 }
               },
               {
+                "resource_id": "pps",
+                "details": {
+                  "data": "aggregate_v2",
+                  "callback": []
+                }
+              },
+              {
                 "resource_id": "chargers",
                 "details": {
                   "data": "aggregate_v2",
@@ -51,7 +58,57 @@ export const wsOverviewData = {
                   "data": "pps_throughput",
                   "callback": []
                 }
-              }
+              },
+              
+                {
+                  "resource_id": "audit",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "overview",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "orders",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "users",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "inventory_today",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "status",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "system",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                }
         ]
 },
 "users":{
@@ -131,20 +188,22 @@ export const wsOverviewData = {
 "inventory":{
           "type": "subscribe",
           "data": [
+                
                 {
-                  "resource_id": "inventory_history",
-                  "details": {
-                    "data": "complete_v2",
-                    "callback": []
-                  }
-                },
-                {
+
                   "resource_id": "inventory_today",
                   "details": {
                     "data": "complete_v2",
                     "callback": []
                   }
                 },
+                {
+                  "resource_id": "inventory_history",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
+                }
                 
           ]
 },

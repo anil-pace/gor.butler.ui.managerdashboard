@@ -1,5 +1,5 @@
 import {ERROR,SUCCESS} from '../constants/appConstants';
-import {EMPTY_PWD,TYPE_SUCCESS,EMPTY_NAME,INVALID_NAME,INVALID_PWD,MATCH_PWD,INVALID_LOCID,INVALID_SKUID} from '../constants/messageConstants';
+import {EMPTY_PWD,TYPE_SUCCESS,EMPTY_NAME,INVALID_NAME,INVALID_PWD_OP,INVALID_PWD_MG,MATCH_PWD,INVALID_LOCID,INVALID_SKUID,INVALID_ID,INVALID_FORMAT} from '../constants/messageConstants';
 
 export function nameStatus(firstname,lastname){
           let nameInfo, format=  /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
@@ -26,23 +26,40 @@ export function nameStatus(firstname,lastname){
           };   
           return nameInfo;
 }
-export function passwordStatus(pwd1,pwd2){
+export function passwordStatus(pswd,confirmPswd,selectedRole,managerRole){
           let passwordInfo;
-          if(!pwd1.length)
+          if(!pswd.length)
           {
             passwordInfo={
               type:ERROR,
               msg:EMPTY_PWD           
             };            
           }
-          if(pwd1.length<6)
+          else if(pswd.length<8)
           {
-            passwordInfo={
+            if(selectedRole===managerRole)
+            {
+              passwordInfo={
               type:ERROR,
-              msg:INVALID_PWD           
-            };            
+              msg:INVALID_PWD_MG           
+              };
+            }
+            else if(pswd.length<6)
+            {
+              passwordInfo={
+              type:ERROR,
+              msg:INVALID_PWD_OP           
+              };              
+            }            
+            else
+            {
+              passwordInfo={
+              type:SUCCESS,
+              msg:TYPE_SUCCESS               
+              };            
+            }
           }
-          else if(pwd1!=pwd2)
+          else if(pswd!=confirmPswd)
           {
             passwordInfo={
               type:ERROR,
@@ -55,8 +72,8 @@ export function passwordStatus(pwd1,pwd2){
               type:SUCCESS,
               msg:TYPE_SUCCESS               
             };            
-          };   
-          return passwordInfo;
+          }   
+        return passwordInfo;
 }
 export function locationStatus(locId){
     let locInfo;
@@ -94,4 +111,30 @@ export function skuStatus(skuId)
             };            
       }
       return skuInfo;
+}
+export function idStatus(userid)
+{
+    let idInfo,format=  /[!@#$%^&*()_+\-=\[\]{};':"\\|,<>\/?]/;
+    if(userid.length<1||userid.length>30)
+    {
+            idInfo={
+              type:ERROR,
+              msg:INVALID_ID           
+            }
+    }
+    else if(format.test(userid))
+    {
+            idInfo={
+              type:ERROR,
+              msg:INVALID_FORMAT           
+            }
+    }
+    else
+      {
+            idInfo={
+              type:SUCCESS,
+              msg:TYPE_SUCCESS               
+            };            
+      }
+    return idInfo;
 }

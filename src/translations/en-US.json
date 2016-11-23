@@ -1,8 +1,28 @@
 [
   {
+    "id": "commonDataTable.edit.button",
+    "description": "edit button",
+    "defaultMessage": "Edit"
+  },
+  {
+    "id": "commonDataTable.Delete.button",
+    "description": "Delete button",
+    "defaultMessage": "Delete"
+  },
+  {
+    "id": "commonDataTable.startAudit.button",
+    "description": "edit button",
+    "defaultMessage": "Start audit"
+  },
+  {
     "id": "footer.description",
     "description": "Footer description",
     "defaultMessage": "Copyright @ 2016 GreyOrange Pte Ltd"
+  },
+  {
+    "id": "app.greeting",
+    "description": "Greeting to welcome the user to the app",
+    "defaultMessage": "Hello, {name}!"
   },
   {
     "id": "header.description",
@@ -17,7 +37,72 @@
   {
     "id": "header.user_post",
     "description": "User post",
-    "defaultMessage": "{user_post}"
+    "defaultMessage": "--"
+  },
+  {
+    "id": "inventory.header",
+    "description": "Inventory Header Message",
+    "defaultMessage": "Inventory"
+  },
+  {
+    "id": "itemTable.categoryType.category",
+    "description": "Category Name",
+    "defaultMessage": "Category"
+  },
+  {
+    "id": "itemTable.cbmUsed.cbm",
+    "description": "CBM Used field",
+    "defaultMessage": "CBM Used"
+  },
+  {
+    "id": "itemTable.daysInHand.count",
+    "description": "Days in Hand",
+    "defaultMessage": "Days in Hand"
+  },
+  {
+    "id": "inventory.snaphot.date",
+    "description": "Snapshot date string",
+    "defaultMessage": "Today's"
+  },
+  {
+    "id": "inventory.snaphot.openingStock",
+    "description": "Snapshot table header",
+    "defaultMessage": "Opening Stock"
+  },
+  {
+    "id": "inventory.snaphot.closingStock",
+    "description": "Snapshot table header",
+    "defaultMessage": "Closing Stock"
+  },
+  {
+    "id": "inventory.snaphot.header",
+    "description": "Snapshot header",
+    "defaultMessage": "stock snapshot"
+  },
+  {
+    "id": "inventory.snaphot.itemsPut",
+    "description": "Snapshot table header",
+    "defaultMessage": "Items Put"
+  },
+  {
+    "id": "inventory.snaphot.itemsPick",
+    "description": "Snapshot table header",
+    "defaultMessage": "Items Pick"
+  },
+  {
+    "id": "inventory.snaphot.currentStock",
+    "description": "Snapshot table header",
+    "defaultMessage": "Current Stock"
+  },
+  {
+    "id": "inventory.snaphot.sku",
+    "description": "Snapshot table header",
+    "defaultMessage": "SKUs"
+  },
+  {
+    "id": "inventory.snaphot.cbmUsed",
+    "description": "Snapshot table header",
+    "defaultMessage": "CBM Used"
   },
   {
     "id": "login.lang.english",
@@ -40,6 +125,11 @@
     "defaultMessage": "Butler"
   },
   {
+    "id": "login.butler.trademark",
+    "description": "Trademark",
+    "defaultMessage": "TM"
+  },
+  {
     "id": "login.butler.manageInterface",
     "description": "Text for Management Interface",
     "defaultMessage": "Management Interface"
@@ -47,7 +137,12 @@
   {
     "id": "login.butler.fail",
     "description": "Text for login failure",
-    "defaultMessage": "Invalid username and/or password"
+    "defaultMessage": "Invalid username and/or password, please try again"
+  },
+  {
+    "id": "login.butler.connection.fail",
+    "description": "Text for connection failure",
+    "defaultMessage": "Connection failure"
   },
   {
     "id": "login.butler.error.username",
@@ -75,6 +170,16 @@
     "defaultMessage": "Login"
   },
   {
+    "id": "OrderSubTab.waves",
+    "description": "waves tab for OrderSubTab",
+    "defaultMessage": "Waves"
+  },
+  {
+    "id": "OrderSubTab.orderlist",
+    "description": "orderlist tab for OrderSubTab",
+    "defaultMessage": "Order List"
+  },
+  {
     "id": "butlerBot.tab.heading",
     "description": "butler bot tab",
     "defaultMessage": "Butler Bots"
@@ -90,24 +195,14 @@
     "defaultMessage": "Charging Station"
   },
   {
-    "id": "notify.success.add",
-    "description": "Text for successfull user addition",
-    "defaultMessage": "User successfully added"
-  },
-  {
-    "id": "notify.success.delete",
-    "description": "Text for successfull user deletion",
-    "defaultMessage": "User successfully deleted"
-  },
-  {
     "id": "notify.success.edit",
     "description": "Text for successfully editing user",
-    "defaultMessage": "User successfully edited"
+    "defaultMessage": "User details updated successfully"
   },
   {
     "id": "notify.error.usernameExists",
     "description": "Text for already registered username",
-    "defaultMessage": "Username already registered!"
+    "defaultMessage": "An account has already been created with this User ID"
   },
   {
     "id": "notify.error.passwordMissing",
@@ -140,6 +235,11 @@
     "defaultMessage": "Please enter a valid User ID"
   },
   {
+    "id": "user.invalid.format",
+    "description": "Text for invalid user ID format",
+    "defaultMessage": "Please use only letters (a-z), numbers, and periods"
+  },
+  {
     "id": "login.empty.password",
     "description": "Text for empty password",
     "defaultMessage": "Please enter a password"
@@ -147,22 +247,137 @@
   {
     "id": "user.empty.name",
     "description": "Text for empty user name",
-    "defaultMessage": "Minimum 6 characters required"
+    "defaultMessage": "Please enter a name"
   },
   {
     "id": "user.invalid.name",
     "description": "Text for invalid user name",
-    "defaultMessage": "Special characters \"~\",\"@\" and \"%\" are not allowed"
+    "defaultMessage": "Special characters like \"~\",\"@\" and \"%\" are not allowed"
   },
   {
-    "id": "user.invalid.password",
-    "description": "Text for invalid password",
-    "defaultMessage": "Minimum 6 characters required"
+    "id": "user.invalid.password.operator",
+    "description": "Text for invalid password for operator",
+    "defaultMessage": "Please enter a password of at least 6 alphanumeric characters"
+  },
+  {
+    "id": "user.invalid.password.manager",
+    "description": "Text for invalid password for manager",
+    "defaultMessage": "Please enter a password of at least 8 alphanumeric characters"
   },
   {
     "id": "user.match.password",
     "description": "Text for passwords not matching",
-    "defaultMessage": "Passwords do not match"
+    "defaultMessage": "Both password entered do not match. Please try again"
+  },
+  {
+    "id": "msu.name.prefix",
+    "description": "prefix for msu name",
+    "defaultMessage": "MSU"
+  },
+  {
+    "id": "chargingStation.name.prefix",
+    "description": "prefix for charging station name",
+    "defaultMessage": "CS"
+  },
+  {
+    "id": "pps.name.prefix",
+    "description": "prefix for pps name",
+    "defaultMessage": "PPS"
+  },
+  {
+    "id": "audit.invalid.sku",
+    "description": "Text for invalid SKU ID",
+    "defaultMessage": "Please enter a valid SKU Number"
+  },
+  {
+    "id": "audit.invalid.location",
+    "description": "Text for invalid location ID",
+    "defaultMessage": "Please enter a valid location Number"
+  },
+  {
+    "id": "notify.error.audit.location",
+    "description": "Text for invalid location",
+    "defaultMessage": "Location does not exist"
+  },
+  {
+    "id": "notify.error.audit.sku",
+    "description": "Text for invalid sku",
+    "defaultMessage": "SKU does not exist"
+  },
+  {
+    "id": "notify.error.audit.g016",
+    "description": "Text for unsuccessful audit deletion",
+    "defaultMessage": "Given audit does not exists"
+  },
+  {
+    "id": "notify.error.audit.AE001",
+    "description": "Text for invalid audit ID",
+    "defaultMessage": "Audit Id does not exists"
+  },
+  {
+    "id": "notify.error.audit.AE002",
+    "description": "Text for invalid PPS",
+    "defaultMessage": "Valid PPS not found for Audit"
+  },
+  {
+    "id": "notify.error.audit.AE004",
+    "description": "Text for already processed location",
+    "defaultMessage": "Audit of location already under process"
+  },
+  {
+    "id": "notify.error.audit.AE005",
+    "description": "Text for already processed sku",
+    "defaultMessage": "Audit of sku already under process"
+  },
+  {
+    "id": "notify.error.audit.AE006",
+    "description": "Text for already processed audit",
+    "defaultMessage": "Audit ID already processed"
+  },
+  {
+    "id": "notify.create.audit.success",
+    "description": "Text for successfull audit creation",
+    "defaultMessage": "New audit task created successfully"
+  },
+  {
+    "id": "notify.start.audit.success",
+    "description": "Text for successfull audit creation",
+    "defaultMessage": "Audit started successfully"
+  },
+  {
+    "id": "notify.delete.audit.processed",
+    "description": "Text for already processed audit",
+    "defaultMessage": "Audit already processed. Cannot delete"
+  },
+  {
+    "id": "notify.error.user.fail",
+    "description": "Text for error in updating user",
+    "defaultMessage": "Error in updating user"
+  },
+  {
+    "id": "notify.error.user.response",
+    "description": "Text for error in response",
+    "defaultMessage": "Error in response"
+  },
+  {
+    "id": "notify.error.audit.create",
+    "description": "Text for error in creating audit",
+    "defaultMessage": "Error in creating audit"
+  },
+  {
+    "id": "notify.error.api",
+    "description": "Text for unregistered API response",
+    "defaultMessage": "API response not registered"
+  },
+  {
+    "id": "notify.error.connection",
+    "description": "Text for connection refused",
+    "defaultMessage": "Connection refused"
+  },
+  {
+    "id": "inventory.histogram.noDataText",
+    "description": "Inventory Histogram No Data Text",
+    "defaultMessage": "No Stock Found"
   },
   {
     "id": "widget.audit.heading.value",
@@ -182,12 +397,362 @@
   {
     "id": "widget.audit.throughput",
     "description": "Throughput message",
-    "defaultMessage": "{count} {pluralMsg} auditing {throughput} items/hr"
+    "defaultMessage": "{count, number} {count, plural, one {PPS} other {PPS}} auditing {throughput} items/hr"
   },
   {
     "id": "widget.audit.heading",
     "description": "Audit Item Heading",
     "defaultMessage": "Items audited"
+  },
+  {
+    "id": "audit.table.heading",
+    "description": "Heading for audit table",
+    "defaultMessage": "Audit Tasks"
+  },
+  {
+    "id": "audit.table.buttonLable",
+    "description": "button label for audit create",
+    "defaultMessage": "Create New Task"
+  },
+  {
+    "id": "auditTable.stationID",
+    "description": "total audit ID for auditTable",
+    "defaultMessage": "{rowsCount} AUDIT ID"
+  },
+  {
+    "id": "auditTable.SubAuditID",
+    "description": "total Sub auditID for auditTable",
+    "defaultMessage": "Total:{rowsCount}"
+  },
+  {
+    "id": "audit.table.type",
+    "description": "audit type for audit table",
+    "defaultMessage": "AUDIT TYPE"
+  },
+  {
+    "id": "audit.table.STATUS",
+    "description": "STATUS for audit",
+    "defaultMessage": "STATUS"
+  },
+  {
+    "id": "audit.table.startTime",
+    "description": "startTime for audit",
+    "defaultMessage": "START TIME"
+  },
+  {
+    "id": "audit.table.progress",
+    "description": "progress for audit task",
+    "defaultMessage": "PROGRESS(%)"
+  },
+  {
+    "id": "audit.table.timeCompleted",
+    "description": "timeCompleted for audit",
+    "defaultMessage": "TIME COMPLETED"
+  },
+  {
+    "id": "audit.table.action",
+    "description": "action Column",
+    "defaultMessage": "ACTIONS"
+  },
+  {
+    "id": "audit.add.heading",
+    "description": "Heading for add audit",
+    "defaultMessage": "Create new audit task"
+  },
+  {
+    "id": "audit.add.subheading",
+    "description": "Subheading for add audit",
+    "defaultMessage": "Select and enter details below to create a new audit task"
+  },
+  {
+    "id": "audit.add.auditdetails.heading",
+    "description": "Text for audit details heading",
+    "defaultMessage": "Select the type of audit task"
+  },
+  {
+    "id": "audit.add.auditdetails.subheading",
+    "description": "Text for audit details subheading",
+    "defaultMessage": "Select the audit type and enter details accordingly"
+  },
+  {
+    "id": "audit.add.auditdetails.fields",
+    "description": "Text for field information",
+    "defaultMessage": "All fields are required"
+  },
+  {
+    "id": "audit.add.type.heading",
+    "description": "Text for Audit type",
+    "defaultMessage": "Audit type"
+  },
+  {
+    "id": "audit.add.typedetails.sku",
+    "description": "Text for sku",
+    "defaultMessage": "Audit by SKU code"
+  },
+  {
+    "id": "audit.add.typedetails.skutext",
+    "description": "Subtext for sku",
+    "defaultMessage": "Create an audit task based on the SKU code of an item"
+  },
+  {
+    "id": "audit.add.typedetails.location",
+    "description": "Text for location",
+    "defaultMessage": "Audit by Location code"
+  },
+  {
+    "id": "audit.add.typedetails.locationtext",
+    "description": "Subtext for manager",
+    "defaultMessage": "Create an audit task based on the location of a MSU"
+  },
+  {
+    "id": "audit.add.sku.heading",
+    "description": "Text for SKU heading",
+    "defaultMessage": "Enter SKU code"
+  },
+  {
+    "id": "audit.add.sku.subheading",
+    "description": "Subtext for enter sku",
+    "defaultMessage": "Enter alphanumeric SKU code of the item to be audited"
+  },
+  {
+    "id": "audit.add.location.heading",
+    "description": "Text for location heading",
+    "defaultMessage": "Enter Location"
+  },
+  {
+    "id": "audit.add.location.subheading",
+    "description": "Subtext for enter location",
+    "defaultMessage": "Format: (XXX.X.X.XX)"
+  },
+  {
+    "id": "audit.add.tips.heading",
+    "description": "Text for tips heading",
+    "defaultMessage": "Tips:"
+  },
+  {
+    "id": "audit.add.tips.subheading",
+    "description": "Subtext for tips",
+    "defaultMessage": "Once an audit task has been created, please click on the \"Assign PPS\" button in the audit listing to start the audit task."
+  },
+  {
+    "id": "audits.add.password.button",
+    "description": "Text for add audit button",
+    "defaultMessage": "Create audit"
+  },
+  {
+    "id": "audit.delete.heading",
+    "description": "Text for audit delete heading",
+    "defaultMessage": "Are you sure you would like to delete audit task {task_name} ?"
+  },
+  {
+    "id": "audit.duplicate.heading",
+    "description": "Text for audit duplicate heading",
+    "defaultMessage": "Are you sure you would like to duplicate audit task {task_name} ?"
+  },
+  {
+    "id": "audit.start.auditdetails.subheading2",
+    "description": "Text for audit details subheading when no pps",
+    "defaultMessage": "There are currently no PPS in audit mode."
+  },
+  {
+    "id": "audit.start.auditdetails.please",
+    "description": "Text for please",
+    "defaultMessage": "Please"
+  },
+  {
+    "id": "audit.start.auditdetails.hyperlink",
+    "description": "Text for hyperlink",
+    "defaultMessage": "go to the PPS mode"
+  },
+  {
+    "id": "audit.start.auditdetails.operations",
+    "description": "Text change operation",
+    "defaultMessage": "change PPS operations."
+  },
+  {
+    "id": "audit.start.ppscheckbox",
+    "description": "Text for PPS",
+    "defaultMessage": "PPS {eta}"
+  },
+  {
+    "id": "audit.start.heading",
+    "description": "Heading for start audit",
+    "defaultMessage": "Start audit task"
+  },
+  {
+    "id": "audit.start.subheading",
+    "description": "Subheading for start audit",
+    "defaultMessage": "Assign one or more PPS and start the audit task"
+  },
+  {
+    "id": "audit.start.auditdetails.heading",
+    "description": "Text for audit details heading",
+    "defaultMessage": "Assign PPS for {task}"
+  },
+  {
+    "id": "audit.start.auditdetails.subheading1",
+    "description": "Text for audit details subheading when pps present",
+    "defaultMessage": "All PPS below are currently in the audit mode."
+  },
+  {
+    "id": "audit.start.button",
+    "description": "Text for start audit button",
+    "defaultMessage": "Start task now"
+  },
+  {
+    "id": "audit.back.button",
+    "description": "Text for go back button",
+    "defaultMessage": "Go Back"
+  },
+  {
+    "id": "audit.add.heading",
+    "description": "Heading for add audit",
+    "defaultMessage": "Create new audit task"
+  },
+  {
+    "id": "audit.add.subheading",
+    "description": "Subheading for add audit",
+    "defaultMessage": "Select and enter details below to create a new audit task"
+  },
+  {
+    "id": "audit.add.auditdetails.heading",
+    "description": "Text for audit details heading",
+    "defaultMessage": "Select the type of audit task"
+  },
+  {
+    "id": "audit.add.auditdetails.subheading",
+    "description": "Text for audit details subheading",
+    "defaultMessage": "Select the audit type and enter details accordingly"
+  },
+  {
+    "id": "audit.add.auditdetails.fields",
+    "description": "Text for field information",
+    "defaultMessage": "All fields are required"
+  },
+  {
+    "id": "audit.add.type.heading",
+    "description": "Text for Audit type",
+    "defaultMessage": "Audit type"
+  },
+  {
+    "id": "audit.add.typedetails.sku",
+    "description": "Text for sku",
+    "defaultMessage": "Audit by SKU code"
+  },
+  {
+    "id": "audit.add.typedetails.skutext",
+    "description": "Subtext for sku",
+    "defaultMessage": "Create an audit task based on the SKU code of an item"
+  },
+  {
+    "id": "audit.add.typedetails.location",
+    "description": "Text for location",
+    "defaultMessage": "Audit by Location code"
+  },
+  {
+    "id": "audit.add.typedetails.locationtext",
+    "description": "Subtext for manager",
+    "defaultMessage": "Create an audit task based on the location of a MSU"
+  },
+  {
+    "id": "audit.add.sku.heading",
+    "description": "Text for SKU heading",
+    "defaultMessage": "Enter SKU code"
+  },
+  {
+    "id": "audit.add.sku.subheading",
+    "description": "Subtext for enter sku",
+    "defaultMessage": "Enter alphanumeric SKU code of the item to be audited"
+  },
+  {
+    "id": "audit.add.location.heading",
+    "description": "Text for location heading",
+    "defaultMessage": "Enter Location"
+  },
+  {
+    "id": "audit.add.location.subheading",
+    "description": "Subtext for enter location",
+    "defaultMessage": "Format: (XXX.X.X.XX)"
+  },
+  {
+    "id": "audit.add.tips.heading",
+    "description": "Text for tips heading",
+    "defaultMessage": "Tips:"
+  },
+  {
+    "id": "audit.add.tips.subheading",
+    "description": "Subtext for tips",
+    "defaultMessage": "Once an audit task has been created, please click on the \"Assign PPS\" button in the audit listing to start the audit task."
+  },
+  {
+    "id": "audits.add.password.button",
+    "description": "Text for add audit button",
+    "defaultMessage": "Create audit"
+  },
+  {
+    "id": "audit.duplicate.heading",
+    "description": "Text for audit duplicate heading",
+    "defaultMessage": "Are you sure you would like to duplicate audit task {task_name} ?"
+  },
+  {
+    "id": "inventory.histogram.header",
+    "description": "Inventory Histogram Header Message",
+    "defaultMessage": "Stock level history"
+  },
+  {
+    "id": "inventory.linechart.header",
+    "description": "Inventory Line Chart Header Message",
+    "defaultMessage": "Item Movements"
+  },
+  {
+    "id": "inventory.histogram.noDataText",
+    "description": "Message for No stock",
+    "defaultMessage": "No Stock Found"
+  },
+  {
+    "id": "snapshot.inventory.usedSpace",
+    "description": "Space utilised message",
+    "defaultMessage": "{utilisedSpace}% space utilized"
+  },
+  {
+    "id": "itemCat.category.heading",
+    "description": "Item category table's column category heading",
+    "defaultMessage": "Category"
+  },
+  {
+    "id": "itemCat.CBM.heading",
+    "description": "Item category table's column CBM heading",
+    "defaultMessage": "CBM Used"
+  },
+  {
+    "id": "itemCat.daysOnHand.heading",
+    "description": "Item category table's column days On Hand heading",
+    "defaultMessage": "Days on Hand"
+  },
+  {
+    "id": "logout.question",
+    "description": "Text for logout question",
+    "defaultMessage": "Are you sure you would like to log out now?"
+  },
+  {
+    "id": "audit.start.auditdetails.subheading2",
+    "description": "Text for audit details subheading when no pps",
+    "defaultMessage": "There are currently no PPS in audit mode."
+  },
+  {
+    "id": "audit.start.auditdetails.noPPS1",
+    "description": "Text please",
+    "defaultMessage": "Please"
+  },
+  {
+    "id": "audit.start.auditdetails.noPPS2",
+    "description": "Text hyperlink",
+    "defaultMessage": "go to the PPS mode"
+  },
+  {
+    "id": "audit.start.auditdetails.noPPS3",
+    "description": "Text change operation",
+    "defaultMessage": "change PPS operations."
   },
   {
     "id": "pickPerformance.dropdown",
@@ -205,9 +770,109 @@
     "defaultMessage": "PPS - audit performance"
   },
   {
+    "id": "orderList.progress.status",
+    "description": "In 'progress message' for orders",
+    "defaultMessage": "In Progress"
+  },
+  {
+    "id": "orderList.completed.status",
+    "description": "'Completed' status",
+    "defaultMessage": "Completed"
+  },
+  {
+    "id": "orderList.exception.status",
+    "description": "'Exception' status",
+    "defaultMessage": "Exception"
+  },
+  {
+    "id": "orderList.Unfulfillable.status",
+    "description": "'Unfulfillable' status",
+    "defaultMessage": "Unfulfillable"
+  },
+  {
+    "id": "orderlist.Refreshed.at",
+    "description": "'Refreshed' status",
+    "defaultMessage": "Refreshed at:"
+  },
+  {
+    "id": "orderlistTab.pageNum",
+    "description": "page num orderlist",
+    "defaultMessage": "Page {currentPage} of {totalPage}"
+  },
+  {
+    "id": "orderlist.table.allDrop",
+    "description": "allOrders dropdown option for orderlist",
+    "defaultMessage": "All orders"
+  },
+  {
+    "id": "orderlist.table.breachedDrop",
+    "description": "breached dropdown option for orderlist",
+    "defaultMessage": "Breached orders"
+  },
+  {
+    "id": "pendingDrop.table.allDrop",
+    "description": "pending dropdown option for orderlist",
+    "defaultMessage": "Pending orders"
+  },
+  {
+    "id": "completedDrop.table.allDrop",
+    "description": "completed dropdown option for orderlist",
+    "defaultMessage": "Completed orders"
+  },
+  {
+    "id": "exceptionDrop.table",
+    "description": "exception order dropdown for orderlist",
+    "defaultMessage": "Exception"
+  },
+  {
+    "id": "orderlist.table.allTimeDrop",
+    "description": "allTime dropdown option for orderlist",
+    "defaultMessage": "All"
+  },
+  {
+    "id": "orderlist.table.oneHrDrop",
+    "description": "oneHr dropdown option for orderlist",
+    "defaultMessage": "Last 1 hours"
+  },
+  {
+    "id": "pendingDrop.table.twoHrDrop",
+    "description": "twoHr dropdown option for orderlist",
+    "defaultMessage": "Last 2 hours"
+  },
+  {
+    "id": "completedDrop.table.sixHrDrop",
+    "description": "sixHr dropdown option for orderlist",
+    "defaultMessage": "Last 6 hours"
+  },
+  {
+    "id": "pendingDrop.table.twelveHrDrop",
+    "description": "twelveHr dropdown option for orderlist",
+    "defaultMessage": "Last 12 hours"
+  },
+  {
+    "id": "completedDrop.table.oneDayDrop",
+    "description": "oneDay dropdown option for orderlist",
+    "defaultMessage": "Last 1 day"
+  },
+  {
     "id": "order.table.heading",
     "description": "Heading for order list",
     "defaultMessage": "OrderList"
+  },
+  {
+    "id": "order.table.buttonLable",
+    "description": "button label for refresh",
+    "defaultMessage": "Refresh Data"
+  },
+  {
+    "id": "orderlist.Totalorder",
+    "description": "total order for ordertable",
+    "defaultMessage": "{totalOrder} Order List"
+  },
+  {
+    "id": "orderlist.subTotalorder",
+    "description": "subtotal order for ordertable",
+    "defaultMessage": "Total:{totalOrder}"
   },
   {
     "id": "orderList.table.status",
@@ -215,688 +880,24 @@
     "defaultMessage": "STATUS"
   },
   {
-    "id": "orderlist.table.operatingMode",
-    "description": "recievedTime for Orders",
-    "defaultMessage": "RECIEVED TIME"
-  },
-  {
-    "id": "order.table.heading",
-    "description": "Heading for order list",
-    "defaultMessage": "OrderList"
-  },
-  {
-    "id": "orderList.table.status",
-    "description": "Status for orders",
-    "defaultMessage": "STATUS"
-  },
-  {
-    "id": "waves.table.pickBy",
-    "description": "pick by for waves",
+    "id": "orderlist.table.pickBy",
+    "description": "pick by for orderlist",
     "defaultMessage": "PICK BY"
   },
   {
     "id": "orderlist.table.operatingMode",
     "description": "recievedTime for Orders",
-    "defaultMessage": "RECIEVED TIME"
+    "defaultMessage": "RECEIVED TIME"
   },
   {
-    "id": "waves.table.completedTime",
-    "description": "completedTime for waves",
+    "id": "orderlist.table.completedTime",
+    "description": "completedTime for orderlist",
     "defaultMessage": "COMPLETED"
   },
   {
-    "id": "waves.table.orderLine",
-    "description": "orderLine for waves",
+    "id": "orderlist.table.orderLine",
+    "description": "orderLine for orderlist",
     "defaultMessage": "ORDER LINE"
-  },
-  {
-    "id": "waves.table.heading",
-    "description": "Heading for waves",
-    "defaultMessage": "Waves"
-  },
-  {
-    "id": "waves.table.status",
-    "description": "Status for waves",
-    "defaultMessage": "STATUS"
-  },
-  {
-    "id": "butlerBot.table.startTime",
-    "description": "StartTime for butlerbot",
-    "defaultMessage": "START TIME"
-  },
-  {
-    "id": "waves.table.cutOffTime",
-    "description": "cutOffTime for waves",
-    "defaultMessage": "CUT-OFF TIME"
-  },
-  {
-    "id": "butlerBot.table.ordersToFulfill",
-    "description": "orders to fulfill for waves",
-    "defaultMessage": "ORDERS TO FULFILL"
-  },
-  {
-    "id": "waves.table.progress",
-    "description": "progress for waves",
-    "defaultMessage": "PROGRESS(%)"
-  },
-  {
-    "id": "waves.table.totalOrders",
-    "description": "totalOrders for waves",
-    "defaultMessage": "TOTAL ORDERS"
-  },
-  {
-    "id": "health.pps",
-    "description": "pps health",
-    "defaultMessage": "PPS"
-  },
-  {
-    "id": "health.Butler",
-    "description": "Butler bots health",
-    "defaultMessage": "Butler bots"
-  },
-  {
-    "id": "health.ChargingStation",
-    "description": "Charging Stations health",
-    "defaultMessage": "Charging Stations"
-  },
-  {
-    "id": "systemHealth.dropdown",
-    "description": "systemHealth dropdown label",
-    "defaultMessage": "System Health"
-  },
-  {
-    "id": "PPSpickPerformance.dropdown",
-    "description": "PPSpickPerformance dropdown label",
-    "defaultMessage": "PPS Pick Performance"
-  },
-  {
-    "id": "PPSputPerformance.dropdown",
-    "description": "PPSputPerformance dropdown label",
-    "defaultMessage": "PPS Put Performance"
-  },
-  {
-    "id": "PPSauditPerformance.dropdown",
-    "description": "PPSauditPerformance dropdown label",
-    "defaultMessage": "PPS Audit Performance"
-  },
-  {
-    "id": "widget.pick.headingleft",
-    "description": "Heading for pick status widget",
-    "defaultMessage": "Orders to fullfill"
-  },
-  {
-    "id": "widget.pick.completed",
-    "description": "Text for completed",
-    "defaultMessage": "Completed"
-  },
-  {
-    "id": "widget.pick.status.idle",
-    "description": "PPS Offline",
-    "defaultMessage": "Offline"
-  },
-  {
-    "id": "widget.pick.status.starting",
-    "description": "Awaiting throughput data",
-    "defaultMessage": "Starting..."
-  },
-  {
-    "id": "widget.pick.throughput",
-    "description": "Throughput message",
-    "defaultMessage": "{count} PPS fullfilling at {throughput} items/hr"
-  },
-  {
-    "id": "widget.pick.headingright",
-    "description": "Heading for cut-off time",
-    "defaultMessage": "Time to cut-off"
-  },
-  {
-    "id": "widget.pick.textright",
-    "description": "Time remaining",
-    "defaultMessage": "{cut_off}"
-  },
-  {
-    "id": "widget.pick.lowright",
-    "description": "Estimated time",
-    "defaultMessage": "Completing in {eta}"
-  },
-  {
-    "id": "widget.pick.statusright",
-    "description": "Text for wave end time",
-    "defaultMessage": "{wave_end}"
-  },
-  {
-    "id": "widget.pick.statusleft.onschedule",
-    "description": "Text for on schedule",
-    "defaultMessage": "On Schedule"
-  },
-  {
-    "id": "widget.pick.statusleft.atrisk",
-    "description": "Text for orders at risk",
-    "defaultMessage": "{count_risk} {count_risk, plural, one {order} other {orders}} at risk"
-  },
-  {
-    "id": "widget.put.heading.value",
-    "description": "Total Items Stocked",
-    "defaultMessage": "None"
-  },
-  {
-    "id": "widget.put.status.offline",
-    "description": "Offline Status",
-    "defaultMessage": "Offline"
-  },
-  {
-    "id": "widget.put.status.starting",
-    "description": "Awaiting throughput data",
-    "defaultMessage": "Starting..."
-  },
-  {
-    "id": "widget.put.throughput",
-    "description": "Throughput message",
-    "defaultMessage": "{count} {pluralMsg} stocking {throughput} items/hr"
-  },
-  {
-    "id": "widget.put.heading",
-    "description": "Put Item Heading",
-    "defaultMessage": "Items stocked"
-  },
-  {
-    "id": "butlerBot.table.heading",
-    "description": "Heading for butlerbot",
-    "defaultMessage": "BUTLER BOTS"
-  },
-  {
-    "id": "butlerBot.table.status",
-    "description": "Status for butlerbot",
-    "defaultMessage": "STATUS"
-  },
-  {
-    "id": "butlerBot.table.currentTask",
-    "description": "Current task for butlerbot",
-    "defaultMessage": "CURRENT TASK"
-  },
-  {
-    "id": "butlerBot.table.msu",
-    "description": "MSU Status for butlerbot",
-    "defaultMessage": "MSU"
-  },
-  {
-    "id": "butlerBot.table.location",
-    "description": "Location for butlerbot",
-    "defaultMessage": "LOCATION"
-  },
-  {
-    "id": "butlerBot.table.voltage",
-    "description": "voltage for butlerbot",
-    "defaultMessage": "VOLTAGE"
-  },
-  {
-    "id": "ChargingStations.table.heading",
-    "description": "Heading for ChargingStations",
-    "defaultMessage": "CHARGING STATIONS"
-  },
-  {
-    "id": "ChargingStations.table.STATUS",
-    "description": "STATUS for ChargingStations",
-    "defaultMessage": "STATUS"
-  },
-  {
-    "id": "ChargingStations.table.operatingMode",
-    "description": "operatingMode for ChargingStations",
-    "defaultMessage": "OPERATING MODE"
-  },
-  {
-    "id": "ChargingStations.table.connectedBots",
-    "description": "connectedBots for ChargingStations",
-    "defaultMessage": "BOTS CONNECTED"
-  },
-  {
-    "id": "NotificationTable.table.heading",
-    "description": "Heading for NotificationTable",
-    "defaultMessage": "Notifications"
-  },
-  {
-    "id": "NotificationTable.table.component",
-    "description": "component for NotificationTable",
-    "defaultMessage": "COMPONENT"
-  },
-  {
-    "id": "Notifications.table.status",
-    "description": "Status for NotificationTable",
-    "defaultMessage": "EVENT TYPE"
-  },
-  {
-    "id": "NotificationTable.table.description",
-    "description": "description for current component",
-    "defaultMessage": "DESCRIPTION"
-  },
-  {
-    "id": "NotificationTable.table.remark",
-    "description": "remark for component",
-    "defaultMessage": "REMARKS"
-  },
-  {
-    "id": "NotificationTable.table.location",
-    "description": "Starting Time for Component",
-    "defaultMessage": "TIME"
-  },
-  {
-    "id": "pps.table.heading",
-    "description": "Heading for PPS",
-    "defaultMessage": "PPS"
-  },
-  {
-    "id": "PPS.table.status",
-    "description": "Status for PPS",
-    "defaultMessage": "STATUS"
-  },
-  {
-    "id": "PPS.table.operatingMode",
-    "description": "operatingMode for PPS",
-    "defaultMessage": "OPERATING MODE"
-  },
-  {
-    "id": "PPS.table.performance",
-    "description": "performance Status for PPS",
-    "defaultMessage": "PERFORMANCE"
-  },
-  {
-    "id": "PPS.table.operatorAssigned",
-    "description": "operatorAssigned for PPS",
-    "defaultMessage": "OPERATOR ASSIGNED"
-  },
-  {
-    "id": "overview.tab.heading",
-    "description": "overview tab",
-    "defaultMessage": "OVERVIEW"
-  },
-  {
-    "id": "system.tab.heading",
-    "description": "system tab",
-    "defaultMessage": "SYSTEM"
-  },
-  {
-    "id": "orders.tab.heading",
-    "description": "orders tab",
-    "defaultMessage": "ORDERS"
-  },
-  {
-    "id": "users.tab.heading",
-    "description": "users tab",
-    "defaultMessage": "USERS"
-  },
-  {
-    "id": "overviewStatus.tab.heading",
-    "description": "overview Status",
-    "defaultMessage": "Fulfiling orders"
-  },
-  {
-    "id": "systemStatus.tab.heading",
-    "description": "system Status",
-    "defaultMessage": "Online"
-  },
-  {
-    "id": "ordersStatus.tab.heading",
-    "description": "orders Status",
-    "defaultMessage": "70% fulfilled"
-  },
-  {
-    "id": "usersStatus.tab.heading",
-    "description": "users Status",
-    "defaultMessage": "35 users logged in"
-  },
-  {
-    "id": "users.add.heading",
-    "description": "Heading for Add new user",
-    "defaultMessage": "Add new user"
-  },
-  {
-    "id": "users.add.subheading",
-    "description": "Subheading for add new user",
-    "defaultMessage": "All the fields are mandatory"
-  },
-  {
-    "id": "users.add.userdetails.heading",
-    "description": "Text for user details heading",
-    "defaultMessage": "Enter User details"
-  },
-  {
-    "id": "users.add.userdetails.subheading",
-    "description": "Text for user details subheading",
-    "defaultMessage": "A User ID will be required to log into the system"
-  },
-  {
-    "id": "users.add.userdetails.userid",
-    "description": "Text for user id",
-    "defaultMessage": "User ID"
-  },
-  {
-    "id": "users.add.userdetails.firstname",
-    "description": "Text for first name",
-    "defaultMessage": "First Name"
-  },
-  {
-    "id": "users.add.userdetails.lastname",
-    "description": "Text for last name",
-    "defaultMessage": "Last Name"
-  },
-  {
-    "id": "users.add.password.heading",
-    "description": "Heading for create password",
-    "defaultMessage": "Create password"
-  },
-  {
-    "id": "sers.add.password.subheading",
-    "description": "Subheading for create password",
-    "defaultMessage": "Min of 6 digits will be required for logging into the Operator Interface"
-  },
-  {
-    "id": "users.add.password.field1",
-    "description": "Text for password",
-    "defaultMessage": "Password"
-  },
-  {
-    "id": "users.add.password.field2",
-    "description": "Text for confirm password",
-    "defaultMessage": "Confirm Password"
-  },
-  {
-    "id": "users.add.password.button",
-    "description": "Text for add new user button",
-    "defaultMessage": "Add new user"
-  },
-  {
-    "id": "users.delete.heading",
-    "description": "Text for user delete heading",
-    "defaultMessage": "Information related to the user will be lost"
-  },
-  {
-    "id": "users.edit.heading",
-    "description": "Heading for Edit user",
-    "defaultMessage": "Edit user"
-  },
-  {
-    "id": "users.edit.subheading",
-    "description": "Subheading for Edit user",
-    "defaultMessage": "All the fields are mandatory"
-  },
-  {
-    "id": "users.edit.userdetails.heading",
-    "description": "Text for user details heading",
-    "defaultMessage": "Enter User details"
-  },
-  {
-    "id": "users.edit.userdetails.subheading",
-    "description": "Text for user details subheading",
-    "defaultMessage": "A User ID will be required to log into the system"
-  },
-  {
-    "id": "users.edit.userdetails.userid",
-    "description": "Text for user id",
-    "defaultMessage": "User ID"
-  },
-  {
-    "id": "users.edit.userdetails.firstname",
-    "description": "Text for first name",
-    "defaultMessage": "First Name"
-  },
-  {
-    "id": "users.edit.userdetails.lastname",
-    "description": "Text for last name",
-    "defaultMessage": "Last Name"
-  },
-  {
-    "id": "users.edit.changepassword.heading",
-    "description": "Heading for Change password",
-    "defaultMessage": "Change password"
-  },
-  {
-    "id": "users.edit.changepassword.subheading",
-    "description": "Subheading for create password",
-    "defaultMessage": "Min of 6 digits will be required for logging into the Operator Interface"
-  },
-  {
-    "id": "users.edit.password.field1",
-    "description": "Text for password",
-    "defaultMessage": "Password"
-  },
-  {
-    "id": "users.edit.password.field2",
-    "description": "Text for confirm password",
-    "defaultMessage": "Confirm Password"
-  },
-  {
-    "id": "users.edit.password.",
-    "description": "Heading for Password",
-    "defaultMessage": "Password"
-  },
-  {
-    "id": "users.edit.password.query",
-    "description": "Text for change password",
-    "defaultMessage": "Change Password?"
-  },
-  {
-    "id": "users.edit.password.button",
-    "description": "Text for edit user button",
-    "defaultMessage": "Save"
-  },
-  {
-    "id": "users.add.roledetails.heading",
-    "description": "Heading for role",
-    "defaultMessage": "Choose a role"
-  },
-  {
-    "id": "users.add.roledetails.subheading",
-    "description": "Subheading for role",
-    "defaultMessage": "User will be given a specific level of control over the Butler system depending on the designated role"
-  },
-  {
-    "id": "users.add.roledetails.operator",
-    "description": "Text for operator",
-    "defaultMessage": "Operator"
-  },
-  {
-    "id": "users.add.roledetails.operatortext",
-    "description": "Subtext for operator",
-    "defaultMessage": "Grant access to the Operator Interface at each Pick Put Station in the Butler system"
-  },
-  {
-    "id": "users.add.roledetails.supervisortext",
-    "description": "Subtext for supervisor",
-    "defaultMessage": "Grant access to the Management Interface and Operator Interface for the Butler system"
-  },
-  {
-    "id": "users.add.roledetails.manager",
-    "description": "Text for manager",
-    "defaultMessage": "Manager"
-  },
-  {
-    "id": "users.add.roledetails.managertext",
-    "description": "Subtext for manager",
-    "defaultMessage": "Grant access to the Management Interface and Operator Interface to all systems"
-  },
-  {
-    "id": "user.table.heading",
-    "description": "Heading for users table",
-    "defaultMessage": "USERS"
-  },
-  {
-    "id": "user.table.users",
-    "description": "Users Column",
-    "defaultMessage": "USERS"
-  },
-  {
-    "id": "user.table.status",
-    "description": "Users Status",
-    "defaultMessage": "STATUS"
-  },
-  {
-    "id": "user.table.role",
-    "description": "User Role",
-    "defaultMessage": "ROLE"
-  },
-  {
-    "id": "user.table.workMode",
-    "description": "User Workmode",
-    "defaultMessage": "WORKMODE"
-  },
-  {
-    "id": "user.table.location",
-    "description": "User location",
-    "defaultMessage": "LOCATION"
-  },
-  {
-    "id": "user.table.logInTime",
-    "description": "User log in time",
-    "defaultMessage": "LOG IN TIME"
-  },
-  {
-    "id": "snapshot.inventory.usedSpace",
-    "description": "Space utilised message",
-    "defaultMessage": "{utilisedSpace}% space utilized"
-  },
-  {
-    "id": "butlerDetail.name.prefix",
-    "description": "prefix for butler id",
-    "defaultMessage": "BOT - {botId}"
-  },
-  {
-    "id": "pps.name.prefix",
-    "description": "prefix for pps id",
-    "defaultMessage": "PPS - {ppsId}"
-  },
-  {
-    "id": "charger.name.prefix",
-    "description": "prefix for charger id",
-    "defaultMessage": "CS - {csId}"
-  },
-  {
-    "id": "msu.name.prefix",
-    "description": "prefix for msu id",
-    "defaultMessage": "MSU - {msuId}"
-  },
-  {
-    "id": "ppsDetail.pick.status",
-    "description": "pick status for pps",
-    "defaultMessage": "Pick"
-  },
-  {
-    "id": "ppsDetail.put.status",
-    "description": "put status for pps",
-    "defaultMessage": "Put"
-  },
-  {
-    "id": "ppsDetail.audit.status",
-    "description": "audit status for pps",
-    "defaultMessage": "Audit"
-  },
-  {
-    "id": "ppsDetail.name.prefix",
-    "description": "prefix for pps id in ppsDetail",
-    "defaultMessage": "PPS - {ppsId}"
-  },
-  {
-    "id": "ppsDetail.on.status",
-    "description": "on status for pps",
-    "defaultMessage": "On"
-  },
-  {
-    "id": "ppsDetail.off.prefix",
-    "description": "off status for pps",
-    "defaultMessage": "Off"
-  },
-  {
-    "id": "ppsDetail.performance.prefix",
-    "description": "performance for pps id in ppsDetail",
-    "defaultMessage": "{performance} - orders/hr"
-  },
-  {
-    "id": "chargersDetail.connected.status",
-    "description": "connected status for chargersDetail",
-    "defaultMessage": "Connected"
-  },
-  {
-    "id": "chargersDetail.disconnected.status",
-    "description": "disconnected status for chargersDetail",
-    "defaultMessage": "Disconnected"
-  },
-  {
-    "id": "chargersDetail.manual.mode",
-    "description": "manual mode for chargersDetail",
-    "defaultMessage": "Manual"
-  },
-  {
-    "id": "chargersDetail.auto.mode",
-    "description": "Auto mode for chargersDetail",
-    "defaultMessage": "Auto"
-  },
-  {
-    "id": "chargersDetail.name.prefix",
-    "description": "prefix for cs id in chargersDetail",
-    "defaultMessage": "Charging Stations - {csId}"
-  },
-  {
-    "id": "chargersDetail.butler.prefix",
-    "description": "prefix for butler id in chargersDetail",
-    "defaultMessage": "Butler - {botId}"
-  },
-  {
-    "id": "butlerDetail.online.status",
-    "description": "online status for butlerDetail",
-    "defaultMessage": "Online"
-  },
-  {
-    "id": "butlerDetail.offline.status",
-    "description": "offline status for butlerDetail",
-    "defaultMessage": "Offline"
-  },
-  {
-    "id": "ButlerBotTable.botState",
-    "description": "bot state for ButlerBotTable",
-    "defaultMessage": "Pick ({pick}) . Put ({put}) . Charging ({charging}) . Idle ({idle})"
-  },{
-    "id": "ButlerBotTable.TotalBot",
-    "description": "total bot for ButlerBotTable",
-    "defaultMessage": "{totalBot} BOT"
-  },
-  {
-    "id": "ButlerBotTable.subTotalBot",
-    "description": "sub text for totalbot ButlerBotTable",
-    "defaultMessage": "Total: {totalBot}"
-  },
-  {
-    "id": "PPS.table.pickDrop",
-    "description": "pick dropdown option for PPS",
-    "defaultMessage": "Put"
-  },
-  {
-    "id": "PPS.table.putDrop",
-    "description": "put dropdown option for PPS",
-    "defaultMessage": "Pick"
-  },
-  {
-    "id": "PPS.table.auditDrop",
-    "description": "audit dropdown option for PPS",
-    "defaultMessage": "Audit"
-  },
-  {
-    "id": "waveDetail.progress.status",
-    "description": "progress status for wave",
-    "defaultMessage": "In Progress"
-  },
-  {
-    "id": "waveDetail.completed.status",
-    "description": "completed status for wave",
-    "defaultMessage": "Completed"
-  },
-  {
-    "id": "waveDetail.breached.status",
-    "description": "breached status for wave",
-    "defaultMessage": "Breached"
-  },
-  {
-    "id": "waveDetail.pending.status",
-    "description": "pending status for wave",
-    "defaultMessage": "Pending"
   },
   {
     "id": "waveDetail.id.prefix",
@@ -974,94 +975,769 @@
     "defaultMessage": "{totalOrders} orders"
   },
   {
-    "id": "orderlist.table.allDrop",
-    "description": "allOrders dropdown option for orderlist",
-    "defaultMessage": "All orders"
+    "id": "health.pps",
+    "description": "pps health",
+    "defaultMessage": "PPS"
   },
   {
-    "id": "orderlist.table.breachedDrop",
-    "description": "breached dropdown option for orderlist",
-    "defaultMessage": "Breached orders"
+    "id": "health.Butler",
+    "description": "Butler bots health",
+    "defaultMessage": "Butler bots"
   },
   {
-    "id": "pendingDrop.table.allDrop",
-    "description": "pending dropdown option for orderlist",
-    "defaultMessage": "Pending orders"
+    "id": "health.ChargingStation",
+    "description": "Charging Stations health",
+    "defaultMessage": "Charging Stations"
   },
   {
-    "id": "completedDrop.table.allDrop",
-    "description": "completed dropdown option for orderlist",
-    "defaultMessage": "Completed orders"
+    "id": "systemHealth.dropdown",
+    "description": "systemHealth dropdown label",
+    "defaultMessage": "System Health"
   },
   {
-    "id": "orderlist.table.allTimeDrop",
-    "description": "allTime dropdown option for orderlist",
-    "defaultMessage": "All"
+    "id": "PPSpickPerformance.dropdown",
+    "description": "PPSpickPerformance dropdown label",
+    "defaultMessage": "PPS Pick Performance"
   },
   {
-    "id": "orderlist.table.oneHrDrop",
-    "description": "oneHr dropdown option for orderlist",
-    "defaultMessage": "Last 1 hours"
+    "id": "PPSputPerformance.dropdown",
+    "description": "PPSputPerformance dropdown label",
+    "defaultMessage": "PPS Put Performance"
   },
   {
-    "id": "pendingDrop.table.twoHrDrop",
-    "description": "twoHr dropdown option for orderlist",
-    "defaultMessage": "Last 2 hours"
+    "id": "PPSauditPerformance.dropdown",
+    "description": "PPSauditPerformance dropdown label",
+    "defaultMessage": "PPS Audit Performance"
   },
   {
-    "id": "completedDrop.table.sixHrDrop",
-    "description": "sixHr dropdown option for orderlist",
-    "defaultMessage": "Last 6 hours"
+    "id": "widget.pick.headingleft",
+    "description": "Heading for pick status widget",
+    "defaultMessage": "Orders to fullfill"
   },
   {
-    "id": "pendingDrop.table.twelveHrDrop",
-    "description": "twelveHr dropdown option for orderlist",
-    "defaultMessage": "Last 12 hours"
+    "id": "widget.pick.completed",
+    "description": "Text for completed",
+    "defaultMessage": "Completed"
   },
   {
-    "id": "completedDrop.table.oneDayDrop",
-    "description": "oneDay dropdown option for orderlist",
-    "defaultMessage": "Last 1 day"
+    "id": "widget.pick.status.idle",
+    "description": "PPS Offline",
+    "defaultMessage": "Offline"
   },
   {
-    "id": "order.table.heading",
-    "description": "Heading for order list",
-    "defaultMessage": "OrderList"
+    "id": "widget.pick.status.starting",
+    "description": "Awaiting throughput data",
+    "defaultMessage": "Starting..."
   },
   {
-    "id": "orderlist.Totalorder",
-    "description": "total order for ordertable",
-    "defaultMessage": "{totalOrder} Order List"
+    "id": "widget.pick.throughput",
+    "description": "Throughput message",
+    "defaultMessage": "{count} PPS fullfilling at {throughput} items/hr"
   },
   {
-    "id": "orderlist.subTotalorder",
-    "description": "subtotal order for ordertable",
-    "defaultMessage": "Total:{totalOrder}"
+    "id": "widget.pick.lowright",
+    "description": "Estimated time",
+    "defaultMessage": "Completing in {eta}"
   },
   {
-    "id": "orderList.table.status",
-    "description": "Status for orders",
+    "id": "widget.pick.headingright",
+    "description": "Heading for cut-off time",
+    "defaultMessage": "Time to cut-off"
+  },
+  {
+    "id": "widget.pick.textright",
+    "description": "Time remaining",
+    "defaultMessage": "{cut_off}"
+  },
+  {
+    "id": "widget.pick.statusright",
+    "description": "Text for wave end time",
+    "defaultMessage": "{wave_end}"
+  },
+  {
+    "id": "widget.pick.statusleft.onschedule",
+    "description": "Text for on schedule",
+    "defaultMessage": "On Schedule"
+  },
+  {
+    "id": "widget.pick.statusleft.atrisk",
+    "description": "Text for orders at risk",
+    "defaultMessage": "{count_risk} {count_risk, plural, one {order} other {orders}} at risk"
+  },
+  {
+    "id": "widget.put.heading.value",
+    "description": "Total Items Stocked",
+    "defaultMessage": "None"
+  },
+  {
+    "id": "widget.put.status.offline",
+    "description": "Offline Status",
+    "defaultMessage": "Offline"
+  },
+  {
+    "id": "widget.put.status.starting",
+    "description": "Awaiting throughput data",
+    "defaultMessage": "Starting..."
+  },
+  {
+    "id": "widget.put.throughput",
+    "description": "Throughput message",
+    "defaultMessage": "{count} {pluralMsg} stocking {throughput} items/hr"
+  },
+  {
+    "id": "widget.put.heading",
+    "description": "Put Item Heading",
+    "defaultMessage": "Items stocked"
+  },
+  {
+    "id": "audit.start.ppscheckbox",
+    "description": "Text for PPS",
+    "defaultMessage": "PPS {eta}"
+  },
+  {
+    "id": "audit.start.heading",
+    "description": "Heading for start audit",
+    "defaultMessage": "Start audit task"
+  },
+  {
+    "id": "audit.start.subheading",
+    "description": "Subheading for start audit",
+    "defaultMessage": "Assign one or more PPS and start the audit task."
+  },
+  {
+    "id": "audit.start.auditdetails.heading",
+    "description": "Text for audit details heading",
+    "defaultMessage": "Assign PPS for Location"
+  },
+  {
+    "id": "audit.start.auditdetails.subheading1",
+    "description": "Text for audit details subheading when pps present",
+    "defaultMessage": "All PPS below are currently in the audit mode."
+  },
+  {
+    "id": "audit.start.button",
+    "description": "Text for start audit button",
+    "defaultMessage": "Start task now"
+  },
+  {
+    "id": "audit.back.button",
+    "description": "Text for go back button",
+    "defaultMessage": "Go Back"
+  },
+  {
+    "id": "pps.name.prefix",
+    "description": "prefix for pps id",
+    "defaultMessage": "PPS - {ppsId}"
+  },
+  {
+    "id": "charger.name.prefix",
+    "description": "prefix for charger id",
+    "defaultMessage": "CS - {csId}"
+  },
+  {
+    "id": "msu.name.prefix",
+    "description": "prefix for msu id",
+    "defaultMessage": "MSU - {msuId}"
+  },
+  {
+    "id": "butlerBot.table.heading",
+    "description": "Heading for butlerbot",
+    "defaultMessage": "Butler Bots"
+  },
+  {
+    "id": "ButlerBotTable.TotalBot",
+    "description": "total bot for ButlerBotTable",
+    "defaultMessage": "{totalBot} BOT"
+  },
+  {
+    "id": "ButlerBotTable.subTotalBot",
+    "description": "sub text for totalbot ButlerBotTable",
+    "defaultMessage": "Total: {totalBot}"
+  },
+  {
+    "id": "butlerBot.table.status",
+    "description": "Status for butlerbot",
     "defaultMessage": "STATUS"
   },
   {
-    "id": "orderlist.table.pickBy",
-    "description": "pick by for orderlist",
-    "defaultMessage": "PICK BY"
+    "id": "butlerBot.table.currentTask",
+    "description": "Current task for butlerbot",
+    "defaultMessage": "CURRENT TASK"
   },
   {
-    "id": "orderlist.table.operatingMode",
-    "description": "recievedTime for Orders",
-    "defaultMessage": "RECIEVED TIME"
+    "id": "ButlerBotTable.botState",
+    "description": "bot state for ButlerBotTable",
+    "defaultMessage": "Pick ({pick}) . Put ({put}) . Charging ({charging}) . Idle ({idle})"
   },
   {
-    "id": "orderlist.table.completedTime",
-    "description": "completedTime for orderlist",
-    "defaultMessage": "COMPLETED"
+    "id": "butlerBot.table.msu",
+    "description": "MSU Status for butlerbot",
+    "defaultMessage": "MSU"
   },
   {
-    "id": "orderlist.table.orderLine",
-    "description": "orderLine for orderlist",
-    "defaultMessage": "ORDER LINE"
+    "id": "ButlerBotTable.mounted",
+    "description": "msu mounted for ButlerBotTable",
+    "defaultMessage": "{msuMounted} Mounted"
+  },
+  {
+    "id": "butlerBot.table.location",
+    "description": "Location for butlerbot",
+    "defaultMessage": "LOCATION"
+  },
+  {
+    "id": "ButlerBotTable.locations",
+    "description": "msu mounted for ButlerBotTable",
+    "defaultMessage": "{locations} Mounted"
+  },
+  {
+    "id": "butlerBot.table.voltage",
+    "description": "voltage for butlerbot",
+    "defaultMessage": "VOLTAGE"
+  },
+  {
+    "id": "ButlerBotTable.avgVoltage",
+    "description": "avgVoltage for ButlerBotTable",
+    "defaultMessage": "Avg. Voltage {voltage}"
+  },
+  {
+    "id": "chargersDetail.name.prefix",
+    "description": "prefix for cs id in chargersDetail",
+    "defaultMessage": "Charging Stations - {csId}"
+  },
+  {
+    "id": "chargersDetail.butler.prefix",
+    "description": "prefix for butler id in chargersDetail",
+    "defaultMessage": "Butler - {botId}"
+  },
+  {
+    "id": "ChargingStations.table.heading",
+    "description": "Heading for ChargingStations",
+    "defaultMessage": "Charging Stations"
+  },
+  {
+    "id": "ChargingStationsTable.stationID",
+    "description": "total stationID for ChargingStationsTable",
+    "defaultMessage": "{rowsCount} STATION ID"
+  },
+  {
+    "id": "ChargingStationsTable.SubstationID",
+    "description": "total SubStationID for ChargingStationsTable",
+    "defaultMessage": "Total:{rowsCount}"
+  },
+  {
+    "id": "ChargingStations.table.STATUS",
+    "description": "STATUS for ChargingStations",
+    "defaultMessage": "STATUS"
+  },
+  {
+    "id": "ChargingStations.table.operatingMode",
+    "description": "operatingMode for ChargingStations",
+    "defaultMessage": "OPERATING MODE"
+  },
+  {
+    "id": "ChargingStationsTable.mode",
+    "description": "cs mode for ChargingStationsTable",
+    "defaultMessage": "Manual ({manual}) . Auto ({auto})"
+  },
+  {
+    "id": "ChargingStations.table.connectedBots",
+    "description": "connectedBots for ChargingStations",
+    "defaultMessage": "BOTS CONNECTED"
+  },
+  {
+    "id": "ChargingStationsTable.totalBots",
+    "description": "total bots ChargingStationsTable",
+    "defaultMessage": "{totalBots} bots connected"
+  },
+  {
+    "id": "NotificationTable.table.heading",
+    "description": "Heading for NotificationTable",
+    "defaultMessage": "Notifications"
+  },
+  {
+    "id": "NotificationTable.table.component",
+    "description": "component for NotificationTable",
+    "defaultMessage": "COMPONENT"
+  },
+  {
+    "id": "Notifications.table.status",
+    "description": "Status for NotificationTable",
+    "defaultMessage": "EVENT TYPE"
+  },
+  {
+    "id": "NotificationTable.table.description",
+    "description": "description for current component",
+    "defaultMessage": "DESCRIPTION"
+  },
+  {
+    "id": "NotificationTable.table.remark",
+    "description": "remark for component",
+    "defaultMessage": "REMARKS"
+  },
+  {
+    "id": "NotificationTable.table.location",
+    "description": "Starting Time for Component",
+    "defaultMessage": "TIME"
+  },
+  {
+    "id": "ppsDetail.performance.prefix",
+    "description": "performance for pps id in ppsDetail",
+    "defaultMessage": "{performance} - orders/hr"
+  },
+  {
+    "id": "PPS.table.pickDrop",
+    "description": "pick dropdown option for PPS",
+    "defaultMessage": "Put"
+  },
+  {
+    "id": "PPS.table.putDrop",
+    "description": "put dropdown option for PPS",
+    "defaultMessage": "Pick"
+  },
+  {
+    "id": "PPS.table.auditDrop",
+    "description": "audit dropdown option for PPS",
+    "defaultMessage": "Audit"
+  },
+  {
+    "id": "pps.table.heading",
+    "description": "Heading for PPS",
+    "defaultMessage": "PPS"
+  },
+  {
+    "id": "PPStable.selected",
+    "description": "selected pps for ppsSelected",
+    "defaultMessage": "{selected} selected"
+  },
+  {
+    "id": "PPStable.Totalpps",
+    "description": "total pps",
+    "defaultMessage": "{ppsTotal} PPS"
+  },
+  {
+    "id": "PPStable.Subpps",
+    "description": "sub pps",
+    "defaultMessage": "Total: {ppsTotal}"
+  },
+  {
+    "id": "PPS.table.status",
+    "description": "Status for PPS",
+    "defaultMessage": "STATUS"
+  },
+  {
+    "id": "PPS.table.operatingMode",
+    "description": "operatingMode for PPS",
+    "defaultMessage": "OPERATING MODE"
+  },
+  {
+    "id": "PPStable.ppsState",
+    "description": "pps state for PPStable",
+    "defaultMessage": "Pick ({pick}) . Put ({put}) . Audit ({audit}) . Not set ({notSet})"
+  },
+  {
+    "id": "PPS.table.performance",
+    "description": "performance Status for PPS",
+    "defaultMessage": "PERFORMANCE"
+  },
+  {
+    "id": "PPS.table.operatorAssigned",
+    "description": "operatorAssigned for PPS",
+    "defaultMessage": "OPERATOR ASSIGNED"
+  },
+  {
+    "id": "PPStable.totalOperator",
+    "description": "totalOperator for PPStable",
+    "defaultMessage": "{operatorNum} operator"
+  },
+  {
+    "id": "tabs.offline",
+    "description": "offline",
+    "defaultMessage": "Offline"
+  },
+  {
+    "id": "overview.tab.heading",
+    "description": "overview tab",
+    "defaultMessage": "OVERVIEW"
+  },
+  {
+    "id": "system.tab.heading",
+    "description": "system tab",
+    "defaultMessage": "SYSTEM"
+  },
+  {
+    "id": "orders.tab.heading",
+    "description": "orders tab",
+    "defaultMessage": "ORDERS"
+  },
+  {
+    "id": "users.tab.heading",
+    "description": "users tab",
+    "defaultMessage": "USERS"
+  },
+  {
+    "id": "inventory.tab.heading",
+    "description": "inventory tab",
+    "defaultMessage": "INVENTORY"
+  },
+  {
+    "id": "audit.tab.heading",
+    "description": "audit tab",
+    "defaultMessage": "AUDIT"
+  },
+  {
+    "id": "overviewStatus.tab.heading",
+    "description": "overview Status fulfilling orders",
+    "defaultMessage": "Fulfilling orders"
+  },
+  {
+    "id": "systemStatus.tab.online",
+    "description": "system Status online",
+    "defaultMessage": "Online"
+  },
+  {
+    "id": "systemStatus.tab.emergency",
+    "description": "system Status emergency",
+    "defaultMessage": "Emergency"
+  },
+  {
+    "id": "overviewStatus.tab.emergency",
+    "description": "overview Status emergency",
+    "defaultMessage": "Butlers stopped"
+  },
+  {
+    "id": "ordersStatus.tab.heading",
+    "description": "orders Status",
+    "defaultMessage": "{count}% fulfilled"
+  },
+  {
+    "id": "usersStatus.tab.heading",
+    "description": "users Status",
+    "defaultMessage": "{count} users online"
+  },
+  {
+    "id": "inventoryStatus.tab.heading",
+    "description": "inventory Status",
+    "defaultMessage": "{count}% space utilized"
+  },
+  {
+    "id": "auditStatus.tab.heading",
+    "description": "audit Status",
+    "defaultMessage": "{count} in progress"
+  },
+  {
+    "id": "users.add.heading",
+    "description": "Heading for Add new user",
+    "defaultMessage": "Add new user"
+  },
+  {
+    "id": "users.add.subheading",
+    "description": "Subheading for add new user",
+    "defaultMessage": "All the fields are mandatory"
+  },
+  {
+    "id": "users.add.userdetails.heading",
+    "description": "Text for user details heading",
+    "defaultMessage": "Enter User details"
+  },
+  {
+    "id": "users.add.userdetails.subheading",
+    "description": "Text for user details subheading",
+    "defaultMessage": "A User ID will be required to log into the system"
+  },
+  {
+    "id": "users.add.userdetails.userid",
+    "description": "Text for user id",
+    "defaultMessage": "User ID"
+  },
+  {
+    "id": "users.add.userdetails.firstname",
+    "description": "Text for first name",
+    "defaultMessage": "First Name"
+  },
+  {
+    "id": "users.add.userdetails.lastname",
+    "description": "Text for last name",
+    "defaultMessage": "Last Name"
+  },
+  {
+    "id": "users.add.password.heading",
+    "description": "Heading for create password",
+    "defaultMessage": "Create password"
+  },
+  {
+    "id": "users.add.password.subheading.manager",
+    "description": "Subheading for create password",
+    "defaultMessage": "A password of at least 8 alphanumeric characters will be required for logging into the Management Interface and Operator Interface"
+  },
+  {
+    "id": "users.add.password.subheading.operator",
+    "description": "Subheading for create password operator",
+    "defaultMessage": "A password of 6 digits will be required for logging into the Operator Interface."
+  },
+  {
+    "id": "users.add.password.field1",
+    "description": "Text for password",
+    "defaultMessage": "Password"
+  },
+  {
+    "id": "users.add.password.field2",
+    "description": "Text for confirm password",
+    "defaultMessage": "Confirm Password"
+  },
+  {
+    "id": "users.add.password.button",
+    "description": "Text for add new user button",
+    "defaultMessage": "Add new user"
+  },
+  {
+    "id": "users.delete.heading",
+    "description": "Text for user delete heading",
+    "defaultMessage": "Are you sure you would like to delete \"{user_name}\" ?"
+  },
+  {
+    "id": "users.delete.subheading",
+    "description": "Text for user delete subheading",
+    "defaultMessage": "Information related to the user will be lost"
+  },
+  {
+    "id": "users.edit.heading",
+    "description": "Heading for Edit user",
+    "defaultMessage": "Edit user"
+  },
+  {
+    "id": "users.edit.subheading",
+    "description": "Subheading for Edit user",
+    "defaultMessage": "All the fields are mandatory"
+  },
+  {
+    "id": "users.edit.userdetails.heading",
+    "description": "Text for user details heading",
+    "defaultMessage": "Enter User details"
+  },
+  {
+    "id": "users.edit.userdetails.subheading",
+    "description": "Text for user details subheading",
+    "defaultMessage": "A User ID will be required to log into the system"
+  },
+  {
+    "id": "users.edit.userdetails.userid",
+    "description": "Text for user id",
+    "defaultMessage": "User ID"
+  },
+  {
+    "id": "users.edit.userdetails.firstname",
+    "description": "Text for first name",
+    "defaultMessage": "First Name"
+  },
+  {
+    "id": "users.edit.userdetails.lastname",
+    "description": "Text for last name",
+    "defaultMessage": "Last Name"
+  },
+  {
+    "id": "users.edit.changepassword.heading",
+    "description": "Heading for Change password",
+    "defaultMessage": "Change password"
+  },
+  {
+    "id": "users.edit.changepassword.subheading",
+    "description": "Subheading for create password",
+    "defaultMessage": "New password will be effective when user log-in next time"
+  },
+  {
+    "id": "users.edit.password.field1",
+    "description": "Text for password",
+    "defaultMessage": "Password"
+  },
+  {
+    "id": "users.edit.password.field2",
+    "description": "Text for confirm password",
+    "defaultMessage": "Confirm Password"
+  },
+  {
+    "id": "users.edit.password.",
+    "description": "Heading for Password",
+    "defaultMessage": "Password"
+  },
+  {
+    "id": "users.edit.password.query",
+    "description": "Text for change password",
+    "defaultMessage": "Change Password"
+  },
+  {
+    "id": "users.edit.password.button",
+    "description": "Text for edit user button",
+    "defaultMessage": "Save"
+  },
+  {
+    "id": "users.add.roledetails.heading",
+    "description": "Heading for role",
+    "defaultMessage": "Choose a role"
+  },
+  {
+    "id": "users.add.roledetails.subheading",
+    "description": "Subheading for role",
+    "defaultMessage": "User will be given a specific level of control over the Butler system depending on the designated role"
+  },
+  {
+    "id": "users.add.roledetails.operator",
+    "description": "Text for operator",
+    "defaultMessage": "Operator"
+  },
+  {
+    "id": "users.add.roledetails.operatortext",
+    "description": "Subtext for operator",
+    "defaultMessage": "Grant access to the Operator Interface at each Pick Put Station in the Butler system"
+  },
+  {
+    "id": "users.add.roledetails.manager",
+    "description": "Text for manager",
+    "defaultMessage": "Manager"
+  },
+  {
+    "id": "users.add.roledetails.managertext",
+    "description": "Subtext for manager",
+    "defaultMessage": "Grant access to the Management Interface and Operator Interface to all systems"
+  },
+  {
+    "id": "users.add.roledetails.heading",
+    "description": "Heading for role",
+    "defaultMessage": "Choose a role"
+  },
+  {
+    "id": "users.add.roledetails.subheading",
+    "description": "Subheading for role",
+    "defaultMessage": "User will be given a specific level of control over the Butler system depending on the designated role"
+  },
+  {
+    "id": "users.add.roledetails.operator",
+    "description": "Text for operator",
+    "defaultMessage": "Operator"
+  },
+  {
+    "id": "users.add.roledetails.operatortext",
+    "description": "Subtext for operator",
+    "defaultMessage": "Grant access to the Operator Interface at each Pick Put Station in the Butler system"
+  },
+  {
+    "id": "users.add.roledetails.manager",
+    "description": "Text for manager",
+    "defaultMessage": "Manager"
+  },
+  {
+    "id": "users.add.roledetails.managertext",
+    "description": "Subtext for manager",
+    "defaultMessage": "Grant access to the Management Interface and Operator Interface to all systems"
+  },
+  {
+    "id": "user.table.heading",
+    "description": "Heading for users table",
+    "defaultMessage": "Users"
+  },
+  {
+    "id": "user.button.heading",
+    "description": "button heading for users table",
+    "defaultMessage": "Add new user"
+  },
+  {
+    "id": "user.table.users",
+    "description": "Users Column",
+    "defaultMessage": "USERS"
+  },
+  {
+    "id": "user.table.totaluser",
+    "description": "total user",
+    "defaultMessage": "Total:{rowsCount}"
+  },
+  {
+    "id": "user.table.status",
+    "description": "Users Status",
+    "defaultMessage": "STATUS"
+  },
+  {
+    "id": "user.table.role",
+    "description": "User Role",
+    "defaultMessage": "ROLE"
+  },
+  {
+    "id": "user.table.workMode",
+    "description": "User Workmode",
+    "defaultMessage": "WORKMODE"
+  },
+  {
+    "id": "user.table.location",
+    "description": "User location",
+    "defaultMessage": "LOCATION"
+  },
+  {
+    "id": "user.table.logInTime",
+    "description": "User log in time",
+    "defaultMessage": "LOG IN TIME"
+  },
+  {
+    "id": "user.table.action",
+    "description": "action Column",
+    "defaultMessage": "ACTIONS"
+  },
+  {
+    "id": "butlerDetail.online.status",
+    "description": "online status for butlerDetail",
+    "defaultMessage": "Online"
+  },
+  {
+    "id": "butlerDetail.offline.status",
+    "description": "offline status for butlerDetail",
+    "defaultMessage": "Offline"
+  },
+  {
+    "id": "butlerDetail.name.prefix",
+    "description": "prefix for butler id",
+    "defaultMessage": "BOT - {botId}"
+  },
+  {
+    "id": "pps.name.prefix",
+    "description": "prefix for pps id",
+    "defaultMessage": "PPS - {ppsId}"
+  },
+  {
+    "id": "charger.name.prefix",
+    "description": "prefix for charger id",
+    "defaultMessage": "CS - {csId}"
+  },
+  {
+    "id": "msu.name.prefix",
+    "description": "prefix for msu id",
+    "defaultMessage": "MSU - {msuId}"
+  },
+  {
+    "id": "chargersDetail.connected.status",
+    "description": "connected status for chargersDetail",
+    "defaultMessage": "Connected"
+  },
+  {
+    "id": "chargersDetail.disconnected.status",
+    "description": "disconnected status for chargersDetail",
+    "defaultMessage": "Disconnected"
+  },
+  {
+    "id": "chargersDetail.manual.mode",
+    "description": "manual mode for chargersDetail",
+    "defaultMessage": "Manual"
+  },
+  {
+    "id": "chargersDetail.auto.mode",
+    "description": "Auto mode for chargersDetail",
+    "defaultMessage": "Auto"
+  },
+  {
+    "id": "chargersDetail.name.prefix",
+    "description": "prefix for cs id in chargersDetail",
+    "defaultMessage": "Charging Stations - {csId}"
+  },
+  {
+    "id": "chargersDetail.butler.prefix",
+    "description": "prefix for butler id in chargersDetail",
+    "defaultMessage": "Butler - {botId}"
   },
   {
     "id": "orderList.progress.status",
@@ -1079,39 +1755,39 @@
     "defaultMessage": "Unfulfillable"
   },
   {
-    "id": "OrderSubTab.waves",
-    "description": "waves tab for OrderSubTab",
-    "defaultMessage": "Waves"
+    "id": "ppsDetail.pick.status",
+    "description": "pick status for pps",
+    "defaultMessage": "Pick"
   },
   {
-    "id": "OrderSubTab.orderlist",
-    "description": "orderlist tab for OrderSubTab",
-    "defaultMessage": "Order List"
+    "id": "ppsDetail.put.status",
+    "description": "put status for pps",
+    "defaultMessage": "Put"
   },
   {
-    "id": "orderlistTab.refreshStatusMinutes",
-    "description": "refresh status for orderlist",
-    "defaultMessage": "Last Updated {updateStatus} minutes ago"
+    "id": "ppsDetail.audit.status",
+    "description": "audit status for pps",
+    "defaultMessage": "Audit"
   },
   {
-    "id": "orderlistTab.refreshStatusSeconds",
-    "description": "refresh status for orderlist",
-    "defaultMessage": "Last Updated {updateStatus} seconds ago"
+    "id": "ppsDetail.name.prefix",
+    "description": "prefix for pps id in ppsDetail",
+    "defaultMessage": "PPS - {ppsId}"
   },
   {
-    "id":"pps.dropdown.placeholder",
-    "description": "placeholder for pps mode change",
-    "defaultMessage": "Change PPS mode"
+    "id": "ppsDetail.on.status",
+    "description": "on status for pps",
+    "defaultMessage": "On"
   },
   {
-        "id": "table.filter.placeholder",
-        "description": "placeholder for table filter",
-        "defaultMessage": "Filter by keywords"
+    "id": "ppsDetail.off.prefix",
+    "description": "off status for pps",
+    "defaultMessage": "Off"
   },
   {
-    "id": "order.table.buttonLable",
-    "description": "button label for refresh",
-    "defaultMessage": "Refresh Data"
+    "id": "ppsDetail.performance.prefix",
+    "description": "performance for pps id in ppsDetail",
+    "defaultMessage": "{performance} - orders/hr"
   },
   {
     "id": "userDetails.operator",
@@ -1157,11 +1833,50 @@
     "id": "userDetails.Offline.status",
     "description": "Offline status for userDetails",
     "defaultMessage": "Offline"
-},
-{
-    "id": "snapshot.inventory.usedSpace",
-    "description": "Space utilised message",
-    "defaultMessage": "{utilisedSpace}% space utilized"
-
+  },
+  {
+    "id": "waveDetail.progress.status",
+    "description": "progress status for wave",
+    "defaultMessage": "In Progress"
+  },
+  {
+    "id": "waveDetail.completed.status",
+    "description": "completed status for wave",
+    "defaultMessage": "Completed"
+  },
+  {
+    "id": "waveDetail.breached.status",
+    "description": "breached status for wave",
+    "defaultMessage": "Breached"
+  },
+  {
+    "id": "waveDetail.pending.status",
+    "description": "pending status for wave",
+    "defaultMessage": "Pending"
+  },
+  {
+    "id": "waveDetail.id.prefix",
+    "description": "waveDetail id prefix",
+    "defaultMessage": "WAVE-{waveId}"
+  },
+  {
+    "id": "notify.success.add",
+    "description": "Text for successfull user addition",
+    "defaultMessage": "New user \"{first} {last}\" added successfully"
+  },
+  {
+    "id": "notify.success.delete",
+    "description": "Text for successfull user deletion",
+    "defaultMessage": "User \"{first} {last}\" deleted successfully"
+  },
+  {
+    "id": "notify.delete.audit.success",
+    "description": "Text for successfull audit deletion",
+    "defaultMessage": "Audit task {audit_id} has been deleted"
+  },
+  {
+    "id": "pps.dropdown.placeholder",
+    "description": "mode change for pps",
+    "defaultMessage": "Change PPS Mode"
   }
 ]

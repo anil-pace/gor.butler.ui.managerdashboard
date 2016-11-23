@@ -1,4 +1,4 @@
-import {ID_DATA,NAME_DATA,PASSWORD_DATA,INFO_RESET,ERROR,SUCCESS,INFO,HIDE,NOTIFY_PASS,NOTIFY_HIDE,NOTIFY_FAIL,PASS_DATA,MD_ID,SET_ROLE} from '../constants/appConstants'; 
+import {ID_DATA,NAME_DATA,PASSWORD_DATA,INFO_RESET,ERROR,SUCCESS,INFO,HIDE,NOTIFY_PASS,NOTIFY_HIDE,NOTIFY_FAIL,PASS_DATA,MD_ID,SET_ROLE,NOTIFY_DELETE,DELETION} from '../constants/appConstants'; 
 import {US001,US002,UE001,UE002,INVALID_ID,EMPTY_PWD,EMPTY_NAME,INVALID_NAME,INVALID_PWD,MATCH_PWD,TYPE_SUCCESS} from '../constants/messageConstants'; 
 
 /**
@@ -48,6 +48,17 @@ export  function appInfo(state={},action){
             "notifyInfo":notifyInfo
          })
          break;
+    
+    case NOTIFY_DELETE:
+         let notifyDel=action.data, notifyDelInfo;
+         notifyDelInfo={
+          type:DELETION,
+          msg:notifyDel
+         };
+         return Object.assign({}, state, { 
+            "notifyInfo":notifyDelInfo
+         })
+         break;
 
     case NOTIFY_FAIL:
          let notifyErr=action.data, notifyErrInfo;
@@ -73,10 +84,7 @@ export  function appInfo(state={},action){
 
     case MD_ID:
         let roleInfo;
-        roleInfo={
-          type:INFO,
-          msg:action.data
-        }
+        roleInfo=action.data;
          return Object.assign({}, state, { 
             "roleInfo":roleInfo
          })
@@ -84,10 +92,7 @@ export  function appInfo(state={},action){
 
     case SET_ROLE:
         let roleSet;
-        roleSet={
-          type:INFO,
-          msg:action.data
-        }
+        roleSet=action.data;
          return Object.assign({}, state, { 
             "roleSet":roleSet
          })      

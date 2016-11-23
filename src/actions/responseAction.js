@@ -14,18 +14,7 @@ export function receiveButlersData(data){
 		data
 	}
 }
-export function receiveInventoryTodayData(data){
-	return {
-		type:INVENTORY_DATA_TODAY,
-		data
-	}
-}
-export function receiveInventoryHistoryData(data){
-	return {
-		type:INVENTORY_DATA_HISTORY,
-		data
-	}
-}
+
 export function receiveChargersData(data){
 	
 	return{
@@ -62,10 +51,9 @@ export function receiveThroughputData(data){
 	}
 
 }
-export function initData(data){
+export function setInitData(){
 	return {
-		type: WS_INIT,
-		data
+		type: WS_INIT
 	}
 }
 

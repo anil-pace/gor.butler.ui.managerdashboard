@@ -132,7 +132,7 @@ class PerformanceWidget extends React.Component{
 		
 	var itemRender;	
 	if(this.props.widget === "PICK_PPS_PERFORMANCE"){
-		itemRender = <ChartHorizontal data={this.props.ppsPerformance} type="orders_picked" performanceParam="orders/hr"/>
+		itemRender = <ChartHorizontal data={this.props.ppsPerformance} type="items_picked" performanceParam="orders/hr"/>
 	}
 
 	else if(this.props.widget === "PUT_PPS_PERFORMANCE"){

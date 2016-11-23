@@ -1,14 +1,9 @@
 import React  from 'react';
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
 //success codes related to user management
-export const US001 = (<FormattedMessage id="notify.success.add" description='Text for successfull user addition' 
-            defaultMessage="User successfully added"/>);
-
-export const US002 =(<FormattedMessage id="notify.success.delete" description='Text for successfull user deletion' 
-            defaultMessage="User successfully deleted"/>);
 
 export const US004 = (<FormattedMessage id="notify.success.edit" description='Text for successfully editing user' 
-            defaultMessage="User successfully edited"/>);
+            defaultMessage="User details updated successfully"/>);
 //error codes related to user management
 
 
@@ -20,7 +15,7 @@ export const E028 = "Pps is already in requested mode";
 export const E029 = "Previous request of changing mode is already pending, Please try later!";
 
 export const UE002 = (<FormattedMessage id="notify.error.usernameExists" description='Text for already registered username' 
-            defaultMessage="Username already registered!"/>);
+            defaultMessage="An account has already been created with this User ID"/>);
 
 export const UE003= (<FormattedMessage id="notify.error.passwordMissing" description='Text for passwords missing' 
             defaultMessage="Password not provided!"/>);
@@ -53,7 +48,10 @@ export const EMPTY_NAME= (<FormattedMessage id="user.empty.name" description='Te
 export const INVALID_NAME= (<FormattedMessage id="user.invalid.name" description='Text for invalid user name' 
             defaultMessage='Special characters like "~","@" and "%" are not allowed'/>);
 
-export const INVALID_PWD= (<FormattedMessage id="user.invalid.password" description='Text for invalid password' 
+export const INVALID_PWD_OP= (<FormattedMessage id="user.invalid.password.operator" description='Text for invalid password for operator' 
+            defaultMessage="Please enter a password of at least 6 alphanumeric characters"/>);
+
+export const INVALID_PWD_MG= (<FormattedMessage id="user.invalid.password.manager" description='Text for invalid password for manager' 
             defaultMessage="Please enter a password of at least 8 alphanumeric characters"/>);
 
 export const MATCH_PWD= (<FormattedMessage id="user.match.password" description='Text for passwords not matching' 
@@ -83,8 +81,10 @@ export const INVALID_LOCID= (<FormattedMessage id="audit.invalid.location" descr
 
 
 // Codes for audit management
-export const E025 = (<FormattedMessage id="notify.error.audit.e025" description='Text for invalid sku number or location' 
-            defaultMessage="Either location or sku does not exist"/>);
+export const E026 = (<FormattedMessage id="notify.error.audit.location" description='Text for invalid location' 
+            defaultMessage="Location does not exist"/>);
+export const E027 = (<FormattedMessage id="notify.error.audit.sku" description='Text for invalid sku' 
+            defaultMessage="SKU does not exist"/>);
 export const G016 = (<FormattedMessage id="notify.error.audit.g016" description='Text for unsuccessful audit deletion' 
             defaultMessage="Given audit does not exists"/>);
 export const AE001 = (<FormattedMessage id="notify.error.audit.AE001" description='Text for invalid audit ID' 
@@ -101,8 +101,6 @@ export const AS001 = (<FormattedMessage id="notify.create.audit.success" descrip
             defaultMessage="New audit task created successfully"/>);
 export const AS00A = (<FormattedMessage id="notify.start.audit.success" description='Text for successfull audit creation' 
             defaultMessage="Audit started successfully"/>);
-export const AS002 = (<FormattedMessage id="notify.delete.audit.success" description='Text for successfull audit deletion' 
-            defaultMessage="Audit deleted successfully"/>);
 export const AS003 = (<FormattedMessage id="notify.delete.audit.processed" description='Text for already processed audit' 
             defaultMessage="Audit already processed. Cannot delete"/>);
 
@@ -118,5 +116,9 @@ export const ERR_API=(<FormattedMessage id="notify.error.api" description='Text 
             defaultMessage="API response not registered"/>);
 export const ERR_CONNECT=(<FormattedMessage id="notify.error.connection" description='Text for connection refused' 
             defaultMessage="Connection refused"/>);
+
+//Inventory Tab messages
+export const HISTOGRAM_NO_DATA_TEXT = (<FormattedMessage id="inventory.histogram.noDataText" description="Inventory Histogram No Data Text" 
+                    defaultMessage ="No Stock Found"/>);
 
 

@@ -1,17 +1,19 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import Footer from '../Footer/Footer';
-import Loader from '../../components/loader/Loader'
-import { authLoginData,mockLoginAuth,setUsername,setLoginLoader } from '../../actions/loginAction';
+import Spinner from '../../components/spinner/Spinner'
+import { authLoginData,mockLoginAuth,setUsername,setLoginSpinner,connectionFault } from '../../actions/loginAction';
 import {validateID, validatePassword, resetForm} from '../../actions/validationActions';
+
 import { connect } from 'react-redux';
-import {AUTH_LOGIN,ERROR,SUCCESS} from '../../constants/appConstants'; 
+import {AUTH_LOGIN,ERROR,SUCCESS,TYPING,EN,JA,FILL_BACK} from '../../constants/appConstants'; 
 import {INVALID_ID,EMPTY_PWD,TYPE_SUCCESS} from '../../constants/messageConstants'; 
 import {LOGIN_URL} from '../../constants/configConstants'; 
 import { FormattedMessage } from 'react-intl';
 import { updateIntl } from 'react-intl-redux';
 import Dropdown from '../../components/dropdown/dropdown.js';
 import { translationMessages } from '../../utilities/i18n';
+import { idStatus } from '../../utilities/fieldCheck';
 
 
 class Login extends React.Component{
@@ -19,13 +21,13 @@ class Login extends React.Component{
 	 {
     	super(props);      
       this.state={sel:0, items :[
-        { value: 'en', label: (<FormattedMessage id='login.lang.english' defaultMessage="English" description="English option in the language drop down"/>) },
-        { value: 'ja', label: (<FormattedMessage id='login.lang.japanese' defaultMessage="Japanese" description="Japanese option in the language drop down"/>) },
+        { value: EN, label: (<FormattedMessage id='login.lang.english' defaultMessage="English" description="English option in the language drop down"/>) },
+        { value: JA, label: (<FormattedMessage id='login.lang.japanese' defaultMessage="Japanese" description="Japanese option in the language drop down"/>) },
       ]};
     }
     componentWillMount()
     {
-        document.body.className='gor-fill-back';
+        document.body.className=FILL_BACK;
         this._changeDropdown();
     } 
     _changeDropdown()
@@ -49,29 +51,16 @@ class Login extends React.Component{
       }
     }
     _checkUser(){
-          let userid=this.userName.value, idInfo;
-          if(userid.length<1)
-          {
-            idInfo={
-              type:ERROR,
-              msg:INVALID_ID           
-            }
-          }
-          else
-          {
-            idInfo={
-              type:SUCCESS,
-              msg:TYPE_SUCCESS               
-            };            
-          }
-         this.props.validateID(idInfo);
-         return idInfo.type;
+        let userid=this.userName.value, idInfo;
+        idInfo=idStatus(userid);
+        this.props.validateID(idInfo);
+        return idInfo.type;
     }
     _typing(ele){
       if(ele===1)
-        this.userField.className='gor-login-field gor-input-ok gor-input-typing';
+        this.userField.className=TYPING;
       else
-        this.passField.className='gor-login-field gor-input-ok gor-input-typing';
+        this.passField.className=TYPING;
     }
     _checkPass(){
           let password=this.password.value.trim(), loginPassInfo;
@@ -115,7 +104,14 @@ class Login extends React.Component{
      */
     _handleSubmit(e){
     	e.preventDefault();
-    	let formdata={         
+      if(!window.navigator.onLine)
+      {
+        this.props.connectionFault();
+    	   return;
+      }
+      else
+      {
+       let formdata={         
           	'username': this.userName.value,
           	'password': this.password.value,
          };
@@ -138,20 +134,16 @@ class Login extends React.Component{
                 'accept':'application/json'
             }
         sessionStorage.setItem('nextView', 'md');
-        if(MOCK === false){
     	    this.props.setUsername(formdata.username);
-            this.props.setLoginLoader(true);
+            this.props.setLoginSpinner(true);
             this.props.authLoginData(loginData);
-        }
-        else{
-            this.props.mockLoginAuth(loginData);
-        }
+      }
     }
 	render(){
         return (
                
             <div className='gor-login-form'>
-            <Loader isLoading={this.props.loginLoading} />
+            <Spinner isLoading={this.props.loginSpinner} />
             <form action="#"  id = "loginForm" ref={node => { this.loginForm = node }} 
                 onSubmit={(e) => this._handleSubmit(e)}>
                 <div className='gor-login-lang'>
@@ -172,7 +164,10 @@ class Login extends React.Component{
                        <FormattedMessage id='login.butler.title' 
                         defaultMessage="Butler" description="Text for butler management Login form title"/>
                        </span>
-                       <sup>TM</sup>
+                       <sup><FormattedMessage id='login.butler.trademark' 
+
+                    defaultMessage="TM"
+                            description="Trademark"/></sup>
                     </div>
                     <p>
                     <FormattedMessage id='login.butler.manageInterface' 
@@ -186,6 +181,13 @@ class Login extends React.Component{
 
                     <FormattedMessage id='login.butler.fail' 
                         defaultMessage="Invalid username and/or password, please try again" description="Text for login failure"/>
+
+                 </div>):''
+                }
+                {(this.props.connectionActive===false)?(<div className='gor-login-auth-error'><div className='gor-login-error'></div>
+
+                    <FormattedMessage id='login.butler.connection.fail' 
+                        defaultMessage="Connection failure" description="Text for connection failure"/>
 
                  </div>):''
                 }
@@ -248,13 +250,15 @@ Login.contextTypes = {
 function mapStateToProps(state, ownProps){
 	return {
         loginAuthorized:state.authLogin.loginAuthorized,
+        connectionActive:state.authLogin.connectionActive,
         auth_token: state.authLogin.auth_token,
         userName: state.authLogin.username,
         sLang: state.intl.locale,
         intlMessages: state.intl.messages,
         idInfo: state.appInfo.idInfo||{},
         loginPassCheck: state.appInfo.passwordInfo||{},
-        loginLoading:state.loader.loginLoader           
+        loginSpinner:state.spinner.loginSpinner         
+
     };
 }
 /**
@@ -273,7 +277,8 @@ var mapDispatchToProps = function(dispatch){
         setUsername: function(data){ dispatch(setUsername(data)); },        
         validatePass: function(data){ dispatch(validatePassword(data)); },        
         resetForm:   function(){ dispatch(resetForm()); },
-        setLoginLoader:   function(data){ dispatch(setLoginLoader(data)); }
+        setLoginSpinner:   function(data){ dispatch(setLoginSpinner(data)); },
+        connectionFault: function(){dispatch(connectionFault()); }
     }
 };
 

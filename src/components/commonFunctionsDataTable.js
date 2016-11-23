@@ -91,7 +91,7 @@ export const ActionCell = ({rowIndex, data, columnKey,selEdit,selDel,mid, ...pro
   <Cell {...props}>
     <div className="gor-user-Logo-wrap">
       <button onClick={selEdit.bind(this,columnKey,rowIndex)}>
-        <div className="user-edit-icon" /><span>
+        <div className="gor-edit-icon" /><span>
           <FormattedMessage id="commonDataTable.edit.button" description='edit button' defaultMessage='Edit'/>
         </span>
       </button>
@@ -99,7 +99,7 @@ export const ActionCell = ({rowIndex, data, columnKey,selEdit,selDel,mid, ...pro
     <div className="gor-user-Logo-wrap">
 
       <button disabled={(mid===data.getObjectAt(rowIndex).uid)?true:false} onClick={selDel.bind(this,columnKey,rowIndex)} >
-        <div className="user-del-icon" /><span><FormattedMessage id="commonDataTable.Delete.button" description='Delete button' defaultMessage='Delete'/></span>
+        <div className="gor-del-icon" /><span><FormattedMessage id="commonDataTable.Delete.button" description='Delete button' defaultMessage='Delete'/></span>
 
       </button>
     </div>  
@@ -136,15 +136,15 @@ export const StatusCell = ({rowIndex, data, columnKey,statusKey, ...props}) => (
   </Cell>
 );
 
-export const ActionCellAudit = ({rowIndex, data, columnKey, tasks, handleAudit,manageAuditTask,showBox, ...props}) => (
+export const ActionCellAudit = ({rowIndex, data, columnKey, tasks, handleAudit,manageAuditTask, clickDropDown,showBox, ...props}) => (
   <Cell {...props}>
-    <div className="gor-audit-actions-button">
+    <div className="gor-audit-actions-button" >
      {data.getObjectAt(rowIndex)[showBox]?(
       <button className="gor-add-btn" onClick={handleAudit.bind(this,columnKey,rowIndex)}>
           <FormattedMessage id="commonDataTable.startAudit.button" description='edit button' defaultMessage='Start audit'/>
       </button>):''}
     </div>
-    <div className="gor-audit-actions-drop">
+    <div className="gor-audit-actions-drop" onClick={clickDropDown.bind(this,rowIndex)}>
       <DropdownTable  styleClass={'gorDataTableDrop'} placeholder="Manage Tasks" items={tasks} changeMode={manageAuditTask.bind(this,rowIndex)}/>
     </div>
   </Cell>

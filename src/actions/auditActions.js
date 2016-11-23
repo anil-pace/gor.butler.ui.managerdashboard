@@ -1,5 +1,5 @@
 
-import { AJAX_CALL,AUDIT_RETRIEVE, RECIEVE_AUDIT_DATA,SET_AUDIT,RESET_AUDIT,SETAUDIT_PPS} from '../constants/appConstants'
+import { AJAX_CALL,AUDIT_RETRIEVE, RECIEVE_AUDIT_DATA,SET_AUDIT,RESET_AUDIT,SETAUDIT_PPS,REFRESH_AUDIT, DISPLAY_AUDIT_SPINNER} from '../constants/appConstants'
 
 
 export function getAuditData(params){
@@ -34,4 +34,17 @@ export function getPPSAudit(data){
 		type: SETAUDIT_PPS,
 		data
 	}
+}
+export function setAuditRefresh(data){
+  return {
+    type: REFRESH_AUDIT,
+    data
+  }
+}
+
+export function setAuditSpinner(data){
+  return {
+    type: DISPLAY_AUDIT_SPINNER,
+    data
+  }
 }

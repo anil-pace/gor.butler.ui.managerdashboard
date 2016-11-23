@@ -8,6 +8,17 @@ import {changePPSmode} from '../../actions/ppsModeChangeAction'
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
 import {BASE_URL, PPS_MODE_CHANGE_URL,PROTOCOL,API_URL} from '../../constants/configConstants';
 import {PPS_MODE_CHANGE} from '../../constants/appConstants';
+import { defineMessages } from 'react-intl';
+
+const messages = defineMessages({
+    ppsPlaceholder: {
+        id: 'pps.dropdown.placeholder',
+        description: 'mode change for pps',
+        defaultMessage: 'Change PPS Mode',
+    },
+
+
+});
 
 class PPStable extends React.Component {
   constructor(props) {
@@ -214,6 +225,7 @@ class PPStable extends React.Component {
     let audit = this.props.operationMode.Audit;
     let notSet = this.props.operationMode.NotSet;
     let operatorNum =  this.props.operatorNum;
+    console.log("pps",this.props);
     if(this.state.renderDropD===true) {
       drop = <DropdownTable  styleClass={'gorDataTableDrop'} placeholder={this.props.intlMessg["pps.dropdown.placeholder"]} items={modes} changeMode={this.handleModeChange.bind(this)}/>;
     }

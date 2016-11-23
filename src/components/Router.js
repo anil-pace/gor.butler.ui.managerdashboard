@@ -7,7 +7,11 @@ import { Router, Route, hashHistory, IndexRoute} from 'react-router';
 import {loginRequest} from '../actions/loginAction';
 import Overview from '../containers/OverviewTab'; 
 import {tabSelected,subTabSelected} from '../actions/tabSelectAction';
-import {OVERVIEW,TAB_ROUTE_MAP} from '../constants/appConstants';
+import {setInventorySpinner} from '../actions/inventoryActions';
+import {setAuditSpinner} from '../actions/auditActions';
+import {setOrderListSpinner} from '../actions/orderListActions';
+import {setWavesSpinner, setButlerSpinner, setPpsSpinner, setCsSpinner} from '../actions/spinnerAction';
+import {OVERVIEW,TAB_ROUTE_MAP,INVENTORY, AUDIT, ORDERLIST,WAVES,BUTLERBOTS, PPS, CHARGING} from '../constants/appConstants';
 
 
 class Routes extends React.Component{
@@ -26,6 +30,59 @@ class Routes extends React.Component{
   			this.props.loginRequest();
   			this.props.tabSelected(selTab);
   			this.props.subTabSelected(subTab);
+  			console.log(selTab,subTab)
+  			switch(selTab.toUpperCase()){
+  				case INVENTORY:
+  				this.props.setInventorySpinner(true);
+  				break;
+
+  				case AUDIT:
+  				this.props.setAuditSpinner(true);
+  				break;
+  				default:
+  				this.props.setInventorySpinner(false);
+  				this.props.setAuditSpinner(false);
+
+  			}
+  			if(subTab !== null) {
+  				switch(subTab.toUpperCase()) {
+  					case ORDERLIST:
+  					this.props.setOrderListSpinner(true);
+  					break;
+
+  					case WAVES.toUpperCase():
+  					this.props.setWavesSpinner(true);
+  					break;
+
+  					case BUTLERBOTS.toUpperCase():
+  					this.props.setButlerSpinner(true);
+  					break;
+
+  					case PPS.toUpperCase():
+  					this.props.setPpsSpinner(true);
+  					break;
+
+  					case CHARGING.toUpperCase():
+  					this.props.setCsSpinner(true);
+  					break;
+
+  					case WAVES.toUpperCase():
+  					this.props.setWavesSpinner(true);
+  					break;
+
+  					
+
+  					
+
+  					default:
+  					this.props.setOrderListSpinner(false);
+  					this.props.setWavesSpinner(false);
+  					this.props.setButlerSpinner(false);
+  					this.props.setPpsSpinner(false);
+  					this.props.setCsSpinner(false);
+  					this.props.setWavesSpinner(false);
+  				}
+  			}
     		replace(nextView)
  	 	}
  	 	
@@ -186,7 +243,14 @@ var mapDispatchToProps = function(dispatch){
     return {
         loginRequest: function(){ dispatch(loginRequest()); },
         tabSelected: function(data){ dispatch(tabSelected(data)) },
-        subTabSelected: function(data){ dispatch(subTabSelected(data)) }
+        subTabSelected: function(data){ dispatch(subTabSelected(data)) },
+        setInventorySpinner:function(data){dispatch(setInventorySpinner(data));},
+        setAuditSpinner: function(data){dispatch(setAuditSpinner(data))},
+        setButlerSpinner: function(data){dispatch(setButlerSpinner(data))},
+        setOrderListSpinner: function(data){dispatch(setOrderListSpinner(data))},
+        setWavesSpinner: function(data){dispatch(setWavesSpinner(data))},
+        setPpsSpinner: function(data){dispatch(setPpsSpinner(data))},
+        setCsSpinner: function(data){dispatch(setCsSpinner(data))}
     }
 };
 export default connect(null,mapDispatchToProps)(Routes);

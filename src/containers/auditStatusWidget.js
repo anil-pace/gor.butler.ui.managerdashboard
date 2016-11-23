@@ -3,6 +3,7 @@ import ReactDOM  from 'react-dom';
 import Tilex from '../components/tile1x/Tilex';
 import { connect } from 'react-redux';
 import { FormattedMessage,FormattedNumber } from 'react-intl';
+import {AUDIT_ICON} from '../constants/appConstants';
 
 class AuditStatusWidget extends React.Component{
 	/**
@@ -58,7 +59,7 @@ class AuditStatusWidget extends React.Component{
         defaultMessage='Items audited'/>;
         auditData.value = value;
 		auditData.low = lowStr; 
-        auditData.logo = "iAudit";
+        auditData.logo = AUDIT_ICON;
 
 		return auditData
     		

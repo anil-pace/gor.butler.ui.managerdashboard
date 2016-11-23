@@ -1,7 +1,6 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import UserDataTable from './userTab/userTabTable';
-import Loader from '../components/loader/Loader';
 import { connect } from 'react-redux'; 
 function processUserDetails(data, nProps) {
   let operator  = nProps.context.intl.formatMessage({id:"userDetails.operator", defaultMessage: "Operator"});
@@ -16,6 +15,7 @@ function processUserDetails(data, nProps) {
   var role = {"butler_ui":operator, "butler_supervisor":manager};
   var work_mode = {"pick":pick,"put": put,"audit": audit};
   var work_place = {"front": front, "back":back};
+  var timeOffset=nProps.props.timeOffset;
 
 
   var userDetails = [], userData = {};
@@ -33,7 +33,8 @@ function processUserDetails(data, nProps) {
       userData.workMode = work_mode[data[i].pps.pps_mode];
     }
     userData.location = nProps.context.intl.formatMessage({id:"userDetails.location", defaultMessage: "PPS {ppsId}"},{"ppsId":data[i].pps.pps_id});
-    userData.logInTime = data[i].login_time;
+    userData.logInTime = nProps.context.intl.formatTime(data[i].login_time,{hour: 'numeric',minute: 'numeric'}) +
+    "(" + nProps.context.intl.formatRelative(data[i].login_time) +")";
     }
 
     else {
@@ -72,7 +73,7 @@ class UsersTab extends React.Component{
 			<div>
 				<div>
 					<div className="gorUserTable">
-						<UserDataTable items={userData} itemNumber={itemNumber} intlMessg={this.props.intlMessages} mid={this.props.manager.length?this.props.manager.users[0].id:''}/>
+						<UserDataTable items={userData} itemNumber={itemNumber} intlMessg={this.props.intlMessages} mid={this.props.manager.users?this.props.manager.users[0].id:''}/>
 					</div>
 				</div>
 			</div>
@@ -86,7 +87,8 @@ function mapStateToProps(state, ownProps){
   return {
     userdetails: state.userDetails.userDetails || [],
     intlMessages: state.intl.messages,
-    manager:state.headerData.headerInfo||[]
+    manager:state.headerData.headerInfo||[],
+    timeOffset: state.authLogin.timeOffset
 
   };
 }

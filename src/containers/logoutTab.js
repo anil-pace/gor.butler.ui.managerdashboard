@@ -3,7 +3,7 @@ import ReactDOM  from 'react-dom';
 import { connect } from 'react-redux' ;
 import { logoutRequest } from '../actions/loginAction';
 import { endWsAction } from '../actions/socketActions';
-import { FormattedMessage,FormattedPlural } from 'react-intl';        
+import { FormattedMessage } from 'react-intl';        
 
 class LogOut extends React.Component{
   constructor(props) 
@@ -15,12 +15,9 @@ class LogOut extends React.Component{
   }
   appLogout() {
       this.props.removeModal();
+      sessionStorage.clear();
       this.props.userLogout();
       this.props.endConnect();
-      sessionStorage.removeItem("nextView");
-      sessionStorage.removeItem("subTab");
-      sessionStorage.removeItem("selTab");
-      sessionStorage.removeItem("username");
   }  
   render()
   {
@@ -28,7 +25,8 @@ class LogOut extends React.Component{
         <div>
           <div className='gor-logout'>
             <div className='gor-logout-text'>
-              <div className='iQuestion gor-align-middle'></div><span>Are you sure you would like to log out now?</span>
+              <div className='gor-question gor-align-middle'></div><span><FormattedMessage id='logout.question' 
+                        defaultMessage="Are you sure you would like to log out now?" description="Text for logout question"/></span>
            </div>
               <div className='gor-logout-bottom'>
                 <button className='gor-cancel-btn' onClick={this.removeThisModal.bind(this)}>Cancel</button>

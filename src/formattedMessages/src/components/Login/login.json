@@ -20,6 +20,11 @@
     "defaultMessage": "Butler"
   },
   {
+    "id": "login.butler.trademark",
+    "description": "Trademark",
+    "defaultMessage": "TM"
+  },
+  {
     "id": "login.butler.manageInterface",
     "description": "Text for Management Interface",
     "defaultMessage": "Management Interface"
@@ -28,6 +33,11 @@
     "id": "login.butler.fail",
     "description": "Text for login failure",
     "defaultMessage": "Invalid username and/or password, please try again"
+  },
+  {
+    "id": "login.butler.connection.fail",
+    "description": "Text for connection failure",
+    "defaultMessage": "Connection failure"
   },
   {
     "id": "login.butler.error.username",

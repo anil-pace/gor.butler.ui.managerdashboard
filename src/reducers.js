@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import {headerData}  from './reducers/headerReducer'
 import {authLogin}  from './reducers/loginReducer'
-import {loader}  from './reducers/loaderReducer'
+import {spinner}  from './reducers/spinnerReducer'
 import {recieveSocketActions}  from './reducers/socketReducer'
 import { routerReducer as routing } from 'react-router-redux';
 import { intlReducer } from 'react-intl-redux'
@@ -30,6 +30,8 @@ import {waveInfo} from './reducers/waveDetailReducer';
 import {d3barChart} from './reducers/barChartReducer';
 import {currentTableState} from './reducers/tableStateReducer';
 import {recieveAuditDetail} from './reducers/auditDetailReducer';
+import {tabsData} from './reducers/tabDataReducer';
+
 const rootReducer = combineReducers({
   intl:intlReducer,
   headerData,
@@ -52,10 +54,11 @@ const rootReducer = combineReducers({
   chargersDetail,
   butlerDetail,
   PPSDetail,
+  tabsData,
   tabSelected,
   PPSperformance,
   userDetails,
-  loader,
+  spinner,
   getOrderDetail,
   filterOptions,
   waveInfo,

@@ -1,45 +1,32 @@
-import {receiveAuthData,setLoginLoader} from '../actions/loginAction';
+import {receiveAuthData,setLoginSpinner,setTimeOffSetData} from '../actions/loginAction';
 import {recieveOrdersData} from '../actions/paginationAction';
-import {recieveAuditData} from '../actions/auditActions';
+import {recieveAuditData,setAuditRefresh,setAuditSpinner} from '../actions/auditActions';
 import {assignRole} from '../actions/userActions';
 import {recieveHeaderInfo} from '../actions/headerAction';
 import {getPPSAudit} from '../actions/auditActions';
-import {notifySuccess, notifyFail,validateID} from '../actions/validationActions';
-import {ERROR,AUTH_LOGIN, ADD_USER, CHECK_ID,DELETE_USER,GET_ROLES,ORDERS_RETRIEVE,PPS_MODE_CHANGE,EDIT_USER,BUTLER_UI,CODE_US001,CODE_US002,CODE_US004,CODE_UE001,CODE_UE002,CODE_UE003,CODE_UE004,CODE_UE005,CODE_UE006,RECIEVE_HEADER,SUCCESS,CREATE_AUDIT,AUDIT_RETRIEVE,CODE_E025,CODE_G015,GET_PPSLIST,START_AUDIT,CODE_AE001,CODE_AE002,CODE_AE006,DELETE_AUDIT,CODE_AS002,CODE_AS003,CODE_G016,CODE_AE004,CODE_AE005} from '../constants/appConstants';
-import {US001,US002,US004,UE001,UE002,UE003,UE004,UE005,UE006,E028,E029,MODE_REQUESTED,TYPE_SUCCESS,E025,AS001,ERR_API,ERR_USR,ERR_RES,ERR_AUDIT,AE001,AE002,AE006,AS00A,AS002,AS003,G016,AE004,AE005} from '../constants/messageConstants';
+import {codeToString} from './codeToString';
+import {setOrderListSpinner} from '../actions/orderListActions';
+import {notifySuccess, notifyFail,validateID,notifyDelete} from '../actions/validationActions';
+import {ERROR,AUTH_LOGIN, ADD_USER, RECIEVE_TIME_OFFSET,CHECK_ID,DELETE_USER,GET_ROLES,ORDERS_RETRIEVE,PPS_MODE_CHANGE,EDIT_USER,BUTLER_UI,CODE_UE002,RECIEVE_HEADER,SUCCESS,CREATE_AUDIT,AUDIT_RETRIEVE,GET_PPSLIST,START_AUDIT,DELETE_AUDIT,BUTLER_SUPERVISOR} from '../constants/appConstants';
+import {UE002,E028,E029,MODE_REQUESTED,TYPE_SUCCESS,AS001,ERR_API,ERR_USR,ERR_RES,ERR_AUDIT,AS00A} from '../constants/messageConstants';
 
 export function AjaxParse(store,res,cause)
 {
+	let stringInfo={};
 	switch(cause)
 	{
-		case AUTH_LOGIN:
-			
+		case AUTH_LOGIN:			
 			store.dispatch(receiveAuthData(res));
-			store.dispatch(setLoginLoader(false));
+			store.dispatch(setLoginSpinner(false));
 			break;
-
-
 		case ORDERS_RETRIEVE:
 			store.dispatch(recieveOrdersData(res));
+			store.dispatch(setOrderListSpinner(false));
 			break;
-			
-			if(res.alert_data)
-			{
-
-			}
-			break;
-
-
 		case AUDIT_RETRIEVE:
 			store.dispatch(recieveAuditData(res));
+			store.dispatch(setAuditSpinner(false));
 			break;
-			
-			if(res.alert_data)
-			{
-
-			}
-			break;	
-
 		case GET_ROLES:
 			let i,rolesArr,k={};
 			rolesArr=res.roles;
@@ -47,17 +34,15 @@ export function AjaxParse(store,res,cause)
 			{
 				if(rolesArr[i].name===BUTLER_UI)
 				{
-					k.operator=rolesArr[i].id;
+					k.BUTLER_UI=rolesArr[i].id;
 				}
 				else
 				{
-					k.manager=rolesArr[i].id;					
+					k.BUTLER_SUPERVISOR=rolesArr[i].id;					
 				}
 			}
 			store.dispatch(assignRole(k));
 			break;
-
-
 		case CHECK_ID:
 			let idExist;
 			if(res.users.length)
@@ -76,8 +61,6 @@ export function AjaxParse(store,res,cause)
 			}
 			store.dispatch(validateID(idExist));			
 			break;
-
-
 		case PPS_MODE_CHANGE:
 			if(res.alert_data) {
 				switch(res.alert_data[0].code) {
@@ -94,72 +77,64 @@ export function AjaxParse(store,res,cause)
 					store.dispatch(notifySuccess(MODE_REQUESTED));
 			}
 			break;
+		case ADD_USER:
 
 		case DELETE_USER:
 
 		case EDIT_USER:
-
-		case ADD_USER:
 			try
 		    {	
-		    	switch(res.alert_data[0].code)
+		    	stringInfo=codeToString(res.alert_data[0]);
+		    	if(stringInfo.type)
 		    	{
-		    		case CODE_US001:
-						store.dispatch(notifySuccess(US001));
-		    			break;
-		    		case CODE_US002:
-						store.dispatch(notifySuccess(US002));
-		    			break;
-		    		case CODE_US004:
-						store.dispatch(notifySuccess(US004));
-		    			break;
-		    		case CODE_UE001:
-						store.dispatch(notifyFail(UE001));
-		    			break;
-		    		case CODE_UE002:
-						store.dispatch(notifyFail(UE002));		 
-		    			break;
-		    		case CODE_UE003:
-						store.dispatch(notifyFail(UE003));		    		
-		    			break;
-		    		case CODE_UE004:
-						store.dispatch(notifyFail(UE004));		    		
-		    			break;
-		    		case CODE_UE005:
-						store.dispatch(notifyFail(UE005));		    				    		
-		    			break;
-		    		case CODE_UE006:
-						store.dispatch(notifyFail(UE006));		    				    		
-		    			break;
-		    		default:
-		    			store.dispatch(notifyFail(ERR_USR));		    				    		
-
-		    	}			
+		    		store.dispatch(notifySuccess(stringInfo.msg));
+		    	}
+		    	else
+		    	{
+		    		store.dispatch(notifyFail(stringInfo.msg));				    		
+		    	}
 		    }
 			catch(e)
 			{
 		    			store.dispatch(notifyFail(ERR_RES));
 		    			throw e;		
 			}
-
 			break;
 		case CREATE_AUDIT:
 			if(res.alert_data)								//Can't use try-catch here
 		    {	
-		    	switch(res.alert_data[0].code)
-		    	{
-		    		case CODE_E025:
-						store.dispatch(notifyFail(E025));		    		
-		    			break;
-					default:
-		    			store.dispatch(notifyFail(ERR_AUDIT));		    				    									    				    				    		
-		    	}
+		    	stringInfo=codeToString(res.alert_data[0]);
+		    	store.dispatch(notifyFail(stringInfo.msg));
+		    	store.dispatch(setAuditRefresh(false));//reset refresh flag			   		
 		   	}
 		   	else
 		   	{
-		    			store.dispatch(notifySuccess(AS001));				   		
+		    			store.dispatch(notifySuccess(AS001));	
+		    			store.dispatch(setAuditRefresh(true));//set refresh flag			   		
 		   	}
 			break;
+		case DELETE_AUDIT:
+			try
+		    {	
+		    	stringInfo=codeToString(res.alert_data[0]);
+		    	if(stringInfo.type)
+		    	{
+		    		store.dispatch(notifyDelete(stringInfo.msg));
+		    		store.dispatch(setAuditRefresh(true));//set refresh flag
+		    	}
+		    	else
+		    	{
+		    		store.dispatch(notifyFail(stringInfo.msg));	
+		    		store.dispatch(setAuditRefresh(false));//reset refresh flag			   			
+		    	}
+		    }
+			catch(e)
+			{
+		    			store.dispatch(notifyFail(ERR_RES));
+		    			throw e;		
+			}
+			break;
+
 		case GET_PPSLIST:
 			let auditpps=[];
 			if(res.data.audit)
@@ -171,32 +146,16 @@ export function AjaxParse(store,res,cause)
 		case START_AUDIT:
 			if(res.successful.length)
 			{
-		    		store.dispatch(notifySuccess(AS00A));				   		
+		    		store.dispatch(notifySuccess(AS00A));
+		    		store.dispatch(setAuditRefresh(true));//set refresh flag				   		
 			}
 			else
 			{
 				try
 				{
-					switch(res.unsuccessful[0].alert_data[0].code)
-					{
-						case CODE_AE001:
-		    					store.dispatch(notifyFail(AE001));		
-								break;
-						case CODE_AE002:
-		    					store.dispatch(notifyFail(AE002));		
-								break;
-						case CODE_AE004:
-		    					store.dispatch(notifyFail(AE004));		
-								break;
-						case CODE_AE005:
-		    					store.dispatch(notifyFail(AE005));		
-								break;
-						case CODE_AE006:
-		    					store.dispatch(notifyFail(AE006));		
-								break;
-						default:
-		    					store.dispatch(notifyFail(ERR_RES));		
-					}
+					stringInfo=codeToString(res.unsuccessful[0].alert_data[0].code);
+					store.dispatch(notifyFail(stringInfo.msg));
+					store.dispatch(setAuditRefresh(false));//reset refresh flag			   		
 				}
 				catch(e)
 				{
@@ -206,35 +165,14 @@ export function AjaxParse(store,res,cause)
 
 			}
 			break;
-		case DELETE_AUDIT:
-			try
-		    {	
-		    	switch(res.alert_data[0].code)
-		    	{
-		    		case CODE_AS002:
-						store.dispatch(notifySuccess(AS002));
-		    			break;
-		    		case CODE_AS003:
-						store.dispatch(notifyFail(AS003));
-		    			break;
-		    		case CODE_G016:
-						store.dispatch(notifyFail(G016));
-		    			break;
-		    		default:
-		    			store.dispatch(notifyFail(ERR_RES));		    				    		
-
-		    	}			
-		    }
-			catch(e)
-			{
-		    			store.dispatch(notifyFail(ERR_RES));
-		    			throw e;		
-			}
-			break;
 		case RECIEVE_HEADER:
 						store.dispatch(recieveHeaderInfo(res));
 						break;
+		case RECIEVE_TIME_OFFSET:
+						store.dispatch(setTimeOffSetData(res));
+						break;
+
 		default:
-		    			store.dispatch(notifyFail(ERR_API));	
+		    store.dispatch(notifyFail(ERR_API));	
 	}
 }  

@@ -40,9 +40,14 @@
     "defaultMessage": "Create password"
   },
   {
-    "id": "sers.add.password.subheading",
+    "id": "users.add.password.subheading.manager",
     "description": "Subheading for create password",
-    "defaultMessage": "Min of 6 digits will be required for logging into the Operator Interface"
+    "defaultMessage": "A password of at least 8 alphanumeric characters will be required for logging into the Management Interface and Operator Interface"
+  },
+  {
+    "id": "users.add.password.subheading.operator",
+    "description": "Subheading for create password operator",
+    "defaultMessage": "A password of 6 digits will be required for logging into the Operator Interface."
   },
   {
     "id": "users.add.password.field1",

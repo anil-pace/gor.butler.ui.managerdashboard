@@ -3,13 +3,13 @@ import ReactDOM  from 'react-dom';
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
 import {validateID, validateName, validatePassword, resetForm} from '../../actions/validationActions';
 import {userRequest} from '../../actions/userActions';
-import {ADD_USER,CHECK_ID,ERROR,SUCCESS,INFO,GET_ROLES} from '../../constants/appConstants';
+import {ADD_USER,CHECK_ID,ERROR,SUCCESS,INFO,GET_ROLES,BUTLER_SUPERVISOR,BUTLER_UI} from '../../constants/appConstants';
 import {ROLE_URL,CHECK_USER,HEADER_URL} from '../../constants/configConstants';
 import {INVALID_ID,INVALID_FORMAT,TYPE_SUCCESS} from '../../constants/messageConstants';
 import { connect } from 'react-redux';
 import FieldError from '../../components/fielderror/fielderror';
 import RoleGroup from './roleGroup';
-import { nameStatus, passwordStatus } from '../../utilities/fieldCheck';
+import { nameStatus, passwordStatus, idStatus } from '../../utilities/fieldCheck';
 
 class AddUser extends React.Component{
   constructor(props) 
@@ -32,38 +32,18 @@ class AddUser extends React.Component{
         this.props.userRequest(userData);
   }
   _checkId(){
-    let userid=this.userId.value, idInfo,format=  /[!@#$%^&*()_+\-=\[\]{};':"\\|,<>\/?]/;
-    if(userid.length<1||userid.length>30)
+    let userid=this.userId.value, idInfo;
+    idInfo=idStatus(userid);
+    this.props.validateID(idInfo);
+    if(idInfo.type)
     {
-            idInfo={
-              type:ERROR,
-              msg:INVALID_ID           
-            }
-    }
-    else if(format.test(userid))
-    {
-            idInfo={
-              type:ERROR,
-              msg:INVALID_FORMAT           
-            }
-    }
-    else
-      {
-            idInfo={
-              type:SUCCESS,
-              msg:TYPE_SUCCESS               
-            };            
-      }
-      this.props.validateID(idInfo);
-      if(idInfo.type)
-      {
        let userData={
                 'url':CHECK_USER+userid,
                 'method':'GET',
                 'cause':CHECK_ID,
                 'contentType':'application/json',
                 'accept':'application/json',
-                'token':sessionStorage.getItem('auth_token')
+                'token':this.props.auth_token
       }
       this.props.userRequest(userData);
     }
@@ -75,20 +55,20 @@ class AddUser extends React.Component{
       return nameInfo.type;
    }
   _checkPwd(){
-    let pwd1=this.password1.value,pwd2=this.password2.value, passwordInfo;
-    passwordInfo=passwordStatus(pwd1,pwd2);
+    let pswd=this.pswd.value,confirmPswd=this.confirmPswd.value, passwordInfo, roleSelected=this.props.roleSet, roleSupervisor=this.props.roleInfo.BUTLER_SUPERVISOR;
+    passwordInfo=passwordStatus(pswd,confirmPswd,roleSelected,roleSupervisor);
     this.props.validatePassword(passwordInfo);
     return passwordInfo.type;
   }
   _handleAddUser(e){
         e.preventDefault();
-        let pwd1,pwd2,role,opt,userid,firstname,lastname;
+        let pswd,confirmPswd,role,opt,userid,firstname,lastname;
 
         userid=this.userId.value;
         firstname=this.firstName.value;
         lastname=this.lastName.value;
-        pwd1=this.password1.value;
-        pwd2=this.password2.value;
+        pswd=this.pswd.value;
+        confirmPswd=this.confirmPswd.value;
 
         if(!this.props.idCheck.type)
         {
@@ -106,15 +86,15 @@ class AddUser extends React.Component{
             return;
         }
 
-        role=this.props.roleSet?this.props.roleSet.msg:this.props.roleInfo.msg.operator;
+        role=this.props.roleSet?this.props.roleSet:this.props.roleInfo.BUTLER_UI;
 
         let formdata={         
                     "first_name": firstname,
                     "last_name": lastname,
                     "username": userid,
                     "role_id":role,
-                    "password": pwd1,
-                    "password_confirm": pwd2     
+                    "password": pswd,
+                    "password_confirm": confirmPswd     
 
          };
         let userData={
@@ -124,14 +104,14 @@ class AddUser extends React.Component{
                 'cause':ADD_USER,
                 'contentType':'application/json',
                 'accept':'application/json',
-                'token':sessionStorage.getItem('auth_token')
+                'token':this.props.auth_token
             }
         this.props.userRequest(userData);
         this.removeThisModal();
   }
   render()
   {
-      let tick=(<div className='iTick'/>);
+      let tick=(<div className='gor-tick'/>);
 
       return (
         <div>
@@ -175,22 +155,25 @@ class AddUser extends React.Component{
 
             </div>
 
-          {this.props.roleInfo?(<RoleGroup operator={this.props.roleInfo.msg.operator} manager={this.props.roleInfo.msg.manager} />):''}
+          {this.props.roleInfo?(<RoleGroup operator={this.props.roleInfo.BUTLER_UI} manager={this.props.roleInfo.BUTLER_SUPERVISOR} />):''}
             
             <div className='gor-usr-details'>
             <div className='gor-usr-hdlg'><FormattedMessage id="users.add.password.heading" description='Heading for create password' 
             defaultMessage='Create password'/></div>
-            <div className='gor-sub-head'><FormattedMessage id="sers.add.password.subheading" description='Subheading for create password' 
-            defaultMessage='Min of 6 digits will be required for logging into the Operator Interface'/></div>
+            <div className='gor-sub-head'>
+            {this.props.roleInfo?(this.props.roleSet===this.props.roleInfo.BUTLER_SUPERVISOR?<FormattedMessage id="users.add.password.subheading.manager" description='Subheading for create password' 
+            defaultMessage='A password of at least 8 alphanumeric characters will be required for logging into the Management Interface and Operator Interface'/>:<FormattedMessage id="users.add.password.subheading.operator" description='Subheading for create password operator' 
+            defaultMessage='A password of 6 digits will be required for logging into the Operator Interface.'/>):''}
+            </div>
 
               <div className='gor-usr-hdsm'><FormattedMessage id="users.add.password.field1" description='Text for password' 
             defaultMessage='Password'/></div>
-              <input className={"gor-usr-fdlg"+(this.props.passwordCheck.type===ERROR?' gor-input-error':' gor-input-ok')} onBlur={(this.props.passwordCheck.type===ERROR||this.props.passwordCheck.type===SUCCESS)?this._checkPwd.bind(this):''} type="password" id="password1"  ref={node => { this.password1 = node }}/>     
+              <input className={"gor-usr-fdlg"+(this.props.passwordCheck.type===ERROR?' gor-input-error':' gor-input-ok')} onBlur={(this.props.passwordCheck.type===ERROR||this.props.passwordCheck.type===SUCCESS)?this._checkPwd.bind(this):''} type="password" id="pswd"  ref={node => { this.pswd = node }}/>     
               {this.props.passwordCheck.type?tick:''}
 
               <div className='gor-usr-hdsm'><FormattedMessage id="users.add.password.field2" description='Text for confirm password' 
             defaultMessage='Confirm Password'/></div>
-              <input className={"gor-usr-fdlg"+(this.props.passwordCheck.type===ERROR?' gor-input-error':' gor-input-ok')} onBlur={this._checkPwd.bind(this)} type="password" id="password2"  ref={node => { this.password2 = node }}/>
+              <input className={"gor-usr-fdlg"+(this.props.passwordCheck.type===ERROR?' gor-input-error':' gor-input-ok')} onBlur={this._checkPwd.bind(this)} type="password" id="confirmPswd"  ref={node => { this.confirmPswd = node }}/>
               {this.props.passwordCheck.type===SUCCESS?tick:((this.props.passwordCheck.type===ERROR)?<FieldError txt={this.props.passwordCheck.msg} />:'')}
 
             </div>
@@ -214,7 +197,8 @@ function mapStateToProps(state, ownProps){
       nameCheck: state.appInfo.nameInfo || {},
       passwordCheck: state.appInfo.passwordInfo || {},
       roleInfo: state.appInfo.roleInfo || null,
-      roleSet:  state.appInfo.roleSet  || null  
+      roleSet:  state.appInfo.roleSet  || null,
+      auth_token: state.authLogin.auth_token  
   };
 }
 

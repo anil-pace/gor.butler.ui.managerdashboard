@@ -4,7 +4,7 @@ import { connect } from 'react-redux' ;
 import {userRequest} from '../../actions/userActions';
 import { FormattedMessage,FormattedPlural } from 'react-intl';        
 import { DELETE_AUDIT } from '../../constants/appConstants';
-import { AUDIT_URL } from '../../constants/configConstants';
+import { AUDIT_URL,DELETE_AUDIT_URL } from '../../constants/configConstants';
 
 class DeleteAudit extends React.Component{
   constructor(props) 
@@ -17,12 +17,12 @@ class DeleteAudit extends React.Component{
   _userDel() {
     let auditId=this.props.auditId;
     let userData={
-                'url':AUDIT_URL+'/delete/'+auditId,
+                'url':DELETE_AUDIT_URL+auditId,
                 'method':'DELETE',
                 'cause':DELETE_AUDIT,
                 'contentType':'application/json',
                 'accept':'application/json',
-                'token':sessionStorage.getItem('auth_token')
+                'token':this.props.auth_token
     }
     this.props.userRequest(userData);
     this.props.removeModal();
@@ -33,7 +33,7 @@ class DeleteAudit extends React.Component{
         <div>
           <div className='gor-delete gor-modal-content'>
             <div className='gor-delete-text'>
-              <div className='iQuestion gor-align-top'></div>
+              <div className='gor-question gor-align-top'></div>
               <div className='gor-delete-line'>
                <div className='gor-delete-query'><FormattedMessage id="audit.delete.heading" description='Text for audit delete heading' 
             defaultMessage='Are you sure you would like to delete audit task {task_name} ?' values={{task_name:(this.props.auditComplete?this.props.auditComplete:'')}}/></div>
@@ -50,6 +50,7 @@ class DeleteAudit extends React.Component{
   };
  function mapStateToProps(state, ownProps){
   return  {
+      auth_token:state.authLogin.auth_token
     }
 } 
 function mapDispatchToProps(dispatch){

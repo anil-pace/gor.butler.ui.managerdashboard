@@ -3,6 +3,7 @@
  * This will be switched based on tab click
  */
 import React  from 'react';
+import { FormattedMessage,FormattedNumber,FormattedDate} from 'react-intl';
 
 
 
@@ -12,45 +13,53 @@ class SnapShotDetails extends React.Component{
     	super(props);
 
     }	
+
+  
    
 	render(){
 		
-		
+		var isToday = this.props.currentDate === Date.parse(this.props.snapshotTabData.date) ? true :false,
+		dt,openingStock;
+		if(isToday){
+			dt = <FormattedMessage id='inventory.snaphot.date' defaultMessage="Today's" description="Snapshot date string"/>
+			openingStock = <FormattedMessage id='inventory.snaphot.openingStock' defaultMessage="Opening Stock" description="Snapshot table header"/>
+		}
+		else{
+			dt = <FormattedDate year='numeric' month='short' day='2-digit' value={new Date(Date.parse(this.props.snapshotTabData.date))}/>
+			openingStock = <FormattedMessage id='inventory.snaphot.closingStock' defaultMessage="Closing Stock" description="Snapshot table header"/>
+		}
 		return (
 			<div className="gorSnapShot">
-				<h1>Today's stock snapshot</h1>
+				<h1>{dt}<FormattedMessage id='inventory.snaphot.header' defaultMessage=" stock snapshot" description="Snapshot header"/> </h1>
 				<div className="gorSnapShotCont">
 					<table width="100%">
 					<tbody>
 					<tr>
-						<td>
-						<p>Opening Stock</p>
-
-						<p>{this.props.snapshotData.opening_stock}</p>
+						<td className="stkParam">
+						<p>{openingStock}</p>
+						<p><FormattedNumber value={this.props.snapshotTabData.opening_stock || 0}/></p>
 						</td>
-						<td>
-						<p>Items Put</p>
-						<p>{this.props.snapshotData.items_put}</p>
+						<td className="stkParam">
+						<p><FormattedMessage id='inventory.snaphot.itemsPut' defaultMessage="Items Put" description="Snapshot table header"/></p>
+						<p><FormattedNumber value={this.props.snapshotTabData.items_put || 0}/></p>
 						</td>
-						<td>
-						<p>Items Pick</p>
-						<p>{this.props.snapshotData.items_picked}</p>
-
+						<td className="stkParam">
+						<p><FormattedMessage id='inventory.snaphot.itemsPick' defaultMessage="Items Pick" description="Snapshot table header"/></p>
+						<p><FormattedNumber value= {this.props.snapshotTabData.items_picked || 0} /></p>
 						</td>
 					</tr>
 					<tr>
-						<td>
-							<p>Current Stock</p>
-
-						<p>{this.props.snapshotData.current_stock}</p>
+						<td className="stkParam">
+							<p><FormattedMessage id='inventory.snaphot.currentStock' defaultMessage="Current Stock" description="Snapshot table header"/></p>
+						<p><FormattedNumber value={this.props.snapshotTabData.current_stock || 0}/></p>
 						</td>
-						<td>
-							<p>SKUs</p>
-						<p>{this.props.snapshotData.total_skus}</p>
+						<td className="stkParam">
+							<p><FormattedMessage id='inventory.snaphot.sku' defaultMessage="SKUs" description="Snapshot table header"/></p>
+						<p><FormattedNumber value={this.props.snapshotTabData.total_skus || 0} /></p>
 						</td>
-						<td>
-							<p>CBM Used</p>
-						<p>{this.props.snapshotData.cbm_used}</p>
+						<td className="stkParam">
+							<p><FormattedMessage id='inventory.snaphot.cbmUsed' defaultMessage="CBM Used" description="Snapshot table header"/></p>
+						<p><FormattedNumber value={this.props.snapshotTabData.cbm_used || 0} /></p>
 
 						</td>
 					</tr>
@@ -64,8 +73,9 @@ class SnapShotDetails extends React.Component{
 	}
 };
 SnapShotDetails.propTypes={
-
-	snapshotData:React.PropTypes.object
+	currentDate:React.PropTypes.number,
+	snapshotData:React.PropTypes.object,
+	hasDataChanged:React.PropTypes.number
 
 }
 export default SnapShotDetails;

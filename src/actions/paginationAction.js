@@ -1,4 +1,4 @@
-import { AJAX_CALL ,ORDER_RECIEVED, STATUS_FILTER, TIME_FILTER, GET_PAGE_SIZE,GET_CURRENT_PAGE,GET_LAST_REFRESH_TIME} from '../constants/appConstants'
+import { AJAX_CALL ,ORDER_RECIEVED, STATUS_FILTER, TIME_FILTER, GET_PAGE_SIZE_ORDERS,GET_CURRENT_PAGE_ORDERS,GET_PAGE_SIZE_AUDIT,GET_CURRENT_PAGE_AUDIT,GET_LAST_REFRESH_TIME} from '../constants/appConstants'
 
 export function getPageData(params){
 	return {
@@ -34,19 +34,20 @@ export function getTimeFilter(data) {
 
 }
 
-export function getPageSize(data) {
+export function getPageSizeOrders(data) {
   return {
-    type: GET_PAGE_SIZE,
+    type: GET_PAGE_SIZE_ORDERS,
     data
   }
 }
 
-export function currentPage(data) {
+export function currentPageOrders(data) {
   return {
-    type: GET_CURRENT_PAGE,
+    type: GET_CURRENT_PAGE_ORDERS,
     data
   }
 }
+
 
 export function lastRefreshTime(data) {
   return {
