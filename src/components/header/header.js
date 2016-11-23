@@ -117,7 +117,7 @@ class Header extends React.Component{
 							</div>
 							<div>
 								<a href="javascript:void(0)" onClick={this.addModal.bind(this)}><FormattedMessage id='header.logout' 
-                        defaultMessage="Log out" description="Text for logout"/></a>
+                        defaultMessage="Logout" description="Text for logout"/></a>
 							</div>
 						</div>
 					</div>

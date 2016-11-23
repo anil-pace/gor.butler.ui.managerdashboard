@@ -17,6 +17,6 @@
   {
     "id": "header.logout",
     "description": "Text for logout",
-    "defaultMessage": "Log out"
+    "defaultMessage": "Logout"
   }
 ]
