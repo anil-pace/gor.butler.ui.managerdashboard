@@ -13,5 +13,10 @@
     "id": "header.user_post",
     "description": "User post",
     "defaultMessage": "--"
+  },
+  {
+    "id": "header.logout",
+    "description": "Text for logout",
+    "defaultMessage": "Logout"
   }
 ]

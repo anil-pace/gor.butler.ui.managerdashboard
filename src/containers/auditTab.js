@@ -8,7 +8,7 @@ import {getAuditData,setAuditRefresh} from '../actions/auditActions';
 import AuditTable from './auditTab/auditTable';
 import ReactPaginate from 'react-paginate';
 import {getPageData} from '../actions/paginationAction';
-import {AUDIT_RETRIEVE} from '../constants/appConstants';
+import {AUDIT_RETRIEVE,GET,APP_JSON} from '../constants/appConstants';
 import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,SEARCH_AUDIT_URL,GIVEN_PAGE,GIVEN_PAGE_SIZE} from '../constants/configConstants';
 
 
@@ -113,10 +113,10 @@ class AuditTab extends React.Component{
    
     let paginationData={
               'url':url,
-              'method':'GET',
+              'method':GET,
               'cause': AUDIT_RETRIEVE,
               'token': this.props.auth_token,
-              'contentType':'application/json'
+              'contentType':APP_JSON
           } 
          this.props.getPageData(paginationData);
  }

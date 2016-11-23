@@ -41,8 +41,8 @@ class Tabs extends React.Component{
         sessionStorage.setItem('selTab', TAB_ROUTE_MAP[selTab]);
         sessionStorage.setItem('subTab', '');
     }
-  _emergencyModal() {
-    let emergency_data=this.props.system_data;
+  _emergencyModal(system_data) {
+    let emergency_data=system_data;
     modal.add(Emergency, {
       title: '',
       size: 'large', // large, medium or small,
@@ -52,9 +52,9 @@ class Tabs extends React.Component{
     });
   }
   componentWillReceiveProps(nextProps){
-    if(this.props.system_emergency)
+    if(nextProps.system_emergency)
     {
-      this._emergencyModal();
+      this._emergencyModal(nextProps.system_data);
     }
   }
   _parseStatus()

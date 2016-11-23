@@ -138,3 +138,22 @@ export function idStatus(userid)
       }
     return idInfo;
 }
+export function emptyField(field)
+{
+    let fieldInfo;
+    if(field.length<1)
+    {
+            fieldInfo={
+              type:ERROR,
+              msg:EMPTY_PWD           
+            };
+    }
+    else
+    {
+            fieldInfo={
+              type:SUCCESS,
+              msg:TYPE_SUCCESS               
+            };            
+    }
+    return fieldInfo;
+}

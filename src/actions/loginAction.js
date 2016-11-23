@@ -27,33 +27,17 @@ export function loginRedirect(data){
 }
 
 export function receiveAuthData(data){  
-  if(data && data.auth_token)
-  {
-      console.log('Login Pass');
       return{
         type: LOGIN_SUCCESS,
         data
       }
-
-  }
- else
-  {
-      console.log('Login Fail');
+}
+ export function loginFail(){
       return{
-        type: LOGIN_FAILURE,
-        data
+        type: LOGIN_FAILURE
       }
   }
-}
-/**
- * Mock login module
- */
-export function mockLoginAuth(params) {
-  return {
-    type: MOCK_LOGIN,
-    params
-  }
- }
+
 /**
  * function that sends ajax to authorize user
  */

@@ -3024,6 +3024,7 @@ progress::-moz-progress-bar {
   background: #f36f36;
   color: #ffffff;
   border-radius: 3px;
+  cursor: pointer;
 }
 
 .gor-field-error {
@@ -3351,6 +3352,7 @@ progress::-moz-progress-bar {
   color: #ffffff;
   border-radius: 3px;
   display: inline-block;
+  cursor: pointer;
 }
 
 .gor-cancel-btn {
@@ -3363,6 +3365,7 @@ progress::-moz-progress-bar {
   border-radius: 3px;
   margin-right: 0.625rem;
   display: inline-block;
+  cursor: pointer;
 }
 
 .gor-notify-top {
@@ -3614,6 +3617,7 @@ progress::-moz-progress-bar {
   color: #ffffff;
   border-radius: 3px;
   display: inline-block;
+  cursor: pointer;
 }
 
 .gorInventory {
