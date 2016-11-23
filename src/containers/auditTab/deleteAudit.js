@@ -3,7 +3,7 @@ import ReactDOM  from 'react-dom';
 import { connect } from 'react-redux' ;
 import {userRequest} from '../../actions/userActions';
 import { FormattedMessage,FormattedPlural } from 'react-intl';        
-import { DELETE_AUDIT,APP_JSON } from '../../constants/appConstants';
+import { DELETE_AUDIT,APP_JSON,DELETE } from '../../constants/appConstants';
 import { AUDIT_URL,DELETE_AUDIT_URL } from '../../constants/configConstants';
 
 class DeleteAudit extends React.Component{
@@ -18,7 +18,7 @@ class DeleteAudit extends React.Component{
     let auditId=this.props.auditId;
     let userData={
                 'url':DELETE_AUDIT_URL+auditId,
-                'method':'DELETE',
+                'method':DELETE,
                 'cause':DELETE_AUDIT,
                 'contentType':APP_JSON,
                 'accept':APP_JSON,

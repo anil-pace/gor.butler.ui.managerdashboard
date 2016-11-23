@@ -13,7 +13,7 @@ import { FormattedMessage } from 'react-intl';
 import { updateIntl } from 'react-intl-redux';
 import Dropdown from '../../components/dropdown/dropdown.js';
 import { translationMessages } from '../../utilities/i18n';
-import { idStatus } from '../../utilities/fieldCheck';
+import { emptyField } from '../../utilities/fieldCheck';
 
 
 class Login extends React.Component{
@@ -58,7 +58,7 @@ class Login extends React.Component{
     }
     _checkUser(){
         let userid=this.userName.value, idInfo;
-        idInfo=idStatus(userid);
+        idInfo=emptyField(userid);
         this.props.validateID(idInfo);
         return idInfo.type;
     }
@@ -70,20 +70,7 @@ class Login extends React.Component{
     }
     _checkPass(){
           let password=this.password.value.trim(), loginPassInfo;
-          if(password.length<1)
-          {
-            loginPassInfo={
-              type:ERROR,
-              msg:EMPTY_PWD           
-            }
-          }
-          else
-          {
-            loginPassInfo={
-              type:SUCCESS,
-              msg:TYPE_SUCCESS               
-            };            
-          };
+          loginPassInfo=emptyField(password);
           this.props.validatePass(loginPassInfo);
           return loginPassInfo.type;    
     }
