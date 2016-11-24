@@ -20,6 +20,13 @@ class AddUser extends React.Component{
     this.props.resetForm();
     this.props.removeModal();
   }
+  componentWillReceiveProps(nextProps){
+    if(!nextProps.auth_token)
+    {
+      this.removeThisModal();
+    }
+  }
+
   componentDidMount(){
         let userData={
                 'url':ROLE_URL,

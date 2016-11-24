@@ -27,6 +27,12 @@ class StartAudit extends React.Component{
   _removeThisModal() {
     this.props.removeModal();
   }
+  componentWillReceiveProps(nextProps){
+    if(!nextProps.auth_token)
+    {
+      this._removeThisModal();
+    }
+  }
   componentDidMount(){
         let userData={
                 'url':PPSLIST_URL,

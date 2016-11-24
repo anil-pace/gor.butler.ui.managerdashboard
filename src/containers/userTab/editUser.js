@@ -32,6 +32,12 @@ class EditUser extends React.Component{
     this.props.resetForm();
     this.props.removeModal();
   }
+  componentWillReceiveProps(nextProps){
+    if(!nextProps.auth_token)
+    {
+      this.removeThisModal();
+    }
+  }  
   _checkName(){
       let firstname=this.firstName.value, lastname=this.lastName.value, nameInfo;
       nameInfo=nameStatus(firstname,lastname);

@@ -14,6 +14,12 @@ class DeleteUser extends React.Component{
   removeThisModal() {
       this.props.removeModal();
   }
+  componentWillReceiveProps(nextProps){
+    if(!nextProps.auth_token)
+    {
+      this.removeThisModal();
+    }
+  }
   userDelete() {
     let delurl=HEADER_URL+'/'+(this.props.id?this.props.id:'');
     let userData={

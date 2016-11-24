@@ -14,6 +14,12 @@ class DeleteAudit extends React.Component{
   _removeThisModal() {
       this.props.removeModal();
   }
+  componentWillReceiveProps(nextProps){
+    if(!nextProps.auth_token)
+    {
+      this._removeThisModal();
+    }
+  }
   _userDel() {
     let auditId=this.props.auditId;
     let userData={

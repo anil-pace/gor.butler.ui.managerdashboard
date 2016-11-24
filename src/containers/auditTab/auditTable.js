@@ -37,12 +37,21 @@ class AuditTable extends React.Component {
    */
    _handleOnClickDropdown(rowIndex) {
     if (rowIndex.constructor === Number && rowIndex >= 0){    
-      let domArray = document.querySelectorAll('.fixedDataTableRowLayout_rowWrapper');
+      var domArray = document.querySelectorAll('.fixedDataTableRowLayout_rowWrapper');
+      // since the last drop down menu does not have the space to show the menu below it
+      // hence it has to be put on top
+      var lastDownMenu = document
+                          .querySelector('.fixedDataTableRowLayout_rowWrapper:last-child .Dropdown-menu');
+      if (lastDownMenu){
+        lastDownMenu.style.bottom = '100%';
+        lastDownMenu.style.top = 'initial';
+      }
+
       let DOMObj = domArray[rowIndex+1];
       DOMObj.style.zIndex = "30";
       for(var i = domArray.length-1; i>=0;i--){
         if (domArray[i] !== DOMObj){
-          domArray[i].style.zIndex = "0";
+          domArray[i].style.zIndex = "2";
         }
       }
     }
