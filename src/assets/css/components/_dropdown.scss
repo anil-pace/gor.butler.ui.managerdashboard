@@ -70,14 +70,16 @@
   position: absolute;
   top: 105%;
   width: 100%;
+<<<<<<< 499d0515fb0567e0344b7bfa6c507a0b7b80276a
   z-index: 30;
+=======
+>>>>>>> Fix for bug BSS-739
   -webkit-overflow-scrolling: touch;
 }
 .Dropdown-menu:last-child{
   bottom:100%;
   top:0;
 }
-
 
 
 .Dropdown-option {
