@@ -33,20 +33,19 @@
          break;
          default:
          this.props.setInventorySpinner(false);
-
      }
      replace(nextView)
  }
 
  _updateLanguage(){
     var sessionLocale = sessionStorage.getItem('localLanguage');
-    var sLocale = sessionLocale? sessionLocale : navigator.language;
-    sLocale = sLocale.substring(0,2);// since we need only the first two characters fo the locale.
+    
+    sessionLocale = sessionLocale.substring(0,2);// since we need only the first two characters fo the locale.
     let data = {
-        locale : sLocale,
-        messages: translationMessages[sLocale]
+        locale : sessionLocale,
+        messages: translationMessages[sessionLocale]
     }
-    sessionStorage.setItem('localLanguage', sLocale);
+    sessionStorage.setItem('localLanguage', sessionLocale);
     this.props.updateIntl(data);
 }
 

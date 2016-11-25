@@ -79,7 +79,9 @@ class Login extends React.Component{
                         defaultMessage="Language" description="Text for language"/>
                 
                     </div>
-                    <Dropdown optionDispatch={(e) => this._handleSelectionChange(e)} items={this.state.items} styleClass={'gor-lang-drop'} currentState={this.state.items[this.state.sel]} />
+                    <Dropdown optionDispatch={(e) => this._handleSelectionChange(e)} items={this.state.items}
+                     styleClass={'gor-lang-drop'} 
+                    currentState={this.state.items[this.state.sel]} />
                 </div>
                 <div className='gor-login-logo alt-gor-logo'>
                 </div>
