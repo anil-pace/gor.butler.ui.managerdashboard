@@ -469,6 +469,7 @@ background-color: #FFFFFF;
   font-size: 12px;
   max-height: 9px;
   background: #ffffff;
+  text-transform: capitalize;
 
 }
 
@@ -484,6 +485,7 @@ background-color: #FFFFFF;
   font-size: 12px;
   max-height: 9px;
   background: #ffffff;
+  text-transform: capitalize;
 
 }
 .online .public_fixedDataTableCell_cellContent{
@@ -515,6 +517,7 @@ background-color: #FFFFFF;
   font-size: 12px;
   max-height: 9px;
   background: #ffffff;
+  text-transform: capitalize;
 
 }
 
@@ -584,6 +587,7 @@ background-color: #FFFFFF;
   font-size: 12px;
   max-height: 9px;
   background: #ffffff;
+  text-transform: capitalize;
 }
 
 .pending .public_fixedDataTableCell_cellContent{
@@ -615,6 +619,31 @@ background-color: #FFFFFF;
   max-height: 9px;
   background: #ffffff;
 
+}
+.auto{
+  .public_fixedDataTableCell_cellContent{
+    text-transform: capitalize;
+  }
+} 
+.manual{
+  .public_fixedDataTableCell_cellContent{
+    text-transform: capitalize;
+  }
+}
+.audit{
+  .public_fixedDataTableCell_cellContent{
+    text-transform: capitalize;
+  }
+}
+.pick{
+  .public_fixedDataTableCell_cellContent{
+    text-transform: capitalize;
+  }
+}
+.put{
+  .public_fixedDataTableCell_cellContent{
+    text-transform: capitalize;
+  }
 }
 
 .public_fixedDataTableCell_columnResizerKnob {

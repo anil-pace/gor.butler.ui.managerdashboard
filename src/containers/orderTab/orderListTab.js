@@ -10,8 +10,9 @@
  import {ORDERS_RETRIEVE} from '../../constants/frontEndConstants';
  import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,ORDER_PAGE, PICK_BEFORE_ORDER_URL, BREACHED_URL} from '../../constants/configConstants';
  import OrderListTable from './orderListTable';
- import Dropdown from '../../components/dropdown/dropdown'
- import { FormattedMessage ,defineMessages,FormattedDate} from 'react-intl';
+ import Dropdown from '../../components/dropdown/dropdown';
+ import {stringConfig} from '../../constants/backEndConstants';
+ import { FormattedMessage ,defineMessages,FormattedRelative,FormattedDate} from 'react-intl';
 
 
 const messages = defineMessages ({
@@ -38,7 +39,7 @@ const messages = defineMessages ({
       orderListRefreshedat:{
         id:'orderlist.Refreshed.at', 
         description:" 'Refreshed' status",
-        defaultMessage:'Refreshed at: '}
+        defaultMessage:'Last Updated '}
    });
 
 class OrderListTab extends React.Component{
@@ -72,17 +73,17 @@ class OrderListTab extends React.Component{
       orderData.id = data[i].order_id;
 
       if(data[i].breached === true) {
-        orderData.status = ordersStatus[data[i].status];
+        orderData.status = stringConfig[data[i].status];
         orderData.statusClass = "breached";
         orderData.statusPriority = breachedStatus[data[i].status];
       }
       if(data[i].exception === true) {
-        orderData.status = ordersStatus[data[i].status];
+        orderData.status = stringConfig[data[i].status];
         orderData.statusClass = "gor-exception";
         orderData.statusPriority = breachedStatus[data[i].status];
       }      
       else {
-        orderData.status = ordersStatus[data[i].status];
+        orderData.status = stringConfig[data[i].status];
         orderData.statusClass = data[i].status;
         orderData.statusPriority = unBreachedStatus[data[i].status];
       }
@@ -101,8 +102,18 @@ class OrderListTab extends React.Component{
         orderData.pickBy = "--";
       }
       else {
-        orderData.pickBy = data[i].pick_before_time.substring(4);
-        orderData.pickBy = orderData.pickBy.substring(0, orderData.pickBy.length - 4)
+       // orderData.pickBy = data[i].pick_before_time.substring(4);
+       // orderData.pickBy = orderData.pickBy.substring(0, orderData.pickBy.length - 4);
+        orderData.pickBy = <FormattedDate value = {data[i].pick_before_time}
+                                timeZone={timeOffset}
+                                 year='numeric'
+                                  month='short'
+                                  day='2-digit'
+                                  hour="2-digit"
+                                  minute="2-digit"
+                                  second="2-digit"
+                                  timeZoneName="long"
+                                />;
       }
 
       if(data[i].completed_orderlines === data[i].total_orderlines) {
@@ -111,7 +122,7 @@ class OrderListTab extends React.Component{
       else {
         orderData.orderLine = data[i].completed_orderlines + "/" + data[i].total_orderlines;
       }
-      console.log(timeOffset);
+      
       orderData.completedTime = <FormattedDate value = {data[i].update_time}
                                 timeZone={timeOffset}
                                  year='numeric'
@@ -205,16 +216,10 @@ class OrderListTab extends React.Component{
     
   render(){
     var updateStatus;
-    let updateStatusIntl;
+    var updateStatusIntl,updateStatusText;
     if(this.props.filterOptions.lastUpdatedOn) {
-      updateStatusIntl = this
-      .context 
-      .intl
-      .formatMessage(messages.orderListRefreshedat)+ ' ' +this
-      .context
-      .intl
-      .formatDate(this.props.filterOptions.lastUpdatedOn, 
-        { hour: 'numeric',minute: 'numeric'});
+      updateStatusText = <FormattedMessage id="orderlistTab.orderListRefreshedat" description='Refresh Status text' defaultMessage='Last Updated ' />
+      updateStatusIntl = <FormattedRelative updateInterval={10000} value={Date.now()}/>
 
   }
 
@@ -240,7 +245,7 @@ class OrderListTab extends React.Component{
       <div>
       <div className="gor-Orderlist-table" >  
 
-      <OrderListTable items={orderDetail} itemNumber={itemNumber} statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter} refreshOption={this.refresh.bind(this)} lastUpdated={updateStatusIntl} refreshList={this.refresh.bind(this)} intlMessg={this.props.intlMessages}/>
+      <OrderListTable items={orderDetail} itemNumber={itemNumber} statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter} refreshOption={this.refresh.bind(this)} lastUpdatedText = {updateStatusText} lastUpdated={updateStatusIntl} refreshList={this.refresh.bind(this)} intlMessg={this.props.intlMessages}/>
       
       <div className="gor-pageNum">
         <Dropdown  styleClass={'gor-Page-Drop'}  items={ordersByStatus} currentState={ordersByStatus[0]} optionDispatch={this.props.getPageSizeOrders} refreshList={this.refresh.bind(this)}/>

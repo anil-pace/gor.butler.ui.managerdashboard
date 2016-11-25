@@ -67,6 +67,9 @@ export const CHARGING_TAB = "Charging Station";
 export const PPS_TAB = "Pick Put Stations";
 export const ORDER_LIST = "Order List";
 export const WAVES = "Waves";
+export const BUTLERBOTS = "butlerbots";
+export const CHARGING = "chargingstation";
+export const PPS = "pps";
 export const TAB_CLASS = {
 	overview:"gorMainBlock", 
 	system:"gorMainBlock",
@@ -278,7 +281,7 @@ export const LEGEND_DEFAULT = LEGEND_RECT;
 
 
 export const EN='en';
-export const JP='ja';
+export const JA='ja';
 // Style class constants
 export const TYPING='gor-login-field gor-input-ok gor-input-typing';
 export const FILL_BACK='gor-fill-back';

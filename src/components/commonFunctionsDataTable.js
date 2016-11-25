@@ -106,8 +106,8 @@ export const ActionCell = ({rowIndex, data, columnKey,selEdit,selDel,mid, ...pro
   </Cell>
 );
 
-export const TextCell = ({rowIndex, data, columnKey, ...props}) => (
-  <Cell {...props}>
+export const TextCell = ({rowIndex, data, columnKey,classKey, ...props}) => (
+  <Cell {...props} className={data.getObjectAt(rowIndex)[classKey]}>
     {data.getObjectAt(rowIndex)[columnKey]}
   </Cell>
 );

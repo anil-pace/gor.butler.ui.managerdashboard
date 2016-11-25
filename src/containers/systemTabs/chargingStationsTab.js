@@ -8,6 +8,7 @@ import ReactDOM  from 'react-dom';
 import ChargingStationsTable from './chargingStationsTable';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+import {stringConfig} from '../../constants/backEndConstants'
 
 function processChargersData(data, nProps) {
   var chargerData=[],detail = {},count = 0;
@@ -25,11 +26,12 @@ function processChargersData(data, nProps) {
     CS = nProps.context.intl.formatMessage({id:"chargersDetail.name.prefix", description:"prefix for cs id in chargersDetail", defaultMessage:"Charging Stations - {csId}"},{"csId":csId});
     BUTLER = nProps.context.intl.formatMessage({id:"chargersDetail.butler.prefix", description:"prefix for butler id in chargersDetail", defaultMessage:"Butler - {botId}"},{"botId":botId});
     detail.id = CS;
-    detail.status = status[data[i].charger_status];
+    detail.status = stringConfig[data[i].charger_status];//status[data[i].charger_status];
     detail.statusClass = data[i].charger_status;
     detail.statusPriority = priStatus[data[i].charger_status];
-    detail.mode = mode[data[i].charger_mode];
-    if(data[i].docked_butler_id !== null && data[i].docked_butler_id.length !== 0 ) {
+    detail.mode = stringConfig[data[i].charger_mode];
+    detail.modeClass = data[i].charger_mode;
+    if(data[i].docked_butler_id  && data[i].docked_butler_id.length) {
        detail.dockedBots = BUTLER;
      }
 

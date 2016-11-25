@@ -337,7 +337,7 @@ export const LEGEND_DEFAULT = LEGEND_RECT;
 
 
 export const EN='en';
-export const JP='ja';
+export const JA='ja';
 // Style class constants
 export const TYPING='gor-login-field gor-input-ok gor-input-typing';
 export const FILL_BACK='gor-fill-back';

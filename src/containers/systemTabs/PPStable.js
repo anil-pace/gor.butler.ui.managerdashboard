@@ -332,7 +332,7 @@ class PPStable extends React.Component {
               </div>
             </SortHeaderCell>
           }
-          cell={<TextCell data={sortedDataList} />}
+          cell={<TextCell data={sortedDataList} classKey={"operatingModeClass"}/>}
           fixed={true}
           width={columnWidths.operatingMode}
           isResizable={true}

@@ -88,7 +88,7 @@ class ChargingStationsTable extends React.Component {
     var sortIndexes = this._defaultSortIndexes.slice();
     var tableData={
       sortedDataList: new DataListWrapper(sortData(columnKey, sortDir,sortIndexes,this._dataList), this._dataList),
-      colSortDirs: {[columnKey]: sortDir,},
+      colSortDirs: {[columnKey]: sortDir},
       columnWidths: this.props.tableData.columnWidths,
     };
     this.props.currentTableState(tableData)
@@ -196,7 +196,7 @@ class ChargingStationsTable extends React.Component {
               </div>
             </SortHeaderCell>
           }
-          cell={<TextCell data={sortedDataList} />}
+          cell={<TextCell data={sortedDataList} classKey = "modeClass"/>}
           fixed={true}
           width={columnWidths.mode}
           isResizable={true}
