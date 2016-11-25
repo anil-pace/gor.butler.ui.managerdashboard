@@ -4,7 +4,6 @@
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
   left: 0;
-  /*overflow: hidden;*/
   position: absolute;
   top: 0;
   white-space: nowrap;
@@ -28,7 +27,6 @@
   border-width: 0 1px 0 0;
   box-sizing: border-box;
   display: block;
-  /*overflow: hidden;*/
   position: absolute;
   white-space: normal;
   background: grey;
@@ -106,14 +104,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 }
 
 
-.fixedDataTableLayout_main {
-  border-style: solid;
-  border-width: 1px;
-  box-sizing: border-box;
-  /*overflow: hidden;*/
-  position: relative;
-}
-
 .fixedDataTableLayout_header,
 .fixedDataTableLayout_hasBottomBorder {
   border-bottom-style: solid;
@@ -139,7 +129,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 }
 
 .fixedDataTableLayout_rowsContainer {
-  /*overflow: hidden;*/
   position: relative;
 }
 
@@ -160,7 +149,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 
 .fixedDataTableRowLayout_main {
   box-sizing: border-box;
-  /*overflow: hidden;*/
   position: absolute;
   top: 0;
   border-bottom: #e6e6e6;
@@ -190,11 +178,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   width: 4px;
 }
 
-.fixedDataTableRowLayout_rowWrapper {
-  position: absolute;
-  top: 0;
-  z-index:20;
-}
+
 /**
  * Copyright (c) 2015, Facebook, Inc.
  * All rights reserved.
@@ -387,10 +371,12 @@ border-bottom-width: 0px;
 
 .fixedDataTableRowLayout_rowWrapper:hover .public_fixedDataTableCell_main {
   background-color: #e6e6e6;
-  z-index:20;
 }
 
-
+.fixedDataTableRowLayout_rowWrapper:last-child .Dropdown-menu {
+  top: initial;
+  bottom: 100%
+}
 
 .public_fixedDataTable_header:hover .public_fixedDataTableCell_main {
 
@@ -761,7 +747,6 @@ background-color: #FFFFFF;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
   left: 0;
-  /*overflow: hidden;*/
   position: absolute;
   top: 0;
   white-space: nowrap;
@@ -793,7 +778,6 @@ background-color: #FFFFFF;
   border-width: 0 1px 0 0;
   box-sizing: border-box;
   display: block;
-  /*overflow: hidden;*/
   position: absolute;
   white-space: normal;
 }
@@ -894,8 +878,8 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   border-style: solid;
   border-width: 1px;
   box-sizing: border-box;
-  /*overflow: hidden;*/
   position: relative;
+  overflow: hidden;
 }
 
 .fixedDataTableLayout_header,
@@ -923,7 +907,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 }
 
 .fixedDataTableLayout_rowsContainer {
-  /*overflow: hidden;*/
   position: relative;
 }
 
@@ -944,7 +927,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 
 .fixedDataTableRowLayout_main {
   box-sizing: border-box;
-  /*overflow: hidden;*/
   position: absolute;
   top: 0;
 }
@@ -1408,7 +1390,7 @@ input[type="checkbox"]{
         position: absolute;
         top: 100%;
         width: 100%;
-        z-index: 1000;
+        z-index: 30;
       -webkit-overflow-scrolling: touch;
       border-color: #aaaaaa;
       font-size: 14px;

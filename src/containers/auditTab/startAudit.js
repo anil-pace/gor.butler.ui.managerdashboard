@@ -6,7 +6,9 @@ import {setAuditType,resetAuditType} from '../../actions/auditActions';
 import {userRequest} from '../../actions/userActions';
 import { connect } from 'react-redux';
 import {INVALID_SKUID,INVALID_LOCID,TYPE_SUCCESS} from '../../constants/messageConstants';
-import { ERROR,SUCCESS,SKU,LOCATION,CREATE_AUDIT,GET_PPSLIST,START_AUDIT } from '../../constants/frontEndConstants';
+
+import { ERROR,SUCCESS,SKU,LOCATION,CREATE_AUDIT,GET_PPSLIST,START_AUDIT,GET,APP_JSON,POST } from '../../constants/frontEndConstants';
+
 import { AUDIT_URL,PPSLIST_URL,START_AUDIT_URL } from '../../constants/configConstants';
 import FieldError from '../../components/fielderror/fielderror';
 import { locationStatus, skuStatus } from '../../utilities/fieldCheck';
@@ -30,10 +32,10 @@ class StartAudit extends React.Component{
   componentDidMount(){
         let userData={
                 'url':PPSLIST_URL,
-                'method':'GET',
+                'method':GET,
                 'cause':GET_PPSLIST,
-                'contentType':'application/json',
-                'accept':'application/json',
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
                 'token':sessionStorage.getItem('auth_token')
             }
         this.props.userRequest(userData);
@@ -49,10 +51,10 @@ class StartAudit extends React.Component{
     let userData={
                 'url':START_AUDIT_URL,
                 'formdata':formdata,
-                'method':'POST',
+                'method':POST,
                 'cause':START_AUDIT,
-                'contentType':'application/json',
-                'accept':'application/json',
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
                 'token':this.props.auth_token
     }
     this.props.userRequest(userData);

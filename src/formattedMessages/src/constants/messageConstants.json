@@ -1,5 +1,15 @@
 [
   {
+    "id": "login.lang.english",
+    "description": "English option in the language drop down",
+    "defaultMessage": "English"
+  },
+  {
+    "id": "login.lang.japanese",
+    "description": "Japanese option in the language drop down",
+    "defaultMessage": "日本語"
+  },
+  {
     "id": "notify.success.edit",
     "description": "Text for successfully editing user",
     "defaultMessage": "User details updated successfully"
@@ -177,7 +187,47 @@
   {
     "id": "notify.error.connection",
     "description": "Text for connection refused",
-    "defaultMessage": "Connection refused"
+    "defaultMessage": "Network Failure"
+  },
+  {
+    "id": "notify.error.400",
+    "description": "Text for bad request",
+    "defaultMessage": "Network error: 400 Bad Request"
+  },
+  {
+    "id": "notify.error.401",
+    "description": "Text for Unauthorizedun",
+    "defaultMessage": "Network error: 401 Unauthorized"
+  },
+  {
+    "id": "notify.error.403",
+    "description": "Text for Forbidden",
+    "defaultMessage": "Network error: 403 Forbidden"
+  },
+  {
+    "id": "notify.error.405",
+    "description": "Text for method not allowed",
+    "defaultMessage": "Network error: 405 Method Not Allowed"
+  },
+  {
+    "id": "notify.error.408",
+    "description": "Text for request timeout",
+    "defaultMessage": "Network error: 408 Request Time-out"
+  },
+  {
+    "id": "notify.error.409",
+    "description": "Text for conflict",
+    "defaultMessage": "Network error: 409 Conflict"
+  },
+  {
+    "id": "notify.error.500",
+    "description": "Text for internal server error",
+    "defaultMessage": "Network error: 500 Internal Servor Error"
+  },
+  {
+    "id": "notify.error.502",
+    "description": "Text for bad gateway",
+    "defaultMessage": "Network error: 502 Bad Gateway"
   },
   {
     "id": "inventory.histogram.noDataText",

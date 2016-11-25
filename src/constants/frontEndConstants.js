@@ -282,18 +282,34 @@ export const LEGEND_DEFAULT = LEGEND_RECT;
 
 export const EN='en';
 export const JA='ja';
+export const HR='h ';
+export const MM='m ';
 // Style class constants
 export const TYPING='gor-login-field gor-input-ok gor-input-typing';
 export const FILL_BACK='gor-fill-back';
 export const GET='GET';
+export const POST='POST';
+export const PUT='PUT';
+export const DELETE='DELETE';
+export const APP_JSON='application/json';
 export const GOR_RISK='gor-risk';
 export const GOR_NONE='gor-none';
 export const GOR_SUCCESS='gor-success';
 export const GOR_PENDING="pending";
 export const GOR_PROGRESS="progress";
+export const GOR_BREACHED="breached";
+export const GOR_EXCEPTION="gor-exception";
+export const GOR_OFFLINE='gor-offline';
+export const GOR_ONLINE='gor-online';
+export const GOR_NORMAL_TAB='gor-normal-tab';
+export const GOR_PASS='pass';
+export const GOR_FAILURE='fail';
 //Icons
 export const PICK_ICON=' iPick';
 export const STOCK_ICON="iStock";
 export const AUDIT_ICON="iAudit";
 export const TILE_ONTIME='overview-tile-ontime-icon';
 export const TILE_ALERT='header-yellow-alert-icon';
+export const TICK_WHITE='gor-tick-white';
+export const REMOVE_ICON='gor-remove-white';
+export const ERROR_WHITE='gor-error-white';

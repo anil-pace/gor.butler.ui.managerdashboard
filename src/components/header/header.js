@@ -1,6 +1,6 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-import {RECIEVE_HEADER,HEADER_START_TIME,REQUEST_HEADER,RECIEVE,RECIEVE_ITEM_TO_STOCK} from '../../constants/frontEndConstants';
+import {RECIEVE_HEADER,HEADER_START_TIME,REQUEST_HEADER,RECIEVE,RECIEVE_ITEM_TO_STOCK,GET} from '../../constants/frontEndConstants';
 import {USER_ROLE_MAP} from '../../constants/backEndConstants';
 import {HEADER_URL} from '../../constants/configConstants'
 import {modal} from 'react-redux-modal';
@@ -26,7 +26,7 @@ class Header extends React.Component{
               if(username && this.props.authToken){
               let headerData={
                 'url':HEADER_URL+'?username='+username,
-                'method':'GET',
+                'method':GET,
                 'cause':RECIEVE_HEADER,
                 'token':this.props.authToken
             }
@@ -117,7 +117,8 @@ class Header extends React.Component{
 							<div className="horizontalDiv">	
 							</div>
 							<div>
-								<a href="javascript:void(0)" onClick={this.addModal.bind(this)}>Logout</a>
+								<a href="javascript:void(0)" onClick={this.addModal.bind(this)}><FormattedMessage id='header.logout' 
+                        defaultMessage="Logout" description="Text for logout"/></a>
 							</div>
 						</div>
 					</div>

@@ -20,8 +20,8 @@ class TopNotifications extends React.Component{
     }
 	render(){
 		return (
-		<div className={"gor-notify-top"+(this.props.notifyInfo?(this.props.notifyInfo.type===SUCCESS||this.props.notifyInfo.type===DELETION?' pass':' fail'):'')} style={(this.props.notifyInfo)?(this.props.notifyInfo.type!==HIDE?{display:'block'}:{display:'none'}):{display:'none'}}>
-			<span className={(this.props.notifyInfo?(this.props.notifyInfo.type===SUCCESS?'gor-tick-white':(this.props.notifyInfo.type===DELETION?'gor-remove-white':'gor-error-white')):'')}></span><span>{this.props.notifyInfo?this.props.notifyInfo.msg:''}</span>
+		<div className={"gor-notify-top "+(this.props.notifyInfo?(this.props.notifyInfo.type):'')} style={(this.props.notifyInfo)?(this.props.notifyInfo.type!==HIDE?{display:'block'}:{display:'none'}):{display:'none'}}>
+			<span className={(this.props.notifyInfo?(this.props.notifyInfo.icon):'')}></span><span>{this.props.notifyInfo?this.props.notifyInfo.msg:''}</span>
 		</div> 
 		);
 	}

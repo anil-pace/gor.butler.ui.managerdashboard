@@ -17,7 +17,6 @@ export const WS_CONNECTED = "WS_CONNECTED";
 export const WS_DISCONNECT = "WS_DISCONNECT";
 export const WS_ONMESSAGE = "WS_ONMESSAGE";
 export const WS_ONSEND = "WS_ONSEND";
-export const WS_INIT = "WS_INIT";
 export const WS_SUCCESS="Sucessfully logged in";
 export const WS_END="WS_END";
 export const WS_MOCK="WS_MOCK";
@@ -87,11 +86,11 @@ export const PPS_TAB = "Pick Put Stations";
 export const ORDER_LIST = "Order List";
 export const WAVES = "Waves";
 export const TAB_CLASS = {
-	overview:"gorMainBlock", 
-	system:"gorMainBlock",
-	orders:"gorMainBlock", 
-	inventory:"gorMainBlock", 
-	users:"gorMainBlock"
+	overview:"gor-main-block", 
+	system:"gor-main-block",
+	orders:"gor-main-block", 
+	inventory:"gor-main-block", 
+	users:"gor-main-block"
 };
 
 
@@ -338,18 +337,35 @@ export const LEGEND_DEFAULT = LEGEND_RECT;
 
 export const EN='en';
 export const JA='ja';
+export const HR='h ';
+export const MM='m ';
+
 // Style class constants
 export const TYPING='gor-login-field gor-input-ok gor-input-typing';
 export const FILL_BACK='gor-fill-back';
 export const GET='GET';
+export const POST='POST';
+export const PUT='PUT';
+export const DELETE='DELETE';
+export const APP_JSON='application/json';
 export const GOR_RISK='gor-risk';
 export const GOR_NONE='gor-none';
 export const GOR_SUCCESS='gor-success';
 export const GOR_PENDING="pending";
 export const GOR_PROGRESS="progress";
+export const GOR_BREACHED="breached";
+export const GOR_EXCEPTION="gor-exception";
+export const GOR_OFFLINE='gor-offline';
+export const GOR_ONLINE='gor-online';
+export const GOR_NORMAL_TAB='gor-normal-tab';
+export const GOR_PASS='pass';
+export const GOR_FAILURE='fail';
 //Icons
 export const PICK_ICON=' iPick';
 export const STOCK_ICON="iStock";
 export const AUDIT_ICON="iAudit";
 export const TILE_ONTIME='overview-tile-ontime-icon';
 export const TILE_ALERT='header-yellow-alert-icon';
+export const TICK_WHITE='gor-tick-white';
+export const REMOVE_ICON='gor-remove-white';
+export const ERROR_WHITE='gor-error-white';

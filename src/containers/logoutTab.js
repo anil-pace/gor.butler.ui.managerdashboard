@@ -8,19 +8,21 @@ import { FormattedMessage } from 'react-intl';
 class LogOut extends React.Component{
   constructor(props) 
   {
-      super(props);  
+    super(props);  
   }
   removeThisModal() {
-      this.props.removeModal();
+    this.props.removeModal();
   }
   appLogout() {
+     
       this.props.removeModal();
       sessionStorage.clear();
       this.props.userLogout();
       this.props.endConnect();
-  }  
-  render()
-  {
+     
+    }  
+    render()
+    {
       return (
         <div>
           <div className='gor-logout'>
@@ -29,20 +31,22 @@ class LogOut extends React.Component{
                         defaultMessage="Are you sure you would like to log out now?" description="Text for logout question"/></span>
            </div>
               <div className='gor-logout-bottom'>
-                <button className='gor-cancel-btn' onClick={this.removeThisModal.bind(this)}>Cancel</button>
-                <button className='gor-logout-btn' onClick={this.appLogout.bind(this)}>Log out now</button>
+                <button className='gor-cancel-btn' onClick={this.removeThisModal.bind(this)}><FormattedMessage id='logout.cancel' 
+                        defaultMessage="Cancel" description="Text for cancel"/></button>
+                <button className='gor-logout-btn' onClick={this.appLogout.bind(this)}><FormattedMessage id='logout.done' 
+                        defaultMessage="Log out now" description="Text for logout button"/></button>
               </div> 
           </div>
         </div>
-      );
-    }
-  };
- 
-function mapDispatchToProps(dispatch){
-    return {
-      endConnect: function(){ dispatch(endWsAction()); },
-        userLogout: function(){ dispatch(logoutRequest()); }
-    }
-};
+        );
+      }
+    };
 
-export default connect(null,mapDispatchToProps)(LogOut);
+    function mapDispatchToProps(dispatch){
+      return {
+        endConnect: function(){ dispatch(endWsAction()); },
+        userLogout: function(){ dispatch(logoutRequest()); }
+      }
+    };
+
+    export default connect(null,mapDispatchToProps)(LogOut);

@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { connect } from 'react-redux' ;
 import {userRequest} from '../../actions/userActions';
-import {DELETE_USER} from '../../constants/frontEndConstants';
+import {DELETE_USER,APP_JSON,DELETE} from '../../constants/frontEndConstants';
 import {HEADER_URL} from '../../constants/configConstants';
 import { FormattedMessage,FormattedPlural } from 'react-intl';        
 
@@ -18,10 +18,10 @@ class DeleteUser extends React.Component{
     let delurl=HEADER_URL+'/'+(this.props.id?this.props.id:'');
     let userData={
                 'url':delurl,
-                'method':'DELETE',
+                'method':DELETE,
                 'cause':DELETE_USER,
-                'contentType':'application/json',
-                'accept':'application/json',
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
                 'token':this.props.auth_token
     }
     this.props.userRequest(userData);
