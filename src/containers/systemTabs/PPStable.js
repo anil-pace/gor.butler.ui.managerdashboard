@@ -33,7 +33,7 @@ class PPStable extends React.Component {
       sortedDataList: this._dataList,
       colSortDirs: {},
       columnWidths: {
-        id: this.props.containerWidth*0.15,
+        id: this.props.containerWidth*0.07,
         status: this.props.containerWidth*0.1,
         operatingMode: this.props.containerWidth*0.2,
         performance: this.props.containerWidth*0.2,
@@ -69,10 +69,10 @@ class PPStable extends React.Component {
       sortedDataList: this._dataList,
       colSortDirs: {},
       columnWidths: {
-         id: nextProps.containerWidth*0.15,
-        status: nextProps.containerWidth*0.1,
-        operatingMode: nextProps.containerWidth*0.2,
-        performance: nextProps.containerWidth*0.15,
+         id: nextProps.containerWidth*0.09,
+        status: nextProps.containerWidth*0.078,
+        operatingMode: nextProps.containerWidth*0.145,
+        performance: nextProps.containerWidth*0.092,
         operatorAssigned: nextProps.containerWidth*0.4
       },
       headerChecked: false,
@@ -258,7 +258,7 @@ class PPStable extends React.Component {
        </div>
 
       <Table
-        rowHeight={66}
+        rowHeight={50}
         rowsCount={sortedDataList.getSize()}
         headerHeight={70}
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}

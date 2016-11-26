@@ -190,7 +190,7 @@ export class SortHeaderCell extends React.Component {
       <Cell {...props}>
         <a onClick={this._onSortChange}>
           {children} 
-          <div style={{display: 'inline-block'}}>{sortDir ? (sortDir === SortTypes.DESC ? '↓' : '↑') : ''} </div>
+          <div className="sortIcon" >{sortDir ? (sortDir === SortTypes.DESC ? '↓' : '↑') : ''} </div>
         </a>
       </Cell>
     );

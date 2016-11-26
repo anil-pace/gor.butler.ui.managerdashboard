@@ -130,7 +130,7 @@ class ChargingStationsTable extends React.Component {
        </div>
 
       <Table
-        rowHeight={66}
+        rowHeight={50}
         rowsCount={rowsCount}
         headerHeight={70}
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
