@@ -10,8 +10,10 @@ import ReactPaginate from 'react-paginate';
 import {getPageData} from '../actions/paginationAction';
 import {AUDIT_RETRIEVE} from '../constants/appConstants';
 import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,SEARCH_AUDIT_URL,GIVEN_PAGE,GIVEN_PAGE_SIZE} from '../constants/configConstants';
+
 import { FormattedDate } from 'react-intl';
 import {setAuditSpinner} from '../actions/auditActions';
+
 
 
 function processAuditData(data, nProps ) {
@@ -22,7 +24,9 @@ function processAuditData(data, nProps ) {
   let sku  = nProps.context.intl.formatMessage({id:"auditdetail.sku.prefix", defaultMessage: "SKU"});
   let location  = nProps.context.intl.formatMessage({id:"auditdetail.location.prefix", defaultMessage: "Location"});
 
+
   let timeOffset: state.authLogin.timeOffset;
+
   
   var priorityStatus = {"audit_created":2, "audit_pending":3, "audit_waiting":3, "audit_conflicting":3, "audit_started":1, "audit_tasked":1, "audit_aborted":4, "audit_completed":4};
   var auditStatus = {"audit_created":created, "audit_pending":pending, "audit_waiting":pending, "audit_conflicting":pending, "audit_started":progress, "audit_tasked":progress, "audit_aborted":completed, "audit_completed":completed, "audit_pending_approval":completed};
@@ -59,35 +63,23 @@ function processAuditData(data, nProps ) {
     }
 
     if(data[i].start_request_time) {
-      auditData.startTime = <FormattedDate value = {data[i].start_request_time}
-                                timeZone={timeOffset}
-                                 year='numeric'
-                                  month='short'
-                                  day='2-digit'
-                                  hour="2-digit"
-                                  minute="2-digit"
-                                />
+      auditData.startTime = data[i].start_request_time;
     }
     else {
       auditData.startTime = "--";
     }
 
-    if(data[i].expected_quantity !== 0 && completed_quantity !== null) {
-      auditData.progress = (data[i].completed_quantity)/(data[i].expected_quantity) * 100;
+    if(data[i].expected_quantity !== 0 && data[i].completed_quantity !== null) {
+      auditData.progress = (data[i].completed_quantity)/(data[i].expected_quantity);
     }
+
+
     else {
-      auditData.progress = 0; 
+      auditData.progress = 0; //needs to be done
     }
 
     if(data[i].completion_time) {
-      auditData.completedTime = <FormattedDate value = {data[i].completion_time}
-                                timeZone={timeOffset}
-                                 year='numeric'
-                                  month='short'
-                                  day='2-digit'
-                                  hour="2-digit"
-                                  minute="2-digit"
-                                />;
+      auditData.completedTime = data[i].completion_time;
     }
     else {
       auditData.completedTime = "--";
@@ -154,12 +146,14 @@ render(){
   
   
   return (
-  
    <div>
+   
+   <div>
+
+   <div className="gor-Auditlist-table">
    <Spinner isLoading={this.props.auditSpinner} />
-   <div>
-   <div className="gor-Auditlist-table" >
-    {renderTab}
+   {renderTab}
+
    </div>
    </div>
         <div id={"react-paginate"}>
@@ -188,7 +182,6 @@ function mapStateToProps(state, ownProps){
     totalPage: state.recieveAuditDetail.totalPage || 0,
     auditRefresh:state.recieveAuditDetail.auditRefresh || null,  
     intlMessages: state.intl.messages,
-    timeOffset: state.authLogin.timeOffset,
     auth_token: state.authLogin.auth_token
   };
 }

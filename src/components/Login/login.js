@@ -7,7 +7,7 @@ import {validateID, validatePassword, resetForm} from '../../actions/validationA
 
 import { connect } from 'react-redux';
 import {AUTH_LOGIN,ERROR,SUCCESS,TYPING,EN,JA,FILL_BACK} from '../../constants/appConstants'; 
-import {INVALID_ID,EMPTY_PWD,TYPE_SUCCESS} from '../../constants/messageConstants'; 
+import {INVALID_ID,EMPTY_PWD,TYPE_SUCCESS,ENG,JAP} from '../../constants/messageConstants'; 
 import {LOGIN_URL} from '../../constants/configConstants'; 
 import { FormattedMessage } from 'react-intl';
 import { updateIntl } from 'react-intl-redux';
@@ -21,8 +21,10 @@ class Login extends React.Component{
 	 {
     	super(props);      
       this.state={sel:0, items :[
-        { value: EN, label: (<FormattedMessage id='login.lang.english' defaultMessage="English" description="English option in the language drop down"/>) },
-        { value: JA, label: (<FormattedMessage id='login.lang.japanese' defaultMessage="Japanese" description="Japanese option in the language drop down"/>) },
+        { value: EN, label: ENG },
+        { value: JA, label: JAP },
+
+
       ]};
     }
     componentWillMount()
@@ -49,6 +51,10 @@ class Login extends React.Component{
            document.body.className='';
            this.context.router.push("/md");
       }
+    }
+
+    componentDidMount(nextProps){
+      
     }
     _checkUser(){
         let userid=this.userName.value, idInfo;
@@ -95,6 +101,7 @@ class Login extends React.Component{
             messages: translationMessages[sLocale]
         }
         this.props.updateIntl(data);
+        sessionStorage.setItem('localLanguage', sLocale);
         this._changeDropdown();
     }
     /**
@@ -165,7 +172,6 @@ class Login extends React.Component{
                         defaultMessage="Butler" description="Text for butler management Login form title"/>
                        </span>
                        <sup><FormattedMessage id='login.butler.trademark' 
-
                     defaultMessage="TM"
                             description="Trademark"/></sup>
                     </div>
@@ -249,12 +255,11 @@ Login.contextTypes = {
 
 function mapStateToProps(state, ownProps){
 	return {
-        loginAuthorized:state.authLogin.loginAuthorized,
+        loginAuthorized:state.authLogin.loginAuthorized ,
         connectionActive:state.authLogin.connectionActive,
-        auth_token: state.authLogin.auth_token,
-        userName: state.authLogin.username,
-        sLang: state.intl.locale,
-        intlMessages: state.intl.messages,
+        auth_token: state.authLogin.auth_token || null,
+        sLang: state.intl.locale || null,
+        intlMessages: state.intl.messages || {},
         idInfo: state.appInfo.idInfo||{},
         loginPassCheck: state.appInfo.passwordInfo||{},
         loginSpinner:state.spinner.loginSpinner         

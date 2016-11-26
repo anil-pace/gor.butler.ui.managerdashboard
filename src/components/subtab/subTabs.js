@@ -54,14 +54,14 @@ class SystemTab extends React.Component{
               defaultMessage ="Charging Station"/>
 
 
-		var selectClass = {notification:"gorMainBlock", butlerbots:"gorMainBlock", pps:"gorMainBlock", chargingstation:"gorMainBlock"};
+		var selectClass = {notification:"gor-main-block", butlerbots:"gor-main-block", pps:"gor-main-block", chargingstation:"gor-main-block"};
 
 		if(this.props.subTab.length) {
-			selectClass[this.props.subTab] = "gorMainBlockSelect";
+			selectClass[this.props.subTab] = "gor-main-blockSelect";
 		}
 
 		else {
-			selectClass["butlerbots"] = "gorMainBlockSelect";
+			selectClass["butlerbots"] = "gor-main-blockSelect";
 		}
 
 		return (

@@ -1,15 +1,5 @@
 [
   {
-    "id": "login.lang.english",
-    "description": "English option in the language drop down",
-    "defaultMessage": "English"
-  },
-  {
-    "id": "login.lang.japanese",
-    "description": "Japanese option in the language drop down",
-    "defaultMessage": "Japanese"
-  },
-  {
     "id": "login.butler.language",
     "description": "Text for language",
     "defaultMessage": "Language"

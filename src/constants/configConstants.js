@@ -1,5 +1,5 @@
 
-export const BASE_URL = '192.168.8.120';
+export const BASE_URL = '192.168.8.119';
 export const PORT = '8888';
 export const PROTOCOL = 'https://';
 export const WS_PROTOCOL ="wss://";
@@ -18,6 +18,10 @@ export const START_AUDIT_URL=AUDIT_URL+'/start';
 export const SEARCH_AUDIT_URL=AUDIT_URL + "/search?start_time=";
 export const PPSLIST_URL = API_URL+"/pps/pps_mode"
 export const ORDER_PAGE = "?page=";
+export const EXCEPTION_TRUE="&exception=true";
+export const WAREHOUSE_STATUS="&warehouse_status=";
+export const UPDATE_TIME_LOW='&update_time<=';
+export const UPDATE_TIME_HIGH='&update_time>=';
 export const PICK_BEFORE_ORDER_URL = "&pick_before_time<=";
 export const BREACHED_URL = "&warehouse_status=['pending','fulfillable']";
 export const TIME_ZONE_URL = PROTOCOL+BASE_URL+"/api/components/get_time_zone"

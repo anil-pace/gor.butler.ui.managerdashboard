@@ -136,25 +136,21 @@ class UserDataTable extends React.Component {
       name:name    });
    
   }
- //  _showModal(){
- // //    this.myModal.style.display = "block";
- //       this.refs.modal.style.display = "block";   
- //  }
- //  _hideModal(){
- // //    this.myModal.style.display = "none";    
- //       this.refs.modal.style.display = "none";   
  
- //  }
 
   render() {
     var {sortedDataList, colSortDirs,columnWidths} = this.state;
-    var columnWidth= (this.props.containerWidth/this.props.itemNumber)
-    var heightRes = 560 ,rowsCount = sortedDataList.getSize();
+    var columnWidth= (this.props.containerWidth/this.props.itemNumber);
+    var heightRes = 560 ,rowsCount = sortedDataList.getSize(), noData ;
     if(this.props.containerHeight !== 0) {
       heightRes = this.props.containerHeight;
     }
     var selEdit = this.handleEdit.bind(this);
     var selDel= this.handleDel.bind(this); 
+    noData = <div/>;
+    if(rowsCount === 0) {
+     noData =  <div> NO DATA </div>
+    }
     return (
       <div>
         <div className="gorToolBar">
@@ -181,6 +177,7 @@ class UserDataTable extends React.Component {
         </div>
         </div>
        </div>
+
       <Table
         rowHeight={66}
         rowsCount={sortedDataList.getSize()}
@@ -287,6 +284,7 @@ class UserDataTable extends React.Component {
           width={columnWidth}
         />
       </Table>
+      {noData}
       </div>
     );
   }
