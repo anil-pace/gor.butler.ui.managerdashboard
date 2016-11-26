@@ -24,11 +24,10 @@ class PPS extends React.Component{
   var PPSData=[], detail = {}, ppsId, performance,totalUser = 0;
   var nProps = this;
   var data = nProps.props.PPSDetail.PPStypeDetail;
-  var ppsStatus = ["Off", "On"];
   let PPS, ON, OFF, PERFORMANCE;
-  let pick  = stringConfig.pick;//nProps.context.intl.formatMessage({id:"ppsDetail.pick.status", defaultMessage: "Pick"});
-  let put = stringConfig.put;//nProps.context.intl.formatMessage({id:"ppsDetail.put.status", defaultMessage: "Put"});
-  let audit = stringConfig.audit;//nProps.context.intl.formatMessage({id:"ppsDetail.audit.status", defaultMessage: "Audit"});
+  let pick  = nProps.context.intl.formatMessage(stringConfig.pick.params);
+  let put = nProps.context.intl.formatMessage(stringConfig.put.params);
+  let audit = nProps.context.intl.formatMessage(stringConfig.audit.params);
   var currentTask = {"pick":pick, "put":put, "audit":audit};
   var priStatus = {"on": 1, "off": 2};
 
@@ -38,8 +37,8 @@ class PPS extends React.Component{
     ppsId = data[i].pps_id;
     performance = data[i].performance;
     PPS =  nProps.context.intl.formatMessage({id:"ppsDetail.name.prefix", description:"prefix for pps id in ppsDetail", defaultMessage:"PPS-{ppsId}"},{"ppsId":ppsId});
-    ON = stringConfig.on;//nProps.context.intl.formatMessage({id:"ppsDetail.on.status", defaultMessage: "On"});
-    OFF = stringConfig.off;//nProps.context.intl.formatMessage({id:"ppsDetail.off.status", defaultMessage: "Off"});
+    ON = nProps.context.intl.formatMessage(stringConfig.on.params);
+    OFF = nProps.context.intl.formatMessage(stringConfig.off.params);
     PERFORMANCE =  nProps.context.intl.formatMessage({id:"ppsDetail.performance.prefix", description:"prefix for pps id in ppsDetail", defaultMessage:"{performance} orders/hr"},{"performance":performance?performance:"0"});
     detail.id =  PPS;
     detail.ppsId = ppsId;

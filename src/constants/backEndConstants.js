@@ -65,41 +65,59 @@ export const USER_ROLE_MAP ={
 
 
 export var stringConfig = {
-    "per_hour": (<FormattedMessage id="stringConfig.per_hour" description='Text displaying per hour' 
-            defaultMessage="per_hour"/>),
-    "on": (<FormattedMessage id="stringConfig.on" description='Text displaying on' 
-            defaultMessage="on"/>),
-    "off": (<FormattedMessage id="stringConfig.off" description='Text displaying off' 
-            defaultMessage="off"/>),
-    "pick": (<FormattedMessage id="stringConfig.pick" description='Text displaying pick' 
-            defaultMessage="pick"/>),
-    "put": (<FormattedMessage id="stringConfig.put" description='Text displaying put' 
-            defaultMessage="put"/>),
-    "audit": (<FormattedMessage id="stringConfig.audit" description='Text displaying audit' 
-            defaultMessage="audit"/>),
-    "soft": (<FormattedMessage id="stringConfig.soft" description='Text displaying soft' 
-            defaultMessage="soft"/>),
-    "hard": (<FormattedMessage id="stringConfig.hard" description='Text displaying hard' 
-            defaultMessage="hard"/>),
-    "soft_manual": (<FormattedMessage id="stringConfig.soft_manual" description='Text displaying soft_manual' 
-            defaultMessage="soft_manual"/>),
-    "pending": (<FormattedMessage id="stringConfig.pending" description='Text displaying pending' 
-            defaultMessage="Pending"/>),
-    "disconnected":(<FormattedMessage id="stringConfig.disconnected" description='Text displaying disconnect' 
-            defaultMessage="disconnected"/>),
-    "connected":(<FormattedMessage id="stringConfig.connected" description='Text displaying connected' 
-            defaultMessage="connected"/>),
-    "completed": (<FormattedMessage id="stringConfig.completed" description='Text displaying completed' 
-            defaultMessage="completed"/>),
-    "in_progress": (<FormattedMessage id="stringConfig.in_progress" description='Text displaying in_progress' 
-            defaultMessage="In Progress"/>),
-    "breached": (<FormattedMessage id="stringConfig.breached" description='Text displaying breached' 
-            defaultMessage="Breached"/>),
-    "fulfillable":(<FormattedMessage id="stringConfig.fulfillable" description='Text displaying In Progress' 
-            defaultMessage="In Progress"/>),
-    "manual":(<FormattedMessage id="stringConfig.manual" description='Text displaying manual' 
-            defaultMessage="manual"/>),
-    "auto":(<FormattedMessage id="stringConfig.auto" description='Text displaying auto' 
-            defaultMessage="auto"/>)
+    "per_hour": {
+        params:{id:"stringConfig.per_hour", defaultMessage: "per_hour"}
+    },
+    "on": {
+        params:{id:"stringConfig.on", defaultMessage: "on"}
+    },
+    "off": {
+        params:{id:"stringConfig.off", defaultMessage: "off"}
+    },
+    "pick": {
+        params:{id:"stringConfig.pick", defaultMessage: "pick"}
+    },
+    "put": {
+        params:{id:"stringConfig.put", defaultMessage: "put"}
+    },
+    "audit": {
+        params:{id:"stringConfig.audit", defaultMessage: "audit"}
+    },
+    "soft": {
+        params:{id:"stringConfig.soft", defaultMessage: "soft"}
+    },
+    "hard": {
+        params:{id:"stringConfig.hard", defaultMessage: "hard"}
+    },
+    "soft_manual": {
+        params:{id:"stringConfig.soft_manual", defaultMessage: "soft_manual"}
+    },
+    "pending": {
+        params:{id:"stringConfig.pending", defaultMessage: "Pending"}
+    },
+    "disconnected":{
+        params:{id:"stringConfig.disconnected", defaultMessage: "Disconnected"}
+    },
+    "connected":{
+        params:{id:"stringConfig.connected", defaultMessage: "Connected"}
+    },
+    "completed": {
+        params:{id:"stringConfig.completed", defaultMessage: "Completed"}
+    },
+    "in_progress": {
+        params:{id:"stringConfig.in_progress", defaultMessage: "In Progress"}
+    },
+    "breached": {
+        params:{id:"stringConfig.breached", defaultMessage: "Breached"}
+    },
+    "fulfillable":{
+        params:{id:"stringConfig.fulfillable", defaultMessage: "In Progress"}
+    },
+    "manual":{
+        params:{id:"stringConfig.manual", defaultMessage: "Manual"}
+    },
+    "auto":{
+        params:{id:"stringConfig.auto", defaultMessage: "Auto"}
+    }
 }
 Object.freeze(stringConfig);
