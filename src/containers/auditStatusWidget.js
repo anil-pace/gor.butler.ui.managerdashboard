@@ -3,7 +3,7 @@ import ReactDOM  from 'react-dom';
 import Tilex from '../components/tile1x/Tilex';
 import { connect } from 'react-redux';
 import { FormattedMessage,FormattedNumber } from 'react-intl';
-import {AUDIT_ICON} from '../constants/appConstants';
+import {AUDIT_ICON} from '../constants/frontEndConstants';
 
 class AuditStatusWidget extends React.Component{
 	/**

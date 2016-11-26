@@ -1,5 +1,5 @@
 
-import { INVENTORY_DATA_TODAY,DISPLAY_INVENTORY_HISTORY,INVENTORY_DATA_HISTORY,DISPLAY_INVENTORY_SPINNER} from '../constants/appConstants'
+import { INVENTORY_DATA_TODAY,DISPLAY_INVENTORY_HISTORY,INVENTORY_DATA_HISTORY,DISPLAY_INVENTORY_SPINNER} from '../constants/frontEndConstants'
 
 
 export function receiveInventoryTodayData(data){

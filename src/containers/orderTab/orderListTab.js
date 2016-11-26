@@ -4,13 +4,16 @@
  import ReactPaginate from 'react-paginate';
  import { connect } from 'react-redux';
  import {getPageData, getStatusFilter, getTimeFilter,getPageSizeOrders,currentPageOrders,lastRefreshTime} from '../../actions/paginationAction';
- import {ORDERS_RETRIEVE,GOR_BREACHED,GOR_EXCEPTION} from '../../constants/appConstants';
+ import {ORDERS_RETRIEVE,GOR_BREACHED,GOR_EXCEPTION,GET,APP_JSON} from '../../constants/frontEndConstants';
  import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,ORDER_PAGE, PICK_BEFORE_ORDER_URL, BREACHED_URL,UPDATE_TIME_HIGH,UPDATE_TIME_LOW,EXCEPTION_TRUE} from '../../constants/configConstants';
  import OrderListTable from './orderListTable';
+
  import Dropdown from '../../components/dropdown/dropdown'
- import { FormattedMessage ,defineMessages,FormattedDate} from 'react-intl';
+ import { FormattedMessage ,defineMessages,FormattedRelative,FormattedDate} from 'react-intl';
  import Spinner from '../../components/spinner/Spinner';
  import {setOrderListSpinner} from '../../actions/orderListActions';
+ import {stringConfig} from '../../constants/backEndConstants';
+
 
  const messages = defineMessages ({
   inProgressStatus:{
@@ -32,12 +35,12 @@
           id:"orderList.Unfulfillable.status", 
           description:" 'Unfulfillable' status",
           defaultMessage: "Unfulfillable"},
+      orderListRefreshedat:{
+        id:'orderlist.Refreshed.at', 
+        description:" 'Refreshed' status",
+        defaultMessage:'Last Updated '}
+   });
 
-          orderListRefreshedat:{
-            id:'orderlist.Refreshed.at', 
-            description:" 'Refreshed' status",
-            defaultMessage:'Refreshed at: '}
-          });
 
  class OrderListTab extends React.Component{
   constructor(props) 
@@ -71,6 +74,7 @@
       orderData.id = data[i].order_id;
 
       if(data[i].breached === true) {
+
         orderData.status = ordersStatus[data[i].status];
         orderData.statusClass = GOR_BREACHED;
         orderData.statusPriority = breachedStatus[data[i].status];
@@ -79,11 +83,12 @@
       else if(data[i].exception === true) {
         orderData.status = ordersStatus[data[i].status];
         orderData.statusClass = GOR_EXCEPTION;
+
         orderData.statusPriority = breachedStatus[data[i].status];
         alertStatesNum++;
       }      
       else {
-        orderData.status = ordersStatus[data[i].status];
+        orderData.status = stringConfig[data[i].status];
         orderData.statusClass = data[i].status;
         orderData.statusPriority = unBreachedStatus[data[i].status];
       }
@@ -91,13 +96,26 @@
 
 
 
-      orderData.recievedTime = nProps.context.intl.formatDate(data[i].create_time, {month: 'short', timeZone:{timeOffset}, year:'numeric', day:'2-digit', hour:"2-digit", minute:"2-digit"});
+      orderData.recievedTime = <FormattedDate value = {data[i].create_time}
+                                timeZone={timeOffset}
+                                year='numeric'
+                                month='short'
+                                day='2-digit'
+                                hour="2-digit"
+                                minute="2-digit"
+                                second="2-digit"
+                                timeZoneName="long"
+                                />;
+                                
+
       if(data[i].pick_before_time === null) {
         orderData.pickBy = "--";
       }
       else {
-        orderData.pickBy = nProps.context.intl.formatDate(data[i].pick_before_time, {month: 'short', timeZone:{timeOffset}, year:'numeric', day:'2-digit', hour:"2-digit", minute:"2-digit"});
-      }
+         orderData.pickBy = data[i].pick_before_time.substring(4);
+         orderData.pickBy = orderData.pickBy.substring(0, orderData.pickBy.length - 4)
+     }
+
 
       if(data[i].completed_orderlines === data[i].total_orderlines) {
         orderData.orderLine = data[i].total_orderlines;
@@ -106,7 +124,18 @@
         orderData.orderLine = data[i].completed_orderlines + "/" + data[i].total_orderlines;
       }
       if (data[i].status === "completed"){
-        orderData.completedTime = nProps.context.intl.formatDate(data[i].update_time, {month: 'short', timeZone:{timeOffset}, year:'numeric', day:'2-digit', hour:"2-digit", minute:"2-digit"});
+        orderData.completedTime = <FormattedDate value = {data[i].update_time}
+
+                                timeZone={timeOffset}
+                                year='numeric'
+                                month='short'
+                                day='2-digit'
+                                hour="2-digit"
+                                minute="2-digit"
+                                second="2-digit"
+                                timeZoneName="long"
+
+                                />;
       }else{
         orderData.completedTime = "--";
       }
@@ -149,6 +178,7 @@
 
 
 
+
   refresh() {
     var convertTime = {"oneHourOrders": 1, "twoHourOrders": 2, "sixHourOrders": 6, "twelveHourOrders": 12, "oneDayOrders": 24};
     var status = this.props.filterOptions.statusFilter, timeOut = this.props.filterOptions.timeFilter,currentTime,prevTime;
@@ -169,6 +199,7 @@
       appendStatusUrl = "";
     }
 
+
     else if(this.props.filterOptions.statusFilter === "breached") {
       currentTime = new Date();
       currentTime = currentTime.toISOString();
@@ -176,19 +207,18 @@
     }
     else if(this.props.filterOptions.statusFilter=== "exception")
     {
-      appendStatusUrl = "&exception=true" ;      
+      appendStatusUrl = EXCEPTION_TRUE ;      
     }
     else {
-     appendStatusUrl = "&warehouse_status=" + (this.props.filterOptions.statusFilter);
+     appendStatusUrl = WAREHOUSE_STATUS + (this.props.filterOptions.statusFilter);
    }
-
    if(timeOut !== undefined && timeOut !== "allOrders") {
     currentTime = new Date();
     prevTime = new Date();
     prevTime = new Date(prevTime.setHours(prevTime.getHours() - convertTime[timeOut]));
     prevTime = prevTime.toISOString();
     currentTime = currentTime.toISOString();
-    appendTimeUrl = '&update_time<='+ currentTime +'&update_time>='+ prevTime;
+    appendTimeUrl = UPDATE_TIME_LOW+ currentTime +UPDATE_TIME_HIGH+ prevTime;
   }
   data.url = data.url + appendStatusUrl+appendTimeUrl+appendPageSize;
   this.props.lastRefreshTime((new Date()));
@@ -199,21 +229,11 @@
 
 render(){
   var updateStatus;
-  
-
-   let updateStatusIntl;
+  let updateStatusIntl,updateStatusText;
   if(this.props.filterOptions.lastUpdatedOn) {
-    updateStatusIntl = this
-    .context 
-    .intl
-    .formatMessage(messages.orderListRefreshedat)+ ' ' +this
-    .context
-    .intl
-    .formatDate(this.props.filterOptions.lastUpdatedOn, 
-      { hour: 'numeric',minute: 'numeric'});
-  }           
-
-
+    updateStatusText = <FormattedMessage id="orderlistTab.orderListRefreshedat" description='Refresh Status text' defaultMessage='Last Updated ' />
+    updateStatusIntl = <FormattedRelative updateInterval={10000} value={Date.now()}/>
+  }
   var itemNumber = 6, table, pages;
   const ordersByStatus = [
   { value: '25', label: '25' },
@@ -224,49 +244,47 @@ render(){
   { value: '1000', label: '1000' }
   ];
   var currentPage = this.props.filterOptions.currentPage, totalPage = this.props.orderData.totalPage;
-  var orderDetail,orderInfo, alertNum=0;
+  var orderDetail , alertNum = 0,orderInfo;
   if(this.props.orderData.ordersDetail !== undefined) {
     orderInfo = this.processOrders(this.props.orderData.ordersDetail, this);
     orderDetail = orderInfo.renderOrderData;
     alertNum = orderInfo.alertStatesNum;
   }
   return (
-  <div>
-  
-  <div className="gor-Orderlist-table" >  
-<Spinner isLoading={this.props.orderListSpinner} />
-  <OrderListTable items={orderDetail} itemNumber={itemNumber} statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter} refreshOption={this.refresh.bind(this)} lastUpdated={updateStatusIntl} refreshList={this.refresh.bind(this)} intlMessg={this.props.intlMessages} alertNum={alertNum}/>
+    <div>
+    <div className="gor-Orderlist-table" >  
 
-  <div className="gor-pageNum">
-  <Dropdown  styleClass={'gor-Page-Drop'}  items={ordersByStatus} currentState={ordersByStatus[0]} optionDispatch={this.props.getPageSizeOrders} refreshList={this.refresh.bind(this)}/>
-  </div>
-  <div className="gor-paginate">
-  <div className = "gor-paginate-state"> 
-  <FormattedMessage id="orderlistTab.pageNum" description='page num orderlist' defaultMessage='Page {currentPage} of {totalPage}' values={{currentPage: currentPage?currentPage:'0', totalPage: totalPage?totalPage:'0'}}/>
+    <OrderListTable items={orderDetail} itemNumber={itemNumber} statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter} refreshOption={this.refresh.bind(this)} lastUpdatedText = {updateStatusText} lastUpdated={updateStatusIntl} refreshList={this.refresh.bind(this)} intlMessg={this.props.intlMessages} alertNum={alertNum}/>
 
-  </div>
-  <div id={"react-paginate"}>
-  <ReactPaginate previousLabel={"<<"}
-  nextLabel={">>"}
-  breakClassName={"break-me"}
-  pageNum={this.props.orderData.totalPage}
-  marginPagesDisplayed={1}
-  pageRangeDisplayed={1}
-  clickCallback={this.handlePageClick.bind(this)}
-  containerClassName={"pagination"}
-  subContainerClassName={"pages pagination"}
-  activeClassName={"active"} />
-  </div>
-  </div>
-  </div>
-  </div>
+    <div className="gor-pageNum">
+    <Dropdown  styleClass={'gor-Page-Drop'}  items={ordersByStatus} currentState={ordersByStatus[0]} optionDispatch={this.props.getPageSizeOrders} refreshList={this.refresh.bind(this)}/>
+    </div>
+    <div className="gor-paginate">
+    <div className = "gor-paginate-state"> 
+    <FormattedMessage id="orderlistTab.pageNum" description='page num orderlist' defaultMessage='Page {currentPage} of {totalPage}' values={{currentPage: currentPage?currentPage:'0', totalPage: totalPage?totalPage:'0'}}/>
+
+    </div>
+    <div id={"react-paginate"}>
+    <ReactPaginate previousLabel={"<<"}
+    nextLabel={">>"}
+    breakClassName={"break-me"}
+    pageNum={this.props.orderData.totalPage}
+    marginPagesDisplayed={1}
+    pageRangeDisplayed={1}
+    clickCallback={this.handlePageClick.bind(this)}
+    containerClassName={"pagination"}
+    subContainerClassName={"pages pagination"}
+    activeClassName={"active"} />
+    </div>
+    </div>
+    </div>
+    </div>
 
   );
 }
 }
 
 function mapStateToProps(state, ownProps){
-  console.log(state)
   return {
     orderListSpinner: state.spinner.orderListSpinner || false,
     filterOptions: state.filterOptions || {},

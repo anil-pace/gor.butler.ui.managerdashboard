@@ -3,7 +3,8 @@ import ReactDOM  from 'react-dom';
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
 import {validateID, validateName, validatePassword, resetForm} from '../../actions/validationActions';
 import {userRequest} from '../../actions/userActions';
-import {ADD_USER,CHECK_ID,ERROR,SUCCESS,INFO,GET_ROLES,BUTLER_SUPERVISOR,BUTLER_UI} from '../../constants/appConstants';
+import {ADD_USER,CHECK_ID,ERROR,SUCCESS,INFO,GET_ROLES,GET,APP_JSON,POST} from '../../constants/frontEndConstants';
+import {BUTLER_SUPERVISOR,BUTLER_UI} from  '../../constants/backEndConstants';
 import {ROLE_URL,CHECK_USER,HEADER_URL} from '../../constants/configConstants';
 import {INVALID_ID,INVALID_FORMAT,TYPE_SUCCESS} from '../../constants/messageConstants';
 import { connect } from 'react-redux';
@@ -23,10 +24,10 @@ class AddUser extends React.Component{
   componentDidMount(){
         let userData={
                 'url':ROLE_URL,
-                'method':'GET',
+                'method':GET,
                 'cause':GET_ROLES,
-                'contentType':'application/json',
-                'accept':'application/json',
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
                 'token':this.props.auth_token
             }
         this.props.userRequest(userData);
@@ -39,10 +40,10 @@ class AddUser extends React.Component{
     {
        let userData={
                 'url':CHECK_USER+userid,
-                'method':'GET',
+                'method':GET,
                 'cause':CHECK_ID,
-                'contentType':'application/json',
-                'accept':'application/json',
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
                 'token':this.props.auth_token
       }
       this.props.userRequest(userData);
@@ -100,10 +101,10 @@ class AddUser extends React.Component{
         let userData={
                 'url':HEADER_URL,
                 'formdata':formdata,
-                'method':'POST',
+                'method':POST,
                 'cause':ADD_USER,
-                'contentType':'application/json',
-                'accept':'application/json',
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
                 'token':this.props.auth_token
             }
         this.props.userRequest(userData);

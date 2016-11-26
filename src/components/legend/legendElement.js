@@ -2,7 +2,7 @@
  * Component for creating graph legend 
  */
 import React  from 'react';
-import {LEGEND_ROUND,LEGEND_RECT,LEGEND_DEFAULT} from '../../constants/appConstants'
+import {LEGEND_ROUND,LEGEND_RECT,LEGEND_DEFAULT} from '../../constants/frontEndConstants'
 
 
 

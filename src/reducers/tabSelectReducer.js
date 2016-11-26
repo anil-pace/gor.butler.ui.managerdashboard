@@ -1,4 +1,4 @@
-import { TAB_SELECTED ,PREV_TAB_SELECTED,SUB_TAB_SELECTED} from '../constants/appConstants'
+import { TAB_SELECTED ,PREV_TAB_SELECTED,SUB_TAB_SELECTED} from '../constants/frontEndConstants'
 
 export  function tabSelected(state={},action){
 	switch (action.type) {

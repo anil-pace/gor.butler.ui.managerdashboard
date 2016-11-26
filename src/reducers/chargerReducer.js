@@ -1,4 +1,4 @@
-import {CHARGERS_DATA} from '../constants/appConstants';
+import {CHARGERS_DATA} from '../constants/frontEndConstants';
 /**
  * @param  {State Object}
  * @param  {Action object}

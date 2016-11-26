@@ -1,3 +1,6 @@
+import React  from 'react';
+import { FormattedMessage,FormattedPlural } from 'react-intl'; 
+
 //WS constants
 export const WS_SUCCESS="Sucessfully logged in";
 
@@ -58,3 +61,51 @@ export const USER_ROLE_MAP ={
 	[BUTLER_UI] : "Operator"
 
 }
+/*String config codes*/
+
+
+export var stringConfig = {
+    "per_hour": (<FormattedMessage id="stringConfig.per_hour" description='Text displaying per hour' 
+            defaultMessage="per_hour"/>),
+    "on": (<FormattedMessage id="stringConfig.on" description='Text displaying on' 
+            defaultMessage="on"/>),
+    "off": (<FormattedMessage id="stringConfig.off" description='Text displaying off' 
+            defaultMessage="off"/>),
+    "pick": (<FormattedMessage id="stringConfig.pick" description='Text displaying pick' 
+            defaultMessage="pick"/>),
+    "put": (<FormattedMessage id="stringConfig.put" description='Text displaying put' 
+            defaultMessage="put"/>),
+    "audit": (<FormattedMessage id="stringConfig.audit" description='Text displaying audit' 
+            defaultMessage="audit"/>),
+    "soft": (<FormattedMessage id="stringConfig.soft" description='Text displaying soft' 
+            defaultMessage="soft"/>),
+    "hard": (<FormattedMessage id="stringConfig.hard" description='Text displaying hard' 
+            defaultMessage="hard"/>),
+    "soft_manual": (<FormattedMessage id="stringConfig.soft_manual" description='Text displaying soft_manual' 
+            defaultMessage="soft_manual"/>),
+    "pending": (<FormattedMessage id="stringConfig.pending" description='Text displaying pending' 
+            defaultMessage="In Progress"/>),
+    "disconnected":(<FormattedMessage id="stringConfig.disconnected" description='Text displaying disconnect' 
+            defaultMessage="disconnected"/>),
+    "connected":(<FormattedMessage id="stringConfig.connected" description='Text displaying connected' 
+            defaultMessage="connected"/>),
+    "Completed": (<FormattedMessage id="stringConfig.completed" description='Text displaying completed' 
+            defaultMessage="completed"/>),
+    "completed": (<FormattedMessage id="stringConfig.order.completed" description='Text displaying completed' 
+            defaultMessage="completed"/>),
+    "in_progress": (<FormattedMessage id="stringConfig.in_progress" description='Text displaying in_progress' 
+            defaultMessage="In Progress"/>),
+    "breached": (<FormattedMessage id="stringConfig.breached" description='Text displaying breached' 
+            defaultMessage="Breached"/>),
+    "fulfillable":(<FormattedMessage id="stringConfig.fulfillable" description='Text displaying In Progress' 
+            defaultMessage="In Progress"/>),
+    "manual":(<FormattedMessage id="stringConfig.manual" description='Text displaying manual' 
+            defaultMessage="manual"/>),
+    "auto":(<FormattedMessage id="stringConfig.auto" description='Text displaying auto' 
+            defaultMessage="auto"/>),
+    "not_fulfillable":(<FormattedMessage id="stringConfig.notFulfillable" description='Text displaying not fulfillable status' 
+            defaultMessage="unfulfillable"/>),
+    "exception":(<FormattedMessage id="stringConfig.Exception" description='Text displaying Exception status' 
+            defaultMessage="exception"/>)
+}
+Object.freeze(stringConfig);

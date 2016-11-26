@@ -2,8 +2,9 @@ import React  from 'react';
 import WavesTable from './waveTable';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import {GOR_PENDING,GOR_PROGRESS} from '../../constants/appConstants';
 import Spinner from '../../components/spinner/Spinner';
+import {GOR_PENDING,GOR_PROGRESS} from '../../constants/frontEndConstants';
+import {stringConfig} from '../../constants/backEndConstants';
 
 function processWaveData(data, nProps) {
   var waveData = [], waveDetail = {};
@@ -23,7 +24,7 @@ function processWaveData(data, nProps) {
       waveDetail.id = WAVE ;
       waveDetail.statusClass = status[data[i].status];
       waveDetail.statusPriority = priStatus[data[i].status];
-      waveDetail.status = intlStatus[data[i].status];
+      waveDetail.status = stringConfig[data[i].status];
       
       if(data[i].start_time === "") {
         waveDetail.startTime = "--";

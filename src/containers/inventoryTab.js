@@ -33,7 +33,7 @@ class InventoryTab extends React.Component{
 		return (
 			<div className="gorInventory wrapper">
 				<Spinner isLoading={this.props.inventorySpinner} />
-				<Inventory  currentDate = {this.props.currentDate} hasDataChanged = {this.props.hasDataChanged} inventoryData={this.props.inventoryData} histogramLabel={histogramLabel} linechartLabel={linechartLabel} isPrevDateSelected = {this.props.isPrevDateSelected} inventoryDataPrevious = {this.props.inventoryDataPrevious} snapshotData={this.props.snapshotData}/>
+				<Inventory recreatedData={this.props.recreatedData} currentDate = {this.props.currentDate} hasDataChanged = {this.props.hasDataChanged} inventoryData={this.props.inventoryData} histogramLabel={histogramLabel} linechartLabel={linechartLabel} isPrevDateSelected = {this.props.isPrevDateSelected} inventoryDataPrevious = {this.props.inventoryDataPrevious} snapshotData={this.props.snapshotData}/>
 			</div>
 		);
 	}
@@ -45,9 +45,10 @@ InventoryTab.propTypes={
 	snapshotData:React.PropTypes.array,
 	inventorySpinner:React.PropTypes.bool,
 	isPrevDateSelected:React.PropTypes.bool,
-	inventoryDataPrevious:React.PropTypes.object ,
+	inventoryDataPrevious:React.PropTypes.array ,
 	hasDataChanged:React.PropTypes.number,
-	currentDate:React.PropTypes.number
+	currentDate:React.PropTypes.number,
+	recreatedData: React.PropTypes.object
 }
 
 function mapStateToProps(state,ownProps){
@@ -59,7 +60,8 @@ function mapStateToProps(state,ownProps){
       "isPrevDateSelected":state.inventoryInfo.isPrevDateSelected || false,
       "inventoryDataPrevious":state.inventoryInfo.inventoryDataPrevious || [],
       "hasDataChanged":state.inventoryInfo.hasDataChanged ,
-      "currentDate":state.inventoryInfo.currentDate
+      "currentDate":state.inventoryInfo.currentDate,
+      "recreatedData":state.inventoryInfo.recreatedData || {}
     }
 };
 

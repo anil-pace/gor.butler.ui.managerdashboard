@@ -2,6 +2,7 @@
  * Importing Router dependencies
  */
 
+
 import React  from 'react';
 import { connect } from 'react-redux';
 import { Router, Route, hashHistory, IndexRoute} from 'react-router';
@@ -12,7 +13,8 @@ import {setInventorySpinner} from '../actions/inventoryActions';
 import {setAuditSpinner} from '../actions/auditActions';
 import {setOrderListSpinner} from '../actions/orderListActions';
 import {setWavesSpinner, setButlerSpinner, setPpsSpinner, setCsSpinner} from '../actions/spinnerAction';
-import {OVERVIEW,TAB_ROUTE_MAP,INVENTORY, AUDIT, ORDERLIST,WAVES,BUTLERBOTS, PPS, CHARGING} from '../constants/appConstants';
+import {AUDIT, ORDERLIST,WAVES,BUTLERBOTS, PPS, CHARGING} from '../constants/appConstants';
+import {OVERVIEW,TAB_ROUTE_MAP,INVENTORY} from '../constants/frontEndConstants';
 import { translationMessages } from '../utilities/i18n';
 import { updateIntl } from 'react-intl-redux';
 
@@ -32,7 +34,6 @@ class Routes extends React.Component{
   			this.props.loginRequest();
   			this.props.tabSelected(selTab);
   			this.props.subTabSelected(subTab);
-  			console.log(selTab,subTab)
   			switch(selTab.toUpperCase()){
   				case INVENTORY:
   				this.props.setInventorySpinner(true);
@@ -90,26 +91,28 @@ class Routes extends React.Component{
    }
     _updateLanguage(){
     var sessionLocale = sessionStorage.getItem('localLanguage');
-    var sLocale = sessionLocale? sessionLocale : navigator.language;
-         // since we need only the first two characters fo the locale.
-         sLocale = sLocale.substring(0,2);
-         let data = {
-            locale : sLocale,
-            messages: translationMessages[sLocale]
-        }
-        sessionStorage.setItem('localLanguage', sLocale);
-        this.props.updateIntl(data);
+    
+    sessionLocale = sessionLocale.substring(0,2);// since we need only the first two characters fo the locale.
+    let data = {
+        locale : sessionLocale,
+        messages: translationMessages[sessionLocale]
     }
+    sessionStorage.setItem('localLanguage', sessionLocale);
+    this.props.updateIntl(data);
+}
+
 
      _refreshPage(nextState, replace){
         if (sessionStorage.getItem('auth_token')) {
             this._requireAuth.call(this,nextState, replace);
         }
 
-        if(sessionStorage.getItem('localLanguage')){
-            this._updateLanguage.call(this);
-        }
+
+    if(sessionStorage.getItem('localLanguage')){
+        this._updateLanguage.call(this);
     }
+}
+
 
  	 	
 	

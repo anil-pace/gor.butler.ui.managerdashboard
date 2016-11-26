@@ -978,26 +978,7 @@ export const resTypeSnapShotToday = {
 
 export const resTypeSnapShotHistory = {
 	"resource_type": "inventory_history",
-	"complete_data": [{
-		"date": "2016-10-25",
-		"opening_stock": 100000,
-		"items_put": 4976,
-		"items_picked": 11098,
-		"cbm_used": 780,
-		"total_skus": 1112,
-		"warehouse_utilization": 43,
-		"category_data": [{
-			"category_type": "apparel",
-			"cbm_used": 100,
-			"days_on_hand": 4.5,
-			"warehouse_utilization": 10
-		}, {
-			"category_type": "others",
-			"cbm_used": 207,
-			"days_on_hand": 2,
-			"warehouse_utilization": 33
-		}]
-	}, {
+	"complete_data": [ {
 		"date": "2016-10-24",
 		"opening_stock": 47000,
 		"items_put": 20040,

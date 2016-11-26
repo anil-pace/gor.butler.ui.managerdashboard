@@ -9,7 +9,7 @@ import Emergency from '../containers/Emergency';
 import {setInventorySpinner} from '../actions/inventoryActions';
 import {setAuditSpinner} from '../actions/auditActions';
 import {setButlerSpinner} from '../actions/spinnerAction';
-import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP,INVENTORY,AUDIT,FULFILLING_ORDERS,GOR_OFFLINE,GOR_ONLINE,GOR_NORMAL_TAB} from '../constants/appConstants';
+import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP,INVENTORY,AUDIT,FULFILLING_ORDERS,GOR_OFFLINE,GOR_ONLINE,GOR_NORMAL_TAB} from '../constants/frontEndConstants';
 import { FormattedMessage,FormattedNumber } from 'react-intl';
 
 class Tabs extends React.Component{
@@ -53,8 +53,8 @@ class Tabs extends React.Component{
         sessionStorage.setItem('selTab', TAB_ROUTE_MAP[selTab]);
         sessionStorage.setItem('subTab', '');
     }
-  _emergencyModal() {
-    let emergency_data=this.props.system_data;
+  _emergencyModal(system_data) {
+    let emergency_data=system_data;
     modal.add(Emergency, {
       title: '',
       size: 'large', // large, medium or small,
@@ -64,9 +64,9 @@ class Tabs extends React.Component{
     });
   }
   componentWillReceiveProps(nextProps){
-    if(this.props.system_emergency)
+    if(nextProps.system_emergency)
     {
-      this._emergencyModal();
+      this._emergencyModal(nextProps.system_data);
     }
   }
   _parseStatus()
@@ -211,6 +211,7 @@ var mapDispatchToProps = function(dispatch){
         setButlerSpinner:function(data){dispatch(setButlerSpinner(data))}
 	}
 };
+
 
 
 

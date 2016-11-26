@@ -162,7 +162,7 @@ class OrderListTable extends React.Component {
               defaultMessage ="Refresh Data"/>
             </button>
             </div>
-            <div className="gor-button-sub-status"> {this.props.lastUpdated} </div>
+            <div className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
           </div>
         <div className="filterWrapper"> 
         <div className="gorToolBarDropDown">

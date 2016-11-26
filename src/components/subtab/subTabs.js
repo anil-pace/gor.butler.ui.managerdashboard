@@ -7,9 +7,11 @@ import SubTab from './subTab';
 import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
 import { FormattedMessage } from 'react-intl';
-import {subTabSelected} from '../../actions/tabSelectAction';
 import {setButlerSpinner, setPpsSpinner, setCsSpinner} from '../../actions/spinnerAction';
-import {NOTIFICATION,BUTLERBOTS,PPS,CHARGING,SYS_SUB_TAB_ROUTE_MAP} from '../../constants/appConstants'
+import {subTabSelected} from '../../actions/tabSelectAction'
+import {NOTIFICATION,SYS_SUB_TAB_ROUTE_MAP} from '../../constants/frontEndConstants'
+import {BUTLERBOTS,PPS,CHARGING} from '../../constants/backEndConstants'
+
 
 class SystemTab extends React.Component{
 	constructor(props) 
@@ -19,7 +21,6 @@ class SystemTab extends React.Component{
    
     handleSysSubTabClick(tabName){
       this.props.subTabSelected(SYS_SUB_TAB_ROUTE_MAP[tabName]);
-      //console.log("subtab",(SYS_SUB_TAB_ROUTE_MAP[tabName]).toUpperCase())
       sessionStorage.setItem("subTab",SYS_SUB_TAB_ROUTE_MAP[tabName])
       switch(tabName) {
   					case BUTLERBOTS:

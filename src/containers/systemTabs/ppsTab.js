@@ -10,6 +10,8 @@ import { connect } from 'react-redux';
 import {changePPSmode} from '../../actions/ppsModeChangeAction'
 import { FormattedMessage } from 'react-intl';
 import Spinner from '../../components/spinner/Spinner';
+import {stringConfig} from '../../constants/backEndConstants'
+
 
 
 
@@ -26,9 +28,9 @@ class PPS extends React.Component{
   var data = nProps.props.PPSDetail.PPStypeDetail;
   var ppsStatus = ["Off", "On"];
   let PPS, ON, OFF, PERFORMANCE;
-  let pick  = nProps.context.intl.formatMessage({id:"ppsDetail.pick.status", defaultMessage: "Pick"});
-  let put = nProps.context.intl.formatMessage({id:"ppsDetail.put.status", defaultMessage: "Put"});
-  let audit = nProps.context.intl.formatMessage({id:"ppsDetail.audit.status", defaultMessage: "Audit"});
+  let pick  = stringConfig.pick;//nProps.context.intl.formatMessage({id:"ppsDetail.pick.status", defaultMessage: "Pick"});
+  let put = stringConfig.put;//nProps.context.intl.formatMessage({id:"ppsDetail.put.status", defaultMessage: "Put"});
+  let audit = stringConfig.audit;//nProps.context.intl.formatMessage({id:"ppsDetail.audit.status", defaultMessage: "Audit"});
   var currentTask = {"pick":pick, "put":put, "audit":audit};
   var priStatus = {"on": 1, "off": 2};
 
@@ -38,8 +40,8 @@ class PPS extends React.Component{
     ppsId = data[i].pps_id;
     performance = data[i].performance;
     PPS =  nProps.context.intl.formatMessage({id:"ppsDetail.name.prefix", description:"prefix for pps id in ppsDetail", defaultMessage:"PPS-{ppsId}"},{"ppsId":ppsId});
-    ON = nProps.context.intl.formatMessage({id:"ppsDetail.on.status", defaultMessage: "On"});
-    OFF = nProps.context.intl.formatMessage({id:"ppsDetail.off.status", defaultMessage: "Off"});
+    ON = stringConfig.on;//nProps.context.intl.formatMessage({id:"ppsDetail.on.status", defaultMessage: "On"});
+    OFF = stringConfig.off;//nProps.context.intl.formatMessage({id:"ppsDetail.off.status", defaultMessage: "Off"});
     PERFORMANCE =  nProps.context.intl.formatMessage({id:"ppsDetail.performance.prefix", description:"prefix for pps id in ppsDetail", defaultMessage:"{performance} orders/hr"},{"performance":performance?performance:"0"});
     detail.id =  PPS;
     detail.ppsId = ppsId;
@@ -53,6 +55,7 @@ class PPS extends React.Component{
     }
     detail.statusClass = data[i].pps_status;
     detail.operatingMode = currentTask[data[i].current_task];
+    detail.operatingModeClass = data[i].current_task;
     detail.performance = PERFORMANCE;///  orders /items
     if(data[i].operators_assigned === null) {
       detail.operatorAssigned = "--";
@@ -133,3 +136,4 @@ PPS.contextTypes = {
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(PPS) ;
+

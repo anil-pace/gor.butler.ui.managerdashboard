@@ -1,6 +1,7 @@
 import React  from 'react';
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
-import {ERROR,SUCCESS,CODE_US001,CODE_US002,CODE_US004,CODE_UE001,CODE_UE002,CODE_UE003,CODE_UE004,CODE_UE005,CODE_UE006,CODE_AS002,CODE_AS003,CODE_G016,CODE_AE001,CODE_AE002,CODE_AE004,CODE_AE005,CODE_AE006,CODE_E026,CODE_E027} from '../constants/appConstants';
+import {ERROR,SUCCESS} from '../constants/frontEndConstants';
+import {CODE_US001,CODE_US002,CODE_US004,CODE_UE001,CODE_UE002,CODE_UE003,CODE_UE004,CODE_UE005,CODE_UE006,CODE_AS002,CODE_AS003,CODE_G016,CODE_AE001,CODE_AE002,CODE_AE004,CODE_AE005,CODE_AE006,CODE_E026,CODE_E027} from '../constants/backEndConstants'
 import {US004,UE001,UE002,UE003,UE004,UE005,UE006,AS003,G016,AE001,AE002,AE004,AE005,AE006,E026,E027,ERR_RES} from '../constants/messageConstants';
 
 export function codeToString(res){
@@ -11,14 +12,14 @@ export function codeToString(res){
               stringInfo={
                 type:SUCCESS,
                 msg:(<FormattedMessage id="notify.success.add" description='Text for successfull user addition' 
-            defaultMessage='New user "{first} {last}" added successfully' values={{first:res.details[0],last:res.details[1]}}/>)   //Make string for addition
+            defaultMessage='New user "{first} {last}" added successfully' values={{first:res.details[0]||"--",last:res.details[1]||"--"}}/>)   //Make string for addition
               }
               break;
             case CODE_US002:
               stringInfo={
                 type:SUCCESS,
                 msg:(<FormattedMessage id="notify.success.delete" description='Text for successfull user deletion' 
-            defaultMessage='User "{first} {last}" deleted successfully' values={{first:res.details[0],last:res.details[1]}}/>)    //Make string for deletion
+            defaultMessage='User "{first} {last}" deleted successfully' values={{first:res.details[0]||"--",last:res.details[1]||"--"}}/>)    //Make string for deletion
               }
               break;
             case CODE_US004:
@@ -31,7 +32,7 @@ export function codeToString(res){
               stringInfo={
                 type:SUCCESS,
                 msg:(<FormattedMessage id="notify.delete.audit.success" description='Text for successfull audit deletion' 
-            defaultMessage="Audit task {audit_id} has been deleted" values={{audit_id:res.details}}/>)
+            defaultMessage="Audit task {audit_id} has been deleted" values={{audit_id:res.details||"--"}}/>)
               }
               break;              
             case CODE_UE001:

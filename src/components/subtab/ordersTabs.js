@@ -8,7 +8,7 @@ import SubTab from './subTab';
 import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
 import {subTabSelected} from '../../actions/tabSelectAction'
-import {ORDER_LIST, WAVES,SYS_SUB_TAB_ROUTE_MAP,ORDERLIST} from '../../constants/appConstants';
+import {ORDER_LIST, WAVES,SYS_SUB_TAB_ROUTE_MAP,ORDERLIST} from '../../constants/frontEndConstants';
 import { FormattedMessage } from 'react-intl';
 import {setOrderListSpinner} from '../../actions/orderListActions';
 import {setWavesSpinner} from '../../actions/spinnerAction';
@@ -22,7 +22,6 @@ class OrderSubTab extends React.Component{
 
     handleSysSubTabClick(tabName){
       this.props.subTabSelected(SYS_SUB_TAB_ROUTE_MAP[tabName]);
-      console.log("subtab",(SYS_SUB_TAB_ROUTE_MAP[tabName]).toUpperCase());
       sessionStorage.setItem("subTab",SYS_SUB_TAB_ROUTE_MAP[tabName])
       switch((SYS_SUB_TAB_ROUTE_MAP[tabName]).toUpperCase()){
   				case ORDERLIST:

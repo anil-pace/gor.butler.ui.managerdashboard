@@ -1,4 +1,4 @@
-import {ERROR,SUCCESS} from '../constants/appConstants';
+import {ERROR,SUCCESS} from '../constants/frontEndConstants';
 import {EMPTY_PWD,TYPE_SUCCESS,EMPTY_NAME,INVALID_NAME,INVALID_PWD_OP,INVALID_PWD_MG,MATCH_PWD,INVALID_LOCID,INVALID_SKUID,INVALID_ID,INVALID_FORMAT} from '../constants/messageConstants';
 
 export function nameStatus(firstname,lastname){
@@ -137,4 +137,23 @@ export function idStatus(userid)
             };            
       }
     return idInfo;
+}
+export function emptyField(field)
+{
+    let fieldInfo;
+    if(field.length<1)
+    {
+            fieldInfo={
+              type:ERROR,
+              msg:EMPTY_PWD           
+            };
+    }
+    else
+    {
+            fieldInfo={
+              type:SUCCESS,
+              msg:TYPE_SUCCESS               
+            };            
+    }
+    return fieldInfo;
 }
