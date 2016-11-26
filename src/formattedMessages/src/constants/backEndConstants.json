@@ -38,5 +38,72 @@
     "id": "stringConfig.hard",
     "description": "Text displaying hard",
     "defaultMessage": "hard"
+
+  },
+  {
+    "id": "stringConfig.soft_manual",
+    "description": "Text displaying soft_manual",
+    "defaultMessage": "soft_manual"
+  },
+  {
+    "id": "stringConfig.pending",
+    "description": "Text displaying pending",
+    "defaultMessage": "In Progress"
+  },
+  {
+    "id": "stringConfig.disconnected",
+    "description": "Text displaying disconnect",
+    "defaultMessage": "disconnected"
+  },
+  {
+    "id": "stringConfig.connected",
+    "description": "Text displaying connected",
+    "defaultMessage": "connected"
+  },
+  {
+    "id": "stringConfig.completed",
+    "description": "Text displaying completed",
+    "defaultMessage": "completed"
+  },
+  {
+    "id": "stringConfig.order.completed",
+    "description": "Text displaying completed",
+    "defaultMessage": "completed"
+  },
+  {
+    "id": "stringConfig.in_progress",
+    "description": "Text displaying in_progress",
+    "defaultMessage": "In Progress"
+  },
+  {
+    "id": "stringConfig.breached",
+    "description": "Text displaying breached",
+    "defaultMessage": "Breached"
+  },
+  {
+    "id": "stringConfig.fulfillable",
+    "description": "Text displaying In Progress",
+    "defaultMessage": "In Progress"
+  },
+  {
+    "id": "stringConfig.manual",
+    "description": "Text displaying manual",
+    "defaultMessage": "manual"
+  },
+  {
+    "id": "stringConfig.auto",
+    "description": "Text displaying auto",
+    "defaultMessage": "auto"
+  },
+  {
+    "id": "stringConfig.notFulfillable",
+    "description": "Text displaying not fulfillable status",
+    "defaultMessage": "unfulfillable"
+  },
+  {
+    "id": "stringConfig.Exception",
+    "description": "Text displaying Exception status",
+    "defaultMessage": "exception"
+
   }
 ]

@@ -8,7 +8,9 @@ import ReactDOM  from 'react-dom';
 import ChargingStationsTable from './chargingStationsTable';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+import Spinner from '../../components/spinner/Spinner';
 import {stringConfig} from '../../constants/backEndConstants'
+
 
 
 
@@ -25,6 +27,7 @@ class ChargingStations extends React.Component{
   CS, csId, botId, BUTLER;
   
   var priStatus = {"connected": 1, "disconnected": 2};
+
   for (var i = data.length - 1; i >= 0; i--) {
     detail = {}
     csId = data[i].charger_id;
@@ -74,6 +77,7 @@ class ChargingStations extends React.Component{
 			<div>
 				<div>
 					<div className="gorTesting">
+          <Spinner isLoading={this.props.csSpinner} />
 						<ChargingStationsTable items={chargersData} itemNumber={itemNumber} chargersState={chargersState} intlMessg={this.props.intlMessages}/>
 					</div>
 				</div>
@@ -84,6 +88,7 @@ class ChargingStations extends React.Component{
 
 function mapStateToProps(state, ownProps){
   return {
+    csSpinner: state.spinner.csSpinner || false,
     chargersDetail: state.chargersDetail || [],
     intlMessages: state.intl.messages
   };
@@ -95,3 +100,4 @@ ChargingStations.contextTypes ={
 
 
 export default connect(mapStateToProps)(ChargingStations) ;
+

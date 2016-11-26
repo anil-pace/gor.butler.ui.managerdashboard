@@ -1,3 +1,4 @@
+
 import React from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
 import DropdownTable from '../../components/dropdown/dropdownTable'
@@ -7,6 +8,18 @@ import { connect } from 'react-redux';
 import {changePPSmode} from '../../actions/ppsModeChangeAction'
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
 import {BASE_URL, PPS_MODE_CHANGE_URL,PROTOCOL,API_URL} from '../../constants/configConstants';
+import { defineMessages } from 'react-intl';
+
+const messages = defineMessages({
+    ppsPlaceholder: {
+        id: 'pps.dropdown.placeholder',
+        description: 'mode change for pps',
+        defaultMessage: 'Change PPS Mode',
+    },
+
+
+});
+
 import {PPS_MODE_CHANGE,APP_JSON,PUT} from '../../constants/frontEndConstants';
 
 

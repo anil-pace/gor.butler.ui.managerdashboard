@@ -11,6 +11,10 @@ import {getPageData} from '../actions/paginationAction';
 import {AUDIT_RETRIEVE,GET,APP_JSON} from '../constants/frontEndConstants';
 import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,SEARCH_AUDIT_URL,GIVEN_PAGE,GIVEN_PAGE_SIZE} from '../constants/configConstants';
 
+import { FormattedDate } from 'react-intl';
+import {setAuditSpinner} from '../actions/auditActions';
+
+
 
 function processAuditData(data, nProps ) {
   let created  = nProps.context.intl.formatMessage({id:"auditdetail.created.status", defaultMessage: "Created"});
@@ -19,8 +23,13 @@ function processAuditData(data, nProps ) {
   let completed  = nProps.context.intl.formatMessage({id:"auditdetail.completed.status", defaultMessage: "Completed"});
   let sku  = nProps.context.intl.formatMessage({id:"auditdetail.sku.prefix", defaultMessage: "SKU"});
   let location  = nProps.context.intl.formatMessage({id:"auditdetail.location.prefix", defaultMessage: "Location"});
+
+
+  let timeOffset: state.authLogin.timeOffset;
+
   
-  var auditStatus = {"audit_created":created, "audit_pending":pending, "audit_waiting":pending, "audit_conflicting":pending, "audit_started":progress, "audit_tasked":progress, "audit_aborted":completed, "audit_completed":completed};
+  var priorityStatus = {"audit_created":2, "audit_pending":3, "audit_waiting":3, "audit_conflicting":3, "audit_started":1, "audit_tasked":1, "audit_aborted":4, "audit_completed":4};
+  var auditStatus = {"audit_created":created, "audit_pending":pending, "audit_waiting":pending, "audit_conflicting":pending, "audit_started":progress, "audit_tasked":progress, "audit_aborted":completed, "audit_completed":completed, "audit_pending_approval":completed};
   var statusClass = {"Pending": "pending", "Completed":"completed", "In Progress":"progress", "Created":"pending"}
   var auditType = {"sku":sku, "location":location};
   var auditDetails = [], auditData = {};
@@ -38,6 +47,10 @@ function processAuditData(data, nProps ) {
     }
 
     if(data[i].audit_status) {
+      auditData.statusPriority = priorityStatus[data[i].audit_status];
+      if(auditData.statusPriority === undefined) {
+        auditData.statusPriority = 1;
+      }
       auditData.status = auditStatus[data[i].audit_status]; 
       auditData.statusClass = statusClass[auditData.status];
       if(data[i].audit_status === "audit_created") {
@@ -56,9 +69,11 @@ function processAuditData(data, nProps ) {
       auditData.startTime = "--";
     }
 
-    if(data[i].expected_quantity !== 0 && completed_quantity !== null) {
+    if(data[i].expected_quantity !== 0 && data[i].completed_quantity !== null) {
       auditData.progress = (data[i].completed_quantity)/(data[i].expected_quantity);
     }
+
+
     else {
       auditData.progress = 0; //needs to be done
     }
@@ -118,6 +133,7 @@ class AuditTab extends React.Component{
               'token': this.props.auth_token,
               'contentType':APP_JSON
           } 
+          this.props.setAuditSpinner(true);
          this.props.getPageData(paginationData);
  }
 
@@ -131,9 +147,13 @@ render(){
   
   return (
    <div>
+   
    <div>
+
    <div className="gor-Auditlist-table">
+   <Spinner isLoading={this.props.auditSpinner} />
    {renderTab}
+
    </div>
    </div>
         <div id={"react-paginate"}>
@@ -156,6 +176,7 @@ render(){
 
 function mapStateToProps(state, ownProps){
   return {
+    auditSpinner: state.spinner.auditSpinner || false,
     auditDetail: state.recieveAuditDetail.auditDetail || [],
     totalPage: state.recieveAuditDetail.totalPage || 0,
     auditRefresh:state.recieveAuditDetail.auditRefresh || null,  
@@ -166,6 +187,7 @@ function mapStateToProps(state, ownProps){
 
 var mapDispatchToProps = function(dispatch){
   return {
+    setAuditSpinner: function(data){dispatch(setAuditSpinner(data))},
     getAuditData: function(data){ dispatch(getAuditData(data)); },
     getPageData: function(data){ dispatch(getPageData(data)); },
     setAuditRefresh: function(){dispatch(setAuditRefresh());}

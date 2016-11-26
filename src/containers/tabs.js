@@ -7,6 +7,8 @@ import {tabSelected,subTabSelected} from '../actions/tabSelectAction';
 import {modal} from 'react-redux-modal';
 import Emergency from '../containers/Emergency';
 import {setInventorySpinner} from '../actions/inventoryActions';
+import {setAuditSpinner} from '../actions/auditActions';
+import {setButlerSpinner} from '../actions/spinnerAction';
 import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP,INVENTORY,AUDIT,FULFILLING_ORDERS,GOR_OFFLINE,GOR_ONLINE,GOR_NORMAL_TAB} from '../constants/frontEndConstants';
 import { FormattedMessage,FormattedNumber } from 'react-intl';
 
@@ -27,12 +29,22 @@ class Tabs extends React.Component{
          * only
          */
         switch(selTab){
+
+          case SYSTEM:
+          this.props.setButlerSpinner(true);
+          break;
+
           case INVENTORY:
           this.props.setInventorySpinner(true);
           break;
+          
           default:
           this.props.setInventorySpinner(false);
+          this.props.setButlerSpinner(false);
+          
         }
+
+       
         
         
         this.props.tabSelected(TAB_ROUTE_MAP[selTab]);
@@ -194,9 +206,12 @@ var mapDispatchToProps = function(dispatch){
 	return {
 		tabSelected: function(data){ dispatch(tabSelected(data)); },
         subTabSelected: function(data){ dispatch(subTabSelected(data)); },
-        setInventorySpinner:function(data){dispatch(setInventorySpinner(data));}
+        setInventorySpinner:function(data){dispatch(setInventorySpinner(data));},
+        setAuditSpinner:function(data){dispatch(setAuditSpinner(data));},
+        setButlerSpinner:function(data){dispatch(setButlerSpinner(data))}
 	}
 };
+
 
 
 

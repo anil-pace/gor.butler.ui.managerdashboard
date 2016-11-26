@@ -108,7 +108,7 @@ class ChargingStationsTable extends React.Component {
     
 
     var tableRenderer = <div/>
-    if(this.props.tableData.length !== 0) {
+    if(this.props.tableData.length !== 0 ) {
        tableRenderer = <div className="gorTableMainContainer">
         <div className="gorToolBar">
           <div className="gorToolBarWrap">

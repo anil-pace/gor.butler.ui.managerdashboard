@@ -6,6 +6,8 @@ import {wsOnMessageAction} from '../actions/socketActions';
 import {recieveOverviewStatus,recieveSystemStatus,recieveAuditStatus,recieveOrdersStatus,recieveUsersStatus,recieveInventoryStatus,recieveStatus} from '../actions/tabActions';
 import {displaySpinner} from '../actions/spinnerAction';
 import {setInventorySpinner} from '../actions/inventoryActions';
+import {setAuditSpinner} from '../actions/auditActions';
+import {setButlerSpinner,setPpsSpinner,setCsSpinner,setWavesSpinner} from '../actions/spinnerAction';
 import {receiveInventoryTodayData,receiveInventoryHistoryData} from '../actions/inventoryActions';
 import {resTypeSnapShotToday,resTypeSnapShotHistory} from '../../mock/mockDBData';
 
@@ -18,12 +20,15 @@ export function ResponseParse(store,res)
 		store.dispatch(wsOnMessageAction(res));
 		return;
 	}
+	
 		switch(res.resource_type)
 		{
 			case PARSE_PPS:
 				store.dispatch(recievePPSperformance(res));
+				store.dispatch(setPpsSpinner(false));
 				break;
 			case PARSE_BUTLERS:
+				store.dispatch(setButlerSpinner(false));
 				store.dispatch(receiveButlersData(res));
 				break;
 			case PARSE_AUDIT:
@@ -34,6 +39,7 @@ export function ResponseParse(store,res)
 				else
 				{
 				 	store.dispatch(receiveAuditData(res));
+				 	store.dispatch(setAuditSpinner(false));
 				}
 				break;
 			case PARSE_PUT:
@@ -41,6 +47,7 @@ export function ResponseParse(store,res)
 				break;
 			case PARSE_CHARGERS:
 				store.dispatch(receiveChargersData(res));
+				store.dispatch(setCsSpinner(false));
 				break;
 			case PARSE_INVENTORY_HISTORY:
 				if(res.header_data)
@@ -75,8 +82,8 @@ export function ResponseParse(store,res)
 				}
 				else
 				{
-					store.dispatch(receiveOrdersData(res));
-					
+					store.dispatch(setWavesSpinner(false));
+					store.dispatch(receiveOrdersData(res));	
 				}
 				break;
 		    case PARSE_PPA_THROUGHPUT:
@@ -90,7 +97,9 @@ export function ResponseParse(store,res)
 				store.dispatch(recieveChargersDetail(res));
 				break;	
 			case SYSTEM_BUTLERS_DETAILS:
+
 				store.dispatch(recieveButlersDetail(res));
+				
 				break;
 			case SYSTEM_PPS_DETAILS:
 				store.dispatch(recievePPSDetail(res));
@@ -121,7 +130,10 @@ export function ResponseParse(store,res)
 				store.dispatch(recieveInventoryStatus(res));
 				break;	
 			case PARSE_STATUS:
-				store.dispatch(recieveStatus(res));	    
+				store.dispatch(recieveStatus(res));	 
+				break;
+			
+				   
 			default:
 				//store.dispatch(initData(res));          //Default action
 			break;			

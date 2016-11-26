@@ -605,6 +605,32 @@ background-color: #FFFFFF;
 
 }
 
+.fulfillable .public_fixedDataTableCell_cellContent{
+
+  border-radius: 15px;
+  text-align: center;
+  width:70px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #aaaaaa;
+  color: #aaaaaa;
+  font-size: 12px;
+  max-height: 9px;
+  background: #ffffff;
+
+}
+
+.gor-order-exception {
+background: #f99405;
+  border-radius: 15px;
+  text-align: center;
+  width:70px;
+  color: #ffffff;
+  font-size: 12px;
+  max-height: 9px;
+  
+}
+
 .progress .public_fixedDataTableCell_cellContent{
 
   
@@ -641,6 +667,11 @@ background-color: #FFFFFF;
   }
 }
 .put{
+  .public_fixedDataTableCell_cellContent{
+    text-transform: capitalize;
+  }
+}
+.not_fulfillable{
   .public_fixedDataTableCell_cellContent{
     text-transform: capitalize;
   }
@@ -1470,7 +1501,7 @@ input[type="checkbox"]{
   }
 }
 
-.gorUserTable {
+.gor-User-Table {
   height: 85vh;
 }
 
@@ -1582,7 +1613,8 @@ progress::-moz-progress-bar {
   padding-top: 10px;
 }
 
-.gor-header-id {
+.gor-header-id 
+{
   display: inline-block;
   vertical-align: middle;
   .public_fixedDataTableCell_wrap1{

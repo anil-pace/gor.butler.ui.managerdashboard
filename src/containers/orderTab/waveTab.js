@@ -2,8 +2,9 @@ import React  from 'react';
 import WavesTable from './waveTable';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+import Spinner from '../../components/spinner/Spinner';
 import {GOR_PENDING,GOR_PROGRESS} from '../../constants/frontEndConstants';
-import {stringConfig} from '../../constants/backEndConstants'
+import {stringConfig} from '../../constants/backEndConstants';
 
 function processWaveData(data, nProps) {
   var waveData = [], waveDetail = {};
@@ -23,7 +24,7 @@ function processWaveData(data, nProps) {
       waveDetail.id = WAVE ;
       waveDetail.statusClass = status[data[i].status];
       waveDetail.statusPriority = priStatus[data[i].status];
-      waveDetail.status = stringConfig[data[i].status];
+      waveDetail.status = nProps.context.intl.formatMessage(stringConfig[data[i].status].params);
       
       if(data[i].start_time === "") {
         waveDetail.startTime = "--";
@@ -54,52 +55,62 @@ function processWaveData(data, nProps) {
 }
 
 
+
+
 class WaveTab extends React.Component{
-	constructor(props) 
-	{
-    	super(props);
-    }	
-	render(){
-		var itemNumber = 7, waveData = this.props.waveDetail.waveData, waveState = {"pendingWave":"--", "progressWave":"--", "orderRemaining":"--", "completedWaves":"--", "totalOrders":"--"};	
-		var totalOrders = 0, orderToFulfill = 0, completedWaves = 0, pendingWaves = 0, progressWave = 0 ;
+  constructor(props) 
+  {
+   super(props);
+ }  
+ render(){
+  var itemNumber = 7, waveData = this.props.waveDetail.waveData, waveState = {"pendingWave":"--", "progressWave":"--", "orderRemaining":"--", "completedWaves":"--", "totalOrders":"--"}; 
+  var totalOrders = 0, orderToFulfill = 0, completedWaves = 0, pendingWaves = 0, progressWave = 0 ;
 
-    if(this.props.waveDetail.waveData !== undefined) {
-      waveData = processWaveData(this.props.waveDetail.waveData, this)
-		if(waveData && waveData.length) {
-  		for (var i = waveData.length - 1; i >= 0; i--) {
-  				if(waveData[i].totalOrders) {
-  					totalOrders = waveData[i].totalOrders + totalOrders;
-  				}
-  				if(waveData[i].ordersToFulfill) {
-  					orderToFulfill = waveData[i].ordersToFulfill + orderToFulfill;
-  				}
+  if(this.props.waveDetail.waveData !== undefined) {
+    waveData = processWaveData(this.props.waveDetail.waveData, this)
+    if(waveData && waveData.length) {
+      for (var i = waveData.length - 1; i >= 0; i--) {
+        if(waveData[i].totalOrders) {
+         totalOrders = waveData[i].totalOrders + totalOrders;
+       }
+       if(waveData[i].ordersToFulfill) {
+         orderToFulfill = waveData[i].ordersToFulfill + orderToFulfill;
+       }
 
-  				if(waveData[i].progress === 100) {
-  					completedWaves++;
-  				}
-          if(waveData[i].statusClass === GOR_PENDING) {
-              pendingWaves++;
-          }
+       if(waveData[i].progress === 100) {
+         completedWaves++;
+       }
+       if(waveData[i].statusClass === GOR_PENDING) {
+        pendingWaves++;
+      }
 
-          if(waveData[i].statusClass === GOR_PROGRESS) {
-              progressWave++;
-          }
-  			}
-  			waveState = {"pendingWave":pendingWaves, "progressWave":progressWave, "orderRemaining":orderToFulfill, "completedWaves":completedWaves, "totalOrders":totalOrders};	
-  		}
+      if(waveData[i].statusClass === GOR_PROGRESS) {
+        progressWave++;
+      }
     }
-		return (
-			<div className="gorTesting">
-				<WavesTable items={waveData} itemNumber={itemNumber} waveState={waveState} intlMessg={this.props.intlMessages}/>
-			</div>
-		);
-	}
+    waveState = {"pendingWave":pendingWaves, "progressWave":progressWave, "orderRemaining":orderToFulfill, "completedWaves":completedWaves, "totalOrders":totalOrders}; 
+  }
 }
+return (
+<div className="gorTesting">
+<Spinner isLoading={this.props.wavesSpinner} />
+<WavesTable items={waveData} itemNumber={itemNumber} waveState={waveState} intlMessg={this.props.intlMessages}/>
+</div>
+);
+}
+}
+
 
 function mapStateToProps(state, ownProps){
   return {
-      waveDetail: state.waveInfo || {},
-      intlMessages: state.intl.messages
+
+    wavesSpinner: state.spinner.wavesSpinner || false,
+    filterOptions: state.filterOptions || {},
+    waveDetail: state.waveInfo || {},
+    intlMessages: state.intl.messages,
+    timeOffset: state.authLogin.timeOffset,
+    waveDetail: state.waveInfo || {},
+    intlMessages: state.intl.messages
   };
 };
 

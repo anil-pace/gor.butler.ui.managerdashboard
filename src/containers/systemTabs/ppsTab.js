@@ -9,7 +9,9 @@ import PPStable from './PPStable';
 import { connect } from 'react-redux';
 import {changePPSmode} from '../../actions/ppsModeChangeAction'
 import { FormattedMessage } from 'react-intl';
+import Spinner from '../../components/spinner/Spinner';
 import {stringConfig} from '../../constants/backEndConstants'
+
 
 
 
@@ -103,6 +105,7 @@ class PPS extends React.Component{
 			<div>
 				<div>
 					<div className="gorTesting">
+            <Spinner isLoading={this.props.ppsSpinner} />
 						<PPStable items={data} itemNumber={itemNumber} operatorNum={operatorNum} operationMode={operationMode} modeChange={this.props.changePPSmode} intlMessg={this.props.intlMessages}/>
 					</div>
 				</div>
@@ -115,6 +118,7 @@ class PPS extends React.Component{
 
 function mapStateToProps(state, ownProps){
   return {
+    ppsSpinner: state.spinner.ppsSpinner || false,
     PPSDetail: state.PPSDetail || [],
     intlMessages: state.intl.messages
   };
@@ -131,3 +135,4 @@ PPS.contextTypes = {
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(PPS) ;
+

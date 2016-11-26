@@ -70,7 +70,7 @@ class UsersTab extends React.Component{
 		return (
 			<div>
 				<div>
-					<div className="gorUserTable">
+					<div className="gor-User-Table">
 						<UserDataTable items={userData} itemNumber={itemNumber} intlMessg={this.props.intlMessages} mid={this.props.manager.users?this.props.manager.users[0].id:''}/>
 					</div>
 				</div>

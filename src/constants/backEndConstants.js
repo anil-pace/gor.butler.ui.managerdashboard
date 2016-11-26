@@ -104,6 +104,9 @@ export var stringConfig = {
     "completed": {
         params:{id:"stringConfig.completed", defaultMessage: "Completed"}
     },
+    "Completed": {
+        params:{id:"stringConfig.Completed", defaultMessage: "completed"}
+    },
     "in_progress": {
         params:{id:"stringConfig.in_progress", defaultMessage: "In Progress"}
     },
@@ -113,11 +116,22 @@ export var stringConfig = {
     "fulfillable":{
         params:{id:"stringConfig.fulfillable", defaultMessage: "In Progress"}
     },
+    "abandoned":{
+        params:{id:"stringConfig.abandoned", defaultMessage: "Abandoned"}
+    },
     "manual":{
         params:{id:"stringConfig.manual", defaultMessage: "Manual"}
     },
     "auto":{
         params:{id:"stringConfig.auto", defaultMessage: "Auto"}
+    },
+    
+    "not_fulfillable":{
+        params:{id:"stringConfig.notFulfillable", defaultMessage: "unfulfillable"}
+    },
+    "exception":{
+        params:{id:"stringConfig.Exception", defaultMessage: "Exception"}
     }
+
 }
 Object.freeze(stringConfig);

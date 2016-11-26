@@ -120,7 +120,6 @@ d3.chart('BarChart', {
 
         return this.selectAll('rect')
           .data(data, function(d) { 
-            //console.log(d);
             return d.name; 
           });
       },

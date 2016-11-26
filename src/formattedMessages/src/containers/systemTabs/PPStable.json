@@ -1,5 +1,10 @@
 [
   {
+    "id": "pps.dropdown.placeholder",
+    "description": "mode change for pps",
+    "defaultMessage": "Change PPS Mode"
+  },
+  {
     "id": "PPS.table.pickDrop",
     "description": "pick dropdown option for PPS",
     "defaultMessage": "Put"

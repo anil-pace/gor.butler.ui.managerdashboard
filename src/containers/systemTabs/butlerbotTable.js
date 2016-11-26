@@ -234,7 +234,7 @@ class ButlerBotTable extends React.Component {
               defaultMessage ="LOCATION"/> 
               <div className="gorToolHeaderSubText"> 
                 <FormattedMessage id="ButlerBotTable.locations" description='msu mounted for ButlerBotTable' 
-                defaultMessage='{locations} Mounted' 
+                defaultMessage='{locations} Locations' 
                 values={{locations:locations}}/>
               </div>
             </SortHeaderCell>

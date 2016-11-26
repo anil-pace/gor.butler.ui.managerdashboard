@@ -70,6 +70,7 @@ export const WAVES = "Waves";
 export const BUTLERBOTS = "butlerbots";
 export const CHARGING = "chargingstation";
 export const PPS = "pps";
+export const ORDERLIST = "ORDERLIST";
 export const TAB_CLASS = {
 	overview:"gorMainBlock", 
 	system:"gorMainBlock",
@@ -141,6 +142,12 @@ export const GET_LAST_REFRESH_TIME = "GET_LAST_REFRESH_TIME";
 /*Constants for Spinner*/
 export const DISPLAY_SPINNER = "DISPLAY_SPINNER";
 export const DISPLAY_LOGIN_SPINNER = "DISPLAY_LOGIN_SPINNER";
+export const DISPLAY_AUDIT_SPINNER = "DISPLAY_AUDIT_SPINNER";
+export const DISPLAY_ORDER_LIST_SPINNER = "DISPLAY_ORDER_LIST_SPINNER";
+export const DISPLAY_WAVES_SPINNER = "DISPLAY_WAVES_SPINNER";
+export const DISPLAY_BUTLER_SPINNER = "DISPLAY_BUTLER_SPINNER";
+export const DISPLAY_PPS_SPINNER = "DISPLAY_PPS_SPINNER";
+export const DISPLAY_CHARGING_STATION_SPINNER = "DISPLAY_CHARGING_STATION_SPINNER";
 
 /*Map for routes of tab*/
 
