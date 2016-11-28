@@ -10,7 +10,8 @@ import {setAuditSpinner} from '../actions/auditActions';
 import {setButlerSpinner,setPpsSpinner,setCsSpinner,setWavesSpinner} from '../actions/spinnerAction';
 import {receiveInventoryTodayData,receiveInventoryHistoryData} from '../actions/inventoryActions';
 import {resTypeSnapShotToday,resTypeSnapShotHistory} from '../../mock/mockDBData';
-
+import {notifyFail} from '../actions/validationActions';
+import {ERR_RES} from '../constants/messageConstants';
 
 export function ResponseParse(store,res)
 {
@@ -28,8 +29,13 @@ export function ResponseParse(store,res)
 				store.dispatch(setPpsSpinner(false));
 				break;
 			case PARSE_BUTLERS:
-				store.dispatch(setButlerSpinner(false));
-				store.dispatch(receiveButlersData(res));
+				try{
+					store.dispatch(setButlerSpinner(false));
+					store.dispatch(receiveButlersData(res));
+				}
+				catch(e){
+					store.dispatch(notifyFail(ERR_RES));
+				}
 				break;
 			case PARSE_AUDIT:
 				if(res.header_data)
@@ -43,11 +49,21 @@ export function ResponseParse(store,res)
 				}
 				break;
 			case PARSE_PUT:
-				store.dispatch(receivePutData(res));
+				try{
+					store.dispatch(receivePutData(res));
+				}
+				catch(e){
+					store.dispatch(notifyFail(ERR_RES));
+				}
 				break;
 			case PARSE_CHARGERS:
-				store.dispatch(receiveChargersData(res));
-				store.dispatch(setCsSpinner(false));
+				try{
+					store.dispatch(receiveChargersData(res));
+					store.dispatch(setCsSpinner(false));
+				}
+				catch(e){
+					store.dispatch(notifyFail(ERR_RES));
+				}
 				break;
 			case PARSE_INVENTORY_HISTORY:
 				if(res.header_data)
@@ -76,18 +92,29 @@ export function ResponseParse(store,res)
 
 				break;
 			case PARSE_ORDERS:	
-				if(res.header_data)
-				{
-					store.dispatch(recieveOrdersStatus(res));
+			    try{
+					if(res.header_data)
+					{
+						store.dispatch(recieveOrdersStatus(res));
+					}
+					else
+					{
+						store.dispatch(setWavesSpinner(false));
+						store.dispatch(receiveOrdersData(res));	
+					}
 				}
-				else
-				{
-					store.dispatch(setWavesSpinner(false));
-					store.dispatch(receiveOrdersData(res));	
+				catch(e){
+					store.dispatch(notifyFail(ERR_RES));
 				}
 				break;
 		    case PARSE_PPA_THROUGHPUT:
-				store.dispatch(receiveThroughputData(res));
+		    	try{
+					store.dispatch(receiveThroughputData(res));
+				}
+				catch(e)
+				{
+					store.dispatch(notifyFail(ERR_RES));
+				}
 				break;	
 			case HISTOGRAM_DETAILS:
 				store.dispatch(recieveHistogramData(res));
@@ -108,17 +135,21 @@ export function ResponseParse(store,res)
 				store.dispatch(recievePPSperformance(res));
 				break;
 			case USER_DATA:
-				if(res.header_data)
-				{
-					store.dispatch(recieveUsersStatus(res));
+				try{
+					if(res.header_data)
+					{
+						store.dispatch(recieveUsersStatus(res));
+					}
+					else
+					{
+						store.dispatch(recieveUserDetails(res));	
+						store.dispatch(displaySpinner(false));
+					}
 				}
-				else
+				catch(e)
 				{
-					store.dispatch(recieveUserDetails(res));	
-					store.dispatch(displaySpinner(false));
+					store.dispatch(notifyFail(ERR_RES));
 				}
-
-				//store.dispatch(recieveUserDetails(res));	  
 				break;
 			case PARSE_OVERVIEW:
 				store.dispatch(recieveOverviewStatus(res));

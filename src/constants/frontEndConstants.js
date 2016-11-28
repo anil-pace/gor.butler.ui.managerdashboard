@@ -291,6 +291,7 @@ export const EN='en';
 export const JA='ja';
 export const HR='h ';
 export const MM='m ';
+export const SS='s ';
 // Style class constants
 export const TYPING='gor-login-field gor-input-ok gor-input-typing';
 export const FILL_BACK='gor-fill-back';
