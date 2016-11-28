@@ -1,4 +1,4 @@
-import { RENDER_STATSWIDGET } from '../constants/appConstants'
+import { RENDER_STATSWIDGET } from '../constants/frontEndConstants'
 
 export function renderStatsWidget(data){
 	return {

@@ -1,4 +1,4 @@
-import {ORDERS_DATA} from '../constants/appConstants';
+import {ORDERS_DATA} from '../constants/frontEndConstants';
 import React  from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -14,7 +14,7 @@ export  function waveInfo(state={},action){
     case ORDERS_DATA:
           var res=action.data, waveData;
           if(res.complete_data){
-            //waveData = processWaveData(res.complete_data)
+
             return Object.assign({}, state, {
             "waveData" : res.complete_data
             })

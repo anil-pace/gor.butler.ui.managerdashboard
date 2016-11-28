@@ -5,7 +5,7 @@ import Footer from '../Footer/Footer';
 import Spinner from '../../components/spinner/Spinner';
 import {resetForm} from '../../actions/validationActions';
 import { connect } from 'react-redux';
-import {EN,JA,FILL_BACK} from '../../constants/appConstants'; 
+import {EN,JA,FILL_BACK} from '../../constants/frontEndConstants'; 
 import {ENG,JAP} from '../../constants/messageConstants'; 
 import { FormattedMessage } from 'react-intl';
 import { updateIntl } from 'react-intl-redux';
@@ -79,7 +79,9 @@ class Login extends React.Component{
                         defaultMessage="Language" description="Text for language"/>
                 
                     </div>
-                    <Dropdown optionDispatch={(e) => this._handleSelectionChange(e)} items={this.state.items} styleClass={'gor-lang-drop'} currentState={this.state.items[this.state.sel]} />
+                    <Dropdown optionDispatch={(e) => this._handleSelectionChange(e)} items={this.state.items}
+                     styleClass={'gor-lang-drop'} 
+                    currentState={this.state.items[this.state.sel]} />
                 </div>
                 <div className='gor-login-logo alt-gor-logo'>
                 </div>

@@ -2,13 +2,17 @@
  * Container for Overview tab
  * This will be switched based on tab click
  */
+
 import React  from 'react';
 import SubTab from './subTab';
 import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
 import {subTabSelected} from '../../actions/tabSelectAction'
-import {ORDER_LIST, WAVES,SYS_SUB_TAB_ROUTE_MAP} from '../../constants/appConstants';
+import {ORDER_LIST, WAVES,SYS_SUB_TAB_ROUTE_MAP,ORDERLIST} from '../../constants/frontEndConstants';
 import { FormattedMessage } from 'react-intl';
+import {setOrderListSpinner} from '../../actions/orderListActions';
+import {setWavesSpinner} from '../../actions/spinnerAction';
+
 
 class OrderSubTab extends React.Component{
 	constructor(props) 
@@ -19,6 +23,19 @@ class OrderSubTab extends React.Component{
     handleSysSubTabClick(tabName){
       this.props.subTabSelected(SYS_SUB_TAB_ROUTE_MAP[tabName]);
       sessionStorage.setItem("subTab",SYS_SUB_TAB_ROUTE_MAP[tabName])
+      switch((SYS_SUB_TAB_ROUTE_MAP[tabName]).toUpperCase()){
+  				case ORDERLIST:
+  				this.props.setOrderListSpinner(true);
+  				break;
+
+  				case WAVES.toUpperCase():
+  				this.props.setWavesSpinner(true);
+  				break;
+
+  				default:
+  				this.props.setOrderListSpinner(false);
+  				this.props.setWavesSpinner(false);
+  			}
     }
     
 	render(){
@@ -59,7 +76,9 @@ function mapStateToProps(state, ownProps){
 
 var mapDispatchToProps = function(dispatch){
 	return {
-		subTabSelected: function(data){ dispatch(subTabSelected(data)); }
+		subTabSelected: function(data){ dispatch(subTabSelected(data)); },
+		setOrderListSpinner: function(data){dispatch(setOrderListSpinner(data))},
+		setWavesSpinner: function(data){dispatch(setWavesSpinner(data))}
 	}
 };
 

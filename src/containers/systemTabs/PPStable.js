@@ -1,3 +1,4 @@
+
 import React from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
 import DropdownTable from '../../components/dropdown/dropdownTable'
@@ -7,7 +8,20 @@ import { connect } from 'react-redux';
 import {changePPSmode} from '../../actions/ppsModeChangeAction'
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
 import {BASE_URL, PPS_MODE_CHANGE_URL,PROTOCOL,API_URL} from '../../constants/configConstants';
-import {PPS_MODE_CHANGE,APP_JSON,PUT} from '../../constants/appConstants';
+import { defineMessages } from 'react-intl';
+
+const messages = defineMessages({
+    ppsPlaceholder: {
+        id: 'pps.dropdown.placeholder',
+        description: 'mode change for pps',
+        defaultMessage: 'Change PPS Mode',
+    },
+
+
+});
+
+import {PPS_MODE_CHANGE,APP_JSON,PUT} from '../../constants/frontEndConstants';
+
 
 class PPStable extends React.Component {
   constructor(props) {
@@ -32,7 +46,7 @@ class PPStable extends React.Component {
       sortedDataList: this._dataList,
       colSortDirs: {},
       columnWidths: {
-        id: this.props.containerWidth*0.15,
+        id: this.props.containerWidth*0.07,
         status: this.props.containerWidth*0.1,
         operatingMode: this.props.containerWidth*0.2,
         performance: this.props.containerWidth*0.2,
@@ -68,10 +82,10 @@ class PPStable extends React.Component {
       sortedDataList: this._dataList,
       colSortDirs: {},
       columnWidths: {
-         id: nextProps.containerWidth*0.15,
-        status: nextProps.containerWidth*0.1,
-        operatingMode: nextProps.containerWidth*0.2,
-        performance: nextProps.containerWidth*0.15,
+         id: nextProps.containerWidth*0.09,
+        status: nextProps.containerWidth*0.078,
+        operatingMode: nextProps.containerWidth*0.145,
+        performance: nextProps.containerWidth*0.092,
         operatorAssigned: nextProps.containerWidth*0.4
       },
       headerChecked: false,
@@ -257,7 +271,7 @@ class PPStable extends React.Component {
        </div>
 
       <Table
-        rowHeight={66}
+        rowHeight={50}
         rowsCount={sortedDataList.getSize()}
         headerHeight={70}
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
@@ -332,7 +346,7 @@ class PPStable extends React.Component {
               </div>
             </SortHeaderCell>
           }
-          cell={<TextCell data={sortedDataList} />}
+          cell={<TextCell data={sortedDataList} classKey={"operatingModeClass"}/>}
           fixed={true}
           width={columnWidths.operatingMode}
           isResizable={true}

@@ -1,10 +1,6 @@
-import { DISPLAY_SPINNER} from '../constants/appConstants'
 
-/**
- * [showLoader Action function for showing loader]
- * @param  {[Boolean]} data [true]
- * @return {[type]}      [description]
- */
+import { DISPLAY_SPINNER,DISPLAY_WAVES_SPINNER,DISPLAY_BUTLER_SPINNER,DISPLAY_PPS_SPINNER,DISPLAY_CHARGING_STATION_SPINNER} from '../constants/frontEndConstants';
+
 export function displaySpinner(data){
 	
 	return {
@@ -13,3 +9,33 @@ export function displaySpinner(data){
   	}
 }
 
+
+export function setWavesSpinner(data) {
+	return {
+		type: DISPLAY_WAVES_SPINNER,
+		data
+  	}
+}
+
+export function setButlerSpinner(data) {
+	return {
+		type: DISPLAY_BUTLER_SPINNER,
+		data
+  	}
+}
+
+
+export function setPpsSpinner(data) {
+	return {
+		type: DISPLAY_PPS_SPINNER,
+		data
+  	}
+}
+
+
+export function setCsSpinner(data) {
+	return {
+		type: DISPLAY_CHARGING_STATION_SPINNER,
+		data
+  	}
+}

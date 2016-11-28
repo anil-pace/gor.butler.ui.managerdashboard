@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { notifyHide } from '../../actions/validationActions';
 import { connect } from 'react-redux';
-import {NOTIFY_HIDE,HIDE,SUCCESS,DELETION} from '../../constants/appConstants'; 
+import {NOTIFY_HIDE,HIDE,SUCCESS,DELETION} from '../../constants/frontEndConstants'; 
 
 class TopNotifications extends React.Component{
 	constructor(props) 

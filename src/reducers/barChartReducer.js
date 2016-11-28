@@ -1,4 +1,4 @@
-import { BAR_D3_COMPONENT } from '../constants/appConstants'
+import { BAR_D3_COMPONENT } from '../constants/frontEndConstants'
 
 export  function d3barChart(state={},action){
 	

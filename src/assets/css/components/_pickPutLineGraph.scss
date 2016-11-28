@@ -1,15 +1,108 @@
 @import '../abstracts/functions';
 
-path { 
-    stroke: steelblue;
-    stroke-width: 2;
-    fill: none;
-}
+.lineGraph{
+	.bar{
+		cursor:pointer;
+	}
+	path { 
+	    stroke: steelblue;
+	    stroke-width: 2;
+	    fill: none;
+	}
+	.y{
+		path{
+			&.domain{
+				display:none;
+			}
+		}
+		.tick{
+			line{
+				display:none;
+			}
+		}
+	}
+	.axis{
+		&.x{
+			.domain{
+				display:block;
+			}
+		}
+		path{
+			fill: none;
+		    stroke: grey;
+		    stroke-width: 1;
+		    shape-rendering: crispEdges;
+		}
+		line{
+			fill: none;
+		    stroke: grey;
+		    stroke-width: 1;
+		    shape-rendering: crispEdges;
+		}
+	}
+	.x{
+		path{
+			&.domain{
+				stroke-width:2;
+				stroke:#666666;
+				display:block;
+			}
+		}
+		line{
+			display:none;
+		}
+	}
+	.bar{
+		fill:#498BD8;
+		opacity: 1;
+	}
+	.tick{
+		text{
+			fill:#666666;
+			font-size:12px;
+		}
 
-.axis path,
-.axis line {
-    fill: none;
-    stroke: grey;
-    stroke-width: 1;
-    shape-rendering: crispEdges;
+	}
+	.grid{
+		.domain{
+			display:none;
+		}
+		.tick{
+			opacity:1;
+			stroke:none;
+			line{
+				stroke:#CCCCCC;
+			}
+		}
+		.tick:nth-child(1){
+			line{
+				stroke:#666666;
+				stroke-width:2;
+			}
+		}
+		path{
+			&.line{
+				stroke-width:2;
+				stroke:#7ED321;
+			}
+			&.line:nth-child(1){
+				stroke:#D0021B
+			}
+		}
+	}
+
 }
+.tooltip {	
+		    position: absolute;			
+		    text-align: center;			
+		    width: 60px;					
+		    height: 28px;					
+		    padding: 2px;				
+		    font: 12px sans-serif;		
+		    background: lightsteelblue;	
+		    border: 0px;		
+		    border-radius: 8px;			
+		    pointer-events: none;			
+		}
+
+

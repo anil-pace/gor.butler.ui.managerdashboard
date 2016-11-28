@@ -1,4 +1,4 @@
-import {AJAX_CALL,RECIEVE_HEADER} from '../constants/appConstants.js';
+import {AJAX_CALL,RECIEVE_HEADER} from '../constants/frontEndConstants.js';
 
 
 

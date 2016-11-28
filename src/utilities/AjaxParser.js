@@ -1,12 +1,14 @@
 import {receiveAuthData,setLoginSpinner,setTimeOffSetData,loginFail} from '../actions/loginAction';
 import {recieveOrdersData} from '../actions/paginationAction';
-import {recieveAuditData,setAuditRefresh} from '../actions/auditActions';
+import {recieveAuditData,setAuditRefresh,setAuditSpinner} from '../actions/auditActions';
 import {assignRole} from '../actions/userActions';
 import {recieveHeaderInfo} from '../actions/headerAction';
 import {getPPSAudit} from '../actions/auditActions';
 import {codeToString} from './codeToString';
+import {setOrderListSpinner} from '../actions/orderListActions';
 import {notifySuccess, notifyFail,validateID,notifyDelete} from '../actions/validationActions';
-import {ERROR,AUTH_LOGIN, ADD_USER, RECIEVE_TIME_OFFSET,CHECK_ID,DELETE_USER,GET_ROLES,ORDERS_RETRIEVE,PPS_MODE_CHANGE,EDIT_USER,BUTLER_UI,CODE_UE002,RECIEVE_HEADER,SUCCESS,CREATE_AUDIT,AUDIT_RETRIEVE,GET_PPSLIST,START_AUDIT,DELETE_AUDIT,BUTLER_SUPERVISOR} from '../constants/appConstants';
+import {ERROR,AUTH_LOGIN, ADD_USER, RECIEVE_TIME_OFFSET,CHECK_ID,DELETE_USER,GET_ROLES,ORDERS_RETRIEVE,PPS_MODE_CHANGE,EDIT_USER,RECIEVE_HEADER,SUCCESS,CREATE_AUDIT,AUDIT_RETRIEVE,GET_PPSLIST,START_AUDIT,DELETE_AUDIT} from '../constants/frontEndConstants';
+import {BUTLER_UI,CODE_UE002,BUTLER_SUPERVISOR} from '../constants/backEndConstants'
 import {UE002,E028,E029,MODE_REQUESTED,TYPE_SUCCESS,AS001,ERR_API,ERR_USR,ERR_RES,ERR_AUDIT,AS00A} from '../constants/messageConstants';
 import {ShowError} from './showError';
 
@@ -28,9 +30,11 @@ export function AjaxParse(store,res,cause,status)
 			break;
 		case ORDERS_RETRIEVE:
 			store.dispatch(recieveOrdersData(res));
+			store.dispatch(setOrderListSpinner(false));
 			break;
 		case AUDIT_RETRIEVE:
 			store.dispatch(recieveAuditData(res));
+			store.dispatch(setAuditSpinner(false));
 			break;
 		case GET_ROLES:
 			let i,rolesArr,k={};

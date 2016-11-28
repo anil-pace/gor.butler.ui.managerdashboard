@@ -1,6 +1,6 @@
 import React  from 'react';
 import StackedChartHorizontal from '../../components/graphd3/stackedChartHorizontal'
-import {SCH_CONFIG} from '../../constants/appConstants'
+import {SCH_CONFIG} from '../../constants/frontEndConstants'
 
 
 

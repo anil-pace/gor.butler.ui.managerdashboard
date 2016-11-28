@@ -67,6 +67,10 @@ export const CHARGING_TAB = "Charging Station";
 export const PPS_TAB = "Pick Put Stations";
 export const ORDER_LIST = "Order List";
 export const WAVES = "Waves";
+export const BUTLERBOTS = "butlerbots";
+export const CHARGING = "chargingstation";
+export const PPS = "pps";
+export const ORDERLIST = "ORDERLIST";
 export const TAB_CLASS = {
 	overview:"gorMainBlock", 
 	system:"gorMainBlock",
@@ -138,6 +142,12 @@ export const GET_LAST_REFRESH_TIME = "GET_LAST_REFRESH_TIME";
 /*Constants for Spinner*/
 export const DISPLAY_SPINNER = "DISPLAY_SPINNER";
 export const DISPLAY_LOGIN_SPINNER = "DISPLAY_LOGIN_SPINNER";
+export const DISPLAY_AUDIT_SPINNER = "DISPLAY_AUDIT_SPINNER";
+export const DISPLAY_ORDER_LIST_SPINNER = "DISPLAY_ORDER_LIST_SPINNER";
+export const DISPLAY_WAVES_SPINNER = "DISPLAY_WAVES_SPINNER";
+export const DISPLAY_BUTLER_SPINNER = "DISPLAY_BUTLER_SPINNER";
+export const DISPLAY_PPS_SPINNER = "DISPLAY_PPS_SPINNER";
+export const DISPLAY_CHARGING_STATION_SPINNER = "DISPLAY_CHARGING_STATION_SPINNER";
 
 /*Map for routes of tab*/
 
@@ -278,19 +288,35 @@ export const LEGEND_DEFAULT = LEGEND_RECT;
 
 
 export const EN='en';
-export const JP='ja';
+export const JA='ja';
+export const HR='h ';
+export const MM='m ';
 // Style class constants
 export const TYPING='gor-login-field gor-input-ok gor-input-typing';
 export const FILL_BACK='gor-fill-back';
 export const GET='GET';
+export const POST='POST';
+export const PUT='PUT';
+export const DELETE='DELETE';
+export const APP_JSON='application/json';
 export const GOR_RISK='gor-risk';
 export const GOR_NONE='gor-none';
 export const GOR_SUCCESS='gor-success';
 export const GOR_PENDING="pending";
 export const GOR_PROGRESS="progress";
+export const GOR_BREACHED="breached";
+export const GOR_EXCEPTION="gor-exception";
+export const GOR_OFFLINE='gor-offline';
+export const GOR_ONLINE='gor-online';
+export const GOR_NORMAL_TAB='gor-normal-tab';
+export const GOR_PASS='pass';
+export const GOR_FAIL='fail';
 //Icons
 export const PICK_ICON=' iPick';
 export const STOCK_ICON="iStock";
 export const AUDIT_ICON="iAudit";
 export const TILE_ONTIME='overview-tile-ontime-icon';
 export const TILE_ALERT='header-yellow-alert-icon';
+export const TICK_WHITE='gor-tick-white';
+export const REMOVE_ICON='gor-remove-white';
+export const ERROR_WHITE='gor-error-white';

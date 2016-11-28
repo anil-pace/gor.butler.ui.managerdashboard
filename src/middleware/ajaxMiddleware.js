@@ -1,4 +1,6 @@
-import {AJAX_CALL,AUTH_LOGIN} from '../constants/appConstants';
+
+import {AJAX_CALL,AUTH_LOGIN} from '../constants/frontEndConstants';
+
 import {AjaxParse} from '../utilities/AjaxParser';
 import {ShowError} from '../utilities/showError';
 import {logoutRequest} from '../actions/loginAction'

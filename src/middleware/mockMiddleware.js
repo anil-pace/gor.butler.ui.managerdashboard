@@ -1,5 +1,5 @@
 import * as mockData from '../../mock/mockDBData';
-import {WS_MOCK,ADD_USER} from '../constants/appConstants';
+import {WS_MOCK,ADD_USER} from '../constants/frontEndConstants';
 import {ResponseParse} from '../utilities/responseParser';
 import {AjaxParse} from '../utilities/AjaxParser';
 

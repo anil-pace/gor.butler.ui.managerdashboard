@@ -138,6 +138,7 @@ body {
 .checkbox-disabled-icon,
 .overview-tile-yellow-alert-icon,
 .overview-tile-red-alert-icon,
+.table-subtab-alert-icon,
 .header-emergency-icon,
 .header-red-alert-icon,
 .header-yellow-alert-icon,
@@ -248,7 +249,8 @@ body {
 }
 
 .iPick {
-  background-position: -308px 4px;
+  background-position: -308px 5px;
+  vertical-align: top;
 }
 
 .overview-tile-ontime-icon {
@@ -365,6 +367,13 @@ body {
   width: 16px;
   height: 18px;
   cursor: pointer;
+  display: inline-block;
+}
+
+.table-subtab-alert-icon {
+  background-position: -18px -78px;
+  width: 16px;
+  height: 16px;
   display: inline-block;
 }
 
@@ -1073,7 +1082,6 @@ body {
   position: absolute;
   top: 105%;
   width: 100%;
-  z-index: 30;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -1476,7 +1484,6 @@ body {
 .fixedDataTableCellGroupLayout_cellGroup {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  left: 0;
   position: absolute;
   top: 0;
   white-space: nowrap;
@@ -1833,6 +1840,14 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   background-color: #e6e6e6;
 }
 
+.fixedDataTableRowLayout_rowWrapper:hover .public_fixedDataTableRow_main {
+  background-color: #e6e6e6;
+}
+
+.fixedDataTableRowLayout_rowWrapper:hover .public_fixedDataTable_header {
+  background-color: #fff;
+}
+
 .fixedDataTableRowLayout_rowWrapper:last-child .Dropdown-menu {
   top: initial;
   bottom: 100%;
@@ -1903,6 +1918,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   font-size: 12px;
   max-height: 9px;
   background: #ffffff;
+  text-transform: capitalize;
 }
 
 .off .public_fixedDataTableCell_cellContent {
@@ -1916,6 +1932,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   font-size: 12px;
   max-height: 9px;
   background: #ffffff;
+  text-transform: capitalize;
 }
 
 .online .public_fixedDataTableCell_cellContent {
@@ -1942,6 +1959,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   font-size: 12px;
   max-height: 9px;
   background: #ffffff;
+  text-transform: capitalize;
 }
 
 .completed .public_fixedDataTableCell_cellContent {
@@ -2001,6 +2019,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   font-size: 12px;
   max-height: 9px;
   background: #ffffff;
+  text-transform: capitalize;
 }
 
 .pending .public_fixedDataTableCell_cellContent {
@@ -2016,6 +2035,29 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   background: #ffffff;
 }
 
+.fulfillable .public_fixedDataTableCell_cellContent {
+  border-radius: 15px;
+  text-align: center;
+  width: 70px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #aaaaaa;
+  color: #aaaaaa;
+  font-size: 12px;
+  max-height: 9px;
+  background: #ffffff;
+}
+
+.gor-order-exception {
+  background: #f99405;
+  border-radius: 15px;
+  text-align: center;
+  width: 70px;
+  color: #ffffff;
+  font-size: 12px;
+  max-height: 9px;
+}
+
 .progress .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
@@ -2027,6 +2069,30 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   font-size: 12px;
   max-height: 9px;
   background: #ffffff;
+}
+
+.auto .public_fixedDataTableCell_cellContent {
+  text-transform: capitalize;
+}
+
+.manual .public_fixedDataTableCell_cellContent {
+  text-transform: capitalize;
+}
+
+.audit .public_fixedDataTableCell_cellContent {
+  text-transform: capitalize;
+}
+
+.pick .public_fixedDataTableCell_cellContent {
+  text-transform: capitalize;
+}
+
+.put .public_fixedDataTableCell_cellContent {
+  text-transform: capitalize;
+}
+
+.not_fulfillable .public_fixedDataTableCell_cellContent {
+  text-transform: capitalize;
 }
 
 .public_fixedDataTableCell_columnResizerKnob {
@@ -2140,7 +2206,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .fixedDataTableCellGroupLayout_cellGroup {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  left: 0;
+  left: 0.0625rem;
   position: absolute;
   top: 0;
   white-space: nowrap;
@@ -2151,6 +2217,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   vertical-align: top;
   white-space: normal;
   background: #f7f7f7;
+  border-bottom: 1px solid #dddddd;
 }
 
 .fixedDataTableCellGroupLayout_cellGroupWrapper {
@@ -2513,6 +2580,10 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   padding: 5px 8px 8px 8px;
 }
 
+.public_fixedDataTableCell_cellContent a {
+  cursor: pointer;
+}
+
 .public_fixedDataTableCell_columnResizerKnob {
   background-color: #0284ff;
 }
@@ -2555,6 +2626,10 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .public_fixedDataTableRow_highlighted,
 .public_fixedDataTableRow_highlighted .public_fixedDataTableCell_main {
   background-color: #f7f7f7;
+}
+
+.public_fixedDataTableRow_even, .public_fixedDataTableRow_odd {
+  background: #f7f7f7;
 }
 
 .public_fixedDataTableRow_fixedColumnsDivider {
@@ -2657,16 +2732,21 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   padding-left: 24px;
 }
 
-.gorToolHeaderEl {
+.fixedDataTableLayout_main .gorToolHeaderEl {
   display: inline-block;
-  padding-bottom: 4px;
+}
+
+.fixedDataTableLayout_main .sortIcon {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 5px;
 }
 
 .gorToolHeaderSubText {
   font-family: "source sans pro";
   font-size: 12px;
   color: #666666;
-  padding-top: 4px;
+  padding-top: 14px;
 }
 
 .gorTesting {
@@ -2834,7 +2914,7 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
-.gorUserTable {
+.gor-User-Table {
   height: 85vh;
 }
 
@@ -2948,7 +3028,14 @@ progress::-moz-progress-bar {
 .gor-header-id {
   display: inline-block;
   vertical-align: middle;
-  padding-top: 10px;
+}
+
+.gor-header-id .public_fixedDataTableCell_wrap1 {
+  padding-left: 0;
+}
+
+.gor-header-id .public_fixedDataTableCell_cellContent {
+  padding-left: 0;
 }
 
 .gorSubTab.gorContainer {
@@ -3754,69 +3841,6 @@ progress::-moz-progress-bar {
   border-bottom: 0;
 }
 
-.lineGraph .bar {
-  cursor: pointer;
-}
-
-.lineGraph .y path.domain {
-  display: none;
-}
-
-.lineGraph .y .tick line {
-  display: none;
-}
-
-.lineGraph .axis.x .domain {
-  display: block;
-}
-
-.lineGraph .x path.domain {
-  stroke-width: 2;
-  stroke: #666666;
-  display: block;
-}
-
-.lineGraph .x line {
-  display: none;
-}
-
-.lineGraph .bar {
-  fill: #498BD8;
-  opacity: 1;
-}
-
-.lineGraph .tick text {
-  fill: #666666;
-  font-size: 12px;
-}
-
-.lineGraph .grid .domain {
-  display: none;
-}
-
-.lineGraph .grid .tick {
-  opacity: 1;
-  stroke: none;
-}
-
-.lineGraph .grid .tick line {
-  stroke: #CCCCCC;
-}
-
-.lineGraph .grid .tick:nth-child(1) line {
-  stroke: #666666;
-  stroke-width: 2;
-}
-
-.lineGraph .grid path.line {
-  stroke-width: 2;
-  stroke: #7ED321;
-}
-
-.lineGraph .grid path.line:nth-child(1) {
-  stroke: #D0021B;
-}
-
 .inventoryHist .bar {
   cursor: pointer;
 }
@@ -3871,18 +3895,100 @@ progress::-moz-progress-bar {
   stroke-width: 2;
 }
 
-path {
+.lineGraph .bar {
+  cursor: pointer;
+}
+
+.lineGraph path {
   stroke: steelblue;
   stroke-width: 2;
   fill: none;
 }
 
-.axis path,
-.axis line {
+.lineGraph .y path.domain {
+  display: none;
+}
+
+.lineGraph .y .tick line {
+  display: none;
+}
+
+.lineGraph .axis.x .domain {
+  display: block;
+}
+
+.lineGraph .axis path {
   fill: none;
   stroke: grey;
   stroke-width: 1;
   shape-rendering: crispEdges;
+}
+
+.lineGraph .axis line {
+  fill: none;
+  stroke: grey;
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+
+.lineGraph .x path.domain {
+  stroke-width: 2;
+  stroke: #666666;
+  display: block;
+}
+
+.lineGraph .x line {
+  display: none;
+}
+
+.lineGraph .bar {
+  fill: #498BD8;
+  opacity: 1;
+}
+
+.lineGraph .tick text {
+  fill: #666666;
+  font-size: 12px;
+}
+
+.lineGraph .grid .domain {
+  display: none;
+}
+
+.lineGraph .grid .tick {
+  opacity: 1;
+  stroke: none;
+}
+
+.lineGraph .grid .tick line {
+  stroke: #CCCCCC;
+}
+
+.lineGraph .grid .tick:nth-child(1) line {
+  stroke: #666666;
+  stroke-width: 2;
+}
+
+.lineGraph .grid path.line {
+  stroke-width: 2;
+  stroke: #7ED321;
+}
+
+.lineGraph .grid path.line:nth-child(1) {
+  stroke: #D0021B;
+}
+
+.tooltip {
+  position: absolute;
+  text-align: center;
+  width: 60px;
+  height: 28px;
+  padding: 2px;
+  font: 12px sans-serif;
+  background: lightsteelblue;
+  border: 0px;
+  border-radius: 8px;
+  pointer-events: none;
 }
 
 .gor-emergency {

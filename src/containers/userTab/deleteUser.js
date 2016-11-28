@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { connect } from 'react-redux' ;
 import {userRequest} from '../../actions/userActions';
-import {DELETE_USER,APP_JSON,DELETE} from '../../constants/appConstants';
+import {DELETE_USER,APP_JSON,DELETE} from '../../constants/frontEndConstants';
 import {HEADER_URL} from '../../constants/configConstants';
 import { FormattedMessage,FormattedPlural } from 'react-intl';        
 

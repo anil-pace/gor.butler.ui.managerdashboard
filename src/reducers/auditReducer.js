@@ -1,4 +1,4 @@
-import {AUDIT_DATA,SET_AUDIT,RESET_AUDIT,SETAUDIT_PPS} from '../constants/appConstants'; 
+import {AUDIT_DATA,SET_AUDIT,RESET_AUDIT,SETAUDIT_PPS} from '../constants/frontEndConstants'; 
 /**
  * @param  {State Object}
  * @param  {Action object}

@@ -1,4 +1,4 @@
-import {USER_DETAILS} from '../constants/appConstants';
+import {USER_DETAILS} from '../constants/frontEndConstants';
 import React  from 'react';
 import { FormattedMessage } from 'react-intl';
 

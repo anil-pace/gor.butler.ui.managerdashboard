@@ -1,4 +1,5 @@
-import {PPS_DATA,PARSE_PPS} from '../constants/appConstants';
+import {PPS_DATA} from '../constants/frontEndConstants';
+import {PARSE_PPS} from '../constants/backEndConstants'
 /**
  * @param  {State Object}
  * @param  {Action object}

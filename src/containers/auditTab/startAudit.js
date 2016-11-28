@@ -6,7 +6,9 @@ import {setAuditType,resetAuditType} from '../../actions/auditActions';
 import {userRequest} from '../../actions/userActions';
 import { connect } from 'react-redux';
 import {INVALID_SKUID,INVALID_LOCID,TYPE_SUCCESS} from '../../constants/messageConstants';
-import { ERROR,SUCCESS,SKU,LOCATION,CREATE_AUDIT,GET_PPSLIST,START_AUDIT,GET,APP_JSON,POST } from '../../constants/appConstants';
+
+import { ERROR,SUCCESS,SKU,LOCATION,CREATE_AUDIT,GET_PPSLIST,START_AUDIT,GET,APP_JSON,POST } from '../../constants/frontEndConstants';
+
 import { AUDIT_URL,PPSLIST_URL,START_AUDIT_URL } from '../../constants/configConstants';
 import FieldError from '../../components/fielderror/fielderror';
 import { locationStatus, skuStatus } from '../../utilities/fieldCheck';

@@ -1873,5 +1873,10 @@
     "id": "notify.delete.audit.success",
     "description": "Text for successfull audit deletion",
     "defaultMessage": "Audit task {audit_id} has been deleted"
+  },
+  {
+    "id": "pps.dropdown.placeholder",
+    "description": "mode change for pps",
+    "defaultMessage": "Change PPS Mode"
   }
 ]

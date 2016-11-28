@@ -109,7 +109,7 @@ class OrderListTable extends React.Component {
   render() {
     
     var {sortedDataList, colSortDirs,columnWidths} = this.state;
-    var totalOrder = sortedDataList.getSize();
+    var totalOrder = sortedDataList.getSize(), headerAlert = <div/>;
     let allDrop = <FormattedMessage id="orderlist.table.allDrop" description="allOrders dropdown option for orderlist" defaultMessage ="All orders"/> 
     let breachedDrop = <FormattedMessage id="orderlist.table.breachedDrop" description="breached dropdown option for orderlist" defaultMessage ="Breached orders"/> 
     let pendingDrop = <FormattedMessage id="pendingDrop.table.allDrop" description="pending dropdown option for orderlist" defaultMessage ="Pending orders"/> 
@@ -139,6 +139,11 @@ class OrderListTable extends React.Component {
     { value: 'twelveHourOrders', label: twelveHrDrop },
     { value: 'oneDayOrders', label: oneDayDrop }
     ];
+
+    if(this.props.alertNum !== 0) {
+
+     headerAlert =  <div className="gorToolHeaderEl alertState"> <div className="table-subtab-alert-icon"/> <div>{this.props.alertNum} Alerts </div> </div>
+    }
     
     return (
       <div className="gorTableMainContainer">
@@ -157,7 +162,7 @@ class OrderListTable extends React.Component {
               defaultMessage ="Refresh Data"/>
             </button>
             </div>
-            <div className="gor-button-sub-status"> {this.props.lastUpdated} </div>
+            <div className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
           </div>
         <div className="filterWrapper"> 
         <div className="gorToolBarDropDown">
@@ -218,10 +223,9 @@ class OrderListTable extends React.Component {
               defaultMessage ="STATUS"/> 
               </div>
               <div>
-              <div className="statuslogoWrap">
-              <div className=" gorToolHeaderEl"/>
-              </div>
-              <div className="gorToolHeaderEl alertState"> </div>
+                <div className="statuslogoWrap">
+                  {headerAlert}
+                </div>
               </div>
             </SortHeaderCell>
           }

@@ -111,6 +111,7 @@ export const SYSTEM_PPS_DETAILS = "system_pps_details";
 export const SYSTEM_BUTLERS_DETAILS = "butlers";
 export const HISTOGRAM_DETAILS = "histogram";
 export const USER_DATA = "users";
+export const ORDERLIST = "ORDERLIST";
 
 
 /*Constants for type of AJAX call*/
@@ -165,7 +166,12 @@ export const GET_LAST_REFRESH_TIME = "GET_LAST_REFRESH_TIME";
 /*Constants for Spinner*/
 export const DISPLAY_SPINNER = "DISPLAY_SPINNER";
 export const DISPLAY_LOGIN_SPINNER = "DISPLAY_LOGIN_SPINNER";
-
+export const DISPLAY_AUDIT_SPINNER = "DISPLAY_AUDIT_SPINNER";
+export const DISPLAY_ORDER_LIST_SPINNER = "DISPLAY_ORDER_LIST_SPINNER";
+export const DISPLAY_WAVES_SPINNER = "DISPLAY_WAVES_SPINNER";
+export const DISPLAY_BUTLER_SPINNER = "DISPLAY_BUTLER_SPINNER";
+export const DISPLAY_PPS_SPINNER = "DISPLAY_PPS_SPINNER";
+export const DISPLAY_CHARGING_STATION_SPINNER = "DISPLAY_CHARGING_STATION_SPINNER";
 /*Map for routes of tab*/
 
 export const TAB_ROUTE_MAP = {
@@ -339,6 +345,7 @@ export const EN='en';
 export const JA='ja';
 export const HR='h ';
 export const MM='m ';
+
 // Style class constants
 export const TYPING='gor-login-field gor-input-ok gor-input-typing';
 export const FILL_BACK='gor-fill-back';
@@ -353,7 +360,7 @@ export const GOR_SUCCESS='gor-success';
 export const GOR_PENDING="pending";
 export const GOR_PROGRESS="progress";
 export const GOR_BREACHED="breached";
-export const GOR_EXCEPTION="gor-exception";
+export const GOR_EXCEPTION="gor-order-exception";
 export const GOR_OFFLINE='gor-offline';
 export const GOR_ONLINE='gor-online';
 export const GOR_NORMAL_TAB='gor-normal-tab';

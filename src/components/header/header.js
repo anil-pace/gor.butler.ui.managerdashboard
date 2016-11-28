@@ -1,6 +1,7 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-import {RECIEVE_HEADER,HEADER_START_TIME,REQUEST_HEADER,RECIEVE,RECIEVE_ITEM_TO_STOCK,USER_ROLE_MAP,GET} from '../../constants/appConstants';
+import {RECIEVE_HEADER,HEADER_START_TIME,REQUEST_HEADER,RECIEVE,RECIEVE_ITEM_TO_STOCK,GET} from '../../constants/frontEndConstants';
+import {USER_ROLE_MAP} from '../../constants/backEndConstants';
 import {HEADER_URL} from '../../constants/configConstants'
 import {modal} from 'react-redux-modal';
 import { getHeaderInfo } from '../../actions/headerAction';

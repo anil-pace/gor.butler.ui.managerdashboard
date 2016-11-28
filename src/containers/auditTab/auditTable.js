@@ -107,14 +107,19 @@ class AuditTable extends React.Component {
 
 
     _onSortChange(columnKey, sortDir) {
+      if(columnKey === "status") {
+      columnKey = "statusPriority";
+    }
       var sortIndexes = this._defaultSortIndexes.slice();
       var tableData={
         sortedDataList: new DataListWrapper(sortData(columnKey, sortDir,sortIndexes,this._dataList), this._dataList),
         colSortDirs: {[columnKey]: sortDir,},
         columnWidths: this.props.tableData.columnWidths,
       };
+
       this.props.currentTableState(tableData)
     }
+
 
     createAudit() { 
       modal.add(CreateAudit, {
@@ -148,14 +153,14 @@ class AuditTable extends React.Component {
 
     manageAuditTask(rowIndex,option ){
       if(option.value === "duplicateTask"){
-        var auditType, auditTypeValue, auditComplete,auditTypeParam;
+        var auditType, auditTypeValue, auditComplete,auditTypeParam,sortedIndex;
 
 
         if(this.props.tableData.sortedDataList._data !== undefined) {
           sortedIndex = this.props.tableData.sortedDataList._indexMap[rowIndex];
-          auditType = this.props.tableData.sortedDataList.newData[sortedIndex].auditType;
-          auditTypeParam = this.props.tableData.sortedDataList.newData[sortedIndex].auditValue;
-          auditComplete = this.props.tableData.sortedDataList.newData[sortedIndex].auditTypeValue;
+          auditType = this.props.tableData.sortedDataList._data.newData[sortedIndex].auditType;
+          auditTypeParam = this.props.tableData.sortedDataList._data.newData[sortedIndex].auditValue;
+          auditComplete = this.props.tableData.sortedDataList._data.newData[sortedIndex].auditTypeValue;
         }
         else {
           auditType = this.props.items[rowIndex].auditType;
@@ -273,6 +278,7 @@ class AuditTable extends React.Component {
 
       <Column
 
+
       columnKey="auditTypeValue"
       header={
         <SortHeaderCell onSortChange={this._onSortChange}
@@ -375,6 +381,7 @@ class AuditTable extends React.Component {
       width={columnWidths.actions}
 
       />
+
       </Table>
       </div>
 

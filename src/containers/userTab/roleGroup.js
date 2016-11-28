@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { connect } from 'react-redux';
 import {setRole} from '../../actions/userActions';
-import {BUTLER_SUPERVISOR,BUTLER_UI} from '../../constants/appConstants'
+import {BUTLER_SUPERVISOR,BUTLER_UI} from '../../constants/backEndConstants'
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
 
 

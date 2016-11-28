@@ -3,7 +3,7 @@ import ReactDOM  from 'react-dom';
 import Tilex from '../components/tile1x/Tilex';
 import { connect } from 'react-redux';
 import { FormattedMessage,FormattedNumber ,FormattedPlural} from 'react-intl';
-import {STOCK_ICON} from '../constants/appConstants';
+import {STOCK_ICON} from '../constants/frontEndConstants';
 
 class PutStatusWidget extends React.Component{
 	/**
