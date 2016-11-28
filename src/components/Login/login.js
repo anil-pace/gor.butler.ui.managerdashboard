@@ -74,7 +74,6 @@ class Login extends React.Component{
             <Spinner isLoading={this.props.loginSpinner} />
                 <div className='gor-login-lang'>
                     <div className='gor-lang-text'>
-                    
                     <FormattedMessage id='login.butler.language' 
                         defaultMessage="Language" description="Text for language"/>
                 
