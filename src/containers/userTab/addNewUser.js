@@ -5,7 +5,7 @@ import {validateID, validateName, validatePassword, resetForm} from '../../actio
 import {userRequest} from '../../actions/userActions';
 import {ADD_USER,CHECK_ID,ERROR,SUCCESS,INFO,GET_ROLES,BUTLER_SUPERVISOR,BUTLER_UI,GET,APP_JSON,POST} from '../../constants/appConstants';
 import {ROLE_URL,CHECK_USER,HEADER_URL} from '../../constants/configConstants';
-import {INVALID_ID,INVALID_FORMAT,TYPE_SUCCESS} from '../../constants/messageConstants';
+import {INVALID_ID,INVALID_FORMAT,TYPE_SUCCESS,MG_PWD,OP_PWD} from '../../constants/messageConstants';
 import { connect } from 'react-redux';
 import FieldError from '../../components/fielderror/fielderror';
 import RoleGroup from './roleGroup';
@@ -168,9 +168,7 @@ class AddUser extends React.Component{
             <div className='gor-usr-hdlg'><FormattedMessage id="users.add.password.heading" description='Heading for create password' 
             defaultMessage='Create password'/></div>
             <div className='gor-sub-head'>
-            {this.props.roleInfo?(this.props.roleSet===this.props.roleInfo.BUTLER_SUPERVISOR?<FormattedMessage id="users.add.password.subheading.manager" description='Subheading for create password' 
-            defaultMessage='A password of at least 8 alphanumeric characters will be required for logging into the Management Interface and Operator Interface'/>:<FormattedMessage id="users.add.password.subheading.operator" description='Subheading for create password operator' 
-            defaultMessage='A password of 6 digits will be required for logging into the Operator Interface.'/>):''}
+            {this.props.roleInfo?(this.props.roleSet===this.props.roleInfo.BUTLER_SUPERVISOR?MG_PWD:OP_PWD):''}
             </div>
 
               <div className='gor-usr-hdsm'><FormattedMessage id="users.add.password.field1" description='Text for password' 
