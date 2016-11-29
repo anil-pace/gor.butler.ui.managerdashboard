@@ -8,13 +8,13 @@ import {PARSE_BUTLERS} from '../constants/backEndConstants'
 export  function butlersInfo(state={},action){
 	switch (action.type) {
 	  case BUTLERS_DATA:
-         var count_active= 0,res;
+         var res;
          res=action.data;
          var butlersKey = {"active" : 0, "inactive": 0};
             if(res.aggregate_data) {  
               butlersKey = {
-               "active" : action.data.aggregate_data.active_butlers,
-               "inactive": action.data.aggregate_data.inactive_butlers
+               "active" : Number(action.data.aggregate_data.active_butlers),
+               "inactive": Number(action.data.aggregate_data.inactive_butlers)
              
            }
          }
