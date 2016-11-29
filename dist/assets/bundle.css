@@ -1085,11 +1085,6 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
-.ddown .Dropdown-menu:last-child {
-  bottom: 100%;
-  top: 0;
-}
-
 .ddown .Dropdown-option {
   box-sizing: border-box;
   color: #666666;

@@ -82,10 +82,10 @@ class PPStable extends React.Component {
       sortedDataList: this._dataList,
       colSortDirs: {},
       columnWidths: {
-         id: nextProps.containerWidth*0.09,
-        status: nextProps.containerWidth*0.078,
-        operatingMode: nextProps.containerWidth*0.145,
-        performance: nextProps.containerWidth*0.092,
+         id: nextProps.containerWidth*0.12,
+        status: nextProps.containerWidth*0.098,
+        operatingMode: nextProps.containerWidth*0.165,
+        performance: nextProps.containerWidth*0.122,
         operatorAssigned: nextProps.containerWidth*0.4
       },
       headerChecked: false,

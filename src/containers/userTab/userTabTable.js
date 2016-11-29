@@ -110,7 +110,24 @@ class UserDataTable extends React.Component {
     });
   }
   handleEdit(columnKey,rowIndex) {
-    let uid=this.state.sortedDataList.newData[rowIndex].uid,uname=this.state.sortedDataList.newData[rowIndex].userName,fname=this.state.sortedDataList.newData[rowIndex].first,lname=this.state.sortedDataList.newData[rowIndex].last,roleId=this.state.sortedDataList.newData[rowIndex].roleId;
+    let uid, uname, fname, lname, roleId;
+    if(this.state.sortedDataList.newData === undefined) {
+      sortedIndex = this.state.sortedDataList._indexMap[rowIndex];
+      uid = this.state.sortedDataList._data.newData[sortedIndex].uid;
+      uname = this.state.sortedDataList._data.newData[sortedIndex].userName;
+      fname = this.state.sortedDataList._data.newData[sortedIndex].first;
+      lname = this.state.sortedDataList._data.newData[sortedIndex].last;
+      roleId = this.state.sortedDataList._data.newData[sortedIndex].roleId;
+    }
+
+    else {
+      uid=this.state.sortedDataList.newData[rowIndex].uid;
+      uname=this.state.sortedDataList.newData[rowIndex].userName;
+      fname=this.state.sortedDataList.newData[rowIndex].first;
+      lname=this.state.sortedDataList.newData[rowIndex].last;
+      roleId=this.state.sortedDataList.newData[rowIndex].roleId;
+    }
+
     modal.add(EditUser, {
       title: '',
       size: 'large', // large, medium or small,
@@ -126,7 +143,17 @@ class UserDataTable extends React.Component {
    
   }
   handleDel(columnKey,rowIndex) {
-    let id=this.state.sortedDataList.newData[rowIndex].uid,name=this.state.sortedDataList.newData[rowIndex].id;
+    let id, name, temp,sortedIndex;
+    if(this.state.sortedDataList.newData === undefined) {
+      sortedIndex = this.state.sortedDataList._indexMap[rowIndex];
+      id = this.state.sortedDataList._data.newData[sortedIndex].uid;
+      name = this.state.sortedDataList._data.newData[sortedIndex].id;
+    }
+
+    else {
+      id=this.state.sortedDataList.newData[rowIndex].uid;
+      name=this.state.sortedDataList.newData[rowIndex].id;
+    }
     modal.add(DeleteUser, {
       title: '',
       size: 'large', // large, medium or small,
