@@ -39,7 +39,6 @@ const ajaxMiddleware = (function(){
                  catch(e)
                  {
                   ShowError(store,params.cause,httpRequest.status);
-                  throw e;                      
                  }
               }      
       }

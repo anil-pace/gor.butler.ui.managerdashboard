@@ -372,7 +372,7 @@
   {
     "id": "notify.error.connection",
     "description": "Text for connection refused",
-    "defaultMessage": "Connection refused"
+    "defaultMessage": "Network Failure"
   },
   {
     "id": "inventory.histogram.noDataText",
