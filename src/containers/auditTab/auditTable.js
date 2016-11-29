@@ -320,7 +320,7 @@ class AuditTable extends React.Component {
         <FormattedMessage id="audit.table.startTime" description="startTime for audit" 
         defaultMessage ="START TIME"/>
         <div className="gorToolHeaderSubText"> 
-
+        
         </div>
         </SortHeaderCell>
       }
@@ -354,7 +354,7 @@ class AuditTable extends React.Component {
         <FormattedMessage id="audit.table.timeCompleted" description="timeCompleted for audit" 
         defaultMessage ="TIME COMPLETED"/>
         <div className="gorToolHeaderSubText"> 
-
+        {this.props.timeZoneString}
         </div>
         </SortHeaderCell>
       }

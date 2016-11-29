@@ -256,7 +256,9 @@ class OrderListTable extends React.Component {
               sortDir={colSortDirs.recievedTime}>
               <FormattedMessage id="orderlist.table.operatingMode" description="recievedTime for Orders" 
               defaultMessage ="RECIEVED TIME"/>
-              <div className="gorToolHeaderSubText"> </div>
+              <div className="gorToolHeaderSubText"> 
+                {this.props.timeZoneString}
+              </div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
@@ -271,7 +273,10 @@ class OrderListTable extends React.Component {
               sortDir={colSortDirs.completedTime}>
               <FormattedMessage id="orderlist.table.completedTime" description="completedTime for orderlist" 
               defaultMessage ="COMPLETED"/>
-              <div className="gorToolHeaderSubText"> </div>
+              <div className="gorToolHeaderSubText">
+                {this.props.timeZoneString}
+               </div>
+                
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
