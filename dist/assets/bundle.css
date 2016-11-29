@@ -250,6 +250,7 @@ body {
 
 .iPick {
   background-position: -308px 4px;
+  vertical-align: top;
 }
 
 .overview-tile-ontime-icon {
@@ -1082,6 +1083,11 @@ body {
   top: 105%;
   width: 100%;
   -webkit-overflow-scrolling: touch;
+}
+
+.ddown .Dropdown-menu:last-child {
+  bottom: 100%;
+  top: 0;
 }
 
 .ddown .Dropdown-option {

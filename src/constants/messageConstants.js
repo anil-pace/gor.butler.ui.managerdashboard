@@ -142,3 +142,8 @@ export const HISTOGRAM_NO_DATA_TEXT = (<FormattedMessage id="inventory.histogram
                     defaultMessage ="No Stock Found"/>);
 
 
+//Messages for user forms
+export const MG_PWD=(<FormattedMessage id="users.add.password.subheading.manager" description='Subheading for create password' 
+            defaultMessage='A password of at least 8 alphanumeric characters will be required for logging into the Management Interface and Operator Interface'/>);
+export const OP_PWD=(<FormattedMessage id="users.add.password.subheading.operator" description='Subheading for create password operator' 
+            defaultMessage='A password of 6 digits will be required for logging into the Operator Interface.'/>);

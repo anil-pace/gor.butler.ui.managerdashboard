@@ -72,6 +72,10 @@
   width: 100%;
   -webkit-overflow-scrolling: touch;
 }
+.Dropdown-menu:last-child{
+  bottom:100%;
+  top:0;
+}
 
 
 .Dropdown-option {

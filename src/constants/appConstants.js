@@ -365,7 +365,7 @@ export const GOR_OFFLINE='gor-offline';
 export const GOR_ONLINE='gor-online';
 export const GOR_NORMAL_TAB='gor-normal-tab';
 export const GOR_PASS='pass';
-export const GOR_FAILURE='fail';
+export const GOR_FAIL='fail';
 //Icons
 export const PICK_ICON=' iPick';
 export const STOCK_ICON="iStock";

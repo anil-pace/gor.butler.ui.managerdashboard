@@ -40,11 +40,6 @@
     "defaultMessage": "{cut_off}"
   },
   {
-    "id": "widget.pick.statusright",
-    "description": "Text for wave end time",
-    "defaultMessage": "{wave_end}"
-  },
-  {
     "id": "widget.pick.statusleft.onschedule",
     "description": "Text for on schedule",
     "defaultMessage": "On Schedule"

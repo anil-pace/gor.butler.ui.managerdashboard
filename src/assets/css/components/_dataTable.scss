@@ -803,6 +803,7 @@ background: #f99405;
 .fixedDataTableCellGroupLayout_cellGroup {
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
+
   left: calculateRem(1px);
   position: absolute;
   top: 0;
