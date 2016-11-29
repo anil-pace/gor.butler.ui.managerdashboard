@@ -2,8 +2,18 @@ import React from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
 import Dropdown from '../../components/dropdown/dropdown'
 import Dimensions from 'react-dimensions'
-import { FormattedMessage, FormattedDate, FormattedTime,FormattedRelative } from 'react-intl';
+import { FormattedMessage, FormattedDate, FormattedTime,FormattedRelative ,defineMessages} from 'react-intl';
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
+
+
+const messages = defineMessages({
+    filterPlaceholder: {
+        id: 'table.filter.placeholder',
+        description: 'placeholder for table filter',
+        defaultMessage: 'Search by keywords',
+    }
+});
+
 
 class OrderListTable extends React.Component {
   constructor(props) {
@@ -142,7 +152,7 @@ class OrderListTable extends React.Component {
 
     if(this.props.alertNum !== 0) {
 
-     headerAlert =  <div className="gorToolHeaderEl alertState"> <div className="table-subtab-alert-icon"/> <div>{this.props.alertNum} Alerts </div> </div>
+     headerAlert =  <div className="gorToolHeaderEl alertState"> <div className="table-subtab-alert-icon"/> <div className="gor-inline">{this.props.alertNum} Alerts </div> </div>
     }
     
     return (

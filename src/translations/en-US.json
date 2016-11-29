@@ -1888,5 +1888,10 @@
     "id": "healthTab.status.off",
     "description": "off status for healthtab",
     "defaultMessage": "Off"
-  }
+  },
+  {
+        "id": "table.filter.placeholder",
+        "description": "placeholder for table filter",
+        "defaultMessage": "Search by keywords"
+    }
 ]

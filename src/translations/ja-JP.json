@@ -1843,5 +1843,10 @@
     "id": "healthTab.status.off",
     "description": "off status for healthtab",
     "defaultMessage": "日本語"
-  }
+  },
+  {
+        "id": "table.filter.placeholder",
+        "description": "placeholder for table filter",
+        "defaultMessage": "日本語"
+    }
 ]

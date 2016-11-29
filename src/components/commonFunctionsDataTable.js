@@ -23,7 +23,7 @@ export function filterIndex(e,_dataList,filterField) {
       for (var i = filterField.length - 1; i >= 0; i--) {
         data[i] = getData[filterField[i]];
 
-        if (data[i].toLowerCase().indexOf(filterBy) !== -1) {
+        if (typeof data[i] === "string" && data[i].toLowerCase().indexOf(filterBy) !== -1) {
           filteredIndexes.push(index);
           break;
         }

@@ -88,7 +88,7 @@
         alertStatesNum++;
       }      
       else {
-        orderData.status = stringConfig[data[i].status];
+        orderData.status = nProps.context.intl.formatMessage(stringConfig[data[i].status]);
         orderData.statusClass = data[i].status;
         orderData.statusPriority = unBreachedStatus[data[i].status];
       }
@@ -253,7 +253,8 @@ render(){
   return (
     <div>
     <div className="gor-Orderlist-table" >  
-    <Spinner isLoading={this.props.orderListSpinner} />
+
+    <Spinner isLoading={this.props.orderListSpinner}/>
     <OrderListTable items={orderDetail} itemNumber={itemNumber} statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter} refreshOption={this.refresh.bind(this)} lastUpdatedText = {updateStatusText} lastUpdated={updateStatusIntl} refreshList={this.refresh.bind(this)} intlMessg={this.props.intlMessages} alertNum={alertNum}/>
 
     <div className="gor-pageNum">

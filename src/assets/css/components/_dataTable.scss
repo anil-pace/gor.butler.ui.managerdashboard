@@ -551,7 +551,7 @@ background-color: #FFFFFF;
 
 .gor-exception .public_fixedDataTableCell_cellContent{
 
-  background: #EC1C24;
+  background: #F99405;
   border-radius: 15px;
   text-align: center;
   width:70px;
@@ -646,6 +646,16 @@ background: #f99405;
   background: #ffffff;
 
 }
+.completed{
+  .public_fixedDataTableCell_cellContent{
+    text-transform: capitalize;
+  }
+}
+.Completed{
+  .public_fixedDataTableCell_cellContent{
+    text-transform: capitalize;
+  }
+}
 .auto{
   .public_fixedDataTableCell_cellContent{
     text-transform: capitalize;
@@ -667,6 +677,11 @@ background: #f99405;
   }
 }
 .put{
+  .public_fixedDataTableCell_cellContent{
+    text-transform: capitalize;
+  }
+}
+.not_fulfillable{
   .public_fixedDataTableCell_cellContent{
     text-transform: capitalize;
   }
@@ -1618,6 +1633,10 @@ progress::-moz-progress-bar {
   .public_fixedDataTableCell_cellContent{
     padding-left:0;
   }
+}
+
+.gor-inline {
+  display: inline-block;
 }
 
  
