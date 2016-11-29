@@ -11,12 +11,37 @@ import {getPageData} from '../actions/paginationAction';
 import {AUDIT_RETRIEVE,GET,APP_JSON} from '../constants/frontEndConstants';
 import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,SEARCH_AUDIT_URL,GIVEN_PAGE,GIVEN_PAGE_SIZE} from '../constants/configConstants';
 
-import { FormattedDate } from 'react-intl';
+
 import {setAuditSpinner} from '../actions/auditActions';
 
 
 
-function processAuditData(data, nProps ) {
+
+
+
+class AuditTab extends React.Component{
+	constructor(props) 
+	{
+   super(props);
+ }
+ componentWillReceiveProps(nextProps)
+ {
+  if(nextProps.auditRefresh)
+  {
+     var data = {};
+     data.selected = 0;
+     this.handlePageClick(data);
+     nextProps.setAuditRefresh(false);
+  }
+ }
+ componentDidMount() {
+  var data = {};
+  data.selected = 0;
+  this.handlePageClick(data);
+ }
+ _processAuditData(data,nProps){
+  var nProps = this,
+  data = nProps.props.auditDetail;
   let created  = nProps.context.intl.formatMessage({id:"auditdetail.created.status", defaultMessage: "Created"});
   let pending  = nProps.context.intl.formatMessage({id:"auditdetail.pending.status", defaultMessage: "Pending"});
   let progress  = nProps.context.intl.formatMessage({id:"auditdetail.progress.status", defaultMessage: "In Progress"});
@@ -25,7 +50,7 @@ function processAuditData(data, nProps ) {
   let location  = nProps.context.intl.formatMessage({id:"auditdetail.location.prefix", defaultMessage: "Location"});
 
 
-  let timeOffset: state.authLogin.timeOffset;
+  var timeOffset= nProps.props.timeOffset || "";
 
   
   var priorityStatus = {"audit_created":2, "audit_pending":3, "audit_waiting":3, "audit_conflicting":3, "audit_started":1, "audit_tasked":1, "audit_aborted":4, "audit_completed":4};
@@ -63,7 +88,14 @@ function processAuditData(data, nProps ) {
     }
 
     if(data[i].start_request_time) {
-      auditData.startTime = data[i].start_request_time;
+      auditData.startTime = nProps.context.intl.formatDate(data[i].start_request_time,
+                                {timeZone:timeOffset,
+                                  year:'numeric',
+                                  month:'short',
+                                  day:'2-digit',
+                                  hour:"2-digit",
+                                  minute:"2-digit"
+                                })
     }
     else {
       auditData.startTime = "--";
@@ -79,7 +111,14 @@ function processAuditData(data, nProps ) {
     }
 
     if(data[i].completion_time) {
-      auditData.completedTime = data[i].completion_time;
+      auditData.completedTime = nProps.context.intl.formatDate(data[i].completion_time,
+                                {timeZone:timeOffset,
+                                  year:'numeric',
+                                  month:'short',
+                                  day:'2-digit',
+                                  hour:"2-digit",
+                                  minute:"2-digit"
+                                })
     }
     else {
       auditData.completedTime = "--";
@@ -89,28 +128,6 @@ function processAuditData(data, nProps ) {
   }
   console.log(auditDetails)
   return auditDetails;
-}
-
-
-class AuditTab extends React.Component{
-	constructor(props) 
-	{
-   super(props);
- }
- componentWillReceiveProps(nextProps)
- {
-  if(nextProps.auditRefresh)
-  {
-     var data = {};
-     data.selected = 0;
-     this.handlePageClick(data);
-     nextProps.setAuditRefresh(false);
-  }
- }
- componentDidMount() {
-  var data = {};
-  data.selected = 0;
-  this.handlePageClick(data);
  }
  handlePageClick(data){
     var url;
@@ -139,11 +156,20 @@ class AuditTab extends React.Component{
  }
 
 render(){
-  var renderTab = <div/>;
+  var renderTab = <div/>,
+  timeOffset = this.props.timeOffset || "",
+  headerTimeZone = (this.context.intl.formatDate(Date.now(),
+                                {timeZone:timeOffset,
+                                  year:'numeric',
+                                  timeZoneName:'long'
+                                }));
   
-    var auditData = processAuditData(this.props.auditDetail, this);
+  /*Extracting Time zone string for the specified time zone*/
+  headerTimeZone = headerTimeZone.substr(5, headerTimeZone.length);
+  
+    var auditData = this._processAuditData();
     renderTab = <AuditTable items={auditData}
-    intlMessg={this.props.intlMessages} />
+    intlMessg={this.props.intlMessages} timeZoneString = {headerTimeZone}/>
   
   
   return (
@@ -182,7 +208,8 @@ function mapStateToProps(state, ownProps){
     totalPage: state.recieveAuditDetail.totalPage || 0,
     auditRefresh:state.recieveAuditDetail.auditRefresh || null,  
     intlMessages: state.intl.messages,
-    auth_token: state.authLogin.auth_token
+    auth_token: state.authLogin.auth_token,
+    timeOffset: state.authLogin.timeOffset
   };
 }
 

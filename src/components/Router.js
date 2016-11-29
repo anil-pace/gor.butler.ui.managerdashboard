@@ -1,8 +1,6 @@
 /**
  * Importing Router dependencies
  */
-
-
 import React  from 'react';
 import { connect } from 'react-redux';
 import { Router, Route, hashHistory, IndexRoute} from 'react-router';
@@ -107,165 +105,159 @@ class Routes extends React.Component{
             this._requireAuth.call(this,nextState, replace);
         }
 
-
     if(sessionStorage.getItem('localLanguage')){
         this._updateLanguage.call(this);
     }
 }
+render(){
+   return (
+      <Router history={hashHistory}>
+      <Route name="default" path="/" 
+      getComponent={(location, callback) => {
+         require.ensure([], function (require) {
+            callback(null, require('../App').default);
+        },"defaultApp");
+     }}
+     />
+     <Route name="login" path="/login"   onEnter={this._refreshPage.bind(this)} 
+     getComponent={(location, callback) => {
+         require.ensure([], function (require) {
+            callback(null, require('./Login/login').default);
+        },"login");
+     }}
+     />
+     <Route name="app" path="/md"  
+     getComponent={(location, callback) => {
+         require.ensure([], function (require) {
+            callback(null, require('../App').default);
+        },"app");
+     }}
+     >
+     <IndexRoute 
+     getComponent={(location, callback) => {
+         require.ensure([], function (require) {
+            callback(null, require('../containers/OverviewTab').default);
+        },"indexOverview");
+     }}
+     />
+     <Route name="system" path="/system" className="gorResponsive"  
+     getComponent={(location, callback) => {
+         require.ensure([], function (require) {
+            callback(null, require('../containers/systemTab').default);
+        },"system");
+     }}
+     > 
+     <IndexRoute 
+     getComponent={(location, callback) => {
+         require.ensure([], function (require) {
+            callback(null, require('../containers/systemTabs/butlerbotTab').default);
+        },"indexButBot");
+     }}
+     />
+     <Route name="butlerbots" path="/butlerbots"  
+     getComponent={(location, callback) => {
+         require.ensure([], function (require) {
+            callback(null, require('../containers/systemTabs/butlerbotTab').default);
+        },"butlerBots");
+     }}
+     />
 
+     <Route name="pps" path="/pps"  
+     getComponent={(location, callback) => {
+         require.ensure([], function (require) {
+            callback(null, require('../containers/systemTabs/ppsTab').default);
+        },"pps");
+     }}
+     />
 
- 	 	
-	
+     <Route name="chargingstation" path="/chargingstation"  
+     getComponent={(location, callback) => {
+         require.ensure([], function (require) {
+            callback(null, require('../containers/systemTabs/chargingStationsTab').default);
+        },"chargingStation");
+     }}
+     />
+     </Route>
 
-    render(){
-       return (
-          <Router history={hashHistory}>
-          <Route name="default" path="/" 
-          getComponent={(location, callback) => {
-             require.ensure([], function (require) {
-                callback(null, require('../App').default);
-            },"defaultApp");
-         }}
-         />
-         <Route name="login" path="/login"   onEnter={this._refreshPage.bind(this)} 
-         getComponent={(location, callback) => {
-             require.ensure([], function (require) {
-                callback(null, require('./Login/login').default);
-            },"login");
-         }}
-         />
-         <Route name="app" path="/md"  
-         getComponent={(location, callback) => {
-             require.ensure([], function (require) {
-                callback(null, require('../App').default);
-            },"app");
-         }}
-         >
-         <IndexRoute 
-         getComponent={(location, callback) => {
-             require.ensure([], function (require) {
-                callback(null, require('../containers/OverviewTab').default);
-            },"indexOverview");
-         }}
-         />
-         <Route name="system" path="/system" className="gorResponsive"  
-         getComponent={(location, callback) => {
-             require.ensure([], function (require) {
-                callback(null, require('../containers/systemTab').default);
-            },"system");
-         }}
-         > 
-         <IndexRoute 
-         getComponent={(location, callback) => {
-             require.ensure([], function (require) {
-                callback(null, require('../containers/systemTabs/butlerbotTab').default);
-            },"indexButBot");
-         }}
-         />
-         <Route name="butlerbots" path="/butlerbots"  
-         getComponent={(location, callback) => {
-             require.ensure([], function (require) {
-                callback(null, require('../containers/systemTabs/butlerbotTab').default);
-            },"butlerBots");
-         }}
-         />
+     <Route name="orders" path="/orders"  
+     getComponent={(location, callback) => {
+         require.ensure([], function (require) {
+            callback(null, require('../containers/ordersTab').default);
+        },"orders");
+     }}
+     >
+     <IndexRoute 
+     getComponent={(location, callback) => {
+         require.ensure([], function (require) {
+            callback(null, require('../containers/orderTab/waveTab').default);
+        },"indexWave");
+     }}
+     />
 
-         <Route name="pps" path="/pps"  
-         getComponent={(location, callback) => {
-             require.ensure([], function (require) {
-                callback(null, require('../containers/systemTabs/ppsTab').default);
-            },"pps");
-         }}
-         />
+     <Route name="waves" path="/waves"  
+     getComponent={(location, callback) => {
+         require.ensure([], function (require) {
+            callback(null, require('../containers/orderTab/waveTab').default);
+        },"waveTab");
+     }}
+     />
 
-         <Route name="chargingstation" path="/chargingstation"  
-         getComponent={(location, callback) => {
-             require.ensure([], function (require) {
-                callback(null, require('../containers/systemTabs/chargingStationsTab').default);
-            },"chargingStation");
-         }}
-         />
-         </Route>
-
-         <Route name="orders" path="/orders"  
-         getComponent={(location, callback) => {
-             require.ensure([], function (require) {
-                callback(null, require('../containers/ordersTab').default);
-            },"orders");
-         }}
-         >
-         <IndexRoute 
-         getComponent={(location, callback) => {
-             require.ensure([], function (require) {
-                callback(null, require('../containers/orderTab/waveTab').default);
-            },"indexWave");
-         }}
-         />
-
-         <Route name="waves" path="/waves"  
-         getComponent={(location, callback) => {
-             require.ensure([], function (require) {
-                callback(null, require('../containers/orderTab/waveTab').default);
-            },"waveTab");
-         }}
-         />
-
-         <Route name="orderlist" path="/orderlist"  
-         getComponent={(location, callback) => {
-             require.ensure([], function (require) {
-                callback(null, require('../containers/orderTab/orderListTab').default);
-            },"orderList");
-         }}
-         />
-         </Route>
+     <Route name="orderlist" path="/orderlist"  
+     getComponent={(location, callback) => {
+         require.ensure([], function (require) {
+            callback(null, require('../containers/orderTab/orderListTab').default);
+        },"orderList");
+     }}
+     />
+     </Route>
 
 
 
-         <Route name="audit" path="/audit"  
-         getComponent={(location, callback) => {
-             require.ensure([], function (require) {
-                callback(null, require('../containers/auditTab').default);
-            },"audit");
+     <Route name="audit" path="/audit"  
+     getComponent={(location, callback) => {
+         require.ensure([], function (require) {
+            callback(null, require('../containers/auditTab').default);
+        },"audit");
 
-         }}
-         />
+     }}
+     />
 
-         <Route name="inventory" path="/inventory"  
-         getComponent={(location, callback) => {
-             require.ensure([], function (require) {
-                callback(null, require('../containers/inventoryTab').default);
-            },"inventory");
+     <Route name="inventory" path="/inventory"  
+     getComponent={(location, callback) => {
+         require.ensure([], function (require) {
+            callback(null, require('../containers/inventoryTab').default);
+        },"inventory");
 
 
-         }}
-         />
+     }}
+     />
 
-         <Route name="audit" path="/audit"  
-         getComponent={(location, callback) => {
-             require.ensure([], function (require) {
-                callback(null, require('../containers/auditTab').default);
-            },"audit");
-         }}
-         />
+     <Route name="audit" path="/audit"  
+     getComponent={(location, callback) => {
+         require.ensure([], function (require) {
+            callback(null, require('../containers/auditTab').default);
+        },"audit");
+     }}
+     />
 
-         <Route name="users" path="/users"  
-         getComponent={(location, callback) => {
-             require.ensure([], function (require) {
-                callback(null, require('../containers/usersTab').default);
-            },"users");
-         }}
-         />
+     <Route name="users" path="/users"  
+     getComponent={(location, callback) => {
+         require.ensure([], function (require) {
+            callback(null, require('../containers/usersTab').default);
+        },"users");
+     }}
+     />
 
-         <Route name="overview" path="/overview"  
-         getComponent={(location, callback) => {
-             require.ensure([], function (require) {
-                callback(null, require('../containers/OverviewTab').default);
-            },"overview");
-         }}
-         />
-         </Route>
-         </Router>
-         )}
+     <Route name="overview" path="/overview"  
+     getComponent={(location, callback) => {
+         require.ensure([], function (require) {
+            callback(null, require('../containers/OverviewTab').default);
+        },"overview");
+     }}
+     />
+     </Route>
+     </Router>
+     )}
 
 }
 

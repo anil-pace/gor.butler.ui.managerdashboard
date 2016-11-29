@@ -16,7 +16,12 @@ class DuplicateAudit extends React.Component{
   }
   _removeThisModal() {
       this.props.removeModal();
-      this.props.refreshData();
+  }
+  componentWillReceiveProps(nextProps){
+    if(!nextProps.auth_token)
+    {
+      this._removeThisModal();
+    }
   }
   _userDup() {
     let formdata={

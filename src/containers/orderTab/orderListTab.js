@@ -9,7 +9,7 @@
  import OrderListTable from './orderListTable';
 
  import Dropdown from '../../components/dropdown/dropdown'
- import { FormattedMessage ,defineMessages,FormattedRelative,FormattedDate} from 'react-intl';
+ import { FormattedMessage ,defineMessages,FormattedRelative} from 'react-intl';
  import Spinner from '../../components/spinner/Spinner';
  import {setOrderListSpinner} from '../../actions/orderListActions';
  import {stringConfig} from '../../constants/backEndConstants';
@@ -96,16 +96,14 @@
 
 
 
-      orderData.recievedTime = <FormattedDate value = {data[i].create_time}
-                                timeZone={timeOffset}
-                                year='numeric'
-                                month='short'
-                                day='2-digit'
-                                hour="2-digit"
-                                minute="2-digit"
-                                second="2-digit"
-                                timeZoneName="long"
-                                />;
+      orderData.recievedTime = nProps.context.intl.formatDate(data[i].create_time,
+                                {timeZone:timeOffset,
+                                  year:'numeric',
+                                  month:'short',
+                                  day:'2-digit',
+                                  hour:"2-digit",
+                                  minute:"2-digit"
+                                })
                                 
 
       if(data[i].pick_before_time === null) {
@@ -124,18 +122,14 @@
         orderData.orderLine = data[i].completed_orderlines + "/" + data[i].total_orderlines;
       }
       if (data[i].status === "completed"){
-        orderData.completedTime = <FormattedDate value = {data[i].update_time}
-
-                                timeZone={timeOffset}
-                                year='numeric'
-                                month='short'
-                                day='2-digit'
-                                hour="2-digit"
-                                minute="2-digit"
-                                second="2-digit"
-                                timeZoneName="long"
-
-                                />;
+        orderData.completedTime = nProps.context.intl.formatDate(data[i].update_time,
+                                {timeZone:timeOffset,
+                                  year:'numeric',
+                                  month:'short',
+                                  day:'2-digit',
+                                  hour:"2-digit",
+                                  minute:"2-digit"
+                                })
       }else{
         orderData.completedTime = "--";
       }
@@ -228,7 +222,7 @@
 
 
 render(){
-  var updateStatus;
+  var updateStatus,timeOffset,headerTimeZone;
   let updateStatusIntl,updateStatusText;
   if(this.props.filterOptions.lastUpdatedOn) {
     updateStatusText = <FormattedMessage id="orderlistTab.orderListRefreshedat" description='Refresh Status text' defaultMessage='Last Updated ' />
@@ -250,12 +244,22 @@ render(){
     orderDetail = orderInfo.renderOrderData;
     alertNum = orderInfo.alertStatesNum;
   }
+
+  timeOffset = this.props.timeOffset || "",
+  headerTimeZone = (this.context.intl.formatDate(Date.now(),
+                                {timeZone:timeOffset,
+                                  year:'numeric',
+                                  timeZoneName:'long'
+                                }));
+  
+  /*Extracting Time zone string for the specified time zone*/
+  headerTimeZone = headerTimeZone.substr(5, headerTimeZone.length);
   return (
     <div>
     <div className="gor-Orderlist-table" >  
 
     <Spinner isLoading={this.props.orderListSpinner}/>
-    <OrderListTable items={orderDetail} itemNumber={itemNumber} statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter} refreshOption={this.refresh.bind(this)} lastUpdatedText = {updateStatusText} lastUpdated={updateStatusIntl} refreshList={this.refresh.bind(this)} intlMessg={this.props.intlMessages} alertNum={alertNum}/>
+    <OrderListTable items={orderDetail} timeZoneString = {headerTimeZone} itemNumber={itemNumber} statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter} refreshOption={this.refresh.bind(this)} lastUpdatedText = {updateStatusText} lastUpdated={updateStatusIntl} refreshList={this.refresh.bind(this)} intlMessg={this.props.intlMessages} alertNum={alertNum}/>
 
     <div className="gor-pageNum">
     <Dropdown  styleClass={'gor-Page-Drop'}  items={ordersByStatus} currentState={ordersByStatus[0]} optionDispatch={this.props.getPageSizeOrders} refreshList={this.refresh.bind(this)}/>

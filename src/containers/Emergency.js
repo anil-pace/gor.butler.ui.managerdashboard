@@ -17,18 +17,25 @@ class Emergency extends React.Component{
         <div>
           <div className='gor-emergency'>
             <div className='gor-emergency-heading'>
-              <span className='gor-error-white'></span><span>Systemwide emergency stop</span>
+              <span className='gor-error-white'></span><span><FormattedMessage id="emergency.heading" description='Text for emergency heading' 
+            defaultMessage="Systemwide emergency stop" /></span>
            </div>
               <div className='gor-emergency-body'>
-                <span>The butler system is now stopped by a {this.props.emergency_data} emergency.</span>
-                <div>System reset required before returning to operation</div>
+                <span><FormattedMessage id="emergency.type" description='Text for emergency type ' 
+            defaultMessage="The butler system is now stopped by a {type} emergency." values={{type:this.props.emergency_data||"--"}} /></span>
+                <div><FormattedMessage id="emergency.action" description='Text for emergency action' 
+            defaultMessage="System reset required before returning to operation" /></div>
                 <div className='gor-emergency-details'>
-                  <div>Stoppped:</div>
-                  <div>Triggered at:</div>
-                  <div>Operator:</div>                
+                  <div><FormattedMessage id="emergency.stop" description='Text for emergency stop' 
+            defaultMessage="Stoppped:" /></div>
+                  <div><FormattedMessage id="emergency.trigger" description='Text for emergency trigger' 
+            defaultMessage="Triggered at:" /></div>
+                  <div><FormattedMessage id="emergency.operator" description='Text for emergency operator' 
+            defaultMessage="Operator:" /></div>                
                 </div>
               </div> 
-                <p><button className='gor-emergency-close' onClick={this.removeThisModal.bind(this)}>Close</button></p>
+                <p><button className='gor-emergency-close' onClick={this.removeThisModal.bind(this)}><FormattedMessage id="emergency.button" description='Text for close button' 
+            defaultMessage="Close" /></button></p>
           </div>
         </div>
       );

@@ -58,7 +58,7 @@ export  function tabsData(state={},action){
       let orders_completed=0;
       if(action.data.header_data)
       {
-        orders_completed=Number(action.data.header_data.percentage_completed);
+        orders_completed=Number(action.data.header_data.percentage_completed).toFixed(2);
       }
       return Object.assign({}, state, {
         "orders_completed":orders_completed
