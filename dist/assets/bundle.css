@@ -2071,6 +2071,14 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   background: #ffffff;
 }
 
+.completed .public_fixedDataTableCell_cellContent {
+  text-transform: capitalize;
+}
+
+.Completed .public_fixedDataTableCell_cellContent {
+  text-transform: capitalize;
+}
+
 .auto .public_fixedDataTableCell_cellContent {
   text-transform: capitalize;
 }

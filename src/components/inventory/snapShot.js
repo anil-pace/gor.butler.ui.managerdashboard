@@ -30,7 +30,7 @@ class SnapShotDetails extends React.Component{
 		}
 		return (
 			<div className="gorSnapShot">
-				<h1>{dt}<FormattedMessage id='inventory.snaphot.header' defaultMessage=" stock snapshot" description="Snapshot header"/> </h1>
+				<h1>{dt} <FormattedMessage id='inventory.snaphot.header' defaultMessage=" stock snapshot" description="Snapshot header"/> </h1>
 				<div className="gorSnapShotCont">
 					<table width="100%">
 					<tbody>
