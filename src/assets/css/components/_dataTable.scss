@@ -646,6 +646,16 @@ background: #f99405;
   background: #ffffff;
 
 }
+.completed{
+  .public_fixedDataTableCell_cellContent{
+    text-transform: capitalize;
+  }
+}
+.Completed{
+  .public_fixedDataTableCell_cellContent{
+    text-transform: capitalize;
+  }
+}
 .auto{
   .public_fixedDataTableCell_cellContent{
     text-transform: capitalize;

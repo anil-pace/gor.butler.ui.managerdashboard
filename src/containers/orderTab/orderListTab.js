@@ -88,7 +88,7 @@
         alertStatesNum++;
       }      
       else {
-        orderData.status = nProps.context.intl.formatMessage(stringConfig[data[i].status].params);
+        orderData.status = nProps.context.intl.formatMessage(stringConfig[data[i].status]);
         orderData.statusClass = data[i].status;
         orderData.statusPriority = unBreachedStatus[data[i].status];
       }

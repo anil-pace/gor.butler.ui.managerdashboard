@@ -15,7 +15,7 @@ const messages = defineMessages({
         id: 'pps.dropdown.placeholder',
         description: 'mode change for pps',
         defaultMessage: 'Change PPS Mode',
-    },
+    }
 
 
 });

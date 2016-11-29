@@ -1,5 +1,8 @@
 import React  from 'react';
-import { FormattedMessage,FormattedPlural } from 'react-intl'; 
+import { defineMessages } from 'react-intl';
+
+
+
 
 //WS constants
 export const WS_SUCCESS="Sucessfully logged in";
@@ -64,7 +67,122 @@ export const USER_ROLE_MAP ={
 /*String config codes*/
 
 
-export var stringConfig = {
+export const  stringConfig= defineMessages({
+    on: {
+        id: 'stringConfig.on',
+        description: 'Text to display on',
+        defaultMessage: 'on'
+    },
+    off: {
+        id: 'stringConfig.off',
+        description: 'Text to show off',
+        defaultMessage: "off"
+    },
+    per_hour:{
+        id: 'stringConfig.per_hour',
+        description: 'Text to show per_hour',
+        defaultMessage: "per_hour"
+    },
+    pick:{
+        id: 'stringConfig.pick',
+        description: 'Text to show pick',
+        defaultMessage: "pick"
+    },
+    put:{
+        id: 'stringConfig.put',
+        description: 'Text to show put',
+        defaultMessage: "put"
+    },
+    audit:{
+        id: 'stringConfig.audit',
+        description: 'Text to show audit',
+        defaultMessage: "audit"
+    },
+    soft:{
+        id: 'stringConfig.soft',
+        description: 'Text to show soft',
+        defaultMessage: "soft"
+    },
+    hard:{
+        id: 'stringConfig.hard',
+        description: 'Text to show hard',
+        defaultMessage: "hard"
+    },
+    soft_manual:{
+        id: 'stringConfig.soft_manual',
+        description: 'Text to show soft_manual',
+        defaultMessage: "soft_manual"
+    },
+    pending:{
+        id: 'stringConfig.pending',
+        description: 'Text to show pending',
+        defaultMessage: "pending"
+    },
+    disconnected:{
+        id: 'stringConfig.disconnected',
+        description: 'Text to show disconnected',
+        defaultMessage: "Disconnected"
+    },
+    connected:{
+        id: 'stringConfig.connected',
+        description: 'Text to show connected',
+        defaultMessage: "Connected"
+    },
+    completed:{
+        id: 'stringConfig.completed',
+        description: 'Text to show completed',
+        defaultMessage: "Completed"
+    },
+    Completed:{
+        id: 'stringConfig.Completed',
+        description: 'Text to show Completed',
+        defaultMessage: "completed"
+    },
+    in_progress:{
+        id: 'stringConfig.in_progress',
+        description: 'Text to show In Progress',
+        defaultMessage: "In Progress"
+    },
+    breached:{
+        id: 'stringConfig.breached',
+        description: 'Text to show breached',
+        defaultMessage: "Breached"
+    },
+    fulfillable:{
+        id: 'stringConfig.fulfillable',
+        description: 'Text to show fulfillable',
+        defaultMessage: "In Progress"
+    },
+    abandoned:{
+        id: 'stringConfig.abandoned',
+        description: 'Text to show abandoned',
+        defaultMessage: "Abandoned"
+    },
+    manual:{
+        id: 'stringConfig.manual',
+        description: 'Text to show manual',
+        defaultMessage: "Manual"
+    },
+    auto:{
+        id: 'stringConfig.auto',
+        description: 'Text to show auto',
+        defaultMessage: "Auto"
+    },
+    not_fulfillable:{
+        id: 'stringConfig.notFulfillable',
+        description: 'Text to show auto',
+        defaultMessage: "Auto"
+    },
+    exception:{
+        id: 'stringConfig.exception',
+        description: 'Text to show exception',
+        defaultMessage: "Exception"
+    }
+
+
+
+});
+/*export var stringConfig = {
     "per_hour": {
         params:{id:"stringConfig.per_hour", defaultMessage: "per_hour"}
     },
@@ -134,4 +252,4 @@ export var stringConfig = {
     }
 
 }
-Object.freeze(stringConfig);
+Object.freeze(stringConfig);*/

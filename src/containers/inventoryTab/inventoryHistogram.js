@@ -3,6 +3,23 @@ import Histogram from '../../components/graphd3/histogram';
 import {setInventoryDate} from '../../actions/inventoryActions';
 import {INVENTORY_HISTORY_DAYS_COUNT,INVENTORY_HISTOGRAM_CONFIG} from '../../constants/frontEndConstants';
 import { connect } from 'react-redux'; 
+import { defineMessages } from 'react-intl';
+
+//Mesages for internationalization
+const messages = defineMessages({
+    invHistogramNoDataTxt: {
+        id: 'inventory.histogram.noDataText',
+        description: 'Text when there is no stock',
+        defaultMessage: 'No Stock Found',
+    },
+    invHistogramTodayTxt: {
+        id: 'inventory.histogram.today',
+        description: 'Text to show today',
+        defaultMessage: "Today's",
+    }
+
+
+});
 
 
 
@@ -70,8 +87,8 @@ class InventoryHistogram extends React.Component{
    var histogramData = _this._processData();//this.context.intl.formatMessage({id:"inventory.histogram.noDataText", defaultMessage: config.noDataText}
    var config = Object.assign({},INVENTORY_HISTOGRAM_CONFIG)
    config.noData = histogramData.length ? histogramData[histogramData.length-1].noData : false;
-   config.noDataText= _this.context.intl.formatMessage({id:"inventory.histogram.noDataText", defaultMessage: 'No Stock Found'});
-   config.today = _this.context.intl.formatMessage({id:"inventory.histogram.today", defaultMessage: "Today's"});
+   config.noDataText= _this.context.intl.formatMessage(messages.invHistogramNoDataTxt);
+   config.today = _this.context.intl.formatMessage(messages.invHistogramTodayTxt);
    config.breakMonth = _this.context.intl.formatDate(Date.now(), {month: 'short'}); 
    return (
      <div>
