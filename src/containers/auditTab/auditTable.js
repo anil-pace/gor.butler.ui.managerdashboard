@@ -297,7 +297,7 @@ class AuditTable extends React.Component {
       columnKey="status"
       header={
         <SortHeaderCell onSortChange={this._onSortChange}
-        sortDir={colSortDirs.status}>
+        sortDir={colSortDirs.statusPriority}>
         <FormattedMessage id="audit.table.STATUS" description="STATUS for audit" 
         defaultMessage ="STATUS"/>
         <div className="gorToolHeaderSubText">  </div>

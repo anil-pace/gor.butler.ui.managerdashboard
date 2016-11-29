@@ -87,6 +87,7 @@ function processAuditData(data, nProps ) {
     auditDetails.push(auditData);
     auditData = {};
   }
+  console.log(auditDetails)
   return auditDetails;
 }
 

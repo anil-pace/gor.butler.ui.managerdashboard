@@ -1878,5 +1878,15 @@
     "id": "pps.dropdown.placeholder",
     "description": "mode change for pps",
     "defaultMessage": "Change PPS Mode"
+  },
+  {
+    "id": "healthTab.status.on",
+    "description": "on status for healthtab",
+    "defaultMessage": "On"
+  },
+  {
+    "id": "healthTab.status.off",
+    "description": "off status for healthtab",
+    "defaultMessage": "Off"
   }
 ]

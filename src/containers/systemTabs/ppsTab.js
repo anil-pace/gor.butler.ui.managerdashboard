@@ -26,7 +26,6 @@ class PPS extends React.Component{
   var PPSData=[], detail = {}, ppsId, performance,totalUser = 0;
   var nProps = this;
   var data = nProps.props.PPSDetail.PPStypeDetail;
-  var ppsStatus = ["Off", "On"];
   let PPS, ON, OFF, PERFORMANCE;
   let pick  = stringConfig.pick;//nProps.context.intl.formatMessage({id:"ppsDetail.pick.status", defaultMessage: "Pick"});
   let put = stringConfig.put;//nProps.context.intl.formatMessage({id:"ppsDetail.put.status", defaultMessage: "Put"});
