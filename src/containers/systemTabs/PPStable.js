@@ -78,15 +78,18 @@ class PPStable extends React.Component {
       this._defaultSortIndexes.push(index);
     }
     var columnWidth= (nextProps.containerWidth/nextProps.itemNumber)
+    
     this.state = {
       sortedDataList: this._dataList,
       colSortDirs: {},
       columnWidths: {
-         id: nextProps.containerWidth*0.12,
-        status: nextProps.containerWidth*0.098,
-        operatingMode: nextProps.containerWidth*0.165,
-        performance: nextProps.containerWidth*0.122,
-        operatorAssigned: nextProps.containerWidth*0.4
+
+         id: nextProps.containerWidth*0.15,
+        status: nextProps.containerWidth*0.1,
+        operatingMode: nextProps.containerWidth*0.17,
+        performance: nextProps.containerWidth*0.15,
+        operatorAssigned: nextProps.containerWidth*0.6
+
       },
       headerChecked: false,
       isChecked:temp,
