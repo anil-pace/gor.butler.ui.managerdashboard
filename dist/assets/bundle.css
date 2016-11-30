@@ -1085,11 +1085,6 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
-.ddown .Dropdown-menu:last-child {
-  bottom: 100%;
-  top: 0;
-}
-
 .ddown .Dropdown-option {
   box-sizing: border-box;
   color: #666666;
@@ -1986,7 +1981,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 }
 
 .gor-exception .public_fixedDataTableCell_cellContent {
-  background: #EC1C24;
+  background: #F99405;
   border-radius: 15px;
   text-align: center;
   width: 70px;
@@ -3049,6 +3044,10 @@ progress::-moz-progress-bar {
 
 .gor-header-id .public_fixedDataTableCell_cellContent {
   padding-left: 0;
+}
+
+.gor-inline {
+  display: inline-block;
 }
 
 .gorSubTab.gorContainer {

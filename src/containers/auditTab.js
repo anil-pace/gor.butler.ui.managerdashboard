@@ -126,6 +126,7 @@ class AuditTab extends React.Component{
     auditDetails.push(auditData);
     auditData = {};
   }
+  
   return auditDetails;
  }
  handlePageClick(data){
