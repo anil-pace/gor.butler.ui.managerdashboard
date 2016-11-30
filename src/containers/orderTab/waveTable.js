@@ -4,6 +4,7 @@ import DropdownTable from '../../components/dropdown/dropdownTable'
 import Dimensions from 'react-dimensions'
 import { FormattedMessage } from 'react-intl';
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData,ProgressCell} from '../../components/commonFunctionsDataTable';
+import {GOR_STATUS,GOR_STATUS_PRIORITY} from '../../constants/frontEndConstants';
 
 class WavesTable extends React.Component {
   constructor(props) {
@@ -92,8 +93,8 @@ class WavesTable extends React.Component {
   }
   
   _onSortChange(columnKey, sortDir) {
-     if(columnKey === "status") {
-      columnKey = "statusPriority";
+     if(columnKey === GOR_STATUS) {
+      columnKey = GOR_STATUS_PRIORITY;
     }
     var sortIndexes = this._defaultSortIndexes.slice();
     this.setState({

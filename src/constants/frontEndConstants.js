@@ -43,6 +43,9 @@ export const RENDER_WIDGET = "RENDER_WIDGET";
 export const TAB_SELECTED = "TAB_SELECTED";
 export const PREV_TAB_SELECTED = "PREV_TAB_SELECTED";
 export const SUB_TAB_SELECTED = "SUB_TAB_SELECTED";
+export const GOR_ORDER_PICKED = "orders_picked";
+export const GOR_ITEMS_PUT = "items_put";
+export const GOR_ITEMS_AUDITED = "items_audited";
 
 /*FE constants for parsing*/
 export const PPS_PERFORMANCE = "PPS_PERFORMANCE";
@@ -312,6 +315,9 @@ export const GOR_ONLINE='gor-online';
 export const GOR_NORMAL_TAB='gor-normal-tab';
 export const GOR_PASS='pass';
 export const GOR_FAIL='fail';
+export const GOR_STATUS = "status";
+export const GOR_STATUS_PRIORITY = "statusPriority";
+
 //Icons
 export const PICK_ICON=' iPick';
 export const STOCK_ICON="iStock";

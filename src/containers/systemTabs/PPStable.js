@@ -9,6 +9,7 @@ import {changePPSmode} from '../../actions/ppsModeChangeAction'
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
 import {BASE_URL, PPS_MODE_CHANGE_URL,PROTOCOL,API_URL} from '../../constants/configConstants';
 import { defineMessages } from 'react-intl';
+import {GOR_STATUS,GOR_STATUS_PRIORITY} from '../../constants/frontEndConstants';
 
 const messages = defineMessages({
     ppsPlaceholder: {
@@ -170,8 +171,8 @@ class PPStable extends React.Component {
       columnKey = "id"
     }
 
-    if(columnKey === "status") {
-      columnKey = "statusPriority"
+    if(columnKey === GOR_STATUS) {
+      columnKey = GOR_STATUS_PRIORITY;
     }
     var sortIndexes = this._defaultSortIndexes.slice();
     this.setState({

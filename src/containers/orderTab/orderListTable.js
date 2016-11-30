@@ -4,6 +4,7 @@ import Dropdown from '../../components/dropdown/dropdown'
 import Dimensions from 'react-dimensions'
 import { FormattedMessage, FormattedDate, FormattedTime,FormattedRelative ,defineMessages} from 'react-intl';
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
+import {GOR_STATUS,GOR_STATUS_PRIORITY} from '../../constants/frontEndConstants';
 
 
 const messages = defineMessages({
@@ -103,8 +104,8 @@ class OrderListTable extends React.Component {
   
   
   _onSortChange(columnKey, sortDir) {
-     if(columnKey === "status") {
-      columnKey = "statusPriority";
+    if(columnKey === GOR_STATUS) {
+      columnKey = GOR_STATUS_PRIORITY;
     }
     var sortIndexes = this._defaultSortIndexes.slice();
     this.setState({
