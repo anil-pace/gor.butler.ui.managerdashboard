@@ -551,7 +551,7 @@ background-color: #FFFFFF;
 
 .gor-exception .public_fixedDataTableCell_cellContent{
 
-  background: #EC1C24;
+  background: #F99405;
   border-radius: 15px;
   text-align: center;
   width:70px;
@@ -1634,6 +1634,10 @@ progress::-moz-progress-bar {
   .public_fixedDataTableCell_cellContent{
     padding-left:0;
   }
+}
+
+.gor-inline {
+  display: inline-block;
 }
 
  

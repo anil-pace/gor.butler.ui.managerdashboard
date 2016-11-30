@@ -83,11 +83,13 @@ class PPStable extends React.Component {
       sortedDataList: this._dataList,
       colSortDirs: {},
       columnWidths: {
+
          id: nextProps.containerWidth*0.15,
         status: nextProps.containerWidth*0.1,
         operatingMode: nextProps.containerWidth*0.17,
         performance: nextProps.containerWidth*0.15,
         operatorAssigned: nextProps.containerWidth*0.6
+
       },
       headerChecked: false,
       isChecked:temp,
@@ -166,6 +168,10 @@ class PPStable extends React.Component {
   _onSortChange(columnKey, sortDir) {
     if(columnKey === undefined) {
       columnKey = "id"
+    }
+
+    if(columnKey === "status") {
+      columnKey = "statusPriority"
     }
     var sortIndexes = this._defaultSortIndexes.slice();
     this.setState({
@@ -315,7 +321,7 @@ class PPStable extends React.Component {
           columnKey="status"
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
-              sortDir={colSortDirs.status} >
+              sortDir={colSortDirs.statusPriority} >
               <div>
                  <FormattedMessage id="PPS.table.status" description="Status for PPS" 
               defaultMessage ="STATUS"/> 

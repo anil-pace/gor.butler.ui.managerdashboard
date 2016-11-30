@@ -5,7 +5,7 @@
  import { connect } from 'react-redux';
  import {getPageData, getStatusFilter, getTimeFilter,getPageSizeOrders,currentPageOrders,lastRefreshTime} from '../../actions/paginationAction';
  import {ORDERS_RETRIEVE,GOR_BREACHED,GOR_EXCEPTION,GET,APP_JSON} from '../../constants/frontEndConstants';
- import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,ORDER_PAGE, PICK_BEFORE_ORDER_URL, BREACHED_URL,UPDATE_TIME_HIGH,UPDATE_TIME_LOW,EXCEPTION_TRUE} from '../../constants/configConstants';
+ import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,ORDER_PAGE, PICK_BEFORE_ORDER_URL, BREACHED_URL,UPDATE_TIME_HIGH,UPDATE_TIME_LOW,EXCEPTION_TRUE,WAREHOUSE_STATUS} from '../../constants/configConstants';
  import OrderListTable from './orderListTable';
 
  import Dropdown from '../../components/dropdown/dropdown'
@@ -257,6 +257,7 @@ render(){
   return (
     <div>
     <div className="gor-Orderlist-table" >  
+
     <Spinner isLoading={this.props.orderListSpinner}/>
     <OrderListTable items={orderDetail} timeZoneString = {headerTimeZone} itemNumber={itemNumber} statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter} refreshOption={this.refresh.bind(this)} lastUpdatedText = {updateStatusText} lastUpdated={updateStatusIntl} refreshList={this.refresh.bind(this)} intlMessg={this.props.intlMessages} alertNum={alertNum}/>
 

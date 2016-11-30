@@ -1,5 +1,10 @@
 [
   {
+    "id": "table.filter.placeholder",
+    "description": "placeholder for table filter",
+    "defaultMessage": "Search by keywords"
+  },
+  {
     "id": "orderlist.table.allDrop",
     "description": "allOrders dropdown option for orderlist",
     "defaultMessage": "All orders"
