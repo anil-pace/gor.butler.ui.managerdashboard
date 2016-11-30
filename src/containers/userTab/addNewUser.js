@@ -3,9 +3,10 @@ import ReactDOM  from 'react-dom';
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
 import {validateID, validateName, validatePassword, resetForm} from '../../actions/validationActions';
 import {userRequest} from '../../actions/userActions';
-import {ADD_USER,CHECK_ID,ERROR,SUCCESS,INFO,GET_ROLES,BUTLER_SUPERVISOR,BUTLER_UI} from '../../constants/appConstants';
+import {ADD_USER,CHECK_ID,ERROR,SUCCESS,INFO,GET_ROLES,GET,APP_JSON,POST} from '../../constants/frontEndConstants';
+import {BUTLER_SUPERVISOR,BUTLER_UI} from  '../../constants/backEndConstants';
 import {ROLE_URL,CHECK_USER,HEADER_URL} from '../../constants/configConstants';
-import {INVALID_ID,INVALID_FORMAT,TYPE_SUCCESS} from '../../constants/messageConstants';
+import {INVALID_ID,INVALID_FORMAT,TYPE_SUCCESS,MG_PWD,OP_PWD} from '../../constants/messageConstants';
 import { connect } from 'react-redux';
 import FieldError from '../../components/fielderror/fielderror';
 import RoleGroup from './roleGroup';
@@ -20,14 +21,21 @@ class AddUser extends React.Component{
     this.props.resetForm();
     this.props.removeModal();
   }
+  componentWillReceiveProps(nextProps){
+    if(!nextProps.auth_token)
+    {
+      this.removeThisModal();
+    }
+  }
+
   componentDidMount(){
         let userData={
                 'url':ROLE_URL,
-                'method':'GET',
+                'method':GET,
                 'cause':GET_ROLES,
-                'contentType':'application/json',
-                'accept':'application/json',
-                'token':sessionStorage.getItem('auth_token')
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
+                'token':this.props.auth_token
             }
         this.props.userRequest(userData);
   }
@@ -39,10 +47,10 @@ class AddUser extends React.Component{
     {
        let userData={
                 'url':CHECK_USER+userid,
-                'method':'GET',
+                'method':GET,
                 'cause':CHECK_ID,
-                'contentType':'application/json',
-                'accept':'application/json',
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
                 'token':this.props.auth_token
       }
       this.props.userRequest(userData);
@@ -100,10 +108,10 @@ class AddUser extends React.Component{
         let userData={
                 'url':HEADER_URL,
                 'formdata':formdata,
-                'method':'POST',
+                'method':POST,
                 'cause':ADD_USER,
-                'contentType':'application/json',
-                'accept':'application/json',
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
                 'token':this.props.auth_token
             }
         this.props.userRequest(userData);
@@ -161,9 +169,7 @@ class AddUser extends React.Component{
             <div className='gor-usr-hdlg'><FormattedMessage id="users.add.password.heading" description='Heading for create password' 
             defaultMessage='Create password'/></div>
             <div className='gor-sub-head'>
-            {this.props.roleInfo?(this.props.roleSet===this.props.roleInfo.BUTLER_SUPERVISOR?<FormattedMessage id="users.add.password.subheading.manager" description='Subheading for create password' 
-            defaultMessage='A password of at least 8 alphanumeric characters will be required for logging into the Management Interface and Operator Interface'/>:<FormattedMessage id="users.add.password.subheading.operator" description='Subheading for create password operator' 
-            defaultMessage='A password of 6 digits will be required for logging into the Operator Interface.'/>):''}
+            {this.props.roleInfo?(this.props.roleSet===this.props.roleInfo.BUTLER_SUPERVISOR?MG_PWD:OP_PWD):''}
             </div>
 
               <div className='gor-usr-hdsm'><FormattedMessage id="users.add.password.field1" description='Text for password' 

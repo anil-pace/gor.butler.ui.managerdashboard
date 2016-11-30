@@ -6,7 +6,9 @@ import {setAuditType,resetAuditType} from '../../actions/auditActions';
 import {userRequest} from '../../actions/userActions';
 import { connect } from 'react-redux';
 import {INVALID_SKUID,INVALID_LOCID,TYPE_SUCCESS} from '../../constants/messageConstants';
-import { ERROR,SUCCESS,SKU,LOCATION,CREATE_AUDIT } from '../../constants/appConstants';
+
+import { ERROR,SUCCESS,SKU,LOCATION,CREATE_AUDIT,APP_JSON,POST } from '../../constants/frontEndConstants';
+
 import { AUDIT_URL } from '../../constants/configConstants';
 import FieldError from '../../components/fielderror/fielderror';
 import { locationStatus, skuStatus } from '../../utilities/fieldCheck';
@@ -24,6 +26,12 @@ class CreateAudit extends React.Component{
   }
   _removeThisModal() {
     this.props.removeModal();
+  }
+  componentWillReceiveProps(nextProps){
+    if(!nextProps.auth_token)
+    {
+      this._removeThisModal();
+    }
   }
   _checkSku(skuId){
     let skuInfo;
@@ -79,10 +87,10 @@ class CreateAudit extends React.Component{
     let userData={
                 'url':AUDIT_URL,
                 'formdata':formdata,
-                'method':'POST',
+                'method':POST,
                 'cause':CREATE_AUDIT,
-                'contentType':'application/json',
-                'accept':'application/json',
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
                 'token':this.props.auth_token
     }
     this.props.userRequest(userData);

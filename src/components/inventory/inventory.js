@@ -9,7 +9,7 @@ import InventoryStacked from '../../containers/inventoryTab/inventoryStacked';
 import SnapShot from './snapShot';
 import InventoryHistogram from '../../containers/inventoryTab/inventoryHistogram';
 import ItemCategoryTable from './ItemCategoryTable';
-import {LEGEND_ROUND,INV_LINE_LEGEND_IPICKED_COLOR,INV_LINE_LEGEND_DATA,INV_LINE_LEGEND_CONFIG,INV_LINE_LEGEND_IPUT_COLOR,INV_HIST_LEGEND_DATA,INV_HIST_LEGEND_COLOR,INV_HIST_LEGEND_CONFIG} from '../../constants/appConstants'
+import {LEGEND_ROUND,INV_LINE_LEGEND_IPICKED_COLOR,INV_LINE_LEGEND_DATA,INV_LINE_LEGEND_CONFIG,INV_LINE_LEGEND_IPUT_COLOR,INV_HIST_LEGEND_DATA,INV_HIST_LEGEND_COLOR,INV_HIST_LEGEND_CONFIG} from '../../constants/frontEndConstants'
 import PickPutLineGraph from './PickPutLineGraph';
 import { FormattedMessage ,FormattedDate} from 'react-intl';
 
@@ -52,7 +52,7 @@ import { FormattedMessage ,FormattedDate} from 'react-intl';
 						<Legend hasDataChanged = {this.props.hasDataChanged} legendData = {histogramLegend}/>
 						</div>
 						<div className="histogram">
-						<InventoryHistogram  hasDataChanged = {this.props.hasDataChanged} histogramData={this.props.inventoryData}/>
+						<InventoryHistogram  recreatedData={this.props.recreatedData} hasDataChanged = {this.props.hasDataChanged} histogramData={this.props.inventoryData}/>
 						</div>
 						<div className="histLbl">
 						<span>{this.props.linechartLabel}</span>
@@ -61,7 +61,7 @@ import { FormattedMessage ,FormattedDate} from 'react-intl';
 						<Legend hasDataChanged = {this.props.hasDataChanged} legendData = {lineChartLagend} legendType={LEGEND_ROUND}/>
 						</div>
 						<div className="lineGraph">
-						<PickPutLineGraph hasDataChanged = {this.props.hasDataChanged} inventoryData={this.props.inventoryData}/>
+						<PickPutLineGraph recreatedData={this.props.recreatedData} hasDataChanged = {this.props.hasDataChanged} inventoryData={this.props.inventoryData}/>
 						</div>
 						
 						</div>
@@ -82,14 +82,15 @@ import { FormattedMessage ,FormattedDate} from 'react-intl';
 };
 Inventory.propTypes={
 	data:React.PropTypes.array,
-	histogramLabel:React.PropTypes.string,
-	linechartLabel:React.PropTypes.string,
+	histogramLabel:React.PropTypes.object,
+	linechartLabel:React.PropTypes.object,
 	snapshotData:React.PropTypes.array,
 	inventoryData: React.PropTypes.array,
 	inventoryDataPrevious:React.PropTypes.array,
 	isPrevDateSelected:React.PropTypes.bool,
 	currentDate:React.PropTypes.number,
-	hasDataChanged : React.PropTypes.number
+	hasDataChanged : React.PropTypes.number,
+	recreatedData: React.PropTypes.object
 }
 export default Inventory;
 

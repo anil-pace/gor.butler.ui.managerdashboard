@@ -110,7 +110,24 @@ class UserDataTable extends React.Component {
     });
   }
   handleEdit(columnKey,rowIndex) {
-    let uid=this.state.sortedDataList.newData[rowIndex].uid,uname=this.state.sortedDataList.newData[rowIndex].userName,fname=this.state.sortedDataList.newData[rowIndex].first,lname=this.state.sortedDataList.newData[rowIndex].last,roleId=this.state.sortedDataList.newData[rowIndex].roleId;
+    let uid, uname, fname, lname, roleId;
+    if(this.state.sortedDataList.newData === undefined) {
+      sortedIndex = this.state.sortedDataList._indexMap[rowIndex];
+      uid = this.state.sortedDataList._data.newData[sortedIndex].uid;
+      uname = this.state.sortedDataList._data.newData[sortedIndex].userName;
+      fname = this.state.sortedDataList._data.newData[sortedIndex].first;
+      lname = this.state.sortedDataList._data.newData[sortedIndex].last;
+      roleId = this.state.sortedDataList._data.newData[sortedIndex].roleId;
+    }
+
+    else {
+      uid=this.state.sortedDataList.newData[rowIndex].uid;
+      uname=this.state.sortedDataList.newData[rowIndex].userName;
+      fname=this.state.sortedDataList.newData[rowIndex].first;
+      lname=this.state.sortedDataList.newData[rowIndex].last;
+      roleId=this.state.sortedDataList.newData[rowIndex].roleId;
+    }
+
     modal.add(EditUser, {
       title: '',
       size: 'large', // large, medium or small,
@@ -126,7 +143,17 @@ class UserDataTable extends React.Component {
    
   }
   handleDel(columnKey,rowIndex) {
-    let id=this.state.sortedDataList.newData[rowIndex].uid,name=this.state.sortedDataList.newData[rowIndex].id;
+    let id, name, temp,sortedIndex;
+    if(this.state.sortedDataList.newData === undefined) {
+      sortedIndex = this.state.sortedDataList._indexMap[rowIndex];
+      id = this.state.sortedDataList._data.newData[sortedIndex].uid;
+      name = this.state.sortedDataList._data.newData[sortedIndex].id;
+    }
+
+    else {
+      id=this.state.sortedDataList.newData[rowIndex].uid;
+      name=this.state.sortedDataList.newData[rowIndex].id;
+    }
     modal.add(DeleteUser, {
       title: '',
       size: 'large', // large, medium or small,
@@ -136,25 +163,21 @@ class UserDataTable extends React.Component {
       name:name    });
    
   }
- //  _showModal(){
- // //    this.myModal.style.display = "block";
- //       this.refs.modal.style.display = "block";   
- //  }
- //  _hideModal(){
- // //    this.myModal.style.display = "none";    
- //       this.refs.modal.style.display = "none";   
  
- //  }
 
   render() {
     var {sortedDataList, colSortDirs,columnWidths} = this.state;
-    var columnWidth= (this.props.containerWidth/this.props.itemNumber)
-    var heightRes = 560 ,rowsCount = sortedDataList.getSize();
+    var columnWidth= (this.props.containerWidth/this.props.itemNumber);
+    var heightRes = 560 ,rowsCount = sortedDataList.getSize(), noData ;
     if(this.props.containerHeight !== 0) {
       heightRes = this.props.containerHeight;
     }
     var selEdit = this.handleEdit.bind(this);
     var selDel= this.handleDel.bind(this); 
+    noData = <div/>;
+    if(rowsCount === 0) {
+     noData =  <div> NO DATA </div>
+    }
     return (
       <div>
         <div className="gorToolBar">
@@ -181,6 +204,7 @@ class UserDataTable extends React.Component {
         </div>
         </div>
        </div>
+
       <Table
         rowHeight={66}
         rowsCount={sortedDataList.getSize()}
@@ -196,11 +220,10 @@ class UserDataTable extends React.Component {
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.id}>
               <div className="gorToolHeaderEl">
-              <div className="gorToolHeaderEl">
                 {sortedDataList.getSize()} 
                 <FormattedMessage id="user.table.users" description="Users Column" 
               defaultMessage =" USERS"/> 
-              </div>
+             
               <div className="gorToolHeaderSubText">
                  <FormattedMessage id="user.table.totaluser" description='total user' 
                 defaultMessage='Total:{rowsCount}' 
@@ -217,7 +240,7 @@ class UserDataTable extends React.Component {
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.status}>
-              <div>
+              <div className="gorToolHeaderEl"> 
               <FormattedMessage id="user.table.status" description="Users Status" 
               defaultMessage ="STATUS"/> 
               </div>
@@ -231,8 +254,10 @@ class UserDataTable extends React.Component {
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.role}> 
+               <div className="gorToolHeaderEl"> 
                <FormattedMessage id="user.table.role" description="User Role" 
               defaultMessage ="ROLE"/>
+              </div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
@@ -243,8 +268,10 @@ class UserDataTable extends React.Component {
           header={
             <SortHeaderCell  onSortChange={this._onSortChange}
               sortDir={colSortDirs.workMode}>
+               <div className="gorToolHeaderEl"> 
                <FormattedMessage id="user.table.workMode" description="User Workmode" 
               defaultMessage ="WORKMODE"/>
+              </div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
@@ -255,8 +282,10 @@ class UserDataTable extends React.Component {
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.location}>
+               <div className="gorToolHeaderEl"> 
                <FormattedMessage id="user.table.location" description="User location" 
               defaultMessage ="LOCATION"/>
+              </div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
@@ -267,8 +296,10 @@ class UserDataTable extends React.Component {
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.logInTime}>
+               <div className="gorToolHeaderEl"> 
                <FormattedMessage id="user.table.logInTime" description="User log in time" 
               defaultMessage ="LOG IN TIME"/>
+              </div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList}  />}
@@ -278,15 +309,17 @@ class UserDataTable extends React.Component {
           columnKey="actions"
           header={
             <SortHeaderCell >
-               
+                <div className="gorToolHeaderEl"> 
                <FormattedMessage id="user.table.action" description="action Column" 
               defaultMessage ="ACTIONS"/> 
+              </div>
             </SortHeaderCell>
           }
           cell={<ActionCell data={sortedDataList} selEdit={selEdit} selDel={selDel} mid={this.props.mid}/>}
           width={columnWidth}
         />
       </Table>
+      {noData}
       </div>
     );
   }

@@ -4,7 +4,7 @@
  */
 import React  from 'react';
 import { FormattedMessage } from 'react-intl';
-import {CATEGORY_COLOR_MAP } from '../../constants/appConstants';
+import {CATEGORY_COLOR_MAP } from '../../constants/frontEndConstants';
 
 
 

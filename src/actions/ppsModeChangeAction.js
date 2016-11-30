@@ -1,4 +1,4 @@
-import {  AJAX_CALL} from '../constants/appConstants'
+import {  AJAX_CALL} from '../constants/frontEndConstants'
 
 export function changePPSmode(params){
 	return {

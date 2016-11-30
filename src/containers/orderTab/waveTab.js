@@ -2,7 +2,9 @@ import React  from 'react';
 import WavesTable from './waveTable';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import {GOR_PENDING,GOR_PROGRESS} from '../../constants/appConstants';
+import Spinner from '../../components/spinner/Spinner';
+import {GOR_PENDING,GOR_PROGRESS} from '../../constants/frontEndConstants';
+import {stringConfig} from '../../constants/backEndConstants';
 
 function processWaveData(data, nProps) {
   var waveData = [], waveDetail = {};
@@ -14,55 +16,54 @@ function processWaveData(data, nProps) {
   var intlStatus = {"In Progress":progress, "Completed":completed, "Breached":breached, "Pending":pending };
   var status = {"In Progress":"progress", "Completed":"completed", "Breached":"breached", "Pending":"pending" };
   var priStatus = {"In Progress": 2, "Completed": 4, "Breached":1 ,"Pending":3};
-  var timeOffset = nProps.timeOffset;
-
   if(data) {
-   for (var i =data.length - 1; i >= 0; i--) {
-    waveId = data[i].wave_id;
-    WAVE = nProps.context.intl.formatMessage({id:"waveDetail.id.prefix", defaultMessage: "WAVE-{waveId}"},{"waveId":waveId});
-    waveDetail = {};
-    waveDetail.id = WAVE ;
-    waveDetail.statusClass = status[data[i].status];
-    waveDetail.statusPriority = priStatus[data[i].status];
-    waveDetail.status = intlStatus[data[i].status];
+     for (var i =data.length - 1; i >= 0; i--) {
+      waveId = data[i].wave_id;
+      WAVE = nProps.context.intl.formatMessage({id:"waveDetail.id.prefix", defaultMessage: "WAVE-{waveId}"},{"waveId":waveId});
+      waveDetail = {};
+      waveDetail.id = WAVE ;
+      waveDetail.statusClass = status[data[i].status];
+      waveDetail.statusPriority = priStatus[data[i].status];
+      waveDetail.status = nProps.context.intl.formatMessage(stringConfig[data[i].status]);
+      
+      if(data[i].start_time === "") {
+        waveDetail.startTime = "--";
+      }
+      else {
+        waveDetail.startTime = data[i].start_time;
+      }
 
-    if(data[i].start_time === "") {
-      waveDetail.startTime = "--";
-    }
-    else {
-      waveDetail.startTime =  nProps.context.intl.formatRelative(data[i].start_time, {units:'day'})+
-      ', '+ nProps.context.intl.formatTime(data[i].start_time,{hour: 'numeric',minute: 'numeric'});
-    }
-    if(data[i].cut_off_time === "") {
-      waveDetail.cutOffTime = "--";
-    }
-    else {
-      waveDetail.cutOffTime = nProps.context.intl.formatRelative(data[i].cut_off_time, {units:'day'})+
-      ', '+ nProps.context.intl.formatTime(data[i].cut_off_time,{hour: 'numeric',minute: 'numeric'})
-    }
-
-    waveDetail.ordersToFulfill = data[i].orders_to_fulfill;
-    waveDetail.totalOrders = data[i].total_orders;
-    if(waveDetail.totalOrders) {
-      waveDetail.progress = parseInt(((waveDetail.totalOrders-waveDetail.ordersToFulfill)/waveDetail.totalOrders)*100);
-    }
-    else {
-      waveDetail.progress = 0;
-    }
-    waveData.push(waveDetail);
+      if(data[i].cut_off_time === "") {
+        waveDetail.cutOffTime = "--";
+      }
+      else {
+        waveDetail.cutOffTime = data[i].cut_off_time;
+      }
+      waveDetail.cutOffTime = data[i].cut_off_time;
+      waveDetail.ordersToFulfill = data[i].orders_to_fulfill;
+      waveDetail.totalOrders = data[i].total_orders;
+      if(waveDetail.totalOrders) {
+        waveDetail.progress = parseInt(((waveDetail.totalOrders-waveDetail.ordersToFulfill)/waveDetail.totalOrders)*100);
+      }
+      else {
+        waveDetail.progress = 0;
+      }
+      waveData.push(waveDetail);
+     }
   }
+  return waveData;
 }
-return waveData;
-}
+
+
 
 
 class WaveTab extends React.Component{
-	constructor(props) 
-	{
+  constructor(props) 
+  {
    super(props);
- }	
+ }  
  render(){
-  var itemNumber = 7, waveData = this.props.waveDetail.waveData, waveState = {"pendingWave":"--", "progressWave":"--", "orderRemaining":"--", "completedWaves":"--", "totalOrders":"--"};	
+  var itemNumber = 7, waveData = this.props.waveDetail.waveData, waveState = {"pendingWave":"--", "progressWave":"--", "orderRemaining":"--", "completedWaves":"--", "totalOrders":"--"}; 
   var totalOrders = 0, orderToFulfill = 0, completedWaves = 0, pendingWaves = 0, progressWave = 0 ;
 
   if(this.props.waveDetail.waveData !== undefined) {
@@ -87,22 +88,29 @@ class WaveTab extends React.Component{
         progressWave++;
       }
     }
-    waveState = {"pendingWave":pendingWaves, "progressWave":progressWave, "orderRemaining":orderToFulfill, "completedWaves":completedWaves, "totalOrders":totalOrders};	
+    waveState = {"pendingWave":pendingWaves, "progressWave":progressWave, "orderRemaining":orderToFulfill, "completedWaves":completedWaves, "totalOrders":totalOrders}; 
   }
 }
 return (
 <div className="gorTesting">
+<Spinner isLoading={this.props.wavesSpinner} />
 <WavesTable items={waveData} itemNumber={itemNumber} waveState={waveState} intlMessg={this.props.intlMessages}/>
 </div>
 );
 }
 }
 
+
 function mapStateToProps(state, ownProps){
   return {
+
+    wavesSpinner: state.spinner.wavesSpinner || false,
+    filterOptions: state.filterOptions || {},
     waveDetail: state.waveInfo || {},
     intlMessages: state.intl.messages,
-    timeOffset: state.authLogin.timeOffset
+    timeOffset: state.authLogin.timeOffset,
+    waveDetail: state.waveInfo || {},
+    intlMessages: state.intl.messages
   };
 };
 

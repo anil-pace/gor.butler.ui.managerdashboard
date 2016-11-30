@@ -1,4 +1,4 @@
-import {GET_OVERVIEW,GET_SYSTEM,GET_INVENTORY,GET_AUDIT,GET_USERS,GET_ORDERS,GET_STATUS} from '../constants/appConstants.js';
+import {GET_OVERVIEW,GET_SYSTEM,GET_INVENTORY,GET_AUDIT,GET_USERS,GET_ORDERS,GET_STATUS} from '../constants/frontEndConstants.js';
 
 export  function tabsData(state={},action){
 	switch (action.type) {
@@ -17,7 +17,7 @@ export  function tabsData(state={},action){
       if(action.data.header_data)
       {      
         system_emergency=action.data.header_data.emergency;
-        system_data=action.data.header_data.emergency_data;
+        system_data=action.data.header_data.emergency_level;
       }
       return Object.assign({}, state, {
         "system_emergency":system_emergency,
@@ -58,7 +58,7 @@ export  function tabsData(state={},action){
       let orders_completed=0;
       if(action.data.header_data)
       {
-        orders_completed=Number(action.data.header_data.percentage_completed);
+        orders_completed=Number(action.data.header_data.percentage_completed).toFixed(2);
       }
       return Object.assign({}, state, {
         "orders_completed":orders_completed

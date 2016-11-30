@@ -25,13 +25,6 @@ export const wsOverviewData = {
                 }
               },
               {
-                "resource_id": "pps",
-                "details": {
-                  "data": "aggregate_v2",
-                  "callback": []
-                }
-              },
-              {
                 "resource_id": "chargers",
                 "details": {
                   "data": "aggregate_v2",

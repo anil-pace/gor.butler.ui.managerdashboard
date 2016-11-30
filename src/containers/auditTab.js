@@ -8,88 +8,15 @@ import {getAuditData,setAuditRefresh} from '../actions/auditActions';
 import AuditTable from './auditTab/auditTable';
 import ReactPaginate from 'react-paginate';
 import {getPageData} from '../actions/paginationAction';
-import {AUDIT_RETRIEVE} from '../constants/appConstants';
+import {AUDIT_RETRIEVE,GET,APP_JSON} from '../constants/frontEndConstants';
 import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,SEARCH_AUDIT_URL,GIVEN_PAGE,GIVEN_PAGE_SIZE} from '../constants/configConstants';
-import { FormattedDate } from 'react-intl';
 
 
-function processAuditData(data, nProps ) {
-  let created  = nProps.context.intl.formatMessage({id:"auditdetail.created.status", defaultMessage: "Created"});
-  let pending  = nProps.context.intl.formatMessage({id:"auditdetail.pending.status", defaultMessage: "Pending"});
-  let progress  = nProps.context.intl.formatMessage({id:"auditdetail.progress.status", defaultMessage: "In Progress"});
-  let completed  = nProps.context.intl.formatMessage({id:"auditdetail.completed.status", defaultMessage: "Completed"});
-  let sku  = nProps.context.intl.formatMessage({id:"auditdetail.sku.prefix", defaultMessage: "SKU"});
-  let location  = nProps.context.intl.formatMessage({id:"auditdetail.location.prefix", defaultMessage: "Location"});
-  let timeOffset: state.authLogin.timeOffset;
-  
-  var auditStatus = {"audit_created":created, "audit_pending":pending, "audit_waiting":pending, "audit_conflicting":pending, "audit_started":progress, "audit_tasked":progress, "audit_aborted":completed, "audit_completed":completed};
-  var statusClass = {"Pending": "pending", "Completed":"completed", "In Progress":"progress", "Created":"pending"}
-  var auditType = {"sku":sku, "location":location};
-  var auditDetails = [], auditData = {};
-  for (var i = data.length - 1; i >= 0; i--) {
-    if(data[i].audit_id) {
-      auditData.id = data[i].audit_id;
-    }
+import {setAuditSpinner} from '../actions/auditActions';
 
-    if(data[i].audit_param_type) {
-      auditData.auditType = data[i].audit_param_type;
-      if(data[i].audit_param_value) {
-        auditData.auditValue = data[i].audit_param_value;
-        auditData.auditTypeValue = auditType[data[i].audit_param_type] + "-" + data[i].audit_param_value;
-      }
-    }
 
-    if(data[i].audit_status) {
-      auditData.status = auditStatus[data[i].audit_status]; 
-      auditData.statusClass = statusClass[auditData.status];
-      if(data[i].audit_status === "audit_created") {
-        auditData.startAudit = true;
-      }
 
-      else {
-        auditData.startAudit = false;
-      }
-    }
 
-    if(data[i].start_request_time) {
-      auditData.startTime = <FormattedDate value = {data[i].start_request_time}
-                                timeZone={timeOffset}
-                                 year='numeric'
-                                  month='short'
-                                  day='2-digit'
-                                  hour="2-digit"
-                                  minute="2-digit"
-                                />
-    }
-    else {
-      auditData.startTime = "--";
-    }
-
-    if(data[i].expected_quantity !== 0 && completed_quantity !== null) {
-      auditData.progress = (data[i].completed_quantity)/(data[i].expected_quantity) * 100;
-    }
-    else {
-      auditData.progress = 0; 
-    }
-
-    if(data[i].completion_time) {
-      auditData.completedTime = <FormattedDate value = {data[i].completion_time}
-                                timeZone={timeOffset}
-                                 year='numeric'
-                                  month='short'
-                                  day='2-digit'
-                                  hour="2-digit"
-                                  minute="2-digit"
-                                />;
-    }
-    else {
-      auditData.completedTime = "--";
-    }
-    auditDetails.push(auditData);
-    auditData = {};
-  }
-  return auditDetails;
-}
 
 
 class AuditTab extends React.Component{
@@ -112,6 +39,96 @@ class AuditTab extends React.Component{
   data.selected = 0;
   this.handlePageClick(data);
  }
+ _processAuditData(data,nProps){
+  var nProps = this,
+  data = nProps.props.auditDetail;
+  let created  = nProps.context.intl.formatMessage({id:"auditdetail.created.status", defaultMessage: "Created"});
+  let pending  = nProps.context.intl.formatMessage({id:"auditdetail.pending.status", defaultMessage: "Pending"});
+  let progress  = nProps.context.intl.formatMessage({id:"auditdetail.progress.status", defaultMessage: "In Progress"});
+  let completed  = nProps.context.intl.formatMessage({id:"auditdetail.completed.status", defaultMessage: "Completed"});
+  let sku  = nProps.context.intl.formatMessage({id:"auditdetail.sku.prefix", defaultMessage: "SKU"});
+  let location  = nProps.context.intl.formatMessage({id:"auditdetail.location.prefix", defaultMessage: "Location"});
+
+
+  var timeOffset= nProps.props.timeOffset || "";
+
+  
+  var priorityStatus = {"audit_created":2, "audit_pending":3, "audit_waiting":3, "audit_conflicting":3, "audit_started":1, "audit_tasked":1, "audit_aborted":4, "audit_completed":4};
+  var auditStatus = {"audit_created":created, "audit_pending":pending, "audit_waiting":pending, "audit_conflicting":pending, "audit_started":progress, "audit_tasked":progress, "audit_aborted":completed, "audit_completed":completed, "audit_pending_approval":completed};
+  var statusClass = {"Pending": "pending", "Completed":"completed", "In Progress":"progress", "Created":"pending"}
+  var auditType = {"sku":sku, "location":location};
+  var auditDetails = [], auditData = {};
+  for (var i = data.length - 1; i >= 0; i--) {
+    if(data[i].audit_id) {
+      auditData.id = data[i].audit_id;
+    }
+
+    if(data[i].audit_param_type) {
+      auditData.auditType = data[i].audit_param_type;
+      if(data[i].audit_param_value) {
+        auditData.auditValue = data[i].audit_param_value;
+        auditData.auditTypeValue = auditType[data[i].audit_param_type] + "-" + data[i].audit_param_value;
+      }
+    }
+
+    if(data[i].audit_status) {
+      auditData.statusPriority = priorityStatus[data[i].audit_status];
+      if(auditData.statusPriority === undefined) {
+        auditData.statusPriority = 1;
+      }
+      auditData.status = auditStatus[data[i].audit_status]; 
+      auditData.statusClass = statusClass[auditData.status];
+      if(data[i].audit_status === "audit_created") {
+        auditData.startAudit = true;
+      }
+
+      else {
+        auditData.startAudit = false;
+      }
+    }
+
+    if(data[i].start_request_time) {
+      auditData.startTime = nProps.context.intl.formatDate(data[i].start_request_time,
+                                {timeZone:timeOffset,
+                                  year:'numeric',
+                                  month:'short',
+                                  day:'2-digit',
+                                  hour:"2-digit",
+                                  minute:"2-digit"
+                                })
+    }
+    else {
+      auditData.startTime = "--";
+    }
+
+    if(data[i].expected_quantity !== 0 && data[i].completed_quantity !== null) {
+      auditData.progress = (data[i].completed_quantity)/(data[i].expected_quantity);
+    }
+
+
+    else {
+      auditData.progress = 0; //needs to be done
+    }
+
+    if(data[i].completion_time) {
+      auditData.completedTime = nProps.context.intl.formatDate(data[i].completion_time,
+                                {timeZone:timeOffset,
+                                  year:'numeric',
+                                  month:'short',
+                                  day:'2-digit',
+                                  hour:"2-digit",
+                                  minute:"2-digit"
+                                })
+    }
+    else {
+      auditData.completedTime = "--";
+    }
+    auditDetails.push(auditData);
+    auditData = {};
+  }
+  
+  return auditDetails;
+ }
  handlePageClick(data){
     var url;
     var makeDate = new Date();
@@ -129,28 +146,41 @@ class AuditTab extends React.Component{
    
     let paginationData={
               'url':url,
-              'method':'GET',
+              'method':GET,
               'cause': AUDIT_RETRIEVE,
               'token': this.props.auth_token,
-              'contentType':'application/json'
+              'contentType':APP_JSON
           } 
+          this.props.setAuditSpinner(true);
          this.props.getPageData(paginationData);
  }
 
 render(){
-  var renderTab = <div/>;
+  var renderTab = <div/>,
+  timeOffset = this.props.timeOffset || "",
+  headerTimeZone = (this.context.intl.formatDate(Date.now(),
+                                {timeZone:timeOffset,
+                                  year:'numeric',
+                                  timeZoneName:'long'
+                                }));
   
-    var auditData = processAuditData(this.props.auditDetail, this);
+  /*Extracting Time zone string for the specified time zone*/
+  headerTimeZone = headerTimeZone.substr(5, headerTimeZone.length);
+  
+    var auditData = this._processAuditData();
     renderTab = <AuditTable items={auditData}
-    intlMessg={this.props.intlMessages} />
+    intlMessg={this.props.intlMessages} timeZoneString = {headerTimeZone}/>
   
   
   return (
-  
    <div>
+   
    <div>
-   <div className="gor-Auditlist-table" >
+
+   <div className="gor-Auditlist-table">
+   <Spinner isLoading={this.props.auditSpinner} />
    {renderTab}
+
    </div>
    </div>
         <div id={"react-paginate"}>
@@ -173,17 +203,19 @@ render(){
 
 function mapStateToProps(state, ownProps){
   return {
+    auditSpinner: state.spinner.auditSpinner || false,
     auditDetail: state.recieveAuditDetail.auditDetail || [],
     totalPage: state.recieveAuditDetail.totalPage || 0,
     auditRefresh:state.recieveAuditDetail.auditRefresh || null,  
     intlMessages: state.intl.messages,
-    timeOffset: state.authLogin.timeOffset,
-    auth_token: state.authLogin.auth_token
+    auth_token: state.authLogin.auth_token,
+    timeOffset: state.authLogin.timeOffset
   };
 }
 
 var mapDispatchToProps = function(dispatch){
   return {
+    setAuditSpinner: function(data){dispatch(setAuditSpinner(data))},
     getAuditData: function(data){ dispatch(getAuditData(data)); },
     getPageData: function(data){ dispatch(getPageData(data)); },
     setAuditRefresh: function(){dispatch(setAuditRefresh());}

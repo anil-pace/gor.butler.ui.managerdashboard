@@ -7,6 +7,7 @@ import ReactDOM  from 'react-dom';
 import ButlerBotTable from './butlerbotTable';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+import Spinner from '../../components/spinner/Spinner';
 
 
 function processButlersData(data, nProps) {
@@ -110,6 +111,7 @@ class ButlerBot extends React.Component{
 			<div>
 				<div>
 					<div className="gorTesting">
+          <Spinner isLoading={this.props.butlerSpinner}/>
 						<ButlerBotTable items={butlerData} itemNumber={itemNumber} parameters={taskDetail} intlMessg={this.props.intlMessages}/>
 					</div>
 				</div>
@@ -120,6 +122,7 @@ class ButlerBot extends React.Component{
 
 function mapStateToProps(state, ownProps){
   return {
+    butlerSpinner: state.spinner.butlerSpinner || false,
     butlerDetail: state.butlerDetail || [],
     intlMessages: state.intl.messages
   };

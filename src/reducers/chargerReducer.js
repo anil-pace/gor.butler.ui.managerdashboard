@@ -1,4 +1,4 @@
-import {CHARGERS_DATA} from '../constants/appConstants';
+import {CHARGERS_DATA} from '../constants/frontEndConstants';
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -11,8 +11,8 @@ export  function chargerInfo(state={},action){
               var res = action.data;
             if(res.aggregate_data !== undefined){
               chargersKey = {
-               "Connected" : action.data.aggregate_data.active_chargers,
-               "Disconnected": action.data.aggregate_data.inactive_chargers
+               "Connected" : Number(action.data.aggregate_data.active_chargers),
+               "Disconnected": Number(action.data.aggregate_data.inactive_chargers)
             }
              
            }

@@ -1,4 +1,4 @@
-import {RECIEVE_HEADER} from '../constants/appConstants.js';
+import {RECIEVE_HEADER} from '../constants/frontEndConstants.js';
 
 export  function headerData(state={},action){
 	switch (action.type) {

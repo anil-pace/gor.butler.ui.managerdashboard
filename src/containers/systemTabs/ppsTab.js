@@ -9,16 +9,27 @@ import PPStable from './PPStable';
 import { connect } from 'react-redux';
 import {changePPSmode} from '../../actions/ppsModeChangeAction'
 import { FormattedMessage } from 'react-intl';
+import Spinner from '../../components/spinner/Spinner';
+import {stringConfig} from '../../constants/backEndConstants'
 
 
-function _processPPSData(data, nProps) {
+
+
+class PPS extends React.Component{
+	constructor(props) 
+	{
+    	super(props);
+    }	
+
+  _processPPSData() {
   //TODO: codes need to be replaced after checking with backend
   var PPSData=[], detail = {}, ppsId, performance,totalUser = 0;
-  var ppsStatus = ["Off", "On"];
+  var nProps = this;
+  var data = nProps.props.PPSDetail.PPStypeDetail;
   let PPS, ON, OFF, PERFORMANCE;
-  let pick  = nProps.context.intl.formatMessage({id:"ppsDetail.pick.status", defaultMessage: "Pick"});
-  let put = nProps.context.intl.formatMessage({id:"ppsDetail.put.status", defaultMessage: "Put"});
-  let audit = nProps.context.intl.formatMessage({id:"ppsDetail.audit.status", defaultMessage: "Audit"});
+  let pick  = nProps.context.intl.formatMessage(stringConfig.pick);
+  let put = nProps.context.intl.formatMessage(stringConfig.put);
+  let audit = nProps.context.intl.formatMessage(stringConfig.audit);
   var currentTask = {"pick":pick, "put":put, "audit":audit};
   var priStatus = {"on": 1, "off": 2};
 
@@ -28,8 +39,8 @@ function _processPPSData(data, nProps) {
     ppsId = data[i].pps_id;
     performance = data[i].performance;
     PPS =  nProps.context.intl.formatMessage({id:"ppsDetail.name.prefix", description:"prefix for pps id in ppsDetail", defaultMessage:"PPS-{ppsId}"},{"ppsId":ppsId});
-    ON = nProps.context.intl.formatMessage({id:"ppsDetail.on.status", defaultMessage: "On"});
-    OFF = nProps.context.intl.formatMessage({id:"ppsDetail.off.status", defaultMessage: "Off"});
+    ON = nProps.context.intl.formatMessage(stringConfig.on);
+    OFF = nProps.context.intl.formatMessage(stringConfig.off);
     PERFORMANCE =  nProps.context.intl.formatMessage({id:"ppsDetail.performance.prefix", description:"prefix for pps id in ppsDetail", defaultMessage:"{performance} orders/hr"},{"performance":performance?performance:"0"});
     detail.id =  PPS;
     detail.ppsId = ppsId;
@@ -43,6 +54,7 @@ function _processPPSData(data, nProps) {
     }
     detail.statusClass = data[i].pps_status;
     detail.operatingMode = currentTask[data[i].current_task];
+    detail.operatingModeClass = data[i].current_task;
     detail.performance = PERFORMANCE;///  orders /items
     if(data[i].operators_assigned === null) {
       detail.operatorAssigned = "--";
@@ -66,18 +78,12 @@ function _processPPSData(data, nProps) {
   return PPSData;
 
 }
-
-class PPS extends React.Component{
-	constructor(props) 
-	{
-    	super(props);
-    }	
 	render(){	
 
 	var operationMode = {"Pick":0, "Put":0, "Audit":0,"NotSet":0};
     var data , operatorNum = 0, itemNumber = 5;
     if(this.props.PPSDetail.PPStypeDetail !== undefined) {
-    	data = _processPPSData(this.props.PPSDetail.PPStypeDetail, this);
+    	data = this._processPPSData();
       for (var i = data.length - 1; i >= 0; i--) {
         if(data[i].operatingMode !== null) {
            operationMode[data[i].operatingMode] = operationMode[data[i].operatingMode] +1;
@@ -99,6 +105,7 @@ class PPS extends React.Component{
 			<div>
 				<div>
 					<div className="gorTesting">
+            <Spinner isLoading={this.props.ppsSpinner} />
 						<PPStable items={data} itemNumber={itemNumber} operatorNum={operatorNum} operationMode={operationMode} modeChange={this.props.changePPSmode} intlMessg={this.props.intlMessages}/>
 					</div>
 				</div>
@@ -111,6 +118,7 @@ class PPS extends React.Component{
 
 function mapStateToProps(state, ownProps){
   return {
+    ppsSpinner: state.spinner.ppsSpinner || false,
     PPSDetail: state.PPSDetail || [],
     intlMessages: state.intl.messages
   };
@@ -127,3 +135,4 @@ PPS.contextTypes = {
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(PPS) ;
+

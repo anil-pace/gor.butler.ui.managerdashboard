@@ -4,6 +4,7 @@ import Dropdown from '../components/dropdown/dropdown.js';
 import ChartHorizontal from '../components/graphd3/graph_horizontal';
 import { connect } from 'react-redux';
 import {renderPerformanceWidget} from '../actions/performanceWidgetActions';
+import {GOR_ORDER_PICKED, GOR_ITEMS_PUT, GOR_ITEMS_AUDITED} from '../constants/frontEndConstants';
 import { FormattedMessage } from 'react-intl';
 
 
@@ -132,15 +133,15 @@ class PerformanceWidget extends React.Component{
 		
 	var itemRender;	
 	if(this.props.widget === "PICK_PPS_PERFORMANCE"){
-		itemRender = <ChartHorizontal data={this.props.ppsPerformance} type="items_picked" performanceParam="orders/hr"/>
+		itemRender = <ChartHorizontal data={this.props.ppsPerformance} type={GOR_ORDER_PICKED} performanceParam="orders/hr"/>
 	}
 
 	else if(this.props.widget === "PUT_PPS_PERFORMANCE"){
-		itemRender = <ChartHorizontal data={this.props.ppsPerformance} type="items_put" performanceParam="items/hr"/>
+		itemRender = <ChartHorizontal data={this.props.ppsPerformance} type={GOR_ITEMS_PUT} performanceParam="items/hr"/>
 	}
 
 	else if(this.props.widget === "AUDIT_PPS_PERFORMANCE"){
-		itemRender = <ChartHorizontal data={this.props.ppsPerformance} type="items_audited" performanceParam="items/hr"/>
+		itemRender = <ChartHorizontal data={this.props.ppsPerformance} type={GOR_ITEMS_AUDITED} performanceParam="items/hr"/>
 	}
 	else {
 		itemRender = <Health ppsData={pps_data} butlerData={butler_data} chargingData={charging_data}/>

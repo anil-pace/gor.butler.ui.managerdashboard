@@ -37,12 +37,21 @@ class AuditTable extends React.Component {
    */
    _handleOnClickDropdown(rowIndex) {
     if (rowIndex.constructor === Number && rowIndex >= 0){    
-      let domArray = document.querySelectorAll('.fixedDataTableRowLayout_rowWrapper');
+      var domArray = document.querySelectorAll('.fixedDataTableRowLayout_rowWrapper');
+      // since the last drop down menu does not have the space to show the menu below it
+      // hence it has to be put on top
+      var lastDownMenu = document
+                          .querySelector('.fixedDataTableRowLayout_rowWrapper:last-child .Dropdown-menu');
+      if (lastDownMenu){
+        lastDownMenu.style.bottom = '100%';
+        lastDownMenu.style.top = 'initial';
+      }
+
       let DOMObj = domArray[rowIndex+1];
       DOMObj.style.zIndex = "30";
       for(var i = domArray.length-1; i>=0;i--){
         if (domArray[i] !== DOMObj){
-          domArray[i].style.zIndex = "0";
+          domArray[i].style.zIndex = "2";
         }
       }
     }
@@ -98,14 +107,19 @@ class AuditTable extends React.Component {
 
 
     _onSortChange(columnKey, sortDir) {
+      if(columnKey === "status") {
+      columnKey = "statusPriority";
+    }
       var sortIndexes = this._defaultSortIndexes.slice();
       var tableData={
         sortedDataList: new DataListWrapper(sortData(columnKey, sortDir,sortIndexes,this._dataList), this._dataList),
         colSortDirs: {[columnKey]: sortDir,},
         columnWidths: this.props.tableData.columnWidths,
       };
+
       this.props.currentTableState(tableData)
     }
+
 
     createAudit() { 
       modal.add(CreateAudit, {
@@ -139,14 +153,14 @@ class AuditTable extends React.Component {
 
     manageAuditTask(rowIndex,option ){
       if(option.value === "duplicateTask"){
-        var auditType, auditTypeValue, auditComplete,auditTypeParam;
+        var auditType, auditTypeValue, auditComplete,auditTypeParam,sortedIndex;
 
 
         if(this.props.tableData.sortedDataList._data !== undefined) {
           sortedIndex = this.props.tableData.sortedDataList._indexMap[rowIndex];
-          auditType = this.props.tableData.sortedDataList.newData[sortedIndex].auditType;
-          auditTypeParam = this.props.tableData.sortedDataList.newData[sortedIndex].auditValue;
-          auditComplete = this.props.tableData.sortedDataList.newData[sortedIndex].auditTypeValue;
+          auditType = this.props.tableData.sortedDataList._data.newData[sortedIndex].auditType;
+          auditTypeParam = this.props.tableData.sortedDataList._data.newData[sortedIndex].auditValue;
+          auditComplete = this.props.tableData.sortedDataList._data.newData[sortedIndex].auditTypeValue;
         }
         else {
           auditType = this.props.items[rowIndex].auditType;
@@ -243,11 +257,9 @@ class AuditTable extends React.Component {
         <SortHeaderCell onSortChange={this._onSortChange}
         sortDir={colSortDirs.id}>
         <div className="gorToolHeaderEl">
-        <div className="gorToolHeaderEl"> 
         <FormattedMessage id="auditTable.stationID" description='total audit ID for auditTable' 
         defaultMessage='{rowsCount} AUDIT ID' 
         values={{rowsCount:rowsCount?rowsCount:'0'}}/>
-        </div>
         <div className="gorToolHeaderSubText">
         <FormattedMessage id="auditTable.SubAuditID" description='total Sub auditID for auditTable' 
         defaultMessage='Total:{rowsCount}' 
@@ -264,13 +276,16 @@ class AuditTable extends React.Component {
 
       <Column
 
+
       columnKey="auditTypeValue"
       header={
         <SortHeaderCell onSortChange={this._onSortChange}
         sortDir={colSortDirs.auditTypeValue}>
+         <div className="gorToolHeaderEl"> 
         <FormattedMessage id="audit.table.type" description="audit type for audit table" 
         defaultMessage ="AUDIT TYPE"/>
         <div className="gorToolHeaderSubText">  </div>
+        </div>
         </SortHeaderCell>
       }
       cell={<TextCell data={sortedDataList} ></TextCell>}
@@ -282,12 +297,14 @@ class AuditTable extends React.Component {
       columnKey="status"
       header={
         <SortHeaderCell onSortChange={this._onSortChange}
-        sortDir={colSortDirs.status}>
+        sortDir={colSortDirs.statusPriority}>
+         <div className="gorToolHeaderEl"> 
+
         <FormattedMessage id="audit.table.STATUS" description="STATUS for audit" 
         defaultMessage ="STATUS"/>
         <div className="gorToolHeaderSubText">  </div>
         <div>
-
+        </div>
         </div>
         </SortHeaderCell>
       }
@@ -302,10 +319,12 @@ class AuditTable extends React.Component {
       header={
         <SortHeaderCell onSortChange={this._onSortChange}
         sortDir={colSortDirs.mode}>
+         <div className="gorToolHeaderEl"> 
         <FormattedMessage id="audit.table.startTime" description="startTime for audit" 
         defaultMessage ="START TIME"/>
         <div className="gorToolHeaderSubText"> 
 
+        </div>
         </div>
         </SortHeaderCell>
       }
@@ -319,10 +338,12 @@ class AuditTable extends React.Component {
       header={
         <SortHeaderCell onSortChange={this._onSortChange}
         sortDir={colSortDirs.progress} >
+         <div className="gorToolHeaderEl"> 
         <FormattedMessage id="audit.table.progress" description="progress for audit task" 
         defaultMessage ="PROGRESS(%)"/>
         <div className="gorToolHeaderSubText">   
         </div> 
+        </div>
         </SortHeaderCell>
       }
       cell={<ProgressCell data={sortedDataList}  />}
@@ -336,10 +357,12 @@ class AuditTable extends React.Component {
       header={
         <SortHeaderCell onSortChange={this._onSortChange}
         sortDir={colSortDirs.completedTime}>
+         <div className="gorToolHeaderEl"> 
         <FormattedMessage id="audit.table.timeCompleted" description="timeCompleted for audit" 
         defaultMessage ="TIME COMPLETED"/>
         <div className="gorToolHeaderSubText"> 
-
+        {this.props.timeZoneString}
+        </div>
         </div>
         </SortHeaderCell>
       }
@@ -353,10 +376,11 @@ class AuditTable extends React.Component {
       columnKey="actions"
       header={
         <SortHeaderCell >
-
+         <div className="gorToolHeaderEl"> 
         <FormattedMessage id="audit.table.action" description="action Column" 
         defaultMessage ="ACTIONS"/> 
         <div className="gorToolHeaderSubText">  </div>
+        </div>
         </SortHeaderCell>
       }
       cell={<ActionCellAudit data={sortedDataList} handleAudit={this.startAudit.bind(this)} tasks={tasks} 
@@ -366,6 +390,7 @@ class AuditTable extends React.Component {
       width={columnWidths.actions}
 
       />
+
       </Table>
       </div>
 
@@ -373,19 +398,21 @@ class AuditTable extends React.Component {
     return (
     <div> {tableRenderer} </div>
     );
-  }}
-
-  function mapStateToProps(state, ownProps){
-    return {
-      tableData: state.currentTableState.currentTableState || [],
-    };
   }
+}
 
+function mapStateToProps(state, ownProps){
 
-  var mapDispatchToProps = function(dispatch){
-    return {
-      currentTableState: function(data){ dispatch(currentTableState(data)); }
-    }
+  return {
+    tableData: state.currentTableState.currentTableState || [],
   };
+}
 
-  export default connect(mapStateToProps,mapDispatchToProps)(Dimensions()(AuditTable));
+
+var mapDispatchToProps = function(dispatch){
+  return {
+    currentTableState: function(data){ dispatch(currentTableState(data)); }
+  }
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(Dimensions()(AuditTable));

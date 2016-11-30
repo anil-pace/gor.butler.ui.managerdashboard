@@ -14,14 +14,15 @@ class DropdownTable extends Component {
   _onSelect (option) {
     this.setState({selected: option})
     this.props.changeMode(option);
+  
   }
 
   render () {
     const defaultOption = this.state.selected
     return (
-    <div className={this.props.styleClass}>
-    <Ddown options={this.props.items} onChange={this._onSelect} value={defaultOption} placeholder="Select an option" />
-    </div>
+      <div className={this.props.styleClass}>
+        <Ddown options={this.props.items} onChange={this._onSelect} value={defaultOption} placeholder="Select an option" />
+      </div>
     )
   }
 }

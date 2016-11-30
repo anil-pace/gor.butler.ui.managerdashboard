@@ -1,4 +1,7 @@
-import {WS_INIT,BUTLERS_DATA,PPS_DATA,PUT_DATA,AUDIT_DATA,INVENTORY_DATA_TODAY,INVENTORY_DATA_HISTORY,ORDERS_DATA,CHARGERS_DATA,THROUGHPUT_DATA,HISTOGRAM_DATA,CHARGERS_DETAIL,BUTLERS_DETAIL,PPS_DETAIL,PPS_PERFORMANCE, USER_DETAILS,PARSE_PPS} from '../constants/appConstants'
+
+import {BUTLERS_DATA,PPS_DATA,PUT_DATA,AUDIT_DATA,INVENTORY_DATA_TODAY,INVENTORY_DATA_HISTORY,ORDERS_DATA,CHARGERS_DATA,THROUGHPUT_DATA,HISTOGRAM_DATA,CHARGERS_DETAIL,BUTLERS_DETAIL,PPS_PERFORMANCE, USER_DETAILS} from '../constants/frontEndConstants'
+import {PPS_DETAIL,PARSE_PPS} from '../constants/backEndConstants'
+
 //import {getFetchData} from 'headerAction'
 
 export function receivePpsData(data){
@@ -50,11 +53,6 @@ export function receiveThroughputData(data){
 		data
 	}
 
-}
-export function setInitData(){
-	return {
-		type: WS_INIT
-	}
 }
 
 export function recieveHistogramData(data){

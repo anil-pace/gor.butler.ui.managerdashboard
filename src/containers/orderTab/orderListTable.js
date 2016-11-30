@@ -2,8 +2,18 @@ import React from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
 import Dropdown from '../../components/dropdown/dropdown'
 import Dimensions from 'react-dimensions'
-import { FormattedMessage, FormattedDate, FormattedTime,FormattedRelative } from 'react-intl';
+import { FormattedMessage, FormattedDate, FormattedTime,FormattedRelative ,defineMessages} from 'react-intl';
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
+
+
+const messages = defineMessages({
+    filterPlaceholder: {
+        id: 'table.filter.placeholder',
+        description: 'placeholder for table filter',
+        defaultMessage: 'Search by keywords',
+    }
+});
+
 
 class OrderListTable extends React.Component {
   constructor(props) {
@@ -109,7 +119,7 @@ class OrderListTable extends React.Component {
   render() {
     
     var {sortedDataList, colSortDirs,columnWidths} = this.state;
-    var totalOrder = sortedDataList.getSize();
+    var totalOrder = sortedDataList.getSize(), headerAlert = <div/>;
     let allDrop = <FormattedMessage id="orderlist.table.allDrop" description="allOrders dropdown option for orderlist" defaultMessage ="All orders"/> 
     let breachedDrop = <FormattedMessage id="orderlist.table.breachedDrop" description="breached dropdown option for orderlist" defaultMessage ="Breached orders"/> 
     let pendingDrop = <FormattedMessage id="pendingDrop.table.allDrop" description="pending dropdown option for orderlist" defaultMessage ="Pending orders"/> 
@@ -139,6 +149,11 @@ class OrderListTable extends React.Component {
     { value: 'twelveHourOrders', label: twelveHrDrop },
     { value: 'oneDayOrders', label: oneDayDrop }
     ];
+
+    if(this.props.alertNum !== 0) {
+
+     headerAlert =  <div className="gorToolHeaderEl alertState"> <div className="table-subtab-alert-icon"/> <div className="gor-inline">{this.props.alertNum} Alerts </div> </div>
+    }
     
     return (
       <div className="gorTableMainContainer">
@@ -157,7 +172,7 @@ class OrderListTable extends React.Component {
               defaultMessage ="Refresh Data"/>
             </button>
             </div>
-            <div className="gor-button-sub-status"> {this.props.lastUpdated} </div>
+            <div className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
           </div>
         <div className="filterWrapper"> 
         <div className="gorToolBarDropDown">
@@ -218,10 +233,9 @@ class OrderListTable extends React.Component {
               defaultMessage ="STATUS"/> 
               </div>
               <div>
-              <div className="statuslogoWrap">
-              <div className=" gorToolHeaderEl"/>
-              </div>
-              <div className="gorToolHeaderEl alertState"> </div>
+                <div className="statuslogoWrap">
+                  {headerAlert}
+                </div>
               </div>
             </SortHeaderCell>
           }
@@ -235,9 +249,11 @@ class OrderListTable extends React.Component {
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.pickBy}>
+              <div className="gorToolHeaderEl">
               <FormattedMessage id="orderlist.table.pickBy" description="pick by for orderlist" 
               defaultMessage ="PICK BY"/>
               <div className="gorToolHeaderSubText"> </div>
+              </div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
@@ -250,9 +266,13 @@ class OrderListTable extends React.Component {
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.recievedTime}>
+              <div className="gorToolHeaderEl">
               <FormattedMessage id="orderlist.table.operatingMode" description="recievedTime for Orders" 
-              defaultMessage ="RECEIVED TIME"/>
-              <div className="gorToolHeaderSubText"> </div>
+              defaultMessage ="RECIEVED TIME"/>
+              <div className="gorToolHeaderSubText"> 
+                {this.props.timeZoneString}
+              </div>
+              </div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
@@ -265,9 +285,13 @@ class OrderListTable extends React.Component {
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.completedTime}>
+               <div className="gorToolHeaderEl">
               <FormattedMessage id="orderlist.table.completedTime" description="completedTime for orderlist" 
               defaultMessage ="COMPLETED"/>
-              <div className="gorToolHeaderSubText"> </div>
+              <div className="gorToolHeaderSubText">
+                {this.props.timeZoneString}
+               </div>
+                </div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
@@ -280,9 +304,11 @@ class OrderListTable extends React.Component {
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.orderLine}>
+              <div className="gorToolHeaderEl">
               <FormattedMessage id="orderlist.table.orderLine" description="orderLine for orderlist" 
               defaultMessage ="ORDER LINE"/>
               <div className="gorToolHeaderSubText"> </div>
+              </div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}

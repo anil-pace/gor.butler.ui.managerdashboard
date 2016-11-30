@@ -4,7 +4,9 @@ import { connect } from 'react-redux' ;
 import {userRequest} from '../../actions/userActions';
 import { FormattedMessage,FormattedPlural } from 'react-intl';        
 import {INVALID_SKUID,INVALID_LOCID,TYPE_SUCCESS} from '../../constants/messageConstants';
-import { ERROR,SUCCESS,SKU,LOCATION,CREATE_AUDIT } from '../../constants/appConstants';
+
+import { ERROR,SUCCESS,SKU,LOCATION,CREATE_AUDIT,APP_JSON,POST } from '../../constants/frontEndConstants';
+
 import { AUDIT_URL } from '../../constants/configConstants';
 
 class DuplicateAudit extends React.Component{
@@ -14,7 +16,12 @@ class DuplicateAudit extends React.Component{
   }
   _removeThisModal() {
       this.props.removeModal();
-      this.props.refreshData();
+  }
+  componentWillReceiveProps(nextProps){
+    if(!nextProps.auth_token)
+    {
+      this._removeThisModal();
+    }
   }
   _userDup() {
     let formdata={
@@ -24,10 +31,10 @@ class DuplicateAudit extends React.Component{
     let userData={
                 'url':AUDIT_URL,
                 'formdata':formdata,
-                'method':'POST',
+                'method':POST,
                 'cause':CREATE_AUDIT,
-                'contentType':'application/json',
-                'accept':'application/json',
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
                 'token':this.props.auth_token
     }
     this.props.userRequest(userData);

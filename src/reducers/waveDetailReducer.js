@@ -1,4 +1,4 @@
-import {ORDERS_DATA} from '../constants/appConstants';
+import {ORDERS_DATA} from '../constants/frontEndConstants';
 import React  from 'react';
 import { FormattedMessage } from 'react-intl';
 

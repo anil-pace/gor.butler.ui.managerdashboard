@@ -1,5 +1,10 @@
 [
   {
+    "id": "table.filter.placeholder",
+    "description": "placeholder for table filter",
+    "defaultMessage": "Search by keywords"
+  },
+  {
     "id": "orderlist.table.allDrop",
     "description": "allOrders dropdown option for orderlist",
     "defaultMessage": "All orders"
@@ -87,7 +92,7 @@
   {
     "id": "orderlist.table.operatingMode",
     "description": "recievedTime for Orders",
-    "defaultMessage": "RECEIVED TIME"
+    "defaultMessage": "RECIEVED TIME"
   },
   {
     "id": "orderlist.table.completedTime",

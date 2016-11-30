@@ -1,0 +1,37 @@
+[
+  {
+    "id": "emergency.heading",
+    "description": "Text for emergency heading",
+    "defaultMessage": "Systemwide emergency stop"
+  },
+  {
+    "id": "emergency.type",
+    "description": "Text for emergency type",
+    "defaultMessage": "The butler system is now stopped by a {type} emergency."
+  },
+  {
+    "id": "emergency.action",
+    "description": "Text for emergency action",
+    "defaultMessage": "System reset required before returning to operation"
+  },
+  {
+    "id": "emergency.stop",
+    "description": "Text for emergency stop",
+    "defaultMessage": "Stoppped:"
+  },
+  {
+    "id": "emergency.trigger",
+    "description": "Text for emergency trigger",
+    "defaultMessage": "Triggered at:"
+  },
+  {
+    "id": "emergency.operator",
+    "description": "Text for emergency operator",
+    "defaultMessage": "Operator:"
+  },
+  {
+    "id": "emergency.button",
+    "description": "Text for close button",
+    "defaultMessage": "Close"
+  }
+]

@@ -1,4 +1,4 @@
-import {TABLE_STATE} from '../constants/appConstants.js';
+import {TABLE_STATE} from '../constants/frontEndConstants.js';
 
 export  function currentTableState(state={},action){
 	switch (action.type) {

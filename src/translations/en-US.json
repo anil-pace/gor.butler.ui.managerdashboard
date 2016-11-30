@@ -112,7 +112,7 @@
   {
     "id": "login.lang.japanese",
     "description": "Japanese option in the language drop down",
-    "defaultMessage": "Japanese"
+    "defaultMessage": "日本語"
   },
   {
     "id": "login.butler.language",
@@ -372,7 +372,7 @@
   {
     "id": "notify.error.connection",
     "description": "Text for connection refused",
-    "defaultMessage": "Connection refused"
+    "defaultMessage": "Network Failure"
   },
   {
     "id": "inventory.histogram.noDataText",
@@ -1873,5 +1873,25 @@
     "id": "notify.delete.audit.success",
     "description": "Text for successfull audit deletion",
     "defaultMessage": "Audit task {audit_id} has been deleted"
-  }
+  },
+  {
+    "id": "pps.dropdown.placeholder",
+    "description": "mode change for pps",
+    "defaultMessage": "Change PPS Mode"
+  },
+  {
+    "id": "healthTab.status.on",
+    "description": "on status for healthtab",
+    "defaultMessage": "On"
+  },
+  {
+    "id": "healthTab.status.off",
+    "description": "off status for healthtab",
+    "defaultMessage": "Off"
+  },
+  {
+        "id": "table.filter.placeholder",
+        "description": "placeholder for table filter",
+        "defaultMessage": "Search by keywords"
+    }
 ]

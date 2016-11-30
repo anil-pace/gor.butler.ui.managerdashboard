@@ -4,8 +4,12 @@ import Tab from '../components/tabs/tab';
 import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
 import {tabSelected,subTabSelected} from '../actions/tabSelectAction';
+import {modal} from 'react-redux-modal';
+import Emergency from '../containers/Emergency';
 import {setInventorySpinner} from '../actions/inventoryActions';
-import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP,INVENTORY,AUDIT,FULFILLING_ORDERS} from '../constants/appConstants';
+import {setAuditSpinner} from '../actions/auditActions';
+import {setButlerSpinner} from '../actions/spinnerAction';
+import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP,INVENTORY,AUDIT,FULFILLING_ORDERS,GOR_OFFLINE,GOR_ONLINE,GOR_NORMAL_TAB} from '../constants/frontEndConstants';
 import { FormattedMessage,FormattedNumber } from 'react-intl';
 
 class Tabs extends React.Component{
@@ -25,12 +29,22 @@ class Tabs extends React.Component{
          * only
          */
         switch(selTab){
+
+          case SYSTEM:
+          this.props.setButlerSpinner(true);
+          break;
+
           case INVENTORY:
           this.props.setInventorySpinner(true);
           break;
+          
           default:
           this.props.setInventorySpinner(false);
+          this.props.setButlerSpinner(false);
+          
         }
+
+       
         
         
         this.props.tabSelected(TAB_ROUTE_MAP[selTab]);
@@ -39,7 +53,22 @@ class Tabs extends React.Component{
         sessionStorage.setItem('selTab', TAB_ROUTE_MAP[selTab]);
         sessionStorage.setItem('subTab', '');
     }
-
+  _emergencyModal(system_data) {
+    let emergency_data=system_data;
+    modal.add(Emergency, {
+      title: '',
+      size: 'large', // large, medium or small,
+      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: true,
+      emergency_data: emergency_data
+    });
+  }
+  componentWillReceiveProps(nextProps){
+    if(nextProps.system_emergency != this.props.system_emergency)
+    {
+      this._emergencyModal(nextProps.system_data);
+    }
+  }
   _parseStatus()
   {
     let overview,system,order,ordersvalue,users,usersvalue,inventoryvalue,inventory,audit,overviewStatus,systemStatus,ordersStatus,usersStatus,auditStatus,inventoryStatus,offline,systemClass,ordersClass,auditClass,items={};
@@ -72,7 +101,7 @@ class Tabs extends React.Component{
      usersStatus=offline;
      inventoryStatus=offline; 
      auditStatus=offline;
-     systemClass='gorOffline';
+     systemClass=GOR_OFFLINE;
     }
     else
     {
@@ -89,7 +118,7 @@ class Tabs extends React.Component{
       {
         systemStatus = <FormattedMessage id="systemStatus.tab.online" description="system Status online" 
               defaultMessage ="Online"/>;  
-        systemClass='gorOnline';
+        systemClass=GOR_ONLINE;
       }
       else
       {
@@ -102,7 +131,7 @@ class Tabs extends React.Component{
       ordersvalue = <FormattedNumber value={this.props.orders_completed}/>
       ordersStatus = <FormattedMessage id="ordersStatus.tab.heading" description="orders Status " 
               defaultMessage ="{count}% fulfilled" values={{count:ordersvalue}}/>;  
-      ordersClass='gorOnline';
+      ordersClass=GOR_ONLINE;
       usersvalue = <FormattedNumber value={this.props.users_online}/>
       usersStatus = <FormattedMessage id="usersStatus.tab.heading" description="users Status " 
               defaultMessage ="{count} users online" values={{count:usersvalue}}/>;  
@@ -113,11 +142,11 @@ class Tabs extends React.Component{
               defaultMessage ="{count} in progress" values={{count:this.props.audit_count?this.props.audit_count:'None'}}/>;          
       if(this.props.audit_count)
       {
-        auditClass='gorOnline';
+        auditClass=GOR_ONLINE;
       }
       else
       {
-        auditClass='gorOffline';
+        auditClass=GOR_OFFLINE;
       }
     }
 
@@ -128,32 +157,31 @@ class Tabs extends React.Component{
 
   let items=this._parseStatus();
                       
-
 		return (
-		<div className="gorTabs gorMainBlock">
+		<div className="gor-tabs gor-main-block">
 		<Link to="/overview" onClick = {this.handleTabClick.bind(this,OVERVIEW)}>
-			<Tab items={{ tab: items.overview, Status: items.overviewStatus, currentState:'' }} changeClass={(this.props.tab.toUpperCase() === OVERVIEW ? 'sel' :'gor-normal-tab')} subIcons={false}/>
+			<Tab items={{ tab: items.overview, Status: items.overviewStatus, currentState:'' }} changeClass={(this.props.tab.toUpperCase() === OVERVIEW ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
 		</Link>
 
 		<Link to="/system" onClick = {this.handleTabClick.bind(this,SYSTEM)}>
-			<Tab items={{ tab: items.system, Status: items.systemStatus, currentState:items.systemClass }} changeClass={(!this.props.system_emergency?(this.props.tab.toUpperCase() === SYSTEM ? 'sel' :'gor-normal-tab'):'fail')} subIcons={true}/>
+			<Tab items={{ tab: items.system, Status: items.systemStatus, currentState:items.systemClass }} changeClass={(!this.props.system_emergency?(this.props.tab.toUpperCase() === SYSTEM ? 'sel' :GOR_NORMAL_TAB):'fail')} subIcons={true}/>
 		</Link>
 
 		<Link to="/orders" onClick = {this.handleTabClick.bind(this,ORDERS)}>
-			<Tab items={{ tab: items.order, Status: items.ordersStatus, currentState:items.ordersClass }} changeClass={(this.props.tab.toUpperCase() === ORDERS ? 'sel' :'gor-normal-tab')} subIcons={false}/>
+			<Tab items={{ tab: items.order, Status: items.ordersStatus, currentState:items.ordersClass }} changeClass={(this.props.tab.toUpperCase() === ORDERS ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
 		</Link>
 
 
     <Link to="/audit" onClick = {this.handleTabClick.bind(this,AUDIT)}>
-      <Tab items={{ tab: items.audit, Status: items.auditStatus, currentState:items.auditClass }} changeClass={(this.props.tab.toUpperCase() === AUDIT ? 'sel' :'gor-normal-tab')} subIcons={false}/>
+      <Tab items={{ tab: items.audit, Status: items.auditStatus, currentState:items.auditClass }} changeClass={(this.props.tab.toUpperCase() === AUDIT ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
       </Link>
 
     <Link to="/inventory" onClick = {this.handleTabClick.bind(this,INVENTORY)}>
-      <Tab items={{ tab: items.inventory, Status: items.inventoryStatus, currentState:'' }} changeClass={(this.props.tab.toUpperCase() === INVENTORY ? 'sel' :'gor-normal-tab')} subIcons={false}/>
+      <Tab items={{ tab: items.inventory, Status: items.inventoryStatus, currentState:'' }} changeClass={(this.props.tab.toUpperCase() === INVENTORY ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
     </Link>
 		
 		<Link to="/users" onClick = {this.handleTabClick.bind(this,USERS)}>
-			<Tab items={{ tab: items.users, Status: items.usersStatus, currentState:'' }} changeClass={(this.props.tab.toUpperCase() === USERS ? 'sel' :'gor-normal-tab')} subIcons={false}/>
+			<Tab items={{ tab: items.users, Status: items.usersStatus, currentState:'' }} changeClass={(this.props.tab.toUpperCase() === USERS ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
 		</Link>
 	</div>
 		);
@@ -165,7 +193,7 @@ function mapStateToProps(state, ownProps){
          tab:state.tabSelected.tab || TAB_ROUTE_MAP[OVERVIEW],
          overview_status:state.tabsData.overview_status||null,
          system_emergency:state.tabsData.system_emergency||null,
-         system_data:state.tabsData.system_data||{},
+         system_data:state.tabsData.system_data||null,
          users_online:state.tabsData.users_online||0,
          audit_count:state.tabsData.audit_count||0,
          space_utilized:state.tabsData.space_utilized||0,
@@ -178,9 +206,12 @@ var mapDispatchToProps = function(dispatch){
 	return {
 		tabSelected: function(data){ dispatch(tabSelected(data)); },
         subTabSelected: function(data){ dispatch(subTabSelected(data)); },
-        setInventorySpinner:function(data){dispatch(setInventorySpinner(data));}
+        setInventorySpinner:function(data){dispatch(setInventorySpinner(data));},
+        setAuditSpinner:function(data){dispatch(setAuditSpinner(data));},
+        setButlerSpinner:function(data){dispatch(setButlerSpinner(data))}
 	}
 };
+
 
 
 

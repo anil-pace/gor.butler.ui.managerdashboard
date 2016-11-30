@@ -27,6 +27,7 @@ class MultiLineGraph extends React.Component{
  
   _graphRender(invData){
 
+    if(invData.length){
     try{
         // if (this.props.inventoryData.length  <= 0){
         //   return;
@@ -60,6 +61,9 @@ class MultiLineGraph extends React.Component{
         var y = d3.scale.linear().range([height, 0]);
         var xx = function(e)  { return x(function(d) { return x(d.date);}) };
         var yy = function(e)  { return y(function(d) { return y(d.items_put); }) };
+        var div = d3.select("body").append("div") 
+        .attr("class", "tooltip")       
+        .style("opacity", 0);
 
         // setting axis
         
@@ -135,7 +139,20 @@ class MultiLineGraph extends React.Component{
         .style("fill", "#D0021B")
         .attr("cx", pickLine.x())
         .attr("cy", pickLine.y())
-        .attr("r", 3.5);
+        .attr("r", 3.5)
+        .on("mouseover", function(d) {    
+            div.transition()    
+                .duration(200)    
+                .style("opacity", 1);    
+            div .html(d.date + "<br/>"  + d.items_picked)  
+                .style("left", (event.pageX) + "px")   
+                .style("top", (event.pageY - 28) + "px");  
+            })          
+        .on("mouseout", function(d) {   
+            div.transition()    
+                .duration(500)    
+                .style("opacity", 0); 
+        });  ;
 
          g.selectAll("circle.line2")
         .data(dataArray)
@@ -144,7 +161,22 @@ class MultiLineGraph extends React.Component{
         .style("fill", "#7ED321")
         .attr("cx", putLine.x())
         .attr("cy", putLine.y())
-        .attr("r", 3.5);  
+        .attr("r", 3.5)
+        .on("mouseover", function(d) {    
+            div.transition()    
+                .duration(200)    
+                .style("opacity", 1);    
+            div .html(d.date + "<br/>"  + d.items_put)  
+                .style("left", (event.pageX) + "px")   
+                .style("top", (event.pageY - 28) + "px");  
+            })          
+        .on("mouseout", function(d) {   
+            div.transition()    
+                .duration(500)    
+                .style("opacity", 0); 
+        });  
+
+   
     }
     else{
       svg
@@ -159,6 +191,10 @@ class MultiLineGraph extends React.Component{
       catch(error){
         throw "Error while creating the pickput line graph: "+ error;
       }
+    }
+    else{
+      this.setState({d3: ''});
+    }
 
     }
 
@@ -170,10 +206,11 @@ class MultiLineGraph extends React.Component{
   }
   
     render() {
-      
+     var renderHtml = <RD3Component data={this.state.d3} />;
+     
      return (
      <div>
-     <RD3Component data={this.state.d3} />
+     {renderHtml}
      </div>
      )
    }

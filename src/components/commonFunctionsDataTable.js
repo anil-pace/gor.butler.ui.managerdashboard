@@ -23,7 +23,7 @@ export function filterIndex(e,_dataList,filterField) {
       for (var i = filterField.length - 1; i >= 0; i--) {
         data[i] = getData[filterField[i]];
 
-        if (data[i].toLowerCase().indexOf(filterBy) !== -1) {
+        if (typeof data[i] === "string" && data[i].toLowerCase().indexOf(filterBy) !== -1) {
           filteredIndexes.push(index);
           break;
         }
@@ -106,8 +106,8 @@ export const ActionCell = ({rowIndex, data, columnKey,selEdit,selDel,mid, ...pro
   </Cell>
 );
 
-export const TextCell = ({rowIndex, data, columnKey, ...props}) => (
-  <Cell {...props}>
+export const TextCell = ({rowIndex, data, columnKey,classKey, ...props}) => (
+  <Cell {...props} className={data.getObjectAt(rowIndex)[classKey]}>
     {data.getObjectAt(rowIndex)[columnKey]}
   </Cell>
 );
@@ -138,7 +138,7 @@ export const StatusCell = ({rowIndex, data, columnKey,statusKey, ...props}) => (
 
 export const ActionCellAudit = ({rowIndex, data, columnKey, tasks, handleAudit,manageAuditTask, clickDropDown,showBox, ...props}) => (
   <Cell {...props}>
-    <div className="gor-audit-actions-button" >
+    <div className="gor-audit-actions-button">
      {data.getObjectAt(rowIndex)[showBox]?(
       <button className="gor-add-btn" onClick={handleAudit.bind(this,columnKey,rowIndex)}>
           <FormattedMessage id="commonDataTable.startAudit.button" description='edit button' defaultMessage='Start audit'/>
@@ -190,7 +190,7 @@ export class SortHeaderCell extends React.Component {
       <Cell {...props}>
         <a onClick={this._onSortChange}>
           {children} 
-          <div style={{display: 'inline-block'}}>{sortDir ? (sortDir === SortTypes.DESC ? '↓' : '↑') : ''} </div>
+          <div className="sortIcon" >{sortDir ? (sortDir === SortTypes.DESC ? '↓' : '↑') : ''} </div>
         </a>
       </Cell>
     );

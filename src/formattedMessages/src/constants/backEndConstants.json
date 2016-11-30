@@ -1,0 +1,112 @@
+[
+  {
+    "id": "stringConfig.on",
+    "description": "Text to display on",
+    "defaultMessage": "on"
+  },
+  {
+    "id": "stringConfig.off",
+    "description": "Text to show off",
+    "defaultMessage": "off"
+  },
+  {
+    "id": "stringConfig.per_hour",
+    "description": "Text to show per_hour",
+    "defaultMessage": "per_hour"
+  },
+  {
+    "id": "stringConfig.pick",
+    "description": "Text to show pick",
+    "defaultMessage": "pick"
+  },
+  {
+    "id": "stringConfig.put",
+    "description": "Text to show put",
+    "defaultMessage": "put"
+  },
+  {
+    "id": "stringConfig.audit",
+    "description": "Text to show audit",
+    "defaultMessage": "audit"
+  },
+  {
+    "id": "stringConfig.soft",
+    "description": "Text to show soft",
+    "defaultMessage": "soft"
+  },
+  {
+    "id": "stringConfig.hard",
+    "description": "Text to show hard",
+    "defaultMessage": "hard"
+  },
+  {
+    "id": "stringConfig.soft_manual",
+    "description": "Text to show soft_manual",
+    "defaultMessage": "soft_manual"
+  },
+  {
+    "id": "stringConfig.pending",
+    "description": "Text to show pending",
+    "defaultMessage": "pending"
+  },
+  {
+    "id": "stringConfig.disconnected",
+    "description": "Text to show disconnected",
+    "defaultMessage": "Disconnected"
+  },
+  {
+    "id": "stringConfig.connected",
+    "description": "Text to show connected",
+    "defaultMessage": "Connected"
+  },
+  {
+    "id": "stringConfig.completed",
+    "description": "Text to show completed",
+    "defaultMessage": "Completed"
+  },
+  {
+    "id": "stringConfig.Completed",
+    "description": "Text to show Completed",
+    "defaultMessage": "completed"
+  },
+  {
+    "id": "stringConfig.in_progress",
+    "description": "Text to show In Progress",
+    "defaultMessage": "In Progress"
+  },
+  {
+    "id": "stringConfig.breached",
+    "description": "Text to show breached",
+    "defaultMessage": "Breached"
+  },
+  {
+    "id": "stringConfig.fulfillable",
+    "description": "Text to show fulfillable",
+    "defaultMessage": "In Progress"
+  },
+  {
+    "id": "stringConfig.abandoned",
+    "description": "Text to show abandoned",
+    "defaultMessage": "Abandoned"
+  },
+  {
+    "id": "stringConfig.manual",
+    "description": "Text to show manual",
+    "defaultMessage": "Manual"
+  },
+  {
+    "id": "stringConfig.auto",
+    "description": "Text to show auto",
+    "defaultMessage": "Auto"
+  },
+  {
+    "id": "stringConfig.notFulfillable",
+    "description": "Text to show auto",
+    "defaultMessage": "Auto"
+  },
+  {
+    "id": "stringConfig.exception",
+    "description": "Text to show exception",
+    "defaultMessage": "Exception"
+  }
+]

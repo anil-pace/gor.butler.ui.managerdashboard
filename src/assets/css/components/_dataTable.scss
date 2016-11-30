@@ -3,13 +3,13 @@
 .fixedDataTableCellGroupLayout_cellGroup {
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
-  left: 0;
   position: absolute;
   top: 0;
   white-space: nowrap;
   border-bottom: solid;
   border-width: 1px;
   border-color: #dedede;
+  
 }
 
 .fixedDataTableCellGroupLayout_cellGroup > .public_fixedDataTableCell_main {
@@ -104,14 +104,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 }
 
 
-.fixedDataTableLayout_main {
-  border-style: solid;
-  border-width: 1px;
-  box-sizing: border-box;
-  overflow: hidden;
-  position: relative;
-}
-
 .fixedDataTableLayout_header,
 .fixedDataTableLayout_hasBottomBorder {
   border-bottom-style: solid;
@@ -137,7 +129,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 }
 
 .fixedDataTableLayout_rowsContainer {
-  overflow: hidden;
   position: relative;
 }
 
@@ -186,6 +177,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .fixedDataTableRowLayout_columnsShadow {
   width: 4px;
 }
+
 
 /**
  * Copyright (c) 2015, Facebook, Inc.
@@ -319,6 +311,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   border-color: #d3d3d3;
 }
 
+
 .public_fixedDataTable_header,
 .public_fixedDataTable_hasBottomBorder {
   border-color: #d3d3d3;
@@ -377,16 +370,32 @@ border-bottom-width: 0px;
   background-color: #f4f4f4;
 }
 
-.fixedDataTableRowLayout_rowWrapper:hover .public_fixedDataTableCell_main {
-  background-color: #e6e6e6;
+
+.fixedDataTableRowLayout_rowWrapper{
+        &:hover{
+            .public_fixedDataTableCell_main{
+              background-color: #e6e6e6;
+            }
+            .public_fixedDataTableRow_main{
+              background-color: #e6e6e6;
+            }
+            .public_fixedDataTable_header{
+              background-color: #fff;
+            }
+        }
 }
 
 
+.fixedDataTableRowLayout_rowWrapper:last-child .Dropdown-menu {
+  top: initial;
+  bottom: 100%
+}
 
 .public_fixedDataTable_header:hover .public_fixedDataTableCell_main {
 
 background-color: #FFFFFF;
 }
+
 
 .Stopped .public_fixedDataTableCell_cellContent{
 
@@ -435,7 +444,7 @@ background-color: #FFFFFF;
 
 }
 
-.Unfulfillable .public_fixedDataTableCell_cellContent{
+.not_fulfillable .public_fixedDataTableCell_cellContent{
 
   background: #f99405;
   border-radius: 15px;
@@ -460,6 +469,7 @@ background-color: #FFFFFF;
   font-size: 12px;
   max-height: 9px;
   background: #ffffff;
+  text-transform: capitalize;
 
 }
 
@@ -475,6 +485,7 @@ background-color: #FFFFFF;
   font-size: 12px;
   max-height: 9px;
   background: #ffffff;
+  text-transform: capitalize;
 
 }
 .online .public_fixedDataTableCell_cellContent{
@@ -506,6 +517,7 @@ background-color: #FFFFFF;
   font-size: 12px;
   max-height: 9px;
   background: #ffffff;
+  text-transform: capitalize;
 
 }
 
@@ -518,9 +530,10 @@ background-color: #FFFFFF;
   border-style: solid;
   border-width: 1px;
   border-color: #00a54f;
-  color: #00a54f;
+  color: #ffffff;
   font-size: 12px;
   max-height: 9px;
+  background-color: #00a54f;
 
 
 }
@@ -538,7 +551,7 @@ background-color: #FFFFFF;
 
 .gor-exception .public_fixedDataTableCell_cellContent{
 
-  background: #EC1C24;
+  background: #F99405;
   border-radius: 15px;
   text-align: center;
   width:70px;
@@ -574,6 +587,7 @@ background-color: #FFFFFF;
   font-size: 12px;
   max-height: 9px;
   background: #ffffff;
+  text-transform: capitalize;
 }
 
 .pending .public_fixedDataTableCell_cellContent{
@@ -591,6 +605,32 @@ background-color: #FFFFFF;
 
 }
 
+.fulfillable .public_fixedDataTableCell_cellContent{
+
+  border-radius: 15px;
+  text-align: center;
+  width:70px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #aaaaaa;
+  color: #aaaaaa;
+  font-size: 12px;
+  max-height: 9px;
+  background: #ffffff;
+
+}
+
+.gor-order-exception {
+background: #f99405;
+  border-radius: 15px;
+  text-align: center;
+  width:70px;
+  color: #ffffff;
+  font-size: 12px;
+  max-height: 9px;
+  
+}
+
 .progress .public_fixedDataTableCell_cellContent{
 
   
@@ -605,6 +645,51 @@ background-color: #FFFFFF;
   max-height: 9px;
   background: #ffffff;
 
+}
+.completed{
+  .public_fixedDataTableCell_cellContent{
+    text-transform: capitalize;
+  }
+}
+.pending{
+  .public_fixedDataTableCell_cellContent{
+    text-transform: capitalize;
+  }
+}
+.Completed{
+  .public_fixedDataTableCell_cellContent{
+    text-transform: capitalize;
+  }
+}
+.auto{
+  .public_fixedDataTableCell_cellContent{
+    text-transform: capitalize;
+  }
+} 
+.manual{
+  .public_fixedDataTableCell_cellContent{
+    text-transform: capitalize;
+  }
+}
+.audit{
+  .public_fixedDataTableCell_cellContent{
+    text-transform: capitalize;
+  }
+}
+.pick{
+  .public_fixedDataTableCell_cellContent{
+    text-transform: capitalize;
+  }
+}
+.put{
+  .public_fixedDataTableCell_cellContent{
+    text-transform: capitalize;
+  }
+}
+.not_fulfillable{
+  .public_fixedDataTableCell_cellContent{
+    text-transform: capitalize;
+  }
 }
 
 .public_fixedDataTableCell_columnResizerKnob {
@@ -650,6 +735,8 @@ background-color: #FFFFFF;
 .public_fixedDataTableRow_highlighted .public_fixedDataTableCell_main {
   background-color: #ffffff;
 }
+
+
 
 .public_fixedDataTableRow_fixedColumnsDivider {
   border-color: #d3d3d3;
@@ -721,10 +808,13 @@ background-color: #FFFFFF;
 .fixedDataTableCellGroupLayout_cellGroup {
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
-  left: 0;
+
+  left: calculateRem(1px);
   position: absolute;
   top: 0;
   white-space: nowrap;
+
+
 }
 
 .fixedDataTableCellGroupLayout_cellGroup > .public_fixedDataTableCell_main {
@@ -732,6 +822,7 @@ background-color: #FFFFFF;
   vertical-align: top;
   white-space: normal;
   background: #f7f7f7;
+  border-bottom: 1px solid #dddddd;
 }
 
 .fixedDataTableCellGroupLayout_cellGroupWrapper {
@@ -854,6 +945,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   border-width: 1px;
   box-sizing: border-box;
   position: relative;
+  overflow: hidden;
 }
 
 .fixedDataTableLayout_header,
@@ -880,6 +972,9 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   margin-top: -4px;
 }
 
+.fixedDataTableLayout_rowsContainer {
+  position: relative;
+}
 
 .fixedDataTableLayout_horizontalScrollbar {
   bottom: 0;
@@ -1092,6 +1187,9 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 
 .public_fixedDataTableCell_cellContent {
   padding: 5px 8px 8px 8px;
+  a{
+    cursor:pointer;
+  }
   
 }
 
@@ -1138,7 +1236,9 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .public_fixedDataTableRow_highlighted .public_fixedDataTableCell_main {
   background-color: #f7f7f7;
 }
-
+.public_fixedDataTableRow_even,.public_fixedDataTableRow_odd{
+  background:#f7f7f7;
+}
 .public_fixedDataTableRow_fixedColumnsDivider {
   border-color: #ffffff;
 }
@@ -1240,18 +1340,26 @@ color: #000000;
   vertical-align: middle;
   padding-left: 24px;
 }
+.fixedDataTableLayout_main{
+    .gorToolHeaderEl {
+      display: inline-block;
+      min-height:calculateRem(38px);
+    }
+    .sortIcon{
+      display: inline-block;
+      vertical-align: top;
+      margin-left: 5px;
+    }
 
-
-.gorToolHeaderEl {
-  display: inline-block;
-  padding-bottom: 4px;
 }
+
+
 
 .gorToolHeaderSubText{
   font-family: "source sans pro";
   font-size: 12px;
   color: #666666;
-  padding-top: 4px;
+  padding-top: 14px;
 }
 
 .gorTesting {
@@ -1361,7 +1469,7 @@ input[type="checkbox"]{
         position: absolute;
         top: 100%;
         width: 100%;
-        z-index: 1000;
+        z-index: 30;
       -webkit-overflow-scrolling: touch;
       border-color: #aaaaaa;
       font-size: 14px;
@@ -1410,7 +1518,7 @@ input[type="checkbox"]{
   }
 }
 
-.gorUserTable {
+.gor-User-Table {
   height: 85vh;
 }
 
@@ -1522,9 +1630,21 @@ progress::-moz-progress-bar {
   padding-top: 10px;
 }
 
-.gor-header-id {
+.gor-header-id 
+{
   display: inline-block;
   vertical-align: middle;
-  padding-top: 10px;
+  .public_fixedDataTableCell_wrap1{
+    padding-left:0;
+  }
+  .public_fixedDataTableCell_cellContent{
+    padding-left:0;
+  }
 }
+
+.gor-inline {
+  display: inline-block;
+}
+
+ 
 

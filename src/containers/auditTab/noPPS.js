@@ -3,8 +3,8 @@ import {Link}  from 'react-router';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux' ;
 import {tabSelected,subTabSelected} from '../../actions/tabSelectAction'
-import {NOTIFICATION,BUTLERBOTS,PPS,CHARGING,SYS_SUB_TAB_ROUTE_MAP,TAB_ROUTE_MAP,SYSTEM} from '../../constants/appConstants' 
-
+import {NOTIFICATION,SYS_SUB_TAB_ROUTE_MAP,TAB_ROUTE_MAP,SYSTEM} from '../../constants/frontEndConstants' 
+import {BUTLERBOTS,PPS,CHARGING} from '../../constants/backEndConstants'
 class NoPPS extends React.Component{
   constructor(props) 
   {

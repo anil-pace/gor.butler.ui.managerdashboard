@@ -1,3 +1,4 @@
+
 import React from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
 import DropdownTable from '../../components/dropdown/dropdownTable'
@@ -7,7 +8,20 @@ import { connect } from 'react-redux';
 import {changePPSmode} from '../../actions/ppsModeChangeAction'
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
 import {BASE_URL, PPS_MODE_CHANGE_URL,PROTOCOL,API_URL} from '../../constants/configConstants';
-import {PPS_MODE_CHANGE} from '../../constants/appConstants';
+import { defineMessages } from 'react-intl';
+
+const messages = defineMessages({
+    ppsPlaceholder: {
+        id: 'pps.dropdown.placeholder',
+        description: 'mode change for pps',
+        defaultMessage: 'Change PPS Mode',
+    }
+
+
+});
+
+import {PPS_MODE_CHANGE,APP_JSON,PUT} from '../../constants/frontEndConstants';
+
 
 class PPStable extends React.Component {
   constructor(props) {
@@ -32,7 +46,7 @@ class PPStable extends React.Component {
       sortedDataList: this._dataList,
       colSortDirs: {},
       columnWidths: {
-        id: this.props.containerWidth*0.15,
+        id: this.props.containerWidth*0.07,
         status: this.props.containerWidth*0.1,
         operatingMode: this.props.containerWidth*0.2,
         performance: this.props.containerWidth*0.2,
@@ -64,15 +78,18 @@ class PPStable extends React.Component {
       this._defaultSortIndexes.push(index);
     }
     var columnWidth= (nextProps.containerWidth/nextProps.itemNumber)
+    
     this.state = {
       sortedDataList: this._dataList,
       colSortDirs: {},
       columnWidths: {
+
          id: nextProps.containerWidth*0.15,
         status: nextProps.containerWidth*0.1,
-        operatingMode: nextProps.containerWidth*0.2,
+        operatingMode: nextProps.containerWidth*0.17,
         performance: nextProps.containerWidth*0.15,
-        operatorAssigned: nextProps.containerWidth*0.4
+        operatorAssigned: nextProps.containerWidth*0.6
+
       },
       headerChecked: false,
       isChecked:temp,
@@ -152,6 +169,10 @@ class PPStable extends React.Component {
     if(columnKey === undefined) {
       columnKey = "id"
     }
+
+    if(columnKey === "status") {
+      columnKey = "statusPriority"
+    }
     var sortIndexes = this._defaultSortIndexes.slice();
     this.setState({
       sortedDataList: new DataListWrapper(sortData(columnKey, sortDir,sortIndexes,this._dataList), this._dataList),
@@ -179,10 +200,10 @@ class PPStable extends React.Component {
         let ppsModeChange={
                'url':url,
                'formdata':formdata,
-               'method':'PUT',
+               'method':PUT,
                'cause': PPS_MODE_CHANGE,
                'token': sessionStorage.getItem('auth_token'),
-              'contentType':'application/json'
+              'contentType':APP_JSON
          } 
          
          this.props.modeChange(ppsModeChange);
@@ -257,7 +278,7 @@ class PPStable extends React.Component {
        </div>
 
       <Table
-        rowHeight={66}
+        rowHeight={50}
         rowsCount={sortedDataList.getSize()}
         headerHeight={70}
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
@@ -276,11 +297,9 @@ class PPStable extends React.Component {
               <SortHeaderCell onSortChange={this._onSortChange} 
                 sortDir={colSortDirs.id}>  
                 <div className="gorToolHeaderEl">
-                <div className="gorToolHeaderEl"> 
                   <FormattedMessage id="PPStable.Totalpps" description='total pps' 
                   defaultMessage='{ppsTotal} PPS' 
                   values={{ppsTotal:ppsTotal?ppsTotal:'0'}}/> 
-                </div>
                 <div className="gorToolHeaderSubText"> 
                   <FormattedMessage id="PPStable.Subpps" description='sub pps' 
                   defaultMessage='Total: {ppsTotal}' 
@@ -300,16 +319,19 @@ class PPStable extends React.Component {
           columnKey="status"
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
-              sortDir={colSortDirs.status} >
-              <div>
+
+              sortDir={colSortDirs.statusPriority}>
+
+              <div className="gorToolHeaderEl">
+
                  <FormattedMessage id="PPS.table.status" description="Status for PPS" 
               defaultMessage ="STATUS"/> 
-              </div>
+              
               <div>
               <div className="statuslogoWrap">
             
               </div>
-              
+              </div>
               </div>
             </SortHeaderCell>
           }
@@ -323,6 +345,7 @@ class PPStable extends React.Component {
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.operatingMode}>
+               <div className="gorToolHeaderEl"> 
               <FormattedMessage id="PPS.table.operatingMode" description="operatingMode for PPS" 
               defaultMessage ="OPERATING MODE"/>
               <div className="gorToolHeaderSubText">
@@ -330,9 +353,10 @@ class PPStable extends React.Component {
                 defaultMessage='Pick ({pick}) . Put ({put}) . Audit ({audit}) . Not set ({notSet})' 
                 values={{pick: pick?pick:'0', put:put?put:'0', audit:audit?audit:'0', notSet:notSet?notSet:'0'}}/>
               </div>
+              </div>
             </SortHeaderCell>
           }
-          cell={<TextCell data={sortedDataList} />}
+          cell={<TextCell data={sortedDataList} classKey={"operatingModeClass"}/>}
           fixed={true}
           width={columnWidths.operatingMode}
           isResizable={true}
@@ -342,6 +366,7 @@ class PPStable extends React.Component {
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.performance}>
+               <div className="gorToolHeaderEl"> 
                <FormattedMessage id="PPS.table.performance" description="performance Status for PPS" 
               defaultMessage ="PERFORMANCE"/> 
                <div>
@@ -349,6 +374,7 @@ class PPStable extends React.Component {
             
               </div>
               
+              </div>
               </div>
             </SortHeaderCell>
           }
@@ -362,12 +388,14 @@ class PPStable extends React.Component {
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.operatorAssigned}>
+               <div className="gorToolHeaderEl"> 
                <FormattedMessage id="PPS.table.operatorAssigned" description="operatorAssigned for PPS" 
               defaultMessage ="OPERATOR ASSIGNED"/> 
               <div className="gorToolHeaderSubText"> 
                 <FormattedMessage id="PPStable.totalOperator" description='totalOperator for PPStable' 
                 defaultMessage='{operatorNum} operator' 
                 values={{operatorNum: operatorNum?operatorNum:'0'}}/>
+              </div>
               </div>
             </SortHeaderCell>
           }

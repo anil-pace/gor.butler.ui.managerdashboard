@@ -7,8 +7,11 @@ import SubTab from './subTab';
 import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
 import { FormattedMessage } from 'react-intl';
+import {setButlerSpinner, setPpsSpinner, setCsSpinner} from '../../actions/spinnerAction';
 import {subTabSelected} from '../../actions/tabSelectAction'
-import {NOTIFICATION,BUTLERBOTS,PPS,CHARGING,SYS_SUB_TAB_ROUTE_MAP} from '../../constants/appConstants'
+import {NOTIFICATION,SYS_SUB_TAB_ROUTE_MAP} from '../../constants/frontEndConstants'
+import {BUTLERBOTS,PPS,CHARGING} from '../../constants/backEndConstants'
+
 
 class SystemTab extends React.Component{
 	constructor(props) 
@@ -19,6 +22,24 @@ class SystemTab extends React.Component{
     handleSysSubTabClick(tabName){
       this.props.subTabSelected(SYS_SUB_TAB_ROUTE_MAP[tabName]);
       sessionStorage.setItem("subTab",SYS_SUB_TAB_ROUTE_MAP[tabName])
+      switch(tabName) {
+  					case BUTLERBOTS:
+  					this.props.setButlerSpinner(true);
+  					break;
+
+  					case PPS:
+  					this.props.setPpsSpinner(true);
+  					break;
+
+  					case CHARGING:
+  					this.props.setCsSpinner(true);
+  					break;
+  					
+  					default:
+  					this.props.setButlerSpinner(false);
+					this.props.setPpsSpinner(false);
+					this.props.setCsSpinner(false);  					
+  				}
     }
     
 	render(){
@@ -34,14 +55,14 @@ class SystemTab extends React.Component{
               defaultMessage ="Charging Station"/>
 
 
-		var selectClass = {notification:"gorMainBlock", butlerbots:"gorMainBlock", pps:"gorMainBlock", chargingstation:"gorMainBlock"};
+		var selectClass = {notification:"gor-main-block", butlerbots:"gor-main-block", pps:"gor-main-block", chargingstation:"gor-main-block"};
 
 		if(this.props.subTab.length) {
-			selectClass[this.props.subTab] = "gorMainBlockSelect";
+			selectClass[this.props.subTab] = "gor-main-blockSelect";
 		}
 
 		else {
-			selectClass["butlerbots"] = "gorMainBlockSelect";
+			selectClass["butlerbots"] = "gor-main-blockSelect";
 		}
 
 		return (
@@ -72,6 +93,9 @@ function mapStateToProps(state, ownProps){
 
 var mapDispatchToProps = function(dispatch){
 	return {
+		setCsSpinner: function(data){ dispatch(setCsSpinner(data))},
+		setPpsSpinner: function(data){ dispatch(setPpsSpinner(data))},
+		setButlerSpinner: function(data){ dispatch(setButlerSpinner(data))},
 		subTabSelected: function(data){ dispatch(subTabSelected(data)); }
 	}
 };

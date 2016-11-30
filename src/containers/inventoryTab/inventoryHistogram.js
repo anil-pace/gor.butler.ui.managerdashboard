@@ -1,19 +1,26 @@
 import React  from 'react';
 import Histogram from '../../components/graphd3/histogram';
 import {setInventoryDate} from '../../actions/inventoryActions';
-import {INVENTORY_HISTORY_DAYS_COUNT,INVENTORY_HISTOGRAM_CONFIG} from '../../constants/appConstants';
+import {INVENTORY_HISTORY_DAYS_COUNT,INVENTORY_HISTOGRAM_CONFIG} from '../../constants/frontEndConstants';
 import { connect } from 'react-redux'; 
 import { defineMessages } from 'react-intl';
 
+//Mesages for internationalization
 const messages = defineMessages({
-    noStock: {
+    invHistogramNoDataTxt: {
         id: 'inventory.histogram.noDataText',
-        description: 'Message for No stock',
+        description: 'Text when there is no stock',
         defaultMessage: 'No Stock Found',
     },
+    invHistogramTodayTxt: {
+        id: 'inventory.histogram.today',
+        description: 'Text to show today',
+        defaultMessage: "Today's",
+    }
 
 
 });
+
 
 
 class InventoryHistogram extends React.Component{
@@ -24,36 +31,47 @@ class InventoryHistogram extends React.Component{
    }
    _processData(){
    	var histogramData = JSON.parse(JSON.stringify(this.props.histogramData)),
-   	processedData = [],
-   	noStock = 0,
+   	processedData = [];
+    if(histogramData.length){
+   	let noStock = 0,
    	lastProcessedDate,
-   	dataLen = histogramData.length;
-   	for(let i=0,len = INVENTORY_HISTORY_DAYS_COUNT ; i < len && dataLen; i++){
-   		var dataObj = {},dt;
-   		if(histogramData[i]){
-   		dt = (new Date(Date.parse(histogramData[i].date)));
-   		dataObj.xAxisData = dt.getDate();
-   		dataObj.yAxisData = histogramData[i].current_stock;
-   		dataObj.customData = Date.parse(histogramData[i].date);
-   		lastProcessedDate = new Date(Date.parse(histogramData[i].date));
-   		if(!noStock){
-   			noStock = histogramData[i].current_stock;
-   			dataObj.noData =  noStock ? false : true;
-   		}
-   		
-   	}
-   	else{
-   		dataObj.xAxisData = (new Date(lastProcessedDate.setDate(lastProcessedDate.getDate() - 1))).getDate();
-   		dataObj.yAxisData = 0;
-   		dataObj.customData = lastProcessedDate.getTime();
-   	}
+   	dataLen = histogramData.length,
+    dateToday = dataLen ? new Date(Date.parse(histogramData[0].date)) :  null,
+    recreatedData =  this.props.recreatedData;
+    for(let i=0,len = INVENTORY_HISTORY_DAYS_COUNT,j=0 ; i <= len && dataLen; i++){
+      let dataObj={};
+      let currentDate = new Date(dateToday.getFullYear(),
+                                  dateToday.getMonth(),
+                                  dateToday.getDate(),
+                                  dateToday.getHours(),
+                                  dateToday.getMinutes(),
+                                  dateToday.getSeconds(),
+                                  dateToday.getMilliseconds());
+      currentDate.setDate(currentDate.getDate() - i);
 
-   		processedData.push(dataObj);
-   	}
+      if(!recreatedData[currentDate.getTime()]){
+        dataObj.xAxisData = currentDate.getDate();
+        dataObj.yAxisData = 0;
+        dataObj.customData = (new Date(currentDate)).getTime();
+      }
+      else{
+        dataObj.xAxisData =histogramData[j] ?  (new Date(Date.parse(histogramData[j].date))).getDate() : currentDate.getDate();
+      dataObj.yAxisData = histogramData[j].current_stock;
+      dataObj.customData = Date.parse(histogramData[j].date);
+      if(!noStock){
+        noStock = histogramData[j].current_stock;
+        dataObj.noData =  noStock ? false : true;
+      }
+      j++;
+      }
+    processedData.push(dataObj);
+    }
+   
    	processedData.sort(function(a, b) {
         var x = a["customData"]; var y = b["customData"];
         return ((x < y) ? -1 : ((x > y) ? 1 : 0));
     });
+   }
    
 	return processedData;
    }
@@ -69,8 +87,8 @@ class InventoryHistogram extends React.Component{
    var histogramData = _this._processData();//this.context.intl.formatMessage({id:"inventory.histogram.noDataText", defaultMessage: config.noDataText}
    var config = Object.assign({},INVENTORY_HISTOGRAM_CONFIG)
    config.noData = histogramData.length ? histogramData[histogramData.length-1].noData : false;
-   config.noDataText= _this.context.intl.formatMessage({id:"inventory.histogram.noDataText", defaultMessage: 'No Stock Found'});
-   config.today = _this.context.intl.formatRelative(Date.now()- 1000 * 60 * 60 ,'day');
+   config.noDataText= _this.context.intl.formatMessage(messages.invHistogramNoDataTxt);
+   config.today = _this.context.intl.formatMessage(messages.invHistogramTodayTxt);
    config.breakMonth = _this.context.intl.formatDate(Date.now(), {month: 'short'}); 
    return (
      <div>
@@ -83,7 +101,8 @@ class InventoryHistogram extends React.Component{
 InventoryHistogram.propTypes={
   histogramData:React.PropTypes.array,
   currentDate:React.PropTypes.number,
-  hasDataChanged:React.PropTypes.number
+  hasDataChanged:React.PropTypes.number,
+  recreatedData : React.PropTypes.object
 }
 InventoryHistogram.contextTypes ={
  intl:React.PropTypes.object.isRequired

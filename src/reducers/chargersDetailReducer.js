@@ -1,4 +1,4 @@
-import {CHARGERS_DETAIL,CHARGERS_DATA} from '../constants/appConstants';
+import {CHARGERS_DETAIL,CHARGERS_DATA} from '../constants/frontEndConstants';
 import React  from 'react';
 import { FormattedMessage } from 'react-intl';
 

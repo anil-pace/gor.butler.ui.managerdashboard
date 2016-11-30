@@ -4,7 +4,8 @@ import { FormattedMessage,FormattedPlural } from 'react-intl';
 import {userRequest} from '../../actions/userActions';
 import {validateName, validatePassword, resetForm} from '../../actions/validationActions';
 import { connect } from 'react-redux';
-import {ERROR,GET_ROLES,EDIT_USER,SUCCESS,BUTLER_SUPERVISOR,BUTLER_UI} from '../../constants/appConstants';
+import {ERROR,GET_ROLES,EDIT_USER,SUCCESS,GET,APP_JSON,PUT} from '../../constants/frontEndConstants';
+import {BUTLER_SUPERVISOR,BUTLER_UI} from '../../constants/backEndConstants';
 import {TYPE_SUCCESS} from '../../constants/messageConstants';
 import {ROLE_URL,HEADER_URL} from '../../constants/configConstants';
 import FieldError from '../../components/fielderror/fielderror';
@@ -19,10 +20,10 @@ class EditUser extends React.Component{
   componentDidMount(){
         let userData={
                 'url':ROLE_URL,
-                'method':'GET',
+                'method':GET,
                 'cause':GET_ROLES,
-                'contentType':'application/json',
-                'accept':'application/json',
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
                 'token':this.props.auth_token
             }
         this.props.userRequest(userData);
@@ -32,6 +33,12 @@ class EditUser extends React.Component{
     this.props.resetForm();
     this.props.removeModal();
   }
+  componentWillReceiveProps(nextProps){
+    if(!nextProps.auth_token)
+    {
+      this.removeThisModal();
+    }
+  }  
   _checkName(){
       let firstname=this.firstName.value, lastname=this.lastName.value, nameInfo;
       nameInfo=nameStatus(firstname,lastname);
@@ -102,10 +109,10 @@ class EditUser extends React.Component{
         let userData={
                 'url':editurl,
                 'formdata':formdata,
-                'method':'PUT',
+                'method':PUT,
                 'cause':EDIT_USER,
-                'contentType':'application/json',
-                'accept':'application/json',
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
                 'token':this.props.auth_token
             }
         this.props.userRequest(userData);
