@@ -257,11 +257,9 @@ class AuditTable extends React.Component {
         <SortHeaderCell onSortChange={this._onSortChange}
         sortDir={colSortDirs.id}>
         <div className="gorToolHeaderEl">
-        <div className="gorToolHeaderEl"> 
         <FormattedMessage id="auditTable.stationID" description='total audit ID for auditTable' 
         defaultMessage='{rowsCount} AUDIT ID' 
         values={{rowsCount:rowsCount?rowsCount:'0'}}/>
-        </div>
         <div className="gorToolHeaderSubText">
         <FormattedMessage id="auditTable.SubAuditID" description='total Sub auditID for auditTable' 
         defaultMessage='Total:{rowsCount}' 
@@ -283,9 +281,11 @@ class AuditTable extends React.Component {
       header={
         <SortHeaderCell onSortChange={this._onSortChange}
         sortDir={colSortDirs.auditTypeValue}>
+         <div className="gorToolHeaderEl"> 
         <FormattedMessage id="audit.table.type" description="audit type for audit table" 
         defaultMessage ="AUDIT TYPE"/>
         <div className="gorToolHeaderSubText">  </div>
+        </div>
         </SortHeaderCell>
       }
       cell={<TextCell data={sortedDataList} ></TextCell>}
@@ -298,11 +298,12 @@ class AuditTable extends React.Component {
       header={
         <SortHeaderCell onSortChange={this._onSortChange}
         sortDir={colSortDirs.status}>
+         <div className="gorToolHeaderEl"> 
         <FormattedMessage id="audit.table.STATUS" description="STATUS for audit" 
         defaultMessage ="STATUS"/>
         <div className="gorToolHeaderSubText">  </div>
         <div>
-
+        </div>
         </div>
         </SortHeaderCell>
       }
@@ -317,10 +318,12 @@ class AuditTable extends React.Component {
       header={
         <SortHeaderCell onSortChange={this._onSortChange}
         sortDir={colSortDirs.mode}>
+         <div className="gorToolHeaderEl"> 
         <FormattedMessage id="audit.table.startTime" description="startTime for audit" 
         defaultMessage ="START TIME"/>
         <div className="gorToolHeaderSubText"> 
-        
+
+        </div>
         </div>
         </SortHeaderCell>
       }
@@ -334,10 +337,12 @@ class AuditTable extends React.Component {
       header={
         <SortHeaderCell onSortChange={this._onSortChange}
         sortDir={colSortDirs.progress} >
+         <div className="gorToolHeaderEl"> 
         <FormattedMessage id="audit.table.progress" description="progress for audit task" 
         defaultMessage ="PROGRESS(%)"/>
         <div className="gorToolHeaderSubText">   
         </div> 
+        </div>
         </SortHeaderCell>
       }
       cell={<ProgressCell data={sortedDataList}  />}
@@ -351,10 +356,12 @@ class AuditTable extends React.Component {
       header={
         <SortHeaderCell onSortChange={this._onSortChange}
         sortDir={colSortDirs.completedTime}>
+         <div className="gorToolHeaderEl"> 
         <FormattedMessage id="audit.table.timeCompleted" description="timeCompleted for audit" 
         defaultMessage ="TIME COMPLETED"/>
         <div className="gorToolHeaderSubText"> 
         {this.props.timeZoneString}
+        </div>
         </div>
         </SortHeaderCell>
       }
@@ -368,10 +375,11 @@ class AuditTable extends React.Component {
       columnKey="actions"
       header={
         <SortHeaderCell >
-
+         <div className="gorToolHeaderEl"> 
         <FormattedMessage id="audit.table.action" description="action Column" 
         defaultMessage ="ACTIONS"/> 
         <div className="gorToolHeaderSubText">  </div>
+        </div>
         </SortHeaderCell>
       }
       cell={<ActionCellAudit data={sortedDataList} handleAudit={this.startAudit.bind(this)} tasks={tasks} 

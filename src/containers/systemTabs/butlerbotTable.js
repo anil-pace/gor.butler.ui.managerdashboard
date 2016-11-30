@@ -151,9 +151,8 @@ class ButlerBotTable extends React.Component {
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.id}> 
               <div className="gorToolHeaderEl">
-              <div className="gorToolHeaderEl"> 
                 <FormattedMessage id="ButlerBotTable.TotalBot" description='total bot for ButlerBotTable' defaultMessage='{totalBot} BOT' values={{totalBot: totalBot}}/>
-              </div>
+              
               <div className="gorToolHeaderSubText"> 
                 <FormattedMessage id="ButlerBotTable.subTotalBot" description='sub text for totalbot ButlerBotTable' defaultMessage='Total: {totalBot}' values={{totalBot: totalBot}}/>
               </div>
@@ -170,15 +169,15 @@ class ButlerBotTable extends React.Component {
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.statusPriority} >
-              <div>
+              <div className="gorToolHeaderEl"> 
                  <FormattedMessage id="butlerBot.table.status" description="Status for butlerbot" 
               defaultMessage ="STATUS"/> 
-              </div>
+              
               <div>
               <div className="statuslogoWrap">
               <div className=" gorToolHeaderEl"/>
               </div>
-              
+              </div>
               </div>
             </SortHeaderCell>
           }
@@ -192,12 +191,14 @@ class ButlerBotTable extends React.Component {
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.current}>
+               <div className="gorToolHeaderEl"> 
               <FormattedMessage id="butlerBot.table.currentTask" description="Current task for butlerbot" 
               defaultMessage ="CURRENT TASK"/>
               <div className="gorToolHeaderSubText">
                 <FormattedMessage id="ButlerBotTable.botState" description='bot state for ButlerBotTable' 
                 defaultMessage='Pick ({pick}) . Put ({put}) . Charging ({charging}) . Idle ({idle})' 
                 values={{pick: pick, put:put, charging:charging, idle:idle}}/>
+              </div>
               </div>
             </SortHeaderCell>
           }
@@ -211,12 +212,14 @@ class ButlerBotTable extends React.Component {
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.msu}>
+               <div className="gorToolHeaderEl"> 
                <FormattedMessage id="butlerBot.table.msu" description="MSU Status for butlerbot" 
               defaultMessage ="MSU"/> 
               <div className="gorToolHeaderSubText">
                 <FormattedMessage id="ButlerBotTable.mounted" description='msu mounted for ButlerBotTable' 
                 defaultMessage='{msuMounted} Mounted' 
                 values={{msuMounted:msuMounted}}/>
+              </div>
               </div>
             </SortHeaderCell>
           }
@@ -230,12 +233,14 @@ class ButlerBotTable extends React.Component {
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.location}>
+               <div className="gorToolHeaderEl"> 
                <FormattedMessage id="butlerBot.table.location" description="Location for butlerbot" 
               defaultMessage ="LOCATION"/> 
               <div className="gorToolHeaderSubText"> 
                 <FormattedMessage id="ButlerBotTable.locations" description='msu mounted for ButlerBotTable' 
                 defaultMessage='{locations} Locations' 
                 values={{locations:locations}}/>
+              </div>
               </div>
             </SortHeaderCell>
           }
@@ -249,6 +254,7 @@ class ButlerBotTable extends React.Component {
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.voltage}>
+               <div className="gorToolHeaderEl"> 
                <FormattedMessage id="butlerBot.table.voltage" description="voltage for butlerbot" 
               defaultMessage ="VOLTAGE"/>
               <div className="gorToolHeaderSubText"> 
@@ -256,6 +262,7 @@ class ButlerBotTable extends React.Component {
                 defaultMessage='Avg. Voltage {voltage}' 
                 values={{voltage:voltage}}/>  
               </div> 
+              </div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList}  />}

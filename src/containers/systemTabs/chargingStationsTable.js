@@ -143,12 +143,12 @@ class ChargingStationsTable extends React.Component {
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.id}>
-              <div className="gorToolHeaderEl">
+              
               <div className="gorToolHeaderEl"> 
                  <FormattedMessage id="ChargingStationsTable.stationID" description='total stationID for ChargingStationsTable' 
                 defaultMessage='{rowsCount} STATION ID' 
                 values={{rowsCount:rowsCount?rowsCount:'0'}}/>
-              </div>
+              
               <div className="gorToolHeaderSubText">
                <FormattedMessage id="ChargingStationsTable.SubstationID" description='total SubStationID for ChargingStationsTable' 
                 defaultMessage='Total:{rowsCount}' 
@@ -167,11 +167,13 @@ class ChargingStationsTable extends React.Component {
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.statusPriority}>
+              <div className="gorToolHeaderEl"> 
               <FormattedMessage id="ChargingStations.table.STATUS" description="STATUS for ChargingStations" 
               defaultMessage ="STATUS"/>
               <div className="gorToolHeaderSubText">  </div>
                <div>
               <div className="statuslogoWrap">
+              </div>
               </div>
               </div>
             </SortHeaderCell>
@@ -187,12 +189,14 @@ class ChargingStationsTable extends React.Component {
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.mode}>
+              <div className="gorToolHeaderEl"> 
               <FormattedMessage id="ChargingStations.table.operatingMode" description="operatingMode for ChargingStations" 
               defaultMessage ="OPERATING MODE"/>
               <div className="gorToolHeaderSubText"> 
                 <FormattedMessage id="ChargingStationsTable.mode" description='cs mode for ChargingStationsTable' 
                 defaultMessage='Manual ({manual}) . Auto ({auto})' 
                 values={{manual:manual?manual:'0', auto:auto?auto:'0'}}/>
+              </div>
               </div>
             </SortHeaderCell>
           }
@@ -206,12 +210,14 @@ class ChargingStationsTable extends React.Component {
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.dockedBots}>
+              <div className="gorToolHeaderEl"> 
               <FormattedMessage id="ChargingStations.table.connectedBots" description="connectedBots for ChargingStations" 
               defaultMessage ="BOTS CONNECTED"/>
               <div className="gorToolHeaderSubText">
                 <FormattedMessage id="ChargingStationsTable.totalBots" description='total bots ChargingStationsTable' 
                 defaultMessage='{totalBots} bots connected' 
                 values={{totalBots:totalBots?totalBots:'0'}}/>
+                </div>
               </div>
             </SortHeaderCell>
           }
