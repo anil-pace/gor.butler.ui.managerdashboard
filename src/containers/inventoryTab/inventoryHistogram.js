@@ -48,7 +48,6 @@ class InventoryHistogram extends React.Component{
                                   dateToday.getSeconds(),
                                   dateToday.getMilliseconds());
       currentDate.setDate(currentDate.getDate() - i);
-
       if(!recreatedData[currentDate.getTime()]){
         dataObj.xAxisData = currentDate.getDate();
         dataObj.yAxisData = 0;

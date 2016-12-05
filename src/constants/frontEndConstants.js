@@ -232,7 +232,7 @@ export const INV_LINE_LEGEND_CONFIG = {
 				containerHeight:"60px"
 			}
 
-export const INVENTORY_HISTORY_DAYS_COUNT = 30;
+export const INVENTORY_HISTORY_DAYS_COUNT = 29;
 export const INVENTORY_HISTOGRAM_CONFIG = {
 	height:200,
 	width:(70/100) * screen.width,
