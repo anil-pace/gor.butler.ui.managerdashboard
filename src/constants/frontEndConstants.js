@@ -43,6 +43,9 @@ export const RENDER_WIDGET = "RENDER_WIDGET";
 export const TAB_SELECTED = "TAB_SELECTED";
 export const PREV_TAB_SELECTED = "PREV_TAB_SELECTED";
 export const SUB_TAB_SELECTED = "SUB_TAB_SELECTED";
+export const GOR_ORDER_PICKED = "orders_picked";
+export const GOR_ITEMS_PUT = "items_put";
+export const GOR_ITEMS_AUDITED = "items_audited";
 
 /*FE constants for parsing*/
 export const PPS_PERFORMANCE = "PPS_PERFORMANCE";
