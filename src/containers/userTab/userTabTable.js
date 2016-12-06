@@ -8,6 +8,7 @@ import {modal} from 'react-redux-modal';
 import AddUser from './addNewUser';
 import EditUser from './editUser';
 import DeleteUser from './deleteUser';
+import {GOR_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
 
 class UserDataTable extends React.Component {
   constructor(props) {
@@ -168,15 +169,18 @@ class UserDataTable extends React.Component {
   render() {
     var {sortedDataList, colSortDirs,columnWidths} = this.state;
     var columnWidth= (this.props.containerWidth/this.props.itemNumber);
-    var heightRes = 560 ,rowsCount = sortedDataList.getSize(), noData ;
+    var heightRes = 560 ,rowsCount = sortedDataList.getSize() ;
     if(this.props.containerHeight !== 0) {
       heightRes = this.props.containerHeight;
     }
     var selEdit = this.handleEdit.bind(this);
     var selDel= this.handleDel.bind(this); 
-    noData = <div/>;
-    if(rowsCount === 0) {
-     noData =  <div> NO DATA </div>
+    var containerHeight = this.props.containerHeight;
+    var noData = <div/>;
+    if(rowsCount === 0 || rowsCount === undefined) {
+     noData =  <div> <FormattedMessage id="user.table.noData" description="No data message for user table" 
+       defaultMessage ="No User Found"/>  </div>
+     containerHeight = 73;
     }
     return (
       <div>
@@ -212,7 +216,7 @@ class UserDataTable extends React.Component {
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
         width={this.props.containerWidth}
-        height={this.props.containerHeight}
+        height={containerHeight}
         {...this.props}>
         <Column
           columnKey="id"
@@ -319,7 +323,7 @@ class UserDataTable extends React.Component {
           width={columnWidth}
         />
       </Table>
-      {noData}
+      <div className="gor-no-data"> {noData} </div>
       </div>
     );
   }

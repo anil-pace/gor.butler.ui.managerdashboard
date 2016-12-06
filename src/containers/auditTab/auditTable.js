@@ -12,7 +12,7 @@ import CreateAudit from './createAudit';
 import StartAudit from './startAudit';
 import DeleteAudit from './deleteAudit';
 import DuplicateAudit from './duplicateAudit';
-import {GOR_STATUS,GOR_STATUS_PRIORITY} from '../../constants/frontEndConstants';
+import {GOR_STATUS,GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
 
 
 class AuditTable extends React.Component {
@@ -203,7 +203,7 @@ class AuditTable extends React.Component {
 
 
     render() {
-      var sortedDataList = this._dataList;
+      var sortedDataList = this._dataList, heightRes;
       if(this.props.tableData.sortedDataList !== undefined && this.props.tableData.sortedDataList._data !== undefined) {
         sortedDataList = this.props.tableData.sortedDataList;
       }
@@ -214,7 +214,15 @@ class AuditTable extends React.Component {
       { value: 'duplicateTask', label: 'Duplicate task' },
       { value: 'deleteRecord', label: 'Delete record' }
       ];
-
+      if(this.props.containerHeight !== 0) {
+        heightRes = this.props.containerHeight;
+      }
+      var noData = <div/>;
+     if(rowsCount === 0 || rowsCount === undefined) {
+        noData =  <div> <FormattedMessage id="audit.table.noData" description="No data message for audit table" 
+       defaultMessage ="No Audit Task Found"/> </div>
+        heightRes = GOR_TABLE_HEADER_HEIGHT;
+      }
 
       var tableRenderer = <div/>
       if(this.props.tableData.length !== 0) {
@@ -251,7 +259,7 @@ class AuditTable extends React.Component {
        onColumnResizeEndCallback={this._onColumnResizeEndCallback}
        isColumnResizing={false}
        width={this.props.containerWidth}
-       height={this.props.containerHeight*0.9}
+       height={heightRes*0.9}
        {...this.props}>
        <Column
        columnKey="id"
@@ -394,6 +402,7 @@ class AuditTable extends React.Component {
       />
 
       </Table>
+      <div className="gor-no-data"> {noData} </div>
       </div>
 
     }
