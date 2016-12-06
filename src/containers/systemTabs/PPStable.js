@@ -298,11 +298,9 @@ class PPStable extends React.Component {
               <SortHeaderCell onSortChange={this._onSortChange} 
                 sortDir={colSortDirs.id}>  
                 <div className="gorToolHeaderEl">
-                <div className="gorToolHeaderEl"> 
                   <FormattedMessage id="PPStable.Totalpps" description='total pps' 
                   defaultMessage='{ppsTotal} PPS' 
                   values={{ppsTotal:ppsTotal?ppsTotal:'0'}}/> 
-                </div>
                 <div className="gorToolHeaderSubText"> 
                   <FormattedMessage id="PPStable.Subpps" description='sub pps' 
                   defaultMessage='Total: {ppsTotal}' 
@@ -322,16 +320,19 @@ class PPStable extends React.Component {
           columnKey="status"
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
-              sortDir={colSortDirs.statusPriority} >
-              <div>
+
+              sortDir={colSortDirs.statusPriority}>
+
+              <div className="gorToolHeaderEl">
+
                  <FormattedMessage id="PPS.table.status" description="Status for PPS" 
               defaultMessage ="STATUS"/> 
-              </div>
+              
               <div>
               <div className="statuslogoWrap">
             
               </div>
-              
+              </div>
               </div>
             </SortHeaderCell>
           }
@@ -345,12 +346,14 @@ class PPStable extends React.Component {
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.operatingMode}>
+               <div className="gorToolHeaderEl"> 
               <FormattedMessage id="PPS.table.operatingMode" description="operatingMode for PPS" 
               defaultMessage ="OPERATING MODE"/>
               <div className="gorToolHeaderSubText">
                 <FormattedMessage id="PPStable.ppsState" description='pps state for PPStable' 
                 defaultMessage='Pick ({pick}) . Put ({put}) . Audit ({audit}) . Not set ({notSet})' 
                 values={{pick: pick?pick:'0', put:put?put:'0', audit:audit?audit:'0', notSet:notSet?notSet:'0'}}/>
+              </div>
               </div>
             </SortHeaderCell>
           }
@@ -364,6 +367,7 @@ class PPStable extends React.Component {
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.performance}>
+               <div className="gorToolHeaderEl"> 
                <FormattedMessage id="PPS.table.performance" description="performance Status for PPS" 
               defaultMessage ="PERFORMANCE"/> 
                <div>
@@ -371,6 +375,7 @@ class PPStable extends React.Component {
             
               </div>
               
+              </div>
               </div>
             </SortHeaderCell>
           }
@@ -384,12 +389,14 @@ class PPStable extends React.Component {
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.operatorAssigned}>
+               <div className="gorToolHeaderEl"> 
                <FormattedMessage id="PPS.table.operatorAssigned" description="operatorAssigned for PPS" 
               defaultMessage ="OPERATOR ASSIGNED"/> 
               <div className="gorToolHeaderSubText"> 
                 <FormattedMessage id="PPStable.totalOperator" description='totalOperator for PPStable' 
                 defaultMessage='{operatorNum} operator' 
                 values={{operatorNum: operatorNum?operatorNum:'0'}}/>
+              </div>
               </div>
             </SortHeaderCell>
           }

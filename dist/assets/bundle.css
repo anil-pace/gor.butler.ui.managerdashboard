@@ -2075,6 +2075,10 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   text-transform: capitalize;
 }
 
+.pending .public_fixedDataTableCell_cellContent {
+  text-transform: capitalize;
+}
+
 .Completed .public_fixedDataTableCell_cellContent {
   text-transform: capitalize;
 }
@@ -2742,6 +2746,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 
 .fixedDataTableLayout_main .gorToolHeaderEl {
   display: inline-block;
+  min-height: 2.375rem;
 }
 
 .fixedDataTableLayout_main .sortIcon {

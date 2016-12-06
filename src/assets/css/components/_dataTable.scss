@@ -651,6 +651,11 @@ background: #f99405;
     text-transform: capitalize;
   }
 }
+.pending{
+  .public_fixedDataTableCell_cellContent{
+    text-transform: capitalize;
+  }
+}
 .Completed{
   .public_fixedDataTableCell_cellContent{
     text-transform: capitalize;
@@ -1338,6 +1343,7 @@ color: #000000;
 .fixedDataTableLayout_main{
     .gorToolHeaderEl {
       display: inline-block;
+      min-height:calculateRem(38px);
     }
     .sortIcon{
       display: inline-block;

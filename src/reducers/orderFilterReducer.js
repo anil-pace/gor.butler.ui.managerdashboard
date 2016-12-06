@@ -1,4 +1,4 @@
-import { STATUS_FILTER, TIME_FILTER ,GET_PAGE_SIZE_ORDERS,GET_CURRENT_PAGE_ORDERS,GET_LAST_REFRESH_TIME} from '../constants/frontEndConstants'
+import { STATUS_FILTER, TIME_FILTER ,GET_PAGE_SIZE_ORDERS,GET_CURRENT_PAGE_ORDERS,GET_LAST_REFRESH_TIME, SET_CURRENT_PAGE} from '../constants/frontEndConstants'
 export  function filterOptions(state={},action){
 	switch (action.type) {
 	  
@@ -25,7 +25,12 @@ export  function filterOptions(state={},action){
       case GET_LAST_REFRESH_TIME:
       	 return Object.assign({}, state, {
 	    	"lastUpdatedOn":action.data
-      })	
+      })
+
+      case SET_CURRENT_PAGE:
+      	 return Object.assign({}, state, {
+	    	"currentPageUrl":action.data
+      })
 	    
 	  default:
 	    return state

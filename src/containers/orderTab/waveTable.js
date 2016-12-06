@@ -147,9 +147,7 @@ class WavesTable extends React.Component {
         <SortHeaderCell onSortChange={this._onSortChange}
         sortDir={colSortDirs.id}> 
         <div className="gorToolHeaderEl">
-        <div className="gorToolHeaderEl"> 
         <FormattedMessage id="WavesTable.heading" description='heading for WavesTable' defaultMessage='Waves'/>
-        </div>
         <div className="gorToolHeaderSubText"> 
         <FormattedMessage id="WavesTable.Totalwaves" description='total waves for WavesTable' defaultMessage='Total:{totalwave}' values={{totalwave: totalwave?totalwave:'0'}}/>
         
@@ -167,15 +165,15 @@ class WavesTable extends React.Component {
       header={
         <SortHeaderCell onSortChange={this._onSortChange}
         sortDir={colSortDirs.statusPriority}>
-        <div>
+         <div className="gorToolHeaderEl"> 
         <FormattedMessage id="waves.table.status" description="Status for waves" 
         defaultMessage ="STATUS"/> 
-        </div>
         <div>
         <div className="statuslogoWrap">
         <div className=" gorToolHeaderEl"/>
         </div>
         <div className="gorToolHeaderEl alertState"> </div>
+        </div>
         </div>
         </SortHeaderCell>
       }
@@ -189,12 +187,14 @@ class WavesTable extends React.Component {
       header={
         <SortHeaderCell onSortChange={this._onSortChange}
         sortDir={colSortDirs.startTime}>
+         <div className="gorToolHeaderEl"> 
         <FormattedMessage id="waves.table.startTime" description="StartTime for butlerbot" 
         defaultMessage ="START TIME"/>
         <div className="gorToolHeaderSubText"> 
         <FormattedMessage id="WavesTable.pending.status" description='pending status for WavesTable' 
         defaultMessage='{pendingWave} waves pending' 
         values={{pendingWave:pendingWave?pendingWave:'0'}}/>
+        </div>
         </div>
         </SortHeaderCell>
       }
@@ -208,12 +208,14 @@ class WavesTable extends React.Component {
       header={
         <SortHeaderCell onSortChange={this._onSortChange}
         sortDir={colSortDirs.cutOffTime}>
+         <div className="gorToolHeaderEl"> 
         <FormattedMessage id="waves.table.cutOffTime" description="cutOffTime for waves" 
         defaultMessage ="CUT-OFF TIME"/> 
         <div className="gorToolHeaderSubText"> 
         <FormattedMessage id="WavesTable.progress.status" description='progress status for WavesTable' 
         defaultMessage='{progressWave} waves in progress' 
         values={{progressWave:progressWave?progressWave:'0'}}/>
+        </div>
         </div>
         </SortHeaderCell>
       }
@@ -227,12 +229,14 @@ class WavesTable extends React.Component {
       header={
         <SortHeaderCell onSortChange={this._onSortChange}
         sortDir={colSortDirs.ordersToFulfill}>
+         <div className="gorToolHeaderEl"> 
         <FormattedMessage id="waves.table.ordersToFulfill" description="orders to fulfill for waves" 
         defaultMessage ="ORDERS TO FULFILL"/> 
         <div className="gorToolHeaderSubText">  
         <FormattedMessage id="WavesTable.orderRemaining.status" description='orderRemaining status for WavesTable' 
         defaultMessage='{orderRemaining} remaining' 
         values={{orderRemaining:orderRemaining?orderRemaining:'0'}}/>
+        </div>
         </div>
         </SortHeaderCell>
       }
@@ -246,6 +250,7 @@ class WavesTable extends React.Component {
       header={
         <SortHeaderCell onSortChange={this._onSortChange}
         sortDir={colSortDirs.progress} >
+         <div className="gorToolHeaderEl"> 
         <FormattedMessage id="waves.table.progress" description="progress for waves" 
         defaultMessage ="PROGRESS(%)"/>
         <div className="gorToolHeaderSubText">   
@@ -253,6 +258,7 @@ class WavesTable extends React.Component {
         defaultMessage='{completedWaves} waves completed' 
         values={{completedWaves:completedWaves?completedWaves:'0'}}/>
         </div> 
+        </div>
         </SortHeaderCell>
       }
       cell={<ProgressCell data={sortedDataList}  />}
@@ -265,6 +271,7 @@ class WavesTable extends React.Component {
       header={
         <SortHeaderCell onSortChange={this._onSortChange}
         sortDir={colSortDirs.totalOrders}>
+         <div className="gorToolHeaderEl"> 
         <FormattedMessage id="waves.table.totalOrders" description="totalOrders for waves" 
         defaultMessage ="TOTAL ORDERS"/>
         <div className="gorToolHeaderSubText">  
@@ -272,6 +279,7 @@ class WavesTable extends React.Component {
         defaultMessage='{totalOrders} orders' 
         values={{totalOrders:totalOrders?totalOrders:'0'}}/>
         </div> 
+        </div>
         </SortHeaderCell>
       }
       cell={<TextCell data={sortedDataList}  />}

@@ -50,6 +50,7 @@ export const PICK_PPS_PERFORMANCE = "PICK_PPS_PERFORMANCE";
 export const PUT_PPS_PERFORMANCE = "PUT_PPS_PERFORMANCE";
 export const AUDIT_PPS_PERFORMANCE = "AUDIT_PPS_PERFORMANCE";
 
+
 /*FE constants for parsing*/
 export const PPS_PERFORMANCE = "PPS_PERFORMANCE";
 export const USER_DETAILS = "USER_DETAILS";
@@ -144,6 +145,7 @@ export const DEFAULT_PAGE_SIZE = "25";
 export const PAGE_FIELD = "?page=";
 export const GET_CURRENT_PAGE_ORDERS = "GET_CURRENT_PAGE_ORDERS";
 export const GET_LAST_REFRESH_TIME = "GET_LAST_REFRESH_TIME";
+export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 
 /*Constants for Spinner*/
 export const DISPLAY_SPINNER = "DISPLAY_SPINNER";

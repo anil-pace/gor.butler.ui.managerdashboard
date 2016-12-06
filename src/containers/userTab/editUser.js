@@ -16,6 +16,7 @@ class EditUser extends React.Component{
   constructor(props) 
   {
       super(props);  
+      this.state={view:0}
   }
   componentDidMount(){
         let userData={
@@ -46,8 +47,7 @@ class EditUser extends React.Component{
       return nameInfo.type;
   }
   _handleAnchorClick(){
-    this.view1.style.display='block';
-    this.view2.style.display='none';
+    this.setState({view:1});
   }
   _checkPwd(){
     let pswd=this.pswd.value,confirmPswd=this.confirmPswd.value, givenRole,passwordInfo, roleSelected, roleSupervisor=this.props.roleInfo.BUTLER_SUPERVISOR;
@@ -60,6 +60,10 @@ class EditUser extends React.Component{
       givenRole=this.props.roleInfo.BUTLER_UI;
     }
     roleSelected=this.props.roleSet?this.props.roleSet:givenRole;
+    if(roleSelected!=givenRole)
+    {
+      this.setState({view:1});
+    }
     passwordInfo=passwordStatus(pswd,confirmPswd,roleSelected,roleSupervisor);   
     this.props.validatePassword(passwordInfo);
     return passwordInfo.type;
@@ -78,16 +82,6 @@ class EditUser extends React.Component{
           if(!this._checkName())
             return;
         }
-        if(!this.props.passwordCheck.type)
-        {          
-          if(!pswd&&!confirmPswd)
-          {
-            pswd="__unchanged__";
-            confirmPswd="__unchanged__";
-          }
-          else if(!this._checkPwd())
-            return;
-        }
         if(this.props.roleId == BUTLER_SUPERVISOR)
         {
           givenRole=this.props.roleInfo.BUTLER_SUPERVISOR;
@@ -97,6 +91,19 @@ class EditUser extends React.Component{
           givenRole=this.props.roleInfo.BUTLER_UI;
         }
         role=this.props.roleSet?this.props.roleSet:givenRole;
+
+        if(!this.props.passwordCheck.type)
+        {  
+           if(!pswd&&!confirmPswd&&role==givenRole)
+           {
+             pswd="__unchanged__";
+             confirmPswd="__unchanged__";
+           }
+           else if(!this._checkPwd())
+           {
+             return;
+           }
+        }
         let formdata={         
                     "first_name": firstname,
                     "last_name": lastname,
@@ -164,7 +171,8 @@ class EditUser extends React.Component{
           {this.props.roleInfo?(<RoleGroup operator={this.props.roleInfo.BUTLER_UI} manager={this.props.roleInfo.BUTLER_SUPERVISOR} roleId={this.props.roleId} />):''}
 
             <div className='gor-usr-details'>
-            <div className='gor-pass-view1'  ref={node => { this.view1 = node }}>
+            
+            <div style={this.state.view?{display:'block'}:{display:'none'}}>
               <div className='gor-usr-hdlg'><FormattedMessage id="users.edit.changepassword.heading" description='Heading for Change password' 
                defaultMessage='Change password'/></div>
               <div className='gor-sub-head'><FormattedMessage id="users.edit.changepassword.subheading" description='Subheading for create password' 
@@ -172,18 +180,16 @@ class EditUser extends React.Component{
 
               <div className='gor-usr-hdsm'><FormattedMessage id="users.edit.password.field1" description='Text for password' 
             defaultMessage='Password'/></div>
-              <input className={"gor-usr-fdlg"+(this.props.passwordCheck.type===ERROR?' gor-input-error':' gor-input-ok')} onBlur={(this.props.passwordCheck.type===ERROR||this.props.passwordCheck.type===SUCCESS)?this._checkPwd.bind(this):''} type="password" id="pswd"  ref={node => { this.pswd = node }}/>     
+              <input className={"gor-usr-fdlg"+(this.props.passwordCheck.type===ERROR?' gor-input-error':' gor-input-ok')} onMouseDown={(this.props.passwordCheck.type===ERROR||this.props.passwordCheck.type===SUCCESS)?this._checkPwd.bind(this):''} type="password" id="pswd"  ref={node => { this.pswd = node }}/>     
               {this.props.passwordCheck.type?tick:''}
 
               <div className='gor-usr-hdsm'><FormattedMessage id="users.edit.password.field2" description='Text for confirm password' 
             defaultMessage='Confirm Password'/></div>
-              <input className={"gor-usr-fdlg"+(this.props.passwordCheck.type===ERROR?' gor-input-error':' gor-input-ok')} onBlur={this._checkPwd.bind(this)} type="password" id="confirmPswd"  ref={node => { this.confirmPswd = node }}/>
+              <input className={"gor-usr-fdlg"+(this.props.passwordCheck.type===ERROR?' gor-input-error':' gor-input-ok')} onMouseDown={this._checkPwd.bind(this)} type="password" id="confirmPswd"  ref={node => { this.confirmPswd = node }}/>
               {this.props.passwordCheck.type?tick:((this.props.passwordCheck.type===ERROR)?<FieldError txt={this.props.passwordCheck.msg} />:'')}
             </div>
-            </div>
 
-            <div className='gor-usr-details'>
-            <div className='gor-pass-view2'  ref={node => { this.view2 = node }}>
+            <div style={this.state.view?{display:'none'}:{display:'block'}}>
               <div className='gor-usr-hdlg'><FormattedMessage id="users.edit.password." description='Heading for Password' 
               defaultMessage='Password'/></div>
 

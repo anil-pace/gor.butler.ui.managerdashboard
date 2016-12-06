@@ -138,17 +138,18 @@ var chart = d3.select(node).append('svg')
    .style("fill","#666666");
 
    bar.append("text")
-   .attr("x", 75)
-   .attr("y", (barHeight / 2) - 3) 
-   .attr("dy", ".35em")
-   .text(function(d) { 
-      if(d.type === 0){ 
-        return "No Data"; 
-      }
-      })
-   .style("font-size","12px")
-   .style("font-family","sans-serif")
-   .style("fill","#666666");
+  .attr("x", 75)
+  .attr("y", (barHeight / 2) - 3) 
+  .attr("dy", ".35em")
+  .text(function(d) { 
+     if(d.type === 0){ 
+       return "No Data"; 
+     }
+     })
+  .style("font-size","12px")
+  .style("font-family","sans-serif")
+  .style("fill","#666666");
+
 
    chart.append("text")
             .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
@@ -165,11 +166,11 @@ var chart = d3.select(node).append('svg')
  
 }
 componentDidMount(){
-    this.graphRender(this.props.containerWidth,this.props.data.ppsPerformance.aggregate_data,this.props.type,this.props.performanceParam);
+    this.graphRender(this.props.containerWidth,this.props.data.aggregate_data,this.props.type,this.props.performanceParam);
   }
 
    componentWillReceiveProps(nextProps){
-    this.graphRender(nextProps.containerWidth,nextProps.data.ppsPerformance.aggregate_data,nextProps.type,nextProps.performanceParam);
+    this.graphRender(nextProps.containerWidth,nextProps.data.aggregate_data,nextProps.type,nextProps.performanceParam);
   }
 render() {
  return (

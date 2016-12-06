@@ -88,7 +88,6 @@
         alertStatesNum++;
       }      
       else {
-        console.log(data[i].status)
         orderData.status = nProps.context.intl.formatMessage(stringConfig[data[i].status]);
         orderData.statusClass = data[i].status;
         orderData.statusPriority = unBreachedStatus[data[i].status];
@@ -174,11 +173,15 @@
 
 
 
-  refresh() {
+  refresh = (data) => {
     var convertTime = {"oneHourOrders": 1, "twoHourOrders": 2, "sixHourOrders": 6, "twelveHourOrders": 12, "oneDayOrders": 24};
     var status = this.props.filterOptions.statusFilter, timeOut = this.props.filterOptions.timeFilter,currentTime,prevTime;
-    var data = {}, appendStatusUrl="", appendTimeUrl="", appendPageSize="";
-    data.selected = 0;
+    var  appendStatusUrl="", appendTimeUrl="", appendPageSize="";
+    if(data === undefined) {
+      data = {};
+      data.selected = 0;
+      data.url = "";
+    }
     data.url = "";
     data.url = API_URL + ORDERS_URL + ORDER_PAGE + (data.selected+1);
 
@@ -277,7 +280,7 @@ render(){
     pageNum={this.props.orderData.totalPage}
     marginPagesDisplayed={1}
     pageRangeDisplayed={1}
-    clickCallback={this.handlePageClick.bind(this)}
+    clickCallback={this.refresh.bind(this)}
     containerClassName={"pagination"}
     subContainerClassName={"pages pagination"}
     activeClassName={"active"} />
@@ -310,7 +313,8 @@ var mapDispatchToProps = function(dispatch){
     getPageSizeOrders: function(data){ dispatch(getPageSizeOrders(data));},
     currentPage: function(data){ dispatch(currentPageOrders(data));},
     lastRefreshTime: function(data){ dispatch(lastRefreshTime(data));},
-     setOrderListSpinner: function(data){dispatch(setOrderListSpinner(data))}
+     setOrderListSpinner: function(data){dispatch(setOrderListSpinner(data))},
+     setCurrentPage: function(data){dispatch(setCurrentPage(data))}
   }
 };
 

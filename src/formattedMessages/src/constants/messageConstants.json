@@ -190,6 +190,11 @@
     "defaultMessage": "Network Failure"
   },
   {
+    "id": "notify.error.parse",
+    "description": "Text for parsing error",
+    "defaultMessage": "An error occurred while parsing the response"
+  },
+  {
     "id": "notify.error.400",
     "description": "Text for bad request",
     "defaultMessage": "Network error: 400 Bad Request"

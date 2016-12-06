@@ -132,9 +132,10 @@ class PerformanceWidget extends React.Component{
 		var charging_data=_getChargingdata(this.props.chargersData);
 		
 	var itemRender;	
+
 	var noData = <FormattedMessage id="health.noData" description="pps graph nodata" defaultMessage ="No Data"/>
 	if(this.props.widget === PICK_PPS_PERFORMANCE){
-		if(this.props.ppsPerformance.length !== undefined) {
+		if(this.props.ppsPerformance.aggregate_data !== undefined) {
 			itemRender = <ChartHorizontal data={this.props.ppsPerformance} type={GOR_ORDER_PICKED} performanceParam="orders/hr"/>
 		}
 
@@ -145,7 +146,7 @@ class PerformanceWidget extends React.Component{
 
 	else if(this.props.widget === PUT_PPS_PERFORMANCE){
 		
-		if(this.props.ppsPerformance.length !== undefined) {
+		if(this.props.ppsPerformance.aggregate_data !== undefined) {
 			itemRender = <ChartHorizontal data={this.props.ppsPerformance} type={GOR_ITEMS_PUT} performanceParam="items/hr"/>
 		}
 
@@ -155,13 +156,14 @@ class PerformanceWidget extends React.Component{
 	}
 
 	else if(this.props.widget === AUDIT_PPS_PERFORMANCE){
-		if(this.props.ppsPerformance.length !== undefined) {
+		if(this.props.ppsPerformance.aggregate_data !== undefined) {
 			itemRender = <ChartHorizontal data={this.props.ppsPerformance} type={GOR_ITEMS_AUDITED} performanceParam="items/hr"/>
 		}
 
 		else {
 			itemRender = <div className="gor-performance-noData"> {noData} </div> ;
 		}
+
 	}
 	else {
 		itemRender = <Health ppsData={pps_data} butlerData={butler_data} chargingData={charging_data}/>
@@ -189,7 +191,7 @@ function mapStateToProps(state, ownProps){
 		ppsData: state.recieveSocketActions.ppsData || {},
 		butlersData:state.butlersInfo || {},
 		chargersData:state.chargerInfo || {},
-		ppsPerformance: state.PPSperformance || {}
+		ppsPerformance: state.ppsPerformance || {}
 	};
 }
 

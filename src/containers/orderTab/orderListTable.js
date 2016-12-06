@@ -250,9 +250,11 @@ class OrderListTable extends React.Component {
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.pickBy}>
+              <div className="gorToolHeaderEl">
               <FormattedMessage id="orderlist.table.pickBy" description="pick by for orderlist" 
               defaultMessage ="PICK BY"/>
               <div className="gorToolHeaderSubText"> </div>
+              </div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
@@ -265,10 +267,12 @@ class OrderListTable extends React.Component {
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.recievedTime}>
+              <div className="gorToolHeaderEl">
               <FormattedMessage id="orderlist.table.operatingMode" description="recievedTime for Orders" 
               defaultMessage ="RECIEVED TIME"/>
               <div className="gorToolHeaderSubText"> 
                 {this.props.timeZoneString}
+              </div>
               </div>
             </SortHeaderCell>
           }
@@ -282,12 +286,13 @@ class OrderListTable extends React.Component {
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.completedTime}>
+               <div className="gorToolHeaderEl">
               <FormattedMessage id="orderlist.table.completedTime" description="completedTime for orderlist" 
               defaultMessage ="COMPLETED"/>
               <div className="gorToolHeaderSubText">
                 {this.props.timeZoneString}
                </div>
-                
+                </div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
@@ -300,9 +305,11 @@ class OrderListTable extends React.Component {
           header={
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.orderLine}>
+              <div className="gorToolHeaderEl">
               <FormattedMessage id="orderlist.table.orderLine" description="orderLine for orderlist" 
               defaultMessage ="ORDER LINE"/>
               <div className="gorToolHeaderSubText"> </div>
+              </div>
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}
