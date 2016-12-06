@@ -35,9 +35,14 @@
     "defaultMessage": "AUDIT"
   },
   {
-    "id": "overviewStatus.tab.heading",
+    "id": "overviewStatus.tab.fulfilling",
     "description": "overview Status fulfilling orders",
     "defaultMessage": "Fulfilling orders"
+  },
+  {
+    "id": "overviewStatus.tab.default",
+    "description": "default overview Status",
+    "defaultMessage": "None"
   },
   {
     "id": "systemStatus.tab.online",

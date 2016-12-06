@@ -14,7 +14,7 @@ export function secondsToTime(secs){
      timestr+=mm+MM;   
      if(ss)
      {
-        timestr+=ss+ss;
+        timestr+=ss+SS;
      }
      return timestr;     
 }	
