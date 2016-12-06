@@ -1207,6 +1207,11 @@ body {
   text-anchor: end;
 }
 
+.gor-performance-noData {
+  padding-left: 152px;
+  padding-top: 130px;
+}
+
 .gor-fill-back {
   background: #4D5055;
 }
@@ -1941,6 +1946,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   font-size: 12px;
   max-height: 9px;
   background: #ffffff;
+  text-transform: capitalize;
 }
 
 .connected .public_fixedDataTableCell_cellContent {
@@ -2001,6 +2007,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   font-size: 12px;
   max-height: 9px;
   background: #ffffff;
+  text-transform: capitalize;
 }
 
 .disconnected .public_fixedDataTableCell_cellContent {
@@ -3951,6 +3958,10 @@ progress::-moz-progress-bar {
 
 .lineGraph .x line {
   display: none;
+}
+
+.lineGraph .x line.month-break {
+  display: block;
 }
 
 .lineGraph .bar {

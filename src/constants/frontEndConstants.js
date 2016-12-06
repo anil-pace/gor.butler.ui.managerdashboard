@@ -46,6 +46,10 @@ export const SUB_TAB_SELECTED = "SUB_TAB_SELECTED";
 export const GOR_ORDER_PICKED = "orders_picked";
 export const GOR_ITEMS_PUT = "items_put";
 export const GOR_ITEMS_AUDITED = "items_audited";
+export const PICK_PPS_PERFORMANCE = "PICK_PPS_PERFORMANCE";
+export const PUT_PPS_PERFORMANCE = "PUT_PPS_PERFORMANCE";
+export const AUDIT_PPS_PERFORMANCE = "AUDIT_PPS_PERFORMANCE";
+
 
 /*FE constants for parsing*/
 export const PPS_PERFORMANCE = "PPS_PERFORMANCE";
@@ -141,6 +145,7 @@ export const DEFAULT_PAGE_SIZE = "25";
 export const PAGE_FIELD = "?page=";
 export const GET_CURRENT_PAGE_ORDERS = "GET_CURRENT_PAGE_ORDERS";
 export const GET_LAST_REFRESH_TIME = "GET_LAST_REFRESH_TIME";
+export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 
 /*Constants for Spinner*/
 export const DISPLAY_SPINNER = "DISPLAY_SPINNER";
@@ -315,6 +320,9 @@ export const GOR_ONLINE='gor-online';
 export const GOR_NORMAL_TAB='gor-normal-tab';
 export const GOR_PASS='pass';
 export const GOR_FAIL='fail';
+export const GOR_STATUS = "status";
+export const GOR_STATUS_PRIORITY = "statusPriority";
+
 //Icons
 export const PICK_ICON=' iPick';
 export const STOCK_ICON="iStock";

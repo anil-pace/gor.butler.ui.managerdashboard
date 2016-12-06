@@ -101,8 +101,8 @@
   },
   {
     "id": "stringConfig.notFulfillable",
-    "description": "Text to show auto",
-    "defaultMessage": "Auto"
+    "description": "Text to show In progress",
+    "defaultMessage": "In Progress"
   },
   {
     "id": "stringConfig.exception",
@@ -118,5 +118,15 @@
     "id": "stringConfig.offline",
     "description": "Text to show Offline",
     "defaultMessage": "offline"
+  },
+  {
+    "id": "stringConfig.received",
+    "description": "Text to show received",
+    "defaultMessage": "In Progress"
+  },
+  {
+    "id": "stringConfig.cancelled",
+    "description": "Text to show cancelled",
+    "defaultMessage": "In Progress"
   }
 ]

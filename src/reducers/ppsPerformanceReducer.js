@@ -14,13 +14,14 @@ export  function PPSperformance(state={},action){
          var res;
          res=action.data;
          if(res.aggregate_data){
-          
-          }
-          
-           return Object.assign({}, state, {
+          return Object.assign({}, state, {
                "ppsPerformance" : action.data
           })
 
+          
+          }
+          
+           
 	  default:
 	    return state
   }

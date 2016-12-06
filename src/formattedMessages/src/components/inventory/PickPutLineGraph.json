@@ -12,5 +12,10 @@
   {
     "id": "inventory.linechart.noDataText",
     "defaultMessage": "No Item Movement"
+  },
+  {
+    "id": "inventory.linechart.today",
+    "description": "Text to show today",
+    "defaultMessage": "Today's"
   }
 ]

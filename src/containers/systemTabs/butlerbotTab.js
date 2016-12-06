@@ -59,7 +59,7 @@ class ButlerBot extends React.Component{
     butlerDetail = {};
     butlerDetail.id =  BOT;
     butlerDetail.statusClass = data[i].state;
-    butlerDetail.status = stringConfig[data[i].state];
+    butlerDetail.status = nProps.context.intl.formatMessage(stringConfig[data[i].state]);
     butlerDetail.statusPriority = priStatus[data[i].state];
     butlerDetail.location = data[i].location;
     butlerDetail.voltage = data[i].voltage;

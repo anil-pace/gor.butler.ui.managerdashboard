@@ -27,7 +27,9 @@ class WaveTab extends React.Component{
   data = nProps.props.waveDetail.waveData;
   var waveData = [], waveDetail = {};
   let WAVE, waveId;
+
   var status = {"In Progress":"progress", "Completed":"completed", "Breached":"breached", "Pending":"pending" };
+
   var priStatus = {"In Progress": 2, "Completed": 4, "Breached":1 ,"Pending":3};
   if(data) {
      for (var i =data.length - 1; i >= 0; i--) {
@@ -43,16 +45,31 @@ class WaveTab extends React.Component{
         waveDetail.startTime = "--";
       }
       else {
-        waveDetail.startTime = data[i].start_time;
+        waveDetail.startTime = nProps.context.intl.formatDate(data[i].startTime,
+                                {timeZone:timeOffset,
+                                  year:'numeric',
+                                  month:'short',
+                                  day:'2-digit',
+                                  hour:"2-digit",
+                                  minute:"2-digit",
+                                  hour12: false
+                                });
       }
 
       if(data[i].cut_off_time === "") {
         waveDetail.cutOffTime = "--";
       }
       else {
-        waveDetail.cutOffTime = data[i].cut_off_time;
+        waveDetail.cutOffTime = nProps.context.intl.formatDate(data[i].cutOffTime,
+                                {timeZone:timeOffset,
+                                  year:'numeric',
+                                  month:'short',
+                                  day:'2-digit',
+                                  hour:"2-digit",
+                                  minute:"2-digit",
+                                  hour12: false
+                                });
       }
-      waveDetail.cutOffTime = data[i].cut_off_time;
       waveDetail.ordersToFulfill = data[i].orders_to_fulfill;
       waveDetail.totalOrders = data[i].total_orders;
       if(waveDetail.totalOrders) {

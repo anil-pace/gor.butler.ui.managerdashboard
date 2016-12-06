@@ -150,6 +150,7 @@ var chart = d3.select(node).append('svg')
   .style("font-family","sans-serif")
   .style("fill","#666666");
 
+
    chart.append("text")
             .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
             .attr("transform", "translate("+ (width/2+30) +","+(-7)+")")  // centre below axis
@@ -165,11 +166,11 @@ var chart = d3.select(node).append('svg')
  
 }
 componentDidMount(){
-    this.graphRender(this.props.containerWidth,this.props.data.ppsPerformance.aggregate_data,this.props.type,this.props.performanceParam);
+    this.graphRender(this.props.containerWidth,this.props.data.aggregate_data,this.props.type,this.props.performanceParam);
   }
 
    componentWillReceiveProps(nextProps){
-    this.graphRender(nextProps.containerWidth,nextProps.data.ppsPerformance.aggregate_data,nextProps.type,nextProps.performanceParam);
+    this.graphRender(nextProps.containerWidth,nextProps.data.aggregate_data,nextProps.type,nextProps.performanceParam);
   }
 render() {
  return (

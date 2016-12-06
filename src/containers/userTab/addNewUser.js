@@ -174,12 +174,12 @@ class AddUser extends React.Component{
 
               <div className='gor-usr-hdsm'><FormattedMessage id="users.add.password.field1" description='Text for password' 
             defaultMessage='Password'/></div>
-              <input className={"gor-usr-fdlg"+(this.props.passwordCheck.type===ERROR?' gor-input-error':' gor-input-ok')} onBlur={(this.props.passwordCheck.type===ERROR||this.props.passwordCheck.type===SUCCESS)?this._checkPwd.bind(this):''} type="password" id="pswd"  ref={node => { this.pswd = node }}/>     
+              <input className={"gor-usr-fdlg"+(this.props.passwordCheck.type===ERROR?' gor-input-error':' gor-input-ok')} onMouseDown={(this.props.passwordCheck.type===ERROR||this.props.passwordCheck.type===SUCCESS)?this._checkPwd.bind(this):''} type="password" id="pswd"  ref={node => { this.pswd = node }}/>     
               {this.props.passwordCheck.type?tick:''}
 
               <div className='gor-usr-hdsm'><FormattedMessage id="users.add.password.field2" description='Text for confirm password' 
             defaultMessage='Confirm Password'/></div>
-              <input className={"gor-usr-fdlg"+(this.props.passwordCheck.type===ERROR?' gor-input-error':' gor-input-ok')} onBlur={this._checkPwd.bind(this)} type="password" id="confirmPswd"  ref={node => { this.confirmPswd = node }}/>
+              <input className={"gor-usr-fdlg"+(this.props.passwordCheck.type===ERROR?' gor-input-error':' gor-input-ok')} onMouseDown={this._checkPwd.bind(this)} type="password" id="confirmPswd"  ref={node => { this.confirmPswd = node }}/>
               {this.props.passwordCheck.type===SUCCESS?tick:((this.props.passwordCheck.type===ERROR)?<FieldError txt={this.props.passwordCheck.msg} />:'')}
 
             </div>

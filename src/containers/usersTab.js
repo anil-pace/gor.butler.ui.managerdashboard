@@ -61,18 +61,18 @@ class UsersTab extends React.Component{
 	{
     	super(props);
     }
-  _processUserDetails(data, nProps) {
+  _processUserDetails() {
   var nProps = this,
   data = nProps.props.userdetails
   let operator  = nProps.context.intl.formatMessage(messages.userOperator);
   let manager  = nProps.context.intl.formatMessage(messages.userManager);
-  let pick  = stringConfig.pick;
-  let put  = stringConfig.put;
-  let audit  = stringConfig.audit;
+  let pick  = nProps.context.intl.formatMessage(stringConfig.pick);
+  let put  = nProps.context.intl.formatMessage(stringConfig.put);
+  let audit  = nProps.context.intl.formatMessage(stringConfig.audit);
   let front  = nProps.context.intl.formatMessage(messages.userFront);
   let back  = nProps.context.intl.formatMessage(messages.userBack);
-  let online  = stringConfig.online;
-  let offline  = stringConfig.offline;
+  let online  = nProps.context.intl.formatMessage(stringConfig.online);
+  let offline  = nProps.context.intl.formatMessage(stringConfig.offline);
   var role = {"butler_ui":operator, "butler_supervisor":manager};
   var work_mode = {"pick":pick,"put": put,"audit": audit};
   var work_place = {"front": front, "back":back};
@@ -92,8 +92,11 @@ class UsersTab extends React.Component{
     else if(data[i].pps.pps_mode) {
       userData.workMode = work_mode[data[i].pps.pps_mode];
     }
+
     userData.location = nProps.context.intl.formatMessage(messages.userLocation,{"ppsId":data[i].pps.pps_id});
-    userData.logInTime = data[i].login_time;
+    userData.logInTime = nProps.context.intl.formatTime(data[i].login_time,{hour: 'numeric',minute: 'numeric'}) +
+    " (" + nProps.context.intl.formatRelative(data[i].login_time) +")";;
+
     }
 
     else {

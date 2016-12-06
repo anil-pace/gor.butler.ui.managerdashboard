@@ -26,19 +26,16 @@ class MultiLineGraph extends React.Component{
   */
  
   _graphRender(invData){
-
+    var node = document.createElement('div');
     if(invData.length){
     try{
-        // if (this.props.inventoryData.length  <= 0){
-        //   return;
-        // }
+        
         let config =  this.props.config;
-        let node = document.createElement('div');
+        
         let width = config.width;
         let height = config.height;
         let margin =config.margin;
         let component = this;
-        // let dataArray = this.props.inventoryData;
         width= width - margin.left - margin.right;
 
         let jsonArray= invData
@@ -186,16 +183,20 @@ class MultiLineGraph extends React.Component{
       .attr("y",height/2)
       .text(config.noDataText);
     }
+     var mBreak= g.selectAll("g.x");
+     var textEl = parseInt(mBreak.select("g:nth-child("+dataArray.length+") text").text());
+      mBreak.select("g:nth-child("+dataArray.length+")").append("text").attr("x","-20").attr("y","2.5em").text(config.today)
+      var monthBreak = mBreak.select("g:nth-child("+(dataArray.length - 1)+")");
+      mBreak.select("g:nth-child("+(dataArray.length - textEl)+")").append("line").attr("class","month-break").attr("x1","15").attr("x2","15").attr("y1","0").attr("y2","25");
+      mBreak.select("g:nth-child("+(dataArray.length - (textEl-1))+")").append("text").attr("x","-5").attr("y","30").text(config.breakMonth);
         
-        this.setState({d3: node});
+        
       }
       catch(error){
         throw "Error while creating the pickput line graph: "+ error;
       }
     }
-    else{
-      this.setState({d3: ''});
-    }
+    this.setState({d3: node});
 
     }
 

@@ -35,6 +35,13 @@ export function passwordStatus(pswd,confirmPswd,selectedRole,managerRole){
               msg:EMPTY_PWD           
             };            
           }
+          else if(pswd!=confirmPswd)
+          {
+             passwordInfo={
+              type:ERROR,
+              msg:MATCH_PWD           
+             };            
+          }
           else if(pswd.length<8)
           {
             if(selectedRole===managerRole)
@@ -56,23 +63,17 @@ export function passwordStatus(pswd,confirmPswd,selectedRole,managerRole){
               passwordInfo={
               type:SUCCESS,
               msg:TYPE_SUCCESS               
-              };            
+              };                
             }
-          }
-          else if(pswd!=confirmPswd)
-          {
-            passwordInfo={
-              type:ERROR,
-              msg:MATCH_PWD           
-            };            
           }
           else
           {
-            passwordInfo={
+              passwordInfo={
               type:SUCCESS,
               msg:TYPE_SUCCESS               
-            };            
-          }   
+              };            
+          }    
+
         return passwordInfo;
 }
 export function locationStatus(locId){

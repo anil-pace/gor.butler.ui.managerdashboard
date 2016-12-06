@@ -22,6 +22,11 @@ const messages = defineMessages({
     noDataText:{
       id:"inventory.linechart.noDataText", 
       defaultMessage: "No Item Movement"
+    },
+    lineChartTodayTxt: {
+        id: 'inventory.linechart.today',
+        description: 'Text to show today',
+        defaultMessage: "Today's",
     }
 
 
@@ -107,8 +112,10 @@ class PickPutLineGraph extends React.Component{
   }
     render(){
         var processedData = this._processData();
-        var config = Object.assign({},INVENTORY_LINE_CONFIG)
-        config.noDataText = this.context.intl.formatMessage(messages.noDataText)
+        var config = Object.assign({},INVENTORY_LINE_CONFIG);
+        config.noDataText = this.context.intl.formatMessage(messages.noDataText);
+        config.today = this.context.intl.formatMessage(messages.lineChartTodayTxt);
+        config.breakMonth = this.context.intl.formatDate(Date.now(), {month: 'short'}); 
         return (
             <div>
                 <MultiLineGraph config ={config} inventoryData={processedData || []}/>

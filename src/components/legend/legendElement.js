@@ -61,7 +61,7 @@ legendElement.propTypes={
 	color:React.PropTypes.string,
 	xpos:React.PropTypes.number,
 	ypos:React.PropTypes.number,
-	name:React.PropTypes.string
+	name:React.PropTypes.object
 }
 legendElement.contextTypes = {
   intl: React.PropTypes.object.isRequired
