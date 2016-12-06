@@ -252,7 +252,9 @@ class OrderListTable extends React.Component {
               <div className="gorToolHeaderEl">
               <FormattedMessage id="orderlist.table.pickBy" description="pick by for orderlist" 
               defaultMessage ="PICK BY"/>
-              <div className="gorToolHeaderSubText"> </div>
+              <div className="gorToolHeaderSubText"> 
+                {this.props.timeZoneString}
+              </div>
               </div>
             </SortHeaderCell>
           }

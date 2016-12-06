@@ -92,17 +92,14 @@
         orderData.statusClass = data[i].status;
         orderData.statusPriority = unBreachedStatus[data[i].status];
       }
-      
-
-
-
       orderData.recievedTime = nProps.context.intl.formatDate(data[i].create_time,
                                 {timeZone:timeOffset,
                                   year:'numeric',
                                   month:'short',
                                   day:'2-digit',
                                   hour:"2-digit",
-                                  minute:"2-digit"
+                                  minute:"2-digit",
+                                  hour12: false
                                 })
                                 
 
@@ -110,8 +107,15 @@
         orderData.pickBy = "--";
       }
       else {
-         orderData.pickBy = data[i].pick_before_time.substring(4);
-         orderData.pickBy = orderData.pickBy.substring(0, orderData.pickBy.length - 4)
+         orderData.pickBy = nProps.context.intl.formatDate(data[i].pick_before_time,
+                                {timeZone:timeOffset,
+                                  year:'numeric',
+                                  month:'short',
+                                  day:'2-digit',
+                                  hour:"2-digit",
+                                  minute:"2-digit",
+                                  hour12: false
+                                })
      }
 
 
@@ -128,7 +132,8 @@
                                   month:'short',
                                   day:'2-digit',
                                   hour:"2-digit",
-                                  minute:"2-digit"
+                                  minute:"2-digit",
+                                  hour12: false
                                 })
       }else{
         orderData.completedTime = "--";
