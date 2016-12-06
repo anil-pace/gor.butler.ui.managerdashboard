@@ -167,7 +167,7 @@ class OrderListTable extends React.Component {
               defaultMessage ="OrderList"/>
             </div>
             <div className="gor-button-wrap">
-            <button className="gor-refresh-btn" onClick={this.props.refreshOption.bind(this)} >
+            <button className="gor-refresh-btn" onClick={this.props.refreshOption.bind(this,null)} >
               
               <FormattedMessage id="order.table.buttonLable" description="button label for refresh" 
               defaultMessage ="Refresh Data"/>

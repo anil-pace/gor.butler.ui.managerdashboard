@@ -177,7 +177,7 @@
     var convertTime = {"oneHourOrders": 1, "twoHourOrders": 2, "sixHourOrders": 6, "twelveHourOrders": 12, "oneDayOrders": 24};
     var status = this.props.filterOptions.statusFilter, timeOut = this.props.filterOptions.timeFilter,currentTime,prevTime;
     var  appendStatusUrl="", appendTimeUrl="", appendPageSize="";
-    if(data === undefined) {
+    if(!data) {
       data = {};
       data.selected = 0;
       data.url = "";
