@@ -65,7 +65,7 @@ class MultiLineGraph extends React.Component{
 
         // setting axis
         
-        var xAxis = d3.svg.axis().scale(x).orient("bottom").tickFormat(d3.time.format("%d")).ticks(dataArray.length-1)
+        var xAxis = d3.svg.axis().scale(x).orient("bottom").tickFormat(d3.time.format("%e")).ticks(dataArray.length-1)
         .outerTickSize(config.outerTickSize);
         var yAxis = d3.svg.axis().scale(y).orient("left")
         .ticks(config.ticks).outerTickSize(config.outerTickSize);
