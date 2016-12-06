@@ -107,12 +107,13 @@ class Tabs extends React.Component{
     {
       if(this.props.overview_status === FULFILLING_ORDERS)
       {
-        overviewStatus = <FormattedMessage id="overviewStatus.tab.heading" description="overview Status fulfilling orders" 
+        overviewStatus = <FormattedMessage id="overviewStatus.tab.fulfilling" description="overview Status fulfilling orders" 
               defaultMessage ="Fulfilling orders"/>;  
       }
       else
       {
-        overviewStatus = '';          
+        overviewStatus = <FormattedMessage id="overviewStatus.tab.default" description="default overview Status" 
+              defaultMessage ="None"/>;          
       }
       if(!this.props.system_emergency)
       {
