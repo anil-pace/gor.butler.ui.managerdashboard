@@ -1,6 +1,6 @@
 import {HR,MM,SS} from '../constants/frontEndConstants';;
 
-export function secsToTime(secs){
+export function secondsToTime(secs){
      let hh=0,mm=0,ss=0,mins,timestr='';
      hh=parseInt(secs/3600,10);
      secs%=3600;
