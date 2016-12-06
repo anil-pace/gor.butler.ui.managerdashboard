@@ -46,6 +46,9 @@ export const SUB_TAB_SELECTED = "SUB_TAB_SELECTED";
 export const GOR_ORDER_PICKED = "orders_picked";
 export const GOR_ITEMS_PUT = "items_put";
 export const GOR_ITEMS_AUDITED = "items_audited";
+export const PICK_PPS_PERFORMANCE = "PICK_PPS_PERFORMANCE";
+export const PUT_PPS_PERFORMANCE = "PUT_PPS_PERFORMANCE";
+export const AUDIT_PPS_PERFORMANCE = "AUDIT_PPS_PERFORMANCE";
 
 /*FE constants for parsing*/
 export const PPS_PERFORMANCE = "PPS_PERFORMANCE";

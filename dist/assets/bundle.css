@@ -1207,6 +1207,11 @@ body {
   text-anchor: end;
 }
 
+.gor-performance-noData {
+  padding-left: 152px;
+  padding-top: 130px;
+}
+
 .gor-fill-back {
   background: #4D5055;
 }

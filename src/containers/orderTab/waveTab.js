@@ -14,7 +14,7 @@ function processWaveData(data, nProps) {
   let breached  = nProps.context.intl.formatMessage({id:"waveDetail.breached.status", defaultMessage: "Breached"});
   let pending  = nProps.context.intl.formatMessage({id:"waveDetail.pending.status", defaultMessage: "Pending"});
   var intlStatus = {"In Progress":progress, "Completed":completed, "Breached":breached, "Pending":pending };
-  var status = {"In Progress":"progress", "Completed":"completed", "Breached":"breached", "Pending":"pending" };
+  var status = {"in_progress":"progress", "Completed":"completed", "Breached":"breached", "Pending":"pending" };
   var priStatus = {"In Progress": 2, "Completed": 4, "Breached":1 ,"Pending":3};
   if(data) {
      for (var i =data.length - 1; i >= 0; i--) {

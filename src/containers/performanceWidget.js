@@ -5,7 +5,7 @@ import ChartHorizontal from '../components/graphd3/graph_horizontal';
 import { connect } from 'react-redux';
 import {renderPerformanceWidget} from '../actions/performanceWidgetActions';
 import { FormattedMessage } from 'react-intl';
-import {GOR_ORDER_PICKED, GOR_ITEMS_PUT, GOR_ITEMS_AUDITED} from '../constants/frontEndConstants';
+import {GOR_ORDER_PICKED, GOR_ITEMS_PUT, GOR_ITEMS_AUDITED, PICK_PPS_PERFORMANCE, PUT_PPS_PERFORMANCE, AUDIT_PPS_PERFORMANCE} from '../constants/frontEndConstants';
 
 
 function _getPPSdata(link) {
@@ -132,16 +132,36 @@ class PerformanceWidget extends React.Component{
 		var charging_data=_getChargingdata(this.props.chargersData);
 		
 	var itemRender;	
-	if(this.props.widget === "PICK_PPS_PERFORMANCE"){
-		itemRender = <ChartHorizontal data={this.props.ppsPerformance} type={GOR_ORDER_PICKED} performanceParam="orders/hr"/>
+	var noData = <FormattedMessage id="health.noData" description="pps graph nodata" defaultMessage ="No Data"/>
+	if(this.props.widget === PICK_PPS_PERFORMANCE){
+		if(this.props.ppsPerformance.length !== undefined) {
+			itemRender = <ChartHorizontal data={this.props.ppsPerformance} type={GOR_ORDER_PICKED} performanceParam="orders/hr"/>
+		}
+
+		else {
+			itemRender = <div className="gor-performance-noData"> {noData} </div> ;
+		}
 	}
 
-	else if(this.props.widget === "PUT_PPS_PERFORMANCE"){
-		itemRender = <ChartHorizontal data={this.props.ppsPerformance} type={GOR_ITEMS_PUT} performanceParam="items/hr"/>
+	else if(this.props.widget === PUT_PPS_PERFORMANCE){
+		
+		if(this.props.ppsPerformance.length !== undefined) {
+			itemRender = <ChartHorizontal data={this.props.ppsPerformance} type={GOR_ITEMS_PUT} performanceParam="items/hr"/>
+		}
+
+		else {
+			itemRender = <div className="gor-performance-noData"> {noData} </div> ;
+		}
 	}
 
-	else if(this.props.widget === "AUDIT_PPS_PERFORMANCE"){
-		itemRender = <ChartHorizontal data={this.props.ppsPerformance} type={GOR_ITEMS_AUDITED} performanceParam="items/hr"/>
+	else if(this.props.widget === AUDIT_PPS_PERFORMANCE){
+		if(this.props.ppsPerformance.length !== undefined) {
+			itemRender = <ChartHorizontal data={this.props.ppsPerformance} type={GOR_ITEMS_AUDITED} performanceParam="items/hr"/>
+		}
+
+		else {
+			itemRender = <div className="gor-performance-noData"> {noData} </div> ;
+		}
 	}
 	else {
 		itemRender = <Health ppsData={pps_data} butlerData={butler_data} chargingData={charging_data}/>

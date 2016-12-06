@@ -101,12 +101,22 @@
   },
   {
     "id": "stringConfig.notFulfillable",
-    "description": "Text to show auto",
-    "defaultMessage": "Auto"
+    "description": "Text to show In progress",
+    "defaultMessage": "In Progress"
   },
   {
     "id": "stringConfig.exception",
     "description": "Text to show exception",
     "defaultMessage": "Exception"
+  },
+  {
+    "id": "stringConfig.received",
+    "description": "Text to show received",
+    "defaultMessage": "In Progress"
+  },
+  {
+    "id": "stringConfig.cancelled",
+    "description": "Text to show cancelled",
+    "defaultMessage": "In Progress"
   }
 ]
