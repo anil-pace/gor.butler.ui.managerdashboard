@@ -44,8 +44,8 @@ class PickStatusWidget extends React.Component{
         if(!textLeft)
         {
             valueLeftStatus=GOR_NONE;
-            textLeft=<FormattedMessage id="widget.pick.completed" description='Text for completed' 
-            defaultMessage='Completed'/>;
+            textLeft=<FormattedMessage id="widget.pick.none" description='Text for none' 
+            defaultMessage='None'/>;
             lowLeft=<FormattedMessage id="widget.pick.status.idle" description='PPS Offline' 
             defaultMessage='Offline'/>;
         }

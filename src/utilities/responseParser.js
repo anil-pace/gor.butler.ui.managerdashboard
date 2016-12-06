@@ -10,8 +10,6 @@ import {setAuditSpinner} from '../actions/auditActions';
 import {setButlerSpinner,setPpsSpinner,setCsSpinner,setWavesSpinner} from '../actions/spinnerAction';
 import {receiveInventoryTodayData,receiveInventoryHistoryData} from '../actions/inventoryActions';
 import {resTypeSnapShotToday,resTypeSnapShotHistory} from '../../mock/mockDBData';
-import {notifyFail} from '../actions/validationActions';
-import {ERR_RES} from '../constants/messageConstants';
 
 export function ResponseParse(store,res)
 {
@@ -130,7 +128,6 @@ export function ResponseParse(store,res)
 	    }
     }
     catch(e){
-		store.dispatch(notifyFail(ERR_RES));
 		throw e;
 	}
 }  

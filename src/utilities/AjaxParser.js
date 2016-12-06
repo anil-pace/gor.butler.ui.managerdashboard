@@ -15,8 +15,9 @@ import {ShowError} from './showError';
 export function AjaxParse(store,res,cause,status)
 {
 	let stringInfo={};
-	switch(cause)
-	{
+
+      switch(cause)
+	  {
 		case AUTH_LOGIN:	
 			if(res.auth_token)
 			{		
@@ -87,30 +88,20 @@ export function AjaxParse(store,res,cause,status)
 			}
 			break;
 		case ADD_USER:
-
 		case DELETE_USER:
-
 		case EDIT_USER:
-			try
-		    {	
-		    	stringInfo=codeToString(res.alert_data[0]);
-		    	if(stringInfo.type)
-		    	{
-		    		store.dispatch(notifySuccess(stringInfo.msg));
-		    	}
-		    	else
-		    	{
-		    		store.dispatch(notifyFail(stringInfo.msg));				    		
-		    	}
+		    stringInfo=codeToString(res.alert_data[0]);
+		    if(stringInfo.type)
+		    {
+		    	store.dispatch(notifySuccess(stringInfo.msg));
 		    }
-			catch(e)
-			{
-		    			store.dispatch(notifyFail(ERR_RES));
-		    			throw e;		
-			}
+		    else
+		    {
+		    	store.dispatch(notifyFail(stringInfo.msg));				    		
+		    }
 			break;
 		case CREATE_AUDIT:
-			if(res.alert_data)								//Can't use try-catch here
+			if(res.alert_data)								
 		    {	
 		    	stringInfo=codeToString(res.alert_data[0]);
 		    	store.dispatch(notifyFail(stringInfo.msg));
@@ -123,27 +114,18 @@ export function AjaxParse(store,res,cause,status)
 		   	}
 			break;
 		case DELETE_AUDIT:
-			try
-		    {	
-		    	stringInfo=codeToString(res.alert_data[0]);
-		    	if(stringInfo.type)
-		    	{
-		    		store.dispatch(notifyDelete(stringInfo.msg));
-		    		store.dispatch(setAuditRefresh(true));//set refresh flag
-		    	}
-		    	else
-		    	{
-		    		store.dispatch(notifyFail(stringInfo.msg));	
-		    		store.dispatch(setAuditRefresh(false));//reset refresh flag			   			
-		    	}
+		    stringInfo=codeToString(res.alert_data[0]);
+		    if(stringInfo.type)
+		    {
+		    	store.dispatch(notifyDelete(stringInfo.msg));
+		    	store.dispatch(setAuditRefresh(true));//set refresh flag
 		    }
-			catch(e)
-			{
-		    			store.dispatch(notifyFail(ERR_RES));
-		    			throw e;		
-			}
+		    else
+		    {
+		    	store.dispatch(notifyFail(stringInfo.msg));	
+		    	store.dispatch(setAuditRefresh(false));//reset refresh flag			   			
+		    }
 			break;
-
 		case GET_PPSLIST:
 			let auditpps=[];
 			if(res.data.audit)
@@ -160,28 +142,19 @@ export function AjaxParse(store,res,cause,status)
 			}
 			else
 			{
-				try
-				{
 					stringInfo=codeToString(res.unsuccessful[0].alert_data[0].code);
 					store.dispatch(notifyFail(stringInfo.msg));
 					store.dispatch(setAuditRefresh(false));//reset refresh flag			   		
-				}
-				catch(e)
-				{
-		    			store.dispatch(notifyFail(ERR_RES));
-		    			throw e;		
-				}
-
 			}
 			break;
 		case RECIEVE_HEADER:
-						store.dispatch(recieveHeaderInfo(res));
-						break;
+			 store.dispatch(recieveHeaderInfo(res));
+			 break;
 		case RECIEVE_TIME_OFFSET:
-						store.dispatch(setTimeOffSetData(res));
-						break;
+			 store.dispatch(setTimeOffSetData(res));
+			 break;
 
 		default:
 			ShowError(store,cause,status);
-	}
+	 }
 }  
