@@ -110,6 +110,16 @@
     "defaultMessage": "Exception"
   },
   {
+    "id": "stringConfig.online",
+    "description": "Text to show Online",
+    "defaultMessage": "online"
+  },
+  {
+    "id": "stringConfig.offline",
+    "description": "Text to show Offline",
+    "defaultMessage": "offline"
+  },
+  {
     "id": "stringConfig.received",
     "description": "Text to show received",
     "defaultMessage": "In Progress"

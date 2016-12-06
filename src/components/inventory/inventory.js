@@ -28,11 +28,32 @@ import { FormattedMessage ,FormattedDate} from 'react-intl';
 		var snapShotData = this.props.isPrevDateSelected ? this.props.inventoryDataPrevious : this.props.snapshotData[0];
 		
 		var histogramLegend = {
-			data:INV_HIST_LEGEND_DATA,
+			data:[{
+				color:INV_HIST_LEGEND_COLOR,
+				name:<FormattedMessage id="inventory.histogram.legend" description="Inventory Histogram Legend" 
+              			defaultMessage ="Items Stocked">
+              			{(message) => <tspan>{message}</tspan>}
+              			</FormattedMessage>
+			}],
 			config:INV_HIST_LEGEND_CONFIG
 		}
 		var lineChartLagend = {
-			data:INV_LINE_LEGEND_DATA,
+			data:[
+				{
+					color:INV_LINE_LEGEND_IPICKED_COLOR,
+					name:<FormattedMessage id="inventory.linechart.legendPicked" description="Inventory Linechart Legend for picked" 
+              			defaultMessage ="Items Picked">
+              			{(message) => <tspan>{message}</tspan>}
+              			</FormattedMessage>
+				},
+				{
+					color:INV_LINE_LEGEND_IPUT_COLOR,
+					name:<FormattedMessage id="inventory.linechart.legendPut" description="Inventory Linechart Legend for put" 
+              			defaultMessage ="Items Put">
+              			{(message) => <tspan>{message}</tspan>}
+              			</FormattedMessage>
+				}
+			],
 			config:INV_LINE_LEGEND_CONFIG
 		}
 		return (

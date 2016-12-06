@@ -1,0 +1,26 @@
+[
+  {
+    "id": "auditdetail.created.status",
+    "defaultMessage": "Created"
+  },
+  {
+    "id": "auditdetail.pending.status",
+    "defaultMessage": "Pending"
+  },
+  {
+    "id": "auditdetail.progress.status",
+    "defaultMessage": "In Progress"
+  },
+  {
+    "id": "auditdetail.completed.status",
+    "defaultMessage": "Completed"
+  },
+  {
+    "id": "auditdetail.sku.prefix",
+    "defaultMessage": "SKU"
+  },
+  {
+    "id": "auditdetail.location.prefix",
+    "defaultMessage": "Location"
+  }
+]

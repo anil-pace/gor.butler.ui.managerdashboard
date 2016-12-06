@@ -9,7 +9,7 @@ import * as mockData from '../../mock/mockDBData'
  */
  function parseInvData(state,action){
   //Parsing logic goes here
-  var inventoryObj,inventory,currentDate,stateObj,hasDataChanged,isHistory,completeData,categoryData,calculatedInvData={};
+  var inventoryObj,parsedDate,inventory,currentDate,stateObj,hasDataChanged,isHistory,completeData,categoryData,calculatedInvData={};
   var recreatedData=state.recreatedData ? JSON.parse(JSON.stringify(state.recreatedData)) : {};
   isHistory = (action.type === INVENTORY_DATA_HISTORY ? "inventoryDataHistory" : "inventoryDataToday")
   
@@ -18,7 +18,7 @@ import * as mockData from '../../mock/mockDBData'
   stateObj = JSON.parse(JSON.stringify(state));
   hasDataChanged = stateObj.hasDataChanged === 0 ? 1 : 0;
   
-  inventory = inventoryObj.complete_data
+  inventory = JSON.parse(JSON.stringify(inventoryObj.complete_data));
 
   for(let i = 0 ,len=inventory.length; i < len ; i++){
     inventory[i]["current_stock"] = (inventory[i]["opening_stock"] + inventory[i]["items_put"])-inventory[i]["items_picked"]
@@ -29,11 +29,13 @@ import * as mockData from '../../mock/mockDBData'
       categoryData[j].colorCode = CATEGORY_COLOR_MAP[j] || CATEGORY_COLOR_MAP[CATEGORY_COLOR_MAP.length -1]
     }
     categoryData.push(calculatedInvData);
+    parsedDate = new Date(inventory[i].date);
+    inventory[i].date = parsedDate.getFullYear() +"-"+(parsedDate.getMonth()+1)+"-"+parsedDate.getDate();
     recreatedData[Date.parse(inventory[i].date)] = inventory[i];
   }
   //Adding the inventory today to inventory history
   if(state.inventoryDataToday && state.inventoryDataToday.length){
-      //currentDate = state.inventoryDataToday[0]
+      
       inventory.unshift(state.inventoryDataToday[0]);
       recreatedData[Date.parse(inventory[0].date)] = inventory[0];
       currentDate = state.currentDate;

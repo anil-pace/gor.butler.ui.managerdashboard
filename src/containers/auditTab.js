@@ -10,9 +10,38 @@ import ReactPaginate from 'react-paginate';
 import {getPageData} from '../actions/paginationAction';
 import {AUDIT_RETRIEVE,GET,APP_JSON} from '../constants/frontEndConstants';
 import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,SEARCH_AUDIT_URL,GIVEN_PAGE,GIVEN_PAGE_SIZE} from '../constants/configConstants';
-
-
 import {setAuditSpinner} from '../actions/auditActions';
+import { defineMessages } from 'react-intl';
+
+//Mesages for internationalization
+const messages = defineMessages({
+    auditCreatedStatus: {
+      id:"auditdetail.created.status", 
+      defaultMessage: "Created"
+    },
+    auditPendingStatus:{
+      id:"auditdetail.pending.status", 
+      defaultMessage: "Pending"
+    },
+    auditInProgressStatus:{
+      id:"auditdetail.progress.status", 
+      defaultMessage: "In Progress"
+    },
+    auditCompletedStatus: {
+      id:"auditdetail.completed.status", 
+      defaultMessage: "Completed"
+    },
+    auditSKU:{
+      id:"auditdetail.sku.prefix", 
+      defaultMessage: "SKU"
+    },
+    auditLocation:{
+      id:"auditdetail.location.prefix", 
+      defaultMessage: "Location"
+    }
+
+
+});
 
 
 
@@ -42,12 +71,12 @@ class AuditTab extends React.Component{
  _processAuditData(data,nProps){
   var nProps = this,
   data = nProps.props.auditDetail;
-  let created  = nProps.context.intl.formatMessage({id:"auditdetail.created.status", defaultMessage: "Created"});
-  let pending  = nProps.context.intl.formatMessage({id:"auditdetail.pending.status", defaultMessage: "Pending"});
-  let progress  = nProps.context.intl.formatMessage({id:"auditdetail.progress.status", defaultMessage: "In Progress"});
-  let completed  = nProps.context.intl.formatMessage({id:"auditdetail.completed.status", defaultMessage: "Completed"});
-  let sku  = nProps.context.intl.formatMessage({id:"auditdetail.sku.prefix", defaultMessage: "SKU"});
-  let location  = nProps.context.intl.formatMessage({id:"auditdetail.location.prefix", defaultMessage: "Location"});
+  let created  = nProps.context.intl.formatMessage(messages.auditCreatedStatus);
+  let pending  = nProps.context.intl.formatMessage(messages.auditPendingStatus);
+  let progress  = nProps.context.intl.formatMessage(messages.auditInProgressStatus);
+  let completed  = nProps.context.intl.formatMessage(messages.auditCompletedStatus);
+  let sku  = nProps.context.intl.formatMessage(messages.auditSKU);
+  let location  = nProps.context.intl.formatMessage(messages.auditLocation);
 
 
   var timeOffset= nProps.props.timeOffset || "";
@@ -94,7 +123,8 @@ class AuditTab extends React.Component{
                                   month:'short',
                                   day:'2-digit',
                                   hour:"2-digit",
-                                  minute:"2-digit"
+                                  minute:"2-digit",
+                                  hour12: false
                                 })
     }
     else {

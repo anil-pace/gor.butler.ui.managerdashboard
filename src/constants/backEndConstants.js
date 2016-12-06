@@ -176,7 +176,17 @@ export const  stringConfig= defineMessages({
     exception:{
         id: 'stringConfig.exception',
         description: 'Text to show exception',
-        defaultMessage: "Exception" //needs to be done
+        defaultMessage: "Exception"
+    },
+    online:{
+        id: 'stringConfig.online',
+        description: 'Text to show Online',
+        defaultMessage: "online"
+    },
+    offline:{
+        id: 'stringConfig.offline',
+        description: 'Text to show Offline',
+        defaultMessage: "offline"
     },
     received:{
         id: 'stringConfig.received',
@@ -187,6 +197,7 @@ export const  stringConfig= defineMessages({
         id: 'stringConfig.cancelled',
         description: 'Text to show cancelled',
         defaultMessage: "In Progress"  //need to be done
+
     }
     // temp_unfull need to be done ****
 

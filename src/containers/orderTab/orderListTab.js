@@ -100,7 +100,7 @@
                                   hour:"2-digit",
                                   minute:"2-digit",
                                   hour12: false
-                                })
+                                });
                                 
 
       if(data[i].pick_before_time === null) {

@@ -1,0 +1,7 @@
+[
+  {
+    "id": "snapshot.inventory.usedSpace",
+    "description": "Text for used space",
+    "defaultMessage": "{utilisedSpace}% space utilized"
+  }
+]

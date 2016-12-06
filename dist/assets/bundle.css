@@ -1946,6 +1946,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   font-size: 12px;
   max-height: 9px;
   background: #ffffff;
+  text-transform: capitalize;
 }
 
 .connected .public_fixedDataTableCell_cellContent {
@@ -2006,6 +2007,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   font-size: 12px;
   max-height: 9px;
   background: #ffffff;
+  text-transform: capitalize;
 }
 
 .disconnected .public_fixedDataTableCell_cellContent {
@@ -3968,6 +3970,10 @@ progress::-moz-progress-bar {
   display: none;
 }
 
+.lineGraph .x line.month-break {
+  display: block;
+}
+
 .lineGraph .bar {
   fill: #498BD8;
   opacity: 1;
@@ -4005,17 +4011,20 @@ progress::-moz-progress-bar {
   stroke: #D0021B;
 }
 
-.tooltip {
+.tooltip.ppLine {
   position: absolute;
-  text-align: center;
-  width: 60px;
-  height: 28px;
-  padding: 2px;
+  text-align: left;
+  width: 100px;
+  height: 40px;
+  padding: 5px 10px;
   font: 12px sans-serif;
-  background: lightsteelblue;
+  background: #4D5055;
   border: 0px;
   border-radius: 8px;
+  opacity: 0.9;
+  line-height: 20px;
   pointer-events: none;
+  color: #fff;
 }
 
 .gor-emergency {

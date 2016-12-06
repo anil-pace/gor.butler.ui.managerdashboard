@@ -1,0 +1,21 @@
+[
+  {
+    "id": "inventory.linechart.toolTipPut",
+    "description": "Text for put in tooltip",
+    "defaultMessage": "Put"
+  },
+  {
+    "id": "inventory.linechart.toolTipPick",
+    "description": "Text for pick in tooltip",
+    "defaultMessage": "Pick"
+  },
+  {
+    "id": "inventory.linechart.noDataText",
+    "defaultMessage": "No Item Movement"
+  },
+  {
+    "id": "inventory.linechart.today",
+    "description": "Text to show today",
+    "defaultMessage": "Today's"
+  }
+]

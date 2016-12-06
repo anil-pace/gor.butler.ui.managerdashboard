@@ -10,7 +10,22 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import Spinner from '../../components/spinner/Spinner';
 import {stringConfig} from '../../constants/backEndConstants'
+import { defineMessages } from 'react-intl';
 
+//Mesages for internationalization
+const messages = defineMessages({
+    cdPrefix: {
+      id:"chargersDetail.name.prefix", 
+      description:"prefix for cs id in chargersDetail", 
+      defaultMessage:"Charging Stations - {csId}"
+    },
+    butlerPrefix:{
+      id:"chargersDetail.butler.prefix", 
+      description:"prefix for butler id in chargersDetail", 
+      defaultMessage:"Butler - {botId}"
+    }
+
+});
 
 
 
@@ -32,8 +47,8 @@ class ChargingStations extends React.Component{
     detail = {}
     csId = data[i].charger_id;
     botId = data[i].docked_butler_id;
-    CS = nProps.context.intl.formatMessage({id:"chargersDetail.name.prefix", description:"prefix for cs id in chargersDetail", defaultMessage:"Charging Stations - {csId}"},{"csId":csId});
-    BUTLER = nProps.context.intl.formatMessage({id:"chargersDetail.butler.prefix", description:"prefix for butler id in chargersDetail", defaultMessage:"Butler - {botId}"},{"botId":botId});
+    CS = nProps.context.intl.formatMessage(messages.cdPrefix,{"csId":csId});
+    BUTLER = nProps.context.intl.formatMessage(messages.butlerPrefix,{"botId":botId});
     detail.id = CS;
     detail.status = nProps.context.intl.formatMessage((stringConfig[data[i].charger_status]));
     detail.statusClass = data[i].charger_status;

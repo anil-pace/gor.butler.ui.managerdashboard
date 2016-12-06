@@ -11,7 +11,22 @@ import {changePPSmode} from '../../actions/ppsModeChangeAction'
 import { FormattedMessage } from 'react-intl';
 import Spinner from '../../components/spinner/Spinner';
 import {stringConfig} from '../../constants/backEndConstants'
+import { defineMessages } from 'react-intl';
 
+//Mesages for internationalization
+const messages = defineMessages({
+    namePrefix: {
+      id:"ppsDetail.name.prefix", 
+      description:"prefix for pps id in ppsDetail", 
+      defaultMessage:"PPS-{ppsId}"
+    },
+    perfPrefix:{
+      id:"ppsDetail.performance.prefix", 
+      description:"prefix for pps id in ppsDetail", 
+      defaultMessage:"{performance} orders/hr"
+    }
+
+});
 
 
 
@@ -38,10 +53,10 @@ class PPS extends React.Component{
     detail = {};
     ppsId = data[i].pps_id;
     performance = data[i].performance;
-    PPS =  nProps.context.intl.formatMessage({id:"ppsDetail.name.prefix", description:"prefix for pps id in ppsDetail", defaultMessage:"PPS-{ppsId}"},{"ppsId":ppsId});
+    PPS =  nProps.context.intl.formatMessage(messages.namePrefix,{"ppsId":ppsId});
     ON = nProps.context.intl.formatMessage(stringConfig.on);
     OFF = nProps.context.intl.formatMessage(stringConfig.off);
-    PERFORMANCE =  nProps.context.intl.formatMessage({id:"ppsDetail.performance.prefix", description:"prefix for pps id in ppsDetail", defaultMessage:"{performance} orders/hr"},{"performance":performance?performance:"0"});
+    PERFORMANCE =  nProps.context.intl.formatMessage(messages.perfPrefix,{"performance":performance?performance:"0"});
     detail.id =  PPS;
     detail.ppsId = ppsId;
     if(data[i].pps_status === "on") {

@@ -48,7 +48,6 @@ class InventoryHistogram extends React.Component{
                                   dateToday.getSeconds(),
                                   dateToday.getMilliseconds());
       currentDate.setDate(currentDate.getDate() - i);
-
       if(!recreatedData[currentDate.getTime()]){
         dataObj.xAxisData = currentDate.getDate();
         dataObj.yAxisData = 0;
@@ -84,7 +83,7 @@ class InventoryHistogram extends React.Component{
    
    render() {
     var _this = this;
-   var histogramData = _this._processData();//this.context.intl.formatMessage({id:"inventory.histogram.noDataText", defaultMessage: config.noDataText}
+   var histogramData = _this._processData();
    var config = Object.assign({},INVENTORY_HISTOGRAM_CONFIG)
    config.noData = histogramData.length ? histogramData[histogramData.length-1].noData : false;
    config.noDataText= _this.context.intl.formatMessage(messages.invHistogramNoDataTxt);
