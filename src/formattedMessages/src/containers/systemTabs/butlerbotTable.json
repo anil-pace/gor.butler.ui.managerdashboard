@@ -1,5 +1,10 @@
 [
   {
+    "id": "butlerbot.table.noData",
+    "description": "No data message for butlerbot table",
+    "defaultMessage": "No Butler Bot Found"
+  },
+  {
     "id": "butlerBot.table.heading",
     "description": "Heading for butlerbot",
     "defaultMessage": "Butler Bots"

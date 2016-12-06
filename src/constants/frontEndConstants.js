@@ -35,7 +35,7 @@ export const FULFILLING_ORDERS="fulfilling_orders";
 export const TABLE_STATE = "TABLE_STATE";
 export const REQUEST_HEADER = "REQUEST_HEADER";
 export const RECIEVE_HEADER = "RECIEVE_HEADER";
-
+export const GOR_TABLE_HEADER_HEIGHT = 73;
 
 
 /*Constants for performance widget*/

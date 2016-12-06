@@ -1,5 +1,10 @@
 [
   {
+    "id": "audit.table.noData",
+    "description": "No data message for audit table",
+    "defaultMessage": "No Audit Task Found"
+  },
+  {
     "id": "audit.table.heading",
     "description": "Heading for audit table",
     "defaultMessage": "Audit Tasks"
