@@ -7,29 +7,59 @@ import ReactDOM  from 'react-dom';
 import ButlerBotTable from './butlerbotTable';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+import {stringConfig} from '../../constants/backEndConstants';
 import Spinner from '../../components/spinner/Spinner';
+import { defineMessages } from 'react-intl';
+
+//Mesages for internationalization
+const messages = defineMessages({
+    butlerPrefix: {id:"butlerDetail.name.prefix",
+     description:"prefix for butler id", 
+     defaultMessage:"BOT - {botId}"
+   },
+    ppsPrefix:{
+      id:"pps.name.prefix",
+      description:"prefix for pps id", 
+      defaultMessage:"PPS {ppsId}"
+    },
+    chargerPrefix:{
+      id:"charger.name.prefix", 
+      description:"prefix for charger id", 
+      defaultMessage:"CS - {csId}"
+    },
+    msuPrefix: {
+      id:"msu.name.prefix", 
+      description:"prefix for msu id", 
+      defaultMessage:"MSU - {msuId}"
+    }
+
+});
 
 
-function processButlersData(data, nProps) {
+
+class ButlerBot extends React.Component{
+	
+  _processButlersData() {
+  var nProps = this,
+  data = nProps.props.butlerDetail.butlerDetail;
   var butlerData=[], butlerDetail = {};
-  let online  = nProps.context.intl.formatMessage({id:"butlerDetail.online.status", defaultMessage: "Online"});
-  let offline  = nProps.context.intl.formatMessage({id:"butlerDetail.offline.status", defaultMessage: "Offline"});
+  
   var currentTask = {0:"Pick", 1:"Put", 2:"Audit", 3:"Charging", 4:"Move"};
   var currentSubtask = {0:"Moving to",1:"Moving to mount",2:"Moving to dismount",3:"Docked at"};
-  var currentState = {"online":online, "offline":offline};
+  
   var priStatus = {"online": 1, "offline": 2};
   let BOT, PPS, CS, MSU ;
 
   for (var i = data.length - 1; i >= 0; i--) {
     var botId = data[i].butler_id, msuId = data[i].display_msu_id, csId = data[i].charger_id, ppsId = data[i].pps_id;
-    BOT =  nProps.context.intl.formatMessage({id:"butlerDetail.name.prefix", description:"prefix for butler id", defaultMessage:"BOT - {botId}"},{"botId":botId});
-    PPS =  nProps.context.intl.formatMessage({id:"pps.name.prefix", description:"prefix for pps id", defaultMessage:"PPS {ppsId}"},{"ppsId":ppsId});
-    CS =  nProps.context.intl.formatMessage({id:"charger.name.prefix", description:"prefix for charger id", defaultMessage:"CS - {csId}"},{"csId":csId});
-    MSU =  nProps.context.intl.formatMessage({id:"msu.name.prefix", description:"prefix for msu id", defaultMessage:"MSU - {msuId}"},{"msuId":msuId});
+    BOT =  nProps.context.intl.formatMessage(messages.butlerPrefix,{"botId":botId});
+    PPS =  nProps.context.intl.formatMessage(messages.ppsPrefix,{"ppsId":ppsId});
+    CS =  nProps.context.intl.formatMessage(messages.chargerPrefix,{"csId":csId});
+    MSU =  nProps.context.intl.formatMessage(messages.msuPrefix,{"msuId":msuId});
     butlerDetail = {};
     butlerDetail.id =  BOT;
     butlerDetail.statusClass = data[i].state;
-    butlerDetail.status = currentState[data[i].state];
+    butlerDetail.status = stringConfig[data[i].state];
     butlerDetail.statusPriority = priStatus[data[i].state];
     butlerDetail.location = data[i].location;
     butlerDetail.voltage = data[i].voltage;
@@ -69,8 +99,7 @@ function processButlersData(data, nProps) {
   
   return butlerData;
 }
-class ButlerBot extends React.Component{
-	constructor(props) 
+  constructor(props) 
 	{
     	super(props);
     }	
@@ -79,7 +108,7 @@ class ButlerBot extends React.Component{
   var butlerData, avgVoltage =0;
   var taskDetail = {"Put":0, "Pick":0, "Charging":0, "Idle":0,"Audit":0, "avgVoltage":0, "msuMounted":0, "location":0};
   if(this.props.butlerDetail.butlerDetail !==undefined) {
-    butlerData = processButlersData(this.props.butlerDetail.butlerDetail, this)
+    butlerData = this._processButlersData();
     if(butlerData && butlerData.length) {
     	for (var i = butlerData.length - 1; i >= 0; i--) {
     		avgVoltage = butlerData[i].voltage + avgVoltage;

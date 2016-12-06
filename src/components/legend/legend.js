@@ -21,9 +21,9 @@ class Legend extends React.Component{
     	var data = _this.props.legendData.data || [];
     	var config = _this.props.legendData.config || {};
     	var elements = data.map(function(item, i){
-	      var name = _this.context.intl.formatMessage({id:"inventory.histogram.legend", defaultMessage: item.name});
+	      //var name = _this.context.intl.formatMessage({id:"inventory.histogram.legend", defaultMessage: item.name});
 	      return (
-	        <LegendElement legendType={_this.props.legendType} color={item.color} xpos={config.xpos+i*config.xIncrement} ypos={config.ypos} name={name} key={i}/>
+	        <LegendElement legendType={_this.props.legendType} color={item.color} xpos={config.xpos+i*config.xIncrement} ypos={config.ypos} name={item.name} key={i}/>
 	      )
 	    })
     return elements;

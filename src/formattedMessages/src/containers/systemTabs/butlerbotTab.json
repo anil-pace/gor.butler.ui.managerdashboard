@@ -1,8 +1,13 @@
 [
   {
+    "id": "butlerDetail.name.prefix",
+    "description": "prefix for butler id",
+    "defaultMessage": "BOT - {botId}"
+  },
+  {
     "id": "pps.name.prefix",
     "description": "prefix for pps id",
-    "defaultMessage": "PPS - {ppsId}"
+    "defaultMessage": "PPS {ppsId}"
   },
   {
     "id": "charger.name.prefix",

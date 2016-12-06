@@ -1,6 +1,6 @@
 /**
- * Container for Inventory tab
- * This will be switched based on tab click
+ * Dumb component for inventory snapshot
+ * 
  */
 import React  from 'react';
 import { FormattedMessage,FormattedNumber,FormattedDate} from 'react-intl';

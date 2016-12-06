@@ -108,5 +108,15 @@
     "id": "stringConfig.exception",
     "description": "Text to show exception",
     "defaultMessage": "Exception"
+  },
+  {
+    "id": "stringConfig.online",
+    "description": "Text to show Online",
+    "defaultMessage": "online"
+  },
+  {
+    "id": "stringConfig.offline",
+    "description": "Text to show Offline",
+    "defaultMessage": "offline"
   }
 ]

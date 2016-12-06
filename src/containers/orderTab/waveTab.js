@@ -5,21 +5,34 @@ import { FormattedMessage } from 'react-intl';
 import Spinner from '../../components/spinner/Spinner';
 import {GOR_PENDING,GOR_PROGRESS} from '../../constants/frontEndConstants';
 import {stringConfig} from '../../constants/backEndConstants';
+import { defineMessages } from 'react-intl';
 
-function processWaveData(data, nProps) {
+//Mesages for internationalization
+const messages = defineMessages({
+    wavePrefix: {
+      id:"waveDetail.id.prefix", 
+      defaultMessage: "WAVE-{waveId}"
+    }
+
+
+});
+
+
+
+
+class WaveTab extends React.Component{
+  
+  _processWaveData(data, nProps) {
+  var nProps = this,
+  data = nProps.props.waveDetail.waveData;
   var waveData = [], waveDetail = {};
   let WAVE, waveId;
-  let progress  = nProps.context.intl.formatMessage({id:"waveDetail.progress.status", defaultMessage: "In Progress"});
-  let completed  = nProps.context.intl.formatMessage({id:"waveDetail.completed.status", defaultMessage: "Completed"});
-  let breached  = nProps.context.intl.formatMessage({id:"waveDetail.breached.status", defaultMessage: "Breached"});
-  let pending  = nProps.context.intl.formatMessage({id:"waveDetail.pending.status", defaultMessage: "Pending"});
-  var intlStatus = {"In Progress":progress, "Completed":completed, "Breached":breached, "Pending":pending };
   var status = {"In Progress":"progress", "Completed":"completed", "Breached":"breached", "Pending":"pending" };
   var priStatus = {"In Progress": 2, "Completed": 4, "Breached":1 ,"Pending":3};
   if(data) {
      for (var i =data.length - 1; i >= 0; i--) {
       waveId = data[i].wave_id;
-      WAVE = nProps.context.intl.formatMessage({id:"waveDetail.id.prefix", defaultMessage: "WAVE-{waveId}"},{"waveId":waveId});
+      WAVE = nProps.context.intl.formatMessage(messages.wavePrefix,{"waveId":waveId});
       waveDetail = {};
       waveDetail.id = WAVE ;
       waveDetail.statusClass = status[data[i].status];
@@ -54,10 +67,6 @@ function processWaveData(data, nProps) {
   return waveData;
 }
 
-
-
-
-class WaveTab extends React.Component{
   constructor(props) 
   {
    super(props);
@@ -67,7 +76,7 @@ class WaveTab extends React.Component{
   var totalOrders = 0, orderToFulfill = 0, completedWaves = 0, pendingWaves = 0, progressWave = 0 ;
 
   if(this.props.waveDetail.waveData !== undefined) {
-    waveData = processWaveData(this.props.waveDetail.waveData, this)
+    waveData = this._processWaveData()
     if(waveData && waveData.length) {
       for (var i = waveData.length - 1; i >= 0; i--) {
         if(waveData[i].totalOrders) {

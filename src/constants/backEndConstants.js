@@ -177,6 +177,16 @@ export const  stringConfig= defineMessages({
         id: 'stringConfig.exception',
         description: 'Text to show exception',
         defaultMessage: "Exception"
+    },
+    online:{
+        id: 'stringConfig.online',
+        description: 'Text to show Online',
+        defaultMessage: "online"
+    },
+    offline:{
+        id: 'stringConfig.offline',
+        description: 'Text to show Offline',
+        defaultMessage: "offline"
     }
 
 

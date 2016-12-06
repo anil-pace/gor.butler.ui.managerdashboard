@@ -1,6 +1,19 @@
 import React  from 'react';
 import rd3 from 'react-d3-library';
 import * as d3 from 'd3';
+import {SCH_CONFIG} from '../../constants/frontEndConstants';
+import { defineMessages } from 'react-intl';
+
+//Mesages for internationalization
+const messages = defineMessages({
+    invUsedSpace: {
+        id: 'snapshot.inventory.usedSpace',
+        description: 'Text for used space',
+        defaultMessage: "{utilisedSpace}% space utilized",
+    }
+
+
+});
 
 
 
@@ -27,7 +40,7 @@ class StackedChartHorizontal extends React.Component{
  
    
   _processData(data,config){
-    var config = this.props.config;
+    var config = SCH_CONFIG;
     var node = document.createElement('div');
     var svg = d3.select(node).append('svg')
       .attr("width", config.svgInfo.width)
@@ -54,7 +67,7 @@ class StackedChartHorizontal extends React.Component{
         svg.append("text")
         .attr("x",(x-14 < 0 ? 0 : x-14)+"%")
         .attr("y",config.svgInfo.textInfo.y)
-        .text(this.context.intl.formatMessage({id:"snapshot.inventory.usedSpace", defaultMessage: config.svgInfo.textInfo.message},values))
+        .text(this.context.intl.formatMessage(messages.invUsedSpace,values))
       }
       
 
@@ -73,7 +86,7 @@ class StackedChartHorizontal extends React.Component{
         svg.append("text")
         .attr("x",(config.svgInfo.width/2)-44)
         .attr("y",Number(config.svgInfo.height)/2)
-        .text(this.context.intl.formatMessage({id:"snapshot.inventory.usedSpace", defaultMessage: config.svgInfo.textInfo.message},values))
+        .text(this.context.intl.formatMessage(messages.invUsedSpace,values))
       }
 
       x+=(data[i].warehouse_utilization || data[i].unusedSpace)
@@ -93,7 +106,6 @@ class StackedChartHorizontal extends React.Component{
 
 StackedChartHorizontal.propTypes={
   snapshotData:React.PropTypes.object,
-  config:React.PropTypes.object,
   hasDataChanged:React.PropTypes.number
 }
 StackedChartHorizontal.contextTypes ={

@@ -1,11 +1,31 @@
 /**
  * Container for PickPutLineGraph 
- * This will be switched based on tab click
+ * 
  */
 import React  from 'react';
 import MultiLineGraph from '../graphd3/multiLineGraph';
 import {INVENTORY_HISTORY_DAYS_COUNT,INVENTORY_LINE_CONFIG} from  '../../constants/frontEndConstants'
+import { defineMessages } from 'react-intl';
 
+//Mesages for internationalization
+const messages = defineMessages({
+    toolTipPut: {
+        id: 'inventory.linechart.toolTipPut',
+        description: 'Text for put in tooltip',
+        defaultMessage: "Put",
+    },
+    toolTipPick: {
+        id: 'inventory.linechart.toolTipPick',
+        description: 'Text for pick in tooltip',
+        defaultMessage: "Pick",
+    },
+    noDataText:{
+      id:"inventory.linechart.noDataText", 
+      defaultMessage: "No Item Movement"
+    }
+
+
+});
 
 
 class PickPutLineGraph extends React.Component{
@@ -39,12 +59,32 @@ class PickPutLineGraph extends React.Component{
         dataObj.items_put = 0;
         dataObj.items_picked = 0;
         dataObj.customData = (new Date(currentDate)).getTime();
+        dataObj.toolTipData = {
+                      date:this.context.intl.formatDate(dataObj.date,
+                                {
+                                  year:'numeric',
+                                  month:'short',
+                                  day:'2-digit'
+                                }),
+                      put:this.context.intl.formatMessage(messages.toolTipPut)+":"+dataObj.items_put,
+                      pick:this.context.intl.formatMessage(messages.toolTipPick)+":"+dataObj.items_picked
+                    }
       }
       else{
         dataObj.date =histogramData[j] ?  (new Date(Date.parse(histogramData[j].date))) : currentDate;
         dataObj.items_put =  histogramData[j].items_put;
         dataObj.items_picked = histogramData[j].items_picked;
         dataObj.customData = Date.parse(histogramData[j].date);
+        dataObj.toolTipData = {
+                      date:this.context.intl.formatDate(dataObj.date,
+                                {
+                                  year:'numeric',
+                                  month:'short',
+                                  day:'2-digit'
+                                }),
+                      put:this.context.intl.formatMessage(messages.toolTipPut)+":"+dataObj.items_put,
+                      pick:this.context.intl.formatMessage(messages.toolTipPick)+":"+dataObj.items_picked
+                    }
       if(!noStock){
         noStock = histogramData[j].items_put || histogramData[j].items_picked;
         dataObj.noData =  noStock ? false : true;
@@ -68,7 +108,7 @@ class PickPutLineGraph extends React.Component{
     render(){
         var processedData = this._processData();
         var config = Object.assign({},INVENTORY_LINE_CONFIG)
-        config.noDataText = this.context.intl.formatMessage({id:"inventory.linechart.noDataText", defaultMessage: "No Item Movement"})
+        config.noDataText = this.context.intl.formatMessage(messages.noDataText)
         return (
             <div>
                 <MultiLineGraph config ={config} inventoryData={processedData || []}/>

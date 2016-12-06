@@ -51,6 +51,7 @@ class MultiLineGraph extends React.Component{
           rObj.date = new Date(obj.date);
           rObj.items_put = obj.items_put;
           rObj.items_picked = obj.items_picked;
+          rObj.toolTipData = obj.toolTipData;
 
           return rObj;
         })
@@ -62,7 +63,7 @@ class MultiLineGraph extends React.Component{
         var xx = function(e)  { return x(function(d) { return x(d.date);}) };
         var yy = function(e)  { return y(function(d) { return y(d.items_put); }) };
         var div = d3.select("body").append("div") 
-        .attr("class", "tooltip")       
+        .attr("class", "tooltip ppLine")       
         .style("opacity", 0);
 
         // setting axis
@@ -144,7 +145,7 @@ class MultiLineGraph extends React.Component{
             div.transition()    
                 .duration(200)    
                 .style("opacity", 1);    
-            div .html(d.date + "<br/>"  + d.items_picked)  
+            div .html("<p>"+d.toolTipData.date + "</p><p>"  + d.toolTipData.pick+"</p>")  
                 .style("left", (event.pageX) + "px")   
                 .style("top", (event.pageY - 28) + "px");  
             })          
@@ -166,7 +167,7 @@ class MultiLineGraph extends React.Component{
             div.transition()    
                 .duration(200)    
                 .style("opacity", 1);    
-            div .html(d.date + "<br/>"  + d.items_put)  
+            div .html("<p>"+d.toolTipData.date + "</p><p>"  + d.toolTipData.put+"</p>")  
                 .style("left", (event.pageX) + "px")   
                 .style("top", (event.pageY - 28) + "px");  
             })          
