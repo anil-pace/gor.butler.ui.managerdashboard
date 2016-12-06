@@ -92,26 +92,30 @@
         orderData.statusClass = data[i].status;
         orderData.statusPriority = unBreachedStatus[data[i].status];
       }
-      
-
-
-
       orderData.recievedTime = nProps.context.intl.formatDate(data[i].create_time,
                                 {timeZone:timeOffset,
                                   year:'numeric',
                                   month:'short',
                                   day:'2-digit',
                                   hour:"2-digit",
-                                  minute:"2-digit"
-                                })
+                                  minute:"2-digit",
+                                  hour12: false
+                                });
                                 
 
       if(data[i].pick_before_time === null) {
         orderData.pickBy = "--";
       }
       else {
-         orderData.pickBy = data[i].pick_before_time.substring(4);
-         orderData.pickBy = orderData.pickBy.substring(0, orderData.pickBy.length - 4)
+         orderData.pickBy = nProps.context.intl.formatDate(data[i].pick_before_time,
+                                {timeZone:timeOffset,
+                                  year:'numeric',
+                                  month:'short',
+                                  day:'2-digit',
+                                  hour:"2-digit",
+                                  minute:"2-digit",
+                                  hour12: false
+                                })
      }
 
 
@@ -128,7 +132,8 @@
                                   month:'short',
                                   day:'2-digit',
                                   hour:"2-digit",
-                                  minute:"2-digit"
+                                  minute:"2-digit",
+                                  hour12: false
                                 })
       }else{
         orderData.completedTime = "--";
@@ -173,11 +178,15 @@
 
 
 
-  refresh() {
+  refresh = (data) => {
     var convertTime = {"oneHourOrders": 1, "twoHourOrders": 2, "sixHourOrders": 6, "twelveHourOrders": 12, "oneDayOrders": 24};
     var status = this.props.filterOptions.statusFilter, timeOut = this.props.filterOptions.timeFilter,currentTime,prevTime;
-    var data = {}, appendStatusUrl="", appendTimeUrl="", appendPageSize="";
-    data.selected = 0;
+    var  appendStatusUrl="", appendTimeUrl="", appendPageSize="";
+    if(!data) {
+      data = {};
+      data.selected = 0;
+      data.url = "";
+    }
     data.url = "";
     data.url = API_URL + ORDERS_URL + ORDER_PAGE + (data.selected+1);
 
@@ -276,7 +285,7 @@ render(){
     pageNum={this.props.orderData.totalPage}
     marginPagesDisplayed={1}
     pageRangeDisplayed={1}
-    clickCallback={this.handlePageClick.bind(this)}
+    clickCallback={this.refresh.bind(this)}
     containerClassName={"pagination"}
     subContainerClassName={"pages pagination"}
     activeClassName={"active"} />
@@ -309,7 +318,8 @@ var mapDispatchToProps = function(dispatch){
     getPageSizeOrders: function(data){ dispatch(getPageSizeOrders(data));},
     currentPage: function(data){ dispatch(currentPageOrders(data));},
     lastRefreshTime: function(data){ dispatch(lastRefreshTime(data));},
-     setOrderListSpinner: function(data){dispatch(setOrderListSpinner(data))}
+     setOrderListSpinner: function(data){dispatch(setOrderListSpinner(data))},
+     setCurrentPage: function(data){dispatch(setCurrentPage(data))}
   }
 };
 

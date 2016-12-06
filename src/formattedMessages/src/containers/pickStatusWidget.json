@@ -5,9 +5,9 @@
     "defaultMessage": "Orders to fullfill"
   },
   {
-    "id": "widget.pick.completed",
-    "description": "Text for completed",
-    "defaultMessage": "Completed"
+    "id": "widget.pick.none",
+    "description": "Text for none",
+    "defaultMessage": "None"
   },
   {
     "id": "widget.pick.status.idle",

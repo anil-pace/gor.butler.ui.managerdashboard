@@ -10,8 +10,6 @@ import {setAuditSpinner} from '../actions/auditActions';
 import {setButlerSpinner,setPpsSpinner,setCsSpinner,setWavesSpinner} from '../actions/spinnerAction';
 import {receiveInventoryTodayData,receiveInventoryHistoryData} from '../actions/inventoryActions';
 import {resTypeSnapShotToday,resTypeSnapShotHistory} from '../../mock/mockDBData';
-import {notifyFail} from '../actions/validationActions';
-import {ERR_RES} from '../constants/messageConstants';
 
 export function ResponseParse(store,res)
 {
@@ -21,7 +19,7 @@ export function ResponseParse(store,res)
 		store.dispatch(wsOnMessageAction(res));
 		return;
 	}
-	
+	try{
 		switch(res.resource_type)
 		{
 			case PARSE_PPS:
@@ -29,13 +27,8 @@ export function ResponseParse(store,res)
 				store.dispatch(setPpsSpinner(false));
 				break;
 			case PARSE_BUTLERS:
-				try{
-					store.dispatch(setButlerSpinner(false));
-					store.dispatch(receiveButlersData(res));
-				}
-				catch(e){
-					store.dispatch(notifyFail(ERR_RES));
-				}
+				store.dispatch(setButlerSpinner(false));
+				store.dispatch(receiveButlersData(res));
 				break;
 			case PARSE_AUDIT:
 				if(res.header_data)
@@ -49,21 +42,11 @@ export function ResponseParse(store,res)
 				}
 				break;
 			case PARSE_PUT:
-				try{
-					store.dispatch(receivePutData(res));
-				}
-				catch(e){
-					store.dispatch(notifyFail(ERR_RES));
-				}
+				store.dispatch(receivePutData(res));
 				break;
 			case PARSE_CHARGERS:
-				try{
-					store.dispatch(receiveChargersData(res));
-					store.dispatch(setCsSpinner(false));
-				}
-				catch(e){
-					store.dispatch(notifyFail(ERR_RES));
-				}
+				store.dispatch(receiveChargersData(res));
+				store.dispatch(setCsSpinner(false));
 				break;
 			case PARSE_INVENTORY_HISTORY:
 				if(res.header_data)
@@ -76,7 +59,6 @@ export function ResponseParse(store,res)
 					store.dispatch(setInventorySpinner(false));
 					
 				}
-
 				break;
 			case PARSE_INVENTORY_TODAY:		
 				if(res.header_data)
@@ -89,44 +71,29 @@ export function ResponseParse(store,res)
 					store.dispatch(setInventorySpinner(false));
 					
 				}
-
 				break;
 			case PARSE_ORDERS:	
-			    try{
-					if(res.header_data)
-					{
-						store.dispatch(recieveOrdersStatus(res));
-					}
-					else
-					{
-						store.dispatch(setWavesSpinner(false));
-						store.dispatch(receiveOrdersData(res));	
-					}
+				if(res.header_data)
+				{
+					store.dispatch(recieveOrdersStatus(res));
 				}
-				catch(e){
-					store.dispatch(notifyFail(ERR_RES));
+				else
+				{
+					store.dispatch(setWavesSpinner(false));
+					store.dispatch(receiveOrdersData(res));	
 				}
 				break;
 		    case PARSE_PPA_THROUGHPUT:
-		    	try{
-					store.dispatch(receiveThroughputData(res));
-				}
-				catch(e)
-				{
-					store.dispatch(notifyFail(ERR_RES));
-				}
+				store.dispatch(receiveThroughputData(res));
 				break;	
 			case HISTOGRAM_DETAILS:
-				store.dispatch(recieveHistogramData(res));
-				
+				store.dispatch(recieveHistogramData(res));				
 				break;
 			case SYSTEM_CHARGERS_DETAILS:
 				store.dispatch(recieveChargersDetail(res));
 				break;	
 			case SYSTEM_BUTLERS_DETAILS:
-
 				store.dispatch(recieveButlersDetail(res));
-				
 				break;
 			case SYSTEM_PPS_DETAILS:
 				store.dispatch(recievePPSDetail(res));
@@ -135,20 +102,14 @@ export function ResponseParse(store,res)
 				store.dispatch(recievePPSperformance(res));
 				break;
 			case USER_DATA:
-				try{
-					if(res.header_data)
-					{
-						store.dispatch(recieveUsersStatus(res));
-					}
-					else
-					{
-						store.dispatch(recieveUserDetails(res));	
-						store.dispatch(displaySpinner(false));
-					}
-				}
-				catch(e)
+				if(res.header_data)
 				{
-					store.dispatch(notifyFail(ERR_RES));
+					store.dispatch(recieveUsersStatus(res));
+				}
+				else
+				{
+					store.dispatch(recieveUserDetails(res));	
+					store.dispatch(displaySpinner(false));
 				}
 				break;
 			case PARSE_OVERVIEW:
@@ -162,11 +123,11 @@ export function ResponseParse(store,res)
 				break;	
 			case PARSE_STATUS:
 				store.dispatch(recieveStatus(res));	 
-				break;
-			
-				   
+				break;				   
 			default:
-				//store.dispatch(initData(res));          //Default action
-			break;			
+	    }
+    }
+    catch(e){
+		throw e;
 	}
 }  

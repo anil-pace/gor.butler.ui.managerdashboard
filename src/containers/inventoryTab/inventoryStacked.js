@@ -1,6 +1,6 @@
 import React  from 'react';
 import StackedChartHorizontal from '../../components/graphd3/stackedChartHorizontal'
-import {SCH_CONFIG} from '../../constants/frontEndConstants'
+
 
 
 
@@ -18,7 +18,7 @@ class InventoryStacked extends React.Component{
    
    return (
      <div>
-       <StackedChartHorizontal hasDataChanged= {this.props.hasDataChanged} snapshotData = {this.props.snapshotData} config = {SCH_CONFIG}/>
+       <StackedChartHorizontal hasDataChanged= {this.props.hasDataChanged} snapshotData = {this.props.snapshotData} />
      </div>
    )
  }

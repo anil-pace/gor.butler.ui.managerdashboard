@@ -33,5 +33,10 @@
     "id": "PPSauditPerformance.dropdown",
     "description": "PPSauditPerformance dropdown label",
     "defaultMessage": "PPS Audit Performance"
+  },
+  {
+    "id": "health.noData",
+    "description": "pps graph nodata",
+    "defaultMessage": "No Data"
   }
 ]

@@ -34,9 +34,10 @@ class Histogram extends React.Component{
   
    _processData(data,config){
    	
+    var node = document.createElement('div');
     if(data.length){
     var _this= this;
-	 var node = document.createElement('div');
+	 
    	var svg = d3.select(node).append("svg"),
     margin = config.margin,
     width = config.width - margin.left - margin.right,
@@ -106,18 +107,16 @@ class Histogram extends React.Component{
         svg.insert("text",":first-child").attr("x",width/2).attr("y",height/2).text(config.noDataText || "");
     }
     if(config.showMonthBreak && data.length){
-      var abc= g.selectAll("g.axis--x");
-      abc.select("g:nth-child("+data.length+")").append("text").attr("x","-20").attr("y","2.5em").text(config.today)
-      var monthBreak = abc.select("g:nth-child("+(data.length - data[data.length-1].xAxisData)+")");
+      var mBreak= g.selectAll("g.axis--x");
+      mBreak.select("g:nth-child("+data.length+")").append("text").attr("x","-20").attr("y","2.5em").text(config.today)
+      var monthBreak = mBreak.select("g:nth-child("+(data.length - data[data.length-1].xAxisData)+")");
       monthBreak.append("line").attr("class","month-break").attr("x1","15").attr("x2","15").attr("y1","0").attr("y2","25");
-      abc.select("g:nth-child("+(data.length - data[data.length-2].xAxisData)+")").append("text").attr("x","-5").attr("y","30").text(config.breakMonth);
+      mBreak.select("g:nth-child("+(data.length - data[data.length-2].xAxisData)+")").append("text").attr("x","-5").attr("y","30").text(config.breakMonth);
     }
-        this.setState({d3: node});
+        
 
      }
-     else{
-      this.setState({d3: ''});
-     }
+     this.setState({d3: node});
    }
   
 

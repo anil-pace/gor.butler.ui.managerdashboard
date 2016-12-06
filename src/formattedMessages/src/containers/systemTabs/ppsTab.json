@@ -1,7 +1,12 @@
 [
   {
+    "id": "ppsDetail.name.prefix",
+    "description": "prefix for pps id in ppsDetail",
+    "defaultMessage": "PPS-{ppsId}"
+  },
+  {
     "id": "ppsDetail.performance.prefix",
-    "description": "performance for pps id in ppsDetail",
-    "defaultMessage": "{performance} - orders/hr"
+    "description": "prefix for pps id in ppsDetail",
+    "defaultMessage": "{performance} orders/hr"
   }
 ]

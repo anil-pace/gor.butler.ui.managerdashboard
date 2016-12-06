@@ -18,7 +18,7 @@ class legendElement extends React.Component{
     	var position =  "translate(" + this.props.xpos + "," + this.props.ypos + ")";
     	switch(type){
     		case LEGEND_ROUND:
-    		name = this.context.intl.formatMessage({id:"inventory.legend.name", defaultMessage: this.props.name})
+    		name =this.props.name;
     		structure =  <g transform={position}>
 			    		<circle cx="20" cy="20" r="4" stroke={this.props.color}  fill={this.props.color} style={{"strokeWidth":5}}/>
 						        <text x="30" y="25"  >
@@ -27,16 +27,16 @@ class legendElement extends React.Component{
 								  </g>
 			break;
 			case LEGEND_RECT:
-			name = this.context.intl.formatMessage({id:"inventory.legend.name", defaultMessage: this.props.name})
+			name = name =this.props.name;
 			structure = <g transform={position}>
 						<rect    fill={this.props.color} width="20" height="20"/>
 				        <text x={this.props.xpos +15} y={this.props.ypos - 5}  >
-						    {name}
+						   <foreignobject> {name}</foreignobject>
 						  </text>
 						  </g>
 			break;
 			default:
-			name = this.context.intl.formatMessage({id:"inventory.legend.name", defaultMessage: this.props.name})
+			name = name =this.props.name;
 			structure = <g transform={position}>
 						<rect    fill={this.props.color} width="20" height="20"/>
 				        <text x={this.props.xpos+25} y={this.props.ypos - 5}    >
@@ -61,7 +61,7 @@ legendElement.propTypes={
 	color:React.PropTypes.string,
 	xpos:React.PropTypes.number,
 	ypos:React.PropTypes.number,
-	name:React.PropTypes.string
+	name:React.PropTypes.object
 }
 legendElement.contextTypes = {
   intl: React.PropTypes.object.isRequired

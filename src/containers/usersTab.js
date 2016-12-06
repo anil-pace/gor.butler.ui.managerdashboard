@@ -2,16 +2,77 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import UserDataTable from './userTab/userTabTable';
 import { connect } from 'react-redux'; 
-function processUserDetails(data, nProps) {
-  let operator  = nProps.context.intl.formatMessage({id:"userDetails.operator", defaultMessage: "Operator"});
-  let manager  = nProps.context.intl.formatMessage({id:"userDetails.manager", defaultMessage: "Manager"});
-  let pick  = nProps.context.intl.formatMessage({id:"userDetails.pick.status", defaultMessage: "Pick"});
-  let put  = nProps.context.intl.formatMessage({id:"userDetails.put.status", defaultMessage: "Put"});
-  let audit  = nProps.context.intl.formatMessage({id:"userDetails.audit.status", defaultMessage: "Audit"});
-  let front  = nProps.context.intl.formatMessage({id:"userDetails.front.status", defaultMessage: "Front"});
-  let back  = nProps.context.intl.formatMessage({id:"userDetails.back.status", defaultMessage: "Back"});
-  let online  = nProps.context.intl.formatMessage({id:"userDetails.online.status", defaultMessage: "Online"});
-  let offline  = nProps.context.intl.formatMessage({id:"userDetails.offline.status", defaultMessage: "Offline"});
+import { defineMessages } from 'react-intl';
+import {stringConfig} from '../constants/backEndConstants'
+
+//Mesages for internationalization
+const messages = defineMessages({
+    userOperator: {
+      id:"userDetails.operator", 
+      defaultMessage: "Operator"
+    },
+    userManager:{
+      id:"userDetails.manager", 
+      defaultMessage: "Manager"
+    },
+    userPick:{
+      id:"userDetails.pick.status",
+      defaultMessage: "Pick"
+    },
+    auditCompletedStatus: {
+      id:"auditdetail.completed.status", 
+      defaultMessage: "Completed"
+    },
+    userPut:{
+      id:"userDetails.put.status", 
+      defaultMessage: "Put"
+    },
+    userAudit:{
+      id:"userDetails.audit.status", 
+      defaultMessage: "Audit"
+    },
+    userFront:{
+      id:"userDetails.front.status", 
+      defaultMessage: "Front"
+    },
+    userBack:{
+      id:"userDetails.back.status", 
+      defaultMessage: "Back"
+    },
+    userOnline:{
+      id:"userDetails.online.status", 
+      defaultMessage: "Online"
+    },
+    userOffline:{
+      id:"userDetails.offline.status", 
+      defaultMessage: "Offline"
+    },
+    userLocation:{
+      id:"userDetails.location",
+      defaultMessage: "PPS {ppsId}"
+    }
+
+
+});
+
+
+class UsersTab extends React.Component{
+	constructor(props) 
+	{
+    	super(props);
+    }
+  _processUserDetails() {
+  var nProps = this,
+  data = nProps.props.userdetails
+  let operator  = nProps.context.intl.formatMessage(messages.userOperator);
+  let manager  = nProps.context.intl.formatMessage(messages.userManager);
+  let pick  = nProps.context.intl.formatMessage(stringConfig.pick);
+  let put  = nProps.context.intl.formatMessage(stringConfig.put);
+  let audit  = nProps.context.intl.formatMessage(stringConfig.audit);
+  let front  = nProps.context.intl.formatMessage(messages.userFront);
+  let back  = nProps.context.intl.formatMessage(messages.userBack);
+  let online  = nProps.context.intl.formatMessage(stringConfig.online);
+  let offline  = nProps.context.intl.formatMessage(stringConfig.offline);
   var role = {"butler_ui":operator, "butler_supervisor":manager};
   var work_mode = {"pick":pick,"put": put,"audit": audit};
   var work_place = {"front": front, "back":back};
@@ -31,8 +92,11 @@ function processUserDetails(data, nProps) {
     else if(data[i].pps.pps_mode) {
       userData.workMode = work_mode[data[i].pps.pps_mode];
     }
-    userData.location = nProps.context.intl.formatMessage({id:"userDetails.location", defaultMessage: "PPS {ppsId}"},{"ppsId":data[i].pps.pps_id});
-    userData.logInTime = data[i].login_time;
+
+    userData.location = nProps.context.intl.formatMessage(messages.userLocation,{"ppsId":data[i].pps.pps_id});
+    userData.logInTime = nProps.context.intl.formatTime(data[i].login_time,{hour: 'numeric',minute: 'numeric'}) +
+    " (" + nProps.context.intl.formatRelative(data[i].login_time) +")";;
+
     }
 
     else {
@@ -55,17 +119,11 @@ function processUserDetails(data, nProps) {
   }
 
   return userDetails;
-}
-
-class UsersTab extends React.Component{
-	constructor(props) 
-	{
-    	super(props);
-    }	
+}	
 	render(){
 		var itemNumber = 7, userData;	
 		if(this.props.userdetails !== undefined) {
-			userData = processUserDetails(this.props.userdetails, this);
+			userData = this._processUserDetails();
 		}	
 		return (
 			<div>

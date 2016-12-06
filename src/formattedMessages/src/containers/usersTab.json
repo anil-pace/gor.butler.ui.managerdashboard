@@ -1,0 +1,46 @@
+[
+  {
+    "id": "userDetails.operator",
+    "defaultMessage": "Operator"
+  },
+  {
+    "id": "userDetails.manager",
+    "defaultMessage": "Manager"
+  },
+  {
+    "id": "userDetails.pick.status",
+    "defaultMessage": "Pick"
+  },
+  {
+    "id": "auditdetail.completed.status",
+    "defaultMessage": "Completed"
+  },
+  {
+    "id": "userDetails.put.status",
+    "defaultMessage": "Put"
+  },
+  {
+    "id": "userDetails.audit.status",
+    "defaultMessage": "Audit"
+  },
+  {
+    "id": "userDetails.front.status",
+    "defaultMessage": "Front"
+  },
+  {
+    "id": "userDetails.back.status",
+    "defaultMessage": "Back"
+  },
+  {
+    "id": "userDetails.online.status",
+    "defaultMessage": "Online"
+  },
+  {
+    "id": "userDetails.offline.status",
+    "defaultMessage": "Offline"
+  },
+  {
+    "id": "userDetails.location",
+    "defaultMessage": "PPS {ppsId}"
+  }
+]

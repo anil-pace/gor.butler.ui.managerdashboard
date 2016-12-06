@@ -26,19 +26,16 @@ class MultiLineGraph extends React.Component{
   */
  
   _graphRender(invData){
-
+    var node = document.createElement('div');
     if(invData.length){
     try{
-        // if (this.props.inventoryData.length  <= 0){
-        //   return;
-        // }
+        
         let config =  this.props.config;
-        let node = document.createElement('div');
+        
         let width = config.width;
         let height = config.height;
         let margin =config.margin;
         let component = this;
-        // let dataArray = this.props.inventoryData;
         width= width - margin.left - margin.right;
 
         let jsonArray= invData
@@ -51,6 +48,7 @@ class MultiLineGraph extends React.Component{
           rObj.date = new Date(obj.date);
           rObj.items_put = obj.items_put;
           rObj.items_picked = obj.items_picked;
+          rObj.toolTipData = obj.toolTipData;
 
           return rObj;
         })
@@ -62,12 +60,12 @@ class MultiLineGraph extends React.Component{
         var xx = function(e)  { return x(function(d) { return x(d.date);}) };
         var yy = function(e)  { return y(function(d) { return y(d.items_put); }) };
         var div = d3.select("body").append("div") 
-        .attr("class", "tooltip")       
+        .attr("class", "tooltip ppLine")       
         .style("opacity", 0);
 
         // setting axis
         
-        var xAxis = d3.svg.axis().scale(x).orient("bottom").tickFormat(d3.time.format("%d")).ticks(dataArray.length-1)
+        var xAxis = d3.svg.axis().scale(x).orient("bottom").tickFormat(d3.time.format("%e")).ticks(dataArray.length-1)
         .outerTickSize(config.outerTickSize);
         var yAxis = d3.svg.axis().scale(y).orient("left")
         .ticks(config.ticks).outerTickSize(config.outerTickSize);
@@ -144,7 +142,7 @@ class MultiLineGraph extends React.Component{
             div.transition()    
                 .duration(200)    
                 .style("opacity", 1);    
-            div .html(d.date + "<br/>"  + d.items_picked)  
+            div .html("<p>"+d.toolTipData.date + "</p><p>"  + d.toolTipData.pick+"</p>")  
                 .style("left", (event.pageX) + "px")   
                 .style("top", (event.pageY - 28) + "px");  
             })          
@@ -166,7 +164,7 @@ class MultiLineGraph extends React.Component{
             div.transition()    
                 .duration(200)    
                 .style("opacity", 1);    
-            div .html(d.date + "<br/>"  + d.items_put)  
+            div .html("<p>"+d.toolTipData.date + "</p><p>"  + d.toolTipData.put+"</p>")  
                 .style("left", (event.pageX) + "px")   
                 .style("top", (event.pageY - 28) + "px");  
             })          
@@ -185,16 +183,20 @@ class MultiLineGraph extends React.Component{
       .attr("y",height/2)
       .text(config.noDataText);
     }
+     var mBreak= g.selectAll("g.x");
+     var textEl = parseInt(mBreak.select("g:nth-child("+dataArray.length+") text").text());
+      mBreak.select("g:nth-child("+dataArray.length+")").append("text").attr("x","-20").attr("y","2.5em").text(config.today)
+      var monthBreak = mBreak.select("g:nth-child("+(dataArray.length - 1)+")");
+      mBreak.select("g:nth-child("+(dataArray.length - textEl)+")").append("line").attr("class","month-break").attr("x1","15").attr("x2","15").attr("y1","0").attr("y2","25");
+      mBreak.select("g:nth-child("+(dataArray.length - (textEl-1))+")").append("text").attr("x","-5").attr("y","30").text(config.breakMonth);
         
-        this.setState({d3: node});
+        
       }
       catch(error){
         throw "Error while creating the pickput line graph: "+ error;
       }
     }
-    else{
-      this.setState({d3: ''});
-    }
+    this.setState({d3: node});
 
     }
 
