@@ -6,7 +6,8 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import {currentTableState} from '../../actions/tableDataAction'
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
- 
+import {GOR_STATUS,GOR_STATUS_PRIORITY} from '../../constants/frontEndConstants';
+
 
   var tempGlobal = 0;
 class ChargingStationsTable extends React.Component {
@@ -81,8 +82,8 @@ class ChargingStationsTable extends React.Component {
   
   _onSortChange(columnKey, sortDir) {
     
-    if(columnKey === "status") {
-      columnKey = "statusPriority";
+    if(columnKey === GOR_STATUS) {
+      columnKey = GOR_STATUS_PRIORITY;
     }
     var sortIndexes = this._defaultSortIndexes.slice();
     var tableData={

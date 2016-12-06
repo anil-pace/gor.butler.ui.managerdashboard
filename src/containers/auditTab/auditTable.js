@@ -12,6 +12,8 @@ import CreateAudit from './createAudit';
 import StartAudit from './startAudit';
 import DeleteAudit from './deleteAudit';
 import DuplicateAudit from './duplicateAudit';
+import {GOR_STATUS,GOR_STATUS_PRIORITY} from '../../constants/frontEndConstants';
+
 
 class AuditTable extends React.Component {
   constructor(props) {
@@ -107,8 +109,8 @@ class AuditTable extends React.Component {
 
 
     _onSortChange(columnKey, sortDir) {
-      if(columnKey === "status") {
-      columnKey = "statusPriority";
+      if(columnKey === GOR_STATUS) {
+      columnKey = GOR_STATUS_PRIORITY;
     }
       var sortIndexes = this._defaultSortIndexes.slice();
       var tableData={

@@ -170,14 +170,25 @@ export const  stringConfig= defineMessages({
     },
     not_fulfillable:{
         id: 'stringConfig.notFulfillable',
-        description: 'Text to show auto',
-        defaultMessage: "Auto"
+        description: 'Text to show In progress',
+        defaultMessage: "In Progress"
     },
     exception:{
         id: 'stringConfig.exception',
         description: 'Text to show exception',
-        defaultMessage: "Exception"
+        defaultMessage: "Exception" //needs to be done
+    },
+    received:{
+        id: 'stringConfig.received',
+        description: 'Text to show received',
+        defaultMessage: "In Progress"
+    },
+    cancelled:{
+        id: 'stringConfig.cancelled',
+        description: 'Text to show cancelled',
+        defaultMessage: "In Progress"  //need to be done
     }
+    // temp_unfull need to be done ****
 
 
 
