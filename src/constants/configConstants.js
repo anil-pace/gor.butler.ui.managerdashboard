@@ -1,6 +1,6 @@
 
 
-export const BASE_URL = '192.168.8.177';
+export const BASE_URL = 'localhost';
 
 export const PORT = '8888';
 export const PROTOCOL = 'https://';
