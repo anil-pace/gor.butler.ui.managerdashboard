@@ -4,7 +4,7 @@ import DropdownTable from '../../components/dropdown/dropdownTable'
 import Dimensions from 'react-dimensions'
 import { FormattedMessage } from 'react-intl';
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
-import {GOR_STATUS,GOR_STATUS_PRIORITY} from '../../constants/frontEndConstants';
+import {GOR_STATUS,GOR_STATUS_PRIORITY,GOR_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
 
 class ButlerBotTable extends React.Component {
   constructor(props) {
@@ -116,7 +116,13 @@ class ButlerBotTable extends React.Component {
     let msuMounted = this.props.parameters.msuMounted;
     let locations = this.props.parameters.location;
     let voltage = this.props.parameters.avgVoltage;
-    
+    var containerHeight = this.props.containerHeight;
+    var noData = <div/>;
+    if(totalBot === 0 || totalBot === undefined) {
+     noData =  <div> <FormattedMessage id="butlerbot.table.noData" description="No data message for butlerbot table" 
+       defaultMessage ="No Butler Bot Found"/>  </div>
+     containerHeight = GOR_TABLE_HEADER_HEIGHT;
+    }
     return (
       <div className="gorTableMainContainer">
         <div className="gorToolBar">
@@ -144,7 +150,7 @@ class ButlerBotTable extends React.Component {
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
         width={this.props.containerWidth}
-        height={this.props.containerHeight}
+        height={containerHeight}
         {...this.props}>
         <Column
           columnKey="id"
@@ -272,6 +278,7 @@ class ButlerBotTable extends React.Component {
           isResizable={true}
         />
       </Table>
+       <div className="gor-no-data"> {noData} </div>
       </div>
     );
   }

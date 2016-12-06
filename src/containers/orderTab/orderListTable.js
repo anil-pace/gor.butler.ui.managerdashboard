@@ -4,7 +4,7 @@ import Dropdown from '../../components/dropdown/dropdown'
 import Dimensions from 'react-dimensions'
 import { FormattedMessage, FormattedDate, FormattedTime,FormattedRelative ,defineMessages} from 'react-intl';
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
-import {GOR_STATUS,GOR_STATUS_PRIORITY} from '../../constants/frontEndConstants';
+import {GOR_STATUS,GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
 
 
 const messages = defineMessages({
@@ -120,7 +120,7 @@ class OrderListTable extends React.Component {
   render() {
     
     var {sortedDataList, colSortDirs,columnWidths} = this.state;
-    var totalOrder = sortedDataList.getSize(), headerAlert = <div/>;
+    var totalOrder = sortedDataList.getSize(), headerAlert = <div/>,heightRes;
     let allDrop = <FormattedMessage id="orderlist.table.allDrop" description="allOrders dropdown option for orderlist" defaultMessage ="All orders"/> 
     let breachedDrop = <FormattedMessage id="orderlist.table.breachedDrop" description="breached dropdown option for orderlist" defaultMessage ="Breached orders"/> 
     let pendingDrop = <FormattedMessage id="pendingDrop.table.allDrop" description="pending dropdown option for orderlist" defaultMessage ="Pending orders"/> 
@@ -155,7 +155,16 @@ class OrderListTable extends React.Component {
 
      headerAlert =  <div className="gorToolHeaderEl alertState"> <div className="table-subtab-alert-icon"/> <div className="gor-inline">{this.props.alertNum} Alerts </div> </div>
     }
-    
+
+    if(this.props.containerHeight !== 0) {
+      heightRes = this.props.containerHeight;
+    }
+    var noData = <div/>;
+    if(totalOrder === 0 || totalOrder === undefined) {
+     noData =  <div> <FormattedMessage id="orderlist.table.noData" description="No data message for orderlist table" 
+       defaultMessage ="No Orders Found"/>  </div>
+     heightRes = GOR_TABLE_HEADER_HEIGHT;
+    }
     return (
       <div className="gorTableMainContainer">
       
@@ -201,7 +210,7 @@ class OrderListTable extends React.Component {
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
         width={this.props.containerWidth}
-        height={this.props.containerHeight*0.9}
+        height={heightRes*0.9}
         {...this.props}>
         <Column
           columnKey="id"
@@ -320,6 +329,7 @@ class OrderListTable extends React.Component {
           isResizable={true}
         />
       </Table>
+      <div className="gor-no-data"> {noData} </div>
       </div>
     );
   }
