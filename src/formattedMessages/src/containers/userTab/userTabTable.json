@@ -1,5 +1,10 @@
 [
   {
+    "id": "user.table.noData",
+    "description": "No data message for user table",
+    "defaultMessage": "No User Found"
+  },
+  {
     "id": "user.table.heading",
     "description": "Heading for users table",
     "defaultMessage": "Users"

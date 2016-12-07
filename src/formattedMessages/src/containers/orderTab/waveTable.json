@@ -1,5 +1,10 @@
 [
   {
+    "id": "waves.table.noData",
+    "description": "No data message for waves table",
+    "defaultMessage": "No Waves Found"
+  },
+  {
     "id": "waves.table.heading",
     "description": "Heading for waves",
     "defaultMessage": "Waves"

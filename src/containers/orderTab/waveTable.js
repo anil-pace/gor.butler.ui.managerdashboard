@@ -4,7 +4,7 @@ import DropdownTable from '../../components/dropdown/dropdownTable'
 import Dimensions from 'react-dimensions'
 import { FormattedMessage } from 'react-intl';
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData,ProgressCell} from '../../components/commonFunctionsDataTable';
-import {GOR_STATUS,GOR_STATUS_PRIORITY} from '../../constants/frontEndConstants';
+import {GOR_STATUS,GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
 
 class WavesTable extends React.Component {
   constructor(props) {
@@ -111,6 +111,12 @@ class WavesTable extends React.Component {
     var orderRemaining = this.props.waveState.orderRemaining.toLocaleString(), totalOrders = this.props.waveState.totalOrders.toLocaleString();
     if(this.props.containerHeight !== 0) {
       heightRes = this.props.containerHeight;
+    }
+    var noData = <div/>;
+    if(totalwave === 0 || totalwave === undefined) {
+     noData =  <div> <FormattedMessage id="waves.table.noData" description="No data message for waves table" 
+       defaultMessage ="No Waves Found"/>  </div>
+     heightRes = GOR_TABLE_HEADER_HEIGHT;
     }
     return (
       <div className="gorTableMainContainer">
@@ -288,6 +294,7 @@ class WavesTable extends React.Component {
       isResizable={true}
       />
       </Table>
+      <div className="gor-no-data"> {noData} </div>
       </div>
       );
 }

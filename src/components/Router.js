@@ -28,7 +28,6 @@ class Routes extends React.Component{
   			let subTab =(sessionStorage.getItem('subTab') || null);
   			let nextView ='/'+ (subTab || sessionStorage.getItem('nextView') || 'md');
   			let selTab =(sessionStorage.getItem('selTab') || TAB_ROUTE_MAP[OVERVIEW]);
-  			
   			this.props.loginRequest();
   			this.props.tabSelected(selTab);
   			this.props.subTabSelected(subTab);
@@ -71,9 +70,6 @@ class Routes extends React.Component{
   					this.props.setWavesSpinner(true);
   					break;
 
-  					
-
-  					
 
   					default:
   					this.props.setOrderListSpinner(false);
@@ -261,8 +257,9 @@ render(){
 
 }
 
-var mapDispatchToProps = function(dispatch){
 
+
+var mapDispatchToProps = function(dispatch){
     return {
       updateIntl: function(params){ dispatch(updateIntl(params));},
         loginRequest: function(){ dispatch(loginRequest()); },

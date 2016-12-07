@@ -60,6 +60,11 @@
     "defaultMessage": "Last 1 day"
   },
   {
+    "id": "orderlist.table.noData",
+    "description": "No data message for orderlist table",
+    "defaultMessage": "No Orders Found"
+  },
+  {
     "id": "order.table.heading",
     "description": "Heading for order list",
     "defaultMessage": "OrderList"

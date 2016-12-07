@@ -72,11 +72,11 @@ class MultiLineGraph extends React.Component{
 
         var pickLine = d3.svg.line()
         .x(function(d) { return x(d.date);})
-        .y(function(d) { return y(d.items_put); });
+        .y(function(d) { return y(d.items_picked); });
 
         var putLine = d3.svg.line()
         .x(function(d) { return x(d.date);})
-        .y(function(d) { return y(d.items_picked); });
+        .y(function(d) { return y(d.items_put); });
 
         var svg = d3.select(node).append("svg")
         .attr("width", width + margin.left + margin.right)
