@@ -319,9 +319,9 @@ export const GOR_EXCEPTION="gor-exception";
 export const GOR_OFFLINE='gor-offline';
 export const GOR_ONLINE='gor-online';
 export const GOR_NORMAL_TAB='gor-normal-tab';
-export const GOR_PASS='pass';
-export const GOR_FAIL='fail';
-export const GOR_INFO='info';
+export const GOR_PASS='gor-pass';
+export const GOR_FAIL='gor-fail';
+export const GOR_INFO='gor-info';
 export const GOR_STATUS = "status";
 export const GOR_STATUS_PRIORITY = "statusPriority";
 
