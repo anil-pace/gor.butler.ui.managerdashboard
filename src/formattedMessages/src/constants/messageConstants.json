@@ -62,7 +62,7 @@
   {
     "id": "user.empty.name",
     "description": "Text for empty user name",
-    "defaultMessage": "Please enter a name"
+    "defaultMessage": "Please enter a user name"
   },
   {
     "id": "user.invalid.name",

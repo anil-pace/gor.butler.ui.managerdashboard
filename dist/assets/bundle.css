@@ -3478,6 +3478,11 @@ progress::-moz-progress-bar {
   color: #ffffff;
 }
 
+.info {
+  background: #3f529b;
+  color: #ffffff;
+}
+
 #react-paginate {
   display: inline-block;
   box-sizing: border-box;

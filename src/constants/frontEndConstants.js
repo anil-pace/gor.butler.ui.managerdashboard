@@ -131,6 +131,7 @@ export const DELETION=4;
 export const NOTIFY_PASS='NOTIFY_PASS';
 export const NOTIFY_DELETE='NOTIFY_DELETE';
 export const NOTIFY_FAIL='NOTIFY_FAIL';
+export const NOTIFY_INFO='NOTIFY_INFO';
 export const NOTIFY_HIDE='NOTIFY_HIDE';
 export const MD_ID='MD_ID';
 export const SET_ROLE='SET_ROLE';
@@ -320,6 +321,7 @@ export const GOR_ONLINE='gor-online';
 export const GOR_NORMAL_TAB='gor-normal-tab';
 export const GOR_PASS='pass';
 export const GOR_FAIL='fail';
+export const GOR_INFO='info';
 export const GOR_STATUS = "status";
 export const GOR_STATUS_PRIORITY = "statusPriority";
 

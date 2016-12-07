@@ -1,4 +1,4 @@
-import {ID_DATA,NAME_DATA,PASSWORD_DATA,INFO_RESET,ERROR,SUCCESS,INFO,HIDE,NOTIFY_PASS,NOTIFY_HIDE,NOTIFY_FAIL,PASS_DATA,MD_ID,SET_ROLE,NOTIFY_DELETE,DELETION,GOR_PASS,GOR_FAIL,TICK_WHITE,REMOVE_ICON,ERROR_WHITE} from '../constants/frontEndConstants';
+import {ID_DATA,NAME_DATA,PASSWORD_DATA,INFO_RESET,ERROR,SUCCESS,INFO,HIDE,NOTIFY_PASS,NOTIFY_HIDE,NOTIFY_FAIL,NOTIFY_INFO,PASS_DATA,MD_ID,SET_ROLE,NOTIFY_DELETE,DELETION,GOR_PASS,GOR_FAIL,GOR_INFO,TICK_WHITE,REMOVE_ICON,ERROR_WHITE} from '../constants/frontEndConstants';
 import {US001,US002,UE001,UE002,INVALID_ID,EMPTY_PWD,EMPTY_NAME,INVALID_NAME,INVALID_PWD,MATCH_PWD,TYPE_SUCCESS} from '../constants/messageConstants'; 
 
 /**
@@ -39,14 +39,14 @@ export  function appInfo(state={},action){
           break;
 
     case NOTIFY_PASS:
-         let notifyMsg=action.data, notifyInfo;
-         notifyInfo={
+         let notifyMsg=action.data, notifyPass;
+         notifyPass={
           type:GOR_PASS,
           icon:TICK_WHITE,
           msg:notifyMsg
          };
          return Object.assign({}, state, { 
-            "notifyInfo":notifyInfo
+            "notifyInfo":notifyPass
          })
          break;
     
@@ -74,6 +74,18 @@ export  function appInfo(state={},action){
          })
          break;
 
+    case NOTIFY_INFO:
+         let notifyInfoMsg=action.data, notifyInfo;
+         notifyInfo={
+          type:GOR_INFO,
+          icon:TICK_WHITE,
+          msg:notifyInfoMsg
+         };
+         return Object.assign({}, state, { 
+            "notifyInfo":notifyInfo
+         })
+         break;
+
     case NOTIFY_HIDE:
          let notifyHide;
          notifyHide={
@@ -83,7 +95,6 @@ export  function appInfo(state={},action){
             "notifyInfo":notifyHide
          })
          break;
-
 
     case MD_ID:
         let roleInfo;
