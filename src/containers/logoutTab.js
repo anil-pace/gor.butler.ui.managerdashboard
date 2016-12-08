@@ -14,7 +14,6 @@ class LogOut extends React.Component{
     this.props.removeModal();
   }
   appLogout() {
-     
       this.props.removeModal();
       sessionStorage.clear();
       this.props.userLogout();

@@ -57,18 +57,18 @@ class AuditTab extends React.Component{
  {
   if(nextProps.auditRefresh)
   {
-     var data = {};
-     data.selected = 0;
-     this.handlePageClick(data);
-     nextProps.setAuditRefresh(false);
-  }
+   var data = {};
+   data.selected = 0;
+   this.handlePageClick(data);
+   nextProps.setAuditRefresh(false);
  }
- componentDidMount() {
+}
+componentDidMount() {
   var data = {};
   data.selected = 0;
   this.handlePageClick(data);
- }
- _processAuditData(data,nProps){
+}
+_processAuditData(data,nProps){
   var nProps = this,
   data = nProps.props.auditDetail;
   let created  = nProps.context.intl.formatMessage(messages.auditCreatedStatus);
@@ -115,17 +115,16 @@ class AuditTab extends React.Component{
         auditData.startAudit = false;
       }
     }
-
     if(data[i].start_request_time) {
       auditData.startTime = nProps.context.intl.formatDate(data[i].start_request_time,
-                                {timeZone:timeOffset,
-                                  year:'numeric',
-                                  month:'short',
-                                  day:'2-digit',
-                                  hour:"2-digit",
-                                  minute:"2-digit",
-                                  hour12: false
-                                })
+        {timeZone:timeOffset,
+          year:'numeric',
+          month:'short',
+          day:'2-digit',
+          hour:"2-digit",
+          minute:"2-digit",
+          hour12: false
+        })
     }
     else {
       auditData.startTime = "--";
@@ -142,13 +141,13 @@ class AuditTab extends React.Component{
 
     if(data[i].completion_time) {
       auditData.completedTime = nProps.context.intl.formatDate(data[i].completion_time,
-                                {timeZone:timeOffset,
-                                  year:'numeric',
-                                  month:'short',
-                                  day:'2-digit',
-                                  hour:"2-digit",
-                                  minute:"2-digit"
-                                })
+        {timeZone:timeOffset,
+          year:'numeric',
+          month:'short',
+          day:'2-digit',
+          hour:"2-digit",
+          minute:"2-digit"
+        })
     }
     else {
       auditData.completedTime = "--";
@@ -158,75 +157,75 @@ class AuditTab extends React.Component{
   }
   
   return auditDetails;
- }
- handlePageClick(data){
-    var url;
-    var makeDate = new Date();
-    makeDate.setDate(makeDate.getDate() - 30)
-    makeDate = makeDate.getFullYear()+'-'+makeDate.getMonth()+'-'+makeDate.getDate();  
- 
-    if(data.url === undefined) {
-      url = SEARCH_AUDIT_URL+makeDate+GIVEN_PAGE+(data.selected+1)+GIVEN_PAGE_SIZE;
-    }
+}
+handlePageClick(data){
+  var url;
+  var makeDate = new Date();
+  makeDate.setDate(makeDate.getDate() - 30)
+  makeDate = makeDate.getFullYear()+'-'+makeDate.getMonth()+'-'+makeDate.getDate();  
+
+  if(data.url === undefined) {
+    url = SEARCH_AUDIT_URL+makeDate+GIVEN_PAGE+(data.selected+1)+GIVEN_PAGE_SIZE;
+  }
 
 
-    else {
-      url = data.url;
-    }
-   
-    let paginationData={
-              'url':url,
-              'method':GET,
-              'cause': AUDIT_RETRIEVE,
-              'token': this.props.auth_token,
-              'contentType':APP_JSON
-          } 
-          this.props.setAuditSpinner(true);
-         this.props.getPageData(paginationData);
- }
+  else {
+    url = data.url;
+  }
+
+  let paginationData={
+    'url':url,
+    'method':GET,
+    'cause': AUDIT_RETRIEVE,
+    'token': this.props.auth_token,
+    'contentType':APP_JSON
+  } 
+  this.props.setAuditSpinner(true);
+  this.props.getPageData(paginationData);
+}
 
 render(){
   var renderTab = <div/>,
   timeOffset = this.props.timeOffset || "",
   headerTimeZone = (this.context.intl.formatDate(Date.now(),
-                                {timeZone:timeOffset,
-                                  year:'numeric',
-                                  timeZoneName:'long'
-                                }));
+    {timeZone:timeOffset,
+      year:'numeric',
+      timeZoneName:'long'
+    }));
   
   /*Extracting Time zone string for the specified time zone*/
   headerTimeZone = headerTimeZone.substr(5, headerTimeZone.length);
   
-    var auditData = this._processAuditData();
-    renderTab = <AuditTable items={auditData}
-    intlMessg={this.props.intlMessages} timeZoneString = {headerTimeZone}/>
+  var auditData = this._processAuditData();
+  renderTab = <AuditTable items={auditData}
+  intlMessg={this.props.intlMessages} timeZoneString = {headerTimeZone}/>
   
   
   return (
-   <div>
-   
-   <div>
+  <div>
 
-   <div className="gor-Auditlist-table">
-   <Spinner isLoading={this.props.auditSpinner} />
-   {renderTab}
+  <div>
 
-   </div>
-   </div>
-        <div id={"react-paginate"}>
-          <ReactPaginate previousLabel={"<<"}
-                       nextLabel={">>"}
-                       breakClassName={"break-me"}
-                       pageNum={this.props.totalPage}
-                       marginPagesDisplayed={1}
-                       pageRangeDisplayed={1}
-                       clickCallback={this.handlePageClick.bind(this)}
-                       containerClassName={"pagination"}
-                       subContainerClassName={"pages pagination"}
-                       activeClassName={"active"} />
-        </div>   
-   </div>
-   );
+  <div className="gor-Auditlist-table">
+  <Spinner isLoading={this.props.auditSpinner} />
+  {renderTab}
+
+  </div>
+  </div>
+  <div id={"react-paginate"}>
+  <ReactPaginate previousLabel={"<<"}
+  nextLabel={">>"}
+  breakClassName={"break-me"}
+  pageNum={this.props.totalPage}
+  marginPagesDisplayed={1}
+  pageRangeDisplayed={1}
+  clickCallback={this.handlePageClick.bind(this)}
+  containerClassName={"pagination"}
+  subContainerClassName={"pages pagination"}
+  activeClassName={"active"} />
+  </div>   
+  </div>
+  );
 }
 };
 
