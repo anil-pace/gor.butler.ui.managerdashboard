@@ -128,5 +128,15 @@
     "id": "stringConfig.cancelled",
     "description": "Text to show cancelled",
     "defaultMessage": "In Progress"
+  },
+  {
+    "id": "stringConfig.butler_supervisor",
+    "description": "Text to show Manager",
+    "defaultMessage": "Manager"
+  },
+  {
+    "id": "stringConfig.butler_ui",
+    "description": "Text to show Operator",
+    "defaultMessage": "Operator"
   }
 ]

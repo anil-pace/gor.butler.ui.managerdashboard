@@ -1,7 +1,7 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import {RECIEVE_HEADER,HEADER_START_TIME,REQUEST_HEADER,RECIEVE,RECIEVE_ITEM_TO_STOCK,GET} from '../../constants/frontEndConstants';
-import {USER_ROLE_MAP} from '../../constants/backEndConstants';
+import {stringConfig} from '../../constants/backEndConstants';
 import {HEADER_URL} from '../../constants/configConstants'
 import {modal} from 'react-redux-modal';
 import { getHeaderInfo } from '../../actions/headerAction';
@@ -54,7 +54,7 @@ class Header extends React.Component{
   	if(this.props.headerInfo && this.props.headerInfo.users.length){
   		 headerInfo= Object.assign({},this.props.headerInfo)
   		headerInfo.fullName = (headerInfo.users[0].first_name || '--') +' '+ (headerInfo.users[0].last_name || '--');
-  		headerInfo.designation = USER_ROLE_MAP[headerInfo.users[0].roles[0]] || '';
+  		headerInfo.designation = headerInfo.users[0].roles[0] || 'butler_ui';
   	}
   	headerInfo.start= HEADER_START_TIME
   	return headerInfo
@@ -102,11 +102,7 @@ class Header extends React.Component{
 						    }
 							</div>
 							<div className="subTextClient">
-								<FormattedMessage id="header.user_post" description='User post' 
-        					defaultMessage='{user_post}'
-        					values={{
-						        user_post: headerInfo ? headerInfo.designation : ''
-						    }}/>
+								{headerInfo.designation ? this.context.intl.formatMessage(stringConfig[headerInfo.designation]) : "--"}
 							</div>
 						</div>
 						<div className="block user-icon">
@@ -128,6 +124,10 @@ class Header extends React.Component{
 		);
 	}
 };
+
+Header.contextTypes = {
+    intl: React.PropTypes.object.isRequired
+}
 /**
  * Function to pass state values as props
  */

@@ -198,6 +198,16 @@ export const  stringConfig= defineMessages({
         description: 'Text to show cancelled',
         defaultMessage: "In Progress"  //need to be done
 
+    },
+    butler_supervisor:{
+        id: 'stringConfig.butler_supervisor',
+        description: 'Text to show Manager',
+        defaultMessage: "Manager"  //need to be done
+    },
+    butler_ui:{
+        id: 'stringConfig.butler_ui',
+        description: 'Text to show Operator',
+        defaultMessage: "Operator"  //need to be done
     }
     // temp_unfull need to be done ****
 
