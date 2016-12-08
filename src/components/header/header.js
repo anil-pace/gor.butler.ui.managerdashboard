@@ -103,9 +103,9 @@ class Header extends React.Component{
 							</div>
 							<div className="subTextClient">
 								<FormattedMessage id="header.user_post" description='User post' 
-        					defaultMessage='--'
+        					defaultMessage='{user_post}'
         					values={{
-						        user_post: headerInfo ? headerInfo.designation : '',
+						        user_post: headerInfo ? headerInfo.designation : ''
 						    }}/>
 							</div>
 						</div>

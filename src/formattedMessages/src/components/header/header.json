@@ -12,7 +12,7 @@
   {
     "id": "header.user_post",
     "description": "User post",
-    "defaultMessage": "--"
+    "defaultMessage": "{user_post}"
   },
   {
     "id": "header.logout",

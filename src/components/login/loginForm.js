@@ -1,6 +1,6 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-import {authLoginData,setLoginSpinner,connectionFault} from '../../actions/loginAction';
+import {authLoginData,setLoginSpinner,connectionFault,setUsername} from '../../actions/loginAction';
 import {validateID, validatePassword} from '../../actions/validationActions';
 import { connect } from 'react-redux';
 import {AUTH_LOGIN,ERROR,TYPING,APP_JSON,POST} from '../../constants/appConstants'; 
@@ -60,6 +60,7 @@ class LoginForm extends React.Component{
             }
         sessionStorage.setItem('nextView', 'md');
         this.props.setLoginSpinner(true);
+        this.props.setUsername(formdata.username);
         this.props.authLoginData(loginData);
     }
 	render(){
@@ -148,6 +149,7 @@ function mapDispatchToProps (dispatch){
         validateID: function(data){ dispatch(validateID(data)); }, 
         validatePass: function(data){ dispatch(validatePassword(data)); },        
         setLoginSpinner:   function(data){ dispatch(setLoginSpinner(data)); },
+        setUsername: function(data){ dispatch(setUsername(data)); },   
         connectionFault: function(){dispatch(connectionFault()); }
     };
 }

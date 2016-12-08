@@ -35,11 +35,6 @@
     "defaultMessage": "Start time:{time}"
   },
   {
-    "id": "header.user_post",
-    "description": "User post",
-    "defaultMessage": "--"
-  },
-  {
     "id": "inventory.header",
     "description": "Inventory Header Message",
     "defaultMessage": "Inventory"
