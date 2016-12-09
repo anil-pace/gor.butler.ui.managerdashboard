@@ -47,7 +47,7 @@
   {
     "id": "stringConfig.pending",
     "description": "Text to show pending",
-    "defaultMessage": "pending"
+    "defaultMessage": "In Progress"
   },
   {
     "id": "stringConfig.disconnected",
@@ -102,7 +102,7 @@
   {
     "id": "stringConfig.notFulfillable",
     "description": "Text to show In progress",
-    "defaultMessage": "In Progress"
+    "defaultMessage": "Unfulfillable"
   },
   {
     "id": "stringConfig.exception",
@@ -127,7 +127,7 @@
   {
     "id": "stringConfig.cancelled",
     "description": "Text to show cancelled",
-    "defaultMessage": "In Progress"
+    "defaultMessage": "Cancelled"
   },
   {
     "id": "stringConfig.butler_supervisor",
@@ -138,5 +138,15 @@
     "id": "stringConfig.butler_ui",
     "description": "Text to show Operator",
     "defaultMessage": "Operator"
+  },
+  {
+    "id": "stringConfig.admin",
+    "description": "Text to show admin",
+    "defaultMessage": "--"
+  },
+  {
+    "id": "stringConfig.temporary_unfulfillable",
+    "description": "Text for temporary unfulfillable status",
+    "defaultMessage": "Temporary Unfulfillable"
   }
 ]

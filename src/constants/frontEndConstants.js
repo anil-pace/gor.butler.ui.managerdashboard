@@ -35,7 +35,7 @@ export const FULFILLING_ORDERS="fulfilling_orders";
 export const TABLE_STATE = "TABLE_STATE";
 export const REQUEST_HEADER = "REQUEST_HEADER";
 export const RECIEVE_HEADER = "RECIEVE_HEADER";
-export const GOR_TABLE_HEADER_HEIGHT = 73;
+export const GOR_TABLE_HEADER_HEIGHT = 71;
 
 
 /*Constants for performance widget*/
@@ -43,7 +43,7 @@ export const RENDER_WIDGET = "RENDER_WIDGET";
 export const TAB_SELECTED = "TAB_SELECTED";
 export const PREV_TAB_SELECTED = "PREV_TAB_SELECTED";
 export const SUB_TAB_SELECTED = "SUB_TAB_SELECTED";
-export const GOR_ORDER_PICKED = "orders_picked";
+export const GOR_ORDER_PICKED = "items_picked";
 export const GOR_ITEMS_PUT = "items_put";
 export const GOR_ITEMS_AUDITED = "items_audited";
 export const PICK_PPS_PERFORMANCE = "PICK_PPS_PERFORMANCE";

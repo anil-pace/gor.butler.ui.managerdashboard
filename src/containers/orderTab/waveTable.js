@@ -113,9 +113,9 @@ class WavesTable extends React.Component {
       heightRes = this.props.containerHeight;
     }
     var noData = <div/>;
-    if(totalwave === 0 || totalwave === undefined) {
-     noData =  <div> <FormattedMessage id="waves.table.noData" description="No data message for waves table" 
-       defaultMessage ="No Waves Found"/>  </div>
+    if(totalwave === 0 || totalwave === undefined || totalwave === null) {
+     noData =  <div className="gor-no-data"> <FormattedMessage id="waves.table.noData" description="No data message for waves table" 
+        defaultMessage ="No Waves Found"/>  </div>
      heightRes = GOR_TABLE_HEADER_HEIGHT;
     }
     return (
@@ -139,7 +139,7 @@ class WavesTable extends React.Component {
       </div>
       </div>
       <Table
-      rowHeight={66}
+      rowHeight={50}
       rowsCount={sortedDataList.getSize()}
       headerHeight={70}
       onColumnResizeEndCallback={this._onColumnResizeEndCallback}
@@ -294,7 +294,7 @@ class WavesTable extends React.Component {
       isResizable={true}
       />
       </Table>
-      <div className="gor-no-data"> {noData} </div>
+      <div> {noData} </div>
       </div>
       );
 }

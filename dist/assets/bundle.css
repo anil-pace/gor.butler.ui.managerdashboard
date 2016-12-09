@@ -2037,7 +2037,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   background: #ffffff;
 }
 
-.fulfillable .public_fixedDataTableCell_cellContent {
+.cancelled .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
   width: 70px;
@@ -2048,9 +2048,24 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   font-size: 12px;
   max-height: 9px;
   background: #ffffff;
+  text-transform: capitalize;
 }
 
-.gor-order-exception {
+.fulfillable .public_fixedDataTableCell_cellContent {
+  border-radius: 15px;
+  text-align: center;
+  width: 70px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #00a54f;
+  color: #00a54f;
+  font-size: 12px;
+  max-height: 9px;
+  background: #ffffff;
+  text-transform: capitalize;
+}
+
+.gor-order-exception .public_fixedDataTableCell_cellContent {
   background: #f99405;
   border-radius: 15px;
   text-align: center;

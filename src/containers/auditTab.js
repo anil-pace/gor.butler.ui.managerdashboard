@@ -135,7 +135,6 @@ class AuditTab extends React.Component{
       auditData.progress = (data[i].completed_quantity)/(data[i].expected_quantity);
     }
 
-
     else {
       auditData.progress = 0; //needs to be done
     }
