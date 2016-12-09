@@ -45,15 +45,15 @@ class App extends React.Component{
     }
 
     if (this.props.timeOutDuration){
-      // let durationInMilliSeconds = this.props.timeOutDuration*1000;
-      let durationInMilliSeconds = 10000;
+       let durationInMilliSeconds = this.props.timeOutDuration*1000;
+      // let durationInMilliSeconds = 10000;
       // trigger auto logout after timeduration.
-      setTimeout(function(){
-        sessionStorage.clear();
-        this.props.userLogout();
-        this.props.endConnect();
+      // setTimeout(function(){
+      //   sessionStorage.clear();
+      //   this.props.userLogout();
+      //   this.props.endConnect();
 
-      }.bind(this), durationInMilliSeconds);
+      // }.bind(this), durationInMilliSeconds);
     }
   }
 
