@@ -305,9 +305,8 @@ class PPStable extends React.Component {
               <SortHeaderCell onSortChange={this._onSortChange} 
                 sortDir={colSortDirs.id}>  
                 <div className="gorToolHeaderEl">
-                  <FormattedMessage id="PPStable.Totalpps" description='total pps' 
-                  defaultMessage='{ppsTotal} PPS' 
-                  values={{ppsTotal:ppsTotal?ppsTotal:'0'}}/> 
+                  <FormattedMessage id="PPStable.ppsColumn.heading" description='PPS - column Heading' 
+                  defaultMessage='PPS' /> 
                 <div className="gorToolHeaderSubText"> 
                   <FormattedMessage id="PPStable.Subpps" description='sub pps' 
                   defaultMessage='Total: {ppsTotal}' 

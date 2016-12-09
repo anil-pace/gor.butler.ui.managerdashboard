@@ -269,9 +269,8 @@ class AuditTable extends React.Component {
         <SortHeaderCell onSortChange={this._onSortChange}
         sortDir={colSortDirs.id}>
         <div className="gorToolHeaderEl">
-        <FormattedMessage id="auditTable.stationID" description='total audit ID for auditTable' 
-        defaultMessage='{rowsCount} AUDIT ID' 
-        values={{rowsCount:rowsCount?rowsCount:'0'}}/>
+        <FormattedMessage id="auditTable.stationID.heading" description='Heading for audit ID for auditTable' 
+        defaultMessage='AUDIT ID' />
         <div className="gorToolHeaderSubText">
         <FormattedMessage id="auditTable.SubAuditID" description='total Sub auditID for auditTable' 
         defaultMessage='Total:{rowsCount}' 

@@ -1,21 +1,19 @@
+import React  from 'react';
+import ReactPaginate from 'react-paginate';
+import { connect } from 'react-redux';
+import {getPageData, getStatusFilter, getTimeFilter,getPageSizeOrders,currentPageOrders,lastRefreshTime} from '../../actions/paginationAction';
+import {ORDERS_RETRIEVE,GOR_BREACHED,GOR_EXCEPTION,GET,APP_JSON} from '../../constants/frontEndConstants';
+import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,ORDER_PAGE, PICK_BEFORE_ORDER_URL, BREACHED_URL,UPDATE_TIME_HIGH,UPDATE_TIME_LOW,EXCEPTION_TRUE,WAREHOUSE_STATUS} from '../../constants/configConstants';
+import OrderListTable from './orderListTable';
+
+import Dropdown from '../../components/dropdown/dropdown'
+import { FormattedMessage ,defineMessages,FormattedRelative} from 'react-intl';
+import Spinner from '../../components/spinner/Spinner';
+import {setOrderListSpinner} from '../../actions/orderListActions';
+import {stringConfig} from '../../constants/backEndConstants';
 
 
- import React  from 'react';
- import ReactPaginate from 'react-paginate';
- import { connect } from 'react-redux';
- import {getPageData, getStatusFilter, getTimeFilter,getPageSizeOrders,currentPageOrders,lastRefreshTime} from '../../actions/paginationAction';
- import {ORDERS_RETRIEVE,GOR_BREACHED,GOR_EXCEPTION,GET,APP_JSON} from '../../constants/frontEndConstants';
- import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,ORDER_PAGE, PICK_BEFORE_ORDER_URL, BREACHED_URL,UPDATE_TIME_HIGH,UPDATE_TIME_LOW,EXCEPTION_TRUE,WAREHOUSE_STATUS} from '../../constants/configConstants';
- import OrderListTable from './orderListTable';
-
- import Dropdown from '../../components/dropdown/dropdown'
- import { FormattedMessage ,defineMessages,FormattedRelative} from 'react-intl';
- import Spinner from '../../components/spinner/Spinner';
- import {setOrderListSpinner} from '../../actions/orderListActions';
- import {stringConfig} from '../../constants/backEndConstants';
-
-
- const messages = defineMessages ({
+const messages = defineMessages ({
   inProgressStatus:{
     id: 'orderList.progress.status',
     description: "In 'progress message' for orders",
@@ -35,14 +33,14 @@
           id:"orderList.Unfulfillable.status", 
           description:" 'Unfulfillable' status",
           defaultMessage: "Unfulfillable"},
-      orderListRefreshedat:{
-        id:'orderlist.Refreshed.at', 
-        description:" 'Refreshed' status",
-        defaultMessage:'Last Updated '}
-   });
+          orderListRefreshedat:{
+            id:'orderlist.Refreshed.at', 
+            description:" 'Refreshed' status",
+            defaultMessage:'Last Updated '}
+          });
 
 
- class OrderListTab extends React.Component{
+class OrderListTab extends React.Component{
   constructor(props) 
   {
     super(props);
@@ -93,139 +91,139 @@
         orderData.statusPriority = unBreachedStatus[data[i].status];
       }
       orderData.recievedTime = nProps.context.intl.formatDate(data[i].create_time,
-                                {timeZone:timeOffset,
-                                  year:'numeric',
-                                  month:'short',
-                                  day:'2-digit',
-                                  hour:"2-digit",
-                                  minute:"2-digit",
-                                  hour12: false
-                                });
-                                
+        {timeZone:timeOffset,
+          year:'numeric',
+          month:'short',
+          day:'2-digit',
+          hour:"2-digit",
+          minute:"2-digit",
+          hour12: false
+        });
+
 
       if(data[i].pick_before_time === null) {
         orderData.pickBy = "--";
       }
       else {
-         orderData.pickBy = nProps.context.intl.formatDate(data[i].pick_before_time,
-                                {timeZone:timeOffset,
-                                  year:'numeric',
-                                  month:'short',
-                                  day:'2-digit',
-                                  hour:"2-digit",
-                                  minute:"2-digit",
-                                  hour12: false
-                                })
+       orderData.pickBy = nProps.context.intl.formatDate(data[i].pick_before_time,
+        {timeZone:timeOffset,
+          year:'numeric',
+          month:'short',
+          day:'2-digit',
+          hour:"2-digit",
+          minute:"2-digit",
+          hour12: false
+        })
      }
 
 
-      if(data[i].completed_orderlines === data[i].total_orderlines) {
-        orderData.orderLine = data[i].total_orderlines;
-      }
-      else {
-        orderData.orderLine = data[i].completed_orderlines + "/" + data[i].total_orderlines;
-      }
-      if (data[i].status === "completed"){
-        orderData.completedTime = nProps.context.intl.formatDate(data[i].update_time,
-                                {timeZone:timeOffset,
-                                  year:'numeric',
-                                  month:'short',
-                                  day:'2-digit',
-                                  hour:"2-digit",
-                                  minute:"2-digit",
-                                  hour12: false
-                                })
-      }else{
-        orderData.completedTime = "--";
-      }
-
-      renderOrderData.push(orderData);
-      orderData = {};
-
+     if(data[i].completed_orderlines === data[i].total_orderlines) {
+      orderData.orderLine = data[i].total_orderlines;
     }
-    orderDataPacket = {"renderOrderData":renderOrderData,"alertStatesNum":alertStatesNum}
-    
-    return orderDataPacket;
-  }
-
-
-  handlePageClick = (data) => {
-    var url;
-    if(data.url === undefined) {
-      url = API_URL + ORDERS_URL + ORDER_PAGE + (data.selected+1) + "&PAGE_SIZE=25";
-    }
-
-
     else {
-      url = data.url;
+      orderData.orderLine = data[i].completed_orderlines + "/" + data[i].total_orderlines;
+    }
+    if (data[i].status === "completed"){
+      orderData.completedTime = nProps.context.intl.formatDate(data[i].update_time,
+        {timeZone:timeOffset,
+          year:'numeric',
+          month:'short',
+          day:'2-digit',
+          hour:"2-digit",
+          minute:"2-digit",
+          hour12: false
+        })
+    }else{
+      orderData.completedTime = "--";
     }
 
-    let paginationData={
+    renderOrderData.push(orderData);
+    orderData = {};
 
-      'url':url,
-      'method':'GET',
-      'cause': ORDERS_RETRIEVE,
-      'token': this.props.auth_token,
-      'contentType':'application/json'
-    } 
-    this.props.setOrderListSpinner(true);
-    this.props.currentPage(data.selected+1);
-    this.props.getPageData(paginationData);
+  }
+  orderDataPacket = {"renderOrderData":renderOrderData,"alertStatesNum":alertStatesNum}
+
+  return orderDataPacket;
+}
+
+
+handlePageClick = (data) => {
+  var url;
+  if(data.url === undefined) {
+    url = API_URL + ORDERS_URL + ORDER_PAGE + (data.selected+1) + "&PAGE_SIZE=25";
   }
 
 
+  else {
+    url = data.url;
+  }
+
+  let paginationData={
+
+    'url':url,
+    'method':'GET',
+    'cause': ORDERS_RETRIEVE,
+    'token': this.props.auth_token,
+    'contentType':'application/json'
+  } 
+  this.props.setOrderListSpinner(true);
+  this.props.currentPage(data.selected+1);
+  this.props.getPageData(paginationData);
+}
 
 
 
 
-  refresh = (data) => {
-    var convertTime = {"oneHourOrders": 1, "twoHourOrders": 2, "sixHourOrders": 6, "twelveHourOrders": 12, "oneDayOrders": 24};
-    var status = this.props.filterOptions.statusFilter, timeOut = this.props.filterOptions.timeFilter,currentTime,prevTime;
-    var  appendStatusUrl="", appendTimeUrl="", appendPageSize="";
-    if(!data) {
-      data = {};
-      data.selected = 0;
-      data.url = "";
-    }
+
+
+refresh = (data) => {
+  var convertTime = {"oneHourOrders": 1, "twoHourOrders": 2, "sixHourOrders": 6, "twelveHourOrders": 12, "oneDayOrders": 24};
+  var status = this.props.filterOptions.statusFilter, timeOut = this.props.filterOptions.timeFilter,currentTime,prevTime;
+  var  appendStatusUrl="", appendTimeUrl="", appendPageSize="";
+  if(!data) {
+    data = {};
+    data.selected = 0;
     data.url = "";
-    data.url = API_URL + ORDERS_URL + ORDER_PAGE + (data.selected+1);
-
-    if(this.props.filterOptions.pageSize === undefined) {
-      appendPageSize = PAGE_SIZE_URL + "25";
-    }
-
-    else {
-      appendPageSize = PAGE_SIZE_URL + this.props.filterOptions.pageSize ;
-    }
-
-    if((status === undefined || status === "all")) {
-      appendStatusUrl = "";
-    }
-
-
-    else if(this.props.filterOptions.statusFilter === "breached") {
-      currentTime = new Date();
-      currentTime = currentTime.toISOString();
-      appendStatusUrl = PICK_BEFORE_ORDER_URL + currentTime + BREACHED_URL ;
-    }
-    else if(this.props.filterOptions.statusFilter=== "exception")
-    {
-      appendStatusUrl = EXCEPTION_TRUE ;      
-    }
-    else {
-     appendStatusUrl = WAREHOUSE_STATUS + (this.props.filterOptions.statusFilter);
-   }
-   if(timeOut !== undefined && timeOut !== "allOrders") {
-    currentTime = new Date();
-    prevTime = new Date();
-    prevTime = new Date(prevTime.setHours(prevTime.getHours() - convertTime[timeOut]));
-    prevTime = prevTime.toISOString();
-    currentTime = currentTime.toISOString();
-    appendTimeUrl = UPDATE_TIME_LOW+ currentTime +UPDATE_TIME_HIGH+ prevTime;
   }
-  data.url = data.url + appendStatusUrl+appendTimeUrl+appendPageSize;
-  this.props.lastRefreshTime((new Date()));
-  this.handlePageClick(data)
+  data.url = "";
+  data.url = API_URL + ORDERS_URL + ORDER_PAGE + (data.selected+1);
+
+  if(this.props.filterOptions.pageSize === undefined) {
+    appendPageSize = PAGE_SIZE_URL + "25";
+  }
+
+  else {
+    appendPageSize = PAGE_SIZE_URL + this.props.filterOptions.pageSize ;
+  }
+
+  if((status === undefined || status === "all")) {
+    appendStatusUrl = "";
+  }
+
+
+  else if(this.props.filterOptions.statusFilter === "breached") {
+    currentTime = new Date();
+    currentTime = currentTime.toISOString();
+    appendStatusUrl = PICK_BEFORE_ORDER_URL + currentTime + BREACHED_URL ;
+  }
+  else if(this.props.filterOptions.statusFilter=== "exception")
+  {
+    appendStatusUrl = EXCEPTION_TRUE ;      
+  }
+  else {
+   appendStatusUrl = WAREHOUSE_STATUS + (this.props.filterOptions.statusFilter);
+ }
+ if(timeOut !== undefined && timeOut !== "allOrders") {
+  currentTime = new Date();
+  prevTime = new Date();
+  prevTime = new Date(prevTime.setHours(prevTime.getHours() - convertTime[timeOut]));
+  prevTime = prevTime.toISOString();
+  currentTime = currentTime.toISOString();
+  appendTimeUrl = UPDATE_TIME_LOW+ currentTime +UPDATE_TIME_HIGH+ prevTime;
+}
+data.url = data.url + appendStatusUrl+appendTimeUrl+appendPageSize;
+this.props.lastRefreshTime((new Date()));
+this.handlePageClick(data)
 }
 
 
@@ -256,43 +254,43 @@ render(){
 
   timeOffset = this.props.timeOffset || "",
   headerTimeZone = (this.context.intl.formatDate(Date.now(),
-                                {timeZone:timeOffset,
-                                  year:'numeric',
-                                  timeZoneName:'long'
-                                }));
+  {timeZone:timeOffset,
+    year:'numeric',
+    timeZoneName:'long'
+  }));
   
   /*Extracting Time zone string for the specified time zone*/
   headerTimeZone = headerTimeZone.substr(5, headerTimeZone.length);
   return (
-    <div>
-    <div className="gor-Orderlist-table" >  
+  <div>
+  <div className="gor-Orderlist-table" >  
 
-    <Spinner isLoading={this.props.orderListSpinner}/>
-    <OrderListTable items={orderDetail} timeZoneString = {headerTimeZone} itemNumber={itemNumber} statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter} refreshOption={this.refresh.bind(this)} lastUpdatedText = {updateStatusText} lastUpdated={updateStatusIntl} refreshList={this.refresh.bind(this)} intlMessg={this.props.intlMessages} alertNum={alertNum}/>
+  <Spinner isLoading={this.props.orderListSpinner}/>
+  <OrderListTable items={orderDetail} timeZoneString = {headerTimeZone} itemNumber={itemNumber} statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter} refreshOption={this.refresh.bind(this)} lastUpdatedText = {updateStatusText} lastUpdated={updateStatusIntl} refreshList={this.refresh.bind(this)} intlMessg={this.props.intlMessages} alertNum={alertNum}/>
 
-    <div className="gor-pageNum">
-    <Dropdown  styleClass={'gor-Page-Drop'}  items={ordersByStatus} currentState={ordersByStatus[0]} optionDispatch={this.props.getPageSizeOrders} refreshList={this.refresh.bind(this)}/>
-    </div>
-    <div className="gor-paginate">
-    <div className = "gor-paginate-state"> 
-    <FormattedMessage id="orderlistTab.pageNum" description='page num orderlist' defaultMessage='Page {currentPage} of {totalPage}' values={{currentPage: currentPage?currentPage:'0', totalPage: totalPage?totalPage:'0'}}/>
+  <div className="gor-pageNum">
+  <Dropdown  styleClass={'gor-Page-Drop'}  items={ordersByStatus} currentState={ordersByStatus[0]} optionDispatch={this.props.getPageSizeOrders} refreshList={this.refresh.bind(this)}/>
+  </div>
+  <div className="gor-paginate">
+  <div className = "gor-paginate-state"> 
+  <FormattedMessage id="orderlistTab.pageNum" description='page num orderlist' defaultMessage='Page {currentPage} of {totalPage}' values={{currentPage: currentPage?currentPage:'0', totalPage: totalPage?totalPage:'0'}}/>
 
-    </div>
-    <div id={"react-paginate"}>
-    <ReactPaginate previousLabel={"<<"}
-    nextLabel={">>"}
-    breakClassName={"break-me"}
-    pageNum={this.props.orderData.totalPage}
-    marginPagesDisplayed={1}
-    pageRangeDisplayed={1}
-    clickCallback={this.refresh.bind(this)}
-    containerClassName={"pagination"}
-    subContainerClassName={"pages pagination"}
-    activeClassName={"active"} />
-    </div>
-    </div>
-    </div>
-    </div>
+  </div>
+  <div id={"react-paginate"}>
+  <ReactPaginate previousLabel={"<<"}
+  nextLabel={">>"}
+  breakClassName={"break-me"}
+  pageNum={this.props.orderData.totalPage}
+  marginPagesDisplayed={1}
+  pageRangeDisplayed={1}
+  clickCallback={this.refresh.bind(this)}
+  containerClassName={"pagination"}
+  subContainerClassName={"pages pagination"}
+  activeClassName={"active"} />
+  </div>
+  </div>
+  </div>
+  </div>
 
   );
 }
@@ -318,8 +316,8 @@ var mapDispatchToProps = function(dispatch){
     getPageSizeOrders: function(data){ dispatch(getPageSizeOrders(data));},
     currentPage: function(data){ dispatch(currentPageOrders(data));},
     lastRefreshTime: function(data){ dispatch(lastRefreshTime(data));},
-     setOrderListSpinner: function(data){dispatch(setOrderListSpinner(data))},
-     setCurrentPage: function(data){dispatch(setCurrentPage(data))}
+    setOrderListSpinner: function(data){dispatch(setOrderListSpinner(data))},
+    setCurrentPage: function(data){dispatch(setCurrentPage(data))}
   }
 };
 
