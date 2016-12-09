@@ -25,7 +25,7 @@ class OrderSubTab extends React.Component{
       sessionStorage.setItem("subTab",SYS_SUB_TAB_ROUTE_MAP[tabName])
       switch((SYS_SUB_TAB_ROUTE_MAP[tabName]).toUpperCase()){
   				case ORDERLIST:
-  				this.props.setOrderListSpinner(true);
+  				//this.props.setOrderListSpinner(true);
   				break;
 
   				case WAVES.toUpperCase():
