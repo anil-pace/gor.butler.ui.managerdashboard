@@ -10,7 +10,10 @@ import {ENG,JAP} from '../../constants/messageConstants';
 import { FormattedMessage } from 'react-intl';
 import { updateIntl } from 'react-intl-redux';
 import Dropdown from '../../components/dropdown/dropdown.js';
+import TopNotifications from '../../components/topnotify/topnotify';
 import { translationMessages } from '../../utilities/i18n';
+
+
 
 
 class Login extends React.Component{
@@ -69,8 +72,8 @@ class Login extends React.Component{
     }
  	render(){
         return (
-               
             <div className='gor-login-form'>
+            <TopNotifications />
             <Spinner isLoading={this.props.loginSpinner} />
                 <div className='gor-login-lang'>
                     <div className='gor-lang-text'>

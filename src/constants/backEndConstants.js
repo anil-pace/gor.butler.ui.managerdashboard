@@ -198,80 +198,22 @@ export const  stringConfig= defineMessages({
         description: 'Text to show cancelled',
         defaultMessage: "In Progress"  //need to be done
 
+    },
+    butler_supervisor:{
+        id: 'stringConfig.butler_supervisor',
+        description: 'Text to show Manager',
+        defaultMessage: "Manager"  //need to be done
+    },
+    butler_ui:{
+        id: 'stringConfig.butler_ui',
+        description: 'Text to show Operator',
+        defaultMessage: "Operator"  //need to be done
+    },
+    admin:{
+        id: 'stringConfig.admin',
+        description: 'Text to show admin',
+        defaultMessage: "--"  //need to be done
     }
     // temp_unfull need to be done ****
-
-
-
 });
-/*export var stringConfig = {
-    "per_hour": {
-        params:{id:"stringConfig.per_hour", defaultMessage: "per_hour"}
-    },
-    "on": {
-        params:{id:"stringConfig.on", defaultMessage: "on"}
-    },
-    "off": {
-        params:{id:"stringConfig.off", defaultMessage: "off"}
-    },
-    "pick": {
-        params:{id:"stringConfig.pick", defaultMessage: "pick"}
-    },
-    "put": {
-        params:{id:"stringConfig.put", defaultMessage: "put"}
-    },
-    "audit": {
-        params:{id:"stringConfig.audit", defaultMessage: "audit"}
-    },
-    "soft": {
-        params:{id:"stringConfig.soft", defaultMessage: "soft"}
-    },
-    "hard": {
-        params:{id:"stringConfig.hard", defaultMessage: "hard"}
-    },
-    "soft_manual": {
-        params:{id:"stringConfig.soft_manual", defaultMessage: "soft_manual"}
-    },
-    "pending": {
-        params:{id:"stringConfig.pending", defaultMessage: "Pending"}
-    },
-    "disconnected":{
-        params:{id:"stringConfig.disconnected", defaultMessage: "Disconnected"}
-    },
-    "connected":{
-        params:{id:"stringConfig.connected", defaultMessage: "Connected"}
-    },
-    "completed": {
-        params:{id:"stringConfig.completed", defaultMessage: "Completed"}
-    },
-    "Completed": {
-        params:{id:"stringConfig.Completed", defaultMessage: "completed"}
-    },
-    "in_progress": {
-        params:{id:"stringConfig.in_progress", defaultMessage: "In Progress"}
-    },
-    "breached": {
-        params:{id:"stringConfig.breached", defaultMessage: "Breached"}
-    },
-    "fulfillable":{
-        params:{id:"stringConfig.fulfillable", defaultMessage: "In Progress"}
-    },
-    "abandoned":{
-        params:{id:"stringConfig.abandoned", defaultMessage: "Abandoned"}
-    },
-    "manual":{
-        params:{id:"stringConfig.manual", defaultMessage: "Manual"}
-    },
-    "auto":{
-        params:{id:"stringConfig.auto", defaultMessage: "Auto"}
-    },
-    
-    "not_fulfillable":{
-        params:{id:"stringConfig.notFulfillable", defaultMessage: "unfulfillable"}
-    },
-    "exception":{
-        params:{id:"stringConfig.Exception", defaultMessage: "Exception"}
-    }
 
-}
-Object.freeze(stringConfig);*/
