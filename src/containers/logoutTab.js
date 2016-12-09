@@ -10,6 +10,12 @@ class LogOut extends React.Component{
   {
     super(props);  
   }
+  componentWillReceiveProps(nextProps){
+    if(!nextProps.auth_token)
+    {
+      this.removeThisModal();
+    }
+  }
   removeThisModal() {
     this.props.removeModal();
   }
@@ -41,6 +47,11 @@ class LogOut extends React.Component{
         );
       }
     };
+function mapStateToProps(state, ownProps){
+  return {
+      auth_token: state.authLogin.auth_token  
+  };
+}
 
     function mapDispatchToProps(dispatch){
       return {
@@ -49,4 +60,4 @@ class LogOut extends React.Component{
       }
     };
 
-    export default connect(null,mapDispatchToProps)(LogOut);
+    export default connect(mapStateToProps,mapDispatchToProps)(LogOut);
