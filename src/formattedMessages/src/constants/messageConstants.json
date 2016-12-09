@@ -10,9 +10,29 @@
     "defaultMessage": "日本語"
   },
   {
+    "id": "login.autologout.message",
+    "description": "Auto logout message",
+    "defaultMessage": "Due to session expiry, Auto Logout has been triggered!"
+  },
+  {
     "id": "notify.success.edit",
     "description": "Text for successfully editing user",
     "defaultMessage": "User details updated successfully"
+  },
+  {
+    "id": "ppsDetail.modeChange.success",
+    "description": "Success Message for PPS mode",
+    "defaultMessage": "PPS Mode Change Request Processed"
+  },
+  {
+    "id": "ppsDetail.modeChange.isAlreadyRequested",
+    "description": "PPS is already in requested mode",
+    "defaultMessage": "PPS is already in requested mode"
+  },
+  {
+    "id": "ppsDetail.modeChange.tryLater",
+    "description": "Previous Change request is pending",
+    "defaultMessage": "Previous request of changing mode is already pending, Please try later!"
   },
   {
     "id": "notify.error.usernameExists",
