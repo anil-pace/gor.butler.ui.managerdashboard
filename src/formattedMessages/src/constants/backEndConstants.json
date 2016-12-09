@@ -138,5 +138,10 @@
     "id": "stringConfig.butler_ui",
     "description": "Text to show Operator",
     "defaultMessage": "Operator"
+  },
+  {
+    "id": "stringConfig.admin",
+    "description": "Text to show admin",
+    "defaultMessage": "--"
   }
 ]
