@@ -77,6 +77,7 @@ export function authLoginData(params) {
     params
   }
  }
+ 
  /**
   * [setTimeOffSetData Sets the timeoffset value]
   * @param {[type]} data [description]
