@@ -11,6 +11,7 @@ import {TIME_ZONE_URL} from './constants/configConstants'
 import {prevTabSelected} from './actions/tabSelectAction';
 import { connect } from 'react-redux'; 
 import TopNotifications from './components/topnotify/topnotify';
+import { notifyInfo} from './actions/validationActions';
 
 
 class App extends React.Component{ 
@@ -157,7 +158,8 @@ class App extends React.Component{
     getTimeOffSetData:function(data){ dispatch(getTimeOffSetData(data)); },
     setTimeOffSetData:function(data){ dispatch(setTimeOffSetData(data)); },
     endConnect: function(){ dispatch(endWsAction()); },
-    userLogout: function(){ dispatch(logoutRequest()); }
+    userLogout: function(){ dispatch(logoutRequest()); },
+    notifyInfo: function(data){dispatch (notifyInfo(data));}
   }
 };
 export  default connect(mapStateToProps,mapDispatchToProps)(App);
