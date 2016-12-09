@@ -28,9 +28,11 @@ class WaveTab extends React.Component{
   var waveData = [], waveDetail = {};
   let WAVE, waveId;
 
-  var status = {"In Progress":"progress", "Completed":"completed", "Breached":"breached", "Pending":"pending" };
-  var timeOffset = this.props.timeOffset
+
+  var status = {"in_progress":"progress", "completed":"completed", "Breached":"breached", "Pending":"pending" };
+   var timeOffset = this.props.timeOffset
   var priStatus = {"In Progress": 2, "Completed": 4, "Breached":1 ,"Pending":3};
+  var timeOffset = this.props.timeOffset;
   if(data) {
      for (var i =data.length - 1; i >= 0; i--) {
       waveId = data[i].wave_id;

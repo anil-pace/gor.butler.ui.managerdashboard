@@ -210,17 +210,19 @@ class AuditTable extends React.Component {
       var colSortDirs = this.props.tableData.colSortDirs;
       var columnWidths = this.props.tableData.columnWidths;
       var rowsCount = sortedDataList.getSize();
+      var duplicateTask = <FormattedMessage id="audit.table.duplicateTask" description="duplicateTask option for audit" defaultMessage ="Duplicate task"/>; 
+      var deleteRecord = <FormattedMessage id="audit.table.deleteRecord" description="deleteRecord option for audit" defaultMessage ="Delete record"/>; 
       const tasks = [
-      { value: 'duplicateTask', label: 'Duplicate task' },
-      { value: 'deleteRecord', label: 'Delete record' }
+      { value: 'duplicateTask', label: duplicateTask },
+      { value: 'deleteRecord', label: deleteRecord }
       ];
       if(this.props.containerHeight !== 0) {
         heightRes = this.props.containerHeight;
       }
       var noData = <div/>;
-     if(rowsCount === 0 || rowsCount === undefined) {
-        noData =  <div> <FormattedMessage id="audit.table.noData" description="No data message for audit table" 
-       defaultMessage ="No Audit Task Found"/> </div>
+     if(rowsCount === 0 || rowsCount === undefined || rowsCount === null) {
+        noData =  <div className="gor-no-data"> <FormattedMessage id="audit.table.noData" description="No data message for audit table" 
+        defaultMessage ="No Audit Task Found"/> </div>
         heightRes = GOR_TABLE_HEADER_HEIGHT;
       }
 
@@ -253,7 +255,7 @@ class AuditTable extends React.Component {
        </div>
 
        <Table 
-       rowHeight={60}
+       rowHeight={50}
        rowsCount={rowsCount}
        headerHeight={70}
        onColumnResizeEndCallback={this._onColumnResizeEndCallback}
@@ -402,7 +404,7 @@ class AuditTable extends React.Component {
       />
 
       </Table>
-      <div className="gor-no-data"> {noData} </div>
+      <div> {noData} </div>
       </div>
 
     }

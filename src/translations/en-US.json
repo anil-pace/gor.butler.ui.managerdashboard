@@ -1182,7 +1182,7 @@
   {
     "id": "ButlerBotTable.locations",
     "description": "msu mounted for ButlerBotTable",
-    "defaultMessage": "{locations} Mounted"
+    "defaultMessage": "{locations} Location"
   },
   {
     "id": "butlerBot.table.voltage",

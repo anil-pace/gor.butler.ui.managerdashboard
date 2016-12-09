@@ -177,11 +177,11 @@ class UserDataTable extends React.Component {
     var selDel= this.handleDel.bind(this); 
     var containerHeight = this.props.containerHeight;
     var noData = <div/>;
-    if(rowsCount === 0 || rowsCount === undefined) {
-     noData =  <div> <FormattedMessage id="user.table.noData" description="No data message for user table" 
-       defaultMessage ="No User Found"/>  </div>
-     containerHeight = 73;
-    }
+    if(rowsCount === 0 || rowsCount === undefined || rowsCount === null) {
+     noData =  <div className="gor-no-data"> <FormattedMessage id="user.table.noData" description="No data message for user table" 
+        defaultMessage ="No User Found"/>  </div>
+     containerHeight = GOR_TABLE_HEADER_HEIGHT;
+     }
     return (
       <div>
         <div className="gorToolBar">
@@ -210,7 +210,7 @@ class UserDataTable extends React.Component {
        </div>
 
       <Table
-        rowHeight={66}
+        rowHeight={50}
         rowsCount={sortedDataList.getSize()}
         headerHeight={70}
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
@@ -323,7 +323,7 @@ class UserDataTable extends React.Component {
           width={columnWidth}
         />
       </Table>
-      <div className="gor-no-data"> {noData} </div>
+      <div> {noData} </div>
       </div>
     );
   }

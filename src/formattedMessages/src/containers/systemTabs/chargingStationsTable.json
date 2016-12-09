@@ -1,5 +1,10 @@
 [
   {
+    "id": "ChargingStations.table.noData",
+    "description": "No data message for ChargingStations table",
+    "defaultMessage": "No Charging Stations Found"
+  },
+  {
     "id": "ChargingStations.table.heading",
     "description": "Heading for ChargingStations",
     "defaultMessage": "Charging Stations"

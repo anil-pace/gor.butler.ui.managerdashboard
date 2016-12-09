@@ -166,11 +166,11 @@ var chart = d3.select(node).append('svg')
  
 }
 componentDidMount(){
-    this.graphRender(this.props.containerWidth,this.props.data.aggregate_data,this.props.type,this.props.performanceParam);
+    this.graphRender(this.props.containerWidth,this.props.data.ppsPerformance.aggregate_data,this.props.type,this.props.performanceParam);
   }
 
    componentWillReceiveProps(nextProps){
-    this.graphRender(nextProps.containerWidth,nextProps.data.aggregate_data,nextProps.type,nextProps.performanceParam);
+    this.graphRender(nextProps.containerWidth,nextProps.data.ppsPerformance.aggregate_data,nextProps.type,nextProps.performanceParam);
   }
 render() {
  return (
