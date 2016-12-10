@@ -15,30 +15,30 @@ import { defineMessages } from 'react-intl';
 
 //Mesages for internationalization
 const messages = defineMessages({
-    auditCreatedStatus: {
-      id:"auditdetail.created.status", 
-      defaultMessage: "Created"
-    },
-    auditPendingStatus:{
-      id:"auditdetail.pending.status", 
-      defaultMessage: "Pending"
-    },
-    auditInProgressStatus:{
-      id:"auditdetail.progress.status", 
-      defaultMessage: "In Progress"
-    },
-    auditCompletedStatus: {
-      id:"auditdetail.completed.status", 
-      defaultMessage: "Completed"
-    },
-    auditSKU:{
-      id:"auditdetail.sku.prefix", 
-      defaultMessage: "SKU"
-    },
-    auditLocation:{
-      id:"auditdetail.location.prefix", 
-      defaultMessage: "Location"
-    }
+  auditCreatedStatus: {
+    id:"auditdetail.created.status", 
+    defaultMessage: "Created"
+  },
+  auditPendingStatus:{
+    id:"auditdetail.pending.status", 
+    defaultMessage: "Pending"
+  },
+  auditInProgressStatus:{
+    id:"auditdetail.progress.status", 
+    defaultMessage: "In Progress"
+  },
+  auditCompletedStatus: {
+    id:"auditdetail.completed.status", 
+    defaultMessage: "Completed"
+  },
+  auditSKU:{
+    id:"auditdetail.sku.prefix", 
+    defaultMessage: "SKU"
+  },
+  auditLocation:{
+    id:"auditdetail.location.prefix", 
+    defaultMessage: "Location"
+  }
 
 
 });
@@ -201,30 +201,30 @@ render(){
   
   
   return (
-  <div>
+    <div>
 
-  <div>
+    <div>
 
-  <div className="gor-Auditlist-table">
-  <Spinner isLoading={this.props.auditSpinner} />
-  {renderTab}
+    <div className="gor-Auditlist-table">
+    <Spinner isLoading={this.props.auditSpinner} setSpinner={this.props.setAuditSpinner}/>
+    {renderTab}
 
-  </div>
-  </div>
-  <div id={"react-paginate"}>
-  <ReactPaginate previousLabel={"<<"}
-  nextLabel={">>"}
-  breakClassName={"break-me"}
-  pageNum={this.props.totalPage}
-  marginPagesDisplayed={1}
-  pageRangeDisplayed={1}
-  clickCallback={this.handlePageClick.bind(this)}
-  containerClassName={"pagination"}
-  subContainerClassName={"pages pagination"}
-  activeClassName={"active"} />
-  </div>   
-  </div>
-  );
+    </div>
+    </div>
+    <div id={"react-paginate"}>
+    <ReactPaginate previousLabel={"<<"}
+    nextLabel={">>"}
+    breakClassName={"break-me"}
+    pageNum={this.props.totalPage}
+    marginPagesDisplayed={1}
+    pageRangeDisplayed={1}
+    clickCallback={this.handlePageClick.bind(this)}
+    containerClassName={"pagination"}
+    subContainerClassName={"pages pagination"}
+    activeClassName={"active"} />
+    </div>   
+    </div>
+    );
 }
 };
 

@@ -9,7 +9,8 @@ import ChargingStationsTable from './chargingStationsTable';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import Spinner from '../../components/spinner/Spinner';
-import {stringConfig} from '../../constants/backEndConstants'
+import { setCsSpinner } from '../../actions/spinnerAction';
+import {stringConfig} from '../../constants/backEndConstants';
 import { defineMessages } from 'react-intl';
 
 //Mesages for internationalization
@@ -92,7 +93,7 @@ class ChargingStations extends React.Component{
 			<div>
 				<div>
 					<div className="gorTesting">
-          <Spinner isLoading={this.props.csSpinner} />
+          <Spinner isLoading={this.props.csSpinner} setSpinner={this.props.setCsSpinner} />
 						<ChargingStationsTable items={chargersData} itemNumber={itemNumber} chargersState={chargersState} intlMessg={this.props.intlMessages}/>
 					</div>
 				</div>
@@ -109,10 +110,15 @@ function mapStateToProps(state, ownProps){
   };
 }
 
+function mapDispatchToProps(dispatch){
+  return{
+    setCsSpinner: function(data){ dispatch(setCsSpinner(data));}
+  }
+}
 ChargingStations.contextTypes ={
  intl:React.PropTypes.object.isRequired
 }
 
 
-export default connect(mapStateToProps)(ChargingStations) ;
+export default connect(mapStateToProps,mapDispatchToProps)(ChargingStations) ;
 

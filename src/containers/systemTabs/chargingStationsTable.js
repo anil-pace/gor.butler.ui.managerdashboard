@@ -152,9 +152,8 @@ class ChargingStationsTable extends React.Component {
               sortDir={colSortDirs.id}>
               
               <div className="gorToolHeaderEl"> 
-                 <FormattedMessage id="ChargingStationsTable.stationID" description='total stationID for ChargingStationsTable' 
-                defaultMessage='{rowsCount} STATION ID' 
-                values={{rowsCount:rowsCount?rowsCount:'0'}}/>
+                 <FormattedMessage id="ChargingStationsTable.stationID.heading" description='StationID heading' 
+                defaultMessage='STATION ID'/>
               
               <div className="gorToolHeaderSubText">
                <FormattedMessage id="ChargingStationsTable.SubstationID" description='total SubStationID for ChargingStationsTable' 

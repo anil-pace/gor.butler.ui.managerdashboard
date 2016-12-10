@@ -35,9 +35,9 @@
     "defaultMessage": "{selected} selected"
   },
   {
-    "id": "PPStable.Totalpps",
-    "description": "total pps",
-    "defaultMessage": "{ppsTotal} PPS"
+    "id": "PPStable.ppsColumn.heading",
+    "description": "PPS - column Heading",
+    "defaultMessage": "PPS"
   },
   {
     "id": "PPStable.Subpps",

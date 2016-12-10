@@ -192,7 +192,6 @@ class UserDataTable extends React.Component {
             </div>
             <div className="gorToolBarElements">
                 <button className="gor-add-btn" onClick={this.addModal.bind(this)}>
-                  
                   <FormattedMessage id="user.button.heading" description="button heading for users table" 
               defaultMessage ="Add new user"/>
               </button>
@@ -224,14 +223,13 @@ class UserDataTable extends React.Component {
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.id}>
               <div className="gorToolHeaderEl">
-                {sortedDataList.getSize()} 
                 <FormattedMessage id="user.table.users" description="Users Column" 
-              defaultMessage =" USERS"/> 
+              defaultMessage ="USERS"/> 
              
               <div className="gorToolHeaderSubText">
                  <FormattedMessage id="user.table.totaluser" description='total user' 
-                defaultMessage='Total:{rowsCount}' 
-                values={{rowsCount:rowsCount?rowsCount:'0'}}/>
+                defaultMessage='Total: {rowsCount}' 
+                values={{rowsCount:rowsCount?rowsCount:' 0'}}/>
               </div>
               </div>
             </SortHeaderCell>

@@ -11,8 +11,8 @@
   },
   {
     "id": "ButlerBotTable.TotalBot",
-    "description": "total bot for ButlerBotTable",
-    "defaultMessage": "{totalBot} BOT"
+    "description": "Column name for the Bot id in bot table",
+    "defaultMessage": "BOT"
   },
   {
     "id": "ButlerBotTable.subTotalBot",

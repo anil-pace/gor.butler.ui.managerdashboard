@@ -10,9 +10,9 @@
     "defaultMessage": "Charging Stations"
   },
   {
-    "id": "ChargingStationsTable.stationID",
-    "description": "total stationID for ChargingStationsTable",
-    "defaultMessage": "{rowsCount} STATION ID"
+    "id": "ChargingStationsTable.stationID.heading",
+    "description": "StationID heading",
+    "defaultMessage": "STATION ID"
   },
   {
     "id": "ChargingStationsTable.SubstationID",

@@ -167,8 +167,6 @@ class OrderListTable extends React.Component {
     }
     return (
       <div className="gorTableMainContainer">
-      
-      
         <div className="gorToolBar">
           <div className="gorToolBarWrap">
             <div className="gorToolBarElements">
@@ -219,7 +217,8 @@ class OrderListTable extends React.Component {
               sortDir={colSortDirs.id}> 
               <div className="gorToolHeaderEl">
               <div className="gorToolHeaderEl">
-               <FormattedMessage id="orderlist.Totalorder" description='total order for ordertable' defaultMessage='{totalOrder} Order List' values={{totalOrder: totalOrder?totalOrder:'0'}}/>
+               <FormattedMessage id="orderlist.order.heading" description='Heading for order IDs in ordertable' 
+               defaultMessage='Order List' />
                 </div>
               <div className="gorToolHeaderSubText">
                <FormattedMessage id="orderlist.subTotalorder" description='subtotal order for ordertable' defaultMessage='Total:{totalOrder}' values={{totalOrder: totalOrder?totalOrder:'0'}}/>
