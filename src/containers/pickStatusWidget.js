@@ -16,11 +16,11 @@ class PickStatusWidget extends React.Component{
     	super(props);
     }
     _parseProps (){
-        var statusClass, 
+        var statusClass='', 
         statusLogo, 
         headingLeft,
-        valueLeftStatus,
-        valueRightStatus,
+        valueLeftStatus='',
+        valueRightStatus='',
         textLeft,
         headingRight,
         textRight, 
@@ -99,6 +99,11 @@ class PickStatusWidget extends React.Component{
                 }
             }
         }
+        if(!this.props.system_status)
+        {
+            lowLeft=<FormattedMessage id="widget.pick.offline" description='Message for system offline' 
+                defaultMessage='Offline'/>;
+        }
         items={headingleft:headingLeft, headingright:headingRight, textleft:textLeft, 
             valueLeftStatus:valueLeftStatus, valueRightStatus:valueRightStatus, 
             textright:textRight, statusleft:statusLeft, statusClass:statusClass, 
@@ -119,7 +124,8 @@ class PickStatusWidget extends React.Component{
         return  {
             ordersData:state.ordersInfo.ordersData,
             ppsData:state.ppsInfo.ppsData,
-            throughputData : state.throughputInfo.throughputData
+            throughputData : state.throughputInfo.throughputData,
+            system_status:state.tabsData.status||null
         }
     }
     export default connect(mapStateToProps)(PickStatusWidget);

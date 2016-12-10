@@ -3,7 +3,7 @@ import ReactDOM  from 'react-dom';
 import Tilex from '../components/tile1x/Tilex';
 import { connect } from 'react-redux';
 import { FormattedMessage,FormattedNumber ,FormattedPlural} from 'react-intl';
-import {STOCK_ICON} from '../constants/frontEndConstants';
+import {STOCK_ICON,GOR_NONE} from '../constants/frontEndConstants';
 
 class PutStatusWidget extends React.Component{
 	/**
@@ -19,7 +19,7 @@ class PutStatusWidget extends React.Component{
     	 * @return {[void]} 
     	 */
         _formatContainerData() {
-    		var lowStr,totalPut = this.props.ppsData ? this.props.ppsData.totalPut : 0,
+    		var lowStr,valueLeftStatus='',totalPut = this.props.ppsData ? this.props.ppsData.totalPut : 0,
     		putData = Object.assign({},this.props.putData),
     		putThroughput = this.props.throughputData ? this.props.throughputData.put_throughput : null,
     		value = putData ? putData.value : null,pluralMsg,
@@ -29,7 +29,7 @@ class PutStatusWidget extends React.Component{
     		if (!value){
     			value = <FormattedMessage id="widget.put.heading.value" description='Total Items Stocked' 
             		defaultMessage='None'/>;
-
+                valueLeftStatus=GOR_NONE;
     			lowStr = <FormattedMessage id="widget.put.status.idle" description='Put PPS idle message' 
                 defaultMessage='{count} idle PPS (Put mode)'
                 values={{
@@ -52,13 +52,18 @@ class PutStatusWidget extends React.Component{
 							        throughput:putThroughput
 							    }}/>;
     		}
+            if(!this.props.system_status)
+            {
+             lowStr=<FormattedMessage id="widget.put.offline" description='Message for system offline' 
+                defaultMessage='Offline'/>;
+            }
 
     		putData.heading = <FormattedMessage id="widget.put.heading" description='Put Item Heading' 
             					defaultMessage='Items stocked'/>;
             putData.value = value;
             putData.low = lowStr;
             putData.logo = STOCK_ICON;
-    		
+    		putData.valueLeftStatus=valueLeftStatus;
     		return putData
     		
     	}
@@ -77,7 +82,7 @@ function mapStateToProps(state, ownProps){
         putData: state.putInfo.putData,
         ppsData:state.ppsInfo.ppsData,
         throughputData : state.throughputInfo.throughputData,
-        
+        system_status:state.tabsData.status||null
     };
 }
  

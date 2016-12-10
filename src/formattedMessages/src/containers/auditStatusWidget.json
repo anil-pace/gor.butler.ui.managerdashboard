@@ -15,6 +15,11 @@
     "defaultMessage": "{count, number} {count, plural, one {PPS} other {PPS}} auditing {throughput} items/hr"
   },
   {
+    "id": "widget.audit.offline",
+    "description": "Message for system offline",
+    "defaultMessage": "Offline"
+  },
+  {
     "id": "widget.audit.heading",
     "description": "Audit Item Heading",
     "defaultMessage": "Items audited"

@@ -43,5 +43,10 @@
     "id": "widget.pick.statusleft.atrisk",
     "description": "Text for orders at risk",
     "defaultMessage": "{count_risk} {count_risk, plural, one {order} other {orders}} at risk"
+  },
+  {
+    "id": "widget.pick.offline",
+    "description": "Message for system offline",
+    "defaultMessage": "Offline"
   }
 ]

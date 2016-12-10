@@ -15,6 +15,11 @@
     "defaultMessage": "{count} {pluralMsg} stocking {throughput} items/hr"
   },
   {
+    "id": "widget.put.offline",
+    "description": "Message for system offline",
+    "defaultMessage": "Offline"
+  },
+  {
     "id": "widget.put.heading",
     "description": "Put Item Heading",
     "defaultMessage": "Items stocked"
