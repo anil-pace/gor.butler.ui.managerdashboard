@@ -72,8 +72,10 @@ class Login extends React.Component{
     }
  	render(){
         return (
+          <div>
+              <TopNotifications />
             <div className='gor-login-form'>
-            <TopNotifications />
+          
             <Spinner isLoading={this.props.loginSpinner} />
                 <div className='gor-login-lang'>
                     <div className='gor-lang-text'>
@@ -94,6 +96,7 @@ class Login extends React.Component{
                 </div>
                 <Footer />
             </div>
+          </div>
 		);
 	}
 

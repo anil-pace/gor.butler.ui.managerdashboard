@@ -160,9 +160,9 @@ class OrderListTable extends React.Component {
       heightRes = this.props.containerHeight;
     }
     var noData = <div/>;
-    if(totalOrder === 0 || totalOrder === undefined) {
-     noData =  <div> <FormattedMessage id="orderlist.table.noData" description="No data message for orderlist table" 
-       defaultMessage ="No Orders Found"/>  </div>
+    if(totalOrder === 0 || totalOrder === undefined || totalOrder === null) {
+     noData =  <div className="gor-no-data"> <FormattedMessage id="orderlist.table.noData" description="No data message for orderlist table" 
+        defaultMessage ="No Orders Found"/>  </div>
      heightRes = GOR_TABLE_HEADER_HEIGHT;
     }
     return (
@@ -204,7 +204,7 @@ class OrderListTable extends React.Component {
        </div>
 
       <Table
-        rowHeight={66}
+        rowHeight={50}
         rowsCount={sortedDataList.getSize()}
         headerHeight={70}
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
@@ -329,7 +329,7 @@ class OrderListTable extends React.Component {
           isResizable={true}
         />
       </Table>
-      <div className="gor-no-data"> {noData} </div>
+      <div> {noData} </div>
       </div>
     );
   }

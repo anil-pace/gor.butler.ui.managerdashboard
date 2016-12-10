@@ -116,7 +116,7 @@ export const  stringConfig= defineMessages({
     pending:{
         id: 'stringConfig.pending',
         description: 'Text to show pending',
-        defaultMessage: "pending"
+        defaultMessage: "In Progress"
     },
     disconnected:{
         id: 'stringConfig.disconnected',
@@ -171,7 +171,7 @@ export const  stringConfig= defineMessages({
     not_fulfillable:{
         id: 'stringConfig.notFulfillable',
         description: 'Text to show In progress',
-        defaultMessage: "In Progress"
+        defaultMessage: "Unfulfillable"
     },
     exception:{
         id: 'stringConfig.exception',
@@ -196,24 +196,29 @@ export const  stringConfig= defineMessages({
     cancelled:{
         id: 'stringConfig.cancelled',
         description: 'Text to show cancelled',
-        defaultMessage: "In Progress"  //need to be done
+        defaultMessage: "Cancelled"  
 
     },
     butler_supervisor:{
         id: 'stringConfig.butler_supervisor',
         description: 'Text to show Manager',
-        defaultMessage: "Manager"  //need to be done
+        defaultMessage: "Manager"  
     },
     butler_ui:{
         id: 'stringConfig.butler_ui',
         description: 'Text to show Operator',
-        defaultMessage: "Operator"  //need to be done
+        defaultMessage: "Operator"  
     },
     admin:{
         id: 'stringConfig.admin',
         description: 'Text to show admin',
-        defaultMessage: "--"  //need to be done
+        defaultMessage: "--" 
+    },
+    temporary_unfulfillable:{
+        "id": "stringConfig.temporary_unfulfillable",
+        "description": "Text for temporary unfulfillable status",
+        "defaultMessage": "Temporary Unfulfillable"
     }
-    // temp_unfull need to be done ****
+    
 });
 

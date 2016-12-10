@@ -51,7 +51,7 @@
   },
   {
     "id": "ButlerBotTable.locations",
-    "description": "msu mounted for ButlerBotTable",
+    "description": "msu Location for ButlerBotTable",
     "defaultMessage": "{locations} Locations"
   },
   {

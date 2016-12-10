@@ -1,5 +1,15 @@
 [
   {
+    "id": "audit.table.duplicateTask",
+    "description": "duplicateTask option for audit",
+    "defaultMessage": "Duplicate task"
+  },
+  {
+    "id": "audit.table.deleteRecord",
+    "description": "deleteRecord option for audit",
+    "defaultMessage": "Delete record"
+  },
+  {
     "id": "audit.table.noData",
     "description": "No data message for audit table",
     "defaultMessage": "No Audit Task Found"
