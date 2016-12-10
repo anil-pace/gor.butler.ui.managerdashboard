@@ -19,8 +19,8 @@ export function ResponseParse(store,res)
 		store.dispatch(wsOnMessageAction(res));
 		return;
 	}
-	switch(res.resource_type)
-	{
+		switch(res.resource_type)
+		{
 			case PARSE_PPS:
 				store.dispatch(recievePPSperformance(res));
 				store.dispatch(setPpsSpinner(false));
@@ -124,5 +124,6 @@ export function ResponseParse(store,res)
 				store.dispatch(recieveStatus(res));	 
 				break;				   
 			default:
-	}
-}  
+
+	    }
+   }  

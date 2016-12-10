@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import {stringConfig} from '../../constants/backEndConstants';
 import Spinner from '../../components/spinner/Spinner';
+import { setButlerSpinner } from  '../../actions/spinnerAction';
 import { defineMessages } from 'react-intl';
 
 //Mesages for internationalization
@@ -140,7 +141,7 @@ class ButlerBot extends React.Component{
 			<div>
 				<div>
 					<div className="gorTesting">
-          <Spinner isLoading={this.props.butlerSpinner}/>
+          <Spinner isLoading={this.props.butlerSpinner} setSpinner={this.props.setButlerSpinner}/>
 						<ButlerBotTable items={butlerData} itemNumber={itemNumber} parameters={taskDetail} intlMessg={this.props.intlMessages}/>
 					</div>
 				</div>
@@ -157,11 +158,17 @@ function mapStateToProps(state, ownProps){
   };
 }
 
+function mapDispatchToProps(){
+  return{
+    setButlerSpinner: function(data){dispatch(setButlerSpinner(data))}
+  }
+}
+
 ButlerBot.contextTypes ={
  intl:React.PropTypes.object.isRequired
 }
 
 
-export default connect(mapStateToProps)(ButlerBot) ;
+export default connect(mapStateToProps,mapDispatchToProps)(ButlerBot) ;
 
 

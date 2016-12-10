@@ -265,7 +265,7 @@ render(){
   <div>
   <div className="gor-Orderlist-table" >  
 
-  <Spinner isLoading={this.props.orderListSpinner}/>
+  <Spinner isLoading={this.props.orderListSpinner} setSpinner={this.props.setOrderListSpinner}/>
   <OrderListTable items={orderDetail} timeZoneString = {headerTimeZone} itemNumber={itemNumber} statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter} refreshOption={this.refresh.bind(this)} lastUpdatedText = {updateStatusText} lastUpdated={updateStatusIntl} refreshList={this.refresh.bind(this)} intlMessg={this.props.intlMessages} alertNum={alertNum}/>
 
   <div className="gor-pageNum">
