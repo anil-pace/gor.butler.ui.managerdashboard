@@ -5,19 +5,19 @@
     "defaultMessage": "None"
   },
   {
-    "id": "widget.audit.status.offline",
-    "description": "Offline Status",
-    "defaultMessage": "Offline"
-  },
-  {
-    "id": "widget.audit.status.starting",
-    "description": "Awaiting throughput data",
-    "defaultMessage": "Starting..."
+    "id": "widget.audit.status.idle",
+    "description": "Audit PPS idle message",
+    "defaultMessage": "{count} idle PPS (Audit mode)"
   },
   {
     "id": "widget.audit.throughput",
     "description": "Throughput message",
     "defaultMessage": "{count, number} {count, plural, one {PPS} other {PPS}} auditing {throughput} items/hr"
+  },
+  {
+    "id": "widget.audit.offline",
+    "description": "Message for system offline",
+    "defaultMessage": "Offline"
   },
   {
     "id": "widget.audit.heading",

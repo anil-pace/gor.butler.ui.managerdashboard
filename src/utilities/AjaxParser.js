@@ -142,7 +142,7 @@ export function AjaxParse(store,res,cause,status)
 			}
 			else
 			{
-					stringInfo=codeToString(res.unsuccessful[0].alert_data[0].code);
+					stringInfo=codeToString(res.unsuccessful[0].alert_data[0]);
 					store.dispatch(notifyFail(stringInfo.msg));
 					store.dispatch(setAuditRefresh(false));//reset refresh flag			   		
 			}

@@ -16,11 +16,11 @@ class PickStatusWidget extends React.Component{
     	super(props);
     }
     _parseProps (){
-        var statusClass, 
+        var statusClass='', 
         statusLogo, 
         headingLeft,
-        valueLeftStatus,
-        valueRightStatus,
+        valueLeftStatus='',
+        valueRightStatus='',
         textLeft,
         headingRight,
         textRight, 
@@ -33,38 +33,35 @@ class PickStatusWidget extends React.Component{
         eta=0,
         items={},
         ordersData= Object.assign({},this.props.ordersData),
-        ppsCount=this.props.ppsData?this.props.ppsData.totalPick:null,
+        ppsCount=this.props.ppsData?this.props.ppsData.totalPick:0,
         pickThroughput=this.props.throughputData? this.props.throughputData.pick_throughput:0;
         
         headingLeft=<FormattedMessage id="widget.pick.headingleft" description='Heading for pick status widget' 
         defaultMessage='Orders to fullfill'/>;
         logo=PICK_ICON;
         textLeft=ordersData.count_pending;
-        
+        ppsCount = <FormattedNumber value={ppsCount}/>
         if(!textLeft)
         {
             valueLeftStatus=GOR_NONE;
             textLeft=<FormattedMessage id="widget.pick.none" description='Text for none' 
             defaultMessage='None'/>;
-            lowLeft=<FormattedMessage id="widget.pick.status.idle" description='PPS Offline' 
-            defaultMessage='Offline'/>;
+            lowLeft=<FormattedMessage id="widget.pick.idle" description='Pick PPS idle message' 
+                defaultMessage='{count} idle PPS (Pick mode)'
+                values={{
+                    count: ppsCount
+                }}/>;
         }
         else
         {
             textLeft=<FormattedNumber id='widget.pick.textleft' value={ordersData.count_pending} />;
             pickThroughput = <FormattedNumber value={pickThroughput}/>
-            if(!ppsCount){
-                lowLeft = <FormattedMessage id="widget.pick.status.starting" description='Awaiting throughput data' 
-                defaultMessage='Starting...'/>;
-            }
-            else{
-                lowLeft=<FormattedMessage id="widget.pick.throughput" description='Throughput message' 
+            lowLeft=<FormattedMessage id="widget.pick.throughput" description='Throughput message' 
                 defaultMessage='{count} PPS fullfilling at {throughput} items/hr'
                 values={{
                     count: ppsCount,
                     throughput:pickThroughput
                 }}/>;     
-            }
 
             eta=secondsToTime(ordersData.eta);
             lowRight=<FormattedMessage id="widget.pick.lowright" description='Estimated time' 
@@ -102,6 +99,11 @@ class PickStatusWidget extends React.Component{
                 }
             }
         }
+        if(!this.props.system_status)
+        {
+            lowLeft=<FormattedMessage id="widget.pick.offline" description='Message for system offline' 
+                defaultMessage='Offline'/>;
+        }
         items={headingleft:headingLeft, headingright:headingRight, textleft:textLeft, 
             valueLeftStatus:valueLeftStatus, valueRightStatus:valueRightStatus, 
             textright:textRight, statusleft:statusLeft, statusClass:statusClass, 
@@ -122,7 +124,8 @@ class PickStatusWidget extends React.Component{
         return  {
             ordersData:state.ordersInfo.ordersData,
             ppsData:state.ppsInfo.ppsData,
-            throughputData : state.throughputInfo.throughputData
+            throughputData : state.throughputInfo.throughputData,
+            system_status:state.tabsData.status||null
         }
     }
     export default connect(mapStateToProps)(PickStatusWidget);

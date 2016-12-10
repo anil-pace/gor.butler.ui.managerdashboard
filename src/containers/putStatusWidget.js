@@ -3,7 +3,7 @@ import ReactDOM  from 'react-dom';
 import Tilex from '../components/tile1x/Tilex';
 import { connect } from 'react-redux';
 import { FormattedMessage,FormattedNumber ,FormattedPlural} from 'react-intl';
-import {STOCK_ICON} from '../constants/frontEndConstants';
+import {STOCK_ICON,GOR_NONE} from '../constants/frontEndConstants';
 
 class PutStatusWidget extends React.Component{
 	/**
@@ -19,23 +19,22 @@ class PutStatusWidget extends React.Component{
     	 * @return {[void]} 
     	 */
         _formatContainerData() {
-    		var lowStr,totalPut = this.props.ppsData ? this.props.ppsData.totalPut : null,
+    		var lowStr,valueLeftStatus='',totalPut = this.props.ppsData ? this.props.ppsData.totalPut : 0,
     		putData = Object.assign({},this.props.putData),
     		putThroughput = this.props.throughputData ? this.props.throughputData.put_throughput : null,
     		value = putData ? putData.value : null,pluralMsg,
     		heading;
-
+            totalPut=<FormattedNumber value={totalPut}/>;
     		//Setting display values based on server values/mock
     		if (!value){
     			value = <FormattedMessage id="widget.put.heading.value" description='Total Items Stocked' 
             		defaultMessage='None'/>;
-            		
-    			lowStr = <FormattedMessage id="widget.put.status.offline" description='Offline Status' 
-            		defaultMessage='Offline'/>;
-    		}
-    		else if(!totalPut){
-    			lowStr = <FormattedMessage id="widget.put.status.starting" description='Awaiting throughput data' 
-            					defaultMessage='Starting...'/>;
+                valueLeftStatus=GOR_NONE;
+    			lowStr = <FormattedMessage id="widget.put.status.idle" description='Put PPS idle message' 
+                defaultMessage='{count} idle PPS (Put mode)'
+                values={{
+                    count: totalPut
+                }}/>;
     		}
     		else{
     			value = <FormattedNumber value={value}/>
@@ -53,13 +52,18 @@ class PutStatusWidget extends React.Component{
 							        throughput:putThroughput
 							    }}/>;
     		}
+            if(!this.props.system_status)
+            {
+             lowStr=<FormattedMessage id="widget.put.offline" description='Message for system offline' 
+                defaultMessage='Offline'/>;
+            }
 
     		putData.heading = <FormattedMessage id="widget.put.heading" description='Put Item Heading' 
             					defaultMessage='Items stocked'/>;
             putData.value = value;
             putData.low = lowStr;
             putData.logo = STOCK_ICON;
-    		
+    		putData.valueLeftStatus=valueLeftStatus;
     		return putData
     		
     	}
@@ -78,7 +82,7 @@ function mapStateToProps(state, ownProps){
         putData: state.putInfo.putData,
         ppsData:state.ppsInfo.ppsData,
         throughputData : state.throughputInfo.throughputData,
-        
+        system_status:state.tabsData.status||null
     };
 }
  

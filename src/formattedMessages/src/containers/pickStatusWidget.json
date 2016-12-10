@@ -10,14 +10,9 @@
     "defaultMessage": "None"
   },
   {
-    "id": "widget.pick.status.idle",
-    "description": "PPS Offline",
-    "defaultMessage": "Offline"
-  },
-  {
-    "id": "widget.pick.status.starting",
-    "description": "Awaiting throughput data",
-    "defaultMessage": "Starting..."
+    "id": "widget.pick.idle",
+    "description": "Pick PPS idle message",
+    "defaultMessage": "{count} idle PPS (Pick mode)"
   },
   {
     "id": "widget.pick.throughput",
@@ -48,5 +43,10 @@
     "id": "widget.pick.statusleft.atrisk",
     "description": "Text for orders at risk",
     "defaultMessage": "{count_risk} {count_risk, plural, one {order} other {orders}} at risk"
+  },
+  {
+    "id": "widget.pick.offline",
+    "description": "Message for system offline",
+    "defaultMessage": "Offline"
   }
 ]
