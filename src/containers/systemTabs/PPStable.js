@@ -231,10 +231,10 @@ class PPStable extends React.Component {
     ];
     var checkState = this.handleChange.bind(this);
     var drop, selected =0, ppsTotal = sortedDataList.getSize();
-    let pick = this.props.operationMode.Pick;
-    let put = this.props.operationMode.Put;
-    let audit = this.props.operationMode.Audit;
-    let notSet = this.props.operationMode.NotSet;
+    let pick = this.props.operationMode.pick;
+    let put = this.props.operationMode.put;
+    let audit = this.props.operationMode.audit;
+    let notSet = this.props.operationMode.notSet;
     let operatorNum =  this.props.operatorNum, j=1;
     if(this.state.renderDropD===true) {
       drop = <DropdownTable  styleClass={'gorDataTableDrop'} placeholder={this.props.intlMessg["pps.dropdown.placeholder"]} items={modes} changeMode={this.handleModeChange.bind(this)}/>;
