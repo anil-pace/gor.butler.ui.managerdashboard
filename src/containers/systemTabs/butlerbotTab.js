@@ -158,7 +158,7 @@ function mapStateToProps(state, ownProps){
   };
 }
 
-function mapDispatchToProps(){
+function mapDispatchToProps(dispatch){
   return{
     setButlerSpinner: function(data){dispatch(setButlerSpinner(data))}
   }
