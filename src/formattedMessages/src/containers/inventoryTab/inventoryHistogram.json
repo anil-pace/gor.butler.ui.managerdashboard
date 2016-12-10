@@ -1,12 +1,7 @@
 [
   {
     "id": "inventory.histogram.noDataText",
-    "description": "Text when there is no stock",
+    "description": "Message for No stock",
     "defaultMessage": "No Stock Found"
-  },
-  {
-    "id": "inventory.histogram.today",
-    "description": "Text to show today",
-    "defaultMessage": "Today's"
   }
 ]
