@@ -95,7 +95,7 @@ class PPS extends React.Component{
 }
 	render(){	
 
-	var operationMode = {"Pick":0, "Put":0, "Audit":0,"NotSet":0};
+	var operationMode = {"pick":0, "put":0, "audit":0,"notSet":0};
     var data , operatorNum = 0, itemNumber = 5;
     if(this.props.PPSDetail.PPStypeDetail !== undefined) {
     	data = this._processPPSData();
