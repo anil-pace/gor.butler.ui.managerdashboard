@@ -10,14 +10,9 @@
     "defaultMessage": "None"
   },
   {
-    "id": "widget.pick.status.idle",
-    "description": "PPS Offline",
-    "defaultMessage": "Offline"
-  },
-  {
-    "id": "widget.pick.status.starting",
-    "description": "Awaiting throughput data",
-    "defaultMessage": "Starting..."
+    "id": "widget.pick.idle",
+    "description": "Pick PPS idle message",
+    "defaultMessage": "{count} idle PPS (Pick mode)"
   },
   {
     "id": "widget.pick.throughput",

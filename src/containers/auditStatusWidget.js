@@ -26,18 +26,17 @@ class AuditStatusWidget extends React.Component{
 		auditThroughput = this.props.throughputData ? this.props.throughputData.audit_throughput : null,
 		value = auditData.total_audited ? auditData.total_audited : null ,
 		pluralMsg;
-
+		totalAudit=<FormattedNumber value={totalAudit}/>;
 		//Setting display values based on server values/mock
 		if (!value){
 			value = <FormattedMessage id="widget.audit.heading.value" description='Total Items Audited' 
         				defaultMessage='None'/>;
         				
-			lowStr = <FormattedMessage id="widget.audit.status.offline" description='Offline Status' 
-        				defaultMessage='Offline'/>;
-		}
-		else if(!totalAudit){
-			lowStr = <FormattedMessage id="widget.audit.status.starting" description='Awaiting throughput data' 
-        					defaultMessage='Starting...'/>;
+			lowStr = <FormattedMessage id="widget.audit.status.idle"  description='Audit PPS idle message' 
+                defaultMessage='{count} idle PPS (Audit mode)'
+                values={{
+                    count: totalAudit
+                }}/>;
 		}
 		else{
 			value = <FormattedNumber value={value}/>

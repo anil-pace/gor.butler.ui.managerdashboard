@@ -19,23 +19,22 @@ class PutStatusWidget extends React.Component{
     	 * @return {[void]} 
     	 */
         _formatContainerData() {
-    		var lowStr,totalPut = this.props.ppsData ? this.props.ppsData.totalPut : null,
+    		var lowStr,totalPut = this.props.ppsData ? this.props.ppsData.totalPut : 0,
     		putData = Object.assign({},this.props.putData),
     		putThroughput = this.props.throughputData ? this.props.throughputData.put_throughput : null,
     		value = putData ? putData.value : null,pluralMsg,
     		heading;
-
+            totalPut=<FormattedNumber value={totalPut}/>;
     		//Setting display values based on server values/mock
     		if (!value){
     			value = <FormattedMessage id="widget.put.heading.value" description='Total Items Stocked' 
             		defaultMessage='None'/>;
-            		
-    			lowStr = <FormattedMessage id="widget.put.status.offline" description='Offline Status' 
-            		defaultMessage='Offline'/>;
-    		}
-    		else if(!totalPut){
-    			lowStr = <FormattedMessage id="widget.put.status.starting" description='Awaiting throughput data' 
-            					defaultMessage='Starting...'/>;
+
+    			lowStr = <FormattedMessage id="widget.put.status.idle" description='Put PPS idle message' 
+                defaultMessage='{count} idle PPS (Put mode)'
+                values={{
+                    count: totalPut
+                }}/>;
     		}
     		else{
     			value = <FormattedNumber value={value}/>
