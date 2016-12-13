@@ -70,6 +70,7 @@ class WavesTable extends React.Component {
     this._onSortChange = this._onSortChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+    this._onSortChange(nextProps.currentSortState,nextProps.currentHeaderOrder);
 
   } 
   _onColumnResizeEndCallback(newColumnWidth, columnKey) {
@@ -103,6 +104,8 @@ class WavesTable extends React.Component {
         [columnKey]: sortDir,
       },
     });
+    this.props.sortHeaderOrder(sortDir);
+    this.props.sortHeaderState(columnKey);
   }
   render() {
     

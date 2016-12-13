@@ -335,3 +335,13 @@ export const TILE_ALERT='header-yellow-alert-icon';
 export const TICK_WHITE='gor-tick-white';
 export const REMOVE_ICON='gor-remove-white';
 export const ERROR_WHITE='gor-error-white';
+
+//Sort header constants
+export const BUTLER_HEADER_SORT = "BUTLER_HEADER_SORT";
+export const BUTLER_HEADER_SORT_ORDER = "BUTLER_HEADER_SORT_ORDER";
+export const PPS_HEADER_SORT = "PPS_HEADER_SORT";
+export const PPS_HEADER_SORT_ORDER = "PPS_HEADER_SORT_ORDER";
+export const USER_HEADER_SORT = "USER_HEADER_SORT";
+export const USER_HEADER_SORT_ORDER = "USER_HEADER_SORT_ORDER";
+export const WAVE_HEADER_SORT = "WAVE_HEADER_SORT";
+export const WAVE_HEADER_SORT_ORDER = "WAVE_HEADER_SORT_ORDER";
