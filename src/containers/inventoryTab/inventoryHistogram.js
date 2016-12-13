@@ -55,10 +55,10 @@ class InventoryHistogram extends React.Component{
       }
       else{
         dataObj.xAxisData =histogramData[j] ?  (new Date(Date.parse(histogramData[j].date))).getDate() : currentDate.getDate();
-      dataObj.yAxisData = histogramData[j].current_stock;
+      dataObj.yAxisData = histogramData[j].opening_stock;
       dataObj.customData = Date.parse(histogramData[j].date);
       if(!noStock){
-        noStock = histogramData[j].current_stock;
+        noStock = histogramData[j].opening_stock;
         dataObj.noData =  noStock ? false : true;
       }
       j++;
