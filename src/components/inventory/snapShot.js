@@ -19,13 +19,14 @@ class SnapShotDetails extends React.Component{
 	render(){
 		
 		var isToday = this.props.currentDate === Date.parse(this.props.snapshotTabData.date) ? true :false,
-		dt,openingStock;
+		dt,openingStock,todayDate;
 		if(isToday){
 			dt = <FormattedMessage id='inventory.snaphot.date' defaultMessage="Today's" description="Snapshot date string"/>
 			openingStock = <FormattedMessage id='inventory.snaphot.openingStock' defaultMessage="Opening Stock" description="Snapshot table header"/>
 		}
 		else{
-			dt = <FormattedDate year='numeric' month='short' day='2-digit' value={new Date(Date.parse(this.props.snapshotTabData.date))}/>
+			todayDate = this.props.snapshotTabData.date ? this.props.snapshotTabData.date : (new Date());
+			dt = <FormattedDate year='numeric' month='short' day='2-digit' value={new Date(Date.parse(todayDate))}/>
 			openingStock = <FormattedMessage id='inventory.snaphot.closingStock' defaultMessage="Closing Stock" description="Snapshot table header"/>
 		}
 		return (

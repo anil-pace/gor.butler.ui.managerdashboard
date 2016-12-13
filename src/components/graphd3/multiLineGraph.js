@@ -59,9 +59,15 @@ class MultiLineGraph extends React.Component{
         var y = d3.scale.linear().range([height, 0]);
         var xx = function(e)  { return x(function(d) { return x(d.date);}) };
         var yy = function(e)  { return y(function(d) { return y(d.items_put); }) };
+        var prevDiv = document.getElementsByClassName("ppLine")[0];
         var div = d3.select("body").append("div") 
         .attr("class", "tooltip ppLine")       
         .style("opacity", 0);
+
+        //Removing preexisting tooltip div
+        if(prevDiv){
+            prevDiv.parentNode.removeChild(prevDiv);
+        }
 
         // setting axis
         
@@ -184,12 +190,13 @@ class MultiLineGraph extends React.Component{
           .text(config.noDataText);
         }
         var mBreak= g.selectAll("g.x");
-        if (g.x){
-          var textEl = parseInt(mBreak.select("g:nth-child("+dataArray.length+") text").text());
-          mBreak.select("g:nth-child("+dataArray.length+")").append("text").attr("x","-20").attr("y","2.5em").text(config.today)
-          var monthBreak = mBreak.select("g:nth-child("+(dataArray.length - 1)+")");
-          mBreak.select("g:nth-child("+(dataArray.length - textEl)+")").append("line").attr("class","month-break").attr("x1","15").attr("x2","15").attr("y1","0").attr("y2","25");
-          mBreak.select("g:nth-child("+(dataArray.length - (textEl-1))+")").append("text").attr("x","-5").attr("y","30").text(config.breakMonth);
+        if (mBreak.length){
+          var dataLen = dataArray.length - 1;
+          var textEl = parseInt(mBreak.select("g:nth-child("+dataLen+") text").text());
+          mBreak.select("g:nth-child("+(dataLen)+")").append("text").attr("x","-20").attr("y","2.5em").text(config.today)
+          var monthBreak = mBreak.select("g:nth-child("+(dataLen)+")");
+          mBreak.select("g:nth-child("+(dataLen - textEl)+")").append("line").attr("class","month-break").attr("x1","15").attr("x2","15").attr("y1","0").attr("y2","25");
+          mBreak.select("g:nth-child("+(dataLen - (textEl-1))+")").append("text").attr("x","-5").attr("y","30").text(config.breakMonth);
         }
         
       }
