@@ -2030,14 +2030,15 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   width: 70px;
   border-style: solid;
   border-width: 1px;
-  border-color: #aaaaaa;
-  color: #aaaaaa;
+  border-color: #00a54f;
+  color: #00a54f;
   font-size: 12px;
   max-height: 9px;
   background: #ffffff;
+  text-transform: capitalize;
 }
 
-.fulfillable .public_fixedDataTableCell_cellContent {
+.cancelled .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
   width: 70px;
@@ -2048,9 +2049,24 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   font-size: 12px;
   max-height: 9px;
   background: #ffffff;
+  text-transform: capitalize;
 }
 
-.gor-order-exception {
+.fulfillable .public_fixedDataTableCell_cellContent {
+  border-radius: 15px;
+  text-align: center;
+  width: 70px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #00a54f;
+  color: #00a54f;
+  font-size: 12px;
+  max-height: 9px;
+  background: #ffffff;
+  text-transform: capitalize;
+}
+
+.gor-order-exception .public_fixedDataTableCell_cellContent {
   background: #f99405;
   border-radius: 15px;
   text-align: center;
@@ -3489,7 +3505,7 @@ progress::-moz-progress-bar {
 }
 
 .gor-info {
-  background: #3f529b;
+  background: #799e9f;
   color: #ffffff;
 }
 
@@ -3790,7 +3806,7 @@ progress::-moz-progress-bar {
   width: 28%;
   display: inline-block;
   vertical-align: top;
-  height: 90vh;
+  min-height: 550px;
   padding: 1.25rem 0.625rem;
 }
 
@@ -3811,6 +3827,8 @@ progress::-moz-progress-bar {
 
 .gorInventory .catText {
   vertical-align: middle;
+  word-wrap: break-word;
+  word-break: break-all;
 }
 
 .gorInventory .stkParam {
@@ -4014,6 +4032,10 @@ progress::-moz-progress-bar {
 
 .lineGraph .grid path.line:nth-child(1) {
   stroke: #D0021B;
+}
+
+.lineGraph circle.line {
+  cursor: pointer;
 }
 
 .tooltip.ppLine {

@@ -3,10 +3,10 @@
  * one for the pick line 2nd for the put line
  */
 
-import React  from 'react';
-import rd3 from 'react-d3-library';
-import * as d3 from 'd3';
-import Dimensions from 'react-dimensions'
+ import React  from 'react';
+ import rd3 from 'react-d3-library';
+ import * as d3 from 'd3';
+ import Dimensions from 'react-dimensions'
 
 //constant for usage in render function
 const RD3Component = rd3.Component;
@@ -24,11 +24,11 @@ class MultiLineGraph extends React.Component{
   * @param  {Object} nextP            next props
   * @param  {Object} performanceParam [description]
   */
- 
+  
   _graphRender(invData){
     var node = document.createElement('div');
     if(invData.length){
-    try{
+      try{
         
         let config =  this.props.config;
         
@@ -43,7 +43,7 @@ class MultiLineGraph extends React.Component{
         //setting the initial 
         //var parseDate = d3.time.format("%Y-%m-%d").parse;
         let noData = jsonArray[jsonArray.length-1] ? jsonArray[jsonArray.length-1].noData : false;
-       let dataArray = jsonArray.map(function(obj){
+        var dataArray = jsonArray.map(function(obj){
           let rObj = {};
           rObj.date = new Date(obj.date);
           rObj.items_put = obj.items_put;
@@ -59,9 +59,15 @@ class MultiLineGraph extends React.Component{
         var y = d3.scale.linear().range([height, 0]);
         var xx = function(e)  { return x(function(d) { return x(d.date);}) };
         var yy = function(e)  { return y(function(d) { return y(d.items_put); }) };
+        var prevDiv = document.getElementsByClassName("ppLine")[0];
         var div = d3.select("body").append("div") 
         .attr("class", "tooltip ppLine")       
         .style("opacity", 0);
+
+        //Removing preexisting tooltip div
+        if(prevDiv){
+            prevDiv.parentNode.removeChild(prevDiv);
+        }
 
         // setting axis
         
@@ -88,7 +94,7 @@ class MultiLineGraph extends React.Component{
         // Scale the range of the data
         x.domain(d3.extent(dataArray, function(d) {
          return d.date;
-          }));
+       }));
         if(noData){
           y.domain([0, d3.max(dataArray, function(d) { return config.defaultMaxYAxis })]);
         }
@@ -98,18 +104,18 @@ class MultiLineGraph extends React.Component{
         
 
         g.attr("class", "grid")
-      .call(d3.svg.axis()
-        .scale(y)
-        .orient("left")
-        .ticks(3)
-            .tickSize(-width)
-            .tickFormat("")
-      )  
+        .call(d3.svg.axis()
+          .scale(y)
+          .orient("left")
+          .ticks(3)
+          .tickSize(-width)
+          .tickFormat("")
+          )  
         // Add the valueline path.
         if(!noData){
-        g.append("path")    
-        .attr("class", "line")
-        .attr("d", putLine(dataArray));
+          g.append("path")    
+          .attr("class", "line")
+          .attr("d", putLine(dataArray));
 
         // Add the valueline2 path.
         g.append("path")    
@@ -129,67 +135,69 @@ class MultiLineGraph extends React.Component{
         .attr("class", "y axis")
         .call(yAxis);
         
-    if(!noData){
-        g.selectAll("circle.line")
-        .data(dataArray)
-        .enter().append("svg:circle")
-        .attr("class", "line")
-        .style("fill", "#D0021B")
-        .attr("cx", pickLine.x())
-        .attr("cy", pickLine.y())
-        .attr("r", 3.5)
-        .on("mouseover", function(d) {    
+        if(!noData){
+          g.selectAll("circle.line")
+          .data(dataArray)
+          .enter().append("svg:circle")
+          .attr("class", "line")
+          .style("fill", "#D0021B")
+          .attr("cx", pickLine.x())
+          .attr("cy", pickLine.y())
+          .attr("r", 3.5)
+          .on("mouseover", function(d) {    
             div.transition()    
-                .duration(200)    
-                .style("opacity", 1);    
+            .duration(200)    
+            .style("opacity", 1);    
             div .html("<p>"+d.toolTipData.date + "</p><p>"  + d.toolTipData.pick+"</p>")  
-                .style("left", (event.pageX) + "px")   
-                .style("top", (event.pageY - 28) + "px");  
-            })          
-        .on("mouseout", function(d) {   
+            .style("left", (event.pageX) + "px")   
+            .style("top", (event.pageY - 28) + "px");  
+          })          
+          .on("mouseout", function(d) {   
             div.transition()    
-                .duration(500)    
-                .style("opacity", 0); 
-        });  ;
+            .duration(500)    
+            .style("opacity", 0); 
+          });  ;
 
-         g.selectAll("circle.line2")
-        .data(dataArray)
-        .enter().append("svg:circle")
-        .attr("class", "line")
-        .style("fill", "#7ED321")
-        .attr("cx", putLine.x())
-        .attr("cy", putLine.y())
-        .attr("r", 3.5)
-        .on("mouseover", function(d) {    
+          g.selectAll("circle.line2")
+          .data(dataArray)
+          .enter().append("svg:circle")
+          .attr("class", "line")
+          .style("fill", "#7ED321")
+          .attr("cx", putLine.x())
+          .attr("cy", putLine.y())
+          .attr("r", 3.5)
+          .on("mouseover", function(d) {    
             div.transition()    
-                .duration(200)    
-                .style("opacity", 1);    
+            .duration(200)    
+            .style("opacity", 1);    
             div .html("<p>"+d.toolTipData.date + "</p><p>"  + d.toolTipData.put+"</p>")  
-                .style("left", (event.pageX) + "px")   
-                .style("top", (event.pageY - 28) + "px");  
-            })          
-        .on("mouseout", function(d) {   
+            .style("left", (event.pageX) + "px")   
+            .style("top", (event.pageY - 28) + "px");  
+          })          
+          .on("mouseout", function(d) {   
             div.transition()    
-                .duration(500)    
-                .style("opacity", 0); 
-        });  
+            .duration(500)    
+            .style("opacity", 0); 
+          });  
 
-   
-    }
-    else{
-      svg
-      .insert("text",":first-child")
-      .attr("x",width/2)
-      .attr("y",height/2)
-      .text(config.noDataText);
-    }
-     var mBreak= g.selectAll("g.x");
-     var textEl = parseInt(mBreak.select("g:nth-child("+dataArray.length+") text").text());
-      mBreak.select("g:nth-child("+dataArray.length+")").append("text").attr("x","-20").attr("y","2.5em").text(config.today)
-      var monthBreak = mBreak.select("g:nth-child("+(dataArray.length - 1)+")");
-      mBreak.select("g:nth-child("+(dataArray.length - textEl)+")").append("line").attr("class","month-break").attr("x1","15").attr("x2","15").attr("y1","0").attr("y2","25");
-      mBreak.select("g:nth-child("+(dataArray.length - (textEl-1))+")").append("text").attr("x","-5").attr("y","30").text(config.breakMonth);
-        
+          
+        }
+        else{
+          svg
+          .insert("text",":first-child")
+          .attr("x",width/2)
+          .attr("y",height/2)
+          .text(config.noDataText);
+        }
+        var mBreak= g.selectAll("g.x");
+        if (mBreak.length){
+          var dataLen = dataArray.length - 1;
+          var textEl = parseInt(mBreak.select("g:nth-child("+dataLen+") text").text());
+          mBreak.select("g:nth-child("+(dataLen)+")").append("text").attr("x","-20").attr("y","2.5em").text(config.today)
+          var monthBreak = mBreak.select("g:nth-child("+(dataLen)+")");
+          mBreak.select("g:nth-child("+(dataLen - textEl)+")").append("line").attr("class","month-break").attr("x1","15").attr("x2","15").attr("y1","0").attr("y2","25");
+          mBreak.select("g:nth-child("+(dataLen - (textEl-1))+")").append("text").attr("x","-5").attr("y","30").text(config.breakMonth);
+        }
         
       }
       catch(error){
@@ -198,26 +206,26 @@ class MultiLineGraph extends React.Component{
     }
     this.setState({d3: node});
 
-    }
+  }
 
-   componentDidMount(){
+  componentDidMount(){
     this._graphRender(JSON.parse(JSON.stringify(this.props.inventoryData)));
   }
   componentWillReceiveProps(nextProps,nextState){
     this._graphRender(JSON.parse(JSON.stringify(nextProps.inventoryData)));
   }
   
-    render() {
-     var renderHtml = <RD3Component data={this.state.d3} />;
-     
-     return (
-     <div>
-     {renderHtml}
-     </div>
-     )
-   }
- };
- MultiLineGraph.propTypes={
+  render() {
+   var renderHtml = <RD3Component data={this.state.d3} />;
+   
+   return (
+   <div>
+   {renderHtml}
+   </div>
+   )
+ }
+};
+MultiLineGraph.propTypes={
   inventoryData: React.PropTypes.array
 }
 

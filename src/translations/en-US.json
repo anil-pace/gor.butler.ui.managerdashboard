@@ -20,9 +20,9 @@
     "defaultMessage": "Copyright @ 2016 GreyOrange Pte Ltd"
   },
   {
-    "id": "app.greeting",
-    "description": "Greeting to welcome the user to the app",
-    "defaultMessage": "Hello, {name}!"
+    "id": "snapshot.inventory.usedSpace",
+    "description": "Text for used space",
+    "defaultMessage": "{utilisedSpace}% space utilized"
   },
   {
     "id": "header.description",
@@ -33,6 +33,36 @@
     "id": "header.start_time",
     "description": "Start time",
     "defaultMessage": "Start time:{time}"
+  },
+  {
+    "id": "header.logout",
+    "description": "Text for logout",
+    "defaultMessage": "Logout"
+  },
+  {
+    "id": "healthTab.status.on",
+    "description": "on status for healthtab",
+    "defaultMessage": "On"
+  },
+  {
+    "id": "healthTab.status.off",
+    "description": "off status for healthtab",
+    "defaultMessage": "Off"
+  },
+  {
+    "id": "inventory.histogram.legend",
+    "description": "Inventory Histogram Legend",
+    "defaultMessage": "Items Stocked"
+  },
+  {
+    "id": "inventory.linechart.legendPicked",
+    "description": "Inventory Linechart Legend for picked",
+    "defaultMessage": "Items Picked"
+  },
+  {
+    "id": "inventory.linechart.legendPut",
+    "description": "Inventory Linechart Legend for put",
+    "defaultMessage": "Items Put"
   },
   {
     "id": "inventory.header",
@@ -53,6 +83,25 @@
     "id": "itemTable.daysInHand.count",
     "description": "Days in Hand",
     "defaultMessage": "Days in Hand"
+  },
+  {
+    "id": "inventory.linechart.toolTipPut",
+    "description": "Text for put in tooltip",
+    "defaultMessage": "Put"
+  },
+  {
+    "id": "inventory.linechart.toolTipPick",
+    "description": "Text for pick in tooltip",
+    "defaultMessage": "Pick"
+  },
+  {
+    "id": "inventory.linechart.noDataText",
+    "defaultMessage": "No Item Movement"
+  },
+  {
+    "id": "inventory.linechart.today",
+    "description": "Text to show today",
+    "defaultMessage": "Today's"
   },
   {
     "id": "inventory.snaphot.date",
@@ -98,16 +147,6 @@
     "id": "inventory.snaphot.cbmUsed",
     "description": "Snapshot table header",
     "defaultMessage": "CBM Used"
-  },
-  {
-    "id": "login.lang.english",
-    "description": "English option in the language drop down",
-    "defaultMessage": "English"
-  },
-  {
-    "id": "login.lang.japanese",
-    "description": "Japanese option in the language drop down",
-    "defaultMessage": "日本語"
   },
   {
     "id": "login.butler.language",
@@ -190,9 +229,184 @@
     "defaultMessage": "Charging Station"
   },
   {
+    "id": "stringConfig.on",
+    "description": "Text to display on",
+    "defaultMessage": "on"
+  },
+  {
+    "id": "stringConfig.off",
+    "description": "Text to show off",
+    "defaultMessage": "off"
+  },
+  {
+    "id": "stringConfig.per_hour",
+    "description": "Text to show per_hour",
+    "defaultMessage": "per_hour"
+  },
+  {
+    "id": "stringConfig.pick",
+    "description": "Text to show pick",
+    "defaultMessage": "pick"
+  },
+  {
+    "id": "stringConfig.put",
+    "description": "Text to show put",
+    "defaultMessage": "put"
+  },
+  {
+    "id": "stringConfig.audit",
+    "description": "Text to show audit",
+    "defaultMessage": "audit"
+  },
+  {
+    "id": "stringConfig.soft",
+    "description": "Text to show soft",
+    "defaultMessage": "soft"
+  },
+  {
+    "id": "stringConfig.hard",
+    "description": "Text to show hard",
+    "defaultMessage": "hard"
+  },
+  {
+    "id": "stringConfig.soft_manual",
+    "description": "Text to show soft_manual",
+    "defaultMessage": "soft_manual"
+  },
+  {
+    "id": "stringConfig.pending",
+    "description": "Text to show pending",
+    "defaultMessage": "pending"
+  },
+  {
+    "id": "stringConfig.disconnected",
+    "description": "Text to show disconnected",
+    "defaultMessage": "Disconnected"
+  },
+  {
+    "id": "stringConfig.connected",
+    "description": "Text to show connected",
+    "defaultMessage": "Connected"
+  },
+  {
+    "id": "stringConfig.completed",
+    "description": "Text to show completed",
+    "defaultMessage": "Completed"
+  },
+  {
+    "id": "stringConfig.Completed",
+    "description": "Text to show Completed",
+    "defaultMessage": "completed"
+  },
+  {
+    "id": "stringConfig.in_progress",
+    "description": "Text to show In Progress",
+    "defaultMessage": "In Progress"
+  },
+  {
+    "id": "stringConfig.breached",
+    "description": "Text to show breached",
+    "defaultMessage": "Breached"
+  },
+  {
+    "id": "stringConfig.fulfillable",
+    "description": "Text to show fulfillable",
+    "defaultMessage": "In Progress"
+  },
+  {
+    "id": "stringConfig.abandoned",
+    "description": "Text to show abandoned",
+    "defaultMessage": "Abandoned"
+  },
+  {
+    "id": "stringConfig.manual",
+    "description": "Text to show manual",
+    "defaultMessage": "Manual"
+  },
+  {
+    "id": "stringConfig.auto",
+    "description": "Text to show auto",
+    "defaultMessage": "Auto"
+  },
+  {
+    "id": "stringConfig.notFulfillable",
+    "description": "Text to show In progress",
+    "defaultMessage": "In Progress"
+  },
+  {
+    "id": "stringConfig.exception",
+    "description": "Text to show exception",
+    "defaultMessage": "Exception"
+  },
+  {
+    "id": "stringConfig.online",
+    "description": "Text to show Online",
+    "defaultMessage": "online"
+  },
+  {
+    "id": "stringConfig.offline",
+    "description": "Text to show Offline",
+    "defaultMessage": "offline"
+  },
+  {
+    "id": "stringConfig.received",
+    "description": "Text to show received",
+    "defaultMessage": "In Progress"
+  },
+  {
+    "id": "stringConfig.cancelled",
+    "description": "Text to show cancelled",
+    "defaultMessage": "In Progress"
+  },
+  {
+    "id": "stringConfig.butler_supervisor",
+    "description": "Text to show Manager",
+    "defaultMessage": "Manager"
+  },
+  {
+    "id": "stringConfig.butler_ui",
+    "description": "Text to show Operator",
+    "defaultMessage": "Operator"
+  },
+  {
+    "id": "stringConfig.admin",
+    "description": "Text to show admin",
+    "defaultMessage": "--"
+  },
+  {
+    "id": "login.lang.english",
+    "description": "English option in the language drop down",
+    "defaultMessage": "English"
+  },
+  {
+    "id": "login.lang.japanese",
+    "description": "Japanese option in the language drop down",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "login.autologout.message",
+    "description": "Auto logout message",
+    "defaultMessage": "Due to session expiry, Auto Logout has been triggered!"
+  },
+  {
     "id": "notify.success.edit",
     "description": "Text for successfully editing user",
     "defaultMessage": "User details updated successfully"
+  },
+  {
+    "id": "ppsDetail.modeChange.success",
+    "description": "Success Message for PPS mode",
+    "defaultMessage": "PPS Mode Change Request Processed"
+  },
+  {
+    "id": "ppsDetail.modeChange.isAlreadyRequested",
+    "description": "PPS is already in requested mode",
+    "defaultMessage": "PPS is already in requested mode"
+  },
+  {
+    "id": "ppsDetail.modeChange.tryLater",
+    "description": "Previous Change request is pending",
+    "defaultMessage": "Previous request of changing mode is already pending, Please try later!"
   },
   {
     "id": "notify.error.usernameExists",
@@ -242,7 +456,7 @@
   {
     "id": "user.empty.name",
     "description": "Text for empty user name",
-    "defaultMessage": "Please enter a name"
+    "defaultMessage": "Please enter a user name"
   },
   {
     "id": "user.invalid.name",
@@ -370,9 +584,59 @@
     "defaultMessage": "Network Failure"
   },
   {
+    "id": "notify.error.400",
+    "description": "Text for bad request",
+    "defaultMessage": "Network error: 400 Bad Request"
+  },
+  {
+    "id": "notify.error.401",
+    "description": "Text for Unauthorizedun",
+    "defaultMessage": "Network error: 401 Unauthorized"
+  },
+  {
+    "id": "notify.error.403",
+    "description": "Text for Forbidden",
+    "defaultMessage": "Network error: 403 Forbidden"
+  },
+  {
+    "id": "notify.error.405",
+    "description": "Text for method not allowed",
+    "defaultMessage": "Network error: 405 Method Not Allowed"
+  },
+  {
+    "id": "notify.error.408",
+    "description": "Text for request timeout",
+    "defaultMessage": "Network error: 408 Request Time-out"
+  },
+  {
+    "id": "notify.error.409",
+    "description": "Text for conflict",
+    "defaultMessage": "Network error: 409 Conflict"
+  },
+  {
+    "id": "notify.error.500",
+    "description": "Text for internal server error",
+    "defaultMessage": "Network error: 500 Internal Servor Error"
+  },
+  {
+    "id": "notify.error.502",
+    "description": "Text for bad gateway",
+    "defaultMessage": "Network error: 502 Bad Gateway"
+  },
+  {
     "id": "inventory.histogram.noDataText",
     "description": "Inventory Histogram No Data Text",
     "defaultMessage": "No Stock Found"
+  },
+  {
+    "id": "users.add.password.subheading.manager",
+    "description": "Subheading for create password",
+    "defaultMessage": "A password of at least 8 alphanumeric characters will be required for logging into the Management Interface and Operator Interface"
+  },
+  {
+    "id": "users.add.password.subheading.operator",
+    "description": "Subheading for create password operator",
+    "defaultMessage": "A password of 6 digits will be required for logging into the Operator Interface."
   },
   {
     "id": "widget.audit.heading.value",
@@ -400,6 +664,35 @@
     "defaultMessage": "Items audited"
   },
   {
+    "id": "auditdetail.created.status",
+    "defaultMessage": "Created"
+  },
+  {
+    "id": "auditdetail.pending.status",
+    "defaultMessage": "Pending"
+  },
+  {
+    "id": "auditdetail.progress.status",
+    "defaultMessage": "In Progress"
+  },
+  {
+    "id": "auditdetail.completed.status",
+    "defaultMessage": "Completed"
+  },
+  {
+    "id": "auditdetail.sku.prefix",
+    "defaultMessage": "SKU"
+  },
+  {
+    "id": "auditdetail.location.prefix",
+    "defaultMessage": "Location"
+  },
+  {
+    "id": "audit.table.noData",
+    "description": "No data message for audit table",
+    "defaultMessage": "No Audit Task Found"
+  },
+  {
     "id": "audit.table.heading",
     "description": "Heading for audit table",
     "defaultMessage": "Audit Tasks"
@@ -410,9 +703,9 @@
     "defaultMessage": "Create New Task"
   },
   {
-    "id": "auditTable.stationID",
-    "description": "total audit ID for auditTable",
-    "defaultMessage": "{rowsCount} AUDIT ID"
+    "id": "auditTable.stationID.heading",
+    "description": "Heading for audit ID for auditTable",
+    "defaultMessage": "AUDIT ID"
   },
   {
     "id": "auditTable.SubAuditID",
@@ -690,6 +983,41 @@
     "defaultMessage": "Are you sure you would like to duplicate audit task {task_name} ?"
   },
   {
+    "id": "emergency.heading",
+    "description": "Text for emergency heading",
+    "defaultMessage": "Systemwide emergency stop"
+  },
+  {
+    "id": "emergency.type",
+    "description": "Text for emergency type",
+    "defaultMessage": "The butler system is now stopped by a {type} emergency."
+  },
+  {
+    "id": "emergency.action",
+    "description": "Text for emergency action",
+    "defaultMessage": "System reset required before returning to operation"
+  },
+  {
+    "id": "emergency.stop",
+    "description": "Text for emergency stop",
+    "defaultMessage": "Stoppped:"
+  },
+  {
+    "id": "emergency.trigger",
+    "description": "Text for emergency trigger",
+    "defaultMessage": "Triggered at:"
+  },
+  {
+    "id": "emergency.operator",
+    "description": "Text for emergency operator",
+    "defaultMessage": "Operator:"
+  },
+  {
+    "id": "emergency.button",
+    "description": "Text for close button",
+    "defaultMessage": "Close"
+  },
+  {
     "id": "inventory.histogram.header",
     "description": "Inventory Histogram Header Message",
     "defaultMessage": "Stock level history"
@@ -701,8 +1029,13 @@
   },
   {
     "id": "inventory.histogram.noDataText",
-    "description": "Message for No stock",
+    "description": "Text when there is no stock",
     "defaultMessage": "No Stock Found"
+  },
+  {
+    "id": "inventory.histogram.today",
+    "description": "Text to show today",
+    "defaultMessage": "Today's"
   },
   {
     "id": "snapshot.inventory.usedSpace",
@@ -728,6 +1061,16 @@
     "id": "logout.question",
     "description": "Text for logout question",
     "defaultMessage": "Are you sure you would like to log out now?"
+  },
+  {
+    "id": "logout.cancel",
+    "description": "Text for cancel",
+    "defaultMessage": "Cancel"
+  },
+  {
+    "id": "logout.done",
+    "description": "Text for logout button",
+    "defaultMessage": "Log out now"
   },
   {
     "id": "audit.start.auditdetails.subheading2",
@@ -787,12 +1130,22 @@
   {
     "id": "orderlist.Refreshed.at",
     "description": "'Refreshed' status",
-    "defaultMessage": "Refreshed at:"
+    "defaultMessage": "Last Updated"
+  },
+  {
+    "id": "orderlistTab.orderListRefreshedat",
+    "description": "Refresh Status text",
+    "defaultMessage": "Last Updated"
   },
   {
     "id": "orderlistTab.pageNum",
     "description": "page num orderlist",
     "defaultMessage": "Page {currentPage} of {totalPage}"
+  },
+  {
+    "id": "table.filter.placeholder",
+    "description": "placeholder for table filter",
+    "defaultMessage": "Search by keywords"
   },
   {
     "id": "orderlist.table.allDrop",
@@ -850,6 +1203,11 @@
     "defaultMessage": "Last 1 day"
   },
   {
+    "id": "orderlist.table.noData",
+    "description": "No data message for orderlist table",
+    "defaultMessage": "No Orders Found"
+  },
+  {
     "id": "order.table.heading",
     "description": "Heading for order list",
     "defaultMessage": "OrderList"
@@ -860,9 +1218,9 @@
     "defaultMessage": "Refresh Data"
   },
   {
-    "id": "orderlist.Totalorder",
-    "description": "total order for ordertable",
-    "defaultMessage": "{totalOrder} Order List"
+    "id": "orderlist.order.heading",
+    "description": "Heading for order IDs in ordertable",
+    "defaultMessage": "Order List"
   },
   {
     "id": "orderlist.subTotalorder",
@@ -882,7 +1240,7 @@
   {
     "id": "orderlist.table.operatingMode",
     "description": "recievedTime for Orders",
-    "defaultMessage": "RECEIVED TIME"
+    "defaultMessage": "RECIEVED TIME"
   },
   {
     "id": "orderlist.table.completedTime",
@@ -896,8 +1254,12 @@
   },
   {
     "id": "waveDetail.id.prefix",
-    "description": "waveDetail id prefix",
     "defaultMessage": "WAVE-{waveId}"
+  },
+  {
+    "id": "waves.table.noData",
+    "description": "No data message for waves table",
+    "defaultMessage": "No Waves Found"
   },
   {
     "id": "waves.table.heading",
@@ -1005,14 +1367,19 @@
     "defaultMessage": "PPS Audit Performance"
   },
   {
+    "id": "health.noData",
+    "description": "pps graph nodata",
+    "defaultMessage": "No Data"
+  },
+  {
     "id": "widget.pick.headingleft",
     "description": "Heading for pick status widget",
     "defaultMessage": "Orders to fullfill"
   },
   {
-    "id": "widget.pick.completed",
-    "description": "Text for completed",
-    "defaultMessage": "Completed"
+    "id": "widget.pick.none",
+    "description": "Text for none",
+    "defaultMessage": "None"
   },
   {
     "id": "widget.pick.status.idle",
@@ -1043,11 +1410,6 @@
     "id": "widget.pick.textright",
     "description": "Time remaining",
     "defaultMessage": "{cut_off}"
-  },
-  {
-    "id": "widget.pick.statusright",
-    "description": "Text for wave end time",
-    "defaultMessage": "{wave_end}"
   },
   {
     "id": "widget.pick.statusleft.onschedule",
@@ -1120,9 +1482,14 @@
     "defaultMessage": "Go Back"
   },
   {
+    "id": "butlerDetail.name.prefix",
+    "description": "prefix for butler id",
+    "defaultMessage": "BOT - {botId}"
+  },
+  {
     "id": "pps.name.prefix",
     "description": "prefix for pps id",
-    "defaultMessage": "PPS - {ppsId}"
+    "defaultMessage": "PPS {ppsId}"
   },
   {
     "id": "charger.name.prefix",
@@ -1135,14 +1502,19 @@
     "defaultMessage": "MSU - {msuId}"
   },
   {
+    "id": "butlerbot.table.noData",
+    "description": "No data message for butlerbot table",
+    "defaultMessage": "No Butler Bot Found"
+  },
+  {
     "id": "butlerBot.table.heading",
     "description": "Heading for butlerbot",
     "defaultMessage": "Butler Bots"
   },
   {
     "id": "ButlerBotTable.TotalBot",
-    "description": "total bot for ButlerBotTable",
-    "defaultMessage": "{totalBot} BOT"
+    "description": "Column name for the Bot id in bot table",
+    "defaultMessage": "BOT"
   },
   {
     "id": "ButlerBotTable.subTotalBot",
@@ -1182,7 +1554,7 @@
   {
     "id": "ButlerBotTable.locations",
     "description": "msu mounted for ButlerBotTable",
-    "defaultMessage": "{locations} Mounted"
+    "defaultMessage": "{locations} Locations"
   },
   {
     "id": "butlerBot.table.voltage",
@@ -1210,9 +1582,9 @@
     "defaultMessage": "Charging Stations"
   },
   {
-    "id": "ChargingStationsTable.stationID",
-    "description": "total stationID for ChargingStationsTable",
-    "defaultMessage": "{rowsCount} STATION ID"
+    "id": "ChargingStationsTable.stationID.heading",
+    "description": "StationID heading",
+    "defaultMessage": "STATION ID"
   },
   {
     "id": "ChargingStationsTable.SubstationID",
@@ -1275,9 +1647,19 @@
     "defaultMessage": "TIME"
   },
   {
+    "id": "ppsDetail.name.prefix",
+    "description": "prefix for pps id in ppsDetail",
+    "defaultMessage": "PPS-{ppsId}"
+  },
+  {
     "id": "ppsDetail.performance.prefix",
-    "description": "performance for pps id in ppsDetail",
-    "defaultMessage": "{performance} - orders/hr"
+    "description": "prefix for pps id in ppsDetail",
+    "defaultMessage": "{performance} orders/hr"
+  },
+  {
+    "id": "pps.dropdown.placeholder",
+    "description": "mode change for pps",
+    "defaultMessage": "Change PPS Mode"
   },
   {
     "id": "PPS.table.pickDrop",
@@ -1305,9 +1687,9 @@
     "defaultMessage": "{selected} selected"
   },
   {
-    "id": "PPStable.Totalpps",
-    "description": "total pps",
-    "defaultMessage": "{ppsTotal} PPS"
+    "id": "PPStable.ppsColumn.heading",
+    "description": "PPS - column Heading",
+    "defaultMessage": "PPS"
   },
   {
     "id": "PPStable.Subpps",
@@ -1380,9 +1762,14 @@
     "defaultMessage": "AUDIT"
   },
   {
-    "id": "overviewStatus.tab.heading",
+    "id": "overviewStatus.tab.fulfilling",
     "description": "overview Status fulfilling orders",
     "defaultMessage": "Fulfilling orders"
+  },
+  {
+    "id": "overviewStatus.tab.default",
+    "description": "default overview Status",
+    "defaultMessage": "None"
   },
   {
     "id": "systemStatus.tab.online",
@@ -1418,6 +1805,50 @@
     "id": "auditStatus.tab.heading",
     "description": "audit Status",
     "defaultMessage": "{count} in progress"
+  },
+  {
+    "id": "userDetails.operator",
+    "defaultMessage": "Operator"
+  },
+  {
+    "id": "userDetails.manager",
+    "defaultMessage": "Manager"
+  },
+  {
+    "id": "userDetails.pick.status",
+    "defaultMessage": "Pick"
+  },
+  {
+    "id": "auditdetail.completed.status",
+    "defaultMessage": "Completed"
+  },
+  {
+    "id": "userDetails.put.status",
+    "defaultMessage": "Put"
+  },
+  {
+    "id": "userDetails.audit.status",
+    "defaultMessage": "Audit"
+  },
+  {
+    "id": "userDetails.front.status",
+    "defaultMessage": "Front"
+  },
+  {
+    "id": "userDetails.back.status",
+    "defaultMessage": "Back"
+  },
+  {
+    "id": "userDetails.online.status",
+    "defaultMessage": "Online"
+  },
+  {
+    "id": "userDetails.offline.status",
+    "defaultMessage": "Offline"
+  },
+  {
+    "id": "userDetails.location",
+    "defaultMessage": "PPS {ppsId}"
   },
   {
     "id": "users.add.heading",
@@ -1458,16 +1889,6 @@
     "id": "users.add.password.heading",
     "description": "Heading for create password",
     "defaultMessage": "Create password"
-  },
-  {
-    "id": "users.add.password.subheading.manager",
-    "description": "Subheading for create password",
-    "defaultMessage": "A password of at least 8 alphanumeric characters will be required for logging into the Management Interface and Operator Interface"
-  },
-  {
-    "id": "users.add.password.subheading.operator",
-    "description": "Subheading for create password operator",
-    "defaultMessage": "A password of 6 digits will be required for logging into the Operator Interface."
   },
   {
     "id": "users.add.password.field1",
@@ -1625,6 +2046,11 @@
     "defaultMessage": "Grant access to the Management Interface and Operator Interface to all systems"
   },
   {
+    "id": "user.table.noData",
+    "description": "No data message for user table",
+    "defaultMessage": "No User Found"
+  },
+  {
     "id": "user.table.heading",
     "description": "Heading for users table",
     "defaultMessage": "Users"
@@ -1642,7 +2068,7 @@
   {
     "id": "user.table.totaluser",
     "description": "total user",
-    "defaultMessage": "Total:{rowsCount}"
+    "defaultMessage": "Total: {rowsCount}"
   },
   {
     "id": "user.table.status",
@@ -1868,25 +2294,5 @@
     "id": "notify.delete.audit.success",
     "description": "Text for successfull audit deletion",
     "defaultMessage": "Audit task {audit_id} has been deleted"
-  },
-  {
-    "id": "pps.dropdown.placeholder",
-    "description": "mode change for pps",
-    "defaultMessage": "Change PPS Mode"
-  },
-  {
-    "id": "healthTab.status.on",
-    "description": "on status for healthtab",
-    "defaultMessage": "On"
-  },
-  {
-    "id": "healthTab.status.off",
-    "description": "off status for healthtab",
-    "defaultMessage": "Off"
-  },
-  {
-        "id": "table.filter.placeholder",
-        "description": "placeholder for table filter",
-        "defaultMessage": "Search by keywords"
-    }
+  }
 ]

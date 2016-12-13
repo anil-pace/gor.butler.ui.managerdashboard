@@ -3,6 +3,7 @@ import ReactDOM  from 'react-dom';
 import LoginForm from './loginForm';
 import Footer from '../Footer/Footer';
 import Spinner from '../../components/spinner/Spinner';
+import { setLoginSpinner } from '../../actions/loginAction';
 import {resetForm} from '../../actions/validationActions';
 import { connect } from 'react-redux';
 import {EN,JA,FILL_BACK} from '../../constants/frontEndConstants'; 
@@ -72,14 +73,15 @@ class Login extends React.Component{
     }
  	render(){
         return (
+          <div>
+              <TopNotifications />
             <div className='gor-login-form'>
-            <TopNotifications />
-            <Spinner isLoading={this.props.loginSpinner} />
+          
+            <Spinner isLoading={this.props.loginSpinner} setSpinner={this.props.setLoginSpinner}/>
                 <div className='gor-login-lang'>
                     <div className='gor-lang-text'>
                     <FormattedMessage id='login.butler.language' 
                         defaultMessage="Language" description="Text for language"/>
-                
                     </div>
                     <Dropdown optionDispatch={(e) => this._handleSelectionChange(e)} items={this.state.items}
                      styleClass={'gor-lang-drop'} 
@@ -94,6 +96,7 @@ class Login extends React.Component{
                 </div>
                 <Footer />
             </div>
+          </div>
 		);
 	}
 
@@ -124,8 +127,10 @@ var mapDispatchToProps = function(dispatch){
 
     return {
         updateIntl: function(params){ dispatch(updateIntl(params));},
-        resetForm:   function(){ dispatch(resetForm()); }
+        resetForm:   function(){ dispatch(resetForm()); },
+        setLoginSpinner: function(params) { dispatch(setLoginSpinner(params));}
     }
 };
+
 
 export 	default connect(mapStateToProps,mapDispatchToProps)(Login);

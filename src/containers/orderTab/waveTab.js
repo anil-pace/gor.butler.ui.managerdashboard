@@ -3,6 +3,7 @@ import WavesTable from './waveTable';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import Spinner from '../../components/spinner/Spinner';
+import { setWavesSpinner } from '../../actions/spinnerAction';
 import {GOR_PENDING,GOR_PROGRESS} from '../../constants/frontEndConstants';
 import {stringConfig} from '../../constants/backEndConstants';
 import { defineMessages } from 'react-intl';
@@ -28,9 +29,11 @@ class WaveTab extends React.Component{
   var waveData = [], waveDetail = {};
   let WAVE, waveId;
 
-  var status = {"In Progress":"progress", "Completed":"completed", "Breached":"breached", "Pending":"pending" };
-  var timeOffset = this.props.timeOffset
+
+  var status = {"in_progress":"progress", "completed":"completed", "Breached":"breached", "Pending":"pending" };
+   var timeOffset = this.props.timeOffset
   var priStatus = {"In Progress": 2, "Completed": 4, "Breached":1 ,"Pending":3};
+  var timeOffset = this.props.timeOffset;
   if(data) {
      for (var i =data.length - 1; i >= 0; i--) {
       waveId = data[i].wave_id;
@@ -119,7 +122,7 @@ class WaveTab extends React.Component{
 }
 return (
 <div className="gorTesting">
-<Spinner isLoading={this.props.wavesSpinner} />
+<Spinner isLoading={this.props.wavesSpinner} setSpinner={this.props.setWavesSpinner}/>
 <WavesTable items={waveData} itemNumber={itemNumber} waveState={waveState} intlMessg={this.props.intlMessages}/>
 </div>
 );
@@ -140,9 +143,15 @@ function mapStateToProps(state, ownProps){
   };
 };
 
+function mapDispatchToProps(dispath){
+  return{
+    setWavesSpinner: function(data){dispatch(setWavesSpinner(data))}
+  }
+}
+
 WaveTab.contextTypes ={
  intl:React.PropTypes.object.isRequired
 }
 
 
-export default connect(mapStateToProps)(WaveTab) ;
+export default connect(mapStateToProps,mapDispatchToProps)(WaveTab) ;

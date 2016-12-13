@@ -20,6 +20,11 @@
     "defaultMessage": "Audit"
   },
   {
+    "id": "PPStable.table.noData",
+    "description": "No data message for PPStable",
+    "defaultMessage": "No PPS Found"
+  },
+  {
     "id": "pps.table.heading",
     "description": "Heading for PPS",
     "defaultMessage": "PPS"
@@ -30,9 +35,9 @@
     "defaultMessage": "{selected} selected"
   },
   {
-    "id": "PPStable.Totalpps",
-    "description": "total pps",
-    "defaultMessage": "{ppsTotal} PPS"
+    "id": "PPStable.ppsColumn.heading",
+    "description": "PPS - column Heading",
+    "defaultMessage": "PPS"
   },
   {
     "id": "PPStable.Subpps",

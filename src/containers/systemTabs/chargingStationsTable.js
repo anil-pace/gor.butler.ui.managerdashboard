@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import {currentTableState} from '../../actions/tableDataAction'
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
-import {GOR_STATUS,GOR_STATUS_PRIORITY} from '../../constants/frontEndConstants';
+import {GOR_STATUS,GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
 
 
   var tempGlobal = 0;
@@ -106,6 +106,13 @@ class ChargingStationsTable extends React.Component {
     let auto = this.props.chargersState.automaticMode;
     let totalBots = this.props.chargersState.connectedBots;
     
+     var containerHeight = this.props.containerHeight;
+   var noData = <div/>;
+    if(rowsCount === 0 || rowsCount === undefined || rowsCount === null) {
+     noData =  <div className="gor-no-data"> <FormattedMessage id="ChargingStations.table.noData" description="No data message for ChargingStations table" 
+       defaultMessage ="No Charging Stations Found"/>  </div>
+     containerHeight = GOR_TABLE_HEADER_HEIGHT;
+    }
 
     var tableRenderer = <div/>
     if(this.props.tableData.length !== 0 ) {
@@ -136,7 +143,7 @@ class ChargingStationsTable extends React.Component {
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
         width={this.props.containerWidth}
-        height={this.props.containerHeight}
+        height={containerHeight}
         {...this.props}>
         <Column
           columnKey="id"
@@ -145,9 +152,8 @@ class ChargingStationsTable extends React.Component {
               sortDir={colSortDirs.id}>
               
               <div className="gorToolHeaderEl"> 
-                 <FormattedMessage id="ChargingStationsTable.stationID" description='total stationID for ChargingStationsTable' 
-                defaultMessage='{rowsCount} STATION ID' 
-                values={{rowsCount:rowsCount?rowsCount:'0'}}/>
+                 <FormattedMessage id="ChargingStationsTable.stationID.heading" description='StationID heading' 
+                defaultMessage='STATION ID'/>
               
               <div className="gorToolHeaderSubText">
                <FormattedMessage id="ChargingStationsTable.SubstationID" description='total SubStationID for ChargingStationsTable' 
@@ -227,6 +233,7 @@ class ChargingStationsTable extends React.Component {
           isResizable={true}
         />
       </Table>
+      <div > {noData} </div>
       </div>
     
   }

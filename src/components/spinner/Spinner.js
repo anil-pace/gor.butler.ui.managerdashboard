@@ -13,9 +13,15 @@ class Spinner extends React.Component{
 	{  
     	super(props); 
   	}	
-  	
-  
-  	
+
+  	componentDidMount(){
+    	if(this.props.setSpinner){
+    		if(this.props.isLoading === true)
+    		{
+   		 	 setTimeout(this.props.setSpinner.bind(this,false), 5000);    	
+    		}
+    	}
+    }
   	/**Render method called when component react renders
   	 * @return {[type]}
   	 */

@@ -174,7 +174,7 @@ class Chart extends React.Component{
         .on("mousemove", function(d,i){  
            var mouse = d3.mouse(this);
            var mousex = mouse[0] + 10;
-           var mousey =  mouse[1] + 300; 
+           var mousey =  mouse[1] + 295; 
            d3.selectAll('.remove').style("left", mousex + "px" );
            d3.selectAll('.remove').style("top", + mousey + "px" );
          })

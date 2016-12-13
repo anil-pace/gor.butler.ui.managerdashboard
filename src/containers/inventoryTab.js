@@ -6,6 +6,7 @@ import React  from 'react';
 
 import Inventory from '../components/inventory/inventory';
 import Spinner from '../components/spinner/Spinner';
+import { setInventorySpinner } from '../actions/inventoryActions';
 import { FormattedMessage} from 'react-intl';
 import { connect } from 'react-redux'; 
 
@@ -17,7 +18,10 @@ class InventoryTab extends React.Component{
 
     }	
 
-  
+    _setSpinner(bShow) {
+    	var _bShow = bShow ? bShow:false;
+    	this.props.setInventorySpinner(_bShow);
+    }  
 
 	render(){
 		/**
@@ -32,7 +36,7 @@ class InventoryTab extends React.Component{
 		snapshotData = this.props.isPrevDateSelected ? this.props.inventoryDataPrevious : this.props.snapshotData
 		return (
 			<div className="gorInventory wrapper">
-				<Spinner isLoading={this.props.inventorySpinner} />
+				<Spinner isLoading={this.props.inventorySpinner} setSpinner={this.props.setInventorySpinner}/>
 				<Inventory recreatedData={this.props.recreatedData} currentDate = {this.props.currentDate} hasDataChanged = {this.props.hasDataChanged} inventoryData={this.props.inventoryData} histogramLabel={histogramLabel} linechartLabel={linechartLabel} isPrevDateSelected = {this.props.isPrevDateSelected} inventoryDataPrevious = {this.props.inventoryDataPrevious} snapshotData={this.props.snapshotData}/>
 			</div>
 		);
@@ -45,7 +49,7 @@ InventoryTab.propTypes={
 	snapshotData:React.PropTypes.array,
 	inventorySpinner:React.PropTypes.bool,
 	isPrevDateSelected:React.PropTypes.bool,
-	inventoryDataPrevious:React.PropTypes.array ,
+	inventoryDataPrevious:React.PropTypes.object ,
 	hasDataChanged:React.PropTypes.number,
 	currentDate:React.PropTypes.number,
 	recreatedData: React.PropTypes.object
@@ -53,7 +57,6 @@ InventoryTab.propTypes={
 
 function mapStateToProps(state,ownProps){
     return {
-
       "inventoryData": state.inventoryInfo.inventoryDataHistory || [],
       "snapshotData":state.inventoryInfo.inventoryDataToday || [],
       "inventorySpinner":state.spinner.inventorySpinner || false,
@@ -64,7 +67,13 @@ function mapStateToProps(state,ownProps){
       "recreatedData":state.inventoryInfo.recreatedData || {}
     }
 };
+    function mapDispatchToProps(dispatch){
+    	return{
+    		setInventorySpinner:function(data){dispatch(setInventorySpinner(data));}
+    	}
+    };
 
-export default connect(mapStateToProps)(InventoryTab);
+
+export default connect(mapStateToProps,mapDispatchToProps)(InventoryTab);
 
 

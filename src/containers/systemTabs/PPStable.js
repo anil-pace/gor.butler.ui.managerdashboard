@@ -9,7 +9,7 @@ import {changePPSmode} from '../../actions/ppsModeChangeAction'
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
 import {BASE_URL, PPS_MODE_CHANGE_URL,PROTOCOL,API_URL} from '../../constants/configConstants';
 import { defineMessages } from 'react-intl';
-import {GOR_STATUS,GOR_STATUS_PRIORITY} from '../../constants/frontEndConstants';
+import {GOR_STATUS,GOR_STATUS_PRIORITY,GOR_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
 
 const messages = defineMessages({
     ppsPlaceholder: {
@@ -47,11 +47,11 @@ class PPStable extends React.Component {
       sortedDataList: this._dataList,
       colSortDirs: {},
       columnWidths: {
-        id: this.props.containerWidth*0.07,
+        id: this.props.containerWidth*0.15,
         status: this.props.containerWidth*0.1,
-        operatingMode: this.props.containerWidth*0.2,
-        performance: this.props.containerWidth*0.2,
-        operatorAssigned: this.props.containerWidth*0.35
+        operatingMode: this.props.containerWidth*0.17,
+        performance: this.props.containerWidth*0.15,
+        operatorAssigned: this.props.containerWidth*0.6
       },
       headerChecked: false,
       isChecked:temp,
@@ -235,7 +235,7 @@ class PPStable extends React.Component {
     let put = this.props.operationMode.Put;
     let audit = this.props.operationMode.Audit;
     let notSet = this.props.operationMode.NotSet;
-    let operatorNum =  this.props.operatorNum;
+    let operatorNum =  this.props.operatorNum, j=1;
     if(this.state.renderDropD===true) {
       drop = <DropdownTable  styleClass={'gorDataTableDrop'} placeholder={this.props.intlMessg["pps.dropdown.placeholder"]} items={modes} changeMode={this.handleModeChange.bind(this)}/>;
     }
@@ -243,11 +243,18 @@ class PPStable extends React.Component {
     else {
       drop = <div/>;
     }
-    var j=1;
     for (var i = this.state.isChecked.length - 1; i >= 0; i--) {
       if(this.state.isChecked[i] === true) {
         selected = selected + 1;
       }
+    }
+
+    var containerHeight = this.props.containerHeight;
+    var noData = <div/>;
+    if(ppsTotal === 0 || ppsTotal === undefined || ppsTotal === null) {
+     noData =  <div className="gor-no-data"> <FormattedMessage id="PPStable.table.noData" description="No data message for PPStable" 
+       defaultMessage ="No PPS Found"/>  </div>
+     containerHeight = GOR_TABLE_HEADER_HEIGHT;
     }
    
     return (
@@ -285,7 +292,7 @@ class PPStable extends React.Component {
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
         width={this.props.containerWidth}
-        height={this.props.containerHeight}
+        height={containerHeight}
         {...this.props}>
         <Column
           columnKey="id"
@@ -298,9 +305,8 @@ class PPStable extends React.Component {
               <SortHeaderCell onSortChange={this._onSortChange} 
                 sortDir={colSortDirs.id}>  
                 <div className="gorToolHeaderEl">
-                  <FormattedMessage id="PPStable.Totalpps" description='total pps' 
-                  defaultMessage='{ppsTotal} PPS' 
-                  values={{ppsTotal:ppsTotal?ppsTotal:'0'}}/> 
+                  <FormattedMessage id="PPStable.ppsColumn.heading" description='PPS - column Heading' 
+                  defaultMessage='PPS' /> 
                 <div className="gorToolHeaderSubText"> 
                   <FormattedMessage id="PPStable.Subpps" description='sub pps' 
                   defaultMessage='Total: {ppsTotal}' 
@@ -406,6 +412,7 @@ class PPStable extends React.Component {
           isResizable={true}
         />
       </Table>
+      <div > {noData} </div>
       </div>
     );
   }

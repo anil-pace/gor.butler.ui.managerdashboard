@@ -177,11 +177,11 @@ class UserDataTable extends React.Component {
     var selDel= this.handleDel.bind(this); 
     var containerHeight = this.props.containerHeight;
     var noData = <div/>;
-    if(rowsCount === 0 || rowsCount === undefined) {
-     noData =  <div> <FormattedMessage id="user.table.noData" description="No data message for user table" 
-       defaultMessage ="No User Found"/>  </div>
-     containerHeight = 73;
-    }
+    if(rowsCount === 0 || rowsCount === undefined || rowsCount === null) {
+     noData =  <div className="gor-no-data"> <FormattedMessage id="user.table.noData" description="No data message for user table" 
+        defaultMessage ="No User Found"/>  </div>
+     containerHeight = GOR_TABLE_HEADER_HEIGHT;
+     }
     return (
       <div>
         <div className="gorToolBar">
@@ -192,7 +192,6 @@ class UserDataTable extends React.Component {
             </div>
             <div className="gorToolBarElements">
                 <button className="gor-add-btn" onClick={this.addModal.bind(this)}>
-                  
                   <FormattedMessage id="user.button.heading" description="button heading for users table" 
               defaultMessage ="Add new user"/>
               </button>
@@ -210,7 +209,7 @@ class UserDataTable extends React.Component {
        </div>
 
       <Table
-        rowHeight={66}
+        rowHeight={50}
         rowsCount={sortedDataList.getSize()}
         headerHeight={70}
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
@@ -224,14 +223,13 @@ class UserDataTable extends React.Component {
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.id}>
               <div className="gorToolHeaderEl">
-                {sortedDataList.getSize()} 
                 <FormattedMessage id="user.table.users" description="Users Column" 
-              defaultMessage =" USERS"/> 
+              defaultMessage ="USERS"/> 
              
               <div className="gorToolHeaderSubText">
                  <FormattedMessage id="user.table.totaluser" description='total user' 
-                defaultMessage='Total:{rowsCount}' 
-                values={{rowsCount:rowsCount?rowsCount:'0'}}/>
+                defaultMessage='Total: {rowsCount}' 
+                values={{rowsCount:rowsCount?rowsCount:' 0'}}/>
               </div>
               </div>
             </SortHeaderCell>
@@ -323,7 +321,7 @@ class UserDataTable extends React.Component {
           width={columnWidth}
         />
       </Table>
-      <div className="gor-no-data"> {noData} </div>
+      <div> {noData} </div>
       </div>
     );
   }

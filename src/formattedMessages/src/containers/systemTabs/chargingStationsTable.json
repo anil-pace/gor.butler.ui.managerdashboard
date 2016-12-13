@@ -1,13 +1,18 @@
 [
   {
+    "id": "ChargingStations.table.noData",
+    "description": "No data message for ChargingStations table",
+    "defaultMessage": "No Charging Stations Found"
+  },
+  {
     "id": "ChargingStations.table.heading",
     "description": "Heading for ChargingStations",
     "defaultMessage": "Charging Stations"
   },
   {
-    "id": "ChargingStationsTable.stationID",
-    "description": "total stationID for ChargingStationsTable",
-    "defaultMessage": "{rowsCount} STATION ID"
+    "id": "ChargingStationsTable.stationID.heading",
+    "description": "StationID heading",
+    "defaultMessage": "STATION ID"
   },
   {
     "id": "ChargingStationsTable.SubstationID",

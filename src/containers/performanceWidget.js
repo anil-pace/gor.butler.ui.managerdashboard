@@ -135,7 +135,7 @@ class PerformanceWidget extends React.Component{
 
 	var noData = <FormattedMessage id="health.noData" description="pps graph nodata" defaultMessage ="No Data"/>
 	if(this.props.widget === PICK_PPS_PERFORMANCE){
-		if(this.props.ppsPerformance.aggregate_data !== undefined) {
+		if(this.props.ppsPerformance.ppsPerformance !== undefined && this.props.ppsPerformance.ppsPerformance.aggregate_data !== undefined) {
 			itemRender = <ChartHorizontal data={this.props.ppsPerformance} type={GOR_ORDER_PICKED} performanceParam="orders/hr"/>
 		}
 
@@ -146,7 +146,7 @@ class PerformanceWidget extends React.Component{
 
 	else if(this.props.widget === PUT_PPS_PERFORMANCE){
 		
-		if(this.props.ppsPerformance.aggregate_data !== undefined) {
+		if(this.props.ppsPerformance.ppsPerformance !== undefined && this.props.ppsPerformance.ppsPerformance.aggregate_data !== undefined) {
 			itemRender = <ChartHorizontal data={this.props.ppsPerformance} type={GOR_ITEMS_PUT} performanceParam="items/hr"/>
 		}
 
@@ -156,7 +156,7 @@ class PerformanceWidget extends React.Component{
 	}
 
 	else if(this.props.widget === AUDIT_PPS_PERFORMANCE){
-		if(this.props.ppsPerformance.aggregate_data !== undefined) {
+		if(this.props.ppsPerformance.ppsPerformance !== undefined && this.props.ppsPerformance.ppsPerformance.aggregate_data !== undefined) {
 			itemRender = <ChartHorizontal data={this.props.ppsPerformance} type={GOR_ITEMS_AUDITED} performanceParam="items/hr"/>
 		}
 
@@ -191,7 +191,7 @@ function mapStateToProps(state, ownProps){
 		ppsData: state.recieveSocketActions.ppsData || {},
 		butlersData:state.butlersInfo || {},
 		chargersData:state.chargerInfo || {},
-		ppsPerformance: state.ppsPerformance || {}
+		ppsPerformance: state.PPSperformance || {}
 	};
 }
 

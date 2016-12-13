@@ -118,11 +118,11 @@ class ButlerBotTable extends React.Component {
     let voltage = this.props.parameters.avgVoltage;
     var containerHeight = this.props.containerHeight;
     var noData = <div/>;
-    if(totalBot === 0 || totalBot === undefined) {
-     noData =  <div> <FormattedMessage id="butlerbot.table.noData" description="No data message for butlerbot table" 
-       defaultMessage ="No Butler Bot Found"/>  </div>
-     containerHeight = GOR_TABLE_HEADER_HEIGHT;
-    }
+     if(totalBot === 0 || totalBot === undefined || totalBot === null) {
+    noData =  <div className="gor-no-data"> <FormattedMessage id="butlerbot.table.noData" description="No data message for butlerbot table" 
+        defaultMessage ="No Butler Bot Found"/>  </div>
+      containerHeight = GOR_TABLE_HEADER_HEIGHT;
+     }
     return (
       <div className="gorTableMainContainer">
         <div className="gorToolBar">
@@ -144,7 +144,7 @@ class ButlerBotTable extends React.Component {
         </div>
        </div>
       <Table
-        rowHeight={66}
+        rowHeight={50}
         rowsCount={sortedDataList.getSize()}
         headerHeight={70}
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
@@ -158,7 +158,7 @@ class ButlerBotTable extends React.Component {
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.id}> 
               <div className="gorToolHeaderEl">
-                <FormattedMessage id="ButlerBotTable.TotalBot" description='total bot for ButlerBotTable' defaultMessage='{totalBot} BOT' values={{totalBot: totalBot}}/>
+                <FormattedMessage id="ButlerBotTable.TotalBot" description='Column name for the Bot id in bot table' defaultMessage='BOT'/>
               
               <div className="gorToolHeaderSubText"> 
                 <FormattedMessage id="ButlerBotTable.subTotalBot" description='sub text for totalbot ButlerBotTable' defaultMessage='Total: {totalBot}' values={{totalBot: totalBot}}/>
@@ -244,7 +244,7 @@ class ButlerBotTable extends React.Component {
                <FormattedMessage id="butlerBot.table.location" description="Location for butlerbot" 
               defaultMessage ="LOCATION"/> 
               <div className="gorToolHeaderSubText"> 
-                <FormattedMessage id="ButlerBotTable.locations" description='msu mounted for ButlerBotTable' 
+                <FormattedMessage id="ButlerBotTable.locations" description='msu Location for ButlerBotTable' 
                 defaultMessage='{locations} Locations' 
                 values={{locations:locations}}/>
               </div>
@@ -278,7 +278,7 @@ class ButlerBotTable extends React.Component {
           isResizable={true}
         />
       </Table>
-       <div className="gor-no-data"> {noData} </div>
+       <div> {noData} </div>
       </div>
     );
   }

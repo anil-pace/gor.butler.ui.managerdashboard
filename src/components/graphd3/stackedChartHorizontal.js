@@ -55,7 +55,7 @@ class StackedChartHorizontal extends React.Component{
     
     if(!data[i].warehouse_utilization && data[i].unusedSpace){
         
-        values.utilisedSpace = ""+utilisedSpace;
+        values.utilisedSpace = ""+(utilisedSpace.toFixed(2));
         if(utilisedSpace){
         svg.append("line")
         .attr("x1",x+"%")

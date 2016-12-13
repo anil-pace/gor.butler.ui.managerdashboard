@@ -22,7 +22,7 @@
   {
     "id": "user.table.totaluser",
     "description": "total user",
-    "defaultMessage": "Total:{rowsCount}"
+    "defaultMessage": "Total: {rowsCount}"
   },
   {
     "id": "user.table.status",

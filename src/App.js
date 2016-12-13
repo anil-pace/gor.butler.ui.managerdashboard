@@ -5,16 +5,18 @@ import Tabs from './containers/tabs';
 import Header from './components/header/header';
 import {setWsAction ,setMockAction, endWsAction} from './actions/socketActions';
 import {getTimeOffSetData,setTimeOffSetData, logoutRequest} from './actions/loginAction';
-import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,WS_MOCK,USERS,TAB_ROUTE_MAP,OVERVIEW ,SYSTEM,ORDERS,INVENTORY,GET} from './constants/frontEndConstants';
-import { wsOverviewData} from './constants/initData.js';
-import {TIME_ZONE_URL} from './constants/configConstants'
-import {prevTabSelected} from './actions/tabSelectAction';
-import { connect } from 'react-redux'; 
-import TopNotifications from './components/topnotify/topnotify';
-import { notifyInfo} from './actions/validationActions';
+import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,
+  WS_MOCK,USERS,TAB_ROUTE_MAP,OVERVIEW ,SYSTEM,ORDERS,INVENTORY,GET} from './constants/frontEndConstants';
+  import { AUTO_LOGOUT } from './constants/messageConstants';
+  import { wsOverviewData} from './constants/initData.js';
+  import {TIME_ZONE_URL} from './constants/configConstants'
+  import {prevTabSelected} from './actions/tabSelectAction';
+  import { connect } from 'react-redux'; 
+  import TopNotifications from './components/topnotify/topnotify';
+  import { notifyInfo} from './actions/validationActions';
 
 
-class App extends React.Component{ 
+  class App extends React.Component{ 
   /**
    * Called once before rendering of component,used to displatch fetch action
    * @return {[type]}
@@ -45,19 +47,19 @@ class App extends React.Component{
     }
 
     if (this.props.timeOutDuration){
-       let durationInMilliSeconds = this.props.timeOutDuration*1000;
-      // let durationInMilliSeconds = 10000;
-      // trigger auto logout after timeduration.
-      // setTimeout(function(){
-      //   sessionStorage.clear();
-      //   this.props.userLogout();
-      //   this.props.endConnect();
+      let durationInMilliSeconds = this.props.timeOutDuration * 1000;
 
-      // }.bind(this), durationInMilliSeconds);
-    }
-  }
+     // trigger auto logout after time duration.
+     setTimeout(function(){
+      sessionStorage.clear();
+      this.props.userLogout();
+      this.props.endConnect();
+      this.props.notifyInfo(AUTO_LOGOUT);
+    }.bind(this), durationInMilliSeconds);
+   }
+ }
 
-  componentWillReceiveProps(nextProps) {
+ componentWillReceiveProps(nextProps) {
     /**
      * Checking if the user is loggedin 
      * and redirecting to main page
@@ -104,21 +106,18 @@ class App extends React.Component{
      * @return {[type]}
      */
      render(){
-    //var items3={start:"09:00:25", name:"Krish verma gandhi sharma", post:"Manager"}
-    
-    
-    return (
+       return (
 
-      <div className="mainContainer">
-      <TopNotifications />
-      <Header />
-      <Tabs/>
-      {this.props.children}
-      </div>
-      
-      );
-  }
-};
+        <div className="mainContainer">
+        <TopNotifications />
+        <Header />
+        <Tabs/>
+        {this.props.children}
+        </div>
+
+        );
+     }
+   };
 /**
  * [Passing Router to component through context]
  * @type {Object}
