@@ -3,7 +3,7 @@ import ReactDOM  from 'react-dom';
 import Tile2x from '../components/tile2x/Tile2x';
 import { connect } from 'react-redux' ;
 import { FormattedMessage,FormattedNumber,FormattedPlural,FormattedRelative, FormattedDate } from 'react-intl';
-import {PICK_ICON,GOR_RISK,GOR_NONE,GOR_SUCCESS,TILE_ONTIME,TILE_ALERT} from '../constants/frontEndConstants';
+import {PICK_ICON,GOR_RISK,GOR_SUCCESS,TILE_ONTIME,TILE_ALERT} from '../constants/frontEndConstants';
 import {secondsToTime} from '../utilities/processTime';
 
 class PickStatusWidget extends React.Component{
@@ -43,9 +43,9 @@ class PickStatusWidget extends React.Component{
         ppsCount = <FormattedNumber value={ppsCount}/>
         if(!textLeft)
         {
-            valueLeftStatus=GOR_NONE;
-            textLeft=<FormattedMessage id="widget.pick.none" description='Text for none' 
-            defaultMessage='None'/>;
+            valueLeftStatus=GOR_SUCCESS;
+            textLeft=<FormattedMessage id="widget.pick.completed" description='Text for completed' 
+            defaultMessage='COMPLETED'/>;
             lowLeft=<FormattedMessage id="widget.pick.idle" description='Pick PPS idle message' 
                 defaultMessage='{count} idle PPS (Pick mode)'
                 values={{
@@ -65,7 +65,7 @@ class PickStatusWidget extends React.Component{
 
             eta=secondsToTime(ordersData.eta);
             lowRight=<FormattedMessage id="widget.pick.lowright" description='Estimated time' 
-            defaultMessage='Completing in {eta}' values={{eta:eta}}/>;
+            defaultMessage='Estimated to complete in {eta}' values={{eta:eta}}/>;
             if(ordersData.wave_end){
                 headingRight=<FormattedMessage id="widget.pick.headingright" description='Heading for cut-off time' 
                 defaultMessage='Time to cut-off'/>;

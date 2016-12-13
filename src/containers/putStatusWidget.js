@@ -21,8 +21,8 @@ class PutStatusWidget extends React.Component{
         _formatContainerData() {
     		var lowStr,valueLeftStatus='',totalPut = this.props.ppsData ? this.props.ppsData.totalPut : 0,
     		putData = Object.assign({},this.props.putData),
-    		putThroughput = this.props.throughputData ? this.props.throughputData.put_throughput : null,
-    		value = putData ? putData.value : null,pluralMsg,
+    		putThroughput = this.props.throughputData ? this.props.throughputData.put_throughput : 0,
+    		value = putData ? putData.value : 0,pluralMsg,
     		heading;
             totalPut=<FormattedNumber value={totalPut}/>;
     		//Setting display values based on server values/mock

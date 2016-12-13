@@ -12,7 +12,7 @@
   {
     "id": "widget.audit.throughput",
     "description": "Throughput message",
-    "defaultMessage": "{count, number} {count, plural, one {PPS} other {PPS}} auditing {throughput} items/hr"
+    "defaultMessage": "{pps_count} PPS auditing {throughput} items/hr"
   },
   {
     "id": "widget.audit.offline",

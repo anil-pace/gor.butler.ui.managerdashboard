@@ -5,9 +5,9 @@
     "defaultMessage": "Orders to fullfill"
   },
   {
-    "id": "widget.pick.none",
-    "description": "Text for none",
-    "defaultMessage": "None"
+    "id": "widget.pick.completed",
+    "description": "Text for completed",
+    "defaultMessage": "COMPLETED"
   },
   {
     "id": "widget.pick.idle",
@@ -22,7 +22,7 @@
   {
     "id": "widget.pick.lowright",
     "description": "Estimated time",
-    "defaultMessage": "Completing in {eta}"
+    "defaultMessage": "Estimated to complete in {eta}"
   },
   {
     "id": "widget.pick.headingright",
