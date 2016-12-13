@@ -51,7 +51,7 @@
 		width: 28%;
     	display: inline-block;
     	vertical-align: top;
-    	height:90vh;
+    	min-height:550px;
     	padding:calculateRem(20px) calculateRem(10px);
 	}
 	.snapShtWrap{
@@ -70,6 +70,8 @@
 	}
 	.catText{
 		vertical-align: middle;
+		word-wrap: break-word;
+		word-break: break-all;
 	}
 	.stkParam{
 		padding:calculateRem(10px);

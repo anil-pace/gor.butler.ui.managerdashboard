@@ -932,7 +932,7 @@ body {
 }
 
 .gor-tile .gor-success {
-  color: #00a54f;
+  color: #10C469;
 }
 
 .gor-tile .gor-breach {
@@ -1846,11 +1846,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 
 .fixedDataTableRowLayout_rowWrapper:hover .public_fixedDataTable_header {
   background-color: #fff;
-}
-
-.fixedDataTableRowLayout_rowWrapper:last-child .Dropdown-menu {
-  top: initial;
-  bottom: 100%;
 }
 
 .public_fixedDataTable_header:hover .public_fixedDataTableCell_main {
@@ -3806,7 +3801,7 @@ progress::-moz-progress-bar {
   width: 28%;
   display: inline-block;
   vertical-align: top;
-  height: 90vh;
+  min-height: 550px;
   padding: 1.25rem 0.625rem;
 }
 
@@ -3827,6 +3822,8 @@ progress::-moz-progress-bar {
 
 .gorInventory .catText {
   vertical-align: middle;
+  word-wrap: break-word;
+  word-break: break-all;
 }
 
 .gorInventory .stkParam {
@@ -4030,6 +4027,10 @@ progress::-moz-progress-bar {
 
 .lineGraph .grid path.line:nth-child(1) {
   stroke: #D0021B;
+}
+
+.lineGraph circle.line {
+  cursor: pointer;
 }
 
 .tooltip.ppLine {

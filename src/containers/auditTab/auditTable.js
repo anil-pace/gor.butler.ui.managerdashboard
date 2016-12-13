@@ -48,6 +48,11 @@ class AuditTable extends React.Component {
         lastDownMenu.style.bottom = '100%';
         lastDownMenu.style.top = 'initial';
       }
+      var firstDropDownMenu = document
+                          .querySelector('.fixedDataTableRowLayout_rowWrapper:nth-child(1) .Dropdown-menu');
+      if (firstDropDownMenu){
+        firstDropDownMenu.style.bottom = 'initial';
+      }
 
       let DOMObj = domArray[rowIndex+1];
       DOMObj.style.zIndex = "30";

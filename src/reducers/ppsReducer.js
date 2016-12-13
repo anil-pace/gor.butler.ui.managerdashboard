@@ -28,13 +28,22 @@ function processPPSData(response){
       totalPut = 0,totalAudit = 0,totalPick=0;
       for(let i = 0; i < aggData.length ; i++ ){
         if(aggData[i].hasOwnProperty("pps_mode") && aggData[i]["pps_mode"] === "put"){
-          totalPut++;
+          if(aggData[i]["active"])
+          {
+              totalPut++;
+          }
         }
         else if(aggData[i].hasOwnProperty("pps_mode") && aggData[i]["pps_mode"] === "audit"){
+          if(aggData[i]["active"])
+          {
             totalAudit++;
+          }
         }
         else if(aggData[i].hasOwnProperty("pps_mode") && aggData[i]["pps_mode"] === "pick"){
+          if(aggData[i]["active"])
+          {
             totalPick++;
+          }
         }        
       }
       return {

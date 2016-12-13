@@ -101,6 +101,13 @@ export const wsOverviewData = {
                     "data": "header",
                     "callback": []
                   }
+                },
+                {
+                  "resource_id": "audit_agg",
+                  "details": {
+                    "data": "aggregate_v2",
+                    "callback": []
+                  }
                 }
         ]
 },
@@ -114,7 +121,55 @@ export const wsOverviewData = {
                     "callback": []
                   }
                 },
-                
+                {
+                  "resource_id": "audit",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "overview",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "orders",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "users",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "inventory_today",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "status",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "system",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                }
           ]
 },
 "system":{
@@ -124,6 +179,55 @@ export const wsOverviewData = {
                   "resource_id": "butlers",
                   "details": {
                     "data": "complete_v2",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "audit",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "overview",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "orders",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "users",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "inventory_today",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "status",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "system",
+                  "details": {
+                    "data": "header",
                     "callback": []
                   }
                 }
@@ -138,6 +242,55 @@ export const wsOverviewData = {
                     "data": "complete_v2",
                     "callback": []
                   }
+                },
+                {
+                  "resource_id": "audit",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "overview",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "orders",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "users",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "inventory_today",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "status",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "system",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
                 }
           ]
 },
@@ -150,7 +303,56 @@ export const wsOverviewData = {
                     "data": "complete_v2",
                     "callback": []
                   }
-            }
+            },
+                {
+                  "resource_id": "audit",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "overview",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "orders",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "users",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "inventory_today",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "status",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "system",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                }
 		]
 },
 "notification":{
@@ -162,7 +364,56 @@ export const wsOverviewData = {
                     "data": "complete_v2",
                     "callback": []
                   }
-            }
+            },
+                {
+                  "resource_id": "audit",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "overview",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "orders",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "users",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "inventory_today",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "status",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "system",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                }
 		]
 },
 "butlerbots":{
@@ -174,7 +425,56 @@ export const wsOverviewData = {
                     "data": "complete_v2",
                     "callback": []
                   }
-            }
+            },
+                {
+                  "resource_id": "audit",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "overview",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "orders",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "users",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "inventory_today",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "status",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "system",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                }
 		]
 },
 
@@ -196,6 +496,55 @@ export const wsOverviewData = {
                     "data": "complete_v2",
                     "callback": []
                   }
+                },
+                {
+                  "resource_id": "audit",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "overview",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "orders",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "users",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "inventory_today",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "status",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "system",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
                 }
                 
           ]
@@ -210,7 +559,55 @@ export const wsOverviewData = {
                     "callback": []
                   }
                 },
-                
+                {
+                  "resource_id": "audit",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "overview",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "orders",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "users",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "inventory_today",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "status",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "system",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                }
           ]
 },
 
@@ -224,7 +621,55 @@ export const wsOverviewData = {
                     "callback": []
                   }
                 },
-                
+                {
+                  "resource_id": "audit",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "overview",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "orders",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "users",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "inventory_today",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "status",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "system",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                }
           ]
 }
 }
