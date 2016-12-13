@@ -64,7 +64,7 @@ class Tabs extends React.Component{
     });
   }
   componentWillReceiveProps(nextProps){
-    if(nextProps.system_emergency != this.props.system_emergency)
+    if(nextProps.system_emergency && nextProps.system_emergency != this.props.system_emergency)
     {
       this._emergencyModal(nextProps.system_data);
     }
