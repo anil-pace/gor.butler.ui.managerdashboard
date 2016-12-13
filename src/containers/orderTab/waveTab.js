@@ -7,6 +7,7 @@ import { setWavesSpinner } from '../../actions/spinnerAction';
 import {GOR_PENDING,GOR_PROGRESS} from '../../constants/frontEndConstants';
 import {stringConfig} from '../../constants/backEndConstants';
 import { defineMessages } from 'react-intl';
+import { waveHeaderSort,waveHeaderSortOrder } from '../../actions/sortHeaderActions';
 
 //Mesages for internationalization
 const messages = defineMessages({
@@ -30,8 +31,8 @@ class WaveTab extends React.Component{
   let WAVE, waveId;
 
 
-  var status = {"in_progress":"progress", "completed":"completed", "Breached":"breached", "Pending":"pending" };
-  var priStatus = {"In Progress": 2, "Completed": 4, "Breached":1 ,"Pending":3};
+  var status = {"in_progress":"progress", "completed":"completed", "breached":"breached", "pending":"pending" };
+  var priStatus = {"in_progress": 2, "completed": 4, "breached":1 ,"pending":3};
   var timeOffset = this.props.timeOffset;
   if(data) {
      for (var i =data.length - 1; i >= 0; i--) {
@@ -47,7 +48,7 @@ class WaveTab extends React.Component{
         waveDetail.startTime = "--";
       }
       else {
-        waveDetail.startTime = nProps.context.intl.formatDate(data[i].startTime,
+        waveDetail.startTime = nProps.context.intl.formatDate(data[i].start_time,
                                 {timeZone:timeOffset,
                                   year:'numeric',
                                   month:'short',
@@ -62,7 +63,7 @@ class WaveTab extends React.Component{
         waveDetail.cutOffTime = "--";
       }
       else {
-        waveDetail.cutOffTime = nProps.context.intl.formatDate(data[i].cutOffTime,
+        waveDetail.cutOffTime = nProps.context.intl.formatDate(data[i].cut_off_time,
                                 {timeZone:timeOffset,
                                   year:'numeric',
                                   month:'short',
@@ -122,7 +123,7 @@ class WaveTab extends React.Component{
 return (
 <div className="gorTesting">
 <Spinner isLoading={this.props.wavesSpinner} setSpinner={this.props.setWavesSpinner}/>
-<WavesTable items={waveData} itemNumber={itemNumber} waveState={waveState} intlMessg={this.props.intlMessages}/>
+<WavesTable items={waveData} itemNumber={itemNumber} waveState={waveState} intlMessg={this.props.intlMessages} sortHeaderState={this.props.waveHeaderSort} sortHeaderOrder={this.props.waveHeaderSortOrder} currentSortState={this.props.waveSortHeader} currentHeaderOrder={this.props.waveSortHeaderState}/>
 </div>
 );
 }
@@ -131,7 +132,8 @@ return (
 
 function mapStateToProps(state, ownProps){
   return {
-
+    waveSortHeader: state.sortHeaderState.waveHeaderSort || "id" ,
+    waveSortHeaderState: state.sortHeaderState.waveHeaderSortOrder || "ASC",
     wavesSpinner: state.spinner.wavesSpinner || false,
     filterOptions: state.filterOptions || {},
     waveDetail: state.waveInfo || {},
@@ -142,10 +144,12 @@ function mapStateToProps(state, ownProps){
   };
 };
 
-function mapDispatchToProps(dispath){
+var mapDispatchToProps = function(dispatch){
   return{
-    setWavesSpinner: function(data){dispatch(setWavesSpinner(data))}
-  }
+    setWavesSpinner: function(data){dispatch(setWavesSpinner(data))},
+    waveHeaderSort: function(data){dispatch(waveHeaderSort(data))},
+    waveHeaderSortOrder: function(data){dispatch(waveHeaderSortOrder(data))}
+  };
 }
 
 WaveTab.contextTypes ={
