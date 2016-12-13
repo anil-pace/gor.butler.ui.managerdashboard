@@ -23,8 +23,8 @@ class AuditStatusWidget extends React.Component{
 	 	var lowStr,valueLeftStatus='',
 	 	auditData = Object.assign({},this.props.auditData),
 	 	totalAudit = this.props.ppsData ? this.props.ppsData.totalAudit : 0,
-		auditThroughput = this.props.throughputData ? this.props.throughputData.audit_throughput : null,
-		value = auditData.total_audited ? auditData.total_audited : null ,
+		auditThroughput = this.props.throughputData ? this.props.throughputData.audit_throughput : 0,
+		value = auditData.total_audited ? auditData.total_audited : 0 ,
 		pluralMsg;
 		totalAudit=<FormattedNumber value={totalAudit}/>;
 		//Setting display values based on server values/mock
@@ -41,15 +41,10 @@ class AuditStatusWidget extends React.Component{
 		else{
 			value = <FormattedNumber value={value}/>
 			auditThroughput = <FormattedNumber value={auditThroughput}/>
-			
-			
 			lowStr = <FormattedMessage id="widget.audit.throughput" description='Throughput message' 
-        					defaultMessage='{count,number} {count, plural,
-                      one {PPS}
-                      other {PPS}
-                    } auditing {throughput} items/hr'
+        					defaultMessage="{pps_count} PPS auditing {throughput} items/hr"
         					values={{
-						        count: totalAudit,
+						        pps_count: totalAudit,
 						        throughput:auditThroughput
 						    }}/>;
 		}

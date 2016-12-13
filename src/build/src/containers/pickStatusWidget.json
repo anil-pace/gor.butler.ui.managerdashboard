@@ -32,7 +32,7 @@
   {
     "id": "widget.pick.lowright",
     "description": "Estimated time",
-    "defaultMessage": "Completing in {eta}"
+    "defaultMessage": "Estimated to complete in {eta}"
   },
   {
     "id": "widget.pick.statusleft.onschedule",
