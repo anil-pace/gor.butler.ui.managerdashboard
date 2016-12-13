@@ -276,7 +276,7 @@
   {
     "id": "stringConfig.pending",
     "description": "Text to show pending",
-    "defaultMessage": "pending"
+    "defaultMessage": "In Progress"
   },
   {
     "id": "stringConfig.disconnected",
@@ -331,7 +331,7 @@
   {
     "id": "stringConfig.notFulfillable",
     "description": "Text to show In progress",
-    "defaultMessage": "In Progress"
+    "defaultMessage": "Unfulfillable"
   },
   {
     "id": "stringConfig.exception",
@@ -356,7 +356,7 @@
   {
     "id": "stringConfig.cancelled",
     "description": "Text to show cancelled",
-    "defaultMessage": "In Progress"
+    "defaultMessage": "Cancelled"
   },
   {
     "id": "stringConfig.butler_supervisor",
@@ -372,6 +372,11 @@
     "id": "stringConfig.admin",
     "description": "Text to show admin",
     "defaultMessage": "--"
+  },
+  {
+    "id": "stringConfig.temporary_unfulfillable",
+    "description": "Text for temporary unfulfillable status",
+    "defaultMessage": "Temporary Unfulfillable"
   },
   {
     "id": "login.lang.english",
@@ -644,19 +649,19 @@
     "defaultMessage": "None"
   },
   {
-    "id": "widget.audit.status.offline",
-    "description": "Offline Status",
-    "defaultMessage": "Offline"
-  },
-  {
-    "id": "widget.audit.status.starting",
-    "description": "Awaiting throughput data",
-    "defaultMessage": "Starting..."
+    "id": "widget.audit.status.idle",
+    "description": "Audit PPS idle message",
+    "defaultMessage": "{count} idle PPS (Audit mode)"
   },
   {
     "id": "widget.audit.throughput",
     "description": "Throughput message",
-    "defaultMessage": "{count, number} {count, plural, one {PPS} other {PPS}} auditing {throughput} items/hr"
+    "defaultMessage": "{pps_count} PPS auditing {throughput} items/hr"
+  },
+  {
+    "id": "widget.audit.offline",
+    "description": "Message for system offline",
+    "defaultMessage": "Offline"
   },
   {
     "id": "widget.audit.heading",
@@ -686,6 +691,16 @@
   {
     "id": "auditdetail.location.prefix",
     "defaultMessage": "Location"
+  },
+  {
+    "id": "audit.table.duplicateTask",
+    "description": "duplicateTask option for audit",
+    "defaultMessage": "Duplicate task"
+  },
+  {
+    "id": "audit.table.deleteRecord",
+    "description": "deleteRecord option for audit",
+    "defaultMessage": "Delete record"
   },
   {
     "id": "audit.table.noData",
@@ -1377,19 +1392,14 @@
     "defaultMessage": "Orders to fullfill"
   },
   {
-    "id": "widget.pick.none",
-    "description": "Text for none",
-    "defaultMessage": "None"
+    "id": "widget.pick.completed",
+    "description": "Text for completed",
+    "defaultMessage": "COMPLETED"
   },
   {
-    "id": "widget.pick.status.idle",
-    "description": "PPS Offline",
-    "defaultMessage": "Offline"
-  },
-  {
-    "id": "widget.pick.status.starting",
-    "description": "Awaiting throughput data",
-    "defaultMessage": "Starting..."
+    "id": "widget.pick.idle",
+    "description": "Pick PPS idle message",
+    "defaultMessage": "{count} idle PPS (Pick mode)"
   },
   {
     "id": "widget.pick.throughput",
@@ -1399,7 +1409,7 @@
   {
     "id": "widget.pick.lowright",
     "description": "Estimated time",
-    "defaultMessage": "Estimated to complete in {eta}}"
+    "defaultMessage": "Estimated to complete in {eta}"
   },
   {
     "id": "widget.pick.headingright",
@@ -1422,24 +1432,29 @@
     "defaultMessage": "{count_risk} {count_risk, plural, one {order} other {orders}} at risk"
   },
   {
+    "id": "widget.pick.offline",
+    "description": "Message for system offline",
+    "defaultMessage": "Offline"
+  },
+  {
     "id": "widget.put.heading.value",
     "description": "Total Items Stocked",
     "defaultMessage": "None"
   },
   {
-    "id": "widget.put.status.offline",
-    "description": "Offline Status",
-    "defaultMessage": "Offline"
-  },
-  {
-    "id": "widget.put.status.starting",
-    "description": "Awaiting throughput data",
-    "defaultMessage": "Starting..."
+    "id": "widget.put.status.idle",
+    "description": "Put PPS idle message",
+    "defaultMessage": "{count} idle PPS (Put mode)"
   },
   {
     "id": "widget.put.throughput",
     "description": "Throughput message",
     "defaultMessage": "{count} {pluralMsg} stocking {throughput} items/hr"
+  },
+  {
+    "id": "widget.put.offline",
+    "description": "Message for system offline",
+    "defaultMessage": "Offline"
   },
   {
     "id": "widget.put.heading",
@@ -1553,7 +1568,7 @@
   },
   {
     "id": "ButlerBotTable.locations",
-    "description": "msu mounted for ButlerBotTable",
+    "description": "msu Location for ButlerBotTable",
     "defaultMessage": "{locations} Locations"
   },
   {
@@ -1575,6 +1590,11 @@
     "id": "chargersDetail.butler.prefix",
     "description": "prefix for butler id in chargersDetail",
     "defaultMessage": "Butler - {botId}"
+  },
+  {
+    "id": "ChargingStations.table.noData",
+    "description": "No data message for ChargingStations table",
+    "defaultMessage": "No Charging Stations Found"
   },
   {
     "id": "ChargingStations.table.heading",
@@ -1675,6 +1695,11 @@
     "id": "PPS.table.auditDrop",
     "description": "audit dropdown option for PPS",
     "defaultMessage": "Audit"
+  },
+  {
+    "id": "PPStable.table.noData",
+    "description": "No data message for PPStable",
+    "defaultMessage": "No PPS Found"
   },
   {
     "id": "pps.table.heading",
