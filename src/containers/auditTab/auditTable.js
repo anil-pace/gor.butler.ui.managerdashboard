@@ -48,6 +48,11 @@ class AuditTable extends React.Component {
         lastDownMenu.style.bottom = '100%';
         lastDownMenu.style.top = 'initial';
       }
+      var firstDropDownMenu = document
+                          .querySelector('.fixedDataTableRowLayout_rowWrapper:nth-child(1) .Dropdown-menu');
+      if (firstDropDownMenu){
+        firstDropDownMenu.style.bottom = 'initial';
+      }
 
       let DOMObj = domArray[rowIndex+1];
       DOMObj.style.zIndex = "30";
@@ -72,10 +77,10 @@ class AuditTable extends React.Component {
       colSortDirs: {},
       columnWidths: {
         id: nProps.containerWidth*0.15,
-        auditTypeValue: nProps.containerWidth*0.15,
+        auditTypeValue: nProps.containerWidth*0.14,
         status: nProps.containerWidth*0.1,
         startTime: nProps.containerWidth*0.1,
-        progress: nProps.containerWidth*0.1,
+        progress: nProps.containerWidth*0.11,
         completedTime: nProps.containerWidth*0.15,
         actions: nProps.containerWidth*0.25
       }};

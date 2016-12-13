@@ -13,6 +13,7 @@ import Spinner from '../../components/spinner/Spinner';
 import { setPpsSpinner } from '../../actions/spinnerAction';
 import {stringConfig} from '../../constants/backEndConstants'
 import { defineMessages } from 'react-intl';
+import { ppsHeaderSort,ppsHeaderSortOrder } from '../../actions/sortHeaderActions';
 
 //Mesages for internationalization
 const messages = defineMessages({
@@ -122,7 +123,7 @@ class PPS extends React.Component{
 				<div>
 					<div className="gorTesting">
             <Spinner isLoading={this.props.ppsSpinner} setSpinner={this.props.setPpsSpinner}/>
-						<PPStable items={data} itemNumber={itemNumber} operatorNum={operatorNum} operationMode={operationMode} modeChange={this.props.changePPSmode} intlMessg={this.props.intlMessages}/>
+						<PPStable items={data} itemNumber={itemNumber} operatorNum={operatorNum} operationMode={operationMode} modeChange={this.props.changePPSmode} intlMessg={this.props.intlMessages} sortHeaderState={this.props.ppsHeaderSort} currentSortState={this.props.ppsSortHeader} sortHeaderOrder={this.props.ppsHeaderSortOrder} currentHeaderOrder={this.props.ppsSortHeaderState}/>
 					</div>
 				</div>
 			</div>
@@ -134,6 +135,8 @@ class PPS extends React.Component{
 
 function mapStateToProps(state, ownProps){
   return {
+    ppsSortHeader: state.sortHeaderState.ppsHeaderSort || "id" ,
+    ppsSortHeaderState: state.sortHeaderState.ppsHeaderSortOrder || "ASC",
     ppsSpinner: state.spinner.ppsSpinner || false,
     PPSDetail: state.PPSDetail || [],
     intlMessages: state.intl.messages
@@ -143,7 +146,9 @@ function mapStateToProps(state, ownProps){
 var mapDispatchToProps = function(dispatch){
   return {
     changePPSmode: function(data){ dispatch(changePPSmode(data)); },
-    setPpsSpinner: function(data){ dispatch(setPpsSpinner(data))}
+    setPpsSpinner: function(data){ dispatch(setPpsSpinner(data))},
+    ppsHeaderSort: function(data){dispatch(ppsHeaderSort(data))},
+    ppsHeaderSortOrder: function(data){dispatch(ppsHeaderSortOrder(data))}
   }
 };
 
