@@ -248,7 +248,7 @@ class PPStable extends React.Component {
     let audit = this.props.operationMode.audit;
     let notSet = this.props.operationMode.notSet;
     let operatorNum =  this.props.operatorNum, j=1;
-    if(this.props.getDropRender===true) {
+    if(this.props.bDropRender===true) {
       drop = <DropdownTable  styleClass={'gorDataTableDrop'} placeholder={this.props.intlMessg["pps.dropdown.placeholder"]} items={modes} changeMode={this.handleModeChange.bind(this)}/>;
     }
 

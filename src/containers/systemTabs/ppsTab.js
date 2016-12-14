@@ -131,7 +131,7 @@ class PPS extends React.Component{
              sortHeaderOrder={this.props.ppsHeaderSortOrder} currentHeaderOrder={this.props.ppsSortHeaderState} 
              setCheckedPps={this.props.setCheckedPps} checkedPps={this.props.checkedPps}
              renderDdrop={this.props.setDropDisplay}
-             getDropRender = {this.props.getDropRender}
+             bDropRender = {this.props.bDropRender}
              setCheckAll = {this.props.setCheckAll}
              getCheckAll = {this.props.getCheckAll}/>
 					</div>
@@ -146,7 +146,7 @@ class PPS extends React.Component{
 function mapStateToProps(state, ownProps){
   return {
     getCheckAll: state.sortHeaderState.checkAll || false,
-    getDropRender: state.sortHeaderState.renderDropD || false,
+    bDropRender: state.sortHeaderState.renderDropD || false,
     checkedPps: state.sortHeaderState.checkedPps,
     ppsSortHeader: state.sortHeaderState.ppsHeaderSort || INITIAL_HEADER_SORT ,
     ppsSortHeaderState: state.sortHeaderState.ppsHeaderSortOrder || INITIAL_HEADER_ORDER,
