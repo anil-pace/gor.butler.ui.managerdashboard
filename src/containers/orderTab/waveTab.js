@@ -8,6 +8,8 @@ import {GOR_PENDING,GOR_PROGRESS} from '../../constants/frontEndConstants';
 import {stringConfig} from '../../constants/backEndConstants';
 import { defineMessages } from 'react-intl';
 import { waveHeaderSort,waveHeaderSortOrder } from '../../actions/sortHeaderActions';
+import {INITIAL_HEADER_SORT,INITIAL_HEADER_ORDER} from '../../constants/frontEndConstants';
+
 
 //Mesages for internationalization
 const messages = defineMessages({
@@ -132,8 +134,8 @@ return (
 
 function mapStateToProps(state, ownProps){
   return {
-    waveSortHeader: state.sortHeaderState.waveHeaderSort || "id" ,
-    waveSortHeaderState: state.sortHeaderState.waveHeaderSortOrder || "ASC",
+    waveSortHeader: state.sortHeaderState.waveHeaderSort || INITIAL_HEADER_SORT ,
+    waveSortHeaderState: state.sortHeaderState.waveHeaderSortOrder || INITIAL_HEADER_ORDER,
     wavesSpinner: state.spinner.wavesSpinner || false,
     filterOptions: state.filterOptions || {},
     waveDetail: state.waveInfo || {},

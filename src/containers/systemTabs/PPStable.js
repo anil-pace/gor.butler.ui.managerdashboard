@@ -60,6 +60,7 @@ class PPStable extends React.Component {
     this._onSortChange = this._onSortChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+    
   }
 
   componentWillReceiveProps(nextProps) {
@@ -140,7 +141,28 @@ class PPStable extends React.Component {
     }
 
     this.setState({isChecked:checkedState});
-    this.setState({renderDropD:showDropdown});    
+    this.setState({renderDropD:showDropdown});   
+  }
+
+  
+  
+  _onSortChange(columnKey, sortDir) {
+    if(columnKey === undefined) {
+      columnKey = "id"
+    }
+
+    if(columnKey === GOR_STATUS) {
+      columnKey = GOR_STATUS_PRIORITY;
+    }
+    var sortIndexes = this._defaultSortIndexes.slice();
+    this.setState({
+      sortedDataList: new DataListWrapper(sortData(columnKey, sortDir,sortIndexes,this._dataList), this._dataList),
+      colSortDirs: {
+        [columnKey]: sortDir,
+      },
+    });
+    this.props.sortHeaderOrder(sortDir);
+    this.props.sortHeaderState(columnKey);
   }
 
   headerCheckChange() {
@@ -165,25 +187,6 @@ class PPStable extends React.Component {
     this.setState({headerChecked:false}); 
     }
      
-  }
-  
-  _onSortChange(columnKey, sortDir) {
-    if(columnKey === undefined) {
-      columnKey = "id"
-    }
-
-    if(columnKey === GOR_STATUS) {
-      columnKey = GOR_STATUS_PRIORITY;
-    }
-    var sortIndexes = this._defaultSortIndexes.slice();
-    this.setState({
-      sortedDataList: new DataListWrapper(sortData(columnKey, sortDir,sortIndexes,this._dataList), this._dataList),
-      colSortDirs: {
-        [columnKey]: sortDir,
-      },
-    });
-    this.props.sortHeaderOrder(sortDir);
-    this.props.sortHeaderState(columnKey);
   }
 
   handleModeChange(data) {
@@ -217,7 +220,9 @@ class PPStable extends React.Component {
     var resetCheck = new Array(this.state.isChecked.length).fill(false);
     this.setState({isChecked:resetCheck});
     this.setState({renderDropD:false});
-    this.setState({headerChecked:false}); 
+    this.setState({headerChecked:false});
+    
+ 
   }
 
   

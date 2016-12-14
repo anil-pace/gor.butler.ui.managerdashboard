@@ -8,6 +8,7 @@ import ButlerBotTable from './butlerbotTable';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import {stringConfig} from '../../constants/backEndConstants';
+import {INITIAL_HEADER_SORT,INITIAL_HEADER_ORDER} from '../../constants/frontEndConstants';
 import Spinner from '../../components/spinner/Spinner';
 import { setButlerSpinner } from  '../../actions/spinnerAction';
 import { butlerHeaderSort,butlerHeaderSortOrder } from '../../actions/sortHeaderActions';
@@ -153,8 +154,8 @@ class ButlerBot extends React.Component{
 
 function mapStateToProps(state, ownProps){
   return {
-    butlerSortHeader: state.sortHeaderState.butlerHeaderSort || "id" ,
-    butlerSortHeaderState: state.sortHeaderState.butlerHeaderSortOrder || "ASC",
+    butlerSortHeader: state.sortHeaderState.butlerHeaderSort || INITIAL_HEADER_SORT ,
+    butlerSortHeaderState: state.sortHeaderState.butlerHeaderSortOrder || INITIAL_HEADER_ORDER,
     butlerSpinner: state.spinner.butlerSpinner || false,
     butlerDetail: state.butlerDetail || [],
     intlMessages: state.intl.messages

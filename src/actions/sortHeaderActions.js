@@ -1,4 +1,4 @@
-import { BUTLER_HEADER_SORT ,BUTLER_HEADER_SORT_ORDER, PPS_HEADER_SORT, PPS_HEADER_SORT_ORDER, USER_HEADER_SORT, USER_HEADER_SORT_ORDER, WAVE_HEADER_SORT, WAVE_HEADER_SORT_ORDER} from '../constants/frontEndConstants'
+import { BUTLER_HEADER_SORT ,BUTLER_HEADER_SORT_ORDER, PPS_HEADER_SORT, PPS_HEADER_SORT_ORDER, USER_HEADER_SORT, USER_HEADER_SORT_ORDER, WAVE_HEADER_SORT, WAVE_HEADER_SORT_ORDER, CS_HEADER_SORT_ORDER, CS_HEADER_SORT, PPS_CHECKED} from '../constants/frontEndConstants'
 
 export function butlerHeaderSort(data){
 	return {
@@ -12,6 +12,13 @@ export function butlerHeaderSortOrder(data){
 		type: BUTLER_HEADER_SORT_ORDER,
 		data
 	}
+}
+
+export function setCheckedPps(data){
+	return {
+		type: PPS_CHECKED,
+		data
+  	}
 }
 
 export function ppsHeaderSort(data){
@@ -52,6 +59,20 @@ export function waveHeaderSort(data){
 export function waveHeaderSortOrder(data){
 	return {
 		type: WAVE_HEADER_SORT_ORDER,
+		data
+	}
+}
+
+export function csHeaderSort(data){
+	return {
+		type: CS_HEADER_SORT,
+		data
+  	}
+}
+
+export function csHeaderSortOrder(data){
+	return {
+		type: CS_HEADER_SORT_ORDER,
 		data
 	}
 }
