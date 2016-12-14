@@ -64,7 +64,9 @@ class UserDataTable extends React.Component {
     this._onSortChange = this._onSortChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
-    this._onSortChange("id","ASC");
+    if(nextProps.items.length) {
+    this._onSortChange(nextProps.currentSortState,nextProps.currentHeaderOrder);
+  }
   }
 
    _onColumnResizeEndCallback(newColumnWidth, columnKey) {
@@ -98,8 +100,8 @@ class UserDataTable extends React.Component {
         [columnKey]: sortDir,
       },
     });
-    //this.props.sortHeaderOrder(sortDir);
-   // this.props.sortHeaderState(columnKey);
+   this.props.sortHeaderOrder(sortDir);
+   this.props.sortHeaderState(columnKey);
   } 
 
 
@@ -114,7 +116,7 @@ class UserDataTable extends React.Component {
     });
   }
   handleEdit(columnKey,rowIndex) {
-    let uid, uname, fname, lname, roleId;
+    let uid, uname, fname, lname, roleId,sortedIndex;
     if(this.state.sortedDataList.newData === undefined) {
       sortedIndex = this.state.sortedDataList._indexMap[rowIndex];
       uid = this.state.sortedDataList._data.newData[sortedIndex].uid;

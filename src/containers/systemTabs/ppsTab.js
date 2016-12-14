@@ -13,7 +13,8 @@ import Spinner from '../../components/spinner/Spinner';
 import { setPpsSpinner } from '../../actions/spinnerAction';
 import {stringConfig} from '../../constants/backEndConstants'
 import { defineMessages } from 'react-intl';
-import { ppsHeaderSort,ppsHeaderSortOrder } from '../../actions/sortHeaderActions';
+import { ppsHeaderSort,ppsHeaderSortOrder, setCheckedPps } from '../../actions/sortHeaderActions';
+import {INITIAL_HEADER_SORT,INITIAL_HEADER_ORDER} from '../../constants/frontEndConstants';
 
 //Mesages for internationalization
 const messages = defineMessages({
@@ -123,7 +124,7 @@ class PPS extends React.Component{
 				<div>
 					<div className="gorTesting">
             <Spinner isLoading={this.props.ppsSpinner} setSpinner={this.props.setPpsSpinner}/>
-						<PPStable items={data} itemNumber={itemNumber} operatorNum={operatorNum} operationMode={operationMode} modeChange={this.props.changePPSmode} intlMessg={this.props.intlMessages} sortHeaderState={this.props.ppsHeaderSort} currentSortState={this.props.ppsSortHeader} sortHeaderOrder={this.props.ppsHeaderSortOrder} currentHeaderOrder={this.props.ppsSortHeaderState}/>
+						<PPStable items={data} itemNumber={itemNumber} operatorNum={operatorNum} operationMode={operationMode} modeChange={this.props.changePPSmode} intlMessg={this.props.intlMessages} sortHeaderState={this.props.ppsHeaderSort} currentSortState={this.props.ppsSortHeader} sortHeaderOrder={this.props.ppsHeaderSortOrder} currentHeaderOrder={this.props.ppsSortHeaderState} setCheckedPps={this.props.setCheckedPps} getPpsState={this.props.getPpsState}/>
 					</div>
 				</div>
 			</div>
@@ -134,9 +135,11 @@ class PPS extends React.Component{
 
 
 function mapStateToProps(state, ownProps){
+  
   return {
-    ppsSortHeader: state.sortHeaderState.ppsHeaderSort || "id" ,
-    ppsSortHeaderState: state.sortHeaderState.ppsHeaderSortOrder || "ASC",
+    getPpsState: state.sortHeaderState.checkedPps,
+    ppsSortHeader: state.sortHeaderState.ppsHeaderSort || INITIAL_HEADER_SORT ,
+    ppsSortHeaderState: state.sortHeaderState.ppsHeaderSortOrder || INITIAL_HEADER_ORDER,
     ppsSpinner: state.spinner.ppsSpinner || false,
     PPSDetail: state.PPSDetail || [],
     intlMessages: state.intl.messages
@@ -148,7 +151,8 @@ var mapDispatchToProps = function(dispatch){
     changePPSmode: function(data){ dispatch(changePPSmode(data)); },
     setPpsSpinner: function(data){ dispatch(setPpsSpinner(data))},
     ppsHeaderSort: function(data){dispatch(ppsHeaderSort(data))},
-    ppsHeaderSortOrder: function(data){dispatch(ppsHeaderSortOrder(data))}
+    ppsHeaderSortOrder: function(data){dispatch(ppsHeaderSortOrder(data))},
+    setCheckedPps: function(data){dispatch(setCheckedPps(data))}
   }
 };
 

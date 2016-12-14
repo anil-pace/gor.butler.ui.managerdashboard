@@ -337,11 +337,17 @@ export const REMOVE_ICON='gor-remove-white';
 export const ERROR_WHITE='gor-error-white';
 
 //Sort header constants
+export const INITIAL_HEADER_SORT = "id";
+export const INITIAL_HEADER_ORDER = "DESC";
 export const BUTLER_HEADER_SORT = "BUTLER_HEADER_SORT";
 export const BUTLER_HEADER_SORT_ORDER = "BUTLER_HEADER_SORT_ORDER";
+export const PPS_CHECKED = "PPS_CHECKED";
 export const PPS_HEADER_SORT = "PPS_HEADER_SORT";
 export const PPS_HEADER_SORT_ORDER = "PPS_HEADER_SORT_ORDER";
 export const USER_HEADER_SORT = "USER_HEADER_SORT";
 export const USER_HEADER_SORT_ORDER = "USER_HEADER_SORT_ORDER";
 export const WAVE_HEADER_SORT = "WAVE_HEADER_SORT";
 export const WAVE_HEADER_SORT_ORDER = "WAVE_HEADER_SORT_ORDER";
+export const CS_HEADER_SORT = "CS_HEADER_SORT";
+export const CS_HEADER_SORT_ORDER = "CS_HEADER_SORT_ORDER";
+
