@@ -13,7 +13,7 @@ import Spinner from '../../components/spinner/Spinner';
 import { setPpsSpinner } from '../../actions/spinnerAction';
 import {stringConfig} from '../../constants/backEndConstants'
 import { defineMessages } from 'react-intl';
-import { ppsHeaderSort,ppsHeaderSortOrder, setCheckedPps } from '../../actions/sortHeaderActions';
+import { ppsHeaderSort,ppsHeaderSortOrder, setCheckedPps,setDropDisplay ,setCheckAll} from '../../actions/sortHeaderActions';
 import {INITIAL_HEADER_SORT,INITIAL_HEADER_ORDER} from '../../constants/frontEndConstants';
 
 //Mesages for internationalization
@@ -37,6 +37,7 @@ class PPS extends React.Component{
 	constructor(props) 
 	{
     	super(props);
+      
     }	
 
   _processPPSData() {
@@ -124,7 +125,15 @@ class PPS extends React.Component{
 				<div>
 					<div className="gorTesting">
             <Spinner isLoading={this.props.ppsSpinner} setSpinner={this.props.setPpsSpinner}/>
-						<PPStable items={data} itemNumber={itemNumber} operatorNum={operatorNum} operationMode={operationMode} modeChange={this.props.changePPSmode} intlMessg={this.props.intlMessages} sortHeaderState={this.props.ppsHeaderSort} currentSortState={this.props.ppsSortHeader} sortHeaderOrder={this.props.ppsHeaderSortOrder} currentHeaderOrder={this.props.ppsSortHeaderState} setCheckedPps={this.props.setCheckedPps} getPpsState={this.props.getPpsState}/>
+						<PPStable items={data} itemNumber={itemNumber} operatorNum={operatorNum} operationMode={operationMode}
+             modeChange={this.props.changePPSmode} intlMessg={this.props.intlMessages} 
+             sortHeaderState={this.props.ppsHeaderSort} currentSortState={this.props.ppsSortHeader} 
+             sortHeaderOrder={this.props.ppsHeaderSortOrder} currentHeaderOrder={this.props.ppsSortHeaderState} 
+             setCheckedPps={this.props.setCheckedPps} checkedPps={this.props.checkedPps}
+             renderDdrop={this.props.setDropDisplay}
+             bDropRender = {this.props.bDropRender}
+             setCheckAll = {this.props.setCheckAll}
+             getCheckAll = {this.props.getCheckAll}/>
 					</div>
 				</div>
 			</div>
@@ -135,9 +144,10 @@ class PPS extends React.Component{
 
 
 function mapStateToProps(state, ownProps){
-  
   return {
-    getPpsState: state.sortHeaderState.checkedPps,
+    getCheckAll: state.sortHeaderState.checkAll || false,
+    bDropRender: state.sortHeaderState.renderDropD || false,
+    checkedPps: state.sortHeaderState.checkedPps,
     ppsSortHeader: state.sortHeaderState.ppsHeaderSort || INITIAL_HEADER_SORT ,
     ppsSortHeaderState: state.sortHeaderState.ppsHeaderSortOrder || INITIAL_HEADER_ORDER,
     ppsSpinner: state.spinner.ppsSpinner || false,
@@ -152,7 +162,9 @@ var mapDispatchToProps = function(dispatch){
     setPpsSpinner: function(data){ dispatch(setPpsSpinner(data))},
     ppsHeaderSort: function(data){dispatch(ppsHeaderSort(data))},
     ppsHeaderSortOrder: function(data){dispatch(ppsHeaderSortOrder(data))},
-    setCheckedPps: function(data){dispatch(setCheckedPps(data))}
+    setCheckedPps: function(data){dispatch(setCheckedPps(data))},
+    setDropDisplay: function(data){dispatch(setDropDisplay(data))},
+    setCheckAll: function(data) {dispatch(setCheckAll(data))}
   }
 };
 
