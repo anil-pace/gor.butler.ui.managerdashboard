@@ -132,7 +132,7 @@ class PPStable extends React.Component {
     
     var showDropdown=false, ppsSelected;
     
-    var checkedState=JSON.parse(JSON.stringify(this.props.checkedPps));
+    var checkedState=this.props.checkedPps.slice();
     if(checkedState[rowIndex] === true) {
       checkedState[rowIndex] = false;
     }
