@@ -12,6 +12,8 @@ import Spinner from '../../components/spinner/Spinner';
 import { setCsSpinner } from '../../actions/spinnerAction';
 import {stringConfig} from '../../constants/backEndConstants';
 import { defineMessages } from 'react-intl';
+import {INITIAL_HEADER_SORT,INITIAL_HEADER_ORDER} from '../../constants/frontEndConstants';
+import { csHeaderSort,csHeaderSortOrder } from '../../actions/sortHeaderActions';
 
 //Mesages for internationalization
 const messages = defineMessages({
@@ -94,7 +96,7 @@ class ChargingStations extends React.Component{
 				<div>
 					<div className="gorTesting">
           <Spinner isLoading={this.props.csSpinner} setSpinner={this.props.setCsSpinner} />
-						<ChargingStationsTable items={chargersData} itemNumber={itemNumber} chargersState={chargersState} intlMessg={this.props.intlMessages}/>
+						<ChargingStationsTable items={chargersData} itemNumber={itemNumber} chargersState={chargersState} intlMessg={this.props.intlMessages} sortHeaderState={this.props.csHeaderSort} currentSortState={this.props.csSortHeader} sortHeaderOrder={this.props.csHeaderSortOrder} currentHeaderOrder={this.props.csSortHeaderState}/>
 					</div>
 				</div>
 			</div>
@@ -103,18 +105,24 @@ class ChargingStations extends React.Component{
 };
 
 function mapStateToProps(state, ownProps){
+  
   return {
+    csSortHeader: state.sortHeaderState.csHeaderSort || INITIAL_HEADER_SORT ,
+    csSortHeaderState: state.sortHeaderState.csHeaderSortOrder || INITIAL_HEADER_ORDER,
     csSpinner: state.spinner.csSpinner || false,
     chargersDetail: state.chargersDetail || [],
     intlMessages: state.intl.messages
   };
 }
 
-function mapDispatchToProps(dispatch){
+var mapDispatchToProps = function(dispatch){
   return{
-    setCsSpinner: function(data){ dispatch(setCsSpinner(data));}
-  }
+    setCsSpinner: function(data){ dispatch(setCsSpinner(data));},
+    csHeaderSort: function(data){dispatch(csHeaderSort(data))},
+    csHeaderSortOrder: function(data){dispatch(csHeaderSortOrder(data))}
+  };
 }
+
 ChargingStations.contextTypes ={
  intl:React.PropTypes.object.isRequired
 }

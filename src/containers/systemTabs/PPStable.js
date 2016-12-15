@@ -60,6 +60,7 @@ class PPStable extends React.Component {
     this._onSortChange = this._onSortChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+    
   }
 
   componentWillReceiveProps(nextProps) {
@@ -79,7 +80,10 @@ class PPStable extends React.Component {
       this._defaultSortIndexes.push(index);
     }
     var columnWidth= (nextProps.containerWidth/nextProps.itemNumber)
-    
+    if(!this.props.checkedPps && nextProps.items) {
+      var data1 =  new Array(nextProps.items.length).fill(false);
+      this.props.setCheckedPps(data1)
+    }
     this.state = {
       sortedDataList: this._dataList,
       colSortDirs: {},
@@ -93,12 +97,16 @@ class PPStable extends React.Component {
 
       },
       headerChecked: false,
-      isChecked:temp,
+      isChecked:this.props.checkedPps,
       renderDropD: false,
     };
+    
+
     this._onSortChange = this._onSortChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+    this._onSortChange(nextProps.currentSortState,nextProps.currentHeaderOrder);
+
   }
 
    _onColumnResizeEndCallback(newColumnWidth, columnKey) {
@@ -124,7 +132,7 @@ class PPStable extends React.Component {
     
     var showDropdown=false, ppsSelected;
     
-    var checkedState=this.state.isChecked;
+    var checkedState=this.props.checkedPps.slice();
     if(checkedState[rowIndex] === true) {
       checkedState[rowIndex] = false;
     }
@@ -137,34 +145,11 @@ class PPStable extends React.Component {
         break;
       }
     }
-
-    this.setState({isChecked:checkedState});
-    this.setState({renderDropD:showDropdown});    
+    this.props.setCheckedPps(checkedState) 
+    this.props.renderDdrop(showDropdown);
   }
 
-  headerCheckChange() {
-    var checkedAllState=this.state.isChecked,showDropdown,headerState = this.state.headerChecked;
-    if(headerState === false) {
-    for (var i = checkedAllState.length - 1; i >= 0; i--) {
-      checkedAllState[i] = true;
-    }
-    showDropdown=true;
-    this.setState({isChecked:checkedAllState});
-    this.setState({renderDropD:showDropdown});
-    this.setState({headerChecked:true}); 
-    }
-
-    else {
-      for (var i = checkedAllState.length - 1; i >= 0; i--) {
-      checkedAllState[i] = false;
-    }
-    showDropdown=false;
-    this.setState({isChecked:checkedAllState});
-    this.setState({renderDropD:showDropdown});
-    this.setState({headerChecked:false}); 
-    }
-     
-  }
+  
   
   _onSortChange(columnKey, sortDir) {
     if(columnKey === undefined) {
@@ -181,17 +166,43 @@ class PPStable extends React.Component {
         [columnKey]: sortDir,
       },
     });
+    this.props.sortHeaderOrder(sortDir);
+    this.props.sortHeaderState(columnKey);
+  }
+
+  headerCheckChange() {
+    var checkedAllState=this.props.checkedPps,showDropdown,headerState = this.props.getCheckAll;
+    if(headerState === false) {
+    for (var i = checkedAllState.length - 1; i >= 0; i--) {
+      checkedAllState[i] = true;
+    }
+    showDropdown=true;
+    this.props.setCheckedPps(checkedAllState);
+    this.props.renderDdrop(showDropdown);
+    this.props.setCheckAll(true);
+    }
+
+    else {
+      for (var i = checkedAllState.length - 1; i >= 0; i--) {
+      checkedAllState[i] = false;
+    }
+    showDropdown=false;
+    this.props.setCheckedPps(checkedAllState);
+    this.props.renderDdrop(showDropdown);
+    this.props.setCheckAll(false);
+    }
+     
   }
 
   handleModeChange(data) {
     var checkedPPS=[], j=0, mode=data.value, sortedIndex;
-    for (var i = this.state.isChecked.length - 1; i >= 0; i--) {
-      if(this.state.isChecked[i] === true) {
+    for (var i = this.props.checkedPps.length - 1; i >= 0; i--) {
+      if(this.props.checkedPps[i] === true) {
         if(this.state.sortedDataList.newData !== undefined) {
          checkedPPS[j] = this.state.sortedDataList.newData[i].ppsId;
         }
         else {
-          sortedIndex = this.state.sortedDataList._indexMap[j];
+          sortedIndex = this.state.sortedDataList._indexMap[i];
           checkedPPS[j] = this.state.sortedDataList._data.newData[sortedIndex].ppsId;
         }
         let formdata={         
@@ -211,15 +222,16 @@ class PPStable extends React.Component {
         j++;
       }
     }
-    var resetCheck = new Array(this.state.isChecked.length).fill(false);
-    this.setState({isChecked:resetCheck});
-    this.setState({renderDropD:false});
-    this.setState({headerChecked:false}); 
+    var resetCheck = new Array(this.props.checkedPps.length).fill(false);
+    this.props.setCheckAll(false);
+    this.props.renderDdrop(false);
+    this.props.setCheckedPps(resetCheck);
+ 
   }
 
   
   render() {
-    var {sortedDataList, colSortDirs,columnWidths,isChecked,renderDropD, ppsSelected,headerChecked} = this.state, checkedPPS = [];
+    var {sortedDataList, colSortDirs,columnWidths,renderDropD, ppsSelected,headerChecked} = this.state, checkedPPS = [];
     let pickDrop = <FormattedMessage id="PPS.table.pickDrop" description="pick dropdown option for PPS" defaultMessage ="Put"/> 
     let putDrop = <FormattedMessage id="PPS.table.putDrop" description="put dropdown option for PPS" defaultMessage ="Pick"/> 
     let auditDrop = <FormattedMessage id="PPS.table.auditDrop" description="audit dropdown option for PPS" defaultMessage ="Audit"/> 
@@ -231,24 +243,25 @@ class PPStable extends React.Component {
     ];
     var checkState = this.handleChange.bind(this);
     var drop, selected =0, ppsTotal = sortedDataList.getSize();
-    let pick = this.props.operationMode.Pick;
-    let put = this.props.operationMode.Put;
-    let audit = this.props.operationMode.Audit;
-    let notSet = this.props.operationMode.NotSet;
+    let pick = this.props.operationMode.pick;
+    let put = this.props.operationMode.put;
+    let audit = this.props.operationMode.audit;
+    let notSet = this.props.operationMode.notSet;
     let operatorNum =  this.props.operatorNum, j=1;
-    if(this.state.renderDropD===true) {
+    if(this.props.bDropRender===true) {
       drop = <DropdownTable  styleClass={'gorDataTableDrop'} placeholder={this.props.intlMessg["pps.dropdown.placeholder"]} items={modes} changeMode={this.handleModeChange.bind(this)}/>;
     }
 
     else {
       drop = <div/>;
     }
-    for (var i = this.state.isChecked.length - 1; i >= 0; i--) {
-      if(this.state.isChecked[i] === true) {
-        selected = selected + 1;
+    if(this.props.checkedPps) {
+      for (var i = this.props.checkedPps.length - 1; i >= 0; i--) {
+        if(this.props.checkedPps[i] === true) {
+          selected = selected + 1;
+        }
       }
     }
-
     var containerHeight = this.props.containerHeight;
     var noData = <div/>;
     if(ppsTotal === 0 || ppsTotal === undefined || ppsTotal === null) {
@@ -299,7 +312,7 @@ class PPStable extends React.Component {
           header={
             <div>
             <div className="gor-header-check">
-              <input type="checkbox" checked={this.state.headerChecked} onChange={this.headerCheckChange.bind(this)}/>
+              <input type="checkbox" checked={this.props.getCheckAll} onChange={this.headerCheckChange.bind(this)}/>
             </div>
             <div className="gor-header-id">
               <SortHeaderCell onSortChange={this._onSortChange} 
@@ -317,7 +330,7 @@ class PPStable extends React.Component {
             </div>
             </div>
           }
-          cell={  <ComponentCell data={sortedDataList} checkState={checkState} checked={this.state.isChecked} />}
+          cell={  <ComponentCell data={sortedDataList} checkState={checkState} checked={this.props.checkedPps} />}
           fixed={true}
           width={columnWidths.id}
           isResizable={true}

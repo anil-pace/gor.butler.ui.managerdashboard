@@ -13,46 +13,59 @@ import {GOR_STATUS,GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT} from '../../con
 class ChargingStationsTable extends React.Component {
   constructor(props) {
     super(props);
-    this.tableState(this.props,this);
+    var items = this.props.items || [];
+    var temp = new Array(items ? items.length : 0).fill(false);
+    this._dataList = new tableRenderer(items ? items.length : 0);
+    this._defaultSortIndexes = [];
+    this._dataList.newData=items;
+    var size = this._dataList.getSize();
+    for (var index = 0; index < size; index++) {
+      this._defaultSortIndexes.push(index);
+    }
+    var columnWidth= (this.props.containerWidth/this.props.itemNumber);
+    this.state = {
+      sortedDataList: this._dataList,
+      colSortDirs: {},
+      columnWidths: {
+         id: this.props.containerWidth*0.15,
+        status: this.props.containerWidth*0.1,
+        mode: this.props.containerWidth*0.15,
+        dockedBots: this.props.containerWidth*0.6
+      },
+    };
     this._onSortChange = this._onSortChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    this.tableState(nextProps,this);
-    if(nextProps.items !== undefined && tempGlobal === 0) {
-      tempGlobal = 1;
-    } 
-  }
-
-  componentDidMount() {
-    this.props.currentTableState(this.tableState(this.props, this));    
-  }
-
-   componentWillUnmount() {
-    tempGlobal = 1;
-   }
-
-  tableState(nProps, current) {
-    var items = nProps.items || [];
-    current._dataList = new tableRenderer(items ? items.length : 0);
-    current._defaultSortIndexes = [];
-    current._dataList.newData=items;
-    var size = current._dataList.getSize();
+    var items = nextProps.items || [];
+    var temp = new Array(items ? items.length : 0).fill(false);
+    this._dataList = new tableRenderer(items ? items.length : 0);
+    this._defaultSortIndexes = [];
+    this._dataList.newData=items;
+    var size = this._dataList.getSize();
     for (var index = 0; index < size; index++) {
-      current._defaultSortIndexes.push(index);
+      this._defaultSortIndexes.push(index);
     }
-    var tableData = {sortedDataList: current._dataList,
+    var columnWidth= (nextProps.containerWidth/nextProps.itemNumber)
+    this.state = {
+      sortedDataList: this._dataList,
       colSortDirs: {},
       columnWidths: {
-        id: nProps.containerWidth*0.15,
-        status: nProps.containerWidth*0.1,
-        mode: nProps.containerWidth*0.15,
-        dockedBots: nProps.containerWidth*0.6
-      }};
-      return tableData;
+         id: nextProps.containerWidth*0.15,
+        status: nextProps.containerWidth*0.1,
+        mode: nextProps.containerWidth*0.15,
+        dockedBots: nextProps.containerWidth*0.6
+      },
+    };
+    this._onSortChange = this._onSortChange.bind(this);
+    this._onFilterChange = this._onFilterChange.bind(this);
+    this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+    this._onSortChange(nextProps.currentSortState,nextProps.currentHeaderOrder);
   }
+
+
 
      _onColumnResizeEndCallback(newColumnWidth, columnKey) {
     this.setState(({columnWidths}) => ({
@@ -64,43 +77,36 @@ class ChargingStationsTable extends React.Component {
   }
   _onFilterChange(e) {
     if (!e.target.value) {
-      var tableData={
-      sortedDataList: this._dataList,
-      colSortDirs: this.props.tableData.colSortDirs,
-      columnWidths: this.props.tableData.columnWidths,
-      };
+      this.setState({
+        sortedDataList: this._dataList,
+      });
     }
     var filterField = ["mode","id","status","dockedBots"];
-    var tableData={
+    this.setState({
       sortedDataList: new DataListWrapper(filterIndex(e,this._dataList,filterField), this._dataList),
-      colSortDirs: this.props.tableData.colSortDirs,
-      columnWidths: this.props.tableData.columnWidths,
-      };
-    this.props.currentTableState(tableData);
+    });
   }
   
   
   _onSortChange(columnKey, sortDir) {
     
-    if(columnKey === GOR_STATUS) {
+   if(columnKey === GOR_STATUS) {
       columnKey = GOR_STATUS_PRIORITY;
     }
     var sortIndexes = this._defaultSortIndexes.slice();
-    var tableData={
+    this.setState({
       sortedDataList: new DataListWrapper(sortData(columnKey, sortDir,sortIndexes,this._dataList), this._dataList),
-      colSortDirs: {[columnKey]: sortDir},
-      columnWidths: this.props.tableData.columnWidths,
-    };
-    this.props.currentTableState(tableData)
+      colSortDirs: {
+        [columnKey]: sortDir,
+      },
+    });
+     this.props.sortHeaderOrder(sortDir);
+     this.props.sortHeaderState(columnKey);
   }
+
   render() {
     
-    var sortedDataList = this._dataList
-    if(this.props.tableData.sortedDataList !== undefined && this.props.tableData.sortedDataList._data !== undefined) {
-      sortedDataList = this.props.tableData.sortedDataList;
-    }
-    var colSortDirs = this.props.tableData.colSortDirs;
-    var columnWidths = this.props.tableData.columnWidths;
+    var {sortedDataList, colSortDirs,columnWidths} = this.state;
     var rowsCount = sortedDataList.getSize();
     let manual = this.props.chargersState.manualMode;
     let auto = this.props.chargersState.automaticMode;
@@ -114,9 +120,7 @@ class ChargingStationsTable extends React.Component {
      containerHeight = GOR_TABLE_HEADER_HEIGHT;
     }
 
-    var tableRenderer = <div/>
-    if(this.props.tableData.length !== 0 ) {
-       tableRenderer = <div className="gorTableMainContainer">
+    var tableRenderer = <div className="gorTableMainContainer">
         <div className="gorToolBar">
           <div className="gorToolBarWrap">
             <div className="gorToolBarElements">
@@ -236,24 +240,13 @@ class ChargingStationsTable extends React.Component {
       <div > {noData} </div>
       </div>
     
-  }
+  
     return (
       <div> {tableRenderer} </div>
     );
   }
 }
 
-function mapStateToProps(state, ownProps){
-  return {
-    tableData: state.currentTableState.currentTableState || [],
-  };
-}
 
 
-var mapDispatchToProps = function(dispatch){
-  return {
-    currentTableState: function(data){ dispatch(currentTableState(data)); }
-  }
-};
-
-export default connect(mapStateToProps,mapDispatchToProps)(Dimensions()(ChargingStationsTable));
+export default (Dimensions()(ChargingStationsTable));

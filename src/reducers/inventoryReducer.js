@@ -30,7 +30,7 @@ import * as mockData from '../../mock/mockDBData'
     }
     categoryData.push(calculatedInvData);
     parsedDate = new Date(inventory[i].date);
-    inventory[i].date = parsedDate.getFullYear() +"-"+(parsedDate.getMonth()+1)+"-"+parsedDate.getDate();
+    inventory[i].date = parsedDate.getFullYear() +"-"+(parsedDate.getMonth()+1)+"-"+("0" + parsedDate.getDate()).slice(-2);
     recreatedData[Date.parse(inventory[i].date)] = inventory[i];
   }
   //Adding the inventory today to inventory history
@@ -60,7 +60,7 @@ function displayHistorySnapShot(state,action){
   if(state.currentDate !== action.data){
     selectedData = state.recreatedData[action.data]
   }
-
+  console.log(selectedData);
   return Object.assign({}, state, {
     "inventoryDataPrevious": selectedData || null,
     "isPrevDateSelected":selectedData ? true : false

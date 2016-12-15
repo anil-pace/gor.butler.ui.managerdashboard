@@ -130,7 +130,7 @@ _processAuditData(data,nProps){
       auditData.startTime = "--";
     }
 
-    if(data[i].expected_quantity !== 0 && data[i].completed_quantity !== null) {
+    if( data[i].expected_quantity && data[i].completed_quantity ) {
       auditData.progress = (data[i].completed_quantity)/(data[i].expected_quantity);
     }
 

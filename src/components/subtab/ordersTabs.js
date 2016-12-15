@@ -67,7 +67,6 @@ class OrderSubTab extends React.Component{
 }
 
 function mapStateToProps(state, ownProps){
-    console.log(state)
     return  {
          subTab:state.tabSelected.subTab || {},
          tab:state.tabSelected.tab

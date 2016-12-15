@@ -8,8 +8,10 @@ import ButlerBotTable from './butlerbotTable';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import {stringConfig} from '../../constants/backEndConstants';
+import {INITIAL_HEADER_SORT,INITIAL_HEADER_ORDER} from '../../constants/frontEndConstants';
 import Spinner from '../../components/spinner/Spinner';
 import { setButlerSpinner } from  '../../actions/spinnerAction';
+import { butlerHeaderSort,butlerHeaderSortOrder } from '../../actions/sortHeaderActions';
 import { defineMessages } from 'react-intl';
 
 //Mesages for internationalization
@@ -142,7 +144,7 @@ class ButlerBot extends React.Component{
 				<div>
 					<div className="gorTesting">
           <Spinner isLoading={this.props.butlerSpinner} setSpinner={this.props.setButlerSpinner}/>
-						<ButlerBotTable items={butlerData} itemNumber={itemNumber} parameters={taskDetail} intlMessg={this.props.intlMessages}/>
+						<ButlerBotTable items={butlerData} itemNumber={itemNumber} parameters={taskDetail} intlMessg={this.props.intlMessages} sortHeaderState={this.props.butlerHeaderSort} currentSortState={this.props.butlerSortHeader} sortHeaderOrder={this.props.butlerHeaderSortOrder} currentHeaderOrder={this.props.butlerSortHeaderState}/>
 					</div>
 				</div>
 			</div>
@@ -152,16 +154,21 @@ class ButlerBot extends React.Component{
 
 function mapStateToProps(state, ownProps){
   return {
+    butlerSortHeader: state.sortHeaderState.butlerHeaderSort || INITIAL_HEADER_SORT ,
+    butlerSortHeaderState: state.sortHeaderState.butlerHeaderSortOrder || INITIAL_HEADER_ORDER,
     butlerSpinner: state.spinner.butlerSpinner || false,
     butlerDetail: state.butlerDetail || [],
     intlMessages: state.intl.messages
   };
 }
 
-function mapDispatchToProps(dispatch){
+
+var mapDispatchToProps = function(dispatch){
   return{
-    setButlerSpinner: function(data){dispatch(setButlerSpinner(data))}
-  }
+    setButlerSpinner: function(data){dispatch(setButlerSpinner(data))},
+    butlerHeaderSort: function(data){dispatch(butlerHeaderSort(data))},
+    butlerHeaderSortOrder: function(data){dispatch(butlerHeaderSortOrder(data))}
+  };
 }
 
 ButlerBot.contextTypes ={

@@ -18,8 +18,7 @@ class ButlerBotTable extends React.Component {
     for (var index = 0; index < size; index++) {
       this._defaultSortIndexes.push(index);
     }
-    var columnWidth= (this.props.containerWidth/this.props.itemNumber)
-    //var columnWidth = 10;
+    var columnWidth= (this.props.containerWidth/this.props.itemNumber);
     this.state = {
       sortedDataList: this._dataList,
       colSortDirs: {},
@@ -35,8 +34,6 @@ class ButlerBotTable extends React.Component {
     this._onSortChange = this._onSortChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
-    //this._onSortChange("id","DESC");
-
   }
 
   
@@ -67,7 +64,7 @@ class ButlerBotTable extends React.Component {
     this._onSortChange = this._onSortChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
-    //this._onSortChange("id","DESC");
+    this._onSortChange(nextProps.currentSortState,nextProps.currentHeaderOrder);
   }
   
    _onColumnResizeEndCallback(newColumnWidth, columnKey) {
@@ -90,9 +87,7 @@ class ButlerBotTable extends React.Component {
     });
   }
   
-  handlChange(columnKey,rowIndex) {
-    
-  }
+ 
   _onSortChange(columnKey, sortDir) {
      if(columnKey === GOR_STATUS) {
       columnKey = GOR_STATUS_PRIORITY;
@@ -104,6 +99,8 @@ class ButlerBotTable extends React.Component {
         [columnKey]: sortDir,
       },
     });
+    this.props.sortHeaderOrder(sortDir);
+    this.props.sortHeaderState(columnKey);
   }
   
   render() {

@@ -5,19 +5,14 @@
     "defaultMessage": "Orders to fullfill"
   },
   {
-    "id": "widget.pick.none",
-    "description": "Text for none",
-    "defaultMessage": "None"
+    "id": "widget.pick.completed",
+    "description": "Text for completed",
+    "defaultMessage": "COMPLETED"
   },
   {
-    "id": "widget.pick.status.idle",
-    "description": "PPS Offline",
-    "defaultMessage": "Offline"
-  },
-  {
-    "id": "widget.pick.status.starting",
-    "description": "Awaiting throughput data",
-    "defaultMessage": "Starting..."
+    "id": "widget.pick.idle",
+    "description": "Pick PPS idle message",
+    "defaultMessage": "{count} idle PPS (Pick mode)"
   },
   {
     "id": "widget.pick.throughput",
@@ -27,7 +22,7 @@
   {
     "id": "widget.pick.lowright",
     "description": "Estimated time",
-    "defaultMessage": "Completing in {eta}"
+    "defaultMessage": "Estimated to complete in {eta}"
   },
   {
     "id": "widget.pick.headingright",
@@ -48,5 +43,10 @@
     "id": "widget.pick.statusleft.atrisk",
     "description": "Text for orders at risk",
     "defaultMessage": "{count_risk} {count_risk, plural, one {order} other {orders}} at risk"
+  },
+  {
+    "id": "widget.pick.offline",
+    "description": "Message for system offline",
+    "defaultMessage": "Offline"
   }
 ]

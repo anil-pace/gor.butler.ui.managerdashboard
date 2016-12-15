@@ -4,7 +4,8 @@ import UserDataTable from './userTab/userTabTable';
 import { connect } from 'react-redux'; 
 import { defineMessages } from 'react-intl';
 import {stringConfig} from '../constants/backEndConstants'
-
+import {userHeaderSort,userHeaderSortOrder} from '../actions/sortHeaderActions';
+import {INITIAL_HEADER_SORT,INITIAL_HEADER_ORDER} from '../constants/frontEndConstants';
 //Mesages for internationalization
 const messages = defineMessages({
     userOperator: {
@@ -129,7 +130,7 @@ class UsersTab extends React.Component{
 			<div>
 				<div>
 					<div className="gor-User-Table">
-						<UserDataTable items={userData} itemNumber={itemNumber} intlMessg={this.props.intlMessages} mid={this.props.manager.users?this.props.manager.users[0].id:''}/>
+						<UserDataTable items={userData} itemNumber={itemNumber} intlMessg={this.props.intlMessages} mid={this.props.manager.users?this.props.manager.users[0].id:''} sortHeaderState={this.props.userHeaderSort} sortHeaderOrder={this.props.userHeaderSortOrder} currentSortState={this.props.userSortHeader} currentHeaderOrder={this.props.userSortHeaderState}/>
 					</div>
 				</div>
 			</div>
@@ -139,12 +140,20 @@ class UsersTab extends React.Component{
 
 
 function mapStateToProps(state, ownProps){
-
   return {
     userdetails: state.userDetails.userDetails || [],
     intlMessages: state.intl.messages,
-    manager:state.headerData.headerInfo||[]
+    manager:state.headerData.headerInfo||[],
+    userSortHeader: state.sortHeaderState.userHeaderSort || INITIAL_HEADER_SORT ,
+    userSortHeaderState: state.sortHeaderState.userHeaderSortOrder || INITIAL_HEADER_ORDER
 
+  };
+}
+
+var mapDispatchToProps = function(dispatch){
+  return{
+    userHeaderSort: function(data){dispatch(userHeaderSort(data))},
+    userHeaderSortOrder: function(data){dispatch(userHeaderSortOrder(data))}
   };
 }
 
@@ -156,6 +165,6 @@ UsersTab.contextTypes ={
 
 
 
-export  default connect(mapStateToProps)(UsersTab);
+export  default connect(mapStateToProps,mapDispatchToProps)(UsersTab);
 
 

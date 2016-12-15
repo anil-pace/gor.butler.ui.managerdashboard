@@ -125,7 +125,7 @@ export const ProgressCell = ({rowIndex, data, columnKey, ...props}) => (
 
 export const ComponentCell = ({rowIndex, data, columnKey,checkState,checked, ...props}) => (
   
-  <Cell {...props}> <input type="checkbox" checked={checked[rowIndex]} onChange={checkState.bind(this,columnKey,rowIndex,data.getObjectAt(rowIndex)[columnKey])}/>
+  <Cell {...props}> <input type="checkbox" checked={checked[rowIndex]?true:false} onChange={checkState.bind(this,columnKey,rowIndex,data.getObjectAt(rowIndex)[columnKey])}/>
     {data.getObjectAt(rowIndex)[columnKey]}
   </Cell>
 );
@@ -190,7 +190,7 @@ export class SortHeaderCell extends React.Component {
       <Cell {...props}>
         <a onClick={this._onSortChange}>
           {children} 
-          <div className="sortIcon" >{sortDir ? (sortDir === SortTypes.DESC ? '↓' : '↑') : ''} </div>
+          <div className="sortIcon" >{sortDir ? (sortDir === SortTypes.DESC ? '↑' : '↓') : ''} </div>
         </a>
       </Cell>
     );

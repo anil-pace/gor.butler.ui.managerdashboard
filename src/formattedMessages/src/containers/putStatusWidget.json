@@ -5,19 +5,19 @@
     "defaultMessage": "None"
   },
   {
-    "id": "widget.put.status.offline",
-    "description": "Offline Status",
-    "defaultMessage": "Offline"
-  },
-  {
-    "id": "widget.put.status.starting",
-    "description": "Awaiting throughput data",
-    "defaultMessage": "Starting..."
+    "id": "widget.put.status.idle",
+    "description": "Put PPS idle message",
+    "defaultMessage": "{count} idle PPS (Put mode)"
   },
   {
     "id": "widget.put.throughput",
     "description": "Throughput message",
     "defaultMessage": "{count} {pluralMsg} stocking {throughput} items/hr"
+  },
+  {
+    "id": "widget.put.offline",
+    "description": "Message for system offline",
+    "defaultMessage": "Offline"
   },
   {
     "id": "widget.put.heading",

@@ -18,11 +18,11 @@ class ItemCategoryTable extends React.Component{
    
    
 	render(){
-		var structure;
+		var structure,catData;
 		if(this.props.snapshotData.category_data){
-			structure = this.props.snapshotData.category_data.map(function(object, i){
+			catData = (this.props.snapshotData.category_data).slice(0, -1);
+			structure = catData.map(function(object, i){
         		var color = object.category_type ? CATEGORY_COLOR_MAP[i] : "";
-        		
         		return (
         			<tr key={i}>
         				<td>
