@@ -369,16 +369,6 @@
     "defaultMessage": "Operator"
   },
   {
-    "id": "stringConfig.admin",
-    "description": "Text to show admin",
-    "defaultMessage": "--"
-  },
-  {
-    "id": "stringConfig.temporary_unfulfillable",
-    "description": "Text for temporary unfulfillable status",
-    "defaultMessage": "Temporary Unfulfillable"
-  },
-  {
     "id": "login.lang.english",
     "description": "English option in the language drop down",
     "defaultMessage": "English"
@@ -1672,11 +1662,6 @@
     "defaultMessage": "PPS-{ppsId}"
   },
   {
-    "id": "ppsDetail.performance.prefix",
-    "description": "prefix for pps id in ppsDetail",
-    "defaultMessage": "{performance} orders/hr"
-  },
-  {
     "id": "pps.dropdown.placeholder",
     "description": "mode change for pps",
     "defaultMessage": "Change PPS Mode"
@@ -2229,11 +2214,6 @@
     "id": "ppsDetail.off.prefix",
     "description": "off status for pps",
     "defaultMessage": "Off"
-  },
-  {
-    "id": "ppsDetail.performance.prefix",
-    "description": "performance for pps id in ppsDetail",
-    "defaultMessage": "{performance} - orders/hr"
   },
   {
     "id": "userDetails.operator",

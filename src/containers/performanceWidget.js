@@ -136,7 +136,7 @@ class PerformanceWidget extends React.Component{
 	var noData = <FormattedMessage id="health.noData" description="pps graph nodata" defaultMessage ="No Data"/>
 	if(this.props.widget === PICK_PPS_PERFORMANCE){
 		if(this.props.ppsPerformance.ppsPerformance !== undefined && this.props.ppsPerformance.ppsPerformance.aggregate_data !== undefined) {
-			itemRender = <ChartHorizontal data={this.props.ppsPerformance} type={GOR_ORDER_PICKED} performanceParam="orders/hr"/>
+			itemRender = <ChartHorizontal data={this.props.ppsPerformance} type={GOR_ORDER_PICKED} performanceParam="items/hr"/>
 		}
 
 		else {

@@ -1,3 +1,4 @@
+
 import React  from 'react';
 import ReactPaginate from 'react-paginate';
 import { connect } from 'react-redux';
@@ -5,7 +6,6 @@ import {getPageData, getStatusFilter, getTimeFilter,getPageSizeOrders,currentPag
 import {ORDERS_RETRIEVE,GOR_BREACHED,GOR_EXCEPTION,GET,APP_JSON} from '../../constants/frontEndConstants';
 import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,ORDER_PAGE, PICK_BEFORE_ORDER_URL, BREACHED_URL,UPDATE_TIME_HIGH,UPDATE_TIME_LOW,EXCEPTION_TRUE,WAREHOUSE_STATUS} from '../../constants/configConstants';
 import OrderListTable from './orderListTable';
-
 import Dropdown from '../../components/dropdown/dropdown'
 import { FormattedMessage ,defineMessages,FormattedRelative} from 'react-intl';
 import Spinner from '../../components/spinner/Spinner';
@@ -73,13 +73,13 @@ class OrderListTab extends React.Component{
 
       if(data[i].breached === true) {
 
-        orderData.status = ordersStatus[data[i].status];
+        orderData.status = nProps.context.intl.formatMessage(stringConfig[data[i].status]);
         orderData.statusClass = GOR_BREACHED;
         orderData.statusPriority = breachedStatus[data[i].status];
         alertStatesNum++;
       }
       else if(data[i].exception === true) {
-        orderData.status = ordersStatus[data[i].status];
+        orderData.status = nProps.context.intl.formatMessage(stringConfig[data[i].status]);
         orderData.statusClass = GOR_EXCEPTION;
 
         orderData.statusPriority = breachedStatus[data[i].status];

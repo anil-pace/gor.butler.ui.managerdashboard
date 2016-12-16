@@ -15,7 +15,14 @@ function reverseSortDirection(sortDir) {
   return sortDir === SortTypes.DESC ? SortTypes.ASC : SortTypes.DESC;
 }
 export function filterIndex(e,_dataList,filterField) {
-	var filterBy = e.target.value.toLowerCase();
+  var filterBy 
+  if(!e.target) {
+    filterBy = e;
+  }
+  else {
+	filterBy = e.target.value.toLowerCase();
+  }
+
      var size = _dataList.getSize(), data = [];
      var filteredIndexes = [];
     for (var index = 0; index < size; index++) {

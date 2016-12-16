@@ -212,12 +212,12 @@ export const  stringConfig= defineMessages({
     admin:{
         id: 'stringConfig.admin',
         description: 'Text to show admin',
-        defaultMessage: "--" 
+        defaultMessage: "Admin" 
     },
     temporary_unfulfillable:{
         "id": "stringConfig.temporary_unfulfillable",
         "description": "Text for temporary unfulfillable status",
-        "defaultMessage": "Temporary Unfulfillable"
+        "defaultMessage": "Unfulfillable"
     }
     
 });
