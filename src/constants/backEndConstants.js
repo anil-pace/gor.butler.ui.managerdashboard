@@ -217,7 +217,7 @@ export const  stringConfig= defineMessages({
     temporary_unfulfillable:{
         "id": "stringConfig.temporary_unfulfillable",
         "description": "Text for temporary unfulfillable status",
-        "defaultMessage": "Temporary Unfulfillable"
+        "defaultMessage": "Unfulfillable"
     }
     
 });

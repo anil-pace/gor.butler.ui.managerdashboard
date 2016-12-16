@@ -81,8 +81,8 @@ class PPStable extends React.Component {
     }
     var columnWidth= (nextProps.containerWidth/nextProps.itemNumber)
     if(!this.props.checkedPps && nextProps.items) {
-      var data1 =  new Array(nextProps.items.length).fill(false);
-      this.props.setCheckedPps(data1)
+      var initialCheckState =  new Array(nextProps.items.length).fill(false);
+      this.props.setCheckedPps(initialCheckState)
     }
     this.state = {
       sortedDataList: this._dataList,
