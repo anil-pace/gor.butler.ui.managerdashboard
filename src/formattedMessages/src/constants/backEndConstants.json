@@ -142,7 +142,7 @@
   {
     "id": "stringConfig.admin",
     "description": "Text to show admin",
-    "defaultMessage": "--"
+    "defaultMessage": "Admin"
   },
   {
     "id": "stringConfig.temporary_unfulfillable",

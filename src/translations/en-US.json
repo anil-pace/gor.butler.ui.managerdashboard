@@ -369,11 +369,6 @@
     "defaultMessage": "Operator"
   },
   {
-    "id": "stringConfig.admin",
-    "description": "Text to show admin",
-    "defaultMessage": "--"
-  },
-  {
     "id": "login.lang.english",
     "description": "English option in the language drop down",
     "defaultMessage": "English"
