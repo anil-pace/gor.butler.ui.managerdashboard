@@ -369,11 +369,6 @@
     "defaultMessage": "Operator"
   },
   {
-    "id": "stringConfig.admin",
-    "description": "Text to show admin",
-    "defaultMessage": "--"
-  },
-  {
     "id": "stringConfig.temporary_unfulfillable",
     "description": "Text for temporary unfulfillable status",
     "defaultMessage": "Temporary Unfulfillable"
