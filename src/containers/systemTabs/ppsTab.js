@@ -26,7 +26,7 @@ const messages = defineMessages({
     perfPrefix:{
       id:"ppsDetail.performance.prefix", 
       description:"prefix for pps id in ppsDetail", 
-      defaultMessage:"{performance} orders/hr"
+      defaultMessage:"{performance} items/hr"
     }
 
 });

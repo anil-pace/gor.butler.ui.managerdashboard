@@ -82,7 +82,7 @@ _processAuditData(data,nProps){
   var timeOffset= nProps.props.timeOffset || "";
 
   
-  var priorityStatus = {"audit_created":2, "audit_pending":3, "audit_waiting":3, "audit_conflicting":3, "audit_started":1, "audit_tasked":1, "audit_aborted":4, "audit_completed":4};
+  var priorityStatus = {"audit_created":2, "audit_pending":3, "audit_waiting":3, "audit_conflicting":3, "audit_started":1, "audit_tasked":1, "audit_aborted":4, "audit_completed":4, "audit_pending_approval":4};
   var auditStatus = {"audit_created":created, "audit_pending":pending, "audit_waiting":pending, "audit_conflicting":pending, "audit_started":progress, "audit_tasked":progress, "audit_aborted":completed, "audit_completed":completed, "audit_pending_approval":completed};
   var statusClass = {"Pending": "pending", "Completed":"completed", "In Progress":"progress", "Created":"pending"}
   var auditType = {"sku":sku, "location":location};

@@ -104,6 +104,8 @@ class OrderListTable extends React.Component {
   
   
   _onSortChange(columnKey, sortDir) {
+
+    console.log("it worked")
     if(columnKey === GOR_STATUS) {
       columnKey = GOR_STATUS_PRIORITY;
     }
