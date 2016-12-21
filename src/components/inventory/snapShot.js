@@ -19,15 +19,15 @@ class SnapShotDetails extends React.Component{
 	render(){
 		
 		var isToday = this.props.currentDate === Date.parse(this.props.snapshotTabData.date) ? true :false,
-		dt,openingStock,todayDate;
+		dt,currentStock,todayDate;
 		if(isToday){
 			dt = <FormattedMessage id='inventory.snaphot.date' defaultMessage="Today's" description="Snapshot date string"/>
-			openingStock = <FormattedMessage id='inventory.snaphot.openingStock' defaultMessage="Opening Stock" description="Snapshot table header"/>
+			currentStock = <FormattedMessage id='inventory.snaphot.currentStock' defaultMessage="Current Stock" description="Snapshot table header"/>
 		}
 		else{
 			todayDate = this.props.snapshotTabData.date ? this.props.snapshotTabData.date : (new Date());
 			dt = <FormattedDate year='numeric' month='short' day='2-digit' value={new Date(Date.parse(todayDate))}/>
-			openingStock = <FormattedMessage id='inventory.snaphot.closingStock' defaultMessage="Closing Stock" description="Snapshot table header"/>
+			currentStock = <FormattedMessage id='inventory.snaphot.closingStock' defaultMessage="Closing Stock" description="Snapshot table header"/>
 		}
 		return (
 			<div className="gorSnapShot">
@@ -37,8 +37,8 @@ class SnapShotDetails extends React.Component{
 					<tbody>
 					<tr>
 						<td className="stkParam">
-						<p>{openingStock}</p>
-						<p><FormattedNumber value={this.props.snapshotTabData.opening_stock || 0}/></p>
+						<p>{currentStock}</p>
+						<p><FormattedNumber value={this.props.snapshotTabData.current_stock || 0}/></p>
 						</td>
 						<td className="stkParam">
 						<p><FormattedMessage id='inventory.snaphot.itemsPut' defaultMessage="Items Put" description="Snapshot table header"/></p>
@@ -50,10 +50,11 @@ class SnapShotDetails extends React.Component{
 						</td>
 					</tr>
 					<tr>
-						<td className="stkParam">
-							<p><FormattedMessage id='inventory.snaphot.currentStock' defaultMessage="Current Stock" description="Snapshot table header"/></p>
-						<p><FormattedNumber value={this.props.snapshotTabData.current_stock || 0}/></p>
+					<td className="stkParam">
+						<p><FormattedMessage id='inventory.snaphot.openingStock' defaultMessage="Opening Stock" description="Snapshot table header"/></p>
+						<p><FormattedNumber value={this.props.snapshotTabData.opening_stock || 0}/></p>
 						</td>
+					
 						<td className="stkParam">
 							<p><FormattedMessage id='inventory.snaphot.sku' defaultMessage="SKUs" description="Snapshot table header"/></p>
 						<p><FormattedNumber value={this.props.snapshotTabData.total_skus || 0} /></p>
