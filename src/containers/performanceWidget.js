@@ -6,7 +6,15 @@ import { connect } from 'react-redux';
 import {renderPerformanceWidget} from '../actions/performanceWidgetActions';
 import { FormattedMessage } from 'react-intl';
 import {GOR_ORDER_PICKED, GOR_ITEMS_PUT, GOR_ITEMS_AUDITED, PICK_PPS_PERFORMANCE, PUT_PPS_PERFORMANCE, AUDIT_PPS_PERFORMANCE} from '../constants/frontEndConstants';
+import { defineMessages } from 'react-intl';
 
+const messages = defineMessages({
+    performanceParam: {
+        id: 'performanceParam.graph',
+        description: 'Performance param graph',
+        defaultMessage: "items/hr",
+    }
+});
 
 function _getPPSdata(link) {
 		
@@ -136,7 +144,7 @@ class PerformanceWidget extends React.Component{
 	var noData = <FormattedMessage id="health.noData" description="pps graph nodata" defaultMessage ="No Data"/>
 	if(this.props.widget === PICK_PPS_PERFORMANCE){
 		if(this.props.ppsPerformance.ppsPerformance !== undefined && this.props.ppsPerformance.ppsPerformance.aggregate_data !== undefined) {
-			itemRender = <ChartHorizontal data={this.props.ppsPerformance} type={GOR_ORDER_PICKED} performanceParam="items/hr"/>
+			itemRender = <ChartHorizontal data={this.props.ppsPerformance} type={GOR_ORDER_PICKED} performanceParam={this.context.intl.formatMessage(messages.performanceParam)}/>
 		}
 
 		else {
@@ -147,7 +155,7 @@ class PerformanceWidget extends React.Component{
 	else if(this.props.widget === PUT_PPS_PERFORMANCE){
 		
 		if(this.props.ppsPerformance.ppsPerformance !== undefined && this.props.ppsPerformance.ppsPerformance.aggregate_data !== undefined) {
-			itemRender = <ChartHorizontal data={this.props.ppsPerformance} type={GOR_ITEMS_PUT} performanceParam="items/hr"/>
+			itemRender = <ChartHorizontal data={this.props.ppsPerformance} type={GOR_ITEMS_PUT} performanceParam={this.context.intl.formatMessage(messages.performanceParam)}/>
 		}
 
 		else {
@@ -157,7 +165,7 @@ class PerformanceWidget extends React.Component{
 
 	else if(this.props.widget === AUDIT_PPS_PERFORMANCE){
 		if(this.props.ppsPerformance.ppsPerformance !== undefined && this.props.ppsPerformance.ppsPerformance.aggregate_data !== undefined) {
-			itemRender = <ChartHorizontal data={this.props.ppsPerformance} type={GOR_ITEMS_AUDITED} performanceParam="items/hr"/>
+			itemRender = <ChartHorizontal data={this.props.ppsPerformance} type={GOR_ITEMS_AUDITED} performanceParam={this.context.intl.formatMessage(messages.performanceParam)}/>
 		}
 
 		else {
@@ -200,6 +208,10 @@ var mapDispatchToProps = function(dispatch){
 		renderPerformanceWidget: function(data){ dispatch(renderPerformanceWidget(data)); }
 	}
 };
+
+PerformanceWidget.contextTypes ={
+ intl:React.PropTypes.object.isRequired
+}
 
 export default connect(mapStateToProps,mapDispatchToProps)(PerformanceWidget) ;
 

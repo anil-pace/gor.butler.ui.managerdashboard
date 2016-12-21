@@ -369,11 +369,6 @@
     "defaultMessage": "Operator"
   },
   {
-    "id": "stringConfig.admin",
-    "description": "Text to show admin",
-    "defaultMessage": "--"
-  },
-  {
     "id": "login.lang.english",
     "description": "English option in the language drop down",
     "defaultMessage": "English"
@@ -1105,17 +1100,17 @@
   {
     "id": "pickPerformance.dropdown",
     "description": "pickPerformance dropdown label",
-    "defaultMessage": "PPS - pick performance"
+    "defaultMessage": "PPS Pick Performance"
   },
   {
     "id": "putPerformance.dropdown",
     "description": "putPerformance dropdown label",
-    "defaultMessage": "PPS - put performance"
+    "defaultMessage": "PPS Put Performance"
   },
   {
     "id": "auditPerformance.dropdown",
     "description": "auditPerformance dropdown label",
-    "defaultMessage": "PPS - audit performance"
+    "defaultMessage": "PPS Audit Performance"
   },
   {
     "id": "orderList.progress.status",
@@ -2304,5 +2299,51 @@
     "id": "notify.delete.audit.success",
     "description": "Text for successfull audit deletion",
     "defaultMessage": "Audit task {audit_id} has been deleted"
-  }
+  },
+  {
+    "id": "horizontal.graph.noData",
+    "description": "No data message for graph",
+    "defaultMessage": "No Data"
+  },
+  {
+    "id": "graph.noData",
+    "description": "No data message for graph",
+    "defaultMessage": "No Data"
+  },
+  {
+    "id": "performanceParam.graph",
+    "description": "Performance param graph",
+    "defaultMessage": "items/hr"
+  },
+  {
+    "id": "audit.placeholder",
+    "description": "audit dropdown placeholder",
+    "defaultMessage": "Manage Tasks"
+  },
+  {
+    "id":"audit.name.prefix", 
+      "description":"prefix for audit", 
+      "defaultMessage":"Audit"
+  },
+  {
+      "id":"moving.task", 
+      "description":"moving task", 
+      "defaultMessage":"Moving to"
+    },
+    {
+      "id":"movingMount.task", 
+      "description":"movingMount task", 
+      "defaultMessage":"Moving to mount"
+    },
+   {
+      "id":"movingDismount.task", 
+      "description":"movingDismount task", 
+      "defaultMessage":"Moving to dismount"
+    },
+    {
+      "id":"docked.task", 
+      "description":"docked task", 
+      "defaultMessage":"Docked at"
+    }
+
 ]

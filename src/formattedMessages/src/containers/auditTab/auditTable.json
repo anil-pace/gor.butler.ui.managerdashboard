@@ -1,5 +1,10 @@
 [
   {
+    "id": "audit.placeholder",
+    "description": "audit dropdown placeholder",
+    "defaultMessage": "Manage Tasks 2"
+  },
+  {
     "id": "audit.table.duplicateTask",
     "description": "duplicateTask option for audit",
     "defaultMessage": "Duplicate task"

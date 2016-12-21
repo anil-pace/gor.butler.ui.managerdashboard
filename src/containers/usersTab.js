@@ -4,7 +4,7 @@ import UserDataTable from './userTab/userTabTable';
 import { connect } from 'react-redux'; 
 import { defineMessages } from 'react-intl';
 import {stringConfig} from '../constants/backEndConstants'
-import {userHeaderSort,userHeaderSortOrder} from '../actions/sortHeaderActions';
+import {userHeaderSort,userHeaderSortOrder,userFilterDetail} from '../actions/sortHeaderActions';
 import {INITIAL_HEADER_SORT,INITIAL_HEADER_ORDER} from '../constants/frontEndConstants';
 //Mesages for internationalization
 const messages = defineMessages({
@@ -130,7 +130,12 @@ class UsersTab extends React.Component{
 			<div>
 				<div>
 					<div className="gor-User-Table">
-						<UserDataTable items={userData} itemNumber={itemNumber} intlMessg={this.props.intlMessages} mid={this.props.manager.users?this.props.manager.users[0].id:''} sortHeaderState={this.props.userHeaderSort} sortHeaderOrder={this.props.userHeaderSortOrder} currentSortState={this.props.userSortHeader} currentHeaderOrder={this.props.userSortHeaderState}/>
+						<UserDataTable items={userData} itemNumber={itemNumber} intlMessg={this.props.intlMessages} 
+                           mid={this.props.manager.users?this.props.manager.users[0].id:''} 
+                           sortHeaderState={this.props.userHeaderSort} sortHeaderOrder={this.props.userHeaderSortOrder} 
+                           currentSortState={this.props.userSortHeader} currentHeaderOrder={this.props.userSortHeaderState}
+                           setUserFilter={this.props.userFilterDetail}
+                           getUserFilter = {this.props.getUserFilter}/>
 					</div>
 				</div>
 			</div>
@@ -141,6 +146,7 @@ class UsersTab extends React.Component{
 
 function mapStateToProps(state, ownProps){
   return {
+    getUserFilter: state.sortHeaderState.userFilter|| "",
     userdetails: state.userDetails.userDetails || [],
     intlMessages: state.intl.messages,
     manager:state.headerData.headerInfo||[],
@@ -152,6 +158,7 @@ function mapStateToProps(state, ownProps){
 
 var mapDispatchToProps = function(dispatch){
   return{
+    userFilterDetail: function(data){dispatch(userFilterDetail(data))},
     userHeaderSort: function(data){dispatch(userHeaderSort(data))},
     userHeaderSortOrder: function(data){dispatch(userHeaderSortOrder(data))}
   };

@@ -982,7 +982,7 @@ body {
   border-radius: 3px;
   box-shadow: 0px 2px 3px 3px #EAEAEA;
   display: inline-block;
-  margin: 0% 0% 1% 2%;
+  margin: 0% 0% 1% 1.5%;
   vertical-align: bottom;
   width: 67%;
   height: 400px;
@@ -999,7 +999,7 @@ body {
   box-shadow: 0px 2px 3px 3px #EAEAEA;
   display: inline-block;
   margin: 0% 0% 1% 1.5%;
-  width: 28%;
+  width: 28.5%;
   height: 400px;
   vertical-align: bottom;
 }
@@ -2783,7 +2783,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 
 .fixedDataTableLayout_main .gorToolHeaderEl {
   display: inline-block;
-  min-height: 2.375rem;
 }
 
 .fixedDataTableLayout_main .sortIcon {
@@ -2848,6 +2847,7 @@ input[type="checkbox"] {
 
 .alertState {
   color: #fc3838;
+  padding-top: 16px;
 }
 
 .gorDataTableDrop {
