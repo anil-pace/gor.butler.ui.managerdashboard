@@ -4,8 +4,17 @@ import * as d3 from 'd3';
 import Dimensions from 'react-dimensions'
 import { connect } from 'react-redux';
 import {barD3Component} from '../../actions/graphAction';
-
+import { FormattedMessage } from 'react-intl'; 
+import { defineMessages } from 'react-intl';
 const RD3Component = rd3.Component;
+
+const messages = defineMessages({
+    noData: {
+        id: 'horizontal.graph.noData',
+        description: 'No data message for graph',
+        defaultMessage: "No Data",
+    }
+});
 
 
 class Chart extends React.Component{
@@ -68,6 +77,8 @@ class Chart extends React.Component{
       }
     function update(data) {
       var noDataFlag = true;
+      var noData = <FormattedMessage id="horizontal.graph.noData" description="No data message for graph" 
+              defaultMessage ="No Data"/>;
       var m_names = new Array("Jan", "Feb", "March", 
 "April", "May", "June", "July", "Aug", "Sep", 
 "Oct", "Nov", "Dec"); 
@@ -184,7 +195,7 @@ class Chart extends React.Component{
            d3.selectAll('.remove').style("left", mousex + "px");
          });
     if(noDataFlag === true) {
-      svg.insert("text",":first-child").attr("x",width/2).attr("y",height/2).text("No Data"|| "");
+      svg.insert("text",":first-child").attr("x",width/2).attr("y",height/2).text(component.context.intl.formatMessage(messages.noData)|| "");
     }
 
     component.setState({d3: node});
@@ -230,6 +241,10 @@ var mapDispatchToProps = function(dispatch){
     barD3Component: function(data){ dispatch(barD3Component(data)); }
   }
 };
+
+Chart.contextTypes ={
+ intl:React.PropTypes.object.isRequired
+}
 
 export default Dimensions()(Chart) ;
 

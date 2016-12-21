@@ -13,6 +13,15 @@ import StartAudit from './startAudit';
 import DeleteAudit from './deleteAudit';
 import DuplicateAudit from './duplicateAudit';
 import {GOR_STATUS,GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
+import { defineMessages } from 'react-intl';
+
+const messages = defineMessages({
+    auditPlaceholder: {
+        id: 'audit.placeholder',
+        description: 'audit dropdown placeholder',
+        defaultMessage: "Manage Tasks 2",
+    }
+});
 
 
 class AuditTable extends React.Component {
@@ -279,7 +288,7 @@ class AuditTable extends React.Component {
         <div className="gorToolHeaderSubText">
         <FormattedMessage id="auditTable.SubAuditID" description='total Sub auditID for auditTable' 
         defaultMessage='Total:{rowsCount}' 
-        values={{rowsCount:rowsCount?rowsCount:'0'}}/> 
+        values={{rowsCount:this.props.totalAudits?this.props.totalAudits:'0'}}/> 
         </div>
         </div>
         </SortHeaderCell>
@@ -402,6 +411,7 @@ class AuditTable extends React.Component {
       cell={<ActionCellAudit data={sortedDataList} handleAudit={this.startAudit.bind(this)} tasks={tasks} 
       manageAuditTask={this.manageAuditTask.bind(this)} showBox="startAudit"
       clickDropDown={this._handleOnClickDropdown.bind(this)}
+      placeholderText={this.context.intl.formatMessage(messages.auditPlaceholder)}
       />}
       width={columnWidths.actions}
 
@@ -431,5 +441,9 @@ var mapDispatchToProps = function(dispatch){
     currentTableState: function(data){ dispatch(currentTableState(data)); }
   }
 };
+
+AuditTable.contextTypes ={
+ intl:React.PropTypes.object.isRequired
+}
 
 export default connect(mapStateToProps,mapDispatchToProps)(Dimensions()(AuditTable));

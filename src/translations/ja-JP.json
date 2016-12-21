@@ -1848,5 +1848,50 @@
         "id": "table.filter.placeholder",
         "description": "placeholder for table filter",
         "defaultMessage": "日本語"
+  },
+  {
+    "id": "horizontal.graph.noData",
+    "description": "No data message for graph",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "graph.noData",
+    "description": "No data message for graph",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "performanceParam.graph",
+    "description": "Performance param graph",
+    "defaultMessage": "日本語"
+  },
+   {
+    "id": "audit.placeholder",
+    "description": "audit dropdown placeholder",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id":"audit.name.prefix", 
+      "description":"prefix for audit", 
+      "defaultMessage":"日本語"
+  },
+  {
+      "id":"moving.task", 
+      "description":"moving task", 
+      "defaultMessage":"日本語"
+    },
+    {
+      "id":"movingMount.task", 
+      "description":"movingMount task", 
+      "defaultMessage":"日本語"
+    },
+   {
+      "id":"movingDismount.task", 
+      "description":"movingDismount task", 
+      "defaultMessage":"日本語"
+    },
+    {
+      "id":"docked.task", 
+      "description":"docked task", 
+      "defaultMessage":"日本語"
     }
 ]

@@ -18,5 +18,50 @@
     "id": "msu.name.prefix",
     "description": "prefix for msu id",
     "defaultMessage": "MSU - {msuId}"
+  },
+  {
+    "id": "audit.name.prefix",
+    "description": "prefix for audit",
+    "defaultMessage": "Audit"
+  },
+  {
+    "id": "pick.name.prefix",
+    "description": "prefix for Pick",
+    "defaultMessage": "Pick"
+  },
+  {
+    "id": "Put.name.prefix",
+    "description": "prefix for put",
+    "defaultMessage": "Put"
+  },
+  {
+    "id": "Charging.name.prefix",
+    "description": "prefix for Charging",
+    "defaultMessage": "Charging"
+  },
+  {
+    "id": "Move.name.prefix",
+    "description": "prefix for Charging",
+    "defaultMessage": "Move"
+  },
+  {
+    "id": "moving.task",
+    "description": "moving task",
+    "defaultMessage": "Moving to"
+  },
+  {
+    "id": "movingMount.task",
+    "description": "movingMount task",
+    "defaultMessage": "Moving to mount"
+  },
+  {
+    "id": "movingDismount.task",
+    "description": "movingDismount task",
+    "defaultMessage": "Moving to dismount"
+  },
+  {
+    "id": "docked.task",
+    "description": "docked task",
+    "defaultMessage": "Docked at"
   }
 ]

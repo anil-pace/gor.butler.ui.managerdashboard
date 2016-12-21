@@ -266,7 +266,11 @@ render(){
   <div className="gor-Orderlist-table" >  
 
   <Spinner isLoading={this.props.orderListSpinner} setSpinner={this.props.setOrderListSpinner}/>
-  <OrderListTable items={orderDetail} timeZoneString = {headerTimeZone} itemNumber={itemNumber} statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter} refreshOption={this.refresh.bind(this)} lastUpdatedText = {updateStatusText} lastUpdated={updateStatusIntl} refreshList={this.refresh.bind(this)} intlMessg={this.props.intlMessages} alertNum={alertNum}/>
+  <OrderListTable items={orderDetail} timeZoneString = {headerTimeZone} itemNumber={itemNumber} 
+                  statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter} 
+                  refreshOption={this.refresh.bind(this)} lastUpdatedText = {updateStatusText} lastUpdated={updateStatusIntl} 
+                  refreshList={this.refresh.bind(this)} intlMessg={this.props.intlMessages} alertNum={alertNum}
+                  totalOrders={this.props.orderData.totalOrders}/>
 
   <div className="gor-pageNum">
   <Dropdown  styleClass={'gor-Page-Drop'}  items={ordersByStatus} currentState={ordersByStatus[0]} optionDispatch={this.props.getPageSizeOrders} refreshList={this.refresh.bind(this)}/>

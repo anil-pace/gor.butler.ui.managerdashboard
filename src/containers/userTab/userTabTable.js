@@ -38,16 +38,6 @@ class UserDataTable extends React.Component {
     }));
   }
 
-  _onFilterChange(e) {
-    if (!e.target.value) {
-      this.setState({
-        sortedDataList: this._dataList,
-      });
-    }
-    this.setState({
-      sortedDataList: new DataListWrapper(filterIndex(e,this._dataList), this._dataList),
-    });
-  }
 
   componentWillReceiveProps(nextProps){
     this._dataList = new tableRenderer(nextProps.items.length);
@@ -65,8 +55,13 @@ class UserDataTable extends React.Component {
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
     if(nextProps.items.length) {
-    this._onSortChange(nextProps.currentSortState,nextProps.currentHeaderOrder);
-  }
+      
+      this._onSortChange(nextProps.currentSortState,nextProps.currentHeaderOrder);
+      //console.log("user filter",this.props.getUserFilter)
+      //this._onFilterChange(this.props.getUserFilter);
+      
+    }
+
   }
 
    _onColumnResizeEndCallback(newColumnWidth, columnKey) {
@@ -79,19 +74,30 @@ class UserDataTable extends React.Component {
   }
 
   _onFilterChange(e) {
-    if (!e.target.value) {
+    var filterField = ["role","id","status","workMode","location","logInTime"];
+     if (e.target && !e.target.value) {
       this.setState({
         sortedDataList: this._dataList,
       });
     }
-    var filterField = ["role","id","status","workMode","location","logInTime"];
-    this.setState({
-      sortedDataList: new DataListWrapper(filterIndex(e,this._dataList,filterField), this._dataList),
-    });
+    if(e.target && e.target.value) {
+      //console.log("target e",e.target.value)
+      this.props.setUserFilter(e.target.value);
+      this.setState({
+       sortedDataList: new DataListWrapper(filterIndex(e,this._dataList,filterField), this._dataList),
+      });
+      
+    }
+
+    else {
+      this.setState({
+       sortedDataList: new DataListWrapper(filterIndex(e,this._dataList,filterField), this._dataList),
+      });
+       //this.props.setUserFilter(e);
+    } 
   }
 
   
-
   _onSortChange(columnKey, sortDir) {
     var sortIndexes = this._defaultSortIndexes.slice();
     this.setState({
@@ -207,7 +213,8 @@ class UserDataTable extends React.Component {
             <div className="searchbox-magnifying-glass-icon"/>
             <input className="gorInputFilter"
               onChange={this._onFilterChange}
-              placeholder={this.props.intlMessg["table.filter.placeholder"]}>
+              placeholder={this.props.intlMessg["table.filter.placeholder"]}
+              value={this.props.getUserFilter}>
             </input>
         </div>
         </div>
