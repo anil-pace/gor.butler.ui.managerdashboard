@@ -2,9 +2,17 @@ import React  from 'react';
 import rd3 from 'react-d3-library';
 import * as d3 from 'd3';
 import Dimensions from 'react-dimensions'
-
+import { defineMessages } from 'react-intl';
 const RD3Component = rd3.Component;
 
+
+const messages = defineMessages({
+    noData: {
+        id: 'graph.noData',
+        description: 'No data message for graph',
+        defaultMessage: "No Data",
+    }
+});
 
 class ChartHorizontal extends React.Component{
   constructor(props) 
@@ -33,10 +41,12 @@ var component = this;
 
   function update(data) {
 
-    var width = widther-100;
-   var barHeight = parentHeight/(data.length);
+  var width = widther-100;
+  var barHeight = parentHeight/(data.length);
   var left = 30;
   var top =20;
+  
+
 
   //var margin = {top: 20, right: 20, bottom: 50, left: 100};
 
@@ -52,16 +62,14 @@ var component = this;
     .scale(y)
     .orient("right")
 
-    var node = document.createElement('div');
-var chart = d3.select(node).append('svg')
+  var node = document.createElement('div');
+  var chart = d3.select(node).append('svg')
   .attr("width", widther)
   .attr("height", 400)
   .append("g")
    .attr("transform", "translate(" + left + "," + top + ")")
 
    x.domain([0, d3.max(data, function(d) { return d.type; })]);
-
-   
 
    var bar = chart.selectAll("g")
    .data(data)
@@ -143,7 +151,7 @@ var chart = d3.select(node).append('svg')
   .attr("dy", ".35em")
   .text(function(d) { 
      if(d.type === 0){ 
-       return "No Data"; 
+       return component.context.intl.formatMessage(messages.noData); 
      }
      })
   .style("font-size","12px")
@@ -180,5 +188,9 @@ render() {
    )
 }
 };
+
+ChartHorizontal.contextTypes ={
+ intl:React.PropTypes.object.isRequired
+}
 export default Dimensions()(ChartHorizontal) ;
 

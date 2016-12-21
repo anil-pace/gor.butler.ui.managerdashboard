@@ -1382,7 +1382,6 @@ color: #000000;
 .fixedDataTableLayout_main{
     .gorToolHeaderEl {
       display: inline-block;
-      min-height:calculateRem(38px);
     }
     .sortIcon{
       display: inline-block;
@@ -1450,6 +1449,7 @@ input[type="checkbox"]{
 
 .alertState {
   color: #fc3838;
+  padding-top : 16px;
 }
 
 .gorDataTableDrop {

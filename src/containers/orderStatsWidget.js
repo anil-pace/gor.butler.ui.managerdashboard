@@ -12,13 +12,13 @@ class OrderStatsWidget extends React.Component{
 	render(){
 		
 		let pickPerformance = <FormattedMessage id="pickPerformance.dropdown" description="pickPerformance dropdown label" 
-              defaultMessage ="PPS - pick performance"/>
+              defaultMessage ="PPS Pick Performance"/>
 
          let putPerformance = <FormattedMessage id="putPerformance.dropdown" description="putPerformance dropdown label" 
-              defaultMessage ="PPS - put performance"/>
+              defaultMessage ="PPS Put Performance"/>
               
         let auditPerformance = <FormattedMessage id="auditPerformance.dropdown" description="auditPerformance dropdown label" 
-              defaultMessage ="PPS - audit performance"/>
+              defaultMessage ="PPS Audit Performance"/>
               
 
 		const item = [

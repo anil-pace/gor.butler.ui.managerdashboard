@@ -105,7 +105,7 @@ class OrderListTable extends React.Component {
   
   _onSortChange(columnKey, sortDir) {
 
-    console.log("it worked")
+    
     if(columnKey === GOR_STATUS) {
       columnKey = GOR_STATUS_PRIORITY;
     }
@@ -122,7 +122,7 @@ class OrderListTable extends React.Component {
   render() {
     
     var {sortedDataList, colSortDirs,columnWidths} = this.state;
-    var totalOrder = sortedDataList.getSize(), headerAlert = <div/>,heightRes;
+    var totalOrder = this.props.totalOrders, headerAlert = <div/>,heightRes;
     let allDrop = <FormattedMessage id="orderlist.table.allDrop" description="allOrders dropdown option for orderlist" defaultMessage ="All orders"/> 
     let breachedDrop = <FormattedMessage id="orderlist.table.breachedDrop" description="breached dropdown option for orderlist" defaultMessage ="Breached orders"/> 
     let pendingDrop = <FormattedMessage id="pendingDrop.table.allDrop" description="pending dropdown option for orderlist" defaultMessage ="Pending orders"/> 
