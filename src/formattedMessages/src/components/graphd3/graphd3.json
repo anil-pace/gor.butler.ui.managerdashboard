@@ -1,0 +1,7 @@
+[
+  {
+    "id": "horizontal.graph.noData",
+    "description": "No data message for graph",
+    "defaultMessage": "No Data"
+  }
+]

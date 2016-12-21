@@ -1,5 +1,5 @@
 
-import {BUTLER_HEADER_SORT,BUTLER_HEADER_SORT_ORDER, PPS_HEADER_SORT, PPS_HEADER_SORT_ORDER, USER_HEADER_SORT, USER_HEADER_SORT_ORDER, WAVE_HEADER_SORT, WAVE_HEADER_SORT_ORDER, CS_HEADER_SORT_ORDER ,CS_HEADER_SORT,PPS_CHECKED, DROP_RENDER_DISPLAY,SET_CHECK_ALL} from '../constants/frontEndConstants'
+import {BUTLER_HEADER_SORT,BUTLER_HEADER_SORT_ORDER, PPS_HEADER_SORT, PPS_HEADER_SORT_ORDER, USER_HEADER_SORT, USER_HEADER_SORT_ORDER, WAVE_HEADER_SORT, WAVE_HEADER_SORT_ORDER, CS_HEADER_SORT_ORDER ,CS_HEADER_SORT,PPS_CHECKED, DROP_RENDER_DISPLAY,SET_CHECK_ALL, SET_USER_FILTER} from '../constants/frontEndConstants'
 
 export  function sortHeaderState(state={},action){
 	switch (action.type) {
@@ -67,7 +67,13 @@ export  function sortHeaderState(state={},action){
 	  case CS_HEADER_SORT_ORDER:
 	    return Object.assign({}, state, {
 	    	"csHeaderSortOrder":action.data
-      })    
+      })
+
+	  case SET_USER_FILTER:
+	    return Object.assign({}, state, {
+	    	"userFilter":action.data
+      })  
+          
 	   
 	  default:
 	    return state

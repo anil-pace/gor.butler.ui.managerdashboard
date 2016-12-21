@@ -17,7 +17,7 @@ function reverseSortDirection(sortDir) {
 export function filterIndex(e,_dataList,filterField) {
   var filterBy 
   if(!e.target) {
-    filterBy = e;
+    filterBy = e.toLowerCase();
   }
   else {
 	filterBy = e.target.value.toLowerCase();
@@ -143,7 +143,7 @@ export const StatusCell = ({rowIndex, data, columnKey,statusKey, ...props}) => (
   </Cell>
 );
 
-export const ActionCellAudit = ({rowIndex, data, columnKey, tasks, handleAudit,manageAuditTask, clickDropDown,showBox, ...props}) => (
+export const ActionCellAudit = ({rowIndex, data, columnKey, tasks, handleAudit,manageAuditTask, clickDropDown,showBox,placeholderText, ...props}) => (
   <Cell {...props}>
     <div className="gor-audit-actions-button">
      {data.getObjectAt(rowIndex)[showBox]?(
@@ -152,7 +152,7 @@ export const ActionCellAudit = ({rowIndex, data, columnKey, tasks, handleAudit,m
       </button>):''}
     </div>
     <div className="gor-audit-actions-drop" onClick={clickDropDown.bind(this,rowIndex)}>
-      <DropdownTable  styleClass={'gorDataTableDrop'} placeholder="Manage Tasks" items={tasks} changeMode={manageAuditTask.bind(this,rowIndex)}/>
+      <DropdownTable  styleClass={'gorDataTableDrop'} placeholder={placeholderText} items={tasks} changeMode={manageAuditTask.bind(this,rowIndex)}/>
     </div>
   </Cell>
 );

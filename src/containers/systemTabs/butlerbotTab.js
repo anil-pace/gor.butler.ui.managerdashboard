@@ -34,8 +34,52 @@ const messages = defineMessages({
       id:"msu.name.prefix", 
       description:"prefix for msu id", 
       defaultMessage:"MSU - {msuId}"
+    },
+    audit: {
+      id:"audit.name.prefix", 
+      description:"prefix for audit", 
+      defaultMessage:"Audit"
+    },
+    pick: {
+      id:"pick.name.prefix", 
+      description:"prefix for Pick", 
+      defaultMessage:"Pick"
+    },
+    put: {
+      id:"Put.name.prefix", 
+      description:"prefix for put", 
+      defaultMessage:"Put"
+    },
+    charging: {
+      id:"Charging.name.prefix", 
+      description:"prefix for Charging", 
+      defaultMessage:"Charging"
+    },
+    move: {
+      id:"Move.name.prefix", 
+      description:"prefix for Charging", 
+      defaultMessage:"Move"
+    },
+    moving: {
+      id:"moving.task", 
+      description:"moving task", 
+      defaultMessage:"Moving to"
+    },
+    movingMount: {
+      id:"movingMount.task", 
+      description:"movingMount task", 
+      defaultMessage:"Moving to mount"
+    },
+    movingDismount: {
+      id:"movingDismount.task", 
+      description:"movingDismount task", 
+      defaultMessage:"Moving to dismount"
+    },
+    docked: {
+      id:"docked.task", 
+      description:"docked task", 
+      defaultMessage:"Docked at"
     }
-
 });
 
 
@@ -47,8 +91,16 @@ class ButlerBot extends React.Component{
   data = nProps.props.butlerDetail.butlerDetail;
   var butlerData=[], butlerDetail = {};
   
-  var currentTask = {0:"Pick", 1:"Put", 2:"Audit", 3:"Charging", 4:"Move"};
-  var currentSubtask = {0:"Moving to",1:"Moving to mount",2:"Moving to dismount",3:"Docked at"};
+  var currentTask = {0:nProps.context.intl.formatMessage(messages.pick), 
+                     1:nProps.context.intl.formatMessage(messages.put),
+                     2:nProps.context.intl.formatMessage(messages.audit),
+                     3:nProps.context.intl.formatMessage(messages.charging), 
+                     4:nProps.context.intl.formatMessage(messages.move)};
+
+  var currentSubtask = {0:nProps.context.intl.formatMessage(messages.moving),
+                        1:nProps.context.intl.formatMessage(messages.movingMount),
+                        2:nProps.context.intl.formatMessage(messages.movingDismount),
+                        3:nProps.context.intl.formatMessage(messages.docked)};
   
   var priStatus = {"online": 1, "offline": 2};
   let BOT, PPS, CS, MSU ;

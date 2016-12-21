@@ -2783,7 +2783,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 
 .fixedDataTableLayout_main .gorToolHeaderEl {
   display: inline-block;
-  min-height: 2.375rem;
 }
 
 .fixedDataTableLayout_main .sortIcon {
@@ -2848,6 +2847,7 @@ input[type="checkbox"] {
 
 .alertState {
   color: #fc3838;
+  padding-top: 16px;
 }
 
 .gorDataTableDrop {
