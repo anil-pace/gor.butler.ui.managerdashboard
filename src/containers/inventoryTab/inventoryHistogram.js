@@ -37,6 +37,7 @@ class InventoryHistogram extends React.Component{
    	lastProcessedDate,
    	dataLen = histogramData.length,
     dateToday = dataLen ? new Date(Date.parse(histogramData[0].date)) :  null,
+    dateEpoch = dateToday ? dateToday.getTime() : null,
     recreatedData =  this.props.recreatedData;
     for(let i=0,len = INVENTORY_HISTORY_DAYS_COUNT,j=0 ; i <= len && dataLen; i++){
       let dataObj={};
@@ -54,11 +55,12 @@ class InventoryHistogram extends React.Component{
         dataObj.customData = (new Date(currentDate)).getTime();
       }
       else{
+        
         dataObj.xAxisData =histogramData[j] ?  (new Date(Date.parse(histogramData[j].date))).getDate() : currentDate.getDate();
-      dataObj.yAxisData = histogramData[j].opening_stock;
+      dataObj.yAxisData = (currentDate.getTime() === dateEpoch ? histogramData[j].current_stock : histogramData[j].opening_stock);
       dataObj.customData = Date.parse(histogramData[j].date);
       if(!noStock){
-        noStock = histogramData[j].opening_stock;
+        noStock = (currentDate.getTime() === dateEpoch ? histogramData[j].current_stock : histogramData[j].opening_stock);
         dataObj.noData =  noStock ? false : true;
       }
       j++;
