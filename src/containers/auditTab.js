@@ -59,7 +59,7 @@ class AuditTab extends React.Component{
   {
    var data = {};
    data.selected = 0;
-   this.handlePageClick(data);
+   setTimeout(this.handlePageClick(data),1500);
    nextProps.setAuditRefresh(false);
  }
 }

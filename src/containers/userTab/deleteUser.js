@@ -48,8 +48,10 @@ class DeleteUser extends React.Component{
               </div>
            </div>
               <div className='gor-delete-bottom'>
-                <button className='gor-cancel-btn' onClick={this.removeThisModal.bind(this)}>Cancel</button>
-                <button className='gor-delete-btn' onClick={this.userDelete.bind(this)}>Delete</button>
+                <button className='gor-cancel-btn' onClick={this.removeThisModal.bind(this)}><FormattedMessage id="users.delete.cancel" description='Text for Cancel button' 
+            defaultMessage='Cancel'/></button>
+                <button className='gor-delete-btn' onClick={this.userDelete.bind(this)}><FormattedMessage id="users.delete.confirm" description='Text for Delete button' 
+            defaultMessage='Delete'/></button>
               </div> 
           </div>
         </div>
