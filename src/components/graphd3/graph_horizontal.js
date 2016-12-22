@@ -43,16 +43,8 @@ var component = this;
 
   var width = widther-100;
   var barHeight = parentHeight/(data.length);
-  var left = 30;
-  var top =20;
-  
-
-
-  //var margin = {top: 20, right: 20, bottom: 50, left: 100};
-
-  var x = d3.scale.linear()
-  .range([0, width]);
-
+  var left = 30, top =20;
+  var x = d3.scale.linear().range([0, width]);
   var xAxis =  d3.svg.axis()
     .scale(x)
     .orient("top")
@@ -61,13 +53,14 @@ var component = this;
   var yAxis = d3.svg.axis()
     .scale(y)
     .orient("right")
+    .outerTickSize(0)
 
   var node = document.createElement('div');
   var chart = d3.select(node).append('svg')
   .attr("width", widther)
   .attr("height", 400)
   .append("g")
-   .attr("transform", "translate(" + left + "," + top + ")")
+  .attr("transform", "translate(" + left + "," + top + ")")
 
    x.domain([0, d3.max(data, function(d) { return d.type; })]);
 
@@ -75,10 +68,10 @@ var component = this;
    .data(data)
    .enter().append("g")
    .attr("class", "g")
-      .attr("y", function(d) { 
-        return y(d.pps_id); 
-      })
-      .attr("width", y.rangeBand())
+   .attr("y", function(d) { 
+      return y(d.pps_id); 
+    })
+   .attr("width", y.rangeBand())
    .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
 
    bar.append("g")
@@ -105,7 +98,7 @@ var component = this;
    .attr("ry", 2)
    .attr("x" , 50)
    .attr("width", function(d) { return x(d.type); })
-   .attr("height", barHeight - 8)
+   .attr("height", barHeight - 10)
    .style("fill","#D3D3D3")
    .style("opacity", "0.5");
 
@@ -126,7 +119,7 @@ var component = this;
    .style("font-size","12px")
    .style("font-weight", "bold")
    .style("font-family","sans-serif")
-   .style("fill","#666666");
+   .style("fill","#000000");
 
    bar.append("text")
    .attr("x", -10)
