@@ -10,11 +10,16 @@ import {setAuditSpinner} from '../actions/auditActions';
 import {setButlerSpinner,setPpsSpinner,setCsSpinner,setWavesSpinner} from '../actions/spinnerAction';
 import {receiveInventoryTodayData,receiveInventoryHistoryData} from '../actions/inventoryActions';
 import {resTypeSnapShotToday,resTypeSnapShotHistory} from '../../mock/mockDBData';
+import {endSession} from './endSession';
 
 export function ResponseParse(store,res)
 {
 
-	
+		if(res.alert_data)
+		{
+			endSession(store);
+			return;
+		}
 		if (!res.resource_type) {
 			store.dispatch(wsOnMessageAction(res));
 			return;

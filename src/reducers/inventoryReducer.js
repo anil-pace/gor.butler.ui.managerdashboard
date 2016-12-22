@@ -60,6 +60,7 @@ function displayHistorySnapShot(state,action){
   if(state.currentDate !== action.data){
     selectedData = state.recreatedData[action.data]
   }
+
   return Object.assign({}, state, {
     "inventoryDataPrevious": selectedData || null,
     "isPrevDateSelected":selectedData ? true : false

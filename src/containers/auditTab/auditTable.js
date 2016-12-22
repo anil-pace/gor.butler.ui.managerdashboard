@@ -54,6 +54,7 @@ class AuditTable extends React.Component {
       // hence it has to be put on top
       var lastDownMenu = document
                           .querySelector('.fixedDataTableRowLayout_rowWrapper:last-child .Dropdown-menu');
+
       if (lastDownMenu){
         lastDownMenu.style.bottom = '100%';
         lastDownMenu.style.top = 'initial';
@@ -63,6 +64,17 @@ class AuditTable extends React.Component {
       if (firstDropDownMenu){
         firstDropDownMenu.style.bottom = 'initial';
       }
+
+      //** fix for issue reported in JIRA -BSS-739
+      //The first child is the edge case ofr the dropdowns, where it should appear down but appears on the top
+      // hence this fix.
+      var firstDownMenu = document
+                          .querySelector('.fixedDataTableRowLayout_rowWrapper:nth-child(1) .Dropdown-menu');
+      if (firstDownMenu) {
+        firstDownMenu.style.bottom = 'initial';
+      }
+
+
 
       let DOMObj = domArray[rowIndex+1];
       DOMObj.style.zIndex = "30";

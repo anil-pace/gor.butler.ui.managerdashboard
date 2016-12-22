@@ -233,9 +233,9 @@ export const INV_HIST_LEGEND_CONFIG = {
 			}
 export const INV_LINE_LEGEND_CONFIG = {
 				xpos:0,
-				xIncrement:105,
+				xIncrement:115,
 				ypos:25,
-				containerWidth:"90%",
+				containerWidth:"95%",
 				containerHeight:"60px"
 			}
 
