@@ -320,7 +320,6 @@ render(){
 }
 
 function mapStateToProps(state, ownProps){
-  console.log(state)
   return {
     orderSortHeader: state.sortHeaderState.orderHeaderSort || INITIAL_HEADER_SORT ,
     orderSortHeaderState: state.sortHeaderState.orderHeaderSortOrder || [],

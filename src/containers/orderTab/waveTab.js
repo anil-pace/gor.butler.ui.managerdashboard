@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import Spinner from '../../components/spinner/Spinner';
 import { setWavesSpinner } from '../../actions/spinnerAction';
-import {GOR_PENDING,GOR_PROGRESS} from '../../constants/frontEndConstants';
+import {GOR_PENDING,GOR_PROGRESS,GOR_BREACHED} from '../../constants/frontEndConstants';
 import {stringConfig} from '../../constants/backEndConstants';
 import { defineMessages } from 'react-intl';
 import { waveHeaderSort,waveHeaderSortOrder } from '../../actions/sortHeaderActions';
@@ -35,7 +35,7 @@ class WaveTab extends React.Component{
 
   var status = {"in_progress":"progress", "completed":"completed", "breached":"breached", "pending":"pending" };
   var priStatus = {"in_progress": 2, "completed": 4, "breached":1 ,"pending":3};
-  var timeOffset = this.props.timeOffset;
+  var timeOffset = this.props.timeOffset, alertNum = 0;
   if(data) {
      for (var i =data.length - 1; i >= 0; i--) {
       waveId = data[i].wave_id;
@@ -45,7 +45,7 @@ class WaveTab extends React.Component{
       waveDetail.statusClass = status[data[i].status];
       waveDetail.statusPriority = priStatus[data[i].status];
       waveDetail.status = nProps.context.intl.formatMessage(stringConfig[data[i].status]);
-      
+
       if(data[i].start_time === "") {
         waveDetail.startTime = "--";
       }
@@ -95,7 +95,7 @@ class WaveTab extends React.Component{
  }  
  render(){
   var itemNumber = 7, waveData = this.props.waveDetail.waveData, waveState = {"pendingWave":"--", "progressWave":"--", "orderRemaining":"--", "completedWaves":"--", "totalOrders":"--"}; 
-  var totalOrders = 0, orderToFulfill = 0, completedWaves = 0, pendingWaves = 0, progressWave = 0 ;
+  var totalOrders = 0, orderToFulfill = 0, completedWaves = 0, pendingWaves = 0, progressWave = 0, alertNum = 0 ;
 
   if(this.props.waveDetail.waveData !== undefined) {
     waveData = this._processWaveData()
@@ -118,8 +118,12 @@ class WaveTab extends React.Component{
       if(waveData[i].statusClass === GOR_PROGRESS) {
         progressWave++;
       }
+
+      if(waveData[i].statusClass === GOR_BREACHED) {
+        alertNum++;
+      }
     }
-    waveState = {"pendingWave":pendingWaves, "progressWave":progressWave, "orderRemaining":orderToFulfill, "completedWaves":completedWaves, "totalOrders":totalOrders}; 
+    waveState = {"pendingWave":pendingWaves, "progressWave":progressWave, "orderRemaining":orderToFulfill, "completedWaves":completedWaves, "totalOrders":totalOrders, "alertNum":alertNum}; 
   }
 }
 return (

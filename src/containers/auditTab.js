@@ -133,7 +133,7 @@ _processAuditData(data,nProps){
     }
 
     else {
-      auditData.progress = 0; //needs to be done
+      auditData.progress = 0; 
     }
 
     if(data[i].completion_time) {
