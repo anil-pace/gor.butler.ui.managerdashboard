@@ -1,5 +1,5 @@
 
-import { BUTLER_HEADER_SORT ,BUTLER_HEADER_SORT_ORDER, PPS_HEADER_SORT, PPS_HEADER_SORT_ORDER, USER_HEADER_SORT, USER_HEADER_SORT_ORDER, WAVE_HEADER_SORT, WAVE_HEADER_SORT_ORDER, CS_HEADER_SORT_ORDER, CS_HEADER_SORT, PPS_CHECKED, DROP_RENDER_DISPLAY,SET_CHECK_ALL, SET_USER_FILTER} from '../constants/frontEndConstants'
+import { BUTLER_HEADER_SORT ,BUTLER_HEADER_SORT_ORDER, PPS_HEADER_SORT, PPS_HEADER_SORT_ORDER, USER_HEADER_SORT, USER_HEADER_SORT_ORDER, WAVE_HEADER_SORT, WAVE_HEADER_SORT_ORDER, CS_HEADER_SORT_ORDER, CS_HEADER_SORT, PPS_CHECKED, DROP_RENDER_DISPLAY,SET_CHECK_ALL, SET_USER_FILTER, ORDER_HEADER_SORT_ORDER, ORDER_HEADER_SORT, AUDIT_HEADER_SORT_ORDER, AUDIT_HEADER_SORT} from '../constants/frontEndConstants'
 
 export function butlerHeaderSort(data){
 	return {
@@ -95,6 +95,34 @@ export function setCheckAll(data){
 export function userFilterDetail(data){
 	return {
 		type: SET_USER_FILTER,
+		data
+	}
+}
+
+export function orderHeaderSortOrder(data){
+	return {
+		type: ORDER_HEADER_SORT_ORDER,
+		data
+	}
+}
+
+export function orderHeaderSort(data){
+	return {
+		type: ORDER_HEADER_SORT,
+		data
+	}
+}
+
+export function auditHeaderSortOrder(data){
+	return {
+		type: AUDIT_HEADER_SORT_ORDER,
+		data
+	}
+}
+
+export function auditHeaderSort(data){
+	return {
+		type: AUDIT_HEADER_SORT,
 		data
 	}
 }

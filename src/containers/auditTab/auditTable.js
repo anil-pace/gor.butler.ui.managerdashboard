@@ -19,7 +19,7 @@ const messages = defineMessages({
     auditPlaceholder: {
         id: 'audit.placeholder',
         description: 'audit dropdown placeholder',
-        defaultMessage: "Manage Tasks 2",
+        defaultMessage: "Manage Tasks",
     }
 });
 
@@ -31,6 +31,7 @@ class AuditTable extends React.Component {
     this._onSortChange = this._onSortChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+    this.backendSort = this.backendSort.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -78,12 +79,15 @@ class AuditTable extends React.Component {
     current._dataList = new tableRenderer(items ? items.length : 0);
     current._defaultSortIndexes = [];
     current._dataList.newData=items;
-    var size = current._dataList.getSize();
+    var size = current._dataList.getSize(),sortIndex={};
     for (var index = 0; index < size; index++) {
       current._defaultSortIndexes.push(index);
     }
+    if(nProps.currentHeaderOrder.colSortDirs) {
+      sortIndex = nProps.currentHeaderOrder.colSortDirs;
+    }
     var tableData = {sortedDataList: current._dataList,
-      colSortDirs: {},
+      colSortDirs: sortIndex,
       columnWidths: {
         id: nProps.containerWidth*0.15,
         auditTypeValue: nProps.containerWidth*0.14,
@@ -135,6 +139,18 @@ class AuditTable extends React.Component {
 
       this.props.currentTableState(tableData)
     }
+
+   backendSort(columnKey, sortDir) {
+    var data={"columnKey":columnKey, "sortDir":sortDir, selected:0}
+    var tableData={
+        sortedDataList: this.props.tableData.sortedDataList,
+        colSortDirs: {[columnKey]: sortDir,},
+        columnWidths: this.props.tableData.columnWidths,
+      };
+      this.props.currentTableState(tableData);
+      this.props.sortHeaderState(columnKey);
+      this.props.refreshData(data);
+  }
 
 
     createAudit() { 
@@ -280,7 +296,7 @@ class AuditTable extends React.Component {
        <Column
        columnKey="id"
        header={
-        <SortHeaderCell onSortChange={this._onSortChange}
+        <SortHeaderCell onSortChange={this.backendSort}
         sortDir={colSortDirs.id}>
         <div className="gorToolHeaderEl">
         <FormattedMessage id="auditTable.stationID.heading" description='Heading for audit ID for auditTable' 
@@ -304,14 +320,13 @@ class AuditTable extends React.Component {
 
       columnKey="auditTypeValue"
       header={
-        <SortHeaderCell onSortChange={this._onSortChange}
-        sortDir={colSortDirs.auditTypeValue}>
+        <div className="gor-table-header">
          <div className="gorToolHeaderEl"> 
         <FormattedMessage id="audit.table.type" description="audit type for audit table" 
         defaultMessage ="AUDIT TYPE"/>
         <div className="gorToolHeaderSubText">  </div>
         </div>
-        </SortHeaderCell>
+        </div>
       }
       cell={<TextCell data={sortedDataList} ></TextCell>}
       fixed={true}
@@ -321,8 +336,7 @@ class AuditTable extends React.Component {
       <Column
       columnKey="status"
       header={
-        <SortHeaderCell onSortChange={this._onSortChange}
-        sortDir={colSortDirs.statusPriority}>
+       <div className="gor-table-header">
          <div className="gorToolHeaderEl"> 
 
         <FormattedMessage id="audit.table.STATUS" description="STATUS for audit" 
@@ -331,7 +345,7 @@ class AuditTable extends React.Component {
         <div>
         </div>
         </div>
-        </SortHeaderCell>
+        </div>
       }
       cell={<StatusCell data={sortedDataList} statusKey="statusClass" ></StatusCell>}
       fixed={true}
@@ -342,7 +356,7 @@ class AuditTable extends React.Component {
       <Column
       columnKey="startTime"
       header={
-        <SortHeaderCell onSortChange={this._onSortChange}
+        <SortHeaderCell onSortChange={this.backendSort}
         sortDir={colSortDirs.mode}>
          <div className="gorToolHeaderEl"> 
         <FormattedMessage id="audit.table.startTime" description="startTime for audit" 
@@ -361,15 +375,14 @@ class AuditTable extends React.Component {
       <Column
       columnKey="progress"
       header={
-        <SortHeaderCell onSortChange={this._onSortChange}
-        sortDir={colSortDirs.progress} >
+        <div className="gor-table-header">
          <div className="gorToolHeaderEl"> 
         <FormattedMessage id="audit.table.progress" description="progress for audit task" 
         defaultMessage ="PROGRESS(%)"/>
         <div className="gorToolHeaderSubText">   
         </div> 
         </div>
-        </SortHeaderCell>
+        </div>
       }
       cell={<ProgressCell data={sortedDataList}  />}
       fixed={true}
@@ -380,7 +393,7 @@ class AuditTable extends React.Component {
       <Column
       columnKey="completedTime"
       header={
-        <SortHeaderCell onSortChange={this._onSortChange}
+        <SortHeaderCell onSortChange={this.backendSort}
         sortDir={colSortDirs.completedTime}>
          <div className="gorToolHeaderEl"> 
         <FormattedMessage id="audit.table.timeCompleted" description="timeCompleted for audit" 
@@ -400,13 +413,13 @@ class AuditTable extends React.Component {
       <Column
       columnKey="actions"
       header={
-        <SortHeaderCell >
+        <div className="gor-table-header">
          <div className="gorToolHeaderEl"> 
         <FormattedMessage id="audit.table.action" description="action Column" 
         defaultMessage ="ACTIONS"/> 
         <div className="gorToolHeaderSubText">  </div>
         </div>
-        </SortHeaderCell>
+        </div>
       }
       cell={<ActionCellAudit data={sortedDataList} handleAudit={this.startAudit.bind(this)} tasks={tasks} 
       manageAuditTask={this.manageAuditTask.bind(this)} showBox="startAudit"

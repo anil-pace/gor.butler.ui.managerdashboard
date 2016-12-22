@@ -1,5 +1,5 @@
 
-export const BASE_URL = '192.168.8.117';
+export const BASE_URL = '192.168.8.108';
 export const PORT = '8888';
 export const PROTOCOL = 'https://';
 export const WS_PROTOCOL ="wss://";
@@ -26,4 +26,4 @@ export const PICK_BEFORE_ORDER_URL = "&pick_before_time<=";
 export const BREACHED_URL = "&warehouse_status=['pending','fulfillable']";
 export const TIME_ZONE_URL = PROTOCOL+BASE_URL+"/api/components/get_time_zone"
 export const GIVEN_PAGE="&page=";
-export const GIVEN_PAGE_SIZE="&PAGE_SIZE=10";
+export const GIVEN_PAGE_SIZE="&PAGE_SIZE=20";

@@ -12,6 +12,7 @@ import {AUDIT_RETRIEVE,GET,APP_JSON} from '../constants/frontEndConstants';
 import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,SEARCH_AUDIT_URL,GIVEN_PAGE,GIVEN_PAGE_SIZE} from '../constants/configConstants';
 import {setAuditSpinner} from '../actions/auditActions';
 import { defineMessages } from 'react-intl';
+import {auditHeaderSortOrder, auditHeaderSort} from '../actions/sortHeaderActions';
 
 //Mesages for internationalization
 const messages = defineMessages({
@@ -158,13 +159,18 @@ _processAuditData(data,nProps){
   return auditDetails;
 }
 handlePageClick(data){
-  var url;
+  var url, appendSortUrl = "";
+  var sortHead = {"startTime":"&order_by=start_actual_time", "completedTime":"&order_by=completion_time", "id":"&order_by=audit_id"};
+  var sortOrder = {"DESC":"&order=desc", "ASC":"&order=asc"};
   var makeDate = new Date();
   makeDate.setDate(makeDate.getDate() - 30)
   makeDate = makeDate.getFullYear()+'-'+makeDate.getMonth()+'-'+makeDate.getDate();  
 
   if(data.url === undefined) {
-    url = SEARCH_AUDIT_URL+makeDate+GIVEN_PAGE+(data.selected+1)+GIVEN_PAGE_SIZE;
+    if(data.columnKey && data.sortDir) {
+      appendSortUrl = sortHead[data.columnKey] + sortOrder[data.sortDir]; 
+    }
+    url = SEARCH_AUDIT_URL+makeDate+GIVEN_PAGE+(data.selected+1)+GIVEN_PAGE_SIZE + appendSortUrl;
   }
 
 
@@ -183,6 +189,8 @@ handlePageClick(data){
   this.props.getPageData(paginationData);
 }
 
+
+
 render(){
   var renderTab = <div/>,
   timeOffset = this.props.timeOffset || "",
@@ -199,7 +207,10 @@ render(){
   renderTab = <AuditTable items={auditData}
               intlMessg={this.props.intlMessages} 
               timeZoneString = {headerTimeZone}
-              totalAudits={this.props.totalAudits}/>
+              totalAudits={this.props.totalAudits}
+              sortHeaderState={this.props.auditHeaderSort} currentSortState={this.props.auditSortHeader} 
+              sortHeaderOrder={this.props.auditHeaderSortOrder} currentHeaderOrder={this.props.auditSortHeaderState}
+              refreshData={this.handlePageClick.bind(this)}/>
   
   
   return (
@@ -233,6 +244,8 @@ render(){
 
 function mapStateToProps(state, ownProps){
   return {
+    auditSortHeader: state.sortHeaderState.auditHeaderSort || "id" ,
+    auditSortHeaderState: state.sortHeaderState.auditHeaderSortOrder || [],
     totalAudits: state.recieveAuditDetail.totalAudits || 0,
     auditSpinner: state.spinner.auditSpinner || false,
     auditDetail: state.recieveAuditDetail.auditDetail || [],
@@ -246,6 +259,8 @@ function mapStateToProps(state, ownProps){
 
 var mapDispatchToProps = function(dispatch){
   return {
+    auditHeaderSort: function(data){dispatch(auditHeaderSort(data))},
+    auditHeaderSortOrder: function(data){dispatch(auditHeaderSortOrder(data))},
     setAuditSpinner: function(data){dispatch(setAuditSpinner(data))},
     getAuditData: function(data){ dispatch(getAuditData(data)); },
     getPageData: function(data){ dispatch(getPageData(data)); },
