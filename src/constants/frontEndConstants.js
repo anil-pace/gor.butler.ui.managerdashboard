@@ -233,9 +233,9 @@ export const INV_HIST_LEGEND_CONFIG = {
 			}
 export const INV_LINE_LEGEND_CONFIG = {
 				xpos:0,
-				xIncrement:105,
+				xIncrement:115,
 				ypos:25,
-				containerWidth:"90%",
+				containerWidth:"95%",
 				containerHeight:"60px"
 			}
 
@@ -352,3 +352,4 @@ export const CS_HEADER_SORT = "CS_HEADER_SORT";
 export const CS_HEADER_SORT_ORDER = "CS_HEADER_SORT_ORDER";
 export const DROP_RENDER_DISPLAY = "DROP_RENDER_DISPLAY";
 export const SET_CHECK_ALL = "SET_CHECK_ALL";
+export const SET_USER_FILTER = "SET_USER_FILTER";

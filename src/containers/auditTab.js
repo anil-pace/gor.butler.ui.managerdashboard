@@ -195,7 +195,9 @@ render(){
   
   var auditData = this._processAuditData();
   renderTab = <AuditTable items={auditData}
-  intlMessg={this.props.intlMessages} timeZoneString = {headerTimeZone}/>
+              intlMessg={this.props.intlMessages} 
+              timeZoneString = {headerTimeZone}
+              totalAudits={this.props.totalAudits}/>
   
   
   return (
@@ -229,6 +231,7 @@ render(){
 
 function mapStateToProps(state, ownProps){
   return {
+    totalAudits: state.recieveAuditDetail.totalAudits || 0,
     auditSpinner: state.spinner.auditSpinner || false,
     auditDetail: state.recieveAuditDetail.auditDetail || [],
     totalPage: state.recieveAuditDetail.totalPage || 0,

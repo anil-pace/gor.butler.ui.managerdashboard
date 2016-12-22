@@ -269,6 +269,11 @@ class PPStable extends React.Component {
        defaultMessage ="No PPS Found"/>  </div>
      containerHeight = GOR_TABLE_HEADER_HEIGHT;
     }
+    
+    var checkedStatePps = [];
+    if(this.props.checkedPps) {
+      checkedStatePps = this.props.checkedPps;
+    }
    
     return (
       <div className="gorTableMainContainer">
@@ -330,7 +335,7 @@ class PPStable extends React.Component {
             </div>
             </div>
           }
-          cell={  <ComponentCell data={sortedDataList} checkState={checkState} checked={this.props.checkedPps} />}
+          cell={  <ComponentCell data={sortedDataList} checkState={checkState} checked={checkedStatePps} />}
           fixed={true}
           width={columnWidths.id}
           isResizable={true}

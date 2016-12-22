@@ -1,5 +1,10 @@
 [
   {
+    "id": "performanceParam.graph",
+    "description": "Performance param graph",
+    "defaultMessage": "items/hr"
+  },
+  {
     "id": "health.pps",
     "description": "pps health",
     "defaultMessage": "PPS"

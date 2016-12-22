@@ -5,9 +5,9 @@
     "defaultMessage": "Today's"
   },
   {
-    "id": "inventory.snaphot.openingStock",
+    "id": "inventory.snaphot.currentStock",
     "description": "Snapshot table header",
-    "defaultMessage": "Opening Stock"
+    "defaultMessage": "Current Stock"
   },
   {
     "id": "inventory.snaphot.closingStock",
@@ -30,9 +30,9 @@
     "defaultMessage": "Items Pick"
   },
   {
-    "id": "inventory.snaphot.currentStock",
+    "id": "inventory.snaphot.openingStock",
     "description": "Snapshot table header",
-    "defaultMessage": "Current Stock"
+    "defaultMessage": "Opening Stock"
   },
   {
     "id": "inventory.snaphot.sku",

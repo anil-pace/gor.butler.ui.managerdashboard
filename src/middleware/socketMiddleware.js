@@ -22,13 +22,8 @@ const socketMiddleware = (function(){
 
   const onMessage = (ws,store) => evt => {
     //Parse the JSON message received on the websocket
-    try{
     var msg = JSON.parse(evt.data);
       ResponseParse(store,msg);    
-    }
-    catch(e){
-      throw e;
-    }
   }
 
   return store => next => action => {
