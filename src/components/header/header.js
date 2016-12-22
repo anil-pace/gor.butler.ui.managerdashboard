@@ -53,7 +53,7 @@ class Header extends React.Component{
   	var headerInfo={};
   	if(this.props.headerInfo && this.props.headerInfo.users.length){
   		 headerInfo= Object.assign({},this.props.headerInfo)
-  		headerInfo.fullName = (headerInfo.users[0].first_name || '--') +' '+ (headerInfo.users[0].last_name || '--');
+  		headerInfo.fullName = (headerInfo.users[0].first_name || '') +' '+ (headerInfo.users[0].last_name || '');
   		headerInfo.designation = headerInfo.users[0].roles[0] || 'butler_ui';
   	}
   	headerInfo.start= HEADER_START_TIME
