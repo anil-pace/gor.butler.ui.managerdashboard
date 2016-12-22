@@ -44,23 +44,20 @@ const messages = defineMessages({
 });
 
 
-
-
-
-
 class AuditTab extends React.Component{
 	constructor(props) 
 	{
    super(props);
- }
+   this.state={selected_page:0};
+  }
  componentWillReceiveProps(nextProps)
  {
   if(nextProps.auditRefresh)
   {
-   var data = {};
-   data.selected = 0;
-   setTimeout(this.handlePageClick(data),1500);
-   nextProps.setAuditRefresh(false);
+   var data={};
+   data.selected = this.state.selected_page;
+   this.handlePageClick(data);
+   this.props.setAuditRefresh(false);
  }
 }
 componentDidMount() {
@@ -160,6 +157,7 @@ _processAuditData(data,nProps){
 handlePageClick(data){
   var url;
   var makeDate = new Date();
+  this.setState({selected_page:data.selected});
   makeDate.setDate(makeDate.getDate() - 30)
   makeDate = makeDate.getFullYear()+'-'+makeDate.getMonth()+'-'+makeDate.getDate();  
 
