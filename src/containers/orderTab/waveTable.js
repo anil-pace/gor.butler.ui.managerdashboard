@@ -111,9 +111,13 @@ class WavesTable extends React.Component {
     
     var {sortedDataList, colSortDirs,columnWidths} = this.state;  
     var heightRes = 500, totalwave = sortedDataList.getSize(), pendingWave = this.props.waveState.pendingWave, progressWave = this.props.waveState.progressWave, completedWaves = this.props.waveState.completedWaves ;
-    var orderRemaining = this.props.waveState.orderRemaining.toLocaleString(), totalOrders = this.props.waveState.totalOrders.toLocaleString();
+    var orderRemaining = this.props.waveState.orderRemaining.toLocaleString(), totalOrders = this.props.waveState.totalOrders.toLocaleString(), headerAlert = <div/>;
+
     if(this.props.containerHeight !== 0) {
       heightRes = this.props.containerHeight;
+    }
+    if(this.props.waveState.alertNum && this.props.waveState.alertNum !== 0) {
+     headerAlert =  <div className="gorToolHeaderEl alertState"> <div className="table-subtab-alert-icon"/> <div className="gor-inline">{this.props.waveState.alertNum} Alerts </div> </div>
     }
     var noData = <div/>;
     if(totalwave === 0 || totalwave === undefined || totalwave === null) {
@@ -178,10 +182,11 @@ class WavesTable extends React.Component {
         <FormattedMessage id="waves.table.status" description="Status for waves" 
         defaultMessage ="STATUS"/> 
         <div>
-        <div className="statuslogoWrap">
-        <div className=" gorToolHeaderEl"/>
-        </div>
-        <div className="gorToolHeaderEl alertState"> </div>
+        <div>
+                <div className="statuslogoWrap">
+                  {headerAlert}
+                </div>
+              </div>
         </div>
         </div>
         </SortHeaderCell>

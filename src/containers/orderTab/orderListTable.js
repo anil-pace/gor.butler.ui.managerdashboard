@@ -47,6 +47,7 @@ class OrderListTable extends React.Component {
     this._onSortChange = this._onSortChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+    this.backendSort = this.backendSort.bind(this);
   }
 
   componentWillReceiveProps(nextProps){
@@ -63,10 +64,13 @@ class OrderListTable extends React.Component {
     for (var index = 0; index < size; index++) {
       this._defaultSortIndexes.push(index);
     }
-    var columnWidth= (nextProps.containerWidth/nextProps.itemNumber)
+    var columnWidth= (nextProps.containerWidth/nextProps.itemNumber), sortIndex = {}
+    if(this.props.currentHeaderOrder.colSortDirs) {
+      sortIndex = this.props.currentHeaderOrder.colSortDirs;
+    }
     this.state = {
       sortedDataList: this._dataList,
-      colSortDirs: {},
+      colSortDirs: sortIndex,
       columnWidths: {
         id: columnWidth,
         status: columnWidth,
@@ -79,6 +83,7 @@ class OrderListTable extends React.Component {
     this._onSortChange = this._onSortChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+    this.backendSort = this.backendSort.bind(this);
   }
 
   
@@ -116,6 +121,15 @@ class OrderListTable extends React.Component {
         [columnKey]: sortDir,
       },
     });
+  }
+
+  backendSort(columnKey, sortDir) {
+    var data={"columnKey":columnKey, "sortDir":sortDir, selected:0}
+    this.props.sortHeaderState(columnKey);
+    this.props.refreshData(data);
+    this.props.sortHeaderOrder({
+      colSortDirs: {[columnKey]: sortDir},
+    })
   }
 
   
@@ -215,7 +229,7 @@ class OrderListTable extends React.Component {
         <Column
           columnKey="id"
           header={
-            <SortHeaderCell onSortChange={this._onSortChange}
+            <SortHeaderCell onSortChange={this.backendSort}
               sortDir={colSortDirs.id}> 
               <div className="gorToolHeaderEl">
               <div className="gorToolHeaderEl">
@@ -237,8 +251,7 @@ class OrderListTable extends React.Component {
         <Column
           columnKey="status"
           header={
-            <SortHeaderCell onSortChange={this._onSortChange}
-              sortDir={colSortDirs.statusPriority}>
+            <div className="gor-table-header">
               <div>
                  <FormattedMessage id="orderList.table.status" description="Status for orders" 
               defaultMessage ="STATUS"/> 
@@ -248,7 +261,7 @@ class OrderListTable extends React.Component {
                   {headerAlert}
                 </div>
               </div>
-            </SortHeaderCell>
+            </div>
           }
           cell={<StatusCell data={sortedDataList} statusKey="statusClass" ></StatusCell>}
           fixed={true}
@@ -258,7 +271,7 @@ class OrderListTable extends React.Component {
         <Column
           columnKey="pickBy"
           header={
-            <SortHeaderCell onSortChange={this._onSortChange}
+            <SortHeaderCell onSortChange={this.backendSort}
               sortDir={colSortDirs.pickBy}>
               <div className="gorToolHeaderEl">
               <FormattedMessage id="orderlist.table.pickBy" description="pick by for orderlist" 
@@ -277,7 +290,7 @@ class OrderListTable extends React.Component {
         <Column
           columnKey="recievedTime"
           header={
-            <SortHeaderCell onSortChange={this._onSortChange}
+            <SortHeaderCell onSortChange={this.backendSort}
               sortDir={colSortDirs.recievedTime}>
               <div className="gorToolHeaderEl">
               <FormattedMessage id="orderlist.table.operatingMode" description="recievedTime for Orders" 
@@ -296,8 +309,7 @@ class OrderListTable extends React.Component {
         <Column
           columnKey="completedTime"
           header={
-            <SortHeaderCell onSortChange={this._onSortChange}
-              sortDir={colSortDirs.completedTime}>
+            <div className="gor-table-header">
                <div className="gorToolHeaderEl">
               <FormattedMessage id="orderlist.table.completedTime" description="completedTime for orderlist" 
               defaultMessage ="COMPLETED"/>
@@ -305,7 +317,7 @@ class OrderListTable extends React.Component {
                 {this.props.timeZoneString}
                </div>
                 </div>
-            </SortHeaderCell>
+            </div>
           }
           cell={<TextCell data={sortedDataList} />}
           fixed={true}
@@ -315,14 +327,13 @@ class OrderListTable extends React.Component {
         <Column
           columnKey="orderLine"
           header={
-            <SortHeaderCell onSortChange={this._onSortChange}
-              sortDir={colSortDirs.orderLine}>
+            <div className="gor-table-header">
               <div className="gorToolHeaderEl">
               <FormattedMessage id="orderlist.table.orderLine" description="orderLine for orderlist" 
               defaultMessage ="ORDER LINE"/>
               <div className="gorToolHeaderSubText"> </div>
               </div>
-            </SortHeaderCell>
+            </div>
           }
           cell={<TextCell data={sortedDataList} />}
           fixed={true}

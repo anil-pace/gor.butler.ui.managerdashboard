@@ -2,7 +2,7 @@
   {
     "id": "audit.placeholder",
     "description": "audit dropdown placeholder",
-    "defaultMessage": "Manage Tasks 2"
+    "defaultMessage": "Manage Tasks"
   },
   {
     "id": "audit.table.duplicateTask",
