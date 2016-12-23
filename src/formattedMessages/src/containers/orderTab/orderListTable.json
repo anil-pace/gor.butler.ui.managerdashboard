@@ -75,9 +75,9 @@
     "defaultMessage": "Refresh Data"
   },
   {
-    "id": "orderlist.order.heading",
+    "id": "orderlist.order.headingText",
     "description": "Heading for order IDs in ordertable",
-    "defaultMessage": "Order List"
+    "defaultMessage": "ORDER ID"
   },
   {
     "id": "orderlist.subTotalorder",
