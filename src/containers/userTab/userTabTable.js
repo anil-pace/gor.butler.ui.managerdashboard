@@ -235,14 +235,8 @@ class UserDataTable extends React.Component {
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.id}>
               <div className="gorToolHeaderEl">
-                <FormattedMessage id="user.table.users" description="Users Column" 
-              defaultMessage ="USERS"/> 
-             
-              <div className="gorToolHeaderSubText">
-                 <FormattedMessage id="user.table.totaluser" description='total user' 
-                defaultMessage='Total: {rowsCount}' 
-                values={{rowsCount:rowsCount?rowsCount:' 0'}}/>
-              </div>
+                <FormattedMessage id="user.table.usersCount" description="Users Column" 
+              defaultMessage ="{rowsCount} USERS" values={{rowsCount:rowsCount?rowsCount:'0'}}/> 
               </div>
             </SortHeaderCell>
           }
