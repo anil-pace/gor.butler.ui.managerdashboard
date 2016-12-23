@@ -2778,7 +2778,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   color: #000000;
   display: inline-block;
   vertical-align: middle;
-  padding-left: 24px;
+  padding-top: 6px;
 }
 
 .fixedDataTableLayout_main .gorToolHeaderEl {
@@ -3075,6 +3075,17 @@ input[type="checkbox"] {
   display: inline-block;
   padding-top: 13px;
   padding-left: 23px;
+}
+
+.gor-user-add-wrap {
+  padding-left: 20px;
+}
+
+.gorHeaderSubText {
+  font-family: "source sans pro";
+  font-size: 12px;
+  color: #666666;
+  padding-top: 14px;
 }
 
 .gorSubTab.gorContainer {

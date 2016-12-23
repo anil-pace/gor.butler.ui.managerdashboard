@@ -205,14 +205,11 @@ export class SortHeaderCell extends React.Component {
 
   _onSortChange(e) {
     e.preventDefault();
-
-    
       this.props.onSortChange(
         this.props.columnKey,
         this.props.sortDir ?
           reverseSortDirection(this.props.sortDir) :
           SortTypes.DESC
       );
-    
   }
 }

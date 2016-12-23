@@ -191,7 +191,7 @@ refresh = (data) => {
   if(data.columnKey && data.sortDir) {
     appendSortUrl = sortHead[data.columnKey] + sortOrder[data.sortDir];
   }
-  else if(this.props.orderSortHeaderState && this.props.orderSortHeader) {
+  else if(this.props.orderSortHeaderState && this.props.orderSortHeader && this.props.orderSortHeaderState.colSortDirs) {
     appendSortUrl = sortHead[this.props.orderSortHeader] + sortOrder[this.props.orderSortHeaderState.colSortDirs[this.props.orderSortHeader]]
   }
 

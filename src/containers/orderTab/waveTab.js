@@ -128,8 +128,13 @@ class WaveTab extends React.Component{
 }
 return (
 <div className="gorTesting">
-<Spinner isLoading={this.props.wavesSpinner} setSpinner={this.props.setWavesSpinner}/>
-<WavesTable items={waveData} itemNumber={itemNumber} waveState={waveState} intlMessg={this.props.intlMessages} sortHeaderState={this.props.waveHeaderSort} sortHeaderOrder={this.props.waveHeaderSortOrder} currentSortState={this.props.waveSortHeader} currentHeaderOrder={this.props.waveSortHeaderState}/>
+  <Spinner isLoading={this.props.wavesSpinner} setSpinner={this.props.setWavesSpinner}/>
+  <WavesTable items={waveData} itemNumber={itemNumber} 
+            waveState={waveState} intlMessg={this.props.intlMessages} 
+            sortHeaderState={this.props.waveHeaderSort} 
+            sortHeaderOrder={this.props.waveHeaderSortOrder} 
+            currentSortState={this.props.waveSortHeader} 
+            currentHeaderOrder={this.props.waveSortHeaderState}/>
 </div>
 );
 }

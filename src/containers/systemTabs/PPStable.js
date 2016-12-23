@@ -282,7 +282,7 @@ class PPStable extends React.Component {
             <div className="gorToolBarElements">
                <FormattedMessage id="pps.table.heading" description="Heading for PPS" 
               defaultMessage ="PPS"/>
-              <div className="gorToolHeaderSubText"> 
+              <div className="gorHeaderSubText"> 
                 <FormattedMessage id="PPStable.selected" description='selected pps for ppsSelected' 
                 defaultMessage='{selected} selected' 
                 values={{selected:selected?selected:'0'}}/> 

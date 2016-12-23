@@ -77,7 +77,7 @@
   {
     "id": "orderlist.order.heading",
     "description": "Heading for order IDs in ordertable",
-    "defaultMessage": "Order List"
+    "defaultMessage": "Order ID"
   },
   {
     "id": "orderlist.subTotalorder",

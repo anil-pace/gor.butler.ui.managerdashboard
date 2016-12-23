@@ -202,10 +202,12 @@ class UserDataTable extends React.Component {
               defaultMessage ="Users"/>
             </div>
             <div className="gorToolBarElements">
-                <button className="gor-add-btn" onClick={this.addModal.bind(this)}>
-                  <FormattedMessage id="user.button.heading" description="button heading for users table" 
-              defaultMessage ="Add new user"/>
-              </button>
+                <div className="gor-user-add-wrap">
+                   <button className="gor-add-btn" onClick={this.addModal.bind(this)}>
+                    <FormattedMessage id="user.button.heading" description="button heading for users table" 
+                    defaultMessage ="Add new user"/>
+                  </button>
+                  </div>
             </div>            
           </div>
           <div className="filterWrapper">  
@@ -322,12 +324,12 @@ class UserDataTable extends React.Component {
         <Column
           columnKey="actions"
           header={
-            <SortHeaderCell >
+            <div className="gor-table-header">
                 <div className="gorToolHeaderEl"> 
                <FormattedMessage id="user.table.action" description="action Column" 
               defaultMessage ="ACTIONS"/> 
               </div>
-            </SortHeaderCell>
+            </div>
           }
           cell={<ActionCell data={sortedDataList} selEdit={selEdit} selDel={selDel} mid={this.props.mid}/>}
           width={columnWidth}
