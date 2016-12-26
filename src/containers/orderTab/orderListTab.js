@@ -12,6 +12,7 @@ import Spinner from '../../components/spinner/Spinner';
 import {setOrderListSpinner} from '../../actions/orderListActions';
 import {stringConfig} from '../../constants/backEndConstants';
 import {orderHeaderSortOrder, orderHeaderSort} from '../../actions/sortHeaderActions';
+import {getDaysDiff} from '../../utilities/getDaysDiff';
 
 const messages = defineMessages ({
   inProgressStatus:{
@@ -105,18 +106,22 @@ class OrderListTab extends React.Component{
         orderData.pickBy = "--";
       }
       else {
-       orderData.pickBy = nProps.context.intl.formatDate(data[i].pick_before_time,
-        {timeZone:timeOffset,
+        if(getDaysDiff(data[i].pick_before_time)<2){
+          orderData.pickBy = nProps.context.intl.formatRelative(data[i].pick_before_time,{timeZone:timeOffset,units:'day'}) +
+           ", " + nProps.context.intl.formatTime(data[i].pick_before_time,{timeZone:timeOffset,hour: 'numeric',minute: 'numeric',hour12: false});
+        }
+        else{
+          orderData.pickBy = nProps.context.intl.formatDate(data[i].pick_before_time,
+          {timeZone:timeOffset,
           year:'numeric',
           month:'short',
           day:'2-digit',
           hour:"2-digit",
           minute:"2-digit",
           hour12: false
-        })
-     }
-
-
+          });
+        }
+      }
      if(data[i].completed_orderlines === data[i].total_orderlines) {
       orderData.orderLine = data[i].total_orderlines;
     }
@@ -124,7 +129,12 @@ class OrderListTab extends React.Component{
       orderData.orderLine = data[i].completed_orderlines + "/" + data[i].total_orderlines;
     }
     if (data[i].status === "completed"){
-      orderData.completedTime = nProps.context.intl.formatDate(data[i].update_time,
+      if(getDaysDiff(data[i].update_time)<2){
+        orderData.completedTime = nProps.context.intl.formatRelative(data[i].update_time,{timeZone:timeOffset,units:'day'}) + 
+        ", " + nProps.context.intl.formatTime(data[i].update_time,{timeZone:timeOffset,hour: 'numeric',minute: 'numeric',hour12: false});     
+      }
+      else{
+        orderData.completedTime = nProps.context.intl.formatDate(data[i].update_time,
         {timeZone:timeOffset,
           year:'numeric',
           month:'short',
@@ -132,7 +142,8 @@ class OrderListTab extends React.Component{
           hour:"2-digit",
           minute:"2-digit",
           hour12: false
-        })
+        });
+      }
     }else{
       orderData.completedTime = "--";
     }
