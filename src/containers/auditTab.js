@@ -13,6 +13,7 @@ import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,SEARCH_AUDIT_URL,GIV
 import {setAuditSpinner} from '../actions/auditActions';
 import { defineMessages } from 'react-intl';
 import {auditHeaderSortOrder, auditHeaderSort} from '../actions/sortHeaderActions';
+import {getDaysDiff} from '../utilities/getDaysDiff';
 
 //Mesages for internationalization
 const messages = defineMessages({
@@ -80,8 +81,8 @@ _processAuditData(data,nProps){
   var timeOffset= nProps.props.timeOffset || "";
 
   
-  var priorityStatus = {"audit_created":2, "audit_pending":3, "audit_waiting":3, "audit_conflicting":3, "audit_started":1, "audit_tasked":1, "audit_aborted":4, "audit_completed":4, "audit_pending_approval":4};
-  var auditStatus = {"audit_created":created, "audit_pending":pending, "audit_waiting":pending, "audit_conflicting":pending, "audit_started":progress, "audit_tasked":progress, "audit_aborted":completed, "audit_completed":completed, "audit_pending_approval":completed};
+  var priorityStatus = {"audit_created":2, "audit_pending":3, "audit_waiting":3, "audit_conflicting":3, "audit_accepted":3, "audit_started":1, "audit_tasked":1, "audit_aborted":4, "audit_completed":4, "audit_pending_approval":4};
+  var auditStatus = {"audit_created":created, "audit_pending":pending, "audit_waiting":pending, "audit_conflicting":pending, "audit_accepted":pending, "audit_started":progress, "audit_tasked":progress, "audit_aborted":completed, "audit_completed":completed, "audit_pending_approval":completed};
   var statusClass = {"Pending": "pending", "Completed":"completed", "In Progress":"progress", "Created":"pending"}
   var auditType = {"sku":sku, "location":location};
   var auditDetails = [], auditData = {};
@@ -117,8 +118,14 @@ _processAuditData(data,nProps){
         auditData.startAudit = false;
       }
     }
+
     if(data[i].start_actual_time) {
-      auditData.startTime = nProps.context.intl.formatDate(data[i].start_actual_time,
+      if(getDaysDiff(data[i].start_actual_time)<2){
+       auditData.startTime = nProps.context.intl.formatRelative(data[i].start_actual_time,{timeZone:timeOffset,units:'day'}) +
+        ", " + nProps.context.intl.formatTime(data[i].start_actual_time,{timeZone:timeOffset,hour: 'numeric',minute: 'numeric',hour12: false});
+      }
+      else{
+        auditData.startTime = nProps.context.intl.formatDate(data[i].start_actual_time,
         {timeZone:timeOffset,
           year:'numeric',
           month:'short',
@@ -126,7 +133,8 @@ _processAuditData(data,nProps){
           hour:"2-digit",
           minute:"2-digit",
           hour12: false
-        })
+        });
+      }
     }
     else {
       auditData.startTime = "--";
@@ -141,14 +149,20 @@ _processAuditData(data,nProps){
     }
 
     if(data[i].completion_time) {
-      auditData.completedTime = nProps.context.intl.formatDate(data[i].completion_time,
+      if(getDaysDiff(data[i].completion_time)<2){
+       auditData.completedTime = nProps.context.intl.formatRelative(data[i].completion_time,{timeZone:timeOffset,units:'day'}) + 
+       ", " + nProps.context.intl.formatTime(data[i].completion_time,{timeZone:timeOffset,hour: 'numeric',minute: 'numeric',hour12: false});
+      }
+      else{
+        auditData.completedTime = nProps.context.intl.formatDate(data[i].completion_time,
         {timeZone:timeOffset,
           year:'numeric',
           month:'short',
           day:'2-digit',
           hour:"2-digit",
           minute:"2-digit"
-        })
+        });
+      }
     }
     else {
       auditData.completedTime = "--";

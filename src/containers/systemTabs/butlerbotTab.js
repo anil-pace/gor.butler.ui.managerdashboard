@@ -202,7 +202,6 @@ class ButlerBot extends React.Component{
   	taskDetail = {"Put":"--", "Pick":"--", "Charging":"--", "Idle":"--","Audit":"--", "avgVoltage":"--", "msuMounted":"--", "location":"--", "online":"--"};
   }
 }
-console.log(taskDetail)
 		return (
 			<div>
 				<div>

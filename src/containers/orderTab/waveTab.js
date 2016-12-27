@@ -9,6 +9,7 @@ import {stringConfig} from '../../constants/backEndConstants';
 import { defineMessages } from 'react-intl';
 import { waveHeaderSort,waveHeaderSortOrder } from '../../actions/sortHeaderActions';
 import {INITIAL_HEADER_SORT,INITIAL_HEADER_ORDER} from '../../constants/frontEndConstants';
+import {getDaysDiff} from '../../utilities/getDaysDiff';
 
 
 //Mesages for internationalization
@@ -50,7 +51,12 @@ class WaveTab extends React.Component{
         waveDetail.startTime = "--";
       }
       else {
-        waveDetail.startTime = nProps.context.intl.formatDate(data[i].start_time,
+        if(getDaysDiff(data[i].start_time)<2){
+          waveDetail.startTime = nProps.context.intl.formatRelative(data[i].start_time,{timeZone:timeOffset,units:'day'}) + 
+          ", " + nProps.context.intl.formatTime(data[i].start_time,{timeZone:timeOffset,hour: 'numeric',minute: 'numeric',hour12: false});
+        }
+        else{
+          waveDetail.startTime = nProps.context.intl.formatDate(data[i].start_time,
                                 {timeZone:timeOffset,
                                   year:'numeric',
                                   month:'short',
@@ -59,13 +65,19 @@ class WaveTab extends React.Component{
                                   minute:"2-digit",
                                   hour12: false
                                 });
+        }
       }
 
       if(data[i].cut_off_time === "") {
         waveDetail.cutOffTime = "--";
       }
       else {
-        waveDetail.cutOffTime = nProps.context.intl.formatDate(data[i].cut_off_time,
+        if(getDaysDiff(data[i].cut_off_time)<2){
+          waveDetail.cutOffTime = nProps.context.intl.formatRelative(data[i].cut_off_time,{timeZone:timeOffset,units:'day'}) + 
+          ", " + nProps.context.intl.formatTime(data[i].cut_off_time,{timeZone:timeOffset,hour: 'numeric',minute: 'numeric',hour12: false});
+        }
+        else{
+          waveDetail.cutOffTime = nProps.context.intl.formatDate(data[i].cut_off_time,
                                 {timeZone:timeOffset,
                                   year:'numeric',
                                   month:'short',
@@ -74,6 +86,7 @@ class WaveTab extends React.Component{
                                   minute:"2-digit",
                                   hour12: false
                                 });
+        }
       }
       waveDetail.ordersToFulfill = data[i].orders_to_fulfill;
       waveDetail.totalOrders = data[i].total_orders;
