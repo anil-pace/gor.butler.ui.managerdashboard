@@ -36,6 +36,7 @@ export const TABLE_STATE = "TABLE_STATE";
 export const REQUEST_HEADER = "REQUEST_HEADER";
 export const RECIEVE_HEADER = "RECIEVE_HEADER";
 export const GOR_TABLE_HEADER_HEIGHT = 71;
+export const GOR_USER_TABLE_HEADER_HEIGHT = 50;
 
 
 /*Constants for performance widget*/
@@ -325,7 +326,8 @@ export const GOR_FAIL='gor-fail';
 export const GOR_INFO='gor-info';
 export const GOR_STATUS = "status";
 export const GOR_STATUS_PRIORITY = "statusPriority";
-
+export const GOR_PERIPHERAL_ONLINE = "online";
+export const GOR_PERIPHERAL_OFFLINE = "offline";
 //Icons
 export const PICK_ICON=' iPick';
 export const STOCK_ICON="iStock";
@@ -337,8 +339,8 @@ export const REMOVE_ICON='gor-remove-white';
 export const ERROR_WHITE='gor-error-white';
 
 //Sort header constants
-export const INITIAL_HEADER_SORT = "id";
-export const INITIAL_HEADER_ORDER = "DESC";
+export const INITIAL_HEADER_SORT = "status";
+export const INITIAL_HEADER_ORDER = "ASC";
 export const BUTLER_HEADER_SORT = "BUTLER_HEADER_SORT";
 export const BUTLER_HEADER_SORT_ORDER = "BUTLER_HEADER_SORT_ORDER";
 export const PPS_CHECKED = "PPS_CHECKED";

@@ -50,6 +50,11 @@
     "defaultMessage": "In Progress"
   },
   {
+    "id": "stringConfig.wave.pending",
+    "description": "Text to show pending",
+    "defaultMessage": "Pending"
+  },
+  {
     "id": "stringConfig.disconnected",
     "description": "Text to show disconnected",
     "defaultMessage": "Disconnected"

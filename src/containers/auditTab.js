@@ -86,8 +86,12 @@ _processAuditData(data,nProps){
   var auditType = {"sku":sku, "location":location};
   var auditDetails = [], auditData = {};
   for (var i = data.length - 1; i >= 0; i--) {
-    if(data[i].audit_id) {
-      auditData.id = data[i].audit_id;
+    if(data[i].display_id) {
+      auditData.id = data[i].display_id;
+    }
+
+    else {
+      auditData.id = "--";
     }
 
     if(data[i].audit_param_type) {
@@ -113,8 +117,8 @@ _processAuditData(data,nProps){
         auditData.startAudit = false;
       }
     }
-    if(data[i].start_request_time) {
-      auditData.startTime = nProps.context.intl.formatDate(data[i].start_request_time,
+    if(data[i].start_actual_time) {
+      auditData.startTime = nProps.context.intl.formatDate(data[i].start_actual_time,
         {timeZone:timeOffset,
           year:'numeric',
           month:'short',
@@ -152,13 +156,12 @@ _processAuditData(data,nProps){
     auditDetails.push(auditData);
     auditData = {};
   }
-  
   return auditDetails;
 }
 handlePageClick(data){
   var url, appendSortUrl = "";
   var sortHead = {"startTime":"&order_by=start_actual_time", "completedTime":"&order_by=completion_time", "id":"&order_by=audit_id"};
-  var sortOrder = {"DESC":"&order=desc", "ASC":"&order=asc"};
+  var sortOrder = {"DESC":"&order=asc", "ASC":"&order=desc"};
   var makeDate = new Date();
   this.setState({selected_page:data.selected});
   makeDate.setDate(makeDate.getDate() - 30)

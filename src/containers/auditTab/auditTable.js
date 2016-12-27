@@ -101,11 +101,11 @@ class AuditTable extends React.Component {
     var tableData = {sortedDataList: current._dataList,
       colSortDirs: sortIndex,
       columnWidths: {
-        id: nProps.containerWidth*0.15,
+        id: nProps.containerWidth*0.09,
         auditTypeValue: nProps.containerWidth*0.14,
         status: nProps.containerWidth*0.1,
-        startTime: nProps.containerWidth*0.1,
-        progress: nProps.containerWidth*0.11,
+        startTime: nProps.containerWidth*0.15,
+        progress: nProps.containerWidth*0.12,
         completedTime: nProps.containerWidth*0.15,
         actions: nProps.containerWidth*0.25
       }};

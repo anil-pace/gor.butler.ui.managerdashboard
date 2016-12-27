@@ -8,7 +8,7 @@ import {modal} from 'react-redux-modal';
 import AddUser from './addNewUser';
 import EditUser from './editUser';
 import DeleteUser from './deleteUser';
-import {GOR_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
+import {GOR_USER_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
 
 class UserDataTable extends React.Component {
   constructor(props) {
@@ -23,6 +23,7 @@ class UserDataTable extends React.Component {
     this.state = {
        colSortDirs: {},
       sortedDataList: this._dataList,
+      ghdgsfh:''
       },
     this._onSortChange = this._onSortChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
@@ -54,14 +55,7 @@ class UserDataTable extends React.Component {
     this._onSortChange = this._onSortChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
-    if(nextProps.items.length) {
-      
-      this._onSortChange(nextProps.currentSortState,nextProps.currentHeaderOrder);
-      //console.log("user filter",this.props.getUserFilter)
-      //this._onFilterChange(this.props.getUserFilter);
-      
-    }
-
+    this._onFilterChange(nextProps.getUserFilter);
   }
 
    _onColumnResizeEndCallback(newColumnWidth, columnKey) {
@@ -73,33 +67,51 @@ class UserDataTable extends React.Component {
     }));
   }
 
+
+
   _onFilterChange(e) {
-    var filterField = ["role","id","status","workMode","location","logInTime"];
+    var filterField = ["role","id","status","workMode","location","logInTime"], newData;
+    
      if (e.target && !e.target.value) {
       this.setState({
         sortedDataList: this._dataList,
       });
     }
-    if(e.target && e.target.value) {
-      //console.log("target e",e.target.value)
-      this.props.setUserFilter(e.target.value);
+    if(e.target && (e.target.value || e.target.value === "")) {
+      var captureValue = e.target.value;
+      newData = new DataListWrapper(filterIndex(e,this.state.sortedDataList,filterField), this._dataList)
+      
       this.setState({
-       sortedDataList: new DataListWrapper(filterIndex(e,this._dataList,filterField), this._dataList),
-      });
+        sortedDataList: newData
+        }, function() {
+            this.props.setUserFilter(captureValue);
+            if(this.props.items.length) {
+               this._onSortChange(this.props.currentSortState,this.props.currentHeaderOrder);
+             }
+      })
+      
       
     }
 
     else {
+      newData = new DataListWrapper(filterIndex(e,this.state.sortedDataList,filterField), this._dataList);
       this.setState({
-       sortedDataList: new DataListWrapper(filterIndex(e,this._dataList,filterField), this._dataList),
-      });
-       //this.props.setUserFilter(e);
-    } 
+        sortedDataList: newData
+        }, function() {
+            if(this.props.items.length) {
+               this._onSortChange(this.props.currentSortState,this.props.currentHeaderOrder);
+             }
+      })
+    }
+    
   }
 
   
   _onSortChange(columnKey, sortDir) {
     var sortIndexes = this._defaultSortIndexes.slice();
+    if(this.state.sortedDataList._indexMap) {
+      sortIndexes = this.state.sortedDataList._indexMap.slice();
+    }
     this.setState({
       sortedDataList: new DataListWrapper(sortData(columnKey, sortDir,sortIndexes,this._dataList), this._dataList),
       colSortDirs: {
@@ -191,7 +203,7 @@ class UserDataTable extends React.Component {
     if(rowsCount === 0 || rowsCount === undefined || rowsCount === null) {
      noData =  <div className="gor-no-data"> <FormattedMessage id="user.table.noData" description="No data message for user table" 
         defaultMessage ="No User Found"/>  </div>
-     containerHeight = GOR_TABLE_HEADER_HEIGHT;
+     containerHeight = GOR_USER_TABLE_HEADER_HEIGHT;
      }
     return (
       <div>
@@ -225,7 +237,7 @@ class UserDataTable extends React.Component {
       <Table
         rowHeight={50}
         rowsCount={sortedDataList.getSize()}
-        headerHeight={70}
+        headerHeight={50}
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
         width={this.props.containerWidth}
@@ -237,14 +249,8 @@ class UserDataTable extends React.Component {
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.id}>
               <div className="gorToolHeaderEl">
-                <FormattedMessage id="user.table.users" description="Users Column" 
-              defaultMessage ="USERS"/> 
-             
-              <div className="gorToolHeaderSubText">
-                 <FormattedMessage id="user.table.totaluser" description='total user' 
-                defaultMessage='Total: {rowsCount}' 
-                values={{rowsCount:rowsCount?rowsCount:' 0'}}/>
-              </div>
+                <FormattedMessage id="user.table.usersCount" description="Users Column" 
+              defaultMessage ="{rowsCount} USERS" values={{rowsCount:rowsCount?rowsCount:'0'}}/> 
               </div>
             </SortHeaderCell>
           }

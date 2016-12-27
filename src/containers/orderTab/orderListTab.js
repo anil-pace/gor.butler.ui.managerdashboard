@@ -181,7 +181,7 @@ refresh = (data) => {
   var status = this.props.filterOptions.statusFilter, timeOut = this.props.filterOptions.timeFilter,currentTime,prevTime;
   var  appendStatusUrl="", appendTimeUrl="", appendPageSize="", appendSortUrl="";
   var sortHead = {"recievedTime":"&order_by=create_time", "pickBy":"&order_by=pick_before_time", "id":"&order_by=order_id"};
-  var sortOrder = {"DESC":"&order=desc", "ASC":"&order=asc"};
+  var sortOrder = {"DESC":"&order=asc", "ASC":"&order=desc"};
   if(!data) {
     data = {};
     data.selected = 0;

@@ -33,7 +33,7 @@ class WaveTab extends React.Component{
   let WAVE, waveId;
 
 
-  var status = {"in_progress":"progress", "completed":"completed", "breached":"breached", "pending":"pending" };
+  var status = {"in_progress":"progress", "completed":"completed", "breached":"breached", "wave_pending":"pending" };
   var priStatus = {"in_progress": 2, "completed": 4, "breached":1 ,"pending":3};
   var timeOffset = this.props.timeOffset, alertNum = 0;
   if(data) {

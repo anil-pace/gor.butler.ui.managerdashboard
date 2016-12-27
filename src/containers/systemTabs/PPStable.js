@@ -281,7 +281,7 @@ class PPStable extends React.Component {
           <div className="gorToolBarWrap">
             <div className="gorToolBarElements">
                <FormattedMessage id="pps.table.heading" description="Heading for PPS" 
-              defaultMessage ="PPS"/>
+              defaultMessage ="Pick Put Stations"/>
               <div className="gorHeaderSubText"> 
                 <FormattedMessage id="PPStable.selected" description='selected pps for ppsSelected' 
                 defaultMessage='{selected} selected' 
@@ -418,7 +418,7 @@ class PPStable extends React.Component {
               defaultMessage ="OPERATOR ASSIGNED"/> 
               <div className="gorToolHeaderSubText"> 
                 <FormattedMessage id="PPStable.totalOperator" description='totalOperator for PPStable' 
-                defaultMessage='{operatorNum} operator' 
+                defaultMessage='{operatorNum} operators' 
                 values={{operatorNum: operatorNum?operatorNum:'0'}}/>
               </div>
               </div>
