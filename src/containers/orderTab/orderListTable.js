@@ -44,7 +44,6 @@ class OrderListTable extends React.Component {
         orderLine: columnWidth
       },
     };
-    this._onSortChange = this._onSortChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
     this.backendSort = this.backendSort.bind(this);
@@ -80,7 +79,6 @@ class OrderListTable extends React.Component {
         orderLine: columnWidth
       },
     };
-    this._onSortChange = this._onSortChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
     this.backendSort = this.backendSort.bind(this);
@@ -96,32 +94,17 @@ class OrderListTable extends React.Component {
     }));
   }
   _onFilterChange(e) {
-    if (!e.target.value) {
-      this.setState({
-        sortedDataList: this._dataList,
-      });
+    var data={"type":"searchOrder", "captureValue":"", "selected":0 }
+    if(e.target && (e.target.value || e.target.value === "")) {
+      data["captureValue"] = e.target.value;
+      this.props.setOrderFilter(e.target.value);
     }
-    var filterField = ["recievedTime","id","status","completedTime","pickBy","orderLine"];
-    this.setState({
-      sortedDataList: new DataListWrapper(filterIndex(e,this._dataList,filterField), this._dataList),
-    });
+    else {
+      data["captureValue"] = e;
+    }
+    this.props.refreshData(data);
   }
   
-  
-  _onSortChange(columnKey, sortDir) {
-
-    
-    if(columnKey === GOR_STATUS) {
-      columnKey = GOR_STATUS_PRIORITY;
-    }
-    var sortIndexes = this._defaultSortIndexes.slice();
-    this.setState({
-      sortedDataList: new DataListWrapper(sortData(columnKey, sortDir,sortIndexes,this._dataList), this._dataList),
-      colSortDirs: {
-        [columnKey]: sortDir,
-      },
-    });
-  }
 
   backendSort(columnKey, sortDir) {
     var data={"columnKey":columnKey, "sortDir":sortDir, selected:0}
@@ -211,7 +194,8 @@ class OrderListTable extends React.Component {
             <div className="searchbox-magnifying-glass-icon"/>
             <input className="gorInputFilter"
               onChange={this._onFilterChange}
-              placeholder={this.props.intlMessg["table.filter.placeholder"]}>
+              placeholder={this.props.intlMessg["table.filter.placeholder"]}
+              value={this.props.getOrderFilter}>
             </input>
         </div>
         </div>
