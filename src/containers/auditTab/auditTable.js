@@ -12,8 +12,9 @@ import CreateAudit from './createAudit';
 import StartAudit from './startAudit';
 import DeleteAudit from './deleteAudit';
 import DuplicateAudit from './duplicateAudit';
-import {GOR_STATUS,GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
+import {GOR_STATUS,GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT,DEBOUNCE_TIMER} from '../../constants/frontEndConstants';
 import { defineMessages } from 'react-intl';
+import {debounce} from '../../utilities/debounce';
 
 const messages = defineMessages({
     auditPlaceholder: {
@@ -101,11 +102,11 @@ class AuditTable extends React.Component {
     var tableData = {sortedDataList: current._dataList,
       colSortDirs: sortIndex,
       columnWidths: {
-        id: nProps.containerWidth*0.15,
+        id: nProps.containerWidth*0.09,
         auditTypeValue: nProps.containerWidth*0.14,
         status: nProps.containerWidth*0.1,
-        startTime: nProps.containerWidth*0.1,
-        progress: nProps.containerWidth*0.11,
+        startTime: nProps.containerWidth*0.15,
+        progress: nProps.containerWidth*0.12,
         completedTime: nProps.containerWidth*0.15,
         actions: nProps.containerWidth*0.25
       }};
@@ -121,20 +122,17 @@ class AuditTable extends React.Component {
       }));
     }
     _onFilterChange(e) {
-      if (!e.target.value) {
-        var tableData={
-          sortedDataList: this._dataList,
-          colSortDirs: this.props.tableData.colSortDirs,
-          columnWidths: this.props.tableData.columnWidths,
-        };
+      var data={"type":"searchOrder", "captureValue":"", "selected":0 },debounceFilter;
+      if(e.target && (e.target.value || e.target.value === "")) {
+        data["captureValue"] = e.target.value;
+        this.props.setAuditFilter(e.target.value);
       }
-      var filterField = ["auditTypeValue","id","status"];
-      var tableData={
-        sortedDataList: new DataListWrapper(filterIndex(e,this._dataList,filterField), this._dataList),
-        colSortDirs: this.props.tableData.colSortDirs,
-        columnWidths: this.props.tableData.columnWidths,
-      };
-      this.props.currentTableState(tableData);
+      else {
+        data["captureValue"] = e;
+      }
+      this.props.setAuditFilter(e.target.value)
+      debounceFilter = debounce(this.props.refreshData, DEBOUNCE_TIMER);
+      debounceFilter(data);
     }
 
 
@@ -251,6 +249,10 @@ class AuditTable extends React.Component {
       }
       var colSortDirs = this.props.tableData.colSortDirs;
       var columnWidths = this.props.tableData.columnWidths;
+      var auditCompleted = this.props.auditState.auditCompleted;
+      var locationAudit = this.props.auditState.locationAudit;
+      var skuAudit = this.props.auditState.skuAudit;
+      var totalProgress = this.props.auditState.totalProgress;
       var rowsCount = sortedDataList.getSize();
       var duplicateTask = <FormattedMessage id="audit.table.duplicateTask" description="duplicateTask option for audit" defaultMessage ="Duplicate task"/>; 
       var deleteRecord = <FormattedMessage id="audit.table.deleteRecord" description="deleteRecord option for audit" defaultMessage ="Delete record"/>; 
@@ -336,7 +338,11 @@ class AuditTable extends React.Component {
          <div className="gorToolHeaderEl"> 
         <FormattedMessage id="audit.table.type" description="audit type for audit table" 
         defaultMessage ="AUDIT TYPE"/>
-        <div className="gorToolHeaderSubText">  </div>
+        <div className="gorToolHeaderSubText">
+                <FormattedMessage id="audit.auditType" description='audit type for audit table' 
+                defaultMessage='SKU ({sku}) . Location ({location})' 
+                values={{sku: skuAudit?skuAudit:'0', location:locationAudit?locationAudit:'0'}}/>
+              </div>
         </div>
         </div>
       }
@@ -353,9 +359,14 @@ class AuditTable extends React.Component {
 
         <FormattedMessage id="audit.table.STATUS" description="STATUS for audit" 
         defaultMessage ="STATUS"/>
-        <div className="gorToolHeaderSubText">  </div>
-        <div>
-        </div>
+        
+       <div className="gor-subStatus-online">
+                  <div >  
+                    <FormattedMessage id="auditTable.status" description='status completed audit' 
+                defaultMessage='{auditCompleted} Completed' 
+                values={{auditCompleted:auditCompleted?auditCompleted:'0'}}/>
+                  </div>
+                </div>
         </div>
         </div>
       }
@@ -391,8 +402,11 @@ class AuditTable extends React.Component {
          <div className="gorToolHeaderEl"> 
         <FormattedMessage id="audit.table.progress" description="progress for audit task" 
         defaultMessage ="PROGRESS(%)"/>
-        <div className="gorToolHeaderSubText">   
-        </div> 
+        <div className="gorToolHeaderSubText">
+                <FormattedMessage id="audit.Totalprogress" description='total progress for audit table' 
+                defaultMessage='{totalProgress}% Completed' 
+                values={{totalProgress: totalProgress?totalProgress:'0'}}/>
+              </div>
         </div>
         </div>
       }

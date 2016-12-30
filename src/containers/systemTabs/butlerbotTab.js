@@ -8,10 +8,10 @@ import ButlerBotTable from './butlerbotTable';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import {stringConfig} from '../../constants/backEndConstants';
-import {INITIAL_HEADER_SORT,INITIAL_HEADER_ORDER} from '../../constants/frontEndConstants';
+import {INITIAL_HEADER_SORT,INITIAL_HEADER_ORDER,GOR_PERIPHERAL_ONLINE, GOR_PERIPHERAL_OFFLINE} from '../../constants/frontEndConstants';
 import Spinner from '../../components/spinner/Spinner';
 import { setButlerSpinner } from  '../../actions/spinnerAction';
-import { butlerHeaderSort,butlerHeaderSortOrder } from '../../actions/sortHeaderActions';
+import { butlerHeaderSort,butlerHeaderSortOrder,butlerFilterDetail } from '../../actions/sortHeaderActions';
 import { defineMessages } from 'react-intl';
 
 //Mesages for internationalization
@@ -161,7 +161,10 @@ class ButlerBot extends React.Component{
 	render(){
   var itemNumber = 6;
   var butlerData, avgVoltage =0;
-  var taskDetail = {"Put":0, "Pick":0, "Charging":0, "Idle":0,"Audit":0, "avgVoltage":0, "msuMounted":0, "location":0};
+  var taskDetail = {"Put":0, "Pick":0, "Charging":0, "Idle":0,"Audit":0, 
+                    "avgVoltage":0, "msuMounted":0, "location":0, "online":0, 
+                    "offline":0};
+
   if(this.props.butlerDetail.butlerDetail !==undefined) {
     butlerData = this._processButlersData();
     if(butlerData && butlerData.length) {
@@ -183,12 +186,20 @@ class ButlerBot extends React.Component{
     			taskDetail["location"]++;
     		}
 
+        if(butlerData[i].status === GOR_PERIPHERAL_ONLINE) {
+          taskDetail["online"]++;
+        }
+
+        if(butlerData[i].status === GOR_PERIPHERAL_OFFLINE) {
+          taskDetail["offline"]++;
+        }
+
     	}
-    	avgVoltage = ((avgVoltage/(butlerData.length)).toFixed(2));
+    	avgVoltage = ((avgVoltage/(butlerData.length)).toFixed(1));
     	taskDetail["avgVoltage"]=avgVoltage + "V";
     }
   else {
-  	taskDetail = {"Put":"--", "Pick":"--", "Charging":"--", "Idle":"--","Audit":"--", "avgVoltage":"--", "msuMounted":"--", "location":"--"};
+  	taskDetail = {"Put":"--", "Pick":"--", "Charging":"--", "Idle":"--","Audit":"--", "avgVoltage":"--", "msuMounted":"--", "location":"--", "online":"--"};
   }
 }
 		return (
@@ -196,7 +207,13 @@ class ButlerBot extends React.Component{
 				<div>
 					<div className="gorTesting">
           <Spinner isLoading={this.props.butlerSpinner} setSpinner={this.props.setButlerSpinner}/>
-						<ButlerBotTable items={butlerData} itemNumber={itemNumber} parameters={taskDetail} intlMessg={this.props.intlMessages} sortHeaderState={this.props.butlerHeaderSort} currentSortState={this.props.butlerSortHeader} sortHeaderOrder={this.props.butlerHeaderSortOrder} currentHeaderOrder={this.props.butlerSortHeaderState}/>
+						<ButlerBotTable items={butlerData} itemNumber={itemNumber} parameters={taskDetail} 
+                            intlMessg={this.props.intlMessages} sortHeaderState={this.props.butlerHeaderSort} 
+                            currentSortState={this.props.butlerSortHeader} 
+                            sortHeaderOrder={this.props.butlerHeaderSortOrder} 
+                            currentHeaderOrder={this.props.butlerSortHeaderState}
+                            setButlerFilter={this.props.butlerFilterDetail}
+                            getButlerFilter = {this.props.butlerFilter}/>
 					</div>
 				</div>
 			</div>
@@ -206,6 +223,7 @@ class ButlerBot extends React.Component{
 
 function mapStateToProps(state, ownProps){
   return {
+    butlerFilter: state.sortHeaderState.butlerFilter|| "",
     butlerSortHeader: state.sortHeaderState.butlerHeaderSort || INITIAL_HEADER_SORT ,
     butlerSortHeaderState: state.sortHeaderState.butlerHeaderSortOrder || INITIAL_HEADER_ORDER,
     butlerSpinner: state.spinner.butlerSpinner || false,
@@ -217,6 +235,7 @@ function mapStateToProps(state, ownProps){
 
 var mapDispatchToProps = function(dispatch){
   return{
+    butlerFilterDetail: function(data){dispatch(butlerFilterDetail(data))},
     setButlerSpinner: function(data){dispatch(setButlerSpinner(data))},
     butlerHeaderSort: function(data){dispatch(butlerHeaderSort(data))},
     butlerHeaderSortOrder: function(data){dispatch(butlerHeaderSortOrder(data))}

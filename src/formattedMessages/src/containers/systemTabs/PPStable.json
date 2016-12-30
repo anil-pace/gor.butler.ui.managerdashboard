@@ -27,7 +27,7 @@
   {
     "id": "pps.table.heading",
     "description": "Heading for PPS",
-    "defaultMessage": "PPS"
+    "defaultMessage": "Pick Put Stations"
   },
   {
     "id": "PPStable.selected",
@@ -48,6 +48,11 @@
     "id": "PPS.table.status",
     "description": "Status for PPS",
     "defaultMessage": "STATUS"
+  },
+  {
+    "id": "PPStable.status",
+    "description": "status for PPS table",
+    "defaultMessage": "{ppsOnState} On"
   },
   {
     "id": "PPS.table.operatingMode",
@@ -72,6 +77,6 @@
   {
     "id": "PPStable.totalOperator",
     "description": "totalOperator for PPStable",
-    "defaultMessage": "{operatorNum} operator"
+    "defaultMessage": "{operatorNum} operators"
   }
 ]

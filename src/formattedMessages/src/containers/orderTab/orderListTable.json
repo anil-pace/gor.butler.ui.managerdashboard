@@ -2,7 +2,7 @@
   {
     "id": "table.filter.placeholder",
     "description": "placeholder for table filter",
-    "defaultMessage": "Search by keywords"
+    "defaultMessage": "Filter by keywords"
   },
   {
     "id": "orderlist.table.allDrop",

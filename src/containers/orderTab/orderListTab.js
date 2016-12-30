@@ -1,17 +1,16 @@
-
 import React  from 'react';
 import ReactPaginate from 'react-paginate';
 import { connect } from 'react-redux';
 import {getPageData, getStatusFilter, getTimeFilter,getPageSizeOrders,currentPageOrders,lastRefreshTime} from '../../actions/paginationAction';
 import {ORDERS_RETRIEVE,GOR_BREACHED,GOR_EXCEPTION,GET,APP_JSON, INITIAL_HEADER_SORT, INITIAL_HEADER_ORDER} from '../../constants/frontEndConstants';
-import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,ORDER_PAGE, PICK_BEFORE_ORDER_URL, BREACHED_URL,UPDATE_TIME_HIGH,UPDATE_TIME_LOW,EXCEPTION_TRUE,WAREHOUSE_STATUS} from '../../constants/configConstants';
+import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,ORDER_PAGE, PICK_BEFORE_ORDER_URL, BREACHED_URL,UPDATE_TIME_HIGH,UPDATE_TIME_LOW,EXCEPTION_TRUE,WAREHOUSE_STATUS,FILTER_ORDER_ID} from '../../constants/configConstants';
 import OrderListTable from './orderListTable';
 import Dropdown from '../../components/dropdown/dropdown'
 import { FormattedMessage ,defineMessages,FormattedRelative} from 'react-intl';
 import Spinner from '../../components/spinner/Spinner';
 import {setOrderListSpinner} from '../../actions/orderListActions';
 import {stringConfig} from '../../constants/backEndConstants';
-import {orderHeaderSortOrder, orderHeaderSort} from '../../actions/sortHeaderActions';
+import {orderHeaderSortOrder, orderHeaderSort, orderFilterDetail} from '../../actions/sortHeaderActions';
 import {getDaysDiff} from '../../utilities/getDaysDiff';
 
 const messages = defineMessages ({
@@ -49,7 +48,7 @@ class OrderListTab extends React.Component{
   componentDidMount() {
     var data = {};
     data.selected = 0;
-    this.handlePageClick(data);
+    this.refresh(data);
   }
 
   processOrders(data, nProps) {
@@ -164,7 +163,6 @@ handlePageClick = (data) => {
     url = API_URL + ORDERS_URL + ORDER_PAGE + (data.selected+1) + "&PAGE_SIZE=25";
   }
 
-
   else {
     url = data.url;
   }
@@ -190,9 +188,9 @@ handlePageClick = (data) => {
 refresh = (data) => {
   var convertTime = {"oneHourOrders": 1, "twoHourOrders": 2, "sixHourOrders": 6, "twelveHourOrders": 12, "oneDayOrders": 24};
   var status = this.props.filterOptions.statusFilter, timeOut = this.props.filterOptions.timeFilter,currentTime,prevTime;
-  var  appendStatusUrl="", appendTimeUrl="", appendPageSize="", appendSortUrl="";
+  var  appendStatusUrl="", appendTimeUrl="", appendPageSize="", appendSortUrl="", appendTextFilterUrl="";
   var sortHead = {"recievedTime":"&order_by=create_time", "pickBy":"&order_by=pick_before_time", "id":"&order_by=order_id"};
-  var sortOrder = {"DESC":"&order=desc", "ASC":"&order=asc"};
+  var sortOrder = {"DESC":"&order=asc", "ASC":"&order=desc"};
   if(!data) {
     data = {};
     data.selected = 0;
@@ -202,8 +200,17 @@ refresh = (data) => {
   if(data.columnKey && data.sortDir) {
     appendSortUrl = sortHead[data.columnKey] + sortOrder[data.sortDir];
   }
-  else if(this.props.orderSortHeaderState && this.props.orderSortHeader) {
+  else if(this.props.orderSortHeaderState && this.props.orderSortHeader && this.props.orderSortHeaderState.colSortDirs) {
     appendSortUrl = sortHead[this.props.orderSortHeader] + sortOrder[this.props.orderSortHeaderState.colSortDirs[this.props.orderSortHeader]]
+  }
+
+  //for search via text filter
+  if((data.captureValue || data.captureValue === "") && data.type === "searchOrder") {
+      appendTextFilterUrl = FILTER_ORDER_ID + data.captureValue;
+  }
+
+  else if(this.props.orderFilter){
+    appendTextFilterUrl = FILTER_ORDER_ID + this.props.orderFilter;
   }
 
   //generating api url by pagination page no.
@@ -247,7 +254,7 @@ refresh = (data) => {
 }
 
 //combining all the filters
-data.url = data.url + appendStatusUrl+appendTimeUrl+appendPageSize+ appendSortUrl ;
+data.url = data.url + appendStatusUrl+appendTimeUrl+appendPageSize+ appendSortUrl + appendTextFilterUrl;
 this.props.lastRefreshTime((new Date()));
 this.handlePageClick(data)
 }
@@ -299,7 +306,8 @@ render(){
                   totalOrders={this.props.orderData.totalOrders}
                   sortHeaderState={this.props.orderHeaderSort} currentSortState={this.props.orderSortHeader} 
                   sortHeaderOrder={this.props.orderHeaderSortOrder} currentHeaderOrder={this.props.orderSortHeaderState}
-                  refreshData={this.refresh.bind(this)}
+                  refreshData={this.refresh.bind(this)} setOrderFilter={this.props.orderFilterDetail}
+                  getOrderFilter={this.props.orderFilter}
                   />
 
   <div className="gor-pageNum">
@@ -331,7 +339,9 @@ render(){
 }
 
 function mapStateToProps(state, ownProps){
+  console.log(state)
   return {
+    orderFilter: state.sortHeaderState.orderFilter|| "",
     orderSortHeader: state.sortHeaderState.orderHeaderSort || INITIAL_HEADER_SORT ,
     orderSortHeaderState: state.sortHeaderState.orderHeaderSortOrder || [],
     orderListSpinner: state.spinner.orderListSpinner || false,
@@ -346,6 +356,7 @@ function mapStateToProps(state, ownProps){
 
 var mapDispatchToProps = function(dispatch){
   return {
+    orderFilterDetail: function(data){dispatch(orderFilterDetail(data))},
     orderHeaderSort: function(data){dispatch(orderHeaderSort(data))},
     orderHeaderSortOrder: function(data){dispatch(orderHeaderSortOrder(data))},
     getPageData: function(data){ dispatch(getPageData(data)); },

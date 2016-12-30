@@ -191,7 +191,7 @@ class EditUser extends React.Component{
 
             <div style={this.state.view?{display:'none'}:{display:'block'}}>
               <div className='gor-usr-hdlg'><FormattedMessage id="users.edit.password." description='Heading for Password' 
-              defaultMessage='Password'/></div>
+              defaultMessage='New Password'/></div>
 
               <a href="javascript:void(0)" onClick={(e) => this._handleAnchorClick(e)}><FormattedMessage id="users.edit.password.query" description='Text for change password' 
               defaultMessage='Change Password'/></a>

@@ -45,16 +45,25 @@ var reA = /[^a-zA-Z]/g;
 var reN = /[^0-9]/g;
 export function sortData (columnKey, sortDir,sortIndexes,_dataList) {
 	 sortIndexes.sort((indexA, indexB) => {
-      var sortVal = 0;
-      var AInt = parseInt(_dataList.getObjectAt(indexA)[columnKey], 10);
-    var BInt = parseInt(_dataList.getObjectAt(indexB)[columnKey], 10);
+      var sortVal = 0,valA,valB;
+     if(_dataList._data) {
+        valA = _dataList._data.newData[indexA][columnKey];
+        valB = _dataList._data.newData[indexB][columnKey];
+      }
+
+      else {
+        valA = _dataList.newData[indexA][columnKey];
+        valB = _dataList.newData[indexB][columnKey];
+      }
+      var AInt = parseInt(valA, 10);
+    var BInt = parseInt(valB, 10);
 
     if(isNaN(AInt) && isNaN(BInt)){
-        var aA = _dataList.getObjectAt(indexA)[columnKey].replace(reA, "");
-        var bA = _dataList.getObjectAt(indexB)[columnKey].replace(reA, "");
+        var aA = valA.replace(reA, "");
+        var bA = valB.replace(reA, "");
         if(aA === bA) {
-            var aN = parseInt(_dataList.getObjectAt(indexA)[columnKey].replace(reN, ""), 10);
-            var bN = parseInt(_dataList.getObjectAt(indexB)[columnKey].replace(reN, ""), 10);
+            var aN = parseInt(valA.replace(reN, ""), 10);
+            var bN = parseInt(valB.replace(reN, ""), 10);
             sortVal =  aN === bN ? 0 : aN > bN ? 1 : -1;
         } else {
             sortVal =  aA.localeCompare(bA);
@@ -114,10 +123,11 @@ export const ActionCell = ({rowIndex, data, columnKey,selEdit,selDel,mid, ...pro
 );
 
 export const TextCell = ({rowIndex, data, columnKey,classKey, ...props}) => (
-  <Cell {...props} className={data.getObjectAt(rowIndex)[classKey]}>
+  <Cell {...props} >
     {data.getObjectAt(rowIndex)[columnKey]}
   </Cell>
 );
+
 
 export const ProgressCell = ({rowIndex, data, columnKey, ...props}) => (
   <Cell {...props}>
@@ -205,14 +215,11 @@ export class SortHeaderCell extends React.Component {
 
   _onSortChange(e) {
     e.preventDefault();
-
-    
       this.props.onSortChange(
         this.props.columnKey,
         this.props.sortDir ?
           reverseSortDirection(this.props.sortDir) :
           SortTypes.DESC
       );
-    
   }
 }

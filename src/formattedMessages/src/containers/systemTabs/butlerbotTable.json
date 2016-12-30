@@ -12,7 +12,7 @@
   {
     "id": "ButlerBotTable.TotalBot",
     "description": "Column name for the Bot id in bot table",
-    "defaultMessage": "BOT"
+    "defaultMessage": "BOTS"
   },
   {
     "id": "ButlerBotTable.subTotalBot",
@@ -23,6 +23,11 @@
     "id": "butlerBot.table.status",
     "description": "Status for butlerbot",
     "defaultMessage": "STATUS"
+  },
+  {
+    "id": "ButlerBotTable.status",
+    "description": "status for ButlerBotTable",
+    "defaultMessage": "{onlineBots} Online"
   },
   {
     "id": "butlerBot.table.currentTask",
@@ -37,7 +42,7 @@
   {
     "id": "butlerBot.table.msu",
     "description": "MSU Status for butlerbot",
-    "defaultMessage": "MSU"
+    "defaultMessage": "MSU MOUNTED"
   },
   {
     "id": "ButlerBotTable.mounted",
@@ -62,6 +67,6 @@
   {
     "id": "ButlerBotTable.avgVoltage",
     "description": "avgVoltage for ButlerBotTable",
-    "defaultMessage": "Avg. Voltage {voltage}"
+    "defaultMessage": "Avg {voltage}"
   }
 ]
