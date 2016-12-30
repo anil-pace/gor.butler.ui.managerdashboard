@@ -699,6 +699,11 @@ background: #f99405;
   background: #ffffff;
 
 }
+
+.left .public_fixedDataTableCell_cellContent{
+  text-align: right;
+}
+
 .completed{
   .public_fixedDataTableCell_cellContent{
     text-transform: capitalize;
@@ -1704,4 +1709,13 @@ font-family: "source sans pro";
   font-size: 13px;
   padding-top: 11px;
  }
+.gor-dropD-text{
+    display: inline-block;
+    padding-right: 16px;
+    vertical-align: initial;
+    font-size: 14px;
+    font-weight: 100;
+    color: #aaaaaa;
+}
+
 

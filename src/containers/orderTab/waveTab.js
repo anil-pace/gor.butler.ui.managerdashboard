@@ -7,7 +7,7 @@ import { setWavesSpinner } from '../../actions/spinnerAction';
 import {GOR_PENDING,GOR_PROGRESS,GOR_BREACHED} from '../../constants/frontEndConstants';
 import {stringConfig} from '../../constants/backEndConstants';
 import { defineMessages } from 'react-intl';
-import { waveHeaderSort,waveHeaderSortOrder } from '../../actions/sortHeaderActions';
+import { waveHeaderSort,waveHeaderSortOrder,waveFilterDetail } from '../../actions/sortHeaderActions';
 import {INITIAL_HEADER_SORT,INITIAL_HEADER_ORDER} from '../../constants/frontEndConstants';
 import {getDaysDiff} from '../../utilities/getDaysDiff';
 
@@ -147,7 +147,9 @@ return (
             sortHeaderState={this.props.waveHeaderSort} 
             sortHeaderOrder={this.props.waveHeaderSortOrder} 
             currentSortState={this.props.waveSortHeader} 
-            currentHeaderOrder={this.props.waveSortHeaderState}/>
+            currentHeaderOrder={this.props.waveSortHeaderState}
+            setWaveFilter={this.props.waveFilterDetail}
+            getWaveFilter = {this.props.waveFilter}/>/>
 </div>
 );
 }
@@ -156,6 +158,7 @@ return (
 
 function mapStateToProps(state, ownProps){
   return {
+    waveFilter: state.sortHeaderState.waveFilter|| "",
     waveSortHeader: state.sortHeaderState.waveHeaderSort || INITIAL_HEADER_SORT ,
     waveSortHeaderState: state.sortHeaderState.waveHeaderSortOrder || INITIAL_HEADER_ORDER,
     wavesSpinner: state.spinner.wavesSpinner || false,
@@ -170,6 +173,7 @@ function mapStateToProps(state, ownProps){
 
 var mapDispatchToProps = function(dispatch){
   return{
+    waveFilterDetail: function(data){dispatch(waveFilterDetail(data))},
     setWavesSpinner: function(data){dispatch(setWavesSpinner(data))},
     waveHeaderSort: function(data){dispatch(waveHeaderSort(data))},
     waveHeaderSortOrder: function(data){dispatch(waveHeaderSortOrder(data))}

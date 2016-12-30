@@ -89,8 +89,6 @@ class UserDataTable extends React.Component {
                this._onSortChange(this.props.currentSortState,this.props.currentHeaderOrder);
              }
       })
-      
-      
     }
 
     else {

@@ -2122,6 +2122,10 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   background: #ffffff;
 }
 
+.left .public_fixedDataTableCell_cellContent {
+  text-align: right;
+}
+
 .completed .public_fixedDataTableCell_cellContent {
   text-transform: capitalize;
 }
@@ -3107,6 +3111,15 @@ input[type="checkbox"] {
   color: #00a54f;
   font-size: 13px;
   padding-top: 11px;
+}
+
+.gor-dropD-text {
+  display: inline-block;
+  padding-right: 16px;
+  vertical-align: initial;
+  font-size: 14px;
+  font-weight: 100;
+  color: #aaaaaa;
 }
 
 .gorSubTab.gorContainer {

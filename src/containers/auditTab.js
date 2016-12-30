@@ -3,16 +3,16 @@ import ReactDOM  from 'react-dom';
 import UserDataTable from './userTab/userTabTable';
 import Spinner from '../components/spinner/Spinner';
 import { connect } from 'react-redux'; 
-import {AUDIT_URL} from '../constants/configConstants';
+import {AUDIT_URL,FILTER_AUDIT_ID} from '../constants/configConstants';
 import {getAuditData,setAuditRefresh} from '../actions/auditActions';
 import AuditTable from './auditTab/auditTable';
 import ReactPaginate from 'react-paginate';
 import {getPageData} from '../actions/paginationAction';
-import {AUDIT_RETRIEVE,GET,APP_JSON} from '../constants/frontEndConstants';
+import {AUDIT_RETRIEVE,GET,APP_JSON,GOR_COMPLETED_STATUS,LOCATION,SKU} from '../constants/frontEndConstants';
 import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,SEARCH_AUDIT_URL,GIVEN_PAGE,GIVEN_PAGE_SIZE} from '../constants/configConstants';
 import {setAuditSpinner} from '../actions/auditActions';
 import { defineMessages } from 'react-intl';
-import {auditHeaderSortOrder, auditHeaderSort} from '../actions/sortHeaderActions';
+import {auditHeaderSortOrder, auditHeaderSort, auditFilterDetail} from '../actions/sortHeaderActions';
 import {getDaysDiff} from '../utilities/getDaysDiff';
 
 //Mesages for internationalization
@@ -173,13 +173,17 @@ _processAuditData(data,nProps){
   return auditDetails;
 }
 handlePageClick(data){
-  var url, appendSortUrl = "";
+  var url, appendSortUrl = "",appendTextFilterUrl="";
   var sortHead = {"startTime":"&order_by=start_actual_time", "completedTime":"&order_by=completion_time", "id":"&order_by=audit_id"};
   var sortOrder = {"DESC":"&order=asc", "ASC":"&order=desc"};
   var makeDate = new Date();
   this.setState({selected_page:data.selected});
   makeDate.setDate(makeDate.getDate() - 30)
   makeDate = makeDate.getFullYear()+'-'+makeDate.getMonth()+'-'+makeDate.getDate();  
+  
+  if((data.captureValue || data.captureValue === "") && data.type === "searchOrder") {
+      appendTextFilterUrl = FILTER_AUDIT_ID + data.captureValue;
+  }
 
   if(data.url === undefined) {
     if(data.columnKey && data.sortDir) {
@@ -187,11 +191,11 @@ handlePageClick(data){
     }
     url = SEARCH_AUDIT_URL+makeDate+GIVEN_PAGE+(data.selected+1)+GIVEN_PAGE_SIZE + appendSortUrl;
   }
-
-
   else {
     url = data.url;
   }
+
+  url = url + appendTextFilterUrl;
 
   let paginationData={
     'url':url,
@@ -213,19 +217,39 @@ render(){
     {timeZone:timeOffset,
       year:'numeric',
       timeZoneName:'long'
-    }));
+    })),
+  totalProgress = 0;
   
   /*Extracting Time zone string for the specified time zone*/
   headerTimeZone = headerTimeZone.substr(5, headerTimeZone.length);
   
   var auditData = this._processAuditData();
+  var auditState = {"auditCompleted":0 ,"skuAudit": 0, "locationAudit":0, "totalProgress":0} 
+  for (var i = auditData.length - 1; i >= 0; i--) {
+    if(auditData[i].status === GOR_COMPLETED_STATUS) {
+      auditState["auditCompleted"]++;
+    }
+    if(auditData[i].auditType === SKU) {
+      auditState["skuAudit"]++;
+    }
+    if(auditData[i].auditType === LOCATION) {
+      auditState["locationAudit"]++;
+    }
+    totalProgress = auditData[i].progress + totalProgress;
+
+  }
+  if(auditData.length && auditData.length !== 0) {
+    auditState["totalProgress"] = (totalProgress)/(auditData.length);
+  }
+
   renderTab = <AuditTable items={auditData}
               intlMessg={this.props.intlMessages} 
               timeZoneString = {headerTimeZone}
               totalAudits={this.props.totalAudits}
               sortHeaderState={this.props.auditHeaderSort} currentSortState={this.props.auditSortHeader} 
               sortHeaderOrder={this.props.auditHeaderSortOrder} currentHeaderOrder={this.props.auditSortHeaderState}
-              refreshData={this.handlePageClick.bind(this)}/>
+              refreshData={this.handlePageClick.bind(this)}
+              setAuditFilter={this.props.auditFilterDetail} auditState={auditState}/>
   
   
   return (
@@ -259,6 +283,7 @@ render(){
 
 function mapStateToProps(state, ownProps){
   return {
+    orderFilter: state.sortHeaderState.auditFilter|| "",
     auditSortHeader: state.sortHeaderState.auditHeaderSort || "id" ,
     auditSortHeaderState: state.sortHeaderState.auditHeaderSortOrder || [],
     totalAudits: state.recieveAuditDetail.totalAudits || 0,
@@ -274,6 +299,7 @@ function mapStateToProps(state, ownProps){
 
 var mapDispatchToProps = function(dispatch){
   return {
+    auditFilterDetail: function(data){dispatch(auditFilterDetail(data))},
     auditHeaderSort: function(data){dispatch(auditHeaderSort(data))},
     auditHeaderSortOrder: function(data){dispatch(auditHeaderSortOrder(data))},
     setAuditSpinner: function(data){dispatch(setAuditSpinner(data))},

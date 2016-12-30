@@ -11,7 +11,7 @@ import {stringConfig} from '../../constants/backEndConstants';
 import {INITIAL_HEADER_SORT,INITIAL_HEADER_ORDER,GOR_PERIPHERAL_ONLINE, GOR_PERIPHERAL_OFFLINE} from '../../constants/frontEndConstants';
 import Spinner from '../../components/spinner/Spinner';
 import { setButlerSpinner } from  '../../actions/spinnerAction';
-import { butlerHeaderSort,butlerHeaderSortOrder } from '../../actions/sortHeaderActions';
+import { butlerHeaderSort,butlerHeaderSortOrder,butlerFilterDetail } from '../../actions/sortHeaderActions';
 import { defineMessages } from 'react-intl';
 
 //Mesages for internationalization
@@ -207,7 +207,13 @@ class ButlerBot extends React.Component{
 				<div>
 					<div className="gorTesting">
           <Spinner isLoading={this.props.butlerSpinner} setSpinner={this.props.setButlerSpinner}/>
-						<ButlerBotTable items={butlerData} itemNumber={itemNumber} parameters={taskDetail} intlMessg={this.props.intlMessages} sortHeaderState={this.props.butlerHeaderSort} currentSortState={this.props.butlerSortHeader} sortHeaderOrder={this.props.butlerHeaderSortOrder} currentHeaderOrder={this.props.butlerSortHeaderState}/>
+						<ButlerBotTable items={butlerData} itemNumber={itemNumber} parameters={taskDetail} 
+                            intlMessg={this.props.intlMessages} sortHeaderState={this.props.butlerHeaderSort} 
+                            currentSortState={this.props.butlerSortHeader} 
+                            sortHeaderOrder={this.props.butlerHeaderSortOrder} 
+                            currentHeaderOrder={this.props.butlerSortHeaderState}
+                            setButlerFilter={this.props.butlerFilterDetail}
+                            getButlerFilter = {this.props.butlerFilter}/>
 					</div>
 				</div>
 			</div>
@@ -217,6 +223,7 @@ class ButlerBot extends React.Component{
 
 function mapStateToProps(state, ownProps){
   return {
+    butlerFilter: state.sortHeaderState.butlerFilter|| "",
     butlerSortHeader: state.sortHeaderState.butlerHeaderSort || INITIAL_HEADER_SORT ,
     butlerSortHeaderState: state.sortHeaderState.butlerHeaderSortOrder || INITIAL_HEADER_ORDER,
     butlerSpinner: state.spinner.butlerSpinner || false,
@@ -228,6 +235,7 @@ function mapStateToProps(state, ownProps){
 
 var mapDispatchToProps = function(dispatch){
   return{
+    butlerFilterDetail: function(data){dispatch(butlerFilterDetail(data))},
     setButlerSpinner: function(data){dispatch(setButlerSpinner(data))},
     butlerHeaderSort: function(data){dispatch(butlerHeaderSort(data))},
     butlerHeaderSortOrder: function(data){dispatch(butlerHeaderSortOrder(data))}

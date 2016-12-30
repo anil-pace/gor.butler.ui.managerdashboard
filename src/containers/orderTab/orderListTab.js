@@ -1,10 +1,9 @@
-
 import React  from 'react';
 import ReactPaginate from 'react-paginate';
 import { connect } from 'react-redux';
 import {getPageData, getStatusFilter, getTimeFilter,getPageSizeOrders,currentPageOrders,lastRefreshTime} from '../../actions/paginationAction';
 import {ORDERS_RETRIEVE,GOR_BREACHED,GOR_EXCEPTION,GET,APP_JSON, INITIAL_HEADER_SORT, INITIAL_HEADER_ORDER} from '../../constants/frontEndConstants';
-import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,ORDER_PAGE, PICK_BEFORE_ORDER_URL, BREACHED_URL,UPDATE_TIME_HIGH,UPDATE_TIME_LOW,EXCEPTION_TRUE,WAREHOUSE_STATUS} from '../../constants/configConstants';
+import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,ORDER_PAGE, PICK_BEFORE_ORDER_URL, BREACHED_URL,UPDATE_TIME_HIGH,UPDATE_TIME_LOW,EXCEPTION_TRUE,WAREHOUSE_STATUS,FILTER_ORDER_ID} from '../../constants/configConstants';
 import OrderListTable from './orderListTable';
 import Dropdown from '../../components/dropdown/dropdown'
 import { FormattedMessage ,defineMessages,FormattedRelative} from 'react-intl';
@@ -207,11 +206,11 @@ refresh = (data) => {
 
   //for search via text filter
   if((data.captureValue || data.captureValue === "") && data.type === "searchOrder") {
-      appendTextFilterUrl = "&order_id~=" + data.captureValue;
+      appendTextFilterUrl = FILTER_ORDER_ID + data.captureValue;
   }
 
   else if(this.props.orderFilter){
-    appendTextFilterUrl = "&order_id~=" + this.props.orderFilter;
+    appendTextFilterUrl = FILTER_ORDER_ID + this.props.orderFilter;
   }
 
   //generating api url by pagination page no.

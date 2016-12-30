@@ -3,9 +3,9 @@ import {Table, Column, Cell} from 'fixed-data-table';
 import Dropdown from '../../components/dropdown/dropdown'
 import Dimensions from 'react-dimensions'
 import { FormattedMessage, FormattedDate, FormattedTime,FormattedRelative ,defineMessages} from 'react-intl';
-import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
-import {GOR_STATUS,GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
-
+import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData,TestingCell} from '../../components/commonFunctionsDataTable';
+import {GOR_STATUS,GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT,DEBOUNCE_TIMER} from '../../constants/frontEndConstants';
+import {debounce} from '../../utilities/debounce';
 
 const messages = defineMessages({
     filterPlaceholder: {
@@ -17,6 +17,8 @@ const messages = defineMessages({
 
 
 class OrderListTable extends React.Component {
+ 
+
   constructor(props) {
     super(props);
     if(this.props.items === undefined) {
@@ -93,8 +95,9 @@ class OrderListTable extends React.Component {
       }
     }));
   }
-  _onFilterChange(e) {
-    var data={"type":"searchOrder", "captureValue":"", "selected":0 }
+
+   _onFilterChange(e) {
+    var data={"type":"searchOrder", "captureValue":"", "selected":0 },debounceFilter;
     if(e.target && (e.target.value || e.target.value === "")) {
       data["captureValue"] = e.target.value;
       this.props.setOrderFilter(e.target.value);
@@ -102,7 +105,8 @@ class OrderListTable extends React.Component {
     else {
       data["captureValue"] = e;
     }
-    this.props.refreshData(data);
+    debounceFilter = debounce(this.props.refreshData, DEBOUNCE_TIMER);
+    debounceFilter(data);
   }
   
 
@@ -183,6 +187,7 @@ class OrderListTable extends React.Component {
           </div>
         <div className="filterWrapper"> 
         <div className="gorToolBarDropDown">
+          <div className="gor-dropD-text"> Show </div>
           <div className="gor-dropDown-firstInnerElement">
               <Dropdown  styleClass={'gorDataTableDrop'}  items={ordersByStatus} currentState={ordersByStatus[0]} optionDispatch={this.props.statusFilter} refreshList={this.props.refreshList}/>
           </div>
@@ -319,7 +324,7 @@ class OrderListTable extends React.Component {
               </div>
             </div>
           }
-          cell={<TextCell data={sortedDataList} />}
+          cell={<TextCell data={sortedDataList} align="left"/>}
           fixed={true}
           width={columnWidths.orderLine}
           isResizable={true}

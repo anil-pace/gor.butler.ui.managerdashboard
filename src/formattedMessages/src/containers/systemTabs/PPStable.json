@@ -50,6 +50,11 @@
     "defaultMessage": "STATUS"
   },
   {
+    "id": "PPStable.status",
+    "description": "status for PPS table",
+    "defaultMessage": "{ppsOnState} On"
+  },
+  {
     "id": "PPS.table.operatingMode",
     "description": "operatingMode for PPS",
     "defaultMessage": "OPERATING MODE"

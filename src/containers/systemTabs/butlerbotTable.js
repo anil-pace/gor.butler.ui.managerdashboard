@@ -64,7 +64,7 @@ class ButlerBotTable extends React.Component {
     this._onSortChange = this._onSortChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
-    this._onSortChange(nextProps.currentSortState,nextProps.currentHeaderOrder);
+    this._onFilterChange(nextProps.getButlerFilter);
   }
   
    _onColumnResizeEndCallback(newColumnWidth, columnKey) {
@@ -76,15 +76,36 @@ class ButlerBotTable extends React.Component {
     }));
   }
   _onFilterChange(e) {
-    if (!e.target.value) {
+    if (e.target && !e.target.value) {
       this.setState({
         sortedDataList: this._dataList,
       });
     }
-    var filterField = ["current","id","status","msu","location"];
-    this.setState({
-      sortedDataList: new DataListWrapper(filterIndex(e,this._dataList,filterField), this._dataList),
-    });
+    var filterField = ["current","id","status","msu","location"], newData;
+     if(e.target && (e.target.value || e.target.value === "")) {
+      var captureValue = e.target.value;
+      newData = new DataListWrapper(filterIndex(e,this.state.sortedDataList,filterField), this._dataList)
+      
+      this.setState({
+        sortedDataList: newData
+        }, function() {
+            this.props.setButlerFilter(captureValue);
+            if(this.props.items && this.props.items.length) {
+               this._onSortChange(this.props.currentSortState,this.props.currentHeaderOrder);
+             }
+      })
+    }
+
+    else {
+      newData = new DataListWrapper(filterIndex(e,this.state.sortedDataList,filterField), this._dataList);
+      this.setState({
+        sortedDataList: newData
+        }, function() {
+            if(this.props.items && this.props.items.length) {
+               this._onSortChange(this.props.currentSortState,this.props.currentHeaderOrder);
+             }
+      })
+    }
   }
   
  
@@ -93,6 +114,9 @@ class ButlerBotTable extends React.Component {
       columnKey = GOR_STATUS_PRIORITY;
     }
     var sortIndexes = this._defaultSortIndexes.slice();
+    if(this.state.sortedDataList._indexMap) {
+      sortIndexes = this.state.sortedDataList._indexMap.slice();
+    }
     this.setState({
       sortedDataList: new DataListWrapper(sortData(columnKey, sortDir,sortIndexes,this._dataList), this._dataList),
       colSortDirs: {
@@ -136,7 +160,8 @@ class ButlerBotTable extends React.Component {
             <div className="searchbox-magnifying-glass-icon"/>
             <input className="gorInputFilter"
               onChange={this._onFilterChange}
-              placeholder={this.props.intlMessg["table.filter.placeholder"]}>
+              placeholder={this.props.intlMessg["table.filter.placeholder"]}
+              value={this.props.getButlerFilter}>
             </input>
         </div>
         </div>

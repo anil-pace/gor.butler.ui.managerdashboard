@@ -1973,7 +1973,7 @@
   {
     "id": "users.edit.password.field1",
     "description": "Text for password",
-    "defaultMessage": "Password"
+    "defaultMessage": "New Password"
   },
   {
     "id": "users.edit.password.field2",

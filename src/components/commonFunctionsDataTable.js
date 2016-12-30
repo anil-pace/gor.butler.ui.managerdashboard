@@ -128,6 +128,7 @@ export const TextCell = ({rowIndex, data, columnKey,classKey, ...props}) => (
   </Cell>
 );
 
+
 export const ProgressCell = ({rowIndex, data, columnKey, ...props}) => (
   <Cell {...props}>
   <div className="gor-progressBar-wrap">
