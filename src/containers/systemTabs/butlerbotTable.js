@@ -184,7 +184,7 @@ class ButlerBotTable extends React.Component {
                 <FormattedMessage id="ButlerBotTable.TotalBot" description='Column name for the Bot id in bot table' defaultMessage='BOTS'/>
               
               <div className="gorToolHeaderSubText"> 
-                <FormattedMessage id="ButlerBotTable.subTotalBot" description='sub text for totalbot ButlerBotTable' defaultMessage='Total: {totalBot}' values={{totalBot: totalBot}}/>
+                <FormattedMessage id="ButlerBotTable.subTotalBot" description='sub text for totalbot ButlerBotTable' defaultMessage='Total: {totalBot}' values={{totalBot: totalBot?totalBot:"0"}}/>
               </div>
               </div>
             </SortHeaderCell>
@@ -270,7 +270,7 @@ class ButlerBotTable extends React.Component {
               <div className="gorToolHeaderSubText"> 
                 <FormattedMessage id="ButlerBotTable.locations" description='msu Location for ButlerBotTable' 
                 defaultMessage='{locations} Locations' 
-                values={{locations:locations?locations:'--'}}/>
+                values={{locations:locations?locations:'0'}}/>
               </div>
               </div>
             </SortHeaderCell>
@@ -291,7 +291,7 @@ class ButlerBotTable extends React.Component {
               <div className="gorToolHeaderSubText"> 
                 <FormattedMessage id="ButlerBotTable.avgVoltage" description='avgVoltage for ButlerBotTable' 
                 defaultMessage='Avg {voltage}' 
-                values={{voltage:voltage}}/>  
+                values={{voltage:voltage?voltage:"0 V"}}/>  
               </div> 
               </div>
             </SortHeaderCell>

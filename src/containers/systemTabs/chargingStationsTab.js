@@ -56,7 +56,12 @@ class ChargingStations extends React.Component{
     detail.status = nProps.context.intl.formatMessage((stringConfig[data[i].charger_status]));
     detail.statusClass = data[i].charger_status;
     detail.statusPriority = priStatus[data[i].charger_status];
-    detail.mode = nProps.context.intl.formatMessage(stringConfig[data[i].charger_mode]);
+    if(nProps.context.intl.formatMessage(stringConfig[data[i].charger_mode])) {
+     detail.mode = nProps.context.intl.formatMessage(stringConfig[data[i].charger_mode]);
+    }
+    else {
+      detail.mode = data[i].charger_mode;
+    }
     detail.modeClass = data[i].charger_mode;
     if(data[i].docked_butler_id  && data[i].docked_butler_id.length) {
        detail.dockedBots = BUTLER;

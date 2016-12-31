@@ -853,7 +853,7 @@ body {
 
 .gor-tabs .gorTab .gorInlineDisplay {
   display: inline-block;
-  padding-right: 16px;
+  padding-right: 20px;
 }
 
 body {
@@ -1490,6 +1490,7 @@ body {
   border-bottom: solid;
   border-width: 1px;
   border-color: #dedede;
+  text-transform: capitalize;
 }
 
 .fixedDataTableCellGroupLayout_cellGroup > .public_fixedDataTableCell_main {
@@ -2123,7 +2124,11 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 }
 
 .left .public_fixedDataTableCell_cellContent {
-  text-align: right;
+  text-align: left;
+}
+
+.right .public_fixedDataTableCell_cellContent {
+  text-align: left;
 }
 
 .completed .public_fixedDataTableCell_cellContent {
@@ -2814,6 +2819,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   font-size: 12px;
   color: #666666;
   padding-top: 14px;
+  min-height: 0.875rem;
 }
 
 .gorTesting {

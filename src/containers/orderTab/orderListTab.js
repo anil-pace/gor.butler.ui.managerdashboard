@@ -86,7 +86,12 @@ class OrderListTab extends React.Component{
         alertStatesNum++;
       }      
       else {
-        orderData.status = nProps.context.intl.formatMessage(stringConfig[data[i].status]);
+        if(nProps.context.intl.formatMessage(stringConfig[data[i].status])) {
+          orderData.status = nProps.context.intl.formatMessage(stringConfig[data[i].status]);
+        }
+        else {
+          orderData.status = data[i].status;
+        }
         orderData.statusClass = data[i].status;
         orderData.statusPriority = unBreachedStatus[data[i].status];
       }
@@ -339,7 +344,6 @@ render(){
 }
 
 function mapStateToProps(state, ownProps){
-  console.log(state)
   return {
     orderFilter: state.sortHeaderState.orderFilter|| "",
     orderSortHeader: state.sortHeaderState.orderHeaderSort || INITIAL_HEADER_SORT ,

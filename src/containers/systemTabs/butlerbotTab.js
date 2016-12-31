@@ -114,9 +114,26 @@ class ButlerBot extends React.Component{
     butlerDetail = {};
     butlerDetail.id =  BOT;
     butlerDetail.statusClass = data[i].state;
-    butlerDetail.status = nProps.context.intl.formatMessage(stringConfig[data[i].state]);
+    if(nProps.context.intl.formatMessage(stringConfig[data[i].state])) {
+      butlerDetail.status = nProps.context.intl.formatMessage(stringConfig[data[i].state]);
+    }
+
+    else {
+      butlerDetail.status = data[i].state;
+    }
     butlerDetail.statusPriority = priStatus[data[i].state];
-    butlerDetail.location = data[i].location;
+    if(data[i].location) {
+      butlerDetail.location = data[i].location;
+    }
+    else {
+      butlerDetail.location = "--";
+    }
+    if(data[i].voltage) {
+      butlerDetail.voltage = data[i].voltage + "V";
+    }
+    else {
+      butlerDetail.voltage = "--";
+    }
     butlerDetail.voltage = data[i].voltage;
     butlerDetail.taskNum = currentTask[data[i].current_task];
     butlerDetail.taskType = data[i].current_task;
@@ -199,7 +216,7 @@ class ButlerBot extends React.Component{
     	taskDetail["avgVoltage"]=avgVoltage + "V";
     }
   else {
-  	taskDetail = {"Put":"--", "Pick":"--", "Charging":"--", "Idle":"--","Audit":"--", "avgVoltage":"--", "msuMounted":"--", "location":"--", "online":"--"};
+  	taskDetail = {"Put":"--", "Pick":"--", "Charging":"--", "Idle":"--","Audit":"--", "avgVoltage":0, "msuMounted":"--", "location":"--", "online":"--"};
   }
 }
 		return (
