@@ -48,6 +48,9 @@ class WaveTab extends React.Component{
       if(nProps.context.intl.formatMessage(stringConfig[data[i].status])) {
         waveDetail.status = nProps.context.intl.formatMessage(stringConfig[data[i].status]);
       }
+      else {
+        waveDetail.status = data[i].status;
+      }
       if(data[i].start_time === "") {
         waveDetail.startTime = "--";
       }
@@ -150,7 +153,7 @@ return (
             currentSortState={this.props.waveSortHeader} 
             currentHeaderOrder={this.props.waveSortHeaderState}
             setWaveFilter={this.props.waveFilterDetail}
-            getWaveFilter = {this.props.waveFilter}/>/>
+            getWaveFilter = {this.props.waveFilter}/>
 </div>
 );
 }

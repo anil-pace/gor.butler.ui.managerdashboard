@@ -59,6 +59,9 @@ class ChargingStations extends React.Component{
     if(nProps.context.intl.formatMessage(stringConfig[data[i].charger_mode])) {
      detail.mode = nProps.context.intl.formatMessage(stringConfig[data[i].charger_mode]);
     }
+    else {
+      detail.mode = data[i].charger_mode;
+    }
     detail.modeClass = data[i].charger_mode;
     if(data[i].docked_butler_id  && data[i].docked_butler_id.length) {
        detail.dockedBots = BUTLER;

@@ -117,6 +117,10 @@ class ButlerBot extends React.Component{
     if(nProps.context.intl.formatMessage(stringConfig[data[i].state])) {
       butlerDetail.status = nProps.context.intl.formatMessage(stringConfig[data[i].state]);
     }
+
+    else {
+      butlerDetail.status = data[i].state;
+    }
     butlerDetail.statusPriority = priStatus[data[i].state];
     if(data[i].location) {
       butlerDetail.location = data[i].location;
