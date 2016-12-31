@@ -70,6 +70,11 @@
     "defaultMessage": "PERFORMANCE"
   },
   {
+    "id": "PPStable.avgThroughput",
+    "description": "avgThroughput for PPStable",
+    "defaultMessage": "Avg {avgThroughput} items/hr"
+  },
+  {
     "id": "PPS.table.operatorAssigned",
     "description": "operatorAssigned for PPS",
     "defaultMessage": "OPERATOR ASSIGNED"

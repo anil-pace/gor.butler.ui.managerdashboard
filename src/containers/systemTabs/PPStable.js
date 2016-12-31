@@ -274,6 +274,7 @@ class PPStable extends React.Component {
     let notSet = this.props.operationMode.notSet;
     let operatorNum =  this.props.operatorNum, j=1;
     let ppsOnState = this.props.ppsOnState;
+    let avgThroughput = this.props.avgThroughput;
     if(this.props.bDropRender===true) {
       drop = <DropdownTable  styleClass={'gorDataTableDrop'} placeholder={this.props.intlMessg["pps.dropdown.placeholder"]} items={modes} changeMode={this.handleModeChange.bind(this)}/>;
     }
@@ -423,12 +424,11 @@ class PPStable extends React.Component {
                <div className="gorToolHeaderEl"> 
                <FormattedMessage id="PPS.table.performance" description="performance Status for PPS" 
               defaultMessage ="PERFORMANCE"/> 
-               <div>
-              <div className="statuslogoWrap">
-            
-              </div>
-              
-              </div>
+              <div className="gorToolHeaderSubText"> 
+                <FormattedMessage id="PPStable.avgThroughput" description='avgThroughput for PPStable' 
+                defaultMessage='Avg {avgThroughput} items/hr' 
+                values={{avgThroughput:avgThroughput?avgThroughput:"0"}}/>  
+              </div> 
               </div>
             </SortHeaderCell>
           }

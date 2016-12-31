@@ -75,6 +75,11 @@
     "defaultMessage": "Refresh Data"
   },
   {
+    "id": "order.table.dropdown.text",
+    "description": "Sub text for order list dropdown",
+    "defaultMessage": "Show"
+  },
+  {
     "id": "orderlist.order.headingText",
     "description": "Heading for order IDs in ordertable",
     "defaultMessage": "ORDER ID"

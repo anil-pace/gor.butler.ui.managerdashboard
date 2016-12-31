@@ -45,8 +45,9 @@ class WaveTab extends React.Component{
       waveDetail.id = WAVE ;
       waveDetail.statusClass = status[data[i].status];
       waveDetail.statusPriority = priStatus[data[i].status];
-      waveDetail.status = nProps.context.intl.formatMessage(stringConfig[data[i].status]);
-
+      if(nProps.context.intl.formatMessage(stringConfig[data[i].status])) {
+        waveDetail.status = nProps.context.intl.formatMessage(stringConfig[data[i].status]);
+      }
       if(data[i].start_time === "") {
         waveDetail.startTime = "--";
       }

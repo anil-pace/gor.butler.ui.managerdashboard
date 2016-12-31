@@ -187,7 +187,8 @@ class OrderListTable extends React.Component {
           </div>
         <div className="filterWrapper"> 
         <div className="gorToolBarDropDown">
-          <div className="gor-dropD-text"> Show </div>
+          <div className="gor-dropD-text"> <FormattedMessage id="order.table.dropdown.text" description="Sub text for order list dropdown" 
+              defaultMessage ="Show"/> </div>
           <div className="gor-dropDown-firstInnerElement">
               <Dropdown  styleClass={'gorDataTableDrop'}  items={ordersByStatus} currentState={ordersByStatus[0]} optionDispatch={this.props.statusFilter} refreshList={this.props.refreshList}/>
           </div>

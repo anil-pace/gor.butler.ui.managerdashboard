@@ -86,7 +86,9 @@ class OrderListTab extends React.Component{
         alertStatesNum++;
       }      
       else {
-        orderData.status = nProps.context.intl.formatMessage(stringConfig[data[i].status]);
+        if(nProps.context.intl.formatMessage(stringConfig[data[i].status])) {
+          orderData.status = nProps.context.intl.formatMessage(stringConfig[data[i].status]);
+        }
         orderData.statusClass = data[i].status;
         orderData.statusPriority = unBreachedStatus[data[i].status];
       }

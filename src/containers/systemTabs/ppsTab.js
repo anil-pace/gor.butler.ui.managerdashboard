@@ -75,6 +75,7 @@ class PPS extends React.Component{
     detail.operatingMode = currentTask[data[i].current_task];
     detail.operatingModeClass = data[i].current_task;
     detail.performance = PERFORMANCE;///  orders /items
+    detail.ppsThroughput = data[i].performance;
     if(data[i].operators_assigned === null) {
       detail.operatorAssigned = "--";
     }
@@ -100,7 +101,7 @@ class PPS extends React.Component{
 	render(){	
 
 	var operationMode = {"pick":0, "put":0, "audit":0,"notSet":0};
-    var data , operatorNum = 0, itemNumber = 5, ppsOn = 0;
+    var data , operatorNum = 0, itemNumber = 5, ppsOn = 0, avgThroughput=0;
     if(this.props.PPSDetail.PPStypeDetail !== undefined) {
     	data = this._processPPSData();
       for (var i = data.length - 1; i >= 0; i--) {
@@ -119,8 +120,15 @@ class PPS extends React.Component{
          if(data[i].status === GOR_ON_STATUS) {
           ppsOn++;
          }
+
+         if(data[i].ppsThroughput) {
+          avgThroughput = avgThroughput + data[i].ppsThroughput;
+         }
     }
-    
+
+    if(data.length) {
+      avgThroughput = (avgThroughput/(data.length)).toFixed(1);
+    }
 
     }
 	
@@ -139,7 +147,8 @@ class PPS extends React.Component{
              setCheckAll = {this.props.setCheckAll}
              getCheckAll = {this.props.getCheckAll}
              setPpsFilter={this.props.ppsFilterDetail}
-             getPpsFilter = {this.props.ppsFilter}/>
+             getPpsFilter = {this.props.ppsFilter}
+             avgThroughput = {avgThroughput}/>
 					</div>
 				</div>
 			</div>
