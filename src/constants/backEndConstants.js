@@ -20,7 +20,8 @@ export const PARSE_INVENTORY_HISTORY = "inventory_history";
 export const PARSE_PUT = "put";
 export const PARSE_PICK = "pick";
 export const PARSE_PPA_THROUGHPUT = "put_pick_audit_throughput";
-export const PARSE_AUDIT = "audit_agg";
+export const PARSE_AUDIT = "audit";
+export const PARSE_AUDIT_AGG = "audit_agg";
 export const PARSE_STATUS = "status";
 export const SYSTEM_CHARGERS_DETAILS = "chargers";
 export const BUTLERBOTS = "butlerbots";
@@ -117,6 +118,11 @@ export const  stringConfig= defineMessages({
         id: 'stringConfig.pending',
         description: 'Text to show pending',
         defaultMessage: "In Progress"
+    },
+    wave_pending:{
+        id: 'stringConfig.wave.pending',
+        description: 'Text to show pending',
+        defaultMessage: "Pending"
     },
     disconnected:{
         id: 'stringConfig.disconnected',

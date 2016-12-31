@@ -1,7 +1,7 @@
 
 import {receivePpsData,receiveButlersData,receiveAuditData,receiveThroughputData,receivePutData,receiveChargersData,receiveOrdersData,initData,recieveHistogramData,recieveChargersDetail,recieveButlersDetail,recievePPSDetail,recievePPSperformance,recieveUserDetails} from '../actions/responseAction';
 import {HISTOGRAM_DATA} from '../constants/frontEndConstants';
-import {SYSTEM_CHARGERS_DETAILS,USER_DATA,HISTOGRAM_DETAILS,PARSE_OVERVIEW,PARSE_SYSTEM,PARSE_STATUS,PPS_DETAIL,SYSTEM_PPS_DETAILS,SYSTEM_BUTLERS_DETAILS,PARSE_PPS,PARSE_BUTLERS,PARSE_CHARGERS,PARSE_INVENTORY_HISTORY,PARSE_INVENTORY_TODAY,PARSE_INVENTORY,PARSE_ORDERS,PARSE_PUT,PARSE_PICK,PARSE_PPA_THROUGHPUT,PARSE_AUDIT,} from '../constants/backEndConstants'
+import {SYSTEM_CHARGERS_DETAILS,USER_DATA,HISTOGRAM_DETAILS,PARSE_OVERVIEW,PARSE_SYSTEM,PARSE_STATUS,PPS_DETAIL,SYSTEM_PPS_DETAILS,SYSTEM_BUTLERS_DETAILS,PARSE_PPS,PARSE_BUTLERS,PARSE_CHARGERS,PARSE_INVENTORY_HISTORY,PARSE_INVENTORY_TODAY,PARSE_INVENTORY,PARSE_ORDERS,PARSE_PUT,PARSE_PICK,PARSE_PPA_THROUGHPUT,PARSE_AUDIT,PARSE_AUDIT_AGG} from '../constants/backEndConstants'
 import {wsOnMessageAction} from '../actions/socketActions';
 import {recieveOverviewStatus,recieveSystemStatus,recieveAuditStatus,recieveOrdersStatus,recieveUsersStatus,recieveInventoryStatus,recieveStatus} from '../actions/tabActions';
 import {displaySpinner} from '../actions/spinnerAction';
@@ -10,11 +10,16 @@ import {setAuditSpinner} from '../actions/auditActions';
 import {setButlerSpinner,setPpsSpinner,setCsSpinner,setWavesSpinner} from '../actions/spinnerAction';
 import {receiveInventoryTodayData,receiveInventoryHistoryData} from '../actions/inventoryActions';
 import {resTypeSnapShotToday,resTypeSnapShotHistory} from '../../mock/mockDBData';
+import {endSession} from './endSession';
 
 export function ResponseParse(store,res)
 {
 
-	
+		if(res.alert_data)
+		{
+			endSession(store);
+			return;
+		}
 		if (!res.resource_type) {
 			store.dispatch(wsOnMessageAction(res));
 			return;
@@ -30,15 +35,11 @@ export function ResponseParse(store,res)
 				store.dispatch(receiveButlersData(res));
 				break;
 			case PARSE_AUDIT:
-				if(res.header_data)
-				{
 					store.dispatch(recieveAuditStatus(res));
-				}
-				else
-				{
+					break;
+			case PARSE_AUDIT_AGG:
 				 	store.dispatch(receiveAuditData(res));
 				 	store.dispatch(setAuditSpinner(false));
-				}
 				break;
 			case PARSE_PUT:
 				store.dispatch(receivePutData(res));

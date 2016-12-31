@@ -3,9 +3,7 @@ import {AJAX_CALL,AUTH_LOGIN} from '../constants/frontEndConstants';
 
 import {AjaxParse} from '../utilities/AjaxParser';
 import {ShowError} from '../utilities/showError';
-import {logoutRequest} from '../actions/loginAction'
-import { endWsAction } from '../actions/socketActions';
-
+import {endSession} from '../utilities/endSession';
 
 const ajaxMiddleware = (function(){ 
 
@@ -26,9 +24,7 @@ const ajaxMiddleware = (function(){
       httpRequest.onreadystatechange = function(xhr){
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
               if(httpRequest.status === 401 && params.cause!==AUTH_LOGIN) {
-                sessionStorage.clear();        
-                store.dispatch(logoutRequest());
-                store.dispatch(endWsAction()); 
+                endSession(store);
               }
               else {
                  try

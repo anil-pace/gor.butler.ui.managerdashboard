@@ -13,8 +13,8 @@ import Spinner from '../../components/spinner/Spinner';
 import { setPpsSpinner } from '../../actions/spinnerAction';
 import {stringConfig} from '../../constants/backEndConstants'
 import { defineMessages } from 'react-intl';
-import { ppsHeaderSort,ppsHeaderSortOrder, setCheckedPps,setDropDisplay ,setCheckAll} from '../../actions/sortHeaderActions';
-import {INITIAL_HEADER_SORT,INITIAL_HEADER_ORDER} from '../../constants/frontEndConstants';
+import { ppsHeaderSort,ppsHeaderSortOrder, setCheckedPps,setDropDisplay ,setCheckAll,ppsFilterDetail} from '../../actions/sortHeaderActions';
+import {INITIAL_HEADER_SORT,INITIAL_HEADER_ORDER,GOR_ON_STATUS} from '../../constants/frontEndConstants';
 
 //Mesages for internationalization
 const messages = defineMessages({
@@ -75,6 +75,7 @@ class PPS extends React.Component{
     detail.operatingMode = currentTask[data[i].current_task];
     detail.operatingModeClass = data[i].current_task;
     detail.performance = PERFORMANCE;///  orders /items
+    detail.ppsThroughput = data[i].performance;
     if(data[i].operators_assigned === null) {
       detail.operatorAssigned = "--";
     }
@@ -100,7 +101,7 @@ class PPS extends React.Component{
 	render(){	
 
 	var operationMode = {"pick":0, "put":0, "audit":0,"notSet":0};
-    var data , operatorNum = 0, itemNumber = 5;
+    var data , operatorNum = 0, itemNumber = 5, ppsOn = 0, avgThroughput=0;
     if(this.props.PPSDetail.PPStypeDetail !== undefined) {
     	data = this._processPPSData();
       for (var i = data.length - 1; i >= 0; i--) {
@@ -112,11 +113,22 @@ class PPS extends React.Component{
           operatorNum = "--";
        }
        
-    if (operatorNum < data[i].totalUser) {
-      operatorNum = data[i].totalUser
+        if (operatorNum < data[i].totalUser) {
+          operatorNum = data[i].totalUser
+         }
+
+         if(data[i].status === GOR_ON_STATUS) {
+          ppsOn++;
+         }
+
+         if(data[i].ppsThroughput) {
+          avgThroughput = avgThroughput + data[i].ppsThroughput;
+         }
     }
+
+    if(data.length) {
+      avgThroughput = (avgThroughput/(data.length)).toFixed(1);
     }
-    
 
     }
 	
@@ -129,11 +141,14 @@ class PPS extends React.Component{
              modeChange={this.props.changePPSmode} intlMessg={this.props.intlMessages} 
              sortHeaderState={this.props.ppsHeaderSort} currentSortState={this.props.ppsSortHeader} 
              sortHeaderOrder={this.props.ppsHeaderSortOrder} currentHeaderOrder={this.props.ppsSortHeaderState} 
-             setCheckedPps={this.props.setCheckedPps} checkedPps={this.props.checkedPps}
+             setCheckedPps={this.props.setCheckedPps} checkedPps={this.props.checkedPps} ppsOnState={ppsOn}
              renderDdrop={this.props.setDropDisplay}
              bDropRender = {this.props.bDropRender}
              setCheckAll = {this.props.setCheckAll}
-             getCheckAll = {this.props.getCheckAll}/>
+             getCheckAll = {this.props.getCheckAll}
+             setPpsFilter={this.props.ppsFilterDetail}
+             getPpsFilter = {this.props.ppsFilter}
+             avgThroughput = {avgThroughput}/>
 					</div>
 				</div>
 			</div>
@@ -145,6 +160,7 @@ class PPS extends React.Component{
 
 function mapStateToProps(state, ownProps){
   return {
+    ppsFilter: state.sortHeaderState.ppsFilter|| "",
     getCheckAll: state.sortHeaderState.checkAll || false,
     bDropRender: state.sortHeaderState.renderDropD || false,
     checkedPps: state.sortHeaderState.checkedPps,
@@ -158,6 +174,7 @@ function mapStateToProps(state, ownProps){
 
 var mapDispatchToProps = function(dispatch){
   return {
+    ppsFilterDetail: function(data){dispatch(ppsFilterDetail(data))},
     changePPSmode: function(data){ dispatch(changePPSmode(data)); },
     setPpsSpinner: function(data){ dispatch(setPpsSpinner(data))},
     ppsHeaderSort: function(data){dispatch(ppsHeaderSort(data))},

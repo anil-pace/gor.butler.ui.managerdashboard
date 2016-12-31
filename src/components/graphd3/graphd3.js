@@ -25,30 +25,37 @@ class Chart extends React.Component{
    }
 
   graphRender(containerWidth,tData,nextP){
-    var component = this;
-    var widther = containerWidth;
-    var margin = {top: 20, right: 20, bottom: 20, left: 40},
-    width = widther - margin.left - margin.right,
-    height = 300 - margin.top - margin.bottom;
-   var count=-1;
-   var temp=-1;
-   var y = d3.scale.linear().range([height, 0]);
-   var x = d3.scale.ordinal().rangeRoundBands([0, width], .1);
-  var xAxis = d3.svg.axis()
-    .scale(x)
-    .orient("bottom")
-    .tickFormat(function(d){
-      count++;
-      temp++;
-      if (count === 3 || temp ===0 || temp ===23){
-        count = 0;
-        return d;
+    var component = this, widther = containerWidth, count=-1, temp=-1, data = [], barData = {}, json = tData;
+    var margin = {top: 20, right: 20, bottom: 20, left: 40}, width = widther - margin.left - margin.right, height = 300 - margin.top - margin.bottom;
+    
+    if(json !== undefined) {
+      for (var i = 0; i < json.length; i++) {
+        barData.timeInterval = json[i].timeInterval;
+        barData.type = json[i][nextP];
+        data.push(barData);
+        barData = {};
       }
-      return "";
-    });
-   
 
-  var yAxis = d3.svg.axis()
+    var y = d3.scale.linear().range([height, 0]);
+    var x = d3.scale.ordinal().rangeRoundBands([0, width], .1);
+    var xAxis = d3.svg.axis()
+     .scale(x)
+     .orient("bottom")
+     .tickFormat(function(d){
+       count++;
+       temp++;
+       if (count === 3 || temp ===0 || temp ===23){
+         count = 0;
+         if(d <= 9) {
+          return "0" + d + ":00"
+         }
+         return d+":00";
+       }
+       return "";
+      });
+   
+    x.domain(data.map(function(d) { return (d.timeInterval )  ; }));
+    var yAxis = d3.svg.axis()
     .scale(y)
     .orient("left")
     .ticks(10);
@@ -63,16 +70,7 @@ class Chart extends React.Component{
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
       
-      var data = [];
-      var barData = {};
-       var json = tData; 
-       if(json !== undefined) {
-       for (var i = 0; i < json.length; i++) {
-        barData.timeInterval = json[i].timeInterval;
-        barData.type = json[i][nextP];
-        data.push(barData);
-        barData = {};
-       }
+     
         update(data);
       }
     function update(data) {

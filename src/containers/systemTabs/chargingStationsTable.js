@@ -62,7 +62,7 @@ class ChargingStationsTable extends React.Component {
     this._onSortChange = this._onSortChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
-    this._onSortChange(nextProps.currentSortState,nextProps.currentHeaderOrder);
+    this._onFilterChange(nextProps.getCsFilter);
   }
 
 
@@ -76,15 +76,36 @@ class ChargingStationsTable extends React.Component {
     }));
   }
   _onFilterChange(e) {
-    if (!e.target.value) {
+    var filterField = ["mode","id","status","dockedBots"], newData;
+    if (e.target && !e.target.value) {
       this.setState({
         sortedDataList: this._dataList,
       });
     }
-    var filterField = ["mode","id","status","dockedBots"];
-    this.setState({
-      sortedDataList: new DataListWrapper(filterIndex(e,this._dataList,filterField), this._dataList),
-    });
+     if(e.target && (e.target.value || e.target.value === "")) {
+      var captureValue = e.target.value;
+      newData = new DataListWrapper(filterIndex(e,this.state.sortedDataList,filterField), this._dataList)
+      
+      this.setState({
+        sortedDataList: newData
+        }, function() {
+            this.props.setCsFilter(captureValue);
+            if(this.props.items && this.props.items.length) {
+               this._onSortChange(this.props.currentSortState,this.props.currentHeaderOrder);
+             }
+      })
+    }
+
+    else {
+      newData = new DataListWrapper(filterIndex(e,this.state.sortedDataList,filterField), this._dataList);
+      this.setState({
+        sortedDataList: newData
+        }, function() {
+            if(this.props.items && this.props.items.length) {
+               this._onSortChange(this.props.currentSortState,this.props.currentHeaderOrder);
+             }
+      })
+    }
   }
   
   
@@ -94,6 +115,9 @@ class ChargingStationsTable extends React.Component {
       columnKey = GOR_STATUS_PRIORITY;
     }
     var sortIndexes = this._defaultSortIndexes.slice();
+    if(this.state.sortedDataList._indexMap) {
+      sortIndexes = this.state.sortedDataList._indexMap.slice();
+    }
     this.setState({
       sortedDataList: new DataListWrapper(sortData(columnKey, sortDir,sortIndexes,this._dataList), this._dataList),
       colSortDirs: {
@@ -111,7 +135,7 @@ class ChargingStationsTable extends React.Component {
     let manual = this.props.chargersState.manualMode;
     let auto = this.props.chargersState.automaticMode;
     let totalBots = this.props.chargersState.connectedBots;
-    
+    let csConnected = this.props.chargersState.csConnected;
      var containerHeight = this.props.containerHeight;
    var noData = <div/>;
     if(rowsCount === 0 || rowsCount === undefined || rowsCount === null) {
@@ -134,7 +158,8 @@ class ChargingStationsTable extends React.Component {
             <div className="searchbox-magnifying-glass-icon"/>
             <input className="gorInputFilter"
               onChange={this._onFilterChange}
-              placeholder={this.props.intlMessg["table.filter.placeholder"]}>
+              placeholder={this.props.intlMessg["table.filter.placeholder"]}
+              value={this.props.getCsFilter}>
             </input>
         </div>
         </div>
@@ -180,11 +205,13 @@ class ChargingStationsTable extends React.Component {
               <div className="gorToolHeaderEl"> 
               <FormattedMessage id="ChargingStations.table.STATUS" description="STATUS for ChargingStations" 
               defaultMessage ="STATUS"/>
-              <div className="gorToolHeaderSubText">  </div>
-               <div>
-              <div className="statuslogoWrap">
-              </div>
-              </div>
+             <div className="gor-subStatus-online">
+                  <div >  
+                    <FormattedMessage id="csTable.status" description='status for cs table' 
+                defaultMessage='{csConnected} connected' 
+                values={{csConnected:csConnected?csConnected:'0'}}/>
+                  </div>
+                </div>
               </div>
             </SortHeaderCell>
           }

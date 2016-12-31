@@ -11,6 +11,7 @@ import {ERROR,AUTH_LOGIN, ADD_USER, RECIEVE_TIME_OFFSET,CHECK_ID,DELETE_USER,GET
 import {BUTLER_UI,CODE_UE002,BUTLER_SUPERVISOR} from '../constants/backEndConstants'
 import {UE002,E028,E029,MODE_REQUESTED,TYPE_SUCCESS,AS001,ERR_API,ERR_USR,ERR_RES,ERR_AUDIT,AS00A} from '../constants/messageConstants';
 import {ShowError} from './showError';
+import {endSession} from './endSession';
 
 export function AjaxParse(store,res,cause,status)
 {
@@ -148,6 +149,10 @@ export function AjaxParse(store,res,cause,status)
 			}
 			break;
 		case RECIEVE_HEADER:
+			 if(res.users[0].roles[0]==BUTLER_UI)
+			 {
+			 	endSession(store);
+			 }
 			 store.dispatch(recieveHeaderInfo(res));
 			 break;
 		case RECIEVE_TIME_OFFSET:

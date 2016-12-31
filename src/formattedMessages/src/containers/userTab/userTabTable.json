@@ -15,14 +15,9 @@
     "defaultMessage": "Add new user"
   },
   {
-    "id": "user.table.users",
+    "id": "user.table.usersCount",
     "description": "Users Column",
-    "defaultMessage": "USERS"
-  },
-  {
-    "id": "user.table.totaluser",
-    "description": "total user",
-    "defaultMessage": "Total: {rowsCount}"
+    "defaultMessage": "{rowsCount} USERS"
   },
   {
     "id": "user.table.status",

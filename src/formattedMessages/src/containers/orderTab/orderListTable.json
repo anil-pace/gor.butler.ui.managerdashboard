@@ -2,7 +2,7 @@
   {
     "id": "table.filter.placeholder",
     "description": "placeholder for table filter",
-    "defaultMessage": "Search by keywords"
+    "defaultMessage": "Filter by keywords"
   },
   {
     "id": "orderlist.table.allDrop",
@@ -75,9 +75,14 @@
     "defaultMessage": "Refresh Data"
   },
   {
-    "id": "orderlist.order.heading",
+    "id": "order.table.dropdown.text",
+    "description": "Sub text for order list dropdown",
+    "defaultMessage": "Show"
+  },
+  {
+    "id": "orderlist.order.headingText",
     "description": "Heading for order IDs in ordertable",
-    "defaultMessage": "Order List"
+    "defaultMessage": "ORDER ID"
   },
   {
     "id": "orderlist.subTotalorder",
