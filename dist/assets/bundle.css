@@ -1490,7 +1490,6 @@ body {
   border-bottom: solid;
   border-width: 1px;
   border-color: #dedede;
-  text-transform: capitalize;
 }
 
 .fixedDataTableCellGroupLayout_cellGroup > .public_fixedDataTableCell_main {

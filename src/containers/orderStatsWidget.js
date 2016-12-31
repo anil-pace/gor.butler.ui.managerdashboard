@@ -36,15 +36,15 @@ class OrderStatsWidget extends React.Component{
 			}
 		}
     
-    if(renderWidget === "PPS_PUT_PERFORMANCE") {
+    if(renderWidget === "PPS_PUT_PERFORMANCE" && this.props.histdata) {
     	chartRender = <Chart tableData={this.props.histdata} type={"put"}/>
     }
 
-    else if(renderWidget === "PPS_AUDIT_PERFORMANCE") {
+    else if(renderWidget === "PPS_AUDIT_PERFORMANCE" && this.props.histdata) {
     	chartRender = <Chart tableData={this.props.histdata} type={"audit"}/>
     }
 
-    else {
+    else if(this.props.histdata){
 
     	chartRender = <Chart tableData={this.props.histdata} type={"pick"}/>
     }

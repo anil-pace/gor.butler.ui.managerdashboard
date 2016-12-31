@@ -128,13 +128,13 @@ class ButlerBot extends React.Component{
     else {
       butlerDetail.location = "--";
     }
-    if(data[i].voltage) {
-      butlerDetail.voltage = data[i].voltage + "V";
+    if(data[i].voltage || data[i].voltage === 0) {
+      butlerDetail.voltage = data[i].voltage + " V";
     }
     else {
       butlerDetail.voltage = "--";
     }
-    butlerDetail.voltage = data[i].voltage;
+    butlerDetail.butlerAvgVoltage = data[i].voltage;
     butlerDetail.taskNum = currentTask[data[i].current_task];
     butlerDetail.taskType = data[i].current_task;
     if(data[i].display_msu_id === null) {
@@ -186,7 +186,7 @@ class ButlerBot extends React.Component{
     butlerData = this._processButlersData();
     if(butlerData && butlerData.length) {
     	for (var i = butlerData.length - 1; i >= 0; i--) {
-    		avgVoltage = butlerData[i].voltage + avgVoltage;
+    		avgVoltage = butlerData[i].butlerAvgVoltage + avgVoltage;
     		if(butlerData[i].taskNum === null || butlerData[i].taskNum === undefined) {
     			taskDetail["Idle"]++;
     		}
