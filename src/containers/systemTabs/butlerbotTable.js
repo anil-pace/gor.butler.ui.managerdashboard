@@ -64,7 +64,7 @@ class ButlerBotTable extends React.Component {
     this._onSortChange = this._onSortChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
-    this._onSortChange(nextProps.currentSortState,nextProps.currentHeaderOrder);
+    this._onFilterChange(nextProps.getButlerFilter);
   }
   
    _onColumnResizeEndCallback(newColumnWidth, columnKey) {
@@ -76,15 +76,36 @@ class ButlerBotTable extends React.Component {
     }));
   }
   _onFilterChange(e) {
-    if (!e.target.value) {
+    if (e.target && !e.target.value) {
       this.setState({
         sortedDataList: this._dataList,
       });
     }
-    var filterField = ["current","id","status","msu","location"];
-    this.setState({
-      sortedDataList: new DataListWrapper(filterIndex(e,this._dataList,filterField), this._dataList),
-    });
+    var filterField = ["current","id","status","msu","location"], newData;
+     if(e.target && (e.target.value || e.target.value === "")) {
+      var captureValue = e.target.value;
+      newData = new DataListWrapper(filterIndex(e,this.state.sortedDataList,filterField), this._dataList)
+      
+      this.setState({
+        sortedDataList: newData
+        }, function() {
+            this.props.setButlerFilter(captureValue);
+            if(this.props.items && this.props.items.length) {
+               this._onSortChange(this.props.currentSortState,this.props.currentHeaderOrder);
+             }
+      })
+    }
+
+    else {
+      newData = new DataListWrapper(filterIndex(e,this.state.sortedDataList,filterField), this._dataList);
+      this.setState({
+        sortedDataList: newData
+        }, function() {
+            if(this.props.items && this.props.items.length) {
+               this._onSortChange(this.props.currentSortState,this.props.currentHeaderOrder);
+             }
+      })
+    }
   }
   
  
@@ -93,6 +114,9 @@ class ButlerBotTable extends React.Component {
       columnKey = GOR_STATUS_PRIORITY;
     }
     var sortIndexes = this._defaultSortIndexes.slice();
+    if(this.state.sortedDataList._indexMap) {
+      sortIndexes = this.state.sortedDataList._indexMap.slice();
+    }
     this.setState({
       sortedDataList: new DataListWrapper(sortData(columnKey, sortDir,sortIndexes,this._dataList), this._dataList),
       colSortDirs: {
@@ -113,6 +137,7 @@ class ButlerBotTable extends React.Component {
     let msuMounted = this.props.parameters.msuMounted;
     let locations = this.props.parameters.location;
     let voltage = this.props.parameters.avgVoltage;
+    let onlineBots = this.props.parameters.online;
     var containerHeight = this.props.containerHeight;
     var noData = <div/>;
      if(totalBot === 0 || totalBot === undefined || totalBot === null) {
@@ -135,7 +160,8 @@ class ButlerBotTable extends React.Component {
             <div className="searchbox-magnifying-glass-icon"/>
             <input className="gorInputFilter"
               onChange={this._onFilterChange}
-              placeholder={this.props.intlMessg["table.filter.placeholder"]}>
+              placeholder={this.props.intlMessg["table.filter.placeholder"]}
+              value={this.props.getButlerFilter}>
             </input>
         </div>
         </div>
@@ -155,10 +181,10 @@ class ButlerBotTable extends React.Component {
             <SortHeaderCell onSortChange={this._onSortChange}
               sortDir={colSortDirs.id}> 
               <div className="gorToolHeaderEl">
-                <FormattedMessage id="ButlerBotTable.TotalBot" description='Column name for the Bot id in bot table' defaultMessage='BOT'/>
+                <FormattedMessage id="ButlerBotTable.TotalBot" description='Column name for the Bot id in bot table' defaultMessage='BOTS'/>
               
               <div className="gorToolHeaderSubText"> 
-                <FormattedMessage id="ButlerBotTable.subTotalBot" description='sub text for totalbot ButlerBotTable' defaultMessage='Total: {totalBot}' values={{totalBot: totalBot}}/>
+                <FormattedMessage id="ButlerBotTable.subTotalBot" description='sub text for totalbot ButlerBotTable' defaultMessage='Total: {totalBot}' values={{totalBot: totalBot?totalBot:"0"}}/>
               </div>
               </div>
             </SortHeaderCell>
@@ -175,13 +201,14 @@ class ButlerBotTable extends React.Component {
               sortDir={colSortDirs.statusPriority} >
               <div className="gorToolHeaderEl"> 
                  <FormattedMessage id="butlerBot.table.status" description="Status for butlerbot" 
-              defaultMessage ="STATUS"/> 
-              
-              <div>
-              <div className="statuslogoWrap">
-              <div className=" gorToolHeaderEl"/>
-              </div>
-              </div>
+              defaultMessage ="STATUS"/>
+                <div className="gor-subStatus-online">
+                  <div >  
+                    <FormattedMessage id="ButlerBotTable.status" description='status for ButlerBotTable' 
+                defaultMessage='{onlineBots} Online' 
+                values={{onlineBots:onlineBots?onlineBots:'0'}}/>
+                  </div>
+                </div>
               </div>
             </SortHeaderCell>
           }
@@ -201,7 +228,7 @@ class ButlerBotTable extends React.Component {
               <div className="gorToolHeaderSubText">
                 <FormattedMessage id="ButlerBotTable.botState" description='bot state for ButlerBotTable' 
                 defaultMessage='Pick ({pick}) . Put ({put}) . Charging ({charging}) . Idle ({idle})' 
-                values={{pick: pick, put:put, charging:charging, idle:idle}}/>
+                values={{pick: pick?pick:'0', put:put?put:'0', charging:charging?charging:'0', idle:idle?idle:'0'}}/>
               </div>
               </div>
             </SortHeaderCell>
@@ -218,11 +245,11 @@ class ButlerBotTable extends React.Component {
               sortDir={colSortDirs.msu}>
                <div className="gorToolHeaderEl"> 
                <FormattedMessage id="butlerBot.table.msu" description="MSU Status for butlerbot" 
-              defaultMessage ="MSU"/> 
+              defaultMessage ="MSU MOUNTED"/> 
               <div className="gorToolHeaderSubText">
                 <FormattedMessage id="ButlerBotTable.mounted" description='msu mounted for ButlerBotTable' 
                 defaultMessage='{msuMounted} Mounted' 
-                values={{msuMounted:msuMounted}}/>
+                values={{msuMounted:msuMounted?msuMounted:'0'}}/>
               </div>
               </div>
             </SortHeaderCell>
@@ -243,7 +270,7 @@ class ButlerBotTable extends React.Component {
               <div className="gorToolHeaderSubText"> 
                 <FormattedMessage id="ButlerBotTable.locations" description='msu Location for ButlerBotTable' 
                 defaultMessage='{locations} Locations' 
-                values={{locations:locations}}/>
+                values={{locations:locations?locations:'0'}}/>
               </div>
               </div>
             </SortHeaderCell>
@@ -263,8 +290,8 @@ class ButlerBotTable extends React.Component {
               defaultMessage ="VOLTAGE"/>
               <div className="gorToolHeaderSubText"> 
                 <FormattedMessage id="ButlerBotTable.avgVoltage" description='avgVoltage for ButlerBotTable' 
-                defaultMessage='Avg. Voltage {voltage}' 
-                values={{voltage:voltage}}/>  
+                defaultMessage='Avg {voltage}' 
+                values={{voltage:voltage?voltage:"0 V"}}/>  
               </div> 
               </div>
             </SortHeaderCell>

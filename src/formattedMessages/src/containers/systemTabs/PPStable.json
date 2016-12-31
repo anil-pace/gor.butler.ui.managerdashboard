@@ -27,7 +27,7 @@
   {
     "id": "pps.table.heading",
     "description": "Heading for PPS",
-    "defaultMessage": "PPS"
+    "defaultMessage": "Pick Put Stations"
   },
   {
     "id": "PPStable.selected",
@@ -50,6 +50,11 @@
     "defaultMessage": "STATUS"
   },
   {
+    "id": "PPStable.status",
+    "description": "status for PPS table",
+    "defaultMessage": "{ppsOnState} On"
+  },
+  {
     "id": "PPS.table.operatingMode",
     "description": "operatingMode for PPS",
     "defaultMessage": "OPERATING MODE"
@@ -65,6 +70,11 @@
     "defaultMessage": "PERFORMANCE"
   },
   {
+    "id": "PPStable.avgThroughput",
+    "description": "avgThroughput for PPStable",
+    "defaultMessage": "Avg {avgThroughput} items/hr"
+  },
+  {
     "id": "PPS.table.operatorAssigned",
     "description": "operatorAssigned for PPS",
     "defaultMessage": "OPERATOR ASSIGNED"
@@ -72,6 +82,6 @@
   {
     "id": "PPStable.totalOperator",
     "description": "totalOperator for PPStable",
-    "defaultMessage": "{operatorNum} operator"
+    "defaultMessage": "{operatorNum} operators"
   }
 ]

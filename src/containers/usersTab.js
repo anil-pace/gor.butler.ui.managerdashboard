@@ -135,7 +135,7 @@ class UsersTab extends React.Component{
                            sortHeaderState={this.props.userHeaderSort} sortHeaderOrder={this.props.userHeaderSortOrder} 
                            currentSortState={this.props.userSortHeader} currentHeaderOrder={this.props.userSortHeaderState}
                            setUserFilter={this.props.userFilterDetail}
-                           getUserFilter = {this.props.getUserFilter}/>
+                           getUserFilter = {this.props.userFilter}/>
 					</div>
 				</div>
 			</div>
@@ -146,11 +146,11 @@ class UsersTab extends React.Component{
 
 function mapStateToProps(state, ownProps){
   return {
-    getUserFilter: state.sortHeaderState.userFilter|| "",
+    userFilter: state.sortHeaderState.userFilter|| "",
     userdetails: state.userDetails.userDetails || [],
     intlMessages: state.intl.messages,
     manager:state.headerData.headerInfo||[],
-    userSortHeader: state.sortHeaderState.userHeaderSort || INITIAL_HEADER_SORT ,
+    userSortHeader: state.sortHeaderState.userHeaderSort || "role" ,
     userSortHeaderState: state.sortHeaderState.userHeaderSortOrder || INITIAL_HEADER_ORDER
 
   };

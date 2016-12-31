@@ -36,6 +36,7 @@ export const TABLE_STATE = "TABLE_STATE";
 export const REQUEST_HEADER = "REQUEST_HEADER";
 export const RECIEVE_HEADER = "RECIEVE_HEADER";
 export const GOR_TABLE_HEADER_HEIGHT = 71;
+export const GOR_USER_TABLE_HEADER_HEIGHT = 50;
 
 
 /*Constants for performance widget*/
@@ -109,6 +110,7 @@ export const GET_ROLES='GET_ROLES';
 export const PPS_MODE_CHANGE = 'PPS_MODE_CHANGE';
 export const GET_HEADER_INFO = 'GET_HEADER_INFO';
 export const EDIT_USER='EDIT_USER';
+export const DEBOUNCE_TIMER=1000;
 
 export const AUDIT_RETRIEVE = "AUDIT_RETRIEVE";
 export const RECIEVE_AUDIT_DATA = "RECIEVE_AUDIT_DATA";
@@ -325,7 +327,11 @@ export const GOR_FAIL='gor-fail';
 export const GOR_INFO='gor-info';
 export const GOR_STATUS = "status";
 export const GOR_STATUS_PRIORITY = "statusPriority";
-
+export const GOR_PERIPHERAL_ONLINE = "online";
+export const GOR_PERIPHERAL_OFFLINE = "offline";
+export const GOR_ON_STATUS = "on";
+export const GOR_CONNECTED_STATUS = "Connected";
+export const GOR_COMPLETED_STATUS = "Completed";
 //Icons
 export const PICK_ICON=' iPick';
 export const STOCK_ICON="iStock";
@@ -337,8 +343,8 @@ export const REMOVE_ICON='gor-remove-white';
 export const ERROR_WHITE='gor-error-white';
 
 //Sort header constants
-export const INITIAL_HEADER_SORT = "id";
-export const INITIAL_HEADER_ORDER = "DESC";
+export const INITIAL_HEADER_SORT = "status";
+export const INITIAL_HEADER_ORDER = "ASC";
 export const BUTLER_HEADER_SORT = "BUTLER_HEADER_SORT";
 export const BUTLER_HEADER_SORT_ORDER = "BUTLER_HEADER_SORT_ORDER";
 export const PPS_CHECKED = "PPS_CHECKED";
@@ -353,3 +359,13 @@ export const CS_HEADER_SORT_ORDER = "CS_HEADER_SORT_ORDER";
 export const DROP_RENDER_DISPLAY = "DROP_RENDER_DISPLAY";
 export const SET_CHECK_ALL = "SET_CHECK_ALL";
 export const SET_USER_FILTER = "SET_USER_FILTER";
+export const ORDER_HEADER_SORT_ORDER = "ORDER_HEADER_SORT_ORDER";
+export const ORDER_HEADER_SORT = "ORDER_HEADER_SORT";
+export const AUDIT_HEADER_SORT = "AUDIT_HEADER_SORT";
+export const AUDIT_HEADER_SORT_ORDER = "AUDIT_HEADER_SORT_ORDER";
+export const SET_ORDER_FILTER = "SET_ORDER_FILTER";
+export const SET_AUDIT_FILTER = "SET_AUDIT_FILTER";
+export const SET_BUTLER_FILTER = "SET_BUTLER_FILTER";
+export const SET_PPS_FILTER = "SET_PPS_FILTER";
+export const SET_CS_FILTER = "SET_CS_FILTER";
+export const SET_WAVE_FILTER = "SET_WAVE_FILTER"

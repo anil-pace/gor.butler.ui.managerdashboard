@@ -853,7 +853,7 @@ body {
 
 .gor-tabs .gorTab .gorInlineDisplay {
   display: inline-block;
-  padding-right: 16px;
+  padding-right: 20px;
 }
 
 body {
@@ -906,13 +906,13 @@ body {
 }
 
 .gor-tile .gor-tile-one {
-  width: 45%;
+  width: 42%;
   display: inline-block;
   margin-right: auto;
 }
 
 .gor-tile .gor-tile-two {
-  width: 55%;
+  width: 58%;
   display: inline-block;
   margin-right: 0;
 }
@@ -1490,6 +1490,7 @@ body {
   border-bottom: solid;
   border-width: 1px;
   border-color: #dedede;
+  text-transform: capitalize;
 }
 
 .fixedDataTableCellGroupLayout_cellGroup > .public_fixedDataTableCell_main {
@@ -2047,6 +2048,20 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   text-transform: capitalize;
 }
 
+.abandoned .public_fixedDataTableCell_cellContent {
+  border-radius: 15px;
+  text-align: center;
+  width: 70px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #aaaaaa;
+  color: #aaaaaa;
+  font-size: 12px;
+  max-height: 9px;
+  background: #ffffff;
+  text-transform: capitalize;
+}
+
 .temporary_unfulfillable .public_fixedDataTableCell_cellContent {
   background: #f36f36;
   border-radius: 15px;
@@ -2106,6 +2121,14 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   font-size: 12px;
   max-height: 9px;
   background: #ffffff;
+}
+
+.left .public_fixedDataTableCell_cellContent {
+  text-align: left;
+}
+
+.right .public_fixedDataTableCell_cellContent {
+  text-align: left;
 }
 
 .completed .public_fixedDataTableCell_cellContent {
@@ -2778,7 +2801,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   color: #000000;
   display: inline-block;
   vertical-align: middle;
-  padding-left: 24px;
+  padding-top: 6px;
 }
 
 .fixedDataTableLayout_main .gorToolHeaderEl {
@@ -2796,6 +2819,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   font-size: 12px;
   color: #666666;
   padding-top: 14px;
+  min-height: 0.875rem;
 }
 
 .gorTesting {
@@ -3068,6 +3092,40 @@ input[type="checkbox"] {
   font-size: 20px;
   font-weight: bold;
   color: #4d5055;
+  height: 35px;
+}
+
+.gor-table-header {
+  display: inline-block;
+  padding-top: 13px;
+  padding-left: 23px;
+}
+
+.gor-user-add-wrap {
+  padding-left: 20px;
+}
+
+.gorHeaderSubText {
+  font-family: "source sans pro";
+  font-size: 12px;
+  color: #666666;
+  padding-top: 6px;
+}
+
+.gor-subStatus-online {
+  font-family: "source sans pro";
+  color: #00a54f;
+  font-size: 13px;
+  padding-top: 11px;
+}
+
+.gor-dropD-text {
+  display: inline-block;
+  padding-right: 16px;
+  vertical-align: initial;
+  font-size: 14px;
+  font-weight: 100;
+  color: #aaaaaa;
 }
 
 .gorSubTab.gorContainer {

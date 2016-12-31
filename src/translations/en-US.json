@@ -1175,7 +1175,7 @@
   {
     "id": "table.filter.placeholder",
     "description": "placeholder for table filter",
-    "defaultMessage": "Search by keywords"
+    "defaultMessage": "Filter by keywords"
   },
   {
     "id": "orderlist.table.allDrop",
@@ -1250,7 +1250,7 @@
   {
     "id": "orderlist.order.heading",
     "description": "Heading for order IDs in ordertable",
-    "defaultMessage": "Order List"
+    "defaultMessage": "Order ID"
   },
   {
     "id": "orderlist.subTotalorder",
@@ -1594,7 +1594,7 @@
   {
     "id": "ButlerBotTable.TotalBot",
     "description": "Column name for the Bot id in bot table",
-    "defaultMessage": "BOT"
+    "defaultMessage": "BOTS"
   },
   {
     "id": "ButlerBotTable.subTotalBot",
@@ -1619,7 +1619,7 @@
   {
     "id": "butlerBot.table.msu",
     "description": "MSU Status for butlerbot",
-    "defaultMessage": "MSU"
+    "defaultMessage": "MSU MOUNTED"
   },
   {
     "id": "ButlerBotTable.mounted",
@@ -1644,7 +1644,7 @@
   {
     "id": "ButlerBotTable.avgVoltage",
     "description": "avgVoltage for ButlerBotTable",
-    "defaultMessage": "Avg. Voltage {voltage}"
+    "defaultMessage": "Avg {voltage}"
   },
   {
     "id": "chargersDetail.name.prefix",
@@ -1769,7 +1769,7 @@
   {
     "id": "pps.table.heading",
     "description": "Heading for PPS",
-    "defaultMessage": "PPS"
+    "defaultMessage": "Pick Put Station"
   },
   {
     "id": "PPStable.selected",
@@ -1814,7 +1814,7 @@
   {
     "id": "PPStable.totalOperator",
     "description": "totalOperator for PPStable",
-    "defaultMessage": "{operatorNum} operator"
+    "defaultMessage": "{operatorNum} operators"
   },
   {
     "id": "tabs.offline",
@@ -2053,7 +2053,7 @@
   {
     "id": "users.edit.password.field1",
     "description": "Text for password",
-    "defaultMessage": "Password"
+    "defaultMessage": "New Password"
   },
   {
     "id": "users.edit.password.field2",

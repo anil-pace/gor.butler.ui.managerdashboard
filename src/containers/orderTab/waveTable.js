@@ -70,7 +70,7 @@ class WavesTable extends React.Component {
     this._onSortChange = this._onSortChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
-    this._onSortChange(nextProps.currentSortState,nextProps.currentHeaderOrder);
+    this._onFilterChange(nextProps.getWaveFilter);
 
   } 
   _onColumnResizeEndCallback(newColumnWidth, columnKey) {
@@ -82,15 +82,36 @@ class WavesTable extends React.Component {
     }));
   }
   _onFilterChange(e) {
-    if (!e.target.value) {
+    var filterField = ["startTime","id","status","cutOffTime"], newData;
+    if (e.target && !e.target.value) {
       this.setState({
         sortedDataList: this._dataList,
       });
     }
-    var filterField = ["startTime","id","status","cutOffTime"];
-    this.setState({
-      sortedDataList: new DataListWrapper(filterIndex(e,this._dataList,filterField), this._dataList),
-    });
+     if(e.target && (e.target.value || e.target.value === "")) {
+      var captureValue = e.target.value;
+      newData = new DataListWrapper(filterIndex(e,this.state.sortedDataList,filterField), this._dataList)
+      
+      this.setState({
+        sortedDataList: newData
+        }, function() {
+            this.props.setWaveFilter(captureValue);
+            if(this.props.items && this.props.items.length) {
+               this._onSortChange(this.props.currentSortState,this.props.currentHeaderOrder);
+             }
+      })
+    }
+
+    else {
+      newData = new DataListWrapper(filterIndex(e,this.state.sortedDataList,filterField), this._dataList);
+      this.setState({
+        sortedDataList: newData
+        }, function() {
+            if(this.props.items && this.props.items.length) {
+               this._onSortChange(this.props.currentSortState,this.props.currentHeaderOrder);
+             }
+      })
+    }
   }
   
   _onSortChange(columnKey, sortDir) {
@@ -98,6 +119,9 @@ class WavesTable extends React.Component {
       columnKey = GOR_STATUS_PRIORITY;
     }
     var sortIndexes = this._defaultSortIndexes.slice();
+    if(this.state.sortedDataList._indexMap) {
+      sortIndexes = this.state.sortedDataList._indexMap.slice();
+    }
     this.setState({
       sortedDataList: new DataListWrapper(sortData(columnKey, sortDir,sortIndexes,this._dataList), this._dataList),
       colSortDirs: {
@@ -111,9 +135,13 @@ class WavesTable extends React.Component {
     
     var {sortedDataList, colSortDirs,columnWidths} = this.state;  
     var heightRes = 500, totalwave = sortedDataList.getSize(), pendingWave = this.props.waveState.pendingWave, progressWave = this.props.waveState.progressWave, completedWaves = this.props.waveState.completedWaves ;
-    var orderRemaining = this.props.waveState.orderRemaining.toLocaleString(), totalOrders = this.props.waveState.totalOrders.toLocaleString();
+    var orderRemaining = this.props.waveState.orderRemaining.toLocaleString(), totalOrders = this.props.waveState.totalOrders.toLocaleString(), headerAlert = <div/>;
+
     if(this.props.containerHeight !== 0) {
       heightRes = this.props.containerHeight;
+    }
+    if(this.props.waveState.alertNum && this.props.waveState.alertNum !== 0) {
+     headerAlert =  <div className="gorToolHeaderEl alertState"> <div className="table-subtab-alert-icon"/> <div className="gor-inline">{this.props.waveState.alertNum} Alerts </div> </div>
     }
     var noData = <div/>;
     if(totalwave === 0 || totalwave === undefined || totalwave === null) {
@@ -136,7 +164,8 @@ class WavesTable extends React.Component {
       <div className="searchbox-magnifying-glass-icon"/>
       <input className="gorInputFilter"
       onChange={this._onFilterChange}
-      placeholder={this.props.intlMessg["table.filter.placeholder"]}>
+      placeholder={this.props.intlMessg["table.filter.placeholder"]}
+      value={this.props.getWaveFilter}>
       </input>
       </div>
       </div>
@@ -178,10 +207,11 @@ class WavesTable extends React.Component {
         <FormattedMessage id="waves.table.status" description="Status for waves" 
         defaultMessage ="STATUS"/> 
         <div>
-        <div className="statuslogoWrap">
-        <div className=" gorToolHeaderEl"/>
-        </div>
-        <div className="gorToolHeaderEl alertState"> </div>
+        <div>
+                <div className="statuslogoWrap">
+                  {headerAlert}
+                </div>
+              </div>
         </div>
         </div>
         </SortHeaderCell>

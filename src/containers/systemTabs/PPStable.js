@@ -105,8 +105,9 @@ class PPStable extends React.Component {
     this._onSortChange = this._onSortChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
-    this._onSortChange(nextProps.currentSortState,nextProps.currentHeaderOrder);
-
+    if(this.props.items && this.props.items.length) {
+     this._onFilterChange(nextProps.getPpsFilter);
+    }
   }
 
    _onColumnResizeEndCallback(newColumnWidth, columnKey) {
@@ -118,15 +119,36 @@ class PPStable extends React.Component {
     }));
   }
   _onFilterChange(e) {
-    if (!e.target.value) {
+    var filterField = ["operatingMode","id","status","performance","operatorAssigned"],newData;
+    if (e.target && !e.target.value) {
       this.setState({
         sortedDataList: this._dataList,
       });
     }
-    var filterField = ["operatingMode","id","status","performance","operatorAssigned"];
-    this.setState({
-      sortedDataList: new DataListWrapper(filterIndex(e,this._dataList,filterField), this._dataList),
-    });
+    if(e.target && (e.target.value || e.target.value === "")) {
+      var captureValue = e.target.value;
+      newData = new DataListWrapper(filterIndex(e,this.state.sortedDataList,filterField), this._dataList)
+      
+      this.setState({
+        sortedDataList: newData
+        }, function() {
+            this.props.setPpsFilter(captureValue);
+            if(this.props.items && this.props.items.length) {
+               this._onSortChange(this.props.currentSortState,this.props.currentHeaderOrder);
+             }
+      })
+    }
+
+    else {
+      newData = new DataListWrapper(filterIndex(e,this.state.sortedDataList,filterField), this._dataList);
+      this.setState({
+        sortedDataList: newData
+        }, function() {
+            if(this.props.items && this.props.items.length) {
+               this._onSortChange(this.props.currentSortState,this.props.currentHeaderOrder);
+             }
+      })
+    }
   }
   handleChange(columnKey,rowIndex,data) {
     
@@ -160,6 +182,9 @@ class PPStable extends React.Component {
       columnKey = GOR_STATUS_PRIORITY;
     }
     var sortIndexes = this._defaultSortIndexes.slice();
+    if(this.state.sortedDataList._indexMap) {
+      sortIndexes = this.state.sortedDataList._indexMap.slice();
+    }
     this.setState({
       sortedDataList: new DataListWrapper(sortData(columnKey, sortDir,sortIndexes,this._dataList), this._dataList),
       colSortDirs: {
@@ -248,6 +273,8 @@ class PPStable extends React.Component {
     let audit = this.props.operationMode.audit;
     let notSet = this.props.operationMode.notSet;
     let operatorNum =  this.props.operatorNum, j=1;
+    let ppsOnState = this.props.ppsOnState;
+    let avgThroughput = this.props.avgThroughput;
     if(this.props.bDropRender===true) {
       drop = <DropdownTable  styleClass={'gorDataTableDrop'} placeholder={this.props.intlMessg["pps.dropdown.placeholder"]} items={modes} changeMode={this.handleModeChange.bind(this)}/>;
     }
@@ -281,8 +308,8 @@ class PPStable extends React.Component {
           <div className="gorToolBarWrap">
             <div className="gorToolBarElements">
                <FormattedMessage id="pps.table.heading" description="Heading for PPS" 
-              defaultMessage ="PPS"/>
-              <div className="gorToolHeaderSubText"> 
+              defaultMessage ="Pick Put Stations"/>
+              <div className="gorHeaderSubText"> 
                 <FormattedMessage id="PPStable.selected" description='selected pps for ppsSelected' 
                 defaultMessage='{selected} selected' 
                 values={{selected:selected?selected:'0'}}/> 
@@ -297,7 +324,8 @@ class PPStable extends React.Component {
             <div className="searchbox-magnifying-glass-icon"/>
             <input className="gorInputFilter"
               onChange={this._onFilterChange}
-              placeholder={this.props.intlMessg["table.filter.placeholder"]}>
+              placeholder={this.props.intlMessg["table.filter.placeholder"]}
+              value={this.props.getPpsFilter}>
             </input>
         </div>
         </div>
@@ -352,11 +380,13 @@ class PPStable extends React.Component {
                  <FormattedMessage id="PPS.table.status" description="Status for PPS" 
               defaultMessage ="STATUS"/> 
               
-              <div>
-              <div className="statuslogoWrap">
-            
-              </div>
-              </div>
+              <div className="gor-subStatus-online">
+                  <div >  
+                    <FormattedMessage id="PPStable.status" description='status for PPS table' 
+                defaultMessage='{ppsOnState} On' 
+                values={{ppsOnState:ppsOnState?ppsOnState:'0'}}/>
+                  </div>
+                </div>
               </div>
             </SortHeaderCell>
           }
@@ -394,12 +424,11 @@ class PPStable extends React.Component {
                <div className="gorToolHeaderEl"> 
                <FormattedMessage id="PPS.table.performance" description="performance Status for PPS" 
               defaultMessage ="PERFORMANCE"/> 
-               <div>
-              <div className="statuslogoWrap">
-            
-              </div>
-              
-              </div>
+              <div className="gorToolHeaderSubText"> 
+                <FormattedMessage id="PPStable.avgThroughput" description='avgThroughput for PPStable' 
+                defaultMessage='Avg {avgThroughput} items/hr' 
+                values={{avgThroughput:avgThroughput?avgThroughput:"0"}}/>  
+              </div> 
               </div>
             </SortHeaderCell>
           }
@@ -418,7 +447,7 @@ class PPStable extends React.Component {
               defaultMessage ="OPERATOR ASSIGNED"/> 
               <div className="gorToolHeaderSubText"> 
                 <FormattedMessage id="PPStable.totalOperator" description='totalOperator for PPStable' 
-                defaultMessage='{operatorNum} operator' 
+                defaultMessage='{operatorNum} operators' 
                 values={{operatorNum: operatorNum?operatorNum:'0'}}/>
               </div>
               </div>

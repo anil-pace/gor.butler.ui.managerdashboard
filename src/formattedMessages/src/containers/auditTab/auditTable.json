@@ -2,7 +2,7 @@
   {
     "id": "audit.placeholder",
     "description": "audit dropdown placeholder",
-    "defaultMessage": "Manage Tasks 2"
+    "defaultMessage": "Manage Tasks"
   },
   {
     "id": "audit.table.duplicateTask",
@@ -45,9 +45,19 @@
     "defaultMessage": "AUDIT TYPE"
   },
   {
+    "id": "audit.auditType",
+    "description": "audit type for audit table",
+    "defaultMessage": "SKU ({sku}) . Location ({location})"
+  },
+  {
     "id": "audit.table.STATUS",
     "description": "STATUS for audit",
     "defaultMessage": "STATUS"
+  },
+  {
+    "id": "auditTable.status",
+    "description": "status completed audit",
+    "defaultMessage": "{auditCompleted} Completed"
   },
   {
     "id": "audit.table.startTime",
@@ -58,6 +68,11 @@
     "id": "audit.table.progress",
     "description": "progress for audit task",
     "defaultMessage": "PROGRESS(%)"
+  },
+  {
+    "id": "audit.Totalprogress",
+    "description": "total progress for audit table",
+    "defaultMessage": "{totalProgress}% Completed"
   },
   {
     "id": "audit.table.timeCompleted",

@@ -12,8 +12,8 @@ import Spinner from '../../components/spinner/Spinner';
 import { setCsSpinner } from '../../actions/spinnerAction';
 import {stringConfig} from '../../constants/backEndConstants';
 import { defineMessages } from 'react-intl';
-import {INITIAL_HEADER_SORT,INITIAL_HEADER_ORDER} from '../../constants/frontEndConstants';
-import { csHeaderSort,csHeaderSortOrder } from '../../actions/sortHeaderActions';
+import {INITIAL_HEADER_SORT,INITIAL_HEADER_ORDER,GOR_CONNECTED_STATUS} from '../../constants/frontEndConstants';
+import { csHeaderSort,csHeaderSortOrder ,csFilterDetail} from '../../actions/sortHeaderActions';
 
 //Mesages for internationalization
 const messages = defineMessages({
@@ -56,7 +56,12 @@ class ChargingStations extends React.Component{
     detail.status = nProps.context.intl.formatMessage((stringConfig[data[i].charger_status]));
     detail.statusClass = data[i].charger_status;
     detail.statusPriority = priStatus[data[i].charger_status];
-    detail.mode = nProps.context.intl.formatMessage(stringConfig[data[i].charger_mode]);
+    if(nProps.context.intl.formatMessage(stringConfig[data[i].charger_mode])) {
+     detail.mode = nProps.context.intl.formatMessage(stringConfig[data[i].charger_mode]);
+    }
+    else {
+      detail.mode = data[i].charger_mode;
+    }
     detail.modeClass = data[i].charger_mode;
     if(data[i].docked_butler_id  && data[i].docked_butler_id.length) {
        detail.dockedBots = BUTLER;
@@ -71,7 +76,7 @@ class ChargingStations extends React.Component{
 }
 	render(){
 	
-	var itemNumber = 4, connectedBots = 0, manualMode = 0, automaticMode = 0, chargersState = {"connectedBots": "--","manualMode": "--", "automaticMode":"--"}, chargersData;
+	var itemNumber = 4, connectedBots = 0, manualMode = 0, automaticMode = 0, chargersState = {"connectedBots": "--","manualMode": "--", "automaticMode":"--", "csConnected":0}, chargersData, csConnected=0;
     if(this.props.chargersDetail.chargersDetail !== undefined) {
      chargersData =  this._processChargersData();
     if(chargersData && chargersData.length) {
@@ -86,8 +91,12 @@ class ChargingStations extends React.Component{
       		else{
       			automaticMode++;
       		}
+          if(chargersData[i].status === GOR_CONNECTED_STATUS) {
+            csConnected++;
+          }
+          
     	}
-    	chargersState = {"connectedBots": connectedBots,"manualMode": manualMode, "automaticMode":automaticMode};
+    	chargersState = {"connectedBots": connectedBots,"manualMode": manualMode, "automaticMode":automaticMode, "csConnected":csConnected};
 	}
 }
 
@@ -96,7 +105,13 @@ class ChargingStations extends React.Component{
 				<div>
 					<div className="gorTesting">
           <Spinner isLoading={this.props.csSpinner} setSpinner={this.props.setCsSpinner} />
-						<ChargingStationsTable items={chargersData} itemNumber={itemNumber} chargersState={chargersState} intlMessg={this.props.intlMessages} sortHeaderState={this.props.csHeaderSort} currentSortState={this.props.csSortHeader} sortHeaderOrder={this.props.csHeaderSortOrder} currentHeaderOrder={this.props.csSortHeaderState}/>
+						<ChargingStationsTable items={chargersData} itemNumber={itemNumber} 
+                                   chargersState={chargersState} intlMessg={this.props.intlMessages} 
+                                   sortHeaderState={this.props.csHeaderSort} currentSortState={this.props.csSortHeader} 
+                                   sortHeaderOrder={this.props.csHeaderSortOrder} 
+                                   currentHeaderOrder={this.props.csSortHeaderState}
+                                   setCsFilter={this.props.csFilterDetail}
+                                   getCsFilter = {this.props.csFilter}/>
 					</div>
 				</div>
 			</div>
@@ -107,6 +122,7 @@ class ChargingStations extends React.Component{
 function mapStateToProps(state, ownProps){
   
   return {
+    csFilter: state.sortHeaderState.csFilter|| "",
     csSortHeader: state.sortHeaderState.csHeaderSort || INITIAL_HEADER_SORT ,
     csSortHeaderState: state.sortHeaderState.csHeaderSortOrder || INITIAL_HEADER_ORDER,
     csSpinner: state.spinner.csSpinner || false,
@@ -117,6 +133,7 @@ function mapStateToProps(state, ownProps){
 
 var mapDispatchToProps = function(dispatch){
   return{
+    csFilterDetail: function(data){dispatch(csFilterDetail(data))},
     setCsSpinner: function(data){ dispatch(setCsSpinner(data));},
     csHeaderSort: function(data){dispatch(csHeaderSort(data))},
     csHeaderSortOrder: function(data){dispatch(csHeaderSortOrder(data))}

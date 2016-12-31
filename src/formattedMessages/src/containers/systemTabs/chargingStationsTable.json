@@ -25,6 +25,11 @@
     "defaultMessage": "STATUS"
   },
   {
+    "id": "csTable.status",
+    "description": "status for cs table",
+    "defaultMessage": "{csConnected} connected"
+  },
+  {
     "id": "ChargingStations.table.operatingMode",
     "description": "operatingMode for ChargingStations",
     "defaultMessage": "OPERATING MODE"
