@@ -1,5 +1,3 @@
-
-
 export const BASE_URL = '192.168.8.103';
 export const PORT = '8888';
 export const PROTOCOL = 'https://';
