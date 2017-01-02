@@ -237,7 +237,7 @@ class WavesTable extends React.Component {
         </div>
         </SortHeaderCell>
       }
-      cell={<TextCell data={sortedDataList} />}
+      cell={<TextCell style={{textTransform: 'capitalize'}} data={sortedDataList} />}
       fixed={true}
       width={columnWidths.startTime}
       isResizable={true}
@@ -258,7 +258,7 @@ class WavesTable extends React.Component {
         </div>
         </SortHeaderCell>
       }
-      cell={<TextCell data={sortedDataList} />}
+      cell={<TextCell style={{textTransform: 'capitalize'}} data={sortedDataList} />}
       fixed={true}
       width={columnWidths.cutOffTime}
       isResizable={true}

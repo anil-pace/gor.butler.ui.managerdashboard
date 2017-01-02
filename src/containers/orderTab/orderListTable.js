@@ -272,7 +272,7 @@ class OrderListTable extends React.Component {
               </div>
             </SortHeaderCell>
           }
-          cell={<TextCell data={sortedDataList} />}
+          cell={<TextCell style={{textTransform: 'capitalize'}} data={sortedDataList} />}
           fixed={true}
           width={columnWidths.pickBy}
           isResizable={true}
@@ -291,7 +291,7 @@ class OrderListTable extends React.Component {
               </div>
             </SortHeaderCell>
           }
-          cell={<TextCell data={sortedDataList} />}
+          cell={<TextCell style={{textTransform: 'capitalize'}} data={sortedDataList} />}
           fixed={true}
           width={columnWidths.recievedTime}
           isResizable={true}
@@ -309,7 +309,7 @@ class OrderListTable extends React.Component {
                 </div>
             </div>
           }
-          cell={<TextCell data={sortedDataList} />}
+          cell={<TextCell style={{textTransform: 'capitalize'}} data={sortedDataList} />}
           fixed={true}
           width={columnWidths.completedTime}
           isResizable={true}

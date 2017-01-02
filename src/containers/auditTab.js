@@ -87,12 +87,13 @@ _processAuditData(data,nProps){
   var auditType = {"sku":sku, "location":location};
   var auditDetails = [], auditData = {};
   for (var i = data.length - 1; i >= 0; i--) {
+     auditData.id = data[i].audit_id;
     if(data[i].display_id) {
-      auditData.id = data[i].display_id;
+      auditData.display_id = data[i].display_id;
     }
 
     else {
-      auditData.id = "--";
+      auditData.display_id = "--";
     }
 
     if(data[i].audit_param_type) {
