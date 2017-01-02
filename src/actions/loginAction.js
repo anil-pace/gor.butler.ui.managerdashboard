@@ -32,11 +32,6 @@ export function receiveAuthData(data){
         data
       }
 }
- export function loginFail(){
-      return{
-        type: LOGIN_FAILURE
-      }
-  }
 
 /**
  * function that sends ajax to authorize user
@@ -89,9 +84,3 @@ export function authLoginData(params) {
   }
  }
 
-export function connectionFault()
-{
-  return {
-    type:CONNECTION_FAILURE
-  }
-}

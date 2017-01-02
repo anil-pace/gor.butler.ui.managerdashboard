@@ -1,4 +1,4 @@
-import {ID_DATA,NAME_DATA,PASSWORD_DATA,INFO_RESET,ID_BACKEND,NOTIFY_PASS,NOTIFY_HIDE,NOTIFY_FAIL,NOTIFY_DELETE,NOTIFY_INFO} from '../constants/frontEndConstants'
+import {SKU_DATA,LOC_DATA,ID_DATA,NAME_DATA,PASSWORD_DATA,INFO_RESET,ID_BACKEND,NOTIFY_PASS,NOTIFY_HIDE,NOTIFY_FAIL,NOTIFY_DELETE,NOTIFY_INFO,LOGIN_ERROR} from '../constants/frontEndConstants';
 
 
 export function validateID(data){
@@ -15,6 +15,21 @@ export function validateName(data){
 		data
 	}
 }
+export function validateSKU(data){
+	
+	return{
+		type:SKU_DATA,
+		data
+	}
+}
+export function validateLOC(data){
+	
+	return{
+		type:LOC_DATA,
+		data
+	}
+}
+
 export function validatePassword(data){
 	return {
 		type:PASSWORD_DATA,
@@ -53,5 +68,11 @@ export function notifyInfo(data){
 export function notifyHide(){	
 	return{
 		type:NOTIFY_HIDE
+	}
+}
+export function loginError(data){
+	return{
+		type:LOGIN_ERROR,
+		data
 	}
 }

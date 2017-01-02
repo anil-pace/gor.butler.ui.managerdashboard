@@ -308,7 +308,7 @@ class AuditTable extends React.Component {
        height={heightRes*0.9}
        {...this.props}>
        <Column
-       columnKey="id"
+       columnKey="display_id"
        header={
         <SortHeaderCell onSortChange={this.backendSort}
         sortDir={colSortDirs.id}>

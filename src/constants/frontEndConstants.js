@@ -10,7 +10,7 @@ export const MOCK_LOGIN = "MOCK_LOGIN";
 export const SET_USERNAME = "SET_USERNAME";
 export const SET_TIME_OFFSET = "SET_TIME_OFFSET";
 export const RECIEVE_TIME_OFFSET = "RECIEVE_TIME_OFFSET";
-
+export const LOGIN_ERROR = "LOGIN_ERROR";
 /*Constants for Web Sockets*/
 export const WS_CONNECT = "WS_CONNECT";
 export const WS_CONNECTED = "WS_CONNECTED";
@@ -135,9 +135,11 @@ export const NOTIFY_DELETE='NOTIFY_DELETE';
 export const NOTIFY_FAIL='NOTIFY_FAIL';
 export const NOTIFY_INFO='NOTIFY_INFO';
 export const NOTIFY_HIDE='NOTIFY_HIDE';
-export const MD_ID='MD_ID';
+export const ID_MAP='ID_MAP';
 export const SET_ROLE='SET_ROLE';
 export const SKU_INFO='SKU_INFO';
+export const SKU_DATA="SKU_DATA";
+export const LOC_DATA="LOC_DATA";
 
 /*Constants for pagination*/
 export const PAGE_DATA = "PAGE_DATA";
