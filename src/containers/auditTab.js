@@ -87,12 +87,13 @@ _processAuditData(data,nProps){
   var auditType = {"sku":sku, "location":location};
   var auditDetails = [], auditData = {};
   for (var i = data.length - 1; i >= 0; i--) {
+    auditData.id = data[i].audit_id;
     if(data[i].display_id) {
-      auditData.id = data[i].display_id;
+      auditData.display_id = data[i].display_id;
     }
 
     else {
-      auditData.id = "--";
+      auditData.display_id = "--";
     }
 
     if(data[i].audit_param_type) {
@@ -174,7 +175,7 @@ _processAuditData(data,nProps){
 }
 handlePageClick(data){
   var url, appendSortUrl = "",appendTextFilterUrl="";
-  var sortHead = {"startTime":"&order_by=start_actual_time", "completedTime":"&order_by=completion_time", "id":"&order_by=audit_id"};
+  var sortHead = {"startTime":"&order_by=start_actual_time", "completedTime":"&order_by=completion_time", "display_id":"&order_by=audit_id"};
   var sortOrder = {"DESC":"&order=asc", "ASC":"&order=desc"};
   var makeDate = new Date();
   this.setState({selected_page:data.selected});

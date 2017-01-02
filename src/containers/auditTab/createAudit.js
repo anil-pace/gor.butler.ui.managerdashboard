@@ -1,7 +1,7 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
-import { resetForm,validateID,validateName } from '../../actions/validationActions'; 
+import { resetForm,validateSKU,validateLOC } from '../../actions/validationActions'; 
 import {setAuditType,resetAuditType} from '../../actions/auditActions';
 import {userRequest} from '../../actions/userActions';
 import { connect } from 'react-redux';
@@ -190,8 +190,8 @@ class CreateAudit extends React.Component{
 function mapStateToProps(state, ownProps){
   return {
       auditType:  state.auditInfo.auditType  || {},
-      skuCheck: state.appInfo.idInfo || {},
-      locCheck: state.appInfo.nameInfo || {},
+      skuCheck: state.appInfo.skuInfo || {},
+      locCheck: state.appInfo.locInfo || {},
       auth_token:state.authLogin.auth_token
   };
 }
@@ -201,8 +201,8 @@ var mapDispatchToProps = function(dispatch){
     userRequest: function(data){ dispatch(userRequest(data)); },
     setAuditType: function(data){ dispatch(setAuditType(data)); },
     resetAuditType: function(data){ dispatch(resetAuditType(data)); },    
-    validateSKU: function(data){ dispatch(validateID(data)); },
-    validateLoc: function(data){ dispatch(validateName(data)); },            
+    validateSKU: function(data){ dispatch(validateSKU(data)); },
+    validateLoc: function(data){ dispatch(validateLOC(data)); },            
     resetForm:   function(){ dispatch(resetForm()); }
   }
 };

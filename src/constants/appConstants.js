@@ -148,7 +148,7 @@ export const NOTIFY_PASS='NOTIFY_PASS';
 export const NOTIFY_DELETE='NOTIFY_DELETE';
 export const NOTIFY_FAIL='NOTIFY_FAIL';
 export const NOTIFY_HIDE='NOTIFY_HIDE';
-export const MD_ID='MD_ID';
+export const ID_MAP='ID_MAP';
 export const SET_ROLE='SET_ROLE';
 export const SKU_INFO='SKU_INFO';
 

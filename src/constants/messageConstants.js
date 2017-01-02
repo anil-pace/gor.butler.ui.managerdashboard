@@ -5,7 +5,13 @@ import { FormattedMessage,FormattedPlural } from 'react-intl';
 export const ENG=(<FormattedMessage id='login.lang.english' defaultMessage="English" description="English option in the language drop down"/>);
 export const JAP=(<FormattedMessage id='login.lang.japanese' defaultMessage="日本語" description="Japanese option in the language drop down"/>);
 export const AUTO_LOGOUT = (<FormattedMessage id= 'login.autologout.message' defaultMessage="Due to session expiry, Auto Logout has been triggered!"
-      description="Auto logout message"/>)
+      description="Auto logout message"/>);
+export const WRONG_CRED=(<FormattedMessage id='login.butler.fail' 
+                        defaultMessage="Invalid username and/or password, please try again" description="Text for login failure"/>);
+export const NO_NET=(<FormattedMessage id='login.butler.connection.fail' 
+                        defaultMessage="Connection failure" description="Text for connection failure"/>);
+export const UNAUTH=(<FormattedMessage id='login.butler.unauthorized' 
+                        defaultMessage="You are not authorized" description="Text for unauthorized login"/>)
 //success codes related to user management
 
 export const US004 = (<FormattedMessage id="notify.success.edit" description='Text for successfully editing user' 
