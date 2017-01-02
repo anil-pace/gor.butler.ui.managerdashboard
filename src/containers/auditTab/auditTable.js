@@ -102,7 +102,7 @@ class AuditTable extends React.Component {
     var tableData = {sortedDataList: current._dataList,
       colSortDirs: sortIndex,
       columnWidths: {
-        id: nProps.containerWidth*0.09,
+        display_id: nProps.containerWidth*0.09,
         auditTypeValue: nProps.containerWidth*0.14,
         status: nProps.containerWidth*0.1,
         startTime: nProps.containerWidth*0.15,
@@ -311,7 +311,7 @@ class AuditTable extends React.Component {
        columnKey="display_id"
        header={
         <SortHeaderCell onSortChange={this.backendSort}
-        sortDir={colSortDirs.id}>
+        sortDir={colSortDirs.display_id}>
         <div className="gorToolHeaderEl">
         <FormattedMessage id="auditTable.stationID.heading" description='Heading for audit ID for auditTable' 
         defaultMessage='AUDIT ID' />
@@ -325,7 +325,7 @@ class AuditTable extends React.Component {
       }
       cell={  <TextCell data={sortedDataList}/>}
       fixed={true}
-      width={columnWidths.id}
+      width={columnWidths.display_id}
       isResizable={true}
       />
 
@@ -380,7 +380,7 @@ class AuditTable extends React.Component {
       columnKey="startTime"
       header={
         <SortHeaderCell onSortChange={this.backendSort}
-        sortDir={colSortDirs.mode}>
+        sortDir={colSortDirs.startTime}>
          <div className="gorToolHeaderEl"> 
         <FormattedMessage id="audit.table.startTime" description="startTime for audit" 
         defaultMessage ="START TIME"/>
