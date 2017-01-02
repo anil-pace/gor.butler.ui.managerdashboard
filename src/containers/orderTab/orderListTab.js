@@ -106,7 +106,7 @@ class OrderListTab extends React.Component{
         });
 
 
-      if(data[i].pick_before_time === null) {
+      if(!data[i].pick_before_time) {
         orderData.pickBy = "--";
       }
       else {
