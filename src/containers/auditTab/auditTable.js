@@ -430,7 +430,7 @@ class AuditTable extends React.Component {
         </div>
         </SortHeaderCell>
       }
-      cell={<TextCell data={sortedDataList} />}
+      cell={<TextCell style={{textTransform: 'capitalize'}} data={sortedDataList} />}
       fixed={true}
       width={columnWidths.completedTime}
       isResizable={true}
