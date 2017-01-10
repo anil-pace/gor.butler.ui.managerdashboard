@@ -102,11 +102,11 @@ class AuditTable extends React.Component {
     var tableData = {sortedDataList: current._dataList,
       colSortDirs: sortIndex,
       columnWidths: {
-        id: nProps.containerWidth*0.09,
+        display_id: nProps.containerWidth*0.09,
         auditTypeValue: nProps.containerWidth*0.14,
         status: nProps.containerWidth*0.1,
-        startTime: nProps.containerWidth*0.15,
-        progress: nProps.containerWidth*0.12,
+        startTime: nProps.containerWidth*0.14,
+        progress: nProps.containerWidth*0.13,
         completedTime: nProps.containerWidth*0.15,
         actions: nProps.containerWidth*0.25
       }};
@@ -311,7 +311,7 @@ class AuditTable extends React.Component {
        columnKey="display_id"
        header={
         <SortHeaderCell onSortChange={this.backendSort}
-        sortDir={colSortDirs.id}>
+        sortDir={colSortDirs.display_id}>
         <div className="gorToolHeaderEl">
         <FormattedMessage id="auditTable.stationID.heading" description='Heading for audit ID for auditTable' 
         defaultMessage='AUDIT ID' />
@@ -325,7 +325,7 @@ class AuditTable extends React.Component {
       }
       cell={  <TextCell data={sortedDataList}/>}
       fixed={true}
-      width={columnWidths.id}
+      width={columnWidths.display_id}
       isResizable={true}
       />
 
@@ -380,7 +380,7 @@ class AuditTable extends React.Component {
       columnKey="startTime"
       header={
         <SortHeaderCell onSortChange={this.backendSort}
-        sortDir={colSortDirs.mode}>
+        sortDir={colSortDirs.startTime}>
          <div className="gorToolHeaderEl"> 
         <FormattedMessage id="audit.table.startTime" description="startTime for audit" 
         defaultMessage ="START TIME"/>
@@ -405,7 +405,7 @@ class AuditTable extends React.Component {
         <div className="gorToolHeaderSubText">
                 <FormattedMessage id="audit.Totalprogress" description='total progress for audit table' 
                 defaultMessage='{totalProgress}% Completed' 
-                values={{totalProgress: totalProgress?totalProgress:'0'}}/>
+                values={{totalProgress: totalProgress.toFixed(1)?totalProgress.toFixed(1):'0'}}/>
               </div>
         </div>
         </div>
