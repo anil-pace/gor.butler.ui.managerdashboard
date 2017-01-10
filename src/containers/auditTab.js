@@ -142,7 +142,7 @@ _processAuditData(data,nProps){
     }
 
     if( data[i].expected_quantity && data[i].completed_quantity ) {
-      auditData.progress = (data[i].completed_quantity)/(data[i].expected_quantity);
+      auditData.progress = ((data[i].completed_quantity)/(data[i].expected_quantity)*100);
     }
 
     else {
@@ -237,6 +237,7 @@ render(){
       auditState["locationAudit"]++;
     }
     totalProgress = auditData[i].progress + totalProgress;
+    auditData[i].progress = auditData[i].progress.toFixed(1);
 
   }
   if(auditData.length && auditData.length !== 0) {
