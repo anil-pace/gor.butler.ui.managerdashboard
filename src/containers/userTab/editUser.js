@@ -92,17 +92,14 @@ class EditUser extends React.Component{
         }
         role=this.props.roleSet?this.props.roleSet:givenRole;
 
-        if(!this.props.passwordCheck.type)
-        {  
-           if(!pswd&&!confirmPswd&&role==givenRole)
-           {
-             pswd="__unchanged__";
-             confirmPswd="__unchanged__";
-           }
-           else if(!this._checkPwd())
-           {
-             return;
-           }
+        if(!pswd&&!confirmPswd&&role==givenRole)
+        {
+          pswd="__unchanged__";
+          confirmPswd="__unchanged__";
+        }
+        else if(!this._checkPwd())
+        {
+          return;
         }
         let formdata={         
                     "first_name": firstname,
@@ -180,12 +177,12 @@ class EditUser extends React.Component{
 
               <div className='gor-usr-hdsm'><FormattedMessage id="users.edit.password.field1" description='Text for password' 
             defaultMessage='Password'/></div>
-              <input className={"gor-usr-fdlg"+(this.props.passwordCheck.type===ERROR?' gor-input-error':' gor-input-ok')} onMouseDown={(this.props.passwordCheck.type===ERROR||this.props.passwordCheck.type===SUCCESS)?this._checkPwd.bind(this):''} type="password" id="pswd"  ref={node => { this.pswd = node }}/>     
+              <input className={"gor-usr-fdlg"+(this.props.passwordCheck.type===ERROR?' gor-input-error':' gor-input-ok')} type="password" id="pswd"  ref={node => { this.pswd = node }}/>     
               {this.props.passwordCheck.type?tick:''}
 
               <div className='gor-usr-hdsm'><FormattedMessage id="users.edit.password.field2" description='Text for confirm password' 
             defaultMessage='Confirm Password'/></div>
-              <input className={"gor-usr-fdlg"+(this.props.passwordCheck.type===ERROR?' gor-input-error':' gor-input-ok')} onMouseDown={this._checkPwd.bind(this)} type="password" id="confirmPswd"  ref={node => { this.confirmPswd = node }}/>
+              <input className={"gor-usr-fdlg"+(this.props.passwordCheck.type===ERROR?' gor-input-error':' gor-input-ok')} type="password" id="confirmPswd"  ref={node => { this.confirmPswd = node }}/>
               {this.props.passwordCheck.type?tick:((this.props.passwordCheck.type===ERROR)?<FieldError txt={this.props.passwordCheck.msg} />:'')}
             </div>
 
