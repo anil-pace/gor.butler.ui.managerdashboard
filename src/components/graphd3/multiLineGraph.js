@@ -35,6 +35,7 @@ class MultiLineGraph extends React.Component{
         let width = config.width;
         let height = config.height;
         let margin =config.margin;
+        let padding = config.padding;
         let component = this;
         width= width - margin.left - margin.right;
 
@@ -55,7 +56,7 @@ class MultiLineGraph extends React.Component{
         //let dataArray = jsonArray;
         //setting scale
         
-        var x = d3.time.scale().range([0, width]);
+        var x = d3.time.scale().range([padding, width-padding]);
         var y = d3.scale.linear().range([height, 0]);
         var xx = function(e)  { return x(function(d) { return x(d.date);}) };
         var yy = function(e)  { return y(function(d) { return y(d.items_put); }) };
@@ -193,7 +194,7 @@ class MultiLineGraph extends React.Component{
         if (mBreak.length){
           var dataLen = dataArray.length - 1;
           var textEl = parseInt(mBreak.select("g:nth-child("+dataLen+") text").text());
-          mBreak.select("g:nth-child("+(dataLen)+")").append("text").attr("x","-20").attr("y","2.5em").text(config.today)
+          mBreak.select("g:nth-child("+(dataLen+1)+")").append("text").attr("x","-20").attr("y","2.5em").text(config.today)
           var monthBreak = mBreak.select("g:nth-child("+(dataLen)+")");
           mBreak.select("g:nth-child("+(dataLen - textEl)+")").append("line").attr("class","month-break").attr("x1","15").attr("x2","15").attr("y1","0").attr("y2","25");
           mBreak.select("g:nth-child("+(dataLen - (textEl-1))+")").append("text").attr("x","-5").attr("y","30").text(config.breakMonth);

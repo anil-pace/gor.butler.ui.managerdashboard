@@ -262,6 +262,7 @@ export const INVENTORY_LINE_CONFIG = {
 	bandPadding:0.05,
 	outerTickSize:0,
 	defaultMaxYAxis:100000,
+	padding:18,
 	ticks:3,
 	showMonthBreak:true,
 	noDataText:'No Item Movement'
