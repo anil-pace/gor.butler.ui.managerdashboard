@@ -18,7 +18,7 @@ class DropdownTable extends Component {
   }
 
   render () {
-    const defaultOption = this.state.selected
+    const defaultOption = this.props.placeholder;
     return (
       <div className={this.props.styleClass}>
         <Ddown options={this.props.items} onChange={this._onSelect} value={defaultOption} placeholder="Select an option" />
