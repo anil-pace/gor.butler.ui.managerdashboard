@@ -3,7 +3,7 @@ import {Table, Column, Cell} from 'fixed-data-table';
 import {modal} from 'react-redux-modal';
 import { FormattedMessage } from 'react-intl';
 import DropdownTable from './dropdown/dropdownTable'
-
+import {AUDIT_APPROVED, AUDIT_REJECTED} from '../constants/frontEndConstants';
 export var SortTypes = {
   ASC: 'ASC',
   DESC: 'DESC',
@@ -153,11 +153,11 @@ export const StatusCell = ({rowIndex, data, columnKey,statusKey, ...props}) => (
   </Cell>
 );
 
-export const ResolveCell = ({rowIndex, data, columnKey, ...props}) => (
+export const ResolveCell = ({rowIndex, data, columnKey, checkStatus, ...props}) => (
   <Cell {...props}>
-    <input type="radio"  name='role' defaultChecked={true}  />
+    <input type="radio"  name={rowIndex}  onChange={checkStatus.bind(this,rowIndex,AUDIT_APPROVED)} />
     <FormattedMessage id="commonDataTable.resolveAudit.approve" description='resolve button' defaultMessage='Approve'/>
-    <input type="radio"  name='role' defaultChecked={true}  />
+    <input type="radio"  name={rowIndex}  onChange={checkStatus.bind(this,rowIndex,AUDIT_REJECTED)}/>
     <FormattedMessage id="commonDataTable.resolveAudit.reject" description='resolve button' defaultMessage='Reject'/>
   </Cell>
 );

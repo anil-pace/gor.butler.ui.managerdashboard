@@ -374,3 +374,5 @@ export const SET_BUTLER_FILTER = "SET_BUTLER_FILTER";
 export const SET_PPS_FILTER = "SET_PPS_FILTER";
 export const SET_CS_FILTER = "SET_CS_FILTER";
 export const SET_WAVE_FILTER = "SET_WAVE_FILTER"
+export const AUDIT_APPROVED = "approve";
+export const AUDIT_REJECTED = "rejected";

@@ -18,17 +18,19 @@ class ResolveAudit extends React.Component{
       this._dataList.newData=data;
       this.state = {
       auditDataList: this._dataList,
+      checkedState: [],
       } 
   }
 
   componentWillReceiveProps(nextProps){
 
      var data = nextProps.auditLines.auditlines || [], processedData;
-      processedData = this.processData(data,nextProps);
+      processedData = this._processData(data,nextProps);
       this._dataList = new tableRenderer(data ? data.length : 0);
       this._dataList.newData=processedData;
       this.state = {
       auditDataList: this._dataList,
+      checkedState: [],
       }
   }
   _removeThisModal() {
@@ -48,29 +50,43 @@ class ResolveAudit extends React.Component{
   }
   
 
-  processData(auditLines,nProps) {
+  _processData(auditLines,nProps) {
     var data = auditLines, processedData = [], auditData = {};
     for (var i = data.length - 1; i >= 0; i--) {
       auditData.actual_quantity = data[i].actual_quantity;
       auditData.expected_quantity = data[i].expected_quantity;
-      auditData.slot_id = data[i].expected_quantity;
+      auditData.slot_id = data[i].slot_id;
       if(this.context.intl.formatMessage(stringConfig[data[i].status])) {
         auditData.status = this.context.intl.formatMessage(stringConfig[data[i].status]);
       } 
       else{
         auditData.status = data[i].status;
       }
-      //auditData.status = data[i].status;
       processedData.push(auditData);
       auditData =  {};
     }
     return processedData;
-
   } 
+
+  _checkAuditStatus(rowIndex,state) {
+    
+    var checkedAudit = {"rowIndex":rowIndex, "state":state}, auditIndexed = false;
+    var tempState = this.state.checkedState.slice();
+    for (var i = tempState.length - 1; i >= 0; i--) {
+      if(tempState[i].rowIndex === rowIndex) {
+        tempState[i].state = state;
+        auditIndexed = true;
+        break;
+      }
+    }
+    if(!auditIndexed) {
+      tempState.push(checkedAudit)
+    }
+    this.setState({checkedState:tempState})
+  }
   
   render()
   {
-      console.log(this.props.auditLines)
       var {auditDataList} = this.state;
       var rowsCount = 0;
     
@@ -143,7 +159,7 @@ class ResolveAudit extends React.Component{
                               <FormattedMessage id="resolveAudit.table.STATUS" description="status Column" defaultMessage ="STATUS"/> 
                             </div>
                         }
-                        cell={  <ResolveCell > </ResolveCell>}
+                        cell={  <ResolveCell checkStatus={this._checkAuditStatus.bind(this)} > </ResolveCell>}
                         width={220}
                       />
                      

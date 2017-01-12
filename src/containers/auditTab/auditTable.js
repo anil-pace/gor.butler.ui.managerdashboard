@@ -204,15 +204,7 @@ class AuditTable extends React.Component {
         else {
           auditId = this.props.items[rowIndex].id;
         }
-       //  let url = AUDIT_URL + "/" + auditId + PENDING_ORDERLINES; 
-       //  let paginationData={
-       //   'url':url,
-       //   'method':GET,
-       //   'cause': AUDIT_RESOLVE_LINES,
-       //   'token': this.props.auth_token,
-       //   'contentType':APP_JSON
-       //  } 
-       // this.props.getAuditOrderLines(paginationData);  
+    
          modal.add(ResolveAudit, {
         title: '',
         size: 'large', // large, medium or small,
@@ -459,7 +451,7 @@ class AuditTable extends React.Component {
         </div>
         </SortHeaderCell>
       }
-      cell={<TextCell data={sortedDataList} />}
+      cell={<TextCell style={{textTransform: 'capitalize'}} data={sortedDataList} />}
       fixed={true}
       width={columnWidths.completedTime}
       isResizable={true}
