@@ -40,6 +40,10 @@ const messages = defineMessages({
   auditLocation:{
     id:"auditdetail.location.prefix", 
     defaultMessage: "Location"
+  },
+  auditPendingApp:{
+    id:"auditdetail.auditPendingApp.prefix", 
+    defaultMessage: "Issues found"
   }
 
 
@@ -74,6 +78,7 @@ _processAuditData(data,nProps){
   let pending  = nProps.context.intl.formatMessage(messages.auditPendingStatus);
   let progress  = nProps.context.intl.formatMessage(messages.auditInProgressStatus);
   let completed  = nProps.context.intl.formatMessage(messages.auditCompletedStatus);
+  let pendingApp  = nProps.context.intl.formatMessage(messages.auditPendingApp);
   let sku  = nProps.context.intl.formatMessage(messages.auditSKU);
   let location  = nProps.context.intl.formatMessage(messages.auditLocation);
 
@@ -82,8 +87,8 @@ _processAuditData(data,nProps){
 
   
   var priorityStatus = {"audit_created":2, "audit_pending":3, "audit_waiting":3, "audit_conflicting":3, "audit_accepted":3, "audit_started":1, "audit_tasked":1, "audit_aborted":4, "audit_completed":4, "audit_pending_approval":4};
-  var auditStatus = {"audit_created":created, "audit_pending":pending, "audit_waiting":pending, "audit_conflicting":pending, "audit_accepted":pending, "audit_started":progress, "audit_tasked":progress, "audit_aborted":completed, "audit_completed":completed, "audit_pending_approval":completed};
-  var statusClass = {"Pending": "pending", "Completed":"completed", "In Progress":"progress", "Created":"pending"}
+  var auditStatus = {"audit_created":created, "audit_pending":pending, "audit_waiting":pending, "audit_conflicting":pending, "audit_accepted":pending, "audit_started":progress, "audit_tasked":progress, "audit_aborted":completed, "audit_completed":completed, "audit_pending_approval":pendingApp, "audit_resolved":progress};
+  var statusClass = {"Pending": "pending", "Completed":"completed", "In Progress":"progress", "Created":"pending", "Issues found":"breached"}
   var auditType = {"sku":sku, "location":location};
   var auditDetails = [], auditData = {};
   for (var i = data.length - 1; i >= 0; i--) {
@@ -117,6 +122,23 @@ _processAuditData(data,nProps){
 
       else {
         auditData.startAudit = false;
+      }
+
+      
+      if(data[i].audit_status === "audit_pending_approval") {
+        auditData.resolveAudit = true;
+      }
+
+      else {
+        auditData.resolveAudit = false;
+      }
+
+      if(data[i].audit_status === "audit_resolved") {
+        auditData.viewIssues = true;
+      }
+
+      else {
+        auditData.viewIssues = false;
       }
     }
 
@@ -175,7 +197,7 @@ _processAuditData(data,nProps){
 }
 handlePageClick(data){
   var url, appendSortUrl = "",appendTextFilterUrl="";
-  var sortHead = {"startTime":"&order_by=start_actual_time", "completedTime":"&order_by=completion_time", "id":"&order_by=audit_id"};
+  var sortHead = {"startTime":"&order_by=start_actual_time", "completedTime":"&order_by=completion_time", "display_id":"&order_by=audit_id"};
   var sortOrder = {"DESC":"&order=asc", "ASC":"&order=desc"};
   var makeDate = new Date();
   this.setState({selected_page:data.selected});

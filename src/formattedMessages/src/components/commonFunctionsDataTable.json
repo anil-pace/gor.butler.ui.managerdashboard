@@ -10,8 +10,28 @@
     "defaultMessage": "Delete"
   },
   {
+    "id": "commonDataTable.resolveAudit.approve",
+    "description": "resolve button",
+    "defaultMessage": "Approve"
+  },
+  {
+    "id": "commonDataTable.resolveAudit.reject",
+    "description": "resolve button",
+    "defaultMessage": "Reject"
+  },
+  {
     "id": "commonDataTable.startAudit.button",
-    "description": "edit button",
+    "description": "start button",
     "defaultMessage": "Start audit"
+  },
+  {
+    "id": "commonDataTable.resolveAudit.button",
+    "description": "resolve button",
+    "defaultMessage": "Resolve"
+  },
+  {
+    "id": "commonDataTable.viewIssues.button",
+    "description": "viewIssues button",
+    "defaultMessage": "View issues"
   }
 ]

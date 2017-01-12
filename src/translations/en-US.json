@@ -2344,6 +2344,11 @@
       "id":"docked.task", 
       "description":"docked task", 
       "defaultMessage":"Docked at"
+    },
+    {
+    "id":"auditdetail.auditPendingApp.prefix", 
+    "description":"auditPending status", 
+    "defaultMessage": "Issues found"
     }
 
 ]

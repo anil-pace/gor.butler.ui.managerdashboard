@@ -1,13 +1,13 @@
 import {receiveAuthData,setLoginSpinner,setTimeOffSetData,loginFail} from '../actions/loginAction';
 import {recieveOrdersData} from '../actions/paginationAction';
-import {recieveAuditData,setAuditRefresh,setAuditSpinner} from '../actions/auditActions';
+import {recieveAuditData,setAuditRefresh,setAuditSpinner,setPendingAuditLines} from '../actions/auditActions';
 import {assignRole} from '../actions/userActions';
 import {recieveHeaderInfo} from '../actions/headerAction';
 import {getPPSAudit} from '../actions/auditActions';
 import {codeToString} from './codeToString';
 import {setOrderListSpinner} from '../actions/orderListActions';
 import {notifySuccess, notifyFail,validateID,notifyDelete,loginError} from '../actions/validationActions';
-import {ERROR,AUTH_LOGIN, ADD_USER, RECIEVE_TIME_OFFSET,CHECK_ID,DELETE_USER,GET_ROLES,ORDERS_RETRIEVE,PPS_MODE_CHANGE,EDIT_USER,RECIEVE_HEADER,SUCCESS,CREATE_AUDIT,AUDIT_RETRIEVE,GET_PPSLIST,START_AUDIT,DELETE_AUDIT} from '../constants/frontEndConstants';
+import {ERROR,AUTH_LOGIN, ADD_USER, RECIEVE_TIME_OFFSET,CHECK_ID,DELETE_USER,GET_ROLES,ORDERS_RETRIEVE,PPS_MODE_CHANGE,EDIT_USER,RECIEVE_HEADER,SUCCESS,CREATE_AUDIT,AUDIT_RETRIEVE,GET_PPSLIST,START_AUDIT,DELETE_AUDIT,AUDIT_RESOLVE_LINES} from '../constants/frontEndConstants';
 import {BUTLER_UI,CODE_UE002,BUTLER_SUPERVISOR} from '../constants/backEndConstants'
 import {UE002,E028,E029,MODE_REQUESTED,TYPE_SUCCESS,AS001,ERR_API,ERR_USR,ERR_RES,ERR_AUDIT,AS00A,WRONG_CRED} from '../constants/messageConstants';
 import {ShowError} from './showError';
@@ -16,7 +16,6 @@ import {endSession} from './endSession';
 export function AjaxParse(store,res,cause,status)
 {
 	let stringInfo={};
-
       switch(cause)
 	  {
 		case AUTH_LOGIN:	
@@ -158,6 +157,10 @@ export function AjaxParse(store,res,cause,status)
 		case RECIEVE_TIME_OFFSET:
 			 store.dispatch(setTimeOffSetData(res));
 			 break;
+
+		case AUDIT_RESOLVE_LINES:
+			 store.dispatch(setPendingAuditLines(res));
+			 break;	 
 
 		default:
 			ShowError(store,cause,status);

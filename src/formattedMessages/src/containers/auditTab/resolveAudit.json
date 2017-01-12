@@ -1,0 +1,27 @@
+[
+  {
+    "id": "audit.resolve.heading",
+    "description": "Heading for resolve audit",
+    "defaultMessage": "Resolve issues"
+  },
+  {
+    "id": "resolveAudit.table.slot",
+    "description": "slot id Column",
+    "defaultMessage": "SLOT ID"
+  },
+  {
+    "id": "resolveAudit.table.expectedItems",
+    "description": "expectedItems Column",
+    "defaultMessage": "EXPECTED QUANTITY"
+  },
+  {
+    "id": "resolveAudit.table.actualQuantity",
+    "description": "actualQuantity Column",
+    "defaultMessage": "ACTUAL QUANTITY"
+  },
+  {
+    "id": "resolveAudit.table.STATUS",
+    "description": "status Column",
+    "defaultMessage": "STATUS"
+  }
+]

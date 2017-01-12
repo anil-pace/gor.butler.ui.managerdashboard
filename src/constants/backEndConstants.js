@@ -224,6 +224,16 @@ export const  stringConfig= defineMessages({
         "id": "stringConfig.temporary_unfulfillable",
         "description": "Text for temporary unfulfillable status",
         "defaultMessage": "Unfulfillable"
+    },
+    audit_resolved:{
+        "id": "stringConfig.audit_resolved",
+        "description": "Text for audit resolved status",
+        "defaultMessage": "Resolved"
+    },
+    audit_pending_approval:{
+        "id": "stringConfig.audit_pending_approval",
+        "description": "Text for audit pending approval status",
+        "defaultMessage": "Unresolved"
     }
     
 });

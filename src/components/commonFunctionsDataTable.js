@@ -122,8 +122,8 @@ export const ActionCell = ({rowIndex, data, columnKey,selEdit,selDel,mid, ...pro
   </Cell>
 );
 
-export const TextCell = ({rowIndex, data, columnKey,classKey, ...props}) => (
-  <Cell {...props} >
+export const TextCell = ({rowIndex, data, columnKey,setClass, ...props}) => (
+  <Cell {...props} className={setClass}>
     {data.getObjectAt(rowIndex)[columnKey]}
   </Cell>
 );
@@ -153,12 +153,29 @@ export const StatusCell = ({rowIndex, data, columnKey,statusKey, ...props}) => (
   </Cell>
 );
 
-export const ActionCellAudit = ({rowIndex, data, columnKey, tasks, handleAudit,manageAuditTask, clickDropDown,showBox,placeholderText, ...props}) => (
+export const ResolveCell = ({rowIndex, data, columnKey, ...props}) => (
+  <Cell {...props}>
+    <input type="radio"  name='role' defaultChecked={true}  />
+    <FormattedMessage id="commonDataTable.resolveAudit.approve" description='resolve button' defaultMessage='Approve'/>
+    <input type="radio"  name='role' defaultChecked={true}  />
+    <FormattedMessage id="commonDataTable.resolveAudit.reject" description='resolve button' defaultMessage='Reject'/>
+  </Cell>
+);
+
+export const ActionCellAudit = ({rowIndex, data, columnKey, tasks, handleAudit,manageAuditTask, clickDropDown,showBox,placeholderText,resolveflag,resolveAudit,checkIssues, ...props}) => (
   <Cell {...props}>
     <div className="gor-audit-actions-button">
      {data.getObjectAt(rowIndex)[showBox]?(
       <button className="gor-add-btn" onClick={handleAudit.bind(this,columnKey,rowIndex)}>
-          <FormattedMessage id="commonDataTable.startAudit.button" description='edit button' defaultMessage='Start audit'/>
+          <FormattedMessage id="commonDataTable.startAudit.button" description='start button' defaultMessage='Start audit'/>
+      </button>):''}
+     {data.getObjectAt(rowIndex)[resolveflag]?(
+      <button className="gor-add-btn" onClick={resolveAudit.bind(this,columnKey,rowIndex)}>
+          <FormattedMessage id="commonDataTable.resolveAudit.button" description='resolve button' defaultMessage='Resolve'/>
+      </button>):''}
+     {data.getObjectAt(rowIndex)[checkIssues]?(
+      <button className="gor-resolve-button" onClick={resolveAudit.bind(this,columnKey,rowIndex)}>
+          <FormattedMessage id="commonDataTable.viewIssues.button" description='viewIssues button' defaultMessage='View issues'/>
       </button>):''}
     </div>
     <div className="gor-audit-actions-drop" onClick={clickDropDown.bind(this,rowIndex)}>
