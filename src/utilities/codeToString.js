@@ -32,7 +32,7 @@ export function codeToString(res){
               stringInfo={
                 type:SUCCESS,
                 msg:(<FormattedMessage id="notify.delete.audit.success" description='Text for successfull audit deletion' 
-            defaultMessage="Audit task {audit_id} has been deleted" values={{audit_id:res.details||"--"}}/>)
+            defaultMessage="Audit task {audit_id} has been deleted" values={{audit_id:res.details[1]||"--"}}/>)
               }
               break;              
             case CODE_UE001:
