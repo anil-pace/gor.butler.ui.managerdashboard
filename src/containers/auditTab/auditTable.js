@@ -55,7 +55,9 @@ class AuditTable extends React.Component {
     var el = event.target;
     var elClassName = (el.className).trim(),
     parentEl,siblingEl,totalRowCount = this.props.items.length -1;
-    if(elClassName === "Dropdown-control" || elClassName === "Dropdown-placeholder" || elClassName === "Dropdown-arrow"){
+    if(elClassName !== "Dropdown-control" && elClassName !== "Dropdown-placeholder" && elClassName !== "Dropdown-arrow"){
+      return;
+    }
       parentEl= el.parentNode;
       while(parentEl){
         if(parentEl.className === "fixedDataTableRowLayout_rowWrapper"){
@@ -80,9 +82,9 @@ class AuditTable extends React.Component {
         parentEl.nextSibling.style.zIndex = "2" ;
       }
       
-    }
+    
 
-  
+
   }
 
   tableState(nProps, current) {
