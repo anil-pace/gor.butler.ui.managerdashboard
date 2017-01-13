@@ -1836,6 +1836,10 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   background-color: #f4f4f4;
 }
 
+.fixedDataTableRowLayout_rowWrapper:last-child {
+  width: 1281px;
+}
+
 .fixedDataTableRowLayout_rowWrapper:hover .public_fixedDataTableCell_main {
   background-color: #e6e6e6;
 }

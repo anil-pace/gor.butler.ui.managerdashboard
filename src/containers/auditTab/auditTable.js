@@ -48,43 +48,39 @@ class AuditTable extends React.Component {
    * This has to be removed once we get rid of the fixedDataTable
    * @param  {Number} rowIndex rowindex on which the click was initiated
    */
-   _handleOnClickDropdown(rowIndex) {
-    if (rowIndex.constructor === Number && rowIndex >= 0){    
-      var domArray = document.querySelectorAll('.fixedDataTableRowLayout_rowWrapper');
-      // since the last drop down menu does not have the space to show the menu below it
-      // hence it has to be put on top
-      var lastDownMenu = document
-                          .querySelector('.fixedDataTableRowLayout_rowWrapper:last-child .Dropdown-menu');
+   _handleOnClickDropdown(event, index) {
 
-      if (lastDownMenu){
-        lastDownMenu.style.bottom = '100%';
-        lastDownMenu.style.top = 'initial';
-      }
-      var firstDropDownMenu = document
-                          .querySelector('.fixedDataTableRowLayout_rowWrapper:nth-child(1) .Dropdown-menu');
-      if (firstDropDownMenu){
-        firstDropDownMenu.style.bottom = 'initial';
-      }
-
-      //** fix for issue reported in JIRA -BSS-739
-      //The first child is the edge case ofr the dropdowns, where it should appear down but appears on the top
-      // hence this fix.
-      var firstDownMenu = document
-                          .querySelector('.fixedDataTableRowLayout_rowWrapper:nth-child(1) .Dropdown-menu');
-      if (firstDownMenu) {
-        firstDownMenu.style.bottom = 'initial';
-      }
-
-
-
-      let DOMObj = domArray[rowIndex+1];
-      DOMObj.style.zIndex = "30";
-      for(var i = domArray.length-1; i>=0;i--){
-        if (domArray[i] !== DOMObj){
-          domArray[i].style.zIndex = "2";
+    var el = event.target;
+    var elClassName = (el.className).trim(),
+    parentEl,siblingEl,totalRowCount = this.props.items.length -1;
+    if(elClassName === "Dropdown-control" || elClassName === "Dropdown-placeholder" || elClassName === "Dropdown-arrow"){
+      parentEl= el.parentNode;
+      while(parentEl){
+        if(parentEl.className === "fixedDataTableRowLayout_rowWrapper"){
+          parentEl.style.zIndex = "30";
+          if(index === totalRowCount){
+            if(elClassName !== "Dropdown-control"){
+              siblingEl = el.parentNode.nextSibling;
+            }
+            else{
+              siblingEl = el.nextSibling;
+            }
+            siblingEl.style.bottom = '100%';
+            siblingEl.style.top = 'initial';
+          }
+          break;
+        }
+        else{
+          parentEl = parentEl.parentNode;
         }
       }
+      if(parentEl.nextSibling){
+        parentEl.nextSibling.style.zIndex = "2" ;
+      }
+      
     }
+
+  
   }
 
   tableState(nProps, current) {
@@ -254,6 +250,7 @@ class AuditTable extends React.Component {
       var skuAudit = this.props.auditState.skuAudit;
       var totalProgress = this.props.auditState.totalProgress;
       var rowsCount = sortedDataList.getSize();
+      //console.log(rowsCount)
       var duplicateTask = <FormattedMessage id="audit.table.duplicateTask" description="duplicateTask option for audit" defaultMessage ="Duplicate task"/>; 
       var deleteRecord = <FormattedMessage id="audit.table.deleteRecord" description="deleteRecord option for audit" defaultMessage ="Delete record"/>; 
       const tasks = [
@@ -302,6 +299,7 @@ class AuditTable extends React.Component {
        rowHeight={50}
        rowsCount={rowsCount}
        headerHeight={70}
+       onRowClick={this._handleOnClickDropdown.bind(this)}
        onColumnResizeEndCallback={this._onColumnResizeEndCallback}
        isColumnResizing={false}
        width={this.props.containerWidth}
@@ -449,7 +447,7 @@ class AuditTable extends React.Component {
       }
       cell={<ActionCellAudit data={sortedDataList} handleAudit={this.startAudit.bind(this)} tasks={tasks} 
       manageAuditTask={this.manageAuditTask.bind(this)} showBox="startAudit"
-      clickDropDown={this._handleOnClickDropdown.bind(this)}
+      
       placeholderText={this.context.intl.formatMessage(messages.auditPlaceholder)}
       />}
       width={columnWidths.actions}
