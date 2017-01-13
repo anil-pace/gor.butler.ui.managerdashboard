@@ -1,4 +1,4 @@
-import {RECIEVE_AUDIT_DATA,REFRESH_AUDIT} from '../constants/frontEndConstants'; 
+import {RECIEVE_AUDIT_DATA,REFRESH_AUDIT,SET_AUDIT_ORDERLINES} from '../constants/frontEndConstants'; 
 import React  from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -24,6 +24,12 @@ export  function recieveAuditDetail(state={},action){
             "auditRefresh" : action.data
           })
           break;
+
+    case SET_AUDIT_ORDERLINES:
+           return Object.assign({}, state, { 
+            "auditPendingLines" : action.data
+          })
+          break; 
     default:
       return state
   }

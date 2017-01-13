@@ -51,6 +51,8 @@ export const PICK_PPS_PERFORMANCE = "PICK_PPS_PERFORMANCE";
 export const PUT_PPS_PERFORMANCE = "PUT_PPS_PERFORMANCE";
 export const AUDIT_PPS_PERFORMANCE = "AUDIT_PPS_PERFORMANCE";
 
+/* config constant for (first + last) name if true*/
+export const GOR_FIRST_LAST = true;
 
 /*FE constants for parsing*/
 export const PPS_PERFORMANCE = "PPS_PERFORMANCE";
@@ -117,6 +119,8 @@ export const RECIEVE_AUDIT_DATA = "RECIEVE_AUDIT_DATA";
 export const CREATE_AUDIT='CREATE_AUDIT';
 export const DELETE_AUDIT='DELETE_AUDIT';
 export const GET_PPSLIST='GET_PPSLIST';
+export const AUDIT_RESOLVE_LINES="AUDIT_RESOLVE_LINES";
+export const SET_AUDIT_ORDERLINES="SET_AUDIT_ORDERLINES";
 
 /*Constants for app info checking*/
 export const ID_DATA = "ID_DATA";
@@ -335,6 +339,10 @@ export const GOR_PERIPHERAL_OFFLINE = "offline";
 export const GOR_ON_STATUS = "on";
 export const GOR_CONNECTED_STATUS = "Connected";
 export const GOR_COMPLETED_STATUS = "Completed";
+export const GOR_BREACHED_LINES = "gor-breached-lines";
+export const AUDIT_CREATED = "audit_created";
+export const AUDIT_PENDING_APPROVAL = "audit_pending_approval";
+export const AUDIT_RESOLVED = "audit_resolved"; 
 //Icons
 export const PICK_ICON=' iPick';
 export const STOCK_ICON="iStock";
@@ -372,3 +380,5 @@ export const SET_BUTLER_FILTER = "SET_BUTLER_FILTER";
 export const SET_PPS_FILTER = "SET_PPS_FILTER";
 export const SET_CS_FILTER = "SET_CS_FILTER";
 export const SET_WAVE_FILTER = "SET_WAVE_FILTER"
+export const AUDIT_APPROVED = "approve";
+export const AUDIT_REJECTED = "rejected";

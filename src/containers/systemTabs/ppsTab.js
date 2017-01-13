@@ -14,7 +14,7 @@ import { setPpsSpinner } from '../../actions/spinnerAction';
 import {stringConfig} from '../../constants/backEndConstants'
 import { defineMessages } from 'react-intl';
 import { ppsHeaderSort,ppsHeaderSortOrder, setCheckedPps,setDropDisplay ,setCheckAll,ppsFilterDetail} from '../../actions/sortHeaderActions';
-import {INITIAL_HEADER_SORT,INITIAL_HEADER_ORDER,GOR_ON_STATUS} from '../../constants/frontEndConstants';
+import {INITIAL_HEADER_SORT,INITIAL_HEADER_ORDER,GOR_ON_STATUS,GOR_FIRST_LAST} from '../../constants/frontEndConstants';
 
 //Mesages for internationalization
 const messages = defineMessages({
@@ -80,13 +80,20 @@ class PPS extends React.Component{
       detail.operatorAssigned = "--";
     }
     else {
+      var userFirstLast;
       totalUser = totalUser + data[i].operators_assigned.length;
       for (var j = data[i].operators_assigned.length - 1; j >= 0; j--) {
+        if(GOR_FIRST_LAST) {
+            userFirstLast = (data[i].operators_assigned[j][0]?data[i].operators_assigned[j][0]:"") + " " + (data[i].operators_assigned[j][1]?data[i].operators_assigned[j][1]:"");
+          }
+          else {
+            userFirstLast = (data[i].operators_assigned[j][1]?data[i].operators_assigned[j][1]:"") + " " + (data[i].operators_assigned[j][0]?data[i].operators_assigned[j][0]:"");
+          }
         if(detail.operatorAssigned) {
-          detail.operatorAssigned = detail.operatorAssigned + ", " + data[i].operators_assigned[j];
+          detail.operatorAssigned = detail.operatorAssigned + ", " + userFirstLast;
         }
         else {
-          detail.operatorAssigned =  data[i].operators_assigned[j];
+          detail.operatorAssigned =  userFirstLast;
         }
       }
       detail.totalOperator = detail.totalOperator + data[i].operators_assigned.length;
