@@ -8,7 +8,7 @@ import {getAuditData,setAuditRefresh} from '../actions/auditActions';
 import AuditTable from './auditTab/auditTable';
 import ReactPaginate from 'react-paginate';
 import {getPageData} from '../actions/paginationAction';
-import {AUDIT_RETRIEVE,GET,APP_JSON,GOR_COMPLETED_STATUS,LOCATION,SKU} from '../constants/frontEndConstants';
+import {AUDIT_RETRIEVE,GET,APP_JSON,GOR_COMPLETED_STATUS,LOCATION,SKU,AUDIT_PENDING_APPROVAL,AUDIT_RESOLVED,AUDIT_CREATED} from '../constants/frontEndConstants';
 import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,SEARCH_AUDIT_URL,GIVEN_PAGE,GIVEN_PAGE_SIZE} from '../constants/configConstants';
 import {setAuditSpinner} from '../actions/auditActions';
 import { defineMessages } from 'react-intl';
@@ -116,7 +116,7 @@ _processAuditData(data,nProps){
       }
       auditData.status = auditStatus[data[i].audit_status]; 
       auditData.statusClass = statusClass[auditData.status];
-      if(data[i].audit_status === "audit_created") {
+      if(data[i].audit_status === AUDIT_CREATED) {
         auditData.startAudit = true;
       }
 
@@ -125,7 +125,7 @@ _processAuditData(data,nProps){
       }
 
       
-      if(data[i].audit_status === "audit_pending_approval") {
+      if(data[i].audit_status === AUDIT_PENDING_APPROVAL) {
         auditData.resolveAudit = true;
       }
 
@@ -133,7 +133,7 @@ _processAuditData(data,nProps){
         auditData.resolveAudit = false;
       }
 
-      if(data[i].audit_status === "audit_resolved") {
+      if(data[i].audit_status === AUDIT_RESOLVED) {
         auditData.viewIssues = true;
       }
 

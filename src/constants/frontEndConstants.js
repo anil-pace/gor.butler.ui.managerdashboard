@@ -266,6 +266,7 @@ export const INVENTORY_LINE_CONFIG = {
 	bandPadding:0.05,
 	outerTickSize:0,
 	defaultMaxYAxis:100000,
+	padding:18,
 	ticks:3,
 	showMonthBreak:true,
 	noDataText:'No Item Movement'
@@ -339,6 +340,9 @@ export const GOR_ON_STATUS = "on";
 export const GOR_CONNECTED_STATUS = "Connected";
 export const GOR_COMPLETED_STATUS = "Completed";
 export const GOR_BREACHED_LINES = "gor-breached-lines";
+export const AUDIT_CREATED = "audit_created";
+export const AUDIT_PENDING_APPROVAL = "audit_pending_approval";
+export const AUDIT_RESOLVED = "audit_resolved"; 
 //Icons
 export const PICK_ICON=' iPick';
 export const STOCK_ICON="iStock";

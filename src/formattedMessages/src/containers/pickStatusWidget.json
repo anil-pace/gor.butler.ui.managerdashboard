@@ -10,6 +10,11 @@
     "defaultMessage": "COMPLETED"
   },
   {
+    "id": "widget.pick.none",
+    "description": "Text for no orders",
+    "defaultMessage": "None"
+  },
+  {
     "id": "widget.pick.idle",
     "description": "Pick PPS idle message",
     "defaultMessage": "{count} idle PPS (Pick mode)"
