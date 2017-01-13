@@ -95,17 +95,26 @@ class OrderListTab extends React.Component{
         orderData.statusClass = data[i].status;
         orderData.statusPriority = unBreachedStatus[data[i].status];
       }
-      orderData.recievedTime = nProps.context.intl.formatDate(data[i].create_time,
-        {timeZone:timeOffset,
+      if(!data[i].create_time){
+        orderData.recievedTime = "--";
+      }
+      else{
+        if(getDaysDiff(data[i].create_time)<2){
+          orderData.recievedTime = nProps.context.intl.formatRelative(data[i].create_time,{timeZone:timeOffset,units:'day'}) +
+           ", " + nProps.context.intl.formatTime(data[i].create_time,{timeZone:timeOffset,hour: 'numeric',minute: 'numeric',hour12: false});
+        }
+        else{
+          orderData.recievedTime = nProps.context.intl.formatDate(data[i].create_time,
+          {timeZone:timeOffset,
           year:'numeric',
           month:'short',
           day:'2-digit',
           hour:"2-digit",
           minute:"2-digit",
           hour12: false
-        });
-
-
+          });
+        }
+      }
       if(!data[i].pick_before_time) {
         orderData.pickBy = "--";
       }
