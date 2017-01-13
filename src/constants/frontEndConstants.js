@@ -51,6 +51,8 @@ export const PICK_PPS_PERFORMANCE = "PICK_PPS_PERFORMANCE";
 export const PUT_PPS_PERFORMANCE = "PUT_PPS_PERFORMANCE";
 export const AUDIT_PPS_PERFORMANCE = "AUDIT_PPS_PERFORMANCE";
 
+/* config constant for (first + last) name if true*/
+export const GOR_FIRST_LAST = true;
 
 /*FE constants for parsing*/
 export const PPS_PERFORMANCE = "PPS_PERFORMANCE";

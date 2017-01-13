@@ -2976,6 +2976,7 @@ input[type="checkbox"] {
 .gorProgressBarLabel {
   display: inline-block;
   padding-left: 10px;
+  vertical-align: top;
 }
 
 .gor-user-Logo-wrap {
@@ -3044,7 +3045,7 @@ input[type="checkbox"] {
   border-width: 1px;
   border-radius: 15px;
   height: 10px;
-  width: 100px;
+  width: 135px;
   display: inline-block;
 }
 
@@ -3136,6 +3137,13 @@ input[type="checkbox"] {
   display: inline-block;
   padding-left: 17px;
   padding-top: 14px;
+}
+
+.gor-resolve-head {
+  display: inline-block;
+  padding-top: 6px;
+  font-size: 14px;
+  color: #4d5055;
 }
 
 .gorSubTab.gorContainer {

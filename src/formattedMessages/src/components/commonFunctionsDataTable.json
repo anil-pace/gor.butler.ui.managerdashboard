@@ -10,6 +10,21 @@
     "defaultMessage": "Delete"
   },
   {
+    "id": "audit.resolveUnresolve",
+    "description": "resolveUnresolve issue for audit table",
+    "defaultMessage": "{resolvedCount} issues, {unresolvedCount} unresolved"
+  },
+  {
+    "id": "audit.resolveIssues",
+    "description": "resolve issue for audit table",
+    "defaultMessage": "{resolvedCount} issues"
+  },
+  {
+    "id": "audit.unresolveIssues",
+    "description": "unresolve issue for audit table",
+    "defaultMessage": "{unresolvedCount} unresolved issues"
+  },
+  {
     "id": "commonDataTable.resolveAudit.approve",
     "description": "resolve button",
     "defaultMessage": "Approve"

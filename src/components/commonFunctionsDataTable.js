@@ -129,10 +129,28 @@ export const TextCell = ({rowIndex, data, columnKey,setClass, ...props}) => (
 );
 
 
-export const ProgressCell = ({rowIndex, data, columnKey, ...props}) => (
+export const ProgressCell = ({rowIndex, data, columnKey, resolved, unresolved, ...props}) => (
   <Cell {...props}>
   <div className="gor-progressBar-wrap">
     <div className="gor-progressBar" style={{width:data.getObjectAt(rowIndex)[columnKey]}} />
+    {(data.getObjectAt(rowIndex)[resolved] && data.getObjectAt(rowIndex)[unresolved])?
+    <div className="gor-resolve-head">
+    <FormattedMessage id="audit.resolveUnresolve" description='resolveUnresolve issue for audit table' defaultMessage='{resolvedCount} issues, {unresolvedCount} unresolved' values={{resolvedCount:data.getObjectAt(rowIndex)[resolved], unresolvedCount:data.getObjectAt(rowIndex)[unresolved] }}/>
+    </div> : ""
+    }
+
+    {(data.getObjectAt(rowIndex)[resolved] && !data.getObjectAt(rowIndex)[unresolved])?
+    <div className="gor-resolve-head">
+    <FormattedMessage id="audit.resolveIssues" description='resolve issue for audit table' defaultMessage='{resolvedCount} issues' values={{resolvedCount:data.getObjectAt(rowIndex)[resolved]}}/>
+    </div> : ""
+    }
+
+    {(!data.getObjectAt(rowIndex)[resolved] && data.getObjectAt(rowIndex)[unresolved])?
+    <div className="gor-resolve-head">
+    <FormattedMessage id="audit.unresolveIssues" description='unresolve issue for audit table' defaultMessage='{unresolvedCount} unresolved issues' values={{unresolvedCount:data.getObjectAt(rowIndex)[unresolved]}}/>
+    </div> : ""
+    }
+
   </div>
     <div className="gorProgressBarLabel">
       { data.getObjectAt(rowIndex)[columnKey]}% 

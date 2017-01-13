@@ -164,6 +164,7 @@ class ResolveAudit extends React.Component{
                       />
                      
                     </Table>
+                    
                 </div>
               </div>
             </div>

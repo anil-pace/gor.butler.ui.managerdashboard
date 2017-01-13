@@ -190,6 +190,8 @@ _processAuditData(data,nProps){
     else {
       auditData.completedTime = "--";
     }
+    auditData.resolvedTask = data[i].resolved;
+    auditData.unresolvedTask = data[i].unresolved;
     auditDetails.push(auditData);
     auditData = {};
   }

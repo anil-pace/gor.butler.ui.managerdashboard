@@ -105,10 +105,10 @@ class AuditTable extends React.Component {
       colSortDirs: sortIndex,
       columnWidths: {
         display_id: nProps.containerWidth*0.09,
-        auditTypeValue: nProps.containerWidth*0.14,
-        status: nProps.containerWidth*0.1,
-        startTime: nProps.containerWidth*0.14,
-        progress: nProps.containerWidth*0.13,
+        auditTypeValue: nProps.containerWidth*0.13,
+        status: nProps.containerWidth*0.08,
+        startTime: nProps.containerWidth*0.13,
+        progress: nProps.containerWidth*0.17,
         completedTime: nProps.containerWidth*0.15,
         actions: nProps.containerWidth*0.25
       }};
@@ -431,7 +431,7 @@ class AuditTable extends React.Component {
         </div>
         </div>
       }
-      cell={<ProgressCell data={sortedDataList}  />}
+      cell={<ProgressCell data={sortedDataList} resolved="resolvedTask" unresolved="unresolvedTask" > </ProgressCell>}
       fixed={true}
       width={columnWidths.progress}
       isResizable={true}
