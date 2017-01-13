@@ -59,13 +59,12 @@ class InventoryHistogram extends React.Component{
       dataObj.customData = Date.parse(histogramData[j].date);
       if(!noStock){
         noStock = histogramData[j].current_stock ;
-        dataObj.noData =  noStock ? false : true;
       }
       j++;
       }
     processedData.push(dataObj);
     }
-   
+    processedData[0].noData =  noStock ? false : true;
    	processedData.sort(function(a, b) {
         var x = a["customData"]; var y = b["customData"];
         return ((x < y) ? -1 : ((x > y) ? 1 : 0));

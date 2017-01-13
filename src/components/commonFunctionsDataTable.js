@@ -161,7 +161,7 @@ export const ActionCellAudit = ({rowIndex, data, columnKey, tasks, handleAudit,m
           <FormattedMessage id="commonDataTable.startAudit.button" description='edit button' defaultMessage='Start audit'/>
       </button>):''}
     </div>
-    <div className="gor-audit-actions-drop" onClick={clickDropDown.bind(this,rowIndex)}>
+    <div className="gor-audit-actions-drop" >
       <DropdownTable  styleClass={'gorDataTableDrop'} placeholder={placeholderText} items={tasks} changeMode={manageAuditTask.bind(this,rowIndex)}/>
     </div>
   </Cell>

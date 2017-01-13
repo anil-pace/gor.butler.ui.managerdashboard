@@ -946,157 +946,336 @@ export const resTypeSnapShot = {
 
 export const resTypeSnapShotToday = {
 	"complete_data": [{
-		"total_skus": 198,
-		"opening_stock": 1322,
-		"cbm_used": 6.37,
-		"warehouse_utilization": 7.68,
-		"date": "2016-12-12T06:09:15.615252+00:00",
+		"total_skus": 223,
+		"opening_stock": 1926,
+		"cbm_used": 5.4,
+		"warehouse_utilization": 6.46,
+		"date": "2017-01-01T06:52:58.216873+00:00",
 		"category_data": [{
 			"category_type": "generic_apparel",
-			"cbm_used": 0.59,
-			"warehouse_utilization": 12.26,
-			"days_on_hand": 1630.0
+			"cbm_used": 0.48,
+			"warehouse_utilization": 8.93,
+			"days_on_hand": 156.0
 		}, {
 			"category_type": "only_medicine",
-			"cbm_used": 0.81,
-			"warehouse_utilization": 11.74,
-			"days_on_hand": null
+			"cbm_used": 0.69,
+			"warehouse_utilization": 6.38,
+			"days_on_hand": 3900.0
 		}, {
 			"category_type": "generic_medicine",
-			"cbm_used": 0.82,
-			"warehouse_utilization": 11.06,
+			"cbm_used": 0.7,
+			"warehouse_utilization": 5.93,
 			"days_on_hand": null
 		}, {
 			"category_type": "medicine_apparel_generic",
-			"cbm_used": 0.69,
-			"warehouse_utilization": 11.06,
-			"days_on_hand": null
+			"cbm_used": 0.57,
+			"warehouse_utilization": 5.93,
+			"days_on_hand": 1210.0
 		}, {
 			"category_type": "apparel_medicine_generic",
-			"cbm_used": 0.73,
-			"warehouse_utilization": 10.68,
+			"cbm_used": 0.63,
+			"warehouse_utilization": 5.79,
 			"days_on_hand": null
 		}],
-		"items_picked": 3,
-		"items_put": 10
+		"items_picked": 0,
+		"items_put": 0
 	}],
 	"resource_type": "inventory_today"
 }
 
 export const resTypeSnapShotHistory = {
 	"complete_data": [{
-		"total_skus": 198,
-		"cbm_used": 6.37,
-		"warehouse_utilization": 7.68,
+		"total_skus": 223,
+		"cbm_used": 5.4,
+		"warehouse_utilization": 6.46,
 		"category_data": [{
-			"category_type": "only_medicine",
-			"cbm_used": 0.81,
-			"days_on_hand": null,
-			"warehouse_utilization": 11.8
-		}, {
 			"category_type": "generic_apparel",
-			"cbm_used": 0.59,
-			"days_on_hand": null,
-			"warehouse_utilization": 11.8
+			"cbm_used": 0.48,
+			"days_on_hand": 745.0,
+			"warehouse_utilization": 7.43
+		}, {
+			"category_type": "only_medicine",
+			"cbm_used": 0.69,
+			"days_on_hand": 3900.0,
+			"warehouse_utilization": 6.48
 		}, {
 			"category_type": "generic_medicine",
-			"cbm_used": 0.82,
+			"cbm_used": 0.7,
 			"days_on_hand": null,
-			"warehouse_utilization": 11.12
+			"warehouse_utilization": 6.03
 		}, {
 			"category_type": "medicine_apparel_generic",
-			"cbm_used": 0.69,
-			"days_on_hand": null,
-			"warehouse_utilization": 11.12
+			"cbm_used": 0.57,
+			"days_on_hand": 1210.0,
+			"warehouse_utilization": 6.03
 		}, {
 			"category_type": "apparel_medicine_generic",
-			"cbm_used": 0.73,
+			"cbm_used": 0.63,
 			"days_on_hand": null,
-			"warehouse_utilization": 10.74
+			"warehouse_utilization": 5.88
 		}],
-		"opening_stock": 1322,
-		"date": "2016-12-11T15:30:00.099216+00:00",
+		"opening_stock": 1893,
+		"date": "2017-01-01T15:30:00.070773+00:00",
 		"items_picked": 0,
 		"items_put": 0
 	}, {
-		"total_skus": 198,
-		"cbm_used": 6.37,
-		"warehouse_utilization": 7.68,
+		"total_skus": 223,
+		"cbm_used": 5.4,
+		"warehouse_utilization": 6.46,
 		"category_data": [{
-			"category_type": "only_medicine",
-			"cbm_used": 0.81,
-			"days_on_hand": null,
-			"warehouse_utilization": 11.8
-		}, {
 			"category_type": "generic_apparel",
-			"cbm_used": 0.59,
-			"days_on_hand": null,
-			"warehouse_utilization": 11.8
+			"cbm_used": 0.48,
+			"days_on_hand": 745.0,
+			"warehouse_utilization": 7.43
+		}, {
+			"category_type": "only_medicine",
+			"cbm_used": 0.69,
+			"days_on_hand": 3900.0,
+			"warehouse_utilization": 6.48
 		}, {
 			"category_type": "generic_medicine",
-			"cbm_used": 0.82,
+			"cbm_used": 0.7,
 			"days_on_hand": null,
-			"warehouse_utilization": 11.12
+			"warehouse_utilization": 6.03
 		}, {
 			"category_type": "medicine_apparel_generic",
-			"cbm_used": 0.69,
-			"days_on_hand": null,
-			"warehouse_utilization": 11.12
+			"cbm_used": 0.57,
+			"days_on_hand": 1210.0,
+			"warehouse_utilization": 6.03
 		}, {
 			"category_type": "apparel_medicine_generic",
-			"cbm_used": 0.73,
+			"cbm_used": 0.63,
 			"days_on_hand": null,
-			"warehouse_utilization": 10.74
+			"warehouse_utilization": 5.88
 		}],
-		"opening_stock": 73,
-		"date": "2016-12-10T15:30:00.110887+00:00",
-		"items_picked": 6,
-		"items_put": 12
-	}, {
-		"total_skus": 1,
-		"cbm_used": 0.0,
-		"warehouse_utilization": 0.0,
-		"category_data": [],
-		"opening_stock": 143,
-		"date": "2016-12-09T15:30:00.389739+00:00",
-		"items_picked": 84,
-		"items_put": 16
-	}, {
-		"total_skus": 1,
-		"cbm_used": 0.0,
-		"warehouse_utilization": 0.01,
-		"category_data": [],
-		"opening_stock": 10,
-		"date": "2016-12-08T15:30:00.153703+00:00",
-		"items_picked": 96,
-		"items_put": 229
-	}, {
-		"total_skus": 1,
-		"cbm_used": 0.0,
-		"warehouse_utilization": 0.0,
-		"category_data": [],
-		"opening_stock": 21,
-		"date": "2016-12-07T15:30:00.493919+00:00",
-		"items_picked": 21,
-		"items_put": 10
-	}, {
-		"total_skus": 1,
-		"cbm_used": 0.0,
-		"warehouse_utilization": 0.0,
-		"category_data": [],
-		"opening_stock": 22,
-		"date": "2016-12-06T15:30:00.479760+00:00",
-		"items_picked": 14,
-		"items_put": 13
-	}, {
-		"total_skus": 1,
-		"cbm_used": 0.0,
-		"warehouse_utilization": 0.01,
-		"category_data": [],
-		"opening_stock": 147,
-		"date": "2016-12-05T15:30:00.784861+00:00",
+		"opening_stock": 1893,
+		"date": "2016-12-31T15:30:00.063435+00:00",
 		"items_picked": 0,
 		"items_put": 0
+	}, {
+		"total_skus": 223,
+		"cbm_used": 5.4,
+		"warehouse_utilization": 6.46,
+		"category_data": [{
+			"category_type": "generic_apparel",
+			"cbm_used": 0.48,
+			"days_on_hand": 745.0,
+			"warehouse_utilization": 7.43
+		}, {
+			"category_type": "only_medicine",
+			"cbm_used": 0.69,
+			"days_on_hand": 3900.0,
+			"warehouse_utilization": 6.48
+		}, {
+			"category_type": "generic_medicine",
+			"cbm_used": 0.7,
+			"days_on_hand": null,
+			"warehouse_utilization": 6.03
+		}, {
+			"category_type": "medicine_apparel_generic",
+			"cbm_used": 0.57,
+			"days_on_hand": 1210.0,
+			"warehouse_utilization": 6.03
+		}, {
+			"category_type": "apparel_medicine_generic",
+			"cbm_used": 0.63,
+			"days_on_hand": null,
+			"warehouse_utilization": 5.88
+		}],
+		"opening_stock": 1895,
+		"date": "2016-12-30T15:30:00.069655+00:00",
+		"items_picked": 3,
+		"items_put": 1
+	}, {
+		"total_skus": 223,
+		"cbm_used": 5.4,
+		"warehouse_utilization": 6.46,
+		"category_data": [{
+			"category_type": "generic_apparel",
+			"cbm_used": 0.48,
+			"days_on_hand": 1510.0,
+			"warehouse_utilization": 7.52
+		}, {
+			"category_type": "only_medicine",
+			"cbm_used": 0.69,
+			"days_on_hand": 3900.0,
+			"warehouse_utilization": 6.47
+		}, {
+			"category_type": "generic_medicine",
+			"cbm_used": 0.7,
+			"days_on_hand": null,
+			"warehouse_utilization": 6.03
+		}, {
+			"category_type": "medicine_apparel_generic",
+			"cbm_used": 0.57,
+			"days_on_hand": 1210.0,
+			"warehouse_utilization": 6.03
+		}, {
+			"category_type": "apparel_medicine_generic",
+			"cbm_used": 0.63,
+			"days_on_hand": null,
+			"warehouse_utilization": 5.88
+		}],
+		"opening_stock": 1895,
+		"date": "2016-12-29T15:30:00.047227+00:00",
+		"items_picked": 0,
+		"items_put": 0
+	}, {
+		"total_skus": 223,
+		"cbm_used": 5.4,
+		"warehouse_utilization": 6.46,
+		"category_data": [{
+			"category_type": "generic_apparel",
+			"cbm_used": 0.48,
+			"days_on_hand": 1510.0,
+			"warehouse_utilization": 7.52
+		}, {
+			"category_type": "only_medicine",
+			"cbm_used": 0.69,
+			"days_on_hand": 3900.0,
+			"warehouse_utilization": 6.47
+		}, {
+			"category_type": "generic_medicine",
+			"cbm_used": 0.7,
+			"days_on_hand": null,
+			"warehouse_utilization": 6.03
+		}, {
+			"category_type": "medicine_apparel_generic",
+			"cbm_used": 0.57,
+			"days_on_hand": 1210.0,
+			"warehouse_utilization": 6.03
+		}, {
+			"category_type": "apparel_medicine_generic",
+			"cbm_used": 0.63,
+			"days_on_hand": null,
+			"warehouse_utilization": 5.88
+		}],
+		"opening_stock": 1895,
+		"date": "2016-12-28T15:30:00.050883+00:00",
+		"items_picked": 0,
+		"items_put": 0
+	}, {
+		"total_skus": 223,
+		"cbm_used": 5.4,
+		"warehouse_utilization": 6.46,
+		"category_data": [{
+			"category_type": "generic_apparel",
+			"cbm_used": 0.48,
+			"days_on_hand": 1510.0,
+			"warehouse_utilization": 7.52
+		}, {
+			"category_type": "only_medicine",
+			"cbm_used": 0.69,
+			"days_on_hand": 3900.0,
+			"warehouse_utilization": 6.47
+		}, {
+			"category_type": "generic_medicine",
+			"cbm_used": 0.7,
+			"days_on_hand": null,
+			"warehouse_utilization": 6.03
+		}, {
+			"category_type": "medicine_apparel_generic",
+			"cbm_used": 0.57,
+			"days_on_hand": 1210.0,
+			"warehouse_utilization": 6.03
+		}, {
+			"category_type": "apparel_medicine_generic",
+			"cbm_used": 0.63,
+			"days_on_hand": null,
+			"warehouse_utilization": 5.88
+		}],
+		"opening_stock": 1893,
+		"date": "2016-12-27T15:30:00.124690+00:00",
+		"items_picked": 5,
+		"items_put": 7
+	}, {
+		"total_skus": 223,
+		"cbm_used": 5.4,
+		"warehouse_utilization": 6.46,
+		"category_data": [{
+			"category_type": "generic_apparel",
+			"cbm_used": 0.48,
+			"days_on_hand": null,
+			"warehouse_utilization": 7.58
+		}, {
+			"category_type": "only_medicine",
+			"cbm_used": 0.69,
+			"days_on_hand": 3900.0,
+			"warehouse_utilization": 6.48
+		}, {
+			"category_type": "generic_medicine",
+			"cbm_used": 0.7,
+			"days_on_hand": null,
+			"warehouse_utilization": 6.03
+		}, {
+			"category_type": "medicine_apparel_generic",
+			"cbm_used": 0.57,
+			"days_on_hand": 1210.0,
+			"warehouse_utilization": 6.03
+		}, {
+			"category_type": "apparel_medicine_generic",
+			"cbm_used": 0.63,
+			"days_on_hand": null,
+			"warehouse_utilization": 5.88
+		}],
+		"opening_stock": 467,
+		"date": "2016-12-26T15:30:00.113678+00:00",
+		"items_picked": 4,
+		"items_put": 4
+	}, {
+		"total_skus": 210,
+		"cbm_used": 2.81,
+		"warehouse_utilization": 4.41,
+		"category_data": [],
+		"opening_stock": 467,
+		"date": "2016-12-25T15:30:00.071003+00:00",
+		"items_picked": 0,
+		"items_put": 0
+	}, {
+		"total_skus": 210,
+		"cbm_used": 2.81,
+		"warehouse_utilization": 4.41,
+		"category_data": [],
+		"opening_stock": 460,
+		"date": "2016-12-24T15:30:00.039256+00:00",
+		"items_picked": 18,
+		"items_put": 25
+	}, {
+		"total_skus": 211,
+		"cbm_used": 2.83,
+		"warehouse_utilization": 4.45,
+		"category_data": [],
+		"opening_stock": 474,
+		"date": "2016-12-23T15:30:00.053555+00:00",
+		"items_picked": 12,
+		"items_put": 4
+	}, {
+		"total_skus": 211,
+		"cbm_used": 2.85,
+		"warehouse_utilization": 4.48,
+		"category_data": [],
+		"opening_stock": 16,
+		"date": "2016-12-22T15:30:00.094117+00:00",
+		"items_picked": 4,
+		"items_put": 462
+	}, {
+		"total_skus": 1,
+		"cbm_used": 0.0,
+		"warehouse_utilization": 0.0,
+		"category_data": [],
+		"opening_stock": 26,
+		"date": "2016-12-21T15:30:00.065665+00:00",
+		"items_picked": 40,
+		"items_put": 30
+	}, {
+		"total_skus": 1,
+		"cbm_used": 0.0,
+		"warehouse_utilization": 0.0,
+		"category_data": [],
+		"opening_stock": 0,
+		"date": "2016-12-20T15:30:00.078449+00:00",
+		"items_picked": 2,
+		"items_put": 28
 	}],
 	"resource_type": "inventory_history"
 }
