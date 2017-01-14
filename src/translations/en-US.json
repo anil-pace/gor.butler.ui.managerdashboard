@@ -2384,5 +2384,56 @@
     "id": "notify.delete.audit.success",
     "description": "Text for successfull audit deletion",
     "defaultMessage": "Audit task {audit_id} has been deleted"
-  }
+  },
+  {
+    "id": "horizontal.graph.noData",
+    "description": "No data message for graph",
+    "defaultMessage": "No Data"
+  },
+  {
+    "id": "graph.noData",
+    "description": "No data message for graph",
+    "defaultMessage": "No Data"
+  },
+  {
+    "id": "performanceParam.graph",
+    "description": "Performance param graph",
+    "defaultMessage": "items/hr"
+  },
+  {
+    "id": "audit.placeholder",
+    "description": "audit dropdown placeholder",
+    "defaultMessage": "Manage Tasks"
+  },
+  {
+    "id":"audit.name.prefix", 
+      "description":"prefix for audit", 
+      "defaultMessage":"Audit"
+  },
+  {
+      "id":"moving.task", 
+      "description":"moving task", 
+      "defaultMessage":"Moving to"
+    },
+    {
+      "id":"movingMount.task", 
+      "description":"movingMount task", 
+      "defaultMessage":"Moving to mount"
+    },
+   {
+      "id":"movingDismount.task", 
+      "description":"movingDismount task", 
+      "defaultMessage":"Moving to dismount"
+    },
+    {
+      "id":"docked.task", 
+      "description":"docked task", 
+      "defaultMessage":"Docked at"
+    },
+    {
+    "id":"auditdetail.auditPendingApp.prefix", 
+    "description":"auditPending status", 
+    "defaultMessage": "Issues found"
+    }
+
 ]

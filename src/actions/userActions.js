@@ -1,4 +1,4 @@
-import { AJAX_CALL, MD_ID, SET_ROLE} from '../constants/frontEndConstants'
+import { AJAX_CALL, ID_MAP, SET_ROLE} from '../constants/frontEndConstants'
 
 /**
  * Actions for users page
@@ -14,7 +14,7 @@ export function userRequest(params){
 export function assignRole(data)
 {
   return {
-    type: MD_ID,
+    type: ID_MAP,
     data
     }
 }

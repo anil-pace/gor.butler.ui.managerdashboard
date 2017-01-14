@@ -15,16 +15,6 @@
     "defaultMessage": "Management Interface"
   },
   {
-    "id": "login.butler.fail",
-    "description": "Text for login failure",
-    "defaultMessage": "Invalid username and/or password, please try again"
-  },
-  {
-    "id": "login.butler.connection.fail",
-    "description": "Text for connection failure",
-    "defaultMessage": "Connection failure"
-  },
-  {
     "id": "login.butler.error.username",
     "description": "Text for missing username error",
     "defaultMessage": "Please enter your username"

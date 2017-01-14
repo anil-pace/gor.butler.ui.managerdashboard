@@ -1,5 +1,4 @@
-import {ID_DATA,NAME_DATA,PASSWORD_DATA,INFO_RESET,ERROR,SUCCESS,INFO,HIDE,NOTIFY_PASS,NOTIFY_HIDE,NOTIFY_FAIL,NOTIFY_INFO,PASS_DATA,MD_ID,SET_ROLE,NOTIFY_DELETE,DELETION,GOR_PASS,GOR_FAIL,GOR_INFO,TICK_WHITE,REMOVE_ICON,ERROR_WHITE} from '../constants/frontEndConstants';
-import {US001,US002,UE001,UE002,INVALID_ID,EMPTY_PWD,EMPTY_NAME,INVALID_NAME,INVALID_PWD,MATCH_PWD,TYPE_SUCCESS} from '../constants/messageConstants'; 
+import {ID_DATA,NAME_DATA,PASSWORD_DATA,INFO_RESET,ERROR,SUCCESS,INFO,HIDE,NOTIFY_PASS,NOTIFY_HIDE,NOTIFY_FAIL,NOTIFY_INFO,PASS_DATA,ID_MAP,SET_ROLE,NOTIFY_DELETE,DELETION,GOR_PASS,GOR_FAIL,GOR_INFO,TICK_WHITE,REMOVE_ICON,ERROR_WHITE,LOGIN_ERROR,SKU_DATA,LOC_DATA} from '../constants/frontEndConstants';
 
 /**
  * @param  {State Object}
@@ -8,6 +7,17 @@ import {US001,US002,UE001,UE002,INVALID_ID,EMPTY_PWD,EMPTY_NAME,INVALID_NAME,INV
  */
 export  function appInfo(state={},action){
   switch (action.type) {
+
+    case LOGIN_ERROR:
+        let errorMsg=action.data, loginInfo;
+         loginInfo={
+          type:ERROR,
+          msg:errorMsg
+         };
+          return Object.assign({}, state, { 
+            "loginInfo" : loginInfo
+          })
+          break;
 
     case ID_DATA:
           return Object.assign({}, state, { 
@@ -34,6 +44,7 @@ export  function appInfo(state={},action){
             "idInfo" : null,
             "nameInfo":null,
             "passwordInfo":null,
+            "loginInfo":null,
             "roleSet":null
           })
           break;
@@ -96,7 +107,7 @@ export  function appInfo(state={},action){
          })
          break;
 
-    case MD_ID:
+    case ID_MAP:
         let roleInfo;
         roleInfo=action.data;
          return Object.assign({}, state, { 
@@ -109,7 +120,21 @@ export  function appInfo(state={},action){
         roleSet=action.data;
          return Object.assign({}, state, { 
             "roleSet":roleSet
-         })      
+         })    
+
+    case SKU_DATA:
+          return Object.assign({}, state, { 
+            "skuInfo" : action.data
+          })
+          break;
+    
+    case LOC_DATA:
+
+          return Object.assign({}, state, { 
+            "locInfo":action.data     
+          })
+          break;
+
     default:
       return state
   }

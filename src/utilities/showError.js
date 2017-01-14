@@ -1,7 +1,7 @@
 import {connectionFault,setLoginSpinner} from '../actions/loginAction';
 import {AUTH_LOGIN} from '../constants/frontEndConstants';
-import {ERR_CONNECT,ERR_400,ERR_401,ERR_403,ERR_405,ERR_408,ERR_409,ERR_500,ERR_502} from '../constants/messageConstants';
-import {notifyFail} from '../actions/validationActions';
+import {ERR_CONNECT,ERR_400,ERR_401,ERR_403,ERR_405,ERR_408,ERR_409,ERR_500,ERR_502,NO_NET} from '../constants/messageConstants';
+import {notifyFail,loginError} from '../actions/validationActions';
 
 export function ShowError(store,cause,status)
 {
@@ -15,7 +15,7 @@ export function ShowError(store,cause,status)
 			if(cause === AUTH_LOGIN)
 			{
 				store.dispatch(setLoginSpinner(false));
-				store.dispatch(connectionFault());
+				store.dispatch(loginError(NO_NET));
 			}
 			else
 			{

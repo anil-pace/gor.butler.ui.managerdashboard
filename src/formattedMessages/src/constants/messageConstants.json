@@ -15,6 +15,21 @@
     "defaultMessage": "Due to session expiry, Auto Logout has been triggered!"
   },
   {
+    "id": "login.butler.fail",
+    "description": "Text for login failure",
+    "defaultMessage": "Invalid username and/or password, please try again"
+  },
+  {
+    "id": "login.butler.connection.fail",
+    "description": "Text for connection failure",
+    "defaultMessage": "Connection failure"
+  },
+  {
+    "id": "login.butler.unauthorized",
+    "description": "Text for unauthorized login",
+    "defaultMessage": "You are not authorized"
+  },
+  {
     "id": "notify.success.edit",
     "description": "Text for successfully editing user",
     "defaultMessage": "User details updated successfully"

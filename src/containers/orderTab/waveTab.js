@@ -51,7 +51,7 @@ class WaveTab extends React.Component{
       else {
         waveDetail.status = data[i].status;
       }
-      if(data[i].start_time === "") {
+      if(!data[i].start_time) {
         waveDetail.startTime = "--";
       }
       else {
@@ -72,7 +72,7 @@ class WaveTab extends React.Component{
         }
       }
 
-      if(data[i].cut_off_time === "") {
+      if(!data[i].cut_off_time) {
         waveDetail.cutOffTime = "--";
       }
       else {

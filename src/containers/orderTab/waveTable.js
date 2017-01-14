@@ -1,6 +1,5 @@
 import React from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
-import DropdownTable from '../../components/dropdown/dropdownTable'
 import Dimensions from 'react-dimensions'
 import { FormattedMessage } from 'react-intl';
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData,ProgressCell} from '../../components/commonFunctionsDataTable';
@@ -237,7 +236,7 @@ class WavesTable extends React.Component {
         </div>
         </SortHeaderCell>
       }
-      cell={<TextCell data={sortedDataList} />}
+      cell={<TextCell style={{textTransform: 'capitalize'}} data={sortedDataList} />}
       fixed={true}
       width={columnWidths.startTime}
       isResizable={true}
@@ -258,7 +257,7 @@ class WavesTable extends React.Component {
         </div>
         </SortHeaderCell>
       }
-      cell={<TextCell data={sortedDataList} />}
+      cell={<TextCell style={{textTransform: 'capitalize'}} data={sortedDataList} />}
       fixed={true}
       width={columnWidths.cutOffTime}
       isResizable={true}
