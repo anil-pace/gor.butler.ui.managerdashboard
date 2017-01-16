@@ -97,7 +97,7 @@ class ResolveAudit extends React.Component{
       var screenId = this.props.screenId, auditType = this.props.auditType;
       var missingAudit = auditDataList.getSize(), auditId = this.props.displayId, headerHeight=GOR_USER_TABLE_HEADER_HEIGHT;
       var containerHeight = (((missingAudit?missingAudit:0)*headerHeight + headerHeight)>minHeight?((missingAudit?missingAudit:0)*headerHeight + headerHeight):minHeight);
-      con
+      
       return (
         <div>
           <div className="gor-modal-content">
