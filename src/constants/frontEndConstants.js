@@ -37,7 +37,8 @@ export const REQUEST_HEADER = "REQUEST_HEADER";
 export const RECIEVE_HEADER = "RECIEVE_HEADER";
 export const GOR_TABLE_HEADER_HEIGHT = 71;
 export const GOR_USER_TABLE_HEADER_HEIGHT = 50;
-
+export const GOR_AUDIT_RESOLVE_MIN_HEIGHT = 400;
+export const GOR_AUDIT_RESOLVE_WIDTH = 1200;
 
 /*Constants for performance widget*/
 export const RENDER_WIDGET = "RENDER_WIDGET";
@@ -197,6 +198,8 @@ export const SKU='sku';
 export const LOCATION='location';
 export const SETAUDIT_PPS='SETAUDIT_PPS';
 export const REFRESH_AUDIT='REFRESH_AUDIT';
+export const APPROVE_AUDIT = "APPROVE_AUDIT";
+export const VIEW_AUDIT_ISSUES = "VIEW_AUDIT_ISSUES";
 
 /*Inventory parsing constants*/
 export const INVENTORY_DATA_TODAY = 'INVENTORY_DATA_TODAY'
@@ -343,6 +346,7 @@ export const GOR_BREACHED_LINES = "gor-breached-lines";
 export const AUDIT_CREATED = "audit_created";
 export const AUDIT_PENDING_APPROVAL = "audit_pending_approval";
 export const AUDIT_RESOLVED = "audit_resolved"; 
+export const AUDIT_UNRESOLVED = "Unresolved";
 //Icons
 export const PICK_ICON=' iPick';
 export const STOCK_ICON="iStock";
