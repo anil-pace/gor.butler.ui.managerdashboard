@@ -3,7 +3,7 @@ import ReactDOM  from 'react-dom';
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
 import { connect } from 'react-redux';
 import {getAuditOrderLines} from '../../actions/auditActions';
-import {GET,APP_JSON,AUDIT_RESOLVE_LINES,GOR_BREACHED_LINES} from '../../constants/frontEndConstants';
+import {GET,APP_JSON,AUDIT_RESOLVE_LINES,GOR_BREACHED_LINES,VIEW_AUDIT_ISSUES,APPROVE_AUDIT,GOR_USER_TABLE_HEADER_HEIGHT,GOR_AUDIT_RESOLVE_MIN_HEIGHT,GOR_AUDIT_RESOLVE_WIDTH} from '../../constants/frontEndConstants';
 import {AUDIT_URL, PENDING_ORDERLINES} from '../../constants/configConstants';
 import {Table, Column, Cell} from 'fixed-data-table';
 import {tableRenderer,TextCell,DataListWrapper,ResolveCell} from '../../components/commonFunctionsDataTable';
@@ -84,32 +84,50 @@ class ResolveAudit extends React.Component{
     }
     this.setState({checkedState:tempState})
   }
+
+  _confirmIssues() {
+    console.log("confirmed");
+    this._removeThisModal();
+  }
   
   render()
   {
       var {auditDataList} = this.state;
-      var rowsCount = 0;
-    
+      var rowsCount = 0, minHeight = GOR_AUDIT_RESOLVE_MIN_HEIGHT;
+      var screenId = this.props.screenId, auditType = this.props.auditType;
+      var missingAudit = auditDataList.getSize(), auditId = this.props.displayId, headerHeight=GOR_USER_TABLE_HEADER_HEIGHT;
+      var containerHeight = (((missingAudit?missingAudit:0)*headerHeight + headerHeight)>minHeight?((missingAudit?missingAudit:0)*headerHeight + headerHeight):minHeight);
+      
       return (
         <div>
           <div className="gor-modal-content">
             <div className='gor-modal-head'>
-              <div className='gor-usr-add'>
+              <div className='gor-audit-resolve'>
                 <FormattedMessage id="audit.resolve.heading" description='Heading for resolve audit' defaultMessage='Resolve issues'/>
                 <span className="close" onClick={this._removeThisModal.bind(this)}>×</span>
               </div>
             </div>
             <div className='gor-modal-body'>
               <div className='gor-usr-form'>
+                <div className="gor-auditResolve-h1"> 
+                  <FormattedMessage id="audit.missing.information" description='missing information for audit' 
+                                    defaultMessage='{missingAudit} Items missing in Audit task #{auditId}' 
+                                    values={{missingAudit: missingAudit, auditId:auditId}}/> 
+                </div>
+                <div className="gor-auditResolve-h2">
+                  <FormattedMessage id="audit.missing.auditType" description='missing information for audit type' 
+                                    defaultMessage='For the {auditType}' 
+                                    values={{auditType: auditType}}/> 
+                </div>
                 <div className="gor-audit-detail">
                   <Table
-                      rowHeight={50}
+                      rowHeight={headerHeight}
                       rowsCount={auditDataList.getSize()}
-                      headerHeight={50}
+                      headerHeight={headerHeight}
                       onColumnResizeEndCallback={this._onColumnResizeEndCallback}
                       isColumnResizing={false}
-                      width={1200}
-                      height={500}
+                      width={GOR_AUDIT_RESOLVE_WIDTH}
+                      height={containerHeight}
                       {...this.props}>
                       <Column
                         columnKey="slot_id"
@@ -153,18 +171,36 @@ class ResolveAudit extends React.Component{
                       />
 
                       <Column
-                        columnKey="status"
+                        columnKey="resolve"
                         header={
                             <div className="gorAuditHeader">
-                              <FormattedMessage id="resolveAudit.table.STATUS" description="status Column" defaultMessage ="STATUS"/> 
+                              <FormattedMessage id="resolveAudit.table.resolve" description="resolve Column" defaultMessage ="RESOLVE"/> 
                             </div>
                         }
-                        cell={  <ResolveCell checkStatus={this._checkAuditStatus.bind(this)} > </ResolveCell>}
+                        cell={  <ResolveCell data={auditDataList} checkStatus={this._checkAuditStatus.bind(this)} screenId={screenId}> </ResolveCell>}
                         width={220}
                       />
                      
                     </Table>
-                    
+                    {screenId===APPROVE_AUDIT?
+                      <div className="gor-auditResolve-btn-wrap">
+                        <div className="gor-auditresolve-btn">                    
+                          <button className="gor-refresh-btn" onClick={this._removeThisModal.bind(this)}>
+                            <FormattedMessage id="resolveAudit.cancelLabel" description="button label for cancel" defaultMessage ="Cancel" />
+                          </button>
+                        </div>
+                        <div className="gor-auditresolve-btn">
+                          <button className="gor-add-btn" onClick={this._confirmIssues.bind(this)}>
+                            <FormattedMessage id="resolveAudit.confirmLabel" description='button label for confirm' defaultMessage='Confirm'/>
+                          </button>
+                        </div>   
+                      </div> :
+                      <div className="gor-auditIssue-btn-wrap">
+                        <button className="gor-refresh-btn" onClick={this._removeThisModal.bind(this)}>
+                          <FormattedMessage id="resolveAudit.closeLabel" description="button label for close" defaultMessage ="Close" />
+                        </button> 
+                      </div>
+                    } 
                 </div>
               </div>
             </div>

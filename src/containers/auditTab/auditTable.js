@@ -193,13 +193,17 @@ class AuditTable extends React.Component {
       });
     }
 
-    resolveAudit(columnKey,rowIndex) {
-        var auditId;
+    resolveAudit(columnKey,rowIndex,screenId) {
+        var auditId, auditType, displayId;
         if(this.props.tableData.sortedDataList._data !== undefined) {
           sortedIndex = this.props.tableData.sortedDataList._indexMap[rowIndex];
           auditId = this.props.tableData.sortedDataList._data.newData[sortedIndex].id;
+          auditType = this.props.tableData.sortedDataList._data.newData[sortedIndex].auditTypeValue;
+          displayId = this.props.tableData.sortedDataList._data.newData[sortedIndex].display_id;
         }
         else {
+          auditType = this.props.items[rowIndex].auditTypeValue;
+          displayId = this.props.items[rowIndex].display_id;
           auditId = this.props.items[rowIndex].id;
         }
     
@@ -208,7 +212,10 @@ class AuditTable extends React.Component {
         size: 'large', // large, medium or small,
         closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
         hideCloseButton: true,
-        auditId:auditId
+        auditId:auditId,
+        screenId:screenId,
+        auditType:auditType,
+        displayId:displayId
       });
     }
 
