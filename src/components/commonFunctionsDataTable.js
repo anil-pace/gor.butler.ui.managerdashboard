@@ -132,7 +132,7 @@ export const TextCell = ({rowIndex, data, columnKey,setClass, ...props}) => (
 export const ProgressCell = ({rowIndex, data, columnKey, resolved, unresolved, ...props}) => (
   <Cell {...props}>
   <div className="gor-progressBar-wrap">
-    <div className="gor-progressBar" style={{width:data.getObjectAt(rowIndex)[columnKey]}} />
+    <div className="gor-progressBar" style={{width:((data.getObjectAt(rowIndex)[columnKey])*1.4)}} />
     {(data.getObjectAt(rowIndex)[resolved] && data.getObjectAt(rowIndex)[unresolved])?
     <div className="gor-resolve-head">
     <FormattedMessage id="audit.resolveUnresolve" description='resolveUnresolve issue for audit table' defaultMessage='{resolvedCount} issues, {unresolvedCount} unresolved' values={{resolvedCount:data.getObjectAt(rowIndex)[resolved], unresolvedCount:data.getObjectAt(rowIndex)[unresolved] }}/>

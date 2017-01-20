@@ -1,0 +1,107 @@
+@import '../abstracts/functions';
+
+.gor-paginate-wrap {
+	width: calculateRem(370px);
+    padding-top: calculateRem(10px);
+    padding-bottom: calculateRem(10px);
+	.gor-paginate-input-box-wrap {
+		display: inline-block;
+		vertical-align: text-top;
+
+		.gor-paginate-text-wrap {
+			display:inline-block;
+			font-family:'Source Sans Pro Semibold', sans-serif;
+	        font-size:calculateRem(14px);
+	        color: #AAAAAA;
+	        padding-left: calculateRem(15px);
+	    	padding-right: calculateRem(15px);
+		}
+		.gor-paginate-input-box  {
+			width: calculateRem(46px);
+			height: calculateRem(35px);
+			border-color: #AAAAAA;
+	   	    border-style: solid;
+	    	border-radius: calculateRem(3px);
+	    	font-size: calculateRem(14px);
+	    	text-align: center;
+	    	color: #AAAAAA;
+	    	font-family:'Source Sans Pro Semibold', sans-serif;
+	        font-size:calculateRem(14px);
+		}
+	}
+
+	.gor-button-wrap {
+		width: calculateRem(190px);
+		height: calculateRem(35px);
+		background: #ffffff;
+		color: #AAAAAA;
+
+		.gor-paginate-middle-right-btn {
+			display: inline-block;
+	    	border-style: solid;
+	    	border-width: calculateRem(1px);
+	    	width: calculateRem(46px);
+	    	height: calculateRem(35px);
+	    	border-color: #AAAAAA;
+		}
+		.gor-paginate-middle-right-btn:hover {
+	    	border-color: #4D5055;
+	    	color: #4D5055;
+	    	cursor:pointer;
+		}
+		.gor-paginate-right-btn {
+			display: inline-block;
+	    	border-style: solid;
+	    	border-width: calculateRem(1px);
+	    	border-left-width: calculateRem(0px);
+	    	width: calculateRem(46px);
+	    	height: calculateRem(35px);
+	    	border-color: #AAAAAA;
+	    	border-bottom-right-radius: calculateRem(3px);
+	    	border-top-right-radius: calculateRem(3px);
+		}
+		.gor-paginate-right-btn:hover {
+	    	border-color: #4D5055;
+	    	color: #4D5055;
+	    	cursor:pointer;
+		}
+		.gor-paginate-left-btn {
+			display: inline-block;
+	    	border-style: solid;
+	    	border-width: calculateRem(1px);
+	    	border-right-width: calculateRem(0px);
+	    	width: calculateRem(46px);
+	    	height: calculateRem(35px);
+	    	border-color: #AAAAAA;
+	    	border-bottom-left-radius: calculateRem(3px);
+	    	border-top-left-radius: calculateRem(3px);
+		}
+		.gor-paginate-left-btn:hover {
+	    	border-color: #4D5055;
+	    	color: #4D5055;
+	    	cursor:pointer;
+		}
+		.gor-paginate-middle-left-btn {
+			display: inline-block;
+	    	border-style: solid;
+	    	border-width: calculateRem(1px);
+	    	border-right-width: calculateRem(0px);
+	    	width: calculateRem(46px);
+	    	height: calculateRem(35px);
+	    	border-color: #AAAAAA;
+		}
+		.gor-paginate-middle-left-btn:hover {
+	    	border-color: #4D5055;
+	    	color: #4D5055;
+	    	cursor:pointer;
+		}
+
+		.gor-paginate-btn-disable {
+			pointer-events:none;
+			opacity: 0.5;
+		}
+
+	}
+}
+
+

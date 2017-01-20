@@ -5,6 +5,11 @@
     "defaultMessage": "Resolve issues"
   },
   {
+    "id": "audit.viewIssues.heading",
+    "description": "Heading for view issues audit",
+    "defaultMessage": "View issues"
+  },
+  {
     "id": "audit.missing.information",
     "description": "missing information for audit",
     "defaultMessage": "{missingAudit} Items missing in Audit task #{auditId}"

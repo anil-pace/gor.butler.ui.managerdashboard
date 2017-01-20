@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import {AUDIT_URL,FILTER_AUDIT_ID} from '../constants/configConstants';
 import {getAuditData,setAuditRefresh} from '../actions/auditActions';
 import AuditTable from './auditTab/auditTable';
-import ReactPaginate from 'react-paginate';
 import {getPageData} from '../actions/paginationAction';
 import {AUDIT_RETRIEVE,GET,APP_JSON,GOR_COMPLETED_STATUS,LOCATION,SKU,AUDIT_PENDING_APPROVAL,AUDIT_RESOLVED,AUDIT_CREATED} from '../constants/frontEndConstants';
 import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,SEARCH_AUDIT_URL,GIVEN_PAGE,GIVEN_PAGE_SIZE} from '../constants/configConstants';
@@ -14,7 +13,7 @@ import {setAuditSpinner} from '../actions/auditActions';
 import { defineMessages } from 'react-intl';
 import {auditHeaderSortOrder, auditHeaderSort, auditFilterDetail} from '../actions/sortHeaderActions';
 import {getDaysDiff} from '../utilities/getDaysDiff';
-
+import GorPaginate from '../components/gorPaginate/gorPaginate';
 //Mesages for internationalization
 const messages = defineMessages({
   auditCreatedStatus: {
@@ -68,7 +67,7 @@ class AuditTab extends React.Component{
 }
 componentDidMount() {
   var data = {};
-  data.selected = 0;
+  data.selected = 1;
   this.handlePageClick(data);
 }
 _processAuditData(data,nProps){
@@ -214,7 +213,7 @@ handlePageClick(data){
     if(data.columnKey && data.sortDir) {
       appendSortUrl = sortHead[data.columnKey] + sortOrder[data.sortDir]; 
     }
-    url = SEARCH_AUDIT_URL+makeDate+GIVEN_PAGE+(data.selected+1)+GIVEN_PAGE_SIZE + appendSortUrl;
+    url = SEARCH_AUDIT_URL+makeDate+GIVEN_PAGE+(data.selected)+GIVEN_PAGE_SIZE + appendSortUrl;
   }
   else {
     url = data.url;
@@ -280,27 +279,15 @@ render(){
   
   return (
     <div>
-
-    <div>
-
-    <div className="gor-Auditlist-table">
-    <Spinner isLoading={this.props.auditSpinner} setSpinner={this.props.setAuditSpinner}/>
-    {renderTab}
-
-    </div>
-    </div>
-    <div id={"react-paginate"}>
-    <ReactPaginate previousLabel={"<<"}
-    nextLabel={">>"}
-    breakClassName={"break-me"}
-    pageNum={this.props.totalPage}
-    marginPagesDisplayed={1}
-    pageRangeDisplayed={1}
-    clickCallback={this.handlePageClick.bind(this)}
-    containerClassName={"pagination"}
-    subContainerClassName={"pages pagination"}
-    activeClassName={"active"} />
-    </div>   
+      <div>
+        <div className="gor-Auditlist-table">
+          <Spinner isLoading={this.props.auditSpinner} setSpinner={this.props.setAuditSpinner}/>
+          {renderTab}
+        </div>
+      </div>
+      <div className="gor-audit-paginate-wrap">
+        <GorPaginate getPageDetail={this.handlePageClick.bind(this)} totalPage={this.props.totalPage}/>
+      </div>  
     </div>
     );
 }

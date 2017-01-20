@@ -12,6 +12,7 @@ import {BUTLER_UI,CODE_UE002,BUTLER_SUPERVISOR} from '../constants/backEndConsta
 import {UE002,E028,E029,MODE_REQUESTED,TYPE_SUCCESS,AS001,ERR_API,ERR_USR,ERR_RES,ERR_AUDIT,AS00A,WRONG_CRED} from '../constants/messageConstants';
 import {ShowError} from './showError';
 import {endSession} from './endSession';
+import {setResolveAuditSpinner} from '../actions/spinnerAction';
 
 export function AjaxParse(store,res,cause,status)
 {
@@ -159,6 +160,7 @@ export function AjaxParse(store,res,cause,status)
 			 break;
 
 		case AUDIT_RESOLVE_LINES:
+			 store.dispatch(setResolveAuditSpinner(false));
 			 store.dispatch(setPendingAuditLines(res));
 			 break;	 
 
