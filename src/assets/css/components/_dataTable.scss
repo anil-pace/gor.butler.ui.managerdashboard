@@ -1643,7 +1643,7 @@ input[type="checkbox"]{
   border-width: 1px;
   border-radius: 15px;
   height: 10px;
-  width: 135px;
+  width: 140px;
   display: inline-block;
 }
 
@@ -1741,4 +1741,8 @@ font-family: "source sans pro";
     font-size: 14px;
     color: #4d5055;
   
+}
+
+.gor-audit-paginate-wrap {
+  float: right;
 }

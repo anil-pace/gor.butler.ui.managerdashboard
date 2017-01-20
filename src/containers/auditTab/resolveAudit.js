@@ -8,7 +8,8 @@ import {AUDIT_URL, PENDING_ORDERLINES} from '../../constants/configConstants';
 import {Table, Column, Cell} from 'fixed-data-table';
 import {tableRenderer,TextCell,DataListWrapper,ResolveCell} from '../../components/commonFunctionsDataTable';
 import {stringConfig} from '../../constants/backEndConstants';
-
+import Spinner from '../../components/spinner/Spinner';
+import {setResolveAuditSpinner} from '../../actions/spinnerAction';
 class ResolveAudit extends React.Component{
   constructor(props) 
   {
@@ -46,6 +47,7 @@ class ResolveAudit extends React.Component{
          'token': this.props.auth_token,
          'contentType':APP_JSON
         } 
+        this.props.setResolveAuditSpinner(true);
        this.props.getAuditOrderLines(paginationData);  
   }
   
@@ -86,7 +88,6 @@ class ResolveAudit extends React.Component{
   }
 
   _confirmIssues() {
-    console.log("confirmed");
     this._removeThisModal();
   }
   
@@ -97,17 +98,22 @@ class ResolveAudit extends React.Component{
       var screenId = this.props.screenId, auditType = this.props.auditType;
       var missingAudit = auditDataList.getSize(), auditId = this.props.displayId, headerHeight=GOR_USER_TABLE_HEADER_HEIGHT;
       var containerHeight = (((missingAudit?missingAudit:0)*headerHeight + headerHeight)>minHeight?((missingAudit?missingAudit:0)*headerHeight + headerHeight):minHeight);
+     
       
       return (
         <div>
           <div className="gor-modal-content">
             <div className='gor-modal-head'>
               <div className='gor-audit-resolve'>
-                <FormattedMessage id="audit.resolve.heading" description='Heading for resolve audit' defaultMessage='Resolve issues'/>
+                {screenId===APPROVE_AUDIT?
+                  <FormattedMessage id="audit.resolve.heading" description='Heading for resolve audit' defaultMessage='Resolve issues'/> :
+                  <FormattedMessage id="audit.viewIssues.heading" description='Heading for view issues audit' defaultMessage='View issues'/>
+                }
                 <span className="close" onClick={this._removeThisModal.bind(this)}>×</span>
               </div>
             </div>
             <div className='gor-modal-body'>
+            <Spinner isLoading={this.props.auditResolveSpinner} setSpinner={this.props.setResolveAuditSpinner}/>
               <div className='gor-usr-form'>
                 <div className="gor-auditResolve-h1"> 
                   <FormattedMessage id="audit.missing.information" description='missing information for audit' 
@@ -120,6 +126,7 @@ class ResolveAudit extends React.Component{
                                     values={{auditType: auditType}}/> 
                 </div>
                 <div className="gor-audit-detail">
+
                   <Table
                       rowHeight={headerHeight}
                       rowsCount={auditDataList.getSize()}
@@ -213,14 +220,15 @@ class ResolveAudit extends React.Component{
   function mapStateToProps(state, ownProps){
   return {
     auth_token:state.authLogin.auth_token,
-    auditLines:state.recieveAuditDetail.auditPendingLines || []
+    auditLines:state.recieveAuditDetail.auditPendingLines || [],
+    auditResolveSpinner:state.spinner.auditResolveSpinner || false
   };
 }
 
 var mapDispatchToProps = function(dispatch){
   return {
     getAuditOrderLines: function(data){dispatch(getAuditOrderLines(data))},
-    
+    setResolveAuditSpinner: function(data){dispatch(setResolveAuditSpinner(data))}
   }
 };
 
