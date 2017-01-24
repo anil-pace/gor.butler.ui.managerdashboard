@@ -7,12 +7,13 @@ import {getPPSAudit} from '../actions/auditActions';
 import {codeToString} from './codeToString';
 import {setOrderListSpinner} from '../actions/orderListActions';
 import {notifySuccess, notifyFail,validateID,notifyDelete,loginError} from '../actions/validationActions';
-import {ERROR,AUTH_LOGIN, ADD_USER, RECIEVE_TIME_OFFSET,CHECK_ID,DELETE_USER,GET_ROLES,ORDERS_RETRIEVE,PPS_MODE_CHANGE,EDIT_USER,RECIEVE_HEADER,SUCCESS,CREATE_AUDIT,AUDIT_RETRIEVE,GET_PPSLIST,START_AUDIT,DELETE_AUDIT,AUDIT_RESOLVE_LINES} from '../constants/frontEndConstants';
+import {ERROR,AUTH_LOGIN, ADD_USER, RECIEVE_TIME_OFFSET,CHECK_ID,DELETE_USER,GET_ROLES,ORDERS_RETRIEVE,PPS_MODE_CHANGE,EDIT_USER,RECIEVE_HEADER,SUCCESS,CREATE_AUDIT,AUDIT_RETRIEVE,GET_PPSLIST,START_AUDIT,DELETE_AUDIT,AUDIT_RESOLVE_LINES,AUDIT_RESOLVE_CONFIRMED} from '../constants/frontEndConstants';
 import {BUTLER_UI,CODE_UE002,BUTLER_SUPERVISOR} from '../constants/backEndConstants'
 import {UE002,E028,E029,MODE_REQUESTED,TYPE_SUCCESS,AS001,ERR_API,ERR_USR,ERR_RES,ERR_AUDIT,AS00A,WRONG_CRED} from '../constants/messageConstants';
 import {ShowError} from './showError';
 import {endSession} from './endSession';
 import {setResolveAuditSpinner} from '../actions/spinnerAction';
+import {statusToString} from './statusToString';
 
 export function AjaxParse(store,res,cause,status)
 {
@@ -163,6 +164,17 @@ export function AjaxParse(store,res,cause,status)
 			 store.dispatch(setResolveAuditSpinner(false));
 			 store.dispatch(setPendingAuditLines(res));
 			 break;	 
+        
+        case AUDIT_RESOLVE_CONFIRMED:
+        	if(res.successful.status)
+		    {
+		    	stringInfo = statusToString(res.successful)
+		    	store.dispatch(notifySuccess(stringInfo.msg));
+		    }
+		    else {
+		    	ShowError(store,cause,status);
+		    }
+        	break;
 
 		default:
 			ShowError(store,cause,status);

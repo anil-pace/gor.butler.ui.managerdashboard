@@ -13,13 +13,13 @@ class GorPaginate extends React.Component{
   }
 
   componentWillReceiveProps(nextProps) {
-    var totalPage = nextProps.totalPage;
+    var totalPage = nextProps.totalPage;  // for async call response come with some delay so updating total page here
     this.setState({totalPage:totalPage});
   }
 
   submit(e) {
     e.preventDefault();
-    var regex = /^\d+$/;
+    var regex = /^\d+$/; // used for validation of numeric key by user 
     var data = {selected:this.state.currentPage};
     if(regex.test(this.pageNum.value)) {
       data = {selected:this.pageNum.value};

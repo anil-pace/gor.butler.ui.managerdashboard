@@ -7,7 +7,7 @@ import {AUDIT_URL,FILTER_AUDIT_ID} from '../constants/configConstants';
 import {getAuditData,setAuditRefresh} from '../actions/auditActions';
 import AuditTable from './auditTab/auditTable';
 import {getPageData} from '../actions/paginationAction';
-import {AUDIT_RETRIEVE,GET,APP_JSON,GOR_COMPLETED_STATUS,LOCATION,SKU,AUDIT_PENDING_APPROVAL,AUDIT_RESOLVED,AUDIT_CREATED} from '../constants/frontEndConstants';
+import {AUDIT_RETRIEVE,GET,APP_JSON,GOR_COMPLETED_STATUS,LOCATION,SKU,AUDIT_PENDING_APPROVAL,AUDIT_RESOLVED,AUDIT_CREATED, AUDIT_LINE_REJECTED} from '../constants/frontEndConstants';
 import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,SEARCH_AUDIT_URL,GIVEN_PAGE,GIVEN_PAGE_SIZE} from '../constants/configConstants';
 import {setAuditSpinner} from '../actions/auditActions';
 import { defineMessages } from 'react-intl';
@@ -81,12 +81,8 @@ _processAuditData(data,nProps){
   let sku  = nProps.context.intl.formatMessage(messages.auditSKU);
   let location  = nProps.context.intl.formatMessage(messages.auditLocation);
 
-
   var timeOffset= nProps.props.timeOffset || "";
-
-  
-  var priorityStatus = {"audit_created":2, "audit_pending":3, "audit_waiting":3, "audit_conflicting":3, "audit_accepted":3, "audit_started":1, "audit_tasked":1, "audit_aborted":4, "audit_completed":4, "audit_pending_approval":4};
-  var auditStatus = {"audit_created":created, "audit_pending":pending, "audit_waiting":pending, "audit_conflicting":pending, "audit_accepted":pending, "audit_started":progress, "audit_tasked":progress, "audit_aborted":completed, "audit_completed":completed, "audit_pending_approval":pendingApp, "audit_resolved":progress};
+  var auditStatus = {"audit_created":created, "audit_pending":pending, "audit_waiting":pending, "audit_conflicting":pending, "audit_accepted":pending, "audit_started":progress, "audit_tasked":progress, "audit_aborted":completed, "audit_completed":completed, "audit_pending_approval":pendingApp, "audit_resolved":progress, audit_rejected:"audit_rejected"};
   var statusClass = {"Pending": "pending", "Completed":"completed", "In Progress":"progress", "Created":"pending", "Issues found":"breached"}
   var auditType = {"sku":sku, "location":location};
   var auditDetails = [], auditData = {};
@@ -109,7 +105,6 @@ _processAuditData(data,nProps){
     }
 
     if(data[i].audit_status) {
-      auditData.statusPriority = priorityStatus[data[i].audit_status];
       if(auditData.statusPriority === undefined) {
         auditData.statusPriority = 1;
       }
@@ -132,7 +127,7 @@ _processAuditData(data,nProps){
         auditData.resolveAudit = false;
       }
 
-      if(data[i].audit_status === AUDIT_RESOLVED) {
+      if(data[i].audit_status === AUDIT_RESOLVED || data[i].audit_status === AUDIT_LINE_REJECTED) {
         auditData.viewIssues = true;
       }
 

@@ -1,5 +1,4 @@
 import React  from 'react';
-import ReactPaginate from 'react-paginate';
 import { connect } from 'react-redux';
 import {getPageData, getStatusFilter, getTimeFilter,getPageSizeOrders,currentPageOrders,lastRefreshTime} from '../../actions/paginationAction';
 import {ORDERS_RETRIEVE,GOR_BREACHED,GOR_EXCEPTION,GET,APP_JSON, INITIAL_HEADER_SORT, INITIAL_HEADER_ORDER} from '../../constants/frontEndConstants';
@@ -12,7 +11,7 @@ import {setOrderListSpinner} from '../../actions/orderListActions';
 import {stringConfig} from '../../constants/backEndConstants';
 import {orderHeaderSortOrder, orderHeaderSort, orderFilterDetail} from '../../actions/sortHeaderActions';
 import {getDaysDiff} from '../../utilities/getDaysDiff';
-
+import GorPaginate from '../../components/gorPaginate/gorPaginate';
 const messages = defineMessages ({
   inProgressStatus:{
     id: 'orderList.progress.status',
@@ -47,7 +46,7 @@ class OrderListTab extends React.Component{
   } 
   componentDidMount() {
     var data = {};
-    data.selected = 0;
+    data.selected = 1;
     this.refresh(data);
   }
 
@@ -59,9 +58,7 @@ class OrderListTab extends React.Component{
     let completed  = nProps.context.intl.formatMessage(messages.completedStatus);
     let exception = nProps.context.intl.formatMessage(messages.exceptionStatus);
     let unfulfillable  = nProps.context.intl.formatMessage(messages.unfulfillableStatus); 
-    var renderOrderData = [], ordersStatus = {'pending':progress, "fulfillable": progress, "completed":completed, "not_fulfillable":unfulfillable, "exception":exception},orderData = {};
-    var breachedStatus = {'pending':1, "fulfillable": 1, "completed":3, "not_fulfillable":2};
-    var unBreachedStatus = {'pending':4, "fulfillable": 4, "completed":6, "not_fulfillable":5};
+    var renderOrderData = [], orderData = {};
     var timeOffset=nProps.props.timeOffset, alertStatesNum = 0, orderDataPacket = {};
     if(!data.length) {
       orderDataPacket = {"renderOrderData":renderOrderData,"alertStatesNum":alertStatesNum}
@@ -75,14 +72,11 @@ class OrderListTab extends React.Component{
 
         orderData.status = nProps.context.intl.formatMessage(stringConfig[data[i].status]);
         orderData.statusClass = GOR_BREACHED;
-        orderData.statusPriority = breachedStatus[data[i].status];
         alertStatesNum++;
       }
       else if(data[i].exception === true) {
         orderData.status = nProps.context.intl.formatMessage(stringConfig[data[i].status]);
         orderData.statusClass = GOR_EXCEPTION;
-
-        orderData.statusPriority = breachedStatus[data[i].status];
         alertStatesNum++;
       }      
       else {
@@ -93,7 +87,6 @@ class OrderListTab extends React.Component{
           orderData.status = data[i].status;
         }
         orderData.statusClass = data[i].status;
-        orderData.statusPriority = unBreachedStatus[data[i].status];
       }
       if(!data[i].create_time){
         orderData.recievedTime = "--";
@@ -174,7 +167,7 @@ class OrderListTab extends React.Component{
 handlePageClick = (data) => {
   var url;
   if(data.url === undefined) {
-    url = API_URL + ORDERS_URL + ORDER_PAGE + (data.selected+1) + "&PAGE_SIZE=25";
+    url = API_URL + ORDERS_URL + ORDER_PAGE + (data.selected) + "&PAGE_SIZE=25";
   }
 
   else {
@@ -190,7 +183,7 @@ handlePageClick = (data) => {
     'contentType':'application/json'
   } 
   this.props.setOrderListSpinner(true);
-  this.props.currentPage(data.selected+1);
+  this.props.currentPage(data.selected);
   this.props.getPageData(paginationData);
 }
 
@@ -207,7 +200,7 @@ refresh = (data) => {
   var sortOrder = {"DESC":"&order=asc", "ASC":"&order=desc"};
   if(!data) {
     data = {};
-    data.selected = 0;
+    data.selected = 1;
     data.url = "";
   }
   //for backend sorting
@@ -229,7 +222,7 @@ refresh = (data) => {
 
   //generating api url by pagination page no.
   data.url = "";
-  data.url = API_URL + ORDERS_URL + ORDER_PAGE + (data.selected+1);
+  data.url = API_URL + ORDERS_URL + ORDER_PAGE + (data.selected);
   
   //appending page size filter
   if(this.props.filterOptions.pageSize === undefined) {
@@ -328,22 +321,7 @@ render(){
   <Dropdown  styleClass={'gor-Page-Drop'}  items={ordersByStatus} currentState={ordersByStatus[0]} optionDispatch={this.props.getPageSizeOrders} refreshList={this.refresh.bind(this)}/>
   </div>
   <div className="gor-paginate">
-  <div className = "gor-paginate-state"> 
-  <FormattedMessage id="orderlistTab.pageNum" description='page num orderlist' defaultMessage='Page {currentPage} of {totalPage}' values={{currentPage: currentPage?currentPage:'0', totalPage: totalPage?totalPage:'0'}}/>
-
-  </div>
-  <div id={"react-paginate"}>
-  <ReactPaginate previousLabel={"<<"}
-  nextLabel={">>"}
-  breakClassName={"break-me"}
-  pageNum={this.props.orderData.totalPage}
-  marginPagesDisplayed={1}
-  pageRangeDisplayed={1}
-  clickCallback={this.refresh.bind(this)}
-  containerClassName={"pagination"}
-  subContainerClassName={"pages pagination"}
-  activeClassName={"active"} />
-  </div>
+  <GorPaginate getPageDetail={this.refresh.bind(this)} totalPage={this.props.orderData.totalPage}/>
   </div>
   </div>
   </div>
