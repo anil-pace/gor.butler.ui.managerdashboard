@@ -91,8 +91,6 @@ class ResolveAudit extends React.Component{
   _confirmIssues() {
     
     var auditConfirmDetail = {"data":this.state.checkedState};
-    var data = JSON.stringify(auditConfirmDetail);
-    console.log(data)
     var url = AUDIT_URL + AUDIT_ANAMOLY;
      let paginationData={
          'url':url,
@@ -103,8 +101,6 @@ class ResolveAudit extends React.Component{
          'accept':APP_JSON,
          'formdata': auditConfirmDetail
         }
-
-        console.log(paginationData);
         this.props.resolveAuditLines(paginationData);
      
     this._removeThisModal();
