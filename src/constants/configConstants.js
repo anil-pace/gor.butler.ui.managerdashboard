@@ -30,3 +30,4 @@ export const GIVEN_PAGE_SIZE="&PAGE_SIZE=20";
 export const FILTER_ORDER_ID =  "&order_id~=";
 export const FILTER_AUDIT_ID = "&display_id=";
 export const PENDING_ORDERLINES = "/pending_auditlines";
+export const AUDIT_ANAMOLY  = "/anamoly_auditlines";

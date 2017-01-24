@@ -2,9 +2,9 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
 import { connect } from 'react-redux';
-import {getAuditOrderLines} from '../../actions/auditActions';
-import {GET,APP_JSON,AUDIT_RESOLVE_LINES,GOR_BREACHED_LINES,VIEW_AUDIT_ISSUES,APPROVE_AUDIT,GOR_USER_TABLE_HEADER_HEIGHT,GOR_AUDIT_RESOLVE_MIN_HEIGHT,GOR_AUDIT_RESOLVE_WIDTH} from '../../constants/frontEndConstants';
-import {AUDIT_URL, PENDING_ORDERLINES} from '../../constants/configConstants';
+import {getAuditOrderLines,resolveAuditLines} from '../../actions/auditActions';
+import {GET,APP_JSON,AUDIT_RESOLVE_LINES,GOR_BREACHED_LINES,VIEW_AUDIT_ISSUES,APPROVE_AUDIT,GOR_USER_TABLE_HEADER_HEIGHT,GOR_AUDIT_RESOLVE_MIN_HEIGHT,GOR_AUDIT_RESOLVE_WIDTH, POST, AUDIT_RESOLVE_CONFIRMED} from '../../constants/frontEndConstants';
+import {AUDIT_URL, PENDING_ORDERLINES, AUDIT_ANAMOLY} from '../../constants/configConstants';
 import {Table, Column, Cell} from 'fixed-data-table';
 import {tableRenderer,TextCell,DataListWrapper,ResolveCell} from '../../components/commonFunctionsDataTable';
 import {stringConfig} from '../../constants/backEndConstants';
@@ -58,6 +58,7 @@ class ResolveAudit extends React.Component{
       auditData.actual_quantity = data[i].actual_quantity;
       auditData.expected_quantity = data[i].expected_quantity;
       auditData.slot_id = data[i].slot_id;
+      auditData.auditLineId = data[i].auditline_id;
       if(this.context.intl.formatMessage(stringConfig[data[i].status])) {
         auditData.status = this.context.intl.formatMessage(stringConfig[data[i].status]);
       } 
@@ -71,12 +72,12 @@ class ResolveAudit extends React.Component{
   } 
 
   _checkAuditStatus(rowIndex,state) {
-    
-    var checkedAudit = {"rowIndex":rowIndex, "state":state}, auditIndexed = false;
+    var newAuditLineId = this.state.auditDataList.newData[rowIndex].auditLineId
+    var checkedAudit = {"response":state, "auditline_id":newAuditLineId}, auditIndexed = false;
     var tempState = this.state.checkedState.slice();
     for (var i = tempState.length - 1; i >= 0; i--) {
-      if(tempState[i].rowIndex === rowIndex) {
-        tempState[i].state = state;
+      if(tempState[i].auditline_id === newAuditLineId) {
+        tempState[i].response = state;
         auditIndexed = true;
         break;
       }
@@ -88,6 +89,20 @@ class ResolveAudit extends React.Component{
   }
 
   _confirmIssues() {
+    
+    var auditConfirmDetail = {"data":this.state.checkedState};
+    var url = AUDIT_URL + AUDIT_ANAMOLY;
+     let paginationData={
+         'url':url,
+         'method':POST,
+         'cause': AUDIT_RESOLVE_CONFIRMED,
+         'token': this.props.auth_token,
+         'contentType':APP_JSON,
+         'accept':APP_JSON,
+         'formdata': auditConfirmDetail
+        }
+        this.props.resolveAuditLines(paginationData);
+     
     this._removeThisModal();
   }
   
@@ -227,6 +242,7 @@ class ResolveAudit extends React.Component{
 
 var mapDispatchToProps = function(dispatch){
   return {
+    resolveAuditLines: function(data){dispatch(resolveAuditLines(data))},
     getAuditOrderLines: function(data){dispatch(getAuditOrderLines(data))},
     setResolveAuditSpinner: function(data){dispatch(setResolveAuditSpinner(data))}
   }

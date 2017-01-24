@@ -114,6 +114,7 @@ export const PPS_MODE_CHANGE = 'PPS_MODE_CHANGE';
 export const GET_HEADER_INFO = 'GET_HEADER_INFO';
 export const EDIT_USER='EDIT_USER';
 export const DEBOUNCE_TIMER=1000;
+export const AUDIT_RESOLVE_CONFIRMED = "AUDIT_RESOLVE_CONFIRMED";
 
 export const AUDIT_RETRIEVE = "AUDIT_RETRIEVE";
 export const RECIEVE_AUDIT_DATA = "RECIEVE_AUDIT_DATA";
@@ -348,6 +349,7 @@ export const AUDIT_CREATED = "audit_created";
 export const AUDIT_PENDING_APPROVAL = "audit_pending_approval";
 export const AUDIT_RESOLVED = "audit_resolved"; 
 export const AUDIT_UNRESOLVED = "Unresolved";
+export const AUDIT_LINE_REJECTED  = "audit_rejected";
 //Icons
 export const PICK_ICON=' iPick';
 export const STOCK_ICON="iStock";
@@ -385,5 +387,5 @@ export const SET_BUTLER_FILTER = "SET_BUTLER_FILTER";
 export const SET_PPS_FILTER = "SET_PPS_FILTER";
 export const SET_CS_FILTER = "SET_CS_FILTER";
 export const SET_WAVE_FILTER = "SET_WAVE_FILTER"
-export const AUDIT_APPROVED = "approve";
-export const AUDIT_REJECTED = "rejected";
+export const AUDIT_APPROVED = "auditline_approved";
+export const AUDIT_REJECTED = "auditline_rejected";

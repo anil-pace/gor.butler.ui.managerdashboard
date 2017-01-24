@@ -60,3 +60,11 @@ export function setPendingAuditLines(data) {
     data
   }
 }
+
+export function resolveAuditLines(params) {
+  return {
+    type: AJAX_CALL,
+    params
+  }
+}
+

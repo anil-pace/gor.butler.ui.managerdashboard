@@ -194,7 +194,7 @@ class AuditTable extends React.Component {
     }
 
     resolveAudit(columnKey,rowIndex,screenId) {
-        var auditId, auditType, displayId;
+        var auditId, auditType, displayId, auditLineId;
         if(this.props.tableData.sortedDataList._data !== undefined) {
           sortedIndex = this.props.tableData.sortedDataList._indexMap[rowIndex];
           auditId = this.props.tableData.sortedDataList._data.newData[sortedIndex].id;
