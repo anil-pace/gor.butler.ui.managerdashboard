@@ -37,7 +37,8 @@ export const REQUEST_HEADER = "REQUEST_HEADER";
 export const RECIEVE_HEADER = "RECIEVE_HEADER";
 export const GOR_TABLE_HEADER_HEIGHT = 71;
 export const GOR_USER_TABLE_HEADER_HEIGHT = 50;
-
+export const GOR_AUDIT_RESOLVE_MIN_HEIGHT = 400;
+export const GOR_AUDIT_RESOLVE_WIDTH = 1200;
 
 /*Constants for performance widget*/
 export const RENDER_WIDGET = "RENDER_WIDGET";
@@ -113,6 +114,7 @@ export const PPS_MODE_CHANGE = 'PPS_MODE_CHANGE';
 export const GET_HEADER_INFO = 'GET_HEADER_INFO';
 export const EDIT_USER='EDIT_USER';
 export const DEBOUNCE_TIMER=1000;
+export const AUDIT_RESOLVE_CONFIRMED = "AUDIT_RESOLVE_CONFIRMED";
 
 export const AUDIT_RETRIEVE = "AUDIT_RETRIEVE";
 export const RECIEVE_AUDIT_DATA = "RECIEVE_AUDIT_DATA";
@@ -166,6 +168,7 @@ export const DISPLAY_BUTLER_SPINNER = "DISPLAY_BUTLER_SPINNER";
 export const DISPLAY_PPS_SPINNER = "DISPLAY_PPS_SPINNER";
 export const DISPLAY_CHARGING_STATION_SPINNER = "DISPLAY_CHARGING_STATION_SPINNER";
 export const DISPLAY_USERS_SPINNER ="DISPLAY_USERS_SPINNER";
+export const DISPAY_RESOLVE_AUDIT_SPINNER = "DISPAY_RESOLVE_AUDIT_SPINNER";
 
 /*Map for routes of tab*/
 
@@ -197,6 +200,8 @@ export const SKU='sku';
 export const LOCATION='location';
 export const SETAUDIT_PPS='SETAUDIT_PPS';
 export const REFRESH_AUDIT='REFRESH_AUDIT';
+export const APPROVE_AUDIT = "APPROVE_AUDIT";
+export const VIEW_AUDIT_ISSUES = "VIEW_AUDIT_ISSUES";
 
 /*Inventory parsing constants*/
 export const INVENTORY_DATA_TODAY = 'INVENTORY_DATA_TODAY'
@@ -343,6 +348,8 @@ export const GOR_BREACHED_LINES = "gor-breached-lines";
 export const AUDIT_CREATED = "audit_created";
 export const AUDIT_PENDING_APPROVAL = "audit_pending_approval";
 export const AUDIT_RESOLVED = "audit_resolved"; 
+export const AUDIT_UNRESOLVED = "Unresolved";
+export const AUDIT_LINE_REJECTED  = "audit_rejected";
 //Icons
 export const PICK_ICON=' iPick';
 export const STOCK_ICON="iStock";
@@ -380,5 +387,5 @@ export const SET_BUTLER_FILTER = "SET_BUTLER_FILTER";
 export const SET_PPS_FILTER = "SET_PPS_FILTER";
 export const SET_CS_FILTER = "SET_CS_FILTER";
 export const SET_WAVE_FILTER = "SET_WAVE_FILTER"
-export const AUDIT_APPROVED = "approve";
-export const AUDIT_REJECTED = "rejected";
+export const AUDIT_APPROVED = "auditline_approved";
+export const AUDIT_REJECTED = "auditline_rejected";
