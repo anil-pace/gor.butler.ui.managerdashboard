@@ -43,6 +43,10 @@ const messages = defineMessages({
   auditPendingApp:{
     id:"auditdetail.auditPendingApp.prefix", 
     defaultMessage: "Issues found"
+  },
+  auditRejected:{
+    id:"auditdetail.auditRejected.prefix", 
+    defaultMessage: "Rejected"
   }
 
 
@@ -80,10 +84,11 @@ _processAuditData(data,nProps){
   let pendingApp  = nProps.context.intl.formatMessage(messages.auditPendingApp);
   let sku  = nProps.context.intl.formatMessage(messages.auditSKU);
   let location  = nProps.context.intl.formatMessage(messages.auditLocation);
+  let rejected = nProps.context.intl.formatMessage(messages.auditRejected);
 
   var timeOffset= nProps.props.timeOffset || "";
-  var auditStatus = {"audit_created":created, "audit_pending":pending, "audit_waiting":pending, "audit_conflicting":pending, "audit_accepted":pending, "audit_started":progress, "audit_tasked":progress, "audit_aborted":completed, "audit_completed":completed, "audit_pending_approval":pendingApp, "audit_resolved":progress, audit_rejected:"audit_rejected"};
-  var statusClass = {"Pending": "pending", "Completed":"completed", "In Progress":"progress", "Created":"pending", "Issues found":"breached"}
+  var auditStatus = {"audit_created":created, "audit_pending":pending, "audit_waiting":pending, "audit_conflicting":pending, "audit_accepted":pending, "audit_started":progress, "audit_tasked":progress, "audit_aborted":completed, "audit_completed":completed, "audit_pending_approval":pendingApp, "audit_resolved":progress, audit_rejected:rejected};
+  var statusClass = {"Pending": "pending", "Completed":"completed", "In Progress":"progress", "Created":"pending", "Issues found":"breached", "Rejected":"progress"}
   var auditType = {"sku":sku, "location":location};
   var auditDetails = [], auditData = {};
   for (var i = data.length - 1; i >= 0; i--) {
