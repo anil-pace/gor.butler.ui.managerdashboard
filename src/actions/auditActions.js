@@ -1,7 +1,4 @@
-
-
-import { AJAX_CALL,AUDIT_RETRIEVE, RECIEVE_AUDIT_DATA,SET_AUDIT,RESET_AUDIT,SETAUDIT_PPS,REFRESH_AUDIT,DISPLAY_AUDIT_SPINNER} from '../constants/frontEndConstants'
-
+import { AJAX_CALL,AUDIT_RETRIEVE, RECIEVE_AUDIT_DATA,SET_AUDIT,RESET_AUDIT,SETAUDIT_PPS,REFRESH_AUDIT,DISPLAY_AUDIT_SPINNER,SET_AUDIT_ORDERLINES} from '../constants/frontEndConstants'
 
 export function getAuditData(params){
 	return {
@@ -16,7 +13,6 @@ export function recieveAuditData(data){
 		data
 	}
 }
-
 
 export function setAuditType(data){
   return {
@@ -49,3 +45,26 @@ export function setAuditSpinner(data){
     data
   }
 }
+
+export function getAuditOrderLines(params) {
+  return {
+    type: AJAX_CALL,
+    params
+  }
+}
+
+
+export function setPendingAuditLines(data) {
+  return {
+    type: SET_AUDIT_ORDERLINES,
+    data
+  }
+}
+
+export function resolveAuditLines(params) {
+  return {
+    type: AJAX_CALL,
+    params
+  }
+}
+

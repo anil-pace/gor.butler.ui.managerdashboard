@@ -1569,6 +1569,7 @@ input[type="checkbox"]{
 .gorProgressBarLabel {
   display: inline-block;
   padding-left: 10px;
+  vertical-align: top;
 
 }
 
@@ -1596,6 +1597,7 @@ input[type="checkbox"]{
     border-radius:3px;
     margin-left:30px;
     vertical-align: sub;
+    cursor: pointer
 
 }
 
@@ -1641,7 +1643,7 @@ input[type="checkbox"]{
   border-width: 1px;
   border-radius: 15px;
   height: 10px;
-  width: 100px;
+  width: 140px;
   display: inline-block;
 }
 
@@ -1722,4 +1724,25 @@ font-family: "source sans pro";
     color: #aaaaaa;
 }
 
+.gor-breached-lines .public_fixedDataTableCell_cellContent{
+  color: #fc3838;
+  font-weight: bold;
+}
 
+.gorAuditHeader { 
+  display: inline-block; 
+  padding-left: 17px; 
+  padding-top: 14px; 
+  }
+
+.gor-resolve-head {
+  display: inline-block;
+    padding-top: 6px;
+    font-size: 14px;
+    color: #4d5055;
+  
+}
+
+.gor-audit-paginate-wrap {
+  float: right;
+}

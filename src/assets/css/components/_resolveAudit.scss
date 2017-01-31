@@ -1,0 +1,64 @@
+@import '../abstracts/functions';
+
+.gor-audit-detail {
+    font-family: 'Source Sans Pro', sans-serif;
+    width:80%;
+    margin: auto;
+}
+
+.gor-auditResolve-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: calculateRem(20px);
+    width: 100%;
+    min-height:100vh;
+}
+
+.gor-auditResolve-head{
+        font-family:'Source Sans Pro Regular', sans-serif;
+        font-size:calculateRem(26px);
+        border-bottom:1px solid #AAAAAA;
+        min-height:calculateRem(60px);
+        width:92%;
+        padding-top:calculateRem(40px);
+        margin:auto;
+        margin-left:calculateRem(30px);
+        margin-right:calculateRem(30px);
+        position:fixed;
+        top:0;
+        background:#ffffff;
+}
+
+.gor-audit-resolve{
+    display:inline-block;
+    width:100%;
+}
+
+.gor-auditResolve-h1 {
+    font-size: calculateRem(20px);
+    font-weight: bold;
+    padding-left: 10%;
+    padding-bottom: calculateRem(8px);
+}
+
+.gor-auditResolve-h2 {
+   padding-left: 10%;
+   padding-bottom: calculateRem(51px);
+}
+
+.gor-auditResolve-btn-wrap {
+    padding-left: 70%;
+    padding-top: calculateRem(20px);
+}
+
+.gor-auditIssue-btn-wrap {
+    padding-left: 83%;
+    padding-top: calculateRem(20px);
+}
+
+.gor-auditresolve-btn {
+    display: inline-block;
+    padding-left: calculateRem(25px);
+    vertical-align: middle;
+}
+

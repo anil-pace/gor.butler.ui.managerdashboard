@@ -1,0 +1,12 @@
+[
+  {
+    "id": "audit.resolve.success",
+    "description": "Text for resolved audit lines",
+    "defaultMessage": "Audit task {auditId} with {auditType} - {auditTypeValue} has been approved"
+  },
+  {
+    "id": "audit.resolve.rejected",
+    "description": "Text for rejected audit lines",
+    "defaultMessage": "Audit task {auditId} with {auditType} - {auditTypeValue} has been rejected"
+  }
+]

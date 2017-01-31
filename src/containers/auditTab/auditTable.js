@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM  from 'react-dom';
 import {Table, Column, Cell} from 'fixed-data-table';
-import DropdownTable from '../../components/dropdown/dropdownTable'
 import Dimensions from 'react-dimensions'
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
@@ -12,9 +11,12 @@ import CreateAudit from './createAudit';
 import StartAudit from './startAudit';
 import DeleteAudit from './deleteAudit';
 import DuplicateAudit from './duplicateAudit';
-import {GOR_STATUS,GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT,DEBOUNCE_TIMER} from '../../constants/frontEndConstants';
+import ResolveAudit from './resolveAudit';
+import {GOR_STATUS,GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT,DEBOUNCE_TIMER,AUDIT_RESOLVE_LINES,GET,APP_JSON} from '../../constants/frontEndConstants';
 import { defineMessages } from 'react-intl';
 import {debounce} from '../../utilities/debounce';
+import {getAuditOrderLines} from '../../actions/auditActions';
+import {AUDIT_URL, PENDING_ORDERLINES} from '../../constants/configConstants';
 
 const messages = defineMessages({
     auditPlaceholder: {
@@ -101,10 +103,10 @@ class AuditTable extends React.Component {
       colSortDirs: sortIndex,
       columnWidths: {
         display_id: nProps.containerWidth*0.09,
-        auditTypeValue: nProps.containerWidth*0.14,
-        status: nProps.containerWidth*0.1,
-        startTime: nProps.containerWidth*0.15,
-        progress: nProps.containerWidth*0.12,
+        auditTypeValue: nProps.containerWidth*0.13,
+        status: nProps.containerWidth*0.08,
+        startTime: nProps.containerWidth*0.13,
+        progress: nProps.containerWidth*0.17,
         completedTime: nProps.containerWidth*0.15,
         actions: nProps.containerWidth*0.25
       }};
@@ -191,6 +193,32 @@ class AuditTable extends React.Component {
       });
     }
 
+    resolveAudit(columnKey,rowIndex,screenId) {
+        var auditId, auditType, displayId, auditLineId;
+        if(this.props.tableData.sortedDataList._data !== undefined) {
+          sortedIndex = this.props.tableData.sortedDataList._indexMap[rowIndex];
+          auditId = this.props.tableData.sortedDataList._data.newData[sortedIndex].id;
+          auditType = this.props.tableData.sortedDataList._data.newData[sortedIndex].auditTypeValue;
+          displayId = this.props.tableData.sortedDataList._data.newData[sortedIndex].display_id;
+        }
+        else {
+          auditType = this.props.items[rowIndex].auditTypeValue;
+          displayId = this.props.items[rowIndex].display_id;
+          auditId = this.props.items[rowIndex].id;
+        }
+    
+         modal.add(ResolveAudit, {
+        title: '',
+        size: 'large', // large, medium or small,
+        closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+        hideCloseButton: true,
+        auditId:auditId,
+        screenId:screenId,
+        auditType:auditType,
+        displayId:displayId
+      });
+    }
+
     manageAuditTask(rowIndex,option ){
       if(option.value === "duplicateTask"){
         var auditType, auditTypeValue, auditComplete,auditTypeParam,sortedIndex;
@@ -252,7 +280,6 @@ class AuditTable extends React.Component {
       var skuAudit = this.props.auditState.skuAudit;
       var totalProgress = this.props.auditState.totalProgress;
       var rowsCount = sortedDataList.getSize();
-      //console.log(rowsCount)
       var duplicateTask = <FormattedMessage id="audit.table.duplicateTask" description="duplicateTask option for audit" defaultMessage ="Duplicate task"/>; 
       var deleteRecord = <FormattedMessage id="audit.table.deleteRecord" description="deleteRecord option for audit" defaultMessage ="Delete record"/>; 
       const tasks = [
@@ -405,12 +432,12 @@ class AuditTable extends React.Component {
         <div className="gorToolHeaderSubText">
                 <FormattedMessage id="audit.Totalprogress" description='total progress for audit table' 
                 defaultMessage='{totalProgress}% Completed' 
-                values={{totalProgress: totalProgress?totalProgress:'0'}}/>
+                values={{totalProgress: totalProgress.toFixed(1)?totalProgress.toFixed(1):'0'}}/>
               </div>
         </div>
         </div>
       }
-      cell={<ProgressCell data={sortedDataList}  />}
+      cell={<ProgressCell data={sortedDataList} resolved="resolvedTask" unresolved="unresolvedTask" > </ProgressCell>}
       fixed={true}
       width={columnWidths.progress}
       isResizable={true}
@@ -451,6 +478,8 @@ class AuditTable extends React.Component {
       manageAuditTask={this.manageAuditTask.bind(this)} showBox="startAudit"
       
       placeholderText={this.context.intl.formatMessage(messages.auditPlaceholder)}
+      resolveflag="resolveAudit" resolveAudit={this.resolveAudit.bind(this)} 
+      checkIssues="viewIssues"
       />}
       width={columnWidths.actions}
 
@@ -470,14 +499,16 @@ class AuditTable extends React.Component {
 function mapStateToProps(state, ownProps){
 
   return {
-    tableData: state.currentTableState.currentTableState || [],
+    auth_token:state.authLogin.auth_token,
+    tableData: state.currentTableState.currentTableState || []
   };
 }
 
 
 var mapDispatchToProps = function(dispatch){
   return {
-    currentTableState: function(data){ dispatch(currentTableState(data)); }
+    currentTableState: function(data){ dispatch(currentTableState(data)); },
+    getAuditOrderLines: function(data){dispatch(getAuditOrderLines(data))}
   }
 };
 

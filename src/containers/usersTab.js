@@ -145,6 +145,7 @@ class UsersTab extends React.Component{
 
 
 function mapStateToProps(state, ownProps){
+  
   return {
     userFilter: state.sortHeaderState.userFilter|| "",
     userdetails: state.userDetails.userDetails || [],

@@ -10,8 +10,43 @@
     "defaultMessage": "Delete"
   },
   {
+    "id": "audit.resolveUnresolve",
+    "description": "resolveUnresolve issue for audit table",
+    "defaultMessage": "{resolvedCount} issues, {unresolvedCount} unresolved"
+  },
+  {
+    "id": "audit.resolveIssues",
+    "description": "resolve issue for audit table",
+    "defaultMessage": "{resolvedCount} issues"
+  },
+  {
+    "id": "audit.unresolveIssues",
+    "description": "unresolve issue for audit table",
+    "defaultMessage": "{unresolvedCount} unresolved issues"
+  },
+  {
+    "id": "commonDataTable.resolveAudit.approve",
+    "description": "resolve button",
+    "defaultMessage": "Approve"
+  },
+  {
+    "id": "commonDataTable.resolveAudit.reject",
+    "description": "resolve button",
+    "defaultMessage": "Reject"
+  },
+  {
     "id": "commonDataTable.startAudit.button",
-    "description": "edit button",
+    "description": "start button",
     "defaultMessage": "Start audit"
+  },
+  {
+    "id": "commonDataTable.resolveAudit.button",
+    "description": "resolve button",
+    "defaultMessage": "Resolve"
+  },
+  {
+    "id": "commonDataTable.viewIssues.button",
+    "description": "viewIssues button",
+    "defaultMessage": "View issues"
   }
 ]
