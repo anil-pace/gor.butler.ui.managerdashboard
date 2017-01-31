@@ -192,7 +192,7 @@
   {
     "id": "notify.start.audit.success",
     "description": "Text for successfull audit creation",
-    "defaultMessage": "Audit started successfully"
+    "defaultMessage": "PPS assigned succeddfully. Audit task started"
   },
   {
     "id": "notify.delete.audit.processed",

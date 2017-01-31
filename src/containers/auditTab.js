@@ -13,6 +13,7 @@ import {setAuditSpinner} from '../actions/auditActions';
 import { defineMessages } from 'react-intl';
 import {auditHeaderSortOrder, auditHeaderSort, auditFilterDetail} from '../actions/sortHeaderActions';
 import {getDaysDiff} from '../utilities/getDaysDiff';
+import {addDateOffSet} from '../utilities/processDate'; 
 import GorPaginate from '../components/gorPaginate/gorPaginate';
 //Mesages for internationalization
 const messages = defineMessages({
@@ -192,14 +193,12 @@ _processAuditData(data,nProps){
   return auditDetails;
 }
 handlePageClick(data){
-  var url, appendSortUrl = "",appendTextFilterUrl="";
+  var url, appendSortUrl = "",appendTextFilterUrl="", makeDate;
   var sortHead = {"startTime":"&order_by=start_actual_time", "completedTime":"&order_by=completion_time", "display_id":"&order_by=audit_id"};
   var sortOrder = {"DESC":"&order=asc", "ASC":"&order=desc"};
-  var makeDate = new Date();
+  var currentDate = new Date();
   this.setState({selected_page:data.selected});
-  makeDate.setDate(makeDate.getDate() - 30)
-  makeDate = makeDate.getFullYear()+'-'+makeDate.getMonth()+'-'+makeDate.getDate();  
-  
+  makeDate = addDateOffSet(currentDate,-30);
   if((data.captureValue || data.captureValue === "") && data.type === "searchOrder") {
       appendTextFilterUrl = FILTER_AUDIT_ID + data.captureValue;
   }
