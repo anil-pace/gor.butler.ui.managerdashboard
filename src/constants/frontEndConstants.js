@@ -309,10 +309,12 @@ export const LEGEND_ROUND= "ROUND";
 export const LEGEND_RECT= "RECTANGLE";
 export const LEGEND_DEFAULT = LEGEND_RECT;
 
-
-
 export const EN='en';
 export const JA='ja';
+export const ES='es'; 
+export const ZH='zh'; 
+export const DE='de'; 
+export const FR='fr'; 
 export const HR='h ';
 export const MM='m ';
 export const SS='s ';

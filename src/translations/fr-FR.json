@@ -2,17 +2,17 @@
  {
    "id": "commonDataTable.edit.button",
    "description": "edit button",
-   "defaultMessage": "編集"
+   "defaultMessage": "Modifier"
  },
  {
    "id": "commonDataTable.Delete.button",
    "description": "Delete button",
-   "defaultMessage": "削除"
+   "defaultMessage": "Supprimer"
  },
  {
    "id": "commonDataTable.startAudit.button",
    "description": "edit button",
-   "defaultMessage": "編集"
+   "defaultMessage": "Lancer la vérification"
  },
  {
    "id": "footer.description",
@@ -22,457 +22,457 @@
  {
    "id": "snapshot.inventory.usedSpace",
    "description": "Text for used space",
-   "defaultMessage": "{utilisedSpace}% スペース使用"
+   "defaultMessage": "{UtilisedSpace}% espace utilisé"
  },
  {
    "id": "header.description",
    "description": "Header description",
-   "defaultMessage": "バトラー・マネージメント・システム"
+   "defaultMessage": "Système de gestion Butler"
  },
  {
    "id": "header.start_time",
    "description": "Start time",
-   "defaultMessage": "開始時刻:{time}"
+   "defaultMessage": "Heure de début :{heure}"
  },
  {
    "id": "header.logout",
    "description": "Text for logout",
-   "defaultMessage": "ログアウト"
+   "defaultMessage": "Se déconnecter"
  },
  {
    "id": "healthTab.status.on",
    "description": "on status for healthtab",
-   "defaultMessage": "オン"
+   "defaultMessage": "Allumé"
  },
  {
    "id": "healthTab.status.off",
    "description": "off status for healthtab",
-   "defaultMessage": "オフ"
+   "defaultMessage": "Éteint"
  },
  {
    "id": "inventory.histogram.legend",
    "description": "Inventory Histogram Legend",
-   "defaultMessage": "在庫商品"
+   "defaultMessage": "Articles Stockés"
  },
  {
    "id": "inventory.linechart.legendPicked",
    "description": "Inventory Linechart Legend for picked",
-   "defaultMessage": "ピック済商品"
+   "defaultMessage": "Articles Ramassés"
  },
  {
    "id": "inventory.linechart.legendPut",
    "description": "Inventory Linechart Legend for put",
-   "defaultMessage": "入荷済商品"
+   "defaultMessage": "Articles Placés"
  },
  {
    "id": "inventory.header",
    "description": "Inventory Header Message",
-   "defaultMessage": "在庫"
+   "defaultMessage": "Inventaire"
  },
  {
    "id": "itemTable.categoryType.category",
    "description": "Category Name",
-   "defaultMessage": "カテゴリ"
+   "defaultMessage": "Catégorie"
  },
  {
    "id": "itemTable.cbmUsed.cbm",
    "description": "CBM Used field",
-   "defaultMessage": "使用されたCBM"
+   "defaultMessage": "CBM utilisé"
  },
  {
    "id": "itemTable.daysInHand.count",
    "description": "Days in Hand",
-   "defaultMessage": "期日"
+   "defaultMessage": "Jours Encaissés"
  },
  {
    "id": "inventory.linechart.toolTipPut",
    "description": "Text for put in tooltip",
-   "defaultMessage": "入荷"
+   "defaultMessage": "Placer"
  },
  {
    "id": "inventory.linechart.toolTipPick",
    "description": "Text for pick in tooltip",
-   "defaultMessage": "ピック"
+   "defaultMessage": "Ramasser"
  },
  {
    "id": "inventory.linechart.noDataText",
    "description": "",
-   "defaultMessage": "商品移動なし"
+   "defaultMessage": "Pas de mouvement d'article"
  },
  {
    "id": "inventory.linechart.today",
    "description": "Text to show today",
-   "defaultMessage": "本日の在庫"
+   "defaultMessage": "Du Jour"
  },
  {
    "id": "inventory.snaphot.date",
    "description": "Snapshot date string",
-   "defaultMessage": "本日の在庫"
+   "defaultMessage": "Du Jour"
  },
  {
    "id": "inventory.snaphot.openingStock",
    "description": "Snapshot table header",
-   "defaultMessage": "期初在庫"
+   "defaultMessage": "Stock Initial"
  },
  {
    "id": "inventory.snaphot.closingStock",
    "description": "Snapshot table header",
-   "defaultMessage": "期初在庫"
+   "defaultMessage": "Stock final"
  },
  {
    "id": "inventory.snaphot.header",
    "description": "Snapshot header",
-   "defaultMessage": "在庫スナップショット"
+   "defaultMessage": "capture d'écran du stock"
  },
  {
    "id": "inventory.snaphot.itemsPut",
    "description": "Snapshot table header",
-   "defaultMessage": "期初在庫"
+   "defaultMessage": "Articles Placés"
  },
  {
    "id": "inventory.snaphot.itemsPick",
    "description": "Snapshot table header",
-   "defaultMessage": "期初在庫"
+   "defaultMessage": "Articles à choisir"
  },
  {
    "id": "inventory.snaphot.currentStock",
    "description": "Snapshot table header",
-   "defaultMessage": "期初在庫"
+   "defaultMessage": "Stock actuel"
  },
  {
    "id": "inventory.snaphot.sku",
    "description": "Snapshot table header",
-   "defaultMessage": "期初在庫"
+   "defaultMessage": "SKU"
  },
  {
    "id": "inventory.snaphot.cbmUsed",
    "description": "Snapshot table header",
-   "defaultMessage": "期初在庫"
+   "defaultMessage": "CBM utilisé"
  },
  {
    "id": "login.butler.language",
    "description": "Text for language",
-   "defaultMessage": "言語"
+   "defaultMessage": "Langue"
  },
  {
    "id": "login.butler.title",
    "description": "Text for butler management Login form title",
-   "defaultMessage": "バトラー"
+   "defaultMessage": "Butler"
  },
  {
    "id": "login.butler.trademark",
    "description": "Trademark",
-   "defaultMessage": "TM"
+   "defaultMessage": "MD"
  },
  {
    "id": "login.butler.manageInterface",
    "description": "Text for Management Interface",
-   "defaultMessage": "マネージメント・インターフェース"
+   "defaultMessage": "Interface de gestion"
  },
  {
    "id": "login.butler.fail",
    "description": "Text for login failure",
-   "defaultMessage": "無効のユーザ名またはパスワード。"
+   "defaultMessage": "Nom d'utilisateur ou mot de passe incorrect. Veuillez réessayer"
  },
  {
    "id": "login.butler.connection.fail",
    "description": "Text for connection failure",
-   "defaultMessage": "接続失敗"
+   "defaultMessage": "Échec de connexion"
  },
  {
    "id": "login.butler.error.username",
    "description": "Text for missing username error",
-   "defaultMessage": "ユーザ名を入れてください。"
+   "defaultMessage": "Veuillez saisir votre identifiant"
  },
  {
    "id": "login.butler.error.password",
    "description": "Text for missing password error",
-   "defaultMessage": "パスワードを入れてください。"
+   "defaultMessage": "Veuillez saisir votre mot de passe"
  },
  {
    "id": "login.form.username",
    "description": "Placeholder text for username",
-   "defaultMessage": "ユーザ名"
+   "defaultMessage": "Nom d'utilisateur"
  },
  {
    "id": "login.form.password",
    "description": "Placeholder text for password",
-   "defaultMessage": "パスワード"
+   "defaultMessage": "Mot de Passe"
  },
  {
    "id": "login.form.button",
    "description": "Text for button",
-   "defaultMessage": "ログイン"
+   "defaultMessage": "Connexion"
  },
  {
    "id": "OrderSubTab.waves",
    "description": "waves tab for OrderSubTab",
-   "defaultMessage": "ウェーブ"
+   "defaultMessage": "Ondes"
  },
  {
    "id": "OrderSubTab.orderlist",
    "description": "orderlist tab for OrderSubTab",
-   "defaultMessage": "注文リスト"
+   "defaultMessage": "Liste des commandes"
  },
  {
    "id": "butlerBot.tab.heading",
    "description": "butler bot tab",
-   "defaultMessage": "バトラー・ボット"
+   "defaultMessage": "Bots Butler"
  },
  {
    "id": "pps.tab.heading",
    "description": "pps tab",
-   "defaultMessage": "ピック入荷ステーション"
+   "defaultMessage": "Station de câblage"
  },
  {
    "id": "chargingstation.tab.heading",
    "description": "charging station tab",
-   "defaultMessage": "充電所"
+   "defaultMessage": "Station de recharge"
  },
  {
    "id": "stringConfig.on",
    "description": "Text to display on",
-   "defaultMessage": "オン"
+   "defaultMessage": "Allumé"
  },
  {
    "id": "stringConfig.off",
    "description": "Text to show off",
-   "defaultMessage": "オフ"
+   "defaultMessage": "Éteint"
  },
  {
    "id": "stringConfig.per_hour",
    "description": "Text to show per_hour",
-   "defaultMessage": "1時間当たり"
+   "defaultMessage": "par_heure"
  },
  {
    "id": "stringConfig.pick",
    "description": "Text to show pick",
-   "defaultMessage": "ピック"
+   "defaultMessage": "Ramasser"
  },
  {
    "id": "stringConfig.put",
    "description": "Text to show put",
-   "defaultMessage": "入荷"
+   "defaultMessage": "Placer"
  },
  {
    "id": "stringConfig.audit",
    "description": "Text to show audit",
-   "defaultMessage": "棚卸"
+   "defaultMessage": "vérifier"
  },
  {
    "id": "stringConfig.soft",
    "description": "Text to show soft",
-   "defaultMessage": "ソフト"
+   "defaultMessage": "soft"
  },
  {
    "id": "stringConfig.hard",
    "description": "Text to show hard",
-   "defaultMessage": "ハード"
+   "defaultMessage": "hard"
  },
  {
    "id": "stringConfig.soft_manual",
    "description": "Text to show soft_manual",
-   "defaultMessage": "ソフトマニュアル"
+   "defaultMessage": "soft_manuel"
  },
  {
    "id": "stringConfig.pending",
    "description": "Text to show pending",
-   "defaultMessage": "処理中"
+   "defaultMessage": "En cours"
  },
  {
    "id": "stringConfig.disconnected",
    "description": "Text to show disconnected",
-   "defaultMessage": "切断"
+   "defaultMessage": "Déconnecté"
  },
  {
    "id": "stringConfig.connected",
    "description": "Text to show connected",
-   "defaultMessage": "接続"
+   "defaultMessage": "Connecté"
  },
  {
    "id": "stringConfig.completed",
    "description": "Text to show completed",
-   "defaultMessage": "完了"
+   "defaultMessage": "Terminé"
  },
  {
    "id": "stringConfig.Completed",
    "description": "Text to show Completed",
-   "defaultMessage": "完了"
+   "defaultMessage": "Terminé"
  },
  {
    "id": "stringConfig.in_progress",
    "description": "Text to show In Progress",
-   "defaultMessage": "処理中"
+   "defaultMessage": "En cours"
  },
  {
    "id": "stringConfig.breached",
    "description": "Text to show breached",
-   "defaultMessage": "破壊"
+   "defaultMessage": "Défaillance"
  },
  {
    "id": "stringConfig.fulfillable",
    "description": "Text to show fulfillable",
-   "defaultMessage": "処理中"
+   "defaultMessage": "En cours"
  },
  {
    "id": "stringConfig.abandoned",
    "description": "Text to show abandoned",
-   "defaultMessage": "放棄"
+   "defaultMessage": "Abandonné"
  },
  {
    "id": "stringConfig.manual",
    "description": "Text to show manual",
-   "defaultMessage": "マニュアル"
+   "defaultMessage": "Manuel"
  },
  {
    "id": "stringConfig.auto",
    "description": "Text to show auto",
-   "defaultMessage": "オート"
+   "defaultMessage": "Automatique"
  },
  {
    "id": "stringConfig.notFulfillable",
    "description": "Text to show In progress",
-   "defaultMessage": "処理中"
+   "defaultMessage": "Non réalisable"
  },
  {
    "id": "stringConfig.exception",
    "description": "Text to show exception",
-   "defaultMessage": "例外"
+   "defaultMessage": "Exception"
  },
  {
    "id": "stringConfig.online",
    "description": "Text to show Online",
-   "defaultMessage": "オンライン"
+   "defaultMessage": "en ligne"
  },
  {
    "id": "stringConfig.offline",
    "description": "Text to show Offline",
-   "defaultMessage": "オフライン"
+   "defaultMessage": "hors ligne"
  },
  {
    "id": "stringConfig.received",
    "description": "Text to show received",
-   "defaultMessage": "処理中"
+   "defaultMessage": "En cours"
  },
  {
    "id": "stringConfig.cancelled",
    "description": "Text to show cancelled",
-   "defaultMessage": "キャンセル"
+   "defaultMessage": "Annulé"
  },
  {
    "id": "stringConfig.butler_supervisor",
    "description": "Text to show Manager",
-   "defaultMessage": "マネージャー"
+   "defaultMessage": "Gestionnaire"
  },
  {
    "id": "stringConfig.butler_ui",
    "description": "Text to show Operator",
-   "defaultMessage": "オペレーター"
+   "defaultMessage": "Opérateur"
  },
  {
    "id": "login.lang.english",
    "description": "English option in the language drop down",
-   "defaultMessage": "英語"
+   "defaultMessage": "English (United States)"
  },
  {
    "id": "login.lang.japanese",
    "description": "Japanese option in the language drop down",
-   "defaultMessage": "English (United States)"
+   "defaultMessage": "日本語"
  },
  {
    "id": "login.autologout.message",
    "description": "Auto logout message",
-   "defaultMessage": "セッションが切断されたため、ログアウトされました。"
+   "defaultMessage": "Comme la session a expiré, la déconnexion automatique a été déclenchée !"
  },
  {
    "id": "notify.success.edit",
    "description": "Text for successfully editing user",
-   "defaultMessage": "ユーザ詳細は正常に更新されました"
+   "defaultMessage": "Les informations de l'utilisateur ont été mises à jour avec succès"
  },
  {
    "id": "ppsDetail.modeChange.success",
    "description": "Success Message for PPS mode",
-   "defaultMessage": "PPSモード変更要求が処理されました"
+   "defaultMessage": "Demande de Changement vers le Mode PPS traitée"
  },
  {
    "id": "ppsDetail.modeChange.isAlreadyRequested",
    "description": "PPS is already in requested mode",
-   "defaultMessage": "PPSは既に要求モードです"
+   "defaultMessage": "Le PPS est déjà en mode demandé"
  },
  {
    "id": "ppsDetail.modeChange.tryLater",
    "description": "Previous Change request is pending",
-   "defaultMessage": "変更モードの前回要求が保留中のため、後で実施してください。"
+   "defaultMessage": "La demande précédente de changement de mode est déjà en attente. Veuillez essayer plus tard !"
  },
  {
    "id": "notify.error.usernameExists",
    "description": "Text for already registered username",
-   "defaultMessage": "本ユーザIDで既にアカウントが作成されています"
+   "defaultMessage": "Un compte a déjà été créé avec cet ID utilisateur"
  },
  {
    "id": "notify.error.passwordMissing",
    "description": "Text for passwords missing",
-   "defaultMessage": "パスワードを入力してください！"
+   "defaultMessage": "Aucun mot de passe n'a été renseigné !"
  },
  {
    "id": "notify.error.passwordMatch",
    "description": "Text for passwords not matching",
-   "defaultMessage": "パスワードが一致しません！"
+   "defaultMessage": "Les mots de passe ne correspondent pas !"
  },
  {
    "id": "notify.error.username",
    "description": "Text for missing username",
-   "defaultMessage": "ユーザ名は必須項目です！"
+   "defaultMessage": "Le nom d'utilisateur est un champ requis !"
  },
  {
    "id": "notify.error.role",
    "description": "Text for missing roles",
-   "defaultMessage": "役割は必須項目です！"
+   "defaultMessage": "Le rôle est un champ requis !"
  },
  {
    "id": "appInfo.success",
    "description": "Text for success",
-   "defaultMessage": "成功"
+   "defaultMessage": "Réussi"
  },
  {
    "id": "user.invalid.id",
    "description": "Text for invalid user ID",
-   "defaultMessage": "有効なユーザIDを入力してください"
+   "defaultMessage": "Veuillez saisir un ID d'utilisateur valide"
  },
  {
    "id": "user.invalid.format",
    "description": "Text for invalid user ID format",
-   "defaultMessage": "半角英数小文字とピリオドのみ使用してください"
+   "defaultMessage": "Veuillez utiliser uniquement des lettres (a-z), des chiffres et des points"
  },
  {
    "id": "login.empty.password",
    "description": "Text for empty password",
-   "defaultMessage": "パスワードを入力してください"
+   "defaultMessage": "Veuillez saisir un mot de passe"
  },
  {
    "id": "user.empty.name",
    "description": "Text for empty user name",
-   "defaultMessage": "ユーザ名を入力してください"
+   "defaultMessage": "Veuillez saisir un nom d'utilisateur"
  },
  {
    "id": "user.invalid.name",
    "description": "Text for invalid user name",
-   "defaultMessage": "「~」、「@」、「%」などの特殊文字は許可されません"
+   "defaultMessage": "Les caractères spéciaux comme « ~ », « @ » et « % »ne sont pas acceptés"
  },
  {
    "id": "user.invalid.password.operator",
    "description": "Text for invalid password for operator",
-   "defaultMessage": "パスワードは6文字以上の英数字で入力してください"
+   "defaultMessage": "Veuillez saisir un mot de passe de 6 caractères alphanumériques au moins"
  },
  {
    "id": "user.invalid.password.manager",
    "description": "Text for invalid password for manager",
-   "defaultMessage": "パスワードは8文字以上の英数字で入力してください"
+   "defaultMessage": "Veuillez saisir un mot de passe de 8 caractères alphanumériques au moins"
  },
  {
    "id": "user.match.password",
    "description": "Text for passwords not matching",
-   "defaultMessage": "パスワードが一致しません！"
+   "defaultMessage": "Les deux mot de passe saisis ne correspondent pas. Veuillez réessayer"
  },
  {
    "id": "msu.name.prefix",
@@ -492,192 +492,192 @@
  {
    "id": "audit.invalid.sku",
    "description": "Text for invalid SKU ID",
-   "defaultMessage": "有効なSKU番号を入力してください"
+   "defaultMessage": "Veuillez saisir un numéro SKU"
  },
  {
    "id": "audit.invalid.location",
    "description": "Text for invalid location ID",
-   "defaultMessage": "有効なロケーション番号を入力してください"
+   "defaultMessage": "Veuillez saisir un numéro d'emplacement valide"
  },
  {
    "id": "notify.error.audit.location",
    "description": "Text for invalid location",
-   "defaultMessage": "ロケーションは存在しません"
+   "defaultMessage": "L'emplacement n'existe pas"
  },
  {
    "id": "notify.error.audit.sku",
    "description": "Text for invalid sku",
-   "defaultMessage": "SKUは存在しません"
+   "defaultMessage": "SKU n'existe pas"
  },
  {
    "id": "notify.error.audit.g016",
    "description": "Text for unsuccessful audit deletion",
-   "defaultMessage": "定められた棚卸は存在しません"
+   "defaultMessage": "La vérification donnée n'existe pas"
  },
  {
    "id": "notify.error.audit.AE001",
    "description": "Text for invalid audit ID",
-   "defaultMessage": "棚卸IDは存在しません"
+   "defaultMessage": "L'Id de la vérification n'existe pas"
  },
  {
    "id": "notify.error.audit.AE002",
    "description": "Text for invalid PPS",
-   "defaultMessage": "棚卸用の有効なPPSは見つかりません"
+   "defaultMessage": "Aucun PPS valide n'a été trouvé pour la vérification"
  },
  {
    "id": "notify.error.audit.AE004",
    "description": "Text for already processed location",
-   "defaultMessage": "ロケーションの棚卸は処理中です"
+   "defaultMessage": "La vérification de l'emplacement était déjà en cours"
  },
  {
    "id": "notify.error.audit.AE005",
    "description": "Text for already processed sku",
-   "defaultMessage": "skuの棚卸は処理中です"
+   "defaultMessage": "La vérification du sku est déjà en cours"
  },
  {
    "id": "notify.error.audit.AE006",
    "description": "Text for already processed audit",
-   "defaultMessage": "既に処理された棚卸ID"
+   "defaultMessage": "L'ID de la vérification est déjà traité"
  },
  {
    "id": "notify.create.audit.success",
    "description": "Text for successfull audit creation",
-   "defaultMessage": "新棚卸タスクが作成されました"
+   "defaultMessage": "Nouvelle tâche de vérification créée avec succès"
  },
  {
    "id": "notify.start.audit.success",
    "description": "Text for successfull audit creation",
-   "defaultMessage": "新棚卸タスクが作成されました"
+   "defaultMessage": "La vérification a démarré avec succès"
  },
  {
    "id": "notify.delete.audit.processed",
    "description": "Text for already processed audit",
-   "defaultMessage": "既に処理された棚卸ID"
+   "defaultMessage": "La vérification est déjà traitée. Impossible de supprimer"
  },
  {
    "id": "notify.error.user.fail",
    "description": "Text for error in updating user",
-   "defaultMessage": "更新中のユーザにエラーが発生しました"
+   "defaultMessage": "Erreur dans la mise à jour de l'utilisateur"
  },
  {
    "id": "notify.error.user.response",
    "description": "Text for error in response",
-   "defaultMessage": "応答にエラーが発生しました"
+   "defaultMessage": "Erreur dans la réponse"
  },
  {
    "id": "notify.error.audit.create",
    "description": "Text for error in creating audit",
-   "defaultMessage": "棚卸作成にエラーが発生しました"
+   "defaultMessage": "Erreur dans la création de la vérification"
  },
  {
    "id": "notify.error.api",
    "description": "Text for unregistered API response",
-   "defaultMessage": "APIの応答が登録されていません"
+   "defaultMessage": "La réponse de l'API n'est pas enregistrée"
  },
  {
    "id": "notify.error.connection",
    "description": "Text for connection refused",
-   "defaultMessage": "ネットワーク失敗"
+   "defaultMessage": "Problème de réseau"
  },
  {
    "id": "notify.error.400",
    "description": "Text for bad request",
-   "defaultMessage": "ネットワークエラー：400 Bad Request"
+   "defaultMessage": "Erreur réseau : 400 Demande erronée"
  },
  {
    "id": "notify.error.401",
    "description": "Text for Unauthorizedun",
-   "defaultMessage": "ネットワークエラー：401 Unauthorized"
+   "defaultMessage": "Erreur réseau : 401 Non autorisé"
  },
  {
    "id": "notify.error.403",
    "description": "Text for Forbidden",
-   "defaultMessage": "ネットワークエラー：403 Forbidden"
+   "defaultMessage": "Erreur réseau : 403 Interdit"
  },
  {
    "id": "notify.error.405",
    "description": "Text for method not allowed",
-   "defaultMessage": "ネットワークエラー：405 Method Not Allowed"
+   "defaultMessage": "Erreur réseau : 405 Méthode non autorisée"
  },
  {
    "id": "notify.error.408",
    "description": "Text for request timeout",
-   "defaultMessage": "ネットワークエラー：408 Request Time-out"
+   "defaultMessage": "Erreur réseau : 408 Temps de traitement de la demande dépassé"
  },
  {
    "id": "notify.error.409",
    "description": "Text for conflict",
-   "defaultMessage": "ネットワークエラー：409 Conflict"
+   "defaultMessage": "Erreur réseau : 409 Conflit"
  },
  {
    "id": "notify.error.500",
    "description": "Text for internal server error",
-   "defaultMessage": "ネットワークエラー：500 Internal Servor Error"
+   "defaultMessage": "Erreur réseau : 500 Erreur interne du serveur"
  },
  {
    "id": "notify.error.502",
    "description": "Text for bad gateway",
-   "defaultMessage": "ネットワークエラー：502 Bad Gateway"
+   "defaultMessage": "Erreur réseau : 502 Mauvaise passerelle"
  },
  {
    "id": "inventory.histogram.noDataText",
    "description": "Inventory Histogram No Data Text",
-   "defaultMessage": "在庫がありません"
+   "defaultMessage": "Aucun stock trouvé"
  },
  {
    "id": "users.add.password.subheading.manager",
    "description": "Subheading for create password",
-   "defaultMessage": "マネージメント・インターフェイスとオペレーター・インターフェイスにログインするには、最低8文字の英数字のパスワードが必要です"
+   "defaultMessage": "Un mot de passe d'au moins 8 caractères alphanumériques sera nécessaire pour se connecter à l'interface de gestion et à l'interface opérateur"
  },
  {
    "id": "users.add.password.subheading.operator",
    "description": "Subheading for create password operator",
-   "defaultMessage": "オペレーター・インターフェースにログインするには、6桁のパスワードが必要です。"
+   "defaultMessage": "Un mot de passe de 6 chiffres sera nécessaire pour se connecter à l'interface opérateur."
  },
  {
    "id": "widget.audit.heading.value",
    "description": "Total Items Audited",
-   "defaultMessage": "なし"
+   "defaultMessage": "Aucun(e)"
  },
  {
    "id": "widget.audit.status.idle",
    "description": "Audit PPS idle message",
-   "defaultMessage": "{count} アイドル PPS (棚卸モード)"
+   "defaultMessage": "{count} PPS (mode Vérification) inactif"
  },
  {
    "id": "widget.audit.throughput",
    "description": "Throughput message",
-   "defaultMessage": "{pps_count} PPS 棚卸 {throughput} 商品/時間"
+   "defaultMessage": "{pps_count} PPS vérification {throughout} articles/h"
  },
  {
    "id": "widget.audit.offline",
    "description": "Message for system offline",
-   "defaultMessage": "オフライン"
+   "defaultMessage": "hors ligne"
  },
  {
    "id": "widget.audit.heading",
    "description": "Audit Item Heading",
-   "defaultMessage": "棚卸済商品"
+   "defaultMessage": "Éléments vérifiés"
  },
  {
    "id": "auditdetail.created.status",
    "description": "",
-   "defaultMessage": "作成済み"
+   "defaultMessage": "Créé"
  },
  {
    "id": "auditdetail.pending.status",
    "description": "",
-   "defaultMessage": "処理中"
+   "defaultMessage": "En cours"
  },
  {
    "id": "auditdetail.progress.status",
    "description": "",
-   "defaultMessage": "処理中"
+   "defaultMessage": "En cours"
  },
  {
    "id": "auditdetail.completed.status",
    "description": "",
-   "defaultMessage": "完了"
+   "defaultMessage": "Terminé"
  },
  {
    "id": "auditdetail.sku.prefix",
@@ -687,187 +687,187 @@
  {
    "id": "auditdetail.location.prefix",
    "description": "",
-   "defaultMessage": "ロケーション"
+   "defaultMessage": "Emplacement"
  },
  {
    "id": "audit.table.duplicateTask",
    "description": "duplicateTask option for audit",
-   "defaultMessage": "重複タスク"
+   "defaultMessage": "Tâche dupliquée"
  },
  {
    "id": "audit.table.deleteRecord",
    "description": "deleteRecord option for audit",
-   "defaultMessage": "レコードを削除"
+   "defaultMessage": "Supprimer le registre"
  },
  {
    "id": "audit.table.noData",
    "description": "No data message for audit table",
-   "defaultMessage": "棚卸用のタスクは見つかりません"
+   "defaultMessage": "Aucune tâche de vérification n'a été trouvée"
  },
  {
    "id": "audit.table.heading",
    "description": "Heading for audit table",
-   "defaultMessage": "棚卸用のタスク"
+   "defaultMessage": "Tâches de vérification"
  },
  {
    "id": "audit.table.buttonLable",
    "description": "button label for audit create",
-   "defaultMessage": "新タスクを作成"
+   "defaultMessage": "Créer une nouvelle tâche"
  },
  {
    "id": "auditTable.stationID.heading",
    "description": "Heading for audit ID for auditTable",
-   "defaultMessage": "棚卸ID"
+   "defaultMessage": "ID de la vérification"
  },
  {
    "id": "auditTable.SubAuditID",
    "description": "total Sub auditID for auditTable",
-   "defaultMessage": "合計:{rowsCount}"
+   "defaultMessage": "Total :{rowsCount}"
  },
  {
    "id": "audit.table.type",
    "description": "audit type for audit table",
-   "defaultMessage": "棚卸の種類"
+   "defaultMessage": "TYPE DE VÉRIFICATION"
  },
  {
    "id": "audit.table.STATUS",
    "description": "STATUS for audit",
-   "defaultMessage": "状態"
+   "defaultMessage": "STATUT"
  },
  {
    "id": "audit.table.startTime",
    "description": "startTime for audit",
-   "defaultMessage": "開始時刻"
+   "defaultMessage": "HEURE DE DÉMARRAGE"
  },
  {
    "id": "audit.table.progress",
    "description": "progress for audit task",
-   "defaultMessage": "処理中(%)"
+   "defaultMessage": "PROGRESSION (%)"
  },
  {
    "id": "audit.table.timeCompleted",
    "description": "timeCompleted for audit",
-   "defaultMessage": "完了時刻"
+   "defaultMessage": "HEURE DE FIN"
  },
  {
    "id": "audit.table.action",
    "description": "action Column",
-   "defaultMessage": "アクション"
+   "defaultMessage": "ACTIONS"
  },
  {
    "id": "audit.add.heading",
    "description": "Heading for add audit",
-   "defaultMessage": "新棚卸タスクを作成"
+   "defaultMessage": "Créer une nouvelle tâche de vérification"
  },
  {
    "id": "audit.add.subheading",
    "description": "Subheading for add audit",
-   "defaultMessage": "新棚卸タスクを作成するには以下の詳細を選択または入力してください"
+   "defaultMessage": "Sélectionnez et saisissez vos informations ci-dessous pour créer une nouvelle tâche de vérification"
  },
  {
    "id": "audit.add.auditdetails.heading",
    "description": "Text for audit details heading",
-   "defaultMessage": "棚卸タスクの種類を選択してください"
+   "defaultMessage": "Sélectionnez le type de tâche de vérification"
  },
  {
    "id": "audit.add.auditdetails.subheading",
    "description": "Text for audit details subheading",
-   "defaultMessage": "棚卸種類を選択して詳細を入力してください"
+   "defaultMessage": "Sélectionnez le type de vérification et saisissez les informations qui conviennent"
  },
  {
    "id": "audit.add.auditdetails.fields",
    "description": "Text for field information",
-   "defaultMessage": "全項目は必須項目です"
+   "defaultMessage": "Tous les champs sont obligatoires"
  },
  {
    "id": "audit.add.type.heading",
    "description": "Text for Audit type",
-   "defaultMessage": "棚卸の種類"
+   "defaultMessage": "TYPE DE VÉRIFICATION"
  },
  {
    "id": "audit.add.typedetails.sku",
    "description": "Text for sku",
-   "defaultMessage": "SKUコードで棚卸"
+   "defaultMessage": "Vérifier par code SKU"
  },
  {
    "id": "audit.add.typedetails.skutext",
    "description": "Subtext for sku",
-   "defaultMessage": "商品のSKUコードに基づいて棚卸タスクを作成してください"
+   "defaultMessage": "Créer une tâche de vérification sur la base du code SKU d'un élément"
  },
  {
    "id": "audit.add.typedetails.location",
    "description": "Text for location",
-   "defaultMessage": "ロケーションコードで棚卸"
+   "defaultMessage": "Vérification par code de localisation"
  },
  {
    "id": "audit.add.typedetails.locationtext",
    "description": "Subtext for manager",
-   "defaultMessage": "MSUのロケーションに基づいて棚卸タスクを作成してください"
+   "defaultMessage": "Créer une tâche de vérification basée sur la localisation d'un MSU"
  },
  {
    "id": "audit.add.sku.heading",
    "description": "Text for SKU heading",
-   "defaultMessage": "SKUコードを入力してください"
+   "defaultMessage": "Saisissez le code SKU"
  },
  {
    "id": "audit.add.sku.subheading",
    "description": "Subtext for enter sku",
-   "defaultMessage": "棚卸対象の商品のSKUコードを英数字で入力してください"
+   "defaultMessage": "Saisissez le code SKU alphanumérique de l'élément à vérifier"
  },
  {
    "id": "audit.add.location.heading",
    "description": "Text for location heading",
-   "defaultMessage": "ロケーションを入力してください"
+   "defaultMessage": "Saisissez une localisation"
  },
  {
    "id": "audit.add.location.subheading",
    "description": "Subtext for enter location",
-   "defaultMessage": "形式： (XXX.X.X.XX)"
+   "defaultMessage": "Format : (XXX.X.X.XX)"
  },
  {
    "id": "audit.add.tips.heading",
    "description": "Text for tips heading",
-   "defaultMessage": "ヒント："
+   "defaultMessage": "Astuces :"
  },
  {
    "id": "audit.add.tips.subheading",
    "description": "Subtext for tips",
-   "defaultMessage": "棚卸タスクが作成された後、棚卸リストの「Assign PPS」ボタンをクリックして棚卸タスクを開始してください。"
+   "defaultMessage": "Une fois qu'une mission de vérification a été créée, veuillez cliquer sur le bouton « Attribuer PPS » dans la liste de vérification pour démarrer la tâche de vérification."
  },
  {
    "id": "audits.add.password.button",
    "description": "Text for add audit button",
-   "defaultMessage": "棚卸を作成してください"
+   "defaultMessage": "Créer vérification"
  },
  {
    "id": "audit.delete.heading",
    "description": "Text for audit delete heading",
-   "defaultMessage": "棚卸タスク{task_name}を削除してもよろしいですか？"
+   "defaultMessage": "Êtes-vous sûr de vouloir supprimer la tâche de vérification {task_name} ?"
  },
  {
    "id": "audit.duplicate.heading",
    "description": "Text for audit duplicate heading",
-   "defaultMessage": "棚卸タスク{task_name}を複製してもよろしいですか？"
+   "defaultMessage": "Êtes-vous sûr de vouloir dupliquer la tâche de vérification {task_name} ?"
  },
  {
    "id": "audit.start.auditdetails.subheading2",
    "description": "Text for audit details subheading when no pps",
-   "defaultMessage": "現在、棚卸モードにはPPSはありません。"
+   "defaultMessage": "Il n'y a aucun PPS en mode vérification actuellement."
  },
  {
    "id": "audit.start.auditdetails.please",
    "description": "Text for please",
-   "defaultMessage": "お願いします"
+   "defaultMessage": "Veuillez"
  },
  {
    "id": "audit.start.auditdetails.hyperlink",
    "description": "Text for hyperlink",
-   "defaultMessage": "PPSモードに遷移してください"
+   "defaultMessage": "passer en mode PPS"
  },
  {
    "id": "audit.start.auditdetails.operations",
    "description": "Text change operation",
-   "defaultMessage": "PPSの操作を変更してください。"
+   "defaultMessage": "Pour modifier les opérations de PPS."
  },
  {
    "id": "audit.start.ppscheckbox",
@@ -877,472 +877,472 @@
  {
    "id": "audit.start.heading",
    "description": "Heading for start audit",
-   "defaultMessage": "棚卸タスクを開始してください"
+   "defaultMessage": "Démarrer la tâche de vérification"
  },
  {
    "id": "audit.start.subheading",
    "description": "Subheading for start audit",
-   "defaultMessage": "1つ以上のPPSを割り当てて、棚卸タスクを開始してください"
+   "defaultMessage": "Attribuer un ou plusieurs PPS et démarrer la tâche de vérification"
  },
  {
    "id": "audit.start.auditdetails.heading",
    "description": "Text for audit details heading",
-   "defaultMessage": "棚卸タスクの種類を選択してください"
+   "defaultMessage": "Attribuer PPS pour {task}"
  },
  {
    "id": "audit.start.auditdetails.subheading1",
    "description": "Text for audit details subheading when pps present",
-   "defaultMessage": "以下のすべてのPPSは現在棚卸モードになっています。"
+   "defaultMessage": "Tous les PPS ci-dessous sont actuellement en mode vérification."
  },
  {
    "id": "audit.start.button",
    "description": "Text for start audit button",
-   "defaultMessage": "タスクを開始してください"
+   "defaultMessage": "Démarrer la tâche maintenant"
  },
  {
    "id": "audit.back.button",
    "description": "Text for go back button",
-   "defaultMessage": "戻る"
+   "defaultMessage": "Retour"
  },
  {
    "id": "audit.add.heading",
    "description": "Heading for add audit",
-   "defaultMessage": "新棚卸タスクを作成"
+   "defaultMessage": "Créer une nouvelle tâche de vérification"
  },
  {
    "id": "audit.add.subheading",
    "description": "Subheading for add audit",
-   "defaultMessage": "新棚卸タスクを作成するには以下の詳細を選択または入力してください"
+   "defaultMessage": "Sélectionnez et saisissez vos informations ci-dessous pour créer une nouvelle tâche de vérification"
  },
  {
    "id": "audit.add.auditdetails.heading",
    "description": "Text for audit details heading",
-   "defaultMessage": "棚卸タスクの種類を選択してください"
+   "defaultMessage": "Sélectionnez le type de tâche de vérification"
  },
  {
    "id": "audit.add.auditdetails.subheading",
    "description": "Text for audit details subheading",
-   "defaultMessage": "棚卸種類を選択して詳細を入力してください"
+   "defaultMessage": "Sélectionnez le type de vérification et saisissez les informations qui conviennent"
  },
  {
    "id": "audit.add.auditdetails.fields",
    "description": "Text for field information",
-   "defaultMessage": "全項目は必須項目です"
+   "defaultMessage": "Tous les champs sont obligatoires"
  },
  {
    "id": "audit.add.type.heading",
    "description": "Text for Audit type",
-   "defaultMessage": "棚卸の種類"
+   "defaultMessage": "TYPE DE VÉRIFICATION"
  },
  {
    "id": "audit.add.typedetails.sku",
    "description": "Text for sku",
-   "defaultMessage": "SKUコードで棚卸"
+   "defaultMessage": "Vérifier par code SKU"
  },
  {
    "id": "audit.add.typedetails.skutext",
    "description": "Subtext for sku",
-   "defaultMessage": "商品のSKUコードに基づいて棚卸タスクを作成してください"
+   "defaultMessage": "Créer une tâche de vérification sur la base du code SKU d'un élément"
  },
  {
    "id": "audit.add.typedetails.location",
    "description": "Text for location",
-   "defaultMessage": "ロケーションコードで棚卸"
+   "defaultMessage": "Vérification par code de localisation"
  },
  {
    "id": "audit.add.typedetails.locationtext",
    "description": "Subtext for manager",
-   "defaultMessage": "MSUのロケーションに基づいて棚卸タスクを作成してください"
+   "defaultMessage": "Créer une tâche de vérification basée sur la localisation d'un MSU"
  },
  {
    "id": "audit.add.sku.heading",
    "description": "Text for SKU heading",
-   "defaultMessage": "SKUコードを入力してください"
+   "defaultMessage": "Saisissez le code SKU"
  },
  {
    "id": "audit.add.sku.subheading",
    "description": "Subtext for enter sku",
-   "defaultMessage": "棚卸対象の商品のSKUコードを英数字で入力してください"
+   "defaultMessage": "Saisissez le code SKU alphanumérique de l'élément à vérifier"
  },
  {
    "id": "audit.add.location.heading",
    "description": "Text for location heading",
-   "defaultMessage": "ロケーションを入力してください"
+   "defaultMessage": "Saisissez une localisation"
  },
  {
    "id": "audit.add.location.subheading",
    "description": "Subtext for enter location",
-   "defaultMessage": "形式： (XXX.X.X.XX)"
+   "defaultMessage": "Format : (XXX.X.X.XX)"
  },
  {
    "id": "audit.add.tips.heading",
    "description": "Text for tips heading",
-   "defaultMessage": "ヒント："
+   "defaultMessage": "Astuces :"
  },
  {
    "id": "audit.add.tips.subheading",
    "description": "Subtext for tips",
-   "defaultMessage": "棚卸タスクが作成された後、棚卸リストの「Assign PPS」ボタンをクリックして棚卸タスクを開始してください。"
+   "defaultMessage": "Une fois qu'une mission de vérification a été créée, veuillez cliquer sur le bouton « Attribuer PPS » dans la liste de vérification pour démarrer la tâche de vérification."
  },
  {
    "id": "audits.add.password.button",
    "description": "Text for add audit button",
-   "defaultMessage": "棚卸を作成してください"
+   "defaultMessage": "Créer vérification"
  },
  {
    "id": "audit.duplicate.heading",
    "description": "Text for audit duplicate heading",
-   "defaultMessage": "棚卸タスク{task_name}を複製してもよろしいですか？"
+   "defaultMessage": "Êtes-vous sûr de vouloir dupliquer la tâche de vérification {task_name} ?"
  },
  {
    "id": "emergency.heading",
    "description": "Text for emergency heading",
-   "defaultMessage": "システムの緊急停止"
+   "defaultMessage": "Arrêt d'urgence de tout le système"
  },
  {
    "id": "emergency.type",
    "description": "Text for emergency type",
-   "defaultMessage": "バトラーシステムは現在、{type}の緊急事態で停止されています。"
+   "defaultMessage": "Le système Butler est arrêté en ce moment par une urgence {type}."
  },
  {
    "id": "emergency.action",
    "description": "Text for emergency action",
-   "defaultMessage": "操作に戻る前にシステムリセットが必要です"
+   "defaultMessage": "La réinitialisation du système est requise avant de revenir à l'opération"
  },
  {
    "id": "emergency.stop",
    "description": "Text for emergency stop",
-   "defaultMessage": "停止："
+   "defaultMessage": "Arrêté :"
  },
  {
    "id": "emergency.trigger",
    "description": "Text for emergency trigger",
-   "defaultMessage": "トリガー："
+   "defaultMessage": "Déclenché à :"
  },
  {
    "id": "emergency.operator",
    "description": "Text for emergency operator",
-   "defaultMessage": "オペレーター："
+   "defaultMessage": "Opérateur :"
  },
  {
    "id": "emergency.button",
    "description": "Text for close button",
-   "defaultMessage": "閉じる"
+   "defaultMessage": "Fermer"
  },
  {
    "id": "inventory.histogram.header",
    "description": "Inventory Histogram Header Message",
-   "defaultMessage": "在庫レベル履歴"
+   "defaultMessage": "Historique du niveau des stocks"
  },
  {
    "id": "inventory.linechart.header",
    "description": "Inventory Line Chart Header Message",
-   "defaultMessage": "商品の移動"
+   "defaultMessage": "Déplacement des éléments"
  },
  {
    "id": "inventory.histogram.noDataText",
    "description": "Text when there is no stock",
-   "defaultMessage": "在庫がありません"
+   "defaultMessage": "Aucun stock trouvé"
  },
  {
    "id": "inventory.histogram.today",
    "description": "Text to show today",
-   "defaultMessage": "本日の在庫"
+   "defaultMessage": "Du Jour"
  },
  {
    "id": "snapshot.inventory.usedSpace",
    "description": "Space utilised message",
-   "defaultMessage": "{utilisedSpace}% スペース使用"
+   "defaultMessage": "{UtilisedSpace}% espace utilisé"
  },
  {
    "id": "itemCat.category.heading",
    "description": "Item category table's column category heading",
-   "defaultMessage": "カテゴリ"
+   "defaultMessage": "Catégorie"
  },
  {
    "id": "itemCat.CBM.heading",
    "description": "Item category table's column CBM heading",
-   "defaultMessage": "使用済みCBM"
+   "defaultMessage": "CBM utilisé"
  },
  {
    "id": "itemCat.daysOnHand.heading",
    "description": "Item category table's column days On Hand heading",
-   "defaultMessage": "期日"
+   "defaultMessage": "Jours Encaissés"
  },
  {
    "id": "logout.question",
    "description": "Text for logout question",
-   "defaultMessage": "ログアウトしてもよろしいですか？"
+   "defaultMessage": "Êtes-vous sûr de vouloir vous déconnecter maintenant ?"
  },
  {
    "id": "logout.cancel",
    "description": "Text for cancel",
-   "defaultMessage": "キャンセル"
+   "defaultMessage": "Annuler"
  },
  {
    "id": "logout.done",
    "description": "Text for logout button",
-   "defaultMessage": "ログアウト"
+   "defaultMessage": "Déconnecter maintenant"
  },
  {
    "id": "audit.start.auditdetails.subheading2",
    "description": "Text for audit details subheading when no pps",
-   "defaultMessage": "現在、棚卸モードにはPPSはありません。"
+   "defaultMessage": "Il n'y a aucun PPS en mode vérification actuellement."
  },
  {
    "id": "audit.start.auditdetails.noPPS1",
    "description": "Text please",
-   "defaultMessage": "お願いします"
+   "defaultMessage": "Veuillez"
  },
  {
    "id": "audit.start.auditdetails.noPPS2",
    "description": "Text hyperlink",
-   "defaultMessage": "PPSモードに遷移してください"
+   "defaultMessage": "passer en mode PPS"
  },
  {
    "id": "audit.start.auditdetails.noPPS3",
    "description": "Text change operation",
-   "defaultMessage": "PPSの操作を変更してください。"
+   "defaultMessage": "Pour modifier les opérations de PPS."
  },
  {
    "id": "pickPerformance.dropdown",
    "description": "pickPerformance dropdown label",
-   "defaultMessage": "PPS - ピックパフォーマンス"
+   "defaultMessage": "Performance de ramassage PPS"
  },
  {
    "id": "putPerformance.dropdown",
    "description": "putPerformance dropdown label",
-   "defaultMessage": "PPS - 入荷パフォーマンス"
+   "defaultMessage": "Performance de placement PPS"
  },
  {
    "id": "auditPerformance.dropdown",
    "description": "auditPerformance dropdown label",
-   "defaultMessage": "PPS - 棚卸パフォーマンス"
+   "defaultMessage": "Performance de vérification PPS"
  },
  {
    "id": "orderList.progress.status",
    "description": "In 'progress message' for orders",
-   "defaultMessage": "処理中"
+   "defaultMessage": "En cours"
  },
  {
    "id": "orderList.completed.status",
    "description": "'Completed' status",
-   "defaultMessage": "完了"
+   "defaultMessage": "Terminé"
  },
  {
    "id": "orderList.exception.status",
    "description": "'Exception' status",
-   "defaultMessage": "例外"
+   "defaultMessage": "Exception"
  },
  {
    "id": "orderList.Unfulfillable.status",
    "description": "'Unfulfillable' status",
-   "defaultMessage": "注文不可"
+   "defaultMessage": "Non réalisable"
  },
  {
    "id": "orderlist.Refreshed.at",
    "description": "'Refreshed' status",
-   "defaultMessage": "最終更新"
+   "defaultMessage": "Dernière mise à jour"
  },
  {
    "id": "orderlistTab.orderListRefreshedat",
    "description": "Refresh Status text",
-   "defaultMessage": "最終更新"
+   "defaultMessage": "Dernière mise à jour"
  },
  {
    "id": "orderlistTab.pageNum",
    "description": "page num orderlist",
-   "defaultMessage": "{totalPage}の{currentPage}ページ"
+   "defaultMessage": "Page {currentPage} sur {totalPage}"
  },
  {
    "id": "table.filter.placeholder",
    "description": "placeholder for table filter",
-   "defaultMessage": "キーワードで検索"
+   "defaultMessage": "Filtrer par mots clés"
  },
  {
    "id": "orderlist.table.allDrop",
    "description": "allOrders dropdown option for orderlist",
-   "defaultMessage": "全注文"
+   "defaultMessage": "Toutes les commandes"
  },
  {
    "id": "orderlist.table.breachedDrop",
    "description": "breached dropdown option for orderlist",
-   "defaultMessage": "注文破棄"
+   "defaultMessage": "Commandes défaillantes"
  },
  {
    "id": "pendingDrop.table.allDrop",
    "description": "pending dropdown option for orderlist",
-   "defaultMessage": "注文処理中"
+   "defaultMessage": "Commandes en attente"
  },
  {
    "id": "completedDrop.table.allDrop",
    "description": "completed dropdown option for orderlist",
-   "defaultMessage": "注文完了"
+   "defaultMessage": "Commandes exécutées"
  },
  {
    "id": "exceptionDrop.table",
    "description": "exception order dropdown for orderlist",
-   "defaultMessage": "例外"
+   "defaultMessage": "Exception"
  },
  {
    "id": "orderlist.table.allTimeDrop",
    "description": "allTime dropdown option for orderlist",
-   "defaultMessage": "全"
+   "defaultMessage": "Tous les"
  },
  {
    "id": "orderlist.table.oneHrDrop",
    "description": "oneHr dropdown option for orderlist",
-   "defaultMessage": "過去1時間"
+   "defaultMessage": "Dure 1 heure"
  },
  {
    "id": "pendingDrop.table.twoHrDrop",
    "description": "twoHr dropdown option for orderlist",
-   "defaultMessage": "過去2時間"
+   "defaultMessage": "Dure 2 heures"
  },
  {
    "id": "completedDrop.table.sixHrDrop",
    "description": "sixHr dropdown option for orderlist",
-   "defaultMessage": "過去6時間"
+   "defaultMessage": "Dure 6 heures"
  },
  {
    "id": "pendingDrop.table.twelveHrDrop",
    "description": "twelveHr dropdown option for orderlist",
-   "defaultMessage": "過去12時間"
+   "defaultMessage": "Dure 12 heures"
  },
  {
    "id": "completedDrop.table.oneDayDrop",
    "description": "oneDay dropdown option for orderlist",
-   "defaultMessage": "過去1日"
+   "defaultMessage": "Dure 1 jour"
  },
  {
    "id": "orderlist.table.noData",
    "description": "No data message for orderlist table",
-   "defaultMessage": "注文は見つかりません"
+   "defaultMessage": "Aucune commande trouvée"
  },
  {
    "id": "order.table.heading",
    "description": "Heading for order list",
-   "defaultMessage": "注文リスト"
+   "defaultMessage": "ListeCommande"
  },
  {
    "id": "order.table.buttonLable",
    "description": "button label for refresh",
-   "defaultMessage": "データを更新"
+   "defaultMessage": "Actualiser les données"
  },
  {
    "id": "orderlist.order.heading",
    "description": "Heading for order IDs in ordertable",
-   "defaultMessage": "注文リスト"
+   "defaultMessage": "ID de commande"
  },
  {
    "id": "orderlist.subTotalorder",
    "description": "subtotal order for ordertable",
-   "defaultMessage": "合計：{totalOrder}"
+   "defaultMessage": "Total :{totalOrder}"
  },
  {
    "id": "orderList.table.status",
    "description": "Status for orders",
-   "defaultMessage": "状態"
+   "defaultMessage": "STATUT"
  },
  {
    "id": "orderlist.table.pickBy",
    "description": "pick by for orderlist",
-   "defaultMessage": "選択者"
+   "defaultMessage": "RAMASSER PAR"
  },
  {
    "id": "orderlist.table.operatingMode",
    "description": "recievedTime for Orders",
-   "defaultMessage": "受領時間"
+   "defaultMessage": "HEURE DE RÉCEPTION"
  },
  {
    "id": "orderlist.table.completedTime",
    "description": "completedTime for orderlist",
-   "defaultMessage": "完了"
+   "defaultMessage": "Terminé"
  },
  {
    "id": "orderlist.table.orderLine",
    "description": "orderLine for orderlist",
-   "defaultMessage": "注文ライン"
+   "defaultMessage": "LIGNE DE COMMANDE"
  },
  {
    "id": "waveDetail.id.prefix",
    "description": "",
-   "defaultMessage": "ウェーブ-{waveId}"
+   "defaultMessage": "ONDE-{waveId}"
  },
  {
    "id": "waves.table.noData",
    "description": "No data message for waves table",
-   "defaultMessage": "ウェーブが見つかりません"
+   "defaultMessage": "Aucune onde n'a été trouvée"
  },
  {
    "id": "waves.table.heading",
    "description": "Heading for waves",
-   "defaultMessage": "ウェーブ"
+   "defaultMessage": "Ondes"
  },
  {
    "id": "WavesTable.heading",
    "description": "heading for WavesTable",
-   "defaultMessage": "ウェーブ"
+   "defaultMessage": "Ondes"
  },
  {
    "id": "WavesTable.Totalwaves",
    "description": "total waves for WavesTable",
-   "defaultMessage": "合計:{totalwave}"
+   "defaultMessage": "Total :{totalwave}"
  },
  {
    "id": "waves.table.status",
    "description": "Status for waves",
-   "defaultMessage": "ステータス"
+   "defaultMessage": "STATUT"
  },
  {
    "id": "waves.table.startTime",
    "description": "StartTime for butlerbot",
-   "defaultMessage": "開始時刻"
+   "defaultMessage": "HEURE DE DÉMARRAGE"
  },
  {
    "id": "WavesTable.pending.status",
    "description": "pending status for WavesTable",
-   "defaultMessage": "{pendingWave} 保留中のウェーブ"
+   "defaultMessage": "{pendingWave} ondes en attente"
  },
  {
    "id": "waves.table.cutOffTime",
    "description": "cutOffTime for waves",
-   "defaultMessage": "切断時間"
+   "defaultMessage": "HEURE LIMITE"
  },
  {
    "id": "WavesTable.progress.status",
    "description": "progress status for WavesTable",
-   "defaultMessage": "{progressWave} 処理中のウェーブ"
+   "defaultMessage": "{progressWave} ondes en cours"
  },
  {
    "id": "waves.table.ordersToFulfill",
    "description": "orders to fulfill for waves",
-   "defaultMessage": "処理中注文"
+   "defaultMessage": "COMMANDES À RÉALISER"
  },
  {
    "id": "WavesTable.orderRemaining.status",
    "description": "orderRemaining status for WavesTable",
-   "defaultMessage": "{orderRemaining} 残り"
+   "defaultMessage": "{orderRemaining} restantes"
  },
  {
    "id": "waves.table.progress",
    "description": "progress for waves",
-   "defaultMessage": "処理中(%)"
+   "defaultMessage": "PROGRESSION (%)"
  },
  {
    "id": "WavesTable.completed.status",
    "description": "completed status for WavesTable",
-   "defaultMessage": "{completedWaves} 完了ウェーブ"
+   "defaultMessage": "{completedWaves} ondes terminées"
  },
  {
    "id": "waves.table.totalOrders",
    "description": "totalOrders for waves",
-   "defaultMessage": "合計注文"
+   "defaultMessage": "COMMANDES TOTALES"
  },
  {
    "id": "WavesTable.totalOrders.status",
    "description": "totalOrders status for WavesTable",
-   "defaultMessage": "{totalOrders} 注文"
+   "defaultMessage": "{totalOrders} commandes"
  },
  {
    "id": "health.pps",
@@ -1352,67 +1352,67 @@
  {
    "id": "health.Butler",
    "description": "Butler bots health",
-   "defaultMessage": "バトラー・ボット"
+   "defaultMessage": "Bots Butler"
  },
  {
    "id": "health.ChargingStation",
    "description": "Charging Stations health",
-   "defaultMessage": "充電所"
+   "defaultMessage": "Stations de recharge"
  },
  {
    "id": "systemHealth.dropdown",
    "description": "systemHealth dropdown label",
-   "defaultMessage": "システムのヘルス"
+   "defaultMessage": "Santé du système"
  },
  {
    "id": "PPSpickPerformance.dropdown",
    "description": "PPSpickPerformance dropdown label",
-   "defaultMessage": "PPS - ピックパフォーマンス"
+   "defaultMessage": "Performance de ramassage PPS"
  },
  {
    "id": "PPSputPerformance.dropdown",
    "description": "PPSputPerformance dropdown label",
-   "defaultMessage": "PPS - 入荷パフォーマンス"
+   "defaultMessage": "Performance de placement PPS"
  },
  {
    "id": "PPSauditPerformance.dropdown",
    "description": "PPSauditPerformance dropdown label",
-   "defaultMessage": "PPS - 棚卸パフォーマンス"
+   "defaultMessage": "Performance de vérification PPS"
  },
  {
    "id": "health.noData",
    "description": "pps graph nodata",
-   "defaultMessage": "データなし"
+   "defaultMessage": "Pas de données"
  },
  {
    "id": "widget.pick.headingleft",
    "description": "Heading for pick status widget",
-   "defaultMessage": "処理中注文"
+   "defaultMessage": "Commandes à réaliser"
  },
  {
    "id": "widget.pick.completed",
    "description": "Text for completed",
-   "defaultMessage": "完了"
+   "defaultMessage": "Terminé"
  },
  {
    "id": "widget.pick.idle",
    "description": "Pick PPS idle message",
-   "defaultMessage": "{count} アイドルPPS (ピックモード)"
+   "defaultMessage": "{count} PPS en repos (mode Ramassage)"
  },
  {
    "id": "widget.pick.throughput",
    "description": "Throughput message",
-   "defaultMessage": "{pps_count} PPS 棚卸 {throughput} 商品/時間"
+   "defaultMessage": "{count} réalisation de PPS à hauteur de {débit} éléments/hr"
  },
  {
    "id": "widget.pick.lowright",
    "description": "Estimated time",
-   "defaultMessage": "{eta}で完了見込みです"
+   "defaultMessage": "Temps estimé avant complétude {eta}"
  },
  {
    "id": "widget.pick.headingright",
    "description": "Heading for cut-off time",
-   "defaultMessage": "切断の時間"
+   "defaultMessage": "Temps avant limite"
  },
  {
    "id": "widget.pick.textright",
@@ -1422,42 +1422,42 @@
  {
    "id": "widget.pick.statusleft.onschedule",
    "description": "Text for on schedule",
-   "defaultMessage": "予定通り"
+   "defaultMessage": "À venir"
  },
  {
    "id": "widget.pick.statusleft.atrisk",
    "description": "Text for orders at risk",
-   "defaultMessage": "{count_risk} {count_risk、複数、１つの{order} その他 {orders}}のリスク"
+   "defaultMessage": "{count_risk} {count_risk, plural, une {order} autre {orders}} en risque"
  },
  {
    "id": "widget.pick.offline",
    "description": "Message for system offline",
-   "defaultMessage": "オフライン"
+   "defaultMessage": "hors ligne"
  },
  {
    "id": "widget.put.heading.value",
    "description": "Total Items Stocked",
-   "defaultMessage": "なし"
+   "defaultMessage": "Aucun(e)"
  },
  {
    "id": "widget.put.status.idle",
    "description": "Put PPS idle message",
-   "defaultMessage": "{count} アイドル PPS (入荷モード)"
+   "defaultMessage": "{count} PPS en repos (mode Placement)"
  },
  {
    "id": "widget.put.throughput",
    "description": "Throughput message",
-   "defaultMessage": "{pps_count} PPS 棚卸 {throughput} 商品/時間"
+   "defaultMessage": "{count} {pluralMsg} stockage {throughput} éléments/hr"
  },
  {
    "id": "widget.put.offline",
    "description": "Message for system offline",
-   "defaultMessage": "オフライン"
+   "defaultMessage": "hors ligne"
  },
  {
    "id": "widget.put.heading",
    "description": "Put Item Heading",
-   "defaultMessage": "在庫商品"
+   "defaultMessage": "Articles Stockés"
  },
  {
    "id": "audit.start.ppscheckbox",
@@ -1467,37 +1467,37 @@
  {
    "id": "audit.start.heading",
    "description": "Heading for start audit",
-   "defaultMessage": "棚卸タスクを開始してください"
+   "defaultMessage": "Démarrer la tâche de vérification"
  },
  {
    "id": "audit.start.subheading",
    "description": "Subheading for start audit",
-   "defaultMessage": "1つ以上のPPSを割り当てて、棚卸タスクを開始してください"
+   "defaultMessage": "</g>"
  },
  {
    "id": "audit.start.auditdetails.heading",
    "description": "Text for audit details heading",
-   "defaultMessage": "棚卸タスクの種類を選択してください"
+   "defaultMessage": "Attribuer PPS pour Localisation"
  },
  {
    "id": "audit.start.auditdetails.subheading1",
    "description": "Text for audit details subheading when pps present",
-   "defaultMessage": "以下のすべてのPPSは現在棚卸モードになっています。"
+   "defaultMessage": "Tous les PPS ci-dessous sont actuellement en mode vérification."
  },
  {
    "id": "audit.start.button",
    "description": "Text for start audit button",
-   "defaultMessage": "タスクを開始してください"
+   "defaultMessage": "Démarrer la tâche maintenant"
  },
  {
    "id": "audit.back.button",
    "description": "Text for go back button",
-   "defaultMessage": "戻る"
+   "defaultMessage": "Retour"
  },
  {
    "id": "butlerDetail.name.prefix",
    "description": "prefix for butler id",
-   "defaultMessage": "BOT - {botId}"
+   "defaultMessage": "ROBOT - {botId}"
  },
  {
    "id": "pps.name.prefix",
@@ -1517,152 +1517,152 @@
  {
    "id": "butlerbot.table.noData",
    "description": "No data message for butlerbot table",
-   "defaultMessage": "バトラー・ボットは見つかりません"
+   "defaultMessage": "Aucun robot Butler n'a été trouvé"
  },
  {
    "id": "butlerBot.table.heading",
    "description": "Heading for butlerbot",
-   "defaultMessage": "バトラー・ボット"
+   "defaultMessage": "Bots Butler"
  },
  {
    "id": "ButlerBotTable.TotalBot",
    "description": "Column name for the Bot id in bot table",
-   "defaultMessage": "BOT"
+   "defaultMessage": "ROBOTS"
  },
  {
    "id": "ButlerBotTable.subTotalBot",
    "description": "sub text for totalbot ButlerBotTable",
-   "defaultMessage": "合計: {totalBot}"
+   "defaultMessage": "Total : {TotalBot}"
  },
  {
    "id": "butlerBot.table.status",
    "description": "Status for butlerbot",
-   "defaultMessage": "ステータス"
+   "defaultMessage": "STATUT"
  },
  {
    "id": "butlerBot.table.currentTask",
    "description": "Current task for butlerbot",
-   "defaultMessage": "現行タスク"
+   "defaultMessage": "TÂCHE COURANTE"
  },
  {
    "id": "ButlerBotTable.botState",
    "description": "bot state for ButlerBotTable",
-   "defaultMessage": "ピック ({pick}) . 入荷 ({put}) . 充電 ({charging}) . アイドル ({idle})"
+   "defaultMessage": "Ramasser ({pick}). Placer ({put}). Charge ({charging}). Repos ({idle})"
  },
  {
    "id": "butlerBot.table.msu",
    "description": "MSU Status for butlerbot",
-   "defaultMessage": "MSU"
+   "defaultMessage": "MSU MONTÉ"
  },
  {
    "id": "ButlerBotTable.mounted",
    "description": "msu mounted for ButlerBotTable",
-   "defaultMessage": "{msuMounted} マウント"
+   "defaultMessage": "{msuMounted} Monté"
  },
  {
    "id": "butlerBot.table.location",
    "description": "Location for butlerbot",
-   "defaultMessage": "ロケーション"
+   "defaultMessage": "Emplacement"
  },
  {
    "id": "ButlerBotTable.locations",
    "description": "msu Location for ButlerBotTable",
-   "defaultMessage": "{locations} ロケーション"
+   "defaultMessage": "{locations} Localisations"
  },
  {
    "id": "butlerBot.table.voltage",
    "description": "voltage for butlerbot",
-   "defaultMessage": "電圧"
+   "defaultMessage": "TENSION"
  },
  {
    "id": "ButlerBotTable.avgVoltage",
    "description": "avgVoltage for ButlerBotTable",
-   "defaultMessage": "平均電圧 {voltage}"
+   "defaultMessage": "Moy {voltage}"
  },
  {
    "id": "chargersDetail.name.prefix",
    "description": "prefix for cs id in chargersDetail",
-   "defaultMessage": "充電所 - {csId}"
+   "defaultMessage": "Stations de recharge - {csId}"
  },
  {
    "id": "chargersDetail.butler.prefix",
    "description": "prefix for butler id in chargersDetail",
-   "defaultMessage": "バトラー - {botId}"
+   "defaultMessage": "Butler - {botId}"
  },
  {
    "id": "ChargingStations.table.noData",
    "description": "No data message for ChargingStations table",
-   "defaultMessage": "充電所が見つかりません"
+   "defaultMessage": "Pas de stations de recharge trouvées"
  },
  {
    "id": "ChargingStations.table.heading",
    "description": "Heading for ChargingStations",
-   "defaultMessage": "充電所"
+   "defaultMessage": "Stations de recharge"
  },
  {
    "id": "ChargingStationsTable.stationID.heading",
    "description": "StationID heading",
-   "defaultMessage": "ステーションID"
+   "defaultMessage": "ID DE LA STATION"
  },
  {
    "id": "ChargingStationsTable.SubstationID",
    "description": "total SubStationID for ChargingStationsTable",
-   "defaultMessage": "合計:{rowsCount}"
+   "defaultMessage": "Total :{rowsCount}"
  },
  {
    "id": "ChargingStations.table.STATUS",
    "description": "STATUS for ChargingStations",
-   "defaultMessage": "ステータス"
+   "defaultMessage": "STATUT"
  },
  {
    "id": "ChargingStations.table.operatingMode",
    "description": "operatingMode for ChargingStations",
-   "defaultMessage": "オペレーションモード"
+   "defaultMessage": "MODE D'EXPLOITATION"
  },
  {
    "id": "ChargingStationsTable.mode",
    "description": "cs mode for ChargingStationsTable",
-   "defaultMessage": "手動 ({manual}) . 自動 ({auto})"
+   "defaultMessage": "Manuel ({manual}). Automatique ({auto})"
  },
  {
    "id": "ChargingStations.table.connectedBots",
    "description": "connectedBots for ChargingStations",
-   "defaultMessage": "ボット接続"
+   "defaultMessage": "ROBOTS CONNECTÉS"
  },
  {
    "id": "ChargingStationsTable.totalBots",
    "description": "total bots ChargingStationsTable",
-   "defaultMessage": "{totalBots} ボット接続"
+   "defaultMessage": "{totalBots} robots connectés"
  },
  {
    "id": "NotificationTable.table.heading",
    "description": "Heading for NotificationTable",
-   "defaultMessage": "通知"
+   "defaultMessage": "Notifications"
  },
  {
    "id": "NotificationTable.table.component",
    "description": "component for NotificationTable",
-   "defaultMessage": "部品"
+   "defaultMessage": "COMPOSANT"
  },
  {
    "id": "Notifications.table.status",
    "description": "Status for NotificationTable",
-   "defaultMessage": "イベント種類"
+   "defaultMessage": "TYPE D’ÉVÉNEMENT"
  },
  {
    "id": "NotificationTable.table.description",
    "description": "description for current component",
-   "defaultMessage": "説明"
+   "defaultMessage": "DESCRIPTION"
  },
  {
    "id": "NotificationTable.table.remark",
    "description": "remark for component",
-   "defaultMessage": "備考"
+   "defaultMessage": "REMARQUES"
  },
  {
    "id": "NotificationTable.table.location",
    "description": "Starting Time for Component",
-   "defaultMessage": "時間"
+   "defaultMessage": "HEURE"
  },
  {
    "id": "ppsDetail.name.prefix",
@@ -1672,37 +1672,37 @@
  {
    "id": "pps.dropdown.placeholder",
    "description": "mode change for pps",
-   "defaultMessage": "PPSモード変更"
+   "defaultMessage": "Changer le mode PPS"
  },
  {
    "id": "PPS.table.pickDrop",
    "description": "pick dropdown option for PPS",
-   "defaultMessage": "入荷"
+   "defaultMessage": "Placer"
  },
  {
    "id": "PPS.table.putDrop",
    "description": "put dropdown option for PPS",
-   "defaultMessage": "ピック"
+   "defaultMessage": "Ramasser"
  },
  {
    "id": "PPS.table.auditDrop",
    "description": "audit dropdown option for PPS",
-   "defaultMessage": "棚卸"
+   "defaultMessage": "vérifier"
  },
  {
    "id": "PPStable.table.noData",
    "description": "No data message for PPStable",
-   "defaultMessage": "PPSが見つかりません"
+   "defaultMessage": "</g>"
  },
  {
    "id": "pps.table.heading",
    "description": "Heading for PPS",
-   "defaultMessage": "PPS"
+   "defaultMessage": "Ramassage Placement Station"
  },
  {
    "id": "PPStable.selected",
    "description": "selected pps for ppsSelected",
-   "defaultMessage": "{selected}が選択されました"
+   "defaultMessage": "{selected} sélectionné"
  },
  {
    "id": "PPStable.ppsColumn.heading",
@@ -1712,167 +1712,167 @@
  {
    "id": "PPStable.Subpps",
    "description": "sub pps",
-   "defaultMessage": "合計: {ppsTotal}"
+   "defaultMessage": "Total : {ppsTotal}"
  },
  {
    "id": "PPS.table.status",
    "description": "Status for PPS",
-   "defaultMessage": "ステータス"
+   "defaultMessage": "STATUT"
  },
  {
    "id": "PPS.table.operatingMode",
    "description": "operatingMode for PPS",
-   "defaultMessage": "操作モード"
+   "defaultMessage": "MODE D'EXPLOITATION"
  },
  {
    "id": "PPStable.ppsState",
    "description": "pps state for PPStable",
-   "defaultMessage": "ピック ({pick}) . 入荷 ({put}) . 棚卸 ({audit}) . 未設定 ({notSet})"
+   "defaultMessage": "Ramasser ({pick}). Placer ({put}). Vérification ({audit}). Non définie ({notSet})"
  },
  {
    "id": "PPS.table.performance",
    "description": "performance Status for PPS",
-   "defaultMessage": "パフォーマンス"
+   "defaultMessage": "PERFORMANCE"
  },
  {
    "id": "PPS.table.operatorAssigned",
    "description": "operatorAssigned for PPS",
-   "defaultMessage": "配属オペレーター"
+   "defaultMessage": "OPÉRATEUR AFFECTÉ"
  },
  {
    "id": "PPStable.totalOperator",
    "description": "totalOperator for PPStable",
-   "defaultMessage": "{operatorNum} オペレーター"
+   "defaultMessage": "{operatorNum} opérateurs"
  },
  {
    "id": "tabs.offline",
    "description": "offline",
-   "defaultMessage": "オフライン"
+   "defaultMessage": "hors ligne"
  },
  {
    "id": "overview.tab.heading",
    "description": "overview tab",
-   "defaultMessage": "概要"
+   "defaultMessage": "APERÇU"
  },
  {
    "id": "system.tab.heading",
    "description": "system tab",
-   "defaultMessage": "システム"
+   "defaultMessage": "SYSTÈME"
  },
  {
    "id": "orders.tab.heading",
    "description": "orders tab",
-   "defaultMessage": "注文"
+   "defaultMessage": "COMMANDES"
  },
  {
    "id": "users.tab.heading",
    "description": "users tab",
-   "defaultMessage": "ユーザ"
+   "defaultMessage": "UTILISATEURS"
  },
  {
    "id": "inventory.tab.heading",
    "description": "inventory tab",
-   "defaultMessage": "目録"
+   "defaultMessage": "Inventaire"
  },
  {
    "id": "audit.tab.heading",
    "description": "audit tab",
-   "defaultMessage": "棚卸"
+   "defaultMessage": "vérifier"
  },
  {
    "id": "overviewStatus.tab.fulfilling",
    "description": "overview Status fulfilling orders",
-   "defaultMessage": "処理中の注文"
+   "defaultMessage": "Réaliser des commandes"
  },
  {
    "id": "overviewStatus.tab.default",
    "description": "default overview Status",
-   "defaultMessage": "なし"
+   "defaultMessage": "Aucun(e)"
  },
  {
    "id": "systemStatus.tab.online",
    "description": "system Status online",
-   "defaultMessage": "オンライン"
+   "defaultMessage": "en ligne"
  },
  {
    "id": "systemStatus.tab.emergency",
    "description": "system Status emergency",
-   "defaultMessage": "緊急"
+   "defaultMessage": "Urgence"
  },
  {
    "id": "overviewStatus.tab.emergency",
    "description": "overview Status emergency",
-   "defaultMessage": "バトラーは停止された"
+   "defaultMessage": "Butlers arrêtés"
  },
  {
    "id": "ordersStatus.tab.heading",
    "description": "orders Status",
-   "defaultMessage": "{count}% 処理済み注文"
+   "defaultMessage": "{count}% réalisées"
  },
  {
    "id": "usersStatus.tab.heading",
    "description": "users Status",
-   "defaultMessage": "{count} ユーザのオンライン"
+   "defaultMessage": "{count} utilisateurs en ligne"
  },
  {
    "id": "inventoryStatus.tab.heading",
    "description": "inventory Status",
-   "defaultMessage": "{count}% スペース使用"
+   "defaultMessage": "{count}% d'espace utilisé"
  },
  {
    "id": "auditStatus.tab.heading",
    "description": "audit Status",
-   "defaultMessage": "{count} 処理中"
+   "defaultMessage": "{count} en cours"
  },
  {
    "id": "userDetails.operator",
    "description": "",
-   "defaultMessage": "オペレーター"
+   "defaultMessage": "Opérateur"
  },
  {
    "id": "userDetails.manager",
    "description": "",
-   "defaultMessage": "マネージャー"
+   "defaultMessage": "Gestionnaire"
  },
  {
    "id": "userDetails.pick.status",
    "description": "",
-   "defaultMessage": "ピック"
+   "defaultMessage": "Ramasser"
  },
  {
    "id": "auditdetail.completed.status",
    "description": "",
-   "defaultMessage": "完了"
+   "defaultMessage": "Terminé"
  },
  {
    "id": "userDetails.put.status",
    "description": "",
-   "defaultMessage": "入荷"
+   "defaultMessage": "Placer"
  },
  {
    "id": "userDetails.audit.status",
    "description": "",
-   "defaultMessage": "棚卸"
+   "defaultMessage": "vérifier"
  },
  {
    "id": "userDetails.front.status",
    "description": "",
-   "defaultMessage": "フロント"
+   "defaultMessage": "Avant"
  },
  {
    "id": "userDetails.back.status",
    "description": "",
-   "defaultMessage": "バック"
+   "defaultMessage": "Arrière"
  },
  {
    "id": "userDetails.online.status",
    "description": "",
-   "defaultMessage": "オンライン"
+   "defaultMessage": "en ligne"
  },
  {
    "id": "userDetails.offline.status",
    "description": "",
-   "defaultMessage": "オフライン"
+   "defaultMessage": "hors ligne"
  },
  {
    "id": "userDetails.location",
@@ -1882,272 +1882,272 @@
  {
    "id": "users.add.heading",
    "description": "Heading for Add new user",
-   "defaultMessage": "新ユーザを追加"
+   "defaultMessage": "Ajouter un nouvel utilisateur"
  },
  {
    "id": "users.add.subheading",
    "description": "Subheading for add new user",
-   "defaultMessage": "全項目が必須項目です"
+   "defaultMessage": "Tous les champs sont obligatoires"
  },
  {
    "id": "users.add.userdetails.heading",
    "description": "Text for user details heading",
-   "defaultMessage": "ユーザ詳細を入力してください"
+   "defaultMessage": "Saisir les informations de l'utilisateur"
  },
  {
    "id": "users.add.userdetails.subheading",
    "description": "Text for user details subheading",
-   "defaultMessage": "システムにログインするにはユーザIDが必要です"
+   "defaultMessage": "Un ID d'utilisateur sera nécessaire pour se connecter au système"
  },
  {
    "id": "users.add.userdetails.userid",
    "description": "Text for user id",
-   "defaultMessage": "ユーザID"
+   "defaultMessage": "ID d'utilisateur"
  },
  {
    "id": "users.add.userdetails.firstname",
    "description": "Text for first name",
-   "defaultMessage": "氏名"
+   "defaultMessage": "Prénom"
  },
  {
    "id": "users.add.userdetails.lastname",
    "description": "Text for last name",
-   "defaultMessage": "姓名"
+   "defaultMessage": "Nom"
  },
  {
    "id": "users.add.password.heading",
    "description": "Heading for create password",
-   "defaultMessage": "パスワードを作成する"
+   "defaultMessage": "Créer mot de passe"
  },
  {
    "id": "users.add.password.field1",
    "description": "Text for password",
-   "defaultMessage": "パスワード"
+   "defaultMessage": "Mot de Passe"
  },
  {
    "id": "users.add.password.field2",
    "description": "Text for confirm password",
-   "defaultMessage": "パスワードを確認してください"
+   "defaultMessage": "Confirmation du mot de passe"
  },
  {
    "id": "users.add.password.button",
    "description": "Text for add new user button",
-   "defaultMessage": "新ユーザを追加"
+   "defaultMessage": "Ajouter un nouvel utilisateur"
  },
  {
    "id": "users.delete.heading",
    "description": "Text for user delete heading",
-   "defaultMessage": "「{user_name}」を削除してもよろしいですか？"
+   "defaultMessage": "Êtes-vous sûr de vouloir supprimer « {user_name} » ?"
  },
  {
    "id": "users.delete.subheading",
    "description": "Text for user delete subheading",
-   "defaultMessage": "ユーザに関する情報が失われます"
+   "defaultMessage": "Les informations relatives à l'utilisateur seront perdues"
  },
  {
    "id": "users.edit.heading",
    "description": "Heading for Edit user",
-   "defaultMessage": "ユーザを編集する"
+   "defaultMessage": "Modifier l'utilisateur"
  },
  {
    "id": "users.edit.subheading",
    "description": "Subheading for Edit user",
-   "defaultMessage": "全項目が必須項目です"
+   "defaultMessage": "Tous les champs sont obligatoires"
  },
  {
    "id": "users.edit.userdetails.heading",
    "description": "Text for user details heading",
-   "defaultMessage": "ユーザ詳細を入力してください"
+   "defaultMessage": "Saisir les informations de l'utilisateur"
  },
  {
    "id": "users.edit.userdetails.subheading",
    "description": "Text for user details subheading",
-   "defaultMessage": "システムにログインするにはユーザIDが必要です"
+   "defaultMessage": "Un ID d'utilisateur sera nécessaire pour se connecter au système"
  },
  {
    "id": "users.edit.userdetails.userid",
    "description": "Text for user id",
-   "defaultMessage": "ユーザID"
+   "defaultMessage": "ID d'utilisateur"
  },
  {
    "id": "users.edit.userdetails.firstname",
    "description": "Text for first name",
-   "defaultMessage": "氏名"
+   "defaultMessage": "Prénom"
  },
  {
    "id": "users.edit.userdetails.lastname",
    "description": "Text for last name",
-   "defaultMessage": "姓名"
+   "defaultMessage": "Nom"
  },
  {
    "id": "users.edit.changepassword.heading",
    "description": "Heading for Change password",
-   "defaultMessage": "パスワードを変更する"
+   "defaultMessage": "Changer le mot de passe"
  },
  {
    "id": "users.edit.changepassword.subheading",
    "description": "Subheading for create password",
-   "defaultMessage": "マネージメント・インターフェイスとオペレーター・インターフェイスにログインするには、最低8文字の英数字のパスワードが必要です"
+   "defaultMessage": "Le nouveau mot de passe sera effectif lorsque l'utilisateur se connectera la prochaine fois"
  },
  {
    "id": "users.edit.password.field1",
    "description": "Text for password",
-   "defaultMessage": "パスワード"
+   "defaultMessage": "Nouveau mot de passe"
  },
  {
    "id": "users.edit.password.field2",
    "description": "Text for confirm password",
-   "defaultMessage": "パスワードを確認してください"
+   "defaultMessage": "Confirmation du mot de passe"
  },
  {
    "id": "users.edit.password.",
    "description": "Heading for Password",
-   "defaultMessage": "パスワード"
+   "defaultMessage": "Mot de Passe"
  },
  {
    "id": "users.edit.password.query",
    "description": "Text for change password",
-   "defaultMessage": "パスワードを変更する"
+   "defaultMessage": "Changer le mot de passe"
  },
  {
    "id": "users.edit.password.button",
    "description": "Text for edit user button",
-   "defaultMessage": "保存"
+   "defaultMessage": "Enregistrer"
  },
  {
    "id": "users.add.roledetails.heading",
    "description": "Heading for role",
-   "defaultMessage": "役割を選択する"
+   "defaultMessage": "Choisir un rôle"
  },
  {
    "id": "users.add.roledetails.subheading",
    "description": "Subheading for role",
-   "defaultMessage": "役割毎にユーザはバトラーシステムの特定レベルの制御が可能です。"
+   "defaultMessage": "Un niveau spécifique de contrôle sur le système Butler selon le rôle désigné sera accordé à l'utilisateur"
  },
  {
    "id": "users.add.roledetails.operator",
    "description": "Text for operator",
-   "defaultMessage": "オペレーター"
+   "defaultMessage": "Opérateur"
  },
  {
    "id": "users.add.roledetails.operatortext",
    "description": "Subtext for operator",
-   "defaultMessage": "バトラーシステムの各ピック入荷ステーションのオペレータインターフェイスへのアクセスを許可する"
+   "defaultMessage": "Accorder l'accès à l'interface opérateur à chaque station Ramassage Placement dans le système Butler"
  },
  {
    "id": "users.add.roledetails.manager",
    "description": "Text for manager",
-   "defaultMessage": "マネージャー"
+   "defaultMessage": "Gestionnaire"
  },
  {
    "id": "users.add.roledetails.managertext",
    "description": "Subtext for manager",
-   "defaultMessage": "MSUのロケーションに基づいて棚卸タスクを作成してください"
+   "defaultMessage": "Accorder l'accès à l'interface de gestion et à l'interface de l'opérateur pour tous les systèmes"
  },
  {
    "id": "users.add.roledetails.heading",
    "description": "Heading for role",
-   "defaultMessage": "役割を選択する"
+   "defaultMessage": "Choisir un rôle"
  },
  {
    "id": "users.add.roledetails.subheading",
    "description": "Subheading for role",
-   "defaultMessage": "役割毎にユーザはバトラーシステムの特定レベルの制御が可能です。"
+   "defaultMessage": "Un niveau spécifique de contrôle sur le système Butler selon le rôle désigné sera accordé à l'utilisateur"
  },
  {
    "id": "users.add.roledetails.operator",
    "description": "Text for operator",
-   "defaultMessage": "オペレーター"
+   "defaultMessage": "Opérateur"
  },
  {
    "id": "users.add.roledetails.operatortext",
    "description": "Subtext for operator",
-   "defaultMessage": "バトラーシステムの各ピック入荷ステーションのオペレータインターフェイスへのアクセスを許可する"
+   "defaultMessage": "Accorder l'accès à l'interface opérateur à chaque station Ramassage Placement dans le système Butler"
  },
  {
    "id": "users.add.roledetails.manager",
    "description": "Text for manager",
-   "defaultMessage": "マネージャー"
+   "defaultMessage": "Gestionnaire"
  },
  {
    "id": "users.add.roledetails.managertext",
    "description": "Subtext for manager",
-   "defaultMessage": "MSUのロケーションに基づいて棚卸タスクを作成してください"
+   "defaultMessage": "Accorder l'accès à l'interface de gestion et à l'interface de l'opérateur pour tous les systèmes"
  },
  {
    "id": "user.table.noData",
    "description": "No data message for user table",
-   "defaultMessage": "ユーザが見つかりません"
+   "defaultMessage": "Aucun utilisateur trouvé"
  },
  {
    "id": "user.table.heading",
    "description": "Heading for users table",
-   "defaultMessage": "ユーザ"
+   "defaultMessage": "UTILISATEURS"
  },
  {
    "id": "user.button.heading",
    "description": "button heading for users table",
-   "defaultMessage": "新ユーザを追加"
+   "defaultMessage": "Ajouter un nouvel utilisateur"
  },
  {
    "id": "user.table.users",
    "description": "Users Column",
-   "defaultMessage": "ユーザ行"
+   "defaultMessage": "UTILISATEURS"
  },
  {
    "id": "user.table.totaluser",
    "description": "total user",
-   "defaultMessage": "合計: {rowsCount}"
+   "defaultMessage": "Total : {rowsCount}"
  },
  {
    "id": "user.table.status",
    "description": "Users Status",
-   "defaultMessage": "{count} ユーザのオンライン"
+   "defaultMessage": "STATUT"
  },
  {
    "id": "user.table.role",
    "description": "User Role",
-   "defaultMessage": "役割"
+   "defaultMessage": "RÔLE"
  },
  {
    "id": "user.table.workMode",
    "description": "User Workmode",
-   "defaultMessage": "作業モード"
+   "defaultMessage": "MODE TRAVAIL"
  },
  {
    "id": "user.table.location",
    "description": "User location",
-   "defaultMessage": "ロケーション"
+   "defaultMessage": "Emplacement"
  },
  {
    "id": "user.table.logInTime",
    "description": "User log in time",
-   "defaultMessage": "ログイン時間"
+   "defaultMessage": "CONNEXION À L'HEURE"
  },
  {
    "id": "user.table.action",
    "description": "action Column",
-   "defaultMessage": "アクション"
+   "defaultMessage": "ACTIONS"
  },
  {
    "id": "butlerDetail.online.status",
    "description": "online status for butlerDetail",
-   "defaultMessage": "オンライン"
+   "defaultMessage": "en ligne"
  },
  {
    "id": "butlerDetail.offline.status",
    "description": "offline status for butlerDetail",
-   "defaultMessage": "オフライン"
+   "defaultMessage": "hors ligne"
  },
  {
    "id": "butlerDetail.name.prefix",
    "description": "prefix for butler id",
-   "defaultMessage": "BOT - {botId}"
+   "defaultMessage": "ROBOT - {botId}"
  },
  {
    "id": "pps.name.prefix",
    "description": "prefix for pps id",
-   "defaultMessage": "PPS {ppsId}"
+   "defaultMessage": "PPS - {ppsId}"
  },
  {
    "id": "charger.name.prefix",
@@ -2162,211 +2162,211 @@
  {
    "id": "chargersDetail.connected.status",
    "description": "connected status for chargersDetail",
-   "defaultMessage": "接続"
+   "defaultMessage": "Connecté"
  },
  {
    "id": "chargersDetail.disconnected.status",
    "description": "disconnected status for chargersDetail",
-   "defaultMessage": "切断"
+   "defaultMessage": "Déconnecté"
  },
  {
    "id": "chargersDetail.manual.mode",
    "description": "manual mode for chargersDetail",
-   "defaultMessage": "マニュアル"
+   "defaultMessage": "Manuel"
  },
  {
    "id": "chargersDetail.auto.mode",
    "description": "Auto mode for chargersDetail",
-   "defaultMessage": "オート"
+   "defaultMessage": "Automatique"
  },
  {
    "id": "chargersDetail.name.prefix",
    "description": "prefix for cs id in chargersDetail",
-   "defaultMessage": "充電所 - {csId}"
+   "defaultMessage": "Stations de recharge - {csId}"
  },
  {
    "id": "chargersDetail.butler.prefix",
    "description": "prefix for butler id in chargersDetail",
-   "defaultMessage": "バトラー - {botId}"
+   "defaultMessage": "Butler - {botId}"
  },
  {
    "id": "orderList.progress.status",
    "description": "progress status for orderList",
-   "defaultMessage": "処理中"
+   "defaultMessage": "En cours"
  },
  {
    "id": "orderList.completed.status",
    "description": "completed status for orderList",
-   "defaultMessage": "完了"
+   "defaultMessage": "Terminé"
  },
  {
    "id": "orderList.Unfulfillable.status",
    "description": "Unfulfillable status for orderList",
-   "defaultMessage": "注文不可"
+   "defaultMessage": "Non réalisable"
  },
  {
    "id": "ppsDetail.pick.status",
    "description": "pick status for pps",
-   "defaultMessage": "ピック"
+   "defaultMessage": "Ramasser"
  },
  {
    "id": "ppsDetail.put.status",
    "description": "put status for pps",
-   "defaultMessage": "入荷"
+   "defaultMessage": "Placer"
  },
  {
    "id": "ppsDetail.audit.status",
    "description": "audit status for pps",
-   "defaultMessage": "棚卸"
+   "defaultMessage": "vérifier"
  },
  {
    "id": "ppsDetail.name.prefix",
    "description": "prefix for pps id in ppsDetail",
-   "defaultMessage": "PPS-{ppsId}"
+   "defaultMessage": "PPS - {ppsId}"
  },
  {
    "id": "ppsDetail.on.status",
    "description": "on status for pps",
-   "defaultMessage": "オン"
+   "defaultMessage": "Allumé"
  },
  {
    "id": "ppsDetail.off.prefix",
    "description": "off status for pps",
-   "defaultMessage": "オフ"
+   "defaultMessage": "Éteint"
  },
  {
    "id": "userDetails.operator",
    "description": "operator user",
-   "defaultMessage": "オペレーター"
+   "defaultMessage": "Opérateur"
  },
  {
    "id": "userDetails.manager",
    "description": "manager user",
-   "defaultMessage": "マネージャー"
+   "defaultMessage": "Gestionnaire"
  },
  {
    "id": "userDetails.pick.status",
    "description": "pick status for userDetails",
-   "defaultMessage": "ピック"
+   "defaultMessage": "Ramasser"
  },
  {
    "id": "userDetails.put.status",
    "description": "put status for userDetails",
-   "defaultMessage": "入荷"
+   "defaultMessage": "Placer"
  },
  {
    "id": "userDetails.audit.status",
    "description": "audit status for userDetails",
-   "defaultMessage": "棚卸"
+   "defaultMessage": "vérifier"
  },
  {
    "id": "userDetails.front.status",
    "description": "front status for userDetails",
-   "defaultMessage": "フロント"
+   "defaultMessage": "Avant"
  },
  {
    "id": "userDetails.back.status",
    "description": "back status for userDetails",
-   "defaultMessage": "バック"
+   "defaultMessage": "Arrière"
  },
  {
    "id": "userDetails.online.status",
    "description": "online status for userDetails",
-   "defaultMessage": "オンライン"
+   "defaultMessage": "en ligne"
  },
  {
    "id": "userDetails.Offline.status",
    "description": "Offline status for userDetails",
-   "defaultMessage": "オフライン"
+   "defaultMessage": "hors ligne"
  },
  {
    "id": "waveDetail.progress.status",
    "description": "progress status for wave",
-   "defaultMessage": "処理中"
+   "defaultMessage": "En cours"
  },
  {
    "id": "waveDetail.completed.status",
    "description": "completed status for wave",
-   "defaultMessage": "完了"
+   "defaultMessage": "Terminé"
  },
  {
    "id": "waveDetail.breached.status",
    "description": "breached status for wave",
-   "defaultMessage": "破棄"
+   "defaultMessage": "Défaillance"
  },
  {
    "id": "waveDetail.pending.status",
    "description": "pending status for wave",
-   "defaultMessage": "処理中"
+   "defaultMessage": "En cours"
  },
  {
    "id": "waveDetail.id.prefix",
    "description": "waveDetail id prefix",
-   "defaultMessage": "ウェーブ-{waveId}"
+   "defaultMessage": "ONDE-{waveId}"
  },
  {
    "id": "notify.success.add",
    "description": "Text for successfull user addition",
-   "defaultMessage": "新ユーザ「{first} {last}」が追加されました"
+   "defaultMessage": "Nouvel utilisateur «{first} {last}» rajouté avec succès"
  },
  {
    "id": "notify.success.delete",
    "description": "Text for successfull user deletion",
-   "defaultMessage": "ユーザ「{first} {last}」が削除されました"
+   "defaultMessage": "Utilisateur «{first} {last}» supprimé avec succès"
  },
  {
    "id": "notify.delete.audit.success",
    "description": "Text for successfull audit deletion",
-   "defaultMessage": "棚卸{audit_id} が削除されました"
+   "defaultMessage": "La tâche de vérification {audit_id} a été supprimée"
  },
  {
    "id": "horizontal.graph.noData",
    "description": "No data message for graph",
-   "defaultMessage": "データなし"
+   "defaultMessage": "Pas de données"
  },
  {
    "id": "graph.noData",
    "description": "No data message for graph",
-   "defaultMessage": "データなし"
+   "defaultMessage": "Pas de données"
  },
  {
    "id": "performanceParam.graph",
    "description": "Performance param graph",
-   "defaultMessage": "商品/時間"
+   "defaultMessage": "éléments/h"
  },
  {
    "id": "audit.placeholder",
    "description": "audit dropdown placeholder",
-   "defaultMessage": "タスク管理"
+   "defaultMessage": "Gestion des tâches"
  },
  {
    "id": "audit.name.prefix",
    "description": "prefix for audit",
-   "defaultMessage": "棚卸"
+   "defaultMessage": "vérifier"
  },
  {
    "id": "moving.task",
    "description": "moving task",
-   "defaultMessage": "へ移動"
+   "defaultMessage": "Déplacement pour"
  },
  {
    "id": "movingMount.task",
    "description": "movingMount task",
-   "defaultMessage": "マウントへ移動"
+   "defaultMessage": "Déplacement pour monter"
  },
  {
    "id": "movingDismount.task",
    "description": "movingDismount task",
-   "defaultMessage": "ディスマウントへ移動"
+   "defaultMessage": "Déplacement pour démonter"
  },
  {
    "id": "docked.task",
    "description": "docked task",
-   "defaultMessage": "でドックされた"
+   "defaultMessage": "Amarré à"
  },
  {
    "id": "auditdetail.auditPendingApp.prefix",
    "description": "auditPending status",
-   "defaultMessage": "問題発見"
+   "defaultMessage": "Problèmes rencontrés"
  }
 ]

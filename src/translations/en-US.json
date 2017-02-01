@@ -391,7 +391,7 @@
   {
     "id": "login.lang.english",
     "description": "English option in the language drop down",
-    "defaultMessage": "English"
+    "defaultMessage": "English (United States)"
   },
   {
     "id": "login.lang.japanese",
@@ -2435,5 +2435,4 @@
     "description":"auditPending status", 
     "defaultMessage": "Issues found"
     }
-
 ]
