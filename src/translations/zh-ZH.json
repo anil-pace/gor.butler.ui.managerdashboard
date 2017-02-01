@@ -399,7 +399,6 @@
    "description": "Text to show Operator",
    "defaultMessage": "操作員"
  },
- 
  {
    "id": "login.autologout.message",
    "description": "Auto logout message",
