@@ -377,7 +377,7 @@
  {
    "id": "login.lang.japanese",
    "description": "Japanese option in the language drop down",
-   "defaultMessage": "日本語"
+   "defaultMessage": "English (United States)"
  },
  {
    "id": "login.autologout.message",
