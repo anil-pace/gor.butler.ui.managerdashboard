@@ -30,6 +30,7 @@ const ajaxMiddleware = (function(){
                  try
                  {
                   var response=JSON.parse(httpRequest.response,httpRequest.status);
+                  console.log("Response is ", response);
                   AjaxParse(store,response,params.cause,httpRequest.status);          
                  }
                  catch(e)
@@ -48,6 +49,8 @@ const ajaxMiddleware = (function(){
     httpRequest.open(params.method, params.url);
     httpRequest.setRequestHeader('Content-Type', params.contentType || "text/html");
     httpRequest.setRequestHeader('Accept', params.accept || "text/html");
+    httpRequest.setRequestHeader('Authorization', params.authorization || null);
+    console.log("Params are ", params);
     if(params.cause!==AUTH_LOGIN)
     {
       httpRequest.setRequestHeader('Authentication-Token', params.token);

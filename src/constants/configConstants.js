@@ -1,10 +1,15 @@
 
-export const BASE_URL = 'localhost';
+export const BASE_URL = 'localhost:5000';
+export const WEBSOCKET_BASE_URL = 'localhost:8888';
+export const OAUTH_IP = 'http://192.168.8.96';
+export const OAUTH_PORT = ':8080';
+export const OAUTH_BASE_URL = '/zuul/auth-service/platform'
+export const OAUTH_TOKEN_ENDPOINT = '/oauth/token'
 export const PORT = '8888';
-export const PROTOCOL = 'https://';
-export const WS_PROTOCOL ="wss://";
-export const WS_URL = WS_PROTOCOL+BASE_URL+"/manager_api/wss"
-export const LOGIN_URL=PROTOCOL+BASE_URL+"/api/auth/token"
+export const PROTOCOL = 'http://';
+export const WS_PROTOCOL ="ws://";
+export const WS_URL = WS_PROTOCOL+WEBSOCKET_BASE_URL+"/manager_api/ws"
+export const LOGIN_URL = OAUTH_IP + OAUTH_PORT + OAUTH_BASE_URL + OAUTH_TOKEN_ENDPOINT
 export const API_URL=PROTOCOL+BASE_URL+"/api"
 export const HEADER_URL = PROTOCOL+BASE_URL+"/api/user"
 export const ORDERS_URL="/orders/md"
@@ -31,3 +36,6 @@ export const FILTER_ORDER_ID =  "&order_id~=";
 export const FILTER_AUDIT_ID = "&display_id=";
 export const PENDING_ORDERLINES = "/pending_auditlines";
 export const AUDIT_ANAMOLY  = "/anamoly_auditlines";
+export const CLIENT_ID = "wms";
+export const CLIENT_SECRET = "rubix"
+export const GRANT_TYPE = "password"
