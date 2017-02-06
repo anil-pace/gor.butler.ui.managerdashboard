@@ -208,7 +208,6 @@ class Tabs extends React.Component{
 }
 
 function mapStateToProps(state, ownProps){
-  console.log(state)
     return  {
          tab:state.tabSelected.tab || TAB_ROUTE_MAP[OVERVIEW],
          overview_status:state.tabsData.overview_status||null,
