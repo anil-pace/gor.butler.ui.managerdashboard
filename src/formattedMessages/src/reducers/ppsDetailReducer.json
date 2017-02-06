@@ -28,10 +28,5 @@
     "id": "ppsDetail.off.prefix",
     "description": "off status for pps",
     "defaultMessage": "Off"
-  },
-  {
-    "id": "ppsDetail.performance.prefix",
-    "description": "performance for pps id in ppsDetail",
-    "defaultMessage": "{performance} - orders/hr"
   }
 ]
