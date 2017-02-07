@@ -409,15 +409,9 @@
     "defaultMessage": "Operator"
   },
   {
-<<<<<<< bcd460902563a6e798f1f7e120d72018673786ef
     "id": "stringConfig.admin",
     "description": "Text to show admin",
     "defaultMessage": "Admin"
-=======
-    "id": "login.lang.english",
-    "description": "English option in the language drop down",
-    "defaultMessage": "English (United States)"
->>>>>>> added German, Chinese, French and Spanish
   },
   {
     "id": "stringConfig.temporary_unfulfillable",
