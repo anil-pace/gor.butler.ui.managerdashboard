@@ -408,7 +408,16 @@
     "description": "Text to show Operator",
     "defaultMessage": "Operator"
   },
-  
+  {
+    "id": "stringConfig.admin",
+    "description": "Text to show admin",
+    "defaultMessage": "Admin"
+  },
+  {
+    "id": "stringConfig.temporary_unfulfillable",
+    "description": "Text for temporary unfulfillable status",
+    "defaultMessage": "Unfulfillable"
+  },
   {
     "id": "login.autologout.message",
     "description": "Auto logout message",
