@@ -186,6 +186,7 @@ class CreateAudit extends React.Component{
     }
   }
 function mapStateToProps(state, ownProps){
+  console.log(state);
   return {
       auditType:  state.auditInfo.auditType  || {},
       skuCheck: state.appInfo.skuInfo || {},

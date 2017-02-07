@@ -826,6 +826,10 @@ body {
   color: #EC1C24;
 }
 
+.gor-tabs .gorTab .gor-emergency-alert {
+  color: #FFFFFF;
+}
+
 .gor-tabs .gorTab .gor-offline {
   font-family: "source sans pro";
   color: #9C9FA0;
@@ -4250,7 +4254,6 @@ input[type="checkbox"] {
 }
 
 .gor-paginate-wrap {
-  width: 23.125rem;
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
 }
