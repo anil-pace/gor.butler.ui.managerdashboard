@@ -162,7 +162,7 @@ export const  stringConfig= defineMessages({
     abandoned:{
         id: 'stringConfig.abandoned',
         description: 'Text to show abandoned',
-        defaultMessage: "Abandoned"
+        defaultMessage: "Unfulfillable"
     },
     manual:{
         id: 'stringConfig.manual',
@@ -223,7 +223,7 @@ export const  stringConfig= defineMessages({
     temporary_unfulfillable:{
         "id": "stringConfig.temporary_unfulfillable",
         "description": "Text for temporary unfulfillable status",
-        "defaultMessage": "Unfulfillable"
+        "defaultMessage": "On hold"
     },
     audit_resolved:{
         "id": "stringConfig.audit_resolved",
@@ -234,6 +234,11 @@ export const  stringConfig= defineMessages({
         "id": "stringConfig.audit_pending_approval",
         "description": "Text for audit pending approval status",
         "defaultMessage": "Unresolved"
+    },
+    audit_rejected: {
+        "id": "stringConfig.audit_rejected",
+        "description": "Text for audit rejected status",
+        "defaultMessage": "Rejected"
     }
     
 });

@@ -28,10 +28,5 @@
     "id": "orderlistTab.orderListRefreshedat",
     "description": "Refresh Status text",
     "defaultMessage": "Last Updated"
-  },
-  {
-    "id": "orderlistTab.pageNum",
-    "description": "page num orderlist",
-    "defaultMessage": "Page {currentPage} of {totalPage}"
   }
 ]

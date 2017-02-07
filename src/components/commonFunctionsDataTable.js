@@ -3,7 +3,7 @@ import {Table, Column, Cell} from 'fixed-data-table';
 import {modal} from 'react-redux-modal';
 import { FormattedMessage } from 'react-intl';
 import DropdownTable from './dropdown/dropdownTable'
-import {AUDIT_APPROVED, AUDIT_REJECTED} from '../constants/frontEndConstants';
+import {AUDIT_APPROVED, AUDIT_REJECTED,VIEW_AUDIT_ISSUES,APPROVE_AUDIT,GOR_STATUS,AUDIT_UNRESOLVED} from '../constants/frontEndConstants';
 export var SortTypes = {
   ASC: 'ASC',
   DESC: 'DESC',
@@ -132,7 +132,7 @@ export const TextCell = ({rowIndex, data, columnKey,setClass, ...props}) => (
 export const ProgressCell = ({rowIndex, data, columnKey, resolved, unresolved, ...props}) => (
   <Cell {...props}>
   <div className="gor-progressBar-wrap">
-    <div className="gor-progressBar" style={{width:data.getObjectAt(rowIndex)[columnKey]}} />
+    <div className="gor-progressBar" style={{width:((data.getObjectAt(rowIndex)[columnKey])*1.4)}} />
     {(data.getObjectAt(rowIndex)[resolved] && data.getObjectAt(rowIndex)[unresolved])?
     <div className="gor-resolve-head">
     <FormattedMessage id="audit.resolveUnresolve" description='resolveUnresolve issue for audit table' defaultMessage='{resolvedCount} issues, {unresolvedCount} unresolved' values={{resolvedCount:data.getObjectAt(rowIndex)[resolved], unresolvedCount:data.getObjectAt(rowIndex)[unresolved] }}/>
@@ -171,12 +171,14 @@ export const StatusCell = ({rowIndex, data, columnKey,statusKey, ...props}) => (
   </Cell>
 );
 
-export const ResolveCell = ({rowIndex, data, columnKey, checkStatus, ...props}) => (
+export const ResolveCell = ({rowIndex, data, columnKey, checkStatus, screenId, ...props}) => (
   <Cell {...props}>
-    <input type="radio"  name={rowIndex}  onChange={checkStatus.bind(this,rowIndex,AUDIT_APPROVED)} />
-    <FormattedMessage id="commonDataTable.resolveAudit.approve" description='resolve button' defaultMessage='Approve'/>
-    <input type="radio"  name={rowIndex}  onChange={checkStatus.bind(this,rowIndex,AUDIT_REJECTED)}/>
-    <FormattedMessage id="commonDataTable.resolveAudit.reject" description='resolve button' defaultMessage='Reject'/>
+    <div style={(screenId===VIEW_AUDIT_ISSUES || data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED)?{opacity: 0.5}:{opacity: 1}}>
+      <input type="radio"  name={rowIndex} disabled={data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED?true:false} onChange={checkStatus.bind(this,rowIndex,AUDIT_APPROVED)} />
+        <FormattedMessage id="commonDataTable.resolveAudit.approve" description='resolve button' defaultMessage='Approve '/>
+      <input type="radio"  name={rowIndex} disabled={data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED?true:false} onChange={checkStatus.bind(this,rowIndex,AUDIT_REJECTED)}/>
+        <FormattedMessage id="commonDataTable.resolveAudit.reject" description='resolve button' defaultMessage='Reject'/>
+    </div>
   </Cell>
 );
 
@@ -188,11 +190,11 @@ export const ActionCellAudit = ({rowIndex, data, columnKey, tasks, handleAudit,m
           <FormattedMessage id="commonDataTable.startAudit.button" description='start button' defaultMessage='Start audit'/>
       </button>):''}
      {data.getObjectAt(rowIndex)[resolveflag]?(
-      <button className="gor-add-btn" onClick={resolveAudit.bind(this,columnKey,rowIndex)}>
+      <button className="gor-add-btn" onClick={resolveAudit.bind(this,columnKey,rowIndex,APPROVE_AUDIT)}>
           <FormattedMessage id="commonDataTable.resolveAudit.button" description='resolve button' defaultMessage='Resolve'/>
       </button>):''}
      {data.getObjectAt(rowIndex)[checkIssues]?(
-      <button className="gor-resolve-button" onClick={resolveAudit.bind(this,columnKey,rowIndex)}>
+      <button className="gor-resolve-button" onClick={resolveAudit.bind(this,columnKey,rowIndex,VIEW_AUDIT_ISSUES)}>
           <FormattedMessage id="commonDataTable.viewIssues.button" description='viewIssues button' defaultMessage='View issues'/>
       </button>):''}
     </div>

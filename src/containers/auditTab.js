@@ -6,15 +6,15 @@ import { connect } from 'react-redux';
 import {AUDIT_URL,FILTER_AUDIT_ID} from '../constants/configConstants';
 import {getAuditData,setAuditRefresh} from '../actions/auditActions';
 import AuditTable from './auditTab/auditTable';
-import ReactPaginate from 'react-paginate';
 import {getPageData} from '../actions/paginationAction';
-import {AUDIT_RETRIEVE,GET,APP_JSON,GOR_COMPLETED_STATUS,LOCATION,SKU,AUDIT_PENDING_APPROVAL,AUDIT_RESOLVED,AUDIT_CREATED} from '../constants/frontEndConstants';
+import {AUDIT_RETRIEVE,GET,APP_JSON,GOR_COMPLETED_STATUS,LOCATION,SKU,AUDIT_PENDING_APPROVAL,AUDIT_RESOLVED,AUDIT_CREATED, AUDIT_LINE_REJECTED} from '../constants/frontEndConstants';
 import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,SEARCH_AUDIT_URL,GIVEN_PAGE,GIVEN_PAGE_SIZE} from '../constants/configConstants';
 import {setAuditSpinner} from '../actions/auditActions';
 import { defineMessages } from 'react-intl';
 import {auditHeaderSortOrder, auditHeaderSort, auditFilterDetail} from '../actions/sortHeaderActions';
 import {getDaysDiff} from '../utilities/getDaysDiff';
-
+import {addDateOffSet} from '../utilities/processDate'; 
+import GorPaginate from '../components/gorPaginate/gorPaginate';
 //Mesages for internationalization
 const messages = defineMessages({
   auditCreatedStatus: {
@@ -68,7 +68,7 @@ class AuditTab extends React.Component{
 }
 componentDidMount() {
   var data = {};
-  data.selected = 0;
+  data.selected = 1;
   this.handlePageClick(data);
 }
 _processAuditData(data,nProps){
@@ -82,12 +82,8 @@ _processAuditData(data,nProps){
   let sku  = nProps.context.intl.formatMessage(messages.auditSKU);
   let location  = nProps.context.intl.formatMessage(messages.auditLocation);
 
-
   var timeOffset= nProps.props.timeOffset || "";
-
-  
-  var priorityStatus = {"audit_created":2, "audit_pending":3, "audit_waiting":3, "audit_conflicting":3, "audit_accepted":3, "audit_started":1, "audit_tasked":1, "audit_aborted":4, "audit_completed":4, "audit_pending_approval":4};
-  var auditStatus = {"audit_created":created, "audit_pending":pending, "audit_waiting":pending, "audit_conflicting":pending, "audit_accepted":pending, "audit_started":progress, "audit_tasked":progress, "audit_aborted":completed, "audit_completed":completed, "audit_pending_approval":pendingApp, "audit_resolved":progress};
+  var auditStatus = {"audit_created":created, "audit_pending":pending, "audit_waiting":pending, "audit_conflicting":pending, "audit_accepted":pending, "audit_started":progress, "audit_tasked":progress, "audit_aborted":completed, "audit_completed":completed, "audit_pending_approval":pendingApp, "audit_resolved":progress, audit_rejected:"audit_rejected"};
   var statusClass = {"Pending": "pending", "Completed":"completed", "In Progress":"progress", "Created":"pending", "Issues found":"breached"}
   var auditType = {"sku":sku, "location":location};
   var auditDetails = [], auditData = {};
@@ -110,7 +106,6 @@ _processAuditData(data,nProps){
     }
 
     if(data[i].audit_status) {
-      auditData.statusPriority = priorityStatus[data[i].audit_status];
       if(auditData.statusPriority === undefined) {
         auditData.statusPriority = 1;
       }
@@ -133,7 +128,7 @@ _processAuditData(data,nProps){
         auditData.resolveAudit = false;
       }
 
-      if(data[i].audit_status === AUDIT_RESOLVED) {
+      if(data[i].audit_status === AUDIT_RESOLVED || data[i].audit_status === AUDIT_LINE_REJECTED) {
         auditData.viewIssues = true;
       }
 
@@ -198,14 +193,12 @@ _processAuditData(data,nProps){
   return auditDetails;
 }
 handlePageClick(data){
-  var url, appendSortUrl = "",appendTextFilterUrl="";
+  var url, appendSortUrl = "",appendTextFilterUrl="", makeDate;
   var sortHead = {"startTime":"&order_by=start_actual_time", "completedTime":"&order_by=completion_time", "display_id":"&order_by=audit_id"};
   var sortOrder = {"DESC":"&order=asc", "ASC":"&order=desc"};
-  var makeDate = new Date();
+  var currentDate = new Date();
   this.setState({selected_page:data.selected});
-  makeDate.setDate(makeDate.getDate() - 30)
-  makeDate = makeDate.getFullYear()+'-'+makeDate.getMonth()+'-'+makeDate.getDate();  
-  
+  makeDate = addDateOffSet(currentDate,-30);
   if((data.captureValue || data.captureValue === "") && data.type === "searchOrder") {
       appendTextFilterUrl = FILTER_AUDIT_ID + data.captureValue;
   }
@@ -214,7 +207,7 @@ handlePageClick(data){
     if(data.columnKey && data.sortDir) {
       appendSortUrl = sortHead[data.columnKey] + sortOrder[data.sortDir]; 
     }
-    url = SEARCH_AUDIT_URL+makeDate+GIVEN_PAGE+(data.selected+1)+GIVEN_PAGE_SIZE + appendSortUrl;
+    url = SEARCH_AUDIT_URL+makeDate+GIVEN_PAGE+(data.selected)+GIVEN_PAGE_SIZE + appendSortUrl;
   }
   else {
     url = data.url;
@@ -280,27 +273,15 @@ render(){
   
   return (
     <div>
-
-    <div>
-
-    <div className="gor-Auditlist-table">
-    <Spinner isLoading={this.props.auditSpinner} setSpinner={this.props.setAuditSpinner}/>
-    {renderTab}
-
-    </div>
-    </div>
-    <div id={"react-paginate"}>
-    <ReactPaginate previousLabel={"<<"}
-    nextLabel={">>"}
-    breakClassName={"break-me"}
-    pageNum={this.props.totalPage}
-    marginPagesDisplayed={1}
-    pageRangeDisplayed={1}
-    clickCallback={this.handlePageClick.bind(this)}
-    containerClassName={"pagination"}
-    subContainerClassName={"pages pagination"}
-    activeClassName={"active"} />
-    </div>   
+      <div>
+        <div className="gor-Auditlist-table">
+          <Spinner isLoading={this.props.auditSpinner} setSpinner={this.props.setAuditSpinner}/>
+          {renderTab}
+        </div>
+      </div>
+      <div className="gor-audit-paginate-wrap">
+        <GorPaginate getPageDetail={this.handlePageClick.bind(this)} totalPage={this.props.totalPage}/>
+      </div>  
     </div>
     );
 }
