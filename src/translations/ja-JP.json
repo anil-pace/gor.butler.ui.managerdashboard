@@ -1,4 +1,34 @@
 [
+   {
+    "id": "login.lang.english",
+    "description": "English option in the language drop down",
+    "defaultMessage": "English (United States)"
+  },
+  {
+    "id": "login.lang.japanese",
+    "description": "Japanese option in the language drop down",
+    "defaultMessage": "日本語"
+  },
+  {
+    "id": "login.lang.spanish",
+    "description": "SPANISH option in the language drop down",
+    "defaultMessage": "Español"
+  },
+  {
+    "id": "login.lang.chinese",
+    "description": "Chinese option in the language drop down",
+    "defaultMessage": "中文"
+  },
+  {
+    "id": "login.lang.german",
+    "description": "German option in the language drop down",
+    "defaultMessage": "Deutsche"
+  },
+  {
+    "id": "login.lang.french",
+    "description": "French option in the language drop down",
+    "defaultMessage": "Français"
+  },
  {
    "id": "commonDataTable.edit.button",
    "description": "edit button",
@@ -369,16 +399,7 @@
    "description": "Text to show Operator",
    "defaultMessage": "オペレーター"
  },
- {
-   "id": "login.lang.english",
-   "description": "English option in the language drop down",
-   "defaultMessage": "英語"
- },
- {
-   "id": "login.lang.japanese",
-   "description": "Japanese option in the language drop down",
-   "defaultMessage": "English (United States)"
- },
+ 
  {
    "id": "login.autologout.message",
    "description": "Auto logout message",

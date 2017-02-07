@@ -26,5 +26,9 @@
   {
     "id": "auditdetail.auditPendingApp.prefix",
     "defaultMessage": "Issues found"
+  },
+  {
+    "id": "auditdetail.auditRejected.prefix",
+    "defaultMessage": "Rejected"
   }
 ]
