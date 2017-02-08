@@ -129,7 +129,7 @@ class OrderListTable extends React.Component {
     let pendingDrop = <FormattedMessage id="pendingDrop.table.allDrop" description="pending dropdown option for orderlist" defaultMessage ="Pending orders"/> 
     let completedDrop = <FormattedMessage id="completedDrop.table.allDrop" description="completed dropdown option for orderlist" defaultMessage ="Completed orders"/> 
     let exception = <FormattedMessage id="exceptionDrop.table" description="exception order dropdown for orderlist" defaultMessage="Exception"/>
-
+    
     let allTimeDrop = <FormattedMessage id="orderlist.table.allTimeDrop" description="allTime dropdown option for orderlist" defaultMessage ="All"/> 
     let oneHrDrop = <FormattedMessage id="orderlist.table.oneHrDrop" description="oneHr dropdown option for orderlist" defaultMessage ="Last 1 hours"/> 
     let twoHrDrop = <FormattedMessage id="pendingDrop.table.twoHrDrop" description="twoHr dropdown option for orderlist" defaultMessage ="Last 2 hours"/> 

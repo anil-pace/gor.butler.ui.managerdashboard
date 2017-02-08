@@ -22,6 +22,11 @@ class CreateAudit extends React.Component{
     this.props.resetAuditType();
     this.props.resetForm();            
   }
+
+  componentWillMount() {
+    var initialSkuInfo = {};
+    this.props.validateSKU(initialSkuInfo);
+  }
   _removeThisModal() {
     this.props.removeModal();
   }
@@ -30,6 +35,10 @@ class CreateAudit extends React.Component{
     {
       this._removeThisModal();
     }
+  }
+
+  _validSku() {
+    console.log("sdjsdnvkjsdnvkj")
   }
   _checkSku(skuId){
     let skuInfo;
@@ -152,7 +161,7 @@ class CreateAudit extends React.Component{
             defaultMessage='Enter SKU code'/></div>
               <div className='gor-sub-head'><FormattedMessage id="audit.add.sku.subheading" description='Subtext for enter sku' 
             defaultMessage='Enter alphanumeric SKU code of the item to be audited'/></div>
-              <input className={"gor-usr-fdlg"+(this.props.skuCheck.type === ERROR ? ' gor-input-error':' gor-input-ok')} placeholder="e.g. 46978072" id="skuid"  ref={node => { this.skuId = node }} />
+              <input className={"gor-usr-fdlg"+(this.props.skuCheck.type === ERROR ? ' gor-input-error':' gor-input-ok')} onBlur={this._validSku.bind(this)} placeholder="e.g. 46978072" id="skuid"  ref={node => { this.skuId = node }}/>
               {this.props.skuCheck.type===ERROR?<FieldError txt={this.props.skuCheck.msg} />:''}
             </div>
 

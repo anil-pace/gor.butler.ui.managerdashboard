@@ -1,5 +1,5 @@
 
-
+.gor-close,
 .gor-edit-icon,
 .gor-del-icon,
 .dropdown-arrow-icon,
@@ -227,4 +227,12 @@ background-position: -101px -52px;
     width: 16px;
     height: 16px;
     display: inline-block;
+}
+
+.gor-close {
+    background-position: -61px -94px;
+    width: 14px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: middle;
 }
