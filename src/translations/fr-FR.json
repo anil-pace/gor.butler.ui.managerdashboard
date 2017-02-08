@@ -192,7 +192,7 @@
  {
    "id": "login.butler.trademark",
    "description": "Trademark",
-   "defaultMessage": "MD"
+   "defaultMessage": "TM"
  },
  {
    "id": "login.butler.manageInterface",
@@ -399,7 +399,6 @@
    "description": "Text to show Operator",
    "defaultMessage": "Opérateur"
  },
- 
  {
    "id": "login.autologout.message",
    "description": "Auto logout message",
@@ -1518,7 +1517,7 @@
  {
    "id": "butlerDetail.name.prefix",
    "description": "prefix for butler id",
-   "defaultMessage": "ROBOT - {botId}"
+   "defaultMessage": "Butler - {botId}"
  },
  {
    "id": "pps.name.prefix",

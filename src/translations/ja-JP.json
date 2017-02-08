@@ -187,7 +187,7 @@
  {
    "id": "login.butler.title",
    "description": "Text for butler management Login form title",
-   "defaultMessage": "バトラー"
+   "defaultMessage": "Butler"
  },
  {
    "id": "login.butler.trademark",
@@ -399,7 +399,6 @@
    "description": "Text to show Operator",
    "defaultMessage": "オペレーター"
  },
- 
  {
    "id": "login.autologout.message",
    "description": "Auto logout message",

@@ -50,6 +50,16 @@
     "defaultMessage": "Copyright @ 2016 GreyOrange Pte Ltd"
   },
   {
+    "id": "graph.noData",
+    "description": "No data message for graph",
+    "defaultMessage": "No Data"
+  },
+  {
+    "id": "horizontal.graph.noData",
+    "description": "No data message for graph",
+    "defaultMessage": "No Data"
+  },
+  {
     "id": "snapshot.inventory.usedSpace",
     "description": "Text for used space",
     "defaultMessage": "{utilisedSpace}% space utilized"
@@ -139,9 +149,9 @@
     "defaultMessage": "Today's"
   },
   {
-    "id": "inventory.snaphot.openingStock",
+    "id": "inventory.snaphot.currentStock",
     "description": "Snapshot table header",
-    "defaultMessage": "Opening Stock"
+    "defaultMessage": "Current Stock"
   },
   {
     "id": "inventory.snaphot.closingStock",
@@ -164,9 +174,9 @@
     "defaultMessage": "Items Pick"
   },
   {
-    "id": "inventory.snaphot.currentStock",
+    "id": "inventory.snaphot.openingStock",
     "description": "Snapshot table header",
-    "defaultMessage": "Current Stock"
+    "defaultMessage": "Opening Stock"
   },
   {
     "id": "inventory.snaphot.sku",
@@ -398,7 +408,16 @@
     "description": "Text to show Operator",
     "defaultMessage": "Operator"
   },
-  
+  {
+    "id": "stringConfig.admin",
+    "description": "Text to show admin",
+    "defaultMessage": "Admin"
+  },
+  {
+    "id": "stringConfig.temporary_unfulfillable",
+    "description": "Text for temporary unfulfillable status",
+    "defaultMessage": "Unfulfillable"
+  },
   {
     "id": "login.autologout.message",
     "description": "Auto logout message",
@@ -702,6 +721,11 @@
   {
     "id": "auditdetail.location.prefix",
     "defaultMessage": "Location"
+  },
+  {
+    "id": "audit.placeholder",
+    "description": "audit dropdown placeholder",
+    "defaultMessage": "Manage Tasks 2"
   },
   {
     "id": "audit.table.duplicateTask",
@@ -1358,6 +1382,11 @@
     "defaultMessage": "{totalOrders} orders"
   },
   {
+    "id": "performanceParam.graph",
+    "description": "Performance param graph",
+    "defaultMessage": "items/hr"
+  },
+  {
     "id": "health.pps",
     "description": "pps health",
     "defaultMessage": "PPS"
@@ -1528,6 +1557,51 @@
     "defaultMessage": "MSU - {msuId}"
   },
   {
+    "id": "audit.name.prefix",
+    "description": "prefix for audit",
+    "defaultMessage": "Audit"
+  },
+  {
+    "id": "pick.name.prefix",
+    "description": "prefix for Pick",
+    "defaultMessage": "Pick"
+  },
+  {
+    "id": "Put.name.prefix",
+    "description": "prefix for put",
+    "defaultMessage": "Put"
+  },
+  {
+    "id": "Charging.name.prefix",
+    "description": "prefix for Charging",
+    "defaultMessage": "Charging"
+  },
+  {
+    "id": "Move.name.prefix",
+    "description": "prefix for Charging",
+    "defaultMessage": "Move"
+  },
+  {
+    "id": "moving.task",
+    "description": "moving task",
+    "defaultMessage": "Moving to"
+  },
+  {
+    "id": "movingMount.task",
+    "description": "movingMount task",
+    "defaultMessage": "Moving to mount"
+  },
+  {
+    "id": "movingDismount.task",
+    "description": "movingDismount task",
+    "defaultMessage": "Moving to dismount"
+  },
+  {
+    "id": "docked.task",
+    "description": "docked task",
+    "defaultMessage": "Docked at"
+  },
+  {
     "id": "butlerbot.table.noData",
     "description": "No data message for butlerbot table",
     "defaultMessage": "No Butler Bot Found"
@@ -1681,6 +1755,11 @@
     "id": "ppsDetail.name.prefix",
     "description": "prefix for pps id in ppsDetail",
     "defaultMessage": "PPS-{ppsId}"
+  },
+  {
+    "id": "ppsDetail.performance.prefix",
+    "description": "prefix for pps id in ppsDetail",
+    "defaultMessage": "{performance} items/hr"
   },
   {
     "id": "pps.dropdown.placeholder",
@@ -2235,6 +2314,11 @@
     "id": "ppsDetail.off.prefix",
     "description": "off status for pps",
     "defaultMessage": "Off"
+  },
+  {
+    "id": "ppsDetail.performance.prefix",
+    "description": "performance for pps id in ppsDetail",
+    "defaultMessage": "{performance} - orders/hr"
   },
   {
     "id": "userDetails.operator",
