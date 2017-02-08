@@ -6,14 +6,15 @@ import {recieveHeaderInfo} from '../actions/headerAction';
 import {getPPSAudit} from '../actions/auditActions';
 import {codeToString} from './codeToString';
 import {setOrderListSpinner} from '../actions/orderListActions';
-import {notifySuccess, notifyFail,validateID,notifyDelete,loginError} from '../actions/validationActions';
+import {notifySuccess, notifyFail,validateID,notifyDelete,loginError,validateSKU} from '../actions/validationActions';
 import {ERROR,AUTH_LOGIN, ADD_USER, RECIEVE_TIME_OFFSET,CHECK_ID,DELETE_USER,GET_ROLES,ORDERS_RETRIEVE,PPS_MODE_CHANGE,EDIT_USER,RECIEVE_HEADER,SUCCESS,CREATE_AUDIT,AUDIT_RETRIEVE,GET_PPSLIST,START_AUDIT,DELETE_AUDIT,AUDIT_RESOLVE_LINES,AUDIT_RESOLVE_CONFIRMED} from '../constants/frontEndConstants';
-import {BUTLER_UI,CODE_UE002,BUTLER_SUPERVISOR} from '../constants/backEndConstants'
+import {BUTLER_UI,CODE_UE002,BUTLER_SUPERVISOR,CODE_E027} from '../constants/backEndConstants'
 import {UE002,E028,E029,MODE_REQUESTED,TYPE_SUCCESS,AS001,ERR_API,ERR_USR,ERR_RES,ERR_AUDIT,AS00A,WRONG_CRED} from '../constants/messageConstants';
 import {ShowError} from './showError';
 import {endSession} from './endSession';
 import {setResolveAuditSpinner} from '../actions/spinnerAction';
 import {statusToString} from './statusToString';
+import {INVALID_SKUID} from '../constants/messageConstants';
 
 export function AjaxParse(store,res,cause,status)
 {
@@ -104,10 +105,16 @@ export function AjaxParse(store,res,cause,status)
 			break;
 		case CREATE_AUDIT:
 			if(res.alert_data)								
-		    {	
-		    	stringInfo=codeToString(res.alert_data[0]);
-		    	store.dispatch(notifyFail(stringInfo.msg));
-		    	store.dispatch(setAuditRefresh(false));//reset refresh flag			   		
+		    {
+		    	if(res.alert_data[0].code === CODE_E027) {
+		    		var skuInfo={ type:ERROR, msg:INVALID_SKUID};
+		    		store.dispatch(validateSKU(skuInfo));
+		    	}
+		    	else {
+			    	stringInfo=codeToString(res.alert_data[0]);
+			    	store.dispatch(notifyFail(stringInfo.msg));
+			    	store.dispatch(setAuditRefresh(false));//reset refresh flag		
+		    	}	   		
 		   	}
 		   	else
 		   	{

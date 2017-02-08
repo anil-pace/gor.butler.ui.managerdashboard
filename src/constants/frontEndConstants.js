@@ -391,3 +391,7 @@ export const SET_CS_FILTER = "SET_CS_FILTER";
 export const SET_WAVE_FILTER = "SET_WAVE_FILTER"
 export const AUDIT_APPROVED = "auditline_approved";
 export const AUDIT_REJECTED = "auditline_rejected";
+
+//search dropdown constants
+export const SHOW_ALL_ENTRIES = "available";
+export const SHOW_SELECTED_ENTRIES = "checked";
