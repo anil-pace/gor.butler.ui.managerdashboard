@@ -1,9 +1,7 @@
 
-<<<<<<< HEAD
-export const BASE_URL = '192.168.8.155';
-=======
-export const BASE_URL = 'localhost';
->>>>>>> 699d5c3b2266e62e3663a73b2e50ee6508d8e1fb
+
+
+export const BASE_URL = '192.168.8.103' ;
 export const PORT = '8888';
 export const PROTOCOL = 'https://';
 export const WS_PROTOCOL ="wss://";

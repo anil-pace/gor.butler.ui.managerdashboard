@@ -47,49 +47,56 @@ class StackedChartHorizontal extends React.Component{
       .attr("height", config.svgInfo.height)
       .append("g")
       .attr("transform", "translate(" + config.svgInfo.x + "," + config.svgInfo.y + ")");
+    var totalSpaceUtilization = data ? data.warehouse_utilization : 0;
+    var totalSpaceInPx = (totalSpaceUtilization/100)*config.svgInfo.width;
+    var unusedSpace = data ? data.unusedSpace : 100;
+    var unusedColorCode = data ? data.colorCode : "#EEE";
      data = data ? data.category_data : [];
-    var x = 0,utilisedSpace=0;
-    var values={"utilisedSpace":utilisedSpace};
+    var x = 0;//utilisedSpace=0;
+    var values={"utilisedSpace":totalSpaceUtilization};
 
     for(let i = 0, l =data.length ; i< l ; i++){
-    
-    if(!data[i].warehouse_utilization && data[i].unusedSpace){
-        
-        values.utilisedSpace = ""+(utilisedSpace.toFixed(2));
-        if(utilisedSpace){
-        svg.append("line")
-        .attr("x1",x+"%")
-        .attr("x2",x+"%")
-        .attr("y1",config.svgInfo.lineInfo.y1)
-        .attr("y2",config.svgInfo.lineInfo.y2)
-        .style("stroke",d3.rgb(config.svgInfo.lineInfo.stroke))
-        .style("stroke-width",config.svgInfo.lineInfo["stroke-width"])
-        svg.append("text")
-        .attr("x",(x-14 < 0 ? 0 : x-14)+"%")
-        .attr("y",config.svgInfo.textInfo.y)
-        .text(this.context.intl.formatMessage(messages.invUsedSpace,values))
-      }
       
-
-      }
-      else{
-        utilisedSpace+=data[i].warehouse_utilization;
-      }
       svg.append("rect")
-      .attr("x",x+"%")
+      .attr("x",x+"px")
       .attr("y",config.svgInfo.rectInfo.y)
-      .attr("width",""+(data[i].warehouse_utilization || data[i].unusedSpace)+"%")
+      .attr("width",""+(data[i].warehouse_utilization ? (data[i].warehouse_utilization/100)*totalSpaceInPx : 0)+"px")
       .attr("height",config.svgInfo.rectInfo.height)
       .style("fill",d3.rgb(data[i].colorCode))
 
-      if(!utilisedSpace){
-        svg.append("text")
-        .attr("x",(config.svgInfo.width/2)-44)
-        .attr("y",Number(config.svgInfo.height)/2)
-        .text(this.context.intl.formatMessage(messages.invUsedSpace,values))
-      }
-
-      x+=(data[i].warehouse_utilization || data[i].unusedSpace)
+      x+=(data[i].warehouse_utilization ? (data[i].warehouse_utilization/100)*totalSpaceInPx : 0)
+    }
+    svg.append("rect")
+      .attr("x",x+"px")
+      .attr("y",config.svgInfo.rectInfo.y)
+      .attr("width",""+(totalSpaceInPx-x)+"px")
+      .attr("height",config.svgInfo.rectInfo.height)
+      .style("fill",d3.rgb("#EEE"))
+    svg.append("rect")
+      .attr("x",totalSpaceInPx+"px")
+      .attr("y",config.svgInfo.rectInfo.y)
+      .attr("width",""+((unusedSpace/100)*config.svgInfo.width)+"px")
+      .attr("height",config.svgInfo.rectInfo.height)
+      .style("fill",d3.rgb(unusedColorCode))
+  
+     if(totalSpaceUtilization){
+      svg.append("line")
+      .attr("x1",totalSpaceInPx+"px")
+      .attr("x2",totalSpaceInPx+"px")
+      .attr("y1",config.svgInfo.lineInfo.y1)
+      .attr("y2",config.svgInfo.lineInfo.y2)
+      .style("stroke",d3.rgb(config.svgInfo.lineInfo.stroke))
+      .style("stroke-width",config.svgInfo.lineInfo["stroke-width"])
+      svg.append("text")
+      .attr("x",(x-14 < 0 ? 0 : x-14)+"px")
+      .attr("y",config.svgInfo.textInfo.y)
+      .text(this.context.intl.formatMessage(messages.invUsedSpace,values))
+    }
+    else{
+      svg.append("text")
+      .attr("x",(config.svgInfo.width/2)-44)
+      .attr("y",Number(config.svgInfo.height)/2)
+      .text(this.context.intl.formatMessage(messages.invUsedSpace,values))
     }
     this.setState({d3: node});
   }

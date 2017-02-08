@@ -219,7 +219,8 @@ export const CATEGORY_COLOR_MAP = [
 	"#F7F7F7",
 	"#A44550",
 	"#8F39EC",
-	"#EEEEEE"
+	"#EEEEEE",
+	"#FFFFFF"
 ]
 export const INV_HIST_LEGEND_COLOR = "#498BD8";
 export const INV_LINE_LEGEND_IPICKED_COLOR = "#D0021B";
