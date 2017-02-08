@@ -192,7 +192,7 @@
  {
    "id": "login.butler.trademark",
    "description": "Trademark",
-   "defaultMessage": "MD"
+   "defaultMessage": "TM"
  },
  {
    "id": "login.butler.manageInterface",
@@ -1517,7 +1517,7 @@
  {
    "id": "butlerDetail.name.prefix",
    "description": "prefix for butler id",
-   "defaultMessage": "ROBOT - {botId}"
+   "defaultMessage": "Butler - {botId}"
  },
  {
    "id": "pps.name.prefix",
