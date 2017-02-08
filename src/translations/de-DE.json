@@ -187,7 +187,7 @@
 {
    "id": "login.butler.title",
    "description": "Text for butler management Login form title",
-   "defaultMessage": "Diener"
+   "defaultMessage": "Butler"
 },
 {
    "id": "login.butler.trademark",
@@ -247,7 +247,7 @@
 {
    "id": "butlerBot.tab.heading",
    "description": "butler bot tab",
-   "defaultMessage": "Diener Bots"
+   "defaultMessage": "Butler Bots"
 },
 {
    "id": "pps.tab.heading",
@@ -1372,7 +1372,7 @@
 {
    "id": "health.Butler",
    "description": "Butler bots health",
-   "defaultMessage": "Diener Bots"
+   "defaultMessage": "Butler Bots"
 },
 {
    "id": "health.ChargingStation",
@@ -1542,7 +1542,7 @@
 {
    "id": "butlerBot.table.heading",
    "description": "Heading for butlerbot",
-   "defaultMessage": "Diener Bots"
+   "defaultMessage": "Butler Bots"
 },
 {
    "id": "ButlerBotTable.TotalBot",
@@ -1607,7 +1607,7 @@
 {
    "id": "chargersDetail.butler.prefix",
    "description": "prefix for butler id in chargersDetail",
-   "defaultMessage": "Diener - {botId}"
+   "defaultMessage": "Butler - {botId}"
 },
 {
    "id": "ChargingStations.table.noData",
@@ -2207,7 +2207,7 @@
 {
    "id": "chargersDetail.butler.prefix",
    "description": "prefix for butler id in chargersDetail",
-   "defaultMessage": "Diener - {botId}"
+   "defaultMessage": "Butler - {botId}"
 },
 {
    "id": "orderList.progress.status",

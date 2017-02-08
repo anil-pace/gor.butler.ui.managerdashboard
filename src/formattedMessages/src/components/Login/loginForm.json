@@ -1,15 +1,5 @@
 [
   {
-    "id": "login.butler.title",
-    "description": "Text for butler management Login form title",
-    "defaultMessage": "Butler"
-  },
-  {
-    "id": "login.butler.trademark",
-    "description": "Trademark",
-    "defaultMessage": "TM"
-  },
-  {
     "id": "login.butler.manageInterface",
     "description": "Text for Management Interface",
     "defaultMessage": "Management Interface"
