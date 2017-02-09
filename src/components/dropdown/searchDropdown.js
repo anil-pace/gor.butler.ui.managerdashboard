@@ -34,7 +34,7 @@ class SearchDropdown extends Component {
       }
     }
     this.setState({checkedIndex:checkedState, selected:placeholderList, totalChecked:totalChecked});
-    this._hideList();
+    //this._hideList();
   }
 
   _showList() { 
