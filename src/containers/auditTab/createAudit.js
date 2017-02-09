@@ -144,30 +144,30 @@ class CreateAudit extends React.Component{
     return skuAttributeData;
   }
 
+  _searchDropdownEntries(skuState,processedSkuResponse) {
+    if(skuState === VALID_SKU && processedSkuResponse.keys){
+      var key = processedSkuResponse.keys[0]; //not generic need to change in version 2 of pdfa
+      var dropdownDataField={value:""},dropdownData=[];
+      var skuAttributes = this.props.skuAttributes.audit_attributes_values[key];
+      for (var i = skuAttributes.length - 1; i >= 0; i--) {
+        dropdownDataField.value = skuAttributes[i];
+        dropdownData.push(dropdownDataField);
+        dropdownDataField={value:""};
+      }
+      return dropdownData;
+    }
+  }
+
   render()
   {
-      //---------------------------------------------------
-      const tempdata = [
-    { value: '11'},
-    { value: '2'},
-    { value: '31'},
-    { value: '44'},
-    { value: '51'},
-    { value: '71'},
-    { value: '8'},
-    { value: '1'},
-    { value: '44'},
-    { value: '51'}
-    ];
-    
-      //---------------------------------------------------
+     
       let tick=(<div className='gor-tick'/>);  
       let validSkuMessg = <FormattedMessage id="audit.valid.sku" description='text for valid sku' defaultMessage='SKU confirmed'/>;
       let invalidSku = <FormattedMessage id="audit.invalid.sku" description='text for invalid sku' defaultMessage='Please enter correct SKU number'/>;
       let validSkuNoAtri = <FormattedMessage id="audit.noAtrributes.sku" description='text for valid sku with no attributed' defaultMessage='SKU confirmed but no batch number found'/>;
       var processedSkuResponse = this._processSkuAttributes();
       var skuState = this._claculateSkuState(processedSkuResponse);
-      
+      var dropdownData = this._searchDropdownEntries(skuState,processedSkuResponse);
               
       return (
         <div>
@@ -222,7 +222,7 @@ class CreateAudit extends React.Component{
               </div>
               {skuState===NO_ATTRIBUTE_SKU?"":
                 <div className={"gor-searchDropdown-audit-wrap" + (skuState!= VALID_SKU?" gor-disable-content":"")}>
-                  <SearchDropdown list={tempdata}/>
+                  <SearchDropdown list={dropdownData}/>
                 </div>}
             </div>
 
