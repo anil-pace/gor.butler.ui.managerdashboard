@@ -8,7 +8,7 @@ class SearchDropdown extends Component {
     var listLength = this.props.list.length;
     var initialIndex = Array.from(Array(listLength).keys());
     var checkedIndex  = new Array(listLength).fill(false);
-    this.state = {selected:"", showList:false, currentQuery:"", currentList:initialIndex, checkedIndex:checkedIndex, totalChecked:0, tabSelected:SHOW_ALL_ENTRIES}
+    this.state = {selected:"Search and select", showList:false, currentQuery:"", currentList:initialIndex, checkedIndex:checkedIndex, totalChecked:0, tabSelected:SHOW_ALL_ENTRIES}
     this._showList = this._showList.bind(this);
   }
 
@@ -33,7 +33,8 @@ class SearchDropdown extends Component {
         totalChecked++;
       }
     }
-    this.setState({checkedIndex:checkedState, selected:placeholderList, totalChecked:totalChecked})
+    this.setState({checkedIndex:checkedState, selected:placeholderList, totalChecked:totalChecked});
+    this._hideList();
   }
 
   _showList() { 
@@ -81,7 +82,7 @@ class SearchDropdown extends Component {
   render () {
     var dropdownOptions = this._renderList();
     return (
-      <div style={{width:'206px', position:'absolute'}}>
+      <div style={{width:'100%'}}>
         <div className={this.state.showList?"gor-searchDropdown-input-wrap-open":"gor-searchDropdown-input-wrap"} onClick={() => {this._showList()}}>
           <div className="gor-searchDropdown-icon-wrap">
             <div className="searchbox-magnifying-glass-icon"/>

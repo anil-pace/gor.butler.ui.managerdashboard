@@ -11,7 +11,6 @@ import PickStatusWidget from '../containers/pickStatusWidget'
 import { connect } from 'react-redux';
 import Dimensions from 'react-dimensions'
 
-
 class Overview extends React.Component{
 	constructor(props) 
 	{
@@ -26,6 +25,7 @@ class Overview extends React.Component{
 					<div className="col span_2_of_4">
 						<PutStatusWidget />
 						<AuditStatusWidget />
+
 					</div>
 					<div className="col span_2_of_4 gorNoML">
 						<PickStatusWidget />
