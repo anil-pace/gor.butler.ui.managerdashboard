@@ -1,4 +1,4 @@
-import { AJAX_CALL,AUDIT_RETRIEVE, RECIEVE_AUDIT_DATA,SET_AUDIT,RESET_AUDIT,SETAUDIT_PPS,REFRESH_AUDIT,DISPLAY_AUDIT_SPINNER,SET_AUDIT_ORDERLINES} from '../constants/frontEndConstants'
+import { AJAX_CALL,AUDIT_RETRIEVE, RECIEVE_AUDIT_DATA,SET_AUDIT,RESET_AUDIT,SETAUDIT_PPS,REFRESH_AUDIT,DISPLAY_AUDIT_SPINNER,SET_AUDIT_ORDERLINES, VALIDATED_ATTIBUTES_DATA} from '../constants/frontEndConstants'
 
 export function getAuditData(params){
 	return {
@@ -65,6 +65,14 @@ export function resolveAuditLines(params) {
   return {
     type: AJAX_CALL,
     params
+  }
+}
+
+export function auditValidatedAttributes(data) {
+  console.log(data)
+  return {
+    type: VALIDATED_ATTIBUTES_DATA,
+    data
   }
 }
 

@@ -1,15 +1,16 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
-import { resetForm,validateSKU,validateLOC } from '../../actions/validationActions'; 
-import {setAuditType,resetAuditType} from '../../actions/auditActions';
+import { resetForm,validateSKU,validateLOC,validateSKUcode, validateSKUcodeSpinner } from '../../actions/validationActions'; 
+import {setAuditType,resetAuditType,auditValidatedAttributes} from '../../actions/auditActions';
 import {userRequest} from '../../actions/userActions';
 import { connect } from 'react-redux';
 import {INVALID_SKUID,INVALID_LOCID,TYPE_SUCCESS} from '../../constants/messageConstants';
-import { ERROR,SUCCESS,SKU,LOCATION,CREATE_AUDIT,APP_JSON,POST } from '../../constants/frontEndConstants';
-import { AUDIT_URL } from '../../constants/configConstants';
+import { ERROR,SUCCESS,SKU,LOCATION,CREATE_AUDIT,APP_JSON,POST, GET, VALIDATE_SKU_ID, VALID_SKU, NO_ATTRIBUTE_SKU, INVALID_SKU } from '../../constants/frontEndConstants';
+import { AUDIT_URL ,SKU_VALIDATION_URL} from '../../constants/configConstants';
 import FieldError from '../../components/fielderror/fielderror';
 import { locationStatus, skuStatus } from '../../utilities/fieldCheck';
+import SearchDropdown from '../../components/dropdown/searchDropdown';
 
 
 class CreateAudit extends React.Component{
@@ -24,8 +25,11 @@ class CreateAudit extends React.Component{
   }
 
   componentWillMount() {
-    var initialSkuInfo = {};
+    var initialSkuInfo = {}, initialAttributes;
+    this.noSkuValidation = true;
     this.props.validateSKU(initialSkuInfo);
+    this.props.validateSKUcodeSpinner(false);
+    this.props.auditValidatedAttributes(initialAttributes)
   }
   _removeThisModal() {
     this.props.removeModal();
@@ -38,7 +42,18 @@ class CreateAudit extends React.Component{
   }
 
   _validSku() {
-    console.log("sdjsdnvkjsdnvkj")
+    var initialAttributes;
+    let urlData={
+         'url': SKU_VALIDATION_URL + this.skuId.value,
+         'method':GET,
+         'cause': VALIDATE_SKU_ID,
+         'token': this.props.auth_token,
+         'contentType':APP_JSON
+        }
+      this.props.auditValidatedAttributes(initialAttributes)
+      this.props.validateSKUcodeSpinner(true);
+      this.props.validateSKUcode(urlData);
+      this.noSkuValidation = false;
   }
   _checkSku(skuId){
     let skuInfo;
@@ -103,9 +118,36 @@ class CreateAudit extends React.Component{
     this.props.userRequest(userData);
     this.props.removeModal();
   }
+
+  _claculateSkuState() {
+    var skuState = (!this.noSkuValidation?(this.props.skuValidationResponse?"":(this.props.skuAttributes?(this.props.skuAttributes.audit_attributes_values?VALID_SKU:NO_ATTRIBUTE_SKU):INVALID_SKU)):"");
+    return skuState
+  }
+
   render()
   {
+      //---------------------------------------------------
+      const tempdata = [
+    { value: '11'},
+    { value: '2'},
+    { value: '31'},
+    { value: '44'},
+    { value: '51'},
+    { value: '71'},
+    { value: '8'},
+    { value: '1'},
+    { value: '44'},
+    { value: '51'}
+    ];
+    
+      //---------------------------------------------------
       let tick=(<div className='gor-tick'/>);  
+      let validSkuMessg = <FormattedMessage id="audit.valid.sku" description='text for valid sku' defaultMessage='SKU confirmed'/>;
+      let invalidSku = <FormattedMessage id="audit.invalid.sku" description='text for invalid sku' defaultMessage='Please enter correct SKU number'/>;
+      let validSkuNoAtri = <FormattedMessage id="audit.noAtrributes.sku" description='text for valid sku with no attributed' defaultMessage='SKU confirmed but no batch number found'/>;
+      var skuState = this._claculateSkuState()
+      
+              
       return (
         <div>
           <div className="gor-modal-content">
@@ -124,14 +166,9 @@ class CreateAudit extends React.Component{
             <div className='gor-usr-form'>
             <div className='gor-usr-details'>
             <div className='gor-usr-hdlg'><FormattedMessage id="audit.add.auditdetails.heading" description='Text for audit details heading' 
-            defaultMessage='Select the type of audit task'/></div>
-            <div className='gor-sub-head'><FormattedMessage id="audit.add.auditdetails.subheading" description='Text for audit details subheading' 
-            defaultMessage='Select the audit type and enter details accordingly'/><p><FormattedMessage id="audit.add.auditdetails.fields" description='Text for field information' 
-            defaultMessage='All fields are required'/></p></div>
-
+            defaultMessage='Select audit type by'/></div>
               <div className='gor-usr-field'>              
-                <div className='gor-usr-hdsm'><FormattedMessage id="audit.add.type.heading" description='Text for Audit type' 
-            defaultMessage='Audit type'/></div>
+                
               </div>
             
                 <div className='gor-role'>
@@ -139,30 +176,33 @@ class CreateAudit extends React.Component{
                 <FormattedMessage id="audit.add.typedetails.sku" description='Text for sku' 
             defaultMessage='Audit by SKU code'/> </span>
                 </div>
-                <div className='gor-choose'>
-                  <div className='gor-sub-head'><FormattedMessage id="audit.add.typedetails.skutext" description='Subtext for sku' 
-            defaultMessage='Create an audit task based on the SKU code of an item'/></div>
-                </div>
-
                 <div className='gor-role'>
                 <input type="radio" value={LOCATION} onChange={this._checkType.bind(this)} name="role" ref={node => { this.location = node }} /><span className='gor-usr-hdsm'>
                 <FormattedMessage id="audit.add.typedetails.location" description='Text for location' 
             defaultMessage='Audit by Location code'/></span>
                 </div>
-                <div className='gor-choose'>
-                <div className='gor-sub-head'><FormattedMessage id="audit.add.typedetails.locationtext" description='Subtext for manager' 
-            defaultMessage='Create an audit task based on the location of a MSU'/></div>
-                </div>
+                
             </div>
             
             <div className='gor-usr-details'>
             <div style={{'display':this.props.auditType==LOCATION?'none':'block'}}>
              <div className='gor-usr-hdsm'><FormattedMessage id="audit.add.sku.heading" description='Text for SKU heading' 
             defaultMessage='Enter SKU code'/></div>
-              <div className='gor-sub-head'><FormattedMessage id="audit.add.sku.subheading" description='Subtext for enter sku' 
-            defaultMessage='Enter alphanumeric SKU code of the item to be audited'/></div>
-              <input className={"gor-usr-fdlg"+(this.props.skuCheck.type === ERROR ? ' gor-input-error':' gor-input-ok')} onBlur={this._validSku.bind(this)} placeholder="e.g. 46978072" id="skuid"  ref={node => { this.skuId = node }}/>
-              {this.props.skuCheck.type===ERROR?<FieldError txt={this.props.skuCheck.msg} />:''}
+              <div className="gor-audit-input-wrap">
+                <input className={"gor-audit-input"+(skuState===INVALID_SKU ? ' gor-input-error':' gor-input-ok')} placeholder="e.g. 46978072" id="skuid"  ref={node => { this.skuId = node }}/>
+                <div className={skuState===INVALID_SKU?"gor-login-error":(skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU?"header-yellow-alert-icon":"")}/>
+              </div>
+              <div className={"gor-sku-validation-btn-wrap" + (this.props.skuValidationResponse?" gor-disable-content":"")}>
+                <button className="gor-auditCreate-btn" type="button" onClick={this._validSku.bind(this)}><FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
+                        defaultMessage='Validate'/></button>
+              </div>
+              <div className={skuState===INVALID_SKU?"gor-sku-error":"gor-sku-valid"}>
+                {skuState===INVALID_SKU?invalidSku:(skuState===VALID_SKU?validSkuMessg:(skuState===NO_ATTRIBUTE_SKU?validSkuNoAtri:""))}
+              </div>
+              {this.props.skuAttributes && !this.props.skuAttributes.audit_attributes_values?"":
+                <div className={"gor-searchDropdown-audit-wrap" + (!this.props.skuAttributes?" gor-disable-content":"")}>
+                  <SearchDropdown list={tempdata}/>
+                </div>}
             </div>
 
             <div style={{'display':this.props.auditType==LOCATION?'block':'none'}}>
@@ -174,14 +214,6 @@ class CreateAudit extends React.Component{
               {this.props.locCheck.type===ERROR?<FieldError txt={this.props.locCheck.msg} />:''}
             </div>
             </div>
-
-            <div className='gor-usr-details'>
-             <div className='gor-usr-hdsm'><FormattedMessage id="audit.add.tips.heading" description='Text for tips heading' 
-            defaultMessage='Tips:'/></div>
-              <div className='gor-sub-head'><FormattedMessage id="audit.add.tips.subheading" description='Subtext for tips' 
-            defaultMessage='Once an audit task has been created, please click on the "Assign PPS" button in the audit listing to start the audit task.'/></div>
-            </div>
-     
             <p className='gor-submit'>
              <button className="gor-add-btn"><FormattedMessage id="audits.add.password.button" description='Text for add audit button' 
             defaultMessage='Create audit'/></button>
@@ -195,12 +227,14 @@ class CreateAudit extends React.Component{
     }
   }
 function mapStateToProps(state, ownProps){
-  console.log(state);
+  
   return {
+      skuValidationResponse: state.auditInfo.skuValidationSpinner || false,
       auditType:  state.auditInfo.auditType  || {},
       skuCheck: state.appInfo.skuInfo || {},
       locCheck: state.appInfo.locInfo || {},
-      auth_token:state.authLogin.auth_token
+      auth_token:state.authLogin.auth_token,
+      skuAttributes: state.auditInfo.skuAttributes
   };
 }
 
@@ -211,7 +245,10 @@ var mapDispatchToProps = function(dispatch){
     resetAuditType: function(data){ dispatch(resetAuditType(data)); },    
     validateSKU: function(data){ dispatch(validateSKU(data)); },
     validateLoc: function(data){ dispatch(validateLOC(data)); },            
-    resetForm:   function(){ dispatch(resetForm()); }
+    resetForm:   function(){ dispatch(resetForm()); },
+    validateSKUcode: function(data){dispatch(validateSKUcode(data));},
+    validateSKUcodeSpinner: function(data){dispatch(validateSKUcodeSpinner(data));},
+    auditValidatedAttributes: function(data){dispatch(auditValidatedAttributes(data));}
   }
 };
 
