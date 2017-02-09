@@ -6,7 +6,7 @@ import {setAuditType,resetAuditType,auditValidatedAttributes} from '../../action
 import {userRequest} from '../../actions/userActions';
 import { connect } from 'react-redux';
 import {INVALID_SKUID,INVALID_LOCID,TYPE_SUCCESS} from '../../constants/messageConstants';
-import { ERROR,SUCCESS,SKU,LOCATION,CREATE_AUDIT,APP_JSON,POST, GET, VALIDATE_SKU_ID, VALID_SKU, NO_ATTRIBUTE_SKU, INVALID_SKU } from '../../constants/frontEndConstants';
+import { ERROR,SUCCESS,SKU,LOCATION,CREATE_AUDIT,APP_JSON,POST, GET, VALIDATE_SKU_ID, VALID_SKU, NO_ATTRIBUTE_SKU, INVALID_SKU,NO_SKU_VALIDATION,WATING_FOR_VALIDATION } from '../../constants/frontEndConstants';
 import { AUDIT_URL ,SKU_VALIDATION_URL} from '../../constants/configConstants';
 import FieldError from '../../components/fielderror/fielderror';
 import { locationStatus, skuStatus } from '../../utilities/fieldCheck';
@@ -119,34 +119,55 @@ class CreateAudit extends React.Component{
     this.props.removeModal();
   }
 
-  _claculateSkuState() {
-    var skuState = (!this.noSkuValidation?(this.props.skuValidationResponse?"":(this.props.skuAttributes?(this.props.skuAttributes.audit_attributes_values?VALID_SKU:NO_ATTRIBUTE_SKU):INVALID_SKU)):"");
-    return skuState
+  _claculateSkuState(processedSkuResponse) {
+    var skuState = (this.noSkuValidation?NO_SKU_VALIDATION:(!processedSkuResponse.isValid?INVALID_SKU:(processedSkuResponse.hasAttribute?VALID_SKU:NO_ATTRIBUTE_SKU)));
+    skuState = (this.props.skuValidationResponse?WATING_FOR_VALIDATION:skuState);
+    return skuState;
+  }
+
+  _processSkuAttributes() {
+    
+    var keys = [], hasAttribute = false, isValid=false;
+    var skuAttributeData = {keys:keys, hasAttribute: hasAttribute, isValid:isValid};
+    if(this.props.skuAttributes && this.props.skuAttributes.audit_attributes_values) {
+        isValid = true;
+        for (var key in this.props.skuAttributes.audit_attributes_values) {
+          if (this.props.skuAttributes.audit_attributes_values.hasOwnProperty(key)) {
+            keys.push(key);
+            if(this.props.skuAttributes.audit_attributes_values[key].length) {
+              hasAttribute = true;
+            }
+          }
+        }
+    }
+    skuAttributeData = {keys:keys, hasAttribute: hasAttribute, isValid:isValid};
+    return skuAttributeData;
+  }
+
+  _searchDropdownEntries(skuState,processedSkuResponse) {
+    if(skuState === VALID_SKU && processedSkuResponse.keys){
+      var key = processedSkuResponse.keys[0]; //not generic need to change in version 2 of pdfa
+      var dropdownDataField={value:""},dropdownData=[];
+      var skuAttributes = this.props.skuAttributes.audit_attributes_values[key];
+      for (var i = skuAttributes.length - 1; i >= 0; i--) {
+        dropdownDataField.value = skuAttributes[i];
+        dropdownData.push(dropdownDataField);
+        dropdownDataField={value:""};
+      }
+      return dropdownData;
+    }
   }
 
   render()
   {
-      //---------------------------------------------------
-      const tempdata = [
-    { value: '11'},
-    { value: '2'},
-    { value: '31'},
-    { value: '44'},
-    { value: '51'},
-    { value: '71'},
-    { value: '8'},
-    { value: '1'},
-    { value: '44'},
-    { value: '51'}
-    ];
-    
-      //---------------------------------------------------
+     
       let tick=(<div className='gor-tick'/>);  
       let validSkuMessg = <FormattedMessage id="audit.valid.sku" description='text for valid sku' defaultMessage='SKU confirmed'/>;
       let invalidSku = <FormattedMessage id="audit.invalid.sku" description='text for invalid sku' defaultMessage='Please enter correct SKU number'/>;
       let validSkuNoAtri = <FormattedMessage id="audit.noAtrributes.sku" description='text for valid sku with no attributed' defaultMessage='SKU confirmed but no batch number found'/>;
-      var skuState = this._claculateSkuState()
-      
+      var processedSkuResponse = this._processSkuAttributes();
+      var skuState = this._claculateSkuState(processedSkuResponse);
+      var dropdownData = this._searchDropdownEntries(skuState,processedSkuResponse);
               
       return (
         <div>
@@ -199,9 +220,9 @@ class CreateAudit extends React.Component{
               <div className={skuState===INVALID_SKU?"gor-sku-error":"gor-sku-valid"}>
                 {skuState===INVALID_SKU?invalidSku:(skuState===VALID_SKU?validSkuMessg:(skuState===NO_ATTRIBUTE_SKU?validSkuNoAtri:""))}
               </div>
-              {this.props.skuAttributes && !this.props.skuAttributes.audit_attributes_values?"":
-                <div className={"gor-searchDropdown-audit-wrap" + (!this.props.skuAttributes?" gor-disable-content":"")}>
-                  <SearchDropdown list={tempdata}/>
+              {skuState===NO_ATTRIBUTE_SKU?"":
+                <div className={"gor-searchDropdown-audit-wrap" + (skuState!= VALID_SKU?" gor-disable-content":"")}>
+                  <SearchDropdown list={dropdownData}/>
                 </div>}
             </div>
 

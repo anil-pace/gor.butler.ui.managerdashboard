@@ -69,7 +69,6 @@ export function resolveAuditLines(params) {
 }
 
 export function auditValidatedAttributes(data) {
-  console.log(data)
   return {
     type: VALIDATED_ATTIBUTES_DATA,
     data

@@ -209,7 +209,8 @@ export const VALIDATED_SKU_CODE = "VALIDATED_SKU_CODE";
 export const VALID_SKU = "VALID_SKU";
 export const NO_ATTRIBUTE_SKU = "NO_ATTRIBUTE_SKU";
 export const INVALID_SKU = "INVALID_SKU";
-
+export const NO_SKU_VALIDATION = "NO_SKU_VALIDATION";
+export const WATING_FOR_VALIDATION = "WATING_FOR_VALIDATION";
 
 /*Inventory parsing constants*/
 export const INVENTORY_DATA_TODAY = 'INVENTORY_DATA_TODAY'

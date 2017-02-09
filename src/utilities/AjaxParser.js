@@ -185,15 +185,10 @@ export function AjaxParse(store,res,cause,status)
 
         case VALIDATE_SKU_ID:
         	console.log(res)
-        	if(res.alert_data && res.alert_data[0].code===CODE_E027) {
-        		store.dispatch(validateSKUcodeSpinner(false));
-        		//store.dispatch(validatedSKUcode(false));
-        	}
-        	else if(res.sku && res.audit_attributes_values) {
-        		store.dispatch(validateSKUcodeSpinner(false));
+        	if(res.sku && res.audit_attributes_values) {
         		store.dispatch(auditValidatedAttributes(res));
-        		//store.dispatch(validatedSKUcode(true));
         	}
+        	store.dispatch(validateSKUcodeSpinner(false));
         	break;	
 
 		default:
