@@ -1749,9 +1749,20 @@ font-family: "source sans pro";
 
 .gor-tooltip {
   display: none;
+
 }
 .gor-tool-tip-hover {
   
 }
 
-.gor-tool-tip-hover:hover + .gor-tooltip { display: block; height:100px; background-color:black; z-index:900;}
+.gor-tool-tip-hover:hover + .gor-tooltip 
+{ display: block;   
+  z-index:900;
+  padding-top: 32px;
+}
+
+.gor-tooltip-text-wrap {
+  background-color: #ffffff;
+    border: solid 1px grey;
+    border-radius: 3px;
+}
