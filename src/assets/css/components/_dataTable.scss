@@ -1746,3 +1746,12 @@ font-family: "source sans pro";
 .gor-audit-paginate-wrap {
   float: right;
 }
+
+.gor-tooltip {
+  display: none;
+}
+.gor-tool-tip-hover {
+  
+}
+
+.gor-tool-tip-hover:hover + .gor-tooltip { display: block; height:100px; background-color:black; z-index:900;}

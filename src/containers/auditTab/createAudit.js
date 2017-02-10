@@ -163,8 +163,8 @@ class CreateAudit extends React.Component{
      
       let tick=(<div className='gor-tick'/>);  
       let validSkuMessg = <FormattedMessage id="audit.valid.sku" description='text for valid sku' defaultMessage='SKU confirmed'/>;
-      let invalidSku = <FormattedMessage id="audit.invalid.sku" description='text for invalid sku' defaultMessage='Please enter correct SKU number'/>;
-      let validSkuNoAtri = <FormattedMessage id="audit.noAtrributes.sku" description='text for valid sku with no attributed' defaultMessage='SKU confirmed but no batch number found'/>;
+      let invalidSkuMessg = <FormattedMessage id="audit.invalid.sku" description='text for invalid sku' defaultMessage='Please enter correct SKU number'/>;
+      let validSkuNoAtriMessg = <FormattedMessage id="audit.noAtrributes.sku" description='text for valid sku with no attributed' defaultMessage='SKU confirmed but no batch number found'/>;
       var processedSkuResponse = this._processSkuAttributes();
       var skuState = this._claculateSkuState(processedSkuResponse);
       var dropdownData = this._searchDropdownEntries(skuState,processedSkuResponse);
@@ -218,8 +218,10 @@ class CreateAudit extends React.Component{
                         defaultMessage='Validate'/></button>
               </div>
               <div className={skuState===INVALID_SKU?"gor-sku-error":"gor-sku-valid"}>
-                {skuState===INVALID_SKU?invalidSku:(skuState===VALID_SKU?validSkuMessg:(skuState===NO_ATTRIBUTE_SKU?validSkuNoAtri:""))}
+                {skuState===INVALID_SKU?invalidSkuMessg:(skuState===VALID_SKU?validSkuMessg:(skuState===NO_ATTRIBUTE_SKU?validSkuNoAtriMessg:""))}
               </div>
+              <div className='gor-usr-hdsm'><FormattedMessage id="audit.dropdown.heading" description='Text for dropdown heading' 
+                       defaultMessage='Choose batch number (Optional)'/></div>
               {skuState===NO_ATTRIBUTE_SKU?"":
                 <div className={"gor-searchDropdown-audit-wrap" + (skuState!= VALID_SKU?" gor-disable-content":"")}>
                   <SearchDropdown list={dropdownData}/>
