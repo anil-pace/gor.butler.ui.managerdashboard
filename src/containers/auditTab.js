@@ -53,6 +53,10 @@ const messages = defineMessages({
     id:"auditdetail.auditResolved.prefix", 
     defaultMessage: "Resolved"
   },
+  auditReAudited:{
+    id:"auditdetail.auditReaudited.prefix", 
+    defaultMessage: "Re Audited"
+  },
 
 
 });
@@ -91,9 +95,10 @@ _processAuditData(data,nProps){
   let location  = nProps.context.intl.formatMessage(messages.auditLocation);
   let rejected = nProps.context.intl.formatMessage(messages.auditRejected);
   let resolved = nProps.context.intl.formatMessage(messages.auditResolved);
+  let reAudited = nProps.context.intl.formatMessage(messages.auditReAudited);
   var timeOffset= nProps.props.timeOffset || "";
-  var auditStatus = {"audit_created":created, "audit_pending":pending, "audit_waiting":pending, "audit_conflicting":pending, "audit_accepted":pending, "audit_started":progress, "audit_tasked":progress, "audit_aborted":completed, "audit_completed":completed, "audit_pending_approval":pendingApp, "audit_resolved":resolved, audit_rejected:rejected};
-  var statusClass = {"Pending": "pending", "Completed":"completed", "In Progress":"progress", "Created":"pending", "Issues found":"breached", "Rejected":"breached", "Resolved":"progress"}
+  var auditStatus = {"audit_created":created, "audit_pending":pending, "audit_waiting":pending, "audit_conflicting":pending, "audit_accepted":pending, "audit_started":progress, "audit_tasked":progress, "audit_aborted":completed, "audit_completed":completed, "audit_pending_approval":pendingApp, "audit_resolved":resolved, audit_rejected:rejected,audit_reaudited:reAudited};
+  var statusClass = {"Pending": "pending", "Completed":"completed", "In Progress":"progress", "Created":"pending", "Issues found":"breached", "Rejected":"breached", "Resolved":"progress", "Re Audited":"progress"}
   var auditType = {"sku":sku, "location":location};
   var auditDetails = [], auditData = {};
   for (var i = data.length - 1; i >= 0; i--) {
@@ -172,7 +177,10 @@ _processAuditData(data,nProps){
     }
 
     else {
-      auditData.progress = 0; 
+      auditData.progress = 0;
+      if(data[i].audit_status === "audit_completed") {
+       auditData.progress = 100; 
+      }
     }
 
     if(data[i].completion_time) {

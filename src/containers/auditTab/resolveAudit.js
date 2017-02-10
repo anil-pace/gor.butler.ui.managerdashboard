@@ -20,6 +20,7 @@ class ResolveAudit extends React.Component{
       this.state = {
       auditDataList: this._dataList,
       checkedState: [],
+      totalMismatch: 0,
       } 
   }
 
@@ -32,6 +33,7 @@ class ResolveAudit extends React.Component{
       this.state = {
       auditDataList: this._dataList,
       checkedState: [],
+      totalMismatch: 0,
       }
   }
   _removeThisModal() {
@@ -53,10 +55,11 @@ class ResolveAudit extends React.Component{
   
 
   _processData(auditLines,nProps) {
-    var data = auditLines, processedData = [], auditData = {};
+    var data = auditLines, processedData = [], auditData = {}, totalMismatch = 0;
     for (var i = data.length - 1; i >= 0; i--) {
       auditData.actual_quantity = data[i].actual_quantity;
       auditData.expected_quantity = data[i].expected_quantity;
+      totalMismatch = (data[i].expected_quantity-data[i].actual_quantity) + totalMismatch;
       auditData.slot_id = data[i].slot_id;
       auditData.auditLineId = data[i].auditline_id;
       if(this.context.intl.formatMessage(stringConfig[data[i].status])) {
@@ -68,6 +71,7 @@ class ResolveAudit extends React.Component{
       processedData.push(auditData);
       auditData =  {};
     }
+    this.setState({totalMismatch:totalMismatch})
     return processedData;
   } 
 
@@ -133,7 +137,7 @@ class ResolveAudit extends React.Component{
                 <div className="gor-auditResolve-h1"> 
                   <FormattedMessage id="audit.missing.information" description='missing information for audit' 
                                     defaultMessage='{missingAudit} Items missing in Audit task #{auditId}' 
-                                    values={{missingAudit: missingAudit, auditId:auditId}}/> 
+                                    values={{missingAudit: this.state.totalMismatch, auditId:auditId}}/> 
                 </div>
                 <div className="gor-auditResolve-h2">
                   <FormattedMessage id="audit.missing.auditType" description='missing information for audit type' 

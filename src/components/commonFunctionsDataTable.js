@@ -130,7 +130,7 @@ export const TextCell = ({rowIndex, data, columnKey,setClass, ...props}) => (
 
 export const ToolTipCell = ({rowIndex, data, columnKey,setClass,callBack, ...props}) => (
   <Cell {...props} className={setClass}>
-    <div className="gor-tool-tip-hover" onClick={callBack}>
+    <div className="gor-tool-tip-hover" onMouseEnter={callBack}>
       {data.getObjectAt(rowIndex)[columnKey]}
     </div>
     <div className="gor-tooltip">Krishna </div>

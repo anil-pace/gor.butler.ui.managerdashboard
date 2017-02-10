@@ -6,7 +6,7 @@ import {setAuditType,resetAuditType,auditValidatedAttributes} from '../../action
 import {userRequest} from '../../actions/userActions';
 import { connect } from 'react-redux';
 import {INVALID_SKUID,INVALID_LOCID,TYPE_SUCCESS} from '../../constants/messageConstants';
-import { ERROR,SUCCESS,SKU,LOCATION,CREATE_AUDIT,APP_JSON,POST, GET, VALIDATE_SKU_ID, VALID_SKU, NO_ATTRIBUTE_SKU, INVALID_SKU,NO_SKU_VALIDATION,WATING_FOR_VALIDATION } from '../../constants/frontEndConstants';
+import { ERROR,SUCCESS,SKU,LOCATION,CREATE_AUDIT,APP_JSON,POST, GET, VALIDATE_SKU_ID, VALID_SKU, NO_ATTRIBUTE_SKU, SKU_NOT_EXISTS,NO_SKU_VALIDATION,WATING_FOR_VALIDATION } from '../../constants/frontEndConstants';
 import { AUDIT_URL ,SKU_VALIDATION_URL} from '../../constants/configConstants';
 import FieldError from '../../components/fielderror/fielderror';
 import { locationStatus, skuStatus } from '../../utilities/fieldCheck';
@@ -120,7 +120,7 @@ class CreateAudit extends React.Component{
   }
 
   _claculateSkuState(processedSkuResponse) {
-    var skuState = (this.noSkuValidation?NO_SKU_VALIDATION:(!processedSkuResponse.isValid?INVALID_SKU:(processedSkuResponse.hasAttribute?VALID_SKU:NO_ATTRIBUTE_SKU)));
+    var skuState = (this.noSkuValidation?NO_SKU_VALIDATION:(!processedSkuResponse.isValid?SKU_NOT_EXISTS:(processedSkuResponse.hasAttribute?VALID_SKU:NO_ATTRIBUTE_SKU)));
     skuState = (this.props.skuValidationResponse?WATING_FOR_VALIDATION:skuState);
     return skuState;
   }
@@ -210,15 +210,15 @@ class CreateAudit extends React.Component{
              <div className='gor-usr-hdsm'><FormattedMessage id="audit.add.sku.heading" description='Text for SKU heading' 
             defaultMessage='Enter SKU code'/></div>
               <div className="gor-audit-input-wrap">
-                <input className={"gor-audit-input"+(skuState===INVALID_SKU ? ' gor-input-error':' gor-input-ok')} placeholder="e.g. 46978072" id="skuid"  ref={node => { this.skuId = node }}/>
-                <div className={skuState===INVALID_SKU?"gor-login-error":(skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU?"header-yellow-alert-icon":"")}/>
+                <input className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} placeholder="e.g. 46978072" id="skuid"  ref={node => { this.skuId = node }}/>
+                <div className={skuState===SKU_NOT_EXISTS?"gor-login-error":(skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU?"header-yellow-alert-icon":"")}/>
               </div>
               <div className={"gor-sku-validation-btn-wrap" + (this.props.skuValidationResponse?" gor-disable-content":"")}>
                 <button className="gor-auditCreate-btn" type="button" onClick={this._validSku.bind(this)}><FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
                         defaultMessage='Validate'/></button>
               </div>
-              <div className={skuState===INVALID_SKU?"gor-sku-error":"gor-sku-valid"}>
-                {skuState===INVALID_SKU?invalidSkuMessg:(skuState===VALID_SKU?validSkuMessg:(skuState===NO_ATTRIBUTE_SKU?validSkuNoAtriMessg:""))}
+              <div className={skuState===SKU_NOT_EXISTS?"gor-sku-error":"gor-sku-valid"}>
+                {skuState===SKU_NOT_EXISTS?invalidSkuMessg:(skuState===VALID_SKU?validSkuMessg:(skuState===NO_ATTRIBUTE_SKU?validSkuNoAtriMessg:""))}
               </div>
               <div className='gor-usr-hdsm'><FormattedMessage id="audit.dropdown.heading" description='Text for dropdown heading' 
                        defaultMessage='Choose batch number (Optional)'/></div>
