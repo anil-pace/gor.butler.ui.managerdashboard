@@ -130,6 +130,10 @@ body {
   font-family: Source Sans Pro;
 }
 
+.gor-pagination-first,
+.gor-pagination-last,
+.gor-pagination-previous,
+.gor-pagination-next,
 .gor-close,
 .gor-edit-icon,
 .gor-del-icon,
@@ -390,6 +394,46 @@ body {
   height: 16px;
   display: inline-block;
   vertical-align: middle;
+}
+
+.gor-pagination-first {
+  background-position: -75px -94px;
+  width: 14px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: 10px;
+  margin-left: 14px;
+}
+
+.gor-pagination-last {
+  background-position: -123px -94px;
+  width: 10px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: 10px;
+  margin-left: 14px;
+}
+
+.gor-pagination-next {
+  background-position: -108px -94px;
+  width: 14px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: 10px;
+  margin-left: 14px;
+}
+
+.gor-pagination-previous {
+  background-position: -93px -94px;
+  width: 14px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: 10px;
+  margin-left: 14px;
 }
 
 /*  SECTIONS  */
@@ -3170,6 +3214,22 @@ input[type="checkbox"] {
   float: right;
 }
 
+.gor-tooltip {
+  display: none;
+}
+
+.gor-tool-tip-hover:hover + .gor-tooltip {
+  display: block;
+  background-color: black;
+  z-index: 900;
+  padding-top: 32px;
+}
+
+.gor-tooltip-text-wrap {
+  background-color: #ffffff;
+  border: solid 1px grey;
+}
+
 .gorSubTab.gorContainer {
   background-color: #F8F8F8;
   width: auto;
@@ -4332,6 +4392,8 @@ input[type="checkbox"] {
   border-color: #4D5055;
   color: #4D5055;
   cursor: pointer;
+  border-left-style: solid;
+  border-left-width: 1px;
 }
 
 .gor-paginate-wrap .gor-button-wrap .gor-paginate-left-btn {
@@ -4350,6 +4412,7 @@ input[type="checkbox"] {
   border-color: #4D5055;
   color: #4D5055;
   cursor: pointer;
+  border-right: solid 1px;
 }
 
 .gor-paginate-wrap .gor-button-wrap .gor-paginate-middle-left-btn {
@@ -4366,6 +4429,7 @@ input[type="checkbox"] {
   border-color: #4D5055;
   color: #4D5055;
   cursor: pointer;
+  border-right: solid 1px;
 }
 
 .gor-paginate-wrap .gor-button-wrap .gor-paginate-btn-disable {

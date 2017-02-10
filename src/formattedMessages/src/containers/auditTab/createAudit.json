@@ -50,6 +50,11 @@
     "defaultMessage": "Validate"
   },
   {
+    "id": "audit.dropdown.heading",
+    "description": "Text for dropdown heading",
+    "defaultMessage": "Choose batch number (Optional)"
+  },
+  {
     "id": "audit.add.location.heading",
     "description": "Text for location heading",
     "defaultMessage": "Enter Location"

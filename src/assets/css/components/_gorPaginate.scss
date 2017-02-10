@@ -63,6 +63,8 @@
 	    	border-color: #4D5055;
 	    	color: #4D5055;
 	    	cursor:pointer;
+	    	border-left-style: solid;
+    		border-left-width: 1px;
 		}
 		.gor-paginate-left-btn {
 			display: inline-block;
@@ -79,6 +81,7 @@
 	    	border-color: #4D5055;
 	    	color: #4D5055;
 	    	cursor:pointer;
+	    	border-right: solid 1px;
 		}
 		.gor-paginate-middle-left-btn {
 			display: inline-block;
@@ -93,6 +96,7 @@
 	    	border-color: #4D5055;
 	    	color: #4D5055;
 	    	cursor:pointer;
+	    	border-right: solid 1px;
 		}
 
 		.gor-paginate-btn-disable {

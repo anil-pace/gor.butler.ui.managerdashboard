@@ -5,7 +5,7 @@ import Dimensions from 'react-dimensions'
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import {currentTableState} from '../../actions/tableDataAction'
-import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData, ProgressCell,ActionCellAudit} from '../../components/commonFunctionsDataTable';
+import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData, ProgressCell,ActionCellAudit,ToolTipCell} from '../../components/commonFunctionsDataTable';
 import {modal} from 'react-redux-modal';
 import CreateAudit from './createAudit';
 import StartAudit from './startAudit';
@@ -51,11 +51,10 @@ class AuditTable extends React.Component {
    * @param  {Number} rowIndex rowindex on which the click was initiated
    */
    _handleOnClickDropdown(event, index) {
-
     var el = event.target;
     var elClassName = (el.className).trim(),
     parentEl,siblingEl,totalRowCount = this.props.items.length -1;
-    if(elClassName !== "Dropdown-control" && elClassName !== "Dropdown-placeholder" && elClassName !== "Dropdown-arrow"){
+    if(elClassName !== "Dropdown-control" && elClassName !== "Dropdown-placeholder" && elClassName !== "Dropdown-arrow" && elClassName !== "gor-tool-tip-hover"){
       return;
     }
       parentEl= el.parentNode;
@@ -81,8 +80,6 @@ class AuditTable extends React.Component {
       if(parentEl.nextSibling){
         parentEl.nextSibling.style.zIndex = "2" ;
       }
-      
-    
 
 
   }
@@ -266,7 +263,7 @@ class AuditTable extends React.Component {
     });
       }
     }
-
+   
 
     render() {
       var sortedDataList = this._dataList, heightRes;
@@ -276,10 +273,13 @@ class AuditTable extends React.Component {
       var colSortDirs = this.props.tableData.colSortDirs;
       var columnWidths = this.props.tableData.columnWidths;
       var auditCompleted = this.props.auditState.auditCompleted;
+      var auditIssue = this.props.auditState.auditIssue;
       var locationAudit = this.props.auditState.locationAudit;
       var skuAudit = this.props.auditState.skuAudit;
       var totalProgress = this.props.auditState.totalProgress;
       var rowsCount = sortedDataList.getSize();
+      var headerAlert =  <div className="gorToolHeaderEl alertState"> <div className="table-subtab-alert-icon"/> <div className="gor-inline">{auditIssue} Alerts </div> </div>
+    
       var duplicateTask = <FormattedMessage id="audit.table.duplicateTask" description="duplicateTask option for audit" defaultMessage ="Duplicate task"/>; 
       var deleteRecord = <FormattedMessage id="audit.table.deleteRecord" description="deleteRecord option for audit" defaultMessage ="Delete record"/>; 
       const tasks = [
@@ -373,7 +373,7 @@ class AuditTable extends React.Component {
         </div>
         </div>
       }
-      cell={<TextCell data={sortedDataList} ></TextCell>}
+      cell={<ToolTipCell data={sortedDataList} callBack={this._handleOnClickDropdown.bind(this)} ></ToolTipCell>}
       fixed={true}
       width={columnWidths.auditTypeValue}
       isResizable={true}
@@ -386,14 +386,14 @@ class AuditTable extends React.Component {
 
         <FormattedMessage id="audit.table.STATUS" description="STATUS for audit" 
         defaultMessage ="STATUS"/>
-        
-       <div className="gor-subStatus-online">
-                  <div >  
-                    <FormattedMessage id="auditTable.status" description='status completed audit' 
-                defaultMessage='{auditCompleted} Completed' 
-                values={{auditCompleted:auditCompleted?auditCompleted:'0'}}/>
-                  </div>
-                </div>
+        {auditIssue?headerAlert:
+         <div className="gor-subStatus-online">
+            <div>  
+              <FormattedMessage id="auditTable.status" description='status completed audit' 
+                                        defaultMessage='{auditCompleted} Completed' 
+                                        values={{auditCompleted:auditCompleted?auditCompleted:'0'}}/>
+              </div>
+          </div>}
         </div>
         </div>
       }

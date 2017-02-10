@@ -5,15 +5,12 @@ import {SHOW_ALL_ENTRIES, SHOW_SELECTED_ENTRIES} from '../../constants/frontEndC
 class SearchDropdown extends Component {
   constructor (props) {
     super(props)
-    var listLength = (this.props.list && this.props.list.length?this.props.list.length:0);
-    var initialIndex = Array.from(Array(listLength).keys());
-    var checkedIndex  = new Array(listLength).fill(false);
-    this.state = {selected:"Search and select", showList:false, currentQuery:"", currentList:initialIndex, checkedIndex:checkedIndex, totalChecked:0, tabSelected:SHOW_ALL_ENTRIES}
+    this.state = {selected:"Search and select", showList:false, currentQuery:"", currentList:"", checkedIndex:"", totalChecked:0, tabSelected:SHOW_ALL_ENTRIES}
     this._showList = this._showList.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-     var listLength = (nextProps.list && nextProps.list.length?nextProps.list.length:0);
+    var listLength = (nextProps.list && nextProps.list.length?nextProps.list.length:0);
     var initialIndex = Array.from(Array(listLength).keys());
     var checkedIndex  = new Array(listLength).fill(false);
     this.state = {selected:"Search and select", showList:false, currentQuery:"", currentList:initialIndex, checkedIndex:checkedIndex, totalChecked:0, tabSelected:SHOW_ALL_ENTRIES}
