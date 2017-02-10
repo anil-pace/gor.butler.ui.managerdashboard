@@ -17,12 +17,12 @@ class Overview extends React.Component{
     	super(props);
     }
 
+
 	render(){
 		return (
 			<div className="gorWidgetWrap">
 				<div className="section group">
 					<div className="col span_2_of_4">
-
 						<PutStatusWidget />
 						<AuditStatusWidget />
 
@@ -34,7 +34,7 @@ class Overview extends React.Component{
 				<div>
 					<OrderStatsWidget/>
         			<PerformanceWidget/>
-				</div>
+        			</div>
 			</div>    
 		);
 	}

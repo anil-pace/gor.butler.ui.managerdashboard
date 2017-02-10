@@ -115,6 +115,7 @@ export const GET_HEADER_INFO = 'GET_HEADER_INFO';
 export const EDIT_USER='EDIT_USER';
 export const DEBOUNCE_TIMER=1000;
 export const AUDIT_RESOLVE_CONFIRMED = "AUDIT_RESOLVE_CONFIRMED";
+export const VALIDATE_SKU_ID = "VALIDATE_SKU_ID";
 
 export const AUDIT_RETRIEVE = "AUDIT_RETRIEVE";
 export const RECIEVE_AUDIT_DATA = "RECIEVE_AUDIT_DATA";
@@ -169,6 +170,7 @@ export const DISPLAY_PPS_SPINNER = "DISPLAY_PPS_SPINNER";
 export const DISPLAY_CHARGING_STATION_SPINNER = "DISPLAY_CHARGING_STATION_SPINNER";
 export const DISPLAY_USERS_SPINNER ="DISPLAY_USERS_SPINNER";
 export const DISPAY_RESOLVE_AUDIT_SPINNER = "DISPAY_RESOLVE_AUDIT_SPINNER";
+export const VALIDATE_SKU_SPINNER = "VALIDATE_SKU_SPINNER";
 
 /*Map for routes of tab*/
 
@@ -202,6 +204,13 @@ export const SETAUDIT_PPS='SETAUDIT_PPS';
 export const REFRESH_AUDIT='REFRESH_AUDIT';
 export const APPROVE_AUDIT = "APPROVE_AUDIT";
 export const VIEW_AUDIT_ISSUES = "VIEW_AUDIT_ISSUES";
+export const VALIDATED_ATTIBUTES_DATA = "VALIDATED_ATTIBUTES_DATA";
+export const VALIDATED_SKU_CODE = "VALIDATED_SKU_CODE";
+export const VALID_SKU = "VALID_SKU";
+export const NO_ATTRIBUTE_SKU = "NO_ATTRIBUTE_SKU";
+export const INVALID_SKU = "INVALID_SKU";
+export const NO_SKU_VALIDATION = "NO_SKU_VALIDATION";
+export const WATING_FOR_VALIDATION = "WATING_FOR_VALIDATION";
 
 /*Inventory parsing constants*/
 export const INVENTORY_DATA_TODAY = 'INVENTORY_DATA_TODAY'
@@ -391,3 +400,7 @@ export const SET_CS_FILTER = "SET_CS_FILTER";
 export const SET_WAVE_FILTER = "SET_WAVE_FILTER"
 export const AUDIT_APPROVED = "auditline_approved";
 export const AUDIT_REJECTED = "auditline_rejected";
+
+//search dropdown constants
+export const SHOW_ALL_ENTRIES = "available";
+export const SHOW_SELECTED_ENTRIES = "checked";
