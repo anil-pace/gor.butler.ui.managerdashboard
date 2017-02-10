@@ -16,7 +16,9 @@ import SearchDropdown from '../../components/dropdown/searchDropdown';
 class CreateAudit extends React.Component{
   constructor(props) 
   {
-      super(props);  
+      super(props); 
+      var selectedList = []; 
+      this.state = {selected:selectedList}
   }
   componentWillUnmount()
   {
@@ -25,7 +27,11 @@ class CreateAudit extends React.Component{
   }
 
   componentWillMount() {
+
     var initialSkuInfo = {}, initialAttributes;
+    var selectedList = []; 
+    this.state = {selected:selectedList}
+    this.selectedList=[];
     this.noSkuValidation = true;
     this.props.validateSKU(initialSkuInfo);
     this.props.validateSKUcodeSpinner(false);
@@ -40,7 +46,10 @@ class CreateAudit extends React.Component{
       this._removeThisModal();
     }
   }
-
+  _selectedAttributes(selectedList) {
+    console.log(selectedList)
+    this.setState({selected:selectedList});
+  }
   _validSku() {
     var initialAttributes;
     let urlData={
@@ -88,7 +97,7 @@ class CreateAudit extends React.Component{
     md=this.location;
     sku=this.skuId.value;
     loc=this.locationId.value;
-    if(op.checked)
+    if(this.skuState === NO_ATTRIBUTE_SKU || !this.state.selected.length)
     {
       if(!this._checkSku(sku))
         return;
@@ -96,7 +105,20 @@ class CreateAudit extends React.Component{
          audit_param_type: op.value,
          audit_param_value: sku 
       };
+    }
+    else if(this.skuState === VALID_SKU && this.state.selected.length) {
+      formdata={
+              "audit_param_type" : "pdfa", 
+              "audit_param_value" : {
+                  "product_sku": sku,
+                  "pdfa_values": {
+                                  "box_id": this.state.selected
+                                  }
+                    }
+                };
+
     } 
+    //box_id is hardcoded as of now
     else
     {
       if(!this._checkLocation(loc))
@@ -122,6 +144,7 @@ class CreateAudit extends React.Component{
   _claculateSkuState(processedSkuResponse) {
     var skuState = (this.noSkuValidation?NO_SKU_VALIDATION:(!processedSkuResponse.isValid?SKU_NOT_EXISTS:(processedSkuResponse.hasAttribute?VALID_SKU:NO_ATTRIBUTE_SKU)));
     skuState = (this.props.skuValidationResponse?WATING_FOR_VALIDATION:skuState);
+    this.skuState = skuState;
     return skuState;
   }
 
@@ -224,7 +247,7 @@ class CreateAudit extends React.Component{
                        defaultMessage='Choose batch number (Optional)'/></div>
               {skuState===NO_ATTRIBUTE_SKU?"":
                 <div className={"gor-searchDropdown-audit-wrap" + (skuState!= VALID_SKU?" gor-disable-content":"")}>
-                  <SearchDropdown list={dropdownData}/>
+                  <SearchDropdown list={dropdownData} selectedItems={this._selectedAttributes.bind(this)}/>
                 </div>}
             </div>
 

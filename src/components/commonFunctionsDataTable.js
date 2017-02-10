@@ -134,8 +134,15 @@ export const ToolTipCell = ({rowIndex, data, columnKey,setClass,callBack, ...pro
       {data.getObjectAt(rowIndex)[columnKey]}
     </div>
     <div className="gor-tooltip">
+      <div className="gor-tooltip-arrow"/> 
       <div className="gor-tooltip-text-wrap">
-        Krishna
+        <div className="gor-tooltip-heading">Batch number</div>
+        <div className="gor-tooltip-datalines">
+            <div>Krishna</div>
+            <div>Gandhi</div>
+            <div>Krishna</div>
+            <div>Gandhi</div>
+        </div>
       </div> 
     </div>
   </Cell>
