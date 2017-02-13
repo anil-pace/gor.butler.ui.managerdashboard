@@ -7,7 +7,7 @@ import {AUDIT_URL,FILTER_AUDIT_ID} from '../constants/configConstants';
 import {getAuditData,setAuditRefresh} from '../actions/auditActions';
 import AuditTable from './auditTab/auditTable';
 import {getPageData} from '../actions/paginationAction';
-import {AUDIT_RETRIEVE,GET,APP_JSON,GOR_COMPLETED_STATUS,LOCATION,SKU,AUDIT_PENDING_APPROVAL,AUDIT_RESOLVED,AUDIT_CREATED, AUDIT_LINE_REJECTED,AUDIT_ISSUES_STATUS} from '../constants/frontEndConstants';
+import {AUDIT_RETRIEVE,GET,APP_JSON,GOR_COMPLETED_STATUS,LOCATION,SKU,AUDIT_PENDING_APPROVAL,AUDIT_RESOLVED,AUDIT_CREATED, AUDIT_LINE_REJECTED,AUDIT_ISSUES_STATUS,AUDIT_BY_PDFA} from '../constants/frontEndConstants';
 import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,SEARCH_AUDIT_URL,GIVEN_PAGE,GIVEN_PAGE_SIZE} from '../constants/configConstants';
 import {setAuditSpinner} from '../actions/auditActions';
 import { defineMessages } from 'react-intl';
@@ -111,11 +111,20 @@ _processAuditData(data,nProps){
       auditData.display_id = "--";
     }
 
-    if(data[i].audit_param_type) {
+    if(data[i].audit_param_type !== AUDIT_BY_PDFA) {
       auditData.auditType = data[i].audit_param_type;
       if(data[i].audit_param_value) {
         auditData.auditValue = data[i].audit_param_value;
         auditData.auditTypeValue = auditType[data[i].audit_param_type] + "-" + data[i].audit_param_value;
+      }
+    }
+
+    else if(data[i].audit_param_type === AUDIT_BY_PDFA){
+      auditData.auditType = data[i].audit_param_type;
+      if(data[i].audit_param_value) {
+        auditData.auditValue = data[i].audit_param_value.product_sku;
+        auditData.auditTypeValue = auditType[SKU] + "-" + data[i].audit_param_value.product_sku;
+        auditData.pdfaValues = data[i].audit_param_value.pdfa_values;
       }
     }
 
@@ -281,7 +290,7 @@ render(){
   if(auditData.length && auditData.length !== 0) {
     auditState["totalProgress"] = (totalProgress)/(auditData.length);
   }
-
+  console.log(auditData)
 
   renderTab = <AuditTable items={auditData}
               intlMessg={this.props.intlMessages} 

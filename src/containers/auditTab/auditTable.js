@@ -31,7 +31,6 @@ class AuditTable extends React.Component {
   constructor(props) {
     super(props);
     this.tableState(this.props,this);
-    this._onSortChange = this._onSortChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
     this.backendSort = this.backendSort.bind(this);
@@ -133,20 +132,7 @@ class AuditTable extends React.Component {
     }
 
 
-    _onSortChange(columnKey, sortDir) {
-      if(columnKey === GOR_STATUS) {
-      columnKey = GOR_STATUS_PRIORITY;
-    }
-      var sortIndexes = this._defaultSortIndexes.slice();
-      var tableData={
-        sortedDataList: new DataListWrapper(sortData(columnKey, sortDir,sortIndexes,this._dataList), this._dataList),
-        colSortDirs: {[columnKey]: sortDir,},
-        columnWidths: this.props.tableData.columnWidths,
-      };
-
-      this.props.currentTableState(tableData)
-    }
-
+ 
    backendSort(columnKey, sortDir) {
     var data={"columnKey":columnKey, "sortDir":sortDir, selected:0}
     var tableData={
@@ -191,17 +177,19 @@ class AuditTable extends React.Component {
     }
 
     resolveAudit(columnKey,rowIndex,screenId) {
-        var auditId, auditType, displayId, auditLineId;
+        var auditId, auditType, displayId, auditLineId, auditMethod;
         if(this.props.tableData.sortedDataList._data !== undefined) {
           sortedIndex = this.props.tableData.sortedDataList._indexMap[rowIndex];
           auditId = this.props.tableData.sortedDataList._data.newData[sortedIndex].id;
           auditType = this.props.tableData.sortedDataList._data.newData[sortedIndex].auditTypeValue;
-          displayId = this.props.tableData.sortedDataList._data.newData[sortedIndex].display_id;
+          displayId = this.props.tableData.sortedDataList._data.newData[sortedIndex].display_id; 
+          auditMethod = this.props.tableData.sortedDataList._data.newData[sortedIndex].auditType; 
         }
         else {
           auditType = this.props.items[rowIndex].auditTypeValue;
           displayId = this.props.items[rowIndex].display_id;
           auditId = this.props.items[rowIndex].id;
+          auditMethod = this.props.items[rowIndex].auditType; 
         }
     
          modal.add(ResolveAudit, {
@@ -212,7 +200,8 @@ class AuditTable extends React.Component {
         auditId:auditId,
         screenId:screenId,
         auditType:auditType,
-        displayId:displayId
+        displayId:displayId,
+        auditMethod:auditMethod
       });
     }
 
@@ -497,7 +486,6 @@ class AuditTable extends React.Component {
 }
 
 function mapStateToProps(state, ownProps){
-
   return {
     auth_token:state.authLogin.auth_token,
     tableData: state.currentTableState.currentTableState || []

@@ -30,14 +30,16 @@ class SearchDropdown extends Component {
 
   _selectThis(i) {
     var currentOption = this.props.list[i].value, placeholderList="", totalChecked=0;
-    var checkedState = this.state.checkedIndex;
+    var checkedState = this.state.checkedIndex, listToDispatch=[];
     checkedState[i] = !checkedState[i];
     for (var i = this.props.list.length - 1; i >= 0; i--) {
       if(checkedState[i]) {
         placeholderList = (placeholderList===""?this.props.list[i].value:placeholderList + ", " + this.props.list[i].value);
+        listToDispatch.push(this.props.list[i].value)
         totalChecked++;
       }
     }
+    this.props.selectedItems(listToDispatch);
     this.setState({checkedIndex:checkedState, selected:placeholderList, totalChecked:totalChecked});
     this._hideList();
   }

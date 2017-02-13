@@ -1758,11 +1758,31 @@ font-family: "source sans pro";
 .gor-tool-tip-hover:hover + .gor-tooltip 
 { display: block;   
   z-index:900;
-  padding-top: 32px;
+  padding-top: 14px;
+  width: 210px;
+  position: fixed;
+  overflow: hidden;
 }
 
 .gor-tooltip-text-wrap {
-  background-color: #ffffff;
+    background-color: #ffffff;
     border: solid 1px grey;
     border-radius: 3px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-top: 20px;
+}
+
+.gor-tooltip-arrow {
+  width: 0; 
+  height: 0; 
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 12px solid black;
+  margin-left: 23px;
+}
+
+.gor-tooltip-heading{
+  font-weight: bold;
+  padding-bottom: 15px;
 }
