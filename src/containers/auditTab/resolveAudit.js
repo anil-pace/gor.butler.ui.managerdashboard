@@ -112,7 +112,7 @@ class ResolveAudit extends React.Component{
 
   _resolveIssueByPdfa() {
     var slotIdHashMap = {};
-    var auditDataLine = [{actual_quantity:0, auditline_id:"66a3ee18-0278-41f3-b979-72dfabadfe6c", expected_quantity:1, slot_id:"003.1.A.03-04", status:"audit_pending_approval"},
+    var auditDataLine = [{actual_quantity:0, auditline_id:"66a3ee18-0278-41f3-b979-72dfabadfe6c", expected_quantity:1, slot_id:"003.1.A.03-04", status:"audit_pending_approval"}, //mock data
                          {actual_quantity:0, auditline_id:"66a3ee18-0278-41f3-b979-72dfabadfe6s", expected_quantity:1, slot_id:"003.1.A.03-05", status:"audit_pending_approval"},
                          {actual_quantity:0, auditline_id:"66a3ee18-0278-41f3-b979-72dfabadfe61", expected_quantity:1, slot_id:"003.1.A.03-04", status:"audit_pending_approval"},
                          {actual_quantity:0, auditline_id:"66a3ee18-0278-41f3-b979-72dfabadfe64", expected_quantity:1, slot_id:"003.1.A.03-05", status:"audit_pending_approval"}];
@@ -134,7 +134,6 @@ class ResolveAudit extends React.Component{
         slotIdData={slotId:"", slotIdDataLine:[]}
       }
     }
-    console.log(slotIdGrouping)
     return slotIdGrouping;
   }
 

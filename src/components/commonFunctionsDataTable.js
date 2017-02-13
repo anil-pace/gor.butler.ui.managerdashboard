@@ -128,11 +128,11 @@ export const TextCell = ({rowIndex, data, columnKey,setClass, ...props}) => (
   </Cell>
 );
 
-export const ToolTipCell = ({rowIndex, data, columnKey,setClass,callBack, ...props}) => (
+export const ToolTipCell = ({rowIndex, data, columnKey,setClass,callBack,tooltipData, ...props}) => (
   <Cell {...props} className={setClass}>
     {data.getObjectAt(rowIndex)[columnKey]}
     <div className="gor-tool-tip-hover" onMouseEnter={callBack}>
-      {data.getObjectAt(rowIndex)["pdfaValues"] && data.getObjectAt(rowIndex)["pdfaValues"].box_id?data.getObjectAt(rowIndex)["pdfaValues"].box_id.length+" items selected":""}
+      {data.getObjectAt(rowIndex)[tooltipData] && data.getObjectAt(rowIndex)[tooltipData].box_id?data.getObjectAt(rowIndex)[tooltipData].box_id.length+" items selected":""}
     </div>
     <div className="gor-tooltip">
       <div className="gor-tooltip-arrow"/> 
@@ -140,13 +140,14 @@ export const ToolTipCell = ({rowIndex, data, columnKey,setClass,callBack, ...pro
         <div className="gor-tooltip-heading">Batch number</div>
         <div className="gor-tooltip-datalines">
             <div>
-              {data.getObjectAt(rowIndex)["pdfaValues"]?data.getObjectAt(rowIndex)["pdfaValues"].box_id:""}
+              {data.getObjectAt(rowIndex)[tooltipData]?data.getObjectAt(rowIndex)[tooltipData].box_id:""}
             </div>
         </div>
       </div> 
     </div>
   </Cell>
 );
+//box_id is harcoded as of now in tool tip component
 
 
 export const ProgressCell = ({rowIndex, data, columnKey, resolved, unresolved, ...props}) => (

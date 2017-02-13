@@ -362,7 +362,7 @@ class AuditTable extends React.Component {
         </div>
         </div>
       }
-      cell={<ToolTipCell data={sortedDataList} callBack={this._handleOnClickDropdown.bind(this)} ></ToolTipCell>}
+      cell={<ToolTipCell data={sortedDataList} callBack={this._handleOnClickDropdown.bind(this)} tooltipData="pdfaValues" ></ToolTipCell>}
       fixed={true}
       width={columnWidths.auditTypeValue}
       isResizable={true}
