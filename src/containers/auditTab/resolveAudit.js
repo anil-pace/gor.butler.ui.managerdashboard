@@ -109,15 +109,160 @@ class ResolveAudit extends React.Component{
      
     this._removeThisModal();
   }
+
+  _resolveIssueByPdfa() {
+    var slotIdHashMap = {};
+    var auditDataLine = [{actual_quantity:0, auditline_id:"66a3ee18-0278-41f3-b979-72dfabadfe6c", expected_quantity:1, slot_id:"003.1.A.03-04", status:"audit_pending_approval"},
+                         {actual_quantity:0, auditline_id:"66a3ee18-0278-41f3-b979-72dfabadfe6s", expected_quantity:1, slot_id:"003.1.A.03-05", status:"audit_pending_approval"},
+                         {actual_quantity:0, auditline_id:"66a3ee18-0278-41f3-b979-72dfabadfe61", expected_quantity:1, slot_id:"003.1.A.03-04", status:"audit_pending_approval"},
+                         {actual_quantity:0, auditline_id:"66a3ee18-0278-41f3-b979-72dfabadfe64", expected_quantity:1, slot_id:"003.1.A.03-05", status:"audit_pending_approval"}];
+    //var auditDataLine = this.state.auditDataList.newData; 
+    var slotIdGrouping={}, slotIdData={slotId:"", slotIdDataLine:[]};
+    for (var i = auditDataLine.length - 1; i >= 0; i--) {
+      var columnSlotId = auditDataLine[i].slot_id;
+      if(slotIdHashMap[columnSlotId]) {
+        slotIdGrouping[columnSlotId].slotIdDataLine.push(auditDataLine[i]);
+        //slotIdGrouping.totalLines = slotIdGrouping.totalLines + 1;
+      }
+
+      else {
+        slotIdHashMap[columnSlotId] = true;
+        slotIdData.slotId = auditDataLine[i].slot_id;
+        slotIdData.slotIdDataLine.push(auditDataLine[i]);
+        slotIdGrouping[columnSlotId] = slotIdData;
+        //slotIdGrouping.totalLines = slotIdGrouping.totalLines + 2;
+        slotIdData={slotId:"", slotIdDataLine:[]}
+      }
+    }
+    console.log(slotIdGrouping)
+    return slotIdGrouping;
+  }
+
+  _renderPDFAtable(data) {
+    var pdfaResolveTable = [],resolveTable;
+    var pdfaHeader = <Table
+                      rowHeight={GOR_USER_TABLE_HEADER_HEIGHT}
+                      rowsCount={0}
+                      headerHeight={GOR_USER_TABLE_HEADER_HEIGHT}
+                      width={GOR_AUDIT_RESOLVE_WIDTH}
+                      height={GOR_USER_TABLE_HEADER_HEIGHT}
+                      {...this.props}>
+                      <Column header={<div className="gorAuditHeader">
+                                        <FormattedMessage id="resolveAudit.table.slot" description="slot id Column" defaultMessage ="SLOT ID"/> 
+                                      </div>} width={220}/>
+                      <Column header={<div className="gorAuditHeader">
+                                        <FormattedMessage id="resolveAudit.table.expectedItems" description="expectedItems Column" defaultMessage ="EXPECTED QUANTITY"/> 
+                                     </div>} width={220}/>
+                      <Column header={<div className="gorAuditHeader">
+                                        <FormattedMessage id="resolveAudit.table.actualQuantity" description="actualQuantity Column" defaultMessage ="ACTUAL QUANTITY"/> 
+                                      </div>} width={220}/>
+                      <Column header={<div className="gorAuditHeader">
+                                        <FormattedMessage id="resolveAudit.table.STATUS" description="status Column" defaultMessage ="STATUS"/> 
+                                      </div>} width={220}/>
+                      <Column header={<div className="gorAuditHeader">
+                                        <FormattedMessage id="resolveAudit.table.resolve" description="resolve Column" defaultMessage ="RESOLVE"/> 
+                                      </div>} width={220}/>
+                    </Table> 
+
+    pdfaResolveTable.push(pdfaHeader)                   
+    for (var key in data) {
+      if (data.hasOwnProperty(key)) {
+        var auditDataList = new tableRenderer(data[key].slotIdDataLine ? data[key].slotIdDataLine.length : 0);
+        var inSlot = <FormattedMessage id="audit.inSlot.text" defaultMessage='In slot '/> 
+        var containerHeight = (auditDataList.getSize())*GOR_USER_TABLE_HEADER_HEIGHT+2;
+        auditDataList.newData=data[key].slotIdDataLine;
+        resolveTable =<div> 
+                      <div>
+                        <span>{inSlot}</span>
+                        <span><b>{key}:</b></span>
+                      </div>
+                      <Table
+                      rowHeight={GOR_USER_TABLE_HEADER_HEIGHT}
+                      rowsCount={auditDataList.getSize()}
+                      headerHeight={0}
+                      width={GOR_AUDIT_RESOLVE_WIDTH}
+                      height={containerHeight}
+                      {...this.props}>
+                      <Column  columnKey="slot_id" cell={<TextCell data={auditDataList}/>} width={220}/>
+                      <Column  columnKey="expected_quantity" cell={  <TextCell data={auditDataList} />} width={220}/>
+                      <Column  columnKey="actual_quantity" cell={  <TextCell data={auditDataList} setClass={GOR_BREACHED_LINES}> </TextCell>} width={220}/>
+                      <Column  columnKey="status" cell={<TextCell data={auditDataList}> </TextCell>} width={220}/>
+                      <Column  columnKey="resolve" cell={  <ResolveCell data={auditDataList} checkStatus={this._checkAuditStatus.bind(this)} screenId={this.props.screenId}> </ResolveCell>} width={220}/>
+                    </Table>        
+                    </div>
+        pdfaResolveTable.push(resolveTable);               
+        }
+    }    
+   return pdfaResolveTable;
+          
+  }
+
+  _renderSkutable() {
+    var resolveTable = <div/>, headerHeight=GOR_USER_TABLE_HEADER_HEIGHT,minHeight = GOR_AUDIT_RESOLVE_MIN_HEIGHT;
+    var {auditDataList} = this.state 
+    var missingAudit = auditDataList.getSize();
+    var screenId = this.props.screenId
+    var containerHeight = (((missingAudit?missingAudit:0)*headerHeight + headerHeight)>minHeight?((missingAudit?missingAudit:0)*headerHeight + headerHeight):minHeight);
+    resolveTable = <div>
+                      <Table
+                      rowHeight={headerHeight}
+                      rowsCount={auditDataList.getSize()}
+                      headerHeight={headerHeight}
+                      onColumnResizeEndCallback={this._onColumnResizeEndCallback}
+                      isColumnResizing={false}
+                      width={GOR_AUDIT_RESOLVE_WIDTH}
+                      height={containerHeight}
+                      {...this.props}>
+                      <Column
+                        columnKey="slot_id"
+                        header={<div className="gorAuditHeader"> <FormattedMessage id="resolveAudit.table.slot" description="slot id Column" defaultMessage ="SLOT ID"/> </div>}
+                        cell={  <TextCell data={auditDataList} />}
+                        width={220}
+                      />
+                      <Column
+                        columnKey="expected_quantity"
+                        header={<div className="gorAuditHeader"> <FormattedMessage id="resolveAudit.table.expectedItems" description="expectedItems Column" defaultMessage ="EXPECTED QUANTITY"/> </div>}
+                        cell={  <TextCell data={auditDataList} />}
+                        width={220}
+                      />
+                      <Column
+                        columnKey="actual_quantity"
+                        header={<div className="gorAuditHeader"><FormattedMessage id="resolveAudit.table.actualQuantity" description="actualQuantity Column" defaultMessage ="ACTUAL QUANTITY"/> </div>
+                        }
+                        cell={  <TextCell data={auditDataList} setClass={GOR_BREACHED_LINES}> </TextCell>}
+                        width={220}
+                      />
+                      <Column
+                        columnKey="status"
+                        header={<div className="gorAuditHeader"><FormattedMessage id="resolveAudit.table.STATUS" description="status Column" defaultMessage ="STATUS"/> </div>}
+                        cell={  <TextCell data={auditDataList}> </TextCell>}
+                        width={220}
+                      />
+
+                      <Column
+                        columnKey="resolve"
+                        header={<div className="gorAuditHeader"> <FormattedMessage id="resolveAudit.table.resolve" description="resolve Column" defaultMessage ="RESOLVE"/> </div>}
+                        cell={  <ResolveCell data={auditDataList} checkStatus={this._checkAuditStatus.bind(this)} screenId={screenId}> </ResolveCell>}
+                        width={220}
+                      /> 
+                    </Table>
+                    </div>
+   return resolveTable;                 
+
+  }
   
   render()
   {
-      var {auditDataList} = this.state;
-      var rowsCount = 0, minHeight = GOR_AUDIT_RESOLVE_MIN_HEIGHT;
-      var screenId = this.props.screenId, auditType = this.props.auditType;
-      var missingAudit = auditDataList.getSize(), auditId = this.props.displayId, headerHeight=GOR_USER_TABLE_HEADER_HEIGHT;
-      var containerHeight = (((missingAudit?missingAudit:0)*headerHeight + headerHeight)>minHeight?((missingAudit?missingAudit:0)*headerHeight + headerHeight):minHeight);
-     
+      var {auditDataList} = this.state, screenId = this.props.screenId, auditType = this.props.auditType, auditId = this.props.displayId;
+      var auditbysku= (this.props.auditMethod==="pdfa"?false:false), resolveTable = <div/>;
+      if(auditbysku) {
+        resolveTable = this._renderSkutable();
+      }
+      else {
+        var groupingBySlotId = this._resolveIssueByPdfa();
+        resolveTable = this._renderPDFAtable(groupingBySlotId);
+        
+      }
       
       return (
         <div>
@@ -145,69 +290,8 @@ class ResolveAudit extends React.Component{
                                     values={{auditType: auditType}}/> 
                 </div>
                 <div className="gor-audit-detail">
-
-                  <Table
-                      rowHeight={headerHeight}
-                      rowsCount={auditDataList.getSize()}
-                      headerHeight={headerHeight}
-                      onColumnResizeEndCallback={this._onColumnResizeEndCallback}
-                      isColumnResizing={false}
-                      width={GOR_AUDIT_RESOLVE_WIDTH}
-                      height={containerHeight}
-                      {...this.props}>
-                      <Column
-                        columnKey="slot_id"
-                        header={
-                            <div className="gorAuditHeader">
-                              <FormattedMessage id="resolveAudit.table.slot" description="slot id Column" defaultMessage ="SLOT ID"/> 
-                            </div>
-                        }
-                        cell={  <TextCell data={auditDataList} />}
-                        width={220}
-                      />
-                      <Column
-                        columnKey="expected_quantity"
-                        header={
-                            <div className="gorAuditHeader">
-                              <FormattedMessage id="resolveAudit.table.expectedItems" description="expectedItems Column" defaultMessage ="EXPECTED QUANTITY"/> 
-                            </div>
-                        }
-                        cell={  <TextCell data={auditDataList} />}
-                        width={220}
-                      />
-                      <Column
-                        columnKey="actual_quantity"
-                        header={
-                            <div className="gorAuditHeader">
-                              <FormattedMessage id="resolveAudit.table.actualQuantity" description="actualQuantity Column" defaultMessage ="ACTUAL QUANTITY"/> 
-                            </div>
-                        }
-                        cell={  <TextCell data={auditDataList} setClass={GOR_BREACHED_LINES}> </TextCell>}
-                        width={220}
-                      />
-                      <Column
-                        columnKey="status"
-                        header={
-                            <div className="gorAuditHeader">
-                              <FormattedMessage id="resolveAudit.table.STATUS" description="status Column" defaultMessage ="STATUS"/> 
-                            </div>
-                        }
-                        cell={  <TextCell data={auditDataList}> </TextCell>}
-                        width={220}
-                      />
-
-                      <Column
-                        columnKey="resolve"
-                        header={
-                            <div className="gorAuditHeader">
-                              <FormattedMessage id="resolveAudit.table.resolve" description="resolve Column" defaultMessage ="RESOLVE"/> 
-                            </div>
-                        }
-                        cell={  <ResolveCell data={auditDataList} checkStatus={this._checkAuditStatus.bind(this)} screenId={screenId}> </ResolveCell>}
-                        width={220}
-                      />
-                     
-                    </Table>
+                  {resolveTable}
+                  
                     {screenId===APPROVE_AUDIT?
                       <div className="gor-auditResolve-btn-wrap">
                         <div className="gor-auditresolve-btn">                    
@@ -225,8 +309,8 @@ class ResolveAudit extends React.Component{
                         <button className="gor-refresh-btn" onClick={this._removeThisModal.bind(this)}>
                           <FormattedMessage id="resolveAudit.closeLabel" description="button label for close" defaultMessage ="Close" />
                         </button> 
-                      </div>
-                    } 
+                      </div> 
+                  }
                 </div>
               </div>
             </div>

@@ -130,18 +130,18 @@ export const TextCell = ({rowIndex, data, columnKey,setClass, ...props}) => (
 
 export const ToolTipCell = ({rowIndex, data, columnKey,setClass,callBack, ...props}) => (
   <Cell {...props} className={setClass}>
+    {data.getObjectAt(rowIndex)[columnKey]}
     <div className="gor-tool-tip-hover" onMouseEnter={callBack}>
-      {data.getObjectAt(rowIndex)[columnKey]}
+      {data.getObjectAt(rowIndex)["pdfaValues"] && data.getObjectAt(rowIndex)["pdfaValues"].box_id?data.getObjectAt(rowIndex)["pdfaValues"].box_id.length+" items selected":""}
     </div>
     <div className="gor-tooltip">
       <div className="gor-tooltip-arrow"/> 
       <div className="gor-tooltip-text-wrap">
         <div className="gor-tooltip-heading">Batch number</div>
         <div className="gor-tooltip-datalines">
-            <div>Krishna</div>
-            <div>Gandhi</div>
-            <div>Krishna</div>
-            <div>Gandhi</div>
+            <div>
+              {data.getObjectAt(rowIndex)["pdfaValues"]?data.getObjectAt(rowIndex)["pdfaValues"].box_id:""}
+            </div>
         </div>
       </div> 
     </div>

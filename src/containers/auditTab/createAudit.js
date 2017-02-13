@@ -47,7 +47,6 @@ class CreateAudit extends React.Component{
     }
   }
   _selectedAttributes(selectedList) {
-    console.log(selectedList)
     this.setState({selected:selectedList});
   }
   _validSku() {
@@ -97,8 +96,8 @@ class CreateAudit extends React.Component{
     md=this.location;
     sku=this.skuId.value;
     loc=this.locationId.value;
-    if(this.skuState === NO_ATTRIBUTE_SKU || !this.state.selected.length)
-    {
+    if(this.skuState === NO_ATTRIBUTE_SKU || !this.state.selected.length) //if sku has no attributes || sku has attributes but not 
+    {                                                                     //doing audit by pdfa
       if(!this._checkSku(sku))
         return;
       formdata={
@@ -106,7 +105,7 @@ class CreateAudit extends React.Component{
          audit_param_value: sku 
       };
     }
-    else if(this.skuState === VALID_SKU && this.state.selected.length) {
+    else if(this.skuState === VALID_SKU && this.state.selected.length) { //sku has attributes and doing audit by pdfa
       formdata={
               "audit_param_type" : "pdfa", 
               "audit_param_value" : {
@@ -243,10 +242,10 @@ class CreateAudit extends React.Component{
               <div className={skuState===SKU_NOT_EXISTS?"gor-sku-error":"gor-sku-valid"}>
                 {skuState===SKU_NOT_EXISTS?invalidSkuMessg:(skuState===VALID_SKU?validSkuMessg:(skuState===NO_ATTRIBUTE_SKU?validSkuNoAtriMessg:""))}
               </div>
-              <div className='gor-usr-hdsm'><FormattedMessage id="audit.dropdown.heading" description='Text for dropdown heading' 
-                       defaultMessage='Choose batch number (Optional)'/></div>
               {skuState===NO_ATTRIBUTE_SKU?"":
                 <div className={"gor-searchDropdown-audit-wrap" + (skuState!= VALID_SKU?" gor-disable-content":"")}>
+                  <div className='gor-usr-hdsm'><FormattedMessage id="audit.dropdown.heading" description='Text for dropdown heading' 
+                       defaultMessage='Choose batch number (Optional)'/></div>
                   <SearchDropdown list={dropdownData} selectedItems={this._selectedAttributes.bind(this)}/>
                 </div>}
             </div>
@@ -272,8 +271,8 @@ class CreateAudit extends React.Component{
       );
     }
   }
+
 function mapStateToProps(state, ownProps){
-  
   return {
       skuValidationResponse: state.auditInfo.skuValidationSpinner || false,
       auditType:  state.auditInfo.auditType  || {},
