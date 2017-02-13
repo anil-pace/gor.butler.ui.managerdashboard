@@ -254,7 +254,7 @@ class ResolveAudit extends React.Component{
   render()
   {
       var {auditDataList} = this.state, screenId = this.props.screenId, auditType = this.props.auditType, auditId = this.props.displayId;
-      var auditbysku= (this.props.auditMethod==="pdfa"?false:false), resolveTable = <div/>;
+      var auditbysku= (this.props.auditMethod==="pdfa"?false:true), resolveTable = <div/>;
       if(auditbysku) {
         resolveTable = this._renderSkutable();
       }
