@@ -19,12 +19,12 @@ export  function authLogin(state={},action){
 	  case LOGIN_REDIRECT:
 	
     case LOGIN_SUCCESS:
-	   sessionStorage.setItem('auth_token', action.data.auth_token);
+	   sessionStorage.setItem('auth_token', action.data.access_token);
 
       return Object.assign({}, state, {
           "loginAuthorized":true,
           "connectionActive":true,
-        	"auth_token": action.data.auth_token,
+        	"auth_token": action.data.access_token,
           "timeOutDuration" : action.data.duration
       })
 

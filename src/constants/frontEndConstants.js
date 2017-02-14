@@ -336,6 +336,7 @@ export const POST='POST';
 export const PUT='PUT';
 export const DELETE='DELETE';
 export const APP_JSON='application/json';
+export const APP_X_WWW_URL_FORM_ENCODED='application/x-www-form-urlencoded';
 export const GOR_RISK='gor-risk';
 export const GOR_NONE='gor-none';
 export const GOR_SUCCESS='gor-success';

@@ -48,6 +48,7 @@ const ajaxMiddleware = (function(){
     httpRequest.open(params.method, params.url);
     httpRequest.setRequestHeader('Content-Type', params.contentType || "text/html");
     httpRequest.setRequestHeader('Accept', params.accept || "text/html");
+    httpRequest.setRequestHeader('Authorization', params.authorization || null);
     if(params.cause!==AUTH_LOGIN)
     {
       httpRequest.setRequestHeader('Authentication-Token', params.token);

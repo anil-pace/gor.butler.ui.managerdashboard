@@ -3,9 +3,9 @@ import ReactDOM  from 'react-dom';
 import {authLoginData,setLoginSpinner,setUsername} from '../../actions/loginAction';
 import {validateID, validatePassword, loginError} from '../../actions/validationActions';
 import { connect } from 'react-redux';
-import {AUTH_LOGIN,ERROR,TYPING,APP_JSON,POST} from '../../constants/frontEndConstants';
+import {AUTH_LOGIN,ERROR,TYPING,APP_JSON,APP_X_WWW_URL_FORM_ENCODED,POST} from '../../constants/frontEndConstants';
 import {NO_NET} from '../../constants/messageConstants';
-import {LOGIN_URL} from '../../constants/configConstants'; 
+import {LOGIN_URL, CLIENT_ID, CLIENT_SECRET, GRANT_TYPE, USERNAME_KEY, PASSWORD_KEY, CLIENT_ID_KEY, CLIENT_SECRET_KEY, GRANT_TYPE_KEY, AUTHORIZATION_TYPE} from '../../constants/configConstants'; 
 import { FormattedMessage } from 'react-intl';
 import { emptyField } from '../../utilities/fieldCheck';
 
@@ -46,34 +46,41 @@ class LoginForm extends React.Component{
             if(!this._checkPass())
                 return;
         }
-       let formdata={         
-            'username': this.userName.value,
-            'password': this.password.value,
-        };
+
+        let username = this.userName.value
+
+        let password = this.password.value
+
+        let data = USERNAME_KEY+username+PASSWORD_KEY+password+CLIENT_ID_KEY+CLIENT_ID+CLIENT_SECRET_KEY+CLIENT_SECRET+GRANT_TYPE_KEY+GRANT_TYPE
 
         let loginData={
-                'url':LOGIN_URL,
-                'formdata':formdata,
+                'url':LOGIN_URL + data,
                 'method':POST,
                 'cause':AUTH_LOGIN,
-                'contentType':APP_JSON,
-                'accept':APP_JSON
-            }
+                'contentType':APP_X_WWW_URL_FORM_ENCODED,
+                'accept':APP_JSON,
+                'authorization':AUTHORIZATION_TYPE 
+            };
+
         sessionStorage.setItem('nextView', 'md');
         this.props.setLoginSpinner(true);
-        this.props.setUsername(formdata.username);
+        this.props.setUsername(username);
         this.props.authLoginData(loginData);
     }
 	render(){
-        // remove the internationalization from 'Butler' as it is our brand and also 'TM' as it is universal term
         return (
               <form action="#"  id = "loginForm" ref={node => { this.loginForm = node }} 
                 onSubmit={(e) => this._handleSubmit(e)}>
                 <div className='gor-login-mid'>
                 <div className='gor-upper-box'>
                     <div className='gor-login-head'>
-                      <span className='gor-lg-txt'>Butler</span>
-                       <sup>TM</sup>
+                      <span className='gor-lg-txt'>
+                       <FormattedMessage id='login.butler.title' 
+                        defaultMessage="Butler" description="Text for butler management Login form title"/>
+                       </span>
+                       <sup><FormattedMessage id='login.butler.trademark' 
+                    defaultMessage="TM"
+                            description="Trademark"/></sup>
                     </div>
                     <p>
                     <FormattedMessage id='login.butler.manageInterface' 
