@@ -12,7 +12,7 @@ import StartAudit from './startAudit';
 import DeleteAudit from './deleteAudit';
 import DuplicateAudit from './duplicateAudit';
 import ResolveAudit from './resolveAudit';
-import {GOR_STATUS,GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT,DEBOUNCE_TIMER,AUDIT_RESOLVE_LINES,GET,APP_JSON} from '../../constants/frontEndConstants';
+import {GOR_STATUS,GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT,DEBOUNCE_TIMER,AUDIT_RESOLVE_LINES,GET,APP_JSON,GOR_AUDIT_RESOLVE_MIN_HEIGHT,GOR_USER_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
 import { defineMessages } from 'react-intl';
 import {debounce} from '../../utilities/debounce';
 import {getAuditOrderLines} from '../../actions/auditActions';
@@ -275,16 +275,17 @@ class AuditTable extends React.Component {
       { value: 'duplicateTask', label: duplicateTask },
       { value: 'deleteRecord', label: deleteRecord }
       ];
-      if(this.props.containerHeight !== 0) {
-        heightRes = this.props.containerHeight;
-      }
+      
       var noData = <div/>;
      if(rowsCount === 0 || rowsCount === undefined || rowsCount === null) {
         noData =  <div className="gor-no-data"> <FormattedMessage id="audit.table.noData" description="No data message for audit table" 
         defaultMessage ="No Audit Task Found"/> </div>
         heightRes = GOR_TABLE_HEADER_HEIGHT;
       }
-
+      else{
+        var headerHeight=GOR_USER_TABLE_HEADER_HEIGHT,minHeight = GOR_AUDIT_RESOLVE_MIN_HEIGHT;
+        heightRes = (((rowsCount?rowsCount:0)*headerHeight + headerHeight)>minHeight?((rowsCount?rowsCount:0)*headerHeight + headerHeight):minHeight);
+      } 
       var tableRenderer = <div/>
       if(this.props.tableData.length !== 0) {
        tableRenderer = <div className="gorTableMainContainer">

@@ -171,7 +171,7 @@ class ResolveAudit extends React.Component{
         var containerHeight = (auditDataList.getSize())*GOR_USER_TABLE_HEADER_HEIGHT+2;
         auditDataList.newData=data[key].slotIdDataLine;
         resolveTable =<div> 
-                      <div>
+                      <div className="gor-auditresolve-pdfa-slot-header">
                         <span>{inSlot}</span>
                         <span><b>{key}:</b></span>
                       </div>
@@ -253,7 +253,7 @@ class ResolveAudit extends React.Component{
   render()
   {
       var {auditDataList} = this.state, screenId = this.props.screenId, auditType = this.props.auditType, auditId = this.props.displayId;
-      var auditbysku= (this.props.auditMethod==="pdfa"?false:true), resolveTable = <div/>;
+      var auditbysku= (this.props.auditMethod==="pdfa"?false:false), resolveTable = <div/>;
       if(auditbysku) {
         resolveTable = this._renderSkutable();
       }

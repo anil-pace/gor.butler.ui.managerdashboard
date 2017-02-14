@@ -140,7 +140,7 @@ export const ToolTipCell = ({rowIndex, data, columnKey,setClass,callBack,tooltip
         <div className="gor-tooltip-heading">Batch number</div>
         <div className="gor-tooltip-datalines">
             <div>
-              {data.getObjectAt(rowIndex)[tooltipData]?data.getObjectAt(rowIndex)[tooltipData].box_id:""}
+              {data.getObjectAt(rowIndex)[tooltipData] && data.getObjectAt(rowIndex)[tooltipData].box_id?(data.getObjectAt(rowIndex)[tooltipData].box_id.map(function(object, i){return <div key={i} > {i+1}. {object} </div>;})):""}
             </div>
         </div>
       </div> 

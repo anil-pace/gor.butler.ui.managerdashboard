@@ -2454,5 +2454,17 @@
     "id":"auditdetail.auditPendingApp.prefix", 
     "description":"auditPending status", 
     "defaultMessage": "Issues found"
-    }
+    },
+    {
+    "id": "auditdetail.auditRejected.prefix",
+    "defaultMessage": "Rejected"
+    },
+    {
+    "id": "auditdetail.auditReaudited.prefix",
+    "defaultMessage": "Re Audited"
+  },
+  {
+    "id": "auditdetail.auditResolved.prefix",
+    "defaultMessage": "Resolved"
+  }
 ]
