@@ -128,11 +128,11 @@ export const TextCell = ({rowIndex, data, columnKey,setClass, ...props}) => (
   </Cell>
 );
 
-export const ToolTipCell = ({rowIndex, data, columnKey,setClass,callBack, ...props}) => (
+export const ToolTipCell = ({rowIndex, data, columnKey,setClass,callBack,tooltipData, ...props}) => (
   <Cell {...props} className={setClass}>
     {data.getObjectAt(rowIndex)[columnKey]}
     <div className="gor-tool-tip-hover" onMouseEnter={callBack}>
-      {data.getObjectAt(rowIndex)["pdfaValues"] && data.getObjectAt(rowIndex)["pdfaValues"].box_id?data.getObjectAt(rowIndex)["pdfaValues"].box_id.length+" items selected":""}
+      {data.getObjectAt(rowIndex)[tooltipData] && data.getObjectAt(rowIndex)[tooltipData].box_id?data.getObjectAt(rowIndex)[tooltipData].box_id.length+" items selected":""}
     </div>
     <div className="gor-tooltip">
       <div className="gor-tooltip-arrow"/> 
@@ -140,13 +140,14 @@ export const ToolTipCell = ({rowIndex, data, columnKey,setClass,callBack, ...pro
         <div className="gor-tooltip-heading">Batch number</div>
         <div className="gor-tooltip-datalines">
             <div>
-              {data.getObjectAt(rowIndex)["pdfaValues"]?data.getObjectAt(rowIndex)["pdfaValues"].box_id:""}
+              {data.getObjectAt(rowIndex)[tooltipData] && data.getObjectAt(rowIndex)[tooltipData].box_id?(data.getObjectAt(rowIndex)[tooltipData].box_id.map(function(object, i){return <div key={i} > {i+1}. {object} </div>;})):""}
             </div>
         </div>
       </div> 
     </div>
   </Cell>
 );
+//box_id is harcoded as of now in tool tip component
 
 
 export const ProgressCell = ({rowIndex, data, columnKey, resolved, unresolved, ...props}) => (
@@ -194,9 +195,9 @@ export const StatusCell = ({rowIndex, data, columnKey,statusKey, ...props}) => (
 export const ResolveCell = ({rowIndex, data, columnKey, checkStatus, screenId, ...props}) => (
   <Cell {...props}>
     <div style={(screenId===VIEW_AUDIT_ISSUES || data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED)?{opacity: 0.5}:{opacity: 1}}>
-      <input type="radio"  name={rowIndex} disabled={data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED?true:false} onChange={checkStatus.bind(this,rowIndex,AUDIT_APPROVED)} checked={data.getObjectAt(rowIndex)[GOR_STATUS]===AUDIT_RESOLVED_STATUS?"checked":""}/>
+      <input type="radio"  name={data.getObjectAt(rowIndex)["auditLineId"]} disabled={data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED?true:false} onChange={checkStatus.bind(this,rowIndex,AUDIT_APPROVED,data.getObjectAt(rowIndex)["auditLineId"])} />
         <FormattedMessage id="commonDataTable.resolveAudit.approve" description='resolve button' defaultMessage='Approve '/>
-      <input type="radio"  name={rowIndex} disabled={data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED?true:false} onChange={checkStatus.bind(this,rowIndex,AUDIT_REJECTED)} checked={data.getObjectAt(rowIndex)[GOR_STATUS]===AUDIT_REJECTED_STATUS?"checked":""}/>
+      <input type="radio"  name={data.getObjectAt(rowIndex)["auditLineId"]} disabled={data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED?true:false} onChange={checkStatus.bind(this,rowIndex,AUDIT_REJECTED,data.getObjectAt(rowIndex)["auditLineId"])} />
         <FormattedMessage id="commonDataTable.resolveAudit.reject" description='resolve button' defaultMessage='Reject'/>
     </div>
   </Cell>

@@ -290,7 +290,6 @@ render(){
   if(auditData.length && auditData.length !== 0) {
     auditState["totalProgress"] = (totalProgress)/(auditData.length);
   }
-  console.log(auditData)
 
   renderTab = <AuditTable items={auditData}
               intlMessg={this.props.intlMessages} 

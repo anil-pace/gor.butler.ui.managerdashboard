@@ -111,13 +111,13 @@ class CreateAudit extends React.Component{
               "audit_param_value" : {
                   "product_sku": sku,
                   "pdfa_values": {
-                                  "box_id": this.state.selected
+                                  "box_id": this.state.selected //box_id is hardcoded as of now
                                   }
                     }
                 };
 
     } 
-    //box_id is hardcoded as of now
+    
     else
     {
       if(!this._checkLocation(loc))
@@ -190,7 +190,7 @@ class CreateAudit extends React.Component{
       var processedSkuResponse = this._processSkuAttributes();
       var skuState = this._claculateSkuState(processedSkuResponse);
       var dropdownData = this._searchDropdownEntries(skuState,processedSkuResponse);
-              
+      
       return (
         <div>
           <div className="gor-modal-content">
@@ -260,7 +260,7 @@ class CreateAudit extends React.Component{
             </div>
             </div>
             <p className='gor-submit'>
-             <button className="gor-add-btn"><FormattedMessage id="audits.add.password.button" description='Text for add audit button' 
+             <button className={"gor-add-btn" + (processedSkuResponse.isValid?"":" gor-disable-content")}><FormattedMessage id="audits.add.password.button" description='Text for add audit button' 
             defaultMessage='Create audit'/></button>
             </p>
             </div>
