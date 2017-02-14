@@ -3,7 +3,7 @@ import ReactDOM  from 'react-dom';
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
 import { connect } from 'react-redux';
 import {getAuditOrderLines,resolveAuditLines} from '../../actions/auditActions';
-import {GET,APP_JSON,AUDIT_RESOLVE_LINES,GOR_BREACHED_LINES,VIEW_AUDIT_ISSUES,APPROVE_AUDIT,GOR_USER_TABLE_HEADER_HEIGHT,GOR_AUDIT_RESOLVE_MIN_HEIGHT,GOR_AUDIT_RESOLVE_WIDTH, POST, AUDIT_RESOLVE_CONFIRMED} from '../../constants/frontEndConstants';
+import {GET,APP_JSON,AUDIT_RESOLVE_LINES,GOR_BREACHED_LINES,VIEW_AUDIT_ISSUES,APPROVE_AUDIT,GOR_USER_TABLE_HEADER_HEIGHT,GOR_AUDIT_RESOLVE_MIN_HEIGHT,GOR_AUDIT_RESOLVE_WIDTH, POST, AUDIT_RESOLVE_CONFIRMED,AUDIT_BY_PDFA} from '../../constants/frontEndConstants';
 import {AUDIT_URL, PENDING_ORDERLINES, AUDIT_ANAMOLY} from '../../constants/configConstants';
 import {Table, Column, Cell} from 'fixed-data-table';
 import {tableRenderer,TextCell,DataListWrapper,ResolveCell} from '../../components/commonFunctionsDataTable';
@@ -75,8 +75,15 @@ class ResolveAudit extends React.Component{
     return processedData;
   } 
 
-  _checkAuditStatus(rowIndex,state) {
-    var newAuditLineId = this.state.auditDataList.newData[rowIndex].auditLineId
+  _checkAuditStatus(rowIndex,state,auditLineId) {
+    var newAuditLineId;
+    if(this.props.auditMethod===AUDIT_BY_PDFA) {
+      var newAuditLineIndex = this.actualMapping[auditLineId];
+      newAuditLineId = this.state.auditDataList.newData[newAuditLineIndex].auditLineId
+    }
+    else{
+      newAuditLineId = this.state.auditDataList.newData[rowIndex].auditLineId
+    }
     var checkedAudit = {"response":state, "auditline_id":newAuditLineId}, auditIndexed = false;
     var tempState = this.state.checkedState.slice();
     for (var i = tempState.length - 1; i >= 0; i--) {
@@ -112,28 +119,31 @@ class ResolveAudit extends React.Component{
 
   _resolveIssueByPdfa() {
     var slotIdHashMap = {};
-    var auditDataLine = [{actual_quantity:0, auditline_id:"66a3ee18-0278-41f3-b979-72dfabadfe6c", expected_quantity:1, slot_id:"003.1.A.03-04", status:"audit_pending_approval"}, //mock data
-                         {actual_quantity:0, auditline_id:"66a3ee18-0278-41f3-b979-72dfabadfe6s", expected_quantity:1, slot_id:"003.1.A.03-05", status:"audit_pending_approval"},
-                         {actual_quantity:0, auditline_id:"66a3ee18-0278-41f3-b979-72dfabadfe61", expected_quantity:1, slot_id:"003.1.A.03-04", status:"audit_pending_approval"},
-                         {actual_quantity:0, auditline_id:"66a3ee18-0278-41f3-b979-72dfabadfe64", expected_quantity:1, slot_id:"003.1.A.03-05", status:"audit_pending_approval"}];
-    //var auditDataLine = this.state.auditDataList.newData; 
-    var slotIdGrouping={}, slotIdData={slotId:"", slotIdDataLine:[]};
+    // var auditDataLine = [{actual_quantity:0, auditline_id:"66a3ee18-0278-41f3-b979-72dfabadfe6c", expected_quantity:1, slot_id:"003.1.A.03-04", status:"audit_pending_approval"}, //mock data
+    //                      {actual_quantity:0, auditline_id:"66a3ee18-0278-41f3-b979-72dfabadfe6s", expected_quantity:1, slot_id:"003.1.A.03-05", status:"audit_pending_approval"},
+    //                      {actual_quantity:0, auditline_id:"66a3ee18-0278-41f3-b979-72dfabadfe61", expected_quantity:1, slot_id:"003.1.A.03-04", status:"audit_pending_approval"},
+    //                      {actual_quantity:0, auditline_id:"66a3ee18-0278-41f3-b979-72dfabadfe64", expected_quantity:1, slot_id:"003.1.A.03-05", status:"audit_pending_approval"}];
+    var auditDataLine = this.state.auditDataList.newData; 
+    var slotIdGrouping={}, slotIdData={slotId:"", slotIdDataLine:[]}, actualMapping={};
     for (var i = auditDataLine.length - 1; i >= 0; i--) {
       var columnSlotId = auditDataLine[i].slot_id;
-      if(slotIdHashMap[columnSlotId]) {
+      if(slotIdHashMap[columnSlotId]>=0) {
         slotIdGrouping[columnSlotId].slotIdDataLine.push(auditDataLine[i]);
+        actualMapping[auditDataLine[i].auditLineId] = i;
         //slotIdGrouping.totalLines = slotIdGrouping.totalLines + 1;
       }
 
       else {
-        slotIdHashMap[columnSlotId] = true;
+        slotIdHashMap[columnSlotId] = i;
         slotIdData.slotId = auditDataLine[i].slot_id;
         slotIdData.slotIdDataLine.push(auditDataLine[i]);
         slotIdGrouping[columnSlotId] = slotIdData;
+        actualMapping[auditDataLine[i].auditLineId] = i;
         //slotIdGrouping.totalLines = slotIdGrouping.totalLines + 2;
         slotIdData={slotId:"", slotIdDataLine:[]}
       }
     }
+    this.actualMapping = actualMapping;
     return slotIdGrouping;
   }
 
@@ -182,7 +192,7 @@ class ResolveAudit extends React.Component{
                       width={GOR_AUDIT_RESOLVE_WIDTH}
                       height={containerHeight}
                       {...this.props}>
-                      <Column  columnKey="slot_id" cell={<TextCell data={auditDataList}/>} width={220}/>
+                      <Column  columnKey="auditLineId" cell={<TextCell data={auditDataList}/>} width={220}/>
                       <Column  columnKey="expected_quantity" cell={  <TextCell data={auditDataList} />} width={220}/>
                       <Column  columnKey="actual_quantity" cell={  <TextCell data={auditDataList} setClass={GOR_BREACHED_LINES}> </TextCell>} width={220}/>
                       <Column  columnKey="status" cell={<TextCell data={auditDataList}> </TextCell>} width={220}/>
@@ -253,7 +263,7 @@ class ResolveAudit extends React.Component{
   render()
   {
       var {auditDataList} = this.state, screenId = this.props.screenId, auditType = this.props.auditType, auditId = this.props.displayId;
-      var auditbysku= (this.props.auditMethod==="pdfa"?false:false), resolveTable = <div/>;
+      var auditbysku= (this.props.auditMethod==="pdfa"?false:true), resolveTable = <div/>;
       if(auditbysku) {
         resolveTable = this._renderSkutable();
       }

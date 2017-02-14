@@ -195,9 +195,9 @@ export const StatusCell = ({rowIndex, data, columnKey,statusKey, ...props}) => (
 export const ResolveCell = ({rowIndex, data, columnKey, checkStatus, screenId, ...props}) => (
   <Cell {...props}>
     <div style={(screenId===VIEW_AUDIT_ISSUES || data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED)?{opacity: 0.5}:{opacity: 1}}>
-      <input type="radio"  name={rowIndex} disabled={data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED?true:false} onChange={checkStatus.bind(this,rowIndex,AUDIT_APPROVED)} checked={data.getObjectAt(rowIndex)[GOR_STATUS]===AUDIT_RESOLVED_STATUS?"checked":""}/>
+      <input type="radio"  name={data.getObjectAt(rowIndex)["auditLineId"]} disabled={data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED?true:false} onChange={checkStatus.bind(this,rowIndex,AUDIT_APPROVED,data.getObjectAt(rowIndex)["auditLineId"])} />
         <FormattedMessage id="commonDataTable.resolveAudit.approve" description='resolve button' defaultMessage='Approve '/>
-      <input type="radio"  name={rowIndex} disabled={data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED?true:false} onChange={checkStatus.bind(this,rowIndex,AUDIT_REJECTED)} checked={data.getObjectAt(rowIndex)[GOR_STATUS]===AUDIT_REJECTED_STATUS?"checked":""}/>
+      <input type="radio"  name={data.getObjectAt(rowIndex)["auditLineId"]} disabled={data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED?true:false} onChange={checkStatus.bind(this,rowIndex,AUDIT_REJECTED,data.getObjectAt(rowIndex)["auditLineId"])} />
         <FormattedMessage id="commonDataTable.resolveAudit.reject" description='resolve button' defaultMessage='Reject'/>
     </div>
   </Cell>

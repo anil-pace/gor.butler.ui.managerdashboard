@@ -284,7 +284,7 @@ class AuditTable extends React.Component {
       }
       else{
         var headerHeight=GOR_USER_TABLE_HEADER_HEIGHT,minHeight = GOR_AUDIT_RESOLVE_MIN_HEIGHT;
-        heightRes = (((rowsCount?rowsCount:0)*headerHeight + headerHeight)>minHeight?((rowsCount?rowsCount:0)*headerHeight + headerHeight):minHeight);
+        heightRes = (((rowsCount?rowsCount:0)*headerHeight + 3*headerHeight)>minHeight?((rowsCount?rowsCount:0)*headerHeight + 3*headerHeight):minHeight);
       } 
       var tableRenderer = <div/>
       if(this.props.tableData.length !== 0) {
