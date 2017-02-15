@@ -21,8 +21,6 @@ export function AjaxParse(store,res,cause,status)
       switch(cause)
 	  {
 		case AUTH_LOGIN:	
-			console.log("Got ", res);
-			console.log("Got ", res.access_token);
 			if(res.access_token)
 			{		
 				store.dispatch(receiveAuthData(res));

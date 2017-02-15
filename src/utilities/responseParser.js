@@ -14,7 +14,7 @@ import {endSession} from './endSession';
 
 export function ResponseParse(store,res)
 {
-
+		console.log("response is ", res);
 		if(res.alert_data)
 		{
 			endSession(store);

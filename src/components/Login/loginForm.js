@@ -55,6 +55,8 @@ class LoginForm extends React.Component{
 
         let final_url = LOGIN_URL + data
 
+        console.log("final_url is ", final_url)
+
         let loginData={
                 'url':final_url,
                 'method':POST,
@@ -66,7 +68,7 @@ class LoginForm extends React.Component{
 
         sessionStorage.setItem('nextView', 'md');
         this.props.setLoginSpinner(true);
-        this.props.setUsername(formdata.username);
+        this.props.setUsername(username);
         this.props.authLoginData(loginData);
     }
 	render(){
