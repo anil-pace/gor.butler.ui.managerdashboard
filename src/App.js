@@ -7,15 +7,16 @@ import {setWsAction ,setMockAction, endWsAction} from './actions/socketActions';
 import {getTimeOffSetData,setTimeOffSetData, logoutRequest} from './actions/loginAction';
 import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,
   WS_MOCK,USERS,TAB_ROUTE_MAP,OVERVIEW ,SYSTEM,ORDERS,INVENTORY,GET} from './constants/frontEndConstants';
-  import { AUTO_LOGOUT } from './constants/messageConstants';
-  import { wsOverviewData} from './constants/initData.js';
-  import {TIME_ZONE_URL} from './constants/configConstants'
-  import {prevTabSelected} from './actions/tabSelectAction';
-  import { connect } from 'react-redux'; 
-  import TopNotifications from './components/topnotify/topnotify';
-  import { notifyInfo} from './actions/validationActions';
+import { AUTO_LOGOUT } from './constants/messageConstants';
+import { wsOverviewData} from './constants/initData.js';
+import {TIME_ZONE_URL} from './constants/configConstants'
+import {prevTabSelected} from './actions/tabSelectAction';
+import { connect } from 'react-redux'; 
+import TopNotifications from './components/topnotify/topnotify';
+import { notifyInfo} from './actions/validationActions';
+import Perf from 'react-addons-perf'
 
-
+//console.log(Perf);
   class App extends React.Component{ 
   /**
    * Called once before rendering of component,used to displatch fetch action
@@ -28,11 +29,13 @@ import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,
   } 
   
   componentWillMount(){
-
+    window.Perf = Perf;
     this.context.router.push("/login");
 
   }
+
   componentDidMount(){
+   // Perf.start();
     var timeOffset =  sessionStorage.getItem("timeOffset");
     if(!timeOffset){
       let timeOffsetParams={
