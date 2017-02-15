@@ -30,5 +30,13 @@
   {
     "id": "auditdetail.auditRejected.prefix",
     "defaultMessage": "Rejected"
+  },
+  {
+    "id": "auditdetail.auditResolved.prefix",
+    "defaultMessage": "Resolved"
+  },
+  {
+    "id": "auditdetail.auditReaudited.prefix",
+    "defaultMessage": "Re Audited"
   }
 ]

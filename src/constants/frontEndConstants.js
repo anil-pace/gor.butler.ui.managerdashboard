@@ -208,10 +208,11 @@ export const VALIDATED_ATTIBUTES_DATA = "VALIDATED_ATTIBUTES_DATA";
 export const VALIDATED_SKU_CODE = "VALIDATED_SKU_CODE";
 export const VALID_SKU = "VALID_SKU";
 export const NO_ATTRIBUTE_SKU = "NO_ATTRIBUTE_SKU";
-export const INVALID_SKU = "INVALID_SKU";
+export const SKU_NOT_EXISTS = "INVALID_SKU";
 export const NO_SKU_VALIDATION = "NO_SKU_VALIDATION";
 export const WATING_FOR_VALIDATION = "WATING_FOR_VALIDATION";
-
+export const AUDIT_ISSUES_STATUS = "Issues found";
+export const AUDIT_BY_PDFA = "pdfa";
 /*Inventory parsing constants*/
 export const INVENTORY_DATA_TODAY = 'INVENTORY_DATA_TODAY'
 export const INVENTORY_DATA_HISTORY = 'INVENTORY_DATA_HISTORY'
@@ -361,6 +362,8 @@ export const AUDIT_PENDING_APPROVAL = "audit_pending_approval";
 export const AUDIT_RESOLVED = "audit_resolved"; 
 export const AUDIT_UNRESOLVED = "Unresolved";
 export const AUDIT_LINE_REJECTED  = "audit_rejected";
+export const AUDIT_REJECTED_STATUS = "Rejected";
+export const AUDIT_RESOLVED_STATUS = "Resolved";
 //Icons
 export const PICK_ICON=' iPick';
 export const STOCK_ICON="iStock";

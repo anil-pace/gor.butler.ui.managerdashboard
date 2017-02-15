@@ -184,7 +184,6 @@ export function AjaxParse(store,res,cause,status)
         	break;
 
         case VALIDATE_SKU_ID:
-        	console.log(res)
         	if(res.sku && res.audit_attributes_values) {
         		store.dispatch(auditValidatedAttributes(res));
         	}

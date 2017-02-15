@@ -26,30 +26,33 @@ var component = this;
   var widther = containerWidth;
   var parentHeight = 300;
   
-    var json=tData;
-     var data = [];
+      var json=tData;
+      var data = [];
       var barData = {}; 
        for (var i = 0; i < json.length; i++) {
-        barData.pps_id = json[i].pps_id;
-        barData.type = json[i][nextP]
-        data.push(barData);
-        barData = {};
+        if(json[i][nextP]>0) {
+          barData.pps_id = json[i].pps_id;
+          barData.type = json[i][nextP]
+          data.push(barData);
+          barData = {};
+        }
        }
-    update(data);
+       data.sort(function(a, b) {return parseFloat(b.type) - parseFloat(a.type);});
+       update(data);
 
   
 
   function update(data) {
-
+    var minHeight = 50;
   var width = widther-100;
-  var barHeight = parentHeight/(data.length);
+  var barHeight = (data.length && parentHeight/(data.length)>=minHeight)?minHeight:parentHeight/(data.length);
   var left = 30, top =20;
   var x = d3.scale.linear().range([0, width]);
   var xAxis =  d3.svg.axis()
     .scale(x)
     .orient("top")
 
-  var y = d3.scale.ordinal().rangeRoundBands([0, barHeight], .1);
+  var y = d3.scale.ordinal().rangeRoundBands([0, parentHeight-(data.length*barHeight)], .1);
   var yAxis = d3.svg.axis()
     .scale(y)
     .orient("right")
