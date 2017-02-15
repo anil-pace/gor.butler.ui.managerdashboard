@@ -220,7 +220,7 @@ _processAuditData(data,nProps){
 }
 handlePageClick(data){
   var url, appendSortUrl = "",appendTextFilterUrl="", makeDate;
-  var sortHead = {"startTime":"&order_by=start_actual_time", "completedTime":"&order_by=completion_time", "display_id":"&order_by=audit_id"};
+  var sortHead = {"startTime":"&order_by=start_actual_time", "completedTime":"&order_by=completion_time", "display_id":"&order_by=display_id"};
   var sortOrder = {"DESC":"&order=asc", "ASC":"&order=desc"};
   var currentDate = new Date();
   this.setState({selected_page:data.selected});

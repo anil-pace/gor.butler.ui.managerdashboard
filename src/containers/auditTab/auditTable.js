@@ -118,7 +118,7 @@ class AuditTable extends React.Component {
       }));
     }
     _onFilterChange(e) {
-      var data={"type":"searchOrder", "captureValue":"", "selected":0 },debounceFilter;
+      var data={"type":"searchOrder", "captureValue":"", "selected":1 },debounceFilter;
       if(e.target && (e.target.value || e.target.value === "")) {
         data["captureValue"] = e.target.value;
         this.props.setAuditFilter(e.target.value);
@@ -134,7 +134,7 @@ class AuditTable extends React.Component {
 
  
    backendSort(columnKey, sortDir) {
-    var data={"columnKey":columnKey, "sortDir":sortDir, selected:0}
+    var data={"columnKey":columnKey, "sortDir":sortDir, selected:1}
     var tableData={
         sortedDataList: this.props.tableData.sortedDataList,
         colSortDirs: {[columnKey]: sortDir,},

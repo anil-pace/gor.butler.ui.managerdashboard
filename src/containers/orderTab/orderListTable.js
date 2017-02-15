@@ -97,7 +97,7 @@ class OrderListTable extends React.Component {
   }
 
    _onFilterChange(e) {
-    var data={"type":"searchOrder", "captureValue":"", "selected":0 },debounceFilter;
+    var data={"type":"searchOrder", "captureValue":"", "selected":1 },debounceFilter;
     if(e.target && (e.target.value || e.target.value === "")) {
       data["captureValue"] = e.target.value;
       this.props.setOrderFilter(e.target.value);
@@ -111,7 +111,7 @@ class OrderListTable extends React.Component {
   
 
   backendSort(columnKey, sortDir) {
-    var data={"columnKey":columnKey, "sortDir":sortDir, selected:0}
+    var data={"columnKey":columnKey, "sortDir":sortDir, selected:1}
     this.props.sortHeaderState(columnKey);
     this.props.refreshData(data);
     this.props.sortHeaderOrder({
@@ -267,7 +267,7 @@ class OrderListTable extends React.Component {
               <FormattedMessage id="orderlist.table.pickBy" description="pick by for orderlist" 
               defaultMessage ="PICK BY"/>
               <div className="gorToolHeaderSubText"> 
-                {this.props.timeZoneString}
+                <FormattedMessage id="orderlist.pendingOrders" description='pendingOrders header ordertable' defaultMessage='{pendingOrders} orders pending' values={{pendingOrders: this.props.totalPendingOrder?this.props.totalPendingOrder:'0'}}/>
               </div>
               </div>
             </SortHeaderCell>
@@ -304,7 +304,7 @@ class OrderListTable extends React.Component {
               <FormattedMessage id="orderlist.table.completedTime" description="completedTime for orderlist" 
               defaultMessage ="COMPLETED"/>
               <div className="gorToolHeaderSubText">
-                {this.props.timeZoneString}
+              <FormattedMessage id="orderlist.totalCompletedOrder" description='totalCompletedOrder header ordertable' defaultMessage='Avg {totalCompletedOrder} orders/hr' values={{totalCompletedOrder: this.props.totalCompletedOrder?this.props.totalCompletedOrder:'0'}}/>
                </div>
                 </div>
             </div>
@@ -321,7 +321,9 @@ class OrderListTable extends React.Component {
               <div className="gorToolHeaderEl">
               <FormattedMessage id="orderlist.table.orderLine" description="orderLine for orderlist" 
               defaultMessage ="ORDER LINE"/>
-              <div className="gorToolHeaderSubText"> </div>
+              <div className="gorToolHeaderSubText"> 
+              <FormattedMessage id="orderlist.itemsPerOrder" description='itemsPerOrder header ordertable' defaultMessage='Avg {itemsPerOrder} items/hr' values={{itemsPerOrder: this.props.itemsPerOrder?this.props.itemsPerOrder.toFixed(2):'0'}}/>
+              </div>
               </div>
             </div>
           }

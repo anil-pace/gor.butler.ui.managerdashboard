@@ -311,6 +311,9 @@ render(){
                   refreshOption={this.refresh.bind(this)} lastUpdatedText = {updateStatusText} lastUpdated={updateStatusIntl} 
                   refreshList={this.refresh.bind(this)} intlMessg={this.props.intlMessages} alertNum={alertNum}
                   totalOrders={this.props.orderData.totalOrders}
+                  itemsPerOrder={this.props.orderData.itemsPerOrder}
+                  totalCompletedOrder={this.props.orderData.totalCompletedOrder}
+                  totalPendingOrder={this.props.orderData.totalPendingOrder}
                   sortHeaderState={this.props.orderHeaderSort} currentSortState={this.props.orderSortHeader} 
                   sortHeaderOrder={this.props.orderHeaderSortOrder} currentHeaderOrder={this.props.orderSortHeaderState}
                   refreshData={this.refresh.bind(this)} setOrderFilter={this.props.orderFilterDetail}
