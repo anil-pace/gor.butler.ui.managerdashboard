@@ -97,7 +97,7 @@ class OrderListTable extends React.Component {
   }
 
    _onFilterChange(e) {
-    var data={"type":"searchOrder", "captureValue":"", "selected":0 },debounceFilter;
+    var data={"type":"searchOrder", "captureValue":"", "selected":1 },debounceFilter;
     if(e.target && (e.target.value || e.target.value === "")) {
       data["captureValue"] = e.target.value;
       this.props.setOrderFilter(e.target.value);
@@ -111,7 +111,7 @@ class OrderListTable extends React.Component {
   
 
   backendSort(columnKey, sortDir) {
-    var data={"columnKey":columnKey, "sortDir":sortDir, selected:0}
+    var data={"columnKey":columnKey, "sortDir":sortDir, selected:1}
     this.props.sortHeaderState(columnKey);
     this.props.refreshData(data);
     this.props.sortHeaderOrder({
