@@ -111,7 +111,7 @@ class CreateAudit extends React.Component{
               "audit_param_value" : {
                   "product_sku": sku,
                   "pdfa_values": {
-                                  "box_id": this.state.selected //box_id is hardcoded as of now
+                                  "box_id": this.state.selected //box_id is hardcoded as of now (kerry specific)
                                   }
                     }
                 };

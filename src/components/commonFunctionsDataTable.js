@@ -147,7 +147,7 @@ export const ToolTipCell = ({rowIndex, data, columnKey,setClass,callBack,tooltip
     </div>
   </Cell>
 );
-//box_id is harcoded as of now in tool tip component
+//box_id is harcoded as of now in tool tip component (kerry specific)
 
 
 export const ProgressCell = ({rowIndex, data, columnKey, resolved, unresolved, ...props}) => (

@@ -69,7 +69,7 @@ class ResolveAudit extends React.Component{
         auditData.status = data[i].status;
       }
       if(data[i].pdfa_audit_attributes && data[i].pdfa_audit_attributes.box_id) {
-        auditData.attributeDetail = data[i].pdfa_audit_attributes.box_id;  // box_id is harcoded as of now (keery specific)
+        auditData.attributeDetail = data[i].pdfa_audit_attributes.box_id;  // box_id is harcoded as of now (kerry specific)
       }
       processedData.push(auditData);
       auditData =  {};
