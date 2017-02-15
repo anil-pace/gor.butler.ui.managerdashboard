@@ -10,13 +10,14 @@ import PutStatusWidget from '../containers/putStatusWidget'
 import PickStatusWidget from '../containers/pickStatusWidget'
 import { connect } from 'react-redux';
 import Dimensions from 'react-dimensions'
+import SearchDropdown from '../components/dropdown/searchDropdown'
 
 class Overview extends React.Component{
 	constructor(props) 
 	{
     	super(props);
     }
-
+    
 
 	render(){
 		return (
