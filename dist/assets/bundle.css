@@ -3217,6 +3217,13 @@ input[type="checkbox"] {
   display: none;
 }
 
+.gor-tool-tip-hover {
+  font-weight: normal;
+  color: #27aae1;
+  font-size: 14px;
+  padding-top: 4px;
+}
+
 .gor-tool-tip-hover:hover + .gor-tooltip {
   display: block;
   z-index: 900;

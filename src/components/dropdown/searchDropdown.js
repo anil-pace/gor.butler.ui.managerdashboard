@@ -147,9 +147,3 @@ class SearchDropdown extends Component {
 }
 
 export default SearchDropdown;
-
-
-
-
-
- 
