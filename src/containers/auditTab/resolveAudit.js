@@ -68,8 +68,12 @@ class ResolveAudit extends React.Component{
       else{
         auditData.status = data[i].status;
       }
+      if(data[i].pdfa_audit_attributes && data[i].pdfa_audit_attributes.box_id) {
+        auditData.attributeDetail = data[i].pdfa_audit_attributes.box_id;  // box_id is harcoded as of now (keery specific)
+      }
       processedData.push(auditData);
       auditData =  {};
+
     }
     this.setState({totalMismatch:totalMismatch})
     return processedData;
@@ -78,8 +82,8 @@ class ResolveAudit extends React.Component{
   _checkAuditStatus(rowIndex,state,auditLineId) {
     var newAuditLineId;
     if(this.props.auditMethod===AUDIT_BY_PDFA) {
-      var newAuditLineIndex = this.actualMapping[auditLineId];
-      newAuditLineId = this.state.auditDataList.newData[newAuditLineIndex].auditLineId
+      var newAuditLineIndex = this.actualMapping[auditLineId]; //in case of pdfa rowindex wont work so using actual index
+      newAuditLineId = this.state.auditDataList.newData[newAuditLineIndex].auditLineId;
     }
     else{
       newAuditLineId = this.state.auditDataList.newData[rowIndex].auditLineId
@@ -119,10 +123,6 @@ class ResolveAudit extends React.Component{
 
   _resolveIssueByPdfa() {
     var slotIdHashMap = {};
-    // var auditDataLine = [{actual_quantity:0, auditline_id:"66a3ee18-0278-41f3-b979-72dfabadfe6c", expected_quantity:1, slot_id:"003.1.A.03-04", status:"audit_pending_approval"}, //mock data
-    //                      {actual_quantity:0, auditline_id:"66a3ee18-0278-41f3-b979-72dfabadfe6s", expected_quantity:1, slot_id:"003.1.A.03-05", status:"audit_pending_approval"},
-    //                      {actual_quantity:0, auditline_id:"66a3ee18-0278-41f3-b979-72dfabadfe61", expected_quantity:1, slot_id:"003.1.A.03-04", status:"audit_pending_approval"},
-    //                      {actual_quantity:0, auditline_id:"66a3ee18-0278-41f3-b979-72dfabadfe64", expected_quantity:1, slot_id:"003.1.A.03-05", status:"audit_pending_approval"}];
     var auditDataLine = this.state.auditDataList.newData; 
     var slotIdGrouping={}, slotIdData={slotId:"", slotIdDataLine:[]}, actualMapping={};
     for (var i = auditDataLine.length - 1; i >= 0; i--) {
@@ -143,7 +143,7 @@ class ResolveAudit extends React.Component{
         slotIdData={slotId:"", slotIdDataLine:[]}
       }
     }
-    this.actualMapping = actualMapping;
+    this.actualMapping = actualMapping; //due to grouping, actual mapping is lost. hence storing here
     return slotIdGrouping;
   }
 
@@ -192,7 +192,7 @@ class ResolveAudit extends React.Component{
                       width={GOR_AUDIT_RESOLVE_WIDTH}
                       height={containerHeight}
                       {...this.props}>
-                      <Column  columnKey="auditLineId" cell={<TextCell data={auditDataList}/>} width={220}/>
+                      <Column  columnKey="attributeDetail" cell={<TextCell data={auditDataList}/>} width={220}/>
                       <Column  columnKey="expected_quantity" cell={  <TextCell data={auditDataList} />} width={220}/>
                       <Column  columnKey="actual_quantity" cell={  <TextCell data={auditDataList} setClass={GOR_BREACHED_LINES}> </TextCell>} width={220}/>
                       <Column  columnKey="status" cell={<TextCell data={auditDataList}> </TextCell>} width={220}/>
