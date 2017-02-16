@@ -233,7 +233,7 @@ class CreateAudit extends React.Component{
             defaultMessage='Enter SKU code'/></div>
               <div className="gor-audit-input-wrap">
                 <input className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} placeholder="e.g. 46978072" id="skuid"  ref={node => { this.skuId = node }}/>
-                <div className={skuState===SKU_NOT_EXISTS?"gor-login-error":(skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU?"header-yellow-alert-icon":"")}/>
+                <div className={skuState===SKU_NOT_EXISTS?"gor-login-error":(skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU?"gor-verified-icon":"")}/>
               </div>
               <div className={"gor-sku-validation-btn-wrap" + (this.props.skuValidationResponse?" gor-disable-content":"")}>
                 <button className="gor-auditCreate-btn" type="button" onClick={this._validSku.bind(this)}><FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 

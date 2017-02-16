@@ -52,8 +52,7 @@ class SearchDropdown extends Component {
       }
     }
     this.props.selectedItems(listToDispatch);
-    this.setState({checkedIndex:checkedState, selected:placeholderList, totalChecked:totalChecked});
-    //this._hideList();
+    this.setState({checkedIndex:checkedState, selected:placeholderList, totalChecked:totalChecked, showList: true});
   }
 
   _showList() { 
