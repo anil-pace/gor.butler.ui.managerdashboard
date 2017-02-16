@@ -1,4 +1,4 @@
-import {SKU_DATA,LOC_DATA,ID_DATA,NAME_DATA,PASSWORD_DATA,INFO_RESET,ID_BACKEND,NOTIFY_PASS,NOTIFY_HIDE,NOTIFY_FAIL,NOTIFY_DELETE,NOTIFY_INFO,LOGIN_ERROR} from '../constants/frontEndConstants';
+import {SKU_DATA,LOC_DATA,ID_DATA,NAME_DATA,PASSWORD_DATA,INFO_RESET,ID_BACKEND,NOTIFY_PASS,NOTIFY_HIDE,NOTIFY_FAIL,NOTIFY_DELETE,NOTIFY_INFO,LOGIN_ERROR,AJAX_CALL,VALIDATE_SKU_SPINNER,VALIDATED_SKU_CODE} from '../constants/frontEndConstants';
 
 
 export function validateID(data){
@@ -73,6 +73,28 @@ export function notifyHide(){
 export function loginError(data){
 	return{
 		type:LOGIN_ERROR,
+		data
+	}
+}
+
+export function validateSKUcode(params){
+	return{
+		type:AJAX_CALL,
+		params
+	}
+}
+
+export function validateSKUcodeSpinner(data) {
+	return{
+		type:VALIDATE_SKU_SPINNER,
+		data
+	}
+}
+
+
+export function validatedSKUcode(data) {
+	return{
+		type:VALIDATED_SKU_CODE,
 		data
 	}
 }

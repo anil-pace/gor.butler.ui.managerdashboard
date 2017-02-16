@@ -115,6 +115,7 @@ export const GET_HEADER_INFO = 'GET_HEADER_INFO';
 export const EDIT_USER='EDIT_USER';
 export const DEBOUNCE_TIMER=1000;
 export const AUDIT_RESOLVE_CONFIRMED = "AUDIT_RESOLVE_CONFIRMED";
+export const VALIDATE_SKU_ID = "VALIDATE_SKU_ID";
 
 export const AUDIT_RETRIEVE = "AUDIT_RETRIEVE";
 export const RECIEVE_AUDIT_DATA = "RECIEVE_AUDIT_DATA";
@@ -169,6 +170,7 @@ export const DISPLAY_PPS_SPINNER = "DISPLAY_PPS_SPINNER";
 export const DISPLAY_CHARGING_STATION_SPINNER = "DISPLAY_CHARGING_STATION_SPINNER";
 export const DISPLAY_USERS_SPINNER ="DISPLAY_USERS_SPINNER";
 export const DISPAY_RESOLVE_AUDIT_SPINNER = "DISPAY_RESOLVE_AUDIT_SPINNER";
+export const VALIDATE_SKU_SPINNER = "VALIDATE_SKU_SPINNER";
 
 /*Map for routes of tab*/
 
@@ -202,7 +204,15 @@ export const SETAUDIT_PPS='SETAUDIT_PPS';
 export const REFRESH_AUDIT='REFRESH_AUDIT';
 export const APPROVE_AUDIT = "APPROVE_AUDIT";
 export const VIEW_AUDIT_ISSUES = "VIEW_AUDIT_ISSUES";
-
+export const VALIDATED_ATTIBUTES_DATA = "VALIDATED_ATTIBUTES_DATA";
+export const VALIDATED_SKU_CODE = "VALIDATED_SKU_CODE";
+export const VALID_SKU = "VALID_SKU";
+export const NO_ATTRIBUTE_SKU = "NO_ATTRIBUTE_SKU";
+export const SKU_NOT_EXISTS = "INVALID_SKU";
+export const NO_SKU_VALIDATION = "NO_SKU_VALIDATION";
+export const WATING_FOR_VALIDATION = "WATING_FOR_VALIDATION";
+export const AUDIT_ISSUES_STATUS = "Issues found";
+export const AUDIT_BY_PDFA = "pdfa";
 /*Inventory parsing constants*/
 export const INVENTORY_DATA_TODAY = 'INVENTORY_DATA_TODAY'
 export const INVENTORY_DATA_HISTORY = 'INVENTORY_DATA_HISTORY'
@@ -310,10 +320,12 @@ export const LEGEND_ROUND= "ROUND";
 export const LEGEND_RECT= "RECTANGLE";
 export const LEGEND_DEFAULT = LEGEND_RECT;
 
-
-
 export const EN='en';
 export const JA='ja';
+export const ES='es'; 
+export const ZH='zh'; 
+export const DE='de'; 
+export const FR='fr'; 
 export const HR='h ';
 export const MM='m ';
 export const SS='s ';
@@ -351,6 +363,8 @@ export const AUDIT_PENDING_APPROVAL = "audit_pending_approval";
 export const AUDIT_RESOLVED = "audit_resolved"; 
 export const AUDIT_UNRESOLVED = "Unresolved";
 export const AUDIT_LINE_REJECTED  = "audit_rejected";
+export const AUDIT_REJECTED_STATUS = "Rejected";
+export const AUDIT_RESOLVED_STATUS = "Resolved";
 //Icons
 export const PICK_ICON=' iPick';
 export const STOCK_ICON="iStock";
@@ -390,3 +404,7 @@ export const SET_CS_FILTER = "SET_CS_FILTER";
 export const SET_WAVE_FILTER = "SET_WAVE_FILTER"
 export const AUDIT_APPROVED = "auditline_approved";
 export const AUDIT_REJECTED = "auditline_rejected";
+
+//search dropdown constants
+export const SHOW_ALL_ENTRIES = "available";
+export const SHOW_SELECTED_ENTRIES = "checked";

@@ -1,5 +1,5 @@
-import {wsResponseAction,wsOnMessageAction,wsEndConnection} from '../actions/socketActions'
-import {WS_CONNECT,WS_DISCONNECT,WS_ONMESSAGE,WS_ONSEND} from '../constants/frontEndConstants'
+import {wsResponseAction,wsEndConnection} from '../actions/socketActions'
+import {WS_CONNECT,WS_DISCONNECT,WS_ONSEND} from '../constants/frontEndConstants'
 import {WS_URL} from '../constants/configConstants'
 import {ResponseParse} from '../utilities/responseParser';
 

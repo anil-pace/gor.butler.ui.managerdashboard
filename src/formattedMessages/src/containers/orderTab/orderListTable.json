@@ -100,6 +100,11 @@
     "defaultMessage": "PICK BY"
   },
   {
+    "id": "orderlist.pendingOrders",
+    "description": "pendingOrders header ordertable",
+    "defaultMessage": "{pendingOrders} orders pending"
+  },
+  {
     "id": "orderlist.table.operatingMode",
     "description": "recievedTime for Orders",
     "defaultMessage": "RECIEVED TIME"
@@ -110,8 +115,18 @@
     "defaultMessage": "COMPLETED"
   },
   {
+    "id": "orderlist.totalCompletedOrder",
+    "description": "totalCompletedOrder header ordertable",
+    "defaultMessage": "Avg {totalCompletedOrder} orders/hr"
+  },
+  {
     "id": "orderlist.table.orderLine",
     "description": "orderLine for orderlist",
     "defaultMessage": "ORDER LINE"
+  },
+  {
+    "id": "orderlist.itemsPerOrder",
+    "description": "itemsPerOrder header ordertable",
+    "defaultMessage": "Avg {itemsPerOrder} items/hr"
   }
 ]
