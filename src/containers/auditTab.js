@@ -273,7 +273,6 @@ handlePageClick(data){
 
 
 render(){
-  console.log("krishna")
   var renderTab = <div/>,
   timeOffset = this.props.timeOffset || "",
   headerTimeZone = (this.context.intl.formatDate(Date.now(),

@@ -41,6 +41,7 @@ class AuditTable extends React.Component {
     this.tableState(nextProps,this);
   }
 
+    
   /**
    * Hack for fixing the bug https://work.greyorange.com/jira/browse/BSS-656
    * This has to be removed once we get rid of the fixedDataTable
@@ -226,7 +227,6 @@ class AuditTable extends React.Component {
    
 
     render() {
-      console.log("dsfddfw")
       var {sortedDataList, colSortDirs,columnWidths} = this.state, heightRes;
       var auditCompleted = this.props.auditState.auditCompleted;
       var auditIssue = this.props.auditState.auditIssue;
