@@ -41,16 +41,6 @@ class AuditTable extends React.Component {
     this.tableState(nextProps,this);
   }
 
-  // shouldComponentUpdate(nextProps) {
-  //   if (this.props.auditState !== nextProps.auditState || this.props.currentSortState !== nextProps.currentSortState || this.props.currentHeaderOrder == nextProps.currentHeaderOrder) {
-  //     return true;
-  //   }
-
-  //   else if ()
-
-  //   return false;
-  // }
-  
   /**
    * Hack for fixing the bug https://work.greyorange.com/jira/browse/BSS-656
    * This has to be removed once we get rid of the fixedDataTable
