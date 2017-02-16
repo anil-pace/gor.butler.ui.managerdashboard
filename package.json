@@ -84,6 +84,7 @@
     "parallelshell": "^2.0.0",
     "react": "^15.3.1",
     "react-addons-create-fragment": "^15.3.2",
+    "react-addons-shallow-compare": "^15.4.2",
     "react-addons-test-utils": "^15.2.0",
     "react-d3-library": "^1.1.7",
     "react-dom": "^15.3.1",
@@ -95,6 +96,7 @@
     "react-router-redux": "^4.0.5",
     "redux": "^3.5.2",
     "redux-router": "^2.1.2",
+    "shallow-compare": "^1.2.0",
     "webpack": "^1.13.2",
     "webpack-cleanup-plugin": "^0.4.0",
     "webpack-dev-server": "^1.16.1"

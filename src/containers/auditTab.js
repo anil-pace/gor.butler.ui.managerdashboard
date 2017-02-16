@@ -78,6 +78,24 @@ class AuditTab extends React.Component{
    this.props.setAuditRefresh(false);
  }
 }
+
+shouldComponentUpdate(nextProps) {
+  var flag = false;
+    if (nextProps.auditRefresh !== this.props.auditRefresh) {
+      flag = flag || true;
+    }
+
+    else if(this.props.auditDetail.length && nextProps.auditDetail.length && this.props.auditDetail[0].audit_id !== nextProps.auditDetail[0].audit_id) {
+      flag = flag || true;
+    }
+
+    else if(this.props.auditSortHeader !== nextProps.auditSortHeader || this.props.auditSpinner !== nextProps.auditSpinner) {
+      flag = flag || true;
+    }
+
+    return flag;
+  }
+
 componentDidMount() {
   var data = {};
   data.selected = 1;
@@ -255,6 +273,7 @@ handlePageClick(data){
 
 
 render(){
+  console.log("krishna")
   var renderTab = <div/>,
   timeOffset = this.props.timeOffset || "",
   headerTimeZone = (this.context.intl.formatDate(Date.now(),
@@ -327,7 +346,7 @@ function mapStateToProps(state, ownProps){
     auditSpinner: state.spinner.auditSpinner || false,
     auditDetail: state.recieveAuditDetail.auditDetail || [],
     totalPage: state.recieveAuditDetail.totalPage || 0,
-    auditRefresh:state.recieveAuditDetail.auditRefresh || null,  
+    auditRefresh:state.recieveAuditDetail.auditRefresh || false,  
     intlMessages: state.intl.messages,
     auth_token: state.authLogin.auth_token,
     timeOffset: state.authLogin.timeOffset
