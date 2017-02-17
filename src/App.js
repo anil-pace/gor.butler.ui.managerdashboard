@@ -16,7 +16,7 @@ import TopNotifications from './components/topnotify/topnotify';
 import { notifyInfo} from './actions/validationActions';
 import Perf from 'react-addons-perf'
 
-//console.log(Perf);
+console.log(Perf);
   class App extends React.Component{ 
   /**
    * Called once before rendering of component,used to displatch fetch action
