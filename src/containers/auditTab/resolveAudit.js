@@ -157,7 +157,7 @@ class ResolveAudit extends React.Component{
                       height={GOR_USER_TABLE_HEADER_HEIGHT}
                       {...this.props}>
                       <Column header={<div className="gorAuditHeader">
-                                        <FormattedMessage id="resolveAudit.table.slot" description="slot id Column" defaultMessage ="SLOT ID"/> 
+                                        <FormattedMessage id="resolveAudit.table.batchID" description="batch id Column" defaultMessage ="BATCH NO."/> 
                                       </div>} width={220}/>
                       <Column header={<div className="gorAuditHeader">
                                         <FormattedMessage id="resolveAudit.table.expectedItems" description="expectedItems Column" defaultMessage ="EXPECTED QUANTITY"/> 

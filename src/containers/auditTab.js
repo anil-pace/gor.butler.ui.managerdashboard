@@ -15,6 +15,7 @@ import {auditHeaderSortOrder, auditHeaderSort, auditFilterDetail} from '../actio
 import {getDaysDiff} from '../utilities/getDaysDiff';
 import {addDateOffSet} from '../utilities/processDate'; 
 import GorPaginate from '../components/gorPaginate/gorPaginate';
+import {showTableFilter} from '../actions/filterAction';
 //Mesages for internationalization
 const messages = defineMessages({
   auditCreatedStatus: {
@@ -79,27 +80,32 @@ class AuditTab extends React.Component{
  }
 }
 
-shouldComponentUpdate(nextProps) {
-  var flag = false;
-    if (nextProps.auditRefresh !== this.props.auditRefresh) {
-      flag = flag || true;
-    }
+// shouldComponentUpdate(nextProps) {
+//   var flag = false;
+//     if (nextProps.auditRefresh !== this.props.auditRefresh) {
+//       flag = flag || true;
+//     }
 
-    else if(this.props.auditDetail.length && nextProps.auditDetail.length && this.props.auditDetail[0].audit_id !== nextProps.auditDetail[0].audit_id) {
-      flag = flag || true;
-    }
+//     else if(this.props.auditDetail.length && nextProps.auditDetail.length && this.props.auditDetail[0].audit_id !== nextProps.auditDetail[0].audit_id) {
+//       flag = flag || true;
+//     }
 
-    else if(this.props.auditSortHeader !== nextProps.auditSortHeader || this.props.auditSpinner !== nextProps.auditSpinner) {
-      flag = flag || true;
-    }
+//     else if(this.props.auditSortHeader !== nextProps.auditSortHeader || this.props.auditSpinner !== nextProps.auditSpinner) {
+//       flag = flag || true;
+//     }
 
-    return flag;
-  }
+//     else if(this.props.showFilter !== nextProps.showFilter) {
+//       flag = flag || true;
+//     }
+
+//     return flag;
+//   }
 
 componentDidMount() {
   var data = {};
   data.selected = 1;
   this.handlePageClick(data);
+
 }
 _processAuditData(data,nProps){
   var nProps = this,
@@ -316,7 +322,9 @@ render(){
               sortHeaderState={this.props.auditHeaderSort} currentSortState={this.props.auditSortHeader} 
               sortHeaderOrder={this.props.auditHeaderSortOrder} currentHeaderOrder={this.props.auditSortHeaderState}
               refreshData={this.handlePageClick.bind(this)}
-              setAuditFilter={this.props.auditFilterDetail} auditState={auditState}/>
+              setAuditFilter={this.props.auditFilterDetail} auditState={auditState}
+              setFilter={this.props.showTableFilter} showFilter={this.props.showFilter}/>
+  
   
   
   return (
@@ -327,9 +335,9 @@ render(){
           {renderTab}
         </div>
       </div>
-      <div className="gor-audit-paginate-wrap">
+      {auditData.length?<div className="gor-audit-paginate-wrap">
         <GorPaginate getPageDetail={this.handlePageClick.bind(this)} totalPage={this.props.totalPage}/>
-      </div>  
+      </div>:""} 
     </div>
     );
 }
@@ -348,7 +356,8 @@ function mapStateToProps(state, ownProps){
     auditRefresh:state.recieveAuditDetail.auditRefresh || false,  
     intlMessages: state.intl.messages,
     auth_token: state.authLogin.auth_token,
-    timeOffset: state.authLogin.timeOffset
+    timeOffset: state.authLogin.timeOffset,
+    showFilter: state.filterInfo.filterState || false,
   };
 }
 
@@ -360,7 +369,8 @@ var mapDispatchToProps = function(dispatch){
     setAuditSpinner: function(data){dispatch(setAuditSpinner(data))},
     getAuditData: function(data){ dispatch(getAuditData(data)); },
     getPageData: function(data){ dispatch(getPageData(data)); },
-    setAuditRefresh: function(){dispatch(setAuditRefresh());}
+    setAuditRefresh: function(){dispatch(setAuditRefresh());},
+    showTableFilter: function(data){dispatch(showTableFilter(data));}
   }
 };
 

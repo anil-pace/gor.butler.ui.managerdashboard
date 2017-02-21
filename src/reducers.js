@@ -32,7 +32,7 @@ import {currentTableState} from './reducers/tableStateReducer';
 import {recieveAuditDetail} from './reducers/auditDetailReducer';
 import {tabsData} from './reducers/tabDataReducer';
 import {sortHeaderState} from './reducers/sortHeaderReducer';
-
+import {filterInfo} from './reducers/filterReducer';
 
 const rootReducer = combineReducers({
   intl:intlReducer,
@@ -67,7 +67,8 @@ const rootReducer = combineReducers({
   d3barChart,
   currentTableState,
   recieveAuditDetail,
-  sortHeaderState
+  sortHeaderState,
+  filterInfo
    })
 
 export default rootReducer

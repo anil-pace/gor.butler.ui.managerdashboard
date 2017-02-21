@@ -1,8 +1,8 @@
 [
   {
-    "id": "resolveAudit.table.slot",
-    "description": "slot id Column",
-    "defaultMessage": "SLOT ID"
+    "id": "resolveAudit.table.batchID",
+    "description": "batch id Column",
+    "defaultMessage": "BATCH NO."
   },
   {
     "id": "resolveAudit.table.expectedItems",
@@ -27,6 +27,11 @@
   {
     "id": "audit.inSlot.text",
     "defaultMessage": "In slot"
+  },
+  {
+    "id": "resolveAudit.table.slot",
+    "description": "slot id Column",
+    "defaultMessage": "SLOT ID"
   },
   {
     "id": "audit.resolve.heading",

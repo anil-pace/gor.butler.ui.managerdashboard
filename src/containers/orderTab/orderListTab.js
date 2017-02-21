@@ -49,6 +49,14 @@ class OrderListTab extends React.Component{
     data.selected = 1;
     this.refresh(data);
   }
+  // shouldComponentUpdate(nextProps) {
+  //   var flag = false;
+
+  //   if(this.props.orderListSpinner !== nextProps.orderListSpinner) {
+  //     flag = flag || true;
+  //   }
+  //   return flag;
+  // }
 
   processOrders(data, nProps) {
 
@@ -269,6 +277,7 @@ this.handlePageClick(data)
 
 
 render(){
+  
   var updateStatus,timeOffset,headerTimeZone;
   let updateStatusIntl,updateStatusText;
   if(this.props.filterOptions.lastUpdatedOn) {
