@@ -255,12 +255,12 @@ class CreateAudit extends React.Component{
             defaultMessage='Enter Location'/></div>
               <div className='gor-sub-head'><FormattedMessage id="audit.add.location.subheading" description='Subtext for enter location' 
             defaultMessage='Format: (XXX.X.X.XX)'/></div>
-              <input className={"gor-usr-fdlg"+(this.props.locCheck.type === ERROR ? ' gor-input-error':' gor-input-ok')} placeholder="e.g. 132.0.A.47" id="locationid"  ref={node => { this.locationId = node }} />
+              <input className={"gor-audit-fdlg"+(this.props.locCheck.type === ERROR ? ' gor-input-error':' gor-input-ok')} placeholder="e.g. 132.0.A.47" id="locationid"  ref={node => { this.locationId = node }} />
               {this.props.locCheck.type===ERROR?<FieldError txt={this.props.locCheck.msg} />:''}
             </div>
             </div>
             <p className='gor-submit'>
-             <button className={"gor-add-btn" + (processedSkuResponse.isValid?"":" gor-disable-content")}><FormattedMessage id="audits.add.password.button" description='Text for add audit button' 
+             <button className={"gor-add-btn" + (processedSkuResponse.isValid || this.props.auditType===LOCATION?"":" gor-disable-content")}><FormattedMessage id="audits.add.password.button" description='Text for add audit button' 
             defaultMessage='Create audit'/></button>
             </p>
             </div>

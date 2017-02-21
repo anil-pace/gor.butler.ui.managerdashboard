@@ -18,7 +18,7 @@ class Spinner extends React.Component{
     	if(this.props.setSpinner){
     		if(this.props.isLoading === true)
     		{
-   		 	 setTimeout(this.props.setSpinner.bind(this,false), 5000);    	
+   		 	 setTimeout(this.props.setSpinner.bind(this,false), 500);    	
     		}
     	}
     }

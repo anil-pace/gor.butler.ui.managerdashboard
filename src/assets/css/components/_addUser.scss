@@ -113,6 +113,23 @@
             margin-top:25px; 
         }
         .gor-usr-fdlg{
+                text-align: left;
+                margin-top: 0.625rem;
+                padding: 0.625rem;
+                 width: 65%;
+                 background-color: #FFFFFF;
+                 border-radius: 3px;
+                display: block;
+                &:hover{
+                    border:1px solid #666666;  
+                }
+                &:disabled{
+                    border:1px solid #cccccc;
+                    background:#f7f7f7;
+                }
+        }
+
+        .gor-audit-fdlg{
                 margin:auto;
                 text-align:left;
                 margin-top:calculateRem(10px);

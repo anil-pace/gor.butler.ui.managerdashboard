@@ -408,3 +408,6 @@ export const AUDIT_REJECTED = "auditline_rejected";
 //search dropdown constants
 export const SHOW_ALL_ENTRIES = "available";
 export const SHOW_SELECTED_ENTRIES = "checked";
+
+//table filter
+export const SHOW_FILTER = "SHOW_FILTER";

@@ -17,7 +17,7 @@ import { defineMessages } from 'react-intl';
 import {debounce} from '../../utilities/debounce';
 import {getAuditOrderLines} from '../../actions/auditActions';
 import {AUDIT_URL, PENDING_ORDERLINES} from '../../constants/configConstants';
-
+import AuditFilter from './auditFilter';
 const messages = defineMessages({
     auditPlaceholder: {
         id: 'audit.placeholder',
@@ -224,9 +224,13 @@ class AuditTable extends React.Component {
     });
       }
     }
-   
+   _setFilter() {
+    var newState = !this.props.showFilter;
+    this.props.setFilter(newState)
+   }
 
     render() {
+      console.log(this.props.showFilter)
       var {sortedDataList, colSortDirs,columnWidths} = this.state, heightRes;
       var auditCompleted = this.props.auditState.auditCompleted;
       var auditIssue = this.props.auditState.auditIssue;
@@ -251,15 +255,26 @@ class AuditTable extends React.Component {
       }
       else{
         var headerHeight=GOR_USER_TABLE_HEADER_HEIGHT,minHeight = GOR_AUDIT_RESOLVE_MIN_HEIGHT;
-        heightRes = (((rowsCount?rowsCount:0)*headerHeight + 3*headerHeight)>minHeight?((rowsCount?rowsCount:0)*headerHeight + 3*headerHeight):minHeight);
+        //heightRes = (((rowsCount?rowsCount:0)*headerHeight + 3*headerHeight)>minHeight?((rowsCount?rowsCount:0)*headerHeight + 3*headerHeight):minHeight)+100;
+        heightRes = screen.height-260
       } 
+      var filterHeight = screen.height-190;
       var tableRenderer = <div/>
        tableRenderer = <div className="gorTableMainContainer">
+       <div className="gor-filter-wrap" style={{'display':this.props.showFilter?'block':'none', height:filterHeight}}> 
+         <AuditFilter/>  
+       </div>
        <div className="gorToolBar">
        <div className="gorToolBarWrap">
        <div className="gorToolBarElements">
        <FormattedMessage id="audit.table.heading" description="Heading for audit table" 
        defaultMessage ="Audit Tasks"/>
+       </div>
+       <div className="gor-button-wrap">
+        <button className="gor-auditCreate-btn" onClick={this._setFilter.bind(this)} >
+          <FormattedMessage id="audit.table.filterLabel" description="button label for filter" 
+          defaultMessage ="Filter"/>
+         </button>
        </div>
        <div className="gor-button-wrap">
        <button className="gor-auditCreate-btn" onClick={this.createAudit.bind(this)} >
