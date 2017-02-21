@@ -119,7 +119,7 @@
                  width: 65%;
                  background-color: #FFFFFF;
                  border-radius: 3px;
-                display: block;
+                display: inline-block;
                 &:hover{
                     border:1px solid #666666;  
                 }
@@ -151,6 +151,21 @@
             font-size:14px;
         }
         .gor-usr-field{
+            display:inline-block;
+            width:35%;
+            .gor-usr-fdsm{
+                margin:auto;
+                text-align:left;
+                margin-top:calculateRem(10px);
+                padding:calculateRem(10px);
+                background-color:#FFFFFF;
+                border-radius:3px;
+                &:hover{
+                    border:1px solid #666666;  
+                }
+            }
+        }
+        .gor-audit-field{
             display:inline-block;
             width:38%;
             .gor-usr-fdsm{
