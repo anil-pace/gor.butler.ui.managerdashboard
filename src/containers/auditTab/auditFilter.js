@@ -21,7 +21,8 @@ class AuditFilter extends React.Component{
 
     _processAuditSearchField(){
         var temp = ["Search by SKU", "Search by Location"]
-        var inputField = <FilterInputFieldWrap inputText={temp} handleInputText={this._handleInputQuery.bind(this)}/>
+        var inputValue = this.state.searchQuery;
+        var inputField = <FilterInputFieldWrap inputText={temp} handleInputText={this._handleInputQuery.bind(this)} inputValue={inputValue}/>
         return inputField;           
 
     }

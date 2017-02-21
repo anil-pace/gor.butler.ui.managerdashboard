@@ -3453,7 +3453,7 @@ input[type="checkbox"] {
   width: 65%;
   background-color: #FFFFFF;
   border-radius: 3px;
-  display: block;
+  display: inline-block;
 }
 
 .gor-modal-content .gor-usr-details .gor-usr-fdlg:hover {
@@ -3492,7 +3492,7 @@ input[type="checkbox"] {
 
 .gor-modal-content .gor-usr-details .gor-usr-field {
   display: inline-block;
-  width: 38%;
+  width: 35%;
 }
 
 .gor-modal-content .gor-usr-details .gor-usr-field .gor-usr-fdsm {
@@ -3505,6 +3505,24 @@ input[type="checkbox"] {
 }
 
 .gor-modal-content .gor-usr-details .gor-usr-field .gor-usr-fdsm:hover {
+  border: 1px solid #666666;
+}
+
+.gor-modal-content .gor-usr-details .gor-audit-field {
+  display: inline-block;
+  width: 38%;
+}
+
+.gor-modal-content .gor-usr-details .gor-audit-field .gor-usr-fdsm {
+  margin: auto;
+  text-align: left;
+  margin-top: 0.625rem;
+  padding: 0.625rem;
+  background-color: #FFFFFF;
+  border-radius: 3px;
+}
+
+.gor-modal-content .gor-usr-details .gor-audit-field .gor-usr-fdsm:hover {
   border: 1px solid #666666;
 }
 
@@ -4360,7 +4378,7 @@ input[type="checkbox"] {
 }
 
 .gor-auditResolve-btn-wrap {
-  padding-left: 70%;
+  padding-left: 69%;
   padding-top: 1.25rem;
 }
 
@@ -4381,7 +4399,7 @@ input[type="checkbox"] {
   padding-left: 10px;
   border: solid 1px #dedede;
   border-top: 0px;
-  width: 1188px;
+  width: 1088px;
 }
 
 .gor-paginate-wrap {

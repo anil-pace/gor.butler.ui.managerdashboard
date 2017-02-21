@@ -1,6 +1,7 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
+
 class Filter extends React.Component{
 	constructor(props) 
 	{
@@ -43,7 +44,7 @@ class Filter extends React.Component{
     	                 	</div>
     	                 </div>
     	                 <div className="gor-filter-body-slider-wrap"> 
-    	               
+    	                 	
     	                 </div>
                      </div>
                  <div className="gor-filter-footer"> 
