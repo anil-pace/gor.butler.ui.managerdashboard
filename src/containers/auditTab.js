@@ -80,26 +80,26 @@ class AuditTab extends React.Component{
  }
 }
 
-shouldComponentUpdate(nextProps) {
-  var flag = false;
-    if (nextProps.auditRefresh !== this.props.auditRefresh) {
-      flag = flag || true;
-    }
+// shouldComponentUpdate(nextProps) {
+//   var flag = false;
+//     if (nextProps.auditRefresh !== this.props.auditRefresh) {
+//       flag = flag || true;
+//     }
 
-    else if(this.props.auditDetail.length && nextProps.auditDetail.length && this.props.auditDetail[0].audit_id !== nextProps.auditDetail[0].audit_id) {
-      flag = flag || true;
-    }
+//     else if(this.props.auditDetail.length && nextProps.auditDetail.length && this.props.auditDetail[0].audit_id !== nextProps.auditDetail[0].audit_id) {
+//       flag = flag || true;
+//     }
 
-    else if(this.props.auditSortHeader !== nextProps.auditSortHeader || this.props.auditSpinner !== nextProps.auditSpinner) {
-      flag = flag || true;
-    }
+//     else if(this.props.auditSortHeader !== nextProps.auditSortHeader || this.props.auditSpinner !== nextProps.auditSpinner) {
+//       flag = flag || true;
+//     }
 
-    else if(this.props.showFilter !== nextProps.showFilter) {
-      flag = flag || true;
-    }
+//     else if(this.props.showFilter !== nextProps.showFilter) {
+//       flag = flag || true;
+//     }
 
-    return flag;
-  }
+//     return flag;
+//   }
 
 componentDidMount() {
   var data = {};
@@ -345,7 +345,6 @@ render(){
 
 
 function mapStateToProps(state, ownProps){
-  console.log(state)
   return {
     orderFilter: state.sortHeaderState.auditFilter|| "",
     auditSortHeader: state.sortHeaderState.auditHeaderSort || "id" ,

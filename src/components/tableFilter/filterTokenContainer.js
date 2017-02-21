@@ -9,8 +9,9 @@ class FilterTokenWrap extends React.Component{
     }
     _processTokenFields() {
     	var tokens = this.props.label, tokenWrap=[];
+        var tokenSelected = this.props.selectedToken;
     	for (var i = tokens.length - 1; i >= 0; i--) {
-    		var tokenComponent = <FilterToken tokenCallBack={this.props.tokenCallBack} tokenField={this.props.field} tokenLabel={tokens[i]}/>
+    		var tokenComponent = <FilterToken tokenCallBack={this.props.tokenCallBack} tokenField={this.props.field} tokenLabel={tokens[i]} tokenSelected={tokenSelected}/>
     		tokenWrap.push(tokenComponent);
     	}
     	return tokenWrap;

@@ -96,7 +96,7 @@ class CreateAudit extends React.Component{
     md=this.location;
     sku=this.skuId.value;
     loc=this.locationId.value;
-    if(this.skuState === NO_ATTRIBUTE_SKU || !this.state.selected.length) //if sku has no attributes || sku has attributes but not 
+    if((this.skuState === NO_ATTRIBUTE_SKU || !this.state.selected.length) && this.props.auditType!==LOCATION) //if sku has no attributes || sku has attributes but not 
     {                                                                     //doing audit by pdfa
       if(!this._checkSku(sku))
         return;

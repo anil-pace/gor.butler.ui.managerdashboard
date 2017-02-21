@@ -277,7 +277,7 @@ this.handlePageClick(data)
 
 
 render(){
-  console.log("in order tab")
+  
   var updateStatus,timeOffset,headerTimeZone;
   let updateStatusIntl,updateStatusText;
   if(this.props.filterOptions.lastUpdatedOn) {

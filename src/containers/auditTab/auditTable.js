@@ -230,7 +230,6 @@ class AuditTable extends React.Component {
    }
 
     render() {
-      console.log(this.props.showFilter)
       var {sortedDataList, colSortDirs,columnWidths} = this.state, heightRes;
       var auditCompleted = this.props.auditState.auditCompleted;
       var auditIssue = this.props.auditState.auditIssue;
@@ -246,7 +245,7 @@ class AuditTable extends React.Component {
       { value: 'duplicateTask', label: duplicateTask },
       { value: 'deleteRecord', label: deleteRecord }
       ];
-      
+      var noFilter = false;
       var noData = <div/>;
      if(rowsCount === 0 || rowsCount === undefined || rowsCount === null) {
         noData =  <div className="gor-no-data"> <FormattedMessage id="audit.table.noData" description="No data message for audit table" 
@@ -255,7 +254,6 @@ class AuditTable extends React.Component {
       }
       else{
         var headerHeight=GOR_USER_TABLE_HEADER_HEIGHT,minHeight = GOR_AUDIT_RESOLVE_MIN_HEIGHT;
-        //heightRes = (((rowsCount?rowsCount:0)*headerHeight + 3*headerHeight)>minHeight?((rowsCount?rowsCount:0)*headerHeight + 3*headerHeight):minHeight)+100;
         heightRes = screen.height-260
       } 
       var filterHeight = screen.height-190;
@@ -270,12 +268,14 @@ class AuditTable extends React.Component {
        <FormattedMessage id="audit.table.heading" description="Heading for audit table" 
        defaultMessage ="Audit Tasks"/>
        </div>
+       {noFilter?
        <div className="gor-button-wrap">
         <button className="gor-auditCreate-btn" onClick={this._setFilter.bind(this)} >
           <FormattedMessage id="audit.table.filterLabel" description="button label for filter" 
           defaultMessage ="Filter"/>
          </button>
        </div>
+      :""}
        <div className="gor-button-wrap">
        <button className="gor-auditCreate-btn" onClick={this.createAudit.bind(this)} >
 

@@ -4,14 +4,14 @@ import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
 import {showTableFilter} from '../../actions/filterAction';
 import { connect } from 'react-redux'; 
-import FilterInputField from '../../components/tableFilter/filterInputField';
+import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import ReactSlider from 'react-slider'
 class AuditFilter extends React.Component{
 	constructor(props) 
 	{
     	super(props);
-        this.state = {tokenSelected: {}}; 
+        this.state = {tokenSelected: {}, searchQuery: {}}; 
     }
 
     _closeFilter() {
@@ -20,24 +20,56 @@ class AuditFilter extends React.Component{
     }	
 
     _processAuditSearchField(){
-        var temp = "Search by SKU"
-        var inputField = <FilterInputField inputText={temp}/>
-        var inputFieldList =[];
-        inputFieldList.push(inputField);  
-        inputFieldList.push(inputField);  
-        return inputFieldList;           
+        var temp = ["Search by SKU", "Search by Location"]
+        var inputField = <FilterInputFieldWrap inputText={temp} handleInputText={this._handleInputQuery.bind(this)}/>
+        return inputField;           
 
     }
 
     _processFilterToken() {
-        var tempField = "STATUS", label=["Any, Any1, Any2, Any3"];
-        var temp = <FilterTokenWrap field={tempField} tokenCallBack={this._handelTokenClick.bind(this)} label={label}/>;
-        return temp;
+        var tempField1 = "STATUS",tempField2="SEARCH", labelC1=["Any", "Any1", "Any2", "Any3"],labelC2=["This", "This1", "This2", "This3"];
+        var selectedToken =  this.state.tokenSelected;
+        var column1 = <FilterTokenWrap field={tempField1} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC1} selectedToken={selectedToken}/>;
+        var column2 = <FilterTokenWrap field={tempField2} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC2} selectedToken={selectedToken}/>;
+        var columnDetail = {column1token:column1, column2token:column2};
+        return columnDetail;
     }
 
-    _handelTokenClick(field,value) {
-        console.log(field,value)
+    _handelTokenClick(field,value,state) {
+        var selectedToken = this.state.tokenSelected;
+        if(selectedToken[field]) {
+            if(state === "add") {
+                selectedToken[field].push(value);
+            }
+            else {
+                var index = selectedToken[field].indexOf(value);
+                if (index >= 0) {
+                    selectedToken[field].splice( index, 1 );
+                }
+            }
+        }
+
+        else {
+            selectedToken[field] = [];
+            selectedToken[field].push(value);
+        }
+        this.setState({tokenSelected:selectedToken});
         
+    }
+
+    _handleInputQuery(inputQuery,queryField) {
+        var currentSearchState = this.state.searchQuery;
+        currentSearchState[queryField] = inputQuery;
+        this.setState({searchQuery:currentSearchState})
+    }
+
+    _applyFilter() {
+       console.log("applied")
+       console.log(this.state)
+    }
+
+    _clearFilter() {
+        this.setState({tokenSelected: {}, searchQuery: {}});
     }
 
 	render(){
@@ -46,8 +78,11 @@ class AuditFilter extends React.Component{
 		return (
 			<div>
                  <Filter hideFilter={this._closeFilter.bind(this)} 
+                         clearFilter={this._clearFilter.bind(this)}
                          searchField={auditSearchField}
-                         filterToken={auditFilterToken} />
+                         filterTokenC1={auditFilterToken.column1token}
+                         filterTokenC2={auditFilterToken.column2token}
+                         formSubmit={this._applyFilter.bind(this)} />
             </div>
 		);
 	}
