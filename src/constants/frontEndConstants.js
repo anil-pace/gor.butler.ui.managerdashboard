@@ -38,7 +38,7 @@ export const RECIEVE_HEADER = "RECIEVE_HEADER";
 export const GOR_TABLE_HEADER_HEIGHT = 71;
 export const GOR_USER_TABLE_HEADER_HEIGHT = 50;
 export const GOR_AUDIT_RESOLVE_MIN_HEIGHT = 400;
-export const GOR_AUDIT_RESOLVE_WIDTH = 1200;
+export const GOR_AUDIT_RESOLVE_WIDTH = 1100;
 
 /*Constants for performance widget*/
 export const RENDER_WIDGET = "RENDER_WIDGET";

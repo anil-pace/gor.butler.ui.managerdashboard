@@ -210,7 +210,7 @@ class CreateAudit extends React.Component{
             <div className='gor-usr-details'>
             <div className='gor-usr-hdlg'><FormattedMessage id="audit.add.auditdetails.heading" description='Text for audit details heading' 
             defaultMessage='Select audit type by'/></div>
-              <div className='gor-usr-field'>              
+              <div className='gor-audit-field'>              
                 
               </div>
             

@@ -6,7 +6,7 @@ import {showTableFilter} from '../../actions/filterAction';
 import { connect } from 'react-redux'; 
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
-import ReactSlider from 'react-slider'
+
 class AuditFilter extends React.Component{
 	constructor(props) 
 	{
@@ -21,7 +21,8 @@ class AuditFilter extends React.Component{
 
     _processAuditSearchField(){
         var temp = ["Search by SKU", "Search by Location"]
-        var inputField = <FilterInputFieldWrap inputText={temp} handleInputText={this._handleInputQuery.bind(this)}/>
+        var inputValue = this.state.searchQuery;
+        var inputField = <FilterInputFieldWrap inputText={temp} handleInputText={this._handleInputQuery.bind(this)} inputValue={inputValue}/>
         return inputField;           
 
     }
