@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM  from 'react-dom';
 import Ddown from 'react-dropdown';
 import {SHOW_ALL_ENTRIES, SHOW_SELECTED_ENTRIES} from '../../constants/frontEndConstants';
 
@@ -7,6 +8,7 @@ class SearchDropdown extends Component {
     super(props)
     this.state = {selected:"Search and select", showList:false, currentQuery:"", currentList:"", checkedIndex:"", totalChecked:0, tabSelected:SHOW_ALL_ENTRIES}
     this._showList = this._showList.bind(this);
+    this._handleDocumentClick = this._handleDocumentClick.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -15,6 +17,16 @@ class SearchDropdown extends Component {
     var checkedIndex  = new Array(listLength).fill(false);
     this.state = {selected:"Search and select", showList:false, currentQuery:"", currentList:initialIndex, checkedIndex:checkedIndex, totalChecked:0, tabSelected:SHOW_ALL_ENTRIES}
     this._showList = this._showList.bind(this);
+  }
+
+  componentWillMount() {
+    document.addEventListener('click', this._handleDocumentClick, false);
+    document.addEventListener('touchend', this._handleDocumentClick, false);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('click', this._handleDocumentClick, false);
+    document.removeEventListener('touchend', this._handleDocumentClick, false);
   }
 
   _querySubmit(e) {
@@ -40,8 +52,7 @@ class SearchDropdown extends Component {
       }
     }
     this.props.selectedItems(listToDispatch);
-    this.setState({checkedIndex:checkedState, selected:placeholderList, totalChecked:totalChecked});
-    this._hideList();
+    this.setState({checkedIndex:checkedState, selected:placeholderList, totalChecked:totalChecked, showList: true});
   }
 
   _showList() { 
@@ -84,6 +95,12 @@ class SearchDropdown extends Component {
        }
       }
     return items;
+  }
+
+  _handleDocumentClick() {
+    if (!ReactDOM.findDOMNode(this).contains(event.target)) {
+          this.setState({showList: false});
+    }
   }
 
   render () {

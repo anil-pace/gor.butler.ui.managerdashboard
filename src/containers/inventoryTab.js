@@ -28,7 +28,6 @@ class InventoryTab extends React.Component{
 		 * Need to remove these hardcoded variables
 		 * 
 		 */
-		
 		var histogramLabel =<FormattedMessage id="inventory.histogram.header" description="Inventory Histogram Header Message" 
               			defaultMessage ="Stock level history"/>  ,
 		linechartLabel = <FormattedMessage id="inventory.linechart.header" description="Inventory Line Chart Header Message" 

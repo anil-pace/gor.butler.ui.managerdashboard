@@ -25,6 +25,11 @@
     "defaultMessage": "Audit Tasks"
   },
   {
+    "id": "audit.table.filterLabel",
+    "description": "button label for filter",
+    "defaultMessage": "Filter"
+  },
+  {
     "id": "audit.table.buttonLable",
     "description": "button label for audit create",
     "defaultMessage": "Create New Task"

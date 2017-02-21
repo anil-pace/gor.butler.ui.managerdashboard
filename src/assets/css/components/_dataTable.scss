@@ -1751,7 +1751,10 @@ font-family: "source sans pro";
 
 }
 .gor-tool-tip-hover {
-  
+  font-weight: normal;
+  color: #27aae1;
+  font-size: 14px;
+  padding-top: 4px;
 }
 
 .gor-tool-tip-hover:hover + .gor-tooltip 
@@ -1761,6 +1764,7 @@ font-family: "source sans pro";
   width: 210px;
   position: fixed;
   overflow: hidden;
+  
 }
 
 .gor-tooltip-text-wrap {

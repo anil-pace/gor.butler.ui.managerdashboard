@@ -11,12 +11,13 @@ import PickStatusWidget from '../containers/pickStatusWidget'
 import { connect } from 'react-redux';
 import Dimensions from 'react-dimensions'
 
+
 class Overview extends React.Component{
 	constructor(props) 
 	{
     	super(props);
     }
-
+    
 
 	render(){
 		return (

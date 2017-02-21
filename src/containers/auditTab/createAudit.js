@@ -96,7 +96,7 @@ class CreateAudit extends React.Component{
     md=this.location;
     sku=this.skuId.value;
     loc=this.locationId.value;
-    if(this.skuState === NO_ATTRIBUTE_SKU || !this.state.selected.length) //if sku has no attributes || sku has attributes but not 
+    if((this.skuState === NO_ATTRIBUTE_SKU || !this.state.selected.length) && this.props.auditType!==LOCATION) //if sku has no attributes || sku has attributes but not 
     {                                                                     //doing audit by pdfa
       if(!this._checkSku(sku))
         return;
@@ -233,7 +233,7 @@ class CreateAudit extends React.Component{
             defaultMessage='Enter SKU code'/></div>
               <div className="gor-audit-input-wrap">
                 <input className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} placeholder="e.g. 46978072" id="skuid"  ref={node => { this.skuId = node }}/>
-                <div className={skuState===SKU_NOT_EXISTS?"gor-login-error":(skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU?"header-yellow-alert-icon":"")}/>
+                <div className={skuState===SKU_NOT_EXISTS?"gor-login-error":(skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU?"gor-verified-icon":"")}/>
               </div>
               <div className={"gor-sku-validation-btn-wrap" + (this.props.skuValidationResponse?" gor-disable-content":"")}>
                 <button className="gor-auditCreate-btn" type="button" onClick={this._validSku.bind(this)}><FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
@@ -255,12 +255,12 @@ class CreateAudit extends React.Component{
             defaultMessage='Enter Location'/></div>
               <div className='gor-sub-head'><FormattedMessage id="audit.add.location.subheading" description='Subtext for enter location' 
             defaultMessage='Format: (XXX.X.X.XX)'/></div>
-              <input className={"gor-usr-fdlg"+(this.props.locCheck.type === ERROR ? ' gor-input-error':' gor-input-ok')} placeholder="e.g. 132.0.A.47" id="locationid"  ref={node => { this.locationId = node }} />
+              <input className={"gor-audit-fdlg"+(this.props.locCheck.type === ERROR ? ' gor-input-error':' gor-input-ok')} placeholder="e.g. 132.0.A.47" id="locationid"  ref={node => { this.locationId = node }} />
               {this.props.locCheck.type===ERROR?<FieldError txt={this.props.locCheck.msg} />:''}
             </div>
             </div>
             <p className='gor-submit'>
-             <button className={"gor-add-btn" + (processedSkuResponse.isValid?"":" gor-disable-content")}><FormattedMessage id="audits.add.password.button" description='Text for add audit button' 
+             <button className={"gor-add-btn" + (processedSkuResponse.isValid || this.props.auditType===LOCATION?"":" gor-disable-content")}><FormattedMessage id="audits.add.password.button" description='Text for add audit button' 
             defaultMessage='Create audit'/></button>
             </p>
             </div>

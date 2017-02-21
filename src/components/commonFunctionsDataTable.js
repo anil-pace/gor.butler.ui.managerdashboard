@@ -134,6 +134,7 @@ export const ToolTipCell = ({rowIndex, data, columnKey,setClass,callBack,tooltip
     <div className="gor-tool-tip-hover" onMouseEnter={callBack}>
       {data.getObjectAt(rowIndex)[tooltipData] && data.getObjectAt(rowIndex)[tooltipData].box_id?data.getObjectAt(rowIndex)[tooltipData].box_id.length+" items selected":""}
     </div>
+    {data.getObjectAt(rowIndex)[tooltipData] && data.getObjectAt(rowIndex)[tooltipData].box_id?
     <div className="gor-tooltip">
       <div className="gor-tooltip-arrow"/> 
       <div className="gor-tooltip-text-wrap">
@@ -145,6 +146,7 @@ export const ToolTipCell = ({rowIndex, data, columnKey,setClass,callBack,tooltip
         </div>
       </div> 
     </div>
+    :""}
   </Cell>
 );
 //box_id is harcoded as of now in tool tip component (kerry specific)
