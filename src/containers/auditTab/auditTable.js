@@ -58,7 +58,7 @@ class AuditTable extends React.Component {
       while(parentEl){
         if(parentEl.className === "fixedDataTableRowLayout_rowWrapper"){
           parentEl.style.zIndex = "30";
-          if(index === totalRowCount){
+          if(index === totalRowCount && totalRowCount!== 0){
             if(elClassName !== "Dropdown-control"){
               siblingEl = el.parentNode.nextSibling;
             }
@@ -245,7 +245,7 @@ class AuditTable extends React.Component {
       { value: 'duplicateTask', label: duplicateTask },
       { value: 'deleteRecord', label: deleteRecord }
       ];
-      var noFilter = false;
+      var noFilter = true;
       var noData = <div/>;
      if(rowsCount === 0 || rowsCount === undefined || rowsCount === null) {
         noData =  <div className="gor-no-data"> <FormattedMessage id="audit.table.noData" description="No data message for audit table" 

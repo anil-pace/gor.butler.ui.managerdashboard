@@ -130,6 +130,8 @@ body {
   font-family: Source Sans Pro;
 }
 
+.gor-filter-add-token,
+.gor-filter-checked-token,
 .gor-verified-icon,
 .gor-pagination-first,
 .gor-pagination-last,
@@ -442,6 +444,31 @@ body {
   width: 16px;
   height: 16px;
   display: inline-block;
+  vertical-align: middle;
+}
+
+.gor-filter-add-token {
+  background-position: -151px -94px;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.gor-filter-checked-token {
+  background-position: -135px -94px;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.gor-white-spinner {
+  background-image: url(images/whiteSpinner.svg);
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 /*  SECTIONS  */
@@ -4814,4 +4841,11 @@ input[type="checkbox"] {
 
 .gor-filter-token-container {
   padding-bottom: 15px;
+}
+
+.gor-no-result-filter {
+  color: #EC1C24;
+  padding-top: 30px;
+  font-size: 20px;
+  padding-left: 20px;
 }

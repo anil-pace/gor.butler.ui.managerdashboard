@@ -6,7 +6,7 @@ import { FormattedMessage, FormattedDate, FormattedTime,FormattedRelative ,defin
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData,TestingCell} from '../../components/commonFunctionsDataTable';
 import {GOR_STATUS,GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT,DEBOUNCE_TIMER} from '../../constants/frontEndConstants';
 import {debounce} from '../../utilities/debounce';
-
+import OrderFilter from './orderFilter';
 const messages = defineMessages({
     filterPlaceholder: {
         id: 'table.filter.placeholder',
@@ -105,7 +105,7 @@ class OrderListTable extends React.Component {
     else {
       data["captureValue"] = e;
     }
-    debounceFilter = debounce(this.props.refreshData, DEBOUNCE_TIMER);
+    debounceFilter = debounce(this.props.refreshOption, DEBOUNCE_TIMER);
     debounceFilter(data);
   }
   
@@ -113,12 +113,15 @@ class OrderListTable extends React.Component {
   backendSort(columnKey, sortDir) {
     var data={"columnKey":columnKey, "sortDir":sortDir, selected:1}
     this.props.sortHeaderState(columnKey);
-    this.props.refreshData(data);
+    this.props.refreshOption(data);
     this.props.sortHeaderOrder({
       colSortDirs: {[columnKey]: sortDir},
     })
   }
-
+  _setFilter() {
+    var newState = !this.props.showFilter;
+    this.props.setFilter(newState)
+   }
   
   render() {
     
@@ -137,23 +140,6 @@ class OrderListTable extends React.Component {
     let twelveHrDrop = <FormattedMessage id="pendingDrop.table.twelveHrDrop" description="twelveHr dropdown option for orderlist" defaultMessage ="Last 12 hours"/> 
     let oneDayDrop = <FormattedMessage id="completedDrop.table.oneDayDrop" description="oneDay dropdown option for orderlist" defaultMessage ="Last 1 day"/> 
     
-    const ordersByStatus = [
-    { value: 'all', label: allDrop },
-    { value: 'breached', label: breachedDrop },
-    { value: 'pending', label: pendingDrop },
-    { value: 'completed', label: completedDrop },
-    { value: 'exception', label: exception}
-    ];
-
-    const ordersByTime = [
-    { value: 'allOrders', label: allTimeDrop },
-    { value: 'oneHourOrders', label: oneHrDrop },
-    { value: 'twoHourOrders', label: twoHrDrop },
-    { value: 'sixHourOrders', label: sixHrDrop },
-    { value: 'twelveHourOrders', label: twelveHrDrop },
-    { value: 'oneDayOrders', label: oneDayDrop }
-    ];
-
     if(this.props.alertNum !== 0) {
 
      headerAlert =  <div className="gorToolHeaderEl alertState"> <div className="table-subtab-alert-icon"/> <div className="gor-inline">{this.props.alertNum} Alerts </div> </div>
@@ -168,8 +154,12 @@ class OrderListTable extends React.Component {
         defaultMessage ="No Orders Found"/>  </div>
      heightRes = GOR_TABLE_HEADER_HEIGHT;
     }
+    var filterHeight = screen.height-190;
     return (
       <div className="gorTableMainContainer">
+      <div className="gor-filter-wrap" style={{'width':this.props.showFilter?'350px':'0px', height:filterHeight}}> 
+         <OrderFilter refreshOption={this.props.refreshOption} responseFlag={this.props.responseFlag}/>  
+       </div>
         <div className="gorToolBar">
           <div className="gorToolBarWrap">
             <div className="gorToolBarElements">
@@ -187,23 +177,13 @@ class OrderListTable extends React.Component {
           </div>
         <div className="filterWrapper"> 
         <div className="gorToolBarDropDown">
-          <div className="gor-dropD-text"> <FormattedMessage id="order.table.dropdown.text" description="Sub text for order list dropdown" 
-              defaultMessage ="Show"/> </div>
-          <div className="gor-dropDown-firstInnerElement">
-              <Dropdown  styleClass={'gorDataTableDrop'}  items={ordersByStatus} currentState={ordersByStatus[0]} optionDispatch={this.props.statusFilter} refreshList={this.props.refreshList}/>
-          </div>
-          <div className="gor-dropDown-secondInnerElement">                                                                  
-              <Dropdown  styleClass={'gorDataTableDrop'}  items={ordersByTime} currentState={ordersByTime[0]}  optionDispatch={this.props.timeFilter} refreshList={this.props.refreshList}/>
-            </div>
-            </div> 
-        <div className="gorFilter">
-            <div className="searchbox-magnifying-glass-icon"/>
-            <input className="gorInputFilter"
-              onChange={this._onFilterChange}
-              placeholder={this.props.intlMessg["table.filter.placeholder"]}
-              value={this.props.getOrderFilter}>
-            </input>
-        </div>
+        <div className="gor-button-wrap">
+        <button className={this.props.isFilterApplied?"gor-add-btn":"gor-auditCreate-btn"} onClick={this._setFilter.bind(this)} >
+          <FormattedMessage id="order.table.filterLabel" description="button label for filter" 
+          defaultMessage ="Filter"/>
+         </button>
+       </div>
+        </div>     
         </div>
        </div>
 
