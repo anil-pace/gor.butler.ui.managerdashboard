@@ -14,7 +14,7 @@ class FilterInputField extends React.Component{
 		return (
 			<div>
                 <div className="gor-filter-input-text"> {this.props.inputText} </div>
-                <input className='gor-filter-input-wrap' type="text" onChange={this._textSubmit.bind(this)} ref={node => { this.pageNum = node }} value="sds"/>
+                <input className='gor-filter-input-wrap' type="text" onChange={this._textSubmit.bind(this)} ref={node => { this.pageNum = node }} value={this.props.inputValue||""}/>
             </div>
 		);
 	}

@@ -1,4 +1,4 @@
-import {SHOW_FILTER} from '../constants/frontEndConstants'; 
+import {SHOW_FILTER, IS_FILTER_APPLIED} from '../constants/frontEndConstants'; 
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -12,6 +12,11 @@ export  function filterInfo(state={},action){
           })
           break;
     
+    case IS_FILTER_APPLIED:
+          return Object.assign({}, state, { 
+            "isFilterApplied" : action.data
+          })
+          break;
     default:
       return state
   }

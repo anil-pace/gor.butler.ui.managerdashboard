@@ -1,3 +1,5 @@
+.gor-filter-add-token,
+.gor-filter-checked-token,
 .gor-verified-icon,
 .gor-pagination-first,
 .gor-pagination-last,
@@ -282,6 +284,30 @@ background-position: -101px -52px;
 
 .gor-verified-icon {
     background-position: -426px -77px;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.gor-filter-add-token {
+    background-position: -151px -94px;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.gor-filter-checked-token {
+    background-position: -135px -94px;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.gor-white-spinner {
+    background-image: url(images/whiteSpinner.svg);
     width: 16px;
     height: 16px;
     display: inline-block;

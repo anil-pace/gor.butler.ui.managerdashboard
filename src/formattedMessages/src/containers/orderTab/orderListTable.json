@@ -75,9 +75,9 @@
     "defaultMessage": "Refresh Data"
   },
   {
-    "id": "order.table.dropdown.text",
-    "description": "Sub text for order list dropdown",
-    "defaultMessage": "Show"
+    "id": "order.table.filterLabel",
+    "description": "button label for filter",
+    "defaultMessage": "Filter"
   },
   {
     "id": "orderlist.order.headingText",

@@ -13,7 +13,8 @@ class FilterInputFieldWrap extends React.Component{
     _processInputField() {
         var totalInput = this.props.inputText, inputFieldWrap =[];
         for (var i = totalInput.length - 1; i >= 0; i--) {
-            var inputField = <FilterInputField inputText={totalInput[i]} handleInputText={this.props.handleInputText}/>;
+            var inputValue = this.props.inputValue[totalInput[i]];
+            var inputField = <FilterInputField inputText={totalInput[i]} handleInputText={this.props.handleInputText} inputValue={inputValue}/>;
             inputFieldWrap.push(inputField)
         }
         return inputFieldWrap;
