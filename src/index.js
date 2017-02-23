@@ -50,14 +50,15 @@ if (!window.Intl) {
   // Webpack parses the inside of require.ensure at build time to know that intl
   // should be bundled separately. You could get the same effect by passing
   // ['intl'] as the first argument.
-  require.ensure([], () => {
+  require.ensure(['intl'], (require) => {
     // Ensure only makes sure the module has been downloaded and parsed.
     // Now we actually need to run it to install the polyfill.
-    require('intl');
+     require('intl');
+     
  
     // Carry on
     initApp();
-  });
+  },"IntlBundle");
 } else {
   // Polyfill wasn't needed, carry on
   initApp();
