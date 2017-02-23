@@ -36,6 +36,13 @@ class StackedChartHorizontal extends React.Component{
   componentWillReceiveProps(nextProps){
     this._processData(nextProps.snapshotData,nextProps.config);
   }
+  shouldComponentUpdate(nextProps, nextState){
+    if(!Object.keys(nextProps.snapshotData).length){
+      return false;
+    }
+      return true;
+    
+  }
 
  
    
@@ -51,10 +58,11 @@ class StackedChartHorizontal extends React.Component{
     var totalSpaceInPx = (totalSpaceUtilization/100)*config.svgInfo.width;
     var unusedSpace = data ? data.unusedSpace : 100;
     var unusedColorCode = data ? data.colorCode : "#EEE";
-     data = data ? data.category_data : [];
+     data = data.category_data ? data.category_data : [];
     var x = 0;//utilisedSpace=0;
     var values={"utilisedSpace":totalSpaceUtilization};
 
+    if(unusedSpace){
     for(let i = 0, l =data.length ; i< l ; i++){
       
       svg.append("rect")
@@ -98,6 +106,7 @@ class StackedChartHorizontal extends React.Component{
       .attr("y",Number(config.svgInfo.height)/2)
       .text(this.context.intl.formatMessage(messages.invUsedSpace,values))
     }
+  }
     this.setState({d3: node});
   }
 

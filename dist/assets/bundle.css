@@ -4179,6 +4179,10 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
+.inventoryHist .bar:last-child {
+  fill: #949699;
+}
+
 .inventoryHist .axis--y path.domain {
   display: none;
 }
@@ -4199,11 +4203,6 @@ input[type="checkbox"] {
 
 .inventoryHist .axis--x line.month-break {
   display: block;
-}
-
-.inventoryHist .bar {
-  fill: #498BD8;
-  opacity: 1;
 }
 
 .inventoryHist .tick text {
@@ -4302,18 +4301,30 @@ input[type="checkbox"] {
   stroke: #CCCCCC;
 }
 
+.lineGraph .grid circle {
+  cursor: pointer;
+}
+
+.lineGraph .grid circle.pick {
+  fill: #1976D2;
+}
+
+.lineGraph .grid circle.put {
+  fill: #F5A623;
+}
+
 .lineGraph .grid .tick:nth-child(1) line {
   stroke: #666666;
   stroke-width: 2;
 }
 
 .lineGraph .grid path.line {
-  stroke-width: 2;
-  stroke: #7ED321;
+  stroke-width: 3.5;
+  stroke: #F5A623;
 }
 
-.lineGraph .grid path.line:nth-child(1) {
-  stroke: #D0021B;
+.lineGraph .grid path.line.pick {
+  stroke: #1976D2;
 }
 
 .lineGraph circle.line {

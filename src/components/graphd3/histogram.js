@@ -30,12 +30,20 @@ class Histogram extends React.Component{
   	this._processData(JSON.parse(JSON.stringify(nextProps.histogramData)),nextProps.config);
   }
 
+  shouldComponentUpdate(nextProps, nextState){
+    if(this.props.hasDataChanged === nextProps.hasDataChanged || !nextProps.histogramData.length){
+      return false;
+    }
+      return true;
+    
+  }
+
 
   
    _processData(data,config){
    	
     var node = document.createElement('div');
-    if(data.length){
+    if(data.length > 1){
     var _this= this;
 	 
    	var svg = d3.select(node).append("svg"),
@@ -66,7 +74,7 @@ class Histogram extends React.Component{
     	y.domain([0, d3.max(data, function(d) { return config.defaultMaxYAxis; })]);
     }
     else{
-    	y.domain([0, d3.max(data, function(d) { return d.yAxisData; })]);
+    	y.domain([0, d3.max(data, function(d) { return (d.yAxisData + (1000 - (d.yAxisData%1000))); })]);
     }
 
     //Adding grid lines
@@ -95,6 +103,8 @@ class Histogram extends React.Component{
       .data(data)
       .enter().append("rect")
         .attr("class", "bar")
+        .attr("rx","2")
+        .attr("ry","2")
     .attr("x", function(d) { return x(d.xAxisData ); })
         .attr("y", function(d) { return y(d.yAxisData); })
         .attr("width", Math.min(x.rangeBand()-2, 100))

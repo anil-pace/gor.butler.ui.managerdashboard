@@ -39,32 +39,12 @@ class PickPutLineGraph extends React.Component{
 
     }   
    _processData(){
-    var histogramData = JSON.parse(JSON.stringify(this.props.inventoryData)),
+    var recreatedData = JSON.parse(JSON.stringify(this.props.recreatedData)),
     processedData = [];
-    if(histogramData.length){
 
-    let noStock = 0,
-    lastProcessedDate,
-    dataLen = histogramData.length,
-    dateToday = dataLen ? new Date(Date.parse(histogramData[0].date)) :  null,
-    recreatedData =  this.props.recreatedData;
-    for(let i=0,len = INVENTORY_HISTORY_DAYS_COUNT,j=0 ; i <= len && dataLen; i++){
-      let dataObj={};
-      let currentDate = new Date(dateToday.getFullYear(),
-                                  dateToday.getMonth(),
-                                  dateToday.getDate(),
-                                  dateToday.getHours(),
-                                  dateToday.getMinutes(),
-                                  dateToday.getSeconds(),
-                                  dateToday.getMilliseconds());
-      currentDate.setDate(currentDate.getDate() - i);
-
-      if(!recreatedData[currentDate.getTime()]){
-        dataObj.date = currentDate;
-        dataObj.items_put = 0;
-        dataObj.items_picked = 0;
-        dataObj.customData = (new Date(currentDate)).getTime();
-        dataObj.toolTipData = {
+    for(let k in recreatedData){
+      let dataObj = recreatedData[k].graphInfo;
+      dataObj.toolTipData = {
                       date:this.context.intl.formatDate(dataObj.date,
                                 {
                                   year:'numeric',
@@ -74,35 +54,17 @@ class PickPutLineGraph extends React.Component{
                       put:this.context.intl.formatMessage(messages.toolTipPut)+":"+dataObj.items_put,
                       pick:this.context.intl.formatMessage(messages.toolTipPick)+":"+dataObj.items_picked
                     }
-      }
-      else{
-        dataObj.date =histogramData[j] ?  (new Date(Date.parse(histogramData[j].date))) : currentDate;
-        dataObj.items_put =  histogramData[j].items_put;
-        dataObj.items_picked = histogramData[j].items_picked;
-        dataObj.customData = Date.parse(histogramData[j].date);
-        dataObj.toolTipData = {
-                      date:this.context.intl.formatDate(dataObj.date,
-                                {
-                                  year:'numeric',
-                                  month:'short',
-                                  day:'2-digit'
-                                }),
-                      put:this.context.intl.formatMessage(messages.toolTipPut)+":"+dataObj.items_put,
-                      pick:this.context.intl.formatMessage(messages.toolTipPick)+":"+dataObj.items_picked
-                    }
-      if(!noStock){
-        noStock = histogramData[j].items_put || histogramData[j].items_picked;
-      }
-      j++;
-      }
-    processedData.push(dataObj);
+      processedData.push(dataObj)
     }
-    processedData[0].noData =  noStock ? false : true;
+    
+
+    
+    //processedData[0].noData =  noStock ? false : true;
     processedData.sort(function(a, b) {
         var x = a["customData"]; var y = b["customData"];
         return ((x < y) ? -1 : ((x > y) ? 1 : 0));
     });
-}
+
    
     return processedData;
    }
@@ -117,7 +79,7 @@ class PickPutLineGraph extends React.Component{
         config.breakMonth = this.context.intl.formatDate(Date.now(), {month: 'short'}); 
         return (
             <div>
-                <MultiLineGraph config ={config} inventoryData={processedData || []}/>
+                <MultiLineGraph hasDataChanged = {this.props.hasDataChanged} config ={config} inventoryData={processedData || []}/>
             </div>
             );
     }

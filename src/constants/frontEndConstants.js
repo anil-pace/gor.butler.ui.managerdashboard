@@ -272,7 +272,7 @@ export const INVENTORY_HISTOGRAM_CONFIG = {
 	bandPadding:0.05,
 	outerTickSize:0,
 	defaultMaxYAxis:100000,
-	ticks:3,
+	ticks:4,
 	showMonthBreak:true,
 	noDataText:'No Stock Found'
 }

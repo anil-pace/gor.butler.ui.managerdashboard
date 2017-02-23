@@ -15,7 +15,13 @@ class ItemCategoryTable extends React.Component{
 
     }
 
-   
+    shouldComponentUpdate(nextProps, nextState){
+	    if(this.props.hasDataChanged === nextProps.hasDataChanged || !Object.keys(nextProps.snapshotData).length){
+	      return false;
+	    }
+	      return true;
+    
+  	}
    
 	render(){
 		var structure,catData;
