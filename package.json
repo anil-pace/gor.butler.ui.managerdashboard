@@ -74,6 +74,7 @@
     "fs": "0.0.1-security",
     "glob": "^7.0.6",
     "html-webpack-plugin": "^2.22.0",
+    "intl": "^1.2.5",
     "jasmine-reporters": "^1.0.0",
     "jest": "^13.2.3",
     "json-loader": "^0.5.4",

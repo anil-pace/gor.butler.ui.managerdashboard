@@ -28,7 +28,11 @@ import {preloadedState} from './utilities/intialData';
 const initState = preloadedState;
 const store = configureStore(initState);
 
-ReactDOM.render(
+/**
+ * Function to initialize App
+ */
+function initApp(){
+	ReactDOM.render(
 	<Provider store={store}>
 	<IntlProvider messages={ initState.intl.messages } locale={navigator.language} >
 	<div>
@@ -39,3 +43,24 @@ ReactDOM.render(
 
 	</Provider>
 ,document.getElementById('container'))
+}
+
+// Check if polyfill required
+if (!window.Intl) {
+  // Webpack parses the inside of require.ensure at build time to know that intl
+  // should be bundled separately. You could get the same effect by passing
+  // ['intl'] as the first argument.
+  require.ensure([], () => {
+    // Ensure only makes sure the module has been downloaded and parsed.
+    // Now we actually need to run it to install the polyfill.
+    require('intl');
+ 
+    // Carry on
+    initApp();
+  });
+} else {
+  // Polyfill wasn't needed, carry on
+  initApp();
+}
+
+
