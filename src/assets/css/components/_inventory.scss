@@ -140,6 +140,9 @@
 .inventoryHist{
 	.bar{
 		cursor:pointer;
+		&:last-child{
+			fill:#949699;
+		}
 	}
 	.axis--y{
 		path{
@@ -169,10 +172,7 @@
 		}
 
 	}
-	.bar{
-		fill:#498BD8;
-		opacity: 1;
-	}
+	
 	.tick{
 		text{
 			fill:#666666;

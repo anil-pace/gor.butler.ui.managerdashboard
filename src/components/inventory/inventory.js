@@ -25,7 +25,9 @@ import { FormattedMessage ,FormattedDate} from 'react-intl';
    
 	render(){
 		
-		var snapShotData = this.props.isPrevDateSelected ? this.props.inventoryDataPrevious : this.props.snapshotData[0];
+		var snapShotData = this.props.isPrevDateSelected ? this.props.inventoryDataPrevious : this.props.snapshotData;
+
+		//var snapShotData = this.props.snapshotData;
 		
 		var histogramLegend = {
 			data:[{
@@ -56,6 +58,7 @@ import { FormattedMessage ,FormattedDate} from 'react-intl';
 			],
 			config:INV_LINE_LEGEND_CONFIG
 		}
+		
 		return (
 			<div>
 			<div className="head">
@@ -73,7 +76,7 @@ import { FormattedMessage ,FormattedDate} from 'react-intl';
 						<Legend hasDataChanged = {this.props.hasDataChanged} legendData = {histogramLegend}/>
 						</div>
 						<div className="histogram">
-						<InventoryHistogram  recreatedData={this.props.recreatedData} hasDataChanged = {this.props.hasDataChanged} histogramData={this.props.inventoryData}/>
+						<InventoryHistogram  recreatedData={this.props.recreatedData} hasDataChanged = {this.props.hasDataChanged} />
 						</div>
 						<div className="histLbl">
 						<span>{this.props.linechartLabel}</span>
@@ -82,15 +85,15 @@ import { FormattedMessage ,FormattedDate} from 'react-intl';
 						<Legend hasDataChanged = {this.props.hasDataChanged} legendData = {lineChartLagend} legendType={LEGEND_ROUND}/>
 						</div>
 						<div className="lineGraph">
-						<PickPutLineGraph recreatedData={this.props.recreatedData} hasDataChanged = {this.props.hasDataChanged} inventoryData={this.props.inventoryData}/>
+						<PickPutLineGraph recreatedData={this.props.recreatedData} hasDataChanged = {this.props.hasDataChanged} />
 						</div>
 						
 						</div>
 					</div>
 					<div className = "stkSnapSht">
 					<div className = "snapShtWrap">
-					<SnapShot hasDataChanged = {this.props.hasDataChanged} currentDate = {this.props.currentDate} snapshotTabData={snapShotData || {}}/>
-					<InventoryStacked hasDataChanged = {this.props.hasDataChanged} snapshotData={snapShotData }/>
+						<SnapShot hasDataChanged = {this.props.hasDataChanged} currentDate = {this.props.currentDate} snapshotTabData={snapShotData || {}}/>
+					<InventoryStacked hasDataChanged = {this.props.hasDataChanged} snapshotData={snapShotData || {}}/>
 					<ItemCategoryTable hasDataChanged = {this.props.hasDataChanged} snapshotData={snapShotData || {}}/>
 					</div>
 					</div>
@@ -101,15 +104,16 @@ import { FormattedMessage ,FormattedDate} from 'react-intl';
 		);
 	}
 };
+
 Inventory.propTypes={
 	data:React.PropTypes.array,
 	histogramLabel:React.PropTypes.object,
 	linechartLabel:React.PropTypes.object,
-	snapshotData:React.PropTypes.array,
+	snapshotData:React.PropTypes.object,
 	inventoryData: React.PropTypes.array,
-	inventoryDataPrevious:React.PropTypes.array,
+	inventoryDataPrevious:React.PropTypes.object,
 	isPrevDateSelected:React.PropTypes.bool,
-	currentDate:React.PropTypes.number,
+	currentDate:React.PropTypes.object,
 	hasDataChanged : React.PropTypes.number,
 	recreatedData: React.PropTypes.object
 }
