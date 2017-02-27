@@ -255,9 +255,9 @@ export const INV_LINE_LEGEND_CONFIG = {
 
 export const INVENTORY_HISTORY_DAYS_COUNT = 29;
 export const INVENTORY_HISTOGRAM_CONFIG = {
-	height:200,
+	height:250,
 	width:(70/100) * screen.width,
-	margin:{top: 20, right: 20, bottom: 30, left: 60},
+	margin:{top: 20, right: 20, bottom: 60, left: 60},
 	bandPadding:0.05,
 	outerTickSize:0,
 	defaultMaxYAxis:100000,
@@ -266,14 +266,14 @@ export const INVENTORY_HISTOGRAM_CONFIG = {
 	noDataText:'No Stock Found'
 }
 export const INVENTORY_LINE_CONFIG = {
-	height:200,
+	height:250,
 	width:(70/100) * screen.width,
-	margin:{top: 20, right: 20, bottom: 30, left: 60},
+	margin:{top: 20, right: 20, bottom: 60, left: 60},
 	bandPadding:0.05,
 	outerTickSize:0,
 	defaultMaxYAxis:100000,
 	padding:18,
-	ticks:3,
+	ticks:4,
 	showMonthBreak:true,
 	noDataText:'No Item Movement'
 }

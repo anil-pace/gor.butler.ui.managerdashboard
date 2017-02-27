@@ -118,14 +118,19 @@ class Histogram extends React.Component{
     }
     if(config.showMonthBreak && data.length){
       var mBreak= g.selectAll("g.axis--x");
-      mBreak.select("g:nth-child("+data.length+")").append("text").attr("x","-20").attr("y","2.5em").text(config.today)
-      var monthBreak = mBreak.select("g:nth-child("+(data.length - data[data.length-1].xAxisData)+")");
+      var dLength = data.length;
+      var monthBreak = mBreak.select("g:nth-child("+(dLength - data[dLength-1].xAxisData)+")");
+      let isOverlap = (data[dLength-1].xAxisData === 1 ? true :false);
+      let yToday = (isOverlap ? "3.5em":"2.5em");
+      mBreak.select("g:nth-child("+dLength+")").append("text").attr("x","-20").attr("y",yToday).text(config.today);
+      
+    }
       monthBreak.append("line").attr("class","month-break").attr("x1","15").attr("x2","15").attr("y1","0").attr("y2","25");
-      mBreak.select("g:nth-child("+(data.length - data[data.length-2].xAxisData)+")").append("text").attr("x","-5").attr("y","30").text(config.breakMonth);
+      mBreak.select("g:nth-child("+(dLength - data[dLength-2].xAxisData)+")").append("text").attr("x","-5").attr("y","30").text(config.breakMonth);
     }
         
 
-     }
+     
      this.setState({d3: node});
    }
   

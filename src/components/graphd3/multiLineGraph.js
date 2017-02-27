@@ -102,7 +102,7 @@ class MultiLineGraph extends React.Component{
           y.domain([0, d3.max(dataArray, function(d) { return config.defaultMaxYAxis })]);
         }
         else{
-          y.domain([0, d3.max(dataArray, function(d) { return Math.max(d.items_put, d.items_picked); })]);
+          y.domain([0, d3.max(dataArray, function(d) { var maxVal = Math.max(d.items_put, d.items_picked);return (maxVal + (1000 - (maxVal%1000)));  })]);
         }
         
 
@@ -193,7 +193,9 @@ class MultiLineGraph extends React.Component{
         if (mBreak.length){
           var dataLen = dataArray.length - 1;
           var textEl = parseInt(mBreak.select("g:nth-child("+dataLen+") text").text());
-          mBreak.select("g:nth-child("+(dataLen+1)+")").append("text").attr("x","-20").attr("y","2.5em").text(config.today)
+          let isOverlap = (textEl === 1 ? true :false);
+          let yToday = (isOverlap ? "3.5em":"2.5em");
+          mBreak.select("g:nth-child("+(dataLen+1)+")").append("text").attr("x","-20").attr("y",yToday).text(config.today)
           var monthBreak = mBreak.select("g:nth-child("+(dataLen)+")");
           mBreak.select("g:nth-child("+(dataLen - textEl)+")").append("line").attr("class","month-break").attr("x1","15").attr("x2","15").attr("y1","0").attr("y2","25");
           mBreak.select("g:nth-child("+(dataLen - (textEl-1))+")").append("text").attr("x","-5").attr("y","30").text(config.breakMonth);
