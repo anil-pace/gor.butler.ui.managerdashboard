@@ -76,7 +76,7 @@ import { FormattedMessage ,FormattedDate} from 'react-intl';
 						<Legend hasDataChanged = {this.props.hasDataChanged} legendData = {histogramLegend}/>
 						</div>
 						<div className="histogram">
-						<InventoryHistogram  recreatedData={this.props.recreatedData} hasDataChanged = {this.props.hasDataChanged} />
+						<InventoryHistogram  noData = {this.props.noData} recreatedData={this.props.recreatedData} hasDataChanged = {this.props.hasDataChanged} />
 						</div>
 						<div className="histLbl">
 						<span>{this.props.linechartLabel}</span>
@@ -85,7 +85,7 @@ import { FormattedMessage ,FormattedDate} from 'react-intl';
 						<Legend hasDataChanged = {this.props.hasDataChanged} legendData = {lineChartLagend} legendType={LEGEND_ROUND}/>
 						</div>
 						<div className="lineGraph">
-						<PickPutLineGraph recreatedData={this.props.recreatedData} hasDataChanged = {this.props.hasDataChanged} />
+						<PickPutLineGraph noData = {this.props.noData} recreatedData={this.props.recreatedData} hasDataChanged = {this.props.hasDataChanged} />
 						</div>
 						
 						</div>
@@ -113,9 +113,10 @@ Inventory.propTypes={
 	inventoryData: React.PropTypes.array,
 	inventoryDataPrevious:React.PropTypes.object,
 	isPrevDateSelected:React.PropTypes.bool,
-	currentDate:React.PropTypes.object,
+	currentDate:React.PropTypes.number,
 	hasDataChanged : React.PropTypes.number,
-	recreatedData: React.PropTypes.object
+	recreatedData: React.PropTypes.object,
+	noData:React.PropTypes.bool
 }
 export default Inventory;
 

@@ -3986,8 +3986,13 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
-.inventoryHist .bar:last-child {
+.inventoryHist .bar.sel {
   fill: #949699;
+}
+
+.inventoryHist .bar.last-child {
+  stroke: #4d5055;
+  stroke-width: 0.0625rem;
 }
 
 .inventoryHist .axis--y path.domain {

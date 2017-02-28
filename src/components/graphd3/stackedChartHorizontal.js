@@ -88,6 +88,13 @@ class StackedChartHorizontal extends React.Component{
       .style("fill",d3.rgb(unusedColorCode))
   
      if(totalSpaceUtilization){
+      let textXPos=x-14;
+      if(textXPos < 0){
+        textXPos = 0
+      }
+      else if(textXPos >=config.svgInfo.width ){
+        textXPos = config.svgInfo.width - 170;
+      }
       svg.append("line")
       .attr("x1",totalSpaceInPx+"px")
       .attr("x2",totalSpaceInPx+"px")
@@ -96,7 +103,7 @@ class StackedChartHorizontal extends React.Component{
       .style("stroke",d3.rgb(config.svgInfo.lineInfo.stroke))
       .style("stroke-width",config.svgInfo.lineInfo["stroke-width"])
       svg.append("text")
-      .attr("x",(x-14 < 0 ? 0 : x-14)+"px")
+      .attr("x",textXPos+"px")
       .attr("y",config.svgInfo.textInfo.y)
       .text(this.context.intl.formatMessage(messages.invUsedSpace,values))
     }

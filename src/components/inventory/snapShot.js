@@ -24,7 +24,7 @@ class SnapShotDetails extends React.Component{
    
 	render(){
 		
-		var isToday = Date.parse(this.props.currentDate) === Date.parse(this.props.snapshotTabData.date) ? true :false,
+		var isToday = this.props.currentDate === Date.parse(this.props.snapshotTabData.date) ? true :false,
 		dt,currentStock,todayDate;
 		if(isToday){
 			dt = <FormattedMessage id='inventory.snaphot.date' defaultMessage="Today's" description="Snapshot date string"/>

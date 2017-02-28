@@ -7,7 +7,12 @@
   {
     "id": "inventory.linechart.toolTipPick",
     "description": "Text for pick in tooltip",
-    "defaultMessage": "Pick"
+    "defaultMessage": "Picked"
+  },
+  {
+    "id": "inventory.linechart.toolTipEntity",
+    "description": "Text inventory entity",
+    "defaultMessage": "Items"
   },
   {
     "id": "inventory.linechart.noDataText",

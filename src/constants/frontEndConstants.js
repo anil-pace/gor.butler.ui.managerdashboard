@@ -220,11 +220,11 @@ export const CATEGORY_COLOR_MAP = [
 	"#A44550",
 	"#8F39EC",
 	"#EEEEEE",
-	"#FFFFFF"
+	"#F9F9F9"
 ]
-export const INV_HIST_LEGEND_COLOR = "#498BD8";
-export const INV_LINE_LEGEND_IPICKED_COLOR = "#D0021B";
-export const INV_LINE_LEGEND_IPUT_COLOR = "#7ED321";
+export const INV_HIST_LEGEND_COLOR = "#D3D3D3";
+export const INV_LINE_LEGEND_IPICKED_COLOR = "#1976D2";
+export const INV_LINE_LEGEND_IPUT_COLOR = "#F5A623";
 export const INV_HIST_LEGEND_DATA = [{
 	color:INV_HIST_LEGEND_COLOR,
 	name:'Items Stocked'
