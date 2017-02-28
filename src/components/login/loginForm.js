@@ -65,19 +65,15 @@ class LoginForm extends React.Component{
         this.props.authLoginData(loginData);
     }
 	render(){
+        // remove the internationalization from 'Butler' as it is our brand and also 'TM' as it is universal term
         return (
               <form action="#"  id = "loginForm" ref={node => { this.loginForm = node }} 
                 onSubmit={(e) => this._handleSubmit(e)}>
                 <div className='gor-login-mid'>
                 <div className='gor-upper-box'>
                     <div className='gor-login-head'>
-                      <span className='gor-lg-txt'>
-                       <FormattedMessage id='login.butler.title' 
-                        defaultMessage="Butler" description="Text for butler management Login form title"/>
-                       </span>
-                       <sup><FormattedMessage id='login.butler.trademark' 
-                    defaultMessage="TM"
-                            description="Trademark"/></sup>
+                      <span className='gor-lg-txt'>Butler</span>
+                       <sup>TM</sup>
                     </div>
                     <p>
                     <FormattedMessage id='login.butler.manageInterface' 

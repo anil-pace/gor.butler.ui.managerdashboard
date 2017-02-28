@@ -1,4 +1,4 @@
-import {AUDIT_DATA,SET_AUDIT,RESET_AUDIT,SETAUDIT_PPS} from '../constants/frontEndConstants'; 
+import {AUDIT_DATA,SET_AUDIT,RESET_AUDIT,SETAUDIT_PPS,VALIDATE_SKU_SPINNER,VALIDATED_ATTIBUTES_DATA} from '../constants/frontEndConstants'; 
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -35,7 +35,19 @@ export  function auditInfo(state={},action){
           return Object.assign({}, state, { 
             "ppsList" : action.data
           })
-          break;        
+          break;  
+
+    case VALIDATE_SKU_SPINNER:
+            return Object.assign({}, state, { 
+            "skuValidationSpinner" : action.data
+          })
+          break;  
+
+    case VALIDATED_ATTIBUTES_DATA:
+       return Object.assign({}, state, { 
+            "skuAttributes" : action.data
+          })
+          break;             
     default:
       return state
   }

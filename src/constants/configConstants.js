@@ -1,7 +1,4 @@
-
-
-
-export const BASE_URL = '192.168.8.103' ;
+export const BASE_URL = '192.168.8.205';
 export const PORT = '8888';
 export const PROTOCOL = 'https://';
 export const WS_PROTOCOL ="wss://";
@@ -33,3 +30,5 @@ export const FILTER_ORDER_ID =  "&order_id~=";
 export const FILTER_AUDIT_ID = "&display_id=";
 export const PENDING_ORDERLINES = "/pending_auditlines";
 export const AUDIT_ANAMOLY  = "/anamoly_auditlines";
+export const SKU_VALIDATION_URL = API_URL + "/sku/audit_attributes_configured/";
+

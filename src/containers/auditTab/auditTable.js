@@ -5,19 +5,19 @@ import Dimensions from 'react-dimensions'
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import {currentTableState} from '../../actions/tableDataAction'
-import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData, ProgressCell,ActionCellAudit} from '../../components/commonFunctionsDataTable';
+import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData, ProgressCell,ActionCellAudit,ToolTipCell} from '../../components/commonFunctionsDataTable';
 import {modal} from 'react-redux-modal';
 import CreateAudit from './createAudit';
 import StartAudit from './startAudit';
 import DeleteAudit from './deleteAudit';
 import DuplicateAudit from './duplicateAudit';
 import ResolveAudit from './resolveAudit';
-import {GOR_STATUS,GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT,DEBOUNCE_TIMER,AUDIT_RESOLVE_LINES,GET,APP_JSON} from '../../constants/frontEndConstants';
+import {GOR_STATUS,GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT,DEBOUNCE_TIMER,AUDIT_RESOLVE_LINES,GET,APP_JSON,GOR_AUDIT_RESOLVE_MIN_HEIGHT,GOR_USER_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
 import { defineMessages } from 'react-intl';
 import {debounce} from '../../utilities/debounce';
 import {getAuditOrderLines} from '../../actions/auditActions';
 import {AUDIT_URL, PENDING_ORDERLINES} from '../../constants/configConstants';
-
+import AuditFilter from './auditFilter';
 const messages = defineMessages({
     auditPlaceholder: {
         id: 'audit.placeholder',
@@ -31,7 +31,6 @@ class AuditTable extends React.Component {
   constructor(props) {
     super(props);
     this.tableState(this.props,this);
-    this._onSortChange = this._onSortChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
     this.backendSort = this.backendSort.bind(this);
@@ -42,27 +41,24 @@ class AuditTable extends React.Component {
     this.tableState(nextProps,this);
   }
 
-  componentDidMount() {
-    this.props.currentTableState(this.tableState(this.props, this));    
-  }  
+    
   /**
    * Hack for fixing the bug https://work.greyorange.com/jira/browse/BSS-656
    * This has to be removed once we get rid of the fixedDataTable
    * @param  {Number} rowIndex rowindex on which the click was initiated
    */
    _handleOnClickDropdown(event, index) {
-
     var el = event.target;
     var elClassName = (el.className).trim(),
     parentEl,siblingEl,totalRowCount = this.props.items.length -1;
-    if(elClassName !== "Dropdown-control" && elClassName !== "Dropdown-placeholder" && elClassName !== "Dropdown-arrow"){
+    if(elClassName !== "Dropdown-control" && elClassName !== "Dropdown-placeholder" && elClassName !== "Dropdown-arrow" && elClassName !== "gor-tool-tip-hover"){
       return;
     }
       parentEl= el.parentNode;
       while(parentEl){
         if(parentEl.className === "fixedDataTableRowLayout_rowWrapper"){
           parentEl.style.zIndex = "30";
-          if(index === totalRowCount){
+          if(index === totalRowCount && totalRowCount!== 0){
             if(elClassName !== "Dropdown-control"){
               siblingEl = el.parentNode.nextSibling;
             }
@@ -81,8 +77,6 @@ class AuditTable extends React.Component {
       if(parentEl.nextSibling){
         parentEl.nextSibling.style.zIndex = "2" ;
       }
-      
-    
 
 
   }
@@ -99,7 +93,8 @@ class AuditTable extends React.Component {
     if(nProps.currentHeaderOrder.colSortDirs) {
       sortIndex = nProps.currentHeaderOrder.colSortDirs;
     }
-    var tableData = {sortedDataList: current._dataList,
+      current.state = {
+      sortedDataList: current._dataList,
       colSortDirs: sortIndex,
       columnWidths: {
         display_id: nProps.containerWidth*0.09,
@@ -109,8 +104,8 @@ class AuditTable extends React.Component {
         progress: nProps.containerWidth*0.17,
         completedTime: nProps.containerWidth*0.15,
         actions: nProps.containerWidth*0.25
-      }};
-      return tableData;
+      },
+    };
     }
 
     _onColumnResizeEndCallback(newColumnWidth, columnKey) {
@@ -122,7 +117,7 @@ class AuditTable extends React.Component {
       }));
     }
     _onFilterChange(e) {
-      var data={"type":"searchOrder", "captureValue":"", "selected":0 },debounceFilter;
+      var data={"type":"searchOrder", "captureValue":"", "selected":1 },debounceFilter;
       if(e.target && (e.target.value || e.target.value === "")) {
         data["captureValue"] = e.target.value;
         this.props.setAuditFilter(e.target.value);
@@ -136,28 +131,12 @@ class AuditTable extends React.Component {
     }
 
 
-    _onSortChange(columnKey, sortDir) {
-      if(columnKey === GOR_STATUS) {
-      columnKey = GOR_STATUS_PRIORITY;
-    }
-      var sortIndexes = this._defaultSortIndexes.slice();
-      var tableData={
-        sortedDataList: new DataListWrapper(sortData(columnKey, sortDir,sortIndexes,this._dataList), this._dataList),
-        colSortDirs: {[columnKey]: sortDir,},
-        columnWidths: this.props.tableData.columnWidths,
-      };
-
-      this.props.currentTableState(tableData)
-    }
-
+ 
    backendSort(columnKey, sortDir) {
-    var data={"columnKey":columnKey, "sortDir":sortDir, selected:0}
-    var tableData={
-        sortedDataList: this.props.tableData.sortedDataList,
-        colSortDirs: {[columnKey]: sortDir,},
-        columnWidths: this.props.tableData.columnWidths,
-      };
-      this.props.currentTableState(tableData);
+    var data={"columnKey":columnKey, "sortDir":sortDir, selected:1}
+      this.props.sortHeaderOrder({
+      colSortDirs: {[columnKey]: sortDir},
+    })
       this.props.sortHeaderState(columnKey);
       this.props.refreshData(data);
   }
@@ -177,12 +156,8 @@ class AuditTable extends React.Component {
 
     startAudit(columnKey,rowIndex) {
       var auditId = [], sortedIndex;
-      if(this.props.tableData.sortedDataList._data !== undefined) {
-        sortedIndex = this.props.tableData.sortedDataList._indexMap[rowIndex];
-        auditId.push(this.props.tableData.sortedDataList._data.newData[sortedIndex].id);
-      }
-      else {
-        auditId.push(this.props.items[rowIndex].id);
+      if(this.state.sortedDataList.newData[rowIndex]) {
+        auditId.push(this.state.sortedDataList.newData[rowIndex].id)
       }
       modal.add(StartAudit, {
         title: '',
@@ -194,19 +169,13 @@ class AuditTable extends React.Component {
     }
 
     resolveAudit(columnKey,rowIndex,screenId) {
-        var auditId, auditType, displayId, auditLineId;
-        if(this.props.tableData.sortedDataList._data !== undefined) {
-          sortedIndex = this.props.tableData.sortedDataList._indexMap[rowIndex];
-          auditId = this.props.tableData.sortedDataList._data.newData[sortedIndex].id;
-          auditType = this.props.tableData.sortedDataList._data.newData[sortedIndex].auditTypeValue;
-          displayId = this.props.tableData.sortedDataList._data.newData[sortedIndex].display_id;
+        var auditId, auditType, displayId, auditLineId, auditMethod;
+        if(this.state.sortedDataList.newData[rowIndex]) {
+          auditId = this.state.sortedDataList.newData[rowIndex].id;
+          auditType = this.state.sortedDataList.newData[rowIndex].auditTypeValue;
+          displayId = this.state.sortedDataList.newData[rowIndex].display_id;
+          auditMethod = this.state.sortedDataList.newData[rowIndex].auditType;
         }
-        else {
-          auditType = this.props.items[rowIndex].auditTypeValue;
-          displayId = this.props.items[rowIndex].display_id;
-          auditId = this.props.items[rowIndex].id;
-        }
-    
          modal.add(ResolveAudit, {
         title: '',
         size: 'large', // large, medium or small,
@@ -215,25 +184,18 @@ class AuditTable extends React.Component {
         auditId:auditId,
         screenId:screenId,
         auditType:auditType,
-        displayId:displayId
+        displayId:displayId,
+        auditMethod:auditMethod
       });
     }
 
     manageAuditTask(rowIndex,option ){
       if(option.value === "duplicateTask"){
         var auditType, auditTypeValue, auditComplete,auditTypeParam,sortedIndex;
-
-
-        if(this.props.tableData.sortedDataList._data !== undefined) {
-          sortedIndex = this.props.tableData.sortedDataList._indexMap[rowIndex];
-          auditType = this.props.tableData.sortedDataList._data.newData[sortedIndex].auditType;
-          auditTypeParam = this.props.tableData.sortedDataList._data.newData[sortedIndex].auditValue;
-          auditComplete = this.props.tableData.sortedDataList._data.newData[sortedIndex].auditTypeValue;
-        }
-        else {
-          auditType = this.props.items[rowIndex].auditType;
-          auditTypeParam = this.props.items[rowIndex].auditValue;
-          auditComplete = this.props.items[rowIndex].auditTypeValue;
+        if(this.state.sortedDataList.newData[rowIndex]) {
+          auditType = this.state.sortedDataList.newData[rowIndex].auditType;
+          auditTypeParam = this.state.sortedDataList.newData[rowIndex].auditValue;
+          auditComplete = this.state.sortedDataList.newData[rowIndex].auditTypeValue;
         }
 
         modal.add(DuplicateAudit, {
@@ -249,12 +211,8 @@ class AuditTable extends React.Component {
       }
       else if(option.value === "deleteRecord"){
         var auditId;
-        if(this.props.tableData.sortedDataList._data !== undefined) {
-          sortedIndex = this.props.tableData.sortedDataList._indexMap[rowIndex];
-          auditId = this.props.tableData.sortedDataList._data.newData[sortedIndex].id;
-        }
-        else {
-          auditId = this.props.items[rowIndex].id;
+        if(this.state.sortedDataList.newData[rowIndex]) {
+          auditId = this.state.sortedDataList.newData[rowIndex].id;
         }
         modal.add(DeleteAudit, {
           title: '',
@@ -266,45 +224,58 @@ class AuditTable extends React.Component {
     });
       }
     }
-
+   _setFilter() {
+    var newState = !this.props.showFilter;
+    this.props.setFilter(newState)
+   }
 
     render() {
-      var sortedDataList = this._dataList, heightRes;
-      if(this.props.tableData.sortedDataList !== undefined && this.props.tableData.sortedDataList._data !== undefined) {
-        sortedDataList = this.props.tableData.sortedDataList;
-      }
-      var colSortDirs = this.props.tableData.colSortDirs;
-      var columnWidths = this.props.tableData.columnWidths;
+      var {sortedDataList, colSortDirs,columnWidths} = this.state, heightRes;
       var auditCompleted = this.props.auditState.auditCompleted;
+      var auditIssue = this.props.auditState.auditIssue;
       var locationAudit = this.props.auditState.locationAudit;
       var skuAudit = this.props.auditState.skuAudit;
       var totalProgress = this.props.auditState.totalProgress;
       var rowsCount = sortedDataList.getSize();
+      var headerAlert =  <div className="gorToolHeaderEl alertState"> <div className="table-subtab-alert-icon"/> <div className="gor-inline">{auditIssue} Alerts </div> </div>
+    
       var duplicateTask = <FormattedMessage id="audit.table.duplicateTask" description="duplicateTask option for audit" defaultMessage ="Duplicate task"/>; 
       var deleteRecord = <FormattedMessage id="audit.table.deleteRecord" description="deleteRecord option for audit" defaultMessage ="Delete record"/>; 
       const tasks = [
       { value: 'duplicateTask', label: duplicateTask },
       { value: 'deleteRecord', label: deleteRecord }
       ];
-      if(this.props.containerHeight !== 0) {
-        heightRes = this.props.containerHeight;
-      }
+      var noFilter = true;
       var noData = <div/>;
      if(rowsCount === 0 || rowsCount === undefined || rowsCount === null) {
         noData =  <div className="gor-no-data"> <FormattedMessage id="audit.table.noData" description="No data message for audit table" 
         defaultMessage ="No Audit Task Found"/> </div>
         heightRes = GOR_TABLE_HEADER_HEIGHT;
       }
-
+      else{
+        var headerHeight=GOR_USER_TABLE_HEADER_HEIGHT,minHeight = GOR_AUDIT_RESOLVE_MIN_HEIGHT;
+        heightRes = screen.height-260
+      } 
+      var filterHeight = screen.height-190;
       var tableRenderer = <div/>
-      if(this.props.tableData.length !== 0) {
        tableRenderer = <div className="gorTableMainContainer">
+       <div className="gor-filter-wrap" style={{'display':this.props.showFilter?'block':'none', height:filterHeight}}> 
+         <AuditFilter/>  
+       </div>
        <div className="gorToolBar">
        <div className="gorToolBarWrap">
        <div className="gorToolBarElements">
        <FormattedMessage id="audit.table.heading" description="Heading for audit table" 
        defaultMessage ="Audit Tasks"/>
        </div>
+       {noFilter?
+       <div className="gor-button-wrap">
+        <button className="gor-auditCreate-btn" onClick={this._setFilter.bind(this)} >
+          <FormattedMessage id="audit.table.filterLabel" description="button label for filter" 
+          defaultMessage ="Filter"/>
+         </button>
+       </div>
+      :""}
        <div className="gor-button-wrap">
        <button className="gor-auditCreate-btn" onClick={this.createAudit.bind(this)} >
 
@@ -373,7 +344,7 @@ class AuditTable extends React.Component {
         </div>
         </div>
       }
-      cell={<TextCell data={sortedDataList} ></TextCell>}
+      cell={<ToolTipCell data={sortedDataList} callBack={this._handleOnClickDropdown.bind(this)} tooltipData="pdfaValues" ></ToolTipCell>}
       fixed={true}
       width={columnWidths.auditTypeValue}
       isResizable={true}
@@ -386,14 +357,14 @@ class AuditTable extends React.Component {
 
         <FormattedMessage id="audit.table.STATUS" description="STATUS for audit" 
         defaultMessage ="STATUS"/>
-        
-       <div className="gor-subStatus-online">
-                  <div >  
-                    <FormattedMessage id="auditTable.status" description='status completed audit' 
-                defaultMessage='{auditCompleted} Completed' 
-                values={{auditCompleted:auditCompleted?auditCompleted:'0'}}/>
-                  </div>
-                </div>
+        {auditIssue?headerAlert:
+         <div className="gor-subStatus-online">
+            <div>  
+              <FormattedMessage id="auditTable.status" description='status completed audit' 
+                                        defaultMessage='{auditCompleted} Completed' 
+                                        values={{auditCompleted:auditCompleted?auditCompleted:'0'}}/>
+              </div>
+          </div>}
         </div>
         </div>
       }
@@ -489,31 +460,18 @@ class AuditTable extends React.Component {
       <div> {noData} </div>
       </div>
 
-    }
+    
     return (
     <div> {tableRenderer} </div>
     );
   }
 }
 
-function mapStateToProps(state, ownProps){
-
-  return {
-    auth_token:state.authLogin.auth_token,
-    tableData: state.currentTableState.currentTableState || []
-  };
-}
 
 
-var mapDispatchToProps = function(dispatch){
-  return {
-    currentTableState: function(data){ dispatch(currentTableState(data)); },
-    getAuditOrderLines: function(data){dispatch(getAuditOrderLines(data))}
-  }
-};
 
 AuditTable.contextTypes ={
  intl:React.PropTypes.object.isRequired
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Dimensions()(AuditTable));
+export default (Dimensions()(AuditTable));

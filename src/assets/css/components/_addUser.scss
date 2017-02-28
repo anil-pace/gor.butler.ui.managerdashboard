@@ -113,11 +113,28 @@
             margin-top:25px; 
         }
         .gor-usr-fdlg{
+                text-align: left;
+                margin-top: 0.625rem;
+                padding: 0.625rem;
+                 width: 65%;
+                 background-color: #FFFFFF;
+                 border-radius: 3px;
+                display: inline-block;
+                &:hover{
+                    border:1px solid #666666;  
+                }
+                &:disabled{
+                    border:1px solid #cccccc;
+                    background:#f7f7f7;
+                }
+        }
+
+        .gor-audit-fdlg{
                 margin:auto;
                 text-align:left;
                 margin-top:calculateRem(10px);
                 padding:calculateRem(10px);
-                width:70%;
+                width:40%;
                 background-color:#FFFFFF;
                 border-radius:3px;
                 &:hover{
@@ -134,6 +151,21 @@
             font-size:14px;
         }
         .gor-usr-field{
+            display:inline-block;
+            width:35%;
+            .gor-usr-fdsm{
+                margin:auto;
+                text-align:left;
+                margin-top:calculateRem(10px);
+                padding:calculateRem(10px);
+                background-color:#FFFFFF;
+                border-radius:3px;
+                &:hover{
+                    border:1px solid #666666;  
+                }
+            }
+        }
+        .gor-audit-field{
             display:inline-block;
             width:38%;
             .gor-usr-fdsm{

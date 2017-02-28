@@ -1,5 +1,20 @@
 [
   {
+    "id": "audit.valid.sku",
+    "description": "text for valid sku",
+    "defaultMessage": "SKU confirmed"
+  },
+  {
+    "id": "audit.invalid.sku",
+    "description": "text for invalid sku",
+    "defaultMessage": "Please enter correct SKU number"
+  },
+  {
+    "id": "audit.noAtrributes.sku",
+    "description": "text for valid sku with no attributed",
+    "defaultMessage": "SKU confirmed but no batch number found"
+  },
+  {
     "id": "audit.add.heading",
     "description": "Heading for add audit",
     "defaultMessage": "Create new audit task"
@@ -12,22 +27,7 @@
   {
     "id": "audit.add.auditdetails.heading",
     "description": "Text for audit details heading",
-    "defaultMessage": "Select the type of audit task"
-  },
-  {
-    "id": "audit.add.auditdetails.subheading",
-    "description": "Text for audit details subheading",
-    "defaultMessage": "Select the audit type and enter details accordingly"
-  },
-  {
-    "id": "audit.add.auditdetails.fields",
-    "description": "Text for field information",
-    "defaultMessage": "All fields are required"
-  },
-  {
-    "id": "audit.add.type.heading",
-    "description": "Text for Audit type",
-    "defaultMessage": "Audit type"
+    "defaultMessage": "Select audit type by"
   },
   {
     "id": "audit.add.typedetails.sku",
@@ -35,19 +35,9 @@
     "defaultMessage": "Audit by SKU code"
   },
   {
-    "id": "audit.add.typedetails.skutext",
-    "description": "Subtext for sku",
-    "defaultMessage": "Create an audit task based on the SKU code of an item"
-  },
-  {
     "id": "audit.add.typedetails.location",
     "description": "Text for location",
     "defaultMessage": "Audit by Location code"
-  },
-  {
-    "id": "audit.add.typedetails.locationtext",
-    "description": "Subtext for manager",
-    "defaultMessage": "Create an audit task based on the location of a MSU"
   },
   {
     "id": "audit.add.sku.heading",
@@ -55,9 +45,14 @@
     "defaultMessage": "Enter SKU code"
   },
   {
-    "id": "audit.add.sku.subheading",
-    "description": "Subtext for enter sku",
-    "defaultMessage": "Enter alphanumeric SKU code of the item to be audited"
+    "id": "audits.validateSKU",
+    "description": "Text for validate sku button",
+    "defaultMessage": "Validate"
+  },
+  {
+    "id": "audit.dropdown.heading",
+    "description": "Text for dropdown heading",
+    "defaultMessage": "Choose batch number (Optional)"
   },
   {
     "id": "audit.add.location.heading",
@@ -68,16 +63,6 @@
     "id": "audit.add.location.subheading",
     "description": "Subtext for enter location",
     "defaultMessage": "Format: (XXX.X.X.XX)"
-  },
-  {
-    "id": "audit.add.tips.heading",
-    "description": "Text for tips heading",
-    "defaultMessage": "Tips:"
-  },
-  {
-    "id": "audit.add.tips.subheading",
-    "description": "Subtext for tips",
-    "defaultMessage": "Once an audit task has been created, please click on the \"Assign PPS\" button in the audit listing to start the audit task."
   },
   {
     "id": "audits.add.password.button",
