@@ -58,7 +58,7 @@ class InventoryHistogram extends React.Component{
     var _this = this;
    var histogramData = _this._processData();
    var config = Object.assign({},INVENTORY_HISTOGRAM_CONFIG)
-   config.noData = histogramData.length ? histogramData[histogramData.length-1].noData : false;
+   config.noData = this.props.noData;
    config.noDataText= _this.context.intl.formatMessage(messages.invHistogramNoDataTxt);
    config.today = _this.context.intl.formatMessage(messages.invHistogramTodayTxt);
    config.breakMonth = _this.context.intl.formatDate(Date.now(), {month: 'short'}); 
@@ -74,7 +74,8 @@ InventoryHistogram.propTypes={
   histogramData:React.PropTypes.array,
   currentDate:React.PropTypes.number,
   hasDataChanged:React.PropTypes.number,
-  recreatedData : React.PropTypes.object
+  recreatedData : React.PropTypes.object,
+  noData:React.PropTypes.bool
 }
 InventoryHistogram.contextTypes ={
  intl:React.PropTypes.object.isRequired

@@ -9,7 +9,7 @@ import * as mockData from '../../mock/mockDBData'
  */
  function parseInvData(state,action){
   //Parsing logic goes here
-  var inventoryObj,invObj,parsedDate,dateToday,dataObj={},inventory,dateTodayState,stateObj,hasDataChanged,isHistory,completeData,categoryData,calculatedInvData={};
+  var inventoryObj,invObj,parsedDate,historyClosingStock=0,dateToday,noData,dataObj={},inventory,dateTodayState,stateObj,hasDataChanged,isHistory,completeData,categoryData,calculatedInvData={};
   var recreatedData;
   isHistory = (action.type === INVENTORY_DATA_HISTORY ? "inventoryDataHistory" : "inventoryDataToday")
   
@@ -17,12 +17,13 @@ import * as mockData from '../../mock/mockDBData'
   inventoryObj = JSON.parse(JSON.stringify(action.data));
   stateObj = JSON.parse(JSON.stringify(state));
   hasDataChanged = stateObj.hasDataChanged === 0 ? 1 : 0;
+  noData = stateObj.noData ;
   recreatedData = stateObj.recreatedData ? JSON.parse(JSON.stringify(stateObj.recreatedData)) : {},
   dateTodayState = stateObj.dateTodayState || null;
   //histogramData = stateObj.histogramData || {};
   inventory = inventoryObj.complete_data;
 
-  if(isHistory === "inventoryDataToday" && !Object.keys(recreatedData).length){
+  if(isHistory === "inventoryDataToday" ){
     invObj = inventory[0];
     invObj["current_stock"] = (invObj["opening_stock"] + invObj["items_put"])-invObj["items_picked"]
     invObj.unusedSpace = 100 - invObj["warehouse_utilization"];
@@ -34,20 +35,23 @@ import * as mockData from '../../mock/mockDBData'
     }
  
     //categoryData.push(calculatedInvData);
-    let parseDtInMS = Date.parse(invObj.date);
+    let parseDtInMS ;//= Date.parse(invObj.date);
     parsedDate = new Date(invObj.date);
     invObj.date = parsedDate.getFullYear() +"-"+(parsedDate.getMonth()+1)+"-"+("0" + parsedDate.getDate()).slice(-2);
+    parseDtInMS = new Date(invObj.date).getTime();
     recreatedData[parseDtInMS] = {};
     recreatedData[parseDtInMS].otherInfo = invObj;
     dateToday = parsedDate;
-    dateTodayState = parsedDate
+    dateTodayState = parseDtInMS
     dataObj.xAxisData = parsedDate.getDate();
     dataObj.yAxisData = invObj.current_stock ;
     dataObj.items_picked = invObj.items_picked;
     dataObj.items_put = invObj.items_put;
     dataObj.date = parsedDate;
-    dataObj.customData = Date.parse(invObj.date);
-    recreatedData[parseDtInMS].graphInfo = dataObj
+    dataObj.customData = parseDtInMS;
+    recreatedData[parseDtInMS].graphInfo = dataObj;
+    noData = invObj.current_stock ? false : true;
+
     //processedData.push(dataObj);
 
   }
@@ -76,27 +80,30 @@ import * as mockData from '../../mock/mockDBData'
         dataObj.yAxisData = invObj.current_stock || 0;
         dataObj.date = currentDate;
         dataObj.customData = (new Date(currentDate)).getTime();
-        recreatedData[histDate].graphInfo =dataObj
+        recreatedData[histDate].graphInfo =dataObj;
+        historyClosingStock+= invObj.current_stock 
     
     }
+    noData = historyClosingStock ? false : true;
   }
+
+
 
   return Object.assign({}, state, {
 
     [isHistory] : [] || null,
     "recreatedData": recreatedData || null,
     "dateTodayState" : dateTodayState || null,
-    "hasDataChanged":hasDataChanged
+    "hasDataChanged":hasDataChanged,
+    noData
 
   })
 
 }
 function displayHistorySnapShot(state,action){
   var selectedData,hasDataChanged=state.hasDataChanged;
-  if(Date.parse(state.dateTodayState)!== action.data){
     selectedData = state.recreatedData[action.data] ? state.recreatedData[action.data].otherInfo : {};
     hasDataChanged = state.hasDataChanged === 0 ? 1 : 0;
-  }
 
   return Object.assign({}, state, {
     "inventoryDataPrevious": selectedData || null,

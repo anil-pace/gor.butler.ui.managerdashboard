@@ -110,9 +110,12 @@ class Histogram extends React.Component{
         .attr("width", Math.min(x.rangeBand()-2, 100))
         .attr("height", function(d) { return height - y(d.yAxisData); })
         .on("click",function(e){
-        	_this.props.onClickCallBack(e);
+        	 d3.select(".bar.sel").classed("sel",false);
+           d3.select(this).classed("sel",true);
+          _this.props.onClickCallBack(e);
         	event.stopImmediatePropagation();
         })
+    g.select("rect:last-child").classed("sel",true);
     if(config.noData && config.noData === true){
         svg.insert("text",":first-child").attr("x",width/2).attr("y",height/2).text(config.noDataText || "");
     }

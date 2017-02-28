@@ -12,12 +12,17 @@ const messages = defineMessages({
     toolTipPut: {
         id: 'inventory.linechart.toolTipPut',
         description: 'Text for put in tooltip',
-        defaultMessage: "Put",
+        defaultMessage: "Put"
     },
     toolTipPick: {
         id: 'inventory.linechart.toolTipPick',
         description: 'Text for pick in tooltip',
-        defaultMessage: "Pick",
+        defaultMessage: "Picked"
+    },
+    toolTipEntity:{
+        id: 'inventory.linechart.toolTipEntity',
+        description: 'Text inventory entity',
+        defaultMessage: "Items",
     },
     noDataText:{
       id:"inventory.linechart.noDataText", 
@@ -26,7 +31,7 @@ const messages = defineMessages({
     lineChartTodayTxt: {
         id: 'inventory.linechart.today',
         description: 'Text to show today',
-        defaultMessage: "Today's",
+        defaultMessage: "Today's"
     }
 
 
@@ -51,8 +56,8 @@ class PickPutLineGraph extends React.Component{
                                   month:'short',
                                   day:'2-digit'
                                 }),
-                      put:this.context.intl.formatMessage(messages.toolTipPut)+":"+dataObj.items_put,
-                      pick:this.context.intl.formatMessage(messages.toolTipPick)+":"+dataObj.items_picked
+                      put:this.context.intl.formatMessage(messages.toolTipPut)+": "+dataObj.items_put+" "+this.context.intl.formatMessage(messages.toolTipEntity),
+                      pick:this.context.intl.formatMessage(messages.toolTipPick)+": "+dataObj.items_picked+" "+this.context.intl.formatMessage(messages.toolTipEntity)
                     }
       processedData.push(dataObj)
     }
@@ -86,7 +91,8 @@ class PickPutLineGraph extends React.Component{
 };
 PickPutLineGraph.propTypes={
     inventoryData: React.PropTypes.array,
-    hasDataChanged:React.PropTypes.number
+    hasDataChanged:React.PropTypes.number,
+    noData:React.PropTypes.bool
 }
 
 PickPutLineGraph.contextTypes = {

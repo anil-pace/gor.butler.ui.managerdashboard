@@ -43,7 +43,7 @@ class MultiLineGraph extends React.Component{
         
         //setting the initial 
         //var parseDate = d3.time.format("%Y-%m-%d").parse;
-        let noData = jsonArray[jsonArray.length-1] ? jsonArray[jsonArray.length-1].noData : false;
+        let noData = this.props.noData;
         var dataArray = jsonArray.map(function(obj){
           let rObj = {};
           rObj.date = new Date(obj.date);
@@ -149,7 +149,7 @@ class MultiLineGraph extends React.Component{
             div.transition()    
             .duration(200)    
             .style("opacity", 1);    
-            div .html("<p>"+d.toolTipData.date + "</p><p>"  + d.toolTipData.pick+"</p>")  
+            div .html('<p style="font-weight:bold;">'+d.toolTipData.date + "</p><p>"  + d.toolTipData.pick+"</p>")  
             .style("left", (event.pageX) + "px")   
             .style("top", (event.pageY - 28) + "px");  
           })          
@@ -170,7 +170,7 @@ class MultiLineGraph extends React.Component{
             div.transition()    
             .duration(200)    
             .style("opacity", 1);    
-            div .html("<p>"+d.toolTipData.date + "</p><p>"  + d.toolTipData.put+"</p>")  
+            div .html('<p style="font-weight:bold;">'+d.toolTipData.date + "</p><p>"  + d.toolTipData.put+"</p>")  
             .style("left", (event.pageX) + "px")   
             .style("top", (event.pageY - 28) + "px");  
           })          
