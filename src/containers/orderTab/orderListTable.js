@@ -171,18 +171,20 @@ class OrderListTable extends React.Component {
               defaultMessage ="OrderList"/>
             </div>
             <div className="gor-button-wrap">
-            <button className="gor-refresh-btn" onClick={this.props.refreshOption.bind(this,null)} >
-              
-              <FormattedMessage id="order.table.buttonLable" description="button label for refresh" 
-              defaultMessage ="Refresh Data"/>
-            </button>
+
             </div>
-            <div className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
           </div>
         <div className="filterWrapper"> 
         <div className="gorToolBarDropDown">
         <div className="gor-button-wrap">
-        <button className={this.props.isFilterApplied?"gor-add-btn":"gor-auditCreate-btn"} onClick={this._setFilter.bind(this)} >
+        <div className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
+            <button className="gor-filterBtn-btn" onClick={this.props.refreshOption.bind(this,null)} >
+              <div className="gor-refresh-icon"/>
+              <FormattedMessage id="order.table.buttonLable" description="button label for refresh" 
+              defaultMessage ="Refresh Data"/>
+            </button>
+        <button className={this.props.isFilterApplied?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
+          <div className="gor-manage-task"/>
           <FormattedMessage id="order.table.filterLabel" description="button label for filter" 
           defaultMessage ="Filter"/>
          </button>

@@ -1,3 +1,5 @@
+.gor-refresh-icon,
+.gor-manage-task,
 .gor-filter-add-token,
 .gor-filter-checked-token,
 .gor-verified-icon,
@@ -312,4 +314,24 @@ background-position: -101px -52px;
     height: 16px;
     display: inline-block;
     vertical-align: middle;
+}
+
+.gor-refresh-icon {
+    background-position: -409px -78px;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: bottom;
+    margin-right: 5px;
+}
+
+.gor-manage-task {
+    background-position: -358px -77px;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: bottom;
+    margin-right: 5px;
 }
