@@ -25,9 +25,9 @@ class MultiLineGraph extends React.Component{
   * @param  {Object} performanceParam [description]
   */
   
-  _graphRender(invData){
+ _graphRender(invData){
     var node = document.createElement('div');
-    if(invData.length){
+    if(invData.length > 1){
       try{
         
         let config =  this.props.config;
@@ -43,7 +43,7 @@ class MultiLineGraph extends React.Component{
         
         //setting the initial 
         //var parseDate = d3.time.format("%Y-%m-%d").parse;
-        let noData = jsonArray[jsonArray.length-1] ? jsonArray[jsonArray.length-1].noData : false;
+        let noData = this.props.noData;
         var dataArray = jsonArray.map(function(obj){
           let rObj = {};
           rObj.date = new Date(obj.date);
@@ -72,16 +72,18 @@ class MultiLineGraph extends React.Component{
 
         // setting axis
         
-        var xAxis = d3.svg.axis().scale(x).orient("bottom").tickFormat(d3.time.format("%e")).ticks(dataArray.length-1)
+        var xAxis = d3.svg.axis().scale(x).orient("bottom").tickFormat(d3.time.format("%e")).tickValues(dataArray.map( function(d){return d.date;} ))
         .outerTickSize(config.outerTickSize);
         var yAxis = d3.svg.axis().scale(y).orient("left")
         .ticks(config.ticks).outerTickSize(config.outerTickSize);
 
         var pickLine = d3.svg.line()
+        .interpolate("monotone") 
         .x(function(d) { return x(d.date);})
         .y(function(d) { return y(d.items_picked); });
 
         var putLine = d3.svg.line()
+        .interpolate("monotone") 
         .x(function(d) { return x(d.date);})
         .y(function(d) { return y(d.items_put); });
 
@@ -100,7 +102,7 @@ class MultiLineGraph extends React.Component{
           y.domain([0, d3.max(dataArray, function(d) { return config.defaultMaxYAxis })]);
         }
         else{
-          y.domain([0, d3.max(dataArray, function(d) { return Math.max(d.items_put, d.items_picked); })]);
+          y.domain([0, d3.max(dataArray, function(d) { var maxVal = Math.max(d.items_put, d.items_picked);return (maxVal + (1000 - (maxVal%1000)));  })]);
         }
         
 
@@ -115,13 +117,12 @@ class MultiLineGraph extends React.Component{
         // Add the valueline path.
         if(!noData){
           g.append("path")    
-          .attr("class", "line")
+          .attr("class", "line put")
           .attr("d", putLine(dataArray));
 
         // Add the valueline2 path.
         g.append("path")    
-        .attr("class", "line")
-        .style("stroke", "red")
+        .attr("class", "line pick")
         .attr("d", pickLine(dataArray));
       }
 
@@ -137,19 +138,18 @@ class MultiLineGraph extends React.Component{
         .call(yAxis);
         
         if(!noData){
-          g.selectAll("circle.line")
+          g.selectAll("circle")
           .data(dataArray)
           .enter().append("svg:circle")
-          .attr("class", "line")
-          .style("fill", "#D0021B")
+          .attr("class", "pick")
           .attr("cx", pickLine.x())
           .attr("cy", pickLine.y())
-          .attr("r", 3.5)
+          .attr("r", 4.5)
           .on("mouseover", function(d) {    
             div.transition()    
             .duration(200)    
             .style("opacity", 1);    
-            div .html("<p>"+d.toolTipData.date + "</p><p>"  + d.toolTipData.pick+"</p>")  
+            div .html('<p style="font-weight:bold;">'+d.toolTipData.date + "</p><p>"  + d.toolTipData.pick+"</p>")  
             .style("left", (event.pageX) + "px")   
             .style("top", (event.pageY - 28) + "px");  
           })          
@@ -159,19 +159,18 @@ class MultiLineGraph extends React.Component{
             .style("opacity", 0); 
           });  ;
 
-          g.selectAll("circle.line2")
+          g.selectAll("circle.put")
           .data(dataArray)
           .enter().append("svg:circle")
-          .attr("class", "line")
-          .style("fill", "#7ED321")
+          .attr("class", "put")
           .attr("cx", putLine.x())
           .attr("cy", putLine.y())
-          .attr("r", 3.5)
+          .attr("r", 4.5)
           .on("mouseover", function(d) {    
             div.transition()    
             .duration(200)    
             .style("opacity", 1);    
-            div .html("<p>"+d.toolTipData.date + "</p><p>"  + d.toolTipData.put+"</p>")  
+            div .html('<p style="font-weight:bold;">'+d.toolTipData.date + "</p><p>"  + d.toolTipData.put+"</p>")  
             .style("left", (event.pageX) + "px")   
             .style("top", (event.pageY - 28) + "px");  
           })          
@@ -194,7 +193,9 @@ class MultiLineGraph extends React.Component{
         if (mBreak.length){
           var dataLen = dataArray.length - 1;
           var textEl = parseInt(mBreak.select("g:nth-child("+dataLen+") text").text());
-          mBreak.select("g:nth-child("+(dataLen+1)+")").append("text").attr("x","-20").attr("y","2.5em").text(config.today)
+          let isOverlap = (textEl === 1 ? true :false);
+          let yToday = (isOverlap ? "3.5em":"2.5em");
+          mBreak.select("g:nth-child("+(dataLen+1)+")").append("text").attr("x","-20").attr("y",yToday).text(config.today)
           var monthBreak = mBreak.select("g:nth-child("+(dataLen)+")");
           mBreak.select("g:nth-child("+(dataLen - textEl)+")").append("line").attr("class","month-break").attr("x1","15").attr("x2","15").attr("y1","0").attr("y2","25");
           mBreak.select("g:nth-child("+(dataLen - (textEl-1))+")").append("text").attr("x","-5").attr("y","30").text(config.breakMonth);
@@ -214,6 +215,14 @@ class MultiLineGraph extends React.Component{
   }
   componentWillReceiveProps(nextProps,nextState){
     this._graphRender(JSON.parse(JSON.stringify(nextProps.inventoryData)));
+  }
+
+  shouldComponentUpdate(nextProps, nextState){
+    if(this.props.hasDataChanged === nextProps.hasDataChanged || !nextProps.inventoryData.length){
+      return false;
+    }
+      return true;
+    
   }
   
   render() {

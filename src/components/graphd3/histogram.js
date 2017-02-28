@@ -30,12 +30,20 @@ class Histogram extends React.Component{
   	this._processData(JSON.parse(JSON.stringify(nextProps.histogramData)),nextProps.config);
   }
 
+  shouldComponentUpdate(nextProps, nextState){
+    if(this.props.hasDataChanged === nextProps.hasDataChanged || !nextProps.histogramData.length){
+      return false;
+    }
+      return true;
+    
+  }
+
 
   
    _processData(data,config){
    	
     var node = document.createElement('div');
-    if(data.length){
+    if(data.length > 1){
     var _this= this;
 	 
    	var svg = d3.select(node).append("svg"),
@@ -66,7 +74,7 @@ class Histogram extends React.Component{
     	y.domain([0, d3.max(data, function(d) { return config.defaultMaxYAxis; })]);
     }
     else{
-    	y.domain([0, d3.max(data, function(d) { return d.yAxisData; })]);
+    	y.domain([0, d3.max(data, function(d) { return (d.yAxisData + (1000 - (d.yAxisData%1000))); })]);
     }
 
     //Adding grid lines
@@ -95,27 +103,37 @@ class Histogram extends React.Component{
       .data(data)
       .enter().append("rect")
         .attr("class", "bar")
+        .attr("rx","2")
+        .attr("ry","2")
     .attr("x", function(d) { return x(d.xAxisData ); })
         .attr("y", function(d) { return y(d.yAxisData); })
         .attr("width", Math.min(x.rangeBand()-2, 100))
         .attr("height", function(d) { return height - y(d.yAxisData); })
         .on("click",function(e){
-        	_this.props.onClickCallBack(e);
+        	 d3.select(".bar.sel").classed("sel",false);
+           d3.select(this).classed("sel",true);
+          _this.props.onClickCallBack(e);
         	event.stopImmediatePropagation();
         })
+    g.select("rect:last-child").classed("sel",true);
     if(config.noData && config.noData === true){
         svg.insert("text",":first-child").attr("x",width/2).attr("y",height/2).text(config.noDataText || "");
     }
     if(config.showMonthBreak && data.length){
       var mBreak= g.selectAll("g.axis--x");
-      mBreak.select("g:nth-child("+data.length+")").append("text").attr("x","-20").attr("y","2.5em").text(config.today)
-      var monthBreak = mBreak.select("g:nth-child("+(data.length - data[data.length-1].xAxisData)+")");
+      var dLength = data.length;
+      var monthBreak = mBreak.select("g:nth-child("+(dLength - data[dLength-1].xAxisData)+")");
+      let isOverlap = (data[dLength-1].xAxisData === 1 ? true :false);
+      let yToday = (isOverlap ? "3.5em":"2.5em");
+      mBreak.select("g:nth-child("+dLength+")").append("text").attr("x","-20").attr("y",yToday).text(config.today);
+      
+    }
       monthBreak.append("line").attr("class","month-break").attr("x1","15").attr("x2","15").attr("y1","0").attr("y2","25");
-      mBreak.select("g:nth-child("+(data.length - data[data.length-2].xAxisData)+")").append("text").attr("x","-5").attr("y","30").text(config.breakMonth);
+      mBreak.select("g:nth-child("+(dLength - data[dLength-2].xAxisData)+")").append("text").attr("x","-5").attr("y","30").text(config.breakMonth);
     }
         
 
-     }
+     
      this.setState({d3: node});
    }
   

@@ -40,7 +40,7 @@
 		width: 70%;
     	display: inline-block;
     	vertical-align: middle;
-    	height:70vh
+    	height:auto;
 	}
 	.legendCnt{
 		width: 25%;
@@ -140,6 +140,13 @@
 .inventoryHist{
 	.bar{
 		cursor:pointer;
+		&.sel{
+			fill:#949699;
+		}
+		&.last-child{
+			stroke: #4d5055;
+    		stroke-width: 0.0625rem;
+		}
 	}
 	.axis--y{
 		path{
@@ -169,10 +176,7 @@
 		}
 
 	}
-	.bar{
-		fill:#498BD8;
-		opacity: 1;
-	}
+	
 	.tick{
 		text{
 			fill:#666666;

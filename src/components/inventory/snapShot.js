@@ -14,7 +14,13 @@ class SnapShotDetails extends React.Component{
 
     }	
 
-  
+  	shouldComponentUpdate(nextProps, nextState){
+	    if(this.props.hasDataChanged === nextProps.hasDataChanged || !Object.keys(nextProps.snapshotTabData).length){
+	      return false;
+	    }
+	      return true;
+    
+  	}
    
 	render(){
 		
@@ -26,7 +32,7 @@ class SnapShotDetails extends React.Component{
 		}
 		else{
 			todayDate = this.props.snapshotTabData.date ? this.props.snapshotTabData.date : (new Date());
-			dt = <FormattedDate year='numeric' month='short' day='2-digit' value={new Date(Date.parse(todayDate))}/>
+			dt = <FormattedDate year='numeric' month='short' day='2-digit' value={new Date(todayDate)}/>
 			currentStock = <FormattedMessage id='inventory.snaphot.closingStock' defaultMessage="Closing Stock" description="Snapshot table header"/>
 		}
 		return (
@@ -75,7 +81,7 @@ class SnapShotDetails extends React.Component{
 	}
 };
 SnapShotDetails.propTypes={
-	currentDate:React.PropTypes.number,
+	currentDate:React.PropTypes.object,
 	snapshotData:React.PropTypes.object,
 	hasDataChanged:React.PropTypes.number
 

@@ -141,4 +141,3 @@ module.exports = {
             contentBase:['./dist','./dist/assets']
         }
     }
-   

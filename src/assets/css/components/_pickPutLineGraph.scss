@@ -54,6 +54,7 @@
 				display:block;
 			}
 		}
+
 	}
 	.bar{
 		fill:#498BD8;
@@ -77,6 +78,15 @@
 				stroke:#CCCCCC;
 			}
 		}
+		circle{
+			cursor:pointer;
+			&.pick{
+				fill:#1976D2;
+			}
+			&.put{
+				fill:#F5A623;
+			}
+		}
 		.tick:nth-child(1){
 			line{
 				stroke:#666666;
@@ -85,12 +95,13 @@
 		}
 		path{
 			&.line{
-				stroke-width:2;
-				stroke:#7ED321;
+				stroke-width:3.5;
+				stroke:#F5A623;
+				&.pick{
+				stroke:#1976D2;
 			}
-			&.line:nth-child(1){
-				stroke:#D0021B
 			}
+			
 		}
 	}
 	circle{

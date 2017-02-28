@@ -230,11 +230,11 @@ export const CATEGORY_COLOR_MAP = [
 	"#A44550",
 	"#8F39EC",
 	"#EEEEEE",
-	"#FFFFFF"
+	"#F9F9F9"
 ]
-export const INV_HIST_LEGEND_COLOR = "#498BD8";
-export const INV_LINE_LEGEND_IPICKED_COLOR = "#D0021B";
-export const INV_LINE_LEGEND_IPUT_COLOR = "#7ED321";
+export const INV_HIST_LEGEND_COLOR = "#D3D3D3";
+export const INV_LINE_LEGEND_IPICKED_COLOR = "#1976D2";
+export const INV_LINE_LEGEND_IPUT_COLOR = "#F5A623";
 export const INV_HIST_LEGEND_DATA = [{
 	color:INV_HIST_LEGEND_COLOR,
 	name:'Items Stocked'
@@ -265,25 +265,25 @@ export const INV_LINE_LEGEND_CONFIG = {
 
 export const INVENTORY_HISTORY_DAYS_COUNT = 29;
 export const INVENTORY_HISTOGRAM_CONFIG = {
-	height:200,
+	height:250,
 	width:(70/100) * screen.width,
-	margin:{top: 20, right: 20, bottom: 30, left: 60},
+	margin:{top: 20, right: 20, bottom: 60, left: 60},
 	bandPadding:0.05,
 	outerTickSize:0,
 	defaultMaxYAxis:100000,
-	ticks:3,
+	ticks:4,
 	showMonthBreak:true,
 	noDataText:'No Stock Found'
 }
 export const INVENTORY_LINE_CONFIG = {
-	height:200,
+	height:250,
 	width:(70/100) * screen.width,
-	margin:{top: 20, right: 20, bottom: 30, left: 60},
+	margin:{top: 20, right: 20, bottom: 60, left: 60},
 	bandPadding:0.05,
 	outerTickSize:0,
 	defaultMaxYAxis:100000,
 	padding:18,
-	ticks:3,
+	ticks:4,
 	showMonthBreak:true,
 	noDataText:'No Item Movement'
 }
