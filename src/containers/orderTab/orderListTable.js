@@ -122,6 +122,10 @@ class OrderListTable extends React.Component {
     var newState = !this.props.showFilter;
     this.props.setFilter(newState)
    }
+
+   _showAllOrder() {
+    this.props.refreshOption();
+   }
   
   render() {
     
@@ -154,7 +158,7 @@ class OrderListTable extends React.Component {
         defaultMessage ="No Orders Found"/>  </div>
      heightRes = GOR_TABLE_HEADER_HEIGHT;
     }
-    var filterHeight = screen.height-190;
+    var filterHeight = screen.height-190-50;
     return (
       <div className="gorTableMainContainer">
       <div className="gor-filter-wrap" style={{'width':this.props.showFilter?'350px':'0px', height:filterHeight}}> 
@@ -186,7 +190,14 @@ class OrderListTable extends React.Component {
         </div>     
         </div>
        </div>
-
+       {this.props.isFilterApplied && !this.props.responseFlag?<div className="gor-filter-search-result-bar">
+                                       <FormattedMessage id="orderlist.filter.search.bar" description='total order for filter search bar' 
+                                                          defaultMessage='{totalOrder} Orders found' 
+                                                          values={{totalOrder: totalOrder?totalOrder:'0'}}/>
+                                                          <span className="gor-filter-search-show-all" onClick={this._showAllOrder.bind(this)}>
+                                                            <FormattedMessage id="orderlist.filter.search.bar.showall" description="button label for show all" defaultMessage ="Show all orders"/> 
+                                                          </span>
+                                   </div>:""}
       <Table
         rowHeight={50}
         rowsCount={sortedDataList.getSize()}

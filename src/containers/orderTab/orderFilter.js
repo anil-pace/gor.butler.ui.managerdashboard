@@ -11,12 +11,10 @@ class OrderFilter extends React.Component{
 	constructor(props) 
 	{
     	super(props);
-        this.state = {tokenSelected: {}, searchQuery: {}}; 
+        this.state = {tokenSelected: {"STATUS":["all"], "TIME PERIOD":["allOrders"]}, searchQuery: {},
+                      defaultToken: {"STATUS":["all"], "TIME PERIOD":["allOrders"]}}; 
     }
 
-    componentWillMount() {
-        console.log("dwjwkk")
-    }
 
     _closeFilter() {
         var filterState = !this.props.showFilter;
@@ -57,14 +55,26 @@ class OrderFilter extends React.Component{
 
     _handelTokenClick(field,value,state) {
         var selectedToken = this.state.tokenSelected;
+        var defaultToken = this.state.defaultToken[field];
         if(selectedToken[field]) {
-            if(state === "add") {
+            if(state === "add") {                           // when user select a token adds in state and remove default selected token
+                selectedToken[field].push(value);
+                var removeDefaultFieldIndex = selectedToken[field].indexOf(defaultToken[0]);
+                if (removeDefaultFieldIndex >= 0) {
+                    selectedToken[field].splice( removeDefaultFieldIndex, 1 );
+                }
+            }
+            else if(state === "addDefault") {              // when user add the default token
+                selectedToken[field] = [];
                 selectedToken[field].push(value);
             }
             else {
-                var index = selectedToken[field].indexOf(value);
+                var index = selectedToken[field].indexOf(value);  // when user removing token
                 if (index >= 0) {
                     selectedToken[field].splice( index, 1 );
+                }
+                if (selectedToken[field] && !selectedToken[field].length) { // checks when none is selected, checks default option
+                    selectedToken[field].push(defaultToken[0])
                 }
             }
         }
@@ -84,8 +94,6 @@ class OrderFilter extends React.Component{
     }
 
     _applyFilter() {
-       console.log("applied")
-       console.log(this.state)
        var temp = this.state;
        this.props.refreshOption(temp);
 
@@ -94,7 +102,8 @@ class OrderFilter extends React.Component{
     _clearFilter() {
         var clearState = {};
         this.props.filterApplied(false)
-        this.setState({tokenSelected: {}, searchQuery: {}});
+        this.setState({tokenSelected: {"STATUS":["all"], "TIME PERIOD":["allOrders"]}, searchQuery: {}});
+        this.props.refreshOption(clearState)
     } 
 
 

@@ -4849,3 +4849,20 @@ input[type="checkbox"] {
   font-size: 20px;
   padding-left: 20px;
 }
+
+.gor-filter-search-result-bar {
+  border-top: solid 2px #92d3ee;
+  background-color: rgba(29, 140, 186, 0.2);
+  font-size: 14px;
+  padding-top: 4.5px;
+  padding-bottom: 7.5px;
+  padding-left: 19px;
+  color: #333333;
+}
+
+.gor-filter-search-show-all {
+  font-weight: 600;
+  color: #1d8cbb;
+  text-decoration: underline;
+  padding-left: 20px;
+}

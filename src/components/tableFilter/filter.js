@@ -15,9 +15,7 @@ class Filter extends React.Component{
     _resetFilter() {
         this.props.clearFilter();
     }
-    componentWillRecieveProps(nextProps) {
-
-    }
+    
 
     _submitFilterForm() {
         this.props.formSubmit();
@@ -57,7 +55,7 @@ class Filter extends React.Component{
                  		Reset
                  	</span>
                  	<div className="gor-filter-btn-wrap">
-                 		<button className={!this.props.responseFlag?"gor-white-spinner":"gor-add-btn gor-disable-content"} onClick={this._submitFilterForm.bind(this)}>
+                 		<button className={!this.props.responseFlag?"gor-add-btn":"gor-add-btn gor-disable-content"} onClick={this._submitFilterForm.bind(this)}>
                     		<FormattedMessage id="gor.filter.heading" description="filter heading"  defaultMessage ="Apply filter"/>
                   		</button>
                  	</div> 
