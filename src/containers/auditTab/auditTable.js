@@ -58,7 +58,7 @@ class AuditTable extends React.Component {
       while(parentEl){
         if(parentEl.className === "fixedDataTableRowLayout_rowWrapper"){
           parentEl.style.zIndex = "30";
-          if(index === totalRowCount){
+          if(index === totalRowCount && totalRowCount!== 0){
             if(elClassName !== "Dropdown-control"){
               siblingEl = el.parentNode.nextSibling;
             }

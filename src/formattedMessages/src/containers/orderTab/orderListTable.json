@@ -75,9 +75,19 @@
     "defaultMessage": "Refresh Data"
   },
   {
-    "id": "order.table.dropdown.text",
-    "description": "Sub text for order list dropdown",
-    "defaultMessage": "Show"
+    "id": "order.table.filterLabel",
+    "description": "button label for filter",
+    "defaultMessage": "Filter"
+  },
+  {
+    "id": "orderlist.filter.search.bar",
+    "description": "total order for filter search bar",
+    "defaultMessage": "{totalOrder} Orders found"
+  },
+  {
+    "id": "orderlist.filter.search.bar.showall",
+    "description": "button label for show all",
+    "defaultMessage": "Show all orders"
   },
   {
     "id": "orderlist.order.headingText",

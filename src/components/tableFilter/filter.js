@@ -15,10 +15,10 @@ class Filter extends React.Component{
     _resetFilter() {
         this.props.clearFilter();
     }
+    
 
     _submitFilterForm() {
         this.props.formSubmit();
-        this.props.hideFilter();
     }
 	render(){
 		return (
@@ -31,6 +31,9 @@ class Filter extends React.Component{
                  		Hide
                  	</div>
                  </div>
+                    <div>{this.props.noDataFlag?
+                            <div className="gor-no-result-filter">No results found, please try again</div>:""}
+                    </div>
                      <div className="gor-filter-body">
     	                 <div className="gor-filter-body-input-wrap"> 
     	                 	{this.props.searchField}
@@ -52,7 +55,7 @@ class Filter extends React.Component{
                  		Reset
                  	</span>
                  	<div className="gor-filter-btn-wrap">
-                 		<button className="gor-add-btn" onClick={this._submitFilterForm.bind(this)}>
+                 		<button className={!this.props.responseFlag?"gor-add-btn":"gor-add-btn gor-disable-content"} onClick={this._submitFilterForm.bind(this)}>
                     		<FormattedMessage id="gor.filter.heading" description="filter heading"  defaultMessage ="Apply filter"/>
                   		</button>
                  	</div> 

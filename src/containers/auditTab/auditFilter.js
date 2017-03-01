@@ -65,8 +65,7 @@ class AuditFilter extends React.Component{
     }
 
     _applyFilter() {
-       console.log("applied")
-       console.log(this.state)
+      
     }
 
     _clearFilter() {

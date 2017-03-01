@@ -1,4 +1,4 @@
-import { SHOW_FILTER } from '../constants/frontEndConstants'
+import { SHOW_FILTER ,IS_FILTER_APPLIED} from '../constants/frontEndConstants'
 
 export function showTableFilter(data){
 	return {
@@ -7,3 +7,10 @@ export function showTableFilter(data){
   	}
 }
 
+
+export function filterApplied(data){
+	return {
+		type: IS_FILTER_APPLIED,
+		data
+  	}
+}
