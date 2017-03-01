@@ -80,6 +80,16 @@
     "defaultMessage": "Filter"
   },
   {
+    "id": "orderlist.filter.search.bar",
+    "description": "total order for filter search bar",
+    "defaultMessage": "{totalOrder} Orders found"
+  },
+  {
+    "id": "orderlist.filter.search.bar.showall",
+    "description": "button label for show all",
+    "defaultMessage": "Show all orders"
+  },
+  {
     "id": "orderlist.order.headingText",
     "description": "Heading for order IDs in ordertable",
     "defaultMessage": "ORDER ID"

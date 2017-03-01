@@ -24,7 +24,7 @@ class Overview extends React.Component{
 			<div className="gorWidgetWrap">
 				<div className="section group">
 					<div className="col span_2_of_4">
-						<PutStatusWidget />
+						<PutStatusWidget/>
 						<AuditStatusWidget />
 
 					</div>

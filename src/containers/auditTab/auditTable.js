@@ -245,7 +245,7 @@ class AuditTable extends React.Component {
       { value: 'duplicateTask', label: duplicateTask },
       { value: 'deleteRecord', label: deleteRecord }
       ];
-      var noFilter = true;
+      var noFilter = false;
       var noData = <div/>;
      if(rowsCount === 0 || rowsCount === undefined || rowsCount === null) {
         noData =  <div className="gor-no-data"> <FormattedMessage id="audit.table.noData" description="No data message for audit table" 

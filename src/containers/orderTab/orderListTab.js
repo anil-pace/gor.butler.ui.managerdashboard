@@ -55,6 +55,7 @@ class OrderListTab extends React.Component{
     if((nextProps.orderData.ordersDetail && !nextProps.orderData.ordersDetail.length)){
       return false;
     }
+
     return true;
   }
 
@@ -264,7 +265,7 @@ refresh = (data) => {
 
   //generating api url by pagination page no.
   data.url = "";
-  data.url = API_URL + ORDERS_URL + ORDER_PAGE + (data.selected);
+  data.url = API_URL + ORDERS_URL + ORDER_PAGE + (data.selected?data.selected:1);
   
   //appending page size filter
   if(this.props.filterOptions.pageSize === undefined) {

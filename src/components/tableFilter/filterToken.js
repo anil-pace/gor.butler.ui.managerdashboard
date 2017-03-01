@@ -19,8 +19,11 @@ class FilterToken extends React.Component{
                 }
             }
         }
-        if(!tokenFound){
+        if(!tokenFound && !this.props.lastToken){
             this.props.tokenCallBack(this.props.tokenField,this.props.tokenLabel.value,"add");
+        }
+        else if(!tokenFound && this.props.lastToken) {
+            this.props.tokenCallBack(this.props.tokenField,this.props.tokenLabel.value,"addDefault");
         }
     	
     }
