@@ -3,7 +3,7 @@ import {Table, Column, Cell} from 'fixed-data-table';
 import {modal} from 'react-redux-modal';
 import { FormattedMessage } from 'react-intl';
 import DropdownTable from './dropdown/dropdownTable'
-import {AUDIT_APPROVED, AUDIT_REJECTED,VIEW_AUDIT_ISSUES,APPROVE_AUDIT,GOR_STATUS,AUDIT_UNRESOLVED} from '../constants/frontEndConstants';
+import {AUDIT_APPROVED, AUDIT_REJECTED,VIEW_AUDIT_ISSUES,APPROVE_AUDIT,GOR_STATUS,AUDIT_UNRESOLVED,AUDIT_REJECTED_STATUS,AUDIT_RESOLVED_STATUS} from '../constants/frontEndConstants';
 export var SortTypes = {
   ASC: 'ASC',
   DESC: 'DESC',
@@ -128,6 +128,35 @@ export const TextCell = ({rowIndex, data, columnKey,setClass, ...props}) => (
   </Cell>
 );
 
+export const ToolTipCell = ({rowIndex, data, columnKey,setClass,callBack,tooltipData, ...props}) => (
+  <Cell {...props} className={setClass}>
+    {data.getObjectAt(rowIndex)[columnKey]}
+    <div className="gor-tool-tip-hover" onMouseEnter={callBack}>
+      {data.getObjectAt(rowIndex)[tooltipData] && data.getObjectAt(rowIndex)[tooltipData][Object.keys(data.getObjectAt(rowIndex)[tooltipData])[0]]
+          ?data.getObjectAt(rowIndex)[tooltipData][Object.keys(data.getObjectAt(rowIndex)[tooltipData])[0]].length+" items selected"
+          :""}
+    </div>
+    {data.getObjectAt(rowIndex)[tooltipData] && data.getObjectAt(rowIndex)[tooltipData][Object.keys(data.getObjectAt(rowIndex)[tooltipData])[0]]?
+    <div className="gor-tooltip">
+      <div className="gor-tooltip-arrow"/> 
+      <div className="gor-tooltip-text-wrap">
+        <div className="gor-tooltip-heading">
+          <FormattedMessage id="commonDataTable.attributesType.heading" description='heading for attribute' defaultMessage='Box Id'/>
+        </div>
+        <div className="gor-tooltip-datalines">
+            <div>
+              {data.getObjectAt(rowIndex)[tooltipData] && data.getObjectAt(rowIndex)[tooltipData][Object.keys(data.getObjectAt(rowIndex)[tooltipData])[0]]?
+                  (data.getObjectAt(rowIndex)[tooltipData][Object.keys(data.getObjectAt(rowIndex)[tooltipData])[0]].map(function(object, i){return <div key={i} > {i+1}. {object} </div>;}))
+                  :""}
+            </div>
+        </div>
+      </div> 
+    </div>
+    :""}
+  </Cell>
+);
+//assuming only one attributes is there in tool tip component (kerry specific)
+
 
 export const ProgressCell = ({rowIndex, data, columnKey, resolved, unresolved, ...props}) => (
   <Cell {...props}>
@@ -174,9 +203,9 @@ export const StatusCell = ({rowIndex, data, columnKey,statusKey, ...props}) => (
 export const ResolveCell = ({rowIndex, data, columnKey, checkStatus, screenId, ...props}) => (
   <Cell {...props}>
     <div style={(screenId===VIEW_AUDIT_ISSUES || data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED)?{opacity: 0.5}:{opacity: 1}}>
-      <input type="radio"  name={rowIndex} disabled={data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED?true:false} onChange={checkStatus.bind(this,rowIndex,AUDIT_APPROVED)} />
+      <input type="radio"  name={data.getObjectAt(rowIndex)["auditLineId"]} disabled={data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED?true:false} onChange={checkStatus.bind(this,rowIndex,AUDIT_APPROVED,data.getObjectAt(rowIndex)["auditLineId"])} />
         <FormattedMessage id="commonDataTable.resolveAudit.approve" description='resolve button' defaultMessage='Approve '/>
-      <input type="radio"  name={rowIndex} disabled={data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED?true:false} onChange={checkStatus.bind(this,rowIndex,AUDIT_REJECTED)}/>
+      <input type="radio"  name={data.getObjectAt(rowIndex)["auditLineId"]} disabled={data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED?true:false} onChange={checkStatus.bind(this,rowIndex,AUDIT_REJECTED,data.getObjectAt(rowIndex)["auditLineId"])} />
         <FormattedMessage id="commonDataTable.resolveAudit.reject" description='resolve button' defaultMessage='Reject'/>
     </div>
   </Cell>

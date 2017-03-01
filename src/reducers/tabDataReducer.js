@@ -35,13 +35,15 @@ export  function tabsData(state={},action){
       })
       break;
       case GET_AUDIT:
-      let audit_count=0;
+      let audit_count=0, audit_alert=0;
       if(action.data.header_data)
       {
         audit_count=Number(action.data.header_data.audits_in_progress);
+        audit_alert =Number(action.data.header_data.audit_alert);
       }
       return Object.assign({}, state, {
-        "audit_count":audit_count
+        "audit_count":audit_count,
+        "audit_alert":audit_alert
       })      
       break;
       case GET_INVENTORY:

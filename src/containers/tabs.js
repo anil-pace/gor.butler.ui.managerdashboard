@@ -9,7 +9,7 @@ import Emergency from '../containers/Emergency';
 import {setInventorySpinner} from '../actions/inventoryActions';
 import {setAuditSpinner} from '../actions/auditActions';
 import {setButlerSpinner} from '../actions/spinnerAction';
-import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP,INVENTORY,AUDIT,FULFILLING_ORDERS,GOR_OFFLINE,GOR_ONLINE,GOR_NORMAL_TAB} from '../constants/frontEndConstants';
+import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP,INVENTORY,AUDIT,FULFILLING_ORDERS,GOR_OFFLINE,GOR_ONLINE,GOR_NORMAL_TAB,GOR_FAIL} from '../constants/frontEndConstants';
 import { FormattedMessage,FormattedNumber } from 'react-intl';
 
 class Tabs extends React.Component{
@@ -71,7 +71,9 @@ class Tabs extends React.Component{
   }
   _parseStatus()
   {
-    let overview,system,order,ordersvalue,users,usersvalue,inventoryvalue,inventory,audit,overviewStatus,systemStatus,ordersStatus,usersStatus,auditStatus,inventoryStatus,offline,systemClass,ordersClass,auditClass,items={};
+    let overview,system,order,ordersvalue,users,usersvalue,inventoryvalue,
+        inventory,audit,overviewStatus,systemStatus,ordersStatus,usersStatus,auditStatus,inventoryStatus,
+        offline,systemClass,ordersClass,auditClass,items={}, auditIcon = false;
 
     offline = <FormattedMessage id="tabs.offline" description="offline" 
               defaultMessage ="Offline"/>;
@@ -125,22 +127,25 @@ class Tabs extends React.Component{
       {
         systemStatus = <FormattedMessage id="systemStatus.tab.emergency" description="system Status emergency" 
               defaultMessage ="Emergency"/>;  
-        systemClass='gor-alert';        
+        systemClass='gor-emergency-alert';       
         overviewStatus = <FormattedMessage id="overviewStatus.tab.emergency" description="overview Status emergency" 
               defaultMessage ="Butlers stopped"/>;  
       }
       ordersvalue = <FormattedNumber value={this.props.orders_completed}/>
       ordersStatus = <FormattedMessage id="ordersStatus.tab.heading" description="orders Status " 
-              defaultMessage ="{count}% fulfilled" values={{count:ordersvalue}}/>;  
+                                       defaultMessage ="{count}% fulfilled" values={{count:ordersvalue}}/>;  
       ordersClass=GOR_ONLINE;
+
       usersvalue = <FormattedNumber value={this.props.users_online}/>
       usersStatus = <FormattedMessage id="usersStatus.tab.heading" description="users Status " 
-              defaultMessage ="{count} users online" values={{count:usersvalue}}/>;  
+                                      defaultMessage ="{count} users online" values={{count:usersvalue}}/>;  
+
       inventoryvalue = <FormattedNumber value={this.props.space_utilized}/>
       inventoryStatus = <FormattedMessage id="inventoryStatus.tab.heading" description="inventory Status " 
-              defaultMessage ="{count}% space utilized" values={{count:inventoryvalue}}/>;            
+                                           defaultMessage ="{count}% space utilized" values={{count:inventoryvalue}}/>;            
       auditStatus=<FormattedMessage id="auditStatus.tab.heading" description="audit Status " 
-              defaultMessage ="{count} in progress" values={{count:this.props.audit_count?this.props.audit_count:'None'}}/>;          
+                                     defaultMessage ="{count} in progress" 
+                                     values={{count:this.props.audit_count?this.props.audit_count:'None'}}/>;          
       if(this.props.audit_count)
       {
         auditClass=GOR_ONLINE;
@@ -149,9 +154,22 @@ class Tabs extends React.Component{
       {
         auditClass=GOR_OFFLINE;
       }
+      if(this.props.audit_alert) {
+        auditClass = (this.props.audit_alert?'gor-alert':auditClass);
+        auditStatus=<FormattedMessage id="auditStatus.tab.alert.heading" description="audit Status alert" 
+                                     defaultMessage ="{count} alerts" 
+                                     values={{count:this.props.audit_alert?this.props.audit_alert:"0"}}/>;
+       auditIcon = true;                                                        
+      }
     }
 
-    items={overview:overview,system:system,order:order,users:users,inventory:inventory,audit:audit,overviewStatus:overviewStatus,systemStatus:systemStatus,ordersStatus:ordersStatus,auditStatus:auditStatus,usersStatus:usersStatus,inventoryStatus:inventoryStatus,systemClass:systemClass,ordersClass:ordersClass,auditClass:auditClass};
+    items={overview:overview,system:system,order:order,
+           users:users,inventory:inventory,audit:audit,
+           overviewStatus:overviewStatus,systemStatus:systemStatus,ordersStatus:ordersStatus,
+           auditStatus:auditStatus,usersStatus:usersStatus,inventoryStatus:inventoryStatus,
+           systemClass:systemClass,ordersClass:ordersClass,auditClass:auditClass,
+           auditIcon:auditIcon};
+
     return items;
   }
 	render(){
@@ -165,7 +183,7 @@ class Tabs extends React.Component{
 		</Link>
 
 		<Link to="/system" onClick = {this.handleTabClick.bind(this,SYSTEM)}>
-			<Tab items={{ tab: items.system, Status: items.systemStatus, currentState:items.systemClass }} changeClass={(!this.props.system_emergency?(this.props.tab.toUpperCase() === SYSTEM ? 'sel' :GOR_NORMAL_TAB):'fail')} subIcons={true}/>
+			<Tab items={{ tab: items.system, Status: items.systemStatus, currentState:items.systemClass }} changeClass={(!this.props.system_emergency?(this.props.tab.toUpperCase() === SYSTEM ? 'sel' :GOR_NORMAL_TAB):GOR_FAIL)} subIcons={true}/>
 		</Link>
 
 		<Link to="/orders" onClick = {this.handleTabClick.bind(this,ORDERS)}>
@@ -174,7 +192,7 @@ class Tabs extends React.Component{
 
 
     <Link to="/audit" onClick = {this.handleTabClick.bind(this,AUDIT)}>
-      <Tab items={{ tab: items.audit, Status: items.auditStatus, currentState:items.auditClass }} changeClass={(this.props.tab.toUpperCase() === AUDIT ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
+      <Tab items={{ tab: items.audit, Status: items.auditStatus, currentState:items.auditClass}} changeClass={(this.props.tab.toUpperCase() === AUDIT ? 'sel' :GOR_NORMAL_TAB)} subIcons={items.auditIcon}/>
       </Link>
 
     <Link to="/inventory" onClick = {this.handleTabClick.bind(this,INVENTORY)}>
@@ -190,6 +208,7 @@ class Tabs extends React.Component{
 }
 
 function mapStateToProps(state, ownProps){
+
     return  {
          tab:state.tabSelected.tab || TAB_ROUTE_MAP[OVERVIEW],
          overview_status:state.tabsData.overview_status||null,
@@ -199,7 +218,8 @@ function mapStateToProps(state, ownProps){
          audit_count:state.tabsData.audit_count||0,
          space_utilized:state.tabsData.space_utilized||0,
          orders_completed:state.tabsData.orders_completed||0,
-         system_status:state.tabsData.status||null
+         system_status:state.tabsData.status||null,
+         audit_alert: state.tabsData.audit_alert || 0
     }
 }
 

@@ -1,5 +1,13 @@
-
-
+.gor-refresh-icon,
+.gor-manage-task,
+.gor-filter-add-token,
+.gor-filter-checked-token,
+.gor-verified-icon,
+.gor-pagination-first,
+.gor-pagination-last,
+.gor-pagination-previous,
+.gor-pagination-next,
+.gor-close,
 .gor-edit-icon,
 .gor-del-icon,
 .dropdown-arrow-icon,
@@ -225,6 +233,105 @@ background-position: -101px -52px;
 .table-subtab-alert-icon {
     background-position: -18px -78px;
     width: 16px;
+    height: 14px;
+    display: inline-block;
+}
+
+.gor-close {
+    background-position: -61px -94px;
+    width: 14px;
     height: 16px;
     display: inline-block;
+    vertical-align: middle;
+}
+
+.gor-pagination-first {
+    background-position: -75px -94px;
+    width: 14px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 10px;
+    margin-left: 14px;
+
+}
+.gor-pagination-last {
+    background-position: -123px -94px;
+    width: 10px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 10px;
+    margin-left: 14px;
+}
+.gor-pagination-next {
+    background-position: -108px -94px;
+    width: 14px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 10px;
+    margin-left: 14px;
+}
+.gor-pagination-previous {
+    background-position: -93px -94px;
+    width: 14px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 10px;
+    margin-left: 14px;
+}
+
+
+.gor-verified-icon {
+    background-position: -426px -77px;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.gor-filter-add-token {
+    background-position: -151px -94px;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.gor-filter-checked-token {
+    background-position: -135px -94px;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.gor-white-spinner {
+    background-image: url(images/whiteSpinner.svg);
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.gor-refresh-icon {
+    background-position: -409px -78px;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: bottom;
+    margin-right: 5px;
+}
+
+.gor-manage-task {
+    background-position: -358px -77px;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: bottom;
+    margin-right: 5px;
 }
