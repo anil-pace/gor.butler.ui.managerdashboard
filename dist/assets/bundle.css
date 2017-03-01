@@ -4155,6 +4155,7 @@ input[type="checkbox"] {
 
 .inventoryHist .bar {
   cursor: pointer;
+  opacity: 0.9;
 }
 
 .inventoryHist .bar.sel {

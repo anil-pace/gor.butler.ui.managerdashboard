@@ -140,6 +140,7 @@
 .inventoryHist{
 	.bar{
 		cursor:pointer;
+		opacity:0.9;
 		&.sel{
 			fill:#949699;
 		}
