@@ -139,9 +139,8 @@ class Histogram extends React.Component{
       var lastXAxisValue = parseInt((data[dLength-1].xAxisData).split("_")[1]);
       var secondLastXAxisValue = parseInt((data[dLength-2].xAxisData).split("_")[1]);
       var monthBreak = mBreak.select("g:nth-child("+(dLength - lastXAxisValue)+")");
-      let isOverlap = (lastXAxisValue === 1 ? true :false);
-      let yToday = (isOverlap ? "3.5em":"2.5em");
-      let xToday = (isOverlap ? "-20":"-20");
+      let yToday = "3.5em";
+      let xToday = "-20";
       mBreak.select("g:nth-child("+dLength+")").append("text").attr("x","-20").attr("y",yToday).text(config.today);
       
     }
@@ -172,7 +171,7 @@ Histogram.propTypes={
   onClickCallBack:React.PropTypes.func,
   noDataText:React.PropTypes.string,
   noData:React.PropTypes.bool,
-  hasDataChanged:React.PropTypes.number
+  hasDataChanged:React.PropTypes.bool
 }
 
 

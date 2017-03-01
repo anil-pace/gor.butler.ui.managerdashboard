@@ -16,11 +16,10 @@ import * as mockData from '../../mock/mockDBData'
   /*Cannot use object.assign as it does not support deep cloning*/
   inventoryObj = JSON.parse(JSON.stringify(action.data));
   stateObj = JSON.parse(JSON.stringify(state));
-  hasDataChanged = stateObj.hasDataChanged === 0 ? 1 : 0;
+  hasDataChanged = stateObj.hasDataChanged === false ? true : false;
   noData = stateObj.noData ;
   recreatedData = stateObj.recreatedData ? JSON.parse(JSON.stringify(stateObj.recreatedData)) : {},
   dateTodayState = stateObj.dateTodayState || null;
-  //histogramData = stateObj.histogramData || {};
   inventory = inventoryObj.complete_data;
 
   if(isHistory === "inventoryDataToday" ){
@@ -33,9 +32,8 @@ import * as mockData from '../../mock/mockDBData'
       categoryData[j].colorCode = CATEGORY_COLOR_MAP[j] || CATEGORY_COLOR_MAP[CATEGORY_COLOR_MAP.length -1];
       
     }
- 
-    //categoryData.push(calculatedInvData);
-    let parseDtInMS ;//= Date.parse(invObj.date);
+    
+    let parseDtInMS ;
     parsedDate = new Date(invObj.date);
     invObj.date = parsedDate.getFullYear() +"-"+(parsedDate.getMonth()+1)+"-"+("0" + parsedDate.getDate()).slice(-2);
     parseDtInMS = new Date(invObj.date).getTime();
@@ -52,12 +50,9 @@ import * as mockData from '../../mock/mockDBData'
     recreatedData[parseDtInMS].graphInfo = dataObj;
     noData = invObj.current_stock ? false : true;
 
-    //processedData.push(dataObj);
-
   }
   else if(isHistory !== "inventoryDataToday"){
     let dataLength = inventory.length;
-    //let parseDtInMS = Date.parse(invObj.date);
     dateToday = new Date(stateObj.dateTodayState) ;
     for(let i = 0; i < INVENTORY_HISTORY_DAYS_COUNT ; i++){
       dateToday = new Date(dateToday.setDate(dateToday.getDate()-1));
@@ -92,8 +87,6 @@ import * as mockData from '../../mock/mockDBData'
 
 
   return Object.assign({}, state, {
-
-    [isHistory] : [] || null,
     "recreatedData": recreatedData || null,
     "dateTodayState" : dateTodayState || null,
     "hasDataChanged":hasDataChanged,

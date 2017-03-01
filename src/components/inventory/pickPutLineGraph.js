@@ -64,7 +64,7 @@ class PickPutLineGraph extends React.Component{
     
 
     
-    //processedData[0].noData =  noStock ? false : true;
+    
     processedData.sort(function(a, b) {
         var x = a["customData"]; var y = b["customData"];
         return ((x < y) ? -1 : ((x > y) ? 1 : 0));
@@ -91,7 +91,7 @@ class PickPutLineGraph extends React.Component{
 };
 PickPutLineGraph.propTypes={
     inventoryData: React.PropTypes.array,
-    hasDataChanged:React.PropTypes.number,
+    hasDataChanged:React.PropTypes.bool,
     noData:React.PropTypes.bool
 }
 

@@ -129,7 +129,7 @@ class StackedChartHorizontal extends React.Component{
 
 StackedChartHorizontal.propTypes={
   snapshotData:React.PropTypes.object,
-  hasDataChanged:React.PropTypes.number
+  hasDataChanged:React.PropTypes.bool
 }
 StackedChartHorizontal.contextTypes ={
  intl:React.PropTypes.object.isRequired

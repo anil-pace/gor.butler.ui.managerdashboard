@@ -70,6 +70,6 @@ class ItemCategoryTable extends React.Component{
 };
 ItemCategoryTable.propTypes={
 	snapshotData:React.PropTypes.object,
-	hasDataChanged:React.PropTypes.number
+	hasDataChanged:React.PropTypes.bool
 }
 export default ItemCategoryTable;

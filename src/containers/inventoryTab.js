@@ -55,8 +55,8 @@ InventoryTab.propTypes={
 	inventorySpinner:React.PropTypes.bool,
 	isPrevDateSelected:React.PropTypes.bool,
 	inventoryDataPrevious:React.PropTypes.object ,
-	hasDataChanged:React.PropTypes.number,
-	dateTodayState:React.PropTypes.object,
+	hasDataChanged:React.PropTypes.bool,
+	dateTodayState:React.PropTypes.number,
 	recreatedData: React.PropTypes.object,
 	noData:React.PropTypes.bool
 }

@@ -37,7 +37,7 @@ class InventoryHistogram extends React.Component{
       processedData.push(recreatedData[k].graphInfo)
     }
 
-    /*processedData[0].noData =  noStock ? false : true;*/
+    
    	processedData.sort(function(a, b) {
         var x = a["customData"]; var y = b["customData"];
         return ((x < y) ? -1 : ((x > y) ? 1 : 0));
@@ -73,7 +73,7 @@ class InventoryHistogram extends React.Component{
 InventoryHistogram.propTypes={
   histogramData:React.PropTypes.array,
   currentDate:React.PropTypes.number,
-  hasDataChanged:React.PropTypes.number,
+  hasDataChanged:React.PropTypes.bool,
   recreatedData : React.PropTypes.object,
   noData:React.PropTypes.bool
 }
