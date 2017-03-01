@@ -9,7 +9,7 @@ import * as mockData from '../../mock/mockDBData'
  */
  function parseInvData(state,action){
   //Parsing logic goes here
-  var inventoryObj,parsedDate,inventory,currentDate,stateObj,hasDataChanged,isHistory,completeData,categoryData,calculatedInvData={};
+  var inventoryObj,invObj,parsedDate,inventory,currentDate,stateObj,hasDataChanged,isHistory,completeData,categoryData,calculatedInvData={};
   var recreatedData=state.recreatedData ? JSON.parse(JSON.stringify(state.recreatedData)) : {};
   isHistory = (action.type === INVENTORY_DATA_HISTORY ? "inventoryDataHistory" : "inventoryDataToday")
   
@@ -21,14 +21,17 @@ import * as mockData from '../../mock/mockDBData'
   inventory = JSON.parse(JSON.stringify(inventoryObj.complete_data));
 
   for(let i = 0 ,len=inventory.length; i < len ; i++){
-    inventory[i]["current_stock"] = (inventory[i]["opening_stock"] + inventory[i]["items_put"])-inventory[i]["items_picked"]
-    calculatedInvData.unusedSpace = 100 - inventory[i]["warehouse_utilization"];
-    calculatedInvData.colorCode = CATEGORY_COLOR_MAP[CATEGORY_COLOR_MAP.length -1];
+    invObj = inventory[i];
+    invObj["current_stock"] = (invObj["opening_stock"] + invObj["items_put"])-invObj["items_picked"]
+    invObj.unusedSpace = 100 - invObj["warehouse_utilization"];
+    invObj.colorCode = CATEGORY_COLOR_MAP[CATEGORY_COLOR_MAP.length -1];
     categoryData = inventory[i]["category_data"];
     for(let j = 0,len2=categoryData.length ; j < len2 ; j++){
-      categoryData[j].colorCode = CATEGORY_COLOR_MAP[j] || CATEGORY_COLOR_MAP[CATEGORY_COLOR_MAP.length -1]
+      categoryData[j].colorCode = CATEGORY_COLOR_MAP[j] || CATEGORY_COLOR_MAP[CATEGORY_COLOR_MAP.length -1];
+      
     }
-    categoryData.push(calculatedInvData);
+ 
+    //categoryData.push(calculatedInvData);
     parsedDate = new Date(inventory[i].date);
     inventory[i].date = parsedDate.getFullYear() +"-"+(parsedDate.getMonth()+1)+"-"+("0" + parsedDate.getDate()).slice(-2);
     recreatedData[Date.parse(inventory[i].date)] = inventory[i];

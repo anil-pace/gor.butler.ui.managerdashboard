@@ -12,6 +12,7 @@ import {stringConfig} from '../../constants/backEndConstants';
 import {orderHeaderSortOrder, orderHeaderSort, orderFilterDetail} from '../../actions/sortHeaderActions';
 import {getDaysDiff} from '../../utilities/getDaysDiff';
 import GorPaginate from '../../components/gorPaginate/gorPaginate';
+import {showTableFilter,filterApplied} from '../../actions/filterAction';
 const messages = defineMessages ({
   inProgressStatus:{
     id: 'orderList.progress.status',
@@ -48,6 +49,14 @@ class OrderListTab extends React.Component{
     var data = {};
     data.selected = 1;
     this.refresh(data);
+  }
+
+  shouldComponentUpdate(nextProps) {
+    if((nextProps.orderData.ordersDetail && !nextProps.orderData.ordersDetail.length)){
+      return false;
+    }
+
+    return true;
   }
 
   processOrders(data, nProps) {
@@ -194,10 +203,11 @@ handlePageClick = (data) => {
 
 refresh = (data) => {
   var convertTime = {"oneHourOrders": 1, "twoHourOrders": 2, "sixHourOrders": 6, "twelveHourOrders": 12, "oneDayOrders": 24};
-  var status = this.props.filterOptions.statusFilter, timeOut = this.props.filterOptions.timeFilter,currentTime,prevTime;
+  var prevTime,currentTime;
   var  appendStatusUrl="", appendTimeUrl="", appendPageSize="", appendSortUrl="", appendTextFilterUrl="";
   var sortHead = {"recievedTime":"&order_by=create_time", "pickBy":"&order_by=pick_before_time", "id":"&order_by=order_id"};
   var sortOrder = {"DESC":"&order=asc", "ASC":"&order=desc"};
+  var filterApplied = false;
   if(!data) {
     data = {};
     data.selected = 1;
@@ -212,17 +222,50 @@ refresh = (data) => {
   }
 
   //for search via text filter
-  if((data.captureValue || data.captureValue === "") && data.type === "searchOrder") {
-      appendTextFilterUrl = FILTER_ORDER_ID + data.captureValue;
+  if(data.searchQuery && data.searchQuery["ORDER ID"]) {
+    appendTextFilterUrl = FILTER_ORDER_ID + data.searchQuery["ORDER ID"];
+    data.selected = 1;
+    filterApplied = true;
   }
 
-  else if(this.props.orderFilter){
-    appendTextFilterUrl = FILTER_ORDER_ID + this.props.orderFilter;
+  //appending filter for status
+  if(data.tokenSelected && data.tokenSelected["STATUS"] && data.tokenSelected["STATUS"].length) {
+    var status = data.tokenSelected["STATUS"][0] //need to change harcoding
+    if((status === undefined || status === "all")) {
+      appendStatusUrl = "";
+    }
+    else if(status === "breached") {
+      currentTime = new Date();
+      currentTime = currentTime.toISOString();
+      appendStatusUrl = PICK_BEFORE_ORDER_URL + currentTime + BREACHED_URL ;
+    }
+    else if(status === "exception")
+    {
+      appendStatusUrl = EXCEPTION_TRUE ;      
+    }
+    else {
+     appendStatusUrl = WAREHOUSE_STATUS + status;
+   }
+   data.selected = 1; 
+   filterApplied = true;
+  }
+
+  //appending filter for orders by time
+ if(data.tokenSelected && data.tokenSelected["TIME PERIOD"] && data.tokenSelected["TIME PERIOD"].length &&data.tokenSelected["TIME PERIOD"][0]!=="allOrders") {
+    var timeOut = data.tokenSelected["TIME PERIOD"][0]
+    currentTime = new Date();
+    prevTime = new Date();
+    prevTime = new Date(prevTime.setHours(prevTime.getHours() - convertTime[timeOut]));
+    prevTime = prevTime.toISOString();
+    currentTime = currentTime.toISOString();
+    appendTimeUrl = UPDATE_TIME_LOW+ currentTime +UPDATE_TIME_HIGH+ prevTime;
+    data.selected = 1;
+    filterApplied = true;
   }
 
   //generating api url by pagination page no.
   data.url = "";
-  data.url = API_URL + ORDERS_URL + ORDER_PAGE + (data.selected);
+  data.url = API_URL + ORDERS_URL + ORDER_PAGE + (data.selected?data.selected:1);
   
   //appending page size filter
   if(this.props.filterOptions.pageSize === undefined) {
@@ -233,36 +276,14 @@ refresh = (data) => {
     appendPageSize = PAGE_SIZE_URL + this.props.filterOptions.pageSize ;
   }
 
-  //appending filter for status
-  if((status === undefined || status === "all")) {
-    appendStatusUrl = "";
-  }
-  else if(this.props.filterOptions.statusFilter === "breached") {
-    currentTime = new Date();
-    currentTime = currentTime.toISOString();
-    appendStatusUrl = PICK_BEFORE_ORDER_URL + currentTime + BREACHED_URL ;
-  }
-  else if(this.props.filterOptions.statusFilter=== "exception")
-  {
-    appendStatusUrl = EXCEPTION_TRUE ;      
-  }
-  else {
-   appendStatusUrl = WAREHOUSE_STATUS + (this.props.filterOptions.statusFilter);
- }
+  
 
- //appending filter for orders by time
- if(timeOut !== undefined && timeOut !== "allOrders") {
-  currentTime = new Date();
-  prevTime = new Date();
-  prevTime = new Date(prevTime.setHours(prevTime.getHours() - convertTime[timeOut]));
-  prevTime = prevTime.toISOString();
-  currentTime = currentTime.toISOString();
-  appendTimeUrl = UPDATE_TIME_LOW+ currentTime +UPDATE_TIME_HIGH+ prevTime;
-}
+
 
 //combining all the filters
 data.url = data.url + appendStatusUrl+appendTimeUrl+appendPageSize+ appendSortUrl + appendTextFilterUrl;
 this.props.lastRefreshTime((new Date()));
+this.props.filterApplied(filterApplied);
 this.handlePageClick(data)
 }
 
@@ -305,16 +326,21 @@ render(){
   <div>
   <div className="gor-Orderlist-table" >  
 
-  <Spinner isLoading={this.props.orderListSpinner} setSpinner={this.props.setOrderListSpinner}/>
+  {!this.props.showFilter?<Spinner isLoading={this.props.orderListSpinner} setSpinner={this.props.setOrderListSpinner}/>:""}
   <OrderListTable items={orderDetail} timeZoneString = {headerTimeZone} itemNumber={itemNumber} 
                   statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter} 
                   refreshOption={this.refresh.bind(this)} lastUpdatedText = {updateStatusText} lastUpdated={updateStatusIntl} 
-                  refreshList={this.refresh.bind(this)} intlMessg={this.props.intlMessages} alertNum={alertNum}
+                  intlMessg={this.props.intlMessages} alertNum={alertNum}
                   totalOrders={this.props.orderData.totalOrders}
+                  itemsPerOrder={this.props.orderData.itemsPerOrder}
+                  totalCompletedOrder={this.props.orderData.totalCompletedOrder}
+                  totalPendingOrder={this.props.orderData.totalPendingOrder}
                   sortHeaderState={this.props.orderHeaderSort} currentSortState={this.props.orderSortHeader} 
                   sortHeaderOrder={this.props.orderHeaderSortOrder} currentHeaderOrder={this.props.orderSortHeaderState}
-                  refreshData={this.refresh.bind(this)} setOrderFilter={this.props.orderFilterDetail}
-                  getOrderFilter={this.props.orderFilter}
+                  setOrderFilter={this.props.orderFilterDetail}
+                  getOrderFilter={this.props.orderFilter} setFilter={this.props.showTableFilter} 
+                  showFilter={this.props.showFilter} responseFlag={this.props.orderListSpinner}
+                  isFilterApplied={this.props.isFilterApplied}
                   />
 
   <div className="gor-pageNum">
@@ -341,7 +367,9 @@ function mapStateToProps(state, ownProps){
     statusFilter : state.filterOptions.statusFilter || null,
     intlMessages: state.intl.messages,
     timeOffset: state.authLogin.timeOffset,
-    auth_token: state.authLogin.auth_token  
+    auth_token: state.authLogin.auth_token,
+    showFilter: state.filterInfo.filterState || false,
+    isFilterApplied: state.filterInfo.isFilterApplied || false,
   };
 }
 
@@ -357,7 +385,9 @@ var mapDispatchToProps = function(dispatch){
     currentPage: function(data){ dispatch(currentPageOrders(data));},
     lastRefreshTime: function(data){ dispatch(lastRefreshTime(data));},
     setOrderListSpinner: function(data){dispatch(setOrderListSpinner(data))},
-    setCurrentPage: function(data){dispatch(setCurrentPage(data))}
+    setCurrentPage: function(data){dispatch(setCurrentPage(data))},
+    showTableFilter: function(data){dispatch(showTableFilter(data));},
+    filterApplied: function(data){dispatch(filterApplied(data));}
   }
 };
 

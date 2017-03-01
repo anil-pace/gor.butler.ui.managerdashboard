@@ -155,9 +155,16 @@ class Chart extends React.Component{
       .on("mousemove", function(d, i) {
         d3.select(this)
         .classed("hover", true)
+        .attr("height", function(d) {return height - y(d.type);})
+        .attr("x", function(d) { return x(d.timeInterval); })
         .attr("stroke", "#045A8D")
         .attr("stroke-width", "0.5px");
-        d3.select('.remove').html( "<div style='background:#4d5055; color:#ffffff; padding:10px 30px 10px 10px; border-radius:5%; font-size:14px;'> "+ d.timeInterval + ":00 - " + (d.timeInterval+1) +":00 <div style='color: #ffffff; padding-top:2px;'> "+ (new Date()).getDate() + " " + m_names[(new Date()).getMonth()] +",2016</div> <div style='color: #ffffff; display:inline-block; padding-top:10px; font-size:14px;'> Fulfilled:  " + d.type.toLocaleString() + "</div>" ).style("visibility", "visible");
+        d3.select('.remove').html( "<div style='background:#4d5055; color:#ffffff; padding:10px 30px 10px 10px; border-radius:5%; font-size:14px;'> "+ d.timeInterval + ":00 - " + (d.timeInterval+1) +":00 <div style='color: #ffffff; padding-top:2px;'> "+ (new Date()).getDate() + " " + m_names[(new Date()).getMonth()] +",2016</div> <div style='color: #ffffff; display:inline-block; padding-top:10px; font-size:14px;'> Fulfilled:  " + d.type.toLocaleString() + " </div> <div style='border-left: 9px solid transparent; border-right: 9px solid transparent; border-top: 12px solid #4d5055; margin-left: 58px; position: absolute; margin-top: 5px;'/>" ).style("visibility", "visible");
+        var mouse = d3.mouse(this);
+           var mousex = x(d.timeInterval) + 20;
+           var mousey =  y(d.type) + 315 ; 
+           d3.selectAll('.remove').style("left", mousex + "px" );
+           d3.selectAll('.remove').style("top", + mousey + "px" );
       })
       .on("mouseout", function(d, i) {
        d3.selectAll(".layer")
@@ -180,13 +187,6 @@ class Chart extends React.Component{
     
       d3.select(node).selectAll('svg')
         .data(data)
-        .on("mousemove", function(d,i){  
-           var mouse = d3.mouse(this);
-           var mousex = mouse[0] + 10;
-           var mousey =  mouse[1] + 295; 
-           d3.selectAll('.remove').style("left", mousex + "px" );
-           d3.selectAll('.remove').style("top", + mousey + "px" );
-         })
         .on("mouseover", function(){  
            var mousex = d3.mouse(this);
            mousex = mousex[0] + 10;

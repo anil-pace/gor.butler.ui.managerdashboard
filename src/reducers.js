@@ -4,7 +4,7 @@ import {authLogin}  from './reducers/loginReducer'
 import {spinner}  from './reducers/spinnerReducer'
 import {recieveSocketActions}  from './reducers/socketReducer'
 import { routerReducer as routing } from 'react-router-redux';
-import { intlReducer } from 'react-intl-redux'
+import { intlReducer } from 'react-intl-redux';
 import {performanceWidget}  from './reducers/performanceWidgetReducer'
 import {butlersInfo}  from './reducers/butlerReducer'
 import {chargerInfo}  from './reducers/chargerReducer'
@@ -32,7 +32,7 @@ import {currentTableState} from './reducers/tableStateReducer';
 import {recieveAuditDetail} from './reducers/auditDetailReducer';
 import {tabsData} from './reducers/tabDataReducer';
 import {sortHeaderState} from './reducers/sortHeaderReducer';
-
+import {filterInfo} from './reducers/filterReducer';
 
 const rootReducer = combineReducers({
   intl:intlReducer,
@@ -67,7 +67,8 @@ const rootReducer = combineReducers({
   d3barChart,
   currentTableState,
   recieveAuditDetail,
-  sortHeaderState
+  sortHeaderState,
+  filterInfo
    })
 
 export default rootReducer

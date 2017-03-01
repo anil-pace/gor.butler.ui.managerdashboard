@@ -6,7 +6,7 @@ import { FormattedMessage, FormattedDate, FormattedTime,FormattedRelative ,defin
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData,TestingCell} from '../../components/commonFunctionsDataTable';
 import {GOR_STATUS,GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT,DEBOUNCE_TIMER} from '../../constants/frontEndConstants';
 import {debounce} from '../../utilities/debounce';
-
+import OrderFilter from './orderFilter';
 const messages = defineMessages({
     filterPlaceholder: {
         id: 'table.filter.placeholder',
@@ -97,7 +97,7 @@ class OrderListTable extends React.Component {
   }
 
    _onFilterChange(e) {
-    var data={"type":"searchOrder", "captureValue":"", "selected":0 },debounceFilter;
+    var data={"type":"searchOrder", "captureValue":"", "selected":1 },debounceFilter;
     if(e.target && (e.target.value || e.target.value === "")) {
       data["captureValue"] = e.target.value;
       this.props.setOrderFilter(e.target.value);
@@ -105,20 +105,27 @@ class OrderListTable extends React.Component {
     else {
       data["captureValue"] = e;
     }
-    debounceFilter = debounce(this.props.refreshData, DEBOUNCE_TIMER);
+    debounceFilter = debounce(this.props.refreshOption, DEBOUNCE_TIMER);
     debounceFilter(data);
   }
   
 
   backendSort(columnKey, sortDir) {
-    var data={"columnKey":columnKey, "sortDir":sortDir, selected:0}
+    var data={"columnKey":columnKey, "sortDir":sortDir, selected:1}
     this.props.sortHeaderState(columnKey);
-    this.props.refreshData(data);
+    this.props.refreshOption(data);
     this.props.sortHeaderOrder({
       colSortDirs: {[columnKey]: sortDir},
     })
   }
+  _setFilter() {
+    var newState = !this.props.showFilter;
+    this.props.setFilter(newState)
+   }
 
+   _showAllOrder() {
+    this.props.refreshOption();
+   }
   
   render() {
     
@@ -129,31 +136,13 @@ class OrderListTable extends React.Component {
     let pendingDrop = <FormattedMessage id="pendingDrop.table.allDrop" description="pending dropdown option for orderlist" defaultMessage ="Pending orders"/> 
     let completedDrop = <FormattedMessage id="completedDrop.table.allDrop" description="completed dropdown option for orderlist" defaultMessage ="Completed orders"/> 
     let exception = <FormattedMessage id="exceptionDrop.table" description="exception order dropdown for orderlist" defaultMessage="Exception"/>
-
+    
     let allTimeDrop = <FormattedMessage id="orderlist.table.allTimeDrop" description="allTime dropdown option for orderlist" defaultMessage ="All"/> 
     let oneHrDrop = <FormattedMessage id="orderlist.table.oneHrDrop" description="oneHr dropdown option for orderlist" defaultMessage ="Last 1 hours"/> 
     let twoHrDrop = <FormattedMessage id="pendingDrop.table.twoHrDrop" description="twoHr dropdown option for orderlist" defaultMessage ="Last 2 hours"/> 
     let sixHrDrop = <FormattedMessage id="completedDrop.table.sixHrDrop" description="sixHr dropdown option for orderlist" defaultMessage ="Last 6 hours"/> 
     let twelveHrDrop = <FormattedMessage id="pendingDrop.table.twelveHrDrop" description="twelveHr dropdown option for orderlist" defaultMessage ="Last 12 hours"/> 
     let oneDayDrop = <FormattedMessage id="completedDrop.table.oneDayDrop" description="oneDay dropdown option for orderlist" defaultMessage ="Last 1 day"/> 
-    
-    const ordersByStatus = [
-    { value: 'all', label: allDrop },
-    { value: 'breached', label: breachedDrop },
-    { value: 'pending', label: pendingDrop },
-    { value: 'completed', label: completedDrop },
-    { value: 'exception', label: exception}
-    ];
-
-    const ordersByTime = [
-    { value: 'allOrders', label: allTimeDrop },
-    { value: 'oneHourOrders', label: oneHrDrop },
-    { value: 'twoHourOrders', label: twoHrDrop },
-    { value: 'sixHourOrders', label: sixHrDrop },
-    { value: 'twelveHourOrders', label: twelveHrDrop },
-    { value: 'oneDayOrders', label: oneDayDrop }
-    ];
-
     if(this.props.alertNum !== 0) {
 
      headerAlert =  <div className="gorToolHeaderEl alertState"> <div className="table-subtab-alert-icon"/> <div className="gor-inline">{this.props.alertNum} Alerts </div> </div>
@@ -168,8 +157,12 @@ class OrderListTable extends React.Component {
         defaultMessage ="No Orders Found"/>  </div>
      heightRes = GOR_TABLE_HEADER_HEIGHT;
     }
+    var filterHeight = screen.height-190-50;
     return (
       <div className="gorTableMainContainer">
+      <div className="gor-filter-wrap" style={{'width':this.props.showFilter?'350px':'0px', height:filterHeight}}> 
+         <OrderFilter refreshOption={this.props.refreshOption} responseFlag={this.props.responseFlag}/>  
+       </div>
         <div className="gorToolBar">
           <div className="gorToolBarWrap">
             <div className="gorToolBarElements">
@@ -177,36 +170,35 @@ class OrderListTable extends React.Component {
               defaultMessage ="OrderList"/>
             </div>
             <div className="gor-button-wrap">
-            <button className="gor-refresh-btn" onClick={this.props.refreshOption.bind(this,null)} >
-              
-              <FormattedMessage id="order.table.buttonLable" description="button label for refresh" 
-              defaultMessage ="Refresh Data"/>
-            </button>
+
             </div>
-            <div className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
           </div>
         <div className="filterWrapper"> 
         <div className="gorToolBarDropDown">
-          <div className="gor-dropD-text"> <FormattedMessage id="order.table.dropdown.text" description="Sub text for order list dropdown" 
-              defaultMessage ="Show"/> </div>
-          <div className="gor-dropDown-firstInnerElement">
-              <Dropdown  styleClass={'gorDataTableDrop'}  items={ordersByStatus} currentState={ordersByStatus[0]} optionDispatch={this.props.statusFilter} refreshList={this.props.refreshList}/>
-          </div>
-          <div className="gor-dropDown-secondInnerElement">                                                                  
-              <Dropdown  styleClass={'gorDataTableDrop'}  items={ordersByTime} currentState={ordersByTime[0]}  optionDispatch={this.props.timeFilter} refreshList={this.props.refreshList}/>
-            </div>
-            </div> 
-        <div className="gorFilter">
-            <div className="searchbox-magnifying-glass-icon"/>
-            <input className="gorInputFilter"
-              onChange={this._onFilterChange}
-              placeholder={this.props.intlMessg["table.filter.placeholder"]}
-              value={this.props.getOrderFilter}>
-            </input>
-        </div>
+        <div className="gor-button-wrap">
+        <div className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
+            <button className="gor-filterBtn-btn" onClick={this.props.refreshOption.bind(this,null)} >
+              <div className="gor-refresh-icon"/>
+              <FormattedMessage id="order.table.buttonLable" description="button label for refresh" 
+              defaultMessage ="Refresh Data"/>
+            </button>
+        <button className={this.props.isFilterApplied?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
+          <div className="gor-manage-task"/>
+          <FormattedMessage id="order.table.filterLabel" description="button label for filter" 
+          defaultMessage ="Filter"/>
+         </button>
+       </div>
+        </div>     
         </div>
        </div>
-
+       {this.props.isFilterApplied && !this.props.responseFlag?<div className="gor-filter-search-result-bar">
+                                       <FormattedMessage id="orderlist.filter.search.bar" description='total order for filter search bar' 
+                                                          defaultMessage='{totalOrder} Orders found' 
+                                                          values={{totalOrder: totalOrder?totalOrder:'0'}}/>
+                                                          <span className="gor-filter-search-show-all" onClick={this._showAllOrder.bind(this)}>
+                                                            <FormattedMessage id="orderlist.filter.search.bar.showall" description="button label for show all" defaultMessage ="Show all orders"/> 
+                                                          </span>
+                                   </div>:""}
       <Table
         rowHeight={50}
         rowsCount={sortedDataList.getSize()}
@@ -267,7 +259,7 @@ class OrderListTable extends React.Component {
               <FormattedMessage id="orderlist.table.pickBy" description="pick by for orderlist" 
               defaultMessage ="PICK BY"/>
               <div className="gorToolHeaderSubText"> 
-                {this.props.timeZoneString}
+                <FormattedMessage id="orderlist.pendingOrders" description='pendingOrders header ordertable' defaultMessage='{pendingOrders} orders pending' values={{pendingOrders: this.props.totalPendingOrder?this.props.totalPendingOrder:'0'}}/>
               </div>
               </div>
             </SortHeaderCell>
@@ -304,7 +296,7 @@ class OrderListTable extends React.Component {
               <FormattedMessage id="orderlist.table.completedTime" description="completedTime for orderlist" 
               defaultMessage ="COMPLETED"/>
               <div className="gorToolHeaderSubText">
-                {this.props.timeZoneString}
+              <FormattedMessage id="orderlist.totalCompletedOrder" description='totalCompletedOrder header ordertable' defaultMessage='Avg {totalCompletedOrder} orders/hr' values={{totalCompletedOrder: this.props.totalCompletedOrder?this.props.totalCompletedOrder:'0'}}/>
                </div>
                 </div>
             </div>
@@ -321,7 +313,9 @@ class OrderListTable extends React.Component {
               <div className="gorToolHeaderEl">
               <FormattedMessage id="orderlist.table.orderLine" description="orderLine for orderlist" 
               defaultMessage ="ORDER LINE"/>
-              <div className="gorToolHeaderSubText"> </div>
+              <div className="gorToolHeaderSubText"> 
+              <FormattedMessage id="orderlist.itemsPerOrder" description='itemsPerOrder header ordertable' defaultMessage='Avg {itemsPerOrder} items/hr' values={{itemsPerOrder: this.props.itemsPerOrder?this.props.itemsPerOrder.toFixed(2):'0'}}/>
+              </div>
               </div>
             </div>
           }
