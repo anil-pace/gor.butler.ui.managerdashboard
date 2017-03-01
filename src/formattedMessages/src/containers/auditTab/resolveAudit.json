@@ -2,7 +2,7 @@
   {
     "id": "resolveAudit.table.batchID",
     "description": "batch id Column",
-    "defaultMessage": "BATCH NO."
+    "defaultMessage": "BOX ID."
   },
   {
     "id": "resolveAudit.table.expectedItems",

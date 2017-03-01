@@ -68,8 +68,8 @@ class ResolveAudit extends React.Component{
       else{
         auditData.status = data[i].status;
       }
-      if(data[i].pdfa_audit_attributes && data[i].pdfa_audit_attributes.box_id) {
-        auditData.attributeDetail = data[i].pdfa_audit_attributes.box_id;  // box_id is harcoded as of now (kerry specific)
+      if(data[i].pdfa_audit_attributes && auditLines[0].pdfa_audit_attributes[Object.keys(auditLines[0].pdfa_audit_attributes)]) {
+        auditData.attributeDetail = auditLines[0].pdfa_audit_attributes[Object.keys(auditLines[0].pdfa_audit_attributes)];  //assuming only one attributes is there as of now (kerry specific) 
       }
       processedData.push(auditData);
       auditData =  {};
@@ -157,7 +157,7 @@ class ResolveAudit extends React.Component{
                       height={GOR_USER_TABLE_HEADER_HEIGHT}
                       {...this.props}>
                       <Column header={<div className="gorAuditHeader">
-                                        <FormattedMessage id="resolveAudit.table.batchID" description="batch id Column" defaultMessage ="BATCH NO."/> 
+                                        <FormattedMessage id="resolveAudit.table.batchID" description="batch id Column" defaultMessage ="BOX ID."/> 
                                       </div>} width={220}/>
                       <Column header={<div className="gorAuditHeader">
                                         <FormattedMessage id="resolveAudit.table.expectedItems" description="expectedItems Column" defaultMessage ="EXPECTED QUANTITY"/> 
