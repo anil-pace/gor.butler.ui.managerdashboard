@@ -12,7 +12,7 @@
   {
     "id": "audit.noAtrributes.sku",
     "description": "text for valid sku with no attributed",
-    "defaultMessage": "SKU confirmed but no batch number found"
+    "defaultMessage": "SKU confirmed but no Box Id found"
   },
   {
     "id": "audit.add.heading",
@@ -52,7 +52,7 @@
   {
     "id": "audit.dropdown.heading",
     "description": "Text for dropdown heading",
-    "defaultMessage": "Choose batch number (Optional)"
+    "defaultMessage": "Choose Box Id (Optional)"
   },
   {
     "id": "audit.add.location.heading",

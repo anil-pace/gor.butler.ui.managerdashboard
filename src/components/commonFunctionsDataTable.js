@@ -141,7 +141,7 @@ export const ToolTipCell = ({rowIndex, data, columnKey,setClass,callBack,tooltip
       <div className="gor-tooltip-arrow"/> 
       <div className="gor-tooltip-text-wrap">
         <div className="gor-tooltip-heading">
-          <FormattedMessage id="commonDataTable.attributesType.heading" description='heading for attribute' defaultMessage='Batch number'/>
+          <FormattedMessage id="commonDataTable.attributesType.heading" description='heading for attribute' defaultMessage='Box Id'/>
         </div>
         <div className="gor-tooltip-datalines">
             <div>

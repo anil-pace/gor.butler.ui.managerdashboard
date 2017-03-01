@@ -183,7 +183,7 @@ class CreateAudit extends React.Component{
       let tick=(<div className='gor-tick'/>);  
       let validSkuMessg = <FormattedMessage id="audit.valid.sku" description='text for valid sku' defaultMessage='SKU confirmed'/>;
       let invalidSkuMessg = <FormattedMessage id="audit.invalid.sku" description='text for invalid sku' defaultMessage='Please enter correct SKU number'/>;
-      let validSkuNoAtriMessg = <FormattedMessage id="audit.noAtrributes.sku" description='text for valid sku with no attributed' defaultMessage='SKU confirmed but no batch number found'/>;
+      let validSkuNoAtriMessg = <FormattedMessage id="audit.noAtrributes.sku" description='text for valid sku with no attributed' defaultMessage='SKU confirmed but no Box Id found'/>;
       var processedSkuResponse = this._processSkuAttributes();
       var skuState = this._claculateSkuState(processedSkuResponse);
       var dropdownData = this._searchDropdownEntries(skuState,processedSkuResponse);
@@ -242,7 +242,7 @@ class CreateAudit extends React.Component{
               {skuState===NO_ATTRIBUTE_SKU?"":
                 <div className={"gor-searchDropdown-audit-wrap" + (skuState!= VALID_SKU?" gor-disable-content":"")}>
                   <div className='gor-usr-hdsm'><FormattedMessage id="audit.dropdown.heading" description='Text for dropdown heading' 
-                       defaultMessage='Choose batch number (Optional)'/></div>
+                       defaultMessage='Choose Box Id (Optional)'/></div>
                   <SearchDropdown list={dropdownData} selectedItems={this._selectedAttributes.bind(this)}/>
                 </div>}
             </div>
