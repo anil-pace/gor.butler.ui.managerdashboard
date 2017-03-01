@@ -10,6 +10,16 @@
     "defaultMessage": "Delete"
   },
   {
+    "id": "commonDataTable.attributesType.total",
+    "description": "total for attribute selected",
+    "defaultMessage": "{totalItems} items selected"
+  },
+  {
+    "id": "commonDataTable.attributesType.heading",
+    "description": "heading for attribute",
+    "defaultMessage": "Batch number"
+  },
+  {
     "id": "audit.resolveUnresolve",
     "description": "resolveUnresolve issue for audit table",
     "defaultMessage": "{resolvedCount} issues, {unresolvedCount} unresolved"

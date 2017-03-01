@@ -140,7 +140,9 @@ export const ToolTipCell = ({rowIndex, data, columnKey,setClass,callBack,tooltip
     <div className="gor-tooltip">
       <div className="gor-tooltip-arrow"/> 
       <div className="gor-tooltip-text-wrap">
-        <div className="gor-tooltip-heading">Batch number</div>
+        <div className="gor-tooltip-heading">
+          <FormattedMessage id="commonDataTable.attributesType.heading" description='heading for attribute' defaultMessage='Batch number'/>
+        </div>
         <div className="gor-tooltip-datalines">
             <div>
               {data.getObjectAt(rowIndex)[tooltipData] && data.getObjectAt(rowIndex)[tooltipData][Object.keys(data.getObjectAt(rowIndex)[tooltipData])[0]]?

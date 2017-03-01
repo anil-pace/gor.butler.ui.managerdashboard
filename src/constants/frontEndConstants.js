@@ -39,7 +39,7 @@ export const GOR_TABLE_HEADER_HEIGHT = 71;
 export const GOR_USER_TABLE_HEADER_HEIGHT = 50;
 export const GOR_AUDIT_RESOLVE_MIN_HEIGHT = 400;
 export const GOR_AUDIT_RESOLVE_WIDTH = 1100;
-export const GOR_AUDIT_TABLE_HEIGHT_CORRECTION = 260;
+export const GOR_AUDIT_TABLE_HEIGHT_CORRECTION = 300;
 
 /*Constants for performance widget*/
 export const RENDER_WIDGET = "RENDER_WIDGET";
