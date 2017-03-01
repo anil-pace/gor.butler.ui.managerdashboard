@@ -132,16 +132,20 @@ export const ToolTipCell = ({rowIndex, data, columnKey,setClass,callBack,tooltip
   <Cell {...props} className={setClass}>
     {data.getObjectAt(rowIndex)[columnKey]}
     <div className="gor-tool-tip-hover" onMouseEnter={callBack}>
-      {data.getObjectAt(rowIndex)[tooltipData] && data.getObjectAt(rowIndex)[tooltipData].box_id?data.getObjectAt(rowIndex)[tooltipData].box_id.length+" items selected":""}
+      {data.getObjectAt(rowIndex)[tooltipData] && data.getObjectAt(rowIndex)[tooltipData][Object.keys(data.getObjectAt(rowIndex)[tooltipData])[0]]
+          ?data.getObjectAt(rowIndex)[tooltipData][Object.keys(data.getObjectAt(rowIndex)[tooltipData])[0]].length+" items selected"
+          :""}
     </div>
-    {data.getObjectAt(rowIndex)[tooltipData] && data.getObjectAt(rowIndex)[tooltipData].box_id?
+    {data.getObjectAt(rowIndex)[tooltipData] && data.getObjectAt(rowIndex)[tooltipData][Object.keys(data.getObjectAt(rowIndex)[tooltipData])[0]]?
     <div className="gor-tooltip">
       <div className="gor-tooltip-arrow"/> 
       <div className="gor-tooltip-text-wrap">
         <div className="gor-tooltip-heading">Batch number</div>
         <div className="gor-tooltip-datalines">
             <div>
-              {data.getObjectAt(rowIndex)[tooltipData] && data.getObjectAt(rowIndex)[tooltipData].box_id?(data.getObjectAt(rowIndex)[tooltipData].box_id.map(function(object, i){return <div key={i} > {i+1}. {object} </div>;})):""}
+              {data.getObjectAt(rowIndex)[tooltipData] && data.getObjectAt(rowIndex)[tooltipData][Object.keys(data.getObjectAt(rowIndex)[tooltipData])[0]]?
+                  (data.getObjectAt(rowIndex)[tooltipData][Object.keys(data.getObjectAt(rowIndex)[tooltipData])[0]].map(function(object, i){return <div key={i} > {i+1}. {object} </div>;}))
+                  :""}
             </div>
         </div>
       </div> 
@@ -149,7 +153,7 @@ export const ToolTipCell = ({rowIndex, data, columnKey,setClass,callBack,tooltip
     :""}
   </Cell>
 );
-//box_id is harcoded as of now in tool tip component (kerry specific)
+//assuming only one attributes is there in tool tip component (kerry specific)
 
 
 export const ProgressCell = ({rowIndex, data, columnKey, resolved, unresolved, ...props}) => (

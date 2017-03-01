@@ -106,16 +106,12 @@ class CreateAudit extends React.Component{
       };
     }
     else if(this.skuState === VALID_SKU && this.state.selected.length) { //sku has attributes and doing audit by pdfa
-      formdata={
-              "audit_param_type" : "pdfa", 
-              "audit_param_value" : {
-                  "product_sku": sku,
-                  "pdfa_values": {
-                                  "box_id": this.state.selected //box_id is hardcoded as of now (kerry specific)
-                                  }
-                    }
-                };
-
+      formdata={}
+      formdata["audit_param_type"] = "pdfa";
+      formdata["audit_param_value"] = {}
+      formdata["audit_param_value"]["product_sku"]=sku;
+      formdata["audit_param_value"]["pdfa_values"] = {}
+      formdata["audit_param_value"]["pdfa_values"][this.keys]=this.state.selected;
     } 
     
     else
@@ -163,6 +159,7 @@ class CreateAudit extends React.Component{
         }
     }
     skuAttributeData = {keys:keys, hasAttribute: hasAttribute, isValid:isValid};
+    this.keys = keys[0]; // harcoding since backend support only one entry
     return skuAttributeData;
   }
 
