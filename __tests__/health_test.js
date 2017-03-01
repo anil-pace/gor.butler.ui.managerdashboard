@@ -3,7 +3,7 @@ import React  from 'react';
 import { shallow, mount, render } from 'enzyme';
 import Health from '../src/components/health/Health';
 
-//Just to clear
+//Just to clear test-cases
 	it('Should be 1',()=>{
 		expect(1).toEqual(1);
 	})
