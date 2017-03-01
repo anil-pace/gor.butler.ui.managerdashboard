@@ -43,7 +43,7 @@ import * as mockData from '../../mock/mockDBData'
     recreatedData[parseDtInMS].otherInfo = invObj;
     dateToday = parsedDate;
     dateTodayState = parseDtInMS
-    dataObj.xAxisData = parsedDate.getDate();
+    dataObj.xAxisData = Math.random()+"_"+parsedDate.getDate();
     dataObj.yAxisData = invObj.current_stock ;
     dataObj.items_picked = invObj.items_picked;
     dataObj.items_put = invObj.items_put;
@@ -59,13 +59,15 @@ import * as mockData from '../../mock/mockDBData'
     let dataLength = inventory.length;
     //let parseDtInMS = Date.parse(invObj.date);
     dateToday = new Date(stateObj.dateTodayState) ;
-    for(let i = 0; i < dataLength ; i++){
-      invObj = inventory[i];
-      let histDate = Date.parse(invObj.date);
-      invObj["current_stock"] = (invObj["opening_stock"] + invObj["items_put"])-invObj["items_picked"]
-      invObj.unusedSpace = 100 - invObj["warehouse_utilization"];
+    for(let i = 0; i < INVENTORY_HISTORY_DAYS_COUNT ; i++){
+      dateToday = new Date(dateToday.setDate(dateToday.getDate()-1));
+      invObj = inventory[i] ? inventory[i] : {};
+      let emptyData = Object.keys(invObj).length ? false : true;
+      let histDate = !emptyData ? Date.parse(invObj.date) : dateToday.getTime();
+      invObj["current_stock"] = !emptyData ? (invObj["opening_stock"] + invObj["items_put"])-invObj["items_picked"] : 0;
+      invObj.unusedSpace = !emptyData ? (100 - invObj["warehouse_utilization"]) : 100;
       invObj.colorCode = CATEGORY_COLOR_MAP[CATEGORY_COLOR_MAP.length -1];
-      categoryData = invObj["category_data"];
+      categoryData = !emptyData ? invObj["category_data"] : [];
       for(let j = 0,len2=categoryData.length ; j < len2 ; j++){
         categoryData[j].colorCode = CATEGORY_COLOR_MAP[j] || CATEGORY_COLOR_MAP[CATEGORY_COLOR_MAP.length -1];
         
@@ -74,12 +76,12 @@ import * as mockData from '../../mock/mockDBData'
       recreatedData[histDate].otherInfo = invObj;
       dataObj={};
       let currentDate = new Date(histDate);
-        dataObj.xAxisData = currentDate.getDate();
-        dataObj.items_picked = invObj.items_picked;
-        dataObj.items_put = invObj.items_put;
-        dataObj.yAxisData = invObj.current_stock || 0;
+        dataObj.xAxisData = Math.random()+"_"+currentDate.getDate();
+        dataObj.items_picked = !emptyData ? invObj.items_picked : 0;
+        dataObj.items_put = !emptyData ? invObj.items_put : 0;
+        dataObj.yAxisData = !emptyData ? (invObj.current_stock || 0) : 0;
         dataObj.date = currentDate;
-        dataObj.customData = (new Date(currentDate)).getTime();
+        dataObj.customData = histDate ;//(new Date(currentDate)).getTime();
         recreatedData[histDate].graphInfo =dataObj;
         historyClosingStock+= invObj.current_stock 
     

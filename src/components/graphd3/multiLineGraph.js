@@ -110,7 +110,7 @@ class MultiLineGraph extends React.Component{
         .call(d3.svg.axis()
           .scale(y)
           .orient("left")
-          .ticks(3)
+          .ticks(4)
           .tickSize(-width)
           .tickFormat("")
           )  
@@ -191,11 +191,11 @@ class MultiLineGraph extends React.Component{
         }
         var mBreak= g.selectAll("g.x");
         if (mBreak.length){
-          var dataLen = dataArray.length - 1;
+          var dataLen = dataArray.length ;
           var textEl = parseInt(mBreak.select("g:nth-child("+dataLen+") text").text());
           let isOverlap = (textEl === 1 ? true :false);
           let yToday = (isOverlap ? "3.5em":"2.5em");
-          mBreak.select("g:nth-child("+(dataLen+1)+")").append("text").attr("x","-20").attr("y",yToday).text(config.today)
+          mBreak.select("g:nth-child("+(dataLen)+")").append("text").attr("x","-20").attr("y",yToday).text(config.today)
           var monthBreak = mBreak.select("g:nth-child("+(dataLen)+")");
           mBreak.select("g:nth-child("+(dataLen - textEl)+")").append("line").attr("class","month-break").attr("x1","15").attr("x2","15").attr("y1","0").attr("y2","25");
           mBreak.select("g:nth-child("+(dataLen - (textEl-1))+")").append("text").attr("x","-5").attr("y","30").text(config.breakMonth);

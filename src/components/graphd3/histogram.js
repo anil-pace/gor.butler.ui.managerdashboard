@@ -51,7 +51,21 @@ class Histogram extends React.Component{
     width = config.width - margin.left - margin.right,
     height = config.height - margin.top - margin.bottom;
 	 svg.attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
+    .attr("height", height + margin.top + margin.bottom);
+
+     //Hack to allow duplicate x Axis values
+    var adjustTicks = function(){
+       var xaxisgroup = this.node();
+       var ticks = xaxisgroup.children;
+       for (var i = 0; i < ticks.length; i++) {
+           if(ticks[i].localName == 'path'){continue; }
+
+           var tick_text = d3.select(ticks[i].children[1]);
+           tick_text.text(tick_text.text().split("_")[1])
+
+       };
+    }
+
     var x = d3.scale.ordinal().rangeRoundBands([0, width], config.bandPadding);
 
   	var y = d3.scale.linear().range([height, 0]);
@@ -90,7 +104,7 @@ class Histogram extends React.Component{
     g.append("g")
         .attr("class", "x axis axis--x")
         .attr("transform", "translate(0," + height + ")")
-        .call( xAxis);
+        .call( xAxis).call(adjustTicks);
 
 
   //Adding y axis
@@ -122,14 +136,17 @@ class Histogram extends React.Component{
     if(config.showMonthBreak && data.length){
       var mBreak= g.selectAll("g.axis--x");
       var dLength = data.length;
-      var monthBreak = mBreak.select("g:nth-child("+(dLength - data[dLength-1].xAxisData)+")");
-      let isOverlap = (data[dLength-1].xAxisData === 1 ? true :false);
+      var lastXAxisValue = parseInt((data[dLength-1].xAxisData).split("_")[1]);
+      var secondLastXAxisValue = parseInt((data[dLength-2].xAxisData).split("_")[1]);
+      var monthBreak = mBreak.select("g:nth-child("+(dLength - lastXAxisValue)+")");
+      let isOverlap = (lastXAxisValue === 1 ? true :false);
       let yToday = (isOverlap ? "3.5em":"2.5em");
+      let xToday = (isOverlap ? "-20":"-20");
       mBreak.select("g:nth-child("+dLength+")").append("text").attr("x","-20").attr("y",yToday).text(config.today);
       
     }
       monthBreak.append("line").attr("class","month-break").attr("x1","15").attr("x2","15").attr("y1","0").attr("y2","25");
-      mBreak.select("g:nth-child("+(dLength - data[dLength-2].xAxisData)+")").append("text").attr("x","-5").attr("y","30").text(config.breakMonth);
+      monthBreak.append("text").attr("x","20").attr("y","30").text(config.breakMonth);
     }
         
 
