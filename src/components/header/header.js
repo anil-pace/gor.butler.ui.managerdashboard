@@ -89,7 +89,7 @@ class Header extends React.Component{
 			<div className="blockLeft">
 				<div className="logoWrap">
 					<div>
-						<div className="logo fk-logo"></div>
+						<div ></div>
 					</div>
 				</div>
 				<div className="gor-border"/>
