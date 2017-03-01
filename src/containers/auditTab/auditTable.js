@@ -12,7 +12,7 @@ import StartAudit from './startAudit';
 import DeleteAudit from './deleteAudit';
 import DuplicateAudit from './duplicateAudit';
 import ResolveAudit from './resolveAudit';
-import {GOR_STATUS,GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT,DEBOUNCE_TIMER,AUDIT_RESOLVE_LINES,GET,APP_JSON,GOR_AUDIT_RESOLVE_MIN_HEIGHT,GOR_USER_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
+import {GOR_STATUS,GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT,DEBOUNCE_TIMER,AUDIT_RESOLVE_LINES,GET,APP_JSON,GOR_AUDIT_RESOLVE_MIN_HEIGHT,GOR_USER_TABLE_HEADER_HEIGHT,GOR_AUDIT_TABLE_HEIGHT_CORRECTION} from '../../constants/frontEndConstants';
 import { defineMessages } from 'react-intl';
 import {debounce} from '../../utilities/debounce';
 import {getAuditOrderLines} from '../../actions/auditActions';
@@ -254,7 +254,7 @@ class AuditTable extends React.Component {
       }
       else{
         var headerHeight=GOR_USER_TABLE_HEADER_HEIGHT,minHeight = GOR_AUDIT_RESOLVE_MIN_HEIGHT;
-        heightRes = screen.height-260
+        heightRes = screen.height + GOR_AUDIT_TABLE_HEIGHT_CORRECTION
       } 
       var filterHeight = screen.height-190;
       var tableRenderer = <div/>
@@ -303,7 +303,7 @@ class AuditTable extends React.Component {
        onColumnResizeEndCallback={this._onColumnResizeEndCallback}
        isColumnResizing={false}
        width={this.props.containerWidth}
-       height={heightRes*0.9}
+       height={heightRes}
        {...this.props}>
        <Column
        columnKey="display_id"

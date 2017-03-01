@@ -106,16 +106,12 @@ class CreateAudit extends React.Component{
       };
     }
     else if(this.skuState === VALID_SKU && this.state.selected.length) { //sku has attributes and doing audit by pdfa
-      formdata={
-              "audit_param_type" : "pdfa", 
-              "audit_param_value" : {
-                  "product_sku": sku,
-                  "pdfa_values": {
-                                  "box_id": this.state.selected //box_id is hardcoded as of now (kerry specific)
-                                  }
-                    }
-                };
-
+      formdata={}
+      formdata["audit_param_type"] = "pdfa";
+      formdata["audit_param_value"] = {}
+      formdata["audit_param_value"]["product_sku"]=sku;
+      formdata["audit_param_value"]["pdfa_values"] = {}
+      formdata["audit_param_value"]["pdfa_values"][this.keys]=this.state.selected;
     } 
     
     else
@@ -163,6 +159,7 @@ class CreateAudit extends React.Component{
         }
     }
     skuAttributeData = {keys:keys, hasAttribute: hasAttribute, isValid:isValid};
+    this.keys = keys[0]; // harcoding since backend support only one entry
     return skuAttributeData;
   }
 
@@ -186,7 +183,7 @@ class CreateAudit extends React.Component{
       let tick=(<div className='gor-tick'/>);  
       let validSkuMessg = <FormattedMessage id="audit.valid.sku" description='text for valid sku' defaultMessage='SKU confirmed'/>;
       let invalidSkuMessg = <FormattedMessage id="audit.invalid.sku" description='text for invalid sku' defaultMessage='Please enter correct SKU number'/>;
-      let validSkuNoAtriMessg = <FormattedMessage id="audit.noAtrributes.sku" description='text for valid sku with no attributed' defaultMessage='SKU confirmed but no batch number found'/>;
+      let validSkuNoAtriMessg = <FormattedMessage id="audit.noAtrributes.sku" description='text for valid sku with no attributed' defaultMessage='SKU confirmed but no Box Id found'/>;
       var processedSkuResponse = this._processSkuAttributes();
       var skuState = this._claculateSkuState(processedSkuResponse);
       var dropdownData = this._searchDropdownEntries(skuState,processedSkuResponse);
@@ -245,7 +242,7 @@ class CreateAudit extends React.Component{
               {skuState===NO_ATTRIBUTE_SKU?"":
                 <div className={"gor-searchDropdown-audit-wrap" + (skuState!= VALID_SKU?" gor-disable-content":"")}>
                   <div className='gor-usr-hdsm'><FormattedMessage id="audit.dropdown.heading" description='Text for dropdown heading' 
-                       defaultMessage='Choose batch number (Optional)'/></div>
+                       defaultMessage='Choose Box Id (Optional)'/></div>
                   <SearchDropdown list={dropdownData} selectedItems={this._selectedAttributes.bind(this)}/>
                 </div>}
             </div>

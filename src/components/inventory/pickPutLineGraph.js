@@ -61,10 +61,7 @@ class PickPutLineGraph extends React.Component{
                     }
       processedData.push(dataObj)
     }
-    
 
-    
-    
     processedData.sort(function(a, b) {
         var x = a["customData"]; var y = b["customData"];
         return ((x < y) ? -1 : ((x > y) ? 1 : 0));

@@ -195,6 +195,7 @@ class MultiLineGraph extends React.Component{
           var textEl = parseInt(mBreak.select("g:nth-child("+dataLen+") text").text());
           let yToday = "3.5em";
           mBreak.select("g:nth-child("+(dataLen)+")").append("text").attr("x","-20").attr("y",yToday).text(config.today)
+
           var monthBreak = mBreak.select("g:nth-child("+(dataLen)+")");
           mBreak.select("g:nth-child("+(dataLen - textEl)+")").append("line").attr("class","month-break").attr("x1","15").attr("x2","15").attr("y1","0").attr("y2","25");
           mBreak.select("g:nth-child("+(dataLen - (textEl-1))+")").append("text").attr("x","-5").attr("y","30").text(config.breakMonth);

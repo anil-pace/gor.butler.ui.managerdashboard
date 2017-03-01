@@ -32,8 +32,10 @@ import * as mockData from '../../mock/mockDBData'
       categoryData[j].colorCode = CATEGORY_COLOR_MAP[j] || CATEGORY_COLOR_MAP[CATEGORY_COLOR_MAP.length -1];
       
     }
+
     
     let parseDtInMS ;
+
     parsedDate = new Date(invObj.date);
     invObj.date = parsedDate.getFullYear() +"-"+(parsedDate.getMonth()+1)+"-"+("0" + parsedDate.getDate()).slice(-2);
     parseDtInMS = new Date(invObj.date).getTime();
@@ -41,6 +43,7 @@ import * as mockData from '../../mock/mockDBData'
     recreatedData[parseDtInMS].otherInfo = invObj;
     dateToday = parsedDate;
     dateTodayState = parseDtInMS
+
     dataObj.xAxisData = Math.random()+"_"+parsedDate.getDate();
     dataObj.yAxisData = invObj.current_stock ;
     dataObj.items_picked = invObj.items_picked;
@@ -63,6 +66,7 @@ import * as mockData from '../../mock/mockDBData'
       invObj.unusedSpace = !emptyData ? (100 - invObj["warehouse_utilization"]) : 100;
       invObj.colorCode = CATEGORY_COLOR_MAP[CATEGORY_COLOR_MAP.length -1];
       categoryData = !emptyData ? invObj["category_data"] : [];
+
       for(let j = 0,len2=categoryData.length ; j < len2 ; j++){
         categoryData[j].colorCode = CATEGORY_COLOR_MAP[j] || CATEGORY_COLOR_MAP[CATEGORY_COLOR_MAP.length -1];
         
@@ -76,13 +80,14 @@ import * as mockData from '../../mock/mockDBData'
         dataObj.items_put = !emptyData ? invObj.items_put : 0;
         dataObj.yAxisData = !emptyData ? (invObj.current_stock || 0) : 0;
         dataObj.date = currentDate;
-        dataObj.customData = histDate ;//(new Date(currentDate)).getTime();
+        dataObj.customData = histDate ;
         recreatedData[histDate].graphInfo =dataObj;
         historyClosingStock+= invObj.current_stock 
     
     }
     noData = historyClosingStock ? false : true;
   }
+
 
 
 

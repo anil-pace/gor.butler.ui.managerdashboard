@@ -143,7 +143,6 @@ class OrderListTable extends React.Component {
     let sixHrDrop = <FormattedMessage id="completedDrop.table.sixHrDrop" description="sixHr dropdown option for orderlist" defaultMessage ="Last 6 hours"/> 
     let twelveHrDrop = <FormattedMessage id="pendingDrop.table.twelveHrDrop" description="twelveHr dropdown option for orderlist" defaultMessage ="Last 12 hours"/> 
     let oneDayDrop = <FormattedMessage id="completedDrop.table.oneDayDrop" description="oneDay dropdown option for orderlist" defaultMessage ="Last 1 day"/> 
-    
     if(this.props.alertNum !== 0) {
 
      headerAlert =  <div className="gorToolHeaderEl alertState"> <div className="table-subtab-alert-icon"/> <div className="gor-inline">{this.props.alertNum} Alerts </div> </div>

@@ -146,6 +146,7 @@ class Histogram extends React.Component{
     }
       monthBreak.append("line").attr("class","month-break").attr("x1","15").attr("x2","15").attr("y1","0").attr("y2","25");
       monthBreak.append("text").attr("x","20").attr("y","30").text(config.breakMonth);
+
     }
         
 

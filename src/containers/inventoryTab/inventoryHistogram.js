@@ -37,7 +37,6 @@ class InventoryHistogram extends React.Component{
       processedData.push(recreatedData[k].graphInfo)
     }
 
-    
    	processedData.sort(function(a, b) {
         var x = a["customData"]; var y = b["customData"];
         return ((x < y) ? -1 : ((x > y) ? 1 : 0));

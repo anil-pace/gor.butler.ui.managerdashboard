@@ -26,6 +26,7 @@ import { FormattedMessage ,FormattedDate} from 'react-intl';
 	render(){
 		
 		var snapShotData = this.props.isPrevDateSelected ? this.props.inventoryDataPrevious : this.props.snapshotData;
+
 		
 		var histogramLegend = {
 			data:[{
