@@ -4161,7 +4161,7 @@ input[type="checkbox"] {
   fill: #949699;
 }
 
-.inventoryHist .bar.last-child {
+.inventoryHist .bar:last-child {
   stroke: #4d5055;
   stroke-width: 0.0625rem;
 }

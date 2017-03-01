@@ -119,7 +119,7 @@ class Histogram extends React.Component{
         .attr("class", "bar")
         .attr("rx","2")
         .attr("ry","2")
-    .attr("x", function(d) { return x(d.xAxisData ); })
+        .attr("x", function(d) { return x(d.xAxisData ); })
         .attr("y", function(d) { return y(d.yAxisData); })
         .attr("width", Math.min(x.rangeBand()-2, 100))
         .attr("height", function(d) { return height - y(d.yAxisData); })
