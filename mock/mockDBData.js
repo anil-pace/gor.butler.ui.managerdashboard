@@ -775,7 +775,7 @@ export const resTypePPSdetail = {
 		"items_put": 400,
 		"items_audited": 300,
 		"pps_mode": "put",
-		"active": "true"
+		"active": true
 	},{
 		"pps_id": 2,
                 	"time_unit": "per_hour",
@@ -783,8 +783,8 @@ export const resTypePPSdetail = {
 		"items_picked": 900,
 		"items_put": 500,
 		"items_audited": 570,
-		"pps_mode": "put",
-		"active": "true"
+		"pps_mode": "pick",
+		"active": true
 	}, {
 		"pps_id": 3,
                 	"time_unit": "per_hour",
@@ -793,7 +793,7 @@ export const resTypePPSdetail = {
 		"items_put": 600,
 		"items_audited": 770,
 		"pps_mode": "put",
-		"active": "true"
+		"active": false
 	}, {
 		"pps_id": 4,
                 	"time_unit": "per_hour",
@@ -801,62 +801,8 @@ export const resTypePPSdetail = {
 		"items_picked": 900,
 		"items_put": 700,
 		"items_audited": 870,
-		"pps_mode": "put",
-		"active": "true"
-	},{
-		"pps_id": 5,
-                	"time_unit": "per_hour",
-		"orders_picked": 500,
-		"items_picked": 800,
-		"items_put": 600,
-		"items_audited": 470,
-		"pps_mode": "put",
-		"active": "true"
-	},{
-		"pps_id": 6,
-                	"time_unit": "per_hour",
-		"orders_picked": 500,
-		"items_picked": 700,
-		"items_put": 700,
-		"items_audited": 370,
-		"pps_mode": "put",
-		"active": "true"
-	},{
-		"pps_id": 7,
-                	"time_unit": "per_hour",
-		"orders_picked": 500,
-		"items_picked": 600,
-		"items_put": 800,
-		"items_audited": 270,
-		"pps_mode": "put",
-		"active": "true"
-	},{
-		"pps_id": 8,
-                	"time_unit": "per_hour",
-		"orders_picked": 500,
-		"items_picked": 300,
-		"items_put": 300,
-		"items_audited": 770,
-		"pps_mode": "pick",
-		"active": "true"
-	},{
-		"pps_id": 9,
-                	"time_unit": "per_hour",
-		"orders_picked": 500,
-		"items_picked": 200, 
-		"items_put": 400,
-		"items_audited": 600,
 		"pps_mode": "audit",
-		"active": "true"
-	},{
-		"pps_id": 10,
-                	"time_unit": "per_hour",
-		"orders_picked": 500,
-		"items_picked": 300,
-		"items_put": 500,
-		"items_audited": 570,
-		"pps_mode": "put",
-		"active": "true"
+		"active": true
 	}
 	],
 	"resource_type": "pps"

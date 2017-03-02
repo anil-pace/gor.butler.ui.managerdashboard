@@ -4,10 +4,13 @@ import {BUTLERS_DATA} from '../../../src/constants/appConstants';
 
 describe('Tests for butler reducer',()=>{
 	it('Handle data parsing',()=>{
-		let action={type:BUTLERS_DATA, data:{aggregate_data:{count_active:10}}};
+		let action={type:BUTLERS_DATA, data:{aggregate_data:{active_butlers:10, inactive_butlers:2}}};
 		expect(butlersInfo(undefined,action)).toEqual(
 			{
-				"butlersData": {count_active:10}
+				"butlersData": {
+					active:10,
+					inactive:2
+				}
 			});
 	});	
 });

@@ -8,7 +8,7 @@ describe('Header  Tests', () => {
     
      // const wrapper = shallow(<Header user={items}/>);
 
-//Just to clear
+//Just to clear text-cases
 	it('Should be 1',()=>{
 		expect(1).toEqual(1);
 	})
