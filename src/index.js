@@ -21,6 +21,7 @@ import configureStore from './store';
 import socketMiddleware from './middleware/socketMiddleware';
 import Routes from './components/Router';
 import {preloadedState} from './utilities/intialData';
+ 
 
 /**
  * Creating a store and passing it to provider
