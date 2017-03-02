@@ -71,26 +71,22 @@ class Header extends React.Component{
 					</div>
 				</div>
 				<div className="gor-border"/>
-				<div className="blockSystem">
-
-					<div className="upperText">
-						<FormattedMessage id="header.description" description="Header description" 
-              			defaultMessage ="Butler Management System"/> 
-					</div>
-					<div className="subText">
-					<FormattedMessage id="header.start_time" description='Start time ' 
-        					defaultMessage='Start time:{time} '
-        					values={{
-						        time: headerInfo.start,
-						    }}/>
-					</div>
-				</div>
 			</div>
 			<div className="blockLeft">
 				<div className="logoWrap">
-					<div>
-						<div className="logo fk-logo"></div>
-					</div>
+					<div className="blockSystem">
+						<div className="upperText">
+							<FormattedMessage id="header.butler" description="Header description" 
+        		      			defaultMessage ="Butler"/> 
+						</div>
+						<div className="subText">
+							<FormattedMessage id="header.start" description='Start time ' 
+        						defaultMessage='Start time:{time} '
+        						values={{
+						        time: headerInfo.start,
+						    }}/>
+						</div>
+					</div>					
 				</div>
 				<div className="gor-border"/>
 				<div className="dropdown" id="profile"  >

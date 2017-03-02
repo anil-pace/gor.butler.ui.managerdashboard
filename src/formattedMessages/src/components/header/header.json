@@ -1,11 +1,11 @@
 [
   {
-    "id": "header.description",
+    "id": "header.butler",
     "description": "Header description",
-    "defaultMessage": "Butler Management System"
+    "defaultMessage": "Butler"
   },
   {
-    "id": "header.start_time",
+    "id": "header.start",
     "description": "Start time",
     "defaultMessage": "Start time:{time}"
   },

@@ -194,7 +194,7 @@ export const SYS_SUB_TAB_ROUTE_MAP={
 }
 
 /*Constant for time on header*/
-export const HEADER_START_TIME = '09:00 AM IST'
+export const HEADER_START_TIME = ' 09:00:15 (IST)'
 
 /*Constants for Audit tab */
 export const SET_AUDIT='SET_AUDIT';
@@ -339,6 +339,7 @@ export const PUT='PUT';
 export const DELETE='DELETE';
 export const APP_JSON='application/json';
 export const GOR_RISK='gor-risk';
+export const GOR_DELAY='gor-breach';
 export const GOR_NONE='gor-none';
 export const GOR_SUCCESS='gor-success';
 export const GOR_PENDING="pending";
