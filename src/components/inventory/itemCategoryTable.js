@@ -15,12 +15,18 @@ class ItemCategoryTable extends React.Component{
 
     }
 
-   
+    shouldComponentUpdate(nextProps, nextState){
+	    if(this.props.hasDataChanged === nextProps.hasDataChanged || !Object.keys(nextProps.snapshotData).length){
+	      return false;
+	    }
+	      return true;
+    
+  	}
    
 	render(){
 		var structure,catData;
 		if(this.props.snapshotData.category_data){
-			catData = (this.props.snapshotData.category_data).slice(0, -1);
+			catData = this.props.snapshotData.category_data;
 			structure = catData.map(function(object, i){
         		var color = object.category_type ? CATEGORY_COLOR_MAP[i] : "";
         		return (
@@ -64,6 +70,6 @@ class ItemCategoryTable extends React.Component{
 };
 ItemCategoryTable.propTypes={
 	snapshotData:React.PropTypes.object,
-	hasDataChanged:React.PropTypes.number
+	hasDataChanged:React.PropTypes.bool
 }
 export default ItemCategoryTable;
