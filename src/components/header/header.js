@@ -8,6 +8,10 @@ import { getHeaderInfo } from '../../actions/headerAction';
 import LogOut from '../../containers/logoutTab'; 
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux'; 
+import HamBurger from '../hamburger/hamburger';
+import PauseOperation from '../../containers/emergencyProcess/pauseOperation'; 
+import ResumeOperation from '../../containers/emergencyProcess/resumeOperation'; 
+
 var dropdownFlag=0;
 var temp;
 
@@ -49,6 +53,14 @@ class Header extends React.Component{
       //.. all what you put in here you will get access in the modal props ;)
     });
    }
+   _pauseOperation() {
+    	modal.add(PauseOperation, {
+      	title: '',
+      	size: 'large', // large, medium or small,
+     	closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+     	hideCloseButton: true
+    	});
+  	}
   _processData(){
   	var headerInfo={};
   	if(this.props.headerInfo && this.props.headerInfo.users.length){
@@ -59,9 +71,28 @@ class Header extends React.Component{
   	headerInfo.start= HEADER_START_TIME
   	return headerInfo
   }
+  _processMenu(headerInfo){
+  	var menuObj = {}, heading, subHeading, optionList;
+  	heading = (<FormattedMessage id="header.butler" description="Header description" 
+        		      			defaultMessage ="Butler"/>);
+  	subHeading = (<FormattedMessage id="header.start" description='Start time ' 
+        						defaultMessage='Start time:{time} '
+        						values={{
+						        time: headerInfo.start,
+						    }}/>);
+  	optionList = [];
+  	optionList.push({optionClass:'gor-pass',  icon:'gor-tick-white', optionText:'Option 2', 
+  			fnButton:'' , buttonText:''});
+  	optionList.push({optionClass:'',  icon:'', optionText:'Enter password to pause the operation', 
+  			fnButton:this._pauseOperation, buttonText:'Pause'});
 
+  	menuObj = {heading:heading, subHeading:subHeading, optionList:optionList,
+  	 menuStyle:'', headingStyle:''};
+  	return menuObj;
+  }
 	render(){
 		var headerInfo = this._processData()
+		var menuDetails = this._processMenu(headerInfo);
 		return (
 		<header className="gorHeader head">
 			<div className="mainBlock">
@@ -73,21 +104,7 @@ class Header extends React.Component{
 				<div className="gor-border"/>
 			</div>
 			<div className="blockLeft">
-				<div className="logoWrap">
-					<div className="blockSystem">
-						<div className="upperText">
-							<FormattedMessage id="header.butler" description="Header description" 
-        		      			defaultMessage ="Butler"/> 
-						</div>
-						<div className="subText">
-							<FormattedMessage id="header.start" description='Start time ' 
-        						defaultMessage='Start time:{time} '
-        						values={{
-						        time: headerInfo.start,
-						    }}/>
-						</div>
-					</div>					
-				</div>
+				<HamBurger data={menuDetails} />
 				<div className="gor-border"/>
 				<div className="dropdown" id="profile"  >
 					<div  className="dropbtn" onClick={this.openDropdown}>

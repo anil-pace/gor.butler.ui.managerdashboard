@@ -1,0 +1,12 @@
+[
+  {
+    "id": "users.delete.cancel",
+    "description": "Text for Cancel button",
+    "defaultMessage": "Cancel"
+  },
+  {
+    "id": "users.delete.confirm",
+    "description": "Text for Delete button",
+    "defaultMessage": "Delete"
+  }
+]

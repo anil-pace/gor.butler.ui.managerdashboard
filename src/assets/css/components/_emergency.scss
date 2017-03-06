@@ -1,5 +1,48 @@
 @import '../abstracts/functions';
-
+.gor-operation-head{
+	border-bottom:1px solid #AAAAAA;
+	padding: 5%;
+	width: 86%;
+	margin: auto;
+	font-size: 20px;
+	text-align: left;
+	.gor-question{
+		vertical-align: middle;
+	}
+}
+.gor-error-lg{
+	font-size: 30px;
+	color: red;
+}
+button:disabled{
+	background: grey;
+}
+.gor-password-field-lg{
+			margin:auto;
+			text-align:left;
+			margin-top:calculateRem(20px);
+			padding:calculateRem(5px);
+			padding-left:calculateRem(15px);
+			width:75%;
+			background-color:#FFFFFF;
+			border-radius:3px;
+			color:#666666;
+}
+.gor-operation-body{
+	padding: 5%;
+	font-size: 15px;
+	color: #AAAAAA;
+}
+.gor-margin-top{
+	margin-top:40px;
+}
+.gor-operation-pause{
+	width:40%;
+	min-height:calculateRem(300px);
+	margin-top: 25vh;
+	text-align:center;
+	border-radius:1%;
+}
 .gor-emergency{
 	width:60%;
 	min-height:calculateRem(500px);

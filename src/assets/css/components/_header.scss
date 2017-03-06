@@ -6,7 +6,6 @@
 .gorHeader {
 	&.head{
 		overflow: hidden;
-    	padding: calculateRem(5px) 0;
     	background:#fff;
 	}
 	.dropbtn{
@@ -26,12 +25,11 @@
 		}
 		&:focus{
 			background-color: #efefef;
-		}
-		
+		}	
 		
 	}
 	.dropdown {
-			
+			padding: calculateRem(5px) 0;
 			display: inline-block;
 			vertical-align: middle;
 		}
@@ -112,6 +110,11 @@
     		vertical-align: middle;
     		padding-right: 10px;
 		}
+		.menuWrap{
+			display: inline-block;
+			line-height: 22px;	
+			width: 50%;	
+		}
 		.upperText {
 			font-family: $gor-font-family;
 			font-size: calculateRem(18px);
@@ -119,14 +122,26 @@
 			font-weight: bold;
 			line-height: 1;  
 			display: inline-block;
+			&.gor-white-text{
+				color:#FFFFFF;		
+			}
 			
+		}
+		.gor-menuIcon{
+			display: inline-block;	
+			width: 15px;
+			float: right;
+			margin-right: 5px;	
+			margin-top: 5px;
 		}
 		.subText {
 			font-family: $gor-font-family;
 			font-size: calculateRem(12px);
-			font-weight: normal;
 			color: #4d5055;
 			padding-top: 2px;
+			&.gor-white-text{
+				color:#FFFFFF;		
+			}
 		}
 		.subTextClient {
 				font-family: $gor-font-family;
@@ -147,8 +162,7 @@
 			.mainBlock {
 				display: inline-block;
 				overflow: hidden;
-				padding: calculateRem(0px) calculateRem(0px);
-				
+    			padding: calculateRem(5px) 0;			
 			}
 
 			.blockSystem {
@@ -162,6 +176,8 @@
 			.blockLeft{
 				display: inline-block;
 				float:right;
+				cursor: pointer;
+				width: 30%;
 			}
 			.upperTextClient {
 				padding:10px calculateRem(20px) calculateRem(6px) calculateRem(0px);

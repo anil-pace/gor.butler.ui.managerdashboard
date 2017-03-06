@@ -675,7 +675,6 @@ body {
 
 .gorHeader.head {
   overflow: hidden;
-  padding: 0.3125rem 0;
   background: #fff;
 }
 
@@ -703,6 +702,7 @@ body {
 }
 
 .gorHeader .dropdown {
+  padding: 0.3125rem 0;
   display: inline-block;
   vertical-align: middle;
 }
@@ -790,6 +790,12 @@ body {
   padding-right: 10px;
 }
 
+.gorHeader .menuWrap {
+  display: inline-block;
+  line-height: 22px;
+  width: 50%;
+}
+
 .gorHeader .upperText {
   font-family: "source sans pro";
   font-size: 1.125rem;
@@ -799,12 +805,27 @@ body {
   display: inline-block;
 }
 
+.gorHeader .upperText.gor-white-text {
+  color: #FFFFFF;
+}
+
+.gorHeader .gor-menuIcon {
+  display: inline-block;
+  width: 15px;
+  float: right;
+  margin-right: 5px;
+  margin-top: 5px;
+}
+
 .gorHeader .subText {
   font-family: "source sans pro";
   font-size: 0.75rem;
-  font-weight: normal;
   color: #4d5055;
   padding-top: 2px;
+}
+
+.gorHeader .subText.gor-white-text {
+  color: #FFFFFF;
 }
 
 .gorHeader .subTextClient {
@@ -825,7 +846,7 @@ body {
 .gorHeader .mainBlock {
   display: inline-block;
   overflow: hidden;
-  padding: 0rem 0rem;
+  padding: 0.3125rem 0;
 }
 
 .gorHeader .blockSystem {
@@ -838,6 +859,8 @@ body {
 .gorHeader .blockLeft {
   display: inline-block;
   float: right;
+  cursor: pointer;
+  width: 30%;
 }
 
 .gorHeader .upperTextClient {
@@ -1336,6 +1359,21 @@ body {
   background: #4D5055;
 }
 
+.field {
+  font-family: 'Source Sans Pro Regular', sans-serif;
+  border: none;
+  font-size: 18px;
+  margin-left: 0.625rem;
+  width: 80%;
+  color: #F36F36;
+  text-shadow: 0px 0px 0px #AAAAAA;
+  -webkit-text-fill-color: transparent;
+}
+
+.field:focus {
+  text-shadow: 0px 0px 0px #666666;
+}
+
 .gor-login-form {
   color: #A6A7A9;
   font-family: 'Source Sans Pro', sans-serif;
@@ -1527,21 +1565,6 @@ body {
 
 .gor-login-form .gor-login-mid .gor-login-field.gor-input-typing:focus {
   color: #333333;
-}
-
-.gor-login-form .gor-login-mid .gor-login-field .field {
-  font-family: 'Source Sans Pro Regular', sans-serif;
-  border: none;
-  font-size: 18px;
-  margin-left: 0.625rem;
-  width: 80%;
-  color: #F36F36;
-  text-shadow: 0px 0px 0px #AAAAAA;
-  -webkit-text-fill-color: transparent;
-}
-
-.gor-login-form .gor-login-mid .gor-login-field .field:focus {
-  text-shadow: 0px 0px 0px #666666;
 }
 
 .gor-login-form .gor-login-mid .gor-login-field .gor-login-user {
@@ -3367,7 +3390,7 @@ input[type="checkbox"] {
 
 .gor-add-btn {
   font-family: 'Source Sans Pro Bold', sans-serif;
-  width: 113px;
+  min-width: 113px;
   height: 35px;
   font-size: 14px;
   background: #f36f36;
@@ -4353,6 +4376,58 @@ input[type="checkbox"] {
   color: #fff;
 }
 
+.gor-operation-head {
+  border-bottom: 1px solid #AAAAAA;
+  padding: 5%;
+  width: 86%;
+  margin: auto;
+  font-size: 20px;
+  text-align: left;
+}
+
+.gor-operation-head .gor-question {
+  vertical-align: middle;
+}
+
+.gor-error-lg {
+  font-size: 30px;
+  color: red;
+}
+
+button:disabled {
+  background: grey;
+}
+
+.gor-password-field-lg {
+  margin: auto;
+  text-align: left;
+  margin-top: 1.25rem;
+  padding: 0.3125rem;
+  padding-left: 0.9375rem;
+  width: 75%;
+  background-color: #FFFFFF;
+  border-radius: 3px;
+  color: #666666;
+}
+
+.gor-operation-body {
+  padding: 5%;
+  font-size: 15px;
+  color: #AAAAAA;
+}
+
+.gor-margin-top {
+  margin-top: 40px;
+}
+
+.gor-operation-pause {
+  width: 40%;
+  min-height: 18.75rem;
+  margin-top: 25vh;
+  text-align: center;
+  border-radius: 1%;
+}
+
 .gor-emergency {
   width: 60%;
   min-height: 31.25rem;
@@ -4933,4 +5008,60 @@ input[type="checkbox"] {
   background-color: #ffffff;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   border: solid 1px #f36f36;
+}
+
+.gor-hamburger-option {
+  padding: 20px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  font-size: 12px;
+  color: #55565a;
+}
+
+.gor-hamburger-option.gor-pass {
+  font-size: 20px;
+  background: #00a54f;
+  color: #ffffff;
+}
+
+.gor-hamburger-option.gor-fail {
+  font-size: 20px;
+  background: #EC1C24;
+  color: #ffffff;
+}
+
+.gor-option-icon {
+  width: 20%;
+}
+
+.gor-option-icon .gor-tick-white {
+  vertical-align: middle;
+}
+
+.gor-option-icon .gor-error-white {
+  vertical-align: middle;
+}
+
+.gor-hamburger-wrapper {
+  position: absolute;
+  background-color: #FFFFFF;
+  min-width: 350px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.gor-btn-small {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  width: 60px;
+  background: #f36f36;
+  padding: 2%;
+  color: #ffffff;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.gor-right {
+  float: right;
 }

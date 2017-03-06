@@ -1,0 +1,47 @@
+.gor-hamburger-option{
+	padding: 20px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    font-size: 12px;
+    color: #55565a;
+    &.gor-pass{
+    	font-size: 20px;
+		background:#00a54f;
+	    color:#ffffff;			
+	}
+	&.gor-fail{
+    	font-size: 20px;
+		background:#EC1C24;
+		color:#ffffff;	
+	}
+}
+.gor-option-icon{
+	width:20%;
+	.gor-tick-white{
+		vertical-align: middle;
+	}
+	.gor-error-white{
+		vertical-align: middle;		
+	}
+}
+.gor-hamburger-wrapper{
+    position: absolute;
+    background-color: #FFFFFF;
+    min-width: 350px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.gor-btn-small{
+    font-family:'Source Sans Pro Bold', sans-serif;
+    width:60px;
+    background:#f36f36;
+    padding: 2%;
+    color:#ffffff;
+    border-radius:3px;
+    cursor:pointer;
+    font-size: 15px;
+}
+.gor-right{
+	float:right;
+}
