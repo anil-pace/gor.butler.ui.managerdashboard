@@ -1,21 +1,44 @@
 @import '../abstracts/functions';
 .gor-operation-head{
-	border-bottom:1px solid #AAAAAA;
-	padding: 5%;
-	width: 86%;
+	border-bottom:1px solid #dddddd;
+	padding-top: 5%;
+	padding-bottom: 5%;
+	width: 90%;
 	margin: auto;
 	font-size: 20px;
 	text-align: left;
-	.gor-question{
+	.gor-question-2{
 		vertical-align: middle;
+		margin-right: 20px;
 	}
 }
+.close{
+	float:right;
+	font-size: 40px;
+	color: #666666;
+	cursor:pointer;	
+}
+.gor-operation-stop{
+	.tab-alert-icon{
+		vertical-align: middle;
+		margin-right: 20px;
+	}
+	height: 230px;
+}
 .gor-error-lg{
-	font-size: 30px;
-	color: red;
+	font-size: 26px;
+	color: #ec1c24;
+}
+.gor-error-md{
+	font-size: 18px;
+	color: #ec1c24;
+}
+.gor-text-sm{
+	font-size: 15px;
+	color: #666666;
 }
 button:disabled{
-	background: grey;
+	opacity: 0.60;
 }
 .gor-password-field-lg{
 			margin:auto;
@@ -27,11 +50,25 @@ button:disabled{
 			background-color:#FFFFFF;
 			border-radius:3px;
 			color:#666666;
+			font-size: 16px;	
+			&.gor-input-typing{
+			 	.gor-login-user{
+				    background-position:-273px -77px;    
+
+				}
+				.gor-login-password{
+       				background-position:-291px -77px;    
+				}
+				color:#666666;
+				&:focus{
+					color:#333333;
+				}			
+			}		
 }
 .gor-operation-body{
 	padding: 5%;
-	font-size: 15px;
-	color: #AAAAAA;
+	font-size: 14px;
+	color: #666666;
 }
 .gor-margin-top{
 	margin-top:40px;

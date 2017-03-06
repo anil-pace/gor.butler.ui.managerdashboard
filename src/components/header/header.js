@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import HamBurger from '../hamburger/hamburger';
 import PauseOperation from '../../containers/emergencyProcess/pauseOperation'; 
 import ResumeOperation from '../../containers/emergencyProcess/resumeOperation'; 
+import OperationStop from '../../containers/emergencyProcess/OperationStop'; 
 
 var dropdownFlag=0;
 var temp;
@@ -59,6 +60,22 @@ class Header extends React.Component{
       	size: 'large', // large, medium or small,
      	closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
      	hideCloseButton: true
+    	});
+  	}
+   _resumeOperation() {
+    	modal.add(ResumeOperation, {
+      	title: '',
+      	size: 'large', // large, medium or small,
+     	closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+     	hideCloseButton: true
+    	});
+  	}
+   _StopOperation() {
+    	modal.add(OperationStop, {
+      	title: '',
+      	size: 'large', // large, medium or small,
+     	closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+     	hideCloseButton: false
     	});
   	}
   _processData(){

@@ -163,7 +163,7 @@ body {
 .header-offline-icon,
 .user-icon,
 .overview-tile-ontime-icon,
-.statusOl, .statusAl, .iStock, .iAudit, .iPick, .gor-login-user, .gor-login-password, .gor-login-error, .gor-tick, .gor-question, .gor-tick-white, .gor-remove-white, .gor-error-white, .gor-login-user-error, .gor-login-password-error {
+.statusOl, .statusAl, .iStock, .iAudit, .iPick, .gor-login-user, .gor-login-password, .gor-login-error, .gor-tick, .gor-question, .gor-tick-white, .gor-remove-white, .gor-error-white, .gor-login-user-error, .gor-login-password-error, .gor-question-2 {
   background-image: url(images/icons.svg);
 }
 
@@ -192,6 +192,7 @@ body {
   width: 16px;
   height: 16px;
   display: inline-block;
+  vertical-align: middle;
 }
 
 .gor-login-password-error {
@@ -491,6 +492,14 @@ body {
   display: inline-block;
   vertical-align: bottom;
   margin-right: 5px;
+}
+
+.gor-question-2 {
+  background-position: -564px -1px;
+  width: 46px;
+  height: 50px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 /*  SECTIONS  */
@@ -798,8 +807,8 @@ body {
 
 .gorHeader .upperText {
   font-family: "source sans pro";
-  font-size: 1.125rem;
-  color: #4d5055;
+  font-size: 18px;
+  color: #3c3f43;
   font-weight: bold;
   line-height: 1;
   display: inline-block;
@@ -1374,6 +1383,19 @@ body {
   text-shadow: 0px 0px 0px #666666;
 }
 
+.gor-login-usr-error {
+  text-align: left;
+  color: #EC1C24;
+  font-size: 18px;
+  margin: auto;
+  margin-top: 10px;
+  width: 75%;
+}
+
+.gor-login-usr-error.gor-sm-string {
+  font-size: 12px;
+}
+
 .gor-login-form {
   color: #A6A7A9;
   font-family: 'Source Sans Pro', sans-serif;
@@ -1581,15 +1603,6 @@ body {
   font-size: 18px;
   text-align: center;
   margin-top: 10px;
-}
-
-.gor-login-form .gor-login-mid .gor-login-usr-error {
-  text-align: left;
-  color: #EC1C24;
-  font-size: 18px;
-  margin: auto;
-  margin-top: 10px;
-  width: 75%;
 }
 
 .gor-login-form .gor-login-mid .gor-login-btn {
@@ -4377,25 +4390,52 @@ input[type="checkbox"] {
 }
 
 .gor-operation-head {
-  border-bottom: 1px solid #AAAAAA;
-  padding: 5%;
-  width: 86%;
+  border-bottom: 1px solid #dddddd;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  width: 90%;
   margin: auto;
   font-size: 20px;
   text-align: left;
 }
 
-.gor-operation-head .gor-question {
+.gor-operation-head .gor-question-2 {
   vertical-align: middle;
+  margin-right: 20px;
+}
+
+.close {
+  float: right;
+  font-size: 40px;
+  color: #666666;
+}
+
+.gor-operation-stop {
+  height: 230px;
+}
+
+.gor-operation-stop .tab-alert-icon {
+  vertical-align: middle;
+  margin-right: 20px;
 }
 
 .gor-error-lg {
-  font-size: 30px;
-  color: red;
+  font-size: 26px;
+  color: #ec1c24;
+}
+
+.gor-error-md {
+  font-size: 18px;
+  color: #ec1c24;
+}
+
+.gor-text-sm {
+  font-size: 15px;
+  color: #666666;
 }
 
 button:disabled {
-  background: grey;
+  opacity: 0.60;
 }
 
 .gor-password-field-lg {
@@ -4408,12 +4448,29 @@ button:disabled {
   background-color: #FFFFFF;
   border-radius: 3px;
   color: #666666;
+  font-size: 16px;
+}
+
+.gor-password-field-lg.gor-input-typing {
+  color: #666666;
+}
+
+.gor-password-field-lg.gor-input-typing .gor-login-user {
+  background-position: -273px -77px;
+}
+
+.gor-password-field-lg.gor-input-typing .gor-login-password {
+  background-position: -291px -77px;
+}
+
+.gor-password-field-lg.gor-input-typing:focus {
+  color: #333333;
 }
 
 .gor-operation-body {
   padding: 5%;
-  font-size: 15px;
-  color: #AAAAAA;
+  font-size: 14px;
+  color: #666666;
 }
 
 .gor-margin-top {
@@ -5016,17 +5073,17 @@ button:disabled {
   display: block;
   text-align: left;
   font-size: 12px;
-  color: #55565a;
+  color: #666666;
 }
 
 .gor-hamburger-option.gor-pass {
-  font-size: 20px;
+  font-size: 18px;
   background: #00a54f;
   color: #ffffff;
 }
 
 .gor-hamburger-option.gor-fail {
-  font-size: 20px;
+  font-size: 18px;
   background: #EC1C24;
   color: #ffffff;
 }
@@ -5049,6 +5106,7 @@ button:disabled {
   min-width: 350px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
+  font-size: 14px;
 }
 
 .gor-btn-small {

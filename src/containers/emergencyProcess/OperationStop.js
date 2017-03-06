@@ -37,20 +37,20 @@ class OperationStop extends React.Component{
   {
       return (
         <div>
-          <div className='gor-delete gor-modal-content'>
-            <div className='gor-delete-text'>
-              <div className='gor-question'></div>
+          <div className='gor-delete gor-modal-content gor-operation-stop'>
+            <span className="close" onClick={this.removeThisModal.bind(this)}>×</span>
+            <div className='gor-delete-text'>  
+              <div className='tab-alert-icon'></div>
               <div className='gor-delete-line'>
-               <div className='gor-delete-query gor-error-lg'>Operation Stopped
+                <div className='gor-delete-query gor-error-lg'>Operation Stopped
               </div>
+              </div>
+              <div className='gor-margin-top'>
+                <div className='gor-error-md'>Butler operation has been paused from the management dashboard</div>
+                <span className='gor-text-sm'>To resume butler operation in the warehouse, you will be required to go 
+                through a safety checklist</span>
               </div>
            </div>
-              <div className='gor-delete-bottom'>
-                <button className='gor-cancel-btn' onClick={this.removeThisModal.bind(this)}><FormattedMessage id="users.delete.cancel" description='Text for Cancel button' 
-            defaultMessage='Cancel'/></button>
-                <button className='gor-delete-btn' onClick={this.userDelete.bind(this)}><FormattedMessage id="users.delete.confirm" description='Text for Delete button' 
-            defaultMessage='Delete'/></button>
-              </div> 
           </div>
         </div>
       );
