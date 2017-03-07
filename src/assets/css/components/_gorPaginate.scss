@@ -1,7 +1,6 @@
 @import '../abstracts/functions';
 
 .gor-paginate-wrap {
-	width: calculateRem(370px);
     padding-top: calculateRem(10px);
     padding-bottom: calculateRem(10px);
 	.gor-paginate-input-box-wrap {
@@ -64,6 +63,8 @@
 	    	border-color: #4D5055;
 	    	color: #4D5055;
 	    	cursor:pointer;
+	    	border-left-style: solid;
+    		border-left-width: 1px;
 		}
 		.gor-paginate-left-btn {
 			display: inline-block;
@@ -80,6 +81,7 @@
 	    	border-color: #4D5055;
 	    	color: #4D5055;
 	    	cursor:pointer;
+	    	border-right: solid 1px;
 		}
 		.gor-paginate-middle-left-btn {
 			display: inline-block;
@@ -94,6 +96,7 @@
 	    	border-color: #4D5055;
 	    	color: #4D5055;
 	    	cursor:pointer;
+	    	border-right: solid 1px;
 		}
 
 		.gor-paginate-btn-disable {

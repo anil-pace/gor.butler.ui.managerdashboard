@@ -75,9 +75,19 @@
     "defaultMessage": "Refresh Data"
   },
   {
-    "id": "order.table.dropdown.text",
-    "description": "Sub text for order list dropdown",
-    "defaultMessage": "Show"
+    "id": "order.table.filterLabel",
+    "description": "button label for filter",
+    "defaultMessage": "Filter"
+  },
+  {
+    "id": "orderlist.filter.search.bar",
+    "description": "total order for filter search bar",
+    "defaultMessage": "{totalOrder} Orders found"
+  },
+  {
+    "id": "orderlist.filter.search.bar.showall",
+    "description": "button label for show all",
+    "defaultMessage": "Show all orders"
   },
   {
     "id": "orderlist.order.headingText",
@@ -100,6 +110,11 @@
     "defaultMessage": "PICK BY"
   },
   {
+    "id": "orderlist.pendingOrders",
+    "description": "pendingOrders header ordertable",
+    "defaultMessage": "{pendingOrders} orders pending"
+  },
+  {
     "id": "orderlist.table.operatingMode",
     "description": "recievedTime for Orders",
     "defaultMessage": "RECIEVED TIME"
@@ -110,8 +125,18 @@
     "defaultMessage": "COMPLETED"
   },
   {
+    "id": "orderlist.totalCompletedOrder",
+    "description": "totalCompletedOrder header ordertable",
+    "defaultMessage": "Avg {totalCompletedOrder} orders/hr"
+  },
+  {
     "id": "orderlist.table.orderLine",
     "description": "orderLine for orderlist",
     "defaultMessage": "ORDER LINE"
+  },
+  {
+    "id": "orderlist.itemsPerOrder",
+    "description": "itemsPerOrder header ordertable",
+    "defaultMessage": "Avg {itemsPerOrder} items/hr"
   }
 ]

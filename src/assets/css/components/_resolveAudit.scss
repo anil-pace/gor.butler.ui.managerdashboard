@@ -47,7 +47,7 @@
 }
 
 .gor-auditResolve-btn-wrap {
-    padding-left: 70%;
+    padding-left: 69%;
     padding-top: calculateRem(20px);
 }
 
@@ -60,5 +60,14 @@
     display: inline-block;
     padding-left: calculateRem(25px);
     vertical-align: middle;
+}
+
+.gor-auditresolve-pdfa-slot-header {
+   height: 36px;
+    padding-top: 20px;
+    padding-left: 10px;
+    border: solid 1px #dedede;
+    border-top: 0px;
+    width: 1088px;
 }
 

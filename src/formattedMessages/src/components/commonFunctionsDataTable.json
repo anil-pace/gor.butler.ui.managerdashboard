@@ -10,6 +10,11 @@
     "defaultMessage": "Delete"
   },
   {
+    "id": "commonDataTable.attributesType.heading",
+    "description": "heading for attribute",
+    "defaultMessage": "Box Id"
+  },
+  {
     "id": "audit.resolveUnresolve",
     "description": "resolveUnresolve issue for audit table",
     "defaultMessage": "{resolvedCount} issues, {unresolvedCount} unresolved"

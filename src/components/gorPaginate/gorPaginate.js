@@ -93,16 +93,16 @@ class GorPaginate extends React.Component{
               </div>
               <div className="gor-button-wrap">
                 <div className={currentPage<=1?"gor-paginate-left-btn gor-paginate-btn-disable":"gor-paginate-left-btn"} onClick={this._firstPage.bind(this)}> 
-                  <span>{paginateButton.firstPg}</span> 
+                  <span className="gor-pagination-first"/>
                 </div>
                 <div className={currentPage<=1?"gor-paginate-middle-left-btn gor-paginate-btn-disable":"gor-paginate-middle-left-btn"} onClick={this._decPage.bind(this)}> 
-                  <span>{paginateButton.prevPg}</span> 
+                  <span className="gor-pagination-previous"/> 
                 </div>
                 <div className={currentPage>=(totalPage)?"gor-paginate-middle-right-btn gor-paginate-btn-disable":"gor-paginate-middle-right-btn"} onClick={this._incPage.bind(this)}> 
-                  <span>{paginateButton.nextPg}</span> 
+                  <span className="gor-pagination-next"/>
                 </div>
                 <div className={currentPage>=(totalPage)?"gor-paginate-right-btn gor-paginate-btn-disable":"gor-paginate-right-btn"} onClick={this._lastPage.bind(this)}> 
-                  <span>{paginateButton.lastPg}</span> 
+                  <span className="gor-pagination-last"/> 
                 </div>
               </div>
           </form>  

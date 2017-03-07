@@ -14,7 +14,7 @@ import {prevTabSelected} from './actions/tabSelectAction';
 import { connect } from 'react-redux'; 
 import TopNotifications from './components/topnotify/topnotify';
 import { notifyInfo} from './actions/validationActions';
-import Perf from 'react-addons-perf'
+import Perf from 'react-addons-perf';
 
 console.log(Perf);
   class App extends React.Component{ 
@@ -30,12 +30,13 @@ console.log(Perf);
   
   componentWillMount(){
     window.Perf = Perf;
+    //Perf.start();
     this.context.router.push("/login");
 
   }
 
   componentDidMount(){
-   // Perf.start();
+   
     var timeOffset =  sessionStorage.getItem("timeOffset");
     if(!timeOffset){
       let timeOffsetParams={
