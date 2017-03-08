@@ -4097,7 +4097,7 @@ input[type="checkbox"] {
   width: 70%;
   display: inline-block;
   vertical-align: middle;
-  height: 70vh;
+  height: auto;
 }
 
 .gorInventory .legendCnt {
@@ -4199,6 +4199,16 @@ input[type="checkbox"] {
 
 .inventoryHist .bar {
   cursor: pointer;
+  opacity: 0.9;
+}
+
+.inventoryHist .bar.sel {
+  fill: #949699;
+}
+
+.inventoryHist .bar:last-child {
+  stroke: #4d5055;
+  stroke-width: 0.0625rem;
 }
 
 .inventoryHist .axis--y path.domain {
@@ -4221,11 +4231,6 @@ input[type="checkbox"] {
 
 .inventoryHist .axis--x line.month-break {
   display: block;
-}
-
-.inventoryHist .bar {
-  fill: #498BD8;
-  opacity: 1;
 }
 
 .inventoryHist .tick text {
@@ -4324,18 +4329,30 @@ input[type="checkbox"] {
   stroke: #CCCCCC;
 }
 
+.lineGraph .grid circle {
+  cursor: pointer;
+}
+
+.lineGraph .grid circle.pick {
+  fill: #1976D2;
+}
+
+.lineGraph .grid circle.put {
+  fill: #F5A623;
+}
+
 .lineGraph .grid .tick:nth-child(1) line {
   stroke: #666666;
   stroke-width: 2;
 }
 
 .lineGraph .grid path.line {
-  stroke-width: 2;
-  stroke: #7ED321;
+  stroke-width: 3.5;
+  stroke: #F5A623;
 }
 
-.lineGraph .grid path.line:nth-child(1) {
-  stroke: #D0021B;
+.lineGraph .grid path.line.pick {
+  stroke: #1976D2;
 }
 
 .lineGraph circle.line {

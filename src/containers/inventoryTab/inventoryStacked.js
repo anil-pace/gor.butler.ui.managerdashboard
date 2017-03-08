@@ -26,7 +26,7 @@ class InventoryStacked extends React.Component{
 
 InventoryStacked.propTypes={
   snapshotData:React.PropTypes.object,
-  hasDataChanged:React.PropTypes.number
+  hasDataChanged:React.PropTypes.bool
 }
 
 

@@ -1,17 +1,9 @@
  jest.unmock('../../../src/actions/loginAction');
 import * as actions from '../../../src/actions/loginAction';
-import { LOGIN_REQUEST, LOGIN_REDIRECT, LOGIN_SUCCESS,LOGIN_FAILURE, AJAX_CALL} from '../../../src/constants/appConstants';
+import { LOGIN_REQUEST, LOGIN_REDIRECT, LOGIN_SUCCESS,LOGIN_FAILURE, AJAX_CALL,SET_USERNAME}
+ from '../../../src/constants/frontEndConstants';
 
 describe ('Login actions',()=>{
-	it('Action for login request',()=>{
-		const data='Sample form';
-		const expectedLogin={
-		 type:LOGIN_REQUEST,
-		 data
-		};
-		expect(actions.loginRequest(data)).toEqual(expectedLogin);
-
-	});
 	it('Action for succesfull login authentication',()=>{
 		const data={auth_token:'sdasdasd'};
 		const expectedLogin={
@@ -19,7 +11,6 @@ describe ('Login actions',()=>{
 		 data
 		};
 		expect(actions.receiveAuthData(data)).toEqual(expectedLogin);
-
 	});
 	it('Action for AJAX CALL',()=>{
 		const params='sdasdasd';
@@ -28,5 +19,13 @@ describe ('Login actions',()=>{
 		 params
 		};
 		expect(actions.authLoginData(params)).toEqual(expectedLogin);
+	});
+	it('Action for setting username',()=>{
+		const data='sunahai';
+		const expectedLogin={
+		 type:SET_USERNAME,
+		 data
+		};
+		expect(actions.setUsername(data)).toEqual(expectedLogin);
 	});
 });
