@@ -36,7 +36,7 @@ class OrderListTable extends React.Component {
     var columnWidth= (this.props.containerWidth/this.props.itemNumber)
     this.state = {
       sortedDataList: this._dataList,
-      colSortDirs: {},
+      colSortDirs: {status:"DESC"},
       columnWidths: {
         id: columnWidth,
         status: columnWidth,
@@ -65,7 +65,7 @@ class OrderListTable extends React.Component {
     for (var index = 0; index < size; index++) {
       this._defaultSortIndexes.push(index);
     }
-    var columnWidth= (nextProps.containerWidth/nextProps.itemNumber), sortIndex = {}
+    var columnWidth= (nextProps.containerWidth/nextProps.itemNumber), sortIndex = {status:"DESC"};
     if(this.props.currentHeaderOrder.colSortDirs) {
       sortIndex = this.props.currentHeaderOrder.colSortDirs;
     }
@@ -233,7 +233,8 @@ class OrderListTable extends React.Component {
         <Column
           columnKey="status"
           header={
-            <div className="gor-table-header">
+            <SortHeaderCell onSortChange={this.backendSort} sortDir={colSortDirs.status}>
+            <div className="gorToolHeaderEl">
               <div>
                  <FormattedMessage id="orderList.table.status" description="Status for orders" 
               defaultMessage ="STATUS"/> 
@@ -244,6 +245,7 @@ class OrderListTable extends React.Component {
                 </div>
               </div>
             </div>
+             </SortHeaderCell>
           }
           cell={<StatusCell data={sortedDataList} statusKey="statusClass" ></StatusCell>}
           fixed={true}

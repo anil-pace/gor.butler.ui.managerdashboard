@@ -1789,3 +1789,26 @@ font-family: "source sans pro";
   font-weight: bold;
   padding-bottom: 15px;
 }
+
+.gor-audit-filter-create-wrap {
+  display: inline-block;
+    float: right;
+    margin-top: 16px;
+    margin-right: 40px;
+}
+
+
+.gor-audit-create-btn {
+  height: 35px;
+  border-radius: 3px;
+  background-color: #4d5055;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  font-family: "source sans pro";
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  color: #ffffff;
+  padding-left: 14px;
+    padding-right: 14px;
+    vertical-align: sub;
+}

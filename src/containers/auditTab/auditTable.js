@@ -31,7 +31,6 @@ class AuditTable extends React.Component {
   constructor(props) {
     super(props);
     this.tableState(this.props,this);
-    this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
     this.backendSort = this.backendSort.bind(this);
   }
@@ -57,7 +56,7 @@ class AuditTable extends React.Component {
       parentEl= el.parentNode;
       while(parentEl){
         if(parentEl.className === "fixedDataTableRowLayout_rowWrapper"){
-          parentEl.style.zIndex = "30";
+          parentEl.style.zIndex = "300";
           if(index === totalRowCount && totalRowCount!== 0){
             if(elClassName !== "Dropdown-control"){
               siblingEl = el.parentNode.nextSibling;
@@ -86,7 +85,7 @@ class AuditTable extends React.Component {
     current._dataList = new tableRenderer(items ? items.length : 0);
     current._defaultSortIndexes = [];
     current._dataList.newData=items;
-    var size = current._dataList.getSize(),sortIndex={};
+    var size = current._dataList.getSize(),sortIndex={status:"DESC"};
     for (var index = 0; index < size; index++) {
       current._defaultSortIndexes.push(index);
     }
@@ -116,19 +115,7 @@ class AuditTable extends React.Component {
         }
       }));
     }
-    _onFilterChange(e) {
-      var data={"type":"searchOrder", "captureValue":"", "selected":1 },debounceFilter;
-      if(e.target && (e.target.value || e.target.value === "")) {
-        data["captureValue"] = e.target.value;
-        this.props.setAuditFilter(e.target.value);
-      }
-      else {
-        data["captureValue"] = e;
-      }
-      this.props.setAuditFilter(e.target.value)
-      debounceFilter = debounce(this.props.refreshData, DEBOUNCE_TIMER);
-      debounceFilter(data);
-    }
+    
 
 
  
@@ -229,6 +216,10 @@ class AuditTable extends React.Component {
     this.props.setFilter(newState)
    }
 
+   _showAllAudit() {
+    var clearFilter = []
+    this.props.refreshData(clearFilter);
+   }
     render() {
       var {sortedDataList, colSortDirs,columnWidths} = this.state, heightRes;
       var auditCompleted = this.props.auditState.auditCompleted;
@@ -245,7 +236,7 @@ class AuditTable extends React.Component {
       { value: 'duplicateTask', label: duplicateTask },
       { value: 'deleteRecord', label: deleteRecord }
       ];
-      var noFilter = false;
+      var noFilter = true;
       var noData = <div/>;
      if(rowsCount === 0 || rowsCount === undefined || rowsCount === null) {
         noData =  <div className="gor-no-data"> <FormattedMessage id="audit.table.noData" description="No data message for audit table" 
@@ -254,13 +245,13 @@ class AuditTable extends React.Component {
       }
       else{
         var headerHeight=GOR_USER_TABLE_HEADER_HEIGHT,minHeight = GOR_AUDIT_RESOLVE_MIN_HEIGHT;
-        heightRes = screen.height + GOR_AUDIT_TABLE_HEIGHT_CORRECTION
+        heightRes = GOR_USER_TABLE_HEADER_HEIGHT*rowsCount + GOR_AUDIT_TABLE_HEIGHT_CORRECTION
       } 
       var filterHeight = screen.height-190;
       var tableRenderer = <div/>
        tableRenderer = <div className="gorTableMainContainer">
        <div className="gor-filter-wrap" style={{'display':this.props.showFilter?'block':'none', height:filterHeight}}> 
-         <AuditFilter/>  
+         <AuditFilter refreshOption={this.props.refreshData}/>  
        </div>
        <div className="gorToolBar">
        <div className="gorToolBarWrap">
@@ -268,33 +259,33 @@ class AuditTable extends React.Component {
        <FormattedMessage id="audit.table.heading" description="Heading for audit table" 
        defaultMessage ="Audit Tasks"/>
        </div>
-       {noFilter?
-       <div className="gor-button-wrap">
-        <button className="gor-auditCreate-btn" onClick={this._setFilter.bind(this)} >
-          <FormattedMessage id="audit.table.filterLabel" description="button label for filter" 
-          defaultMessage ="Filter"/>
-         </button>
+       
        </div>
-      :""}
+       <div className="gor-audit-filter-create-wrap">
        <div className="gor-button-wrap">
-       <button className="gor-auditCreate-btn" onClick={this.createAudit.bind(this)} >
-
+         <button className="gor-audit-create-btn" onClick={this.createAudit.bind(this)} >
+         <div className="gor-filter-add-token"/>
        <FormattedMessage id="audit.table.buttonLable" description="button label for audit create" 
        defaultMessage ="Create New Task"/>
        </button>
        </div>
-       </div>
-       <div className="filterWrapper">  
-       <div className="gorFilter">
-       <div className="searchbox-magnifying-glass-icon"/>
-       <input className="gorInputFilter"
-       onChange={this._onFilterChange}
-       placeholder={this.props.intlMessg["table.filter.placeholder"]}>
-       </input>
+       <div className="gor-button-wrap">
+       <button className={this.props.isFilterApplied?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
+       <div className="gor-manage-task"/>
+          <FormattedMessage id="audit.table.filterLabel" description="button label for filter" 
+          defaultMessage ="Filter"/>
+         </button>
        </div>
        </div>
        </div>
-
+       {this.props.isFilterApplied && !this.props.responseFlag?<div className="gor-filter-search-result-bar">
+                                       <FormattedMessage id="orderlist.filter.search.bar" description='total order for filter search bar' 
+                                                          defaultMessage='{totalOrder} Orders found' 
+                                                          values={{totalOrder: rowsCount?rowsCount:'0'}}/>
+                                                          <span className="gor-filter-search-show-all" onClick={this._showAllAudit.bind(this)}>
+                                                            <FormattedMessage id="orderlist.filter.search.bar.showall" description="button label for show all" defaultMessage ="Show all orders"/> 
+                                                          </span>
+                                   </div>:""}
        <Table 
        rowHeight={50}
        rowsCount={rowsCount}
@@ -352,7 +343,8 @@ class AuditTable extends React.Component {
       <Column
       columnKey="status"
       header={
-       <div className="gor-table-header">
+        <SortHeaderCell onSortChange={this.backendSort}
+        sortDir={colSortDirs.status}>
          <div className="gorToolHeaderEl"> 
 
         <FormattedMessage id="audit.table.STATUS" description="STATUS for audit" 
@@ -366,7 +358,7 @@ class AuditTable extends React.Component {
               </div>
           </div>}
         </div>
-        </div>
+        </SortHeaderCell>
       }
       cell={<StatusCell data={sortedDataList} statusKey="statusClass" ></StatusCell>}
       fixed={true}

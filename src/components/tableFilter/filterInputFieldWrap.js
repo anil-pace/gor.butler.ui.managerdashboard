@@ -8,12 +8,12 @@ class FilterInputFieldWrap extends React.Component{
     	super(props);
     }
     _textSubmit(e) {
-    	this.props.handleInputText(this.pageNum.value,this.props.inputText);
+    	this.props.handleInputText(this.pageNum.value,this.props.inputText.value);
   	}
     _processInputField() {
         var totalInput = this.props.inputText, inputFieldWrap =[];
         for (var i = totalInput.length - 1; i >= 0; i--) {
-            var inputValue = this.props.inputValue[totalInput[i]];
+            var inputValue = this.props.inputValue[totalInput[i].value];
             var inputField = <FilterInputField inputText={totalInput[i]} handleInputText={this.props.handleInputText} inputValue={inputValue}/>;
             inputFieldWrap.push(inputField)
         }
@@ -27,6 +27,6 @@ class FilterInputFieldWrap extends React.Component{
             </div>
 		);
 	}
-};
+}; 
 
 export default FilterInputFieldWrap ;

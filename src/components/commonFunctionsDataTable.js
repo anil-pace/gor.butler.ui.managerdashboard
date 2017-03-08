@@ -24,7 +24,9 @@ export function filterIndex(e,_dataList,filterField) {
   }
 
      var size = _dataList.getSize(), data = [];
+     var allIndex = Array.from(Array(size).keys());
      var filteredIndexes = [];
+
     for (var index = 0; index < size; index++) {
       var getData = _dataList.getObjectAt(index);
       for (var i = filterField.length - 1; i >= 0; i--) {
@@ -35,9 +37,8 @@ export function filterIndex(e,_dataList,filterField) {
           break;
         }
       }
-      
-      
     }
+  
     return filteredIndexes;
 }
 
@@ -203,9 +204,11 @@ export const StatusCell = ({rowIndex, data, columnKey,statusKey, ...props}) => (
 export const ResolveCell = ({rowIndex, data, columnKey, checkStatus, screenId, ...props}) => (
   <Cell {...props}>
     <div style={(screenId===VIEW_AUDIT_ISSUES || data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED)?{opacity: 0.5}:{opacity: 1}}>
-      <input type="radio"  name={data.getObjectAt(rowIndex)["auditLineId"]} disabled={data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED?true:false} onChange={checkStatus.bind(this,rowIndex,AUDIT_APPROVED,data.getObjectAt(rowIndex)["auditLineId"])} />
+      <input type="radio"  name={data.getObjectAt(rowIndex)["auditLineId"]} disabled={data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED?true:false} 
+             onChange={checkStatus.bind(this,rowIndex,AUDIT_APPROVED,data.getObjectAt(rowIndex)["auditLineId"])} />
         <FormattedMessage id="commonDataTable.resolveAudit.approve" description='resolve button' defaultMessage='Approve '/>
-      <input type="radio"  name={data.getObjectAt(rowIndex)["auditLineId"]} disabled={data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED?true:false} onChange={checkStatus.bind(this,rowIndex,AUDIT_REJECTED,data.getObjectAt(rowIndex)["auditLineId"])} />
+      <input type="radio"  name={data.getObjectAt(rowIndex)["auditLineId"]} disabled={data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED?true:false} 
+             onChange={checkStatus.bind(this,rowIndex,AUDIT_REJECTED,data.getObjectAt(rowIndex)["auditLineId"])} />
         <FormattedMessage id="commonDataTable.resolveAudit.reject" description='resolve button' defaultMessage='Reject'/>
     </div>
   </Cell>

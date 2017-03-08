@@ -123,6 +123,10 @@ export const AS00A = (<FormattedMessage id="notify.start.audit.success" descript
       defaultMessage="PPS assigned succeddfully. Audit task started"/>);
 export const AS003 = (<FormattedMessage id="notify.delete.audit.processed" description='Text for already processed audit' 
       defaultMessage="Audit already processed. Cannot delete"/>);
+export const AE007 = (<FormattedMessage id="notify.Location.audit.pending" description='Text for Location of audit pending for approval' 
+      defaultMessage="Location of audit pending for approval"/>);
+export const AE008 = (<FormattedMessage id="notify.Location.currently.processed" description='Text for Location of audit currently being processed' 
+      defaultMessage="Location of audit currently being processed"/>);
 
 
 //Codes for Ajax Parser

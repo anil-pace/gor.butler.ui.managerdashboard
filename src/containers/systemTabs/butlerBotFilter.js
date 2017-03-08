@@ -7,12 +7,12 @@ import { connect } from 'react-redux';
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
-class AuditFilter extends React.Component{
+class ButlerBotFilter extends React.Component{
 	constructor(props) 
 	{
     	super(props);
-        this.state = {tokenSelected: {"AUDIT TYPE":["all"], "STATUS":["all"]}, searchQuery: {},
-                      defaultToken: {"AUDIT TYPE":["all"], "STATUS":["all"]}}; 
+        this.state = {tokenSelected: {"STATUS":["any"], "MODE":["any"]}, searchQuery: {},
+                      defaultToken: {"STATUS":["any"], "MODE":["any"]}}; 
     }
 
     _closeFilter() {
@@ -21,29 +21,31 @@ class AuditFilter extends React.Component{
     }	
 
     _processAuditSearchField(){
-        const temp = [{value:"AUDIT TASK ID", label:<FormattedMessage id="audit.inputField.id" defaultMessage ="AUDIT TASK ID"/>}, 
-                    {value:"SPECIFIC SKU ID", label:<FormattedMessage id="audit.inputField.sku" defaultMessage ="SPECIFIC SKU ID"/>},
-                    {value:"SPECIFIC LOCATION ID", label:<FormattedMessage id="audit.inputField.location" defaultMessage ="SPECIFIC LOCATION ID"/>}];
+        const temp = [{value:"BOT ID", label:<FormattedMessage id="butletbot.inputField.id" defaultMessage ="BOT ID"/>}, 
+                    {value:"SPECIFIC LOCATION/ZONE", label:<FormattedMessage id="butletbot.inputField.sku" defaultMessage ="SPECIFIC LOCATION/ZONE"/>}];
         var inputValue = this.state.searchQuery;
         var inputField = <FilterInputFieldWrap inputText={temp} handleInputText={this._handleInputQuery.bind(this)} inputValue={inputValue}/>
         return inputField;           
     }
  
     _processFilterToken() {
-        var tokenFieldC1 = {value:"AUDIT TYPE", label:<FormattedMessage id="audit.tokenfield.typeAudit" defaultMessage ="AUDIT TYPE"/>};
-        var tokenFieldC2 = {value:"STATUS", label:<FormattedMessage id="audit.tokenfield.STATUS" defaultMessage ="STATUS"/>}; 
+        var tokenFieldC1 = {value:"STATUS", label:<FormattedMessage id="butletbot.tokenfield.STATUS" defaultMessage ="STATUS"/>};
+        var tokenFieldC2 = {value:"MODE", label:<FormattedMessage id="butletbot.tokenfield.MODE" defaultMessage ="MODE"/>}; 
         const labelC1 = [
-                    { value: 'all', label:<FormattedMessage id="audit.token1.all" defaultMessage ="Any"/> },
-                    { value: 'sku', label:<FormattedMessage id="audit.token1.sku" defaultMessage ="SKU"/> },
-                    { value: 'location', label:<FormattedMessage id="audit.token1.location" defaultMessage ="Location"/> }
+                    { value: 'any', label:<FormattedMessage id="butletbot.token1.all" defaultMessage ="Any"/> },
+                    { value: 'stopped', label:<FormattedMessage id="butletbot.token1.stopped" defaultMessage ="Stopped"/> },
+                    { value: 'error', label:<FormattedMessage id="butletbot.token1.error" defaultMessage ="Error"/> },
+                    { value: 'warning', label:<FormattedMessage id="butletbot.token1.warning" defaultMessage ="Warning"/> },
+                    { value: 'online', label:<FormattedMessage id="butletbot.token1.Online" defaultMessage ="Online"/> },
+                    { value: 'offline', label:<FormattedMessage id="butletbot.token1.Offline" defaultMessage ="Offline"/> }
                     ];
         const labelC2 = [
-                    { value: 'all', label:<FormattedMessage id="audit.token2.all" defaultMessage ="Any"/> },
-                    { value: 'issueFound', label:<FormattedMessage id="audit.token2.issueFound" defaultMessage ="Issue found"/>},
-                    { value: 'rejected', label:<FormattedMessage id="audit.token2.rejected" defaultMessage ="Rejected"/> },
-                    { value: 'resolved', label:<FormattedMessage id="audit.token2.resolved" defaultMessage ="Resolved"/> },
-                    { value: 'inProgress', label:<FormattedMessage id="audit.token2.inProgress" defaultMessage ="In progress"/>},
-                    { value: 'pending', label:<FormattedMessage id="audit.token2.pending" defaultMessage ="Pending"/> }
+                    { value: 'any', label:<FormattedMessage id="butletbot.token2.any" defaultMessage ="Any"/> },
+                    { value: 'pick', label:<FormattedMessage id="butletbot.token2.pick" defaultMessage ="Pick"/>},
+                    { value: 'put', label:<FormattedMessage id="butletbot.token2.put" defaultMessage ="Put"/> },
+                    { value: 'audit', label:<FormattedMessage id="butletbot.token2.audit" defaultMessage ="Audit"/> },
+                    { value: 'charging', label:<FormattedMessage id="butletbot.token2.charging" defaultMessage ="Charging"/>},
+                    { value: 'not set', label:<FormattedMessage id="butletbot.token2.notSet" defaultMessage ="Not set"/> }
                     ];
         var selectedToken =  this.state.tokenSelected;
         var column1 = <FilterTokenWrap field={tokenFieldC2} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC2} selectedToken={selectedToken}/>;
@@ -62,18 +64,17 @@ class AuditFilter extends React.Component{
 
     _applyFilter() {
       console.log(this.state)
-      this.props.refreshOption(this.state);
+      
     }
 
     _clearFilter() {
         var clearState = {};
-        this.setState({tokenSelected: {"AUDIT TYPE":["all"], "STATUS":["all"]}, searchQuery: {}});
+        this.setState({tokenSelected: {"STATUS":["any"], "MODE":["any"]}, searchQuery: {}});
         this.props.filterApplied(false);
-        this.props.refreshOption(clearState)
+        
     }
 
 	render(){
-        var noOrder = this.props.totalAudits?false:true;
         var auditSearchField = this._processAuditSearchField();
         var auditFilterToken = this._processFilterToken();
 		return (
@@ -84,8 +85,7 @@ class AuditFilter extends React.Component{
                          filterTokenC1={auditFilterToken.column1token}
                          filterTokenC2={auditFilterToken.column2token}
                          formSubmit={this._applyFilter.bind(this)}
-                         responseFlag={this.props.auditSpinner}
-                         noDataFlag={noOrder}
+                         noDataFlag={false}
                          />
             </div>
 		);
@@ -96,8 +96,7 @@ class AuditFilter extends React.Component{
 function mapStateToProps(state, ownProps){
   return {
     showFilter: state.filterInfo.filterState || false,
-    auditSpinner: state.spinner.auditSpinner || false,
-    totalAudits: state.recieveAuditDetail.totalAudits || 0,
+    
   };
 }
 
@@ -107,4 +106,4 @@ var mapDispatchToProps = function(dispatch){
     filterApplied: function(data){dispatch(filterApplied(data));}
   }
 };
-export default connect(mapStateToProps,mapDispatchToProps)(AuditFilter) ;
+export default connect(mapStateToProps,mapDispatchToProps)(ButlerBotFilter) ;
