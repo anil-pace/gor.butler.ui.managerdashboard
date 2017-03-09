@@ -10,7 +10,7 @@ class Footer extends React.Component{
 		return (
 		<div className="gor-footer">
 			<FormattedMessage id="footer.description" description="Footer description" 
-              			defaultMessage ="Copyright @ 2016 GreyOrange Pte Ltd"/>
+              			defaultMessage ="Copyright @ 2017 GreyOrange Pte Ltd"/>
 		</div> 
 		);
 	}
