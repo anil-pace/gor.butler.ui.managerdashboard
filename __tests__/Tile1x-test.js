@@ -3,14 +3,15 @@ import React  from 'react';
 import { shallow, mount, render } from 'enzyme';
 import Tilex from '../src/components/tile1x/Tilex';
 
+
 describe('Tilex  Tests', () => {	
     var item={heading:'This is it', value:'10', low:'These many per/hr'};
     
     const wrapper = shallow(<Tilex items={item}/>);
 
 //Structure testing
-	it('Should contain 4 div elements',()=>{
-   		expect(wrapper.find('div').length).toEqual(4);
+	it('Should contain 5 div elements',()=>{
+   		expect(wrapper.find('div').length).toEqual(5);
 	 });
 
 	it('Should contain 1 div with class "gor-up-tile"',()=>{
@@ -30,7 +31,7 @@ describe('Tilex  Tests', () => {
 		expect(wrapper.find('.gor-heading-value').text()).toEqual(item.value);
 	});
 
-	it('Status should be items.status',()=>{
+	it('Status should contain performance',()=>{
 		expect(wrapper.find('.gor-low-tile').text()).toBe(item.low);
 	});
     
