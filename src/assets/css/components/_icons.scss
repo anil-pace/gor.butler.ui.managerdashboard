@@ -31,7 +31,8 @@
 .header-offline-icon,
 .user-icon,
 .overview-tile-ontime-icon,
-.statusOl,.statusAl,.iStock ,.iAudit,.iPick,.gor-login-user,.gor-login-password,.gor-login-error,.gor-tick,.gor-question,.gor-tick-white,.gor-remove-white,.gor-error-white,.gor-login-user-error,.gor-login-password-error,.gor-question-2{
+.statusOl,.statusAl,.iStock ,.iAudit,.iPick,.gor-login-user,.gor-login-password,.gor-login-error,.gor-tick,.gor-question,.gor-tick-white,.gor-remove-white,.gor-error-white,.gor-login-user-error,.gor-login-password-error,.gor-question-2,.gor-operation-tick,.gor-alert-lg,
+.gor-dropdown-open,.gor-dropdown-close,.gor-caution,.gor-delay-icon{
     background-image: url(images/icons.svg);
 }
 .fk-logo,
@@ -342,4 +343,42 @@ background-position: -101px -52px;
     height: 50px;
     display: inline-block;
     vertical-align: middle;    
+}
+.gor-operation-tick{
+    background-position: -251px -52px;
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.gor-alert-lg{
+    background-position: -613px -3px;
+    width: 50px;
+    height: 46px;
+    display: inline-block;
+    vertical-align: middle;   
+}
+.gor-dropdown-open{
+    background-position: -10px -110px;
+    width: 8px;
+    height: 8px;
+    display: inline-block;
+    vertical-align: middle;       
+}
+.gor-dropdown-close{
+    background-position: -1px -110px;
+    width: 8px;
+    height: 6px;
+    display: inline-block;
+    vertical-align: middle;   
+}
+.gor-caution{
+    background-position: -511px -1px;
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    vertical-align: middle;       
+}
+.gor-delay-icon{
+    
 }

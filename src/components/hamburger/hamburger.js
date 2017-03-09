@@ -15,8 +15,8 @@ class HamBurger extends React.Component{
     	optionList = this.props.data.optionList || []; 	
     	for(let index=0;index<optionList.length;index++){
     		listItems.push(<span className={'gor-hamburger-option '+optionList[index].optionClass} key={index} >
-                        		{optionList[index].icon && <span className='gor-option-icon'>
-                        										<div className={optionList[index].icon}></div></span>}
+                        		{optionList[index].icon && <div className='gor-option-icon'>
+                        										<div className={optionList[index].icon}></div></div>}
                         			<span>{optionList[index].optionText}</span>
                         		{optionList[index].fnButton && <button className='gor-btn-small gor-right' onClick={optionList[index].fnButton.bind(this)}>{optionList[index].buttonText}</button>}
                       		</span>);
@@ -27,16 +27,18 @@ class HamBurger extends React.Component{
 		var listItems = this._processList();
 		var dropDownMenu = (<span className='gor-hamburger-wrapper' style={(this.state.menuVisible)?{display:'block'}:{display:'none'}}>{listItems}</span>);
 		return (
-				<div className={"menuWrap "+this.props.data.menuStyle} onClick={this._toggleDropdown.bind(this)}>
+				<div className={"gor-menuWrap "+this.props.data.menuStyle} 
+				style={this.state.menuVisible?{borderLeft:'1px solid #aaaaaa',borderRight:'1px solid #aaaaaa'}:{}}
+				 onClick={this._toggleDropdown.bind(this)}>
 					<div className="blockSystem">
-						<div className={"upperText "+this.props.data.headingStyle}>
+						<div className={"gor-upperText "+this.props.data.headingStyle}>
 							{this.props.data.heading}
 						</div>
-						<div className={"subText "+this.props.data.headingStyle}>
+						<div className={"gor-subText "+this.props.data.headingStyle}>
 							{this.props.data.subHeading}
 						</div>
 					</div>	
-					<div className={'gor-menuIcon '+(this.state.menuVisible?'':'gor-edit-icon')} >
+					<div className={'gor-menuIcon '+(this.state.menuVisible?'gor-dropdown-open':'gor-dropdown-close')} >
 					</div>
 					{dropDownMenu}									
 				</div>		

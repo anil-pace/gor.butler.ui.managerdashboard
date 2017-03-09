@@ -3,9 +3,10 @@ import ReactDOM  from 'react-dom';
 import { connect } from 'react-redux' ;
 import {userRequest} from '../../actions/userActions';
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
-import {validatePassword} from '../../actions/validationActions';
+import {validatePassword, resetForm} from '../../actions/validationActions';
 import { emptyField } from '../../utilities/fieldCheck';
-import {AUTH_LOGIN,ERROR,APP_JSON,POST,SUCCESS} from '../../constants/frontEndConstants';
+import {LOGIN_URL} from '../../constants/configConstants';
+import {ERROR,APP_JSON,POST,SUCCESS,AUTH_USER,PAUSE_OPERATION} from '../../constants/frontEndConstants';
 
 class PauseOperation extends React.Component{
   constructor(props) 
@@ -13,6 +14,7 @@ class PauseOperation extends React.Component{
       super(props);  
   }
   _removeThisModal() {
+      this.props.resetForm();
       this.props.removeModal();
   }
   _typing(){
@@ -30,6 +32,25 @@ class PauseOperation extends React.Component{
     {
       this._removeThisModal();
     }
+    if(nextProps.modalStatus && !this.props.modalStatus){
+      this._removeThisModal();
+    }    
+  }
+  _handlePause(){
+   let formdata={         
+            'username': this.props.username,
+            'password': this.password.value,
+    };
+    let userData={
+                'url':LOGIN_URL,
+                'method':POST,
+                'cause':PAUSE_OPERATION,
+                'formdata':formdata,
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
+                'token':this.props.auth_token
+    }
+    this.props.userRequest(userData);
   }
   render()
   {
@@ -56,7 +77,8 @@ class PauseOperation extends React.Component{
               </div>
               <div className='gor-margin-top'>              
                 <button className='gor-cancel-btn' onClick={this._removeThisModal.bind(this)}>Cancel</button>
-                <button className='gor-add-btn' disabled={this.props.passWordCheck.type === SUCCESS?false:true}>Pause Operation</button>
+                <button className='gor-add-btn' disabled={this.props.passWordCheck.type === SUCCESS?false:true}
+                  onClick={this._handlePause.bind(this)} >Pause Operation</button>
               </div>
             </div>
           </div>
@@ -66,13 +88,16 @@ class PauseOperation extends React.Component{
  function mapStateToProps(state, ownProps){
   return  {
       auth_token:state.authLogin.auth_token,
+      username:state.authLogin.username,
       passWordCheck: state.appInfo.passwordInfo||{},
+      modalStatus: state.appInfo.hideModal || false
     }
 } 
 function mapDispatchToProps(dispatch){
     return {
       userRequest: function(data){ dispatch(userRequest(data)); },
-      validatePass: function(data){ dispatch(validatePassword(data)); },              
+      validatePass: function(data){ dispatch(validatePassword(data)); },  
+      resetForm:   function(){ dispatch(resetForm()); }                  
     }
 };
 

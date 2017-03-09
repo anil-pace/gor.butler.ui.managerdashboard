@@ -1,0 +1,7 @@
+[
+  {
+    "id": "audit.start.ppscheckbox",
+    "description": "Text for PPS",
+    "defaultMessage": "PPS {eta}"
+  }
+]

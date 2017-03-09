@@ -414,3 +414,10 @@ export const SHOW_SELECTED_ENTRIES = "checked";
 //table filter
 export const SHOW_FILTER = "SHOW_FILTER";
 export const IS_FILTER_APPLIED = "IS_FILTER_APPLIED";
+
+//Emergency & Pause operation
+export const PAUSE_OPERATION = "PAUSE_OPERATION";
+export const RESUME_OPERATION = "RESUME_OPERATION";
+export const CONFIRM_SAFETY = "CONFIRM_SAFETY";
+export const AUTH_USER = "AUTH_USER";
+export const MODAL_STATUS = "MODAL_STATUS";

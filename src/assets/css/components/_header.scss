@@ -110,39 +110,6 @@
     		vertical-align: middle;
     		padding-right: 10px;
 		}
-		.menuWrap{
-			display: inline-block;
-			line-height: 22px;	
-			width: 50%;	
-		}
-		.upperText {
-			font-family: $gor-font-family;
-			font-size: 18px;
-			color: #3c3f43;
-			font-weight: bold;
-			line-height: 1;  
-			display: inline-block;
-			&.gor-white-text{
-				color:#FFFFFF;		
-			}
-			
-		}
-		.gor-menuIcon{
-			display: inline-block;	
-			width: 15px;
-			float: right;
-			margin-right: 5px;	
-			margin-top: 5px;
-		}
-		.subText {
-			font-family: $gor-font-family;
-			font-size: calculateRem(12px);
-			color: #4d5055;
-			padding-top: 2px;
-			&.gor-white-text{
-				color:#FFFFFF;		
-			}
-		}
 		.subTextClient {
 				font-family: $gor-font-family;
 				font-size: calculateRem(12px);
@@ -168,9 +135,9 @@
 			.blockSystem {
 				display: inline-block;
 				overflow: hidden;
-				padding-left:calculateRem(10px);
+				padding-left:calculateRem(15px);
 				vertical-align: middle;
-				
+				margin-top: 2px;
 			}
 
 			.blockLeft{

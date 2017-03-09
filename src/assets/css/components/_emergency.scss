@@ -12,6 +12,75 @@
 		margin-right: 20px;
 	}
 }
+.gor-emergency-overlay{
+	position: absolute;
+	height: 100vh;
+	background: rgba(236, 28, 35, 0.4);
+	width: 100%;
+}
+.gor-safetylist{
+	.gor-usr-details{
+		width: 40%;
+	}
+	.gor-sub-head{
+		width: 70%;
+	}
+}
+.gor-safety-body{
+	font-size: 14px;
+	width: 80%;
+	margin-top: 20px;
+	.tab-alert-icon{
+		margin-right: 10px;
+	}
+}
+.gor-safety-error{
+	border-radius: 3px;
+	background-color: #ffffff;
+	border: solid 1px #ef301e;
+	padding: 3%;
+	.gor-error-sm{
+		display: inline-block;
+		width:90%;
+	}
+}
+.gor-checklist-item{
+	font-size: 14px;
+	line-height: 1.43;
+	color: #666666;
+	margin-right: 10px;
+}
+.gor-resume-operation{
+	width:50%;
+	min-height:calculateRem(250px);
+	margin-top: 25vh;
+	border-radius:1%;
+	text-align:left;
+	.gor-operation-head{
+		width:100%;
+		padding: 2%;
+		border:	none;
+		font-size: 26px;
+		color:#666666;
+		.gor-operation-heading{
+			color: #4d5055;
+			margin-left: 20px;
+		}
+	}
+	.gor-operation-body{
+		padding: 2%;
+	}
+}
+.gor-text-bold{
+	font-weight:bold;
+	font-size: 18px;
+	color: #4a4a4a;
+}
+.gor-operation-text{
+	margin-top:5px;
+	font-size: 16px;
+	color:#666666;
+}
 .close{
 	float:right;
 	font-size: 40px;
@@ -19,10 +88,7 @@
 	cursor:pointer;	
 }
 .gor-operation-stop{
-	.tab-alert-icon{
-		vertical-align: middle;
-		margin-right: 20px;
-	}
+	position: relative;
 	height: 230px;
 }
 .gor-error-lg{
@@ -33,9 +99,17 @@
 	font-size: 18px;
 	color: #ec1c24;
 }
+.gor-error-sm{
+	font-size: 14px;
+	color: #e63831;
+}
 .gor-text-sm{
 	font-size: 15px;
 	color: #666666;
+}
+.gor-center-align{
+	margin:auto;
+	text-align:center;
 }
 button:disabled{
 	opacity: 0.60;
@@ -79,6 +153,9 @@ button:disabled{
 	margin-top: 25vh;
 	text-align:center;
 	border-radius:1%;
+	.gor-delete-line{
+		margin-left: 20px;
+	}
 }
 .gor-emergency{
 	width:60%;
