@@ -1587,7 +1587,7 @@
  {
    "id": "ButlerBotTable.mounted",
    "description": "msu mounted for ButlerBotTable",
-   "defaultMessage": "{msuMounted}Angeschlossen"
+   "defaultMessage": "{msuMounted} Angeschlossen"
  },
  {
    "id": "butlerBot.table.location",
