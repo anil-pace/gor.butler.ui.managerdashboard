@@ -381,12 +381,12 @@
   {
     "id": "stringConfig.online",
     "description": "Text to show Online",
-    "defaultMessage": "online"
+    "defaultMessage": "Online"
   },
   {
     "id": "stringConfig.offline",
     "description": "Text to show Offline",
-    "defaultMessage": "offline"
+    "defaultMessage": "Offline"
   },
   {
     "id": "stringConfig.received",
