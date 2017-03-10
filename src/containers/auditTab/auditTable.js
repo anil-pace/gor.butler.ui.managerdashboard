@@ -85,7 +85,7 @@ class AuditTable extends React.Component {
     current._dataList = new tableRenderer(items ? items.length : 0);
     current._defaultSortIndexes = [];
     current._dataList.newData=items;
-    var size = current._dataList.getSize(),sortIndex={status:"DESC"};
+    var size = current._dataList.getSize(),sortIndex={};
     for (var index = 0; index < size; index++) {
       current._defaultSortIndexes.push(index);
     }
@@ -97,8 +97,8 @@ class AuditTable extends React.Component {
       colSortDirs: sortIndex,
       columnWidths: {
         display_id: nProps.containerWidth*0.09,
-        auditTypeValue: nProps.containerWidth*0.13,
-        status: nProps.containerWidth*0.08,
+        auditTypeValue: nProps.containerWidth*0.12,
+        status: nProps.containerWidth*0.09,
         startTime: nProps.containerWidth*0.13,
         progress: nProps.containerWidth*0.17,
         completedTime: nProps.containerWidth*0.15,

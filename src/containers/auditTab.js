@@ -86,7 +86,7 @@ shouldComponentUpdate(nextProps) {
       flag = flag || true;
     }
 
-    if((nextProps.auditDetail && !nextProps.auditDetail.length)){
+    else if((nextProps.auditDetail && !nextProps.auditDetail.length)){
       flag = flag || false;
     }
 
@@ -122,7 +122,8 @@ _processAuditData(data,nProps){
   let reAudited = nProps.context.intl.formatMessage(messages.auditReAudited);
   var timeOffset= nProps.props.timeOffset || "";
   var auditStatus = {"audit_created":created, "audit_pending":pending, "audit_waiting":pending, "audit_conflicting":pending, "audit_accepted":pending, "audit_started":progress, "audit_tasked":progress, "audit_aborted":completed, "audit_completed":completed, "audit_pending_approval":pendingApp, "audit_resolved":resolved, audit_rejected:rejected,audit_reaudited:reAudited};
-  var statusClass = {"Pending": "pending", "Completed":"completed", "In Progress":"progress", "Created":"pending", "Issues found":"breached", "Rejected":"breached", "Resolved":"progress", "Re-audited":"completed"}
+  //var statusClass = {"Pending": "pending", "Completed":"completed", "In Progress":"progress", "Created":"pending", "Issues found":"breached", "Rejected":"breached", "Resolved":"progress", "Re-audited":"completed"}
+  var statusClass = {"audit_created":"pending", "audit_pending":"pending", "audit_waiting":"pending", "audit_conflicting":"pending", "audit_accepted":"pending", "audit_started":"progress", "audit_tasked":"progress", "audit_aborted":"completed", "audit_completed":"completed", "audit_pending_approval":"breached", "audit_resolved":"progress", audit_rejected:"breached",audit_reaudited:"completed"};
   var auditType = {"sku":sku, "location":location};
   var auditDetails = [], auditData = {};
   for (var i = data.length - 1; i >= 0; i--) {
@@ -157,7 +158,7 @@ _processAuditData(data,nProps){
         auditData.statusPriority = 1;
       }
       auditData.status = auditStatus[data[i].audit_status]; 
-      auditData.statusClass = statusClass[auditData.status];
+      auditData.statusClass = statusClass[data[i].audit_status];
       if(data[i].audit_status === AUDIT_CREATED) {
         auditData.startAudit = true;
       }
