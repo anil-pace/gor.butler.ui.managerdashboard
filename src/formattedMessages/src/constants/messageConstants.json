@@ -308,5 +308,15 @@
     "id": "users.add.password.subheading.operator",
     "description": "Subheading for create password operator",
     "defaultMessage": "A password of 6 digits will be required for logging into the Operator Interface."
+  },
+  {
+    "id": "emergency.resume.coreerror",
+    "description": "Error while resuming operation",
+    "defaultMessage": "Cannot connect to butler core"
+  },
+  {
+    "id": "emergency.resume.success",
+    "description": "Operations resumed",
+    "defaultMessage": "Operation resumed"
   }
 ]

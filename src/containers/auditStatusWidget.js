@@ -53,6 +53,11 @@ class AuditStatusWidget extends React.Component{
              lowStr=<FormattedMessage id="widget.audit.offline" description='Message for system offline' 
                 defaultMessage='Offline'/>;
         }
+        if(this.props.systemEmergency){
+             lowStr=<FormattedMessage id="widget.audit.emergency" description='Message for system in emergency state' 
+                defaultMessage='--'/>;                
+        }
+
 		auditData.heading = <FormattedMessage id="widget.audit.heading" description='Audit Item Heading' 
         defaultMessage='Items audited'/>;
         auditData.value = value;
@@ -80,7 +85,8 @@ function mapStateToProps(state, ownProps){
         auditData: state.auditInfo.auditData,
         ppsData:state.ppsInfo.ppsData,
         throughputData : state.throughputInfo.throughputData,
-        system_status:state.tabsData.status||null
+        system_status:state.tabsData.status||null,
+        systemEmergency: state.tabsData.system_emergency||null
     }
 }
 

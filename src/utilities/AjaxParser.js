@@ -6,13 +6,19 @@ import {recieveHeaderInfo} from '../actions/headerAction';
 import {getPPSAudit} from '../actions/auditActions';
 import {codeToString} from './codeToString';
 import {setOrderListSpinner} from '../actions/orderListActions';
-import {notifySuccess, notifyFail,validateID,notifyDelete,loginError,validateSKU, validateSKUcodeSpinner} from '../actions/validationActions';
-import {ERROR,AUTH_LOGIN, ADD_USER, RECIEVE_TIME_OFFSET,CHECK_ID,DELETE_USER,GET_ROLES,ORDERS_RETRIEVE,PPS_MODE_CHANGE,EDIT_USER,RECIEVE_HEADER,SUCCESS,CREATE_AUDIT,AUDIT_RETRIEVE,GET_PPSLIST,START_AUDIT,DELETE_AUDIT,AUDIT_RESOLVE_LINES,AUDIT_RESOLVE_CONFIRMED, VALIDATE_SKU_ID} from '../constants/frontEndConstants';
+import {notifySuccess, notifyFail,validateID,notifyDelete,
+	validatePassword,loginError,validateSKU, validateSKUcodeSpinner,modalStatus,getSafetyList
+,getSafetyErrorList} from '../actions/validationActions';
+import {ERROR,AUTH_LOGIN, ADD_USER, RECIEVE_TIME_OFFSET,CHECK_ID,DELETE_USER,GET_ROLES,ORDERS_RETRIEVE,
+	PPS_MODE_CHANGE,EDIT_USER,RECIEVE_HEADER,SUCCESS,CREATE_AUDIT,AUDIT_RETRIEVE,GET_PPSLIST,START_AUDIT,
+	DELETE_AUDIT,AUDIT_RESOLVE_LINES,AUDIT_RESOLVE_CONFIRMED, VALIDATE_SKU_ID,PAUSE_OPERATION,
+	RESUME_OPERATION,CONFIRM_SAFETY} from '../constants/frontEndConstants';
 import {BUTLER_UI,CODE_UE002,BUTLER_SUPERVISOR,CODE_E027} from '../constants/backEndConstants'
-import {UE002,E028,E029,MODE_REQUESTED,TYPE_SUCCESS,AS001,ERR_API,ERR_USR,ERR_RES,ERR_AUDIT,AS00A,WRONG_CRED} from '../constants/messageConstants';
+import {UE002,E028,E029,MODE_REQUESTED,TYPE_SUCCESS,AS001,ERR_API,ERR_USR,ERR_RES,ERR_AUDIT,AS00A,WRONG_CRED,
+E051,ES} from '../constants/messageConstants';
 import {ShowError} from './showError';
 import {endSession} from './endSession';
-import {setResolveAuditSpinner} from '../actions/spinnerAction';
+import {setResolveAuditSpinner,setSafetySpinner} from '../actions/spinnerAction';
 import {statusToString} from './statusToString';
 import {INVALID_SKUID} from '../constants/messageConstants';
 
@@ -190,6 +196,69 @@ export function AjaxParse(store,res,cause,status)
         	store.dispatch(validateSKUcodeSpinner(false));
         	break;	
 
+        case PAUSE_OPERATION:
+        	var pausePwd;
+			if(!res.auth_token)
+			{
+	          pausePwd={
+	              type:ERROR,
+	              msg:UE002             
+	            };                        
+ 	         }
+	        else
+            {
+              pausePwd={
+              	type:SUCCESS,
+              	msg:TYPE_SUCCESS               
+              };               
+              //hit next api
+              store.dispatch(modalStatus(true));                           
+			}
+			store.dispatch(validatePassword(pausePwd));			
+			break;
+		case RESUME_OPERATION:
+			var resumePwd;
+			if(!res.auth_token)
+			{
+	          resumePwd={
+	              type:ERROR,
+	              msg:UE002             
+	            };                        
+ 	         }
+	        else
+            {
+              resumePwd={
+              	type:SUCCESS,
+              	msg:TYPE_SUCCESS               
+              };
+              //hit next api  
+              store.dispatch(modalStatus(true));                           
+			}
+			store.dispatch(validatePassword(resumePwd));						
+			break;
+		case CHECK_SAFETY:
+			var safetyList = [], safetyResponse = action.data;
+			if(safetyResponse.data){
+				safetyList = safetyResponse.data;
+			}
+			store.dispatch(getSafetyList(safetyList));
+			break;
+		case CONFIRM_SAFETY:
+			var rejectList = [], rejectResponse = action.data;
+			if(rejectResponse.data){
+				rejectList = rejectResponse.data;
+				if(!rejectList.length){
+					store.dispatch(modalStatus(true));                           
+					store.dispatch(notifySuccess(ES));
+				}
+			}
+			else{
+				store.dispatch(modalStatus(true));                           
+				store.dispatch(notifyFail(E051));
+			}
+			store.dispatch.setSafetySpinner(false);
+			store.dispatch(getSafetyErrorList(rejectList));			
+			break;
 		default:
 			ShowError(store,cause,status);
 	 }

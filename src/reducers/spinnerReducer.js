@@ -1,5 +1,7 @@
 
-import { DISPLAY_SPINNER,DISPLAY_LOGIN_SPINNER,DISPLAY_INVENTORY_SPINNER,DISPLAY_AUDIT_SPINNER, DISPLAY_ORDER_LIST_SPINNER,DISPLAY_WAVES_SPINNER,DISPLAY_BUTLER_SPINNER,DISPLAY_PPS_SPINNER,DISPLAY_CHARGING_STATION_SPINNER,DISPAY_RESOLVE_AUDIT_SPINNER} from '../constants/frontEndConstants'
+import { DISPLAY_SPINNER,DISPLAY_LOGIN_SPINNER,DISPLAY_INVENTORY_SPINNER,DISPLAY_AUDIT_SPINNER, 
+	DISPLAY_ORDER_LIST_SPINNER,DISPLAY_WAVES_SPINNER,DISPLAY_BUTLER_SPINNER,DISPLAY_PPS_SPINNER,
+	DISPLAY_CHARGING_STATION_SPINNER,DISPAY_RESOLVE_AUDIT_SPINNER,DISPLAY_SAFETY_SPINNER} from '../constants/frontEndConstants'
 
 /**
  * [loader reducer function to set isLoading state]
@@ -56,6 +58,11 @@ export  function spinner(state={},action){
       case DISPAY_RESOLVE_AUDIT_SPINNER:
       return Object.assign({}, state, {
 	    	"auditResolveSpinner":action.data
+	  })
+
+      case DISPLAY_SAFETY_SPINNER:
+      return Object.assign({}, state, {
+	    	"safetySpinner":action.data
 	  })
 
 	  default:

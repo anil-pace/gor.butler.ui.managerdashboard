@@ -4,6 +4,32 @@
 {
   	background: #4D5055;	
 }
+			.field{
+				font-family:'Source Sans Pro Regular', sans-serif;
+				border:none;
+				font-size:18px;
+				margin-left:calculateRem(10px);
+				width:80%;
+				color: #F36F36;
+ 			   	text-shadow: 0px 0px 0px #AAAAAA;
+			    -webkit-text-fill-color: transparent;
+			    &:focus{
+			    	text-shadow: 0px 0px 0px #666666;
+			    }
+			}
+.gor-login-usr-error
+{
+			text-align:left;
+			color:#EC1C24;
+			font-size:18px;			
+			margin:auto;
+			margin-top:10px;
+			width:75%;
+			&.gor-sm-string{
+				font-size: 12px;
+			}
+}
+
 .gor-login-form
 {
   	color:#A6A7A9;
@@ -182,19 +208,6 @@
 					color:#333333;
 				}			
 			}
-			.field{
-				font-family:'Source Sans Pro Regular', sans-serif;
-				border:none;
-				font-size:18px;
-				margin-left:calculateRem(10px);
-				width:80%;
-				color: #F36F36;
- 			   	text-shadow: 0px 0px 0px #AAAAAA;
-			    -webkit-text-fill-color: transparent;
-			    &:focus{
-			    	text-shadow: 0px 0px 0px #666666;
-			    }
-			}
 			.gor-login-user{
 				vertical-align:middle;
 			}
@@ -209,15 +222,6 @@
 			font-size:18px;
 			text-align:center;
 			margin-top:10px;
-		}
-		.gor-login-usr-error
-		{
-			text-align:left;
-			color:#EC1C24;
-			font-size:18px;			
-			margin:auto;
-			margin-top:10px;
-			width:75%;
 		}
 		.gor-login-btn
 		{

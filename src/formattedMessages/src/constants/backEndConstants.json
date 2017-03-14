@@ -170,6 +170,36 @@
     "defaultMessage": "Rejected"
   },
   {
+    "id": "stringConfig.md001",
+    "description": "Text for safety checklist item 1",
+    "defaultMessage": "No personnel are present in the no-man zone."
+  },
+  {
+    "id": "stringConfig.md002",
+    "description": "Text for safety checklist item 2",
+    "defaultMessage": "All Butler and MSU positions have been corrected."
+  },
+  {
+    "id": "stringConfig.md003",
+    "description": "Text for safety checklist item 3",
+    "defaultMessage": "All no-man zone gates are properly closed."
+  },
+  {
+    "id": "stringConfig.md004",
+    "description": "Text for safety checklist item 4",
+    "defaultMessage": "All no-man gate limit switches are active and working."
+  },
+  {
+    "id": "stringConfig.md005",
+    "description": "Text for safety checklist item 5",
+    "defaultMessage": "No zonal emergencies are pressed."
+  },
+  {
+    "id": "stringConfig.md006",
+    "description": "Text for safety checklist item 6",
+    "defaultMessage": "All Zigbee boxes are online."
+  },
+  {
     "id": "stringConfig.audit_reaudited",
     "description": "Text for audit reaudited status",
     "defaultMessage": "Re-audited"

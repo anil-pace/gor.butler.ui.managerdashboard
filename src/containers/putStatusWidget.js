@@ -57,6 +57,10 @@ class PutStatusWidget extends React.Component{
              lowStr=<FormattedMessage id="widget.put.offline" description='Message for system offline' 
                 defaultMessage='Offline'/>;
             }
+            if(this.props.systemEmergency){
+             lowStr=<FormattedMessage id="widget.put.emergency" description='Message for system in emergency state' 
+                defaultMessage='--'/>;                
+            }
 
     		putData.heading = <FormattedMessage id="widget.put.heading" description='Put Item Heading' 
             					defaultMessage='Items stocked'/>;
@@ -82,7 +86,8 @@ function mapStateToProps(state, ownProps){
         putData: state.putInfo.putData,
         ppsData:state.ppsInfo.ppsData,
         throughputData : state.throughputInfo.throughputData,
-        system_status:state.tabsData.status||null
+        system_status: state.tabsData.status||null,
+        systemEmergency: state.tabsData.system_emergency||null
     };
 }
  

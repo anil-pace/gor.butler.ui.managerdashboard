@@ -20,6 +20,11 @@
     "defaultMessage": "Offline"
   },
   {
+    "id": "widget.put.emergency",
+    "description": "Message for system in emergency state",
+    "defaultMessage": "--"
+  },
+  {
     "id": "widget.put.heading",
     "description": "Put Item Heading",
     "defaultMessage": "Items stocked"
