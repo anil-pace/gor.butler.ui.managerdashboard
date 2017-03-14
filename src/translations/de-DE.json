@@ -47,7 +47,7 @@
  {
    "id": "footer.description",
    "description": "Footer description",
-   "defaultMessage": "Copyright @ 2016 GreyOrange Pte Ltd"
+   "defaultMessage": "Copyright @ 2017 GreyOrange Pte Ltd"
  },
  {
    "id": "snapshot.inventory.usedSpace",
@@ -57,7 +57,7 @@
  {
    "id": "header.description",
    "description": "Header description",
-   "defaultMessage": "Diener Management-System"
+   "defaultMessage": "Butler Management-System"
  },
  {
    "id": "header.start_time",
@@ -187,7 +187,7 @@
  {
    "id": "login.butler.title",
    "description": "Text for butler management Login form title",
-   "defaultMessage": "Diener"
+   "defaultMessage": "Butler"
  },
  {
    "id": "login.butler.trademark",
@@ -247,7 +247,7 @@
  {
    "id": "butlerBot.tab.heading",
    "description": "butler bot tab",
-   "defaultMessage": "Diener Bots"
+   "defaultMessage": "Butler Bots"
  },
  {
    "id": "pps.tab.heading",
@@ -287,7 +287,7 @@
  {
    "id": "stringConfig.audit",
    "description": "Text to show audit",
-   "defaultMessage": "prüfen"
+   "defaultMessage": "PRÜFEN"
  },
  {
    "id": "stringConfig.soft",
@@ -1032,7 +1032,7 @@
  {
    "id": "emergency.type",
    "description": "Text for emergency type",
-   "defaultMessage": "Das Diener-System wurde durch einen {type}-Notfall angehalten."
+   "defaultMessage": "Das Butler-System wurde durch einen {type}-Notfall angehalten."
  },
  {
    "id": "emergency.action",
@@ -1382,7 +1382,7 @@
  {
    "id": "health.Butler",
    "description": "Butler bots health",
-   "defaultMessage": "Diener Bots"
+   "defaultMessage": "Butler Bots"
  },
  {
    "id": "health.ChargingStation",
@@ -1547,12 +1547,12 @@
  {
    "id": "butlerbot.table.noData",
    "description": "No data message for butlerbot table",
-   "defaultMessage": "Kein Diener-Bot gefunden"
+   "defaultMessage": "Kein Butler-Bot gefunden"
  },
  {
    "id": "butlerBot.table.heading",
    "description": "Heading for butlerbot",
-   "defaultMessage": "Diener Bots"
+   "defaultMessage": "Butler Bots"
  },
  {
    "id": "ButlerBotTable.TotalBot",
@@ -1587,7 +1587,7 @@
  {
    "id": "ButlerBotTable.mounted",
    "description": "msu mounted for ButlerBotTable",
-   "defaultMessage": "{msuMounted}Angeschlossen"
+   "defaultMessage": "{msuMounted} Angeschlossen"
  },
  {
    "id": "butlerBot.table.location",
@@ -1617,7 +1617,7 @@
  {
    "id": "chargersDetail.butler.prefix",
    "description": "prefix for butler id in chargersDetail",
-   "defaultMessage": "Diener - {botId}"
+   "defaultMessage": "Butler - {botId}"
  },
  {
    "id": "ChargingStations.table.noData",
@@ -1832,7 +1832,7 @@
  {
    "id": "overviewStatus.tab.emergency",
    "description": "overview Status emergency",
-   "defaultMessage": "Diener angehalten"
+   "defaultMessage": "Butler angehalten"
  },
  {
    "id": "ordersStatus.tab.heading",
@@ -2052,7 +2052,7 @@
  {
    "id": "users.add.roledetails.subheading",
    "description": "Subheading for role",
-   "defaultMessage": "Der Benutzer erhält einen spezifizierten Kontrolllevel über das Diener-System, gemäß seiner zugewiesenen Aufgaben"
+   "defaultMessage": "Der Benutzer erhält einen spezifizierten Kontrolllevel über das Butler-System, gemäß seiner zugewiesenen Aufgaben"
  },
  {
    "id": "users.add.roledetails.operator",
@@ -2062,7 +2062,7 @@
  {
    "id": "users.add.roledetails.operatortext",
    "description": "Subtext for operator",
-   "defaultMessage": "Gewähren Sie Zugang zur Benutzeroberfläche an jeder Auswahl- und Platzierungs-Station im Diener-System"
+   "defaultMessage": "Gewähren Sie Zugang zur Benutzeroberfläche an jeder Auswahl- und Platzierungs-Station im Butler-System"
  },
  {
    "id": "users.add.roledetails.manager",
@@ -2082,7 +2082,7 @@
  {
    "id": "users.add.roledetails.subheading",
    "description": "Subheading for role",
-   "defaultMessage": "Der Benutzer erhält einen spezifizierten Kontrolllevel über das Diener-System, gemäß seiner zugewiesenen Aufgaben"
+   "defaultMessage": "Der Benutzer erhält einen spezifizierten Kontrolllevel über das Butler-System, gemäß seiner zugewiesenen Aufgaben"
  },
  {
    "id": "users.add.roledetails.operator",
@@ -2092,7 +2092,7 @@
  {
    "id": "users.add.roledetails.operatortext",
    "description": "Subtext for operator",
-   "defaultMessage": "Gewähren Sie Zugang zur Benutzeroberfläche an jeder Auswahl- und Platzierungs-Station im Diener-System"
+   "defaultMessage": "Gewähren Sie Zugang zur Benutzeroberfläche an jeder Auswahl- und Platzierungs-Station im Butler-System"
  },
  {
    "id": "users.add.roledetails.manager",
@@ -2217,7 +2217,7 @@
  {
    "id": "chargersDetail.butler.prefix",
    "description": "prefix for butler id in chargersDetail",
-   "defaultMessage": "Diener - {botId}"
+   "defaultMessage": "Butler - {botId}"
  },
  {
    "id": "orderList.progress.status",
