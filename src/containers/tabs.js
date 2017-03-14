@@ -145,8 +145,8 @@ class Tabs extends React.Component{
       ordersClass=GOR_ONLINE;
 
       usersvalue = <FormattedNumber value={this.props.users_online}/>
-      usersStatus = <FormattedMessage id="usersStatus.tab.heading" description="users Status " 
-                                      defaultMessage ="{count} users online" values={{count:usersvalue}}/>;  
+      usersStatus = <FormattedMessage id="usersStatus.tab.heading#" description="users Status " 
+                                      defaultMessage ="{count} {count,plural, =0 {user} one {user} other {users}} online" values={{count:this.props.users_online?this.props.users_online:"0"}}/>;  
 
       inventoryvalue = <FormattedNumber value={this.props.space_utilized}/>
       inventoryStatus = <FormattedMessage id="inventoryStatus.tab.heading" description="inventory Status " 
@@ -165,7 +165,7 @@ class Tabs extends React.Component{
       if(this.props.audit_alert) {
         auditClass = (this.props.audit_alert?'gor-alert':auditClass);
         auditStatus=<FormattedMessage id="auditStatus.tab.alert.heading" description="audit Status alert" 
-                                     defaultMessage ="{count} alerts" 
+                                     defaultMessage ="{count} {count,plural, one {alert} other {alerts}}" 
                                      values={{count:this.props.audit_alert?this.props.audit_alert:"0"}}/>;
        auditIcon = true;                                                        
       }

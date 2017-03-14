@@ -220,6 +220,16 @@
     "defaultMessage": "Audit already processed. Cannot delete"
   },
   {
+    "id": "notify.Location.audit.pending",
+    "description": "Text for Location of audit pending for approval",
+    "defaultMessage": "Location of audit pending for approval"
+  },
+  {
+    "id": "notify.Location.currently.processed",
+    "description": "Text for Location of audit currently being processed",
+    "defaultMessage": "Location of audit currently being processed"
+  },
+  {
     "id": "notify.error.user.fail",
     "description": "Text for error in updating user",
     "defaultMessage": "Error in updating user"

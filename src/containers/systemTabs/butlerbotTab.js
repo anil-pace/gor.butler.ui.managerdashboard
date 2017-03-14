@@ -13,7 +13,7 @@ import Spinner from '../../components/spinner/Spinner';
 import { setButlerSpinner } from  '../../actions/spinnerAction';
 import { butlerHeaderSort,butlerHeaderSortOrder,butlerFilterDetail } from '../../actions/sortHeaderActions';
 import { defineMessages } from 'react-intl';
-
+import {showTableFilter,filterApplied} from '../../actions/filterAction';
 //Mesages for internationalization
 const messages = defineMessages({
     butlerPrefix: {id:"butlerDetail.name.prefix",
@@ -230,7 +230,10 @@ class ButlerBot extends React.Component{
                             sortHeaderOrder={this.props.butlerHeaderSortOrder} 
                             currentHeaderOrder={this.props.butlerSortHeaderState}
                             setButlerFilter={this.props.butlerFilterDetail}
-                            getButlerFilter = {this.props.butlerFilter}/>
+                            getButlerFilter = {this.props.butlerFilter}
+                            showFilter={this.props.showFilter}
+                            isFilterApplied={this.props.isFilterApplied}
+                            setFilter={this.props.showTableFilter}/>
 					</div>
 				</div>
 			</div>
@@ -239,13 +242,16 @@ class ButlerBot extends React.Component{
 };
 
 function mapStateToProps(state, ownProps){
+  console.log(state)
   return {
     butlerFilter: state.sortHeaderState.butlerFilter|| "",
     butlerSortHeader: state.sortHeaderState.butlerHeaderSort || INITIAL_HEADER_SORT ,
     butlerSortHeaderState: state.sortHeaderState.butlerHeaderSortOrder || INITIAL_HEADER_ORDER,
     butlerSpinner: state.spinner.butlerSpinner || false,
     butlerDetail: state.butlerDetail || [],
-    intlMessages: state.intl.messages
+    intlMessages: state.intl.messages,
+    showFilter: state.filterInfo.filterState || false,
+    isFilterApplied: state.filterInfo.isFilterApplied || false,
   };
 }
 
@@ -255,7 +261,9 @@ var mapDispatchToProps = function(dispatch){
     butlerFilterDetail: function(data){dispatch(butlerFilterDetail(data))},
     setButlerSpinner: function(data){dispatch(setButlerSpinner(data))},
     butlerHeaderSort: function(data){dispatch(butlerHeaderSort(data))},
-    butlerHeaderSortOrder: function(data){dispatch(butlerHeaderSortOrder(data))}
+    butlerHeaderSortOrder: function(data){dispatch(butlerHeaderSortOrder(data))},
+    showTableFilter: function(data){dispatch(showTableFilter(data));},
+    filterApplied: function(data){dispatch(filterApplied(data));}
   };
 }
 

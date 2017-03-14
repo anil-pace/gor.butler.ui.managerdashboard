@@ -24,7 +24,7 @@ const messages = defineMessages({
       defaultMessage:"PPS-{ppsId}"
     },
     perfPrefix:{
-      id:"ppsDetail.performance.prefix", 
+      id:"ppsDetail.performance.prefix.items", 
       description:"prefix for pps id in ppsDetail", 
       defaultMessage:"{performance} items/hr"
     }
@@ -56,7 +56,7 @@ class PPS extends React.Component{
   for (var i = data.length - 1; i >= 0; i--) {
     detail = {};
     ppsId = data[i].pps_id;
-    performance = data[i].performance;
+    performance = (data[i].performance<0?0:data[i].performance);
     PPS =  nProps.context.intl.formatMessage(messages.namePrefix,{"ppsId":ppsId});
     ON = nProps.context.intl.formatMessage(stringConfig.on);
     OFF = nProps.context.intl.formatMessage(stringConfig.off);
@@ -69,13 +69,13 @@ class PPS extends React.Component{
     }
     else {
       detail.status = OFF;
-      detail.statusPriority = 2;
+      detail.statusPriority = 1;
     }
     detail.statusClass = data[i].pps_status;
     detail.operatingMode = currentTask[data[i].current_task];
     detail.operatingModeClass = data[i].current_task;
     detail.performance = PERFORMANCE;///  orders /items
-    detail.ppsThroughput = data[i].performance;
+    detail.ppsThroughput = (data[i].performance<0?0:data[i].performance);
     if(data[i].operators_assigned === null) {
       detail.operatorAssigned = "--";
     }

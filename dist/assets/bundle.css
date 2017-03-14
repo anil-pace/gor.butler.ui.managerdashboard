@@ -1277,12 +1277,12 @@ body {
 
 .Order-Stats-Drop {
   width: 33%;
-  max-width: 276px;
+  max-width: 280px;
 }
 
 .Performance-Widget-Drop {
   width: 75%;
-  max-width: 267px;
+  max-width: 282px;
 }
 
 .axis path,
@@ -2016,7 +2016,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   background: #fc3838;
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   color: #ffffff;
   font-size: 12px;
   max-height: 9px;
@@ -2026,7 +2026,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   background: #fc3838;
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   color: #ffffff;
   font-size: 12px;
   max-height: 9px;
@@ -2036,7 +2036,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   background: #f99405;
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   color: #ffffff;
   font-size: 12px;
   max-height: 9px;
@@ -2046,7 +2046,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   background: #f99405;
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   color: #ffffff;
   font-size: 12px;
   max-height: 9px;
@@ -2056,7 +2056,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   background: #f99405;
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   color: #ffffff;
   font-size: 12px;
   max-height: 9px;
@@ -2065,7 +2065,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .on .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   border-style: solid;
   border-width: 1px;
   border-color: #00a54f;
@@ -2079,7 +2079,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .off .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   border-style: solid;
   border-width: 1px;
   border-color: #aaaaaa;
@@ -2093,7 +2093,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .online .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   border-style: solid;
   border-width: 1px;
   border-color: #00a54f;
@@ -2107,7 +2107,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .connected .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   border-style: solid;
   border-width: 1px;
   border-color: #00a54f;
@@ -2121,7 +2121,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .completed .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   border-style: solid;
   border-width: 1px;
   border-color: #00a54f;
@@ -2135,7 +2135,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   background: #fc3838;
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   color: #ffffff;
   font-size: 12px;
   max-height: 9px;
@@ -2145,7 +2145,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   background: #F99405;
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   color: #ffffff;
   font-size: 12px;
   max-height: 9px;
@@ -2154,7 +2154,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .offline .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   border-style: solid;
   border-width: 1px;
   border-color: #aaaaaa;
@@ -2168,7 +2168,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .disconnected .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   border-style: solid;
   border-width: 1px;
   border-color: #aaaaaa;
@@ -2182,7 +2182,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .pending .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   border-style: solid;
   border-width: 1px;
   border-color: #00a54f;
@@ -2196,7 +2196,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .cancelled .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   border-style: solid;
   border-width: 1px;
   border-color: #aaaaaa;
@@ -2210,7 +2210,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .abandoned .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   border-style: solid;
   border-width: 1px;
   border-color: #aaaaaa;
@@ -2225,7 +2225,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   background: #f36f36;
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   color: #ffffff;
   font-size: 12px;
   max-height: 9px;
@@ -2235,7 +2235,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .in_progress {
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   border-style: solid;
   border-width: 1px;
   border-color: #00a54f;
@@ -2248,7 +2248,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .fulfillable .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   border-style: solid;
   border-width: 1px;
   border-color: #00a54f;
@@ -2263,7 +2263,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   background: #f99405;
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   color: #ffffff;
   font-size: 12px;
   max-height: 9px;
@@ -2272,7 +2272,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .progress .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   border-style: solid;
   border-width: 1px;
   border-color: #00a54f;
@@ -2955,7 +2955,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 }
 
 .gorToolBarWrap {
-  width: 33%;
+  width: 40%;
   font-weight: bold;
   color: #000000;
   display: inline-block;
@@ -3351,6 +3351,29 @@ input[type="checkbox"] {
 .gor-tooltip-heading {
   font-weight: bold;
   padding-bottom: 15px;
+}
+
+.gor-audit-filter-create-wrap {
+  display: inline-block;
+  float: right;
+  margin-top: 16px;
+  margin-right: 40px;
+}
+
+.gor-audit-create-btn {
+  height: 35px;
+  border-radius: 3px;
+  background-color: #4d5055;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  font-family: "source sans pro";
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  color: #ffffff;
+  padding-left: 14px;
+  padding-right: 14px;
+  vertical-align: sub;
+  cursor: pointer;
 }
 
 .gorSubTab.gorContainer {
@@ -5027,7 +5050,6 @@ button:disabled {
 }
 
 .gor-filter-body {
-  height: 400px;
   overflow: auto;
 }
 
@@ -5247,7 +5269,7 @@ button:disabled {
 
 .gor-btn-small {
   font-family: 'Source Sans Pro Bold', sans-serif;
-  width: 60px;
+  min-width: 60px;
   background: #f36f36;
   padding: 2%;
   color: #ffffff;

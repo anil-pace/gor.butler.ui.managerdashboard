@@ -10,6 +10,11 @@
     "defaultMessage": "Butler Bots"
   },
   {
+    "id": "butlerbot.table.filterLabel",
+    "description": "button label for filter",
+    "defaultMessage": "Filter"
+  },
+  {
     "id": "ButlerBotTable.TotalBot",
     "description": "Column name for the Bot id in bot table",
     "defaultMessage": "BOTS"

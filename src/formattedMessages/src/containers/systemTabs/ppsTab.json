@@ -5,7 +5,7 @@
     "defaultMessage": "PPS-{ppsId}"
   },
   {
-    "id": "ppsDetail.performance.prefix",
+    "id": "ppsDetail.performance.prefix.items",
     "description": "prefix for pps id in ppsDetail",
     "defaultMessage": "{performance} items/hr"
   }

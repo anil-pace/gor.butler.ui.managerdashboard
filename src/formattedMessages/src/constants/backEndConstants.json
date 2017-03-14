@@ -198,5 +198,10 @@
     "id": "stringConfig.md006",
     "description": "Text for safety checklist item 6",
     "defaultMessage": "All Zigbee boxes are online."
+  },
+  {
+    "id": "stringConfig.audit_reaudited",
+    "description": "Text for audit reaudited status",
+    "defaultMessage": "Re-audited"
   }
 ]

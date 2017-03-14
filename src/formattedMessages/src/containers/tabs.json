@@ -60,9 +60,9 @@
     "defaultMessage": "{count}% fulfilled"
   },
   {
-    "id": "usersStatus.tab.heading",
+    "id": "usersStatus.tab.heading#",
     "description": "users Status",
-    "defaultMessage": "{count} users online"
+    "defaultMessage": "{count} {count, plural, =0 {user} one {user} other {users}} online"
   },
   {
     "id": "inventoryStatus.tab.heading",
@@ -77,6 +77,6 @@
   {
     "id": "auditStatus.tab.alert.heading",
     "description": "audit Status alert",
-    "defaultMessage": "{count} alerts"
+    "defaultMessage": "{count} {count, plural, one {alert} other {alerts}}"
   }
 ]

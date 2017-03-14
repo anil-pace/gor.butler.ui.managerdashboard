@@ -264,6 +264,7 @@ class ResolveAudit extends React.Component{
   {
       var {auditDataList} = this.state, screenId = this.props.screenId, auditType = this.props.auditType, auditId = this.props.displayId;
       var auditbysku= (this.props.auditMethod==="pdfa"?false:true), resolveTable = <div/>;
+      var totalLines = auditDataList.getSize()?auditDataList.getSize():0;
       if(auditbysku) {
         resolveTable = this._renderSkutable();
       }
@@ -290,13 +291,13 @@ class ResolveAudit extends React.Component{
               <div className='gor-usr-form'>
                 <div className="gor-auditResolve-h1"> 
                   <FormattedMessage id="audit.missing.information" description='missing information for audit' 
-                                    defaultMessage='{missingAudit} Items missing in Audit task #{auditId}' 
-                                    values={{missingAudit: this.state.totalMismatch, auditId:auditId}}/> 
+                                    defaultMessage='Audit task #{auditId} - {auditType}' 
+                                    values={{missingAudit: this.state.totalMismatch, auditId:auditId,auditType: auditType}}/> 
                 </div>
                 <div className="gor-auditResolve-h2">
                   <FormattedMessage id="audit.missing.auditType" description='missing information for audit type' 
-                                    defaultMessage='For the {auditType}' 
-                                    values={{auditType: auditType}}/> 
+                                    defaultMessage='Mismatch found in {totalLines} slot' 
+                                    values={{totalLines: totalLines}}/> 
                 </div>
                 <div className="gor-audit-detail">
                   {resolveTable}
