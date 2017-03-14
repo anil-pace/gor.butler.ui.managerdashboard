@@ -38,7 +38,7 @@ class HamBurger extends React.Component{
 							{this.props.data.subHeading}
 						</div>
 					</div>	
-					<div className={'gor-menuIcon '+(this.state.menuVisible?'gor-dropdown-open':'gor-dropdown-close')} >
+					<div className={'gor-menuIcon '+(this.state.menuVisible?this.props.data.openIcon:this.props.data.closeIcon)} >
 					</div>
 					{dropDownMenu}									
 				</div>		

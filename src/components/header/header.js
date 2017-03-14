@@ -53,13 +53,13 @@ class Header extends React.Component{
       //.. all what you put in here you will get access in the modal props ;)
     });
    }
-   _showModal(modalComponent, closeButton)
+   _showModal(modalComponent)
    {
     	modal.add(modalComponent, {
       	title: '',
       	size: 'large', // large, medium or small,
      	closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-     	hideCloseButton: !closeButton
+     	hideCloseButton: true
     	});   	
    }
   	_processData(){
@@ -96,9 +96,9 @@ class Header extends React.Component{
   		optionList.push({optionClass:'gor-operation-normal',  icon:'gor-operation-tick', optionText:option1, 
   			fnButton:'' , buttonText:''});
   		optionList.push({optionClass:'',  icon:'', optionText:option2, 
-  			fnButton:this._showModal.bind(this,PauseOperation,true), buttonText:buttonText});
+  			fnButton:this._showModal.bind(this,PauseOperation), buttonText:buttonText});
   		menuObj = {heading:heading, subHeading:subHeading, optionList:optionList,
-  	 		menuStyle:'', headingStyle:''};
+  	 		menuStyle:'', headingStyle:'',openIcon:'gor-dropdown-open', closeIcon:'gor-dropdown-close'};
   	}
   	else{
   		heading = (<FormattedMessage id="header.emergency.heading" description="Header description" 
@@ -126,10 +126,11 @@ class Header extends React.Component{
         						defaultMessage='Enter password to resume operation.'/>);
   			optionList.push({optionClass:'',  icon:'', 
   				optionText:option2, 
-  				fnButton: this._showModal.bind(this,ResumeOperation,true), buttonText:buttonText});  		  			
+  				fnButton: this._showModal.bind(this,ResumeOperation), buttonText:buttonText});  		  			
   		}
 	  	menuObj = {heading:heading, subHeading:subHeading, optionList:optionList,
-  		 menuStyle:'gor-fail', headingStyle:'gor-white-text'};
+  		 menuStyle:'gor-fail', headingStyle:'gor-white-text', openIcon:'gor-emergency-dropdown-open', 
+  		 closeIcon:'gor-emergency-dropdown-close'};
   	}
 
   	return menuObj;

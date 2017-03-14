@@ -164,7 +164,8 @@ body {
 .user-icon,
 .overview-tile-ontime-icon,
 .statusOl, .statusAl, .iStock, .iAudit, .iPick, .gor-login-user, .gor-login-password, .gor-login-error, .gor-tick, .gor-question, .gor-tick-white, .gor-remove-white, .gor-error-white, .gor-login-user-error, .gor-login-password-error, .gor-question-2, .gor-operation-tick, .gor-alert-lg,
-.gor-dropdown-open, .gor-dropdown-close, .gor-caution, .gor-delay-icon {
+.gor-dropdown-open, .gor-dropdown-close, .gor-caution, .gor-delay-icon,
+.gor-emergency-dropdown-close, .gor-emergency-dropdown-open {
   background-image: url(images/icons.svg);
 }
 
@@ -520,11 +521,12 @@ body {
 }
 
 .gor-dropdown-open {
-  background-position: -10px -110px;
+  background-position: -1px -110px;
   width: 8px;
   height: 8px;
   display: inline-block;
   vertical-align: middle;
+  transform: rotate(180deg);
 }
 
 .gor-dropdown-close {
@@ -539,6 +541,31 @@ body {
   background-position: -511px -1px;
   width: 50px;
   height: 50px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.gor-delay-icon {
+  background-position: -443px -77px;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.gor-emergency-dropdown-open {
+  background-position: -37px -110px;
+  width: 8px;
+  height: 6px;
+  display: inline-block;
+  vertical-align: middle;
+  transform: rotate(180deg);
+}
+
+.gor-emergency-dropdown-close {
+  background-position: -37px -110px;
+  width: 8px;
+  height: 6px;
   display: inline-block;
   vertical-align: middle;
 }
@@ -5188,7 +5215,7 @@ button:disabled {
 .gor-menuWrap {
   display: inline-block;
   line-height: 22px;
-  width: 45%;
+  width: 50%;
 }
 
 .gor-menu-heading {
@@ -5227,7 +5254,7 @@ button:disabled {
   text-align: left;
   font-size: 12px;
   color: #666666;
-  max-height: 35px;
+  max-height: 32px;
 }
 
 .gor-hamburger-option.gor-operation-normal {
@@ -5266,6 +5293,7 @@ button:disabled {
   z-index: 1;
   font-size: 14px;
   border: solid 1px #aaaaaa;
+  border-top: none;
 }
 
 .gor-btn-small {
