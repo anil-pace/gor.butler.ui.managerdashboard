@@ -73,11 +73,13 @@ class SafetyChecklist extends React.Component{
   _handleSafetyConfirm(e)
   {
     e.preventDefault();
-    var noItems;
+    var noItems, formdata;
     noItems = this.props.checkList.length;
+    formdata = {'type':'stop'};
     let userData={
                 'url':VALIDATION_LIST,
                 'method':POST,
+                'formdata':formdata,
                 'cause':CONFIRM_SAFETY,
                 'contentType':APP_JSON,
                 'accept':APP_JSON,
