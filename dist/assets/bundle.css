@@ -3333,6 +3333,7 @@ input[type="checkbox"] {
   padding-left: 14px;
   padding-right: 14px;
   vertical-align: sub;
+  cursor: pointer;
 }
 
 .gorSubTab.gorContainer {

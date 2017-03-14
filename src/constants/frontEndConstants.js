@@ -414,3 +414,5 @@ export const SHOW_SELECTED_ENTRIES = "checked";
 export const SHOW_FILTER = "SHOW_FILTER";
 export const IS_FILTER_APPLIED = "IS_FILTER_APPLIED";
 export const AUDIT_TASK_ID = "AUDIT TASK ID"
+export const ADD_TOKEN = "add";
+export const ADD_DEFAULT = "addDefault";

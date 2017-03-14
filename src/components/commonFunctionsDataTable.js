@@ -24,7 +24,6 @@ export function filterIndex(e,_dataList,filterField) {
   }
 
      var size = _dataList.getSize(), data = [];
-     var allIndex = Array.from(Array(size).keys());
      var filteredIndexes = [];
 
     for (var index = 0; index < size; index++) {
@@ -177,7 +176,7 @@ export const ProgressCell = ({rowIndex, data, columnKey, resolved, unresolved, .
 
     {(!data.getObjectAt(rowIndex)[resolved] && data.getObjectAt(rowIndex)[unresolved])?
     <div className="gor-resolve-head">
-    <FormattedMessage id="audit.unresolveIssues" description='unresolve issue for audit table' defaultMessage='{unresolvedCount} unresolved issues' values={{unresolvedCount:data.getObjectAt(rowIndex)[unresolved]}}/>
+    <FormattedMessage id="audit.unresolveIssues" description='unresolve issue for audit table' defaultMessage='{unresolvedCount} {unresolvedCount,plural, one {unresolved issue} other{unresolved issues}}' values={{unresolvedCount:data.getObjectAt(rowIndex)[unresolved]?data.getObjectAt(rowIndex)[unresolved]:"0"}}/>
     </div> : ""
     }
 

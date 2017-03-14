@@ -24,7 +24,7 @@ const messages = defineMessages({
       defaultMessage:"PPS-{ppsId}"
     },
     perfPrefix:{
-      id:"ppsDetail.performance.prefix", 
+      id:"ppsDetail.performance.prefix.items", 
       description:"prefix for pps id in ppsDetail", 
       defaultMessage:"{performance} items/hr"
     }
@@ -69,7 +69,7 @@ class PPS extends React.Component{
     }
     else {
       detail.status = OFF;
-      detail.statusPriority = 2;
+      detail.statusPriority = 1;
     }
     detail.statusClass = data[i].pps_status;
     detail.operatingMode = currentTask[data[i].current_task];

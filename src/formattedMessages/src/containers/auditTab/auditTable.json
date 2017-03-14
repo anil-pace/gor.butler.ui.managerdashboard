@@ -5,6 +5,11 @@
     "defaultMessage": "Manage Tasks"
   },
   {
+    "id": "auditList.alert.lable",
+    "description": "audit list alert lable",
+    "defaultMessage": "{auditIssue} {auditIssue, plural, one {Alert} other {Alerts}}"
+  },
+  {
     "id": "audit.table.duplicateTask",
     "description": "duplicateTask option for audit",
     "defaultMessage": "Duplicate task"

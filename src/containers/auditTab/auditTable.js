@@ -228,7 +228,11 @@ class AuditTable extends React.Component {
       var skuAudit = this.props.auditState.skuAudit;
       var totalProgress = this.props.auditState.totalProgress;
       var rowsCount = sortedDataList.getSize();
-      var headerAlert =  <div className="gorToolHeaderEl alertState"> <div className="table-subtab-alert-icon"/> <div className="gor-inline">{auditIssue} Alerts </div> </div>
+      var headerAlert =  <div className="alertState"> <div className="table-subtab-alert-icon"/> 
+                          <div className="gor-inline"><FormattedMessage id="auditList.alert.lable" description='audit list alert lable' 
+                                                          defaultMessage='{auditIssue} {auditIssue,plural, one{Alert} other{Alerts}}' 
+                                                          values={{auditIssue: auditIssue?auditIssue:'0'}}/> </div> 
+                          </div>
     
       var duplicateTask = <FormattedMessage id="audit.table.duplicateTask" description="duplicateTask option for audit" defaultMessage ="Duplicate task"/>; 
       var deleteRecord = <FormattedMessage id="audit.table.deleteRecord" description="deleteRecord option for audit" defaultMessage ="Delete record"/>; 

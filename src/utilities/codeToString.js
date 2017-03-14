@@ -128,7 +128,7 @@ export function codeToString(res){
             case CODE_AE008:
               stringInfo={
                 type:SUCCESS,
-                msg:AE007
+                msg:AE008
               }                     
               break;    
             case CODE_AE007:

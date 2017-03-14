@@ -30,8 +30,8 @@ class AuditFilter extends React.Component{
     }
  
     _processFilterToken() {
-        var tokenFieldC1 = {value:"AUDIT TYPE", label:<FormattedMessage id="audit.tokenfield.typeAudit" defaultMessage ="AUDIT TYPE"/>};
-        var tokenFieldC2 = {value:"STATUS", label:<FormattedMessage id="audit.tokenfield.STATUS" defaultMessage ="STATUS"/>}; 
+        var tokenAuditTypeField = {value:"AUDIT TYPE", label:<FormattedMessage id="audit.tokenfield.typeAudit" defaultMessage ="AUDIT TYPE"/>};
+        var tokenStatusField = {value:"STATUS", label:<FormattedMessage id="audit.tokenfield.STATUS" defaultMessage ="STATUS"/>}; 
         const labelC1 = [
                     { value: 'all', label:<FormattedMessage id="audit.token1.all" defaultMessage ="Any"/> },
                     { value: 'sku', label:<FormattedMessage id="audit.token1.sku" defaultMessage ="SKU"/> },
@@ -46,8 +46,8 @@ class AuditFilter extends React.Component{
                     { value: 'pending', label:<FormattedMessage id="audit.token2.pending" defaultMessage ="Pending"/> }
                     ];
         var selectedToken =  this.state.tokenSelected;
-        var column1 = <FilterTokenWrap field={tokenFieldC2} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC2} selectedToken={selectedToken}/>;
-        var column2 = <FilterTokenWrap field={tokenFieldC1} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC1} selectedToken={selectedToken}/>;
+        var column1 = <FilterTokenWrap field={tokenStatusField} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC2} selectedToken={selectedToken}/>;
+        var column2 = <FilterTokenWrap field={tokenAuditTypeField} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC1} selectedToken={selectedToken}/>;
         var columnDetail = {column1token:column1, column2token:column2};
         return columnDetail;
     }
@@ -61,7 +61,6 @@ class AuditFilter extends React.Component{
     }
 
     _applyFilter() {
-      console.log(this.state)
       this.props.refreshOption(this.state);
     }
 
