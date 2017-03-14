@@ -56,7 +56,8 @@ export const CODE_AE006='ae006';
 export const CODE_AS002='as002';
 export const CODE_AS003='as003';
 export const CODE_G016='g016';
-
+export const CODE_AE007='ae007';
+export const CODE_AE008='ae008';
 /*User roles map*/
 export const BUTLER_SUPERVISOR = 'butler_supervisor';
 export const BUTLER_UI = 'butler_ui';
@@ -239,6 +240,11 @@ export const  stringConfig= defineMessages({
         "id": "stringConfig.audit_rejected",
         "description": "Text for audit rejected status",
         "defaultMessage": "Rejected"
+    },
+    audit_reaudited: {
+        "id": "stringConfig.audit_reaudited",
+        "description": "Text for audit reaudited status",
+        "defaultMessage": "Re-audited"
     }
     
 });

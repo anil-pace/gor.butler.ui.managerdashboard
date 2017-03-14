@@ -205,7 +205,8 @@ refresh = (data) => {
   var convertTime = {"oneHourOrders": 1, "twoHourOrders": 2, "sixHourOrders": 6, "twelveHourOrders": 12, "oneDayOrders": 24};
   var prevTime,currentTime;
   var  appendStatusUrl="", appendTimeUrl="", appendPageSize="", appendSortUrl="", appendTextFilterUrl="";
-  var sortHead = {"recievedTime":"&order_by=create_time", "pickBy":"&order_by=pick_before_time", "id":"&order_by=order_id"};
+  var sortHead = {"recievedTime":"&order_by=create_time", "pickBy":"&order_by=pick_before_time", "id":"&order_by=order_id",
+                  "status":"&order_by=warehouse_status&order_by_seq=['breached','exception','not_fulfillable','abandoned','temporary_unfulfillable','pending','fulfillable','cancelled','completed']"};
   var sortOrder = {"DESC":"&order=asc", "ASC":"&order=desc"};
   var filterApplied = false;
   if(!data) {

@@ -46,12 +46,12 @@
   {
     "id": "audit.missing.information",
     "description": "missing information for audit",
-    "defaultMessage": "{missingAudit} Items missing in Audit task #{auditId}"
+    "defaultMessage": "Audit task #{auditId} - {auditType}"
   },
   {
     "id": "audit.missing.auditType",
     "description": "missing information for audit type",
-    "defaultMessage": "For the {auditType}"
+    "defaultMessage": "Mismatch found in {totalLines} slot"
   },
   {
     "id": "resolveAudit.cancelLabel",

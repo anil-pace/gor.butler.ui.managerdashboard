@@ -168,5 +168,10 @@
     "id": "stringConfig.audit_rejected",
     "description": "Text for audit rejected status",
     "defaultMessage": "Rejected"
+  },
+  {
+    "id": "stringConfig.audit_reaudited",
+    "description": "Text for audit reaudited status",
+    "defaultMessage": "Re-audited"
   }
 ]

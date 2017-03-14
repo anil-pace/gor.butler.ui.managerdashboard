@@ -18,7 +18,7 @@ class CreateAudit extends React.Component{
   {
       super(props); 
       var selectedList = []; 
-      this.state = {selected:selectedList}
+      this.state = {selected:selectedList,confirmedSku:null,currentSku:""}
   }
   componentWillUnmount()
   {
@@ -62,6 +62,7 @@ class CreateAudit extends React.Component{
       this.props.validateSKUcodeSpinner(true);
       this.props.validateSKUcode(urlData);
       this.noSkuValidation = false;
+      this.setState({confirmedSku:this.skuId.value})
   }
   _checkSku(skuId){
     let skuInfo;
@@ -176,6 +177,12 @@ class CreateAudit extends React.Component{
       return dropdownData;
     }
   }
+  _captureQuery(e) {
+    if(e.target.value) {
+      var emptyList = [];
+      this.setState({currentSku:e.target.value,selected:emptyList})
+    }
+  }
 
   render()
   {
@@ -187,6 +194,7 @@ class CreateAudit extends React.Component{
       var processedSkuResponse = this._processSkuAttributes();
       var skuState = this._claculateSkuState(processedSkuResponse);
       var dropdownData = this._searchDropdownEntries(skuState,processedSkuResponse);
+      var confirmedSkuNotChanged = (this.state.confirmedSku===this.state.currentSku?true:false)
       
       return (
         <div>
@@ -229,18 +237,18 @@ class CreateAudit extends React.Component{
              <div className='gor-usr-hdsm'><FormattedMessage id="audit.add.sku.heading" description='Text for SKU heading' 
             defaultMessage='Enter SKU code'/></div>
               <div className="gor-audit-input-wrap">
-                <input className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} placeholder="e.g. 46978072" id="skuid"  ref={node => { this.skuId = node }}/>
-                <div className={skuState===SKU_NOT_EXISTS?"gor-login-error":(skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU?"gor-verified-icon":"")}/>
+                <input className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} placeholder="e.g. 46978072" id="skuid"  ref={node => { this.skuId = node }} onChange={this._captureQuery.bind(this)}/>
+                <div className={skuState===SKU_NOT_EXISTS?"gor-login-error":((skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU )&& confirmedSkuNotChanged?"gor-verified-icon":"")}/>
               </div>
               <div className={"gor-sku-validation-btn-wrap" + (this.props.skuValidationResponse?" gor-disable-content":"")}>
                 <button className="gor-auditCreate-btn" type="button" onClick={this._validSku.bind(this)}><FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
                         defaultMessage='Validate'/></button>
               </div>
               <div className={skuState===SKU_NOT_EXISTS?"gor-sku-error":"gor-sku-valid"}>
-                {skuState===SKU_NOT_EXISTS?invalidSkuMessg:(skuState===VALID_SKU?validSkuMessg:(skuState===NO_ATTRIBUTE_SKU?validSkuNoAtriMessg:""))}
+                {confirmedSkuNotChanged?(skuState===SKU_NOT_EXISTS?invalidSkuMessg:(skuState===VALID_SKU?validSkuMessg:(skuState===NO_ATTRIBUTE_SKU?validSkuNoAtriMessg:""))):""}
               </div>
-              {skuState===NO_ATTRIBUTE_SKU?"":
-                <div className={"gor-searchDropdown-audit-wrap" + (skuState!= VALID_SKU?" gor-disable-content":"")}>
+              {skuState===NO_ATTRIBUTE_SKU ?"":
+                <div className={"gor-searchDropdown-audit-wrap" + (skuState!= VALID_SKU || !confirmedSkuNotChanged?" gor-disable-content":"")}>
                   <div className='gor-usr-hdsm'><FormattedMessage id="audit.dropdown.heading" description='Text for dropdown heading' 
                        defaultMessage='Choose Box Id (Optional)'/></div>
                   <SearchDropdown list={dropdownData} selectedItems={this._selectedAttributes.bind(this)}/>
@@ -257,7 +265,7 @@ class CreateAudit extends React.Component{
             </div>
             </div>
             <p className='gor-submit'>
-             <button className={"gor-add-btn" + (processedSkuResponse.isValid || this.props.auditType===LOCATION?"":" gor-disable-content")}><FormattedMessage id="audits.add.password.button" description='Text for add audit button' 
+             <button className={"gor-add-btn" + ((processedSkuResponse.isValid && confirmedSkuNotChanged)|| this.props.auditType===LOCATION?"":" gor-disable-content")}><FormattedMessage id="audits.add.password.button" description='Text for add audit button' 
             defaultMessage='Create audit'/></button>
             </p>
             </div>

@@ -6,7 +6,7 @@ import {showTableFilter, filterApplied} from '../../actions/filterAction';
 import { connect } from 'react-redux'; 
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
-
+import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
 class OrderFilter extends React.Component{
 	constructor(props) 
 	{
@@ -22,7 +22,7 @@ class OrderFilter extends React.Component{
     }	
 
     _processAuditSearchField(){
-        var temp = ["ORDER ID"]
+        var temp = [{value:"ORDER ID", label:<FormattedMessage id="order.inputField.id" defaultMessage ="ORDER ID"/>}];
         var inputValue = this.state.searchQuery;
         var inputField = <FilterInputFieldWrap inputText={temp} handleInputText={this._handleInputQuery.bind(this)} inputValue={inputValue}/>
         return inputField;           
@@ -30,73 +30,42 @@ class OrderFilter extends React.Component{
     }
 
     _processFilterToken() {
-        var tempField1 = "STATUS",tempField2="TIME PERIOD"; 
+        var tokenField1 = {value:"STATUS", label:<FormattedMessage id="order.token.status" defaultMessage ="STATUS"/>};
+        var tokenField2 = {value:"TIME PERIOD", label:<FormattedMessage id="order.token.timePeriod" defaultMessage ="TIME PERIOD"/>}; 
         var labelC1 = [
-                    { value: 'all', label: "All orders" },
-                    { value: 'breached', label: "Breached orders" },
-                    { value: 'pending', label: "Pending orders" },
-                    { value: 'completed', label: "Completed orders" },
-                    { value: 'exception', label: "Exception"}
+                    { value: 'all', label: <FormattedMessage id="order.STATUS.all" defaultMessage ="All orders"/>},
+                    { value: 'breached', label: <FormattedMessage id="order.STATUS.breach" defaultMessage ="Breached orders"/>},
+                    { value: 'pending', label: <FormattedMessage id="order.STATUS.pending" defaultMessage ="Pending orders"/>},
+                    { value: 'completed', label: <FormattedMessage id="order.STATUS.completed" defaultMessage ="Completed orders"/>},
+                    { value: 'exception', label: <FormattedMessage id="order.STATUS.exep" defaultMessage ="Exception"/>}
                     ];
         var labelC2 = [
-                    { value: 'allOrders', label: "All" },
-                    { value: 'oneHourOrders', label: "Last 1 hours" },
-                    { value: 'twoHourOrders', label: "Last 2 hours" },
-                    { value: 'sixHourOrders', label: "Last 6 hours" },
-                    { value: 'twelveHourOrders', label: "Last 12 hours" },
-                    { value: 'oneDayOrders', label: "Last 1 day" }
+                    { value: 'allOrders', label: <FormattedMessage id="order.timePeriod.all" defaultMessage ="All"/>},
+                    { value: 'oneHourOrders', label: <FormattedMessage id="order.timePeriod.oneHr" defaultMessage ="Last 1 hours"/>},
+                    { value: 'twoHourOrders', label: <FormattedMessage id="order.timePeriod.twoHR" defaultMessage ="Last 2 hours"/>},
+                    { value: 'sixHourOrders', label: <FormattedMessage id="order.timePeriod.sixHr" defaultMessage ="Last 6 hours"/>},
+                    { value: 'twelveHourOrders', label: <FormattedMessage id="order.timePeriod.twoHr" defaultMessage ="Last 12 hours"/>},
+                    { value: 'oneDayOrders', label: <FormattedMessage id="order.timePeriod.oneday" defaultMessage ="Last 1 day"/>}
                     ];
         var selectedToken =  this.state.tokenSelected;
-        var column1 = <FilterTokenWrap field={tempField1} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC1} selectedToken={selectedToken}/>;
-        var column2 = <FilterTokenWrap field={tempField2} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC2} selectedToken={selectedToken}/>;
+        var column1 = <FilterTokenWrap field={tokenField1} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC1} selectedToken={selectedToken}/>;
+        var column2 = <FilterTokenWrap field={tokenField2} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC2} selectedToken={selectedToken}/>;
         var columnDetail = {column1token:column1, column2token:column2};
         return columnDetail;
     }
 
     _handelTokenClick(field,value,state) {
-        var selectedToken = this.state.tokenSelected;
-        var defaultToken = this.state.defaultToken[field];
-        if(selectedToken[field]) {
-            if(state === "add") {                           // when user select a token adds in state and remove default selected token
-                selectedToken[field].push(value);
-                var removeDefaultFieldIndex = selectedToken[field].indexOf(defaultToken[0]);
-                if (removeDefaultFieldIndex >= 0) {
-                    selectedToken[field].splice( removeDefaultFieldIndex, 1 );
-                }
-            }
-            else if(state === "addDefault") {              // when user add the default token
-                selectedToken[field] = [];
-                selectedToken[field].push(value);
-            }
-            else {
-                var index = selectedToken[field].indexOf(value);  // when user removing token
-                if (index >= 0) {
-                    selectedToken[field].splice( index, 1 );
-                }
-                if (selectedToken[field] && !selectedToken[field].length) { // checks when none is selected, checks default option
-                    selectedToken[field].push(defaultToken[0])
-                }
-            }
-        }
-
-        else {
-            selectedToken[field] = [];
-            selectedToken[field].push(value);
-        }
-        this.setState({tokenSelected:selectedToken});
+        this.setState({tokenSelected:handelTokenClick(field,value,state,this.state)});
         
     }
 
     _handleInputQuery(inputQuery,queryField) {
-        var currentSearchState = this.state.searchQuery;
-        currentSearchState[queryField] = inputQuery;
-        this.setState({searchQuery:currentSearchState})
+        this.setState({searchQuery:handleInputQuery(inputQuery,queryField,this.state)})
     }
 
     _applyFilter() {
-       var temp = this.state;
-       this.props.refreshOption(temp);
-
+        console.log(this.state)
+       this.props.refreshOption(this.state);
     }
 
     _clearFilter() {
