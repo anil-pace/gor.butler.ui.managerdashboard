@@ -1,12 +1,27 @@
 [
   {
-    "id": "users.delete.cancel",
-    "description": "Text for Cancel button",
+    "id": "operation.pause.heading",
+    "description": "Text for pause operation heading",
+    "defaultMessage": "Pause Operation"
+  },
+  {
+    "id": "operation.pause.text",
+    "description": "Text for pause operation action",
+    "defaultMessage": "All Butler bots, PPS and other sysytem components will be paused once\n              completed the last action"
+  },
+  {
+    "id": "operation.pause.error",
+    "description": "Text for wrong password",
+    "defaultMessage": "The entered input does not match. Please try again."
+  },
+  {
+    "id": "operation.pause.cancel",
+    "description": "Text for cancel button",
     "defaultMessage": "Cancel"
   },
   {
-    "id": "users.delete.confirm",
-    "description": "Text for Delete button",
+    "id": "operation.pause.button",
+    "description": "Text for pause button",
     "defaultMessage": "Pause Operation"
   }
 ]

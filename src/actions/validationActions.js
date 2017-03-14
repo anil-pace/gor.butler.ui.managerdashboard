@@ -1,7 +1,7 @@
 import {SKU_DATA,LOC_DATA,ID_DATA,NAME_DATA,PASSWORD_DATA,INFO_RESET,
 	ID_BACKEND,NOTIFY_PASS,NOTIFY_HIDE,NOTIFY_FAIL,NOTIFY_DELETE,
 	NOTIFY_INFO,LOGIN_ERROR,AJAX_CALL,VALIDATE_SKU_SPINNER,
-	VALIDATED_SKU_CODE,MODAL_STATUS} from '../constants/frontEndConstants';
+	VALIDATED_SKU_CODE,MODAL_STATUS,SAFETY_MAP,SAFETY_ERROR_MAP} from '../constants/frontEndConstants';
 
 
 export function validateID(data){
@@ -105,6 +105,20 @@ export function validatedSKUcode(data) {
 export function modalStatus(data){
 	return{
 		type: MODAL_STATUS,
+		data
+	}
+}
+
+export function getSafetyList(data){
+	return{
+		type:SAFETY_MAP,
+		data
+	}
+}
+
+export function getSafetyErrorList(data){
+	return{
+		type:SAFETY_ERROR_MAP,
 		data
 	}
 }

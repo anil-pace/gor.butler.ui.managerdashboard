@@ -163,3 +163,9 @@ export const MG_PWD=(<FormattedMessage id="users.add.password.subheading.manager
       defaultMessage='A password of at least 8 alphanumeric characters will be required for logging into the Management Interface and Operator Interface'/>);
 export const OP_PWD=(<FormattedMessage id="users.add.password.subheading.operator" description='Subheading for create password operator' 
       defaultMessage='A password of 6 digits will be required for logging into the Operator Interface.'/>);
+
+//Messages for emergency
+export const E051=(<FormattedMessage id="emergency.resume.coreerror" description='Error while resuming operation' 
+      defaultMessage='Cannot connect to butler core'/>);
+export const ES=(<FormattedMessage id="emergency.resume.success" description='Operations resumed' 
+      defaultMessage='Operation resumed'/>);

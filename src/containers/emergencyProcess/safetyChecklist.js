@@ -1,13 +1,15 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
-import { resetForm,validateID,validateName } from '../../actions/validationActions'; 
+import { resetForm} from '../../actions/validationActions'; 
 import {userRequest} from '../../actions/userActions';
+import {setSafetySpinner} from '../../actions/spinnerAction';
 import { connect } from 'react-redux';
-import { ERROR,SUCCESS,GET,APP_JSON,POST,CONFIRM_SAFETY} from '../../constants/frontEndConstants';
-import { PPSLIST_URL } from '../../constants/configConstants';
+import { ERROR,SUCCESS,GET,APP_JSON,POST,CHECK_SAFETY,CONFIRM_SAFETY} from '../../constants/frontEndConstants';
+import { LOGIN_URL, VALIDATION_LIST } from '../../constants/configConstants';
 import { locationStatus, skuStatus } from '../../utilities/fieldCheck';
-
+import {stringConfig} from '../../constants/backEndConstants';
+import Spinner from '../../components/spinner/Spinner';
 
 class SafetyChecklist extends React.Component{
   constructor(props) 
@@ -29,15 +31,26 @@ class SafetyChecklist extends React.Component{
     {
       this._removeThisModal();
     }
+    if(nextProps.modalStatus && !this.props.modalStatus){
+      this._removeThisModal();
+    }
+    if(nextProps.safetyErrorList.length != this.props.safetyErrorList.length)
+    {
+      var errorList = this.props.safetyErrorList;
+      this.setState({safetyError:true, errorList:errorList});
+      for(let i in errorList){
+        this._toggleSelection(errorList[i],noItems);           
+      }      
+    }
   }
   componentDidMount(){
         let userData={
-                'url':PPSLIST_URL,
+                'url':VALIDATION_LIST,
                 'method':GET,
-                'cause':CONFIRM_SAFETY,
+                'cause':CHECK_SAFETY,
                 'contentType':APP_JSON,
                 'accept':APP_JSON,
-                'token':sessionStorage.getItem('auth_token')
+                'token':this.props.auth_token
             }
         this.props.userRequest(userData);
   }
@@ -61,12 +74,17 @@ class SafetyChecklist extends React.Component{
   {
     e.preventDefault();
     var noItems;
-    noItems = this.props.ppsList.length;
-    this.setState({safetyError:true, errorList:[4,3]});
-    for(let i in this.state.errorList){
-      this._toggleSelection(errorList[i],noItems);           
+    noItems = this.props.checkList.length;
+    let userData={
+                'url':VALIDATION_LIST,
+                'method':POST,
+                'cause':CONFIRM_SAFETY,
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
+                'token':this.props.auth_token
     }
-
+    this.props.userRequest(userData);
+    this.props.setSafetySpinner(true);
   }
   _isValid(item,noItems){
     var errorList = this.state.errorList, idx;
@@ -77,40 +95,32 @@ class SafetyChecklist extends React.Component{
     return true;
   }
   _processList(){
-    var checkList=[],items=this.props.ppsList,noItems=items.length,item;
+    var checkList=[],items=this.props.checkList, noItems, item, msgCode;
+    noItems=items.length;
     for(let i=0;i<noItems;i++)
     {
-        if(this._isValid(items[i],noItems)){
-          item = (<li key={items[i]}>
-              <input type="checkbox" key={true} value={items[i]} onChange={this._toggleSelection.bind(this,i,noItems)} />
+        msgCode = items[i];
+        if(this._isValid(msgCode,noItems)){
+          item = (<li key={msgCode}>
+              <input type="checkbox" key={true} value={msgCode} onChange={this._toggleSelection.bind(this,msgCode,noItems)} />
               <span className='gor-checklist-item'>
-                {items[i]}
+                {stringConfig[msgCode]}
               </span>
               </li>);
         }
         else{
-          item = (<li key={items[i]}>
-              <input type="checkbox" key={false} value={items[i]} onChange={this._toggleSelection.bind(this,i,noItems)} />
+          item = (<li key={msgCode}>
+              <input type="checkbox" key={false} value={msgCode} onChange={this._toggleSelection.bind(this,msgCode,noItems)} />
               <span className='gor-checklist-item'>
-                {items[i]}
-              </span><span className='gor-error-sm'>(Check again)</span>
+                {stringConfig[msgCode]}
+              </span><span className='gor-error-sm'><FormattedMessage id='operation.safety.steperror' 
+                    defaultMessage="(Check again)"
+                            description="Text for error in step"/></span>
               </li>);
         }
         checkList.push(item);
     }
     return checkList;
-  }
-  _handleSafety(){
-    let delurl='';
-    let userData={
-                'url':delurl,
-                'method':POST,
-                'cause':PAUSE_OPERATION,
-                'contentType':APP_JSON,
-                'accept':APP_JSON,
-                'token':this.props.auth_token
-    }
-    this.props.userRequest(userData);
   }
   render()
   {
@@ -119,7 +129,9 @@ class SafetyChecklist extends React.Component{
         <div className='gor-safetylist'>
           <div className="gor-modal-content">
             <div className='gor-modal-head'>
-              <div className='gor-usr-add'>Safety checklist
+              <div className='gor-usr-add'><FormattedMessage id='operation.safety.heading' 
+                    defaultMessage="Safety checklist"
+                            description="Text for safety heading"/>
               </div>
               <span className="close" onClick={this._removeThisModal.bind(this)}>×</span>
             </div>
@@ -128,14 +140,20 @@ class SafetyChecklist extends React.Component{
                 onSubmit={(e) => this._handleSafetyConfirm(e)}>
              <div className='gor-usr-form'>
               <div className='gor-usr-details'>
-                <div className='gor-usr-hdsm'>Check approval steps</div>
-                <div className='gor-sub-head'>Tick every item to confirm that the system is safe to resume operation</div>
+                <div className='gor-usr-hdsm'><FormattedMessage id='operation.safety.steps' 
+                    defaultMessage="Check approval steps"
+                            description="Text for approval steps"/></div>
+                <div className='gor-sub-head'><FormattedMessage id='operation.safety.text' 
+                    defaultMessage="Tick every item to confirm that the system is safe to resume operation"
+                            description="Text for ticking items"/></div>
                 <div className='gor-safety-body'>
                  {this.state.safetyError && 
                   (<div className='gor-safety-error'>
                     <div className='tab-alert-icon'></div>
-                    <div className='gor-error-sm'>System has found some of these steps were not followed. 
-                    Please check or contact service engineer for support</div>
+                    <div className='gor-error-sm'><FormattedMessage id='operation.safety.errors' 
+                    defaultMessage="System has found some of these steps were not followed. 
+                    Please check or contact service engineer for support"
+                            description="Text for safety error"/></div>
                   </div>)
                   }
                   <ul>
@@ -144,7 +162,10 @@ class SafetyChecklist extends React.Component{
                 </div> 
                 <div className='gor-margin-top'>
                 <button type="submit" className="gor-add-btn" disabled={(!this.state.allChecked)?true:false}
-                  onClick={this._handleSafetyConfirm.bind(this)}>Confirm</button>
+                  onClick={this._handleSafetyConfirm.bind(this)}><FormattedMessage id='operation.safety.confirm' 
+                    defaultMessage="Confirm" description="Text for confirm button"/>
+                    <Spinner isLoading={this.props.safetySpinner} setSpinner={this.props.setSafetySpinner}/>
+                    </button>
                 </div>
               </div>
              </div>
@@ -158,16 +179,19 @@ class SafetyChecklist extends React.Component{
 function mapStateToProps(state, ownProps){
   return {
       auditType:  state.auditInfo.auditType  || {},
-      ppsList: [2,3,4],
-      auth_token:state.authLogin.auth_token
+      checkList: state.appInfo.safetyList || [],
+      safetyErrorList: state.appInfo.safetyErrorList || [],
+      auth_token:state.authLogin.auth_token,
+      modalStatus: state.appInfo.hideModal || false,
+      safetySpinner:state.spinner.safetySpinner || false
   };
 }
 
 var mapDispatchToProps = function(dispatch){
   return {
     userRequest: function(data){ dispatch(userRequest(data)); },
-    resetAuditType: function(data){ dispatch(resetAuditType(data)); },    
-    resetForm:   function(){ dispatch(resetForm()); }
+    resetForm:   function(){ dispatch(resetForm()); },
+    setSafetySpinner: function(data){ dispatch(setSafetySpinner(data)); }
   }
 };
 

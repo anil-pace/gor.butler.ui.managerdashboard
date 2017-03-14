@@ -3,10 +3,12 @@ import ReactDOM  from 'react-dom';
 import { connect } from 'react-redux' ;
 import {userRequest} from '../../actions/userActions';
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
+import {modal} from 'react-redux-modal';
 import {validatePassword, resetForm} from '../../actions/validationActions';
 import { emptyField } from '../../utilities/fieldCheck';
 import {LOGIN_URL} from '../../constants/configConstants';
 import {ERROR,TYPING,APP_JSON,POST,SUCCESS,RESUME_OPERATION} from '../../constants/frontEndConstants';
+import SafetyChecklist from './safetyChecklist';
 
 class ResumeOperation extends React.Component{
   constructor(props) 
@@ -34,6 +36,13 @@ class ResumeOperation extends React.Component{
     }
     if(nextProps.modalStatus && !this.props.modalStatus){
       this._removeThisModal();
+      modal.add(SafetyChecklist, {
+      title: '',
+      size: 'large', // large, medium or small,
+      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: true // (optional) if you don't wanna show the top right close button
+      //.. all what you put in here you will get access in the modal props ;)
+      });
     }
   }
   _handleResume(){
@@ -57,11 +66,16 @@ class ResumeOperation extends React.Component{
       return (
           <div className='gor-operation-pause gor-modal-content'>
             <div className='gor-operation-head'>
-              <div className='gor-question-2'></div>Resume Operation
+              <div className='gor-question-2'></div>
+              <FormattedMessage id='operation.resume.heading' 
+                    defaultMessage="Resume Operation"
+                            description="Text for resume operation heading"/>
             </div>
             <div className='gor-operation-body'>
-              <span>To resume operation, you will be required to go through a safety
-                checklist to make sure that the Butler system is ready</span>
+              <span><FormattedMessage id='operation.resume.text' 
+                    defaultMessage="To resume operation, you will be required to go through a safety
+                checklist to make sure that the Butler system is ready"
+                            description="Text for resume operation body"/></span>
               <div className='gor-margin-top'>
                  <div className={'gor-password-field-lg'+(this.props.passWordCheck.type === ERROR?' gor-input-error':' gor-input-ok')} ref={node => { this.passField = node }}>
                         <div className={this.props.passWordCheck.type === ERROR?'gor-login-password-error':'gor-login-password'}></div>
@@ -71,14 +85,19 @@ class ResumeOperation extends React.Component{
                 </div>
                 {this.props.passWordCheck && this.props.passWordCheck.type === ERROR?
                   (<div className='gor-login-usr-error gor-sm-string' >
-                      The entered input does not match. Please try again.
+                      <FormattedMessage id='operation.resume.error' 
+                    defaultMessage="The entered input does not match. Please try again."
+                            description="Text for wrong password"/>
                   </div>):''
                 }
              </div>
               <div className='gor-margin-top'>              
-                <button className='gor-cancel-btn' onClick={this._removeThisModal.bind(this)}>Cancel</button>
+                <button className='gor-cancel-btn' onClick={this._removeThisModal.bind(this)}>
+                <FormattedMessage id='operation.cancel' 
+                        defaultMessage="Cancel" description="Text for cancel"/></button>
                 <button className='gor-add-btn' disabled={this.props.passWordCheck.type === SUCCESS?false:true}
-                onClick={this._handleResume.bind(this)} >View safety checklist</button>
+                onClick={this._handleResume.bind(this)} ><FormattedMessage id='operation.resume.view' 
+                        defaultMessage="View safety checklist" description="Text for viewing safety checklist"/></button>
               </div>
             </div>
           </div>

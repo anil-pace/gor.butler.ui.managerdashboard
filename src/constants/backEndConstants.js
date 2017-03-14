@@ -239,7 +239,36 @@ export const  stringConfig= defineMessages({
         "id": "stringConfig.audit_rejected",
         "description": "Text for audit rejected status",
         "defaultMessage": "Rejected"
+    },
+    md001 : {
+        "id": "stringConfig.md001",
+        "description": "Text for safety checklist item 1",
+        "defaultMessage": "No personnel are present in the no-man zone."
+    },
+    md002 : {
+        "id": "stringConfig.md002",
+        "description": "Text for safety checklist item 2",
+        "defaultMessage": "All Butler and MSU positions have been corrected."
+    },
+    md003 : {
+        "id": "stringConfig.md003",
+        "description": "Text for safety checklist item 3",
+        "defaultMessage": "All no-man zone gates are properly closed."
+    },
+    md004 : {
+        "id": "stringConfig.md004",
+        "description": "Text for safety checklist item 4",
+        "defaultMessage": "All no-man gate limit switches are active and working."
+    },
+    md005 : {
+        "id": "stringConfig.md005",
+        "description": "Text for safety checklist item 5",
+        "defaultMessage": "No zonal emergencies are pressed."
+    },
+    md006 : {
+        "id": "stringConfig.md006",
+        "description": "Text for safety checklist item 6",
+        "defaultMessage": "All Zigbee boxes are online."
     }
-    
 });
 

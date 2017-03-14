@@ -5169,7 +5169,7 @@ button:disabled {
   width: 45%;
 }
 
-.gor-upperText {
+.gor-menu-heading {
   font-family: "Source Sans Pro";
   font-size: 18px;
   color: #3c3f43;
@@ -5177,7 +5177,7 @@ button:disabled {
   display: inline-block;
 }
 
-.gor-upperText.gor-white-text {
+.gor-menu-heading.gor-white-text {
   color: #FFFFFF;
 }
 
@@ -5188,13 +5188,13 @@ button:disabled {
   margin-right: 20px;
 }
 
-.gor-subText {
+.gor-menu-subheading {
   font-family: "Source Sans Pro";
   font-size: 0.75rem;
   color: #3c3f43;
 }
 
-.gor-subText.gor-white-text {
+.gor-menu-subheading.gor-white-text {
   color: #FFFFFF;
 }
 
@@ -5205,6 +5205,7 @@ button:disabled {
   text-align: left;
   font-size: 12px;
   color: #666666;
+  max-height: 35px;
 }
 
 .gor-hamburger-option.gor-operation-normal {

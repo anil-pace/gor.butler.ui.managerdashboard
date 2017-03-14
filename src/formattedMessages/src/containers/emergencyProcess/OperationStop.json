@@ -1,12 +1,32 @@
 [
   {
-    "id": "users.delete.cancel",
-    "description": "Text for Cancel button",
-    "defaultMessage": "Cancel"
+    "id": "operation.alert.stop",
+    "description": "Text for operation stopped heading",
+    "defaultMessage": "Operation Stopped"
   },
   {
-    "id": "users.delete.confirm",
-    "description": "Text for Delete button",
-    "defaultMessage": "Delete"
+    "id": "operation.alert.pause",
+    "description": "Text for operation paused heading",
+    "defaultMessage": "Operation Paused"
+  },
+  {
+    "id": "operation.alert.stop.text",
+    "description": "Text for emergency button press",
+    "defaultMessage": "Emergency Stop button has been pressed."
+  },
+  {
+    "id": "operation.alert.pause.text",
+    "description": "Text for operation paused alert",
+    "defaultMessage": "Butler operation has been paused from the management dashboard"
+  },
+  {
+    "id": "operation.alert.stop.subtext",
+    "description": "Subtext for stop alert",
+    "defaultMessage": "To resume butler operation in the warehouse, you will be required to go through a safety checklist"
+  },
+  {
+    "id": "operation.alert.pause.subtext",
+    "description": "Subtext for pause alert",
+    "defaultMessage": "You must check the emergency situation and release the Emergency Stop button in order to resume the operation in warehouse"
   }
 ]

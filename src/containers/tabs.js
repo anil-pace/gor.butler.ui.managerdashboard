@@ -5,13 +5,13 @@ import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
 import {tabSelected,subTabSelected} from '../actions/tabSelectAction';
 import {modal} from 'react-redux-modal';
-import Emergency from '../containers/Emergency';
 import {setInventorySpinner} from '../actions/inventoryActions';
 import {setAuditSpinner} from '../actions/auditActions';
 import {setButlerSpinner} from '../actions/spinnerAction';
 import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP,INVENTORY,AUDIT,FULFILLING_ORDERS,GOR_OFFLINE,GOR_ONLINE,GOR_NORMAL_TAB,GOR_FAIL} from '../constants/frontEndConstants';
 import { FormattedMessage,FormattedNumber } from 'react-intl';
 import OperationStop from '../containers/emergencyProcess/OperationStop';
+import EmergencyRelease from '../containers/emergencyProcess/emergencyRelease'; 
 
 class Tabs extends React.Component{
 	constructor(props) 
@@ -63,20 +63,22 @@ class Tabs extends React.Component{
       emergencyPress: stopFlag
       });
   }
-  _emergencyModal(system_data) {
-    let emergency_data=system_data;
-    modal.add(Emergency, {
-      title: '',
-      size: 'large', // large, medium or small,
+  _emergencyRelease(){
+      modal.add(EmergencyRelease, {
+        title: '',
+        size: 'large', // large, medium or small,
       closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-      hideCloseButton: true,
-      emergency_data: emergency_data
-    });
+      hideCloseButton: false
+      });    
   }
   componentWillReceiveProps(nextProps){
     if(nextProps.system_emergency && !this.props.system_emergency)
     {
       this._stopOperation(true);
+    }
+    if(nextProps.system_data === "none" && this.props.system_data === "hard")
+    {
+      this._emergencyModal();
     }
   }
   _parseStatus()
@@ -218,7 +220,7 @@ function mapStateToProps(state, ownProps){
     return  {
          tab:state.tabSelected.tab || TAB_ROUTE_MAP[OVERVIEW],
          overview_status:state.tabsData.overview_status||null,
-         system_emergency:state.tabsData.system_emergency||null,
+         system_emergency:state.tabsData.system_emergency||false,
          system_data:state.tabsData.system_data||null,
          users_online:state.tabsData.users_online||0,
          audit_count:state.tabsData.audit_count||0,

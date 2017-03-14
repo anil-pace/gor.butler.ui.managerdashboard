@@ -57,11 +57,14 @@ class PauseOperation extends React.Component{
       return (
           <div className='gor-operation-pause gor-modal-content'>
             <div className='gor-operation-head'>
-              <div className='gor-question-2'></div>Pause Operation
+              <div className='gor-question-2'></div><FormattedMessage id='operation.pause.heading' 
+                    defaultMessage="Pause Operation"
+                            description="Text for pause operation heading"/>
             </div>
             <div className='gor-operation-body'>
-              <span>All Butler bots, PPS and other sysytem components will be paused once
-              completed the last action</span>
+              <FormattedMessage id='operation.pause.text' 
+                    defaultMessage="All Butler bots, PPS and other sysytem components will be paused once
+              completed the last action" description="Text for pause operation action"/>
               <div className='gor-margin-top'>
                 <div className={'gor-password-field-lg'+(this.props.passWordCheck.type === ERROR?' gor-input-error':' gor-input-ok')} ref={node => { this.passField = node }}>
                         <div className={this.props.passWordCheck.type === ERROR?'gor-login-password-error':'gor-login-password'}></div>
@@ -71,14 +74,22 @@ class PauseOperation extends React.Component{
                 </div>
                 {this.props.passWordCheck && this.props.passWordCheck.type === ERROR?
                   (<div className='gor-login-usr-error gor-sm-string' >
-                      The entered input does not match. Please try again.
+                      <FormattedMessage id='operation.pause.error' 
+                    defaultMessage="The entered input does not match. Please try again."
+                            description="Text for wrong password"/>
                   </div>):''
                 }
               </div>
               <div className='gor-margin-top'>              
-                <button className='gor-cancel-btn' onClick={this._removeThisModal.bind(this)}>Cancel</button>
+                <button className='gor-cancel-btn' onClick={this._removeThisModal.bind(this)}>
+                <FormattedMessage id='operation.pause.cancel' 
+                    defaultMessage="Cancel"
+                            description="Text for cancel button"/></button>
                 <button className='gor-add-btn' disabled={this.props.passWordCheck.type === SUCCESS?false:true}
-                  onClick={this._handlePause.bind(this)} >Pause Operation</button>
+                  onClick={this._handlePause.bind(this)} >
+                  <FormattedMessage id='operation.pause.button' 
+                    defaultMessage="Pause Operation"
+                            description="Text for pause button"/></button>
               </div>
             </div>
           </div>

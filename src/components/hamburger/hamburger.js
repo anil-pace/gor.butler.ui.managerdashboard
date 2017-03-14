@@ -31,10 +31,10 @@ class HamBurger extends React.Component{
 				style={this.state.menuVisible?{borderLeft:'1px solid #aaaaaa',borderRight:'1px solid #aaaaaa'}:{}}
 				 onClick={this._toggleDropdown.bind(this)}>
 					<div className="blockSystem">
-						<div className={"gor-upperText "+this.props.data.headingStyle}>
+						<div className={"gor-menu-heading "+this.props.data.headingStyle}>
 							{this.props.data.heading}
 						</div>
-						<div className={"gor-subText "+this.props.data.headingStyle}>
+						<div className={"gor-menu-subheading "+this.props.data.headingStyle}>
 							{this.props.data.subHeading}
 						</div>
 					</div>	

@@ -11,9 +11,6 @@ import { connect } from 'react-redux';
 import HamBurger from '../hamburger/hamburger';
 import PauseOperation from '../../containers/emergencyProcess/pauseOperation'; 
 import ResumeOperation from '../../containers/emergencyProcess/resumeOperation'; 
-import OperationStop from '../../containers/emergencyProcess/OperationStop'; 
-import EmergencyRelease from '../../containers/emergencyProcess/emergencyRelease'; 
-import SafetyChecklist from '../../containers/emergencyProcess/safetyChecklist';
 
 var dropdownFlag=0;
 var temp;
@@ -65,38 +62,6 @@ class Header extends React.Component{
      	hideCloseButton: !closeButton
     	});   	
    }
-   _pauseOperation() {
-    	modal.add(pauseOperation, {
-      	title: '',
-      	size: 'large', // large, medium or small,
-     	closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-     	hideCloseButton: true
-    	});
-  	}
-   _resumeOperation() {
-    	modal.add(ResumeOperation, {
-      	title: '',
-      	size: 'large', // large, medium or small,
-     	closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-     	hideCloseButton: true
-    	});
-  	}
-   _stopOperation() {
-    	modal.add(OperationStop, {
-      	title: '',
-      	size: 'large', // large, medium or small,
-     	closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-     	hideCloseButton: false
-    	});
-  	}
-  	_emergencyRelease(){
-    	modal.add(EmergencyRelease, {
-      	title: '',
-      	size: 'large', // large, medium or small,
-     	closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-     	hideCloseButton: false
-    	});  		
-  	}
   	_processData(){
   		var headerInfo={};
   		if(this.props.headerInfo && this.props.headerInfo.users.length){
@@ -108,49 +73,65 @@ class Header extends React.Component{
   		return headerInfo
   	}
   _processMenu(headerInfo){
-  	var menuObj = {}, heading, subHeading, optionList;
-  	heading = (<FormattedMessage id="header.butler" description="Header description" 
+  	var menuObj = {}, heading, subHeading, optionList, option1, option2, buttonText;
+  	optionList = [];
+  	
+  	if(!this.props.system_emergency){
+  		heading = (<FormattedMessage id="header.butler" description="Header description" 
         		      			defaultMessage ="Butler"/>);
-  	subHeading = (<FormattedMessage id="header.start" description='Start time ' 
+  		subHeading = (<FormattedMessage id="header.start" description='Start time ' 
         						defaultMessage='Start time:{time} '
         						values={{
 						        time: headerInfo.start,
 						    }}/>);
-  	optionList = [];
-  	
-  	// if(this.props.system_emergency){
-  	// 	optionList.push({optionClass:'gor-fail',  icon:'gor-error-white', optionText:'Operation stopped', 
-  	// 		fnButton:'' , buttonText:''});
-  	// 	optionList.push({optionClass:'',  icon:'', 
-  	// 		optionText:'Release the Emergency Stop button from the Zigbee box in order to resume operation.', 
-  	// 		fnButton:'', buttonText:'Resume'});  		
-	  // 	menuObj = {heading:'Emergency', subHeading:'In Zone', optionList:optionList,
-  	// 	 menuStyle:'gor-fail', headingStyle:'gor-white-text'};
-  	// }
-
-  	optionList.push({optionClass:'gor-operation-normal',  icon:'gor-operation-tick', optionText:'Option 2', 
+  		option1 = (<FormattedMessage id="header.option.normal" description='normal operation' 
+        						defaultMessage='Operation normal'
+						    />);
+  		option2 = (<FormattedMessage id="header.option.pause" description='pause operation option' 
+        						defaultMessage='Enter password to pause the operation'
+						    />);
+  		buttonText = (<FormattedMessage id="header.button.pause" description='Button text' 
+        						defaultMessage='Pause'
+						    />);
+  		optionList.push({optionClass:'gor-operation-normal',  icon:'gor-operation-tick', optionText:option1, 
   			fnButton:'' , buttonText:''});
-  	optionList.push({optionClass:'',  icon:'', optionText:'Enter password to pause the operation', 
-  			fnButton:this._showModal.bind(this,ResumeOperation,false), buttonText:'Pause'});
-  	menuObj = {heading:heading, subHeading:subHeading, optionList:optionList,
-  	 menuStyle:'', headingStyle:''};
-
-
-  	// optionList.push({optionClass:'gor-fail',  icon:'gor-error-white', optionText:'Option 2', 
-  	// 		fnButton:'' , buttonText:''});
-  	// optionList.push({optionClass:'',  icon:'', optionText:'Enter password to pause the operation', 
-  	// 		fnButton:this._pauseOperation, buttonText:'Pause'});
-
-  	// menuObj = {heading:heading, subHeading:subHeading, optionList:optionList,
-  	//  menuStyle:'gor-fail', headingStyle:'gor-white-text'};
-
-  	// optionList.push({optionClass:'gor-fail',  icon:'gor-error-white', optionText:'Option 2', 
-  	// 		fnButton:'' , buttonText:''});
-  	// optionList.push({optionClass:'',  icon:'', optionText:'Enter password to pause the operation', 
-  	// 		fnButton:this._pauseOperation, buttonText:'Pause'});
-
-  	// menuObj = {heading:heading, subHeading:subHeading, optionList:optionList,
-  	//  menuStyle:'gor-fail', headingStyle:'gor-white-text'};
+  		optionList.push({optionClass:'',  icon:'', optionText:option2, 
+  			fnButton:this._showModal.bind(this,PauseOperation,true), buttonText:buttonText});
+  		menuObj = {heading:heading, subHeading:subHeading, optionList:optionList,
+  	 		menuStyle:'', headingStyle:''};
+  	}
+  	else{
+  		heading = (<FormattedMessage id="header.emergency.heading" description="Header description" 
+        		      			defaultMessage ="Emergency"/>);
+  		subHeading = (<FormattedMessage id="header.emergency.subheading" description='Start time ' 
+        						defaultMessage='In Zone'
+						    />);
+  		option1 = (<FormattedMessage id="header.option.stopped" description='stopped operation' 
+        						defaultMessage='Operation stopped'
+						    />);
+  		buttonText = (<FormattedMessage id="header.button.resume" description='Button text' 
+        						defaultMessage='Resume'
+						    />);
+  		optionList.push({optionClass:'gor-fail',  icon:'gor-error-white', optionText:option1, 
+  			fnButton:'' , buttonText:''});
+  		if(this.props.system_data==="none"){
+	  		option2 = (<FormattedMessage id="header.option.release" description='release operation option' 
+        						defaultMessage='Release the Emergency Stop button from the Zigbee box in order 
+        						to resume operation.'/>);
+  			optionList.push({optionClass:'',  icon:'', 
+  				optionText:option2, 
+  				fnButton: '', buttonText:buttonText});  		
+  		}
+  		else{
+	  		option2 = (<FormattedMessage id="header.option.resume" description='resume operation option' 
+        						defaultMessage='Enter password to resume operation.'/>);
+  			optionList.push({optionClass:'',  icon:'', 
+  				optionText:option2, 
+  				fnButton: this._showModal.bind(this,ResumeOperation,true), buttonText:buttonText});  		  			
+  		}
+	  	menuObj = {heading:heading, subHeading:subHeading, optionList:optionList,
+  		 menuStyle:'gor-fail', headingStyle:'gor-white-text'};
+  	}
 
   	return menuObj;
   }
@@ -214,7 +195,9 @@ function mapStateToProps(state,ownProps) {
   headerInfo:state.headerData.headerInfo,
   authToken : state.authLogin.auth_token,
   username:state.authLogin.username,
-  system_emergency:state.tabsData.system_emergency||true
+  system_emergency:state.tabsData.system_emergency||null,
+  system_status:state.tabsData.status||null,
+  system_data:state.tabsData.system_data||null
  }
 } 
 /**
