@@ -88,7 +88,7 @@ class Header extends React.Component{
         						defaultMessage='Operation normal'
 						    />);
   		option2 = (<FormattedMessage id="header.option.pause" description='pause operation option' 
-        						defaultMessage='Enter password to pause the operation'
+        						defaultMessage='Enter password to pause operation'
 						    />);
   		buttonText = (<FormattedMessage id="header.button.pause" description='Button text' 
         						defaultMessage='Pause'
@@ -118,8 +118,7 @@ class Header extends React.Component{
 	  		option2 = (<FormattedMessage id="header.option.release" description='release operation option' 
         						defaultMessage='Release the Emergency Stop button from the Zigbee box in order 
         						to resume operation.'/>);
-  			optionList.push({optionClass:'',  icon:'', 
-  				optionText:option2, 
+  			optionList.push({optionClass:'',  icon:'', optionText:option2, 
   				fnButton: '', buttonText:buttonText});  		
   		}
   		else{

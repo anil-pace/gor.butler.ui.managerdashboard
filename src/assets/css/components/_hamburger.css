@@ -67,6 +67,7 @@
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     font-size: 14px;
+    border: solid 1px #aaaaaa;
 }
 .gor-btn-small{
     font-family:'Source Sans Pro Bold', sans-serif;

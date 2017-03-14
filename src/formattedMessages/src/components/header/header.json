@@ -17,7 +17,7 @@
   {
     "id": "header.option.pause",
     "description": "pause operation option",
-    "defaultMessage": "Enter password to pause the operation"
+    "defaultMessage": "Enter password to pause operation"
   },
   {
     "id": "header.button.pause",
