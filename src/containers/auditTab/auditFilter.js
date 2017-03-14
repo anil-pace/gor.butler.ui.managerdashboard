@@ -21,11 +21,11 @@ class AuditFilter extends React.Component{
     }	
 
     _processAuditSearchField(){
-        const temp = [{value:"AUDIT TASK ID", label:<FormattedMessage id="audit.inputField.id" defaultMessage ="AUDIT TASK ID"/>}, 
+        const filterInputFields = [{value:"AUDIT TASK ID", label:<FormattedMessage id="audit.inputField.id" defaultMessage ="AUDIT TASK ID"/>}, 
                     {value:"SPECIFIC SKU ID", label:<FormattedMessage id="audit.inputField.sku" defaultMessage ="SPECIFIC SKU ID"/>},
                     {value:"SPECIFIC LOCATION ID", label:<FormattedMessage id="audit.inputField.location" defaultMessage ="SPECIFIC LOCATION ID"/>}];
         var inputValue = this.state.searchQuery;
-        var inputField = <FilterInputFieldWrap inputText={temp} handleInputText={this._handleInputQuery.bind(this)} inputValue={inputValue}/>
+        var inputField = <FilterInputFieldWrap inputText={filterInputFields} handleInputText={this._handleInputQuery.bind(this)} inputValue={inputValue}/>
         return inputField;           
     }
  
