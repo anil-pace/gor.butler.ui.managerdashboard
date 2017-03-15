@@ -20,6 +20,11 @@
     "defaultMessage": "Offline"
   },
   {
+    "id": "widget.audit.emergency",
+    "description": "Message for system in emergency state",
+    "defaultMessage": "--"
+  },
+  {
     "id": "widget.audit.heading",
     "description": "Audit Item Heading",
     "defaultMessage": "Items audited"

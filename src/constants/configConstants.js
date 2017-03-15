@@ -31,4 +31,4 @@ export const FILTER_AUDIT_ID = "&display_id=";
 export const PENDING_ORDERLINES = "/pending_auditlines";
 export const AUDIT_ANAMOLY  = "/anamoly_auditlines";
 export const SKU_VALIDATION_URL = API_URL + "/sku/audit_attributes_configured/";
-
+export const VALIDATION_LIST = API_URL + "/system/validate_and_remove_emergency";

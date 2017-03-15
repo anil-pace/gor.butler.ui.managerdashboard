@@ -1,0 +1,12 @@
+[
+  {
+    "id": "header.butler",
+    "description": "Header description",
+    "defaultMessage": "Butler"
+  },
+  {
+    "id": "header.start",
+    "description": "Start time",
+    "defaultMessage": "Start time:{time}"
+  }
+]

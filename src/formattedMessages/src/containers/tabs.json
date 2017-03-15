@@ -45,19 +45,14 @@
     "defaultMessage": "None"
   },
   {
+    "id": "overviewStatus.tab.stop",
+    "description": "overview Status emergency",
+    "defaultMessage": "Operation stopped"
+  },
+  {
     "id": "systemStatus.tab.online",
     "description": "system Status online",
     "defaultMessage": "Online"
-  },
-  {
-    "id": "systemStatus.tab.emergency",
-    "description": "system Status emergency",
-    "defaultMessage": "Emergency"
-  },
-  {
-    "id": "overviewStatus.tab.emergency",
-    "description": "overview Status emergency",
-    "defaultMessage": "Butlers stopped"
   },
   {
     "id": "ordersStatus.tab.heading",

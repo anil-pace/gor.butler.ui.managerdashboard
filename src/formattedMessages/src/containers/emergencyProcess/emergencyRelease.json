@@ -1,0 +1,22 @@
+[
+  {
+    "id": "operation.alert.release",
+    "description": "Text for emergency button release heading",
+    "defaultMessage": "Stop button released"
+  },
+  {
+    "id": "operation.alert.release.text",
+    "description": "Text for emergency stop button release",
+    "defaultMessage": "Emergency Stop button has been released."
+  },
+  {
+    "id": "operation.alert.release.subtext",
+    "description": "Text for next stop to resume operation",
+    "defaultMessage": "You will be required to enter your password in order to view the checklist.\n              Approving all the items on checklist will resume the warehouse operation"
+  },
+  {
+    "id": "operation.alert.release.button",
+    "description": "Text button to resume operation",
+    "defaultMessage": "Resume operation"
+  }
+]

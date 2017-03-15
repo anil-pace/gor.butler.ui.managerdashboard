@@ -31,7 +31,9 @@
 .header-offline-icon,
 .user-icon,
 .overview-tile-ontime-icon,
-.statusOl,.statusAl,.iStock ,.iAudit,.iPick,.gor-login-user,.gor-login-password,.gor-login-error,.gor-tick,.gor-question,.gor-tick-white,.gor-remove-white,.gor-error-white,.gor-login-user-error,.gor-login-password-error{
+.statusOl,.statusAl,.iStock ,.iAudit,.iPick,.gor-login-user,.gor-login-password,.gor-login-error,.gor-tick,.gor-question,.gor-tick-white,.gor-remove-white,.gor-error-white,.gor-login-user-error,.gor-login-password-error,.gor-question-2,.gor-operation-tick,.gor-alert-lg,
+.gor-dropdown-open,.gor-dropdown-close,.gor-caution,.gor-delay-icon,
+.gor-emergency-dropdown-close,.gor-emergency-dropdown-open{
     background-image: url(images/icons.svg);
 }
 .fk-logo,
@@ -57,6 +59,7 @@
     width:16px;
     height:16px;    
     display:inline-block;
+    vertical-align: middle;
 }
 .gor-login-password-error{
     background-position:-325px -77px;
@@ -334,4 +337,69 @@ background-position: -101px -52px;
     display: inline-block;
     vertical-align: bottom;
     margin-right: 5px;
+}
+.gor-question-2{
+    background-position:-564px -1px;
+    width: 46px;
+    height: 50px;
+    display: inline-block;
+    vertical-align: middle;    
+}
+.gor-operation-tick{
+    background-position: -251px -52px;
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.gor-alert-lg{
+    background-position: -613px -3px;
+    width: 50px;
+    height: 46px;
+    display: inline-block;
+    vertical-align: middle;   
+}
+.gor-dropdown-open{
+    background-position: -1px -110px;
+    width: 8px;
+    height: 8px;
+    display: inline-block;
+    vertical-align: middle; 
+    transform: rotate(180deg);      
+}
+.gor-dropdown-close{
+    background-position: -1px -110px;
+    width: 8px;
+    height: 6px;
+    display: inline-block;
+    vertical-align: middle;   
+}
+.gor-caution{
+    background-position: -511px -1px;
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    vertical-align: middle;       
+}
+.gor-delay-icon{
+    background-position: -443px -77px;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: middle;      
+}
+.gor-emergency-dropdown-open{
+    background-position: -37px -110px;
+    width: 8px;
+    height: 6px;
+    display: inline-block;
+    vertical-align: middle;   
+    transform: rotate(180deg);  
+}
+.gor-emergency-dropdown-close{
+    background-position: -37px -110px;
+    width: 8px;
+    height: 6px;
+    display: inline-block;
+    vertical-align: middle;     
 }
