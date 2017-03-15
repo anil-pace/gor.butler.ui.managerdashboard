@@ -12,7 +12,7 @@ import {notifySuccess, notifyFail,validateID,notifyDelete,
 import {ERROR,AUTH_LOGIN, ADD_USER, RECIEVE_TIME_OFFSET,CHECK_ID,DELETE_USER,GET_ROLES,ORDERS_RETRIEVE,
 	PPS_MODE_CHANGE,EDIT_USER,RECIEVE_HEADER,SUCCESS,CREATE_AUDIT,AUDIT_RETRIEVE,GET_PPSLIST,START_AUDIT,
 	DELETE_AUDIT,AUDIT_RESOLVE_LINES,AUDIT_RESOLVE_CONFIRMED, VALIDATE_SKU_ID,PAUSE_OPERATION,
-	RESUME_OPERATION,CONFIRM_SAFETY} from '../constants/frontEndConstants';
+	RESUME_OPERATION,CONFIRM_SAFETY,CHECK_SAFETY} from '../constants/frontEndConstants';
 import {BUTLER_UI,CODE_UE002,BUTLER_SUPERVISOR,CODE_E027} from '../constants/backEndConstants'
 import {UE002,E028,E029,MODE_REQUESTED,TYPE_SUCCESS,AS001,ERR_API,ERR_USR,ERR_RES,ERR_AUDIT,AS00A,WRONG_CRED,
 E051,ES} from '../constants/messageConstants';
@@ -224,7 +224,7 @@ export function AjaxParse(store,res,cause,status)
 	              type:ERROR,
 	              msg:UE002             
 	            };                        
- 	         }
+ 	        }
 	        else
             {
               resumePwd={
@@ -237,14 +237,14 @@ export function AjaxParse(store,res,cause,status)
 			store.dispatch(validatePassword(resumePwd));						
 			break;
 		case CHECK_SAFETY:
-			var safetyList = [], safetyResponse = action.data;
+			var safetyList = [], safetyResponse = res;
 			if(safetyResponse.data){
 				safetyList = safetyResponse.data;
 			}
 			store.dispatch(getSafetyList(safetyList));
 			break;
 		case CONFIRM_SAFETY:
-			var rejectList = [], rejectResponse = action.data;
+			var rejectList = [], rejectResponse = res;
 			if(rejectResponse.data){
 				rejectList = rejectResponse.data;
 				if(!rejectList.length){
@@ -256,7 +256,7 @@ export function AjaxParse(store,res,cause,status)
 				store.dispatch(modalStatus(true));                           
 				store.dispatch(notifyFail(E051));
 			}
-			store.dispatch.setSafetySpinner(false);
+			store.dispatch(setSafetySpinner(false));
 			store.dispatch(getSafetyErrorList(rejectList));			
 			break;
 		default:

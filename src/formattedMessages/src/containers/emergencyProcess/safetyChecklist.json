@@ -17,7 +17,7 @@
   {
     "id": "operation.safety.text",
     "description": "Text for ticking items",
-    "defaultMessage": "Tick every item to confirm that the system is safe to resume operation"
+    "defaultMessage": "Tick every item to confirm that the system is safe to resume operation."
   },
   {
     "id": "operation.safety.errors",
