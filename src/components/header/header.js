@@ -1,7 +1,7 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import {RECIEVE_HEADER,HEADER_START_TIME,REQUEST_HEADER,RECIEVE,RECIEVE_ITEM_TO_STOCK,
-	GET,HARD} from '../../constants/frontEndConstants';
+	GET,SOFT_MANUAL} from '../../constants/frontEndConstants';
 import {stringConfig} from '../../constants/backEndConstants';
 import {HEADER_URL} from '../../constants/configConstants'
 import {modal} from 'react-redux-modal';
@@ -115,7 +115,7 @@ class Header extends React.Component{
 						    />);
   		optionList.push({optionClass:'gor-fail',  icon:'gor-error-white', optionText:option1, 
   			fnButton:'' , buttonText:''});
-  		if(this.props.system_data === HARD){
+  		if(this.props.system_data !== SOFT_MANUAL){
 	  		option2 = (<FormattedMessage id="header.option.release" description='release operation option' 
         						defaultMessage='Release the Emergency Stop button from the Zigbee box in order 
         						to resume operation.'/>);
