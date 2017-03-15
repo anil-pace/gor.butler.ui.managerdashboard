@@ -7,7 +7,7 @@ import {AUDIT_URL,FILTER_AUDIT_ID} from '../constants/configConstants';
 import {getAuditData,setAuditRefresh} from '../actions/auditActions';
 import AuditTable from './auditTab/auditTable';
 import {getPageData} from '../actions/paginationAction';
-import {AUDIT_RETRIEVE,GET,APP_JSON,GOR_COMPLETED_STATUS,LOCATION,SKU,AUDIT_PENDING_APPROVAL,AUDIT_RESOLVED,AUDIT_CREATED, AUDIT_LINE_REJECTED,AUDIT_ISSUES_STATUS,AUDIT_BY_PDFA,AUDIT_TASK_ID} from '../constants/frontEndConstants';
+import {AUDIT_RETRIEVE,GET,APP_JSON,GOR_COMPLETED_STATUS,LOCATION,SKU,AUDIT_PENDING_APPROVAL,AUDIT_RESOLVED,AUDIT_CREATED, AUDIT_LINE_REJECTED,AUDIT_ISSUES_STATUS,AUDIT_BY_PDFA,AUDIT_TASK_ID,sortAuditHead,sortOrder} from '../constants/frontEndConstants';
 import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,SEARCH_AUDIT_URL,GIVEN_PAGE,GIVEN_PAGE_SIZE} from '../constants/configConstants';
 import {setAuditSpinner} from '../actions/auditActions';
 import { defineMessages } from 'react-intl';
@@ -248,9 +248,6 @@ _processAuditData(data,nProps){
 
 handlePageClick(data){
   var url, appendSortUrl = "",appendTextFilterUrl="", makeDate;
-  var sortHead = {"startTime":"&order_by=start_actual_time", "completedTime":"&order_by=completion_time", "display_id":"&order_by=display_id",
-                  "status":"&order_by=audit_status&order_by_seq=[ 'audit_pending_approval','audit_created','audit_accepted','audit_conflicting','audit_waiting','audit_pending','audit_reaudited','audit_started','audit_tasked','audit_rejected','audit_resolved','audit_aborted', 'audit_completed']"};
-  var sortOrder = {"DESC":"&order=asc", "ASC":"&order=desc"};
   var currentDate = new Date();
   var filterApplied = false;
   makeDate = addDateOffSet(currentDate,-30);
@@ -263,7 +260,7 @@ handlePageClick(data){
   if(data.url === undefined) {
     data.selected = data.selected?data.selected:1;
     if(data.columnKey && data.sortDir) {
-      appendSortUrl = sortHead[data.columnKey] + sortOrder[data.sortDir]; 
+      appendSortUrl = sortAuditHead[data.columnKey] + sortOrder[data.sortDir]; 
     }
     url = SEARCH_AUDIT_URL+makeDate+GIVEN_PAGE+(data.selected)+GIVEN_PAGE_SIZE + appendSortUrl;
   }

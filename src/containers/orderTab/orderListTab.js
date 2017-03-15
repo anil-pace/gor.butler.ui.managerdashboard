@@ -1,7 +1,7 @@
 import React  from 'react';
 import { connect } from 'react-redux';
 import {getPageData, getStatusFilter, getTimeFilter,getPageSizeOrders,currentPageOrders,lastRefreshTime} from '../../actions/paginationAction';
-import {ORDERS_RETRIEVE,GOR_BREACHED,GOR_EXCEPTION,GET,APP_JSON, INITIAL_HEADER_SORT, INITIAL_HEADER_ORDER} from '../../constants/frontEndConstants';
+import {ORDERS_RETRIEVE,GOR_BREACHED,GOR_EXCEPTION,GET,APP_JSON, INITIAL_HEADER_SORT, INITIAL_HEADER_ORDER, sortOrderHead,sortOrder} from '../../constants/frontEndConstants';
 import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,ORDER_PAGE, PICK_BEFORE_ORDER_URL, BREACHED_URL,UPDATE_TIME_HIGH,UPDATE_TIME_LOW,EXCEPTION_TRUE,WAREHOUSE_STATUS,FILTER_ORDER_ID} from '../../constants/configConstants';
 import OrderListTable from './orderListTable';
 import Dropdown from '../../components/dropdown/dropdown'
@@ -205,9 +205,6 @@ refresh = (data) => {
   var convertTime = {"oneHourOrders": 1, "twoHourOrders": 2, "sixHourOrders": 6, "twelveHourOrders": 12, "oneDayOrders": 24};
   var prevTime,currentTime;
   var  appendStatusUrl="", appendTimeUrl="", appendPageSize="", appendSortUrl="", appendTextFilterUrl="";
-  var sortHead = {"recievedTime":"&order_by=create_time", "pickBy":"&order_by=pick_before_time", "id":"&order_by=order_id",
-                  "status":"&order_by=warehouse_status&order_by_seq=['breached','exception','not_fulfillable','abandoned','temporary_unfulfillable','pending','fulfillable','cancelled','completed']"};
-  var sortOrder = {"DESC":"&order=asc", "ASC":"&order=desc"};
   var filterApplied = false;
   if(!data) {
     data = {};
@@ -216,10 +213,10 @@ refresh = (data) => {
   }
   //for backend sorting
   if(data.columnKey && data.sortDir) {
-    appendSortUrl = sortHead[data.columnKey] + sortOrder[data.sortDir];
+    appendSortUrl = sortOrderHead[data.columnKey] + sortOrder[data.sortDir];
   }
   else if(this.props.orderSortHeaderState && this.props.orderSortHeader && this.props.orderSortHeaderState.colSortDirs) {
-    appendSortUrl = sortHead[this.props.orderSortHeader] + sortOrder[this.props.orderSortHeaderState.colSortDirs[this.props.orderSortHeader]]
+    appendSortUrl = sortOrderHead[this.props.orderSortHeader] + sortOrder[this.props.orderSortHeaderState.colSortDirs[this.props.orderSortHeader]]
   }
 
   //for search via text filter
