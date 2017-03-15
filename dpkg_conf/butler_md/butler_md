@@ -14,14 +14,14 @@
 # Do NOT "set -e"
 
 DESC="UI"
-NAME=butler_md_alpha
-DAEMON=/opt/butler_md_alpha/bin/$NAME
+NAME=butler_md
+DAEMON=/opt/butler_md/bin/$NAME
 DAEMON_ARGS=""
 SCRIPTNAME=/etc/init.d/$NAME
 DIR=`pwd`
 
 if [ -z "$HOME" ]; then
-	export HOME=/opt/butler_md_alpha
+	export HOME=/opt/butler_md
 fi
 
 # Define LSB log_* functions.
@@ -34,7 +34,7 @@ fi
 #
 do_start()
 {
-	 /opt/butler_md_alpha/bin/butler-md-alpha start
+	 /opt/butler_md/bin/butler-md start
 }
 
 #
@@ -42,7 +42,7 @@ do_start()
 #
 do_stop()
 {
-	 /opt/butler_md_alpha/bin/butler-md-alpha stop
+	 /opt/butler_md/bin/butler-md stop
 }
 
 
