@@ -5,12 +5,15 @@ import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
 import {tabSelected,subTabSelected} from '../actions/tabSelectAction';
 import {modal} from 'react-redux-modal';
-import Emergency from '../containers/Emergency';
 import {setInventorySpinner} from '../actions/inventoryActions';
 import {setAuditSpinner} from '../actions/auditActions';
 import {setButlerSpinner} from '../actions/spinnerAction';
-import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP,INVENTORY,AUDIT,FULFILLING_ORDERS,GOR_OFFLINE,GOR_ONLINE,GOR_NORMAL_TAB,GOR_FAIL} from '../constants/frontEndConstants';
+import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP,INVENTORY,AUDIT,
+FULFILLING_ORDERS,GOR_OFFLINE,GOR_ONLINE,GOR_NORMAL_TAB,GOR_FAIL,
+SOFT_MANUAL,HARD} from '../constants/frontEndConstants';
 import { FormattedMessage,FormattedNumber } from 'react-intl';
+import OperationStop from '../containers/emergencyProcess/OperationStop';
+import EmergencyRelease from '../containers/emergencyProcess/emergencyRelease'; 
 
 class Tabs extends React.Component{
 	constructor(props) 
@@ -53,25 +56,36 @@ class Tabs extends React.Component{
         sessionStorage.setItem('selTab', TAB_ROUTE_MAP[selTab]);
         sessionStorage.setItem('subTab', '');
     }
-  _emergencyModal(system_data) {
-    let emergency_data=system_data;
-    modal.add(Emergency, {
-      title: '',
-      size: 'large', // large, medium or small,
+  _stopOperation(stopFlag) {
+      modal.add(OperationStop, {
+        title: '',
+        size: 'large', // large, medium or small,
       closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-      hideCloseButton: true,
-      emergency_data: emergency_data
-    });
+      hideCloseButton: false,
+      emergencyPress: stopFlag
+      });
+  }
+  _emergencyRelease(){
+      modal.add(EmergencyRelease, {
+        title: '',
+        size: 'large', // large, medium or small,
+      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: false
+      });    
   }
   componentWillReceiveProps(nextProps){
-    if(nextProps.system_emergency && nextProps.system_emergency != this.props.system_emergency)
+    if(nextProps.system_data === SOFT_MANUAL && this.props.system_data === HARD)
     {
-      this._emergencyModal(nextProps.system_data);
+      this._emergencyRelease();
+    }
+    else if(nextProps.system_emergency && !this.props.system_emergency)
+    {
+      this._stopOperation(true);
     }
   }
   _parseStatus()
   {
-    let overview,system,order,ordersvalue,users,usersvalue,inventoryvalue,
+    let overview,system,order,ordersvalue,users,usersvalue,inventoryvalue,overviewClass,
         inventory,audit,overviewStatus,systemStatus,ordersStatus,usersStatus,auditStatus,inventoryStatus,
         offline,systemClass,ordersClass,auditClass,items={}, auditIcon = false;
 
@@ -117,28 +131,24 @@ class Tabs extends React.Component{
         overviewStatus = <FormattedMessage id="overviewStatus.tab.default" description="default overview Status" 
               defaultMessage ="None"/>;          
       }
-      if(!this.props.system_emergency)
+      if(this.props.system_emergency)
       {
-        systemStatus = <FormattedMessage id="systemStatus.tab.online" description="system Status online" 
+        overviewStatus = <FormattedMessage id="overviewStatus.tab.stop" description="overview Status emergency" 
+              defaultMessage ="Operation stopped"/>;  
+        overviewClass = 'gor-alert'
+      }
+      systemStatus = <FormattedMessage id="systemStatus.tab.online" description="system Status online" 
               defaultMessage ="Online"/>;  
-        systemClass=GOR_ONLINE;
-      }
-      else
-      {
-        systemStatus = <FormattedMessage id="systemStatus.tab.emergency" description="system Status emergency" 
-              defaultMessage ="Emergency"/>;  
-        systemClass='gor-emergency-alert';       
-        overviewStatus = <FormattedMessage id="overviewStatus.tab.emergency" description="overview Status emergency" 
-              defaultMessage ="Butlers stopped"/>;  
-      }
+      systemClass=GOR_ONLINE;
+
       ordersvalue = <FormattedNumber value={this.props.orders_completed}/>
       ordersStatus = <FormattedMessage id="ordersStatus.tab.heading" description="orders Status " 
                                        defaultMessage ="{count}% fulfilled" values={{count:ordersvalue}}/>;  
       ordersClass=GOR_ONLINE;
 
       usersvalue = <FormattedNumber value={this.props.users_online}/>
-      usersStatus = <FormattedMessage id="usersStatus.tab.heading" description="users Status " 
-                                      defaultMessage ="{count} users online" values={{count:usersvalue}}/>;  
+      usersStatus = <FormattedMessage id="usersStatus.tab.heading#" description="users Status " 
+                                      defaultMessage ="{count} {count,plural, =0 {user} one {user} other {users}} online" values={{count:this.props.users_online?this.props.users_online:"0"}}/>;  
 
       inventoryvalue = <FormattedNumber value={this.props.space_utilized}/>
       inventoryStatus = <FormattedMessage id="inventoryStatus.tab.heading" description="inventory Status " 
@@ -157,7 +167,7 @@ class Tabs extends React.Component{
       if(this.props.audit_alert) {
         auditClass = (this.props.audit_alert?'gor-alert':auditClass);
         auditStatus=<FormattedMessage id="auditStatus.tab.alert.heading" description="audit Status alert" 
-                                     defaultMessage ="{count} alerts" 
+                                     defaultMessage ="{count} {count,plural, one {alert} other {alerts}}" 
                                      values={{count:this.props.audit_alert?this.props.audit_alert:"0"}}/>;
        auditIcon = true;                                                        
       }
@@ -165,7 +175,7 @@ class Tabs extends React.Component{
 
     items={overview:overview,system:system,order:order,
            users:users,inventory:inventory,audit:audit,
-           overviewStatus:overviewStatus,systemStatus:systemStatus,ordersStatus:ordersStatus,
+           overviewStatus:overviewStatus, overviewClass:overviewClass,systemStatus:systemStatus,ordersStatus:ordersStatus,
            auditStatus:auditStatus,usersStatus:usersStatus,inventoryStatus:inventoryStatus,
            systemClass:systemClass,ordersClass:ordersClass,auditClass:auditClass,
            auditIcon:auditIcon};
@@ -179,11 +189,11 @@ class Tabs extends React.Component{
 		return (
 		<div className="gor-tabs gor-main-block">
 		<Link to="/overview" onClick = {this.handleTabClick.bind(this,OVERVIEW)}>
-			<Tab items={{ tab: items.overview, Status: items.overviewStatus, currentState:'' }} changeClass={(this.props.tab.toUpperCase() === OVERVIEW ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
+			<Tab items={{ tab: items.overview, Status: items.overviewStatus, currentState:items.overviewClass }} changeClass={(this.props.tab.toUpperCase() === OVERVIEW ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
 		</Link>
 
 		<Link to="/system" onClick = {this.handleTabClick.bind(this,SYSTEM)}>
-			<Tab items={{ tab: items.system, Status: items.systemStatus, currentState:items.systemClass }} changeClass={(!this.props.system_emergency?(this.props.tab.toUpperCase() === SYSTEM ? 'sel' :GOR_NORMAL_TAB):GOR_FAIL)} subIcons={true}/>
+			<Tab items={{ tab: items.system, Status: items.systemStatus, currentState:items.systemClass }} changeClass={(this.props.tab.toUpperCase() === SYSTEM ? 'sel' :GOR_NORMAL_TAB)} subIcons={true}/>
 		</Link>
 
 		<Link to="/orders" onClick = {this.handleTabClick.bind(this,ORDERS)}>
@@ -212,7 +222,7 @@ function mapStateToProps(state, ownProps){
     return  {
          tab:state.tabSelected.tab || TAB_ROUTE_MAP[OVERVIEW],
          overview_status:state.tabsData.overview_status||null,
-         system_emergency:state.tabsData.system_emergency||null,
+         system_emergency:state.tabsData.system_emergency||false,
          system_data:state.tabsData.system_data||null,
          users_online:state.tabsData.users_online||0,
          audit_count:state.tabsData.audit_count||0,

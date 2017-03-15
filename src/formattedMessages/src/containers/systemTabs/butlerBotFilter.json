@@ -1,0 +1,66 @@
+[
+  {
+    "id": "butletbot.inputField.id",
+    "defaultMessage": "BOT ID"
+  },
+  {
+    "id": "butletbot.inputField.sku",
+    "defaultMessage": "SPECIFIC LOCATION/ZONE"
+  },
+  {
+    "id": "butletbot.tokenfield.STATUS",
+    "defaultMessage": "STATUS"
+  },
+  {
+    "id": "butletbot.tokenfield.MODE",
+    "defaultMessage": "MODE"
+  },
+  {
+    "id": "butletbot.token1.all",
+    "defaultMessage": "Any"
+  },
+  {
+    "id": "butletbot.token1.stopped",
+    "defaultMessage": "Stopped"
+  },
+  {
+    "id": "butletbot.token1.error",
+    "defaultMessage": "Error"
+  },
+  {
+    "id": "butletbot.token1.warning",
+    "defaultMessage": "Warning"
+  },
+  {
+    "id": "butletbot.token1.Online",
+    "defaultMessage": "Online"
+  },
+  {
+    "id": "butletbot.token1.Offline",
+    "defaultMessage": "Offline"
+  },
+  {
+    "id": "butletbot.token2.any",
+    "defaultMessage": "Any"
+  },
+  {
+    "id": "butletbot.token2.pick",
+    "defaultMessage": "Pick"
+  },
+  {
+    "id": "butletbot.token2.put",
+    "defaultMessage": "Put"
+  },
+  {
+    "id": "butletbot.token2.audit",
+    "defaultMessage": "Audit"
+  },
+  {
+    "id": "butletbot.token2.charging",
+    "defaultMessage": "Charging"
+  },
+  {
+    "id": "butletbot.token2.notSet",
+    "defaultMessage": "Not set"
+  }
+]

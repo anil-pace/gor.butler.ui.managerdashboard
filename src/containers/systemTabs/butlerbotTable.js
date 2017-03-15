@@ -4,6 +4,7 @@ import Dimensions from 'react-dimensions'
 import { FormattedMessage } from 'react-intl';
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
 import {GOR_STATUS,GOR_STATUS_PRIORITY,GOR_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
+import ButlerBotFilter from './butlerBotFilter';
 
 class ButlerBotTable extends React.Component {
   constructor(props) {
@@ -125,6 +126,11 @@ class ButlerBotTable extends React.Component {
     this.props.sortHeaderOrder(sortDir);
     this.props.sortHeaderState(columnKey);
   }
+
+  _setFilter() {
+    var newState = !this.props.showFilter;
+    this.props.setFilter(newState)
+   }
   
   render() {
     var {sortedDataList, colSortDirs,columnWidths} = this.state;
@@ -139,13 +145,18 @@ class ButlerBotTable extends React.Component {
     let onlineBots = this.props.parameters.online;
     var containerHeight = this.props.containerHeight;
     var noData = <div/>;
+    var noFilter = false;
      if(totalBot === 0 || totalBot === undefined || totalBot === null) {
     noData =  <div className="gor-no-data"> <FormattedMessage id="butlerbot.table.noData" description="No data message for butlerbot table" 
         defaultMessage ="No Butler Bot Found"/>  </div>
       containerHeight = GOR_TABLE_HEADER_HEIGHT;
      }
+     var filterHeight = screen.height-190-50;
     return (
       <div className="gorTableMainContainer">
+      {noFilter?<div className="gor-filter-wrap" style={{'width':this.props.showFilter?'350px':'0px', height:filterHeight}}> 
+         <ButlerBotFilter/>  
+       </div>:""}
         <div className="gorToolBar">
           <div className="gorToolBarWrap">
             <div className="gorToolBarElements">
@@ -163,6 +174,13 @@ class ButlerBotTable extends React.Component {
               value={this.props.getButlerFilter}>
             </input>
         </div>
+         {noFilter?<div className="gor-button-wrap">
+       <button className={this.props.isFilterApplied?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
+       <div className="gor-manage-task"/>
+          <FormattedMessage id="butlerbot.table.filterLabel" description="button label for filter" 
+          defaultMessage ="Filter"/>
+         </button>
+       </div>:""}
         </div>
        </div>
       <Table

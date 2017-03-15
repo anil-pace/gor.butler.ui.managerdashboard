@@ -25,6 +25,7 @@ export function filterIndex(e,_dataList,filterField) {
 
      var size = _dataList.getSize(), data = [];
      var filteredIndexes = [];
+
     for (var index = 0; index < size; index++) {
       var getData = _dataList.getObjectAt(index);
       for (var i = filterField.length - 1; i >= 0; i--) {
@@ -35,9 +36,8 @@ export function filterIndex(e,_dataList,filterField) {
           break;
         }
       }
-      
-      
     }
+  
     return filteredIndexes;
 }
 
@@ -176,7 +176,7 @@ export const ProgressCell = ({rowIndex, data, columnKey, resolved, unresolved, .
 
     {(!data.getObjectAt(rowIndex)[resolved] && data.getObjectAt(rowIndex)[unresolved])?
     <div className="gor-resolve-head">
-    <FormattedMessage id="audit.unresolveIssues" description='unresolve issue for audit table' defaultMessage='{unresolvedCount} unresolved issues' values={{unresolvedCount:data.getObjectAt(rowIndex)[unresolved]}}/>
+    <FormattedMessage id="audit.unresolveIssues" description='unresolve issue for audit table' defaultMessage='{unresolvedCount} {unresolvedCount,plural, one {unresolved issue} other{unresolved issues}}' values={{unresolvedCount:data.getObjectAt(rowIndex)[unresolved]?data.getObjectAt(rowIndex)[unresolved]:"0"}}/>
     </div> : ""
     }
 
@@ -202,12 +202,24 @@ export const StatusCell = ({rowIndex, data, columnKey,statusKey, ...props}) => (
 
 export const ResolveCell = ({rowIndex, data, columnKey, checkStatus, screenId, ...props}) => (
   <Cell {...props}>
+  {screenId===VIEW_AUDIT_ISSUES?
     <div style={(screenId===VIEW_AUDIT_ISSUES || data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED)?{opacity: 0.5}:{opacity: 1}}>
-      <input type="radio"  name={data.getObjectAt(rowIndex)["auditLineId"]} disabled={data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED?true:false} onChange={checkStatus.bind(this,rowIndex,AUDIT_APPROVED,data.getObjectAt(rowIndex)["auditLineId"])} />
+      <input type="radio"  name={data.getObjectAt(rowIndex)["auditLineId"]} disabled={data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED?true:false} 
+             onChange={checkStatus.bind(this,rowIndex,AUDIT_APPROVED,data.getObjectAt(rowIndex)["auditLineId"])} checked={data.getObjectAt(rowIndex)[GOR_STATUS]===AUDIT_RESOLVED_STATUS?true:false}/>
         <FormattedMessage id="commonDataTable.resolveAudit.approve" description='resolve button' defaultMessage='Approve '/>
-      <input type="radio"  name={data.getObjectAt(rowIndex)["auditLineId"]} disabled={data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED?true:false} onChange={checkStatus.bind(this,rowIndex,AUDIT_REJECTED,data.getObjectAt(rowIndex)["auditLineId"])} />
+      <input type="radio"  name={data.getObjectAt(rowIndex)["auditLineId"]} disabled={data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED?true:false} 
+             onChange={checkStatus.bind(this,rowIndex,AUDIT_REJECTED,data.getObjectAt(rowIndex)["auditLineId"])} checked={data.getObjectAt(rowIndex)[GOR_STATUS]===AUDIT_REJECTED_STATUS?true:false}/>
+        <FormattedMessage id="commonDataTable.resolveAudit.reject" description='resolve button' defaultMessage='Reject'/>
+    </div>:
+    <div style={(screenId===VIEW_AUDIT_ISSUES || data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED)?{opacity: 0.5}:{opacity: 1}}>
+      <input type="radio"  name={data.getObjectAt(rowIndex)["auditLineId"]} disabled={data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED?true:false} 
+             onChange={checkStatus.bind(this,rowIndex,AUDIT_APPROVED,data.getObjectAt(rowIndex)["auditLineId"])} />
+        <FormattedMessage id="commonDataTable.resolveAudit.approve" description='resolve button' defaultMessage='Approve '/>
+      <input type="radio"  name={data.getObjectAt(rowIndex)["auditLineId"]} disabled={data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED?true:false} 
+             onChange={checkStatus.bind(this,rowIndex,AUDIT_REJECTED,data.getObjectAt(rowIndex)["auditLineId"])}/>
         <FormattedMessage id="commonDataTable.resolveAudit.reject" description='resolve button' defaultMessage='Reject'/>
     </div>
+  }
   </Cell>
 );
 

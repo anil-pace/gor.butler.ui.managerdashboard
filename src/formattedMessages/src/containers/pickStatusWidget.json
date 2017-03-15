@@ -53,5 +53,20 @@
     "id": "widget.pick.offline",
     "description": "Message for system offline",
     "defaultMessage": "Offline"
+  },
+  {
+    "id": "widget.pick.emergency",
+    "description": "Message for system in emergency state",
+    "defaultMessage": "--"
+  },
+  {
+    "id": "widget.pick.statusleft.delay",
+    "description": "Text for delay in orders",
+    "defaultMessage": "Delayed"
+  },
+  {
+    "id": "widget.pick.lowright.emergency",
+    "description": "Estimated time",
+    "defaultMessage": "Estimated to complete in --"
   }
 ]

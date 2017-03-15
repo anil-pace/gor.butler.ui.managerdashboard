@@ -1,0 +1,27 @@
+[
+  {
+    "id": "operation.resume.heading",
+    "description": "Text for resume operation heading",
+    "defaultMessage": "Resume Operation"
+  },
+  {
+    "id": "operation.resume.text",
+    "description": "Text for resume operation body",
+    "defaultMessage": "To resume operation, you will be required to go through a safety\n                checklist to make sure that the Butler system is ready"
+  },
+  {
+    "id": "operation.resume.error",
+    "description": "Text for wrong password",
+    "defaultMessage": "The entered input does not match. Please try again."
+  },
+  {
+    "id": "operation.cancel",
+    "description": "Text for cancel",
+    "defaultMessage": "Cancel"
+  },
+  {
+    "id": "operation.resume.view",
+    "description": "Text for viewing safety checklist",
+    "defaultMessage": "View safety checklist"
+  }
+]

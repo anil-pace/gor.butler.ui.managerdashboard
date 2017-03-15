@@ -1904,7 +1904,7 @@
   {
     "id": "usersStatus.tab.heading",
     "description": "users Status",
-    "defaultMessage": "{count} users online"
+    "defaultMessage": "{count} {count, plural,=0{user} one{user} other{users}} online"
   },
   {
     "id": "inventoryStatus.tab.heading",
@@ -2459,10 +2459,7 @@
     "id": "auditdetail.auditRejected.prefix",
     "defaultMessage": "Rejected"
     },
-    {
-    "id": "auditdetail.auditReaudited.prefix",
-    "defaultMessage": "Re Audited"
-  },
+    
   {
     "id": "auditdetail.auditResolved.prefix",
     "defaultMessage": "Resolved"

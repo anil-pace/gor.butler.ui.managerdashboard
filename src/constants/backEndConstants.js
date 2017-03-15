@@ -56,7 +56,8 @@ export const CODE_AE006='ae006';
 export const CODE_AS002='as002';
 export const CODE_AS003='as003';
 export const CODE_G016='g016';
-
+export const CODE_AE007='ae007';
+export const CODE_AE008='ae008';
 /*User roles map*/
 export const BUTLER_SUPERVISOR = 'butler_supervisor';
 export const BUTLER_UI = 'butler_ui';
@@ -239,7 +240,41 @@ export const  stringConfig= defineMessages({
         "id": "stringConfig.audit_rejected",
         "description": "Text for audit rejected status",
         "defaultMessage": "Rejected"
+    },
+    md001 : {
+        "id": "stringConfig.md001",
+        "description": "Text for safety checklist item 1",
+        "defaultMessage": "No personnel are present in the no-man zone."
+    },
+    md002 : {
+        "id": "stringConfig.md002",
+        "description": "Text for safety checklist item 2",
+        "defaultMessage": "All Butler and MSU positions have been corrected."
+    },
+    md003 : {
+        "id": "stringConfig.md003",
+        "description": "Text for safety checklist item 3",
+        "defaultMessage": "All no-man zone gates are properly closed."
+    },
+    md004 : {
+        "id": "stringConfig.md004",
+        "description": "Text for safety checklist item 4",
+        "defaultMessage": "All no-man gate limit switches are active and working."
+    },
+    md005 : {
+        "id": "stringConfig.md005",
+        "description": "Text for safety checklist item 5",
+        "defaultMessage": "No zonal emergencies are pressed."
+    },
+    md006 : {
+        "id": "stringConfig.md006",
+        "description": "Text for safety checklist item 6",
+        "defaultMessage": "All Zigbee boxes are online."
+    },
+    audit_reaudited: {
+        "id": "stringConfig.audit_reaudited",
+        "description": "Text for audit reaudited status",
+        "defaultMessage": "Re-audited"
     }
-    
 });
 

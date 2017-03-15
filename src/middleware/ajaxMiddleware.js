@@ -1,5 +1,5 @@
 
-import {AJAX_CALL,AUTH_LOGIN} from '../constants/frontEndConstants';
+import {AJAX_CALL,AUTH_LOGIN,PAUSE_OPERATION,RESUME_OPERATION} from '../constants/frontEndConstants';
 
 import {AjaxParse} from '../utilities/AjaxParser';
 import {ShowError} from '../utilities/showError';
@@ -17,13 +17,13 @@ const ajaxMiddleware = (function(){
        var formData = params.formdata || params || null,
        loginData= params.formdata? JSON.stringify(params.formdata):null;
        var httpRequest = new XMLHttpRequest();
-
+       var authCause = [AUTH_LOGIN, PAUSE_OPERATION, RESUME_OPERATION];
        if (!httpRequest || !params.url) {
         return false;
         }
       httpRequest.onreadystatechange = function(xhr){
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
-              if(httpRequest.status === 401 && params.cause!==AUTH_LOGIN) {
+              if(httpRequest.status === 401 && authCause.indexOf(params.cause)==-1) {
                 endSession(store);
               }
               else {

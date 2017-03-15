@@ -27,7 +27,7 @@
   {
     "id": "audit.unresolveIssues",
     "description": "unresolve issue for audit table",
-    "defaultMessage": "{unresolvedCount} unresolved issues"
+    "defaultMessage": "{unresolvedCount} {unresolvedCount, plural, one {unresolved issue} other {unresolved issues}}"
   },
   {
     "id": "commonDataTable.resolveAudit.approve",
