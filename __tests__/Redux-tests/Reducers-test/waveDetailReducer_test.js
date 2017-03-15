@@ -22,23 +22,25 @@ describe('Tests for wave detail reducer ',()=>{
 			};
 		expect(waveInfo(undefined,action)).toEqual(expectData);
 	});	
-	it('Handle data parsing',()=>{
-		const dataObj={
-			complete_data:{
-				waveId:1
-			}
-		}
+	it('testing null case',()=>{
+		const dataObj={};
 		const action={
 					type:ORDERS_DATA, 
 					data:dataObj
 			};
 			
-		const expectData ={
-				"waveData":{
-					waveId:1
-				}
-				
+		const expectData ={};
+		expect(waveInfo(undefined,action)).toEqual(expectData);
+	});
+
+	it('testing empty object case',()=>{
+		const dataObj={complete_data:{}};
+		const action={
+					type:ORDERS_DATA, 
+					data:dataObj
 			};
+			
+		const expectData ={"waveData":{}};
 		expect(waveInfo(undefined,action)).toEqual(expectData);
 	});	
 });
