@@ -1,0 +1,58 @@
+[
+  {
+    "id": "audit.inputField.id",
+    "defaultMessage": "AUDIT TASK ID"
+  },
+  {
+    "id": "audit.inputField.sku",
+    "defaultMessage": "SPECIFIC SKU ID"
+  },
+  {
+    "id": "audit.inputField.location",
+    "defaultMessage": "SPECIFIC LOCATION ID"
+  },
+  {
+    "id": "audit.tokenfield.typeAudit",
+    "defaultMessage": "AUDIT TYPE"
+  },
+  {
+    "id": "audit.tokenfield.STATUS",
+    "defaultMessage": "STATUS"
+  },
+  {
+    "id": "audit.token1.all",
+    "defaultMessage": "Any"
+  },
+  {
+    "id": "audit.token1.sku",
+    "defaultMessage": "SKU"
+  },
+  {
+    "id": "audit.token1.location",
+    "defaultMessage": "Location"
+  },
+  {
+    "id": "audit.token2.all",
+    "defaultMessage": "Any"
+  },
+  {
+    "id": "audit.token2.issueFound",
+    "defaultMessage": "Issue found"
+  },
+  {
+    "id": "audit.token2.rejected",
+    "defaultMessage": "Rejected"
+  },
+  {
+    "id": "audit.token2.resolved",
+    "defaultMessage": "Resolved"
+  },
+  {
+    "id": "audit.token2.inProgress",
+    "defaultMessage": "In progress"
+  },
+  {
+    "id": "audit.token2.pending",
+    "defaultMessage": "Pending"
+  }
+]

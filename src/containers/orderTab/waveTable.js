@@ -20,7 +20,7 @@ class WavesTable extends React.Component {
     for (var index = 0; index < size; index++) {
       this._defaultSortIndexes.push(index);
     }
-    var columnWidth= (this.props.containerWidth/this.props.itemNumber)
+    var columnWidth= (this.props.containerWidth/this.props.itemNumber);
     this.state = {
       sortedDataList: this._dataList,
       colSortDirs: {},

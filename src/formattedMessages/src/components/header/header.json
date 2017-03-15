@@ -1,13 +1,58 @@
 [
   {
-    "id": "header.description",
+    "id": "header.butler",
     "description": "Header description",
-    "defaultMessage": "Butler Management System"
+    "defaultMessage": "Butler"
   },
   {
-    "id": "header.start_time",
+    "id": "header.start",
     "description": "Start time",
     "defaultMessage": "Start time:{time}"
+  },
+  {
+    "id": "header.option.normal",
+    "description": "normal operation",
+    "defaultMessage": "Operation normal"
+  },
+  {
+    "id": "header.option.pause",
+    "description": "pause operation option",
+    "defaultMessage": "Enter password to pause operation"
+  },
+  {
+    "id": "header.button.pause",
+    "description": "Button text",
+    "defaultMessage": "Pause"
+  },
+  {
+    "id": "header.emergency.heading",
+    "description": "Header description",
+    "defaultMessage": "Emergency"
+  },
+  {
+    "id": "header.emergency.subheading",
+    "description": "Start time",
+    "defaultMessage": "In Zone"
+  },
+  {
+    "id": "header.option.stopped",
+    "description": "stopped operation",
+    "defaultMessage": "Operation stopped"
+  },
+  {
+    "id": "header.button.resume",
+    "description": "Button text",
+    "defaultMessage": "Resume"
+  },
+  {
+    "id": "header.option.release",
+    "description": "release operation option",
+    "defaultMessage": "Release the Emergency Stop button from the Zigbee box in order \n        \t\t\t\t\t\tto resume operation."
+  },
+  {
+    "id": "header.option.resume",
+    "description": "resume operation option",
+    "defaultMessage": "Enter password to resume operation."
   },
   {
     "id": "header.logout",

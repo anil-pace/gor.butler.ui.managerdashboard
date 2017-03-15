@@ -163,7 +163,9 @@ body {
 .header-offline-icon,
 .user-icon,
 .overview-tile-ontime-icon,
-.statusOl, .statusAl, .iStock, .iAudit, .iPick, .gor-login-user, .gor-login-password, .gor-login-error, .gor-tick, .gor-question, .gor-tick-white, .gor-remove-white, .gor-error-white, .gor-login-user-error, .gor-login-password-error {
+.statusOl, .statusAl, .iStock, .iAudit, .iPick, .gor-login-user, .gor-login-password, .gor-login-error, .gor-tick, .gor-question, .gor-tick-white, .gor-remove-white, .gor-error-white, .gor-login-user-error, .gor-login-password-error, .gor-question-2, .gor-operation-tick, .gor-alert-lg,
+.gor-dropdown-open, .gor-dropdown-close, .gor-caution, .gor-delay-icon,
+.gor-emergency-dropdown-close, .gor-emergency-dropdown-open {
   background-image: url(images/icons.svg);
 }
 
@@ -192,6 +194,7 @@ body {
   width: 16px;
   height: 16px;
   display: inline-block;
+  vertical-align: middle;
 }
 
 .gor-login-password-error {
@@ -344,6 +347,7 @@ body {
   height: 24px;
   margin-right: 15px;
   display: inline-block;
+  vertical-align: middle;
 }
 
 .gor-remove-white {
@@ -491,6 +495,81 @@ body {
   display: inline-block;
   vertical-align: bottom;
   margin-right: 5px;
+}
+
+.gor-question-2 {
+  background-position: -564px -1px;
+  width: 46px;
+  height: 50px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.gor-operation-tick {
+  background-position: -251px -52px;
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.gor-alert-lg {
+  background-position: -613px -3px;
+  width: 50px;
+  height: 46px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.gor-dropdown-open {
+  background-position: -1px -110px;
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+  vertical-align: middle;
+  transform: rotate(180deg);
+}
+
+.gor-dropdown-close {
+  background-position: -1px -110px;
+  width: 8px;
+  height: 6px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.gor-caution {
+  background-position: -511px -1px;
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.gor-delay-icon {
+  background-position: -443px -77px;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.gor-emergency-dropdown-open {
+  background-position: -37px -110px;
+  width: 8px;
+  height: 6px;
+  display: inline-block;
+  vertical-align: middle;
+  transform: rotate(180deg);
+}
+
+.gor-emergency-dropdown-close {
+  background-position: -37px -110px;
+  width: 8px;
+  height: 6px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 /*  SECTIONS  */
@@ -675,7 +754,6 @@ body {
 
 .gorHeader.head {
   overflow: hidden;
-  padding: 0.3125rem 0;
   background: #fff;
 }
 
@@ -687,7 +765,7 @@ body {
   border: none;
   cursor: pointer;
   width: auto;
-  font-family: "source sans pro";
+  font-family: "Source Sans Pro";
 }
 
 .gorHeader .dropbtn:hover {
@@ -703,12 +781,13 @@ body {
 }
 
 .gorHeader .dropdown {
+  padding: 0.3125rem 0;
   display: inline-block;
   vertical-align: middle;
 }
 
 .gorHeader .dropdown-content {
-  font-family: "source sans pro";
+  font-family: "Source Sans Pro";
   background-color: white;
   font-size: 0.875rem;
   color: #4d5055;
@@ -737,7 +816,7 @@ body {
 }
 
 .gorHeader .dropdown-content-afterClick {
-  font-family: "source sans pro";
+  font-family: "Source Sans Pro";
   background-color: white;
   font-size: 0.875rem;
   color: #4d5055;
@@ -790,25 +869,8 @@ body {
   padding-right: 10px;
 }
 
-.gorHeader .upperText {
-  font-family: "source sans pro";
-  font-size: 1.125rem;
-  color: #4d5055;
-  font-weight: bold;
-  line-height: 1;
-  display: inline-block;
-}
-
-.gorHeader .subText {
-  font-family: "source sans pro";
-  font-size: 0.75rem;
-  font-weight: normal;
-  color: #4d5055;
-  padding-top: 2px;
-}
-
 .gorHeader .subTextClient {
-  font-family: "source sans pro";
+  font-family: "Source Sans Pro";
   font-size: 0.75rem;
   font-weight: normal;
   color: #4d5055;
@@ -825,24 +887,27 @@ body {
 .gorHeader .mainBlock {
   display: inline-block;
   overflow: hidden;
-  padding: 0rem 0rem;
+  padding: 0.3125rem 0;
 }
 
 .gorHeader .blockSystem {
   display: inline-block;
   overflow: hidden;
-  padding-left: 0.625rem;
+  padding-left: 0.9375rem;
   vertical-align: middle;
+  margin-top: 2px;
 }
 
 .gorHeader .blockLeft {
   display: inline-block;
   float: right;
+  cursor: pointer;
+  width: 30%;
 }
 
 .gorHeader .upperTextClient {
   padding: 10px 1.25rem 0.375rem 0rem;
-  font-family: "source sans pro";
+  font-family: "Source Sans Pro";
   font-size: 0.875rem;
   font-weight: 600;
   line-height: 0;
@@ -1147,7 +1212,7 @@ body {
   border-radius: 0.25rem;
   box-sizing: border-box;
   color: #000000;
-  font-family: "source sans pro";
+  font-family: "Source Sans Pro";
   font-size: 1.25rem;
   font-weight: bold;
   cursor: default;
@@ -1241,12 +1306,12 @@ body {
 
 .Order-Stats-Drop {
   width: 33%;
-  max-width: 276px;
+  max-width: 280px;
 }
 
 .Performance-Widget-Drop {
   width: 75%;
-  max-width: 267px;
+  max-width: 282px;
 }
 
 .axis path,
@@ -1334,6 +1399,34 @@ body {
 
 .gor-fill-back {
   background: #4D5055;
+}
+
+.field {
+  font-family: 'Source Sans Pro Regular', sans-serif;
+  border: none;
+  font-size: 18px;
+  margin-left: 0.625rem;
+  width: 80%;
+  color: #F36F36;
+  text-shadow: 0px 0px 0px #AAAAAA;
+  -webkit-text-fill-color: transparent;
+}
+
+.field:focus {
+  text-shadow: 0px 0px 0px #666666;
+}
+
+.gor-login-usr-error {
+  text-align: left;
+  color: #EC1C24;
+  font-size: 18px;
+  margin: auto;
+  margin-top: 10px;
+  width: 75%;
+}
+
+.gor-login-usr-error.gor-sm-string {
+  font-size: 12px;
 }
 
 .gor-login-form {
@@ -1529,21 +1622,6 @@ body {
   color: #333333;
 }
 
-.gor-login-form .gor-login-mid .gor-login-field .field {
-  font-family: 'Source Sans Pro Regular', sans-serif;
-  border: none;
-  font-size: 18px;
-  margin-left: 0.625rem;
-  width: 80%;
-  color: #F36F36;
-  text-shadow: 0px 0px 0px #AAAAAA;
-  -webkit-text-fill-color: transparent;
-}
-
-.gor-login-form .gor-login-mid .gor-login-field .field:focus {
-  text-shadow: 0px 0px 0px #666666;
-}
-
 .gor-login-form .gor-login-mid .gor-login-field .gor-login-user {
   vertical-align: middle;
 }
@@ -1558,15 +1636,6 @@ body {
   font-size: 18px;
   text-align: center;
   margin-top: 10px;
-}
-
-.gor-login-form .gor-login-mid .gor-login-usr-error {
-  text-align: left;
-  color: #EC1C24;
-  font-size: 18px;
-  margin: auto;
-  margin-top: 10px;
-  width: 75%;
 }
 
 .gor-login-form .gor-login-mid .gor-login-btn {
@@ -1976,7 +2045,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   background: #fc3838;
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   color: #ffffff;
   font-size: 12px;
   max-height: 9px;
@@ -1986,7 +2055,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   background: #fc3838;
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   color: #ffffff;
   font-size: 12px;
   max-height: 9px;
@@ -1996,7 +2065,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   background: #f99405;
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   color: #ffffff;
   font-size: 12px;
   max-height: 9px;
@@ -2006,7 +2075,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   background: #f99405;
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   color: #ffffff;
   font-size: 12px;
   max-height: 9px;
@@ -2016,7 +2085,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   background: #f99405;
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   color: #ffffff;
   font-size: 12px;
   max-height: 9px;
@@ -2025,7 +2094,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .on .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   border-style: solid;
   border-width: 1px;
   border-color: #00a54f;
@@ -2039,7 +2108,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .off .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   border-style: solid;
   border-width: 1px;
   border-color: #aaaaaa;
@@ -2053,7 +2122,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .online .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   border-style: solid;
   border-width: 1px;
   border-color: #00a54f;
@@ -2067,7 +2136,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .connected .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   border-style: solid;
   border-width: 1px;
   border-color: #00a54f;
@@ -2081,7 +2150,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .completed .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   border-style: solid;
   border-width: 1px;
   border-color: #00a54f;
@@ -2095,7 +2164,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   background: #fc3838;
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   color: #ffffff;
   font-size: 12px;
   max-height: 9px;
@@ -2105,7 +2174,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   background: #F99405;
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   color: #ffffff;
   font-size: 12px;
   max-height: 9px;
@@ -2114,7 +2183,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .offline .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   border-style: solid;
   border-width: 1px;
   border-color: #aaaaaa;
@@ -2128,7 +2197,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .disconnected .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   border-style: solid;
   border-width: 1px;
   border-color: #aaaaaa;
@@ -2142,7 +2211,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .pending .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   border-style: solid;
   border-width: 1px;
   border-color: #00a54f;
@@ -2156,7 +2225,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .cancelled .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   border-style: solid;
   border-width: 1px;
   border-color: #aaaaaa;
@@ -2170,7 +2239,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .abandoned .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   border-style: solid;
   border-width: 1px;
   border-color: #aaaaaa;
@@ -2185,7 +2254,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   background: #f36f36;
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   color: #ffffff;
   font-size: 12px;
   max-height: 9px;
@@ -2195,7 +2264,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .in_progress {
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   border-style: solid;
   border-width: 1px;
   border-color: #00a54f;
@@ -2208,7 +2277,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .fulfillable .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   border-style: solid;
   border-width: 1px;
   border-color: #00a54f;
@@ -2223,7 +2292,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   background: #f99405;
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   color: #ffffff;
   font-size: 12px;
   max-height: 9px;
@@ -2232,7 +2301,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .progress .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
-  width: 70px;
+  width: 90px;
   border-style: solid;
   border-width: 1px;
   border-color: #00a54f;
@@ -2915,7 +2984,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 }
 
 .gorToolBarWrap {
-  width: 33%;
+  width: 40%;
   font-weight: bold;
   color: #000000;
   display: inline-block;
@@ -3313,6 +3382,29 @@ input[type="checkbox"] {
   padding-bottom: 15px;
 }
 
+.gor-audit-filter-create-wrap {
+  display: inline-block;
+  float: right;
+  margin-top: 16px;
+  margin-right: 40px;
+}
+
+.gor-audit-create-btn {
+  height: 35px;
+  border-radius: 3px;
+  background-color: #4d5055;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  font-family: "source sans pro";
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  color: #ffffff;
+  padding-left: 14px;
+  padding-right: 14px;
+  vertical-align: sub;
+  cursor: pointer;
+}
+
 .gorSubTab.gorContainer {
   background-color: #F8F8F8;
   width: auto;
@@ -3367,7 +3459,7 @@ input[type="checkbox"] {
 
 .gor-add-btn {
   font-family: 'Source Sans Pro Bold', sans-serif;
-  width: 113px;
+  min-width: 113px;
   height: 35px;
   font-size: 14px;
   background: #f36f36;
@@ -3499,7 +3591,7 @@ input[type="checkbox"] {
   text-align: left;
   margin-top: 0.625rem;
   padding: 0.625rem;
-  width: 65%;
+  width: 66%;
   background-color: #FFFFFF;
   border-radius: 3px;
   display: inline-block;
@@ -3541,7 +3633,7 @@ input[type="checkbox"] {
 
 .gor-modal-content .gor-usr-details .gor-usr-field {
   display: inline-block;
-  width: 35%;
+  width: 36%;
 }
 
 .gor-modal-content .gor-usr-details .gor-usr-field .gor-usr-fdsm {
@@ -3777,7 +3869,7 @@ input[type="checkbox"] {
 }
 
 .gor-pass {
-  background: #00a54f;
+  background: #27aae1;
   color: #ffffff;
 }
 
@@ -4353,6 +4445,194 @@ input[type="checkbox"] {
   color: #fff;
 }
 
+.gor-operation-head {
+  border-bottom: 1px solid #dddddd;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  width: 90%;
+  margin: auto;
+  font-size: 20px;
+  text-align: left;
+}
+
+.gor-operation-head .gor-question-2 {
+  vertical-align: middle;
+  margin-right: 20px;
+}
+
+.gor-emergency-overlay {
+  position: absolute;
+  height: 100vh;
+  background: rgba(236, 28, 35, 0.4);
+  width: 100%;
+}
+
+.gor-safetylist .gor-usr-details {
+  width: 40%;
+}
+
+.gor-safetylist .gor-sub-head {
+  width: 70%;
+}
+
+.gor-safety-body {
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+.gor-safety-body .tab-alert-icon {
+  margin-right: 10px;
+}
+
+.gor-safety-error {
+  border-radius: 3px;
+  background-color: #ffffff;
+  border: solid 1px #ef301e;
+  padding: 3%;
+  width: 75%;
+}
+
+.gor-safety-error .gor-error-sm {
+  display: inline-block;
+  width: 90%;
+}
+
+.gor-checklist-item {
+  font-size: 14px;
+  line-height: 1.43;
+  color: #666666;
+  margin-right: 10px;
+}
+
+.gor-resume-operation {
+  width: 50%;
+  min-height: 15.625rem;
+  margin-top: 25vh;
+  border-radius: 1%;
+  text-align: left;
+}
+
+.gor-resume-operation .gor-operation-head {
+  width: 100%;
+  padding: 2%;
+  border: none;
+  font-size: 26px;
+  color: #666666;
+}
+
+.gor-resume-operation .gor-operation-head .gor-operation-heading {
+  color: #4d5055;
+  margin-left: 20px;
+}
+
+.gor-resume-operation .gor-operation-body {
+  padding: 2%;
+}
+
+.gor-text-bold {
+  font-weight: bold;
+  font-size: 18px;
+  color: #4a4a4a;
+}
+
+.gor-operation-text {
+  margin-top: 5px;
+  font-size: 16px;
+  color: #666666;
+}
+
+.close {
+  float: right;
+  font-size: 40px;
+  color: #666666;
+  cursor: pointer;
+}
+
+.gor-operation-stop {
+  position: relative;
+  height: 230px;
+}
+
+.gor-error-lg {
+  font-size: 26px;
+  color: #ec1c24;
+}
+
+.gor-error-md {
+  font-size: 18px;
+  color: #ec1c24;
+}
+
+.gor-error-sm {
+  font-size: 14px;
+  color: #e63831;
+}
+
+.gor-text-sm {
+  font-size: 15px;
+  color: #666666;
+}
+
+.gor-center-align {
+  margin: auto;
+  text-align: center;
+}
+
+button:disabled {
+  opacity: 0.60;
+}
+
+.gor-password-field-lg {
+  margin: auto;
+  text-align: left;
+  margin-top: 1.25rem;
+  padding: 0.3125rem;
+  padding-left: 0.9375rem;
+  width: 75%;
+  background-color: #FFFFFF;
+  border-radius: 3px;
+  color: #666666;
+  font-size: 16px;
+}
+
+.gor-password-field-lg.gor-input-typing {
+  color: #666666;
+}
+
+.gor-password-field-lg.gor-input-typing .gor-login-user {
+  background-position: -273px -77px;
+}
+
+.gor-password-field-lg.gor-input-typing .gor-login-password {
+  background-position: -291px -77px;
+}
+
+.gor-password-field-lg.gor-input-typing:focus {
+  color: #333333;
+}
+
+.gor-operation-body {
+  padding: 5%;
+  font-size: 14px;
+  color: #666666;
+}
+
+.gor-margin-top {
+  margin-top: 40px;
+}
+
+.gor-operation-pause {
+  width: 40%;
+  min-height: 18.75rem;
+  margin-top: 25vh;
+  text-align: center;
+  border-radius: 1%;
+}
+
+.gor-operation-pause .gor-delete-line {
+  margin-left: 20px;
+}
+
 .gor-emergency {
   width: 60%;
   min-height: 31.25rem;
@@ -4799,7 +5079,6 @@ input[type="checkbox"] {
 }
 
 .gor-filter-body {
-  height: 400px;
   overflow: auto;
 }
 
@@ -4933,4 +5212,103 @@ input[type="checkbox"] {
   background-color: #ffffff;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   border: solid 1px #f36f36;
+}
+
+.gor-menuWrap {
+  display: inline-block;
+  line-height: 22px;
+  width: 50%;
+}
+
+.gor-menu-heading {
+  font-family: "Source Sans Pro";
+  font-size: 18px;
+  color: #3c3f43;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.gor-menu-heading.gor-white-text {
+  color: #FFFFFF;
+}
+
+.gor-menuIcon {
+  display: inline-block;
+  float: right;
+  margin-top: 20px;
+  margin-right: 20px;
+}
+
+.gor-menu-subheading {
+  font-family: "Source Sans Pro";
+  font-size: 0.75rem;
+  color: #3c3f43;
+}
+
+.gor-menu-subheading.gor-white-text {
+  color: #FFFFFF;
+}
+
+.gor-hamburger-option {
+  padding: 19px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  font-size: 12px;
+  color: #666666;
+  max-height: 32px;
+}
+
+.gor-hamburger-option.gor-operation-normal {
+  font-size: 18px;
+  background: #10c469;
+  color: #FFFFFF;
+  font-weight: bold;
+}
+
+.gor-hamburger-option.gor-fail {
+  font-size: 18px;
+  background: #EC1C24;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.gor-option-icon {
+  width: 15%;
+  margin-right: 5px;
+  display: inline-block;
+}
+
+.gor-option-icon .gor-tick-white {
+  vertical-align: middle;
+}
+
+.gor-option-icon .gor-error-white {
+  vertical-align: middle;
+}
+
+.gor-hamburger-wrapper {
+  position: absolute;
+  background-color: #FFFFFF;
+  width: 330px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  font-size: 14px;
+  border: solid 1px #aaaaaa;
+  border-top: none;
+}
+
+.gor-btn-small {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  min-width: 60px;
+  background: #f36f36;
+  padding: 2%;
+  color: #ffffff;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.gor-right {
+  float: right;
 }

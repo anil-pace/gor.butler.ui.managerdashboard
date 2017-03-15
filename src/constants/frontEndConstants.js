@@ -117,6 +117,14 @@ export const EDIT_USER='EDIT_USER';
 export const DEBOUNCE_TIMER=1000;
 export const AUDIT_RESOLVE_CONFIRMED = "AUDIT_RESOLVE_CONFIRMED";
 export const VALIDATE_SKU_ID = "VALIDATE_SKU_ID";
+export const PAUSE_OPERATION = "PAUSE_OPERATION";
+export const RESUME_OPERATION = "RESUME_OPERATION";
+export const CHECK_SAFETY = "CHECK_SAFETY";
+export const CONFIRM_SAFETY = "CONFIRM_SAFETY";
+export const AUTH_USER = "AUTH_USER";
+export const MODAL_STATUS = "MODAL_STATUS";
+export const SAFETY_MAP = "SAFETY_MAP";
+export const SAFETY_ERROR_MAP = "SAFETY_ERROR_MAP";
 
 export const AUDIT_RETRIEVE = "AUDIT_RETRIEVE";
 export const RECIEVE_AUDIT_DATA = "RECIEVE_AUDIT_DATA";
@@ -172,7 +180,7 @@ export const DISPLAY_CHARGING_STATION_SPINNER = "DISPLAY_CHARGING_STATION_SPINNE
 export const DISPLAY_USERS_SPINNER ="DISPLAY_USERS_SPINNER";
 export const DISPAY_RESOLVE_AUDIT_SPINNER = "DISPAY_RESOLVE_AUDIT_SPINNER";
 export const VALIDATE_SKU_SPINNER = "VALIDATE_SKU_SPINNER";
-
+export const DISPLAY_SAFETY_SPINNER = "DISPLAY_SAFETY_SPINNER";
 /*Map for routes of tab*/
 
 export const TAB_ROUTE_MAP = {
@@ -194,7 +202,7 @@ export const SYS_SUB_TAB_ROUTE_MAP={
 }
 
 /*Constant for time on header*/
-export const HEADER_START_TIME = '09:00 AM IST'
+export const HEADER_START_TIME = ' 09:00:15 (IST)'
 
 /*Constants for Audit tab */
 export const SET_AUDIT='SET_AUDIT';
@@ -339,6 +347,7 @@ export const PUT='PUT';
 export const DELETE='DELETE';
 export const APP_JSON='application/json';
 export const GOR_RISK='gor-risk';
+export const GOR_DELAY='gor-breach';
 export const GOR_NONE='gor-none';
 export const GOR_SUCCESS='gor-success';
 export const GOR_PENDING="pending";
@@ -375,6 +384,7 @@ export const TILE_ALERT='header-yellow-alert-icon';
 export const TICK_WHITE='gor-tick-white';
 export const REMOVE_ICON='gor-remove-white';
 export const ERROR_WHITE='gor-error-white';
+export const DELAY_ICON="gor-delay-icon";
 
 //Sort header constants
 export const INITIAL_HEADER_SORT = "status";
@@ -413,3 +423,22 @@ export const SHOW_SELECTED_ENTRIES = "checked";
 //table filter
 export const SHOW_FILTER = "SHOW_FILTER";
 export const IS_FILTER_APPLIED = "IS_FILTER_APPLIED";
+
+//Emergency & Pause operation
+export const AUDIT_TASK_ID = "AUDIT TASK ID"
+export const ADD_TOKEN = "add";
+export const ADD_DEFAULT = "addDefault";
+export const SOFT_MANUAL = "soft_manual";
+export const HARD = "hard";
+//backend sort
+export const sortAuditHead = {"startTime":"&order_by=start_actual_time", 
+							"completedTime":"&order_by=completion_time", 
+							"display_id":"&order_by=display_id",
+                  			"status":"&order_by=audit_status&order_by_seq=[ 'audit_pending_approval','audit_created','audit_accepted','audit_conflicting','audit_waiting','audit_resolved','audit_pending','audit_reaudited','audit_started','audit_tasked','audit_rejected','audit_resolved','audit_aborted', 'audit_completed']"};
+export const sortOrder = {"DESC":"&order=asc", "ASC":"&order=desc"};
+
+export const sortOrderHead = {"recievedTime":"&order_by=create_time", 
+							  "pickBy":"&order_by=pick_before_time", 
+							  "id":"&order_by=order_id",
+                  			  "status":"&order_by=warehouse_status&order_by_seq=['breached','exception','not_fulfillable','abandoned','temporary_unfulfillable','pending','fulfillable','cancelled','completed']"};
+

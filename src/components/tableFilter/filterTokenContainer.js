@@ -12,7 +12,7 @@ class FilterTokenWrap extends React.Component{
         var tokenSelected = this.props.selectedToken;
     	for (var i = tokens.length - 1; i >= 0; i--) {
     		var tokenComponent = <FilterToken tokenCallBack={this.props.tokenCallBack} 
-                                              tokenField={this.props.field} tokenLabel={tokens[i]} 
+                                              tokenField={this.props.field.value} tokenLabel={tokens[i]} 
                                               tokenSelected={tokenSelected} lastToken={i?false:true}/>
     		tokenWrap.push(tokenComponent);
     	}
@@ -24,12 +24,12 @@ class FilterTokenWrap extends React.Component{
 		return (
 			<div>
 				<div className="gor-filter-token-section-h1">
-					{this.props.field}
+					{this.props.field.label}
 				</div>
                	{tokenWrap}
             </div>
 		);
-	}
+	} 
 };
 
 export default FilterTokenWrap ;

@@ -1,0 +1,32 @@
+[
+  {
+    "id": "operation.safety.steperror",
+    "description": "Text for error in step",
+    "defaultMessage": "(Check again)"
+  },
+  {
+    "id": "operation.safety.heading",
+    "description": "Text for safety heading",
+    "defaultMessage": "Safety checklist"
+  },
+  {
+    "id": "operation.safety.steps",
+    "description": "Text for approval steps",
+    "defaultMessage": "Check approval steps"
+  },
+  {
+    "id": "operation.safety.text",
+    "description": "Text for ticking items",
+    "defaultMessage": "Tick every item to confirm that the system is safe to resume operation."
+  },
+  {
+    "id": "operation.safety.errors",
+    "description": "Text for safety error",
+    "defaultMessage": "System has found some of these steps were not followed. \n                    Please check or contact service engineer for support"
+  },
+  {
+    "id": "operation.safety.confirm",
+    "description": "Text for confirm button",
+    "defaultMessage": "Confirm"
+  }
+]

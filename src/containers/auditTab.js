@@ -7,7 +7,7 @@ import {AUDIT_URL,FILTER_AUDIT_ID} from '../constants/configConstants';
 import {getAuditData,setAuditRefresh} from '../actions/auditActions';
 import AuditTable from './auditTab/auditTable';
 import {getPageData} from '../actions/paginationAction';
-import {AUDIT_RETRIEVE,GET,APP_JSON,GOR_COMPLETED_STATUS,LOCATION,SKU,AUDIT_PENDING_APPROVAL,AUDIT_RESOLVED,AUDIT_CREATED, AUDIT_LINE_REJECTED,AUDIT_ISSUES_STATUS,AUDIT_BY_PDFA} from '../constants/frontEndConstants';
+import {AUDIT_RETRIEVE,GET,APP_JSON,GOR_COMPLETED_STATUS,LOCATION,SKU,AUDIT_PENDING_APPROVAL,AUDIT_RESOLVED,AUDIT_CREATED, AUDIT_LINE_REJECTED,AUDIT_ISSUES_STATUS,AUDIT_BY_PDFA,AUDIT_TASK_ID,sortAuditHead,sortOrder} from '../constants/frontEndConstants';
 import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,SEARCH_AUDIT_URL,GIVEN_PAGE,GIVEN_PAGE_SIZE} from '../constants/configConstants';
 import {setAuditSpinner} from '../actions/auditActions';
 import { defineMessages } from 'react-intl';
@@ -15,7 +15,7 @@ import {auditHeaderSortOrder, auditHeaderSort, auditFilterDetail} from '../actio
 import {getDaysDiff} from '../utilities/getDaysDiff';
 import {addDateOffSet} from '../utilities/processDate'; 
 import GorPaginate from '../components/gorPaginate/gorPaginate';
-import {showTableFilter} from '../actions/filterAction';
+import {showTableFilter,filterApplied} from '../actions/filterAction';
 //Mesages for internationalization
 const messages = defineMessages({
   auditCreatedStatus: {
@@ -56,7 +56,7 @@ const messages = defineMessages({
   },
   auditReAudited:{
     id:"auditdetail.auditReaudited.prefix", 
-    defaultMessage: "Re Audited"
+    defaultMessage: "Re-audited"
   },
 
 
@@ -86,8 +86,8 @@ shouldComponentUpdate(nextProps) {
       flag = flag || true;
     }
 
-    else if(this.props.auditDetail.length && nextProps.auditDetail.length && this.props.auditDetail[0].audit_id !== nextProps.auditDetail[0].audit_id) {
-      flag = flag || true;
+    else if((nextProps.auditDetail && !nextProps.auditDetail.length)){
+      flag = flag || false;
     }
 
     else if(this.props.auditSortHeader !== nextProps.auditSortHeader || this.props.auditSpinner !== nextProps.auditSpinner) {
@@ -122,7 +122,8 @@ _processAuditData(data,nProps){
   let reAudited = nProps.context.intl.formatMessage(messages.auditReAudited);
   var timeOffset= nProps.props.timeOffset || "";
   var auditStatus = {"audit_created":created, "audit_pending":pending, "audit_waiting":pending, "audit_conflicting":pending, "audit_accepted":pending, "audit_started":progress, "audit_tasked":progress, "audit_aborted":completed, "audit_completed":completed, "audit_pending_approval":pendingApp, "audit_resolved":resolved, audit_rejected:rejected,audit_reaudited:reAudited};
-  var statusClass = {"Pending": "pending", "Completed":"completed", "In Progress":"progress", "Created":"pending", "Issues found":"breached", "Rejected":"breached", "Resolved":"progress", "Re Audited":"progress"}
+  //var statusClass = {"Pending": "pending", "Completed":"completed", "In Progress":"progress", "Created":"pending", "Issues found":"breached", "Rejected":"breached", "Resolved":"progress", "Re-audited":"completed"}
+  var statusClass = {"audit_created":"pending", "audit_pending":"pending", "audit_waiting":"pending", "audit_conflicting":"pending", "audit_accepted":"pending", "audit_started":"progress", "audit_tasked":"progress", "audit_aborted":"completed", "audit_completed":"completed", "audit_pending_approval":"breached", "audit_resolved":"progress", audit_rejected:"breached",audit_reaudited:"completed"};
   var auditType = {"sku":sku, "location":location};
   var auditDetails = [], auditData = {};
   for (var i = data.length - 1; i >= 0; i--) {
@@ -157,7 +158,7 @@ _processAuditData(data,nProps){
         auditData.statusPriority = 1;
       }
       auditData.status = auditStatus[data[i].audit_status]; 
-      auditData.statusClass = statusClass[auditData.status];
+      auditData.statusClass = statusClass[data[i].audit_status];
       if(data[i].audit_status === AUDIT_CREATED) {
         auditData.startAudit = true;
       }
@@ -242,27 +243,31 @@ _processAuditData(data,nProps){
   }
   return auditDetails;
 }
+
+
+
 handlePageClick(data){
   var url, appendSortUrl = "",appendTextFilterUrl="", makeDate;
-  var sortHead = {"startTime":"&order_by=start_actual_time", "completedTime":"&order_by=completion_time", "display_id":"&order_by=display_id"};
-  var sortOrder = {"DESC":"&order=asc", "ASC":"&order=desc"};
   var currentDate = new Date();
-  this.setState({selected_page:data.selected});
+  var filterApplied = false;
   makeDate = addDateOffSet(currentDate,-30);
-  if((data.captureValue || data.captureValue === "") && data.type === "searchOrder") {
-      appendTextFilterUrl = FILTER_AUDIT_ID + data.captureValue;
+  
+  if(data.searchQuery && data.searchQuery[AUDIT_TASK_ID]) {
+    appendTextFilterUrl = FILTER_AUDIT_ID + data.searchQuery[AUDIT_TASK_ID];
+    data.selected = 1;
+    filterApplied = true;
   }
-
   if(data.url === undefined) {
+    data.selected = data.selected?data.selected:1;
     if(data.columnKey && data.sortDir) {
-      appendSortUrl = sortHead[data.columnKey] + sortOrder[data.sortDir]; 
+      appendSortUrl = sortAuditHead[data.columnKey] + sortOrder[data.sortDir]; 
     }
     url = SEARCH_AUDIT_URL+makeDate+GIVEN_PAGE+(data.selected)+GIVEN_PAGE_SIZE + appendSortUrl;
   }
   else {
     url = data.url;
   }
-
+  this.setState({selected_page:data.selected});
   url = url + appendTextFilterUrl;
 
   let paginationData={
@@ -273,6 +278,7 @@ handlePageClick(data){
     'contentType':APP_JSON
   } 
   this.props.setAuditSpinner(true);
+  this.props.filterApplied(filterApplied);
   this.props.getPageData(paginationData);
 }
 
@@ -301,7 +307,7 @@ render(){
     if(auditData[i].status === AUDIT_ISSUES_STATUS) {
       auditState["auditIssue"]++;
     }
-    if(auditData[i].auditType === SKU) {
+    if(auditData[i].auditType === SKU || auditData[i].auditType === AUDIT_BY_PDFA) {
       auditState["skuAudit"]++;
     }
     if(auditData[i].auditType === LOCATION) {
@@ -323,7 +329,9 @@ render(){
               sortHeaderOrder={this.props.auditHeaderSortOrder} currentHeaderOrder={this.props.auditSortHeaderState}
               refreshData={this.handlePageClick.bind(this)}
               setAuditFilter={this.props.auditFilterDetail} auditState={auditState}
-              setFilter={this.props.showTableFilter} showFilter={this.props.showFilter}/>
+              setFilter={this.props.showTableFilter} showFilter={this.props.showFilter}
+              isFilterApplied={this.props.isFilterApplied}
+              responseFlag={this.props.auditSpinner}/>
   
   
   
@@ -331,7 +339,7 @@ render(){
     <div>
       <div>
         <div className="gor-Auditlist-table">
-          <Spinner isLoading={this.props.auditSpinner} setSpinner={this.props.setAuditSpinner}/>
+          {!this.props.showFilter?<Spinner isLoading={this.props.auditSpinner} setSpinner={this.props.setAuditSpinner}/>:""}
           {renderTab}
         </div>
       </div>
@@ -358,6 +366,7 @@ function mapStateToProps(state, ownProps){
     auth_token: state.authLogin.auth_token,
     timeOffset: state.authLogin.timeOffset,
     showFilter: state.filterInfo.filterState || false,
+    isFilterApplied: state.filterInfo.isFilterApplied || false,
   };
 }
 
@@ -370,7 +379,8 @@ var mapDispatchToProps = function(dispatch){
     getAuditData: function(data){ dispatch(getAuditData(data)); },
     getPageData: function(data){ dispatch(getPageData(data)); },
     setAuditRefresh: function(){dispatch(setAuditRefresh());},
-    showTableFilter: function(data){dispatch(showTableFilter(data));}
+    showTableFilter: function(data){dispatch(showTableFilter(data));},
+    filterApplied: function(data){dispatch(filterApplied(data));}
   }
 };
 

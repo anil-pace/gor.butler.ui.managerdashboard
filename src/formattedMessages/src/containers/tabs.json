@@ -45,19 +45,14 @@
     "defaultMessage": "None"
   },
   {
+    "id": "overviewStatus.tab.stop",
+    "description": "overview Status emergency",
+    "defaultMessage": "Operation stopped"
+  },
+  {
     "id": "systemStatus.tab.online",
     "description": "system Status online",
     "defaultMessage": "Online"
-  },
-  {
-    "id": "systemStatus.tab.emergency",
-    "description": "system Status emergency",
-    "defaultMessage": "Emergency"
-  },
-  {
-    "id": "overviewStatus.tab.emergency",
-    "description": "overview Status emergency",
-    "defaultMessage": "Butlers stopped"
   },
   {
     "id": "ordersStatus.tab.heading",
@@ -65,9 +60,9 @@
     "defaultMessage": "{count}% fulfilled"
   },
   {
-    "id": "usersStatus.tab.heading",
+    "id": "usersStatus.tab.heading#",
     "description": "users Status",
-    "defaultMessage": "{count} users online"
+    "defaultMessage": "{count} {count, plural, =0 {user} one {user} other {users}} online"
   },
   {
     "id": "inventoryStatus.tab.heading",
@@ -82,6 +77,6 @@
   {
     "id": "auditStatus.tab.alert.heading",
     "description": "audit Status alert",
-    "defaultMessage": "{count} alerts"
+    "defaultMessage": "{count} {count, plural, one {alert} other {alerts}}"
   }
 ]

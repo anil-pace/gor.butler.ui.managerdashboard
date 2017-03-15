@@ -1,0 +1,85 @@
+.gor-menuWrap{
+	display: inline-block;
+	line-height: 22px;	
+	width: 50%;	
+}
+.gor-menu-heading {
+	font-family: $gor-font-family;
+	font-size: 18px;
+	color: #3c3f43;
+	font-weight: bold;
+	display: inline-block;
+	&.gor-white-text{
+		color:#FFFFFF;		
+	}
+			
+}
+.gor-menuIcon{
+	display: inline-block;
+	float: right;
+	margin-top: 20px;
+	margin-right: 20px;	
+}
+.gor-menu-subheading {
+	font-family: $gor-font-family;
+	font-size: calculateRem(12px);
+	color: #3c3f43;
+	&.gor-white-text{
+		color:#FFFFFF;		
+	}
+}
+.gor-hamburger-option{
+	padding: 19px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    font-size: 12px;
+    color: #666666;
+    max-height: 32px;
+	&.gor-operation-normal{
+		font-size: 18px;
+		background: #10c469;
+		color: #FFFFFF;
+		font-weight: bold;
+	}
+	&.gor-fail{
+    	font-size: 18px;
+		background:#EC1C24;
+		color:#ffffff;	
+		font-weight: bold;	
+	}
+}
+.gor-option-icon{
+	width:15%;
+	margin-right: 5px;
+	display: inline-block;;
+	.gor-tick-white{
+		vertical-align: middle;
+	}
+	.gor-error-white{
+		vertical-align: middle;		
+	}
+}
+.gor-hamburger-wrapper{
+    position: absolute;
+    background-color: #FFFFFF;
+    width: 330px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    font-size: 14px;
+    border: solid 1px #aaaaaa;
+    border-top: none;
+}
+.gor-btn-small{
+    font-family:'Source Sans Pro Bold', sans-serif;
+    min-width:60px;
+    background:#f36f36;
+    padding: 2%;
+    color:#ffffff;
+    border-radius:3px;
+    cursor:pointer;
+    font-size: 15px;
+}
+.gor-right{
+	float:right;
+}

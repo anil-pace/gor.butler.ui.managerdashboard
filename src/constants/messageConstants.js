@@ -123,6 +123,10 @@ export const AS00A = (<FormattedMessage id="notify.start.audit.success" descript
       defaultMessage="PPS assigned succeddfully. Audit task started"/>);
 export const AS003 = (<FormattedMessage id="notify.delete.audit.processed" description='Text for already processed audit' 
       defaultMessage="Audit already processed. Cannot delete"/>);
+export const AE007 = (<FormattedMessage id="notify.Location.audit.pending" description='Text for Location of audit pending for approval' 
+      defaultMessage="Location of audit pending for approval"/>);
+export const AE008 = (<FormattedMessage id="notify.Location.currently.processed" description='Text for Location of audit currently being processed' 
+      defaultMessage="Location of audit currently being processed"/>);
 
 
 //Codes for Ajax Parser
@@ -163,3 +167,9 @@ export const MG_PWD=(<FormattedMessage id="users.add.password.subheading.manager
       defaultMessage='A password of at least 8 alphanumeric characters will be required for logging into the Management Interface and Operator Interface'/>);
 export const OP_PWD=(<FormattedMessage id="users.add.password.subheading.operator" description='Subheading for create password operator' 
       defaultMessage='A password of 6 digits will be required for logging into the Operator Interface.'/>);
+
+//Messages for emergency
+export const E051=(<FormattedMessage id="emergency.resume.coreerror" description='Error while resuming operation' 
+      defaultMessage='Cannot connect to butler core'/>);
+export const ES=(<FormattedMessage id="emergency.resume.success" description='Operations resumed' 
+      defaultMessage='Operation resumed'/>);

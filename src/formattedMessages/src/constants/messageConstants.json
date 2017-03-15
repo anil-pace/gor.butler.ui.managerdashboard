@@ -220,6 +220,16 @@
     "defaultMessage": "Audit already processed. Cannot delete"
   },
   {
+    "id": "notify.Location.audit.pending",
+    "description": "Text for Location of audit pending for approval",
+    "defaultMessage": "Location of audit pending for approval"
+  },
+  {
+    "id": "notify.Location.currently.processed",
+    "description": "Text for Location of audit currently being processed",
+    "defaultMessage": "Location of audit currently being processed"
+  },
+  {
     "id": "notify.error.user.fail",
     "description": "Text for error in updating user",
     "defaultMessage": "Error in updating user"
@@ -298,5 +308,15 @@
     "id": "users.add.password.subheading.operator",
     "description": "Subheading for create password operator",
     "defaultMessage": "A password of 6 digits will be required for logging into the Operator Interface."
+  },
+  {
+    "id": "emergency.resume.coreerror",
+    "description": "Error while resuming operation",
+    "defaultMessage": "Cannot connect to butler core"
+  },
+  {
+    "id": "emergency.resume.success",
+    "description": "Operations resumed",
+    "defaultMessage": "Operation resumed"
   }
 ]
