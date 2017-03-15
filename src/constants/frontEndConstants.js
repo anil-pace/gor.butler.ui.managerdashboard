@@ -384,6 +384,7 @@ export const TILE_ALERT='header-yellow-alert-icon';
 export const TICK_WHITE='gor-tick-white';
 export const REMOVE_ICON='gor-remove-white';
 export const ERROR_WHITE='gor-error-white';
+export const DELAY_ICON="gor-delay-icon";
 
 //Sort header constants
 export const INITIAL_HEADER_SORT = "status";
@@ -427,6 +428,8 @@ export const IS_FILTER_APPLIED = "IS_FILTER_APPLIED";
 export const AUDIT_TASK_ID = "AUDIT TASK ID"
 export const ADD_TOKEN = "add";
 export const ADD_DEFAULT = "addDefault";
+export const SOFT_MANUAL = "soft_manual";
+export const HARD = "hard";
 //backend sort
 export const sortAuditHead = {"startTime":"&order_by=start_actual_time", 
 							"completedTime":"&order_by=completion_time", 

@@ -8,7 +8,9 @@ import {modal} from 'react-redux-modal';
 import {setInventorySpinner} from '../actions/inventoryActions';
 import {setAuditSpinner} from '../actions/auditActions';
 import {setButlerSpinner} from '../actions/spinnerAction';
-import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP,INVENTORY,AUDIT,FULFILLING_ORDERS,GOR_OFFLINE,GOR_ONLINE,GOR_NORMAL_TAB,GOR_FAIL} from '../constants/frontEndConstants';
+import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP,INVENTORY,AUDIT,
+FULFILLING_ORDERS,GOR_OFFLINE,GOR_ONLINE,GOR_NORMAL_TAB,GOR_FAIL,
+SOFT_MANUAL,HARD} from '../constants/frontEndConstants';
 import { FormattedMessage,FormattedNumber } from 'react-intl';
 import OperationStop from '../containers/emergencyProcess/OperationStop';
 import EmergencyRelease from '../containers/emergencyProcess/emergencyRelease'; 
@@ -72,13 +74,13 @@ class Tabs extends React.Component{
       });    
   }
   componentWillReceiveProps(nextProps){
-    if(nextProps.system_emergency && !this.props.system_emergency)
+    if(nextProps.system_data === SOFT_MANUAL && this.props.system_data === HARD)
+    {
+      this._emergencyRelease();
+    }
+    else if(nextProps.system_emergency && !this.props.system_emergency)
     {
       this._stopOperation(true);
-    }
-    if(nextProps.system_data === "none" && this.props.system_data === "hard")
-    {
-      this._emergencyModal();
     }
   }
   _parseStatus()

@@ -115,7 +115,7 @@ class PickStatusWidget extends React.Component{
             lowLeft=<FormattedMessage id="widget.pick.emergency" description='Message for system in emergency state' 
                 defaultMessage='--'/>;                
             statusClass=GOR_DELAY;  
-            statusLogo=TILE_ALERT;
+            statusLogo='gor-delay-icon';
             statusLeft=<FormattedMessage id="widget.pick.statusleft.delay" description='Text for delay in orders' 
                     defaultMessage='Delayed'/>
             lowRight=<FormattedMessage id="widget.pick.lowright.emergency" description='Estimated time' 
