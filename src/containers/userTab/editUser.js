@@ -50,15 +50,9 @@ class EditUser extends React.Component{
     this.setState({view:1});
   }
   _checkPwd(){
-    let pswd=this.pswd.value,confirmPswd=this.confirmPswd.value, givenRole,passwordInfo, roleSelected, roleSupervisor=this.props.roleInfo.BUTLER_SUPERVISOR;
-    if(this.props.roleId == BUTLER_SUPERVISOR)
-    {
-      givenRole=this.props.roleInfo.BUTLER_SUPERVISOR;
-    }
-    else
-    {
-      givenRole=this.props.roleInfo.BUTLER_UI;
-    }
+    let pswd=this.pswd.value,confirmPswd=this.confirmPswd.value, givenRole,passwordInfo, roleSelected, 
+    roleSupervisor=this._getId(BUTLER_SUPERVISOR);
+    givenRole=this._getId(this.props.roleId);
     roleSelected=this.props.roleSet?this.props.roleSet:givenRole;
     if(roleSelected!=givenRole)
     {
@@ -67,6 +61,16 @@ class EditUser extends React.Component{
     passwordInfo=passwordStatus(pswd,confirmPswd,roleSelected,roleSupervisor);   
     this.props.validatePassword(passwordInfo);
     return passwordInfo.type;
+  }
+  _getId(role){
+    let roles = this.props.roleInfo, len;
+    len = roles.length;
+    for(let i=0; i<len; i++){
+      if(roles[i].name == role){
+        return roles[i].id;
+      }
+    }
+    return null;
   }
   _handleEditUser(e){
         e.preventDefault();
@@ -82,14 +86,8 @@ class EditUser extends React.Component{
           if(!this._checkName())
             return;
         }
-        if(this.props.roleId == BUTLER_SUPERVISOR)
-        {
-          givenRole=this.props.roleInfo.BUTLER_SUPERVISOR;
-        }
-        else
-        {
-          givenRole=this.props.roleInfo.BUTLER_UI;
-        }
+        givenRole=this._getId(this.props.roleId);
+
         role=this.props.roleSet?this.props.roleSet:givenRole;
 
         if(!pswd&&!confirmPswd&&role==givenRole)
@@ -165,7 +163,7 @@ class EditUser extends React.Component{
 
               </div>
            
-          {this.props.roleInfo?(<RoleGroup operator={this.props.roleInfo.BUTLER_UI} manager={this.props.roleInfo.BUTLER_SUPERVISOR} roleId={this.props.roleId} />):''}
+            {this.props.roleInfo.length? (<RoleGroup roleInfo={this.props.roleInfo} roleName={this.props.roleId} />):''}
 
             <div className='gor-usr-details'>
             
@@ -211,7 +209,7 @@ function mapStateToProps(state, ownProps){
   return {
       nameCheck: state.appInfo.nameInfo || {},
       passwordCheck: state.appInfo.passwordInfo || {},
-      roleInfo: state.appInfo.roleInfo || null,
+      roleInfo: state.appInfo.roleInfo || [],
       roleSet:  state.appInfo.roleSet  || null,
       auth_token: state.authLogin.auth_token  
   };

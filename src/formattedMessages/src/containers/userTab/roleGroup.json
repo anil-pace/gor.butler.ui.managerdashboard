@@ -8,25 +8,5 @@
     "id": "users.add.roledetails.subheading",
     "description": "Subheading for role",
     "defaultMessage": "User will be given a specific level of control over the Butler system depending on the designated role"
-  },
-  {
-    "id": "users.add.roledetails.operator",
-    "description": "Text for operator",
-    "defaultMessage": "Operator"
-  },
-  {
-    "id": "users.add.roledetails.operatortext",
-    "description": "Subtext for operator",
-    "defaultMessage": "Grant access to the Operator Interface at each Pick Put Station in the Butler system"
-  },
-  {
-    "id": "users.add.roledetails.manager",
-    "description": "Text for manager",
-    "defaultMessage": "Manager"
-  },
-  {
-    "id": "users.add.roledetails.managertext",
-    "description": "Subtext for manager",
-    "defaultMessage": "Grant access to the Management Interface and Operator Interface to all systems"
   }
 ]

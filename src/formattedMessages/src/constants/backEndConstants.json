@@ -192,7 +192,7 @@
   {
     "id": "stringConfig.md005",
     "description": "Text for safety checklist item 5",
-    "defaultMessage": "No zonal emergencies are pressed."
+    "defaultMessage": "All Hard Emergency buttons are released."
   },
   {
     "id": "stringConfig.md006",
@@ -203,5 +203,15 @@
     "id": "stringConfig.audit_reaudited",
     "description": "Text for audit reaudited status",
     "defaultMessage": "Re-audited"
+  },
+  {
+    "id": "roleDesc.butler_supervisor",
+    "description": "Text for Manager description",
+    "defaultMessage": "Grant access to the Management Interface and Operator Interface to all systems"
+  },
+  {
+    "id": "roleDesc.butler_ui",
+    "description": "Text for Operator description",
+    "defaultMessage": "Grant access to the Operator Interface at each Pick Put Station in the Butler system"
   }
 ]

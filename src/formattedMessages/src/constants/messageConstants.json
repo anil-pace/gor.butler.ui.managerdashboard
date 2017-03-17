@@ -315,6 +315,11 @@
     "defaultMessage": "Cannot connect to butler core"
   },
   {
+    "id": "emergency.resume.statuserror",
+    "description": "Error while resuming operation",
+    "defaultMessage": "Emergency status not soft_manual"
+  },
+  {
     "id": "emergency.resume.success",
     "description": "Operations resumed",
     "defaultMessage": "Operation resumed"
