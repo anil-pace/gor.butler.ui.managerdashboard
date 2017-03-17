@@ -150,6 +150,16 @@
     "defaultMessage": "Admin"
   },
   {
+    "id": "stringConfig.qc",
+    "description": "Text to show Qc operator",
+    "defaultMessage": "QC Operator"
+  },
+  {
+    "id": "stringConfig.packing_operator",
+    "description": "Text to show packing operator",
+    "defaultMessage": "Packing Operator"
+  },
+  {
     "id": "stringConfig.temporary_unfulfillable",
     "description": "Text for temporary unfulfillable status",
     "defaultMessage": "On hold"

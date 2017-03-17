@@ -223,6 +223,16 @@ export const  stringConfig= defineMessages({
         description: 'Text to show admin',
         defaultMessage: "Admin" 
     },
+    qc_operator:{
+        id: 'stringConfig.qc',
+        description: 'Text to show Qc operator',
+        defaultMessage: "QC Operator" 
+    },
+    packing_operator:{
+        id: 'stringConfig.packing_operator',
+        description: 'Text to show packing operator',
+        defaultMessage: "Packing Operator"         
+    },
     temporary_unfulfillable:{
         "id": "stringConfig.temporary_unfulfillable",
         "description": "Text for temporary unfulfillable status",

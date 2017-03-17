@@ -32,12 +32,13 @@ class RoleGroup extends React.Component{
 
         for(let i=0; i<len; i++){
            currentRole = this.props.roleInfo[i];
-           item=(<div key={i}>
+           if(stringConfig.hasOwnProperty(currentRole.name)){
+            item=(<div key={i}>
                 <div className='gor-role'>
                     <input type="radio"  name='role' onChange={this._checkRole.bind(this,currentRole.id)} 
                         defaultChecked={this._getChecked(this.props.roleName, currentRole)}/>
                     <span className='gor-usr-hdsm'>
-                        {stringConfig.hasOwnProperty(currentRole.name)?this.context.intl.formatMessage(stringConfig[currentRole.name]):currentRole.name}
+                        {this.context.intl.formatMessage(stringConfig[currentRole.name])}
                      </span>
                 </div>
                 <div className='gor-choose'>
@@ -47,7 +48,8 @@ class RoleGroup extends React.Component{
                 </div>
 
             </div>);
-           roles.push(item);
+            roles.push(item);            
+           }
         }
         return roles;
     }
