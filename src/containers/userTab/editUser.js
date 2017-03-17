@@ -16,7 +16,7 @@ class EditUser extends React.Component{
   constructor(props) 
   {
       super(props);  
-      this.state={view:0}
+      this.state={pwdView:0}
   }
   componentDidMount(){
         let userData={
@@ -47,16 +47,16 @@ class EditUser extends React.Component{
       return nameInfo.type;
   }
   _handleAnchorClick(){
-    this.setState({view:1});
+    this.setState({pwdView:1});
   }
   _checkPwd(){
     let pswd=this.pswd.value,confirmPswd=this.confirmPswd.value, givenRole,passwordInfo, roleSelected, 
     roleSupervisor=this._getId(BUTLER_SUPERVISOR);
-    givenRole=this._getId(this.props.roleId);
+    givenRole=this._getId(this.props.roleName);
     roleSelected=this.props.roleSet?this.props.roleSet:givenRole;
     if(roleSelected!=givenRole)
     {
-      this.setState({view:1});
+      this.setState({pwdView:1});
     }
     passwordInfo=passwordStatus(pswd,confirmPswd,roleSelected,roleSupervisor);   
     this.props.validatePassword(passwordInfo);
@@ -86,7 +86,7 @@ class EditUser extends React.Component{
           if(!this._checkName())
             return;
         }
-        givenRole=this._getId(this.props.roleId);
+        givenRole=this._getId(this.props.roleName);
 
         role=this.props.roleSet?this.props.roleSet:givenRole;
 
@@ -163,11 +163,11 @@ class EditUser extends React.Component{
 
               </div>
            
-            {this.props.roleInfo.length? (<RoleGroup roleInfo={this.props.roleInfo} roleName={this.props.roleId} />):''}
+            {this.props.roleInfo.length? (<RoleGroup roleInfo={this.props.roleInfo} roleName={this.props.roleName} />):''}
 
             <div className='gor-usr-details'>
             
-            <div style={this.state.view?{display:'block'}:{display:'none'}}>
+            <div style={this.state.pwdView?{display:'block'}:{display:'none'}}>
               <div className='gor-usr-hdlg'><FormattedMessage id="users.edit.changepassword.heading" description='Heading for Change password' 
                defaultMessage='Change password'/></div>
               <div className='gor-sub-head'><FormattedMessage id="users.edit.changepassword.subheading" description='Subheading for create password' 
@@ -184,7 +184,7 @@ class EditUser extends React.Component{
               {this.props.passwordCheck.type?tick:((this.props.passwordCheck.type===ERROR)?<FieldError txt={this.props.passwordCheck.msg} />:'')}
             </div>
 
-            <div style={this.state.view?{display:'none'}:{display:'block'}}>
+            <div style={this.state.pwdView?{display:'none'}:{display:'block'}}>
               <div className='gor-usr-hdlg'><FormattedMessage id="users.edit.password." description='Heading for Password' 
               defaultMessage='New Password'/></div>
 

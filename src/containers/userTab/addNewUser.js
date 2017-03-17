@@ -128,7 +128,6 @@ class AddUser extends React.Component{
   render()
   {
       let tick=(<div className='gor-tick'/>);
-      let managerId = this._getId(BUTLER_SUPERVISOR);
       return (
         <div>
           <div className="gor-modal-content">
@@ -177,7 +176,7 @@ class AddUser extends React.Component{
             <div className='gor-usr-hdlg'><FormattedMessage id="users.add.password.heading" description='Heading for create password' 
             defaultMessage='Create password'/></div>
             <div className='gor-sub-head'>
-            {this.props.roleInfo.length?(this.props.roleSet === managerId ? MG_PWD:OP_PWD):''}
+            {this.props.roleInfo.length? (this.props.roleSet === this._getId(BUTLER_SUPERVISOR) ? MG_PWD:OP_PWD):''}
             </div>
 
               <div className='gor-usr-hdsm'><FormattedMessage id="users.add.password.field1" description='Text for password' 

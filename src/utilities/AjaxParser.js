@@ -47,8 +47,10 @@ export function AjaxParse(store,res,cause,status)
 			store.dispatch(setAuditSpinner(false));
 			break;
 		case GET_ROLES:
-			let i,rolesArr;
-			rolesArr=res.roles;
+			let i,rolesArr = [];
+			if(res.roles){
+				rolesArr=res.roles;				
+			}
 			store.dispatch(assignRole(rolesArr));
 			break;
 		case CHECK_ID:
