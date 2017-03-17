@@ -47,20 +47,11 @@ export function AjaxParse(store,res,cause,status)
 			store.dispatch(setAuditSpinner(false));
 			break;
 		case GET_ROLES:
-			let i,rolesArr,k={};
-			rolesArr=res.roles;
-			for(i=0;i<rolesArr.length;i++)
-			{
-				if(rolesArr[i].name===BUTLER_UI)
-				{
-					k.BUTLER_UI=rolesArr[i].id;
-				}
-				else
-				{
-					k.BUTLER_SUPERVISOR=rolesArr[i].id;					
-				}
+			let i,rolesArr = [];
+			if(res.roles){
+				rolesArr=res.roles;				
 			}
-			store.dispatch(assignRole(k));
+			store.dispatch(assignRole(rolesArr));
 			break;
 		case CHECK_ID:
 			let idExist;
@@ -248,14 +239,14 @@ export function AjaxParse(store,res,cause,status)
 			if(rejectResponse.data){
 				rejectList = rejectResponse.data;
 				if(!rejectList.length){
-					store.dispatch(modalStatus(true));                           
 					store.dispatch(notifySuccess(ES));
 				}
 			}
 			else{
-				store.dispatch(modalStatus(true));                           
-				store.dispatch(notifyFail(E051));
+				stringInfo=codeToString(res.alert_data[0]);
+				store.dispatch(notifyFail(stringInfo.msg));
 			}
+			store.dispatch(modalStatus(true));                           
 			store.dispatch(setSafetySpinner(false));
 			store.dispatch(getSafetyErrorList(rejectList));			
 			break;

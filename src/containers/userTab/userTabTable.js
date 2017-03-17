@@ -132,14 +132,14 @@ class UserDataTable extends React.Component {
     });
   }
   handleEdit(columnKey,rowIndex) {
-    let uid, uname, fname, lname, roleId,sortedIndex;
+    let uid, uname, fname, lname, roleName,sortedIndex;
     if(this.state.sortedDataList.newData === undefined) {
       sortedIndex = this.state.sortedDataList._indexMap[rowIndex];
       uid = this.state.sortedDataList._data.newData[sortedIndex].uid;
       uname = this.state.sortedDataList._data.newData[sortedIndex].userName;
       fname = this.state.sortedDataList._data.newData[sortedIndex].first;
       lname = this.state.sortedDataList._data.newData[sortedIndex].last;
-      roleId = this.state.sortedDataList._data.newData[sortedIndex].roleId;
+      roleName = this.state.sortedDataList._data.newData[sortedIndex].roleId;
     }
 
     else {
@@ -147,7 +147,7 @@ class UserDataTable extends React.Component {
       uname=this.state.sortedDataList.newData[rowIndex].userName;
       fname=this.state.sortedDataList.newData[rowIndex].first;
       lname=this.state.sortedDataList.newData[rowIndex].last;
-      roleId=this.state.sortedDataList.newData[rowIndex].roleId;
+      roleName=this.state.sortedDataList.newData[rowIndex].roleId;
     }
 
     modal.add(EditUser, {
@@ -156,7 +156,7 @@ class UserDataTable extends React.Component {
       closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: true,
       id:uid,
-      roleId:roleId,
+      roleName:roleName,
       userName:uname,
       first:fname,
       last:lname

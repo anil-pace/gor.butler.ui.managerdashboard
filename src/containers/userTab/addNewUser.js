@@ -63,7 +63,8 @@ class AddUser extends React.Component{
       return nameInfo.type;
    }
   _checkPwd(){
-    let pswd=this.pswd.value,confirmPswd=this.confirmPswd.value, passwordInfo, roleSelected=this.props.roleSet, roleSupervisor=this.props.roleInfo.BUTLER_SUPERVISOR;
+    let pswd=this.pswd.value,confirmPswd=this.confirmPswd.value, passwordInfo, 
+    roleSelected=this.props.roleSet, roleSupervisor=this._getId(BUTLER_SUPERVISOR);
     passwordInfo=passwordStatus(pswd,confirmPswd,roleSelected,roleSupervisor);
     this.props.validatePassword(passwordInfo);
     return passwordInfo.type;
@@ -91,7 +92,7 @@ class AddUser extends React.Component{
         if(!this._checkPwd())
           return;
 
-        role=this.props.roleSet?this.props.roleSet:this.props.roleInfo.BUTLER_UI;
+        role=this.props.roleSet?this.props.roleSet:this._getId(BUTLER_UI);
 
         let formdata={         
                     "first_name": firstname,
@@ -114,10 +115,19 @@ class AddUser extends React.Component{
         this.props.userRequest(userData);
         this.removeThisModal();
   }
+  _getId(role){
+    let roles = this.props.roleInfo, len;
+    len = roles.length;
+    for(let i=0; i<len; i++){
+      if(roles[i].name == role){
+        return roles[i].id;
+      }
+    }
+    return null;
+  }
   render()
   {
       let tick=(<div className='gor-tick'/>);
-
       return (
         <div>
           <div className="gor-modal-content">
@@ -160,13 +170,13 @@ class AddUser extends React.Component{
 
             </div>
 
-          {this.props.roleInfo?(<RoleGroup operator={this.props.roleInfo.BUTLER_UI} manager={this.props.roleInfo.BUTLER_SUPERVISOR} />):''}
+            {this.props.roleInfo.length? (<RoleGroup roleInfo={this.props.roleInfo} />):''}
             
             <div className='gor-usr-details'>
             <div className='gor-usr-hdlg'><FormattedMessage id="users.add.password.heading" description='Heading for create password' 
             defaultMessage='Create password'/></div>
             <div className='gor-sub-head'>
-            {this.props.roleInfo?(this.props.roleSet===this.props.roleInfo.BUTLER_SUPERVISOR?MG_PWD:OP_PWD):''}
+            {this.props.roleInfo.length? (this.props.roleSet === this._getId(BUTLER_SUPERVISOR) ? MG_PWD:OP_PWD):''}
             </div>
 
               <div className='gor-usr-hdsm'><FormattedMessage id="users.add.password.field1" description='Text for password' 
@@ -199,7 +209,7 @@ function mapStateToProps(state, ownProps){
       idCheck: state.appInfo.idInfo || {},
       nameCheck: state.appInfo.nameInfo || {},
       passwordCheck: state.appInfo.passwordInfo || {},
-      roleInfo: state.appInfo.roleInfo || null,
+      roleInfo: state.appInfo.roleInfo || [],
       roleSet:  state.appInfo.roleSet  || null,
       auth_token: state.authLogin.auth_token  
   };
