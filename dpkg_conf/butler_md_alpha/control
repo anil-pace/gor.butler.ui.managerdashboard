@@ -1,5 +1,5 @@
-Package: butler-md
-Version: 2.0-0
+Package: butler-md-alpha
+Version: 1.0-4
 Section: base
 Priority: optional
 Architecture: all
