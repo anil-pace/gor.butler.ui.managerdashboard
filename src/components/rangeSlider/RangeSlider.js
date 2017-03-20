@@ -1,7 +1,7 @@
 /* eslint no-debugger: "warn" */
 //import cx from 'classnames'
 import React, { PropTypes, Component } from 'react'
-import { capitalize, clamp } from '../utilities/utils'
+import { capitalize, clamp } from '../../utilities/utils'
 
 /**
  * Predefined constants
@@ -24,7 +24,7 @@ const constants = {
   }
 }
 
-class RangeSlider extends Component {
+class rangeSlider extends Component {
   static propTypes = {
     min: PropTypes.number,
     max: PropTypes.number,
@@ -264,7 +264,7 @@ class RangeSlider extends Component {
         items.push((
           <li
             key={key}
-            className={('rangeslider__label')}
+            className={'rangeslider__label'}
             data-value={key}
             onMouseDown={this.handleDrag}
             onTouchStart={this.handleDrag}
@@ -278,20 +278,19 @@ class RangeSlider extends Component {
       labels = (
         <ul
           ref={(sl) => { this.labels = sl }}
-          className={('rangeslider__label-list')}>
+          className={'rangeslider__label-list'}>
           {items}
         </ul>
       )
     }
 
-    return (
+return (
       <div
         ref={(s) => { this.slider = s }}
         className={('rangeslider', `rangeslider-${orientation}`, {'rangeslider-reverse': reverse}, className)}
-        onMouseDown={this.handleDrag}
-        onMouseUp={this.handleEnd}
-        onTouchStart={this.handleDrag}
-        onTouchEnd={this.handleEnd}>
+        >
+        
+      
         <div
           className='rangeslider__fill'
           style={fillStyle}
@@ -303,19 +302,13 @@ class RangeSlider extends Component {
           onTouchMove={this.handleDrag}
           onTouchEnd={this.handleEnd}
           style={handleStyle}
-        >
-          {
-            tooltip && (
-              <div ref={(st) => { this.tooltip = st }} className='rangeslider__tooltip' >
-                <span>{this.handleFormat(value)}</span>
-              </div>
-            )
-          }
-        </div>
+        />
+        
+        
         {labels}
       </div>
     )
   }
 }
 
-export default RangeSlider
+export default rangeSlider

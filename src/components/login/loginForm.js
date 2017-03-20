@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import {AUTH_LOGIN,ERROR,TYPING,APP_JSON,POST} from '../../constants/frontEndConstants';
 import {NO_NET} from '../../constants/messageConstants';
 import {LOGIN_URL} from '../../constants/configConstants'; 
+import RangeSlider from '../../components/rangeSlider/rangeSlider.js'
 import { FormattedMessage } from 'react-intl';
 import { emptyField } from '../../utilities/fieldCheck';
 
@@ -64,6 +65,11 @@ class LoginForm extends React.Component{
         this.props.setUsername(formdata.username);
         this.props.authLoginData(loginData);
     }
+    _onRangeChange(minValue,maxValue,e){
+        console.log(minValue);
+        console.log(maxValue);
+        console.log(e);
+    }
 	render(){
         // remove the internationalization from 'Butler' as it is our brand and also 'TM' as it is universal term
         return (
@@ -91,6 +97,21 @@ class LoginForm extends React.Component{
                         placeholder={this.props.intlMessages["login.form.username"]}
                          ref={node => { this.userName = node }}/>                    
                 </div>
+                <div className = "rangeslider">
+                 <RangeSlider 
+                     min={0}
+                      max={100}
+                      step={10}
+                      maxValue={80}
+                      value = {50}
+                      orientation={"horizontal"}
+                      reverse={false}
+                      tooltip={false}
+                      labels={{ 0: '0', 50: '50', 100: '100'}}
+                      onChange={this._onRangeChange}
+                      />
+                 </div>
+                
                 </section>
                 {this.props.userNameCheck?(this.props.userNameCheck.type === ERROR?(
                     <div className='gor-login-usr-error' >
