@@ -46,4 +46,14 @@ class HamBurger extends React.Component{
 	}
 };
 
+HamBurger.propTypes={
+		heading:React.PropTypes.object,
+		subHeading:React.PropTypes.object,
+		optionList:React.PropTypes.array,
+  		menuStyle:React.PropTypes.string, 
+  		headingStyle:React.PropTypes.string, 
+  		openIcon:React.PropTypes.string, 
+  		closeIcon:React.PropTypes.string
+}
+
 export default HamBurger ;

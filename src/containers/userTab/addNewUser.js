@@ -4,12 +4,12 @@ import { FormattedMessage,FormattedPlural } from 'react-intl';
 import {validateID, validateName, validatePassword, resetForm} from '../../actions/validationActions';
 import {userRequest} from '../../actions/userActions';
 import {ADD_USER,CHECK_ID,ERROR,SUCCESS,INFO,GET_ROLES,GET,APP_JSON,POST} from '../../constants/frontEndConstants';
-import {BUTLER_SUPERVISOR,BUTLER_UI} from  '../../constants/backEndConstants';
+import {BUTLER_SUPERVISOR,BUTLER_UI,pwdDesc} from  '../../constants/backEndConstants';
 import {ROLE_URL,CHECK_USER,HEADER_URL} from '../../constants/configConstants';
 import {INVALID_ID,INVALID_FORMAT,TYPE_SUCCESS,MG_PWD,OP_PWD} from '../../constants/messageConstants';
 import { connect } from 'react-redux';
 import FieldError from '../../components/fielderror/fielderror';
-import RoleGroup from './roleGroup';
+import UserRoles from './userRoles';
 import { nameStatus, passwordStatus, idStatus } from '../../utilities/fieldCheck';
 
 class AddUser extends React.Component{
@@ -64,8 +64,8 @@ class AddUser extends React.Component{
    }
   _checkPwd(){
     let pswd=this.pswd.value,confirmPswd=this.confirmPswd.value, passwordInfo, 
-    roleSelected=this.props.roleSet, roleSupervisor=this._getId(BUTLER_SUPERVISOR);
-    passwordInfo=passwordStatus(pswd,confirmPswd,roleSelected,roleSupervisor);
+    roleSelected=this.props.roleSet;
+    passwordInfo=passwordStatus(pswd,confirmPswd,roleSelected);
     this.props.validatePassword(passwordInfo);
     return passwordInfo.type;
   }
@@ -92,7 +92,7 @@ class AddUser extends React.Component{
         if(!this._checkPwd())
           return;
 
-        role=this.props.roleSet?this.props.roleSet:this._getId(BUTLER_UI);
+        role=this.props.roleSet?this._getId(this.props.roleSet):this._getId(BUTLER_UI);
 
         let formdata={         
                     "first_name": firstname,
@@ -170,13 +170,15 @@ class AddUser extends React.Component{
 
             </div>
 
-            {this.props.roleInfo.length? (<RoleGroup roleInfo={this.props.roleInfo} />):''}
+            {this.props.roleInfo.length? (<UserRoles roleInfo={this.props.roleInfo} />):''}
             
             <div className='gor-usr-details'>
             <div className='gor-usr-hdlg'><FormattedMessage id="users.add.password.heading" description='Heading for create password' 
             defaultMessage='Create password'/></div>
             <div className='gor-sub-head'>
-            {this.props.roleInfo.length? (this.props.roleSet === this._getId(BUTLER_SUPERVISOR) ? MG_PWD:OP_PWD):''}
+            {pwdDesc.hasOwnProperty(this.props.roleSet)?
+              this.context.intl.formatMessage(pwdDesc[this.props.roleSet]):
+              this.context.intl.formatMessage(pwdDesc[BUTLER_UI])}
             </div>
 
               <div className='gor-usr-hdsm'><FormattedMessage id="users.add.password.field1" description='Text for password' 
@@ -203,7 +205,9 @@ class AddUser extends React.Component{
       );
     }
   }
-
+AddUser.contextTypes = {
+    intl: React.PropTypes.object.isRequired
+}
 function mapStateToProps(state, ownProps){
   return {
       idCheck: state.appInfo.idInfo || {},

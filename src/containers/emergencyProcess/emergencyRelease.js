@@ -73,4 +73,9 @@ function mapDispatchToProps(dispatch){
     }
 };
 
+EmergencyRelease.propTypes={
+      auth_token:React.PropTypes.string, 
+      userRequest:React.PropTypes.func
+}
+
 export default connect(mapStateToProps,mapDispatchToProps)(EmergencyRelease);

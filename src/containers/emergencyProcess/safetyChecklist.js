@@ -201,7 +201,6 @@ SafetyChecklist.contextTypes = {
 
 function mapStateToProps(state, ownProps){
   return {
-      auditType:  state.auditInfo.auditType  || {},
       checkList: state.appInfo.safetyList || [],
       safetyErrorList: state.appInfo.safetyErrorList || [],
       auth_token:state.authLogin.auth_token,
@@ -209,7 +208,6 @@ function mapStateToProps(state, ownProps){
       safetySpinner:state.spinner.safetySpinner || false
   };
 }
-
 var mapDispatchToProps = function(dispatch){
   return {
     userRequest: function(data){ dispatch(userRequest(data)); },
@@ -217,5 +215,15 @@ var mapDispatchToProps = function(dispatch){
     setSafetySpinner: function(data){ dispatch(setSafetySpinner(data)); }
   }
 };
-
+SafetyChecklist.propTypes={
+      auth_token:React.PropTypes.string, 
+      username:React.PropTypes.string,
+      modalStatus:React.PropTypes.bool,
+      checkList:React.PropTypes.array,
+      safetyErrorList:React.PropTypes.array,
+      safetySpinner:React.PropTypes.bool,
+      userRequest:React.PropTypes.func,
+      setSafetySpinner:React.PropTypes.func,
+      resetForm:React.PropTypes.func
+}
 export default connect(mapStateToProps,mapDispatchToProps)(SafetyChecklist);

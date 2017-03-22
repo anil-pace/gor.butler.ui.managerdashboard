@@ -51,6 +51,7 @@ export  function appInfo(state={},action){
             "loginInfo":null,
             "roleSet":null,
             "hideModal":null,
+            "roleInfo":[],
             "safetyErrorList":[]
           })
           break;

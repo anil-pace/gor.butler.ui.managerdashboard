@@ -3468,6 +3468,11 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
+.gor-select-field {
+  height: 35px;
+  width: 40%;
+}
+
 .gor-resolve-button {
   font-family: 'Source Sans Pro Bold', sans-serif;
   width: 113px;

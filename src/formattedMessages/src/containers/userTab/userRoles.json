@@ -1,0 +1,12 @@
+[
+  {
+    "id": "users.add.roledetails.heading",
+    "description": "Heading for role",
+    "defaultMessage": "Choose a role"
+  },
+  {
+    "id": "users.add.roledetails.subheading",
+    "description": "Subheading for role",
+    "defaultMessage": "User will be given a specific level of control over the Butler system depending on the designated role"
+  }
+]

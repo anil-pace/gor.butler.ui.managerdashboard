@@ -77,13 +77,13 @@ class ResumeOperation extends React.Component{
                 checklist to make sure that the Butler system is ready"
                             description="Text for resume operation body"/></span>
               <div className='gor-margin-top'>
-                 <div className={'gor-password-field-lg'+(this.props.passWordCheck.type === ERROR?' gor-input-error':' gor-input-ok')} ref={node => { this.passField = node }}>
-                        <div className={this.props.passWordCheck.type === ERROR?'gor-login-password-error':'gor-login-password'}></div>
+                 <div className={'gor-password-field-lg'+(this.props.passwordCheck.type === ERROR?' gor-input-error':' gor-input-ok')} ref={node => { this.passField = node }}>
+                        <div className={this.props.passwordCheck.type === ERROR?'gor-login-password-error':'gor-login-password'}></div>
                         <input className='field' type="password" id="password" 
                          ref={node => { this.password = node }} onChange={this._typing.bind(this)} 
                          placeholder="Enter your password" />
                 </div>
-                {this.props.passWordCheck && this.props.passWordCheck.type === ERROR?
+                {this.props.passwordCheck && this.props.passwordCheck.type === ERROR?
                   (<div className='gor-login-usr-error gor-sm-string' >
                       <FormattedMessage id='operation.resume.error' 
                     defaultMessage="The entered input does not match. Please try again."
@@ -95,7 +95,7 @@ class ResumeOperation extends React.Component{
                 <button className='gor-cancel-btn' onClick={this._removeThisModal.bind(this)}>
                 <FormattedMessage id='operation.cancel' 
                         defaultMessage="Cancel" description="Text for cancel"/></button>
-                <button className='gor-add-btn' disabled={this.props.passWordCheck.type === SUCCESS?false:true}
+                <button className='gor-add-btn' disabled={this.props.passwordCheck.type === SUCCESS?false:true}
                 onClick={this._handleResume.bind(this)} ><FormattedMessage id='operation.resume.view' 
                         defaultMessage="View safety checklist" description="Text for viewing safety checklist"/></button>
               </div>
@@ -108,7 +108,7 @@ class ResumeOperation extends React.Component{
   return  {
       auth_token:state.authLogin.auth_token,
       username:state.authLogin.username,      
-      passWordCheck: state.appInfo.passwordInfo||{},
+      passwordCheck: state.appInfo.passwordInfo||{},
       modalStatus: state.appInfo.hideModal || false
     }
 } 
@@ -119,5 +119,14 @@ function mapDispatchToProps(dispatch){
       resetForm:   function(){ dispatch(resetForm()); }                  
     }
 };
+ResumeOperation.propTypes={
+      auth_token:React.PropTypes.string, 
+      username:React.PropTypes.string,
+      passwordCheck:React.PropTypes.object,
+      modalStatus:React.PropTypes.bool,
+      userRequest:React.PropTypes.func,
+      validatePass:React.PropTypes.func,
+      resetForm:React.PropTypes.func
+}
 
 export default connect(mapStateToProps,mapDispatchToProps)(ResumeOperation);
