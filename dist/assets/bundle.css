@@ -165,7 +165,7 @@ body {
 .overview-tile-ontime-icon,
 .statusOl, .statusAl, .iStock, .iAudit, .iPick, .gor-login-user, .gor-login-password, .gor-login-error, .gor-tick, .gor-question, .gor-tick-white, .gor-remove-white, .gor-error-white, .gor-login-user-error, .gor-login-password-error, .gor-question-2, .gor-operation-tick, .gor-alert-lg,
 .gor-dropdown-open, .gor-dropdown-close, .gor-caution, .gor-delay-icon,
-.gor-emergency-dropdown-close, .gor-emergency-dropdown-open {
+.gor-emergency-dropdown-close, .gor-emergency-dropdown-open, .gor-info-icon {
   background-image: url(images/icons.svg);
 }
 
@@ -568,6 +568,14 @@ body {
   background-position: -37px -110px;
   width: 8px;
   height: 6px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.gor-info-icon {
+  background-position: -460px -77px;
+  width: 16px;
+  height: 16px;
   display: inline-block;
   vertical-align: middle;
 }
@@ -1312,6 +1320,115 @@ body {
 .Performance-Widget-Drop {
   width: 75%;
   max-width: 282px;
+}
+
+.gor-usr-dropdown {
+  width: 50%;
+  min-height: 25px;
+  border-radius: 2px;
+  display: inline-block;
+  margin-right: 20px;
+  border: 1px solid #aaaaaa;
+}
+
+.gor-usr-dropdown .Dropdown-root {
+  position: relative;
+}
+
+.gor-usr-dropdown .Dropdown-control {
+  position: relative;
+  background-color: white;
+  border-radius: 0.25rem;
+  box-sizing: border-box;
+  color: #aaaaaa;
+  font-family: "Source Sans Pro";
+  font-size: 0.9375rem;
+  font-weight: bold;
+  cursor: default;
+  outline: none;
+  padding: 0.5rem 3.25rem 0.5rem 0.625rem;
+  transition: all 200ms ease;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  height: 35px;
+}
+
+.gor-usr-dropdown .Dropdown-control:hover {
+  box-shadow: 0px 0px 3px 0px #888888;
+  border: 0.0625rem solid #ccc;
+}
+
+.gor-usr-dropdown .Dropdown-arrow {
+  border-color: #000000 transparent transparent;
+  border-style: solid;
+  border-width: 0.5rem 0.4375rem 0.1875rem;
+  content: ' ';
+  display: block;
+  height: 0;
+  margin-top: -ceil(2.5);
+  position: absolute;
+  right: 0.9375rem;
+  top: 0.9375rem;
+}
+
+.gor-usr-dropdown .is-open .Dropdown-arrow {
+  border-color: #000000 transparent transparent;
+  border-style: solid;
+  border-width: 0.5rem 0.4375rem 0.1875rem;
+}
+
+.gor-usr-dropdown .is-open .Dropdown-control {
+  box-shadow: 0px 0px 3px 0px #888888;
+  border: 0.0625rem solid #ccc;
+}
+
+.gor-usr-dropdown .Dropdown-menu {
+  border-radius: 0.25rem;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0px 0px 3px 0px #888888;
+  box-sizing: border-box;
+  margin-top: -0.0625rem;
+  position: absolute;
+  top: 105%;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+.gor-usr-dropdown .Dropdown-option {
+  box-sizing: border-box;
+  color: #666666;
+  cursor: pointer;
+  display: block;
+  height: 45px;
+  padding-left: 10px;
+  padding-top: 12px;
+}
+
+.gor-usr-dropdown .Dropdown-option:last-child {
+  border-bottom-right-radius: 0.125rem;
+  border-bottom-left-radius: 0.125rem;
+}
+
+.gor-usr-dropdown .Dropdown-option:hover {
+  background-color: #efefef;
+  color: #333;
+}
+
+.gor-usr-dropdown .Dropdown-option.is-selected {
+  box-shadow: 0.125rem 0.125rem 0.125rem #888888;
+  background-color: #f2f9fc;
+  color: #333;
+}
+
+.gor-usr-dropdown .Dropdown-noresults {
+  box-sizing: border-box;
+  color: #ccc;
+  cursor: default;
+  display: block;
+  padding: 0.5rem 0.625rem;
 }
 
 .axis path,
@@ -3473,6 +3590,10 @@ input[type="checkbox"] {
   width: 40%;
 }
 
+.gor-role-details {
+  margin-top: 40px;
+}
+
 .gor-resolve-button {
   font-family: 'Source Sans Pro Bold', sans-serif;
   width: 113px;
@@ -5316,4 +5437,31 @@ button:disabled {
 
 .gor-right {
   float: right;
+}
+
+.gor-information {
+  display: inline-block;
+  position: relative;
+}
+
+.gor-information .gor-information-text {
+  width: 250px;
+  padding: 20px;
+  position: absolute;
+  z-index: 1;
+  left: 20px;
+  top: -60px;
+  transition: opacity 1s;
+  box-shadow: 1px 1px 1px #aaaaaa;
+  background: #FFFFFF;
+}
+
+.gor-information .gor-information-text::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -10px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent #FFFFFF transparent transparent;
 }

@@ -33,7 +33,7 @@
 .overview-tile-ontime-icon,
 .statusOl,.statusAl,.iStock ,.iAudit,.iPick,.gor-login-user,.gor-login-password,.gor-login-error,.gor-tick,.gor-question,.gor-tick-white,.gor-remove-white,.gor-error-white,.gor-login-user-error,.gor-login-password-error,.gor-question-2,.gor-operation-tick,.gor-alert-lg,
 .gor-dropdown-open,.gor-dropdown-close,.gor-caution,.gor-delay-icon,
-.gor-emergency-dropdown-close,.gor-emergency-dropdown-open{
+.gor-emergency-dropdown-close,.gor-emergency-dropdown-open,.gor-info-icon{
     background-image: url(images/icons.svg);
 }
 .fk-logo,
@@ -404,4 +404,11 @@ background-position: -101px -52px;
     height: 6px;
     display: inline-block;
     vertical-align: middle;     
+}
+.gor-info-icon{
+    background-position: -460px -77px;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: middle;       
 }

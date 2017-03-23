@@ -1,0 +1,25 @@
+.gor-information{
+	display:inline-block;
+	position: relative;
+	.gor-information-text {
+    	width: 250px;
+    	padding: 20px;
+    	position: absolute;
+    	z-index: 1;
+    	left: 20px;
+    	top: -60px;
+    	transition: opacity 1s;
+		box-shadow: 1px 1px 1px #aaaaaa;
+    	background: #FFFFFF;
+	}
+	.gor-information-text::after {
+   		content: "";
+    	position: absolute;
+    	top: 50%;
+    	left: -10px;
+	    border-width: 5px;
+    	border-style: solid;
+    	border-color: transparent #FFFFFF transparent transparent;
+	}
+}
+

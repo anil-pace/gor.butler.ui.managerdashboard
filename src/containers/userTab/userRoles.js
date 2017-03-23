@@ -5,14 +5,16 @@ import {setRole} from '../../actions/userActions';
 import {BUTLER_SUPERVISOR,BUTLER_UI} from '../../constants/backEndConstants'
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
 import {stringConfig, roleDesc} from '../../constants/backEndConstants';
+import Dropdown from '../../components/dropdown/dropdown';
+import Information from '../../components/Information/Information';
 
 class UserRoles extends React.Component{
 	constructor(props) 
 	{
     	super(props);
     }
-    _checkRole(event){
-            this.props.setRole(event.target.value);
+    _checkRole(value){
+            this.props.setRole(value);
     }
     _getChecked(roleName, currentRole){
         if(!roleName){
@@ -46,8 +48,56 @@ class UserRoles extends React.Component{
         }
         return roles;
     }
+    _isMapped(item){
+           if(stringConfig.hasOwnProperty(item)){
+            return true;
+           }
+           return false;
+    }
+    _getList(){
+        let options=[], selected, len, objDropdown, currentRole;
+        len = this.props.roleInfo.length;
+        for(let i=0; i<len; i++){
+           currentRole = this.props.roleInfo[i];
+           if(!this._isMapped(currentRole.name)){
+                continue;
+           }
+           objDropdown ={
+            value: currentRole.name, 
+            label: this.context.intl.formatMessage(stringConfig[currentRole.name])
+           }
+           options.push(objDropdown);
+           if(this._getChecked(this.props.roleName,currentRole)){
+            selected = objDropdown;
+           }
+        }
+        return {options:options, selected:selected};
+    }
+    _getInfo(){
+        let infoGroup=[], info, selected, len, currentRole;
+        len = this.props.roleInfo.length;
+        for(let i=0; i<len; i++){
+           currentRole = this.props.roleInfo[i];
+           if(!this._isMapped(currentRole.name)){
+                continue;
+           }
+           if(roleDesc.hasOwnProperty(currentRole.name)){
+            info=(<div className='gor-role-details'>
+                    <span>
+                        {this.context.intl.formatMessage(stringConfig[currentRole.name])}
+                    </span>
+                    <span className='gor-sub-head'>
+                        {this.context.intl.formatMessage(roleDesc[this.props.roleSet])}
+                    </span>
+                </div>);            
+           }
+            infoGroup.push(info);
+        }
+        return infoGroup;
+    }
 	render(){
-        var roles = this._processRoles();
+        var dataDropdown = this._getList();
+        var infoData = this._getInfo();
 		return (
             <div className='gor-usr-details'>
                 <div className='gor-usr-hdlg'><FormattedMessage id="users.add.roledetails.heading" description='Heading for role' 
@@ -55,14 +105,9 @@ class UserRoles extends React.Component{
                 <div className='gor-sub-head'><FormattedMessage id="users.add.roledetails.subheading" description='Subheading for role' 
                 defaultMessage='User will be given a specific level of control over the Butler system depending on the designated role'/></div>
                 <div className='gor-role'>
-                    <select className='gor-select-field' onChange={this._checkRole.bind(this)}>
-                        {roles}
-                    </select>
-                    <div className='gor-sub-head'>
-                        {roleDesc.hasOwnProperty(this.props.roleSet)?
-                                this.context.intl.formatMessage(roleDesc[this.props.roleSet]):
-                                this.context.intl.formatMessage(roleDesc[BUTLER_UI])}
-                    </div>
+                    <Dropdown optionDispatch={(e) => this._checkRole(e)} items={dataDropdown.options}
+                        styleClass={'gor-usr-dropdown'} currentState={dataDropdown.selected} />
+                <Information data={infoData} />
                 </div>
             </div>
             );
@@ -70,7 +115,7 @@ class UserRoles extends React.Component{
 };
 function mapStateToProps(state,ownProps) {
  return {
-      roleSet:  state.appInfo.roleSet  || null,    
+      roleSet:  state.appInfo.roleSet  || BUTLER_UI,    
  	}
  }
 function mapDispatchToProps(dispatch){
@@ -82,7 +127,7 @@ UserRoles.contextTypes = {
     intl: React.PropTypes.object.isRequired
 }
 UserRoles.propTypes={
-      roleSet:React.PropTypes.bool, 
+      roleSet:React.PropTypes.string, 
       setRole:React.PropTypes.func,
 }
 
