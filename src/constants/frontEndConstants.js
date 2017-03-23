@@ -20,6 +20,7 @@ export const WS_ONSEND = "WS_ONSEND";
 export const WS_INIT = "WS_INIT";
 export const WS_END="WS_END";
 export const WS_MOCK="WS_MOCK";
+export const DATA_SUBSCRIPTION_PACKET="DATA_SUBSCRIPTION_PACKET";
 
 /* Header constants */
 export const GET_OVERVIEW="get_overview";

@@ -54,5 +54,9 @@
   {
     "id": "audit.token2.pending",
     "defaultMessage": "Pending"
+  },
+  {
+    "id": "au1dit.token2.all",
+    "defaultMessage": "Any"
   }
 ]

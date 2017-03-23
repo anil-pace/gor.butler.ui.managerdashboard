@@ -240,7 +240,10 @@ export const wsOverviewData = {
                   "resource_id": "pps",
                   "details": {
                     "data": "complete_v2",
-                    "callback": []
+                    "callback": [],
+                    "filter_params": {
+                      "pps_id": ['=', '1']
+                    }
                   }
                 },
                 {

@@ -145,7 +145,7 @@ class ButlerBotTable extends React.Component {
     let onlineBots = this.props.parameters.online;
     var containerHeight = this.props.containerHeight;
     var noData = <div/>;
-    var noFilter = false;
+    var noFilter = true;
      if(totalBot === 0 || totalBot === undefined || totalBot === null) {
     noData =  <div className="gor-no-data"> <FormattedMessage id="butlerbot.table.noData" description="No data message for butlerbot table" 
         defaultMessage ="No Butler Bot Found"/>  </div>

@@ -5077,6 +5077,7 @@ button:disabled {
 }
 
 .gor-filter-body {
+  height: 574px;
   overflow: auto;
 }
 
