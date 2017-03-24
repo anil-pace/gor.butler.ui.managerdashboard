@@ -115,7 +115,7 @@ class ButlerBotFilter extends React.Component{
 function mapStateToProps(state, ownProps){
   return {
     showFilter: state.filterInfo.filterState || false,
-    wsSubscriptionData:state.frecieveSocketActions.socketDataSubscriptionPacket,
+    wsSubscriptionData:state.recieveSocketActions.socketDataSubscriptionPacket,
     filterState: state.filterInfo.butlerFilterState
   };
 }
