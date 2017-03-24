@@ -5154,6 +5154,7 @@ button:disabled {
 .gor-filter-body-filterToken-section1 {
   width: 50%;
   display: inline-block;
+  float: left;
 }
 
 .gor-filter-token-container {

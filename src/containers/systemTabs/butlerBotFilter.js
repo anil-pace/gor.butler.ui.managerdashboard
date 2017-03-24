@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
-import {showTableFilter,filterApplied} from '../../actions/filterAction';
+import {showTableFilter,filterApplied,butlerfilterState} from '../../actions/filterAction';
 import { connect } from 'react-redux'; 
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
@@ -14,6 +14,12 @@ class ButlerBotFilter extends React.Component{
     	super(props);
         this.state = {tokenSelected: {"STATUS":["any"], "MODE":["any"]}, searchQuery: {},
                       defaultToken: {"STATUS":["any"], "MODE":["any"]}}; 
+    }
+
+    componentWillMount(){
+        if(this.props.filterState) {
+            this.setState(this.props.filterState)
+        }
     }
 
     _closeFilter() {
@@ -75,12 +81,14 @@ class ButlerBotFilter extends React.Component{
       }
       var updatedWsSubscription = this.props.wsSubscriptionData;
       updatedWsSubscription["system"].data[0].details["filter_params"] = filterSubsData;
+      this.props.butlerfilterState(filterState);
       this.props.socketDataSubscription(updatedWsSubscription);
       this.props.filterApplied(true);
     }
     _clearFilter() {
         var clearState = {};
         this.setState({tokenSelected: {"STATUS":["any"], "MODE":["any"]}, searchQuery: {}});
+        this.props.butlerfilterState({tokenSelected: {"STATUS":["any"], "MODE":["any"]}, searchQuery: {}});
         this.props.filterApplied(false);
         
     }
@@ -108,7 +116,8 @@ function mapStateToProps(state, ownProps){
     console.log(state)
   return {
     showFilter: state.filterInfo.filterState || false,
-    wsSubscriptionData:state.recieveSocketActions.socketDataSubscriptionPacket
+    wsSubscriptionData:state.recieveSocketActions.socketDataSubscriptionPacket,
+    filterState: state.filterInfo.butlerFilterState
     
   };
 }
@@ -117,7 +126,8 @@ var mapDispatchToProps = function(dispatch){
   return {
     showTableFilter: function(data){dispatch(showTableFilter(data));},
     filterApplied: function(data){dispatch(filterApplied(data));},
-    socketDataSubscription: function(data){dispatch(socketDataSubscription(data));}
+    socketDataSubscription: function(data){dispatch(socketDataSubscription(data));},
+    butlerfilterState: function(data){dispatch(butlerfilterState(data));}
   }
 };
 export default connect(mapStateToProps,mapDispatchToProps)(ButlerBotFilter) ;
