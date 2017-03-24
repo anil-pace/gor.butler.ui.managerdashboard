@@ -429,6 +429,7 @@ export const AUDIT_TASK_ID = "AUDIT TASK ID"
 export const ADD_TOKEN = "add";
 export const ADD_DEFAULT = "addDefault";
 export const SOFT_MANUAL = "soft_manual";
+export const SOFT = "soft";
 export const HARD = "hard";
 //backend sort
 export const sortAuditHead = {"startTime":"&order_by=start_actual_time", 

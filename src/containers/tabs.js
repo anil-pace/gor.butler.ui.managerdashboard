@@ -10,7 +10,7 @@ import {setAuditSpinner} from '../actions/auditActions';
 import {setButlerSpinner} from '../actions/spinnerAction';
 import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP,INVENTORY,AUDIT,
 FULFILLING_ORDERS,GOR_OFFLINE,GOR_ONLINE,GOR_NORMAL_TAB,GOR_FAIL,
-SOFT_MANUAL,HARD} from '../constants/frontEndConstants';
+SOFT_MANUAL,HARD,SOFT} from '../constants/frontEndConstants';
 import { FormattedMessage,FormattedNumber } from 'react-intl';
 import OperationStop from '../containers/emergencyProcess/OperationStop';
 import EmergencyRelease from '../containers/emergencyProcess/emergencyRelease'; 
@@ -60,7 +60,7 @@ class Tabs extends React.Component{
       modal.add(OperationStop, {
         title: '',
         size: 'large', // large, medium or small,
-      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: false,
       emergencyPress: stopFlag
       });
@@ -69,7 +69,7 @@ class Tabs extends React.Component{
       modal.add(EmergencyRelease, {
         title: '',
         size: 'large', // large, medium or small,
-      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: false
       });    
   }
@@ -80,7 +80,10 @@ class Tabs extends React.Component{
     }
     else if(nextProps.system_emergency && !this.props.system_emergency)
     {
-      this._stopOperation(true);
+        this._stopOperation(true);
+    }
+    else if(nextProps.system_data === SOFT && this.props.system_data === SOFT_MANUAL){
+        this._stopOperation(true);
     }
   }
   _parseStatus()
@@ -229,7 +232,8 @@ function mapStateToProps(state, ownProps){
          space_utilized:state.tabsData.space_utilized||0,
          orders_completed:state.tabsData.orders_completed||0,
          system_status:state.tabsData.status||null,
-         audit_alert: state.tabsData.audit_alert || 0
+         audit_alert: state.tabsData.audit_alert || 0,
+         modalStatus: state.appInfo.hideModal || false
     }
 }
 

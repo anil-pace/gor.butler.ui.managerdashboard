@@ -58,11 +58,9 @@ class OperationStop extends React.Component{
                             description="Text for operation paused alert"/>)}
                     </div>
                       <span className='gor-text-sm'>
-                      {this.props.emergencyPress?(<FormattedMessage id='operation.alert.stop.subtext' 
-                    defaultMessage='To resume butler operation in the warehouse, you will be required to go through a safety checklist'
-                            description="Subtext for stop alert"/>):(<FormattedMessage id='operation.alert.pause.subtext' 
-                    defaultMessage='You must check the emergency situation and release the Emergency Stop button in order to resume the operation in warehouse'
-                            description="Subtext for pause alert"/>)}
+                        <FormattedMessage id='operation.alert.pause.subtext' 
+                          defaultMessage='You must check the emergency situation and release the Emergency Stop button in order to resume the operation in warehouse'
+                            description="Subtext for pause alert"/>
                       </span>
                     </div>           
                 </div>

@@ -30,7 +30,7 @@ class ResumeOperation extends React.Component{
           return loginPassInfo.type;    
   }
   componentWillReceiveProps(nextProps){
-    if(!nextProps.auth_token)
+    if(!nextProps.auth_token||!nextProps.system_emergency)
     {
       this._removeThisModal();
     }
@@ -40,7 +40,7 @@ class ResumeOperation extends React.Component{
       title: '',
       size: 'large', // large, medium or small,
       closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-      hideCloseButton: true // (optional) if you don't wanna show the top right close button
+      hideCloseButton: true, // (optional) if you don't wanna show the top right close button
       //.. all what you put in here you will get access in the modal props ;)
       });
     }
@@ -109,7 +109,8 @@ class ResumeOperation extends React.Component{
       auth_token:state.authLogin.auth_token,
       username:state.authLogin.username,      
       passwordCheck: state.appInfo.passwordInfo||{},
-      modalStatus: state.appInfo.hideModal || false
+      modalStatus: state.appInfo.hideModal || false,
+      system_emergency:state.tabsData.system_emergency||false 
     }
 } 
 function mapDispatchToProps(dispatch){

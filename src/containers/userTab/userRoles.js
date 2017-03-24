@@ -6,7 +6,7 @@ import {BUTLER_SUPERVISOR,BUTLER_UI} from '../../constants/backEndConstants'
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
 import {stringConfig, roleDesc} from '../../constants/backEndConstants';
 import Dropdown from '../../components/dropdown/dropdown';
-import Information from '../../components/Information/Information';
+import Information from '../../components/Information/information';
 
 class UserRoles extends React.Component{
 	constructor(props) 
@@ -128,6 +128,7 @@ UserRoles.contextTypes = {
 }
 UserRoles.propTypes={
       roleSet:React.PropTypes.string, 
+      roleName:React.PropTypes.string,
       setRole:React.PropTypes.func,
       roleInfo:React.PropTypes.array
 }

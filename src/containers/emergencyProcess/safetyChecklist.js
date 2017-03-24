@@ -27,7 +27,7 @@ class SafetyChecklist extends React.Component{
     this.props.removeModal();
   }
   componentWillReceiveProps(nextProps){
-    if(!nextProps.auth_token)
+    if(!nextProps.auth_token||!nextProps.system_emergency)
     {
       this._removeThisModal();
     }
@@ -205,7 +205,8 @@ function mapStateToProps(state, ownProps){
       safetyErrorList: state.appInfo.safetyErrorList || [],
       auth_token:state.authLogin.auth_token,
       modalStatus: state.appInfo.hideModal || false,
-      safetySpinner:state.spinner.safetySpinner || false
+      safetySpinner:state.spinner.safetySpinner || false,
+      system_emergency:state.tabsData.system_emergency||false 
   };
 }
 var mapDispatchToProps = function(dispatch){

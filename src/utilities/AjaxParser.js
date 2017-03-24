@@ -235,18 +235,21 @@ export function AjaxParse(store,res,cause,status)
 			store.dispatch(getSafetyList(safetyList));
 			break;
 		case CONFIRM_SAFETY:
-			var rejectList = [], rejectResponse = res;
+			var rejectList = [], rejectResponse = res, modalFlag = true;
 			if(rejectResponse.data){
 				rejectList = rejectResponse.data;
 				if(!rejectList.length){
-					store.dispatch(notifySuccess(ES));
+					store.dispatch(notifySuccess(ES));                          					
+				}
+				else{
+					modalFlag = false;
 				}
 			}
-			else{
+			else if(rejectResponse.alert_data){
 				stringInfo=codeToString(res.alert_data[0]);
 				store.dispatch(notifyFail(stringInfo.msg));
 			}
-			store.dispatch(modalStatus(true));                           
+			store.dispatch(modalStatus(modalFlag));                           
 			store.dispatch(setSafetySpinner(false));
 			store.dispatch(getSafetyErrorList(rejectList));			
 			break;
