@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import {AUTH_LOGIN,ERROR,TYPING,APP_JSON,POST} from '../../constants/frontEndConstants';
 import {NO_NET} from '../../constants/messageConstants';
 import {LOGIN_URL} from '../../constants/configConstants'; 
-import RangeSlider from '../../components/rangeSlider/rangeSlider.js'
+import RangeSlider from '../../components/rangeSlider/rangeSlider'
 import { FormattedMessage } from 'react-intl';
 import { emptyField } from '../../utilities/fieldCheck';
 
@@ -65,13 +65,17 @@ class LoginForm extends React.Component{
         this.props.setUsername(formdata.username);
         this.props.authLoginData(loginData);
     }
-    _onRangeChange(minValue,maxValue,e){
-        console.log(minValue);
-        console.log(maxValue);
-        console.log(e);
+    _onRangeChange(e){
+        
+        console.log(arguments);
     }
 	render(){
         // remove the internationalization from 'Butler' as it is our brand and also 'TM' as it is universal term
+        var marks={
+          0:"0",
+          50:"50",
+          100:"100"
+        }
         return (
               <form action="#"  id = "loginForm" ref={node => { this.loginForm = node }} 
                 onSubmit={(e) => this._handleSubmit(e)}>
@@ -98,16 +102,15 @@ class LoginForm extends React.Component{
                          ref={node => { this.userName = node }}/>                    
                 </div>
                 <div className = "rangeslider">
-                 <RangeSlider 
+                
+                 <RangeSlider.Range 
                      min={0}
                       max={100}
                       step={10}
+                      marks={marks}
                       maxValue={80}
-                      value = {50}
-                      orientation={"horizontal"}
-                      reverse={false}
-                      tooltip={false}
-                      labels={{ 0: '0', 50: '50', 100: '100'}}
+                      defaultValue={[0,80]}
+                      allowCross={false}
                       onChange={this._onRangeChange}
                       />
                  </div>
