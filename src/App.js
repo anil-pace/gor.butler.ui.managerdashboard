@@ -135,7 +135,6 @@ import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,
 
 
  function mapStateToProps(state,ownProps) {
-  console.log(state)
    return {
     authToken: state.authLogin.auth_token,
     loginAuthorized : state.authLogin.loginAuthorized,
@@ -148,7 +147,8 @@ import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,
     subTab:state.tabSelected.subTab,
     prevTab:state.tabSelected.prevTab,
     wsSubscriptionData:state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
-    isFilterApplied: state.filterInfo.isFilterApplied || false
+    isFilterApplied: state.filterInfo.isFilterApplied || false,
+    
   }
 } 
 /**

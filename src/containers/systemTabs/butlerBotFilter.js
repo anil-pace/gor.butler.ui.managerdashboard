@@ -83,14 +83,15 @@ class ButlerBotFilter extends React.Component{
       updatedWsSubscription["system"].data[0].details["filter_params"] = filterSubsData;
       this.props.butlerfilterState(filterState);
       this.props.socketDataSubscription(updatedWsSubscription);
-      this.props.filterApplied(true);
+      this.props.filterApplied(!this.props.isFilterApplied);
     }
     _clearFilter() {
-        var clearState = {};
+        var clearState = {}, clearFilterParam = this.props.wsSubscriptionData;
         this.setState({tokenSelected: {"STATUS":["any"], "MODE":["any"]}, searchQuery: {}});
         this.props.butlerfilterState({tokenSelected: {"STATUS":["any"], "MODE":["any"]}, searchQuery: {}});
-        this.props.filterApplied(false);
-        
+        clearFilterParam["system"].data[0].details["filter_params"] = {};
+        this.props.socketDataSubscription(clearFilterParam);
+        this.props.filterApplied(!this.props.isFilterApplied);
     }
 
 	render(){
@@ -113,11 +114,11 @@ class ButlerBotFilter extends React.Component{
 
 
 function mapStateToProps(state, ownProps){
-    console.log(state)
   return {
     showFilter: state.filterInfo.filterState || false,
     wsSubscriptionData:state.recieveSocketActions.socketDataSubscriptionPacket,
-    filterState: state.filterInfo.butlerFilterState
+    filterState: state.filterInfo.butlerFilterState,
+    isFilterApplied: state.filterInfo.isFilterApplied || false
     
   };
 }

@@ -85,7 +85,8 @@ const messages = defineMessages({
 
 
 class ButlerBot extends React.Component{
-	
+
+  
   _processButlersData() {
   var nProps = this,
   data = nProps.props.butlerDetail.butlerDetail;
