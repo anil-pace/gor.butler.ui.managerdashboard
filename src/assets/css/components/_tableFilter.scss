@@ -122,9 +122,12 @@
 }
 
 .gor-filter-body-filterToken-wrap {
-	margin-top: 33px;
-    margin-right: 20px;
-    margin-left: 20px;
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-bottom: 5px;
+    padding-left: 20px;
+    float: left;
+    width: 100%;
 }
 
 .gor-filter-token-section-h1 {
@@ -194,4 +197,22 @@
     background-color: #ffffff;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
     border: solid 1px #f36f36;
+}
+
+.gor-filter-body-slider-wrap{
+    width: 87%;
+    float: left;
+    padding-top: 0px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+.sliderHeaderText{
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+    color: #666666;
+    padding:5px;
+    margin-bottom:10px;
 }

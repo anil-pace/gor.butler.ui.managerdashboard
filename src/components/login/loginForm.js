@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import {AUTH_LOGIN,ERROR,TYPING,APP_JSON,POST} from '../../constants/frontEndConstants';
 import {NO_NET} from '../../constants/messageConstants';
 import {LOGIN_URL} from '../../constants/configConstants'; 
+import RangeSlider from '../../components/rangeSlider/rangeSlider'
 import { FormattedMessage } from 'react-intl';
 import { emptyField } from '../../utilities/fieldCheck';
 
@@ -64,8 +65,14 @@ class LoginForm extends React.Component{
         this.props.setUsername(formdata.username);
         this.props.authLoginData(loginData);
     }
+
 	render(){
         // remove the internationalization from 'Butler' as it is our brand and also 'TM' as it is universal term
+        var marks={
+          0:"0",
+          50:"50",
+          100:"100"
+        }
         return (
               <form action="#"  id = "loginForm" ref={node => { this.loginForm = node }} 
                 onSubmit={(e) => this._handleSubmit(e)}>
@@ -91,6 +98,8 @@ class LoginForm extends React.Component{
                         placeholder={this.props.intlMessages["login.form.username"]}
                          ref={node => { this.userName = node }}/>                    
                 </div>
+    
+                
                 </section>
                 {this.props.userNameCheck?(this.props.userNameCheck.type === ERROR?(
                     <div className='gor-login-usr-error' >

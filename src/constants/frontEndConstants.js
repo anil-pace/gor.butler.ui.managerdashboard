@@ -440,4 +440,13 @@ export const sortOrderHead = {"recievedTime":"&order_by=create_time",
 							  "pickBy":"&order_by=pick_before_time", 
 							  "id":"&order_by=order_id",
                   			  "status":"&order_by=warehouse_status&order_by_seq=['breached','exception','not_fulfillable','abandoned','temporary_unfulfillable','pending','fulfillable','cancelled','completed']"};
+/*Slider default marks we are passing from here*/
+export const filterMarks={
+		          0:"0",
+		          100:"100",
+		          200:"200",
+		          300:"300",
+		          400:"400",
+		          500:"500"
+        	}
 

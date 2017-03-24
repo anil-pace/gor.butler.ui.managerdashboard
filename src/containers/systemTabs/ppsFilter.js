@@ -7,12 +7,14 @@ import { connect } from 'react-redux';
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
+
+
 class PPSFilter extends React.Component{
   constructor(props) 
   {
       super(props);
         this.state = {tokenSelected: {"STATUS":["all"], "MODE":["all"]}, searchQuery: {},
-                      defaultToken: {"DSTATUS":["all"], "MODE":["all"]}}; 
+                      defaultToken: {"DSTATUS":["all"], "MODE":["all"]}, rangeSelected:{"minValue":["0"],"maxValue":["500"]}}; 
     }
 
 
@@ -66,6 +68,22 @@ class PPSFilter extends React.Component{
     _applyFilter() {
         console.log(this.state)
        this.props.refreshOption(this.state);
+
+        var filterSubsData = {}, filterState = this.state;
+      if(filterState.searchQuery) {
+        (filterState.searchQuery["SPECIFIC LOCATION/ZONE"]?filterSubsData["location"] = ['contains',filterState.searchQuery["SPECIFIC LOCATION/ZONE"]]:"");
+        (filterState.searchQuery["BOT ID"]?filterSubsData["butler_id"] = ['=',filterState.searchQuery["BOT ID"]]:"");
+      }
+      if(filterState.tokenSelected) {
+        (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0]!=="any"?filterSubsData["state"] = ['in',filterState.tokenSelected["STATUS"]]:"");
+        (filterState.tokenSelected["MODE"] && filterState.tokenSelected["MODE"][0]!=="any"?filterSubsData["current_task"] = ['in',filterState.tokenSelected["MODE"]]:"");
+      }
+      var updatedWsSubscription = this.props.wsSubscriptionData;
+      updatedWsSubscription["system"].data[0].details["filter_params"] = filterSubsData;
+      this.props.butlerfilterState(filterState);
+      this.props.socketDataSubscription(updatedWsSubscription);
+      this.props.filterApplied(true);
+
     }
 
     _clearFilter() {
@@ -74,9 +92,14 @@ class PPSFilter extends React.Component{
         this.setState({tokenSelected: {"STATUS":["all"], "MODE":["all"]}, searchQuery: {}});
         this.props.refreshOption(clearState)
     } 
+   _onRangeChange(sliderVal){
+       console.log(sliderVal);
+      this.setState({rangeSelected:{minValue:sliderVal.min},rangeSelected:{maxValue:sliderVal.max}});
 
+    }
 
   render(){
+    
         var noOrder = this.props.orderData.totalOrders?false:true;
         var auditSearchField = this._processAuditSearchField();
         var auditFilterToken = this._processFilterToken();
@@ -90,8 +113,9 @@ class PPSFilter extends React.Component{
                          formSubmit={this._applyFilter.bind(this)} //passing function on submit
                          responseFlag={this.props.orderListSpinner} // used for spinner of button 
                          noDataFlag={noOrder} //messg to show in case of no data
-                         />
-            </div>
+                         rangechange={this._onRangeChange.bind(this)}
+                         />        
+      </div>
     );
   }
 };
