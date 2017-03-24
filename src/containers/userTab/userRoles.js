@@ -28,28 +28,8 @@ class UserRoles extends React.Component{
         }
         return false;
     }
-    _processRoles(){
-        let roles=[] ,len, currentRole,item;
-        len = this.props.roleInfo.length;
-
-        for(let i=0; i<len; i++){
-           currentRole = this.props.roleInfo[i];
-           if(stringConfig.hasOwnProperty(currentRole.name)){
-            item=(
-                    <option key={i} name='role' value={currentRole.name} 
-                        selected={this._getChecked(this.props.roleName, currentRole)}>
-                        <span className='gor-usr-hdsm'>
-                            {this.context.intl.formatMessage(stringConfig[currentRole.name])}
-                        </span>
-                    </option>
-            );
-            roles.push(item);            
-           }
-        }
-        return roles;
-    }
-    _isMapped(item){
-           if(stringConfig.hasOwnProperty(item)){
+    _isMapped(config,item){
+           if(config.hasOwnProperty(item)){
             return true;
            }
            return false;
@@ -59,7 +39,7 @@ class UserRoles extends React.Component{
         len = this.props.roleInfo.length;
         for(let i=0; i<len; i++){
            currentRole = this.props.roleInfo[i];
-           if(!this._isMapped(currentRole.name)){
+           if(!this._isMapped(stringConfig,currentRole.name)){
                 continue;
            }
            objDropdown ={
@@ -76,24 +56,27 @@ class UserRoles extends React.Component{
     _getInfo(){
         let infoGroup=[], info, selected, len, currentRole;
         len = this.props.roleInfo.length;
+        let infoHeading = (<div className='gor-role-heading'>
+                            <FormattedMessage id="users.roles.info.heading" description='Heading for roles description' 
+                             defaultMessage='Role definitions'/>
+                          </div>);
+
         for(let i=0; i<len; i++){
            currentRole = this.props.roleInfo[i];
-           if(!this._isMapped(currentRole.name)){
+           if(!this._isMapped(stringConfig,currentRole.name) || !this._isMapped(roleDesc,currentRole.name)){
                 continue;
            }
-           if(roleDesc.hasOwnProperty(currentRole.name)){
             info=(<div className='gor-role-details'>
-                    <span>
-                        {this.context.intl.formatMessage(stringConfig[currentRole.name])}
+                    <span className='gor-usr-hdsm'>
+                        {this.context.intl.formatMessage(stringConfig[currentRole.name])}: 
                     </span>
                     <span className='gor-sub-head'>
-                        {this.context.intl.formatMessage(roleDesc[this.props.roleSet])}
+                        {this.context.intl.formatMessage(roleDesc[currentRole.name])}
                     </span>
                 </div>);            
-           }
             infoGroup.push(info);
         }
-        return infoGroup;
+        return {text:infoGroup, heading:infoHeading};
     }
 	render(){
         var dataDropdown = this._getList();
@@ -107,7 +90,7 @@ class UserRoles extends React.Component{
                 <div className='gor-role'>
                     <Dropdown optionDispatch={(e) => this._checkRole(e)} items={dataDropdown.options}
                         styleClass={'gor-usr-dropdown'} currentState={dataDropdown.selected} />
-                <Information data={infoData} />
+                    <Information data={infoData.text} heading={infoData.heading}/>
                 </div>
             </div>
             );
@@ -129,6 +112,7 @@ UserRoles.contextTypes = {
 UserRoles.propTypes={
       roleSet:React.PropTypes.string, 
       setRole:React.PropTypes.func,
+      roleInfo:React.PropTypes.array
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(UserRoles);

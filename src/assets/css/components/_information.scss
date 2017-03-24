@@ -6,20 +6,29 @@
     	padding: 20px;
     	position: absolute;
     	z-index: 1;
-    	left: 20px;
-    	top: -60px;
+    	left: 30px;
+    	top: -70px;
     	transition: opacity 1s;
-		box-shadow: 1px 1px 1px #aaaaaa;
+		box-shadow: 1px 1px 10px #aaaaaa;
     	background: #FFFFFF;
 	}
-	.gor-information-text::after {
-   		content: "";
-    	position: absolute;
-    	top: 50%;
-    	left: -10px;
-	    border-width: 5px;
-    	border-style: solid;
-    	border-color: transparent #FFFFFF transparent transparent;
+	.gor-information-text:after, .gor-information-text:before {
+		right: 290px;
+		top: 80px;
+		border: solid transparent;
+		content: " ";
+		position: absolute;
+		pointer-events: none;
+	}
+	.gor-information-text:after {
+		border-right-color: white;
+		border-width: 10px;
+		margin-top: -10px;
+	}
+	.gor-information-text:before {
+		border-right-color: #aaaaaa;
+		border-width: 11px;
+		margin-top: -11px;
 	}
 }
 

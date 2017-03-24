@@ -21,7 +21,9 @@ class Information extends React.Component{
           onMouseLeave={this._setHidden.bind(this)} ></div>
             <div className='gor-information-text' 
               style={this.state.infoVisible?{display:'block'}:{display:'none'}}>
+              {this.props.heading}
               {this.props.data}
+                <span className='gor-information-arrow'></span>
             </div>
         </div>
       );

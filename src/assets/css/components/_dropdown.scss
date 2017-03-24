@@ -153,24 +153,13 @@ box-shadow: calculateRem(2px) calculateRem(2px) calculateRem(2px) #888888;
 }
 
 .Dropdown-arrow {
-  border-color: #000000 transparent transparent;
-  border-style: solid;
-  border-width: calculateRem(8px) calculateRem(7px) calculateRem(3px);
-  content: ' ';
-  display: block;
-  height: 0;
-  margin-top: -ceil(2.5);
-  position: absolute;
+  background: url('images/Icons.svg') no-repeat -10px -110px;
+  width: 8px;
+  height: 6px;
+  display:inline-block;
   right: calculateRem(15px);
-  top: calculateRem(15px);
-  
 }
 
-.is-open .Dropdown-arrow {
-  border-color: #000000 transparent transparent;
-  border-style: solid;
-  border-width: calculateRem(8px) calculateRem(7px) calculateRem(3px);
-}
 .is-open .Dropdown-control{
   box-shadow: 0px 0px 3px 0px #888888;
   border: calculateRem(1px) solid #ccc;
