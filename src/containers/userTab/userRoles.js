@@ -17,15 +17,21 @@ class UserRoles extends React.Component{
             this.props.setRole(value);
     }
     _getChecked(roleName, currentRole){
-        if(!roleName){
-            if(currentRole.name === BUTLER_UI)
-            {
+        if(!this.props.roleSet){
+            if(!roleName){
+                if(currentRole.name === BUTLER_UI)
+                {
+                    return true;
+                }
+            }
+            else if(roleName === currentRole.name){
                 return true;
             }
+            return false;
         }
-        if(roleName == currentRole.name){
-            return true;
-        }
+        if(this.props.roleSet === currentRole.name){
+                return true;
+        }        
         return false;
     }
     _isMapped(config,item){
@@ -35,21 +41,32 @@ class UserRoles extends React.Component{
            return false;
     }
     _getList(){
-        let options=[], selected, len, objDropdown, currentRole;
+        let options=[], selected, len, objDropdown, currentRole, label;
         len = this.props.roleInfo.length;
         for(let i=0; i<len; i++){
            currentRole = this.props.roleInfo[i];
            if(!this._isMapped(stringConfig,currentRole.name)){
                 continue;
            }
+           if(this._getChecked(this.props.roleName,currentRole)){
+            selected = {
+                value: currentRole.name, 
+                label:this.context.intl.formatMessage(stringConfig[currentRole.name])
+            };
+            label = (<div>
+                        <span className='gor-role-label'>{this.context.intl.formatMessage(stringConfig[currentRole.name])}</span>
+                        <span className='gor-selected-icon'></span>
+                    </div>
+                )
+           }
+           else{
+            label = this.context.intl.formatMessage(stringConfig[currentRole.name]); 
+           }
            objDropdown ={
             value: currentRole.name, 
-            label: this.context.intl.formatMessage(stringConfig[currentRole.name])
+            label:label
            }
            options.push(objDropdown);
-           if(this._getChecked(this.props.roleName,currentRole)){
-            selected = objDropdown;
-           }
         }
         return {options:options, selected:selected};
     }
@@ -98,7 +115,7 @@ class UserRoles extends React.Component{
 };
 function mapStateToProps(state,ownProps) {
  return {
-      roleSet:  state.appInfo.roleSet  || BUTLER_UI,    
+      roleSet:  state.appInfo.roleSet  || null,    
  	}
  }
 function mapDispatchToProps(dispatch){

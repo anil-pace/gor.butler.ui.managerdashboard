@@ -138,11 +138,15 @@ box-shadow: calculateRem(2px) calculateRem(2px) calculateRem(2px) #888888;
   font-weight: bold;
   cursor: default;
   outline: none;
-  padding: calculateRem(8px) calculateRem(52px) calculateRem(8px) calculateRem(10px);
+  padding: calculateRem(8px) 0 calculateRem(8px) calculateRem(10px);
   transition: all 200ms ease;
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
   height: 35px;
+  .Dropdown-placeholder{
+    display:inline-block;
+    width:90%;
+  }
 }
 
 

@@ -89,7 +89,7 @@ class EditUser extends React.Component{
 
         role=this.props.roleSet?this._getId(this.props.roleSet):givenRole;
 
-        if(!pswd&&!confirmPswd&&role==givenRole)
+        if(!pswd&&!confirmPswd&&(role === givenRole||this.props.roleSet !== BUTLER_SUPERVISOR))
         {
           pswd="__unchanged__";
           confirmPswd="__unchanged__";
