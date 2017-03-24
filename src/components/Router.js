@@ -239,7 +239,7 @@ render(){
      <Route name="users" path="/users"  
      getComponent={(location, callback) => {
          require.ensure([], function (require) {
-            callback(null, require('../containers/usersTab').default);
+            callback(null, require('../containers/userTab/usersTab').default);
         },"users");
      }}
      />

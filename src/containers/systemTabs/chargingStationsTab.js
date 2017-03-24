@@ -14,6 +14,7 @@ import {stringConfig} from '../../constants/backEndConstants';
 import { defineMessages } from 'react-intl';
 import {INITIAL_HEADER_SORT,INITIAL_HEADER_ORDER,GOR_CONNECTED_STATUS} from '../../constants/frontEndConstants';
 import { csHeaderSort,csHeaderSortOrder ,csFilterDetail} from '../../actions/sortHeaderActions';
+import {showTableFilter,filterApplied} from '../../actions/filterAction';
 
 //Mesages for internationalization
 const messages = defineMessages({
@@ -75,7 +76,7 @@ class ChargingStations extends React.Component{
   return chargerData;
 }
 	render(){
-	
+	let updateStatusIntl="";
 	var itemNumber = 4, connectedBots = 0, manualMode = 0, automaticMode = 0, chargersState = {"connectedBots": "--","manualMode": "--", "automaticMode":"--", "csConnected":0}, chargersData, csConnected=0;
     if(this.props.chargersDetail.chargersDetail !== undefined) {
      chargersData =  this._processChargersData();
@@ -111,7 +112,15 @@ class ChargingStations extends React.Component{
                                    sortHeaderOrder={this.props.csHeaderSortOrder} 
                                    currentHeaderOrder={this.props.csSortHeaderState}
                                    setCsFilter={this.props.csFilterDetail}
-                                   getCsFilter = {this.props.csFilter}/>
+                                   getCsFilter = {this.props.csFilter}
+
+                                   isFilterApplied={this.props.isFilterApplied}
+                                   lastUpdatedText={updateStatusIntl}
+                                    lastUpdated={updateStatusIntl}
+                                    showFilter={this.props.showFilter}
+                                    setFilter={this.props.showTableFilter} />
+
+
 					</div>
 				</div>
 			</div>
@@ -127,7 +136,9 @@ function mapStateToProps(state, ownProps){
     csSortHeaderState: state.sortHeaderState.csHeaderSortOrder || INITIAL_HEADER_ORDER,
     csSpinner: state.spinner.csSpinner || false,
     chargersDetail: state.chargersDetail || [],
-    intlMessages: state.intl.messages
+    intlMessages: state.intl.messages,
+
+    showFilter: state.filterInfo.filterState || false
   };
 }
 
@@ -136,7 +147,9 @@ var mapDispatchToProps = function(dispatch){
     csFilterDetail: function(data){dispatch(csFilterDetail(data))},
     setCsSpinner: function(data){ dispatch(setCsSpinner(data));},
     csHeaderSort: function(data){dispatch(csHeaderSort(data))},
-    csHeaderSortOrder: function(data){dispatch(csHeaderSortOrder(data))}
+    csHeaderSortOrder: function(data){dispatch(csHeaderSortOrder(data))},
+    showTableFilter: function(data){dispatch(showTableFilter(data));}
+    
   };
 }
 

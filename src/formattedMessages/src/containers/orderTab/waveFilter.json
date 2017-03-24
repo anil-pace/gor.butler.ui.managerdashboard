@@ -1,0 +1,30 @@
+[
+  {
+    "id": "wave.inputField.id",
+    "defaultMessage": "WAVE ID"
+  },
+  {
+    "id": "wave.token.status",
+    "defaultMessage": "STATUS"
+  },
+  {
+    "id": "wave.STATUS.all",
+    "defaultMessage": "All waves"
+  },
+  {
+    "id": "wave.STATUS.breach",
+    "defaultMessage": "Breached"
+  },
+  {
+    "id": "wave.STATUS.pending",
+    "defaultMessage": "Pending"
+  },
+  {
+    "id": "wave.STATUS.warning",
+    "defaultMessage": "Warning"
+  },
+  {
+    "id": "wave.STATUS.inprogress",
+    "defaultMessage": "In progress"
+  }
+]

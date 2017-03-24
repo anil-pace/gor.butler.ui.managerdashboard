@@ -7,22 +7,22 @@ import { connect } from 'react-redux';
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
-class OrderFilter extends React.Component{
-	constructor(props) 
-	{
-    	super(props);
-        this.state = {tokenSelected: {"STATUS":["all"], "TIME PERIOD":["allOrders"]}, searchQuery: {},
-                      defaultToken: {"STATUS":["all"], "TIME PERIOD":["allOrders"]}}; 
+class ChargingStationFilter extends React.Component{
+  constructor(props) 
+  {
+      super(props);
+        this.state = {tokenSelected: {"DOCKING STATUS":["all"], "OPERATING MODE":["allBot"]}, searchQuery: {},
+                      defaultToken: {"DOCKING STATUS":["all"], "OPERATING MODE":["allBot"]}}; 
     }
 
 
     _closeFilter() {
         var filterState = !this.props.showFilter;
         this.props.showTableFilter(false);
-    }	
+    } 
 
     _processAuditSearchField(){
-        var filterInputFields = [{value:"ORDER ID", label:<FormattedMessage id="order.inputField.id" defaultMessage ="ORDER ID"/>}];
+        var filterInputFields = [{value:"CHARGING STATION ID", label:<FormattedMessage id="charging.inputField.id" defaultMessage ="CHARGING STATION ID"/>}];
         var inputValue = this.state.searchQuery;
         var inputField = <FilterInputFieldWrap inputText={filterInputFields} handleInputText={this._handleInputQuery.bind(this)} inputValue={inputValue}/>
         return inputField;           
@@ -30,23 +30,18 @@ class OrderFilter extends React.Component{
     }
 
     _processFilterToken() {
-        var tokenField1 = {value:"STATUS", label:<FormattedMessage id="order.token.status" defaultMessage ="STATUS"/>};
-        var tokenField2 = {value:"TIME PERIOD", label:<FormattedMessage id="order.token.timePeriod" defaultMessage ="TIME PERIOD"/>}; 
-        var labelC1 = [
-                    { value: 'all', label: <FormattedMessage id="order.STATUS.all" defaultMessage ="All orders"/>},
-                    { value: 'breached', label: <FormattedMessage id="order.STATUS.breach" defaultMessage ="Breached orders"/>},
-                    { value: 'pending', label: <FormattedMessage id="order.STATUS.pending" defaultMessage ="Pending orders"/>},
-                    { value: 'completed', label: <FormattedMessage id="order.STATUS.completed" defaultMessage ="Completed orders"/>},
-                    { value: 'exception', label: <FormattedMessage id="order.STATUS.exep" defaultMessage ="Exception"/>}
+        let tokenField1 = {value:"DOCKING STATUS", label:<FormattedMessage id="charging.token.status" defaultMessage ="DOCKING STATUS"/>};
+        let tokenField2 = {value:"OPERATING MODE", label:<FormattedMessage id="charging.token.timePeriod" defaultMessage ="OPERATING MODE"/>}; 
+       let labelC1 = [
+                    { value: 'all', label: <FormattedMessage id="charging.STATUS.all" defaultMessage ="All"/>},
+                    { value: 'connected', label: <FormattedMessage id="charging.STATUS.breach" defaultMessage ="Connected"/>},
+                    { value: 'disconnectec', label: <FormattedMessage id="charging.STATUS.pending" defaultMessage ="Disconnected"/>}
                     ];
-        var labelC2 = [
-                    { value: 'allOrders', label: <FormattedMessage id="order.timePeriod.all" defaultMessage ="All"/>},
-                    { value: 'oneHourOrders', label: <FormattedMessage id="order.timePeriod.oneHr" defaultMessage ="Last 1 hours"/>},
-                    { value: 'twoHourOrders', label: <FormattedMessage id="order.timePeriod.twoHR" defaultMessage ="Last 2 hours"/>},
-                    { value: 'sixHourOrders', label: <FormattedMessage id="order.timePeriod.sixHr" defaultMessage ="Last 6 hours"/>},
-                    { value: 'twelveHourOrders', label: <FormattedMessage id="order.timePeriod.twoHr" defaultMessage ="Last 12 hours"/>},
-                    { value: 'oneDayOrders', label: <FormattedMessage id="order.timePeriod.oneday" defaultMessage ="Last 1 day"/>}
-                    ];
+        let labelC2 = [
+                    { value: 'allBot', label: <FormattedMessage id="charging.timePeriod.all" defaultMessage ="All"/>},
+                    { value: 'mannual', label: <FormattedMessage id="charging.timePeriod.oneHr" defaultMessage ="Mannual"/>},
+                    { value: 'auto', label: <FormattedMessage id="charging.timePeriod.twoHR" defaultMessage ="Auto"/>}
+                    ]; 
         var selectedToken =  this.state.tokenSelected;
         var column1 = <FilterTokenWrap field={tokenField1} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC1} selectedToken={selectedToken}/>;
         var column2 = <FilterTokenWrap field={tokenField2} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC2} selectedToken={selectedToken}/>;
@@ -71,17 +66,17 @@ class OrderFilter extends React.Component{
     _clearFilter() {
         var clearState = {};
         this.props.filterApplied(false)
-        this.setState({tokenSelected: {"STATUS":["all"], "TIME PERIOD":["allOrders"]}, searchQuery: {}});
+        this.setState({tokenSelected: {"DOCKING STATUS":["all"], "TOPERATING MODE":["allBot"]}, searchQuery: {}});
         this.props.refreshOption(clearState)
     } 
 
 
-	render(){
+  render(){
         var noOrder = this.props.orderData.totalOrders?false:true;
         var auditSearchField = this._processAuditSearchField();
         var auditFilterToken = this._processFilterToken();
-		return (
-			<div>
+    return (
+      <div>
                  <Filter hideFilter={this._closeFilter.bind(this)}  // hiding filter wont disturb state
                          clearFilter={this._clearFilter.bind(this)} // clearing sates of filter
                          searchField={auditSearchField}
@@ -92,8 +87,8 @@ class OrderFilter extends React.Component{
                          noDataFlag={noOrder} //messg to show in case of no data
                          />
             </div>
-		);
-	}
+    );
+  }
 };
 
 
@@ -111,4 +106,6 @@ var mapDispatchToProps = function(dispatch){
     filterApplied: function(data){dispatch(filterApplied(data));}
   }
 };
-export default connect(mapStateToProps,mapDispatchToProps)(OrderFilter) ;
+export default connect(mapStateToProps,mapDispatchToProps)(ChargingStationFilter) ;
+
+

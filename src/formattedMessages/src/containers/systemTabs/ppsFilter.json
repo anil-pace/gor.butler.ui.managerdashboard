@@ -1,0 +1,62 @@
+[
+  {
+    "id": "pps.inputField.id",
+    "defaultMessage": "PPS ID"
+  },
+  {
+    "id": "pps.inputField.oprator",
+    "defaultMessage": "OPERATOR ASSIGNED"
+  },
+  {
+    "id": "pps.token.status",
+    "defaultMessage": "STATUS"
+  },
+  {
+    "id": "pps.token.timePeriod",
+    "defaultMessage": "MODE"
+  },
+  {
+    "id": "pps.STATUS.all",
+    "defaultMessage": "All"
+  },
+  {
+    "id": "pps.STATUS.stopped",
+    "defaultMessage": "Stopped"
+  },
+  {
+    "id": "pps.STATUS.error",
+    "defaultMessage": "Error"
+  },
+  {
+    "id": "pps.STATUS.warning",
+    "defaultMessage": "Warning"
+  },
+  {
+    "id": "pps.STATUS.connected",
+    "defaultMessage": "Connected"
+  },
+  {
+    "id": "pps.STATUS.disconnected",
+    "defaultMessage": "Disconnected"
+  },
+  {
+    "id": "pps.MODE.all",
+    "defaultMessage": "All"
+  },
+  {
+    "id": "pps.MODE.pick",
+    "defaultMessage": "Pick"
+  },
+  {
+    "id": "pps.MODE.put",
+    "defaultMessage": "Put"
+  },
+  {
+    "id": "pps.MODE.auditudit",
+    "defaultMessage": "Audit"
+  },
+  {
+    "id": "v.MODE.notset",
+    "defaultMessage": "Not set"
+  }
+]

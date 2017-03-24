@@ -45,6 +45,12 @@ class Filter extends React.Component{
     	                 	<div className="gor-filter-body-filterToken-section1">
     	                 		{this.props.filterTokenC2}
     	                 	</div>
+                            <div className="gor-filter-body-filterToken-section1">
+                                {this.props.filterTokenC3}
+                            </div>
+                            <div className="gor-filter-body-filterToken-section1">
+                                {this.props.filterTokenC4}
+                            </div>
     	                 </div>
     	                 <div className="gor-filter-body-slider-wrap"> 
     	                 	

@@ -185,7 +185,7 @@ class OrderListTable extends React.Component {
         <button className={this.props.isFilterApplied?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
           <div className="gor-manage-task"/>
           <FormattedMessage id="order.table.filterLabel" description="button label for filter" 
-          defaultMessage ="Filter"/>
+          defaultMessage ="Filter data"/>
          </button>
        </div>
         </div>     

@@ -10,6 +10,7 @@ import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell
 import {BASE_URL, PPS_MODE_CHANGE_URL,PROTOCOL,API_URL} from '../../constants/configConstants';
 import { defineMessages } from 'react-intl';
 import {GOR_STATUS,GOR_STATUS_PRIORITY,GOR_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
+import PPSFilter from './ppsFilter';
 
 const messages = defineMessages({
     ppsPlaceholder: {
@@ -219,6 +220,13 @@ class PPStable extends React.Component {
      
   }
 
+
+_setFilter() {
+    var newState = !this.props.showFilter;
+    this.props.setFilter(newState);
+   }
+
+
   handleModeChange(data) {
     var checkedPPS=[], j=0, mode=data.value, sortedIndex;
     for (var i = this.props.checkedPps.length - 1; i >= 0; i--) {
@@ -256,6 +264,8 @@ class PPStable extends React.Component {
 
   
   render() {
+     let updateStatusIntl="";
+    let filterHeight = screen.height-190-50;
     var {sortedDataList, colSortDirs,columnWidths,renderDropD, ppsSelected,headerChecked} = this.state, checkedPPS = [];
     let pickDrop = <FormattedMessage id="PPS.table.pickDrop" description="pick dropdown option for PPS" defaultMessage ="Put"/> 
     let putDrop = <FormattedMessage id="PPS.table.putDrop" description="put dropdown option for PPS" defaultMessage ="Pick"/> 
@@ -304,6 +314,11 @@ class PPStable extends React.Component {
    
     return (
       <div className="gorTableMainContainer">
+
+<div className="gor-filter-wrap" style={{'width':this.props.showFilter?'350px':'0px', height:filterHeight}}> 
+         <PPSFilter refreshOption={this.props.refreshOption} responseFlag={this.props.responseFlag}/>  
+       </div>
+
         <div className="gorToolBar">
           <div className="gorToolBarWrap">
             <div className="gorToolBarElements">
@@ -319,15 +334,17 @@ class PPStable extends React.Component {
               {drop}
             </div>
           </div>
-        <div className="filterWrapper">  
-        <div className="gorFilter">
-            <div className="searchbox-magnifying-glass-icon"/>
-            <input className="gorInputFilter"
-              onChange={this._onFilterChange}
-              placeholder={this.props.intlMessg["table.filter.placeholder"]}
-              value={this.props.getPpsFilter}>
-            </input>
-        </div>
+        <div className="filterWrapper"> 
+        <div className="gorToolBarDropDown">
+        <div className="gor-button-wrap">
+        <div className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
+        <button className={this.props.isFilterApplied?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
+          <div className="gor-manage-task"/>
+          <FormattedMessage id="order.table.filterLabel" description="button label for filter" 
+          defaultMessage ="Filter data"/>
+         </button>
+       </div>
+        </div>     
         </div>
        </div>
 

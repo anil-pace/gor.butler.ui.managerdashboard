@@ -15,6 +15,7 @@ import {stringConfig} from '../../constants/backEndConstants'
 import { defineMessages } from 'react-intl';
 import { ppsHeaderSort,ppsHeaderSortOrder, setCheckedPps,setDropDisplay ,setCheckAll,ppsFilterDetail} from '../../actions/sortHeaderActions';
 import {INITIAL_HEADER_SORT,INITIAL_HEADER_ORDER,GOR_ON_STATUS,GOR_FIRST_LAST} from '../../constants/frontEndConstants';
+import {showTableFilter,filterApplied} from '../../actions/filterAction';
 
 //Mesages for internationalization
 const messages = defineMessages({
@@ -106,7 +107,7 @@ class PPS extends React.Component{
 
 }
 	render(){	
-
+let updateStatusIntl="";
 	var operationMode = {"pick":0, "put":0, "audit":0,"notSet":0};
     var data , operatorNum = 0, itemNumber = 5, ppsOn = 0, avgThroughput=0;
     if(this.props.PPSDetail.PPStypeDetail !== undefined) {
@@ -155,7 +156,13 @@ class PPS extends React.Component{
              getCheckAll = {this.props.getCheckAll}
              setPpsFilter={this.props.ppsFilterDetail}
              getPpsFilter = {this.props.ppsFilter}
-             avgThroughput = {avgThroughput}/>
+             avgThroughput = {avgThroughput}
+
+             isFilterApplied={this.props.isFilterApplied}
+             lastUpdatedText={updateStatusIntl}
+             lastUpdated={updateStatusIntl}
+             showFilter={this.props.showFilter}
+             setFilter={this.props.showTableFilter}/>
 					</div>
 				</div>
 			</div>
@@ -175,7 +182,8 @@ function mapStateToProps(state, ownProps){
     ppsSortHeaderState: state.sortHeaderState.ppsHeaderSortOrder || INITIAL_HEADER_ORDER,
     ppsSpinner: state.spinner.ppsSpinner || false,
     PPSDetail: state.PPSDetail || [],
-    intlMessages: state.intl.messages
+    intlMessages: state.intl.messages,
+    showFilter: state.filterInfo.filterState || false
   };
 }
 
@@ -188,7 +196,8 @@ var mapDispatchToProps = function(dispatch){
     ppsHeaderSortOrder: function(data){dispatch(ppsHeaderSortOrder(data))},
     setCheckedPps: function(data){dispatch(setCheckedPps(data))},
     setDropDisplay: function(data){dispatch(setDropDisplay(data))},
-    setCheckAll: function(data) {dispatch(setCheckAll(data))}
+    setCheckAll: function(data) {dispatch(setCheckAll(data))},
+    showTableFilter: function(data){dispatch(showTableFilter(data));}
   }
 };
 
