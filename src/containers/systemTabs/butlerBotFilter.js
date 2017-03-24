@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
-import {showTableFilter,filterApplied} from '../../actions/filterAction';
+import {showTableFilter,filterApplied,butlerfilterState} from '../../actions/filterAction';
 import { connect } from 'react-redux'; 
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
@@ -13,6 +13,12 @@ class ButlerBotFilter extends React.Component{
     	super(props);
         this.state = {tokenSelected: {"STATUS":["any"], "MODE":["any"]}, searchQuery: {},
                       defaultToken: {"STATUS":["any"], "MODE":["any"]}}; 
+    }
+
+    componentWillMount(){
+        if(this.props.filterState) {
+            this.setState(this.props.filterState)
+        }
     }
 
     _closeFilter() {
@@ -63,13 +69,26 @@ class ButlerBotFilter extends React.Component{
     }
 
     _applyFilter() {
-      console.log(this.state)
-      
+      var filterSubsData = {}, filterState = this.state;
+      if(filterState.searchQuery) {
+        (filterState.searchQuery["SPECIFIC LOCATION/ZONE"]?filterSubsData["location"] = ['contains',filterState.searchQuery["SPECIFIC LOCATION/ZONE"]]:"");
+        (filterState.searchQuery["BOT ID"]?filterSubsData["butler_id"] = ['=',filterState.searchQuery["BOT ID"]]:"");
+      }
+      if(filterState.tokenSelected) {
+        (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0]!=="any"?filterSubsData["state"] = ['in',filterState.tokenSelected["STATUS"]]:"");
+        (filterState.tokenSelected["MODE"] && filterState.tokenSelected["MODE"][0]!=="any"?filterSubsData["current_task"] = ['in',filterState.tokenSelected["MODE"]]:"");
+      }
+      var updatedWsSubscription = this.props.wsSubscriptionData;
+      updatedWsSubscription["system"].data[0].details["filter_params"] = filterSubsData;
+      this.props.butlerfilterState(filterState);
+      this.props.socketDataSubscription(updatedWsSubscription);
+      this.props.filterApplied(true);
     }
 
     _clearFilter() {
         var clearState = {};
         this.setState({tokenSelected: {"STATUS":["any"], "MODE":["any"]}, searchQuery: {}});
+        this.props.butlerfilterState({tokenSelected: {"STATUS":["any"], "MODE":["any"]}, searchQuery: {}});
         this.props.filterApplied(false);
         
     }
@@ -96,14 +115,17 @@ class ButlerBotFilter extends React.Component{
 function mapStateToProps(state, ownProps){
   return {
     showFilter: state.filterInfo.filterState || false,
-    
+    wsSubscriptionData:state.frecieveSocketActions.socketDataSubscriptionPacket,
+    filterState: state.filterInfo.butlerFilterState
   };
 }
 
 var mapDispatchToProps = function(dispatch){
   return {
     showTableFilter: function(data){dispatch(showTableFilter(data));},
-    filterApplied: function(data){dispatch(filterApplied(data));}
+    filterApplied: function(data){dispatch(filterApplied(data));},
+    socketDataSubscription: function(data){dispatch(socketDataSubscription(data));},
+    butlerfilterState: function(data){dispatch(butlerfilterState(data));}
   }
 };
 export default connect(mapStateToProps,mapDispatchToProps)(ButlerBotFilter) ;
