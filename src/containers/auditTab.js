@@ -122,7 +122,6 @@ _processAuditData(data,nProps){
   let reAudited = nProps.context.intl.formatMessage(messages.auditReAudited);
   var timeOffset= nProps.props.timeOffset || "";
   var auditStatus = {"audit_created":created, "audit_pending":pending, "audit_waiting":pending, "audit_conflicting":pending, "audit_accepted":pending, "audit_started":progress, "audit_tasked":progress, "audit_aborted":completed, "audit_completed":completed, "audit_pending_approval":pendingApp, "audit_resolved":resolved, audit_rejected:rejected,audit_reaudited:reAudited};
-  //var statusClass = {"Pending": "pending", "Completed":"completed", "In Progress":"progress", "Created":"pending", "Issues found":"breached", "Rejected":"breached", "Resolved":"progress", "Re-audited":"completed"}
   var statusClass = {"audit_created":"pending", "audit_pending":"pending", "audit_waiting":"pending", "audit_conflicting":"pending", "audit_accepted":"pending", "audit_started":"progress", "audit_tasked":"progress", "audit_aborted":"completed", "audit_completed":"completed", "audit_pending_approval":"breached", "audit_resolved":"progress", audit_rejected:"breached",audit_reaudited:"completed"};
   var auditType = {"sku":sku, "location":location};
   var auditDetails = [], auditData = {};

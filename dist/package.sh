@@ -5,26 +5,26 @@ RELVSNCMD="git describe  --abbrev=7 --tags --always --first-parent"
 case "$1" in
     run)
 	RELVSN=$(exec ${RELVSNCMD})
-	mkdir butler_md-$RELVSN
-	install -d butler_md-$RELVSN/opt/butler_md_
+	mkdir butler_md_alpha-$RELVSN
+	install -d butler_md_alpha-$RELVSN/opt/butler_md_alpha
 	# copying all the resources from the dist folder 
-	cp index.html butler_md-$RELVSN/opt/butler_md
-	cp -R assets butler_md-$RELVSN/opt/butler_md
-	install -d butler_md-$RELVSN/var/log/butler_md
-	install -d butler_md-$RELVSN/usr/local/bin/
-	install -d butler_md-$RELVSN/etc/butler_md
-	install -d butler_md-$RELVSN/etc/init.d
-	cp -r ../dpkg_conf/butler_md butler_md-$RELVSN/etc/init.d/butler_md
+	cp index.html butler_md_alpha-$RELVSN/opt/butler_md_alpha
+	cp -R assets butler_md_alpha-$RELVSN/opt/butler_md_alpha
+	install -d butler_md_alpha-$RELVSN/var/log/butler_md_alpha
+	install -d butler_md_alpha-$RELVSN/usr/local/bin/
+	install -d butler_md_alpha-$RELVSN/etc/butler_md_alpha
+	install -d butler_md_alpha-$RELVSN/etc/init.d
+	cp -r ../dpkg_conf/butler_md_alpha butler_md_alpha-$RELVSN/etc/init.d/butler_md_alpha
 	mkdir butler_md_alpha-$RELVSN/DEBIAN
-	cp ../dpkg_conf/butler_md/control butler_md-$RELVSN/DEBIAN/control
-	cp ../dpkg_conf/butler_md/rules butler_md-$RELVSN/DEBIAN/rules
-	cp ../dpkg_conf/butler_md/copyright butler_md-$RELVSN/DEBIAN/copyright
-	cp ../dpkg_conf/butler_md/changelog butler_md-$RELVSN/DEBIAN/changelog
-	ln -sf /opt/butler_md/bin/butler_md butler_md-$RELVSN/usr/local/bin/
-	ln -sf /opt/butler_md/log butler_md-$RELVSN/var/log/butler_md
-	chmod u+rw ./butler_md-$RELVSN
-	fakeroot dpkg-deb --build butler_md-$RELVSN
-	rm -rf ./butler_md-$RELVSN
+	cp ../dpkg_conf/butler_md_alpha/control butler_md_alpha-$RELVSN/DEBIAN/control
+	cp ../dpkg_conf/butler_md_alpha/rules butler_md_alpha-$RELVSN/DEBIAN/rules
+	cp ../dpkg_conf/butler_md_alpha/copyright butler_md_alpha-$RELVSN/DEBIAN/copyright
+	cp ../dpkg_conf/butler_md_alpha/changelog butler_md_alpha-$RELVSN/DEBIAN/changelog
+	ln -sf /opt/butler_md_alpha/bin/butler_md_alpha butler_md_alpha-$RELVSN/usr/local/bin/
+	ln -sf /opt/butler_md_alpha/log butler_md_alpha-$RELVSN/var/log/butler_md_alpha
+	chmod u+rw ./butler_md_alpha-$RELVSN
+	fakeroot dpkg-deb --build butler_md_alpha-$RELVSN
+	rm -rf ./butler_md_alpha-$RELVSN
 	;;
     *)
         echo "Usage: $SCRIPT {run}"
