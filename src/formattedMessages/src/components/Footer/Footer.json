@@ -1,7 +1,7 @@
 [
   {
-    "id": "footer.description",
+    "id": "footer.text",
     "description": "Footer description",
-    "defaultMessage": "Copyright @ 2017 GreyOrange Pte Ltd"
+    "defaultMessage": "Copyright @ {dtYear} GreyOrange Pte Ltd"
   }
 ]

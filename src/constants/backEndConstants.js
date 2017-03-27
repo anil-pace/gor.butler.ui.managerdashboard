@@ -302,3 +302,16 @@ export const  roleDesc= defineMessages({
         defaultMessage: "Grant access to the Operator Interface at each Pick Put Station in the Butler system"  
     }
 });
+export const  pwdDesc= defineMessages({
+    
+    butler_supervisor:{
+        id: 'pwdDesc.butler_supervisor',
+        description: 'Text for password description of manager',
+        defaultMessage: "A password of at least 8 alphanumeric characters will be required for logging into the Management Interface and Operator Interface."  
+    },
+    butler_ui:{
+        id: 'pwdDesc.butler_ui',
+        description: 'Text for password description of operator',
+        defaultMessage: "A password of 6 digits will be required for logging into the Operator Interface."  
+    }
+});

@@ -122,7 +122,6 @@ export const RESUME_OPERATION = "RESUME_OPERATION";
 export const CHECK_SAFETY = "CHECK_SAFETY";
 export const CONFIRM_SAFETY = "CONFIRM_SAFETY";
 export const AUTH_USER = "AUTH_USER";
-export const MODAL_STATUS = "MODAL_STATUS";
 export const SAFETY_MAP = "SAFETY_MAP";
 export const SAFETY_ERROR_MAP = "SAFETY_ERROR_MAP";
 
@@ -429,6 +428,7 @@ export const AUDIT_TASK_ID = "AUDIT TASK ID"
 export const ADD_TOKEN = "add";
 export const ADD_DEFAULT = "addDefault";
 export const SOFT_MANUAL = "soft_manual";
+export const SOFT = "soft";
 export const HARD = "hard";
 //backend sort
 export const sortAuditHead = {"startTime":"&order_by=start_actual_time", 
@@ -442,3 +442,6 @@ export const sortOrderHead = {"recievedTime":"&order_by=create_time",
 							  "id":"&order_by=order_id",
                   			  "status":"&order_by=warehouse_status&order_by_seq=['breached','exception','not_fulfillable','abandoned','temporary_unfulfillable','pending','fulfillable','cancelled','completed']"};
 
+//constants for modal handling
+export const MODAL_STATUS = "MODAL_STATUS";
+export const SET_MODAL_KEY = "SET_MODAL_KEY";

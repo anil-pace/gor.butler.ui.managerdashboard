@@ -9,14 +9,14 @@ import {BUTLER_SUPERVISOR,BUTLER_UI} from '../../constants/backEndConstants';
 import {TYPE_SUCCESS} from '../../constants/messageConstants';
 import {ROLE_URL,HEADER_URL} from '../../constants/configConstants';
 import FieldError from '../../components/fielderror/fielderror';
-import RoleGroup from './roleGroup';
+import UserRoles from './userRoles';
 import { nameStatus, passwordStatus } from '../../utilities/fieldCheck';
 
 class EditUser extends React.Component{
   constructor(props) 
   {
       super(props);  
-      this.state={pwdView:0}
+      this.state={pwdView:false}
   }
   componentDidMount(){
         let userData={
@@ -47,18 +47,17 @@ class EditUser extends React.Component{
       return nameInfo.type;
   }
   _handleAnchorClick(){
-    this.setState({pwdView:1});
+    this.setState({pwdView:true});
   }
   _checkPwd(){
-    let pswd=this.pswd.value,confirmPswd=this.confirmPswd.value, givenRole,passwordInfo, roleSelected, 
-    roleSupervisor=this._getId(BUTLER_SUPERVISOR);
-    givenRole=this._getId(this.props.roleName);
+    let pswd=this.pswd.value,confirmPswd=this.confirmPswd.value, givenRole,passwordInfo, roleSelected;
+    givenRole=this.props.roleName;
     roleSelected=this.props.roleSet?this.props.roleSet:givenRole;
     if(roleSelected!=givenRole)
     {
-      this.setState({pwdView:1});
+      this.setState({pwdView:true});
     }
-    passwordInfo=passwordStatus(pswd,confirmPswd,roleSelected,roleSupervisor);   
+    passwordInfo=passwordStatus(pswd,confirmPswd,roleSelected);   
     this.props.validatePassword(passwordInfo);
     return passwordInfo.type;
   }
@@ -88,9 +87,9 @@ class EditUser extends React.Component{
         }
         givenRole=this._getId(this.props.roleName);
 
-        role=this.props.roleSet?this.props.roleSet:givenRole;
+        role=this.props.roleSet?this._getId(this.props.roleSet):givenRole;
 
-        if(!pswd&&!confirmPswd&&role==givenRole)
+        if(!pswd&&!confirmPswd&&(role === givenRole||this.props.roleSet !== BUTLER_SUPERVISOR))
         {
           pswd="__unchanged__";
           confirmPswd="__unchanged__";
@@ -163,7 +162,7 @@ class EditUser extends React.Component{
 
               </div>
            
-            {this.props.roleInfo.length? (<RoleGroup roleInfo={this.props.roleInfo} roleName={this.props.roleName} />):''}
+            {this.props.roleInfo.length? (<UserRoles roleInfo={this.props.roleInfo} roleName={this.props.roleName} />):''}
 
             <div className='gor-usr-details'>
             

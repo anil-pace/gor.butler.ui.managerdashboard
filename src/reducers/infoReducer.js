@@ -1,8 +1,8 @@
 import {ID_DATA,NAME_DATA,PASSWORD_DATA,INFO_RESET,ERROR,SUCCESS,INFO,HIDE,
   NOTIFY_PASS,NOTIFY_HIDE,NOTIFY_FAIL,NOTIFY_INFO,PASS_DATA,ID_MAP,SET_ROLE,
   NOTIFY_DELETE,DELETION,GOR_PASS,GOR_FAIL,GOR_INFO,TICK_WHITE,REMOVE_ICON,
-  ERROR_WHITE,LOGIN_ERROR,SKU_DATA,LOC_DATA,MODAL_STATUS,SAFETY_MAP,SAFETY_ERROR_MAP
-} from '../constants/frontEndConstants';
+  ERROR_WHITE,LOGIN_ERROR,SKU_DATA,LOC_DATA,MODAL_STATUS,SAFETY_MAP,
+  SAFETY_ERROR_MAP,SET_MODAL_KEY} from '../constants/frontEndConstants';
 
 /**
  * @param  {State Object}
@@ -51,6 +51,7 @@ export  function appInfo(state={},action){
             "loginInfo":null,
             "roleSet":null,
             "hideModal":null,
+            "roleInfo":[],
             "safetyErrorList":[]
           })
           break;
@@ -153,6 +154,14 @@ export  function appInfo(state={},action){
     case SAFETY_ERROR_MAP:
           return Object.assign({},state,{
             "safetyErrorList":action.data
+          });
+          break;    
+
+    case SET_MODAL_KEY:
+          var key = action.data, newKey;
+          newKey = (key+1)%2;
+          return Object.assign({},state,{
+            "activeModalKey":newKey
           });
           break;    
     default:

@@ -10,7 +10,21 @@
     border-radius:3px;
     cursor:pointer;
 }
-
+.gor-select-field{
+    height: 35px;
+    width: 40%;
+}
+.gor-role-details{
+    margin-top:20px;
+}
+.gor-role-heading{
+    font-weight:bold;
+    font-size: 14px;
+}
+.gor-role-label{
+    display: inline-block;
+    width: 88%;
+}
 .gor-resolve-button {
     font-family: 'Source Sans Pro Bold', sans-serif;
     width: 113px;
