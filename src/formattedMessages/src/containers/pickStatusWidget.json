@@ -50,11 +50,6 @@
     "defaultMessage": "{count_risk} {count_risk, plural, one {order} other {orders}} at risk"
   },
   {
-    "id": "widget.pick.offline",
-    "description": "Message for system offline",
-    "defaultMessage": "Offline"
-  },
-  {
     "id": "widget.pick.emergency",
     "description": "Message for system in emergency state",
     "defaultMessage": "--"
@@ -68,5 +63,10 @@
     "id": "widget.pick.lowright.emergency",
     "description": "Estimated time",
     "defaultMessage": "Estimated to complete in --"
+  },
+  {
+    "id": "widget.pick.offline",
+    "description": "Message for system offline",
+    "defaultMessage": "Offline"
   }
 ]
