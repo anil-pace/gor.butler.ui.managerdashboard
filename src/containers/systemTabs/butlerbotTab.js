@@ -177,6 +177,7 @@ class ButlerBot extends React.Component{
     	super(props);
     }	
 	render(){
+  let updateStatusIntl="";
   var itemNumber = 6;
   var butlerData, avgVoltage =0;
   var taskDetail = {"Put":0, "Pick":0, "Charging":0, "Idle":0,"Audit":0, 
@@ -234,7 +235,11 @@ class ButlerBot extends React.Component{
                             getButlerFilter = {this.props.butlerFilter}
                             showFilter={this.props.showFilter}
                             isFilterApplied={this.props.isFilterApplied}
-                            setFilter={this.props.showTableFilter}/>
+                            setFilter={this.props.showTableFilter}
+                            
+                            lastUpdatedText={updateStatusIntl} 
+                            lastUpdated={updateStatusIntl}
+                            />
 					</div>
 				</div>
 			</div>

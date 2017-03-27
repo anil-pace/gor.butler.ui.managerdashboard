@@ -10,6 +10,11 @@
     "defaultMessage": "Charging Stations"
   },
   {
+    "id": "order.table.filterLabel",
+    "description": "button label for filter",
+    "defaultMessage": "Filter data"
+  },
+  {
     "id": "ChargingStationsTable.stationID.heading",
     "description": "StationID heading",
     "defaultMessage": "STATION ID"

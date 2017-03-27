@@ -2,6 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 
+
 class Filter extends React.Component{
 	constructor(props) 
 	{
@@ -20,6 +21,9 @@ class Filter extends React.Component{
     _submitFilterForm() {
         this.props.formSubmit();
     }
+    
+
+
 	render(){
 		return (
 			<div>
@@ -45,10 +49,18 @@ class Filter extends React.Component{
     	                 	<div className="gor-filter-body-filterToken-section1">
     	                 		{this.props.filterTokenC2}
     	                 	</div>
+                            <div className="gor-filter-body-filterToken-section1">
+                                {this.props.filterTokenC3}
+                            </div>
+                            <div className="gor-filter-body-filterToken-section1">
+                                {this.props.filterTokenC4}
+                            </div>
     	                 </div>
     	                 <div className="gor-filter-body-slider-wrap"> 
-    	                 	
-    	                 </div>
+    	                 	 
+                        
+                        </div>
+    	                 
                      </div>
                  <div className="gor-filter-footer"> 
                  	<span className="gor-filter-footer-h2" onClick={this._resetFilter.bind(this)}>

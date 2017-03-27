@@ -10,7 +10,7 @@ import { defineMessages } from 'react-intl';
 import { waveHeaderSort,waveHeaderSortOrder,waveFilterDetail } from '../../actions/sortHeaderActions';
 import {INITIAL_HEADER_SORT,INITIAL_HEADER_ORDER} from '../../constants/frontEndConstants';
 import {getDaysDiff} from '../../utilities/getDaysDiff';
-
+import {showTableFilter,filterApplied} from '../../actions/filterAction';
 
 //Mesages for internationalization
 const messages = defineMessages({
@@ -21,7 +21,6 @@ const messages = defineMessages({
 
 
 });
-
 
 
 
@@ -106,11 +105,16 @@ class WaveTab extends React.Component{
   return waveData;
 }
 
+refresh = () => {
+console.log('Refresh');
+}
+
   constructor(props) 
   {
    super(props);
  }  
  render(){
+  var updateStatusIntl="";
   var itemNumber = 7, waveData = this.props.waveDetail.waveData, waveState = {"pendingWave":"--", "progressWave":"--", "orderRemaining":"--", "completedWaves":"--", "totalOrders":"--"}; 
   var totalOrders = 0, orderToFulfill = 0, completedWaves = 0, pendingWaves = 0, progressWave = 0, alertNum = 0 ;
 
@@ -153,7 +157,14 @@ return (
             currentSortState={this.props.waveSortHeader} 
             currentHeaderOrder={this.props.waveSortHeaderState}
             setWaveFilter={this.props.waveFilterDetail}
-            getWaveFilter = {this.props.waveFilter}/>
+            getWaveFilter = {this.props.waveFilter}
+            lastUpdatedText={updateStatusIntl}
+            lastUpdated={updateStatusIntl}
+            refreshOption={this.refresh.bind(this)} 
+            isFilterApplied={this.props.isFilterApplied}
+            showFilter={this.props.showFilter}
+            setFilter={this.props.showTableFilter} 
+            />
 </div>
 );
 }
@@ -171,7 +182,9 @@ function mapStateToProps(state, ownProps){
     intlMessages: state.intl.messages,
     timeOffset: state.authLogin.timeOffset,
     waveDetail: state.waveInfo || {},
-    intlMessages: state.intl.messages
+    intlMessages: state.intl.messages,
+
+    showFilter: state.filterInfo.filterState || false
   };
 };
 
@@ -180,7 +193,9 @@ var mapDispatchToProps = function(dispatch){
     waveFilterDetail: function(data){dispatch(waveFilterDetail(data))},
     setWavesSpinner: function(data){dispatch(setWavesSpinner(data))},
     waveHeaderSort: function(data){dispatch(waveHeaderSort(data))},
-    waveHeaderSortOrder: function(data){dispatch(waveHeaderSortOrder(data))}
+    waveHeaderSortOrder: function(data){dispatch(waveHeaderSortOrder(data))},
+
+     showTableFilter: function(data){dispatch(showTableFilter(data));}
   };
 }
 

@@ -22,6 +22,8 @@ class Header extends React.Component{
     	if(dropdownFlag === 0) {
     		temp="dropdown-content"; 
     	}
+      this.setDropdown = this.setDropdown.bind(this);
+      this.state = {showDropdown: false}
     	
     	 
     }
@@ -42,6 +44,10 @@ class Header extends React.Component{
     	dropdownFlag = 1;
     	temp="dropdown-content-afterClick";
 
+    }
+    setDropdown() {
+      this.setState({showDropdown:!this.state.showDropdown});
+      console.log(this.state.showDropdown)
     }
 
    addModal() {
@@ -152,7 +158,7 @@ class Header extends React.Component{
 				<HamBurger data={menuDetails} />
 				<div className="gor-border"/>
 				<div className="dropdown" id="profile"  >
-					<div  className="dropbtn" onClick={this.openDropdown}>
+					<div  className="dropbtn" onClick={this.setDropdown}>
 						<div className="block">
 							<div className="upperTextClient truncate">
 								{
@@ -167,15 +173,16 @@ class Header extends React.Component{
 							
 						</div>
 
-						<div id="myDropdown" className="dropdown-content">
-							<div className="horizontalDiv">	
-							</div>
-							<div>
-								<a href="javascript:void(0)" onClick={this.addModal.bind(this)}><FormattedMessage id='header.logout' 
-                        defaultMessage="Logout" description="Text for logout"/></a>
-							</div>
-						</div>
+						
 					</div>
+          {this.state.showDropdown?<div id="myDropdown" className="dropdown-content">
+              <div className="horizontalDiv"> 
+              </div>
+              <div>
+                <a href="javascript:void(0)" onClick={this.addModal.bind(this)}><FormattedMessage id='header.logout' 
+                        defaultMessage="Logout" description="Text for logout"/></a>
+              </div>
+            </div>:""}
 				</div>
 			</div>
 		</header>

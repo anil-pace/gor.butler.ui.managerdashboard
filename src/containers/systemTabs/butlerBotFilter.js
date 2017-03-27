@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
-import {socketDataSubscription} from '../../actions/socketActions';
 class ButlerBotFilter extends React.Component{
 	constructor(props) 
 	{
@@ -85,6 +84,7 @@ class ButlerBotFilter extends React.Component{
       this.props.socketDataSubscription(updatedWsSubscription);
       this.props.filterApplied(!this.props.isFilterApplied);
     }
+
     _clearFilter() {
         var clearState = {}, clearFilterParam = this.props.wsSubscriptionData;
         this.setState({tokenSelected: {"STATUS":["any"], "MODE":["any"]}, searchQuery: {}});
@@ -119,7 +119,6 @@ function mapStateToProps(state, ownProps){
     wsSubscriptionData:state.recieveSocketActions.socketDataSubscriptionPacket,
     filterState: state.filterInfo.butlerFilterState,
     isFilterApplied: state.filterInfo.isFilterApplied || false
-    
   };
 }
 

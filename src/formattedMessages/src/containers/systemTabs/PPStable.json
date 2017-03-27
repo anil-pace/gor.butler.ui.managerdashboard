@@ -35,6 +35,11 @@
     "defaultMessage": "{selected} selected"
   },
   {
+    "id": "order.table.filterLabel",
+    "description": "button label for filter",
+    "defaultMessage": "Filter data"
+  },
+  {
     "id": "PPStable.ppsColumn.heading",
     "description": "PPS - column Heading",
     "defaultMessage": "PPS"
