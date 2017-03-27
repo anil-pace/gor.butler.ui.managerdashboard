@@ -27,7 +27,7 @@ class SafetyChecklist extends React.Component{
     this.props.removeModal();
   }
   componentWillReceiveProps(nextProps){
-    if(!nextProps.auth_token||!nextProps.system_emergency)
+    if(!nextProps.auth_token||!nextProps.system_emergency||nextProps.activeModalKey !== this.props.activeModalKey)
     {
       this._removeThisModal();
     }
@@ -206,7 +206,8 @@ function mapStateToProps(state, ownProps){
       auth_token:state.authLogin.auth_token,
       modalStatus: state.appInfo.hideModal || false,
       safetySpinner:state.spinner.safetySpinner || false,
-      system_emergency:state.tabsData.system_emergency||false 
+      system_emergency:state.tabsData.system_emergency||false,
+      activeModalKey: state.appInfo.activeModalKey || 0 
   };
 }
 var mapDispatchToProps = function(dispatch){
@@ -223,6 +224,8 @@ SafetyChecklist.propTypes={
       checkList:React.PropTypes.array,
       safetyErrorList:React.PropTypes.array,
       safetySpinner:React.PropTypes.bool,
+      system_emergency:React.PropTypes.bool,
+      activeModalKey:React.PropTypes.number,
       userRequest:React.PropTypes.func,
       setSafetySpinner:React.PropTypes.func,
       resetForm:React.PropTypes.func

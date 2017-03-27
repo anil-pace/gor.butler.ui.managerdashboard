@@ -6,6 +6,7 @@ import {userRequest} from '../../actions/userActions';
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
 import {AUTH_LOGIN,ERROR,TYPING,APP_JSON,POST,SUCCESS} from '../../constants/frontEndConstants';
 import ResumeOperation from './resumeOperation'; 
+import {switchModalKey} from '../../actions/validationActions';
 
 class EmergencyRelease extends React.Component{
   constructor(props) 
@@ -16,12 +17,13 @@ class EmergencyRelease extends React.Component{
       this.props.removeModal();
   }
   componentWillReceiveProps(nextProps){
-    if(!nextProps.auth_token)
+    if(!nextProps.auth_token||nextProps.activeModalKey !== this.props.activeModalKey)
     {
       this._removeThisModal();
     }
   }
   _resumeOperation(){
+    this.props.switchModalKey(this.props.activeModalKey);
     this._removeThisModal();
     modal.add(ResumeOperation, {
       title: '',
@@ -65,16 +67,19 @@ class EmergencyRelease extends React.Component{
  function mapStateToProps(state, ownProps){
   return  {
       auth_token:state.authLogin.auth_token,
+      activeModalKey: state.appInfo.activeModalKey || 0
     }
 } 
 function mapDispatchToProps(dispatch){
     return {
       userRequest: function(data){ dispatch(userRequest(data)); },
+      switchModalKey:function(data){dispatch(switchModalKey(data))}
     }
 };
 
 EmergencyRelease.propTypes={
-      auth_token:React.PropTypes.string, 
+      auth_token:React.PropTypes.string,
+      activeModalKey:React.PropTypes.number, 
       userRequest:React.PropTypes.func
 }
 

@@ -9,6 +9,7 @@ import { emptyField } from '../../utilities/fieldCheck';
 import {LOGIN_URL} from '../../constants/configConstants';
 import {ERROR,TYPING,APP_JSON,POST,SUCCESS,RESUME_OPERATION} from '../../constants/frontEndConstants';
 import SafetyChecklist from './safetyChecklist';
+import {switchModalKey} from '../../actions/validationActions';
 
 class ResumeOperation extends React.Component{
   constructor(props) 
@@ -30,11 +31,12 @@ class ResumeOperation extends React.Component{
           return loginPassInfo.type;    
   }
   componentWillReceiveProps(nextProps){
-    if(!nextProps.auth_token||!nextProps.system_emergency)
+    if(!nextProps.auth_token||!nextProps.system_emergency||nextProps.activeModalKey !== this.props.activeModalKey)
     {
       this._removeThisModal();
     }
     if(nextProps.modalStatus && !this.props.modalStatus){
+      this.props.switchModalKey(this.props.activeModalKey);
       this._removeThisModal();
       modal.add(SafetyChecklist, {
       title: '',
@@ -110,14 +112,16 @@ class ResumeOperation extends React.Component{
       username:state.authLogin.username,      
       passwordCheck: state.appInfo.passwordInfo||{},
       modalStatus: state.appInfo.hideModal || false,
-      system_emergency:state.tabsData.system_emergency||false 
+      system_emergency:state.tabsData.system_emergency||false,
+      activeModalKey: state.appInfo.activeModalKey || 0       
     }
 } 
 function mapDispatchToProps(dispatch){
     return {
       userRequest: function(data){ dispatch(userRequest(data)); },
       validatePass: function(data){ dispatch(validatePassword(data)); },  
-      resetForm:   function(){ dispatch(resetForm()); }                  
+      resetForm:   function(){ dispatch(resetForm()); },
+      switchModalKey:function(data){dispatch(switchModalKey(data))}                    
     }
 };
 ResumeOperation.propTypes={
@@ -125,6 +129,8 @@ ResumeOperation.propTypes={
       username:React.PropTypes.string,
       passwordCheck:React.PropTypes.object,
       modalStatus:React.PropTypes.bool,
+      system_emergency:React.PropTypes.bool,
+      activeModalKey:React.PropTypes.number,      
       userRequest:React.PropTypes.func,
       validatePass:React.PropTypes.func,
       resetForm:React.PropTypes.func

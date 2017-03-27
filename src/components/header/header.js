@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import HamBurger from '../hamburger/hamburger';
 import PauseOperation from '../../containers/emergencyProcess/pauseOperation'; 
 import ResumeOperation from '../../containers/emergencyProcess/resumeOperation'; 
+import {switchModalKey} from '../../actions/validationActions';
 
 var dropdownFlag=0;
 var temp;
@@ -56,6 +57,7 @@ class Header extends React.Component{
    }
    _showModal(modalComponent)
    {
+      this.props.switchModalKey(this.props.activeModalKey);
     	modal.add(modalComponent, {
       	title: '',
       	size: 'large', // large, medium or small,
@@ -198,7 +200,8 @@ function mapStateToProps(state,ownProps) {
   username:state.authLogin.username,
   system_emergency:state.tabsData.system_emergency||null,
   system_status:state.tabsData.status||null,
-  system_data:state.tabsData.system_data||null
+  system_data:state.tabsData.system_data||null,
+  activeModalKey: state.appInfo.activeModalKey || 0
  }
 } 
 /**
@@ -206,7 +209,8 @@ function mapStateToProps(state,ownProps) {
  */
 function mapDispatchToProps(dispatch){
     return {
-        getHeaderInfo: function(data){ dispatch(getHeaderInfo(data)); }
+        getHeaderInfo: function(data){ dispatch(getHeaderInfo(data)); },
+        switchModalKey:function(data){dispatch(switchModalKey(data))}
     }
 };
 

@@ -28,7 +28,7 @@ class PauseOperation extends React.Component{
           return loginPassInfo.type;    
   }
   componentWillReceiveProps(nextProps){
-    if(!nextProps.auth_token)
+    if(!nextProps.auth_token||nextProps.activeModalKey !== this.props.activeModalKey)
     {
       this._removeThisModal();
     }
@@ -101,7 +101,8 @@ class PauseOperation extends React.Component{
       auth_token:state.authLogin.auth_token,
       username:state.authLogin.username,
       passwordCheck: state.appInfo.passwordInfo||{},
-      modalStatus: state.appInfo.hideModal || false
+      modalStatus: state.appInfo.hideModal || false,
+      activeModalKey: state.appInfo.activeModalKey || 0
     }
 } 
 function mapDispatchToProps(dispatch){
@@ -116,6 +117,7 @@ PauseOperation.propTypes={
       username:React.PropTypes.string,
       passwordCheck:React.PropTypes.object,
       modalStatus:React.PropTypes.bool,
+      activeModalKey:React.PropTypes.number,      
       userRequest:React.PropTypes.func,
       validatePass:React.PropTypes.func,
       resetForm:React.PropTypes.func
