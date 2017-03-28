@@ -108,8 +108,8 @@ class PPS extends React.Component{
 }
 	render(){	
 let updateStatusIntl="";
-	var operationMode = {"pick":0, "put":0, "audit":0,"notSet":0};
-    var data , operatorNum = 0, itemNumber = 5, ppsOn = 0, avgThroughput=0;
+	let operationMode = {"pick":0, "put":0, "audit":0,"notSet":0};
+    let data , operatorNum = 0, itemNumber = 5, ppsOn = 0, avgThroughput=0;
     if(this.props.PPSDetail.PPStypeDetail !== undefined) {
     	data = this._processPPSData();
       for (var i = data.length - 1; i >= 0; i--) {
@@ -157,7 +157,7 @@ let updateStatusIntl="";
              setPpsFilter={this.props.ppsFilterDetail}
              getPpsFilter = {this.props.ppsFilter}
              avgThroughput = {avgThroughput}
-
+            ppsFilterState={this.props.ppsFilterState}
              isFilterApplied={this.props.isFilterApplied}
              lastUpdatedText={updateStatusIntl}
              lastUpdated={updateStatusIntl}
@@ -183,6 +183,8 @@ function mapStateToProps(state, ownProps){
     ppsSpinner: state.spinner.ppsSpinner || false,
     PPSDetail: state.PPSDetail || [],
     intlMessages: state.intl.messages,
+    showFilter: state.filterInfo.filterState || false,
+    ppsFilterState:state.filterInfo.ppsFilterState|| false,
     showFilter: state.filterInfo.filterState || false
   };
 }

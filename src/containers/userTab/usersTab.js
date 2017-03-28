@@ -144,6 +144,7 @@ class UsersTab extends React.Component{
                            setUserFilter={this.props.userFilterDetail}
                            getUserFilter = {this.props.userFilter}
 
+                            userFilterStatus={this.props.userFilterStatus}
                             isFilterApplied={this.props.isFilterApplied}
                             lastUpdatedText={updateStatusIntl}
                             lastUpdated={updateStatusIntl}
@@ -166,7 +167,9 @@ function mapStateToProps(state, ownProps){
     manager:state.headerData.headerInfo||[],
     userSortHeader: state.sortHeaderState.userHeaderSort || "role" ,
     userSortHeaderState: state.sortHeaderState.userHeaderSortOrder || INITIAL_HEADER_ORDER,
-     showFilter: state.filterInfo.filterState || false
+    showFilter: state.filterInfo.filterState || false,
+    isFilterApplied: state.filterInfo.isFilterApplied || false,
+    userFilterStatus:state.filterInfo.userFilterStatus|| false
 
   };
 }
@@ -176,7 +179,8 @@ var mapDispatchToProps = function(dispatch){
     userFilterDetail: function(data){dispatch(userFilterDetail(data))},
     userHeaderSort: function(data){dispatch(userHeaderSort(data))},
     userHeaderSortOrder: function(data){dispatch(userHeaderSortOrder(data))},
-     showTableFilter: function(data){dispatch(showTableFilter(data));}
+    showTableFilter: function(data){dispatch(showTableFilter(data));},
+    filterApplied: function(data){dispatch(filterApplied(data));}
   };
 }
 

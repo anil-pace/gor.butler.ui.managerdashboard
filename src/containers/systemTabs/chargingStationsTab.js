@@ -113,7 +113,7 @@ class ChargingStations extends React.Component{
                                    currentHeaderOrder={this.props.csSortHeaderState}
                                    setCsFilter={this.props.csFilterDetail}
                                    getCsFilter = {this.props.csFilter}
-
+                                    chargingFilterStatus={this.props.chargingFilterStatus}
                                    isFilterApplied={this.props.isFilterApplied}
                                    lastUpdatedText={updateStatusIntl}
                                     lastUpdated={updateStatusIntl}
@@ -137,8 +137,9 @@ function mapStateToProps(state, ownProps){
     csSpinner: state.spinner.csSpinner || false,
     chargersDetail: state.chargersDetail || [],
     intlMessages: state.intl.messages,
-
-    showFilter: state.filterInfo.filterState || false
+    showFilter: state.filterInfo.filterState || false,
+     isFilterApplied: state.filterInfo.isFilterApplied || false,
+    chargingFilterStatus:state.filterInfo.chargingFilterStatus|| false
   };
 }
 
@@ -148,7 +149,8 @@ var mapDispatchToProps = function(dispatch){
     setCsSpinner: function(data){ dispatch(setCsSpinner(data));},
     csHeaderSort: function(data){dispatch(csHeaderSort(data))},
     csHeaderSortOrder: function(data){dispatch(csHeaderSortOrder(data))},
-    showTableFilter: function(data){dispatch(showTableFilter(data));}
+    showTableFilter: function(data){dispatch(showTableFilter(data));},
+    filterApplied: function(data){dispatch(filterApplied(data));}
     
   };
 }

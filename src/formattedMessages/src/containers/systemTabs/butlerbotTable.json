@@ -12,7 +12,7 @@
   {
     "id": "order.table.filterLabel",
     "description": "button label for filter",
-    "defaultMessage": "Filterdata"
+    "defaultMessage": "Filter data"
   },
   {
     "id": "ButlerBotTable.TotalBot",

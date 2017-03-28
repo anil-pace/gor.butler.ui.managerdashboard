@@ -182,7 +182,7 @@ class WavesTable extends React.Component {
         <div className="gor-button-wrap">
         <div className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
           
-        <button className={this.props.isFilterApplied?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
+        <button className={this.props.waveFilterStatus?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
           <div className="gor-manage-task"/>
           <FormattedMessage id="order.table.filterLabel" description="button label for filter" 
           defaultMessage ="Filter data"/>

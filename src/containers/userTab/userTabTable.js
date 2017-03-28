@@ -195,16 +195,16 @@ class UserDataTable extends React.Component {
   render() {
     let updateStatusIntl="";
     let filterHeight = screen.height-190-50;
-    var {sortedDataList, colSortDirs,columnWidths} = this.state;
-    var columnWidth= (this.props.containerWidth/this.props.itemNumber);
-    var heightRes = 560 ,rowsCount = sortedDataList.getSize() ;
+    let {sortedDataList, colSortDirs,columnWidths} = this.state;
+    let columnWidth= (this.props.containerWidth/this.props.itemNumber);
+    let heightRes = 560 ,rowsCount = sortedDataList.getSize() ;
     if(this.props.containerHeight !== 0) {
       heightRes = this.props.containerHeight;
     }
     var selEdit = this.handleEdit.bind(this);
-    var selDel= this.handleDel.bind(this); 
-    var containerHeight = this.props.containerHeight;
-    var noData = <div/>;
+    let selDel= this.handleDel.bind(this); 
+    let containerHeight = this.props.containerHeight;
+    let noData = <div/>;
     if(rowsCount === 0 || rowsCount === undefined || rowsCount === null) {
      noData =  <div className="gor-no-data"> <FormattedMessage id="user.table.noData" description="No data message for user table" 
         defaultMessage ="No User Found"/>  </div>
@@ -237,7 +237,7 @@ class UserDataTable extends React.Component {
         <div className="gorToolBarDropDown">
         <div className="gor-button-wrap">
         <div className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
-        <button className={this.props.isFilterApplied?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
+        <button className={this.props.userFilterStatus?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
           <div className="gor-manage-task"/>
           <FormattedMessage id="order.table.filterLabel" description="button label for filter" 
           defaultMessage ="Filter data"/>

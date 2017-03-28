@@ -235,9 +235,10 @@ class ButlerBot extends React.Component{
                             showFilter={this.props.showFilter}
                             isFilterApplied={this.props.isFilterApplied}
                             setFilter={this.props.showTableFilter}
-                            
+                            botFilterStatus={this.props.botFilterStatus}
                             lastUpdatedText={updateStatusIntl} 
                             lastUpdated={updateStatusIntl}
+                            butlerState={this.props.filterState}
                             />
 					</div>
 				</div>
@@ -257,6 +258,8 @@ function mapStateToProps(state, ownProps){
     intlMessages: state.intl.messages,
     showFilter: state.filterInfo.filterState || false,
     isFilterApplied: state.filterInfo.isFilterApplied || false,
+    botFilterStatus:state.filterInfo.botFilterStatus|| false,
+    filterState: state.filterInfo.butlerFilterState
   };
 }
 

@@ -2,36 +2,37 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
-import {showTableFilter,filterApplied} from '../../actions/filterAction';
+import {showTableFilter,filterApplied,userfilterState,toggleUesrFilter} from '../../actions/filterAction';
+import {socketDataSubscription} from '../../actions/socketActions';
 import { connect } from 'react-redux'; 
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
 class UserFilter extends React.Component{
-	constructor(props) 
-	{
-    	super(props);
+    constructor(props) 
+    {
+        super(props);
         this.state = {tokenSelected: {"STATUS":["all"], "ROLE":["all"], "WORK MODE":["all"],"LOCATION":["all"]}, searchQuery: {},
                       defaultToken: {"STATUS":["all"], "ROLE":["all"], "WORK MODE":["all"],"LOCATION":["all"]}}; 
     }
 
     _closeFilter() {
-        var filterState = !this.props.showFilter;
+        let filterState = !this.props.showFilter;
         this.props.showTableFilter(filterState);
-    }	
+    }   
 
-    _processAuditSearchField(){
+    _processUserSearchField(){
         const filterInputFields = [{value:"USER NAME", label:<FormattedMessage id="user.inputField.id" defaultMessage ="USER NAME"/>}];
-        var inputValue = this.state.searchQuery;
-        var inputField = <FilterInputFieldWrap inputText={filterInputFields} handleInputText={this._handleInputQuery.bind(this)} inputValue={inputValue}/>
+        let inputValue = this.state.searchQuery;
+        let inputField = <FilterInputFieldWrap inputText={filterInputFields} handleInputText={this._handleInputQuery.bind(this)} inputValue={inputValue}/>
         return inputField;           
     }
  
     _processFilterToken() {
-        var tokenStatus = {value:"status", label:<FormattedMessage id="user.tokenfield.status" defaultMessage ="STATUS"/>};
-        var tokenRole = {value:"role", label:<FormattedMessage id="user.tokenfield.role" defaultMessage ="ROLE"/>}; 
-        var tokenWorkMode = {value:"workmode", label:<FormattedMessage id="user.tokenfield.mode" defaultMessage ="WORK MODE"/>};
-        var tokenLocation = {value:"location", label:<FormattedMessage id="user.tokenfield.location" defaultMessage ="LOCATION"/>}; 
+        let tokenStatus = {value:"STATUS", label:<FormattedMessage id="user.tokenfield.status" defaultMessage ="STATUS"/>};
+        let tokenRole = {value:"ROLE", label:<FormattedMessage id="user.tokenfield.role" defaultMessage ="ROLE"/>}; 
+        let tokenWorkMode = {value:"WORK MODE", label:<FormattedMessage id="user.tokenfield.mode" defaultMessage ="WORK MODE"/>};
+        let tokenLocation = {value:"LOCATION", label:<FormattedMessage id="user.tokenfield.location" defaultMessage ="LOCATION"/>}; 
         const labelC1 = [
                     { value: 'all', label:<FormattedMessage id="user.status.all" defaultMessage ="Any"/> },
                     { value: 'online', label:<FormattedMessage id="user.status.online" defaultMessage ="Online"/> },
@@ -62,13 +63,13 @@ class UserFilter extends React.Component{
                     { value: 'headoffice', label:<FormattedMessage id="user.location.resolved" defaultMessage ="Head Office"/> }                  
                     ];    
                           
-        var selectedToken =  this.state.tokenSelected;
-        var column1 = <FilterTokenWrap field={tokenStatus} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC1} selectedToken={selectedToken}/>;
-        var column2 = <FilterTokenWrap field={tokenRole} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC2} selectedToken={selectedToken}/>;
-        var column3 = <FilterTokenWrap field={tokenWorkMode} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC3} selectedToken={selectedToken}/>;
-        var column4 = <FilterTokenWrap field={tokenLocation} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC4} selectedToken={selectedToken}/>;
+        let selectedToken =  this.state.tokenSelected;
+        let column1 = <FilterTokenWrap field={tokenStatus} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC1} selectedToken={selectedToken}/>;
+        let column2 = <FilterTokenWrap field={tokenRole} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC2} selectedToken={selectedToken}/>;
+        let column3 = <FilterTokenWrap field={tokenWorkMode} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC3} selectedToken={selectedToken}/>;
+        let column4 = <FilterTokenWrap field={tokenLocation} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC4} selectedToken={selectedToken}/>;
         
-        var columnDetail = {column1token:column1, column2token:column2,column3token:column3, column4token:column4};
+        let columnDetail = {column1token:column1, column2token:column2,column3token:column3, column4token:column4};
         return columnDetail;
     }
 
@@ -81,22 +82,42 @@ class UserFilter extends React.Component{
     }
 
     _applyFilter() {
-      this.props.refreshOption(this.state);
+        let filterSubsData = {}, filterState = this.state;
+      if(filterState.searchQuery) {
+        (filterState.searchQuery["USER NAME"]?filterSubsData["user_name"] = ['contains',filterState.searchQuery["USER NAME"]]:"");
+      }
+      if(filterState.tokenSelected) {
+        (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0]!=="all"?filterSubsData["status"] = ['in',filterState.tokenSelected["STATUS"]]:"");
+        (filterState.tokenSelected["ROLE"] && filterState.tokenSelected["ROLE"][0]!=="all"?filterSubsData["role"] = ['in',filterState.tokenSelected["ROLE"]]:"");
+        (filterState.tokenSelected["WORK MODE"] && filterState.tokenSelected["WORK MODE"][0]!=="all"?filterSubsData["pps_mode"] = ['in',filterState.tokenSelected["WORK MODE"]]:"");
+       // (filterState.tokenSelected["LOCATION"] && filterState.tokenSelected["LOCATION"][0]!=="all"?filterSubsData["seat_type"] = ['in',filterState.tokenSelected["LOCATION"]]:"");
+      }
+      let updatedWsSubscription = this.props.wsSubscriptionData;
+      updatedWsSubscription["users"].data[0].details["filter_params"] = filterSubsData;
+      this.props.userfilterState(filterState);
+      this.props.socketDataSubscription(updatedWsSubscription);
+      this.props.filterApplied(!this.props.isFilterApplied);
+      this.props.toggleUesrFilter(true);
+
     }
 
     _clearFilter() {
-        var clearState = {};
+         let clearState = {};
+         let updatedWsSubscription = this.props.wsSubscriptionData;
+        updatedWsSubscription["users"].data[0].details["filter_params"] = {};
+        this.props.socketDataSubscription(updatedWsSubscription);
         this.setState({tokenSelected: {"STATUS":["all"], "ROLE":["all"], "WORK MODE":["all"],"LOCATION":["all"]}, searchQuery: {}});
-        this.props.filterApplied(false);
-        this.props.refreshOption(clearState)
+        this.props.userfilterState({tokenSelected: {"STATUS":["all"], "ROLE":["all"], "WORK MODE":["all"],"LOCATION":["all"]}, searchQuery: {}});
+        this.props.filterApplied(!this.props.isFilterApplied);
+        this.props.toggleUesrFilter(false);
     }
 
-	render(){
-        var noOrder = this.props.totalAudits?false:true;
-        var userSearchField = this._processAuditSearchField();
-        var userFilterToken = this._processFilterToken();
-		return (
-			<div>
+    render(){
+        let noOrder = this.props.totalAudits?false:true;
+        let userSearchField = this._processUserSearchField();
+        let userFilterToken = this._processFilterToken();
+        return (
+            <div>
                  <Filter hideFilter={this._closeFilter.bind(this)} 
                          clearFilter={this._clearFilter.bind(this)}
                          searchField={userSearchField}
@@ -109,8 +130,8 @@ class UserFilter extends React.Component{
                          noDataFlag={noOrder}
                          />
             </div>
-		);
-	}
+        );
+    }
 };
 
 
@@ -119,13 +140,21 @@ function mapStateToProps(state, ownProps){
     showFilter: state.filterInfo.filterState || false,
     auditSpinner: state.spinner.auditSpinner || false,
     totalAudits: state.recieveAuditDetail.totalAudits || 0,
+    filterState: state.filterInfo.userfilterState,
+    wsSubscriptionData:state.recieveSocketActions.socketDataSubscriptionPacket,
+     isFilterApplied: state.filterInfo.isFilterApplied || false,
+    userFilterStatus:state.filterInfo.userFilterStatus || false
   };
 }
 
 var mapDispatchToProps = function(dispatch){
   return {
     showTableFilter: function(data){dispatch(showTableFilter(data));},
-    filterApplied: function(data){dispatch(filterApplied(data));}
+    filterApplied: function(data){dispatch(filterApplied(data));},
+    userfilterState: function(data){dispatch(userfilterState(data));},
+    socketDataSubscription: function(data){dispatch(socketDataSubscription(data));},
+    toggleUesrFilter: function(data){dispatch(toggleUesrFilter(data));}
+
   }
 };
 export default connect(mapStateToProps,mapDispatchToProps)(UserFilter) ;

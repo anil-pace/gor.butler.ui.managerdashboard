@@ -21,7 +21,7 @@ class OrderFilter extends React.Component{
         this.props.showTableFilter(false);
     }	
 
-    _processAuditSearchField(){
+    _processOrderSearchField(){
         var filterInputFields = [{value:"ORDER ID", label:<FormattedMessage id="order.inputField.id" defaultMessage ="ORDER ID"/>}];
         var inputValue = this.state.searchQuery;
         var inputField = <FilterInputFieldWrap inputText={filterInputFields} handleInputText={this._handleInputQuery.bind(this)} inputValue={inputValue}/>
@@ -78,15 +78,15 @@ class OrderFilter extends React.Component{
 
 	render(){
         var noOrder = this.props.orderData.totalOrders?false:true;
-        var auditSearchField = this._processAuditSearchField();
-        var auditFilterToken = this._processFilterToken();
+        var orderSearchField = this._processOrderSearchField();
+        var orderFilterToken = this._processFilterToken();
 		return (
 			<div>
                  <Filter hideFilter={this._closeFilter.bind(this)}  // hiding filter wont disturb state
                          clearFilter={this._clearFilter.bind(this)} // clearing sates of filter
-                         searchField={auditSearchField}
-                         filterTokenC1={auditFilterToken.column1token}
-                         filterTokenC2={auditFilterToken.column2token}
+                         searchField={orderSearchField}
+                         filterTokenC1={orderFilterToken.column1token}
+                         filterTokenC2={orderFilterToken.column2token}
                          formSubmit={this._applyFilter.bind(this)} //passing function on submit
                          responseFlag={this.props.orderListSpinner} // used for spinner of button 
                          noDataFlag={noOrder} //messg to show in case of no data

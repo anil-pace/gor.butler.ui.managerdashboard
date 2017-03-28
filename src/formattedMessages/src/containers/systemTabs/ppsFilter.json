@@ -21,23 +21,11 @@
   },
   {
     "id": "pps.STATUS.stopped",
-    "defaultMessage": "Stopped"
+    "defaultMessage": "On"
   },
   {
     "id": "pps.STATUS.error",
-    "defaultMessage": "Error"
-  },
-  {
-    "id": "pps.STATUS.warning",
-    "defaultMessage": "Warning"
-  },
-  {
-    "id": "pps.STATUS.connected",
-    "defaultMessage": "Connected"
-  },
-  {
-    "id": "pps.STATUS.disconnected",
-    "defaultMessage": "Disconnected"
+    "defaultMessage": "Off"
   },
   {
     "id": "pps.MODE.all",
@@ -52,7 +40,7 @@
     "defaultMessage": "Put"
   },
   {
-    "id": "pps.MODE.auditudit",
+    "id": "pps.MODE.audit",
     "defaultMessage": "Audit"
   },
   {

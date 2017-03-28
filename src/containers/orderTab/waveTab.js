@@ -164,6 +164,7 @@ return (
             isFilterApplied={this.props.isFilterApplied}
             showFilter={this.props.showFilter}
             setFilter={this.props.showTableFilter} 
+            waveFilterStatus={this.props.waveFilterStatus}
             />
 </div>
 );
@@ -183,7 +184,7 @@ function mapStateToProps(state, ownProps){
     timeOffset: state.authLogin.timeOffset,
     waveDetail: state.waveInfo || {},
     intlMessages: state.intl.messages,
-
+    waveFilterStatus:state.filterInfo.waveFilterStatus|| false,
     showFilter: state.filterInfo.filterState || false
   };
 };
@@ -194,7 +195,6 @@ var mapDispatchToProps = function(dispatch){
     setWavesSpinner: function(data){dispatch(setWavesSpinner(data))},
     waveHeaderSort: function(data){dispatch(waveHeaderSort(data))},
     waveHeaderSortOrder: function(data){dispatch(waveHeaderSortOrder(data))},
-
      showTableFilter: function(data){dispatch(showTableFilter(data));}
   };
 }
