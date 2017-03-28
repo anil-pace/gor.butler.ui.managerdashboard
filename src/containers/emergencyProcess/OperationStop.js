@@ -15,7 +15,7 @@ class OperationStop extends React.Component{
       this.props.removeModal();
   }
   componentWillReceiveProps(nextProps){
-    if(!nextProps.auth_token||!nextProps.system_emergency||nextProps.activeModalKey !== this.props.activeModalKey)
+    if(!nextProps.auth_token||!nextProps.system_emergency||nextProps.system_data !== this.props.system_data)
     {
       this.removeThisModal();
     }
@@ -73,7 +73,7 @@ class OperationStop extends React.Component{
   return  {
       auth_token:state.authLogin.auth_token,
       system_emergency:state.tabsData.system_emergency||false,
-      activeModalKey: state.appInfo.activeModalKey || 0  
+      system_data:state.tabsData.system_data||null  
     }
 } 
 function mapDispatchToProps(dispatch){
@@ -84,9 +84,9 @@ function mapDispatchToProps(dispatch){
 OperationStop.propTypes={
       auth_token:React.PropTypes.string, 
       userRequest:React.PropTypes.func,
-      activeModalKey:React.PropTypes.number,
       emergencyPress:React.PropTypes.bool,
-      system_emergency:React.PropTypes.bool
+      system_emergency:React.PropTypes.bool,
+      system_data:React.PropTypes.string
 }
 
 
