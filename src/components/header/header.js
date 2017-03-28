@@ -12,7 +12,6 @@ import { connect } from 'react-redux';
 import HamBurger from '../hamburger/hamburger';
 import PauseOperation from '../../containers/emergencyProcess/pauseOperation'; 
 import ResumeOperation from '../../containers/emergencyProcess/resumeOperation'; 
-import {switchModalKey} from '../../actions/validationActions';
 
 var dropdownFlag=0;
 var temp;
@@ -57,11 +56,10 @@ class Header extends React.Component{
    }
    _showModal(modalComponent)
    {
-      this.props.switchModalKey(this.props.activeModalKey);
     	modal.add(modalComponent, {
       	title: '',
       	size: 'large', // large, medium or small,
-     	closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+     	closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
      	hideCloseButton: true
     	});   	
    }
@@ -200,8 +198,7 @@ function mapStateToProps(state,ownProps) {
   username:state.authLogin.username,
   system_emergency:state.tabsData.system_emergency||null,
   system_status:state.tabsData.status||null,
-  system_data:state.tabsData.system_data||null,
-  activeModalKey: state.appInfo.activeModalKey || 0
+  system_data:state.tabsData.system_data||null
  }
 } 
 /**
@@ -209,8 +206,7 @@ function mapStateToProps(state,ownProps) {
  */
 function mapDispatchToProps(dispatch){
     return {
-        getHeaderInfo: function(data){ dispatch(getHeaderInfo(data)); },
-        switchModalKey:function(data){dispatch(switchModalKey(data))}
+        getHeaderInfo: function(data){ dispatch(getHeaderInfo(data)); }
     }
 };
 

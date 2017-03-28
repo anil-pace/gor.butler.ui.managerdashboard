@@ -444,4 +444,5 @@ export const sortOrderHead = {"recievedTime":"&order_by=create_time",
 
 //constants for modal handling
 export const MODAL_STATUS = "MODAL_STATUS";
-export const SET_MODAL_KEY = "SET_MODAL_KEY";
+export const MODAL_RESET = "MODAL_RESET";
+export const CHECKLIST = "CHECKLIST";
