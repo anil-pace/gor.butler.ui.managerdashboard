@@ -75,7 +75,7 @@ class WaveFilter extends React.Component{
     _clearFilter() {
         let clearState = {};
         let updatedWsSubscription = this.props.wsSubscriptionData;
-        updatedWsSubscription["orders"].data[0].details["filter_params"] = {};
+        updatedWsSubscription["orders"].data[3].details["filter_params"] = {};
         updatedWsSubscription["waves"].data[0].details["filter_params"] = {};
         this.props.socketDataSubscription(updatedWsSubscription);
         this.setState({tokenSelected: {"STATUS":["all"]}, searchQuery: {}});
