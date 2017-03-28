@@ -1,5 +1,5 @@
 import {MODAL_STATUS,SAFETY_MAP,
-  SAFETY_ERROR_MAP,MODAL_RESET} from '../constants/frontEndConstants';
+  SAFETY_ERROR_MAP,CHECKLIST,MODAL_RESET} from '../constants/frontEndConstants';
 
 /**
  * @param  {State Object}

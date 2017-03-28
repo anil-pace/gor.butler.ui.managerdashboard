@@ -1,4 +1,4 @@
-export const BASE_URL = '45.118.132.185' ;
+export const BASE_URL = 'localhost' ;
 export const PORT = '8888';
 export const PROTOCOL = 'https://';
 export const WS_PROTOCOL ="wss://";

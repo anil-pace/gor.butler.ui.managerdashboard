@@ -74,7 +74,7 @@ class Tabs extends React.Component{
       });    
   }
   componentWillReceiveProps(nextProps){
-    if(nextProps.system_data === SOFT_MANUAL && this.props.system_data === HARD)
+    if(nextProps.system_data === SOFT_MANUAL && (this.props.system_data === HARD || !this.props.system_data))
     {
       this._emergencyRelease();
     }

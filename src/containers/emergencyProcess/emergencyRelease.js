@@ -15,8 +15,13 @@ class EmergencyRelease extends React.Component{
   _removeThisModal() {
       this.props.removeModal();
   }
+  componentDidMount(){
+    if(this.props.checkingList){
+      this._removeThisModal();  //If manager is on safety checklist page, don't show the release modal      
+    }
+  }
   componentWillReceiveProps(nextProps){
-    if(!nextProps.auth_token||nextProps.system_data !== this.props.system_data||nextProps.checkingList)
+    if(!nextProps.auth_token||nextProps.system_data !== this.props.system_data)
     {
       this._removeThisModal();
     }
@@ -26,7 +31,7 @@ class EmergencyRelease extends React.Component{
     modal.add(ResumeOperation, {
       title: '',
       size: 'large', // large, medium or small,
-      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: true // (optional) if you don't wanna show the top right close button
       //.. all what you put in here you will get access in the modal props ;)
     });
