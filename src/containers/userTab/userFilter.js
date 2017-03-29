@@ -29,6 +29,7 @@ class UserFilter extends React.Component{
     }
  
     _processFilterToken() {
+      this.props.roleInfo
         let tokenStatus = {value:"STATUS", label:<FormattedMessage id="user.tokenfield.status" defaultMessage ="STATUS"/>};
         let tokenRole = {value:"ROLE", label:<FormattedMessage id="user.tokenfield.role" defaultMessage ="ROLE"/>}; 
         let tokenWorkMode = {value:"WORK MODE", label:<FormattedMessage id="user.tokenfield.mode" defaultMessage ="WORK MODE"/>};
@@ -147,7 +148,8 @@ function mapStateToProps(state, ownProps){
     filterState: state.filterInfo.userfilterState,
     wsSubscriptionData:state.recieveSocketActions.socketDataSubscriptionPacket,
      isFilterApplied: state.filterInfo.isFilterApplied || false,
-    userFilterStatus:state.filterInfo.userFilterStatus || false
+    userFilterStatus:state.filterInfo.userFilterStatus || false,
+    roleInfo: state.appInfo.roleInfo || null
   };
 }
 

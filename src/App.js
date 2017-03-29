@@ -100,7 +100,7 @@ import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,
     }
     else if(nextProps.prevTab !== currTab){
       this.props.initDataSentCall(subscribeData) ;
-      this.props.prevTabSelected(currTab || TAB_ROUTE_MAP[OVERVIEW]) ;
+      this.props.prevTabSelected(currTab || TAB_ROUTE_MAP[OVERVIEW]);
     }
     else if(nextProps.prevTab === currTab) {
       this.props.initDataSentCall(subscribeData) ;

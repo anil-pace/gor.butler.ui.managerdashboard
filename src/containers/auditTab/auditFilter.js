@@ -43,8 +43,7 @@ class AuditFilter extends React.Component{
                     { value: 'rejected', label:<FormattedMessage id="audit.token2.rejected" defaultMessage ="Rejected"/> },
                     { value: 'resolved', label:<FormattedMessage id="audit.token2.resolved" defaultMessage ="Resolved"/> },
                     { value: 'inProgress', label:<FormattedMessage id="audit.token2.inProgress" defaultMessage ="In progress"/>},
-                    { value: 'pending', label:<FormattedMessage id="audit.token2.pending" defaultMessage ="Pending"/> },
-                    { value: 'all', label:<FormattedMessage id="au1dit.token2.all" defaultMessage ="Any"/> }
+                    { value: 'pending', label:<FormattedMessage id="audit.token2.pending" defaultMessage ="Pending"/> }
                     ];
         var selectedToken =  this.state.tokenSelected;
         var column1 = <FilterTokenWrap field={tokenStatusField} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC2} selectedToken={selectedToken}/>;
