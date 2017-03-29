@@ -40,12 +40,12 @@ class PPSFilter extends React.Component{
         let tokenField1 = {value:"STATUS", label:<FormattedMessage id="pps.token.status" defaultMessage ="STATUS"/>};
         let tokenField2 = {value:"MODE", label:<FormattedMessage id="pps.token.timePeriod" defaultMessage ="MODE"/>}; 
        let labelC1 = [
-                    { value: 'all', label: <FormattedMessage id="pps.STATUS.all" defaultMessage ="All"/>},
+                    { value: 'all', label: <FormattedMessage id="pps.STATUS.all" defaultMessage ="Any"/>},
                     { value: 'on', label: <FormattedMessage id="pps.STATUS.stopped" defaultMessage ="On"/>},
                     { value: 'off', label: <FormattedMessage id="pps.STATUS.error" defaultMessage ="Off"/>}
                     ];
         let labelC2 = [
-                    { value: 'all', label: <FormattedMessage id="pps.MODE.all" defaultMessage ="All"/>},
+                    { value: 'all', label: <FormattedMessage id="pps.MODE.all" defaultMessage ="Any"/>},
                     { value: 'pick', label: <FormattedMessage id="pps.MODE.pick" defaultMessage ="Pick"/>},
                     { value: 'put', label: <FormattedMessage id="pps.MODE.put" defaultMessage ="Put"/>},
                     { value: 'audit', label: <FormattedMessage id="pps.MODE.audit" defaultMessage ="Audit"/>},
@@ -91,9 +91,11 @@ class PPSFilter extends React.Component{
         (filterState.searchQuery["OPERATOR ASSIGNED"]?filterSubsData["operators_assigned"] = ['contains',filterState.searchQuery["OPERATOR ASSIGNED"]]:"");
         (filterState.searchQuery["PPS ID"]?filterSubsData["pps_id"] = ['=',filterState.searchQuery["PPS ID"]]:"");
       }
-      // if(filterState.rangeSelected){
-      //   (filterState.rangeSelected["maxValue"]?filterSubsData["performance"]=['between',[filterState.rangeSelected["minValue"],filterState.rangeSelected["maxValue"]]]:"");
-      // }
+      if(filterState.rangeSelected){
+        (filterState.rangeSelected["maxValue"]?filterSubsData["performance"]=['between',[Number(filterState.rangeSelected["minValue"]),Number(filterState.rangeSelected["maxValue"])]]:"");
+      }
+
+      
       if(filterState.tokenSelected) {
         (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0]!=="all"?filterSubsData["pps_status"] = ['in',filterState.tokenSelected["STATUS"]]:"");
         (filterState.tokenSelected["MODE"] && filterState.tokenSelected["MODE"][0]!=="all"?filterSubsData["current_task"] = ['in',filterState.tokenSelected["MODE"]]:"");
@@ -125,7 +127,8 @@ class PPSFilter extends React.Component{
 
   render(){
     
-        let noOrder = this.props.orderData.totalOrders?false:true;
+        var ppsDetail = this.props.PPSDetail;
+        var noOrder = ppsDetail.PPStypeDetail && ppsDetail.PPStypeDetail.length?false:true;
         let ppsSearchField = this._processPPSSearchField();
         let ppsFilterToken = this._processFilterToken();
         let rangeSlider=this._handleRangeSlider();
@@ -149,12 +152,13 @@ class PPSFilter extends React.Component{
 
 function mapStateToProps(state, ownProps){
   return {
+    PPSDetail: state.PPSDetail || [],
     showFilter: state.filterInfo.filterState || false,
     orderData: state.getOrderDetail || {},
     wsSubscriptionData:state.recieveSocketActions.socketDataSubscriptionPacket,
     orderListSpinner: state.spinner.orderListSpinner || false,
     filterState: state.filterInfo.ppsfilterState,
-      isFilterApplied: state.filterInfo.isFilterApplied || false,
+    isFilterApplied: state.filterInfo.isFilterApplied || false,
     ppsFilterState:state.filterInfo.ppsFilterState || false
   };
 }

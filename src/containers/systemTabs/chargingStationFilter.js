@@ -34,12 +34,12 @@ class ChargingStationFilter extends React.Component{
         let tokenField1 = {value:"DOCKING STATUS", label:<FormattedMessage id="charging.token.status" defaultMessage ="DOCKING STATUS"/>};
         let tokenField2 = {value:"OPERATING MODE", label:<FormattedMessage id="charging.token.timePeriod" defaultMessage ="OPERATING MODE"/>}; 
        let labelC1 = [
-                    { value: 'all', label: <FormattedMessage id="charging.STATUS.all" defaultMessage ="All"/>},
+                    { value: 'all', label: <FormattedMessage id="charging.STATUS.all" defaultMessage ="Any"/>},
                     { value: 'connected', label: <FormattedMessage id="charging.STATUS.breach" defaultMessage ="Connected"/>},
                     { value: 'disconnected', label: <FormattedMessage id="charging.STATUS.pending" defaultMessage ="Disconnected"/>}
                     ];
         let labelC2 = [
-                    { value: 'all', label: <FormattedMessage id="charging.timePeriod.all" defaultMessage ="All"/>},
+                    { value: 'all', label: <FormattedMessage id="charging.timePeriod.all" defaultMessage ="Any"/>},
                     { value: 'mannual', label: <FormattedMessage id="charging.timePeriod.oneHr" defaultMessage ="Mannual"/>},
                     { value: 'auto', label: <FormattedMessage id="charging.timePeriod.twoHR" defaultMessage ="Auto"/>}
                     ]; 
@@ -93,7 +93,10 @@ class ChargingStationFilter extends React.Component{
 
 
   render(){
-        let noOrder = this.props.orderData.totalOrders?false:true;
+       let chargingDetails = this.props.chargerData;
+         let noOrder = chargingDetails.chargersDetail && chargingDetails.chargersDetail.length?false:true;
+
+       
         let chargingSearchField = this._processChargingSearchField();
         let chargingFilterToken = this._processFilterToken();
     return (
@@ -116,7 +119,7 @@ class ChargingStationFilter extends React.Component{
 function mapStateToProps(state, ownProps){
   return {
     showFilter: state.filterInfo.filterState || false,
-    orderData: state.getOrderDetail || {},
+    chargerData: state.chargersDetail || [],
     wsSubscriptionData:state.recieveSocketActions.socketDataSubscriptionPacket,
     orderListSpinner: state.spinner.orderListSpinner || false,
     filterState: state.filterInfo.chargingstationfilterState,

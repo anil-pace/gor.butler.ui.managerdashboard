@@ -40,7 +40,12 @@ class UserDataTable extends React.Component {
     }));
   }
 
-
+shouldComponentUpdate(nextProps) {
+    if((nextProps.items && !nextProps.items.length)){
+      return false;
+    }
+    return true;
+  }
   componentWillReceiveProps(nextProps){
     this._dataList = new tableRenderer(nextProps.items.length);
     this._defaultSortIndexes = [];

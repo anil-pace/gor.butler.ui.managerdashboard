@@ -41,7 +41,7 @@ import {SHOW_FILTER, IS_FILTER_APPLIED,BUTLER_FILTER_STATE,CHARGINGSTATION_FILTE
     break; 
     case USER_FILTER_VALUE:
     return Object.assign({}, state, { 
-      "toggleUesrFilter" : action.data
+      "userFilterStatus" : action.data
     })
     break;
 
@@ -67,7 +67,7 @@ import {SHOW_FILTER, IS_FILTER_APPLIED,BUTLER_FILTER_STATE,CHARGINGSTATION_FILTE
     break;  
     case USER_FILTER_STATE:
     return Object.assign({}, state, { 
-      "userFilterStatus" : action.data
+      "userfilterState" : action.data
     })
     break;
 

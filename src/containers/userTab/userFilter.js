@@ -113,7 +113,10 @@ class UserFilter extends React.Component{
     }
 
     render(){
-        let noOrder = this.props.totalAudits?false:true;
+
+      let userDetail = this.props.userDetails;
+         let noOrder = userDetail.userDetails && userDetail.userDetails.length?false:true;
+
         let userSearchField = this._processUserSearchField();
         let userFilterToken = this._processFilterToken();
         return (
@@ -137,6 +140,7 @@ class UserFilter extends React.Component{
 
 function mapStateToProps(state, ownProps){
   return {
+    userDetails:state.userDetails||[],
     showFilter: state.filterInfo.filterState || false,
     auditSpinner: state.spinner.auditSpinner || false,
     totalAudits: state.recieveAuditDetail.totalAudits || 0,

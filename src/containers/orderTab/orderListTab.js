@@ -55,7 +55,6 @@ class OrderListTab extends React.Component{
     if((nextProps.orderData.ordersDetail && !nextProps.orderData.ordersDetail.length)){
       return false;
     }
-
     return true;
   }
 

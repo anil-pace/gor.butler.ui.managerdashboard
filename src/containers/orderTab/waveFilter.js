@@ -12,8 +12,8 @@ class WaveFilter extends React.Component{
 	constructor(props) 
 	{
     	super(props);
-        this.state = {tokenSelected: {"STATUS":["all"]}, searchQuery: {},
-                      defaultToken: {"STATUS":["all"]}}; 
+        this.state = {tokenSelected: {"STATUS":["any"]}, searchQuery: {},
+                      defaultToken: {"STATUS":["any"]}}; 
     }
     _closeFilter() {
         let filterState = !this.props.showFilter;
@@ -61,8 +61,7 @@ class WaveFilter extends React.Component{
         (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0]!=="any"?filterSubsData["status"] = ['in',filterState.tokenSelected["STATUS"]]:"");
       }
       let updatedWsSubscription = this.props.wsSubscriptionData;
-      updatedWsSubscription["orders"].data[3].details["filter_params"] = filterSubsData;
-      updatedWsSubscription["waves"].data[0].details["filter_params"] = filterSubsData;
+      updatedWsSubscription["orders"].data[0].details["filter_params"] = filterSubsData;
       this.props.wavefilterState(filterState);
       this.props.socketDataSubscription(updatedWsSubscription);
       this.props.filterApplied(!this.props.isFilterApplied);
@@ -75,11 +74,10 @@ class WaveFilter extends React.Component{
     _clearFilter() {
         let clearState = {};
         let updatedWsSubscription = this.props.wsSubscriptionData;
-        updatedWsSubscription["orders"].data[3].details["filter_params"] = {};
-        updatedWsSubscription["waves"].data[0].details["filter_params"] = {};
+        updatedWsSubscription["orders"].data[0].details["filter_params"] = {};
         this.props.socketDataSubscription(updatedWsSubscription);
-        this.setState({tokenSelected: {"STATUS":["all"]}, searchQuery: {}});
-        this.props.wavefilterState({tokenSelected: {"STATUS":["all"]}, searchQuery: {}});
+        this.setState({tokenSelected: {"STATUS":["any"]}, searchQuery: {}});
+        this.props.wavefilterState({tokenSelected: {"STATUS":["any"]}, searchQuery: {}});
         this.props.filterApplied(!this.props.isFilterApplied);
         this.props.toggleWaveFilter(false);
 
@@ -87,7 +85,8 @@ class WaveFilter extends React.Component{
 
 
 	render(){
-        let noOrder = this.props.orderData.totalOrders?false:true;
+        var waveDetail = this.props.waveData;
+         var noOrder = waveDetail.waveData && waveDetail.waveData.length?false:true;
         let waveSearchField = this._processWaveSearchField();
         let waveFilterToken = this._processFilterToken();
 		return (
@@ -110,7 +109,7 @@ class WaveFilter extends React.Component{
 function mapStateToProps(state, ownProps){
   return {
     showFilter: state.filterInfo.filterState || false,
-    orderData: state.getOrderDetail || {},
+    waveData: state.waveInfo || {},
     orderListSpinner: state.spinner.orderListSpinner || false,
     filterState: state.filterInfo.wavefilterState,
     wsSubscriptionData:state.recieveSocketActions.socketDataSubscriptionPacket,

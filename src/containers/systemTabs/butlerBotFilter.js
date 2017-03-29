@@ -102,6 +102,8 @@ class ButlerBotFilter extends React.Component{
     }
 
 	render(){
+    let butlerDetails = this.props.butlerDetail;
+         let noOrder = butlerDetails.butlerDetail && butlerDetails.butlerDetail.length?false:true;
         let butlerSearchField = this._processButlerSearchField();
         let butlerFilterToken = this._processFilterToken();
 		return (
@@ -112,7 +114,7 @@ class ButlerBotFilter extends React.Component{
                          filterTokenC1={butlerFilterToken.column1token}
                          filterTokenC2={butlerFilterToken.column2token}
                          formSubmit={this._applyFilter.bind(this)}
-                         noDataFlag={false}
+                         noDataFlag={noOrder}
                          />
             </div>
 		);
@@ -122,6 +124,7 @@ class ButlerBotFilter extends React.Component{
 
 function mapStateToProps(state, ownProps){
   return {
+    butlerDetail: state.butlerDetail || [],
     showFilter: state.filterInfo.filterState || false,
     wsSubscriptionData:state.recieveSocketActions.socketDataSubscriptionPacket,
     filterState: state.filterInfo.butlerFilterState,

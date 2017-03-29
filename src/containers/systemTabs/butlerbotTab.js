@@ -175,6 +175,7 @@ class ButlerBot extends React.Component{
 	{
     	super(props);
     }	
+  
 	render(){
   let updateStatusIntl="";
   var itemNumber = 6;
