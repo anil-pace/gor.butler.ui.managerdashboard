@@ -1,10 +1,22 @@
 import React  from 'react';
+import ReactDOM  from 'react-dom';
 class HamBurger extends React.Component{
 	constructor(props) 
 	{
     	super(props);
     	this.state={menuVisible:false};
+    	this._handleDocumentClick = this._handleDocumentClick.bind(this);
     }	
+  	componentWillMount() {
+    	document.addEventListener('click', this._handleDocumentClick, false);
+    	document.addEventListener('touchend', this._handleDocumentClick, false);
+  	}  
+
+    
+    componentWillUnmount() {
+    document.removeEventListener('click', this._handleDocumentClick, false);
+    document.removeEventListener('touchend', this._handleDocumentClick, false);
+  }  
     _toggleDropdown(){
     	var currentVisibility = this.state.menuVisible;
     	currentVisibility = !currentVisibility;
@@ -23,6 +35,11 @@ class HamBurger extends React.Component{
     	}
     	return listItems;
     }
+  _handleDocumentClick() {
+    	if (!ReactDOM.findDOMNode(this).contains(event.target)) {
+          this.setState({menuVisible: false});
+    	}
+  	}    
 	render(){
 		var listItems = this._processList();
 		var dropDownMenu = (<span className='gor-hamburger-wrapper' style={(this.state.menuVisible)?{display:'block'}:{display:'none'}}>{listItems}</span>);
@@ -45,5 +62,15 @@ class HamBurger extends React.Component{
 			);
 	}
 };
+
+HamBurger.propTypes={
+		heading:React.PropTypes.object,
+		subHeading:React.PropTypes.object,
+		optionList:React.PropTypes.array,
+  		menuStyle:React.PropTypes.string, 
+  		headingStyle:React.PropTypes.string, 
+  		openIcon:React.PropTypes.string, 
+  		closeIcon:React.PropTypes.string
+}
 
 export default HamBurger ;

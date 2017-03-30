@@ -171,5 +171,7 @@ export const OP_PWD=(<FormattedMessage id="users.add.password.subheading.operato
 //Messages for emergency
 export const E051=(<FormattedMessage id="emergency.resume.coreerror" description='Error while resuming operation' 
       defaultMessage='Cannot connect to butler core'/>);
+export const E052=(<FormattedMessage id="emergency.resume.statuserror" description='Error while resuming operation' 
+      defaultMessage='Emergency status not soft_manual'/>);
 export const ES=(<FormattedMessage id="emergency.resume.success" description='Operations resumed' 
       defaultMessage='Operation resumed'/>);

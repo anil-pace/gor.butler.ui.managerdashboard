@@ -3,7 +3,7 @@ import ReactDOM  from 'react-dom';
 import Tile2x from '../components/tile2x/Tile2x';
 import { connect } from 'react-redux' ;
 import { FormattedMessage,FormattedNumber,FormattedPlural,FormattedRelative, FormattedDate } from 'react-intl';
-import {PICK_ICON,GOR_RISK,GOR_SUCCESS,GOR_NONE,GOR_DELAY,TILE_ONTIME,TILE_ALERT} from '../constants/frontEndConstants';
+import {PICK_ICON,GOR_RISK,GOR_SUCCESS,GOR_NONE,GOR_DELAY,TILE_ONTIME,TILE_ALERT,DELAY_ICON} from '../constants/frontEndConstants';
 import {secondsToTime} from '../utilities/processTime';
 
 class PickStatusWidget extends React.Component{
@@ -115,7 +115,7 @@ class PickStatusWidget extends React.Component{
             lowLeft=<FormattedMessage id="widget.pick.emergency" description='Message for system in emergency state' 
                 defaultMessage='--'/>;                
             statusClass=GOR_DELAY;  
-            statusLogo=TILE_ALERT;
+            statusLogo=DELAY_ICON;
             statusLeft=<FormattedMessage id="widget.pick.statusleft.delay" description='Text for delay in orders' 
                     defaultMessage='Delayed'/>
             lowRight=<FormattedMessage id="widget.pick.lowright.emergency" description='Estimated time' 

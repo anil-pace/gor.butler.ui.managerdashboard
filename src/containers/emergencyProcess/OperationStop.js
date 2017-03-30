@@ -15,7 +15,7 @@ class OperationStop extends React.Component{
       this.props.removeModal();
   }
   componentWillReceiveProps(nextProps){
-    if(!nextProps.auth_token)
+    if(!nextProps.auth_token||!nextProps.system_emergency||nextProps.activeModalKey !== this.props.activeModalKey)
     {
       this.removeThisModal();
     }
@@ -58,11 +58,9 @@ class OperationStop extends React.Component{
                             description="Text for operation paused alert"/>)}
                     </div>
                       <span className='gor-text-sm'>
-                      {this.props.emergencyPress?(<FormattedMessage id='operation.alert.stop.subtext' 
-                    defaultMessage='To resume butler operation in the warehouse, you will be required to go through a safety checklist'
-                            description="Subtext for stop alert"/>):(<FormattedMessage id='operation.alert.pause.subtext' 
-                    defaultMessage='You must check the emergency situation and release the Emergency Stop button in order to resume the operation in warehouse'
-                            description="Subtext for pause alert"/>)}
+                        <FormattedMessage id='operation.alert.pause.subtext' 
+                          defaultMessage='You must check the emergency situation and release the Emergency Stop button in order to resume the operation in warehouse'
+                            description="Subtext for pause alert"/>
                       </span>
                     </div>           
                 </div>
@@ -73,7 +71,9 @@ class OperationStop extends React.Component{
   };
  function mapStateToProps(state, ownProps){
   return  {
-      auth_token:state.authLogin.auth_token
+      auth_token:state.authLogin.auth_token,
+      system_emergency:state.tabsData.system_emergency||false,
+      activeModalKey: state.appInfo.activeModalKey || 0  
     }
 } 
 function mapDispatchToProps(dispatch){
@@ -81,5 +81,13 @@ function mapDispatchToProps(dispatch){
       userRequest: function(data){ dispatch(userRequest(data)); }
     }
 };
+OperationStop.propTypes={
+      auth_token:React.PropTypes.string, 
+      userRequest:React.PropTypes.func,
+      activeModalKey:React.PropTypes.number,
+      emergencyPress:React.PropTypes.bool,
+      system_emergency:React.PropTypes.bool
+}
+
 
 export default connect(mapStateToProps,mapDispatchToProps)(OperationStop);

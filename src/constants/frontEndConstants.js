@@ -123,7 +123,6 @@ export const RESUME_OPERATION = "RESUME_OPERATION";
 export const CHECK_SAFETY = "CHECK_SAFETY";
 export const CONFIRM_SAFETY = "CONFIRM_SAFETY";
 export const AUTH_USER = "AUTH_USER";
-export const MODAL_STATUS = "MODAL_STATUS";
 export const SAFETY_MAP = "SAFETY_MAP";
 export const SAFETY_ERROR_MAP = "SAFETY_ERROR_MAP";
 
@@ -385,6 +384,7 @@ export const TILE_ALERT='header-yellow-alert-icon';
 export const TICK_WHITE='gor-tick-white';
 export const REMOVE_ICON='gor-remove-white';
 export const ERROR_WHITE='gor-error-white';
+export const DELAY_ICON="gor-delay-icon";
 
 //Sort header constants
 export const INITIAL_HEADER_SORT = "status";
@@ -429,6 +429,9 @@ export const BUTLER_FILTER_STATE = "BUTLER_FILTER_STATE";
 export const AUDIT_TASK_ID = "AUDIT TASK ID"
 export const ADD_TOKEN = "add";
 export const ADD_DEFAULT = "addDefault";
+export const SOFT_MANUAL = "soft_manual";
+export const SOFT = "soft";
+export const HARD = "hard";
 //backend sort
 export const sortAuditHead = {"startTime":"&order_by=start_actual_time", 
 							"completedTime":"&order_by=completion_time", 
@@ -450,3 +453,6 @@ export const filterMarks={
 		          500:"500"
         	}
 
+//constants for modal handling
+export const MODAL_STATUS = "MODAL_STATUS";
+export const SET_MODAL_KEY = "SET_MODAL_KEY";
