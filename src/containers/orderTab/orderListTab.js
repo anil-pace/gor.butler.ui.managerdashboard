@@ -227,7 +227,11 @@ refresh = (data) => {
 
   //appending filter for status
   if(data.tokenSelected && data.tokenSelected["STATUS"] && data.tokenSelected["STATUS"].length) {
-    var status = data.tokenSelected["STATUS"][0] //need to change harcoding
+    let statusToken=data.tokenSelected["STATUS"];
+    let index = statusToken.indexOf('breached');
+    (index!=-1)?statusToken.splice(index, 1):"";
+    let status = (statusToken.length>0)?statusToken.join("','"):statusToken; //need to change harcoding
+    let breachedtext=(index!=-1)?"?breached=True":""
     if((status === undefined || status === "all")) {
       appendStatusUrl = "";
     }
@@ -241,7 +245,7 @@ refresh = (data) => {
       appendStatusUrl = EXCEPTION_TRUE ;      
     }
     else {
-     appendStatusUrl = WAREHOUSE_STATUS + status;
+     appendStatusUrl = WAREHOUSE_STATUS +"['"+status+"']"+breachedtext;
    }
    data.selected = 1; 
    filterApplied = true;
@@ -391,5 +395,32 @@ var mapDispatchToProps = function(dispatch){
 OrderListTab.contextTypes = {
  intl:React.PropTypes.object.isRequired
 }
+
+OrderListTab.PropTypes={
+orderFilter: React.PropTypes.string,
+orderSortHeader:React.PropTypes.string,
+orderSortHeaderState:React.PropTypes.array,
+orderListSpinner:React.PropTypes.bool,
+filterOptions: React.PropTypes.object,
+orderData: React.PropTypes.object,
+statusFilter :React.PropTypes.bool,
+timeOffset: React.PropTypes.number,
+auth_token: React.PropTypes.object,
+showFilter: React.PropTypes.bool,
+isFilterApplied:React.PropTypes.bool,
+orderFilterDetail:React.PropTypes.func,
+orderHeaderSort: React.PropTypes.func,
+orderHeaderSortOrder:React.PropTypes.func,
+getPageData: React.PropTypes.func,
+getStatusFilter: React.PropTypes.func,
+getTimeFilter:React.PropTypes.func,
+getPageSizeOrders:React.PropTypes.func,
+currentPage: React.PropTypes.func,
+lastRefreshTime: React.PropTypes.func,
+setOrderListSpinner:React.PropTypes.func,
+setCurrentPage:React.PropTypes.func,
+showTableFilter: React.PropTypes.func,
+filterApplied: React.PropTypes.func 
+};
 
 export default connect(mapStateToProps,mapDispatchToProps)(OrderListTab) ;

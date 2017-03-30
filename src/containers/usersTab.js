@@ -114,7 +114,12 @@ class UsersTab extends React.Component{
     userData.first=data[i].first_name;
     userData.last=data[i].last_name;  
     userData.roleId=data[i].role;
-    userData.role = role[data[i].role];
+    if(role.hasOwnProperty(data[i].role)){
+      userData.role = role[data[i].role];      
+    }
+    else{
+      userData.role = data[i].role;
+    }
     userDetails.push(userData);
     userData = {};
   }

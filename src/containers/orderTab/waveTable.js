@@ -364,4 +364,19 @@ shouldComponentUpdate(nextProps) {
       );
 }
 }
+WavesTable.PropTypes={
+items:React.PropTypes.array,
+  containerWidth:React.PropTypes.number,
+  itemNumber:React.PropTypes.number,
+  currentHeaderOrder:React.PropTypes.object,
+  sortHeaderState:React.PropTypes.func,
+  refreshOption:React.PropTypes.func,
+  lastUpdatedText:React.PropTypes.string,
+  showFilter:React.PropTypes.bool,
+  lastUpdated:React.PropTypes.string,
+  responseFlag:React.PropTypes.bool,
+  setWaveFilter:React.PropTypes.func,
+  setFilter:React.PropTypes.func,
+  containerHeight:React.PropTypes.number
+};
 export default Dimensions()(WavesTable);

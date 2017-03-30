@@ -333,8 +333,19 @@ class OrderListTable extends React.Component {
   }
 }
 
-
-
-//export default connect(null,mapDispatchToProps)(OrderListTable) ;
+OrderListTable.PropTypes={
+  items:React.PropTypes.array,
+  containerWidth:React.PropTypes.number,
+  itemNumber:React.PropTypes.number,
+  currentHeaderOrder:React.PropTypes.object,
+  setOrderFilter:React.PropTypes.func,
+  sortHeaderState:React.PropTypes.func,
+  refreshOption:React.PropTypes.func,
+  lastUpdatedText:React.PropTypes.string,
+  isFilterApplied:React.PropTypes.bool,
+  timeZoneString:React.PropTypes.string,
+  lastUpdated:React.PropTypes.string,
+  responseFlag:React.PropTypes.bool
+};
 
 export default Dimensions()(OrderListTable);

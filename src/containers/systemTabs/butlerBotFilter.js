@@ -3,11 +3,12 @@ import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
 import {showTableFilter,filterApplied,butlerfilterState,toggleBotButton} from '../../actions/filterAction';
-import {socketDataSubscription} from '../../actions/socketActions';
+import {updateMainStore} from '../../actions/socketActions';
 import { connect } from 'react-redux'; 
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
+import {setButlerFilterSpinner}  from '../../actions/spinnerAction';
 class ButlerBotFilter extends React.Component{
 	constructor(props) 
 	{
@@ -48,10 +49,10 @@ class ButlerBotFilter extends React.Component{
                     ];
         const labelC2 = [
                     { value: 'any', label:<FormattedMessage id="butletbot.token2.any" defaultMessage ="Any"/> },
-                    { value: 'pick', label:<FormattedMessage id="butletbot.token2.pick" defaultMessage ="Pick"/>},
-                    { value: 'put', label:<FormattedMessage id="butletbot.token2.put" defaultMessage ="Put"/> },
-                    { value: 'audit', label:<FormattedMessage id="butletbot.token2.audit" defaultMessage ="Audit"/> },
-                    { value: 'charging', label:<FormattedMessage id="butletbot.token2.charging" defaultMessage ="Charging"/>},
+                    { value: '0', label:<FormattedMessage id="butletbot.token2.pick" defaultMessage ="Pick"/>},
+                    { value: '1', label:<FormattedMessage id="butletbot.token2.put" defaultMessage ="Put"/> },
+                    { value: '2', label:<FormattedMessage id="butletbot.token2.audit" defaultMessage ="Audit"/> },
+                    { value: '3', label:<FormattedMessage id="butletbot.token2.charging" defaultMessage ="Charging"/>},
                     { value: 'not set', label:<FormattedMessage id="butletbot.token2.notSet" defaultMessage ="Not set"/> }
                     ];
         let selectedToken =  this.state.tokenSelected;
@@ -70,7 +71,7 @@ class ButlerBotFilter extends React.Component{
     }
 
     _applyFilter() {
-      let filterSubsData = {}, filterState = this.state;
+      let filterSubsData = {}, filterState = this.state,ppsMode;
       if(filterState.searchQuery) {
         (filterState.searchQuery["SPECIFIC LOCATION/ZONE"]?filterSubsData["location"] = ['contains',filterState.searchQuery["SPECIFIC LOCATION/ZONE"]]:"");
         (filterState.searchQuery["BOT ID"]?filterSubsData["butler_id"] = ['=',filterState.searchQuery["BOT ID"]]:"");
@@ -83,9 +84,10 @@ class ButlerBotFilter extends React.Component{
       updatedWsSubscription["butlerbots"].data[0].details["filter_params"] = filterSubsData;
       updatedWsSubscription["system"].data[0].details["filter_params"] = filterSubsData;
       this.props.butlerfilterState(filterState);
-      this.props.socketDataSubscription(updatedWsSubscription);
+      this.props.updateMainStore(updatedWsSubscription);
       this.props.filterApplied(!this.props.isFilterApplied);
       this.props.toggleBotButton(true);
+      this.props.setButlerFilterSpinner(true);
     }
 
     _clearFilter() {
@@ -93,11 +95,12 @@ class ButlerBotFilter extends React.Component{
         let updatedWsSubscription = this.props.wsSubscriptionData;
         updatedWsSubscription["butlerbots"].data[0].details["filter_params"] = {};
         updatedWsSubscription["system"].data[0].details["filter_params"] = {};
-        this.props.socketDataSubscription(updatedWsSubscription);
+        this.props.updateMainStore(updatedWsSubscription);
         this.setState({tokenSelected: {"STATUS":["any"], "MODE":["any"]}, searchQuery: {}});
         this.props.butlerfilterState({tokenSelected: {"STATUS":["any"], "MODE":["any"]}, searchQuery: {}});
         this.props.filterApplied(!this.props.isFilterApplied);
         this.props.toggleBotButton(false);
+        this.props.setButlerFilterSpinner(true);
         
     }
 
@@ -115,6 +118,7 @@ class ButlerBotFilter extends React.Component{
                          filterTokenC2={butlerFilterToken.column2token}
                          formSubmit={this._applyFilter.bind(this)}
                          noDataFlag={noOrder}
+                         responseFlag={this.props.butlerFilterSpinnerState}
                          />
             </div>
 		);
@@ -129,7 +133,9 @@ function mapStateToProps(state, ownProps){
     wsSubscriptionData:state.recieveSocketActions.socketDataSubscriptionPacket,
     filterState: state.filterInfo.butlerFilterState,
     isFilterApplied: state.filterInfo.isFilterApplied || false,
-    botFilterStatus:state.filterInfo.botFilterStatus || false
+    botFilterStatus:state.filterInfo.botFilterStatus || false,
+    butlerFilter:state.spinner.butlerSpinner || false,
+    butlerFilterSpinnerState:state.spinner.butlerFilterSpinnerState || false
   };
 }
 
@@ -137,9 +143,24 @@ var mapDispatchToProps = function(dispatch){
   return {
     showTableFilter: function(data){dispatch(showTableFilter(data));},
     filterApplied: function(data){dispatch(filterApplied(data));},
-    socketDataSubscription: function(data){dispatch(socketDataSubscription(data));},
+    updateMainStore: function(data){dispatch(updateMainStore(data));},
     butlerfilterState: function(data){dispatch(butlerfilterState(data));},
-    toggleBotButton: function(data){dispatch(toggleBotButton(data));}
-  }
+    toggleBotButton: function(data){dispatch(toggleBotButton(data));},
+    setButlerFilterSpinner: function(data){dispatch(setButlerFilterSpinner(data));}
+  } 
 };
+ButlerBotFilter.PropTypes={
+  butlerDetail: React.PropTypes.array,
+showFilter: React.PropTypes.bool,
+wsSubscriptionData:React.PropTypes.object,
+filterState: React.PropTypes.object,
+isFilterApplied:React.PropTypes.bool,
+botFilterStatus:React.PropTypes.bool,
+showTableFilter:React.PropTypes.func,
+filterApplied: React.PropTypes.func,
+updateMainStore:React.PropTypes.func,
+butlerfilterState:React.PropTypes.func,
+toggleBotButton:React.PropTypes.func
+};
+
 export default connect(mapStateToProps,mapDispatchToProps)(ButlerBotFilter) ;

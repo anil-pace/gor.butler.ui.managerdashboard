@@ -1,4 +1,5 @@
 import {ERROR,SUCCESS} from '../constants/frontEndConstants';
+import {BUTLER_SUPERVISOR,BUTLER_UI} from '../constants/backEndConstants'
 import {EMPTY_PWD,TYPE_SUCCESS,EMPTY_NAME,INVALID_NAME,INVALID_PWD_OP,INVALID_PWD_MG,MATCH_PWD,INVALID_LOCID,INVALID_SKUID,INVALID_ID,INVALID_FORMAT} from '../constants/messageConstants';
 
 export function nameStatus(firstname,lastname){
@@ -26,8 +27,9 @@ export function nameStatus(firstname,lastname){
           };   
           return nameInfo;
 }
-export function passwordStatus(pswd,confirmPswd,selectedRole,managerRole){
-          let passwordInfo;
+export function passwordStatus(pswd,confirmPswd,selectedRole){
+          let passwordInfo,managerRole;
+          managerRole=BUTLER_SUPERVISOR;
           if(!pswd.length)
           {
             passwordInfo={

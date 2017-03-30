@@ -106,4 +106,14 @@ var mapDispatchToProps = function(dispatch){
     filterApplied: function(data){dispatch(filterApplied(data));}
   }
 };
+
+AuditFilter.PropTypes={
+    showFilter:React.PropTypes.bool,
+    auditSpinner:React.PropTypes.bool,
+    totalAudits:React.PropTypes.number,
+    showTableFilter:React.PropTypes.func,
+    filterApplied:React.PropTypes.func
+};
+
+
 export default connect(mapStateToProps,mapDispatchToProps)(AuditFilter) ;

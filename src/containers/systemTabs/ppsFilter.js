@@ -4,15 +4,16 @@ import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
 import {showTableFilter, filterApplied,ppsfilterState,togglePPSFilter} from '../../actions/filterAction';
 import { connect } from 'react-redux'; 
-import {socketDataSubscription} from '../../actions/socketActions';
+import {updateMainStore} from '../../actions/socketActions';
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
 import RangeSlider from '../../components/rangeSlider/rangeSlider'
 import {filterMarks} from '../../constants/frontEndConstants';
+import {setPpsFilterSpinner}  from '../../actions/spinnerAction';
 
 
-class PPSFilter extends React.Component{
+class PPSFilter extends React.Component{  
   constructor(props) 
   {
       super(props);
@@ -91,9 +92,9 @@ class PPSFilter extends React.Component{
         (filterState.searchQuery["OPERATOR ASSIGNED"]?filterSubsData["operators_assigned"] = ['contains',filterState.searchQuery["OPERATOR ASSIGNED"]]:"");
         (filterState.searchQuery["PPS ID"]?filterSubsData["pps_id"] = ['=',filterState.searchQuery["PPS ID"]]:"");
       }
-      if(filterState.rangeSelected){
-        (filterState.rangeSelected["maxValue"]?filterSubsData["performance"]=['between',[Number(filterState.rangeSelected["minValue"]),Number(filterState.rangeSelected["maxValue"])]]:"");
-      }
+      // if(filterState.rangeSelected){
+      //   (filterState.rangeSelected["maxValue"]?filterSubsData["performance"]=['between',[Number(filterState.rangeSelected["minValue"]),Number(filterState.rangeSelected["maxValue"])]]:"");
+      // }
 
       
       if(filterState.tokenSelected) {
@@ -103,20 +104,22 @@ class PPSFilter extends React.Component{
       let updatedWsSubscription = this.props.wsSubscriptionData;
       updatedWsSubscription["pps"].data[0].details["filter_params"] = filterSubsData;
       this.props.ppsfilterState(filterState);
-      this.props.socketDataSubscription(updatedWsSubscription);
+      this.props.updateMainStore(updatedWsSubscription);
       this.props.filterApplied(!this.props.isFilterApplied);
       this.props.togglePPSFilter(true);
+      this.props.setPpsFilterSpinner(true);
     }
 
     _clearFilter() {
          let clearState = {};
         let updatedWsSubscription = this.props.wsSubscriptionData;
         updatedWsSubscription["pps"].data[0].details["filter_params"] = {};
-        this.props.socketDataSubscription(updatedWsSubscription);
+        this.props.updateMainStore(updatedWsSubscription);
          this.setState({tokenSelected: {"STATUS":["all"], "MODE":["all"]}, searchQuery: {}, rangeSelected:{"minValue":["-1"],"maxValue":["500"]}});
         this.props.ppsfilterState({tokenSelected: {"STATUS":["all"], "MODE":["all"]}, searchQuery: {}, rangeSelected:{"minValue":["-1"],"maxValue":["500"]}});
         this.props.filterApplied(!this.props.isFilterApplied);
         this.props.togglePPSFilter(false);
+        this.props.setPpsFilterSpinner(true);
 
     } 
 
@@ -140,7 +143,7 @@ class PPSFilter extends React.Component{
                          filterTokenC1={ppsFilterToken.column1token}
                          filterTokenC2={ppsFilterToken.column2token}
                          formSubmit={this._applyFilter.bind(this)} //passing function on submit
-                         responseFlag={this.props.orderListSpinner} // used for spinner of button 
+                         responseFlag={this.props.ppsFilterSpinnerState} // used for spinner of button 
                          noDataFlag={noOrder} //messg to show in case of no data
                          slides={rangeSlider}
                          />        
@@ -159,7 +162,9 @@ function mapStateToProps(state, ownProps){
     orderListSpinner: state.spinner.orderListSpinner || false,
     filterState: state.filterInfo.ppsfilterState,
     isFilterApplied: state.filterInfo.isFilterApplied || false,
-    ppsFilterState:state.filterInfo.ppsFilterState || false
+    ppsFilterState:state.filterInfo.ppsFilterState || false,
+    ppsFilterSpinnerState:state.spinner.ppsFilterSpinnerState || false
+
   };
 }
 
@@ -167,12 +172,28 @@ var mapDispatchToProps = function(dispatch){
   return {
     showTableFilter: function(data){dispatch(showTableFilter(data));},
     filterApplied: function(data){dispatch(filterApplied(data));},
-    socketDataSubscription: function(data){dispatch(socketDataSubscription(data));},
+    updateMainStore: function(data){dispatch(updateMainStore(data));},
     ppsfilterState: function(data){dispatch(ppsfilterState(data));},
-    togglePPSFilter: function(data){dispatch(togglePPSFilter(data));}
+    togglePPSFilter: function(data){dispatch(togglePPSFilter(data));},
+    setPpsSpinner: function(data){dispatch(setPpsSpinner(data));},
+    setPpsFilterSpinner: function(data){dispatch(setPpsFilterSpinner(data));}
 
   }
 };
+PPSFilter.PropTypes={
+  PPSDetail:React.PropTypes.array,
+ showFilter:React.PropTypes.bool,
+ orderData:React.PropTypes.object,
+ wsSubscriptionData:React.PropTypes.object,
+ orderListSpinner:React.PropTypes.bool,
+ isFilterApplied:React.PropTypes.bool,
+ ppsFilterState:React.PropTypes.bool,
+ showTableFilter:React.PropTypes.func,
+filterApplied: React.PropTypes.func,
+updateMainStore:React.PropTypes.func,
+togglePPSFilter:React.PropTypes.func
+};
+
 export default connect(mapStateToProps,mapDispatchToProps)(PPSFilter) ;
 
 

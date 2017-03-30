@@ -7,7 +7,7 @@ import {recieveOverviewStatus,recieveSystemStatus,recieveAuditStatus,recieveOrde
 import {displaySpinner} from '../actions/spinnerAction';
 import {setInventorySpinner} from '../actions/inventoryActions';
 import {setAuditSpinner} from '../actions/auditActions';
-import {setButlerSpinner,setPpsSpinner,setCsSpinner,setWavesSpinner} from '../actions/spinnerAction';
+import {setButlerSpinner,setPpsSpinner,setCsSpinner,setWavesSpinner,setWavesFilterSpinner,setButlerFilterSpinner,setPpsFilterSpinner} from '../actions/spinnerAction';
 import {receiveInventoryTodayData,receiveInventoryHistoryData} from '../actions/inventoryActions';
 import {resTypeSnapShotToday,resTypeSnapShotHistory} from '../../mock/mockDBData';
 import {endSession} from './endSession';
@@ -29,9 +29,11 @@ export function ResponseParse(store,res)
 			case PARSE_PPS:
 				store.dispatch(recievePPSperformance(res));
 				store.dispatch(setPpsSpinner(false));
+				store.dispatch(setPpsFilterSpinner(false));
 				break;
 			case PARSE_BUTLERS:
 				store.dispatch(setButlerSpinner(false));
+				store.dispatch(setButlerFilterSpinner(false));
 				store.dispatch(receiveButlersData(res));
 				break;
 			case PARSE_AUDIT:
@@ -81,6 +83,7 @@ export function ResponseParse(store,res)
 				{
 					store.dispatch(setWavesSpinner(false));
 					store.dispatch(receiveOrdersData(res));	
+					store.dispatch(setWavesFilterSpinner(false));
 				}
 				break;
 		    case PARSE_PPA_THROUGHPUT:
@@ -123,7 +126,10 @@ export function ResponseParse(store,res)
 				break;	
 			case PARSE_STATUS:
 				store.dispatch(recieveStatus(res));	 
-				break;				   
+				break;	
+			case 'orders':
+				store.dispatch(setWavesFilterSpinner(false));
+				break;	   
 			default:
 	    }
 }  

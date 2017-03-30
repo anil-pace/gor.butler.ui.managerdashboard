@@ -68,11 +68,6 @@ class LoginForm extends React.Component{
 
 	render(){
         // remove the internationalization from 'Butler' as it is our brand and also 'TM' as it is universal term
-        var marks={
-          0:"0",
-          50:"50",
-          100:"100"
-        }
         return (
               <form action="#"  id = "loginForm" ref={node => { this.loginForm = node }} 
                 onSubmit={(e) => this._handleSubmit(e)}>

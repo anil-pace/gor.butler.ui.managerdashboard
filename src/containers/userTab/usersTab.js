@@ -200,11 +200,26 @@ var mapDispatchToProps = function(dispatch){
   };
 }
 
-
 UsersTab.contextTypes ={
  intl:React.PropTypes.object.isRequired
 }
-
+UsersTab.PropTypes={
+userFilter: React.PropTypes.string,
+userdetails:React.PropTypes.array,
+manager:React.PropTypes.array,
+userSortHeader:React.PropTypes.string,
+userSortHeaderState:React.PropTypes.string,
+showFilter: React.PropTypes.bool,
+isFilterApplied:React.PropTypes.bool,
+userFilterStatus:React.PropTypes.bool,
+auth_token: React.PropTypes.object,
+userRequest: React.PropTypes.func,
+userFilterDetail:React.PropTypes.func,
+userHeaderSort:React.PropTypes.func,
+userHeaderSortOrder:React.PropTypes.func,
+showTableFilter:React.PropTypes.func,
+filterApplied: React.PropTypes.func
+};
 
 
 

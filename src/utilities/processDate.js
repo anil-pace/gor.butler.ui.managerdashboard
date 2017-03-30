@@ -5,3 +5,7 @@ export function addDateOffSet(dateObj,timeOffset){
              + '-' + startDate.getDate();
   return startDate;
 }
+export function getYear(){
+	var dtToday = new Date();
+	return dtToday.getFullYear();
+}

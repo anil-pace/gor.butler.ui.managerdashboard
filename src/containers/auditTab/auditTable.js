@@ -470,4 +470,19 @@ AuditTable.contextTypes ={
  intl:React.PropTypes.object.isRequired
 }
 
+AuditTable.PropTypes={
+    items:React.PropTypes.array,
+    sortHeaderOrder:React.PropTypes.func,
+    sortHeaderState:React.PropTypes.func,
+    refreshData:React.PropTypes.func,
+    setFilter:React.PropTypes.func,
+    auditState:React.PropTypes.object,
+    showFilter:React.PropTypes.bool,
+    isFilterApplied:React.PropTypes.bool,
+    responseFlag:React.PropTypes.bool,
+containerWidth:React.PropTypes.number,
+totalAudits:React.PropTypes.number
+};
+
+
 export default (Dimensions()(AuditTable));

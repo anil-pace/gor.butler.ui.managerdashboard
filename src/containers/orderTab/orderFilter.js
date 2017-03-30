@@ -111,4 +111,15 @@ var mapDispatchToProps = function(dispatch){
     filterApplied: function(data){dispatch(filterApplied(data));}
   }
 };
+
+OrderFilter.PropTypes={
+    showFilter:React.PropTypes.bool,
+    orderData:React.PropTypes.object,
+    orderListSpinner:React.PropTypes.bool,
+    showTableFilter:React.PropTypes.func,
+    filterApplied:React.PropTypes.func
+};
+
+
+
 export default connect(mapStateToProps,mapDispatchToProps)(OrderFilter) ;

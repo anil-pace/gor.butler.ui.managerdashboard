@@ -4,7 +4,7 @@ import { connect } from 'react-redux' ;
 import {userRequest} from '../../actions/userActions';
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
 import {modal} from 'react-redux-modal';
-import {validatePassword, resetForm} from '../../actions/validationActions';
+import {validatePassword, modalFormReset} from '../../actions/validationActions';
 import { emptyField } from '../../utilities/fieldCheck';
 import {LOGIN_URL} from '../../constants/configConstants';
 import {ERROR,TYPING,APP_JSON,POST,SUCCESS,RESUME_OPERATION} from '../../constants/frontEndConstants';
@@ -30,7 +30,7 @@ class ResumeOperation extends React.Component{
           return loginPassInfo.type;    
   }
   componentWillReceiveProps(nextProps){
-    if(!nextProps.auth_token)
+    if(!nextProps.auth_token||!nextProps.system_emergency||nextProps.system_data !== this.props.system_data)
     {
       this._removeThisModal();
     }
@@ -39,8 +39,8 @@ class ResumeOperation extends React.Component{
       modal.add(SafetyChecklist, {
       title: '',
       size: 'large', // large, medium or small,
-      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-      hideCloseButton: true // (optional) if you don't wanna show the top right close button
+      closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: true, // (optional) if you don't wanna show the top right close button
       //.. all what you put in here you will get access in the modal props ;)
       });
     }
@@ -77,13 +77,13 @@ class ResumeOperation extends React.Component{
                 checklist to make sure that the Butler system is ready"
                             description="Text for resume operation body"/></span>
               <div className='gor-margin-top'>
-                 <div className={'gor-password-field-lg'+(this.props.passWordCheck.type === ERROR?' gor-input-error':' gor-input-ok')} ref={node => { this.passField = node }}>
-                        <div className={this.props.passWordCheck.type === ERROR?'gor-login-password-error':'gor-login-password'}></div>
+                 <div className={'gor-password-field-lg'+(this.props.passwordCheck.type === ERROR?' gor-input-error':' gor-input-ok')} ref={node => { this.passField = node }}>
+                        <div className={this.props.passwordCheck.type === ERROR?'gor-login-password-error':'gor-login-password'}></div>
                         <input className='field' type="password" id="password" 
                          ref={node => { this.password = node }} onChange={this._typing.bind(this)} 
                          placeholder="Enter your password" />
                 </div>
-                {this.props.passWordCheck && this.props.passWordCheck.type === ERROR?
+                {this.props.passwordCheck && this.props.passwordCheck.type === ERROR?
                   (<div className='gor-login-usr-error gor-sm-string' >
                       <FormattedMessage id='operation.resume.error' 
                     defaultMessage="The entered input does not match. Please try again."
@@ -95,7 +95,7 @@ class ResumeOperation extends React.Component{
                 <button className='gor-cancel-btn' onClick={this._removeThisModal.bind(this)}>
                 <FormattedMessage id='operation.cancel' 
                         defaultMessage="Cancel" description="Text for cancel"/></button>
-                <button className='gor-add-btn' disabled={this.props.passWordCheck.type === SUCCESS?false:true}
+                <button className='gor-add-btn' disabled={this.props.passwordCheck.type === SUCCESS?false:true}
                 onClick={this._handleResume.bind(this)} ><FormattedMessage id='operation.resume.view' 
                         defaultMessage="View safety checklist" description="Text for viewing safety checklist"/></button>
               </div>
@@ -108,16 +108,29 @@ class ResumeOperation extends React.Component{
   return  {
       auth_token:state.authLogin.auth_token,
       username:state.authLogin.username,      
-      passWordCheck: state.appInfo.passwordInfo||{},
-      modalStatus: state.appInfo.hideModal || false
+      passwordCheck: state.appInfo.passwordInfo||{},
+      modalStatus: state.emergency.hideModal || false,
+      system_emergency:state.tabsData.system_emergency||false,
+      system_data:state.tabsData.system_data||null
     }
 } 
 function mapDispatchToProps(dispatch){
     return {
       userRequest: function(data){ dispatch(userRequest(data)); },
       validatePass: function(data){ dispatch(validatePassword(data)); },  
-      resetForm:   function(){ dispatch(resetForm()); }                  
+      resetForm:   function(){ dispatch(modalFormReset()); },
     }
 };
+ResumeOperation.propTypes={
+      auth_token:React.PropTypes.string, 
+      username:React.PropTypes.string,
+      passwordCheck:React.PropTypes.object,
+      modalStatus:React.PropTypes.bool,
+      system_emergency:React.PropTypes.bool,
+      userRequest:React.PropTypes.func,
+      validatePass:React.PropTypes.func,
+      resetForm:React.PropTypes.func,
+      system_data:React.PropTypes.string
+}
 
 export default connect(mapStateToProps,mapDispatchToProps)(ResumeOperation);

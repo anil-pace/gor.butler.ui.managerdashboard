@@ -484,6 +484,16 @@
     "defaultMessage": "Admin"
   },
   {
+    "id": "stringConfig.qc",
+    "description": "Text to show Qc operator",
+    "defaultMessage": "QC Operator"
+  },
+  {
+    "id": "stringConfig.packing_operator",
+    "description": "Text to show packing operator",
+    "defaultMessage": "Packing Operator"
+  },
+  {
     "id": "stringConfig.temporary_unfulfillable",
     "description": "Text for temporary unfulfillable status",
     "defaultMessage": "On hold"
@@ -526,7 +536,7 @@
   {
     "id": "stringConfig.md005",
     "description": "Text for safety checklist item 5",
-    "defaultMessage": "No zonal emergencies are pressed."
+    "defaultMessage": "All Hard Emergency buttons are released."
   },
   {
     "id": "stringConfig.md006",
@@ -537,6 +547,16 @@
     "id": "stringConfig.audit_reaudited",
     "description": "Text for audit reaudited status",
     "defaultMessage": "Re-audited"
+  },
+  {
+    "id": "roleDesc.butler_supervisor",
+    "description": "Text for Manager description",
+    "defaultMessage": "Grant access to the Management Interface and Operator Interface to all systems"
+  },
+  {
+    "id": "roleDesc.butler_ui",
+    "description": "Text for Operator description",
+    "defaultMessage": "Grant access to the Operator Interface at each Pick Put Station in the Butler system"
   },
   {
     "id": "login.lang.english",
@@ -852,6 +872,11 @@
     "id": "emergency.resume.coreerror",
     "description": "Error while resuming operation",
     "defaultMessage": "Cannot connect to butler core"
+  },
+  {
+    "id": "emergency.resume.statuserror",
+    "description": "Error while resuming operation",
+    "defaultMessage": "Emergency status not soft_manual"
   },
   {
     "id": "emergency.resume.success",
@@ -1259,6 +1284,75 @@
     "defaultMessage": "Close"
   },
   {
+    "id": "resolveAudit.table.batchID",
+    "description": "batch id Column",
+    "defaultMessage": "BOX ID."
+  },
+  {
+    "id": "resolveAudit.table.expectedItems",
+    "description": "expectedItems Column",
+    "defaultMessage": "EXPECTED QUANTITY"
+  },
+  {
+    "id": "resolveAudit.table.actualQuantity",
+    "description": "actualQuantity Column",
+    "defaultMessage": "ACTUAL QUANTITY"
+  },
+  {
+    "id": "resolveAudit.table.STATUS",
+    "description": "status Column",
+    "defaultMessage": "STATUS"
+  },
+  {
+    "id": "resolveAudit.table.resolve",
+    "description": "resolve Column",
+    "defaultMessage": "RESOLVE"
+  },
+  {
+    "id": "audit.inSlot.text",
+    "defaultMessage": "In slot"
+  },
+  {
+    "id": "resolveAudit.table.slot",
+    "description": "slot id Column",
+    "defaultMessage": "SLOT ID"
+  },
+  {
+    "id": "audit.resolve.heading",
+    "description": "Heading for resolve audit",
+    "defaultMessage": "Resolve issues"
+  },
+  {
+    "id": "audit.viewIssues.heading",
+    "description": "Heading for view issues audit",
+    "defaultMessage": "View issues"
+  },
+  {
+    "id": "audit.missing.information",
+    "description": "missing information for audit",
+    "defaultMessage": "Audit task #{auditId} - {auditType}"
+  },
+  {
+    "id": "audit.missing.auditType",
+    "description": "missing information for audit type",
+    "defaultMessage": "Mismatch found in {totalLines} slot"
+  },
+  {
+    "id": "resolveAudit.cancelLabel",
+    "description": "button label for cancel",
+    "defaultMessage": "Cancel"
+  },
+  {
+    "id": "resolveAudit.confirmLabel",
+    "description": "button label for confirm",
+    "defaultMessage": "Confirm"
+  },
+  {
+    "id": "resolveAudit.closeLabel",
+    "description": "button label for close",
+    "defaultMessage": "Close"
+  },
+  {
     "id": "audit.start.ppscheckbox",
     "description": "Text for PPS",
     "defaultMessage": "PPS {eta}"
@@ -1536,7 +1630,7 @@
   {
     "id": "operation.safety.text",
     "description": "Text for ticking items",
-    "defaultMessage": "Tick every item to confirm that the system is safe to resume operation"
+    "defaultMessage": "Tick every item to confirm that the system is safe to resume operation."
   },
   {
     "id": "operation.safety.errors",
@@ -2820,26 +2914,6 @@
     "id": "users.add.roledetails.subheading",
     "description": "Subheading for role",
     "defaultMessage": "User will be given a specific level of control over the Butler system depending on the designated role"
-  },
-  {
-    "id": "users.add.roledetails.operator",
-    "description": "Text for operator",
-    "defaultMessage": "Operator"
-  },
-  {
-    "id": "users.add.roledetails.operatortext",
-    "description": "Subtext for operator",
-    "defaultMessage": "Grant access to the Operator Interface at each Pick Put Station in the Butler system"
-  },
-  {
-    "id": "users.add.roledetails.manager",
-    "description": "Text for manager",
-    "defaultMessage": "Manager"
-  },
-  {
-    "id": "users.add.roledetails.managertext",
-    "description": "Subtext for manager",
-    "defaultMessage": "Grant access to the Management Interface and Operator Interface to all systems"
   },
   {
     "id": "user.table.noData",

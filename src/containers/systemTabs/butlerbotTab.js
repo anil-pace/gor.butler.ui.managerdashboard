@@ -279,7 +279,23 @@ var mapDispatchToProps = function(dispatch){
 ButlerBot.contextTypes ={
  intl:React.PropTypes.object.isRequired
 }
-
+ButlerBot.PropTypes={
+butlerFilter:React.PropTypes.string,
+butlerSortHeader:React.PropTypes.string,
+butlerSortHeaderState:React.PropTypes.string,
+butlerSpinner:React.PropTypes.bool,
+butlerDetail:React.PropTypes.array,
+showFilter:React.PropTypes.bool,
+isFilterApplied: React.PropTypes.bool,
+botFilterStatus:React.PropTypes.bool,
+filterState:React.PropTypes.object,
+butlerFilterDetail:React.PropTypes.func,
+setButlerSpinner:React.PropTypes.func,
+butlerHeaderSort:React.PropTypes.func,
+butlerHeaderSortOrder:React.PropTypes.func,
+showTableFilter:React.PropTypes.func,
+filterApplied:React.PropTypes.func
+};
 
 export default connect(mapStateToProps,mapDispatchToProps)(ButlerBot) ;
 

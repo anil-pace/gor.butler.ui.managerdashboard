@@ -58,6 +58,8 @@ export const CODE_AS003='as003';
 export const CODE_G016='g016';
 export const CODE_AE007='ae007';
 export const CODE_AE008='ae008';
+export const CODE_E051='e051';
+export const CODE_E052='e052';
 /*User roles map*/
 export const BUTLER_SUPERVISOR = 'butler_supervisor';
 export const BUTLER_UI = 'butler_ui';
@@ -221,6 +223,16 @@ export const  stringConfig= defineMessages({
         description: 'Text to show admin',
         defaultMessage: "Admin" 
     },
+    qc_operator:{
+        id: 'stringConfig.qc',
+        description: 'Text to show Qc operator',
+        defaultMessage: "QC Operator" 
+    },
+    packing_operator:{
+        id: 'stringConfig.packing_operator',
+        description: 'Text to show packing operator',
+        defaultMessage: "Packing Operator"         
+    },
     temporary_unfulfillable:{
         "id": "stringConfig.temporary_unfulfillable",
         "description": "Text for temporary unfulfillable status",
@@ -264,7 +276,7 @@ export const  stringConfig= defineMessages({
     md005 : {
         "id": "stringConfig.md005",
         "description": "Text for safety checklist item 5",
-        "defaultMessage": "No zonal emergencies are pressed."
+        "defaultMessage": "All Hard Emergency buttons are released."
     },
     md006 : {
         "id": "stringConfig.md006",
@@ -277,4 +289,29 @@ export const  stringConfig= defineMessages({
         "defaultMessage": "Re-audited"
     }
 });
-
+export const  roleDesc= defineMessages({
+    
+    butler_supervisor:{
+        id: 'roleDesc.butler_supervisor',
+        description: 'Text for Manager description',
+        defaultMessage: "Grant access to the Management Interface and Operator Interface to all systems"  
+    },
+    butler_ui:{
+        id: 'roleDesc.butler_ui',
+        description: 'Text for Operator description',
+        defaultMessage: "Grant access to the Operator Interface at each Pick Put Station in the Butler system"  
+    }
+});
+export const  pwdDesc= defineMessages({
+    
+    butler_supervisor:{
+        id: 'pwdDesc.butler_supervisor',
+        description: 'Text for password description of manager',
+        defaultMessage: "A password of at least 8 alphanumeric characters will be required for logging into the Management Interface and Operator Interface."  
+    },
+    butler_ui:{
+        id: 'pwdDesc.butler_ui',
+        description: 'Text for password description of operator',
+        defaultMessage: "A password of 6 digits will be required for logging into the Operator Interface."  
+    }
+});

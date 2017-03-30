@@ -1,3 +1,17 @@
+/**
+ * This file is a node utility for collating all the internatilization messages into 
+ * en-US.json from where the translations have to be done for other languages
+ *
+ * Steps to use this file.
+ *
+ * 1. cd into the root directory of the git repo for this project
+ * 2. cd to 'nonClientUtils' folder
+ * 3. execute 'node collateMessagesEs5.js'
+ * 4. check the en-US.json for the updated string for translations.
+ * 
+ */
+
+
 'use strict';
 
 var _stringify = require('babel-runtime/core-js/json/stringify');

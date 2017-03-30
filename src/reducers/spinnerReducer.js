@@ -1,7 +1,7 @@
 
 import { DISPLAY_SPINNER,DISPLAY_LOGIN_SPINNER,DISPLAY_INVENTORY_SPINNER,DISPLAY_AUDIT_SPINNER, 
 	DISPLAY_ORDER_LIST_SPINNER,DISPLAY_WAVES_SPINNER,DISPLAY_BUTLER_SPINNER,DISPLAY_PPS_SPINNER,
-	DISPLAY_CHARGING_STATION_SPINNER,DISPAY_RESOLVE_AUDIT_SPINNER,DISPLAY_SAFETY_SPINNER} from '../constants/frontEndConstants'
+	DISPLAY_CHARGING_STATION_SPINNER,DISPAY_RESOLVE_AUDIT_SPINNER,DISPLAY_SAFETY_SPINNER,DISPAY_USER_SPINNER} from '../constants/frontEndConstants'
 
 /**
  * [loader reducer function to set isLoading state]
@@ -24,6 +24,21 @@ export  function spinner(state={},action){
 	    return Object.assign({}, state, {
 	    	"inventorySpinner":action.data
       })
+	    case 'DISPLAY_WAVES_FILTER_SPINNER':
+	    return Object.assign({}, state, {
+	    	"waveFIlterSpinner":action.data
+      })
+
+	    case 'DISPLAY_BOT_FILTER_SPINNER':
+	    return Object.assign({}, state, {
+	    	"butlerFilterSpinnerState":action.data
+      })
+
+	    case 'DISPLAY_PPS_SPINNER':
+	    return Object.assign({}, state, {
+	    	"ppsFilterSpinnerState":action.data
+      })
+
 
 	  case DISPLAY_AUDIT_SPINNER:
 	  return Object.assign({}, state, {
@@ -64,6 +79,11 @@ export  function spinner(state={},action){
       return Object.assign({}, state, {
 	    	"safetySpinner":action.data
 	  })
+case DISPAY_USER_SPINNER:
+      return Object.assign({}, state, {
+	    	"userSpinner":action.data
+	  })
+
 
 	  default:
 	    return state
