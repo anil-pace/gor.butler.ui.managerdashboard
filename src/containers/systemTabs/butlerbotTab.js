@@ -250,7 +250,6 @@ class ButlerBot extends React.Component{
 };
 
 function mapStateToProps(state, ownProps){
-  console.log(state)
   return {
     butlerFilter: state.sortHeaderState.butlerFilter|| "",
     butlerSortHeader: state.sortHeaderState.butlerHeaderSort || INITIAL_HEADER_SORT ,
