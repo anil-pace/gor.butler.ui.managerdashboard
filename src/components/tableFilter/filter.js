@@ -28,7 +28,8 @@ class Filter extends React.Component{
             <div>
                  <div className="gor-filter-header">
                     <div className="gor-filter-header-h1">
-                        
+                         <FormattedMessage id="gor-filter-filterLabel" description="label for filter" 
+            defaultMessage ="Filter data"/>
                     </div>
                     <div className="gor-filter-header-h2" onClick={this._closeFilter.bind(this)}>
                         Hide

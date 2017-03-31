@@ -9,7 +9,7 @@ import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldW
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
 import {stringConfig} from '../../constants/backEndConstants';
-import {displaySpinner}  from '../../actions/spinnerAction';
+import {userFilterApplySpinner}  from '../../actions/spinnerAction';
 
 class UserFilter extends React.Component{
   constructor(props) 
@@ -116,7 +116,7 @@ _processUserRoll(){
      this.props.updateSubscriptionPacket(updatedWsSubscription);
      this.props.filterApplied(!this.props.isFilterApplied);
      this.props.toggleUserFilter(true);
-     this.props.displaySpinner(true);
+     this.props.userFilterApplySpinner(true);
 
    }
 
@@ -129,7 +129,7 @@ _processUserRoll(){
      this.props.userfilterState({tokenSelected: {"STATUS":["all"], "ROLE":["all"], "WORK MODE":["all"],"LOCATION":["all"]}, searchQuery: {}});
      this.props.filterApplied(!this.props.isFilterApplied);
      this.props.toggleUserFilter(false);
-     this.props.displaySpinner(true);
+     this.props.userFilterApplySpinner(true);
    }
 
    render(){
@@ -184,7 +184,7 @@ var mapDispatchToProps = function(dispatch){
     userfilterState: function(data){dispatch(userfilterState(data));},
     updateSubscriptionPacket: function(data){dispatch(updateSubscriptionPacket(data));},
     toggleUserFilter: function(data){dispatch(toggleUserFilter(data));},
-displaySpinner: function(data){dispatch(displaySpinner(data));}
+userFilterApplySpinner: function(data){dispatch(userFilterApplySpinner(data));}
   }
 };
 UserFilter.PropTypes={

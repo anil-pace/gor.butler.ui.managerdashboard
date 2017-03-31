@@ -10,8 +10,8 @@ import {tabSelected,subTabSelected} from '../actions/tabSelectAction';
 import {setInventorySpinner} from '../actions/inventoryActions';
 import {setAuditSpinner} from '../actions/auditActions';
 import {setOrderListSpinner} from '../actions/orderListActions';
-import {setWavesSpinner, setButlerSpinner, setPpsSpinner, setCsSpinner,displaySpinner} from '../actions/spinnerAction';
-import {AUDIT, ORDERLIST,WAVES,BUTLERBOTS, PPS, CHARGING} from '../constants/appConstants';
+import {setWavesSpinner, setButlerSpinner, setPpsSpinner, setCsSpinner,setUserSpinner} from '../actions/spinnerAction';
+import {AUDIT, ORDERLIST,WAVES,BUTLERBOTS, PPS, CHARGING,USER} from '../constants/appConstants';
 import {OVERVIEW,TAB_ROUTE_MAP,INVENTORY} from '../constants/frontEndConstants';
 import { translationMessages } from '../utilities/i18n';
 import { updateIntl } from 'react-intl-redux';
@@ -39,15 +39,14 @@ class Routes extends React.Component{
   				case AUDIT:
   				this.props.setAuditSpinner(true);
   				break;
-
-          case 'USERS':
-          this.props.displaySpinner(true);
+          case USER:
+          this.props.setUserSpinner(true);
           break;
 
   				default:
   				this.props.setInventorySpinner(false);
   				this.props.setAuditSpinner(false);
-          this.props.displaySpinner(false);
+          this.props.setUserSpinner(false);
 
   			}
   			if(subTab !== null) {
@@ -280,7 +279,8 @@ var mapDispatchToProps = function(dispatch){
         setWavesSpinner: function(data){dispatch(setWavesSpinner(data))},
         setPpsSpinner: function(data){dispatch(setPpsSpinner(data))},
         setCsSpinner: function(data){dispatch(setCsSpinner(data))},
-        displaySpinner: function(data){dispatch(displaySpinner(data))}
+        setUserSpinner: function(data){dispatch(setUserSpinner(data))}
+
     }
 
 };

@@ -1,4 +1,4 @@
-import {SHOW_FILTER, IS_FILTER_APPLIED,BUTLER_FILTER_STATE,CHARGINGSTATION_FILTER_STATE,PPS_FILTER_STATE,WAVE_FILTER_STATE,USER_FILTER_STATE,TOGGLE_BUTTON,TOGGLE_BUTTON_BOT,PPS_FILTER_VALUE,CHARGING_FILTER_VALUE,WAVE_FILTER_VALUE,USER_FILTER_VALUE} from '../constants/frontEndConstants'; 
+import {SHOW_FILTER, IS_FILTER_APPLIED,BUTLER_FILTER_STATE,CHARGINGSTATION_FILTER_STATE,PPS_FILTER_STATE,WAVE_FILTER_STATE,USER_FILTER_STATE,TOGGLE_BUTTON,TOGGLE_BUTTON_BOT,PPS_FILTER_VALUE,CHARGING_FILTER_VALUE,WAVE_FILTER_VALUE,USER_FILTER_VALUE,SET_DEFAULT_RANGE} from '../constants/frontEndConstants'; 
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -18,7 +18,7 @@ import {SHOW_FILTER, IS_FILTER_APPLIED,BUTLER_FILTER_STATE,CHARGINGSTATION_FILTE
       "isFilterApplied" : action.data
     })
     break;
-case 'SET_DEFAULT_RANGE':              //This reducer will update the the isFilterApplied value with true/false
+case SET_DEFAULT_RANGE:              //This reducer will update the the isFilterApplied value with true/false
     return Object.assign({}, state, { 
       "deaultSliderRange" : action.data
     })

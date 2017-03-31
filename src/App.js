@@ -77,12 +77,10 @@ import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,
      let subscribeData;
      if(currTab) {
       subscribeData = (nextProps.wsSubscriptionData[currTab] || nextProps.wsSubscriptionData["default"]);
-      //subscribeData = (wsOverviewData[currTab] || wsOverviewData["default"]);
     }
 
     else {
       subscribeData = nextProps.wsSubscriptionData["default"];
-      //subscribeData = wsOverviewData["default"];
     }
     
     if(!socketStatus){

@@ -21,6 +21,7 @@ export const WS_INIT = "WS_INIT";
 export const WS_END="WS_END";
 export const WS_MOCK="WS_MOCK";
 export const DATA_SUBSCRIPTION_PACKET="DATA_SUBSCRIPTION_PACKET";
+export const SET_DEFAULT_RANGE="SET_DEFAULT_RANGE";
 
 /* Header constants */
 export const GET_OVERVIEW="get_overview";
