@@ -1,5 +1,10 @@
 [
   {
+    "id": "gor-filter-filterLabel",
+    "description": "label for filter",
+    "defaultMessage": "Filter data"
+  },
+  {
     "id": "gor.filter.heading",
     "description": "filter heading",
     "defaultMessage": "Apply filter"

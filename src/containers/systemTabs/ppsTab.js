@@ -15,6 +15,7 @@ import {stringConfig} from '../../constants/backEndConstants'
 import { defineMessages } from 'react-intl';
 import { ppsHeaderSort,ppsHeaderSortOrder, setCheckedPps,setDropDisplay ,setCheckAll,ppsFilterDetail} from '../../actions/sortHeaderActions';
 import {INITIAL_HEADER_SORT,INITIAL_HEADER_ORDER,GOR_ON_STATUS,GOR_FIRST_LAST} from '../../constants/frontEndConstants';
+import {showTableFilter,filterApplied} from '../../actions/filterAction';
 
 //Mesages for internationalization
 const messages = defineMessages({
@@ -106,9 +107,9 @@ class PPS extends React.Component{
 
 }
 	render(){	
-
-	var operationMode = {"pick":0, "put":0, "audit":0,"notSet":0};
-    var data , operatorNum = 0, itemNumber = 5, ppsOn = 0, avgThroughput=0;
+let updateStatusIntl="";
+	let operationMode = {"pick":0, "put":0, "audit":0,"notSet":0};
+    let data , operatorNum = 0, itemNumber = 5, ppsOn = 0, avgThroughput=0;
     if(this.props.PPSDetail.PPStypeDetail !== undefined) {
     	data = this._processPPSData();
       for (var i = data.length - 1; i >= 0; i--) {
@@ -155,7 +156,13 @@ class PPS extends React.Component{
              getCheckAll = {this.props.getCheckAll}
              setPpsFilter={this.props.ppsFilterDetail}
              getPpsFilter = {this.props.ppsFilter}
-             avgThroughput = {avgThroughput}/>
+             avgThroughput = {avgThroughput}
+            ppsFilterState={this.props.ppsFilterState}
+             isFilterApplied={this.props.isFilterApplied}
+             lastUpdatedText={updateStatusIntl}
+             lastUpdated={updateStatusIntl}
+             showFilter={this.props.showFilter}
+             setFilter={this.props.showTableFilter}/>
 					</div>
 				</div>
 			</div>
@@ -175,7 +182,10 @@ function mapStateToProps(state, ownProps){
     ppsSortHeaderState: state.sortHeaderState.ppsHeaderSortOrder || INITIAL_HEADER_ORDER,
     ppsSpinner: state.spinner.ppsSpinner || false,
     PPSDetail: state.PPSDetail || [],
-    intlMessages: state.intl.messages
+    intlMessages: state.intl.messages,
+    showFilter: state.filterInfo.filterState || false,
+    ppsFilterState:state.filterInfo.ppsFilterState|| false,
+    showFilter: state.filterInfo.filterState || false
   };
 }
 
@@ -188,12 +198,35 @@ var mapDispatchToProps = function(dispatch){
     ppsHeaderSortOrder: function(data){dispatch(ppsHeaderSortOrder(data))},
     setCheckedPps: function(data){dispatch(setCheckedPps(data))},
     setDropDisplay: function(data){dispatch(setDropDisplay(data))},
-    setCheckAll: function(data) {dispatch(setCheckAll(data))}
+    setCheckAll: function(data) {dispatch(setCheckAll(data))},
+    showTableFilter: function(data){dispatch(showTableFilter(data));}
   }
 };
 
 PPS.contextTypes = {
  intl:React.PropTypes.object.isRequired
+}
+PPS.PropTypes={
+ppsFilter: React.PropTypes.string,
+getCheckAll:React.PropTypes.bool,
+bDropRender:React.PropTypes.bool,
+ppsSortHeader:React.PropTypes.string,
+ppsSortHeaderState:React.PropTypes.string,
+ppsSpinner:React.PropTypes.bool,
+PPSDetail: React.PropTypes.array,
+showFilter:React.PropTypes.bool,
+ppsFilterState:React.PropTypes.bool,
+showFilter:React.PropTypes.bool,
+ppsFilterDetail:React.PropTypes.func,
+changePPSmode: React.PropTypes.func,
+setPpsSpinner: React.PropTypes.func,
+ppsHeaderSort: React.PropTypes.func,
+ppsHeaderSortOrder:React.PropTypes.func,
+setCheckedPps: React.PropTypes.func,
+setDropDisplay:React.PropTypes.func,
+setCheckAll: React.PropTypes.func,
+showTableFilter:React.PropTypes.func
+
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(PPS) ;

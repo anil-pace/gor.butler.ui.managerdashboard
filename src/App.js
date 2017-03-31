@@ -3,7 +3,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import Tabs from './containers/tabs';
 import Header from './components/header/header';
-import {setWsAction ,setMockAction, endWsAction} from './actions/socketActions';
+import {setWsAction ,setMockAction, endWsAction, updateSubscriptionPacket} from './actions/socketActions';
 import {getTimeOffSetData,setTimeOffSetData, logoutRequest} from './actions/loginAction';
 import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,
   WS_MOCK,USERS,TAB_ROUTE_MAP,OVERVIEW ,SYSTEM,ORDERS,INVENTORY,GET} from './constants/frontEndConstants';
@@ -28,9 +28,8 @@ import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,
   } 
   
   componentWillMount(){
-
     this.context.router.push("/login");
-
+    this.props.updateSubscriptionPacket(wsOverviewData);
   }
   componentDidMount(){
     var timeOffset =  sessionStorage.getItem("timeOffset");
@@ -77,11 +76,11 @@ import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,
      }
      let subscribeData;
      if(currTab) {
-      subscribeData = (wsOverviewData[currTab] || wsOverviewData["default"]);
+      subscribeData = (nextProps.wsSubscriptionData[currTab] || nextProps.wsSubscriptionData["default"]);
     }
 
     else {
-      subscribeData = wsOverviewData["default"];
+      subscribeData = nextProps.wsSubscriptionData["default"];
     }
     
     if(!socketStatus){
@@ -99,7 +98,7 @@ import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,
     }
     else if(nextProps.prevTab !== currTab){
       this.props.initDataSentCall(subscribeData) ;
-      this.props.prevTabSelected(currTab || TAB_ROUTE_MAP[OVERVIEW]) ;
+      this.props.prevTabSelected(currTab || TAB_ROUTE_MAP[OVERVIEW]);
     }
     else if(nextProps.prevTab === currTab) {
       this.props.initDataSentCall(subscribeData) ;
@@ -144,7 +143,9 @@ import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,
     intl: state.intl,
     tab:state.tabSelected.tab,
     subTab:state.tabSelected.subTab,
-    prevTab:state.tabSelected.prevTab
+    prevTab:state.tabSelected.prevTab,
+    wsSubscriptionData:state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
+    isFilterApplied: state.filterInfo.isFilterApplied || false
   }
 } 
 /**
@@ -161,7 +162,8 @@ import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,
     setTimeOffSetData:function(data){ dispatch(setTimeOffSetData(data)); },
     endConnect: function(){ dispatch(endWsAction()); },
     userLogout: function(){ dispatch(logoutRequest()); },
-    notifyInfo: function(data){dispatch (notifyInfo(data));}
+    notifyInfo: function(data){dispatch (notifyInfo(data));},
+    updateSubscriptionPacket: function(data){dispatch (updateSubscriptionPacket(data));}
   }
 };
 export  default connect(mapStateToProps,mapDispatchToProps)(App);

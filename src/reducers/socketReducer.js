@@ -1,4 +1,4 @@
-import {WS_CONNECTED,WS_ONMESSAGE,WS_END} from '../constants/frontEndConstants';
+import {WS_CONNECTED,WS_ONMESSAGE,WS_END, DATA_SUBSCRIPTION_PACKET} from '../constants/frontEndConstants';
 
 
 /**
@@ -30,6 +30,13 @@ export  function recieveSocketActions(state={},action){
           "initDataSent":true
         })
       break;
+
+    case DATA_SUBSCRIPTION_PACKET:
+      return Object.assign({}, state, {
+          "socketDataSubscriptionPacket":action.data 
+        })
+    break;  
+      
 	  default:
 	    return state
   }

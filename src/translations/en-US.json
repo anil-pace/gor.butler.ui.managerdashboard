@@ -1284,6 +1284,75 @@
     "defaultMessage": "Close"
   },
   {
+    "id": "resolveAudit.table.batchID",
+    "description": "batch id Column",
+    "defaultMessage": "BOX ID."
+  },
+  {
+    "id": "resolveAudit.table.expectedItems",
+    "description": "expectedItems Column",
+    "defaultMessage": "EXPECTED QUANTITY"
+  },
+  {
+    "id": "resolveAudit.table.actualQuantity",
+    "description": "actualQuantity Column",
+    "defaultMessage": "ACTUAL QUANTITY"
+  },
+  {
+    "id": "resolveAudit.table.STATUS",
+    "description": "status Column",
+    "defaultMessage": "STATUS"
+  },
+  {
+    "id": "resolveAudit.table.resolve",
+    "description": "resolve Column",
+    "defaultMessage": "RESOLVE"
+  },
+  {
+    "id": "audit.inSlot.text",
+    "defaultMessage": "In slot"
+  },
+  {
+    "id": "resolveAudit.table.slot",
+    "description": "slot id Column",
+    "defaultMessage": "SLOT ID"
+  },
+  {
+    "id": "audit.resolve.heading",
+    "description": "Heading for resolve audit",
+    "defaultMessage": "Resolve issues"
+  },
+  {
+    "id": "audit.viewIssues.heading",
+    "description": "Heading for view issues audit",
+    "defaultMessage": "View issues"
+  },
+  {
+    "id": "audit.missing.information",
+    "description": "missing information for audit",
+    "defaultMessage": "Audit task #{auditId} - {auditType}"
+  },
+  {
+    "id": "audit.missing.auditType",
+    "description": "missing information for audit type",
+    "defaultMessage": "Mismatch found in {totalLines} slot"
+  },
+  {
+    "id": "resolveAudit.cancelLabel",
+    "description": "button label for cancel",
+    "defaultMessage": "Cancel"
+  },
+  {
+    "id": "resolveAudit.confirmLabel",
+    "description": "button label for confirm",
+    "defaultMessage": "Confirm"
+  },
+  {
+    "id": "resolveAudit.closeLabel",
+    "description": "button label for close",
+    "defaultMessage": "Close"
+  },
+  {
     "id": "audit.start.ppscheckbox",
     "description": "Text for PPS",
     "defaultMessage": "PPS {eta}"
@@ -1827,7 +1896,7 @@
   {
     "id": "order.table.filterLabel",
     "description": "button label for filter",
-    "defaultMessage": "Filter"
+    "defaultMessage": "Filter Data"
   },
   {
     "id": "orderlist.filter.search.bar",

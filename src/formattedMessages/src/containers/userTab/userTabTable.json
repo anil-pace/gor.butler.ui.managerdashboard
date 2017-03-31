@@ -15,6 +15,11 @@
     "defaultMessage": "Add new user"
   },
   {
+    "id": "order.table.filterLabel",
+    "description": "button label for filter",
+    "defaultMessage": "Filter data"
+  },
+  {
     "id": "user.table.usersCount",
     "description": "Users Column",
     "defaultMessage": "{rowsCount} USERS"

@@ -1,0 +1,50 @@
+[
+  {
+    "id": "pps.inputField.id",
+    "defaultMessage": "PPS ID"
+  },
+  {
+    "id": "pps.inputField.oprator",
+    "defaultMessage": "OPERATOR ASSIGNED"
+  },
+  {
+    "id": "pps.token.status",
+    "defaultMessage": "STATUS"
+  },
+  {
+    "id": "pps.token.timePeriod",
+    "defaultMessage": "MODE"
+  },
+  {
+    "id": "pps.STATUS.all",
+    "defaultMessage": "Any"
+  },
+  {
+    "id": "pps.STATUS.stopped",
+    "defaultMessage": "On"
+  },
+  {
+    "id": "pps.STATUS.error",
+    "defaultMessage": "Off"
+  },
+  {
+    "id": "pps.MODE.all",
+    "defaultMessage": "Any"
+  },
+  {
+    "id": "pps.MODE.pick",
+    "defaultMessage": "Pick"
+  },
+  {
+    "id": "pps.MODE.put",
+    "defaultMessage": "Put"
+  },
+  {
+    "id": "pps.MODE.audit",
+    "defaultMessage": "Audit"
+  },
+  {
+    "id": "v.MODE.notset",
+    "defaultMessage": "Not set"
+  }
+]

@@ -1,4 +1,4 @@
-export const BASE_URL = 'localhost' ;
+export const BASE_URL = '192.168.8.109' ;
 export const PORT = '8888';
 export const PROTOCOL = 'https://';
 export const WS_PROTOCOL ="wss://";
@@ -22,7 +22,7 @@ export const WAREHOUSE_STATUS="&warehouse_status=";
 export const UPDATE_TIME_LOW='&update_time<=';
 export const UPDATE_TIME_HIGH='&update_time>=';
 export const PICK_BEFORE_ORDER_URL = "&pick_before_time<=";
-export const BREACHED_URL = "&breached=true&warehouse_status=['pending','fulfillable','temporary_unfulfillable']";
+export const BREACHED_URL = "&breached=true&warehouse_status=['pending','fulfillable','temporary_unfulfillable','completed']";
 export const TIME_ZONE_URL = PROTOCOL+BASE_URL+"/api/components/get_time_zone"
 export const GIVEN_PAGE="&page=";
 export const GIVEN_PAGE_SIZE="&PAGE_SIZE=20";

@@ -1,6 +1,6 @@
 import React  from 'react';
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
-import {AUDIT_RESOLVED, AUDIT_LINE_REJECTED, SUCCESS, ERROR} from '../constants/frontEndConstants';
+import {AUDIT_RESOLVED, AUDIT_LINE_REJECTED, SUCCESS, ERROR, AUDIT_BY_PDFA} from '../constants/frontEndConstants';
 import {ERR_RES} from '../constants/messageConstants';
 
 export function statusToString(res){
@@ -8,6 +8,13 @@ export function statusToString(res){
           switch(res.status)
           {
             case AUDIT_RESOLVED:
+              var auditId = res.audit_display_id;
+              var auditType = res.audit_type;
+              var auditTypeValue = res.audit_type_value;
+               if(auditType === AUDIT_BY_PDFA) {
+                auditType = "SKU";
+                auditTypeValue = res.audit_type_value.product_sku;
+              }
               stringInfo={
                 type:SUCCESS,
                 msg:(<FormattedMessage id="audit.resolve.success" description='Text for resolved audit lines' 
@@ -18,6 +25,13 @@ export function statusToString(res){
               break;
             
             case AUDIT_LINE_REJECTED:
+              var auditId = res.audit_display_id;
+              var auditType = res.audit_type;
+              var auditTypeValue = res.audit_type_value;
+              if(auditType === AUDIT_BY_PDFA) {
+                auditType = "SKU";
+                auditTypeValue = res.audit_type_value.product_sku;
+              }
               stringInfo={
                 type:SUCCESS,
                 msg:(<FormattedMessage id="audit.resolve.rejected" description='Text for rejected audit lines' 

@@ -37,7 +37,7 @@
   {
     "id": "audit.table.filterLabel",
     "description": "button label for filter",
-    "defaultMessage": "Filter"
+    "defaultMessage": "Filter data"
   },
   {
     "id": "orderlist.filter.search.bar",

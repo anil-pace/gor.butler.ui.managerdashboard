@@ -1,0 +1,82 @@
+[
+  {
+    "id": "user.inputField.id",
+    "defaultMessage": "USER NAME"
+  },
+  {
+    "id": "user.role.all",
+    "defaultMessage": "Any"
+  },
+  {
+    "id": "user.tokenfield.status",
+    "defaultMessage": "STATUS"
+  },
+  {
+    "id": "user.tokenfield.role",
+    "defaultMessage": "ROLE"
+  },
+  {
+    "id": "user.tokenfield.mode",
+    "defaultMessage": "WORK MODE"
+  },
+  {
+    "id": "user.tokenfield.location",
+    "defaultMessage": "LOCATION"
+  },
+  {
+    "id": "user.status.all",
+    "defaultMessage": "Any"
+  },
+  {
+    "id": "user.status.online",
+    "defaultMessage": "Online"
+  },
+  {
+    "id": "user.status.offline",
+    "defaultMessage": "Offline"
+  },
+  {
+    "id": "user.workmode.all",
+    "defaultMessage": "Any"
+  },
+  {
+    "id": "user.workmode.pickfront",
+    "defaultMessage": "Pick Front"
+  },
+  {
+    "id": "user.workmode.pickback",
+    "defaultMessage": "Pick Back"
+  },
+  {
+    "id": "user.workmode.putfront",
+    "defaultMessage": "Put Front"
+  },
+  {
+    "id": "user.workmode.putback",
+    "defaultMessage": "Put Back"
+  },
+  {
+    "id": "user.workmode.audit",
+    "defaultMessage": "Audit"
+  },
+  {
+    "id": "user.workmode.management",
+    "defaultMessage": "Management"
+  },
+  {
+    "id": "user.location.all",
+    "defaultMessage": "Any"
+  },
+  {
+    "id": "user.location.issueFound",
+    "defaultMessage": "Pick Put Station"
+  },
+  {
+    "id": "user.location.rejected",
+    "defaultMessage": "QC Station"
+  },
+  {
+    "id": "user.location.resolved",
+    "defaultMessage": "Head Office"
+  }
+]

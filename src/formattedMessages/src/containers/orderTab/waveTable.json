@@ -10,6 +10,11 @@
     "defaultMessage": "Waves"
   },
   {
+    "id": "order.table.filterLabel",
+    "description": "button label for filter",
+    "defaultMessage": "Filter data"
+  },
+  {
     "id": "WavesTable.heading",
     "description": "heading for WavesTable",
     "defaultMessage": "Waves"

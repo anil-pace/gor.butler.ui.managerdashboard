@@ -10,6 +10,7 @@ import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell
 import {BASE_URL, PPS_MODE_CHANGE_URL,PROTOCOL,API_URL} from '../../constants/configConstants';
 import { defineMessages } from 'react-intl';
 import {GOR_STATUS,GOR_STATUS_PRIORITY,GOR_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
+import PPSFilter from './ppsFilter';
 
 const messages = defineMessages({
     ppsPlaceholder: {
@@ -62,6 +63,13 @@ class PPStable extends React.Component {
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
     
   }
+  shouldComponentUpdate(nextProps) {
+    if((nextProps.items && !nextProps.items.length)){
+      return false;
+    }
+    return true;
+  }
+
 
   componentWillReceiveProps(nextProps) {
     var temp;
@@ -219,6 +227,13 @@ class PPStable extends React.Component {
      
   }
 
+
+_setFilter() {
+    let newState = !this.props.showFilter;
+    this.props.setFilter(newState);
+   }
+
+
   handleModeChange(data) {
     var checkedPPS=[], j=0, mode=data.value, sortedIndex;
     for (var i = this.props.checkedPps.length - 1; i >= 0; i--) {
@@ -256,7 +271,9 @@ class PPStable extends React.Component {
 
   
   render() {
-    var {sortedDataList, colSortDirs,columnWidths,renderDropD, ppsSelected,headerChecked} = this.state, checkedPPS = [];
+     let updateStatusIntl="";
+    let filterHeight = screen.height-190-50;
+    let {sortedDataList, colSortDirs,columnWidths,renderDropD, ppsSelected,headerChecked} = this.state, checkedPPS = [];
     let pickDrop = <FormattedMessage id="PPS.table.pickDrop" description="pick dropdown option for PPS" defaultMessage ="Put"/> 
     let putDrop = <FormattedMessage id="PPS.table.putDrop" description="put dropdown option for PPS" defaultMessage ="Pick"/> 
     let auditDrop = <FormattedMessage id="PPS.table.auditDrop" description="audit dropdown option for PPS" defaultMessage ="Audit"/> 
@@ -266,8 +283,8 @@ class PPStable extends React.Component {
     { value: 'pick', label: putDrop },
     { value: 'audit', label: auditDrop }
     ];
-    var checkState = this.handleChange.bind(this);
-    var drop, selected =0, ppsTotal = sortedDataList.getSize();
+    let checkState = this.handleChange.bind(this);
+    let drop, selected =0, ppsTotal = sortedDataList.getSize();
     let pick = this.props.operationMode.pick;
     let put = this.props.operationMode.put;
     let audit = this.props.operationMode.audit;
@@ -289,21 +306,26 @@ class PPStable extends React.Component {
         }
       }
     }
-    var containerHeight = this.props.containerHeight;
-    var noData = <div/>;
+    let containerHeight = this.props.containerHeight;
+    let noData = <div/>;
     if(ppsTotal === 0 || ppsTotal === undefined || ppsTotal === null) {
      noData =  <div className="gor-no-data"> <FormattedMessage id="PPStable.table.noData" description="No data message for PPStable" 
        defaultMessage ="No PPS Found"/>  </div>
      containerHeight = GOR_TABLE_HEADER_HEIGHT;
     }
     
-    var checkedStatePps = [];
+    let checkedStatePps = [];
     if(this.props.checkedPps) {
       checkedStatePps = this.props.checkedPps;
     }
    
     return (
       <div className="gorTableMainContainer">
+
+<div className="gor-filter-wrap" style={{'width':this.props.showFilter?'350px':'0px', height:filterHeight}}> 
+         <PPSFilter refreshOption={this.props.refreshOption} responseFlag={this.props.responseFlag}/>  
+       </div>
+
         <div className="gorToolBar">
           <div className="gorToolBarWrap">
             <div className="gorToolBarElements">
@@ -319,15 +341,17 @@ class PPStable extends React.Component {
               {drop}
             </div>
           </div>
-        <div className="filterWrapper">  
-        <div className="gorFilter">
-            <div className="searchbox-magnifying-glass-icon"/>
-            <input className="gorInputFilter"
-              onChange={this._onFilterChange}
-              placeholder={this.props.intlMessg["table.filter.placeholder"]}
-              value={this.props.getPpsFilter}>
-            </input>
-        </div>
+        <div className="filterWrapper"> 
+        <div className="gorToolBarDropDown">
+        <div className="gor-button-wrap">
+        <div className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
+        <button className={this.props.ppsFilterState?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
+          <div className="gor-manage-task"/>
+          <FormattedMessage id="order.table.filterLabel" description="button label for filter" 
+          defaultMessage ="Filter data"/>
+         </button>
+       </div>
+        </div>     
         </div>
        </div>
 
@@ -464,6 +488,23 @@ class PPStable extends React.Component {
     );
   }
 }
+
+PPStable.PropTypes={
+items:React.PropTypes.array,
+  containerWidth:React.PropTypes.number,
+  itemNumber:React.PropTypes.number,
+  currentHeaderOrder:React.PropTypes.object,
+  sortHeaderState:React.PropTypes.func,
+  lastUpdatedText:React.PropTypes.string,
+  showFilter:React.PropTypes.bool,
+  lastUpdated:React.PropTypes.string,
+  ppsFilterState:React.PropTypes.bool,
+  setFilter:React.PropTypes.func,
+  containerHeight:React.PropTypes.number,
+  currentSortState:React.PropTypes.string,
+  responseFlag:React.PropTypes.bool,
+getCheckAll:React.PropTypes.bool
+};
 
 
 export default Dimensions()(PPStable);

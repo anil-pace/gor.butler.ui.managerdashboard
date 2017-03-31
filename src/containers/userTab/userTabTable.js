@@ -9,6 +9,7 @@ import AddUser from './addNewUser';
 import EditUser from './editUser';
 import DeleteUser from './deleteUser';
 import {GOR_USER_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
+import UserFilter from './userFilter';
 
 class UserDataTable extends React.Component {
   constructor(props) {
@@ -39,7 +40,12 @@ class UserDataTable extends React.Component {
     }));
   }
 
-
+shouldComponentUpdate(nextProps) {
+    if((nextProps.items && !nextProps.items.length)){
+      return false;
+    }
+    return true;
+  }
   componentWillReceiveProps(nextProps){
     this._dataList = new tableRenderer(nextProps.items.length);
     this._defaultSortIndexes = [];
@@ -160,10 +166,9 @@ class UserDataTable extends React.Component {
       userName:uname,
       first:fname,
       last:lname
-    });
-
-   
+    }); 
   }
+
   handleDel(columnKey,rowIndex) {
     let id, name, temp,sortedIndex;
     if(this.state.sortedDataList.newData === undefined) {
@@ -185,19 +190,26 @@ class UserDataTable extends React.Component {
       name:name    });
    
   }
+
+  _setFilter() {
+    var newState = !this.props.showFilter;
+    this.props.setFilter(newState);
+   }
  
 
   render() {
-    var {sortedDataList, colSortDirs,columnWidths} = this.state;
-    var columnWidth= (this.props.containerWidth/this.props.itemNumber);
-    var heightRes = 560 ,rowsCount = sortedDataList.getSize() ;
+    let updateStatusIntl="";
+    let filterHeight = screen.height-190-50;
+    let {sortedDataList, colSortDirs,columnWidths} = this.state;
+    let columnWidth= (this.props.containerWidth/this.props.itemNumber);
+    let heightRes = 560 ,rowsCount = sortedDataList.getSize() ;
     if(this.props.containerHeight !== 0) {
       heightRes = this.props.containerHeight;
     }
     var selEdit = this.handleEdit.bind(this);
-    var selDel= this.handleDel.bind(this); 
-    var containerHeight = this.props.containerHeight;
-    var noData = <div/>;
+    let selDel= this.handleDel.bind(this); 
+    let containerHeight = this.props.containerHeight;
+    let noData = <div/>;
     if(rowsCount === 0 || rowsCount === undefined || rowsCount === null) {
      noData =  <div className="gor-no-data"> <FormattedMessage id="user.table.noData" description="No data message for user table" 
         defaultMessage ="No User Found"/>  </div>
@@ -205,6 +217,11 @@ class UserDataTable extends React.Component {
      }
     return (
       <div>
+
+      <div className="gor-filter-wrap" style={{'width':this.props.showFilter?'350px':'0px', height:filterHeight}}> 
+         <UserFilter refreshOption={this.props.refreshOption} responseFlag={this.props.responseFlag}/>  
+       </div>
+
         <div className="gorToolBar">
           <div className="gorToolBarWrap">
             <div className="gorToolBarElements">
@@ -220,16 +237,23 @@ class UserDataTable extends React.Component {
                   </div>
             </div>            
           </div>
-          <div className="filterWrapper">  
-        <div className="gorFilter">
-            <div className="searchbox-magnifying-glass-icon"/>
-            <input className="gorInputFilter"
-              onChange={this._onFilterChange}
-              placeholder={this.props.intlMessg["table.filter.placeholder"]}
-              value={this.props.getUserFilter}>
-            </input>
+
+         <div className="filterWrapper"> 
+        <div className="gorToolBarDropDown">
+        <div className="gor-button-wrap">
+        <div className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
+        <button className={this.props.userFilterStatus?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
+          <div className="gor-manage-task"/>
+          <FormattedMessage id="order.table.filterLabel" description="button label for filter" 
+          defaultMessage ="Filter data"/>
+         </button>
+       </div>
+        </div>     
         </div>
-        </div>
+
+
+
+
        </div>
 
       <Table
@@ -344,4 +368,22 @@ class UserDataTable extends React.Component {
     );
   }
 }
+
+UserDataTable.PropTypes={
+items:React.PropTypes.array,
+  containerWidth:React.PropTypes.number,
+  itemNumber:React.PropTypes.number,
+  currentHeaderOrder:React.PropTypes.object,
+  sortHeaderState:React.PropTypes.func,
+  lastUpdatedText:React.PropTypes.string,
+  showFilter:React.PropTypes.bool,
+  lastUpdated:React.PropTypes.string,
+  setFilter:React.PropTypes.func,
+  containerHeight:React.PropTypes.number,
+  currentSortState:React.PropTypes.string,
+  responseFlag:React.PropTypes.bool,
+  userFilterStatus:React.PropTypes.bool
+
+};
+
 export default Dimensions()(UserDataTable);

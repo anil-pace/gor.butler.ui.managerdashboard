@@ -4,10 +4,10 @@ import {HISTOGRAM_DATA} from '../constants/frontEndConstants';
 import {SYSTEM_CHARGERS_DETAILS,USER_DATA,HISTOGRAM_DETAILS,PARSE_OVERVIEW,PARSE_SYSTEM,PARSE_STATUS,PPS_DETAIL,SYSTEM_PPS_DETAILS,SYSTEM_BUTLERS_DETAILS,PARSE_PPS,PARSE_BUTLERS,PARSE_CHARGERS,PARSE_INVENTORY_HISTORY,PARSE_INVENTORY_TODAY,PARSE_INVENTORY,PARSE_ORDERS,PARSE_PUT,PARSE_PICK,PARSE_PPA_THROUGHPUT,PARSE_AUDIT,PARSE_AUDIT_AGG} from '../constants/backEndConstants'
 import {wsOnMessageAction} from '../actions/socketActions';
 import {recieveOverviewStatus,recieveSystemStatus,recieveAuditStatus,recieveOrdersStatus,recieveUsersStatus,recieveInventoryStatus,recieveStatus} from '../actions/tabActions';
-import {displaySpinner} from '../actions/spinnerAction';
+import {userFilterApplySpinner} from '../actions/spinnerAction';
 import {setInventorySpinner} from '../actions/inventoryActions';
 import {setAuditSpinner} from '../actions/auditActions';
-import {setButlerSpinner,setPpsSpinner,setCsSpinner,setWavesSpinner} from '../actions/spinnerAction';
+import {setButlerSpinner,setPpsSpinner,setCsSpinner,setWavesSpinner,setWavesFilterSpinner,setButlerFilterSpinner,setPpsFilterSpinner,setCsFilterSpinner} from '../actions/spinnerAction';
 import {receiveInventoryTodayData,receiveInventoryHistoryData} from '../actions/inventoryActions';
 import {resTypeSnapShotToday,resTypeSnapShotHistory} from '../../mock/mockDBData';
 import {endSession} from './endSession';
@@ -29,9 +29,11 @@ export function ResponseParse(store,res)
 			case PARSE_PPS:
 				store.dispatch(recievePPSperformance(res));
 				store.dispatch(setPpsSpinner(false));
+				store.dispatch(setPpsFilterSpinner(false));
 				break;
 			case PARSE_BUTLERS:
 				store.dispatch(setButlerSpinner(false));
+				store.dispatch(setButlerFilterSpinner(false));
 				store.dispatch(receiveButlersData(res));
 				break;
 			case PARSE_AUDIT:
@@ -47,6 +49,7 @@ export function ResponseParse(store,res)
 			case PARSE_CHARGERS:
 				store.dispatch(receiveChargersData(res));
 				store.dispatch(setCsSpinner(false));
+				store.dispatch(setCsFilterSpinner(false));
 				break;
 			case PARSE_INVENTORY_HISTORY:
 				if(res.header_data)
@@ -81,6 +84,7 @@ export function ResponseParse(store,res)
 				{
 					store.dispatch(setWavesSpinner(false));
 					store.dispatch(receiveOrdersData(res));	
+					store.dispatch(setWavesFilterSpinner(false));
 				}
 				break;
 		    case PARSE_PPA_THROUGHPUT:
@@ -109,7 +113,7 @@ export function ResponseParse(store,res)
 				else
 				{
 					store.dispatch(recieveUserDetails(res));	
-					store.dispatch(displaySpinner(false));
+					store.dispatch(userFilterApplySpinner(false));
 				}
 				break;
 			case PARSE_OVERVIEW:
@@ -123,7 +127,10 @@ export function ResponseParse(store,res)
 				break;	
 			case PARSE_STATUS:
 				store.dispatch(recieveStatus(res));	 
-				break;				   
+				break;	
+			case 'orders':
+				store.dispatch(setWavesFilterSpinner(false));
+				break;	   
 			default:
 	    }
 }  

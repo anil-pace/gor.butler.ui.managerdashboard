@@ -1,0 +1,38 @@
+[
+  {
+    "id": "charging.inputField.id",
+    "defaultMessage": "CHARGING STATION ID"
+  },
+  {
+    "id": "charging.token.status",
+    "defaultMessage": "DOCKING STATUS"
+  },
+  {
+    "id": "charging.token.timePeriod",
+    "defaultMessage": "OPERATING MODE"
+  },
+  {
+    "id": "charging.STATUS.all",
+    "defaultMessage": "Any"
+  },
+  {
+    "id": "charging.STATUS.breach",
+    "defaultMessage": "Connected"
+  },
+  {
+    "id": "charging.STATUS.pending",
+    "defaultMessage": "Disconnected"
+  },
+  {
+    "id": "charging.timePeriod.all",
+    "defaultMessage": "Any"
+  },
+  {
+    "id": "charging.timePeriod.oneHr",
+    "defaultMessage": "Manual"
+  },
+  {
+    "id": "charging.timePeriod.twoHR",
+    "defaultMessage": "Auto"
+  }
+]

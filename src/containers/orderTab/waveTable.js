@@ -1,9 +1,13 @@
 import React from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
+import Dropdown from '../../components/dropdown/dropdown'
 import Dimensions from 'react-dimensions'
 import { FormattedMessage } from 'react-intl';
+import { FormattedDate, FormattedTime,FormattedRelative ,defineMessages} from 'react-intl';
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData,ProgressCell} from '../../components/commonFunctionsDataTable';
 import {GOR_STATUS,GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
+import WaveFilter from './waveFilter';
+
 
 class WavesTable extends React.Component {
   constructor(props) {
@@ -38,6 +42,14 @@ class WavesTable extends React.Component {
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
   }
+  
+shouldComponentUpdate(nextProps) {
+    if((nextProps.items && !nextProps.items.length)){
+      return false;
+    }
+    return true;
+  }
+
 
   componentWillReceiveProps(nextProps) {
     if(nextProps.items && nextProps.items.length) {
@@ -130,8 +142,15 @@ class WavesTable extends React.Component {
     this.props.sortHeaderOrder(sortDir);
     this.props.sortHeaderState(columnKey);
   }
+
+  _setFilter() {
+    var newState = !this.props.showFilter;
+    this.props.setFilter(newState);
+   }
+
   render() {
-    
+    let filterHeight = screen.height-190-50;
+
     var {sortedDataList, colSortDirs,columnWidths} = this.state;  
     var heightRes = 500, totalwave = sortedDataList.getSize(), pendingWave = this.props.waveState.pendingWave, progressWave = this.props.waveState.progressWave, completedWaves = this.props.waveState.completedWaves ;
     var orderRemaining = this.props.waveState.orderRemaining.toLocaleString(), totalOrders = this.props.waveState.totalOrders.toLocaleString(), headerAlert = <div/>;
@@ -150,6 +169,9 @@ class WavesTable extends React.Component {
     }
     return (
       <div className="gorTableMainContainer">
+      <div className="gor-filter-wrap" style={{'width':this.props.showFilter?'350px':'0px', height:filterHeight}}> 
+         <WaveFilter refreshOption={this.props.refreshOption} responseFlag={this.props.responseFlag}/>  
+       </div>
       <div className="gorToolBar">
       <div className="gorToolBarWrap">
       <div className="gorToolBarElements">
@@ -158,16 +180,25 @@ class WavesTable extends React.Component {
       
       </div>
       </div>
-      <div className="filterWrapper">  
-      <div className="gorFilter">
-      <div className="searchbox-magnifying-glass-icon"/>
-      <input className="gorInputFilter"
-      onChange={this._onFilterChange}
-      placeholder={this.props.intlMessg["table.filter.placeholder"]}
-      value={this.props.getWaveFilter}>
-      </input>
-      </div>
-      </div>
+
+
+
+  <div className="filterWrapper"> 
+        <div className="gorToolBarDropDown">
+        <div className="gor-button-wrap">
+        <div className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
+          
+        <button className={this.props.waveFilterStatus?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
+          <div className="gor-manage-task"/>
+          <FormattedMessage id="order.table.filterLabel" description="button label for filter" 
+          defaultMessage ="Filter data"/>
+         </button>
+       </div>
+        </div>     
+        </div>
+
+
+
       </div>
       <Table
       rowHeight={50}
@@ -331,4 +362,19 @@ class WavesTable extends React.Component {
       );
 }
 }
+WavesTable.PropTypes={
+items:React.PropTypes.array,
+  containerWidth:React.PropTypes.number,
+  itemNumber:React.PropTypes.number,
+  currentHeaderOrder:React.PropTypes.object,
+  sortHeaderState:React.PropTypes.func,
+  refreshOption:React.PropTypes.func,
+  lastUpdatedText:React.PropTypes.string,
+  showFilter:React.PropTypes.bool,
+  lastUpdated:React.PropTypes.string,
+  responseFlag:React.PropTypes.bool,
+  setWaveFilter:React.PropTypes.func,
+  setFilter:React.PropTypes.func,
+  containerHeight:React.PropTypes.number
+};
 export default Dimensions()(WavesTable);

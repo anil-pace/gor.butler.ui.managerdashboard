@@ -11,12 +11,12 @@ var isMock = (process.env.MOCK === "true" ? true :false);
 console.log("Environment:"+process.env.TARGET);
 console.log("Mocking:"+isMock);
 console.log("React Environment: "+reactNodeEnv);
-/**
+/*
  * [appGetEntry get array of entry points based on TARGET]
  * @return {[Array]} [Array of enrty strings]
  */
 function appGetEntry(){
-    if(isDev){
+    if(isDev){  
         return['es6-symbol', 
             'webpack-dev-server/client?http://localhost:8080',
             'webpack/hot/dev-server',
