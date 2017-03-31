@@ -3,7 +3,7 @@ import ReactDOM  from 'react-dom';
 import { connect } from 'react-redux' ;
 import {userRequest} from '../../actions/userActions';
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
-import {validatePassword, resetForm} from '../../actions/validationActions';
+import {validatePassword, modalFormReset} from '../../actions/validationActions';
 import { emptyField } from '../../utilities/fieldCheck';
 import {LOGIN_URL} from '../../constants/configConstants';
 import {ERROR,APP_JSON,POST,SUCCESS,AUTH_USER,PAUSE_OPERATION} from '../../constants/frontEndConstants';
@@ -28,7 +28,7 @@ class PauseOperation extends React.Component{
           return loginPassInfo.type;    
   }
   componentWillReceiveProps(nextProps){
-    if(!nextProps.auth_token||nextProps.activeModalKey !== this.props.activeModalKey)
+    if(!nextProps.auth_token||nextProps.system_data !== this.props.system_data)
     {
       this._removeThisModal();
     }
@@ -101,15 +101,15 @@ class PauseOperation extends React.Component{
       auth_token:state.authLogin.auth_token,
       username:state.authLogin.username,
       passwordCheck: state.appInfo.passwordInfo||{},
-      modalStatus: state.appInfo.hideModal || false,
-      activeModalKey: state.appInfo.activeModalKey || 0
+      modalStatus: state.emergency.hideModal || false,
+      system_data:state.tabsData.system_data||null
     }
 } 
 function mapDispatchToProps(dispatch){
     return {
       userRequest: function(data){ dispatch(userRequest(data)); },
       validatePass: function(data){ dispatch(validatePassword(data)); },  
-      resetForm:   function(){ dispatch(resetForm()); }                  
+      resetForm:   function(){ dispatch(modalFormReset()); }                  
     }
 };
 PauseOperation.propTypes={
@@ -117,10 +117,10 @@ PauseOperation.propTypes={
       username:React.PropTypes.string,
       passwordCheck:React.PropTypes.object,
       modalStatus:React.PropTypes.bool,
-      activeModalKey:React.PropTypes.number,      
       userRequest:React.PropTypes.func,
       validatePass:React.PropTypes.func,
-      resetForm:React.PropTypes.func
+      resetForm:React.PropTypes.func,
+      system_data:React.PropTypes.string
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(PauseOperation);

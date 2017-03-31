@@ -128,7 +128,6 @@ class OrderListTable extends React.Component {
    }
   
   render() {
-    
     var {sortedDataList, colSortDirs,columnWidths} = this.state;
     var totalOrder = this.props.totalOrders, headerAlert = <div/>,heightRes;
     let allDrop = <FormattedMessage id="orderlist.table.allDrop" description="allOrders dropdown option for orderlist" defaultMessage ="All orders"/> 
@@ -160,7 +159,7 @@ class OrderListTable extends React.Component {
     var filterHeight = screen.height-190-50;
     return (
       <div className="gorTableMainContainer">
-      <div className="gor-filter-wrap" style={{'width':this.props.showFilter?'350px':'0px', height:filterHeight}}> 
+      <div className="gor-filter-wrap" style={{'width':'350px','display':this.props.showFilter?'block':'none', height:filterHeight}}> 
          <OrderFilter refreshOption={this.props.refreshOption} responseFlag={this.props.responseFlag}/>  
        </div>
         <div className="gorToolBar">
@@ -333,8 +332,19 @@ class OrderListTable extends React.Component {
   }
 }
 
-
-
-//export default connect(null,mapDispatchToProps)(OrderListTable) ;
+OrderListTable.PropTypes={
+  items:React.PropTypes.array,
+  containerWidth:React.PropTypes.number,
+  itemNumber:React.PropTypes.number,
+  currentHeaderOrder:React.PropTypes.object,
+  setOrderFilter:React.PropTypes.func,
+  sortHeaderState:React.PropTypes.func,
+  refreshOption:React.PropTypes.func,
+  lastUpdatedText:React.PropTypes.string,
+  isFilterApplied:React.PropTypes.bool,
+  timeZoneString:React.PropTypes.string,
+  lastUpdated:React.PropTypes.string,
+  responseFlag:React.PropTypes.bool
+};
 
 export default Dimensions()(OrderListTable);

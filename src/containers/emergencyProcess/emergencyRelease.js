@@ -6,7 +6,6 @@ import {userRequest} from '../../actions/userActions';
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
 import {AUTH_LOGIN,ERROR,TYPING,APP_JSON,POST,SUCCESS} from '../../constants/frontEndConstants';
 import ResumeOperation from './resumeOperation'; 
-import {switchModalKey} from '../../actions/validationActions';
 
 class EmergencyRelease extends React.Component{
   constructor(props) 
@@ -16,19 +15,23 @@ class EmergencyRelease extends React.Component{
   _removeThisModal() {
       this.props.removeModal();
   }
+  componentDidMount(){
+    if(this.props.checkingList){
+      this._removeThisModal();  //If manager is on safety checklist page, don't show the release modal      
+    }
+  }
   componentWillReceiveProps(nextProps){
-    if(!nextProps.auth_token||nextProps.activeModalKey !== this.props.activeModalKey)
+    if(!nextProps.auth_token||nextProps.system_data !== this.props.system_data)
     {
       this._removeThisModal();
     }
   }
   _resumeOperation(){
-    this.props.switchModalKey(this.props.activeModalKey);
     this._removeThisModal();
     modal.add(ResumeOperation, {
       title: '',
       size: 'large', // large, medium or small,
-      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: true // (optional) if you don't wanna show the top right close button
       //.. all what you put in here you will get access in the modal props ;)
     });
@@ -67,20 +70,21 @@ class EmergencyRelease extends React.Component{
  function mapStateToProps(state, ownProps){
   return  {
       auth_token:state.authLogin.auth_token,
-      activeModalKey: state.appInfo.activeModalKey || 0
+      system_data:state.tabsData.system_data||null,
+      checkingList:state.emergency.checkingList||false
     }
 } 
 function mapDispatchToProps(dispatch){
     return {
       userRequest: function(data){ dispatch(userRequest(data)); },
-      switchModalKey:function(data){dispatch(switchModalKey(data))}
     }
 };
 
 EmergencyRelease.propTypes={
       auth_token:React.PropTypes.string,
-      activeModalKey:React.PropTypes.number, 
-      userRequest:React.PropTypes.func
+      userRequest:React.PropTypes.func,
+      system_data:React.PropTypes.string,
+      checkingList:React.PropTypes.bool
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(EmergencyRelease);

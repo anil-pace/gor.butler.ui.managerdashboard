@@ -164,6 +164,7 @@ return (
             isFilterApplied={this.props.isFilterApplied}
             showFilter={this.props.showFilter}
             setFilter={this.props.showTableFilter} 
+            waveFilterStatus={this.props.waveFilterStatus}
             />
 </div>
 );
@@ -182,8 +183,7 @@ function mapStateToProps(state, ownProps){
     intlMessages: state.intl.messages,
     timeOffset: state.authLogin.timeOffset,
     waveDetail: state.waveInfo || {},
-    intlMessages: state.intl.messages,
-
+    waveFilterStatus:state.filterInfo.waveFilterStatus|| false,
     showFilter: state.filterInfo.filterState || false
   };
 };
@@ -194,8 +194,7 @@ var mapDispatchToProps = function(dispatch){
     setWavesSpinner: function(data){dispatch(setWavesSpinner(data))},
     waveHeaderSort: function(data){dispatch(waveHeaderSort(data))},
     waveHeaderSortOrder: function(data){dispatch(waveHeaderSortOrder(data))},
-
-     showTableFilter: function(data){dispatch(showTableFilter(data));}
+    showTableFilter: function(data){dispatch(showTableFilter(data));}
   };
 }
 
@@ -203,5 +202,20 @@ WaveTab.contextTypes ={
  intl:React.PropTypes.object.isRequired
 }
 
+WaveTab.PropTypes={
+waveSortHeaderState:React.PropTypes.string,
+wavesSpinner: React.PropTypes.bool,
+filterOptions:React.PropTypes.object,
+waveDetail:React.PropTypes.object,
+intlMessages: React.PropTypes.string,
+waveDetail: React.PropTypes.object,
+waveFilterState:React.PropTypes.bool,
+showFilter:React.PropTypes.bool,
+waveFilterDetail:React.PropTypes.func,
+setWavesSpinner:React.PropTypes.func,
+waveHeaderSort: React.PropTypes.func,
+waveHeaderSortOrder:React.PropTypes.func,
+showTableFilter:React.PropTypes.func
+};
 
 export default connect(mapStateToProps,mapDispatchToProps)(WaveTab) ;

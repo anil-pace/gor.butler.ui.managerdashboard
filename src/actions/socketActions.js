@@ -1,7 +1,7 @@
 import {WS_CONNECT,WS_DISCONNECT,WS_CONNECTED,WS_ONMESSAGE,WS_ONSEND,WS_END,REQUEST_HEADER,RECIEVE_HEADER,RECIEVE_ITEM_TO_STOCK,DATA_SUBSCRIPTION_PACKET} from '../constants/frontEndConstants'
 import {WS_URL} from '../constants/configConstants'
 import {socketMiddleware} from '../middleware/socketMiddleware';
-//import {getFetchData} from 'headerAction'
+
 
 
 export function wsOnMessageAction(data){
@@ -41,7 +41,7 @@ export function setMockAction(params){
 	}
 }
 
-export function socketDataSubscription(data){
+export function updateSubscriptionPacket(data){
 	return {
 		type: DATA_SUBSCRIPTION_PACKET,
 		data

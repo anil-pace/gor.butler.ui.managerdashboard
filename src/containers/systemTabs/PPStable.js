@@ -63,6 +63,13 @@ class PPStable extends React.Component {
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
     
   }
+  shouldComponentUpdate(nextProps) {
+    if((nextProps.items && !nextProps.items.length)){
+      return false;
+    }
+    return true;
+  }
+
 
   componentWillReceiveProps(nextProps) {
     var temp;
@@ -222,7 +229,7 @@ class PPStable extends React.Component {
 
 
 _setFilter() {
-    var newState = !this.props.showFilter;
+    let newState = !this.props.showFilter;
     this.props.setFilter(newState);
    }
 
@@ -266,7 +273,7 @@ _setFilter() {
   render() {
      let updateStatusIntl="";
     let filterHeight = screen.height-190-50;
-    var {sortedDataList, colSortDirs,columnWidths,renderDropD, ppsSelected,headerChecked} = this.state, checkedPPS = [];
+    let {sortedDataList, colSortDirs,columnWidths,renderDropD, ppsSelected,headerChecked} = this.state, checkedPPS = [];
     let pickDrop = <FormattedMessage id="PPS.table.pickDrop" description="pick dropdown option for PPS" defaultMessage ="Put"/> 
     let putDrop = <FormattedMessage id="PPS.table.putDrop" description="put dropdown option for PPS" defaultMessage ="Pick"/> 
     let auditDrop = <FormattedMessage id="PPS.table.auditDrop" description="audit dropdown option for PPS" defaultMessage ="Audit"/> 
@@ -276,8 +283,8 @@ _setFilter() {
     { value: 'pick', label: putDrop },
     { value: 'audit', label: auditDrop }
     ];
-    var checkState = this.handleChange.bind(this);
-    var drop, selected =0, ppsTotal = sortedDataList.getSize();
+    let checkState = this.handleChange.bind(this);
+    let drop, selected =0, ppsTotal = sortedDataList.getSize();
     let pick = this.props.operationMode.pick;
     let put = this.props.operationMode.put;
     let audit = this.props.operationMode.audit;
@@ -299,15 +306,15 @@ _setFilter() {
         }
       }
     }
-    var containerHeight = this.props.containerHeight;
-    var noData = <div/>;
+    let containerHeight = this.props.containerHeight;
+    let noData = <div/>;
     if(ppsTotal === 0 || ppsTotal === undefined || ppsTotal === null) {
      noData =  <div className="gor-no-data"> <FormattedMessage id="PPStable.table.noData" description="No data message for PPStable" 
        defaultMessage ="No PPS Found"/>  </div>
      containerHeight = GOR_TABLE_HEADER_HEIGHT;
     }
     
-    var checkedStatePps = [];
+    let checkedStatePps = [];
     if(this.props.checkedPps) {
       checkedStatePps = this.props.checkedPps;
     }
@@ -338,7 +345,7 @@ _setFilter() {
         <div className="gorToolBarDropDown">
         <div className="gor-button-wrap">
         <div className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
-        <button className={this.props.isFilterApplied?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
+        <button className={this.props.ppsFilterState?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
           <div className="gor-manage-task"/>
           <FormattedMessage id="order.table.filterLabel" description="button label for filter" 
           defaultMessage ="Filter data"/>
@@ -481,6 +488,23 @@ _setFilter() {
     );
   }
 }
+
+PPStable.PropTypes={
+items:React.PropTypes.array,
+  containerWidth:React.PropTypes.number,
+  itemNumber:React.PropTypes.number,
+  currentHeaderOrder:React.PropTypes.object,
+  sortHeaderState:React.PropTypes.func,
+  lastUpdatedText:React.PropTypes.string,
+  showFilter:React.PropTypes.bool,
+  lastUpdated:React.PropTypes.string,
+  ppsFilterState:React.PropTypes.bool,
+  setFilter:React.PropTypes.func,
+  containerHeight:React.PropTypes.number,
+  currentSortState:React.PropTypes.string,
+  responseFlag:React.PropTypes.bool,
+getCheckAll:React.PropTypes.bool
+};
 
 
 export default Dimensions()(PPStable);

@@ -4,6 +4,10 @@
     "defaultMessage": "USER NAME"
   },
   {
+    "id": "user.role.all",
+    "defaultMessage": "Any"
+  },
+  {
     "id": "user.tokenfield.status",
     "defaultMessage": "STATUS"
   },
@@ -30,22 +34,6 @@
   {
     "id": "user.status.offline",
     "defaultMessage": "Offline"
-  },
-  {
-    "id": "user.role.all",
-    "defaultMessage": "Any"
-  },
-  {
-    "id": "user.role.issueFound",
-    "defaultMessage": "Manager"
-  },
-  {
-    "id": "user.role.rejected",
-    "defaultMessage": "Operator"
-  },
-  {
-    "id": "user.role.resolved",
-    "defaultMessage": "Supervisor"
   },
   {
     "id": "user.workmode.all",

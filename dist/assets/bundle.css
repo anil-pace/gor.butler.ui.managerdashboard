@@ -814,7 +814,7 @@ body {
   right: 0;
   min-width: 5em;
   height: 35px;
-  top: 2.4375rem;
+  top: 2.75rem;
   display: block;
   padding-right: 3px;
   width: 193px;
@@ -5124,6 +5124,15 @@ button:disabled {
   opacity: 0.4;
 }
 
+.spinnerImage {
+  background-image: url(images/whiteSpinner.svg);
+  width: 30px;
+  height: 30px;
+  background-size: contain;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .gor-audit-input-wrap {
   display: inline-block;
   width: 42%;
@@ -5345,6 +5354,10 @@ button:disabled {
   border: solid 1px #aaaaaa;
 }
 
+.gor-filterBtn-btn:hover {
+  cursor: pointer;
+}
+
 .gor-filterBtn-applied {
   font-family: 'Source Sans Pro Bold', sans-serif;
   width: 125px;
@@ -5357,6 +5370,10 @@ button:disabled {
   background-color: #ffffff;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   border: solid 1px #f36f36;
+}
+
+.gor-filterBtn-applied:hover {
+  cursor: pointer;
 }
 
 .gor-filter-body-slider-wrap {
@@ -5759,6 +5776,7 @@ button:disabled {
   width: 250px;
   padding: 20px;
   position: absolute;
+  min-height: 200px;
   z-index: 1;
   left: 30px;
   top: -70px;

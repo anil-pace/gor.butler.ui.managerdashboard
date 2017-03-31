@@ -1,7 +1,7 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
-import { resetForm} from '../../actions/validationActions'; 
+import { modalFormReset,validatingList} from '../../actions/validationActions'; 
 import {userRequest} from '../../actions/userActions';
 import {setSafetySpinner} from '../../actions/spinnerAction';
 import { connect } from 'react-redux';
@@ -21,13 +21,14 @@ class SafetyChecklist extends React.Component{
   }
   componentWillUnmount()
   {
-    this.props.resetForm();            
+    this.props.resetForm();
+    this.props.validatingList(false);            
   }
   _removeThisModal() {
     this.props.removeModal();
   }
   componentWillReceiveProps(nextProps){
-    if(!nextProps.auth_token||!nextProps.system_emergency||nextProps.activeModalKey !== this.props.activeModalKey)
+    if(!nextProps.auth_token||!nextProps.system_emergency)
     {
       this._removeThisModal();
     }
@@ -54,6 +55,7 @@ class SafetyChecklist extends React.Component{
                 'token':this.props.auth_token
             }
         this.props.userRequest(userData);
+        this.props.validatingList(true);
   }
   _toggleSelection(i,noItems){
     var currentSet = this.state.checkedSet;
@@ -121,7 +123,7 @@ class SafetyChecklist extends React.Component{
         }
         else if(this._isValid(msgCode,noItems)){
           item = (<li key={msgCode}>
-              <input type="checkbox" key={msgCode} value={msgCode} onChange={this._toggleSelection.bind(this,msgCode,noItems)} />
+              <input type="checkbox" key={msgCode} value={msgCode} checked={false} onChange={this._toggleSelection.bind(this,msgCode,noItems)} />
               <span className='gor-checklist-item'>
                 {this.context.intl.formatMessage(stringConfig[msgCode])}
               </span>
@@ -201,20 +203,21 @@ SafetyChecklist.contextTypes = {
 
 function mapStateToProps(state, ownProps){
   return {
-      checkList: state.appInfo.safetyList || [],
-      safetyErrorList: state.appInfo.safetyErrorList || [],
+      checkList: state.emergency.safetyList || [],
+      safetyErrorList: state.emergency.safetyErrorList || [],
       auth_token:state.authLogin.auth_token,
-      modalStatus: state.appInfo.hideModal || false,
+      modalStatus: state.emergency.hideModal || false,
       safetySpinner:state.spinner.safetySpinner || false,
       system_emergency:state.tabsData.system_emergency||false,
-      activeModalKey: state.appInfo.activeModalKey || 0 
+      system_data:state.tabsData.system_data||null
   };
 }
 var mapDispatchToProps = function(dispatch){
   return {
     userRequest: function(data){ dispatch(userRequest(data)); },
-    resetForm:   function(){ dispatch(resetForm()); },
-    setSafetySpinner: function(data){ dispatch(setSafetySpinner(data)); }
+    resetForm:   function(){ dispatch(modalFormReset()); },
+    setSafetySpinner: function(data){ dispatch(setSafetySpinner(data)); },
+    validatingList: function(data){ dispatch(validatingList(data));}
   }
 };
 SafetyChecklist.propTypes={
@@ -225,7 +228,7 @@ SafetyChecklist.propTypes={
       safetyErrorList:React.PropTypes.array,
       safetySpinner:React.PropTypes.bool,
       system_emergency:React.PropTypes.bool,
-      activeModalKey:React.PropTypes.number,
+      system_data:React.PropTypes.string,
       userRequest:React.PropTypes.func,
       setSafetySpinner:React.PropTypes.func,
       resetForm:React.PropTypes.func

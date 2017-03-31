@@ -14,7 +14,6 @@ SOFT_MANUAL,HARD,SOFT} from '../constants/frontEndConstants';
 import { FormattedMessage,FormattedNumber } from 'react-intl';
 import OperationStop from '../containers/emergencyProcess/OperationStop';
 import EmergencyRelease from '../containers/emergencyProcess/emergencyRelease'; 
-import {switchModalKey} from '../actions/validationActions';
 
 class Tabs extends React.Component{
 	constructor(props) 
@@ -75,18 +74,15 @@ class Tabs extends React.Component{
       });    
   }
   componentWillReceiveProps(nextProps){
-    if(nextProps.system_data === SOFT_MANUAL && this.props.system_data === HARD)
+    if(nextProps.system_data === SOFT_MANUAL && (this.props.system_data === HARD || !this.props.system_data))
     {
-      this.props.switchModalKey(nextProps.activeModalKey);
       this._emergencyRelease();
     }
     else if(nextProps.system_emergency && !this.props.system_emergency)
     {
-      this.props.switchModalKey(nextProps.activeModalKey);
       this._stopOperation(true);
     }
     else if(nextProps.system_data === SOFT && this.props.system_data === SOFT_MANUAL){
-      this.props.switchModalKey(nextProps.activeModalKey);        
       this._stopOperation(true);
     }
   }
@@ -237,7 +233,6 @@ function mapStateToProps(state, ownProps){
          orders_completed:state.tabsData.orders_completed||0,
          system_status:state.tabsData.status||null,
          audit_alert: state.tabsData.audit_alert || 0,
-         activeModalKey: state.appInfo.activeModalKey || 0
     }
 }
 
@@ -248,7 +243,6 @@ var mapDispatchToProps = function(dispatch){
         setInventorySpinner:function(data){dispatch(setInventorySpinner(data));},
         setAuditSpinner:function(data){dispatch(setAuditSpinner(data));},
         setButlerSpinner:function(data){dispatch(setButlerSpinner(data))},
-        switchModalKey:function(data){dispatch(switchModalKey(data))}
 	}
 };
 

@@ -105,23 +105,22 @@ class PickStatusWidget extends React.Component{
                     valueLeftStatus=GOR_RISK;          
                 }
             }
+            if(this.props.systemEmergency){
+                lowLeft=<FormattedMessage id="widget.pick.emergency" description='Message for system in emergency state' 
+                defaultMessage='--'/>;                
+                statusClass=GOR_DELAY;  
+                statusLogo=DELAY_ICON;
+                statusLeft=<FormattedMessage id="widget.pick.statusleft.delay" description='Text for delay in orders' 
+                    defaultMessage='Delayed'/>
+                lowRight=<FormattedMessage id="widget.pick.lowright.emergency" description='Estimated time' 
+                defaultMessage='Estimated to complete in --'/>;
+            }
         }
         if(!this.props.system_status)
         {
             lowLeft=<FormattedMessage id="widget.pick.offline" description='Message for system offline' 
                 defaultMessage='Offline'/>;
         }
-        if(this.props.systemEmergency){
-            lowLeft=<FormattedMessage id="widget.pick.emergency" description='Message for system in emergency state' 
-                defaultMessage='--'/>;                
-            statusClass=GOR_DELAY;  
-            statusLogo=DELAY_ICON;
-            statusLeft=<FormattedMessage id="widget.pick.statusleft.delay" description='Text for delay in orders' 
-                    defaultMessage='Delayed'/>
-            lowRight=<FormattedMessage id="widget.pick.lowright.emergency" description='Estimated time' 
-            defaultMessage='Estimated to complete in --'/>;
-        }
-
         items={headingleft:headingLeft, headingright:headingRight, textleft:textLeft, 
             valueLeftStatus:valueLeftStatus, valueRightStatus:valueRightStatus, 
             textright:textRight, statusleft:statusLeft, statusClass:statusClass, 

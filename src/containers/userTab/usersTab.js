@@ -3,10 +3,12 @@ import ReactDOM  from 'react-dom';
 import UserDataTable from './userTabTable';
 import { connect } from 'react-redux'; 
 import { defineMessages } from 'react-intl';
+import {userRequest} from '../../actions/userActions';
 import {stringConfig} from '../../constants/backEndConstants'
 import {userHeaderSort,userHeaderSortOrder,userFilterDetail} from '../../actions/sortHeaderActions';
-import {INITIAL_HEADER_SORT,INITIAL_HEADER_ORDER} from '../../constants/frontEndConstants';
+import {INITIAL_HEADER_SORT,INITIAL_HEADER_ORDER,GET_ROLES,GET,APP_JSON} from '../../constants/frontEndConstants';
 import {showTableFilter,filterApplied} from '../../actions/filterAction';
+import {ROLE_URL} from '../../constants/configConstants';
 //Mesages for internationalization
 const messages = defineMessages({
     userOperator: {
@@ -63,6 +65,17 @@ class UsersTab extends React.Component{
 	{
     	super(props);
     }
+      componentDidMount(){
+        let userData={
+                'url':ROLE_URL,
+                'method':GET,
+                'cause':GET_ROLES,
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
+                'token':this.props.auth_token
+            }
+        this.props.userRequest(userData);
+  }
   _processUserDetails() {
   var nProps = this,
   data = nProps.props.userdetails
@@ -144,6 +157,7 @@ class UsersTab extends React.Component{
                            setUserFilter={this.props.userFilterDetail}
                            getUserFilter = {this.props.userFilter}
 
+                            userFilterStatus={this.props.userFilterStatus}
                             isFilterApplied={this.props.isFilterApplied}
                             lastUpdatedText={updateStatusIntl}
                             lastUpdated={updateStatusIntl}
@@ -166,25 +180,46 @@ function mapStateToProps(state, ownProps){
     manager:state.headerData.headerInfo||[],
     userSortHeader: state.sortHeaderState.userHeaderSort || "role" ,
     userSortHeaderState: state.sortHeaderState.userHeaderSortOrder || INITIAL_HEADER_ORDER,
-     showFilter: state.filterInfo.filterState || false
+    showFilter: state.filterInfo.filterState || false,
+    isFilterApplied: state.filterInfo.isFilterApplied || false,
+    userFilterStatus:state.filterInfo.userFilterStatus|| false,
+    roleInfo: state.appInfo.roleInfo || null,
+    auth_token: state.authLogin.auth_token  
 
   };
 }
 
 var mapDispatchToProps = function(dispatch){
   return{
+    userRequest: function(data){ dispatch(userRequest(data)); },
     userFilterDetail: function(data){dispatch(userFilterDetail(data))},
     userHeaderSort: function(data){dispatch(userHeaderSort(data))},
     userHeaderSortOrder: function(data){dispatch(userHeaderSortOrder(data))},
-     showTableFilter: function(data){dispatch(showTableFilter(data));}
+    showTableFilter: function(data){dispatch(showTableFilter(data));},
+    filterApplied: function(data){dispatch(filterApplied(data));}
   };
 }
-
 
 UsersTab.contextTypes ={
  intl:React.PropTypes.object.isRequired
 }
-
+UsersTab.PropTypes={
+userFilter: React.PropTypes.string,
+userdetails:React.PropTypes.array,
+manager:React.PropTypes.array,
+userSortHeader:React.PropTypes.string,
+userSortHeaderState:React.PropTypes.string,
+showFilter: React.PropTypes.bool,
+isFilterApplied:React.PropTypes.bool,
+userFilterStatus:React.PropTypes.bool,
+auth_token: React.PropTypes.object,
+userRequest: React.PropTypes.func,
+userFilterDetail:React.PropTypes.func,
+userHeaderSort:React.PropTypes.func,
+userHeaderSortOrder:React.PropTypes.func,
+showTableFilter:React.PropTypes.func,
+filterApplied: React.PropTypes.func
+};
 
 
 
