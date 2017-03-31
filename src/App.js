@@ -3,7 +3,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import Tabs from './containers/tabs';
 import Header from './components/header/header';
-import {setWsAction ,setMockAction, endWsAction, updateMainStore} from './actions/socketActions';
+import {setWsAction ,setMockAction, endWsAction, updateSubscriptionPacket} from './actions/socketActions';
 import {getTimeOffSetData,setTimeOffSetData, logoutRequest} from './actions/loginAction';
 import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,
   WS_MOCK,USERS,TAB_ROUTE_MAP,OVERVIEW ,SYSTEM,ORDERS,INVENTORY,GET} from './constants/frontEndConstants';
@@ -29,7 +29,7 @@ import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,
   
   componentWillMount(){
     this.context.router.push("/login");
-    this.props.updateMainStore(wsOverviewData);
+    this.props.updateSubscriptionPacket(wsOverviewData);
   }
   componentDidMount(){
     var timeOffset =  sessionStorage.getItem("timeOffset");
@@ -166,7 +166,7 @@ import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,
     endConnect: function(){ dispatch(endWsAction()); },
     userLogout: function(){ dispatch(logoutRequest()); },
     notifyInfo: function(data){dispatch (notifyInfo(data));},
-    updateMainStore: function(data){dispatch (updateMainStore(data));}
+    updateSubscriptionPacket: function(data){dispatch (updateSubscriptionPacket(data));}
   }
 };
 export  default connect(mapStateToProps,mapDispatchToProps)(App);

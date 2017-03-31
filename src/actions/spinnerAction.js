@@ -1,6 +1,7 @@
 
 import { DISPLAY_SPINNER,DISPLAY_WAVES_SPINNER,DISPLAY_BUTLER_SPINNER,DISPLAY_PPS_SPINNER,
-	DISPLAY_CHARGING_STATION_SPINNER,DISPAY_RESOLVE_AUDIT_SPINNER,DISPLAY_SAFETY_SPINNER,DISPAY_USER_SPINNER} from '../constants/frontEndConstants';
+	DISPLAY_CHARGING_STATION_SPINNER,DISPAY_RESOLVE_AUDIT_SPINNER,DISPLAY_SAFETY_SPINNER,DISPAY_USER_SPINNER,DISPLAY_CHARGING_STATION_FILTER_SPINNER,
+DISPLAY_PPS_FILTER_SPINNER,DISPLAY_BOT_FILTER_SPINNER,DISPLAY_WAVES_FILTER_SPINNER} from '../constants/frontEndConstants';
 
 export function displaySpinner(data){
 	
@@ -20,14 +21,14 @@ export function setWavesSpinner(data) {
 
 export function setWavesFilterSpinner(data) {
 	return {
-		type: 'DISPLAY_WAVES_FILTER_SPINNER',
+		type: DISPLAY_WAVES_FILTER_SPINNER,
 		data
   	}
 }
 
 export function setButlerFilterSpinner(data) {
 	return {
-		type: 'DISPLAY_BOT_FILTER_SPINNER',
+		type: DISPLAY_BOT_FILTER_SPINNER,
 		data
   	}
 }
@@ -41,7 +42,7 @@ export function setButlerSpinner(data) {
 
 export function setPpsFilterSpinner(data) {
 	return {
-		type: 'DISPLAY_PPS_SPINNER',
+		type: DISPLAY_PPS_FILTER_SPINNER,
 		data
   	}
 }
@@ -58,6 +59,12 @@ export function setPpsSpinner(data) {
 export function setCsSpinner(data) {
 	return {
 		type: DISPLAY_CHARGING_STATION_SPINNER,
+		data
+  	}
+}
+export function setCsFilterSpinner(data) {
+	return {
+		type: DISPLAY_CHARGING_STATION_FILTER_SPINNER,
 		data
   	}
 }

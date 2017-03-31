@@ -15,6 +15,13 @@ export function filterApplied(data){
 		data
   	}
 }
+export function setDefaultRange(data){
+	return {
+		type: 'SET_DEFAULT_RANGE',
+		data
+  	}
+}
+
 
 //This action is use to keep the updated flag value so that we can get to know the filter is applied for butletBot tab.
 export function toggleBotButton(data){

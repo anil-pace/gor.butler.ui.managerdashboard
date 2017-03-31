@@ -37,11 +37,11 @@ class ButlerBotTable extends React.Component {
   }
 
 shouldComponentUpdate(nextProps) {
-    if((nextProps.items && !nextProps.items.length)){
+    if((nextProps.items && !nextProps.items.length) && this.props.showFilter === nextProps.showFilter){
       return false;
     }
     return true;
-  }
+ }
 
   componentWillReceiveProps(nextProps) {
     var items = nextProps.items || [];
@@ -156,6 +156,7 @@ shouldComponentUpdate(nextProps) {
         defaultMessage ="No Butler Bot Found"/>  </div>
       containerHeight = GOR_TABLE_HEADER_HEIGHT;
      }
+     console.log(this.props.showFilter);
      var filterHeight = screen.height-190-50;
     return (
       <div className="gorTableMainContainer">

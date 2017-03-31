@@ -7,7 +7,7 @@ import {recieveOverviewStatus,recieveSystemStatus,recieveAuditStatus,recieveOrde
 import {displaySpinner} from '../actions/spinnerAction';
 import {setInventorySpinner} from '../actions/inventoryActions';
 import {setAuditSpinner} from '../actions/auditActions';
-import {setButlerSpinner,setPpsSpinner,setCsSpinner,setWavesSpinner,setWavesFilterSpinner,setButlerFilterSpinner,setPpsFilterSpinner} from '../actions/spinnerAction';
+import {setButlerSpinner,setPpsSpinner,setCsSpinner,setWavesSpinner,setWavesFilterSpinner,setButlerFilterSpinner,setPpsFilterSpinner,setCsFilterSpinner} from '../actions/spinnerAction';
 import {receiveInventoryTodayData,receiveInventoryHistoryData} from '../actions/inventoryActions';
 import {resTypeSnapShotToday,resTypeSnapShotHistory} from '../../mock/mockDBData';
 import {endSession} from './endSession';
@@ -49,6 +49,7 @@ export function ResponseParse(store,res)
 			case PARSE_CHARGERS:
 				store.dispatch(receiveChargersData(res));
 				store.dispatch(setCsSpinner(false));
+				store.dispatch(setCsFilterSpinner(false));
 				break;
 			case PARSE_INVENTORY_HISTORY:
 				if(res.header_data)

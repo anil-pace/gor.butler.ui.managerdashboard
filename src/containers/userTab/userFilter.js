@@ -3,7 +3,7 @@ import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
 import {showTableFilter,filterApplied,userfilterState,toggleUserFilter} from '../../actions/filterAction';
-import {updateMainStore} from '../../actions/socketActions';
+import {updateSubscriptionPacket} from '../../actions/socketActions';
 import { connect } from 'react-redux'; 
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
@@ -105,15 +105,15 @@ _processUserRoll(){
           (filterState.searchQuery["USER NAME"]?filterSubsData["user_name"] = ['contains',filterState.searchQuery["USER NAME"]]:"");
         }
         if(filterState.tokenSelected) {
-          (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0]!== "all"?filterSubsData["logged_in"] = ['=',(filterState.tokenSelected["STATUS"]=="online")?"true":"false"]:"");
+          (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0]!== "all" && filterState.tokenSelected["STATUS"].length!==2 ? filterSubsData["logged_in"] = ['is',(filterState.tokenSelected["STATUS"]=="online")?"true":"false"]:"");
           (filterState.tokenSelected["ROLE"] && filterState.tokenSelected["ROLE"][0]!=="all"?filterSubsData["role"] = ['in',filterState.tokenSelected["ROLE"]]:"");
-          (filterState.tokenSelected["WORK MODE"] && filterState.tokenSelected["WORK MODE"][0]!=="all"?filterSubsData["pps_mode"] = ['in',filterState.tokenSelected["WORK MODE"]]:"");
+         // (filterState.tokenSelected["WORK MODE"] && filterState.tokenSelected["WORK MODE"][0]!=="all"?filterSubsData["pps_mode"] = ['in',filterState.tokenSelected["WORK MODE"]]:"");
        // (filterState.tokenSelected["LOCATION"] && filterState.tokenSelected["LOCATION"][0]!=="all"?filterSubsData["seat_type"] = ['in',filterState.tokenSelected["LOCATION"]]:"");
      }
      let updatedWsSubscription = this.props.wsSubscriptionData;
      updatedWsSubscription["users"].data[0].details["filter_params"] = filterSubsData;
      this.props.userfilterState(filterState);
-     this.props.updateMainStore(updatedWsSubscription);
+     this.props.updateSubscriptionPacket(updatedWsSubscription);
      this.props.filterApplied(!this.props.isFilterApplied);
      this.props.toggleUserFilter(true);
      this.props.displaySpinner(true);
@@ -124,7 +124,7 @@ _processUserRoll(){
      let clearState = {};
      let updatedWsSubscription = this.props.wsSubscriptionData;
      updatedWsSubscription["users"].data[0].details["filter_params"] = {};
-     this.props.updateMainStore(updatedWsSubscription);
+     this.props.updateSubscriptionPacket(updatedWsSubscription);
      this.setState({tokenSelected: {"STATUS":["all"], "ROLE":["all"], "WORK MODE":["all"],"LOCATION":["all"]}, searchQuery: {}});
      this.props.userfilterState({tokenSelected: {"STATUS":["all"], "ROLE":["all"], "WORK MODE":["all"],"LOCATION":["all"]}, searchQuery: {}});
      this.props.filterApplied(!this.props.isFilterApplied);
@@ -182,7 +182,7 @@ var mapDispatchToProps = function(dispatch){
     showTableFilter: function(data){dispatch(showTableFilter(data));},
     filterApplied: function(data){dispatch(filterApplied(data));},
     userfilterState: function(data){dispatch(userfilterState(data));},
-    updateMainStore: function(data){dispatch(updateMainStore(data));},
+    updateSubscriptionPacket: function(data){dispatch(updateSubscriptionPacket(data));},
     toggleUserFilter: function(data){dispatch(toggleUserFilter(data));},
 displaySpinner: function(data){dispatch(displaySpinner(data));}
   }
@@ -200,7 +200,7 @@ roleInfo:React.PropTypes.object,
 showTableFilter: React.PropTypes.func,
 filterApplied: React.PropTypes.func,
 userfilterState: React.PropTypes.func,
-updateMainStore: React.PropTypes.func,
+updateSubscriptionPacket: React.PropTypes.func,
 toggleUserFilter:React.PropTypes.func
 };
 

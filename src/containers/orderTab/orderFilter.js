@@ -17,7 +17,6 @@ class OrderFilter extends React.Component{
 
 
     _closeFilter() {
-        var filterState = !this.props.showFilter;
         this.props.showTableFilter(false);
     }	
 
@@ -35,7 +34,7 @@ class OrderFilter extends React.Component{
         var labelC1 = [
                     { value: 'all', label: <FormattedMessage id="order.STATUS.all" defaultMessage ="All orders"/>},
                     { value: 'breached', label: <FormattedMessage id="order.STATUS.breach" defaultMessage ="Breached orders"/>},
-                    { value: 'pending', label: <FormattedMessage id="order.STATUS.pending" defaultMessage ="Pending orders"/>},
+                    { value: 'breached_pending', label: <FormattedMessage id="order.STATUS.pending" defaultMessage ="Pending orders"/>},
                     { value: 'completed', label: <FormattedMessage id="order.STATUS.completed" defaultMessage ="Completed orders"/>},
                     { value: 'exception', label: <FormattedMessage id="order.STATUS.exep" defaultMessage ="Exception"/>}
                     ];

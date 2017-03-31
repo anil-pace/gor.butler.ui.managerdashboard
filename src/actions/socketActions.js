@@ -41,7 +41,7 @@ export function setMockAction(params){
 	}
 }
 
-export function updateMainStore(data){
+export function updateSubscriptionPacket(data){
 	return {
 		type: DATA_SUBSCRIPTION_PACKET,
 		data

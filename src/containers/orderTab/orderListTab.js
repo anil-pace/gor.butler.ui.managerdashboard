@@ -1,7 +1,7 @@
 import React  from 'react';
 import { connect } from 'react-redux';
 import {getPageData, getStatusFilter, getTimeFilter,getPageSizeOrders,currentPageOrders,lastRefreshTime} from '../../actions/paginationAction';
-import {ORDERS_RETRIEVE,GOR_BREACHED,GOR_EXCEPTION,GET,APP_JSON, INITIAL_HEADER_SORT, INITIAL_HEADER_ORDER, sortOrderHead,sortOrder} from '../../constants/frontEndConstants';
+import {ORDERS_RETRIEVE,GOR_BREACHED,BREACHED,GOR_EXCEPTION,GET,APP_JSON, INITIAL_HEADER_SORT, INITIAL_HEADER_ORDER, sortOrderHead,sortOrder} from '../../constants/frontEndConstants';
 import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,ORDER_PAGE, PICK_BEFORE_ORDER_URL, BREACHED_URL,UPDATE_TIME_HIGH,UPDATE_TIME_LOW,EXCEPTION_TRUE,WAREHOUSE_STATUS,FILTER_ORDER_ID} from '../../constants/configConstants';
 import OrderListTable from './orderListTable';
 import Dropdown from '../../components/dropdown/dropdown'
@@ -227,25 +227,21 @@ refresh = (data) => {
 
   //appending filter for status
   if(data.tokenSelected && data.tokenSelected["STATUS"] && data.tokenSelected["STATUS"].length) {
-    let statusToken=data.tokenSelected["STATUS"];
+    let statusToken=(data.tokenSelected["STATUS"]).slice(0);
     let index = statusToken.indexOf('breached');
     (index!=-1)?statusToken.splice(index, 1):"";
-    let status = (statusToken.length>0)?statusToken.join("','"):statusToken; //need to change harcoding
-    let breachedtext=(index!=-1)?"?breached=True":""
+    let status = (statusToken.length>0)?statusToken.join("','"):statusToken; 
+    let breachedtext=(index!=-1)?BREACHED:""
     if((status === undefined || status === "all")) {
       appendStatusUrl = "";
     }
-    else if(status === "breached") {
-      currentTime = new Date();
-      currentTime = currentTime.toISOString();
-      appendStatusUrl = PICK_BEFORE_ORDER_URL + currentTime + BREACHED_URL ;
-    }
+
     else if(status === "exception")
     {
       appendStatusUrl = EXCEPTION_TRUE ;      
     }
     else {
-     appendStatusUrl = WAREHOUSE_STATUS +"['"+status+"']"+breachedtext;
+     appendStatusUrl =status.length!==0?(WAREHOUSE_STATUS +"['"+status+"']"+breachedtext):breachedtext;
    }
    data.selected = 1; 
    filterApplied = true;

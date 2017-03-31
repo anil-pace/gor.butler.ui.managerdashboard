@@ -3,7 +3,7 @@ import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
 import {showTableFilter, filterApplied,wavefilterState,toggleWaveFilter} from '../../actions/filterAction';
-import {updateMainStore} from '../../actions/socketActions';
+import {updateSubscriptionPacket} from '../../actions/socketActions';
 import { connect } from 'react-redux'; 
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
@@ -32,10 +32,10 @@ class WaveFilter extends React.Component{
         let tokenField1 = {value:"STATUS", label:<FormattedMessage id="wave.token.status" defaultMessage ="STATUS"/>};
         let labelC1 = [
                     { value: 'any', label: <FormattedMessage id="wave.STATUS.all" defaultMessage ="All waves"/>},
-                    { value: 'wave_breached', label: <FormattedMessage id="wave.STATUS.breach" defaultMessage ="Breached"/>},
+                    { value: 'breached', label: <FormattedMessage id="wave.STATUS.breach" defaultMessage ="Breached"/>},
                     { value: 'wave_pending', label: <FormattedMessage id="wave.STATUS.pending" defaultMessage ="Pending"/>},
                     { value: 'wave_warning', label: <FormattedMessage id="wave.STATUS.warning" defaultMessage ="Warning"/>},
-                    { value: 'wave_inprogress', label: <FormattedMessage id="wave.STATUS.inprogress" defaultMessage ="In progress"/>}
+                    { value: 'in_progress', label: <FormattedMessage id="wave.STATUS.inprogress" defaultMessage ="In progress"/>}
                     ];
         let selectedToken =  this.state.tokenSelected;
         let column1 = <FilterTokenWrap field={tokenField1} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC1} selectedToken={selectedToken}/>;
@@ -64,7 +64,7 @@ class WaveFilter extends React.Component{
       let updatedWsSubscription = this.props.wsSubscriptionData;
       updatedWsSubscription["orders"].data[0].details["filter_params"] = filterSubsData;
       this.props.wavefilterState(filterState);
-      this.props.updateMainStore(updatedWsSubscription);
+      this.props.updateSubscriptionPacket(updatedWsSubscription);
       this.props.filterApplied(!this.props.isFilterApplied);
       this.props.toggleWaveFilter(true);
       this.props.setWavesFilterSpinner(true);
@@ -76,7 +76,7 @@ class WaveFilter extends React.Component{
         let clearState = {};
         let updatedWsSubscription = this.props.wsSubscriptionData;
         updatedWsSubscription["orders"].data[0].details["filter_params"] = {};
-        this.props.updateMainStore(updatedWsSubscription);
+        this.props.updateSubscriptionPacket(updatedWsSubscription);
         this.setState({tokenSelected: {"STATUS":["any"]}, searchQuery: {}});
         this.props.wavefilterState({tokenSelected: {"STATUS":["any"]}, searchQuery: {}});
         this.props.filterApplied(!this.props.isFilterApplied);
@@ -127,7 +127,7 @@ let mapDispatchToProps = function(dispatch){
     showTableFilter: function(data){dispatch(showTableFilter(data));},
     filterApplied: function(data){dispatch(filterApplied(data));},
     wavefilterState: function(data){dispatch(wavefilterState(data));},
-    updateMainStore: function(data){dispatch(updateMainStore(data));},
+    updateSubscriptionPacket: function(data){dispatch(updateSubscriptionPacket(data));},
     toggleWaveFilter: function(data){dispatch(toggleWaveFilter(data));},
     setWavesFilterSpinner: function(data){dispatch(setWavesFilterSpinner(data));}
 
@@ -137,7 +137,7 @@ WaveFilter.PropTypes={
 showTableFilter: React.PropTypes.func,
 filterApplied:React.PropTypes.func,
 wavefilterState: React.PropTypes.func,
-updateMainStore: React.PropTypes.func,
+updateSubscriptionPacket: React.PropTypes.func,
 toggleWaveFilter:React.PropTypes.func,
 showFilter:React.PropTypes.bool,
 waveData:React.PropTypes.object,

@@ -3,7 +3,7 @@ import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
 import {showTableFilter,filterApplied,butlerfilterState,toggleBotButton} from '../../actions/filterAction';
-import {updateMainStore} from '../../actions/socketActions';
+import {updateSubscriptionPacket} from '../../actions/socketActions';
 import { connect } from 'react-redux'; 
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
@@ -84,7 +84,7 @@ class ButlerBotFilter extends React.Component{
       updatedWsSubscription["butlerbots"].data[0].details["filter_params"] = filterSubsData;
       updatedWsSubscription["system"].data[0].details["filter_params"] = filterSubsData;
       this.props.butlerfilterState(filterState);
-      this.props.updateMainStore(updatedWsSubscription);
+      this.props.updateSubscriptionPacket(updatedWsSubscription);
       this.props.filterApplied(!this.props.isFilterApplied);
       this.props.toggleBotButton(true);
       this.props.setButlerFilterSpinner(true);
@@ -95,7 +95,7 @@ class ButlerBotFilter extends React.Component{
         let updatedWsSubscription = this.props.wsSubscriptionData;
         updatedWsSubscription["butlerbots"].data[0].details["filter_params"] = {};
         updatedWsSubscription["system"].data[0].details["filter_params"] = {};
-        this.props.updateMainStore(updatedWsSubscription);
+        this.props.updateSubscriptionPacket(updatedWsSubscription);
         this.setState({tokenSelected: {"STATUS":["any"], "MODE":["any"]}, searchQuery: {}});
         this.props.butlerfilterState({tokenSelected: {"STATUS":["any"], "MODE":["any"]}, searchQuery: {}});
         this.props.filterApplied(!this.props.isFilterApplied);
@@ -143,7 +143,7 @@ var mapDispatchToProps = function(dispatch){
   return {
     showTableFilter: function(data){dispatch(showTableFilter(data));},
     filterApplied: function(data){dispatch(filterApplied(data));},
-    updateMainStore: function(data){dispatch(updateMainStore(data));},
+    updateSubscriptionPacket: function(data){dispatch(updateSubscriptionPacket(data));},
     butlerfilterState: function(data){dispatch(butlerfilterState(data));},
     toggleBotButton: function(data){dispatch(toggleBotButton(data));},
     setButlerFilterSpinner: function(data){dispatch(setButlerFilterSpinner(data));}
@@ -158,7 +158,7 @@ isFilterApplied:React.PropTypes.bool,
 botFilterStatus:React.PropTypes.bool,
 showTableFilter:React.PropTypes.func,
 filterApplied: React.PropTypes.func,
-updateMainStore:React.PropTypes.func,
+updateSubscriptionPacket:React.PropTypes.func,
 butlerfilterState:React.PropTypes.func,
 toggleBotButton:React.PropTypes.func
 };

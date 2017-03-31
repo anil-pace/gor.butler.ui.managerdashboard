@@ -7,15 +7,23 @@ import {SHOW_FILTER, IS_FILTER_APPLIED,BUTLER_FILTER_STATE,CHARGINGSTATION_FILTE
  export  function filterInfo(state={},action){
   switch (action.type) {
     case SHOW_FILTER:
+    console.log("raja"+action.data);    
     return Object.assign({}, state, { 
       "filterState" : action.data
-    })                    
+    })     
+
     break;
     case IS_FILTER_APPLIED:              //This reducer will update the the isFilterApplied value with true/false
     return Object.assign({}, state, { 
       "isFilterApplied" : action.data
     })
     break;
+case 'SET_DEFAULT_RANGE':              //This reducer will update the the isFilterApplied value with true/false
+    return Object.assign({}, state, { 
+      "deaultSliderRange" : action.data
+    })
+    break;
+
 
     case TOGGLE_BUTTON_BOT:              //This reducer will update the the botFilterStatus value with latest applied filter
     return Object.assign({}, state, { 

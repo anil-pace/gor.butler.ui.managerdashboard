@@ -29,7 +29,7 @@
   },
   {
     "id": "charging.timePeriod.oneHr",
-    "defaultMessage": "Mannual"
+    "defaultMessage": "Manual"
   },
   {
     "id": "charging.timePeriod.twoHR",

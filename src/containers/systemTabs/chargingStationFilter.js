@@ -3,12 +3,12 @@ import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
 import {showTableFilter, filterApplied,chargingstationfilterState,toggleChargingFilter} from '../../actions/filterAction';
-import {updateMainStore} from '../../actions/socketActions';
+import {updateSubscriptionPacket} from '../../actions/socketActions';
 import { connect } from 'react-redux'; 
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
-import {setCsSpinner}  from '../../actions/spinnerAction';
+import {setCsFilterSpinner}  from '../../actions/spinnerAction';
 class ChargingStationFilter extends React.Component{
   constructor(props) 
   {
@@ -22,6 +22,12 @@ class ChargingStationFilter extends React.Component{
         let filterState = !this.props.showFilter;
         this.props.showTableFilter(false);
     } 
+
+      componentWillMount(){
+        if(this.props.chargingstationfilterState) {
+            this.setState(this.props.chargingstationfilterState)
+        }
+    }
 
     _processChargingSearchField(){
         var filterInputFields = [{value:"CHARGING STATION ID", label:<FormattedMessage id="charging.inputField.id" defaultMessage ="CHARGING STATION ID"/>}];
@@ -41,7 +47,7 @@ class ChargingStationFilter extends React.Component{
                     ];
         let labelC2 = [
                     { value: 'all', label: <FormattedMessage id="charging.timePeriod.all" defaultMessage ="Any"/>},
-                    { value: 'mannual', label: <FormattedMessage id="charging.timePeriod.oneHr" defaultMessage ="Mannual"/>},
+                    { value: 'manual', label: <FormattedMessage id="charging.timePeriod.oneHr" defaultMessage ="Manual"/>},
                     { value: 'auto', label: <FormattedMessage id="charging.timePeriod.twoHR" defaultMessage ="Auto"/>}
                     ]; 
         let selectedToken =  this.state.tokenSelected;
@@ -73,22 +79,22 @@ class ChargingStationFilter extends React.Component{
       let updatedWsSubscription = this.props.wsSubscriptionData;
       updatedWsSubscription["chargingstation"].data[0].details["filter_params"] = filterSubsData;
       this.props.chargingstationfilterState(filterState);
-      this.props.updateMainStore(updatedWsSubscription);
+      this.props.updateSubscriptionPacket(updatedWsSubscription);
        this.props.filterApplied(!this.props.isFilterApplied);
       this.props.toggleChargingFilter(true);
-      this.props.setCsSpinner(true);
+      this.props.setCsFilterSpinner(true);
     }
 
     _clearFilter() {
         let clearState = {};
          let updatedWsSubscription = this.props.wsSubscriptionData;
         updatedWsSubscription["chargingstation"].data[0].details["filter_params"] = {};
-        this.props.updateMainStore(updatedWsSubscription);
+        this.props.updateSubscriptionPacket(updatedWsSubscription);
         this.setState({tokenSelected: {"DOCKING STATUS":["all"], "OPERATING MODE":["all"]}, searchQuery: {}});
         this.props.chargingstationfilterState({tokenSelected: {"STATUS":["all"], "MODE":["all"]}, searchQuery: {}});
         this.props.filterApplied(!this.props.isFilterApplied);
         this.props.toggleChargingFilter(false);
-        this.props.setCsSpinner(true);
+        this.props.setCsFilterSpinner(true);
     } 
 
 
@@ -107,7 +113,7 @@ class ChargingStationFilter extends React.Component{
                          filterTokenC1={chargingFilterToken.column1token}
                          filterTokenC2={chargingFilterToken.column2token}
                          formSubmit={this._applyFilter.bind(this)} //passing function on submit
-                         responseFlag={this.props.csSpinner} // used for spinner of button 
+                         responseFlag={this.props.csFilterSpinner} // used for spinner of button 
                          noDataFlag={noOrder} //messg to show in case of no data
                          />
             </div>
@@ -125,7 +131,8 @@ function mapStateToProps(state, ownProps){
     filterState: state.filterInfo.chargingstationfilterState,
     isFilterApplied: state.filterInfo.isFilterApplied || false,
     chargingFilterStatus:state.filterInfo.chargingFilterStatus || false,
-    csSpinner:state.spinner.csSpinner || false
+    csSpinner:state.spinner.csSpinner || false,
+    csFilterSpinner:state.spinner.csFilterSpinner || false
 
   };
 }
@@ -134,10 +141,10 @@ var mapDispatchToProps = function(dispatch){
   return {
     showTableFilter: function(data){dispatch(showTableFilter(data));},
     filterApplied: function(data){dispatch(filterApplied(data));},
-    updateMainStore: function(data){dispatch(updateMainStore(data));},
+    updateSubscriptionPacket: function(data){dispatch(updateSubscriptionPacket(data));},
     chargingstationfilterState: function(data){dispatch(chargingstationfilterState(data));},
     toggleChargingFilter: function(data){dispatch(toggleChargingFilter(data));},
-     setCsSpinner: function(data){dispatch(setCsSpinner(data));}
+     setCsFilterSpinner: function(data){dispatch(setCsFilterSpinner(data));}
   }
 };
 
@@ -151,7 +158,7 @@ isFilterApplied:React.PropTypes.bool,
 chargingFilterStatus:React.PropTypes.bool,
 showTableFilter:React.PropTypes.func,
 filterApplied: React.PropTypes.func,
-updateMainStore:React.PropTypes.func,
+updateSubscriptionPacket:React.PropTypes.func,
 chargingstationfilterState:React.PropTypes.func,
 toggleChargingFilter:React.PropTypes.func
 };

@@ -92,6 +92,11 @@ export const TAB_CLASS = {
 	users:"gorMainBlock"
 };
 
+export const PENDING="audit_accepted','audit_pending','audit_waiting','audit_conflicting";
+export const INPROGRESS="audit_started','audit_tasked";
+export const RESOLVED="audit_resolved";
+export const REJECTED="audit_rejected";
+
 /*Constants for response type */
 export const PPS_DATA = "pps";
 export const BUTLERS_DATA = "BUTLERS_DATA";
@@ -181,7 +186,15 @@ export const DISPLAY_USERS_SPINNER ="DISPLAY_USERS_SPINNER";
 export const DISPAY_RESOLVE_AUDIT_SPINNER = "DISPAY_RESOLVE_AUDIT_SPINNER";
 export const VALIDATE_SKU_SPINNER = "VALIDATE_SKU_SPINNER";
 export const DISPLAY_SAFETY_SPINNER = "DISPLAY_SAFETY_SPINNER";
+export const DISPLAY_BOT_FILTER_SPINNER = "DISPLAY_BOT_FILTER_SPINNER";
+export const DISPLAY_WAVES_FILTER_SPINNER = "DISPLAY_WAVES_FILTER_SPINNER";
 export const DISPAY_USER_SPINNER = "DISPAY_USER_SPINNER";
+export const DISPLAY_PPS_FILTER_SPINNER = "DISPLAY_PPS_FILTER_SPINNER";
+export const DISPLAY_CHARGING_STATION_FILTER_SPINNER = "DISPLAY_CHARGING_STATION_FILTER_SPINNER";
+
+
+
+
 /*Map for routes of tab*/
 
 export const TAB_ROUTE_MAP = {
@@ -223,6 +236,7 @@ export const NO_SKU_VALIDATION = "NO_SKU_VALIDATION";
 export const WATING_FOR_VALIDATION = "WATING_FOR_VALIDATION";
 export const AUDIT_ISSUES_STATUS = "Issues found";
 export const AUDIT_BY_PDFA = "pdfa";
+export const BREACHED ="&breached=True"
 /*Inventory parsing constants*/
 export const INVENTORY_DATA_TODAY = 'INVENTORY_DATA_TODAY'
 export const INVENTORY_DATA_HISTORY = 'INVENTORY_DATA_HISTORY'
@@ -376,6 +390,12 @@ export const AUDIT_UNRESOLVED = "Unresolved";
 export const AUDIT_LINE_REJECTED  = "audit_rejected";
 export const AUDIT_REJECTED_STATUS = "Rejected";
 export const AUDIT_RESOLVED_STATUS = "Resolved";
+export const AUDIT_SKU_TEXT = '&audit_param_type=sku&audit_param_value="';
+export const AUDIT_LOCATION_TEXT = '&audit_param_type=location&audit_param_value="';
+export const AUDIT_ANY_TEXT = '&audit_param_type=any&audit_param_value=["';
+export const AUDIT_TYPE="AUDIT TYPE";
+export const SPECIFIC_SKU_ID='SPECIFIC SKU ID';
+export const SPECIFIC_LOCATION_ID='SPECIFIC LOCATION ID';
 //Icons
 export const PICK_ICON=' iPick';
 export const STOCK_ICON="iStock";

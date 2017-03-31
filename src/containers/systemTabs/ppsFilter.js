@@ -2,9 +2,9 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
-import {showTableFilter, filterApplied,ppsfilterState,togglePPSFilter} from '../../actions/filterAction';
+import {showTableFilter, filterApplied,ppsfilterState,togglePPSFilter,setDefaultRange} from '../../actions/filterAction';
 import { connect } from 'react-redux'; 
-import {updateMainStore} from '../../actions/socketActions';
+import {updateSubscriptionPacket} from '../../actions/socketActions';
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
@@ -60,15 +60,17 @@ class PPSFilter extends React.Component{
     }
 
     _handleRangeSlider(){
+      console.log(this.props.deaultSliderRange);
       return <div>
        <span className="sliderHeaderText">PERFORMANCE RANGE</span>
+
                              <RangeSlider.Range 
                                  min={0}
                                  max={500}
                                  step={100}
                                  marks={filterMarks}
                                  maxValue={500}
-                                 defaultValue={[0,500]}
+                                 defaultValue={this.props.deaultSliderRange}
                                  allowCross={false}
                                  onChange={this._changeSLiderRange.bind(this)}
                                   />
@@ -89,12 +91,26 @@ class PPSFilter extends React.Component{
     _applyFilter() {
         let filterSubsData = {}, filterState = this.state;
       if(filterState.searchQuery) {
-        (filterState.searchQuery["OPERATOR ASSIGNED"]?filterSubsData["operators_assigned"] = ['contains',filterState.searchQuery["OPERATOR ASSIGNED"]]:"");
+if(filterState.searchQuery["OPERATOR ASSIGNED"])
+{
+        let pos,formatedArray;
+        let wholeString=filterState.searchQuery["OPERATOR ASSIGNED"];
+        pos=wholeString.indexOf(' ');
+        if(pos==-1){
+        (filterState.searchQuery["OPERATOR ASSIGNED"]?filterSubsData["operators_assigned"] = ['=',filterState.searchQuery["OPERATOR ASSIGNED"]]:"");
+      }
+       else
+       {
+        formatedArray=wholeString.match(/\S+/g);
+       (filterState.searchQuery["OPERATOR ASSIGNED"]?filterSubsData["operators_assigned"] = ['=',formatedArray]:"");
+        }
+      }
         (filterState.searchQuery["PPS ID"]?filterSubsData["pps_id"] = ['=',filterState.searchQuery["PPS ID"]]:"");
       }
-      // if(filterState.rangeSelected){
-      //   (filterState.rangeSelected["maxValue"]?filterSubsData["performance"]=['between',[Number(filterState.rangeSelected["minValue"]),Number(filterState.rangeSelected["maxValue"])]]:"");
-      // }
+
+      if(filterState.rangeSelected){
+        (filterState.rangeSelected["maxValue"]?filterSubsData["performance"]=['between',[ (Number(filterState.rangeSelected["minValue"])==0)?-1:Number(filterState.rangeSelected["minValue"]),Number(filterState.rangeSelected["maxValue"])]]:"");
+      }
 
       
       if(filterState.tokenSelected) {
@@ -104,7 +120,7 @@ class PPSFilter extends React.Component{
       let updatedWsSubscription = this.props.wsSubscriptionData;
       updatedWsSubscription["pps"].data[0].details["filter_params"] = filterSubsData;
       this.props.ppsfilterState(filterState);
-      this.props.updateMainStore(updatedWsSubscription);
+      this.props.updateSubscriptionPacket(updatedWsSubscription);
       this.props.filterApplied(!this.props.isFilterApplied);
       this.props.togglePPSFilter(true);
       this.props.setPpsFilterSpinner(true);
@@ -114,12 +130,14 @@ class PPSFilter extends React.Component{
          let clearState = {};
         let updatedWsSubscription = this.props.wsSubscriptionData;
         updatedWsSubscription["pps"].data[0].details["filter_params"] = {};
-        this.props.updateMainStore(updatedWsSubscription);
-         this.setState({tokenSelected: {"STATUS":["all"], "MODE":["all"]}, searchQuery: {}, rangeSelected:{"minValue":["-1"],"maxValue":["500"]}});
+        this.props.updateSubscriptionPacket(updatedWsSubscription);
+        this.setState({tokenSelected: {"STATUS":["all"], "MODE":["all"]}, searchQuery: {}, rangeSelected:{"minValue":["-1"],"maxValue":["500"]}});
         this.props.ppsfilterState({tokenSelected: {"STATUS":["all"], "MODE":["all"]}, searchQuery: {}, rangeSelected:{"minValue":["-1"],"maxValue":["500"]}});
         this.props.filterApplied(!this.props.isFilterApplied);
         this.props.togglePPSFilter(false);
         this.props.setPpsFilterSpinner(true);
+        this.props.setDefaultRange([0,500]);
+        this._handleRangeSlider();
 
     } 
 
@@ -160,10 +178,12 @@ function mapStateToProps(state, ownProps){
     orderData: state.getOrderDetail || {},
     wsSubscriptionData:state.recieveSocketActions.socketDataSubscriptionPacket,
     orderListSpinner: state.spinner.orderListSpinner || false,
-    filterState: state.filterInfo.ppsfilterState,
+    filterState: state.filterInfo.ppsFilterValue,
     isFilterApplied: state.filterInfo.isFilterApplied || false,
     ppsFilterState:state.filterInfo.ppsFilterState || false,
-    ppsFilterSpinnerState:state.spinner.ppsFilterSpinnerState || false
+    ppsFilterSpinnerState:state.spinner.ppsFilterSpinnerState || false,
+    deaultSliderRange:state.filterInfo.deaultSliderRange || [0,500]
+    
 
   };
 }
@@ -172,11 +192,12 @@ var mapDispatchToProps = function(dispatch){
   return {
     showTableFilter: function(data){dispatch(showTableFilter(data));},
     filterApplied: function(data){dispatch(filterApplied(data));},
-    updateMainStore: function(data){dispatch(updateMainStore(data));},
+    updateSubscriptionPacket: function(data){dispatch(updateSubscriptionPacket(data));},
     ppsfilterState: function(data){dispatch(ppsfilterState(data));},
     togglePPSFilter: function(data){dispatch(togglePPSFilter(data));},
     setPpsSpinner: function(data){dispatch(setPpsSpinner(data));},
-    setPpsFilterSpinner: function(data){dispatch(setPpsFilterSpinner(data));}
+    setPpsFilterSpinner: function(data){dispatch(setPpsFilterSpinner(data));},
+    setDefaultRange: function(data){dispatch(setDefaultRange(data));}
 
   }
 };
@@ -190,7 +211,7 @@ PPSFilter.PropTypes={
  ppsFilterState:React.PropTypes.bool,
  showTableFilter:React.PropTypes.func,
 filterApplied: React.PropTypes.func,
-updateMainStore:React.PropTypes.func,
+updateSubscriptionPacket:React.PropTypes.func,
 togglePPSFilter:React.PropTypes.func
 };
 

@@ -150,7 +150,6 @@ shouldComponentUpdate(nextProps) {
    }
 
   render() {
-    let updateStatusIntl="";
     let filterHeight = screen.height-190-50;
 
     var {sortedDataList, colSortDirs,columnWidths} = this.state;  
