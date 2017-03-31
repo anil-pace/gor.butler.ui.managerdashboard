@@ -4,9 +4,10 @@ import { FormattedMessage } from 'react-intl';
 
 
 class Filter extends React.Component{
-    constructor(props) 
-    {
-        super(props);
+
+	constructor(props) 
+	{
+    	super(props);
     }
 
     _closeFilter() {
@@ -55,6 +56,7 @@ class Filter extends React.Component{
                             <div className="gor-filter-body-filterToken-section1">
                                 {this.props.filterTokenC4}
                             </div>
+
                          </div>
                          <div className="gor-filter-body-slider-wrap"> 
                              

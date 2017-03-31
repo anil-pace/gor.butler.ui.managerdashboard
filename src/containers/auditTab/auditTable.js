@@ -249,7 +249,7 @@ class AuditTable extends React.Component {
       }
       else{
         var headerHeight=GOR_USER_TABLE_HEADER_HEIGHT,minHeight = GOR_AUDIT_RESOLVE_MIN_HEIGHT;
-        heightRes = GOR_USER_TABLE_HEADER_HEIGHT*rowsCount + GOR_AUDIT_TABLE_HEIGHT_CORRECTION;
+        heightRes = Math.max(GOR_USER_TABLE_HEADER_HEIGHT*rowsCount + GOR_AUDIT_TABLE_HEIGHT_CORRECTION,screen.height-GOR_AUDIT_TABLE_HEIGHT_CORRECTION);
       } 
       var filterHeight = screen.height-190;
       var tableRenderer = <div/>

@@ -15,7 +15,8 @@ class SearchDropdown extends Component {
     var listLength = (nextProps.list && nextProps.list.length?nextProps.list.length:0);
     var initialIndex = Array.from(Array(listLength).keys());
     var checkedIndex  = new Array(listLength).fill(false);
-    this.state = {selected:"Search and select", showList:false, currentQuery:"", currentList:initialIndex, checkedIndex:checkedIndex, totalChecked:0, tabSelected:SHOW_ALL_ENTRIES}
+    var currentTab = this.state.tabSelected;
+    this.state = {selected:"Search and select", showList:false, currentQuery:"", currentList:initialIndex, checkedIndex:checkedIndex, totalChecked:0, tabSelected:currentTab?currentTab:SHOW_ALL_ENTRIES}
     this._showList = this._showList.bind(this);
   }
 

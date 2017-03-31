@@ -59,9 +59,11 @@ class PPSFilter extends React.Component{
         return columnDetail;
     }
 
+
     _handleRangeSlider(){
       return <div>
        <span className="sliderHeaderText">PERFORMANCE RANGE</span>
+
 
                              <RangeSlider.Range 
                                  min={0}
@@ -140,11 +142,9 @@ if(filterState.searchQuery["OPERATOR ASSIGNED"])
 
     } 
 
-
    _changeSLiderRange(sliderVal){
       this.setState({rangeSelected:{minValue:sliderVal[0],maxValue:sliderVal[1]}});
     }
-
   render(){
     
         var ppsDetail = this.props.PPSDetail;
@@ -163,6 +163,7 @@ if(filterState.searchQuery["OPERATOR ASSIGNED"])
                          responseFlag={this.props.ppsFilterSpinnerState} // used for spinner of button 
                          noDataFlag={noOrder} //messg to show in case of no data
                          slides={rangeSlider}
+
                          />        
       </div>
     );

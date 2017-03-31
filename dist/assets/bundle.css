@@ -800,6 +800,7 @@ body {
   padding: 0.3125rem 0;
   display: inline-block;
   vertical-align: middle;
+  width: 49%;
 }
 
 .gorHeader .dropdown-content {
@@ -813,7 +814,10 @@ body {
   right: 0;
   min-width: 5em;
   height: 35px;
-  top: 2.4375rem;
+  top: 2.75rem;
+  display: block;
+  padding-right: 3px;
+  width: 193px;
   box-shadow: 0em 0.1em 0.2em 0em rgba(0, 0, 0, 0.2);
 }
 

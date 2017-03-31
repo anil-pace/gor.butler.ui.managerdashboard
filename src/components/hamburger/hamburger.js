@@ -10,7 +10,13 @@ class HamBurger extends React.Component{
   	componentWillMount() {
     	document.addEventListener('click', this._handleDocumentClick, false);
     	document.addEventListener('touchend', this._handleDocumentClick, false);
-  	}    
+  	}  
+
+    
+    componentWillUnmount() {
+    document.removeEventListener('click', this._handleDocumentClick, false);
+    document.removeEventListener('touchend', this._handleDocumentClick, false);
+  }  
     _toggleDropdown(){
     	var currentVisibility = this.state.menuVisible;
     	currentVisibility = !currentVisibility;
