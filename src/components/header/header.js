@@ -75,7 +75,6 @@ class Header extends React.Component{
     }
     setDropdown() {
       this.setState({showDropdown:!this.state.showDropdown});
-      console.log(this.state.showDropdown)
     }
      _handleDocumentClick() {
       if (!(ReactDOM.findDOMNode(this.dropdownNode).contains(event.target) || (this.dropdownValue && ReactDOM.findDOMNode(this.dropdownValue).contains(event.target)))) {
