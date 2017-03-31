@@ -257,7 +257,7 @@ handlePageClick(data){
 
     if(data.tokenSelected[AUDIT_TYPE][0]!='all')
     {
-    if(data.tokenSelected[AUDIT_TYPE].length==2)
+    if(data.tokenSelected[AUDIT_TYPE].length===2)
     {
       selectvalue='all';
     }

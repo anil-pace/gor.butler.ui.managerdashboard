@@ -60,7 +60,6 @@ class PPSFilter extends React.Component{
     }
 
     _handleRangeSlider(){
-      console.log(this.props.deaultSliderRange);
       return <div>
        <span className="sliderHeaderText">PERFORMANCE RANGE</span>
 

@@ -63,7 +63,6 @@ class OrderFilter extends React.Component{
     }
 
     _applyFilter() {
-        console.log(this.state)
        this.props.refreshOption(this.state);
     }
 

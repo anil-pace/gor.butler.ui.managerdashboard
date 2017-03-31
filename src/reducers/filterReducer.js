@@ -7,7 +7,6 @@ import {SHOW_FILTER, IS_FILTER_APPLIED,BUTLER_FILTER_STATE,CHARGINGSTATION_FILTE
  export  function filterInfo(state={},action){
   switch (action.type) {
     case SHOW_FILTER:
-    console.log("raja"+action.data);    
     return Object.assign({}, state, { 
       "filterState" : action.data
     })     

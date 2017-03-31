@@ -146,7 +146,6 @@ shouldComponentUpdate(nextProps) {
   _setFilter() {
     var newState = !this.props.showFilter;
     this.props.setFilter(newState);
-    console.log('filter');
    }
 
   render() {

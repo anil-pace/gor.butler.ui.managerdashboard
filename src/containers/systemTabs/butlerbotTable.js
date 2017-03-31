@@ -156,7 +156,6 @@ shouldComponentUpdate(nextProps) {
         defaultMessage ="No Butler Bot Found"/>  </div>
       containerHeight = GOR_TABLE_HEADER_HEIGHT;
      }
-     console.log(this.props.showFilter);
      var filterHeight = screen.height-190-50;
     return (
       <div className="gorTableMainContainer">
