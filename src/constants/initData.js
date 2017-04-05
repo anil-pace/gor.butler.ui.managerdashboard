@@ -240,10 +240,7 @@ export const wsOverviewData = {
                   "resource_id": "pps",
                   "details": {
                     "data": "complete_v2",
-                    "callback": [],
-                    "filter_params": {
-                      "pps_id": ['=', '1']
-                    }
+                    "callback": []
                   }
                 },
                 {
@@ -556,7 +553,7 @@ export const wsOverviewData = {
           "type": "subscribe",
           "data": [
                 {
-                  "resource_id": "orders",
+                  "resource_id": "waves",
                   "details": {
                     "data": "complete_v2",
                     "callback": []
@@ -639,7 +636,7 @@ export const wsOverviewData = {
                   }
                 },
                 {
-                  "resource_id": "orders",
+                  "resource_id": "waves",
                   "details": {
                     "data": "header",
                     "callback": []

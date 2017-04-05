@@ -36,7 +36,12 @@ class ButlerBotTable extends React.Component {
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
   }
 
-  
+shouldComponentUpdate(nextProps) {
+    if((nextProps.items && !nextProps.items.length) && this.props.showFilter === nextProps.showFilter){
+      return false;
+    }
+    return true;
+ }
 
   componentWillReceiveProps(nextProps) {
     var items = nextProps.items || [];
@@ -173,7 +178,7 @@ class ButlerBotTable extends React.Component {
         <div className="gorToolBarDropDown">
         <div className="gor-button-wrap">
         <div className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
-        <button className={this.props.isFilterApplied?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
+        <button className={this.props.botFilterStatus?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
           <div className="gor-manage-task"/>
           <FormattedMessage id="order.table.filterLabel" description="button label for filter" 
           defaultMessage ="Filter data"/>
@@ -181,10 +186,6 @@ class ButlerBotTable extends React.Component {
        </div>
         </div>     
         </div>
-
-
-
-
        </div>
       <Table
         rowHeight={50}
@@ -327,4 +328,21 @@ class ButlerBotTable extends React.Component {
     );
   }
 }
+ButlerBotTable.PropTypes={
+items:React.PropTypes.array,
+  containerWidth:React.PropTypes.number,
+  itemNumber:React.PropTypes.number,
+  currentHeaderOrder:React.PropTypes.object,
+  sortHeaderState:React.PropTypes.func,
+  lastUpdatedText:React.PropTypes.string,
+  showFilter:React.PropTypes.bool,
+  lastUpdated:React.PropTypes.string,
+  setButlerFilter:React.PropTypes.func,
+  setFilter:React.PropTypes.func,
+  containerHeight:React.PropTypes.number,
+  parameters:React.PropTypes.object,
+  botFilterStatus:React.PropTypes.bool
+};
+
+
 export default Dimensions()(ButlerBotTable);

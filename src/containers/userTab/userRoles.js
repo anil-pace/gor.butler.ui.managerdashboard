@@ -41,7 +41,7 @@ class UserRoles extends React.Component{
            return false;
     }
     _getList(){
-        let options=[], selected, len, objDropdown, currentRole, label;
+        let options=[], selected={}, len, objDropdown, currentRole, label;
         len = this.props.roleInfo.length;
         for(let i=0; i<len; i++){
            currentRole = this.props.roleInfo[i];

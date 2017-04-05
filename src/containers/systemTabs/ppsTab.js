@@ -108,8 +108,8 @@ class PPS extends React.Component{
 }
 	render(){	
 let updateStatusIntl="";
-	var operationMode = {"pick":0, "put":0, "audit":0,"notSet":0};
-    var data , operatorNum = 0, itemNumber = 5, ppsOn = 0, avgThroughput=0;
+	let operationMode = {"pick":0, "put":0, "audit":0,"notSet":0};
+    let data , operatorNum = 0, itemNumber = 5, ppsOn = 0, avgThroughput=0;
     if(this.props.PPSDetail.PPStypeDetail !== undefined) {
     	data = this._processPPSData();
       for (var i = data.length - 1; i >= 0; i--) {
@@ -157,7 +157,7 @@ let updateStatusIntl="";
              setPpsFilter={this.props.ppsFilterDetail}
              getPpsFilter = {this.props.ppsFilter}
              avgThroughput = {avgThroughput}
-
+            ppsFilterState={this.props.ppsFilterState}
              isFilterApplied={this.props.isFilterApplied}
              lastUpdatedText={updateStatusIntl}
              lastUpdated={updateStatusIntl}
@@ -183,6 +183,8 @@ function mapStateToProps(state, ownProps){
     ppsSpinner: state.spinner.ppsSpinner || false,
     PPSDetail: state.PPSDetail || [],
     intlMessages: state.intl.messages,
+    showFilter: state.filterInfo.filterState || false,
+    ppsFilterState:state.filterInfo.ppsFilterState|| false,
     showFilter: state.filterInfo.filterState || false
   };
 }
@@ -203,6 +205,28 @@ var mapDispatchToProps = function(dispatch){
 
 PPS.contextTypes = {
  intl:React.PropTypes.object.isRequired
+}
+PPS.PropTypes={
+ppsFilter: React.PropTypes.string,
+getCheckAll:React.PropTypes.bool,
+bDropRender:React.PropTypes.bool,
+ppsSortHeader:React.PropTypes.string,
+ppsSortHeaderState:React.PropTypes.string,
+ppsSpinner:React.PropTypes.bool,
+PPSDetail: React.PropTypes.array,
+showFilter:React.PropTypes.bool,
+ppsFilterState:React.PropTypes.bool,
+showFilter:React.PropTypes.bool,
+ppsFilterDetail:React.PropTypes.func,
+changePPSmode: React.PropTypes.func,
+setPpsSpinner: React.PropTypes.func,
+ppsHeaderSort: React.PropTypes.func,
+ppsHeaderSortOrder:React.PropTypes.func,
+setCheckedPps: React.PropTypes.func,
+setDropDisplay:React.PropTypes.func,
+setCheckAll: React.PropTypes.func,
+showTableFilter:React.PropTypes.func
+
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(PPS) ;

@@ -176,6 +176,7 @@ class ButlerBot extends React.Component{
 	{
     	super(props);
     }	
+  
 	render(){
   let updateStatusIntl="";
   var itemNumber = 6;
@@ -236,9 +237,10 @@ class ButlerBot extends React.Component{
                             showFilter={this.props.showFilter}
                             isFilterApplied={this.props.isFilterApplied}
                             setFilter={this.props.showTableFilter}
-                            
+                            botFilterStatus={this.props.botFilterStatus}
                             lastUpdatedText={updateStatusIntl} 
                             lastUpdated={updateStatusIntl}
+                            butlerState={this.props.filterState}
                             />
 					</div>
 				</div>
@@ -258,6 +260,8 @@ function mapStateToProps(state, ownProps){
     intlMessages: state.intl.messages,
     showFilter: state.filterInfo.filterState || false,
     isFilterApplied: state.filterInfo.isFilterApplied || false,
+    botFilterStatus:state.filterInfo.botFilterStatus|| false,
+    filterState: state.filterInfo.butlerFilterState
   };
 }
 
@@ -276,7 +280,23 @@ var mapDispatchToProps = function(dispatch){
 ButlerBot.contextTypes ={
  intl:React.PropTypes.object.isRequired
 }
-
+ButlerBot.PropTypes={
+butlerFilter:React.PropTypes.string,
+butlerSortHeader:React.PropTypes.string,
+butlerSortHeaderState:React.PropTypes.string,
+butlerSpinner:React.PropTypes.bool,
+butlerDetail:React.PropTypes.array,
+showFilter:React.PropTypes.bool,
+isFilterApplied: React.PropTypes.bool,
+botFilterStatus:React.PropTypes.bool,
+filterState:React.PropTypes.object,
+butlerFilterDetail:React.PropTypes.func,
+setButlerSpinner:React.PropTypes.func,
+butlerHeaderSort:React.PropTypes.func,
+butlerHeaderSortOrder:React.PropTypes.func,
+showTableFilter:React.PropTypes.func,
+filterApplied:React.PropTypes.func
+};
 
 export default connect(mapStateToProps,mapDispatchToProps)(ButlerBot) ;
 

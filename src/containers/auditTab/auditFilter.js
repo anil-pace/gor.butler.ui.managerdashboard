@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
+import {REJECTED,RESOLVED,INPROGRESS,PENDING}from '../../constants/frontEndConstants';
+
 class AuditFilter extends React.Component{
 	constructor(props) 
 	{
@@ -40,11 +42,10 @@ class AuditFilter extends React.Component{
         const labelC2 = [
                     { value: 'all', label:<FormattedMessage id="audit.token2.all" defaultMessage ="Any"/> },
                     { value: 'issueFound', label:<FormattedMessage id="audit.token2.issueFound" defaultMessage ="Issue found"/>},
-                    { value: 'rejected', label:<FormattedMessage id="audit.token2.rejected" defaultMessage ="Rejected"/> },
-                    { value: 'resolved', label:<FormattedMessage id="audit.token2.resolved" defaultMessage ="Resolved"/> },
-                    { value: 'inProgress', label:<FormattedMessage id="audit.token2.inProgress" defaultMessage ="In progress"/>},
-                    { value: 'pending', label:<FormattedMessage id="audit.token2.pending" defaultMessage ="Pending"/> },
-                    { value: 'all', label:<FormattedMessage id="au1dit.token2.all" defaultMessage ="Any"/> }
+                    { value: REJECTED, label:<FormattedMessage id="audit.token2.rejected" defaultMessage ="Rejected"/> },
+                    { value: RESOLVED, label:<FormattedMessage id="audit.token2.resolved" defaultMessage ="Resolved"/> },
+                    { value: INPROGRESS , label:<FormattedMessage id="audit.token2.inProgress" defaultMessage ="In progress"/>},
+                    { value: PENDING , label:<FormattedMessage id="audit.token2.pending" defaultMessage ="Pending"/> }
                     ];
         var selectedToken =  this.state.tokenSelected;
         var column1 = <FilterTokenWrap field={tokenStatusField} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC2} selectedToken={selectedToken}/>;
@@ -107,4 +108,14 @@ var mapDispatchToProps = function(dispatch){
     filterApplied: function(data){dispatch(filterApplied(data));}
   }
 };
+
+AuditFilter.PropTypes={
+    showFilter:React.PropTypes.bool,
+    auditSpinner:React.PropTypes.bool,
+    totalAudits:React.PropTypes.number,
+    showTableFilter:React.PropTypes.func,
+    filterApplied:React.PropTypes.func
+};
+
+
 export default connect(mapStateToProps,mapDispatchToProps)(AuditFilter) ;

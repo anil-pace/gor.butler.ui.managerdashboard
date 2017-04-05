@@ -4,12 +4,11 @@ import { connect } from 'react-redux' ;
 import {userRequest} from '../../actions/userActions';
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
 import {modal} from 'react-redux-modal';
-import {validatePassword, resetForm} from '../../actions/validationActions';
+import {validatePassword, modalFormReset} from '../../actions/validationActions';
 import { emptyField } from '../../utilities/fieldCheck';
 import {LOGIN_URL} from '../../constants/configConstants';
 import {ERROR,TYPING,APP_JSON,POST,SUCCESS,RESUME_OPERATION} from '../../constants/frontEndConstants';
 import SafetyChecklist from './safetyChecklist';
-import {switchModalKey} from '../../actions/validationActions';
 
 class ResumeOperation extends React.Component{
   constructor(props) 
@@ -31,17 +30,16 @@ class ResumeOperation extends React.Component{
           return loginPassInfo.type;    
   }
   componentWillReceiveProps(nextProps){
-    if(!nextProps.auth_token||!nextProps.system_emergency||nextProps.activeModalKey !== this.props.activeModalKey)
+    if(!nextProps.auth_token||!nextProps.system_emergency||nextProps.system_data !== this.props.system_data)
     {
       this._removeThisModal();
     }
     if(nextProps.modalStatus && !this.props.modalStatus){
-      this.props.switchModalKey(this.props.activeModalKey);
       this._removeThisModal();
       modal.add(SafetyChecklist, {
       title: '',
       size: 'large', // large, medium or small,
-      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: true, // (optional) if you don't wanna show the top right close button
       //.. all what you put in here you will get access in the modal props ;)
       });
@@ -111,17 +109,16 @@ class ResumeOperation extends React.Component{
       auth_token:state.authLogin.auth_token,
       username:state.authLogin.username,      
       passwordCheck: state.appInfo.passwordInfo||{},
-      modalStatus: state.appInfo.hideModal || false,
+      modalStatus: state.emergency.hideModal || false,
       system_emergency:state.tabsData.system_emergency||false,
-      activeModalKey: state.appInfo.activeModalKey || 0       
+      system_data:state.tabsData.system_data||null
     }
 } 
 function mapDispatchToProps(dispatch){
     return {
       userRequest: function(data){ dispatch(userRequest(data)); },
       validatePass: function(data){ dispatch(validatePassword(data)); },  
-      resetForm:   function(){ dispatch(resetForm()); },
-      switchModalKey:function(data){dispatch(switchModalKey(data))}                    
+      resetForm:   function(){ dispatch(modalFormReset()); },
     }
 };
 ResumeOperation.propTypes={
@@ -130,10 +127,10 @@ ResumeOperation.propTypes={
       passwordCheck:React.PropTypes.object,
       modalStatus:React.PropTypes.bool,
       system_emergency:React.PropTypes.bool,
-      activeModalKey:React.PropTypes.number,      
       userRequest:React.PropTypes.func,
       validatePass:React.PropTypes.func,
-      resetForm:React.PropTypes.func
+      resetForm:React.PropTypes.func,
+      system_data:React.PropTypes.string
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(ResumeOperation);

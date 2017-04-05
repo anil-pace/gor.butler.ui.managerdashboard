@@ -17,11 +17,10 @@ class OrderFilter extends React.Component{
 
 
     _closeFilter() {
-        var filterState = !this.props.showFilter;
         this.props.showTableFilter(false);
     }	
 
-    _processAuditSearchField(){
+    _processOrderSearchField(){
         var filterInputFields = [{value:"ORDER ID", label:<FormattedMessage id="order.inputField.id" defaultMessage ="ORDER ID"/>}];
         var inputValue = this.state.searchQuery;
         var inputField = <FilterInputFieldWrap inputText={filterInputFields} handleInputText={this._handleInputQuery.bind(this)} inputValue={inputValue}/>
@@ -35,7 +34,7 @@ class OrderFilter extends React.Component{
         var labelC1 = [
                     { value: 'all', label: <FormattedMessage id="order.STATUS.all" defaultMessage ="All orders"/>},
                     { value: 'breached', label: <FormattedMessage id="order.STATUS.breach" defaultMessage ="Breached orders"/>},
-                    { value: 'pending', label: <FormattedMessage id="order.STATUS.pending" defaultMessage ="Pending orders"/>},
+                    { value: 'breached_pending', label: <FormattedMessage id="order.STATUS.pending" defaultMessage ="Pending orders"/>},
                     { value: 'completed', label: <FormattedMessage id="order.STATUS.completed" defaultMessage ="Completed orders"/>},
                     { value: 'exception', label: <FormattedMessage id="order.STATUS.exep" defaultMessage ="Exception"/>}
                     ];
@@ -64,7 +63,6 @@ class OrderFilter extends React.Component{
     }
 
     _applyFilter() {
-        console.log(this.state)
        this.props.refreshOption(this.state);
     }
 
@@ -78,15 +76,15 @@ class OrderFilter extends React.Component{
 
 	render(){
         var noOrder = this.props.orderData.totalOrders?false:true;
-        var auditSearchField = this._processAuditSearchField();
-        var auditFilterToken = this._processFilterToken();
+        var orderSearchField = this._processOrderSearchField();
+        var orderFilterToken = this._processFilterToken();
 		return (
 			<div>
                  <Filter hideFilter={this._closeFilter.bind(this)}  // hiding filter wont disturb state
                          clearFilter={this._clearFilter.bind(this)} // clearing sates of filter
-                         searchField={auditSearchField}
-                         filterTokenC1={auditFilterToken.column1token}
-                         filterTokenC2={auditFilterToken.column2token}
+                         searchField={orderSearchField}
+                         filterTokenC1={orderFilterToken.column1token}
+                         filterTokenC2={orderFilterToken.column2token}
                          formSubmit={this._applyFilter.bind(this)} //passing function on submit
                          responseFlag={this.props.orderListSpinner} // used for spinner of button 
                          noDataFlag={noOrder} //messg to show in case of no data
@@ -111,4 +109,15 @@ var mapDispatchToProps = function(dispatch){
     filterApplied: function(data){dispatch(filterApplied(data));}
   }
 };
+
+OrderFilter.PropTypes={
+    showFilter:React.PropTypes.bool,
+    orderData:React.PropTypes.object,
+    orderListSpinner:React.PropTypes.bool,
+    showTableFilter:React.PropTypes.func,
+    filterApplied:React.PropTypes.func
+};
+
+
+
 export default connect(mapStateToProps,mapDispatchToProps)(OrderFilter) ;
