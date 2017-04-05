@@ -43,13 +43,13 @@ class Header extends React.Component{
           }
   	}
     componentWillMount() {
-      document.addEventListener('click', this._handleDocumentClick, false);
-      document.addEventListener('touchend', this._handleDocumentClick, false);
+      document.addEventListener('click', this._handleDocumentClick, true);
+      document.addEventListener('touchend', this._handleDocumentClick, true);
     }  
 
     componentWillUnmount() {
-    document.removeEventListener('click', this._handleDocumentClick, false);
-    document.removeEventListener('touchend', this._handleDocumentClick, false);
+    document.removeEventListener('click', this._handleDocumentClick, true);
+    document.removeEventListener('touchend', this._handleDocumentClick, true);
   }
 
     openDropdown() {
@@ -62,7 +62,7 @@ class Header extends React.Component{
       console.log(this.state.showDropdown)
     }
      _handleDocumentClick() {
-      if (!ReactDOM.findDOMNode(this.dropdownNode).contains(event.target)) {
+      if (!(ReactDOM.findDOMNode(this.dropdownNode).contains(event.target) || ReactDOM.findDOMNode(this.dropdownValue).contains(event.target))) {
           this.setState({showDropdown:false});
       }
     } 
@@ -193,12 +193,12 @@ class Header extends React.Component{
 
 						
 					</div>
-          {this.state.showDropdown?<div id="myDropdown" className="dropdown-content">
+          {this.state.showDropdown?<div id="myDropdown" className="dropdown-content" onClick={this.addModal.bind(this)}>
               <div className="horizontalDiv"> 
               </div>
               <div>
-                <a href="javascript:void(0)" onClick={this.addModal.bind(this)}><FormattedMessage id='header.logout' 
-                        defaultMessage="Logout" description="Text for logout"/></a>
+                <a href="javascript:void(0)" ><FormattedMessage id='header.logout' 
+                        defaultMessage="Logout" description="Text for logout" ref={(node) => { this.dropdownValue = node; }}/></a>
               </div>
             </div>:""}
 				</div>
