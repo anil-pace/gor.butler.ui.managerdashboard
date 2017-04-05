@@ -128,18 +128,28 @@ class ResolveAudit extends React.Component{
     for (var i = auditDataLine.length - 1; i >= 0; i--) {
       var columnSlotId = auditDataLine[i].slot_id;
       if(slotIdHashMap[columnSlotId]>=0) {
+        for (var key in auditDataLine[i].pdfa_audit_attributes) {
+          if (auditDataLine[i].pdfa_audit_attributes.hasOwnProperty(key)) {
+            auditDataLine[i].attributeDetail = auditDataLine[i].pdfa_audit_attributes[key];
+            break;  // only picking first key (hardcoded for kerry)
+          }
+        }
         slotIdGrouping[columnSlotId].slotIdDataLine.push(auditDataLine[i]);
         actualMapping[auditDataLine[i].auditLineId] = i;
-        //slotIdGrouping.totalLines = slotIdGrouping.totalLines + 1;
       }
 
       else {
         slotIdHashMap[columnSlotId] = i;
         slotIdData.slotId = auditDataLine[i].slot_id;
+        for (var key in auditDataLine[i].pdfa_audit_attributes) {
+          if (auditDataLine[i].pdfa_audit_attributes.hasOwnProperty(key)) {
+            auditDataLine[i].attributeDetail = auditDataLine[i].pdfa_audit_attributes[key];
+            break; // only picking first key (hardcoded for kerry)
+          }
+        }
         slotIdData.slotIdDataLine.push(auditDataLine[i]);
         slotIdGrouping[columnSlotId] = slotIdData;
         actualMapping[auditDataLine[i].auditLineId] = i;
-        //slotIdGrouping.totalLines = slotIdGrouping.totalLines + 2;
         slotIdData={slotId:"", slotIdDataLine:[]}
       }
     }
