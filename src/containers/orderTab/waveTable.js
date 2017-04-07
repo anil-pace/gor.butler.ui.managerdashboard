@@ -149,6 +149,7 @@ shouldComponentUpdate(nextProps) {
    }
 
   render() {
+    var showFilterWave =false;
     let filterHeight = screen.height-190-50;
 
     var {sortedDataList, colSortDirs,columnWidths} = this.state;  
@@ -180,7 +181,16 @@ shouldComponentUpdate(nextProps) {
       
       </div>
       </div>
-
+      <div className="filterWrapper">  
+      <div className="gorFilter">
+      <div className="searchbox-magnifying-glass-icon"/>
+      <input className="gorInputFilter"
+      onChange={this._onFilterChange}
+      placeholder={this.props.intlMessg["table.filter.placeholder"]}
+      value={this.props.getWaveFilter}>
+      </input>
+      </div>
+      </div>
 
 
   <div className="filterWrapper"> 
@@ -188,11 +198,11 @@ shouldComponentUpdate(nextProps) {
         <div className="gor-button-wrap">
         <div className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
           
-        <button className={this.props.waveFilterStatus?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
+        {showFilterWave?<button className={this.props.waveFilterStatus?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
           <div className="gor-manage-task"/>
           <FormattedMessage id="order.table.filterLabel" description="button label for filter" 
           defaultMessage ="Filter data"/>
-         </button>
+         </button>:""}
        </div>
         </div>     
         </div>
