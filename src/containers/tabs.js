@@ -10,7 +10,7 @@ import {setAuditSpinner} from '../actions/auditActions';
 import {setButlerSpinner} from '../actions/spinnerAction';
 import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP,INVENTORY,AUDIT,
 FULFILLING_ORDERS,GOR_OFFLINE,GOR_ONLINE,GOR_NORMAL_TAB,GOR_FAIL,
-SOFT_MANUAL,HARD,SOFT} from '../constants/frontEndConstants';
+SOFT_MANUAL,HARD,SOFT,UTILITIES} from '../constants/frontEndConstants';
 import { FormattedMessage,FormattedNumber } from 'react-intl';
 import OperationStop from '../containers/emergencyProcess/OperationStop';
 import EmergencyRelease from '../containers/emergencyProcess/emergencyRelease'; 
@@ -90,7 +90,7 @@ class Tabs extends React.Component{
   {
     let overview,system,order,ordersvalue,users,usersvalue,inventoryvalue,overviewClass,
         inventory,audit,overviewStatus,systemStatus,ordersStatus,usersStatus,auditStatus,inventoryStatus,
-        offline,systemClass,ordersClass,auditClass,items={}, auditIcon = false;
+        offline,systemClass,ordersClass,auditClass,items={}, auditIcon = false,utilities;
 
     offline = <FormattedMessage id="tabs.offline" description="offline" 
               defaultMessage ="Offline"/>;
@@ -110,7 +110,10 @@ class Tabs extends React.Component{
               defaultMessage ="INVENTORY"/>; 
 
     audit = <FormattedMessage id="audit.tab.heading" description="audit tab" 
-              defaultMessage ="AUDIT"/>;           
+              defaultMessage ="AUDIT"/>;  
+
+    utilities = <FormattedMessage id="utilities.tab.heading" description="audit tab" 
+              defaultMessage ="UTILITIES"/>;                     
 
     if(!this.props.system_status)
     {
@@ -181,14 +184,14 @@ class Tabs extends React.Component{
            overviewStatus:overviewStatus, overviewClass:overviewClass,systemStatus:systemStatus,ordersStatus:ordersStatus,
            auditStatus:auditStatus,usersStatus:usersStatus,inventoryStatus:inventoryStatus,
            systemClass:systemClass,ordersClass:ordersClass,auditClass:auditClass,
-           auditIcon:auditIcon};
+           auditIcon:auditIcon, utilities:utilities};
 
     return items;
   }
 	render(){
 
   let items=this._parseStatus();
-                      
+  var showUtilityTab = true;              
 		return (
 		<div className="gor-tabs gor-main-block">
 		<Link to="/overview" onClick = {this.handleTabClick.bind(this,OVERVIEW)}>
@@ -215,6 +218,10 @@ class Tabs extends React.Component{
 		<Link to="/users" onClick = {this.handleTabClick.bind(this,USERS)}>
 			<Tab items={{ tab: items.users, Status: items.usersStatus, currentState:'' }} changeClass={(this.props.tab.toUpperCase() === USERS ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
 		</Link>
+
+    {showUtilityTab?<Link to="/utilities" onClick = {this.handleTabClick.bind(this,UTILITIES)}>
+      <Tab items={{ tab: items.utilities, Status:'', currentState:'' }} changeClass={(this.props.tab.toUpperCase() === UTILITIES ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
+    </Link>:""}
 	</div>
 		);
 	}

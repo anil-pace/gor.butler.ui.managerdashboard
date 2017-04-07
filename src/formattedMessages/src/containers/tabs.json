@@ -35,6 +35,11 @@
     "defaultMessage": "AUDIT"
   },
   {
+    "id": "utilities.tab.heading",
+    "description": "audit tab",
+    "defaultMessage": "UTILITIES"
+  },
+  {
     "id": "overviewStatus.tab.fulfilling",
     "description": "overview Status fulfilling orders",
     "defaultMessage": "Fulfilling orders"

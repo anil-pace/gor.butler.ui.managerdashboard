@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import HamBurger from '../hamburger/hamburger';
 import PauseOperation from '../../containers/emergencyProcess/pauseOperation'; 
 import ResumeOperation from '../../containers/emergencyProcess/resumeOperation'; 
+import {switchModalKey} from '../../actions/validationActions';
 
 var dropdownFlag=0;
 var temp;
@@ -61,7 +62,7 @@ class Header extends React.Component{
       console.log(this.state.showDropdown)
     }
      _handleDocumentClick() {
-      if (!(ReactDOM.findDOMNode(this.dropdownNode).contains(event.target) || ReactDOM.findDOMNode(this.dropdownValue).contains(event.target))) {
+      if (!(ReactDOM.findDOMNode(this.dropdownNode).contains(event.target) || this.dropdownValue?ReactDOM.findDOMNode(this.dropdownValue).contains(event.target):false)) {
           this.setState({showDropdown:false});
       }
     } 
@@ -77,10 +78,11 @@ class Header extends React.Component{
    }
    _showModal(modalComponent)
    {
+      this.props.switchModalKey(this.props.activeModalKey);
     	modal.add(modalComponent, {
       	title: '',
       	size: 'large', // large, medium or small,
-     	closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+     	closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
      	hideCloseButton: true
     	});   	
    }
@@ -190,7 +192,7 @@ class Header extends React.Component{
 						</div>
 
 						
-					</div>
+					
           {this.state.showDropdown?<div id="myDropdown" className="dropdown-content" onClick={this.addModal.bind(this)}>
               <div className="horizontalDiv"> 
               </div>
@@ -199,6 +201,7 @@ class Header extends React.Component{
                         defaultMessage="Logout" description="Text for logout" ref={(node) => { this.dropdownValue = node; }}/></a>
               </div>
             </div>:""}
+            </div>
 				</div>
 			</div>
 		</header>
@@ -220,7 +223,8 @@ function mapStateToProps(state,ownProps) {
   username:state.authLogin.username,
   system_emergency:state.tabsData.system_emergency||null,
   system_status:state.tabsData.status||null,
-  system_data:state.tabsData.system_data||null
+  system_data:state.tabsData.system_data||null,
+  activeModalKey: state.appInfo.activeModalKey || 0
  }
 } 
 /**
@@ -228,7 +232,8 @@ function mapStateToProps(state,ownProps) {
  */
 function mapDispatchToProps(dispatch){
     return {
-        getHeaderInfo: function(data){ dispatch(getHeaderInfo(data)); }
+        getHeaderInfo: function(data){ dispatch(getHeaderInfo(data)); },
+        switchModalKey:function(data){dispatch(switchModalKey(data))}
     }
 };
 
