@@ -12,6 +12,15 @@
     opacity: 0.4;
 }
 
+.spinnerImage{
+   background-image: url(images/whiteSpinner.svg);
+    width: 30px;
+    height: 30px;
+    background-size: contain;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .gor-audit-input-wrap {
 	display: inline-block;
 	width: 42%;

@@ -21,6 +21,7 @@ export const WS_INIT = "WS_INIT";
 export const WS_END="WS_END";
 export const WS_MOCK="WS_MOCK";
 export const DATA_SUBSCRIPTION_PACKET="DATA_SUBSCRIPTION_PACKET";
+export const SET_DEFAULT_RANGE="SET_DEFAULT_RANGE";
 
 /* Header constants */
 export const GET_OVERVIEW="get_overview";
@@ -92,6 +93,11 @@ export const TAB_CLASS = {
 	users:"gorMainBlock"
 };
 
+export const PENDING="audit_accepted','audit_pending','audit_waiting','audit_conflicting";
+export const INPROGRESS="audit_started','audit_tasked";
+export const RESOLVED="audit_resolved";
+export const REJECTED="audit_rejected";
+
 /*Constants for response type */
 export const PPS_DATA = "pps";
 export const BUTLERS_DATA = "BUTLERS_DATA";
@@ -123,7 +129,6 @@ export const RESUME_OPERATION = "RESUME_OPERATION";
 export const CHECK_SAFETY = "CHECK_SAFETY";
 export const CONFIRM_SAFETY = "CONFIRM_SAFETY";
 export const AUTH_USER = "AUTH_USER";
-export const MODAL_STATUS = "MODAL_STATUS";
 export const SAFETY_MAP = "SAFETY_MAP";
 export const SAFETY_ERROR_MAP = "SAFETY_ERROR_MAP";
 
@@ -182,6 +187,15 @@ export const DISPLAY_USERS_SPINNER ="DISPLAY_USERS_SPINNER";
 export const DISPAY_RESOLVE_AUDIT_SPINNER = "DISPAY_RESOLVE_AUDIT_SPINNER";
 export const VALIDATE_SKU_SPINNER = "VALIDATE_SKU_SPINNER";
 export const DISPLAY_SAFETY_SPINNER = "DISPLAY_SAFETY_SPINNER";
+export const DISPLAY_BOT_FILTER_SPINNER = "DISPLAY_BOT_FILTER_SPINNER";
+export const DISPLAY_WAVES_FILTER_SPINNER = "DISPLAY_WAVES_FILTER_SPINNER";
+export const DISPAY_USER_SPINNER = "DISPAY_USER_SPINNER";
+export const DISPLAY_PPS_FILTER_SPINNER = "DISPLAY_PPS_FILTER_SPINNER";
+export const DISPLAY_CHARGING_STATION_FILTER_SPINNER = "DISPLAY_CHARGING_STATION_FILTER_SPINNER";
+
+
+
+
 /*Map for routes of tab*/
 
 export const TAB_ROUTE_MAP = {
@@ -223,6 +237,7 @@ export const NO_SKU_VALIDATION = "NO_SKU_VALIDATION";
 export const WATING_FOR_VALIDATION = "WATING_FOR_VALIDATION";
 export const AUDIT_ISSUES_STATUS = "Issues found";
 export const AUDIT_BY_PDFA = "pdfa";
+export const BREACHED ="&breached=True"
 /*Inventory parsing constants*/
 export const INVENTORY_DATA_TODAY = 'INVENTORY_DATA_TODAY'
 export const INVENTORY_DATA_HISTORY = 'INVENTORY_DATA_HISTORY'
@@ -376,6 +391,12 @@ export const AUDIT_UNRESOLVED = "Unresolved";
 export const AUDIT_LINE_REJECTED  = "audit_rejected";
 export const AUDIT_REJECTED_STATUS = "Rejected";
 export const AUDIT_RESOLVED_STATUS = "Resolved";
+export const AUDIT_SKU_TEXT = '&audit_param_type=sku&audit_param_value="';
+export const AUDIT_LOCATION_TEXT = '&audit_param_type=location&audit_param_value="';
+export const AUDIT_ANY_TEXT = '&audit_param_type=any&audit_param_value=["';
+export const AUDIT_TYPE="AUDIT TYPE";
+export const SPECIFIC_SKU_ID='SPECIFIC SKU ID';
+export const SPECIFIC_LOCATION_ID='SPECIFIC LOCATION ID';
 //Icons
 export const PICK_ICON=' iPick';
 export const STOCK_ICON="iStock";
@@ -385,6 +406,7 @@ export const TILE_ALERT='header-yellow-alert-icon';
 export const TICK_WHITE='gor-tick-white';
 export const REMOVE_ICON='gor-remove-white';
 export const ERROR_WHITE='gor-error-white';
+export const DELAY_ICON="gor-delay-icon";
 
 //Sort header constants
 export const INITIAL_HEADER_SORT = "status";
@@ -416,9 +438,11 @@ export const SET_WAVE_FILTER = "SET_WAVE_FILTER"
 export const AUDIT_APPROVED = "auditline_approved";
 export const AUDIT_REJECTED = "auditline_rejected";
 
+
 //search dropdown constants
 export const SHOW_ALL_ENTRIES = "available";
 export const SHOW_SELECTED_ENTRIES = "checked";
+export const ALL='all'
 
 //table filter
 export const SHOW_FILTER = "SHOW_FILTER";
@@ -440,6 +464,9 @@ export const USER_FILTER_STATE = "USER_FILTER_STATE";
 export const AUDIT_TASK_ID = "AUDIT TASK ID"
 export const ADD_TOKEN = "add";
 export const ADD_DEFAULT = "addDefault";
+export const SOFT_MANUAL = "soft_manual";
+export const SOFT = "soft";
+export const HARD = "hard";
 //backend sort
 export const sortAuditHead = {"startTime":"&order_by=start_actual_time", 
 							"completedTime":"&order_by=completion_time", 
@@ -461,3 +488,7 @@ export const filterMarks={
 		          500:"500"
         	}
 
+//constants for modal handling
+export const MODAL_STATUS = "MODAL_STATUS";
+export const MODAL_RESET = "MODAL_RESET";
+export const CHECKLIST = "CHECKLIST";

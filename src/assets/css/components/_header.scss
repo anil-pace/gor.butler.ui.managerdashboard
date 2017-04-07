@@ -32,6 +32,7 @@
 			padding: calculateRem(5px) 0;
 			display: inline-block;
 			vertical-align: middle;
+			width: 49%;
 		}
 		
 	.dropdown-content {
@@ -45,7 +46,10 @@
 			right: 0;
 			min-width: 5em;
 			height: 35px;
-			top: calculateRem(39px);
+			top: calculateRem(44px);
+			display:block;
+			padding-right: 3px;
+   			width: 193px;
 			box-shadow: 0em .1em .2em 0em rgba(0,0,0,0.2);
 			a{
 				color: #666666;

@@ -1,12 +1,13 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
-import { resetForm} from '../../actions/validationActions'; 
+import { modalFormReset,validatingList} from '../../actions/validationActions'; 
 import {userRequest} from '../../actions/userActions';
 import {setSafetySpinner} from '../../actions/spinnerAction';
 import { connect } from 'react-redux';
-import { ERROR,SUCCESS,GET,APP_JSON,POST,CHECK_SAFETY,CONFIRM_SAFETY} from '../../constants/frontEndConstants';
-import { LOGIN_URL, VALIDATION_LIST } from '../../constants/configConstants';
+import { ERROR,SUCCESS,GET,APP_JSON,POST,CHECK_SAFETY,
+  CONFIRM_SAFETY} from '../../constants/frontEndConstants';
+import { LOGIN_URL, VALIDATION_LIST,VALIDATE_SAFETY } from '../../constants/configConstants';
 import { locationStatus, skuStatus } from '../../utilities/fieldCheck';
 import {stringConfig} from '../../constants/backEndConstants';
 import Spinner from '../../components/spinner/Spinner';
@@ -20,24 +21,25 @@ class SafetyChecklist extends React.Component{
   }
   componentWillUnmount()
   {
-    this.props.resetAuditType();
-    this.props.resetForm();            
+    this.props.resetForm();
+    this.props.validatingList(false);            
   }
   _removeThisModal() {
     this.props.removeModal();
   }
   componentWillReceiveProps(nextProps){
-    if(!nextProps.auth_token)
+    if(!nextProps.auth_token||!nextProps.system_emergency)
     {
       this._removeThisModal();
     }
     if(nextProps.modalStatus && !this.props.modalStatus){
       this._removeThisModal();
     }
-    if(nextProps.safetyErrorList.length != this.props.safetyErrorList.length)
+    if(nextProps.safetyErrorList.length)
     {
-      var errorList = this.props.safetyErrorList;
+      var errorList = nextProps.safetyErrorList , noItems;
       this.setState({safetyError:true, errorList:errorList});
+      noItems = this.props.checkList.length;
       for(let i in errorList){
         this._toggleSelection(errorList[i],noItems);           
       }      
@@ -53,6 +55,7 @@ class SafetyChecklist extends React.Component{
                 'token':this.props.auth_token
             }
         this.props.userRequest(userData);
+        this.props.validatingList(true);
   }
   _toggleSelection(i,noItems){
     var currentSet = this.state.checkedSet;
@@ -77,7 +80,7 @@ class SafetyChecklist extends React.Component{
     noItems = this.props.checkList.length;
     formdata = {'type':'stop'};
     let userData={
-                'url':VALIDATION_LIST,
+                'url':VALIDATE_SAFETY,
                 'method':POST,
                 'formdata':formdata,
                 'cause':CONFIRM_SAFETY,
@@ -96,25 +99,41 @@ class SafetyChecklist extends React.Component{
     }
     return true;
   }
+  _inList(item){
+    var currentSet = this.state.checkedSet;
+    if(currentSet.has(item)){
+      return true;
+    }
+    return false;    
+  }
   _processList(){
     var checkList=[],items=this.props.checkList, noItems, item, msgCode;
     noItems=items.length;
     for(let i=0;i<noItems;i++)
     {
         msgCode = items[i];
-        if(this._isValid(msgCode,noItems)){
+        if(this._inList(msgCode)){
           item = (<li key={msgCode}>
-              <input type="checkbox" key={true} value={msgCode} onChange={this._toggleSelection.bind(this,msgCode,noItems)} />
+              <input type="checkbox" key={msgCode} checked={true} value={msgCode} onChange={this._toggleSelection.bind(this,msgCode,noItems)} />
               <span className='gor-checklist-item'>
-                {stringConfig[msgCode]}
+                {this.context.intl.formatMessage(stringConfig[msgCode])}
+              </span>
+              </li>);
+
+        }
+        else if(this._isValid(msgCode,noItems)){
+          item = (<li key={msgCode}>
+              <input type="checkbox" key={msgCode} value={msgCode} checked={false} onChange={this._toggleSelection.bind(this,msgCode,noItems)} />
+              <span className='gor-checklist-item'>
+                {this.context.intl.formatMessage(stringConfig[msgCode])}
               </span>
               </li>);
         }
         else{
           item = (<li key={msgCode}>
-              <input type="checkbox" key={false} value={msgCode} onChange={this._toggleSelection.bind(this,msgCode,noItems)} />
+              <input type="checkbox" key={msgCode} checked={false} value={msgCode} onChange={this._toggleSelection.bind(this,msgCode,noItems)} />
               <span className='gor-checklist-item'>
-                {stringConfig[msgCode]}
+                {this.context.intl.formatMessage(stringConfig[msgCode])}
               </span><span className='gor-error-sm'><FormattedMessage id='operation.safety.steperror' 
                     defaultMessage="(Check again)"
                             description="Text for error in step"/></span>
@@ -138,15 +157,14 @@ class SafetyChecklist extends React.Component{
               <span className="close" onClick={this._removeThisModal.bind(this)}>×</span>
             </div>
             <div className='gor-modal-body'>
-            <form action="#"  id = "safetyForm" 
-                onSubmit={(e) => this._handleSafetyConfirm(e)}>
+            <form action="#"  id = "safetyForm">
              <div className='gor-usr-form'>
               <div className='gor-usr-details'>
                 <div className='gor-usr-hdsm'><FormattedMessage id='operation.safety.steps' 
                     defaultMessage="Check approval steps"
                             description="Text for approval steps"/></div>
                 <div className='gor-sub-head'><FormattedMessage id='operation.safety.text' 
-                    defaultMessage="Tick every item to confirm that the system is safe to resume operation"
+                    defaultMessage="Tick every item to confirm that the system is safe to resume operation."
                             description="Text for ticking items"/></div>
                 <div className='gor-safety-body'>
                  {this.state.safetyError && 
@@ -178,23 +196,41 @@ class SafetyChecklist extends React.Component{
       );
     }
   }
-function mapStateToProps(state, ownProps){
-  return {
-      auditType:  state.auditInfo.auditType  || {},
-      checkList: state.appInfo.safetyList || [],
-      safetyErrorList: state.appInfo.safetyErrorList || [],
-      auth_token:state.authLogin.auth_token,
-      modalStatus: state.appInfo.hideModal || false,
-      safetySpinner:state.spinner.safetySpinner || false
-  };
+
+SafetyChecklist.contextTypes = {
+    intl: React.PropTypes.object.isRequired
 }
 
+function mapStateToProps(state, ownProps){
+  return {
+      checkList: state.emergency.safetyList || [],
+      safetyErrorList: state.emergency.safetyErrorList || [],
+      auth_token:state.authLogin.auth_token,
+      modalStatus: state.emergency.hideModal || false,
+      safetySpinner:state.spinner.safetySpinner || false,
+      system_emergency:state.tabsData.system_emergency||false,
+      system_data:state.tabsData.system_data||null
+  };
+}
 var mapDispatchToProps = function(dispatch){
   return {
     userRequest: function(data){ dispatch(userRequest(data)); },
-    resetForm:   function(){ dispatch(resetForm()); },
-    setSafetySpinner: function(data){ dispatch(setSafetySpinner(data)); }
+    resetForm:   function(){ dispatch(modalFormReset()); },
+    setSafetySpinner: function(data){ dispatch(setSafetySpinner(data)); },
+    validatingList: function(data){ dispatch(validatingList(data));}
   }
 };
-
+SafetyChecklist.propTypes={
+      auth_token:React.PropTypes.string, 
+      username:React.PropTypes.string,
+      modalStatus:React.PropTypes.bool,
+      checkList:React.PropTypes.array,
+      safetyErrorList:React.PropTypes.array,
+      safetySpinner:React.PropTypes.bool,
+      system_emergency:React.PropTypes.bool,
+      system_data:React.PropTypes.string,
+      userRequest:React.PropTypes.func,
+      setSafetySpinner:React.PropTypes.func,
+      resetForm:React.PropTypes.func
+}
 export default connect(mapStateToProps,mapDispatchToProps)(SafetyChecklist);

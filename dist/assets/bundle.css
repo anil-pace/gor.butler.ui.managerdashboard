@@ -165,7 +165,7 @@ body {
 .overview-tile-ontime-icon,
 .statusOl, .statusAl, .iStock, .iAudit, .iPick, .gor-login-user, .gor-login-password, .gor-login-error, .gor-tick, .gor-question, .gor-tick-white, .gor-remove-white, .gor-error-white, .gor-login-user-error, .gor-login-password-error, .gor-question-2, .gor-operation-tick, .gor-alert-lg,
 .gor-dropdown-open, .gor-dropdown-close, .gor-caution, .gor-delay-icon,
-.gor-emergency-dropdown-close, .gor-emergency-dropdown-open {
+.gor-emergency-dropdown-close, .gor-emergency-dropdown-open, .gor-info-icon, .gor-selected-icon {
   background-image: url(images/icons.svg);
 }
 
@@ -347,6 +347,7 @@ body {
   height: 24px;
   margin-right: 15px;
   display: inline-block;
+  vertical-align: middle;
 }
 
 .gor-remove-white {
@@ -551,6 +552,7 @@ body {
   height: 16px;
   display: inline-block;
   vertical-align: middle;
+  margin-right: 5px;
 }
 
 .gor-emergency-dropdown-open {
@@ -566,6 +568,22 @@ body {
   background-position: -37px -110px;
   width: 8px;
   height: 6px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.gor-info-icon {
+  background-position: -460px -77px;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.gor-selected-icon {
+  background-position: -168px -97px;
+  width: 10px;
+  height: 8px;
   display: inline-block;
   vertical-align: middle;
 }
@@ -782,6 +800,7 @@ body {
   padding: 0.3125rem 0;
   display: inline-block;
   vertical-align: middle;
+  width: 49%;
 }
 
 .gorHeader .dropdown-content {
@@ -795,7 +814,10 @@ body {
   right: 0;
   min-width: 5em;
   height: 35px;
-  top: 2.4375rem;
+  top: 2.75rem;
+  display: block;
+  padding-right: 3px;
+  width: 193px;
   box-shadow: 0em 0.1em 0.2em 0em rgba(0, 0, 0, 0.2);
 }
 
@@ -976,7 +998,6 @@ body {
   padding-bottom: 3px;
   color: #ffffff;
   display: inline-block;
-  width: 75%;
 }
 
 .gor-tabs .gorTab .gorSubText {
@@ -1310,6 +1331,109 @@ body {
 .Performance-Widget-Drop {
   width: 75%;
   max-width: 282px;
+}
+
+.gor-usr-dropdown {
+  width: 50%;
+  min-height: 25px;
+  border-radius: 2px;
+  display: inline-block;
+  margin-right: 20px;
+  border: 1px solid #aaaaaa;
+}
+
+.gor-usr-dropdown .Dropdown-root {
+  position: relative;
+}
+
+.gor-usr-dropdown .Dropdown-control {
+  position: relative;
+  background-color: white;
+  border-radius: 0.25rem;
+  box-sizing: border-box;
+  color: #aaaaaa;
+  font-family: "Source Sans Pro";
+  font-size: 0.9375rem;
+  font-weight: bold;
+  cursor: default;
+  outline: none;
+  padding: 0.5rem 0 0.5rem 0.625rem;
+  transition: all 200ms ease;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  height: 35px;
+}
+
+.gor-usr-dropdown .Dropdown-control .Dropdown-placeholder {
+  display: inline-block;
+  width: 90%;
+}
+
+.gor-usr-dropdown .Dropdown-control:hover {
+  box-shadow: 0px 0px 3px 0px #888888;
+  border: 0.0625rem solid #ccc;
+}
+
+.gor-usr-dropdown .Dropdown-arrow {
+  background: url("images/Icons.svg") no-repeat -10px -110px;
+  width: 8px;
+  height: 6px;
+  display: inline-block;
+  right: 0.9375rem;
+}
+
+.gor-usr-dropdown .is-open .Dropdown-control {
+  box-shadow: 0px 0px 3px 0px #888888;
+  border: 0.0625rem solid #ccc;
+}
+
+.gor-usr-dropdown .Dropdown-menu {
+  border-radius: 0.25rem;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0px 0px 3px 0px #888888;
+  box-sizing: border-box;
+  margin-top: -0.0625rem;
+  position: absolute;
+  top: 105%;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+.gor-usr-dropdown .Dropdown-option {
+  box-sizing: border-box;
+  color: #666666;
+  cursor: pointer;
+  display: block;
+  height: 45px;
+  padding-left: 10px;
+  padding-top: 12px;
+}
+
+.gor-usr-dropdown .Dropdown-option:last-child {
+  border-bottom-right-radius: 0.125rem;
+  border-bottom-left-radius: 0.125rem;
+}
+
+.gor-usr-dropdown .Dropdown-option:hover {
+  background-color: #efefef;
+  color: #333;
+}
+
+.gor-usr-dropdown .Dropdown-option.is-selected {
+  box-shadow: 0.125rem 0.125rem 0.125rem #888888;
+  background-color: #f2f9fc;
+  color: #333;
+}
+
+.gor-usr-dropdown .Dropdown-noresults {
+  box-sizing: border-box;
+  color: #ccc;
+  cursor: default;
+  display: block;
+  padding: 0.5rem 0.625rem;
 }
 
 .axis path,
@@ -3466,6 +3590,25 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
+.gor-select-field {
+  height: 35px;
+  width: 40%;
+}
+
+.gor-role-details {
+  margin-top: 20px;
+}
+
+.gor-role-heading {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.gor-role-label {
+  display: inline-block;
+  width: 88%;
+}
+
 .gor-resolve-button {
   font-family: 'Source Sans Pro Bold', sans-serif;
   width: 113px;
@@ -3589,7 +3732,7 @@ input[type="checkbox"] {
   text-align: left;
   margin-top: 0.625rem;
   padding: 0.625rem;
-  width: 65%;
+  width: 66%;
   background-color: #FFFFFF;
   border-radius: 3px;
   display: inline-block;
@@ -3631,7 +3774,7 @@ input[type="checkbox"] {
 
 .gor-modal-content .gor-usr-details .gor-usr-field {
   display: inline-block;
-  width: 35%;
+  width: 36%;
 }
 
 .gor-modal-content .gor-usr-details .gor-usr-field .gor-usr-fdsm {
@@ -3867,7 +4010,7 @@ input[type="checkbox"] {
 }
 
 .gor-pass {
-  background: #00a54f;
+  background: #27aae1;
   color: #ffffff;
 }
 
@@ -4475,7 +4618,6 @@ input[type="checkbox"] {
 
 .gor-safety-body {
   font-size: 14px;
-  width: 80%;
   margin-top: 20px;
 }
 
@@ -4488,6 +4630,7 @@ input[type="checkbox"] {
   background-color: #ffffff;
   border: solid 1px #ef301e;
   padding: 3%;
+  width: 75%;
 }
 
 .gor-safety-error .gor-error-sm {
@@ -4981,6 +5124,15 @@ button:disabled {
   opacity: 0.4;
 }
 
+.spinnerImage {
+  background-image: url(images/whiteSpinner.svg);
+  width: 30px;
+  height: 30px;
+  background-size: contain;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .gor-audit-input-wrap {
   display: inline-block;
   width: 42%;
@@ -5202,6 +5354,10 @@ button:disabled {
   border: solid 1px #aaaaaa;
 }
 
+.gor-filterBtn-btn:hover {
+  cursor: pointer;
+}
+
 .gor-filterBtn-applied {
   font-family: 'Source Sans Pro Bold', sans-serif;
   width: 125px;
@@ -5214,6 +5370,10 @@ button:disabled {
   background-color: #ffffff;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   border: solid 1px #f36f36;
+}
+
+.gor-filterBtn-applied:hover {
+  cursor: pointer;
 }
 
 .gor-filter-body-slider-wrap {
@@ -5605,4 +5765,43 @@ button:disabled {
     transform-origin: 50% 100%;
     transform: scale(0, 0);
   }
+}
+
+.gor-information {
+  display: inline-block;
+  position: relative;
+}
+
+.gor-information .gor-information-text {
+  width: 250px;
+  padding: 20px;
+  position: absolute;
+  min-height: 200px;
+  z-index: 1;
+  left: 30px;
+  top: -70px;
+  transition: opacity 1s;
+  box-shadow: 1px 1px 10px #aaaaaa;
+  background: #FFFFFF;
+}
+
+.gor-information .gor-information-text:after, .gor-information .gor-information-text:before {
+  right: 290px;
+  top: 80px;
+  border: solid transparent;
+  content: " ";
+  position: absolute;
+  pointer-events: none;
+}
+
+.gor-information .gor-information-text:after {
+  border-right-color: white;
+  border-width: 10px;
+  margin-top: -10px;
+}
+
+.gor-information .gor-information-text:before {
+  border-right-color: #aaaaaa;
+  border-width: 11px;
+  margin-top: -11px;
 }

@@ -13,7 +13,7 @@
   },
   {
     "id": "charging.STATUS.all",
-    "defaultMessage": "All"
+    "defaultMessage": "Any"
   },
   {
     "id": "charging.STATUS.breach",
@@ -25,11 +25,11 @@
   },
   {
     "id": "charging.timePeriod.all",
-    "defaultMessage": "All"
+    "defaultMessage": "Any"
   },
   {
     "id": "charging.timePeriod.oneHr",
-    "defaultMessage": "Mannual"
+    "defaultMessage": "Manual"
   },
   {
     "id": "charging.timePeriod.twoHR",

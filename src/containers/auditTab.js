@@ -7,7 +7,7 @@ import {AUDIT_URL,FILTER_AUDIT_ID} from '../constants/configConstants';
 import {getAuditData,setAuditRefresh} from '../actions/auditActions';
 import AuditTable from './auditTab/auditTable';
 import {getPageData} from '../actions/paginationAction';
-import {AUDIT_RETRIEVE,GET,APP_JSON,GOR_COMPLETED_STATUS,LOCATION,SKU,AUDIT_PENDING_APPROVAL,AUDIT_RESOLVED,AUDIT_CREATED, AUDIT_LINE_REJECTED,AUDIT_ISSUES_STATUS,AUDIT_BY_PDFA,AUDIT_TASK_ID,sortAuditHead,sortOrder} from '../constants/frontEndConstants';
+import {AUDIT_RETRIEVE,GET,APP_JSON,GOR_COMPLETED_STATUS,LOCATION,AUDIT_SKU_TEXT,AUDIT_LOCATION_TEXT,AUDIT_ANY_TEXT,SPECIFIC_LOCATION_ID,SPECIFIC_SKU_ID,AUDIT_TYPE,SKU,AUDIT_PENDING_APPROVAL,AUDIT_RESOLVED,AUDIT_CREATED, AUDIT_LINE_REJECTED,AUDIT_ISSUES_STATUS,AUDIT_BY_PDFA,AUDIT_TASK_ID,sortAuditHead,sortOrder} from '../constants/frontEndConstants';
 import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,SEARCH_AUDIT_URL,GIVEN_PAGE,GIVEN_PAGE_SIZE} from '../constants/configConstants';
 import {setAuditSpinner} from '../actions/auditActions';
 import { defineMessages } from 'react-intl';
@@ -122,7 +122,6 @@ _processAuditData(data,nProps){
   let reAudited = nProps.context.intl.formatMessage(messages.auditReAudited);
   var timeOffset= nProps.props.timeOffset || "";
   var auditStatus = {"audit_created":created, "audit_pending":pending, "audit_waiting":pending, "audit_conflicting":pending, "audit_accepted":pending, "audit_started":progress, "audit_tasked":progress, "audit_aborted":completed, "audit_completed":completed, "audit_pending_approval":pendingApp, "audit_resolved":resolved, audit_rejected:rejected,audit_reaudited:reAudited};
-  //var statusClass = {"Pending": "pending", "Completed":"completed", "In Progress":"progress", "Created":"pending", "Issues found":"breached", "Rejected":"breached", "Resolved":"progress", "Re-audited":"completed"}
   var statusClass = {"audit_created":"pending", "audit_pending":"pending", "audit_waiting":"pending", "audit_conflicting":"pending", "audit_accepted":"pending", "audit_started":"progress", "audit_tasked":"progress", "audit_aborted":"completed", "audit_completed":"completed", "audit_pending_approval":"breached", "audit_resolved":"progress", audit_rejected:"breached",audit_reaudited:"completed"};
   var auditType = {"sku":sku, "location":location};
   var auditDetails = [], auditData = {};
@@ -250,19 +249,54 @@ handlePageClick(data){
   var url, appendSortUrl = "",appendTextFilterUrl="", makeDate;
   var currentDate = new Date();
   var filterApplied = false;
+  let skuText="",arr=[],selectvalue;
   makeDate = addDateOffSet(currentDate,-30);
   
-  if(data.searchQuery && data.searchQuery[AUDIT_TASK_ID]) {
+
+  if(data.searchQuery && data.tokenSelected[AUDIT_TYPE]) {
+
+    if(data.tokenSelected[AUDIT_TYPE][0]!='all')
+    {
+    if(data.tokenSelected[AUDIT_TYPE].length===2)
+    {
+      selectvalue='all';
+    }
+    else
+    {
+      selectvalue=data.tokenSelected[AUDIT_TYPE][0];
+    }
+    switch(selectvalue)
+    {
+    case 'sku':
+    skuText=AUDIT_SKU_TEXT+data.searchQuery[SPECIFIC_SKU_ID]+'"';
+    break;
+    case 'location':
+    skuText=AUDIT_LOCATION_TEXT+data.searchQuery[SPECIFIC_LOCATION_ID]+'"';
+    break;
+    case 'all':
+    skuText=AUDIT_ANY_TEXT+data.searchQuery[SPECIFIC_SKU_ID]+'","'+data.searchQuery[SPECIFIC_LOCATION_ID]+'"]';
+    }
+  
+  }
+}
+  if(data.tokenSelected && data.tokenSelected["STATUS"][0]!='all') {
+    let statusToken=data.tokenSelected["STATUS"];
+    skuText=skuText+'&audit_status='+"['"+statusToken.join("','")+"']";
+  }
+
+   if(data.searchQuery && data.searchQuery[AUDIT_TASK_ID]) {
     appendTextFilterUrl = FILTER_AUDIT_ID + data.searchQuery[AUDIT_TASK_ID];
     data.selected = 1;
     filterApplied = true;
   }
+
+
   if(data.url === undefined) {
     data.selected = data.selected?data.selected:1;
     if(data.columnKey && data.sortDir) {
       appendSortUrl = sortAuditHead[data.columnKey] + sortOrder[data.sortDir]; 
     }
-    url = SEARCH_AUDIT_URL+makeDate+GIVEN_PAGE+(data.selected)+GIVEN_PAGE_SIZE + appendSortUrl;
+    url = SEARCH_AUDIT_URL+makeDate+GIVEN_PAGE+(data.selected)+GIVEN_PAGE_SIZE + appendSortUrl+skuText;
   }
   else {
     url = data.url;

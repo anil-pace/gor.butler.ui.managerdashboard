@@ -14,10 +14,10 @@ import {showTableFilter,filterApplied} from '../../actions/filterAction';
 
 //Mesages for internationalization
 const messages = defineMessages({
-    wavePrefix: {
-      id:"waveDetail.id.prefix", 
-      defaultMessage: "WAVE-{waveId}"
-    }
+  wavePrefix: {
+    id:"waveDetail.id.prefix", 
+    defaultMessage: "WAVE-{waveId}"
+  }
 
 
 });
@@ -25,18 +25,18 @@ const messages = defineMessages({
 
 
 class WaveTab extends React.Component{
-  
+
   _processWaveData(data, nProps) {
-  var nProps = this,
-  data = nProps.props.waveDetail.waveData;
-  var waveData = [], waveDetail = {};
-  let WAVE, waveId;
+    var nProps = this,
+    data = nProps.props.waveDetail.waveData;
+    var waveData = [], waveDetail = {};
+    let WAVE, waveId;
 
 
-  var status = {"in_progress":"progress", "completed":"completed", "breached":"breached", "wave_pending":"pending" };
-  var priStatus = {"in_progress": 2, "completed": 4, "breached":1 ,"pending":3};
-  var timeOffset = this.props.timeOffset, alertNum = 0;
-  if(data) {
+    var status = {"in_progress":"progress", "completed":"completed", "breached":"breached", "wave_pending":"pending" };
+    var priStatus = {"in_progress": 2, "completed": 4, "breached":1 ,"pending":3};
+    var timeOffset = this.props.timeOffset, alertNum = 0;
+    if(data) {
      for (var i =data.length - 1; i >= 0; i--) {
       waveId = data[i].wave_id;
       WAVE = nProps.context.intl.formatMessage(messages.wavePrefix,{"waveId":waveId});
@@ -60,14 +60,14 @@ class WaveTab extends React.Component{
         }
         else{
           waveDetail.startTime = nProps.context.intl.formatDate(data[i].start_time,
-                                {timeZone:timeOffset,
-                                  year:'numeric',
-                                  month:'short',
-                                  day:'2-digit',
-                                  hour:"2-digit",
-                                  minute:"2-digit",
-                                  hour12: false
-                                });
+                                                                {timeZone:timeOffset,
+                                                                  year:'numeric',
+                                                                  month:'short',
+                                                                  day:'2-digit',
+                                                                  hour:"2-digit",
+                                                                  minute:"2-digit",
+                                                                  hour12: false
+                                                                });
         }
       }
 
@@ -81,14 +81,14 @@ class WaveTab extends React.Component{
         }
         else{
           waveDetail.cutOffTime = nProps.context.intl.formatDate(data[i].cut_off_time,
-                                {timeZone:timeOffset,
-                                  year:'numeric',
-                                  month:'short',
-                                  day:'2-digit',
-                                  hour:"2-digit",
-                                  minute:"2-digit",
-                                  hour12: false
-                                });
+                                                                 {timeZone:timeOffset,
+                                                                  year:'numeric',
+                                                                  month:'short',
+                                                                  day:'2-digit',
+                                                                  hour:"2-digit",
+                                                                  minute:"2-digit",
+                                                                  hour12: false
+                                                                });
         }
       }
       waveDetail.ordersToFulfill = data[i].orders_to_fulfill;
@@ -100,20 +100,17 @@ class WaveTab extends React.Component{
         waveDetail.progress = 0;
       }
       waveData.push(waveDetail);
-     }
+    }
   }
   return waveData;
 }
 
-refresh = () => {
-console.log('Refresh');
-}
 
-  constructor(props) 
-  {
-   super(props);
- }  
- render(){
+constructor(props) 
+{
+ super(props);
+}  
+render(){
   var updateStatusIntl="";
   var itemNumber = 7, waveData = this.props.waveDetail.waveData, waveState = {"pendingWave":"--", "progressWave":"--", "orderRemaining":"--", "completedWaves":"--", "totalOrders":"--"}; 
   var totalOrders = 0, orderToFulfill = 0, completedWaves = 0, pendingWaves = 0, progressWave = 0, alertNum = 0 ;
@@ -148,26 +145,26 @@ console.log('Refresh');
   }
 }
 return (
-<div className="gorTesting">
-  <Spinner isLoading={this.props.wavesSpinner} setSpinner={this.props.setWavesSpinner}/>
-  <WavesTable items={waveData} itemNumber={itemNumber} 
-            waveState={waveState} intlMessg={this.props.intlMessages} 
-            sortHeaderState={this.props.waveHeaderSort} 
-            sortHeaderOrder={this.props.waveHeaderSortOrder} 
-            currentSortState={this.props.waveSortHeader} 
-            currentHeaderOrder={this.props.waveSortHeaderState}
-            setWaveFilter={this.props.waveFilterDetail}
-            getWaveFilter = {this.props.waveFilter}
-            lastUpdatedText={updateStatusIntl}
-            lastUpdated={updateStatusIntl}
-            refreshOption={this.refresh.bind(this)} 
-            isFilterApplied={this.props.isFilterApplied}
-            showFilter={this.props.showFilter}
-            setFilter={this.props.showTableFilter} 
-            waveFilterStatus={this.props.waveFilterStatus}
-            />
-</div>
-);
+        <div className="gorTesting">
+        <Spinner isLoading={this.props.wavesSpinner} setSpinner={this.props.setWavesSpinner}/>
+        <WavesTable items={waveData} itemNumber={itemNumber} 
+        waveState={waveState} intlMessg={this.props.intlMessages} 
+        sortHeaderState={this.props.waveHeaderSort} 
+        sortHeaderOrder={this.props.waveHeaderSortOrder} 
+        currentSortState={this.props.waveSortHeader} 
+        currentHeaderOrder={this.props.waveSortHeaderState}
+        setWaveFilter={this.props.waveFilterDetail}
+        getWaveFilter = {this.props.waveFilter}
+        lastUpdatedText={updateStatusIntl}
+        lastUpdated={updateStatusIntl}
+        // refreshOption={this.refresh.bind(this)} 
+        isFilterApplied={this.props.isFilterApplied}
+        showFilter={this.props.showFilter}
+        setFilter={this.props.showTableFilter} 
+        waveFilterStatus={this.props.waveFilterStatus}
+        />
+        </div>
+        );
 }
 }
 
@@ -183,7 +180,6 @@ function mapStateToProps(state, ownProps){
     intlMessages: state.intl.messages,
     timeOffset: state.authLogin.timeOffset,
     waveDetail: state.waveInfo || {},
-    intlMessages: state.intl.messages,
     waveFilterStatus:state.filterInfo.waveFilterStatus|| false,
     showFilter: state.filterInfo.filterState || false
   };
@@ -195,7 +191,7 @@ var mapDispatchToProps = function(dispatch){
     setWavesSpinner: function(data){dispatch(setWavesSpinner(data))},
     waveHeaderSort: function(data){dispatch(waveHeaderSort(data))},
     waveHeaderSortOrder: function(data){dispatch(waveHeaderSortOrder(data))},
-     showTableFilter: function(data){dispatch(showTableFilter(data));}
+    showTableFilter: function(data){dispatch(showTableFilter(data));}
   };
 }
 
@@ -203,5 +199,20 @@ WaveTab.contextTypes ={
  intl:React.PropTypes.object.isRequired
 }
 
+WaveTab.PropTypes={
+  waveSortHeaderState:React.PropTypes.string,
+  wavesSpinner: React.PropTypes.bool,
+  filterOptions:React.PropTypes.object,
+  waveDetail:React.PropTypes.object,
+  intlMessages: React.PropTypes.string,
+  waveDetail: React.PropTypes.object,
+  waveFilterState:React.PropTypes.bool,
+  showFilter:React.PropTypes.bool,
+  waveFilterDetail:React.PropTypes.func,
+  setWavesSpinner:React.PropTypes.func,
+  waveHeaderSort: React.PropTypes.func,
+  waveHeaderSortOrder:React.PropTypes.func,
+  showTableFilter:React.PropTypes.func
+};
 
 export default connect(mapStateToProps,mapDispatchToProps)(WaveTab) ;

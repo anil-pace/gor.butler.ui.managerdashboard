@@ -4,9 +4,10 @@ import { FormattedMessage } from 'react-intl';
 
 
 class Filter extends React.Component{
-    constructor(props) 
-    {
-        super(props);
+
+	constructor(props) 
+	{
+    	super(props);
     }
 
     _closeFilter() {
@@ -28,7 +29,8 @@ class Filter extends React.Component{
             <div>
                  <div className="gor-filter-header">
                     <div className="gor-filter-header-h1">
-                        Filter Data
+                         <FormattedMessage id="gor-filter-filterLabel" description="label for filter" 
+            defaultMessage ="Filter data"/>
                     </div>
                     <div className="gor-filter-header-h2" onClick={this._closeFilter.bind(this)}>
                         Hide
@@ -54,6 +56,7 @@ class Filter extends React.Component{
                             <div className="gor-filter-body-filterToken-section1">
                                 {this.props.filterTokenC4}
                             </div>
+
                          </div>
                          <div className="gor-filter-body-slider-wrap"> 
                              
@@ -66,14 +69,30 @@ class Filter extends React.Component{
                         Reset
                     </span>
                     <div className="gor-filter-btn-wrap">
-                        <button className={!this.props.responseFlag?"gor-add-btn":"gor-add-btn gor-disable-content"} onClick={this._submitFilterForm.bind(this)}>
-                            <FormattedMessage id="gor.filter.heading" description="filter heading"  defaultMessage ="Apply filter"/>
+                        <button className='gor-add-btn' onClick={this._submitFilterForm.bind(this)}>
+                            {!this.props.responseFlag? <FormattedMessage id="gor.filter.heading" description="filter heading"  defaultMessage ="Apply filter"/> :<div className='spinnerImage'></div>}
                         </button>
+
+
                     </div> 
                  </div>
             </div>
         );
     }
+};
+
+Filter.PropTypes={
+  noDataFlag:React.PropTypes.bool,
+ filterTokenC1:React.PropTypes.object,
+ filterTokenC2:React.PropTypes.object,
+ filterTokenC3:React.PropTypes.object,
+ filterTokenC4:React.PropTypes.object,
+ searchField:React.PropTypes.object,
+ slides:React.PropTypes.object,
+ responseFlag:React.PropTypes.bool,
+formSubmit: React.PropTypes.func,
+clearFilter:React.PropTypes.func,
+hideFilter:React.PropTypes.func
 };
 
 export default Filter ;

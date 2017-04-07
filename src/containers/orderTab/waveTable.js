@@ -42,6 +42,14 @@ class WavesTable extends React.Component {
     this._onFilterChange = this._onFilterChange.bind(this);
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
   }
+  
+shouldComponentUpdate(nextProps) {
+    if((nextProps.items && !nextProps.items.length)){
+      return false;
+    }
+    return true;
+  }
+
 
   componentWillReceiveProps(nextProps) {
     if(nextProps.items && nextProps.items.length) {
@@ -138,11 +146,9 @@ class WavesTable extends React.Component {
   _setFilter() {
     var newState = !this.props.showFilter;
     this.props.setFilter(newState);
-    console.log('filter');
    }
 
   render() {
-    let updateStatusIntl="";
     let filterHeight = screen.height-190-50;
 
     var {sortedDataList, colSortDirs,columnWidths} = this.state;  
@@ -356,4 +362,19 @@ class WavesTable extends React.Component {
       );
 }
 }
+WavesTable.PropTypes={
+items:React.PropTypes.array,
+  containerWidth:React.PropTypes.number,
+  itemNumber:React.PropTypes.number,
+  currentHeaderOrder:React.PropTypes.object,
+  sortHeaderState:React.PropTypes.func,
+  refreshOption:React.PropTypes.func,
+  lastUpdatedText:React.PropTypes.string,
+  showFilter:React.PropTypes.bool,
+  lastUpdated:React.PropTypes.string,
+  responseFlag:React.PropTypes.bool,
+  setWaveFilter:React.PropTypes.func,
+  setFilter:React.PropTypes.func,
+  containerHeight:React.PropTypes.number
+};
 export default Dimensions()(WavesTable);

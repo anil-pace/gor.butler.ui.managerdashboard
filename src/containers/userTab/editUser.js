@@ -9,14 +9,14 @@ import {BUTLER_SUPERVISOR,BUTLER_UI} from '../../constants/backEndConstants';
 import {TYPE_SUCCESS} from '../../constants/messageConstants';
 import {ROLE_URL,HEADER_URL} from '../../constants/configConstants';
 import FieldError from '../../components/fielderror/fielderror';
-import RoleGroup from './roleGroup';
+import UserRoles from './userRoles';
 import { nameStatus, passwordStatus } from '../../utilities/fieldCheck';
 
 class EditUser extends React.Component{
   constructor(props) 
   {
       super(props);  
-      this.state={view:0}
+      this.state={pwdView:false}
   }
   componentDidMount(){
         let userData={
@@ -47,26 +47,29 @@ class EditUser extends React.Component{
       return nameInfo.type;
   }
   _handleAnchorClick(){
-    this.setState({view:1});
+    this.setState({pwdView:true});
   }
   _checkPwd(){
-    let pswd=this.pswd.value,confirmPswd=this.confirmPswd.value, givenRole,passwordInfo, roleSelected, roleSupervisor=this.props.roleInfo.BUTLER_SUPERVISOR;
-    if(this.props.roleId == BUTLER_SUPERVISOR)
-    {
-      givenRole=this.props.roleInfo.BUTLER_SUPERVISOR;
-    }
-    else
-    {
-      givenRole=this.props.roleInfo.BUTLER_UI;
-    }
+    let pswd=this.pswd.value,confirmPswd=this.confirmPswd.value, givenRole,passwordInfo, roleSelected;
+    givenRole=this.props.roleName;
     roleSelected=this.props.roleSet?this.props.roleSet:givenRole;
     if(roleSelected!=givenRole)
     {
-      this.setState({view:1});
+      this.setState({pwdView:true});
     }
-    passwordInfo=passwordStatus(pswd,confirmPswd,roleSelected,roleSupervisor);   
+    passwordInfo=passwordStatus(pswd,confirmPswd,roleSelected);   
     this.props.validatePassword(passwordInfo);
     return passwordInfo.type;
+  }
+  _getId(role){
+    let roles = this.props.roleInfo, len;
+    len = roles.length;
+    for(let i=0; i<len; i++){
+      if(roles[i].name == role){
+        return roles[i].id;
+      }
+    }
+    return null;
   }
   _handleEditUser(e){
         e.preventDefault();
@@ -82,17 +85,11 @@ class EditUser extends React.Component{
           if(!this._checkName())
             return;
         }
-        if(this.props.roleId == BUTLER_SUPERVISOR)
-        {
-          givenRole=this.props.roleInfo.BUTLER_SUPERVISOR;
-        }
-        else
-        {
-          givenRole=this.props.roleInfo.BUTLER_UI;
-        }
-        role=this.props.roleSet?this.props.roleSet:givenRole;
+        givenRole=this._getId(this.props.roleName);
 
-        if(!pswd&&!confirmPswd&&role==givenRole)
+        role=this.props.roleSet?this._getId(this.props.roleSet):givenRole;
+
+        if(!pswd&&!confirmPswd&&(role === givenRole||this.props.roleSet !== BUTLER_SUPERVISOR))
         {
           pswd="__unchanged__";
           confirmPswd="__unchanged__";
@@ -165,11 +162,11 @@ class EditUser extends React.Component{
 
               </div>
            
-          {this.props.roleInfo?(<RoleGroup operator={this.props.roleInfo.BUTLER_UI} manager={this.props.roleInfo.BUTLER_SUPERVISOR} roleId={this.props.roleId} />):''}
+            {this.props.roleInfo.length? (<UserRoles roleInfo={this.props.roleInfo} roleName={this.props.roleName} />):''}
 
             <div className='gor-usr-details'>
             
-            <div style={this.state.view?{display:'block'}:{display:'none'}}>
+            <div style={this.state.pwdView?{display:'block'}:{display:'none'}}>
               <div className='gor-usr-hdlg'><FormattedMessage id="users.edit.changepassword.heading" description='Heading for Change password' 
                defaultMessage='Change password'/></div>
               <div className='gor-sub-head'><FormattedMessage id="users.edit.changepassword.subheading" description='Subheading for create password' 
@@ -186,7 +183,7 @@ class EditUser extends React.Component{
               {this.props.passwordCheck.type?tick:((this.props.passwordCheck.type===ERROR)?<FieldError txt={this.props.passwordCheck.msg} />:'')}
             </div>
 
-            <div style={this.state.view?{display:'none'}:{display:'block'}}>
+            <div style={this.state.pwdView?{display:'none'}:{display:'block'}}>
               <div className='gor-usr-hdlg'><FormattedMessage id="users.edit.password." description='Heading for Password' 
               defaultMessage='New Password'/></div>
 
@@ -211,7 +208,7 @@ function mapStateToProps(state, ownProps){
   return {
       nameCheck: state.appInfo.nameInfo || {},
       passwordCheck: state.appInfo.passwordInfo || {},
-      roleInfo: state.appInfo.roleInfo || null,
+      roleInfo: state.appInfo.roleInfo || [],
       roleSet:  state.appInfo.roleSet  || null,
       auth_token: state.authLogin.auth_token  
   };

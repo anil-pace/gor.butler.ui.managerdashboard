@@ -4,8 +4,11 @@ import UserDataTable from './userTab/userTabTable';
 import { connect } from 'react-redux'; 
 import { defineMessages } from 'react-intl';
 import {stringConfig} from '../constants/backEndConstants'
+import Spinner from '../../components/spinner/Spinner';
+import { setUserSpinner } from  '../../actions/spinnerAction';
 import {userHeaderSort,userHeaderSortOrder,userFilterDetail} from '../actions/sortHeaderActions';
 import {INITIAL_HEADER_SORT,INITIAL_HEADER_ORDER} from '../constants/frontEndConstants';
+
 //Mesages for internationalization
 const messages = defineMessages({
     userOperator: {
@@ -114,7 +117,12 @@ class UsersTab extends React.Component{
     userData.first=data[i].first_name;
     userData.last=data[i].last_name;  
     userData.roleId=data[i].role;
-    userData.role = role[data[i].role];
+    if(role.hasOwnProperty(data[i].role)){
+      userData.role = role[data[i].role];      
+    }
+    else{
+      userData.role = data[i].role;
+    }
     userDetails.push(userData);
     userData = {};
   }
@@ -130,6 +138,7 @@ class UsersTab extends React.Component{
 			<div>
 				<div>
 					<div className="gor-User-Table">
+          <Spinner isLoading={this.props.userSpinner} setSpinner={this.props.setUserSpinner}/>
 						<UserDataTable items={userData} itemNumber={itemNumber} intlMessg={this.props.intlMessages} 
                            mid={this.props.manager.users?this.props.manager.users[0].id:''} 
                            sortHeaderState={this.props.userHeaderSort} sortHeaderOrder={this.props.userHeaderSortOrder} 
@@ -152,7 +161,8 @@ function mapStateToProps(state, ownProps){
     intlMessages: state.intl.messages,
     manager:state.headerData.headerInfo||[],
     userSortHeader: state.sortHeaderState.userHeaderSort || "role" ,
-    userSortHeaderState: state.sortHeaderState.userHeaderSortOrder || INITIAL_HEADER_ORDER
+    userSortHeaderState: state.sortHeaderState.userHeaderSortOrder || INITIAL_HEADER_ORDER,
+    userSpinner:state.spinner.userSpinner || false
 
   };
 }
@@ -161,7 +171,8 @@ var mapDispatchToProps = function(dispatch){
   return{
     userFilterDetail: function(data){dispatch(userFilterDetail(data))},
     userHeaderSort: function(data){dispatch(userHeaderSort(data))},
-    userHeaderSortOrder: function(data){dispatch(userHeaderSortOrder(data))}
+    userHeaderSortOrder: function(data){dispatch(userHeaderSortOrder(data))},
+    setUserSpinner:function(data){dispatch(setUserSpinner(data))}
   };
 }
 

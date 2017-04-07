@@ -3,7 +3,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import Tabs from './containers/tabs';
 import Header from './components/header/header';
-import {setWsAction ,setMockAction, endWsAction, socketDataSubscription} from './actions/socketActions';
+import {setWsAction ,setMockAction, endWsAction, updateSubscriptionPacket} from './actions/socketActions';
 import {getTimeOffSetData,setTimeOffSetData, logoutRequest} from './actions/loginAction';
 import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,
   WS_MOCK,USERS,TAB_ROUTE_MAP,OVERVIEW ,SYSTEM,ORDERS,INVENTORY,GET} from './constants/frontEndConstants';
@@ -29,7 +29,7 @@ import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,
   
   componentWillMount(){
     this.context.router.push("/login");
-    this.props.socketDataSubscription(wsOverviewData);
+    this.props.updateSubscriptionPacket(wsOverviewData);
   }
   componentDidMount(){
     var timeOffset =  sessionStorage.getItem("timeOffset");
@@ -77,12 +77,10 @@ import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,
      let subscribeData;
      if(currTab) {
       subscribeData = (nextProps.wsSubscriptionData[currTab] || nextProps.wsSubscriptionData["default"]);
-      //subscribeData = (wsOverviewData[currTab] || wsOverviewData["default"]);
     }
 
     else {
       subscribeData = nextProps.wsSubscriptionData["default"];
-      //subscribeData = wsOverviewData["default"];
     }
     
     if(!socketStatus){
@@ -100,7 +98,7 @@ import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,
     }
     else if(nextProps.prevTab !== currTab){
       this.props.initDataSentCall(subscribeData) ;
-      this.props.prevTabSelected(currTab || TAB_ROUTE_MAP[OVERVIEW]) ;
+      this.props.prevTabSelected(currTab || TAB_ROUTE_MAP[OVERVIEW]);
     }
     else if(nextProps.prevTab === currTab) {
       this.props.initDataSentCall(subscribeData) ;
@@ -135,7 +133,6 @@ import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,
 
 
  function mapStateToProps(state,ownProps) {
-  console.log(state)
    return {
     authToken: state.authLogin.auth_token,
     loginAuthorized : state.authLogin.loginAuthorized,
@@ -148,7 +145,8 @@ import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,
     subTab:state.tabSelected.subTab,
     prevTab:state.tabSelected.prevTab,
     wsSubscriptionData:state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
-    isFilterApplied: state.filterInfo.isFilterApplied || false
+    isFilterApplied: state.filterInfo.isFilterApplied || false,
+    
   }
 } 
 /**
@@ -166,7 +164,7 @@ import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,
     endConnect: function(){ dispatch(endWsAction()); },
     userLogout: function(){ dispatch(logoutRequest()); },
     notifyInfo: function(data){dispatch (notifyInfo(data));},
-    socketDataSubscription: function(data){dispatch (socketDataSubscription(data));}
+    updateSubscriptionPacket: function(data){dispatch (updateSubscriptionPacket(data));}
   }
 };
 export  default connect(mapStateToProps,mapDispatchToProps)(App);

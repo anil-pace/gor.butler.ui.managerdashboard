@@ -1,3 +1,9 @@
+
+/**
+ * This file is for template only it is not being used, 
+ * instead please use collateMessagesEs5.js for collating translations into one en-US.json file
+ * instead please use collateMessagesEs5.js for collating translations into one en-US.json file
+ */
 import * as fs from 'fs';
 import {sync as globSync} from 'glob';
 import {sync as mkdirpSync} from 'mkdirp';
