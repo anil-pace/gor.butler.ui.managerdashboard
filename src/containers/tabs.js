@@ -191,7 +191,7 @@ class Tabs extends React.Component{
 	render(){
 
   let items=this._parseStatus();
-  var showUtilityTab = false;              
+  var showUtilityTab = true;              
 		return (
 		<div className="gor-tabs gor-main-block">
 		<Link to="/overview" onClick = {this.handleTabClick.bind(this,OVERVIEW)}>
