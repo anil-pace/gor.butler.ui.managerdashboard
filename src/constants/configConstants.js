@@ -1,6 +1,6 @@
-export const BASE_URL = '192.168.12.118:5000' ;
+export const BASE_URL = '192.168.8.109' ;
 export const PORT = '8888';
-export const PROTOCOL = 'http://';
+export const PROTOCOL = 'https://';
 export const WS_PROTOCOL ="wss://";
 export const WS_URL = WS_PROTOCOL+BASE_URL+"/manager_api/wss"
 export const LOGIN_URL=PROTOCOL+BASE_URL+"/api/auth/token"
@@ -33,3 +33,4 @@ export const AUDIT_ANAMOLY  = "/anamoly_auditlines";
 export const SKU_VALIDATION_URL = API_URL + "/sku/audit_attributes_configured/";
 export const VALIDATION_LIST = API_URL + "/system/remove_emergency/validation_list";
 export const VALIDATE_SAFETY = API_URL + "/system/validate_and_remove_emergency";
+export const GET_START_TIME_URL = API_URL + "/system/shift_start_time";
