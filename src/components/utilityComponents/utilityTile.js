@@ -16,14 +16,11 @@ class UtilityTile extends React.Component{
 				</div>
 			</div>
 			<div className="gor-utility-tile-body">
-				<input type="file" id="BtnBrowseHidden" name="files" style={{'display': 'none'}} />
-        			<label for="BtnBrowseHidden" id="LblBrowse">
-            			Browse
-        			</label>
+				{this.props.tileBody}
 			</div>
 			{this.props.showFooter?<div className="gor-utility-tile-footer">
 				<div className="got-utility-btn-wrap">
-					<button className="gor-filterBtn-applied" >
+					<button className="gor-filterBtn-applied" onClick={this.props.footerAction}>
           				<FormattedMessage id="utility.downDlabel" description="label for download" defaultMessage ="DOWNLOAD"/>
          			</button>
          		</div>

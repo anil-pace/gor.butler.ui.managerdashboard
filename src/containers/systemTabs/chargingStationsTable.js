@@ -138,7 +138,7 @@ shouldComponentUpdate(nextProps) {
   }
 
   render() {
-    var showFilterCS = false;
+    var showFilterCS = true;
      let updateStatusIntl="";
     let filterHeight = screen.height-190-50;
     var {sortedDataList, colSortDirs,columnWidths} = this.state;
@@ -167,16 +167,7 @@ shouldComponentUpdate(nextProps) {
               
             </div>
           </div>
-          <div className="filterWrapper">  
-        <div className="gorFilter">
-            <div className="searchbox-magnifying-glass-icon"/>
-            <input className="gorInputFilter"
-              onChange={this._onFilterChange}
-              placeholder={this.props.intlMessg["table.filter.placeholder"]}
-              value={this.props.getCsFilter}>
-            </input>
-        </div>
-        </div>
+          
 
   <div className="filterWrapper"> 
         <div className="gorToolBarDropDown">

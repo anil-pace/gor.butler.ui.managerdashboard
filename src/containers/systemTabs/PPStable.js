@@ -271,7 +271,7 @@ _setFilter() {
 
   
   render() {
-    var showFilterPPS = false;
+    var showFilterPPS = true;
      let updateStatusIntl="";
     let filterHeight = screen.height-190-50;
     let {sortedDataList, colSortDirs,columnWidths,renderDropD, ppsSelected,headerChecked} = this.state, checkedPPS = [];
@@ -342,16 +342,7 @@ _setFilter() {
               {drop}
             </div>
           </div>
-          <div className="filterWrapper">  
-        <div className="gorFilter">
-            <div className="searchbox-magnifying-glass-icon"/>
-            <input className="gorInputFilter"
-              onChange={this._onFilterChange}
-              placeholder={this.props.intlMessg["table.filter.placeholder"]}
-              value={this.props.getPpsFilter}>
-            </input>
-        </div>
-        </div>
+          
         <div className="filterWrapper"> 
         <div className="gorToolBarDropDown">
         <div className="gor-button-wrap">

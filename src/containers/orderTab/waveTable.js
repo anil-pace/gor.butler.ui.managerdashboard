@@ -149,7 +149,7 @@ shouldComponentUpdate(nextProps) {
    }
 
   render() {
-    var showFilterWave =false;
+    var showFilterWave =true;
     let filterHeight = screen.height-190-50;
 
     var {sortedDataList, colSortDirs,columnWidths} = this.state;  
@@ -181,16 +181,7 @@ shouldComponentUpdate(nextProps) {
       
       </div>
       </div>
-      <div className="filterWrapper">  
-      <div className="gorFilter">
-      <div className="searchbox-magnifying-glass-icon"/>
-      <input className="gorInputFilter"
-      onChange={this._onFilterChange}
-      placeholder={this.props.intlMessg["table.filter.placeholder"]}
-      value={this.props.getWaveFilter}>
-      </input>
-      </div>
-      </div>
+      
 
 
   <div className="filterWrapper"> 

@@ -113,7 +113,7 @@ class Routes extends React.Component{
     }
 }
 render(){
-  var showUtilityTab = false;  
+  var showUtilityTab = true;  
    return (
       <Router history={hashHistory}>
       <Route name="default" path="/" 

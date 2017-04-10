@@ -150,7 +150,7 @@ shouldComponentUpdate(nextProps) {
     let onlineBots = this.props.parameters.online;
     var containerHeight = this.props.containerHeight;
     var noData = <div/>;
-    var showFilterButler = false;
+    var showFilterButler = true;
     
      if(totalBot === 0 || totalBot === undefined || totalBot === null) {
     noData =  <div className="gor-no-data"> <FormattedMessage id="butlerbot.table.noData" description="No data message for butlerbot table" 
@@ -173,17 +173,7 @@ shouldComponentUpdate(nextProps) {
               
             </div>
           </div>
-          <div className="filterWrapper">  
-        <div className="gorFilter">
-            <div className="searchbox-magnifying-glass-icon"/>
-            <input className="gorInputFilter"
-              onChange={this._onFilterChange}
-              placeholder={this.props.intlMessg["table.filter.placeholder"]}
-              value={this.props.getButlerFilter}>
-            </input>
-        </div>
-        </div>
-
+          
 
   <div className="filterWrapper"> 
         <div className="gorToolBarDropDown">

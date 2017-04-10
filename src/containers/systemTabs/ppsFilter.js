@@ -92,20 +92,22 @@ class PPSFilter extends React.Component{
     _applyFilter() {
         let filterSubsData = {}, filterState = this.state;
       if(filterState.searchQuery) {
-if(filterState.searchQuery["OPERATOR ASSIGNED"])
-{
-        let pos,formatedArray;
-        let wholeString=filterState.searchQuery["OPERATOR ASSIGNED"];
-        pos=wholeString.indexOf(' ');
-        if(pos==-1){
-        (filterState.searchQuery["OPERATOR ASSIGNED"]?filterSubsData["operators_assigned"] = ['=',filterState.searchQuery["OPERATOR ASSIGNED"]]:"");
-      }
-       else
-       {
-        formatedArray=wholeString.match(/\S+/g);
-       (filterState.searchQuery["OPERATOR ASSIGNED"]?filterSubsData["operators_assigned"] = ['=',formatedArray]:"");
-        }
-      }
+
+          /** Gaurav Makkar:
+           *  Changed query parameter for the
+           *  operator assigned.
+           *  Updated data to be sent to the socket:
+           * if single word:
+           * {operator_assigned:["=",<word>]}
+           * if multiple word:
+           * {operator_assigned:["=",[<1>,<2>]]}
+           * {username:[<1>,<2>]}
+           */
+          if (filterState.searchQuery["OPERATOR ASSIGNED"]) {
+              let operator_assigned_query=filterState.searchQuery["OPERATOR ASSIGNED"].split(" ")
+              operator_assigned_query=operator_assigned_query.filter(function(word){ return !!word})
+              filterSubsData["operators_assigned"] = operator_assigned_query.length>1?["=",operator_assigned_query]:["=",operator_assigned_query.join("").trim()];
+          }
         (filterState.searchQuery["PPS ID"]?filterSubsData["pps_id"] = ['=',filterState.searchQuery["PPS ID"]]:"");
       }
 
