@@ -1,4 +1,4 @@
-import {AJAX_CALL,RECIEVE_HEADER,RECEIVE_SYSTEM_START_TIME} from '../constants/frontEndConstants.js';
+import {AJAX_CALL,RECIEVE_HEADER,RECEIVE_SHIFT_START_TIME} from '../constants/frontEndConstants.js';
 
 
 
@@ -17,14 +17,14 @@ export function recieveHeaderInfo(data){
     }
 }
 
-export function recieveSystemStartTime(data){
+export function recieveShiftStartTime(data){
   return {
-    type: RECEIVE_SYSTEM_START_TIME,
+    type: RECEIVE_SHIFT_START_TIME,
       data
     }
 }
 
-export function getSystemStartTime(params){
+export function getShiftStartTime(params){
     return {
         type:AJAX_CALL,
         params

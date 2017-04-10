@@ -492,4 +492,4 @@ export const filterMarks={
 export const MODAL_STATUS = "MODAL_STATUS";
 export const MODAL_RESET = "MODAL_RESET";
 export const CHECKLIST = "CHECKLIST";
-export const RECEIVE_SYSTEM_START_TIME = "RECEIVE_SYSTEM_START_TIME";
+export const RECEIVE_SHIFT_START_TIME = "RECEIVE_SHIFT_START_TIME";

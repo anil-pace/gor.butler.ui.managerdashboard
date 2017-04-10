@@ -1,11 +1,11 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import {RECIEVE_HEADER,HEADER_START_TIME,REQUEST_HEADER,RECIEVE,RECIEVE_ITEM_TO_STOCK,
-	GET,SOFT_MANUAL,RECEIVE_SYSTEM_START_TIME} from '../../constants/frontEndConstants';
+	GET,SOFT_MANUAL,RECEIVE_SHIFT_START_TIME} from '../../constants/frontEndConstants';
 import {stringConfig} from '../../constants/backEndConstants';
-import {HEADER_URL,GET_START_TIME_URL} from '../../constants/configConstants'
+import {HEADER_URL,GET_SHIFT_START_TIME_URL} from '../../constants/configConstants'
 import {modal} from 'react-redux-modal';
-import { getHeaderInfo ,getSystemStartTime} from '../../actions/headerAction';
+import { getHeaderInfo ,getShiftStartTime} from '../../actions/headerAction';
 import LogOut from '../../containers/logoutTab'; 
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux'; 
@@ -35,14 +35,14 @@ class Header extends React.Component{
 	 * to be displayed in the header.
      * @private
      */
-    _getSystemStartTime(){
+    _getShiftStartTime(){
 		let headerData= {
-            'url': GET_START_TIME_URL,
+            'url': GET_SHIFT_START_TIME_URL,
             'method': GET,
-            'cause': RECEIVE_SYSTEM_START_TIME,
+            'cause': RECEIVE_SHIFT_START_TIME,
             'token': this.props.authToken
         }
-		this.props.getSystemStartTime(headerData)
+		this.props.getShiftStartTime(headerData)
 	}
     componentDidMount(){
               var username = this.props.username;
@@ -55,7 +55,7 @@ class Header extends React.Component{
             }
               this.props.getHeaderInfo(headerData)
           }
-        this._getSystemStartTime()
+        this._getShiftStartTime()
   	}
     componentWillMount() {
       document.addEventListener('click', this._handleDocumentClick, true);
@@ -111,7 +111,7 @@ class Header extends React.Component{
 		 * Hard coded start time is replaced 
 		 * with the time fetched in API.
          */
-  		headerInfo.start= this.props.system_start_time
+  		headerInfo.start= this.props.shift_start_time
   		return headerInfo
   	}
   _processMenu(headerInfo){
@@ -236,7 +236,7 @@ Header.contextTypes = {
 function mapStateToProps(state,ownProps) {
  return {
   headerInfo:state.headerData.headerInfo,
-  system_start_time:state.headerData.systemStartTime,
+  shift_start_time:state.headerData.shiftStartTime,
   authToken : state.authLogin.auth_token,
   username:state.authLogin.username,
   system_emergency:state.tabsData.system_emergency||null,
@@ -250,7 +250,7 @@ function mapStateToProps(state,ownProps) {
 function mapDispatchToProps(dispatch){
     return {
         getHeaderInfo: function(data){ dispatch(getHeaderInfo(data)); },
-        getSystemStartTime: function(data){ dispatch(getSystemStartTime(data)); }
+        getShiftStartTime: function(data){ dispatch(getShiftStartTime(data)); }
     }
 };
 
