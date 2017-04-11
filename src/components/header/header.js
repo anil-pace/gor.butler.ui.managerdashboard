@@ -77,7 +77,13 @@ class Header extends React.Component{
       console.log(this.state.showDropdown)
     }
      _handleDocumentClick() {
-      if (!(ReactDOM.findDOMNode(this.dropdownNode).contains(event.target) || ReactDOM.findDOMNode(this.dropdownValue).contains(event.target))) {
+         /**
+		  * Gaurav Makkar
+		  * Added Null check for fixing
+		  * the console error
+		  * Can't read property 'contains' on null
+          */
+      if (!(ReactDOM.findDOMNode(this.dropdownNode).contains(event.target) || (this.dropdownValue && ReactDOM.findDOMNode(this.dropdownValue).contains(event.target)))) {
           this.setState({showDropdown:false});
       }
     } 
