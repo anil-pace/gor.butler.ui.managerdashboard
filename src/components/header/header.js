@@ -217,12 +217,12 @@ class Header extends React.Component{
 
 						
 					</div>
-          {this.state.showDropdown?<div id="myDropdown" className="dropdown-content" onClick={this.addModal.bind(this)}>
+          {this.state.showDropdown?<div ref={(node) => { this.dropdownValue = node; }} id="myDropdown" className="dropdown-content" onClick={this.addModal.bind(this)}>
               <div className="horizontalDiv"> 
               </div>
               <div>
                 <a href="javascript:void(0)" ><FormattedMessage id='header.logout' 
-                        defaultMessage="Logout" description="Text for logout" ref={(node) => { this.dropdownValue = node; }}/></a>
+                        defaultMessage="Logout" description="Text for logout"/></a>
               </div>
             </div>:""}
 				</div>
