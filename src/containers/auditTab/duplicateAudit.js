@@ -24,10 +24,19 @@ class DuplicateAudit extends React.Component{
     }
   }
   _userDup() {
-    let formdata={
+    let formdata={};
+    if(this.props.auditType==="pdfa") {
+      formdata.audit_param_type = this.props.auditType;
+      formdata.audit_param_value = {};
+      formdata.audit_param_value.product_sku = this.props.auditTypeParam;
+      formdata.audit_param_value.pdfa_values = this.props.auditPdfaValue;
+    }
+    else {
+    formdata={
          audit_param_type: this.props.auditType,
          audit_param_value: this.props.auditTypeParam
-      };
+      }
+    }
     let userData={
                 'url':AUDIT_URL,
                 'formdata':formdata,

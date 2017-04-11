@@ -1,0 +1,7 @@
+[
+  {
+    "id": "utility.downDlabel",
+    "description": "label for download",
+    "defaultMessage": "DOWNLOAD"
+  }
+]

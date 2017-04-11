@@ -75,6 +75,7 @@ export const ORDERS = "ORDERS";
 export const INVENTORY = "INVENTORY";
 export const USERS = "USERS";
 export const AUDIT = "AUDIT";
+export const UTILITIES = "UTILITIES";
 export const NOTIFICATION_TAB = "Notification";
 export const BUTLERBOTS_TAB = "Butler Bots";
 export const CHARGING_TAB = "Charging Station";
@@ -204,7 +205,8 @@ export const TAB_ROUTE_MAP = {
 		[ORDERS] : "orders",
 		[INVENTORY] : "inventory",
 		[USERS] : "users",
-		[AUDIT] : "audit"
+		[AUDIT] : "audit",
+		[UTILITIES] : "utilities"
 	}
 export const SYS_SUB_TAB_ROUTE_MAP={
 	[NOTIFICATION] : "notification",
