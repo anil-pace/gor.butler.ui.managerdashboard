@@ -255,6 +255,7 @@ shouldComponentUpdate(nextProps) {
 
 
        </div>
+          {/*Filter Summary*/}
           {this.props.isFilterApplied && !this.props.responseFlag?<div className="gor-filter-search-result-bar">
               <FormattedMessage id="userList.filter.search.bar" description='total users for filter search bar'
                                 defaultMessage='{totalUsers} Users found'
