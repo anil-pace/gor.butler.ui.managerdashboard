@@ -160,6 +160,11 @@ class UsersTab extends React.Component {
         this.props.filterApplied(!this.props.isFilterApplied);
         this.props.showTableFilter(false);
         this.props.toggleUserFilter(false);
+        /**
+         * It will reset the filter
+         * fields already applied in
+         * the Filter box
+         */
         this.props.userfilterState({tokenSelected: {"STATUS":["all"], "ROLE":["all"], "WORK MODE":["all"],"LOCATION":["all"]}, searchQuery: {},
             defaultToken: {"STATUS":["all"], "ROLE":["all"], "WORK MODE":["all"],"LOCATION":["all"]}})
     }
