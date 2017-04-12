@@ -87,7 +87,7 @@ module.exports = {
         devtool: isDev ? 'eval' : 'source-map',
         entry: {
             app: appGetEntry(),
-            vendor: ["react", "react-dom", "react-redux", "react-intl-redux", "redux", "react-d3-library", "d3", "d3-tip", "react-redux-modal"]
+            vendor: ["react", "react-dom", "react-redux", "react-i  ntl-redux", "redux", "react-d3-library", "d3", "d3-tip", "react-redux-modal"]
         },
         output: {
             path: path.join(__dirname, 'dist'),
