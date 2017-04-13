@@ -266,7 +266,7 @@ handlePageClick(data){
 //Formatting the param value for single and multiple type       
       if(value.length)
       {
-      paramValue=(value.length>1 || selectvalue==ANY)?"['"+value.join("','")+"']":"'"+value[0]+"'";
+      paramValue=(value.length>1 || selectvalue===ANY)?"['"+value.join("','")+"']":"'"+value[0]+"'";
         skuText=skuText+AUDIT_PARAM_VALUE+paramValue;
       }
   }
