@@ -17,7 +17,7 @@
   {
     "id": "waveList.filter.search.bar",
     "description": "total waves for filter search bar",
-    "defaultMessage": "{total} Users found"
+    "defaultMessage": "{total} Waves found"
   },
   {
     "id": "waveList.filter.search.bar.showall",

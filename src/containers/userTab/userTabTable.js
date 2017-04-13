@@ -10,6 +10,7 @@ import EditUser from './editUser';
 import DeleteUser from './deleteUser';
 import {GOR_USER_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
 import UserFilter from './userFilter';
+import FilterSummary from '../../components/tableFilter/filterSummary'
 
 class UserDataTable extends React.Component {
   constructor(props) {
@@ -258,14 +259,11 @@ shouldComponentUpdate(nextProps) {
 
        </div>
           {/*Filter Summary*/}
-          {this.props.isFilterApplied && !this.props.responseFlag?<div className="gor-filter-search-result-bar">
-              <FormattedMessage id="userList.filter.search.bar" description='total users for filter search bar'
-                                defaultMessage='{totalUsers} Users found'
-                                values={{totalUsers: sortedDataList.getSize()||0}}/>
-              <span className="gor-filter-search-show-all" onClick={this.props.refreshList}>
-                                                            <FormattedMessage id="userList.filter.search.bar.showall" description="button label for show all" defaultMessage ="Show all Users"/>
-                                                          </span>
-          </div>:""}
+          <FilterSummary isFilterApplied={this.props.isFilterApplied} responseFlag={this.props.responseFlag} filterText={<FormattedMessage id="userList.filter.search.bar" description='total users for filter search bar'
+                                                                                                                                           defaultMessage='{totalUsers} Users found'
+                                                                                                                                           values={{totalUsers: sortedDataList.getSize()||0}}/>}
+                         refreshList={this.props.refreshList}
+                         refreshText={<FormattedMessage id="userList.filter.search.bar.showall" description="button label for show all" defaultMessage ="Show all Users"/>}/>
 
 
       <Table

@@ -11,6 +11,7 @@ import {BASE_URL, PPS_MODE_CHANGE_URL,PROTOCOL,API_URL} from '../../constants/co
 import { defineMessages } from 'react-intl';
 import {GOR_STATUS,GOR_STATUS_PRIORITY,GOR_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
 import PPSFilter from './ppsFilter';
+import FilterSummary from '../../components/tableFilter/filterSummary'
 
 const messages = defineMessages({
     ppsPlaceholder: {
@@ -358,14 +359,11 @@ _setFilter() {
        </div>
 
           {/*Filter Summary*/}
-          {this.props.isFilterApplied && !this.props.responseFlag?<div className="gor-filter-search-result-bar">
-              <FormattedMessage id="ppsList.filter.search.bar" description='total pps for filter search bar'
-                                defaultMessage='{total} Stations found'
-                                values={{total: sortedDataList.getSize()||0}}/>
-              <span className="gor-filter-search-show-all" onClick={this.props.refreshList}>
-                                                            <FormattedMessage id="ppsList.filter.search.bar.showall" description="button label for show all" defaultMessage ="Show all Stations"/>
-                                                          </span>
-          </div>:""}
+          <FilterSummary isFilterApplied={this.props.isFilterApplied} responseFlag={this.props.responseFlag}  filterText={<FormattedMessage id="ppsList.filter.search.bar" description='total pps for filter search bar'
+                                                       defaultMessage='{total} Stations found'
+                                                       values={{total: sortedDataList.getSize()||0}}/>}
+                         refreshList={this.props.refreshList}
+                         refreshText={<FormattedMessage id="ppsList.filter.search.bar.showall" description="button label for show all" defaultMessage ="Show all Stations"/>}/>
 
       <Table
         rowHeight={50}

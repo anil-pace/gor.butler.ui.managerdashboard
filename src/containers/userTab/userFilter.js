@@ -19,9 +19,9 @@ class UserFilter extends React.Component{
     defaultToken: {"STATUS":["all"], "ROLE":["all"], "WORK MODE":["all"],"LOCATION":["all"]}}; 
   }
 
-  componentWillReceiveProps(newProps){
-      if(newProps.filterState && JSON.stringify(this.state)!==JSON.stringify(newProps.filterState)){
-          this.setState(newProps.filterState)
+  componentWillReceiveProps(nextProps){
+      if(nextProps.filterState && JSON.stringify(this.state)!==JSON.stringify(nextProps.filterState)){
+          this.setState(nextProps.filterState)
       }
   }
 
