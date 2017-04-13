@@ -141,7 +141,7 @@ class PPS extends React.Component {
         });
         this.props.filterApplied(!this.props.isFilterApplied);
         this.props.togglePPSFilter(false);
-        this.props.setDefaultRange([0, 500])
+        this.props.showTableFilter(false);
 
     }
 
