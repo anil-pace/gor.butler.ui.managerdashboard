@@ -393,12 +393,13 @@ export const AUDIT_UNRESOLVED = "Unresolved";
 export const AUDIT_LINE_REJECTED  = "audit_rejected";
 export const AUDIT_REJECTED_STATUS = "Rejected";
 export const AUDIT_RESOLVED_STATUS = "Resolved";
-export const AUDIT_SKU_TEXT = '&audit_param_type=sku&audit_param_value="';
-export const AUDIT_LOCATION_TEXT = '&audit_param_type=location&audit_param_value="';
-export const AUDIT_ANY_TEXT = '&audit_param_type=any&audit_param_value=["';
+export const AUDIT_PARAM_TYPE = '&audit_param_type=';
+export const AUDIT_PARAM_VALUE = '&audit_param_value=';
+export const AUDIT_STATUS = '&audit_status=';
 export const AUDIT_TYPE="AUDIT TYPE";
 export const SPECIFIC_SKU_ID='SPECIFIC SKU ID';
 export const SPECIFIC_LOCATION_ID='SPECIFIC LOCATION ID';
+export const ISSUE_FOUND='issueFound';
 //Icons
 export const PICK_ICON=' iPick';
 export const STOCK_ICON="iStock";
@@ -444,8 +445,8 @@ export const AUDIT_REJECTED = "auditline_rejected";
 //search dropdown constants
 export const SHOW_ALL_ENTRIES = "available";
 export const SHOW_SELECTED_ENTRIES = "checked";
-export const ALL='all'
-
+export const ALL='all';
+export const ANY='any';
 //table filter
 export const SHOW_FILTER = "SHOW_FILTER";
 export const IS_FILTER_APPLIED = "IS_FILTER_APPLIED";

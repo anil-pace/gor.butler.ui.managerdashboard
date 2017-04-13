@@ -7,14 +7,14 @@ import { connect } from 'react-redux';
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
-import {REJECTED,RESOLVED,INPROGRESS,PENDING}from '../../constants/frontEndConstants';
+import {REJECTED,RESOLVED,INPROGRESS,PENDING,ANY,ALL,SKU,LOCATION,ISSUE_FOUND,SPECIFIC_SKU_ID,SPECIFIC_LOCATION_ID,AUDIT_TASK_ID,AUDIT_TYPE}from '../../constants/frontEndConstants';
 
 class AuditFilter extends React.Component{
 	constructor(props) 
 	{
     	super(props);
-        this.state = {tokenSelected: {"AUDIT TYPE":["all"], "STATUS":["all"]}, searchQuery: {},
-                      defaultToken: {"AUDIT TYPE":["all"], "STATUS":["all"]}}; 
+        this.state = {tokenSelected: {AUDIT_TYPE:[ANY], "STATUS":[ALL]}, searchQuery: {},
+                      defaultToken: {AUDIT_TYPE:[ANY], "STATUS":[ALL]}}; 
     }
 
     _closeFilter() {
@@ -23,25 +23,25 @@ class AuditFilter extends React.Component{
     }	
 
     _processAuditSearchField(){
-        const filterInputFields = [{value:"AUDIT TASK ID", label:<FormattedMessage id="audit.inputField.id" defaultMessage ="AUDIT TASK ID"/>}, 
-                    {value:"SPECIFIC SKU ID", label:<FormattedMessage id="audit.inputField.sku" defaultMessage ="SPECIFIC SKU ID"/>},
-                    {value:"SPECIFIC LOCATION ID", label:<FormattedMessage id="audit.inputField.location" defaultMessage ="SPECIFIC LOCATION ID"/>}];
+        const filterInputFields = [{value:AUDIT_TASK_ID, label:<FormattedMessage id="audit.inputField.id" defaultMessage ="AUDIT TASK ID"/>}, 
+                    {value:SPECIFIC_SKU_ID, label:<FormattedMessage id="audit.inputField.sku" defaultMessage ="SPECIFIC SKU ID"/>},
+                    {value:SPECIFIC_LOCATION_ID, label:<FormattedMessage id="audit.inputField.location" defaultMessage ="SPECIFIC LOCATION ID"/>}];
         var inputValue = this.state.searchQuery;
         var inputField = <FilterInputFieldWrap inputText={filterInputFields} handleInputText={this._handleInputQuery.bind(this)} inputValue={inputValue}/>
         return inputField;           
     }
  
     _processFilterToken() {
-        var tokenAuditTypeField = {value:"AUDIT TYPE", label:<FormattedMessage id="audit.tokenfield.typeAudit" defaultMessage ="AUDIT TYPE"/>};
+        var tokenAuditTypeField = {value:AUDIT_TYPE, label:<FormattedMessage id="audit.tokenfield.typeAudit" defaultMessage ="AUDIT TYPE"/>};
         var tokenStatusField = {value:"STATUS", label:<FormattedMessage id="audit.tokenfield.STATUS" defaultMessage ="STATUS"/>}; 
         const labelC1 = [
-                    { value: 'all', label:<FormattedMessage id="audit.token1.all" defaultMessage ="Any"/> },
-                    { value: 'sku', label:<FormattedMessage id="audit.token1.sku" defaultMessage ="SKU"/> },
-                    { value: 'location', label:<FormattedMessage id="audit.token1.location" defaultMessage ="Location"/> }
+                    { value: ANY, label:<FormattedMessage id="audit.token1.all" defaultMessage ="Any"/> },
+                    { value: SKU, label:<FormattedMessage id="audit.token1.sku" defaultMessage ="SKU"/> },
+                    { value: LOCATION, label:<FormattedMessage id="audit.token1.location" defaultMessage ="Location"/> }
                     ];
         const labelC2 = [
-                    { value: 'all', label:<FormattedMessage id="audit.token2.all" defaultMessage ="Any"/> },
-                    { value: 'issueFound', label:<FormattedMessage id="audit.token2.issueFound" defaultMessage ="Issue found"/>},
+                    { value: ALL, label:<FormattedMessage id="audit.token2.all" defaultMessage ="Any"/> },
+                    { value: ISSUE_FOUND, label:<FormattedMessage id="audit.token2.issueFound" defaultMessage ="Issue found"/>},
                     { value: REJECTED, label:<FormattedMessage id="audit.token2.rejected" defaultMessage ="Rejected"/> },
                     { value: RESOLVED, label:<FormattedMessage id="audit.token2.resolved" defaultMessage ="Resolved"/> },
                     { value: INPROGRESS , label:<FormattedMessage id="audit.token2.inProgress" defaultMessage ="In progress"/>},
@@ -68,7 +68,7 @@ class AuditFilter extends React.Component{
 
     _clearFilter() {
         var clearState = {};
-        this.setState({tokenSelected: {"AUDIT TYPE":["all"], "STATUS":["all"]}, searchQuery: {}});
+        this.setState({tokenSelected: {AUDIT_TYPE:[ANY], "STATUS":[ALL]}, searchQuery: {}});
         this.props.filterApplied(false);
         this.props.refreshOption(clearState)
     }
