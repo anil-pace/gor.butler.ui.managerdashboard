@@ -248,10 +248,10 @@ _processAuditData(data,nProps){
 
 
 handlePageClick(data){
-  let url, appendSortUrl = "",appendTextFilterUrl="", makeDate,inc=0,value=[],paramValue="";
-  let currentDate = new Date();
-  let filterApplied = false;
-  let skuText="",arr=[],selectvalue;
+  var url, appendSortUrl = "",appendTextFilterUrl="", makeDate,inc=0,value=[],paramValue="";
+  var currentDate = new Date();
+  var filterApplied = false;
+  var skuText="",arr=[],selectvalue;
   makeDate = addDateOffSet(currentDate,-30);
   
 //If user select both we are making it Any for backend support
@@ -264,14 +264,14 @@ handlePageClick(data){
       (propt!==AUDIT_TASK_ID && data.searchQuery[propt]!=="")?value.push(data.searchQuery[propt]):'';
       }
 //Formatting the param value for single and multiple type       
-      if(value.length!==0)
+      if(value.length)
       {
       paramValue=(value.length>1 || selectvalue==ANY)?"['"+value.join("','")+"']":"'"+value[0]+"'";
         skuText=skuText+AUDIT_PARAM_VALUE+paramValue;
       }
   }
 //formating the audit status 
-  if(data.tokenSelected && data.tokenSelected["STATUS"][0]!=ALL) {
+  if(data.tokenSelected && data.tokenSelected["STATUS"][0]!==ALL) {
     let statusToken=data.tokenSelected["STATUS"];
     skuText=skuText+AUDIT_STATUS+"['"+statusToken.join("','")+"']";
   }
