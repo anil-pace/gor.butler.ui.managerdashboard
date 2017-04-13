@@ -271,6 +271,7 @@ _setFilter() {
 
   
   render() {
+    var showFilterPPS = true;
      let updateStatusIntl="";
     let filterHeight = screen.height-190-50;
     let {sortedDataList, colSortDirs,columnWidths,renderDropD, ppsSelected,headerChecked} = this.state, checkedPPS = [];
@@ -341,15 +342,16 @@ _setFilter() {
               {drop}
             </div>
           </div>
+          
         <div className="filterWrapper"> 
         <div className="gorToolBarDropDown">
         <div className="gor-button-wrap">
         <div className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
-        <button className={this.props.ppsFilterState?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
+        {showFilterPPS?<button className={this.props.ppsFilterState?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
           <div className="gor-manage-task"/>
           <FormattedMessage id="order.table.filterLabel" description="button label for filter" 
           defaultMessage ="Filter data"/>
-         </button>
+         </button>:""}
        </div>
         </div>     
         </div>

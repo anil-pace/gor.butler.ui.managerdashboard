@@ -198,6 +198,7 @@ shouldComponentUpdate(nextProps) {
  
 
   render() {
+    var showFilterUser = true;
     let updateStatusIntl="";
     let filterHeight = screen.height-190-50;
     let {sortedDataList, colSortDirs,columnWidths} = this.state;
@@ -237,16 +238,17 @@ shouldComponentUpdate(nextProps) {
                   </div>
             </div>            
           </div>
+          
 
          <div className="filterWrapper"> 
         <div className="gorToolBarDropDown">
         <div className="gor-button-wrap">
         <div className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
-        <button className={this.props.userFilterStatus?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
+        {showFilterUser?<button className={this.props.userFilterStatus?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
           <div className="gor-manage-task"/>
           <FormattedMessage id="order.table.filterLabel" description="button label for filter" 
           defaultMessage ="Filter data"/>
-         </button>
+         </button>:""}
        </div>
         </div>     
         </div>

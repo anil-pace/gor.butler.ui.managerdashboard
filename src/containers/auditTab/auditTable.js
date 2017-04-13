@@ -178,11 +178,14 @@ class AuditTable extends React.Component {
 
     manageAuditTask(rowIndex,option ){
       if(option.value === "duplicateTask"){
-        var auditType, auditTypeValue, auditComplete,auditTypeParam,sortedIndex;
+        var auditType, auditTypeValue, auditComplete,auditTypeParam,sortedIndex, auditPdfaValue;
         if(this.state.sortedDataList.newData[rowIndex]) {
           auditType = this.state.sortedDataList.newData[rowIndex].auditType;
           auditTypeParam = this.state.sortedDataList.newData[rowIndex].auditValue;
           auditComplete = this.state.sortedDataList.newData[rowIndex].auditTypeValue;
+          if(this.state.sortedDataList.newData[rowIndex].pdfaValues) {
+            auditPdfaValue = this.state.sortedDataList.newData[rowIndex].pdfaValues;
+          }
         }
 
         modal.add(DuplicateAudit, {
@@ -192,7 +195,8 @@ class AuditTable extends React.Component {
       hideCloseButton: true,
       auditType:auditType,
       auditTypeParam:auditTypeParam,
-      auditComplete:auditComplete
+      auditComplete:auditComplete,
+      auditPdfaValue:auditPdfaValue
     });
 
       }
