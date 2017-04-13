@@ -357,6 +357,16 @@ _setFilter() {
         </div>
        </div>
 
+          {/*Filter Summary*/}
+          {this.props.isFilterApplied && !this.props.responseFlag?<div className="gor-filter-search-result-bar">
+              <FormattedMessage id="ppsList.filter.search.bar" description='total pps for filter search bar'
+                                defaultMessage='{total} Stations found'
+                                values={{total: sortedDataList.getSize()||0}}/>
+              <span className="gor-filter-search-show-all" onClick={this.props.refreshList}>
+                                                            <FormattedMessage id="ppsList.filter.search.bar.showall" description="button label for show all" defaultMessage ="Show all Stations"/>
+                                                          </span>
+          </div>:""}
+
       <Table
         rowHeight={50}
         rowsCount={sortedDataList.getSize()}

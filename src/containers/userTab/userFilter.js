@@ -19,6 +19,12 @@ class UserFilter extends React.Component{
     defaultToken: {"STATUS":["all"], "ROLE":["all"], "WORK MODE":["all"],"LOCATION":["all"]}}; 
   }
 
+  componentWillReceiveProps(newProps){
+      if(newProps.filterState && JSON.stringify(this.state)!==JSON.stringify(newProps.filterState)){
+          this.setState(newProps.filterState)
+      }
+  }
+
   _closeFilter() {
     let filterState = !this.props.showFilter;
     this.props.showTableFilter(filterState);
@@ -159,7 +165,6 @@ _processUserRoll(){
    }
 
    render(){
-
     let userDetail = this.props.userDetails;
     let noOrder = userDetail.userDetails && userDetail.userDetails.length?false:true;
 

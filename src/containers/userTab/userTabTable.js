@@ -124,7 +124,7 @@ shouldComponentUpdate(nextProps) {
     });
    this.props.sortHeaderOrder(sortDir);
    this.props.sortHeaderState(columnKey);
-  } 
+  }
 
 
 
@@ -257,6 +257,16 @@ shouldComponentUpdate(nextProps) {
 
 
        </div>
+          {/*Filter Summary*/}
+          {this.props.isFilterApplied && !this.props.responseFlag?<div className="gor-filter-search-result-bar">
+              <FormattedMessage id="userList.filter.search.bar" description='total users for filter search bar'
+                                defaultMessage='{totalUsers} Users found'
+                                values={{totalUsers: sortedDataList.getSize()||0}}/>
+              <span className="gor-filter-search-show-all" onClick={this.props.refreshList}>
+                                                            <FormattedMessage id="userList.filter.search.bar.showall" description="button label for show all" defaultMessage ="Show all Users"/>
+                                                          </span>
+          </div>:""}
+
 
       <Table
         rowHeight={50}

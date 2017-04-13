@@ -188,6 +188,16 @@ shouldComponentUpdate(nextProps) {
         </div>     
         </div>
        </div>
+          {/*Filter Summary*/}
+          {this.props.isFilterApplied && !this.props.responseFlag?<div className="gor-filter-search-result-bar">
+              <FormattedMessage id="botList.filter.search.bar" description='total bots for filter search bar'
+                                defaultMessage='{total} Bots found'
+                                values={{total: sortedDataList.getSize()||0}}/>
+              <span className="gor-filter-search-show-all" onClick={this.props.refreshList}>
+                                                            <FormattedMessage id="botList.filter.search.bar.showall" description="button label for show all" defaultMessage ="Show all Bots"/>
+                                                          </span>
+          </div>:""}
+
       <Table
         rowHeight={50}
         rowsCount={sortedDataList.getSize()}

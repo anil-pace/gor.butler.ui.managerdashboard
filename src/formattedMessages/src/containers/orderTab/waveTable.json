@@ -15,6 +15,16 @@
     "defaultMessage": "Filter data"
   },
   {
+    "id": "waveList.filter.search.bar",
+    "description": "total waves for filter search bar",
+    "defaultMessage": "{total} Users found"
+  },
+  {
+    "id": "waveList.filter.search.bar.showall",
+    "description": "button label for show all",
+    "defaultMessage": "Show all Waves"
+  },
+  {
     "id": "WavesTable.heading",
     "description": "heading for WavesTable",
     "defaultMessage": "Waves"
