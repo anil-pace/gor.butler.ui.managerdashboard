@@ -13,8 +13,8 @@ class AuditFilter extends React.Component{
 	constructor(props) 
 	{
     	super(props);
-        this.state = {tokenSelected: {"AUDIT TYPE":["all"], "STATUS":["all"]}, searchQuery: {},
-                      defaultToken: {"AUDIT TYPE":["all"], "STATUS":["all"]}}; 
+        this.state = {tokenSelected: {"AUDIT TYPE":["any"], "STATUS":["all"]}, searchQuery: {},
+                      defaultToken: {"AUDIT TYPE":["any"], "STATUS":["all"]}}; 
     }
 
     _closeFilter() {
@@ -35,7 +35,7 @@ class AuditFilter extends React.Component{
         var tokenAuditTypeField = {value:"AUDIT TYPE", label:<FormattedMessage id="audit.tokenfield.typeAudit" defaultMessage ="AUDIT TYPE"/>};
         var tokenStatusField = {value:"STATUS", label:<FormattedMessage id="audit.tokenfield.STATUS" defaultMessage ="STATUS"/>}; 
         const labelC1 = [
-                    { value: 'all', label:<FormattedMessage id="audit.token1.all" defaultMessage ="Any"/> },
+                    { value: 'any', label:<FormattedMessage id="audit.token1.all" defaultMessage ="Any"/> },
                     { value: 'sku', label:<FormattedMessage id="audit.token1.sku" defaultMessage ="SKU"/> },
                     { value: 'location', label:<FormattedMessage id="audit.token1.location" defaultMessage ="Location"/> }
                     ];
@@ -68,7 +68,7 @@ class AuditFilter extends React.Component{
 
     _clearFilter() {
         var clearState = {};
-        this.setState({tokenSelected: {"AUDIT TYPE":["all"], "STATUS":["all"]}, searchQuery: {}});
+        this.setState({tokenSelected: {"AUDIT TYPE":["any"], "STATUS":["all"]}, searchQuery: {}});
         this.props.filterApplied(false);
         this.props.refreshOption(clearState)
     }

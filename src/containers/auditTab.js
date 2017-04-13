@@ -7,7 +7,9 @@ import {AUDIT_URL,FILTER_AUDIT_ID} from '../constants/configConstants';
 import {getAuditData,setAuditRefresh} from '../actions/auditActions';
 import AuditTable from './auditTab/auditTable';
 import {getPageData} from '../actions/paginationAction';
-import {AUDIT_RETRIEVE,GET,APP_JSON,GOR_COMPLETED_STATUS,LOCATION,AUDIT_SKU_TEXT,AUDIT_LOCATION_TEXT,AUDIT_ANY_TEXT,SPECIFIC_LOCATION_ID,SPECIFIC_SKU_ID,AUDIT_TYPE,SKU,AUDIT_PENDING_APPROVAL,AUDIT_RESOLVED,AUDIT_CREATED, AUDIT_LINE_REJECTED,AUDIT_ISSUES_STATUS,AUDIT_BY_PDFA,AUDIT_TASK_ID,sortAuditHead,sortOrder} from '../constants/frontEndConstants';
+import {AUDIT_RETRIEVE,GET,APP_JSON,GOR_COMPLETED_STATUS,LOCATION,AUDIT_PARAM_TYPE,AUDIT_PARAM_VALUE,SPECIFIC_LOCATION_ID,
+  SPECIFIC_SKU_ID,AUDIT_TYPE,SKU,AUDIT_PENDING_APPROVAL,AUDIT_RESOLVED,AUDIT_CREATED, AUDIT_LINE_REJECTED,AUDIT_ISSUES_STATUS,
+  AUDIT_BY_PDFA,AUDIT_TASK_ID,AUDIT_STATUS,sortAuditHead,sortOrder,ALL,ANY} from '../constants/frontEndConstants';
 import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,SEARCH_AUDIT_URL,GIVEN_PAGE,GIVEN_PAGE_SIZE} from '../constants/configConstants';
 import {setAuditSpinner} from '../actions/auditActions';
 import { defineMessages } from 'react-intl';
@@ -246,7 +248,7 @@ _processAuditData(data,nProps){
 
 
 handlePageClick(data){
-  var url, appendSortUrl = "",appendTextFilterUrl="", makeDate;
+  var url, appendSortUrl = "",appendTextFilterUrl="", makeDate,inc=0,value=[],paramValue="";
   var currentDate = new Date();
   var filterApplied = false;
   let skuText="",arr=[],selectvalue;
@@ -255,33 +257,24 @@ handlePageClick(data){
 
   if(data.searchQuery && data.tokenSelected[AUDIT_TYPE]) {
 
-    if(data.tokenSelected[AUDIT_TYPE][0]!='all')
-    {
-    if(data.tokenSelected[AUDIT_TYPE].length===2)
-    {
-      selectvalue='all';
-    }
-    else
-    {
-      selectvalue=data.tokenSelected[AUDIT_TYPE][0];
-    }
-    switch(selectvalue)
-    {
-    case 'sku':
-    skuText=AUDIT_SKU_TEXT+data.searchQuery[SPECIFIC_SKU_ID]+'"';
-    break;
-    case 'location':
-    skuText=AUDIT_LOCATION_TEXT+data.searchQuery[SPECIFIC_LOCATION_ID]+'"';
-    break;
-    case 'all':
-    skuText=AUDIT_ANY_TEXT+data.searchQuery[SPECIFIC_SKU_ID]+'","'+data.searchQuery[SPECIFIC_LOCATION_ID]+'"]';
-    }
+   selectvalue=(data.tokenSelected[AUDIT_TYPE].length===2)?ANY:data.tokenSelected[AUDIT_TYPE][0];
+    skuText=AUDIT_PARAM_TYPE+selectvalue;
+
+   for(var propt in data.searchQuery){
+      (propt!==AUDIT_TASK_ID && data.searchQuery[propt]!=="")?value.push(data.searchQuery[propt]):'';
+      }
+      if(value.length!==0)
+      {
+      paramValue=(value.length>1 || selectvalue==ANY)?"['"+value.join("','")+"']":"'"+value[0]+"'";
+        skuText=skuText+AUDIT_PARAM_VALUE+paramValue;
+      }
+
   
   }
-}
-  if(data.tokenSelected && data.tokenSelected["STATUS"][0]!='all') {
+
+  if(data.tokenSelected && data.tokenSelected["STATUS"][0]!=ALL) {
     let statusToken=data.tokenSelected["STATUS"];
-    skuText=skuText+'&audit_status='+"['"+statusToken.join("','")+"']";
+    skuText=skuText+AUDIT_STATUS+"['"+statusToken.join("','")+"']";
   }
 
    if(data.searchQuery && data.searchQuery[AUDIT_TASK_ID]) {
