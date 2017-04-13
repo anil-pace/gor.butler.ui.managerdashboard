@@ -248,30 +248,29 @@ _processAuditData(data,nProps){
 
 
 handlePageClick(data){
-  var url, appendSortUrl = "",appendTextFilterUrl="", makeDate,inc=0,value=[],paramValue="";
-  var currentDate = new Date();
-  var filterApplied = false;
+  let url, appendSortUrl = "",appendTextFilterUrl="", makeDate,inc=0,value=[],paramValue="";
+  let currentDate = new Date();
+  let filterApplied = false;
   let skuText="",arr=[],selectvalue;
   makeDate = addDateOffSet(currentDate,-30);
   
-
+//If user select both we are making it Any for backend support
   if(data.searchQuery && data.tokenSelected[AUDIT_TYPE]) {
-
    selectvalue=(data.tokenSelected[AUDIT_TYPE].length===2)?ANY:data.tokenSelected[AUDIT_TYPE][0];
     skuText=AUDIT_PARAM_TYPE+selectvalue;
 
-   for(var propt in data.searchQuery){
+//Pushing the audit type into array to make it generic
+   for(let propt in data.searchQuery){
       (propt!==AUDIT_TASK_ID && data.searchQuery[propt]!=="")?value.push(data.searchQuery[propt]):'';
       }
+//Formatting the param value for single and multiple type       
       if(value.length!==0)
       {
       paramValue=(value.length>1 || selectvalue==ANY)?"['"+value.join("','")+"']":"'"+value[0]+"'";
         skuText=skuText+AUDIT_PARAM_VALUE+paramValue;
       }
-
-  
   }
-
+//formating the audit status 
   if(data.tokenSelected && data.tokenSelected["STATUS"][0]!=ALL) {
     let statusToken=data.tokenSelected["STATUS"];
     skuText=skuText+AUDIT_STATUS+"['"+statusToken.join("','")+"']";
