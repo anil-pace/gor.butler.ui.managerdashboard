@@ -23,6 +23,16 @@ class ButlerBotFilter extends React.Component{
         }
     }
 
+    componentWillReceiveProps(nextProps){
+        if(nextProps.filterState && JSON.stringify(this.state)!==JSON.stringify(nextProps.filterState)){
+            /**
+             * As soon as the properties are changed from
+             * the Show All list, the state will be
+             * updated.
+             */
+            this.setState(nextProps.filterState)
+        }
+    }
     _closeFilter() {
         let filterState = !this.props.showFilter;
         this.props.showTableFilter(filterState);

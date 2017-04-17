@@ -7,6 +7,7 @@ import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell
 import {GOR_STATUS,GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT,DEBOUNCE_TIMER} from '../../constants/frontEndConstants';
 import {debounce} from '../../utilities/debounce';
 import OrderFilter from './orderFilter';
+import FilterSummary from '../../components/tableFilter/filterSummary'
 const messages = defineMessages({
     filterPlaceholder: {
         id: 'table.filter.placeholder',
@@ -190,14 +191,12 @@ class OrderListTable extends React.Component {
         </div>     
         </div>
        </div>
-       {this.props.isFilterApplied && !this.props.responseFlag?<div className="gor-filter-search-result-bar">
-                                       <FormattedMessage id="orderlist.filter.search.bar" description='total order for filter search bar' 
-                                                          defaultMessage='{totalOrder} Orders found' 
-                                                          values={{totalOrder: totalOrder?totalOrder:'0'}}/>
-                                                          <span className="gor-filter-search-show-all" onClick={this._showAllOrder.bind(this)}>
-                                                            <FormattedMessage id="orderlist.filter.search.bar.showall" description="button label for show all" defaultMessage ="Show all orders"/> 
-                                                          </span>
-                                   </div>:""}
+          {/*Filter Summary*/}
+          <FilterSummary isFilterApplied={this.props.isFilterApplied} responseFlag={this.props.responseFlag} filterText={<FormattedMessage id="orderlist.filter.search.bar" description='total order for filter search bar'
+                                                                                                                                           defaultMessage='{total} Orders found'
+                                                                                                                                           values={{total: totalOrder?totalOrder:'0'}}/>}
+                         refreshList={this._showAllOrder.bind(this)}
+                         refreshText={<FormattedMessage id="orderlist.filter.search.bar.showall" description="button label for show all" defaultMessage ="Show all orders"/>}/>
       <Table
         rowHeight={50}
         rowsCount={sortedDataList.getSize()}
