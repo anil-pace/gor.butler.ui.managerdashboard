@@ -17,6 +17,7 @@ import {
 } from '../../components/commonFunctionsDataTable';
 import {GOR_STATUS, GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
 import ChargingStationFilter from './chargingStationFilter';
+import FilterSummary from '../../components/tableFilter/filterSummary'
 
 
 var tempGlobal = 0;
@@ -198,19 +199,16 @@ class ChargingStationsTable extends React.Component {
 
             </div>
 
-            {/*Filter Summary*/}
-            {this.props.isFilterApplied && !this.props.responseFlag ? <div className="gor-filter-search-result-bar">
-                <FormattedMessage id="ChargingStationsTable.filter.search.bar"
-                                  description='total stations for filter search bar'
-                                  defaultMessage='{total} Stations found'
-                                  values={{total: sortedDataList.getSize() || 0}}/>
-                <span className="gor-filter-search-show-all" onClick={this.props.refreshList}>
-                                                            <FormattedMessage
-                                                                id="ChargingStationsTable.filter.search.bar.showall"
-                                                                description="button label for show all"
-                                                                defaultMessage="Show all Stations"/>
-                                                          </span>
-            </div> : ""}
+        {/*Filter Summary*/}
+        <FilterSummary isFilterApplied={this.props.isFilterApplied} responseFlag={this.props.responseFlag} filterText={<FormattedMessage id="ChargingStationsTable.filter.search.bar"
+                                                                                                                                         description='total stations for filter search bar'
+                                                                                                                                         defaultMessage='{total} Stations found'
+                                                                                                                                         values={{total: sortedDataList.getSize() || 0}}/>}
+                       refreshList={this.props.refreshList}
+                       refreshText={<FormattedMessage
+                           id="ChargingStationsTable.filter.search.bar.showall"
+                           description="button label for show all"
+                           defaultMessage="Show all Stations"/>}/>
 
             <Table
                 rowHeight={50}

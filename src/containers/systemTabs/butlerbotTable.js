@@ -5,6 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell,filterIndex,DataListWrapper,sortData} from '../../components/commonFunctionsDataTable';
 import {GOR_STATUS,GOR_STATUS_PRIORITY,GOR_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
 import ButlerBotFilter from './butlerBotFilter';
+import FilterSummary from '../../components/tableFilter/filterSummary'
 
 class ButlerBotTable extends React.Component {
   constructor(props) {
@@ -189,14 +190,11 @@ shouldComponentUpdate(nextProps) {
         </div>
        </div>
           {/*Filter Summary*/}
-          {this.props.isFilterApplied && !this.props.responseFlag?<div className="gor-filter-search-result-bar">
-              <FormattedMessage id="botList.filter.search.bar" description='total bots for filter search bar'
-                                defaultMessage='{total} Bots found'
-                                values={{total: sortedDataList.getSize()||0}}/>
-              <span className="gor-filter-search-show-all" onClick={this.props.refreshList}>
-                                                            <FormattedMessage id="botList.filter.search.bar.showall" description="button label for show all" defaultMessage ="Show all Bots"/>
-                                                          </span>
-          </div>:""}
+          <FilterSummary isFilterApplied={this.props.isFilterApplied} responseFlag={this.props.responseFlag} filterText={<FormattedMessage id="botList.filter.search.bar" description='total bots for filter search bar'
+                                                                                                                                           defaultMessage='{total} Bots found'
+                                                                                                                                           values={{total: sortedDataList.getSize()||0}}/>}
+                         refreshList={this.props.refreshList}
+                         refreshText={<FormattedMessage id="botList.filter.search.bar.showall" description="button label for show all" defaultMessage ="Show all Bots"/>}/>
 
       <Table
         rowHeight={50}

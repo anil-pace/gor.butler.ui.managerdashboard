@@ -18,6 +18,7 @@ import {
 } from '../../components/commonFunctionsDataTable';
 import {GOR_STATUS, GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
 import WaveFilter from './waveFilter';
+import FilterSummary from '../../components/tableFilter/filterSummary'
 
 
 class WavesTable extends React.Component {
@@ -214,17 +215,15 @@ class WavesTable extends React.Component {
 
                 </div>
 
-                {/*Filter Summary*/}
-                {this.props.isFilterApplied && !this.props.responseFlag ? <div className="gor-filter-search-result-bar">
-                    <FormattedMessage id="waveList.filter.search.bar" description='total waves for filter search bar'
-                                      defaultMessage='{total} Users found'
-                                      values={{total: sortedDataList.getSize() || 0}}/>
-                    <span className="gor-filter-search-show-all" onClick={this.props.refreshList}>
-                                                            <FormattedMessage id="waveList.filter.search.bar.showall"
-                                                                              description="button label for show all"
-                                                                              defaultMessage="Show all Waves"/>
-                                                          </span>
-                </div> : ""}
+          {/*Filter Summary*/}
+          <FilterSummary isFilterApplied={this.props.isFilterApplied} responseFlag={this.props.responseFlag} filterText={<FormattedMessage id="waveList.filter.search.bar"
+                                                       description='total waves for filter search bar'
+                                                       defaultMessage='{total} Waves found'
+                                                       values={{total: sortedDataList.getSize() || 0}}/>}
+                         refreshList={this.props.refreshList}
+                         refreshText={<FormattedMessage id="waveList.filter.search.bar.showall"
+                                                        description="button label for show all"
+                                                        defaultMessage="Show all Waves"/>}/>
                 <Table
                     rowHeight={50}
                     rowsCount={sortedDataList.getSize()}

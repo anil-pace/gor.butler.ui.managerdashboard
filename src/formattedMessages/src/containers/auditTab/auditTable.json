@@ -40,14 +40,14 @@
     "defaultMessage": "Filter data"
   },
   {
-    "id": "orderlist.filter.search.bar",
-    "description": "total order for filter search bar",
-    "defaultMessage": "{totalOrder} Orders found"
+    "id": "auditList.filter.search.bar",
+    "description": "total results for filter search bar",
+    "defaultMessage": "{totalOrder} results found"
   },
   {
-    "id": "orderlist.filter.search.bar.showall",
+    "id": "auditList.filter.search.bar.showall",
     "description": "button label for show all",
-    "defaultMessage": "Show all orders"
+    "defaultMessage": "Show all results"
   },
   {
     "id": "auditTable.stationID.heading",

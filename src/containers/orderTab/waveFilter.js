@@ -18,13 +18,13 @@ class WaveFilter extends React.Component {
         };
     }
 
-    componentWillReceiveProps(newProps) {
+    componentWillReceiveProps(nextProps) {
         /**
          * It will update the state as soon as
          * filters are cleared.
          */
-        if (newProps.filterState && JSON.stringify(this.state) !== JSON.stringify(newProps.filterState)) {
-            this.setState(newProps.filterState)
+        if (nextProps.filterState && JSON.stringify(this.state) !== JSON.stringify(nextProps.filterState)) {
+            this.setState(nextProps.filterState)
         }
     }
 
