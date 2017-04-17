@@ -3,7 +3,6 @@ import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import FilterToken from './filterToken';
 import {setTextBoxStatus}  from '../../actions/auditActions';
-import { connect } from 'react-redux'; 
 
 class FilterTokenWrap extends React.Component{
 	constructor(props) 
@@ -14,7 +13,7 @@ class FilterTokenWrap extends React.Component{
     	var tokens = this.props.label, tokenWrap=[];
         var tokenSelected = this.props.selectedToken;
     	for (var i = tokens.length - 1; i >= 0; i--) {
-    		var tokenComponent = <FilterToken key={tokens[i]+i} tokenCallBack={this.props.tokenCallBack} setTextBoxStatus={this.props.setTextBoxStatus.bind(this)} 
+    		var tokenComponent = <FilterToken key={tokens[i]+i} tokenCallBack={this.props.tokenCallBack}  
                                               tokenField={this.props.field.value} tokenLabel={tokens[i]} 
                                               tokenSelected={tokenSelected} lastToken={i?false:true} />
     		tokenWrap.push(tokenComponent);
@@ -34,18 +33,5 @@ class FilterTokenWrap extends React.Component{
 		);
 	} 
 };
-function mapStateToProps(state, ownProps){
-  return {
 
-  }
-}
-var mapDispatchToProps = function(dispatch){
-  return {
-        setTextBoxStatus: function(data){dispatch(setTextBoxStatus(data));}
-    }
-}
-FilterTokenWrap.PropTypes={
-setTextBoxStatus:React.PropTypes.func
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(FilterTokenWrap);
+export default FilterTokenWrap;
