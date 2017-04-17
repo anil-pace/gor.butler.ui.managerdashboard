@@ -2,10 +2,11 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
-import {showTableFilter,filterApplied} from '../../actions/filterAction';
+import {showTableFilter,filterApplied,auditfilterState,toggleAuditFilter} from '../../actions/filterAction';
 import { connect } from 'react-redux'; 
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
+import {setTextBoxStatus}  from '../../actions/auditActions';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
 import {REJECTED,RESOLVED,INPROGRESS,PENDING,ANY,ALL,SKU,LOCATION,ISSUE_FOUND,SPECIFIC_SKU_ID,SPECIFIC_LOCATION_ID,AUDIT_TASK_ID,AUDIT_TYPE}from '../../constants/frontEndConstants';
 
@@ -13,14 +14,22 @@ class AuditFilter extends React.Component{
 	constructor(props) 
 	{
     	super(props);
-        this.state = {tokenSelected: {AUDIT_TYPE:[ANY], "STATUS":[ALL]}, searchQuery: {},
-                      defaultToken: {AUDIT_TYPE:[ANY], "STATUS":[ALL]}}; 
+        this.state = {tokenSelected: {"AUDIT TYPE":[ANY], "STATUS":[ALL]}, searchQuery: {},
+                      defaultToken: {"AUDIT TYPE":[ANY], "STATUS":[ALL]}}; 
     }
 
     _closeFilter() {
         var filterState = !this.props.showFilter;
         this.props.showTableFilter(filterState);
     }	
+
+  componentWillMount(){
+        if(this.props.auditFilterState) {
+            this.setState(this.props.auditFilterState)
+        }
+    }  
+
+
 
     _processAuditSearchField(){
         const filterInputFields = [{value:AUDIT_TASK_ID, label:<FormattedMessage id="audit.inputField.id" defaultMessage ="AUDIT TASK ID"/>}, 
@@ -32,7 +41,7 @@ class AuditFilter extends React.Component{
     }
  
     _processFilterToken() {
-        var tokenAuditTypeField = {value:AUDIT_TYPE, label:<FormattedMessage id="audit.tokenfield.typeAudit" defaultMessage ="AUDIT TYPE"/>};
+        var tokenAuditTypeField = {value:"AUDIT TYPE", label:<FormattedMessage id="audit.tokenfield.typeAudit" defaultMessage ="AUDIT TYPE"/>};
         var tokenStatusField = {value:"STATUS", label:<FormattedMessage id="audit.tokenfield.STATUS" defaultMessage ="STATUS"/>}; 
         const labelC1 = [
                     { value: ANY, label:<FormattedMessage id="audit.token1.all" defaultMessage ="Any"/> },
@@ -63,14 +72,21 @@ class AuditFilter extends React.Component{
     }
 
     _applyFilter() {
+        var filterState = this.state
+        this.props.auditfilterState(filterState);
       this.props.refreshOption(this.state);
+       this.props.toggleAuditFilter(true);
+
     }
 
     _clearFilter() {
-        var clearState = {};
-        this.setState({tokenSelected: {AUDIT_TYPE:[ANY], "STATUS":[ALL]}, searchQuery: {}});
+        var clearState = {},obj={};
+        this.setState({tokenSelected: {"AUDIT TYPE":[ANY], "STATUS":[ALL]}, searchQuery: {}});
+         this.props.auditfilterState({tokenSelected: {"AUDIT TYPE":[ANY], "STATUS":[ALL]}, searchQuery: {}});
         this.props.filterApplied(false);
-        this.props.refreshOption(clearState)
+        this.props.setTextBoxStatus(obj);
+        this.props.refreshOption(clearState);
+         this.props.toggleAuditFilter(false);
     }
 
 	render(){
@@ -99,13 +115,18 @@ function mapStateToProps(state, ownProps){
     showFilter: state.filterInfo.filterState || false,
     auditSpinner: state.spinner.auditSpinner || false,
     totalAudits: state.recieveAuditDetail.totalAudits || 0,
+    auditFilterState: state.filterInfo.auditFilterState,
+    auditFilterStatus: state.filterInfo.auditFilterStatus
   };
 }
 
 var mapDispatchToProps = function(dispatch){
   return {
     showTableFilter: function(data){dispatch(showTableFilter(data));},
-    filterApplied: function(data){dispatch(filterApplied(data));}
+    filterApplied: function(data){dispatch(filterApplied(data));},
+    setTextBoxStatus: function(data){dispatch(setTextBoxStatus(data));},
+     auditfilterState: function(data){dispatch(auditfilterState(data));},
+     toggleAuditFilter: function(data){dispatch(toggleAuditFilter(data));}
   }
 };
 
@@ -114,7 +135,9 @@ AuditFilter.PropTypes={
     auditSpinner:React.PropTypes.bool,
     totalAudits:React.PropTypes.number,
     showTableFilter:React.PropTypes.func,
-    filterApplied:React.PropTypes.func
+    filterApplied:React.PropTypes.func,
+    auditFilterState:React.PropTypes.object,
+    auditFilterStatus:React.PropTypes.bool
 };
 
 

@@ -278,7 +278,7 @@ class AuditTable extends React.Component {
        </button>
        </div>
        <div className="gor-button-wrap">
-       <button className={this.props.isFilterApplied?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
+       <button className={this.props.auditFilterStatus?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
        <div className="gor-manage-task"/>
           <FormattedMessage id="audit.table.filterLabel" description="button label for filter" 
           defaultMessage ="Filter data"/>

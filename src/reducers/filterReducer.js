@@ -1,4 +1,4 @@
-import {SHOW_FILTER, IS_FILTER_APPLIED,BUTLER_FILTER_STATE,CHARGINGSTATION_FILTER_STATE,PPS_FILTER_STATE,WAVE_FILTER_STATE,USER_FILTER_STATE,TOGGLE_BUTTON,TOGGLE_BUTTON_BOT,PPS_FILTER_VALUE,CHARGING_FILTER_VALUE,WAVE_FILTER_VALUE,USER_FILTER_VALUE,SET_DEFAULT_RANGE} from '../constants/frontEndConstants'; 
+import {SHOW_FILTER, IS_FILTER_APPLIED,BUTLER_FILTER_STATE,CHARGINGSTATION_FILTER_STATE,PPS_FILTER_STATE,WAVE_FILTER_STATE,USER_FILTER_STATE,TOGGLE_BUTTON,TOGGLE_BUTTON_BOT,PPS_FILTER_VALUE,CHARGING_FILTER_VALUE,WAVE_FILTER_VALUE,USER_FILTER_VALUE,SET_DEFAULT_RANGE,AUDIT_FILTER_STATE,AUDIT_FILTER_VALUE,ORDER_FILTER_STATE,ORDER_FILTER_VALUE} from '../constants/frontEndConstants'; 
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -45,6 +45,19 @@ case SET_DEFAULT_RANGE:              //This reducer will update the the isFilter
       "ppsFilterState" : action.data
     })
     break; 
+
+    case AUDIT_FILTER_VALUE:               //This reducer will update the the ppsFilterState value with latest applied filter
+    return Object.assign({}, state, { 
+      "auditFilterStatus" : action.data
+    })
+    break;
+
+case ORDER_FILTER_VALUE:               //This reducer will update the the ppsFilterState value with latest applied filter
+    return Object.assign({}, state, { 
+      "orderFilterStatus" : action.data
+    })
+    break;
+
     case USER_FILTER_VALUE:             //This reducer will update the the userFilterStatus value with latest applied filter
     return Object.assign({}, state, { 
       "userFilterStatus" : action.data
@@ -56,6 +69,18 @@ case SET_DEFAULT_RANGE:              //This reducer will update the the isFilter
       "butlerFilterState" : action.data
     })
     break;   
+
+    case AUDIT_FILTER_STATE:          //This reducer will update the the butlerFilterState value with latest applied filter
+    return Object.assign({}, state, { 
+      "auditFilterState" : action.data
+    })
+    break;  
+    case ORDER_FILTER_STATE:          //This reducer will update the the butlerFilterState value with latest applied filter
+    return Object.assign({}, state, { 
+      "orderFilterState" : action.data
+    })
+    break; 
+
     case CHARGINGSTATION_FILTER_STATE:   //This reducer will update the the chargingstationfilterState value with latest applied filter
     return Object.assign({}, state, { 
       "chargingstationfilterState" : action.data
