@@ -104,7 +104,7 @@ shouldComponentUpdate(nextProps) {
   }
 
 componentDidMount() {
-  var data = {};
+  var data = this.props.auditFilterState;
   data.selected = 1;
   this.handlePageClick(data);
 
@@ -245,10 +245,19 @@ _processAuditData(data,nProps){
   return auditDetails;
 }
 
-
+_mappingString(selectvalue){
+    switch(selectvalue){
+                    case "sku":
+                    return SPECIFIC_SKU_ID;
+                    case "location":
+                    return SPECIFIC_LOCATION_ID;
+                    default:
+                    return "any";
+                };
+}
 
 handlePageClick(data){
-  var url, appendSortUrl = "",appendTextFilterUrl="", makeDate,inc=0,value=[],paramValue="";
+  var url, appendSortUrl = "",appendTextFilterUrl="", makeDate,inc=0,value=[],paramValue="",selectedAuditType="";
   var currentDate = new Date();
   var filterApplied = false;
   var skuText="",arr=[],selectvalue;
@@ -258,10 +267,18 @@ handlePageClick(data){
   if(data.searchQuery && data.tokenSelected[AUDIT_TYPE]) {
    selectvalue=(data.tokenSelected[AUDIT_TYPE].length===2)?ANY:data.tokenSelected[AUDIT_TYPE][0];
     skuText=AUDIT_PARAM_TYPE+selectvalue;
+    selectedAuditType=this._mappingString(selectvalue);
 
 //Pushing the audit type into array to make it generic
    for(let propt in data.searchQuery){
-      (propt!==AUDIT_TASK_ID && data.searchQuery[propt]!=="")?value.push(data.searchQuery[propt]):'';
+if(selectedAuditType==='any'){
+(propt!==AUDIT_TASK_ID && data.searchQuery[propt]!=="")?value.push(data.searchQuery[propt]):'';
+}
+else
+{
+  (data.searchQuery[propt]!=="" && propt==selectedAuditType)?value.push(data.searchQuery[propt]):'';
+}
+      
       }
 //Formatting the param value for single and multiple type       
       if(value.length)
@@ -356,8 +373,9 @@ render(){
               refreshData={this.handlePageClick.bind(this)}
               setAuditFilter={this.props.auditFilterDetail} auditState={auditState}
               setFilter={this.props.showTableFilter} showFilter={this.props.showFilter}
-              isFilterApplied={this.props.isFilterApplied}
+              isFilterApplied={this.props.isFilterApplied}  auditFilterStatus={this.props.auditFilterStatus}
               responseFlag={this.props.auditSpinner}/>
+
   
   
   
@@ -393,6 +411,8 @@ function mapStateToProps(state, ownProps){
     timeOffset: state.authLogin.timeOffset,
     showFilter: state.filterInfo.filterState || false,
     isFilterApplied: state.filterInfo.isFilterApplied || false,
+    auditFilterStatus:state.filterInfo.auditFilterStatus|| false,
+    auditFilterState: state.filterInfo.auditFilterState ||{}
   };
 }
 
@@ -412,6 +432,32 @@ var mapDispatchToProps = function(dispatch){
 
 AuditTab.contextTypes ={
  intl:React.PropTypes.object.isRequired
+}
+AuditTab.PropTypes={
+orderFilter: React.PropTypes.string,
+auditSortHeader: React.PropTypes.string,
+auditSortHeaderState:React.PropTypes.array,
+totalAudits: React.PropTypes.number,
+auditSpinner: React.PropTypes.bool,
+auditDetail: React.PropTypes.array,
+totalPage:React.PropTypes.number,
+auditRefresh:React.PropTypes.bool,
+intlMessages: React.PropTypes.string,
+auth_token: React.PropTypes.object,
+timeOffset: React.PropTypes.number,
+showFilter: React.PropTypes.bool,
+isFilterApplied: React.PropTypes.bool,
+auditFilterStatus:React.PropTypes.bool,
+auditFilterState:React.PropTypes.object,
+auditFilterDetail:React.PropTypes.func,
+auditHeaderSort:React.PropTypes.func,
+auditHeaderSortOrder:React.PropTypes.func,
+setAuditSpinner:React.PropTypes.func,
+getAuditData: React.PropTypes.func,
+getPageData: React.PropTypes.func,
+setAuditRefresh:React.PropTypes.func,
+showTableFilter:React.PropTypes.func,
+filterApplied: React.PropTypes.func
 }
 
 

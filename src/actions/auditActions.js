@@ -1,4 +1,4 @@
-import { AJAX_CALL,AUDIT_RETRIEVE, RECIEVE_AUDIT_DATA,SET_AUDIT,RESET_AUDIT,SETAUDIT_PPS,REFRESH_AUDIT,DISPLAY_AUDIT_SPINNER,SET_AUDIT_ORDERLINES, VALIDATED_ATTIBUTES_DATA} from '../constants/frontEndConstants'
+import { AJAX_CALL,AUDIT_RETRIEVE, RECIEVE_AUDIT_DATA,SET_AUDIT,RESET_AUDIT,SETAUDIT_PPS,REFRESH_AUDIT,DISPLAY_AUDIT_SPINNER,SET_AUDIT_ORDERLINES, VALIDATED_ATTIBUTES_DATA,TEXTBOX_STATUS} from '../constants/frontEndConstants'
 
 export function getAuditData(params){
 	return {
@@ -74,4 +74,13 @@ export function auditValidatedAttributes(data) {
     data
   }
 }
+//Set the text box value enable or disable
+export function setTextBoxStatus(data) {
+  return {
+    type: TEXTBOX_STATUS,
+    data
+  }
+};
+
+
 

@@ -46,7 +46,7 @@ class OrderListTab extends React.Component{
     super(props);
   } 
   componentDidMount() {
-    var data = {};
+    var data = this.props.orderFilterState;
     data.selected = 1;
     this.refresh(data);
   }
@@ -338,6 +338,7 @@ render(){
                   getOrderFilter={this.props.orderFilter} setFilter={this.props.showTableFilter} 
                   showFilter={this.props.showFilter} responseFlag={this.props.orderListSpinner}
                   isFilterApplied={this.props.isFilterApplied}
+                   orderFilterStatus={this.props.orderFilterStatus}
                   />
 
   <div className="gor-pageNum">
@@ -367,6 +368,8 @@ function mapStateToProps(state, ownProps){
     auth_token: state.authLogin.auth_token,
     showFilter: state.filterInfo.filterState || false,
     isFilterApplied: state.filterInfo.isFilterApplied || false,
+    orderFilterStatus:state.filterInfo.orderFilterStatus,
+    orderFilterState: state.filterInfo.orderFilterState ||{}
   };
 }
 
@@ -416,7 +419,9 @@ lastRefreshTime: React.PropTypes.func,
 setOrderListSpinner:React.PropTypes.func,
 setCurrentPage:React.PropTypes.func,
 showTableFilter: React.PropTypes.func,
-filterApplied: React.PropTypes.func 
+filterApplied: React.PropTypes.func ,
+orderFilterStatus:React.PropTypes.bool,
+orderFilterState:React.PropTypes.object
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(OrderListTab) ;

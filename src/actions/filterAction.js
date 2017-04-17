@@ -1,4 +1,4 @@
-import { SHOW_FILTER ,IS_FILTER_APPLIED,BUTLER_FILTER_STATE,CHARGINGSTATION_FILTER_STATE,PPS_FILTER_STATE,WAVE_FILTER_STATE,USER_FILTER_STATE,TOGGLE_BUTTON,TOGGLE_BUTTON_BOT,PPS_FILTER_VALUE,CHARGING_FILTER_VALUE,WAVE_FILTER_VALUE,USER_FILTER_VALUE} from '../constants/frontEndConstants'
+import { SHOW_FILTER ,IS_FILTER_APPLIED,BUTLER_FILTER_STATE,CHARGINGSTATION_FILTER_STATE,PPS_FILTER_STATE,WAVE_FILTER_STATE,USER_FILTER_STATE,TOGGLE_BUTTON,TOGGLE_BUTTON_BOT,PPS_FILTER_VALUE,CHARGING_FILTER_VALUE,WAVE_FILTER_VALUE,USER_FILTER_VALUE,AUDIT_FILTER_STATE,AUDIT_FILTER_VALUE,ORDER_FILTER_STATE,ORDER_FILTER_VALUE} from '../constants/frontEndConstants'
 
 //This action is use to update the filter state
 export function showTableFilter(data){
@@ -38,6 +38,20 @@ export function togglePPSFilter(data){
 		data
   	}
 }
+//This action is use to keep the updated flag value so that we can get to know the filter is applied for Audit tab
+export function toggleAuditFilter(data){
+	return {
+		type: AUDIT_FILTER_VALUE,
+		data
+  	}
+}
+//This action is use to keep the updated flag value so that we can get to know the filter is applied for Order tab
+export function toggleOrderFilter(data){
+	return {
+		type: ORDER_FILTER_VALUE,
+		data
+  	}
+}
 
 //This action is use to keep the updated flag value so that we can get to know the filter is applied for Wave tab
 export function toggleWaveFilter(data){
@@ -67,6 +81,20 @@ export function toggleChargingFilter(data){
 export function butlerfilterState(data){
 	return {
 		type: BUTLER_FILTER_STATE,
+		data
+  	}
+}
+//This action is use to keep the current filter state for Audit tab
+export function auditfilterState(data){
+	return {
+		type: AUDIT_FILTER_STATE,
+		data
+  	}
+}
+//This action is use to keep the current filter state for Order tab
+export function orderfilterState(data){
+	return {
+		type: ORDER_FILTER_STATE,
 		data
   	}
 }

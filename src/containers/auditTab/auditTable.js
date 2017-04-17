@@ -250,6 +250,7 @@ class AuditTable extends React.Component {
     }
 
     render() {
+
         var {sortedDataList, colSortDirs, columnWidths} = this.state, heightRes;
         var auditCompleted = this.props.auditState.auditCompleted;
         var auditIssue = this.props.auditState.auditIssue;
@@ -263,6 +264,7 @@ class AuditTable extends React.Component {
                                                           description='audit list alert lable'
                                                           defaultMessage='{auditIssue} {auditIssue,plural, one{Alert} other{Alerts}}'
                                                           values={{auditIssue: auditIssue ? auditIssue : '0'}}/></div>
+
         </div>
 
         var duplicateTask = <FormattedMessage id="audit.table.duplicateTask"
