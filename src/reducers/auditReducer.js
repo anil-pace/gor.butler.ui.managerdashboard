@@ -1,4 +1,4 @@
-import {AUDIT_DATA,SET_AUDIT,RESET_AUDIT,SETAUDIT_PPS,VALIDATE_SKU_SPINNER,VALIDATED_ATTIBUTES_DATA} from '../constants/frontEndConstants'; 
+import {AUDIT_DATA,SET_AUDIT,RESET_AUDIT,SETAUDIT_PPS,VALIDATE_SKU_SPINNER,VALIDATED_ATTIBUTES_DATA,TEXTBOX_STATUS} from '../constants/frontEndConstants'; 
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -47,7 +47,14 @@ export  function auditInfo(state={},action){
        return Object.assign({}, state, { 
             "skuAttributes" : action.data
           })
-          break;             
+          break;  
+
+    case TEXTBOX_STATUS:  
+     return Object.assign({}, state, { 
+            "textBoxStatus" : action.data
+          })
+          break;   
+                     
     default:
       return state
   }

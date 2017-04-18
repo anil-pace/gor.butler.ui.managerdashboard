@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
-import {showTableFilter, filterApplied} from '../../actions/filterAction';
+import {showTableFilter, filterApplied,orderfilterState,toggleOrderFilter} from '../../actions/filterAction';
 import { connect } from 'react-redux'; 
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
@@ -28,6 +28,11 @@ class OrderFilter extends React.Component{
 
     }
 
+  componentWillMount(){
+        if(this.props.orderFilterState) {
+            this.setState(this.props.orderFilterState)
+        }
+    }  
     _processFilterToken() {
         var tokenField1 = {value:"STATUS", label:<FormattedMessage id="order.token.status" defaultMessage ="STATUS"/>};
         var tokenField2 = {value:"TIME PERIOD", label:<FormattedMessage id="order.token.timePeriod" defaultMessage ="TIME PERIOD"/>}; 
@@ -63,6 +68,9 @@ class OrderFilter extends React.Component{
     }
 
     _applyFilter() {
+          var filterState = this.state
+        this.props.orderfilterState(filterState);
+        this.props.toggleOrderFilter(true);
        this.props.refreshOption(this.state);
     }
 
@@ -70,7 +78,10 @@ class OrderFilter extends React.Component{
         var clearState = {};
         this.props.filterApplied(false)
         this.setState({tokenSelected: {"STATUS":["all"], "TIME PERIOD":["allOrders"]}, searchQuery: {}});
-        this.props.refreshOption(clearState)
+        this.props.orderfilterState({tokenSelected: {"STATUS":["all"], "TIME PERIOD":["allOrders"]}, searchQuery: {}});
+        this.props.refreshOption(clearState);
+        this.props.toggleOrderFilter(false);
+
     } 
 
 
@@ -100,13 +111,16 @@ function mapStateToProps(state, ownProps){
     showFilter: state.filterInfo.filterState || false,
     orderData: state.getOrderDetail || {},
     orderListSpinner: state.spinner.orderListSpinner || false,
+    orderFilterState: state.filterInfo.orderFilterState,
   };
 }
 
 var mapDispatchToProps = function(dispatch){
   return {
     showTableFilter: function(data){dispatch(showTableFilter(data));},
-    filterApplied: function(data){dispatch(filterApplied(data));}
+    filterApplied: function(data){dispatch(filterApplied(data));},
+     orderfilterState: function(data){dispatch(orderfilterState(data));},
+     toggleOrderFilter: function(data){dispatch(toggleOrderFilter(data));}
   }
 };
 
@@ -115,7 +129,9 @@ OrderFilter.PropTypes={
     orderData:React.PropTypes.object,
     orderListSpinner:React.PropTypes.bool,
     showTableFilter:React.PropTypes.func,
-    filterApplied:React.PropTypes.func
+    filterApplied:React.PropTypes.func,
+    orderFilterState:React.PropTypes.bool,
+    toggleOrderFilter:React.PropTypes.func
 };
 
 

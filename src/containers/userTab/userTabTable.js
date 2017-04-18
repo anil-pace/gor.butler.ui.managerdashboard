@@ -10,6 +10,7 @@ import EditUser from './editUser';
 import DeleteUser from './deleteUser';
 import {GOR_USER_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
 import UserFilter from './userFilter';
+import FilterSummary from '../../components/tableFilter/filterSummary'
 
 class UserDataTable extends React.Component {
   constructor(props) {
@@ -124,7 +125,7 @@ shouldComponentUpdate(nextProps) {
     });
    this.props.sortHeaderOrder(sortDir);
    this.props.sortHeaderState(columnKey);
-  } 
+  }
 
 
 
@@ -256,6 +257,13 @@ shouldComponentUpdate(nextProps) {
 
 
        </div>
+          {/*Filter Summary*/}
+          <FilterSummary isFilterApplied={this.props.isFilterApplied} responseFlag={this.props.responseFlag} filterText={<FormattedMessage id="userList.filter.search.bar" description='total users for filter search bar'
+                                                                                                                                           defaultMessage='{totalUsers} Users found'
+                                                                                                                                           values={{totalUsers: sortedDataList.getSize()||0}}/>}
+                         refreshList={this.props.refreshList}
+                         refreshText={<FormattedMessage id="userList.filter.search.bar.showall" description="button label for show all" defaultMessage ="Show all Users"/>}/>
+
 
       <Table
         rowHeight={50}

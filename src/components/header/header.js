@@ -75,10 +75,9 @@ class Header extends React.Component{
     }
     setDropdown() {
       this.setState({showDropdown:!this.state.showDropdown});
-      console.log(this.state.showDropdown)
     }
      _handleDocumentClick() {
-      if (!(ReactDOM.findDOMNode(this.dropdownNode).contains(event.target) || this.dropdownValue?ReactDOM.findDOMNode(this.dropdownValue).contains(event.target):false)) {
+      if (!(ReactDOM.findDOMNode(this.dropdownNode).contains(event.target) || (this.dropdownValue && ReactDOM.findDOMNode(this.dropdownValue).contains(event.target)))) {
           this.setState({showDropdown:false});
       }
     } 
@@ -213,12 +212,12 @@ class Header extends React.Component{
 
 						
 					
-          {this.state.showDropdown?<div id="myDropdown" className="dropdown-content" onClick={this.addModal.bind(this)}>
+          {this.state.showDropdown?<div id="myDropdown" className="dropdown-content" ref={(node) => { this.dropdownValue = node; }} onClick={this.addModal.bind(this)}>
               <div className="horizontalDiv"> 
               </div>
               <div>
                 <a href="javascript:void(0)" ><FormattedMessage id='header.logout' 
-                        defaultMessage="Logout" description="Text for logout" ref={(node) => { this.dropdownValue = node; }}/></a>
+                        defaultMessage="Logout" description="Text for logout" /></a>
               </div>
             </div>:""}
             </div>

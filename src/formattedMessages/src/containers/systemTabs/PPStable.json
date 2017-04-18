@@ -40,6 +40,16 @@
     "defaultMessage": "Filter data"
   },
   {
+    "id": "ppsList.filter.search.bar",
+    "description": "total pps for filter search bar",
+    "defaultMessage": "{total} Stations found"
+  },
+  {
+    "id": "ppsList.filter.search.bar.showall",
+    "description": "button label for show all",
+    "defaultMessage": "Show all Stations"
+  },
+  {
     "id": "PPStable.ppsColumn.heading",
     "description": "PPS - column Heading",
     "defaultMessage": "PPS"

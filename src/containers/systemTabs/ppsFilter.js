@@ -35,6 +35,16 @@ class PPSFilter extends React.Component{
         return inputField;           
     }
 
+    componentWillReceiveProps(nextProps){
+        /**
+         * It will update the state as soon as
+         * filters are cleared.
+         */
+        if(nextProps.filterState && JSON.stringify(this.state)!==JSON.stringify(nextProps.filterState)){
+            this.setState(nextProps.filterState)
+        }
+    }
+
 
 
     _processFilterToken() {
@@ -180,7 +190,7 @@ function mapStateToProps(state, ownProps){
     orderData: state.getOrderDetail || {},
     wsSubscriptionData:state.recieveSocketActions.socketDataSubscriptionPacket,
     orderListSpinner: state.spinner.orderListSpinner || false,
-    filterState: state.filterInfo.ppsFilterValue,
+    filterState: state.filterInfo.ppsfilterState,
     isFilterApplied: state.filterInfo.isFilterApplied || false,
     ppsFilterState:state.filterInfo.ppsFilterState || false,
     ppsFilterSpinnerState:state.spinner.ppsFilterSpinnerState || false,

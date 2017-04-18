@@ -13,7 +13,9 @@ import Spinner from '../../components/spinner/Spinner';
 import { setButlerSpinner } from  '../../actions/spinnerAction';
 import { butlerHeaderSort,butlerHeaderSortOrder,butlerFilterDetail } from '../../actions/sortHeaderActions';
 import { defineMessages } from 'react-intl';
-import {showTableFilter,filterApplied} from '../../actions/filterAction';
+import {showTableFilter,filterApplied,toggleBotButton,butlerfilterState} from '../../actions/filterAction';
+import {updateSubscriptionPacket} from './../../actions/socketActions'
+import {wsOverviewData} from './../../constants/initData.js';
 //Mesages for internationalization
 const messages = defineMessages({
     butlerPrefix: {id:"butlerDetail.name.prefix",
@@ -175,7 +177,31 @@ class ButlerBot extends React.Component{
   constructor(props) 
 	{
     	super(props);
-    }	
+    }
+
+    /**
+     * The method will update and send the subscription packet
+     * to fetch the default list of users
+     * @private
+     */
+    refreshList() {
+        let updatedWsSubscription = this.props.wsSubscriptionData;
+        delete updatedWsSubscription["butlerbots"].data[0].details["filter_params"];
+        delete updatedWsSubscription["system"].data[0].details["filter_params"];
+        this.props.updateSubscriptionPacket(updatedWsSubscription);
+        this.props.filterApplied(!this.props.isFilterApplied);
+        this.props.showTableFilter(false);
+        this.props.toggleBotButton(false);
+        /**
+         * It will reset the filter
+         * fields already applied in
+         * the Filter box
+         */
+        this.props.butlerfilterState({
+            tokenSelected: {"STATUS": ["any"], "MODE": ["any"]}, searchQuery: {},
+            defaultToken: {"STATUS": ["any"], "MODE": ["any"]}
+        });
+    }
   
 	render(){
   let updateStatusIntl="";
@@ -241,6 +267,7 @@ class ButlerBot extends React.Component{
                             lastUpdatedText={updateStatusIntl} 
                             lastUpdated={updateStatusIntl}
                             butlerState={this.props.filterState}
+                                        refreshList={this.refreshList.bind(this)}
                             />
 					</div>
 				</div>
@@ -250,7 +277,6 @@ class ButlerBot extends React.Component{
 };
 
 function mapStateToProps(state, ownProps){
-  console.log(state)
   return {
     butlerFilter: state.sortHeaderState.butlerFilter|| "",
     butlerSortHeader: state.sortHeaderState.butlerHeaderSort || INITIAL_HEADER_SORT ,
@@ -261,7 +287,8 @@ function mapStateToProps(state, ownProps){
     showFilter: state.filterInfo.filterState || false,
     isFilterApplied: state.filterInfo.isFilterApplied || false,
     botFilterStatus:state.filterInfo.botFilterStatus|| false,
-    filterState: state.filterInfo.butlerFilterState
+    filterState: state.filterInfo.butlerFilterState,
+      wsSubscriptionData:state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData
   };
 }
 
@@ -273,7 +300,12 @@ var mapDispatchToProps = function(dispatch){
     butlerHeaderSort: function(data){dispatch(butlerHeaderSort(data))},
     butlerHeaderSortOrder: function(data){dispatch(butlerHeaderSortOrder(data))},
     showTableFilter: function(data){dispatch(showTableFilter(data));},
-    filterApplied: function(data){dispatch(filterApplied(data));}
+    filterApplied: function(data){dispatch(filterApplied(data));},
+      updateSubscriptionPacket: function (data) {
+          dispatch(updateSubscriptionPacket(data));
+      },
+      toggleBotButton: function(data){dispatch(toggleBotButton(data));},
+      butlerfilterState: function(data){dispatch(butlerfilterState(data));},
   };
 }
 
