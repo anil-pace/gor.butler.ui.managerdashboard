@@ -36,7 +36,12 @@ class ButlerBotTable extends React.Component {
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
   }
 
-  
+shouldComponentUpdate(nextProps) {
+    if((nextProps.items && !nextProps.items.length) && this.props.showFilter === nextProps.showFilter){
+      return false;
+    }
+    return true;
+ }
 
   componentWillReceiveProps(nextProps) {
     var items = nextProps.items || [];
@@ -323,4 +328,21 @@ class ButlerBotTable extends React.Component {
     );
   }
 }
+ButlerBotTable.PropTypes={
+items:React.PropTypes.array,
+  containerWidth:React.PropTypes.number,
+  itemNumber:React.PropTypes.number,
+  currentHeaderOrder:React.PropTypes.object,
+  sortHeaderState:React.PropTypes.func,
+  lastUpdatedText:React.PropTypes.string,
+  showFilter:React.PropTypes.bool,
+  lastUpdated:React.PropTypes.string,
+  setButlerFilter:React.PropTypes.func,
+  setFilter:React.PropTypes.func,
+  containerHeight:React.PropTypes.number,
+  parameters:React.PropTypes.object,
+  botFilterStatus:React.PropTypes.bool
+};
+
+
 export default Dimensions()(ButlerBotTable);

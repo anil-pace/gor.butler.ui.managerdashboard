@@ -63,6 +63,13 @@ class PPStable extends React.Component {
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
     
   }
+  shouldComponentUpdate(nextProps) {
+    if((nextProps.items && !nextProps.items.length)){
+      return false;
+    }
+    return true;
+  }
+
 
   componentWillReceiveProps(nextProps) {
     var temp;
@@ -481,6 +488,23 @@ _setFilter() {
     );
   }
 }
+
+PPStable.PropTypes={
+items:React.PropTypes.array,
+  containerWidth:React.PropTypes.number,
+  itemNumber:React.PropTypes.number,
+  currentHeaderOrder:React.PropTypes.object,
+  sortHeaderState:React.PropTypes.func,
+  lastUpdatedText:React.PropTypes.string,
+  showFilter:React.PropTypes.bool,
+  lastUpdated:React.PropTypes.string,
+  ppsFilterState:React.PropTypes.bool,
+  setFilter:React.PropTypes.func,
+  containerHeight:React.PropTypes.number,
+  currentSortState:React.PropTypes.string,
+  responseFlag:React.PropTypes.bool,
+getCheckAll:React.PropTypes.bool
+};
 
 
 export default Dimensions()(PPStable);

@@ -206,6 +206,28 @@ var mapDispatchToProps = function(dispatch){
 PPS.contextTypes = {
  intl:React.PropTypes.object.isRequired
 }
+PPS.PropTypes={
+ppsFilter: React.PropTypes.string,
+getCheckAll:React.PropTypes.bool,
+bDropRender:React.PropTypes.bool,
+ppsSortHeader:React.PropTypes.string,
+ppsSortHeaderState:React.PropTypes.string,
+ppsSpinner:React.PropTypes.bool,
+PPSDetail: React.PropTypes.array,
+showFilter:React.PropTypes.bool,
+ppsFilterState:React.PropTypes.bool,
+showFilter:React.PropTypes.bool,
+ppsFilterDetail:React.PropTypes.func,
+changePPSmode: React.PropTypes.func,
+setPpsSpinner: React.PropTypes.func,
+ppsHeaderSort: React.PropTypes.func,
+ppsHeaderSortOrder:React.PropTypes.func,
+setCheckedPps: React.PropTypes.func,
+setDropDisplay:React.PropTypes.func,
+setCheckAll: React.PropTypes.func,
+showTableFilter:React.PropTypes.func
+
+}
 
 export default connect(mapStateToProps,mapDispatchToProps)(PPS) ;
 

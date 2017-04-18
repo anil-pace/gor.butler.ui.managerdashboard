@@ -65,7 +65,12 @@ class ChargingStationsTable extends React.Component {
     this._onFilterChange(nextProps.getCsFilter);
   }
 
-
+shouldComponentUpdate(nextProps) {
+    if((nextProps.items && !nextProps.items.length)){
+      return false;
+    }
+    return true;
+  }
 
      _onColumnResizeEndCallback(newColumnWidth, columnKey) {
     this.setState(({columnWidths}) => ({
@@ -289,6 +294,21 @@ class ChargingStationsTable extends React.Component {
   }
 }
 
+ChargingStationsTable.PropTypes={
+items:React.PropTypes.array,
+  containerWidth:React.PropTypes.number,
+  itemNumber:React.PropTypes.number,
+  currentHeaderOrder:React.PropTypes.object,
+  sortHeaderState:React.PropTypes.func,
+  lastUpdatedText:React.PropTypes.string,
+  showFilter:React.PropTypes.bool,
+  lastUpdated:React.PropTypes.string,
+  setButlerFilter:React.PropTypes.func,
+  setFilter:React.PropTypes.func,
+  containerHeight:React.PropTypes.number,
+  currentSortState:React.PropTypes.string,
+  botFilterStatus:React.PropTypes.bool
+};
 
 
 export default (Dimensions()(ChargingStationsTable));

@@ -138,7 +138,7 @@ function mapStateToProps(state, ownProps){
     chargersDetail: state.chargersDetail || [],
     intlMessages: state.intl.messages,
     showFilter: state.filterInfo.filterState || false,
-     isFilterApplied: state.filterInfo.isFilterApplied || false,
+    isFilterApplied: state.filterInfo.isFilterApplied || false,
     chargingFilterStatus:state.filterInfo.chargingFilterStatus|| false
   };
 }
@@ -158,7 +158,23 @@ var mapDispatchToProps = function(dispatch){
 ChargingStations.contextTypes ={
  intl:React.PropTypes.object.isRequired
 }
+ChargingStations.PropTypes={
+csFilter: React.PropTypes.string,
+csSortHeader:React.PropTypes.string,
+csSortHeaderState:React.PropTypes.string,
+csSpinner:React.PropTypes.bool,
+chargersDetail:React.PropTypes.array,
+showFilter: React.PropTypes.bool,
+isFilterApplied:React.PropTypes.bool,
+chargingFilterStatus:React.PropTypes.bool,
+csFilterDetail:React.PropTypes.func,
+setCsSpinner: React.PropTypes.func,
+csHeaderSort: React.PropTypes.func,
+csHeaderSortOrder:React.PropTypes.func,
+showTableFilter:React.PropTypes.func,
+filterApplied:React.PropTypes.func
 
+};
 
 export default connect(mapStateToProps,mapDispatchToProps)(ChargingStations) ;
 

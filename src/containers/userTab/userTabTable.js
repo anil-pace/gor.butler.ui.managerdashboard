@@ -40,7 +40,12 @@ class UserDataTable extends React.Component {
     }));
   }
 
-
+shouldComponentUpdate(nextProps) {
+    if((nextProps.items && !nextProps.items.length)){
+      return false;
+    }
+    return true;
+  }
   componentWillReceiveProps(nextProps){
     this._dataList = new tableRenderer(nextProps.items.length);
     this._defaultSortIndexes = [];
@@ -363,4 +368,22 @@ class UserDataTable extends React.Component {
     );
   }
 }
+
+UserDataTable.PropTypes={
+items:React.PropTypes.array,
+  containerWidth:React.PropTypes.number,
+  itemNumber:React.PropTypes.number,
+  currentHeaderOrder:React.PropTypes.object,
+  sortHeaderState:React.PropTypes.func,
+  lastUpdatedText:React.PropTypes.string,
+  showFilter:React.PropTypes.bool,
+  lastUpdated:React.PropTypes.string,
+  setFilter:React.PropTypes.func,
+  containerHeight:React.PropTypes.number,
+  currentSortState:React.PropTypes.string,
+  responseFlag:React.PropTypes.bool,
+  userFilterStatus:React.PropTypes.bool
+
+};
+
 export default Dimensions()(UserDataTable);
