@@ -240,7 +240,7 @@ class AuditTable extends React.Component {
     }
 
     _setFilter() {
-        var newState = !this.props.showFilter;
+        var newState = !this.props.auditToggleFilter;
         this.props.setFilter(newState)
     }
 
@@ -292,7 +292,7 @@ class AuditTable extends React.Component {
         var tableRenderer = <div/>
         tableRenderer = <div className="gorTableMainContainer">
             <div className="gor-filter-wrap"
-                 style={{'display': this.props.showFilter ? 'block' : 'none', height: filterHeight}}>
+                 style={{'display': this.props.auditToggleFilter ? 'block' : 'none', height: filterHeight}}>
                 <AuditFilter refreshOption={this.props.refreshData}/>
             </div>
             <div className="gorToolBar">
@@ -525,7 +525,7 @@ AuditTable.PropTypes = {
     refreshData: React.PropTypes.func,
     setFilter: React.PropTypes.func,
     auditState: React.PropTypes.object,
-    showFilter: React.PropTypes.bool,
+    auditToggleFilter: React.PropTypes.bool,
     isFilterApplied: React.PropTypes.bool,
     responseFlag: React.PropTypes.bool,
     containerWidth: React.PropTypes.number,

@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
-import {showTableFilter,filterApplied,butlerfilterState,toggleBotButton} from '../../actions/filterAction';
+import {BotFilterToggle,filterApplied,butlerfilterState,toggleBotButton} from '../../actions/filterAction';
 import {updateSubscriptionPacket} from '../../actions/socketActions';
 import { connect } from 'react-redux'; 
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
@@ -34,8 +34,8 @@ class ButlerBotFilter extends React.Component{
         }
     }
     _closeFilter() {
-        let filterState = !this.props.showFilter;
-        this.props.showTableFilter(filterState);
+        let botToggleFilter = !this.props.botToggleFilter;
+        this.props.BotFilterToggle(botToggleFilter);
     }	
 
     _processButlerSearchField(){
@@ -139,7 +139,7 @@ class ButlerBotFilter extends React.Component{
 function mapStateToProps(state, ownProps){
   return {
     butlerDetail: state.butlerDetail || [],
-    showFilter: state.filterInfo.filterState || false,
+    botToggleFilter: state.filterInfo.botToggleFilter || false,
     wsSubscriptionData:state.recieveSocketActions.socketDataSubscriptionPacket,
     filterState: state.filterInfo.butlerFilterState,
     isFilterApplied: state.filterInfo.isFilterApplied || false,
@@ -151,7 +151,7 @@ function mapStateToProps(state, ownProps){
 
 var mapDispatchToProps = function(dispatch){
   return {
-    showTableFilter: function(data){dispatch(showTableFilter(data));},
+    BotFilterToggle: function(data){dispatch(BotFilterToggle(data));},
     filterApplied: function(data){dispatch(filterApplied(data));},
     updateSubscriptionPacket: function(data){dispatch(updateSubscriptionPacket(data));},
     butlerfilterState: function(data){dispatch(butlerfilterState(data));},
@@ -161,12 +161,12 @@ var mapDispatchToProps = function(dispatch){
 };
 ButlerBotFilter.PropTypes={
   butlerDetail: React.PropTypes.array,
-showFilter: React.PropTypes.bool,
+botToggleFilter: React.PropTypes.bool,
 wsSubscriptionData:React.PropTypes.object,
 filterState: React.PropTypes.object,
 isFilterApplied:React.PropTypes.bool,
 botFilterStatus:React.PropTypes.bool,
-showTableFilter:React.PropTypes.func,
+BotFilterToggle:React.PropTypes.func,
 filterApplied: React.PropTypes.func,
 updateSubscriptionPacket:React.PropTypes.func,
 butlerfilterState:React.PropTypes.func,

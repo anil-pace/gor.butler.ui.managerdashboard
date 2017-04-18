@@ -120,7 +120,7 @@ class OrderListTable extends React.Component {
     })
   }
   _setFilter() {
-    var newState = !this.props.showFilter;
+    var newState = !this.props.ordersToggleFilter;
     this.props.setFilter(newState)
    }
 
@@ -160,7 +160,7 @@ class OrderListTable extends React.Component {
     var filterHeight = screen.height-190-50;
     return (
       <div className="gorTableMainContainer">
-      <div className="gor-filter-wrap" style={{'width':'350px','display':this.props.showFilter?'block':'none', height:filterHeight}}> 
+      <div className="gor-filter-wrap" style={{'width':'350px','display':this.props.ordersToggleFilter?'block':'none', height:filterHeight}}> 
          <OrderFilter refreshOption={this.props.refreshOption} responseFlag={this.props.responseFlag}/>  
        </div>
         <div className="gorToolBar">

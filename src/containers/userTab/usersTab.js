@@ -7,7 +7,7 @@ import {userRequest} from '../../actions/userActions';
 import {stringConfig} from '../../constants/backEndConstants'
 import {userHeaderSort, userHeaderSortOrder, userFilterDetail} from '../../actions/sortHeaderActions';
 import {INITIAL_HEADER_SORT, INITIAL_HEADER_ORDER, GET_ROLES, GET, APP_JSON} from '../../constants/frontEndConstants';
-import {showTableFilter, filterApplied,userfilterState,toggleUserFilter} from '../../actions/filterAction';
+import {userFilterToggle, filterApplied,userfilterState,toggleUserFilter} from '../../actions/filterAction';
 import {ROLE_URL} from '../../constants/configConstants';
 import {updateSubscriptionPacket} from './../../actions/socketActions'
 import {wsOverviewData} from './../../constants/initData.js';
@@ -158,7 +158,7 @@ class UsersTab extends React.Component {
         delete updatedWsSubscription["users"].data[0].details["filter_params"];
         this.props.updateSubscriptionPacket(updatedWsSubscription);
         this.props.filterApplied(!this.props.isFilterApplied);
-        this.props.showTableFilter(false);
+        this.props.userFilterToggle(false);
         this.props.toggleUserFilter(false);
         /**
          * It will reset the filter
@@ -192,8 +192,8 @@ class UsersTab extends React.Component {
                                        isFilterApplied={this.props.isFilterApplied}
                                        lastUpdatedText={updateStatusIntl}
                                        lastUpdated={updateStatusIntl}
-                                       showFilter={this.props.showFilter}
-                                       setFilter={this.props.showTableFilter}/>
+                                       userToggleFilter={this.props.userToggleFilter}
+                                       setFilter={this.props.userFilterToggle}/>
                     </div>
                 </div>
             </div>
@@ -212,7 +212,7 @@ function mapStateToProps(state, ownProps) {
         manager: state.headerData.headerInfo || [],
         userSortHeader: state.sortHeaderState.userHeaderSort || "role",
         userSortHeaderState: state.sortHeaderState.userHeaderSortOrder || INITIAL_HEADER_ORDER,
-        showFilter: state.filterInfo.filterState || false,
+        userToggleFilter: state.filterInfo.userToggleFilter || false,
         isFilterApplied: state.filterInfo.isFilterApplied || false,
         userFilterStatus: state.filterInfo.userFilterStatus || false,
         roleInfo: state.appInfo.roleInfo || null,
@@ -236,8 +236,8 @@ var mapDispatchToProps = function (dispatch) {
         userHeaderSortOrder: function (data) {
             dispatch(userHeaderSortOrder(data))
         },
-        showTableFilter: function (data) {
-            dispatch(showTableFilter(data));
+        userFilterToggle: function (data) {
+            dispatch(userFilterToggle(data));
         },
         filterApplied: function (data) {
             dispatch(filterApplied(data));
@@ -259,7 +259,7 @@ UsersTab.PropTypes = {
     manager: React.PropTypes.array,
     userSortHeader: React.PropTypes.string,
     userSortHeaderState: React.PropTypes.string,
-    showFilter: React.PropTypes.bool,
+    userToggleFilter: React.PropTypes.bool,
     isFilterApplied: React.PropTypes.bool,
     userFilterStatus: React.PropTypes.bool,
     auth_token: React.PropTypes.object,
@@ -267,7 +267,7 @@ UsersTab.PropTypes = {
     userFilterDetail: React.PropTypes.func,
     userHeaderSort: React.PropTypes.func,
     userHeaderSortOrder: React.PropTypes.func,
-    showTableFilter: React.PropTypes.func,
+    userFilterToggle: React.PropTypes.func,
     filterApplied: React.PropTypes.func,
     wsSubscriptionData:React.PropTypes.object
 };

@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
-import {showTableFilter, filterApplied,ppsfilterState,togglePPSFilter,setDefaultRange} from '../../actions/filterAction';
+import {PPSFilterToggle, filterApplied,ppsfilterState,togglePPSFilter,setDefaultRange} from '../../actions/filterAction';
 import { connect } from 'react-redux'; 
 import {updateSubscriptionPacket} from '../../actions/socketActions';
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
@@ -23,8 +23,8 @@ class PPSFilter extends React.Component{
 
 
     _closeFilter() {
-        let filterState = !this.props.showFilter;
-        this.props.showTableFilter(false);
+        let filterState = !this.props.ppsToggleFilter;
+        this.props.PPSFilterToggle(false);
     } 
 
      _processPPSSearchField(){
@@ -160,7 +160,10 @@ class PPSFilter extends React.Component{
   render(){
     
         var ppsDetail = this.props.PPSDetail;
-        var noOrder = ppsDetail.PPStypeDetail && ppsDetail.PPStypeDetail.length?false:true;
+
+       // var noOrder = ppsDetail.PPStypeDetail && ppsDetail.PPStypeDetail.length?false:true;
+      var noOrder = ppsDetail.responseFlag
+
         let ppsSearchField = this._processPPSSearchField();
         let ppsFilterToken = this._processFilterToken();
         let rangeSlider=this._handleRangeSlider();
@@ -186,7 +189,7 @@ class PPSFilter extends React.Component{
 function mapStateToProps(state, ownProps){
   return {
     PPSDetail: state.PPSDetail || [],
-    showFilter: state.filterInfo.filterState || false,
+    ppsToggleFilter: state.filterInfo.ppsToggleFilter || false,
     orderData: state.getOrderDetail || {},
     wsSubscriptionData:state.recieveSocketActions.socketDataSubscriptionPacket,
     orderListSpinner: state.spinner.orderListSpinner || false,
@@ -202,7 +205,7 @@ function mapStateToProps(state, ownProps){
 
 var mapDispatchToProps = function(dispatch){
   return {
-    showTableFilter: function(data){dispatch(showTableFilter(data));},
+    PPSFilterToggle: function(data){dispatch(PPSFilterToggle(data));},
     filterApplied: function(data){dispatch(filterApplied(data));},
     updateSubscriptionPacket: function(data){dispatch(updateSubscriptionPacket(data));},
     ppsfilterState: function(data){dispatch(ppsfilterState(data));},
@@ -215,13 +218,13 @@ var mapDispatchToProps = function(dispatch){
 };
 PPSFilter.PropTypes={
   PPSDetail:React.PropTypes.array,
- showFilter:React.PropTypes.bool,
+ ppsToggleFilter:React.PropTypes.bool,
  orderData:React.PropTypes.object,
  wsSubscriptionData:React.PropTypes.object,
  orderListSpinner:React.PropTypes.bool,
  isFilterApplied:React.PropTypes.bool,
  ppsFilterState:React.PropTypes.bool,
- showTableFilter:React.PropTypes.func,
+ PPSFilterToggle:React.PropTypes.func,
 filterApplied: React.PropTypes.func,
 updateSubscriptionPacket:React.PropTypes.func,
 togglePPSFilter:React.PropTypes.func

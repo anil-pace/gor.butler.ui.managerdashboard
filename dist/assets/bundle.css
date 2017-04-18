@@ -5247,6 +5247,10 @@ button:disabled {
   border: 1px solid #666666;
 }
 
+.gor-filter-disable {
+  background-color: #efefef;
+}
+
 .gor-filter-input-text {
   font-size: 14px;
   font-weight: 600;
@@ -5267,6 +5271,7 @@ button:disabled {
   padding-left: 10px;
   padding-right: 10px;
   padding-bottom: 4px;
+  cursor: pointer;
 }
 
 .gor-filter-token-selected {
@@ -5281,6 +5286,7 @@ button:disabled {
   padding-left: 10px;
   padding-right: 10px;
   padding-bottom: 4px;
+  cursor: pointer;
 }
 
 .gor-filter-token-text {

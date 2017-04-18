@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import {FormattedMessage} from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
-import {showTableFilter, filterApplied, wavefilterState, toggleWaveFilter} from '../../actions/filterAction';
+import {wavesFilterToggle, filterApplied, wavefilterState, toggleWaveFilter} from '../../actions/filterAction';
 import {updateSubscriptionPacket} from '../../actions/socketActions';
 import {connect} from 'react-redux';
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
@@ -29,8 +29,8 @@ class WaveFilter extends React.Component {
     }
 
     _closeFilter() {
-        let filterState = !this.props.showFilter;
-        this.props.showTableFilter(false);
+        let filterState = !this.props.wavesToggleFilter;
+        this.props.wavesFilterToggle(false);
     }
 
     _processWaveSearchField() {
@@ -128,7 +128,7 @@ class WaveFilter extends React.Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        showFilter: state.filterInfo.filterState || false,
+        wavesToggleFilter: state.filterInfo.wavesToggleFilter || false,
         waveData: state.waveInfo || {},
         orderListSpinner: state.spinner.orderListSpinner || false,
         filterState: state.filterInfo.wavefilterState,
@@ -143,8 +143,8 @@ function mapStateToProps(state, ownProps) {
 
 let mapDispatchToProps = function (dispatch) {
     return {
-        showTableFilter: function (data) {
-            dispatch(showTableFilter(data));
+        wavesFilterToggle: function (data) {
+            dispatch(wavesFilterToggle(data));
         },
         filterApplied: function (data) {
             dispatch(filterApplied(data));
@@ -165,12 +165,12 @@ let mapDispatchToProps = function (dispatch) {
     }
 };
 WaveFilter.PropTypes = {
-    showTableFilter: React.PropTypes.func,
+    wavesFilterToggle: React.PropTypes.func,
     filterApplied: React.PropTypes.func,
     wavefilterState: React.PropTypes.func,
     updateSubscriptionPacket: React.PropTypes.func,
     toggleWaveFilter: React.PropTypes.func,
-    showFilter: React.PropTypes.bool,
+    wavesToggleFilter: React.PropTypes.bool,
     waveData: React.PropTypes.object,
     orderListSpinner: React.PropTypes.bool,
     filterState: React.PropTypes.object,

@@ -198,6 +198,8 @@ export const DISPLAY_CHARGING_STATION_FILTER_SPINNER = "DISPLAY_CHARGING_STATION
 
 
 
+
+
 /*Map for routes of tab*/
 
 export const TAB_ROUTE_MAP = {
@@ -441,6 +443,14 @@ export const SET_CS_FILTER = "SET_CS_FILTER";
 export const SET_WAVE_FILTER = "SET_WAVE_FILTER"
 export const AUDIT_APPROVED = "auditline_approved";
 export const AUDIT_REJECTED = "auditline_rejected";
+export const BOT_TOGGLE_FILTER = "BOT_TOGGLE_FILTER";
+export const PPS_TOGGLE_FILTER = "PPS_TOGGLE_FILTER";
+export const CS_TOGGLE_FILTER = "CS_TOGGLE_FILTER";
+export const WAVES_TOGGLE_FILTER = "WAVES_TOGGLE_FILTER";
+export const ORDERS_TOGGLE_FILTER = "ORDERS_TOGGLE_FILTER";
+export const AUDIT_TOGGLE_FILTER = "AUDIT_TOGGLE_FILTER";
+export const USER_TOGGLE_FILTER = "USER_TOGGLE_FILTER";
+
 
 
 //search dropdown constants

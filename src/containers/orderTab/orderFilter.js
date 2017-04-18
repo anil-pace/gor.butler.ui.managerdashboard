@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
-import {showTableFilter, filterApplied,orderfilterState,toggleOrderFilter} from '../../actions/filterAction';
+import {ordersFilterToggle, filterApplied,orderfilterState,toggleOrderFilter} from '../../actions/filterAction';
 import { connect } from 'react-redux'; 
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
@@ -17,7 +17,7 @@ class OrderFilter extends React.Component{
 
 
     _closeFilter() {
-        this.props.showTableFilter(false);
+        this.props.ordersFilterToggle(false);
     }	
 
     _processOrderSearchField(){
@@ -108,7 +108,7 @@ class OrderFilter extends React.Component{
 
 function mapStateToProps(state, ownProps){
   return {
-    showFilter: state.filterInfo.filterState || false,
+    ordersToggleFilter: state.filterInfo.ordersToggleFilter || false,
     orderData: state.getOrderDetail || {},
     orderListSpinner: state.spinner.orderListSpinner || false,
     orderFilterState: state.filterInfo.orderFilterState,
@@ -117,7 +117,7 @@ function mapStateToProps(state, ownProps){
 
 var mapDispatchToProps = function(dispatch){
   return {
-    showTableFilter: function(data){dispatch(showTableFilter(data));},
+    ordersFilterToggle: function(data){dispatch(ordersFilterToggle(data));},
     filterApplied: function(data){dispatch(filterApplied(data));},
      orderfilterState: function(data){dispatch(orderfilterState(data));},
      toggleOrderFilter: function(data){dispatch(toggleOrderFilter(data));}
@@ -125,10 +125,10 @@ var mapDispatchToProps = function(dispatch){
 };
 
 OrderFilter.PropTypes={
-    showFilter:React.PropTypes.bool,
+    ordersToggleFilter:React.PropTypes.bool,
     orderData:React.PropTypes.object,
     orderListSpinner:React.PropTypes.bool,
-    showTableFilter:React.PropTypes.func,
+    ordersFilterToggle:React.PropTypes.func,
     filterApplied:React.PropTypes.func,
     orderFilterState:React.PropTypes.bool,
     toggleOrderFilter:React.PropTypes.func

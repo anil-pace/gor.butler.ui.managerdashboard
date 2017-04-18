@@ -65,10 +65,10 @@ class PPStable extends React.Component {
     
   }
   shouldComponentUpdate(nextProps) {
-    if((nextProps.items && !nextProps.items.length)){
-      return false;
-    }
-    return true;
+    // if((nextProps.items && !nextProps.items.length)){
+    //   return false;
+    // }
+    // return true;
   }
 
 
@@ -230,7 +230,7 @@ class PPStable extends React.Component {
 
 
 _setFilter() {
-    let newState = !this.props.showFilter;
+    let newState = !this.props.ppsToggleFilter;
     this.props.setFilter(newState);
    }
 
@@ -324,7 +324,7 @@ _setFilter() {
     return (
       <div className="gorTableMainContainer">
 
-<div className="gor-filter-wrap" style={{'width':this.props.showFilter?'350px':'0px', height:filterHeight}}> 
+<div className="gor-filter-wrap" style={{'width':this.props.ppsToggleFilter?'350px':'0px', height:filterHeight}}> 
          <PPSFilter refreshOption={this.props.refreshOption} responseFlag={this.props.responseFlag}/>  
        </div>
 
@@ -506,7 +506,7 @@ items:React.PropTypes.array,
   currentHeaderOrder:React.PropTypes.object,
   sortHeaderState:React.PropTypes.func,
   lastUpdatedText:React.PropTypes.string,
-  showFilter:React.PropTypes.bool,
+  ppsToggleFilter:React.PropTypes.bool,
   lastUpdated:React.PropTypes.string,
   ppsFilterState:React.PropTypes.bool,
   setFilter:React.PropTypes.func,

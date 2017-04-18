@@ -13,7 +13,7 @@ import Spinner from '../../components/spinner/Spinner';
 import { setButlerSpinner } from  '../../actions/spinnerAction';
 import { butlerHeaderSort,butlerHeaderSortOrder,butlerFilterDetail } from '../../actions/sortHeaderActions';
 import { defineMessages } from 'react-intl';
-import {showTableFilter,filterApplied,toggleBotButton,butlerfilterState} from '../../actions/filterAction';
+import {BotFilterToggle,filterApplied,toggleBotButton,butlerfilterState} from '../../actions/filterAction';
 import {updateSubscriptionPacket} from './../../actions/socketActions'
 import {wsOverviewData} from './../../constants/initData.js';
 //Mesages for internationalization
@@ -260,9 +260,9 @@ class ButlerBot extends React.Component{
                             currentHeaderOrder={this.props.butlerSortHeaderState}
                             setButlerFilter={this.props.butlerFilterDetail}
                             getButlerFilter = {this.props.butlerFilter}
-                            showFilter={this.props.showFilter}
+                            botToggleFilter={this.props.botToggleFilter}
                             isFilterApplied={this.props.isFilterApplied}
-                            setFilter={this.props.showTableFilter}
+                            setFilter={this.props.BotFilterToggle}
                             botFilterStatus={this.props.botFilterStatus}
                             lastUpdatedText={updateStatusIntl} 
                             lastUpdated={updateStatusIntl}
@@ -285,7 +285,7 @@ function mapStateToProps(state, ownProps){
     butlerSpinner: state.spinner.butlerSpinner || false,
     butlerDetail: state.butlerDetail || [],
     intlMessages: state.intl.messages,
-    showFilter: state.filterInfo.filterState || false,
+    botToggleFilter: state.filterInfo.botToggleFilter || false,
     isFilterApplied: state.filterInfo.isFilterApplied || false,
     botFilterStatus:state.filterInfo.botFilterStatus|| false,
     filterState: state.filterInfo.butlerFilterState,
@@ -300,7 +300,7 @@ var mapDispatchToProps = function(dispatch){
     setButlerSpinner: function(data){dispatch(setButlerSpinner(data))},
     butlerHeaderSort: function(data){dispatch(butlerHeaderSort(data))},
     butlerHeaderSortOrder: function(data){dispatch(butlerHeaderSortOrder(data))},
-    showTableFilter: function(data){dispatch(showTableFilter(data));},
+    BotFilterToggle: function(data){dispatch(BotFilterToggle(data));},
     filterApplied: function(data){dispatch(filterApplied(data));},
       updateSubscriptionPacket: function (data) {
           dispatch(updateSubscriptionPacket(data));

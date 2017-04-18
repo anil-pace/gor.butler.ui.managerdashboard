@@ -1,4 +1,7 @@
-import {SHOW_FILTER, IS_FILTER_APPLIED,BUTLER_FILTER_STATE,CHARGINGSTATION_FILTER_STATE,PPS_FILTER_STATE,WAVE_FILTER_STATE,USER_FILTER_STATE,TOGGLE_BUTTON,TOGGLE_BUTTON_BOT,PPS_FILTER_VALUE,CHARGING_FILTER_VALUE,WAVE_FILTER_VALUE,USER_FILTER_VALUE,SET_DEFAULT_RANGE,AUDIT_FILTER_STATE,AUDIT_FILTER_VALUE,ORDER_FILTER_STATE,ORDER_FILTER_VALUE} from '../constants/frontEndConstants'; 
+import {SHOW_FILTER, IS_FILTER_APPLIED,BUTLER_FILTER_STATE,CHARGINGSTATION_FILTER_STATE,PPS_FILTER_STATE,
+  WAVE_FILTER_STATE,USER_FILTER_STATE,TOGGLE_BUTTON,TOGGLE_BUTTON_BOT,PPS_FILTER_VALUE,CHARGING_FILTER_VALUE,
+  WAVE_FILTER_VALUE,USER_FILTER_VALUE,SET_DEFAULT_RANGE,AUDIT_FILTER_STATE,AUDIT_FILTER_VALUE,ORDER_FILTER_STATE,
+  ORDER_FILTER_VALUE,BOT_TOGGLE_FILTER,PPS_TOGGLE_FILTER,CS_TOGGLE_FILTER,AUDIT_TOGGLE_FILTER,ORDERS_TOGGLE_FILTER,USER_TOGGLE_FILTER,WAVES_TOGGLE_FILTER} from '../constants/frontEndConstants'; 
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -12,6 +15,49 @@ import {SHOW_FILTER, IS_FILTER_APPLIED,BUTLER_FILTER_STATE,CHARGINGSTATION_FILTE
     })     
 
     break;
+
+case BOT_TOGGLE_FILTER:
+    return Object.assign({}, state, { 
+      "botToggleFilter" : action.data
+    })     
+    break;
+
+    case PPS_TOGGLE_FILTER:
+    return Object.assign({}, state, { 
+      "ppsToggleFilter" : action.data
+    })     
+    break;
+
+     case CS_TOGGLE_FILTER:
+    return Object.assign({}, state, { 
+      "csToggleFilter" : action.data
+    })     
+    break;
+
+     case WAVES_TOGGLE_FILTER:
+    return Object.assign({}, state, { 
+      "wavesToggleFilter" : action.data
+    })     
+    break;
+
+     case ORDERS_TOGGLE_FILTER:
+    return Object.assign({}, state, { 
+      "ordersToggleFilter" : action.data
+    })     
+    break;
+
+     case AUDIT_TOGGLE_FILTER:
+    return Object.assign({}, state, { 
+      "auditToggleFilter" : action.data
+    })     
+    break;
+
+     case USER_TOGGLE_FILTER:
+    return Object.assign({}, state, { 
+      "userToggleFilter" : action.data
+    })     
+    break;
+
     case IS_FILTER_APPLIED:              //This reducer will update the the isFilterApplied value with true/false
     return Object.assign({}, state, { 
       "isFilterApplied" : action.data

@@ -27,7 +27,7 @@ import {
     GOR_FIRST_LAST
 } from '../../constants/frontEndConstants';
 import {
-    showTableFilter,
+    PPSFilterToggle,
     filterApplied,
     ppsfilterState,
     togglePPSFilter,
@@ -141,7 +141,7 @@ class PPS extends React.Component {
         });
         this.props.filterApplied(!this.props.isFilterApplied);
         this.props.togglePPSFilter(false);
-        this.props.showTableFilter(false);
+        this.props.PPSFilterToggle(false);
 
     }
 
@@ -203,8 +203,8 @@ class PPS extends React.Component {
                                   isFilterApplied={this.props.isFilterApplied}
                                   lastUpdatedText={updateStatusIntl}
                                   lastUpdated={updateStatusIntl}
-                                  showFilter={this.props.showFilter}
-                                  setFilter={this.props.showTableFilter}
+                                  ppsToggleFilter={this.props.ppsToggleFilter}
+                                  setFilter={this.props.PPSFilterToggle}
                                   refreshList={this._refreshPPSList.bind(this)}
                         />
                     </div>
@@ -227,7 +227,7 @@ function mapStateToProps(state, ownProps) {
         ppsSpinner: state.spinner.ppsSpinner || false,
         PPSDetail: state.PPSDetail || [],
         intlMessages: state.intl.messages,
-        showFilter: state.filterInfo.filterState || false,
+        ppsToggleFilter: state.filterInfo.ppsToggleFilter || false,
         ppsFilterState: state.filterInfo.ppsFilterState || false,
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
         isFilterApplied: state.filterInfo.isFilterApplied || false,
@@ -260,8 +260,8 @@ var mapDispatchToProps = function (dispatch) {
         setCheckAll: function (data) {
             dispatch(setCheckAll(data))
         },
-        showTableFilter: function (data) {
-            dispatch(showTableFilter(data));
+        PPSFilterToggle: function (data) {
+            dispatch(PPSFilterToggle(data));
         },
         ppsfilterState: function (data) {
             dispatch(ppsfilterState(data));
@@ -293,7 +293,7 @@ PPS.PropTypes = {
     ppsSortHeaderState: React.PropTypes.string,
     ppsSpinner: React.PropTypes.bool,
     PPSDetail: React.PropTypes.array,
-    showFilter: React.PropTypes.bool,
+    ppsToggleFilter: React.PropTypes.bool,
     ppsFilterState: React.PropTypes.bool,
     ppsFilterDetail: React.PropTypes.func,
     changePPSmode: React.PropTypes.func,
@@ -303,7 +303,7 @@ PPS.PropTypes = {
     setCheckedPps: React.PropTypes.func,
     setDropDisplay: React.PropTypes.func,
     setCheckAll: React.PropTypes.func,
-    showTableFilter: React.PropTypes.func,
+    PPSFilterToggle: React.PropTypes.func,
     filterApplied: React.PropTypes.func,
     isFilterApplied: React.PropTypes.bool,
     wsSubscriptionData: React.PropTypes.object

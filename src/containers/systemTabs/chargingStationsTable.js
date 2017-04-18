@@ -126,7 +126,7 @@ class ChargingStationsTable extends React.Component {
     }
 
     _setFilter() {
-        var newState = !this.props.showFilter;
+        var newState = !this.props.csToggleFilter;
         this.props.setFilter(newState);
     }
 
@@ -169,7 +169,7 @@ class ChargingStationsTable extends React.Component {
     }
 
     var tableRenderer = <div className="gorTableMainContainer">
-    <div className="gor-filter-wrap" style={{'width':this.props.showFilter?'350px':'0px', height:filterHeight}}> 
+    <div className="gor-filter-wrap" style={{'width':this.props.csToggleFilter?'350px':'0px', height:filterHeight}}> 
          <ChargingStationFilter refreshOption={this.props.refreshOption} responseFlag={this.props.responseFlag}/>  
        </div>
         <div className="gorToolBar">
@@ -336,7 +336,7 @@ ChargingStationsTable.PropTypes = {
     currentHeaderOrder: React.PropTypes.object,
     sortHeaderState: React.PropTypes.func,
     lastUpdatedText: React.PropTypes.string,
-    showFilter: React.PropTypes.bool,
+    csToggleFilter: React.PropTypes.bool,
     lastUpdated: React.PropTypes.string,
     setButlerFilter: React.PropTypes.func,
     setFilter: React.PropTypes.func,

@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
-import {showTableFilter,filterApplied,auditfilterState,toggleAuditFilter} from '../../actions/filterAction';
+import {auditFilterToggle,filterApplied,auditfilterState,toggleAuditFilter} from '../../actions/filterAction';
 import { connect } from 'react-redux'; 
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
@@ -19,8 +19,8 @@ class AuditFilter extends React.Component{
  }
 
  _closeFilter() {
-  var filterState = !this.props.showFilter;
-  this.props.showTableFilter(filterState);
+  var filterState = !this.props.auditToggleFilter;
+  this.props.auditFilterToggle(filterState);
 }	
 
 componentWillMount(){
@@ -143,7 +143,7 @@ render(){
 
 function mapStateToProps(state, ownProps){
   return {
-    showFilter: state.filterInfo.filterState || false,
+    auditToggleFilter: state.filterInfo.auditToggleFilter || false,
     auditSpinner: state.spinner.auditSpinner || false,
     totalAudits: state.recieveAuditDetail.totalAudits || 0,
     auditFilterState: state.filterInfo.auditFilterState,
@@ -154,7 +154,7 @@ function mapStateToProps(state, ownProps){
 
 var mapDispatchToProps = function(dispatch){
   return {
-    showTableFilter: function(data){dispatch(showTableFilter(data));},
+    auditFilterToggle: function(data){dispatch(auditFilterToggle(data));},
     filterApplied: function(data){dispatch(filterApplied(data));},
     setTextBoxStatus: function(data){dispatch(setTextBoxStatus(data));},
     auditfilterState: function(data){dispatch(auditfilterState(data));},
@@ -163,10 +163,10 @@ var mapDispatchToProps = function(dispatch){
 };
 
 AuditFilter.PropTypes={
-  showFilter:React.PropTypes.bool,
+  auditToggleFilter:React.PropTypes.bool,
   auditSpinner:React.PropTypes.bool,
   totalAudits:React.PropTypes.number,
-  showTableFilter:React.PropTypes.func,
+  auditFilterToggle:React.PropTypes.func,
   filterApplied:React.PropTypes.func,
   auditFilterState:React.PropTypes.object,
   auditFilterStatus:React.PropTypes.bool

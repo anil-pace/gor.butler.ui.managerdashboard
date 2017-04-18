@@ -3,7 +3,7 @@ import ReactDOM  from 'react-dom';
 import {FormattedMessage} from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
 import {
-    showTableFilter,
+    CSFilterToggle,
     filterApplied,
     chargingstationfilterState,
     toggleChargingFilter
@@ -25,8 +25,8 @@ class ChargingStationFilter extends React.Component {
 
 
     _closeFilter() {
-        let filterState = !this.props.showFilter;
-        this.props.showTableFilter(false);
+        let filterState = !this.props.csToggleFilter;
+        this.props.CSFilterToggle(false);
     }
 
     componentWillMount() {
@@ -158,7 +158,7 @@ class ChargingStationFilter extends React.Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        showFilter: state.filterInfo.filterState || false,
+        csToggleFilter: state.filterInfo.csToggleFilter || false,
         chargerData: state.chargersDetail || [],
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket,
         orderListSpinner: state.spinner.orderListSpinner || false,
@@ -173,8 +173,8 @@ function mapStateToProps(state, ownProps) {
 
 var mapDispatchToProps = function (dispatch) {
     return {
-        showTableFilter: function (data) {
-            dispatch(showTableFilter(data));
+        CSFilterToggle: function (data) {
+            dispatch(CSFilterToggle(data));
         },
         filterApplied: function (data) {
             dispatch(filterApplied(data));
@@ -195,14 +195,14 @@ var mapDispatchToProps = function (dispatch) {
 };
 
 ChargingStationFilter.PropTypes = {
-    showFilter: React.PropTypes.bool,
+    csToggleFilter: React.PropTypes.bool,
     chargerData: React.PropTypes.array,
     wsSubscriptionData: React.PropTypes.object,
     orderListSpinner: React.PropTypes.bool,
     filterState: React.PropTypes.object,
     isFilterApplied: React.PropTypes.bool,
     chargingFilterStatus: React.PropTypes.bool,
-    showTableFilter: React.PropTypes.func,
+    CSFilterToggle: React.PropTypes.func,
     filterApplied: React.PropTypes.func,
     updateSubscriptionPacket: React.PropTypes.func,
     chargingstationfilterState: React.PropTypes.func,

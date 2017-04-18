@@ -38,7 +38,7 @@ class ButlerBotTable extends React.Component {
   }
 
 shouldComponentUpdate(nextProps) {
-    if((nextProps.items && !nextProps.items.length) && this.props.showFilter === nextProps.showFilter){
+    if((nextProps.items && !nextProps.items.length) && this.props.botToggleFilter === nextProps.botToggleFilter){
       return false;
     }
     return true;
@@ -134,7 +134,7 @@ shouldComponentUpdate(nextProps) {
   }
 
   _setFilter() {
-    var newState = !this.props.showFilter;
+    var newState = !this.props.botToggleFilter;
     this.props.setFilter(newState)
    }
   
@@ -161,7 +161,7 @@ shouldComponentUpdate(nextProps) {
      var filterHeight = screen.height-190-50;
     return (
       <div className="gorTableMainContainer">
-      <div className="gor-filter-wrap" style={{'width':this.props.showFilter?'350px':'0px', height:filterHeight}}> 
+      <div className="gor-filter-wrap" style={{'width':this.props.botToggleFilter?'350px':'0px', height:filterHeight}}> 
          <ButlerBotFilter/>  
        </div>
 
@@ -344,7 +344,7 @@ items:React.PropTypes.array,
   currentHeaderOrder:React.PropTypes.object,
   sortHeaderState:React.PropTypes.func,
   lastUpdatedText:React.PropTypes.string,
-  showFilter:React.PropTypes.bool,
+  botToggleFilter:React.PropTypes.bool,
   lastUpdated:React.PropTypes.string,
   setButlerFilter:React.PropTypes.func,
   setFilter:React.PropTypes.func,

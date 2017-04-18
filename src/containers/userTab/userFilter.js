@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
-import {showTableFilter,filterApplied,userfilterState,toggleUserFilter} from '../../actions/filterAction';
+import {userFilterToggle,filterApplied,userfilterState,toggleUserFilter} from '../../actions/filterAction';
 import {updateSubscriptionPacket} from '../../actions/socketActions';
 import { connect } from 'react-redux'; 
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
@@ -26,8 +26,8 @@ class UserFilter extends React.Component{
   }
 
   _closeFilter() {
-    let filterState = !this.props.showFilter;
-    this.props.showTableFilter(filterState);
+    let filterState = !this.props.userToggleFilter;
+    this.props.userFilterToggle(filterState);
   }   
 
   _processUserSearchField(){
@@ -195,7 +195,7 @@ UserFilter.contextTypes = {
 function mapStateToProps(state, ownProps){
   return {
     userDetails:state.userDetails||[],
-    showFilter: state.filterInfo.filterState || false,
+    userToggleFilter: state.filterInfo.userToggleFilter || false,
     auditSpinner: state.spinner.auditSpinner || false,
     totalAudits: state.recieveAuditDetail.totalAudits || 0,
     filterState: state.filterInfo.userfilterState,
@@ -210,7 +210,7 @@ function mapStateToProps(state, ownProps){
 
 var mapDispatchToProps = function(dispatch){
   return {
-    showTableFilter: function(data){dispatch(showTableFilter(data));},
+    userFilterToggle: function(data){dispatch(userFilterToggle(data));},
     filterApplied: function(data){dispatch(filterApplied(data));},
     userfilterState: function(data){dispatch(userfilterState(data));},
     updateSubscriptionPacket: function(data){dispatch(updateSubscriptionPacket(data));},
@@ -220,7 +220,7 @@ userFilterApplySpinner: function(data){dispatch(userFilterApplySpinner(data));}
 };
 UserFilter.PropTypes={
 userDetails:React.PropTypes.array,
-showFilter: React.PropTypes.bool,
+userToggleFilter: React.PropTypes.bool,
 auditSpinner:React.PropTypes.bool,
 totalAudits:React.PropTypes.number,
 filterState:React.PropTypes.object,
@@ -228,7 +228,7 @@ wsSubscriptionData:React.PropTypes.object,
 isFilterApplied:React.PropTypes.bool,
 userFilterStatus:React.PropTypes.bool,
 roleInfo:React.PropTypes.object,
-showTableFilter: React.PropTypes.func,
+userFilterToggle: React.PropTypes.func,
 filterApplied: React.PropTypes.func,
 userfilterState: React.PropTypes.func,
 updateSubscriptionPacket: React.PropTypes.func,

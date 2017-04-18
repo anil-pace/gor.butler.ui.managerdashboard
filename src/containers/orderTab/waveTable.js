@@ -158,7 +158,7 @@ class WavesTable extends React.Component {
     }
 
     _setFilter() {
-        var newState = !this.props.showFilter;
+        var newState = !this.props.wavesToggleFilter;
         this.props.setFilter(newState);
     }
 
@@ -184,7 +184,7 @@ class WavesTable extends React.Component {
     }
     return (
       <div className="gorTableMainContainer">
-      <div className="gor-filter-wrap" style={{'width':this.props.showFilter?'350px':'0px', height:filterHeight}}> 
+      <div className="gor-filter-wrap" style={{'width':this.props.wavesToggleFilter?'350px':'0px', height:filterHeight}}> 
          <WaveFilter refreshOption={this.props.refreshOption} responseFlag={this.props.responseFlag}/>  
        </div>
       <div className="gorToolBar">
@@ -404,7 +404,7 @@ WavesTable.PropTypes = {
     sortHeaderState: React.PropTypes.func,
     refreshOption: React.PropTypes.func,
     lastUpdatedText: React.PropTypes.string,
-    showFilter: React.PropTypes.bool,
+    wavesToggleFilter: React.PropTypes.bool,
     lastUpdated: React.PropTypes.string,
     responseFlag: React.PropTypes.bool,
     setWaveFilter: React.PropTypes.func,

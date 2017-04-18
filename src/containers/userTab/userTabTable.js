@@ -193,7 +193,7 @@ shouldComponentUpdate(nextProps) {
   }
 
   _setFilter() {
-    var newState = !this.props.showFilter;
+    var newState = !this.props.userToggleFilter;
     this.props.setFilter(newState);
    }
  
@@ -204,7 +204,7 @@ shouldComponentUpdate(nextProps) {
     let filterHeight = screen.height-190-50;
     let {sortedDataList, colSortDirs,columnWidths} = this.state;
     let columnWidth= (this.props.containerWidth/this.props.itemNumber);
-    let heightRes = 560 ,rowsCount = sortedDataList.getSize() ;
+    let heightRes = 560 ,rowsCount = sortedDataList.getSize();
     if(this.props.containerHeight !== 0) {
       heightRes = this.props.containerHeight;
     }
@@ -220,7 +220,7 @@ shouldComponentUpdate(nextProps) {
     return (
       <div>
 
-      <div className="gor-filter-wrap" style={{'width':this.props.showFilter?'350px':'0px', height:filterHeight}}> 
+      <div className="gor-filter-wrap" style={{'width':this.props.userToggleFilter?'350px':'0px', height:filterHeight}}> 
          <UserFilter refreshOption={this.props.refreshOption} responseFlag={this.props.responseFlag}/>  
        </div>
 
@@ -386,7 +386,7 @@ items:React.PropTypes.array,
   currentHeaderOrder:React.PropTypes.object,
   sortHeaderState:React.PropTypes.func,
   lastUpdatedText:React.PropTypes.string,
-  showFilter:React.PropTypes.bool,
+  userToggleFilter:React.PropTypes.bool,
   lastUpdated:React.PropTypes.string,
   setFilter:React.PropTypes.func,
   containerHeight:React.PropTypes.number,

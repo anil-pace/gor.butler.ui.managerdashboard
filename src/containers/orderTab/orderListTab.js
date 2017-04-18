@@ -12,7 +12,7 @@ import {stringConfig} from '../../constants/backEndConstants';
 import {orderHeaderSortOrder, orderHeaderSort, orderFilterDetail} from '../../actions/sortHeaderActions';
 import {getDaysDiff} from '../../utilities/getDaysDiff';
 import GorPaginate from '../../components/gorPaginate/gorPaginate';
-import {showTableFilter,filterApplied} from '../../actions/filterAction';
+import {ordersFilterToggle,filterApplied} from '../../actions/filterAction';
 const messages = defineMessages ({
   inProgressStatus:{
     id: 'orderList.progress.status',
@@ -323,7 +323,7 @@ render(){
   <div>
   <div className="gor-Orderlist-table" >  
 
-  {!this.props.showFilter?<Spinner isLoading={this.props.orderListSpinner} setSpinner={this.props.setOrderListSpinner}/>:""}
+  {!this.props.ordersToggleFilter?<Spinner isLoading={this.props.orderListSpinner} setSpinner={this.props.setOrderListSpinner}/>:""}
   <OrderListTable items={orderDetail} timeZoneString = {headerTimeZone} itemNumber={itemNumber} 
                   statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter} 
                   refreshOption={this.refresh.bind(this)} lastUpdatedText = {updateStatusText} lastUpdated={updateStatusIntl} 
@@ -335,8 +335,8 @@ render(){
                   sortHeaderState={this.props.orderHeaderSort} currentSortState={this.props.orderSortHeader} 
                   sortHeaderOrder={this.props.orderHeaderSortOrder} currentHeaderOrder={this.props.orderSortHeaderState}
                   setOrderFilter={this.props.orderFilterDetail}
-                  getOrderFilter={this.props.orderFilter} setFilter={this.props.showTableFilter} 
-                  showFilter={this.props.showFilter} responseFlag={this.props.orderListSpinner}
+                  getOrderFilter={this.props.orderFilter} setFilter={this.props.ordersFilterToggle} 
+                  ordersToggleFilter={this.props.ordersToggleFilter} responseFlag={this.props.orderListSpinner}
                   isFilterApplied={this.props.isFilterApplied}
                    orderFilterStatus={this.props.orderFilterStatus}
                   />
@@ -366,7 +366,7 @@ function mapStateToProps(state, ownProps){
     intlMessages: state.intl.messages,
     timeOffset: state.authLogin.timeOffset,
     auth_token: state.authLogin.auth_token,
-    showFilter: state.filterInfo.filterState || false,
+    ordersToggleFilter: state.filterInfo.ordersToggleFilter || false,
     isFilterApplied: state.filterInfo.isFilterApplied || false,
     orderFilterStatus:state.filterInfo.orderFilterStatus,
     orderFilterState: state.filterInfo.orderFilterState ||{}
@@ -386,7 +386,7 @@ var mapDispatchToProps = function(dispatch){
     lastRefreshTime: function(data){ dispatch(lastRefreshTime(data));},
     setOrderListSpinner: function(data){dispatch(setOrderListSpinner(data))},
     setCurrentPage: function(data){dispatch(setCurrentPage(data))},
-    showTableFilter: function(data){dispatch(showTableFilter(data));},
+    ordersFilterToggle: function(data){dispatch(ordersFilterToggle(data));},
     filterApplied: function(data){dispatch(filterApplied(data));}
   }
 };
@@ -405,7 +405,7 @@ orderData: React.PropTypes.object,
 statusFilter :React.PropTypes.bool,
 timeOffset: React.PropTypes.number,
 auth_token: React.PropTypes.object,
-showFilter: React.PropTypes.bool,
+ordersToggleFilter: React.PropTypes.bool,
 isFilterApplied:React.PropTypes.bool,
 orderFilterDetail:React.PropTypes.func,
 orderHeaderSort: React.PropTypes.func,
@@ -418,7 +418,7 @@ currentPage: React.PropTypes.func,
 lastRefreshTime: React.PropTypes.func,
 setOrderListSpinner:React.PropTypes.func,
 setCurrentPage:React.PropTypes.func,
-showTableFilter: React.PropTypes.func,
+ordersFilterToggle: React.PropTypes.func,
 filterApplied: React.PropTypes.func ,
 orderFilterStatus:React.PropTypes.bool,
 orderFilterState:React.PropTypes.object
