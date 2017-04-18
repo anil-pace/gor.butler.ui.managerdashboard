@@ -113,6 +113,7 @@ class Routes extends React.Component{
     }
 }
 render(){
+  var showUtilityTab = true;  
    return (
       <Router history={hashHistory}>
       <Route name="default" path="/" 
@@ -250,6 +251,14 @@ render(){
         },"users");
      }}
      />
+
+     {showUtilityTab?<Route name="utilities" path="/utilities"  
+     getComponent={(location, callback) => {
+         require.ensure([], function (require) {
+            callback(null, require('../containers/utilityTab').default);
+        },"utilities");
+     }}
+     />:""}
 
      <Route name="overview" path="/overview"  
      getComponent={(location, callback) => {

@@ -15,6 +15,16 @@
     "defaultMessage": "Filter data"
   },
   {
+    "id": "ChargingStationsTable.filter.search.bar",
+    "description": "total stations for filter search bar",
+    "defaultMessage": "{total} Stations found"
+  },
+  {
+    "id": "ChargingStationsTable.filter.search.bar.showall",
+    "description": "button label for show all",
+    "defaultMessage": "Show all Stations"
+  },
+  {
     "id": "ChargingStationsTable.stationID.heading",
     "description": "StationID heading",
     "defaultMessage": "STATION ID"

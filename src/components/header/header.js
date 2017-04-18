@@ -1,17 +1,18 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import {RECIEVE_HEADER,HEADER_START_TIME,REQUEST_HEADER,RECIEVE,RECIEVE_ITEM_TO_STOCK,
-	GET,SOFT_MANUAL} from '../../constants/frontEndConstants';
+	GET,SOFT_MANUAL,RECEIVE_SHIFT_START_TIME} from '../../constants/frontEndConstants';
 import {stringConfig} from '../../constants/backEndConstants';
-import {HEADER_URL} from '../../constants/configConstants'
+import {HEADER_URL,GET_SHIFT_START_TIME_URL} from '../../constants/configConstants'
 import {modal} from 'react-redux-modal';
-import { getHeaderInfo } from '../../actions/headerAction';
+import { getHeaderInfo ,getShiftStartTime} from '../../actions/headerAction';
 import LogOut from '../../containers/logoutTab'; 
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux'; 
 import HamBurger from '../hamburger/hamburger';
 import PauseOperation from '../../containers/emergencyProcess/pauseOperation'; 
 import ResumeOperation from '../../containers/emergencyProcess/resumeOperation'; 
+import {switchModalKey} from '../../actions/validationActions';
 
 var dropdownFlag=0;
 var temp;
@@ -29,6 +30,21 @@ class Header extends React.Component{
     	
     	 
     }
+
+    /**
+	 * The function will fetch the start time
+	 * to be displayed in the header.
+     * @private
+     */
+    _getShiftStartTime(){
+		let headerData= {
+            'url': GET_SHIFT_START_TIME_URL,
+            'method': GET,
+            'cause': RECEIVE_SHIFT_START_TIME,
+            'token': this.props.authToken
+        }
+		this.props.getShiftStartTime(headerData)
+	}
     componentDidMount(){
               var username = this.props.username;
               if(username && this.props.authToken){
@@ -40,15 +56,16 @@ class Header extends React.Component{
             }
               this.props.getHeaderInfo(headerData)
           }
+        this._getShiftStartTime()
   	}
     componentWillMount() {
-      document.addEventListener('click', this._handleDocumentClick, false);
-      document.addEventListener('touchend', this._handleDocumentClick, false);
+      document.addEventListener('click', this._handleDocumentClick, true);
+      document.addEventListener('touchend', this._handleDocumentClick, true);
     }  
 
     componentWillUnmount() {
-    document.removeEventListener('click', this._handleDocumentClick, false);
-    document.removeEventListener('touchend', this._handleDocumentClick, false);
+    document.removeEventListener('click', this._handleDocumentClick, true);
+    document.removeEventListener('touchend', this._handleDocumentClick, true);
   }
 
     openDropdown() {
@@ -60,7 +77,7 @@ class Header extends React.Component{
       this.setState({showDropdown:!this.state.showDropdown});
     }
      _handleDocumentClick() {
-      if (!ReactDOM.findDOMNode(this.dropdownNode).contains(event.target)) {
+      if (!(ReactDOM.findDOMNode(this.dropdownNode).contains(event.target) || (this.dropdownValue && ReactDOM.findDOMNode(this.dropdownValue).contains(event.target)))) {
           this.setState({showDropdown:false});
       }
     } 
@@ -76,10 +93,11 @@ class Header extends React.Component{
    }
    _showModal(modalComponent)
    {
+      this.props.switchModalKey(this.props.activeModalKey);
     	modal.add(modalComponent, {
       	title: '',
       	size: 'large', // large, medium or small,
-     	closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+     	closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
      	hideCloseButton: true
     	});   	
    }
@@ -90,7 +108,11 @@ class Header extends React.Component{
   			 headerInfo.fullName = (headerInfo.users[0].first_name || '') +' '+ (headerInfo.users[0].last_name || '');
   			 headerInfo.designation = headerInfo.users[0].roles[0] || 'butler_ui';
   		}
-  		headerInfo.start= HEADER_START_TIME
+        /**
+		 * Hard coded start time is replaced 
+		 * with the time fetched in API.
+         */
+  		headerInfo.start= this.props.shift_start_time
   		return headerInfo
   	}
   _processMenu(headerInfo){
@@ -189,15 +211,16 @@ class Header extends React.Component{
 						</div>
 
 						
-					</div>
-          {this.state.showDropdown?<div id="myDropdown" className="dropdown-content">
+					
+          {this.state.showDropdown?<div id="myDropdown" className="dropdown-content" ref={(node) => { this.dropdownValue = node; }} onClick={this.addModal.bind(this)}>
               <div className="horizontalDiv"> 
               </div>
               <div>
-                <a href="javascript:void(0)" onClick={this.addModal.bind(this)}><FormattedMessage id='header.logout' 
-                        defaultMessage="Logout" description="Text for logout"/></a>
+                <a href="javascript:void(0)" ><FormattedMessage id='header.logout' 
+                        defaultMessage="Logout" description="Text for logout" /></a>
               </div>
             </div>:""}
+            </div>
 				</div>
 			</div>
 		</header>
@@ -215,11 +238,13 @@ Header.contextTypes = {
 function mapStateToProps(state,ownProps) {
  return {
   headerInfo:state.headerData.headerInfo,
+  shift_start_time:state.headerData.shiftStartTime,
   authToken : state.authLogin.auth_token,
   username:state.authLogin.username,
   system_emergency:state.tabsData.system_emergency||null,
   system_status:state.tabsData.status||null,
-  system_data:state.tabsData.system_data||null
+  system_data:state.tabsData.system_data||null,
+  activeModalKey: state.appInfo.activeModalKey || 0
  }
 } 
 /**
@@ -227,7 +252,9 @@ function mapStateToProps(state,ownProps) {
  */
 function mapDispatchToProps(dispatch){
     return {
-        getHeaderInfo: function(data){ dispatch(getHeaderInfo(data)); }
+        getHeaderInfo: function(data){ dispatch(getHeaderInfo(data)); },
+        switchModalKey:function(data){dispatch(switchModalKey(data))},
+        getShiftStartTime: function(data){ dispatch(getShiftStartTime(data)); }
     }
 };
 

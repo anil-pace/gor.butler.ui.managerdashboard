@@ -11,6 +11,7 @@ import {BASE_URL, PPS_MODE_CHANGE_URL,PROTOCOL,API_URL} from '../../constants/co
 import { defineMessages } from 'react-intl';
 import {GOR_STATUS,GOR_STATUS_PRIORITY,GOR_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
 import PPSFilter from './ppsFilter';
+import FilterSummary from '../../components/tableFilter/filterSummary'
 
 const messages = defineMessages({
     ppsPlaceholder: {
@@ -271,6 +272,7 @@ _setFilter() {
 
   
   render() {
+    var showFilterPPS = true;
      let updateStatusIntl="";
     let filterHeight = screen.height-190-50;
     let {sortedDataList, colSortDirs,columnWidths,renderDropD, ppsSelected,headerChecked} = this.state, checkedPPS = [];
@@ -341,19 +343,27 @@ _setFilter() {
               {drop}
             </div>
           </div>
+          
         <div className="filterWrapper"> 
         <div className="gorToolBarDropDown">
         <div className="gor-button-wrap">
         <div className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
-        <button className={this.props.ppsFilterState?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
+        {showFilterPPS?<button className={this.props.ppsFilterState?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
           <div className="gor-manage-task"/>
           <FormattedMessage id="order.table.filterLabel" description="button label for filter" 
           defaultMessage ="Filter data"/>
-         </button>
+         </button>:""}
        </div>
         </div>     
         </div>
        </div>
+
+          {/*Filter Summary*/}
+          <FilterSummary isFilterApplied={this.props.isFilterApplied} responseFlag={this.props.responseFlag}  filterText={<FormattedMessage id="ppsList.filter.search.bar" description='total pps for filter search bar'
+                                                       defaultMessage='{total} Stations found'
+                                                       values={{total: sortedDataList.getSize()||0}}/>}
+                         refreshList={this.props.refreshList}
+                         refreshText={<FormattedMessage id="ppsList.filter.search.bar.showall" description="button label for show all" defaultMessage ="Show all Stations"/>}/>
 
       <Table
         rowHeight={50}

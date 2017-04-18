@@ -1,4 +1,4 @@
-import {RECIEVE_HEADER} from '../constants/frontEndConstants.js';
+import {RECIEVE_HEADER,RECEIVE_SHIFT_START_TIME} from '../constants/frontEndConstants.js';
 
 export  function headerData(state={},action){
 	switch (action.type) {
@@ -6,7 +6,12 @@ export  function headerData(state={},action){
 	    return Object.assign({}, state, {
         "headerInfo":action.data
       })
-      break;
+		break;
+    	case RECEIVE_SHIFT_START_TIME:
+            return Object.assign({}, state, {
+
+                "shiftStartTime":new Date(action.data.data).toLocaleTimeString()
+            })
 	  default:
 	    return state
   }

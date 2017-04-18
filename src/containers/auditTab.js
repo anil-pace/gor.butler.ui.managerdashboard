@@ -7,7 +7,9 @@ import {AUDIT_URL,FILTER_AUDIT_ID} from '../constants/configConstants';
 import {getAuditData,setAuditRefresh} from '../actions/auditActions';
 import AuditTable from './auditTab/auditTable';
 import {getPageData} from '../actions/paginationAction';
-import {AUDIT_RETRIEVE,GET,APP_JSON,GOR_COMPLETED_STATUS,LOCATION,AUDIT_SKU_TEXT,AUDIT_LOCATION_TEXT,AUDIT_ANY_TEXT,SPECIFIC_LOCATION_ID,SPECIFIC_SKU_ID,AUDIT_TYPE,SKU,AUDIT_PENDING_APPROVAL,AUDIT_RESOLVED,AUDIT_CREATED, AUDIT_LINE_REJECTED,AUDIT_ISSUES_STATUS,AUDIT_BY_PDFA,AUDIT_TASK_ID,sortAuditHead,sortOrder} from '../constants/frontEndConstants';
+import {AUDIT_RETRIEVE,GET,APP_JSON,GOR_COMPLETED_STATUS,LOCATION,AUDIT_PARAM_TYPE,AUDIT_PARAM_VALUE,SPECIFIC_LOCATION_ID,
+  SPECIFIC_SKU_ID,AUDIT_TYPE,SKU,AUDIT_PENDING_APPROVAL,AUDIT_RESOLVED,AUDIT_CREATED, AUDIT_LINE_REJECTED,AUDIT_ISSUES_STATUS,
+  AUDIT_BY_PDFA,AUDIT_TASK_ID,AUDIT_STATUS,sortAuditHead,sortOrder,ALL,ANY} from '../constants/frontEndConstants';
 import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,SEARCH_AUDIT_URL,GIVEN_PAGE,GIVEN_PAGE_SIZE} from '../constants/configConstants';
 import {setAuditSpinner} from '../actions/auditActions';
 import { defineMessages } from 'react-intl';
@@ -102,7 +104,7 @@ shouldComponentUpdate(nextProps) {
   }
 
 componentDidMount() {
-  var data = {};
+  var data = this.props.auditFilterState;
   data.selected = 1;
   this.handlePageClick(data);
 
@@ -243,45 +245,52 @@ _processAuditData(data,nProps){
   return auditDetails;
 }
 
-
+_mappingString(selectvalue){
+    switch(selectvalue){
+                    case "sku":
+                    return SPECIFIC_SKU_ID;
+                    case "location":
+                    return SPECIFIC_LOCATION_ID;
+                    default:
+                    return "any";
+                };
+}
 
 handlePageClick(data){
-  var url, appendSortUrl = "",appendTextFilterUrl="", makeDate;
+  var url, appendSortUrl = "",appendTextFilterUrl="", makeDate,inc=0,value=[],paramValue="",selectedAuditType="";
   var currentDate = new Date();
   var filterApplied = false;
-  let skuText="",arr=[],selectvalue;
+  var skuText="",arr=[],selectvalue;
   makeDate = addDateOffSet(currentDate,-30);
   
-
+//If user select both we are making it Any for backend support
   if(data.searchQuery && data.tokenSelected[AUDIT_TYPE]) {
+   selectvalue=(data.tokenSelected[AUDIT_TYPE].length===2)?ANY:data.tokenSelected[AUDIT_TYPE][0];
+    skuText=AUDIT_PARAM_TYPE+selectvalue;
+    selectedAuditType=this._mappingString(selectvalue);
 
-    if(data.tokenSelected[AUDIT_TYPE][0]!='all')
-    {
-    if(data.tokenSelected[AUDIT_TYPE].length===2)
-    {
-      selectvalue='all';
-    }
-    else
-    {
-      selectvalue=data.tokenSelected[AUDIT_TYPE][0];
-    }
-    switch(selectvalue)
-    {
-    case 'sku':
-    skuText=AUDIT_SKU_TEXT+data.searchQuery[SPECIFIC_SKU_ID]+'"';
-    break;
-    case 'location':
-    skuText=AUDIT_LOCATION_TEXT+data.searchQuery[SPECIFIC_LOCATION_ID]+'"';
-    break;
-    case 'all':
-    skuText=AUDIT_ANY_TEXT+data.searchQuery[SPECIFIC_SKU_ID]+'","'+data.searchQuery[SPECIFIC_LOCATION_ID]+'"]';
-    }
-  
-  }
+//Pushing the audit type into array to make it generic
+   for(let propt in data.searchQuery){
+if(selectedAuditType==='any'){
+(propt!==AUDIT_TASK_ID && data.searchQuery[propt]!=="")?value.push(data.searchQuery[propt]):'';
 }
-  if(data.tokenSelected && data.tokenSelected["STATUS"][0]!='all') {
+else
+{
+  (data.searchQuery[propt]!=="" && propt==selectedAuditType)?value.push(data.searchQuery[propt]):'';
+}
+      
+      }
+//Formatting the param value for single and multiple type       
+      if(value.length)
+      {
+      paramValue=(value.length>1 || selectvalue===ANY)?"['"+value.join("','")+"']":"'"+value[0]+"'";
+        skuText=skuText+AUDIT_PARAM_VALUE+paramValue;
+      }
+  }
+//formating the audit status 
+  if(data.tokenSelected && data.tokenSelected["STATUS"][0]!==ALL) {
     let statusToken=data.tokenSelected["STATUS"];
-    skuText=skuText+'&audit_status='+"['"+statusToken.join("','")+"']";
+    skuText=skuText+AUDIT_STATUS+"['"+statusToken.join("','")+"']";
   }
 
    if(data.searchQuery && data.searchQuery[AUDIT_TASK_ID]) {
@@ -364,8 +373,9 @@ render(){
               refreshData={this.handlePageClick.bind(this)}
               setAuditFilter={this.props.auditFilterDetail} auditState={auditState}
               setFilter={this.props.showTableFilter} showFilter={this.props.showFilter}
-              isFilterApplied={this.props.isFilterApplied}
+              isFilterApplied={this.props.isFilterApplied}  auditFilterStatus={this.props.auditFilterStatus}
               responseFlag={this.props.auditSpinner}/>
+
   
   
   
@@ -401,6 +411,8 @@ function mapStateToProps(state, ownProps){
     timeOffset: state.authLogin.timeOffset,
     showFilter: state.filterInfo.filterState || false,
     isFilterApplied: state.filterInfo.isFilterApplied || false,
+    auditFilterStatus:state.filterInfo.auditFilterStatus|| false,
+    auditFilterState: state.filterInfo.auditFilterState ||{}
   };
 }
 
@@ -420,6 +432,32 @@ var mapDispatchToProps = function(dispatch){
 
 AuditTab.contextTypes ={
  intl:React.PropTypes.object.isRequired
+}
+AuditTab.PropTypes={
+orderFilter: React.PropTypes.string,
+auditSortHeader: React.PropTypes.string,
+auditSortHeaderState:React.PropTypes.array,
+totalAudits: React.PropTypes.number,
+auditSpinner: React.PropTypes.bool,
+auditDetail: React.PropTypes.array,
+totalPage:React.PropTypes.number,
+auditRefresh:React.PropTypes.bool,
+intlMessages: React.PropTypes.string,
+auth_token: React.PropTypes.object,
+timeOffset: React.PropTypes.number,
+showFilter: React.PropTypes.bool,
+isFilterApplied: React.PropTypes.bool,
+auditFilterStatus:React.PropTypes.bool,
+auditFilterState:React.PropTypes.object,
+auditFilterDetail:React.PropTypes.func,
+auditHeaderSort:React.PropTypes.func,
+auditHeaderSortOrder:React.PropTypes.func,
+setAuditSpinner:React.PropTypes.func,
+getAuditData: React.PropTypes.func,
+getPageData: React.PropTypes.func,
+setAuditRefresh:React.PropTypes.func,
+showTableFilter:React.PropTypes.func,
+filterApplied: React.PropTypes.func
 }
 
 
