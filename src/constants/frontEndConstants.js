@@ -218,7 +218,7 @@ export const SYS_SUB_TAB_ROUTE_MAP={
 	[ORDER_LIST]:"orderlist"
 
 }
-
+export const SHOW_UTILITY_TAB = false;
 /*Constant for time on header*/
 export const HEADER_START_TIME = ' 09:00:15 (IST)'
 

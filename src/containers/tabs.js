@@ -10,7 +10,7 @@ import {setAuditSpinner} from '../actions/auditActions';
 import {setButlerSpinner} from '../actions/spinnerAction';
 import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP,INVENTORY,AUDIT,
 FULFILLING_ORDERS,GOR_OFFLINE,GOR_ONLINE,GOR_NORMAL_TAB,GOR_FAIL,
-SOFT_MANUAL,HARD,SOFT,UTILITIES} from '../constants/frontEndConstants';
+SOFT_MANUAL,HARD,SOFT,UTILITIES,SHOW_UTILITY_TAB} from '../constants/frontEndConstants';
 import { FormattedMessage,FormattedNumber } from 'react-intl';
 import OperationStop from '../containers/emergencyProcess/OperationStop';
 import EmergencyRelease from '../containers/emergencyProcess/emergencyRelease'; 
@@ -191,7 +191,7 @@ class Tabs extends React.Component{
 	render(){
 
   let items=this._parseStatus();
-  var showUtilityTab = true;              
+  var showUtilityTab = SHOW_UTILITY_TAB;              
 		return (
 		<div className="gor-tabs gor-main-block">
 		<Link to="/overview" onClick = {this.handleTabClick.bind(this,OVERVIEW)}>
