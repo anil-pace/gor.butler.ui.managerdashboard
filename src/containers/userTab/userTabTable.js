@@ -10,6 +10,7 @@ import EditUser from './editUser';
 import DeleteUser from './deleteUser';
 import {GOR_USER_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
 import UserFilter from './userFilter';
+import FilterSummary from '../../components/tableFilter/filterSummary'
 
 class UserDataTable extends React.Component {
   constructor(props) {
@@ -124,7 +125,7 @@ shouldComponentUpdate(nextProps) {
     });
    this.props.sortHeaderOrder(sortDir);
    this.props.sortHeaderState(columnKey);
-  } 
+  }
 
 
 
@@ -198,6 +199,7 @@ shouldComponentUpdate(nextProps) {
  
 
   render() {
+    var showFilterUser = true;
     let updateStatusIntl="";
     let filterHeight = screen.height-190-50;
     let {sortedDataList, colSortDirs,columnWidths} = this.state;
@@ -237,16 +239,17 @@ shouldComponentUpdate(nextProps) {
                   </div>
             </div>            
           </div>
+          
 
          <div className="filterWrapper"> 
         <div className="gorToolBarDropDown">
         <div className="gor-button-wrap">
         <div className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
-        <button className={this.props.userFilterStatus?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
+        {showFilterUser?<button className={this.props.userFilterStatus?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
           <div className="gor-manage-task"/>
           <FormattedMessage id="order.table.filterLabel" description="button label for filter" 
           defaultMessage ="Filter data"/>
-         </button>
+         </button>:""}
        </div>
         </div>     
         </div>
@@ -255,6 +258,13 @@ shouldComponentUpdate(nextProps) {
 
 
        </div>
+          {/*Filter Summary*/}
+          <FilterSummary isFilterApplied={this.props.isFilterApplied} responseFlag={this.props.responseFlag} filterText={<FormattedMessage id="userList.filter.search.bar" description='total users for filter search bar'
+                                                                                                                                           defaultMessage='{totalUsers} Users found'
+                                                                                                                                           values={{totalUsers: sortedDataList.getSize()||0}}/>}
+                         refreshList={this.props.refreshList}
+                         refreshText={<FormattedMessage id="userList.filter.search.bar.showall" description="button label for show all" defaultMessage ="Show all Users"/>}/>
+
 
       <Table
         rowHeight={50}

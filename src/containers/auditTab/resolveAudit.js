@@ -68,8 +68,8 @@ class ResolveAudit extends React.Component{
       else{
         auditData.status = data[i].status;
       }
-      if(data[i].pdfa_audit_attributes && auditLines[0].pdfa_audit_attributes[Object.keys(auditLines[0].pdfa_audit_attributes)]) {
-        auditData.attributeDetail = auditLines[0].pdfa_audit_attributes[Object.keys(auditLines[0].pdfa_audit_attributes)];  //assuming only one attributes is there as of now (kerry specific) 
+      if(data[i].pdfa_audit_attributes && auditLines[i].pdfa_audit_attributes[Object.keys(auditLines[0].pdfa_audit_attributes)]) {
+        auditData.attributeDetail = auditLines[i].pdfa_audit_attributes[Object.keys(auditLines[0].pdfa_audit_attributes)];  //assuming only one attributes is there as of now (kerry specific) 
       }
       processedData.push(auditData);
       auditData =  {};
@@ -130,7 +130,6 @@ class ResolveAudit extends React.Component{
       if(slotIdHashMap[columnSlotId]>=0) {
         slotIdGrouping[columnSlotId].slotIdDataLine.push(auditDataLine[i]);
         actualMapping[auditDataLine[i].auditLineId] = i;
-        //slotIdGrouping.totalLines = slotIdGrouping.totalLines + 1;
       }
 
       else {
@@ -139,7 +138,6 @@ class ResolveAudit extends React.Component{
         slotIdData.slotIdDataLine.push(auditDataLine[i]);
         slotIdGrouping[columnSlotId] = slotIdData;
         actualMapping[auditDataLine[i].auditLineId] = i;
-        //slotIdGrouping.totalLines = slotIdGrouping.totalLines + 2;
         slotIdData={slotId:"", slotIdDataLine:[]}
       }
     }
@@ -182,7 +180,7 @@ class ResolveAudit extends React.Component{
         auditDataList.newData=data[key].slotIdDataLine;
         resolveTable =<div> 
                       <div className="gor-auditresolve-pdfa-slot-header">
-                        <span>{inSlot}</span>
+                        <span>{inSlot} </span>
                         <span><b>{key}:</b></span>
                       </div>
                       <Table

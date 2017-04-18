@@ -22,6 +22,7 @@ export const WS_END="WS_END";
 export const WS_MOCK="WS_MOCK";
 export const DATA_SUBSCRIPTION_PACKET="DATA_SUBSCRIPTION_PACKET";
 export const SET_DEFAULT_RANGE="SET_DEFAULT_RANGE";
+export const TEXTBOX_STATUS="TEXTBOX_STATUS";
 
 /* Header constants */
 export const GET_OVERVIEW="get_overview";
@@ -75,6 +76,7 @@ export const ORDERS = "ORDERS";
 export const INVENTORY = "INVENTORY";
 export const USERS = "USERS";
 export const AUDIT = "AUDIT";
+export const UTILITIES = "UTILITIES";
 export const NOTIFICATION_TAB = "Notification";
 export const BUTLERBOTS_TAB = "Butler Bots";
 export const CHARGING_TAB = "Charging Station";
@@ -204,7 +206,8 @@ export const TAB_ROUTE_MAP = {
 		[ORDERS] : "orders",
 		[INVENTORY] : "inventory",
 		[USERS] : "users",
-		[AUDIT] : "audit"
+		[AUDIT] : "audit",
+		[UTILITIES] : "utilities"
 	}
 export const SYS_SUB_TAB_ROUTE_MAP={
 	[NOTIFICATION] : "notification",
@@ -391,12 +394,13 @@ export const AUDIT_UNRESOLVED = "Unresolved";
 export const AUDIT_LINE_REJECTED  = "audit_rejected";
 export const AUDIT_REJECTED_STATUS = "Rejected";
 export const AUDIT_RESOLVED_STATUS = "Resolved";
-export const AUDIT_SKU_TEXT = '&audit_param_type=sku&audit_param_value="';
-export const AUDIT_LOCATION_TEXT = '&audit_param_type=location&audit_param_value="';
-export const AUDIT_ANY_TEXT = '&audit_param_type=any&audit_param_value=["';
+export const AUDIT_PARAM_TYPE = '&audit_param_type=';
+export const AUDIT_PARAM_VALUE = '&audit_param_value=';
+export const AUDIT_STATUS = '&audit_status=';
 export const AUDIT_TYPE="AUDIT TYPE";
 export const SPECIFIC_SKU_ID='SPECIFIC SKU ID';
 export const SPECIFIC_LOCATION_ID='SPECIFIC LOCATION ID';
+export const ISSUE_FOUND='issueFound';
 //Icons
 export const PICK_ICON=' iPick';
 export const STOCK_ICON="iStock";
@@ -442,19 +446,24 @@ export const AUDIT_REJECTED = "auditline_rejected";
 //search dropdown constants
 export const SHOW_ALL_ENTRIES = "available";
 export const SHOW_SELECTED_ENTRIES = "checked";
-export const ALL='all'
-
+export const ALL='all';
+export const ANY='any';
 //table filter
 export const SHOW_FILTER = "SHOW_FILTER";
 export const IS_FILTER_APPLIED = "IS_FILTER_APPLIED";
 export const TOGGLE_BUTTON = "TOGGLE_BUTTON";
 export const TOGGLE_BUTTON_BOT = "TOGGLE_BUTTON_BOT";
 export const PPS_FILTER_VALUE = "PPS_FILTER_VALUE";
+export const AUDIT_FILTER_VALUE = "AUDIT_FILTER_VALUE";
+export const ORDER_FILTER_VALUE = "ORDER_FILTER_VALUE";
 export const CHARGING_FILTER_VALUE = "CHARGING_FILTER_VALUE";
 export const WAVE_FILTER_VALUE = "WAVE_FILTER_VALUE";
 export const USER_FILTER_VALUE = "USER_FILTER_VALUE";
 
 export const BUTLER_FILTER_STATE = "BUTLER_FILTER_STATE";
+export const AUDIT_FILTER_STATE = "AUDIT_FILTER_STATE";
+export const ORDER_FILTER_STATE = "ORDER_FILTER_STATE";
+
 export const CHARGINGSTATION_FILTER_STATE = "CHARGINGSTATION_FILTER_STATE";
 export const PPS_FILTER_STATE = "PPS_FILTER_STATE";
 export const WAVE_FILTER_STATE = "WAVE_FILTER_STATE";
@@ -492,3 +501,4 @@ export const filterMarks={
 export const MODAL_STATUS = "MODAL_STATUS";
 export const MODAL_RESET = "MODAL_RESET";
 export const CHECKLIST = "CHECKLIST";
+export const RECEIVE_SHIFT_START_TIME = "RECEIVE_SHIFT_START_TIME";

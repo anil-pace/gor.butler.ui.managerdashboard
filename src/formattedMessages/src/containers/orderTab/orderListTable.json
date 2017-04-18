@@ -82,7 +82,7 @@
   {
     "id": "orderlist.filter.search.bar",
     "description": "total order for filter search bar",
-    "defaultMessage": "{totalOrder} Orders found"
+    "defaultMessage": "{total} Orders found"
   },
   {
     "id": "orderlist.filter.search.bar.showall",
