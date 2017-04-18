@@ -3,6 +3,7 @@ import UtilityTile from '../components/utilityComponents/utilityTile'
 import UploadDownBar from '../components/utilityComponents/uploadDownBar'
 import DropdownTable from '../components/dropdown/dropdownTable'
 import UtilityDropDown from '../components/utilityComponents/utilityDropDownWrap'
+
 class UtilityTab extends React.Component{
 	constructor(props) 
 	{
@@ -11,8 +12,8 @@ class UtilityTab extends React.Component{
     }
 
     _renderUploadDataTile() {
-    	var barData = {h1:"Expired Items", h2:"(Recall all the expired items)"}
-    	var recallBar = <UploadDownBar barData={barData}/>;
+    	var barData = {h1:"Expired Items", h2:"(Recall all the expired items)", buttonText: "RECALL"}
+    	var recallBar = <UploadDownBar barData={barData} barAction={this._requestExpiredItems.bind(this)}/>;
     	return recallBar;
     }
 
@@ -58,6 +59,19 @@ class UtilityTab extends React.Component{
     _downloadGRN() {
     	// integration with backend pending
     	console.log("download grn")
+    }
+
+    _requestExpiredItems() {
+        var data = {}, filterField = {};
+        data["filter_data"] = [];
+        filterField.field_name = "expiry_date";
+        filterField.operator = ">=";
+        filterField.field_value = "2014-01-15";
+        data["filter_data"].push(filterField);
+        data["multi_order"] = "true";
+        data["prefix"] = "something";
+
+        console.log(data)
     }
 
 	render(){
