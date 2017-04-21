@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
-import {auditFilterToggle,filterApplied,auditfilterState,toggleAuditFilter} from '../../actions/filterAction';
+import {auditFilterToggle,filterApplied,auditfilterState,toggleAuditFilter,setFilterApplyFlag} from '../../actions/filterAction';
 import { connect } from 'react-redux'; 
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
@@ -107,6 +107,7 @@ _applyFilter() {
   this.props.auditfilterState(filterState);
   this.props.refreshOption(this.state);
   this.props.toggleAuditFilter(true);
+  this.props.setFilterApplyFlag(true);
 
 }
 
@@ -118,10 +119,11 @@ _clearFilter() {
   this.props.setTextBoxStatus(obj);
   this.props.refreshOption(clearState);
   this.props.toggleAuditFilter(false);
+   this.props.setFilterApplyFlag(true);
 }
 
 render(){
-  var noOrder = this.props.totalAudits?false:true;
+   var noOrder = this.props.noorderFlag;
   var auditSearchField = this._processAuditSearchField();
   var auditFilterToken = this._processFilterToken();
   return (
@@ -146,6 +148,7 @@ function mapStateToProps(state, ownProps){
     auditToggleFilter: state.filterInfo.auditToggleFilter || false,
     auditSpinner: state.spinner.auditSpinner || false,
     totalAudits: state.recieveAuditDetail.totalAudits || 0,
+    noorderFlag:state.recieveAuditDetail.emptyResponse || false,
     auditFilterState: state.filterInfo.auditFilterState,
     auditFilterStatus: state.filterInfo.auditFilterStatus,
     textboxStatus:  state.auditInfo.textBoxStatus  || {}
@@ -158,9 +161,10 @@ var mapDispatchToProps = function(dispatch){
     filterApplied: function(data){dispatch(filterApplied(data));},
     setTextBoxStatus: function(data){dispatch(setTextBoxStatus(data));},
     auditfilterState: function(data){dispatch(auditfilterState(data));},
-    toggleAuditFilter: function(data){dispatch(toggleAuditFilter(data));}
-  }
-};
+    toggleAuditFilter: function(data){dispatch(toggleAuditFilter(data));},
+     setFilterApplyFlag: function (data) {dispatch(setFilterApplyFlag(data));}
+}
+}
 
 AuditFilter.PropTypes={
   auditToggleFilter:React.PropTypes.bool,
@@ -169,7 +173,12 @@ AuditFilter.PropTypes={
   auditFilterToggle:React.PropTypes.func,
   filterApplied:React.PropTypes.func,
   auditFilterState:React.PropTypes.object,
-  auditFilterStatus:React.PropTypes.bool
+  auditFilterStatus:React.PropTypes.bool,
+  setFilterApplyFlag:React.PropTypes.func,
+  toggleAuditFilter:React.PropTypes.func,
+  auditfilterState:React.PropTypes.func,
+  noorderFlag:React.PropTypes.bool,
+  setTextBoxStatus:React.PropTypes.func
 };
 
 

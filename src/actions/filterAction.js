@@ -1,7 +1,8 @@
 import { SHOW_FILTER ,IS_FILTER_APPLIED,BUTLER_FILTER_STATE,CHARGINGSTATION_FILTER_STATE,PPS_FILTER_STATE,WAVE_FILTER_STATE,
 	USER_FILTER_STATE,TOGGLE_BUTTON,TOGGLE_BUTTON_BOT,PPS_FILTER_VALUE,CHARGING_FILTER_VALUE,WAVE_FILTER_VALUE,
 	USER_FILTER_VALUE,AUDIT_FILTER_STATE,AUDIT_FILTER_VALUE,ORDER_FILTER_STATE,ORDER_FILTER_VALUE,BOT_TOGGLE_FILTER,
-	PPS_TOGGLE_FILTER,CS_TOGGLE_FILTER,WAVES_TOGGLE_FILTER,ORDERS_TOGGLE_FILTER,AUDIT_TOGGLE_FILTER,USER_TOGGLE_FILTER} from '../constants/frontEndConstants'
+	PPS_TOGGLE_FILTER,CS_TOGGLE_FILTER,WAVES_TOGGLE_FILTER,ORDERS_TOGGLE_FILTER,AUDIT_TOGGLE_FILTER,USER_TOGGLE_FILTER,
+FILTER_APPLY_FLAG} from '../constants/frontEndConstants'
 
 //This action is use to update the filter state
 export function showTableFilter(data){
@@ -185,3 +186,14 @@ export function userfilterState(data){
   	}
 
 }
+
+//This action is use to set the bool value so that we can show/hide the filter after clicking on apply button (if data available)
+export function setFilterApplyFlag(data){
+	return {
+		type: FILTER_APPLY_FLAG,
+		data
+  	}
+
+}
+
+

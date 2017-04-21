@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
-import {BotFilterToggle,filterApplied,butlerfilterState,toggleBotButton} from '../../actions/filterAction';
+import {BotFilterToggle,filterApplied,butlerfilterState,toggleBotButton,setFilterApplyFlag} from '../../actions/filterAction';
 import {updateSubscriptionPacket} from '../../actions/socketActions';
 import { connect } from 'react-redux'; 
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
@@ -98,6 +98,9 @@ class ButlerBotFilter extends React.Component{
       this.props.filterApplied(!this.props.isFilterApplied);
       this.props.toggleBotButton(true);
       this.props.setButlerFilterSpinner(true);
+      this.props.setFilterApplyFlag(true);
+
+
     }
 
     _clearFilter() {
@@ -111,12 +114,13 @@ class ButlerBotFilter extends React.Component{
         this.props.filterApplied(!this.props.isFilterApplied);
         this.props.toggleBotButton(false);
         this.props.setButlerFilterSpinner(true);
-        
+        this.props.setFilterApplyFlag(true);
     }
 
 	render(){
     let butlerDetails = this.props.butlerDetail;
-         let noOrder = butlerDetails.butlerDetail && butlerDetails.butlerDetail.length?false:true;
+         //let noOrder = butlerDetails.butlerDetail && butlerDetails.butlerDetail.length?false:true;
+         var noOrder = butlerDetails.emptyResponse;
         let butlerSearchField = this._processButlerSearchField();
         let butlerFilterToken = this._processFilterToken();
 		return (
@@ -156,7 +160,9 @@ var mapDispatchToProps = function(dispatch){
     updateSubscriptionPacket: function(data){dispatch(updateSubscriptionPacket(data));},
     butlerfilterState: function(data){dispatch(butlerfilterState(data));},
     toggleBotButton: function(data){dispatch(toggleBotButton(data));},
-    setButlerFilterSpinner: function(data){dispatch(setButlerFilterSpinner(data));}
+    setButlerFilterSpinner: function(data){dispatch(setButlerFilterSpinner(data));},
+    setFilterApplyFlag: function (data) {dispatch(setFilterApplyFlag(data));
+        }
   } 
 };
 ButlerBotFilter.PropTypes={
@@ -170,7 +176,8 @@ BotFilterToggle:React.PropTypes.func,
 filterApplied: React.PropTypes.func,
 updateSubscriptionPacket:React.PropTypes.func,
 butlerfilterState:React.PropTypes.func,
-toggleBotButton:React.PropTypes.func
+toggleBotButton:React.PropTypes.func,
+setFilterApplyFlag:React.PropTypes.func
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(ButlerBotFilter) ;

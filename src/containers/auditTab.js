@@ -17,7 +17,7 @@ import {auditHeaderSortOrder, auditHeaderSort, auditFilterDetail} from '../actio
 import {getDaysDiff} from '../utilities/getDaysDiff';
 import {addDateOffSet} from '../utilities/processDate'; 
 import GorPaginate from '../components/gorPaginate/gorPaginate';
-import {auditFilterToggle,filterApplied} from '../actions/filterAction';
+import {auditFilterToggle,filterApplied,setFilterApplyFlag} from '../actions/filterAction';
 //Mesages for internationalization
 const messages = defineMessages({
   auditCreatedStatus: {
@@ -328,6 +328,7 @@ else
 
 
 render(){
+  var  emptyResponse=this.props.emptyResponse;
   var renderTab = <div/>,
   timeOffset = this.props.timeOffset || "",
   headerTimeZone = (this.context.intl.formatDate(Date.now(),
@@ -374,7 +375,11 @@ render(){
               setAuditFilter={this.props.auditFilterDetail} auditState={auditState}
               setFilter={this.props.auditFilterToggle} auditToggleFilter={this.props.auditToggleFilter}
               isFilterApplied={this.props.isFilterApplied}  auditFilterStatus={this.props.auditFilterStatus}
-              responseFlag={this.props.auditSpinner}/>
+              responseFlag={this.props.auditSpinner}      filterapplyflag={this.props.filterapplyflag}
+              emptyResponse={emptyResponse}
+              setFilterApplyFlag={this.props.setFilterApplyFlag}/>
+
+
 
   
   
@@ -404,6 +409,7 @@ function mapStateToProps(state, ownProps){
     totalAudits: state.recieveAuditDetail.totalAudits || 0,
     auditSpinner: state.spinner.auditSpinner || false,
     auditDetail: state.recieveAuditDetail.auditDetail || [],
+    emptyResponse: state.recieveAuditDetail.emptyResponse || false,
     totalPage: state.recieveAuditDetail.totalPage || 0,
     auditRefresh:state.recieveAuditDetail.auditRefresh || false,  
     intlMessages: state.intl.messages,
@@ -412,7 +418,8 @@ function mapStateToProps(state, ownProps){
     auditToggleFilter: state.filterInfo.auditToggleFilter || false,
     isFilterApplied: state.filterInfo.isFilterApplied || false,
     auditFilterStatus:state.filterInfo.auditFilterStatus|| false,
-    auditFilterState: state.filterInfo.auditFilterState ||{}
+    auditFilterState: state.filterInfo.auditFilterState ||{},
+    filterapplyflag:state.filterInfo.filterapplyflag|| false
   };
 }
 
@@ -426,7 +433,8 @@ var mapDispatchToProps = function(dispatch){
     getPageData: function(data){ dispatch(getPageData(data)); },
     setAuditRefresh: function(){dispatch(setAuditRefresh());},
     auditFilterToggle: function(data){dispatch(auditFilterToggle(data));},
-    filterApplied: function(data){dispatch(filterApplied(data));}
+    filterApplied: function(data){dispatch(filterApplied(data));},
+     setFilterApplyFlag: function (data) {dispatch(setFilterApplyFlag(data));}
   }
 };
 
@@ -457,7 +465,9 @@ getAuditData: React.PropTypes.func,
 getPageData: React.PropTypes.func,
 setAuditRefresh:React.PropTypes.func,
 auditFilterToggle:React.PropTypes.func,
-filterApplied: React.PropTypes.func
+filterApplied: React.PropTypes.func,
+setFilterApplyFlag:React.PropTypes.func,
+filterapplyflag:React.PropTypes.bool
 }
 
 

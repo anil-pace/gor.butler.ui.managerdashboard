@@ -12,7 +12,7 @@ import {stringConfig} from '../../constants/backEndConstants';
 import {orderHeaderSortOrder, orderHeaderSort, orderFilterDetail} from '../../actions/sortHeaderActions';
 import {getDaysDiff} from '../../utilities/getDaysDiff';
 import GorPaginate from '../../components/gorPaginate/gorPaginate';
-import {ordersFilterToggle,filterApplied} from '../../actions/filterAction';
+import {ordersFilterToggle,filterApplied,setFilterApplyFlag} from '../../actions/filterAction';
 const messages = defineMessages ({
   inProgressStatus:{
     id: 'orderList.progress.status',
@@ -51,17 +51,10 @@ class OrderListTab extends React.Component{
     this.refresh(data);
   }
 
-  shouldComponentUpdate(nextProps) {
-    if((nextProps.orderData.ordersDetail && !nextProps.orderData.ordersDetail.length)){
-      return false;
-    }
-    return true;
-  }
-
   processOrders(data, nProps) {
 
     var nProps = this;
-    var data = nProps.props.orderData.ordersDetail;
+    var data = nProps.props.orderData.ordersDetail ||{};
     let progress  = nProps.context.intl.formatMessage(messages.inProgressStatus);
     let completed  = nProps.context.intl.formatMessage(messages.completedStatus);
     let exception = nProps.context.intl.formatMessage(messages.exceptionStatus);
@@ -287,6 +280,7 @@ this.handlePageClick(data)
 
 
 render(){
+    var  emptyResponse=this.props.orderData.emptyResponse;
   var updateStatus,timeOffset,headerTimeZone;
   let updateStatusIntl,updateStatusText;
   if(this.props.filterOptions.lastUpdatedOn) {
@@ -339,6 +333,9 @@ render(){
                   ordersToggleFilter={this.props.ordersToggleFilter} responseFlag={this.props.orderListSpinner}
                   isFilterApplied={this.props.isFilterApplied}
                    orderFilterStatus={this.props.orderFilterStatus}
+                    emptyResponse={emptyResponse}
+                            filterapplyflag={this.props.filterapplyflag}
+                            setFilterApplyFlag={this.props.setFilterApplyFlag}
                   />
 
   <div className="gor-pageNum">
@@ -369,7 +366,9 @@ function mapStateToProps(state, ownProps){
     ordersToggleFilter: state.filterInfo.ordersToggleFilter || false,
     isFilterApplied: state.filterInfo.isFilterApplied || false,
     orderFilterStatus:state.filterInfo.orderFilterStatus,
-    orderFilterState: state.filterInfo.orderFilterState ||{}
+    orderFilterState: state.filterInfo.orderFilterState ||{},
+    filterapplyflag:state.filterInfo.filterapplyflag|| false
+
   };
 }
 
@@ -387,7 +386,8 @@ var mapDispatchToProps = function(dispatch){
     setOrderListSpinner: function(data){dispatch(setOrderListSpinner(data))},
     setCurrentPage: function(data){dispatch(setCurrentPage(data))},
     ordersFilterToggle: function(data){dispatch(ordersFilterToggle(data));},
-    filterApplied: function(data){dispatch(filterApplied(data));}
+    filterApplied: function(data){dispatch(filterApplied(data));},
+    setFilterApplyFlag: function (data) {dispatch(setFilterApplyFlag(data));}
   }
 };
 
@@ -421,7 +421,9 @@ setCurrentPage:React.PropTypes.func,
 ordersFilterToggle: React.PropTypes.func,
 filterApplied: React.PropTypes.func ,
 orderFilterStatus:React.PropTypes.bool,
-orderFilterState:React.PropTypes.object
+orderFilterState:React.PropTypes.object,
+setFilterApplyFlag:React.PropTypes.func,
+filterapplyflag:React.PropTypes.bool
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(OrderListTab) ;

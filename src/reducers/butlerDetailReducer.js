@@ -66,16 +66,30 @@ export  function butlerDetail(state={},action){
 	  case BUTLERS_DATA:
          var res, butlers ;
          res=action.data;
-         if(res.complete_data){
-             butlers = processButlersData(res.complete_data);
-
-          
+if(res.complete_data && res.complete_data.length)
+          {
+            butlers = processButlersData(res.complete_data);
+              return Object.assign({}, state, {
+                 "butlerDetail" : res.complete_data,
+                "emptyResponse" :false //This flag will update base on response data
+               })
+          }
+          else
+          {
            return Object.assign({}, state, {
-               "butlerDetail" : res.complete_data
+                 "emptyResponse" :true //This flag will update base on response data
           })
          }
+    
 
 	  default:
 	    return state
   }
 }
+
+
+
+
+
+
+

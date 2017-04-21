@@ -17,7 +17,7 @@ import {
     CSFilterToggle,
     filterApplied,
     chargingstationfilterState,
-    toggleChargingFilter
+    toggleChargingFilter,setFilterApplyFlag
 } from '../../actions/filterAction';
 import {updateSubscriptionPacket} from './../../actions/socketActions'
 import {wsOverviewData} from './../../constants/initData.js';
@@ -46,7 +46,7 @@ class ChargingStations extends React.Component {
     _processChargersData(data, nProps) {
         var chargerData = [], detail = {}, count = 0,
             nProps = this,
-            data = nProps.props.chargersDetail.chargersDetail,
+            data = nProps.props.chargersDetail.chargersDetail||{},
             CS, csId, botId, BUTLER;
 
         var priStatus = {"connected": 1, "disconnected": 2};
@@ -104,6 +104,7 @@ class ChargingStations extends React.Component {
     }
 
     render() {
+        var  emptyResponse=this.props.chargersDetail.emptyResponse;
         let updateStatusIntl = "";
         var itemNumber = 4, connectedBots = 0, manualMode = 0, automaticMode = 0,
             chargersState = {"connectedBots": "--", "manualMode": "--", "automaticMode": "--", "csConnected": 0},
@@ -155,7 +156,10 @@ class ChargingStations extends React.Component {
                                                lastUpdated={updateStatusIntl}
                                                csToggleFilter={this.props.csToggleFilter}
                                                setFilter={this.props.CSFilterToggle}
-                                               refreshList={this._refreshChargingStationList.bind(this)}/>
+                                               refreshList={this._refreshChargingStationList.bind(this)}
+                                               emptyResponse={emptyResponse}
+                                                 filterapplyflag={this.props.filterapplyflag}
+                                                setFilterApplyFlag={this.props.setFilterApplyFlag}/>
 
 
                     </div>
@@ -178,7 +182,8 @@ function mapStateToProps(state, ownProps) {
         csToggleFilter: state.filterInfo.csToggleFilter || false,
         isFilterApplied: state.filterInfo.isFilterApplied || false,
         chargingFilterStatus: state.filterInfo.chargingFilterStatus || false,
-        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData
+        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
+        filterapplyflag:state.filterInfo.filterapplyflag|| false
     };
 }
 
@@ -212,7 +217,9 @@ var mapDispatchToProps = function (dispatch) {
         toggleChargingFilter: function (data) {
             dispatch(toggleChargingFilter(data));
         },
-
+        setFilterApplyFlag: function (data) {
+            dispatch(setFilterApplyFlag(data));
+        }
     };
 }
 
@@ -234,7 +241,10 @@ ChargingStations.PropTypes = {
     csHeaderSortOrder: React.PropTypes.func,
     CSFilterToggle: React.PropTypes.func,
     filterApplied: React.PropTypes.func,
-    wsSubscriptionData: React.PropTypes.object
+    wsSubscriptionData: React.PropTypes.object,
+    setFilterApplyFlag:React.PropTypes.func,
+    filterapplyflag:React.PropTypes.bool,
+    emptyResponse:React.PropTypes.bool
 
 };
 

@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import {FormattedMessage} from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
-import {wavesFilterToggle, filterApplied, wavefilterState, toggleWaveFilter} from '../../actions/filterAction';
+import {wavesFilterToggle, filterApplied, wavefilterState, toggleWaveFilter,setFilterApplyFlag} from '../../actions/filterAction';
 import {updateSubscriptionPacket} from '../../actions/socketActions';
 import {connect} from 'react-redux';
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
@@ -10,7 +10,9 @@ import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
 import {setWavesFilterSpinner}  from '../../actions/spinnerAction';
 class WaveFilter extends React.Component {
+
     constructor(props) {
+var a=false;
         super(props);
         this.state = {
             tokenSelected: {"STATUS": ["any"]}, searchQuery: {},
@@ -25,7 +27,7 @@ class WaveFilter extends React.Component {
          */
         if (nextProps.filterState && JSON.stringify(this.state) !== JSON.stringify(nextProps.filterState)) {
             this.setState(nextProps.filterState)
-        }
+        }     
     }
 
     _closeFilter() {
@@ -86,7 +88,8 @@ class WaveFilter extends React.Component {
         this.props.filterApplied(!this.props.isFilterApplied);
         this.props.toggleWaveFilter(true);
         this.props.setWavesFilterSpinner(true);
-
+        this.props.setFilterApplyFlag(true);
+        
 
     }
 
@@ -100,12 +103,13 @@ class WaveFilter extends React.Component {
         this.props.filterApplied(!this.props.isFilterApplied);
         this.props.toggleWaveFilter(false);
         this.props.setWavesFilterSpinner(true);
+        this.props.setFilterApplyFlag(true);
     }
 
 
     render() {
         var waveDetail = this.props.waveData;
-        var noOrder = waveDetail.waveData && waveDetail.waveData.length ? false : true;
+       var noOrder = this.props.waveData.emptyResponse; 
         let waveSearchField = this._processWaveSearchField();
         let waveFilterToken = this._processFilterToken();
         return (
@@ -114,7 +118,6 @@ class WaveFilter extends React.Component {
                         clearFilter={this._clearFilter.bind(this)} // clearing sates of filter
                         searchField={waveSearchField}
                         filterTokenC1={waveFilterToken.column1token}
-
                         formSubmit={this._applyFilter.bind(this)} //passing function on submit
                         responseFlag={this.props.waveFIlterSpinner} // used for spinner of button
                         noDataFlag={noOrder} //messg to show in case of no data
@@ -160,6 +163,9 @@ let mapDispatchToProps = function (dispatch) {
         },
         setWavesFilterSpinner: function (data) {
             dispatch(setWavesFilterSpinner(data));
+        },
+        setFilterApplyFlag: function (data) {
+            dispatch(setFilterApplyFlag(data));
         }
 
     }
@@ -176,7 +182,8 @@ WaveFilter.PropTypes = {
     filterState: React.PropTypes.object,
     wsSubscriptionData: React.PropTypes.object,
     isFilterApplied: React.PropTypes.bool,
-    waveFilterStatus: React.PropTypes.bool
+    waveFilterStatus: React.PropTypes.bool,
+    setFilterApplyFlag:React.PropTypes.func
 };
 
 

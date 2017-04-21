@@ -6,7 +6,7 @@ export  function getOrderDetail(state={},action){
 
           var res, processedData,totalPage, totalOrders,itemsPerOrder,totalCompletedOrder,totalPendingOrder;
           res=action.data;
-          if(res.orders) {
+         if(res.orders.length) {
             totalOrders = res.total_size;
              totalPage = res.total_pages;
              itemsPerOrder = res.items_per_order;
@@ -14,6 +14,7 @@ export  function getOrderDetail(state={},action){
              totalPendingOrder = res.total_pending;
           
           return Object.assign({}, state, { 
+            "emptyResponse":false, //This flag will update base on response data
             "ordersDetail" : res.orders,
             "totalPage" : totalPage,
             "totalOrders" : totalOrders,
@@ -22,7 +23,18 @@ export  function getOrderDetail(state={},action){
             "totalPendingOrder":totalPendingOrder
           })
         }
+        else
+           {
+          return Object.assign({}, state, { 
+          "emptyResponse":true //This flag will update base on response data
+          })
+        }
+
+
+
     default:
       return state
   }
 }
+
+

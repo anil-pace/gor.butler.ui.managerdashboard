@@ -11,13 +11,21 @@ export  function recieveAuditDetail(state={},action){
           res=action.data.data[0];
           totalPage=Number(res.total_pages);
           totalAudit = Number(res.total_results);
-          if(res.audit_list) {
+          if(res.audit_list.length) {
           return Object.assign({}, state, { 
             "auditDetail" : res.audit_list,
             "totalPage" : totalPage,
-            "totalAudits" : totalAudit
+            "totalAudits" : totalAudit, 
+            "emptyResponse" :false
           })
           }
+           else
+          {
+           return Object.assign({}, state, {
+                 "emptyResponse" :true
+          })
+         }
+
           break;
     case REFRESH_AUDIT:
           return Object.assign({}, state, { 
@@ -34,3 +42,4 @@ export  function recieveAuditDetail(state={},action){
       return state
   }
 }
+

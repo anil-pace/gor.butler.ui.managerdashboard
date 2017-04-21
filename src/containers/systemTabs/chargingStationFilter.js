@@ -6,7 +6,7 @@ import {
     CSFilterToggle,
     filterApplied,
     chargingstationfilterState,
-    toggleChargingFilter
+    toggleChargingFilter,setFilterApplyFlag
 } from '../../actions/filterAction';
 import {updateSubscriptionPacket} from '../../actions/socketActions';
 import {connect} from 'react-redux';
@@ -25,6 +25,7 @@ class ChargingStationFilter extends React.Component {
 
 
     _closeFilter() {
+
         let filterState = !this.props.csToggleFilter;
         this.props.CSFilterToggle(false);
     }
@@ -116,6 +117,7 @@ class ChargingStationFilter extends React.Component {
         this.props.filterApplied(!this.props.isFilterApplied);
         this.props.toggleChargingFilter(true);
         this.props.setCsFilterSpinner(true);
+         this.props.setFilterApplyFlag(true);
     }
 
     _clearFilter() {
@@ -128,14 +130,15 @@ class ChargingStationFilter extends React.Component {
         this.props.filterApplied(!this.props.isFilterApplied);
         this.props.toggleChargingFilter(false);
         this.props.setCsFilterSpinner(true);
+        this.props.setFilterApplyFlag(true);
     }
 
 
     render() {
         let chargingDetails = this.props.chargerData;
-        let noOrder = chargingDetails.chargersDetail && chargingDetails.chargersDetail.length ? false : true;
+        //let noOrder = chargingDetails.chargersDetail && chargingDetails.chargersDetail.length ? false : true;
 
-
+ var noOrder = chargingDetails.emptyResponse
         let chargingSearchField = this._processChargingSearchField();
         let chargingFilterToken = this._processFilterToken();
         return (
@@ -190,8 +193,11 @@ var mapDispatchToProps = function (dispatch) {
         },
         setCsFilterSpinner: function (data) {
             dispatch(setCsFilterSpinner(data));
-        }
+        },
+        setFilterApplyFlag: function (data) {
+            dispatch(setFilterApplyFlag(data));
     }
+}
 };
 
 ChargingStationFilter.PropTypes = {
@@ -206,7 +212,8 @@ ChargingStationFilter.PropTypes = {
     filterApplied: React.PropTypes.func,
     updateSubscriptionPacket: React.PropTypes.func,
     chargingstationfilterState: React.PropTypes.func,
-    toggleChargingFilter: React.PropTypes.func
+    toggleChargingFilter: React.PropTypes.func,
+    setFilterApplyFlag:React.PropTypes.func
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChargingStationFilter) ;

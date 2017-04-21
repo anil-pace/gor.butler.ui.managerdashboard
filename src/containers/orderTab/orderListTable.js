@@ -53,6 +53,11 @@ class OrderListTable extends React.Component {
   }
 
   componentWillReceiveProps(nextProps){
+    if(nextProps.emptyResponse==false && this.props.filterapplyflag)
+        {
+            this.props.setFilter(false);
+            this.props.setFilterApplyFlag(false);
+        }
     if(nextProps.items === undefined) {
       this._dataList = new tableRenderer(0);
     }
@@ -120,9 +125,11 @@ class OrderListTable extends React.Component {
     })
   }
   _setFilter() {
-    var newState = !this.props.ordersToggleFilter;
+    if(this.props.items.length){
+    var newState = !this.props.ordersToggleFilter
     this.props.setFilter(newState)
    }
+ }
 
    _showAllOrder() {
     this.props.refreshOption();
@@ -182,11 +189,12 @@ class OrderListTable extends React.Component {
               <FormattedMessage id="order.table.buttonLable" description="button label for refresh" 
               defaultMessage ="Refresh Data"/>
             </button>
-        <button className={this.props.orderFilterStatus?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
-          <div className="gor-manage-task"/>
-          <FormattedMessage id="order.table.filterLabel" description="button label for filter" 
-          defaultMessage ="Filter data"/>
+
+ <button className={this.props.orderFilterStatus?"gor-filterBtn-applied":"gor-filterBtn-btn"} disabled={this.props.items && this.props.items.length?false:true} style={this.props.items && this.props.items.length?{cursor:'pointer'}:{cursor:'default'}} onClick={this._setFilter.bind(this)} >
+       {!this.props.orderFilterStatus?<div><div className="gor-manage-task"></div><FormattedMessage id="order.table.filterLabel" description="button label for filter" defaultMessage ="Filter data"/></div>:
+       <div><div className="gor-manage-task"></div><FormattedMessage id="order.table.showfilter" description="button label for filter" defaultMessage ="Show Filter"/></div>}
          </button>
+
        </div>
         </div>     
         </div>
@@ -343,7 +351,8 @@ OrderListTable.PropTypes={
   isFilterApplied:React.PropTypes.bool,
   timeZoneString:React.PropTypes.string,
   lastUpdated:React.PropTypes.string,
-  responseFlag:React.PropTypes.bool
+  responseFlag:React.PropTypes.bool,
+  setFilterApplyFlag:React.PropTypes.func
 };
 
 export default Dimensions()(OrderListTable);

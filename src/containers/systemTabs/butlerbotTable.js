@@ -37,14 +37,12 @@ class ButlerBotTable extends React.Component {
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
   }
 
-shouldComponentUpdate(nextProps) {
-    if((nextProps.items && !nextProps.items.length) && this.props.botToggleFilter === nextProps.botToggleFilter){
-      return false;
-    }
-    return true;
- }
-
   componentWillReceiveProps(nextProps) {
+    if(nextProps.emptyResponse==false && this.props.filterapplyflag)
+        {
+            this.props.setFilter(false);
+            this.props.setFilterApplyFlag(false);
+        }
     var items = nextProps.items || [];
     var temp = new Array(items ? items.length : 0).fill(false);
     this._dataList = new tableRenderer(items ? items.length : 0);
@@ -134,8 +132,10 @@ shouldComponentUpdate(nextProps) {
   }
 
   _setFilter() {
+      if(this.props.items.length){
     var newState = !this.props.botToggleFilter;
     this.props.setFilter(newState)
+  }
    }
   
   render() {
@@ -151,7 +151,6 @@ shouldComponentUpdate(nextProps) {
     let onlineBots = this.props.parameters.online;
     var containerHeight = this.props.containerHeight;
     var noData = <div/>;
-    var showFilterButler = true;
     
      if(totalBot === 0 || totalBot === undefined || totalBot === null) {
     noData =  <div className="gor-no-data"> <FormattedMessage id="butlerbot.table.noData" description="No data message for butlerbot table" 
@@ -180,11 +179,12 @@ shouldComponentUpdate(nextProps) {
         <div className="gorToolBarDropDown">
         <div className="gor-button-wrap">
         <div className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
-        {showFilterButler?<button className={this.props.botFilterStatus?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
-          <div className="gor-manage-task"/>
-          <FormattedMessage id="order.table.filterLabel" description="button label for filter" 
-          defaultMessage ="Filter data"/>
-         </button>:""}
+
+<button className={this.props.botFilterStatus?"gor-filterBtn-applied":"gor-filterBtn-btn"} disabled={this.props.items && this.props.items.length?false:true} style={this.props.items && this.props.items.length?{cursor:'pointer'}:{cursor:'default'}} onClick={this._setFilter.bind(this)} >
+       {!this.props.botFilterStatus?<div><div className="gor-manage-task"></div><FormattedMessage id="order.table.filterLabel" description="button label for filter" defaultMessage ="Filter data"/></div>:
+       <div><div className="gor-manage-task"></div><FormattedMessage id="order.table.showfilter" description="button label for filter" defaultMessage ="Show Filter"/></div>}
+         </button>
+
        </div>
         </div>     
         </div>
@@ -350,7 +350,11 @@ items:React.PropTypes.array,
   setFilter:React.PropTypes.func,
   containerHeight:React.PropTypes.number,
   parameters:React.PropTypes.object,
-  botFilterStatus:React.PropTypes.bool
+  botFilterStatus:React.PropTypes.bool,
+  setFilterApplyFlag:React.PropTypes.func,
+  filterapplyflag:React.PropTypes.bool,
+  setFilter:React.PropTypes.func,
+  emptyResponse:React.PropTypes.bool
 };
 
 

@@ -63,6 +63,11 @@ class AuditTable extends React.Component {
     componentWillReceiveProps(nextProps) {
 
         this.tableState(nextProps, this);
+       if(nextProps.emptyResponse==false && this.props.filterapplyflag)
+        {
+            this.props.setFilter(false);
+            this.props.setFilterApplyFlag(false);
+        }
     }
 
 
@@ -240,8 +245,10 @@ class AuditTable extends React.Component {
     }
 
     _setFilter() {
+         if(this.props.items.length){
         var newState = !this.props.auditToggleFilter;
         this.props.setFilter(newState)
+    }
     }
 
     _showAllAudit() {
@@ -312,12 +319,11 @@ class AuditTable extends React.Component {
                         </button>
                     </div>
                     <div className="gor-button-wrap">
-                        <button className={this.props.isFilterApplied ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
-                                onClick={this._setFilter.bind(this)}>
-                            <div className="gor-manage-task"/>
-                            <FormattedMessage id="audit.table.filterLabel" description="button label for filter"
-                                              defaultMessage="Filter data"/>
-                        </button>
+<button className={this.props.auditFilterStatus?"gor-filterBtn-applied":"gor-filterBtn-btn"} disabled={this.props.items && this.props.items.length?false:true} style={this.props.items && this.props.items.length?{cursor:'pointer'}:{cursor:'default'}} onClick={this._setFilter.bind(this)} >
+       {!this.props.auditFilterStatus?<div><div className="gor-manage-task"></div><FormattedMessage id="order.table.filterLabel" description="button label for filter" defaultMessage ="Filter data"/></div>:
+       <div><div className="gor-manage-task"></div><FormattedMessage id="order.table.showfilter" description="button label for filter" defaultMessage ="Show Filter"/></div>}
+         </button>
+
                     </div>
                 </div>
             </div>
@@ -529,7 +535,9 @@ AuditTable.PropTypes = {
     isFilterApplied: React.PropTypes.bool,
     responseFlag: React.PropTypes.bool,
     containerWidth: React.PropTypes.number,
-    totalAudits: React.PropTypes.number
+    totalAudits: React.PropTypes.number,
+    setFilterApplyFlag:React.PropTypes.func,
+    filterapplyflag:React.PropTypes.bool
 };
 
 

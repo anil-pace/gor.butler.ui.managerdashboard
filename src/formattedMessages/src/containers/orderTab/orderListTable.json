@@ -80,6 +80,11 @@
     "defaultMessage": "Filter data"
   },
   {
+    "id": "order.table.showfilter",
+    "description": "button label for filter",
+    "defaultMessage": "Show Filter"
+  },
+  {
     "id": "orderlist.filter.search.bar",
     "description": "total order for filter search bar",
     "defaultMessage": "{total} Orders found"

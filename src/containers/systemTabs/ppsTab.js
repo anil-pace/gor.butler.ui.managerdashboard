@@ -31,7 +31,8 @@ import {
     filterApplied,
     ppsfilterState,
     togglePPSFilter,
-    setDefaultRange
+    setDefaultRange,
+    setFilterApplyFlag
 } from '../../actions/filterAction';
 import {updateSubscriptionPacket} from './../../actions/socketActions'
 import {wsOverviewData} from './../../constants/initData.js';
@@ -62,7 +63,7 @@ class PPS extends React.Component {
         //TODO: codes need to be replaced after checking with backend
         var PPSData = [], detail = {}, ppsId, performance, totalUser = 0;
         var nProps = this;
-        var data = nProps.props.PPSDetail.PPStypeDetail;
+        var data = nProps.props.PPSDetail.PPStypeDetail||{};
         let PPS, ON, OFF, PERFORMANCE;
         let pick = nProps.context.intl.formatMessage(stringConfig.pick);
         let put = nProps.context.intl.formatMessage(stringConfig.put);
@@ -146,6 +147,7 @@ class PPS extends React.Component {
     }
 
     render() {
+        var  emptyResponse=this.props.PPSDetail.emptyResponse;
         let updateStatusIntl = "";
         let operationMode = {"pick": 0, "put": 0, "audit": 0, "notSet": 0};
         let data, operatorNum = 0, itemNumber = 5, ppsOn = 0, avgThroughput = 0;
@@ -206,6 +208,9 @@ class PPS extends React.Component {
                                   ppsToggleFilter={this.props.ppsToggleFilter}
                                   setFilter={this.props.PPSFilterToggle}
                                   refreshList={this._refreshPPSList.bind(this)}
+                                  emptyResponse={emptyResponse}
+                                  filterapplyflag={this.props.filterapplyflag}
+                                setFilterApplyFlag={this.props.setFilterApplyFlag}
                         />
                     </div>
                 </div>
@@ -231,6 +236,7 @@ function mapStateToProps(state, ownProps) {
         ppsFilterState: state.filterInfo.ppsFilterState || false,
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
         isFilterApplied: state.filterInfo.isFilterApplied || false,
+        filterapplyflag:state.filterInfo.filterapplyflag|| false
     };
 }
 
@@ -278,6 +284,9 @@ var mapDispatchToProps = function (dispatch) {
 
         setDefaultRange: function (data) {
             dispatch(setDefaultRange(data));
+        },
+        setFilterApplyFlag: function (data) {
+            dispatch(setFilterApplyFlag(data));
         }
     }
 };
@@ -306,7 +315,10 @@ PPS.PropTypes = {
     PPSFilterToggle: React.PropTypes.func,
     filterApplied: React.PropTypes.func,
     isFilterApplied: React.PropTypes.bool,
-    wsSubscriptionData: React.PropTypes.object
+    wsSubscriptionData: React.PropTypes.object,
+    setFilterApplyFlag:React.PropTypes.func,
+    filterapplyflag:React.PropTypes.bool,
+    emptyResponse:React.PropTypes.bool
 
 }
 

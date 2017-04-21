@@ -67,7 +67,7 @@ class UsersTab extends React.Component{
     }
   _processUserDetails() {
   var nProps = this,
-  data = nProps.props.userdetails
+  data = nProps.props.userdetails ||{};
   let operator  = nProps.context.intl.formatMessage(messages.userOperator);
   let manager  = nProps.context.intl.formatMessage(messages.userManager);
   let pick  = nProps.context.intl.formatMessage(stringConfig.pick);
@@ -181,7 +181,18 @@ UsersTab.contextTypes ={
  intl:React.PropTypes.object.isRequired
 }
 
-
+UsersTab.PropTypes={
+userFilterDetail:React.PropTypes.func,
+userHeaderSort: React.PropTypes.func,
+userHeaderSortOrder:React.PropTypes.func,
+setUserSpinner:React.PropTypes.func,
+userFilter: React.PropTypes.string,
+userdetails: React.PropTypes.array,
+manager:React.PropTypes.array,
+userSortHeader:React.PropTypes.string,
+userSortHeaderState:React.PropTypes.string,
+userSpinner:React.PropTypes.bool
+};
 
 
 export  default connect(mapStateToProps,mapDispatchToProps)(UsersTab);

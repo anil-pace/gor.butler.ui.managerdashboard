@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
-import {ordersFilterToggle, filterApplied,orderfilterState,toggleOrderFilter} from '../../actions/filterAction';
+import {ordersFilterToggle, filterApplied,orderfilterState,toggleOrderFilter,setFilterApplyFlag} from '../../actions/filterAction';
 import { connect } from 'react-redux'; 
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
@@ -72,6 +72,7 @@ class OrderFilter extends React.Component{
         this.props.orderfilterState(filterState);
         this.props.toggleOrderFilter(true);
        this.props.refreshOption(this.state);
+       this.props.setFilterApplyFlag(true);
     }
 
     _clearFilter() {
@@ -81,12 +82,13 @@ class OrderFilter extends React.Component{
         this.props.orderfilterState({tokenSelected: {"STATUS":["all"], "TIME PERIOD":["allOrders"]}, searchQuery: {}});
         this.props.refreshOption(clearState);
         this.props.toggleOrderFilter(false);
+        this.props.setFilterApplyFlag(true);
 
     } 
 
 
 	render(){
-        var noOrder = this.props.orderData.totalOrders?false:true;
+        var noOrder = this.props.orderData.emptyResponse;
         var orderSearchField = this._processOrderSearchField();
         var orderFilterToken = this._processFilterToken();
 		return (
@@ -120,7 +122,8 @@ var mapDispatchToProps = function(dispatch){
     ordersFilterToggle: function(data){dispatch(ordersFilterToggle(data));},
     filterApplied: function(data){dispatch(filterApplied(data));},
      orderfilterState: function(data){dispatch(orderfilterState(data));},
-     toggleOrderFilter: function(data){dispatch(toggleOrderFilter(data));}
+     toggleOrderFilter: function(data){dispatch(toggleOrderFilter(data));},
+      setFilterApplyFlag: function (data) {dispatch(setFilterApplyFlag(data));}
   }
 };
 
@@ -131,7 +134,9 @@ OrderFilter.PropTypes={
     ordersFilterToggle:React.PropTypes.func,
     filterApplied:React.PropTypes.func,
     orderFilterState:React.PropTypes.bool,
-    toggleOrderFilter:React.PropTypes.func
+    toggleOrderFilter:React.PropTypes.func,
+    setFilterApplyFlag:React.PropTypes.func,
+    responseFlag:React.PropTypes.bool
 };
 
 

@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
-import {userFilterToggle,filterApplied,userfilterState,toggleUserFilter} from '../../actions/filterAction';
+import {userFilterToggle,filterApplied,userfilterState,toggleUserFilter,setFilterApplyFlag} from '../../actions/filterAction';
 import {updateSubscriptionPacket} from '../../actions/socketActions';
 import { connect } from 'react-redux'; 
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
@@ -149,6 +149,7 @@ _processUserRoll(){
      this.props.filterApplied(!this.props.isFilterApplied);
      this.props.toggleUserFilter(true);
      this.props.userFilterApplySpinner(true);
+     this.props.setFilterApplyFlag(true);
 
    }
 
@@ -162,12 +163,12 @@ _processUserRoll(){
      this.props.filterApplied(!this.props.isFilterApplied);
      this.props.toggleUserFilter(false);
      this.props.userFilterApplySpinner(true);
+     this.props.setFilterApplyFlag(true);
    }
 
    render(){
     let userDetail = this.props.userDetails;
-    let noOrder = userDetail.userDetails && userDetail.userDetails.length?false:true;
-
+     var noOrder = userDetail.emptyResponse;
     let userSearchField = this._processUserSearchField();
     let userFilterToken = this._processFilterToken();
     return (
@@ -215,8 +216,9 @@ var mapDispatchToProps = function(dispatch){
     userfilterState: function(data){dispatch(userfilterState(data));},
     updateSubscriptionPacket: function(data){dispatch(updateSubscriptionPacket(data));},
     toggleUserFilter: function(data){dispatch(toggleUserFilter(data));},
-userFilterApplySpinner: function(data){dispatch(userFilterApplySpinner(data));}
-  }
+userFilterApplySpinner: function(data){dispatch(userFilterApplySpinner(data));},
+setFilterApplyFlag: function (data) {dispatch(setFilterApplyFlag(data));}
+}
 };
 UserFilter.PropTypes={
 userDetails:React.PropTypes.array,
@@ -232,7 +234,8 @@ userFilterToggle: React.PropTypes.func,
 filterApplied: React.PropTypes.func,
 userfilterState: React.PropTypes.func,
 updateSubscriptionPacket: React.PropTypes.func,
-toggleUserFilter:React.PropTypes.func
+toggleUserFilter:React.PropTypes.func,
+setFilterApplyFlag:React.PropTypes.func
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(UserFilter) ;

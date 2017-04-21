@@ -15,6 +15,11 @@
     "defaultMessage": "Filter data"
   },
   {
+    "id": "order.table.showfilter",
+    "description": "button label for filter",
+    "defaultMessage": "Show Filter"
+  },
+  {
     "id": "botList.filter.search.bar",
     "description": "total bots for filter search bar",
     "defaultMessage": "{total} Bots found"

@@ -55,15 +55,15 @@ class WavesTable extends React.Component {
         this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
     }
 
-    shouldComponentUpdate(nextProps) {
-        if ((nextProps.items && !nextProps.items.length)) {
-            return false;
-        }
-        return true;
-    }
-
-
     componentWillReceiveProps(nextProps) {
+
+    if(nextProps.emptyResponse==false && this.props.filterapplyflag)
+        {
+            this.props.setFilter(false);
+            this.props.setFilterApplyFlag(false);
+        }
+    
+
         if (nextProps.items && nextProps.items.length) {
             this._dataList = new tableRenderer(nextProps.items.length);
         }
@@ -94,6 +94,7 @@ class WavesTable extends React.Component {
         this._onFilterChange = this._onFilterChange.bind(this);
         this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
         this._onFilterChange(nextProps.getWaveFilter);
+
 
     }
 
@@ -158,12 +159,13 @@ class WavesTable extends React.Component {
     }
 
     _setFilter() {
+        if(this.props.items.length){
         var newState = !this.props.wavesToggleFilter;
-        this.props.setFilter(newState);
+        this.props.setFilter(true);
     }
+}
 
   render() {
-    var showFilterWave =true;
     let filterHeight = screen.height-190-50;
 
     var {sortedDataList, colSortDirs,columnWidths} = this.state;  
@@ -196,18 +198,15 @@ class WavesTable extends React.Component {
       </div>
       </div>
 
-
-
   <div className="filterWrapper"> 
         <div className="gorToolBarDropDown">
         <div className="gor-button-wrap">
         <div className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
           
-        {showFilterWave?<button className={this.props.waveFilterStatus?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
-          <div className="gor-manage-task"/>
-          <FormattedMessage id="order.table.filterLabel" description="button label for filter"
-          defaultMessage ="Filter data"/>
-         </button>:""}
+        <button className={this.props.waveFilterStatus?"gor-filterBtn-applied":"gor-filterBtn-btn"} disabled={this.props.items && this.props.items.length?false:true} style={this.props.items && this.props.items.length?{cursor:'pointer'}:{cursor:'default'}}  onClick={this._setFilter.bind(this)} >
+       {!this.props.waveFilterStatus?<div><div className="gor-manage-task"></div><FormattedMessage id="order.table.filterLabel" description="button label for filter" defaultMessage ="Filter data"/></div>:
+       <div><div className="gor-manage-task"></div><FormattedMessage id="order.table.showfilter" description="button label for filter" defaultMessage ="Show Filter"/></div>}
+         </button>
        </div>
         </div>     
         </div>
@@ -409,6 +408,8 @@ WavesTable.PropTypes = {
     responseFlag: React.PropTypes.bool,
     setWaveFilter: React.PropTypes.func,
     setFilter: React.PropTypes.func,
-    containerHeight: React.PropTypes.number
+    containerHeight: React.PropTypes.number,
+    filterapplyflag:React.PropTypes.bool,
+    setFilterApplyFlag:React.PropTypes.func
 };
 export default Dimensions()(WavesTable);

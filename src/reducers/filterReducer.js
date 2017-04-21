@@ -1,7 +1,8 @@
 import {SHOW_FILTER, IS_FILTER_APPLIED,BUTLER_FILTER_STATE,CHARGINGSTATION_FILTER_STATE,PPS_FILTER_STATE,
   WAVE_FILTER_STATE,USER_FILTER_STATE,TOGGLE_BUTTON,TOGGLE_BUTTON_BOT,PPS_FILTER_VALUE,CHARGING_FILTER_VALUE,
   WAVE_FILTER_VALUE,USER_FILTER_VALUE,SET_DEFAULT_RANGE,AUDIT_FILTER_STATE,AUDIT_FILTER_VALUE,ORDER_FILTER_STATE,
-  ORDER_FILTER_VALUE,BOT_TOGGLE_FILTER,PPS_TOGGLE_FILTER,CS_TOGGLE_FILTER,AUDIT_TOGGLE_FILTER,ORDERS_TOGGLE_FILTER,USER_TOGGLE_FILTER,WAVES_TOGGLE_FILTER} from '../constants/frontEndConstants'; 
+  ORDER_FILTER_VALUE,BOT_TOGGLE_FILTER,PPS_TOGGLE_FILTER,CS_TOGGLE_FILTER,AUDIT_TOGGLE_FILTER,ORDERS_TOGGLE_FILTER,
+  USER_TOGGLE_FILTER,WAVES_TOGGLE_FILTER,FILTER_APPLY_FLAG} from '../constants/frontEndConstants'; 
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -142,11 +143,19 @@ case ORDER_FILTER_VALUE:               //This reducer will update the the ppsFil
       "wavefilterState" : action.data
     })
     break;  
+
     case USER_FILTER_STATE:              //This reducer will update the the userfilterState value with latest applied filter
     return Object.assign({}, state, { 
       "userfilterState" : action.data
     })
     break;
+
+    case FILTER_APPLY_FLAG:              //This reducer will update the the Apply flag value true/false
+    return Object.assign({}, state, { 
+      "filterapplyflag" : action.data
+    })
+    break;
+
 
     default:
     return state

@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
-import {PPSFilterToggle, filterApplied,ppsfilterState,togglePPSFilter,setDefaultRange} from '../../actions/filterAction';
+import {PPSFilterToggle, filterApplied,ppsfilterState,togglePPSFilter,setDefaultRange,setFilterApplyFlag} from '../../actions/filterAction';
 import { connect } from 'react-redux'; 
 import {updateSubscriptionPacket} from '../../actions/socketActions';
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
@@ -137,6 +137,7 @@ class PPSFilter extends React.Component{
       this.props.filterApplied(!this.props.isFilterApplied);
       this.props.togglePPSFilter(true);
       this.props.setPpsFilterSpinner(true);
+        this.props.setFilterApplyFlag(true);
     }
 
     _clearFilter() {
@@ -151,6 +152,7 @@ class PPSFilter extends React.Component{
         this.props.setPpsFilterSpinner(true);
         this.props.setDefaultRange([0,500]);
         this._handleRangeSlider();
+        this.props.setFilterApplyFlag(true);
 
     } 
 
@@ -158,12 +160,8 @@ class PPSFilter extends React.Component{
       this.setState({rangeSelected:{minValue:sliderVal[0],maxValue:sliderVal[1]}});
     }
   render(){
-    
         var ppsDetail = this.props.PPSDetail;
-
-       // var noOrder = ppsDetail.PPStypeDetail && ppsDetail.PPStypeDetail.length?false:true;
-      var noOrder = ppsDetail.responseFlag
-
+        var noOrder = ppsDetail.emptyResponse
         let ppsSearchField = this._processPPSSearchField();
         let ppsFilterToken = this._processFilterToken();
         let rangeSlider=this._handleRangeSlider();
@@ -212,7 +210,8 @@ var mapDispatchToProps = function(dispatch){
     togglePPSFilter: function(data){dispatch(togglePPSFilter(data));},
     setPpsSpinner: function(data){dispatch(setPpsSpinner(data));},
     setPpsFilterSpinner: function(data){dispatch(setPpsFilterSpinner(data));},
-    setDefaultRange: function(data){dispatch(setDefaultRange(data));}
+    setDefaultRange: function(data){dispatch(setDefaultRange(data));},
+     setFilterApplyFlag: function (data) {dispatch(setFilterApplyFlag(data));}
 
   }
 };
@@ -227,7 +226,8 @@ PPSFilter.PropTypes={
  PPSFilterToggle:React.PropTypes.func,
 filterApplied: React.PropTypes.func,
 updateSubscriptionPacket:React.PropTypes.func,
-togglePPSFilter:React.PropTypes.func
+togglePPSFilter:React.PropTypes.func,
+setFilterApplyFlag:React.PropTypes.func
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(PPSFilter) ;
