@@ -12,7 +12,7 @@ import {setAuditSpinner} from '../actions/auditActions';
 import {setOrderListSpinner} from '../actions/orderListActions';
 import {setWavesSpinner, setButlerSpinner, setPpsSpinner, setCsSpinner,setUserSpinner} from '../actions/spinnerAction';
 import {AUDIT, ORDERLIST,WAVES,BUTLERBOTS, PPS, CHARGING,USER} from '../constants/appConstants';
-import {OVERVIEW,TAB_ROUTE_MAP,INVENTORY} from '../constants/frontEndConstants';
+import {OVERVIEW,TAB_ROUTE_MAP,INVENTORY,SHOW_UTILITY_TAB} from '../constants/frontEndConstants';
 import { translationMessages } from '../utilities/i18n';
 import { updateIntl } from 'react-intl-redux';
 
@@ -113,7 +113,7 @@ class Routes extends React.Component{
     }
 }
 render(){
-  var showUtilityTab = true;  
+  var showUtilityTab = SHOW_UTILITY_TAB;  //will be usefull when need to configure tab 
    return (
       <Router history={hashHistory}>
       <Route name="default" path="/" 

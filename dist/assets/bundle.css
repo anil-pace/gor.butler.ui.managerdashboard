@@ -4819,7 +4819,7 @@ button:disabled {
 
 .gor-audit-detail {
   font-family: 'Source Sans Pro', sans-serif;
-  width: 80%;
+  width: 90%;
   margin: auto;
 }
 
@@ -4854,12 +4854,12 @@ button:disabled {
 .gor-auditResolve-h1 {
   font-size: 1.25rem;
   font-weight: bold;
-  padding-left: 10%;
+  padding-left: 5%;
   padding-bottom: 0.5rem;
 }
 
 .gor-auditResolve-h2 {
-  padding-left: 10%;
+  padding-left: 5%;
   padding-bottom: 3.1875rem;
 }
 

@@ -123,18 +123,19 @@ class AuditTable extends React.Component {
             sortIndex = nProps.currentHeaderOrder.colSortDirs;
         }
         current.state = {
-            sortedDataList: current._dataList,
-            colSortDirs: sortIndex,
-            columnWidths: {
-                display_id: nProps.containerWidth * 0.09,
-                auditTypeValue: nProps.containerWidth * 0.12,
-                status: nProps.containerWidth * 0.09,
-                startTime: nProps.containerWidth * 0.13,
-                progress: nProps.containerWidth * 0.17,
-                completedTime: nProps.containerWidth * 0.15,
-                actions: nProps.containerWidth * 0.25
-            },
+      sortedDataList: current._dataList,
+      colSortDirs: sortIndex,
+      columnWidths: {
+        display_id: nProps.containerWidth*0.07,
+        auditTypeValue: nProps.containerWidth*0.12,
+        status: nProps.containerWidth*0.10,
+        startTime: nProps.containerWidth*0.13,
+        progress: nProps.containerWidth*0.18,
+        completedTime: nProps.containerWidth*0.15,
+        actions: nProps.containerWidth*0.25
+      },
         };
+
     }
 
     _onColumnResizeEndCallback(newColumnWidth, columnKey) {
@@ -252,8 +253,7 @@ class AuditTable extends React.Component {
     }
 
     _showAllAudit() {
-        var clearFilter = []
-        this.props.refreshData(clearFilter);
+        this.props.refreshData();
     }
 
     render() {

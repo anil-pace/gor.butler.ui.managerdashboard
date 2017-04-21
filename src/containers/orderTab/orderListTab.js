@@ -12,7 +12,8 @@ import {stringConfig} from '../../constants/backEndConstants';
 import {orderHeaderSortOrder, orderHeaderSort, orderFilterDetail} from '../../actions/sortHeaderActions';
 import {getDaysDiff} from '../../utilities/getDaysDiff';
 import GorPaginate from '../../components/gorPaginate/gorPaginate';
-import {ordersFilterToggle,filterApplied,setFilterApplyFlag} from '../../actions/filterAction';
+
+import {showTableFilter,filterApplied,orderfilterState,toggleOrderFilter,setFilterApplyFlag,ordersFilterToggle} from '../../actions/filterAction';
 const messages = defineMessages ({
   inProgressStatus:{
     id: 'orderList.progress.status',
@@ -198,11 +199,19 @@ refresh = (data) => {
   var prevTime,currentTime;
   var  appendStatusUrl="", appendTimeUrl="", appendPageSize="", appendSortUrl="", appendTextFilterUrl="";
   var filterApplied = false;
-  if(!data) {
-    data = {};
-    data.selected = 1;
-    data.url = "";
-  }
+    if (!data) {
+        data = {};
+        data.selected = 1;
+        data.url = "";
+        /**
+         * After clearing the applied filter,
+         * It'll set the default state to the filters.
+         */
+        this.props.orderfilterState({tokenSelected: {"STATUS": ["all"], "TIME PERIOD": ["allOrders"]}, searchQuery: {}})
+        this.props.toggleOrderFilter(false)
+        this.props.showTableFilter(false)
+
+    }
   //for backend sorting
   if(data.columnKey && data.sortDir) {
     appendSortUrl = sortOrderHead[data.columnKey] + sortOrder[data.sortDir];
@@ -385,9 +394,14 @@ var mapDispatchToProps = function(dispatch){
     lastRefreshTime: function(data){ dispatch(lastRefreshTime(data));},
     setOrderListSpinner: function(data){dispatch(setOrderListSpinner(data))},
     setCurrentPage: function(data){dispatch(setCurrentPage(data))},
-    ordersFilterToggle: function(data){dispatch(ordersFilterToggle(data));},
+
+    showTableFilter: function(data){dispatch(showTableFilter(data));},
     filterApplied: function(data){dispatch(filterApplied(data));},
-    setFilterApplyFlag: function (data) {dispatch(setFilterApplyFlag(data));}
+    orderfilterState: function(data){dispatch(orderfilterState(data));},
+      toggleOrderFilter: function(data){dispatch(toggleOrderFilter(data));},
+      setFilterApplyFlag: function (data) {dispatch(setFilterApplyFlag(data));},
+        ordersFilterToggle: function(data){dispatch(ordersFilterToggle(data));}
+
   }
 };
 

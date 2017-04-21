@@ -17,7 +17,7 @@ import {auditHeaderSortOrder, auditHeaderSort, auditFilterDetail} from '../actio
 import {getDaysDiff} from '../utilities/getDaysDiff';
 import {addDateOffSet} from '../utilities/processDate'; 
 import GorPaginate from '../components/gorPaginate/gorPaginate';
-import {auditFilterToggle,filterApplied,setFilterApplyFlag} from '../actions/filterAction';
+import {filterApplied,auditfilterState,toggleAuditFilter,auditFilterToggle,setFilterApplyFlag} from '../actions/filterAction';
 //Mesages for internationalization
 const messages = defineMessages({
   auditCreatedStatus: {
@@ -262,7 +262,18 @@ handlePageClick(data){
   var filterApplied = false;
   var skuText="",arr=[],selectvalue;
   makeDate = addDateOffSet(currentDate,-30);
-  
+
+  if (!data) {
+      /**
+       * After clearing the applied filter,
+       * It'll set the default state to the filters.
+       */
+      data={}
+      this.props.auditfilterState({tokenSelected: {"AUDIT TYPE":[ANY], "STATUS":[ALL]}, searchQuery: {},defaultToken: {"AUDIT TYPE":[ANY], "STATUS":[ALL]}})
+      this.props.toggleAuditFilter(false)
+      this.props.showTableFilter(false)
+
+  }
 //If user select both we are making it Any for backend support
   if(data.searchQuery && data.tokenSelected[AUDIT_TYPE]) {
    selectvalue=(data.tokenSelected[AUDIT_TYPE].length===2)?ANY:data.tokenSelected[AUDIT_TYPE][0];
@@ -434,7 +445,9 @@ var mapDispatchToProps = function(dispatch){
     setAuditRefresh: function(){dispatch(setAuditRefresh());},
     auditFilterToggle: function(data){dispatch(auditFilterToggle(data));},
     filterApplied: function(data){dispatch(filterApplied(data));},
-     setFilterApplyFlag: function (data) {dispatch(setFilterApplyFlag(data));}
+    setFilterApplyFlag: function (data) {dispatch(setFilterApplyFlag(data));},
+    auditfilterState: function (data) {dispatch(auditfilterState(data));},
+    toggleAuditFilter: function (data) {dispatch(toggleAuditFilter(data));}
   }
 };
 

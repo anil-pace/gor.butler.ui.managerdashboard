@@ -27,7 +27,13 @@ componentWillMount(){
   if(this.props.auditFilterState) {
     this.setState(this.props.auditFilterState)
   }
-}  
+}
+
+    componentWillReceiveProps(nextProps){
+        if(nextProps.auditFilterState && JSON.stringify(this.state)!==JSON.stringify(nextProps.auditFilterState)){
+            this.setState(nextProps.auditFilterState)
+        }
+    }
 
 
 

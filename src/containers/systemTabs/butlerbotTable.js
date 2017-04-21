@@ -184,7 +184,6 @@ class ButlerBotTable extends React.Component {
        {!this.props.botFilterStatus?<div><div className="gor-manage-task"></div><FormattedMessage id="order.table.filterLabel" description="button label for filter" defaultMessage ="Filter data"/></div>:
        <div><div className="gor-manage-task"></div><FormattedMessage id="order.table.showfilter" description="button label for filter" defaultMessage ="Show Filter"/></div>}
          </button>
-
        </div>
         </div>     
         </div>

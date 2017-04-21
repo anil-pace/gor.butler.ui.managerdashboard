@@ -17,8 +17,15 @@ class OrderFilter extends React.Component{
 
 
     _closeFilter() {
+
         this.props.ordersFilterToggle(false);
     }	
+    componentWillReceiveProps(nextProps){
+        if(nextProps.orderFilterState && JSON.stringify(this.state)!==JSON.stringify(nextProps.orderFilterState)){
+            this.setState(nextProps.orderFilterState)
+        }
+    }
+
 
     _processOrderSearchField(){
         var filterInputFields = [{value:"ORDER ID", label:<FormattedMessage id="order.inputField.id" defaultMessage ="ORDER ID"/>}];
