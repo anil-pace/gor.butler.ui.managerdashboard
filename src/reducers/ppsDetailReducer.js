@@ -6,10 +6,9 @@ import { FormattedMessage } from 'react-intl';
 export  function PPSDetail(state={},action) {
   switch (action.type) {
     case PPS_DETAIL:
-         res=action.data;
-         if(res.complete_data !== undefined){
+         res=action.data;      
           var res, PPSDetail;
-          if(res.complete_data.length)
+          if(res.complete_data && res.complete_data.length)
           {
               return Object.assign({}, state, {
                  "PPStypeDetail" : res.complete_data,
@@ -21,8 +20,7 @@ export  function PPSDetail(state={},action) {
            return Object.assign({}, state, {
                  "emptyResponse" :true //This flag will update base on response data
           })
-         }
-       }
+         }     
 
     default:
       return state

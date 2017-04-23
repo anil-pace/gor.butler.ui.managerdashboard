@@ -67,7 +67,8 @@ class PPStable extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     var temp;
-    if(nextProps.emptyResponse==false && this.props.filterapplyflag)
+    //Based on emptyresponse, appliedbutton and reponse has came or not we hide and show the filter
+    if(!nextProps.emptyResponse && this.props.filterapplyflag && !nextProps.responseFlag)
         {
             this.props.setFilter(false);
             this.props.setFilterApplyFlag(false);

@@ -6,7 +6,7 @@ import {
     CSFilterToggle,
     filterApplied,
     chargingstationfilterState,
-    toggleChargingFilter,setFilterApplyFlag
+    toggleChargingFilterApplied,setFilterApplyFlag
 } from '../../actions/filterAction';
 import {updateSubscriptionPacket} from '../../actions/socketActions';
 import {connect} from 'react-redux';
@@ -26,13 +26,13 @@ class ChargingStationFilter extends React.Component {
 
     _closeFilter() {
 
-        let filterState = !this.props.csToggleFilter;
+        var filterState = !this.props.csToggleFilter;
         this.props.CSFilterToggle(false);
     }
 
     componentWillMount() {
-        if (this.props.chargingstationfilterState) {
-            this.setState(this.props.chargingstationfilterState)
+        if (this.props.filterState) {
+            this.setState(this.props.filterState)
         }
     }
 
@@ -115,7 +115,7 @@ class ChargingStationFilter extends React.Component {
         this.props.chargingstationfilterState(filterState);
         this.props.updateSubscriptionPacket(updatedWsSubscription);
         this.props.filterApplied(!this.props.isFilterApplied);
-        this.props.toggleChargingFilter(true);
+        this.props.toggleChargingFilterApplied(true);
         this.props.setCsFilterSpinner(true);
          this.props.setFilterApplyFlag(true);
     }
@@ -126,9 +126,9 @@ class ChargingStationFilter extends React.Component {
         updatedWsSubscription["chargingstation"].data[0].details["filter_params"] = {};
         this.props.updateSubscriptionPacket(updatedWsSubscription);
         this.setState({tokenSelected: {"DOCKING STATUS": ["all"], "OPERATING MODE": ["all"]}, searchQuery: {}});
-        this.props.chargingstationfilterState({tokenSelected: {"STATUS": ["all"], "MODE": ["all"]}, searchQuery: {}});
+        this.props.chargingstationfilterState({tokenSelected: {"DOCKING STATUS": ["all"], "OPERATING MODE": ["all"]}, searchQuery: {}});
         this.props.filterApplied(!this.props.isFilterApplied);
-        this.props.toggleChargingFilter(false);
+        this.props.toggleChargingFilterApplied(false);
         this.props.setCsFilterSpinner(true);
         this.props.setFilterApplyFlag(true);
     }
@@ -136,9 +136,7 @@ class ChargingStationFilter extends React.Component {
 
     render() {
         let chargingDetails = this.props.chargerData;
-        //let noOrder = chargingDetails.chargersDetail && chargingDetails.chargersDetail.length ? false : true;
-
- var noOrder = chargingDetails.emptyResponse
+        var noChargerStation = chargingDetails.emptyResponse
         let chargingSearchField = this._processChargingSearchField();
         let chargingFilterToken = this._processFilterToken();
         return (
@@ -150,7 +148,7 @@ class ChargingStationFilter extends React.Component {
                         filterTokenC2={chargingFilterToken.column2token}
                         formSubmit={this._applyFilter.bind(this)} //passing function on submit
                         responseFlag={this.props.csFilterSpinner} // used for spinner of button
-                        noDataFlag={noOrder} //messg to show in case of no data
+                        noDataFlag={noChargerStation} //messg to show in case of no data
                 />
             </div>
         );
@@ -188,8 +186,8 @@ var mapDispatchToProps = function (dispatch) {
         chargingstationfilterState: function (data) {
             dispatch(chargingstationfilterState(data));
         },
-        toggleChargingFilter: function (data) {
-            dispatch(toggleChargingFilter(data));
+        toggleChargingFilterApplied: function (data) {
+            dispatch(toggleChargingFilterApplied(data));
         },
         setCsFilterSpinner: function (data) {
             dispatch(setCsFilterSpinner(data));
@@ -212,7 +210,7 @@ ChargingStationFilter.PropTypes = {
     filterApplied: React.PropTypes.func,
     updateSubscriptionPacket: React.PropTypes.func,
     chargingstationfilterState: React.PropTypes.func,
-    toggleChargingFilter: React.PropTypes.func,
+    toggleChargingFilterApplied: React.PropTypes.func,
     setFilterApplyFlag:React.PropTypes.func
 };
 

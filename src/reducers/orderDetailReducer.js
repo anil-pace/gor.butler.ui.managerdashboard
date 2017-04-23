@@ -6,7 +6,7 @@ export  function getOrderDetail(state={},action){
 
           var res, processedData,totalPage, totalOrders,itemsPerOrder,totalCompletedOrder,totalPendingOrder;
           res=action.data;
-         if(res.orders.length) {
+         if(res.orders && res.orders.length) {
             totalOrders = res.total_size;
              totalPage = res.total_pages;
              itemsPerOrder = res.items_per_order;

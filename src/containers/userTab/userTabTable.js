@@ -43,7 +43,8 @@ class UserDataTable extends React.Component {
 
 
   componentWillReceiveProps(nextProps){
-    if(nextProps.emptyResponse==false && this.props.filterapplyflag)
+    //Based on emptyresponse, appliedbutton and reponse has came or not we hide and show the filter
+    if(!nextProps.emptyResponse && this.props.filterapplyflag && !nextProps.responseFlag)
         {
             this.props.setFilter(false);
             this.props.setFilterApplyFlag(false);
@@ -194,7 +195,7 @@ class UserDataTable extends React.Component {
 
   _setFilter() {
       if(this.props.items.length){
-    var newState = !this.props.userToggleFilter;
+    let newState = !this.props.userToggleFilter;
     this.props.setFilter(newState);
   }
    }

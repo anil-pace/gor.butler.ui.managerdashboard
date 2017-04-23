@@ -7,7 +7,7 @@ import {userRequest} from '../../actions/userActions';
 import {stringConfig} from '../../constants/backEndConstants'
 import {userHeaderSort, userHeaderSortOrder, userFilterDetail} from '../../actions/sortHeaderActions';
 import {INITIAL_HEADER_SORT, INITIAL_HEADER_ORDER, GET_ROLES, GET, APP_JSON} from '../../constants/frontEndConstants';
-import {userFilterToggle, filterApplied,userfilterState,toggleUserFilter,setFilterApplyFlag} from '../../actions/filterAction';
+import {userFilterToggle, filterApplied,userfilterState,toggleUserFilterApplied,setFilterApplyFlag} from '../../actions/filterAction';
 import {ROLE_URL} from '../../constants/configConstants';
 import {updateSubscriptionPacket} from './../../actions/socketActions'
 import {wsOverviewData} from './../../constants/initData.js';
@@ -159,7 +159,7 @@ class UsersTab extends React.Component {
         this.props.updateSubscriptionPacket(updatedWsSubscription);
         this.props.filterApplied(!this.props.isFilterApplied);
         this.props.userFilterToggle(false);
-        this.props.toggleUserFilter(false);
+        this.props.toggleUserFilterApplied(false);
         /**
          * It will reset the filter
          * fields already applied in
@@ -252,7 +252,7 @@ var mapDispatchToProps = function (dispatch) {
             dispatch(updateSubscriptionPacket(data));
         },
         userfilterState: function(data){dispatch(userfilterState(data));},
-        toggleUserFilter: function(data){dispatch(toggleUserFilter(data));},
+        toggleUserFilterApplied: function(data){dispatch(toggleUserFilterApplied(data));},
         setFilterApplyFlag: function (data) {dispatch(setFilterApplyFlag(data));}
 }
 }

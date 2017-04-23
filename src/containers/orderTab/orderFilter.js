@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
-import {ordersFilterToggle, filterApplied,orderfilterState,toggleOrderFilter,setFilterApplyFlag} from '../../actions/filterAction';
+import {ordersFilterToggle, filterApplied,orderfilterState,toggleOrderFilterApplied,setFilterApplyFlag} from '../../actions/filterAction';
 import { connect } from 'react-redux'; 
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
@@ -77,7 +77,7 @@ class OrderFilter extends React.Component{
     _applyFilter() {
           var filterState = this.state
         this.props.orderfilterState(filterState);
-        this.props.toggleOrderFilter(true);
+        this.props.toggleOrderFilterApplied(true);
        this.props.refreshOption(this.state);
        this.props.setFilterApplyFlag(true);
     }
@@ -88,7 +88,7 @@ class OrderFilter extends React.Component{
         this.setState({tokenSelected: {"STATUS":["all"], "TIME PERIOD":["allOrders"]}, searchQuery: {}});
         this.props.orderfilterState({tokenSelected: {"STATUS":["all"], "TIME PERIOD":["allOrders"]}, searchQuery: {}});
         this.props.refreshOption(clearState);
-        this.props.toggleOrderFilter(false);
+        this.props.toggleOrderFilterApplied(false);
         this.props.setFilterApplyFlag(true);
 
     } 
@@ -129,7 +129,7 @@ var mapDispatchToProps = function(dispatch){
     ordersFilterToggle: function(data){dispatch(ordersFilterToggle(data));},
     filterApplied: function(data){dispatch(filterApplied(data));},
      orderfilterState: function(data){dispatch(orderfilterState(data));},
-     toggleOrderFilter: function(data){dispatch(toggleOrderFilter(data));},
+     toggleOrderFilterApplied: function(data){dispatch(toggleOrderFilterApplied(data));},
       setFilterApplyFlag: function (data) {dispatch(setFilterApplyFlag(data));}
   }
 };
@@ -141,7 +141,7 @@ OrderFilter.PropTypes={
     ordersFilterToggle:React.PropTypes.func,
     filterApplied:React.PropTypes.func,
     orderFilterState:React.PropTypes.bool,
-    toggleOrderFilter:React.PropTypes.func,
+    toggleOrderFilterApplied:React.PropTypes.func,
     setFilterApplyFlag:React.PropTypes.func,
     responseFlag:React.PropTypes.bool
 };

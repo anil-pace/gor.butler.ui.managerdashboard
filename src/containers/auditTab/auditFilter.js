@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
-import {auditFilterToggle,filterApplied,auditfilterState,toggleAuditFilter,setFilterApplyFlag} from '../../actions/filterAction';
+import {auditFilterToggle,filterApplied,auditfilterState,toggleAuditFilterApplied,setFilterApplyFlag} from '../../actions/filterAction';
 import { connect } from 'react-redux'; 
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
@@ -112,7 +112,7 @@ _applyFilter() {
   var filterState = this.state
   this.props.auditfilterState(filterState);
   this.props.refreshOption(this.state);
-  this.props.toggleAuditFilter(true);
+  this.props.toggleAuditFilterApplied(true);
   this.props.setFilterApplyFlag(true);
 
 }
@@ -124,12 +124,12 @@ _clearFilter() {
   this.props.filterApplied(false);
   this.props.setTextBoxStatus(obj);
   this.props.refreshOption(clearState);
-  this.props.toggleAuditFilter(false);
-   this.props.setFilterApplyFlag(true);
+  this.props.toggleAuditFilterApplied(false);
+  this.props.setFilterApplyFlag(true);
 }
 
 render(){
-   var noOrder = this.props.noorderFlag;
+   var noAudit = this.props.noAuditFlag;
   var auditSearchField = this._processAuditSearchField();
   var auditFilterToken = this._processFilterToken();
   return (
@@ -141,7 +141,7 @@ render(){
    filterTokenC2={auditFilterToken.column2token}
    formSubmit={this._applyFilter.bind(this)}
    responseFlag={this.props.auditSpinner}
-   noDataFlag={noOrder}
+   noDataFlag={noAudit}
    />
    </div>
    );
@@ -154,7 +154,7 @@ function mapStateToProps(state, ownProps){
     auditToggleFilter: state.filterInfo.auditToggleFilter || false,
     auditSpinner: state.spinner.auditSpinner || false,
     totalAudits: state.recieveAuditDetail.totalAudits || 0,
-    noorderFlag:state.recieveAuditDetail.emptyResponse || false,
+    noAuditFlag:state.recieveAuditDetail.emptyResponse || false,
     auditFilterState: state.filterInfo.auditFilterState,
     auditFilterStatus: state.filterInfo.auditFilterStatus,
     textboxStatus:  state.auditInfo.textBoxStatus  || {}
@@ -163,11 +163,11 @@ function mapStateToProps(state, ownProps){
 
 var mapDispatchToProps = function(dispatch){
   return {
-    auditFilterToggle: function(data){dispatch(auditFilterToggle(data));},
+    auditFilterToggle: function(data){dispatch(auditFilterToggle(data));},//set
     filterApplied: function(data){dispatch(filterApplied(data));},
     setTextBoxStatus: function(data){dispatch(setTextBoxStatus(data));},
     auditfilterState: function(data){dispatch(auditfilterState(data));},
-    toggleAuditFilter: function(data){dispatch(toggleAuditFilter(data));},
+    toggleAuditFilterApplied: function(data){dispatch(toggleAuditFilterApplied(data));},
      setFilterApplyFlag: function (data) {dispatch(setFilterApplyFlag(data));}
 }
 }
@@ -181,9 +181,9 @@ AuditFilter.PropTypes={
   auditFilterState:React.PropTypes.object,
   auditFilterStatus:React.PropTypes.bool,
   setFilterApplyFlag:React.PropTypes.func,
-  toggleAuditFilter:React.PropTypes.func,
+  toggleAuditFilterApplied:React.PropTypes.func,
   auditfilterState:React.PropTypes.func,
-  noorderFlag:React.PropTypes.bool,
+  noAuditFlag:React.PropTypes.bool,
   setTextBoxStatus:React.PropTypes.func
 };
 

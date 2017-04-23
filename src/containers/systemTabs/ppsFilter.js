@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
-import {PPSFilterToggle, filterApplied,ppsfilterState,togglePPSFilter,setDefaultRange,setFilterApplyFlag} from '../../actions/filterAction';
+import {PPSFilterToggle, filterApplied,ppsfilterState,togglePPSFilterApplied,setDefaultRange,setFilterApplyFlag} from '../../actions/filterAction';
 import { connect } from 'react-redux'; 
 import {updateSubscriptionPacket} from '../../actions/socketActions';
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
@@ -23,7 +23,7 @@ class PPSFilter extends React.Component{
 
 
     _closeFilter() {
-        let filterState = !this.props.ppsToggleFilter;
+        var filterState = !this.props.ppsToggleFilter;
         this.props.PPSFilterToggle(false);
     } 
 
@@ -135,7 +135,7 @@ class PPSFilter extends React.Component{
       this.props.ppsfilterState(filterState);
       this.props.updateSubscriptionPacket(updatedWsSubscription);
       this.props.filterApplied(!this.props.isFilterApplied);
-      this.props.togglePPSFilter(true);
+      this.props.togglePPSFilterApplied(true);
       this.props.setPpsFilterSpinner(true);
         this.props.setFilterApplyFlag(true);
     }
@@ -148,7 +148,7 @@ class PPSFilter extends React.Component{
         this.setState({tokenSelected: {"STATUS":["all"], "MODE":["all"]}, searchQuery: {}, rangeSelected:{"minValue":["-1"],"maxValue":["500"]}});
         this.props.ppsfilterState({tokenSelected: {"STATUS":["all"], "MODE":["all"]}, searchQuery: {}, rangeSelected:{"minValue":["-1"],"maxValue":["500"]}});
         this.props.filterApplied(!this.props.isFilterApplied);
-        this.props.togglePPSFilter(false);
+        this.props.togglePPSFilterApplied(false);
         this.props.setPpsFilterSpinner(true);
         this.props.setDefaultRange([0,500]);
         this._handleRangeSlider();
@@ -161,7 +161,7 @@ class PPSFilter extends React.Component{
     }
   render(){
         var ppsDetail = this.props.PPSDetail;
-        var noOrder = ppsDetail.emptyResponse
+        var noPPS = ppsDetail.emptyResponse
         let ppsSearchField = this._processPPSSearchField();
         let ppsFilterToken = this._processFilterToken();
         let rangeSlider=this._handleRangeSlider();
@@ -174,7 +174,7 @@ class PPSFilter extends React.Component{
                          filterTokenC2={ppsFilterToken.column2token}
                          formSubmit={this._applyFilter.bind(this)} //passing function on submit
                          responseFlag={this.props.ppsFilterSpinnerState} // used for spinner of button 
-                         noDataFlag={noOrder} //messg to show in case of no data
+                         noDataFlag={noPPS} //messg to show in case of no data
                          slides={rangeSlider}
 
                          />        
@@ -207,7 +207,7 @@ var mapDispatchToProps = function(dispatch){
     filterApplied: function(data){dispatch(filterApplied(data));},
     updateSubscriptionPacket: function(data){dispatch(updateSubscriptionPacket(data));},
     ppsfilterState: function(data){dispatch(ppsfilterState(data));},
-    togglePPSFilter: function(data){dispatch(togglePPSFilter(data));},
+    togglePPSFilterApplied: function(data){dispatch(togglePPSFilterApplied(data));},
     setPpsSpinner: function(data){dispatch(setPpsSpinner(data));},
     setPpsFilterSpinner: function(data){dispatch(setPpsFilterSpinner(data));},
     setDefaultRange: function(data){dispatch(setDefaultRange(data));},
@@ -226,7 +226,7 @@ PPSFilter.PropTypes={
  PPSFilterToggle:React.PropTypes.func,
 filterApplied: React.PropTypes.func,
 updateSubscriptionPacket:React.PropTypes.func,
-togglePPSFilter:React.PropTypes.func,
+togglePPSFilterApplied:React.PropTypes.func,
 setFilterApplyFlag:React.PropTypes.func
 };
 

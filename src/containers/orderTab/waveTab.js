@@ -10,7 +10,7 @@ import {defineMessages} from 'react-intl';
 import {waveHeaderSort, waveHeaderSortOrder, waveFilterDetail} from '../../actions/sortHeaderActions';
 import {INITIAL_HEADER_SORT, INITIAL_HEADER_ORDER} from '../../constants/frontEndConstants';
 import {getDaysDiff} from '../../utilities/getDaysDiff';
-import {wavesFilterToggle, filterApplied, toggleWaveFilter, wavefilterState,setFilterApplyFlag} from '../../actions/filterAction';
+import {wavesFilterToggle, filterApplied, toggleWaveFilterApplied, wavefilterState,setFilterApplyFlag} from '../../actions/filterAction';
 import {updateSubscriptionPacket} from './../../actions/socketActions'
 import {wsOverviewData} from './../../constants/initData.js';
 
@@ -149,7 +149,7 @@ class WaveTab extends React.Component {
         this.props.updateSubscriptionPacket(updatedWsSubscription);
         this.props.filterApplied(!this.props.isFilterApplied);
         this.props.wavesFilterToggle(false);
-        this.props.toggleWaveFilter(false);
+        this.props.toggleWaveFilterApplied(false);
         /**
          * It will reset the filter
          * fields already applied in
@@ -232,6 +232,7 @@ class WaveTab extends React.Component {
                             emptyResponse={emptyResponse}
                             filterapplyflag={this.props.filterapplyflag}
                             setFilterApplyFlag={this.props.setFilterApplyFlag}
+                            
                 />
             </div>
         );
@@ -280,8 +281,8 @@ var mapDispatchToProps = function (dispatch) {
         updateSubscriptionPacket: function (data) {
             dispatch(updateSubscriptionPacket(data));
         },
-        toggleWaveFilter: function (data) {
-            dispatch(toggleWaveFilter(data));
+        toggleWaveFilterApplied: function (data) {
+            dispatch(toggleWaveFilterApplied(data));
         },
         wavefilterState: function (data) {
             dispatch(wavefilterState(data));

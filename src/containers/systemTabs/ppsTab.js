@@ -30,7 +30,7 @@ import {
     PPSFilterToggle,
     filterApplied,
     ppsfilterState,
-    togglePPSFilter,
+    togglePPSFilterApplied,
     setDefaultRange,
     setFilterApplyFlag
 } from '../../actions/filterAction';
@@ -141,7 +141,7 @@ class PPS extends React.Component {
             rangeSelected: {"minValue": ["-1"], "maxValue": ["500"]}
         });
         this.props.filterApplied(!this.props.isFilterApplied);
-        this.props.togglePPSFilter(false);
+        this.props.togglePPSFilterApplied(false);
         this.props.PPSFilterToggle(false);
 
     }
@@ -278,8 +278,8 @@ var mapDispatchToProps = function (dispatch) {
         updateSubscriptionPacket: function (data) {
             dispatch(updateSubscriptionPacket(data));
         },
-        togglePPSFilter: function (data) {
-            dispatch(togglePPSFilter(data));
+        togglePPSFilterApplied: function (data) {
+            dispatch(togglePPSFilterApplied(data));
         },
 
         setDefaultRange: function (data) {

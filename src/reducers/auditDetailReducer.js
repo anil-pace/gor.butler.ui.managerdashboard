@@ -11,7 +11,7 @@ export  function recieveAuditDetail(state={},action){
           res=action.data.data[0];
           totalPage=Number(res.total_pages);
           totalAudit = Number(res.total_results);
-          if(res.audit_list.length) {
+          if(res.audit_list && res.audit_list.length) {
           return Object.assign({}, state, { 
             "auditDetail" : res.audit_list,
             "totalPage" : totalPage,

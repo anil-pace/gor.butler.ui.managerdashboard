@@ -13,7 +13,7 @@ import Spinner from '../../components/spinner/Spinner';
 import { setButlerSpinner } from  '../../actions/spinnerAction';
 import { butlerHeaderSort,butlerHeaderSortOrder,butlerFilterDetail } from '../../actions/sortHeaderActions';
 import { defineMessages } from 'react-intl';
-import {BotFilterToggle,filterApplied,toggleBotButton,butlerfilterState,setFilterApplyFlag} from '../../actions/filterAction';
+import {BotFilterToggle,filterApplied,toggleBotButtonApplied,butlerfilterState,setFilterApplyFlag} from '../../actions/filterAction';
 import {updateSubscriptionPacket} from './../../actions/socketActions'
 import {wsOverviewData} from './../../constants/initData.js';
 //Mesages for internationalization
@@ -191,7 +191,7 @@ class ButlerBot extends React.Component{
         this.props.updateSubscriptionPacket(updatedWsSubscription);
         this.props.filterApplied(!this.props.isFilterApplied);
         this.props.showTableFilter(false);
-        this.props.toggleBotButton(false);
+        this.props.toggleBotButtonApplied(false);
         /**
          * It will reset the filter
          * fields already applied in
@@ -309,7 +309,7 @@ var mapDispatchToProps = function(dispatch){
       updateSubscriptionPacket: function (data) {
           dispatch(updateSubscriptionPacket(data));
       },
-      toggleBotButton: function(data){dispatch(toggleBotButton(data));},
+      toggleBotButtonApplied: function(data){dispatch(toggleBotButtonApplied(data));},
       butlerfilterState: function(data){dispatch(butlerfilterState(data));},
       setFilterApplyFlag: function (data) {dispatch(setFilterApplyFlag(data));
         }

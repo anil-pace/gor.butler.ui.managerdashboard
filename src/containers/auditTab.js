@@ -17,7 +17,7 @@ import {auditHeaderSortOrder, auditHeaderSort, auditFilterDetail} from '../actio
 import {getDaysDiff} from '../utilities/getDaysDiff';
 import {addDateOffSet} from '../utilities/processDate'; 
 import GorPaginate from '../components/gorPaginate/gorPaginate';
-import {filterApplied,auditfilterState,toggleAuditFilter,auditFilterToggle,setFilterApplyFlag} from '../actions/filterAction';
+import {filterApplied,auditfilterState,toggleAuditFilterApplied,auditFilterToggle,setFilterApplyFlag} from '../actions/filterAction';
 //Mesages for internationalization
 const messages = defineMessages({
   auditCreatedStatus: {
@@ -270,7 +270,7 @@ handlePageClick(data){
        */
       data={}
       this.props.auditfilterState({tokenSelected: {"AUDIT TYPE":[ANY], "STATUS":[ALL]}, searchQuery: {},defaultToken: {"AUDIT TYPE":[ANY], "STATUS":[ALL]}})
-      this.props.toggleAuditFilter(false)
+      this.props.toggleAuditFilterApplied(false)
       this.props.showTableFilter(false)
 
   }
@@ -447,7 +447,7 @@ var mapDispatchToProps = function(dispatch){
     filterApplied: function(data){dispatch(filterApplied(data));},
     setFilterApplyFlag: function (data) {dispatch(setFilterApplyFlag(data));},
     auditfilterState: function (data) {dispatch(auditfilterState(data));},
-    toggleAuditFilter: function (data) {dispatch(toggleAuditFilter(data));}
+    toggleAuditFilterApplied: function (data) {dispatch(toggleAuditFilterApplied(data));}
   }
 };
 
@@ -480,7 +480,8 @@ setAuditRefresh:React.PropTypes.func,
 auditFilterToggle:React.PropTypes.func,
 filterApplied: React.PropTypes.func,
 setFilterApplyFlag:React.PropTypes.func,
-filterapplyflag:React.PropTypes.bool
+filterapplyflag:React.PropTypes.bool,
+toggleAuditFilterApplied:React.PropTypes.func
 }
 
 

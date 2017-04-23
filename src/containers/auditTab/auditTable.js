@@ -63,7 +63,8 @@ class AuditTable extends React.Component {
     componentWillReceiveProps(nextProps) {
 
         this.tableState(nextProps, this);
-       if(nextProps.emptyResponse==false && this.props.filterapplyflag)
+        //Based on emptyresponse, appliedbutton and reponse has came or not we hide and show the filter
+       if(!nextProps.emptyResponse && this.props.filterapplyflag && !nextProps.responseFlag)
         {
             this.props.setFilter(false);
             this.props.setFilterApplyFlag(false);
@@ -247,7 +248,7 @@ class AuditTable extends React.Component {
 
     _setFilter() {
          if(this.props.items.length){
-        var newState = !this.props.auditToggleFilter;
+        let newState = !this.props.auditToggleFilter;
         this.props.setFilter(newState)
     }
     }

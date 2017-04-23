@@ -17,7 +17,7 @@ import {
     CSFilterToggle,
     filterApplied,
     chargingstationfilterState,
-    toggleChargingFilter,setFilterApplyFlag
+    toggleChargingFilterApplied,setFilterApplyFlag
 } from '../../actions/filterAction';
 import {updateSubscriptionPacket} from './../../actions/socketActions'
 import {wsOverviewData} from './../../constants/initData.js';
@@ -91,7 +91,7 @@ class ChargingStations extends React.Component {
         this.props.updateSubscriptionPacket(updatedWsSubscription);
         this.props.filterApplied(!this.props.isFilterApplied);
         this.props.CSFilterToggle(false);
-        this.props.toggleChargingFilter(false);
+        this.props.toggleChargingFilterApplied(false);
         /**
          * It will reset the filter
          * fields already applied in
@@ -214,8 +214,8 @@ var mapDispatchToProps = function (dispatch) {
         chargingstationfilterState: function (data) {
             dispatch(chargingstationfilterState(data));
         },
-        toggleChargingFilter: function (data) {
-            dispatch(toggleChargingFilter(data));
+        toggleChargingFilterApplied: function (data) {
+            dispatch(toggleChargingFilterApplied(data));
         },
         setFilterApplyFlag: function (data) {
             dispatch(setFilterApplyFlag(data));

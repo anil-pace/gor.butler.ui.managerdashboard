@@ -13,7 +13,7 @@ import {orderHeaderSortOrder, orderHeaderSort, orderFilterDetail} from '../../ac
 import {getDaysDiff} from '../../utilities/getDaysDiff';
 import GorPaginate from '../../components/gorPaginate/gorPaginate';
 
-import {showTableFilter,filterApplied,orderfilterState,toggleOrderFilter,setFilterApplyFlag,ordersFilterToggle} from '../../actions/filterAction';
+import {showTableFilter,filterApplied,orderfilterState,toggleOrderFilterApplied,setFilterApplyFlag,ordersFilterToggle} from '../../actions/filterAction';
 const messages = defineMessages ({
   inProgressStatus:{
     id: 'orderList.progress.status',
@@ -208,7 +208,7 @@ refresh = (data) => {
          * It'll set the default state to the filters.
          */
         this.props.orderfilterState({tokenSelected: {"STATUS": ["all"], "TIME PERIOD": ["allOrders"]}, searchQuery: {}})
-        this.props.toggleOrderFilter(false)
+        this.props.toggleOrderFilterApplied(false)
         this.props.showTableFilter(false)
 
     }
@@ -398,7 +398,7 @@ var mapDispatchToProps = function(dispatch){
     showTableFilter: function(data){dispatch(showTableFilter(data));},
     filterApplied: function(data){dispatch(filterApplied(data));},
     orderfilterState: function(data){dispatch(orderfilterState(data));},
-      toggleOrderFilter: function(data){dispatch(toggleOrderFilter(data));},
+      toggleOrderFilterApplied: function(data){dispatch(toggleOrderFilterApplied(data));},
       setFilterApplyFlag: function (data) {dispatch(setFilterApplyFlag(data));},
         ordersFilterToggle: function(data){dispatch(ordersFilterToggle(data));}
 
