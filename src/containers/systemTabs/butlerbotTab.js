@@ -8,18 +8,19 @@ import ButlerBotTable from './butlerbotTable';
 import {connect} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
 import {stringConfig} from '../../constants/backEndConstants';
+import {butlerBotsRefreshed} from './../../actions/systemActions'
 import {
     INITIAL_HEADER_SORT,
     INITIAL_HEADER_ORDER,
     GOR_PERIPHERAL_ONLINE,
-    GOR_PERIPHERAL_OFFLINE
+    GOR_PERIPHERAL_OFFLINE,WS_ONSEND
 } from '../../constants/frontEndConstants';
 import Spinner from '../../components/spinner/Spinner';
 import {setButlerSpinner} from  '../../actions/spinnerAction';
 import {butlerHeaderSort, butlerHeaderSortOrder, butlerFilterDetail} from '../../actions/sortHeaderActions';
 import {defineMessages} from 'react-intl';
 import {showTableFilter, filterApplied, toggleBotButton, butlerfilterState} from '../../actions/filterAction';
-import {updateSubscriptionPacket} from './../../actions/socketActions'
+import {updateSubscriptionPacket,setWsAction} from './../../actions/socketActions'
 import {wsOverviewData} from './../../constants/initData.js';
 //Mesages for internationalization
 const messages = defineMessages({
@@ -187,6 +188,25 @@ class ButlerBot extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state={query:null}
+    }
+
+    componentWillMount() {
+        /**
+         * It will update the last refreshed property of
+         * overview details, so that updated subscription
+         * packet can be sent to the server for data
+         * update.
+         */
+        this.props.butlerBotsRefreshed()
+    }
+
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.socketAuthorized && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
+            this.setState({query: nextProps.location.query})
+            this.refreshList(nextProps.location.query)
+        }
     }
 
     /**
@@ -198,6 +218,7 @@ class ButlerBot extends React.Component {
         let updatedWsSubscription = this.props.wsSubscriptionData;
         delete updatedWsSubscription["butlerbots"].data[0].details["filter_params"];
         delete updatedWsSubscription["system"].data[0].details["filter_params"];
+        this.props.initDataSentCall(updatedWsSubscription["butlerbots"])
         this.props.updateSubscriptionPacket(updatedWsSubscription);
         this.props.filterApplied(!this.props.isFilterApplied);
         this.props.showTableFilter(false);
@@ -312,7 +333,9 @@ function mapStateToProps(state, ownProps) {
         isFilterApplied: state.filterInfo.isFilterApplied || false,
         botFilterStatus: state.filterInfo.botFilterStatus || false,
         filterState: state.filterInfo.butlerFilterState,
-        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData
+        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
+        socketAuthorized: state.recieveSocketActions.socketAuthorized,
+        butlerBotsRefreshed:state.butlersInfo.butlerBotsRefreshed
     };
 }
 
@@ -346,6 +369,8 @@ var mapDispatchToProps = function (dispatch) {
         butlerfilterState: function (data) {
             dispatch(butlerfilterState(data));
         },
+        initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
+        butlerBotsRefreshed:function(data){dispatch(butlerBotsRefreshed(data))}
     };
 }
 
