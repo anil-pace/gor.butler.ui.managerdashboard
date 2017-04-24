@@ -6,7 +6,7 @@ import React  from 'react';
 
 import Inventory from '../components/inventory/inventory';
 import Spinner from '../components/spinner/Spinner';
-import { setInventorySpinner } from '../actions/inventoryActions';
+import { setInventorySpinner ,inventoryRefreshed} from '../actions/inventoryActions';
 import { FormattedMessage} from 'react-intl';
 import { connect } from 'react-redux';
 import {wsOverviewData} from './../constants/initData.js';
@@ -19,6 +19,16 @@ class InventoryTab extends React.Component{
 	{
     	super(props);
     	this.state={subscribed:false}
+    }
+
+    componentWillMount() {
+        /**
+         * It will update the last refreshed property of
+         * overview details, so that updated subscription
+         * packet can be sent to the server for data
+         * update.
+         */
+        this.props.inventoryRefreshed()
     }
 
     _setSpinner(bShow) {
@@ -96,6 +106,7 @@ function mapStateToProps(state, ownProps) {
         "noData": state.inventoryInfo.noData,
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
         socketAuthorized: state.recieveSocketActions.socketAuthorized,
+        inventoryRefreshed:state.inventoryInfo.inventoryRefreshed
     }
 }
     function mapDispatchToProps(dispatch){
@@ -105,6 +116,9 @@ function mapStateToProps(state, ownProps) {
             updateSubscriptionPacket: function (data) {
                 dispatch(updateSubscriptionPacket(data));
             },
+            inventoryRefreshed:function(data){
+            	dispatch(inventoryRefreshed(data))
+			}
     	}
     };
 
