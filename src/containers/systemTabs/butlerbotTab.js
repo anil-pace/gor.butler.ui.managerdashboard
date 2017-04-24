@@ -9,6 +9,7 @@ import {connect} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
 import {stringConfig} from '../../constants/backEndConstants';
 import {butlerBotsRefreshed} from './../../actions/systemActions'
+import {hashHistory} from 'react-router'
 import {
     INITIAL_HEADER_SORT,
     INITIAL_HEADER_ORDER,
@@ -253,28 +254,16 @@ class ButlerBot extends React.Component {
 
 
     /**
-     * The method will update and send the subscription packet
-     * to fetch the default list of users
-     * @private
+     *
      */
-    refreshList() {
-        let updatedWsSubscription = this.props.wsSubscriptionData;
-        delete updatedWsSubscription["butlerbots"].data[0].details["filter_params"];
-        delete updatedWsSubscription["system"].data[0].details["filter_params"];
-        this.props.initDataSentCall(updatedWsSubscription["butlerbots"])
-        this.props.updateSubscriptionPacket(updatedWsSubscription);
-        this.props.filterApplied(!this.props.isFilterApplied);
-        this.props.showTableFilter(false);
+    _clearFilter() {
         this.props.toggleBotButton(false);
-        /**
-         * It will reset the filter
-         * fields already applied in
-         * the Filter box
-         */
         this.props.butlerfilterState({
-            tokenSelected: {"STATUS": ["any"], "MODE": ["any"]}, searchQuery: {},
+            tokenSelected: {"STATUS": ["any"], "MODE":["any"]}, searchQuery: {
+            },
             defaultToken: {"STATUS": ["any"], "MODE": ["any"]}
         });
+        hashHistory.push({pathname: "/butlerbots", query: {}})
     }
 
     render() {
@@ -354,7 +343,7 @@ class ButlerBot extends React.Component {
                                         lastUpdatedText={updateStatusIntl}
                                         lastUpdated={updateStatusIntl}
                                         butlerState={this.props.filterState}
-                                        refreshList={this.refreshList.bind(this)}
+                                        refreshList={this._clearFilter.bind(this)}
                         />
                     </div>
                 </div>
