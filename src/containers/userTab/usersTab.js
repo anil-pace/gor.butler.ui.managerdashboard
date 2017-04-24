@@ -6,11 +6,13 @@ import {defineMessages} from 'react-intl';
 import {userRequest} from '../../actions/userActions';
 import {stringConfig} from '../../constants/backEndConstants'
 import {userHeaderSort, userHeaderSortOrder, userFilterDetail} from '../../actions/sortHeaderActions';
-import {INITIAL_HEADER_SORT, INITIAL_HEADER_ORDER, GET_ROLES, GET, APP_JSON} from '../../constants/frontEndConstants';
+import {INITIAL_HEADER_SORT, INITIAL_HEADER_ORDER, GET_ROLES, GET, APP_JSON,WS_ONSEND} from '../../constants/frontEndConstants';
 import {showTableFilter, filterApplied,userfilterState,toggleUserFilter} from '../../actions/filterAction';
 import {ROLE_URL} from '../../constants/configConstants';
-import {updateSubscriptionPacket} from './../../actions/socketActions'
+import {updateSubscriptionPacket,setWsAction} from './../../actions/socketActions'
 import {wsOverviewData} from './../../constants/initData.js';
+import {hashHistory} from 'react-router'
+import {userFilterApplySpinner}  from '../../actions/spinnerAction';
 //Mesages for internationalization
 const messages = defineMessages({
     userOperator: {
@@ -65,6 +67,7 @@ const messages = defineMessages({
 class UsersTab extends React.Component {
     constructor(props) {
         super(props);
+        this.state={query:null}
     }
 
     componentDidMount() {
@@ -79,6 +82,12 @@ class UsersTab extends React.Component {
         this.props.userRequest(userData);
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.socketAuthorized && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
+            this.setState({query: nextProps.location.query})
+            this._refreshList(nextProps.location.query)
+        }
+    }
     _processUserDetails() {
         var nProps = this,
             data = nProps.props.userdetails
@@ -149,15 +158,63 @@ class UsersTab extends React.Component {
     }
 
     /**
+     * The method will update the subscription packet
+     * and will fetch the data from the socket.
+     * @private
+     */
+    _refreshList(query) {
+        let filterSubsData = {}
+        if (query.username) {
+            let name_query = query.username.split(" ")
+            name_query = name_query.filter(function (word) {
+                return !!word
+            })
+            filterSubsData["username"] = name_query.length > 1 ? name_query : name_query.join("").trim();
+        }
+        if (query.status) {
+            filterSubsData["logged_in"] = query.status === 'online' ? 'true' : 'false'
+        }
+        if (query.role) {
+            filterSubsData["role"] = ['in', query.role.split(",")]
+        }
+        if (query.mode) {
+            let pps_list = []
+            query.mode.split(',').forEach(function (mode) {
+                pps_list.push(mode.split("__").length > 1 ? {
+                    pps_mode: mode.split("__")[0],
+                    seat_type: mode.split("__")[1]
+                } : {pps_mode: mode.split("__")[0]})
+            })
+            filterSubsData["pps"] = ['in', pps_list]
+        }
+        if (Object.keys(query).length !== 0) {
+            this.props.toggleUserFilter(true);
+            sessionStorage.setItem("users", this.props.location.search)
+        } else {
+            sessionStorage.removeItem("users")
+        }
+        let updatedWsSubscription = this.props.wsSubscriptionData;
+        updatedWsSubscription["users"].data[0].details["filter_params"] = filterSubsData;
+        this.props.initDataSentCall(updatedWsSubscription["users"])
+        this.props.updateSubscriptionPacket(updatedWsSubscription);
+        this.props.userfilterState({
+            tokenSelected: {
+                "STATUS": [query.status || "all"],
+                "ROLE": [query.role || "all"],
+                "WORK MODE": [query.mode || "all"],
+                "LOCATION": ["all"]
+            }, searchQuery: {"USER NAME": query.username || null},
+            defaultToken: {"STATUS": ["all"], "ROLE": ["all"], "WORK MODE": ["all"], "LOCATION": ["all"]}
+        });
+        this.props.filterApplied(!this.props.isFilterApplied);
+    }
+
+    /**
      * The method will update and send the subscription packet
      * to fetch the default list of users
      * @private
      */
     _refreshUserList() {
-        let updatedWsSubscription = this.props.wsSubscriptionData;
-        delete updatedWsSubscription["users"].data[0].details["filter_params"];
-        this.props.updateSubscriptionPacket(updatedWsSubscription);
-        this.props.filterApplied(!this.props.isFilterApplied);
         this.props.showTableFilter(false);
         this.props.toggleUserFilter(false);
         /**
@@ -167,6 +224,7 @@ class UsersTab extends React.Component {
          */
         this.props.userfilterState({tokenSelected: {"STATUS":["all"], "ROLE":["all"], "WORK MODE":["all"],"LOCATION":["all"]}, searchQuery: {},
             defaultToken: {"STATUS":["all"], "ROLE":["all"], "WORK MODE":["all"],"LOCATION":["all"]}})
+        hashHistory.push({pathname: "/users", query: {}})
     }
 
     render() {
@@ -217,7 +275,8 @@ function mapStateToProps(state, ownProps) {
         userFilterStatus: state.filterInfo.userFilterStatus || false,
         roleInfo: state.appInfo.roleInfo || null,
         auth_token: state.authLogin.auth_token,
-        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData
+        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
+        socketAuthorized: state.recieveSocketActions.socketAuthorized,
 
     };
 }
@@ -247,6 +306,8 @@ var mapDispatchToProps = function (dispatch) {
         },
         userfilterState: function(data){dispatch(userfilterState(data));},
         toggleUserFilter: function(data){dispatch(toggleUserFilter(data));},
+        userFilterApplySpinner: function(data){dispatch(userFilterApplySpinner(data));},
+        initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
     };
 }
 

@@ -25,12 +25,17 @@ import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,
    constructor(props) 
    {  
     super(props); 
-  } 
-  
-  componentWillMount(){
-    this.context.router.push("/login");
-    this.props.updateSubscriptionPacket(wsOverviewData);
   }
+
+      componentWillMount() {
+          if (this.props.location.search) {
+              sessionStorage.setItem("nextUrl", this.props.location.pathname + this.props.location.search)
+          } else {
+              sessionStorage.removeItem("nextUrl")
+          }
+          this.context.router.push("/login");
+          this.props.updateSubscriptionPacket(wsOverviewData);
+      }
   componentDidMount(){
     var timeOffset =  sessionStorage.getItem("timeOffset");
     if(!timeOffset){
@@ -63,12 +68,22 @@ import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,
      * Checking if the user is loggedin 
      * and redirecting to main page
      */
-     
+
      
      let loginAuthorized= nextProps.loginAuthorized,
      authToken=nextProps.authToken,
      socketStatus = nextProps.socketStatus,
-     currTab = nextProps.subTab || nextProps.tab || null;
+        /**
+         * Gaurav Makkar
+         * In case of navigation where the user might not
+         * click the navigation tabs i,e BACK/FORWARD button
+         * currentTab/subtab may cause the problem
+         * with updated packet. So picking the current tab from the
+         * props instead of picking it from sessionStorage.
+         * @type {string}
+         */
+     // currTab = nextProps.subTab || nextProps.tab || null; //
+     currTab = nextProps.location.pathname.substring(1, nextProps.location.pathname.length);
 
      if(!loginAuthorized){
        this.context.router.push("/login");
@@ -94,14 +109,14 @@ import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,
         }
       }
       this.props.sendAuthToSocket(webSocketData) ;
-      this.props.initDataSentCall(subscribeData) ;
+     // this.props.initDataSentCall(subscribeData) ;
     }
-    else if(nextProps.prevTab !== currTab){
-      this.props.initDataSentCall(subscribeData) ;
+    else if(!nextProps.prevTab){
+     // this.props.initDataSentCall(subscribeData) ;
       this.props.prevTabSelected(currTab || TAB_ROUTE_MAP[OVERVIEW]);
     }
-    else if(nextProps.prevTab === currTab) {
-      this.props.initDataSentCall(subscribeData) ;
+    else if(nextProps.prevTab === currTab && nextProps.location.pathname===this.props.location.pathname) {
+      //  this.props.initDataSentCall(subscribeData) ;
     }
   }
     /**Render method called when component react renders

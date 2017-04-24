@@ -22,74 +22,74 @@ class Routes extends React.Component{
     	super(props);
        
     }
-   _requireAuth(nextState, replace ) {
-  		if (sessionStorage.getItem('auth_token')) 
-  		{
-  			let subTab =(sessionStorage.getItem('subTab') || null);
-  			let nextView ='/'+ (subTab || sessionStorage.getItem('nextView') || 'md');
-  			let selTab =(sessionStorage.getItem('selTab') || TAB_ROUTE_MAP[OVERVIEW]);
-  			this.props.loginRequest();
-  			this.props.tabSelected(selTab);
-  			this.props.subTabSelected(subTab);
-  			switch(selTab.toUpperCase()){
-  				case INVENTORY:
-  				this.props.setInventorySpinner(true);
-  				break;
 
-  				case AUDIT:
-  				this.props.setAuditSpinner(true);
-  				break;
-          case USER:
-          this.props.setUserSpinner(true);
-          break;
+    _requireAuth(nextState, replace) {
+        if (sessionStorage.getItem('auth_token')) {
+            let subTab = (sessionStorage.getItem('subTab') || null);
+            let nextView = '/' + (subTab || sessionStorage.getItem('nextView') || 'md');
+            let selTab = (sessionStorage.getItem('selTab') || TAB_ROUTE_MAP[OVERVIEW]);
+            this.props.loginRequest();
+            this.props.tabSelected(selTab);
+            this.props.subTabSelected(subTab);
+            switch (selTab.toUpperCase()) {
+                case INVENTORY:
+                    this.props.setInventorySpinner(true);
+                    break;
 
-  				default:
-  				this.props.setInventorySpinner(false);
-  				this.props.setAuditSpinner(false);
-          this.props.setUserSpinner(false);
+                case AUDIT:
+                    this.props.setAuditSpinner(true);
+                    break;
+                case USER:
+                    this.props.setUserSpinner(true);
+                    break;
 
-  			}
-  			if(subTab !== null) {
-  				switch(subTab.toUpperCase()) {
-  					case ORDERLIST:
-  					this.props.setOrderListSpinner(true);
-  					break;
+                default:
+                    this.props.setInventorySpinner(false);
+                    this.props.setAuditSpinner(false);
+                    this.props.setUserSpinner(false);
 
-  					case WAVES.toUpperCase():
-  					this.props.setWavesSpinner(true);
-  					break;
+            }
+            if (subTab !== null) {
+                switch (subTab.toUpperCase()) {
+                    case ORDERLIST:
+                        this.props.setOrderListSpinner(true);
+                        break;
 
-  					case BUTLERBOTS.toUpperCase():
-  					this.props.setButlerSpinner(true);
-  					break;
+                    case WAVES.toUpperCase():
+                        this.props.setWavesSpinner(true);
+                        break;
 
-  					case PPS.toUpperCase():
-  					this.props.setPpsSpinner(true);
-  					break;
+                    case BUTLERBOTS.toUpperCase():
+                        this.props.setButlerSpinner(true);
+                        break;
 
-  					case CHARGING.toUpperCase():
-  					this.props.setCsSpinner(true);
-  					break;
+                    case PPS.toUpperCase():
+                        this.props.setPpsSpinner(true);
+                        break;
 
-  					case WAVES.toUpperCase():
-  					this.props.setWavesSpinner(true);
-  					break;
+                    case CHARGING.toUpperCase():
+                        this.props.setCsSpinner(true);
+                        break;
+
+                    case WAVES.toUpperCase():
+                        this.props.setWavesSpinner(true);
+                        break;
 
 
-  					default:
-  					this.props.setOrderListSpinner(false);
-  					this.props.setWavesSpinner(false);
-  					this.props.setButlerSpinner(false);
-  					this.props.setPpsSpinner(false);
-  					this.props.setCsSpinner(false);
-  					this.props.setWavesSpinner(false);
+                    default:
+                        this.props.setOrderListSpinner(false);
+                        this.props.setWavesSpinner(false);
+                        this.props.setButlerSpinner(false);
+                        this.props.setPpsSpinner(false);
+                        this.props.setCsSpinner(false);
+                        this.props.setWavesSpinner(false);
 
-         
-  				}
-  			}
-    		replace(nextView)
- 	 	}
-   }
+
+                }
+            }
+            replace(sessionStorage.getItem("nextUrl") || nextView)
+        }
+    }
     _updateLanguage(){
     var sessionLocale = sessionStorage.getItem('localLanguage');
     
@@ -123,7 +123,7 @@ render(){
         },"defaultApp");
      }}
      />
-     <Route name="login" path="/login"   onEnter={this._refreshPage.bind(this)} 
+     <Route name="login" path="/login"   onEnter={this._refreshPage.bind(this)}
      getComponent={(location, callback) => {
          require.ensure([], function (require) {
             callback(null, require('./Login/login').default);
@@ -226,7 +226,7 @@ render(){
      }}
      />
 
-     <Route name="inventory" path="/inventory"  
+     <Route name="inventory" path="/inventory"
      getComponent={(location, callback) => {
          require.ensure([], function (require) {
             callback(null, require('../containers/inventoryTab').default);

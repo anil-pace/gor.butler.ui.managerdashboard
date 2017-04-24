@@ -10,6 +10,7 @@ import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
 import {stringConfig} from '../../constants/backEndConstants';
 import {userFilterApplySpinner}  from '../../actions/spinnerAction';
+import {hashHistory} from 'react-router'
 
 class UserFilter extends React.Component{
   constructor(props) 
@@ -105,64 +106,70 @@ _processUserRoll(){
         this.setState({searchQuery:handleInputQuery(inputQuery,queryField,this.state)});
       }
 
-      _applyFilter() {
-        let filterSubsData = {}, filterState = this.state;
-          /** Gaurav Makkar:
-           * Changed query parameters for username filter
-           * Updated data to be sent to the socket
-           * if single word:
-           * {username:<word>}
-           * if multiple word:
-           * {username:[<1>,<2>]}
-           */
-        if(filterState.searchQuery && filterState.searchQuery["USER NAME"]) {
-            let name_query=filterState.searchQuery["USER NAME"].split(" ")
-            name_query=name_query.filter(function(word){ return !!word})
-          filterSubsData["username"] = name_query.length>1?name_query:name_query.join("").trim();
+    _applyFilter() {
+        let filterSubsData = {}, filterState = this.state, _query = {};
+        /** Gaurav Makkar:
+         * Changed query parameters for username filter
+         * Updated data to be sent to the socket
+         * if single word:
+         * {username:<word>}
+         * if multiple word:
+         * {username:[<1>,<2>]}
+         */
+        if (filterState.searchQuery && filterState.searchQuery["USER NAME"]) {
+            _query.username = filterState.searchQuery["USER NAME"]
+            let name_query = filterState.searchQuery["USER NAME"].split(" ")
+            name_query = name_query.filter(function (word) {
+                return !!word
+            })
+            filterSubsData["username"] = name_query.length > 1 ? name_query : name_query.join("").trim();
         }
-          if (filterState.tokenSelected) {
-              (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !== "all" && filterState.tokenSelected["STATUS"].length !== 2 ? filterSubsData["logged_in"] = ['is', (filterState.tokenSelected["STATUS"] === "online") ? "true" : "false"] : "");
-              (filterState.tokenSelected["ROLE"] && filterState.tokenSelected["ROLE"][0] !== "all" ? filterSubsData["role"] = ['in', filterState.tokenSelected["ROLE"]] : "");
-              /** Gaurav Makkar:
-               * Added double underscore as a separator for the pps mode
-               * and seat type of the Work Mode filter.
-               * Data format to be sent to the socket is
-               * {pps:["in",[{pps_mode:"put",seat_type:"front"}]]}
-               */
-              if (filterState.tokenSelected["WORK MODE"] && filterState.tokenSelected["WORK MODE"][0] !== "all") {
-                  let pps_list = []
-                  filterState.tokenSelected["WORK MODE"].forEach(function (mode) {
-                      pps_list.push(mode.split("__").length > 1 ? {
-                          pps_mode: mode.split("__")[0],
-                          seat_type: mode.split("__")[1]
-                      } : {pps_mode: mode.split("__")[0]})
-                  })
-                  filterSubsData["pps"] = ['in', pps_list]
-              }
+        if (filterState.tokenSelected) {
+            (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !== "all" && filterState.tokenSelected["STATUS"].length !== 2 ? filterSubsData["logged_in"] = ['is', (filterState.tokenSelected["STATUS"] === "online") ? "true" : "false"] : "");
+            (filterState.tokenSelected["ROLE"] && filterState.tokenSelected["ROLE"][0] !== "all" ? filterSubsData["role"] = ['in', filterState.tokenSelected["ROLE"]] : "");
+            /** Gaurav Makkar:
+             * Added double underscore as a separator for the pps mode
+             * and seat type of the Work Mode filter.
+             * Data format to be sent to the socket is
+             * {pps:["in",[{pps_mode:"put",seat_type:"front"}]]}
+             */
+            if (filterState.tokenSelected["WORK MODE"] && filterState.tokenSelected["WORK MODE"][0] !== "all") {
+                let pps_list = []
+                filterState.tokenSelected["WORK MODE"].forEach(function (mode) {
+                    pps_list.push(mode.split("__").length > 1 ? {
+                        pps_mode: mode.split("__")[0],
+                        seat_type: mode.split("__")[1]
+                    } : {pps_mode: mode.split("__")[0]})
+                })
+                filterSubsData["pps"] = ['in', pps_list]
+            }
 
-              // (filterState.tokenSelected["LOCATION"] && filterState.tokenSelected["LOCATION"][0]!=="all"?filterSubsData["seat_type"] = ['in',filterState.tokenSelected["LOCATION"]]:"");
-          }
-     let updatedWsSubscription = this.props.wsSubscriptionData;
-     updatedWsSubscription["users"].data[0].details["filter_params"] = filterSubsData;
-     this.props.userfilterState(filterState);
-     this.props.updateSubscriptionPacket(updatedWsSubscription);
-     this.props.filterApplied(!this.props.isFilterApplied);
-     this.props.toggleUserFilter(true);
-     this.props.userFilterApplySpinner(true);
+            // (filterState.tokenSelected["LOCATION"] && filterState.tokenSelected["LOCATION"][0]!=="all"?filterSubsData["seat_type"] = ['in',filterState.tokenSelected["LOCATION"]]:"");
 
-   }
 
-   _clearFilter() {
-     let clearState = {};
-     let updatedWsSubscription = this.props.wsSubscriptionData;
-     updatedWsSubscription["users"].data[0].details["filter_params"] = {};
-     this.props.updateSubscriptionPacket(updatedWsSubscription);
-     this.setState({tokenSelected: {"STATUS":["all"], "ROLE":["all"], "WORK MODE":["all"],"LOCATION":["all"]}, searchQuery: {}});
-     this.props.userfilterState({tokenSelected: {"STATUS":["all"], "ROLE":["all"], "WORK MODE":["all"],"LOCATION":["all"]}, searchQuery: {}});
-     this.props.filterApplied(!this.props.isFilterApplied);
-     this.props.toggleUserFilter(false);
-     this.props.userFilterApplySpinner(true);
-   }
+            /**
+             * for query generation
+             */
+            if (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !== 'all') {
+                _query.status = filterState.tokenSelected["STATUS"]
+            }
+            if (filterState.tokenSelected["ROLE"] && filterState.tokenSelected["ROLE"][0] !== 'all') {
+                _query.role = filterState.tokenSelected["ROLE"]
+            }
+            if (filterState.tokenSelected["WORK MODE"] && filterState.tokenSelected["WORK MODE"][0] !== 'all') {
+                _query.mode = filterState.tokenSelected["WORK MODE"]
+            }
+        }
+       this.props.toggleUserFilter(true);
+       this.props.userFilterApplySpinner(true);
+       hashHistory.push({pathname: "/users", query: _query})
+    }
+
+    _clearFilter() {
+        this.props.toggleUserFilter(false);
+        this.props.userFilterApplySpinner(true);
+        hashHistory.push({pathname: "/users", query: {}})
+    }
 
    render(){
     let userDetail = this.props.userDetails;
