@@ -17,7 +17,7 @@ import {auditHeaderSortOrder, auditHeaderSort, auditFilterDetail} from '../actio
 import {getDaysDiff} from '../utilities/getDaysDiff';
 import {addDateOffSet} from '../utilities/processDate'; 
 import GorPaginate from '../components/gorPaginate/gorPaginate';
-import {showTableFilter,filterApplied} from '../actions/filterAction';
+import {showTableFilter,filterApplied,auditfilterState,toggleAuditFilter} from '../actions/filterAction';
 //Mesages for internationalization
 const messages = defineMessages({
   auditCreatedStatus: {
@@ -262,7 +262,18 @@ handlePageClick(data){
   var filterApplied = false;
   var skuText="",arr=[],selectvalue;
   makeDate = addDateOffSet(currentDate,-30);
-  
+
+  if (!data) {
+      /**
+       * After clearing the applied filter,
+       * It'll set the default state to the filters.
+       */
+      data={}
+      this.props.auditfilterState({tokenSelected: {"AUDIT TYPE":[ANY], "STATUS":[ALL]}, searchQuery: {},defaultToken: {"AUDIT TYPE":[ANY], "STATUS":[ALL]}})
+      this.props.toggleAuditFilter(false)
+      this.props.showTableFilter(false)
+
+  }
 //If user select both we are making it Any for backend support
   if(data.searchQuery && data.tokenSelected[AUDIT_TYPE]) {
    selectvalue=(data.tokenSelected[AUDIT_TYPE].length===2)?ANY:data.tokenSelected[AUDIT_TYPE][0];
@@ -417,17 +428,41 @@ function mapStateToProps(state, ownProps){
 }
 
 var mapDispatchToProps = function(dispatch){
-  return {
-    auditFilterDetail: function(data){dispatch(auditFilterDetail(data))},
-    auditHeaderSort: function(data){dispatch(auditHeaderSort(data))},
-    auditHeaderSortOrder: function(data){dispatch(auditHeaderSortOrder(data))},
-    setAuditSpinner: function(data){dispatch(setAuditSpinner(data))},
-    getAuditData: function(data){ dispatch(getAuditData(data)); },
-    getPageData: function(data){ dispatch(getPageData(data)); },
-    setAuditRefresh: function(){dispatch(setAuditRefresh());},
-    showTableFilter: function(data){dispatch(showTableFilter(data));},
-    filterApplied: function(data){dispatch(filterApplied(data));}
-  }
+    return {
+        auditFilterDetail: function (data) {
+            dispatch(auditFilterDetail(data))
+        },
+        auditHeaderSort: function (data) {
+            dispatch(auditHeaderSort(data))
+        },
+        auditHeaderSortOrder: function (data) {
+            dispatch(auditHeaderSortOrder(data))
+        },
+        setAuditSpinner: function (data) {
+            dispatch(setAuditSpinner(data))
+        },
+        getAuditData: function (data) {
+            dispatch(getAuditData(data));
+        },
+        getPageData: function (data) {
+            dispatch(getPageData(data));
+        },
+        setAuditRefresh: function () {
+            dispatch(setAuditRefresh());
+        },
+        showTableFilter: function (data) {
+            dispatch(showTableFilter(data));
+        },
+        filterApplied: function (data) {
+            dispatch(filterApplied(data));
+        },
+        auditfilterState: function (data) {
+            dispatch(auditfilterState(data));
+        },
+        toggleAuditFilter: function (data) {
+            dispatch(toggleAuditFilter(data));
+        }
+    }
 };
 
 AuditTab.contextTypes ={

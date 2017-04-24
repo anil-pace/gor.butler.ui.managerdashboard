@@ -246,8 +246,7 @@ class AuditTable extends React.Component {
     }
 
     _showAllAudit() {
-        var clearFilter = []
-        this.props.refreshData(clearFilter);
+        this.props.refreshData();
     }
 
     render() {
