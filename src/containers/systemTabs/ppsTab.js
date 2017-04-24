@@ -209,7 +209,7 @@ class PPS extends React.Component {
                                   setFilter={this.props.PPSFilterToggle}
                                   refreshList={this._refreshPPSList.bind(this)}
                                   emptyResponse={emptyResponse}
-                                  filterapplyflag={this.props.filterapplyflag}
+                                  filterApplyFlag={this.props.filterApplyFlag}
                                 setFilterApplyFlag={this.props.setFilterApplyFlag}
                         />
                     </div>
@@ -236,7 +236,7 @@ function mapStateToProps(state, ownProps) {
         ppsFilterState: state.filterInfo.ppsFilterState || false,
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
         isFilterApplied: state.filterInfo.isFilterApplied || false,
-        filterapplyflag:state.filterInfo.filterapplyflag|| false
+        filterApplyFlag:state.filterInfo.filterApplyFlag|| false
     };
 }
 
@@ -317,7 +317,7 @@ PPS.PropTypes = {
     isFilterApplied: React.PropTypes.bool,
     wsSubscriptionData: React.PropTypes.object,
     setFilterApplyFlag:React.PropTypes.func,
-    filterapplyflag:React.PropTypes.bool,
+    filterApplyFlag:React.PropTypes.bool,
     emptyResponse:React.PropTypes.bool
 
 }

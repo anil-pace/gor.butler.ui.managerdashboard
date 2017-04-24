@@ -230,7 +230,7 @@ class WaveTab extends React.Component {
                             waveFilterStatus={this.props.waveFilterStatus}
                             refreshList={this._refreshWavesList.bind(this)}
                             emptyResponse={emptyResponse}
-                            filterapplyflag={this.props.filterapplyflag}
+                            filterApplyFlag={this.props.filterApplyFlag}
                             setFilterApplyFlag={this.props.setFilterApplyFlag}
                             
                 />
@@ -254,7 +254,7 @@ function mapStateToProps(state, ownProps) {
         wavesToggleFilter: state.filterInfo.wavesToggleFilter || false,
         isFilterApplied: state.filterInfo.isFilterApplied || false,
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
-        filterapplyflag:state.filterInfo.filterapplyflag|| false
+        filterApplyFlag:state.filterInfo.filterApplyFlag|| false
     };
 };
 
@@ -311,7 +311,7 @@ WaveTab.PropTypes = {
     waveHeaderSortOrder: React.PropTypes.func,
     wavesFilterToggle: React.PropTypes.func,
     wsSubscriptionData: React.PropTypes.object,
-    filterapplyflag:React.PropTypes.bool,
+    filterApplyFlag:React.PropTypes.bool,
     setFilterApplyFlag:React.PropTypes.func
 };
 

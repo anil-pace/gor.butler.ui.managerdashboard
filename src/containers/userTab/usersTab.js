@@ -196,7 +196,7 @@ class UsersTab extends React.Component {
                                        userToggleFilter={this.props.userToggleFilter}
                                        setFilter={this.props.userFilterToggle}
                                        emptyResponse={emptyResponse}
-                                       filterapplyflag={this.props.filterapplyflag}
+                                       filterApplyFlag={this.props.filterApplyFlag}
                                         setFilterApplyFlag={this.props.setFilterApplyFlag}/>
                     </div>
                 </div>
@@ -223,7 +223,7 @@ function mapStateToProps(state, ownProps) {
         roleInfo: state.appInfo.roleInfo || null,
         auth_token: state.authLogin.auth_token,
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
-        filterapplyflag:state.filterInfo.filterapplyflag|| false
+        filterApplyFlag:state.filterInfo.filterApplyFlag|| false
 
     };
 }
@@ -278,7 +278,7 @@ UsersTab.PropTypes = {
     wsSubscriptionData:React.PropTypes.object,
     userfilterState:React.PropTypes.func,
     setFilterApplyFlag:React.PropTypes.func,
-filterapplyflag:React.PropTypes.bool
+filterApplyFlag:React.PropTypes.bool
 };
 
 

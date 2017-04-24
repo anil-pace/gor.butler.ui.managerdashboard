@@ -39,7 +39,7 @@ class ButlerBotTable extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     //Based on emptyresponse, appliedbutton and reponse has came or not we hide and show the filter
-    if(!nextProps.emptyResponse && this.props.filterapplyflag && !nextProps.responseFlag)
+    if(!nextProps.emptyResponse && this.props.filterApplyFlag && !nextProps.responseFlag)
         {
             this.props.setFilter(false);
             this.props.setFilterApplyFlag(false);
@@ -352,7 +352,7 @@ items:React.PropTypes.array,
   parameters:React.PropTypes.object,
   botFilterStatus:React.PropTypes.bool,
   setFilterApplyFlag:React.PropTypes.func,
-  filterapplyflag:React.PropTypes.bool,
+  filterApplyFlag:React.PropTypes.bool,
   setFilter:React.PropTypes.func,
   emptyResponse:React.PropTypes.bool
 };

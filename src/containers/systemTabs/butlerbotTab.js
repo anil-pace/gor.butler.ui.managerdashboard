@@ -270,7 +270,7 @@ class ButlerBot extends React.Component{
                             butlerState={this.props.filterState}
                             refreshList={this.refreshList.bind(this)}
                             emptyResponse={emptyResponse}
-                            filterapplyflag={this.props.filterapplyflag}
+                            filterApplyFlag={this.props.filterApplyFlag}
                             setFilterApplyFlag={this.props.setFilterApplyFlag}
                             />
 					</div>
@@ -293,7 +293,7 @@ function mapStateToProps(state, ownProps){
     botFilterStatus:state.filterInfo.botFilterStatus|| false,
     filterState: state.filterInfo.butlerFilterState,
       wsSubscriptionData:state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
-      filterapplyflag:state.filterInfo.filterapplyflag|| false
+      filterApplyFlag:state.filterInfo.filterApplyFlag|| false
   };
 }
 
@@ -336,7 +336,7 @@ butlerHeaderSortOrder:React.PropTypes.func,
 showTableFilter:React.PropTypes.func,
 filterApplied:React.PropTypes.func,
 setFilterApplyFlag:React.PropTypes.func,
-filterapplyflag:React.PropTypes.bool
+filterApplyFlag:React.PropTypes.bool
 
 };
 

@@ -386,7 +386,7 @@ render(){
               setAuditFilter={this.props.auditFilterDetail} auditState={auditState}
               setFilter={this.props.auditFilterToggle} auditToggleFilter={this.props.auditToggleFilter}
               isFilterApplied={this.props.isFilterApplied}  auditFilterStatus={this.props.auditFilterStatus}
-              responseFlag={this.props.auditSpinner}      filterapplyflag={this.props.filterapplyflag}
+              responseFlag={this.props.auditSpinner}      filterApplyFlag={this.props.filterApplyFlag}
               emptyResponse={emptyResponse}
               setFilterApplyFlag={this.props.setFilterApplyFlag}/>
 
@@ -430,7 +430,7 @@ function mapStateToProps(state, ownProps){
     isFilterApplied: state.filterInfo.isFilterApplied || false,
     auditFilterStatus:state.filterInfo.auditFilterStatus|| false,
     auditFilterState: state.filterInfo.auditFilterState ||{},
-    filterapplyflag:state.filterInfo.filterapplyflag|| false
+    filterApplyFlag:state.filterInfo.filterApplyFlag|| false
   };
 }
 
@@ -480,7 +480,7 @@ setAuditRefresh:React.PropTypes.func,
 auditFilterToggle:React.PropTypes.func,
 filterApplied: React.PropTypes.func,
 setFilterApplyFlag:React.PropTypes.func,
-filterapplyflag:React.PropTypes.bool,
+filterApplyFlag:React.PropTypes.bool,
 toggleAuditFilterApplied:React.PropTypes.func
 }
 

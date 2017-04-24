@@ -158,7 +158,7 @@ class ChargingStations extends React.Component {
                                                setFilter={this.props.CSFilterToggle}
                                                refreshList={this._refreshChargingStationList.bind(this)}
                                                emptyResponse={emptyResponse}
-                                                 filterapplyflag={this.props.filterapplyflag}
+                                                 filterApplyFlag={this.props.filterApplyFlag}
                                                 setFilterApplyFlag={this.props.setFilterApplyFlag}/>
 
 
@@ -183,7 +183,7 @@ function mapStateToProps(state, ownProps) {
         isFilterApplied: state.filterInfo.isFilterApplied || false,
         chargingFilterStatus: state.filterInfo.chargingFilterStatus || false,
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
-        filterapplyflag:state.filterInfo.filterapplyflag|| false
+        filterApplyFlag:state.filterInfo.filterApplyFlag|| false
     };
 }
 
@@ -243,7 +243,7 @@ ChargingStations.PropTypes = {
     filterApplied: React.PropTypes.func,
     wsSubscriptionData: React.PropTypes.object,
     setFilterApplyFlag:React.PropTypes.func,
-    filterapplyflag:React.PropTypes.bool,
+    filterApplyFlag:React.PropTypes.bool,
     emptyResponse:React.PropTypes.bool
 
 };

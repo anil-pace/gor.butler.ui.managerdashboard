@@ -343,7 +343,7 @@ render(){
                   isFilterApplied={this.props.isFilterApplied}
                    orderFilterStatus={this.props.orderFilterStatus}
                     emptyResponse={emptyResponse}
-                            filterapplyflag={this.props.filterapplyflag}
+                            filterApplyFlag={this.props.filterApplyFlag}
                             setFilterApplyFlag={this.props.setFilterApplyFlag}
                   />
 
@@ -376,7 +376,7 @@ function mapStateToProps(state, ownProps){
     isFilterApplied: state.filterInfo.isFilterApplied || false,
     orderFilterStatus:state.filterInfo.orderFilterStatus,
     orderFilterState: state.filterInfo.orderFilterState ||{},
-    filterapplyflag:state.filterInfo.filterapplyflag|| false
+    filterApplyFlag:state.filterInfo.filterApplyFlag|| false
 
   };
 }
@@ -437,7 +437,7 @@ filterApplied: React.PropTypes.func ,
 orderFilterStatus:React.PropTypes.bool,
 orderFilterState:React.PropTypes.object,
 setFilterApplyFlag:React.PropTypes.func,
-filterapplyflag:React.PropTypes.bool
+filterApplyFlag:React.PropTypes.bool
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(OrderListTab) ;

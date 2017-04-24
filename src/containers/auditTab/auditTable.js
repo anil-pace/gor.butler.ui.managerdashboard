@@ -64,7 +64,7 @@ class AuditTable extends React.Component {
 
         this.tableState(nextProps, this);
         //Based on emptyresponse, appliedbutton and reponse has came or not we hide and show the filter
-       if(!nextProps.emptyResponse && this.props.filterapplyflag && !nextProps.responseFlag)
+       if(!nextProps.emptyResponse && this.props.filterApplyFlag && !nextProps.responseFlag)
         {
             this.props.setFilter(false);
             this.props.setFilterApplyFlag(false);
@@ -538,7 +538,7 @@ AuditTable.PropTypes = {
     containerWidth: React.PropTypes.number,
     totalAudits: React.PropTypes.number,
     setFilterApplyFlag:React.PropTypes.func,
-    filterapplyflag:React.PropTypes.bool
+    filterApplyFlag:React.PropTypes.bool
 };
 
 

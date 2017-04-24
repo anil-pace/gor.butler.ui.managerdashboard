@@ -152,7 +152,7 @@ case ORDER_FILTER_VALUE:               //This reducer will update the the ppsFil
 
     case FILTER_APPLY_FLAG:              //This reducer will update the the Apply flag value true/false
     return Object.assign({}, state, { 
-      "filterapplyflag" : action.data
+      "filterApplyFlag" : action.data
     })
     break;
 
