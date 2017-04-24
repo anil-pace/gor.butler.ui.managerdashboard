@@ -172,14 +172,20 @@ class UsersTab extends React.Component {
             filterSubsData["username"] = name_query.length > 1 ? name_query : name_query.join("").trim();
         }
         if (query.status) {
-            filterSubsData["logged_in"] = query.status === 'online' ? 'true' : 'false'
+            query.status = query.status.constructor === Array ? query.status : [query.status]
+            if (query.status.length !== 2) {
+                filterSubsData["logged_in"] = query.status[0] === 'online' ? 'true' : 'false'
+            }
+
         }
         if (query.role) {
-            filterSubsData["role"] = ['in', query.role.split(",")]
+            query.role=query.role.constructor===Array?query.role:[query.role]
+            filterSubsData["role"] = ['in', query.role.constructor===Array?query.role:[query.role]]
         }
         if (query.mode) {
             let pps_list = []
-            query.mode.split(',').forEach(function (mode) {
+            query.mode=query.mode.constructor===Array?query.mode:[query.mode]
+            query.mode.forEach(function (mode) {
                 pps_list.push(mode.split("__").length > 1 ? {
                     pps_mode: mode.split("__")[0],
                     seat_type: mode.split("__")[1]
@@ -199,9 +205,9 @@ class UsersTab extends React.Component {
         this.props.updateSubscriptionPacket(updatedWsSubscription);
         this.props.userfilterState({
             tokenSelected: {
-                "STATUS": [query.status || "all"],
-                "ROLE": [query.role || "all"],
-                "WORK MODE": [query.mode || "all"],
+                "STATUS": query.status||["all"],
+                "ROLE": query.role||['all'],
+                "WORK MODE": query.mode||['all'],
                 "LOCATION": ["all"]
             }, searchQuery: {"USER NAME": query.username || null},
             defaultToken: {"STATUS": ["all"], "ROLE": ["all"], "WORK MODE": ["all"], "LOCATION": ["all"]}

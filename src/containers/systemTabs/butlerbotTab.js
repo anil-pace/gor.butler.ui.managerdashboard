@@ -205,9 +205,52 @@ class ButlerBot extends React.Component {
     componentWillReceiveProps(nextProps) {
         if (nextProps.socketAuthorized && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
             this.setState({query: nextProps.location.query})
-            this.refreshList(nextProps.location.query)
+            this._refreshList(nextProps.location.query)
         }
     }
+
+    /**
+     * The method will update the subscription packet
+     * and will fetch the data from the socket.
+     * @private
+     */
+    _refreshList(query) {
+        let filterSubsData = {}
+        if (query.location) {
+            filterSubsData["location"] = ['contains',query.location]
+        }
+        if (query.butler_id) {
+            filterSubsData["butler_id"] = ['=',query.butler_id]
+        }
+        if (query.status) {
+            filterSubsData["state"] = ['in',query.status.constructor===Array?query.status:[query.status]]
+        }
+        if (query.current_task) {
+            filterSubsData["current_task"] = ['in',query.current_task.constructor===Array?query.current_task:[query.current_task]]
+        }
+
+        if (Object.keys(query).length !== 0) {
+            this.props.toggleBotButton(true);
+            sessionStorage.setItem("butlerBots", this.props.location.search)
+        } else {
+            sessionStorage.removeItem("butlerBots")
+        }
+
+        let updatedWsSubscription = this.props.wsSubscriptionData;
+        updatedWsSubscription["system"].data[0].details["filter_params"] = filterSubsData;
+        updatedWsSubscription["butlerbots"].data[0].details["filter_params"] = filterSubsData;
+        this.props.initDataSentCall(updatedWsSubscription["butlerbots"])
+        this.props.updateSubscriptionPacket(updatedWsSubscription);
+        this.props.butlerfilterState({
+            tokenSelected: {"STATUS": query.status?query.status.constructor===Array?query.status:[query.status]:["any"], "MODE": query.current_task?query.current_task.constructor===Array?query.current_task:[query.current_task]:["any"]}, searchQuery: {
+                "SPECIFIC LOCATION/ZONE":query.location||null,
+                "BOT ID":query.butler_id||null
+            },
+            defaultToken: {"STATUS": ["any"], "MODE": ["any"]}
+        });
+        this.props.filterApplied(!this.props.isFilterApplied);
+    }
+
 
     /**
      * The method will update and send the subscription packet

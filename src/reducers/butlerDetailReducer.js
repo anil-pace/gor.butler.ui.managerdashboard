@@ -73,6 +73,12 @@ export function butlerDetail(state = {}, action) {
         case BUTLERS_DATA:
             var res, butlers;
             res = action.data;
+            if (!res.complete_data) {
+                /**
+                 * Error handling
+                 */
+                return state
+            }
             if (res.complete_data) {
                 butlers = processButlersData(res.complete_data);
 
@@ -86,6 +92,7 @@ export function butlerDetail(state = {}, action) {
             return Object.assign({}, state, {
                 "butlerBotsRefreshed": new Date()
             })
+
         default:
             return state
     }
