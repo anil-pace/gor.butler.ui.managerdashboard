@@ -33,7 +33,7 @@
   },
   {
     "id": "order.timePeriod.all",
-    "defaultMessage": "All"
+    "defaultMessage": "Any time"
   },
   {
     "id": "order.timePeriod.oneHr",

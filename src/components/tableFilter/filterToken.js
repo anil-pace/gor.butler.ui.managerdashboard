@@ -1,6 +1,8 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
+import {SINGLE,ADD_TOKEN, ADD_DEFAULT,REMOVE_TOKEN} from '../../constants/frontEndConstants';
+
 
 class FilterToken extends React.Component{
 	constructor(props) 
@@ -9,24 +11,39 @@ class FilterToken extends React.Component{
    }
 
 
-_handleTokenClick() {
+   _handleTokenClick() {
     var selectedToken = this.props.tokenSelected[this.props.tokenField],tokenFound = false;
-    if(selectedToken){
-        for (var i = selectedToken.length - 1; i >= 0; i--) {
-            if(selectedToken[i]===this.props.tokenLabel.value) {
-                this.props.tokenCallBack(this.props.tokenField,this.props.tokenLabel.value,"remove");
-                tokenFound = true;
-                break;
-            }
+    var selectedOption=this.props.selection;
+    var tokenSelect=this.props.tokenLabel.value;
+
+    switch(selectedOption)
+    {
+        case SINGLE:
+        if(selectedToken){
+            tokenSelect===selectedToken[0]? tokenFound=true:"";
+            this.props.tokenCallBack(this.props.tokenField, selectedToken[0],REMOVE_TOKEN);
         }
-    }   
-    if(!tokenFound && !this.props.lastToken){
-        this.props.tokenCallBack(this.props.tokenField,this.props.tokenLabel.value,"add");
+        tokenFound?this.props.tokenCallBack(this.props.tokenField,selectedToken[0],ADD_TOKEN):this.props.tokenCallBack(this.props.tokenField,this.props.tokenLabel.value,ADD_TOKEN); 
+        break; 
+
+        default:
+        if(selectedToken){
+            for (var i = selectedToken.length - 1; i >= 0; i--) {
+                if(selectedToken[i]===this.props.tokenLabel.value) {
+                    this.props.tokenCallBack(this.props.tokenField,this.props.tokenLabel.value,REMOVE_TOKEN);
+                    tokenFound = true;
+                    break;
+                }
+            }
+        }   
+        if(!tokenFound && !this.props.lastToken){
+            this.props.tokenCallBack(this.props.tokenField,this.props.tokenLabel.value,ADD_TOKEN);
+        }
+        else if(!tokenFound && this.props.lastToken) {
+            this.props.tokenCallBack(this.props.tokenField,this.props.tokenLabel.value,ADD_DEFAULT);
+        }
+
     }
-    else if(!tokenFound && this.props.lastToken) {
-        this.props.tokenCallBack(this.props.tokenField,this.props.tokenLabel.value,"addDefault");
-    }
-    
 
 }
 

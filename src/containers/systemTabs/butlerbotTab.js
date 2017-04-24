@@ -190,7 +190,7 @@ class ButlerBot extends React.Component{
         delete updatedWsSubscription["system"].data[0].details["filter_params"];
         this.props.updateSubscriptionPacket(updatedWsSubscription);
         this.props.filterApplied(!this.props.isFilterApplied);
-        this.props.showTableFilter(false);
+        this.props.BotFilterToggle(false);
         this.props.toggleBotButtonApplied(false);
         /**
          * It will reset the filter
@@ -333,7 +333,6 @@ butlerFilterDetail:React.PropTypes.func,
 setButlerSpinner:React.PropTypes.func,
 butlerHeaderSort:React.PropTypes.func,
 butlerHeaderSortOrder:React.PropTypes.func,
-showTableFilter:React.PropTypes.func,
 filterApplied:React.PropTypes.func,
 setFilterApplyFlag:React.PropTypes.func,
 filterApplyFlag:React.PropTypes.bool

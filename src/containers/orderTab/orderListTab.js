@@ -250,8 +250,9 @@ refresh = (data) => {
   }
 
   //appending filter for orders by time
- if(data.tokenSelected && data.tokenSelected["TIME PERIOD"] && data.tokenSelected["TIME PERIOD"].length &&data.tokenSelected["TIME PERIOD"][0]!=="allOrders") {
-    var timeOut = data.tokenSelected["TIME PERIOD"][0]
+ if(data.tokenSelected && data.tokenSelected["TIME PERIOD"] && data.tokenSelected["TIME PERIOD"].length ) {
+    let timeOut;
+    timeOut=data.tokenSelected["TIME PERIOD"][0]==="allOrders" ?"oneDayOrders":data.tokenSelected["TIME PERIOD"][0];
     currentTime = new Date();
     prevTime = new Date();
     prevTime = new Date(prevTime.setHours(prevTime.getHours() - convertTime[timeOut]));

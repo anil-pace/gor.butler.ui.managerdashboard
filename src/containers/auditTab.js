@@ -271,7 +271,7 @@ handlePageClick(data){
       data={}
       this.props.auditfilterState({tokenSelected: {"AUDIT TYPE":[ANY], "STATUS":[ALL]}, searchQuery: {},defaultToken: {"AUDIT TYPE":[ANY], "STATUS":[ALL]}})
       this.props.toggleAuditFilterApplied(false)
-      this.props.showTableFilter(false)
+      this.props.auditFilterToggle(false)
 
   }
 //If user select both we are making it Any for backend support

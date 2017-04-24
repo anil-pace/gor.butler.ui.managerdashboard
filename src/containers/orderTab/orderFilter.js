@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
+
 class OrderFilter extends React.Component{
 	constructor(props) 
 	{
@@ -51,7 +52,7 @@ class OrderFilter extends React.Component{
                     { value: 'exception', label: <FormattedMessage id="order.STATUS.exep" defaultMessage ="Exception"/>}
                     ];
         var labelC2 = [
-                    { value: 'allOrders', label: <FormattedMessage id="order.timePeriod.all" defaultMessage ="All"/>},
+                    { value: 'allOrders', label: <FormattedMessage id="order.timePeriod.all" defaultMessage ="Any time"/>},
                     { value: 'oneHourOrders', label: <FormattedMessage id="order.timePeriod.oneHr" defaultMessage ="Last 1 hours"/>},
                     { value: 'twoHourOrders', label: <FormattedMessage id="order.timePeriod.twoHR" defaultMessage ="Last 2 hours"/>},
                     { value: 'sixHourOrders', label: <FormattedMessage id="order.timePeriod.sixHr" defaultMessage ="Last 6 hours"/>},
@@ -60,7 +61,7 @@ class OrderFilter extends React.Component{
                     ];
         var selectedToken =  this.state.tokenSelected;
         var column1 = <FilterTokenWrap field={tokenField1} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC1} selectedToken={selectedToken}/>;
-        var column2 = <FilterTokenWrap field={tokenField2} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC2} selectedToken={selectedToken}/>;
+        var column2 = <FilterTokenWrap field={tokenField2} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC2} selectedToken={selectedToken} selection="Single"/>;
         var columnDetail = {column1token:column1, column2token:column2};
         return columnDetail;
     }
