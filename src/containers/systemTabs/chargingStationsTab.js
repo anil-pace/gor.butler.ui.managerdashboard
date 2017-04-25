@@ -11,7 +11,7 @@ import Spinner from '../../components/spinner/Spinner';
 import {setCsSpinner} from '../../actions/spinnerAction';
 import {stringConfig} from '../../constants/backEndConstants';
 import {defineMessages} from 'react-intl';
-import {INITIAL_HEADER_SORT, INITIAL_HEADER_ORDER, GOR_CONNECTED_STATUS} from '../../constants/frontEndConstants';
+import {INITIAL_HEADER_SORT, INITIAL_HEADER_ORDER, GOR_CONNECTED_STATUS,WS_ONSEND} from '../../constants/frontEndConstants';
 import {csHeaderSort, csHeaderSortOrder, csFilterDetail} from '../../actions/sortHeaderActions';
 import {
     showTableFilter,
@@ -19,8 +19,10 @@ import {
     chargingstationfilterState,
     toggleChargingFilter
 } from '../../actions/filterAction';
-import {updateSubscriptionPacket} from './../../actions/socketActions'
+import {updateSubscriptionPacket,setWsAction} from './../../actions/socketActions'
 import {wsOverviewData} from './../../constants/initData.js';
+import {chargingStationListRefreshed} from './../../actions/systemActions'
+import {hashHistory} from 'react-router'
 
 //Mesages for internationalization
 const messages = defineMessages({
@@ -41,6 +43,7 @@ const messages = defineMessages({
 class ChargingStations extends React.Component {
     constructor(props) {
         super(props);
+        this.state={query:null}
     }
 
     _processChargersData(data, nProps) {
@@ -79,6 +82,73 @@ class ChargingStations extends React.Component {
         }
         return chargerData;
     }
+
+    componentWillMount() {
+        /**
+         * It will update the last refreshed property of
+         * overview details, so that updated subscription
+         * packet can be sent to the server for data
+         * update.
+         */
+        this.props.chargingStationListRefreshed()
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.socketAuthorized && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
+            this.setState({query: nextProps.location.query})
+            this._refreshList(nextProps.location.query)
+        }
+    }
+
+    /**
+     * The method will update the subscription packet
+     * and will fetch the data from the socket.
+     * @private
+     */
+    _refreshList(query) {
+        let filterSubsData = {}
+        if (query.charger_id) {
+            filterSubsData["charger_id"] = ['contains', query.charger_id]
+        }
+        if (query.charger_status) {
+            filterSubsData["charger_status"] = ['in', query.charger_status.constructor === Array ? query.charger_status : [query.charger_status]]
+        }
+        if (query.charger_mode) {
+            filterSubsData["charger_mode"] = ['in', query.charger_mode.constructor === Array ? query.charger_mode : [query.charger_mode]]
+        }
+
+        if (Object.keys(query).length !== 0) {
+            this.props.toggleChargingFilter(true);
+            sessionStorage.setItem("chargingstation", this.props.location.search)
+        } else {
+            sessionStorage.removeItem("chargingstation")
+        }
+
+        let updatedWsSubscription = this.props.wsSubscriptionData;
+        updatedWsSubscription["chargingstation"].data[0].details["filter_params"] = filterSubsData;
+        this.props.initDataSentCall(updatedWsSubscription["chargingstation"])
+        this.props.updateSubscriptionPacket(updatedWsSubscription);
+        this.props.chargingstationfilterState({
+            tokenSelected: {
+                "DOCKING STATUS": query.charger_status ? query.charger_status.constructor === Array ? query.charger_status : [query.charger_status] : ["all"],
+                "OPERATING MODE": query.charger_mode ? query.charger_mode.constructor === Array ? query.charger_mode : [query.charger_mode] : ["all"]
+            }, searchQuery: {
+                "CHARGING STATION ID": query.charger_id || ''
+            }
+        });
+        this.props.filterApplied(!this.props.isFilterApplied);
+    }
+
+
+    /**
+     *
+     */
+    _clearFilter() {
+        this.props.toggleChargingFilter(false);
+        this.props.chargingstationfilterState({tokenSelected: {"STATUS": ["all"], "MODE": ["all"]}, searchQuery: {}});
+        hashHistory.push({pathname: "/chargingstation", query: {}})
+    }
+
 
     /**
      * The method will update and send the subscription packet
@@ -155,7 +225,7 @@ class ChargingStations extends React.Component {
                                                lastUpdated={updateStatusIntl}
                                                showFilter={this.props.showFilter}
                                                setFilter={this.props.showTableFilter}
-                                               refreshList={this._refreshChargingStationList.bind(this)}/>
+                                               refreshList={this._clearFilter.bind(this)}/>
 
 
                     </div>
@@ -178,7 +248,9 @@ function mapStateToProps(state, ownProps) {
         showFilter: state.filterInfo.filterState || false,
         isFilterApplied: state.filterInfo.isFilterApplied || false,
         chargingFilterStatus: state.filterInfo.chargingFilterStatus || false,
-        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData
+        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
+        chargingStationListRefreshed:state.chargerInfo.chargingStationListRefreshed,
+        socketAuthorized: state.recieveSocketActions.socketAuthorized
     };
 }
 
@@ -212,6 +284,10 @@ var mapDispatchToProps = function (dispatch) {
         toggleChargingFilter: function (data) {
             dispatch(toggleChargingFilter(data));
         },
+        chargingStationListRefreshed:function(data){
+            dispatch(chargingStationListRefreshed(data))
+        },
+        initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
 
     };
 }

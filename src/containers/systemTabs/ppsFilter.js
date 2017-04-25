@@ -11,6 +11,7 @@ import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/t
 import RangeSlider from '../../components/rangeSlider/rangeSlider'
 import {filterMarks} from '../../constants/frontEndConstants';
 import {setPpsFilterSpinner}  from '../../actions/spinnerAction';
+import {hashHistory} from 'react-router'
 
 
 class PPSFilter extends React.Component{  
@@ -100,57 +101,37 @@ class PPSFilter extends React.Component{
 
 
     _applyFilter() {
-        let filterSubsData = {}, filterState = this.state;
-      if(filterState.searchQuery) {
+        let filterState = this.state, _query = {};
+        if (filterState.searchQuery) {
 
-          /** Gaurav Makkar:
-           *  Changed query parameter for the
-           *  operator assigned.
-           *  Updated data to be sent to the socket:
-           * if single word:
-           * {operator_assigned:["=",<word>]}
-           * if multiple word:
-           * {operator_assigned:["=",[<1>,<2>]]}
-           * {username:[<1>,<2>]}
-           */
-          if (filterState.searchQuery["OPERATOR ASSIGNED"]) {
-              let operator_assigned_query=filterState.searchQuery["OPERATOR ASSIGNED"].split(" ")
-              operator_assigned_query=operator_assigned_query.filter(function(word){ return !!word})
-              filterSubsData["operators_assigned"] = operator_assigned_query.length>1?["=",operator_assigned_query]:["=",operator_assigned_query.join("").trim()];
-          }
-        (filterState.searchQuery["PPS ID"]?filterSubsData["pps_id"] = ['=',filterState.searchQuery["PPS ID"]]:"");
-      }
+            if (filterState.searchQuery && filterState.searchQuery["OPERATOR ASSIGNED"]) {
+                _query.operator = filterState.searchQuery["OPERATOR ASSIGNED"]
+            }
 
-      if(filterState.rangeSelected){
-        (filterState.rangeSelected["maxValue"]?filterSubsData["performance"]=['between',[ (Number(filterState.rangeSelected["minValue"])==0)?-1:Number(filterState.rangeSelected["minValue"]),Number(filterState.rangeSelected["maxValue"])]]:"");
-      }
+            if (filterState.searchQuery && filterState.searchQuery["PPS ID"]) {
+                _query.pps_id = filterState.searchQuery["PPS ID"]
+            }
 
-      
-      if(filterState.tokenSelected) {
-        (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0]!=="all"?filterSubsData["pps_status"] = ['in',filterState.tokenSelected["STATUS"]]:"");
-        (filterState.tokenSelected["MODE"] && filterState.tokenSelected["MODE"][0]!=="all"?filterSubsData["current_task"] = ['in',filterState.tokenSelected["MODE"]]:"");
-      }
-      let updatedWsSubscription = this.props.wsSubscriptionData;
-      updatedWsSubscription["pps"].data[0].details["filter_params"] = filterSubsData;
-      this.props.ppsfilterState(filterState);
-      this.props.updateSubscriptionPacket(updatedWsSubscription);
-      this.props.filterApplied(!this.props.isFilterApplied);
-      this.props.togglePPSFilter(true);
-      this.props.setPpsFilterSpinner(true);
+            if (filterState.rangeSelected && (filterState.rangeSelected["maxValue"] || filterState.rangeSelected["minValue"])) {
+                _query.minRange = filterState.rangeSelected["minValue"] || 0
+                _query.maxRange = filterState.rangeSelected["maxValue"]
+            }
+            if (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !== "all") {
+                _query.status = filterState.tokenSelected["STATUS"]
+            }
+            if (filterState.tokenSelected["MODE"] && filterState.tokenSelected["MODE"][0] !== "all") {
+                _query.mode = filterState.tokenSelected["MODE"]
+            }
+            this.props.togglePPSFilter(true);
+            this.props.setPpsFilterSpinner(true);
+            hashHistory.push({pathname: "/pps", query: _query})
+        }
     }
 
-    _clearFilter() {
-         let clearState = {};
-        let updatedWsSubscription = this.props.wsSubscriptionData;
-        updatedWsSubscription["pps"].data[0].details["filter_params"] = {};
-        this.props.updateSubscriptionPacket(updatedWsSubscription);
-        this.setState({tokenSelected: {"STATUS":["all"], "MODE":["all"]}, searchQuery: {}, rangeSelected:{"minValue":["-1"],"maxValue":["500"]}});
-        this.props.ppsfilterState({tokenSelected: {"STATUS":["all"], "MODE":["all"]}, searchQuery: {}, rangeSelected:{"minValue":["-1"],"maxValue":["500"]}});
-        this.props.filterApplied(!this.props.isFilterApplied);
+    _clearFilter(){
         this.props.togglePPSFilter(false);
         this.props.setPpsFilterSpinner(true);
-        this.props.setDefaultRange([0,500]);
-        this._handleRangeSlider();
+        hashHistory.push({pathname: "/pps", query: {}})
 
     } 
 

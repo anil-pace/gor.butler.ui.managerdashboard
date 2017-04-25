@@ -1,4 +1,5 @@
 import {PPS_DETAIL} from '../constants/backEndConstants';
+import {PPS_LIST_REFRESHED} from './../constants/frontEndConstants'
 import React  from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -16,6 +17,11 @@ export  function PPSDetail(state={},action) {
                "PPStypeDetail" : res.complete_data
           })
          }
+
+      case PPS_LIST_REFRESHED:
+          return Object.assign({}, state, {
+              "ppsListRefreshed": new Date()
+          })
 
     default:
       return state
