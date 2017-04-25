@@ -76,10 +76,10 @@ class OrderFilter extends React.Component{
     }
 
     _applyFilter() {
-          var filterState = this.state
+          var filterState = this.state;
         this.props.orderfilterState(filterState);
         this.props.toggleOrderFilterApplied(true);
-       this.props.refreshOption(this.state);
+      this.props.refreshOption(filterState) 
        this.props.setFilterApplyFlag(true);
     }
 

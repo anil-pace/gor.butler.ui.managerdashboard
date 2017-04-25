@@ -1,7 +1,8 @@
 import React  from 'react';
 import { connect } from 'react-redux';
 import {getPageData, getStatusFilter, getTimeFilter,getPageSizeOrders,currentPageOrders,lastRefreshTime} from '../../actions/paginationAction';
-import {ORDERS_RETRIEVE,GOR_BREACHED,BREACHED,GOR_EXCEPTION,GET,APP_JSON, INITIAL_HEADER_SORT, INITIAL_HEADER_ORDER, sortOrderHead,sortOrder} from '../../constants/frontEndConstants';
+import {ORDERS_RETRIEVE,GOR_BREACHED,BREACHED,GOR_EXCEPTION,GET,APP_JSON, INITIAL_HEADER_SORT, 
+  INITIAL_HEADER_ORDER, sortOrderHead,sortOrder,STATUS,TIME_PERIOD,ALL_ORDERS} from '../../constants/frontEndConstants';
 import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,ORDER_PAGE, PICK_BEFORE_ORDER_URL, BREACHED_URL,UPDATE_TIME_HIGH,UPDATE_TIME_LOW,EXCEPTION_TRUE,WAREHOUSE_STATUS,FILTER_ORDER_ID} from '../../constants/configConstants';
 import OrderListTable from './orderListTable';
 import Dropdown from '../../components/dropdown/dropdown'
@@ -47,9 +48,10 @@ class OrderListTab extends React.Component{
     super(props);
   } 
   componentDidMount() {
+    var clearState={};
     var data = this.props.orderFilterState;
     data.selected = 1;
-    this.refresh(data);
+    this.refresh(data)
   }
 
   processOrders(data, nProps) {
@@ -207,7 +209,7 @@ refresh = (data) => {
          * After clearing the applied filter,
          * It'll set the default state to the filters.
          */
-        this.props.orderfilterState({tokenSelected: {"STATUS": ["all"], "TIME PERIOD": ["allOrders"]}, searchQuery: {}})
+        this.props.orderfilterState({tokenSelected: {"STATUS": [ALL], "TIME PERIOD": [ALL_ORDERS]}, searchQuery: {}})
         this.props.toggleOrderFilterApplied(false)
         this.props.showTableFilter(false)
 
@@ -250,9 +252,9 @@ refresh = (data) => {
   }
 
   //appending filter for orders by time
- if(data.tokenSelected && data.tokenSelected["TIME PERIOD"] && data.tokenSelected["TIME PERIOD"].length ) {
+ if(data.tokenSelected && data.tokenSelected[TIME_PERIOD] && data.tokenSelected[TIME_PERIOD].length && data.tokenSelected[TIME_PERIOD][0]!==ALL_ORDERS) {
     let timeOut;
-    timeOut=data.tokenSelected["TIME PERIOD"][0]==="allOrders" ?"oneDayOrders":data.tokenSelected["TIME PERIOD"][0];
+    timeOut=data.tokenSelected[TIME_PERIOD][0];
     currentTime = new Date();
     prevTime = new Date();
     prevTime = new Date(prevTime.setHours(prevTime.getHours() - convertTime[timeOut]));

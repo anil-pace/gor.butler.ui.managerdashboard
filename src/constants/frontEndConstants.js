@@ -515,3 +515,6 @@ export const CHECKLIST = "CHECKLIST";
 export const RECEIVE_SHIFT_START_TIME = "RECEIVE_SHIFT_START_TIME";
 export const FILTER_APPLY_FLAG = "FILTER_APPLY_FLAG";
 export const SINGLE = "Single";
+export const STATUS = "STATUS";
+export const TIME_PERIOD = "TIME PERIOD";
+export const ALL_ORDERS = "allOrders";
