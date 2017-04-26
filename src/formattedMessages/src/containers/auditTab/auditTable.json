@@ -42,7 +42,7 @@
   {
     "id": "auditList.filter.search.bar",
     "description": "total results for filter search bar",
-    "defaultMessage": "{totalOrder} results found"
+    "defaultMessage": "{total} results found"
   },
   {
     "id": "auditList.filter.search.bar.showall",

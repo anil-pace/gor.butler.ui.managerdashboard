@@ -325,8 +325,8 @@ class AuditTable extends React.Component {
             <FilterSummary isFilterApplied={this.props.isFilterApplied} responseFlag={this.props.responseFlag}
                            filterText={<FormattedMessage id="auditList.filter.search.bar"
                                                          description='total results for filter search bar'
-                                                         defaultMessage='{totalOrder} results found'
-                                                         values={{totalOrder: rowsCount ? rowsCount : '0'}}/>}
+                                                         defaultMessage='{total} results found'
+                                                         values={{total: this.props.totalAudits || '0'}}/>}
                            refreshList={this._showAllAudit.bind(this)}
                            refreshText={<FormattedMessage id="auditList.filter.search.bar.showall"
                                                           description="button label for show all"

@@ -9,10 +9,6 @@ import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {setTextBoxStatus}  from '../../actions/auditActions';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
 import {
-    REJECTED,
-    RESOLVED,
-    INPROGRESS,
-    PENDING,
     ANY,
     ALL,
     SKU,
@@ -23,6 +19,8 @@ import {
     AUDIT_TASK_ID,
     AUDIT_TYPE
 }from '../../constants/frontEndConstants';
+import {hashHistory} from 'react-router'
+import {setAuditSpinner} from './../../actions/auditActions';
 
 class AuditFilter extends React.Component {
     constructor(props) {
@@ -38,11 +36,11 @@ class AuditFilter extends React.Component {
         this.props.showTableFilter(filterState);
     }
 
-    componentWillMount() {
-        if (this.props.auditFilterState) {
-            this.setState(this.props.auditFilterState)
-        }
-    }
+    // componentWillMount() {
+    //     if (this.props.auditFilterState) {
+    //         this.setState(this.props.auditFilterState)
+    //     }
+    // }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.auditFilterState && JSON.stringify(this.state) !== JSON.stringify(nextProps.auditFilterState)) {
@@ -106,11 +104,11 @@ class AuditFilter extends React.Component {
         ];
         const labelC2 = [
             {value: ALL, label: <FormattedMessage id="audit.token2.all" defaultMessage="Any"/>},
-            {value: ISSUE_FOUND, label: <FormattedMessage id="audit.token2.issueFound" defaultMessage="Issue found"/>},
-            {value: REJECTED, label: <FormattedMessage id="audit.token2.rejected" defaultMessage="Rejected"/>},
-            {value: RESOLVED, label: <FormattedMessage id="audit.token2.resolved" defaultMessage="Resolved"/>},
-            {value: INPROGRESS, label: <FormattedMessage id="audit.token2.inProgress" defaultMessage="In progress"/>},
-            {value: PENDING, label: <FormattedMessage id="audit.token2.pending" defaultMessage="Pending"/>}
+            {value: "issueFound", label: <FormattedMessage id="audit.token2.issueFound" defaultMessage="Issue found"/>},
+            {value: "audit_rejected", label: <FormattedMessage id="audit.token2.rejected" defaultMessage="Rejected"/>},
+            {value: "audit_resolved", label: <FormattedMessage id="audit.token2.resolved" defaultMessage="Resolved"/>},
+            {value: "audit_started__audit_tasked", label: <FormattedMessage id="audit.token2.inProgress" defaultMessage="In progress"/>},
+            {value: "audit_accepted__audit_pending__audit_waiting__audit_conflicting", label: <FormattedMessage id="audit.token2.pending" defaultMessage="Pending"/>}
         ];
         var selectedToken = this.state.tokenSelected;
         var column1 = <FilterTokenWrap field={tokenStatusField} tokenCallBack={this._handelTokenClick.bind(this)}
@@ -140,21 +138,34 @@ class AuditFilter extends React.Component {
     }
 
     _applyFilter() {
-        var filterState = this.state
-        this.props.auditfilterState(filterState);
-        this.props.refreshOption(this.state);
-        this.props.toggleAuditFilter(true);
+        var filterState = this.state,_query={}
 
+        if(filterState.tokenSelected[AUDIT_TYPE] && filterState.tokenSelected[AUDIT_TYPE][0]!==ANY){
+            _query.auditType=filterState.tokenSelected[AUDIT_TYPE]
+        }
+        if (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !== ALL) {
+            _query.status=filterState.tokenSelected["STATUS"]
+        }
+
+        if (filterState.searchQuery && filterState.searchQuery[AUDIT_TASK_ID]) {
+            _query.taskId=filterState.searchQuery[AUDIT_TASK_ID]
+        }
+        if (filterState.searchQuery && filterState.searchQuery[SPECIFIC_SKU_ID]) {
+            _query.skuId=filterState.searchQuery[SPECIFIC_SKU_ID]
+        }
+        if (filterState.searchQuery && filterState.searchQuery[SPECIFIC_LOCATION_ID]) {
+            _query.locationId=filterState.searchQuery[SPECIFIC_LOCATION_ID]
+        }
+
+        this.props.toggleAuditFilter(true);
+        this.props.setAuditSpinner(true);
+        hashHistory.push({pathname: "/audit", query: _query})
     }
 
     _clearFilter() {
-        var clearState = {}, obj = {};
-        this.setState({tokenSelected: {"AUDIT TYPE": [ANY], "STATUS": [ALL]}, searchQuery: {}});
-        this.props.auditfilterState({tokenSelected: {"AUDIT TYPE": [ANY], "STATUS": [ALL]}, searchQuery: {}});
-        this.props.filterApplied(false);
-        this.props.setTextBoxStatus(obj);
-        this.props.refreshOption(clearState);
         this.props.toggleAuditFilter(false);
+        this.props.setAuditSpinner(true);
+        hashHistory.push({pathname: "/audit", query: {}})
     }
 
     render() {
@@ -206,7 +217,10 @@ var mapDispatchToProps = function (dispatch) {
         },
         toggleAuditFilter: function (data) {
             dispatch(toggleAuditFilter(data));
-        }
+        },
+        setAuditSpinner: function (data) {
+            dispatch(setAuditSpinner(data))
+        },
     }
 };
 

@@ -4,7 +4,7 @@ import UserDataTable from './userTab/userTabTable';
 import Spinner from '../components/spinner/Spinner';
 import {connect} from 'react-redux';
 import {AUDIT_URL, FILTER_AUDIT_ID} from '../constants/configConstants';
-import {getAuditData, setAuditRefresh} from '../actions/auditActions';
+import {getAuditData, setAuditRefresh,auditListRefreshed} from '../actions/auditActions';
 import AuditTable from './auditTab/auditTable';
 import {getPageData} from '../actions/paginationAction';
 import {
@@ -47,8 +47,9 @@ import {defineMessages} from 'react-intl';
 import {auditHeaderSortOrder, auditHeaderSort, auditFilterDetail} from '../actions/sortHeaderActions';
 import {getDaysDiff} from '../utilities/getDaysDiff';
 import {addDateOffSet} from '../utilities/processDate';
-import GorPaginate from '../components/gorPaginate/gorPaginate';
+import GorPaginateV2 from '../components/gorPaginate/gorPaginateV2';
 import {showTableFilter, filterApplied, auditfilterState, toggleAuditFilter} from '../actions/filterAction';
+import {hashHistory} from 'react-router'
 //Mesages for internationalization
 const messages = defineMessages({
     auditCreatedStatus: {
@@ -99,45 +100,151 @@ const messages = defineMessages({
 class AuditTab extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {selected_page: 0};
+        this.state = {selected_page: 1,query:null,auditListRefreshed:null};
+    }
+
+
+    componentWillMount() {
+        /**
+         * It will update the last refreshed property of
+         * overview details, so that updated subscription
+         * packet can be sent to the server for data
+         * update.
+         */
+        this.props.auditListRefreshed()
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.auditRefresh) {
-            var data = {};
-            data.selected = this.state.selected_page;
-            this.handlePageClick(data);
-            this.props.setAuditRefresh(false);
+        if (nextProps.auditListRefreshed && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
+            this.setState({query: nextProps.location.query})
+            this.setState({auditListRefreshed:nextProps.auditListRefreshed})
+            this._refreshList(nextProps.location.query)
         }
     }
 
-    shouldComponentUpdate(nextProps) {
-        var flag = false;
-        if (nextProps.auditRefresh !== this.props.auditRefresh) {
-            flag = flag || true;
+    /**
+     * The method will update the subscription packet
+     * and will fetch the data from the socket.
+     * @private
+     */
+    _refreshList(query) {
+        let _query_params = [], _auditParamValue = [], _auditStatuses = [],
+            url = SEARCH_AUDIT_URL + addDateOffSet(new Date(), -30)
+        if (query.auditType && query.auditType.constructor !== Array) {
+            query.auditType = [query.auditType]
         }
 
-        else if ((nextProps.auditDetail && !nextProps.auditDetail.length)) {
-            flag = flag || false;
+        if (query.auditType && query.auditType.length === 1) {
+            _query_params.push([AUDIT_PARAM_TYPE, query.auditType[0]].join("="))
+        } else {
+            _query_params.push([AUDIT_PARAM_TYPE, ANY].join("="))
         }
 
-        else if (this.props.auditSortHeader !== nextProps.auditSortHeader || this.props.auditSpinner !== nextProps.auditSpinner) {
-            flag = flag || true;
+        if (query.skuId || query.locationId) {
+
+            if (query.skuId) {
+                _auditParamValue.push(query.skuId)
+            }
+            if (query.locationId) {
+                _auditParamValue.push(query.locationId)
+            }
+
+            _query_params.push([AUDIT_PARAM_VALUE, "['"+_auditParamValue.join("','")+"']"].join("="))
         }
 
-        else if (this.props.showFilter !== nextProps.showFilter) {
-            flag = flag || true;
+        if (query.status) {
+            let _flattened_statuses = []
+            query.status=query.status.constructor===Array?query.status:[query.status]
+            query.status.forEach(function (status) {
+                _flattened_statuses.push(status.split("__"))
+            })
+            _auditStatuses = [].concat.apply([], _flattened_statuses)
+            _query_params.push([AUDIT_STATUS,"['"+_auditStatuses.join("','")+"']" ].join("="))
+        }
+        if (query.taskId) {
+            _query_params.push([FILTER_AUDIT_ID, query.taskId].join("="))
         }
 
-        return flag;
+        _query_params.push([GIVEN_PAGE,query.page||1].join("="))
+        _query_params.push([GIVEN_PAGE_SIZE,20].join("="))
+
+        if (query.columnKey && query.sortDir) {
+            this.props.auditHeaderSortOrder({
+                colSortDirs: {[query.columnKey]: query.sortDir},
+            })
+            this.props.auditHeaderSort(query.columnKey);
+            _query_params.push(sortAuditHead[query.columnKey])
+            _query_params.push(sortOrder[query.sortDir])
+        }
+
+        url=[url,_query_params.join("&")].join("&")
+
+        if (Object.keys(query).length !== 0) {
+            this.props.toggleAuditFilter(true);
+            sessionStorage.setItem("pps", this.props.location.search)
+        } else {
+            sessionStorage.removeItem("pps")
+        }
+
+        let paginationData = {
+            'url': url,
+            'method': GET,
+            'cause': AUDIT_RETRIEVE,
+            'token': this.props.auth_token,
+            'contentType': APP_JSON
+        }
+        this.props.setAuditSpinner(true);
+        this.props.auditfilterState({
+            tokenSelected: {"AUDIT TYPE": query.auditType ? query.auditType.constructor === Array ? query.auditType : [query.auditType] : [ANY],
+                "STATUS": query.status ? query.status.constructor === Array ? query.status : [query.status] : [ALL]},
+            searchQuery: {
+                'SPECIFIC SKU ID':query.skuId||'',
+                'SPECIFIC LOCATION ID':query.locationId||'',
+                'AUDIT TASK ID':query.taskId||''
+            },
+            defaultToken: {"AUDIT TYPE": [ANY], "STATUS": [ALL]}
+        })
+        this.props.filterApplied(!this.props.isFilterApplied);
+        this.props.getPageData(paginationData);
+    }
+    /**
+     *
+     */
+    _clearFilter() {
+        this.props.toggleAuditFilter(false);
+        hashHistory.push({pathname: "/audit", query: {}})
     }
 
-    componentDidMount() {
-        var data = this.props.auditFilterState;
-        data.selected = 1;
-        this.handlePageClick(data);
 
-    }
+    // componentWillReceiveProps(nextProps) {
+    //     if (nextProps.auditRefresh) {
+    //         var data = {};
+    //         data.selected = this.state.selected_page;
+    //         this.handlePageClick(data);
+    //         this.props.setAuditRefresh(false);
+    //     }
+    // }
+
+    // shouldComponentUpdate(nextProps) {
+    //     var flag = false;
+    //     if (nextProps.auditRefresh !== this.props.auditRefresh) {
+    //         flag = flag || true;
+    //     }
+    //
+    //     else if ((nextProps.auditDetail && !nextProps.auditDetail.length)) {
+    //         flag = flag || false;
+    //     }
+    //
+    //     else if (this.props.auditSortHeader !== nextProps.auditSortHeader || this.props.auditSpinner !== nextProps.auditSpinner) {
+    //         flag = flag || true;
+    //     }
+    //
+    //     else if (this.props.showFilter !== nextProps.showFilter) {
+    //         flag = flag || true;
+    //     }
+    //
+    //     return flag;
+    // }
 
     _processAuditData(data, nProps) {
         var nProps = this,
@@ -481,7 +588,7 @@ class AuditTab extends React.Component {
                     </div>
                 </div>
                 {auditData.length ? <div className="gor-audit-paginate-wrap">
-                    <GorPaginate getPageDetail={this.handlePageClick.bind(this)} totalPage={this.props.totalPage}/>
+                    <GorPaginateV2 location={this.props.location} currentPage={this.state.query.page||1} totalPage={this.props.totalPage}/>
                 </div> : ""}
             </div>
         );
@@ -506,7 +613,8 @@ function mapStateToProps(state, ownProps) {
         showFilter: state.filterInfo.filterState || false,
         isFilterApplied: state.filterInfo.isFilterApplied || false,
         auditFilterStatus: state.filterInfo.auditFilterStatus || false,
-        auditFilterState: state.filterInfo.auditFilterState || {}
+        auditFilterState: state.filterInfo.auditFilterState || {},
+        auditListRefreshed:state.auditInfo.auditListRefreshed
     };
 }
 
@@ -544,7 +652,10 @@ var mapDispatchToProps = function (dispatch) {
         },
         toggleAuditFilter: function (data) {
             dispatch(toggleAuditFilter(data));
-        }
+        },
+        auditListRefreshed:function(data){
+            dispatch(auditListRefreshed(data))
+        },
     }
 };
 

@@ -394,9 +394,9 @@ export const AUDIT_UNRESOLVED = "Unresolved";
 export const AUDIT_LINE_REJECTED  = "audit_rejected";
 export const AUDIT_REJECTED_STATUS = "Rejected";
 export const AUDIT_RESOLVED_STATUS = "Resolved";
-export const AUDIT_PARAM_TYPE = '&audit_param_type=';
-export const AUDIT_PARAM_VALUE = '&audit_param_value=';
-export const AUDIT_STATUS = '&audit_status=';
+export const AUDIT_PARAM_TYPE = 'audit_param_type';
+export const AUDIT_PARAM_VALUE = 'audit_param_value';
+export const AUDIT_STATUS = 'audit_status';
 export const AUDIT_TYPE="AUDIT TYPE";
 export const SPECIFIC_SKU_ID='SPECIFIC SKU ID';
 export const SPECIFIC_LOCATION_ID='SPECIFIC LOCATION ID';
@@ -477,11 +477,11 @@ export const SOFT_MANUAL = "soft_manual";
 export const SOFT = "soft";
 export const HARD = "hard";
 //backend sort
-export const sortAuditHead = {"startTime":"&order_by=start_actual_time", 
-							"completedTime":"&order_by=completion_time", 
-							"display_id":"&order_by=display_id",
-                  			"status":"&order_by=audit_status&order_by_seq=[ 'audit_pending_approval','audit_created','audit_accepted','audit_conflicting','audit_waiting','audit_resolved','audit_pending','audit_reaudited','audit_started','audit_tasked','audit_rejected','audit_resolved','audit_aborted', 'audit_completed']"};
-export const sortOrder = {"DESC":"&order=asc", "ASC":"&order=desc"};
+export const sortAuditHead = {"startTime":['order_by','start_actual_time'].join("="),
+							"completedTime":["order_by","completion_time"].join("="),
+							"display_id":["order_by","display_id"].join("="),
+                  			"status":[["order_by","audit_status"].join("="),["order_by_seq",[ 'audit_pending_approval','audit_created','audit_accepted','audit_conflicting','audit_waiting','audit_resolved','audit_pending','audit_reaudited','audit_started','audit_tasked','audit_rejected','audit_resolved','audit_aborted', 'audit_completed']].join("=")].join("&")};
+export const sortOrder = {"DESC":["order","asc"].join("="), "ASC":["order","desc"].join("=")};
 
 export const sortOrderHead = {"recievedTime":"&order_by=create_time", 
 							  "pickBy":"&order_by=pick_before_time", 
@@ -507,3 +507,4 @@ export const BUTLERBOTS_REFRESHED = "BUTLERBOTS_REFRESHED";
 export const PPS_LIST_REFRESHED = "PPS_LIST_REFRESHED";
 export const CHARGING_STATION_LIST_REFRESHED = "CHARGING_STATION_LIST_REFRESHED";
 export const INVENTORY_REFRESHED="INVENTORY_REFRESHED"
+export const AUDIT_LIST_REFRESHED="AUDIT_LIST_REFRESHED"
