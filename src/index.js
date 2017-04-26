@@ -22,7 +22,7 @@ import socketMiddleware from './middleware/socketMiddleware';
 import Routes from './components/Router';
 import {preloadedState} from './utilities/intialData';
  
-
+import './assets/css/main.scss';
 /**
  * Creating a store and passing it to provider
  */

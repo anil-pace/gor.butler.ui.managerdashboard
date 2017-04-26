@@ -4,7 +4,7 @@
  */
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-import SubTabs from '../components/subtab/SubTabs';
+import SubTabs from '../components/subtab/subTabs';
 
 
 class SystemTab extends React.Component{

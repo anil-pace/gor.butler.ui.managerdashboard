@@ -1,5 +1,5 @@
 import {INVENTORY_DATA_HISTORY,INVENTORY_HISTORY_DAYS_COUNT,DISPLAY_INVENTORY_HISTORY,INVENTORY_DATA_TODAY,PARSE_INVENTORY_TODAY,CATEGORY_COLOR_MAP,CATEGORY_DEFAULT,CATEGORY_UNUSED,PARSE_INVENTORY_HISTORY } from '../constants/frontEndConstants';
-import * as mockData from '../../mock/mockDBData'
+//import * as mockData from '../../mock/mockDBData'
 
 
 /**

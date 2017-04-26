@@ -6,7 +6,7 @@ import {BUTLER_SUPERVISOR,BUTLER_UI} from '../../constants/backEndConstants'
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
 import {stringConfig, roleDesc} from '../../constants/backEndConstants';
 import Dropdown from '../../components/dropdown/dropdown';
-import Information from '../../components/Information/information';
+import Information from '../../components/Information/Information';
 
 class UserRoles extends React.Component{
 	constructor(props) 

@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import {AUTH_LOGIN,ERROR,TYPING,APP_JSON,POST} from '../../constants/frontEndConstants';
 import {NO_NET} from '../../constants/messageConstants';
 import {LOGIN_URL} from '../../constants/configConstants'; 
-import RangeSlider from '../../components/rangeSlider/rangeSlider'
+import RangeSlider from '../../components/rangeSlider/RangeSlider'
 import { FormattedMessage } from 'react-intl';
 import { emptyField } from '../../utilities/fieldCheck';
 
