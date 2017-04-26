@@ -30,7 +30,7 @@ import {
     sortAuditHead,
     sortOrder,
     ALL,
-    ANY
+    ANY,WS_ONSEND
 } from '../constants/frontEndConstants';
 import {
     BASE_URL,
@@ -50,6 +50,7 @@ import {addDateOffSet} from '../utilities/processDate';
 import GorPaginateV2 from '../components/gorPaginate/gorPaginateV2';
 import {showTableFilter, filterApplied, auditfilterState, toggleAuditFilter} from '../actions/filterAction';
 import {hashHistory} from 'react-router'
+import {updateSubscriptionPacket,setWsAction} from './../actions/socketActions'
 //Mesages for internationalization
 const messages = defineMessages({
     auditCreatedStatus: {
@@ -115,11 +116,18 @@ class AuditTab extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.auditListRefreshed && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
+        if (nextProps.socketAuthorized && nextProps.auditListRefreshed && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
             this.setState({query: nextProps.location.query})
             this.setState({auditListRefreshed:nextProps.auditListRefreshed})
+            this._subscribeData()
             this._refreshList(nextProps.location.query)
         }
+    }
+
+    _subscribeData() {
+        let updatedWsSubscription = this.props.wsSubscriptionData;
+        this.props.initDataSentCall(updatedWsSubscription["default"])
+        this.props.updateSubscriptionPacket(updatedWsSubscription);
     }
 
     /**
@@ -614,7 +622,9 @@ function mapStateToProps(state, ownProps) {
         isFilterApplied: state.filterInfo.isFilterApplied || false,
         auditFilterStatus: state.filterInfo.auditFilterStatus || false,
         auditFilterState: state.filterInfo.auditFilterState || {},
-        auditListRefreshed:state.auditInfo.auditListRefreshed
+        auditListRefreshed:state.auditInfo.auditListRefreshed,
+        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
+        socketAuthorized: state.recieveSocketActions.socketAuthorized,
     };
 }
 
@@ -656,6 +666,13 @@ var mapDispatchToProps = function (dispatch) {
         auditListRefreshed:function(data){
             dispatch(auditListRefreshed(data))
         },
+        updateSubscriptionPacket: function (data) {
+            dispatch(updateSubscriptionPacket(data));
+        },
+        initDataSentCall: function (data) {
+            dispatch(setWsAction({type: WS_ONSEND, data: data}));
+        },
+
     }
 };
 
