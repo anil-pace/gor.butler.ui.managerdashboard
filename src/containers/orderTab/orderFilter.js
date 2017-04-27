@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
+import {hashHistory} from 'react-router'
 class OrderFilter extends React.Component{
 	constructor(props) 
 	{
@@ -73,21 +74,27 @@ class OrderFilter extends React.Component{
     }
 
     _applyFilter() {
-          var filterState = this.state
-        this.props.orderfilterState(filterState);
-        this.props.toggleOrderFilter(true);
-       this.props.refreshOption(this.state);
+        var filterState = this.state, _query = {}
+        if (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !== 'all') {
+            _query.status = filterState.tokenSelected["STATUS"]
+        }
+        if (filterState.tokenSelected["TIME PERIOD"] && filterState.tokenSelected["TIME PERIOD"][0] !== 'allOrders') {
+            _query.period = filterState.tokenSelected["TIME PERIOD"]
+        }
+
+        if (filterState.searchQuery["ORDER ID"]) {
+            _query.orderId = filterState.searchQuery["ORDER ID"]
+        }
+       // this.props.orderfilterState(filterState)
+        this.props.toggleOrderFilter(false);
+        this.props.filterApplied(false);
+        hashHistory.push({pathname: "/orderlist", query: _query})
     }
 
     _clearFilter() {
-        var clearState = {};
-        this.props.filterApplied(false)
-        this.setState({tokenSelected: {"STATUS":["all"], "TIME PERIOD":["allOrders"]}, searchQuery: {}});
-        this.props.orderfilterState({tokenSelected: {"STATUS":["all"], "TIME PERIOD":["allOrders"]}, searchQuery: {}});
-        this.props.refreshOption(clearState);
-        this.props.toggleOrderFilter(false);
+        hashHistory.push({pathname: "/orderlist", query: {}})
+    }
 
-    } 
 
 
 	render(){

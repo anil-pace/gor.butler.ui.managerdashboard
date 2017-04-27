@@ -18,7 +18,7 @@ import {
     INITIAL_HEADER_SORT,
     INITIAL_HEADER_ORDER,
     sortOrderHead,
-    sortOrder
+    sortOrder, WS_ONSEND
 } from '../../constants/frontEndConstants';
 import {
     BASE_URL,
@@ -30,21 +30,24 @@ import {
     PICK_BEFORE_ORDER_URL,
     BREACHED_URL,
     UPDATE_TIME_HIGH,
-    UPDATE_TIME_LOW,
+    UPDATE_TIME_LOW, UPDATE_TIME,
     EXCEPTION_TRUE,
     WAREHOUSE_STATUS,
-    FILTER_ORDER_ID
+    FILTER_ORDER_ID, GIVEN_PAGE, GIVEN_PAGE_SIZE, ORDER_ID_FILTER_PARAM
 } from '../../constants/configConstants';
 import OrderListTable from './orderListTable';
 import Dropdown from '../../components/dropdown/dropdown'
 import {FormattedMessage, defineMessages, FormattedRelative} from 'react-intl';
 import Spinner from '../../components/spinner/Spinner';
-import {setOrderListSpinner} from '../../actions/orderListActions';
+import {setOrderListSpinner, orderListRefreshed} from '../../actions/orderListActions';
 import {stringConfig} from '../../constants/backEndConstants';
 import {orderHeaderSortOrder, orderHeaderSort, orderFilterDetail} from '../../actions/sortHeaderActions';
 import {getDaysDiff} from '../../utilities/getDaysDiff';
-import GorPaginate from '../../components/gorPaginate/gorPaginate';
+import GorPaginateV2 from '../../components/gorPaginate/gorPaginateV2';
 import {showTableFilter, filterApplied, orderfilterState, toggleOrderFilter} from '../../actions/filterAction';
+import {hashHistory} from 'react-router'
+import {updateSubscriptionPacket, setWsAction} from './../../actions/socketActions'
+import {wsOverviewData} from './../../constants/initData.js';
 const messages = defineMessages({
     inProgressStatus: {
         id: 'orderList.progress.status',
@@ -80,19 +83,113 @@ const messages = defineMessages({
 class OrderListTab extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {selected_page: 1, query: null, orderListRefreshed: null};
     }
 
-    componentDidMount() {
-        var data = this.props.orderFilterState;
-        data.selected = 1;
-        this.refresh(data);
+    // componentDidMount() {
+    //     var data = this.props.orderFilterState;
+    //     data.selected = 1;
+    //     this.refresh(data);
+    // }
+
+
+    componentWillMount() {
+        /**
+         * It will update the last refreshed property of
+         * overview details, so that updated subscription
+         * packet can be sent to the server for data
+         * update.
+         */
+        this.props.orderListRefreshed()
     }
 
-    shouldComponentUpdate(nextProps) {
-        if ((nextProps.orderData.ordersDetail && !nextProps.orderData.ordersDetail.length)) {
-            return false;
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.socketAuthorized && nextProps.orderListRefreshed && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
+            this.setState({query: nextProps.location.query})
+            this.setState({orderListRefreshed: nextProps.orderListRefreshed})
+            this._subscribeData()
+            this._refreshList(nextProps.location.query)
         }
-        return true;
+    }
+
+    _subscribeData() {
+        let updatedWsSubscription = this.props.wsSubscriptionData;
+        this.props.initDataSentCall(updatedWsSubscription["default"])
+        this.props.updateSubscriptionPacket(updatedWsSubscription);
+    }
+
+
+    /**
+     * The method will update the subscription packet
+     * and will fetch the data from the socket.
+     * @private
+     */
+    _refreshList(query) {
+        let _query_params = [], convertTime = {
+            "oneHourOrders": 1,
+            "twoHourOrders": 2,
+            "sixHourOrders": 6,
+            "twelveHourOrders": 12,
+            "oneDayOrders": 24
+        };
+
+        if (query.orderId) {
+            _query_params.push([ORDER_ID_FILTER_PARAM, query.orderId].join("~="))
+        }
+
+        //appending filter for status
+        if (query.status) {
+
+        }
+
+        //appending filter for orders by time
+        if (query.period) {
+            let timeOut = query.period.constructor === Array ? query.period[0] : query.period
+            let currentTime = new Date();
+            let prevTime = new Date();
+            prevTime = new Date(prevTime.setHours(prevTime.getHours() - convertTime[timeOut]));
+            prevTime = prevTime.toISOString();
+            currentTime = currentTime.toISOString();
+            _query_params.push([UPDATE_TIME, currentTime].join("<="))
+            _query_params.push([UPDATE_TIME, prevTime].join(">="))
+        }
+        let url = API_URL + ORDERS_URL
+
+        _query_params.push([GIVEN_PAGE, query.page || 1].join("="))
+        _query_params.push([GIVEN_PAGE_SIZE, query.pageSize || 25].join("="))
+        url = [url, _query_params.join("&")].join("?")
+        let paginationData = {
+
+            'url': url,
+            'method': 'GET',
+            'cause': ORDERS_RETRIEVE,
+            'token': this.props.auth_token,
+            'contentType': 'application/json'
+        }
+        if (Object.keys(query).filter(function(el){return el!=='page'}).length !== 0) {
+            this.props.toggleOrderFilter(true);
+            this.props.filterApplied(true);
+        } else {
+            this.props.toggleOrderFilter(false);
+            this.props.filterApplied(false);
+        }
+        this.props.currentPage(1);
+        this.props.setOrderListSpinner(true);
+        this.props.orderfilterState({
+            tokenSelected: {
+                "STATUS": query.status ? (query.status.constructor === Array ? query.status : [query.status]) : ['all'],
+                "TIME PERIOD": query.period ? (query.period.constructor === Array ? query.period[0] : query.period) : ['allOrders']
+            },
+            searchQuery: {"ORDER ID": query.orderId || ''}
+        });
+        this.props.getPageData(paginationData);
+    }
+
+    /**
+     *
+     */
+    _clearFilter() {
+        hashHistory.push({pathname: "/orderlist", query: {}})
     }
 
     processOrders(data, nProps) {
@@ -402,7 +499,7 @@ class OrderListTab extends React.Component {
                                                        setSpinner={this.props.setOrderListSpinner}/> : ""}
                     <OrderListTable items={orderDetail} timeZoneString={headerTimeZone} itemNumber={itemNumber}
                                     statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter}
-                                    refreshOption={this.refresh.bind(this)} lastUpdatedText={updateStatusText}
+                                    refreshOption={this._clearFilter.bind(this)} lastUpdatedText={updateStatusText}
                                     lastUpdated={updateStatusIntl}
                                     intlMessg={this.props.intlMessages} alertNum={alertNum}
                                     totalOrders={this.props.orderData.totalOrders}
@@ -425,8 +522,8 @@ class OrderListTab extends React.Component {
                                   optionDispatch={this.props.getPageSizeOrders} refreshList={this.refresh.bind(this)}/>
                     </div>
                     <div className="gor-paginate">
-                        <GorPaginate getPageDetail={this.refresh.bind(this)}
-                                     totalPage={this.props.orderData.totalPage}/>
+                        {this.state.query?<GorPaginateV2 location={this.props.location} currentPage={this.state.query.page||1}
+                                                         totalPage={this.props.orderData.totalPage}/>:null}
                     </div>
                 </div>
             </div>
@@ -450,7 +547,10 @@ function mapStateToProps(state, ownProps) {
         showFilter: state.filterInfo.filterState || false,
         isFilterApplied: state.filterInfo.isFilterApplied || false,
         orderFilterStatus: state.filterInfo.orderFilterStatus,
-        orderFilterState: state.filterInfo.orderFilterState || {}
+        orderFilterState: state.filterInfo.orderFilterState || {},
+        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
+        socketAuthorized: state.recieveSocketActions.socketAuthorized,
+        orderListRefreshed: state.ordersInfo.orderListRefreshed,
     };
 }
 
@@ -500,7 +600,17 @@ var mapDispatchToProps = function (dispatch) {
         },
         toggleOrderFilter: function (data) {
             dispatch(toggleOrderFilter(data));
-        }
+        },
+        orderListRefreshed: function (data) {
+            dispatch(orderListRefreshed(data))
+        },
+        updateSubscriptionPacket: function (data) {
+            dispatch(updateSubscriptionPacket(data));
+        },
+        initDataSentCall: function (data) {
+            dispatch(setWsAction({type: WS_ONSEND, data: data}));
+        },
+
 
     }
 };

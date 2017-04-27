@@ -51,6 +51,7 @@ import GorPaginateV2 from '../components/gorPaginate/gorPaginateV2';
 import {showTableFilter, filterApplied, auditfilterState, toggleAuditFilter} from '../actions/filterAction';
 import {hashHistory} from 'react-router'
 import {updateSubscriptionPacket,setWsAction} from './../actions/socketActions'
+import {wsOverviewData} from './../constants/initData.js';
 //Mesages for internationalization
 const messages = defineMessages({
     auditCreatedStatus: {
@@ -187,11 +188,12 @@ class AuditTab extends React.Component {
 
         url=[url,_query_params.join("&")].join("&")
 
-        if (Object.keys(query).length !== 0) {
+        if (Object.keys(query).filter(function(el){return el!=='page'}).length !== 0) {
             this.props.toggleAuditFilter(true);
-            sessionStorage.setItem("pps", this.props.location.search)
+            this.props.filterApplied(true);
         } else {
-            sessionStorage.removeItem("pps")
+            this.props.toggleAuditFilter(false);
+            this.props.filterApplied(false);
         }
 
         let paginationData = {
@@ -212,14 +214,12 @@ class AuditTab extends React.Component {
             },
             defaultToken: {"AUDIT TYPE": [ANY], "STATUS": [ALL]}
         })
-        this.props.filterApplied(!this.props.isFilterApplied);
         this.props.getPageData(paginationData);
     }
     /**
      *
      */
     _clearFilter() {
-        this.props.toggleAuditFilter(false);
         hashHistory.push({pathname: "/audit", query: {}})
     }
 
@@ -584,7 +584,7 @@ class AuditTab extends React.Component {
                                 currentSortState={this.props.auditSortHeader}
                                 sortHeaderOrder={this.props.auditHeaderSortOrder}
                                 currentHeaderOrder={this.props.auditSortHeaderState}
-                                refreshData={this.handlePageClick.bind(this)}
+                                refreshData={this._clearFilter.bind(this)}
                                 setAuditFilter={this.props.auditFilterDetail} auditState={auditState}
                                 setFilter={this.props.showTableFilter} showFilter={this.props.showFilter}
                                 isFilterApplied={this.props.isFilterApplied}

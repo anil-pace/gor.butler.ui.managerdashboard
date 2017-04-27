@@ -157,14 +157,10 @@ class AuditFilter extends React.Component {
             _query.locationId=filterState.searchQuery[SPECIFIC_LOCATION_ID]
         }
 
-        this.props.toggleAuditFilter(true);
-        this.props.setAuditSpinner(true);
         hashHistory.push({pathname: "/audit", query: _query})
     }
 
     _clearFilter() {
-        this.props.toggleAuditFilter(false);
-        this.props.setAuditSpinner(true);
         hashHistory.push({pathname: "/audit", query: {}})
     }
 
