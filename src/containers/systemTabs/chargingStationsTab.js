@@ -14,10 +14,10 @@ import {defineMessages} from 'react-intl';
 import {INITIAL_HEADER_SORT, INITIAL_HEADER_ORDER, GOR_CONNECTED_STATUS} from '../../constants/frontEndConstants';
 import {csHeaderSort, csHeaderSortOrder, csFilterDetail} from '../../actions/sortHeaderActions';
 import {
-    showTableFilter,
+    CSFilterToggle,
     filterApplied,
     chargingstationfilterState,
-    toggleChargingFilter
+    toggleChargingFilterApplied,setFilterApplyFlag
 } from '../../actions/filterAction';
 import {updateSubscriptionPacket} from './../../actions/socketActions'
 import {wsOverviewData} from './../../constants/initData.js';
@@ -46,7 +46,7 @@ class ChargingStations extends React.Component {
     _processChargersData(data, nProps) {
         var chargerData = [], detail = {}, count = 0,
             nProps = this,
-            data = nProps.props.chargersDetail.chargersDetail,
+            data = nProps.props.chargersDetail.chargersDetail||{},
             CS, csId, botId, BUTLER;
 
         var priStatus = {"connected": 1, "disconnected": 2};
@@ -90,8 +90,8 @@ class ChargingStations extends React.Component {
         delete updatedWsSubscription["chargingstation"].data[0].details["filter_params"];
         this.props.updateSubscriptionPacket(updatedWsSubscription);
         this.props.filterApplied(!this.props.isFilterApplied);
-        this.props.showTableFilter(false);
-        this.props.toggleChargingFilter(false);
+        this.props.CSFilterToggle(false);
+        this.props.toggleChargingFilterApplied(false);
         /**
          * It will reset the filter
          * fields already applied in
@@ -104,6 +104,7 @@ class ChargingStations extends React.Component {
     }
 
     render() {
+        var  emptyResponse=this.props.chargersDetail.emptyResponse;
         let updateStatusIntl = "";
         var itemNumber = 4, connectedBots = 0, manualMode = 0, automaticMode = 0,
             chargersState = {"connectedBots": "--", "manualMode": "--", "automaticMode": "--", "csConnected": 0},
@@ -153,9 +154,12 @@ class ChargingStations extends React.Component {
                                                isFilterApplied={this.props.isFilterApplied}
                                                lastUpdatedText={updateStatusIntl}
                                                lastUpdated={updateStatusIntl}
-                                               showFilter={this.props.showFilter}
-                                               setFilter={this.props.showTableFilter}
-                                               refreshList={this._refreshChargingStationList.bind(this)}/>
+                                               csToggleFilter={this.props.csToggleFilter}
+                                               setFilter={this.props.CSFilterToggle}
+                                               refreshList={this._refreshChargingStationList.bind(this)}
+                                               emptyResponse={emptyResponse}
+                                                 filterApplyFlag={this.props.filterApplyFlag}
+                                                setFilterApplyFlag={this.props.setFilterApplyFlag}/>
 
 
                     </div>
@@ -175,10 +179,11 @@ function mapStateToProps(state, ownProps) {
         csSpinner: state.spinner.csSpinner || false,
         chargersDetail: state.chargersDetail || [],
         intlMessages: state.intl.messages,
-        showFilter: state.filterInfo.filterState || false,
+        csToggleFilter: state.filterInfo.csToggleFilter || false,
         isFilterApplied: state.filterInfo.isFilterApplied || false,
         chargingFilterStatus: state.filterInfo.chargingFilterStatus || false,
-        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData
+        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
+        filterApplyFlag:state.filterInfo.filterApplyFlag|| false
     };
 }
 
@@ -196,8 +201,8 @@ var mapDispatchToProps = function (dispatch) {
         csHeaderSortOrder: function (data) {
             dispatch(csHeaderSortOrder(data))
         },
-        showTableFilter: function (data) {
-            dispatch(showTableFilter(data));
+        CSFilterToggle: function (data) {
+            dispatch(CSFilterToggle(data));
         },
         filterApplied: function (data) {
             dispatch(filterApplied(data));
@@ -209,10 +214,12 @@ var mapDispatchToProps = function (dispatch) {
         chargingstationfilterState: function (data) {
             dispatch(chargingstationfilterState(data));
         },
-        toggleChargingFilter: function (data) {
-            dispatch(toggleChargingFilter(data));
+        toggleChargingFilterApplied: function (data) {
+            dispatch(toggleChargingFilterApplied(data));
         },
-
+        setFilterApplyFlag: function (data) {
+            dispatch(setFilterApplyFlag(data));
+        }
     };
 }
 
@@ -225,16 +232,19 @@ ChargingStations.PropTypes = {
     csSortHeaderState: React.PropTypes.string,
     csSpinner: React.PropTypes.bool,
     chargersDetail: React.PropTypes.array,
-    showFilter: React.PropTypes.bool,
+    csToggleFilter: React.PropTypes.bool,
     isFilterApplied: React.PropTypes.bool,
     chargingFilterStatus: React.PropTypes.bool,
     csFilterDetail: React.PropTypes.func,
     setCsSpinner: React.PropTypes.func,
     csHeaderSort: React.PropTypes.func,
     csHeaderSortOrder: React.PropTypes.func,
-    showTableFilter: React.PropTypes.func,
+    CSFilterToggle: React.PropTypes.func,
     filterApplied: React.PropTypes.func,
-    wsSubscriptionData: React.PropTypes.object
+    wsSubscriptionData: React.PropTypes.object,
+    setFilterApplyFlag:React.PropTypes.func,
+    filterApplyFlag:React.PropTypes.bool,
+    emptyResponse:React.PropTypes.bool
 
 };
 

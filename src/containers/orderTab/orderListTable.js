@@ -53,6 +53,12 @@ class OrderListTable extends React.Component {
   }
 
   componentWillReceiveProps(nextProps){
+    //Based on emptyresponse, appliedbutton and reponse has came or not we hide and show the filter
+    if(!nextProps.emptyResponse && this.props.filterApplyFlag && !nextProps.responseFlag)
+        {
+            this.props.setFilter(false);
+            this.props.setFilterApplyFlag(false);
+        }
     if(nextProps.items === undefined) {
       this._dataList = new tableRenderer(0);
     }
@@ -120,9 +126,11 @@ class OrderListTable extends React.Component {
     })
   }
   _setFilter() {
-    var newState = !this.props.showFilter;
+    if(this.props.items.length){
+    let newState = !this.props.ordersToggleFilter
     this.props.setFilter(newState)
    }
+ }
 
    _showAllOrder() {
     this.props.refreshOption();
@@ -160,7 +168,7 @@ class OrderListTable extends React.Component {
     var filterHeight = screen.height-190-50;
     return (
       <div className="gorTableMainContainer">
-      <div className="gor-filter-wrap" style={{'width':'350px','display':this.props.showFilter?'block':'none', height:filterHeight}}> 
+      <div className="gor-filter-wrap" style={{'width':'350px','display':this.props.ordersToggleFilter?'block':'none', height:filterHeight}}> 
          <OrderFilter refreshOption={this.props.refreshOption} responseFlag={this.props.responseFlag}/>  
        </div>
         <div className="gorToolBar">
@@ -182,11 +190,12 @@ class OrderListTable extends React.Component {
               <FormattedMessage id="order.table.buttonLable" description="button label for refresh" 
               defaultMessage ="Refresh Data"/>
             </button>
-        <button className={this.props.orderFilterStatus?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
-          <div className="gor-manage-task"/>
-          <FormattedMessage id="order.table.filterLabel" description="button label for filter" 
-          defaultMessage ="Filter data"/>
+
+ <button className={this.props.orderFilterStatus?"gor-filterBtn-applied":"gor-filterBtn-btn"} disabled={this.props.items && this.props.items.length?false:true} style={this.props.items && this.props.items.length?{cursor:'pointer'}:{cursor:'default'}} onClick={this._setFilter.bind(this)} >
+       {!this.props.orderFilterStatus?<div><div className="gor-manage-task"></div><FormattedMessage id="order.table.filterLabel" description="button label for filter" defaultMessage ="Filter data"/></div>:
+       <div><div className="gor-manage-task"></div><FormattedMessage id="order.table.showfilter" description="button label for filter" defaultMessage ="Show Filter"/></div>}
          </button>
+
        </div>
         </div>     
         </div>
@@ -343,7 +352,8 @@ OrderListTable.PropTypes={
   isFilterApplied:React.PropTypes.bool,
   timeZoneString:React.PropTypes.string,
   lastUpdated:React.PropTypes.string,
-  responseFlag:React.PropTypes.bool
+  responseFlag:React.PropTypes.bool,
+  setFilterApplyFlag:React.PropTypes.func
 };
 
 export default Dimensions()(OrderListTable);

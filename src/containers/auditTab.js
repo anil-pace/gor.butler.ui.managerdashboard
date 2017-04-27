@@ -17,7 +17,7 @@ import {auditHeaderSortOrder, auditHeaderSort, auditFilterDetail} from '../actio
 import {getDaysDiff} from '../utilities/getDaysDiff';
 import {addDateOffSet} from '../utilities/processDate'; 
 import GorPaginate from '../components/gorPaginate/gorPaginate';
-import {showTableFilter,filterApplied,auditfilterState,toggleAuditFilter} from '../actions/filterAction';
+import {filterApplied,auditfilterState,toggleAuditFilterApplied,auditFilterToggle,setFilterApplyFlag} from '../actions/filterAction';
 //Mesages for internationalization
 const messages = defineMessages({
   auditCreatedStatus: {
@@ -96,7 +96,7 @@ shouldComponentUpdate(nextProps) {
       flag = flag || true;
     }
 
-    else if(this.props.showFilter !== nextProps.showFilter) {
+    else if(this.props.auditToggleFilter !== nextProps.auditToggleFilter) {
       flag = flag || true;
     }
 
@@ -270,8 +270,8 @@ handlePageClick(data){
        */
       data={}
       this.props.auditfilterState({tokenSelected: {"AUDIT TYPE":[ANY], "STATUS":[ALL]}, searchQuery: {},defaultToken: {"AUDIT TYPE":[ANY], "STATUS":[ALL]}})
-      this.props.toggleAuditFilter(false)
-      this.props.showTableFilter(false)
+      this.props.toggleAuditFilterApplied(false)
+      this.props.auditFilterToggle(false)
 
   }
 //If user select both we are making it Any for backend support
@@ -339,6 +339,7 @@ else
 
 
 render(){
+  var  emptyResponse=this.props.emptyResponse;
   var renderTab = <div/>,
   timeOffset = this.props.timeOffset || "",
   headerTimeZone = (this.context.intl.formatDate(Date.now(),
@@ -383,9 +384,13 @@ render(){
               sortHeaderOrder={this.props.auditHeaderSortOrder} currentHeaderOrder={this.props.auditSortHeaderState}
               refreshData={this.handlePageClick.bind(this)}
               setAuditFilter={this.props.auditFilterDetail} auditState={auditState}
-              setFilter={this.props.showTableFilter} showFilter={this.props.showFilter}
+              setFilter={this.props.auditFilterToggle} auditToggleFilter={this.props.auditToggleFilter}
               isFilterApplied={this.props.isFilterApplied}  auditFilterStatus={this.props.auditFilterStatus}
-              responseFlag={this.props.auditSpinner}/>
+              responseFlag={this.props.auditSpinner}      filterApplyFlag={this.props.filterApplyFlag}
+              emptyResponse={emptyResponse}
+              setFilterApplyFlag={this.props.setFilterApplyFlag}/>
+
+
 
   
   
@@ -394,7 +399,7 @@ render(){
     <div>
       <div>
         <div className="gor-Auditlist-table">
-          {!this.props.showFilter?<Spinner isLoading={this.props.auditSpinner} setSpinner={this.props.setAuditSpinner}/>:""}
+          {!this.props.auditToggleFilter?<Spinner isLoading={this.props.auditSpinner} setSpinner={this.props.setAuditSpinner}/>:""}
           {renderTab}
         </div>
       </div>
@@ -415,54 +420,35 @@ function mapStateToProps(state, ownProps){
     totalAudits: state.recieveAuditDetail.totalAudits || 0,
     auditSpinner: state.spinner.auditSpinner || false,
     auditDetail: state.recieveAuditDetail.auditDetail || [],
+    emptyResponse: state.recieveAuditDetail.emptyResponse || false,
     totalPage: state.recieveAuditDetail.totalPage || 0,
     auditRefresh:state.recieveAuditDetail.auditRefresh || false,  
     intlMessages: state.intl.messages,
     auth_token: state.authLogin.auth_token,
     timeOffset: state.authLogin.timeOffset,
-    showFilter: state.filterInfo.filterState || false,
+    auditToggleFilter: state.filterInfo.auditToggleFilter || false,
     isFilterApplied: state.filterInfo.isFilterApplied || false,
     auditFilterStatus:state.filterInfo.auditFilterStatus|| false,
-    auditFilterState: state.filterInfo.auditFilterState ||{}
+    auditFilterState: state.filterInfo.auditFilterState ||{},
+    filterApplyFlag:state.filterInfo.filterApplyFlag|| false
   };
 }
 
 var mapDispatchToProps = function(dispatch){
-    return {
-        auditFilterDetail: function (data) {
-            dispatch(auditFilterDetail(data))
-        },
-        auditHeaderSort: function (data) {
-            dispatch(auditHeaderSort(data))
-        },
-        auditHeaderSortOrder: function (data) {
-            dispatch(auditHeaderSortOrder(data))
-        },
-        setAuditSpinner: function (data) {
-            dispatch(setAuditSpinner(data))
-        },
-        getAuditData: function (data) {
-            dispatch(getAuditData(data));
-        },
-        getPageData: function (data) {
-            dispatch(getPageData(data));
-        },
-        setAuditRefresh: function () {
-            dispatch(setAuditRefresh());
-        },
-        showTableFilter: function (data) {
-            dispatch(showTableFilter(data));
-        },
-        filterApplied: function (data) {
-            dispatch(filterApplied(data));
-        },
-        auditfilterState: function (data) {
-            dispatch(auditfilterState(data));
-        },
-        toggleAuditFilter: function (data) {
-            dispatch(toggleAuditFilter(data));
-        }
-    }
+  return {
+    auditFilterDetail: function(data){dispatch(auditFilterDetail(data))},
+    auditHeaderSort: function(data){dispatch(auditHeaderSort(data))},
+    auditHeaderSortOrder: function(data){dispatch(auditHeaderSortOrder(data))},
+    setAuditSpinner: function(data){dispatch(setAuditSpinner(data))},
+    getAuditData: function(data){ dispatch(getAuditData(data)); },
+    getPageData: function(data){ dispatch(getPageData(data)); },
+    setAuditRefresh: function(){dispatch(setAuditRefresh());},
+    auditFilterToggle: function(data){dispatch(auditFilterToggle(data));},
+    filterApplied: function(data){dispatch(filterApplied(data));},
+    setFilterApplyFlag: function (data) {dispatch(setFilterApplyFlag(data));},
+    auditfilterState: function (data) {dispatch(auditfilterState(data));},
+    toggleAuditFilterApplied: function (data) {dispatch(toggleAuditFilterApplied(data));}
+  }
 };
 
 AuditTab.contextTypes ={
@@ -480,7 +466,7 @@ auditRefresh:React.PropTypes.bool,
 intlMessages: React.PropTypes.string,
 auth_token: React.PropTypes.object,
 timeOffset: React.PropTypes.number,
-showFilter: React.PropTypes.bool,
+auditToggleFilter: React.PropTypes.bool,
 isFilterApplied: React.PropTypes.bool,
 auditFilterStatus:React.PropTypes.bool,
 auditFilterState:React.PropTypes.object,
@@ -491,8 +477,11 @@ setAuditSpinner:React.PropTypes.func,
 getAuditData: React.PropTypes.func,
 getPageData: React.PropTypes.func,
 setAuditRefresh:React.PropTypes.func,
-showTableFilter:React.PropTypes.func,
-filterApplied: React.PropTypes.func
+auditFilterToggle:React.PropTypes.func,
+filterApplied: React.PropTypes.func,
+setFilterApplyFlag:React.PropTypes.func,
+filterApplyFlag:React.PropTypes.bool,
+toggleAuditFilterApplied:React.PropTypes.func
 }
 
 

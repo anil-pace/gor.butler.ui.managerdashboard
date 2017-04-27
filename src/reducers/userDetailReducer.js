@@ -9,9 +9,17 @@ export  function userDetails(state={},action){
 
          var res, userData;
          res=action.data;
-         if(res.complete_data){
+         if(res.complete_data && res.complete_data.length)
+          {
+              return Object.assign({}, state, {
+                 "userDetails" : res.complete_data,
+                "emptyResponse" :false //This flag will update base on response data
+               })
+          }
+          else
+          {
            return Object.assign({}, state, {
-               "userDetails" : res.complete_data
+                 "emptyResponse" :true //This flag will update base on response data
           })
          }
 
@@ -19,3 +27,6 @@ export  function userDetails(state={},action){
 	    return state
   }
 }
+
+
+

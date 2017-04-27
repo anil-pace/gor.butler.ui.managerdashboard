@@ -15,9 +15,14 @@
     "defaultMessage": "Add new user"
   },
   {
-    "id": "order.table.filterLabel",
+    "id": "user.table.filterLabel",
     "description": "button label for filter",
     "defaultMessage": "Filter data"
+  },
+  {
+    "id": "user.table.showfilter",
+    "description": "button label for filter",
+    "defaultMessage": "Show Filter"
   },
   {
     "id": "userList.filter.search.bar",

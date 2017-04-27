@@ -10,7 +10,7 @@ import {defineMessages} from 'react-intl';
 import {waveHeaderSort, waveHeaderSortOrder, waveFilterDetail} from '../../actions/sortHeaderActions';
 import {INITIAL_HEADER_SORT, INITIAL_HEADER_ORDER} from '../../constants/frontEndConstants';
 import {getDaysDiff} from '../../utilities/getDaysDiff';
-import {showTableFilter, filterApplied, toggleWaveFilter, wavefilterState} from '../../actions/filterAction';
+import {wavesFilterToggle, filterApplied, toggleWaveFilterApplied, wavefilterState,setFilterApplyFlag} from '../../actions/filterAction';
 import {updateSubscriptionPacket} from './../../actions/socketActions'
 import {wsOverviewData} from './../../constants/initData.js';
 
@@ -30,6 +30,7 @@ class WaveTab extends React.Component {
     _processWaveData(data, nProps) {
         var nProps = this,
             data = nProps.props.waveDetail.waveData;
+        
         var waveData = [], waveDetail = {};
         let WAVE, waveId;
 
@@ -147,8 +148,8 @@ class WaveTab extends React.Component {
         delete updatedWsSubscription["orders"].data[0].details["filter_params"];
         this.props.updateSubscriptionPacket(updatedWsSubscription);
         this.props.filterApplied(!this.props.isFilterApplied);
-        this.props.showTableFilter(false);
-        this.props.toggleWaveFilter(false);
+        this.props.wavesFilterToggle(false);
+        this.props.toggleWaveFilterApplied(false);
         /**
          * It will reset the filter
          * fields already applied in
@@ -170,6 +171,7 @@ class WaveTab extends React.Component {
             "completedWaves": "--",
             "totalOrders": "--"
         };
+        var  emptyResponse=this.props.waveDetail.emptyResponse;
         var totalOrders = 0, orderToFulfill = 0, completedWaves = 0, pendingWaves = 0, progressWave = 0, alertNum = 0;
 
         if (this.props.waveDetail.waveData !== undefined) {
@@ -223,10 +225,14 @@ class WaveTab extends React.Component {
                             lastUpdated={updateStatusIntl}
                             refreshOption={this.refresh.bind(this)}
                             isFilterApplied={this.props.isFilterApplied}
-                            showFilter={this.props.showFilter}
-                            setFilter={this.props.showTableFilter}
+                            wavesToggleFilter={this.props.wavesToggleFilter}
+                            setFilter={this.props.wavesFilterToggle}
                             waveFilterStatus={this.props.waveFilterStatus}
                             refreshList={this._refreshWavesList.bind(this)}
+                            emptyResponse={emptyResponse}
+                            filterApplyFlag={this.props.filterApplyFlag}
+                            setFilterApplyFlag={this.props.setFilterApplyFlag}
+                            
                 />
             </div>
         );
@@ -245,9 +251,10 @@ function mapStateToProps(state, ownProps) {
         intlMessages: state.intl.messages,
         timeOffset: state.authLogin.timeOffset,
         waveFilterStatus: state.filterInfo.waveFilterStatus || false,
-        showFilter: state.filterInfo.filterState || false,
+        wavesToggleFilter: state.filterInfo.wavesToggleFilter || false,
         isFilterApplied: state.filterInfo.isFilterApplied || false,
-        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData
+        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
+        filterApplyFlag:state.filterInfo.filterApplyFlag|| false
     };
 };
 
@@ -265,8 +272,8 @@ var mapDispatchToProps = function (dispatch) {
         waveHeaderSortOrder: function (data) {
             dispatch(waveHeaderSortOrder(data))
         },
-        showTableFilter: function (data) {
-            dispatch(showTableFilter(data));
+        wavesFilterToggle: function (data) {
+            dispatch(wavesFilterToggle(data));
         },
         filterApplied: function (data) {
             dispatch(filterApplied(data));
@@ -274,12 +281,15 @@ var mapDispatchToProps = function (dispatch) {
         updateSubscriptionPacket: function (data) {
             dispatch(updateSubscriptionPacket(data));
         },
-        toggleWaveFilter: function (data) {
-            dispatch(toggleWaveFilter(data));
+        toggleWaveFilterApplied: function (data) {
+            dispatch(toggleWaveFilterApplied(data));
         },
         wavefilterState: function (data) {
             dispatch(wavefilterState(data));
         },
+        setFilterApplyFlag: function (data) {
+            dispatch(setFilterApplyFlag(data));
+        }
     };
 }
 
@@ -294,13 +304,15 @@ WaveTab.PropTypes = {
     waveDetail: React.PropTypes.object,
     intlMessages: React.PropTypes.string,
     waveFilterState: React.PropTypes.bool,
-    showFilter: React.PropTypes.bool,
+    wavesToggleFilter: React.PropTypes.bool,
     waveFilterDetail: React.PropTypes.func,
     setWavesSpinner: React.PropTypes.func,
     waveHeaderSort: React.PropTypes.func,
     waveHeaderSortOrder: React.PropTypes.func,
-    showTableFilter: React.PropTypes.func,
-    wsSubscriptionData: React.PropTypes.object
+    wavesFilterToggle: React.PropTypes.func,
+    wsSubscriptionData: React.PropTypes.object,
+    filterApplyFlag:React.PropTypes.bool,
+    setFilterApplyFlag:React.PropTypes.func
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(WaveTab) ;

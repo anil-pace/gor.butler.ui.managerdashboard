@@ -63,6 +63,12 @@ class AuditTable extends React.Component {
     componentWillReceiveProps(nextProps) {
 
         this.tableState(nextProps, this);
+        //Based on emptyresponse, appliedbutton and reponse has came or not we hide and show the filter
+       if(!nextProps.emptyResponse && this.props.filterApplyFlag && !nextProps.responseFlag)
+        {
+            this.props.setFilter(false);
+            this.props.setFilterApplyFlag(false);
+        }
     }
 
 
@@ -241,8 +247,10 @@ class AuditTable extends React.Component {
     }
 
     _setFilter() {
-        var newState = !this.props.showFilter;
+         if(this.props.items.length){
+        let newState = !this.props.auditToggleFilter;
         this.props.setFilter(newState)
+    }
     }
 
     _showAllAudit() {
@@ -292,7 +300,7 @@ class AuditTable extends React.Component {
         var tableRenderer = <div/>
         tableRenderer = <div className="gorTableMainContainer">
             <div className="gor-filter-wrap"
-                 style={{'display': this.props.showFilter ? 'block' : 'none', height: filterHeight}}>
+                 style={{'display': this.props.auditToggleFilter ? 'block' : 'none', height: filterHeight}}>
                 <AuditFilter refreshOption={this.props.refreshData}/>
             </div>
             <div className="gorToolBar">
@@ -312,12 +320,11 @@ class AuditTable extends React.Component {
                         </button>
                     </div>
                     <div className="gor-button-wrap">
-                        <button className={this.props.isFilterApplied ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
-                                onClick={this._setFilter.bind(this)}>
-                            <div className="gor-manage-task"/>
-                            <FormattedMessage id="audit.table.filterLabel" description="button label for filter"
-                                              defaultMessage="Filter data"/>
-                        </button>
+<button className={this.props.auditFilterStatus?"gor-filterBtn-applied":"gor-filterBtn-btn"} disabled={this.props.items && this.props.items.length?false:true} style={this.props.items && this.props.items.length?{cursor:'pointer'}:{cursor:'default'}} onClick={this._setFilter.bind(this)} >
+       {!this.props.auditFilterStatus?<div><div className="gor-manage-task"></div><FormattedMessage id="order.table.filterLabel" description="button label for filter" defaultMessage ="Filter data"/></div>:
+       <div><div className="gor-manage-task"></div><FormattedMessage id="order.table.showfilter" description="button label for filter" defaultMessage ="Show Filter"/></div>}
+         </button>
+
                     </div>
                 </div>
             </div>
@@ -525,11 +532,13 @@ AuditTable.PropTypes = {
     refreshData: React.PropTypes.func,
     setFilter: React.PropTypes.func,
     auditState: React.PropTypes.object,
-    showFilter: React.PropTypes.bool,
+    auditToggleFilter: React.PropTypes.bool,
     isFilterApplied: React.PropTypes.bool,
     responseFlag: React.PropTypes.bool,
     containerWidth: React.PropTypes.number,
-    totalAudits: React.PropTypes.number
+    totalAudits: React.PropTypes.number,
+    setFilterApplyFlag:React.PropTypes.func,
+    filterApplyFlag:React.PropTypes.bool
 };
 
 

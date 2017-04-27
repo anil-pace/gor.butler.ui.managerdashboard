@@ -2,11 +2,12 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
-import {showTableFilter, filterApplied,orderfilterState,toggleOrderFilter} from '../../actions/filterAction';
+import {ordersFilterToggle, filterApplied,orderfilterState,toggleOrderFilterApplied,setFilterApplyFlag} from '../../actions/filterAction';
 import { connect } from 'react-redux'; 
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
+
 class OrderFilter extends React.Component{
 	constructor(props) 
 	{
@@ -17,13 +18,15 @@ class OrderFilter extends React.Component{
 
 
     _closeFilter() {
-        this.props.showTableFilter(false);
-    }
+
+        this.props.ordersFilterToggle(false);
+    }	
     componentWillReceiveProps(nextProps){
         if(nextProps.orderFilterState && JSON.stringify(this.state)!==JSON.stringify(nextProps.orderFilterState)){
             this.setState(nextProps.orderFilterState)
         }
     }
+
 
     _processOrderSearchField(){
         var filterInputFields = [{value:"ORDER ID", label:<FormattedMessage id="order.inputField.id" defaultMessage ="ORDER ID"/>}];
@@ -49,7 +52,7 @@ class OrderFilter extends React.Component{
                     { value: 'exception', label: <FormattedMessage id="order.STATUS.exep" defaultMessage ="Exception"/>}
                     ];
         var labelC2 = [
-                    { value: 'allOrders', label: <FormattedMessage id="order.timePeriod.all" defaultMessage ="All"/>},
+                    { value: 'allOrders', label: <FormattedMessage id="order.timePeriod.all" defaultMessage ="Any time"/>},
                     { value: 'oneHourOrders', label: <FormattedMessage id="order.timePeriod.oneHr" defaultMessage ="Last 1 hours"/>},
                     { value: 'twoHourOrders', label: <FormattedMessage id="order.timePeriod.twoHR" defaultMessage ="Last 2 hours"/>},
                     { value: 'sixHourOrders', label: <FormattedMessage id="order.timePeriod.sixHr" defaultMessage ="Last 6 hours"/>},
@@ -58,7 +61,7 @@ class OrderFilter extends React.Component{
                     ];
         var selectedToken =  this.state.tokenSelected;
         var column1 = <FilterTokenWrap field={tokenField1} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC1} selectedToken={selectedToken}/>;
-        var column2 = <FilterTokenWrap field={tokenField2} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC2} selectedToken={selectedToken}/>;
+        var column2 = <FilterTokenWrap field={tokenField2} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC2} selectedToken={selectedToken} selection="Single"/>;
         var columnDetail = {column1token:column1, column2token:column2};
         return columnDetail;
     }
@@ -73,10 +76,11 @@ class OrderFilter extends React.Component{
     }
 
     _applyFilter() {
-          var filterState = this.state
+          var filterState = this.state;
         this.props.orderfilterState(filterState);
-        this.props.toggleOrderFilter(true);
-       this.props.refreshOption(this.state);
+        this.props.toggleOrderFilterApplied(true);
+      this.props.refreshOption(filterState) 
+       this.props.setFilterApplyFlag(true);
     }
 
     _clearFilter() {
@@ -85,13 +89,14 @@ class OrderFilter extends React.Component{
         this.setState({tokenSelected: {"STATUS":["all"], "TIME PERIOD":["allOrders"]}, searchQuery: {}});
         this.props.orderfilterState({tokenSelected: {"STATUS":["all"], "TIME PERIOD":["allOrders"]}, searchQuery: {}});
         this.props.refreshOption(clearState);
-        this.props.toggleOrderFilter(false);
+        this.props.toggleOrderFilterApplied(false);
+        this.props.setFilterApplyFlag(true);
 
     } 
 
 
 	render(){
-        var noOrder = this.props.orderData.totalOrders?false:true;
+        var noOrder = this.props.orderData.emptyResponse;
         var orderSearchField = this._processOrderSearchField();
         var orderFilterToken = this._processFilterToken();
 		return (
@@ -113,7 +118,7 @@ class OrderFilter extends React.Component{
 
 function mapStateToProps(state, ownProps){
   return {
-    showFilter: state.filterInfo.filterState || false,
+    ordersToggleFilter: state.filterInfo.ordersToggleFilter || false,
     orderData: state.getOrderDetail || {},
     orderListSpinner: state.spinner.orderListSpinner || false,
     orderFilterState: state.filterInfo.orderFilterState,
@@ -122,21 +127,24 @@ function mapStateToProps(state, ownProps){
 
 var mapDispatchToProps = function(dispatch){
   return {
-    showTableFilter: function(data){dispatch(showTableFilter(data));},
+    ordersFilterToggle: function(data){dispatch(ordersFilterToggle(data));},
     filterApplied: function(data){dispatch(filterApplied(data));},
      orderfilterState: function(data){dispatch(orderfilterState(data));},
-     toggleOrderFilter: function(data){dispatch(toggleOrderFilter(data));}
+     toggleOrderFilterApplied: function(data){dispatch(toggleOrderFilterApplied(data));},
+      setFilterApplyFlag: function (data) {dispatch(setFilterApplyFlag(data));}
   }
 };
 
 OrderFilter.PropTypes={
-    showFilter:React.PropTypes.bool,
+    ordersToggleFilter:React.PropTypes.bool,
     orderData:React.PropTypes.object,
     orderListSpinner:React.PropTypes.bool,
-    showTableFilter:React.PropTypes.func,
+    ordersFilterToggle:React.PropTypes.func,
     filterApplied:React.PropTypes.func,
     orderFilterState:React.PropTypes.bool,
-    toggleOrderFilter:React.PropTypes.func
+    toggleOrderFilterApplied:React.PropTypes.func,
+    setFilterApplyFlag:React.PropTypes.func,
+    responseFlag:React.PropTypes.bool
 };
 
 

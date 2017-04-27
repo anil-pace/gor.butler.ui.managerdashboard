@@ -5247,6 +5247,10 @@ button:disabled {
   border: 1px solid #666666;
 }
 
+.gor-filter-disable {
+  background-color: #efefef;
+}
+
 .gor-filter-input-text {
   font-size: 14px;
   font-weight: 600;
@@ -5267,6 +5271,7 @@ button:disabled {
   padding-left: 10px;
   padding-right: 10px;
   padding-bottom: 4px;
+  cursor: pointer;
 }
 
 .gor-filter-token-selected {
@@ -5281,6 +5286,7 @@ button:disabled {
   padding-left: 10px;
   padding-right: 10px;
   padding-bottom: 4px;
+  cursor: pointer;
 }
 
 .gor-filter-token-text {
@@ -5353,10 +5359,6 @@ button:disabled {
   border: solid 1px #aaaaaa;
 }
 
-.gor-filterBtn-btn:hover {
-  cursor: pointer;
-}
-
 .gor-filterBtn-applied {
   font-family: 'Source Sans Pro Bold', sans-serif;
   width: 125px;
@@ -5369,10 +5371,6 @@ button:disabled {
   background-color: #ffffff;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   border: solid 1px #f36f36;
-}
-
-.gor-filterBtn-applied:hover {
-  cursor: pointer;
 }
 
 .gor-filter-body-slider-wrap {

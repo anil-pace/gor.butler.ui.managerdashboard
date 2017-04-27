@@ -2,7 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
-import {showTableFilter,filterApplied,userfilterState,toggleUserFilter} from '../../actions/filterAction';
+import {userFilterToggle,filterApplied,userfilterState,toggleUserFilterApplied,setFilterApplyFlag} from '../../actions/filterAction';
 import {updateSubscriptionPacket} from '../../actions/socketActions';
 import { connect } from 'react-redux'; 
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
@@ -26,8 +26,8 @@ class UserFilter extends React.Component{
   }
 
   _closeFilter() {
-    let filterState = !this.props.showFilter;
-    this.props.showTableFilter(filterState);
+    var filterState = !this.props.userToggleFilter;
+    this.props.userFilterToggle(filterState);
   }   
 
   _processUserSearchField(){
@@ -121,7 +121,7 @@ _processUserRoll(){
           filterSubsData["username"] = name_query.length>1?name_query:name_query.join("").trim();
         }
           if (filterState.tokenSelected) {
-              (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !== "all" && filterState.tokenSelected["STATUS"].length !== 2 ? filterSubsData["logged_in"] = ['is', (filterState.tokenSelected["STATUS"] === "online") ? "true" : "false"] : "");
+              (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !== "all" && filterState.tokenSelected["STATUS"].length !== 2 ? filterSubsData["logged_in"] = ['is', (filterState.tokenSelected["STATUS"][0] === "online") ? "true" : "false"] : "");
               (filterState.tokenSelected["ROLE"] && filterState.tokenSelected["ROLE"][0] !== "all" ? filterSubsData["role"] = ['in', filterState.tokenSelected["ROLE"]] : "");
               /** Gaurav Makkar:
                * Added double underscore as a separator for the pps mode
@@ -147,8 +147,9 @@ _processUserRoll(){
      this.props.userfilterState(filterState);
      this.props.updateSubscriptionPacket(updatedWsSubscription);
      this.props.filterApplied(!this.props.isFilterApplied);
-     this.props.toggleUserFilter(true);
+     this.props.toggleUserFilterApplied(true);
      this.props.userFilterApplySpinner(true);
+     this.props.setFilterApplyFlag(true);
 
    }
 
@@ -160,14 +161,14 @@ _processUserRoll(){
      this.setState({tokenSelected: {"STATUS":["all"], "ROLE":["all"], "WORK MODE":["all"],"LOCATION":["all"]}, searchQuery: {}});
      this.props.userfilterState({tokenSelected: {"STATUS":["all"], "ROLE":["all"], "WORK MODE":["all"],"LOCATION":["all"]}, searchQuery: {}});
      this.props.filterApplied(!this.props.isFilterApplied);
-     this.props.toggleUserFilter(false);
+     this.props.toggleUserFilterApplied(false);
      this.props.userFilterApplySpinner(true);
+     this.props.setFilterApplyFlag(true);
    }
 
    render(){
     let userDetail = this.props.userDetails;
-    let noOrder = userDetail.userDetails && userDetail.userDetails.length?false:true;
-
+     var noUser = userDetail.emptyResponse;
     let userSearchField = this._processUserSearchField();
     let userFilterToken = this._processFilterToken();
     return (
@@ -181,7 +182,7 @@ _processUserRoll(){
       filterTokenC4={userFilterToken.column4token}
       formSubmit={this._applyFilter.bind(this)}
       responseFlag={this.props.isLoading}
-      noDataFlag={noOrder}
+      noDataFlag={noUser}
       />
       </div>
       );
@@ -195,7 +196,7 @@ UserFilter.contextTypes = {
 function mapStateToProps(state, ownProps){
   return {
     userDetails:state.userDetails||[],
-    showFilter: state.filterInfo.filterState || false,
+    userToggleFilter: state.filterInfo.userToggleFilter || false,
     auditSpinner: state.spinner.auditSpinner || false,
     totalAudits: state.recieveAuditDetail.totalAudits || 0,
     filterState: state.filterInfo.userfilterState,
@@ -210,17 +211,18 @@ function mapStateToProps(state, ownProps){
 
 var mapDispatchToProps = function(dispatch){
   return {
-    showTableFilter: function(data){dispatch(showTableFilter(data));},
+    userFilterToggle: function(data){dispatch(userFilterToggle(data));},
     filterApplied: function(data){dispatch(filterApplied(data));},
     userfilterState: function(data){dispatch(userfilterState(data));},
     updateSubscriptionPacket: function(data){dispatch(updateSubscriptionPacket(data));},
-    toggleUserFilter: function(data){dispatch(toggleUserFilter(data));},
-userFilterApplySpinner: function(data){dispatch(userFilterApplySpinner(data));}
-  }
+    toggleUserFilterApplied: function(data){dispatch(toggleUserFilterApplied(data));},
+userFilterApplySpinner: function(data){dispatch(userFilterApplySpinner(data));},
+setFilterApplyFlag: function (data) {dispatch(setFilterApplyFlag(data));}
+}
 };
 UserFilter.PropTypes={
 userDetails:React.PropTypes.array,
-showFilter: React.PropTypes.bool,
+userToggleFilter: React.PropTypes.bool,
 auditSpinner:React.PropTypes.bool,
 totalAudits:React.PropTypes.number,
 filterState:React.PropTypes.object,
@@ -228,11 +230,12 @@ wsSubscriptionData:React.PropTypes.object,
 isFilterApplied:React.PropTypes.bool,
 userFilterStatus:React.PropTypes.bool,
 roleInfo:React.PropTypes.object,
-showTableFilter: React.PropTypes.func,
+userFilterToggle: React.PropTypes.func,
 filterApplied: React.PropTypes.func,
 userfilterState: React.PropTypes.func,
 updateSubscriptionPacket: React.PropTypes.func,
-toggleUserFilter:React.PropTypes.func
+toggleUserFilterApplied:React.PropTypes.func,
+setFilterApplyFlag:React.PropTypes.func
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(UserFilter) ;

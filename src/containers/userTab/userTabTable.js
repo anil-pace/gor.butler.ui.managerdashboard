@@ -41,13 +41,14 @@ class UserDataTable extends React.Component {
     }));
   }
 
-shouldComponentUpdate(nextProps) {
-    if((nextProps.items && !nextProps.items.length)){
-      return false;
-    }
-    return true;
-  }
+
   componentWillReceiveProps(nextProps){
+    //Based on emptyresponse, appliedbutton and reponse has came or not we hide and show the filter
+    if(!nextProps.emptyResponse && this.props.filterApplyFlag && !nextProps.responseFlag)
+        {
+            this.props.setFilter(false);
+            this.props.setFilterApplyFlag(false);
+        }
     this._dataList = new tableRenderer(nextProps.items.length);
     this._defaultSortIndexes = [];
     this._dataList.newData=nextProps.items;
@@ -193,8 +194,10 @@ shouldComponentUpdate(nextProps) {
   }
 
   _setFilter() {
-    var newState = !this.props.showFilter;
+      if(this.props.items.length){
+    let newState = !this.props.userToggleFilter;
     this.props.setFilter(newState);
+  }
    }
  
 
@@ -203,7 +206,7 @@ shouldComponentUpdate(nextProps) {
     let filterHeight = screen.height-190-50;
     let {sortedDataList, colSortDirs,columnWidths} = this.state;
     let columnWidth= (this.props.containerWidth/this.props.itemNumber);
-    let heightRes = 560 ,rowsCount = sortedDataList.getSize() ;
+    let heightRes = 560 ,rowsCount = sortedDataList.getSize();
     if(this.props.containerHeight !== 0) {
       heightRes = this.props.containerHeight;
     }
@@ -219,7 +222,7 @@ shouldComponentUpdate(nextProps) {
     return (
       <div>
 
-      <div className="gor-filter-wrap" style={{'width':this.props.showFilter?'350px':'0px', height:filterHeight}}> 
+      <div className="gor-filter-wrap" style={{'width':this.props.userToggleFilter?'350px':'0px', height:filterHeight}}> 
          <UserFilter refreshOption={this.props.refreshOption} responseFlag={this.props.responseFlag}/>  
        </div>
 
@@ -244,17 +247,16 @@ shouldComponentUpdate(nextProps) {
         <div className="gorToolBarDropDown">
         <div className="gor-button-wrap">
         <div className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
-        <button className={this.props.userFilterStatus?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
-          <div className="gor-manage-task"/>
-          <FormattedMessage id="order.table.filterLabel" description="button label for filter" 
-          defaultMessage ="Filter data"/>
+
+
+         <button className={this.props.userFilterStatus?"gor-filterBtn-applied":"gor-filterBtn-btn"} disabled={this.props.items && this.props.items.length?false:true} style={this.props.items && this.props.items.length?{cursor:'pointer'}:{cursor:'default'}} onClick={this._setFilter.bind(this)} >
+       {!this.props.userFilterStatus?<div><div className="gor-manage-task"></div><FormattedMessage id="user.table.filterLabel" description="button label for filter" defaultMessage ="Filter data"/></div>:
+       <div><div className="gor-manage-task"></div><FormattedMessage id="user.table.showfilter" description="button label for filter" defaultMessage ="Show Filter"/></div>}
          </button>
+
        </div>
         </div>     
         </div>
-
-
-
 
        </div>
           {/*Filter Summary*/}
@@ -385,13 +387,19 @@ items:React.PropTypes.array,
   currentHeaderOrder:React.PropTypes.object,
   sortHeaderState:React.PropTypes.func,
   lastUpdatedText:React.PropTypes.string,
-  showFilter:React.PropTypes.bool,
+  userToggleFilter:React.PropTypes.bool,
   lastUpdated:React.PropTypes.string,
   setFilter:React.PropTypes.func,
   containerHeight:React.PropTypes.number,
   currentSortState:React.PropTypes.string,
   responseFlag:React.PropTypes.bool,
-  userFilterStatus:React.PropTypes.bool
+  userFilterStatus:React.PropTypes.bool,
+  setFilterApplyFlag:React.PropTypes.func,
+  emptyResponse:React.PropTypes.bool,
+  setFilter:React.PropTypes.func,
+  filterApplyFlag:React.PropTypes.bool
+
+
 
 };
 
