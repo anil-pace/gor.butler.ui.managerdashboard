@@ -11,7 +11,12 @@ import Spinner from '../../components/spinner/Spinner';
 import {setCsSpinner} from '../../actions/spinnerAction';
 import {stringConfig} from '../../constants/backEndConstants';
 import {defineMessages} from 'react-intl';
-import {INITIAL_HEADER_SORT, INITIAL_HEADER_ORDER, GOR_CONNECTED_STATUS,WS_ONSEND} from '../../constants/frontEndConstants';
+import {
+    INITIAL_HEADER_SORT,
+    INITIAL_HEADER_ORDER,
+    GOR_CONNECTED_STATUS,
+    WS_ONSEND
+} from '../../constants/frontEndConstants';
 import {csHeaderSort, csHeaderSortOrder, csFilterDetail} from '../../actions/sortHeaderActions';
 import {
     showTableFilter,
@@ -19,7 +24,7 @@ import {
     chargingstationfilterState,
     toggleChargingFilter
 } from '../../actions/filterAction';
-import {updateSubscriptionPacket,setWsAction} from './../../actions/socketActions'
+import {updateSubscriptionPacket, setWsAction} from './../../actions/socketActions'
 import {wsOverviewData} from './../../constants/initData.js';
 import {chargingStationListRefreshed} from './../../actions/systemActions'
 import {hashHistory} from 'react-router'
@@ -43,7 +48,7 @@ const messages = defineMessages({
 class ChargingStations extends React.Component {
     constructor(props) {
         super(props);
-        this.state={query:null}
+        this.state = {query: null}
     }
 
     _processChargersData(data, nProps) {
@@ -117,11 +122,12 @@ class ChargingStations extends React.Component {
             filterSubsData["charger_mode"] = ['in', query.charger_mode.constructor === Array ? query.charger_mode : [query.charger_mode]]
         }
 
-        if (Object.keys(query).length !== 0) {
+        if (Object.keys(query).filter(function(el){return el!=='page'}).length !== 0) {
             this.props.toggleChargingFilter(true);
-            sessionStorage.setItem("chargingstation", this.props.location.search)
+            this.props.filterApplied(true);
         } else {
-            sessionStorage.removeItem("chargingstation")
+            this.props.toggleChargingFilter(false);
+            this.props.filterApplied(false);
         }
 
         let updatedWsSubscription = this.props.wsSubscriptionData;
@@ -136,7 +142,6 @@ class ChargingStations extends React.Component {
                 "CHARGING STATION ID": query.charger_id || ''
             }
         });
-        this.props.filterApplied(!this.props.isFilterApplied);
     }
 
 
@@ -144,8 +149,6 @@ class ChargingStations extends React.Component {
      *
      */
     _clearFilter() {
-        this.props.toggleChargingFilter(false);
-        this.props.chargingstationfilterState({tokenSelected: {"STATUS": ["all"], "MODE": ["all"]}, searchQuery: {}});
         hashHistory.push({pathname: "/chargingstation", query: {}})
     }
 
@@ -249,7 +252,7 @@ function mapStateToProps(state, ownProps) {
         isFilterApplied: state.filterInfo.isFilterApplied || false,
         chargingFilterStatus: state.filterInfo.chargingFilterStatus || false,
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
-        chargingStationListRefreshed:state.chargerInfo.chargingStationListRefreshed,
+        chargingStationListRefreshed: state.chargerInfo.chargingStationListRefreshed,
         socketAuthorized: state.recieveSocketActions.socketAuthorized
     };
 }
@@ -284,10 +287,12 @@ var mapDispatchToProps = function (dispatch) {
         toggleChargingFilter: function (data) {
             dispatch(toggleChargingFilter(data));
         },
-        chargingStationListRefreshed:function(data){
+        chargingStationListRefreshed: function (data) {
             dispatch(chargingStationListRefreshed(data))
         },
-        initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
+        initDataSentCall: function (data) {
+            dispatch(setWsAction({type: WS_ONSEND, data: data}));
+        },
 
     };
 }

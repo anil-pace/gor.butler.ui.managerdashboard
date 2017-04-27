@@ -230,11 +230,12 @@ class ButlerBot extends React.Component {
             filterSubsData["current_task"] = ['in',query.current_task.constructor===Array?query.current_task:[query.current_task]]
         }
 
-        if (Object.keys(query).length !== 0) {
+        if (Object.keys(query).filter(function(el){return el!=='page'}).length !== 0) {
             this.props.toggleBotButton(true);
-            sessionStorage.setItem("butlerBots", this.props.location.search)
+            this.props.filterApplied(true);
         } else {
-            sessionStorage.removeItem("butlerBots")
+            this.props.toggleBotButton(false);
+            this.props.filterApplied(false);
         }
 
         let updatedWsSubscription = this.props.wsSubscriptionData;
@@ -249,7 +250,6 @@ class ButlerBot extends React.Component {
             },
             defaultToken: {"STATUS": ["any"], "MODE": ["any"]}
         });
-        this.props.filterApplied(!this.props.isFilterApplied);
     }
 
 
@@ -257,12 +257,6 @@ class ButlerBot extends React.Component {
      *
      */
     _clearFilter() {
-        this.props.toggleBotButton(false);
-        this.props.butlerfilterState({
-            tokenSelected: {"STATUS": ["any"], "MODE":["any"]}, searchQuery: {
-            },
-            defaultToken: {"STATUS": ["any"], "MODE": ["any"]}
-        });
         hashHistory.push({pathname: "/butlerbots", query: {}})
     }
 

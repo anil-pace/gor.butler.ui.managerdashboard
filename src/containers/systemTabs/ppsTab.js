@@ -104,11 +104,12 @@ class PPS extends React.Component {
             filterSubsData["performance"]=['between',[query.minRange?+query.minRange:-1,query.maxRange?+query.maxRange:500]]
         }
 
-        if (Object.keys(query).length !== 0) {
+        if (Object.keys(query).filter(function(el){return el!=='page'}).length !== 0) {
             this.props.togglePPSFilter(true);
-            sessionStorage.setItem("pps", this.props.location.search)
+            this.props.filterApplied(true);
         } else {
-            sessionStorage.removeItem("pps")
+            this.props.togglePPSFilter(false);
+            this.props.filterApplied(false);
         }
 
         let updatedWsSubscription = this.props.wsSubscriptionData;
@@ -125,7 +126,7 @@ class PPS extends React.Component {
             },
             rangeSelected: {"minValue": [query.minRange||"-1"], "maxValue": [query.maxRange||"500"]}
         }})
-        this.props.filterApplied(!this.props.isFilterApplied);
+
     }
 
 
@@ -133,8 +134,6 @@ class PPS extends React.Component {
      *
      */
     _clearFilter() {
-        this.props.togglePPSFilter(false);
-        this.props.ppsfilterState({tokenSelected: {"STATUS":["all"], "MODE":["all"]}, searchQuery: {}, rangeSelected:{"minValue":["-1"],"maxValue":["500"]}});
         hashHistory.push({pathname: "/pps", query: {}})
     }
 

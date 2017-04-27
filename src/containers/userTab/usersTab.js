@@ -193,11 +193,12 @@ class UsersTab extends React.Component {
             })
             filterSubsData["pps"] = ['in', pps_list]
         }
-        if (Object.keys(query).length !== 0) {
+        if (Object.keys(query).filter(function(el){return el!=='page'}).length !== 0) {
             this.props.toggleUserFilter(true);
-            sessionStorage.setItem("users", this.props.location.search)
+            this.props.filterApplied(true);
         } else {
-            sessionStorage.removeItem("users")
+            this.props.toggleUserFilter(false);
+            this.props.filterApplied(false);
         }
         let updatedWsSubscription = this.props.wsSubscriptionData;
         updatedWsSubscription["users"].data[0].details["filter_params"] = filterSubsData;
@@ -212,7 +213,6 @@ class UsersTab extends React.Component {
             }, searchQuery: {"USER NAME": query.username || null},
             defaultToken: {"STATUS": ["all"], "ROLE": ["all"], "WORK MODE": ["all"], "LOCATION": ["all"]}
         });
-        this.props.filterApplied(!this.props.isFilterApplied);
     }
 
     /**
@@ -221,15 +221,6 @@ class UsersTab extends React.Component {
      * @private
      */
     _refreshUserList() {
-        this.props.showTableFilter(false);
-        this.props.toggleUserFilter(false);
-        /**
-         * It will reset the filter
-         * fields already applied in
-         * the Filter box
-         */
-        this.props.userfilterState({tokenSelected: {"STATUS":["all"], "ROLE":["all"], "WORK MODE":["all"],"LOCATION":["all"]}, searchQuery: {},
-            defaultToken: {"STATUS":["all"], "ROLE":["all"], "WORK MODE":["all"],"LOCATION":["all"]}})
         hashHistory.push({pathname: "/users", query: {}})
     }
 
