@@ -450,7 +450,7 @@ class AuditTab extends React.Component {
 
     handlePageClick(data) {
         var url, appendSortUrl = "", appendTextFilterUrl = "", makeDate, inc = 0, value = [], paramValue = "",
-            selectedAuditType = "";
+            selectedAuditType = "",_queryParams=[];
         var currentDate = new Date();
         var filterApplied = false;
         var skuText = "", arr = [], selectvalue;
@@ -475,6 +475,7 @@ class AuditTab extends React.Component {
         if (data.searchQuery && data.tokenSelected[AUDIT_TYPE]) {
             selectvalue = (data.tokenSelected[AUDIT_TYPE].length === 2) ? ANY : data.tokenSelected[AUDIT_TYPE][0];
             skuText = AUDIT_PARAM_TYPE + selectvalue;
+            _queryParams.push([AUDIT_PARAM_TYPE,selectvalue].join("="))
             selectedAuditType = this._mappingString(selectvalue);
 
 //Pushing the audit type into array to make it generic
@@ -490,6 +491,7 @@ class AuditTab extends React.Component {
 //Formatting the param value for single and multiple type       
             if (value.length) {
                 paramValue = (value.length > 1 || selectvalue === ANY) ? "['" + value.join("','") + "']" : "'" + value[0] + "'";
+                _queryParams.push([AUDIT_PARAM_VALUE, "['"+value.join("','")+"']"].join("="))
                 skuText = skuText + AUDIT_PARAM_VALUE + paramValue;
             }
         }
@@ -497,10 +499,12 @@ class AuditTab extends React.Component {
         if (data.tokenSelected && data.tokenSelected["STATUS"][0] !== ALL) {
             let statusToken = data.tokenSelected["STATUS"];
             skuText = skuText + AUDIT_STATUS + "['" + statusToken.join("','") + "']";
+            _queryParams.push([AUDIT_STATUS,"['"+statusToken.join("','")+"']" ].join("="))
         }
 
         if (data.searchQuery && data.searchQuery[AUDIT_TASK_ID]) {
             appendTextFilterUrl = FILTER_AUDIT_ID + data.searchQuery[AUDIT_TASK_ID];
+            _queryParams.push([FILTER_AUDIT_ID, data.searchQuery[AUDIT_TASK_ID]].join("="))
             data.selected = 1;
             filterApplied = true;
         }
@@ -510,15 +514,17 @@ class AuditTab extends React.Component {
             data.selected = data.selected ? data.selected : 1;
             if (data.columnKey && data.sortDir) {
                 appendSortUrl = sortAuditHead[data.columnKey] + sortOrder[data.sortDir];
+                _queryParams.push(sortAuditHead[data.columnKey])
+                _queryParams.push(sortOrder[data.sortDir])
             }
-            url = SEARCH_AUDIT_URL + makeDate + GIVEN_PAGE + (data.selected) + GIVEN_PAGE_SIZE + appendSortUrl + skuText;
+            _queryParams.push([GIVEN_PAGE,data.selected||1].join("="))
+            _queryParams.push([GIVEN_PAGE_SIZE,20].join("="))
+            url = [SEARCH_AUDIT_URL + makeDate,_queryParams.join("&")].join("&")
         }
         else {
             url = data.url;
         }
         this.setState({selected_page: data.selected});
-        url = url + appendTextFilterUrl;
-
         let paginationData = {
             'url': url,
             'method': GET,

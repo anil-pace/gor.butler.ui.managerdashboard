@@ -477,11 +477,11 @@ export const SOFT_MANUAL = "soft_manual";
 export const SOFT = "soft";
 export const HARD = "hard";
 //backend sort
-export const sortAuditHead = {"startTime":['order_by','start_actual_time'].join("="),
-							"completedTime":["order_by","completion_time"].join("="),
-							"display_id":["order_by","display_id"].join("="),
-                  			"status":[["order_by","audit_status"].join("="),["order_by_seq",[ 'audit_pending_approval','audit_created','audit_accepted','audit_conflicting','audit_waiting','audit_resolved','audit_pending','audit_reaudited','audit_started','audit_tasked','audit_rejected','audit_resolved','audit_aborted', 'audit_completed']].join("=")].join("&")};
-export const sortOrder = {"DESC":["order","asc"].join("="), "ASC":["order","desc"].join("=")};
+export const sortAuditHead = {"startTime":"&order_by=start_actual_time",
+    "completedTime":"&order_by=completion_time",
+    "display_id":"&order_by=display_id",
+    "status":"&order_by=audit_status&order_by_seq=[ 'audit_pending_approval','audit_created','audit_accepted','audit_conflicting','audit_waiting','audit_resolved','audit_pending','audit_reaudited','audit_started','audit_tasked','audit_rejected','audit_resolved','audit_aborted', 'audit_completed']"};
+export const sortOrder = {"DESC":"&order=asc", "ASC":"&order=desc"};
 
 export const sortOrderHead = {"recievedTime":"&order_by=create_time", 
 							  "pickBy":"&order_by=pick_before_time", 
