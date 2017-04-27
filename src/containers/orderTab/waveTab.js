@@ -4,15 +4,17 @@ import {connect} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
 import Spinner from '../../components/spinner/Spinner';
 import {setWavesSpinner} from '../../actions/spinnerAction';
-import {GOR_PENDING, GOR_PROGRESS, GOR_BREACHED} from '../../constants/frontEndConstants';
+import {GOR_PENDING, GOR_PROGRESS, GOR_BREACHED,WS_ONSEND} from '../../constants/frontEndConstants';
 import {stringConfig} from '../../constants/backEndConstants';
 import {defineMessages} from 'react-intl';
 import {waveHeaderSort, waveHeaderSortOrder, waveFilterDetail} from '../../actions/sortHeaderActions';
 import {INITIAL_HEADER_SORT, INITIAL_HEADER_ORDER} from '../../constants/frontEndConstants';
 import {getDaysDiff} from '../../utilities/getDaysDiff';
 import {showTableFilter, filterApplied, toggleWaveFilter, wavefilterState} from '../../actions/filterAction';
-import {updateSubscriptionPacket} from './../../actions/socketActions'
+import {updateSubscriptionPacket,setWsAction} from './../../actions/socketActions'
 import {wsOverviewData} from './../../constants/initData.js';
+import {wavesRefreshed} from './../../actions/orderListActions'
+import {hashHistory} from 'react-router'
 
 //Mesages for internationalization
 const messages = defineMessages({
@@ -26,6 +28,70 @@ const messages = defineMessages({
 
 
 class WaveTab extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state={query:null}
+    }
+
+    componentWillMount() {
+        /**
+         * It will update the last refreshed property of
+         * overview details, so that updated subscription
+         * packet can be sent to the server for data
+         * update.
+         */
+        this.props.wavesRefreshed()
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.socketAuthorized && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
+            this.setState({query: nextProps.location.query})
+            this._refreshList(nextProps.location.query)
+        }
+    }
+
+    /**
+     * The method will update the subscription packet
+     * and will fetch the data from the socket.
+     * @private
+     */
+    _refreshList(query) {
+        let filterSubsData = {}
+        if (query.waveId) {
+            filterSubsData["wave_id"] = ['=', query.waveId];
+        }
+        if (query.status) {
+            filterSubsData["status"] = ['in', query.status.constructor === Array ? query.status : [query.status]]
+        }
+        if (Object.keys(query).filter(function(el){return el!=='page'}).length !== 0) {
+            this.props.toggleWaveFilter(true);
+            this.props.filterApplied(true);
+        } else {
+            this.props.toggleWaveFilter(false);
+            this.props.filterApplied(false);
+        }
+        let updatedWsSubscription = this.props.wsSubscriptionData;
+        updatedWsSubscription["orders"].data[0].details["filter_params"] = filterSubsData;
+        this.props.initDataSentCall(updatedWsSubscription["orders"])
+        this.props.updateSubscriptionPacket(updatedWsSubscription);
+        this.props.wavefilterState({
+            tokenSelected: {
+                "STATUS": query.status ? (query.status.constructor === Array ? query.status : [query.status]) : ["any"]
+            },
+            searchQuery: {
+                "WAVE ID": query.waveId || ''
+            }
+        });
+
+    }
+
+
+    /**
+     *
+     */
+    _clearFilter() {
+        hashHistory.push({pathname: "/waves", query: {}})
+    }
 
     _processWaveData(data, nProps) {
         var nProps = this,
@@ -133,9 +199,7 @@ class WaveTab extends React.Component {
         console.log('Refresh');
     }
 
-    constructor(props) {
-        super(props);
-    }
+
 
     /**
      * The method will update and send the subscription packet
@@ -226,7 +290,7 @@ class WaveTab extends React.Component {
                             showFilter={this.props.showFilter}
                             setFilter={this.props.showTableFilter}
                             waveFilterStatus={this.props.waveFilterStatus}
-                            refreshList={this._refreshWavesList.bind(this)}
+                            refreshList={this._clearFilter.bind(this)}
                 />
             </div>
         );
@@ -247,7 +311,10 @@ function mapStateToProps(state, ownProps) {
         waveFilterStatus: state.filterInfo.waveFilterStatus || false,
         showFilter: state.filterInfo.filterState || false,
         isFilterApplied: state.filterInfo.isFilterApplied || false,
-        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData
+        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
+        socketAuthorized: state.recieveSocketActions.socketAuthorized,
+        wavesRefreshed:state.ppsInfo.wavesRefreshed
+
     };
 };
 
@@ -279,7 +346,10 @@ var mapDispatchToProps = function (dispatch) {
         },
         wavefilterState: function (data) {
             dispatch(wavefilterState(data));
+
         },
+        initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
+        wavesRefreshed:function(data){dispatch(wavesRefreshed(data))}
     };
 }
 
