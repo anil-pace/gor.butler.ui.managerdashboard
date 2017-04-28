@@ -56,6 +56,7 @@ class WaveTab extends React.Component {
      * @private
      */
     _refreshList(query) {
+        this.props.setWavesSpinner(true)
         let filterSubsData = {}
         if (query.waveId) {
             filterSubsData["wave_id"] = ['=', query.waveId];

@@ -216,6 +216,7 @@ class ButlerBot extends React.Component {
      * @private
      */
     _refreshList(query) {
+        this.props.setButlerSpinner(true)
         let filterSubsData = {}
         if (query.location) {
             filterSubsData["location"] = ['contains',query.location]

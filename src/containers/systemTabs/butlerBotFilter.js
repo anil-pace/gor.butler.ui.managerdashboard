@@ -99,14 +99,10 @@ class ButlerBotFilter extends React.Component{
             _query.current_task = filterState.tokenSelected["MODE"]
         }
 
-        this.props.toggleBotButton(true);
-        this.props.setButlerFilterSpinner(true);
         hashHistory.push({pathname: "/butlerbots", query: _query})
     }
 
     _clearFilter() {
-        this.props.toggleBotButton(false);
-        this.props.setButlerFilterSpinner(true);
         hashHistory.push({pathname: "/butlerbots", query: {}})
         
     }

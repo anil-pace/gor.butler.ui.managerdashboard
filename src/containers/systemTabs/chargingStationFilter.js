@@ -113,14 +113,10 @@ class ChargingStationFilter extends React.Component {
             _query.charger_mode = filterState.tokenSelected["OPERATING MODE"]
         }
 
-        this.props.toggleChargingFilter(true);
-        this.props.setCsFilterSpinner(true);
         hashHistory.push({pathname: "/chargingstation", query: _query})
     }
 
     _clearFilter() {
-        this.props.toggleChargingFilter(false);
-        this.props.setCsFilterSpinner(true);
         hashHistory.push({pathname: "/chargingstation", query: {}})
     }
 

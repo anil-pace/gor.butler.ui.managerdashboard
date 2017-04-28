@@ -19,8 +19,7 @@ export  function waveInfo(state={},action){
             "waveData" : res.complete_data
             })
           }
-          break;
-
+          return state
       case WAVES_REFRESHED:
           return Object.assign({}, state, {
               "wavesRefreshed": new Date()

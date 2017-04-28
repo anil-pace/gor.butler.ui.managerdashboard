@@ -125,6 +125,7 @@ class OrderListTab extends React.Component {
      * @private
      */
     _refreshList(query) {
+        this.props.setOrderListSpinner(true);
         let _query_params = [], convertTime = {
             "oneHourOrders": 1,
             "twoHourOrders": 2,
@@ -174,7 +175,6 @@ class OrderListTab extends React.Component {
             this.props.filterApplied(false);
         }
         this.props.currentPage(1);
-        this.props.setOrderListSpinner(true);
         this.props.orderfilterState({
             tokenSelected: {
                 "STATUS": query.status ? (query.status.constructor === Array ? query.status : [query.status]) : ['all'],

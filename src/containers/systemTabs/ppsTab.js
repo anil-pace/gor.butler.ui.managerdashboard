@@ -83,6 +83,7 @@ class PPS extends React.Component {
      * @private
      */
     _refreshList(query) {
+        this.props.setPpsSpinner(true)
         let filterSubsData = {}
         if (query.operator) {
             let operator_assigned_query=query.operator.split(" ")

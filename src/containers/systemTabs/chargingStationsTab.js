@@ -111,6 +111,7 @@ class ChargingStations extends React.Component {
      * @private
      */
     _refreshList(query) {
+        this.props.setCsSpinner(true)
         let filterSubsData = {}
         if (query.charger_id) {
             filterSubsData["charger_id"] = ['contains', query.charger_id]

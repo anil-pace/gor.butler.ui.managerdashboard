@@ -122,15 +122,11 @@ class PPSFilter extends React.Component{
             if (filterState.tokenSelected["MODE"] && filterState.tokenSelected["MODE"][0] !== "all") {
                 _query.mode = filterState.tokenSelected["MODE"]
             }
-            this.props.togglePPSFilter(true);
-            this.props.setPpsFilterSpinner(true);
             hashHistory.push({pathname: "/pps", query: _query})
         }
     }
 
     _clearFilter(){
-        this.props.togglePPSFilter(false);
-        this.props.setPpsFilterSpinner(true);
         hashHistory.push({pathname: "/pps", query: {}})
 
     } 

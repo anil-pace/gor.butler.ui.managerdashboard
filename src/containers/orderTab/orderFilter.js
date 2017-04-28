@@ -85,10 +85,7 @@ class OrderFilter extends React.Component{
         if (filterState.searchQuery["ORDER ID"]) {
             _query.orderId = filterState.searchQuery["ORDER ID"]
         }
-       // this.props.orderfilterState(filterState)
-        this.props.toggleOrderFilter(false);
-        this.props.filterApplied(false);
-        hashHistory.push({pathname: "/orderlist", query: _query})
+       hashHistory.push({pathname: "/orderlist", query: _query})
     }
 
     _clearFilter() {
