@@ -221,7 +221,7 @@ class UsersTab extends React.Component {
      * to fetch the default list of users
      * @private
      */
-    _refreshUserList() {
+    _clearFilter() {
         hashHistory.push({pathname: "/users", query: {}})
     }
 
@@ -243,7 +243,7 @@ class UsersTab extends React.Component {
                                        currentHeaderOrder={this.props.userSortHeaderState}
                                        setUserFilter={this.props.userFilterDetail}
                                        getUserFilter={this.props.userFilter}
-                                       refreshList={this._refreshUserList.bind(this)}
+                                       refreshList={this._clearFilter.bind(this)}
                                        userFilterStatus={this.props.userFilterStatus}
                                        isFilterApplied={this.props.isFilterApplied}
                                        lastUpdatedText={updateStatusIntl}

@@ -200,32 +200,6 @@ class WaveTab extends React.Component {
         console.log('Refresh');
     }
 
-
-
-    /**
-     * The method will update and send the subscription packet
-     * to fetch the default list of waves
-     * @private
-     */
-    _refreshWavesList() {
-        let updatedWsSubscription = this.props.wsSubscriptionData;
-        delete updatedWsSubscription["orders"].data[0].details["filter_params"];
-        this.props.updateSubscriptionPacket(updatedWsSubscription);
-        this.props.filterApplied(!this.props.isFilterApplied);
-        this.props.showTableFilter(false);
-        this.props.toggleWaveFilter(false);
-        /**
-         * It will reset the filter
-         * fields already applied in
-         * the Filter box
-         */
-        this.props.wavefilterState({
-            tokenSelected: {"STATUS": ["any"]},
-            searchQuery: {},
-            defaultToken: {"STATUS": ["any"]}
-        })
-    }
-
     render() {
         var updateStatusIntl = "";
         var itemNumber = 7, waveData = this.props.waveDetail.waveData, waveState = {

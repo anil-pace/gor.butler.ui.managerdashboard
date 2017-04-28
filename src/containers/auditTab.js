@@ -224,36 +224,6 @@ class AuditTab extends React.Component {
     }
 
 
-    // componentWillReceiveProps(nextProps) {
-    //     if (nextProps.auditRefresh) {
-    //         var data = {};
-    //         data.selected = this.state.selected_page;
-    //         this.handlePageClick(data);
-    //         this.props.setAuditRefresh(false);
-    //     }
-    // }
-
-    // shouldComponentUpdate(nextProps) {
-    //     var flag = false;
-    //     if (nextProps.auditRefresh !== this.props.auditRefresh) {
-    //         flag = flag || true;
-    //     }
-    //
-    //     else if ((nextProps.auditDetail && !nextProps.auditDetail.length)) {
-    //         flag = flag || false;
-    //     }
-    //
-    //     else if (this.props.auditSortHeader !== nextProps.auditSortHeader || this.props.auditSpinner !== nextProps.auditSpinner) {
-    //         flag = flag || true;
-    //     }
-    //
-    //     else if (this.props.showFilter !== nextProps.showFilter) {
-    //         flag = flag || true;
-    //     }
-    //
-    //     return flag;
-    // }
-
     _processAuditData(data, nProps) {
         var nProps = this,
             data = nProps.props.auditDetail;

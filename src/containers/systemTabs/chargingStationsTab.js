@@ -154,29 +154,6 @@ class ChargingStations extends React.Component {
     }
 
 
-    /**
-     * The method will update and send the subscription packet
-     * to fetch the default list of users
-     * @private
-     */
-    _refreshChargingStationList() {
-        let updatedWsSubscription = this.props.wsSubscriptionData;
-        delete updatedWsSubscription["chargingstation"].data[0].details["filter_params"];
-        this.props.updateSubscriptionPacket(updatedWsSubscription);
-        this.props.filterApplied(!this.props.isFilterApplied);
-        this.props.showTableFilter(false);
-        this.props.toggleChargingFilter(false);
-        /**
-         * It will reset the filter
-         * fields already applied in
-         * the Filter box
-         */
-        this.props.chargingstationfilterState({
-            tokenSelected: {"DOCKING STATUS": ["all"], "OPERATING MODE": ["all"]}, searchQuery: {},
-            defaultToken: {"DOCKING STATUS": ["all"], "OPERATING MODE": ["all"]}
-        })
-    }
-
     render() {
         let updateStatusIntl = "";
         var itemNumber = 4, connectedBots = 0, manualMode = 0, automaticMode = 0,

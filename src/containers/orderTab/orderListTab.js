@@ -86,13 +86,6 @@ class OrderListTab extends React.Component {
         this.state = {selected_page: 1, query: null, orderListRefreshed: null};
     }
 
-    // componentDidMount() {
-    //     var data = this.props.orderFilterState;
-    //     data.selected = 1;
-    //     this.refresh(data);
-    // }
-
-
     componentWillMount() {
         /**
          * It will update the last refreshed property of

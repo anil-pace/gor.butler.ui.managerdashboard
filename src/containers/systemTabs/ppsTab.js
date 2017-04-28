@@ -204,27 +204,6 @@ class PPS extends React.Component {
 
     }
 
-    /**
-     * It will update the subscription data
-     * and fetch the default list of PPS
-     * @private
-     */
-    _refreshPPSList() {
-        let updatedWsSubscription = this.props.wsSubscriptionData;
-        delete updatedWsSubscription["pps"].data[0].details["filter_params"]
-        this.props.updateSubscriptionPacket(updatedWsSubscription);
-        this.props.ppsfilterState({
-            tokenSelected: {"STATUS": ["all"], "MODE": ["all"]},
-            searchQuery: {},
-            defaultToken: {"STATUS": ["all"], "MODE": ["all"]},
-            rangeSelected: {"minValue": ["-1"], "maxValue": ["500"]}
-        });
-        this.props.filterApplied(!this.props.isFilterApplied);
-        this.props.togglePPSFilter(false);
-        this.props.showTableFilter(false);
-
-    }
-
     render() {
         let updateStatusIntl = "";
         let operationMode = {"pick": 0, "put": 0, "audit": 0, "notSet": 0};
