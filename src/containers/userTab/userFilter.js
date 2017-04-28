@@ -160,14 +160,10 @@ _processUserRoll(){
                 _query.mode = filterState.tokenSelected["WORK MODE"]
             }
         }
-       this.props.toggleUserFilter(true);
-       this.props.userFilterApplySpinner(true);
        hashHistory.push({pathname: "/users", query: _query})
     }
 
     _clearFilter() {
-        this.props.toggleUserFilter(false);
-        this.props.userFilterApplySpinner(true);
         hashHistory.push({pathname: "/users", query: {}})
     }
 

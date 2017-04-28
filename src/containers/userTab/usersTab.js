@@ -163,6 +163,7 @@ class UsersTab extends React.Component {
      * @private
      */
     _refreshList(query) {
+        this.props.userFilterApplySpinner(true);
         let filterSubsData = {}
         if (query.username) {
             let name_query = query.username.split(" ")
