@@ -66,6 +66,14 @@ class AuditTable extends React.Component {
     }
 
 
+    shouldComponentUpdate(nextProps) {
+        if(this.props.items  && nextProps.items.length===0) {
+            return false;
+        }
+        return true;
+    }
+
+
     /**
      * Hack for fixing the bug https://work.greyorange.com/jira/browse/BSS-656
      * This has to be removed once we get rid of the fixedDataTable

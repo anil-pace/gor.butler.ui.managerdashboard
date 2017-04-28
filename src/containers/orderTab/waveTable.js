@@ -56,7 +56,7 @@ class WavesTable extends React.Component {
     }
 
     shouldComponentUpdate(nextProps) {
-        if ((nextProps.items && !nextProps.items.length)) {
+        if(this.props.items  && nextProps.items.length===0) {
             return false;
         }
         return true;
