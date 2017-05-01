@@ -1,5 +1,5 @@
 
-export const BASE_URL = '192.168.8.155' ;
+export const BASE_URL = '192.168.12.90:5000' ;
 export const PORT = '8888';
 export const PROTOCOL = 'https://';
 export const WS_PROTOCOL ="wss://";
@@ -35,3 +35,5 @@ export const SKU_VALIDATION_URL = API_URL + "/sku/audit_attributes_configured/";
 export const VALIDATION_LIST = API_URL + "/system/remove_emergency/validation_list";
 export const VALIDATE_SAFETY = API_URL + "/system/validate_and_remove_emergency";
 export const GET_SHIFT_START_TIME_URL = API_URL + "/system/shift_start_time";
+export const INVENTORY_REPORT_URL = API_URL + "/inventories/get_inventory_report_v2";
+export const GET_ITEM_RECALL = API_URL + "/orders/wrapper/generate_orders"

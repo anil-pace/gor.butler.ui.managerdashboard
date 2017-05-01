@@ -4889,7 +4889,7 @@ button:disabled {
 }
 
 .gor-paginate-wrap {
-  padding-top: 0.625rem;
+  padding-top: 2rem;
   padding-bottom: 0.625rem;
 }
 
@@ -5359,7 +5359,7 @@ button:disabled {
 
 .gor-filterBtn-applied {
   font-family: 'Source Sans Pro Bold', sans-serif;
-  width: 125px;
+  min-width: 125px;
   height: 35px;
   font-size: 14px;
   color: #f36f36;
@@ -5811,7 +5811,15 @@ button:disabled {
   border-bottom: 1px solid #AAAAAA;
 }
 
+.gor-utility-tile-h1 .gor-utility-tile-icon {
+  display: inline-block;
+  float: right;
+  padding-top: 22px;
+  padding-right: 24px;
+}
+
 .gor-utility-tile-h1 .gor-utility-tile-heading {
+  display: inline-block;
   padding: 20px;
   font-size: 18px;
   font-weight: 600;
@@ -5851,6 +5859,7 @@ button:disabled {
   font-size: 0;
   width: 23.7%;
   position: relative;
+  vertical-align: top;
 }
 
 .gor-utility-updown-bar {
@@ -5898,4 +5907,110 @@ button:disabled {
   font-weight: 600;
   color: #000000;
   padding-bottom: 11px;
+}
+
+.gor-utility-body-header {
+  background-color: #efefef;
+  font-size: 14px;
+  font-weight: 600;
+  color: #000000;
+  padding-top: 5px;
+  padding-bottom: 7px;
+  padding-left: 19px;
+}
+
+.gor-utility-btn-wrap {
+  padding-top: 19px;
+  padding-bottom: 22px;
+  padding-left: 58px;
+}
+
+.gor-right-arrow {
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid #000000;
+}
+
+.gor-down-arrow {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #000000;
+}
+
+.gor-utility-master-h1 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #000000;
+  padding-top: 9px;
+  padding-left: 10px;
+}
+
+.gor-utility-master-h2 {
+  font-size: 12px;
+  color: #000000;
+  padding-top: 5px;
+  padding-left: 10px;
+}
+
+.gor-utility-master-arrordian-h1 {
+  font-size: 14px;
+  color: #666666;
+}
+
+.gor-utility-master-button {
+  position: absolute;
+  padding-left: 27%;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  color: #1d8cbb;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.gor-utility-accordian-h1 {
+  width: 39%;
+  padding-left: 34px;
+  padding-top: 19px;
+}
+
+.gor-utility-accordian-h2 {
+  width: 30%;
+}
+
+.gor-utility-accordian-h3 {
+  width: 14%;
+}
+
+.gor-utility-accordian-button {
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  color: #1d8cbb;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.gor-utility-accordian-arrow-wrap {
+  padding-left: 13px;
+  padding-bottom: 12px;
+}
+
+.gor-utility-accordian-border {
+  border: solid 0.1px #cccccc;
+  width: 90%;
+  margin-left: 5%;
+}
+
+.gor-utility-accordian-open {
+  height: 50px;
+}
+
+.gor-utility-accordian {
+  border-bottom: solid 0.5px #cccccc;
+  padding-bottom: 10px;
 }
