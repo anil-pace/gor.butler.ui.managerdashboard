@@ -99,7 +99,8 @@ class UtilityTab extends React.Component{
 					<UtilityTile tileHead="Run scripts" showFooter={false} tileBody={uploadDataTile}/>
 					<UtilityTile tileHead="Download reports" showFooter={true} tileBody={downloadReportTile} 
                                  footerAction={this._downloadReport.bind(this)} enableButton={activeReportDownButton}/>
-					<UtilityTile tileHead="Download Goods Recieved Note" showFooter={true} tileBody={grnTile} footerAction={this._downloadGRN.bind(this)}/>
+					<UtilityTile tileHead="Download Goods Recieved Note" showFooter={true} 
+                                 tileBody={grnTile} footerAction={this._downloadGRN.bind(this)}/>
 				</div>
 			</div>
 		);

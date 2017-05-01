@@ -1,13 +1,13 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
-
+import AccordianBar from './accordianBar';
 class MasterUploadTile extends React.Component{
 	constructor(props)  
 	{
     	super(props);
-    	var arrordianState = new Array(this.props.data.length?this.props.data.length:0).fill(false);
-    	this.state = {showPanel: arrordianState};
+    	var accordianState = new Array(this.props.data.length?this.props.data.length:0).fill(false);
+    	this.state = {showPanel: accordianState};
     	this._handlePanel = this._handlePanel.bind(this);
     }
 
@@ -22,56 +22,11 @@ class MasterUploadTile extends React.Component{
     _renderMasterData() {
     	var result = [], masterUploadBar;
     	for (var i = this.props.data.length - 1; i >= 0; i--) {
-    		
-    	
-    	masterUploadBar =<div> 
-	    						<div className={this.state.showPanel[i]?"gor-utility-accordian-open":"gor-utility-updown-bar"}  onClick={this._handlePanel.bind(this,i)}>
-	    							<div className="gor-inline gor-utility-accordian-arrow-wrap">
-	    								<div className={this.state.showPanel[i]?"gor-down-arrow":"gor-right-arrow"}/>
-	    							</div>
-	    							<div className="gor-inline">
-	    								<div className="gor-utility-master-h1">{this.props.data[i]}</div>
-	    								<div className="gor-utility-master-h2">Status: 100% completed</div> 
-	    							</div>
-	    							<div className="gor-inline gor-utility-master-h2"> 
-	    								2 April 2017, 10:57 
-	    							</div>
-	    						</div>
-	    						{this.state.showPanel[i]?<div className="gor-utility-accordian">
-	    							<div className="gor-utility-accordian-border"/>
-	    							<div className="gor-utility-master-arrordian-h1">
-	    								<div className="gor-inline gor-utility-accordian-h1">Records added</div> 
-	    								<div className="gor-inline gor-utility-accordian-h3">-</div> 
-	    								<div className="gor-inline gor-utility-accordian-h2">48 lines</div>
-	    							</div>
-	    						  	<div className="gor-utility-master-arrordian-h1">
-	    								<div className="gor-inline gor-utility-accordian-h1">Records updated</div> 
-	    								<div className="gor-inline gor-utility-accordian-h3">-</div> 
-	    								<div className="gor-inline gor-utility-accordian-h2">3 lines</div>
-	    							</div>
-	    						  	<div className="gor-utility-master-arrordian-h1">
-	    								<div className="gor-inline gor-utility-accordian-h1">Records deleted</div> 
-	    								<div className="gor-inline gor-utility-accordian-h3">-</div> 
-	    								<div className="gor-inline gor-utility-accordian-h2">0 lines</div>
-	    							</div>
-	    						  	<div className="gor-utility-master-arrordian-h1">
-	    								<div className="gor-inline gor-utility-accordian-h1">Errors</div> 
-	    								<div className="gor-inline gor-utility-accordian-h3">-</div> 
-	    								<div className="gor-inline gor-utility-accordian-h2">0</div>
-	    							</div>
-	    						  	<div className="gor-utility-master-arrordian-h1">
-	    						  		<div className="gor-inline gor-utility-accordian-h1">Upload file:</div>
-	    						  		<div className="gor-inline gor-utility-accordian-button gor-utility-accordian-h3">DOWNLOAD</div>
-	    						  	</div>
-	    						  	<div className="gor-utility-master-arrordian-h1">
-	    						  		<div className="gor-inline gor-utility-accordian-h1">Result file:</div>
-	    						  		<div className="gor-inline gor-utility-accordian-button gor-utility-accordian-h3">DOWNLOAD</div>
-	    						  	</div>
-	    						</div>:""}
-    						 </div>
-    						 result.push(masterUploadBar)
-    						}
-    	return result
+    		masterUploadBar = <AccordianBar showPanel={this.state.showPanel[i]} data={this.props.data[i]} 
+    										handleAccordianState={this._handlePanel} index={i}/>
+    		result.push(masterUploadBar)
+    	}
+    	return result;
     }
 
 	render(){
