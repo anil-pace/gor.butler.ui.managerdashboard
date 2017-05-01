@@ -22,8 +22,7 @@ import {
     DEBOUNCE_TIMER
 } from '../../constants/frontEndConstants';
 import {debounce} from '../../utilities/debounce';
-import OrderFilter from './orderFilter';
-import FilterSummary from '../../components/tableFilter/filterSummary'
+
 const messages = defineMessages({
     filterPlaceholder: {
         id: 'table.filter.placeholder',
@@ -144,10 +143,7 @@ class OrderListTable extends React.Component {
         })
     }
 
-    _setFilter() {
-        var newState = !this.props.showFilter;
-        this.props.setFilter(newState)
-    }
+
 
     _showAllOrder() {
         this.props.refreshOption();
@@ -206,59 +202,9 @@ class OrderListTable extends React.Component {
                                                                     defaultMessage="No Orders Found"/></div>
             heightRes = GOR_TABLE_HEADER_HEIGHT;
         }
-        var filterHeight = screen.height - 190 - 50;
+
         return (
             <div className="gorTableMainContainer">
-                <div className="gor-filter-wrap" style={{
-                    'width': '350px',
-                    'display': this.props.showFilter ? 'block' : 'none',
-                    height: filterHeight
-                }}>
-                    <OrderFilter refreshOption={this.props.refreshOption} responseFlag={this.props.responseFlag}/>
-                </div>
-                <div className="gorToolBar">
-                    <div className="gorToolBarWrap">
-                        <div className="gorToolBarElements">
-                            <FormattedMessage id="order.table.heading" description="Heading for order list"
-                                              defaultMessage="OrderList"/>
-                        </div>
-                        <div className="gor-button-wrap">
-
-                        </div>
-                    </div>
-                    <div className="filterWrapper">
-                        <div className="gorToolBarDropDown">
-                            <div className="gor-button-wrap">
-                                <div
-                                    className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
-                                <button className="gor-filterBtn-btn"
-                                        onClick={this.props.refreshOption.bind(this, null)}>
-                                    <div className="gor-refresh-icon"/>
-                                    <FormattedMessage id="order.table.buttonLable"
-                                                      description="button label for refresh"
-                                                      defaultMessage="Refresh Data"/>
-                                </button>
-                                <button
-                                    className={this.props.orderFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
-                                    onClick={this._setFilter.bind(this)}>
-                                    <div className="gor-manage-task"/>
-                                    <FormattedMessage id="order.table.filterLabel" description="button label for filter"
-                                                      defaultMessage="Filter data"/>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {/*Filter Summary*/}
-                <FilterSummary isFilterApplied={this.props.isFilterApplied} responseFlag={this.props.responseFlag}
-                               filterText={<FormattedMessage id="orderlist.filter.search.bar"
-                                                             description='total order for filter search bar'
-                                                             defaultMessage='{total} Orders found'
-                                                             values={{total: totalOrder ? totalOrder : '0'}}/>}
-                               refreshList={this._showAllOrder.bind(this)}
-                               refreshText={<FormattedMessage id="orderlist.filter.search.bar.showall"
-                                                              description="button label for show all"
-                                                              defaultMessage="Show all orders"/>}/>
                 <Table
                     rowHeight={50}
                     rowsCount={sortedDataList.getSize()}

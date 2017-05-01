@@ -15,6 +15,8 @@ import {updateSubscriptionPacket,setWsAction} from './../../actions/socketAction
 import {wsOverviewData} from './../../constants/initData.js';
 import {wavesRefreshed} from './../../actions/orderListActions'
 import {hashHistory} from 'react-router'
+import WaveFilter from './waveFilter';
+import FilterSummary from '../../components/tableFilter/filterSummary'
 
 //Mesages for internationalization
 const messages = defineMessages({
@@ -91,7 +93,7 @@ class WaveTab extends React.Component {
      *
      */
     _clearFilter() {
-        hashHistory.push({pathname: "/waves", query: {}})
+        hashHistory.push({pathname: "/orders/waves", query: {}})
     }
 
     _processWaveData(data, nProps) {
@@ -196,11 +198,17 @@ class WaveTab extends React.Component {
         return waveData;
     }
 
+    _setFilter() {
+        var newState = !this.props.showFilter;
+        this.props.showTableFilter(newState);
+    }
+
     refresh = () => {
         console.log('Refresh');
     }
 
     render() {
+        let filterHeight = screen.height-190-50;
         var updateStatusIntl = "";
         var itemNumber = 7, waveData = this.props.waveDetail.waveData, waveState = {
             "pendingWave": "--",
@@ -250,6 +258,48 @@ class WaveTab extends React.Component {
         return (
             <div className="gorTesting">
                 <Spinner isLoading={this.props.wavesSpinner} setSpinner={this.props.setWavesSpinner}/>
+                {waveData?<div>
+                    <div className="gor-filter-wrap" style={{'width':this.props.showFilter?'350px':'0px', height:filterHeight}}>
+                        <WaveFilter waveData={waveData} responseFlag={this.props.responseFlag}/>
+                    </div>
+                    <div className="gorToolBar">
+                        <div className="gorToolBarWrap">
+                            <div className="gorToolBarElements">
+                                <FormattedMessage id="waves.table.heading" description="Heading for waves"
+                                                  defaultMessage ="Waves"/>
+
+                            </div>
+                        </div>
+
+
+
+                        <div className="filterWrapper">
+                            <div className="gorToolBarDropDown">
+                                <div className="gor-button-wrap">
+                                    <div className="gor-button-sub-status">{updateStatusIntl} {updateStatusIntl} </div>
+
+                                    <button className={this.props.waveFilterStatus?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
+                                        <div className="gor-manage-task"/>
+                                        <FormattedMessage id="order.table.filterLabel" description="button label for filter"
+                                                          defaultMessage ="Filter data"/>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    {/*Filter Summary*/}
+                    <FilterSummary total={waveData.length||0} isFilterApplied={this.props.isFilterApplied} responseFlag={this.props.responseFlag} filterText={<FormattedMessage id="waveList.filter.search.bar"
+                                                                                                                                                     description='total waves for filter search bar'
+                                                                                                                                                     defaultMessage='{total} Waves found'
+                                                                                                                                                     values={{total: waveData.length || 0}}/>}
+                                   refreshList={this._clearFilter.bind(this)}
+                                   refreshText={<FormattedMessage id="waveList.filter.search.bar.showall"
+                                                                  description="button label for show all"
+                                                                  defaultMessage="Show all Waves"/>}/>
+                </div>:null}
                 <WavesTable items={waveData} itemNumber={itemNumber}
                             waveState={waveState} intlMessg={this.props.intlMessages}
                             sortHeaderState={this.props.waveHeaderSort}

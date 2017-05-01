@@ -17,8 +17,7 @@ import {
     ProgressCell
 } from '../../components/commonFunctionsDataTable';
 import {GOR_STATUS, GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
-import WaveFilter from './waveFilter';
-import FilterSummary from '../../components/tableFilter/filterSummary'
+
 
 
 class WavesTable extends React.Component {
@@ -157,13 +156,10 @@ class WavesTable extends React.Component {
         this.props.sortHeaderState(columnKey);
     }
 
-    _setFilter() {
-        var newState = !this.props.showFilter;
-        this.props.setFilter(newState);
-    }
+
 
   render() {
-    let filterHeight = screen.height-190-50;
+
 
     var {sortedDataList, colSortDirs,columnWidths} = this.state;  
     var heightRes = 500, totalwave = sortedDataList.getSize(), pendingWave = this.props.waveState.pendingWave, progressWave = this.props.waveState.progressWave, completedWaves = this.props.waveState.completedWaves ;
@@ -183,46 +179,7 @@ class WavesTable extends React.Component {
     }
     return (
       <div className="gorTableMainContainer">
-      <div className="gor-filter-wrap" style={{'width':this.props.showFilter?'350px':'0px', height:filterHeight}}> 
-         <WaveFilter refreshOption={this.props.refreshOption} responseFlag={this.props.responseFlag}/>  
-       </div>
-      <div className="gorToolBar">
-      <div className="gorToolBarWrap">
-      <div className="gorToolBarElements">
-      <FormattedMessage id="waves.table.heading" description="Heading for waves" 
-      defaultMessage ="Waves"/>
-      
-      </div>
-      </div>
 
-
-
-  <div className="filterWrapper"> 
-        <div className="gorToolBarDropDown">
-        <div className="gor-button-wrap">
-        <div className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
-          
-        <button className={this.props.waveFilterStatus?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
-          <div className="gor-manage-task"/>
-          <FormattedMessage id="order.table.filterLabel" description="button label for filter"
-          defaultMessage ="Filter data"/>
-         </button>
-       </div>
-        </div>     
-        </div>
-
-
-                </div>
-
-          {/*Filter Summary*/}
-          <FilterSummary isFilterApplied={this.props.isFilterApplied} responseFlag={this.props.responseFlag} filterText={<FormattedMessage id="waveList.filter.search.bar"
-                                                       description='total waves for filter search bar'
-                                                       defaultMessage='{total} Waves found'
-                                                       values={{total: sortedDataList.getSize() || 0}}/>}
-                         refreshList={this.props.refreshList}
-                         refreshText={<FormattedMessage id="waveList.filter.search.bar.showall"
-                                                        description="button label for show all"
-                                                        defaultMessage="Show all Waves"/>}/>
                 <Table
                     rowHeight={50}
                     rowsCount={sortedDataList.getSize()}

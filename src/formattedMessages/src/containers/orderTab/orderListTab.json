@@ -28,5 +28,30 @@
     "id": "orderlistTab.orderListRefreshedat",
     "description": "Refresh Status text",
     "defaultMessage": "Last Updated"
+  },
+  {
+    "id": "order.table.heading",
+    "description": "Heading for order list",
+    "defaultMessage": "OrderList"
+  },
+  {
+    "id": "order.table.buttonLable",
+    "description": "button label for refresh",
+    "defaultMessage": "Refresh Data"
+  },
+  {
+    "id": "order.table.filterLabel",
+    "description": "button label for filter",
+    "defaultMessage": "Filter data"
+  },
+  {
+    "id": "orderlist.filter.search.bar",
+    "description": "total order for filter search bar",
+    "defaultMessage": "{total} Orders found"
+  },
+  {
+    "id": "orderlist.filter.search.bar.showall",
+    "description": "button label for show all",
+    "defaultMessage": "Show all orders"
   }
 ]

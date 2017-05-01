@@ -2,5 +2,25 @@
   {
     "id": "waveDetail.id.prefix",
     "defaultMessage": "WAVE-{waveId}"
+  },
+  {
+    "id": "waves.table.heading",
+    "description": "Heading for waves",
+    "defaultMessage": "Waves"
+  },
+  {
+    "id": "order.table.filterLabel",
+    "description": "button label for filter",
+    "defaultMessage": "Filter data"
+  },
+  {
+    "id": "waveList.filter.search.bar",
+    "description": "total waves for filter search bar",
+    "defaultMessage": "{total} Waves found"
+  },
+  {
+    "id": "waveList.filter.search.bar.showall",
+    "description": "button label for show all",
+    "defaultMessage": "Show all Waves"
   }
 ]

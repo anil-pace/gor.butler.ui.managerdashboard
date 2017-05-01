@@ -27,6 +27,13 @@ class WaveFilter extends React.Component {
         if (nextProps.filterState && JSON.stringify(this.state) !== JSON.stringify(nextProps.filterState)) {
             this.setState(nextProps.filterState)
         }
+
+        /**
+         * Hide the filter as soon as data in the list get updated.
+         */
+        if(nextProps.waveData.length>0 && JSON.stringify(nextProps.waveData)!==JSON.stringify(this.props.waveData)){
+            this.props.showTableFilter(false);
+        }
     }
 
     _closeFilter() {
@@ -80,13 +87,13 @@ class WaveFilter extends React.Component {
         if (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !== "any") {
             _query.status = filterState.tokenSelected["STATUS"]
         }
-        hashHistory.push({pathname: "/waves", query: _query})
+        hashHistory.push({pathname: "/orders/waves", query: _query})
 
 
     }
 
     _clearFilter() {
-        hashHistory.push({pathname: "/waves", query: {}})
+        hashHistory.push({pathname: "/orders/waves", query: {}})
     }
 
 

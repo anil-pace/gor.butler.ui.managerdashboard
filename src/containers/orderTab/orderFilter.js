@@ -24,6 +24,13 @@ class OrderFilter extends React.Component{
         if(nextProps.orderFilterState && JSON.stringify(this.state)!==JSON.stringify(nextProps.orderFilterState)){
             this.setState(nextProps.orderFilterState)
         }
+
+        /**
+         * Hide the filter as soon as data in the list get updated.
+         */
+        if(nextProps.ordersDetail.length>0 && JSON.stringify(nextProps.ordersDetail)!==JSON.stringify(this.props.ordersDetail)){
+            this.props.showTableFilter(false);
+        }
     }
 
     _processOrderSearchField(){
@@ -85,11 +92,11 @@ class OrderFilter extends React.Component{
         if (filterState.searchQuery["ORDER ID"]) {
             _query.orderId = filterState.searchQuery["ORDER ID"]
         }
-       hashHistory.push({pathname: "/orderlist", query: _query})
+       hashHistory.push({pathname: "/orders/orderlist", query: _query})
     }
 
     _clearFilter() {
-        hashHistory.push({pathname: "/orderlist", query: {}})
+        hashHistory.push({pathname: "/orders/orderlist", query: {}})
     }
 
 

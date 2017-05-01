@@ -48,6 +48,8 @@ import {showTableFilter, filterApplied, orderfilterState, toggleOrderFilter} fro
 import {hashHistory} from 'react-router'
 import {updateSubscriptionPacket, setWsAction} from './../../actions/socketActions'
 import {wsOverviewData} from './../../constants/initData.js';
+import OrderFilter from './orderFilter';
+import FilterSummary from '../../components/tableFilter/filterSummary'
 const messages = defineMessages({
     inProgressStatus: {
         id: 'orderList.progress.status',
@@ -160,7 +162,9 @@ class OrderListTab extends React.Component {
             'token': this.props.auth_token,
             'contentType': 'application/json'
         }
-        if (Object.keys(query).filter(function(el){return el!=='page'}).length !== 0) {
+        if (Object.keys(query).filter(function (el) {
+                return el !== 'page'
+            }).length !== 0) {
             this.props.toggleOrderFilter(true);
             this.props.filterApplied(true);
         } else {
@@ -182,7 +186,7 @@ class OrderListTab extends React.Component {
      *
      */
     _clearFilter() {
-        hashHistory.push({pathname: "/orderlist", query: {}})
+        hashHistory.push({pathname: "/orders/orderlist", query: {}})
     }
 
     processOrders(data, nProps) {
@@ -447,8 +451,14 @@ class OrderListTab extends React.Component {
         this.handlePageClick(data)
     }
 
+    _setFilter() {
+        var newState = !this.props.showFilter;
+        this.props.showTableFilter(newState)
+    }
+
 
     render() {
+        var filterHeight = screen.height - 190 - 50;
         var updateStatus, timeOffset, headerTimeZone;
         let updateStatusIntl, updateStatusText;
         if (this.props.filterOptions.lastUpdatedOn) {
@@ -490,6 +500,63 @@ class OrderListTab extends React.Component {
 
                     {!this.props.showFilter ? <Spinner isLoading={this.props.orderListSpinner}
                                                        setSpinner={this.props.setOrderListSpinner}/> : ""}
+                    {orderDetail ? <div>
+                        <div className="gor-filter-wrap" style={{
+                            'width': '350px',
+                            'display': this.props.showFilter ? 'block' : 'none',
+                            height: filterHeight
+                        }}>
+                            <OrderFilter ordersDetail={orderDetail} responseFlag={this.props.responseFlag}/>
+                        </div>
+                        <div className="gorToolBar">
+                            <div className="gorToolBarWrap">
+                                <div className="gorToolBarElements">
+                                    <FormattedMessage id="order.table.heading" description="Heading for order list"
+                                                      defaultMessage="OrderList"/>
+                                </div>
+                                <div className="gor-button-wrap">
+
+                                </div>
+                            </div>
+                            <div className="filterWrapper">
+                                <div className="gorToolBarDropDown">
+                                    <div className="gor-button-wrap">
+                                        <div
+                                            className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
+                                        <button className="gor-filterBtn-btn"
+                                                onClick={this._clearFilter.bind(this)}>
+                                            <div className="gor-refresh-icon"/>
+                                            <FormattedMessage id="order.table.buttonLable"
+                                                              description="button label for refresh"
+                                                              defaultMessage="Refresh Data"/>
+                                        </button>
+                                        <button
+                                            className={this.props.orderFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
+                                            onClick={this._setFilter.bind(this)}>
+                                            <div className="gor-manage-task"/>
+                                            <FormattedMessage id="order.table.filterLabel"
+                                                              description="button label for filter"
+                                                              defaultMessage="Filter data"/>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {/*Filter Summary*/}
+                        <FilterSummary total={orderDetail.length || 0} isFilterApplied={this.props.isFilterApplied}
+                                       responseFlag={this.props.responseFlag}
+                                       filterText={<FormattedMessage id="orderlist.filter.search.bar"
+                                                                     description='total order for filter search bar'
+                                                                     defaultMessage='{total} Orders found'
+                                                                     values={{total: orderDetail ? orderDetail.length : '0'}}/>}
+                                       refreshList={this._clearFilter.bind(this)}
+                                       refreshText={<FormattedMessage id="orderlist.filter.search.bar.showall"
+                                                                      description="button label for show all"
+                                                                      defaultMessage="Show all orders"/>}/>
+
+                    </div> : null}
+
+
                     <OrderListTable items={orderDetail} timeZoneString={headerTimeZone} itemNumber={itemNumber}
                                     statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter}
                                     refreshOption={this._clearFilter.bind(this)} lastUpdatedText={updateStatusText}
@@ -515,8 +582,9 @@ class OrderListTab extends React.Component {
                                   optionDispatch={this.props.getPageSizeOrders} refreshList={this.refresh.bind(this)}/>
                     </div>
                     <div className="gor-paginate">
-                        {this.state.query?<GorPaginateV2 location={this.props.location} currentPage={this.state.query.page||1}
-                                                         totalPage={this.props.orderData.totalPage}/>:null}
+                        {this.state.query ?
+                            <GorPaginateV2 location={this.props.location} currentPage={this.state.query.page || 1}
+                                           totalPage={this.props.orderData.totalPage}/> : null}
                     </div>
                 </div>
             </div>
