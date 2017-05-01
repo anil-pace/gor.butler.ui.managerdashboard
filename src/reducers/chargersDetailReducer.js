@@ -15,9 +15,17 @@ export  function chargersDetail(state={},action) {
          var res;
          res=action.data;
          var chargers;
-         if(res.complete_data){
+         if(res.complete_data && res.complete_data.length)
+          {
+              return Object.assign({}, state, {
+                 "chargersDetail" : res.complete_data,
+                "emptyResponse" :false //This flag will update base on response data
+               })
+          }
+          else
+          {
            return Object.assign({}, state, {
-               "chargersDetail" : res.complete_data
+                 "emptyResponse" :true //This flag will update base on response data
           })
          }
 

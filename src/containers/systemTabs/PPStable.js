@@ -64,16 +64,15 @@ class PPStable extends React.Component {
     this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
     
   }
-  shouldComponentUpdate(nextProps) {
-    if((nextProps.items && !nextProps.items.length)){
-      return false;
-    }
-    return true;
-  }
-
 
   componentWillReceiveProps(nextProps) {
     var temp;
+    //Based on emptyresponse, appliedbutton and reponse has came or not we hide and show the filter
+    if(!nextProps.emptyResponse && this.props.filterApplyFlag && !nextProps.responseFlag)
+        {
+            this.props.setFilter(false);
+            this.props.setFilterApplyFlag(false);
+        }
     if(nextProps.items === undefined) {
       this._dataList = new tableRenderer(0);
       temp = new Array(0).fill(false);
@@ -230,9 +229,12 @@ class PPStable extends React.Component {
 
 
 _setFilter() {
-    let newState = !this.props.showFilter;
+  if(this.props.items.length){
+    let newState = !this.props.ppsToggleFilter;
     this.props.setFilter(newState);
+  }
    }
+
 
 
   handleModeChange(data) {
@@ -323,7 +325,7 @@ _setFilter() {
     return (
       <div className="gorTableMainContainer">
 
-<div className="gor-filter-wrap" style={{'width':this.props.showFilter?'350px':'0px', height:filterHeight}}> 
+<div className="gor-filter-wrap" style={{'width':this.props.ppsToggleFilter?'350px':'0px', height:filterHeight}}> 
          <PPSFilter refreshOption={this.props.refreshOption} responseFlag={this.props.responseFlag}/>  
        </div>
 
@@ -347,10 +349,10 @@ _setFilter() {
         <div className="gorToolBarDropDown">
         <div className="gor-button-wrap">
         <div className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
-        <button className={this.props.ppsFilterState?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
-          <div className="gor-manage-task"/>
-          <FormattedMessage id="order.table.filterLabel" description="button label for filter" 
-          defaultMessage ="Filter data"/>
+
+          <button className={this.props.ppsFilterState?"gor-filterBtn-applied":"gor-filterBtn-btn"} disabled={this.props.items && this.props.items.length?false:true} style={this.props.items && this.props.items.length?{cursor:'pointer'}:{cursor:'default'}} onClick={this._setFilter.bind(this)} >
+       {!this.props.ppsFilterState?<div><div className="gor-manage-task"></div><FormattedMessage id="order.table.filterLabel" description="button label for filter" defaultMessage ="Filter data"/></div>:
+       <div><div className="gor-manage-task"></div><FormattedMessage id="order.table.showfilter" description="button label for filter" defaultMessage ="Show Filter"/></div>}
          </button>
        </div>
         </div>     
@@ -505,14 +507,16 @@ items:React.PropTypes.array,
   currentHeaderOrder:React.PropTypes.object,
   sortHeaderState:React.PropTypes.func,
   lastUpdatedText:React.PropTypes.string,
-  showFilter:React.PropTypes.bool,
+  ppsToggleFilter:React.PropTypes.bool,
   lastUpdated:React.PropTypes.string,
   ppsFilterState:React.PropTypes.bool,
   setFilter:React.PropTypes.func,
   containerHeight:React.PropTypes.number,
   currentSortState:React.PropTypes.string,
   responseFlag:React.PropTypes.bool,
-getCheckAll:React.PropTypes.bool
+  getCheckAll:React.PropTypes.bool,
+  filterApplyFlag:React.PropTypes.bool,
+  setFilterApplyFlag:React.PropTypes.func
 };
 
 

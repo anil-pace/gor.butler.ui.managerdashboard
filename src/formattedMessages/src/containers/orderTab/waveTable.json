@@ -15,6 +15,11 @@
     "defaultMessage": "Filter data"
   },
   {
+    "id": "order.table.showfilter",
+    "description": "button label for filter",
+    "defaultMessage": "Show Filter"
+  },
+  {
     "id": "waveList.filter.search.bar",
     "description": "total waves for filter search bar",
     "defaultMessage": "{total} Waves found"

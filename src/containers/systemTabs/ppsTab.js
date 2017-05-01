@@ -27,11 +27,12 @@ import {
     GOR_FIRST_LAST
 } from '../../constants/frontEndConstants';
 import {
-    showTableFilter,
+    PPSFilterToggle,
     filterApplied,
     ppsfilterState,
-    togglePPSFilter,
-    setDefaultRange
+    togglePPSFilterApplied,
+    setDefaultRange,
+    setFilterApplyFlag
 } from '../../actions/filterAction';
 import {updateSubscriptionPacket} from './../../actions/socketActions'
 import {wsOverviewData} from './../../constants/initData.js';
@@ -62,7 +63,7 @@ class PPS extends React.Component {
         //TODO: codes need to be replaced after checking with backend
         var PPSData = [], detail = {}, ppsId, performance, totalUser = 0;
         var nProps = this;
-        var data = nProps.props.PPSDetail.PPStypeDetail;
+        var data = nProps.props.PPSDetail.PPStypeDetail||{};
         let PPS, ON, OFF, PERFORMANCE;
         let pick = nProps.context.intl.formatMessage(stringConfig.pick);
         let put = nProps.context.intl.formatMessage(stringConfig.put);
@@ -140,12 +141,13 @@ class PPS extends React.Component {
             rangeSelected: {"minValue": ["-1"], "maxValue": ["500"]}
         });
         this.props.filterApplied(!this.props.isFilterApplied);
-        this.props.togglePPSFilter(false);
-        this.props.showTableFilter(false);
+        this.props.togglePPSFilterApplied(false);
+        this.props.PPSFilterToggle(false);
 
     }
 
     render() {
+        var  emptyResponse=this.props.PPSDetail.emptyResponse;
         let updateStatusIntl = "";
         let operationMode = {"pick": 0, "put": 0, "audit": 0, "notSet": 0};
         let data, operatorNum = 0, itemNumber = 5, ppsOn = 0, avgThroughput = 0;
@@ -203,9 +205,12 @@ class PPS extends React.Component {
                                   isFilterApplied={this.props.isFilterApplied}
                                   lastUpdatedText={updateStatusIntl}
                                   lastUpdated={updateStatusIntl}
-                                  showFilter={this.props.showFilter}
-                                  setFilter={this.props.showTableFilter}
+                                  ppsToggleFilter={this.props.ppsToggleFilter}
+                                  setFilter={this.props.PPSFilterToggle}
                                   refreshList={this._refreshPPSList.bind(this)}
+                                  emptyResponse={emptyResponse}
+                                  filterApplyFlag={this.props.filterApplyFlag}
+                                setFilterApplyFlag={this.props.setFilterApplyFlag}
                         />
                     </div>
                 </div>
@@ -227,10 +232,11 @@ function mapStateToProps(state, ownProps) {
         ppsSpinner: state.spinner.ppsSpinner || false,
         PPSDetail: state.PPSDetail || [],
         intlMessages: state.intl.messages,
-        showFilter: state.filterInfo.filterState || false,
+        ppsToggleFilter: state.filterInfo.ppsToggleFilter || false,
         ppsFilterState: state.filterInfo.ppsFilterState || false,
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
         isFilterApplied: state.filterInfo.isFilterApplied || false,
+        filterApplyFlag:state.filterInfo.filterApplyFlag|| false
     };
 }
 
@@ -260,8 +266,8 @@ var mapDispatchToProps = function (dispatch) {
         setCheckAll: function (data) {
             dispatch(setCheckAll(data))
         },
-        showTableFilter: function (data) {
-            dispatch(showTableFilter(data));
+        PPSFilterToggle: function (data) {
+            dispatch(PPSFilterToggle(data));
         },
         ppsfilterState: function (data) {
             dispatch(ppsfilterState(data));
@@ -272,12 +278,15 @@ var mapDispatchToProps = function (dispatch) {
         updateSubscriptionPacket: function (data) {
             dispatch(updateSubscriptionPacket(data));
         },
-        togglePPSFilter: function (data) {
-            dispatch(togglePPSFilter(data));
+        togglePPSFilterApplied: function (data) {
+            dispatch(togglePPSFilterApplied(data));
         },
 
         setDefaultRange: function (data) {
             dispatch(setDefaultRange(data));
+        },
+        setFilterApplyFlag: function (data) {
+            dispatch(setFilterApplyFlag(data));
         }
     }
 };
@@ -293,7 +302,7 @@ PPS.PropTypes = {
     ppsSortHeaderState: React.PropTypes.string,
     ppsSpinner: React.PropTypes.bool,
     PPSDetail: React.PropTypes.array,
-    showFilter: React.PropTypes.bool,
+    ppsToggleFilter: React.PropTypes.bool,
     ppsFilterState: React.PropTypes.bool,
     ppsFilterDetail: React.PropTypes.func,
     changePPSmode: React.PropTypes.func,
@@ -303,10 +312,13 @@ PPS.PropTypes = {
     setCheckedPps: React.PropTypes.func,
     setDropDisplay: React.PropTypes.func,
     setCheckAll: React.PropTypes.func,
-    showTableFilter: React.PropTypes.func,
+    PPSFilterToggle: React.PropTypes.func,
     filterApplied: React.PropTypes.func,
     isFilterApplied: React.PropTypes.bool,
-    wsSubscriptionData: React.PropTypes.object
+    wsSubscriptionData: React.PropTypes.object,
+    setFilterApplyFlag:React.PropTypes.func,
+    filterApplyFlag:React.PropTypes.bool,
+    emptyResponse:React.PropTypes.bool
 
 }
 

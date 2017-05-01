@@ -1,7 +1,8 @@
 import React  from 'react';
 import { connect } from 'react-redux';
 import {getPageData, getStatusFilter, getTimeFilter,getPageSizeOrders,currentPageOrders,lastRefreshTime} from '../../actions/paginationAction';
-import {ORDERS_RETRIEVE,GOR_BREACHED,BREACHED,GOR_EXCEPTION,GET,APP_JSON, INITIAL_HEADER_SORT, INITIAL_HEADER_ORDER, sortOrderHead,sortOrder} from '../../constants/frontEndConstants';
+import {ORDERS_RETRIEVE,GOR_BREACHED,BREACHED,GOR_EXCEPTION,GET,APP_JSON, INITIAL_HEADER_SORT, 
+  INITIAL_HEADER_ORDER, sortOrderHead,sortOrder,STATUS,TIME_PERIOD,ALL_ORDERS} from '../../constants/frontEndConstants';
 import {BASE_URL, API_URL,ORDERS_URL,PAGE_SIZE_URL,PROTOCOL,ORDER_PAGE, PICK_BEFORE_ORDER_URL, BREACHED_URL,UPDATE_TIME_HIGH,UPDATE_TIME_LOW,EXCEPTION_TRUE,WAREHOUSE_STATUS,FILTER_ORDER_ID} from '../../constants/configConstants';
 import OrderListTable from './orderListTable';
 import Dropdown from '../../components/dropdown/dropdown'
@@ -12,7 +13,8 @@ import {stringConfig} from '../../constants/backEndConstants';
 import {orderHeaderSortOrder, orderHeaderSort, orderFilterDetail} from '../../actions/sortHeaderActions';
 import {getDaysDiff} from '../../utilities/getDaysDiff';
 import GorPaginate from '../../components/gorPaginate/gorPaginate';
-import {showTableFilter,filterApplied} from '../../actions/filterAction';
+
+import {showTableFilter,filterApplied,orderfilterState,toggleOrderFilterApplied,setFilterApplyFlag,ordersFilterToggle} from '../../actions/filterAction';
 const messages = defineMessages ({
   inProgressStatus:{
     id: 'orderList.progress.status',
@@ -46,22 +48,16 @@ class OrderListTab extends React.Component{
     super(props);
   } 
   componentDidMount() {
+    var clearState={};
     var data = this.props.orderFilterState;
     data.selected = 1;
-    this.refresh(data);
-  }
-
-  shouldComponentUpdate(nextProps) {
-    if((nextProps.orderData.ordersDetail && !nextProps.orderData.ordersDetail.length)){
-      return false;
-    }
-    return true;
+    this.refresh(data)
   }
 
   processOrders(data, nProps) {
 
     var nProps = this;
-    var data = nProps.props.orderData.ordersDetail;
+    var data = nProps.props.orderData.ordersDetail ||{};
     let progress  = nProps.context.intl.formatMessage(messages.inProgressStatus);
     let completed  = nProps.context.intl.formatMessage(messages.completedStatus);
     let exception = nProps.context.intl.formatMessage(messages.exceptionStatus);
@@ -205,11 +201,19 @@ refresh = (data) => {
   var prevTime,currentTime;
   var  appendStatusUrl="", appendTimeUrl="", appendPageSize="", appendSortUrl="", appendTextFilterUrl="";
   var filterApplied = false;
-  if(!data) {
-    data = {};
-    data.selected = 1;
-    data.url = "";
-  }
+    if (!data) {
+        data = {};
+        data.selected = 1;
+        data.url = "";
+        /**
+         * After clearing the applied filter,
+         * It'll set the default state to the filters.
+         */
+        this.props.orderfilterState({tokenSelected: {"STATUS": [ALL], "TIME PERIOD": [ALL_ORDERS]}, searchQuery: {}})
+        this.props.toggleOrderFilterApplied(false)
+        this.props.showTableFilter(false)
+
+    }
   //for backend sorting
   if(data.columnKey && data.sortDir) {
     appendSortUrl = sortOrderHead[data.columnKey] + sortOrder[data.sortDir];
@@ -248,8 +252,9 @@ refresh = (data) => {
   }
 
   //appending filter for orders by time
- if(data.tokenSelected && data.tokenSelected["TIME PERIOD"] && data.tokenSelected["TIME PERIOD"].length &&data.tokenSelected["TIME PERIOD"][0]!=="allOrders") {
-    var timeOut = data.tokenSelected["TIME PERIOD"][0]
+ if(data.tokenSelected && data.tokenSelected[TIME_PERIOD] && data.tokenSelected[TIME_PERIOD].length && data.tokenSelected[TIME_PERIOD][0]!==ALL_ORDERS) {
+    let timeOut;
+    timeOut=data.tokenSelected[TIME_PERIOD][0];
     currentTime = new Date();
     prevTime = new Date();
     prevTime = new Date(prevTime.setHours(prevTime.getHours() - convertTime[timeOut]));
@@ -287,6 +292,7 @@ this.handlePageClick(data)
 
 
 render(){
+    var  emptyResponse=this.props.orderData.emptyResponse;
   var updateStatus,timeOffset,headerTimeZone;
   let updateStatusIntl,updateStatusText;
   if(this.props.filterOptions.lastUpdatedOn) {
@@ -323,7 +329,7 @@ render(){
   <div>
   <div className="gor-Orderlist-table" >  
 
-  {!this.props.showFilter?<Spinner isLoading={this.props.orderListSpinner} setSpinner={this.props.setOrderListSpinner}/>:""}
+  {!this.props.ordersToggleFilter?<Spinner isLoading={this.props.orderListSpinner} setSpinner={this.props.setOrderListSpinner}/>:""}
   <OrderListTable items={orderDetail} timeZoneString = {headerTimeZone} itemNumber={itemNumber} 
                   statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter} 
                   refreshOption={this.refresh.bind(this)} lastUpdatedText = {updateStatusText} lastUpdated={updateStatusIntl} 
@@ -335,10 +341,13 @@ render(){
                   sortHeaderState={this.props.orderHeaderSort} currentSortState={this.props.orderSortHeader} 
                   sortHeaderOrder={this.props.orderHeaderSortOrder} currentHeaderOrder={this.props.orderSortHeaderState}
                   setOrderFilter={this.props.orderFilterDetail}
-                  getOrderFilter={this.props.orderFilter} setFilter={this.props.showTableFilter} 
-                  showFilter={this.props.showFilter} responseFlag={this.props.orderListSpinner}
+                  getOrderFilter={this.props.orderFilter} setFilter={this.props.ordersFilterToggle} 
+                  ordersToggleFilter={this.props.ordersToggleFilter} responseFlag={this.props.orderListSpinner}
                   isFilterApplied={this.props.isFilterApplied}
                    orderFilterStatus={this.props.orderFilterStatus}
+                    emptyResponse={emptyResponse}
+                            filterApplyFlag={this.props.filterApplyFlag}
+                            setFilterApplyFlag={this.props.setFilterApplyFlag}
                   />
 
   <div className="gor-pageNum">
@@ -366,10 +375,12 @@ function mapStateToProps(state, ownProps){
     intlMessages: state.intl.messages,
     timeOffset: state.authLogin.timeOffset,
     auth_token: state.authLogin.auth_token,
-    showFilter: state.filterInfo.filterState || false,
+    ordersToggleFilter: state.filterInfo.ordersToggleFilter || false,
     isFilterApplied: state.filterInfo.isFilterApplied || false,
     orderFilterStatus:state.filterInfo.orderFilterStatus,
-    orderFilterState: state.filterInfo.orderFilterState ||{}
+    orderFilterState: state.filterInfo.orderFilterState ||{},
+    filterApplyFlag:state.filterInfo.filterApplyFlag|| false
+
   };
 }
 
@@ -386,8 +397,14 @@ var mapDispatchToProps = function(dispatch){
     lastRefreshTime: function(data){ dispatch(lastRefreshTime(data));},
     setOrderListSpinner: function(data){dispatch(setOrderListSpinner(data))},
     setCurrentPage: function(data){dispatch(setCurrentPage(data))},
+
     showTableFilter: function(data){dispatch(showTableFilter(data));},
-    filterApplied: function(data){dispatch(filterApplied(data));}
+    filterApplied: function(data){dispatch(filterApplied(data));},
+    orderfilterState: function(data){dispatch(orderfilterState(data));},
+      toggleOrderFilterApplied: function(data){dispatch(toggleOrderFilterApplied(data));},
+      setFilterApplyFlag: function (data) {dispatch(setFilterApplyFlag(data));},
+        ordersFilterToggle: function(data){dispatch(ordersFilterToggle(data));}
+
   }
 };
 
@@ -405,7 +422,7 @@ orderData: React.PropTypes.object,
 statusFilter :React.PropTypes.bool,
 timeOffset: React.PropTypes.number,
 auth_token: React.PropTypes.object,
-showFilter: React.PropTypes.bool,
+ordersToggleFilter: React.PropTypes.bool,
 isFilterApplied:React.PropTypes.bool,
 orderFilterDetail:React.PropTypes.func,
 orderHeaderSort: React.PropTypes.func,
@@ -418,10 +435,12 @@ currentPage: React.PropTypes.func,
 lastRefreshTime: React.PropTypes.func,
 setOrderListSpinner:React.PropTypes.func,
 setCurrentPage:React.PropTypes.func,
-showTableFilter: React.PropTypes.func,
+ordersFilterToggle: React.PropTypes.func,
 filterApplied: React.PropTypes.func ,
 orderFilterStatus:React.PropTypes.bool,
-orderFilterState:React.PropTypes.object
+orderFilterState:React.PropTypes.object,
+setFilterApplyFlag:React.PropTypes.func,
+filterApplyFlag:React.PropTypes.bool
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(OrderListTab) ;

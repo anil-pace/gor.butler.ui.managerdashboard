@@ -1,6 +1,4 @@
-
-export const BASE_URL = '192.168.12.90:5000' ;
-export const PORT = '8888';
+export const BASE_URL = '192.168.8.109' ;
 export const PROTOCOL = 'https://';
 export const WS_PROTOCOL ="wss://";
 export const WS_URL = WS_PROTOCOL+BASE_URL+"/manager_api/wss"

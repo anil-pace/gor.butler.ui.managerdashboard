@@ -199,6 +199,8 @@ export const DISPLAY_CHARGING_STATION_FILTER_SPINNER = "DISPLAY_CHARGING_STATION
 
 
 
+
+
 /*Map for routes of tab*/
 
 export const TAB_ROUTE_MAP = {
@@ -442,6 +444,14 @@ export const SET_CS_FILTER = "SET_CS_FILTER";
 export const SET_WAVE_FILTER = "SET_WAVE_FILTER"
 export const AUDIT_APPROVED = "auditline_approved";
 export const AUDIT_REJECTED = "auditline_rejected";
+export const BOT_TOGGLE_FILTER = "BOT_TOGGLE_FILTER";
+export const PPS_TOGGLE_FILTER = "PPS_TOGGLE_FILTER";
+export const CS_TOGGLE_FILTER = "CS_TOGGLE_FILTER";
+export const WAVES_TOGGLE_FILTER = "WAVES_TOGGLE_FILTER";
+export const ORDERS_TOGGLE_FILTER = "ORDERS_TOGGLE_FILTER";
+export const AUDIT_TOGGLE_FILTER = "AUDIT_TOGGLE_FILTER";
+export const USER_TOGGLE_FILTER = "USER_TOGGLE_FILTER";
+
 
 
 //search dropdown constants
@@ -474,6 +484,7 @@ export const USER_FILTER_STATE = "USER_FILTER_STATE";
 export const AUDIT_TASK_ID = "AUDIT TASK ID"
 export const ADD_TOKEN = "add";
 export const ADD_DEFAULT = "addDefault";
+export const REMOVE_TOKEN = "remove";
 export const SOFT_MANUAL = "soft_manual";
 export const SOFT = "soft";
 export const HARD = "hard";
@@ -503,3 +514,8 @@ export const MODAL_STATUS = "MODAL_STATUS";
 export const MODAL_RESET = "MODAL_RESET";
 export const CHECKLIST = "CHECKLIST";
 export const RECEIVE_SHIFT_START_TIME = "RECEIVE_SHIFT_START_TIME";
+export const FILTER_APPLY_FLAG = "FILTER_APPLY_FLAG";
+export const SINGLE = "Single";
+export const STATUS = "STATUS";
+export const TIME_PERIOD = "TIME PERIOD";
+export const ALL_ORDERS = "allOrders";

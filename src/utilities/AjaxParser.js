@@ -12,7 +12,7 @@ import {notifySuccess, notifyFail,validateID,notifyDelete,
 import {ERROR,AUTH_LOGIN, ADD_USER, RECIEVE_TIME_OFFSET,CHECK_ID,DELETE_USER,GET_ROLES,ORDERS_RETRIEVE,
 	PPS_MODE_CHANGE,EDIT_USER,RECIEVE_HEADER,SUCCESS,CREATE_AUDIT,AUDIT_RETRIEVE,GET_PPSLIST,START_AUDIT,
 	DELETE_AUDIT,AUDIT_RESOLVE_LINES,AUDIT_RESOLVE_CONFIRMED, VALIDATE_SKU_ID,PAUSE_OPERATION,
-	RESUME_OPERATION,CONFIRM_SAFETY,CHECK_SAFETY,RECEIVE_SHIFT_START_TIME} from '../constants/frontEndConstants';
+	RESUME_OPERATION,CONFIRM_SAFETY,CHECK_SAFETY,RECEIVE_SHIFT_START_TIME,ITEM_RECALLED} from '../constants/frontEndConstants';
 import {BUTLER_UI,CODE_UE002,BUTLER_SUPERVISOR,CODE_E027} from '../constants/backEndConstants'
 import {UE002,E028,E029,MODE_REQUESTED,TYPE_SUCCESS,AS001,ERR_API,ERR_USR,ERR_RES,ERR_AUDIT,AS00A,WRONG_CRED,
 E051,ES} from '../constants/messageConstants';
@@ -256,6 +256,10 @@ export function AjaxParse(store,res,cause,status)
 			store.dispatch(setSafetySpinner(false));
 			store.dispatch(getSafetyErrorList(rejectList));			
 			break;
+
+		case ITEM_RECALLED:
+		break;
+
 		default:
 			ShowError(store,cause,status);
 	 }

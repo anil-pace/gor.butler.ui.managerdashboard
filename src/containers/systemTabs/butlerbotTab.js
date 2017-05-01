@@ -13,7 +13,7 @@ import Spinner from '../../components/spinner/Spinner';
 import { setButlerSpinner } from  '../../actions/spinnerAction';
 import { butlerHeaderSort,butlerHeaderSortOrder,butlerFilterDetail } from '../../actions/sortHeaderActions';
 import { defineMessages } from 'react-intl';
-import {showTableFilter,filterApplied,toggleBotButton,butlerfilterState} from '../../actions/filterAction';
+import {BotFilterToggle,filterApplied,toggleBotButtonApplied,butlerfilterState,setFilterApplyFlag} from '../../actions/filterAction';
 import {updateSubscriptionPacket} from './../../actions/socketActions'
 import {wsOverviewData} from './../../constants/initData.js';
 //Mesages for internationalization
@@ -91,7 +91,7 @@ class ButlerBot extends React.Component{
   
   _processButlersData() {
   var nProps = this,
-  data = nProps.props.butlerDetail.butlerDetail;
+  data = nProps.props.butlerDetail.butlerDetail ||{};
   var butlerData=[], butlerDetail = {};
   
   var currentTask = {0:nProps.context.intl.formatMessage(messages.pick), 
@@ -190,8 +190,8 @@ class ButlerBot extends React.Component{
         delete updatedWsSubscription["system"].data[0].details["filter_params"];
         this.props.updateSubscriptionPacket(updatedWsSubscription);
         this.props.filterApplied(!this.props.isFilterApplied);
-        this.props.showTableFilter(false);
-        this.props.toggleBotButton(false);
+        this.props.BotFilterToggle(false);
+        this.props.toggleBotButtonApplied(false);
         /**
          * It will reset the filter
          * fields already applied in
@@ -204,6 +204,7 @@ class ButlerBot extends React.Component{
     }
   
 	render(){
+  var  emptyResponse=this.props.butlerDetail.emptyResponse;
   let updateStatusIntl="";
   var itemNumber = 6;
   var butlerData, avgVoltage =0;
@@ -260,14 +261,17 @@ class ButlerBot extends React.Component{
                             currentHeaderOrder={this.props.butlerSortHeaderState}
                             setButlerFilter={this.props.butlerFilterDetail}
                             getButlerFilter = {this.props.butlerFilter}
-                            showFilter={this.props.showFilter}
+                            botToggleFilter={this.props.botToggleFilter}
                             isFilterApplied={this.props.isFilterApplied}
-                            setFilter={this.props.showTableFilter}
+                            setFilter={this.props.BotFilterToggle}
                             botFilterStatus={this.props.botFilterStatus}
                             lastUpdatedText={updateStatusIntl} 
                             lastUpdated={updateStatusIntl}
                             butlerState={this.props.filterState}
-                                        refreshList={this.refreshList.bind(this)}
+                            refreshList={this.refreshList.bind(this)}
+                            emptyResponse={emptyResponse}
+                            filterApplyFlag={this.props.filterApplyFlag}
+                            setFilterApplyFlag={this.props.setFilterApplyFlag}
                             />
 					</div>
 				</div>
@@ -284,11 +288,12 @@ function mapStateToProps(state, ownProps){
     butlerSpinner: state.spinner.butlerSpinner || false,
     butlerDetail: state.butlerDetail || [],
     intlMessages: state.intl.messages,
-    showFilter: state.filterInfo.filterState || false,
+    botToggleFilter: state.filterInfo.botToggleFilter || false,
     isFilterApplied: state.filterInfo.isFilterApplied || false,
     botFilterStatus:state.filterInfo.botFilterStatus|| false,
     filterState: state.filterInfo.butlerFilterState,
-      wsSubscriptionData:state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData
+      wsSubscriptionData:state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
+      filterApplyFlag:state.filterInfo.filterApplyFlag|| false
   };
 }
 
@@ -299,13 +304,15 @@ var mapDispatchToProps = function(dispatch){
     setButlerSpinner: function(data){dispatch(setButlerSpinner(data))},
     butlerHeaderSort: function(data){dispatch(butlerHeaderSort(data))},
     butlerHeaderSortOrder: function(data){dispatch(butlerHeaderSortOrder(data))},
-    showTableFilter: function(data){dispatch(showTableFilter(data));},
+    BotFilterToggle: function(data){dispatch(BotFilterToggle(data));},
     filterApplied: function(data){dispatch(filterApplied(data));},
       updateSubscriptionPacket: function (data) {
           dispatch(updateSubscriptionPacket(data));
       },
-      toggleBotButton: function(data){dispatch(toggleBotButton(data));},
+      toggleBotButtonApplied: function(data){dispatch(toggleBotButtonApplied(data));},
       butlerfilterState: function(data){dispatch(butlerfilterState(data));},
+      setFilterApplyFlag: function (data) {dispatch(setFilterApplyFlag(data));
+        }
   };
 }
 
@@ -326,8 +333,10 @@ butlerFilterDetail:React.PropTypes.func,
 setButlerSpinner:React.PropTypes.func,
 butlerHeaderSort:React.PropTypes.func,
 butlerHeaderSortOrder:React.PropTypes.func,
-showTableFilter:React.PropTypes.func,
-filterApplied:React.PropTypes.func
+filterApplied:React.PropTypes.func,
+setFilterApplyFlag:React.PropTypes.func,
+filterApplyFlag:React.PropTypes.bool
+
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(ButlerBot) ;

@@ -15,6 +15,11 @@
     "defaultMessage": "Filter data"
   },
   {
+    "id": "order.table.showfilter",
+    "description": "button label for filter",
+    "defaultMessage": "Show Filter"
+  },
+  {
     "id": "ChargingStationsTable.filter.search.bar",
     "description": "total stations for filter search bar",
     "defaultMessage": "{total} Stations found"

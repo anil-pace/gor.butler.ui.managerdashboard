@@ -82,7 +82,6 @@ class UtilityTab extends React.Component{
          'cause':ITEM_RECALLED,
         }
         this.props.getItemRecall(data)
-
     }
 
 
