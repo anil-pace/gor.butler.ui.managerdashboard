@@ -52,6 +52,11 @@ import {showTableFilter, filterApplied, auditfilterState, toggleAuditFilter} fro
 import {hashHistory} from 'react-router'
 import {updateSubscriptionPacket,setWsAction} from './../actions/socketActions'
 import {wsOverviewData} from './../constants/initData.js';
+import AuditFilter from './auditTab/auditFilter';
+import {FormattedMessage} from 'react-intl';
+import CreateAudit from './auditTab/createAudit';
+import {modal} from 'react-redux-modal';
+import FilterSummary from './../components/tableFilter/filterSummary'
 //Mesages for internationalization
 const messages = defineMessages({
     auditCreatedStatus: {
@@ -507,8 +512,25 @@ class AuditTab extends React.Component {
         this.props.getPageData(paginationData);
     }
 
+    _setFilter() {
+        var newState = !this.props.showFilter;
+        this.props.showTableFilter(newState)
+    }
+
+    createAudit() {
+        modal.add(CreateAudit, {
+            title: '',
+            size: 'large',
+            closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+            hideCloseButton: true // (optional) if you don't wanna show the top right close button
+            //.. all what you put in here you will get access in the modal props ;),
+        });
+
+    }
+
 
     render() {
+        var filterHeight = screen.height - 190;
         var renderTab = <div/>,
             timeOffset = this.props.timeOffset || "",
             headerTimeZone = (this.context.intl.formatDate(Date.now(),
@@ -561,6 +583,51 @@ class AuditTab extends React.Component {
                                 auditFilterStatus={this.props.auditFilterStatus}
                                 responseFlag={this.props.auditSpinner}/>
 
+        let toolbar = <div>
+            <div className="gor-filter-wrap"
+                 style={{'display': this.props.showFilter ? 'block' : 'none', height: filterHeight}}>
+                <AuditFilter auditDetail={this.props.auditDetail} responseFlag={this.props.responseFlag}/>
+            </div>
+            <div className="gorToolBar">
+                <div className="gorToolBarWrap">
+                    <div className="gorToolBarElements">
+                        <FormattedMessage id="audit.table.heading" description="Heading for audit table"
+                                          defaultMessage="Audit Tasks"/>
+                    </div>
+
+                </div>
+                <div className="gor-audit-filter-create-wrap">
+                    <div className="gor-button-wrap">
+                        <button className="gor-audit-create-btn" onClick={this.createAudit.bind(this)}>
+                            <div className="gor-filter-add-token"/>
+                            <FormattedMessage id="audit.table.buttonLable"
+                                              description="button label for audit create"
+                                              defaultMessage="Create New Task"/>
+                        </button>
+                    </div>
+                    <div className="gor-button-wrap">
+                        <button
+                            className={this.props.isFilterApplied ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
+                            onClick={this._setFilter.bind(this)}>
+                            <div className="gor-manage-task"/>
+                            <FormattedMessage id="audit.table.filterLabel" description="button label for filter"
+                                              defaultMessage="Filter data"/>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {/*Filter Summary*/}
+            <FilterSummary total={this.props.totalAudits||0} isFilterApplied={this.props.isFilterApplied} responseFlag={this.props.responseFlag}
+                           filterText={<FormattedMessage id="auditList.filter.search.bar"
+                                                         description='total results for filter search bar'
+                                                         defaultMessage='{total} results found'
+                                                         values={{total: this.props.totalAudits || '0'}}/>}
+                           refreshList={this._clearFilter.bind(this)}
+                           refreshText={<FormattedMessage id="auditList.filter.search.bar.showall"
+                                                          description="button label for show all"
+                                                          defaultMessage="Show all results"/>}/>
+        </div>
+
 
         return (
             <div>
@@ -568,7 +635,8 @@ class AuditTab extends React.Component {
                     <div className="gor-Auditlist-table">
                         {!this.props.showFilter ?
                             <Spinner isLoading={this.props.auditSpinner} setSpinner={this.props.setAuditSpinner}/> : ""}
-                        {renderTab}
+                        {toolbar}
+                            {renderTab}
                     </div>
                 </div>
                 {auditData.length && this.state.query ? <div className="gor-audit-paginate-wrap">

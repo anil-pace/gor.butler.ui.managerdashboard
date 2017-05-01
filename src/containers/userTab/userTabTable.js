@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM  from 'react-dom';
 import {FormattedMessage} from 'react-intl';
 import {Table, Column, Cell} from 'fixed-data-table';
 import Dimensions from 'react-dimensions';
@@ -16,13 +15,9 @@ import {
     ActionCell
 } from '../../components/commonFunctionsDataTable';
 import {modal} from 'react-redux-modal';
-import AddUser from './addNewUser';
 import EditUser from './editUser';
 import DeleteUser from './deleteUser';
 import {GOR_USER_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
-import UserFilter from './userFilter';
-import FilterSummary from '../../components/tableFilter/filterSummary'
-
 class UserDataTable extends React.Component {
     constructor(props) {
         super(props);
@@ -139,16 +134,6 @@ class UserDataTable extends React.Component {
     }
 
 
-    addModal() {
-        modal.add(AddUser, {
-            title: '',
-            size: 'large', // large, medium or small,
-            closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-            hideCloseButton: true // (optional) if you don't wanna show the top right close button
-            //.. all what you put in here you will get access in the modal props ;),
-        });
-    }
-
     handleEdit(columnKey, rowIndex) {
         let uid, uname, fname, lname, roleName, sortedIndex;
         if (this.state.sortedDataList.newData === undefined) {
@@ -231,60 +216,6 @@ class UserDataTable extends React.Component {
         }
         return (
             <div>
-
-                <div className="gor-filter-wrap"
-                     style={{'width': this.props.showFilter ? '350px' : '0px', height: filterHeight}}>
-                    <UserFilter refreshOption={this.props.refreshOption} responseFlag={this.props.responseFlag}/>
-                </div>
-
-                <div className="gorToolBar">
-                    <div className="gorToolBarWrap">
-                        <div className="gorToolBarElements">
-                            <FormattedMessage id="user.table.heading" description="Heading for users table"
-                                              defaultMessage="Users"/>
-                        </div>
-                        <div className="gorToolBarElements">
-                            <div className="gor-user-add-wrap">
-                                <button className="gor-add-btn" onClick={this.addModal.bind(this)}>
-                                    <FormattedMessage id="user.button.heading"
-                                                      description="button heading for users table"
-                                                      defaultMessage="Add new user"/>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div className="filterWrapper">
-                        <div className="gorToolBarDropDown">
-                            <div className="gor-button-wrap">
-                                <div
-                                    className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
-                                <button
-                                    className={this.props.userFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
-                                    onClick={this._setFilter.bind(this)}>
-                                    <div className="gor-manage-task"/>
-                                    <FormattedMessage id="order.table.filterLabel" description="button label for filter"
-                                                      defaultMessage="Filter data"/>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-                {/*Filter Summary*/}
-                <FilterSummary isFilterApplied={this.props.isFilterApplied} responseFlag={this.props.responseFlag}
-                               filterText={<FormattedMessage id="userList.filter.search.bar"
-                                                             description='total users for filter search bar'
-                                                             defaultMessage='{totalUsers} Users found'
-                                                             values={{totalUsers: sortedDataList.getSize() || 0}}/>}
-                               refreshList={this.props.refreshList}
-                               refreshText={<FormattedMessage id="userList.filter.search.bar.showall"
-                                                              description="button label for show all"
-                                                              defaultMessage="Show all Users"/>}/>
-
-
                 <Table
                     rowHeight={50}
                     rowsCount={sortedDataList.getSize()}

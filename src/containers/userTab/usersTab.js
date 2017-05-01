@@ -13,6 +13,11 @@ import {updateSubscriptionPacket,setWsAction} from './../../actions/socketAction
 import {wsOverviewData} from './../../constants/initData.js';
 import {hashHistory} from 'react-router'
 import {userFilterApplySpinner}  from '../../actions/spinnerAction';
+import {modal} from 'react-redux-modal';
+import AddUser from './addNewUser';
+import UserFilter from './userFilter';
+import {FormattedMessage} from 'react-intl';
+import FilterSummary from '../../components/tableFilter/filterSummary'
 //Mesages for internationalization
 const messages = defineMessages({
     userOperator: {
@@ -225,7 +230,23 @@ class UsersTab extends React.Component {
         hashHistory.push({pathname: "/users", query: {}})
     }
 
+    addModal() {
+        modal.add(AddUser, {
+            title: '',
+            size: 'large', // large, medium or small,
+            closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+            hideCloseButton: true // (optional) if you don't wanna show the top right close button
+            //.. all what you put in here you will get access in the modal props ;),
+        });
+    }
+
+    _setFilter() {
+        var newState = !this.props.showFilter;
+        this.props.setFilter(newState);
+    }
+
     render() {
+        let filterHeight = screen.height - 190 - 50;
         let updateStatusIntl = "";
         var itemNumber = 7, userData;
         if (this.props.userdetails !== undefined) {
@@ -235,6 +256,58 @@ class UsersTab extends React.Component {
             <div>
                 <div>
                     <div className="gor-User-Table">
+                        <div className="gor-filter-wrap"
+                             style={{'width': this.props.showFilter ? '350px' : '0px', height: filterHeight}}>
+                            <UserFilter userData={this.props.userdetails} responseFlag={this.props.responseFlag}/>
+                        </div>
+
+                        <div className="gorToolBar">
+                            <div className="gorToolBarWrap">
+                                <div className="gorToolBarElements">
+                                    <FormattedMessage id="user.table.heading" description="Heading for users table"
+                                                      defaultMessage="Users"/>
+                                </div>
+                                <div className="gorToolBarElements">
+                                    <div className="gor-user-add-wrap">
+                                        <button className="gor-add-btn" onClick={this.addModal.bind(this)}>
+                                            <FormattedMessage id="user.button.heading"
+                                                              description="button heading for users table"
+                                                              defaultMessage="Add new user"/>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div className="filterWrapper">
+                                <div className="gorToolBarDropDown">
+                                    <div className="gor-button-wrap">
+                                        <div
+                                            className="gor-button-sub-status">{updateStatusIntl} {updateStatusIntl} </div>
+                                        <button
+                                            className={this.props.userFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
+                                            onClick={this.props.showTableFilter.bind(this)}>
+                                            <div className="gor-manage-task"/>
+                                            <FormattedMessage id="order.table.filterLabel" description="button label for filter"
+                                                              defaultMessage="Filter data"/>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        {/*Filter Summary*/}
+                        <FilterSummary total={userData.length||0} isFilterApplied={this.props.isFilterApplied} responseFlag={this.props.responseFlag}
+                                                          filterText={<FormattedMessage id="userList.filter.search.bar"
+                                                                                        description='total users for filter search bar'
+                                                                                        defaultMessage='{totalUsers} Users found'
+                                                                                        values={{totalUsers: userData.length || 0}}/>}
+                                                          refreshList={this._clearFilter.bind(this)}
+                                                          refreshText={<FormattedMessage id="userList.filter.search.bar.showall"
+                                                                                         description="button label for show all"
+                                                                                         defaultMessage="Show all Users"/>}/>
+
                         <UserDataTable items={userData} itemNumber={itemNumber} intlMessg={this.props.intlMessages}
                                        mid={this.props.manager.users ? this.props.manager.users[0].id : ''}
                                        sortHeaderState={this.props.userHeaderSort}

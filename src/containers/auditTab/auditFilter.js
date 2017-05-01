@@ -40,6 +40,13 @@ class AuditFilter extends React.Component {
         if (nextProps.auditFilterState && JSON.stringify(this.state) !== JSON.stringify(nextProps.auditFilterState)) {
             this.setState(nextProps.auditFilterState)
         }
+        /**
+         * Hide the filter as soon as data in the list get updated.
+         */
+        if(nextProps.auditDetail.length>0 && JSON.stringify(nextProps.auditDetail)!==JSON.stringify(this.props.auditDetail)){
+            this.props.showTableFilter(false);
+        }
+
     }
 
 

@@ -26,6 +26,13 @@ class UserFilter extends React.Component {
         if (nextProps.filterState && JSON.stringify(this.state) !== JSON.stringify(nextProps.filterState)) {
             this.setState(nextProps.filterState)
         }
+        /**
+         * Hide the filter as soon as data in the list get updated.
+         */
+        if(nextProps.userData.length>0 && JSON.stringify(nextProps.userData)!==JSON.stringify(this.props.userData)){
+            this.props.showTableFilter(false);
+        }
+
     }
 
     _closeFilter() {

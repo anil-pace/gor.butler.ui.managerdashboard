@@ -5,7 +5,7 @@ import Dimensions from 'react-dimensions'
 import {FormattedMessage} from 'react-intl';
 import {connect} from 'react-redux';
 import {currentTableState} from '../../actions/tableDataAction'
-import FilterSummary from '../../components/tableFilter/filterSummary'
+
 import {
     SortHeaderCell,
     tableRenderer,
@@ -21,7 +21,7 @@ import {
     ToolTipCell
 } from '../../components/commonFunctionsDataTable';
 import {modal} from 'react-redux-modal';
-import CreateAudit from './createAudit';
+
 import StartAudit from './startAudit';
 import DeleteAudit from './deleteAudit';
 import DuplicateAudit from './duplicateAudit';
@@ -42,7 +42,7 @@ import {defineMessages} from 'react-intl';
 import {debounce} from '../../utilities/debounce';
 import {getAuditOrderLines} from '../../actions/auditActions';
 import {AUDIT_URL, PENDING_ORDERLINES} from '../../constants/configConstants';
-import AuditFilter from './auditFilter';
+
 const messages = defineMessages({
     auditPlaceholder: {
         id: 'audit.placeholder',
@@ -161,16 +161,7 @@ class AuditTable extends React.Component {
     }
 
 
-    createAudit() {
-        modal.add(CreateAudit, {
-            title: '',
-            size: 'large',
-            closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-            hideCloseButton: true // (optional) if you don't wanna show the top right close button
-            //.. all what you put in here you will get access in the modal props ;),
-        });
 
-    }
 
 
     startAudit(columnKey, rowIndex) {
@@ -248,10 +239,7 @@ class AuditTable extends React.Component {
         }
     }
 
-    _setFilter() {
-        var newState = !this.props.showFilter;
-        this.props.setFilter(newState)
-    }
+
 
     _showAllAudit() {
         this.props.refreshData();
@@ -296,49 +284,10 @@ class AuditTable extends React.Component {
             var headerHeight = GOR_USER_TABLE_HEADER_HEIGHT, minHeight = GOR_AUDIT_RESOLVE_MIN_HEIGHT;
             heightRes = Math.max(GOR_USER_TABLE_HEADER_HEIGHT * rowsCount + GOR_AUDIT_TABLE_HEIGHT_CORRECTION, screen.height - GOR_AUDIT_TABLE_HEIGHT_CORRECTION);
         }
-        var filterHeight = screen.height - 190;
+
         var tableRenderer = <div/>
         tableRenderer = <div className="gorTableMainContainer">
-            <div className="gor-filter-wrap"
-                 style={{'display': this.props.showFilter ? 'block' : 'none', height: filterHeight}}>
-                <AuditFilter refreshOption={this.props.refreshData}/>
-            </div>
-            <div className="gorToolBar">
-                <div className="gorToolBarWrap">
-                    <div className="gorToolBarElements">
-                        <FormattedMessage id="audit.table.heading" description="Heading for audit table"
-                                          defaultMessage="Audit Tasks"/>
-                    </div>
 
-                </div>
-                <div className="gor-audit-filter-create-wrap">
-                    <div className="gor-button-wrap">
-                        <button className="gor-audit-create-btn" onClick={this.createAudit.bind(this)}>
-                            <div className="gor-filter-add-token"/>
-                            <FormattedMessage id="audit.table.buttonLable" description="button label for audit create"
-                                              defaultMessage="Create New Task"/>
-                        </button>
-                    </div>
-                    <div className="gor-button-wrap">
-                        <button className={this.props.isFilterApplied ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
-                                onClick={this._setFilter.bind(this)}>
-                            <div className="gor-manage-task"/>
-                            <FormattedMessage id="audit.table.filterLabel" description="button label for filter"
-                                              defaultMessage="Filter data"/>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            {/*Filter Summary*/}
-            <FilterSummary isFilterApplied={this.props.isFilterApplied} responseFlag={this.props.responseFlag}
-                           filterText={<FormattedMessage id="auditList.filter.search.bar"
-                                                         description='total results for filter search bar'
-                                                         defaultMessage='{total} results found'
-                                                         values={{total: this.props.totalAudits || '0'}}/>}
-                           refreshList={this._showAllAudit.bind(this)}
-                           refreshText={<FormattedMessage id="auditList.filter.search.bar.showall"
-                                                          description="button label for show all"
-                                                          defaultMessage="Show all results"/>}/>
             <Table
                 rowHeight={50}
                 rowsCount={rowsCount}
