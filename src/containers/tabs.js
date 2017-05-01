@@ -50,11 +50,11 @@ class Tabs extends React.Component{
        
         
         
-        this.props.tabSelected(TAB_ROUTE_MAP[selTab]);
-        this.props.subTabSelected(null);
-        sessionStorage.setItem('nextView', TAB_ROUTE_MAP[selTab]);
-        sessionStorage.setItem('selTab', TAB_ROUTE_MAP[selTab]);
-        sessionStorage.setItem('subTab', '');
+        // this.props.tabSelected(TAB_ROUTE_MAP[selTab]);
+        // this.props.subTabSelected(null);
+        // sessionStorage.setItem('nextView', TAB_ROUTE_MAP[selTab]);
+        // sessionStorage.setItem('selTab', TAB_ROUTE_MAP[selTab]);
+        // sessionStorage.setItem('subTab', '');
     }
   _stopOperation(stopFlag) {
       modal.add(OperationStop, {

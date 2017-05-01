@@ -571,7 +571,7 @@ class AuditTab extends React.Component {
                         {renderTab}
                     </div>
                 </div>
-                {auditData.length ? <div className="gor-audit-paginate-wrap">
+                {auditData.length && this.state.query ? <div className="gor-audit-paginate-wrap">
                     <GorPaginateV2 location={this.props.location} currentPage={this.state.query.page||1} totalPage={this.props.totalPage}/>
                 </div> : ""}
             </div>

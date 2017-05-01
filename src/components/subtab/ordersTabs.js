@@ -54,10 +54,10 @@ class OrderSubTab extends React.Component{
 			<div>
 				<div className="gorMainSubtab">
 					
-					<Link to="/waves" onClick = {this.handleSysSubTabClick.bind(this,WAVES)}>
+					<Link to="/orders/waves" onClick = {this.handleSysSubTabClick.bind(this,WAVES)}>
 						<SubTab item={waves} changeClass={selectClass["waves"]}/> 
 					</Link>
-					<Link to="/orderlist" onClick = {this.handleSysSubTabClick.bind(this,ORDER_LIST)}>
+					<Link to="/orders/orderlist" onClick = {this.handleSysSubTabClick.bind(this,ORDER_LIST)}>
 						<SubTab item={orderlist} changeClass={selectClass["orderlist"]}/> 
 					</Link>
 				</div>
