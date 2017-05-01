@@ -133,6 +133,7 @@ export const CONFIRM_SAFETY = "CONFIRM_SAFETY";
 export const AUTH_USER = "AUTH_USER";
 export const SAFETY_MAP = "SAFETY_MAP";
 export const SAFETY_ERROR_MAP = "SAFETY_ERROR_MAP";
+export const ITEM_RECALLED = "ITEM_RECALLED";
 
 export const AUDIT_RETRIEVE = "AUDIT_RETRIEVE";
 export const RECIEVE_AUDIT_DATA = "RECIEVE_AUDIT_DATA";
@@ -220,7 +221,7 @@ export const SYS_SUB_TAB_ROUTE_MAP={
 	[ORDER_LIST]:"orderlist"
 
 }
-export const SHOW_UTILITY_TAB = false;
+export const SHOW_UTILITY_TAB = true;
 /*Constant for time on header*/
 export const HEADER_START_TIME = ' 09:00:15 (IST)'
 

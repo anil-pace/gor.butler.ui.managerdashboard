@@ -3,6 +3,11 @@ import UtilityTile from '../components/utilityComponents/utilityTile'
 import UploadDownBar from '../components/utilityComponents/uploadDownBar'
 import DropdownTable from '../components/dropdown/dropdownTable'
 import UtilityDropDown from '../components/utilityComponents/utilityDropDownWrap'
+import MasterUploadTile from '../components/utilityComponents/masterUploadTile'
+import {INVENTORY_REPORT_URL, GET_ITEM_RECALL} from '../constants/configConstants';
+import { connect } from 'react-redux';
+import {getItemRecall} from "../actions/utilityActions";
+import {GET, ITEM_RECALLED} from '../constants/frontEndConstants';
 
 class UtilityTab extends React.Component{
 	constructor(props) 
@@ -51,9 +56,16 @@ class UtilityTab extends React.Component{
     	return grnTile;
     }
 
+    _renderMasterUpload() {
+        var fileType = ["File 001", "File 002"];
+        var recallBar = <MasterUploadTile data={fileType}/>;
+        return recallBar;
+    }
+
     _downloadReport() {
-    	// integration with backend pending
-    	console.log("download report")
+        if(this.state.reportState.fileType && this.state.reportState.category) {
+           window.open(INVENTORY_REPORT_URL)
+        }
     }	
 
     _downloadGRN() {
@@ -62,27 +74,31 @@ class UtilityTab extends React.Component{
     }
 
     _requestExpiredItems() {
-        var data = {}, filterField = {};
-        data["filter_data"] = [];
-        filterField.field_name = "expiry_date";
-        filterField.operator = ">=";
-        filterField.field_value = "2014-01-15";
-        data["filter_data"].push(filterField);
-        data["multi_order"] = "true";
-        data["prefix"] = "something";
-
-        console.log(data)
+        
+        let data={
+         'url':  GET_ITEM_RECALL,
+         'method':GET,
+         'token': this.props.auth_token,
+         'cause':ITEM_RECALLED,
+        }
+        this.props.getItemRecall(data)
     }
+
 
 	render(){
 		var uploadDataTile = this._renderUploadDataTile();
 		var downloadReportTile = this._renderDownReportTile();
 		var grnTile = this._renderGRNtile();
+        var masterUpload = this._renderMasterUpload();
+        var activeReportDownButton = (this.state.reportState.fileType && this.state.reportState.category)?true:false;
 		return (
 			<div >
 				<div>
+                    <UtilityTile tileHead="Master Data Upload" showFooter={false} 
+                                 tileBody={masterUpload} showHeaderIcon={true}/>
 					<UtilityTile tileHead="Run scripts" showFooter={false} tileBody={uploadDataTile}/>
-					<UtilityTile tileHead="Download reports" showFooter={true} tileBody={downloadReportTile} footerAction={this._downloadReport.bind(this)}/>
+					<UtilityTile tileHead="Download reports" showFooter={true} tileBody={downloadReportTile} 
+                                 footerAction={this._downloadReport.bind(this)} enableButton={activeReportDownButton}/>
 					<UtilityTile tileHead="Download Goods Recieved Note" showFooter={true} tileBody={grnTile} footerAction={this._downloadGRN.bind(this)}/>
 				</div>
 			</div>
@@ -90,4 +106,16 @@ class UtilityTab extends React.Component{
 	}
 }
 
-export default UtilityTab ;
+function mapStateToProps(state, ownProps){
+  return {
+      auth_token:state.authLogin.auth_token
+  };
+}
+
+var mapDispatchToProps = function(dispatch){
+  return {
+    getItemRecall: function(data){ dispatch(getItemRecall(data)); }
+  }
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(UtilityTab);

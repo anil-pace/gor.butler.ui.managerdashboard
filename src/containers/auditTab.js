@@ -310,12 +310,12 @@ else
     filterApplied = true;
   }
 
-
-  if(data.url === undefined) {
-    data.selected = data.selected?data.selected:1;
-    if(data.columnKey && data.sortDir) {
+if(data.columnKey && data.sortDir) {
       appendSortUrl = sortAuditHead[data.columnKey] + sortOrder[data.sortDir]; 
     }
+  if(data.url === undefined) {
+    data.selected = data.selected?data.selected:1;
+    
     url = SEARCH_AUDIT_URL+makeDate+GIVEN_PAGE+(data.selected)+GIVEN_PAGE_SIZE + appendSortUrl+skuText;
   }
   else {
