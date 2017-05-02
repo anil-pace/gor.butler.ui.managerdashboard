@@ -25,6 +25,31 @@
     "defaultMessage": "No PPS Found"
   },
   {
+    "id": "pps.table.heading",
+    "description": "Heading for PPS",
+    "defaultMessage": "Pick Put Stations"
+  },
+  {
+    "id": "PPStable.selected",
+    "description": "selected pps for ppsSelected",
+    "defaultMessage": "{selected} selected"
+  },
+  {
+    "id": "order.table.filterLabel",
+    "description": "button label for filter",
+    "defaultMessage": "Filter data"
+  },
+  {
+    "id": "ppsList.filter.search.bar",
+    "description": "total pps for filter search bar",
+    "defaultMessage": "{total} Stations found"
+  },
+  {
+    "id": "ppsList.filter.search.bar.showall",
+    "description": "button label for show all",
+    "defaultMessage": "Show all Stations"
+  },
+  {
     "id": "PPStable.ppsColumn.heading",
     "description": "PPS - column Heading",
     "defaultMessage": "PPS"
