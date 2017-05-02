@@ -43,7 +43,7 @@ class Header extends React.Component{
             'cause': RECEIVE_SHIFT_START_TIME,
             'token': this.props.authToken
         }
-		this.props.getShiftStartTime(headerData)
+		 this.props.getShiftStartTime(headerData)
 	}
     componentDidMount(){
               var username = this.props.username;

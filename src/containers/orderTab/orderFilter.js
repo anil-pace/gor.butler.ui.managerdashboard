@@ -2,12 +2,12 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
-import {ordersFilterToggle, filterApplied,orderfilterState,toggleOrderFilterApplied,setFilterApplyFlag} from '../../actions/filterAction';
+import {showTableFilter, filterApplied,orderfilterState,toggleOrderFilter} from '../../actions/filterAction';
 import { connect } from 'react-redux'; 
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
-
+import {hashHistory} from 'react-router'
 class OrderFilter extends React.Component{
 	constructor(props) 
 	{
@@ -18,15 +18,20 @@ class OrderFilter extends React.Component{
 
 
     _closeFilter() {
-
-        this.props.ordersFilterToggle(false);
-    }	
+        this.props.showTableFilter(false);
+    }
     componentWillReceiveProps(nextProps){
         if(nextProps.orderFilterState && JSON.stringify(this.state)!==JSON.stringify(nextProps.orderFilterState)){
             this.setState(nextProps.orderFilterState)
         }
-    }
 
+        /**
+         * Hide the filter as soon as data in the list get updated.
+         */
+        if(nextProps.ordersDetail.length>0 && JSON.stringify(nextProps.ordersDetail)!==JSON.stringify(this.props.ordersDetail)){
+            this.props.showTableFilter(false);
+        }
+    }
 
     _processOrderSearchField(){
         var filterInputFields = [{value:"ORDER ID", label:<FormattedMessage id="order.inputField.id" defaultMessage ="ORDER ID"/>}];
@@ -52,7 +57,7 @@ class OrderFilter extends React.Component{
                     { value: 'exception', label: <FormattedMessage id="order.STATUS.exep" defaultMessage ="Exception"/>}
                     ];
         var labelC2 = [
-                    { value: 'allOrders', label: <FormattedMessage id="order.timePeriod.all" defaultMessage ="Any time"/>},
+                    { value: 'allOrders', label: <FormattedMessage id="order.timePeriod.all" defaultMessage ="All"/>},
                     { value: 'oneHourOrders', label: <FormattedMessage id="order.timePeriod.oneHr" defaultMessage ="Last 1 hours"/>},
                     { value: 'twoHourOrders', label: <FormattedMessage id="order.timePeriod.twoHR" defaultMessage ="Last 2 hours"/>},
                     { value: 'sixHourOrders', label: <FormattedMessage id="order.timePeriod.sixHr" defaultMessage ="Last 6 hours"/>},
@@ -61,7 +66,7 @@ class OrderFilter extends React.Component{
                     ];
         var selectedToken =  this.state.tokenSelected;
         var column1 = <FilterTokenWrap field={tokenField1} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC1} selectedToken={selectedToken}/>;
-        var column2 = <FilterTokenWrap field={tokenField2} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC2} selectedToken={selectedToken} selection="Single"/>;
+        var column2 = <FilterTokenWrap field={tokenField2} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC2} selectedToken={selectedToken}/>;
         var columnDetail = {column1token:column1, column2token:column2};
         return columnDetail;
     }
@@ -76,27 +81,28 @@ class OrderFilter extends React.Component{
     }
 
     _applyFilter() {
-          var filterState = this.state;
-        this.props.orderfilterState(filterState);
-        this.props.toggleOrderFilterApplied(true);
-      this.props.refreshOption(filterState) 
-       this.props.setFilterApplyFlag(true);
+        var filterState = this.state, _query = {}
+        if (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !== 'all') {
+            _query.status = filterState.tokenSelected["STATUS"]
+        }
+        if (filterState.tokenSelected["TIME PERIOD"] && filterState.tokenSelected["TIME PERIOD"][0] !== 'allOrders') {
+            _query.period = filterState.tokenSelected["TIME PERIOD"]
+        }
+
+        if (filterState.searchQuery["ORDER ID"]) {
+            _query.orderId = filterState.searchQuery["ORDER ID"]
+        }
+       hashHistory.push({pathname: "/orders/orderlist", query: _query})
     }
 
     _clearFilter() {
-        var clearState = {};
-        this.props.filterApplied(false)
-        this.setState({tokenSelected: {"STATUS":["all"], "TIME PERIOD":["allOrders"]}, searchQuery: {}});
-        this.props.orderfilterState({tokenSelected: {"STATUS":["all"], "TIME PERIOD":["allOrders"]}, searchQuery: {}});
-        this.props.refreshOption(clearState);
-        this.props.toggleOrderFilterApplied(false);
-        this.props.setFilterApplyFlag(true);
+        hashHistory.push({pathname: "/orders/orderlist", query: {}})
+    }
 
-    } 
 
 
 	render(){
-        var noOrder = this.props.orderData.emptyResponse;
+        var noOrder = this.props.orderData.totalOrders?false:true;
         var orderSearchField = this._processOrderSearchField();
         var orderFilterToken = this._processFilterToken();
 		return (
@@ -118,7 +124,7 @@ class OrderFilter extends React.Component{
 
 function mapStateToProps(state, ownProps){
   return {
-    ordersToggleFilter: state.filterInfo.ordersToggleFilter || false,
+    showFilter: state.filterInfo.filterState || false,
     orderData: state.getOrderDetail || {},
     orderListSpinner: state.spinner.orderListSpinner || false,
     orderFilterState: state.filterInfo.orderFilterState,
@@ -127,24 +133,21 @@ function mapStateToProps(state, ownProps){
 
 var mapDispatchToProps = function(dispatch){
   return {
-    ordersFilterToggle: function(data){dispatch(ordersFilterToggle(data));},
+    showTableFilter: function(data){dispatch(showTableFilter(data));},
     filterApplied: function(data){dispatch(filterApplied(data));},
      orderfilterState: function(data){dispatch(orderfilterState(data));},
-     toggleOrderFilterApplied: function(data){dispatch(toggleOrderFilterApplied(data));},
-      setFilterApplyFlag: function (data) {dispatch(setFilterApplyFlag(data));}
+     toggleOrderFilter: function(data){dispatch(toggleOrderFilter(data));}
   }
 };
 
 OrderFilter.PropTypes={
-    ordersToggleFilter:React.PropTypes.bool,
+    showFilter:React.PropTypes.bool,
     orderData:React.PropTypes.object,
     orderListSpinner:React.PropTypes.bool,
-    ordersFilterToggle:React.PropTypes.func,
+    showTableFilter:React.PropTypes.func,
     filterApplied:React.PropTypes.func,
     orderFilterState:React.PropTypes.bool,
-    toggleOrderFilterApplied:React.PropTypes.func,
-    setFilterApplyFlag:React.PropTypes.func,
-    responseFlag:React.PropTypes.bool
+    toggleOrderFilter:React.PropTypes.func
 };
 
 

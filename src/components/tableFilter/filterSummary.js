@@ -8,6 +8,17 @@ class FilterSummary extends React.Component {
         super(props);
     }
 
+    shouldComponentUpdate(nextProps) {
+        /**
+         * Don't display the filter summary if count =0
+         * or previous number of results is same of updated list.
+         */
+        if (this.props.total === nextProps.total || nextProps.total === 0) {
+            return false
+        }
+        return true;
+    }
+
     render() {
         return (
             <div>
@@ -22,8 +33,8 @@ class FilterSummary extends React.Component {
     }
 }
 
-FilterSummary.propTypes={
-    refreshList:React.PropTypes.func.isRequired
+FilterSummary.propTypes = {
+    refreshList: React.PropTypes.func.isRequired
 }
 
 export default FilterSummary ;

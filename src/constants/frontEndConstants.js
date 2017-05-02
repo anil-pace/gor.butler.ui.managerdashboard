@@ -133,7 +133,6 @@ export const CONFIRM_SAFETY = "CONFIRM_SAFETY";
 export const AUTH_USER = "AUTH_USER";
 export const SAFETY_MAP = "SAFETY_MAP";
 export const SAFETY_ERROR_MAP = "SAFETY_ERROR_MAP";
-export const ITEM_RECALLED = "ITEM_RECALLED";
 
 export const AUDIT_RETRIEVE = "AUDIT_RETRIEVE";
 export const RECIEVE_AUDIT_DATA = "RECIEVE_AUDIT_DATA";
@@ -199,8 +198,6 @@ export const DISPLAY_CHARGING_STATION_FILTER_SPINNER = "DISPLAY_CHARGING_STATION
 
 
 
-
-
 /*Map for routes of tab*/
 
 export const TAB_ROUTE_MAP = {
@@ -221,7 +218,7 @@ export const SYS_SUB_TAB_ROUTE_MAP={
 	[ORDER_LIST]:"orderlist"
 
 }
-export const SHOW_UTILITY_TAB = true;
+export const SHOW_UTILITY_TAB = false;
 /*Constant for time on header*/
 export const HEADER_START_TIME = ' 09:00:15 (IST)'
 
@@ -397,9 +394,9 @@ export const AUDIT_UNRESOLVED = "Unresolved";
 export const AUDIT_LINE_REJECTED  = "audit_rejected";
 export const AUDIT_REJECTED_STATUS = "Rejected";
 export const AUDIT_RESOLVED_STATUS = "Resolved";
-export const AUDIT_PARAM_TYPE = '&audit_param_type=';
-export const AUDIT_PARAM_VALUE = '&audit_param_value=';
-export const AUDIT_STATUS = '&audit_status=';
+export const AUDIT_PARAM_TYPE = 'audit_param_type';
+export const AUDIT_PARAM_VALUE = 'audit_param_value';
+export const AUDIT_STATUS = 'audit_status';
 export const AUDIT_TYPE="AUDIT TYPE";
 export const SPECIFIC_SKU_ID='SPECIFIC SKU ID';
 export const SPECIFIC_LOCATION_ID='SPECIFIC LOCATION ID';
@@ -444,14 +441,6 @@ export const SET_CS_FILTER = "SET_CS_FILTER";
 export const SET_WAVE_FILTER = "SET_WAVE_FILTER"
 export const AUDIT_APPROVED = "auditline_approved";
 export const AUDIT_REJECTED = "auditline_rejected";
-export const BOT_TOGGLE_FILTER = "BOT_TOGGLE_FILTER";
-export const PPS_TOGGLE_FILTER = "PPS_TOGGLE_FILTER";
-export const CS_TOGGLE_FILTER = "CS_TOGGLE_FILTER";
-export const WAVES_TOGGLE_FILTER = "WAVES_TOGGLE_FILTER";
-export const ORDERS_TOGGLE_FILTER = "ORDERS_TOGGLE_FILTER";
-export const AUDIT_TOGGLE_FILTER = "AUDIT_TOGGLE_FILTER";
-export const USER_TOGGLE_FILTER = "USER_TOGGLE_FILTER";
-
 
 
 //search dropdown constants
@@ -484,15 +473,14 @@ export const USER_FILTER_STATE = "USER_FILTER_STATE";
 export const AUDIT_TASK_ID = "AUDIT TASK ID"
 export const ADD_TOKEN = "add";
 export const ADD_DEFAULT = "addDefault";
-export const REMOVE_TOKEN = "remove";
 export const SOFT_MANUAL = "soft_manual";
 export const SOFT = "soft";
 export const HARD = "hard";
 //backend sort
-export const sortAuditHead = {"startTime":"&order_by=start_actual_time", 
-							"completedTime":"&order_by=completion_time", 
-							"display_id":"&order_by=display_id",
-                  			"status":"&order_by=audit_status&order_by_seq=[ 'audit_pending_approval','audit_created','audit_accepted','audit_conflicting','audit_waiting','audit_resolved','audit_pending','audit_reaudited','audit_started','audit_tasked','audit_rejected','audit_resolved','audit_aborted', 'audit_completed']"};
+export const sortAuditHead = {"startTime":"&order_by=start_actual_time",
+    "completedTime":"&order_by=completion_time",
+    "display_id":"&order_by=display_id",
+    "status":"&order_by=audit_status&order_by_seq=[ 'audit_pending_approval','audit_created','audit_accepted','audit_conflicting','audit_waiting','audit_resolved','audit_pending','audit_reaudited','audit_started','audit_tasked','audit_rejected','audit_resolved','audit_aborted', 'audit_completed']"};
 export const sortOrder = {"DESC":"&order=asc", "ASC":"&order=desc"};
 
 export const sortOrderHead = {"recievedTime":"&order_by=create_time", 
@@ -514,8 +502,11 @@ export const MODAL_STATUS = "MODAL_STATUS";
 export const MODAL_RESET = "MODAL_RESET";
 export const CHECKLIST = "CHECKLIST";
 export const RECEIVE_SHIFT_START_TIME = "RECEIVE_SHIFT_START_TIME";
-export const FILTER_APPLY_FLAG = "FILTER_APPLY_FLAG";
-export const SINGLE = "Single";
-export const STATUS = "STATUS";
-export const TIME_PERIOD = "TIME PERIOD";
-export const ALL_ORDERS = "allOrders";
+export const OVERVIEW_REFRESHED="OVERVIEW_REFRESHED"
+export const BUTLERBOTS_REFRESHED = "BUTLERBOTS_REFRESHED";
+export const PPS_LIST_REFRESHED = "PPS_LIST_REFRESHED";
+export const CHARGING_STATION_LIST_REFRESHED = "CHARGING_STATION_LIST_REFRESHED";
+export const INVENTORY_REFRESHED="INVENTORY_REFRESHED"
+export const AUDIT_LIST_REFRESHED="AUDIT_LIST_REFRESHED"
+export const ORDER_LIST_REFRESHED="ORDER_LIST_REFRESHED"
+export const WAVES_REFRESHED="WAVES_REFRESHED"

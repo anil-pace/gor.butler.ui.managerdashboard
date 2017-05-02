@@ -2,15 +2,15 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import {FormattedMessage} from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
-import {wavesFilterToggle, filterApplied, wavefilterState, toggleWaveFilterApplied,setFilterApplyFlag} from '../../actions/filterAction';
+import {showTableFilter, filterApplied, wavefilterState, toggleWaveFilter} from '../../actions/filterAction';
 import {updateSubscriptionPacket} from '../../actions/socketActions';
 import {connect} from 'react-redux';
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
 import {setWavesFilterSpinner}  from '../../actions/spinnerAction';
+import {hashHistory} from 'react-router'
 class WaveFilter extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -26,12 +26,19 @@ class WaveFilter extends React.Component {
          */
         if (nextProps.filterState && JSON.stringify(this.state) !== JSON.stringify(nextProps.filterState)) {
             this.setState(nextProps.filterState)
-        }     
+        }
+
+        /**
+         * Hide the filter as soon as data in the list get updated.
+         */
+        if(nextProps.waveData.length>0 && JSON.stringify(nextProps.waveData)!==JSON.stringify(this.props.waveData)){
+            this.props.showTableFilter(false);
+        }
     }
 
     _closeFilter() {
-        var filterState = !this.props.wavesToggleFilter;
-        this.props.wavesFilterToggle(false);
+        let filterState = !this.props.showFilter;
+        this.props.showTableFilter(false);
     }
 
     _processWaveSearchField() {
@@ -73,42 +80,26 @@ class WaveFilter extends React.Component {
     }
 
     _applyFilter() {
-        let filterSubsData = {}, filterState = this.state;
-        if (filterState.searchQuery) {
-            (filterState.searchQuery["WAVE ID"] ? filterSubsData["wave_id"] = ['=', filterState.searchQuery["WAVE ID"]] : "");
+        let filterState = this.state, _query = {};
+        if (filterState.searchQuery["WAVE ID"]) {
+            _query.waveId = filterState.searchQuery["WAVE ID"]
         }
-        if (filterState.tokenSelected) {
-            (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !== "any" ? filterSubsData["status"] = ['in', filterState.tokenSelected["STATUS"]] : "");
+        if (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !== "any") {
+            _query.status = filterState.tokenSelected["STATUS"]
         }
-        let updatedWsSubscription = this.props.wsSubscriptionData;
-        updatedWsSubscription["orders"].data[0].details["filter_params"] = filterSubsData;
-        this.props.wavefilterState(filterState);
-        this.props.updateSubscriptionPacket(updatedWsSubscription);
-        this.props.filterApplied(!this.props.isFilterApplied);
-        this.props.toggleWaveFilterApplied(true);
-        this.props.setWavesFilterSpinner(true);
-        this.props.setFilterApplyFlag(true);
-        
+        hashHistory.push({pathname: "/orders/waves", query: _query})
+
 
     }
 
     _clearFilter() {
-        let clearState = {};
-        let updatedWsSubscription = this.props.wsSubscriptionData;
-        updatedWsSubscription["orders"].data[0].details["filter_params"] = {};
-        this.props.updateSubscriptionPacket(updatedWsSubscription);
-        this.setState({tokenSelected: {"STATUS": ["any"]}, searchQuery: {}});
-        this.props.wavefilterState({tokenSelected: {"STATUS": ["any"]}, searchQuery: {}});
-        this.props.filterApplied(!this.props.isFilterApplied);
-        this.props.toggleWaveFilterApplied(false);
-        this.props.setWavesFilterSpinner(true);
-        this.props.setFilterApplyFlag(true);
+        hashHistory.push({pathname: "/orders/waves", query: {}})
     }
 
 
     render() {
         var waveDetail = this.props.waveData;
-       var noWave = this.props.waveData.emptyResponse; 
+        var noOrder = waveDetail.waveData && waveDetail.waveData.length ? false : true;
         let waveSearchField = this._processWaveSearchField();
         let waveFilterToken = this._processFilterToken();
         return (
@@ -117,9 +108,10 @@ class WaveFilter extends React.Component {
                         clearFilter={this._clearFilter.bind(this)} // clearing sates of filter
                         searchField={waveSearchField}
                         filterTokenC1={waveFilterToken.column1token}
+
                         formSubmit={this._applyFilter.bind(this)} //passing function on submit
                         responseFlag={this.props.waveFIlterSpinner} // used for spinner of button
-                        noDataFlag={noWave} //messg to show in case of no data
+                        noDataFlag={noOrder} //messg to show in case of no data
                 />
             </div>
         );
@@ -130,7 +122,7 @@ class WaveFilter extends React.Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        wavesToggleFilter: state.filterInfo.wavesToggleFilter || false,
+        showFilter: state.filterInfo.filterState || false,
         waveData: state.waveInfo || {},
         orderListSpinner: state.spinner.orderListSpinner || false,
         filterState: state.filterInfo.wavefilterState,
@@ -145,8 +137,8 @@ function mapStateToProps(state, ownProps) {
 
 let mapDispatchToProps = function (dispatch) {
     return {
-        wavesFilterToggle: function (data) {
-            dispatch(wavesFilterToggle(data));
+        showTableFilter: function (data) {
+            dispatch(showTableFilter(data));
         },
         filterApplied: function (data) {
             dispatch(filterApplied(data));
@@ -157,32 +149,28 @@ let mapDispatchToProps = function (dispatch) {
         updateSubscriptionPacket: function (data) {
             dispatch(updateSubscriptionPacket(data));
         },
-        toggleWaveFilterApplied: function (data) {
-            dispatch(toggleWaveFilterApplied(data));
+        toggleWaveFilter: function (data) {
+            dispatch(toggleWaveFilter(data));
         },
         setWavesFilterSpinner: function (data) {
             dispatch(setWavesFilterSpinner(data));
-        },
-        setFilterApplyFlag: function (data) {
-            dispatch(setFilterApplyFlag(data));
         }
 
     }
 };
 WaveFilter.PropTypes = {
-    wavesFilterToggle: React.PropTypes.func,
+    showTableFilter: React.PropTypes.func,
     filterApplied: React.PropTypes.func,
     wavefilterState: React.PropTypes.func,
     updateSubscriptionPacket: React.PropTypes.func,
-    toggleWaveFilterApplied: React.PropTypes.func,
-    wavesToggleFilter: React.PropTypes.bool,
+    toggleWaveFilter: React.PropTypes.func,
+    showFilter: React.PropTypes.bool,
     waveData: React.PropTypes.object,
     orderListSpinner: React.PropTypes.bool,
     filterState: React.PropTypes.object,
     wsSubscriptionData: React.PropTypes.object,
     isFilterApplied: React.PropTypes.bool,
-    waveFilterStatus: React.PropTypes.bool,
-    setFilterApplyFlag:React.PropTypes.func
+    waveFilterStatus: React.PropTypes.bool
 };
 
 

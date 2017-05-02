@@ -5,31 +5,6 @@
     "defaultMessage": "No Charging Stations Found"
   },
   {
-    "id": "ChargingStations.table.heading",
-    "description": "Heading for ChargingStations",
-    "defaultMessage": "Charging Stations"
-  },
-  {
-    "id": "order.table.filterLabel",
-    "description": "button label for filter",
-    "defaultMessage": "Filter data"
-  },
-  {
-    "id": "order.table.showfilter",
-    "description": "button label for filter",
-    "defaultMessage": "Show Filter"
-  },
-  {
-    "id": "ChargingStationsTable.filter.search.bar",
-    "description": "total stations for filter search bar",
-    "defaultMessage": "{total} Stations found"
-  },
-  {
-    "id": "ChargingStationsTable.filter.search.bar.showall",
-    "description": "button label for show all",
-    "defaultMessage": "Show all Stations"
-  },
-  {
     "id": "ChargingStationsTable.stationID.heading",
     "description": "StationID heading",
     "defaultMessage": "STATION ID"

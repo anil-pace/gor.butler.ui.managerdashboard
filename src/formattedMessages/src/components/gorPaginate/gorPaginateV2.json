@@ -1,0 +1,12 @@
+[
+  {
+    "id": "paginate.page.heading",
+    "description": "Heading for paginate page",
+    "defaultMessage": "Page"
+  },
+  {
+    "id": "paginate.page.pageNum",
+    "description": "Heading for paginate pageNum",
+    "defaultMessage": "of {totalPage}"
+  }
+]

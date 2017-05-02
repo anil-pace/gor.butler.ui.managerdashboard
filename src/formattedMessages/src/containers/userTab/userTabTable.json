@@ -5,36 +5,6 @@
     "defaultMessage": "No User Found"
   },
   {
-    "id": "user.table.heading",
-    "description": "Heading for users table",
-    "defaultMessage": "Users"
-  },
-  {
-    "id": "user.button.heading",
-    "description": "button heading for users table",
-    "defaultMessage": "Add new user"
-  },
-  {
-    "id": "user.table.filterLabel",
-    "description": "button label for filter",
-    "defaultMessage": "Filter data"
-  },
-  {
-    "id": "user.table.showfilter",
-    "description": "button label for filter",
-    "defaultMessage": "Show Filter"
-  },
-  {
-    "id": "userList.filter.search.bar",
-    "description": "total users for filter search bar",
-    "defaultMessage": "{totalUsers} Users found"
-  },
-  {
-    "id": "userList.filter.search.bar.showall",
-    "description": "button label for show all",
-    "defaultMessage": "Show all Users"
-  },
-  {
     "id": "user.table.usersCount",
     "description": "Users Column",
     "defaultMessage": "{rowsCount} USERS"
