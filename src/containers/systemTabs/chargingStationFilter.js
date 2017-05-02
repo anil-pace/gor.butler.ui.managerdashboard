@@ -44,6 +44,13 @@ class ChargingStationFilter extends React.Component {
         if (nextProps.filterState && JSON.stringify(this.state) !== JSON.stringify(nextProps.filterState)) {
             this.setState(nextProps.filterState)
         }
+
+        /**
+         * Hide the filter as soon as data in the list get updated.
+         */
+        if (nextProps.chargersData.length > 0 && JSON.stringify(nextProps.chargersData) !== JSON.stringify(this.props.chargersData)) {
+            this.props.showTableFilter(false);
+        }
     }
 
 

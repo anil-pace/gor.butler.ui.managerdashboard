@@ -28,6 +28,8 @@ import {updateSubscriptionPacket, setWsAction} from './../../actions/socketActio
 import {wsOverviewData} from './../../constants/initData.js';
 import {chargingStationListRefreshed} from './../../actions/systemActions'
 import {hashHistory} from 'react-router'
+import ChargingStationFilter from './chargingStationFilter';
+import FilterSummary from '../../components/tableFilter/filterSummary'
 
 //Mesages for internationalization
 const messages = defineMessages({
@@ -153,8 +155,13 @@ class ChargingStations extends React.Component {
         hashHistory.push({pathname: "/system/chargingstation", query: {}})
     }
 
+    _setFilter() {
+        this.props.showTableFilter(!this.props.showFilter);
+    }
+
 
     render() {
+        let filterHeight = screen.height - 190 - 50;
         let updateStatusIntl = "";
         var itemNumber = 4, connectedBots = 0, manualMode = 0, automaticMode = 0,
             chargersState = {"connectedBots": "--", "manualMode": "--", "automaticMode": "--", "csConnected": 0},
@@ -192,6 +199,53 @@ class ChargingStations extends React.Component {
                 <div>
                     <div className="gorTesting">
                         <Spinner isLoading={this.props.csSpinner} setSpinner={this.props.setCsSpinner}/>
+                        {chargersData?<div>
+                            <div className="gor-filter-wrap"
+                                 style={{'width': this.props.showFilter ? '350px' : '0px', height: filterHeight}}>
+                                <ChargingStationFilter chargersData={chargersData} responseFlag={this.props.responseFlag}/>
+                            </div>
+                            <div className="gorToolBar">
+                                <div className="gorToolBarWrap">
+                                    <div className="gorToolBarElements">
+                                        <FormattedMessage id="ChargingStations.table.heading" description="Heading for ChargingStations"
+                                                          defaultMessage="Charging Stations"/>
+
+                                    </div>
+                                </div>
+
+
+                                <div className="filterWrapper">
+                                    <div className="gorToolBarDropDown">
+                                        <div className="gor-button-wrap">
+                                            <div
+                                                className="gor-button-sub-status">{updateStatusIntl} {updateStatusIntl} </div>
+
+                                            <button
+                                                className={this.props.chargingFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
+                                                onClick={this._setFilter.bind(this)}>
+                                                <div className="gor-manage-task"/>
+                                                <FormattedMessage id="order.table.filterLabel" description="button label for filter"
+                                                                  defaultMessage="Filter data"/>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            {/*Filter Summary*/}
+                            <FilterSummary total={chargersData.length||0}  isFilterApplied={this.props.isFilterApplied} responseFlag={this.props.responseFlag}
+                                           filterText={<FormattedMessage id="ChargingStationsTable.filter.search.bar"
+                                                                         description='total stations for filter search bar'
+                                                                         defaultMessage='{total} Stations found'
+                                                                         values={{total: chargersData.length || 0}}/>}
+                                           refreshList={this._clearFilter.bind(this)}
+                                           refreshText={<FormattedMessage
+                                               id="ChargingStationsTable.filter.search.bar.showall"
+                                               description="button label for show all"
+                                               defaultMessage="Show all Stations"/>}/>
+                        </div>:null}
                         <ChargingStationsTable items={chargersData} itemNumber={itemNumber}
                                                chargersState={chargersState} intlMessg={this.props.intlMessages}
                                                sortHeaderState={this.props.csHeaderSort}
