@@ -122,12 +122,12 @@ class PPSFilter extends React.Component{
             if (filterState.tokenSelected["MODE"] && filterState.tokenSelected["MODE"][0] !== "all") {
                 _query.mode = filterState.tokenSelected["MODE"]
             }
-            hashHistory.push({pathname: "/pps", query: _query})
+            hashHistory.push({pathname: "/system/pps", query: _query})
         }
     }
 
     _clearFilter(){
-        hashHistory.push({pathname: "/pps", query: {}})
+        hashHistory.push({pathname: "/system/pps", query: {}})
 
     } 
 

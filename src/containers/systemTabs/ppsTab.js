@@ -135,7 +135,7 @@ class PPS extends React.Component {
      *
      */
     _clearFilter() {
-        hashHistory.push({pathname: "/pps", query: {}})
+        hashHistory.push({pathname: "/system/pps", query: {}})
     }
 
     _processPPSData() {

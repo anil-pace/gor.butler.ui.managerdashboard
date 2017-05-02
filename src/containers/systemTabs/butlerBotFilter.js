@@ -99,11 +99,11 @@ class ButlerBotFilter extends React.Component{
             _query.current_task = filterState.tokenSelected["MODE"]
         }
 
-        hashHistory.push({pathname: "/butlerbots", query: _query})
+        hashHistory.push({pathname: "/system/butlerbots", query: _query})
     }
 
     _clearFilter() {
-        hashHistory.push({pathname: "/butlerbots", query: {}})
+        hashHistory.push({pathname: "/system/butlerbots", query: {}})
         
     }
 
