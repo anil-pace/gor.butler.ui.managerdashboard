@@ -25,7 +25,7 @@ class Routes extends React.Component {
     _requireAuth(nextState, replace) {
         if (sessionStorage.getItem('auth_token')) {
             let subTab = (sessionStorage.getItem('subTab') || null);
-            let nextView = '/' + (sessionStorage.getItem('nextView') || 'md');
+            let nextView = (sessionStorage.getItem('nextUrl') || 'md');
             let selTab = (sessionStorage.getItem('selTab') || TAB_ROUTE_MAP[OVERVIEW]);
             this.props.loginRequest();
             this.props.tabSelected(selTab);
