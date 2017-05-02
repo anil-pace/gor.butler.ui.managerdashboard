@@ -33,6 +33,13 @@ class ButlerBotFilter extends React.Component{
              */
             this.setState(nextProps.filterState)
         }
+
+        /**
+         * Hide the filter as soon as data in the list get updated.
+         */
+        if(nextProps.butlerData.length>0 && JSON.stringify(nextProps.butlerData)!==JSON.stringify(this.props.butlerData)){
+            this.props.showTableFilter(false);
+        }
     }
     _closeFilter() {
         let filterState = !this.props.showFilter;

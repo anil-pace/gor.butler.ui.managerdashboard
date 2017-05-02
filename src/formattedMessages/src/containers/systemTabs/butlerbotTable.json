@@ -5,26 +5,6 @@
     "defaultMessage": "No Butler Bot Found"
   },
   {
-    "id": "butlerBot.table.heading",
-    "description": "Heading for butlerbot",
-    "defaultMessage": "Butler Bots"
-  },
-  {
-    "id": "order.table.filterLabel",
-    "description": "button label for filter",
-    "defaultMessage": "Filter data"
-  },
-  {
-    "id": "botList.filter.search.bar",
-    "description": "total bots for filter search bar",
-    "defaultMessage": "{total} Bots found"
-  },
-  {
-    "id": "botList.filter.search.bar.showall",
-    "description": "button label for show all",
-    "defaultMessage": "Show all Bots"
-  },
-  {
     "id": "ButlerBotTable.TotalBot",
     "description": "Column name for the Bot id in bot table",
     "defaultMessage": "BOTS"

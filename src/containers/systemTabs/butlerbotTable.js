@@ -14,8 +14,7 @@ import {
     sortData
 } from '../../components/commonFunctionsDataTable';
 import {GOR_STATUS, GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
-import ButlerBotFilter from './butlerBotFilter';
-import FilterSummary from '../../components/tableFilter/filterSummary'
+
 
 class ButlerBotTable extends React.Component {
     constructor(props) {
@@ -144,10 +143,7 @@ class ButlerBotTable extends React.Component {
         this.props.sortHeaderState(columnKey);
     }
 
-    _setFilter() {
-        var newState = !this.props.showFilter;
-        this.props.setFilter(newState)
-    }
+
 
     render() {
         var {sortedDataList, colSortDirs, columnWidths} = this.state;
@@ -169,51 +165,10 @@ class ButlerBotTable extends React.Component {
                                                                     defaultMessage="No Butler Bot Found"/></div>
             containerHeight = GOR_TABLE_HEADER_HEIGHT;
         }
-        var filterHeight = screen.height - 190 - 50;
+
         return (
             <div className="gorTableMainContainer">
-                <div className="gor-filter-wrap"
-                     style={{'width': this.props.showFilter ? '350px' : '0px', height: filterHeight}}>
-                    <ButlerBotFilter/>
-                </div>
 
-
-                <div className="gorToolBar">
-                    <div className="gorToolBarWrap">
-                        <div className="gorToolBarElements">
-                            <FormattedMessage id="butlerBot.table.heading" description="Heading for butlerbot"
-                                              defaultMessage="Butler Bots"/>
-
-                        </div>
-                    </div>
-
-
-                    <div className="filterWrapper">
-                        <div className="gorToolBarDropDown">
-                            <div className="gor-button-wrap">
-                                <div
-                                    className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
-                                <button
-                                    className={this.props.botFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
-                                    onClick={this._setFilter.bind(this)}>
-                                    <div className="gor-manage-task"/>
-                                    <FormattedMessage id="order.table.filterLabel" description="button label for filter"
-                                                      defaultMessage="Filter data"/>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {/*Filter Summary*/}
-                <FilterSummary isFilterApplied={this.props.isFilterApplied} responseFlag={this.props.responseFlag}
-                               filterText={<FormattedMessage id="botList.filter.search.bar"
-                                                             description='total bots for filter search bar'
-                                                             defaultMessage='{total} Bots found'
-                                                             values={{total: sortedDataList.getSize() || 0}}/>}
-                               refreshList={this.props.refreshList}
-                               refreshText={<FormattedMessage id="botList.filter.search.bar.showall"
-                                                              description="button label for show all"
-                                                              defaultMessage="Show all Bots"/>}/>
 
                 <Table
                     rowHeight={50}

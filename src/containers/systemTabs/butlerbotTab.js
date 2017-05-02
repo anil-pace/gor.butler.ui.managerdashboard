@@ -23,6 +23,8 @@ import {defineMessages} from 'react-intl';
 import {showTableFilter, filterApplied, toggleBotButton, butlerfilterState} from '../../actions/filterAction';
 import {updateSubscriptionPacket,setWsAction} from './../../actions/socketActions'
 import {wsOverviewData} from './../../constants/initData.js';
+import ButlerBotFilter from './butlerBotFilter';
+import FilterSummary from '../../components/tableFilter/filterSummary'
 //Mesages for internationalization
 const messages = defineMessages({
     butlerPrefix: {
@@ -261,7 +263,14 @@ class ButlerBot extends React.Component {
         hashHistory.push({pathname: "/system/butlerbots", query: {}})
     }
 
+
+    _setFilter() {
+        var newState = !this.props.showFilter;
+        this.props.showTableFilter(newState)
+    }
+
     render() {
+        var filterHeight = screen.height - 190 - 50;
         let updateStatusIntl = "";
         var itemNumber = 6;
         var butlerData, avgVoltage = 0;
@@ -323,6 +332,49 @@ class ButlerBot extends React.Component {
                 <div>
                     <div className="gorTesting">
                         <Spinner isLoading={this.props.butlerSpinner} setSpinner={this.props.setButlerSpinner}/>
+                        {butlerData?<div><div className="gor-filter-wrap"
+                                         style={{'width': this.props.showFilter ? '350px' : '0px', height: filterHeight}}>
+                                <ButlerBotFilter butlerData={butlerData} responseFlag={this.props.responseFlag}/>
+                            </div>
+
+
+                            <div className="gorToolBar">
+                            <div className="gorToolBarWrap">
+                            <div className="gorToolBarElements">
+                            <FormattedMessage id="butlerBot.table.heading" description="Heading for butlerbot"
+                            defaultMessage="Butler Bots"/>
+
+                            </div>
+                            </div>
+
+
+                            <div className="filterWrapper">
+                            <div className="gorToolBarDropDown">
+                            <div className="gor-button-wrap">
+                            <div
+                            className="gor-button-sub-status">{updateStatusIntl} {updateStatusIntl} </div>
+                            <button
+                            className={this.props.botFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
+                            onClick={this._setFilter.bind(this)}>
+                            <div className="gor-manage-task"/>
+                            <FormattedMessage id="order.table.filterLabel" description="button label for filter"
+                            defaultMessage="Filter data"/>
+                            </button>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                        {/*Filter Summary*/}
+                            <FilterSummary total={butlerData.length||0} isFilterApplied={this.props.isFilterApplied} responseFlag={this.props.responseFlag}
+                            filterText={<FormattedMessage id="botList.filter.search.bar"
+                                                          description='total bots for filter search bar'
+                                                          defaultMessage='{total} Bots found'
+                                                          values={{total: butlerData.length || 0}}/>}
+                            refreshList={this._clearFilter.bind(this)}
+                            refreshText={<FormattedMessage id="botList.filter.search.bar.showall"
+                                                           description="button label for show all"
+                                                           defaultMessage="Show all Bots"/>}/></div>:null}
+
                         <ButlerBotTable items={butlerData} itemNumber={itemNumber} parameters={taskDetail}
                                         intlMessg={this.props.intlMessages}
                                         sortHeaderState={this.props.butlerHeaderSort}
