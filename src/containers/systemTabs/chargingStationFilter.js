@@ -30,11 +30,6 @@ class ChargingStationFilter extends React.Component {
         this.props.showTableFilter(false);
     }
 
-    componentWillMount() {
-        if (this.props.chargingstationfilterState) {
-            this.setState(this.props.chargingstationfilterState)
-        }
-    }
 
     componentWillReceiveProps(nextProps) {
         /**

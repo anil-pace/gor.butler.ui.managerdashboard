@@ -28,11 +28,10 @@ import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,
   }
 
       componentWillMount() {
-          if (this.props.location.search) {
-              sessionStorage.setItem("nextUrl", this.props.location.pathname + this.props.location.search)
-          } else {
-              sessionStorage.removeItem("nextUrl")
+          if (this.props.location.pathname !== '/') {
+              sessionStorage.setItem("nextUrl", this.props.location.pathname.concat(this.props.location.search))
           }
+
           this.context.router.push("/login");
           this.props.updateSubscriptionPacket(wsOverviewData);
       }
