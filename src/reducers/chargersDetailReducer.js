@@ -10,27 +10,19 @@ import { FormattedMessage } from 'react-intl';
 
 
 export  function chargersDetail(state={},action) {
-  switch (action.type) {
-    case CHARGERS_DATA:
-         var res;
-         res=action.data;
-         var chargers;
-         if(res.complete_data && res.complete_data.length)
-          {
-              return Object.assign({}, state, {
-                 "chargersDetail" : res.complete_data,
-                "emptyResponse" :false //This flag will update base on response data
-               })
-          }
-          else
-          {
-           return Object.assign({}, state, {
-                 "emptyResponse" :true //This flag will update base on response data
-          })
-         }
+    switch (action.type) {
+        case CHARGERS_DATA:
+            var res;
+            res=action.data;
+            var chargers;
+            if(res.complete_data){
+                return Object.assign({}, state, {
+                    "chargersDetail" : res.complete_data
+                })
+            }
 
-    default:
-      return state
-  }
+        default:
+            return state
+    }
 
 }

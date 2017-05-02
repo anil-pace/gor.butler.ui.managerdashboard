@@ -199,6 +199,7 @@ class UsersTab extends React.Component {
             })
             filterSubsData["pps"] = ['in', pps_list]
         }
+        debugger
         if (Object.keys(query).filter(function(el){return el!=='page'}).length !== 0) {
             this.props.toggleUserFilter(true);
             this.props.filterApplied(true);
