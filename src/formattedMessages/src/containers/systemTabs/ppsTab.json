@@ -8,30 +8,5 @@
     "id": "ppsDetail.performance.prefix.items",
     "description": "prefix for pps id in ppsDetail",
     "defaultMessage": "{performance} items/hr"
-  },
-  {
-    "id": "pps.table.heading",
-    "description": "Heading for PPS",
-    "defaultMessage": "Pick Put Stations"
-  },
-  {
-    "id": "PPStable.selected",
-    "description": "selected pps for ppsSelected",
-    "defaultMessage": "{selected} selected"
-  },
-  {
-    "id": "order.table.filterLabel",
-    "description": "button label for filter",
-    "defaultMessage": "Filter data"
-  },
-  {
-    "id": "ppsList.filter.search.bar",
-    "description": "total pps for filter search bar",
-    "defaultMessage": "{total} Stations found"
-  },
-  {
-    "id": "ppsList.filter.search.bar.showall",
-    "description": "button label for show all",
-    "defaultMessage": "Show all Stations"
   }
 ]

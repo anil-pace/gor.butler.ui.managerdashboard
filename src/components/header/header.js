@@ -112,7 +112,12 @@ class Header extends React.Component{
 		 * Hard coded start time is replaced 
 		 * with the time fetched in API.
          */
-  		headerInfo.start= this.props.shift_start_time
+  		headerInfo.start= this.context.intl.formatTime(this.props.shift_start_time, {
+            hour: 'numeric',
+            minute: 'numeric',
+            timeZone:this.props.timeOffset,
+			timeZoneName: 'long'
+        })
   		return headerInfo
   	}
   _processMenu(headerInfo){
@@ -212,7 +217,7 @@ class Header extends React.Component{
 
 						
 					
-          {this.state.showDropdown?<div id="myDropdown" className="dropdown-content" ref={(node) => { this.dropdownValue = node; }} onClick={this.addModal.bind(this)}>
+          {this.state.showDropdown?<div className="dropdown-content" ref={(node) => { this.dropdownValue = node; }} onClick={this.addModal.bind(this)}>
               <div className="horizontalDiv"> 
               </div>
               <div>
@@ -244,7 +249,8 @@ function mapStateToProps(state,ownProps) {
   system_emergency:state.tabsData.system_emergency||null,
   system_status:state.tabsData.status||null,
   system_data:state.tabsData.system_data||null,
-  activeModalKey: state.appInfo.activeModalKey || 0
+  activeModalKey: state.appInfo.activeModalKey || 0,
+     timeOffset: state.authLogin.timeOffset
  }
 } 
 /**
