@@ -113,11 +113,11 @@ class ChargingStationFilter extends React.Component {
             _query.charger_mode = filterState.tokenSelected["OPERATING MODE"]
         }
 
-        hashHistory.push({pathname: "/chargingstation", query: _query})
+        hashHistory.push({pathname: "/system/chargingstation", query: _query})
     }
 
     _clearFilter() {
-        hashHistory.push({pathname: "/chargingstation", query: {}})
+        hashHistory.push({pathname: "/system/chargingstation", query: {}})
     }
 
 

@@ -150,7 +150,7 @@ class ChargingStations extends React.Component {
      *
      */
     _clearFilter() {
-        hashHistory.push({pathname: "/chargingstation", query: {}})
+        hashHistory.push({pathname: "/system/chargingstation", query: {}})
     }
 
 
