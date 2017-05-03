@@ -114,7 +114,6 @@ class UtilityTab extends React.Component{
         }
         this.props.getGRdata(data)
         this.props.validateInvoiceID(false)
-    	console.log(data)
     }
 
     _requestExpiredItems() {
@@ -130,7 +129,6 @@ class UtilityTab extends React.Component{
 
 
 	render(){
-        console.log("render")
 		var uploadDataTile = this._renderUploadDataTile();
 		var downloadReportTile = this._renderDownReportTile();
 		var grnTile = this._renderGRNtile();
@@ -156,7 +154,6 @@ class UtilityTab extends React.Component{
 }
 
 function mapStateToProps(state, ownProps){
-    console.log(state)
   return {
       auth_token:state.authLogin.auth_token,
       validatedInvoice:state.utilityValidations.invalidInvoice || false,
