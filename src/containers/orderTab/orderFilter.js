@@ -8,6 +8,7 @@ import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldW
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
 import {hashHistory} from 'react-router'
+import {SINGLE} from './../../constants/frontEndConstants'
 class OrderFilter extends React.Component{
 	constructor(props) 
 	{
@@ -66,7 +67,7 @@ class OrderFilter extends React.Component{
                     ];
         var selectedToken =  this.state.tokenSelected;
         var column1 = <FilterTokenWrap field={tokenField1} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC1} selectedToken={selectedToken}/>;
-        var column2 = <FilterTokenWrap field={tokenField2} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC2} selectedToken={selectedToken} selection="Single"/>;
+        var column2 = <FilterTokenWrap field={tokenField2} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC2} selectedToken={selectedToken} selection={SINGLE}/>;
         var columnDetail = {column1token:column1, column2token:column2};
         return columnDetail;
     }
