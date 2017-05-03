@@ -1,6 +1,6 @@
 #!/bin/bash
 
-RELVSNCMD="git describe --dirty --abbrev=7 --tags --always --first-parent"
+RELVSNCMD="git describe --abbrev=7 --tags --always --first-parent"
 
 case "$1" in
     run)
