@@ -5155,6 +5155,7 @@ button:disabled {
 .gor-sku-error {
   color: #EC1C24;
   padding-top: 10px;
+  font-size: 15px;
 }
 
 .gor-sku-valid {
@@ -6011,4 +6012,25 @@ button:disabled {
 .gor-utility-accordian {
   border-bottom: solid 0.5px #cccccc;
   padding-bottom: 10px;
+}
+
+.gor-utility-invoice-wrap {
+  margin-left: 34px;
+  width: 76%;
+  box-shadow: none;
+  margin-top: 0px;
+}
+
+.gor-utility-invoice-h1 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000;
+  padding-bottom: 11px;
+  margin-left: 35px;
+  margin-top: 17px;
+}
+
+.gor-utility-error-invoice {
+  margin-left: 33px;
+  padding-top: 5px;
 }

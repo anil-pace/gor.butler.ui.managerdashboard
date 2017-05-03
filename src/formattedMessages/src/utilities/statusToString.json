@@ -8,5 +8,10 @@
     "id": "audit.resolve.rejected",
     "description": "Text for rejected audit lines",
     "defaultMessage": "Audit task {auditId} with {auditType} - {auditTypeValue} has been rejected"
+  },
+  {
+    "id": "utility.item.recall",
+    "description": "Item recall message",
+    "defaultMessage": "{itemCount} expired items recalled"
   }
 ]

@@ -66,7 +66,7 @@ export const EMPTY_NAME= (<FormattedMessage id="user.empty.name" description='Te
       defaultMessage="Please enter a user name"/>);
 
 export const INVALID_NAME= (<FormattedMessage id="user.invalid.name" description='Text for invalid user name' 
-      defaultMessage='Special characters like "~","@" and "%" are not allowed'/>);
+      defaultMessage='Special characters like "~","@","%" are not allowed'/>);
 
 export const INVALID_PWD_OP= (<FormattedMessage id="user.invalid.password.operator" description='Text for invalid password for operator' 
       defaultMessage="Please enter a password of at least 6 alphanumeric characters"/>);
