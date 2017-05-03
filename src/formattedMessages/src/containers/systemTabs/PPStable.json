@@ -5,21 +5,6 @@
     "defaultMessage": "Change PPS Mode"
   },
   {
-    "id": "PPS.table.pickDrop",
-    "description": "pick dropdown option for PPS",
-    "defaultMessage": "Put"
-  },
-  {
-    "id": "PPS.table.putDrop",
-    "description": "put dropdown option for PPS",
-    "defaultMessage": "Pick"
-  },
-  {
-    "id": "PPS.table.auditDrop",
-    "description": "audit dropdown option for PPS",
-    "defaultMessage": "Audit"
-  },
-  {
     "id": "PPStable.table.noData",
     "description": "No data message for PPStable",
     "defaultMessage": "No PPS Found"

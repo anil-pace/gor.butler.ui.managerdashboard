@@ -3,8 +3,6 @@ import {Table, Column, Cell} from 'fixed-data-table';
 import DropdownTable from '../../components/dropdown/dropdownTable'
 import Dimensions from 'react-dimensions'
 import {FormattedMessage} from 'react-intl';
-import {connect} from 'react-redux';
-import {changePPSmode} from '../../actions/ppsModeChangeAction'
 import {
     SortHeaderCell,
     tableRenderer,
@@ -16,11 +14,10 @@ import {
     DataListWrapper,
     sortData
 } from '../../components/commonFunctionsDataTable';
-import {BASE_URL, PPS_MODE_CHANGE_URL, PROTOCOL, API_URL} from '../../constants/configConstants';
+import {PPS_MODE_CHANGE_URL, API_URL} from '../../constants/configConstants';
 import {defineMessages} from 'react-intl';
 import {GOR_STATUS, GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
-import PPSFilter from './ppsFilter';
-import FilterSummary from '../../components/tableFilter/filterSummary'
+
 
 const messages = defineMessages({
     ppsPlaceholder: {
@@ -31,9 +28,6 @@ const messages = defineMessages({
 
 
 });
-
-import {PPS_MODE_CHANGE, APP_JSON, PUT} from '../../constants/frontEndConstants';
-
 
 class PPStable extends React.Component {
     constructor(props) {
@@ -83,14 +77,14 @@ class PPStable extends React.Component {
 
 
     componentWillReceiveProps(nextProps) {
-        var temp;
+        if (JSON.stringify(this.props.items) === JSON.stringify(nextProps.items)) {
+            return
+        }
         if (nextProps.items === undefined) {
             this._dataList = new tableRenderer(0);
-            temp = new Array(0).fill(false);
         }
         else {
             this._dataList = new tableRenderer(nextProps.items.length);
-            temp = new Array(nextProps.items.length).fill(false);
         }
         this._defaultSortIndexes = [];
         this._dataList.newData = nextProps.items;
@@ -98,7 +92,6 @@ class PPStable extends React.Component {
         for (var index = 0; index < size; index++) {
             this._defaultSortIndexes.push(index);
         }
-        var columnWidth = (nextProps.containerWidth / nextProps.itemNumber)
         if (!this.props.checkedPps && nextProps.items) {
             var initialCheckState = new Array(nextProps.items.length).fill(false);
             this.props.setCheckedPps(initialCheckState)
@@ -119,6 +112,7 @@ class PPStable extends React.Component {
             isChecked: this.props.checkedPps,
             renderDropD: false,
         };
+        this.props.updateSortedDataList(this._dataList)
 
 
         this._onSortChange = this._onSortChange.bind(this);
@@ -141,6 +135,7 @@ class PPStable extends React.Component {
     _onFilterChange(e) {
         var filterField = ["operatingMode", "id", "status", "performance", "operatorAssigned"], newData;
         if (e.target && !e.target.value) {
+            this.props.updateSortedDataList(this._dataList)
             this.setState({
                 sortedDataList: this._dataList,
             });
@@ -148,7 +143,7 @@ class PPStable extends React.Component {
         if (e.target && (e.target.value || e.target.value === "")) {
             var captureValue = e.target.value;
             newData = new DataListWrapper(filterIndex(e, this.state.sortedDataList, filterField), this._dataList)
-
+            this.props.updateSortedDataList(newData)
             this.setState({
                 sortedDataList: newData
             }, function () {
@@ -161,6 +156,7 @@ class PPStable extends React.Component {
 
         else {
             newData = new DataListWrapper(filterIndex(e, this.state.sortedDataList, filterField), this._dataList);
+            this.props.updateSortedDataList(newData)
             this.setState({
                 sortedDataList: newData
             }, function () {
@@ -205,6 +201,7 @@ class PPStable extends React.Component {
         if (this.state.sortedDataList._indexMap) {
             sortIndexes = this.state.sortedDataList._indexMap.slice();
         }
+        this.props.updateSortedDataList(new DataListWrapper(sortData(columnKey, sortDir, sortIndexes, this._dataList), this._dataList))
         this.setState({
             sortedDataList: new DataListWrapper(sortData(columnKey, sortDir, sortIndexes, this._dataList), this._dataList),
             colSortDirs: {
@@ -239,68 +236,12 @@ class PPStable extends React.Component {
 
     }
 
-
-    _setFilter() {
-        let newState = !this.props.showFilter;
-        this.props.setFilter(newState);
-    }
-
-
-    handleModeChange(data) {
-        var checkedPPS = [], j = 0, mode = data.value, sortedIndex;
-        for (var i = this.props.checkedPps.length - 1; i >= 0; i--) {
-            if (this.props.checkedPps[i] === true) {
-                if (this.state.sortedDataList.newData !== undefined) {
-                    checkedPPS[j] = this.state.sortedDataList.newData[i].ppsId;
-                }
-                else {
-                    sortedIndex = this.state.sortedDataList._indexMap[i];
-                    checkedPPS[j] = this.state.sortedDataList._data.newData[sortedIndex].ppsId;
-                }
-                let formdata = {
-                    "requested_pps_mode": mode
-                };
-                var url = API_URL + PPS_MODE_CHANGE_URL + checkedPPS[j] + "/pps_mode";
-                let ppsModeChange = {
-                    'url': url,
-                    'formdata': formdata,
-                    'method': PUT,
-                    'cause': PPS_MODE_CHANGE,
-                    'token': sessionStorage.getItem('auth_token'),
-                    'contentType': APP_JSON
-                }
-
-                this.props.modeChange(ppsModeChange);
-                j++;
-            }
-        }
-        var resetCheck = new Array(this.props.checkedPps.length).fill(false);
-        this.props.setCheckAll(false);
-        this.props.renderDdrop(false);
-        this.props.setCheckedPps(resetCheck);
-
-    }
-
-
     render() {
         let updateStatusIntl = "";
-        let filterHeight = screen.height - 190 - 50;
         let {sortedDataList, colSortDirs, columnWidths, renderDropD, ppsSelected, headerChecked} = this.state,
             checkedPPS = [];
-        let pickDrop = <FormattedMessage id="PPS.table.pickDrop" description="pick dropdown option for PPS"
-                                         defaultMessage="Put"/>
-        let putDrop = <FormattedMessage id="PPS.table.putDrop" description="put dropdown option for PPS"
-                                        defaultMessage="Pick"/>
-        let auditDrop = <FormattedMessage id="PPS.table.auditDrop" description="audit dropdown option for PPS"
-                                          defaultMessage="Audit"/>
-
-        const modes = [
-            {value: 'put', label: pickDrop},
-            {value: 'pick', label: putDrop},
-            {value: 'audit', label: auditDrop}
-        ];
         let checkState = this.handleChange.bind(this);
-        let drop, selected = 0, ppsTotal = sortedDataList.getSize();
+        let ppsTotal = sortedDataList.getSize();
         let pick = this.props.operationMode.pick;
         let put = this.props.operationMode.put;
         let audit = this.props.operationMode.audit;
@@ -308,22 +249,6 @@ class PPStable extends React.Component {
         let operatorNum = this.props.operatorNum, j = 1;
         let ppsOnState = this.props.ppsOnState;
         let avgThroughput = this.props.avgThroughput;
-        if (this.props.bDropRender === true) {
-            drop = <DropdownTable styleClass={'gorDataTableDrop'}
-                                  placeholder={this.props.intlMessg["pps.dropdown.placeholder"]} items={modes}
-                                  changeMode={this.handleModeChange.bind(this)}/>;
-        }
-
-        else {
-            drop = <div/>;
-        }
-        if (this.props.checkedPps) {
-            for (var i = this.props.checkedPps.length - 1; i >= 0; i--) {
-                if (this.props.checkedPps[i] === true) {
-                    selected = selected + 1;
-                }
-            }
-        }
         let containerHeight = this.props.containerHeight;
         let noData = <div/>;
         if (ppsTotal === 0 || ppsTotal === undefined || ppsTotal === null) {
@@ -340,56 +265,6 @@ class PPStable extends React.Component {
 
         return (
             <div className="gorTableMainContainer">
-
-                <div className="gor-filter-wrap"
-                     style={{'width': this.props.showFilter ? '350px' : '0px', height: filterHeight}}>
-                    <PPSFilter refreshOption={this.props.refreshOption} responseFlag={this.props.responseFlag}/>
-                </div>
-
-                <div className="gorToolBar">
-                    <div className="gorToolBarWrap">
-                        <div className="gorToolBarElements">
-                            <FormattedMessage id="pps.table.heading" description="Heading for PPS"
-                                              defaultMessage="Pick Put Stations"/>
-                            <div className="gorHeaderSubText">
-                                <FormattedMessage id="PPStable.selected" description='selected pps for ppsSelected'
-                                                  defaultMessage='{selected} selected'
-                                                  values={{selected: selected ? selected : '0'}}/>
-                            </div>
-                        </div>
-                        <div className="gorToolBarDropDown">
-                            {drop}
-                        </div>
-                    </div>
-
-                    <div className="filterWrapper">
-                        <div className="gorToolBarDropDown">
-                            <div className="gor-button-wrap">
-                                <div
-                                    className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
-                                <button
-                                    className={this.props.ppsFilterState ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
-                                    onClick={this._setFilter.bind(this)}>
-                                    <div className="gor-manage-task"/>
-                                    <FormattedMessage id="order.table.filterLabel" description="button label for filter"
-                                                      defaultMessage="Filter data"/>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/*Filter Summary*/}
-                <FilterSummary isFilterApplied={this.props.isFilterApplied} responseFlag={this.props.responseFlag}
-                               filterText={<FormattedMessage id="ppsList.filter.search.bar"
-                                                             description='total pps for filter search bar'
-                                                             defaultMessage='{total} Stations found'
-                                                             values={{total: sortedDataList.getSize() || 0}}/>}
-                               refreshList={this.props.refreshList}
-                               refreshText={<FormattedMessage id="ppsList.filter.search.bar.showall"
-                                                              description="button label for show all"
-                                                              defaultMessage="Show all Stations"/>}/>
-
                 <Table
                     rowHeight={50}
                     rowsCount={sortedDataList.getSize()}
