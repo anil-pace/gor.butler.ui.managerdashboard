@@ -44,6 +44,13 @@ class PPSFilter extends React.Component{
         if(nextProps.filterState && JSON.stringify(this.state)!==JSON.stringify(nextProps.filterState)){
             this.setState(nextProps.filterState)
         }
+
+        /**
+         * Hide the filter as soon as data in the list get updated.
+         */
+        if(nextProps.data.length>0 && JSON.stringify(nextProps.data)!==JSON.stringify(this.props.data)){
+            this.props.showTableFilter(false);
+        }
     }
 
 

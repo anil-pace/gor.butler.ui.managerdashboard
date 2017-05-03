@@ -37,6 +37,11 @@ import {
 } from '../../actions/filterAction';
 import {updateSubscriptionPacket,setWsAction} from './../../actions/socketActions'
 import {wsOverviewData} from './../../constants/initData.js';
+import PPSFilter from './ppsFilter';
+import FilterSummary from '../../components/tableFilter/filterSummary'
+import DropdownTable from '../../components/dropdown/dropdownTable'
+import {PPS_MODE_CHANGE_URL, API_URL} from '../../constants/configConstants';
+import {PPS_MODE_CHANGE, APP_JSON, PUT} from '../../constants/frontEndConstants';
 
 //Mesages for internationalization
 const messages = defineMessages({
@@ -57,7 +62,7 @@ const messages = defineMessages({
 class PPS extends React.Component {
     constructor(props) {
         super(props);
-        this.state={query:null}
+        this.state={query:null,sortedDataList:null}
     }
 
     componentWillMount() {
@@ -119,14 +124,15 @@ class PPS extends React.Component {
         this.props.updateSubscriptionPacket(updatedWsSubscription);
         this.props.ppsfilterState({
             tokenSelected: {
-                "STATUS":  query.status ? query.status.constructor === Array ? query.status : [query.status] : ["all"],
-                "MODE": query.mode ? query.mode.constructor === Array ? query.mode : [query.mode] : ["all"],
-            searchQuery: {
-                "PPS ID":query.pps_id||'',
-                "OPERATOR ASSIGNED":query.operator||""
+                "STATUS": query.status ? query.status.constructor === Array ? query.status : [query.status] : ["all"],
+                "MODE": query.mode ? query.mode.constructor === Array ? query.mode : [query.mode] : ["all"]
             },
-            rangeSelected: {"minValue": [query.minRange||"-1"], "maxValue": [query.maxRange||"500"]}
-        }})
+            searchQuery: {
+                "PPS ID": query.pps_id || '',
+                "OPERATOR ASSIGNED": query.operator || ""
+            },
+            rangeSelected: {"minValue": [query.minRange || "-1"], "maxValue": [query.maxRange || "500"]}
+        })
 
     }
 
@@ -204,7 +210,53 @@ class PPS extends React.Component {
 
     }
 
+    _setFilter() {
+        this.props.showTableFilter(!this.props.showFilter);
+    }
+
+
+    updateSortedDataList(updatedList){
+        this.setState({sortedDataList:updatedList})
+    }
+
+    handleModeChange(data) {
+        var checkedPPS = [], j = 0, mode = data.value, sortedIndex;
+        for (var i = this.props.checkedPps.length - 1; i >= 0; i--) {
+            if (this.props.checkedPps[i] === true) {
+                if (this.state.sortedDataList.newData !== undefined) {
+                    checkedPPS[j] = this.state.sortedDataList.newData[i].ppsId;
+                }
+                else {
+                    sortedIndex = this.state.sortedDataList._indexMap[i];
+                    checkedPPS[j] = this.state.sortedDataList._data.newData[sortedIndex].ppsId;
+                }
+                let formdata = {
+                    "requested_pps_mode": mode
+                };
+                var url = API_URL + PPS_MODE_CHANGE_URL + checkedPPS[j] + "/pps_mode";
+                let ppsModeChange = {
+                    'url': url,
+                    'formdata': formdata,
+                    'method': PUT,
+                    'cause': PPS_MODE_CHANGE,
+                    'token': sessionStorage.getItem('auth_token'),
+                    'contentType': APP_JSON
+                }
+
+                this.props.changePPSmode(ppsModeChange);
+                j++;
+            }
+        }
+        var resetCheck = new Array(this.props.checkedPps.length).fill(false);
+        this.props.setCheckAll(false);
+        this.props.setDropDisplay(false);
+        this.props.setCheckedPps(resetCheck);
+
+    }
+
+
     render() {
+        let filterHeight = screen.height - 190 - 50;
         let updateStatusIntl = "";
         let operationMode = {"pick": 0, "put": 0, "audit": 0, "notSet": 0};
         let data, operatorNum = 0, itemNumber = 5, ppsOn = 0, avgThroughput = 0;
@@ -238,12 +290,94 @@ class PPS extends React.Component {
 
         }
 
+        let drop, selected = 0
+        let pickDrop = <FormattedMessage id="PPS.table.pickDrop" description="pick dropdown option for PPS"
+                                         defaultMessage="Put"/>
+        let putDrop = <FormattedMessage id="PPS.table.putDrop" description="put dropdown option for PPS"
+                                        defaultMessage="Pick"/>
+        let auditDrop = <FormattedMessage id="PPS.table.auditDrop" description="audit dropdown option for PPS"
+                                          defaultMessage="Audit"/>
+        const modes = [
+            {value: 'put', label: pickDrop},
+            {value: 'pick', label: putDrop},
+            {value: 'audit', label: auditDrop}
+        ];
+        if (this.props.bDropRender === true) {
+            drop = <DropdownTable styleClass={'gorDataTableDrop'}
+                                  placeholder={this.props.intlMessages["pps.dropdown.placeholder"]} items={modes}
+                                  changeMode={this.handleModeChange.bind(this)}/>;
+        }
+
+        else {
+            drop = <div/>;
+        }
+        if (this.props.checkedPps) {
+            for (let i = this.props.checkedPps.length - 1; i >= 0; i--) {
+                if (this.props.checkedPps[i] === true) {
+                    selected = selected + 1;
+                }
+            }
+        }
+
         return (
             <div>
                 <div>
                     <div className="gorTesting">
                         <Spinner isLoading={this.props.ppsSpinner} setSpinner={this.props.setPpsSpinner}/>
-                        <PPStable items={data} itemNumber={itemNumber} operatorNum={operatorNum}
+                        {data?<div>
+                            <div className="gor-filter-wrap"
+                                 style={{'width': this.props.showFilter ? '350px' : '0px', height: filterHeight}}>
+                                <PPSFilter data={data} responseFlag={this.props.responseFlag}/>
+                            </div>
+
+                            <div className="gorToolBar">
+                                <div className="gorToolBarWrap">
+                                    <div className="gorToolBarElements">
+                                        <FormattedMessage id="pps.table.heading" description="Heading for PPS"
+                                                          defaultMessage="Pick Put Stations"/>
+                                        <div className="gorHeaderSubText">
+                                            <FormattedMessage id="PPStable.selected" description='selected pps for ppsSelected'
+                                                              defaultMessage='{selected} selected'
+                                                              values={{selected: selected ? selected : '0'}}/>
+                                        </div>
+                                    </div>
+                                    <div className="gorToolBarDropDown">
+                                        {drop}
+                                    </div>
+                                </div>
+
+                                <div className="filterWrapper">
+                                    <div className="gorToolBarDropDown">
+                                        <div className="gor-button-wrap">
+                                            <div
+                                                className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
+                                            <button
+                                                className={this.props.ppsFilterState ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
+                                                onClick={this._setFilter.bind(this)}>
+                                                <div className="gor-manage-task"/>
+                                                <FormattedMessage id="order.table.filterLabel" description="button label for filter"
+                                                                  defaultMessage="Filter data"/>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/*Filter Summary*/}
+                            <FilterSummary total={data.length||0} isFilterApplied={this.props.isFilterApplied} responseFlag={this.props.responseFlag}
+                                           filterText={<FormattedMessage id="ppsList.filter.search.bar"
+                                                                         description='total pps for filter search bar'
+                                                                         defaultMessage='{total} Stations found'
+                                                                         values={{total: data.length || 0}}/>}
+                                           refreshList={this._clearFilter.bind(this)}
+                                           refreshText={<FormattedMessage id="ppsList.filter.search.bar.showall"
+                                                                          description="button label for show all"
+                                                                          defaultMessage="Show all Stations"/>}/>
+
+                        </div>:null}
+
+
+                        <PPStable updateSortedDataList={this.updateSortedDataList.bind(this)} items={data} itemNumber={itemNumber} operatorNum={operatorNum}
                                   operationMode={operationMode}
                                   modeChange={this.props.changePPSmode} intlMessg={this.props.intlMessages}
                                   sortHeaderState={this.props.ppsHeaderSort} currentSortState={this.props.ppsSortHeader}
