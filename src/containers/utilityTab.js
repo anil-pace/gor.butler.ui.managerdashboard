@@ -4,10 +4,12 @@ import UploadDownBar from '../components/utilityComponents/uploadDownBar'
 import DropdownTable from '../components/dropdown/dropdownTable'
 import UtilityDropDown from '../components/utilityComponents/utilityDropDownWrap'
 import MasterUploadTile from '../components/utilityComponents/masterUploadTile'
-import {INVENTORY_REPORT_URL, GET_ITEM_RECALL} from '../constants/configConstants';
+import {INVENTORY_REPORT_URL, GET_ITEM_RECALL, GR_REPORT_URL} from '../constants/configConstants';
 import { connect } from 'react-redux';
-import {getItemRecall} from "../actions/utilityActions";
-import {GET, ITEM_RECALLED} from '../constants/frontEndConstants';
+import {getItemRecall,getGRdata,validateInvoiceID} from "../actions/utilityActions";
+import {setInventoryReportSpinner} from '../actions/spinnerAction';
+import {GET, ITEM_RECALLED, GR_REPORT_RESPONSE} from '../constants/frontEndConstants';
+import FieldError from '../components/fielderror/fielderror';
 
 class UtilityTab extends React.Component{
 	constructor(props) 
@@ -40,19 +42,48 @@ class UtilityTab extends React.Component{
     	this.setState({grnState:newState});
     }
 
+    _captureQuery(e) {
+        if(e.target.value) {
+            var newState = this.state.grnState;
+            newState.invoiceId = e.target.value;
+            this.setState({grnState:newState});
+        }
+    }
+
     _renderDownReportTile() {
     	var downloadReportTile = [];
     	const modes = [{ value: 'inventory', label: "Inventory" }];
     	const fileType = [{ value: 'csv', label: "Comma separated values (csv)" }, { value: 'xls', label: "ExceL Spreadsheet (xls)" }];
-    	downloadReportTile.push(<UtilityDropDown items={modes} dropdownLabel="Category" placeHolderText="Select Category" changeMode={this._changeReportCategory.bind(this)}/>);
-    	downloadReportTile.push(<UtilityDropDown items={fileType} dropdownLabel="File format" placeHolderText="Select format" changeMode={this._changeReportFileType.bind(this)}/>)
+        var currentFileState = this.state.reportState.fileType?(this._getCurrentDropDownState(fileType,this.state.reportState.fileType)):null;
+        var currentCategoryState = this.state.reportState.category?(this._getCurrentDropDownState(modes,this.state.reportState.category)):null;
+    	downloadReportTile.push(<UtilityDropDown items={modes} dropdownLabel="Category" placeHolderText="Select Category" changeMode={this._changeReportCategory.bind(this)} currentState={currentCategoryState}/>);
+    	downloadReportTile.push(<UtilityDropDown items={fileType} dropdownLabel="File format" placeHolderText="Select format" changeMode={this._changeReportFileType.bind(this)} currentState={currentFileState}/>)
     	return downloadReportTile;
     } 
-
+    _getCurrentDropDownState(fileType, currentValue) {
+        for (var i = fileType.length - 1; i >= 0; i--) {
+                if(fileType[i].value === currentValue) {
+                    return  fileType[i].label; 
+                }
+        }
+        return null;
+    }
     _renderGRNtile() {
     	var grnTile = [];
     	const fileType = [{ value: 'csv', label: "Comma separated values (csv)" }, { value: 'xls', label: "ExceL Spreadsheet (xls)" }];
-    	grnTile.push(<UtilityDropDown items={fileType} dropdownLabel="File format" placeHolderText="Select format" changeMode={this._changeGrnFileType.bind(this)}/>)
+        var currentState = this.state.grnState.fileType?(this._getCurrentDropDownState(fileType,this.state.grnState.fileType)):null;
+        var invoiceInput = <div>
+                                <div className="gor-utility-invoice-h1"> STN number: </div>
+                                <div className="gor-audit-input-wrap gor-utility-invoice-wrap">
+                                    <input className="gor-audit-input gor-input-ok" placeholder="Enter STN Number"  ref={node => { this.invoiceId = node }} onChange={this._captureQuery.bind(this)}/>
+                                    {this.props.validatedInvoice?<div className="gor-login-error"/>:""}
+                                </div>
+                                {this.props.validatedInvoice?<div className="gor-sku-error gor-utility-error-invoice">Please enter correct STN number</div>:''}
+                            </div>
+        grnTile.push(invoiceInput)
+    	grnTile.push(<UtilityDropDown items={fileType} dropdownLabel="File format" 
+                                      placeHolderText="Select format" changeMode={this._changeGrnFileType.bind(this)}
+                                      currentState={currentState}/>)
     	return grnTile;
     }
 
@@ -63,14 +94,27 @@ class UtilityTab extends React.Component{
     }
 
     _downloadReport() {
-        if(this.state.reportState.fileType && this.state.reportState.category) {
-           window.open(INVENTORY_REPORT_URL)
+        let data={
+         'url':  INVENTORY_REPORT_URL,
+         'method':GET,
+         'token': this.props.auth_token,
         }
+        this.props.setInventoryReportSpinner(true);
+        this.props.getGRdata(data);
+
     }	
 
     _downloadGRN() {
-    	// integration with backend pending
-    	console.log("download grn")
+        var url = GR_REPORT_URL + "/" + this.state.grnState.invoiceId;
+    	let data={
+         'url':  url,
+         'method':GET,
+         'token': this.props.auth_token,
+         'cause':GR_REPORT_RESPONSE,
+        }
+        this.props.getGRdata(data)
+        this.props.validateInvoiceID(false)
+    	console.log(data)
     }
 
     _requestExpiredItems() {
@@ -86,11 +130,13 @@ class UtilityTab extends React.Component{
 
 
 	render(){
+        console.log("render")
 		var uploadDataTile = this._renderUploadDataTile();
 		var downloadReportTile = this._renderDownReportTile();
 		var grnTile = this._renderGRNtile();
         var masterUpload = this._renderMasterUpload();
         var activeReportDownButton = (this.state.reportState.fileType && this.state.reportState.category)?true:false;
+        var activeGRNDownButton = (this.state.grnState.fileType && this.state.grnState.invoiceId)?true:false;
 		return (
 			<div >
 				<div>
@@ -98,9 +144,11 @@ class UtilityTab extends React.Component{
                                  tileBody={masterUpload} showHeaderIcon={true}/>
 					<UtilityTile tileHead="Run scripts" showFooter={false} tileBody={uploadDataTile}/>
 					<UtilityTile tileHead="Download reports" showFooter={true} tileBody={downloadReportTile} 
-                                 footerAction={this._downloadReport.bind(this)} enableButton={activeReportDownButton}/>
+                                 footerAction={this._downloadReport.bind(this)} enableButton={activeReportDownButton}
+                                 responseState={this.props.inventorySpinner}/>
 					<UtilityTile tileHead="Download Goods Recieved Note" showFooter={true} 
-                                 tileBody={grnTile} footerAction={this._downloadGRN.bind(this)}/>
+                                 tileBody={grnTile} footerAction={this._downloadGRN.bind(this)} 
+                                 enableButton={activeGRNDownButton}/>
 				</div>
 			</div>
 		);
@@ -108,14 +156,20 @@ class UtilityTab extends React.Component{
 }
 
 function mapStateToProps(state, ownProps){
+    console.log(state)
   return {
-      auth_token:state.authLogin.auth_token
+      auth_token:state.authLogin.auth_token,
+      validatedInvoice:state.utilityValidations.invalidInvoice || false,
+      inventorySpinner: state.spinner.inventoryReportSpinner || false
   };
 }
 
 var mapDispatchToProps = function(dispatch){
   return {
-    getItemRecall: function(data){ dispatch(getItemRecall(data)); }
+    getItemRecall: function(data){ dispatch(getItemRecall(data)); },
+    getGRdata: function(data){ dispatch(getGRdata(data)); },
+    validateInvoiceID: function(data){ dispatch(validateInvoiceID(data)); },
+    setInventoryReportSpinner: function(data){ dispatch(setInventoryReportSpinner(data)); }
   }
 };
 

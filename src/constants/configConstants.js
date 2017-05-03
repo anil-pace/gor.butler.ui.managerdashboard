@@ -34,4 +34,5 @@ export const VALIDATION_LIST = API_URL + "/system/remove_emergency/validation_li
 export const VALIDATE_SAFETY = API_URL + "/system/validate_and_remove_emergency";
 export const GET_SHIFT_START_TIME_URL = API_URL + "/system/shift_start_time";
 export const INVENTORY_REPORT_URL = API_URL + "/inventories/get_inventory_report_v2";
-export const GET_ITEM_RECALL = API_URL + "/orders/wrapper/generate_orders"
+export const GET_ITEM_RECALL = API_URL + "/orders/wrapper/generate_orders";
+export const GR_REPORT_URL = API_URL + "/components/generate_gr_report"
