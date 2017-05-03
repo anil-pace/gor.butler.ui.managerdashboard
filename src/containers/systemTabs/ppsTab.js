@@ -124,14 +124,15 @@ class PPS extends React.Component {
         this.props.updateSubscriptionPacket(updatedWsSubscription);
         this.props.ppsfilterState({
             tokenSelected: {
-                "STATUS":  query.status ? query.status.constructor === Array ? query.status : [query.status] : ["all"],
-                "MODE": query.mode ? query.mode.constructor === Array ? query.mode : [query.mode] : ["all"],
-            searchQuery: {
-                "PPS ID":query.pps_id||'',
-                "OPERATOR ASSIGNED":query.operator||""
+                "STATUS": query.status ? query.status.constructor === Array ? query.status : [query.status] : ["all"],
+                "MODE": query.mode ? query.mode.constructor === Array ? query.mode : [query.mode] : ["all"]
             },
-            rangeSelected: {"minValue": [query.minRange||"-1"], "maxValue": [query.maxRange||"500"]}
-        }})
+            searchQuery: {
+                "PPS ID": query.pps_id || '',
+                "OPERATOR ASSIGNED": query.operator || ""
+            },
+            rangeSelected: {"minValue": [query.minRange || "-1"], "maxValue": [query.maxRange || "500"]}
+        })
 
     }
 
@@ -219,10 +220,6 @@ class PPS extends React.Component {
     }
 
     handleModeChange(data) {
-        /**
-         * TODO: This method need to be changed
-         **/
-
         var checkedPPS = [], j = 0, mode = data.value, sortedIndex;
         for (var i = this.props.checkedPps.length - 1; i >= 0; i--) {
             if (this.props.checkedPps[i] === true) {
