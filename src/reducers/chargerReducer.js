@@ -1,4 +1,4 @@
-import {CHARGERS_DATA} from '../constants/frontEndConstants';
+import {CHARGERS_DATA,CHARGING_STATION_LIST_REFRESHED} from '../constants/frontEndConstants';
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -19,6 +19,11 @@ export  function chargerInfo(state={},action){
             return Object.assign({}, state, {
             "chargersData" : chargersKey
          })
+
+        case CHARGING_STATION_LIST_REFRESHED:
+            return Object.assign({}, state, {
+                "chargingStationListRefreshed": new Date()
+            })
 
 	  default:
 	    return state

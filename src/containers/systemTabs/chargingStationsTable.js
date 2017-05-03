@@ -16,8 +16,7 @@ import {
     sortData
 } from '../../components/commonFunctionsDataTable';
 import {GOR_STATUS, GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
-import ChargingStationFilter from './chargingStationFilter';
-import FilterSummary from '../../components/tableFilter/filterSummary'
+
 
 
 var tempGlobal = 0;
@@ -50,12 +49,6 @@ class ChargingStationsTable extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        //Based on emptyresponse, appliedbutton and reponse has came or not we hide and show the filter
-        if(!nextProps.emptyResponse && this.props.filterApplyFlag && !nextProps.responseFlag)
-        {
-            this.props.setFilter(false);
-            this.props.setFilterApplyFlag(false);
-        }
         var items = nextProps.items || [];
         var temp = new Array(items ? items.length : 0).fill(false);
         this._dataList = new tableRenderer(items ? items.length : 0);
@@ -80,6 +73,13 @@ class ChargingStationsTable extends React.Component {
         this._onFilterChange = this._onFilterChange.bind(this);
         this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
         this._onFilterChange(nextProps.getCsFilter);
+    }
+
+    shouldComponentUpdate(nextProps) {
+        if (this.props.items && nextProps.items.length === 0) {
+            return false;
+        }
+        return true;
     }
 
     _onColumnResizeEndCallback(newColumnWidth, columnKey) {
@@ -124,12 +124,7 @@ class ChargingStationsTable extends React.Component {
         }
     }
 
-    _setFilter() {
-        if(this.props.items.length){
-        let newState = !this.props.csToggleFilter;
-        this.props.setFilter(newState);
-    }
-    }
+
 
 
     _onSortChange(columnKey, sortDir) {
@@ -151,65 +146,25 @@ class ChargingStationsTable extends React.Component {
         this.props.sortHeaderState(columnKey);
     }
 
-  render() {
-     let updateStatusIntl="";
-    let filterHeight = screen.height-190-50;
-    var {sortedDataList, colSortDirs,columnWidths} = this.state;
-    var rowsCount = sortedDataList.getSize();
-    let manual = this.props.chargersState.manualMode;
-    let auto = this.props.chargersState.automaticMode;
-    let totalBots = this.props.chargersState.connectedBots;
-    let csConnected = this.props.chargersState.csConnected;
-     var containerHeight = this.props.containerHeight;
-   var noData = <div/>;
-    if(rowsCount === 0 || rowsCount === undefined || rowsCount === null) {
-     noData =  <div className="gor-no-data"> <FormattedMessage id="ChargingStations.table.noData" description="No data message for ChargingStations table" 
-       defaultMessage ="No Charging Stations Found"/>  </div>
-     containerHeight = GOR_TABLE_HEADER_HEIGHT;
-    }
+    render() {
+        let updateStatusIntl = "";
 
-    var tableRenderer = <div className="gorTableMainContainer">
-    <div className="gor-filter-wrap" style={{'width':this.props.csToggleFilter?'350px':'0px', height:filterHeight}}> 
-         <ChargingStationFilter refreshOption={this.props.refreshOption} responseFlag={this.props.responseFlag}/>  
-       </div>
-        <div className="gorToolBar">
-          <div className="gorToolBarWrap">
-            <div className="gorToolBarElements">
-               <FormattedMessage id="ChargingStations.table.heading" description="Heading for ChargingStations" 
-              defaultMessage ="Charging Stations"/>
-              
-            </div>
-          </div>
+        var {sortedDataList, colSortDirs, columnWidths} = this.state;
+        var rowsCount = sortedDataList.getSize();
+        let manual = this.props.chargersState.manualMode;
+        let auto = this.props.chargersState.automaticMode;
+        let totalBots = this.props.chargersState.connectedBots;
+        let csConnected = this.props.chargersState.csConnected;
+        var containerHeight = this.props.containerHeight;
+        var noData = <div/>;
+        if (rowsCount === 0 || rowsCount === undefined || rowsCount === null) {
+            noData = <div className="gor-no-data"><FormattedMessage id="ChargingStations.table.noData"
+                                                                    description="No data message for ChargingStations table"
+                                                                    defaultMessage="No Charging Stations Found"/></div>
+            containerHeight = GOR_TABLE_HEADER_HEIGHT;
+        }
 
-
-  <div className="filterWrapper"> 
-        <div className="gorToolBarDropDown">
-        <div className="gor-button-wrap">
-        <div className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
-
-<button className={this.props.chargingFilterStatus?"gor-filterBtn-applied":"gor-filterBtn-btn"} disabled={this.props.items && this.props.items.length?false:true} style={this.props.items && this.props.items.length?{cursor:'pointer'}:{cursor:'default'}} onClick={this._setFilter.bind(this)} >
-       {!this.props.chargingFilterStatus?<div><div className="gor-manage-task"></div><FormattedMessage id="order.table.filterLabel" description="button label for filter" defaultMessage ="Filter data"/></div>:
-       <div><div className="gor-manage-task"></div><FormattedMessage id="order.table.showfilter" description="button label for filter" defaultMessage ="Show Filter"/></div>}
-         </button>
-
-       </div>
-        </div>     
-        </div>
-
-
-            </div>
-
-        {/*Filter Summary*/}
-        <FilterSummary isFilterApplied={this.props.isFilterApplied} responseFlag={this.props.responseFlag} filterText={<FormattedMessage id="ChargingStationsTable.filter.search.bar"
-                                                                                                                                         description='total stations for filter search bar'
-                                                                                                                                         defaultMessage='{total} Stations found'
-                                                                                                                                         values={{total: sortedDataList.getSize() || 0}}/>}
-                       refreshList={this.props.refreshList}
-                       refreshText={<FormattedMessage
-                           id="ChargingStationsTable.filter.search.bar.showall"
-                           description="button label for show all"
-                           defaultMessage="Show all Stations"/>}/>
-
+        var tableRenderer = <div className="gorTableMainContainer">
             <Table
                 rowHeight={50}
                 rowsCount={rowsCount}
@@ -336,16 +291,13 @@ ChargingStationsTable.PropTypes = {
     currentHeaderOrder: React.PropTypes.object,
     sortHeaderState: React.PropTypes.func,
     lastUpdatedText: React.PropTypes.string,
-    csToggleFilter: React.PropTypes.bool,
+    showFilter: React.PropTypes.bool,
     lastUpdated: React.PropTypes.string,
     setButlerFilter: React.PropTypes.func,
     setFilter: React.PropTypes.func,
     containerHeight: React.PropTypes.number,
     currentSortState: React.PropTypes.string,
-    botFilterStatus: React.PropTypes.bool,
-    setFilterApplyFlag:React.PropTypes.func,
-    emptyResponse:React.PropTypes.bool
-
+    botFilterStatus: React.PropTypes.bool
 };
 
 

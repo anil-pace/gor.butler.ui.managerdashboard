@@ -40,11 +40,6 @@
     "defaultMessage": "Filter data"
   },
   {
-    "id": "order.table.showfilter",
-    "description": "button label for filter",
-    "defaultMessage": "Show Filter"
-  },
-  {
     "id": "ppsList.filter.search.bar",
     "description": "total pps for filter search bar",
     "defaultMessage": "{total} Stations found"

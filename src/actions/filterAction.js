@@ -77,7 +77,7 @@ export function setDefaultRange(data){
 
 
 //This action is use to keep the updated flag value so that we can get to know the filter is applied for butletBot tab.
-export function toggleBotButtonApplied(data){
+export function toggleBotButton(data){
 	return {
 		type: TOGGLE_BUTTON_BOT,
 		data
@@ -85,21 +85,21 @@ export function toggleBotButtonApplied(data){
 }
 
 //This action is use to keep the updated flag value so that we can get to know the filter is applied for PPS tab
-export function togglePPSFilterApplied(data){
+export function togglePPSFilter(data){
 	return {
 		type: PPS_FILTER_VALUE,
 		data
   	}
 }
 //This action is use to keep the updated flag value so that we can get to know the filter is applied for Audit tab
-export function toggleAuditFilterApplied(data){
+export function toggleAuditFilter(data){
 	return {
 		type: AUDIT_FILTER_VALUE,
 		data
   	}
 }
 //This action is use to keep the updated flag value so that we can get to know the filter is applied for Order tab
-export function toggleOrderFilterApplied(data){
+export function toggleOrderFilter(data){
 	return {
 		type: ORDER_FILTER_VALUE,
 		data
@@ -107,7 +107,7 @@ export function toggleOrderFilterApplied(data){
 }
 
 //This action is use to keep the updated flag value so that we can get to know the filter is applied for Wave tab
-export function toggleWaveFilterApplied(data){
+export function toggleWaveFilter(data){
 	return {
 		type: WAVE_FILTER_VALUE,
 		data
@@ -115,7 +115,7 @@ export function toggleWaveFilterApplied(data){
 }
 
 //This action is use to keep the updated flag value so that we can get to know the filter is applied for User tab
-export function toggleUserFilterApplied(data){
+export function toggleUserFilter(data){
 	return {
 		type: USER_FILTER_VALUE,
 		data
@@ -123,7 +123,7 @@ export function toggleUserFilterApplied(data){
 }
 
 //This action is use to keep the updated flag value so that we can get to know the filter is applied for Charging tab
-export function toggleChargingFilterApplied(data){
+export function toggleChargingFilter(data){
 	return {
 		type: CHARGING_FILTER_VALUE,
 		data

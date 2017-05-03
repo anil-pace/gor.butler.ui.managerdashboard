@@ -1,4 +1,4 @@
-import {AUDIT_DATA,SET_AUDIT,RESET_AUDIT,SETAUDIT_PPS,VALIDATE_SKU_SPINNER,VALIDATED_ATTIBUTES_DATA,TEXTBOX_STATUS} from '../constants/frontEndConstants'; 
+import {AUDIT_DATA,SET_AUDIT,RESET_AUDIT,SETAUDIT_PPS,VALIDATE_SKU_SPINNER,VALIDATED_ATTIBUTES_DATA,TEXTBOX_STATUS,AUDIT_LIST_REFRESHED} from '../constants/frontEndConstants';
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -53,7 +53,12 @@ export  function auditInfo(state={},action){
      return Object.assign({}, state, { 
             "textBoxStatus" : action.data
           })
-          break;   
+          break;
+
+      case AUDIT_LIST_REFRESHED:
+          return Object.assign({}, state, {
+              "auditListRefreshed": new Date()
+          })
                      
     default:
       return state

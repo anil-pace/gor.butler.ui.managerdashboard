@@ -38,5 +38,30 @@
   {
     "id": "auditdetail.auditReaudited.prefix",
     "defaultMessage": "Re-audited"
+  },
+  {
+    "id": "audit.table.heading",
+    "description": "Heading for audit table",
+    "defaultMessage": "Audit Tasks"
+  },
+  {
+    "id": "audit.table.buttonLable",
+    "description": "button label for audit create",
+    "defaultMessage": "Create New Task"
+  },
+  {
+    "id": "audit.table.filterLabel",
+    "description": "button label for filter",
+    "defaultMessage": "Filter data"
+  },
+  {
+    "id": "auditList.filter.search.bar",
+    "description": "total results for filter search bar",
+    "defaultMessage": "{total} results found"
+  },
+  {
+    "id": "auditList.filter.search.bar.showall",
+    "description": "button label for show all",
+    "defaultMessage": "Show all results"
   }
 ]

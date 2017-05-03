@@ -12,6 +12,8 @@ import Spinner from '../../components/spinner/Spinner';
 import {setPpsSpinner} from '../../actions/spinnerAction';
 import {stringConfig} from '../../constants/backEndConstants'
 import {defineMessages} from 'react-intl';
+import {ppsListRefreshed} from './../../actions/systemActions'
+import {hashHistory} from 'react-router'
 import {
     ppsHeaderSort,
     ppsHeaderSortOrder,
@@ -24,17 +26,16 @@ import {
     INITIAL_HEADER_SORT,
     INITIAL_HEADER_ORDER,
     GOR_ON_STATUS,
-    GOR_FIRST_LAST
+    GOR_FIRST_LAST,WS_ONSEND
 } from '../../constants/frontEndConstants';
 import {
-    PPSFilterToggle,
+    showTableFilter,
     filterApplied,
     ppsfilterState,
-    togglePPSFilterApplied,
-    setDefaultRange,
-    setFilterApplyFlag
+    togglePPSFilter,
+    setDefaultRange
 } from '../../actions/filterAction';
-import {updateSubscriptionPacket} from './../../actions/socketActions'
+import {updateSubscriptionPacket,setWsAction} from './../../actions/socketActions'
 import {wsOverviewData} from './../../constants/initData.js';
 
 //Mesages for internationalization
@@ -56,14 +57,92 @@ const messages = defineMessages({
 class PPS extends React.Component {
     constructor(props) {
         super(props);
+        this.state={query:null}
+    }
 
+    componentWillMount() {
+        /**
+         * It will update the last refreshed property of
+         * overview details, so that updated subscription
+         * packet can be sent to the server for data
+         * update.
+         */
+        this.props.ppsListRefreshed()
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.socketAuthorized && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
+            this.setState({query: nextProps.location.query})
+            this._refreshList(nextProps.location.query)
+        }
+    }
+
+    /**
+     * The method will update the subscription packet
+     * and will fetch the data from the socket.
+     * @private
+     */
+    _refreshList(query) {
+        this.props.setPpsSpinner(true)
+        let filterSubsData = {}
+        if (query.operator) {
+            let operator_assigned_query=query.operator.split(" ")
+            operator_assigned_query=operator_assigned_query.filter(function(word){ return !!word})
+            filterSubsData["operators_assigned"] = operator_assigned_query.length>1?["=",operator_assigned_query]:["=",operator_assigned_query.join("").trim()];
+        }
+
+        if (query.pps_id) {
+            filterSubsData["pps_id"] = ['=',query.pps_id]
+        }
+        if (query.status) {
+            filterSubsData["pps_status"] = ['in',query.status.constructor===Array?query.status:[query.status]]
+        }
+        if (query.mode) {
+            filterSubsData["current_task"] =['in',query.mode.constructor===Array?query.mode:[query.mode]]
+        }
+
+        if(query.minRange||query.maxRange){
+            filterSubsData["performance"]=['between',[query.minRange?+query.minRange:-1,query.maxRange?+query.maxRange:500]]
+        }
+
+        if (Object.keys(query).filter(function(el){return el!=='page'}).length !== 0) {
+            this.props.togglePPSFilter(true);
+            this.props.filterApplied(true);
+        } else {
+            this.props.togglePPSFilter(false);
+            this.props.filterApplied(false);
+        }
+
+        let updatedWsSubscription = this.props.wsSubscriptionData;
+        updatedWsSubscription["pps"].data[0].details["filter_params"] = filterSubsData;
+        this.props.initDataSentCall(updatedWsSubscription["pps"])
+        this.props.updateSubscriptionPacket(updatedWsSubscription);
+        this.props.ppsfilterState({
+            tokenSelected: {
+                "STATUS":  query.status ? query.status.constructor === Array ? query.status : [query.status] : ["all"],
+                "MODE": query.mode ? query.mode.constructor === Array ? query.mode : [query.mode] : ["all"],
+            searchQuery: {
+                "PPS ID":query.pps_id||'',
+                "OPERATOR ASSIGNED":query.operator||""
+            },
+            rangeSelected: {"minValue": [query.minRange||"-1"], "maxValue": [query.maxRange||"500"]}
+        }})
+
+    }
+
+
+    /**
+     *
+     */
+    _clearFilter() {
+        hashHistory.push({pathname: "/system/pps", query: {}})
     }
 
     _processPPSData() {
         //TODO: codes need to be replaced after checking with backend
         var PPSData = [], detail = {}, ppsId, performance, totalUser = 0;
         var nProps = this;
-        var data = nProps.props.PPSDetail.PPStypeDetail||{};
+        var data = nProps.props.PPSDetail.PPStypeDetail;
         let PPS, ON, OFF, PERFORMANCE;
         let pick = nProps.context.intl.formatMessage(stringConfig.pick);
         let put = nProps.context.intl.formatMessage(stringConfig.put);
@@ -125,29 +204,7 @@ class PPS extends React.Component {
 
     }
 
-    /**
-     * It will update the subscription data
-     * and fetch the default list of PPS
-     * @private
-     */
-    _refreshPPSList() {
-        let updatedWsSubscription = this.props.wsSubscriptionData;
-        delete updatedWsSubscription["pps"].data[0].details["filter_params"]
-        this.props.updateSubscriptionPacket(updatedWsSubscription);
-        this.props.ppsfilterState({
-            tokenSelected: {"STATUS": ["all"], "MODE": ["all"]},
-            searchQuery: {},
-            defaultToken: {"STATUS": ["all"], "MODE": ["all"]},
-            rangeSelected: {"minValue": ["-1"], "maxValue": ["500"]}
-        });
-        this.props.filterApplied(!this.props.isFilterApplied);
-        this.props.togglePPSFilterApplied(false);
-        this.props.PPSFilterToggle(false);
-
-    }
-
     render() {
-        var  emptyResponse=this.props.PPSDetail.emptyResponse;
         let updateStatusIntl = "";
         let operationMode = {"pick": 0, "put": 0, "audit": 0, "notSet": 0};
         let data, operatorNum = 0, itemNumber = 5, ppsOn = 0, avgThroughput = 0;
@@ -205,12 +262,9 @@ class PPS extends React.Component {
                                   isFilterApplied={this.props.isFilterApplied}
                                   lastUpdatedText={updateStatusIntl}
                                   lastUpdated={updateStatusIntl}
-                                  ppsToggleFilter={this.props.ppsToggleFilter}
-                                  setFilter={this.props.PPSFilterToggle}
-                                  refreshList={this._refreshPPSList.bind(this)}
-                                  emptyResponse={emptyResponse}
-                                  filterApplyFlag={this.props.filterApplyFlag}
-                                setFilterApplyFlag={this.props.setFilterApplyFlag}
+                                  showFilter={this.props.showFilter}
+                                  setFilter={this.props.showTableFilter}
+                                  refreshList={this._clearFilter.bind(this)}
                         />
                     </div>
                 </div>
@@ -232,11 +286,12 @@ function mapStateToProps(state, ownProps) {
         ppsSpinner: state.spinner.ppsSpinner || false,
         PPSDetail: state.PPSDetail || [],
         intlMessages: state.intl.messages,
-        ppsToggleFilter: state.filterInfo.ppsToggleFilter || false,
+        showFilter: state.filterInfo.filterState || false,
         ppsFilterState: state.filterInfo.ppsFilterState || false,
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
         isFilterApplied: state.filterInfo.isFilterApplied || false,
-        filterApplyFlag:state.filterInfo.filterApplyFlag|| false
+        socketAuthorized: state.recieveSocketActions.socketAuthorized,
+        ppsListRefreshed:state.ppsInfo.ppsListRefreshed
     };
 }
 
@@ -266,8 +321,8 @@ var mapDispatchToProps = function (dispatch) {
         setCheckAll: function (data) {
             dispatch(setCheckAll(data))
         },
-        PPSFilterToggle: function (data) {
-            dispatch(PPSFilterToggle(data));
+        showTableFilter: function (data) {
+            dispatch(showTableFilter(data));
         },
         ppsfilterState: function (data) {
             dispatch(ppsfilterState(data));
@@ -278,16 +333,15 @@ var mapDispatchToProps = function (dispatch) {
         updateSubscriptionPacket: function (data) {
             dispatch(updateSubscriptionPacket(data));
         },
-        togglePPSFilterApplied: function (data) {
-            dispatch(togglePPSFilterApplied(data));
+        togglePPSFilter: function (data) {
+            dispatch(togglePPSFilter(data));
         },
 
         setDefaultRange: function (data) {
             dispatch(setDefaultRange(data));
         },
-        setFilterApplyFlag: function (data) {
-            dispatch(setFilterApplyFlag(data));
-        }
+        initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
+        ppsListRefreshed:function(data){dispatch(ppsListRefreshed(data))}
     }
 };
 
@@ -302,7 +356,7 @@ PPS.PropTypes = {
     ppsSortHeaderState: React.PropTypes.string,
     ppsSpinner: React.PropTypes.bool,
     PPSDetail: React.PropTypes.array,
-    ppsToggleFilter: React.PropTypes.bool,
+    showFilter: React.PropTypes.bool,
     ppsFilterState: React.PropTypes.bool,
     ppsFilterDetail: React.PropTypes.func,
     changePPSmode: React.PropTypes.func,
@@ -312,13 +366,10 @@ PPS.PropTypes = {
     setCheckedPps: React.PropTypes.func,
     setDropDisplay: React.PropTypes.func,
     setCheckAll: React.PropTypes.func,
-    PPSFilterToggle: React.PropTypes.func,
+    showTableFilter: React.PropTypes.func,
     filterApplied: React.PropTypes.func,
     isFilterApplied: React.PropTypes.bool,
-    wsSubscriptionData: React.PropTypes.object,
-    setFilterApplyFlag:React.PropTypes.func,
-    filterApplyFlag:React.PropTypes.bool,
-    emptyResponse:React.PropTypes.bool
+    wsSubscriptionData: React.PropTypes.object
 
 }
 

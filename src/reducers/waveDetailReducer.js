@@ -1,4 +1,4 @@
-import {ORDERS_DATA} from '../constants/frontEndConstants';
+import {ORDERS_DATA,WAVES_REFRESHED} from '../constants/frontEndConstants';
 import React  from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -13,19 +13,17 @@ export  function waveInfo(state={},action){
   switch (action.type) {
     case ORDERS_DATA:
           var res=action.data, waveData;
-          if(res.complete_data && res.complete_data.length)
-          {
-              return Object.assign({}, state, {
-                 "waveData" : res.complete_data,
-                "emptyResponse" :false //This flag will update base on response data
-               })
+          if(res.complete_data){
+
+            return Object.assign({}, state, {
+            "waveData" : res.complete_data
+            })
           }
-          else
-          {
-           return Object.assign({}, state, {
-                 "emptyResponse" :true //This flag will update base on response data
+          return state
+      case WAVES_REFRESHED:
+          return Object.assign({}, state, {
+              "wavesRefreshed": new Date()
           })
-         }
 
     default:
       return state

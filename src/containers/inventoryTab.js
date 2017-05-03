@@ -6,22 +6,55 @@ import React  from 'react';
 
 import Inventory from '../components/inventory/inventory';
 import Spinner from '../components/spinner/Spinner';
-import { setInventorySpinner } from '../actions/inventoryActions';
+import { setInventorySpinner ,inventoryRefreshed} from '../actions/inventoryActions';
 import { FormattedMessage} from 'react-intl';
-import { connect } from 'react-redux'; 
+import { connect } from 'react-redux';
+import {wsOverviewData} from './../constants/initData.js';
+import {updateSubscriptionPacket,setWsAction} from './../actions/socketActions'
+import {WS_ONSEND} from './../constants/frontEndConstants';
 
 
 class InventoryTab extends React.Component{
 	constructor(props) 
 	{
     	super(props);
+    	this.state={subscribed:false}
+    }
 
-    }	
+    componentWillMount() {
+        /**
+         * It will update the last refreshed property of
+         * overview details, so that updated subscription
+         * packet can be sent to the server for data
+         * update.
+         */
+        this.props.inventoryRefreshed()
+    }
 
     _setSpinner(bShow) {
     	var _bShow = bShow ? bShow:false;
     	this.props.setInventorySpinner(_bShow);
-    }  
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.socketAuthorized && !this.state.subscribed) {
+            this.setState({subscribed: true})
+            this._subscribeData(nextProps)
+        }
+    }
+    componentWillUnmount(){
+        /**
+		 * If a user navigates back to the inventory page,
+		 * it should subscribe to the packet again.
+		 */
+		this.setState({subscribed: false})
+	}
+
+    _subscribeData(nextProps){
+        let updatedWsSubscription = this.props.wsSubscriptionData;
+        this.props.initDataSentCall(updatedWsSubscription["inventory"])
+        this.props.updateSubscriptionPacket(updatedWsSubscription);
+	}
 
 	render(){
 		/**
@@ -61,21 +94,31 @@ InventoryTab.propTypes={
 	noData:React.PropTypes.bool
 }
 
-function mapStateToProps(state,ownProps){
+function mapStateToProps(state, ownProps) {
     return {
-      "inventoryData": state.inventoryInfo.inventoryDataHistory || [],
-      "inventorySpinner":state.spinner.inventorySpinner || false,
-      "isPrevDateSelected":state.inventoryInfo.isPrevDateSelected || false,
-      "inventoryDataPrevious":state.inventoryInfo.inventoryDataPrevious || {},
-      "hasDataChanged":state.inventoryInfo.hasDataChanged ,
-      "dateTodayState":state.inventoryInfo.dateTodayState,
-      "recreatedData":state.inventoryInfo.recreatedData || {},
-      "noData":state.inventoryInfo.noData
+        "inventoryData": state.inventoryInfo.inventoryDataHistory || [],
+        "inventorySpinner": state.spinner.inventorySpinner || false,
+        "isPrevDateSelected": state.inventoryInfo.isPrevDateSelected || false,
+        "inventoryDataPrevious": state.inventoryInfo.inventoryDataPrevious || {},
+        "hasDataChanged": state.inventoryInfo.hasDataChanged,
+        "dateTodayState": state.inventoryInfo.dateTodayState,
+        "recreatedData": state.inventoryInfo.recreatedData || {},
+        "noData": state.inventoryInfo.noData,
+        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
+        socketAuthorized: state.recieveSocketActions.socketAuthorized,
+        inventoryRefreshed:state.inventoryInfo.inventoryRefreshed
     }
-};
+}
     function mapDispatchToProps(dispatch){
     	return{
-    		setInventorySpinner:function(data){dispatch(setInventorySpinner(data));}
+    		setInventorySpinner:function(data){dispatch(setInventorySpinner(data));},
+            initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
+            updateSubscriptionPacket: function (data) {
+                dispatch(updateSubscriptionPacket(data));
+            },
+            inventoryRefreshed:function(data){
+            	dispatch(inventoryRefreshed(data))
+			}
     	}
     };
 

@@ -10,7 +10,7 @@ export  function headerData(state={},action){
     	case RECEIVE_SHIFT_START_TIME:
             return Object.assign({}, state, {
 
-                "shiftStartTime":new Date(action.data.data).toLocaleTimeString()
+                "shiftStartTime":new Date(action.data.data)
             })
 	  default:
 	    return state
