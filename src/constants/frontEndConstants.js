@@ -245,7 +245,7 @@ export const NO_SKU_VALIDATION = "NO_SKU_VALIDATION";
 export const WATING_FOR_VALIDATION = "WATING_FOR_VALIDATION";
 export const AUDIT_ISSUES_STATUS = "Issues found";
 export const AUDIT_BY_PDFA = "pdfa";
-export const BREACHED ="&breached=True"
+export const BREACHED ="breached"
 /*Inventory parsing constants*/
 export const INVENTORY_DATA_TODAY = 'INVENTORY_DATA_TODAY'
 export const INVENTORY_DATA_HISTORY = 'INVENTORY_DATA_HISTORY'
