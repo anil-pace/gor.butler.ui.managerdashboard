@@ -4,15 +4,19 @@ import {connect} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
 import Spinner from '../../components/spinner/Spinner';
 import {setWavesSpinner} from '../../actions/spinnerAction';
-import {GOR_PENDING, GOR_PROGRESS, GOR_BREACHED} from '../../constants/frontEndConstants';
+import {GOR_PENDING, GOR_PROGRESS, GOR_BREACHED,WS_ONSEND} from '../../constants/frontEndConstants';
 import {stringConfig} from '../../constants/backEndConstants';
 import {defineMessages} from 'react-intl';
 import {waveHeaderSort, waveHeaderSortOrder, waveFilterDetail} from '../../actions/sortHeaderActions';
 import {INITIAL_HEADER_SORT, INITIAL_HEADER_ORDER} from '../../constants/frontEndConstants';
 import {getDaysDiff} from '../../utilities/getDaysDiff';
 import {showTableFilter, filterApplied, toggleWaveFilter, wavefilterState} from '../../actions/filterAction';
-import {updateSubscriptionPacket} from './../../actions/socketActions'
+import {updateSubscriptionPacket,setWsAction} from './../../actions/socketActions'
 import {wsOverviewData} from './../../constants/initData.js';
+import {wavesRefreshed} from './../../actions/orderListActions'
+import {hashHistory} from 'react-router'
+import WaveFilter from './waveFilter';
+import FilterSummary from '../../components/tableFilter/filterSummary'
 
 //Mesages for internationalization
 const messages = defineMessages({
@@ -26,6 +30,71 @@ const messages = defineMessages({
 
 
 class WaveTab extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state={query:null}
+    }
+
+    componentWillMount() {
+        /**
+         * It will update the last refreshed property of
+         * overview details, so that updated subscription
+         * packet can be sent to the server for data
+         * update.
+         */
+        this.props.wavesRefreshed()
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.socketAuthorized && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
+            this.setState({query: nextProps.location.query})
+            this._refreshList(nextProps.location.query)
+        }
+    }
+
+    /**
+     * The method will update the subscription packet
+     * and will fetch the data from the socket.
+     * @private
+     */
+    _refreshList(query) {
+        this.props.setWavesSpinner(true)
+        let filterSubsData = {}
+        if (query.waveId) {
+            filterSubsData["wave_id"] = ['=', query.waveId];
+        }
+        if (query.status) {
+            filterSubsData["status"] = ['in', query.status.constructor === Array ? query.status : [query.status]]
+        }
+        if (Object.keys(query).filter(function(el){return el!=='page'}).length !== 0) {
+            this.props.toggleWaveFilter(true);
+            this.props.filterApplied(true);
+        } else {
+            this.props.toggleWaveFilter(false);
+            this.props.filterApplied(false);
+        }
+        let updatedWsSubscription = this.props.wsSubscriptionData;
+        updatedWsSubscription["orders"].data[0].details["filter_params"] = filterSubsData;
+        this.props.initDataSentCall(updatedWsSubscription["orders"])
+        this.props.updateSubscriptionPacket(updatedWsSubscription);
+        this.props.wavefilterState({
+            tokenSelected: {
+                "STATUS": query.status ? (query.status.constructor === Array ? query.status : [query.status]) : ["any"]
+            },
+            searchQuery: {
+                "WAVE ID": query.waveId || ''
+            }
+        });
+
+    }
+
+
+    /**
+     *
+     */
+    _clearFilter() {
+        hashHistory.push({pathname: "/orders/waves", query: {}})
+    }
 
     _processWaveData(data, nProps) {
         var nProps = this,
@@ -129,39 +198,17 @@ class WaveTab extends React.Component {
         return waveData;
     }
 
+    _setFilter() {
+        var newState = !this.props.showFilter;
+        this.props.showTableFilter(newState);
+    }
+
     refresh = () => {
         console.log('Refresh');
     }
 
-    constructor(props) {
-        super(props);
-    }
-
-    /**
-     * The method will update and send the subscription packet
-     * to fetch the default list of waves
-     * @private
-     */
-    _refreshWavesList() {
-        let updatedWsSubscription = this.props.wsSubscriptionData;
-        delete updatedWsSubscription["orders"].data[0].details["filter_params"];
-        this.props.updateSubscriptionPacket(updatedWsSubscription);
-        this.props.filterApplied(!this.props.isFilterApplied);
-        this.props.showTableFilter(false);
-        this.props.toggleWaveFilter(false);
-        /**
-         * It will reset the filter
-         * fields already applied in
-         * the Filter box
-         */
-        this.props.wavefilterState({
-            tokenSelected: {"STATUS": ["any"]},
-            searchQuery: {},
-            defaultToken: {"STATUS": ["any"]}
-        })
-    }
-
     render() {
+        let filterHeight = screen.height-190-50;
         var updateStatusIntl = "";
         var itemNumber = 7, waveData = this.props.waveDetail.waveData, waveState = {
             "pendingWave": "--",
@@ -211,6 +258,48 @@ class WaveTab extends React.Component {
         return (
             <div className="gorTesting">
                 <Spinner isLoading={this.props.wavesSpinner} setSpinner={this.props.setWavesSpinner}/>
+                {waveData?<div>
+                    <div className="gor-filter-wrap" style={{'width':this.props.showFilter?'350px':'0px', height:filterHeight}}>
+                        <WaveFilter waveData={waveData} responseFlag={this.props.responseFlag}/>
+                    </div>
+                    <div className="gorToolBar">
+                        <div className="gorToolBarWrap">
+                            <div className="gorToolBarElements">
+                                <FormattedMessage id="waves.table.heading" description="Heading for waves"
+                                                  defaultMessage ="Waves"/>
+
+                            </div>
+                        </div>
+
+
+
+                        <div className="filterWrapper">
+                            <div className="gorToolBarDropDown">
+                                <div className="gor-button-wrap">
+                                    <div className="gor-button-sub-status">{updateStatusIntl} {updateStatusIntl} </div>
+
+                                    <button className={this.props.waveFilterStatus?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
+                                        <div className="gor-manage-task"/>
+                                        <FormattedMessage id="order.table.filterLabel" description="button label for filter"
+                                                          defaultMessage ="Filter data"/>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    {/*Filter Summary*/}
+                    <FilterSummary total={waveData.length||0} isFilterApplied={this.props.isFilterApplied} responseFlag={this.props.responseFlag} filterText={<FormattedMessage id="waveList.filter.search.bar"
+                                                                                                                                                     description='total waves for filter search bar'
+                                                                                                                                                     defaultMessage='{total} Waves found'
+                                                                                                                                                     values={{total: waveData.length || 0}}/>}
+                                   refreshList={this._clearFilter.bind(this)}
+                                   refreshText={<FormattedMessage id="waveList.filter.search.bar.showall"
+                                                                  description="button label for show all"
+                                                                  defaultMessage="Show all Waves"/>}/>
+                </div>:null}
                 <WavesTable items={waveData} itemNumber={itemNumber}
                             waveState={waveState} intlMessg={this.props.intlMessages}
                             sortHeaderState={this.props.waveHeaderSort}
@@ -226,7 +315,7 @@ class WaveTab extends React.Component {
                             showFilter={this.props.showFilter}
                             setFilter={this.props.showTableFilter}
                             waveFilterStatus={this.props.waveFilterStatus}
-                            refreshList={this._refreshWavesList.bind(this)}
+                            refreshList={this._clearFilter.bind(this)}
                 />
             </div>
         );
@@ -247,7 +336,10 @@ function mapStateToProps(state, ownProps) {
         waveFilterStatus: state.filterInfo.waveFilterStatus || false,
         showFilter: state.filterInfo.filterState || false,
         isFilterApplied: state.filterInfo.isFilterApplied || false,
-        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData
+        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
+        socketAuthorized: state.recieveSocketActions.socketAuthorized,
+        wavesRefreshed:state.ppsInfo.wavesRefreshed
+
     };
 };
 
@@ -279,7 +371,10 @@ var mapDispatchToProps = function (dispatch) {
         },
         wavefilterState: function (data) {
             dispatch(wavefilterState(data));
+
         },
+        initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
+        wavesRefreshed:function(data){dispatch(wavesRefreshed(data))}
     };
 }
 

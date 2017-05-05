@@ -1,4 +1,4 @@
-import {ORDERS_DATA} from '../constants/frontEndConstants';
+import {ORDERS_DATA,WAVES_REFRESHED} from '../constants/frontEndConstants';
 import React  from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -19,6 +19,11 @@ export  function waveInfo(state={},action){
             "waveData" : res.complete_data
             })
           }
+          return state
+      case WAVES_REFRESHED:
+          return Object.assign({}, state, {
+              "wavesRefreshed": new Date()
+          })
 
     default:
       return state

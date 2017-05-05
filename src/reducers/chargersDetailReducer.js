@@ -10,19 +10,19 @@ import { FormattedMessage } from 'react-intl';
 
 
 export  function chargersDetail(state={},action) {
-  switch (action.type) {
-    case CHARGERS_DATA:
-         var res;
-         res=action.data;
-         var chargers;
-         if(res.complete_data){
-           return Object.assign({}, state, {
-               "chargersDetail" : res.complete_data
-          })
-         }
+    switch (action.type) {
+        case CHARGERS_DATA:
+            var res;
+            res=action.data;
+            var chargers;
+            if(res.complete_data){
+                return Object.assign({}, state, {
+                    "chargersDetail" : res.complete_data
+                })
+            }
 
-    default:
-      return state
-  }
+        default:
+            return state
+    }
 
 }

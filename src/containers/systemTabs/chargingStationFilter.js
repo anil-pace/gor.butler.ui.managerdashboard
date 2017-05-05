@@ -14,6 +14,7 @@ import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldW
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
 import {setCsFilterSpinner}  from '../../actions/spinnerAction';
+import {hashHistory} from 'react-router'
 class ChargingStationFilter extends React.Component {
     constructor(props) {
         super(props);
@@ -29,11 +30,6 @@ class ChargingStationFilter extends React.Component {
         this.props.showTableFilter(false);
     }
 
-    componentWillMount() {
-        if (this.props.chargingstationfilterState) {
-            this.setState(this.props.chargingstationfilterState)
-        }
-    }
 
     componentWillReceiveProps(nextProps) {
         /**
@@ -42,6 +38,13 @@ class ChargingStationFilter extends React.Component {
          */
         if (nextProps.filterState && JSON.stringify(this.state) !== JSON.stringify(nextProps.filterState)) {
             this.setState(nextProps.filterState)
+        }
+
+        /**
+         * Hide the filter as soon as data in the list get updated.
+         */
+        if (nextProps.chargersData.length > 0 && JSON.stringify(nextProps.chargersData) !== JSON.stringify(this.props.chargersData)) {
+            this.props.showTableFilter(false);
         }
     }
 
@@ -100,34 +103,23 @@ class ChargingStationFilter extends React.Component {
     }
 
     _applyFilter() {
-        let filterSubsData = {}, filterState = this.state;
-        if (filterState.searchQuery) {
-            (filterState.searchQuery["CHARGING STATION ID"] ? filterSubsData["charger_id"] = ['contains', filterState.searchQuery["CHARGING STATION ID"]] : "");
+        let filterState = this.state, _query = {};
+        if (filterState.searchQuery && filterState.searchQuery["CHARGING STATION ID"]) {
+            _query.charger_id = filterState.searchQuery["CHARGING STATION ID"]
+        }
 
+        if (filterState.tokenSelected["DOCKING STATUS"] && filterState.tokenSelected["DOCKING STATUS"][0] !== 'all') {
+            _query.charger_status = filterState.tokenSelected["DOCKING STATUS"]
         }
-        if (filterState.tokenSelected) {
-            (filterState.tokenSelected["DOCKING STATUS"] && filterState.tokenSelected["DOCKING STATUS"][0] !== "all" ? filterSubsData["charger_status"] = ['in', filterState.tokenSelected["DOCKING STATUS"]] : "");
-            (filterState.tokenSelected["OPERATING MODE"] && filterState.tokenSelected["OPERATING MODE"][0] !== "all" ? filterSubsData["charger_mode"] = ['in', filterState.tokenSelected["OPERATING MODE"]] : "");
+        if (filterState.tokenSelected["OPERATING MODE"] && filterState.tokenSelected["OPERATING MODE"][0] !== 'all') {
+            _query.charger_mode = filterState.tokenSelected["OPERATING MODE"]
         }
-        let updatedWsSubscription = this.props.wsSubscriptionData;
-        updatedWsSubscription["chargingstation"].data[0].details["filter_params"] = filterSubsData;
-        this.props.chargingstationfilterState(filterState);
-        this.props.updateSubscriptionPacket(updatedWsSubscription);
-        this.props.filterApplied(!this.props.isFilterApplied);
-        this.props.toggleChargingFilter(true);
-        this.props.setCsFilterSpinner(true);
+
+        hashHistory.push({pathname: "/system/chargingstation", query: _query})
     }
 
     _clearFilter() {
-        let clearState = {};
-        let updatedWsSubscription = this.props.wsSubscriptionData;
-        updatedWsSubscription["chargingstation"].data[0].details["filter_params"] = {};
-        this.props.updateSubscriptionPacket(updatedWsSubscription);
-        this.setState({tokenSelected: {"DOCKING STATUS": ["all"], "OPERATING MODE": ["all"]}, searchQuery: {}});
-        this.props.chargingstationfilterState({tokenSelected: {"STATUS": ["all"], "MODE": ["all"]}, searchQuery: {}});
-        this.props.filterApplied(!this.props.isFilterApplied);
-        this.props.toggleChargingFilter(false);
-        this.props.setCsFilterSpinner(true);
+        hashHistory.push({pathname: "/system/chargingstation", query: {}})
     }
 
 

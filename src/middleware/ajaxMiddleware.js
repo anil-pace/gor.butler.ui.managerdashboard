@@ -29,8 +29,16 @@ const ajaxMiddleware = (function(){
               else {
                  try
                  {
-                  var response=JSON.parse(httpRequest.response,httpRequest.status);
-                  AjaxParse(store,response,params.cause,httpRequest.status);          
+                   if(httpRequest.getResponseHeader('Content-type') === "text/csv; charset=utf-8") {
+                    var blob = new Blob ([httpRequest.response], {type:'text/csv'});
+                    var url = URL.createObjectURL(blob);
+                    window.open(url);
+                  }
+
+                   else {
+                    var response=JSON.parse(httpRequest.response,httpRequest.status);
+                    AjaxParse(store,response,params.cause,httpRequest.status);          
+                  }
                  }
                  catch(e)
                  {

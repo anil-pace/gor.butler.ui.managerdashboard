@@ -1,5 +1,7 @@
-import {INVENTORY_DATA_HISTORY,INVENTORY_HISTORY_DAYS_COUNT,DISPLAY_INVENTORY_HISTORY,INVENTORY_DATA_TODAY,PARSE_INVENTORY_TODAY,CATEGORY_COLOR_MAP,CATEGORY_DEFAULT,CATEGORY_UNUSED,PARSE_INVENTORY_HISTORY } from '../constants/frontEndConstants';
-//import * as mockData from '../../mock/mockDBData'
+
+import {INVENTORY_DATA_HISTORY,INVENTORY_HISTORY_DAYS_COUNT,DISPLAY_INVENTORY_HISTORY,INVENTORY_DATA_TODAY,PARSE_INVENTORY_TODAY,CATEGORY_COLOR_MAP,CATEGORY_DEFAULT,CATEGORY_UNUSED,PARSE_INVENTORY_HISTORY,INVENTORY_REFRESHED} from '../constants/frontEndConstants';
+
+
 
 
 /**
@@ -119,6 +121,11 @@ export  function inventoryInfo(state={},action){
     return parseInvData(state, action);
     case DISPLAY_INVENTORY_HISTORY:
     return displayHistorySnapShot(state,action)
+
+      case INVENTORY_REFRESHED:
+          return Object.assign({}, state, {
+              "inventoryRefreshed" : new Date()
+          })
 
     default:
     return state

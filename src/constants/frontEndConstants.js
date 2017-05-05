@@ -133,6 +133,8 @@ export const CONFIRM_SAFETY = "CONFIRM_SAFETY";
 export const AUTH_USER = "AUTH_USER";
 export const SAFETY_MAP = "SAFETY_MAP";
 export const SAFETY_ERROR_MAP = "SAFETY_ERROR_MAP";
+export const ITEM_RECALLED = "ITEM_RECALLED";
+export const GR_REPORT_RESPONSE = "GR_REPORT_RESPONSE";
 
 export const AUDIT_RETRIEVE = "AUDIT_RETRIEVE";
 export const RECIEVE_AUDIT_DATA = "RECIEVE_AUDIT_DATA";
@@ -141,6 +143,8 @@ export const DELETE_AUDIT='DELETE_AUDIT';
 export const GET_PPSLIST='GET_PPSLIST';
 export const AUDIT_RESOLVE_LINES="AUDIT_RESOLVE_LINES";
 export const SET_AUDIT_ORDERLINES="SET_AUDIT_ORDERLINES";
+export const INVOICE_VALIDATION = "INVOICE_VALIDATION";
+export const ITEM_RECALLED_DATA = "ITEM_RECALLED_DATA";
 
 /*Constants for app info checking*/
 export const ID_DATA = "ID_DATA";
@@ -194,6 +198,7 @@ export const DISPLAY_WAVES_FILTER_SPINNER = "DISPLAY_WAVES_FILTER_SPINNER";
 export const DISPAY_USER_SPINNER = "DISPAY_USER_SPINNER";
 export const DISPLAY_PPS_FILTER_SPINNER = "DISPLAY_PPS_FILTER_SPINNER";
 export const DISPLAY_CHARGING_STATION_FILTER_SPINNER = "DISPLAY_CHARGING_STATION_FILTER_SPINNER";
+export const DISPLAY_INVENTORY_REPORT_SPINNER = "DISPLAY_INVENTORY_REPORT_SPINNER";
 
 
 
@@ -218,7 +223,7 @@ export const SYS_SUB_TAB_ROUTE_MAP={
 	[ORDER_LIST]:"orderlist"
 
 }
-
+export const SHOW_UTILITY_TAB = false;
 /*Constant for time on header*/
 export const HEADER_START_TIME = ' 09:00:15 (IST)'
 
@@ -394,9 +399,9 @@ export const AUDIT_UNRESOLVED = "Unresolved";
 export const AUDIT_LINE_REJECTED  = "audit_rejected";
 export const AUDIT_REJECTED_STATUS = "Rejected";
 export const AUDIT_RESOLVED_STATUS = "Resolved";
-export const AUDIT_PARAM_TYPE = '&audit_param_type=';
-export const AUDIT_PARAM_VALUE = '&audit_param_value=';
-export const AUDIT_STATUS = '&audit_status=';
+export const AUDIT_PARAM_TYPE = 'audit_param_type';
+export const AUDIT_PARAM_VALUE = 'audit_param_value';
+export const AUDIT_STATUS = 'audit_status';
 export const AUDIT_TYPE="AUDIT TYPE";
 export const SPECIFIC_SKU_ID='SPECIFIC SKU ID';
 export const SPECIFIC_LOCATION_ID='SPECIFIC LOCATION ID';
@@ -477,10 +482,10 @@ export const SOFT_MANUAL = "soft_manual";
 export const SOFT = "soft";
 export const HARD = "hard";
 //backend sort
-export const sortAuditHead = {"startTime":"&order_by=start_actual_time", 
-							"completedTime":"&order_by=completion_time", 
-							"display_id":"&order_by=display_id",
-                  			"status":"&order_by=audit_status&order_by_seq=[ 'audit_pending_approval','audit_created','audit_accepted','audit_conflicting','audit_waiting','audit_resolved','audit_pending','audit_reaudited','audit_started','audit_tasked','audit_rejected','audit_resolved','audit_aborted', 'audit_completed']"};
+export const sortAuditHead = {"startTime":"&order_by=start_actual_time",
+    "completedTime":"&order_by=completion_time",
+    "display_id":"&order_by=display_id",
+    "status":"&order_by=audit_status&order_by_seq=[ 'audit_pending_approval','audit_created','audit_accepted','audit_conflicting','audit_waiting','audit_resolved','audit_pending','audit_reaudited','audit_started','audit_tasked','audit_rejected','audit_resolved','audit_aborted', 'audit_completed']"};
 export const sortOrder = {"DESC":"&order=asc", "ASC":"&order=desc"};
 
 export const sortOrderHead = {"recievedTime":"&order_by=create_time", 
@@ -502,3 +507,12 @@ export const MODAL_STATUS = "MODAL_STATUS";
 export const MODAL_RESET = "MODAL_RESET";
 export const CHECKLIST = "CHECKLIST";
 export const RECEIVE_SHIFT_START_TIME = "RECEIVE_SHIFT_START_TIME";
+export const OVERVIEW_REFRESHED="OVERVIEW_REFRESHED"
+export const BUTLERBOTS_REFRESHED = "BUTLERBOTS_REFRESHED";
+export const PPS_LIST_REFRESHED = "PPS_LIST_REFRESHED";
+export const CHARGING_STATION_LIST_REFRESHED = "CHARGING_STATION_LIST_REFRESHED";
+export const INVENTORY_REFRESHED="INVENTORY_REFRESHED"
+export const AUDIT_LIST_REFRESHED="AUDIT_LIST_REFRESHED"
+export const ORDER_LIST_REFRESHED="ORDER_LIST_REFRESHED"
+export const WAVES_REFRESHED="WAVES_REFRESHED"
+export const SINGLE="Single"

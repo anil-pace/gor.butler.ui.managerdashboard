@@ -50,11 +50,11 @@ class Tabs extends React.Component{
        
         
         
-        this.props.tabSelected(TAB_ROUTE_MAP[selTab]);
-        this.props.subTabSelected(null);
-        sessionStorage.setItem('nextView', TAB_ROUTE_MAP[selTab]);
-        sessionStorage.setItem('selTab', TAB_ROUTE_MAP[selTab]);
-        sessionStorage.setItem('subTab', '');
+        // this.props.tabSelected(TAB_ROUTE_MAP[selTab]);
+        // this.props.subTabSelected(null);
+        // sessionStorage.setItem('nextView', TAB_ROUTE_MAP[selTab]);
+        // sessionStorage.setItem('selTab', TAB_ROUTE_MAP[selTab]);
+        // sessionStorage.setItem('subTab', '');
     }
   _stopOperation(stopFlag) {
       modal.add(OperationStop, {
@@ -198,11 +198,11 @@ class Tabs extends React.Component{
 			<Tab items={{ tab: items.overview, Status: items.overviewStatus, currentState:items.overviewClass }} changeClass={(this.props.tab.toUpperCase() === OVERVIEW ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
 		</Link>
 
-		<Link to="/system" onClick = {this.handleTabClick.bind(this,SYSTEM)}>
+		<Link to="/system/butlerbots" onClick = {this.handleTabClick.bind(this,SYSTEM)}>
 			<Tab items={{ tab: items.system, Status: items.systemStatus, currentState:items.systemClass }} changeClass={(this.props.tab.toUpperCase() === SYSTEM ? 'sel' :GOR_NORMAL_TAB)} subIcons={true}/>
 		</Link>
 
-		<Link to="/orders" onClick = {this.handleTabClick.bind(this,ORDERS)}>
+		<Link to="/orders/waves" onClick = {this.handleTabClick.bind(this,ORDERS)}>
 			<Tab items={{ tab: items.order, Status: items.ordersStatus, currentState:items.ordersClass }} changeClass={(this.props.tab.toUpperCase() === ORDERS ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
 		</Link>
 

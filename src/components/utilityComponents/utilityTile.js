@@ -14,13 +14,16 @@ class UtilityTile extends React.Component{
 				<div className="gor-utility-tile-heading">
 					{this.props.tileHead}
 				</div>
+				{this.props.showHeaderIcon?<div className="gor-utility-tile-icon">
+					<div className="gor-refresh-icon"/>
+				</div>:""}
 			</div>
 			<div className="gor-utility-tile-body">
 				{this.props.tileBody}
 			</div>
 			{this.props.showFooter?<div className="gor-utility-tile-footer">
 				<div className="got-utility-btn-wrap">
-					<button className="gor-filterBtn-applied" onClick={this.props.footerAction}>
+					<button className={this.props.enableButton?"gor-filterBtn-applied":"gor-filterBtn-applied gor-disable-content"} onClick={this.props.footerAction}>
           				<FormattedMessage id="utility.downDlabel" description="label for download" defaultMessage ="DOWNLOAD"/>
          			</button>
          		</div>

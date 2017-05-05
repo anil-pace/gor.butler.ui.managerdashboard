@@ -1,19 +1,19 @@
 .gor-sku-validation-btn-wrap{
-	display:inline-block;
+    display:inline-block;
 }
 
 .gor-searchDropdown-audit-wrap{
-	width: 44.5%;
-	padding-top: 20px;
+    width: 44.5%;
+    padding-top: 20px;
 }
 
 .gor-disable-content{
-	pointer-events: none;
+    pointer-events: none;
     opacity: 0.4;
 }
 
 .spinnerImage{
-   background-image: url(/images/whiteSpinner.svg);
+   background-image: url(images/whiteSpinner.svg);
     width: 30px;
     height: 30px;
     background-size: contain;
@@ -22,8 +22,8 @@
 }
 
 .gor-audit-input-wrap {
-	display: inline-block;
-	width: 42%;
+    display: inline-block;
+    width: 42%;
     height: 35px;
     border-radius: 3px;
     border: solid 1px #aaaaaa;
@@ -42,12 +42,12 @@
 }
 
 .gor-sku-error {
-	color: #EC1C24;
-	padding-top: 10px;
+    color: #EC1C24;
+    padding-top: 10px;
+    font-size: 15px;
 }
 
 .gor-sku-valid{
-	color: #00a54f;
-	padding-top: 10px;
+    color: #00a54f;
+    padding-top: 10px;
 }
-

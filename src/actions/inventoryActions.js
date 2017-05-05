@@ -1,5 +1,5 @@
 
-import { INVENTORY_DATA_TODAY,DISPLAY_INVENTORY_HISTORY,INVENTORY_DATA_HISTORY,DISPLAY_INVENTORY_SPINNER} from '../constants/frontEndConstants'
+import { INVENTORY_DATA_TODAY,DISPLAY_INVENTORY_HISTORY,INVENTORY_DATA_HISTORY,DISPLAY_INVENTORY_SPINNER,INVENTORY_REFRESHED} from '../constants/frontEndConstants'
 
 
 export function receiveInventoryTodayData(data){
@@ -28,4 +28,10 @@ export function receiveInventoryHistoryData(data){
     type:DISPLAY_INVENTORY_HISTORY,
     data
   }
+ }
+ export function inventoryRefreshed(data){
+     return {
+         type:INVENTORY_REFRESHED,
+         data
+     }
  }

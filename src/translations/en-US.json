@@ -681,7 +681,7 @@
   {
     "id": "user.invalid.name",
     "description": "Text for invalid user name",
-    "defaultMessage": "Special characters like \"~\",\"@\" and \"%\" are not allowed"
+    "defaultMessage": "Special characters like \"~\",\"@\",\"%\" are not allowed"
   },
   {
     "id": "user.invalid.password.operator",
@@ -1766,7 +1766,7 @@
   },
   {
     "id": "order.timePeriod.all",
-    "defaultMessage": "All"
+    "defaultMessage": "Any time"
   },
   {
     "id": "order.timePeriod.oneHr",

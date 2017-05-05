@@ -122,7 +122,7 @@
   {
     "id": "user.invalid.name",
     "description": "Text for invalid user name",
-    "defaultMessage": "Special characters like \"~\",\"@\" and \"%\" are not allowed"
+    "defaultMessage": "Special characters like \"~\",\"@\",\"%\" are not allowed"
   },
   {
     "id": "user.invalid.password.operator",

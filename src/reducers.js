@@ -34,6 +34,8 @@ import {tabsData} from './reducers/tabDataReducer';
 import {sortHeaderState} from './reducers/sortHeaderReducer';
 import {filterInfo} from './reducers/filterReducer';
 import {emergency} from './reducers/emergencyReducer';
+import {utilityValidations} from './reducers/utilityReducer';
+import {overviewDetails} from './reducers/overviewReducer';
 
 const rootReducer = combineReducers({
   intl:intlReducer,
@@ -70,7 +72,9 @@ const rootReducer = combineReducers({
   recieveAuditDetail,
   sortHeaderState,
   filterInfo,
-  emergency
+  emergency,
+  utilityValidations,
+  overviewDetails
    })
 
 export default rootReducer

@@ -9,6 +9,7 @@ import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldW
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
 import {setWavesFilterSpinner}  from '../../actions/spinnerAction';
+import {hashHistory} from 'react-router'
 class WaveFilter extends React.Component {
     constructor(props) {
         super(props);
@@ -25,6 +26,13 @@ class WaveFilter extends React.Component {
          */
         if (nextProps.filterState && JSON.stringify(this.state) !== JSON.stringify(nextProps.filterState)) {
             this.setState(nextProps.filterState)
+        }
+
+        /**
+         * Hide the filter as soon as data in the list get updated.
+         */
+        if(nextProps.waveData.length>0 && JSON.stringify(nextProps.waveData)!==JSON.stringify(this.props.waveData)){
+            this.props.showTableFilter(false);
         }
     }
 
@@ -72,34 +80,20 @@ class WaveFilter extends React.Component {
     }
 
     _applyFilter() {
-        let filterSubsData = {}, filterState = this.state;
-        if (filterState.searchQuery) {
-            (filterState.searchQuery["WAVE ID"] ? filterSubsData["wave_id"] = ['=', filterState.searchQuery["WAVE ID"]] : "");
+        let filterState = this.state, _query = {};
+        if (filterState.searchQuery["WAVE ID"]) {
+            _query.waveId = filterState.searchQuery["WAVE ID"]
         }
-        if (filterState.tokenSelected) {
-            (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !== "any" ? filterSubsData["status"] = ['in', filterState.tokenSelected["STATUS"]] : "");
+        if (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !== "any") {
+            _query.status = filterState.tokenSelected["STATUS"]
         }
-        let updatedWsSubscription = this.props.wsSubscriptionData;
-        updatedWsSubscription["orders"].data[0].details["filter_params"] = filterSubsData;
-        this.props.wavefilterState(filterState);
-        this.props.updateSubscriptionPacket(updatedWsSubscription);
-        this.props.filterApplied(!this.props.isFilterApplied);
-        this.props.toggleWaveFilter(true);
-        this.props.setWavesFilterSpinner(true);
+        hashHistory.push({pathname: "/orders/waves", query: _query})
 
 
     }
 
     _clearFilter() {
-        let clearState = {};
-        let updatedWsSubscription = this.props.wsSubscriptionData;
-        updatedWsSubscription["orders"].data[0].details["filter_params"] = {};
-        this.props.updateSubscriptionPacket(updatedWsSubscription);
-        this.setState({tokenSelected: {"STATUS": ["any"]}, searchQuery: {}});
-        this.props.wavefilterState({tokenSelected: {"STATUS": ["any"]}, searchQuery: {}});
-        this.props.filterApplied(!this.props.isFilterApplied);
-        this.props.toggleWaveFilter(false);
-        this.props.setWavesFilterSpinner(true);
+        hashHistory.push({pathname: "/orders/waves", query: {}})
     }
 
 

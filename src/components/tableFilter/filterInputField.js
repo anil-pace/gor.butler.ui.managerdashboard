@@ -14,11 +14,14 @@ class FilterInputField extends React.Component{
 		return (
 			<div>
                 <div className="gor-filter-input-text"> {this.props.inputText.label} </div>
-                <input className='gor-filter-input-wrap' disabled={this.props.flag}   type="text" onChange={this._textSubmit.bind(this)} ref={node => { this.pageNum = node }} value={this.props.inputValue||""}/>
+                <input className={!this.props.flag?"gor-filter-input-wrap":"gor-filter-input-wrap gor-filter-disable"} disabled={this.props.flag}   type="text" onChange={this._textSubmit.bind(this)} ref={node => { this.pageNum = node }} value={this.props.inputValue||""}/>
             </div>
 		);    
 	}
 };
 
 export default FilterInputField ;
+
+
+
 

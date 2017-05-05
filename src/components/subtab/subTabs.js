@@ -69,13 +69,13 @@ class SystemTab extends React.Component{
 			<div>
 				<div className="gorMainSubtab">
 				
-					<Link to="/butlerbots" onClick = {this.handleSysSubTabClick.bind(this,BUTLERBOTS)}>
+					<Link to="/system/butlerbots" onClick = {this.handleSysSubTabClick.bind(this,BUTLERBOTS)}>
 						<SubTab item={butlerBots} changeClass={selectClass[BUTLERBOTS]}/> 
 					</Link>
-					<Link to="/pps" onClick = {this.handleSysSubTabClick.bind(this,PPS)}>
+					<Link to="/system/pps" onClick = {this.handleSysSubTabClick.bind(this,PPS)}>
 						<SubTab item={pps} changeClass={selectClass[PPS]}/> 
 					</Link>
-					<Link to="/chargingstation" onClick = {this.handleSysSubTabClick.bind(this,CHARGING)}>
+					<Link to="/system/chargingstation" onClick = {this.handleSysSubTabClick.bind(this,CHARGING)}>
 						<SubTab item={chargingStation} changeClass={selectClass[CHARGING]}/> 
 					</Link>
 				</div>

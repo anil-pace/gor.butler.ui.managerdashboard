@@ -1,4 +1,4 @@
-import {ORDERS_DATA} from '../constants/frontEndConstants';
+import {ORDERS_DATA,ORDER_LIST_REFRESHED} from '../constants/frontEndConstants';
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -35,6 +35,12 @@ export  function ordersInfo(state={},action){
             return Object.assign({}, state, {
             "ordersData" : ordersData
             })
+
+      case ORDER_LIST_REFRESHED:
+          return Object.assign({}, state, {
+              "orderListRefreshed": new Date()
+          })
+
 
     default:
       return state

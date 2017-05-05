@@ -8,5 +8,25 @@
     "id": "chargersDetail.butler.prefix",
     "description": "prefix for butler id in chargersDetail",
     "defaultMessage": "Butler - {botId}"
+  },
+  {
+    "id": "ChargingStations.table.heading",
+    "description": "Heading for ChargingStations",
+    "defaultMessage": "Charging Stations"
+  },
+  {
+    "id": "order.table.filterLabel",
+    "description": "button label for filter",
+    "defaultMessage": "Filter data"
+  },
+  {
+    "id": "ChargingStationsTable.filter.search.bar",
+    "description": "total stations for filter search bar",
+    "defaultMessage": "{total} Stations found"
+  },
+  {
+    "id": "ChargingStationsTable.filter.search.bar.showall",
+    "description": "button label for show all",
+    "defaultMessage": "Show all Stations"
   }
 ]

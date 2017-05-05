@@ -84,7 +84,7 @@ export function ResponseParse(store,res)
 				{
 					store.dispatch(setWavesSpinner(false));
 					store.dispatch(receiveOrdersData(res));	
-					store.dispatch(setWavesFilterSpinner(false));
+					store.dispatch(setWavesFilterSpinner(false));	
 				}
 				break;
 		    case PARSE_PPA_THROUGHPUT:
