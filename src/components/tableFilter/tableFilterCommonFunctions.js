@@ -18,7 +18,7 @@ export function handelTokenClick(field,value,state,data) {
             else {
                 var index = selectedToken[field].indexOf(value);  // when user removing token
                 if (index >= 0) {
-                    selectedToken[field].splice( index, 1 );
+                  (Array.isArray(selectedToken[field]))? selectedToken[field].splice( index, 1 ):selectedToken[field]=[];
                 }
                 if (selectedToken[field] && !selectedToken[field].length) { // checks when none is selected, checks default option
                     selectedToken[field].push(defaultToken[0])
