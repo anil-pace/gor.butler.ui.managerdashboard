@@ -800,7 +800,7 @@ body {
   padding: 0.3125rem 0;
   display: inline-block;
   vertical-align: middle;
-  width: 49%;
+  width: 40%;
 }
 
 .gorHeader .dropdown-content {
@@ -922,7 +922,7 @@ body {
   display: inline-block;
   float: right;
   cursor: pointer;
-  width: 30%;
+  width: 37%;
 }
 
 .gorHeader .upperTextClient {
@@ -4888,7 +4888,7 @@ button:disabled {
 }
 
 .gor-paginate-wrap {
-  padding-top: 0.625rem;
+  padding-top: 2rem;
   padding-bottom: 0.625rem;
 }
 
@@ -5123,7 +5123,7 @@ button:disabled {
 }
 
 .spinnerImage {
-  background-image: url(/images/whiteSpinner.svg);
+  background-image: url(images/whiteSpinner.svg);
   width: 30px;
   height: 30px;
   background-size: contain;
@@ -5154,6 +5154,7 @@ button:disabled {
 .gor-sku-error {
   color: #EC1C24;
   padding-top: 10px;
+  font-size: 15px;
 }
 
 .gor-sku-valid {
@@ -5246,6 +5247,10 @@ button:disabled {
   border: 1px solid #666666;
 }
 
+.gor-filter-disable {
+  background-color: #efefef;
+}
+
 .gor-filter-input-text {
   font-size: 14px;
   font-weight: 600;
@@ -5266,6 +5271,7 @@ button:disabled {
   padding-left: 10px;
   padding-right: 10px;
   padding-bottom: 4px;
+  cursor: pointer;
 }
 
 .gor-filter-token-selected {
@@ -5280,6 +5286,7 @@ button:disabled {
   padding-left: 10px;
   padding-right: 10px;
   padding-bottom: 4px;
+  cursor: pointer;
 }
 
 .gor-filter-token-text {
@@ -5352,13 +5359,9 @@ button:disabled {
   border: solid 1px #aaaaaa;
 }
 
-.gor-filterBtn-btn:hover {
-  cursor: pointer;
-}
-
 .gor-filterBtn-applied {
   font-family: 'Source Sans Pro Bold', sans-serif;
-  width: 125px;
+  min-width: 125px;
   height: 35px;
   font-size: 14px;
   color: #f36f36;
@@ -5368,10 +5371,6 @@ button:disabled {
   background-color: #ffffff;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   border: solid 1px #f36f36;
-}
-
-.gor-filterBtn-applied:hover {
-  cursor: pointer;
 }
 
 .gor-filter-body-slider-wrap {
@@ -5396,7 +5395,7 @@ button:disabled {
 .gor-menuWrap {
   display: inline-block;
   line-height: 22px;
-  width: 50%;
+  width: 59%;
 }
 
 .gor-menu-heading {
@@ -5810,7 +5809,15 @@ button:disabled {
   border-bottom: 1px solid #AAAAAA;
 }
 
+.gor-utility-tile-h1 .gor-utility-tile-icon {
+  display: inline-block;
+  float: right;
+  padding-top: 22px;
+  padding-right: 24px;
+}
+
 .gor-utility-tile-h1 .gor-utility-tile-heading {
+  display: inline-block;
   padding: 20px;
   font-size: 18px;
   font-weight: 600;
@@ -5850,6 +5857,7 @@ button:disabled {
   font-size: 0;
   width: 23.7%;
   position: relative;
+  vertical-align: top;
 }
 
 .gor-utility-updown-bar {
@@ -5897,4 +5905,131 @@ button:disabled {
   font-weight: 600;
   color: #000000;
   padding-bottom: 11px;
+}
+
+.gor-utility-body-header {
+  background-color: #efefef;
+  font-size: 14px;
+  font-weight: 600;
+  color: #000000;
+  padding-top: 5px;
+  padding-bottom: 7px;
+  padding-left: 19px;
+}
+
+.gor-utility-btn-wrap {
+  padding-top: 19px;
+  padding-bottom: 22px;
+  padding-left: 58px;
+}
+
+.gor-right-arrow {
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid #000000;
+}
+
+.gor-down-arrow {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #000000;
+}
+
+.gor-utility-master-h1 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #000000;
+  padding-top: 9px;
+  padding-left: 10px;
+}
+
+.gor-utility-master-h2 {
+  font-size: 12px;
+  color: #000000;
+  padding-top: 5px;
+  padding-left: 10px;
+}
+
+.gor-utility-master-arrordian-h1 {
+  font-size: 14px;
+  color: #666666;
+}
+
+.gor-utility-master-button {
+  position: absolute;
+  padding-left: 27%;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  color: #1d8cbb;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.gor-utility-accordian-h1 {
+  width: 39%;
+  padding-left: 34px;
+  padding-top: 19px;
+}
+
+.gor-utility-accordian-h2 {
+  width: 30%;
+}
+
+.gor-utility-accordian-h3 {
+  width: 14%;
+}
+
+.gor-utility-accordian-button {
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  color: #1d8cbb;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.gor-utility-accordian-arrow-wrap {
+  padding-left: 13px;
+  padding-bottom: 12px;
+}
+
+.gor-utility-accordian-border {
+  border: solid 0.1px #cccccc;
+  width: 90%;
+  margin-left: 5%;
+}
+
+.gor-utility-accordian-open {
+  height: 50px;
+}
+
+.gor-utility-accordian {
+  border-bottom: solid 0.5px #cccccc;
+  padding-bottom: 10px;
+}
+
+.gor-utility-invoice-wrap {
+  margin-left: 34px;
+  width: 76%;
+  box-shadow: none;
+  margin-top: 0px;
+}
+
+.gor-utility-invoice-h1 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000;
+  padding-bottom: 11px;
+  margin-left: 35px;
+  margin-top: 17px;
+}
+
+.gor-utility-error-invoice {
+  margin-left: 33px;
+  padding-top: 5px;
 }
