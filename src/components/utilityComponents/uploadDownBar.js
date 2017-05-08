@@ -18,8 +18,8 @@ class UploadDownBar extends React.Component{
 							{this.props.barData.h2}
 						</div>
 					</div> 
-					<div className="gor-utility-updown-button" onClick={this.props.barAction}>
-						{this.props.barData.buttonText}
+					<div className="gor-utility-updown-button">
+						RECALL
 					</div>
 			</div>
 		);

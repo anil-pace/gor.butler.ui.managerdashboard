@@ -9,7 +9,7 @@ import {setInventorySpinner} from '../actions/inventoryActions';
 import {setAuditSpinner} from '../actions/auditActions';
 import {setButlerSpinner,setPpsSpinner,setCsSpinner,setWavesSpinner,setWavesFilterSpinner,setButlerFilterSpinner,setPpsFilterSpinner,setCsFilterSpinner} from '../actions/spinnerAction';
 import {receiveInventoryTodayData,receiveInventoryHistoryData} from '../actions/inventoryActions';
-import {resTypeSnapShotToday,resTypeSnapShotHistory} from '../../mock/mockDBData';
+//import {resTypeSnapShotToday,resTypeSnapShotHistory} from '../../mock/mockDBData';
 import {endSession} from './endSession';
 
 export function ResponseParse(store,res)

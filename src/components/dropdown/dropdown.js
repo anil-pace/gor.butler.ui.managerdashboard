@@ -1,6 +1,6 @@
 //styleClass is the name of the css class to be used for styling, defsel is the index of the selected dropdown option.
 
-import React, { Component } from 'react';
+import React,{ Component } from 'react';
 import Ddown from 'react-dropdown';
 
 
