@@ -1,4 +1,3 @@
-
 export const BASE_URL = 'localhost';
 export const PORT = '8888';
 export const PROTOCOL = 'https://';
