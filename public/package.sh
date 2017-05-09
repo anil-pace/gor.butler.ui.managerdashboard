@@ -9,7 +9,10 @@ case "$1" in
 	install -d butler_md_alpha-$RELVSN/opt/butler_md_alpha
 	# copying all the resources from the dist folder 
 	cp index.html butler_md_alpha-$RELVSN/opt/butler_md_alpha
+	cp asset-manifest.json butler_md_alpha-$RELVSN/opt/butler_md_alpha
+	cp favicon.ico butler_md_alpha-$RELVSN/opt/butler_md_alpha
 	cp -R assets butler_md_alpha-$RELVSN/opt/butler_md_alpha
+	cp -R static butler_md_alpha-$RELVSN/opt/butler_md_alpha
 	install -d butler_md_alpha-$RELVSN/var/log/butler_md_alpha
 	install -d butler_md_alpha-$RELVSN/usr/local/bin/
 	install -d butler_md_alpha-$RELVSN/etc/butler_md_alpha
