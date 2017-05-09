@@ -135,6 +135,17 @@ export const SAFETY_MAP = "SAFETY_MAP";
 export const SAFETY_ERROR_MAP = "SAFETY_ERROR_MAP";
 export const ITEM_RECALLED = "ITEM_RECALLED";
 export const GR_REPORT_RESPONSE = "GR_REPORT_RESPONSE";
+/*Constants for Master Upload (CSV)*/
+export const MASTER_FILE_UPLOAD = "MASTER_FILE_UPLOAD";
+export const MASTER_UPLOAD_PROCESSING = "MASTER_UPLOAD_PROCESSING";
+export const MASTER_UPLOAD_SUCCESS = "MASTER_UPLOAD_SUCCESS";
+export const UPLOAD_HISTORY = "UPLOAD_HISTORY";
+export const MASTER_FILE_FORMATS = [".csv"];
+export const MASTER_FILE_VALIDATIONS = {
+	"0":"Only .csv Files Allowed",
+	"1":"File Size Exceeded"
+}
+export const MASTER_FILE_MAX_SIZE = 5e+6;
 
 export const AUDIT_RETRIEVE = "AUDIT_RETRIEVE";
 export const RECIEVE_AUDIT_DATA = "RECIEVE_AUDIT_DATA";
@@ -223,7 +234,7 @@ export const SYS_SUB_TAB_ROUTE_MAP={
 	[ORDER_LIST]:"orderlist"
 
 }
-export const SHOW_UTILITY_TAB = false;
+export const SHOW_UTILITY_TAB = true;
 /*Constant for time on header*/
 export const HEADER_START_TIME = ' 09:00:15 (IST)'
 

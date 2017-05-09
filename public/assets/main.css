@@ -6033,3 +6033,19 @@ button:disabled {
   margin-left: 33px;
   padding-top: 5px;
 }
+
+/*CSS for master data upload*/
+.gor-csvUploadWrap {
+  position: relative;
+  bottom: 32px;
+  cursor: pointer;
+  left: 30px;
+  width: 150px;
+  height: 32px;
+  display: block;
+}
+
+.gor-csvUploadWrap .gor-csvUpload {
+  opacity: 0;
+  cursor: pointer;
+}
