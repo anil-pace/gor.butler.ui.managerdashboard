@@ -126,7 +126,7 @@ class UtilityTab extends React.Component{
          'method':POST,
          'token': this.props.auth_token,
          'cause':MASTER_FILE_UPLOAD,
-         'contentType':'text/csv',
+         'contentType':'multipart/form-data',
          'formdata':formData
         }
         this.props.getItemRecall(params)
