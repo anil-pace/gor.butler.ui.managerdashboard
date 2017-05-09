@@ -135,8 +135,26 @@ class OrderListTab extends React.Component {
 
         //appending filter for status
         if (query.status) {
+            let statusList = query.status.constructor === Array ? query.status.slice() : [query.status]
+            let indexOfBreached = statusList.indexOf('breached');
+            let indexOfException = statusList.indexOf('exception');
+            if (indexOfBreached > -1) {
+                _query_params.push([BREACHED, "True"].join("="))
+                statusList.splice(indexOfBreached, 1)
+            }
+            if (indexOfException > -1) {
+                statusList.splice(indexOfException, 1)
+                _query_params.push([EXCEPTION_TRUE, "true"].join("="))
+            }
+
+            if (statusList.length > 0) {
+                _query_params.push([WAREHOUSE_STATUS, "['" + statusList.join("','") + "']"].join("="))
+            }
+
 
         }
+
+
 
         //appending filter for orders by time
         if (query.period) {
