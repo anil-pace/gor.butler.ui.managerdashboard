@@ -1,4 +1,5 @@
-import { AJAX_CALL,INVOICE_VALIDATION,MASTER_UPLOAD_PROCESSING,MASTER_UPLOAD_SUCCESS} from '../constants/frontEndConstants'
+import { AJAX_CALL,INVOICE_VALIDATION,MASTER_UPLOAD_PROCESSING,MASTER_UPLOAD_SUCCESS,
+UPLOAD_HISTORY} from '../constants/frontEndConstants'
 
 export function getItemRecall(params){
 	return {
@@ -42,6 +43,12 @@ export function uploadMasterDataProcessing(data){
 export function uploadMasterDataSuccess(data){
   return {
     type: MASTER_UPLOAD_SUCCESS,
+    data
+  }
+}
+export function uploadMasterDataHistory(data){
+  return {
+    type: UPLOAD_HISTORY,
     data
   }
 }

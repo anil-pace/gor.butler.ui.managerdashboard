@@ -60,7 +60,7 @@ const ajaxMiddleware = (function(){
                ShowError(store,params.cause,httpRequest.status);
     }
     httpRequest.open(params.method, params.url);
-   // httpRequest.setRequestHeader('Content-Type', params.contentType || "text/html");
+    httpRequest.setRequestHeader('Content-Type', params.contentType || "text/html");
     httpRequest.setRequestHeader('Accept', params.accept || "text/html");
     if(params.cause!==AUTH_LOGIN)
     {

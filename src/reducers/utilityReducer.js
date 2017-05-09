@@ -25,12 +25,14 @@ export  function utilityValidations(state={},action){
               "isMasterUploadProcessing" : action.data
             })
     case MASTER_UPLOAD_SUCCESS:
+          var newFileUploaded = !state.newFileUploaded;
           return Object.assign({}, state, {
-              "masterDataUploadSuccess" : action.data
+              "masterDataUploadSuccess" : action.data.data ? true : false,
+              "newFileUploaded":newFileUploaded
             })
     case UPLOAD_HISTORY:
           return Object.assign({}, state, {
-              "uploadHistoryData" : action.data
+              "uploadHistoryData" : action.data.mdm_upload_info || []
             }) 
     default:
       return state

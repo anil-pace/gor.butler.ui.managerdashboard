@@ -47,6 +47,9 @@ class FileUpload extends React.Component{
 
 	render(){
 		 var isProcessing = this.props.isProcessing;
+     /*<p className = {"gor-upl-err"}>
+                    dsada{this.props.validationList[this.state.isError]}
+                 </p> */
          
 		return (
 			<div>
@@ -54,17 +57,19 @@ class FileUpload extends React.Component{
 				<div className="gor-utility-btn-wrap">
 					<button className="gor-filterBtn-applied">
           				<label>
-  							{!isProcessing? "UPLOAD MASTER DATA" :<div className='spinnerImage'></div>}
+  							{!isProcessing? "UPLOAD MASTER DATA" :<div className='gor-orange-spinner gor-csv-processing'></div>}
 						</label>
+
          			</button>
                     <label className = {"gor-csvUploadWrap"}>
                     <input type="file" ref="fileUpload" name={"csvUpload"} disabled = {isProcessing} className = {"gor-csvUpload"}  accept={this.props.acceptedFormats.toString()} onClick={this._onInputClick.bind(this)} onChange={this._onFileChange.bind(this)}/>
                     </label>
-                   
-         		</div>
-                 <p className = {"gor-upl-err"}>
+                <p className={"gor-upl-msg"}>Maximum File Size: 5 MB</p>  
+                <p className = {"gor-upl-msg gor-upl-err"}>
                     {this.props.validationList[this.state.isError]}
-                 </p>
+                 </p>  
+         		</div>
+                 
 			</div>
 		);
 	}

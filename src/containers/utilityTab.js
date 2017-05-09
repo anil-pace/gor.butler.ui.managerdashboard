@@ -126,6 +126,7 @@ class UtilityTab extends React.Component{
          'method':POST,
          'token': this.props.auth_token,
          'cause':MASTER_FILE_UPLOAD,
+         'contentType':'text/csv',
          'formdata':formData
         }
         this.props.getItemRecall(params)
@@ -133,7 +134,7 @@ class UtilityTab extends React.Component{
     }
 
     _renderMasterUpload() {
-        var uploadHistoryData = this.props.uploadHistoryData ? this.props.uploadHistoryData.data : [];
+        var uploadHistoryData = this.props.uploadHistoryData || [];
         var recallBar = <MasterUploadTile isMasterUploadProcessing = {this.props.isMasterUploadProcessing} maxFileSize = {MASTER_FILE_MAX_SIZE} validationList = {MASTER_FILE_VALIDATIONS} acceptedFormats ={MASTER_FILE_FORMATS} onMasterFileUpload = {this._onMasterFileUpload.bind(this)} historyData={uploadHistoryData}/>;
         return recallBar;
     }
@@ -183,7 +184,11 @@ class UtilityTab extends React.Component{
     componentDidMount(){
       this._onRefresh();
     }
-
+    componentWillReceiveProps(nextProps, nextState){
+      if(nextProps.newFileUploaded !== this.props.newFileUploaded){
+        this._onRefresh();
+      }
+    }
 
   render(){
     var uploadDataTile = this._renderUploadDataTile();
@@ -216,6 +221,7 @@ function mapStateToProps(state, ownProps){
       validatedInvoice:state.utilityValidations.invalidInvoice || false,
       inventorySpinner: state.spinner.inventoryReportSpinner || false,
       isMasterUploadProcessing : state.utilityValidations.isMasterUploadProcessing || false,
+      newFileUploaded:state.utilityValidations.newFileUploaded,
       uploadHistoryData : state.utilityValidations.uploadHistoryData
   };
 }

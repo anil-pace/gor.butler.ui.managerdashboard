@@ -470,7 +470,15 @@ body {
 }
 
 .gor-white-spinner {
-  background-image: url(/images/whiteSpinner.svg);
+  background-image: url(./images/whiteSpinner.svg);
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.gor-orange-spinner {
+  background-image: url(./images/icons.svg);
   width: 16px;
   height: 16px;
   display: inline-block;
@@ -5863,6 +5871,7 @@ button:disabled {
 .gor-utility-updown-bar {
   height: 50px;
   border-bottom: solid 0.5px #cccccc;
+  cursor: pointer;
 }
 
 .gor-utility-updown-bar .gor-utility-updown-wrap {
@@ -6006,6 +6015,7 @@ button:disabled {
 
 .gor-utility-accordian-open {
   height: 50px;
+  cursor: pointer;
 }
 
 .gor-utility-accordian {
@@ -6032,4 +6042,28 @@ button:disabled {
 .gor-utility-error-invoice {
   margin-left: 33px;
   padding-top: 5px;
+}
+
+/*CSS for master data upload*/
+.gor-csvUploadWrap {
+  position: relative;
+  bottom: 32px;
+  cursor: pointer;
+  left: 30px;
+  width: 150px;
+  height: 32px;
+  display: block;
+}
+
+.gor-csvUploadWrap .gor-csvUpload {
+  opacity: 0;
+  cursor: pointer;
+}
+
+.gor-csvUploadWrap .gor-csv-processing {
+  width: 30px;
+  height: 30px;
+  background-size: contain;
+  margin-left: auto;
+  margin-right: auto;
 }

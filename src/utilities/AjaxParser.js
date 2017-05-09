@@ -23,7 +23,10 @@ import {endSession} from './endSession';
 import {setResolveAuditSpinner,setSafetySpinner,setInventoryReportSpinner} from '../actions/spinnerAction';
 import {statusToString} from './statusToString';
 import {INVALID_SKUID} from '../constants/messageConstants';
-import {validateInvoiceID,uploadMasterDataProcessing,uploadMasterDataSuccess} from '../actions/utilityActions';
+import {validateInvoiceID,
+	uploadMasterDataProcessing,
+	uploadMasterDataSuccess,
+uploadMasterDataHistory} from '../actions/utilityActions';
 export function AjaxParse(store,res,cause,status)
 {
 	let stringInfo={};
@@ -271,10 +274,11 @@ export function AjaxParse(store,res,cause,status)
 		break;
 		case MASTER_FILE_UPLOAD:
 			store.dispatch(uploadMasterDataProcessing(false));
-			store.dispatch(uploadMasterDataSuccess(true));
+			store.dispatch(uploadMasterDataSuccess(res));
 		break;
 		case UPLOAD_HISTORY:
-			store.dispatch(validateInvoiceID(res));
+			store.dispatch(uploadMasterDataHistory(res));
+			break;
 		default:
 			ShowError(store,cause,status);
 	 }
