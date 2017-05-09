@@ -103,7 +103,7 @@ class OrderListTab extends React.Component {
             this.setState({query: nextProps.location.query})
             this.setState({orderListRefreshed: nextProps.orderListRefreshed})
             this._subscribeData()
-            this._refreshList(nextProps.location.query)
+            this._refreshList(nextProps.location.query,nextProps.orderSortHeaderState.colSortDirs)
         }
     }
 
@@ -113,14 +113,20 @@ class OrderListTab extends React.Component {
         this.props.updateSubscriptionPacket(updatedWsSubscription);
     }
 
-
+    toggleOrder(data){
+        if(data=="DESC")
+            {return "ASC"}
+        else if(data=="ASC")
+            {return "DESC"}
+    }
     /**
      * The method will update the subscription packet
      * and will fetch the data from the socket.
      * @private
      */
-    _refreshList(query) {
+    _refreshList(query,orderbyParam) {
         this.props.setOrderListSpinner(true);
+
         let _query_params = [], convertTime = {
             "oneHourOrders": 1,
             "twoHourOrders": 2,
@@ -133,6 +139,7 @@ class OrderListTab extends React.Component {
             _query_params.push([ORDER_ID_FILTER_PARAM, query.orderId].join("~="))
         }
 
+     
         //appending filter for status
         if (query.status) {
             let statusList = query.status.constructor === Array ? query.status.slice() : [query.status]
@@ -170,7 +177,9 @@ class OrderListTab extends React.Component {
         let url = API_URL + ORDERS_URL
 
         _query_params.push([GIVEN_PAGE, query.page || 1].join("="))
-        _query_params.push([GIVEN_PAGE_SIZE, query.pageSize || 25].join("="))
+        _query_params.push([GIVEN_PAGE_SIZE, query.pageSize || 25].join("="));
+        orderbyParam? _query_params.push(sortOrderHead[Object.keys(orderbyParam)[0]]):"";
+        orderbyParam? _query_params.push(['order',this.toggleOrder(orderbyParam[Object.keys(orderbyParam)])].join("=")):"";
         url = [url, _query_params.join("&")].join("?")
         let paginationData = {
 
@@ -195,7 +204,8 @@ class OrderListTab extends React.Component {
                 "STATUS": query.status ? (query.status.constructor === Array ? query.status : [query.status]) : ['all'],
                 "TIME PERIOD": query.period ? (query.period.constructor === Array ? query.period[0] : query.period) : ['allOrders']
             },
-            searchQuery: {"ORDER ID": query.orderId || ''}
+            searchQuery: {"ORDER ID": query.orderId || ''},
+            "PAGE": query.page || 1
         });
         this.props.getPageData(paginationData);
     }
@@ -593,6 +603,8 @@ class OrderListTab extends React.Component {
                                     showFilter={this.props.showFilter} responseFlag={this.props.orderListSpinner}
                                     isFilterApplied={this.props.isFilterApplied}
                                     orderFilterStatus={this.props.orderFilterStatus}
+                                    onSortChange={this.refresh.bind(this)}
+                                    PageNumber={this.props.PageNumber}
                     />
 
                     <div className="gor-pageNum">
@@ -630,6 +642,7 @@ function mapStateToProps(state, ownProps) {
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
         socketAuthorized: state.recieveSocketActions.socketAuthorized,
         orderListRefreshed: state.ordersInfo.orderListRefreshed,
+        PageNumber:(state.filterInfo.orderFilterState)? state.filterInfo.orderFilterState.PAGE :1
     };
 }
 
