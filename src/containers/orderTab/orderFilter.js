@@ -10,9 +10,9 @@ import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/t
 import {hashHistory} from 'react-router'
 import {SINGLE} from './../../constants/frontEndConstants'
 class OrderFilter extends React.Component{
-	constructor(props) 
-	{
-    	super(props);
+    constructor(props) 
+    {
+        super(props);
         this.state = {tokenSelected: {"STATUS":["all"], "TIME PERIOD":["allOrders"]}, searchQuery: {},
                       defaultToken: {"STATUS":["all"], "TIME PERIOD":["allOrders"]}}; 
     }
@@ -102,12 +102,12 @@ class OrderFilter extends React.Component{
 
 
 
-	render(){
+    render(){
         var noOrder = this.props.orderData.totalOrders?false:true;
         var orderSearchField = this._processOrderSearchField();
         var orderFilterToken = this._processFilterToken();
-		return (
-			<div>
+        return (
+            <div>
                  <Filter hideFilter={this._closeFilter.bind(this)}  // hiding filter wont disturb state
                          clearFilter={this._clearFilter.bind(this)} // clearing sates of filter
                          searchField={orderSearchField}
@@ -118,8 +118,8 @@ class OrderFilter extends React.Component{
                          noDataFlag={noOrder} //messg to show in case of no data
                          />
             </div>
-		);
-	}
+        );
+    }
 };
 
 

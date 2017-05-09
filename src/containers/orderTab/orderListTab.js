@@ -665,9 +665,7 @@ var mapDispatchToProps = function (dispatch) {
         setOrderListSpinner: function (data) {
             dispatch(setOrderListSpinner(data))
         },
-        setCurrentPage: function (data) {
-            dispatch(setCurrentPage(data))
-        },
+        
         showTableFilter: function (data) {
             dispatch(showTableFilter(data));
         },
@@ -720,7 +718,6 @@ OrderListTab.PropTypes = {
     currentPage: React.PropTypes.func,
     lastRefreshTime: React.PropTypes.func,
     setOrderListSpinner: React.PropTypes.func,
-    setCurrentPage: React.PropTypes.func,
     showTableFilter: React.PropTypes.func,
     filterApplied: React.PropTypes.func,
     orderFilterStatus: React.PropTypes.bool,

@@ -1,7 +1,7 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import LoginForm from './loginForm';
-import Footer from '../Footer/Footer';
+import Footer from '../footer/Footer';
 import Spinner from '../../components/spinner/Spinner';
 import { setLoginSpinner } from '../../actions/loginAction';
 import {resetForm} from '../../actions/validationActions';

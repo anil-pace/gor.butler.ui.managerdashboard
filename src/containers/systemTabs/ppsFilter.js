@@ -8,7 +8,7 @@ import {updateSubscriptionPacket} from '../../actions/socketActions';
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
-import RangeSlider from '../../components/rangeSlider/rangeSlider'
+import RangeSlider from '../../components/rangeSlider/RangeSlider'
 import {filterMarks} from '../../constants/frontEndConstants';
 import {setPpsFilterSpinner}  from '../../actions/spinnerAction';
 import {hashHistory} from 'react-router'
@@ -191,7 +191,6 @@ var mapDispatchToProps = function(dispatch){
     updateSubscriptionPacket: function(data){dispatch(updateSubscriptionPacket(data));},
     ppsfilterState: function(data){dispatch(ppsfilterState(data));},
     togglePPSFilter: function(data){dispatch(togglePPSFilter(data));},
-    setPpsSpinner: function(data){dispatch(setPpsSpinner(data));},
     setPpsFilterSpinner: function(data){dispatch(setPpsFilterSpinner(data));},
     setDefaultRange: function(data){dispatch(setDefaultRange(data));}
 

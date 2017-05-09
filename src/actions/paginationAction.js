@@ -56,10 +56,5 @@ export function lastRefreshTime(data) {
   }
 }
 
-export function setCurrentPage(data) {
-  return {
-    type: SET_CURRENT_PAGE,
-    data
-  }
-}
+
 
