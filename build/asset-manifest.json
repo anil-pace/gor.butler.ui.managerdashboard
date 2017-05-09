@@ -13,8 +13,8 @@
   "inventory.js.map": "static/js/inventory.b681aec8.chunk.js.map",
   "login.js": "static/js/login.cd3d725d.chunk.js",
   "login.js.map": "static/js/login.cd3d725d.chunk.js.map",
-  "main.js": "static/js/main.c1cbd33f.js",
-  "main.js.map": "static/js/main.c1cbd33f.js.map",
+  "main.js": "static/js/main.cf6f9bc7.js",
+  "main.js.map": "static/js/main.cf6f9bc7.js.map",
   "orderList.js": "static/js/orderList.0107633c.chunk.js",
   "orderList.js.map": "static/js/orderList.0107633c.chunk.js.map",
   "orders.js": "static/js/orders.eeba8c2d.chunk.js",
@@ -25,6 +25,6 @@
   "system.js.map": "static/js/system.e1c567f8.chunk.js.map",
   "users.js": "static/js/users.b3b5fdef.chunk.js",
   "users.js.map": "static/js/users.b3b5fdef.chunk.js.map",
-  "utilities.js": "static/js/utilities.b9d9a39f.chunk.js",
-  "utilities.js.map": "static/js/utilities.b9d9a39f.chunk.js.map"
+  "utilities.js": "static/js/utilities.6618de78.chunk.js",
+  "utilities.js.map": "static/js/utilities.6618de78.chunk.js.map"
 }
