@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import AccordianBar from './accordianBar';
 import FileUpload from '../fileUpload/fileUpload';
 
+
 class MasterUploadTile extends React.Component{
 	constructor(props)  
 	{
@@ -30,6 +31,7 @@ class MasterUploadTile extends React.Component{
         }
     	for (let i = historyData.length - 1; i >= 0; i--) {
     		let status = ((historyData[i].created + historyData[i].deleted + historyData[i].error +historyData[i].updated) / historyData[i].total)*100;
+            
             masterUploadBar = <AccordianBar completed = {status} showPanel={this.state.showPanel[i]} data={historyData[i]} 
     										handleAccordianState={this._handlePanel.bind(this)} index={i} key={"acc"+i}/>
     		result.push(masterUploadBar)
@@ -41,9 +43,9 @@ class MasterUploadTile extends React.Component{
 		var masterDataBody = this._renderMasterData();
 		return (
 			<div>
-				<FileUpload isProcessing={this.props.isMasterUploadProcessing} maxFileSize = {this.props.maxFileSize} validationList = {this.props.validationList} acceptedFormats = {this.props.acceptedFormats} onChange={this.props.onMasterFileUpload}/>
+				<FileUpload uploadBtnText= {this.props.uploadBtnText} isProcessing={this.props.isMasterUploadProcessing} maxFileSize = {this.props.maxFileSize} validationList = {this.props.validationList} acceptedFormats = {this.props.acceptedFormats} onChange={this.props.onMasterFileUpload}/>
          		<div className="gor-utility-body-header">
-         			Upload History 
+         			<FormattedMessage id="utility.uploadHistory.head" description='Upload History' defaultMessage='Upload History'/> 
          		</div>
          		<div>
          			{masterDataBody}
@@ -58,7 +60,8 @@ MasterUploadTile.propTypes={
     acceptedFormats:React.PropTypes.array,
     validationList:React.PropTypes.object,
     maxFileSize :  React.PropTypes.number,
-    isMasterUploadProcessing: React.PropTypes.bool
+    isMasterUploadProcessing: React.PropTypes.bool,
+    uploadBtnText:React.PropTypes.string
 }
 
 export default MasterUploadTile ;

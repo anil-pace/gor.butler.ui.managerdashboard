@@ -1,5 +1,6 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
+import { FormattedMessage } from 'react-intl';
 /**
  * Generic component for file upload
  */
@@ -47,24 +48,21 @@ class FileUpload extends React.Component{
 
 	render(){
 		 var isProcessing = this.props.isProcessing;
-     /*<p className = {"gor-upl-err"}>
-                    dsada{this.props.validationList[this.state.isError]}
-                 </p> */
-         
+     var maxSize = this.props.maxFileSize ? Math.round(this.props.maxFileSize / Math.pow(1024, 2), 2) : 0;
 		return (
 			<div>
             
 				<div className="gor-utility-btn-wrap">
 					<button className="gor-filterBtn-applied">
           				<label>
-  							{!isProcessing? "UPLOAD MASTER DATA" :<div className='gor-orange-spinner gor-csv-processing'></div>}
+  							{!isProcessing? this.props.uploadBtnText :<div className='gor-orange-spinner gor-csv-processing'></div>}
 						</label>
 
          			</button>
                     <label className = {"gor-csvUploadWrap"}>
                     <input type="file" ref="fileUpload" name={"csvUpload"} disabled = {isProcessing} className = {"gor-csvUpload"}  accept={this.props.acceptedFormats.toString()} onClick={this._onInputClick.bind(this)} onChange={this._onFileChange.bind(this)}/>
                     </label>
-                <p className={"gor-upl-msg"}>Maximum File Size: 5 MB</p>  
+                <p className={"gor-upl-msg"}> <FormattedMessage id="utility.fileSize.message" description='Maximum File Size:  MB' defaultMessage='Maximum File Size: {maxSize} MB' values={{maxSize:maxSize}}/></p>  
                 <p className = {"gor-upl-msg gor-upl-err"}>
                     {this.props.validationList[this.state.isError]}
                  </p>  
@@ -76,6 +74,7 @@ class FileUpload extends React.Component{
 };
 
 FileUpload.propTypes={
-    onChange:React.PropTypes.func
+    onChange:React.PropTypes.func,
+    uploadBtnText:React.PropTypes.string
 }
 export default FileUpload ;

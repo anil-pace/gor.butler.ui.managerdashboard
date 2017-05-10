@@ -32,6 +32,37 @@ import {
   UPLOAD_HISTORY
 } from '../constants/frontEndConstants';
 import FieldError from '../components/fielderror/fielderror';
+import { defineMessages } from 'react-intl';
+
+//Mesages for internationalization
+const messages = defineMessages({
+    masterDataHead: {
+        id: 'utility.masterData.head',
+        description: 'Master data upload',
+        defaultMessage: "Master data upload"
+    },
+    runScriptsHead: {
+        id: 'utility.runScript.head',
+        description: 'Run Script',
+        defaultMessage: "Run Script"
+    },
+    downloadReportsHead:{
+        id: 'utility.downloadReport.head',
+        description: 'Download Reports',
+        defaultMessage: "Download Reports",
+    },
+    goodsRcvdNotesHead:{
+      id:"utility.goodsRcvdNotes.head", 
+      description: 'Download Goods Recieved Notes',
+      defaultMessage: "Download Goods Recieved Notes"
+    },
+    uploadBtnText:{
+      id:"utility.uploadBtn.label", 
+      description: 'Upload Master Data',
+      defaultMessage: "Upload Master Data"
+    }
+
+});
 
 class UtilityTab extends React.Component{
   constructor(props) 
@@ -118,7 +149,6 @@ class UtilityTab extends React.Component{
      * @return {[type]}            [description]
      */
     _onMasterFileUpload(fileObject){
-      console.log(fileObject);
       var formData = new FormData();
       formData.append("file", fileObject);
       var params={
@@ -126,7 +156,7 @@ class UtilityTab extends React.Component{
          'method':POST,
          'token': this.props.auth_token,
          'cause':MASTER_FILE_UPLOAD,
-         'contentType':'multipart/form-data',
+         'contentType':false,
          'formdata':formData
         }
         this.props.getItemRecall(params)
@@ -135,7 +165,7 @@ class UtilityTab extends React.Component{
 
     _renderMasterUpload() {
         var uploadHistoryData = this.props.uploadHistoryData || [];
-        var recallBar = <MasterUploadTile isMasterUploadProcessing = {this.props.isMasterUploadProcessing} maxFileSize = {MASTER_FILE_MAX_SIZE} validationList = {MASTER_FILE_VALIDATIONS} acceptedFormats ={MASTER_FILE_FORMATS} onMasterFileUpload = {this._onMasterFileUpload.bind(this)} historyData={uploadHistoryData}/>;
+        var recallBar = <MasterUploadTile uploadBtnText = {this.context.intl.formatMessage(messages.uploadBtnText)} isMasterUploadProcessing = {this.props.isMasterUploadProcessing} maxFileSize = {MASTER_FILE_MAX_SIZE} validationList = {MASTER_FILE_VALIDATIONS} acceptedFormats ={MASTER_FILE_FORMATS} onMasterFileUpload = {this._onMasterFileUpload.bind(this)} historyData={uploadHistoryData}/>;
         return recallBar;
     }
 
@@ -200,13 +230,13 @@ class UtilityTab extends React.Component{
     return (
       <div >
         <div>
-                    <UtilityTile tileHead="Master Data Upload" showFooter={false} 
+                    <UtilityTile tileHead={this.context.intl.formatMessage(messages.masterDataHead)} showFooter={false} 
                                  tileBody={masterUpload} showHeaderIcon={true} onRefresh = {this._onRefresh.bind(this)}/>
-          <UtilityTile tileHead="Run scripts" showFooter={false} tileBody={uploadDataTile}/>
-          <UtilityTile tileHead="Download reports" showFooter={true} tileBody={downloadReportTile} 
+          <UtilityTile tileHead={this.context.intl.formatMessage(messages.runScriptsHead)} showFooter={false} tileBody={uploadDataTile}/>
+          <UtilityTile tileHead={this.context.intl.formatMessage(messages.downloadReportsHead)} showFooter={true} tileBody={downloadReportTile} 
                                  footerAction={this._downloadReport.bind(this)} enableButton={activeReportDownButton}
                                  responseState={this.props.inventorySpinner}/>
-          <UtilityTile tileHead="Download Goods Recieved Note" showFooter={true} 
+          <UtilityTile tileHead={this.context.intl.formatMessage(messages.goodsRcvdNotesHead)} showFooter={true} 
                                  tileBody={grnTile} footerAction={this._downloadGRN.bind(this)} 
                                  enableButton={activeGRNDownButton}/>
         </div>
@@ -236,5 +266,8 @@ var mapDispatchToProps = function(dispatch){
     setInventoryReportSpinner: function(data){ dispatch(setInventoryReportSpinner(data)); }
   }
 };
+UtilityTab.contextTypes = {
+    intl: React.PropTypes.object.isRequired
+}
 
 export default connect(mapStateToProps,mapDispatchToProps)(UtilityTab);

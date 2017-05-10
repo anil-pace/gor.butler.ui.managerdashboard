@@ -470,11 +470,15 @@ body {
 }
 
 .gor-white-spinner {
-  background-image: url(/images/whiteSpinner.svg);
+  background-image: url(./images/whiteSpinner.svg);
   width: 16px;
   height: 16px;
   display: inline-block;
   vertical-align: middle;
+}
+
+.gor-orange-spinner {
+  background-image: url(./images/loading_orange.svg);
 }
 
 .gor-refresh-icon {
@@ -5833,13 +5837,20 @@ button:disabled {
 }
 
 .gor-utility-tile-body .gor-upl-msg {
-  width: 60%;
+  width: 67%;
   margin: auto;
   color: #535353;
 }
 
 .gor-utility-tile-body .gor-upl-err {
   color: #FF0000;
+}
+
+.gor-utility-tile-body .gor-csv-processing {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .gor-utility-tile-footer {

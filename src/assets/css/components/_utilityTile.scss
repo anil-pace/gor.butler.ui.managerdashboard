@@ -24,13 +24,19 @@
     font-size:12px;
   }
   .gor-upl-msg{
-     width: 60%;
+     width: 67%;
       margin: auto;
       color:#535353;
   }
   .gor-upl-err{
     color: #FF0000;
   }
+  .gor-csv-processing{
+       width: 18px;
+      height: 18px;
+      display: inline-block;
+      vertical-align: middle;
+    }
 }
 
 .gor-utility-tile-footer {
@@ -246,4 +252,6 @@
       opacity:0;
       cursor: pointer;
     }
+    
   }
+  
