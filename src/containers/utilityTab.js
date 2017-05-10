@@ -165,7 +165,7 @@ class UtilityTab extends React.Component{
 
     _renderMasterUpload() {
         var uploadHistoryData = this.props.uploadHistoryData || [];
-        var recallBar = <MasterUploadTile uploadBtnText = {this.context.intl.formatMessage(messages.uploadBtnText)} isMasterUploadProcessing = {this.props.isMasterUploadProcessing} maxFileSize = {MASTER_FILE_MAX_SIZE} validationList = {MASTER_FILE_VALIDATIONS} acceptedFormats ={MASTER_FILE_FORMATS} onMasterFileUpload = {this._onMasterFileUpload.bind(this)} historyData={uploadHistoryData}/>;
+        var recallBar = <MasterUploadTile dataRefreshed = {this.props.dataRefreshed} uploadBtnText = {this.context.intl.formatMessage(messages.uploadBtnText)} isMasterUploadProcessing = {this.props.isMasterUploadProcessing} maxFileSize = {MASTER_FILE_MAX_SIZE} validationList = {MASTER_FILE_VALIDATIONS} acceptedFormats ={MASTER_FILE_FORMATS} onMasterFileUpload = {this._onMasterFileUpload.bind(this)} historyData={uploadHistoryData}/>;
         return recallBar;
     }
 
@@ -224,9 +224,9 @@ class UtilityTab extends React.Component{
     var uploadDataTile = this._renderUploadDataTile();
     var downloadReportTile = this._renderDownReportTile();
     var grnTile = this._renderGRNtile();
-        var masterUpload = this._renderMasterUpload();
-        var activeReportDownButton = (this.state.reportState.fileType && this.state.reportState.category)?true:false;
-        var activeGRNDownButton = (this.state.grnState.fileType && this.state.grnState.invoiceId)?true:false;
+    var masterUpload = this._renderMasterUpload();
+    var activeReportDownButton = (this.state.reportState.fileType && this.state.reportState.category)?true:false;
+    var activeGRNDownButton = (this.state.grnState.fileType && this.state.grnState.invoiceId)?true:false;
     return (
       <div >
         <div>
@@ -252,7 +252,8 @@ function mapStateToProps(state, ownProps){
       inventorySpinner: state.spinner.inventoryReportSpinner || false,
       isMasterUploadProcessing : state.utilityValidations.isMasterUploadProcessing || false,
       newFileUploaded:state.utilityValidations.newFileUploaded,
-      uploadHistoryData : state.utilityValidations.uploadHistoryData
+      uploadHistoryData : state.utilityValidations.uploadHistoryData,
+      dataRefreshed : state.utilityValidations.dataRefreshed
   };
 }
 
