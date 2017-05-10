@@ -95,10 +95,10 @@ class OrderListTab extends React.Component {
          * packet can be sent to the server for data
          * update.
          */
-        this.props.orderListRefreshed()
-    }
+         this.props.orderListRefreshed()
+     }
 
-    componentWillReceiveProps(nextProps) {
+     componentWillReceiveProps(nextProps) {
         if (nextProps.socketAuthorized && nextProps.orderListRefreshed && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
             this.setState({query: nextProps.location.query})
             this.setState({orderListRefreshed: nextProps.orderListRefreshed})
@@ -124,7 +124,9 @@ class OrderListTab extends React.Component {
      * and will fetch the data from the socket.
      * @private
      */
-    _refreshList(query,orderbyParam) {
+     _refreshList(query,orderbyParam) {
+        var orderbyUrl;
+
         this.props.setOrderListSpinner(true);
 
         let _query_params = [], convertTime = {
@@ -139,11 +141,25 @@ class OrderListTab extends React.Component {
             _query_params.push([ORDER_ID_FILTER_PARAM, query.orderId].join("~="))
         }
 
-     
         //appending filter for status
         if (query.status) {
+         let statusList = query.status.constructor === Array ? query.status.slice() : [query.status]
+         let indexOfBreached = statusList.indexOf('breached');
+         let indexOfException = statusList.indexOf('exception');
+         if (indexOfBreached > -1) {
+             _query_params.push([BREACHED, "True"].join("="))
+             statusList.splice(indexOfBreached, 1)
+         }
+         if (indexOfException > -1) {
+             statusList.splice(indexOfException, 1)
+             _query_params.push([EXCEPTION_TRUE, "true"].join("="))
+         }
 
-        }
+         if (statusList.length > 0) {
+             _query_params.push([WAREHOUSE_STATUS, "['" + statusList.join("','") + "']"].join("="))
+         }
+
+     }
 
         //appending filter for orders by time
         if (query.period) {
@@ -160,9 +176,19 @@ class OrderListTab extends React.Component {
 
         _query_params.push([GIVEN_PAGE, query.page || 1].join("="))
         _query_params.push([GIVEN_PAGE_SIZE, query.pageSize || 25].join("="));
-        orderbyParam? _query_params.push(sortOrderHead[Object.keys(orderbyParam)[0]]):"";
-        orderbyParam? _query_params.push(['order',this.toggleOrder(orderbyParam[Object.keys(orderbyParam)])].join("=")):"";
-        url = [url, _query_params.join("&")].join("?")
+        if(orderbyParam && orderbyParam.sortDir){
+            orderbyParam? _query_params.push(['order',this.toggleOrder(orderbyParam.sortDir)].join("=")):"";
+            orderbyUrl =orderbyParam? sortOrderHead[orderbyParam["columnKey"]]:"";
+
+        }
+        else
+        {
+            orderbyParam? _query_params.push(['order',this.toggleOrder(orderbyParam[Object.keys(orderbyParam)])].join("=")):"";
+            orderbyUrl=orderbyParam? sortOrderHead[Object.keys(orderbyParam)[0]]:"";
+        }  
+        url = [url, _query_params.join("&")].join("?");
+        url+=orderbyUrl;
+        
         let paginationData = {
 
             'url': url,
@@ -172,8 +198,8 @@ class OrderListTab extends React.Component {
             'contentType': 'application/json'
         }
         if (Object.keys(query).filter(function (el) {
-                return el !== 'page'
-            }).length !== 0) {
+            return el !== 'page'
+        }).length !== 0) {
             this.props.toggleOrderFilter(true);
             this.props.filterApplied(true);
         } else {
@@ -195,7 +221,7 @@ class OrderListTab extends React.Component {
     /**
      *
      */
-    _clearFilter() {
+     _clearFilter() {
         hashHistory.push({pathname: "/orders/orderlist", query: {}})
     }
 
@@ -243,27 +269,27 @@ class OrderListTab extends React.Component {
             else {
                 if (getDaysDiff(data[i].create_time) < 2) {
                     orderData.recievedTime = nProps.context.intl.formatRelative(data[i].create_time, {
-                            timeZone: timeOffset,
-                            units: 'day'
-                        }) +
-                        ", " + nProps.context.intl.formatTime(data[i].create_time, {
-                            timeZone: timeOffset,
-                            hour: 'numeric',
-                            minute: 'numeric',
-                            hour12: false
-                        });
+                        timeZone: timeOffset,
+                        units: 'day'
+                    }) +
+                    ", " + nProps.context.intl.formatTime(data[i].create_time, {
+                        timeZone: timeOffset,
+                        hour: 'numeric',
+                        minute: 'numeric',
+                        hour12: false
+                    });
                 }
                 else {
                     orderData.recievedTime = nProps.context.intl.formatDate(data[i].create_time,
-                        {
-                            timeZone: timeOffset,
-                            year: 'numeric',
-                            month: 'short',
-                            day: '2-digit',
-                            hour: "2-digit",
-                            minute: "2-digit",
-                            hour12: false
-                        });
+                    {
+                        timeZone: timeOffset,
+                        year: 'numeric',
+                        month: 'short',
+                        day: '2-digit',
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        hour12: false
+                    });
                 }
             }
             if (!data[i].pick_before_time) {
@@ -272,27 +298,27 @@ class OrderListTab extends React.Component {
             else {
                 if (getDaysDiff(data[i].pick_before_time) < 2) {
                     orderData.pickBy = nProps.context.intl.formatRelative(data[i].pick_before_time, {
-                            timeZone: timeOffset,
-                            units: 'day'
-                        }) +
-                        ", " + nProps.context.intl.formatTime(data[i].pick_before_time, {
-                            timeZone: timeOffset,
-                            hour: 'numeric',
-                            minute: 'numeric',
-                            hour12: false
-                        });
+                        timeZone: timeOffset,
+                        units: 'day'
+                    }) +
+                    ", " + nProps.context.intl.formatTime(data[i].pick_before_time, {
+                        timeZone: timeOffset,
+                        hour: 'numeric',
+                        minute: 'numeric',
+                        hour12: false
+                    });
                 }
                 else {
                     orderData.pickBy = nProps.context.intl.formatDate(data[i].pick_before_time,
-                        {
-                            timeZone: timeOffset,
-                            year: 'numeric',
-                            month: 'short',
-                            day: '2-digit',
-                            hour: "2-digit",
-                            minute: "2-digit",
-                            hour12: false
-                        });
+                    {
+                        timeZone: timeOffset,
+                        year: 'numeric',
+                        month: 'short',
+                        day: '2-digit',
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        hour12: false
+                    });
                 }
             }
             if (data[i].completed_orderlines === data[i].total_orderlines) {
@@ -304,27 +330,27 @@ class OrderListTab extends React.Component {
             if (data[i].status === "completed") {
                 if (getDaysDiff(data[i].update_time) < 2) {
                     orderData.completedTime = nProps.context.intl.formatRelative(data[i].update_time, {
-                            timeZone: timeOffset,
-                            units: 'day'
-                        }) +
-                        ", " + nProps.context.intl.formatTime(data[i].update_time, {
-                            timeZone: timeOffset,
-                            hour: 'numeric',
-                            minute: 'numeric',
-                            hour12: false
-                        });
+                        timeZone: timeOffset,
+                        units: 'day'
+                    }) +
+                    ", " + nProps.context.intl.formatTime(data[i].update_time, {
+                        timeZone: timeOffset,
+                        hour: 'numeric',
+                        minute: 'numeric',
+                        hour12: false
+                    });
                 }
                 else {
                     orderData.completedTime = nProps.context.intl.formatDate(data[i].update_time,
-                        {
-                            timeZone: timeOffset,
-                            year: 'numeric',
-                            month: 'short',
-                            day: '2-digit',
-                            hour: "2-digit",
-                            minute: "2-digit",
-                            hour12: false
-                        });
+                    {
+                        timeZone: timeOffset,
+                        year: 'numeric',
+                        month: 'short',
+                        day: '2-digit',
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        hour12: false
+                    });
                 }
             } else {
                 orderData.completedTime = "--";
@@ -362,35 +388,52 @@ class OrderListTab extends React.Component {
         this.props.currentPage(data.selected);
         this.props.getPageData(paginationData);
     }
+    
+    //To check where the object is empty or not
 
+    isEmpty(objecttoCheck) {
+        for(var key in objecttoCheck) {
+            if (objecttoCheck.hasOwnProperty(key)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     refresh = (data) => {
-        var convertTime = {
-            "oneHourOrders": 1,
-            "twoHourOrders": 2,
-            "sixHourOrders": 6,
-            "twelveHourOrders": 12,
-            "oneDayOrders": 24
-        };
-        var prevTime, currentTime;
-        var appendStatusUrl = "", appendTimeUrl = "", appendPageSize = "", appendSortUrl = "", appendTextFilterUrl = "";
-        var filterApplied = false;
-        if (!data) {
-            data = {};
-            data.selected = 1;
-            data.url = "";
+
+        if(!this.isEmpty(this.props.location.query))
+        {
+            this._refreshList(this.props.location.query,data);
+        }
+        else
+        {
+            var convertTime = {
+                "oneHourOrders": 1,
+                "twoHourOrders": 2,
+                "sixHourOrders": 6,
+                "twelveHourOrders": 12,
+                "oneDayOrders": 24
+            };
+            var prevTime, currentTime;
+            var appendStatusUrl = "", appendTimeUrl = "", appendPageSize = "", appendSortUrl = "", appendTextFilterUrl = "";
+            var filterApplied = false;
+            if (!data) {
+                data = {};
+                data.selected = 1;
+                data.url = "";
             /**
              * After clearing the applied filter,
              * It'll set the default state to the filters.
              */
-            this.props.orderfilterState({
+             this.props.orderfilterState({
                 tokenSelected: {"STATUS": ["all"], "TIME PERIOD": ["allOrders"]},
                 searchQuery: {}
             })
-            this.props.toggleOrderFilter(false)
-            this.props.showTableFilter(false)
+             this.props.toggleOrderFilter(false)
+             this.props.showTableFilter(false)
 
-        }
+         }
         //for backend sorting
         if (data.columnKey && data.sortDir) {
             appendSortUrl = sortOrderHead[data.columnKey] + sortOrder[data.sortDir];
@@ -455,154 +498,155 @@ class OrderListTab extends React.Component {
 
 
 //combining all the filters
-        data.url = data.url + appendStatusUrl + appendTimeUrl + appendPageSize + appendSortUrl + appendTextFilterUrl;
-        this.props.lastRefreshTime((new Date()));
-        this.props.filterApplied(filterApplied);
-        this.handlePageClick(data)
+data.url = data.url + appendStatusUrl + appendTimeUrl + appendPageSize + appendSortUrl + appendTextFilterUrl;
+this.props.lastRefreshTime((new Date()));
+this.props.filterApplied(filterApplied);
+this.handlePageClick(data)
+}
+}
+
+_setFilter() {
+    var newState = !this.props.showFilter;
+    this.props.showTableFilter(newState)
+}
+
+
+render() {
+    var filterHeight = screen.height - 190 - 50;
+    var updateStatus, timeOffset, headerTimeZone;
+    let updateStatusIntl, updateStatusText;
+    if (this.props.filterOptions.lastUpdatedOn) {
+        updateStatusText =
+        <FormattedMessage id="orderlistTab.orderListRefreshedat" description='Refresh Status text'
+        defaultMessage='Last Updated '/>
+        updateStatusIntl = <FormattedRelative updateInterval={10000} value={Date.now()}/>
+    }
+    var itemNumber = 6, table, pages;
+    const ordersByStatus = [
+    {value: '25', label: '25'},
+    {value: '50', label: '50'},
+    {value: '100', label: '100'},
+    {value: '250', label: '250'},
+    {value: '500', label: '500'},
+    {value: '1000', label: '1000'}
+    ];
+    var currentPage = this.props.filterOptions.currentPage, totalPage = this.props.orderData.totalPage;
+    var orderDetail, alertNum = 0, orderInfo;
+    if (this.props.orderData.ordersDetail !== undefined) {
+        orderInfo = this.processOrders(this.props.orderData.ordersDetail, this);
+        orderDetail = orderInfo.renderOrderData;
+        alertNum = orderInfo.alertStatesNum;
     }
 
-    _setFilter() {
-        var newState = !this.props.showFilter;
-        this.props.showTableFilter(newState)
-    }
+    timeOffset = this.props.timeOffset || "",
+    headerTimeZone = (this.context.intl.formatDate(Date.now(),
+    {
+        timeZone: timeOffset,
+        year: 'numeric',
+        timeZoneName: 'long'
+    }));
+
+    /*Extracting Time zone string for the specified time zone*/
+    headerTimeZone = headerTimeZone.substr(5, headerTimeZone.length);
+    return (
+        <div>
+        <div className="gor-Orderlist-table">
+
+        {!this.props.showFilter ? <Spinner isLoading={this.props.orderListSpinner}
+        setSpinner={this.props.setOrderListSpinner}/> : ""}
+        {orderDetail ? <div>
+            <div className="gor-filter-wrap" style={{
+                'width': '350px',
+                'display': this.props.showFilter ? 'block' : 'none',
+                height: filterHeight
+            }}>
+            <OrderFilter ordersDetail={orderDetail} responseFlag={this.props.responseFlag}/>
+            </div>
+            <div className="gorToolBar">
+            <div className="gorToolBarWrap">
+            <div className="gorToolBarElements">
+            <FormattedMessage id="order.table.heading" description="Heading for order list"
+            defaultMessage="OrderList"/>
+            </div>
+            <div className="gor-button-wrap">
+
+            </div>
+            </div>
+            <div className="filterWrapper">
+            <div className="gorToolBarDropDown">
+            <div className="gor-button-wrap">
+            <div
+            className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
+            <button className="gor-filterBtn-btn"
+            onClick={this._clearFilter.bind(this)}>
+            <div className="gor-refresh-icon"/>
+            <FormattedMessage id="order.table.buttonLable"
+            description="button label for refresh"
+            defaultMessage="Refresh Data"/>
+            </button>
+            <button
+            className={this.props.orderFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
+            onClick={this._setFilter.bind(this)}>
+            <div className="gor-manage-task"/>
+            <FormattedMessage id="order.table.filterLabel"
+            description="button label for filter"
+            defaultMessage="Filter data"/>
+            </button>
+            </div>
+            </div>
+            </div>
+            </div>
+        {/*Filter Summary*/}
+        <FilterSummary total={orderDetail.length || 0} isFilterApplied={this.props.isFilterApplied}
+        responseFlag={this.props.responseFlag}
+        filterText={<FormattedMessage id="orderlist.filter.search.bar"
+        description='total order for filter search bar'
+        defaultMessage='{total} Orders found'
+        values={{total: orderDetail ? orderDetail.length : '0'}}/>}
+        refreshList={this._clearFilter.bind(this)}
+        refreshText={<FormattedMessage id="orderlist.filter.search.bar.showall"
+        description="button label for show all"
+        defaultMessage="Show all orders"/>}/>
+
+        </div> : null}
 
 
-    render() {
-        var filterHeight = screen.height - 190 - 50;
-        var updateStatus, timeOffset, headerTimeZone;
-        let updateStatusIntl, updateStatusText;
-        if (this.props.filterOptions.lastUpdatedOn) {
-            updateStatusText =
-                <FormattedMessage id="orderlistTab.orderListRefreshedat" description='Refresh Status text'
-                                  defaultMessage='Last Updated '/>
-            updateStatusIntl = <FormattedRelative updateInterval={10000} value={Date.now()}/>
-        }
-        var itemNumber = 6, table, pages;
-        const ordersByStatus = [
-            {value: '25', label: '25'},
-            {value: '50', label: '50'},
-            {value: '100', label: '100'},
-            {value: '250', label: '250'},
-            {value: '500', label: '500'},
-            {value: '1000', label: '1000'}
-        ];
-        var currentPage = this.props.filterOptions.currentPage, totalPage = this.props.orderData.totalPage;
-        var orderDetail, alertNum = 0, orderInfo;
-        if (this.props.orderData.ordersDetail !== undefined) {
-            orderInfo = this.processOrders(this.props.orderData.ordersDetail, this);
-            orderDetail = orderInfo.renderOrderData;
-            alertNum = orderInfo.alertStatesNum;
-        }
+        <OrderListTable items={orderDetail} timeZoneString={headerTimeZone} itemNumber={itemNumber}
+        statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter}
+        refreshOption={this._clearFilter.bind(this)} lastUpdatedText={updateStatusText}
+        lastUpdated={updateStatusIntl}
+        intlMessg={this.props.intlMessages} alertNum={alertNum}
+        totalOrders={this.props.orderData.totalOrders}
+        itemsPerOrder={this.props.orderData.itemsPerOrder}
+        totalCompletedOrder={this.props.orderData.totalCompletedOrder}
+        totalPendingOrder={this.props.orderData.totalPendingOrder}
+        sortHeaderState={this.props.orderHeaderSort}
+        currentSortState={this.props.orderSortHeader}
+        sortHeaderOrder={this.props.orderHeaderSortOrder}
+        currentHeaderOrder={this.props.orderSortHeaderState}
+        setOrderFilter={this.props.orderFilterDetail}
+        getOrderFilter={this.props.orderFilter} setFilter={this.props.showTableFilter}
+        showFilter={this.props.showFilter} responseFlag={this.props.orderListSpinner}
+        isFilterApplied={this.props.isFilterApplied}
+        orderFilterStatus={this.props.orderFilterStatus}
+        onSortChange={this.refresh.bind(this)}
+        PageNumber={this.props.PageNumber}
+        />
 
-        timeOffset = this.props.timeOffset || "",
-            headerTimeZone = (this.context.intl.formatDate(Date.now(),
-                {
-                    timeZone: timeOffset,
-                    year: 'numeric',
-                    timeZoneName: 'long'
-                }));
-
-        /*Extracting Time zone string for the specified time zone*/
-        headerTimeZone = headerTimeZone.substr(5, headerTimeZone.length);
-        return (
-            <div>
-                <div className="gor-Orderlist-table">
-
-                    {!this.props.showFilter ? <Spinner isLoading={this.props.orderListSpinner}
-                                                       setSpinner={this.props.setOrderListSpinner}/> : ""}
-                    {orderDetail ? <div>
-                        <div className="gor-filter-wrap" style={{
-                            'width': '350px',
-                            'display': this.props.showFilter ? 'block' : 'none',
-                            height: filterHeight
-                        }}>
-                            <OrderFilter ordersDetail={orderDetail} responseFlag={this.props.responseFlag}/>
-                        </div>
-                        <div className="gorToolBar">
-                            <div className="gorToolBarWrap">
-                                <div className="gorToolBarElements">
-                                    <FormattedMessage id="order.table.heading" description="Heading for order list"
-                                                      defaultMessage="OrderList"/>
-                                </div>
-                                <div className="gor-button-wrap">
-
-                                </div>
-                            </div>
-                            <div className="filterWrapper">
-                                <div className="gorToolBarDropDown">
-                                    <div className="gor-button-wrap">
-                                        <div
-                                            className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
-                                        <button className="gor-filterBtn-btn"
-                                                onClick={this._clearFilter.bind(this)}>
-                                            <div className="gor-refresh-icon"/>
-                                            <FormattedMessage id="order.table.buttonLable"
-                                                              description="button label for refresh"
-                                                              defaultMessage="Refresh Data"/>
-                                        </button>
-                                        <button
-                                            className={this.props.orderFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
-                                            onClick={this._setFilter.bind(this)}>
-                                            <div className="gor-manage-task"/>
-                                            <FormattedMessage id="order.table.filterLabel"
-                                                              description="button label for filter"
-                                                              defaultMessage="Filter data"/>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {/*Filter Summary*/}
-                        <FilterSummary total={orderDetail.length || 0} isFilterApplied={this.props.isFilterApplied}
-                                       responseFlag={this.props.responseFlag}
-                                       filterText={<FormattedMessage id="orderlist.filter.search.bar"
-                                                                     description='total order for filter search bar'
-                                                                     defaultMessage='{total} Orders found'
-                                                                     values={{total: orderDetail ? orderDetail.length : '0'}}/>}
-                                       refreshList={this._clearFilter.bind(this)}
-                                       refreshText={<FormattedMessage id="orderlist.filter.search.bar.showall"
-                                                                      description="button label for show all"
-                                                                      defaultMessage="Show all orders"/>}/>
-
-                    </div> : null}
-
-
-                    <OrderListTable items={orderDetail} timeZoneString={headerTimeZone} itemNumber={itemNumber}
-                                    statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter}
-                                    refreshOption={this._clearFilter.bind(this)} lastUpdatedText={updateStatusText}
-                                    lastUpdated={updateStatusIntl}
-                                    intlMessg={this.props.intlMessages} alertNum={alertNum}
-                                    totalOrders={this.props.orderData.totalOrders}
-                                    itemsPerOrder={this.props.orderData.itemsPerOrder}
-                                    totalCompletedOrder={this.props.orderData.totalCompletedOrder}
-                                    totalPendingOrder={this.props.orderData.totalPendingOrder}
-                                    sortHeaderState={this.props.orderHeaderSort}
-                                    currentSortState={this.props.orderSortHeader}
-                                    sortHeaderOrder={this.props.orderHeaderSortOrder}
-                                    currentHeaderOrder={this.props.orderSortHeaderState}
-                                    setOrderFilter={this.props.orderFilterDetail}
-                                    getOrderFilter={this.props.orderFilter} setFilter={this.props.showTableFilter}
-                                    showFilter={this.props.showFilter} responseFlag={this.props.orderListSpinner}
-                                    isFilterApplied={this.props.isFilterApplied}
-                                    orderFilterStatus={this.props.orderFilterStatus}
-                                    onSortChange={this.refresh.bind(this)}
-                                    PageNumber={this.props.PageNumber}
-                    />
-
-                    <div className="gor-pageNum">
-                        <Dropdown styleClass={'gor-Page-Drop'} items={ordersByStatus} currentState={ordersByStatus[0]}
-                                  optionDispatch={this.props.getPageSizeOrders} refreshList={this.refresh.bind(this)}/>
-                    </div>
-                    <div className="gor-paginate">
-                        {this.state.query ?
-                            <GorPaginateV2 location={this.props.location} currentPage={this.state.query.page || 1}
-                                           totalPage={this.props.orderData.totalPage}/> : null}
-                    </div>
-                </div>
+        <div className="gor-pageNum">
+        <Dropdown styleClass={'gor-Page-Drop'} items={ordersByStatus} currentState={ordersByStatus[0]}
+        optionDispatch={this.props.getPageSizeOrders} refreshList={this.refresh.bind(this)}/>
+        </div>
+        <div className="gor-paginate">
+        {this.state.query ?
+            <GorPaginateV2 location={this.props.location} currentPage={this.state.query.page || 1}
+            totalPage={this.props.orderData.totalPage}/> : null}
+            </div>
+            </div>
             </div>
 
-        );
-    }
+            );
+}
 }
 
 function mapStateToProps(state, ownProps) {
