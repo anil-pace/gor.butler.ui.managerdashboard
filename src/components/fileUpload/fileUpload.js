@@ -7,9 +7,9 @@ import { FormattedMessage } from 'react-intl';
 class FileUpload extends React.Component{
 	constructor(props)  
 	{
-    	super(props);
+    	 super(props);
         this.state = {
-            isError: null
+            isError: "-1"
         }
     	
     }
@@ -19,18 +19,18 @@ class FileUpload extends React.Component{
         */
        var file =  event.target.files[0],
        fileName = file.name,
-       isError = null,
+       isError = "-1",
        maxFileSize = this.props.maxFileSize,
        extns = this.props.acceptedFormats;
        if(!extns.includes("."+fileName.split('.').pop())){
-         isError = "0"
+         isError = "1"
          
         }
         else if(file.size > maxFileSize){
-            isError = "1"
+            isError = "2"
         }
         
-        if(!isError){
+        if(isError === "-1"){
             this.props.onChange(event.target.files[0])
         }
         this.setState({
@@ -75,6 +75,8 @@ class FileUpload extends React.Component{
 
 FileUpload.propTypes={
     onChange:React.PropTypes.func,
-    uploadBtnText:React.PropTypes.string
+    uploadBtnText:React.PropTypes.string,
+    maxFileSize:React.PropTypes.number,
+    acceptedFormats:React.PropTypes.array
 }
 export default FileUpload ;

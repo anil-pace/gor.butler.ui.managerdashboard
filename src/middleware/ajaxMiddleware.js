@@ -13,12 +13,12 @@ const ajaxMiddleware = (function(){
        case AJAX_CALL:
 
        var params=action.params;
-       var formData = params.formdata || params || null,loginData;
+       var formData = params.formdata || params || null,httpData;
        if(params.cause !== MASTER_FILE_UPLOAD){
-          loginData = params.formdata? JSON.stringify(params.formdata):null;
+          httpData = params.formdata? JSON.stringify(params.formdata):null;
        }
        else{
-          loginData = params.formdata;
+          httpData = params.formdata;
        }
        
        
@@ -69,7 +69,7 @@ const ajaxMiddleware = (function(){
     {
       httpRequest.setRequestHeader('Authentication-Token', params.token);
     }
-    httpRequest.send(loginData);
+    httpRequest.send(httpData);
     break;
 
     default:

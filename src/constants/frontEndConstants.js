@@ -142,8 +142,8 @@ export const MASTER_UPLOAD_SUCCESS = "MASTER_UPLOAD_SUCCESS";
 export const UPLOAD_HISTORY = "UPLOAD_HISTORY";
 export const MASTER_FILE_FORMATS = [".csv"];
 export const MASTER_FILE_VALIDATIONS = {
-	"0":"Only .csv Files Allowed",
-	"1":"File Size Exceeded"
+	"1":"Only .csv Files Allowed",
+	"2":"File Size Exceeded"
 }
 export const MASTER_FILE_MAX_SIZE = 5e+6;
 
