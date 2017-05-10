@@ -91,7 +91,7 @@ class PPSFilter extends React.Component{
                                  maxValue={500}
                                  defaultValue={this.props.deaultSliderRange}
                                  allowCross={false}
-                                 onChange={this._changeSLiderRange.bind(this)}
+                                 onChange={this._changeSliderRange.bind(this)}
                                   />
                                   </div>
       
@@ -138,8 +138,8 @@ class PPSFilter extends React.Component{
 
     } 
 
-   _changeSLiderRange(sliderVal){
-      this.setState({rangeSelected:{minValue:sliderVal[0],maxValue:sliderVal[1]}});
+   _changeSliderRange(sliderVal){
+      this.setState({rangeSelected:{minValue:(sliderVal[0] ? sliderVal[0] : -1),maxValue:sliderVal[1]}});
     }
   render(){
     

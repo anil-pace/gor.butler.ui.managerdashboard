@@ -2,47 +2,57 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import AccordianBar from './accordianBar';
+import FileUpload from '../fileUpload/fileUpload';
+
+
 class MasterUploadTile extends React.Component{
 	constructor(props)  
 	{
     	super(props);
-    	var accordianState = new Array(this.props.data.length?this.props.data.length:0).fill(false);
-    	this.state = {showPanel: accordianState};
-    	this._handlePanel = this._handlePanel.bind(this);
+    	 this.state = {
+            showPanel: []
+        }
+    	
     }
 
     _handlePanel(index) {
-    	var accordianState = this.state.showPanel;
-    	var currentState = accordianState[index];
-    	accordianState = new Array(accordianState.length?accordianState.length:0).fill(false);
-    	accordianState[index] = !currentState;
-    	this.setState({showPanel:accordianState});
+        var accordianState = this.state.showPanel;
+        var currentState = accordianState[index];
+        accordianState = new Array(accordianState.length?accordianState.length:0).fill(false);
+        accordianState[index] = !currentState;
+        this.setState({showPanel:accordianState});
     }
 
     _renderMasterData() {
-    	var result = [], masterUploadBar;
-    	for (var i = this.props.data.length - 1; i >= 0; i--) {
-    		masterUploadBar = <AccordianBar showPanel={this.state.showPanel[i]} data={this.props.data[i]} 
-    										handleAccordianState={this._handlePanel} index={i}/>
+    	var result = [], masterUploadBar,historyData = this.props.historyData;
+        if(!this.state.showPanel.length){
+            let accordianState = new Array(historyData.length?historyData.length:0).fill(false);
+            this.state = {showPanel: accordianState};
+        }
+    	for (let i = historyData.length - 1; i >= 0; i--) {
+    		let status = ((historyData[i].created + historyData[i].deleted + historyData[i].error +historyData[i].updated) / historyData[i].total)*100;
+            
+            masterUploadBar = <AccordianBar completed = {Math.ceil(status)} showPanel={this.state.showPanel[i]} data={historyData[i]} 
+    										handleAccordianState={this._handlePanel.bind(this)} index={i} key={"acc"+i}/>
     		result.push(masterUploadBar)
     	}
     	return result;
     }
+     shouldComponentUpdate(nextProps, nextState){
+        if(nextProps.dataRefreshed !== this.props.dataRefreshed){
+          return true;
+        }
+          return false;
+        
+      }
 
 	render(){
 		var masterDataBody = this._renderMasterData();
 		return (
 			<div>
-				<div className="gor-utility-btn-wrap">
-					<button className="gor-filterBtn-applied">
-          				<label>
-  							UPLOAD MASTER DATA
-  							<input type="file" style={{'display': 'none'}}/>
-						</label>
-         			</button>
-         		</div>
+				<FileUpload uploadBtnText= {this.props.uploadBtnText} isProcessing={this.props.isMasterUploadProcessing} maxFileSize = {this.props.maxFileSize} validationList = {this.props.validationList} acceptedFormats = {this.props.acceptedFormats} onChange={this.props.onMasterFileUpload}/>
          		<div className="gor-utility-body-header">
-         			Upload History 
+         			<FormattedMessage id="utility.uploadHistory.head" description='Upload History' defaultMessage='Upload History'/> 
          		</div>
          		<div>
          			{masterDataBody}
@@ -51,5 +61,15 @@ class MasterUploadTile extends React.Component{
 		);
 	}
 };
+MasterUploadTile.propTypes={
+    onMasterFileUpload:React.PropTypes.func,
+    historyData:React.PropTypes.array,
+    acceptedFormats:React.PropTypes.array,
+    validationList:React.PropTypes.object,
+    maxFileSize :  React.PropTypes.number,
+    isMasterUploadProcessing: React.PropTypes.bool,
+    uploadBtnText:React.PropTypes.string,
+    dataRefreshed:React.PropTypes.bool
+}
 
 export default MasterUploadTile ;

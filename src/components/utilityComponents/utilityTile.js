@@ -15,7 +15,7 @@ class UtilityTile extends React.Component{
 					{this.props.tileHead}
 				</div>
 				{this.props.showHeaderIcon?<div className="gor-utility-tile-icon">
-					<div className="gor-refresh-icon"/>
+					<div className="gor-refresh-icon" onClick = {this.props.onRefresh}/>
 				</div>:""}
 			</div>
 			<div className="gor-utility-tile-body">

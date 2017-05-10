@@ -1,5 +1,5 @@
 
-import {AJAX_CALL,AUTH_LOGIN,PAUSE_OPERATION,RESUME_OPERATION} from '../constants/frontEndConstants';
+import {AJAX_CALL,AUTH_LOGIN,PAUSE_OPERATION,RESUME_OPERATION,MASTER_FILE_UPLOAD} from '../constants/frontEndConstants';
 
 import {AjaxParse} from '../utilities/AjaxParser';
 import {ShowError} from '../utilities/showError';
@@ -13,9 +13,15 @@ const ajaxMiddleware = (function(){
        case AJAX_CALL:
 
        var params=action.params;
-
-       var formData = params.formdata || params || null,
-       loginData= params.formdata? JSON.stringify(params.formdata):null;
+       var formData = params.formdata || params || null,httpData;
+       if(params.cause !== MASTER_FILE_UPLOAD){
+          httpData = params.formdata? JSON.stringify(params.formdata):null;
+       }
+       else{
+          httpData = params.formdata;
+       }
+       
+       
        var httpRequest = new XMLHttpRequest();
        var authCause = [AUTH_LOGIN, PAUSE_OPERATION, RESUME_OPERATION];
        if (!httpRequest || !params.url) {
@@ -53,14 +59,17 @@ const ajaxMiddleware = (function(){
     httpRequest.onerror = function (err){
                ShowError(store,params.cause,httpRequest.status);
     }
+
     httpRequest.open(params.method, params.url);
-    httpRequest.setRequestHeader('Content-Type', params.contentType || "text/html");
+    if(params.contentType !== false){
+      httpRequest.setRequestHeader('Content-Type', params.contentType || "text/html");
+    }
     httpRequest.setRequestHeader('Accept', params.accept || "text/html");
     if(params.cause!==AUTH_LOGIN)
     {
       httpRequest.setRequestHeader('Authentication-Token', params.token);
     }
-    httpRequest.send(loginData);
+    httpRequest.send(httpData);
     break;
 
     default:

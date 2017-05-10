@@ -81,7 +81,7 @@ class Filter extends React.Component{
     }
 };
 
-Filter.PropTypes={
+Filter.propTypes={
   noDataFlag:React.PropTypes.bool,
  filterTokenC1:React.PropTypes.object,
  filterTokenC2:React.PropTypes.object,

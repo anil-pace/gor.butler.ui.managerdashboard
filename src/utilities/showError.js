@@ -1,5 +1,6 @@
 import {connectionFault,setLoginSpinner} from '../actions/loginAction';
-import {AUTH_LOGIN} from '../constants/frontEndConstants';
+import {uploadMasterDataProcessing} from '../actions/utilityActions';
+import {AUTH_LOGIN,MASTER_FILE_UPLOAD} from '../constants/frontEndConstants';
 import {ERR_CONNECT,ERR_400,ERR_401,ERR_403,ERR_405,ERR_408,ERR_409,ERR_500,ERR_502,NO_NET} from '../constants/messageConstants';
 import {notifyFail,loginError} from '../actions/validationActions';
 
@@ -42,5 +43,8 @@ export function ShowError(store,cause,status)
 			break;
 		default:
           	store.dispatch(notifyFail(ERR_CONNECT));
+	}
+	if(cause === MASTER_FILE_UPLOAD){
+		store.dispatch(uploadMasterDataProcessing(false));
 	}
 }  
