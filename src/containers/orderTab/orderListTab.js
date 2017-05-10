@@ -124,9 +124,9 @@ class OrderListTab extends React.Component {
      * and will fetch the data from the socket.
      * @private
      */
+
      _refreshList(query,orderbyParam) {
         var orderbyUrl;
-
         this.props.setOrderListSpinner(true);
 
         let _query_params = [], convertTime = {
@@ -141,8 +141,10 @@ class OrderListTab extends React.Component {
             _query_params.push([ORDER_ID_FILTER_PARAM, query.orderId].join("~="))
         }
 
+
         //appending filter for status
         if (query.status) {
+
          let statusList = query.status.constructor === Array ? query.status.slice() : [query.status]
          let indexOfBreached = statusList.indexOf('breached');
          let indexOfException = statusList.indexOf('exception');
@@ -160,6 +162,7 @@ class OrderListTab extends React.Component {
          }
 
      }
+
 
         //appending filter for orders by time
         if (query.period) {
@@ -537,7 +540,6 @@ render() {
         orderDetail = orderInfo.renderOrderData;
         alertNum = orderInfo.alertStatesNum;
     }
-
     timeOffset = this.props.timeOffset || "",
     headerTimeZone = (this.context.intl.formatDate(Date.now(),
     {
