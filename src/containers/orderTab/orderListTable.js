@@ -135,7 +135,7 @@ class OrderListTable extends React.Component {
 
 
     backendSort(columnKey, sortDir) {
-        var data = {"columnKey": columnKey, "sortDir": sortDir, selected: this.props.PageNumber}
+        var data = {"columnKey": columnKey, "sortDir": sortDir, selected: this.props.pageNumber}
         this.props.sortHeaderState(columnKey);
         this.props.onSortChange(data);
         this.props.sortHeaderOrder({

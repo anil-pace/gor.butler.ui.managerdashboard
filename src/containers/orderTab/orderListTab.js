@@ -15,10 +15,11 @@ import {
     GOR_EXCEPTION,
     GET,
     APP_JSON,
+    toggleOrder,
     INITIAL_HEADER_SORT,
     INITIAL_HEADER_ORDER,
     sortOrderHead,
-    sortOrder, WS_ONSEND
+    sortOrder, WS_ONSEND,DESC,ASC
 } from '../../constants/frontEndConstants';
 import {
     BASE_URL,
@@ -112,13 +113,6 @@ class OrderListTab extends React.Component {
         this.props.initDataSentCall(updatedWsSubscription["default"])
         this.props.updateSubscriptionPacket(updatedWsSubscription);
     }
-
-    toggleOrder(data){
-        if(data=="DESC")
-            {return "ASC"}
-        else if(data=="ASC")
-            {return "DESC"}
-    }
     /**
      * The method will update the subscription packet
      * and will fetch the data from the socket.
@@ -180,13 +174,13 @@ class OrderListTab extends React.Component {
         _query_params.push([GIVEN_PAGE, query.page || 1].join("="))
         _query_params.push([GIVEN_PAGE_SIZE, query.pageSize || 25].join("="));
         if(orderbyParam && orderbyParam.sortDir){
-            orderbyParam? _query_params.push(['order',this.toggleOrder(orderbyParam.sortDir)].join("=")):"";
+            orderbyParam? _query_params.push(['order',toggleOrder(orderbyParam.sortDir)].join("=")):"";
             orderbyUrl =orderbyParam? sortOrderHead[orderbyParam["columnKey"]]:"";
 
         }
         else
         {
-            orderbyParam? _query_params.push(['order',this.toggleOrder(orderbyParam[Object.keys(orderbyParam)])].join("=")):"";
+            orderbyParam? _query_params.push(['order',toggleOrder(orderbyParam[Object.keys(orderbyParam)])].join("=")):"";
             orderbyUrl=orderbyParam? sortOrderHead[Object.keys(orderbyParam)[0]]:"";
         }  
         url = [url, _query_params.join("&")].join("?");
@@ -394,18 +388,9 @@ class OrderListTab extends React.Component {
     
     //To check where the object is empty or not
 
-    isEmpty(objecttoCheck) {
-        for(var key in objecttoCheck) {
-            if (objecttoCheck.hasOwnProperty(key)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     refresh = (data) => {
-
-        if(!this.isEmpty(this.props.location.query))
+        var locationQuery=this.props.location.query;
+        if(locationQuery && Object.keys(locationQuery).length)
         {
             this._refreshList(this.props.location.query,data);
         }
@@ -632,7 +617,7 @@ render() {
         isFilterApplied={this.props.isFilterApplied}
         orderFilterStatus={this.props.orderFilterStatus}
         onSortChange={this.refresh.bind(this)}
-        PageNumber={this.props.PageNumber}
+        pageNumber={this.props.pageNumber}
         />
 
         <div className="gor-pageNum">
@@ -670,7 +655,7 @@ function mapStateToProps(state, ownProps) {
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
         socketAuthorized: state.recieveSocketActions.socketAuthorized,
         orderListRefreshed: state.ordersInfo.orderListRefreshed,
-        PageNumber:(state.filterInfo.orderFilterState)? state.filterInfo.orderFilterState.PAGE :1
+        pageNumber:(state.filterInfo.orderFilterState)? state.filterInfo.orderFilterState.PAGE :1
     };
 }
 
