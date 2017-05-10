@@ -800,7 +800,7 @@ body {
   padding: 0.3125rem 0;
   display: inline-block;
   vertical-align: middle;
-  width: 49%;
+  width: 40%;
 }
 
 .gorHeader .dropdown-content {
@@ -922,7 +922,7 @@ body {
   display: inline-block;
   float: right;
   cursor: pointer;
-  width: 30%;
+  width: 37%;
 }
 
 .gorHeader .upperTextClient {
@@ -5398,7 +5398,7 @@ button:disabled {
 .gor-menuWrap {
   display: inline-block;
   line-height: 22px;
-  width: 50%;
+  width: 59%;
 }
 
 .gor-menu-heading {
