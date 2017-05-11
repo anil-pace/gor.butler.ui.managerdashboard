@@ -10,7 +10,8 @@ class MasterUploadTile extends React.Component{
 	{
     	super(props);
     	 this.state = {
-            showPanel: []
+            showPanel: [],
+            stateChanged : false
         }
     	
     }
@@ -18,16 +19,25 @@ class MasterUploadTile extends React.Component{
     _handlePanel(index) {
         var accordianState = this.state.showPanel;
         var currentState = accordianState[index];
+        var stateChanged = !this.state.stateChanged;
         accordianState = new Array(accordianState.length?accordianState.length:0).fill(false);
         accordianState[index] = !currentState;
-        this.setState({showPanel:accordianState});
+        
+        this.setState({
+          showPanel:accordianState,
+          stateChanged:stateChanged
+        });
     }
 
     _renderMasterData() {
     	var result = [], masterUploadBar,historyData = this.props.historyData;
         if(!this.state.showPanel.length){
             let accordianState = new Array(historyData.length?historyData.length:0).fill(false);
-            this.state = {showPanel: accordianState};
+            let stateChanged = this.state.stateChanged;
+            this.state = {
+              showPanel: accordianState,
+              stateChanged:stateChanged
+            };
         }
     	for (let i = historyData.length - 1; i >= 0; i--) {
     		let status = ((historyData[i].created + historyData[i].deleted + historyData[i].error +historyData[i].updated) / historyData[i].total)*100;
@@ -39,7 +49,7 @@ class MasterUploadTile extends React.Component{
     	return result;
     }
      shouldComponentUpdate(nextProps, nextState){
-        if(nextProps.dataRefreshed !== this.props.dataRefreshed){
+        if((nextProps.dataRefreshed !== this.props.dataRefreshed) || (this.state.stateChanged !== nextState.stateChanged)){
           return true;
         }
           return false;
