@@ -6,6 +6,7 @@ import FileUpload from '../fileUpload/fileUpload';
 
 
 class MasterUploadTile extends React.Component{
+
   constructor(props)  
   {
       super(props);

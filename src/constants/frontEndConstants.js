@@ -358,11 +358,20 @@ export const SCH_CONFIG ={
 	
 }
 
+export function toggleOrder(data){
+        if(data===DESC)
+            {return ASC}
+        else if(data===ASC)
+            {return DESC}
+}
+
 /*Constants for Legends*/
 
 export const LEGEND_ROUND= "ROUND";
 export const LEGEND_RECT= "RECTANGLE";
 export const LEGEND_DEFAULT = LEGEND_RECT;
+export const ASC = "ASC";
+export const DESC = "DESC";
 
 export const EN='en';
 export const JA='ja';
