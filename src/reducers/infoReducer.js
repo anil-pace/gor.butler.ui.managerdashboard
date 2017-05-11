@@ -49,7 +49,6 @@ export  function appInfo(state={},action){
             "passwordInfo":null,
             "loginInfo":null,
             "roleSet":null,
-            "roleInfo":[],
           })
           break;
 
