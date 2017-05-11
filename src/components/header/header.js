@@ -73,6 +73,7 @@ class Header extends React.Component{
     	temp="dropdown-content-afterClick";
 
     }
+
     setDropdown() {
       this.setState({showDropdown:!this.state.showDropdown});
     }
