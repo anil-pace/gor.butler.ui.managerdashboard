@@ -1,11 +1,11 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import {RECIEVE_HEADER,HEADER_START_TIME,REQUEST_HEADER,RECIEVE,RECIEVE_ITEM_TO_STOCK,
-	GET,SOFT_MANUAL} from '../../constants/frontEndConstants';
+	GET,SOFT_MANUAL, RECEIVE_SHIFT_START_TIME} from '../../constants/frontEndConstants';
   import {stringConfig} from '../../constants/backEndConstants';
-  import {HEADER_URL} from '../../constants/configConstants'
+  import {HEADER_URL,GET_SHIFT_START_TIME_URL} from '../../constants/configConstants'
   import {modal} from 'react-redux-modal';
-  import { getHeaderInfo } from '../../actions/headerAction';
+  import { getHeaderInfo, getShiftStartTime } from '../../actions/headerAction';
   import LogOut from '../../containers/logoutTab'; 
   import { FormattedMessage } from 'react-intl';
   import { connect } from 'react-redux'; 
@@ -30,39 +30,54 @@ import {RECIEVE_HEADER,HEADER_START_TIME,REQUEST_HEADER,RECIEVE,RECIEVE_ITEM_TO_
 
 
   }
-  componentDidMount(){
-    var username = this.props.username;
-    if(username && this.props.authToken){
-      let headerData={
-        'url':HEADER_URL+'?username='+username,
-        'method':GET,
-        'cause':RECIEVE_HEADER,
-        'token':this.props.authToken
+   /**
+   * The function will fetch the start time
+   * to be displayed in the header.
+     * @private
+     */
+     _getShiftStartTime(){
+      let headerData= {
+        'url': GET_SHIFT_START_TIME_URL,
+        'method': GET,
+        'cause': RECEIVE_SHIFT_START_TIME,
+        'token': this.props.authToken
       }
-      this.props.getHeaderInfo(headerData)
+      this.props.getShiftStartTime(headerData)
     }
+    componentDidMount(){
+      var username = this.props.username;
+      if(username && this.props.authToken){
+        let headerData={
+          'url':HEADER_URL+'?username='+username,
+          'method':GET,
+          'cause':RECIEVE_HEADER,
+          'token':this.props.authToken
+        }
+        this.props.getHeaderInfo(headerData)
+      }
+      this._getShiftStartTime()
+    }
+    componentWillMount() {
+      document.addEventListener('click', this._handleDocumentClick, true);
+      document.addEventListener('touchend', this._handleDocumentClick, true);
+    }  
+
+    componentWillUnmount() {
+      document.removeEventListener('click', this._handleDocumentClick, true);
+      document.removeEventListener('touchend', this._handleDocumentClick, true);
+    }
+
+    openDropdown() {
+     dropdownFlag = 1;
+     temp="dropdown-content-afterClick";
+
+   }
+   setDropdown() {
+    this.setState({showDropdown:!this.state.showDropdown});
+    console.log(this.state.showDropdown)
   }
-  componentWillMount() {
-    document.addEventListener('click', this._handleDocumentClick, true);
-    document.addEventListener('touchend', this._handleDocumentClick, true);
-  }  
-
-  componentWillUnmount() {
-    document.removeEventListener('click', this._handleDocumentClick, true);
-    document.removeEventListener('touchend', this._handleDocumentClick, true);
-  }
-
-  openDropdown() {
-   dropdownFlag = 1;
-   temp="dropdown-content-afterClick";
-
- }
- setDropdown() {
-  this.setState({showDropdown:!this.state.showDropdown});
-  console.log(this.state.showDropdown)
-}
-_handleDocumentClick() {
-  if (!(ReactDOM.findDOMNode(this.dropdownNode).contains(event.target) || this.dropdownValue?ReactDOM.findDOMNode(this.dropdownValue).contains(event.target):false)) {
+  _handleDocumentClick() {
+   if (!(ReactDOM.findDOMNode(this.dropdownNode).contains(event.target) || (this.dropdownValue && ReactDOM.findDOMNode(this.dropdownValue).contains(event.target)))) {
     this.setState({showDropdown:false});
   }
 } 
@@ -224,6 +239,7 @@ _processMenu(headerInfo){
  function mapStateToProps(state,ownProps) {
    return {
     headerInfo:state.headerData.headerInfo,
+    shift_start_time:state.headerData.shiftStartTime,
     authToken : state.authLogin.auth_token,
     username:state.authLogin.username,
     system_emergency:state.tabsData.system_emergency||null,
@@ -239,7 +255,8 @@ _processMenu(headerInfo){
  function mapDispatchToProps(dispatch){
   return {
     getHeaderInfo: function(data){ dispatch(getHeaderInfo(data)); },
-    switchModalKey:function(data){dispatch(switchModalKey(data))}
+    switchModalKey:function(data){dispatch(switchModalKey(data))},
+    getShiftStartTime: function(data){ dispatch(getShiftStartTime(data)); }
   }
 };
 
