@@ -47,7 +47,7 @@ class AddUser extends React.Component {
             'accept': APP_JSON,
             'token': this.props.auth_token
         }
-        if (!this.props.roleInfo) {
+        if (!this.props.roleList) {
             this.props.userRequest(userData);
         }
     }
@@ -130,7 +130,7 @@ class AddUser extends React.Component {
     }
 
     _getId(role) {
-        let roles = this.props.roleInfo, len;
+        let roles = this.props.roleList, len;
         len = roles.length;
         for (let i = 0; i < len; i++) {
             if (roles[i].name == role) {
@@ -211,7 +211,7 @@ class AddUser extends React.Component {
 
                                 </div>
 
-                                {this.props.roleInfo.length ? (<UserRoles roleInfo={this.props.roleInfo}/>) : ''}
+                                {this.props.roleList.length ? (<UserRoles roleList={this.props.roleList}/>) : ''}
 
                                 <div className='gor-usr-details'>
                                     <div className='gor-usr-hdlg'><FormattedMessage id="users.add.password.heading"
@@ -272,7 +272,7 @@ function mapStateToProps(state, ownProps) {
         idCheck: state.appInfo.idInfo || {},
         nameCheck: state.appInfo.nameInfo || {},
         passwordCheck: state.appInfo.passwordInfo || {},
-        roleInfo: state.appInfo.roleInfo || [],
+        roleList: state.appInfo.roleList || [],
         roleSet: state.appInfo.roleSet || null,
         auth_token: state.authLogin.auth_token
     };

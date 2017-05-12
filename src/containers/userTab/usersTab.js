@@ -344,7 +344,7 @@ function mapStateToProps(state, ownProps) {
         showFilter: state.filterInfo.filterState || false,
         isFilterApplied: state.filterInfo.isFilterApplied || false,
         userFilterStatus: state.filterInfo.userFilterStatus || false,
-        roleInfo: state.appInfo.roleInfo || null,
+        roleList: state.appInfo.roleList || null,
         auth_token: state.authLogin.auth_token,
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
         socketAuthorized: state.recieveSocketActions.socketAuthorized,
