@@ -17,7 +17,7 @@ import {
     SPECIFIC_SKU_ID,
     SPECIFIC_LOCATION_ID,
     AUDIT_TASK_ID,
-    AUDIT_TYPE
+    AUDIT_TYPE,filterInputFields
 }from '../../constants/frontEndConstants';
 import {hashHistory} from 'react-router'
 import {setAuditSpinner} from './../../actions/auditActions';
@@ -162,7 +162,11 @@ class AuditFilter extends React.Component {
     }
 
     _clearFilter() {
-        hashHistory.push({pathname: "/audit", query: {}})
+        var selectedToken=[];
+        selectedToken[0]='any';
+        var obj=this._mappingArray(selectedToken);
+        this.props.setTextBoxStatus(obj);
+        hashHistory.push({pathname: "/audit", query: {}});
     }
 
     render() {
