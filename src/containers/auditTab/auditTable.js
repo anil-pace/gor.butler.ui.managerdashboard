@@ -135,9 +135,9 @@ class AuditTable extends React.Component {
                 auditTypeValue: nProps.containerWidth * 0.12,
                 status: nProps.containerWidth * 0.11,
                 startTime: nProps.containerWidth * 0.13,
-                progress: nProps.containerWidth * 0.20,
-                completedTime: nProps.containerWidth * 0.15,
-                actions: nProps.containerWidth * 0.20
+                progress: nProps.containerWidth * 0.17,
+                completedTime: nProps.containerWidth * 0.13,
+                actions: nProps.containerWidth * 0.25
             },
         };
     }
