@@ -1,5 +1,5 @@
 import { AJAX_CALL,INVOICE_VALIDATION,MASTER_UPLOAD_PROCESSING,MASTER_UPLOAD_SUCCESS,
-UPLOAD_HISTORY} from '../constants/frontEndConstants'
+UPLOAD_HISTORY,UTILITY_TAB_REFRESHED} from '../constants/frontEndConstants'
 
 export function getItemRecall(params){
 	return {
@@ -51,4 +51,11 @@ export function uploadMasterDataHistory(data){
     type: UPLOAD_HISTORY,
     data
   }
+}
+
+export function utilityTabRefreshed(params) {
+    return {
+        type: UTILITY_TAB_REFRESHED,
+        params
+    }
 }
