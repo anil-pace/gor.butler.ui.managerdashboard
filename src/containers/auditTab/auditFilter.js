@@ -121,11 +121,20 @@ class AuditFilter extends React.Component {
     }
 
     _handelTokenClick(field, value, state) {
-        var obj = {};
-        this.setState({tokenSelected: handelTokenClick(field, value, state, this.state)});
+        var tempArray=[SPECIFIC_SKU_ID,SPECIFIC_LOCATION_ID];
+        var obj = {},queryField;
+        Array.prototype.diff = function (arraytoCompare) {
+        return this.filter(function (i) {
+        return arraytoCompare.indexOf(i) === -1;
+        });
+        };
         var selectedToken = this.state.tokenSelected['AUDIT TYPE'];
+        this.setState({tokenSelected: handelTokenClick(field, value, state, this.state)});
+       
         if (state !== 'addDefault') {
             obj.name = this._mappingArray(selectedToken);
+            queryField=tempArray.diff(obj.name);
+            queryField.length!==0? this.setState({searchQuery: handleInputQuery("", queryField, this.state)}):"";
             this.props.setTextBoxStatus(obj);
         }
         else {

@@ -186,7 +186,7 @@ class AuditTab extends React.Component {
         }
 
         _query_params.push([GIVEN_PAGE,query.page||1].join("="))
-        _query_params.push([GIVEN_PAGE_SIZE,5].join("="))
+        _query_params.push([GIVEN_PAGE_SIZE,20].join("="))
 
            if(auditParam && auditParam.sortDir){
             auditParam? _query_params.push(['order',toggleOrder(auditParam.sortDir)].join("=")):"";
