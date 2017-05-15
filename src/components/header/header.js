@@ -117,7 +117,8 @@ class Header extends React.Component{
             hour: 'numeric',
             minute: 'numeric',
             timeZone:this.props.timeOffset,
-			timeZoneName: 'long'
+			timeZoneName: 'long',
+			hour12:false
         })
   		return headerInfo
   	}

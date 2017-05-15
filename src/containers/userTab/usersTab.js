@@ -128,7 +128,8 @@ class UsersTab extends React.Component {
                 userData.location = nProps.context.intl.formatMessage(messages.userLocation, {"ppsId": data[i].pps.pps_id});
                 userData.logInTime = nProps.context.intl.formatTime(data[i].login_time, {
                         hour: 'numeric',
-                        minute: 'numeric'
+                        minute: 'numeric',
+                        hour12:false
                     }) +
                     " (" + nProps.context.intl.formatRelative(data[i].login_time) + ")";
                 ;
