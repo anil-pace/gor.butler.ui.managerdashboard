@@ -113,8 +113,8 @@ class UtilityTab extends React.Component{
       const fileType = [{ value: 'csv', label: "Comma separated values (csv)" }, { value: 'xls', label: "ExceL Spreadsheet (xls)" }];
         var currentFileState = this.state.reportState.fileType?(this._getCurrentDropDownState(fileType,this.state.reportState.fileType)):null;
         var currentCategoryState = this.state.reportState.category?(this._getCurrentDropDownState(modes,this.state.reportState.category)):null;
-      downloadReportTile.push(<UtilityDropDown key={Math.random()} items={modes} dropdownLabel="Category" placeHolderText="Select Category" changeMode={this._changeReportCategory.bind(this)} currentState={currentCategoryState}/>);
-      downloadReportTile.push(<UtilityDropDown key={Math.random()} items={fileType} dropdownLabel="File format" placeHolderText="Select format" changeMode={this._changeReportFileType.bind(this)} currentState={currentFileState}/>)
+      downloadReportTile.push(<UtilityDropDown key="1" items={modes} dropdownLabel="Category" placeHolderText="Select Category" changeMode={this._changeReportCategory.bind(this)} currentState={currentCategoryState}/>);
+      downloadReportTile.push(<UtilityDropDown key="2" items={fileType} dropdownLabel="File format" placeHolderText="Select format" changeMode={this._changeReportFileType.bind(this)} currentState={currentFileState}/>)
       return downloadReportTile;
     } 
     _getCurrentDropDownState(fileType, currentValue) {
@@ -129,7 +129,7 @@ class UtilityTab extends React.Component{
       var grnTile = [];
       const fileType = [{ value: 'csv', label: "Comma separated values (csv)" }, { value: 'xls', label: "ExceL Spreadsheet (xls)" }];
         var currentState = this.state.grnState.fileType?(this._getCurrentDropDownState(fileType,this.state.grnState.fileType)):null;
-        var invoiceInput = <div key={Math.random()}>
+        var invoiceInput = <div key="1">
                                 <div className="gor-utility-invoice-h1"> STN number: </div>
                                 <div className="gor-audit-input-wrap gor-utility-invoice-wrap">
                                     <input className="gor-audit-input gor-input-ok" placeholder="Enter STN Number"  ref={node => { this.invoiceId = node }} onChange={this._captureQuery.bind(this)}/>
@@ -138,7 +138,7 @@ class UtilityTab extends React.Component{
                                 {this.props.validatedInvoice?<div className="gor-sku-error gor-utility-error-invoice">Please enter correct STN number</div>:''}
                             </div>
         grnTile.push(invoiceInput)
-      grnTile.push(<UtilityDropDown key={Math.random()} items={fileType} dropdownLabel="File format" 
+      grnTile.push(<UtilityDropDown key="2" items={fileType} dropdownLabel="File format"
                                       placeHolderText="Select format" changeMode={this._changeGrnFileType.bind(this)}
                                       currentState={currentState}/>)
       return grnTile;
