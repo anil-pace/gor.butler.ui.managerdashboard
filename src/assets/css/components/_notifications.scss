@@ -1,0 +1,120 @@
+.notificationWrap{
+	display: inline-block;
+    vertical-align: middle;
+    position:relative;
+    width: 20%;
+    border-right: 1px solid #E5E5E5;
+    .resultOverlay{
+    		position: absolute;
+		    display: none;
+		    z-index: 1;
+		    left: -70px;
+		    min-width: 315px;
+		    border-radius: 4px;
+		    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2);
+		    top: 34px;
+		    min-height: 200px;
+		    background: #fff;
+		    .paneHeader{
+		    	padding: 10px 5px;
+    			background: #F8F8F8;
+		    }
+		    .headerText{
+		    	font-size: 14px;
+    			color: #4a4a4a;
+		    }
+		    .searchIcon{
+		    	display:inline-block;
+		    	float:right;
+		    	height:16px;
+		    	width:16px;
+		    	background-position: 0px -93px;
+		    }
+		    .searchBox{
+		    	padding: 10px 5px;
+		    	width:96%;
+			    border: 0;
+
+		    }
+		    .searchBoxWrap{
+		    	padding: 10px 5px;
+		    }
+		    .searchBoxCnt{
+		    	width:100%;
+		    	border: 1px solid #658FDF;
+		    	border-radius:2px;
+		    }
+		    
+    	}
+    .searchResults{
+    	.row{
+		    padding: 10px 5px;
+		 }
+		 .content{
+		 	width: 85%;
+    		display: inline-block;
+    		vertical-align: middle;
+		 }
+		 .errorMsg{
+		 	float:right;
+		 }
+		 .time{
+		 	float:left;
+		 }
+		 p{
+		 	&.message{
+		 		line-height: 35px;
+			    font-size: 14px;
+			    font-weight: bold;
+		 	}
+		 }
+		 span{
+		 	font-size: 12px;
+    		vertical-align: middle;
+		 }
+		 .status{
+		 	display:inline-block;
+		 	width:13%;
+		 	vertical-align: middle;
+		 	.not-statusIcon{
+		 		display:inline-block;
+		 		width:18px;
+		 		height:18px;
+		 		float:right;
+		 		background-position: -17px -76px;
+		 	}
+		 }
+    }
+    .notificationBody{
+    	position:relative;
+    	float: right;
+	    min-height: 25px;
+	    margin-right: 25px;
+
+    	
+    }
+    .not-icon-wrap{
+    	.not-bell{
+    		display: inline-block;
+		    position: relative;
+		    width: 20px;
+		    height: 22px;
+		    background-position: -270px -75px;
+    	}
+    	.not-count{
+    		position: absolute;
+		    border: 1px solid #fff;
+		    border-radius: 4px;
+		    top: -6px;
+		    left: 13px;
+		    font-size: 10px;
+		    text-align: center;
+		    padding: 5px 2px 0px 2px;
+		    width: 20px;
+		    height: 16px;
+		    color: #fff;
+		    display: block;
+		    background: #F62631;
+    	}
+    }
+}    

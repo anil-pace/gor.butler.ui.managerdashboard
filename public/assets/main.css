@@ -165,7 +165,7 @@ body {
 .overview-tile-ontime-icon,
 .statusOl, .statusAl, .iStock, .iAudit, .iPick, .gor-login-user, .gor-login-password, .gor-login-error, .gor-tick, .gor-question, .gor-tick-white, .gor-remove-white, .gor-error-white, .gor-login-user-error, .gor-login-password-error, .gor-question-2, .gor-operation-tick, .gor-alert-lg,
 .gor-dropdown-open, .gor-dropdown-close, .gor-caution, .gor-delay-icon,
-.gor-emergency-dropdown-close, .gor-emergency-dropdown-open, .gor-info-icon, .gor-selected-icon, .Dropdown-arrow {
+.gor-emergency-dropdown-close, .gor-emergency-dropdown-open, .gor-info-icon, .gor-selected-icon, .Dropdown-arrow, .not-bell, .searchIcon, .not-statusIcon {
   background-image: url(./images/icons.svg);
 }
 
@@ -773,8 +773,8 @@ body {
 }
 
 .gorHeader.head {
-  overflow: hidden;
   background: #fff;
+  min-height: 45px;
 }
 
 .gorHeader .dropbtn {
@@ -926,7 +926,7 @@ body {
   display: inline-block;
   float: right;
   cursor: pointer;
-  width: 37%;
+  width: 52%;
 }
 
 .gorHeader .upperTextClient {
@@ -1217,6 +1217,7 @@ body {
 
 .gor-tabs.gor-main-block {
   background-color: #4d5055;
+  clear: both;
 }
 
 .ddown {
@@ -5399,7 +5400,7 @@ button:disabled {
 .gor-menuWrap {
   display: inline-block;
   line-height: 22px;
-  width: 59%;
+  width: 38%;
 }
 
 .gor-menu-heading {
@@ -6075,4 +6076,133 @@ button:disabled {
 .gor-csvUploadWrap .gor-csvUpload {
   opacity: 0;
   cursor: pointer;
+}
+
+.notificationWrap {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  width: 20%;
+  border-right: 1px solid #E5E5E5;
+}
+
+.notificationWrap .resultOverlay {
+  position: absolute;
+  display: none;
+  z-index: 1;
+  left: -70px;
+  min-width: 315px;
+  border-radius: 4px;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2);
+  top: 34px;
+  min-height: 200px;
+  background: #fff;
+}
+
+.notificationWrap .resultOverlay .paneHeader {
+  padding: 10px 5px;
+  background: #F8F8F8;
+}
+
+.notificationWrap .resultOverlay .headerText {
+  font-size: 14px;
+  color: #4a4a4a;
+}
+
+.notificationWrap .resultOverlay .searchIcon {
+  display: inline-block;
+  float: right;
+  height: 16px;
+  width: 16px;
+  background-position: 0px -93px;
+}
+
+.notificationWrap .resultOverlay .searchBox {
+  padding: 10px 5px;
+  width: 96%;
+  border: 0;
+}
+
+.notificationWrap .resultOverlay .searchBoxWrap {
+  padding: 10px 5px;
+}
+
+.notificationWrap .resultOverlay .searchBoxCnt {
+  width: 100%;
+  border: 1px solid #658FDF;
+  border-radius: 2px;
+}
+
+.notificationWrap .searchResults .row {
+  padding: 10px 5px;
+}
+
+.notificationWrap .searchResults .content {
+  width: 85%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.notificationWrap .searchResults .errorMsg {
+  float: right;
+}
+
+.notificationWrap .searchResults .time {
+  float: left;
+}
+
+.notificationWrap .searchResults p.message {
+  line-height: 35px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.notificationWrap .searchResults span {
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+.notificationWrap .searchResults .status {
+  display: inline-block;
+  width: 13%;
+  vertical-align: middle;
+}
+
+.notificationWrap .searchResults .status .not-statusIcon {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  float: right;
+  background-position: -17px -76px;
+}
+
+.notificationWrap .notificationBody {
+  position: relative;
+  float: right;
+  min-height: 25px;
+  margin-right: 25px;
+}
+
+.notificationWrap .not-icon-wrap .not-bell {
+  display: inline-block;
+  position: relative;
+  width: 20px;
+  height: 22px;
+  background-position: -270px -75px;
+}
+
+.notificationWrap .not-icon-wrap .not-count {
+  position: absolute;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  top: -6px;
+  left: 13px;
+  font-size: 10px;
+  text-align: center;
+  padding: 5px 2px 0px 2px;
+  width: 20px;
+  height: 16px;
+  color: #fff;
+  display: block;
+  background: #F62631;
 }
