@@ -14,7 +14,6 @@ export  function utilityValidations(state={},action){
               "invalidInvoice" : true
             })
           }
-
           else {
             return Object.assign({}, state, {
               "invalidInvoice" : false
@@ -31,10 +30,10 @@ export  function utilityValidations(state={},action){
               "newFileUploaded":newFileUploaded
             })
     case UPLOAD_HISTORY:
-          var dataRefreshed = !state.dataRefreshed;
+          var uploadHistChanged = !state.uploadHistChanged;
           return Object.assign({}, state, {
               "uploadHistoryData" : action.data.mdm_upload_info || [],
-              "dataRefreshed":dataRefreshed
+              "uploadHistChanged":uploadHistChanged
             }) 
     default:
       return state
