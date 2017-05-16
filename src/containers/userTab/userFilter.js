@@ -62,8 +62,8 @@ class UserFilter extends React.Component {
     _processUserRoll() {
         let objRole = [{value: 'all', label: <FormattedMessage id="user.role.all" defaultMessage="Any"/>}],
             roleData = {}, currentRole;
-        for (let i = 0, len = this.props.roleInfo.length; i < len; i++) {
-            currentRole = this.props.roleInfo[i];
+        for (let i = 0, len = this.props.roleList.length; i < len; i++) {
+            currentRole = this.props.roleList[i];
             if (!this._isMapped(stringConfig, currentRole.name)) {
                 continue;
             }
@@ -239,7 +239,7 @@ function mapStateToProps(state, ownProps) {
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket,
         isFilterApplied: state.filterInfo.isFilterApplied || false,
         userFilterStatus: state.filterInfo.userFilterStatus || false,
-        roleInfo: state.appInfo.roleInfo || [],
+        roleList: state.appInfo.roleList || [],
         isLoading: state.spinner.isLoading || false
 
     };
@@ -276,7 +276,7 @@ UserFilter.PropTypes = {
     wsSubscriptionData: React.PropTypes.object,
     isFilterApplied: React.PropTypes.bool,
     userFilterStatus: React.PropTypes.bool,
-    roleInfo: React.PropTypes.object,
+    roleList: React.PropTypes.object,
     showTableFilter: React.PropTypes.func,
     filterApplied: React.PropTypes.func,
     userfilterState: React.PropTypes.func,

@@ -73,6 +73,7 @@ class Header extends React.Component{
     	temp="dropdown-content-afterClick";
 
     }
+
     setDropdown() {
       this.setState({showDropdown:!this.state.showDropdown});
     }
@@ -116,7 +117,8 @@ class Header extends React.Component{
             hour: 'numeric',
             minute: 'numeric',
             timeZone:this.props.timeOffset,
-			timeZoneName: 'long'
+			timeZoneName: 'long',
+			hour12:false
         })
   		return headerInfo
   	}

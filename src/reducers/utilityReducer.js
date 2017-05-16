@@ -1,4 +1,4 @@
-import {INVOICE_VALIDATION,MASTER_UPLOAD_PROCESSING,MASTER_UPLOAD_SUCCESS,UPLOAD_HISTORY} from '../constants/frontEndConstants';
+import {INVOICE_VALIDATION,MASTER_UPLOAD_PROCESSING,MASTER_UPLOAD_SUCCESS,UPLOAD_HISTORY,UTILITY_TAB_REFRESHED} from '../constants/frontEndConstants';
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -35,7 +35,12 @@ export  function utilityValidations(state={},action){
           return Object.assign({}, state, {
               "uploadHistoryData" : action.data.mdm_upload_info || [],
               "dataRefreshed":dataRefreshed
-            }) 
+            })
+
+      case UTILITY_TAB_REFRESHED:
+          return Object.assign({}, state, {
+              "utilityTabRefreshed": new Date()
+          })
     default:
       return state
   }
