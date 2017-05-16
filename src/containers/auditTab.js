@@ -285,7 +285,8 @@ class AuditTab extends React.Component {
         };
         var auditType = {"sku": sku, "location": location};
         var auditDetails = [], auditData = {};
-        for (var i = 0,limit=data.length; i<=limit - 1; i++) {
+        var i,limit=data.length;
+        for (i = 0;i<=limit - 1; i++) {
             auditData.id = data[i].audit_id;
             if (data[i].display_id) {
                 auditData.display_id = data[i].display_id;
