@@ -30,7 +30,7 @@ import {
   POST,
   MASTER_FILE_FORMATS,
   MASTER_FILE_MAX_SIZE,
-  UPLOAD_HISTORY
+  UPLOAD_HISTORY,GET_MAX_FILE_SIZE
 } from '../constants/frontEndConstants';
 import FieldError from '../components/fielderror/fielderror';
 import { defineMessages } from 'react-intl';
@@ -164,16 +164,14 @@ class UtilityTab extends React.Component{
         this.props.uploadMasterDataProcessing(true);
     }
      _getfilemaxsize(){
-      var formData = new FormData();
-     // formData.append("file", fileObject);
       var params={
          'url':  GET_MAXSIZE_FILE_URL,
          'method':GET,
          'token': this.props.auth_token,
+         'cause':GET_MAX_FILE_SIZE,
          'contentType':false
         }
-        this.props.getItemRecall(params)
-        this.props.uploadMasterDataProcessing(true);
+        this.props.getItemRecall(params);
     }
 
     _renderMasterUpload() {
