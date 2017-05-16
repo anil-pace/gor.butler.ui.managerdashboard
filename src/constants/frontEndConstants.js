@@ -95,8 +95,8 @@ export const TAB_CLASS = {
 	users:"gorMainBlock"
 };
 
-export const PENDING="audit_accepted','audit_pending','audit_waiting','audit_conflicting";
-export const INPROGRESS="audit_started','audit_tasked";
+export const PENDING="audit_accepted__audit_pending__audit_waiting__audit_conflicting";
+export const INPROGRESS="audit_started__audit_tasked";
 export const RESOLVED="audit_resolved";
 export const REJECTED="audit_rejected";
 
@@ -243,6 +243,7 @@ export const SET_AUDIT='SET_AUDIT';
 export const RESET_AUDIT='RESET_AUDIT';
 export const SKU='sku';
 export const LOCATION='location';
+export const AUDIT_COMPLETED="audit_aborted__audit_reaudited__audit_completed";
 export const SETAUDIT_PPS='SETAUDIT_PPS';
 export const REFRESH_AUDIT='REFRESH_AUDIT';
 export const APPROVE_AUDIT = "APPROVE_AUDIT";
@@ -535,4 +536,5 @@ export const INVENTORY_REFRESHED="INVENTORY_REFRESHED"
 export const AUDIT_LIST_REFRESHED="AUDIT_LIST_REFRESHED"
 export const ORDER_LIST_REFRESHED="ORDER_LIST_REFRESHED"
 export const WAVES_REFRESHED="WAVES_REFRESHED"
+export const UTILITY_TAB_REFRESHED="UTILITY_TAB_REFRESHED"
 export const SINGLE="Single"

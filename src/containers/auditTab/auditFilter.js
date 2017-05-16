@@ -17,7 +17,8 @@ import {
     SPECIFIC_SKU_ID,
     SPECIFIC_LOCATION_ID,
     AUDIT_TASK_ID,
-    AUDIT_TYPE,filterInputFields
+    AUDIT_TYPE,AUDIT_COMPLETED,AUDIT_CREATED,PENDING,INPROGRESS,
+    AUDIT_RESOLVED,AUDIT_LINE_REJECTED
 }from '../../constants/frontEndConstants';
 import {hashHistory} from 'react-router'
 import {setAuditSpinner} from './../../actions/auditActions';
@@ -105,11 +106,14 @@ class AuditFilter extends React.Component {
         ];
         const labelC2 = [
             {value: ALL, label: <FormattedMessage id="audit.token2.all" defaultMessage="Any"/>},
-            {value: "issueFound", label: <FormattedMessage id="audit.token2.issueFound" defaultMessage="Issue found"/>},
-            {value: "audit_rejected", label: <FormattedMessage id="audit.token2.rejected" defaultMessage="Rejected"/>},
-            {value: "audit_resolved", label: <FormattedMessage id="audit.token2.resolved" defaultMessage="Resolved"/>},
-            {value: "audit_started__audit_tasked", label: <FormattedMessage id="audit.token2.inProgress" defaultMessage="In progress"/>},
-            {value: "audit_accepted__audit_pending__audit_waiting__audit_conflicting", label: <FormattedMessage id="audit.token2.pending" defaultMessage="Pending"/>}
+            {value: ISSUE_FOUND, label: <FormattedMessage id="audit.token2.issueFound" defaultMessage="Issue found"/>},
+            {value: AUDIT_LINE_REJECTED, label: <FormattedMessage id="audit.token2.rejected" defaultMessage="Rejected"/>},
+            {value: AUDIT_RESOLVED, label: <FormattedMessage id="audit.token2.resolved" defaultMessage="Resolved"/>},
+            {value: INPROGRESS, label: <FormattedMessage id="audit.token2.inProgress" defaultMessage="In progress"/>},
+            {value: PENDING, label: <FormattedMessage id="audit.token2.pending" defaultMessage="Pending"/>},
+            {value: AUDIT_CREATED, label: <FormattedMessage id="audit.token2.created" defaultMessage="Created"/>},
+            {value: AUDIT_COMPLETED, label: <FormattedMessage id="audit.token2.completed" defaultMessage="Completed"/>}
+
         ];
         var selectedToken = this.state.tokenSelected;
         var column1 = <FilterTokenWrap field={tokenStatusField} tokenCallBack={this._handelTokenClick.bind(this)}

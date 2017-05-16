@@ -49,7 +49,6 @@ export  function appInfo(state={},action){
             "passwordInfo":null,
             "loginInfo":null,
             "roleSet":null,
-            "roleInfo":[],
           })
           break;
 
@@ -112,10 +111,10 @@ export  function appInfo(state={},action){
          break;
 
     case ID_MAP:
-        let roleInfo;
-        roleInfo=action.data;
+        let roleList;
+        roleList=action.data;
          return Object.assign({}, state, { 
-            "roleInfo":roleInfo
+            "roleList":roleList
          })
         break;
 

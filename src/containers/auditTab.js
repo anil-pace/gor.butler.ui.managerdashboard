@@ -400,14 +400,15 @@ class AuditTab extends React.Component {
                 }
                 else {
                     auditData.completedTime = nProps.context.intl.formatDate(data[i].completion_time,
-                    {
-                        timeZone: timeOffset,
-                        year: 'numeric',
-                        month: 'short',
-                        day: '2-digit',
-                        hour: "2-digit",
-                        minute: "2-digit"
-                    });
+                        {
+                            timeZone: timeOffset,
+                            year: 'numeric',
+                            month: 'short',
+                            day: '2-digit',
+                            hour: "2-digit",
+                            minute: "2-digit",
+                            hour12:false
+                        });
                 }
             }
             else {
