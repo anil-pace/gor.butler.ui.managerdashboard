@@ -29,7 +29,6 @@ import {
   GR_REPORT_RESPONSE,
   POST,
   MASTER_FILE_FORMATS,
-  MASTER_FILE_MAX_SIZE,
   UPLOAD_HISTORY,GET_MAX_FILE_SIZE
 } from '../constants/frontEndConstants';
 import FieldError from '../components/fielderror/fielderror';
@@ -176,7 +175,12 @@ class UtilityTab extends React.Component{
 
     _renderMasterUpload() {
         var uploadHistoryData = this.props.uploadHistoryData || [];
-        var recallBar = <MasterUploadTile dataRefreshed = {this.props.dataRefreshed} uploadBtnText = {this.context.intl.formatMessage(messages.uploadBtnText)} isMasterUploadProcessing = {this.props.isMasterUploadProcessing} maxFileSize = {MASTER_FILE_MAX_SIZE} validationList = {MASTER_FILE_VALIDATIONS} acceptedFormats ={MASTER_FILE_FORMATS} onMasterFileUpload = {this._onMasterFileUpload.bind(this)} historyData={uploadHistoryData}/>;
+        var recallBar = <MasterUploadTile dataRefreshed = {this.props.dataRefreshed} 
+        uploadBtnText = {this.context.intl.formatMessage(messages.uploadBtnText)} 
+        isMasterUploadProcessing = {this.props.isMasterUploadProcessing} 
+        maxFileSize = {this.props.maxfilesizelimit} validationList = {MASTER_FILE_VALIDATIONS} 
+        acceptedFormats ={MASTER_FILE_FORMATS} onMasterFileUpload = {this._onMasterFileUpload.bind(this)} 
+        historyData={uploadHistoryData} errorCode={this.props.errorCode} maxSize={this.props.maxsize}/>;
         return recallBar;
     }
 
@@ -232,6 +236,7 @@ class UtilityTab extends React.Component{
     }
 
   render(){
+    var limit=this._getfilemaxsize();
     var uploadDataTile = this._renderUploadDataTile();
     var downloadReportTile = this._renderDownReportTile();
     var grnTile = this._renderGRNtile();
@@ -264,6 +269,9 @@ function mapStateToProps(state, ownProps){
       isMasterUploadProcessing : state.utilityValidations.isMasterUploadProcessing || false,
       newFileUploaded:state.utilityValidations.newFileUploaded,
       uploadHistoryData : state.utilityValidations.uploadHistoryData,
+      maxfilesizelimit:state.utilityValidations.maxfilesizelimit,
+      errorCode:state.utilityValidations.errorCode || {},
+      maxsize:state.utilityValidations.maxsize || 0,
       dataRefreshed : state.utilityValidations.dataRefreshed
   };
 }

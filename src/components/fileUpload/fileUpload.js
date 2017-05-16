@@ -48,7 +48,7 @@ class FileUpload extends React.Component{
 
 	render(){
 		 var isProcessing = this.props.isProcessing;
-     var maxSize = this.props.maxFileSize ? Math.round(this.props.maxFileSize / Math.pow(1024, 2), 2) : 0;
+     var maxSize = this.props.maxFileSize ? Math.round(this.props.maxFileSize / 1024) : 0;
 		return (
 			<div>
             

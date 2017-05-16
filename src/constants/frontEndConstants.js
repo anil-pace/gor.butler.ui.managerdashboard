@@ -141,12 +141,12 @@ export const GET_MAX_FILE_SIZE = "GET_MAX_FILE_SIZE";
 export const MASTER_UPLOAD_PROCESSING = "MASTER_UPLOAD_PROCESSING";
 export const MASTER_UPLOAD_SUCCESS = "MASTER_UPLOAD_SUCCESS";
 export const UPLOAD_HISTORY = "UPLOAD_HISTORY";
+export const UPDATE_FILE_SIZE = "UPDATE_FILE_SIZE";
 export const MASTER_FILE_FORMATS = [".csv"];
 export const MASTER_FILE_VALIDATIONS = {
 	"1":"Only .csv Files Allowed",
 	"2":"File Size Exceeded"
 }
-export const MASTER_FILE_MAX_SIZE = 5e+6;
 
 export const AUDIT_RETRIEVE = "AUDIT_RETRIEVE";
 export const RECIEVE_AUDIT_DATA = "RECIEVE_AUDIT_DATA";

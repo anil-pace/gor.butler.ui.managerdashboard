@@ -1,5 +1,5 @@
 import { AJAX_CALL,INVOICE_VALIDATION,MASTER_UPLOAD_PROCESSING,MASTER_UPLOAD_SUCCESS,
-UPLOAD_HISTORY} from '../constants/frontEndConstants'
+UPLOAD_HISTORY,UPDATE_FILE_SIZE} from '../constants/frontEndConstants'
 
 export function getItemRecall(params){
 	return {
@@ -49,6 +49,12 @@ export function uploadMasterDataSuccess(data){
 export function uploadMasterDataHistory(data){
   return {
     type: UPLOAD_HISTORY,
+    data
+  }
+}
+export function updateMaxFileSize(data){
+  return {
+    type: UPDATE_FILE_SIZE,
     data
   }
 }
