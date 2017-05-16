@@ -26,9 +26,9 @@ class FileUpload extends React.Component{
          isError = "1"
          
         }
-        else if(file.size > maxFileSize){
-            isError = "2"
-        }
+        // else if(file.size > maxFileSize){
+        //     isError = "2"
+        // }
         
         if(isError === "-1"){
             this.props.onChange(event.target.files[0])

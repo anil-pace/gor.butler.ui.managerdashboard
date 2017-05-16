@@ -9,7 +9,8 @@ import {
   GET_ITEM_RECALL, 
   GR_REPORT_URL,
   MASTER_UPLOAD_URL,
-  UPLOAD_HISTORY_URL
+  UPLOAD_HISTORY_URL,
+  GET_MAXSIZE_FILE_URL
 } from '../constants/configConstants';
 import { connect } from 'react-redux';
 import {
@@ -158,6 +159,18 @@ class UtilityTab extends React.Component{
          'cause':MASTER_FILE_UPLOAD,
          'contentType':false,
          'formdata':formData
+        }
+        this.props.getItemRecall(params)
+        this.props.uploadMasterDataProcessing(true);
+    }
+     _getfilemaxsize(){
+      var formData = new FormData();
+     // formData.append("file", fileObject);
+      var params={
+         'url':  GET_MAXSIZE_FILE_URL,
+         'method':GET,
+         'token': this.props.auth_token,
+         'contentType':false
         }
         this.props.getItemRecall(params)
         this.props.uploadMasterDataProcessing(true);
