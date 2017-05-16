@@ -119,22 +119,22 @@ class AuditFilter extends React.Component {
         var columnDetail = {column1token: column1, column2token: column2};
         return columnDetail;
     }
+ _arrayDiff(mainArray,arraytoSearch ) {
+    return mainArray.filter(function (a) {
+        return arraytoSearch.indexOf(a) == -1;
+    });
+}
 
     _handelTokenClick(field, value, state) {
         var tempArray=[SPECIFIC_SKU_ID,SPECIFIC_LOCATION_ID];
         var obj = {},queryField;
-        Array.prototype.diff = function (arraytoCompare) {
-        return this.filter(function (i) {
-        return arraytoCompare.indexOf(i) === -1;
-        });
-        };
         var selectedToken = this.state.tokenSelected['AUDIT TYPE'];
         this.setState({tokenSelected: handelTokenClick(field, value, state, this.state)});
        
         if (state !== 'addDefault') {
             obj.name = this._mappingArray(selectedToken);
-            queryField=tempArray.diff(obj.name);
-            queryField.length!==0? this.setState({searchQuery: handleInputQuery("", queryField, this.state)}):"";
+            queryField=this._arrayDiff(tempArray,obj.name);
+           (queryField && queryField.length!==0)? this.setState({searchQuery: handleInputQuery("", queryField, this.state)}):"";
             this.props.setTextBoxStatus(obj);
         }
         else {
@@ -172,7 +172,7 @@ class AuditFilter extends React.Component {
 
     _clearFilter() {
         var selectedToken=[];
-        selectedToken[0]='any';
+        selectedToken[0]=ANY;
         var obj=this._mappingArray(selectedToken);
         this.props.setTextBoxStatus(obj);
         hashHistory.push({pathname: "/audit", query: {}});

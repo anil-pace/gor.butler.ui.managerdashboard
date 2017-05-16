@@ -159,7 +159,6 @@ class AuditTable extends React.Component {
         })
         this.props.sortHeaderState(columnKey);
         this.props.onSortChange(data);
-        //this.props.refreshData(data);
     }
 
 
