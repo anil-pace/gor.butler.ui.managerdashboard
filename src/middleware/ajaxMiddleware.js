@@ -4,6 +4,7 @@ import {AJAX_CALL,AUTH_LOGIN,PAUSE_OPERATION,RESUME_OPERATION,MASTER_FILE_UPLOAD
 import {AjaxParse} from '../utilities/AjaxParser';
 import {ShowError} from '../utilities/showError';
 import {endSession} from '../utilities/endSession';
+import {saveFile} from '../utilities/utils';
 
 const ajaxMiddleware = (function(){ 
 
@@ -36,9 +37,15 @@ const ajaxMiddleware = (function(){
                  try
                  {
                    if(httpRequest.getResponseHeader('Content-type') === "text/csv; charset=utf-8") {
-                    var blob = new Blob ([httpRequest.response], {type:'text/csv'});
-                    var url = URL.createObjectURL(blob);
-                    window.open(url);
+                    //get the file name from the content-disposition header
+                    //and then save the file
+                    let fileName = 'Download.csv';
+                    if (this.getResponseHeader('Content-disposition')){
+                      let strName = this.getResponseHeader('Content-disposition').match(/(filename=.[^\s\n\t\r]+)/g);
+                      fileName = strName[0].slice(9);
+                    }
+
+                    saveFile(httpRequest.response,fileName);
                   }
 
                    else {

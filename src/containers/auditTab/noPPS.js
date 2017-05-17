@@ -24,7 +24,7 @@ class NoPPS extends React.Component{
             <p>
             <FormattedMessage id="audit.start.auditdetails.please" description='Text for please'  
             defaultMessage='Please '/>
-            <a href="#/pps" onClick = {this.handleSysSubTabClick.bind(this,PPS)}>
+            <a href="#/system/pps" onClick = {this.handleSysSubTabClick.bind(this,PPS)}>
             <FormattedMessage id="audit.start.auditdetails.hyperlink" description='Text for hyperlink'  
             defaultMessage='go to the PPS mode '/>
             </a>

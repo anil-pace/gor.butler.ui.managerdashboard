@@ -17,7 +17,8 @@ import {
     SPECIFIC_SKU_ID,
     SPECIFIC_LOCATION_ID,
     AUDIT_TASK_ID,
-    AUDIT_TYPE
+    AUDIT_TYPE,AUDIT_COMPLETED,AUDIT_CREATED,PENDING,INPROGRESS,
+    AUDIT_RESOLVED,AUDIT_LINE_REJECTED
 }from '../../constants/frontEndConstants';
 import {hashHistory} from 'react-router'
 import {setAuditSpinner} from './../../actions/auditActions';
@@ -105,11 +106,14 @@ class AuditFilter extends React.Component {
         ];
         const labelC2 = [
             {value: ALL, label: <FormattedMessage id="audit.token2.all" defaultMessage="Any"/>},
-            {value: "issueFound", label: <FormattedMessage id="audit.token2.issueFound" defaultMessage="Issue found"/>},
-            {value: "audit_rejected", label: <FormattedMessage id="audit.token2.rejected" defaultMessage="Rejected"/>},
-            {value: "audit_resolved", label: <FormattedMessage id="audit.token2.resolved" defaultMessage="Resolved"/>},
-            {value: "audit_started__audit_tasked", label: <FormattedMessage id="audit.token2.inProgress" defaultMessage="In progress"/>},
-            {value: "audit_accepted__audit_pending__audit_waiting__audit_conflicting", label: <FormattedMessage id="audit.token2.pending" defaultMessage="Pending"/>}
+            {value: ISSUE_FOUND, label: <FormattedMessage id="audit.token2.issueFound" defaultMessage="Issue found"/>},
+            {value: AUDIT_LINE_REJECTED, label: <FormattedMessage id="audit.token2.rejected" defaultMessage="Rejected"/>},
+            {value: AUDIT_RESOLVED, label: <FormattedMessage id="audit.token2.resolved" defaultMessage="Resolved"/>},
+            {value: INPROGRESS, label: <FormattedMessage id="audit.token2.inProgress" defaultMessage="In progress"/>},
+            {value: PENDING, label: <FormattedMessage id="audit.token2.pending" defaultMessage="Pending"/>},
+            {value: AUDIT_CREATED, label: <FormattedMessage id="audit.token2.created" defaultMessage="Created"/>},
+            {value: AUDIT_COMPLETED, label: <FormattedMessage id="audit.token2.completed" defaultMessage="Completed"/>}
+
         ];
         var selectedToken = this.state.tokenSelected;
         var column1 = <FilterTokenWrap field={tokenStatusField} tokenCallBack={this._handelTokenClick.bind(this)}
@@ -119,13 +123,22 @@ class AuditFilter extends React.Component {
         var columnDetail = {column1token: column1, column2token: column2};
         return columnDetail;
     }
+ _arrayDiff(mainArray,arraytoSearch ) {
+    return mainArray.filter(function (a) {
+        return arraytoSearch.indexOf(a) == -1;
+    });
+}
 
     _handelTokenClick(field, value, state) {
-        var obj = {};
-        this.setState({tokenSelected: handelTokenClick(field, value, state, this.state)});
+        var tempArray=[SPECIFIC_SKU_ID,SPECIFIC_LOCATION_ID];
+        var obj = {},queryField;
         var selectedToken = this.state.tokenSelected['AUDIT TYPE'];
+        this.setState({tokenSelected: handelTokenClick(field, value, state, this.state)});
+       
         if (state !== 'addDefault') {
             obj.name = this._mappingArray(selectedToken);
+            queryField=this._arrayDiff(tempArray,obj.name);
+           (queryField && queryField.length!==0)? this.setState({searchQuery: handleInputQuery("", queryField, this.state)}):"";
             this.props.setTextBoxStatus(obj);
         }
         else {
@@ -162,7 +175,11 @@ class AuditFilter extends React.Component {
     }
 
     _clearFilter() {
-        hashHistory.push({pathname: "/audit", query: {}})
+        var selectedToken=[];
+        selectedToken[0]=ANY;
+        var obj=this._mappingArray(selectedToken);
+        this.props.setTextBoxStatus(obj);
+        hashHistory.push({pathname: "/audit", query: {}});
     }
 
     render() {
