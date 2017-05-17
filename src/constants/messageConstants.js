@@ -120,7 +120,7 @@ export const AE006 = (<FormattedMessage id="notify.error.audit.AE006" descriptio
 export const AS001 = (<FormattedMessage id="notify.create.audit.success" description='Text for successfull audit creation' 
       defaultMessage="New audit task created successfully"/>);
 export const AS00A = (<FormattedMessage id="notify.start.audit.success" description='Text for successfull audit creation' 
-      defaultMessage="PPS assigned succeddfully. Audit task started"/>);
+      defaultMessage="PPS assigned successfully. Audit task started"/>);
 export const AS003 = (<FormattedMessage id="notify.delete.audit.processed" description='Text for already processed audit' 
       defaultMessage="Audit already processed. Cannot delete"/>);
 export const AE007 = (<FormattedMessage id="notify.Location.audit.pending" description='Text for Location of audit pending for approval' 

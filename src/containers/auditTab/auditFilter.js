@@ -123,13 +123,22 @@ class AuditFilter extends React.Component {
         var columnDetail = {column1token: column1, column2token: column2};
         return columnDetail;
     }
+ _arrayDiff(mainArray,arraytoSearch ) {
+    return mainArray.filter(function (a) {
+        return arraytoSearch.indexOf(a) == -1;
+    });
+}
 
     _handelTokenClick(field, value, state) {
-        var obj = {};
-        this.setState({tokenSelected: handelTokenClick(field, value, state, this.state)});
+        var tempArray=[SPECIFIC_SKU_ID,SPECIFIC_LOCATION_ID];
+        var obj = {},queryField;
         var selectedToken = this.state.tokenSelected['AUDIT TYPE'];
+        this.setState({tokenSelected: handelTokenClick(field, value, state, this.state)});
+       
         if (state !== 'addDefault') {
             obj.name = this._mappingArray(selectedToken);
+            queryField=this._arrayDiff(tempArray,obj.name);
+           (queryField && queryField.length!==0)? this.setState({searchQuery: handleInputQuery("", queryField, this.state)}):"";
             this.props.setTextBoxStatus(obj);
         }
         else {
@@ -166,7 +175,11 @@ class AuditFilter extends React.Component {
     }
 
     _clearFilter() {
-        hashHistory.push({pathname: "/audit", query: {}})
+        var selectedToken=[];
+        selectedToken[0]=ANY;
+        var obj=this._mappingArray(selectedToken);
+        this.props.setTextBoxStatus(obj);
+        hashHistory.push({pathname: "/audit", query: {}});
     }
 
     render() {
