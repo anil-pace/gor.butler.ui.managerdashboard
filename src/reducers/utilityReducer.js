@@ -25,11 +25,11 @@ export  function utilityValidations(state={},action){
               "isMasterUploadProcessing" : action.data
             })
     case MASTER_UPLOAD_SUCCESS:
-          if(action.data.code)
+          if(action.data.alert_data)
             {
            return Object.assign({}, state, {
-              "errorCode" : action.data.code,
-              "maxsize":action.data.max_size
+              "errorCode" : action.data.alert_data[0].code,
+              "maxsize":action.data.alert_data[0].details.max_size
             })
             }else
           {

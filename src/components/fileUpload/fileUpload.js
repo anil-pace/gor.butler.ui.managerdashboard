@@ -1,6 +1,7 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
+import {utility001} from '../../constants/messageConstants';
 /**
  * Generic component for file upload
  */
@@ -48,7 +49,8 @@ class FileUpload extends React.Component{
 
 	render(){
 		 var isProcessing = this.props.isProcessing;
-     var maxSize = this.props.maxFileSize ? Math.round(this.props.maxFileSize / 1024) : 0;
+   //  var maxSize = this.props.maxFileSize ? Math.round(this.props.maxFileSize / 1024) : 0;
+     var maxSize = this.props.maxFileSize ;
 		return (
 			<div>
             
@@ -65,6 +67,7 @@ class FileUpload extends React.Component{
                 <p className={"gor-upl-msg"}> <FormattedMessage id="utility.fileSize.message" description='Maximum File Size:  MB' defaultMessage='Maximum File Size: {maxSize} MB' values={{maxSize:maxSize}}/></p>  
                 <p className = {"gor-upl-msg gor-upl-err"}>
                     {this.props.validationList[this.state.isError]}
+                    {this.props.errorCode}
                  </p>  
          		</div>
                  

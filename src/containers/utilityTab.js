@@ -228,6 +228,7 @@ class UtilityTab extends React.Component{
     }
     componentDidMount(){
       this._onRefresh();
+     this._getfilemaxsize();
     }
     componentWillReceiveProps(nextProps, nextState){
       if(nextProps.newFileUploaded !== this.props.newFileUploaded){
@@ -236,7 +237,6 @@ class UtilityTab extends React.Component{
     }
 
   render(){
-    var limit=this._getfilemaxsize();
     var uploadDataTile = this._renderUploadDataTile();
     var downloadReportTile = this._renderDownReportTile();
     var grnTile = this._renderGRNtile();
@@ -270,7 +270,7 @@ function mapStateToProps(state, ownProps){
       newFileUploaded:state.utilityValidations.newFileUploaded,
       uploadHistoryData : state.utilityValidations.uploadHistoryData,
       maxfilesizelimit:state.utilityValidations.maxfilesizelimit,
-      errorCode:state.utilityValidations.errorCode || {},
+      errorCode:state.utilityValidations.errorCode,
       maxsize:state.utilityValidations.maxsize || 0,
       dataRefreshed : state.utilityValidations.dataRefreshed
   };
