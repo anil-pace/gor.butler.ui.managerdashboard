@@ -18,7 +18,7 @@ import {
     SPECIFIC_LOCATION_ID,
     AUDIT_TASK_ID,
     AUDIT_TYPE,AUDIT_COMPLETED,AUDIT_CREATED,PENDING,INPROGRESS,
-    AUDIT_RESOLVED,AUDIT_LINE_REJECTED
+    AUDIT_RESOLVED,AUDIT_LINE_REJECTED,SINGLE
 }from '../../constants/frontEndConstants';
 import {hashHistory} from 'react-router'
 import {setAuditSpinner} from './../../actions/auditActions';
@@ -51,7 +51,7 @@ class AuditFilter extends React.Component {
     }
 
 
-    _mappingArray(selectedToken) {
+    _mappingArray(selectedToken,type) {
         var mappingArray = [];
         selectedToken.map(function (value, i) {
             if (value == "sku") {
@@ -60,12 +60,16 @@ class AuditFilter extends React.Component {
             else if (value == "location") {
                 mappingArray.push(SPECIFIC_LOCATION_ID)
             }
-            else {
-                mappingArray.push(SPECIFIC_SKU_ID, SPECIFIC_LOCATION_ID);
-            }
+            //Raja
+            // else {
+            //     mappingArray.push(SPECIFIC_SKU_ID, SPECIFIC_LOCATION_ID);
+            // }
 
         });
+        if(!type)
+        {
         mappingArray.push(AUDIT_TASK_ID);
+        }
         return mappingArray;
     }
 
@@ -119,7 +123,7 @@ class AuditFilter extends React.Component {
         var column1 = <FilterTokenWrap field={tokenStatusField} tokenCallBack={this._handelTokenClick.bind(this)}
                                        label={labelC2} selectedToken={selectedToken}/>;
         var column2 = <FilterTokenWrap field={tokenAuditTypeField} tokenCallBack={this._handelTokenClick.bind(this)}
-                                       label={labelC1} selectedToken={selectedToken}/>;
+                                       label={labelC1} selectedToken={selectedToken} selection={SINGLE}/>;
         var columnDetail = {column1token: column1, column2token: column2};
         return columnDetail;
     }
@@ -131,13 +135,15 @@ class AuditFilter extends React.Component {
 
     _handelTokenClick(field, value, state) {
         var tempArray=[SPECIFIC_SKU_ID,SPECIFIC_LOCATION_ID];
-        var obj = {},queryField;
+        var obj = {},queryField,toRemove;
         var selectedToken = this.state.tokenSelected['AUDIT TYPE'];
+        var token=[value];
         this.setState({tokenSelected: handelTokenClick(field, value, state, this.state)});
        
         if (state !== 'addDefault') {
             obj.name = this._mappingArray(selectedToken);
-            queryField=this._arrayDiff(tempArray,obj.name);
+            toRemove=this._mappingArray(token,selectedToken);
+            queryField= selectedToken.toString()==ANY?toRemove:this._arrayDiff(tempArray,obj.name);
            (queryField && queryField.length!==0)? this.setState({searchQuery: handleInputQuery("", queryField, this.state)}):"";
             this.props.setTextBoxStatus(obj);
         }
