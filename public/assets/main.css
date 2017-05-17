@@ -5837,8 +5837,7 @@ button:disabled {
 }
 
 .gor-utility-tile-body .gor-upl-msg {
-  width: 67%;
-  margin: auto;
+  margin-left: 12%;
   color: #535353;
 }
 
