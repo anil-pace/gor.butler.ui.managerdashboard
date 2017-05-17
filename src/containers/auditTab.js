@@ -193,10 +193,10 @@ class AuditTab extends React.Component {
             auditbyUrl =sortAuditHead[auditParam["columnKey"]];
 
         }
-        else
+        else if(auditParam)
         {
-            auditParam? _query_params.push(['order',toggleOrder(auditParam[Object.keys(auditParam)])].join("=")):"";
-            auditbyUrl=auditParam? sortAuditHead[Object.keys(auditParam)[0]]:"";
+            _query_params.push(['order',toggleOrder(auditParam[Object.keys(auditParam)])].join("="));
+            auditbyUrl=sortAuditHead[Object.keys(auditParam)[0]];
         }
 
         url=[url,_query_params.join("&")].join("&")
