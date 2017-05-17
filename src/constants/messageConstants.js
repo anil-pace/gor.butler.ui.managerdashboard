@@ -177,8 +177,15 @@ export const ES=(<FormattedMessage id="emergency.resume.success" description='Op
       defaultMessage='Operation resumed'/>);
 
 //Message for Master File upload
-export const utility002=(<FormattedMessage id="masterdata.maxlimit.records" description='Records in file should not be greater than' 
+export const fileUploadMessages={
+      "utility002":(<FormattedMessage id="masterdata.maxlimit.records" description='Records in file should not be greater than' 
+      defaultMessage='Records in file should not be greater than'/>),
+      "utility001":(<FormattedMessage id="masterdata.maxlimit.filesize" description='File size should not be greater than' 
+      defaultMessage='File size should not be greater than'/>)
+      
+}
+/*export const utility002=(<FormattedMessage id="masterdata.maxlimit.records" description='Records in file should not be greater than' 
       defaultMessage='Records in file should not be greater than'/>);
 export const utility001=(<FormattedMessage id="masterdata.maxlimit.filesize" description='File size should not be greater than' 
-      defaultMessage='File size should not be greater than'/>);
+      defaultMessage='File size should not be greater than'/>);*/
 

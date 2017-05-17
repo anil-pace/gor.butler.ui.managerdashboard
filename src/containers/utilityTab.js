@@ -31,6 +31,10 @@ import {
   MASTER_FILE_FORMATS,
   UPLOAD_HISTORY,GET_MAX_FILE_SIZE
 } from '../constants/frontEndConstants';
+import {
+fileUploadMessages
+} from '../constants/messageConstants';
+
 import FieldError from '../components/fielderror/fielderror';
 import { defineMessages } from 'react-intl';
 
@@ -178,7 +182,7 @@ class UtilityTab extends React.Component{
         var recallBar = <MasterUploadTile dataRefreshed = {this.props.dataRefreshed} 
         uploadBtnText = {this.context.intl.formatMessage(messages.uploadBtnText)} 
         isMasterUploadProcessing = {this.props.isMasterUploadProcessing} 
-        maxFileSize = {this.props.maxfilesizelimit} validationList = {MASTER_FILE_VALIDATIONS} 
+        maxFileSize = {this.props.maxfilesizelimit} validationList = {MASTER_FILE_VALIDATIONS} errorList={fileUploadMessages}
         acceptedFormats ={MASTER_FILE_FORMATS} onMasterFileUpload = {this._onMasterFileUpload.bind(this)} 
         historyData={uploadHistoryData} errorCode={this.props.errorCode} maxSize={this.props.maxsize}/>;
         return recallBar;
@@ -269,9 +273,9 @@ function mapStateToProps(state, ownProps){
       isMasterUploadProcessing : state.utilityValidations.isMasterUploadProcessing || false,
       newFileUploaded:state.utilityValidations.newFileUploaded,
       uploadHistoryData : state.utilityValidations.uploadHistoryData,
-      maxfilesizelimit:state.utilityValidations.maxfilesizelimit,
+      maxfilesizelimit:state.utilityValidations.maxfilesizelimit ||0,
       errorCode:state.utilityValidations.errorCode,
-      maxsize:state.utilityValidations.maxsize || 0,
+      maxsize:state.utilityValidations.maxsize ||0,
       dataRefreshed : state.utilityValidations.dataRefreshed
   };
 }
