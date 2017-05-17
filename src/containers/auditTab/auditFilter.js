@@ -31,6 +31,12 @@ class AuditFilter extends React.Component {
             defaultToken: {"AUDIT TYPE": [ANY], "STATUS": [ALL]}
         };
     }
+    componentWillMount(){
+        var obj={};
+        obj.name=AUDIT_TASK_ID;
+        this.props.setTextBoxStatus(obj);
+    }
+
 
     _closeFilter() {
         var filterState = !this.props.showFilter;
@@ -181,9 +187,12 @@ class AuditFilter extends React.Component {
     }
 
     _clearFilter() {
-        var selectedToken=[];
-        selectedToken[0]=ANY;
-        var obj=this._mappingArray(selectedToken);
+        //Raja
+        // var selectedToken=[];
+        // selectedToken[0]=ANY;
+        // var obj=this._mappingArray(selectedToken);
+        var obj={};
+        obj.name=AUDIT_TASK_ID;
         this.props.setTextBoxStatus(obj);
         hashHistory.push({pathname: "/audit", query: {}});
     }

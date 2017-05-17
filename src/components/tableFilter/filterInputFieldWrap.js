@@ -17,8 +17,8 @@ class FilterInputFieldWrap extends React.Component{
     var textboxStatus=this.props.textboxStatus ||{};
     for (var i = totalInput.length - 1; i >= 0; i--) {
         if(textboxStatus.name){
-        flag=((textboxStatus.name).indexOf(totalInput[i].value))!==-1?false:true;
 
+       flag=((textboxStatus.name).indexOf(totalInput[i].value))!==-1?false:true;
     }
     var inputValue =(flag?"":this.props.inputValue[totalInput[i].value]);
         var inputField = <FilterInputField key={i} inputText={totalInput[i]} handleInputText={this.props.handleInputText} inputValue={inputValue} flag={flag}/>;

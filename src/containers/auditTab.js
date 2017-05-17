@@ -156,9 +156,11 @@ class AuditTab extends React.Component {
 
         if (query.auditType && query.auditType.length === 1) {
             _query_params.push([AUDIT_PARAM_TYPE, query.auditType[0]].join("="))
-        } else {
-            _query_params.push([AUDIT_PARAM_TYPE, ANY].join("="))
-        }
+         }
+         //raja
+        // else {
+        //     _query_params.push([AUDIT_PARAM_TYPE, ANY].join("="))
+        // }
 
         if (query.skuId || query.locationId) {
 
