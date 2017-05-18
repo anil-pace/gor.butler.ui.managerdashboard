@@ -191,7 +191,7 @@ class Tabs extends React.Component{
 	render(){
 
   let items=this._parseStatus();
-  var showUtilityTab = true;              
+  var showUtilityTab = this.props.config.utility_tab && this.props.config.utility_tab.enabled;
 		return (
 		<div className="gor-tabs gor-main-block">
 		<Link to="/overview" onClick = {this.handleTabClick.bind(this,OVERVIEW)}>
@@ -240,6 +240,7 @@ function mapStateToProps(state, ownProps){
          orders_completed:state.tabsData.orders_completed||0,
          system_status:state.tabsData.status||null,
          audit_alert: state.tabsData.audit_alert || 0,
+         config:state.config||{}
     }
 }
 

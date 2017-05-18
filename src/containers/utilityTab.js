@@ -185,7 +185,7 @@ class UtilityTab extends React.Component {
 
     _renderMasterUpload() {
         var uploadHistoryData = this.props.uploadHistoryData || [];
-        var recallBar = <MasterUploadTile dataRefreshed={this.props.dataRefreshed}
+        var recallBar = <MasterUploadTile uploadHistChanged={this.props.uploadHistChanged}
                                           uploadBtnText={this.context.intl.formatMessage(messages.uploadBtnText)}
                                           isMasterUploadProcessing={this.props.isMasterUploadProcessing}
                                           maxFileSize={MASTER_FILE_MAX_SIZE} validationList={MASTER_FILE_VALIDATIONS}
@@ -279,21 +279,55 @@ class UtilityTab extends React.Component {
         var masterUpload = this._renderMasterUpload();
         var activeReportDownButton = (this.state.reportState.fileType && this.state.reportState.category) ? true : false;
         var activeGRNDownButton = (this.state.grnState.fileType && this.state.grnState.invoiceId) ? true : false;
+        let show_gr_report = false
+        let show_masterdata_upload = false
+        let show_inventory_report = false
+        let show_item_recall_scripts = false
+
+        try {
+            show_gr_report = this.props.config.utility_tab.widgets.gr_report
+        } catch (ex) {
+            //Do nothing
+        }
+        try {
+            show_masterdata_upload = this.props.config.utility_tab.widgets.masterdata_upload;
+        } catch (ex) {
+            //Do nothing
+        }
+        try {
+            show_inventory_report = this.props.config.utility_tab.widgets.reports.inventory_report;
+        } catch (ex) {
+            //Do nothing
+        }
+        try {
+            show_item_recall_scripts = this.props.config.utility_tab.widgets.scripts.item_recall;
+        } catch (ex) {
+            //Do nothing
+        }
+
         return (
             <div >
                 <div>
-                    <UtilityTile tileHead={this.context.intl.formatMessage(messages.masterDataHead)} showFooter={false}
-                                 tileBody={masterUpload} showHeaderIcon={true} onRefresh={this._onRefresh.bind(this)}/>
-                    <UtilityTile tileHead={this.context.intl.formatMessage(messages.runScriptsHead)} showFooter={false}
-                                 tileBody={uploadDataTile}/>
-                    <UtilityTile tileHead={this.context.intl.formatMessage(messages.downloadReportsHead)}
-                                 showFooter={true} tileBody={downloadReportTile}
-                                 footerAction={this._downloadReport.bind(this)} enableButton={activeReportDownButton}
-                                 responseState={this.props.inventorySpinner}/>
-                    <UtilityTile tileHead={this.context.intl.formatMessage(messages.goodsRcvdNotesHead)}
-                                 showFooter={true}
-                                 tileBody={grnTile} footerAction={this._downloadGRN.bind(this)}
-                                 enableButton={activeGRNDownButton}/>
+                    {show_masterdata_upload ?
+                        <UtilityTile tileHead={this.context.intl.formatMessage(messages.masterDataHead)}
+                                     showFooter={false}
+                                     tileBody={masterUpload} showHeaderIcon={true}
+                                     onRefresh={this._onRefresh.bind(this)}/> : null}
+                    {show_item_recall_scripts ?
+                        <UtilityTile tileHead={this.context.intl.formatMessage(messages.runScriptsHead)}
+                                     showFooter={false}
+                                     tileBody={uploadDataTile}/> : null}
+                    {show_inventory_report ?
+                        <UtilityTile tileHead={this.context.intl.formatMessage(messages.downloadReportsHead)}
+                                     showFooter={true} tileBody={downloadReportTile}
+                                     footerAction={this._downloadReport.bind(this)}
+                                     enableButton={activeReportDownButton}
+                                     responseState={this.props.inventorySpinner}/> : null}
+                    {show_gr_report ?
+                        <UtilityTile tileHead={this.context.intl.formatMessage(messages.goodsRcvdNotesHead)}
+                                     showFooter={true}
+                                     tileBody={grnTile} footerAction={this._downloadGRN.bind(this)}
+                                     enableButton={activeGRNDownButton}/> : null}
                 </div>
             </div>
         );
@@ -308,10 +342,11 @@ function mapStateToProps(state, ownProps) {
         isMasterUploadProcessing: state.utilityValidations.isMasterUploadProcessing || false,
         newFileUploaded: state.utilityValidations.newFileUploaded,
         uploadHistoryData: state.utilityValidations.uploadHistoryData,
-        dataRefreshed: state.utilityValidations.dataRefreshed,
+        uploadHistChanged: state.utilityValidations.uploadHistChanged,
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
         socketAuthorized: state.recieveSocketActions.socketAuthorized,
         utilityTabRefreshed: state.utilityValidations.utilityTabRefreshed,
+        config: state.config || {}
     };
 }
 

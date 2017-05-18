@@ -1,7 +1,7 @@
 import {receiveAuthData,setLoginSpinner,setTimeOffSetData,loginFail} from '../actions/loginAction';
 import {recieveOrdersData} from '../actions/paginationAction';
 import {recieveAuditData,setAuditRefresh,setAuditSpinner,setPendingAuditLines,auditValidatedAttributes,validatedSKUcode} from '../actions/auditActions';
-import {assignRole} from '../actions/userActions';
+import {assignRole,recieveConfigurations} from '../actions/userActions';
 import {recieveHeaderInfo,recieveShiftStartTime} from '../actions/headerAction';
 import {getPPSAudit} from '../actions/auditActions';
 import {codeToString} from './codeToString';
@@ -14,7 +14,7 @@ import {ERROR,AUTH_LOGIN, ADD_USER, RECIEVE_TIME_OFFSET,CHECK_ID,DELETE_USER,GET
 	DELETE_AUDIT,AUDIT_RESOLVE_LINES,AUDIT_RESOLVE_CONFIRMED, VALIDATE_SKU_ID,PAUSE_OPERATION,
 	RESUME_OPERATION,CONFIRM_SAFETY,CHECK_SAFETY,RECEIVE_SHIFT_START_TIME,ITEM_RECALLED,GR_REPORT_RESPONSE,ITEM_RECALLED_DATA,
 MASTER_FILE_UPLOAD,
-UPLOAD_HISTORY} from '../constants/frontEndConstants';
+UPLOAD_HISTORY,GET_CONFIGS} from '../constants/frontEndConstants';
 import {BUTLER_UI,CODE_UE002,BUTLER_SUPERVISOR,CODE_E027} from '../constants/backEndConstants'
 import {UE002,E028,E029,MODE_REQUESTED,TYPE_SUCCESS,AS001,ERR_API,ERR_USR,ERR_RES,ERR_AUDIT,AS00A,WRONG_CRED,
 E051,ES} from '../constants/messageConstants';
@@ -279,6 +279,9 @@ export function AjaxParse(store,res,cause,status)
 		case UPLOAD_HISTORY:
 			store.dispatch(uploadMasterDataHistory(res));
 			break;
+		  case GET_CONFIGS:
+		  	store.dispatch(recieveConfigurations(res));
+		  	break;
 		default:
 			ShowError(store,cause,status);
 	 }

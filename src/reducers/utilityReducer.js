@@ -31,10 +31,10 @@ export  function utilityValidations(state={},action){
               "newFileUploaded":newFileUploaded
             })
     case UPLOAD_HISTORY:
-          var dataRefreshed = !state.dataRefreshed;
+          var uploadHistChanged = !state.uploadHistChanged;
           return Object.assign({}, state, {
               "uploadHistoryData" : action.data.mdm_upload_info || [],
-              "dataRefreshed":dataRefreshed
+              "uploadHistChanged":uploadHistChanged
             })
 
       case UTILITY_TAB_REFRESHED:
@@ -42,6 +42,6 @@ export  function utilityValidations(state={},action){
               "utilityTabRefreshed": new Date()
           })
     default:
-      return state
+      return state;
   }
 }
