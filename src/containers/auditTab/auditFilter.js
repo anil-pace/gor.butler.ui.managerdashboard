@@ -32,11 +32,6 @@ class AuditFilter extends React.Component {
         };
         this._updateTextBoxStatus();
     }
-    // componentWillMount(){
-    //     var obj={};
-    //     obj.name=AUDIT_TASK_ID;
-    //     this.props.setTextBoxStatus(obj);
-    // }
 
     _updateTextBoxStatus(){
         var obj={};
@@ -190,9 +185,6 @@ class AuditFilter extends React.Component {
     }
 
     _clearFilter() {
-        // var obj={};
-        // obj.name=AUDIT_TASK_ID;
-        // this.props.setTextBoxStatus(obj);
         this._updateTextBoxStatus();
         hashHistory.push({pathname: "/audit", query: {}});
     }
