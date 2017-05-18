@@ -25,7 +25,8 @@ import {userRequest} from './actions/userActions';
 
    constructor(props) 
    {  
-    super(props); 
+    super(props);
+    this.state={fetchedConfig:false}
   }
 
       componentWillMount() {
@@ -112,7 +113,10 @@ import {userRequest} from './actions/userActions';
     }
     
     if(!socketStatus){
-        this._getConfig()
+        if (!this.state.fetchedConfig) {
+            this._getConfig()
+            this.setState({fetchedConfig: true})
+        }
       this.props.initWebSocket() ; 
     }
     else if(!nextProps.socketAuthorized){
