@@ -6183,6 +6183,21 @@ button:disabled {
   margin-right: 25px;
 }
 
+.notificationWrap .searchResults {
+  height: 350px;
+  overflow: auto;
+}
+
+.notificationWrap .viewAllLink {
+  padding: 15px 5px;
+  text-align: center;
+  background: #F8F8F8;
+}
+
+.notificationWrap .viewAllLink a {
+  color: #4a90e2;
+}
+
 .notificationWrap .not-icon-wrap .not-bell {
   display: inline-block;
   position: relative;

@@ -8,6 +8,7 @@ import NotificationSearchPanel from './notificationSearchPanel';
 
 
 
+
 class Notification extends React.Component{
 	constructor(){
 		super();
@@ -21,6 +22,8 @@ class Notification extends React.Component{
 		this.setState({displayResults: curState})
 	}
 	
+	
+	
 	render(){
 		return (
 			<div>
@@ -33,7 +36,61 @@ class Notification extends React.Component{
 			
 			<ResultPane display={this.state.displayResults}>
 				<NotificationSearchPanel />
-				<div className="searchResults">
+				<div className="searchResults" >
+						<section className="row">
+							<div className="content">
+								<p className="message">{"Butler 007 stopped under charging station"}</p>
+								<p><span className="time">{"1 min ago"}</span><span className="errorMsg">{"System Error [Butler]"}</span></p>
+							</div>
+							<div className="status">
+								<i className="not-statusIcon"></i>
+							</div>
+						</section>
+						<section className="row">
+							<div className="content">
+								<p className="message">{"Butler 007 stopped under charging station"}</p>
+								<p><span className="time">{"1 min ago"}</span><span className="errorMsg">{"System Error [Butler]"}</span></p>
+							</div>
+							<div className="status">
+								<i className="not-statusIcon"></i>
+							</div>
+						</section>
+						<section className="row">
+							<div className="content">
+								<p className="message">{"Butler 007 stopped under charging station"}</p>
+								<p><span className="time">{"1 min ago"}</span><span className="errorMsg">{"System Error [Butler]"}</span></p>
+							</div>
+							<div className="status">
+								<i className="not-statusIcon"></i>
+							</div>
+						</section>
+						<section className="row">
+							<div className="content">
+								<p className="message">{"Butler 007 stopped under charging station"}</p>
+								<p><span className="time">{"1 min ago"}</span><span className="errorMsg">{"System Error [Butler]"}</span></p>
+							</div>
+							<div className="status">
+								<i className="not-statusIcon"></i>
+							</div>
+						</section>
+						<section className="row">
+							<div className="content">
+								<p className="message">{"Butler 007 stopped under charging station"}</p>
+								<p><span className="time">{"1 min ago"}</span><span className="errorMsg">{"System Error [Butler]"}</span></p>
+							</div>
+							<div className="status">
+								<i className="not-statusIcon"></i>
+							</div>
+						</section>
+						<section className="row">
+							<div className="content">
+								<p className="message">{"Butler 007 stopped under charging station"}</p>
+								<p><span className="time">{"1 min ago"}</span><span className="errorMsg">{"System Error [Butler]"}</span></p>
+							</div>
+							<div className="status">
+								<i className="not-statusIcon"></i>
+							</div>
+						</section>
 						<section className="row">
 							<div className="content">
 								<p className="message">{"Butler 007 stopped under charging station"}</p>
@@ -44,6 +101,11 @@ class Notification extends React.Component{
 							</div>
 						</section>
 						
+				</div>
+				<div className="resultFooter">
+					<section className="viewAllLink">
+						<a href="javascript:void(0)" onClick={this.props.handleViewAllLink}>VIEW ALL NOTIFICATIONS </a>
+					</section>
 				</div>
 					</ResultPane>
 			</div>

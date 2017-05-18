@@ -93,6 +93,19 @@
 
     	
     }
+    .searchResults{
+    	height:350px;
+    	overflow: auto;
+
+    }
+    .viewAllLink{
+    	padding: 15px 5px;
+	    text-align: center;
+	    background: #F8F8F8;
+	    a{
+	    	color:#4a90e2;
+	    }
+    }
     .not-icon-wrap{
     	.not-bell{
     		display: inline-block;
