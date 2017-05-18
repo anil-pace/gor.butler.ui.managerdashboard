@@ -57,7 +57,7 @@ class AuditFilter extends React.Component {
     }
 
 
-    _mappingArray(selectedToken,type) {
+    _mappingArray(selectedToken,flag) {
         var mappingArray = [];
         selectedToken.map(function (value, i) {
             if (value == "sku") {
@@ -68,7 +68,7 @@ class AuditFilter extends React.Component {
             }
 
         });
-        if(!type)
+        if(!flag)
         {
         mappingArray.push(AUDIT_TASK_ID);
         }
@@ -137,15 +137,15 @@ class AuditFilter extends React.Component {
 
     _handelTokenClick(field, value, state) {
         var tempArray=[SPECIFIC_SKU_ID,SPECIFIC_LOCATION_ID];
-        var obj = {},queryField,toRemove;
+        var obj = {},queryField,tokentoRemove;
         var selectedToken = this.state.tokenSelected['AUDIT TYPE'];
         var token=[value];
         this.setState({tokenSelected: handelTokenClick(field, value, state, this.state)});
        
         if (state !== 'addDefault') {
             obj.name = this._mappingArray(selectedToken);
-            toRemove=this._mappingArray(token,selectedToken);
-            queryField= selectedToken.toString()==ANY?toRemove:this._arrayDiff(tempArray,obj.name);
+            tokentoRemove=this._mappingArray(token,selectedToken);
+            queryField= selectedToken.toString()==ANY?tokentoRemove:this._arrayDiff(tempArray,obj.name);
            (queryField && queryField.length!==0)? this.setState({searchQuery: handleInputQuery("", queryField, this.state)}):"";
             this.props.setTextBoxStatus(obj);
         }
