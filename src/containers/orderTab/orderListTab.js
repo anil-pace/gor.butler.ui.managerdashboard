@@ -113,6 +113,11 @@ class OrderListTab extends React.Component {
         this.props.initDataSentCall(updatedWsSubscription["default"])
         this.props.updateSubscriptionPacket(updatedWsSubscription);
     }
+
+
+    _handleClickRefreshButton(){
+        this._refreshList(this.state.query,(this.props.orderSortHeaderState?this.props.orderSortHeaderState.colSortDirs:null))
+    }
     /**
      * The method will update the subscription packet
      * and will fetch the data from the socket.
@@ -565,7 +570,7 @@ render() {
             <div
             className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
             <button className="gor-filterBtn-btn"
-            onClick={this._clearFilter.bind(this)}>
+            onClick={this._handleClickRefreshButton.bind(this)}>
             <div className="gor-refresh-icon"/>
             <FormattedMessage id="order.table.buttonLable"
             description="button label for refresh"

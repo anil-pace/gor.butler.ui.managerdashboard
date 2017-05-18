@@ -42,9 +42,9 @@ class UserRoles extends React.Component{
     }
     _getList(){
         let options=[], selected={}, len, objDropdown, currentRole, label;
-        len = this.props.roleInfo.length;
+        len = this.props.roleList.length;
         for(let i=0; i<len; i++){
-           currentRole = this.props.roleInfo[i];
+           currentRole = this.props.roleList[i];
            if(!this._isMapped(stringConfig,currentRole.name)){
                 continue;
            }
@@ -72,14 +72,14 @@ class UserRoles extends React.Component{
     }
     _getInfo(){
         let infoGroup=[], info, selected, len, currentRole;
-        len = this.props.roleInfo.length;
+        len = this.props.roleList.length;
         let infoHeading = (<div className='gor-role-heading'>
                             <FormattedMessage id="users.roles.info.heading" description='Heading for roles description' 
                              defaultMessage='Role definitions'/>
                           </div>);
 
         for(let i=0; i<len; i++){
-           currentRole = this.props.roleInfo[i];
+           currentRole = this.props.roleList[i];
            if(!this._isMapped(stringConfig,currentRole.name) || !this._isMapped(roleDesc,currentRole.name)){
                 continue;
            }
@@ -130,7 +130,7 @@ UserRoles.propTypes={
       roleSet:React.PropTypes.string, 
       roleName:React.PropTypes.string,
       setRole:React.PropTypes.func,
-      roleInfo:React.PropTypes.array
+    roleList:React.PropTypes.array
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(UserRoles);
