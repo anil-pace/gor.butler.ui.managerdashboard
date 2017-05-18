@@ -1,4 +1,4 @@
-import { AJAX_CALL, ID_MAP, SET_ROLE} from '../constants/frontEndConstants'
+import { AJAX_CALL, ID_MAP, SET_ROLE,RECEIVE_CONFIGS} from '../constants/frontEndConstants'
 
 /**
  * Actions for users page
@@ -24,4 +24,11 @@ export function setRole(data)
     type: SET_ROLE,
     data
     }
+}
+
+export function recieveConfigurations(data){
+  return {
+    type:RECEIVE_CONFIGS,
+      data
+  }
 }

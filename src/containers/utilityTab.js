@@ -279,21 +279,55 @@ class UtilityTab extends React.Component {
         var masterUpload = this._renderMasterUpload();
         var activeReportDownButton = (this.state.reportState.fileType && this.state.reportState.category) ? true : false;
         var activeGRNDownButton = (this.state.grnState.fileType && this.state.grnState.invoiceId) ? true : false;
+        var show_gr_report = false
+        var show_masterdata_upload = false
+        var show_inventory_report = false
+        var show_item_recall_scripts = false
+
+        try {
+            show_gr_report = this.props.config.utility_tab.widgets.gr_report
+        } catch (ex) {
+            //Do nothing
+        }
+        try {
+            show_masterdata_upload = this.props.config.utility_tab.widgets.masterdata_upload;
+        } catch (ex) {
+            //Do nothing
+        }
+        try {
+            show_inventory_report = this.props.config.utility_tab.widgets.reports.inventory_report;
+        } catch (ex) {
+            //Do nothing
+        }
+        try {
+            show_item_recall_scripts = this.props.config.utility_tab.widgets.scripts.item_recall;
+        } catch (ex) {
+            //Do nothing
+        }
+
         return (
             <div >
                 <div>
-                    <UtilityTile tileHead={this.context.intl.formatMessage(messages.masterDataHead)} showFooter={false}
-                                 tileBody={masterUpload} showHeaderIcon={true} onRefresh={this._onRefresh.bind(this)}/>
-                    <UtilityTile tileHead={this.context.intl.formatMessage(messages.runScriptsHead)} showFooter={false}
-                                 tileBody={uploadDataTile}/>
-                    <UtilityTile tileHead={this.context.intl.formatMessage(messages.downloadReportsHead)}
-                                 showFooter={true} tileBody={downloadReportTile}
-                                 footerAction={this._downloadReport.bind(this)} enableButton={activeReportDownButton}
-                                 responseState={this.props.inventorySpinner}/>
-                    <UtilityTile tileHead={this.context.intl.formatMessage(messages.goodsRcvdNotesHead)}
-                                 showFooter={true}
-                                 tileBody={grnTile} footerAction={this._downloadGRN.bind(this)}
-                                 enableButton={activeGRNDownButton}/>
+                    {show_masterdata_upload ?
+                        <UtilityTile tileHead={this.context.intl.formatMessage(messages.masterDataHead)}
+                                     showFooter={false}
+                                     tileBody={masterUpload} showHeaderIcon={true}
+                                     onRefresh={this._onRefresh.bind(this)}/> : null}
+                    {show_item_recall_scripts ?
+                        <UtilityTile tileHead={this.context.intl.formatMessage(messages.runScriptsHead)}
+                                     showFooter={false}
+                                     tileBody={uploadDataTile}/> : null}
+                    {show_inventory_report ?
+                        <UtilityTile tileHead={this.context.intl.formatMessage(messages.downloadReportsHead)}
+                                     showFooter={true} tileBody={downloadReportTile}
+                                     footerAction={this._downloadReport.bind(this)}
+                                     enableButton={activeReportDownButton}
+                                     responseState={this.props.inventorySpinner}/> : null}
+                    {show_gr_report ?
+                        <UtilityTile tileHead={this.context.intl.formatMessage(messages.goodsRcvdNotesHead)}
+                                     showFooter={true}
+                                     tileBody={grnTile} footerAction={this._downloadGRN.bind(this)}
+                                     enableButton={activeGRNDownButton}/> : null}
                 </div>
             </div>
         );
@@ -312,6 +346,7 @@ function mapStateToProps(state, ownProps) {
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
         socketAuthorized: state.recieveSocketActions.socketAuthorized,
         utilityTabRefreshed: state.utilityValidations.utilityTabRefreshed,
+        config: state.config || {}
     };
 }
 
