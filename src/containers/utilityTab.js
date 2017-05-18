@@ -24,7 +24,6 @@ import {setInventoryReportSpinner} from '../actions/spinnerAction';
 import {
   GET, 
   ITEM_RECALLED,
-  MASTER_FILE_VALIDATIONS, 
   MASTER_FILE_UPLOAD,
   GR_REPORT_RESPONSE,
   POST,
@@ -182,7 +181,7 @@ class UtilityTab extends React.Component{
         var recallBar = <MasterUploadTile dataRefreshed = {this.props.dataRefreshed} 
         uploadBtnText = {this.context.intl.formatMessage(messages.uploadBtnText)} 
         isMasterUploadProcessing = {this.props.isMasterUploadProcessing} 
-        maxFileSize = {this.props.maxfilesizelimit} validationList = {MASTER_FILE_VALIDATIONS} errorList={fileUploadMessages}
+        maxFileSize = {this.props.maxfilesizelimit} errorList={fileUploadMessages}
         acceptedFormats ={MASTER_FILE_FORMATS} onMasterFileUpload = {this._onMasterFileUpload.bind(this)} 
         historyData={uploadHistoryData} errorCode={this.props.errorCode} maxSize={this.props.maxsize}/>;
         return recallBar;
