@@ -30,8 +30,15 @@ class AuditFilter extends React.Component {
             tokenSelected: {"AUDIT TYPE": [ANY], "STATUS": [ALL]}, searchQuery: {},
             defaultToken: {"AUDIT TYPE": [ANY], "STATUS": [ALL]}
         };
+        this._updateTextBoxStatus();
     }
-    componentWillMount(){
+    // componentWillMount(){
+    //     var obj={};
+    //     obj.name=AUDIT_TASK_ID;
+    //     this.props.setTextBoxStatus(obj);
+    // }
+
+    _updateTextBoxStatus(){
         var obj={};
         obj.name=AUDIT_TASK_ID;
         this.props.setTextBoxStatus(obj);
@@ -183,9 +190,10 @@ class AuditFilter extends React.Component {
     }
 
     _clearFilter() {
-        var obj={};
-        obj.name=AUDIT_TASK_ID;
-        this.props.setTextBoxStatus(obj);
+        // var obj={};
+        // obj.name=AUDIT_TASK_ID;
+        // this.props.setTextBoxStatus(obj);
+        this._updateTextBoxStatus();
         hashHistory.push({pathname: "/audit", query: {}});
     }
 
