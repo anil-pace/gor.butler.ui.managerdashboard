@@ -1,7 +1,7 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
-import {UTILITY002} from '../../constants/frontEndConstants'; 
+import {UTILITY002,MB,KB} from '../../constants/frontEndConstants'; 
 
 /**
  * Generic component for file upload
@@ -24,7 +24,7 @@ class FileUpload extends React.Component{
 
 	render(){
 	 var isProcessing = this.props.isProcessing;
-   var maxSize = this.props.maxFileSize > 1024? (this.props.maxFileSize ? Math.round(this.props.maxFileSize / 1024)+ "mb" : 0 + "mb"):this.props.maxFileSize +"kb";
+   var maxSize = this.props.maxFileSize > MB?( Math.round(this.props.maxFileSize / MB) +"mb"): (Math.round(this.props.maxFileSize / KB)+ "kb");
    var errorLine= (this.props.maxSize)?((this.props.errorCode && this.props.errorCode===UTILITY002)?this.props.maxSize+"line":maxSize):"";
 	
   	return (
@@ -42,7 +42,7 @@ class FileUpload extends React.Component{
                     </label>
                 <p className={"gor-upl-msg"}> <FormattedMessage id="utility.fileSize.message" description='Maximum File Size:  MB' defaultMessage='Maximum File Size: {maxSize}' values={{maxSize:maxSize}}/></p>  
                 <p className = {"gor-upl-msg gor-upl-err"}>
-                    {this.props.errorList[this.props.errorCode]} {errorLine}
+                    {this.props.errorList[this.props.errorCode]} <FormattedMessage id="utility.fileSize.errorline" description='Line or size' defaultMessage= ' {errorLine}' values={{errorLine:errorLine}}/> 
                  </p>  
          		</div>
                  
