@@ -30,7 +30,7 @@ import {
     sortAuditHead,
     sortOrder,
     ALL,
-    ANY,WS_ONSEND
+    ANY,WS_ONSEND,toggleOrder
 } from '../constants/frontEndConstants';
 import {
     BASE_URL,
@@ -118,15 +118,15 @@ class AuditTab extends React.Component {
          * packet can be sent to the server for data
          * update.
          */
-        this.props.auditListRefreshed()
-    }
+         this.props.auditListRefreshed()
+     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.socketAuthorized && nextProps.auditListRefreshed && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
+     componentWillReceiveProps(nextProps) {
+        if (nextProps.socketAuthorized && nextProps.auditListRefreshed && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)) || nextProps.auditRefresh!==this.props.auditRefresh)) { //Changes to refresh the table after creating audit
             this.setState({query: nextProps.location.query})
             this.setState({auditListRefreshed:nextProps.auditListRefreshed})
             this._subscribeData()
-            this._refreshList(nextProps.location.query)
+            this._refreshList(nextProps.location.query,nextProps.auditSortHeaderState.colSortDirs)
         }
     }
 
@@ -135,22 +135,30 @@ class AuditTab extends React.Component {
         this.props.initDataSentCall(updatedWsSubscription["default"])
         this.props.updateSubscriptionPacket(updatedWsSubscription);
     }
-
+    _refresh(data){
+         var locationQuery=this.props.location.query;
+        
+            this._refreshList(this.props.location.query,data);
+        
+  }
     /**
      * The method will update the subscription packet
      * and will fetch the data from the socket.
      * @private
      */
-    _refreshList(query) {
+     _refreshList(query,auditParam) {
+        var auditbyUrl;
         let _query_params = [], _auditParamValue = [], _auditStatuses = [],
-            url = SEARCH_AUDIT_URL + addDateOffSet(new Date(), -30)
+        url = SEARCH_AUDIT_URL + addDateOffSet(new Date(), -30)
         if (query.auditType && query.auditType.constructor !== Array) {
             query.auditType = [query.auditType]
         }
 
         if (query.auditType && query.auditType.length === 1) {
             _query_params.push([AUDIT_PARAM_TYPE, query.auditType[0]].join("="))
-        } else {
+         }
+       
+        else {
             _query_params.push([AUDIT_PARAM_TYPE, ANY].join("="))
         }
 
@@ -182,16 +190,19 @@ class AuditTab extends React.Component {
         _query_params.push([GIVEN_PAGE,query.page||1].join("="))
         _query_params.push([GIVEN_PAGE_SIZE,20].join("="))
 
-        if (query.columnKey && query.sortDir) {
-            this.props.auditHeaderSortOrder({
-                colSortDirs: {[query.columnKey]: query.sortDir},
-            })
-            this.props.auditHeaderSort(query.columnKey);
-            _query_params.push(sortAuditHead[query.columnKey])
-            _query_params.push(sortOrder[query.sortDir])
+           if(auditParam && auditParam.sortDir){
+            _query_params.push(['order',toggleOrder(auditParam.sortDir)].join("="));
+            auditbyUrl =sortAuditHead[auditParam["columnKey"]];
+
+        }
+        else
+        {
+            auditParam? _query_params.push(['order',toggleOrder(auditParam[Object.keys(auditParam)])].join("=")):"";
+            auditbyUrl=auditParam? sortAuditHead[Object.keys(auditParam)[0]]:"";
         }
 
         url=[url,_query_params.join("&")].join("&")
+        url+=auditbyUrl;
 
         if (Object.keys(query).filter(function(el){return el!=='page'}).length !== 0) {
             this.props.toggleAuditFilter(true);
@@ -211,12 +222,13 @@ class AuditTab extends React.Component {
         this.props.setAuditSpinner(true);
         this.props.auditfilterState({
             tokenSelected: {"AUDIT TYPE": query.auditType ? query.auditType.constructor === Array ? query.auditType : [query.auditType] : [ANY],
-                "STATUS": query.status ? query.status.constructor === Array ? query.status : [query.status] : [ALL]},
+            "STATUS": query.status ? query.status.constructor === Array ? query.status : [query.status] : [ALL]},
             searchQuery: {
                 'SPECIFIC SKU ID':query.skuId||'',
                 'SPECIFIC LOCATION ID':query.locationId||'',
                 'AUDIT TASK ID':query.taskId||''
             },
+            "PAGE": query.page || 1,
             defaultToken: {"AUDIT TYPE": [ANY], "STATUS": [ALL]}
         })
         this.props.getPageData(paginationData);
@@ -224,14 +236,14 @@ class AuditTab extends React.Component {
     /**
      *
      */
-    _clearFilter() {
+     _clearFilter() {
         hashHistory.push({pathname: "/audit", query: {}})
     }
 
 
     _processAuditData(data, nProps) {
         var nProps = this,
-            data = nProps.props.auditDetail;
+        data = nProps.props.auditDetail;
         let created = nProps.context.intl.formatMessage(messages.auditCreatedStatus);
         let pending = nProps.context.intl.formatMessage(messages.auditPendingStatus);
         let progress = nProps.context.intl.formatMessage(messages.auditInProgressStatus);
@@ -275,7 +287,8 @@ class AuditTab extends React.Component {
         };
         var auditType = {"sku": sku, "location": location};
         var auditDetails = [], auditData = {};
-        for (var i = data.length - 1; i >= 0; i--) {
+        var i,limit=data.length;
+        for (i = 0;i<=limit - 1; i++) {
             auditData.id = data[i].audit_id;
             if (data[i].display_id) {
                 auditData.display_id = data[i].display_id;
@@ -337,27 +350,27 @@ class AuditTab extends React.Component {
             if (data[i].start_actual_time) {
                 if (getDaysDiff(data[i].start_actual_time) < 2) {
                     auditData.startTime = nProps.context.intl.formatRelative(data[i].start_actual_time, {
-                            timeZone: timeOffset,
-                            units: 'day'
-                        }) +
-                        ", " + nProps.context.intl.formatTime(data[i].start_actual_time, {
-                            timeZone: timeOffset,
-                            hour: 'numeric',
-                            minute: 'numeric',
-                            hour12: false
-                        });
+                        timeZone: timeOffset,
+                        units: 'day'
+                    }) +
+                    ", " + nProps.context.intl.formatTime(data[i].start_actual_time, {
+                        timeZone: timeOffset,
+                        hour: 'numeric',
+                        minute: 'numeric',
+                        hour12: false
+                    });
                 }
                 else {
                     auditData.startTime = nProps.context.intl.formatDate(data[i].start_actual_time,
-                        {
-                            timeZone: timeOffset,
-                            year: 'numeric',
-                            month: 'short',
-                            day: '2-digit',
-                            hour: "2-digit",
-                            minute: "2-digit",
-                            hour12: false
-                        });
+                    {
+                        timeZone: timeOffset,
+                        year: 'numeric',
+                        month: 'short',
+                        day: '2-digit',
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        hour12: false
+                    });
                 }
             }
             else {
@@ -378,15 +391,15 @@ class AuditTab extends React.Component {
             if (data[i].completion_time) {
                 if (getDaysDiff(data[i].completion_time) < 2) {
                     auditData.completedTime = nProps.context.intl.formatRelative(data[i].completion_time, {
-                            timeZone: timeOffset,
-                            units: 'day'
-                        }) +
-                        ", " + nProps.context.intl.formatTime(data[i].completion_time, {
-                            timeZone: timeOffset,
-                            hour: 'numeric',
-                            minute: 'numeric',
-                            hour12: false
-                        });
+                        timeZone: timeOffset,
+                        units: 'day'
+                    }) +
+                    ", " + nProps.context.intl.formatTime(data[i].completion_time, {
+                        timeZone: timeOffset,
+                        hour: 'numeric',
+                        minute: 'numeric',
+                        hour12: false
+                    });
                 }
                 else {
                     auditData.completedTime = nProps.context.intl.formatDate(data[i].completion_time,
@@ -396,7 +409,8 @@ class AuditTab extends React.Component {
                             month: 'short',
                             day: '2-digit',
                             hour: "2-digit",
-                            minute: "2-digit"
+                            minute: "2-digit",
+                            hour12:false
                         });
                 }
             }
@@ -414,18 +428,18 @@ class AuditTab extends React.Component {
     _mappingString(selectvalue) {
         switch (selectvalue) {
             case "sku":
-                return SPECIFIC_SKU_ID;
+            return SPECIFIC_SKU_ID;
             case "location":
-                return SPECIFIC_LOCATION_ID;
+            return SPECIFIC_LOCATION_ID;
             default:
-                return "any";
+            return "any";
         }
         ;
     }
 
     handlePageClick(data) {
         var url, appendSortUrl = "", appendTextFilterUrl = "", makeDate, inc = 0, value = [], paramValue = "",
-            selectedAuditType = "",_queryParams=[];
+        selectedAuditType = "",_queryParams=[];
         var currentDate = new Date();
         var filterApplied = false;
         var skuText = "", arr = [], selectvalue;
@@ -436,215 +450,216 @@ class AuditTab extends React.Component {
              * After clearing the applied filter,
              * It'll set the default state to the filters.
              */
-            data = {}
-            this.props.auditfilterState({
+             data = {}
+             this.props.auditfilterState({
                 tokenSelected: {"AUDIT TYPE": [ANY], "STATUS": [ALL]},
                 searchQuery: {},
                 defaultToken: {"AUDIT TYPE": [ANY], "STATUS": [ALL]}
             })
-            this.props.toggleAuditFilter(false)
-            this.props.showTableFilter(false)
+             this.props.toggleAuditFilter(false)
+             this.props.showTableFilter(false)
 
-        }
+         }
 //If user select both we are making it Any for backend support
-        if (data.searchQuery && data.tokenSelected[AUDIT_TYPE]) {
-            selectvalue = (data.tokenSelected[AUDIT_TYPE].length === 2) ? ANY : data.tokenSelected[AUDIT_TYPE][0];
-            skuText = AUDIT_PARAM_TYPE + selectvalue;
-            _queryParams.push([AUDIT_PARAM_TYPE,selectvalue].join("="))
-            selectedAuditType = this._mappingString(selectvalue);
+if (data.searchQuery && data.tokenSelected[AUDIT_TYPE]) {
+    selectvalue = (data.tokenSelected[AUDIT_TYPE].length === 2) ? ANY : data.tokenSelected[AUDIT_TYPE][0];
+    skuText = AUDIT_PARAM_TYPE + selectvalue;
+    _queryParams.push([AUDIT_PARAM_TYPE,selectvalue].join("="))
+    selectedAuditType = this._mappingString(selectvalue);
 
 //Pushing the audit type into array to make it generic
-            for (let propt in data.searchQuery) {
-                if (selectedAuditType === 'any') {
-                    (propt !== AUDIT_TASK_ID && data.searchQuery[propt] !== "") ? value.push(data.searchQuery[propt]) : '';
-                }
-                else {
-                    (data.searchQuery[propt] !== "" && propt == selectedAuditType) ? value.push(data.searchQuery[propt]) : '';
-                }
+for (let propt in data.searchQuery) {
+    if (selectedAuditType === 'any') {
+        (propt !== AUDIT_TASK_ID && data.searchQuery[propt] !== "") ? value.push(data.searchQuery[propt]) : '';
+    }
+    else {
+        (data.searchQuery[propt] !== "" && propt == selectedAuditType) ? value.push(data.searchQuery[propt]) : '';
+    }
 
-            }
+}
 //Formatting the param value for single and multiple type       
-            if (value.length) {
-                paramValue = (value.length > 1 || selectvalue === ANY) ? "['" + value.join("','") + "']" : "'" + value[0] + "'";
-                _queryParams.push([AUDIT_PARAM_VALUE, "['"+value.join("','")+"']"].join("="))
-                skuText = skuText + AUDIT_PARAM_VALUE + paramValue;
-            }
-        }
+if (value.length) {
+    paramValue = (value.length > 1 || selectvalue === ANY) ? "['" + value.join("','") + "']" : "'" + value[0] + "'";
+    _queryParams.push([AUDIT_PARAM_VALUE, "['"+value.join("','")+"']"].join("="))
+    skuText = skuText + AUDIT_PARAM_VALUE + paramValue;
+}
+}
 //formating the audit status 
-        if (data.tokenSelected && data.tokenSelected["STATUS"][0] !== ALL) {
-            let statusToken = data.tokenSelected["STATUS"];
-            skuText = skuText + AUDIT_STATUS + "['" + statusToken.join("','") + "']";
-            _queryParams.push([AUDIT_STATUS,"['"+statusToken.join("','")+"']" ].join("="))
-        }
+if (data.tokenSelected && data.tokenSelected["STATUS"][0] !== ALL) {
+    let statusToken = data.tokenSelected["STATUS"];
+    skuText = skuText + AUDIT_STATUS + "['" + statusToken.join("','") + "']";
+    _queryParams.push([AUDIT_STATUS,"['"+statusToken.join("','")+"']" ].join("="))
+}
 
-        if (data.searchQuery && data.searchQuery[AUDIT_TASK_ID]) {
-            appendTextFilterUrl = FILTER_AUDIT_ID + data.searchQuery[AUDIT_TASK_ID];
-            _queryParams.push([FILTER_AUDIT_ID, data.searchQuery[AUDIT_TASK_ID]].join("="))
-            data.selected = 1;
-            filterApplied = true;
-        }
+if (data.searchQuery && data.searchQuery[AUDIT_TASK_ID]) {
+    appendTextFilterUrl = FILTER_AUDIT_ID + data.searchQuery[AUDIT_TASK_ID];
+    _queryParams.push([FILTER_AUDIT_ID, data.searchQuery[AUDIT_TASK_ID]].join("="))
+    data.selected = 1;
+    filterApplied = true;
+}
 
 
-        if (data.url === undefined) {
-            data.selected = data.selected ? data.selected : 1;
-            if (data.columnKey && data.sortDir) {
-                appendSortUrl = sortAuditHead[data.columnKey] + sortOrder[data.sortDir];
-                _queryParams.push(sortAuditHead[data.columnKey])
-                _queryParams.push(sortOrder[data.sortDir])
-            }
-            _queryParams.push([GIVEN_PAGE,data.selected||1].join("="))
-            _queryParams.push([GIVEN_PAGE_SIZE,20].join("="))
-            url = [SEARCH_AUDIT_URL + makeDate,_queryParams.join("&")].join("&")
-        }
-        else {
-            url = data.url;
-        }
-        this.setState({selected_page: data.selected});
-        let paginationData = {
-            'url': url,
-            'method': GET,
-            'cause': AUDIT_RETRIEVE,
-            'token': this.props.auth_token,
-            'contentType': APP_JSON
-        }
-        this.props.setAuditSpinner(true);
-        this.props.filterApplied(filterApplied);
-        this.props.getPageData(paginationData);
+if (data.url === undefined) {
+    data.selected = data.selected ? data.selected : 1;
+    if (data.columnKey && data.sortDir) {
+        appendSortUrl = sortAuditHead[data.columnKey] + sortOrder[data.sortDir];
+        _queryParams.push(sortAuditHead[data.columnKey])
+        _queryParams.push(sortOrder[data.sortDir])
     }
+    _queryParams.push([GIVEN_PAGE,data.selected||1].join("="))
+    _queryParams.push([GIVEN_PAGE_SIZE,20].join("="))
+    url = [SEARCH_AUDIT_URL + makeDate,_queryParams.join("&")].join("&")
+}
+else {
+    url = data.url;
+}
+this.setState({selected_page: data.selected});
+let paginationData = {
+    'url': url,
+    'method': GET,
+    'cause': AUDIT_RETRIEVE,
+    'token': this.props.auth_token,
+    'contentType': APP_JSON
+}
+this.props.setAuditSpinner(true);
+this.props.filterApplied(filterApplied);
+this.props.getPageData(paginationData);
+}
 
-    _setFilter() {
-        var newState = !this.props.showFilter;
-        this.props.showTableFilter(newState)
-    }
+_setFilter() {
+    var newState = !this.props.showFilter;
+    this.props.showTableFilter(newState)
+}
 
-    createAudit() {
-        modal.add(CreateAudit, {
-            title: '',
-            size: 'large',
+createAudit() {
+    modal.add(CreateAudit, {
+        title: '',
+        size: 'large',
             closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
             hideCloseButton: true // (optional) if you don't wanna show the top right close button
             //.. all what you put in here you will get access in the modal props ;),
         });
 
+}
+
+
+render() {
+    var filterHeight = screen.height - 190;
+    var renderTab = <div/>,
+    timeOffset = this.props.timeOffset || "",
+    headerTimeZone = (this.context.intl.formatDate(Date.now(),
+    {
+        timeZone: timeOffset,
+        year: 'numeric',
+        timeZoneName: 'long'
+    })),
+    totalProgress = 0;
+
+    /*Extracting Time zone string for the specified time zone*/
+    headerTimeZone = headerTimeZone.substr(5, headerTimeZone.length);
+
+    var auditData = this._processAuditData();
+    var auditState = {"auditCompleted": 0, "skuAudit": 0, "locationAudit": 0, "totalProgress": 0, auditIssue: 0};
+    for (var i = auditData.length - 1; i >= 0; i--) {
+        if (auditData[i].status === GOR_COMPLETED_STATUS) {
+            auditState["auditCompleted"]++;
+        }
+
+        if (auditData[i].status === AUDIT_ISSUES_STATUS) {
+            auditState["auditIssue"]++;
+        }
+        if (auditData[i].auditType === SKU || auditData[i].auditType === AUDIT_BY_PDFA) {
+            auditState["skuAudit"]++;
+        }
+        if (auditData[i].auditType === LOCATION) {
+            auditState["locationAudit"]++;
+        }
+        totalProgress = auditData[i].progress + totalProgress;
+        auditData[i].progress = auditData[i].progress.toFixed(1);
+
+    }
+    if (auditData.length && auditData.length !== 0) {
+        auditState["totalProgress"] = (totalProgress) / (auditData.length);
     }
 
+    renderTab = <AuditTable items={auditData}
+    intlMessg={this.props.intlMessages}
+    timeZoneString={headerTimeZone}
+    totalAudits={this.props.totalAudits}
+    sortHeaderState={this.props.auditHeaderSort}
+    currentSortState={this.props.auditSortHeader}
+    sortHeaderOrder={this.props.auditHeaderSortOrder}
+    currentHeaderOrder={this.props.auditSortHeaderState}
+    refreshData={this._clearFilter.bind(this)}
+    setAuditFilter={this.props.auditFilterDetail} auditState={auditState}
+    setFilter={this.props.showTableFilter} showFilter={this.props.showFilter}
+    isFilterApplied={this.props.isFilterApplied}
+    auditFilterStatus={this.props.auditFilterStatus}
+    responseFlag={this.props.auditSpinner}
+    onSortChange={this._refresh.bind(this)}/>
 
-    render() {
-        var filterHeight = screen.height - 190;
-        var renderTab = <div/>,
-            timeOffset = this.props.timeOffset || "",
-            headerTimeZone = (this.context.intl.formatDate(Date.now(),
-                {
-                    timeZone: timeOffset,
-                    year: 'numeric',
-                    timeZoneName: 'long'
-                })),
-            totalProgress = 0;
+    let toolbar = <div>
+    <div className="gor-filter-wrap"
+    style={{'display': this.props.showFilter ? 'block' : 'none', height: filterHeight}}>
+    <AuditFilter auditDetail={this.props.auditDetail} responseFlag={this.props.responseFlag}/>
+    </div>
+    <div className="gorToolBar">
+    <div className="gorToolBarWrap">
+    <div className="gorToolBarElements">
+    <FormattedMessage id="audit.table.heading" description="Heading for audit table"
+    defaultMessage="Audit Tasks"/>
+    </div>
 
-        /*Extracting Time zone string for the specified time zone*/
-        headerTimeZone = headerTimeZone.substr(5, headerTimeZone.length);
+    </div>
+    <div className="gor-audit-filter-create-wrap">
+    <div className="gor-button-wrap">
+    <button className="gor-audit-create-btn" onClick={this.createAudit.bind(this)}>
+    <div className="gor-filter-add-token"/>
+    <FormattedMessage id="audit.table.buttonLable"
+    description="button label for audit create"
+    defaultMessage="Create New Task"/>
+    </button>
+    </div>
+    <div className="gor-button-wrap">
+    <button
+    className={this.props.isFilterApplied ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
+    onClick={this._setFilter.bind(this)}>
+    <div className="gor-manage-task"/>
+    <FormattedMessage id="audit.table.filterLabel" description="button label for filter"
+    defaultMessage="Filter data"/>
+    </button>
+    </div>
+    </div>
+    </div>
+{/*Filter Summary*/}
+<FilterSummary total={this.props.totalAudits||0} isFilterApplied={this.props.isFilterApplied} responseFlag={this.props.responseFlag}
+filterText={<FormattedMessage id="auditList.filter.search.bar"
+description='total results for filter search bar'
+defaultMessage='{total} results found'
+values={{total: this.props.totalAudits || '0'}}/>}
+refreshList={this._clearFilter.bind(this)}
+refreshText={<FormattedMessage id="auditList.filter.search.bar.showall"
+description="button label for show all"
+defaultMessage="Show all results"/>}/>
+</div>
 
-        var auditData = this._processAuditData();
-        var auditState = {"auditCompleted": 0, "skuAudit": 0, "locationAudit": 0, "totalProgress": 0, auditIssue: 0};
-        for (var i = auditData.length - 1; i >= 0; i--) {
-            if (auditData[i].status === GOR_COMPLETED_STATUS) {
-                auditState["auditCompleted"]++;
-            }
 
-            if (auditData[i].status === AUDIT_ISSUES_STATUS) {
-                auditState["auditIssue"]++;
-            }
-            if (auditData[i].auditType === SKU || auditData[i].auditType === AUDIT_BY_PDFA) {
-                auditState["skuAudit"]++;
-            }
-            if (auditData[i].auditType === LOCATION) {
-                auditState["locationAudit"]++;
-            }
-            totalProgress = auditData[i].progress + totalProgress;
-            auditData[i].progress = auditData[i].progress.toFixed(1);
-
-        }
-        if (auditData.length && auditData.length !== 0) {
-            auditState["totalProgress"] = (totalProgress) / (auditData.length);
-        }
-
-        renderTab = <AuditTable items={auditData}
-                                intlMessg={this.props.intlMessages}
-                                timeZoneString={headerTimeZone}
-                                totalAudits={this.props.totalAudits}
-                                sortHeaderState={this.props.auditHeaderSort}
-                                currentSortState={this.props.auditSortHeader}
-                                sortHeaderOrder={this.props.auditHeaderSortOrder}
-                                currentHeaderOrder={this.props.auditSortHeaderState}
-                                refreshData={this._clearFilter.bind(this)}
-                                setAuditFilter={this.props.auditFilterDetail} auditState={auditState}
-                                setFilter={this.props.showTableFilter} showFilter={this.props.showFilter}
-                                isFilterApplied={this.props.isFilterApplied}
-                                auditFilterStatus={this.props.auditFilterStatus}
-                                responseFlag={this.props.auditSpinner}/>
-
-        let toolbar = <div>
-            <div className="gor-filter-wrap"
-                 style={{'display': this.props.showFilter ? 'block' : 'none', height: filterHeight}}>
-                <AuditFilter auditDetail={this.props.auditDetail} responseFlag={this.props.responseFlag}/>
-            </div>
-            <div className="gorToolBar">
-                <div className="gorToolBarWrap">
-                    <div className="gorToolBarElements">
-                        <FormattedMessage id="audit.table.heading" description="Heading for audit table"
-                                          defaultMessage="Audit Tasks"/>
-                    </div>
-
-                </div>
-                <div className="gor-audit-filter-create-wrap">
-                    <div className="gor-button-wrap">
-                        <button className="gor-audit-create-btn" onClick={this.createAudit.bind(this)}>
-                            <div className="gor-filter-add-token"/>
-                            <FormattedMessage id="audit.table.buttonLable"
-                                              description="button label for audit create"
-                                              defaultMessage="Create New Task"/>
-                        </button>
-                    </div>
-                    <div className="gor-button-wrap">
-                        <button
-                            className={this.props.isFilterApplied ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
-                            onClick={this._setFilter.bind(this)}>
-                            <div className="gor-manage-task"/>
-                            <FormattedMessage id="audit.table.filterLabel" description="button label for filter"
-                                              defaultMessage="Filter data"/>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            {/*Filter Summary*/}
-            <FilterSummary total={this.props.totalAudits||0} isFilterApplied={this.props.isFilterApplied} responseFlag={this.props.responseFlag}
-                           filterText={<FormattedMessage id="auditList.filter.search.bar"
-                                                         description='total results for filter search bar'
-                                                         defaultMessage='{total} results found'
-                                                         values={{total: this.props.totalAudits || '0'}}/>}
-                           refreshList={this._clearFilter.bind(this)}
-                           refreshText={<FormattedMessage id="auditList.filter.search.bar.showall"
-                                                          description="button label for show all"
-                                                          defaultMessage="Show all results"/>}/>
+return (
+    <div>
+    <div>
+    <div className="gor-Auditlist-table">
+    {!this.props.showFilter ?
+        <Spinner isLoading={this.props.auditSpinner} setSpinner={this.props.setAuditSpinner}/> : ""}
+        {toolbar}
+        {renderTab}
         </div>
-
-
-        return (
-            <div>
-                <div>
-                    <div className="gor-Auditlist-table">
-                        {!this.props.showFilter ?
-                            <Spinner isLoading={this.props.auditSpinner} setSpinner={this.props.setAuditSpinner}/> : ""}
-                        {toolbar}
-                            {renderTab}
-                    </div>
-                </div>
-                {auditData.length && this.state.query ? <div className="gor-audit-paginate-wrap">
-                    <GorPaginateV2 location={this.props.location} currentPage={this.state.query.page||1} totalPage={this.props.totalPage}/>
-                </div> : ""}
-            </div>
+        </div>
+        {auditData.length && this.state.query ? <div className="gor-audit-paginate-wrap">
+        <GorPaginateV2 location={this.props.location} currentPage={this.state.query.page||1} totalPage={this.props.totalPage}/>
+        </div> : ""}
+        </div>
         );
-    }
+}
 }
 ;
 

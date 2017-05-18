@@ -17,7 +17,8 @@ import {
     SPECIFIC_SKU_ID,
     SPECIFIC_LOCATION_ID,
     AUDIT_TASK_ID,
-    AUDIT_TYPE
+    AUDIT_TYPE,AUDIT_COMPLETED,AUDIT_CREATED,PENDING,INPROGRESS,
+    AUDIT_RESOLVED,AUDIT_LINE_REJECTED,SINGLE
 }from '../../constants/frontEndConstants';
 import {hashHistory} from 'react-router'
 import {setAuditSpinner} from './../../actions/auditActions';
@@ -29,7 +30,15 @@ class AuditFilter extends React.Component {
             tokenSelected: {"AUDIT TYPE": [ANY], "STATUS": [ALL]}, searchQuery: {},
             defaultToken: {"AUDIT TYPE": [ANY], "STATUS": [ALL]}
         };
+        this._updateTextBoxStatus();
     }
+
+    _updateTextBoxStatus(){
+        var obj={};
+        obj.name=AUDIT_TASK_ID;
+        this.props.setTextBoxStatus(obj);
+    }
+
 
     _closeFilter() {
         var filterState = !this.props.showFilter;
@@ -50,7 +59,7 @@ class AuditFilter extends React.Component {
     }
 
 
-    _mappingArray(selectedToken) {
+    _mappingArray(selectedToken,flag) {
         var mappingArray = [];
         selectedToken.map(function (value, i) {
             if (value == "sku") {
@@ -59,12 +68,12 @@ class AuditFilter extends React.Component {
             else if (value == "location") {
                 mappingArray.push(SPECIFIC_LOCATION_ID)
             }
-            else {
-                mappingArray.push(SPECIFIC_SKU_ID, SPECIFIC_LOCATION_ID);
-            }
 
         });
+        if(!flag)
+        {
         mappingArray.push(AUDIT_TASK_ID);
+        }
         return mappingArray;
     }
 
@@ -105,27 +114,41 @@ class AuditFilter extends React.Component {
         ];
         const labelC2 = [
             {value: ALL, label: <FormattedMessage id="audit.token2.all" defaultMessage="Any"/>},
-            {value: "issueFound", label: <FormattedMessage id="audit.token2.issueFound" defaultMessage="Issue found"/>},
-            {value: "audit_rejected", label: <FormattedMessage id="audit.token2.rejected" defaultMessage="Rejected"/>},
-            {value: "audit_resolved", label: <FormattedMessage id="audit.token2.resolved" defaultMessage="Resolved"/>},
-            {value: "audit_started__audit_tasked", label: <FormattedMessage id="audit.token2.inProgress" defaultMessage="In progress"/>},
-            {value: "audit_accepted__audit_pending__audit_waiting__audit_conflicting", label: <FormattedMessage id="audit.token2.pending" defaultMessage="Pending"/>}
+            {value: ISSUE_FOUND, label: <FormattedMessage id="audit.token2.issueFound" defaultMessage="Issue found"/>},
+            {value: AUDIT_LINE_REJECTED, label: <FormattedMessage id="audit.token2.rejected" defaultMessage="Rejected"/>},
+            {value: AUDIT_RESOLVED, label: <FormattedMessage id="audit.token2.resolved" defaultMessage="Resolved"/>},
+            {value: INPROGRESS, label: <FormattedMessage id="audit.token2.inProgress" defaultMessage="In progress"/>},
+            {value: PENDING, label: <FormattedMessage id="audit.token2.pending" defaultMessage="Pending"/>},
+            {value: AUDIT_CREATED, label: <FormattedMessage id="audit.token2.created" defaultMessage="Created"/>},
+            {value: AUDIT_COMPLETED, label: <FormattedMessage id="audit.token2.completed" defaultMessage="Completed"/>}
+
         ];
         var selectedToken = this.state.tokenSelected;
         var column1 = <FilterTokenWrap field={tokenStatusField} tokenCallBack={this._handelTokenClick.bind(this)}
                                        label={labelC2} selectedToken={selectedToken}/>;
         var column2 = <FilterTokenWrap field={tokenAuditTypeField} tokenCallBack={this._handelTokenClick.bind(this)}
-                                       label={labelC1} selectedToken={selectedToken}/>;
+                                       label={labelC1} selectedToken={selectedToken} selection={SINGLE}/>;
         var columnDetail = {column1token: column1, column2token: column2};
         return columnDetail;
     }
+ _arrayDiff(mainArray,arraytoSearch ) {
+    return mainArray.filter(function (a) {
+        return arraytoSearch.indexOf(a) == -1;
+    });
+}
 
     _handelTokenClick(field, value, state) {
-        var obj = {};
-        this.setState({tokenSelected: handelTokenClick(field, value, state, this.state)});
+        var tempArray=[SPECIFIC_SKU_ID,SPECIFIC_LOCATION_ID];
+        var obj = {},queryField,tokentoRemove;
         var selectedToken = this.state.tokenSelected['AUDIT TYPE'];
+        var token=[value];
+        this.setState({tokenSelected: handelTokenClick(field, value, state, this.state)});
+       
         if (state !== 'addDefault') {
             obj.name = this._mappingArray(selectedToken);
+            tokentoRemove=this._mappingArray(token,selectedToken);
+            queryField= selectedToken.toString()==ANY?tokentoRemove:this._arrayDiff(tempArray,obj.name);
+           (queryField && queryField.length!==0)? this.setState({searchQuery: handleInputQuery("", queryField, this.state)}):"";
             this.props.setTextBoxStatus(obj);
         }
         else {
@@ -162,7 +185,8 @@ class AuditFilter extends React.Component {
     }
 
     _clearFilter() {
-        hashHistory.push({pathname: "/audit", query: {}})
+        this._updateTextBoxStatus();
+        hashHistory.push({pathname: "/audit", query: {}});
     }
 
     render() {

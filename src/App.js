@@ -6,14 +6,15 @@ import Header from './components/header/header';
 import {setWsAction ,setMockAction, endWsAction, updateSubscriptionPacket} from './actions/socketActions';
 import {getTimeOffSetData,setTimeOffSetData, logoutRequest} from './actions/loginAction';
 import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,
-  WS_MOCK,USERS,TAB_ROUTE_MAP,OVERVIEW ,SYSTEM,ORDERS,INVENTORY,GET} from './constants/frontEndConstants';
+  WS_MOCK,USERS,TAB_ROUTE_MAP,OVERVIEW ,SYSTEM,ORDERS,INVENTORY,GET,POST,GET_CONFIGS,APP_JSON} from './constants/frontEndConstants';
   import { AUTO_LOGOUT } from './constants/messageConstants';
   import { wsOverviewData} from './constants/initData.js';
-  import {TIME_ZONE_URL} from './constants/configConstants'
+  import {TIME_ZONE_URL,GET_MD_CONFIG_URL} from './constants/configConstants'
   import {prevTabSelected} from './actions/tabSelectAction';
   import { connect } from 'react-redux'; 
   import TopNotifications from './components/topnotify/topnotify';
   import { notifyInfo} from './actions/validationActions';
+import {userRequest} from './actions/userActions';
 
 
   class App extends React.Component{ 
@@ -24,7 +25,8 @@ import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,
 
    constructor(props) 
    {  
-    super(props); 
+    super(props);
+    this.state={fetchedConfig:false}
   }
 
       componentWillMount() {
@@ -34,6 +36,19 @@ import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,
 
           this.context.router.push("/login");
           this.props.updateSubscriptionPacket(wsOverviewData);
+      }
+
+      _getConfig(){
+          let request = {
+              'url': GET_MD_CONFIG_URL,
+              'method': GET,
+              'cause': GET_CONFIGS,
+              'contentType': APP_JSON,
+              'accept': APP_JSON,
+              'token': this.props.auth_token,
+              'sync':true
+          }
+          this.props.userRequest(request);
       }
   componentDidMount(){
     var timeOffset =  sessionStorage.getItem("timeOffset");
@@ -98,6 +113,10 @@ import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,
     }
     
     if(!socketStatus){
+        if (!this.state.fetchedConfig) {
+            this._getConfig()
+            this.setState({fetchedConfig: true})
+        }
       this.props.initWebSocket() ; 
     }
     else if(!nextProps.socketAuthorized){
@@ -178,7 +197,10 @@ import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,
     endConnect: function(){ dispatch(endWsAction()); },
     userLogout: function(){ dispatch(logoutRequest()); },
     notifyInfo: function(data){dispatch (notifyInfo(data));},
-    updateSubscriptionPacket: function(data){dispatch (updateSubscriptionPacket(data));}
+    updateSubscriptionPacket: function(data){dispatch (updateSubscriptionPacket(data));},
+      userRequest: function (data) {
+          dispatch(userRequest(data));
+      },
   }
 };
 export  default connect(mapStateToProps,mapDispatchToProps)(App);

@@ -17,6 +17,13 @@ class DropdownTable extends Component {
   
   }
 
+  shouldComponentUpdate(nextProps,nextState){
+    if(JSON.stringify(this.props.currentState)!==JSON.stringify(nextProps.currentState)){
+      return true
+    }
+    return false
+  }
+
   render () {
     const defaultOption = this.props.currentState?this.props.currentState:this.props.placeholder;
     return (

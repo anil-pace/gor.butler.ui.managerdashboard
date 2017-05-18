@@ -128,7 +128,8 @@ class UsersTab extends React.Component {
                 userData.location = nProps.context.intl.formatMessage(messages.userLocation, {"ppsId": data[i].pps.pps_id});
                 userData.logInTime = nProps.context.intl.formatTime(data[i].login_time, {
                         hour: 'numeric',
-                        minute: 'numeric'
+                        minute: 'numeric',
+                        hour12:false
                     }) +
                     " (" + nProps.context.intl.formatRelative(data[i].login_time) + ")";
                 ;
@@ -344,7 +345,7 @@ function mapStateToProps(state, ownProps) {
         showFilter: state.filterInfo.filterState || false,
         isFilterApplied: state.filterInfo.isFilterApplied || false,
         userFilterStatus: state.filterInfo.userFilterStatus || false,
-        roleInfo: state.appInfo.roleInfo || null,
+        roleList: state.appInfo.roleList || null,
         auth_token: state.authLogin.auth_token,
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
         socketAuthorized: state.recieveSocketActions.socketAuthorized,

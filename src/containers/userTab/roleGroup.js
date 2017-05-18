@@ -28,10 +28,10 @@ class RoleGroup extends React.Component{
     }
     _processRoles(){
         let roles=[] ,len, currentRole,item;
-        len = this.props.roleInfo.length;
+        len = this.props.roleList.length;
 
         for(let i=0; i<len; i++){
-           currentRole = this.props.roleInfo[i];
+           currentRole = this.props.roleList[i];
            if(stringConfig.hasOwnProperty(currentRole.name)){
             item=(<div key={i}>
                 <div className='gor-role'>

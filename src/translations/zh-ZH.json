@@ -771,7 +771,7 @@
  },
  {
    "id": "notify.start.audit.success",
-   "description": "PPS assigned succeddfully. Audit task started",
+   "description": "PPS assigned successfully. Audit task started",
    "defaultMessage": "成功指派 PPS。稽核工作已開始"
  },
  {

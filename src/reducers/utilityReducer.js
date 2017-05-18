@@ -1,4 +1,4 @@
-import {INVOICE_VALIDATION,MASTER_UPLOAD_PROCESSING,MASTER_UPLOAD_SUCCESS,UPLOAD_HISTORY,UPDATE_FILE_SIZE} from '../constants/frontEndConstants';
+import {INVOICE_VALIDATION,MASTER_UPLOAD_PROCESSING,MASTER_UPLOAD_SUCCESS,UPLOAD_HISTORY,UPDATE_FILE_SIZE,UTILITY_TAB_REFRESHED} from '../constants/frontEndConstants';
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -38,18 +38,24 @@ export  function utilityValidations(state={},action){
               "masterDataUploadSuccess" : action.data.data ? true : false,
               "newFileUploaded":newFileUploaded
             })
+
         }
       case UPLOAD_HISTORY:
           var dataRefreshed = !state.dataRefreshed;
           return Object.assign({}, state, {
               "uploadHistoryData" : action.data.mdm_upload_info || [],
-              "dataRefreshed":dataRefreshed
+              "uploadHistChanged":uploadHistChanged
             })      
           case UPDATE_FILE_SIZE:
           return Object.assign({}, state, {
               "maxfilesizelimit" : action.data.file_content_length || []
             }) 
+          case UTILITY_TAB_REFRESHED:
+          return Object.assign({}, state, {
+              "utilityTabRefreshed": new Date()
+          })
+
     default:
-      return state
+      return state;
   }
 }

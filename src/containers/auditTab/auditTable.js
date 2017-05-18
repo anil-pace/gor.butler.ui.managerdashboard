@@ -74,6 +74,8 @@ class AuditTable extends React.Component {
     }
 
 
+
+
     /**
      * Hack for fixing the bug https://work.greyorange.com/jira/browse/BSS-656
      * This has to be removed once we get rid of the fixedDataTable
@@ -131,10 +133,10 @@ class AuditTable extends React.Component {
             columnWidths: {
                 display_id: nProps.containerWidth * 0.09,
                 auditTypeValue: nProps.containerWidth * 0.12,
-                status: nProps.containerWidth * 0.09,
+                status: nProps.containerWidth * 0.11,
                 startTime: nProps.containerWidth * 0.13,
                 progress: nProps.containerWidth * 0.17,
-                completedTime: nProps.containerWidth * 0.15,
+                completedTime: nProps.containerWidth * 0.13,
                 actions: nProps.containerWidth * 0.25
             },
         };
@@ -151,12 +153,12 @@ class AuditTable extends React.Component {
 
 
     backendSort(columnKey, sortDir) {
-        var data = {"columnKey": columnKey, "sortDir": sortDir, selected: 1}
+        var data = {"columnKey": columnKey, "sortDir": sortDir}
         this.props.sortHeaderOrder({
             colSortDirs: {[columnKey]: sortDir},
         })
         this.props.sortHeaderState(columnKey);
-        this.props.refreshData(data);
+        this.props.onSortChange(data);
     }
 
 

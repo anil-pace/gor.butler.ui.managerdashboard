@@ -40,6 +40,7 @@ export const GET_SHIFT_START_TIME_URL = API_URL + "/system/shift_start_time";
 export const INVENTORY_REPORT_URL = API_URL + "/inventories/get_inventory_report_v2";
 export const GET_ITEM_RECALL = API_URL + "/orders/wrapper/generate_orders";
 export const GR_REPORT_URL = API_URL + "/components/generate_gr_report";
-export const MASTER_UPLOAD_URL = FILE_API_URL + "/products/csv";
-export const GET_MAXSIZE_FILE_URL = FILE_API_URL + "/components/get_mdm_file_size";
-export const UPLOAD_HISTORY_URL = FILE_API_URL + "/components/mdm_info";
+export const MASTER_UPLOAD_URL = API_URL + "/products/csv";
+export const UPLOAD_HISTORY_URL = API_URL + "/components/mdm_info";
+export const GET_MD_CONFIG_URL = API_URL + "/components/get_md_config";
+
