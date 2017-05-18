@@ -5,11 +5,13 @@ import DropdownTable from '../components/dropdown/dropdownTable'
 import UtilityDropDown from '../components/utilityComponents/utilityDropdownWrap'
 import MasterUploadTile from '../components/utilityComponents/masterUploadTile'
 import {
-    INVENTORY_REPORT_URL,
-    GET_ITEM_RECALL,
-    GR_REPORT_URL,
-    MASTER_UPLOAD_URL,
-    UPLOAD_HISTORY_URL
+  INVENTORY_REPORT_URL, 
+  GET_ITEM_RECALL, 
+  GR_REPORT_URL,
+  MASTER_UPLOAD_URL,
+  UPLOAD_HISTORY_URL,
+  GET_MAXSIZE_FILE_URL
+
 } from '../constants/configConstants';
 import {connect} from 'react-redux';
 import {
@@ -21,16 +23,19 @@ import {
 } from "../actions/utilityActions";
 import {setInventoryReportSpinner} from '../actions/spinnerAction';
 import {
-    GET,
-    ITEM_RECALLED,
-    MASTER_FILE_VALIDATIONS,
-    MASTER_FILE_UPLOAD,
-    GR_REPORT_RESPONSE,
-    POST,
-    MASTER_FILE_FORMATS,
-    MASTER_FILE_MAX_SIZE,
-    UPLOAD_HISTORY, WS_ONSEND
+  GET, 
+  ITEM_RECALLED,
+  MASTER_FILE_UPLOAD,
+  GR_REPORT_RESPONSE,
+  POST,
+  MASTER_FILE_FORMATS,
+  UPLOAD_HISTORY,GET_MAX_FILE_SIZE,MASTER_FILE_MAX_SIZE,WS_ONSEND
+
 } from '../constants/frontEndConstants';
+import {
+fileUploadMessages
+} from '../constants/messageConstants';
+
 import FieldError from '../components/fielderror/fielderror';
 import {defineMessages} from 'react-intl';
 import {updateSubscriptionPacket, setWsAction} from './../actions/socketActions'
@@ -182,16 +187,26 @@ class UtilityTab extends React.Component {
         this.props.getItemRecall(params)
         this.props.uploadMasterDataProcessing(true);
     }
+     _getfilemaxsize(){
+      var params={
+         'url':  GET_MAXSIZE_FILE_URL,
+         'method':GET,
+         'token': this.props.auth_token,
+         'cause':GET_MAX_FILE_SIZE,
+         'contentType':false
+        }
+        this.props.getItemRecall(params);
+    }
 
     _renderMasterUpload() {
         var uploadHistoryData = this.props.uploadHistoryData || [];
         var recallBar = <MasterUploadTile uploadHistChanged={this.props.uploadHistChanged}
-                                          uploadBtnText={this.context.intl.formatMessage(messages.uploadBtnText)}
-                                          isMasterUploadProcessing={this.props.isMasterUploadProcessing}
-                                          maxFileSize={MASTER_FILE_MAX_SIZE} validationList={MASTER_FILE_VALIDATIONS}
-                                          acceptedFormats={MASTER_FILE_FORMATS}
-                                          onMasterFileUpload={this._onMasterFileUpload.bind(this)}
-                                          historyData={uploadHistoryData}/>;
+        uploadBtnText = {this.context.intl.formatMessage(messages.uploadBtnText)} 
+        isMasterUploadProcessing = {this.props.isMasterUploadProcessing} 
+        maxFileSize = {this.props.maxfilesizelimit} errorList={fileUploadMessages}
+        acceptedFormats ={MASTER_FILE_FORMATS} onMasterFileUpload = {this._onMasterFileUpload.bind(this)} 
+        historyData={uploadHistoryData} errorCode={this.props.errorCode} maxSize={this.props.maxsize}/>;
+
         return recallBar;
     }
 
@@ -239,10 +254,10 @@ class UtilityTab extends React.Component {
         this.props.getUploadHistory(params)
     }
 
-    componentDidMount() {
-        this._onRefresh();
+    componentDidMount(){
+      this._onRefresh();
+     this._getfilemaxsize();
     }
-
     componentWillReceiveProps(nextProps, nextState) {
         if (nextProps.newFileUploaded !== this.props.newFileUploaded) {
             this._onRefresh();
@@ -334,6 +349,7 @@ class UtilityTab extends React.Component {
     }
 }
 
+
 function mapStateToProps(state, ownProps) {
     return {
         auth_token: state.authLogin.auth_token,
@@ -346,7 +362,11 @@ function mapStateToProps(state, ownProps) {
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
         socketAuthorized: state.recieveSocketActions.socketAuthorized,
         utilityTabRefreshed: state.utilityValidations.utilityTabRefreshed,
-        config: state.config || {}
+        config: state.config || {},
+         maxfilesizelimit:state.utilityValidations.maxfilesizelimit ||0,
+      errorCode:state.utilityValidations.errorCode,
+      maxsize:state.utilityValidations.maxsize ||0,
+      dataRefreshed : state.utilityValidations.dataRefreshed
     };
 }
 

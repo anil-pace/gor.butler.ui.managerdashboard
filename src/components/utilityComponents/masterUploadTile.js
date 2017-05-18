@@ -50,7 +50,8 @@ class MasterUploadTile extends React.Component{
       return result;
     }
      shouldComponentUpdate(nextProps, nextState){
-        if((nextProps.uploadHistChanged !== this.props.uploadHistChanged) || (this.state.stateChanged !== nextState.stateChanged)){
+
+        if((nextProps.uploadHistChanged !== this.props.uploadHistChanged) || (this.state.stateChanged !== nextState.stateChanged) ||(nextProps.maxFileSize !== this.props.maxFileSize)||(nextProps.errorCode !== this.props.errorCode)){
           return true;
         }
           return false;
@@ -61,7 +62,7 @@ class MasterUploadTile extends React.Component{
     var masterDataBody = this._renderMasterData();
     return (
       <div>
-        <FileUpload uploadBtnText= {this.props.uploadBtnText} isProcessing={this.props.isMasterUploadProcessing} maxFileSize = {this.props.maxFileSize} validationList = {this.props.validationList} acceptedFormats = {this.props.acceptedFormats} onChange={this.props.onMasterFileUpload}/>
+        <FileUpload uploadBtnText= {this.props.uploadBtnText} isProcessing={this.props.isMasterUploadProcessing} maxFileSize = {this.props.maxFileSize}  acceptedFormats = {this.props.acceptedFormats} onChange={this.props.onMasterFileUpload} errorCode={this.props.errorCode} maxSize={this.props.maxSize} errorList={this.props.errorList}/>
             <div className="gor-utility-body-header">
               <FormattedMessage id="utility.uploadHistory.head" description='Upload History' defaultMessage='Upload History'/> 
             </div>
