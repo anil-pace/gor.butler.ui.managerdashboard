@@ -19,6 +19,11 @@
  	return Math.min(Math.max(value, min), max)
  }
 
+/**
+ * Save a blob object to a filename
+ * @param  {Object} data     Data to be saved as file
+ * @param  {String} fileName Name of the file to be saved
+ */
  export function saveFile (data, fileName) {
  	var a = document.createElement("a");
  	a.style = "display: none";
