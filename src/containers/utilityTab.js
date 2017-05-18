@@ -279,10 +279,10 @@ class UtilityTab extends React.Component {
         var masterUpload = this._renderMasterUpload();
         var activeReportDownButton = (this.state.reportState.fileType && this.state.reportState.category) ? true : false;
         var activeGRNDownButton = (this.state.grnState.fileType && this.state.grnState.invoiceId) ? true : false;
-        var show_gr_report = false
-        var show_masterdata_upload = false
-        var show_inventory_report = false
-        var show_item_recall_scripts = false
+        let show_gr_report = false
+        let show_masterdata_upload = false
+        let show_inventory_report = false
+        let show_item_recall_scripts = false
 
         try {
             show_gr_report = this.props.config.utility_tab.widgets.gr_report
