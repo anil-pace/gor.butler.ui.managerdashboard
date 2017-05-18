@@ -134,7 +134,7 @@ class Routes extends React.Component {
     }
 
     render() {
-        var showUtilityTab = SHOW_UTILITY_TAB;  //will be usefull when need to configure tab
+        var showUtilityTab = this.props.config.utility_tab && this.props.config.utility_tab.enabled;  //will be usefull when need to configure tab
         return (
             <Router history={hashHistory}>
                 <Route onEnter={this._handleNavigationChanges.bind(this)} name="default" path="/"
@@ -337,5 +337,12 @@ var mapDispatchToProps = function (dispatch) {
 
 };
 
+function mapStateToProps(state, ownProps){
 
-export default connect(null, mapDispatchToProps)(Routes);
+    return  {
+        config:state.config||{}
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Routes);
