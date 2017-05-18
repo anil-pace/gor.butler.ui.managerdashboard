@@ -66,10 +66,6 @@ class AuditFilter extends React.Component {
             else if (value == "location") {
                 mappingArray.push(SPECIFIC_LOCATION_ID)
             }
-            //Raja
-            // else {
-            //     mappingArray.push(SPECIFIC_SKU_ID, SPECIFIC_LOCATION_ID);
-            // }
 
         });
         if(!type)
@@ -187,10 +183,6 @@ class AuditFilter extends React.Component {
     }
 
     _clearFilter() {
-        //Raja
-        // var selectedToken=[];
-        // selectedToken[0]=ANY;
-        // var obj=this._mappingArray(selectedToken);
         var obj={};
         obj.name=AUDIT_TASK_ID;
         this.props.setTextBoxStatus(obj);
