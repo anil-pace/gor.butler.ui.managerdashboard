@@ -60,7 +60,7 @@ const ajaxMiddleware = (function(){
                ShowError(store,params.cause,httpRequest.status);
     }
 
-    httpRequest.open(params.method, params.url,!!params.sync);
+    httpRequest.open(params.method, params.url,params.sync);
     if(params.contentType !== false){
       httpRequest.setRequestHeader('Content-Type', params.contentType || "text/html");
     }
