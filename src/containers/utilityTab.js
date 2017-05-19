@@ -184,8 +184,8 @@ class UtilityTab extends React.Component {
             'contentType': false,
             'formdata': formData
         }
-        this.props.getItemRecall(params)
         this.props.uploadMasterDataProcessing(true);
+        this.props.getItemRecall(params)
     }
      _getfilemaxsize(){
       var params={

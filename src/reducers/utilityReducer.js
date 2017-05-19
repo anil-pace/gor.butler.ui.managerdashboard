@@ -28,15 +28,18 @@ export  function utilityValidations(state={},action){
           if(action.data.alert_data)
             {
            return Object.assign({}, state, {
+              "masterDataUploadSuccess":false,
               "errorCode" : action.data.alert_data[0].code,
               "maxsize":action.data.alert_data[0].details.max_size
             })
             }else
           {
-            var newFileUploaded = !state.newFileUploaded;
+            let newFileUploaded = !state.newFileUploaded;
               return Object.assign({}, state, {
               "masterDataUploadSuccess" : action.data.data ? true : false,
-              "newFileUploaded":newFileUploaded
+              "newFileUploaded":newFileUploaded,
+              "errorCode" : "",
+              "maxsize":""
             })
 
         }
