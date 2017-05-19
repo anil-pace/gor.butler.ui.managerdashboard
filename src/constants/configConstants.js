@@ -44,3 +44,4 @@ export const UPLOAD_HISTORY_URL = API_URL + "/components/mdm_info";
 export const GET_MD_CONFIG_URL = API_URL + "/components/get_md_config";
 export const GET_MAXSIZE_FILE_URL = API_URL + "/components/get_mdm_file_size";
 
+
