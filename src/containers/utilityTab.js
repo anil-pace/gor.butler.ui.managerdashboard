@@ -298,6 +298,14 @@ class UtilityTab extends React.Component {
         let show_masterdata_upload = false
         let show_inventory_report = false
         let show_item_recall_scripts = false
+        try{
+            if(!this.props.config.utility_tab.enabled){
+                return null
+            }
+        }catch(ex){
+            //Do nothing
+        }
+
 
         try {
             show_gr_report = this.props.config.utility_tab.widgets.gr_report
