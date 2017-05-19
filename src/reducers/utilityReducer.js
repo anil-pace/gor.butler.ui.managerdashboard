@@ -1,4 +1,4 @@
-import {INVOICE_VALIDATION,MASTER_UPLOAD_PROCESSING,MASTER_UPLOAD_SUCCESS,UPLOAD_HISTORY,UTILITY_TAB_REFRESHED} from '../constants/frontEndConstants';
+import {INVOICE_VALIDATION,MASTER_UPLOAD_PROCESSING,MASTER_UPLOAD_SUCCESS,UPLOAD_HISTORY,UPDATE_FILE_SIZE,UTILITY_TAB_REFRESHED} from '../constants/frontEndConstants';
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -25,23 +25,40 @@ export  function utilityValidations(state={},action){
               "isMasterUploadProcessing" : action.data
             })
     case MASTER_UPLOAD_SUCCESS:
-          var newFileUploaded = !state.newFileUploaded;
-          return Object.assign({}, state, {
-              "masterDataUploadSuccess" : action.data.data ? true : false,
-              "newFileUploaded":newFileUploaded
+          if(action.data.alert_data)
+            {
+           return Object.assign({}, state, {
+              "masterDataUploadSuccess":false,
+              "errorCode" : action.data.alert_data[0].code,
+              "maxsize":action.data.alert_data[0].details.max_size
             })
-    case UPLOAD_HISTORY:
-          var dataRefreshed = !state.dataRefreshed;
-          return Object.assign({}, state, {
-              "uploadHistoryData" : action.data.mdm_upload_info || [],
-              "dataRefreshed":dataRefreshed
+            }else
+          {
+            let newFileUploaded = !state.newFileUploaded;
+              return Object.assign({}, state, {
+              "masterDataUploadSuccess" : action.data.data ? true : false,
+              "newFileUploaded":newFileUploaded,
+              "errorCode" : "",
+              "maxsize":""
             })
 
-      case UTILITY_TAB_REFRESHED:
+        }
+      case UPLOAD_HISTORY:
+          var uploadHistChanged = !state.uploadHistChanged;
+          return Object.assign({}, state, {
+              "uploadHistoryData" : action.data.mdm_upload_info || [],
+              "uploadHistChanged":uploadHistChanged
+            })      
+          case UPDATE_FILE_SIZE:
+          return Object.assign({}, state, {
+              "maxfilesizelimit" : action.data.file_content_length || []
+            }) 
+          case UTILITY_TAB_REFRESHED:
           return Object.assign({}, state, {
               "utilityTabRefreshed": new Date()
           })
+
     default:
-      return state
+      return state;
   }
 }

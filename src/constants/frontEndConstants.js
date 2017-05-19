@@ -55,6 +55,10 @@ export const GOR_ITEMS_AUDITED = "items_audited";
 export const PICK_PPS_PERFORMANCE = "PICK_PPS_PERFORMANCE";
 export const PUT_PPS_PERFORMANCE = "PUT_PPS_PERFORMANCE";
 export const AUDIT_PPS_PERFORMANCE = "AUDIT_PPS_PERFORMANCE";
+export const UTILITY002 = "utility002";
+export const MB = 1000000;
+export const KB = 1024;
+
 
 /* config constant for (first + last) name if true*/
 export const GOR_FIRST_LAST = true;
@@ -137,15 +141,12 @@ export const ITEM_RECALLED = "ITEM_RECALLED";
 export const GR_REPORT_RESPONSE = "GR_REPORT_RESPONSE";
 /*Constants for Master Upload (CSV)*/
 export const MASTER_FILE_UPLOAD = "MASTER_FILE_UPLOAD";
+export const GET_MAX_FILE_SIZE = "GET_MAX_FILE_SIZE";
 export const MASTER_UPLOAD_PROCESSING = "MASTER_UPLOAD_PROCESSING";
 export const MASTER_UPLOAD_SUCCESS = "MASTER_UPLOAD_SUCCESS";
 export const UPLOAD_HISTORY = "UPLOAD_HISTORY";
+export const UPDATE_FILE_SIZE = "UPDATE_FILE_SIZE";
 export const MASTER_FILE_FORMATS = [".csv"];
-export const MASTER_FILE_VALIDATIONS = {
-	"1":"Only .csv Files Allowed",
-	"2":"File Size Exceeded"
-}
-export const MASTER_FILE_MAX_SIZE = 5e+6;
 
 export const AUDIT_RETRIEVE = "AUDIT_RETRIEVE";
 export const RECIEVE_AUDIT_DATA = "RECIEVE_AUDIT_DATA";
@@ -538,3 +539,6 @@ export const ORDER_LIST_REFRESHED="ORDER_LIST_REFRESHED"
 export const WAVES_REFRESHED="WAVES_REFRESHED"
 export const UTILITY_TAB_REFRESHED="UTILITY_TAB_REFRESHED"
 export const SINGLE="Single"
+
+export const GET_CONFIGS="GET_CONFIGS"
+export const RECEIVE_CONFIGS="RECEIVE_CONFIGS"

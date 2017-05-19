@@ -1,4 +1,4 @@
-export const BASE_URL = '192.168.8.140';
+export const BASE_URL = 'localhost';
 export const PORT = '8888';
 export const PROTOCOL = 'https://';
 export const WS_PROTOCOL ="wss://";
@@ -41,3 +41,7 @@ export const GET_ITEM_RECALL = API_URL + "/orders/wrapper/generate_orders";
 export const GR_REPORT_URL = API_URL + "/components/generate_gr_report";
 export const MASTER_UPLOAD_URL = API_URL + "/products/csv";
 export const UPLOAD_HISTORY_URL = API_URL + "/components/mdm_info";
+export const GET_MD_CONFIG_URL = API_URL + "/components/get_md_config";
+export const GET_MAXSIZE_FILE_URL = API_URL + "/components/get_mdm_file_size";
+
+
