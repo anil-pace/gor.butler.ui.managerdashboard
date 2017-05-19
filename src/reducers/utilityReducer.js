@@ -28,20 +28,23 @@ export  function utilityValidations(state={},action){
           if(action.data.alert_data)
             {
            return Object.assign({}, state, {
+              "masterDataUploadSuccess":false,
               "errorCode" : action.data.alert_data[0].code,
               "maxsize":action.data.alert_data[0].details.max_size
             })
             }else
           {
-            var newFileUploaded = !state.newFileUploaded;
+            let newFileUploaded = !state.newFileUploaded;
               return Object.assign({}, state, {
               "masterDataUploadSuccess" : action.data.data ? true : false,
-              "newFileUploaded":newFileUploaded
+              "newFileUploaded":newFileUploaded,
+              "errorCode" : "",
+              "maxsize":""
             })
 
         }
       case UPLOAD_HISTORY:
-          var dataRefreshed = !state.dataRefreshed;
+          var uploadHistChanged = !state.uploadHistChanged;
           return Object.assign({}, state, {
               "uploadHistoryData" : action.data.mdm_upload_info || [],
               "uploadHistChanged":uploadHistChanged

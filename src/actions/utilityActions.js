@@ -59,6 +59,7 @@ export function updateMaxFileSize(data){
     type: UPDATE_FILE_SIZE,
     data
   }
+}
 
 export function utilityTabRefreshed(params) {
     return {
