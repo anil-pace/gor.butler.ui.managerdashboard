@@ -42,4 +42,5 @@ export const GR_REPORT_URL = API_URL + "/components/generate_gr_report";
 export const MASTER_UPLOAD_URL = API_URL + "/products/csv";
 export const UPLOAD_HISTORY_URL = API_URL + "/components/mdm_info";
 export const GET_MD_CONFIG_URL = API_URL + "/components/get_md_config";
+export const GET_MAXSIZE_FILE_URL = API_URL + "/components/get_mdm_file_size";
 

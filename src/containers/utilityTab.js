@@ -366,7 +366,7 @@ function mapStateToProps(state, ownProps) {
          maxfilesizelimit:state.utilityValidations.maxfilesizelimit ||0,
       errorCode:state.utilityValidations.errorCode,
       maxsize:state.utilityValidations.maxsize ||0,
-      dataRefreshed : state.utilityValidations.dataRefreshed
+     
     };
 }
 

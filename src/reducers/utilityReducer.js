@@ -41,7 +41,7 @@ export  function utilityValidations(state={},action){
 
         }
       case UPLOAD_HISTORY:
-          var dataRefreshed = !state.dataRefreshed;
+          var uploadHistChanged = !state.uploadHistChanged;
           return Object.assign({}, state, {
               "uploadHistoryData" : action.data.mdm_upload_info || [],
               "uploadHistChanged":uploadHistChanged
