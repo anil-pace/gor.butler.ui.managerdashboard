@@ -67,6 +67,21 @@ const messages = defineMessages({
         id: "utility.uploadBtn.label",
         description: 'Upload Master Data',
         defaultMessage: "Upload Master Data"
+    },
+    itemRecallHead:{
+        id: "utility.itemRecall.head",
+        description:"Expired Items",
+        defaultMessage:"Expired Items"
+    },
+    itemRecallSubHead:{
+        id: "utility.itemRecall.subHead",
+        description:"(Recall all the expired items)",
+        defaultMessage:"(Recall all the expired items)"
+    },
+    itemRecallButtonText:{
+        id: "utility.itemRecall.buttonText",
+        description:"RECALL",
+        defaultMessage:"RECALL"
     }
 
 });
@@ -83,7 +98,10 @@ class UtilityTab extends React.Component {
     }
 
     _renderUploadDataTile() {
-        var barData = {h1: "Expired Items", h2: "(Recall all the expired items)", buttonText: "RECALL"}
+        var barData = {
+            h1: this.context.intl.formatMessage(messages.itemRecallHead),
+            h2: this.context.intl.formatMessage(messages.itemRecallSubHead), 
+            buttonText: this.context.intl.formatMessage(messages.itemRecallButtonText)}
         var recallBar = <UploadDownBar barData={barData} barAction={this._requestExpiredItems.bind(this)}/>;
         return recallBar;
     }
