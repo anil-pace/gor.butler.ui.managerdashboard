@@ -151,8 +151,6 @@ class Header extends React.Component {
                 optionClass: 'gor-operation-normal', icon: 'gor-operation-tick', optionText: optionOperation,
                 fnButton: '', buttonText: ''
             });
-            // optionList.push({optionClass:'',  icon:'', optionText:optionAction,
-            // 	fnButton:this._showModal.bind(this,PauseOperation), buttonText:buttonText});
             menuObj = {
                 heading: heading, subHeading: subHeading, optionList: optionList,
                 menuStyle: '', headingStyle: '', openIcon: 'gor-dropdown-open', closeIcon: 'gor-dropdown-close'
