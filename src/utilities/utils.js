@@ -47,10 +47,10 @@ import {SPECIFIC_SKU_ID,SPECIFIC_LOCATION_ID,AUDIT_TASK_ID}from '../constants/fr
  export function  mappingArray(selectedToken,flag) {
         var mappingArray = [];
         selectedToken.map(function (value, i) {
-            if (value == "sku") {
+            if (value === "sku") {
                 mappingArray.push(SPECIFIC_SKU_ID)
             }
-            else if (value == "location") {
+            else if (value === "location") {
                 mappingArray.push(SPECIFIC_LOCATION_ID)
             }
 

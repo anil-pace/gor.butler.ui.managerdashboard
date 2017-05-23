@@ -687,7 +687,7 @@ function mapStateToProps(state, ownProps) {
         auditFilterState: state.filterInfo.auditFilterState || {},
         auditListRefreshed:state.auditInfo.auditListRefreshed,
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
-        socketAuthorized: state.recieveSocketActions.socketAuthorized,
+        socketAuthorized: state.recieveSocketActions.socketAuthorized
     };
 }
 
@@ -737,7 +737,7 @@ var mapDispatchToProps = function (dispatch) {
         },
          setTextBoxStatus: function (data) {
             dispatch(setTextBoxStatus(data));
-        },
+        }
 
     }
 };
