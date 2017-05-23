@@ -45,22 +45,22 @@ class UserRoles extends React.Component{
         len = this.props.roleList.length;
         for(let i=0; i<len; i++){
            currentRole = this.props.roleList[i];
-           if(!this._isMapped(stringConfig,currentRole.name)){
+           /*if(!this._isMapped(stringConfig,currentRole.name)){
                 continue;
-           }
+           }*/
            if(this._getChecked(this.props.roleName,currentRole)){
             selected = {
                 value: currentRole.name, 
-                label:this.context.intl.formatMessage(stringConfig[currentRole.name])
+                label:stringConfig[currentRole.name] ? this.context.intl.formatMessage(stringConfig[currentRole.name]):currentRole.name
             };
             label = (<div>
-                        <span className='gor-role-label'>{this.context.intl.formatMessage(stringConfig[currentRole.name])}</span>
+                        <span className='gor-role-label'>{currentRole.name}</span>
                         <span className='gor-selected-icon'></span>
                     </div>
                 )
            }
            else{
-            label = this.context.intl.formatMessage(stringConfig[currentRole.name]); 
+            label = stringConfig[currentRole.name] ? this.context.intl.formatMessage(stringConfig[currentRole.name]) : currentRole.name; 
            }
            objDropdown ={
             value: currentRole.name, 

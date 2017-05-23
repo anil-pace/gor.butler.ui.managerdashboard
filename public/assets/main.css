@@ -577,7 +577,7 @@ body {
 }
 
 .gor-info-icon {
-  background-position: -460px -77px;
+  background-position: -459px -76px;
   width: 16px;
   height: 16px;
   display: inline-block;
@@ -1401,7 +1401,8 @@ body {
   position: absolute;
   top: 105%;
   width: 100%;
-  -webkit-overflow-scrolling: touch;
+  overflow: auto;
+  max-height: 200px;
 }
 
 .gor-usr-dropdown .Dropdown-option {
