@@ -246,7 +246,7 @@ class AuditTable extends React.Component {
         var clearFilter = []
         this.props.refreshData(clearFilter);
     }
-
+//Render function for Audit Table
     render() {
 
         var {sortedDataList, colSortDirs, columnWidths} = this.state, heightRes;

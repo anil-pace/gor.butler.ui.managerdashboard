@@ -22,6 +22,7 @@ import {
 }from '../../constants/frontEndConstants';
 import {hashHistory} from 'react-router'
 import {setAuditSpinner} from './../../actions/auditActions';
+import {mappingArray,arrayDiff} from '../../utilities/utils';
 
 class AuditFilter extends React.Component {
     constructor(props) {
@@ -30,15 +31,7 @@ class AuditFilter extends React.Component {
             tokenSelected: {"AUDIT TYPE": [ANY], "STATUS": [ALL]}, searchQuery: {},
             defaultToken: {"AUDIT TYPE": [ANY], "STATUS": [ALL]}
         };
-        this._updateTextBoxStatus();
     }
-
-    _updateTextBoxStatus(){
-        var obj={};
-        obj.name=AUDIT_TASK_ID;
-        this.props.setTextBoxStatus(obj);
-    }
-
 
     _closeFilter() {
         var filterState = !this.props.showFilter;
@@ -56,25 +49,6 @@ class AuditFilter extends React.Component {
             this.props.showTableFilter(false);
         }
 
-    }
-
-
-    _mappingArray(selectedToken,flag) {
-        var mappingArray = [];
-        selectedToken.map(function (value, i) {
-            if (value == "sku") {
-                mappingArray.push(SPECIFIC_SKU_ID)
-            }
-            else if (value == "location") {
-                mappingArray.push(SPECIFIC_LOCATION_ID)
-            }
-
-        });
-        if(!flag)
-        {
-        mappingArray.push(AUDIT_TASK_ID);
-        }
-        return mappingArray;
     }
 
     _processAuditSearchField() {
@@ -131,11 +105,6 @@ class AuditFilter extends React.Component {
         var columnDetail = {column1token: column1, column2token: column2};
         return columnDetail;
     }
- _arrayDiff(mainArray,arraytoSearch ) {
-    return mainArray.filter(function (a) {
-        return arraytoSearch.indexOf(a) == -1;
-    });
-}
 
     _handelTokenClick(field, value, state) {
         var tempArray=[SPECIFIC_SKU_ID,SPECIFIC_LOCATION_ID];
@@ -145,9 +114,9 @@ class AuditFilter extends React.Component {
         this.setState({tokenSelected: handelTokenClick(field, value, state, this.state)});
        
         if (state !== 'addDefault') {
-            obj.name = this._mappingArray(selectedToken);
-            tokentoRemove=this._mappingArray(token,selectedToken);
-            queryField= selectedToken.toString()==ANY?tokentoRemove:this._arrayDiff(tempArray,obj.name);
+            obj.name =mappingArray(selectedToken);
+            tokentoRemove=mappingArray(token,selectedToken);
+            queryField= selectedToken.toString()==ANY?tokentoRemove:arrayDiff(tempArray,obj.name);
            (queryField && queryField.length!==0)? this.setState({searchQuery: handleInputQuery("", queryField, this.state)}):"";
             this.props.setTextBoxStatus(obj);
         }
@@ -185,7 +154,7 @@ class AuditFilter extends React.Component {
     }
 
     _clearFilter() {
-        this._updateTextBoxStatus();
+        this.props.setTextBoxStatus({obj:AUDIT_TASK_ID});
         hashHistory.push({pathname: "/audit", query: {}});
     }
 
@@ -252,7 +221,8 @@ AuditFilter.PropTypes = {
     showTableFilter: React.PropTypes.func,
     filterApplied: React.PropTypes.func,
     auditFilterState: React.PropTypes.object,
-    auditFilterStatus: React.PropTypes.bool
+    auditFilterStatus: React.PropTypes.bool,
+    setTextBoxStatus:React.PropTypes.func
 };
 
 

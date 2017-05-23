@@ -4,7 +4,7 @@ import UserDataTable from './userTab/userTabTable';
 import Spinner from '../components/spinner/Spinner';
 import {connect} from 'react-redux';
 import {AUDIT_URL, FILTER_AUDIT_ID} from '../constants/configConstants';
-import {getAuditData, setAuditRefresh,auditListRefreshed} from '../actions/auditActions';
+import {getAuditData, setAuditRefresh,auditListRefreshed,setTextBoxStatus} from '../actions/auditActions';
 import AuditTable from './auditTab/auditTable';
 import {getPageData} from '../actions/paginationAction';
 import {
@@ -57,6 +57,7 @@ import {FormattedMessage} from 'react-intl';
 import CreateAudit from './auditTab/createAudit';
 import {modal} from 'react-redux-modal';
 import FilterSummary from './../components/tableFilter/filterSummary'
+import {mappingArray} from '../utilities/utils';
 //Mesages for internationalization
 const messages = defineMessages({
     auditCreatedStatus: {
@@ -120,13 +121,16 @@ class AuditTab extends React.Component {
          */
          this.props.auditListRefreshed()
      }
-
      componentWillReceiveProps(nextProps) {
         if (nextProps.socketAuthorized && nextProps.auditListRefreshed && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)) || nextProps.auditRefresh!==this.props.auditRefresh)) { //Changes to refresh the table after creating audit
-            this.setState({query: nextProps.location.query})
-            this.setState({auditListRefreshed:nextProps.auditListRefreshed})
-            this._subscribeData()
-            this._refreshList(nextProps.location.query,nextProps.auditSortHeaderState.colSortDirs)
+            let obj={},selectedToken;
+            selectedToken=[nextProps.location.query.auditType];
+            obj.name = mappingArray(selectedToken);
+            this.props.setTextBoxStatus(obj);
+            this.setState({query: nextProps.location.query});
+            this.setState({auditListRefreshed:nextProps.auditListRefreshed});
+            this._subscribeData();
+            this._refreshList(nextProps.location.query,nextProps.auditSortHeaderState.colSortDirs);
         }
     }
 
@@ -542,7 +546,7 @@ createAudit() {
 
 }
 
-
+//Render Function goes here
 render() {
     var filterHeight = screen.height - 190;
     var renderTab = <div/>,
@@ -683,7 +687,7 @@ function mapStateToProps(state, ownProps) {
         auditFilterState: state.filterInfo.auditFilterState || {},
         auditListRefreshed:state.auditInfo.auditListRefreshed,
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
-        socketAuthorized: state.recieveSocketActions.socketAuthorized,
+        socketAuthorized: state.recieveSocketActions.socketAuthorized
     };
 }
 
@@ -731,6 +735,9 @@ var mapDispatchToProps = function (dispatch) {
         initDataSentCall: function (data) {
             dispatch(setWsAction({type: WS_ONSEND, data: data}));
         },
+         setTextBoxStatus: function (data) {
+            dispatch(setTextBoxStatus(data));
+        }
 
     }
 };
@@ -762,7 +769,8 @@ AuditTab.PropTypes = {
     getPageData: React.PropTypes.func,
     setAuditRefresh: React.PropTypes.func,
     showTableFilter: React.PropTypes.func,
-    filterApplied: React.PropTypes.func
+    filterApplied: React.PropTypes.func,
+    setTextBoxStatus:React.PropTypes.func,
 }
 
 
