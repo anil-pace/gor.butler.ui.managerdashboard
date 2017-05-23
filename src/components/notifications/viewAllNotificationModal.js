@@ -3,7 +3,7 @@
  * 
  */
 import React  from 'react';
-import {Table, Column, Cell} from 'fixed-data-table';
+//import {Table, Column, Cell} from 'fixed-data-table';
 import {
     SortHeaderCell,
     tableRenderer,
@@ -18,21 +18,15 @@ import {
     ActionCellAudit,
     ToolTipCell
 } from '../commonFunctionsDataTable';
-import RowDataLoader from './RowDataLoader';
-const NUMBER_OF_ROWS_MAX = 1000;
+import GorTable from '../gor-table-component/index'
+
 class ViewAllNotifications extends React.Component{
 	
 	_closeModal(){
 		this.props.removeModal();
 	}
-	componentWillMount(){
-		this._dataLoader = new RowDataLoader(() => {
-      this.forceUpdate();
-    });
-	}
-	_rowGetter(rowIndex){
-		return this._dataLoader.getRowData(rowIndex);
-	}
+
+	
 		
 	render(){
 		
@@ -47,35 +41,11 @@ class ViewAllNotifications extends React.Component{
             </div>
             <div className='gor-modal-body'>
 
-           			<div className="gorTableMainContainer">
-
-            <Table
-		        rowHeight={30}
-		        rowGetter={this._rowGetter.bind(this)}
-		        rowsCount={NUMBER_OF_ROWS_MAX}
-		        width={"100%"}
-		        maxHeight={450}
-		        headerHeight={40}
-		        onRowClick={this._onRowClick}>
-		        <Column
-		          label="Movie Title"
-		          width={270}
-		          dataKey="title"
-		        />
-		        <Column
-		          label="Rank"
-		          width={100}
-		          cellRenderer={this._renderButton}
-		          dataKey="rank"
-		        />
-		        <Column
-		          label="Year"
-		          width={80}
-		          dataKey="year"
-		        />
-      </Table>
+           			<div className="gorTableMainContainer gor-all-not-tbl">
+           				<GorTable />
+      				
             
-        </div>
+        			</div>
 
             </div>
           </div>

@@ -134,7 +134,6 @@ class Routes extends React.Component {
     }
 
     render() {
-        var showUtilityTab = this.props.config.utility_tab && this.props.config.utility_tab.enabled;  //will be usefull when need to configure tab
         return (
             <Router history={hashHistory}>
                 <Route onEnter={this._handleNavigationChanges.bind(this)} name="default" path="/"
@@ -272,13 +271,13 @@ class Routes extends React.Component {
                            }}
                     />
 
-                    {showUtilityTab ? <Route onEnter={this._handleNavigationChanges.bind(this)} name="utilities" path="/utilities"
+                    <Route onEnter={this._handleNavigationChanges.bind(this)} name="utilities" path="/utilities"
                                              getComponent={(location, callback) => {
                                                  require.ensure([], function (require) {
                                                      callback(null, require('../containers/utilityTab').default);
                                                  }, "utilities");
                                              }}
-                    /> : ""}
+                    />
 
                     <Route onEnter={this._handleNavigationChanges.bind(this)} name="overview" path="/overview"
                            getComponent={(location, callback) => {
