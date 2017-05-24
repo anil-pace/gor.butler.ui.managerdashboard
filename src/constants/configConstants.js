@@ -4,7 +4,7 @@ export const PROTOCOL = 'https://';
 export const WS_PROTOCOL ="wss://";
 export const WS_URL = WS_PROTOCOL+BASE_URL+"/manager_api/wss"
 export const LOGIN_URL=PROTOCOL+BASE_URL+"/api/auth/token"
-export const API_URL=PROTOCOL+BASE_URL+"/api"
+export const API_URL=PROTOCOL+BASE_URL+"/api";
 export const HEADER_URL = PROTOCOL+BASE_URL+"/api/user"
 export const ORDERS_URL="/orders/md"
 export const PPS_MODE_CHANGE_URL = "/pps/";
@@ -40,7 +40,7 @@ export const INVENTORY_REPORT_URL = API_URL + "/inventories/get_inventory_report
 export const GET_ITEM_RECALL = API_URL + "/orders/wrapper/generate_orders";
 export const GR_REPORT_URL = API_URL + "/components/generate_gr_report";
 export const MASTER_UPLOAD_URL = API_URL + "/products/csv";
-export const UPLOAD_HISTORY_URL = API_URL + "/components/mdm_info";
+export const UPLOAD_HISTORY_URL = API_URL+ "/components/mdm_info";
 export const GET_MD_CONFIG_URL = API_URL + "/components/get_md_config";
 export const GET_MAXSIZE_FILE_URL = API_URL + "/components/get_mdm_file_size";
 
