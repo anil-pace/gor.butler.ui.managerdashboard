@@ -218,7 +218,7 @@ class UtilityTab extends React.Component {
 
     _renderMasterUpload() {
         var uploadHistoryData = this.props.uploadHistoryData || [];
-        var recallBar = <MasterUploadTile uploadHistChanged={this.props.uploadHistChanged}
+        var recallBar = <MasterUploadTile  uploadHistChanged={this.props.uploadHistChanged}
         uploadBtnText = {this.context.intl.formatMessage(messages.uploadBtnText)} 
         isMasterUploadProcessing = {this.props.isMasterUploadProcessing} 
         maxFileSize = {this.props.maxfilesizelimit} errorList={fileUploadMessages}
@@ -389,9 +389,9 @@ function mapStateToProps(state, ownProps) {
         socketAuthorized: state.recieveSocketActions.socketAuthorized,
         utilityTabRefreshed: state.utilityValidations.utilityTabRefreshed,
         config: state.config || {},
-         maxfilesizelimit:state.utilityValidations.maxfilesizelimit ||0,
-      errorCode:state.utilityValidations.errorCode,
-      maxsize:state.utilityValidations.maxsize ||0,
+        maxfilesizelimit:state.utilityValidations.maxfilesizelimit ||0,
+        errorCode:state.utilityValidations.errorCode,
+        maxsize:state.utilityValidations.maxsize ||0
      
     };
 }
