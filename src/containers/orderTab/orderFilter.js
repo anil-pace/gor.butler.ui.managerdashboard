@@ -8,7 +8,7 @@ import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldW
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
 import {hashHistory} from 'react-router'
-import {SINGLE} from './../../constants/frontEndConstants'
+import {SINGLE,ORDER_INPROGRESS,ORDER_BREACHED,ORDER_COMPLETED,ORDER_EXCEPTION,ORDER_UNFULFILLABLE,ORDER_ONHOLD,ORDER_CANCELLED,ALL} from './../../constants/frontEndConstants'
 class OrderFilter extends React.Component{
     constructor(props) 
     {
@@ -51,11 +51,15 @@ class OrderFilter extends React.Component{
         var tokenField1 = {value:"STATUS", label:<FormattedMessage id="order.token.status" defaultMessage ="STATUS"/>};
         var tokenField2 = {value:"TIME PERIOD", label:<FormattedMessage id="order.token.timePeriod" defaultMessage ="TIME PERIOD"/>}; 
         var labelC1 = [
-                    { value: 'all', label: <FormattedMessage id="order.STATUS.all" defaultMessage ="All orders"/>},
-                    { value: 'breached', label: <FormattedMessage id="order.STATUS.breach" defaultMessage ="Breached orders"/>},
-                    { value: 'breached_pending', label: <FormattedMessage id="order.STATUS.pending" defaultMessage ="Pending orders"/>},
-                    { value: 'completed', label: <FormattedMessage id="order.STATUS.completed" defaultMessage ="Completed orders"/>},
-                    { value: 'exception', label: <FormattedMessage id="order.STATUS.exep" defaultMessage ="Exception"/>}
+                    { value: ALL, label: <FormattedMessage id="order.STATUS.all" defaultMessage ="All orders"/>},
+                    { value: ORDER_BREACHED, label: <FormattedMessage id="order.STATUS.breach" defaultMessage ="Breached orders"/>},
+                    { value: ORDER_COMPLETED, label: <FormattedMessage id="order.STATUS.completed" defaultMessage ="Completed orders"/>},
+                    { value: ORDER_EXCEPTION, label: <FormattedMessage id="order.STATUS.exep" defaultMessage ="Exception"/>},
+                    { value: ORDER_UNFULFILLABLE, label: <FormattedMessage id="order.STATUS.unfulfillable" defaultMessage ="Unfulfillable"/>},
+                    { value: ORDER_ONHOLD, label: <FormattedMessage id="order.STATUS.onhold" defaultMessage ="On hold"/>},
+                    { value: ORDER_CANCELLED, label: <FormattedMessage id="order.STATUS.cancelled" defaultMessage ="Cancelled"/>},  
+                    { value: ORDER_INPROGRESS, label: <FormattedMessage id="order.STATUS.inprogress" defaultMessage ="In Progress"/>}
+
                     ];
         var labelC2 = [
                     { value: 'allOrders', label: <FormattedMessage id="order.timePeriod.all" defaultMessage ="All"/>},

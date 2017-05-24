@@ -1,9 +1,6 @@
 import React  from 'react';
 import { defineMessages } from 'react-intl';
 
-
-
-
 //WS constants
 export const WS_SUCCESS="Sucessfully logged in";
 
@@ -165,7 +162,7 @@ export const  stringConfig= defineMessages({
     abandoned:{
         id: 'stringConfig.abandoned',
         description: 'Text to show abandoned',
-        defaultMessage: "Unfulfillable"
+        defaultMessage: "Abandoned"
     },
     manual:{
         id: 'stringConfig.manual',

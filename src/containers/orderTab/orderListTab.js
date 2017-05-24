@@ -152,12 +152,19 @@ class OrderListTab extends React.Component {
              statusList.splice(indexOfBreached, 1)
          }
          if (indexOfException > -1) {
-             statusList.splice(indexOfException, 1)
-             _query_params.push([EXCEPTION_TRUE, "true"].join("="))
+        (indexOfBreached> -1)? statusList.splice(indexOfException-1, 1):statusList.splice(indexOfException, 1);     
+         _query_params.push([EXCEPTION_TRUE, "true"].join("="))
          }
 
          if (statusList.length > 0) {
-             _query_params.push([WAREHOUSE_STATUS, "['" + statusList.join("','") + "']"].join("="))
+            let _flattened_statuses = []
+            statusList=statusList.constructor===Array?statusList:[statusList]
+            statusList.forEach(function (status) {
+                _flattened_statuses.push(status.split("__"))
+            })
+            statusList = [].concat.apply([], _flattened_statuses)
+            _query_params.push([WAREHOUSE_STATUS,"['"+statusList.join("','")+"']" ].join("="))
+
          }
 
      }
