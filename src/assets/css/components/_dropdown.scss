@@ -179,7 +179,9 @@ box-shadow: calculateRem(2px) calculateRem(2px) calculateRem(2px) #888888;
   position: absolute;
   top: 105%;
   width: 100%;
-  -webkit-overflow-scrolling: touch;
+  overflow: auto;
+  max-height:200px;
+
 }
 
 
