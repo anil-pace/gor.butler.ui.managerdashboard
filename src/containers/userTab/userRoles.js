@@ -45,9 +45,7 @@ class UserRoles extends React.Component{
         len = this.props.roleList.length;
         for(let i=0; i<len; i++){
            currentRole = this.props.roleList[i];
-           /*if(!this._isMapped(stringConfig,currentRole.name)){
-                continue;
-           }*/
+          
            if(this._getChecked(this.props.roleName,currentRole)){
             selected = {
                 value: currentRole.name, 

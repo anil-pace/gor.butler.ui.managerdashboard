@@ -43,7 +43,7 @@ class MasterUploadTile extends React.Component{
       for (let i = historyData.length - 1; i >= 0; i--) {
         let status = ((historyData[i].created + historyData[i].deleted + historyData[i].error +historyData[i].updated) / historyData[i].total)*100;
             
-            masterUploadBar = <AccordianBar timeOffset = {this.props.timeOffset} completed = {Math.ceil(status)} showPanel={this.state.showPanel[i]} data={historyData[i]} 
+            masterUploadBar = <AccordianBar  completed = {Math.ceil(status)} showPanel={this.state.showPanel[i]} data={historyData[i]} 
                         handleAccordianState={this._handlePanel.bind(this)} index={i} key={"acc"+i}/>
         result.push(masterUploadBar)
       }
@@ -81,8 +81,7 @@ MasterUploadTile.propTypes={
     maxFileSize :  React.PropTypes.number,
     isMasterUploadProcessing: React.PropTypes.bool,
     uploadBtnText:React.PropTypes.string,
-    uploadHistChanged:React.PropTypes.bool,
-    timeOffset:React.PropTypes.string
+    uploadHistChanged:React.PropTypes.bool
 }
 
 export default MasterUploadTile ;
