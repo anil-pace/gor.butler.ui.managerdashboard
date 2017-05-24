@@ -10,7 +10,7 @@ export const GERMAN=(<FormattedMessage id='login.lang.german' defaultMessage="De
 export const FRENCH=(<FormattedMessage id='login.lang.french' defaultMessage="Français" description="French option in the language drop down"/>);
 
 
-export const AUTO_LOGOUT = (<FormattedMessage id= 'login.autologout.message' defaultMessage="Due to session expiry, Auto Logout has been triggered!"
+export const AUTO_LOGOUT=(<FormattedMessage id= 'login.autologout.message' defaultMessage="Due to session expiry, Auto Logout has been triggered!"
       description="Auto logout message"/>);
 export const WRONG_CRED=(<FormattedMessage id='login.butler.fail' 
                         defaultMessage="Invalid username and/or password, please try again" description="Text for login failure"/>);
@@ -20,21 +20,21 @@ export const UNAUTH=(<FormattedMessage id='login.butler.unauthorized'
                         defaultMessage="You are not authorized" description="Text for unauthorized login"/>)
 //success codes related to user management
 
-export const US004 = (<FormattedMessage id="notify.success.edit" description='Text for successfully editing user' 
+export const US004=(<FormattedMessage id="notify.success.edit" description='Text for successfully editing user' 
       defaultMessage="User details updated successfully"/>);
 //error codes related to user management
 
 //success realted to pps mode change
-export const MODE_REQUESTED = (<FormattedMessage id="ppsDetail.modeChange.success" description="Success Message for PPS mode" 
+export const MODE_REQUESTED=(<FormattedMessage id="ppsDetail.modeChange.success" description="Success Message for PPS mode" 
       defaultMessage="PPS Mode Change Request Processed"/>);
 
 //error related to pps mode change
-export const E028 = (<FormattedMessage id="ppsDetail.modeChange.isAlreadyRequested" description="PPS is already in requested mode"
+export const E028=(<FormattedMessage id="ppsDetail.modeChange.isAlreadyRequested" description="PPS is already in requested mode"
       defaultMessage="PPS is already in requested mode"/>);
-export const E029 = (<FormattedMessage id="ppsDetail.modeChange.tryLater" description="Previous Change request is pending"
+export const E029=(<FormattedMessage id="ppsDetail.modeChange.tryLater" description="Previous Change request is pending"
       defaultMessage="Previous request of changing mode is already pending, Please try later!"/>);
 
-export const UE002 = (<FormattedMessage id="notify.error.usernameExists" description='Text for already registered username' 
+export const UE002=(<FormattedMessage id="notify.error.usernameExists" description='Text for already registered username' 
       defaultMessage="An account has already been created with this User ID"/>);
 
 export const UE003= (<FormattedMessage id="notify.error.passwordMissing" description='Text for passwords missing' 
@@ -79,13 +79,13 @@ export const MATCH_PWD= (<FormattedMessage id="user.match.password" description=
 
 
 
-export const MSU = (<FormattedMessage id="msu.name.prefix" description='prefix for msu name' 
+export const MSU=(<FormattedMessage id="msu.name.prefix" description='prefix for msu name' 
       defaultMessage="MSU"/>);
 
-export const CS = (<FormattedMessage id="chargingStation.name.prefix" description='prefix for charging station name' 
+export const CS=(<FormattedMessage id="chargingStation.name.prefix" description='prefix for charging station name' 
       defaultMessage="CS"/>);
 
-export const PPS = (<FormattedMessage id="pps.name.prefix" description='prefix for pps name' 
+export const PPS=(<FormattedMessage id="pps.name.prefix" description='prefix for pps name' 
       defaultMessage="PPS"/>);
 
 
@@ -101,31 +101,31 @@ export const INVALID_LOCID= (<FormattedMessage id="audit.invalid.location" descr
 
 
 // Codes for audit management
-export const E026 = (<FormattedMessage id="notify.error.audit.location" description='Text for invalid location' 
+export const E026=(<FormattedMessage id="notify.error.audit.location" description='Text for invalid location' 
       defaultMessage="Location does not exist"/>);
-export const E027 = (<FormattedMessage id="notify.error.audit.sku" description='Text for invalid sku' 
+export const E027=(<FormattedMessage id="notify.error.audit.sku" description='Text for invalid sku' 
       defaultMessage="SKU does not exist"/>);
-export const G016 = (<FormattedMessage id="notify.error.audit.g016" description='Text for unsuccessful audit deletion' 
+export const G016=(<FormattedMessage id="notify.error.audit.g016" description='Text for unsuccessful audit deletion' 
       defaultMessage="Given audit does not exists"/>);
-export const AE001 = (<FormattedMessage id="notify.error.audit.AE001" description='Text for invalid audit ID' 
+export const AE001=(<FormattedMessage id="notify.error.audit.AE001" description='Text for invalid audit ID' 
       defaultMessage="Audit Id does not exists"/>);
-export const AE002 = (<FormattedMessage id="notify.error.audit.AE002" description='Text for invalid PPS' 
+export const AE002=(<FormattedMessage id="notify.error.audit.AE002" description='Text for invalid PPS' 
       defaultMessage="Valid PPS not found for Audit"/>);
-export const AE004 = (<FormattedMessage id="notify.error.audit.AE004" description='Text for already processed location' 
+export const AE004=(<FormattedMessage id="notify.error.audit.AE004" description='Text for already processed location' 
       defaultMessage="Audit of location already under process"/>);
-export const AE005 = (<FormattedMessage id="notify.error.audit.AE005" description='Text for already processed sku' 
+export const AE005=(<FormattedMessage id="notify.error.audit.AE005" description='Text for already processed sku' 
       defaultMessage="Audit of sku already under process"/>);
-export const AE006 = (<FormattedMessage id="notify.error.audit.AE006" description='Text for already processed audit' 
+export const AE006=(<FormattedMessage id="notify.error.audit.AE006" description='Text for already processed audit' 
       defaultMessage="Audit ID already processed"/>);
-export const AS001 = (<FormattedMessage id="notify.create.audit.success" description='Text for successfull audit creation' 
+export const AS001=(<FormattedMessage id="notify.create.audit.success" description='Text for successfull audit creation' 
       defaultMessage="New audit task created successfully"/>);
-export const AS00A = (<FormattedMessage id="notify.start.audit.success" description='Text for successfull audit creation' 
+export const AS00A=(<FormattedMessage id="notify.start.audit.success" description='Text for successfull audit creation' 
       defaultMessage="PPS assigned successfully. Audit task started"/>);
-export const AS003 = (<FormattedMessage id="notify.delete.audit.processed" description='Text for already processed audit' 
+export const AS003=(<FormattedMessage id="notify.delete.audit.processed" description='Text for already processed audit' 
       defaultMessage="Audit already processed. Cannot delete"/>);
-export const AE007 = (<FormattedMessage id="notify.Location.audit.pending" description='Text for Location of audit pending for approval' 
+export const AE007=(<FormattedMessage id="notify.Location.audit.pending" description='Text for Location of audit pending for approval' 
       defaultMessage="Location of audit pending for approval"/>);
-export const AE008 = (<FormattedMessage id="notify.Location.currently.processed" description='Text for Location of audit currently being processed' 
+export const AE008=(<FormattedMessage id="notify.Location.currently.processed" description='Text for Location of audit currently being processed' 
       defaultMessage="Location of audit currently being processed"/>);
 
 
@@ -158,8 +158,8 @@ export const ERR_500=(<FormattedMessage id="notify.error.500" description='Text 
 export const ERR_502=(<FormattedMessage id="notify.error.502" description='Text for bad gateway' 
       defaultMessage="Network error: 502 Bad Gateway"/>);
 //Inventory Tab messages
-export const HISTOGRAM_NO_DATA_TEXT = (<FormattedMessage id="inventory.histogram.noDataText" description="Inventory Histogram No Data Text" 
-    defaultMessage ="No Stock Found"/>);
+export const HISTOGRAM_NO_DATA_TEXT=(<FormattedMessage id="inventory.histogram.noDataText" description="Inventory Histogram No Data Text" 
+    defaultMessage="No Stock Found"/>);
 
 
 //Messages for user forms

@@ -5,7 +5,7 @@ class HamBurger extends React.Component{
 	{
     	super(props);
     	this.state={menuVisible:false};
-    	this._handleDocumentClick = this._handleDocumentClick.bind(this);
+    	this._handleDocumentClick=this._handleDocumentClick.bind(this);
     }	
   	componentWillMount() {
     	document.addEventListener('click', this._handleDocumentClick, false);
@@ -18,13 +18,13 @@ class HamBurger extends React.Component{
     document.removeEventListener('touchend', this._handleDocumentClick, false);
   }  
     _toggleDropdown(){
-    	var currentVisibility = this.state.menuVisible;
-    	currentVisibility = !currentVisibility;
+    	var currentVisibility=this.state.menuVisible;
+    	currentVisibility=!currentVisibility;
     	this.setState({menuVisible:currentVisibility});
   	}
     _processList(){
     	var optionList, listItems=[]; 
-    	optionList = this.props.data.optionList || []; 	
+    	optionList=this.props.data.optionList || []; 	
     	for(let index=0;index<optionList.length;index++){
     		listItems.push(<span className={'gor-hamburger-option '+optionList[index].optionClass} key={index} >
                         		{optionList[index].icon && <div className='gor-option-icon'>
@@ -41,8 +41,8 @@ class HamBurger extends React.Component{
     	}
   	}    
 	render(){
-		var listItems = this._processList();
-		var dropDownMenu = (<span className='gor-hamburger-wrapper' style={(this.state.menuVisible)?{display:'block'}:{display:'none'}}>{listItems}</span>);
+		var listItems=this._processList();
+		var dropDownMenu=(<span className='gor-hamburger-wrapper' style={(this.state.menuVisible)?{display:'block'}:{display:'none'}}>{listItems}</span>);
 		return (
 				<div className={"gor-menuWrap "+this.props.data.menuStyle} 
 				style={this.state.menuVisible?{borderLeft:'1px solid #aaaaaa',borderRight:'1px solid #aaaaaa'}:{}}

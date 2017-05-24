@@ -32,7 +32,7 @@ class InventoryTab extends React.Component{
     }
 
     _setSpinner(bShow) {
-    	var _bShow = bShow ? bShow:false;
+    	var _bShow=bShow ? bShow:false;
     	this.props.setInventorySpinner(_bShow);
     }
 
@@ -51,7 +51,7 @@ class InventoryTab extends React.Component{
 	}
 
     _subscribeData(nextProps){
-        let updatedWsSubscription = this.props.wsSubscriptionData;
+        let updatedWsSubscription=this.props.wsSubscriptionData;
         this.props.initDataSentCall(updatedWsSubscription["inventory"])
         this.props.updateSubscriptionPacket(updatedWsSubscription);
 	}
@@ -61,23 +61,23 @@ class InventoryTab extends React.Component{
 		 * Need to remove these hardcoded variables
 		 * 
 		 */
-		var histogramLabel =<FormattedMessage id="inventory.histogram.header" description="Inventory Histogram Header Message" 
-              			defaultMessage ="Stock level history"/>  ,
-		linechartLabel = <FormattedMessage id="inventory.linechart.header" description="Inventory Line Chart Header Message" 
-              			defaultMessage ="Item Movements"/>,
-        dateTodayState = this.props.dateTodayState,
-		snapshotData = this.props.recreatedData[dateTodayState] ? this.props.recreatedData[dateTodayState].otherInfo: {}
+		var histogramLabel=<FormattedMessage id="inventory.histogram.header" description="Inventory Histogram Header Message" 
+              			defaultMessage="Stock level history"/>  ,
+		linechartLabel=<FormattedMessage id="inventory.linechart.header" description="Inventory Line Chart Header Message" 
+              			defaultMessage="Item Movements"/>,
+        dateTodayState=this.props.dateTodayState,
+		snapshotData=this.props.recreatedData[dateTodayState] ? this.props.recreatedData[dateTodayState].otherInfo: {}
 		return (
 			<div className="gorInventory wrapper">
 				<Spinner isLoading={this.props.inventorySpinner} setSpinner={this.props.setInventorySpinner}/>
-				<Inventory noData = {this.props.noData} 
+				<Inventory noData={this.props.noData} 
 				recreatedData={this.props.recreatedData} 
-				currentDate = {this.props.dateTodayState} 
-				hasDataChanged = {this.props.hasDataChanged} 
+				currentDate={this.props.dateTodayState} 
+				hasDataChanged={this.props.hasDataChanged} 
 				histogramLabel={histogramLabel} 
 				linechartLabel={linechartLabel} 
-				isPrevDateSelected = {this.props.isPrevDateSelected} 
-				inventoryDataPrevious = {this.props.inventoryDataPrevious} 
+				isPrevDateSelected={this.props.isPrevDateSelected} 
+				inventoryDataPrevious={this.props.inventoryDataPrevious} 
 				snapshotData={snapshotData}/>
 			</div>
 		);

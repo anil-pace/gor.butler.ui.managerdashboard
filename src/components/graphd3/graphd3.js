@@ -6,9 +6,9 @@ import { connect } from 'react-redux';
 import {barD3Component} from '../../actions/graphAction';
 import { FormattedMessage } from 'react-intl'; 
 import { defineMessages } from 'react-intl';
-const RD3Component = rd3.Component;
+const RD3Component=rd3.Component;
 
-const messages = defineMessages({
+const messages=defineMessages({
     noData: {
         id: 'horizontal.graph.noData',
         description: 'No data message for graph',
@@ -21,31 +21,31 @@ class Chart extends React.Component{
   constructor(props) 
   {
      super(props);
-       this.state = {d3: ''}
+       this.state={d3: ''}
    }
 
   graphRender(containerWidth,tData,nextP){
-    var component = this, widther = containerWidth, count=-1, temp=-1, data = [], barData = {}, json = tData;
-    var margin = {top: 20, right: 20, bottom: 20, left: 40}, width = widther - margin.left - margin.right, height = 300 - margin.top - margin.bottom;
+    var component=this, widther=containerWidth, count=-1, temp=-1, data=[], barData={}, json=tData;
+    var margin={top: 20, right: 20, bottom: 20, left: 40}, width=widther - margin.left - margin.right, height=300 - margin.top - margin.bottom;
     
     if(json !== undefined) {
-      for (var i = 0; i < json.length; i++) {
-        barData.timeInterval = json[i].timeInterval;
-        barData.type = json[i][nextP];
+      for (var i=0; i < json.length; i++) {
+        barData.timeInterval=json[i].timeInterval;
+        barData.type=json[i][nextP];
         data.push(barData);
-        barData = {};
+        barData={};
       }
 
-    var y = d3.scale.linear().range([height, 0]);
-    var x = d3.scale.ordinal().rangeRoundBands([0, width], .1);
-    var xAxis = d3.svg.axis()
+    var y=d3.scale.linear().range([height, 0]);
+    var x=d3.scale.ordinal().rangeRoundBands([0, width], .1);
+    var xAxis=d3.svg.axis()
      .scale(x)
      .orient("bottom")
      .tickFormat(function(d){
        count++;
        temp++;
-       if (count === 3 || temp ===0 || temp ===23){
-         count = 0;
+       if (count=== 3 || temp===0 || temp===23){
+         count=0;
          if(d <= 9) {
           return "0" + d + ":00"
          }
@@ -55,16 +55,16 @@ class Chart extends React.Component{
       });
    
     x.domain(data.map(function(d) { return (d.timeInterval )  ; }));
-    var yAxis = d3.svg.axis()
+    var yAxis=d3.svg.axis()
     .scale(y)
     .orient("left")
     .ticks(10);
     
 
     
-    var node = document.createElement('div');
+    var node=document.createElement('div');
 
-    var svg = d3.select(node).append('svg')
+    var svg=d3.select(node).append('svg')
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
@@ -74,23 +74,23 @@ class Chart extends React.Component{
         update(data);
       }
     function update(data) {
-      var noDataFlag = true;
-      var noData = <FormattedMessage id="horizontal.graph.noData" description="No data message for graph" 
-              defaultMessage ="No Data"/>;
-      var m_names = new Array("Jan", "Feb", "March", 
+      var noDataFlag=true;
+      var noData=<FormattedMessage id="horizontal.graph.noData" description="No data message for graph" 
+              defaultMessage="No Data"/>;
+      var m_names=new Array("Jan", "Feb", "March", 
 "April", "May", "June", "July", "Aug", "Sep", 
 "Oct", "Nov", "Dec"); 
       data.forEach(function(d) {
-        d.type = +d.type;
+        d.type=+d.type;
      });
       
-      for (var i = data.length - 1; i >= 0; i--) {
+      for (var i=data.length - 1; i >= 0; i--) {
         if(data[i].type !== 0) {
-          noDataFlag = false;
+          noDataFlag=false;
           break;
         }
       }
-      if(noDataFlag === false) {
+      if(noDataFlag=== false) {
         y.domain([0, d3.max(data, function(d) { return d.type; })]);
       }
       else {
@@ -160,9 +160,9 @@ class Chart extends React.Component{
         .attr("stroke", "#045A8D")
         .attr("stroke-width", "0.5px");
         d3.select('.remove').html( "<div style='background:#4d5055; color:#ffffff; padding:10px 30px 10px 10px; border-radius:5%; font-size:14px;'> "+ d.timeInterval + ":00 - " + (d.timeInterval+1) +":00 <div style='color: #ffffff; padding-top:2px;'> "+ (new Date()).getDate() + " " + m_names[(new Date()).getMonth()] +",2016</div> <div style='color: #ffffff; display:inline-block; padding-top:10px; font-size:14px;'> Fulfilled:  " + d.type.toLocaleString() + " </div> <div style='border-left: 9px solid transparent; border-right: 9px solid transparent; border-top: 12px solid #4d5055; margin-left: 58px; position: absolute; margin-top: 5px;'/>" ).style("visibility", "visible");
-        var mouse = d3.mouse(this);
-           var mousex = x(d.timeInterval) + 20;
-           var mousey =  y(d.type) + 315 ; 
+        var mouse=d3.mouse(this);
+           var mousex=x(d.timeInterval) + 20;
+           var mousey= y(d.type) + 315 ; 
            d3.selectAll('.remove').style("left", mousex + "px" );
            d3.selectAll('.remove').style("top", + mousey + "px" );
       })
@@ -188,11 +188,11 @@ class Chart extends React.Component{
       d3.select(node).selectAll('svg')
         .data(data)
         .on("mouseover", function(){  
-           var mousex = d3.mouse(this);
-           mousex = mousex[0] + 10;
+           var mousex=d3.mouse(this);
+           mousex=mousex[0] + 10;
            d3.selectAll('.remove').style("left", mousex + "px");
          });
-    if(noDataFlag === true) {
+    if(noDataFlag=== true) {
       svg.insert("text",":first-child").attr("x",width/2).attr("y",height/2).text(component.context.intl.formatMessage(messages.noData)|| "");
     }
 
@@ -234,13 +234,13 @@ function mapStateToProps(state, ownProps){
   };
 }
 
-var mapDispatchToProps = function(dispatch){
+var mapDispatchToProps=function(dispatch){
   return {
     barD3Component: function(data){ dispatch(barD3Component(data)); }
   }
 };
 
-Chart.contextTypes ={
+Chart.contextTypes={
  intl:React.PropTypes.object.isRequired
 }
 

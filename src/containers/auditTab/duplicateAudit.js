@@ -1,19 +1,12 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import { connect } from 'react-redux' ;
 import {userRequest} from '../../actions/userActions';
-import { FormattedMessage,FormattedPlural } from 'react-intl';        
-import {INVALID_SKUID,INVALID_LOCID,TYPE_SUCCESS} from '../../constants/messageConstants';
-
-import { ERROR,SUCCESS,SKU,LOCATION,CREATE_AUDIT,APP_JSON,POST } from '../../constants/frontEndConstants';
-
+import { FormattedMessage } from 'react-intl';        
+import { CREATE_AUDIT,APP_JSON,POST } from '../../constants/frontEndConstants';
 import { AUDIT_URL } from '../../constants/configConstants';
 
 class DuplicateAudit extends React.Component{
-  constructor(props) 
-  {
-      super(props);  
-  }
+  
   _removeThisModal() {
       this.props.removeModal();
   }
@@ -26,10 +19,10 @@ class DuplicateAudit extends React.Component{
   _userDup() {
     let formdata={};
     if(this.props.auditType==="pdfa") {
-      formdata.audit_param_type = this.props.auditType;
-      formdata.audit_param_value = {};
-      formdata.audit_param_value.product_sku = this.props.auditTypeParam;
-      formdata.audit_param_value.pdfa_values = this.props.auditPdfaValue;
+      formdata.audit_param_type=this.props.auditType;
+      formdata.audit_param_value={};
+      formdata.audit_param_value.product_sku=this.props.auditTypeParam;
+      formdata.audit_param_value.pdfa_values=this.props.auditPdfaValue;
     }
     else {
     formdata={

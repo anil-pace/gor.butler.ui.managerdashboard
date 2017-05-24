@@ -26,15 +26,15 @@ import {SPECIFIC_SKU_ID,SPECIFIC_LOCATION_ID,AUDIT_TASK_ID}from '../constants/fr
  * @param  {String} fileName Name of the file to be saved
  */
  export function saveFile (data, fileName) {
- 	var a = document.createElement("a");
- 	a.style = "display: none";
+ 	var a=document.createElement("a");
+ 	a.style="display: none";
  	document.body.appendChild(a);
 
- 	var json = JSON.stringify(data),
- 	blob = new Blob([json], {type: "octet/stream"}),
- 	url = window.URL.createObjectURL(blob);
- 	a.href = url;
- 	a.download = fileName;
+ 	var json=JSON.stringify(data),
+ 	blob=new Blob([json], {type: "octet/stream"}),
+ 	url=window.URL.createObjectURL(blob);
+ 	a.href=url;
+ 	a.download=fileName;
  	a.click();
  	window.URL.revokeObjectURL(url);
  }
@@ -45,12 +45,12 @@ import {SPECIFIC_SKU_ID,SPECIFIC_LOCATION_ID,AUDIT_TASK_ID}from '../constants/fr
  * @param  {string} flag Based on this flag Audit Task inputfield wil not return
  */
  export function  mappingArray(selectedToken,flag) {
-        var mappingArray = [];
+        var mappingArray=[];
         selectedToken.map(function (value, i) {
-            if (value === "sku") {
+            if (value=== "sku") {
                 mappingArray.push(SPECIFIC_SKU_ID)
             }
-            else if (value === "location") {
+            else if (value=== "location") {
                 mappingArray.push(SPECIFIC_LOCATION_ID)
             }
 
@@ -69,6 +69,6 @@ import {SPECIFIC_SKU_ID,SPECIFIC_LOCATION_ID,AUDIT_TASK_ID}from '../constants/fr
  */
  export function   arrayDiff(mainArray,arraytoSearch ) {
     return mainArray.filter(function (a) {
-        return arraytoSearch.indexOf(a) == -1;
+        return arraytoSearch.indexOf(a)== -1;
     });
 }

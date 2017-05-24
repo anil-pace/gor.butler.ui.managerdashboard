@@ -29,7 +29,7 @@ import {
   GR_REPORT_RESPONSE,
   POST,
   MASTER_FILE_FORMATS,
-  UPLOAD_HISTORY,GET_MAX_FILE_SIZE,MASTER_FILE_MAX_SIZE,WS_ONSEND
+  UPLOAD_HISTORY,GET_MAX_FILE_SIZE,WS_ONSEND
 
 } from '../constants/frontEndConstants';
 import {
@@ -42,7 +42,7 @@ import {updateSubscriptionPacket, setWsAction} from './../actions/socketActions'
 import {wsOverviewData} from './../constants/initData.js';
 
 //Mesages for internationalization
-const messages = defineMessages({
+const messages=defineMessages({
     masterDataHead: {
         id: 'utility.masterData.head',
         description: 'Master data upload',
@@ -89,7 +89,7 @@ const messages = defineMessages({
 class UtilityTab extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
+        this.state={
             reportState: {},
             grnState: {},
             prodStatusCalledOnLoad: false,
@@ -98,49 +98,49 @@ class UtilityTab extends React.Component {
     }
 
     _renderUploadDataTile() {
-        var barData = {
+        var barData={
             h1: this.context.intl.formatMessage(messages.itemRecallHead),
             h2: this.context.intl.formatMessage(messages.itemRecallSubHead), 
             buttonText: this.context.intl.formatMessage(messages.itemRecallButtonText)}
-        var recallBar = <UploadDownBar barData={barData} barAction={this._requestExpiredItems.bind(this)}/>;
+        var recallBar=<UploadDownBar barData={barData} barAction={this._requestExpiredItems.bind(this)}/>;
         return recallBar;
     }
 
     _changeReportCategory(data) {
-        var newState = this.state.reportState;
-        newState.category = data.value;
+        var newState=this.state.reportState;
+        newState.category=data.value;
         this.setState({reportState: newState});
     }
 
     _changeReportFileType(data) {
-        var newState = this.state.reportState;
-        newState.fileType = data.value;
+        var newState=this.state.reportState;
+        newState.fileType=data.value;
         this.setState({reportState: newState});
     }
 
     _changeGrnFileType(data) {
-        var newState = this.state.grnState;
-        newState.fileType = data.value;
+        var newState=this.state.grnState;
+        newState.fileType=data.value;
         this.setState({grnState: newState});
     }
 
     _captureQuery(e) {
         if (e.target.value) {
-            var newState = this.state.grnState;
-            newState.invoiceId = e.target.value;
+            var newState=this.state.grnState;
+            newState.invoiceId=e.target.value;
             this.setState({grnState: newState});
         }
     }
 
     _renderDownReportTile() {
-        var downloadReportTile = [];
-        const modes = [{value: 'inventory', label: "Inventory"}];
-        const fileType = [{value: 'csv', label: "Comma separated values (csv)"}, {
+        var downloadReportTile=[];
+        const modes=[{value: 'inventory', label: "Inventory"}];
+        const fileType=[{value: 'csv', label: "Comma separated values (csv)"}, {
             value: 'xls',
             label: "ExceL Spreadsheet (xls)"
         }];
-        var currentFileState = this.state.reportState.fileType ? (this._getCurrentDropDownState(fileType, this.state.reportState.fileType)) : null;
-        var currentCategoryState = this.state.reportState.category ? (this._getCurrentDropDownState(modes, this.state.reportState.category)) : null;
+        var currentFileState=this.state.reportState.fileType ? (this._getCurrentDropDownState(fileType, this.state.reportState.fileType)) : null;
+        var currentCategoryState=this.state.reportState.category ? (this._getCurrentDropDownState(modes, this.state.reportState.category)) : null;
         downloadReportTile.push(<UtilityDropDown key="1" items={modes} dropdownLabel="Category"
                                                  placeHolderText="Select Category"
                                                  changeMode={this._changeReportCategory.bind(this)}
@@ -153,8 +153,8 @@ class UtilityTab extends React.Component {
     }
 
     _getCurrentDropDownState(fileType, currentValue) {
-        for (var i = fileType.length - 1; i >= 0; i--) {
-            if (fileType[i].value === currentValue) {
+        for (var i=fileType.length - 1; i >= 0; i--) {
+            if (fileType[i].value=== currentValue) {
                 return fileType[i].label;
             }
         }
@@ -162,17 +162,17 @@ class UtilityTab extends React.Component {
     }
 
     _renderGRNtile() {
-        var grnTile = [];
-        const fileType = [{value: 'csv', label: "Comma separated values (csv)"}, {
+        var grnTile=[];
+        const fileType=[{value: 'csv', label: "Comma separated values (csv)"}, {
             value: 'xls',
             label: "ExceL Spreadsheet (xls)"
         }];
-        var currentState = this.state.grnState.fileType ? (this._getCurrentDropDownState(fileType, this.state.grnState.fileType)) : null;
-        var invoiceInput = <div key="1">
+        var currentState=this.state.grnState.fileType ? (this._getCurrentDropDownState(fileType, this.state.grnState.fileType)) : null;
+        var invoiceInput=<div key="1">
             <div className="gor-utility-invoice-h1"> STN number:</div>
             <div className="gor-audit-input-wrap gor-utility-invoice-wrap">
-                <input className="gor-audit-input gor-input-ok" placeholder="Enter STN Number" ref={node => {
-                    this.invoiceId = node
+                <input className="gor-audit-input gor-input-ok" placeholder="Enter STN Number" ref={node=> {
+                    this.invoiceId=node
                 }} onChange={this._captureQuery.bind(this)}/>
                 {this.props.validatedInvoice ? <div className="gor-login-error"/> : ""}
             </div>
@@ -192,9 +192,9 @@ class UtilityTab extends React.Component {
      * @return {[type]}            [description]
      */
     _onMasterFileUpload(fileObject) {
-        var formData = new FormData();
+        var formData=new FormData();
         formData.append("file", fileObject);
-        var params = {
+        var params={
             'url': MASTER_UPLOAD_URL,
             'method': POST,
             'token': this.props.auth_token,
@@ -217,19 +217,20 @@ class UtilityTab extends React.Component {
     }
 
     _renderMasterUpload() {
-        var uploadHistoryData = this.props.uploadHistoryData || [];
-        var recallBar = <MasterUploadTile  uploadHistChanged={this.props.uploadHistChanged}
-        uploadBtnText = {this.context.intl.formatMessage(messages.uploadBtnText)} 
-        isMasterUploadProcessing = {this.props.isMasterUploadProcessing} 
-        maxFileSize = {this.props.maxfilesizelimit} errorList={fileUploadMessages}
-        acceptedFormats ={MASTER_FILE_FORMATS} onMasterFileUpload = {this._onMasterFileUpload.bind(this)} 
+
+        var uploadHistoryData=this.props.uploadHistoryData || [];
+        var recallBar=<MasterUploadTile uploadHistChanged={this.props.uploadHistChanged}
+        uploadBtnText={this.context.intl.formatMessage(messages.uploadBtnText)} 
+        isMasterUploadProcessing={this.props.isMasterUploadProcessing} 
+        maxFileSize={this.props.maxfilesizelimit} errorList={fileUploadMessages}
+        acceptedFormats={MASTER_FILE_FORMATS} onMasterFileUpload={this._onMasterFileUpload.bind(this)} 
         historyData={uploadHistoryData} errorCode={this.props.errorCode} maxSize={this.props.maxsize}/>;
 
         return recallBar;
     }
 
     _downloadReport() {
-        let data = {
+        let data={
             'url': INVENTORY_REPORT_URL,
             'method': GET,
             'token': this.props.auth_token,
@@ -240,8 +241,8 @@ class UtilityTab extends React.Component {
     }
 
     _downloadGRN() {
-        var url = GR_REPORT_URL + "/" + this.state.grnState.invoiceId;
-        let data = {
+        var url=GR_REPORT_URL + "/" + this.state.grnState.invoiceId;
+        let data={
             'url': url,
             'method': GET,
             'token': this.props.auth_token,
@@ -253,7 +254,7 @@ class UtilityTab extends React.Component {
 
     _requestExpiredItems() {
 
-        let data = {
+        let data={
             'url': GET_ITEM_RECALL,
             'method': GET,
             'token': this.props.auth_token,
@@ -263,7 +264,7 @@ class UtilityTab extends React.Component {
     }
 
     _onRefresh() {
-        var params = {
+        var params={
             'url': UPLOAD_HISTORY_URL,
             'method': GET,
             'token': this.props.auth_token,
@@ -300,22 +301,22 @@ class UtilityTab extends React.Component {
 
 
     _subscribeData() {
-        let updatedWsSubscription = this.props.wsSubscriptionData;
+        let updatedWsSubscription=this.props.wsSubscriptionData;
         this.props.initDataSentCall(updatedWsSubscription["default"])
         this.props.updateSubscriptionPacket(updatedWsSubscription);
     }
 
     render() {
-        var uploadDataTile = this._renderUploadDataTile();
-        var downloadReportTile = this._renderDownReportTile();
-        var grnTile = this._renderGRNtile();
-        var masterUpload = this._renderMasterUpload();
-        var activeReportDownButton = (this.state.reportState.fileType && this.state.reportState.category) ? true : false;
-        var activeGRNDownButton = (this.state.grnState.fileType && this.state.grnState.invoiceId) ? true : false;
-        let show_gr_report = false
-        let show_masterdata_upload = false
-        let show_inventory_report = false
-        let show_item_recall_scripts = false
+        var uploadDataTile=this._renderUploadDataTile();
+        var downloadReportTile=this._renderDownReportTile();
+        var grnTile=this._renderGRNtile();
+        var masterUpload=this._renderMasterUpload();
+        var activeReportDownButton=(this.state.reportState.fileType && this.state.reportState.category) ? true : false;
+        var activeGRNDownButton=(this.state.grnState.fileType && this.state.grnState.invoiceId) ? true : false;
+        let show_gr_report=false
+        let show_masterdata_upload=false
+        let show_inventory_report=false
+        let show_item_recall_scripts=false
         try{
             if(!this.props.config.utility_tab.enabled){
                 return null
@@ -326,22 +327,22 @@ class UtilityTab extends React.Component {
 
 
         try {
-            show_gr_report = this.props.config.utility_tab.widgets.gr_report
+            show_gr_report=this.props.config.utility_tab.widgets.gr_report
         } catch (ex) {
             //Do nothing
         }
         try {
-            show_masterdata_upload = this.props.config.utility_tab.widgets.masterdata_upload;
+            show_masterdata_upload=this.props.config.utility_tab.widgets.masterdata_upload;
         } catch (ex) {
             //Do nothing
         }
         try {
-            show_inventory_report = this.props.config.utility_tab.widgets.reports.inventory_report;
+            show_inventory_report=this.props.config.utility_tab.widgets.reports.inventory_report;
         } catch (ex) {
             //Do nothing
         }
         try {
-            show_item_recall_scripts = this.props.config.utility_tab.widgets.scripts.item_recall;
+            show_item_recall_scripts=this.props.config.utility_tab.widgets.scripts.item_recall;
         } catch (ex) {
             //Do nothing
         }
@@ -396,7 +397,7 @@ function mapStateToProps(state, ownProps) {
     };
 }
 
-var mapDispatchToProps = function (dispatch) {
+var mapDispatchToProps=function (dispatch) {
     return {
         getItemRecall: function (data) {
             dispatch(getItemRecall(data));
@@ -427,7 +428,7 @@ var mapDispatchToProps = function (dispatch) {
         },
     }
 };
-UtilityTab.contextTypes = {
+UtilityTab.contextTypes={
     intl: React.PropTypes.object.isRequired
 }
 

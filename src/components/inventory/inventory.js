@@ -18,40 +18,36 @@ import { FormattedMessage ,FormattedDate} from 'react-intl';
 
 
  class Inventory extends React.Component{
- 	constructor(props) 
- 	{
- 		super(props);
-    }	
-   
+ 	
 	render(){
 		
-		var snapShotData = this.props.isPrevDateSelected ? this.props.inventoryDataPrevious : this.props.snapshotData;
+		var snapShotData=this.props.isPrevDateSelected ? this.props.inventoryDataPrevious : this.props.snapshotData;
 
 		
-		var histogramLegend = {
+		var histogramLegend={
 			data:[{
 				color:INV_HIST_LEGEND_COLOR,
 				name:<FormattedMessage id="inventory.histogram.legend" description="Inventory Histogram Legend" 
-              			defaultMessage ="Items Stocked">
-              			{(message) => <tspan>{message}</tspan>}
+              			defaultMessage="Items Stocked">
+              			{(message)=> <tspan>{message}</tspan>}
               			</FormattedMessage>
 			}],
 			config:INV_HIST_LEGEND_CONFIG
 		}
-		var lineChartLagend = {
+		var lineChartLagend={
 			data:[
 				{
 					color:INV_LINE_LEGEND_IPICKED_COLOR,
 					name:<FormattedMessage id="inventory.linechart.legendPicked" description="Inventory Linechart Legend for picked" 
-              			defaultMessage ="Items Picked">
-              			{(message) => <tspan>{message}</tspan>}
+              			defaultMessage="Items Picked">
+              			{(message)=> <tspan>{message}</tspan>}
               			</FormattedMessage>
 				},
 				{
 					color:INV_LINE_LEGEND_IPUT_COLOR,
 					name:<FormattedMessage id="inventory.linechart.legendPut" description="Inventory Linechart Legend for put" 
-              			defaultMessage ="Items Put">
-              			{(message) => <tspan>{message}</tspan>}
+              			defaultMessage="Items Put">
+              			{(message)=> <tspan>{message}</tspan>}
               			</FormattedMessage>
 				}
 			],
@@ -63,7 +59,7 @@ import { FormattedMessage ,FormattedDate} from 'react-intl';
 			<div className="head">
 			
 				<div className="labelCnt"><span><FormattedMessage id="inventory.header" description="Inventory Header Message" 
-              			defaultMessage ="Inventory"/> </span></div>
+              			defaultMessage="Inventory"/> </span></div>
 				</div>
 				<div >
 					<div className="histCnt">
@@ -72,28 +68,28 @@ import { FormattedMessage ,FormattedDate} from 'react-intl';
 						<span>{this.props.histogramLabel}</span>
 						</div>
 						<div className="legendCnt">
-						<Legend hasDataChanged = {this.props.hasDataChanged} legendData = {histogramLegend}/>
+						<Legend hasDataChanged={this.props.hasDataChanged} legendData={histogramLegend}/>
 						</div>
 						<div className="histogram">
-						<InventoryHistogram  noData = {this.props.noData} recreatedData={this.props.recreatedData} hasDataChanged = {this.props.hasDataChanged} />
+						<InventoryHistogram  noData={this.props.noData} recreatedData={this.props.recreatedData} hasDataChanged={this.props.hasDataChanged} />
 						</div>
 						<div className="histLbl">
 						<span>{this.props.linechartLabel}</span>
 						</div>
 						<div className="legendCnt">
-						<Legend hasDataChanged = {this.props.hasDataChanged} legendData = {lineChartLagend} legendType={LEGEND_ROUND}/>
+						<Legend hasDataChanged={this.props.hasDataChanged} legendData={lineChartLagend} legendType={LEGEND_ROUND}/>
 						</div>
 						<div className="lineGraph">
-						<PickPutLineGraph noData = {this.props.noData} recreatedData={this.props.recreatedData} hasDataChanged = {this.props.hasDataChanged} />
+						<PickPutLineGraph noData={this.props.noData} recreatedData={this.props.recreatedData} hasDataChanged={this.props.hasDataChanged} />
 						</div>
 						
 						</div>
 					</div>
-					<div className = "stkSnapSht">
-					<div className = "snapShtWrap">
-						<SnapShot hasDataChanged = {this.props.hasDataChanged} currentDate = {this.props.currentDate} snapshotTabData={snapShotData || {}}/>
-					<InventoryStacked hasDataChanged = {this.props.hasDataChanged} snapshotData={snapShotData || {}}/>
-					<ItemCategoryTable hasDataChanged = {this.props.hasDataChanged} snapshotData={snapShotData || {}}/>
+					<div className="stkSnapSht">
+					<div className="snapShtWrap">
+						<SnapShot hasDataChanged={this.props.hasDataChanged} currentDate={this.props.currentDate} snapshotTabData={snapShotData || {}}/>
+					<InventoryStacked hasDataChanged={this.props.hasDataChanged} snapshotData={snapShotData || {}}/>
+					<ItemCategoryTable hasDataChanged={this.props.hasDataChanged} snapshotData={snapShotData || {}}/>
 					</div>
 					</div>
 				</div>

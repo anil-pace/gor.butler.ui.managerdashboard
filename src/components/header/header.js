@@ -15,18 +15,18 @@ import HamBurger from '../hamburger/hamburger';
 import PauseOperation from '../../containers/emergencyProcess/pauseOperation';
 import ResumeOperation from '../../containers/emergencyProcess/resumeOperation';
 
-var dropdownFlag = 0;
+var dropdownFlag=0;
 var temp;
 
 class Header extends React.Component {
     constructor(props) {
         super(props);
-        if (dropdownFlag === 0) {
-            temp = "dropdown-content";
+        if (dropdownFlag=== 0) {
+            temp="dropdown-content";
         }
-        this.setDropdown = this.setDropdown.bind(this);
-        this.state = {showDropdown: false};
-        this._handleDocumentClick = this._handleDocumentClick.bind(this);
+        this.setDropdown=this.setDropdown.bind(this);
+        this.state={showDropdown: false};
+        this._handleDocumentClick=this._handleDocumentClick.bind(this);
 
 
     }
@@ -37,7 +37,7 @@ class Header extends React.Component {
      * @private
      */
     _getShiftStartTime() {
-        let headerData = {
+        let headerData={
             'url': GET_SHIFT_START_TIME_URL,
             'method': GET,
             'cause': RECEIVE_SHIFT_START_TIME,
@@ -47,9 +47,9 @@ class Header extends React.Component {
     }
 
     componentDidMount() {
-        var username = this.props.username;
+        var username=this.props.username;
         if (username && this.props.authToken) {
-            let headerData = {
+            let headerData={
                 'url': HEADER_URL + '?username=' + username,
                 'method': GET,
                 'cause': RECIEVE_HEADER,
@@ -71,8 +71,8 @@ class Header extends React.Component {
     }
 
     openDropdown() {
-        dropdownFlag = 1;
-        temp = "dropdown-content-afterClick";
+        dropdownFlag=1;
+        temp="dropdown-content-afterClick";
 
     }
 
@@ -106,17 +106,17 @@ class Header extends React.Component {
     }
 
     _processData() {
-        var headerInfo = {};
+        var headerInfo={};
         if (this.props.headerInfo && this.props.headerInfo.users.length) {
-            headerInfo = Object.assign({}, this.props.headerInfo)
-            headerInfo.fullName = (headerInfo.users[0].first_name || '') + ' ' + (headerInfo.users[0].last_name || '');
-            headerInfo.designation = headerInfo.users[0].roles[0] || 'butler_ui';
+            headerInfo=Object.assign({}, this.props.headerInfo)
+            headerInfo.fullName=(headerInfo.users[0].first_name || '') + ' ' + (headerInfo.users[0].last_name || '');
+            headerInfo.designation=headerInfo.users[0].roles[0] || 'butler_ui';
         }
         /**
          * Hard coded start time is replaced
          * with the time fetched in API.
          */
-        headerInfo.start = this.context.intl.formatTime(this.props.shift_start_time, {
+        headerInfo.start=this.context.intl.formatTime(this.props.shift_start_time, {
             hour: 'numeric',
             minute: 'numeric',
             timeZone: this.props.timeOffset,
@@ -127,45 +127,45 @@ class Header extends React.Component {
     }
 
     _processMenu(headerInfo) {
-        var menuObj = {}, heading, subHeading, optionList, optionOperation, optionAction, buttonText;
-        optionList = [];
+        var menuObj={}, heading, subHeading, optionList, optionOperation, optionAction, buttonText;
+        optionList=[];
 
         if (!this.props.system_emergency) {
-            heading = (<FormattedMessage id="header.butler" description="Header description"
+            heading=(<FormattedMessage id="header.butler" description="Header description"
                                          defaultMessage="Butler"/>);
-            subHeading = (<FormattedMessage id="header.start" description='Start time '
+            subHeading=(<FormattedMessage id="header.start" description='Start time '
                                             defaultMessage='Start time:{time} '
                                             values={{
                                                 time: headerInfo.start,
                                             }}/>);
-            optionOperation = (<FormattedMessage id="header.option.normal" description='normal operation'
+            optionOperation=(<FormattedMessage id="header.option.normal" description='normal operation'
                                                  defaultMessage='Operation normal'
             />);
-            optionAction = (<FormattedMessage id="header.option.pause" description='pause operation option'
+            optionAction=(<FormattedMessage id="header.option.pause" description='pause operation option'
                                               defaultMessage='Enter password to pause operation'
             />);
-            buttonText = (<FormattedMessage id="header.button.pause" description='Button text'
+            buttonText=(<FormattedMessage id="header.button.pause" description='Button text'
                                             defaultMessage='Pause'
             />);
             optionList.push({
                 optionClass: 'gor-operation-normal', icon: 'gor-operation-tick', optionText: optionOperation,
                 fnButton: '', buttonText: ''
             });
-            menuObj = {
+            menuObj={
                 heading: heading, subHeading: subHeading, optionList: optionList,
                 menuStyle: '', headingStyle: '', openIcon: 'gor-dropdown-open', closeIcon: 'gor-dropdown-close'
             };
         }
         else {
-            heading = (<FormattedMessage id="header.emergency.heading" description="Header description"
+            heading=(<FormattedMessage id="header.emergency.heading" description="Header description"
                                          defaultMessage="Emergency"/>);
-            subHeading = (<FormattedMessage id="header.emergency.subheading" description='Start time '
+            subHeading=(<FormattedMessage id="header.emergency.subheading" description='Start time '
                                             defaultMessage='In Zone'
             />);
-            optionOperation = (<FormattedMessage id="header.option.stopped" description='stopped operation'
+            optionOperation=(<FormattedMessage id="header.option.stopped" description='stopped operation'
                                                  defaultMessage='Operation stopped'
             />);
-            buttonText = (<FormattedMessage id="header.button.resume" description='Button text'
+            buttonText=(<FormattedMessage id="header.button.resume" description='Button text'
                                             defaultMessage='Resume'
             />);
             optionList.push({
@@ -173,7 +173,7 @@ class Header extends React.Component {
                 fnButton: '', buttonText: ''
             });
             if (this.props.system_data !== SOFT_MANUAL) {
-                optionAction = (<FormattedMessage id="header.option.release" description='release operation option'
+                optionAction=(<FormattedMessage id="header.option.release" description='release operation option'
                                                   defaultMessage='Release the Emergency Stop button from the Zigbee box in order
         						to resume operation.'/>);
                 optionList.push({
@@ -182,7 +182,7 @@ class Header extends React.Component {
                 });
             }
             else {
-                optionAction = (<FormattedMessage id="header.option.resume" description='resume operation option'
+                optionAction=(<FormattedMessage id="header.option.resume" description='resume operation option'
                                                   defaultMessage='Enter password to resume operation.'/>);
                 optionList.push({
                     optionClass: '', icon: '',
@@ -190,7 +190,7 @@ class Header extends React.Component {
                     fnButton: this._showModal.bind(this, ResumeOperation), buttonText: buttonText
                 });
             }
-            menuObj = {
+            menuObj={
                 heading: heading, subHeading: subHeading, optionList: optionList,
                 menuStyle: 'gor-fail', headingStyle: 'gor-white-text', openIcon: 'gor-emergency-dropdown-open',
                 closeIcon: 'gor-emergency-dropdown-close'
@@ -201,8 +201,8 @@ class Header extends React.Component {
     }
 
     render() {
-        var headerInfo = this._processData()
-        var menuDetails = this._processMenu(headerInfo);
+        var headerInfo=this._processData()
+        var menuDetails=this._processMenu(headerInfo);
         return (
             <header className="gorHeader head">
                 <div className="mainBlock">
@@ -217,8 +217,8 @@ class Header extends React.Component {
                     <HamBurger data={menuDetails}/>
                     <div className="gor-border"/>
                     <div className="dropdown" id="profile">
-                        <div className="dropbtn" onClick={this.setDropdown} ref={(node) => {
-                            this.dropdownNode = node;
+                        <div className="dropbtn" onClick={this.setDropdown} ref={(node)=> {
+                            this.dropdownNode=node;
                         }}>
                             <div className="block">
                                 <div className="upperTextClient truncate">
@@ -235,8 +235,8 @@ class Header extends React.Component {
                             </div>
 
 
-                            {this.state.showDropdown ? <div className="dropdown-content" ref={(node) => {
-                                this.dropdownValue = node;
+                            {this.state.showDropdown ? <div className="dropdown-content" ref={(node)=> {
+                                this.dropdownValue=node;
                             }} onClick={this.addModal.bind(this)}>
                                 <div className="horizontalDiv">
                                 </div>
@@ -254,7 +254,7 @@ class Header extends React.Component {
     }
 }
 
-Header.contextTypes = {
+Header.contextTypes={
     intl: React.PropTypes.object.isRequired
 }
 /**

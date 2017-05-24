@@ -1,6 +1,5 @@
 
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import Tabs from './containers/tabs';
 import Header from './components/header/header';
 import {setWsAction ,setMockAction, endWsAction, updateSubscriptionPacket} from './actions/socketActions';
@@ -39,7 +38,7 @@ import {userRequest} from './actions/userActions';
       }
 
       _getConfig(){
-          let request = {
+          let request={
               'url': GET_MD_CONFIG_URL,
               'method': GET,
               'cause': GET_CONFIGS,
@@ -51,7 +50,7 @@ import {userRequest} from './actions/userActions';
           this.props.userRequest(request);
       }
   componentDidMount(){
-    var timeOffset =  sessionStorage.getItem("timeOffset");
+    var timeOffset= sessionStorage.getItem("timeOffset");
     if(!timeOffset){
       let timeOffsetParams={
         'url':TIME_ZONE_URL,
@@ -65,7 +64,7 @@ import {userRequest} from './actions/userActions';
     }
 
     if (this.props.timeOutDuration){
-      let durationInMilliSeconds = this.props.timeOutDuration * 1000;
+      let durationInMilliSeconds=this.props.timeOutDuration * 1000;
 
      // trigger auto logout after time duration.
      setTimeout(function(){
@@ -86,7 +85,7 @@ import {userRequest} from './actions/userActions';
      
      let loginAuthorized= nextProps.loginAuthorized,
      authToken=nextProps.authToken,
-     socketStatus = nextProps.socketStatus,
+     socketStatus=nextProps.socketStatus,
         /**
          * Gaurav Makkar
          * In case of navigation where the user might not
@@ -96,8 +95,8 @@ import {userRequest} from './actions/userActions';
          * props instead of picking it from sessionStorage.
          * @type {string}
          */
-     // currTab = nextProps.subTab || nextProps.tab || null; //
-     currTab = nextProps.location.pathname.substring(1, nextProps.location.pathname.length);
+     // currTab=nextProps.subTab || nextProps.tab || null; //
+     currTab=nextProps.location.pathname.substring(1, nextProps.location.pathname.length);
 
      if(!loginAuthorized){
        this.context.router.push("/login");
@@ -105,11 +104,11 @@ import {userRequest} from './actions/userActions';
      }
      let subscribeData;
      if(currTab) {
-      subscribeData = (nextProps.wsSubscriptionData[currTab] || nextProps.wsSubscriptionData["default"]);
+      subscribeData=(nextProps.wsSubscriptionData[currTab] || nextProps.wsSubscriptionData["default"]);
     }
 
     else {
-      subscribeData = nextProps.wsSubscriptionData["default"];
+      subscribeData=nextProps.wsSubscriptionData["default"];
     }
     
     if(!socketStatus){
@@ -120,7 +119,7 @@ import {userRequest} from './actions/userActions';
       this.props.initWebSocket() ; 
     }
     else if(!nextProps.socketAuthorized){
-      let webSocketData = {
+      let webSocketData={
         'type': 'auth',
         'data' : {
           "auth_token" : authToken
@@ -133,7 +132,7 @@ import {userRequest} from './actions/userActions';
      // this.props.initDataSentCall(subscribeData) ;
       this.props.prevTabSelected(currTab || TAB_ROUTE_MAP[OVERVIEW]);
     }
-    else if(nextProps.prevTab === currTab && nextProps.location.pathname===this.props.location.pathname) {
+    else if(nextProps.prevTab=== currTab && nextProps.location.pathname===this.props.location.pathname) {
       //  this.props.initDataSentCall(subscribeData) ;
     }
   }
@@ -157,7 +156,7 @@ import {userRequest} from './actions/userActions';
  * [Passing Router to component through context]
  * @type {Object}
  */
- App.contextTypes = {
+ App.contextTypes={
   router: React.PropTypes.object.isRequired
 }
 /**

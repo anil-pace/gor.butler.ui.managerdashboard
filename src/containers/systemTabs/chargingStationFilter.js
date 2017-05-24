@@ -1,5 +1,4 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import {FormattedMessage} from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
 import {
@@ -18,7 +17,7 @@ import {hashHistory} from 'react-router'
 class ChargingStationFilter extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
+        this.state={
             tokenSelected: {"DOCKING STATUS": ["all"], "OPERATING MODE": ["all"]}, searchQuery: {},
             defaultToken: {"DOCKING STATUS": ["all"], "OPERATING MODE": ["all"]}
         };
@@ -26,7 +25,7 @@ class ChargingStationFilter extends React.Component {
 
 
     _closeFilter() {
-        let filterState = !this.props.showFilter;
+        let filterState=!this.props.showFilter;
         this.props.showTableFilter(false);
     }
 
@@ -50,12 +49,12 @@ class ChargingStationFilter extends React.Component {
 
 
     _processChargingSearchField() {
-        var filterInputFields = [{
+        var filterInputFields=[{
             value: "CHARGING STATION ID",
             label: <FormattedMessage id="charging.inputField.id" defaultMessage="CHARGING STATION ID"/>
         }];
-        var inputValue = this.state.searchQuery;
-        var inputField = <FilterInputFieldWrap inputText={filterInputFields}
+        var inputValue=this.state.searchQuery;
+        var inputField=<FilterInputFieldWrap inputText={filterInputFields}
                                                handleInputText={this._handleInputQuery.bind(this)}
                                                inputValue={inputValue}/>
         return inputField;
@@ -63,15 +62,15 @@ class ChargingStationFilter extends React.Component {
     }
 
     _processFilterToken() {
-        let tokenField1 = {
+        let tokenField1={
             value: "DOCKING STATUS",
             label: <FormattedMessage id="charging.token.status" defaultMessage="DOCKING STATUS"/>
         };
-        let tokenField2 = {
+        let tokenField2={
             value: "OPERATING MODE",
             label: <FormattedMessage id="charging.token.timePeriod" defaultMessage="OPERATING MODE"/>
         };
-        let labelC1 = [
+        let labelC1=[
             {value: 'all', label: <FormattedMessage id="charging.STATUS.all" defaultMessage="Any"/>},
             {value: 'connected', label: <FormattedMessage id="charging.STATUS.breach" defaultMessage="Connected"/>},
             {
@@ -79,17 +78,17 @@ class ChargingStationFilter extends React.Component {
                 label: <FormattedMessage id="charging.STATUS.pending" defaultMessage="Disconnected"/>
             }
         ];
-        let labelC2 = [
+        let labelC2=[
             {value: 'all', label: <FormattedMessage id="charging.timePeriod.all" defaultMessage="Any"/>},
             {value: 'manual', label: <FormattedMessage id="charging.timePeriod.oneHr" defaultMessage="Manual"/>},
             {value: 'auto', label: <FormattedMessage id="charging.timePeriod.twoHR" defaultMessage="Auto"/>}
         ];
-        let selectedToken = this.state.tokenSelected;
-        let column1 = <FilterTokenWrap field={tokenField1} tokenCallBack={this._handelTokenClick.bind(this)}
+        let selectedToken=this.state.tokenSelected;
+        let column1=<FilterTokenWrap field={tokenField1} tokenCallBack={this._handelTokenClick.bind(this)}
                                        label={labelC1} selectedToken={selectedToken}/>;
-        let column2 = <FilterTokenWrap field={tokenField2} tokenCallBack={this._handelTokenClick.bind(this)}
+        let column2=<FilterTokenWrap field={tokenField2} tokenCallBack={this._handelTokenClick.bind(this)}
                                        label={labelC2} selectedToken={selectedToken}/>;
-        let columnDetail = {column1token: column1, column2token: column2};
+        let columnDetail={column1token: column1, column2token: column2};
         return columnDetail;
     }
 
@@ -103,16 +102,16 @@ class ChargingStationFilter extends React.Component {
     }
 
     _applyFilter() {
-        let filterState = this.state, _query = {};
+        let filterState=this.state, _query={};
         if (filterState.searchQuery && filterState.searchQuery["CHARGING STATION ID"]) {
-            _query.charger_id = filterState.searchQuery["CHARGING STATION ID"]
+            _query.charger_id=filterState.searchQuery["CHARGING STATION ID"]
         }
 
         if (filterState.tokenSelected["DOCKING STATUS"] && filterState.tokenSelected["DOCKING STATUS"][0] !== 'all') {
-            _query.charger_status = filterState.tokenSelected["DOCKING STATUS"]
+            _query.charger_status=filterState.tokenSelected["DOCKING STATUS"]
         }
         if (filterState.tokenSelected["OPERATING MODE"] && filterState.tokenSelected["OPERATING MODE"][0] !== 'all') {
-            _query.charger_mode = filterState.tokenSelected["OPERATING MODE"]
+            _query.charger_mode=filterState.tokenSelected["OPERATING MODE"]
         }
 
         hashHistory.push({pathname: "/system/chargingstation", query: _query})
@@ -124,12 +123,12 @@ class ChargingStationFilter extends React.Component {
 
 
     render() {
-        let chargingDetails = this.props.chargerData;
-        let noOrder = chargingDetails.chargersDetail && chargingDetails.chargersDetail.length ? false : true;
+        let chargingDetails=this.props.chargerData;
+        let noOrder=chargingDetails.chargersDetail && chargingDetails.chargersDetail.length ? false : true;
 
 
-        let chargingSearchField = this._processChargingSearchField();
-        let chargingFilterToken = this._processFilterToken();
+        let chargingSearchField=this._processChargingSearchField();
+        let chargingFilterToken=this._processFilterToken();
         return (
             <div>
                 <Filter hideFilter={this._closeFilter.bind(this)}  // hiding filter wont disturb state
@@ -163,7 +162,7 @@ function mapStateToProps(state, ownProps) {
     };
 }
 
-var mapDispatchToProps = function (dispatch) {
+var mapDispatchToProps=function (dispatch) {
     return {
         showTableFilter: function (data) {
             dispatch(showTableFilter(data));
@@ -186,7 +185,7 @@ var mapDispatchToProps = function (dispatch) {
     }
 };
 
-ChargingStationFilter.PropTypes = {
+ChargingStationFilter.PropTypes={
     showFilter: React.PropTypes.bool,
     chargerData: React.PropTypes.array,
     wsSubscriptionData: React.PropTypes.object,

@@ -1,5 +1,4 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import {FormattedMessage} from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
 import {showTableFilter, filterApplied, auditfilterState, toggleAuditFilter} from '../../actions/filterAction';
@@ -27,14 +26,14 @@ import {mappingArray,arrayDiff} from '../../utilities/utils';
 class AuditFilter extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
+        this.state={
             tokenSelected: {"AUDIT TYPE": [ANY], "STATUS": [ALL]}, searchQuery: {},
             defaultToken: {"AUDIT TYPE": [ANY], "STATUS": [ALL]}
         };
     }
 
     _closeFilter() {
-        var filterState = !this.props.showFilter;
+        var filterState=!this.props.showFilter;
         this.props.showTableFilter(filterState);
     }
 
@@ -52,7 +51,7 @@ class AuditFilter extends React.Component {
     }
 
     _processAuditSearchField() {
-        const filterInputFields = [{
+        const filterInputFields=[{
             value: AUDIT_TASK_ID,
             label: <FormattedMessage id="audit.inputField.id" defaultMessage="AUDIT TASK ID"/>
         },
@@ -64,29 +63,29 @@ class AuditFilter extends React.Component {
                 value: SPECIFIC_LOCATION_ID,
                 label: <FormattedMessage id="audit.inputField.location" defaultMessage="SPECIFIC LOCATION ID"/>
             }];
-        var inputValue = this.state.searchQuery;
-        var textboxStatus = this.props.textboxStatus || {};
-        var inputField = <FilterInputFieldWrap inputText={filterInputFields}
+        var inputValue=this.state.searchQuery;
+        var textboxStatus=this.props.textboxStatus || {};
+        var inputField=<FilterInputFieldWrap inputText={filterInputFields}
                                                handleInputText={this._handleInputQuery.bind(this)}
                                                inputValue={inputValue} textboxStatus={textboxStatus}/>
         return inputField;
     }
 
     _processFilterToken() {
-        var tokenAuditTypeField = {
+        var tokenAuditTypeField={
             value: "AUDIT TYPE",
             label: <FormattedMessage id="audit.tokenfield.typeAudit" defaultMessage="AUDIT TYPE"/>
         };
-        var tokenStatusField = {
+        var tokenStatusField={
             value: "STATUS",
             label: <FormattedMessage id="audit.tokenfield.STATUS" defaultMessage="STATUS"/>
         };
-        const labelC1 = [
+        const labelC1=[
             {value: ANY, label: <FormattedMessage id="audit.token1.all" defaultMessage="Any"/>},
             {value: SKU, label: <FormattedMessage id="audit.token1.sku" defaultMessage="SKU"/>},
             {value: LOCATION, label: <FormattedMessage id="audit.token1.location" defaultMessage="Location"/>}
         ];
-        const labelC2 = [
+        const labelC2=[
             {value: ALL, label: <FormattedMessage id="audit.token2.all" defaultMessage="Any"/>},
             {value: ISSUE_FOUND, label: <FormattedMessage id="audit.token2.issueFound" defaultMessage="Issue found"/>},
             {value: AUDIT_LINE_REJECTED, label: <FormattedMessage id="audit.token2.rejected" defaultMessage="Rejected"/>},
@@ -97,27 +96,30 @@ class AuditFilter extends React.Component {
             {value: AUDIT_COMPLETED, label: <FormattedMessage id="audit.token2.completed" defaultMessage="Completed"/>}
 
         ];
-        var selectedToken = this.state.tokenSelected;
-        var column1 = <FilterTokenWrap field={tokenStatusField} tokenCallBack={this._handelTokenClick.bind(this)}
+        var selectedToken=this.state.tokenSelected;
+        var column1=<FilterTokenWrap field={tokenStatusField} tokenCallBack={this._handelTokenClick.bind(this)}
                                        label={labelC2} selectedToken={selectedToken}/>;
-        var column2 = <FilterTokenWrap field={tokenAuditTypeField} tokenCallBack={this._handelTokenClick.bind(this)}
+        var column2=<FilterTokenWrap field={tokenAuditTypeField} tokenCallBack={this._handelTokenClick.bind(this)}
                                        label={labelC1} selectedToken={selectedToken} selection={SINGLE}/>;
-        var columnDetail = {column1token: column1, column2token: column2};
+        var columnDetail={column1token: column1, column2token: column2};
         return columnDetail;
     }
 
     _handelTokenClick(field, value, state) {
         var tempArray=[SPECIFIC_SKU_ID,SPECIFIC_LOCATION_ID];
-        var obj = {},queryField,tokentoRemove;
-        var selectedToken = this.state.tokenSelected['AUDIT TYPE'];
+        var obj={},queryField,tokentoRemove;
+        var selectedToken=this.state.tokenSelected['AUDIT TYPE'];
         var token=[value];
         this.setState({tokenSelected: handelTokenClick(field, value, state, this.state)});
        
         if (state !== 'addDefault') {
-            obj.name =mappingArray(selectedToken);
+            obj.name=mappingArray(selectedToken);
             tokentoRemove=mappingArray(token,selectedToken);
-            queryField= selectedToken.toString()==ANY?tokentoRemove:arrayDiff(tempArray,obj.name);
-           (queryField && queryField.length!==0)? this.setState({searchQuery: handleInputQuery("", queryField, this.state)}):"";
+            queryField= (selectedToken.toString()===ANY)?tokentoRemove:arrayDiff(tempArray,obj.name);
+            if (queryField && queryField.length!==0){
+            	this.setState({searchQuery: handleInputQuery("", queryField, this.state)});
+            }
+
             this.props.setTextBoxStatus(obj);
         }
         else {
@@ -131,7 +133,7 @@ class AuditFilter extends React.Component {
     }
 
     _applyFilter() {
-        var filterState = this.state,_query={}
+        var filterState=this.state,_query={}
 
         if(filterState.tokenSelected[AUDIT_TYPE] && filterState.tokenSelected[AUDIT_TYPE][0]!==ANY){
             _query.auditType=filterState.tokenSelected[AUDIT_TYPE]
@@ -159,9 +161,9 @@ class AuditFilter extends React.Component {
     }
 
     render() {
-        var noOrder = this.props.totalAudits ? false : true;
-        var auditSearchField = this._processAuditSearchField();
-        var auditFilterToken = this._processFilterToken();
+        var noOrder=this.props.totalAudits ? false : true;
+        var auditSearchField=this._processAuditSearchField();
+        var auditFilterToken=this._processFilterToken();
         return (
             <div>
                 <Filter hideFilter={this._closeFilter.bind(this)}
@@ -191,7 +193,7 @@ function mapStateToProps(state, ownProps) {
     };
 }
 
-var mapDispatchToProps = function (dispatch) {
+var mapDispatchToProps=function (dispatch) {
     return {
         showTableFilter: function (data) {
             dispatch(showTableFilter(data));
@@ -214,7 +216,7 @@ var mapDispatchToProps = function (dispatch) {
     }
 };
 
-AuditFilter.PropTypes = {
+AuditFilter.PropTypes={
     showFilter: React.PropTypes.bool,
     auditSpinner: React.PropTypes.bool,
     totalAudits: React.PropTypes.number,

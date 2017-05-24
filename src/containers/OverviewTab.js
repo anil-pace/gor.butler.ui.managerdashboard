@@ -19,7 +19,7 @@ import {overviewRefreshed} from './../actions/overviewActions'
 class Overview extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {subscribed: false}
+        this.state={subscribed: false}
     }
 
     componentWillMount() {
@@ -48,7 +48,7 @@ class Overview extends React.Component {
     }
 
     _subscribeData(nextProps) {
-        let updatedWsSubscription = this.props.wsSubscriptionData;
+        let updatedWsSubscription=this.props.wsSubscriptionData;
         this.props.initDataSentCall(updatedWsSubscription["default"])
         this.props.updateSubscriptionPacket(updatedWsSubscription);
     }

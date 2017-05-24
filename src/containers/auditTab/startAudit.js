@@ -1,17 +1,11 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
-import { FormattedMessage,FormattedPlural } from 'react-intl'; 
-import { resetForm,validateID,validateName } from '../../actions/validationActions'; 
-import {setAuditType,resetAuditType} from '../../actions/auditActions';
+import { FormattedMessage } from 'react-intl'; 
+import { resetForm } from '../../actions/validationActions'; 
+import {resetAuditType} from '../../actions/auditActions';
 import {userRequest} from '../../actions/userActions';
 import { connect } from 'react-redux';
-import {INVALID_SKUID,INVALID_LOCID,TYPE_SUCCESS} from '../../constants/messageConstants';
-
-import { ERROR,SUCCESS,SKU,LOCATION,CREATE_AUDIT,GET_PPSLIST,START_AUDIT,GET,APP_JSON,POST } from '../../constants/frontEndConstants';
-
-import { AUDIT_URL,PPSLIST_URL,START_AUDIT_URL } from '../../constants/configConstants';
-import FieldError from '../../components/fielderror/fielderror';
-import { locationStatus, skuStatus } from '../../utilities/fieldCheck';
+import { GET_PPSLIST,START_AUDIT,GET,APP_JSON,POST } from '../../constants/frontEndConstants';
+import { PPSLIST_URL,START_AUDIT_URL } from '../../constants/configConstants';
 import NoPPS from './noPPS';
 
 
@@ -68,8 +62,8 @@ class StartAudit extends React.Component{
   }
    _handleChange(event) 
    {
-    let val = event.target.value;
-    let checked = this.state.checked.slice(); 
+    let val=event.target.value;
+    let checked=this.state.checked.slice(); 
     if(checked.includes(val)) {
       checked.splice(checked.indexOf(val), 1);
     } else {
@@ -98,8 +92,8 @@ class StartAudit extends React.Component{
               <span className="close" onClick={this._removeThisModal.bind(this)}>×</span>
             </div>
             <div className='gor-modal-body'>
-            <form action="#"  id = "startauditForm" ref={node => { this.startauditForm = node }} 
-                onSubmit={(e) => this._handlestartaudit(e)}>
+            <form action="#"  id="startauditForm" ref={node=> { this.startauditForm=node }} 
+                onSubmit={(e)=> this._handlestartaudit(e)}>
 
             <div className='gor-usr-form'>
             <div className='gor-usr-details'>
@@ -134,7 +128,7 @@ function mapStateToProps(state, ownProps){
   };
 }
 
-var mapDispatchToProps = function(dispatch){
+var mapDispatchToProps=function(dispatch){
   return {
     userRequest: function(data){ dispatch(userRequest(data)); },
     resetAuditType: function(data){ dispatch(resetAuditType(data)); },    

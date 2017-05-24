@@ -1,5 +1,4 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import { connect } from 'react-redux' ;
 import {modal} from 'react-redux-modal';
 import {userRequest} from '../../actions/userActions';
@@ -8,10 +7,6 @@ import {AUTH_LOGIN,ERROR,TYPING,APP_JSON,POST,SUCCESS} from '../../constants/fro
 import ResumeOperation from './resumeOperation'; 
 
 class EmergencyRelease extends React.Component{
-  constructor(props) 
-  {
-      super(props);  
-  }
   _removeThisModal() {
       this.props.removeModal();
   }

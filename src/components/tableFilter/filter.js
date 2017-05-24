@@ -1,15 +1,8 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 
 
 class Filter extends React.Component{
-
-	constructor(props) 
-	{
-    	super(props);
-    }
-
     _closeFilter() {
         this.props.hideFilter();
     }   
@@ -30,7 +23,7 @@ class Filter extends React.Component{
                  <div className="gor-filter-header">
                     <div className="gor-filter-header-h1">
                          <FormattedMessage id="gor-filter-filterLabel" description="label for filter" 
-            defaultMessage ="Filter data"/>
+            defaultMessage="Filter data"/>
                     </div>
                     <div className="gor-filter-header-h2" onClick={this._closeFilter.bind(this)}>
                         Hide
@@ -70,7 +63,7 @@ class Filter extends React.Component{
                     </span>
                     <div className="gor-filter-btn-wrap">
                         <button className='gor-add-btn' onClick={this._submitFilterForm.bind(this)}>
-                            {!this.props.responseFlag? <FormattedMessage id="gor.filter.heading" description="filter heading"  defaultMessage ="Apply filter"/> :<div className='spinnerImage'></div>}
+                            {!this.props.responseFlag? <FormattedMessage id="gor.filter.heading" description="filter heading"  defaultMessage="Apply filter"/> :<div className='spinnerImage'></div>}
                         </button>
 
 

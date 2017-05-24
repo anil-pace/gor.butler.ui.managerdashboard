@@ -1,5 +1,4 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import Tab from '../components/tabs/tab';
 import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
@@ -16,10 +15,6 @@ import OperationStop from '../containers/emergencyProcess/OperationStop';
 import EmergencyRelease from '../containers/emergencyProcess/emergencyRelease'; 
 
 class Tabs extends React.Component{
-	constructor(props) 
-	{
-    	super(props);
-    }	
 
     /**
      * [handleTabClick stores the selected tab]
@@ -74,7 +69,7 @@ class Tabs extends React.Component{
       });    
   }
   componentWillReceiveProps(nextProps){
-    if(nextProps.system_data === SOFT_MANUAL && (this.props.system_data === HARD || !this.props.system_data))
+    if(nextProps.system_data=== SOFT_MANUAL && (this.props.system_data=== HARD || !this.props.system_data))
     {
       this._emergencyRelease();
     }
@@ -82,7 +77,7 @@ class Tabs extends React.Component{
     {
       this._stopOperation(true);
     }
-    else if(nextProps.system_data === SOFT && this.props.system_data === SOFT_MANUAL){
+    else if(nextProps.system_data=== SOFT && this.props.system_data=== SOFT_MANUAL){
       this._stopOperation(true);
     }
   }
@@ -90,30 +85,30 @@ class Tabs extends React.Component{
   {
     let overview,system,order,ordersvalue,users,usersvalue,inventoryvalue,overviewClass,
         inventory,audit,overviewStatus,systemStatus,ordersStatus,usersStatus,auditStatus,inventoryStatus,
-        offline,systemClass,ordersClass,auditClass,items={}, auditIcon = false,utilities;
+        offline,systemClass,ordersClass,auditClass,items={}, auditIcon=false,utilities;
 
-    offline = <FormattedMessage id="tabs.offline" description="offline" 
-              defaultMessage ="Offline"/>;
+    offline=<FormattedMessage id="tabs.offline" description="offline" 
+              defaultMessage="Offline"/>;
 
-    overview = <FormattedMessage id="overview.tab.heading" description="overview tab" 
-              defaultMessage ="OVERVIEW"/>;
+    overview=<FormattedMessage id="overview.tab.heading" description="overview tab" 
+              defaultMessage="OVERVIEW"/>;
 
-    system = <FormattedMessage id="system.tab.heading" description="system tab" 
-              defaultMessage ="SYSTEM"/>;
+    system=<FormattedMessage id="system.tab.heading" description="system tab" 
+              defaultMessage="SYSTEM"/>;
               
-    order = <FormattedMessage id="orders.tab.heading" description="orders tab" 
-              defaultMessage ="ORDERS"/>;
+    order=<FormattedMessage id="orders.tab.heading" description="orders tab" 
+              defaultMessage="ORDERS"/>;
               
-    users = <FormattedMessage id="users.tab.heading" description="users tab" 
-              defaultMessage ="USERS"/> ;
-    inventory = <FormattedMessage id="inventory.tab.heading" description="inventory tab" 
-              defaultMessage ="INVENTORY"/>; 
+    users=<FormattedMessage id="users.tab.heading" description="users tab" 
+              defaultMessage="USERS"/> ;
+    inventory=<FormattedMessage id="inventory.tab.heading" description="inventory tab" 
+              defaultMessage="INVENTORY"/>; 
 
-    audit = <FormattedMessage id="audit.tab.heading" description="audit tab" 
-              defaultMessage ="AUDIT"/>;  
+    audit=<FormattedMessage id="audit.tab.heading" description="audit tab" 
+              defaultMessage="AUDIT"/>;  
 
-    utilities = <FormattedMessage id="utilities.tab.heading" description="audit tab" 
-              defaultMessage ="UTILITIES"/>;                     
+    utilities=<FormattedMessage id="utilities.tab.heading" description="audit tab" 
+              defaultMessage="UTILITIES"/>;                     
 
     if(!this.props.system_status)
     {
@@ -127,40 +122,40 @@ class Tabs extends React.Component{
     }
     else
     {
-      if(this.props.overview_status === FULFILLING_ORDERS)
+      if(this.props.overview_status=== FULFILLING_ORDERS)
       {
-        overviewStatus = <FormattedMessage id="overviewStatus.tab.fulfilling" description="overview Status fulfilling orders" 
-              defaultMessage ="Fulfilling orders"/>;  
+        overviewStatus=<FormattedMessage id="overviewStatus.tab.fulfilling" description="overview Status fulfilling orders" 
+              defaultMessage="Fulfilling orders"/>;  
       }
       else
       {
-        overviewStatus = <FormattedMessage id="overviewStatus.tab.default" description="default overview Status" 
-              defaultMessage ="None"/>;          
+        overviewStatus=<FormattedMessage id="overviewStatus.tab.default" description="default overview Status" 
+              defaultMessage="None"/>;          
       }
       if(this.props.system_emergency)
       {
-        overviewStatus = <FormattedMessage id="overviewStatus.tab.stop" description="overview Status emergency" 
-              defaultMessage ="Operation stopped"/>;  
-        overviewClass = 'gor-alert'
+        overviewStatus=<FormattedMessage id="overviewStatus.tab.stop" description="overview Status emergency" 
+              defaultMessage="Operation stopped"/>;  
+        overviewClass='gor-alert'
       }
-      systemStatus = <FormattedMessage id="systemStatus.tab.online" description="system Status online" 
-              defaultMessage ="Online"/>;  
+      systemStatus=<FormattedMessage id="systemStatus.tab.online" description="system Status online" 
+              defaultMessage="Online"/>;  
       systemClass=GOR_ONLINE;
 
-      ordersvalue = <FormattedNumber value={this.props.orders_completed}/>
-      ordersStatus = <FormattedMessage id="ordersStatus.tab.heading" description="orders Status " 
-                                       defaultMessage ="{count}% fulfilled" values={{count:ordersvalue}}/>;  
+      ordersvalue=<FormattedNumber value={this.props.orders_completed}/>
+      ordersStatus=<FormattedMessage id="ordersStatus.tab.heading" description="orders Status " 
+                                       defaultMessage="{count}% fulfilled" values={{count:ordersvalue}}/>;  
       ordersClass=GOR_ONLINE;
 
-      usersvalue = <FormattedNumber value={this.props.users_online}/>
-      usersStatus = <FormattedMessage id="usersStatus.tab.heading#" description="users Status " 
-                                      defaultMessage ="{count} {count,plural, =0 {user} one {user} other {users}} online" values={{count:this.props.users_online?this.props.users_online:"0"}}/>;  
+      usersvalue=<FormattedNumber value={this.props.users_online}/>
+      usersStatus=<FormattedMessage id="usersStatus.tab.heading#" description="users Status " 
+                                      defaultMessage="{count} {count,plural,=0 {user} one {user} other {users}} online" values={{count:this.props.users_online?this.props.users_online:"0"}}/>;  
 
-      inventoryvalue = <FormattedNumber value={this.props.space_utilized}/>
-      inventoryStatus = <FormattedMessage id="inventoryStatus.tab.heading" description="inventory Status " 
-                                           defaultMessage ="{count}% space utilized" values={{count:inventoryvalue}}/>;            
+      inventoryvalue=<FormattedNumber value={this.props.space_utilized}/>
+      inventoryStatus=<FormattedMessage id="inventoryStatus.tab.heading" description="inventory Status " 
+                                           defaultMessage="{count}% space utilized" values={{count:inventoryvalue}}/>;            
       auditStatus=<FormattedMessage id="auditStatus.tab.heading" description="audit Status " 
-                                     defaultMessage ="{count} in progress" 
+                                     defaultMessage="{count} in progress" 
                                      values={{count:this.props.audit_count?this.props.audit_count:'None'}}/>;          
       if(this.props.audit_count)
       {
@@ -171,11 +166,11 @@ class Tabs extends React.Component{
         auditClass=GOR_OFFLINE;
       }
       if(this.props.audit_alert) {
-        auditClass = (this.props.audit_alert?'gor-alert':auditClass);
+        auditClass=(this.props.audit_alert?'gor-alert':auditClass);
         auditStatus=<FormattedMessage id="auditStatus.tab.alert.heading" description="audit Status alert" 
-                                     defaultMessage ="{count} {count,plural, one {alert} other {alerts}}" 
+                                     defaultMessage="{count} {count,plural, one {alert} other {alerts}}" 
                                      values={{count:this.props.audit_alert?this.props.audit_alert:"0"}}/>;
-       auditIcon = true;                                                        
+       auditIcon=true;                                                        
       }
     }
 
@@ -191,36 +186,36 @@ class Tabs extends React.Component{
 	render(){
 
   let items=this._parseStatus();
-  var showUtilityTab = this.props.config.utility_tab && this.props.config.utility_tab.enabled;
+  var showUtilityTab=this.props.config.utility_tab && this.props.config.utility_tab.enabled;
 		return (
 		<div className="gor-tabs gor-main-block">
-		<Link to="/overview" onClick = {this.handleTabClick.bind(this,OVERVIEW)}>
-			<Tab items={{ tab: items.overview, Status: items.overviewStatus, currentState:items.overviewClass }} changeClass={(this.props.tab.toUpperCase() === OVERVIEW ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
+		<Link to="/overview" onClick={this.handleTabClick.bind(this,OVERVIEW)}>
+			<Tab items={{ tab: items.overview, Status: items.overviewStatus, currentState:items.overviewClass }} changeClass={(this.props.tab.toUpperCase()=== OVERVIEW ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
 		</Link>
 
-		<Link to="/system/butlerbots" onClick = {this.handleTabClick.bind(this,SYSTEM)}>
-			<Tab items={{ tab: items.system, Status: items.systemStatus, currentState:items.systemClass }} changeClass={(this.props.tab.toUpperCase() === SYSTEM ? 'sel' :GOR_NORMAL_TAB)} subIcons={true}/>
+		<Link to="/system/butlerbots" onClick={this.handleTabClick.bind(this,SYSTEM)}>
+			<Tab items={{ tab: items.system, Status: items.systemStatus, currentState:items.systemClass }} changeClass={(this.props.tab.toUpperCase()=== SYSTEM ? 'sel' :GOR_NORMAL_TAB)} subIcons={true}/>
 		</Link>
 
-		<Link to="/orders/waves" onClick = {this.handleTabClick.bind(this,ORDERS)}>
-			<Tab items={{ tab: items.order, Status: items.ordersStatus, currentState:items.ordersClass }} changeClass={(this.props.tab.toUpperCase() === ORDERS ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
+		<Link to="/orders/waves" onClick={this.handleTabClick.bind(this,ORDERS)}>
+			<Tab items={{ tab: items.order, Status: items.ordersStatus, currentState:items.ordersClass }} changeClass={(this.props.tab.toUpperCase()=== ORDERS ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
 		</Link>
 
 
-    <Link to="/audit" onClick = {this.handleTabClick.bind(this,AUDIT)}>
-      <Tab items={{ tab: items.audit, Status: items.auditStatus, currentState:items.auditClass}} changeClass={(this.props.tab.toUpperCase() === AUDIT ? 'sel' :GOR_NORMAL_TAB)} subIcons={items.auditIcon}/>
+    <Link to="/audit" onClick={this.handleTabClick.bind(this,AUDIT)}>
+      <Tab items={{ tab: items.audit, Status: items.auditStatus, currentState:items.auditClass}} changeClass={(this.props.tab.toUpperCase()=== AUDIT ? 'sel' :GOR_NORMAL_TAB)} subIcons={items.auditIcon}/>
       </Link>
 
-    <Link to="/inventory" onClick = {this.handleTabClick.bind(this,INVENTORY)}>
-      <Tab items={{ tab: items.inventory, Status: items.inventoryStatus, currentState:'' }} changeClass={(this.props.tab.toUpperCase() === INVENTORY ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
+    <Link to="/inventory" onClick={this.handleTabClick.bind(this,INVENTORY)}>
+      <Tab items={{ tab: items.inventory, Status: items.inventoryStatus, currentState:'' }} changeClass={(this.props.tab.toUpperCase()=== INVENTORY ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
     </Link>
 		
-		<Link to="/users" onClick = {this.handleTabClick.bind(this,USERS)}>
-			<Tab items={{ tab: items.users, Status: items.usersStatus, currentState:'' }} changeClass={(this.props.tab.toUpperCase() === USERS ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
+		<Link to="/users" onClick={this.handleTabClick.bind(this,USERS)}>
+			<Tab items={{ tab: items.users, Status: items.usersStatus, currentState:'' }} changeClass={(this.props.tab.toUpperCase()=== USERS ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
 		</Link>
 
-    {showUtilityTab?<Link to="/utilities" onClick = {this.handleTabClick.bind(this,UTILITIES)}>
-      <Tab items={{ tab: items.utilities, Status:'', currentState:'' }} changeClass={(this.props.tab.toUpperCase() === UTILITIES ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
+    {showUtilityTab?<Link to="/utilities" onClick={this.handleTabClick.bind(this,UTILITIES)}>
+      <Tab items={{ tab: items.utilities, Status:'', currentState:'' }} changeClass={(this.props.tab.toUpperCase()=== UTILITIES ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
     </Link>:""}
 	</div>
 		);
@@ -244,7 +239,7 @@ function mapStateToProps(state, ownProps){
     }
 }
 
-var mapDispatchToProps = function(dispatch){
+var mapDispatchToProps=function(dispatch){
 	return {
 		tabSelected: function(data){ dispatch(tabSelected(data)); },
         subTabSelected: function(data){ dispatch(subTabSelected(data)); },

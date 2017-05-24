@@ -13,7 +13,7 @@ class InventoryTab extends React.Component{
     }	
 	render(){
 		return (
-			<div className = "itemCategory" >
+			<div className="itemCategory" >
 
 				<LineGraph/>
 			</div>

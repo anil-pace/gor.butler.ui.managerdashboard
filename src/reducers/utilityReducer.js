@@ -8,7 +8,7 @@ import {INVOICE_VALIDATION,MASTER_UPLOAD_PROCESSING,MASTER_UPLOAD_SUCCESS,UPLOAD
 export  function utilityValidations(state={},action){
   switch (action.type) {
     case INVOICE_VALIDATION:
-          var res = action.data;
+          var res=action.data;
           if(res.alert_data){
             return Object.assign({}, state, {
               "invalidInvoice" : true
@@ -34,7 +34,7 @@ export  function utilityValidations(state={},action){
             })
             }else
           {
-            let newFileUploaded = !state.newFileUploaded;
+            let newFileUploaded=!state.newFileUploaded;
               return Object.assign({}, state, {
               "masterDataUploadSuccess" : action.data.data ? true : false,
               "newFileUploaded":newFileUploaded,
@@ -44,7 +44,7 @@ export  function utilityValidations(state={},action){
 
         }
       case UPLOAD_HISTORY:
-          var uploadHistChanged = !state.uploadHistChanged;
+          var uploadHistChanged=!state.uploadHistChanged;
           return Object.assign({}, state, {
               "uploadHistoryData" : action.data.mdm_upload_info || [],
               "uploadHistChanged":uploadHistChanged

@@ -19,7 +19,7 @@ import WaveFilter from './waveFilter';
 import FilterSummary from '../../components/tableFilter/filterSummary'
 
 //Mesages for internationalization
-const messages = defineMessages({
+const messages=defineMessages({
     wavePrefix: {
         id: "waveDetail.id.prefix",
         defaultMessage: "WAVE-{waveId}"
@@ -59,12 +59,12 @@ class WaveTab extends React.Component {
      */
     _refreshList(query) {
         this.props.setWavesSpinner(true)
-        let filterSubsData = {}
+        let filterSubsData={}
         if (query.waveId) {
-            filterSubsData["wave_id"] = ['=', query.waveId];
+            filterSubsData["wave_id"]=['=', query.waveId];
         }
         if (query.status) {
-            filterSubsData["status"] = ['in', query.status.constructor === Array ? query.status : [query.status]]
+            filterSubsData["status"]=['in', query.status.constructor=== Array ? query.status : [query.status]]
         }
         if (Object.keys(query).filter(function(el){return el!=='page'}).length !== 0) {
             this.props.toggleWaveFilter(true);
@@ -73,13 +73,13 @@ class WaveTab extends React.Component {
             this.props.toggleWaveFilter(false);
             this.props.filterApplied(false);
         }
-        let updatedWsSubscription = this.props.wsSubscriptionData;
-        updatedWsSubscription["orders"].data[0].details["filter_params"] = filterSubsData;
+        let updatedWsSubscription=this.props.wsSubscriptionData;
+        updatedWsSubscription["orders"].data[0].details["filter_params"]=filterSubsData;
         this.props.initDataSentCall(updatedWsSubscription["orders"])
         this.props.updateSubscriptionPacket(updatedWsSubscription);
         this.props.wavefilterState({
             tokenSelected: {
-                "STATUS": query.status ? (query.status.constructor === Array ? query.status : [query.status]) : ["any"]
+                "STATUS": query.status ? (query.status.constructor=== Array ? query.status : [query.status]) : ["any"]
             },
             searchQuery: {
                 "WAVE ID": query.waveId || ''
@@ -97,40 +97,40 @@ class WaveTab extends React.Component {
     }
 
     _processWaveData(data, nProps) {
-        var nProps = this,
-            data = nProps.props.waveDetail.waveData;
-        var waveData = [], waveDetail = {};
+        var nProps=this,
+            data=nProps.props.waveDetail.waveData;
+        var waveData=[], waveDetail={};
         let WAVE, waveId;
 
 
-        var status = {
+        var status={
             "in_progress": "progress",
             "completed": "completed",
             "breached": "breached",
             "wave_pending": "pending"
         };
-        var priStatus = {"in_progress": 2, "completed": 4, "breached": 1, "pending": 3};
-        var timeOffset = this.props.timeOffset, alertNum = 0;
+        var priStatus={"in_progress": 2, "completed": 4, "breached": 1, "pending": 3};
+        var timeOffset=this.props.timeOffset, alertNum=0;
         if (data) {
-            for (var i = data.length - 1; i >= 0; i--) {
-                waveId = data[i].wave_id;
-                WAVE = nProps.context.intl.formatMessage(messages.wavePrefix, {"waveId": waveId});
-                waveDetail = {};
-                waveDetail.id = WAVE;
-                waveDetail.statusClass = status[data[i].status];
-                waveDetail.statusPriority = priStatus[data[i].status];
+            for (var i=data.length - 1; i >= 0; i--) {
+                waveId=data[i].wave_id;
+                WAVE=nProps.context.intl.formatMessage(messages.wavePrefix, {"waveId": waveId});
+                waveDetail={};
+                waveDetail.id=WAVE;
+                waveDetail.statusClass=status[data[i].status];
+                waveDetail.statusPriority=priStatus[data[i].status];
                 if (nProps.context.intl.formatMessage(stringConfig[data[i].status])) {
-                    waveDetail.status = nProps.context.intl.formatMessage(stringConfig[data[i].status]);
+                    waveDetail.status=nProps.context.intl.formatMessage(stringConfig[data[i].status]);
                 }
                 else {
-                    waveDetail.status = data[i].status;
+                    waveDetail.status=data[i].status;
                 }
                 if (!data[i].start_time) {
-                    waveDetail.startTime = "--";
+                    waveDetail.startTime="--";
                 }
                 else {
                     if (getDaysDiff(data[i].start_time) < 2) {
-                        waveDetail.startTime = nProps.context.intl.formatRelative(data[i].start_time, {
+                        waveDetail.startTime=nProps.context.intl.formatRelative(data[i].start_time, {
                                 timeZone: timeOffset,
                                 units: 'day'
                             }) +
@@ -142,7 +142,7 @@ class WaveTab extends React.Component {
                             });
                     }
                     else {
-                        waveDetail.startTime = nProps.context.intl.formatDate(data[i].start_time,
+                        waveDetail.startTime=nProps.context.intl.formatDate(data[i].start_time,
                             {
                                 timeZone: timeOffset,
                                 year: 'numeric',
@@ -156,11 +156,11 @@ class WaveTab extends React.Component {
                 }
 
                 if (!data[i].cut_off_time) {
-                    waveDetail.cutOffTime = "--";
+                    waveDetail.cutOffTime="--";
                 }
                 else {
                     if (getDaysDiff(data[i].cut_off_time) < 2) {
-                        waveDetail.cutOffTime = nProps.context.intl.formatRelative(data[i].cut_off_time, {
+                        waveDetail.cutOffTime=nProps.context.intl.formatRelative(data[i].cut_off_time, {
                                 timeZone: timeOffset,
                                 units: 'day'
                             }) +
@@ -172,7 +172,7 @@ class WaveTab extends React.Component {
                             });
                     }
                     else {
-                        waveDetail.cutOffTime = nProps.context.intl.formatDate(data[i].cut_off_time,
+                        waveDetail.cutOffTime=nProps.context.intl.formatDate(data[i].cut_off_time,
                             {
                                 timeZone: timeOffset,
                                 year: 'numeric',
@@ -184,13 +184,13 @@ class WaveTab extends React.Component {
                             });
                     }
                 }
-                waveDetail.ordersToFulfill = data[i].orders_to_fulfill;
-                waveDetail.totalOrders = data[i].total_orders;
+                waveDetail.ordersToFulfill=data[i].orders_to_fulfill;
+                waveDetail.totalOrders=data[i].total_orders;
                 if (waveDetail.totalOrders) {
-                    waveDetail.progress = parseInt(((waveDetail.totalOrders - waveDetail.ordersToFulfill) / waveDetail.totalOrders) * 100);
+                    waveDetail.progress=parseInt(((waveDetail.totalOrders - waveDetail.ordersToFulfill) / waveDetail.totalOrders) * 100);
                 }
                 else {
-                    waveDetail.progress = 0;
+                    waveDetail.progress=0;
                 }
                 waveData.push(waveDetail);
             }
@@ -199,53 +199,53 @@ class WaveTab extends React.Component {
     }
 
     _setFilter() {
-        var newState = !this.props.showFilter;
+        var newState=!this.props.showFilter;
         this.props.showTableFilter(newState);
     }
 
-    refresh = () => {
+    refresh=()=> {
         console.log('Refresh');
     }
 
     render() {
-        let filterHeight = screen.height-190-50;
-        var updateStatusIntl = "";
-        var itemNumber = 7, waveData = this.props.waveDetail.waveData, waveState = {
+        let filterHeight=screen.height-190-50;
+        var updateStatusIntl="";
+        var itemNumber=7, waveData=this.props.waveDetail.waveData, waveState={
             "pendingWave": "--",
             "progressWave": "--",
             "orderRemaining": "--",
             "completedWaves": "--",
             "totalOrders": "--"
         };
-        var totalOrders = 0, orderToFulfill = 0, completedWaves = 0, pendingWaves = 0, progressWave = 0, alertNum = 0;
+        var totalOrders=0, orderToFulfill=0, completedWaves=0, pendingWaves=0, progressWave=0, alertNum=0;
 
         if (this.props.waveDetail.waveData !== undefined) {
-            waveData = this._processWaveData()
+            waveData=this._processWaveData()
             if (waveData && waveData.length) {
-                for (var i = waveData.length - 1; i >= 0; i--) {
+                for (var i=waveData.length - 1; i >= 0; i--) {
                     if (waveData[i].totalOrders) {
-                        totalOrders = waveData[i].totalOrders + totalOrders;
+                        totalOrders=waveData[i].totalOrders + totalOrders;
                     }
                     if (waveData[i].ordersToFulfill) {
-                        orderToFulfill = waveData[i].ordersToFulfill + orderToFulfill;
+                        orderToFulfill=waveData[i].ordersToFulfill + orderToFulfill;
                     }
 
-                    if (waveData[i].progress === 100) {
+                    if (waveData[i].progress=== 100) {
                         completedWaves++;
                     }
-                    if (waveData[i].statusClass === GOR_PENDING) {
+                    if (waveData[i].statusClass=== GOR_PENDING) {
                         pendingWaves++;
                     }
 
-                    if (waveData[i].statusClass === GOR_PROGRESS) {
+                    if (waveData[i].statusClass=== GOR_PROGRESS) {
                         progressWave++;
                     }
 
-                    if (waveData[i].statusClass === GOR_BREACHED) {
+                    if (waveData[i].statusClass=== GOR_BREACHED) {
                         alertNum++;
                     }
                 }
-                waveState = {
+                waveState={
                     "pendingWave": pendingWaves,
                     "progressWave": progressWave,
                     "orderRemaining": orderToFulfill,
@@ -266,7 +266,7 @@ class WaveTab extends React.Component {
                         <div className="gorToolBarWrap">
                             <div className="gorToolBarElements">
                                 <FormattedMessage id="waves.table.heading" description="Heading for waves"
-                                                  defaultMessage ="Waves"/>
+                                                  defaultMessage="Waves"/>
 
                             </div>
                         </div>
@@ -281,7 +281,7 @@ class WaveTab extends React.Component {
                                     <button className={this.props.waveFilterStatus?"gor-filterBtn-applied":"gor-filterBtn-btn"} onClick={this._setFilter.bind(this)} >
                                         <div className="gor-manage-task"/>
                                         <FormattedMessage id="order.table.filterLabel" description="button label for filter"
-                                                          defaultMessage ="Filter data"/>
+                                                          defaultMessage="Filter data"/>
                                     </button>
                                 </div>
                             </div>
@@ -343,7 +343,7 @@ function mapStateToProps(state, ownProps) {
     };
 };
 
-var mapDispatchToProps = function (dispatch) {
+var mapDispatchToProps=function (dispatch) {
     return {
         waveFilterDetail: function (data) {
             dispatch(waveFilterDetail(data))
@@ -378,11 +378,11 @@ var mapDispatchToProps = function (dispatch) {
     };
 }
 
-WaveTab.contextTypes = {
+WaveTab.contextTypes={
     intl: React.PropTypes.object.isRequired
 }
 
-WaveTab.PropTypes = {
+WaveTab.PropTypes={
     waveSortHeaderState: React.PropTypes.string,
     wavesSpinner: React.PropTypes.bool,
     filterOptions: React.PropTypes.object,

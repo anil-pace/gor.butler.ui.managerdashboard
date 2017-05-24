@@ -8,24 +8,24 @@ class Tab extends React.Component{
     }	
 	render(){
 		var icon={};
-		if(this.props.subIcons === true && this.props.items.currentState === "gorError") {
-			icon = <div className="tab-alert-icon"/>
+		if(this.props.subIcons=== true && this.props.items.currentState=== "gorError") {
+			icon=<div className="tab-alert-icon"/>
 		}
-		else if(this.props.subIcons === true && this.props.items.currentState === "gor-online") {
-			icon = <div className="tab-online-icon"/>
+		else if(this.props.subIcons=== true && this.props.items.currentState=== "gor-online") {
+			icon=<div className="tab-online-icon"/>
 		}
-		else if(this.props.subIcons === true && this.props.items.currentState === "gor-offline") {
-			icon = <div className="tab-offline-icon"/>
+		else if(this.props.subIcons=== true && this.props.items.currentState=== "gor-offline") {
+			icon=<div className="tab-offline-icon"/>
 		}
-		else if(this.props.subIcons === true && this.props.items.currentState === "gor-alert") {
-			icon = <div className="tab-alert-icon"/>
+		else if(this.props.subIcons=== true && this.props.items.currentState=== "gor-alert") {
+			icon=<div className="tab-alert-icon"/>
 		}
 
-		else if(this.props.subIcons === true && this.props.items.currentState === "gor-emergency-alert") {
-			icon = <div className="gor-error-white"/>
+		else if(this.props.subIcons=== true && this.props.items.currentState=== "gor-emergency-alert") {
+			icon=<div className="gor-error-white"/>
 		}
 		else {
-			icon = <div/>
+			icon=<div/>
 		}
 		return (
 		<div className="gorTab gorContainer">

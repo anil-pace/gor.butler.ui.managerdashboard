@@ -1,8 +1,5 @@
 
 import React  from 'react';
-import ReactDOM  from 'react-dom';
-
-
 
 class Spinner extends React.Component{ 
 	/**
@@ -16,7 +13,7 @@ class Spinner extends React.Component{
 
   	componentDidMount(){
     	if(this.props.setSpinner){
-    		if(this.props.isLoading === true)
+    		if(this.props.isLoading=== true)
     		{
    		 	 setTimeout(this.props.setSpinner.bind(this,false), 5000);    	
     		}

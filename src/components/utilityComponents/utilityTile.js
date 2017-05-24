@@ -15,7 +15,7 @@ class UtilityTile extends React.Component{
 					{this.props.tileHead}
 				</div>
 				{this.props.showHeaderIcon?<div className="gor-utility-tile-icon">
-					<div className="gor-refresh-icon" onClick = {this.props.onRefresh}/>
+					<div className="gor-refresh-icon" onClick={this.props.onRefresh}/>
 				</div>:""}
 			</div>
 			<div className="gor-utility-tile-body">
@@ -24,7 +24,7 @@ class UtilityTile extends React.Component{
 			{this.props.showFooter?<div className="gor-utility-tile-footer">
 				<div className="got-utility-btn-wrap">
 					<button className={this.props.enableButton?"gor-filterBtn-applied":"gor-filterBtn-applied gor-disable-content"} onClick={this.props.footerAction}>
-          				<FormattedMessage id="utility.downDlabel" description="label for download" defaultMessage ="DOWNLOAD"/>
+          				<FormattedMessage id="utility.downDlabel" description="label for download" defaultMessage="DOWNLOAD"/>
          			</button>
          		</div>
 			</div>:""}

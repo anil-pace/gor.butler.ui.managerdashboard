@@ -1,5 +1,4 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import {authLoginData,setLoginSpinner,setUsername} from '../../actions/loginAction';
 import {validateID, validatePassword, loginError} from '../../actions/validationActions';
 import { connect } from 'react-redux';
@@ -69,8 +68,8 @@ class LoginForm extends React.Component{
 	render(){
         // remove the internationalization from 'Butler' as it is our brand and also 'TM' as it is universal term
         return (
-              <form action="#"  id = "loginForm" ref={node => { this.loginForm = node }} 
-                onSubmit={(e) => this._handleSubmit(e)}>
+              <form action="#"  id="loginForm" ref={node=> { this.loginForm=node }} 
+                onSubmit={(e)=> this._handleSubmit(e)}>
                 <div className='gor-login-mid'>
                 <div className='gor-upper-box'>
                     <div className='gor-login-head'>
@@ -83,34 +82,34 @@ class LoginForm extends React.Component{
                             description="Text for Management Interface"/>
                     </p>   
                 </div>
-                { this.props.loginInfo.type === ERROR && (<div className='gor-login-auth-error'><div className='gor-login-error'></div>
+                { this.props.loginInfo.type=== ERROR && (<div className='gor-login-auth-error'><div className='gor-login-error'></div>
                     {this.props.loginInfo.msg}
                  </div>)}
                 <section>
-                <div className={'gor-login-field'+(this.props.userNameCheck.type === ERROR||this.props.loginInfo.type === ERROR?' gor-input-error':' gor-input-ok')} ref={node => { this.userField = node }}>
-				        <div className={this.props.userNameCheck.type === ERROR||this.props.loginInfo.type === ERROR?'gor-login-user-error':'gor-login-user'}></div>
+                <div className={'gor-login-field'+(this.props.userNameCheck.type=== ERROR||this.props.loginInfo.type=== ERROR?' gor-input-error':' gor-input-ok')} ref={node=> { this.userField=node }}>
+				        <div className={this.props.userNameCheck.type=== ERROR||this.props.loginInfo.type=== ERROR?'gor-login-user-error':'gor-login-user'}></div>
                         <input className="field" onInput={this._typing.bind(this,1)} onBlur={this._checkUser.bind(this)} type="text" id="username"  
                         placeholder={this.props.intlMessages["login.form.username"]}
-                         ref={node => { this.userName = node }}/>                    
+                         ref={node=> { this.userName=node }}/>                    
                 </div>
     
                 
                 </section>
-                {this.props.userNameCheck?(this.props.userNameCheck.type === ERROR?(
+                {this.props.userNameCheck?(this.props.userNameCheck.type=== ERROR?(
                     <div className='gor-login-usr-error' >
                     <FormattedMessage id='login.butler.error.username' 
                         defaultMessage="Please enter your username" description="Text for missing username error"/>
                     </div>):''):''
                 }
                 <section>
-                <div className={'gor-login-field'+(this.props.passWordCheck.type === ERROR||this.props.loginInfo.type === ERROR?' gor-input-error':' gor-input-ok')}  ref={node => { this.passField = node }}>
-                        <div className={this.props.passWordCheck.type === ERROR||this.props.loginInfo.type === ERROR?'gor-login-password-error':'gor-login-password'}></div>
+                <div className={'gor-login-field'+(this.props.passWordCheck.type=== ERROR||this.props.loginInfo.type=== ERROR?' gor-input-error':' gor-input-ok')}  ref={node=> { this.passField=node }}>
+                        <div className={this.props.passWordCheck.type=== ERROR||this.props.loginInfo.type=== ERROR?'gor-login-password-error':'gor-login-password'}></div>
                         <input className='field' onInput={this._typing.bind(this,2)} onBlur={this._checkPass.bind(this)} type="password" id="password" 
                         placeholder={this.props.intlMessages["login.form.password"]}
-                         ref={node => { this.password = node }}/>
+                         ref={node=> { this.password=node }}/>
                 </div>
                 </section>
-                {this.props.passWordCheck?(this.props.passWordCheck.type === ERROR?(
+                {this.props.passWordCheck?(this.props.passWordCheck.type=== ERROR?(
                     <div className='gor-login-usr-error' >
                     <FormattedMessage id='login.butler.error.password' 
                         defaultMessage="Please enter your password" description="Text for missing password error"/>
