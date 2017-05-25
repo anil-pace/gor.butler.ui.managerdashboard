@@ -425,11 +425,6 @@
    "defaultMessage": "進行中"
  },
  {
-   "id": "stringConfig.abandoned",
-   "description": "Unfulfillable",
-   "defaultMessage": "不可供發貨"
- },
- {
    "id": "stringConfig.manual",
    "description": "Manual",
    "defaultMessage": "手動"

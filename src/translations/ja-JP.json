@@ -345,11 +345,6 @@
    "defaultMessage": "処理中"
  },
  {
-   "id": "stringConfig.abandoned",
-   "description": "Text to show abandoned",
-   "defaultMessage": "放棄"
- },
- {
    "id": "stringConfig.manual",
    "description": "Text to show manual",
    "defaultMessage": "マニュアル"

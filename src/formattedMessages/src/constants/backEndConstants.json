@@ -90,11 +90,6 @@
     "defaultMessage": "In Progress"
   },
   {
-    "id": "stringConfig.abandoned",
-    "description": "Text to show abandoned",
-    "defaultMessage": "Abandoned"
-  },
-  {
     "id": "stringConfig.manual",
     "description": "Text to show manual",
     "defaultMessage": "Manual"

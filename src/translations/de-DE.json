@@ -345,11 +345,6 @@
    "defaultMessage": "In Bearbeitung"
  },
  {
-   "id": "stringConfig.abandoned",
-   "description": "Text to show abandoned",
-   "defaultMessage": "Stillgelegt"
- },
- {
    "id": "stringConfig.manual",
    "description": "Text to show manual",
    "defaultMessage": "Manuell"
