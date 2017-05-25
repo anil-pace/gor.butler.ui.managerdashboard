@@ -288,7 +288,7 @@ class UsersTab extends React.Component {
                                             className={this.props.userFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
                                             onClick={this.props.showTableFilter.bind(this)}>
                                             <div className="gor-manage-task"/>
-                                            <FormattedMessage id="order.table.filterLabel" description="button label for filter"
+                                            <FormattedMessage id="gor.filter.filterLabel" description="button label for filter"
                                                               defaultMessage="Filter data"/>
                                         </button>
                                     </div>
