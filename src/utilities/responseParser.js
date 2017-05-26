@@ -15,6 +15,7 @@ import {endSession} from './endSession';
 export function ResponseParse(store,res)
 {
 
+		
 		if(res.alert_data)
 		{
 			endSession(store);
@@ -132,5 +133,6 @@ export function ResponseParse(store,res)
 				store.dispatch(setWavesFilterSpinner(false));
 				break;	   
 			default:
+				console.log("in Response Parser");
 	    }
 }  

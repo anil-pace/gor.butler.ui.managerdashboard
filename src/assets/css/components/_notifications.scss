@@ -7,7 +7,7 @@
     .resultOverlay{
     		position: absolute;
 		    display: none;
-		    z-index: 1;
+		    z-index: 2;
 		    left: -70px;
 		    min-width: 315px;
 		    border-radius: 4px;
@@ -32,8 +32,10 @@
 		    }
 		    .searchBox{
 		    	padding: 10px 5px;
-		    	width:96%;
+		    	width:72%;
 			    border: 0;
+			    font-size:13px;
+			    color: #7C7C7C;
 
 		    }
 		    .searchBoxWrap{
@@ -43,6 +45,15 @@
 		    	width:100%;
 		    	border: 1px solid #658FDF;
 		    	border-radius:2px;
+		    	.paneSearch{
+		    		padding: 10px;
+				    color: #fff;
+				    background: #4D5055;
+				    border-radius: 3px;
+				    float: right;
+				    font-size:13px;
+				    cursor:pointer;
+		    	}
 		    }
 		    
     	}
@@ -128,7 +139,11 @@
 		    color: #fff;
 		    display: block;
 		    background: #F62631;
+		    &.read{
+    		display:none;
     	}
+    	}
+
     }
 }
 /*Styles for View All notifications Table*/

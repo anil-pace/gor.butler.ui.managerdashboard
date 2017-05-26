@@ -2,7 +2,8 @@ import { combineReducers } from 'redux';
 import {headerData}  from './reducers/headerReducer'
 import {authLogin}  from './reducers/loginReducer'
 import {spinner}  from './reducers/spinnerReducer'
-import {recieveSocketActions}  from './reducers/socketReducer'
+import {recieveSocketActions}  from './reducers/socketReducer';
+import {notificationSocketReducer} from './reducers/notificationSocketReducer';
 import { routerReducer as routing } from 'react-router-redux';
 import { intlReducer } from 'react-intl-redux';
 import {performanceWidget}  from './reducers/performanceWidgetReducer'
@@ -37,6 +38,7 @@ import {emergency} from './reducers/emergencyReducer';
 import {utilityValidations} from './reducers/utilityReducer';
 import {overviewDetails} from './reducers/overviewReducer';
 import {configReducer} from './reducers/configReducer';
+import {notificationReducer} from './reducers/notificationReducer'
 
 const rootReducer = combineReducers({
   intl:intlReducer,
@@ -44,6 +46,7 @@ const rootReducer = combineReducers({
   authLogin,
   routing,
   recieveSocketActions,
+  notificationSocketReducer,
   butlersInfo,
   chargerInfo,
   modals: modalReducer,
@@ -75,7 +78,8 @@ const rootReducer = combineReducers({
   filterInfo,
   emergency,
   utilityValidations,
-  overviewDetails,config:configReducer
+  overviewDetails,config:configReducer,
+  notificationReducer
    })
 
 export default rootReducer

@@ -24,6 +24,16 @@ export const DATA_SUBSCRIPTION_PACKET="DATA_SUBSCRIPTION_PACKET";
 export const SET_DEFAULT_RANGE="SET_DEFAULT_RANGE";
 export const TEXTBOX_STATUS="TEXTBOX_STATUS";
 
+/*Constants for Notification Web Sockets*/
+export const WS_NOTIFICATION_CONNECT = "WS_NOTIFICATION_CONNECT";
+export const WS_NOTIFICATION_CONNECTED = "WS_NOTIFICATION_CONNECTED";
+export const WS_NOTIFICATION_DISCONNECT = "WS_NOTIFICATION_DISCONNECT";
+export const WS_NOTIFICATION_ONMESSAGE = "WS_NOTIFICATION_ONMESSAGE";
+export const WS_NOTIFICATION_ONSEND = "WS_NOTIFICATION_ONSEND";
+export const WS_NOTIFICATION_INIT = "WS_NOTIFICATION_INIT";
+export const WS_NOTIFICATION_END="WS_NOTIFICATION_END";
+
+
 /* Header constants */
 export const GET_OVERVIEW="get_overview";
 export const GET_SYSTEM="get_system";
@@ -391,6 +401,7 @@ export const GET='GET';
 export const POST='POST';
 export const PUT='PUT';
 export const DELETE='DELETE';
+export const PATCH = 'PATCH';
 export const APP_JSON='application/json';
 export const GOR_RISK='gor-risk';
 export const GOR_DELAY='gor-breach';
@@ -542,3 +553,9 @@ export const SINGLE="Single"
 
 export const GET_CONFIGS="GET_CONFIGS"
 export const RECEIVE_CONFIGS="RECEIVE_CONFIGS"
+
+/*Constants for Notifications*/
+export const SEARCHED_NOTIFICATIONS_DATA = "SEARCHED_NOTIFICATIONS_DATA";
+export const WS_NOTIFICATIONS_DATA = "WS_NOTIFICATIONS_DATA";
+export const SEND_READ_INTIMATION = "SEND_READ_INTIMATION";
+export const RESET_NOTIFICATION_DATA = "RESET_NOTIFICATION_DATA"

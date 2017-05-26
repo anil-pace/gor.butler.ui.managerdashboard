@@ -71,6 +71,9 @@ const ajaxMiddleware = (function(){
     if(params.contentType !== false){
       httpRequest.setRequestHeader('Content-Type', params.contentType || "text/html");
     }
+    if(params.withCredentials){
+      httpRequest.withCredentials = true;
+    }
     httpRequest.setRequestHeader('Accept', params.accept || "text/html");
     if(params.cause!==AUTH_LOGIN)
     {
