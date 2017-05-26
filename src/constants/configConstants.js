@@ -1,7 +1,7 @@
 export const BASE_URL='localhost';
 export const PORT='8888';
-export const PROTOCOL='http://';
-export const WS_PROTOCOL="ws://";
+export const PROTOCOL='https://';
+export const WS_PROTOCOL="wss://";
 export const WS_URL=WS_PROTOCOL+BASE_URL+"/manager_api/wss"
 export const LOGIN_URL=PROTOCOL+BASE_URL+"/api/auth/token"
 export const API_URL=PROTOCOL+BASE_URL+"/api";
