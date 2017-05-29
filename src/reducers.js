@@ -37,6 +37,7 @@ import {emergency} from './reducers/emergencyReducer';
 import {utilityValidations} from './reducers/utilityReducer';
 import {overviewDetails} from './reducers/overviewReducer';
 import {configReducer} from './reducers/configReducer';
+import {reportsDetail} from './reducers/reportsDetailReducer';
 
 const rootReducer = combineReducers({
   intl:intlReducer,
@@ -75,7 +76,7 @@ const rootReducer = combineReducers({
   filterInfo,
   emergency,
   utilityValidations,
-  overviewDetails,config:configReducer
+  overviewDetails,config:configReducer,reportsDetail
    })
 
 export default rootReducer
