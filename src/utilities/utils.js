@@ -29,9 +29,7 @@ import {SPECIFIC_SKU_ID,SPECIFIC_LOCATION_ID,AUDIT_TASK_ID}from '../constants/fr
  	var a=document.createElement("a");
  	a.style="display: none";
  	document.body.appendChild(a);
-
- 	var json=JSON.stringify(data),
- 	blob=new Blob([json], {type: "octet/stream"}),
+ 	var blob=new Blob([data], {type: "octet/stream"}),
  	url=window.URL.createObjectURL(blob);
  	a.href=url;
  	a.download=fileName;
