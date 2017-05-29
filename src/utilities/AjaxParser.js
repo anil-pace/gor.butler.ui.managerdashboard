@@ -14,20 +14,21 @@ import {ERROR,AUTH_LOGIN, ADD_USER, RECIEVE_TIME_OFFSET,CHECK_ID,DELETE_USER,GET
 	DELETE_AUDIT,AUDIT_RESOLVE_LINES,AUDIT_RESOLVE_CONFIRMED, VALIDATE_SKU_ID,PAUSE_OPERATION,
 	RESUME_OPERATION,CONFIRM_SAFETY,CHECK_SAFETY,RECEIVE_SHIFT_START_TIME,ITEM_RECALLED,GR_REPORT_RESPONSE,ITEM_RECALLED_DATA,
 MASTER_FILE_UPLOAD,GET_MAX_FILE_SIZE,GET_CONFIGS,
-UPLOAD_HISTORY} from '../constants/frontEndConstants';
+UPLOAD_HISTORY,GENERATE_REPORT} from '../constants/frontEndConstants';
 
 import {BUTLER_UI,CODE_UE002,BUTLER_SUPERVISOR,CODE_E027} from '../constants/backEndConstants'
 import {UE002,E028,E029,MODE_REQUESTED,TYPE_SUCCESS,AS001,ERR_API,ERR_USR,ERR_RES,ERR_AUDIT,AS00A,WRONG_CRED,
 E051,ES} from '../constants/messageConstants';
 import {ShowError} from './showError';
 import {endSession} from './endSession';
-import {setResolveAuditSpinner,setSafetySpinner,setInventoryReportSpinner} from '../actions/spinnerAction';
+import {setResolveAuditSpinner,setSafetySpinner,setInventoryReportSpinner,setGenerateReportSpinner} from '../actions/spinnerAction';
 import {statusToString} from './statusToString';
 import {INVALID_SKUID} from '../constants/messageConstants';
 import {validateInvoiceID,
 	uploadMasterDataProcessing,
 	uploadMasterDataSuccess,
 uploadMasterDataHistory,updateMaxFileSize} from '../actions/utilityActions';
+import {reportGenerated} from './../actions/reportsActions'
 export function AjaxParse(store,res,cause,status)
 {
 	let stringInfo={};
@@ -288,7 +289,11 @@ export function AjaxParse(store,res,cause,status)
 		  case GET_CONFIGS:
 		  	store.dispatch(recieveConfigurations(res));
 		  	break;
-		  	
+
+		  case GENERATE_REPORT:
+		  	store.dispatch(reportGenerated(res))
+			  store.dispatch(setGenerateReportSpinner(false));
+		  	break;
 		default:
 			ShowError(store,cause,status);
 	 }

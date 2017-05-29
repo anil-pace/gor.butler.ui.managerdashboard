@@ -968,7 +968,7 @@ body {
 }
 
 .gor-tabs .gorTab .gor-main-block {
-  width: 150px;
+  width: 139px;
   padding-left: 20px;
   height: 62px;
   display: table-cell;
@@ -6074,4 +6074,121 @@ button:disabled {
 .gor-csvUploadWrap .gor-csvUpload {
   opacity: 0;
   cursor: pointer;
+}
+
+.download-options-wrapper {
+  float: right;
+  padding-top: 16px;
+  padding-right: 40px;
+}
+
+.gor-report-download-dropDown-wrap {
+  width: 40%;
+  float: right;
+  padding-top: 16px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+.gor-report-download-btn {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  min-width: 113px;
+  height: 35px;
+  font-size: 14px;
+  background: #f36f36;
+  color: #ffffff;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.reportsHeader {
+  height: 68px;
+  background: #FFFFFF;
+  box-shadow: inset 0 5px 5px -5px #888888;
+  font-family: "source sans pro";
+  font-size: 20px;
+  color: #000000;
+}
+
+.reportHeaderTextWrap {
+  width: 40%;
+  font-weight: bold;
+  color: #000000;
+  float: left;
+  vertical-align: middle;
+  padding-top: 6px;
+  padding-left: 20px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+.reportsHeaderText {
+  display: inline-block;
+  vertical-align: sub;
+  padding-top: 18px;
+}
+
+.report-sidebar-wrap {
+  height: 614px;
+  background-color: #ffffff;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+.report-sidebar-open {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-right: 2px solid darkgrey;
+}
+
+.gor-report-download-input-wrap {
+  text-align: left;
+  padding: 0.625rem;
+  width: 100%;
+  background-color: #FFFFFF;
+  border-radius: 3px;
+  display: block;
+  border: 1px solid #AAAAAA;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+.gor-report-download-input-wrap:hover {
+  border: 1px solid #666666;
+}
+
+.gor-report-download-input-wrap.gor-input-error {
+  border: 1px solid #EC1C24;
+}
+
+.reportSidebarHeader {
+  padding: 25px;
+  border-bottom: 1px solid darkgrey;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.reportSidebarFormContainer {
+  padding: 25px;
+  border-bottom: 1px solid darkgrey;
+}
+
+.reportsSidebarCategoryContainer {
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.reportsSidebarCategoryContainer .categoryAll {
+  width: 50%;
+  float: left;
+}
+
+.reportsSidebarCategoryContainer .categorySku {
+  width: 50%;
+  float: right;
+}
+
+.reportsSidebarSkuContainer {
+  padding-top: 25px;
+  padding-bottom: 25px;
 }
