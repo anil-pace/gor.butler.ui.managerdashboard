@@ -17,7 +17,7 @@
  */
 
 import React from 'react'
-require("./../../../library/table/css/table.css")
+import "./../../../library/table/css/table.css"
 export class GTable extends React.Component{
     constructor(props){
         super(props)
