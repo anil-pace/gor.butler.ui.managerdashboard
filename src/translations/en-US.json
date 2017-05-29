@@ -419,7 +419,7 @@
     "filepath": "./src/components/subtab/subTabs.js"
   },
   {
-    "id": "gor-filter-filterLabel",
+    "id": "gor.filter.filterLabel",
     "description": "label for filter",
     "defaultMessage": "Filter data",
     "filepath": "./src/components/tableFilter/filter.js"
@@ -1279,7 +1279,7 @@
     "filepath": "./src/containers/auditTab.js"
   },
   {
-    "id": "audit.table.filterLabel",
+    "id": "gor.filter.filterLabel",
     "description": "button label for filter",
     "defaultMessage": "Filter data",
     "filepath": "./src/containers/auditTab.js"
@@ -2121,7 +2121,7 @@
     "filepath": "./src/containers/orderTab/orderListTab.js"
   },
   {
-    "id": "order.table.filterLabel",
+    "id": "gor.filter.filterLabel",
     "description": "button label for filter",
     "defaultMessage": "Filter data",
     "filepath": "./src/containers/orderTab/orderListTab.js"
@@ -2323,7 +2323,7 @@
     "filepath": "./src/containers/orderTab/waveTab.js"
   },
   {
-    "id": "order.table.filterLabel",
+    "id": "gor.filter.filterLabel",
     "description": "button label for filter",
     "defaultMessage": "Filter data",
     "filepath": "./src/containers/orderTab/waveTab.js"
@@ -2763,7 +2763,7 @@
     "filepath": "./src/containers/systemTabs/butlerbotTab.js"
   },
   {
-    "id": "order.table.filterLabel",
+    "id": "gor.filter.filterLabel",
     "description": "button label for filter",
     "defaultMessage": "Filter data",
     "filepath": "./src/containers/systemTabs/butlerbotTab.js"
@@ -2922,7 +2922,7 @@
     "filepath": "./src/containers/systemTabs/chargingStationsTab.js"
   },
   {
-    "id": "order.table.filterLabel",
+    "id": "gor.filter.filterLabel",
     "description": "button label for filter",
     "defaultMessage": "Filter data",
     "filepath": "./src/containers/systemTabs/chargingStationsTab.js"
@@ -3132,7 +3132,7 @@
     "filepath": "./src/containers/systemTabs/ppsTab.js"
   },
   {
-    "id": "order.table.filterLabel",
+    "id": "gor.filter.filterLabel",
     "description": "button label for filter",
     "defaultMessage": "Filter data",
     "filepath": "./src/containers/systemTabs/ppsTab.js"
@@ -3750,7 +3750,7 @@
     "filepath": "./src/containers/userTab/usersTab.js"
   },
   {
-    "id": "order.table.filterLabel",
+    "id": "gor.filter.filterLabel",
     "description": "button label for filter",
     "defaultMessage": "Filter data",
     "filepath": "./src/containers/userTab/usersTab.js"

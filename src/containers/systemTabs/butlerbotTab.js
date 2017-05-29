@@ -356,7 +356,7 @@ class ButlerBot extends React.Component {
                             className={this.props.botFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
                             onClick={this._setFilter.bind(this)}>
                             <div className="gor-manage-task"/>
-                            <FormattedMessage id="order.table.filterLabel" description="button label for filter"
+                            <FormattedMessage id="gor.filter.filterLabel" description="button label for filter"
                             defaultMessage="Filter data"/>
                             </button>
                             </div>
