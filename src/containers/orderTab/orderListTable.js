@@ -306,7 +306,7 @@ class OrderListTable extends React.Component {
                                     <div className="gorToolHeaderSubText">
                                         <FormattedMessage id="orderlist.totalCompletedOrder"
                                                           description='totalCompletedOrder header ordertable'
-                                                          defaultMessage='Avg {totalCompletedOrder} orders/hr'
+                                                          defaultMessage='{totalCompletedOrder} orders completed'
                                                           values={{totalCompletedOrder: this.props.totalCompletedOrder ? this.props.totalCompletedOrder : '0'}}/>
                                     </div>
                                 </div>
@@ -328,7 +328,7 @@ class OrderListTable extends React.Component {
                                     <div className="gorToolHeaderSubText">
                                         <FormattedMessage id="orderlist.itemsPerOrder"
                                                           description='itemsPerOrder header ordertable'
-                                                          defaultMessage='Avg {itemsPerOrder} items/hr'
+                                                          defaultMessage='Avg {itemsPerOrder} items/order'
                                                           values={{itemsPerOrder: this.props.itemsPerOrder ? this.props.itemsPerOrder.toFixed(2) : '0'}}/>
                                     </div>
                                 </div>

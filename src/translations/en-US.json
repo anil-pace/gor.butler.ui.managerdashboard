@@ -2261,7 +2261,7 @@
   {
     "id": "orderlist.totalCompletedOrder",
     "description": "totalCompletedOrder header ordertable",
-    "defaultMessage": "Avg {totalCompletedOrder} orders/hr",
+    "defaultMessage": "{totalCompletedOrder} orders completed",
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
@@ -2273,7 +2273,7 @@
   {
     "id": "orderlist.itemsPerOrder",
     "description": "itemsPerOrder header ordertable",
-    "defaultMessage": "Avg {itemsPerOrder} items/hr",
+    "defaultMessage": "Avg {itemsPerOrder} items/order",
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
