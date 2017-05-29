@@ -21,10 +21,17 @@ export class GTableHeaderCell extends React.Component {
     }
 
     render() {
-        let header = this.props.header||{}
-        return <div style={header.width ? {flex: '1 0 ' + header.width + "%"} : {}} className={["cell", (header.sortDir || "")].join(" ")} {...this.props}>
+        let props_to_be_passed = Object.assign({}, this.props)
+        let header = props_to_be_passed.header || {}
+        delete props_to_be_passed.header
+        return <div style={header.width ? {flex: '1 0 ' + header.width + "%"} : {}}
+                    className={["cell", (header.sortDir || "")].join(" ")} {...props_to_be_passed}>
             {this.props.children}
 
         </div>
     }
+}
+
+GTableHeaderCell.propTypes = {
+    header: React.PropTypes.object
 }
