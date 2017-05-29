@@ -1377,7 +1377,7 @@
  {
    "id": "health.ChargingStation",
    "description": "Charging Stations health",
-   "defaultMessage": "充電所"
+   "defaultMessage": "Charging Stations"
  },
  {
    "id": "systemHealth.dropdown",
@@ -1617,7 +1617,7 @@
  {
    "id": "ChargingStations.table.heading",
    "description": "Heading for ChargingStations",
-   "defaultMessage": "充電所"
+   "defaultMessage": "Charging Stations"
  },
  {
    "id": "ChargingStationsTable.stationID.heading",
@@ -2388,5 +2388,122 @@
    "id": "auditdetail.auditPendingApp.prefix",
    "description": "auditPending status",
    "defaultMessage": "問題発見"
- }
+ },
+ {
+    "id": "stringConfig.audit_reaudited",
+    "description": "Text for audit reaudited status",
+    "defaultMessage": "再監査",
+    "filepath": "./src/constants/backEndConstants.js"
+  },
+  {
+    "id": "auditdetail.auditReaudited.prefix",
+    "defaultMessage": "再監査"
+  },
+  {
+    "id": "audit.viewIssues.heading",
+    "description": "Heading for view issues audit",
+    "defaultMessage": "問題を表示する"
+  },
+  {
+    "id": "audit.viewIssues.heading",
+    "description": "Heading for view issues audit",
+    "defaultMessage": "問題を表示する"
+  },
+  {
+    "id": "commonDataTable.viewIssues.button",
+    "description": "viewIssues button",
+    "defaultMessage": "問題を表示する"
+  },
+  {
+    "id": "widget.audit.heading.value",
+    "description": "Total Items Audited",
+    "defaultMessage": "なし"
+  },
+  {
+    "id": "widget.pick.none",
+    "description": "Text for no orders",
+    "defaultMessage": "なし"
+  },
+  {
+    "id": "widget.put.heading.value",
+    "description": "Total Items Stocked",
+    "defaultMessage": "なし"
+  },
+  {
+    "id": "overviewStatus.tab.default",
+    "description": "default overview Status",
+    "defaultMessage": "なし"
+  },
+  {
+    "id": "audits.validateSKU",
+    "description": "Text for validate sku button",
+    "defaultMessage": "検証"
+  },
+  {
+    "id": "audit.dropdown.heading",
+    "description": "Text for dropdown heading",
+    "defaultMessage": "ボックスIDを選択（オプション）"
+  },
+  {
+    "id": "gor.filter.filterLabel",
+    "description": "button label for filter",
+    "defaultMessage": "フィルタデータ"
+  },
+  {
+    "id": "audit.tokenfield.STATUS",
+    "defaultMessage": "状態"
+  },
+  {
+    "id": "audit.table.STATUS",
+    "description": "STATUS for audit",
+    "defaultMessage": "状態"
+  },
+  {
+    "id": "resolveAudit.table.STATUS",
+    "description": "status Column",
+    "defaultMessage": "状態"
+  },
+  {
+    "id": "resolveAudit.table.STATUS",
+    "description": "status Column",
+    "defaultMessage": "状態"
+  },
+  {
+    "id": "order.token.status",
+    "defaultMessage": "状態"
+  },
+  {
+    "id": "orderList.table.status",
+    "description": "Status for orders",
+    "defaultMessage": "状態"
+  },
+  {
+    "id": "waves.table.status",
+    "description": "Status for waves",
+    "defaultMessage": "状態"
+  },
+  {
+    "id": "butletbot.tokenfield.STATUS",
+    "defaultMessage": "状態"
+  },
+   {
+    "id": "butlerBot.table.status",
+    "description": "Status for butlerbot",
+    "defaultMessage": "状態"
+  },
+  {
+    "id": "ChargingStations.table.STATUS",
+    "description": "STATUS for ChargingStations",
+    "defaultMessage": "状態"
+  },
+  {
+    "id": "PPS.table.status",
+    "description": "Status for PPS",
+    "defaultMessage": "状態"
+  },
+  {
+    "id": "user.table.status",
+    "description": "Users Status",
+    "defaultMessage": "状態"
+  }
 ]

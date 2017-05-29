@@ -1935,7 +1935,7 @@
    "defaultMessage": "重新整理資料"
  },
  {
-   "id": "order.table.filterLabel",
+   "id": "gor.filter.filterLabel",
    "description": "Filter Data",
    "defaultMessage": "篩選資料"
  },
