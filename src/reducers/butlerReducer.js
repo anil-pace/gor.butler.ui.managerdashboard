@@ -10,9 +10,9 @@ export  function butlersInfo(state={},action){
 	  case BUTLERS_DATA:
          var res;
          res=action.data;
-         var butlersKey = {"active" : 0, "inactive": 0};
+         var butlersKey={"active" : 0, "inactive": 0};
             if(res.aggregate_data) {  
-              butlersKey = {
+              butlersKey={
                "active" : Number(action.data.aggregate_data.active_butlers),
                "inactive": Number(action.data.aggregate_data.inactive_butlers)
              

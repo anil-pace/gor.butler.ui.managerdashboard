@@ -1,6 +1,6 @@
-import {ID_DATA,NAME_DATA,PASSWORD_DATA,INFO_RESET,ERROR,SUCCESS,INFO,HIDE,
-  NOTIFY_PASS,NOTIFY_HIDE,NOTIFY_FAIL,NOTIFY_INFO,PASS_DATA,ID_MAP,SET_ROLE,
-  NOTIFY_DELETE,DELETION,GOR_PASS,GOR_FAIL,GOR_INFO,TICK_WHITE,REMOVE_ICON,
+import {ID_DATA,NAME_DATA,PASSWORD_DATA,INFO_RESET,ERROR,HIDE,
+  NOTIFY_PASS,NOTIFY_HIDE,NOTIFY_FAIL,NOTIFY_INFO,ID_MAP,SET_ROLE,
+  NOTIFY_DELETE,GOR_PASS,GOR_FAIL,GOR_INFO,TICK_WHITE,REMOVE_ICON,
   ERROR_WHITE,LOGIN_ERROR,SKU_DATA,LOC_DATA} from '../constants/frontEndConstants';
 
 /**
@@ -20,28 +20,20 @@ export  function appInfo(state={},action){
           return Object.assign({}, state, { 
             "loginInfo" : loginInfo
           })
-          break;
-
     case ID_DATA:
           return Object.assign({}, state, { 
             "idInfo" : action.data
-          })
-          break;
-    
+          })          
     case NAME_DATA:
 
           return Object.assign({}, state, { 
             "nameInfo":action.data     
           })
-          break;
-
     case PASSWORD_DATA:
 
           return Object.assign({}, state, { 
             "passwordInfo":action.data
           })
-          break;
-
     case INFO_RESET:
           return Object.assign({}, state, { 
             "idInfo" : null,
@@ -50,8 +42,7 @@ export  function appInfo(state={},action){
             "loginInfo":null,
             "roleSet":null,
           })
-          break;
-
+          
     case NOTIFY_PASS:
          let notifyMsg=action.data, notifyPass;
          notifyPass={
@@ -62,8 +53,6 @@ export  function appInfo(state={},action){
          return Object.assign({}, state, { 
             "notifyInfo":notifyPass
          })
-         break;
-    
     case NOTIFY_DELETE:
          let notifyDel=action.data, notifyDelInfo;
          notifyDelInfo={
@@ -74,8 +63,6 @@ export  function appInfo(state={},action){
          return Object.assign({}, state, { 
             "notifyInfo":notifyDelInfo
          })
-         break;
-
     case NOTIFY_FAIL:
          let notifyErr=action.data, notifyErrInfo;
          notifyErrInfo={
@@ -86,8 +73,6 @@ export  function appInfo(state={},action){
          return Object.assign({}, state, { 
             "notifyInfo":notifyErrInfo
          })
-         break;
-
     case NOTIFY_INFO:
          let notifyInfoMsg=action.data, notifyInfo;
          notifyInfo={
@@ -98,8 +83,6 @@ export  function appInfo(state={},action){
          return Object.assign({}, state, { 
             "notifyInfo":notifyInfo
          })
-         break;
-
     case NOTIFY_HIDE:
          let notifyHide;
          notifyHide={
@@ -108,35 +91,26 @@ export  function appInfo(state={},action){
          return Object.assign({}, state, { 
             "notifyInfo":notifyHide
          })
-         break;
-
     case ID_MAP:
         let roleList;
         roleList=action.data;
          return Object.assign({}, state, { 
             "roleList":roleList
          })
-        break;
-
     case SET_ROLE:
         let roleSet;
         roleSet=action.data;
          return Object.assign({}, state, { 
             "roleSet":roleSet
-         })    
-
+         })
     case SKU_DATA:
           return Object.assign({}, state, { 
             "skuInfo" : action.data
           })
-          break;
-    
     case LOC_DATA:
           return Object.assign({}, state, { 
             "locInfo":action.data     
           })
-          break;
-
     default:
       return state
   }

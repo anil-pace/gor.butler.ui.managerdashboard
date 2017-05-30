@@ -3,7 +3,6 @@
  * This will be switched based on tab click
  */
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import PPStable from './PPStable';
 import {connect} from 'react-redux';
 import {changePPSmode} from '../../actions/ppsModeChangeAction'
@@ -44,7 +43,7 @@ import {PPS_MODE_CHANGE_URL, API_URL} from '../../constants/configConstants';
 import {PPS_MODE_CHANGE, APP_JSON, PUT} from '../../constants/frontEndConstants';
 
 //Mesages for internationalization
-const messages = defineMessages({
+const messages=defineMessages({
     namePrefix: {
         id: "ppsDetail.name.prefix",
         description: "prefix for pps id in ppsDetail",
@@ -89,21 +88,21 @@ class PPS extends React.Component {
      */
     _refreshList(query) {
         this.props.setPpsSpinner(true)
-        let filterSubsData = {}
+        let filterSubsData={}
         if (query.operator) {
             let operator_assigned_query=query.operator.split(" ")
             operator_assigned_query=operator_assigned_query.filter(function(word){ return !!word})
-            filterSubsData["operators_assigned"] = operator_assigned_query.length>1?["=",operator_assigned_query]:["=",operator_assigned_query.join("").trim()];
+            filterSubsData["operators_assigned"]=operator_assigned_query.length>1?["=",operator_assigned_query]:["=",operator_assigned_query.join("").trim()];
         }
 
         if (query.pps_id) {
-            filterSubsData["pps_id"] = ['=',query.pps_id]
+            filterSubsData["pps_id"]=['=',query.pps_id]
         }
         if (query.status) {
-            filterSubsData["pps_status"] = ['in',query.status.constructor===Array?query.status:[query.status]]
+            filterSubsData["pps_status"]=['in',query.status.constructor===Array?query.status:[query.status]]
         }
         if (query.mode) {
-            filterSubsData["current_task"] =['in',query.mode.constructor===Array?query.mode:[query.mode]]
+            filterSubsData["current_task"]=['in',query.mode.constructor===Array?query.mode:[query.mode]]
         }
 
         if(query.minRange||query.maxRange){
@@ -118,14 +117,14 @@ class PPS extends React.Component {
             this.props.filterApplied(false);
         }
 
-        let updatedWsSubscription = this.props.wsSubscriptionData;
-        updatedWsSubscription["pps"].data[0].details["filter_params"] = filterSubsData;
+        let updatedWsSubscription=this.props.wsSubscriptionData;
+        updatedWsSubscription["pps"].data[0].details["filter_params"]=filterSubsData;
         this.props.initDataSentCall(updatedWsSubscription["pps"])
         this.props.updateSubscriptionPacket(updatedWsSubscription);
         this.props.ppsfilterState({
             tokenSelected: {
-                "STATUS": query.status ? query.status.constructor === Array ? query.status : [query.status] : ["all"],
-                "MODE": query.mode ? query.mode.constructor === Array ? query.mode : [query.mode] : ["all"]
+                "STATUS": query.status ? query.status.constructor=== Array ? query.status : [query.status] : ["all"],
+                "MODE": query.mode ? query.mode.constructor=== Array ? query.mode : [query.mode] : ["all"]
             },
             searchQuery: {
                 "PPS ID": query.pps_id || '',
@@ -146,64 +145,64 @@ class PPS extends React.Component {
 
     _processPPSData() {
         //TODO: codes need to be replaced after checking with backend
-        var PPSData = [], detail = {}, ppsId, performance, totalUser = 0;
-        var nProps = this;
-        var data = nProps.props.PPSDetail.PPStypeDetail;
+        var PPSData=[], detail={}, ppsId, performance, totalUser=0;
+        var nProps=this;
+        var data=nProps.props.PPSDetail.PPStypeDetail;
         let PPS, ON, OFF, PERFORMANCE;
-        let pick = nProps.context.intl.formatMessage(stringConfig.pick);
-        let put = nProps.context.intl.formatMessage(stringConfig.put);
-        let audit = nProps.context.intl.formatMessage(stringConfig.audit);
-        var currentTask = {"pick": pick, "put": put, "audit": audit};
-        var priStatus = {"on": 1, "off": 2};
+        let pick=nProps.context.intl.formatMessage(stringConfig.pick);
+        let put=nProps.context.intl.formatMessage(stringConfig.put);
+        let audit=nProps.context.intl.formatMessage(stringConfig.audit);
+        var currentTask={"pick": pick, "put": put, "audit": audit};
+        var priStatus={"on": 1, "off": 2};
 
-        detail.totalOperator = 0;
-        for (var i = data.length - 1; i >= 0; i--) {
-            detail = {};
-            ppsId = data[i].pps_id;
-            performance = (data[i].performance < 0 ? 0 : data[i].performance);
-            PPS = nProps.context.intl.formatMessage(messages.namePrefix, {"ppsId": ppsId});
-            ON = nProps.context.intl.formatMessage(stringConfig.on);
-            OFF = nProps.context.intl.formatMessage(stringConfig.off);
-            PERFORMANCE = nProps.context.intl.formatMessage(messages.perfPrefix, {"performance": performance ? performance : "0"});
-            detail.id = PPS;
-            detail.ppsId = ppsId;
-            if (data[i].pps_status === "on") {
-                detail.status = ON;
-                detail.statusPriority = priStatus[data[i].pps_status];
+        detail.totalOperator=0;
+        for (var i=data.length - 1; i >= 0; i--) {
+            detail={};
+            ppsId=data[i].pps_id;
+            performance=(data[i].performance < 0 ? 0 : data[i].performance);
+            PPS=nProps.context.intl.formatMessage(messages.namePrefix, {"ppsId": ppsId});
+            ON=nProps.context.intl.formatMessage(stringConfig.on);
+            OFF=nProps.context.intl.formatMessage(stringConfig.off);
+            PERFORMANCE=nProps.context.intl.formatMessage(messages.perfPrefix, {"performance": performance ? performance : "0"});
+            detail.id=PPS;
+            detail.ppsId=ppsId;
+            if (data[i].pps_status=== "on") {
+                detail.status=ON;
+                detail.statusPriority=priStatus[data[i].pps_status];
             }
             else {
-                detail.status = OFF;
-                detail.statusPriority = 1;
+                detail.status=OFF;
+                detail.statusPriority=1;
             }
-            detail.statusClass = data[i].pps_status;
-            detail.operatingMode = currentTask[data[i].current_task];
-            detail.operatingModeClass = data[i].current_task;
-            detail.performance = PERFORMANCE;///  orders /items
-            detail.ppsThroughput = (data[i].performance < 0 ? 0 : data[i].performance);
-            if (data[i].operators_assigned === null) {
-                detail.operatorAssigned = "--";
+            detail.statusClass=data[i].pps_status;
+            detail.operatingMode=currentTask[data[i].current_task];
+            detail.operatingModeClass=data[i].current_task;
+            detail.performance=PERFORMANCE;///  orders /items
+            detail.ppsThroughput=(data[i].performance < 0 ? 0 : data[i].performance);
+            if (data[i].operators_assigned=== null) {
+                detail.operatorAssigned="--";
             }
             else {
                 var userFirstLast;
-                totalUser = totalUser + data[i].operators_assigned.length;
-                for (var j = data[i].operators_assigned.length - 1; j >= 0; j--) {
+                totalUser=totalUser + data[i].operators_assigned.length;
+                for (var j=data[i].operators_assigned.length - 1; j >= 0; j--) {
                     if (GOR_FIRST_LAST) {
-                        userFirstLast = (data[i].operators_assigned[j][0] ? data[i].operators_assigned[j][0] : "") + " " + (data[i].operators_assigned[j][1] ? data[i].operators_assigned[j][1] : "");
+                        userFirstLast=(data[i].operators_assigned[j][0] ? data[i].operators_assigned[j][0] : "") + " " + (data[i].operators_assigned[j][1] ? data[i].operators_assigned[j][1] : "");
                     }
                     else {
-                        userFirstLast = (data[i].operators_assigned[j][1] ? data[i].operators_assigned[j][1] : "") + " " + (data[i].operators_assigned[j][0] ? data[i].operators_assigned[j][0] : "");
+                        userFirstLast=(data[i].operators_assigned[j][1] ? data[i].operators_assigned[j][1] : "") + " " + (data[i].operators_assigned[j][0] ? data[i].operators_assigned[j][0] : "");
                     }
                     if (detail.operatorAssigned) {
-                        detail.operatorAssigned = detail.operatorAssigned + ", " + userFirstLast;
+                        detail.operatorAssigned=detail.operatorAssigned + ", " + userFirstLast;
                     }
                     else {
-                        detail.operatorAssigned = userFirstLast;
+                        detail.operatorAssigned=userFirstLast;
                     }
                 }
-                detail.totalOperator = detail.totalOperator + data[i].operators_assigned.length;
+                detail.totalOperator=detail.totalOperator + data[i].operators_assigned.length;
 
             }
-            detail.totalUser = totalUser;
+            detail.totalUser=totalUser;
             PPSData.push(detail);
         }
         return PPSData;
@@ -220,21 +219,21 @@ class PPS extends React.Component {
     }
 
     handleModeChange(data) {
-        var checkedPPS = [], j = 0, mode = data.value, sortedIndex;
-        for (var i = this.props.checkedPps.length - 1; i >= 0; i--) {
-            if (this.props.checkedPps[i] === true) {
+        var checkedPPS=[], j=0, mode=data.value, sortedIndex;
+        for (var i=this.props.checkedPps.length - 1; i >= 0; i--) {
+            if (this.props.checkedPps[i]=== true) {
                 if (this.state.sortedDataList.newData !== undefined) {
-                    checkedPPS[j] = this.state.sortedDataList.newData[i].ppsId;
+                    checkedPPS[j]=this.state.sortedDataList.newData[i].ppsId;
                 }
                 else {
-                    sortedIndex = this.state.sortedDataList._indexMap[i];
-                    checkedPPS[j] = this.state.sortedDataList._data.newData[sortedIndex].ppsId;
+                    sortedIndex=this.state.sortedDataList._indexMap[i];
+                    checkedPPS[j]=this.state.sortedDataList._data.newData[sortedIndex].ppsId;
                 }
-                let formdata = {
+                let formdata={
                     "requested_pps_mode": mode
                 };
-                var url = API_URL + PPS_MODE_CHANGE_URL + checkedPPS[j] + "/pps_mode";
-                let ppsModeChange = {
+                var url=API_URL + PPS_MODE_CHANGE_URL + checkedPPS[j] + "/pps_mode";
+                let ppsModeChange={
                     'url': url,
                     'formdata': formdata,
                     'method': PUT,
@@ -247,7 +246,7 @@ class PPS extends React.Component {
                 j++;
             }
         }
-        var resetCheck = new Array(this.props.checkedPps.length).fill(false);
+        var resetCheck=new Array(this.props.checkedPps.length).fill(false);
         this.props.setCheckAll(false);
         this.props.setDropDisplay(false);
         this.props.setCheckedPps(resetCheck);
@@ -256,65 +255,65 @@ class PPS extends React.Component {
 
 
     render() {
-        let filterHeight = screen.height - 190 - 50;
-        let updateStatusIntl = "";
-        let operationMode = {"pick": 0, "put": 0, "audit": 0, "notSet": 0};
-        let data, operatorNum = 0, itemNumber = 5, ppsOn = 0, avgThroughput = 0;
+        let filterHeight=screen.height - 190 - 50;
+        let updateStatusIntl="";
+        let operationMode={"pick": 0, "put": 0, "audit": 0, "notSet": 0};
+        let data, operatorNum=0, itemNumber=5, ppsOn=0, avgThroughput=0;
         if (this.props.PPSDetail.PPStypeDetail !== undefined) {
-            data = this._processPPSData();
-            for (var i = data.length - 1; i >= 0; i--) {
+            data=this._processPPSData();
+            for (var i=data.length - 1; i >= 0; i--) {
                 if (data[i].operatingMode !== null) {
-                    operationMode[data[i].operatingMode] = operationMode[data[i].operatingMode] + 1;
+                    operationMode[data[i].operatingMode]=operationMode[data[i].operatingMode] + 1;
                 }
                 else {
-                    operationMode = {"Pick": "--", "Put": "--", "Audit": "--", "NotSet": "--"};
-                    operatorNum = "--";
+                    operationMode={"Pick": "--", "Put": "--", "Audit": "--", "NotSet": "--"};
+                    operatorNum="--";
                 }
 
                 if (operatorNum < data[i].totalUser) {
-                    operatorNum = data[i].totalUser
+                    operatorNum=data[i].totalUser
                 }
 
-                if (data[i].status === GOR_ON_STATUS) {
+                if (data[i].status=== GOR_ON_STATUS) {
                     ppsOn++;
                 }
 
                 if (data[i].ppsThroughput) {
-                    avgThroughput = avgThroughput + data[i].ppsThroughput;
+                    avgThroughput=avgThroughput + data[i].ppsThroughput;
                 }
             }
 
             if (data.length) {
-                avgThroughput = (avgThroughput / (data.length)).toFixed(1);
+                avgThroughput=(avgThroughput / (data.length)).toFixed(1);
             }
 
         }
 
-        let drop, selected = 0
-        let pickDrop = <FormattedMessage id="PPS.table.pickDrop" description="pick dropdown option for PPS"
+        let drop, selected=0
+        let pickDrop=<FormattedMessage id="PPS.table.pickDrop" description="pick dropdown option for PPS"
                                          defaultMessage="Put"/>
-        let putDrop = <FormattedMessage id="PPS.table.putDrop" description="put dropdown option for PPS"
+        let putDrop=<FormattedMessage id="PPS.table.putDrop" description="put dropdown option for PPS"
                                         defaultMessage="Pick"/>
-        let auditDrop = <FormattedMessage id="PPS.table.auditDrop" description="audit dropdown option for PPS"
+        let auditDrop=<FormattedMessage id="PPS.table.auditDrop" description="audit dropdown option for PPS"
                                           defaultMessage="Audit"/>
-        const modes = [
+        const modes=[
             {value: 'put', label: pickDrop},
             {value: 'pick', label: putDrop},
             {value: 'audit', label: auditDrop}
         ];
-        if (this.props.bDropRender === true) {
-            drop = <DropdownTable styleClass={'gorDataTableDrop'}
+        if (this.props.bDropRender=== true) {
+            drop=<DropdownTable styleClass={'gorDataTableDrop'}
                                   placeholder={this.props.intlMessages["pps.dropdown.placeholder"]} items={modes}
                                   changeMode={this.handleModeChange.bind(this)}/>;
         }
 
         else {
-            drop = <div/>;
+            drop=<div/>;
         }
         if (this.props.checkedPps) {
-            for (let i = this.props.checkedPps.length - 1; i >= 0; i--) {
-                if (this.props.checkedPps[i] === true) {
-                    selected = selected + 1;
+            for (let i=this.props.checkedPps.length - 1; i >= 0; i--) {
+                if (this.props.checkedPps[i]=== true) {
+                    selected=selected + 1;
                 }
             }
         }
@@ -355,7 +354,7 @@ class PPS extends React.Component {
                                                 className={this.props.ppsFilterState ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
                                                 onClick={this._setFilter.bind(this)}>
                                                 <div className="gor-manage-task"/>
-                                                <FormattedMessage id="order.table.filterLabel" description="button label for filter"
+                                                <FormattedMessage id="gor.filter.filterLabel" description="button label for filter"
                                                                   defaultMessage="Filter data"/>
                                             </button>
                                         </div>
@@ -429,7 +428,7 @@ function mapStateToProps(state, ownProps) {
     };
 }
 
-var mapDispatchToProps = function (dispatch) {
+var mapDispatchToProps=function (dispatch) {
     return {
         ppsFilterDetail: function (data) {
             dispatch(ppsFilterDetail(data))
@@ -479,10 +478,10 @@ var mapDispatchToProps = function (dispatch) {
     }
 };
 
-PPS.contextTypes = {
+PPS.contextTypes={
     intl: React.PropTypes.object.isRequired
 }
-PPS.PropTypes = {
+PPS.PropTypes={
     ppsFilter: React.PropTypes.string,
     getCheckAll: React.PropTypes.bool,
     bDropRender: React.PropTypes.bool,

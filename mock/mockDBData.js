@@ -1,13 +1,13 @@
 
 
-export const resTypePut = {
+export const resTypePut={
 	"aggregate_data": {
 		"items_put": 256789
 	},
 	"resource_type": "put"
 };
 
-export const resTypeThroughPut = {
+export const resTypeThroughPut={
 	"aggregate_data": {
 		"put_throughput": 3556,
 		"pick_throughput": 3546,
@@ -15,7 +15,7 @@ export const resTypeThroughPut = {
 	},
 	"resource_type": "put_pick_audit_throughput"
 }
-export const resTypeAudit = {
+export const resTypeAudit={
 	"aggregate_data": {
 			"audit_type":null,		
 			"total_audited": 20687
@@ -23,7 +23,7 @@ export const resTypeAudit = {
 	"resource_type": "audit"
 }
 
-export const resTypePick ={
+export const resTypePick={
 	"aggregate_data": {
 		"count_complete": 0
 	},
@@ -31,7 +31,7 @@ export const resTypePick ={
 };
 
 
-export const resTypeInventory1 = {
+export const resTypeInventory1={
 	"aggregate_data": {
 		"total_available_volume": 0,
 		"count_put": 0,
@@ -54,7 +54,7 @@ export const resTypeOrders={
     },
     "resource_type": "orders"
 }
-export const resTypeChargers = {
+export const resTypeChargers={
 	"data": [{
 		"charger_mode": "manual",
 		"charger_id": "1",
@@ -83,7 +83,7 @@ export const resTypeChargers = {
 	"resource_type": "chargers"
 }
 
-export const resTypeButlersData = {
+export const resTypeButlersData={
 	"data": [{
 		"status": "ready",
 		"display_id": "undefined",
@@ -330,7 +330,7 @@ export const resTypeButlersData = {
 
 
 
-export const resTypeInventory2 = {
+export const resTypeInventory2={
 	"aggregate_data": {
 		"total_available_volume": 0,
 		"count_put": 0,
@@ -344,7 +344,7 @@ export const resTypeInventory2 = {
 	"resource_type": "inventory"
 };
 
-export const resTypeHistogram = {
+export const resTypeHistogram={
 	"aggregate_data": [{
 		"start_time": "0",
 		"items_audited": 0,
@@ -457,7 +457,7 @@ export const resTypeHistogram = {
 	"resource_type": "histogram"
 }
 
-export const resTypeChargersDetail = {
+export const resTypeChargersDetail={
    	 "aggregate_data": [{
    		 "charger_id": 10,
       		 "docked_butler_id": 2
@@ -525,7 +525,7 @@ export const resTypeChargersDetail = {
    	 "resource_type": "system_chargers_details"
 }
 
-export const resTypeButlerDetail = {
+export const resTypeButlerDetail={
    	 
    	 "aggregate_data": [{
    		 "butler_id": 9,
@@ -676,7 +676,7 @@ export const resTypeButlerDetail = {
    	 "resource_type": "system_butlers_details"
  }
 
-export const resTypePPSdetail = { 
+export const resTypePPSdetail={ 
    	 "aggregate_data": [{
    		 "pps_id": 10,
    		 "pps_status": 1,
@@ -766,7 +766,7 @@ export const resTypePPSdetail = {
    	 "resource_type": "system_pps_details"
  }
 
- export const resTypePPSperformance = { 
+ export const resTypePPSperformance={ 
 	"aggregate_data": [{
 		"pps_id": 1,
                 	"time_unit": "per_hour",
@@ -809,7 +809,7 @@ export const resTypePPSdetail = {
 }
 
 
-export const resTypeUsersDetails = {
+export const resTypeUsersDetails={
     
     "resource_type": "users",
 	"complete_data": [{
@@ -829,7 +829,7 @@ export const resTypeUsersDetails = {
 
 }
 
-export const resTypeNotify = {
+export const resTypeNotify={
   "alert_data": [
     {
       "code": "us001",
@@ -839,7 +839,7 @@ export const resTypeNotify = {
     }]
 };
 
-export const resTypeSnapShot = {
+export const resTypeSnapShot={
   "categories": [
     {
       "colorCode": "#7983E6",
@@ -890,7 +890,7 @@ export const resTypeSnapShot = {
     "resource_type": "inventory"
 };
 
-export const resTypeSnapShotToday = {
+export const resTypeSnapShotToday={
 	"complete_data": [{
 		"total_skus": 294,
 		"cbm_used": 12.1,
@@ -929,7 +929,7 @@ export const resTypeSnapShotToday = {
 	"resource_type": "inventory_today"
 }
 
-export const resTypeSnapShotHistory = {
+export const resTypeSnapShotHistory={
 	"complete_data": [
 	{
 		"total_skus": 280,

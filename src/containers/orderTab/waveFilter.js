@@ -1,5 +1,4 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import {FormattedMessage} from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
 import {showTableFilter, filterApplied, wavefilterState, toggleWaveFilter} from '../../actions/filterAction';
@@ -13,7 +12,7 @@ import {hashHistory} from 'react-router'
 class WaveFilter extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
+        this.state={
             tokenSelected: {"STATUS": ["any"]}, searchQuery: {},
             defaultToken: {"STATUS": ["any"]}
         };
@@ -37,36 +36,36 @@ class WaveFilter extends React.Component {
     }
 
     _closeFilter() {
-        let filterState = !this.props.showFilter;
+        let filterState=!this.props.showFilter;
         this.props.showTableFilter(false);
     }
 
     _processWaveSearchField() {
-        let filterInputFields = [{
+        let filterInputFields=[{
             value: "WAVE ID",
             label: <FormattedMessage id="wave.inputField.id" defaultMessage="WAVE ID"/>
         }];
-        let inputValue = this.state.searchQuery;
-        let inputField = <FilterInputFieldWrap inputText={filterInputFields}
+        let inputValue=this.state.searchQuery;
+        let inputField=<FilterInputFieldWrap inputText={filterInputFields}
                                                handleInputText={this._handleInputQuery.bind(this)}
                                                inputValue={inputValue}/>
         return inputField;
     }
 
     _processFilterToken() {
-        let tokenField1 = {value: "STATUS", label: <FormattedMessage id="wave.token.status" defaultMessage="STATUS"/>};
-        let labelC1 = [
+        let tokenField1={value: "STATUS", label: <FormattedMessage id="wave.token.status" defaultMessage="STATUS"/>};
+        let labelC1=[
             {value: 'any', label: <FormattedMessage id="wave.STATUS.all" defaultMessage="All waves"/>},
             {value: 'breached', label: <FormattedMessage id="wave.STATUS.breach" defaultMessage="Breached"/>},
             {value: 'wave_pending', label: <FormattedMessage id="wave.STATUS.pending" defaultMessage="Pending"/>},
             {value: 'wave_warning', label: <FormattedMessage id="wave.STATUS.warning" defaultMessage="Warning"/>},
             {value: 'in_progress', label: <FormattedMessage id="wave.STATUS.inprogress" defaultMessage="In progress"/>}
         ];
-        let selectedToken = this.state.tokenSelected;
-        let column1 = <FilterTokenWrap field={tokenField1} tokenCallBack={this._handelTokenClick.bind(this)}
+        let selectedToken=this.state.tokenSelected;
+        let column1=<FilterTokenWrap field={tokenField1} tokenCallBack={this._handelTokenClick.bind(this)}
                                        label={labelC1} selectedToken={selectedToken}/>;
 
-        let columnDetail = {column1token: column1};
+        let columnDetail={column1token: column1};
         return columnDetail;
     }
 
@@ -80,12 +79,12 @@ class WaveFilter extends React.Component {
     }
 
     _applyFilter() {
-        let filterState = this.state, _query = {};
+        let filterState=this.state, _query={};
         if (filterState.searchQuery["WAVE ID"]) {
-            _query.waveId = filterState.searchQuery["WAVE ID"]
+            _query.waveId=filterState.searchQuery["WAVE ID"]
         }
         if (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !== "any") {
-            _query.status = filterState.tokenSelected["STATUS"]
+            _query.status=filterState.tokenSelected["STATUS"]
         }
         hashHistory.push({pathname: "/orders/waves", query: _query})
 
@@ -98,10 +97,10 @@ class WaveFilter extends React.Component {
 
 
     render() {
-        var waveDetail = this.props.waveData;
-        var noOrder = waveDetail.waveData && waveDetail.waveData.length ? false : true;
-        let waveSearchField = this._processWaveSearchField();
-        let waveFilterToken = this._processFilterToken();
+        var waveDetail=this.props.waveData;
+        var noOrder=waveDetail.waveData && waveDetail.waveData.length ? false : true;
+        let waveSearchField=this._processWaveSearchField();
+        let waveFilterToken=this._processFilterToken();
         return (
             <div>
                 <Filter hideFilter={this._closeFilter.bind(this)}  // hiding filter wont disturb state
@@ -135,7 +134,7 @@ function mapStateToProps(state, ownProps) {
     };
 }
 
-let mapDispatchToProps = function (dispatch) {
+let mapDispatchToProps=function (dispatch) {
     return {
         showTableFilter: function (data) {
             dispatch(showTableFilter(data));
@@ -158,7 +157,7 @@ let mapDispatchToProps = function (dispatch) {
 
     }
 };
-WaveFilter.PropTypes = {
+WaveFilter.PropTypes={
     showTableFilter: React.PropTypes.func,
     filterApplied: React.PropTypes.func,
     wavefilterState: React.PropTypes.func,

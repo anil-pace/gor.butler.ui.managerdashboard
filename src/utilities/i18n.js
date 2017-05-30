@@ -33,16 +33,16 @@ addLocaleData([...enLocaleData,
               ...zhTranslationMessages
 	]);
 
-export const formatTranslationMessages = (messages) => {
-  const formattedMessages = {};
+export const formatTranslationMessages=(messages)=> {
+  const formattedMessages={};
   for (const message of messages) {
-    formattedMessages[message.id] = message.message || message.defaultMessage;
+    formattedMessages[message.id]=message.message || message.defaultMessage;
   }
 
   return formattedMessages;
 };
 
-export const translationMessages = {
+export const translationMessages={
   en: formatTranslationMessages(enTranslationMessages),
   ja: formatTranslationMessages(jaTranslationMessages),
   de: formatTranslationMessages(deTranslationMessages),

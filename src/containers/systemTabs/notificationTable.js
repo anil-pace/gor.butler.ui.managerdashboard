@@ -7,16 +7,16 @@ import {SortHeaderCell,tableRenderer,SortTypes,TextCell,ComponentCell,StatusCell
 class NotificationTable extends React.Component {
   constructor(props) {
     super(props);
-    var temp = new Array(this.props.items.length).fill(false);
-    this._dataList = new tableRenderer(this.props.items.length);
-    this._defaultSortIndexes = [];
+    var temp=new Array(this.props.items.length).fill(false);
+    this._dataList=new tableRenderer(this.props.items.length);
+    this._defaultSortIndexes=[];
     this._dataList.newData=this.props.items;
-    var size = this._dataList.getSize();
-    for (var index = 0; index < size; index++) {
+    var size=this._dataList.getSize();
+    for (var index=0; index < size; index++) {
       this._defaultSortIndexes.push(index);
     }
     var columnWidth= (this.props.containerWidth/this.props.itemNumber)
-    this.state = {
+    this.state={
       sortedDataList: this._dataList,
       colSortDirs: {},
       columnWidths: {
@@ -29,12 +29,12 @@ class NotificationTable extends React.Component {
       },
     };
 
-    this._onSortChange = this._onSortChange.bind(this);
-    this._onFilterChange = this._onFilterChange.bind(this);
-    this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+    this._onSortChange=this._onSortChange.bind(this);
+    this._onFilterChange=this._onFilterChange.bind(this);
+    this._onColumnResizeEndCallback=this._onColumnResizeEndCallback.bind(this);
   }
    _onColumnResizeEndCallback(newColumnWidth, columnKey) {
-    this.setState(({columnWidths}) => ({
+    this.setState(({columnWidths})=> ({
       columnWidths: {
         ...columnWidths,
         [columnKey]: newColumnWidth,
@@ -56,7 +56,7 @@ class NotificationTable extends React.Component {
     
   }
   _onSortChange(columnKey, sortDir) {
-    var sortIndexes = this._defaultSortIndexes.slice();
+    var sortIndexes=this._defaultSortIndexes.slice();
     this.setState({
       sortedDataList: new DataListWrapper(sortData(columnKey, sortDir,sortIndexes,this._dataList), this._dataList),
       colSortDirs: {
@@ -65,20 +65,20 @@ class NotificationTable extends React.Component {
     });
   }
   render() {
-    var heightRes = 500;
+    var heightRes=500;
     if(this.props.containerHeight !== 0) {
-      heightRes = this.props.containerHeight;
+      heightRes=this.props.containerHeight;
     }
     
     
-    var {sortedDataList, colSortDirs,columnWidths} = this.state;  
+    var {sortedDataList, colSortDirs,columnWidths}=this.state;  
     return (
       <div className="gorTableMainContainer">
         <div className="gorToolBar">
           <div className="gorToolBarWrap">
             <div className="gorToolBarElements">
                <FormattedMessage id="NotificationTable.table.heading" description="Heading for NotificationTable" 
-              defaultMessage ="Notifications"/>
+              defaultMessage="Notifications"/>
               
             </div>
           </div>
@@ -108,7 +108,7 @@ class NotificationTable extends React.Component {
               sortDir={colSortDirs.component}> 
               <div className="gorToolHeaderEl">
               <div className="gorToolHeaderEl"> <FormattedMessage id="NotificationTable.table.component" description="component for NotificationTable" 
-              defaultMessage ="COMPONENT"/> </div>
+              defaultMessage="COMPONENT"/> </div>
               
               </div>
             </SortHeaderCell>
@@ -124,7 +124,7 @@ class NotificationTable extends React.Component {
             <SortHeaderCell >
               <div>
                  <FormattedMessage id="Notifications.table.status" description="Status for NotificationTable" 
-              defaultMessage ="EVENT TYPE"/> 
+              defaultMessage="EVENT TYPE"/> 
               </div>
             </SortHeaderCell>
           }
@@ -139,7 +139,7 @@ class NotificationTable extends React.Component {
           header={
             <SortHeaderCell>
               <FormattedMessage id="NotificationTable.table.description" description="description for current component" 
-              defaultMessage ="DESCRIPTION"/>
+              defaultMessage="DESCRIPTION"/>
              
             </SortHeaderCell>
           }
@@ -153,7 +153,7 @@ class NotificationTable extends React.Component {
           header={
             <SortHeaderCell>
                <FormattedMessage id="NotificationTable.table.remark" description="remark for component" 
-              defaultMessage ="REMARKS"/> 
+              defaultMessage="REMARKS"/> 
               
             </SortHeaderCell>
           }
@@ -167,7 +167,7 @@ class NotificationTable extends React.Component {
           header={
             <SortHeaderCell>
                <FormattedMessage id="NotificationTable.table.location" description="Starting Time for Component" 
-              defaultMessage ="TIME"/> 
+              defaultMessage="TIME"/> 
             </SortHeaderCell>
           }
           cell={<TextCell data={sortedDataList} />}

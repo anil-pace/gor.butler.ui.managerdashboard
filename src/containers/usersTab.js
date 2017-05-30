@@ -10,7 +10,7 @@ import {userHeaderSort,userHeaderSortOrder,userFilterDetail} from '../actions/so
 import {INITIAL_HEADER_SORT,INITIAL_HEADER_ORDER} from '../constants/frontEndConstants';
 
 //Mesages for internationalization
-const messages = defineMessages({
+const messages=defineMessages({
     userOperator: {
       id:"userDetails.operator", 
       defaultMessage: "Operator"
@@ -66,73 +66,73 @@ class UsersTab extends React.Component{
     	super(props);
     }
   _processUserDetails() {
-  var nProps = this,
-  data = nProps.props.userdetails ||{};
-  let operator  = nProps.context.intl.formatMessage(messages.userOperator);
-  let manager  = nProps.context.intl.formatMessage(messages.userManager);
-  let pick  = nProps.context.intl.formatMessage(stringConfig.pick);
-  let put  = nProps.context.intl.formatMessage(stringConfig.put);
-  let audit  = nProps.context.intl.formatMessage(stringConfig.audit);
-  let front  = nProps.context.intl.formatMessage(messages.userFront);
-  let back  = nProps.context.intl.formatMessage(messages.userBack);
-  let online  = nProps.context.intl.formatMessage(stringConfig.online);
-  let offline  = nProps.context.intl.formatMessage(stringConfig.offline);
-  var role = {"butler_ui":operator, "butler_supervisor":manager};
-  var work_mode = {"pick":pick,"put": put,"audit": audit};
-  var work_place = {"front": front, "back":back};
+  var nProps=this,
+  data=nProps.props.userdetails ||{};
+  let operator=nProps.context.intl.formatMessage(messages.userOperator);
+  let manager=nProps.context.intl.formatMessage(messages.userManager);
+  let pick=nProps.context.intl.formatMessage(stringConfig.pick);
+  let put=nProps.context.intl.formatMessage(stringConfig.put);
+  let audit=nProps.context.intl.formatMessage(stringConfig.audit);
+  let front=nProps.context.intl.formatMessage(messages.userFront);
+  let back=nProps.context.intl.formatMessage(messages.userBack);
+  let online=nProps.context.intl.formatMessage(stringConfig.online);
+  let offline=nProps.context.intl.formatMessage(stringConfig.offline);
+  var role={"butler_ui":operator, "butler_supervisor":manager};
+  var work_mode={"pick":pick,"put": put,"audit": audit};
+  var work_place={"front": front, "back":back};
 
 
-  var userDetails = [], userData = {};
-  for (var i = data.length - 1; i >= 0; i--) {
+  var userDetails=[], userData={};
+  for (var i=data.length - 1; i >= 0; i--) {
 
-    userData.id = (data[i].first_name || "--") + " " + (data[i].last_name || "--");
+    userData.id=(data[i].first_name || "--") + " " + (data[i].last_name || "--");
     if(data[i].logged_in){
-      userData.status = online;
-      userData.statusClass = "online";
+      userData.status=online;
+      userData.statusClass="online";
     if(data[i].pps.pps_mode && data[i].pps.seat_type) {  
-      userData.workMode = work_mode[data[i].pps.pps_mode] + " " + work_place[data[i].pps.seat_type];
+      userData.workMode=work_mode[data[i].pps.pps_mode] + " " + work_place[data[i].pps.seat_type];
     }
 
     else if(data[i].pps.pps_mode) {
-      userData.workMode = work_mode[data[i].pps.pps_mode];
+      userData.workMode=work_mode[data[i].pps.pps_mode];
     }
 
-    userData.location = nProps.context.intl.formatMessage(messages.userLocation,{"ppsId":data[i].pps.pps_id});
-    userData.logInTime = nProps.context.intl.formatTime(data[i].login_time,{hour: 'numeric',minute: 'numeric',hour12:false}) +
+    userData.location=nProps.context.intl.formatMessage(messages.userLocation,{"ppsId":data[i].pps.pps_id});
+    userData.logInTime=nProps.context.intl.formatTime(data[i].login_time,{hour: 'numeric',minute: 'numeric',hour12:false}) +
     " (" + nProps.context.intl.formatRelative(data[i].login_time) +")";;
 
     }
 
     else {
-    userData.status = offline;
-    userData.statusClass = "offline";
-    userData.workMode = "--";
-    userData.location = "--" ;
-    userData.logInTime = "--";
+    userData.status=offline;
+    userData.statusClass="offline";
+    userData.workMode="--";
+    userData.location="--" ;
+    userData.logInTime="--";
     }
 
 
-    userData.uid = data[i].user_id
+    userData.uid=data[i].user_id
     userData.userName= data[i].user_name;
     userData.first=data[i].first_name;
     userData.last=data[i].last_name;  
     userData.roleId=data[i].role;
     if(role.hasOwnProperty(data[i].role)){
-      userData.role = role[data[i].role];      
+      userData.role=role[data[i].role];      
     }
     else{
-      userData.role = data[i].role;
+      userData.role=data[i].role;
     }
     userDetails.push(userData);
-    userData = {};
+    userData={};
   }
 
   return userDetails;
 }	
 	render(){
-		var itemNumber = 7, userData;	
+		var itemNumber=7, userData;	
 		if(this.props.userdetails !== undefined) {
-			userData = this._processUserDetails();
+			userData=this._processUserDetails();
 		}	
 		return (
 			<div>
@@ -144,7 +144,7 @@ class UsersTab extends React.Component{
                            sortHeaderState={this.props.userHeaderSort} sortHeaderOrder={this.props.userHeaderSortOrder} 
                            currentSortState={this.props.userSortHeader} currentHeaderOrder={this.props.userSortHeaderState}
                            setUserFilter={this.props.userFilterDetail}
-                           getUserFilter = {this.props.userFilter}/>
+                           getUserFilter={this.props.userFilter}/>
 					</div>
 				</div>
 			</div>
@@ -167,7 +167,7 @@ function mapStateToProps(state, ownProps){
   };
 }
 
-var mapDispatchToProps = function(dispatch){
+var mapDispatchToProps=function(dispatch){
   return{
     userFilterDetail: function(data){dispatch(userFilterDetail(data))},
     userHeaderSort: function(data){dispatch(userHeaderSort(data))},
@@ -177,7 +177,7 @@ var mapDispatchToProps = function(dispatch){
 }
 
 
-UsersTab.contextTypes ={
+UsersTab.contextTypes={
  intl:React.PropTypes.object.isRequired
 }
 

@@ -1,4 +1,4 @@
-import {logoutRequest,loginFail} from '../actions/loginAction'
+import {logoutRequest} from '../actions/loginAction'
 import { loginError } from '../actions/validationActions';
 import { UNAUTH } from '../constants/messageConstants';
 import { endWsAction } from '../actions/socketActions';

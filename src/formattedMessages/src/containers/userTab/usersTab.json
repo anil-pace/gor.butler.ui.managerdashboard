@@ -54,7 +54,7 @@
     "defaultMessage": "Add new user"
   },
   {
-    "id": "order.table.filterLabel",
+    "id": "gor.filter.filterLabel",
     "description": "button label for filter",
     "defaultMessage": "Filter data"
   },

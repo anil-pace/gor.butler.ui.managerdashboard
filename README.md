@@ -578,7 +578,7 @@ When you include a script in the HTML file that defines global variables and try
 You can avoid this by reading the global variable explicitly from the `window` object, for example:
 
 ```js
-const $ = window.$;
+const $=window.$;
 ```
 
 This makes it obvious you are using a global variable intentionally rather than because of a typo.
@@ -883,7 +883,7 @@ Similarly to the previous section, you can leave some placeholders in the HTML t
 <html lang="en">
   <head>
     <script>
-      window.SERVER_DATA = __SERVER_DATA__;
+      window.SERVER_DATA=__SERVER_DATA__;
     </script>
 ```
 
@@ -939,7 +939,7 @@ Jest provides a built-in `expect()` global function for making assertions. A bas
 ```js
 import sum from './sum';
 
-it('sums numbers', () => {
+it('sums numbers', ()=> {
   expect(sum(1, 2)).toEqual(3);
   expect(sum(2, 2)).toEqual(4);
 });
@@ -959,8 +959,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
+it('renders without crashing', ()=> {
+  const div=document.createElement('div');
   ReactDOM.render(<App />, div);
 });
 ```
@@ -980,7 +980,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import App from './App';
 
-it('renders without crashing', () => {
+it('renders without crashing', ()=> {
   shallow(<App />);
 });
 ```
@@ -996,9 +996,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import App from './App';
 
-it('renders welcome message', () => {
-  const wrapper = shallow(<App />);
-  const welcome = <h2>Welcome to React</h2>;
+it('renders welcome message', ()=> {
+  const wrapper=shallow(<App />);
+  const welcome=<h2>Welcome to React</h2>;
   // expect(wrapper.contains(welcome)).to.equal(true);
   expect(wrapper.contains(welcome)).toEqual(true);
 });
@@ -1048,12 +1048,12 @@ For example:
 
 #### `src/setupTests.js`
 ```js
-const localStorageMock = {
+const localStorageMock={
   getItem: jest.fn(),
   setItem: jest.fn(),
   clear: jest.fn()
 };
-global.localStorage = localStorageMock
+global.localStorage=localStorageMock
 ```
 
 ### Focusing and Excluding Tests
@@ -1236,9 +1236,9 @@ You don’t necessarily need a static server in order to run a Create React App 
 Here’s a programmatic example using [Node](https://nodejs.org/) and [Express](http://expressjs.com/):
 
 ```javascript
-const express = require('express');
-const path = require('path');
-const app = express();
+const express=require('express');
+const path=require('path');
+const app=express();
 
 app.use(express.static('./build'));
 
@@ -1317,7 +1317,7 @@ Install the Firebase CLI if you haven’t already by running `npm install -g fir
 Then run the `firebase init` command from your project’s root. You need to choose the **Hosting: Configure and deploy Firebase Hosting sites** and choose the Firebase project you created in the previous step. You will need to agree with `database.rules.json` being created, choose `build` as the public directory, and also agree to **Configure as a single-page app** by replying with `y`.
 
 ```sh
-    === Project Setup
+   === Project Setup
 
     First, let's associate this project directory with a Firebase project.
     You can create multiple project aliases by running firebase use --add,
@@ -1325,7 +1325,7 @@ Then run the `firebase init` command from your project’s root. You need to cho
 
     ? What Firebase project do you want to associate as default? Example app (example-app-fd690)
 
-    === Database Setup
+   === Database Setup
 
     Firebase Realtime Database Rules allow you to define how your data should be
     structured and when your data can be read from and written to.
@@ -1335,7 +1335,7 @@ Then run the `firebase init` command from your project’s root. You need to cho
     Future modifications to database.rules.json will update Database Rules when you run
     firebase deploy.
 
-    === Hosting Setup
+   === Hosting Setup
 
     Your public directory is the folder (relative to your project directory) that
     will contain Hosting assets to uploaded with firebase deploy. If you
@@ -1354,7 +1354,7 @@ Then run the `firebase init` command from your project’s root. You need to cho
 Now, after you create a production build with `npm run build`, you can deploy it by running `firebase deploy`.
 
 ```sh
-    === Deploying to 'example-app-fd690'...
+   === Deploying to 'example-app-fd690'...
 
     i  deploying database, hosting
     ✔  database: rules ready to deploy.

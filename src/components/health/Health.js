@@ -2,13 +2,8 @@ import React  from 'react';
 import { FormattedMessage } from 'react-intl';
 
 class Health extends React.Component{
-	constructor(props) 
-	{
-    	super(props);
-    }	
-	render(){
-
 	
+	render(){	
 		return (
 		<div className="health mainBlock">
 		<div className="block attributes">
@@ -26,13 +21,13 @@ class Health extends React.Component{
 					<div className="block onState" >
 						<span>{this.props.items[0].states.onState}</span>
 					</div>
-					<div className="status"><FormattedMessage id="healthTab.status.on" description="on status for healthtab" defaultMessage ="On"/> </div>
+					<div className="status"><FormattedMessage id="healthTab.status.on" description="on status for healthtab" defaultMessage="On"/> </div>
 				</div>
 				<div className="block paramPositionMiddle ">
 					<div className="block offState" >
 						<span>{this.props.items[0].states.offState}</span>
 					</div>
-					<div className="status"><FormattedMessage id="healthTab.status.off" description="off status for healthtab" defaultMessage ="Off"/></div>
+					<div className="status"><FormattedMessage id="healthTab.status.off" description="off status for healthtab" defaultMessage="Off"/></div>
 				</div>
 				
 				

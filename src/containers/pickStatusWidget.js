@@ -1,5 +1,4 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import Tile2x from '../components/tile2x/Tile2x';
 import { connect } from 'react-redux' ;
 import { FormattedMessage,FormattedNumber,FormattedPlural,FormattedRelative, FormattedDate } from 'react-intl';
@@ -40,7 +39,7 @@ class PickStatusWidget extends React.Component{
         defaultMessage='Orders to fullfill'/>;
         logo=PICK_ICON;
         textLeft=ordersData.count_pending;
-        ppsCount = <FormattedNumber value={ppsCount}/>
+        ppsCount=<FormattedNumber value={ppsCount}/>
         if(!textLeft)
         {
             if(ordersData.count_total){
@@ -62,7 +61,7 @@ class PickStatusWidget extends React.Component{
         else
         {
             textLeft=<FormattedNumber id='widget.pick.textleft' value={ordersData.count_pending} />;
-            pickThroughput = <FormattedNumber id='widget.pick.throughput' value={pickThroughput}/>
+            pickThroughput=<FormattedNumber id='widget.pick.throughput' value={pickThroughput}/>
             lowLeft=<FormattedMessage id="widget.pick.throughput" description='Throughput message' 
                 defaultMessage='{count} PPS fullfilling at {throughput} items/hr'
                 values={{
@@ -80,7 +79,7 @@ class PickStatusWidget extends React.Component{
                 textRight=<FormattedMessage id="widget.pick.textright" description='Time remaining' 
                 defaultMessage='{cut_off}' values={{cut_off:remTime}} />;
 
-                statusRight=<FormattedDate value = {ordersData.wave_end}
+                statusRight=<FormattedDate value={ordersData.wave_end}
                 month='short'
                 day='2-digit'
                 hour="2-digit"

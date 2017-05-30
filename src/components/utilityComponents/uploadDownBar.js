@@ -1,5 +1,4 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 
 class UploadDownBar extends React.Component{
@@ -18,8 +17,8 @@ class UploadDownBar extends React.Component{
 							{this.props.barData.h2}
 						</div>
 					</div> 
-					<div className="gor-utility-updown-button">
-						RECALL
+					<div className="gor-utility-updown-button" onClick={this.props.barAction}>
+						{this.props.barData.buttonText}
 					</div>
 			</div>
 		);

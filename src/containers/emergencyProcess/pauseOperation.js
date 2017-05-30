@@ -1,5 +1,4 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import { connect } from 'react-redux' ;
 import {userRequest} from '../../actions/userActions';
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
@@ -9,10 +8,7 @@ import {LOGIN_URL} from '../../constants/configConstants';
 import {ERROR,APP_JSON,POST,SUCCESS,AUTH_USER,PAUSE_OPERATION} from '../../constants/frontEndConstants';
 
 class PauseOperation extends React.Component{
-  constructor(props) 
-  {
-      super(props);  
-  }
+ 
   _removeThisModal() {
       this.props.resetForm();
       this.props.removeModal();
@@ -66,13 +62,13 @@ class PauseOperation extends React.Component{
                     defaultMessage="All Butler bots, PPS and other sysytem components will be paused once
               completed the last action" description="Text for pause operation action"/>
               <div className='gor-margin-top'>
-                <div className={'gor-password-field-lg'+(this.props.passwordCheck.type === ERROR?' gor-input-error':' gor-input-ok')} ref={node => { this.passField = node }}>
-                        <div className={this.props.passwordCheck.type === ERROR?'gor-login-password-error':'gor-login-password'}></div>
+                <div className={'gor-password-field-lg'+(this.props.passwordCheck.type=== ERROR?' gor-input-error':' gor-input-ok')} ref={node=> { this.passField=node }}>
+                        <div className={this.props.passwordCheck.type=== ERROR?'gor-login-password-error':'gor-login-password'}></div>
                         <input className='field' type="password" id="password" 
-                         ref={node => { this.password = node }} onChange={this._typing.bind(this)}
+                         ref={node=> { this.password=node }} onChange={this._typing.bind(this)}
                          placeholder="Enter your password" />
                 </div>
-                {this.props.passwordCheck && this.props.passwordCheck.type === ERROR?
+                {this.props.passwordCheck && this.props.passwordCheck.type=== ERROR?
                   (<div className='gor-login-usr-error gor-sm-string' >
                       <FormattedMessage id='operation.pause.error' 
                     defaultMessage="The entered input does not match. Please try again."
@@ -85,7 +81,7 @@ class PauseOperation extends React.Component{
                 <FormattedMessage id='operation.pause.cancel' 
                     defaultMessage="Cancel"
                             description="Text for cancel button"/></button>
-                <button className='gor-add-btn' disabled={this.props.passwordCheck.type === SUCCESS?false:true}
+                <button className='gor-add-btn' disabled={this.props.passwordCheck.type=== SUCCESS?false:true}
                   onClick={this._handlePause.bind(this)} >
                   <FormattedMessage id='operation.pause.button' 
                     defaultMessage="Pause Operation"

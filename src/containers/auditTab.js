@@ -1,10 +1,8 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
-import UserDataTable from './userTab/userTabTable';
 import Spinner from '../components/spinner/Spinner';
 import {connect} from 'react-redux';
-import {AUDIT_URL, FILTER_AUDIT_ID} from '../constants/configConstants';
-import {getAuditData, setAuditRefresh,auditListRefreshed} from '../actions/auditActions';
+import { FILTER_AUDIT_ID} from '../constants/configConstants';
+import {getAuditData, setAuditRefresh,auditListRefreshed,setTextBoxStatus} from '../actions/auditActions';
 import AuditTable from './auditTab/auditTable';
 import {getPageData} from '../actions/paginationAction';
 import {
@@ -33,11 +31,6 @@ import {
     ANY,WS_ONSEND,toggleOrder
 } from '../constants/frontEndConstants';
 import {
-    BASE_URL,
-    API_URL,
-    ORDERS_URL,
-    PAGE_SIZE_URL,
-    PROTOCOL,
     SEARCH_AUDIT_URL,
     GIVEN_PAGE,
     GIVEN_PAGE_SIZE
@@ -57,8 +50,9 @@ import {FormattedMessage} from 'react-intl';
 import CreateAudit from './auditTab/createAudit';
 import {modal} from 'react-redux-modal';
 import FilterSummary from './../components/tableFilter/filterSummary'
+import {mappingArray} from '../utilities/utils';
 //Mesages for internationalization
-const messages = defineMessages({
+const messages=defineMessages({
     auditCreatedStatus: {
         id: "auditdetail.created.status",
         defaultMessage: "Created"
@@ -107,7 +101,7 @@ const messages = defineMessages({
 class AuditTab extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {selected_page: 1,query:null,auditListRefreshed:null};
+        this.state={selected_page: 1,query:null,auditListRefreshed:null};
     }
 
 
@@ -120,26 +114,26 @@ class AuditTab extends React.Component {
          */
          this.props.auditListRefreshed()
      }
-
      componentWillReceiveProps(nextProps) {
         if (nextProps.socketAuthorized && nextProps.auditListRefreshed && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)) || nextProps.auditRefresh!==this.props.auditRefresh)) { //Changes to refresh the table after creating audit
-            this.setState({query: nextProps.location.query})
-            this.setState({auditListRefreshed:nextProps.auditListRefreshed})
-            this._subscribeData()
-            this._refreshList(nextProps.location.query,nextProps.auditSortHeaderState.colSortDirs)
+            let obj={},selectedToken;
+            selectedToken=[nextProps.location.query.auditType];
+            obj.name=mappingArray(selectedToken);
+            this.props.setTextBoxStatus(obj);
+            this.setState({query: nextProps.location.query});
+            this.setState({auditListRefreshed:nextProps.auditListRefreshed});
+            this._subscribeData();
+            this._refreshList(nextProps.location.query,nextProps.auditSortHeaderState.colSortDirs);
         }
     }
 
     _subscribeData() {
-        let updatedWsSubscription = this.props.wsSubscriptionData;
+        let updatedWsSubscription=this.props.wsSubscriptionData;
         this.props.initDataSentCall(updatedWsSubscription["default"])
         this.props.updateSubscriptionPacket(updatedWsSubscription);
     }
     _refresh(data){
-         var locationQuery=this.props.location.query;
-        
-            this._refreshList(this.props.location.query,data);
-        
+        this._refreshList(this.props.location.query,data);
   }
     /**
      * The method will update the subscription packet
@@ -148,13 +142,13 @@ class AuditTab extends React.Component {
      */
      _refreshList(query,auditParam) {
         var auditbyUrl;
-        let _query_params = [], _auditParamValue = [], _auditStatuses = [],
-        url = SEARCH_AUDIT_URL + addDateOffSet(new Date(), -30)
+        let _query_params=[], _auditParamValue=[], _auditStatuses=[],
+        url=SEARCH_AUDIT_URL + addDateOffSet(new Date(), -30)
         if (query.auditType && query.auditType.constructor !== Array) {
-            query.auditType = [query.auditType]
+            query.auditType=[query.auditType]
         }
 
-        if (query.auditType && query.auditType.length === 1) {
+        if (query.auditType && query.auditType.length=== 1) {
             _query_params.push([AUDIT_PARAM_TYPE, query.auditType[0]].join("="))
          }
        
@@ -175,12 +169,12 @@ class AuditTab extends React.Component {
         }
 
         if (query.status) {
-            let _flattened_statuses = []
+            let _flattened_statuses=[]
             query.status=query.status.constructor===Array?query.status:[query.status]
             query.status.forEach(function (status) {
                 _flattened_statuses.push(status.split("__"))
             })
-            _auditStatuses = [].concat.apply([], _flattened_statuses)
+            _auditStatuses=[].concat.apply([], _flattened_statuses)
             _query_params.push([AUDIT_STATUS,"['"+_auditStatuses.join("','")+"']" ].join("="))
         }
         if (query.taskId) {
@@ -192,13 +186,17 @@ class AuditTab extends React.Component {
 
            if(auditParam && auditParam.sortDir){
             _query_params.push(['order',toggleOrder(auditParam.sortDir)].join("="));
-            auditbyUrl =sortAuditHead[auditParam["columnKey"]];
+            auditbyUrl=sortAuditHead[auditParam["columnKey"]];
 
         }
         else
         {
-            auditParam? _query_params.push(['order',toggleOrder(auditParam[Object.keys(auditParam)])].join("=")):"";
-            auditbyUrl=auditParam? sortAuditHead[Object.keys(auditParam)[0]]:"";
+            if (auditParam){
+                _query_params.push(['order',toggleOrder(auditParam[Object.keys(auditParam)])].join("="));
+                auditbyUrl=sortAuditHead[Object.keys(auditParam)[0]];
+            }else{
+                auditbyUrl="";
+            }
         }
 
         url=[url,_query_params.join("&")].join("&")
@@ -212,7 +210,7 @@ class AuditTab extends React.Component {
             this.props.filterApplied(false);
         }
 
-        let paginationData = {
+        let paginationData={
             'url': url,
             'method': GET,
             'cause': AUDIT_RETRIEVE,
@@ -221,8 +219,8 @@ class AuditTab extends React.Component {
         }
         this.props.setAuditSpinner(true);
         this.props.auditfilterState({
-            tokenSelected: {"AUDIT TYPE": query.auditType ? query.auditType.constructor === Array ? query.auditType : [query.auditType] : [ANY],
-            "STATUS": query.status ? query.status.constructor === Array ? query.status : [query.status] : [ALL]},
+            tokenSelected: {"AUDIT TYPE": query.auditType ? query.auditType.constructor=== Array ? query.auditType : [query.auditType] : [ANY],
+            "STATUS": query.status ? query.status.constructor=== Array ? query.status : [query.status] : [ALL]},
             searchQuery: {
                 'SPECIFIC SKU ID':query.skuId||'',
                 'SPECIFIC LOCATION ID':query.locationId||'',
@@ -242,20 +240,20 @@ class AuditTab extends React.Component {
 
 
     _processAuditData(data, nProps) {
-        var nProps = this,
-        data = nProps.props.auditDetail;
-        let created = nProps.context.intl.formatMessage(messages.auditCreatedStatus);
-        let pending = nProps.context.intl.formatMessage(messages.auditPendingStatus);
-        let progress = nProps.context.intl.formatMessage(messages.auditInProgressStatus);
-        let completed = nProps.context.intl.formatMessage(messages.auditCompletedStatus);
-        let pendingApp = nProps.context.intl.formatMessage(messages.auditPendingApp);
-        let sku = nProps.context.intl.formatMessage(messages.auditSKU);
-        let location = nProps.context.intl.formatMessage(messages.auditLocation);
-        let rejected = nProps.context.intl.formatMessage(messages.auditRejected);
-        let resolved = nProps.context.intl.formatMessage(messages.auditResolved);
-        let reAudited = nProps.context.intl.formatMessage(messages.auditReAudited);
-        var timeOffset = nProps.props.timeOffset || "";
-        var auditStatus = {
+        nProps=this;
+        data=nProps.props.auditDetail;
+        let created=nProps.context.intl.formatMessage(messages.auditCreatedStatus);
+        let pending=nProps.context.intl.formatMessage(messages.auditPendingStatus);
+        let progress=nProps.context.intl.formatMessage(messages.auditInProgressStatus);
+        let completed=nProps.context.intl.formatMessage(messages.auditCompletedStatus);
+        let pendingApp=nProps.context.intl.formatMessage(messages.auditPendingApp);
+        let sku=nProps.context.intl.formatMessage(messages.auditSKU);
+        let location=nProps.context.intl.formatMessage(messages.auditLocation);
+        let rejected=nProps.context.intl.formatMessage(messages.auditRejected);
+        let resolved=nProps.context.intl.formatMessage(messages.auditResolved);
+        let reAudited=nProps.context.intl.formatMessage(messages.auditReAudited);
+        var timeOffset=nProps.props.timeOffset || "";
+        var auditStatus={
             "audit_created": created,
             "audit_pending": pending,
             "audit_waiting": pending,
@@ -270,7 +268,7 @@ class AuditTab extends React.Component {
             audit_rejected: rejected,
             audit_reaudited: reAudited
         };
-        var statusClass = {
+        var statusClass={
             "audit_created": "pending",
             "audit_pending": "pending",
             "audit_waiting": "pending",
@@ -285,71 +283,71 @@ class AuditTab extends React.Component {
             audit_rejected: "breached",
             audit_reaudited: "completed"
         };
-        var auditType = {"sku": sku, "location": location};
-        var auditDetails = [], auditData = {};
+        var auditType={"sku": sku, "location": location};
+        var auditDetails=[], auditData={};
         var i,limit=data.length;
-        for (i = 0;i<=limit - 1; i++) {
-            auditData.id = data[i].audit_id;
+        for (i=0;i<=limit - 1; i++) {
+            auditData.id=data[i].audit_id;
             if (data[i].display_id) {
-                auditData.display_id = data[i].display_id;
+                auditData.display_id=data[i].display_id;
             }
 
             else {
-                auditData.display_id = "--";
+                auditData.display_id="--";
             }
 
             if (data[i].audit_param_type !== AUDIT_BY_PDFA) {
-                auditData.auditType = data[i].audit_param_type;
+                auditData.auditType=data[i].audit_param_type;
                 if (data[i].audit_param_value) {
-                    auditData.auditValue = data[i].audit_param_value;
-                    auditData.auditTypeValue = auditType[data[i].audit_param_type] + "-" + data[i].audit_param_value;
+                    auditData.auditValue=data[i].audit_param_value;
+                    auditData.auditTypeValue=auditType[data[i].audit_param_type] + "-" + data[i].audit_param_value;
                 }
             }
 
-            else if (data[i].audit_param_type === AUDIT_BY_PDFA) {
-                auditData.auditType = data[i].audit_param_type;
+            else if (data[i].audit_param_type=== AUDIT_BY_PDFA) {
+                auditData.auditType=data[i].audit_param_type;
                 if (data[i].audit_param_value) {
-                    auditData.auditValue = data[i].audit_param_value.product_sku;
-                    auditData.auditTypeValue = auditType[SKU] + "-" + data[i].audit_param_value.product_sku;
-                    auditData.pdfaValues = data[i].audit_param_value.pdfa_values;
+                    auditData.auditValue=data[i].audit_param_value.product_sku;
+                    auditData.auditTypeValue=auditType[SKU] + "-" + data[i].audit_param_value.product_sku;
+                    auditData.pdfaValues=data[i].audit_param_value.pdfa_values;
                 }
             }
 
             if (data[i].audit_status) {
-                if (auditData.statusPriority === undefined) {
-                    auditData.statusPriority = 1;
+                if (auditData.statusPriority=== undefined) {
+                    auditData.statusPriority=1;
                 }
-                auditData.status = auditStatus[data[i].audit_status];
-                auditData.statusClass = statusClass[data[i].audit_status];
-                if (data[i].audit_status === AUDIT_CREATED) {
-                    auditData.startAudit = true;
-                }
-
-                else {
-                    auditData.startAudit = false;
-                }
-
-
-                if (data[i].audit_status === AUDIT_PENDING_APPROVAL) {
-                    auditData.resolveAudit = true;
+                auditData.status=auditStatus[data[i].audit_status];
+                auditData.statusClass=statusClass[data[i].audit_status];
+                if (data[i].audit_status=== AUDIT_CREATED) {
+                    auditData.startAudit=true;
                 }
 
                 else {
-                    auditData.resolveAudit = false;
+                    auditData.startAudit=false;
                 }
 
-                if (data[i].audit_status === AUDIT_RESOLVED || data[i].audit_status === AUDIT_LINE_REJECTED || data[i].audit_status === "audit_reaudited") {
-                    auditData.viewIssues = true;
+
+                if (data[i].audit_status=== AUDIT_PENDING_APPROVAL) {
+                    auditData.resolveAudit=true;
                 }
 
                 else {
-                    auditData.viewIssues = false;
+                    auditData.resolveAudit=false;
+                }
+
+                if (data[i].audit_status=== AUDIT_RESOLVED || data[i].audit_status=== AUDIT_LINE_REJECTED || data[i].audit_status=== "audit_reaudited") {
+                    auditData.viewIssues=true;
+                }
+
+                else {
+                    auditData.viewIssues=false;
                 }
             }
 
             if (data[i].start_actual_time) {
                 if (getDaysDiff(data[i].start_actual_time) < 2) {
-                    auditData.startTime = nProps.context.intl.formatRelative(data[i].start_actual_time, {
+                    auditData.startTime=nProps.context.intl.formatRelative(data[i].start_actual_time, {
                         timeZone: timeOffset,
                         units: 'day'
                     }) +
@@ -361,7 +359,7 @@ class AuditTab extends React.Component {
                     });
                 }
                 else {
-                    auditData.startTime = nProps.context.intl.formatDate(data[i].start_actual_time,
+                    auditData.startTime=nProps.context.intl.formatDate(data[i].start_actual_time,
                     {
                         timeZone: timeOffset,
                         year: 'numeric',
@@ -374,23 +372,23 @@ class AuditTab extends React.Component {
                 }
             }
             else {
-                auditData.startTime = "--";
+                auditData.startTime="--";
             }
 
             if (data[i].expected_quantity && data[i].completed_quantity) {
-                auditData.progress = ((data[i].completed_quantity) / (data[i].expected_quantity) * 100);
+                auditData.progress=((data[i].completed_quantity) / (data[i].expected_quantity) * 100);
             }
 
             else {
-                auditData.progress = 0;
-                if (data[i].audit_status === "audit_completed") {
-                    auditData.progress = 100;
+                auditData.progress=0;
+                if (data[i].audit_status=== "audit_completed") {
+                    auditData.progress=100;
                 }
             }
 
             if (data[i].completion_time) {
                 if (getDaysDiff(data[i].completion_time) < 2) {
-                    auditData.completedTime = nProps.context.intl.formatRelative(data[i].completion_time, {
+                    auditData.completedTime=nProps.context.intl.formatRelative(data[i].completion_time, {
                         timeZone: timeOffset,
                         units: 'day'
                     }) +
@@ -402,7 +400,7 @@ class AuditTab extends React.Component {
                     });
                 }
                 else {
-                    auditData.completedTime = nProps.context.intl.formatDate(data[i].completion_time,
+                    auditData.completedTime=nProps.context.intl.formatDate(data[i].completion_time,
                         {
                             timeZone: timeOffset,
                             year: 'numeric',
@@ -415,12 +413,12 @@ class AuditTab extends React.Component {
                 }
             }
             else {
-                auditData.completedTime = "--";
+                auditData.completedTime="--";
             }
-            auditData.resolvedTask = data[i].resolved;
-            auditData.unresolvedTask = data[i].unresolved;
+            auditData.resolvedTask=data[i].resolved;
+            auditData.unresolvedTask=data[i].unresolved;
             auditDetails.push(auditData);
-            auditData = {};
+            auditData={};
         }
         return auditDetails;
     }
@@ -438,19 +436,19 @@ class AuditTab extends React.Component {
     }
 
     handlePageClick(data) {
-        var url, appendSortUrl = "", appendTextFilterUrl = "", makeDate, inc = 0, value = [], paramValue = "",
-        selectedAuditType = "",_queryParams=[];
-        var currentDate = new Date();
-        var filterApplied = false;
-        var skuText = "", arr = [], selectvalue;
-        makeDate = addDateOffSet(currentDate, -30);
+        var url, appendTextFilterUrl="", makeDate, inc=0, value=[], paramValue="",
+        selectedAuditType="",_queryParams=[];
+        var currentDate=new Date();
+        var filterApplied=false;
+        var skuText="", arr=[], selectvalue;
+        makeDate=addDateOffSet(currentDate, -30);
 
         if (!data) {
             /**
              * After clearing the applied filter,
              * It'll set the default state to the filters.
              */
-             data = {}
+             data={}
              this.props.auditfilterState({
                 tokenSelected: {"AUDIT TYPE": [ANY], "STATUS": [ALL]},
                 searchQuery: {},
@@ -462,59 +460,58 @@ class AuditTab extends React.Component {
          }
 //If user select both we are making it Any for backend support
 if (data.searchQuery && data.tokenSelected[AUDIT_TYPE]) {
-    selectvalue = (data.tokenSelected[AUDIT_TYPE].length === 2) ? ANY : data.tokenSelected[AUDIT_TYPE][0];
-    skuText = AUDIT_PARAM_TYPE + selectvalue;
+    selectvalue=(data.tokenSelected[AUDIT_TYPE].length=== 2) ? ANY : data.tokenSelected[AUDIT_TYPE][0];
+    skuText=AUDIT_PARAM_TYPE + selectvalue;
     _queryParams.push([AUDIT_PARAM_TYPE,selectvalue].join("="))
-    selectedAuditType = this._mappingString(selectvalue);
+    selectedAuditType=this._mappingString(selectvalue);
 
 //Pushing the audit type into array to make it generic
 for (let propt in data.searchQuery) {
-    if (selectedAuditType === 'any') {
+    if (selectedAuditType=== 'any') {
         (propt !== AUDIT_TASK_ID && data.searchQuery[propt] !== "") ? value.push(data.searchQuery[propt]) : '';
     }
     else {
-        (data.searchQuery[propt] !== "" && propt == selectedAuditType) ? value.push(data.searchQuery[propt]) : '';
+        (data.searchQuery[propt] !== "" && propt== selectedAuditType) ? value.push(data.searchQuery[propt]) : '';
     }
 
 }
 //Formatting the param value for single and multiple type       
 if (value.length) {
-    paramValue = (value.length > 1 || selectvalue === ANY) ? "['" + value.join("','") + "']" : "'" + value[0] + "'";
+    paramValue=(value.length > 1 || selectvalue=== ANY) ? "['" + value.join("','") + "']" : "'" + value[0] + "'";
     _queryParams.push([AUDIT_PARAM_VALUE, "['"+value.join("','")+"']"].join("="))
-    skuText = skuText + AUDIT_PARAM_VALUE + paramValue;
+    skuText=skuText + AUDIT_PARAM_VALUE + paramValue;
 }
 }
 //formating the audit status 
 if (data.tokenSelected && data.tokenSelected["STATUS"][0] !== ALL) {
-    let statusToken = data.tokenSelected["STATUS"];
-    skuText = skuText + AUDIT_STATUS + "['" + statusToken.join("','") + "']";
+    let statusToken=data.tokenSelected["STATUS"];
+    skuText=skuText + AUDIT_STATUS + "['" + statusToken.join("','") + "']";
     _queryParams.push([AUDIT_STATUS,"['"+statusToken.join("','")+"']" ].join("="))
 }
 
 if (data.searchQuery && data.searchQuery[AUDIT_TASK_ID]) {
-    appendTextFilterUrl = FILTER_AUDIT_ID + data.searchQuery[AUDIT_TASK_ID];
+    appendTextFilterUrl=FILTER_AUDIT_ID + data.searchQuery[AUDIT_TASK_ID];
     _queryParams.push([FILTER_AUDIT_ID, data.searchQuery[AUDIT_TASK_ID]].join("="))
-    data.selected = 1;
-    filterApplied = true;
+    data.selected=1;
+    filterApplied=true;
 }
 
 
-if (data.url === undefined) {
-    data.selected = data.selected ? data.selected : 1;
+if (data.url=== undefined) {
+    data.selected=data.selected ? data.selected : 1;
     if (data.columnKey && data.sortDir) {
-        appendSortUrl = sortAuditHead[data.columnKey] + sortOrder[data.sortDir];
         _queryParams.push(sortAuditHead[data.columnKey])
         _queryParams.push(sortOrder[data.sortDir])
     }
     _queryParams.push([GIVEN_PAGE,data.selected||1].join("="))
     _queryParams.push([GIVEN_PAGE_SIZE,20].join("="))
-    url = [SEARCH_AUDIT_URL + makeDate,_queryParams.join("&")].join("&")
+    url=[SEARCH_AUDIT_URL + makeDate,_queryParams.join("&")].join("&")
 }
 else {
-    url = data.url;
+    url=data.url;
 }
 this.setState({selected_page: data.selected});
-let paginationData = {
+let paginationData={
     'url': url,
     'method': GET,
     'cause': AUDIT_RETRIEVE,
@@ -527,7 +524,7 @@ this.props.getPageData(paginationData);
 }
 
 _setFilter() {
-    var newState = !this.props.showFilter;
+    var newState=!this.props.showFilter;
     this.props.showTableFilter(newState)
 }
 
@@ -542,47 +539,47 @@ createAudit() {
 
 }
 
-
+//Render Function goes here
 render() {
-    var filterHeight = screen.height - 190;
-    var renderTab = <div/>,
-    timeOffset = this.props.timeOffset || "",
-    headerTimeZone = (this.context.intl.formatDate(Date.now(),
+    var filterHeight=screen.height - 190;
+    var renderTab=<div/>,
+    timeOffset=this.props.timeOffset || "",
+    headerTimeZone=(this.context.intl.formatDate(Date.now(),
     {
         timeZone: timeOffset,
         year: 'numeric',
         timeZoneName: 'long'
     })),
-    totalProgress = 0;
+    totalProgress=0;
 
     /*Extracting Time zone string for the specified time zone*/
-    headerTimeZone = headerTimeZone.substr(5, headerTimeZone.length);
+    headerTimeZone=headerTimeZone.substr(5, headerTimeZone.length);
 
-    var auditData = this._processAuditData();
-    var auditState = {"auditCompleted": 0, "skuAudit": 0, "locationAudit": 0, "totalProgress": 0, auditIssue: 0};
-    for (var i = auditData.length - 1; i >= 0; i--) {
-        if (auditData[i].status === GOR_COMPLETED_STATUS) {
+    var auditData=this._processAuditData();
+    var auditState={"auditCompleted": 0, "skuAudit": 0, "locationAudit": 0, "totalProgress": 0, auditIssue: 0};
+    for (var i=auditData.length - 1; i >= 0; i--) {
+        if (auditData[i].status=== GOR_COMPLETED_STATUS) {
             auditState["auditCompleted"]++;
         }
 
-        if (auditData[i].status === AUDIT_ISSUES_STATUS) {
+        if (auditData[i].status=== AUDIT_ISSUES_STATUS) {
             auditState["auditIssue"]++;
         }
-        if (auditData[i].auditType === SKU || auditData[i].auditType === AUDIT_BY_PDFA) {
+        if (auditData[i].auditType=== SKU || auditData[i].auditType=== AUDIT_BY_PDFA) {
             auditState["skuAudit"]++;
         }
-        if (auditData[i].auditType === LOCATION) {
+        if (auditData[i].auditType=== LOCATION) {
             auditState["locationAudit"]++;
         }
-        totalProgress = auditData[i].progress + totalProgress;
-        auditData[i].progress = auditData[i].progress.toFixed(1);
+        totalProgress=auditData[i].progress + totalProgress;
+        auditData[i].progress=auditData[i].progress.toFixed(1);
 
     }
     if (auditData.length && auditData.length !== 0) {
-        auditState["totalProgress"] = (totalProgress) / (auditData.length);
+        auditState["totalProgress"]=(totalProgress) / (auditData.length);
     }
 
-    renderTab = <AuditTable items={auditData}
+    renderTab=<AuditTable items={auditData}
     intlMessg={this.props.intlMessages}
     timeZoneString={headerTimeZone}
     totalAudits={this.props.totalAudits}
@@ -598,7 +595,7 @@ render() {
     responseFlag={this.props.auditSpinner}
     onSortChange={this._refresh.bind(this)}/>
 
-    let toolbar = <div>
+    let toolbar=<div>
     <div className="gor-filter-wrap"
     style={{'display': this.props.showFilter ? 'block' : 'none', height: filterHeight}}>
     <AuditFilter auditDetail={this.props.auditDetail} responseFlag={this.props.responseFlag}/>
@@ -625,7 +622,7 @@ render() {
     className={this.props.isFilterApplied ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
     onClick={this._setFilter.bind(this)}>
     <div className="gor-manage-task"/>
-    <FormattedMessage id="audit.table.filterLabel" description="button label for filter"
+    <FormattedMessage id="gor.filter.filterLabel" description="button label for filter"
     defaultMessage="Filter data"/>
     </button>
     </div>
@@ -683,11 +680,11 @@ function mapStateToProps(state, ownProps) {
         auditFilterState: state.filterInfo.auditFilterState || {},
         auditListRefreshed:state.auditInfo.auditListRefreshed,
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
-        socketAuthorized: state.recieveSocketActions.socketAuthorized,
+        socketAuthorized: state.recieveSocketActions.socketAuthorized
     };
 }
 
-var mapDispatchToProps = function (dispatch) {
+var mapDispatchToProps=function (dispatch) {
     return {
         auditFilterDetail: function (data) {
             dispatch(auditFilterDetail(data))
@@ -731,14 +728,17 @@ var mapDispatchToProps = function (dispatch) {
         initDataSentCall: function (data) {
             dispatch(setWsAction({type: WS_ONSEND, data: data}));
         },
+         setTextBoxStatus: function (data) {
+            dispatch(setTextBoxStatus(data));
+        }
 
     }
 };
 
-AuditTab.contextTypes = {
+AuditTab.contextTypes={
     intl: React.PropTypes.object.isRequired
 }
-AuditTab.PropTypes = {
+AuditTab.PropTypes={
     orderFilter: React.PropTypes.string,
     auditSortHeader: React.PropTypes.string,
     auditSortHeaderState: React.PropTypes.array,
@@ -762,7 +762,8 @@ AuditTab.PropTypes = {
     getPageData: React.PropTypes.func,
     setAuditRefresh: React.PropTypes.func,
     showTableFilter: React.PropTypes.func,
-    filterApplied: React.PropTypes.func
+    filterApplied: React.PropTypes.func,
+    setTextBoxStatus:React.PropTypes.func,
 }
 
 

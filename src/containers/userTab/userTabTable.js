@@ -21,25 +21,25 @@ import {GOR_USER_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
 class UserDataTable extends React.Component {
     constructor(props) {
         super(props);
-        this._dataList = new tableRenderer(this.props.items.length);
-        this._defaultSortIndexes = [];
-        this._dataList.newData = this.props.items;
-        var size = this._dataList.getSize();
-        for (var index = 0; index < size; index++) {
+        this._dataList=new tableRenderer(this.props.items.length);
+        this._defaultSortIndexes=[];
+        this._dataList.newData=this.props.items;
+        var size=this._dataList.getSize();
+        for (var index=0; index < size; index++) {
             this._defaultSortIndexes.push(index);
         }
-        this.state = {
+        this.state={
             colSortDirs: {},
             sortedDataList: this._dataList,
             ghdgsfh: ''
         },
-            this._onSortChange = this._onSortChange.bind(this);
-        this._onFilterChange = this._onFilterChange.bind(this);
-        this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+            this._onSortChange=this._onSortChange.bind(this);
+        this._onFilterChange=this._onFilterChange.bind(this);
+        this._onColumnResizeEndCallback=this._onColumnResizeEndCallback.bind(this);
     }
 
     _onColumnResizeEndCallback(newColumnWidth, columnKey) {
-        this.setState(({columnWidths}) => ({
+        this.setState(({columnWidths})=> ({
             columnWidths: {
                 ...columnWidths,
                 [columnKey]: newColumnWidth,
@@ -55,25 +55,25 @@ class UserDataTable extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this._dataList = new tableRenderer(nextProps.items.length);
-        this._defaultSortIndexes = [];
-        this._dataList.newData = nextProps.items;
-        var size = this._dataList.getSize();
-        for (var index = 0; index < size; index++) {
+        this._dataList=new tableRenderer(nextProps.items.length);
+        this._defaultSortIndexes=[];
+        this._dataList.newData=nextProps.items;
+        var size=this._dataList.getSize();
+        for (var index=0; index < size; index++) {
             this._defaultSortIndexes.push(index);
         }
-        this.state = {
+        this.state={
             colSortDirs: {},
             sortedDataList: this._dataList,
         },
-            this._onSortChange = this._onSortChange.bind(this);
-        this._onFilterChange = this._onFilterChange.bind(this);
-        this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+            this._onSortChange=this._onSortChange.bind(this);
+        this._onFilterChange=this._onFilterChange.bind(this);
+        this._onColumnResizeEndCallback=this._onColumnResizeEndCallback.bind(this);
         this._onFilterChange(nextProps.getUserFilter);
     }
 
     _onColumnResizeEndCallback(newColumnWidth, columnKey) {
-        this.setState(({columnWidths}) => ({
+        this.setState(({columnWidths})=> ({
             columnWidths: {
                 ...columnWidths,
                 [columnKey]: newColumnWidth,
@@ -83,16 +83,16 @@ class UserDataTable extends React.Component {
 
 
     _onFilterChange(e) {
-        var filterField = ["role", "id", "status", "workMode", "location", "logInTime"], newData;
+        var filterField=["role", "id", "status", "workMode", "location", "logInTime"], newData;
 
         if (e.target && !e.target.value) {
             this.setState({
                 sortedDataList: this._dataList,
             });
         }
-        if (e.target && (e.target.value || e.target.value === "")) {
-            var captureValue = e.target.value;
-            newData = new DataListWrapper(filterIndex(e, this.state.sortedDataList, filterField), this._dataList)
+        if (e.target && (e.target.value || e.target.value=== "")) {
+            var captureValue=e.target.value;
+            newData=new DataListWrapper(filterIndex(e, this.state.sortedDataList, filterField), this._dataList)
 
             this.setState({
                 sortedDataList: newData
@@ -105,7 +105,7 @@ class UserDataTable extends React.Component {
         }
 
         else {
-            newData = new DataListWrapper(filterIndex(e, this.state.sortedDataList, filterField), this._dataList);
+            newData=new DataListWrapper(filterIndex(e, this.state.sortedDataList, filterField), this._dataList);
             this.setState({
                 sortedDataList: newData
             }, function () {
@@ -119,9 +119,9 @@ class UserDataTable extends React.Component {
 
 
     _onSortChange(columnKey, sortDir) {
-        var sortIndexes = this._defaultSortIndexes.slice();
+        var sortIndexes=this._defaultSortIndexes.slice();
         if (this.state.sortedDataList._indexMap) {
-            sortIndexes = this.state.sortedDataList._indexMap.slice();
+            sortIndexes=this.state.sortedDataList._indexMap.slice();
         }
         this.setState({
             sortedDataList: new DataListWrapper(sortData(columnKey, sortDir, sortIndexes, this._dataList), this._dataList),
@@ -136,21 +136,21 @@ class UserDataTable extends React.Component {
 
     handleEdit(columnKey, rowIndex) {
         let uid, uname, fname, lname, roleName, sortedIndex;
-        if (this.state.sortedDataList.newData === undefined) {
-            sortedIndex = this.state.sortedDataList._indexMap[rowIndex];
-            uid = this.state.sortedDataList._data.newData[sortedIndex].uid;
-            uname = this.state.sortedDataList._data.newData[sortedIndex].userName;
-            fname = this.state.sortedDataList._data.newData[sortedIndex].first;
-            lname = this.state.sortedDataList._data.newData[sortedIndex].last;
-            roleName = this.state.sortedDataList._data.newData[sortedIndex].roleId;
+        if (this.state.sortedDataList.newData=== undefined) {
+            sortedIndex=this.state.sortedDataList._indexMap[rowIndex];
+            uid=this.state.sortedDataList._data.newData[sortedIndex].uid;
+            uname=this.state.sortedDataList._data.newData[sortedIndex].userName;
+            fname=this.state.sortedDataList._data.newData[sortedIndex].first;
+            lname=this.state.sortedDataList._data.newData[sortedIndex].last;
+            roleName=this.state.sortedDataList._data.newData[sortedIndex].roleId;
         }
 
         else {
-            uid = this.state.sortedDataList.newData[rowIndex].uid;
-            uname = this.state.sortedDataList.newData[rowIndex].userName;
-            fname = this.state.sortedDataList.newData[rowIndex].first;
-            lname = this.state.sortedDataList.newData[rowIndex].last;
-            roleName = this.state.sortedDataList.newData[rowIndex].roleId;
+            uid=this.state.sortedDataList.newData[rowIndex].uid;
+            uname=this.state.sortedDataList.newData[rowIndex].userName;
+            fname=this.state.sortedDataList.newData[rowIndex].first;
+            lname=this.state.sortedDataList.newData[rowIndex].last;
+            roleName=this.state.sortedDataList.newData[rowIndex].roleId;
         }
 
         modal.add(EditUser, {
@@ -168,15 +168,15 @@ class UserDataTable extends React.Component {
 
     handleDel(columnKey, rowIndex) {
         let id, name, temp, sortedIndex;
-        if (this.state.sortedDataList.newData === undefined) {
-            sortedIndex = this.state.sortedDataList._indexMap[rowIndex];
-            id = this.state.sortedDataList._data.newData[sortedIndex].uid;
-            name = this.state.sortedDataList._data.newData[sortedIndex].id;
+        if (this.state.sortedDataList.newData=== undefined) {
+            sortedIndex=this.state.sortedDataList._indexMap[rowIndex];
+            id=this.state.sortedDataList._data.newData[sortedIndex].uid;
+            name=this.state.sortedDataList._data.newData[sortedIndex].id;
         }
 
         else {
-            id = this.state.sortedDataList.newData[rowIndex].uid;
-            name = this.state.sortedDataList.newData[rowIndex].id;
+            id=this.state.sortedDataList.newData[rowIndex].uid;
+            name=this.state.sortedDataList.newData[rowIndex].id;
         }
         modal.add(DeleteUser, {
             title: '',
@@ -190,29 +190,29 @@ class UserDataTable extends React.Component {
     }
 
     _setFilter() {
-        var newState = !this.props.showFilter;
+        var newState=!this.props.showFilter;
         this.props.setFilter(newState);
     }
 
 
     render() {
-        let updateStatusIntl = "";
-        let filterHeight = screen.height - 190 - 50;
-        let {sortedDataList, colSortDirs, columnWidths} = this.state;
-        let columnWidth = (this.props.containerWidth / this.props.itemNumber);
-        let heightRes = 560, rowsCount = sortedDataList.getSize();
+        let updateStatusIntl="";
+        let filterHeight=screen.height - 190 - 50;
+        let {sortedDataList, colSortDirs, columnWidths}=this.state;
+        let columnWidth=(this.props.containerWidth / this.props.itemNumber);
+        let heightRes=560, rowsCount=sortedDataList.getSize();
         if (this.props.containerHeight !== 0) {
-            heightRes = this.props.containerHeight;
+            heightRes=this.props.containerHeight;
         }
-        var selEdit = this.handleEdit.bind(this);
-        let selDel = this.handleDel.bind(this);
-        let containerHeight = this.props.containerHeight;
-        let noData = <div/>;
-        if (rowsCount === 0 || rowsCount === undefined || rowsCount === null) {
-            noData = <div className="gor-no-data"><FormattedMessage id="user.table.noData"
+        var selEdit=this.handleEdit.bind(this);
+        let selDel=this.handleDel.bind(this);
+        let containerHeight=this.props.containerHeight;
+        let noData=<div/>;
+        if (rowsCount=== 0 || rowsCount=== undefined || rowsCount=== null) {
+            noData=<div className="gor-no-data"><FormattedMessage id="user.table.noData"
                                                                     description="No data message for user table"
                                                                     defaultMessage="No User Found"/></div>
-            containerHeight = GOR_USER_TABLE_HEADER_HEIGHT;
+            containerHeight=GOR_USER_TABLE_HEADER_HEIGHT;
         }
         return (
             <div>
@@ -331,7 +331,7 @@ class UserDataTable extends React.Component {
     }
 }
 
-UserDataTable.PropTypes = {
+UserDataTable.PropTypes={
     items: React.PropTypes.array,
     containerWidth: React.PropTypes.number,
     itemNumber: React.PropTypes.number,

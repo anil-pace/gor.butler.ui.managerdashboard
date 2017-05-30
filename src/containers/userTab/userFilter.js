@@ -1,5 +1,4 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import {FormattedMessage} from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
 import {showTableFilter, filterApplied, userfilterState, toggleUserFilter} from '../../actions/filterAction';
@@ -15,7 +14,7 @@ import {hashHistory} from 'react-router'
 class UserFilter extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
+        this.state={
             tokenSelected: {"STATUS": ["all"], "ROLE": ["all"], "WORK MODE": ["all"], "LOCATION": ["all"]},
             searchQuery: {},
             defaultToken: {"STATUS": ["all"], "ROLE": ["all"], "WORK MODE": ["all"], "LOCATION": ["all"]}
@@ -36,17 +35,17 @@ class UserFilter extends React.Component {
     }
 
     _closeFilter() {
-        let filterState = !this.props.showFilter;
+        let filterState=!this.props.showFilter;
         this.props.showTableFilter(filterState);
     }
 
     _processUserSearchField() {
-        const filterInputFields = [{
+        const filterInputFields=[{
             value: "USER NAME",
             label: <FormattedMessage id="user.inputField.id" defaultMessage="USER NAME"/>
         }];
-        let inputValue = this.state.searchQuery;
-        let inputField = <FilterInputFieldWrap inputText={filterInputFields}
+        let inputValue=this.state.searchQuery;
+        let inputField=<FilterInputFieldWrap inputText={filterInputFields}
                                                handleInputText={this._handleInputQuery.bind(this)}
                                                inputValue={inputValue}/>
         return inputField;
@@ -60,14 +59,14 @@ class UserFilter extends React.Component {
     }
 
     _processUserRoll() {
-        let objRole = [{value: 'all', label: <FormattedMessage id="user.role.all" defaultMessage="Any"/>}],
-            roleData = {}, currentRole;
-        for (let i = 0, len = this.props.roleList.length; i < len; i++) {
-            currentRole = this.props.roleList[i];
+        let objRole=[{value: 'all', label: <FormattedMessage id="user.role.all" defaultMessage="Any"/>}],
+            roleData={}, currentRole;
+        for (let i=0, len=this.props.roleList.length; i < len; i++) {
+            currentRole=this.props.roleList[i];
             if (!this._isMapped(stringConfig, currentRole.name)) {
                 continue;
             }
-            roleData = {
+            roleData={
                 value: currentRole.name,
                 label: this.context.intl.formatMessage(stringConfig[currentRole.name])
             }
@@ -77,27 +76,27 @@ class UserFilter extends React.Component {
     }
 
     _processFilterToken() {
-        let tokenStatus = {
+        let tokenStatus={
             value: "STATUS",
             label: <FormattedMessage id="user.tokenfield.status" defaultMessage="STATUS"/>
         };
-        let tokenRole = {value: "ROLE", label: <FormattedMessage id="user.tokenfield.role" defaultMessage="ROLE"/>};
-        let tokenWorkMode = {
+        let tokenRole={value: "ROLE", label: <FormattedMessage id="user.tokenfield.role" defaultMessage="ROLE"/>};
+        let tokenWorkMode={
             value: "WORK MODE",
             label: <FormattedMessage id="user.tokenfield.mode" defaultMessage="WORK MODE"/>
         };
-        let tokenLocation = {
+        let tokenLocation={
             value: "LOCATION",
             label: <FormattedMessage id="user.tokenfield.location" defaultMessage="LOCATION"/>
         };
-        const labelC1 = [
+        const labelC1=[
             {value: 'all', label: <FormattedMessage id="user.status.all" defaultMessage="Any"/>},
             {value: 'online', label: <FormattedMessage id="user.status.online" defaultMessage="Online"/>},
             {value: 'offline', label: <FormattedMessage id="user.status.offline" defaultMessage="Offline"/>}
         ];
 
-        const labelC2 = this._processUserRoll();
-        const labelC3 = [
+        const labelC2=this._processUserRoll();
+        const labelC3=[
             {value: 'all', label: <FormattedMessage id="user.workmode.all" defaultMessage="Any"/>},
             {value: 'pick__front', label: <FormattedMessage id="user.workmode.pickfront" defaultMessage="Pick Front"/>},
             {value: 'pick__back', label: <FormattedMessage id="user.workmode.pickback" defaultMessage="Pick Back"/>},
@@ -107,7 +106,7 @@ class UserFilter extends React.Component {
             {value: 'management', label: <FormattedMessage id="user.workmode.management" defaultMessage="Management"/>}
         ];
 
-        const labelC4 = [
+        const labelC4=[
             {value: 'all', label: <FormattedMessage id="user.location.all" defaultMessage="Any"/>},
             {
                 value: 'pickputstation',
@@ -117,17 +116,17 @@ class UserFilter extends React.Component {
             {value: 'headoffice', label: <FormattedMessage id="user.location.resolved" defaultMessage="Head Office"/>}
         ];
 
-        let selectedToken = this.state.tokenSelected;
-        let column1 = <FilterTokenWrap field={tokenStatus} tokenCallBack={this._handelTokenClick.bind(this)}
+        let selectedToken=this.state.tokenSelected;
+        let column1=<FilterTokenWrap field={tokenStatus} tokenCallBack={this._handelTokenClick.bind(this)}
                                        label={labelC1} selectedToken={selectedToken}/>;
-        let column2 = <FilterTokenWrap field={tokenRole} tokenCallBack={this._handelTokenClick.bind(this)}
+        let column2=<FilterTokenWrap field={tokenRole} tokenCallBack={this._handelTokenClick.bind(this)}
                                        label={labelC2} selectedToken={selectedToken}/>;
-        let column3 = <FilterTokenWrap field={tokenWorkMode} tokenCallBack={this._handelTokenClick.bind(this)}
+        let column3=<FilterTokenWrap field={tokenWorkMode} tokenCallBack={this._handelTokenClick.bind(this)}
                                        label={labelC3} selectedToken={selectedToken}/>;
-        let column4 = <FilterTokenWrap field={tokenLocation} tokenCallBack={this._handelTokenClick.bind(this)}
+        let column4=<FilterTokenWrap field={tokenLocation} tokenCallBack={this._handelTokenClick.bind(this)}
                                        label={labelC4} selectedToken={selectedToken}/>;
 
-        let columnDetail = {column1token: column1, column2token: column2, column3token: column3, column4token: column4};
+        let columnDetail={column1token: column1, column2token: column2, column3token: column3, column4token: column4};
         return columnDetail;
     }
 
@@ -140,7 +139,7 @@ class UserFilter extends React.Component {
     }
 
     _applyFilter() {
-        let filterSubsData = {}, filterState = this.state, _query = {};
+        let filterSubsData={}, filterState=this.state, _query={};
         /** Gaurav Makkar:
          * Changed query parameters for username filter
          * Updated data to be sent to the socket
@@ -150,16 +149,16 @@ class UserFilter extends React.Component {
          * {username:[<1>,<2>]}
          */
         if (filterState.searchQuery && filterState.searchQuery["USER NAME"]) {
-            _query.username = filterState.searchQuery["USER NAME"]
-            let name_query = filterState.searchQuery["USER NAME"].split(" ")
-            name_query = name_query.filter(function (word) {
+            _query.username=filterState.searchQuery["USER NAME"]
+            let name_query=filterState.searchQuery["USER NAME"].split(" ")
+            name_query=name_query.filter(function (word) {
                 return !!word
             })
-            filterSubsData["username"] = name_query.length > 1 ? name_query : name_query.join("").trim();
+            filterSubsData["username"]=name_query.length > 1 ? name_query : name_query.join("").trim();
         }
         if (filterState.tokenSelected) {
-            (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !== "all" && filterState.tokenSelected["STATUS"].length !== 2 ? filterSubsData["logged_in"] = ['is', (filterState.tokenSelected["STATUS"] === "online") ? "true" : "false"] : "");
-            (filterState.tokenSelected["ROLE"] && filterState.tokenSelected["ROLE"][0] !== "all" ? filterSubsData["role"] = ['in', filterState.tokenSelected["ROLE"]] : "");
+            (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !== "all" && filterState.tokenSelected["STATUS"].length !== 2 ? filterSubsData["logged_in"]=['is', (filterState.tokenSelected["STATUS"]=== "online") ? "true" : "false"] : "");
+            (filterState.tokenSelected["ROLE"] && filterState.tokenSelected["ROLE"][0] !== "all" ? filterSubsData["role"]=['in', filterState.tokenSelected["ROLE"]] : "");
             /** Gaurav Makkar:
              * Added double underscore as a separator for the pps mode
              * and seat type of the Work Mode filter.
@@ -167,30 +166,30 @@ class UserFilter extends React.Component {
              * {pps:["in",[{pps_mode:"put",seat_type:"front"}]]}
              */
             if (filterState.tokenSelected["WORK MODE"] && filterState.tokenSelected["WORK MODE"][0] !== "all") {
-                let pps_list = []
+                let pps_list=[]
                 filterState.tokenSelected["WORK MODE"].forEach(function (mode) {
                     pps_list.push(mode.split("__").length > 1 ? {
                         pps_mode: mode.split("__")[0],
                         seat_type: mode.split("__")[1]
                     } : {pps_mode: mode.split("__")[0]})
                 })
-                filterSubsData["pps"] = ['in', pps_list]
+                filterSubsData["pps"]=['in', pps_list]
             }
 
-            // (filterState.tokenSelected["LOCATION"] && filterState.tokenSelected["LOCATION"][0]!=="all"?filterSubsData["seat_type"] = ['in',filterState.tokenSelected["LOCATION"]]:"");
+            // (filterState.tokenSelected["LOCATION"] && filterState.tokenSelected["LOCATION"][0]!=="all"?filterSubsData["seat_type"]=['in',filterState.tokenSelected["LOCATION"]]:"");
 
 
             /**
              * for query generation
              */
             if (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !== 'all') {
-                _query.status = filterState.tokenSelected["STATUS"]
+                _query.status=filterState.tokenSelected["STATUS"]
             }
             if (filterState.tokenSelected["ROLE"] && filterState.tokenSelected["ROLE"][0] !== 'all') {
-                _query.role = filterState.tokenSelected["ROLE"]
+                _query.role=filterState.tokenSelected["ROLE"]
             }
             if (filterState.tokenSelected["WORK MODE"] && filterState.tokenSelected["WORK MODE"][0] !== 'all') {
-                _query.mode = filterState.tokenSelected["WORK MODE"]
+                _query.mode=filterState.tokenSelected["WORK MODE"]
             }
         }
         hashHistory.push({pathname: "/users", query: _query})
@@ -201,11 +200,11 @@ class UserFilter extends React.Component {
     }
 
     render() {
-        let userDetail = this.props.userDetails;
-        let noOrder = userDetail.userDetails && userDetail.userDetails.length ? false : true;
+        let userDetail=this.props.userDetails;
+        let noOrder=userDetail.userDetails && userDetail.userDetails.length ? false : true;
 
-        let userSearchField = this._processUserSearchField();
-        let userFilterToken = this._processFilterToken();
+        let userSearchField=this._processUserSearchField();
+        let userFilterToken=this._processFilterToken();
         return (
             <div>
                 <Filter hideFilter={this._closeFilter.bind(this)}
@@ -225,7 +224,7 @@ class UserFilter extends React.Component {
 }
 ;
 
-UserFilter.contextTypes = {
+UserFilter.contextTypes={
     intl: React.PropTypes.object.isRequired
 }
 
@@ -245,7 +244,7 @@ function mapStateToProps(state, ownProps) {
     };
 }
 
-var mapDispatchToProps = function (dispatch) {
+var mapDispatchToProps=function (dispatch) {
     return {
         showTableFilter: function (data) {
             dispatch(showTableFilter(data));
@@ -267,7 +266,7 @@ var mapDispatchToProps = function (dispatch) {
         }
     }
 };
-UserFilter.PropTypes = {
+UserFilter.PropTypes={
     userDetails: React.PropTypes.array,
     showFilter: React.PropTypes.bool,
     auditSpinner: React.PropTypes.bool,

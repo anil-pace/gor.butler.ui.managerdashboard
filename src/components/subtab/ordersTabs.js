@@ -39,25 +39,25 @@ class OrderSubTab extends React.Component{
     }
     
 	render(){
-		var selectClass = {orderlist:"gor-main-block", waves:"gor-main-block"};
+		var selectClass={orderlist:"gor-main-block", waves:"gor-main-block"};
 		if(this.props.subTab.length) {
-			selectClass[this.props.subTab] = "gor-main-blockSelect";
+			selectClass[this.props.subTab]="gor-main-blockSelect";
 		}
 
 		else {
-			selectClass["waves"] = "gor-main-blockSelect";
+			selectClass["waves"]="gor-main-blockSelect";
 		}
-		let waves = <FormattedMessage id="OrderSubTab.waves" description="waves tab for OrderSubTab" defaultMessage ="Waves"/> 
-    	let orderlist = <FormattedMessage id="OrderSubTab.orderlist" description="orderlist tab for OrderSubTab" defaultMessage ="Order List"/> 
+		let waves=<FormattedMessage id="OrderSubTab.waves" description="waves tab for OrderSubTab" defaultMessage="Waves"/> 
+    	let orderlist=<FormattedMessage id="OrderSubTab.orderlist" description="orderlist tab for OrderSubTab" defaultMessage="Order List"/> 
     
 		return (
 			<div>
 				<div className="gorMainSubtab">
 					
-					<Link to="/orders/waves" onClick = {this.handleSysSubTabClick.bind(this,WAVES)}>
+					<Link to="/orders/waves" onClick={this.handleSysSubTabClick.bind(this,WAVES)}>
 						<SubTab item={waves} changeClass={selectClass["waves"]}/> 
 					</Link>
-					<Link to="/orders/orderlist" onClick = {this.handleSysSubTabClick.bind(this,ORDER_LIST)}>
+					<Link to="/orders/orderlist" onClick={this.handleSysSubTabClick.bind(this,ORDER_LIST)}>
 						<SubTab item={orderlist} changeClass={selectClass["orderlist"]}/> 
 					</Link>
 				</div>
@@ -73,7 +73,7 @@ function mapStateToProps(state, ownProps){
     }
 }
 
-var mapDispatchToProps = function(dispatch){
+var mapDispatchToProps=function(dispatch){
 	return {
 		subTabSelected: function(data){ dispatch(subTabSelected(data)); },
 		setOrderListSpinner: function(data){dispatch(setOrderListSpinner(data))},

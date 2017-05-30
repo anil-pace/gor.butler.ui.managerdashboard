@@ -1,12 +1,10 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
-import {FormattedMessage, FormattedPlural} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 import {userRequest} from '../../actions/userActions';
 import {validateName, validatePassword, resetForm} from '../../actions/validationActions';
 import {connect} from 'react-redux';
 import {ERROR, GET_ROLES, EDIT_USER, SUCCESS, GET, APP_JSON, PUT} from '../../constants/frontEndConstants';
-import {BUTLER_SUPERVISOR, BUTLER_UI} from '../../constants/backEndConstants';
-import {TYPE_SUCCESS} from '../../constants/messageConstants';
+import {BUTLER_SUPERVISOR} from '../../constants/backEndConstants';
 import {ROLE_URL, HEADER_URL} from '../../constants/configConstants';
 import FieldError from '../../components/fielderror/fielderror';
 import UserRoles from './userRoles';
@@ -15,11 +13,11 @@ import {nameStatus, passwordStatus} from '../../utilities/fieldCheck';
 class EditUser extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {pwdView: false}
+        this.state={pwdView: false}
     }
 
     componentDidMount() {
-        let userData = {
+        let userData={
             'url': ROLE_URL,
             'method': GET,
             'cause': GET_ROLES,
@@ -46,8 +44,8 @@ class EditUser extends React.Component {
     }
 
     _checkName() {
-        let firstname = this.firstName.value, lastname = this.lastName.value, nameInfo;
-        nameInfo = nameStatus(firstname, lastname);
+        let firstname=this.firstName.value, lastname=this.lastName.value, nameInfo;
+        nameInfo=nameStatus(firstname, lastname);
         this.props.validateName(nameInfo);
         return nameInfo.type;
     }
@@ -57,22 +55,22 @@ class EditUser extends React.Component {
     }
 
     _checkPwd() {
-        let pswd = this.pswd.value, confirmPswd = this.confirmPswd.value, givenRole, passwordInfo, roleSelected;
-        givenRole = this.props.roleName;
-        roleSelected = this.props.roleSet ? this.props.roleSet : givenRole;
-        if (roleSelected != givenRole) {
+        let pswd=this.pswd.value, confirmPswd=this.confirmPswd.value, givenRole, passwordInfo, roleSelected;
+        givenRole=this.props.roleName;
+        roleSelected=this.props.roleSet ? this.props.roleSet : givenRole;
+        if (roleSelected!==givenRole) {
             this.setState({pwdView: true});
         }
-        passwordInfo = passwordStatus(pswd, confirmPswd, roleSelected);
+        passwordInfo=passwordStatus(pswd, confirmPswd, roleSelected);
         this.props.validatePassword(passwordInfo);
         return passwordInfo.type;
     }
 
     _getId(role) {
-        let roles = this.props.roleList, len;
-        len = roles.length;
-        for (let i = 0; i < len; i++) {
-            if (roles[i].name == role) {
+        let roles=this.props.roleList, len;
+        len=roles.length;
+        for (let i=0; i < len; i++) {
+            if (roles[i].name=== role) {
                 return roles[i].id;
             }
         }
@@ -81,29 +79,29 @@ class EditUser extends React.Component {
 
     _handleEditUser(e) {
         e.preventDefault();
-        let pswd, confirmPswd, role, opt, firstname, lastname, givenRole;
+        let pswd, confirmPswd, role, firstname, lastname, givenRole;
 
-        firstname = this.firstName.value;
-        lastname = this.lastName.value;
-        pswd = this.pswd.value;
-        confirmPswd = this.confirmPswd.value;
+        firstname=this.firstName.value;
+        lastname=this.lastName.value;
+        pswd=this.pswd.value;
+        confirmPswd=this.confirmPswd.value;
 
         if (!this.props.nameCheck.type) {
             if (!this._checkName())
                 return;
         }
-        givenRole = this._getId(this.props.roleName);
+        givenRole=this._getId(this.props.roleName);
 
-        role = this.props.roleSet ? this._getId(this.props.roleSet) : givenRole;
+        role=this.props.roleSet ? this._getId(this.props.roleSet) : givenRole;
 
-        if (!pswd && !confirmPswd && (role === givenRole || this.props.roleSet !== BUTLER_SUPERVISOR)) {
-            pswd = "__unchanged__";
-            confirmPswd = "__unchanged__";
+        if (!pswd && !confirmPswd && (role=== givenRole || this.props.roleSet !== BUTLER_SUPERVISOR)) {
+            pswd="__unchanged__";
+            confirmPswd="__unchanged__";
         }
         else if (!this._checkPwd()) {
             return;
         }
-        let formdata = {
+        let formdata={
             "first_name": firstname,
             "last_name": lastname,
             "role_id": role,
@@ -111,8 +109,8 @@ class EditUser extends React.Component {
             "password_confirm": confirmPswd
 
         };
-        let editurl = HEADER_URL + '/' + this.props.id;
-        let userData = {
+        let editurl=HEADER_URL + '/' + this.props.id;
+        let userData={
             'url': editurl,
             'formdata': formdata,
             'method': PUT,
@@ -126,7 +124,7 @@ class EditUser extends React.Component {
     }
 
     render() {
-        let tick = (<div className='gor-tick'/>);
+        let tick=(<div className='gor-tick'/>);
         return (
             <div>
                 <div className="gor-modal-content">
@@ -142,10 +140,10 @@ class EditUser extends React.Component {
                         <span className="close" onClick={this.removeThisModal.bind(this)}>×</span>
                     </div>
                     <div className='gor-modal-body'>
-                        <form action="#" id="editUserForm" ref={node => {
-                            this.editUserForm = node
+                        <form action="#" id="editUserForm" ref={node=> {
+                            this.editUserForm=node
                         }}
-                              onSubmit={(e) => this._handleEditUser(e)}>
+                              onSubmit={(e)=> this._handleEditUser(e)}>
 
                             <div className='gor-usr-form'>
                                 <div className='gor-usr-details'>
@@ -162,8 +160,8 @@ class EditUser extends React.Component {
                                                                                     description='Text for user id'
                                                                                     defaultMessage='User ID'/></div>
                                     <input className='gor-usr-fdlg' type="text" placeholder={this.props.userName}
-                                           id="userid" ref={node => {
-                                        this.userId = node
+                                           id="userid" ref={node=> {
+                                        this.userId=node
                                     }} disabled/>
                                     <p></p>
                                     <div className='gor-usr-field'>
@@ -171,10 +169,10 @@ class EditUser extends React.Component {
                                             id="users.edit.userdetails.firstname" description='Text for first name'
                                             defaultMessage='First Name'/></div>
                                         <input
-                                            className={"gor-usr-fdsm" + (this.props.nameCheck.type === ERROR ? ' gor-input-error' : ' gor-input-ok')}
-                                            onBlur={(this.props.nameCheck.type === ERROR || this.props.nameCheck.type === SUCCESS) ? this._checkName.bind(this) : ''}
-                                            type="text" defaultValue={this.props.first} id="firstname" ref={node => {
-                                            this.firstName = node
+                                            className={"gor-usr-fdsm" + (this.props.nameCheck.type=== ERROR ? ' gor-input-error' : ' gor-input-ok')}
+                                            onBlur={(this.props.nameCheck.type=== ERROR || this.props.nameCheck.type=== SUCCESS) ? this._checkName.bind(this) : ''}
+                                            type="text" defaultValue={this.props.first} id="firstname" ref={node=> {
+                                            this.firstName=node
                                         }}/>
                                     </div>
                                     <div className='gor-usr-field'>
@@ -182,13 +180,13 @@ class EditUser extends React.Component {
                                             id="users.edit.userdetails.lastname" description='Text for last name'
                                             defaultMessage='Last Name'/></div>
                                         <input
-                                            className={"gor-usr-fdsm" + (this.props.nameCheck.type === ERROR ? ' gor-input-error' : ' gor-input-ok')}
+                                            className={"gor-usr-fdsm" + (this.props.nameCheck.type=== ERROR ? ' gor-input-error' : ' gor-input-ok')}
                                             onBlur={this._checkName.bind(this)} type="text"
-                                            defaultValue={this.props.last} id="lastname" ref={node => {
-                                            this.lastName = node
+                                            defaultValue={this.props.last} id="lastname" ref={node=> {
+                                            this.lastName=node
                                         }}/>
                                     </div>
-                                    {this.props.nameCheck.type ? tick : ((this.props.nameCheck.type === ERROR) ?
+                                    {this.props.nameCheck.type ? tick : ((this.props.nameCheck.type=== ERROR) ?
                                         <FieldError txt={this.props.nameCheck.msg}/> : '')}
 
                                 </div>
@@ -214,11 +212,11 @@ class EditUser extends React.Component {
                                                                                         defaultMessage='Password'/>
                                         </div>
                                         <input
-                                            className={"gor-usr-fdlg" + (this.props.passwordCheck.type === ERROR ? ' gor-input-error' : ' gor-input-ok')}
+                                            className={"gor-usr-fdlg" + (this.props.passwordCheck.type=== ERROR ? ' gor-input-error' : ' gor-input-ok')}
                                             type="password" id="pswd"
-                                            onBlur={(this.props.passwordCheck.type === ERROR || this.props.passwordCheck.type === SUCCESS) ? this._checkPwd.bind(this) : ''}
-                                            ref={node => {
-                                                this.pswd = node
+                                            onBlur={(this.props.passwordCheck.type=== ERROR || this.props.passwordCheck.type=== SUCCESS) ? this._checkPwd.bind(this) : ''}
+                                            ref={node=> {
+                                                this.pswd=node
                                             }}/>
                                         {this.props.passwordCheck.type ? tick : ''}
 
@@ -227,12 +225,12 @@ class EditUser extends React.Component {
                                                                                         defaultMessage='Confirm Password'/>
                                         </div>
                                         <input
-                                            className={"gor-usr-fdlg" + (this.props.passwordCheck.type === ERROR ? ' gor-input-error' : ' gor-input-ok')}
+                                            className={"gor-usr-fdlg" + (this.props.passwordCheck.type=== ERROR ? ' gor-input-error' : ' gor-input-ok')}
                                             type="password" id="confirmPswd" onChange={this._checkPwd.bind(this)}
-                                            ref={node => {
-                                                this.confirmPswd = node
+                                            ref={node=> {
+                                                this.confirmPswd=node
                                             }}/>
-                                        {this.props.passwordCheck.type ? tick : ((this.props.passwordCheck.type === ERROR) ?
+                                        {this.props.passwordCheck.type ? tick : ((this.props.passwordCheck.type=== ERROR) ?
                                             <FieldError txt={this.props.passwordCheck.msg}/> : '')}
                                     </div>
 
@@ -243,7 +241,7 @@ class EditUser extends React.Component {
                                         </div>
 
                                         <a href="javascript:void(0)"
-                                           onClick={(e) => this._handleAnchorClick(e)}><FormattedMessage
+                                           onClick={(e)=> this._handleAnchorClick(e)}><FormattedMessage
                                             id="users.edit.password.query" description='Text for change password'
                                             defaultMessage='Change Password'/></a>
                                     </div>
@@ -272,7 +270,7 @@ function mapStateToProps(state, ownProps) {
     };
 }
 
-var mapDispatchToProps = function (dispatch) {
+var mapDispatchToProps=function (dispatch) {
     return {
         userRequest: function (data) {
             dispatch(userRequest(data));
