@@ -11,7 +11,7 @@ const notificationSocketMiddleware = (function(){
 
   const onMessage = (ws,store) => frame => {
     //Parse the JSON message received on the websocket
-    console.log(frame.body);
+    
     var msg = JSON.parse(frame.body);
       NotificationResponseParse(store,msg);    
   }
@@ -40,7 +40,9 @@ const notificationSocketMiddleware = (function(){
       case WS_NOTIFICATION_CONNECT:
         //Start a new connection to the server
         if(socket !== null) {
-          socket.close();
+          socket.disconnect(function(){
+            console.log("disconnected");
+          });
         }
         //Send an action that shows a "connecting..." status for now
         //store.dispatch(actions.connecting());

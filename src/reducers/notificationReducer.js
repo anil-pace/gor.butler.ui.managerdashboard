@@ -2,7 +2,11 @@ import {
   SEARCHED_NOTIFICATIONS_DATA,
   WS_NOTIFICATIONS_DATA,
   SEND_READ_INTIMATION,
-  RESET_NOTIFICATION_DATA
+  RESET_NOTIFICATION_DATA,
+  GET_ALL_NOTIFICATIONS,
+  RESET_NOTIFICATION_TABLE_DATA,
+  SET_NOTIFICATION_SPINNER,
+  SEARCHED_NOTIFICATIONS_DATA_ALL
 } from '../constants/frontEndConstants';
 /**
  * @param  {State Object}
@@ -34,7 +38,7 @@ export  function notificationReducer(state={},action){
                 let tuple={};
                 tuple.id = wsNotificationData[i].id;
                 tuple.lastRead = epochTime;
-                readList.push(tuple);
+                readList.push(tuple.id);
             }
           }
           return Object.assign({}, state, { 
@@ -49,7 +53,32 @@ export  function notificationReducer(state={},action){
     case RESET_NOTIFICATION_DATA:
           return Object.assign({}, state, { 
             "searchApplied":false
-          })            
+          })
+    case GET_ALL_NOTIFICATIONS: 
+          let notificationData = state.completeNotificationData || [];
+          return Object.assign({}, state, { 
+            "completeNotificationData":notificationData.concat(action.data),
+            "hasDataChanged":!state.hasDataChanged,
+            "isLoading":false
+          })  
+    case RESET_NOTIFICATION_TABLE_DATA:
+           return Object.assign({}, state, { 
+            "completeNotificationData":(action.data ? [] :state.completeNotificationData),
+            "hasDataChanged":!state.hasDataChanged,
+            "searchAppliedAllNotifications":false
+          }) 
+    case SET_NOTIFICATION_SPINNER:  
+          return Object.assign({}, state, { 
+            "isLoading":action.data
+          })  
+    case SEARCHED_NOTIFICATIONS_DATA_ALL:
+          return Object.assign({}, state, { 
+            "searchedAllNotificationData":action.data,
+            "isLoading":false,
+            "hasDataChanged":!state.hasDataChanged,
+            "searchAppliedAllNotifications":true
+          })
+
     default:
       return state
   }

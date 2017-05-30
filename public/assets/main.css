@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* 
 Reset Stylesheet v0.0.1
 Author: Himanshu Saraswat
@@ -6241,6 +6242,7 @@ button:disabled {
 .gor-all-not-tbl {
   width: 97%;
   margin-top: 20px;
+  overflow: auto;
 }
 
 .gor-all-not-tbl .table-row {
@@ -6264,267 +6266,133 @@ button:disabled {
   width: 20%;
 }
 
-/*
- * Define the widths: play around with these 
- * to get a best fit.
- */
-/*
- * Basic styles, good for a large display. Everything fits in
- * one row, no wrapping. All text based cells grow equally.
- */
-.table-row {
-  display: flex;
-  display: -webkit-flex;
-  flex-direction: row;
-  -webkit-flex-direction: row;
-  flex-wrap: no-wrap;
-  -webkit-flex-wrap: no-wrap;
-  width: 100%;
-  padding-left: 15px;
-  padding-right: 15px;
+.allNotificationWrap .gor-modal-head {
+  position: relative;
 }
 
-.wrapper {
-  display: flex;
-  display: -webkit-flex;
-  flex-direction: row;
-  -webkit-flex-direction: row;
+.allNotificationWrap .modal-head-text {
+  width: 50%;
+  display: inline-block;
+  vertical-align: middle;
 }
 
-.column {
-  flex-grow: 0;
-  -webkit-flex-grow: 0;
-  flex-shrink: 0;
-  -webkit-flex-shrink: 0;
-  vertical-align: top;
-}
-
-.index {
-  width: 25px;
-}
-
-.title {
-  width: 220px;
-}
-
-.module {
-  width: 110px;
-}
-
-.reporter {
-  width: 85px;
-}
-
-.status {
-  width: 95px;
-}
-
-.owner {
-  width: 75px;
-}
-
-.severity {
-  width: 80px;
-}
-
-.watch,
-.add-comment {
-  width: 18px;
-}
-
-.date {
-  width: 110px;
-}
-
-.index {
-  text-align: center;
-}
-
-.title {
-  font-weight: bold;
-  color: #337AB5;
-}
-
-.comment {
-  width: 120px;
-}
-
-.title,
-.comment {
-  flex-grow: 1;
-  -webkit-flex-grow: 1;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  padding-right: 4px;
-}
-
-.date {
-  width: 110px;
+.allNotificationWrap .modal-search-input {
+  width: 43%;
+  display: inline-block;
   text-align: right;
-  padding-right: 4px;
+  vertical-align: middle;
 }
 
-/* growable wrappers */
-.title-comment,
-.title-comment-module-reporter,
-.attributes {
-  flex-grow: 1;
-  -webkit-flex-grow: 1;
+.table-container {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-/*
- * Media queries: optimize for different screen widths.
- */
-/*
- * Media breaks.
- */
-@media all and (max-width: 1236px) {
-  .title-comment {
-    flex-direction: column;
-    -webkit-flex-direction: column;
-    width: 220px;
-  }
-  .title-comment div {
-    flex-grow: 0;
-    -webkit-flex-grow: 0;
-  }
-  .title-comment > div {
-    width: 100%;
-  }
-  .module-reporter,
-  .status-owner {
-    flex-direction: column;
-    -webkit-flex-direction: column;
-  }
-  .module-reporter div,
-  .status-owner div {
-    flex-grow: 0;
-    -webkit-flex-grow: 0;
-  }
+.table-container .cell {
+  overflow: hidden;
 }
 
-@media all and (max-width: 956px) {
-  .module-reporter {
-    flex-direction: row;
-    -webkit-flex-direction: row;
-  }
-  .title-comment-module-reporter {
-    flex-direction: column;
-    -webkit-flex-direction: column;
-    width: 220px;
-  }
-  .title-comment-module-reporter div {
-    flex-grow: 0;
-    -webkit-flex-grow: 0;
-  }
-  .title-comment-module-reporter > div {
-    width: 100%;
-  }
-  .status-owner-severity {
-    flex-direction: column;
-    -webkit-flex-direction: column;
-  }
-  .status-owner-severity div {
-    flex-grow: 0;
-    -webkit-flex-grow: 0;
-  }
-  .icons {
-    flex-direction: column;
-    -webkit-flex-direction: column;
-  }
-  .icons div {
-    flex-grow: 0;
-    -webkit-flex-grow: 0;
-  }
-  .dates {
-    flex-direction: column;
-    -webkit-flex-direction: column;
-  }
-  .dates div {
-    flex-grow: 0;
-    -webkit-flex-grow: 0;
-  }
-}
-
-@media all and (max-width: 528px) {
-  .table-row {
-    padding-left: 4px;
-    padding-right: 4px;
-  }
-  .attributes {
-    flex-direction: column;
-    -webkit-flex-direction: column;
-    width: 220px;
-  }
-  .attributes div {
-    flex-grow: 0;
-    -webkit-flex-grow: 0;
-  }
-  .attributes > div {
-    width: 100%;
-  }
-  .module-reporter,
-  .status-owner {
-    flex-direction: row;
-    -webkit-flex-direction: row;
-  }
-}
-
-/*
- * General good-look styles
- */
-.table-row {
-  border-bottom: 1px solid #e0e0e0;
-  border-collapse: collapse;
-  padding-top: 2px;
-}
-
-.table-row.header {
-  background-color: #FFEEDB;
+.table-container .table-header .cell {
   font-weight: bold;
-  padding-top: 6px;
-  padding-bottom: 6px;
-}
-
-.glyphicon {
-  color: #DDDDDD;
-}
-
-.header .glyphicon {
-  color: #333;
-}
-
-.glyphicon-eye-open.active {
-  color: blue;
-}
-
-.glyphicon-comment.active {
-  color: #3EBB0D;
-}
-
-.glyphicon:hover {
-  color: #666;
+  border: none;
+  border-top: 1px solid #DCDCDC;
+  border-bottom: 1px solid #DCDCDC;
+  background-color: #fff;
+  padding: 20px 5px;
   cursor: pointer;
-  text-decoration: underline;
 }
 
-.reporter {
-  color: #999999;
+.table-container .table-header .cell.asc:after {
+  content: 'â†‘';
+  margin-left: 2px;
+  height: 100%;
 }
 
-.comment {
-  font-style: italic;
+.table-container .table-header .cell.desc:after {
+  content: 'â†“';
+  margin-left: 2px;
+  line-height: 100%;
 }
 
-.severity.high {
-  color: red;
+.table-container {
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;
 }
 
-.severity.medium {
-  color: blue;
+.table-container .row {
+  display: -webkit-flex;
+  flex-direction: row;
+  background-color: white;
+  clear: both;
 }
 
-.severity.low {
-  color: green;
+.table-container .cell {
+  padding: 0.5em;
+  border-bottom: 1px solid lightgrey;
+  flex: 1;
+}
+
+.table-container .table-body {
+  max-height: 60vh;
+  overflow: auto;
+}
+
+.table-container .table-body .cell {
+  padding: 15px 5px;
+}
+
+.table-container.table-striped .table-body .row:nth-child(even) {
+  background-color: #FaFaFa;
+}
+
+.table-container.table-striped .table-body .row:nth-child(odd) {
+  background-color: white;
+}
+
+.table-container.table-hover .table-body .row:hover {
+  background-color: #F2F2F2;
+}
+
+@media all and (max-width: 43.125em) {
+  .table-container .header {
+    display: none;
+  }
+  .table-container .row .cell:before {
+    content: attr(title);
+    width: 75px;
+    display: block;
+    background: #222;
+    color: #fff;
+    padding: .25em .5em;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .table-container .row {
+    flex-direction: column;
+  }
+  .table-container .row .cell {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    position: relative;
+    padding: 3em 0 1em 1em;
+  }
+}
+
+/* Fallbacks */
+.no-flexbox .table-container {
+  display: table;
+}
+
+.no-flexbox .row {
+  display: table-row;
+}
+
+.no-flexbox .cell {
+  display: table-cell;
 }

@@ -1,44 +1,30 @@
-import React  from 'react';
+/**
+ * Created by gaurav.m on 5/26/17.
+ */
 
+/**
+ * Options: table-bordered/table-striped
+ * Header Will be in format: [{id:1,text: "SKU CODE", sortable: true}, {id:2,
+                                text: "NAME",
+                                sortable: true
+                                }, {id:3,text: "OPENING STOCK", searchable: false}, {id:4,text: "PURCHAGE QTY", searchable: false}, {id:5,
+                                text: "SALE QTY",
+                                sortable: true
+                            }, {id:6,
+                                text: "CLOSING STOCK",
+                                sortable: true
+                            }]
+ */
 
-class GorTable extends React.Component{
-		
-	render(){
-		
-		return (
-		<div className="container-fluid" >
-				  <div className="table-row header">
-				    <div className="wrapper attributes">
-				        <div className="column  head-title">CODE</div>
-				          <div className="column  head-title">Title</div>
-				          <div className="column  head-title">Comment</div>
-				          <div className="column  head-title">Module</div>
-				          <div className="column  head-title">Reporter</div>
-				    </div>
-				
-				 
-				  </div>
-
-				  <div className="table-row">
-				    
-				    <div className="wrapper attributes">
-				        <div className="column row-value">1</div>
-				          <div className="column row-value">App crashes when dragged by title bar</div>
-				          <div className="column row-value">Eddie, can you please take a look. We want this fixed pretty soon.</div>
-				          <div className="column row-value">Main App</div>
-				          <div className="column row-value">Ravan</div>
-				    </div>
-				  
-				  </div>
-				</div>
-		);
-	}
+import React from 'react';
+//require("./../../../library/table/css/table.css")
+export class GTable extends React.Component{
+    constructor(props){
+        super(props)
+    }
+    render(){
+       return <div className={["table-container"].concat((this.props.options||[])).join(" ")}>
+            {this.props.children}
+        </div>
+    }
 }
-
-export default GorTable ;
-
-
-
-
-
-

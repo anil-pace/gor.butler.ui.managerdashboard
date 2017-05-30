@@ -6,9 +6,9 @@ import React  from 'react';
 import { connect } from 'react-redux';
 import Notification from '../../components/notifications/notifications';
 import {modal} from 'react-redux-modal';
-import ViewAllNotifications from '../../components/notifications/viewAllNotificationModal';
+import ViewAllNotificationWrapper from './viewAllNotificationWrapper';
 import {NOTIFICATIONS_URL,READ_MSG_URL} from '../../constants/configConstants';
-import {GET,PATCH,APP_JSON,SEARCHED_NOTIFICATIONS_DATA} from '../../constants/frontEndConstants';
+import {GET,POST,APP_JSON,SEARCHED_NOTIFICATIONS_DATA} from '../../constants/frontEndConstants';
 import {getNotificationData,resetNotificationData} from '../../actions/notificationAction';
 import {wsNotificationInit} from '../../actions/notificationSocketActions';
 
@@ -19,7 +19,7 @@ class NotificationsWrapper extends React.Component{
 
 	_viewAllLinkClick(){
 		 
-		 modal.add(ViewAllNotifications, {
+		 modal.add(ViewAllNotificationWrapper, {
             title: '',
             size: 'large', 
             closeOnOutsideClick: true, 
@@ -46,7 +46,7 @@ class NotificationsWrapper extends React.Component{
 		
 		let params={
                 'url':READ_MSG_URL,
-                'method':PATCH,
+                'method':POST,
                 'cause':"SEND_READ_INTIMATION",
                 'contentType':APP_JSON,
                 'accept':APP_JSON,
