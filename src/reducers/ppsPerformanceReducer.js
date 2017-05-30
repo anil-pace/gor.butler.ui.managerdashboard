@@ -16,7 +16,7 @@ import {PARSE_PPS} from '../constants/backEndConstants'
 
 
     }
-    break;
+        return state;
     default:
     return state
   }
