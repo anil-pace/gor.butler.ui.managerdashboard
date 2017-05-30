@@ -12,7 +12,7 @@ export  function PPSDetail(state={},action) {
                 "PPStypeDetail" : res.complete_data
             })
         }
-        break;
+    return state;
         case PPS_LIST_REFRESHED:
         return Object.assign({}, state, {
             "ppsListRefreshed": new Date()
