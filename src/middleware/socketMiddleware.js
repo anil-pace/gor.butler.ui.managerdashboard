@@ -4,29 +4,29 @@ import {WS_URL} from '../constants/configConstants'
 import {ResponseParse} from '../utilities/responseParser';
 
 
-const socketMiddleware = (function(){ 
-  var socket = null;
+const socketMiddleware=(function(){ 
+  var socket=null;
 
-  const onOpen = (ws,store,token) => evt => {
+  const onOpen=(ws,store,token)=> evt=> {
     //Send a handshake, or authenticate with remote end
 
     //Tell the store we're connected
     store.dispatch(wsResponseAction(evt.type));
   }
 
-  const onClose = (ws,store) => evt => {
+  const onClose=(ws,store)=> evt=> {
     //Tell the store we've disconnected
     
     store.dispatch(wsEndConnection());
   }
 
-  const onMessage = (ws,store) => evt => {
+  const onMessage=(ws,store)=> evt=> {
     //Parse the JSON message received on the websocket
-    var msg = JSON.parse(evt.data);
+    var msg=JSON.parse(evt.data);
       ResponseParse(store,msg);    
   }
 
-  return store => next => action => {
+  return store=> next=> action=> {
     switch(action.type) {
 
       //The user wants us to connect
@@ -39,10 +39,10 @@ const socketMiddleware = (function(){
         //store.dispatch(actions.connecting());
 
         //Attempt to connect (we could send a 'failed' action on error)
-        socket = new WebSocket(WS_URL);
-        socket.onmessage = onMessage(socket,store);
-        socket.onclose = onClose(socket,store);
-        socket.onopen = onOpen(socket,store,action.token);
+        socket=new WebSocket(WS_URL);
+        socket.onmessage=onMessage(socket,store);
+        socket.onclose=onClose(socket,store);
+        socket.onopen=onOpen(socket,store,action.token);
 
         break;
 
@@ -51,7 +51,7 @@ const socketMiddleware = (function(){
         if(socket !== null) {
           socket.close();
         }
-        socket = null;
+        socket=null;
 
         //Set our state to disconnected
        

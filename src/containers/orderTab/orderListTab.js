@@ -13,23 +13,17 @@ import {
     GOR_BREACHED,
     BREACHED,
     GOR_EXCEPTION,
-    GET,
-    APP_JSON,
     toggleOrder,
     INITIAL_HEADER_SORT,
-    INITIAL_HEADER_ORDER,
     sortOrderHead,
-    sortOrder, WS_ONSEND,DESC,ASC
+    sortOrder, WS_ONSEND
 } from '../../constants/frontEndConstants';
 import {
-    BASE_URL,
     API_URL,
     ORDERS_URL,
     PAGE_SIZE_URL,
     PROTOCOL,
     ORDER_PAGE,
-    PICK_BEFORE_ORDER_URL,
-    BREACHED_URL,
     UPDATE_TIME_HIGH,
     UPDATE_TIME_LOW, UPDATE_TIME,
     EXCEPTION_TRUE,
@@ -51,7 +45,7 @@ import {updateSubscriptionPacket, setWsAction} from './../../actions/socketActio
 import {wsOverviewData} from './../../constants/initData.js';
 import OrderFilter from './orderFilter';
 import FilterSummary from '../../components/tableFilter/filterSummary'
-const messages = defineMessages({
+const messages=defineMessages({
     inProgressStatus: {
         id: 'orderList.progress.status',
         description: "In 'progress message' for orders",
@@ -86,7 +80,7 @@ const messages = defineMessages({
 class OrderListTab extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {selected_page: 1, query: null, orderListRefreshed: null};
+        this.state={selected_page: 1, query: null, orderListRefreshed: null};
     }
 
     componentWillMount() {
@@ -109,7 +103,7 @@ class OrderListTab extends React.Component {
     }
 
     _subscribeData() {
-        let updatedWsSubscription = this.props.wsSubscriptionData;
+        let updatedWsSubscription=this.props.wsSubscriptionData;
         this.props.initDataSentCall(updatedWsSubscription["default"])
         this.props.updateSubscriptionPacket(updatedWsSubscription);
     }
@@ -128,7 +122,7 @@ class OrderListTab extends React.Component {
         var orderbyUrl;
         this.props.setOrderListSpinner(true);
 
-        let _query_params = [], convertTime = {
+        let _query_params=[], convertTime={
             "oneHourOrders": 1,
             "twoHourOrders": 2,
             "sixHourOrders": 6,
@@ -144,20 +138,27 @@ class OrderListTab extends React.Component {
         //appending filter for status
         if (query.status) {
 
-         let statusList = query.status.constructor === Array ? query.status.slice() : [query.status]
-         let indexOfBreached = statusList.indexOf('breached');
-         let indexOfException = statusList.indexOf('exception');
+         let statusList=query.status.constructor=== Array ? query.status.slice() : [query.status]
+         let indexOfBreached=statusList.indexOf('breached');
+         let indexOfException=statusList.indexOf('exception');
          if (indexOfBreached > -1) {
              _query_params.push([BREACHED, "True"].join("="))
              statusList.splice(indexOfBreached, 1)
          }
          if (indexOfException > -1) {
-             statusList.splice(indexOfException, 1)
-             _query_params.push([EXCEPTION_TRUE, "true"].join("="))
+        (indexOfBreached> -1)? statusList.splice(indexOfException-1, 1):statusList.splice(indexOfException, 1);     
+         _query_params.push([EXCEPTION_TRUE, "true"].join("="))
          }
 
          if (statusList.length > 0) {
-             _query_params.push([WAREHOUSE_STATUS, "['" + statusList.join("','") + "']"].join("="))
+            let _flattened_statuses=[]
+            statusList=statusList.constructor===Array?statusList:[statusList]
+            statusList.forEach(function (status) {
+                _flattened_statuses.push(status.split("__"))
+            })
+            statusList=[].concat.apply([], _flattened_statuses)
+            _query_params.push([WAREHOUSE_STATUS,"['"+statusList.join("','")+"']" ].join("="))
+
          }
 
      }
@@ -165,22 +166,22 @@ class OrderListTab extends React.Component {
 
         //appending filter for orders by time
         if (query.period) {
-            let timeOut = query.period.constructor === Array ? query.period[0] : query.period
-            let currentTime = new Date();
-            let prevTime = new Date();
-            prevTime = new Date(prevTime.setHours(prevTime.getHours() - convertTime[timeOut]));
-            prevTime = prevTime.toISOString();
-            currentTime = currentTime.toISOString();
+            let timeOut=query.period.constructor=== Array ? query.period[0] : query.period
+            let currentTime=new Date();
+            let prevTime=new Date();
+            prevTime=new Date(prevTime.setHours(prevTime.getHours() - convertTime[timeOut]));
+            prevTime=prevTime.toISOString();
+            currentTime=currentTime.toISOString();
             _query_params.push([UPDATE_TIME, currentTime].join("<="))
             _query_params.push([UPDATE_TIME, prevTime].join(">="))
         }
-        let url = API_URL + ORDERS_URL
+        let url=API_URL + ORDERS_URL
 
         _query_params.push([GIVEN_PAGE, query.page || 1].join("="))
         _query_params.push([GIVEN_PAGE_SIZE, query.pageSize || 25].join("="));
         if(orderbyParam && orderbyParam.sortDir){
             orderbyParam? _query_params.push(['order',toggleOrder(orderbyParam.sortDir)].join("=")):"";
-            orderbyUrl =orderbyParam? sortOrderHead[orderbyParam["columnKey"]]:"";
+            orderbyUrl=orderbyParam? sortOrderHead[orderbyParam["columnKey"]]:"";
 
         }
         else
@@ -188,10 +189,10 @@ class OrderListTab extends React.Component {
             orderbyParam? _query_params.push(['order',toggleOrder(orderbyParam[Object.keys(orderbyParam)])].join("=")):"";
             orderbyUrl=orderbyParam? sortOrderHead[Object.keys(orderbyParam)[0]]:"";
         }  
-        url = [url, _query_params.join("&")].join("?");
+        url=[url, _query_params.join("&")].join("?");
         url+=orderbyUrl;
         
-        let paginationData = {
+        let paginationData={
 
             'url': url,
             'method': 'GET',
@@ -211,8 +212,8 @@ class OrderListTab extends React.Component {
         this.props.currentPage(1);
         this.props.orderfilterState({
             tokenSelected: {
-                "STATUS": query.status ? (query.status.constructor === Array ? query.status : [query.status]) : ['all'],
-                "TIME PERIOD": query.period ? (query.period.constructor === Array ? query.period[0] : query.period) : ['allOrders']
+                "STATUS": query.status ? (query.status.constructor=== Array ? query.status : [query.status]) : ['all'],
+                "TIME PERIOD": query.period ? (query.period.constructor=== Array ? query.period[0] : query.period) : ['allOrders']
             },
             searchQuery: {"ORDER ID": query.orderId || ''},
             "PAGE": query.page || 1
@@ -229,48 +230,48 @@ class OrderListTab extends React.Component {
 
     processOrders(data, nProps) {
 
-        var nProps = this;
-        var data = nProps.props.orderData.ordersDetail;
-        let progress = nProps.context.intl.formatMessage(messages.inProgressStatus);
-        let completed = nProps.context.intl.formatMessage(messages.completedStatus);
-        let exception = nProps.context.intl.formatMessage(messages.exceptionStatus);
-        let unfulfillable = nProps.context.intl.formatMessage(messages.unfulfillableStatus);
-        var renderOrderData = [], orderData = {};
-        var timeOffset = nProps.props.timeOffset, alertStatesNum = 0, orderDataPacket = {};
+        var nProps=this;
+        var data=nProps.props.orderData.ordersDetail;
+        let progress=nProps.context.intl.formatMessage(messages.inProgressStatus);
+        let completed=nProps.context.intl.formatMessage(messages.completedStatus);
+        let exception=nProps.context.intl.formatMessage(messages.exceptionStatus);
+        let unfulfillable=nProps.context.intl.formatMessage(messages.unfulfillableStatus);
+        var renderOrderData=[], orderData={};
+        var timeOffset=nProps.props.timeOffset, alertStatesNum=0, orderDataPacket={};
         if (!data.length) {
-            orderDataPacket = {"renderOrderData": renderOrderData, "alertStatesNum": alertStatesNum}
+            orderDataPacket={"renderOrderData": renderOrderData, "alertStatesNum": alertStatesNum}
             return orderDataPacket;
         }
 
-        for (var i = 0; i < data.length; i++) {
-            orderData.id = data[i].order_id;
+        for (var i=0; i < data.length; i++) {
+            orderData.id=data[i].order_id;
 
-            if (data[i].breached === true) {
+            if (data[i].breached=== true) {
 
-                orderData.status = nProps.context.intl.formatMessage(stringConfig[data[i].status]);
-                orderData.statusClass = GOR_BREACHED;
+                orderData.status=nProps.context.intl.formatMessage(stringConfig[data[i].status]);
+                orderData.statusClass=GOR_BREACHED;
                 alertStatesNum++;
             }
-            else if (data[i].exception === true) {
-                orderData.status = nProps.context.intl.formatMessage(stringConfig[data[i].status]);
-                orderData.statusClass = GOR_EXCEPTION;
+            else if (data[i].exception=== true) {
+                orderData.status=nProps.context.intl.formatMessage(stringConfig[data[i].status]);
+                orderData.statusClass=GOR_EXCEPTION;
                 alertStatesNum++;
             }
             else {
                 if (nProps.context.intl.formatMessage(stringConfig[data[i].status])) {
-                    orderData.status = nProps.context.intl.formatMessage(stringConfig[data[i].status]);
+                    orderData.status=nProps.context.intl.formatMessage(stringConfig[data[i].status]);
                 }
                 else {
-                    orderData.status = data[i].status;
+                    orderData.status=data[i].status;
                 }
-                orderData.statusClass = data[i].status;
+                orderData.statusClass=data[i].status;
             }
             if (!data[i].create_time) {
-                orderData.recievedTime = "--";
+                orderData.recievedTime="--";
             }
             else {
                 if (getDaysDiff(data[i].create_time) < 2) {
-                    orderData.recievedTime = nProps.context.intl.formatRelative(data[i].create_time, {
+                    orderData.recievedTime=nProps.context.intl.formatRelative(data[i].create_time, {
                         timeZone: timeOffset,
                         units: 'day'
                     }) +
@@ -282,7 +283,7 @@ class OrderListTab extends React.Component {
                     });
                 }
                 else {
-                    orderData.recievedTime = nProps.context.intl.formatDate(data[i].create_time,
+                    orderData.recievedTime=nProps.context.intl.formatDate(data[i].create_time,
                     {
                         timeZone: timeOffset,
                         year: 'numeric',
@@ -295,11 +296,11 @@ class OrderListTab extends React.Component {
                 }
             }
             if (!data[i].pick_before_time) {
-                orderData.pickBy = "--";
+                orderData.pickBy="--";
             }
             else {
                 if (getDaysDiff(data[i].pick_before_time) < 2) {
-                    orderData.pickBy = nProps.context.intl.formatRelative(data[i].pick_before_time, {
+                    orderData.pickBy=nProps.context.intl.formatRelative(data[i].pick_before_time, {
                         timeZone: timeOffset,
                         units: 'day'
                     }) +
@@ -311,7 +312,7 @@ class OrderListTab extends React.Component {
                     });
                 }
                 else {
-                    orderData.pickBy = nProps.context.intl.formatDate(data[i].pick_before_time,
+                    orderData.pickBy=nProps.context.intl.formatDate(data[i].pick_before_time,
                     {
                         timeZone: timeOffset,
                         year: 'numeric',
@@ -323,15 +324,15 @@ class OrderListTab extends React.Component {
                     });
                 }
             }
-            if (data[i].completed_orderlines === data[i].total_orderlines) {
-                orderData.orderLine = data[i].total_orderlines;
+            if (data[i].completed_orderlines=== data[i].total_orderlines) {
+                orderData.orderLine=data[i].total_orderlines;
             }
             else {
-                orderData.orderLine = data[i].completed_orderlines + "/" + data[i].total_orderlines;
+                orderData.orderLine=data[i].completed_orderlines + "/" + data[i].total_orderlines;
             }
-            if (data[i].status === "completed") {
+            if (data[i].status=== "completed") {
                 if (getDaysDiff(data[i].update_time) < 2) {
-                    orderData.completedTime = nProps.context.intl.formatRelative(data[i].update_time, {
+                    orderData.completedTime=nProps.context.intl.formatRelative(data[i].update_time, {
                         timeZone: timeOffset,
                         units: 'day'
                     }) +
@@ -343,7 +344,7 @@ class OrderListTab extends React.Component {
                     });
                 }
                 else {
-                    orderData.completedTime = nProps.context.intl.formatDate(data[i].update_time,
+                    orderData.completedTime=nProps.context.intl.formatDate(data[i].update_time,
                     {
                         timeZone: timeOffset,
                         year: 'numeric',
@@ -355,30 +356,30 @@ class OrderListTab extends React.Component {
                     });
                 }
             } else {
-                orderData.completedTime = "--";
+                orderData.completedTime="--";
             }
 
             renderOrderData.push(orderData);
-            orderData = {};
+            orderData={};
 
         }
-        orderDataPacket = {"renderOrderData": renderOrderData, "alertStatesNum": alertStatesNum}
+        orderDataPacket={"renderOrderData": renderOrderData, "alertStatesNum": alertStatesNum}
 
         return orderDataPacket;
     }
 
 
-    handlePageClick = (data) => {
+    handlePageClick=(data)=> {
         var url;
-        if (data.url === undefined) {
-            url = API_URL + ORDERS_URL + ORDER_PAGE + (data.selected) + "&PAGE_SIZE=25";
+        if (data.url=== undefined) {
+            url=API_URL + ORDERS_URL + ORDER_PAGE + (data.selected) + "&PAGE_SIZE=25";
         }
 
         else {
-            url = data.url;
+            url=data.url;
         }
 
-        let paginationData = {
+        let paginationData={
 
             'url': url,
             'method': 'GET',
@@ -393,7 +394,7 @@ class OrderListTab extends React.Component {
     
     //To check where the object is empty or not
 
-    refresh = (data) => {
+    refresh=(data)=> {
         var locationQuery=this.props.location.query;
         if(locationQuery && Object.keys(locationQuery).length)
         {
@@ -401,7 +402,7 @@ class OrderListTab extends React.Component {
         }
         else
         {
-            var convertTime = {
+            var convertTime={
                 "oneHourOrders": 1,
                 "twoHourOrders": 2,
                 "sixHourOrders": 6,
@@ -409,12 +410,12 @@ class OrderListTab extends React.Component {
                 "oneDayOrders": 24
             };
             var prevTime, currentTime;
-            var appendStatusUrl = "", appendTimeUrl = "", appendPageSize = "", appendSortUrl = "", appendTextFilterUrl = "";
-            var filterApplied = false;
+            var appendStatusUrl="", appendTimeUrl="", appendPageSize="", appendSortUrl="", appendTextFilterUrl="";
+            var filterApplied=false;
             if (!data) {
-                data = {};
-                data.selected = 1;
-                data.url = "";
+                data={};
+                data.selected=1;
+                data.url="";
             /**
              * After clearing the applied filter,
              * It'll set the default state to the filters.
@@ -429,69 +430,69 @@ class OrderListTab extends React.Component {
          }
         //for backend sorting
         if (data.columnKey && data.sortDir) {
-            appendSortUrl = sortOrderHead[data.columnKey] + sortOrder[data.sortDir];
+            appendSortUrl=sortOrderHead[data.columnKey] + sortOrder[data.sortDir];
         }
         else if (this.props.orderSortHeaderState && this.props.orderSortHeader && this.props.orderSortHeaderState.colSortDirs) {
-            appendSortUrl = sortOrderHead[this.props.orderSortHeader] + sortOrder[this.props.orderSortHeaderState.colSortDirs[this.props.orderSortHeader]]
+            appendSortUrl=sortOrderHead[this.props.orderSortHeader] + sortOrder[this.props.orderSortHeaderState.colSortDirs[this.props.orderSortHeader]]
         }
 
         //for search via text filter
         if (data.searchQuery && data.searchQuery["ORDER ID"]) {
-            appendTextFilterUrl = FILTER_ORDER_ID + data.searchQuery["ORDER ID"];
-            data.selected = 1;
-            filterApplied = true;
+            appendTextFilterUrl=FILTER_ORDER_ID + data.searchQuery["ORDER ID"];
+            data.selected=1;
+            filterApplied=true;
         }
 
         //appending filter for status
         if (data.tokenSelected && data.tokenSelected["STATUS"] && data.tokenSelected["STATUS"].length) {
-            let statusToken = (data.tokenSelected["STATUS"]).slice(0);
-            let index = statusToken.indexOf('breached');
+            let statusToken=(data.tokenSelected["STATUS"]).slice(0);
+            let index=statusToken.indexOf('breached');
             (index != -1) ? statusToken.splice(index, 1) : "";
-            let status = (statusToken.length > 0) ? statusToken.join("','") : statusToken;
-            let breachedtext = (index != -1) ? BREACHED : ""
-            if ((status === undefined || status === "all")) {
-                appendStatusUrl = "";
+            let status=(statusToken.length > 0) ? statusToken.join("','") : statusToken;
+            let breachedtext=(index != -1) ? BREACHED : ""
+            if ((status=== undefined || status=== "all")) {
+                appendStatusUrl="";
             }
 
-            else if (status === "exception") {
-                appendStatusUrl = EXCEPTION_TRUE;
+            else if (status=== "exception") {
+                appendStatusUrl=EXCEPTION_TRUE;
             }
             else {
-                appendStatusUrl = status.length !== 0 ? (WAREHOUSE_STATUS + "['" + status + "']" + breachedtext) : breachedtext;
+                appendStatusUrl=status.length !== 0 ? (WAREHOUSE_STATUS + "['" + status + "']" + breachedtext) : breachedtext;
             }
-            data.selected = 1;
-            filterApplied = true;
+            data.selected=1;
+            filterApplied=true;
         }
 
         //appending filter for orders by time
         if (data.tokenSelected && data.tokenSelected["TIME PERIOD"] && data.tokenSelected["TIME PERIOD"].length && data.tokenSelected["TIME PERIOD"][0] !== "allOrders") {
-            var timeOut = data.tokenSelected["TIME PERIOD"][0]
-            currentTime = new Date();
-            prevTime = new Date();
-            prevTime = new Date(prevTime.setHours(prevTime.getHours() - convertTime[timeOut]));
-            prevTime = prevTime.toISOString();
-            currentTime = currentTime.toISOString();
-            appendTimeUrl = UPDATE_TIME_LOW + currentTime + UPDATE_TIME_HIGH + prevTime;
-            data.selected = 1;
-            filterApplied = true;
+            var timeOut=data.tokenSelected["TIME PERIOD"][0]
+            currentTime=new Date();
+            prevTime=new Date();
+            prevTime=new Date(prevTime.setHours(prevTime.getHours() - convertTime[timeOut]));
+            prevTime=prevTime.toISOString();
+            currentTime=currentTime.toISOString();
+            appendTimeUrl=UPDATE_TIME_LOW + currentTime + UPDATE_TIME_HIGH + prevTime;
+            data.selected=1;
+            filterApplied=true;
         }
 
         //generating api url by pagination page no.
-        data.url = "";
-        data.url = API_URL + ORDERS_URL + ORDER_PAGE + (data.selected ? data.selected : 1);
+        data.url="";
+        data.url=API_URL + ORDERS_URL + ORDER_PAGE + (data.selected ? data.selected : 1);
 
         //appending page size filter
-        if (this.props.filterOptions.pageSize === undefined) {
-            appendPageSize = PAGE_SIZE_URL + "25";
+        if (this.props.filterOptions.pageSize=== undefined) {
+            appendPageSize=PAGE_SIZE_URL + "25";
         }
 
         else {
-            appendPageSize = PAGE_SIZE_URL + this.props.filterOptions.pageSize;
+            appendPageSize=PAGE_SIZE_URL + this.props.filterOptions.pageSize;
         }
 
 
 //combining all the filters
-data.url = data.url + appendStatusUrl + appendTimeUrl + appendPageSize + appendSortUrl + appendTextFilterUrl;
+data.url=data.url + appendStatusUrl + appendTimeUrl + appendPageSize + appendSortUrl + appendTextFilterUrl;
 this.props.lastRefreshTime((new Date()));
 this.props.filterApplied(filterApplied);
 this.handlePageClick(data)
@@ -499,23 +500,23 @@ this.handlePageClick(data)
 }
 
 _setFilter() {
-    var newState = !this.props.showFilter;
+    var newState=!this.props.showFilter;
     this.props.showTableFilter(newState)
 }
 
 
 render() {
-    var filterHeight = screen.height - 190 - 50;
+    var filterHeight=screen.height - 190 - 50;
     var updateStatus, timeOffset, headerTimeZone;
     let updateStatusIntl, updateStatusText;
     if (this.props.filterOptions.lastUpdatedOn) {
-        updateStatusText =
+        updateStatusText=
         <FormattedMessage id="orderlistTab.orderListRefreshedat" description='Refresh Status text'
         defaultMessage='Last Updated '/>
-        updateStatusIntl = <FormattedRelative updateInterval={10000} value={Date.now()}/>
+        updateStatusIntl=<FormattedRelative updateInterval={10000} value={Date.now()}/>
     }
-    var itemNumber = 6, table, pages;
-    const ordersByStatus = [
+    var itemNumber=6, table, pages;
+    const ordersByStatus=[
     {value: '25', label: '25'},
     {value: '50', label: '50'},
     {value: '100', label: '100'},
@@ -523,15 +524,15 @@ render() {
     {value: '500', label: '500'},
     {value: '1000', label: '1000'}
     ];
-    var currentPage = this.props.filterOptions.currentPage, totalPage = this.props.orderData.totalPage;
-    var orderDetail, alertNum = 0, orderInfo;
+    var currentPage=this.props.filterOptions.currentPage, totalPage=this.props.orderData.totalPage;
+    var orderDetail, alertNum=0, orderInfo;
     if (this.props.orderData.ordersDetail !== undefined) {
-        orderInfo = this.processOrders(this.props.orderData.ordersDetail, this);
-        orderDetail = orderInfo.renderOrderData;
-        alertNum = orderInfo.alertStatesNum;
+        orderInfo=this.processOrders(this.props.orderData.ordersDetail, this);
+        orderDetail=orderInfo.renderOrderData;
+        alertNum=orderInfo.alertStatesNum;
     }
-    timeOffset = this.props.timeOffset || "",
-    headerTimeZone = (this.context.intl.formatDate(Date.now(),
+    timeOffset=this.props.timeOffset || "",
+    headerTimeZone=(this.context.intl.formatDate(Date.now(),
     {
         timeZone: timeOffset,
         year: 'numeric',
@@ -539,7 +540,7 @@ render() {
     }));
 
     /*Extracting Time zone string for the specified time zone*/
-    headerTimeZone = headerTimeZone.substr(5, headerTimeZone.length);
+    headerTimeZone=headerTimeZone.substr(5, headerTimeZone.length);
     return (
         <div>
         <div className="gor-Orderlist-table">
@@ -580,7 +581,7 @@ render() {
             className={this.props.orderFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
             onClick={this._setFilter.bind(this)}>
             <div className="gor-manage-task"/>
-            <FormattedMessage id="order.table.filterLabel"
+            <FormattedMessage id="gor.filter.filterLabel"
             description="button label for filter"
             defaultMessage="Filter data"/>
             </button>
@@ -664,7 +665,7 @@ function mapStateToProps(state, ownProps) {
     };
 }
 
-var mapDispatchToProps = function (dispatch) {
+var mapDispatchToProps=function (dispatch) {
     return {
         orderFilterDetail: function (data) {
             dispatch(orderFilterDetail(data))
@@ -723,11 +724,11 @@ var mapDispatchToProps = function (dispatch) {
     }
 };
 
-OrderListTab.contextTypes = {
+OrderListTab.contextTypes={
     intl: React.PropTypes.object.isRequired
 }
 
-OrderListTab.PropTypes = {
+OrderListTab.PropTypes={
     orderFilter: React.PropTypes.string,
     orderSortHeader: React.PropTypes.string,
     orderSortHeaderState: React.PropTypes.array,

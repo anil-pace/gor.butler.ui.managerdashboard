@@ -2,7 +2,7 @@ import { findDOMNode } from 'react-dom';
 
 export function isEventFromHandle(e, handles) {
   return Object.keys(handles)
-    .some(key => e.target === findDOMNode(handles[key]));
+    .some(key=> e.target=== findDOMNode(handles[key]));
 }
 
 export function isValueOutOfRange(value, { min, max }) {
@@ -11,25 +11,25 @@ export function isValueOutOfRange(value, { min, max }) {
 
 export function isNotTouchEvent(e) {
   return e.touches.length > 1 ||
-    (e.type.toLowerCase() === 'touchend' && e.touches.length > 0);
+    (e.type.toLowerCase()=== 'touchend' && e.touches.length > 0);
 }
 
 export function getClosestPoint(val, { marks, step, min }) {
-  const points = Object.keys(marks).map(parseFloat);
+  const points=Object.keys(marks).map(parseFloat);
   if (step !== null) {
-    const closestStep =
+    const closestStep=
             Math.round((val - min) / step) * step + min;
     points.push(closestStep);
   }
-  const diffs = points.map(point => Math.abs(val - point));
+  const diffs=points.map(point=> Math.abs(val - point));
   return points[diffs.indexOf(Math.min(...diffs))];
 }
 
 export function getPrecision(step) {
-  const stepString = step.toString();
-  let precision = 0;
+  const stepString=step.toString();
+  let precision=0;
   if (stepString.indexOf('.') >= 0) {
-    precision = stepString.length - stepString.indexOf('.') - 1;
+    precision=stepString.length - stepString.indexOf('.') - 1;
   }
   return precision;
 }
@@ -43,7 +43,7 @@ export function getTouchPosition(vertical, e) {
 }
 
 export function getHandleCenterPosition(vertical, handle) {
-  const coords = handle.getBoundingClientRect();
+  const coords=handle.getBoundingClientRect();
   return vertical ?
     coords.top + (coords.height * 0.5) :
     coords.left + (coords.width * 0.5);
@@ -60,9 +60,9 @@ export function ensureValueInRange(val, { max, min }) {
 }
 
 export function ensureValuePrecision(val, props) {
-  const { step } = props;
-  const closestPoint = getClosestPoint(val, props);
-  return step === null ? closestPoint :
+  const { step }=props;
+  const closestPoint=getClosestPoint(val, props);
+  return step=== null ? closestPoint :
     parseFloat(closestPoint.toFixed(getPrecision(step)));
 }
 

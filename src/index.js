@@ -26,8 +26,8 @@ import './assets/css/main.scss';
 /**
  * Creating a store and passing it to provider
  */
-const initState = preloadedState;
-const store = configureStore(initState);
+const initState=preloadedState;
+const store=configureStore(initState);
 
 ReactDOM.render(
 	<Provider store={store}>

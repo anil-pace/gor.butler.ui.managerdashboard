@@ -3,7 +3,6 @@
  * This will be switched based on tab click
  */
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import ChargingStationsTable from './chargingStationsTable';
 import {connect} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
@@ -32,7 +31,7 @@ import ChargingStationFilter from './chargingStationFilter';
 import FilterSummary from '../../components/tableFilter/filterSummary'
 
 //Mesages for internationalization
-const messages = defineMessages({
+const messages=defineMessages({
     cdPrefix: {
         id: "chargersDetail.name.prefix",
         description: "prefix for cs id in chargersDetail",
@@ -50,40 +49,40 @@ const messages = defineMessages({
 class ChargingStations extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {query: null}
+        this.state={query: null}
     }
 
     _processChargersData(data, nProps) {
-        var chargerData = [], detail = {}, count = 0,
-            nProps = this,
-            data = nProps.props.chargersDetail.chargersDetail,
+        var chargerData=[], detail={}, count=0,
+            nProps=this,
+            data=nProps.props.chargersDetail.chargersDetail,
             CS, csId, botId, BUTLER;
 
-        var priStatus = {"connected": 1, "disconnected": 2};
+        var priStatus={"connected": 1, "disconnected": 2};
 
-        for (var i = data.length - 1; i >= 0; i--) {
-            detail = {}
-            csId = data[i].charger_id;
-            botId = data[i].docked_butler_id;
-            CS = nProps.context.intl.formatMessage(messages.cdPrefix, {"csId": csId});
-            BUTLER = nProps.context.intl.formatMessage(messages.butlerPrefix, {"botId": botId});
-            detail.id = CS;
-            detail.status = nProps.context.intl.formatMessage((stringConfig[data[i].charger_status]));
-            detail.statusClass = data[i].charger_status;
-            detail.statusPriority = priStatus[data[i].charger_status];
+        for (var i=data.length - 1; i >= 0; i--) {
+            detail={}
+            csId=data[i].charger_id;
+            botId=data[i].docked_butler_id;
+            CS=nProps.context.intl.formatMessage(messages.cdPrefix, {"csId": csId});
+            BUTLER=nProps.context.intl.formatMessage(messages.butlerPrefix, {"botId": botId});
+            detail.id=CS;
+            detail.status=nProps.context.intl.formatMessage((stringConfig[data[i].charger_status]));
+            detail.statusClass=data[i].charger_status;
+            detail.statusPriority=priStatus[data[i].charger_status];
             if (nProps.context.intl.formatMessage(stringConfig[data[i].charger_mode])) {
-                detail.mode = nProps.context.intl.formatMessage(stringConfig[data[i].charger_mode]);
+                detail.mode=nProps.context.intl.formatMessage(stringConfig[data[i].charger_mode]);
             }
             else {
-                detail.mode = data[i].charger_mode;
+                detail.mode=data[i].charger_mode;
             }
-            detail.modeClass = data[i].charger_mode;
+            detail.modeClass=data[i].charger_mode;
             if (data[i].docked_butler_id && data[i].docked_butler_id.length) {
-                detail.dockedBots = BUTLER;
+                detail.dockedBots=BUTLER;
             }
 
             else {
-                detail.dockedBots = "--";
+                detail.dockedBots="--";
             }
             chargerData.push(detail);
         }
@@ -114,15 +113,15 @@ class ChargingStations extends React.Component {
      */
     _refreshList(query) {
         this.props.setCsSpinner(true)
-        let filterSubsData = {}
+        let filterSubsData={}
         if (query.charger_id) {
-            filterSubsData["charger_id"] = ['contains', query.charger_id]
+            filterSubsData["charger_id"]=['contains', query.charger_id]
         }
         if (query.charger_status) {
-            filterSubsData["charger_status"] = ['in', query.charger_status.constructor === Array ? query.charger_status : [query.charger_status]]
+            filterSubsData["charger_status"]=['in', query.charger_status.constructor=== Array ? query.charger_status : [query.charger_status]]
         }
         if (query.charger_mode) {
-            filterSubsData["charger_mode"] = ['in', query.charger_mode.constructor === Array ? query.charger_mode : [query.charger_mode]]
+            filterSubsData["charger_mode"]=['in', query.charger_mode.constructor=== Array ? query.charger_mode : [query.charger_mode]]
         }
 
         if (Object.keys(query).filter(function(el){return el!=='page'}).length !== 0) {
@@ -133,14 +132,14 @@ class ChargingStations extends React.Component {
             this.props.filterApplied(false);
         }
 
-        let updatedWsSubscription = this.props.wsSubscriptionData;
-        updatedWsSubscription["chargingstation"].data[0].details["filter_params"] = filterSubsData;
+        let updatedWsSubscription=this.props.wsSubscriptionData;
+        updatedWsSubscription["chargingstation"].data[0].details["filter_params"]=filterSubsData;
         this.props.initDataSentCall(updatedWsSubscription["chargingstation"])
         this.props.updateSubscriptionPacket(updatedWsSubscription);
         this.props.chargingstationfilterState({
             tokenSelected: {
-                "DOCKING STATUS": query.charger_status ? query.charger_status.constructor === Array ? query.charger_status : [query.charger_status] : ["all"],
-                "OPERATING MODE": query.charger_mode ? query.charger_mode.constructor === Array ? query.charger_mode : [query.charger_mode] : ["all"]
+                "DOCKING STATUS": query.charger_status ? query.charger_status.constructor=== Array ? query.charger_status : [query.charger_status] : ["all"],
+                "OPERATING MODE": query.charger_mode ? query.charger_mode.constructor=== Array ? query.charger_mode : [query.charger_mode] : ["all"]
             }, searchQuery: {
                 "CHARGING STATION ID": query.charger_id || ''
             }
@@ -161,31 +160,31 @@ class ChargingStations extends React.Component {
 
 
     render() {
-        let filterHeight = screen.height - 190 - 50;
-        let updateStatusIntl = "";
-        var itemNumber = 4, connectedBots = 0, manualMode = 0, automaticMode = 0,
-            chargersState = {"connectedBots": "--", "manualMode": "--", "automaticMode": "--", "csConnected": 0},
-            chargersData, csConnected = 0;
+        let filterHeight=screen.height - 190 - 50;
+        let updateStatusIntl="";
+        var itemNumber=4, connectedBots=0, manualMode=0, automaticMode=0,
+            chargersState={"connectedBots": "--", "manualMode": "--", "automaticMode": "--", "csConnected": 0},
+            chargersData, csConnected=0;
         if (this.props.chargersDetail.chargersDetail !== undefined) {
-            chargersData = this._processChargersData();
+            chargersData=this._processChargersData();
             if (chargersData && chargersData.length) {
-                for (var i = chargersData.length - 1; i >= 0; i--) {
+                for (var i=chargersData.length - 1; i >= 0; i--) {
                     if (chargersData[i].dockedBots !== "--") {
                         connectedBots++;
                     }
 
-                    if (chargersData[i].mode === "Manual") {
+                    if (chargersData[i].mode=== "Manual") {
                         manualMode++;
                     }
                     else {
                         automaticMode++;
                     }
-                    if (chargersData[i].status === GOR_CONNECTED_STATUS) {
+                    if (chargersData[i].status=== GOR_CONNECTED_STATUS) {
                         csConnected++;
                     }
 
                 }
-                chargersState = {
+                chargersState={
                     "connectedBots": connectedBots,
                     "manualMode": manualMode,
                     "automaticMode": automaticMode,
@@ -224,7 +223,7 @@ class ChargingStations extends React.Component {
                                                 className={this.props.chargingFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
                                                 onClick={this._setFilter.bind(this)}>
                                                 <div className="gor-manage-task"/>
-                                                <FormattedMessage id="order.table.filterLabel" description="button label for filter"
+                                                <FormattedMessage id="gor.filter.filterLabel" description="button label for filter"
                                                                   defaultMessage="Filter data"/>
                                             </button>
                                         </div>
@@ -289,7 +288,7 @@ function mapStateToProps(state, ownProps) {
     };
 }
 
-var mapDispatchToProps = function (dispatch) {
+var mapDispatchToProps=function (dispatch) {
     return {
         csFilterDetail: function (data) {
             dispatch(csFilterDetail(data))
@@ -329,10 +328,10 @@ var mapDispatchToProps = function (dispatch) {
     };
 }
 
-ChargingStations.contextTypes = {
+ChargingStations.contextTypes={
     intl: React.PropTypes.object.isRequired
 }
-ChargingStations.PropTypes = {
+ChargingStations.PropTypes={
     csFilter: React.PropTypes.string,
     csSortHeader: React.PropTypes.string,
     csSortHeaderState: React.PropTypes.string,

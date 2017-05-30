@@ -1935,7 +1935,7 @@
    "defaultMessage": "重新整理資料"
  },
  {
-   "id": "order.table.filterLabel",
+   "id": "gor.filter.filterLabel",
    "description": "Filter Data",
    "defaultMessage": "篩選資料"
  },
@@ -2726,8 +2726,8 @@
  },
  {
    "id": "usersStatus.tab.heading#",
-   "description": "{count},{count, plural, =0 {user} one {user} other {users}} online",
-   "defaultMessage": "{count}、{count, plural, =0 {使用者} one {使用者} other {使用者}} 上線"
+   "description": "{count},{count, plural,=0 {user} one {user} other {users}} online",
+   "defaultMessage": "{count}、{count, plural,=0 {使用者} one {使用者} other {使用者}} 上線"
  },
  {
    "id": "inventoryStatus.tab.heading",

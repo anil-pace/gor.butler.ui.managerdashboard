@@ -1,26 +1,15 @@
 import React  from 'react';
 import StackedChartHorizontal from '../../components/graphd3/stackedChartHorizontal'
 
-
-
-
-
-
 class InventoryStacked extends React.Component{
-  constructor(props) 
-  {
-     super(props);
-    
-   }
-   
 
-   render() {
-   
+ render() {
+
    return (
-     <div>
-       <StackedChartHorizontal hasDataChanged= {this.props.hasDataChanged} snapshotData = {this.props.snapshotData} />
-     </div>
-   )
+           <div>
+           <StackedChartHorizontal hasDataChanged={this.props.hasDataChanged} snapshotData={this.props.snapshotData} />
+           </div>
+           )
  }
 };
 

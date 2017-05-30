@@ -3,7 +3,6 @@
  * This will be switched based on tab click
  */
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import NotificationTable from './notificationTable';
 import { connect } from 'react-redux';
 class Notification extends React.Component{
@@ -196,7 +195,7 @@ class Notification extends React.Component{
   "time": "09:50:52"
 }
 ];
-  var itemNumber = 5;
+  var itemNumber=5;
   
 		return (
 			<div>

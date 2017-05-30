@@ -45,37 +45,37 @@ class SystemTab extends React.Component{
 	render(){
 
 
-        let butlerBots = <FormattedMessage id="butlerBot.tab.heading" description="butler bot tab" 
-              defaultMessage ="Butler Bots"/>
+        let butlerBots=<FormattedMessage id="butlerBot.tab.heading" description="butler bot tab" 
+              defaultMessage="Butler Bots"/>
 
-        let pps = <FormattedMessage id="pps.tab.heading" description="pps tab" 
-              defaultMessage ="Pick Put Stations"/>
+        let pps=<FormattedMessage id="pps.tab.heading" description="pps tab" 
+              defaultMessage="Pick Put Stations"/>
 
-        let chargingStation = <FormattedMessage id="chargingstation.tab.heading" description="charging station tab" 
-              defaultMessage ="Charging Station"/>
+        let chargingStation=<FormattedMessage id="chargingstation.tab.heading" description="charging station tab" 
+              defaultMessage="Charging Station"/>
 
 
-		var selectClass = {notification:"gor-main-block", butlerbots:"gor-main-block", pps:"gor-main-block", chargingstation:"gor-main-block"};
+		var selectClass={notification:"gor-main-block", butlerbots:"gor-main-block", pps:"gor-main-block", chargingstation:"gor-main-block"};
 
 		if(this.props.subTab.length) {
-			selectClass[this.props.subTab] = "gor-main-blockSelect";
+			selectClass[this.props.subTab]="gor-main-blockSelect";
 		}
 
 		else {
-			selectClass["butlerbots"] = "gor-main-blockSelect";
+			selectClass["butlerbots"]="gor-main-blockSelect";
 		}
 
 		return (
 			<div>
 				<div className="gorMainSubtab">
 				
-					<Link to="/system/butlerbots" onClick = {this.handleSysSubTabClick.bind(this,BUTLERBOTS)}>
+					<Link to="/system/butlerbots" onClick={this.handleSysSubTabClick.bind(this,BUTLERBOTS)}>
 						<SubTab item={butlerBots} changeClass={selectClass[BUTLERBOTS]}/> 
 					</Link>
-					<Link to="/system/pps" onClick = {this.handleSysSubTabClick.bind(this,PPS)}>
+					<Link to="/system/pps" onClick={this.handleSysSubTabClick.bind(this,PPS)}>
 						<SubTab item={pps} changeClass={selectClass[PPS]}/> 
 					</Link>
-					<Link to="/system/chargingstation" onClick = {this.handleSysSubTabClick.bind(this,CHARGING)}>
+					<Link to="/system/chargingstation" onClick={this.handleSysSubTabClick.bind(this,CHARGING)}>
 						<SubTab item={chargingStation} changeClass={selectClass[CHARGING]}/> 
 					</Link>
 				</div>
@@ -91,7 +91,7 @@ function mapStateToProps(state, ownProps){
     }
 }
 
-var mapDispatchToProps = function(dispatch){
+var mapDispatchToProps=function(dispatch){
 	return {
 		setCsSpinner: function(data){ dispatch(setCsSpinner(data))},
 		setPpsSpinner: function(data){ dispatch(setPpsSpinner(data))},

@@ -1,29 +1,20 @@
 import React from 'react';
-import {Table, Column, Cell} from 'fixed-data-table';
-import Dropdown from '../../components/dropdown/dropdown'
+import {Table, Column} from 'fixed-data-table';
 import Dimensions from 'react-dimensions'
-import {FormattedMessage, FormattedDate, FormattedTime, FormattedRelative, defineMessages} from 'react-intl';
+import {FormattedMessage, defineMessages} from 'react-intl';
 import {
     SortHeaderCell,
     tableRenderer,
-    SortTypes,
     TextCell,
-    ComponentCell,
-    StatusCell,
-    filterIndex,
-    DataListWrapper,
-    sortData,
-    TestingCell
+    StatusCell
 } from '../../components/commonFunctionsDataTable';
 import {
-    GOR_STATUS,
-    GOR_STATUS_PRIORITY,
     GOR_TABLE_HEADER_HEIGHT,
     DEBOUNCE_TIMER
 } from '../../constants/frontEndConstants';
 import {debounce} from '../../utilities/debounce';
 
-const messages = defineMessages({
+const messages=defineMessages({
     filterPlaceholder: {
         id: 'table.filter.placeholder',
         description: 'placeholder for table filter',
@@ -37,20 +28,20 @@ class OrderListTable extends React.Component {
 
     constructor(props) {
         super(props);
-        if (this.props.items === undefined) {
-            this._dataList = new tableRenderer(0);
+        if (this.props.items=== undefined) {
+            this._dataList=new tableRenderer(0);
         }
         else {
-            this._dataList = new tableRenderer(this.props.items.length);
+            this._dataList=new tableRenderer(this.props.items.length);
         }
-        this._defaultSortIndexes = [];
-        this._dataList.newData = this.props.items;
-        var size = this._dataList.getSize();
-        for (var index = 0; index < size; index++) {
+        this._defaultSortIndexes=[];
+        this._dataList.newData=this.props.items;
+        var size=this._dataList.getSize();
+        for (var index=0; index < size; index++) {
             this._defaultSortIndexes.push(index);
         }
-        var columnWidth = (this.props.containerWidth / this.props.itemNumber)
-        this.state = {
+        var columnWidth=(this.props.containerWidth / this.props.itemNumber)
+        this.state={
             sortedDataList: this._dataList,
             colSortDirs: {status: "DESC"},
             columnWidths: {
@@ -62,30 +53,30 @@ class OrderListTable extends React.Component {
                 orderLine: columnWidth
             },
         };
-        this._onFilterChange = this._onFilterChange.bind(this);
-        this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
-        this.backendSort = this.backendSort.bind(this);
+        this._onFilterChange=this._onFilterChange.bind(this);
+        this._onColumnResizeEndCallback=this._onColumnResizeEndCallback.bind(this);
+        this.backendSort=this.backendSort.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.items === undefined) {
-            this._dataList = new tableRenderer(0);
+        if (nextProps.items=== undefined) {
+            this._dataList=new tableRenderer(0);
         }
         else {
-            this._dataList = new tableRenderer(nextProps.items.length);
+            this._dataList=new tableRenderer(nextProps.items.length);
         }
 
-        this._defaultSortIndexes = [];
-        this._dataList.newData = nextProps.items;
-        var size = this._dataList.getSize();
-        for (var index = 0; index < size; index++) {
+        this._defaultSortIndexes=[];
+        this._dataList.newData=nextProps.items;
+        var size=this._dataList.getSize();
+        for (var index=0; index < size; index++) {
             this._defaultSortIndexes.push(index);
         }
-        var columnWidth = (nextProps.containerWidth / nextProps.itemNumber), sortIndex = {status: "DESC"};
+        var columnWidth=(nextProps.containerWidth / nextProps.itemNumber), sortIndex={status: "DESC"};
         if (this.props.currentHeaderOrder.colSortDirs) {
-            sortIndex = this.props.currentHeaderOrder.colSortDirs;
+            sortIndex=this.props.currentHeaderOrder.colSortDirs;
         }
-        this.state = {
+        this.state={
             sortedDataList: this._dataList,
             colSortDirs: sortIndex,
             columnWidths: {
@@ -97,14 +88,14 @@ class OrderListTable extends React.Component {
                 orderLine: columnWidth
             },
         };
-        this._onFilterChange = this._onFilterChange.bind(this);
-        this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
-        this.backendSort = this.backendSort.bind(this);
+        this._onFilterChange=this._onFilterChange.bind(this);
+        this._onColumnResizeEndCallback=this._onColumnResizeEndCallback.bind(this);
+        this.backendSort=this.backendSort.bind(this);
     }
 
 
     shouldComponentUpdate(nextProps) {
-        if (this.props.items && nextProps.items.length === 0) {
+        if (this.props.items && nextProps.items.length=== 0) {
             return false;
         }
         return true;
@@ -112,7 +103,7 @@ class OrderListTable extends React.Component {
 
 
     _onColumnResizeEndCallback(newColumnWidth, columnKey) {
-        this.setState(({columnWidths}) => ({
+        this.setState(({columnWidths})=> ({
             columnWidths: {
                 ...columnWidths,
                 [columnKey]: newColumnWidth,
@@ -121,21 +112,21 @@ class OrderListTable extends React.Component {
     }
 
     _onFilterChange(e) {
-        var data = {"type": "searchOrder", "captureValue": "", "selected": 1}, debounceFilter;
-        if (e.target && (e.target.value || e.target.value === "")) {
-            data["captureValue"] = e.target.value;
+        var data={"type": "searchOrder", "captureValue": "", "selected": 1}, debounceFilter;
+        if (e.target && (e.target.value || e.target.value=== "")) {
+            data["captureValue"]=e.target.value;
             this.props.setOrderFilter(e.target.value);
         }
         else {
-            data["captureValue"] = e;
+            data["captureValue"]=e;
         }
-        debounceFilter = debounce(this.props.refreshOption, DEBOUNCE_TIMER);
+        debounceFilter=debounce(this.props.refreshOption, DEBOUNCE_TIMER);
         debounceFilter(data);
     }
 
 
     backendSort(columnKey, sortDir) {
-        var data = {"columnKey": columnKey, "sortDir": sortDir, selected: this.props.pageNumber}
+        var data={"columnKey": columnKey, "sortDir": sortDir, selected: this.props.pageNumber}
         this.props.sortHeaderState(columnKey);
         this.props.onSortChange(data);
         this.props.sortHeaderOrder({
@@ -150,57 +141,57 @@ class OrderListTable extends React.Component {
     }
 
     render() {
-        var {sortedDataList, colSortDirs, columnWidths} = this.state;
-        var totalOrder = this.props.totalOrders, headerAlert = <div/>, heightRes;
-        let allDrop = <FormattedMessage id="orderlist.table.allDrop"
+        var {sortedDataList, colSortDirs, columnWidths}=this.state;
+        var totalOrder=this.props.totalOrders, headerAlert=<div/>, heightRes;
+        let allDrop=<FormattedMessage id="orderlist.table.allDrop"
                                         description="allOrders dropdown option for orderlist"
                                         defaultMessage="All orders"/>
-        let breachedDrop = <FormattedMessage id="orderlist.table.breachedDrop"
+        let breachedDrop=<FormattedMessage id="orderlist.table.breachedDrop"
                                              description="breached dropdown option for orderlist"
                                              defaultMessage="Breached orders"/>
-        let pendingDrop = <FormattedMessage id="pendingDrop.table.allDrop"
+        let pendingDrop=<FormattedMessage id="pendingDrop.table.allDrop"
                                             description="pending dropdown option for orderlist"
                                             defaultMessage="Pending orders"/>
-        let completedDrop = <FormattedMessage id="completedDrop.table.allDrop"
+        let completedDrop=<FormattedMessage id="completedDrop.table.allDrop"
                                               description="completed dropdown option for orderlist"
                                               defaultMessage="Completed orders"/>
-        let exception = <FormattedMessage id="exceptionDrop.table" description="exception order dropdown for orderlist"
+        let exception=<FormattedMessage id="exceptionDrop.table" description="exception order dropdown for orderlist"
                                           defaultMessage="Exception"/>
 
-        let allTimeDrop = <FormattedMessage id="orderlist.table.allTimeDrop"
+        let allTimeDrop=<FormattedMessage id="orderlist.table.allTimeDrop"
                                             description="allTime dropdown option for orderlist" defaultMessage="All"/>
-        let oneHrDrop = <FormattedMessage id="orderlist.table.oneHrDrop"
+        let oneHrDrop=<FormattedMessage id="orderlist.table.oneHrDrop"
                                           description="oneHr dropdown option for orderlist"
                                           defaultMessage="Last 1 hours"/>
-        let twoHrDrop = <FormattedMessage id="pendingDrop.table.twoHrDrop"
+        let twoHrDrop=<FormattedMessage id="pendingDrop.table.twoHrDrop"
                                           description="twoHr dropdown option for orderlist"
                                           defaultMessage="Last 2 hours"/>
-        let sixHrDrop = <FormattedMessage id="completedDrop.table.sixHrDrop"
+        let sixHrDrop=<FormattedMessage id="completedDrop.table.sixHrDrop"
                                           description="sixHr dropdown option for orderlist"
                                           defaultMessage="Last 6 hours"/>
-        let twelveHrDrop = <FormattedMessage id="pendingDrop.table.twelveHrDrop"
+        let twelveHrDrop=<FormattedMessage id="pendingDrop.table.twelveHrDrop"
                                              description="twelveHr dropdown option for orderlist"
                                              defaultMessage="Last 12 hours"/>
-        let oneDayDrop = <FormattedMessage id="completedDrop.table.oneDayDrop"
+        let oneDayDrop=<FormattedMessage id="completedDrop.table.oneDayDrop"
                                            description="oneDay dropdown option for orderlist"
                                            defaultMessage="Last 1 day"/>
         if (this.props.alertNum !== 0) {
 
-            headerAlert = <div className="gorToolHeaderEl alertState">
+            headerAlert=<div className="gorToolHeaderEl alertState">
                 <div className="table-subtab-alert-icon"/>
                 <div className="gor-inline">{this.props.alertNum} Alerts</div>
             </div>
         }
 
         if (this.props.containerHeight !== 0) {
-            heightRes = this.props.containerHeight;
+            heightRes=this.props.containerHeight;
         }
-        var noData = <div/>;
-        if (totalOrder === 0 || totalOrder === undefined || totalOrder === null) {
-            noData = <div className="gor-no-data"><FormattedMessage id="orderlist.table.noData"
+        var noData=<div/>;
+        if (totalOrder=== 0 || totalOrder=== undefined || totalOrder=== null) {
+            noData=<div className="gor-no-data"><FormattedMessage id="orderlist.table.noData"
                                                                     description="No data message for orderlist table"
                                                                     defaultMessage="No Orders Found"/></div>
-            heightRes = GOR_TABLE_HEADER_HEIGHT;
+            heightRes=GOR_TABLE_HEADER_HEIGHT;
         }
 
         return (
@@ -315,7 +306,7 @@ class OrderListTable extends React.Component {
                                     <div className="gorToolHeaderSubText">
                                         <FormattedMessage id="orderlist.totalCompletedOrder"
                                                           description='totalCompletedOrder header ordertable'
-                                                          defaultMessage='Avg {totalCompletedOrder} orders/hr'
+                                                          defaultMessage='{totalCompletedOrder} orders completed'
                                                           values={{totalCompletedOrder: this.props.totalCompletedOrder ? this.props.totalCompletedOrder : '0'}}/>
                                     </div>
                                 </div>
@@ -337,7 +328,7 @@ class OrderListTable extends React.Component {
                                     <div className="gorToolHeaderSubText">
                                         <FormattedMessage id="orderlist.itemsPerOrder"
                                                           description='itemsPerOrder header ordertable'
-                                                          defaultMessage='Avg {itemsPerOrder} items/hr'
+                                                          defaultMessage='Avg {itemsPerOrder} items/order'
                                                           values={{itemsPerOrder: this.props.itemsPerOrder ? this.props.itemsPerOrder.toFixed(2) : '0'}}/>
                                     </div>
                                 </div>
@@ -355,7 +346,7 @@ class OrderListTable extends React.Component {
     }
 }
 
-OrderListTable.PropTypes = {
+OrderListTable.PropTypes={
     items: React.PropTypes.array,
     containerWidth: React.PropTypes.number,
     itemNumber: React.PropTypes.number,

@@ -7,10 +7,10 @@ import {CHARGERS_DATA,CHARGING_STATION_LIST_REFRESHED} from '../constants/frontE
 export  function chargerInfo(state={},action){
 	switch (action.type) {
 	  case CHARGERS_DATA:
-              var chargersKey = {"Connected" : 0, "Disconnected": 0};
-              var res = action.data;
+              var chargersKey={"Connected" : 0, "Disconnected": 0};
+              var res=action.data;
             if(res.aggregate_data !== undefined){
-              chargersKey = {
+              chargersKey={
                "Connected" : Number(action.data.aggregate_data.active_chargers),
                "Disconnected": Number(action.data.aggregate_data.inactive_chargers)
             }

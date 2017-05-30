@@ -1,12 +1,10 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
-import { FormattedMessage,FormattedPlural } from 'react-intl'; 
+import { FormattedMessage } from 'react-intl'; 
 import { resetForm,validateSKU,validateLOC,validateSKUcode, validateSKUcodeSpinner } from '../../actions/validationActions'; 
 import {setAuditType,resetAuditType,auditValidatedAttributes} from '../../actions/auditActions';
 import {userRequest} from '../../actions/userActions';
 import { connect } from 'react-redux';
-import {INVALID_SKUID,INVALID_LOCID,TYPE_SUCCESS} from '../../constants/messageConstants';
-import { ERROR,SUCCESS,SKU,LOCATION,CREATE_AUDIT,APP_JSON,POST, GET, VALIDATE_SKU_ID, VALID_SKU, NO_ATTRIBUTE_SKU, SKU_NOT_EXISTS,NO_SKU_VALIDATION,WATING_FOR_VALIDATION } from '../../constants/frontEndConstants';
+import { ERROR,SKU,LOCATION,CREATE_AUDIT,APP_JSON,POST, GET, VALIDATE_SKU_ID, VALID_SKU, NO_ATTRIBUTE_SKU, SKU_NOT_EXISTS,NO_SKU_VALIDATION,WATING_FOR_VALIDATION } from '../../constants/frontEndConstants';
 import { AUDIT_URL ,SKU_VALIDATION_URL} from '../../constants/configConstants';
 import FieldError from '../../components/fielderror/fielderror';
 import { locationStatus, skuStatus } from '../../utilities/fieldCheck';
@@ -17,8 +15,8 @@ class CreateAudit extends React.Component{
   constructor(props) 
   {
       super(props); 
-      var selectedList = []; 
-      this.state = {selected:selectedList,confirmedSku:null,currentSku:""}
+      var selectedList=[]; 
+      this.state={selected:selectedList,confirmedSku:null,currentSku:""}
   }
   componentWillUnmount()
   {
@@ -28,11 +26,11 @@ class CreateAudit extends React.Component{
 
   componentWillMount() {
 
-    var initialSkuInfo = {}, initialAttributes;
-    var selectedList = []; 
-    this.state = {selected:selectedList}
+    var initialSkuInfo={}, initialAttributes;
+    var selectedList=[]; 
+    this.state={selected:selectedList}
     this.selectedList=[];
-    this.noSkuValidation = true;
+    this.noSkuValidation=true;
     this.props.validateSKU(initialSkuInfo);
     this.props.validateSKUcodeSpinner(false);
     this.props.auditValidatedAttributes(initialAttributes)
@@ -61,7 +59,7 @@ class CreateAudit extends React.Component{
       this.props.auditValidatedAttributes(initialAttributes)
       this.props.validateSKUcodeSpinner(true);
       this.props.validateSKUcode(urlData);
-      this.noSkuValidation = false;
+      this.noSkuValidation=false;
       this.setState({confirmedSku:this.skuId.value})
   }
   _checkSku(skuId){
@@ -97,7 +95,7 @@ class CreateAudit extends React.Component{
     md=this.location;
     sku=this.skuId.value;
     loc=this.locationId.value;
-    if((this.skuState === NO_ATTRIBUTE_SKU || !this.state.selected.length) && this.props.auditType!==LOCATION) //if sku has no attributes || sku has attributes but not 
+    if((this.skuState=== NO_ATTRIBUTE_SKU || !this.state.selected.length) && this.props.auditType!==LOCATION) //if sku has no attributes || sku has attributes but not 
     {                                                                     //doing audit by pdfa
       if(!this._checkSku(sku))
         return;
@@ -106,12 +104,12 @@ class CreateAudit extends React.Component{
          audit_param_value: sku 
       };
     }
-    else if(this.skuState === VALID_SKU && this.state.selected.length) { //sku has attributes and doing audit by pdfa
+    else if(this.skuState=== VALID_SKU && this.state.selected.length) { //sku has attributes and doing audit by pdfa
       formdata={}
-      formdata["audit_param_type"] = "pdfa";
-      formdata["audit_param_value"] = {}
+      formdata["audit_param_type"]="pdfa";
+      formdata["audit_param_value"]={}
       formdata["audit_param_value"]["product_sku"]=sku;
-      formdata["audit_param_value"]["pdfa_values"] = {}
+      formdata["audit_param_value"]["pdfa_values"]={}
       formdata["audit_param_value"]["pdfa_values"][this.keys]=this.state.selected;
     } 
     
@@ -138,39 +136,39 @@ class CreateAudit extends React.Component{
   }
 
   _claculateSkuState(processedSkuResponse) {
-    var skuState = (this.noSkuValidation?NO_SKU_VALIDATION:(!processedSkuResponse.isValid?SKU_NOT_EXISTS:(processedSkuResponse.hasAttribute?VALID_SKU:NO_ATTRIBUTE_SKU)));
-    skuState = (this.props.skuValidationResponse?WATING_FOR_VALIDATION:skuState);
-    this.skuState = skuState;
+    var skuState=(this.noSkuValidation?NO_SKU_VALIDATION:(!processedSkuResponse.isValid?SKU_NOT_EXISTS:(processedSkuResponse.hasAttribute?VALID_SKU:NO_ATTRIBUTE_SKU)));
+    skuState=(this.props.skuValidationResponse?WATING_FOR_VALIDATION:skuState);
+    this.skuState=skuState;
     return skuState;
   }
 
   _processSkuAttributes() {
     
-    var keys = [], hasAttribute = false, isValid=false;
-    var skuAttributeData = {keys:keys, hasAttribute: hasAttribute, isValid:isValid};
+    var keys=[], hasAttribute=false, isValid=false;
+    var skuAttributeData={keys:keys, hasAttribute: hasAttribute, isValid:isValid};
     if(this.props.skuAttributes && this.props.skuAttributes.audit_attributes_values) {
-        isValid = true;
+        isValid=true;
         for (var key in this.props.skuAttributes.audit_attributes_values) {
           if (this.props.skuAttributes.audit_attributes_values.hasOwnProperty(key)) {
             keys.push(key);
             if(this.props.skuAttributes.audit_attributes_values[key].length) {
-              hasAttribute = true;
+              hasAttribute=true;
             }
           }
         }
     }
-    skuAttributeData = {keys:keys, hasAttribute: hasAttribute, isValid:isValid};
-    this.keys = keys[0]; // harcoding since backend support only one entry
+    skuAttributeData={keys:keys, hasAttribute: hasAttribute, isValid:isValid};
+    this.keys=keys[0]; // harcoding since backend support only one entry
     return skuAttributeData;
   }
 
   _searchDropdownEntries(skuState,processedSkuResponse) {
-    if(skuState === VALID_SKU && processedSkuResponse.keys){
-      var key = processedSkuResponse.keys[0]; //not generic need to change in version 2 of pdfa
+    if(skuState=== VALID_SKU && processedSkuResponse.keys){
+      var key=processedSkuResponse.keys[0]; //not generic need to change in version 2 of pdfa
       var dropdownDataField={value:""},dropdownData=[];
-      var skuAttributes = this.props.skuAttributes.audit_attributes_values[key];
-      for (var i = skuAttributes.length - 1; i >= 0; i--) {
-        dropdownDataField.value = skuAttributes[i];
+      var skuAttributes=this.props.skuAttributes.audit_attributes_values[key];
+      for (var i=skuAttributes.length - 1; i >= 0; i--) {
+        dropdownDataField.value=skuAttributes[i];
         dropdownData.push(dropdownDataField);
         dropdownDataField={value:""};
       }
@@ -179,22 +177,20 @@ class CreateAudit extends React.Component{
   }
   _captureQuery(e) {
     if(e.target.value) {
-      var emptyList = [];
+      var emptyList=[];
       this.setState({currentSku:e.target.value,selected:emptyList})
     }
   }
 
   render()
   {
-     
-      let tick=(<div className='gor-tick'/>);  
-      let validSkuMessg = <FormattedMessage id="audit.valid.sku" description='text for valid sku' defaultMessage='SKU confirmed'/>;
-      let invalidSkuMessg = <FormattedMessage id="audit.invalid.sku" description='text for invalid sku' defaultMessage='Please enter correct SKU number'/>;
-      let validSkuNoAtriMessg = <FormattedMessage id="audit.noAtrributes.sku" description='text for valid sku with no attributed' defaultMessage='SKU confirmed but no Box Id found'/>;
-      var processedSkuResponse = this._processSkuAttributes();
-      var skuState = this._claculateSkuState(processedSkuResponse);
-      var dropdownData = this._searchDropdownEntries(skuState,processedSkuResponse);
-      var confirmedSkuNotChanged = (this.state.confirmedSku===this.state.currentSku?true:false)
+      let validSkuMessg=<FormattedMessage id="audit.valid.sku" description='text for valid sku' defaultMessage='SKU confirmed'/>;
+      let invalidSkuMessg=<FormattedMessage id="audit.invalid.sku" description='text for invalid sku' defaultMessage='Please enter correct SKU number'/>;
+      let validSkuNoAtriMessg=<FormattedMessage id="audit.noAtrributes.sku" description='text for valid sku with no attributed' defaultMessage='SKU confirmed but no Box Id found'/>;
+      var processedSkuResponse=this._processSkuAttributes();
+      var skuState=this._claculateSkuState(processedSkuResponse);
+      var dropdownData=this._searchDropdownEntries(skuState,processedSkuResponse);
+      var confirmedSkuNotChanged=(this.state.confirmedSku===this.state.currentSku?true:false)
       
       return (
         <div>
@@ -208,8 +204,8 @@ class CreateAudit extends React.Component{
               <span className="close" onClick={this._removeThisModal.bind(this)}>×</span>
             </div>
             <div className='gor-modal-body'>
-            <form action="#"  id = "createauditForm" ref={node => { this.addauditForm = node }} 
-                onSubmit={(e) => this._handleAddaudit(e)}>
+            <form action="#"  id="createauditForm" ref={node=> { this.addauditForm=node }} 
+                onSubmit={(e)=> this._handleAddaudit(e)}>
 
             <div className='gor-usr-form'>
             <div className='gor-usr-details'>
@@ -220,12 +216,12 @@ class CreateAudit extends React.Component{
               </div>
             
                 <div className='gor-role'>
-                <input type="radio"  name='role' onChange={this._checkType.bind(this)} defaultChecked value={SKU} ref={node => { this.sku = node }} /><span className='gor-usr-hdsm'>
+                <input type="radio"  name='role' onChange={this._checkType.bind(this)} defaultChecked value={SKU} ref={node=> { this.sku=node }} /><span className='gor-usr-hdsm'>
                 <FormattedMessage id="audit.add.typedetails.sku" description='Text for sku' 
             defaultMessage='Audit by SKU code'/> </span>
                 </div>
                 <div className='gor-role'>
-                <input type="radio" value={LOCATION} onChange={this._checkType.bind(this)} name="role" ref={node => { this.location = node }} /><span className='gor-usr-hdsm'>
+                <input type="radio" value={LOCATION} onChange={this._checkType.bind(this)} name="role" ref={node=> { this.location=node }} /><span className='gor-usr-hdsm'>
                 <FormattedMessage id="audit.add.typedetails.location" description='Text for location' 
             defaultMessage='Audit by Location code'/></span>
                 </div>
@@ -233,11 +229,11 @@ class CreateAudit extends React.Component{
             </div>
             
             <div className='gor-usr-details'>
-            <div style={{'display':this.props.auditType==LOCATION?'none':'block'}}>
+            <div style={{'display':this.props.auditType===LOCATION?'none':'block'}}>
              <div className='gor-usr-hdsm'><FormattedMessage id="audit.add.sku.heading" description='Text for SKU heading' 
             defaultMessage='Enter SKU code'/></div>
               <div className="gor-audit-input-wrap">
-                <input className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} placeholder="e.g. 46978072" id="skuid"  ref={node => { this.skuId = node }} onChange={this._captureQuery.bind(this)}/>
+                <input className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} placeholder="e.g. 46978072" id="skuid"  ref={node=> { this.skuId=node }} onChange={this._captureQuery.bind(this)}/>
                 <div className={skuState===SKU_NOT_EXISTS?"gor-login-error":((skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU )&& confirmedSkuNotChanged?"gor-verified-icon":"")}/>
               </div>
               <div className={"gor-sku-validation-btn-wrap" + (this.props.skuValidationResponse?" gor-disable-content":"")}>
@@ -248,19 +244,19 @@ class CreateAudit extends React.Component{
                 {confirmedSkuNotChanged?(skuState===SKU_NOT_EXISTS?invalidSkuMessg:(skuState===VALID_SKU?validSkuMessg:(skuState===NO_ATTRIBUTE_SKU?validSkuNoAtriMessg:""))):""}
               </div>
               {skuState===NO_ATTRIBUTE_SKU ?"":
-                <div className={"gor-searchDropdown-audit-wrap" + (skuState!= VALID_SKU || !confirmedSkuNotChanged?" gor-disable-content":"")}>
+                <div className={"gor-searchDropdown-audit-wrap" + (skuState!==VALID_SKU || !confirmedSkuNotChanged?" gor-disable-content":"")}>
                   <div className='gor-usr-hdsm'><FormattedMessage id="audit.dropdown.heading" description='Text for dropdown heading' 
                        defaultMessage='Choose Box Id (Optional)'/></div>
                   <SearchDropdown list={dropdownData} selectedItems={this._selectedAttributes.bind(this)}/>
                 </div>}
             </div>
 
-            <div style={{'display':this.props.auditType==LOCATION?'block':'none'}}>
+            <div style={{'display':this.props.auditType===LOCATION?'block':'none'}}>
              <div className='gor-usr-hdsm'><FormattedMessage id="audit.add.location.heading" description='Text for location heading' 
             defaultMessage='Enter Location'/></div>
               <div className='gor-sub-head'><FormattedMessage id="audit.add.location.subheading" description='Subtext for enter location' 
             defaultMessage='Format: (XXX.X.X.XX)'/></div>
-              <input className={"gor-audit-fdlg"+(this.props.locCheck.type === ERROR ? ' gor-input-error':' gor-input-ok')} placeholder="e.g. 132.0.A.47" id="locationid"  ref={node => { this.locationId = node }} />
+              <input className={"gor-audit-fdlg"+(this.props.locCheck.type=== ERROR ? ' gor-input-error':' gor-input-ok')} placeholder="e.g. 132.0.A.47" id="locationid"  ref={node=> { this.locationId=node }} />
               {this.props.locCheck.type===ERROR?<FieldError txt={this.props.locCheck.msg} />:''}
             </div>
             </div>
@@ -288,7 +284,7 @@ function mapStateToProps(state, ownProps){
   };
 }
 
-var mapDispatchToProps = function(dispatch){
+var mapDispatchToProps=function(dispatch){
   return {
     userRequest: function(data){ dispatch(userRequest(data)); },
     setAuditType: function(data){ dispatch(setAuditType(data)); },

@@ -1,14 +1,12 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
-import { FormattedMessage,FormattedPlural } from 'react-intl'; 
+import { FormattedMessage } from 'react-intl'; 
 import { modalFormReset,validatingList} from '../../actions/validationActions'; 
 import {userRequest} from '../../actions/userActions';
 import {setSafetySpinner} from '../../actions/spinnerAction';
 import { connect } from 'react-redux';
-import { ERROR,SUCCESS,GET,APP_JSON,POST,CHECK_SAFETY,
+import { GET,APP_JSON,POST,CHECK_SAFETY,
   CONFIRM_SAFETY} from '../../constants/frontEndConstants';
-import { LOGIN_URL, VALIDATION_LIST,VALIDATE_SAFETY } from '../../constants/configConstants';
-import { locationStatus, skuStatus } from '../../utilities/fieldCheck';
+import {  VALIDATION_LIST,VALIDATE_SAFETY } from '../../constants/configConstants';
 import {stringConfig} from '../../constants/backEndConstants';
 import Spinner from '../../components/spinner/Spinner';
 
@@ -37,9 +35,9 @@ class SafetyChecklist extends React.Component{
     }
     if(nextProps.safetyErrorList.length)
     {
-      var errorList = nextProps.safetyErrorList , noItems;
+      var errorList=nextProps.safetyErrorList , noItems;
       this.setState({safetyError:true, errorList:errorList});
-      noItems = this.props.checkList.length;
+      noItems=this.props.checkList.length;
       for(let i in errorList){
         this._toggleSelection(errorList[i],noItems);           
       }      
@@ -58,7 +56,7 @@ class SafetyChecklist extends React.Component{
         this.props.validatingList(true);
   }
   _toggleSelection(i,noItems){
-    var currentSet = this.state.checkedSet;
+    var currentSet=this.state.checkedSet;
     if(currentSet.has(i)){
       currentSet.delete(i);      
     }
@@ -66,7 +64,7 @@ class SafetyChecklist extends React.Component{
       currentSet.add(i);
     }
     this.setState({checkedSet:currentSet});
-    if(currentSet.size === noItems){
+    if(currentSet.size=== noItems){
       this.setState({allChecked:true});
     }
     else{
@@ -76,9 +74,8 @@ class SafetyChecklist extends React.Component{
   _handleSafetyConfirm(e)
   {
     e.preventDefault();
-    var noItems, formdata;
-    noItems = this.props.checkList.length;
-    formdata = {'type':'stop'};
+    var formdata;
+    formdata={'type':'stop'};
     let userData={
                 'url':VALIDATE_SAFETY,
                 'method':POST,
@@ -92,15 +89,15 @@ class SafetyChecklist extends React.Component{
     this.props.setSafetySpinner(true);
   }
   _isValid(item,noItems){
-    var errorList = this.state.errorList, idx;
-    idx = errorList.indexOf(item);
-    if(idx!=-1){
+    var errorList=this.state.errorList, idx;
+    idx=errorList.indexOf(item);
+    if(idx!==-1){
       return false;
     }
     return true;
   }
   _inList(item){
-    var currentSet = this.state.checkedSet;
+    var currentSet=this.state.checkedSet;
     if(currentSet.has(item)){
       return true;
     }
@@ -111,9 +108,9 @@ class SafetyChecklist extends React.Component{
     noItems=items.length;
     for(let i=0;i<noItems;i++)
     {
-        msgCode = items[i];
+        msgCode=items[i];
         if(this._inList(msgCode)){
-          item = (<li key={msgCode}>
+          item=(<li key={msgCode}>
               <input type="checkbox" key={msgCode} checked={true} value={msgCode} onChange={this._toggleSelection.bind(this,msgCode,noItems)} />
               <span className='gor-checklist-item'>
                 {this.context.intl.formatMessage(stringConfig[msgCode])}
@@ -122,7 +119,7 @@ class SafetyChecklist extends React.Component{
 
         }
         else if(this._isValid(msgCode,noItems)){
-          item = (<li key={msgCode}>
+          item=(<li key={msgCode}>
               <input type="checkbox" key={msgCode} value={msgCode} checked={false} onChange={this._toggleSelection.bind(this,msgCode,noItems)} />
               <span className='gor-checklist-item'>
                 {this.context.intl.formatMessage(stringConfig[msgCode])}
@@ -130,7 +127,7 @@ class SafetyChecklist extends React.Component{
               </li>);
         }
         else{
-          item = (<li key={msgCode}>
+          item=(<li key={msgCode}>
               <input type="checkbox" key={msgCode} checked={false} value={msgCode} onChange={this._toggleSelection.bind(this,msgCode,noItems)} />
               <span className='gor-checklist-item'>
                 {this.context.intl.formatMessage(stringConfig[msgCode])}
@@ -145,7 +142,7 @@ class SafetyChecklist extends React.Component{
   }
   render()
   {
-      var checkList = this._processList();
+      var checkList=this._processList();
       return (
         <div className='gor-safetylist'>
           <div className="gor-modal-content">
@@ -157,7 +154,7 @@ class SafetyChecklist extends React.Component{
               <span className="close" onClick={this._removeThisModal.bind(this)}>×</span>
             </div>
             <div className='gor-modal-body'>
-            <form action="#"  id = "safetyForm">
+            <form action="#"  id="safetyForm">
              <div className='gor-usr-form'>
               <div className='gor-usr-details'>
                 <div className='gor-usr-hdsm'><FormattedMessage id='operation.safety.steps' 
@@ -197,7 +194,7 @@ class SafetyChecklist extends React.Component{
     }
   }
 
-SafetyChecklist.contextTypes = {
+SafetyChecklist.contextTypes={
     intl: React.PropTypes.object.isRequired
 }
 
@@ -212,7 +209,7 @@ function mapStateToProps(state, ownProps){
       system_data:state.tabsData.system_data||null
   };
 }
-var mapDispatchToProps = function(dispatch){
+var mapDispatchToProps=function(dispatch){
   return {
     userRequest: function(data){ dispatch(userRequest(data)); },
     resetForm:   function(){ dispatch(modalFormReset()); },

@@ -3,10 +3,10 @@ import rd3 from 'react-d3-library';
 import * as d3 from 'd3';
 import Dimensions from 'react-dimensions'
 import { defineMessages } from 'react-intl';
-const RD3Component = rd3.Component;
+const RD3Component=rd3.Component;
 
 
-const messages = defineMessages({
+const messages=defineMessages({
     noData: {
         id: 'graph.noData',
         description: 'No data message for graph',
@@ -18,23 +18,23 @@ class ChartHorizontal extends React.Component{
   constructor(props) 
   {
    super(props);
-   this.state = {d3: ''}
+   this.state={d3: ''}
  }
  
 graphRender(containerWidth,tData,nextP,performanceParam){
-var component = this;
-  var widther = containerWidth;
-  var parentHeight = 300;
+var component=this;
+  var widther=containerWidth;
+  var parentHeight=300;
   
       var json=tData;
-      var data = [];
-      var barData = {}; 
-       for (var i = 0; i < json.length; i++) {
+      var data=[];
+      var barData={}; 
+       for (var i=0; i < json.length; i++) {
         if(json[i][nextP]>0) {
-          barData.pps_id = json[i].pps_id;
-          barData.type = json[i][nextP]
+          barData.pps_id=json[i].pps_id;
+          barData.type=json[i][nextP]
           data.push(barData);
-          barData = {};
+          barData={};
         }
        }
        data.sort(function(a, b) {return parseFloat(b.type) - parseFloat(a.type);});
@@ -43,23 +43,21 @@ var component = this;
   
 
   function update(data) {
-    var minHeight = 50;
-  var width = widther-100;
-  var barHeight = (data.length && parentHeight/(data.length)>=minHeight)?minHeight:parentHeight/(data.length);
-  var left = 30, top =20;
-  var x = d3.scale.linear().range([0, width]);
-  var xAxis =  d3.svg.axis()
-    .scale(x)
-    .orient("top")
+    var minHeight=50;
+  var width=widther-100;
+  var barHeight=(data.length && parentHeight/(data.length)>=minHeight)?minHeight:parentHeight/(data.length);
+  var left=30, top=20;
+  var x=d3.scale.linear().range([0, width]);
 
-  var y = d3.scale.ordinal().rangeRoundBands([0, parentHeight-(data.length*barHeight)], .1);
-  var yAxis = d3.svg.axis()
+
+  var y=d3.scale.ordinal().rangeRoundBands([0, parentHeight-(data.length*barHeight)], .1);
+  var yAxis=d3.svg.axis()
     .scale(y)
     .orient("right")
     .outerTickSize(0)
 
-  var node = document.createElement('div');
-  var chart = d3.select(node).append('svg')
+  var node=document.createElement('div');
+  var chart=d3.select(node).append('svg')
   .attr("width", widther)
   .attr("height", 400)
   .append("g")
@@ -67,7 +65,7 @@ var component = this;
 
    x.domain([0, d3.max(data, function(d) { return d.type; })]);
 
-   var bar = chart.selectAll("g")
+   var bar=chart.selectAll("g")
    .data(data)
    .enter().append("g")
    .attr("class", "g")
@@ -90,7 +88,7 @@ var component = this;
 
     bar.append("g")
     .attr("class", "y axis")
-    .attr("transform", "translate(" + "50" + ",0)")
+    .attr("transform", "translate(50,0)")
     .style({ 'stroke': '#D3D3D3', 'fill': '#D3D3D3', 'stroke-width': '1px'})
     .call(yAxis); 
 
@@ -110,7 +108,7 @@ var component = this;
    .attr("y", (barHeight / 2) - 3)
    .attr("dy", ".35em")
    .text(function(d) {
-        if(d.type === 0) {
+        if(d.type=== 0) {
           return ;
         }
 
@@ -129,7 +127,7 @@ var component = this;
    .attr("y", (barHeight / 2) - 3) 
    .attr("dy", ".35em")
    .text(function(d) { 
-      if(d.type === 4){ 
+      if(d.type=== 4){ 
         return "PPS " + d.pps_id; 
       }
 
@@ -146,7 +144,7 @@ var component = this;
   .attr("y", (barHeight / 2) - 3) 
   .attr("dy", ".35em")
   .text(function(d) { 
-     if(d.type === 0){ 
+     if(d.type=== 0){ 
        return component.context.intl.formatMessage(messages.noData); 
      }
      })
@@ -185,7 +183,7 @@ render() {
 }
 };
 
-ChartHorizontal.contextTypes ={
+ChartHorizontal.contextTypes={
  intl:React.PropTypes.object.isRequired
 }
 export default Dimensions()(ChartHorizontal) ;

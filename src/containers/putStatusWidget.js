@@ -1,5 +1,4 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import Tilex from '../components/tile1x/Tilex';
 import { connect } from 'react-redux';
 import { FormattedMessage,FormattedNumber ,FormattedPlural} from 'react-intl';
@@ -19,32 +18,32 @@ class PutStatusWidget extends React.Component{
     	 * @return {[void]} 
     	 */
         _formatContainerData() {
-    		var lowStr,valueLeftStatus='',totalPut = this.props.ppsData ? this.props.ppsData.totalPut : 0,
-    		putData = Object.assign({},this.props.putData),
-    		putThroughput = this.props.throughputData ? this.props.throughputData.put_throughput : 0,
-    		value = putData ? putData.value : 0,pluralMsg,
+    		var lowStr,valueLeftStatus='',totalPut=this.props.ppsData ? this.props.ppsData.totalPut : 0,
+    		putData=Object.assign({},this.props.putData),
+    		putThroughput=this.props.throughputData ? this.props.throughputData.put_throughput : 0,
+    		value=putData ? putData.value : 0,pluralMsg,
     		heading;
             totalPut=<FormattedNumber value={totalPut}/>;
     		//Setting display values based on server values/mock
     		if (!value){
-    			value = <FormattedMessage id="widget.put.heading.value" description='Total Items Stocked' 
+    			value=<FormattedMessage id="widget.put.heading.value" description='Total Items Stocked' 
             		defaultMessage='None'/>;
                 valueLeftStatus=GOR_NONE;
-    			lowStr = <FormattedMessage id="widget.put.status.idle" description='Put PPS idle message' 
+    			lowStr=<FormattedMessage id="widget.put.status.idle" description='Put PPS idle message' 
                 defaultMessage='{count} idle PPS (Put mode)'
                 values={{
                     count: totalPut
                 }}/>;
     		}
     		else{
-    			value = <FormattedNumber value={value}/>
-                putThroughput = <FormattedNumber value={putThroughput}/>
-                pluralMsg = <FormattedPlural
+    			value=<FormattedNumber value={value}/>
+                putThroughput=<FormattedNumber value={putThroughput}/>
+                pluralMsg=<FormattedPlural
                             value={totalPut}
                             one='PPS'
                             other='PPS'
                         />
-                lowStr = <FormattedMessage id="widget.put.throughput" description='Throughput message' 
+                lowStr=<FormattedMessage id="widget.put.throughput" description='Throughput message' 
             					defaultMessage='{count} {pluralMsg} stocking {throughput} items/hr'
             					values={{
 							        count: totalPut,
@@ -62,11 +61,11 @@ class PutStatusWidget extends React.Component{
                 defaultMessage='--'/>;                
             }
 
-    		putData.heading = <FormattedMessage id="widget.put.heading" description='Put Item Heading' 
+    		putData.heading=<FormattedMessage id="widget.put.heading" description='Put Item Heading' 
             					defaultMessage='Items stocked'/>;
-            putData.value = value;
-            putData.low = lowStr;
-            putData.logo = STOCK_ICON;
+            putData.value=value;
+            putData.low=lowStr;
+            putData.logo=STOCK_ICON;
     		putData.valueLeftStatus=valueLeftStatus;
     		return putData
     		
@@ -74,7 +73,7 @@ class PutStatusWidget extends React.Component{
 
     render()
     {
-    	var putData = this._formatContainerData();
+    	var putData=this._formatContainerData();
     	return (
 			 <Tilex items={putData}/>
     	);

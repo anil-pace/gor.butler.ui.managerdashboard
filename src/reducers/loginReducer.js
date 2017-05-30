@@ -17,7 +17,6 @@ export  function authLogin(state={},action){
       })    
 
 	  case LOGIN_REDIRECT:
-	
     case LOGIN_SUCCESS:
 	   sessionStorage.setItem('auth_token', action.data.auth_token);
 

@@ -1,5 +1,4 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import LoginForm from './loginForm';
 import Footer from '../footer/Footer';
 import Spinner from '../../components/spinner/Spinner';
@@ -38,9 +37,9 @@ class Login extends React.Component{
     } 
     _changeDropdown()
     {
-        for (let i = 0; i < this.state.items.length; i++) 
+        for (let i=0; i < this.state.items.length; i++) 
         { 
-            if(this.state.items[i].value === this.props.sLang)
+            if(this.state.items[i].value=== this.props.sLang)
                 this.setState({sel:i});
         }      
     }
@@ -66,7 +65,7 @@ class Login extends React.Component{
         if (!sLocale){
             return ;
         }
-        let data = {
+        let data={
             locale : sLocale,
             messages: translationMessages[sLocale]
         }
@@ -86,7 +85,7 @@ class Login extends React.Component{
                     <FormattedMessage id='login.butler.language' 
                         defaultMessage="Language" description="Text for language"/>
                     </div>
-                    <Dropdown optionDispatch={(e) => this._handleSelectionChange(e)} items={this.state.items}
+                    <Dropdown optionDispatch={(e)=> this._handleSelectionChange(e)} items={this.state.items}
                      styleClass={'gor-lang-drop'} 
                     currentState={this.state.items[this.state.sel]} />
                 </div>
@@ -109,7 +108,7 @@ class Login extends React.Component{
  * [Passing Router to component through context]
  * @type {Object}
  */
-Login.contextTypes = {
+Login.contextTypes={
         router: React.PropTypes.object.isRequired
 }
 
@@ -127,7 +126,7 @@ function mapStateToProps(state, ownProps){
  * mapping dispatch function to props
  * so that they could be called from props
  */
-var mapDispatchToProps = function(dispatch){
+var mapDispatchToProps=function(dispatch){
 
     return {
         updateIntl: function(params){ dispatch(updateIntl(params));},

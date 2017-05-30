@@ -1,19 +1,19 @@
 import React  from 'react';
-import { FormattedMessage,FormattedPlural } from 'react-intl'; 
+import { FormattedMessage } from 'react-intl'; 
 import {AUDIT_RESOLVED, AUDIT_LINE_REJECTED, SUCCESS, ERROR, AUDIT_BY_PDFA,ITEM_RECALLED_DATA} from '../constants/frontEndConstants';
 import {ERR_RES} from '../constants/messageConstants';
 
 export function statusToString(res){
-          let stringInfo;
+          var stringInfo, auditType, auditTypeValue, auditId;
           switch(res.status)
           {
             case AUDIT_RESOLVED:
-              var auditId = res.audit_display_id;
-              var auditType = res.audit_type;
-              var auditTypeValue = res.audit_type_value;
-               if(auditType === AUDIT_BY_PDFA) {
-                auditType = "SKU";
-                auditTypeValue = res.audit_type_value.product_sku;
+              auditId=res.audit_display_id;
+               auditType=res.audit_type;
+               auditTypeValue=res.audit_type_value;
+               if(auditType=== AUDIT_BY_PDFA) {
+                auditType="SKU";
+                auditTypeValue=res.audit_type_value.product_sku;
               }
               stringInfo={
                 type:SUCCESS,
@@ -25,12 +25,12 @@ export function statusToString(res){
               break;
             
             case AUDIT_LINE_REJECTED:
-              var auditId = res.audit_display_id;
-              var auditType = res.audit_type;
-              var auditTypeValue = res.audit_type_value;
-              if(auditType === AUDIT_BY_PDFA) {
-                auditType = "SKU";
-                auditTypeValue = res.audit_type_value.product_sku;
+              auditId=res.audit_display_id;
+              auditType=res.audit_type;
+              auditTypeValue=res.audit_type_value;
+              if(auditType=== AUDIT_BY_PDFA) {
+                auditType="SKU";
+                auditTypeValue=res.audit_type_value.product_sku;
               }
               stringInfo={
                 type:SUCCESS,
@@ -42,8 +42,7 @@ export function statusToString(res){
               break;
 
             case ITEM_RECALLED_DATA:
-              var itemCount = res.item_count?res.item_count:0;
-              var orderCount = res.order_count?res.order_count:0;
+              var itemCount=res.item_count?res.item_count:0;
               stringInfo={
                 type:SUCCESS,
                 msg:(<FormattedMessage id="utility.item.recall" description='Item recall message' 

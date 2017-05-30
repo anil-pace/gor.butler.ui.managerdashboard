@@ -3,18 +3,13 @@ import rd3 from 'react-d3-library';
 import * as d3 from 'd3';
 
 
-
-
-
-
-const RD3Component = rd3.Component;
-const BarChart = rd3.BarChart;
+const RD3Component=rd3.Component;
 
 class Histogram extends React.Component{
   constructor(props) 
   {
      super(props);
-    this.state = {d3: ''}
+    this.state={d3: ''}
    }
 
 
@@ -24,14 +19,14 @@ class Histogram extends React.Component{
     this._processData(JSON.parse(JSON.stringify(this.props.histogramData)),this.props.config);
   }
   componentWillReceiveProps(nextProps){
-  	var config = {}
-    config.noData = nextProps.noData;
-    config.noDataText = nextProps.noDataText;
+  	var config={}
+    config.noData=nextProps.noData;
+    config.noDataText=nextProps.noDataText;
   	this._processData(JSON.parse(JSON.stringify(nextProps.histogramData)),nextProps.config);
   }
 
   shouldComponentUpdate(nextProps, nextState){
-    if(this.props.hasDataChanged === nextProps.hasDataChanged || !nextProps.histogramData.length){
+    if(this.props.hasDataChanged=== nextProps.hasDataChanged || !nextProps.histogramData.length){
       return false;
     }
       return true;
@@ -42,49 +37,49 @@ class Histogram extends React.Component{
   
    _processData(data,config){
    	
-    var node = document.createElement('div');
+    var node=document.createElement('div');
     if(data.length > 1){
     var _this= this;
 	 
-   	var svg = d3.select(node).append("svg"),
-    margin = config.margin,
-    width = config.width - margin.left - margin.right,
-    height = config.height - margin.top - margin.bottom;
+   	var svg=d3.select(node).append("svg"),
+    margin=config.margin,
+    width=config.width - margin.left - margin.right,
+    height=config.height - margin.top - margin.bottom;
 	 svg.attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom);
 
      //Hack to allow duplicate x Axis values
-    var adjustTicks = function(){
-       var xaxisgroup = this.node();
-       var ticks = xaxisgroup.children;
-       for (var i = 0; i < ticks.length; i++) {
-           if(ticks[i].localName == 'path'){continue; }
+    var adjustTicks=function(){
+       var xaxisgroup=this.node();
+       var ticks=xaxisgroup.children;
+       for (var i=0; i < ticks.length; i++) {
+           if(ticks[i].localName=== 'path'){continue; }
 
-           var tick_text = d3.select(ticks[i].children[1]);
+           var tick_text=d3.select(ticks[i].children[1]);
            tick_text.text(tick_text.text().split("_")[1])
 
        };
     }
 
-    var x = d3.scale.ordinal().rangeRoundBands([0, width], config.bandPadding);
+    var x=d3.scale.ordinal().rangeRoundBands([0, width], config.bandPadding);
 
-  	var y = d3.scale.linear().range([height, 0]);
-  	var xAxis = d3.svg.axis()
+  	var y=d3.scale.linear().range([height, 0]);
+  	var xAxis=d3.svg.axis()
   	    .scale(x)
   	    .orient("bottom").outerTickSize(config.outerTickSize)
   
-  	var yAxis = d3.svg.axis()
+  	var yAxis=d3.svg.axis()
   	    .scale(y)
   	    .orient("left")
   	    .ticks(config.ticks).outerTickSize(config.outerTickSize);
 
-		var g = svg.append("g")
+		var g=svg.append("g")
 	    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
 
     x.domain(data.map(function(d) { return (d.xAxisData )  ; }));
-    if(config.noData && config.noData === true){
+    if(config.noData && config.noData=== true){
     	y.domain([0, d3.max(data, function(d) { return config.defaultMaxYAxis; })]);
     }
     else{
@@ -130,17 +125,15 @@ class Histogram extends React.Component{
         	event.stopImmediatePropagation();
         })
     g.select("rect:last-child").classed("sel",true);
-    if(config.noData && config.noData === true){
+    if(config.noData && config.noData=== true){
         svg.insert("text",":first-child").attr("x",width/2).attr("y",height/2).text(config.noDataText || "");
     }
     if(config.showMonthBreak && data.length){
       var mBreak= g.selectAll("g.axis--x");
-      var dLength = data.length;
-      var lastXAxisValue = parseInt((data[dLength-1].xAxisData).split("_")[1]);
-      var secondLastXAxisValue = parseInt((data[dLength-2].xAxisData).split("_")[1]);
-      var monthBreak = mBreak.select("g:nth-child("+(dLength - lastXAxisValue)+")");
-      let yToday = "3.5em";
-      let xToday = "-20";
+      var dLength=data.length;
+      var lastXAxisValue=parseInt((data[dLength-1].xAxisData).split("_")[1],10);
+      var monthBreak=mBreak.select("g:nth-child("+(dLength - lastXAxisValue)+")");
+      let yToday="3.5em";
       mBreak.select("g:nth-child("+dLength+")").append("text").attr("x","-20").attr("y",yToday).text(config.today);
       
     }
@@ -157,7 +150,7 @@ class Histogram extends React.Component{
 
    render() {
    
-   var renderHtml = <RD3Component data={this.state.d3} />;
+   var renderHtml=<RD3Component data={this.state.d3} />;
    return (
      <div className="inventoryHist">
        {renderHtml}

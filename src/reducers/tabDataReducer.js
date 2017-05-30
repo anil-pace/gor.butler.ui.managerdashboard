@@ -11,7 +11,6 @@ export  function tabsData(state={},action){
       return Object.assign({}, state, {
         "overview_status":overview_status
       })
-      break;
       case GET_SYSTEM:
       let system_data={},system_emergency=false;
       if(action.data.header_data)
@@ -23,7 +22,6 @@ export  function tabsData(state={},action){
         "system_emergency":system_emergency,
         "system_data":system_data
       })
-      break;
       case GET_USERS:
       let users_online=0;
       if(action.data.header_data)
@@ -33,19 +31,17 @@ export  function tabsData(state={},action){
       return Object.assign({}, state, {
         "users_online":users_online
       })
-      break;
       case GET_AUDIT:
       let audit_count=0, audit_alert=0;
       if(action.data.header_data)
       {
         audit_count=Number(action.data.header_data.audits_in_progress);
-        audit_alert =Number(action.data.header_data.audit_alert);
+        audit_alert=Number(action.data.header_data.audit_alert);
       }
       return Object.assign({}, state, {
         "audit_count":audit_count,
         "audit_alert":audit_alert
       })      
-      break;
       case GET_INVENTORY:
       let space_utilized=0;
       if(action.data.header_data)
@@ -55,7 +51,6 @@ export  function tabsData(state={},action){
       return Object.assign({}, state, {
         "space_utilized":space_utilized
       })      
-      break;
       case GET_ORDERS:
       let orders_completed=0;
       if(action.data.header_data)
@@ -65,7 +60,6 @@ export  function tabsData(state={},action){
       return Object.assign({}, state, {
         "orders_completed":orders_completed
       })      
-      break;
       case GET_STATUS:
       let status=false;
       if(action.data.header_data)
@@ -75,7 +69,6 @@ export  function tabsData(state={},action){
       return Object.assign({}, state, {
         "status":status
       })      
-      break;
 	  default:
 	    return state
   }
