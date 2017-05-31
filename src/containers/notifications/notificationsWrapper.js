@@ -58,9 +58,7 @@ class NotificationsWrapper extends React.Component{
 	componentDidMount(){
 		this.props.wsNotificationInit();
 	}
-	componentWillReceiveProps(nextProps){
-		console.log(nextProps.notificationSocketConnected);
-	}	
+		
 	render(){
 		var notificationData = this.props.searchApplied ? this.props.searchedNotificationData : this.props.wsNotificationData ;
 		return (

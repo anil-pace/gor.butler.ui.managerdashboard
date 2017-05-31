@@ -28,8 +28,10 @@ class ViewAllNotificationWrapper extends React.Component{
         super(props);
        
         this.state = {
-            page:1,
-            size:15
+            page:0,
+            size:15,
+            sort:"createTime",
+            order:1
              
         }
     }
@@ -42,21 +44,35 @@ class ViewAllNotificationWrapper extends React.Component{
 	}
 
 	_onSortChange(){
+		var currentOrder = this.state.order ? 0 : 1;
+		var _this = this;
+		_this.setState({
+			order:currentOrder,
+			page:0
+		},function(){
+		_this._fetchNotificationData({lazyData:false});
+		})
 
 	}
 
 	componentDidMount(){
-		let params={
-                'url':NOTIFICATIONS_URL+"?page="+this.state.page+"&size="+this.state.size,
+		
+		this._fetchNotificationData({lazyData:false});
+	}
+
+	_fetchNotificationData(saltParams={}){
+		var params={
+                'url':NOTIFICATIONS_URL+"?page="+this.state.page+"&size="
+                +this.state.size
+                +"&sort="+this.state.sort
+                +"&order="+(this.state.order ? "DESC" : "ASC")
+                +(this.state.searchTerm ? "&searchTerm="+this.state.searchTerm : ""),
                 'method':GET,
                 'cause':GET_ALL_NOTIFICATIONS,
                 'contentType':APP_JSON,
+                'saltParams':saltParams,
                 'accept':APP_JSON,
             }
-		this._fetchNotificationData(params);
-	}
-
-	_fetchNotificationData(params,page,size){
 		this.props.setNotificationSpinner(true);
         this.props.getNotificationData(params);
 	}
@@ -85,8 +101,8 @@ class ViewAllNotificationWrapper extends React.Component{
 			
 
 		}
-		processedData.header = [{id:1,text: "Description", sortable: true},
-             			{id:2,text: "Time", searchable: false}
+		processedData.header = [{id:1,text: "Description", sortable: false},
+             			{id:2,text: "Time", sortable: true,defaultOrder:(this.state.order ? "DESC" : "ASC")}
              ];
         processedData.offset = 0;
         processedData.max= tableRows.length || 15;
@@ -94,7 +110,7 @@ class ViewAllNotificationWrapper extends React.Component{
 	}
 
 	shouldComponentUpdate(nextProps){
-		if(nextProps.hasDataChanged !== this.props.hasDataChanged){
+		if((nextProps.hasDataChanged !== this.props.hasDataChanged) || (nextProps.isLoading !==this.props.isLoading)){
 			return true;
 		}
 		return false
@@ -102,44 +118,39 @@ class ViewAllNotificationWrapper extends React.Component{
 	_onScrollHandler(event){
 		
 		if(event.target.scrollHeight - event.target.scrollTop === event.target.clientHeight){
-				let page = this.state.page + 1;
-				let params={
-                'url':NOTIFICATIONS_URL+"?page="+page+"&size="+this.state.size,
-                'method':GET,
-                'cause':GET_ALL_NOTIFICATIONS,
-                'contentType':APP_JSON,
-                'accept':APP_JSON,
-            }
-				this._fetchNotificationData(params);
-				this.setState({
+			let page = this.state.dataFound === false ? this.state.page: this.state.page + 1;
+            this.setState({
 					page
+				},function(){
+					this._fetchNotificationData({lazyData:true});
 				})
+				
+				
 		}
 		
 	}
 	_handleSubmit(e){
 		e.preventDefault();
 		var value = this.searchInput.value.trim();
-		if(value){
-		let params={
-                'url':NOTIFICATIONS_URL+"?page=0&size=15&searchTerm="+value,
-                'method':GET,
-                'cause':SEARCHED_NOTIFICATIONS_DATA_ALL,
-                'contentType':APP_JSON,
-                'accept':APP_JSON,
-                'withCredentials':true
-            }
-        
-        this._fetchNotificationData(params);
-    }
-    else{
-    	this.props.resetNotificationTableData(false);
-
-    }
 		this.setState({
         	page:0,
         	searchTerm:value
+        },function(){
+        	if(this.state.searchTerm){
+        		this._fetchNotificationData({lazyData:false});
+        	}
+        	else{
+        		this.props.resetNotificationTableData(false);
+        	}
         })
+	}
+
+	componentWillReceiveProps(nextProps){
+		if(nextProps.dataFound !== this.props.dataFound){
+			this.setState({
+				dataFound:nextProps.dataFound
+			})
+		}
 	}
 	
 		
@@ -156,8 +167,8 @@ class ViewAllNotificationWrapper extends React.Component{
                <div className="modal-search-input">
                <div className="viewAllNotSearch">
                <form action="#" onSubmit={(e) => this._handleSubmit(e)}>
-               <input type="text" placeholder="Search" ref={(searchInput) => this.searchInput = searchInput}/>
-               <button  className="notificationSearch">Submit</button>
+               <input type="text" placeholder="Search" className="allSearchInput" ref={(searchInput) => this.searchInput = searchInput}/>
+               <button  className="notificationSearch"><span className="searchIcon"></span></button>
                 
                </form>
                </div>
@@ -172,7 +183,7 @@ class ViewAllNotificationWrapper extends React.Component{
                     <GTableHeader>
                         {processedData.header.map(function (header, index) {
                             return <GTableHeaderCell key={index} header={header} onClick={header.sortable ? self._onSortChange.bind(self, header) : false}>
-                                	{header.text}
+                                	<span>{header.text}</span><span className="sortIcon">{header.sortable && header.defaultOrder === "DESC" ? '↑' : (header.sortable ? '↓' :'') }</span>
                                 </GTableHeaderCell>
 
                         })}
@@ -208,7 +219,8 @@ function mapStateToProps(state, ownProps) {
         "hasDataChanged":state.notificationReducer.hasDataChanged,
         "isLoading":state.notificationReducer.isLoading,
         "searchedAllNotificationData":state.notificationReducer.searchedAllNotificationData,
-        "searchAppliedAllNotifications":state.notificationReducer.searchAppliedAllNotifications
+        "searchAppliedAllNotifications":state.notificationReducer.searchAppliedAllNotifications,
+        "dataFound":state.notificationReducer.dataFound
     }
 }
 function mapDispatchToProps(dispatch){

@@ -14,6 +14,7 @@ const ajaxMiddleware = (function(){
        case AJAX_CALL:
 
        var params=action.params;
+       var saltParams = action.params.saltParams ? action.params.saltParams : {};
        var formData = params.formdata || params || null,httpData;
        if(params.cause !== MASTER_FILE_UPLOAD){
           httpData = params.formdata? JSON.stringify(params.formdata):null;
@@ -50,7 +51,7 @@ const ajaxMiddleware = (function(){
 
                    else {
                     var response=JSON.parse(httpRequest.response,httpRequest.status);
-                    AjaxParse(store,response,params.cause,httpRequest.status);          
+                    AjaxParse(store,response,params.cause,httpRequest.status,saltParams);          
                   }
                  }
                  catch(e)

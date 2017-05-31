@@ -55,11 +55,12 @@ export  function notificationReducer(state={},action){
             "searchApplied":false
           })
     case GET_ALL_NOTIFICATIONS: 
-          let notificationData = state.completeNotificationData || [];
+          let notificationData = action.saltParams.lazyData ? (state.completeNotificationData || []) : [];
           return Object.assign({}, state, { 
             "completeNotificationData":notificationData.concat(action.data),
             "hasDataChanged":!state.hasDataChanged,
-            "isLoading":false
+            "isLoading":false,
+            "dataFound":(action.saltParams.lazyData && !action.data.length ? false : null)
           })  
     case RESET_NOTIFICATION_TABLE_DATA:
            return Object.assign({}, state, { 

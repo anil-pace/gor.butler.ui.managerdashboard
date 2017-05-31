@@ -25,7 +25,8 @@ class NotificationSearchPanel extends React.Component{
 	}
 	render(){
 		return (
-				<div>
+				<div className="paneWrap">
+				<span className="calloutArr"></span>
 				<div className="paneHeader">
 				<section className="paneHeader">
 					<span className="headerText">Notifications</span>

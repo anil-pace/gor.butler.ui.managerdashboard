@@ -54,7 +54,7 @@ class Notification extends React.Component{
 							</div>
 						</section>
 				    )):<section className="row" >
-							<p> <FormattedMessage id="notifications.read.message" description='No unread notifications' defaultMessage='You have no unread Notifications'/> </p>
+							<p className="no-notification"> <FormattedMessage id="notifications.read.message" description='No unread notifications' defaultMessage='You have no unread Notifications'/> </p>
 						</section>}
 				</div>
 				<div className="resultFooter">

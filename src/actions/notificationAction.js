@@ -45,10 +45,11 @@ export function resetNotificationData(){
     }
 }
 
-export function recieveAllNotifications(data){
+export function recieveAllNotifications(data,saltParams){
     return {
         type: GET_ALL_NOTIFICATIONS,
-        data
+        data,
+        saltParams
     }
 }
 
@@ -61,7 +62,8 @@ export function resetNotificationTableData(data){
 
 export function setNotificationSpinner(data){
     return {
-        type: SET_NOTIFICATION_SPINNER
+        type: SET_NOTIFICATION_SPINNER,
+        data
     }
 }
 

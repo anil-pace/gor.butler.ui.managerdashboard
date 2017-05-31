@@ -34,7 +34,7 @@ import {recieveNotificationData,
 	notificationReadIntimation,
 recieveAllNotifications,recieveAllSearchedNotifications} from '../actions/notificationAction'
 
-export function AjaxParse(store,res,cause,status)
+export function AjaxParse(store,res,cause,status,saltParams)
 {
 	let stringInfo={};
       switch(cause)
@@ -301,7 +301,7 @@ export function AjaxParse(store,res,cause,status)
 			store.dispatch(notificationReadIntimation(true));
 			break;
 		case GET_ALL_NOTIFICATIONS:
-			store.dispatch(recieveAllNotifications(res));
+			store.dispatch(recieveAllNotifications(res,saltParams));
 			break;
 		case SEARCHED_NOTIFICATIONS_DATA_ALL:
 			store.dispatch(recieveAllSearchedNotifications(res));
