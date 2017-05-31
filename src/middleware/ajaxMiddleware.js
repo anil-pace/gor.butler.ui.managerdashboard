@@ -1,4 +1,4 @@
-
+  
 import {AJAX_CALL,AUTH_LOGIN,PAUSE_OPERATION,RESUME_OPERATION,MASTER_FILE_UPLOAD} from '../constants/frontEndConstants';
 
 import {AjaxParse} from '../utilities/AjaxParser';
@@ -28,6 +28,9 @@ const ajaxMiddleware=(function(){
        if (!httpRequest || !params.url) {
         return false;
         }
+        if(params.responseType){
+          httpRequest.responseType=params.responseType;
+        }
       httpRequest.onreadystatechange=function(xhr){
         if (httpRequest.readyState=== XMLHttpRequest.DONE) {
               if(httpRequest.status=== 401 && authCause.indexOf(params.cause)==-1) {
@@ -36,13 +39,13 @@ const ajaxMiddleware=(function(){
               else {
                  try
                  {
-                   if(httpRequest.getResponseHeader('Content-type')=== "text/csv; charset=utf-8") {
+                   if(httpRequest.getResponseHeader('Content-type')=== "text/csv; charset=utf-8" || httpRequest.getResponseHeader('Content-type')=== "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
                     //get the file name from the content-disposition header
                     //and then save the file
-                    let fileName='Download.csv';
+                    let fileName;
                     if (this.getResponseHeader('Content-disposition')){
                       let strName=this.getResponseHeader('Content-disposition').match(/(filename=.[^\s\n\t\r]+)/g);
-                      fileName=strName[0].slice(9);
+                      fileName=strName[0].slice(10,strName.length-2);
                     }
 
                     saveFile(httpRequest.response,fileName);
