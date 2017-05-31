@@ -51,10 +51,12 @@ const ajaxMiddleware=(function(){
                     saveFile(httpRequest.response,fileName);
                   }
 
-                   else {
-                    var response=JSON.parse(httpRequest.response,httpRequest.status);
+                   else{
+                    let  decodedString= httpRequest.responseType==="arraybuffer"? String.fromCharCode.apply(null, new Uint8Array(httpRequest.response)):httpRequest.response;
+                    var response=JSON.parse(decodedString,httpRequest.status);
                     AjaxParse(store,response,params.cause,httpRequest.status);          
                   }
+                  
                  }
                  catch(e)
                  {
