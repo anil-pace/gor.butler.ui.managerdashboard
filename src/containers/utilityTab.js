@@ -136,8 +136,8 @@ class UtilityTab extends React.Component {
         var downloadReportTile=[];
         const modes=[{value: 'inventory', label: "Inventory"}];
         const fileType=[{value: 'csv', label: "Comma separated values (csv)"}, {
-            value: 'xls',
-            label: "ExceL Spreadsheet (xls)"
+            value: 'xlsx',
+            label: "ExceL Spreadsheet (xlsx)"
         }];
         var currentFileState=this.state.reportState.fileType ? (this._getCurrentDropDownState(fileType, this.state.reportState.fileType)) : null;
         var currentCategoryState=this.state.reportState.category ? (this._getCurrentDropDownState(modes, this.state.reportState.category)) : null;
@@ -164,8 +164,8 @@ class UtilityTab extends React.Component {
     _renderGRNtile() {
         var grnTile=[];
         const fileType=[{value: 'csv', label: "Comma separated values (csv)"}, {
-            value: 'xls',
-            label: "ExceL Spreadsheet (xls)"
+            value: 'xlsx',
+            label: "ExceL Spreadsheet (xlsx)"
         }];
         var currentState=this.state.grnState.fileType ? (this._getCurrentDropDownState(fileType, this.state.grnState.fileType)) : null;
         var invoiceInput=<div key="1">
@@ -230,10 +230,14 @@ class UtilityTab extends React.Component {
     }
 
     _downloadReport() {
+       let fileType= this.state.reportState.fileType;
+       let url=INVENTORY_REPORT_URL+'?format='+fileType;
         let data={
-            'url': INVENTORY_REPORT_URL,
+            'url': url,
             'method': GET,
             'token': this.props.auth_token,
+            'responseType':'arraybuffer'
+
         }
         this.props.setInventoryReportSpinner(true);
         this.props.getGRdata(data);
@@ -241,12 +245,14 @@ class UtilityTab extends React.Component {
     }
 
     _downloadGRN() {
-        var url=GR_REPORT_URL + "/" + this.state.grnState.invoiceId;
+        var fileType=this.state.grnState.fileType;
+        var url=GR_REPORT_URL + "/" + this.state.grnState.invoiceId+'?format='+fileType;
         let data={
             'url': url,
             'method': GET,
             'token': this.props.auth_token,
             'cause': GR_REPORT_RESPONSE,
+            'responseType':'arraybuffer'
         }
         this.props.getGRdata(data)
         this.props.validateInvoiceID(false)

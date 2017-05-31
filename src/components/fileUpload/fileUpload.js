@@ -35,7 +35,7 @@ import {UTILITY002,MB,KB} from '../../constants/frontEndConstants';
             </label>
             <p className={"gor-upl-msg"}> <FormattedMessage id="utility.fileSize.message" description='Maximum File Size:  MB' defaultMessage='Maximum File Size: {maxSize}' values={{maxSize:maxSize}}/></p>  
             <p className={"gor-upl-msg gor-upl-err"}>
-            {this.props.errorList[this.props.errorCode]} <FormattedMessage id="utility.fileSize.errorline" description='Line or size' defaultMessage='{errorLine}' values={{errorLine:errorLine}}/> 
+            {this.props.errorList[this.props.errorCode]} <FormattedMessage id="utility.fileSize.errorline" description='Line or size' defaultMessage=' {errorLine}' values={{errorLine:errorLine}}/> 
             </p>  
             </div>
 
