@@ -49,7 +49,7 @@ const ajaxMiddleware=(function(){
                       let strName=this.getResponseHeader('Content-disposition').match(/(filename=.[^\s\n\t\r]+)/g);
                       fileName=strName[0].slice(10,strName.length-2);
                     }
-
+                    fileName=(!fileName)?(httpRequest.getResponseHeader('Content-type')=== "text/csv; charset=utf-8"? "download.csv" : "download.xlsx"):fileName;
                     saveFile(httpRequest.response,fileName);
                   }
                    else{
