@@ -9,13 +9,13 @@
  import Dimensions from 'react-dimensions'
 
 //constant for usage in render function
-const RD3Component = rd3.Component;
+const RD3Component=rd3.Component;
 
 class MultiLineGraph extends React.Component{
   constructor(props) {
    super(props);
    //set the d3 object to empty for this particular component
-   this.state = {d3: ''}
+   this.state={d3: ''}
  }
  /**
   * Creates the graph and sets the local state to the node created by react-d3-library
@@ -26,42 +26,39 @@ class MultiLineGraph extends React.Component{
   */
   
  _graphRender(invData){
-    var node = document.createElement('div');
+    var node=document.createElement('div');
     if(invData.length > 1){
       try{
         
-        let config =  this.props.config;
+        let config= this.props.config;
         
-        let width = config.width;
-        let height = config.height;
-        let margin =config.margin;
-        let padding = config.padding;
-        let component = this;
+        let width=config.width;
+        let height=config.height;
+        let margin=config.margin;
+        let padding=config.padding;
         width= width - margin.left - margin.right;
 
         let jsonArray= invData
         
         //setting the initial 
-        //var parseDate = d3.time.format("%Y-%m-%d").parse;
-        let noData = this.props.noData;
-        var dataArray = jsonArray.map(function(obj){
-          let rObj = {};
-          rObj.date = new Date(obj.date);
-          rObj.items_put = obj.items_put;
-          rObj.items_picked = obj.items_picked;
-          rObj.toolTipData = obj.toolTipData;
+        //var parseDate=d3.time.format("%Y-%m-%d").parse;
+        let noData=this.props.noData;
+        var dataArray=jsonArray.map(function(obj){
+          let rObj={};
+          rObj.date=new Date(obj.date);
+          rObj.items_put=obj.items_put;
+          rObj.items_picked=obj.items_picked;
+          rObj.toolTipData=obj.toolTipData;
 
           return rObj;
         })
-        //let dataArray = jsonArray;
+        //let dataArray=jsonArray;
         //setting scale
         
-        var x = d3.time.scale().range([padding, width-padding]);
-        var y = d3.scale.linear().range([height, 0]);
-        var xx = function(e)  { return x(function(d) { return x(d.date);}) };
-        var yy = function(e)  { return y(function(d) { return y(d.items_put); }) };
-        var prevDiv = document.getElementsByClassName("ppLine")[0];
-        var div = d3.select("body").append("div") 
+        var x=d3.time.scale().range([padding, width-padding]);
+        var y=d3.scale.linear().range([height, 0]);
+        var prevDiv=document.getElementsByClassName("ppLine")[0];
+        var div=d3.select("body").append("div") 
         .attr("class", "tooltip ppLine")       
         .style("opacity", 0);
 
@@ -72,25 +69,25 @@ class MultiLineGraph extends React.Component{
 
         // setting axis
         
-        var xAxis = d3.svg.axis().scale(x).orient("bottom").tickFormat(d3.time.format("%e")).tickValues(dataArray.map( function(d){return d.date;} ))
+        var xAxis=d3.svg.axis().scale(x).orient("bottom").tickFormat(d3.time.format("%e")).tickValues(dataArray.map( function(d){return d.date;} ))
         .outerTickSize(config.outerTickSize);
-        var yAxis = d3.svg.axis().scale(y).orient("left")
+        var yAxis=d3.svg.axis().scale(y).orient("left")
         .ticks(config.ticks).outerTickSize(config.outerTickSize);
 
-        var pickLine = d3.svg.line()
+        var pickLine=d3.svg.line()
         .interpolate("monotone") 
         .x(function(d) { return x(d.date);})
         .y(function(d) { return y(d.items_picked); });
 
-        var putLine = d3.svg.line()
+        var putLine=d3.svg.line()
         .interpolate("monotone") 
         .x(function(d) { return x(d.date);})
         .y(function(d) { return y(d.items_put); });
 
-        var svg = d3.select(node).append("svg")
+        var svg=d3.select(node).append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom);
-        var g = svg.append("g")
+        var g=svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
@@ -102,7 +99,7 @@ class MultiLineGraph extends React.Component{
           y.domain([0, d3.max(dataArray, function(d) { return config.defaultMaxYAxis })]);
         }
         else{
-          y.domain([0, d3.max(dataArray, function(d) { var maxVal = Math.max(d.items_put, d.items_picked);return (maxVal + (1000 - (maxVal%1000)));  })]);
+          y.domain([0, d3.max(dataArray, function(d) { var maxVal=Math.max(d.items_put, d.items_picked);return (maxVal + (1000 - (maxVal%1000)));  })]);
         }
         
 
@@ -149,7 +146,7 @@ class MultiLineGraph extends React.Component{
             div.transition()    
             .duration(200)    
             .style("opacity", 1);    
-            div .html('<p style="font-weight:bold;">'+d.toolTipData.date + "</p><p>"  + d.toolTipData.pick+"</p>")  
+            div.html('<p style="font-weight:bold;">'+d.toolTipData.date + "</p><p>"  + d.toolTipData.pick+"</p>")  
             .style("left", (event.pageX) + "px")   
             .style("top", (event.pageY - 28) + "px");  
           })          
@@ -170,7 +167,7 @@ class MultiLineGraph extends React.Component{
             div.transition()    
             .duration(200)    
             .style("opacity", 1);    
-            div .html('<p style="font-weight:bold;">'+d.toolTipData.date + "</p><p>"  + d.toolTipData.put+"</p>")  
+            div.html('<p style="font-weight:bold;">'+d.toolTipData.date + "</p><p>"  + d.toolTipData.put+"</p>")  
             .style("left", (event.pageX) + "px")   
             .style("top", (event.pageY - 28) + "px");  
           })          
@@ -191,19 +188,18 @@ class MultiLineGraph extends React.Component{
         }
         var mBreak= g.selectAll("g.x");
         if (mBreak.length){
-          var dataLen = dataArray.length ;
-          var textEl = parseInt(mBreak.select("g:nth-child("+dataLen+") text").text());
-          let yToday = "3.5em";
+          var dataLen=dataArray.length ;
+          var textEl=parseInt(mBreak.select("g:nth-child("+dataLen+") text").text(),10);
+          let yToday="3.5em";
           mBreak.select("g:nth-child("+(dataLen)+")").append("text").attr("x","-20").attr("y",yToday).text(config.today)
 
-          var monthBreak = mBreak.select("g:nth-child("+(dataLen)+")");
           mBreak.select("g:nth-child("+(dataLen - textEl)+")").append("line").attr("class","month-break").attr("x1","15").attr("x2","15").attr("y1","0").attr("y2","25");
           mBreak.select("g:nth-child("+(dataLen - (textEl-1))+")").append("text").attr("x","-5").attr("y","30").text(config.breakMonth);
         }
         
       }
       catch(error){
-        throw "Error while creating the pickput line graph: "+ error;
+        throw new Error("Error while creating the pickput line graph: "+ error);
       }
     }
     this.setState({d3: node});
@@ -218,7 +214,7 @@ class MultiLineGraph extends React.Component{
   }
 
   shouldComponentUpdate(nextProps, nextState){
-    if(this.props.hasDataChanged === nextProps.hasDataChanged || !nextProps.inventoryData.length){
+    if(this.props.hasDataChanged=== nextProps.hasDataChanged || !nextProps.inventoryData.length){
       return false;
     }
       return true;
@@ -226,7 +222,7 @@ class MultiLineGraph extends React.Component{
   }
   
   render() {
-   var renderHtml = <RD3Component data={this.state.d3} />;
+   var renderHtml=<RD3Component data={this.state.d3} />;
    
    return (
    <div>
@@ -239,7 +235,7 @@ MultiLineGraph.propTypes={
   inventoryData: React.PropTypes.array
 }
 
-MultiLineGraph.contextTypes = {
+MultiLineGraph.contextTypes={
   intl: React.PropTypes.object.isRequired
 }
 

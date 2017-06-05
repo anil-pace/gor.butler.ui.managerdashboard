@@ -1,5 +1,4 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl'; 
 
 
@@ -8,27 +7,27 @@ class GorPaginate extends React.Component{
 	constructor(props) 
 	{  
     	super(props);
-      var totalPage = this.props.totalPage;
-      this.state = {currentPage: 1, totalPage:totalPage, currentQuery: 1} 
+      var totalPage=this.props.totalPage;
+      this.state={currentPage: 1, totalPage:totalPage, currentQuery: 1} 
   }
 
   componentWillReceiveProps(nextProps) {
-    var totalPage = nextProps.totalPage;  // for async call response come with some delay so updating total page here
+    var totalPage=nextProps.totalPage;  // for async call response come with some delay so updating total page here
     this.setState({totalPage:totalPage});
   }
 
   submit(e) {
     e.preventDefault();
-    var regex = /^\d+$/; // used for validation of numeric key by user 
-    var data = {selected:this.state.currentPage};
+    var regex=/^\d+$/; // used for validation of numeric key by user 
+    var data={selected:this.state.currentPage};
     if(regex.test(this.pageNum.value)) {
-      data = {selected:this.pageNum.value};
+      data={selected:this.pageNum.value};
       if(data.selected >= this.state.totalPage) {
-        data.selected = this.state.totalPage;
+        data.selected=this.state.totalPage;
       }
 
       if(data.selected <= 0) {
-        data.selected = 1;
+        data.selected=1;
       }
       
       this.setState({currentPage:data.selected, currentQuery:data.selected});
@@ -45,39 +44,39 @@ class GorPaginate extends React.Component{
   }
 
   _incPage() {
-    var currentPage = this.state.currentPage;
+    var currentPage=this.state.currentPage;
     currentPage++;
     this.setState({currentPage:currentPage, currentQuery:currentPage});
-    var data = {selected:currentPage};
+    var data={selected:currentPage};
     this.props.getPageDetail(data);
   }
 
   _decPage() {
-    var currentPage = this.state.currentPage;
+    var currentPage=this.state.currentPage;
     currentPage--;
     this.setState({currentPage:currentPage, currentQuery:currentPage});
-    var data = {selected:currentPage}
+    var data={selected:currentPage}
     this.props.getPageDetail(data);
   }
 
   _firstPage() {
-    var data = {selected:1};
+    var data={selected:1};
     this.setState({currentPage:1,currentQuery:1});
     this.props.getPageDetail(data);
   }
 
   _lastPage() {
-    var lastPage = this.state.totalPage;
-    var data = {selected:lastPage}
+    var lastPage=this.state.totalPage;
+    var data={selected:lastPage}
     this.setState({currentPage:lastPage,currentQuery:lastPage});
     this.props.getPageDetail(data);
   }
 
   
 	render(){
-    var paginateButton = {firstPg:"|<", lastPg:">|", prevPg:"<", nextPg:">"} 
-    var currentPage = this.state.currentQuery;
-    var totalPage = this.state.totalPage;
+    var paginateButton={firstPg:"|<", lastPg:">|", prevPg:"<", nextPg:">"} 
+    var currentPage=this.state.currentQuery;
+    var totalPage=this.state.totalPage;
 		return (
 			<div>
         <div className="gor-paginate-wrap">
@@ -86,7 +85,7 @@ class GorPaginate extends React.Component{
               <div className="gor-paginate-text-wrap">
                 <FormattedMessage id="paginate.page.heading" description='Heading for paginate page' defaultMessage='Page'/>
               </div> 
-              <input className="gor-paginate-input-box" type="text" value={currentPage} onChange={this._textSubmit.bind(this)} ref={node => { this.pageNum = node }} />
+              <input className="gor-paginate-input-box" type="text" value={currentPage} onChange={this._textSubmit.bind(this)} ref={node=> { this.pageNum=node }} />
               <div className="gor-paginate-text-wrap">
                 <FormattedMessage id="paginate.page.pageNum" description='Heading for paginate pageNum' defaultMessage='of {totalPage}' values={{totalPage:totalPage}}/>
               </div>

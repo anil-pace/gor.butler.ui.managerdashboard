@@ -24,9 +24,9 @@ class Routes extends React.Component {
 
     _requireAuth(nextState, replace) {
         if (sessionStorage.getItem('auth_token')) {
-            let subTab = (sessionStorage.getItem('subTab') || null);
-            let nextView = (sessionStorage.getItem('nextUrl') || 'md');
-            let selTab = (sessionStorage.getItem('selTab') || TAB_ROUTE_MAP[OVERVIEW]);
+            let subTab=(sessionStorage.getItem('subTab') || null);
+            let nextView=(sessionStorage.getItem('nextUrl') || 'md');
+            let selTab=(sessionStorage.getItem('selTab') || TAB_ROUTE_MAP[OVERVIEW]);
             this.props.loginRequest();
             this.props.tabSelected(selTab);
             this.props.subTabSelected(subTab);
@@ -91,10 +91,10 @@ class Routes extends React.Component {
     }
 
     _updateLanguage() {
-        var sessionLocale = sessionStorage.getItem('localLanguage');
+        var sessionLocale=sessionStorage.getItem('localLanguage');
 
-        sessionLocale = sessionLocale.substring(0, 2);// since we need only the first two characters fo the locale.
-        let data = {
+        sessionLocale=sessionLocale.substring(0, 2);// since we need only the first two characters fo the locale.
+        let data={
             locale: sessionLocale,
             messages: translationMessages[sessionLocale]
         }
@@ -114,10 +114,10 @@ class Routes extends React.Component {
     }
 
     _handleNavigationChanges(context, replace) {
-        let pathname = context.location.pathname
+        let pathname=context.location.pathname
 
-        pathname = pathname.substring(1, pathname.length)
-        let navigator = pathname.split("/")
+        pathname=pathname.substring(1, pathname.length)
+        let navigator=pathname.split("/")
         sessionStorage.setItem("selTab", navigator[0])
         sessionStorage.setItem("nextView", pathname)
         if (navigator.length > 1) {
@@ -137,49 +137,49 @@ class Routes extends React.Component {
         return (
             <Router history={hashHistory}>
                 <Route onEnter={this._handleNavigationChanges.bind(this)} name="default" path="/"
-                       getComponent={(location, callback) => {
+                       getComponent={(location, callback)=> {
                            require.ensure([], function (require) {
                                callback(null, require('../App').default);
                            }, "defaultApp");
                        }}
                 />
                 <Route name="login" path="/login" onEnter={this._refreshPage.bind(this)}
-                       getComponent={(location, callback) => {
+                       getComponent={(location, callback)=> {
                            require.ensure([], function (require) {
                                callback(null, require('./login/login').default);
                            }, "login");
                        }}
                 />
                 <Route onEnter={this._handleNavigationChanges.bind(this)} name="app" path="/md"
-                       getComponent={(location, callback) => {
+                       getComponent={(location, callback)=> {
                            require.ensure([], function (require) {
                                callback(null, require('../App').default);
                            }, "app");
                        }}
                 >
                     <IndexRoute
-                        getComponent={(location, callback) => {
+                        getComponent={(location, callback)=> {
                             require.ensure([], function (require) {
                                 callback(null, require('../containers/OverviewTab').default);
                             }, "indexOverview");
                         }}
                     />
                     <Route onEnter={this._handleNavigationChanges.bind(this)} name="system" path="/system" className="gorResponsive"
-                           getComponent={(location, callback) => {
+                           getComponent={(location, callback)=> {
                                require.ensure([], function (require) {
                                    callback(null, require('../containers/systemTab').default);
                                }, "system");
                            }}
                     >
                         <IndexRoute
-                            getComponent={(location, callback) => {
+                            getComponent={(location, callback)=> {
                                 require.ensure([], function (require) {
                                     callback(null, require('../containers/systemTabs/butlerbotTab').default);
                                 }, "indexButBot");
                             }}
                         />
                         <Route onEnter={this._handleNavigationChanges.bind(this)} name="butlerbots" path="/system/butlerbots"
-                               getComponent={(location, callback) => {
+                               getComponent={(location, callback)=> {
                                    require.ensure([], function (require) {
                                        callback(null, require('../containers/systemTabs/butlerbotTab').default);
                                    }, "butlerBots");
@@ -187,7 +187,7 @@ class Routes extends React.Component {
                         />
 
                         <Route onEnter={this._handleNavigationChanges.bind(this)} name="pps" path="/system/pps"
-                               getComponent={(location, callback) => {
+                               getComponent={(location, callback)=> {
                                    require.ensure([], function (require) {
                                        callback(null, require('../containers/systemTabs/ppsTab').default);
                                    }, "pps");
@@ -195,7 +195,7 @@ class Routes extends React.Component {
                         />
 
                         <Route onEnter={this._handleNavigationChanges.bind(this)} name="chargingstation" path="/system/chargingstation"
-                               getComponent={(location, callback) => {
+                               getComponent={(location, callback)=> {
                                    require.ensure([], function (require) {
                                        callback(null, require('../containers/systemTabs/chargingStationsTab').default);
                                    }, "chargingStation");
@@ -204,14 +204,14 @@ class Routes extends React.Component {
                     </Route>
 
                     <Route onEnter={this._handleNavigationChanges.bind(this)} name="orders" path="/orders"
-                           getComponent={(location, callback) => {
+                           getComponent={(location, callback)=> {
                                require.ensure([], function (require) {
                                    callback(null, require('../containers/ordersTab').default);
                                }, "orders");
                            }}
                     >
                         <IndexRoute
-                            getComponent={(location, callback) => {
+                            getComponent={(location, callback)=> {
                                 require.ensure([], function (require) {
                                     callback(null, require('../containers/orderTab/waveTab').default);
                                 }, "indexWave");
@@ -219,7 +219,7 @@ class Routes extends React.Component {
                         />
 
                         <Route onEnter={this._handleNavigationChanges.bind(this)} name="waves" path="/orders/waves"
-                               getComponent={(location, callback) => {
+                               getComponent={(location, callback)=> {
                                    require.ensure([], function (require) {
                                        callback(null, require('../containers/orderTab/waveTab').default);
                                    }, "waveTab");
@@ -227,7 +227,7 @@ class Routes extends React.Component {
                         />
 
                         <Route onEnter={this._handleNavigationChanges.bind(this)} name="orderlist" path="/orders/orderlist"
-                               getComponent={(location, callback) => {
+                               getComponent={(location, callback)=> {
                                    require.ensure([], function (require) {
                                        callback(null, require('../containers/orderTab/orderListTab').default);
                                    }, "orderList");
@@ -237,7 +237,7 @@ class Routes extends React.Component {
 
 
                     <Route onEnter={this._handleNavigationChanges.bind(this)} name="audit" path="/audit"
-                           getComponent={(location, callback) => {
+                           getComponent={(location, callback)=> {
                                require.ensure([], function (require) {
                                    callback(null, require('../containers/auditTab').default);
                                }, "audit");
@@ -246,7 +246,7 @@ class Routes extends React.Component {
                     />
 
                     <Route onEnter={this._handleNavigationChanges.bind(this)} name="inventory" path="/inventory"
-                           getComponent={(location, callback) => {
+                           getComponent={(location, callback)=> {
                                require.ensure([], function (require) {
                                    callback(null, require('../containers/inventoryTab').default);
                                }, "inventory");
@@ -256,7 +256,7 @@ class Routes extends React.Component {
                     />
 
                     <Route onEnter={this._handleNavigationChanges.bind(this)} name="audit" path="/audit"
-                           getComponent={(location, callback) => {
+                           getComponent={(location, callback)=> {
                                require.ensure([], function (require) {
                                    callback(null, require('../containers/auditTab').default);
                                }, "audit");
@@ -264,7 +264,7 @@ class Routes extends React.Component {
                     />
 
                     <Route onEnter={this._handleNavigationChanges.bind(this)} name="users" path="/users"
-                           getComponent={(location, callback) => {
+                           getComponent={(location, callback)=> {
                                require.ensure([], function (require) {
                                    callback(null, require('../containers/userTab/usersTab').default);
                                }, "users");
@@ -272,7 +272,7 @@ class Routes extends React.Component {
                     />
 
                     <Route onEnter={this._handleNavigationChanges.bind(this)} name="utilities" path="/utilities"
-                                             getComponent={(location, callback) => {
+                                             getComponent={(location, callback)=> {
                                                  require.ensure([], function (require) {
                                                      callback(null, require('../containers/utilityTab').default);
                                                  }, "utilities");
@@ -280,7 +280,7 @@ class Routes extends React.Component {
                     />
 
                     <Route onEnter={this._handleNavigationChanges.bind(this)} name="overview" path="/overview"
-                           getComponent={(location, callback) => {
+                           getComponent={(location, callback)=> {
                                require.ensure([], function (require) {
                                    callback(null, require('../containers/OverviewTab').default);
                                }, "overview");
@@ -294,7 +294,7 @@ class Routes extends React.Component {
 }
 
 
-var mapDispatchToProps = function (dispatch) {
+var mapDispatchToProps=function (dispatch) {
     return {
         updateIntl: function (params) {
             dispatch(updateIntl(params));

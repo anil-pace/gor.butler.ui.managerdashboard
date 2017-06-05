@@ -1,4 +1,4 @@
-export const wsOverviewData = {
+export const wsOverviewData={
 	"default":{
           "type": "subscribe",
         "data": [

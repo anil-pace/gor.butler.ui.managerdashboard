@@ -1,5 +1,4 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import UserDataTable from './userTabTable';
 import {connect} from 'react-redux';
 import {defineMessages} from 'react-intl';
@@ -19,7 +18,7 @@ import UserFilter from './userFilter';
 import {FormattedMessage} from 'react-intl';
 import FilterSummary from '../../components/tableFilter/filterSummary'
 //Mesages for internationalization
-const messages = defineMessages({
+const messages=defineMessages({
     userOperator: {
         id: "userDetails.operator",
         defaultMessage: "Operator"
@@ -76,7 +75,7 @@ class UsersTab extends React.Component {
     }
 
     componentDidMount() {
-        let userData = {
+        let userData={
             'url': ROLE_URL,
             'method': GET,
             'cause': GET_ROLES,
@@ -94,39 +93,39 @@ class UsersTab extends React.Component {
         }
     }
     _processUserDetails() {
-        var nProps = this,
-            data = nProps.props.userdetails
-        let operator = nProps.context.intl.formatMessage(messages.userOperator);
-        let manager = nProps.context.intl.formatMessage(messages.userManager);
-        let pick = nProps.context.intl.formatMessage(stringConfig.pick);
-        let put = nProps.context.intl.formatMessage(stringConfig.put);
-        let audit = nProps.context.intl.formatMessage(stringConfig.audit);
-        let front = nProps.context.intl.formatMessage(messages.userFront);
-        let back = nProps.context.intl.formatMessage(messages.userBack);
-        let online = nProps.context.intl.formatMessage(stringConfig.online);
-        let offline = nProps.context.intl.formatMessage(stringConfig.offline);
-        var role = {"butler_ui": operator, "butler_supervisor": manager};
-        var work_mode = {"pick": pick, "put": put, "audit": audit};
-        var work_place = {"front": front, "back": back};
+        var nProps=this,
+            data=nProps.props.userdetails
+        let operator=nProps.context.intl.formatMessage(messages.userOperator);
+        let manager=nProps.context.intl.formatMessage(messages.userManager);
+        let pick=nProps.context.intl.formatMessage(stringConfig.pick);
+        let put=nProps.context.intl.formatMessage(stringConfig.put);
+        let audit=nProps.context.intl.formatMessage(stringConfig.audit);
+        let front=nProps.context.intl.formatMessage(messages.userFront);
+        let back=nProps.context.intl.formatMessage(messages.userBack);
+        let online=nProps.context.intl.formatMessage(stringConfig.online);
+        let offline=nProps.context.intl.formatMessage(stringConfig.offline);
+        var role={"butler_ui": operator, "butler_supervisor": manager};
+        var work_mode={"pick": pick, "put": put, "audit": audit};
+        var work_place={"front": front, "back": back};
 
 
-        var userDetails = [], userData = {};
-        for (var i = data.length - 1; i >= 0; i--) {
+        var userDetails=[], userData={};
+        for (var i=data.length - 1; i >= 0; i--) {
 
-            userData.id = (data[i].first_name || "--") + " " + (data[i].last_name || "--");
+            userData.id=(data[i].first_name || "--") + " " + (data[i].last_name || "--");
             if (data[i].logged_in) {
-                userData.status = online;
-                userData.statusClass = "online";
+                userData.status=online;
+                userData.statusClass="online";
                 if (data[i].pps.pps_mode && data[i].pps.seat_type) {
-                    userData.workMode = work_mode[data[i].pps.pps_mode] + " " + work_place[data[i].pps.seat_type];
+                    userData.workMode=work_mode[data[i].pps.pps_mode] + " " + work_place[data[i].pps.seat_type];
                 }
 
                 else if (data[i].pps.pps_mode) {
-                    userData.workMode = work_mode[data[i].pps.pps_mode];
+                    userData.workMode=work_mode[data[i].pps.pps_mode];
                 }
 
-                userData.location = nProps.context.intl.formatMessage(messages.userLocation, {"ppsId": data[i].pps.pps_id});
-                userData.logInTime = nProps.context.intl.formatTime(data[i].login_time, {
+                userData.location=nProps.context.intl.formatMessage(messages.userLocation, {"ppsId": data[i].pps.pps_id});
+                userData.logInTime=nProps.context.intl.formatTime(data[i].login_time, {
                         hour: 'numeric',
                         minute: 'numeric',
                         hour12:false
@@ -137,27 +136,27 @@ class UsersTab extends React.Component {
             }
 
             else {
-                userData.status = offline;
-                userData.statusClass = "offline";
-                userData.workMode = "--";
-                userData.location = "--";
-                userData.logInTime = "--";
+                userData.status=offline;
+                userData.statusClass="offline";
+                userData.workMode="--";
+                userData.location="--";
+                userData.logInTime="--";
             }
 
 
-            userData.uid = data[i].user_id
-            userData.userName = data[i].user_name;
-            userData.first = data[i].first_name;
-            userData.last = data[i].last_name;
-            userData.roleId = data[i].role;
+            userData.uid=data[i].user_id
+            userData.userName=data[i].user_name;
+            userData.first=data[i].first_name;
+            userData.last=data[i].last_name;
+            userData.roleId=data[i].role;
             if (role.hasOwnProperty(data[i].role)) {
-                userData.role = role[data[i].role];
+                userData.role=role[data[i].role];
             }
             else {
-                userData.role = data[i].role;
+                userData.role=data[i].role;
             }
             userDetails.push(userData);
-            userData = {};
+            userData={};
         }
 
         return userDetails;
@@ -170,27 +169,27 @@ class UsersTab extends React.Component {
      */
     _refreshList(query) {
         this.props.userFilterApplySpinner(true);
-        let filterSubsData = {}
+        let filterSubsData={}
         if (query.username) {
-            let name_query = query.username.split(" ")
-            name_query = name_query.filter(function (word) {
+            let name_query=query.username.split(" ")
+            name_query=name_query.filter(function (word) {
                 return !!word
             })
-            filterSubsData["username"] = name_query.length > 1 ? name_query : name_query.join("").trim();
+            filterSubsData["username"]=name_query.length > 1 ? name_query : name_query.join("").trim();
         }
         if (query.status) {
-            query.status = query.status.constructor === Array ? query.status : [query.status]
+            query.status=query.status.constructor=== Array ? query.status : [query.status]
             if (query.status.length !== 2) {
-                filterSubsData["logged_in"] = query.status[0] === 'online' ? 'true' : 'false'
+                filterSubsData["logged_in"]=query.status[0]=== 'online' ? 'true' : 'false'
             }
 
         }
         if (query.role) {
             query.role=query.role.constructor===Array?query.role:[query.role]
-            filterSubsData["role"] = ['in', query.role.constructor===Array?query.role:[query.role]]
+            filterSubsData["role"]=['in', query.role.constructor===Array?query.role:[query.role]]
         }
         if (query.mode) {
-            let pps_list = []
+            let pps_list=[]
             query.mode=query.mode.constructor===Array?query.mode:[query.mode]
             query.mode.forEach(function (mode) {
                 pps_list.push(mode.split("__").length > 1 ? {
@@ -198,7 +197,7 @@ class UsersTab extends React.Component {
                     seat_type: mode.split("__")[1]
                 } : {pps_mode: mode.split("__")[0]})
             })
-            filterSubsData["pps"] = ['in', pps_list]
+            filterSubsData["pps"]=['in', pps_list]
         }
         if (Object.keys(query).filter(function(el){return el!=='page'}).length !== 0) {
             this.props.toggleUserFilter(true);
@@ -207,8 +206,8 @@ class UsersTab extends React.Component {
             this.props.toggleUserFilter(false);
             this.props.filterApplied(false);
         }
-        let updatedWsSubscription = this.props.wsSubscriptionData;
-        updatedWsSubscription["users"].data[0].details["filter_params"] = filterSubsData;
+        let updatedWsSubscription=this.props.wsSubscriptionData;
+        updatedWsSubscription["users"].data[0].details["filter_params"]=filterSubsData;
         this.props.initDataSentCall(updatedWsSubscription["users"])
         this.props.updateSubscriptionPacket(updatedWsSubscription);
         this.props.userfilterState({
@@ -242,16 +241,16 @@ class UsersTab extends React.Component {
     }
 
     _setFilter() {
-        var newState = !this.props.showFilter;
+        var newState=!this.props.showFilter;
         this.props.setFilter(newState);
     }
 
     render() {
-        let filterHeight = screen.height - 190 - 50;
-        let updateStatusIntl = "";
-        var itemNumber = 7, userData;
+        let filterHeight=screen.height - 190 - 50;
+        let updateStatusIntl="";
+        var itemNumber=7, userData;
         if (this.props.userdetails !== undefined) {
-            userData = this._processUserDetails();
+            userData=this._processUserDetails();
         }
         return (
             <div>
@@ -289,7 +288,7 @@ class UsersTab extends React.Component {
                                             className={this.props.userFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
                                             onClick={this.props.showTableFilter.bind(this)}>
                                             <div className="gor-manage-task"/>
-                                            <FormattedMessage id="order.table.filterLabel" description="button label for filter"
+                                            <FormattedMessage id="gor.filter.filterLabel" description="button label for filter"
                                                               defaultMessage="Filter data"/>
                                         </button>
                                     </div>
@@ -353,7 +352,7 @@ function mapStateToProps(state, ownProps) {
     };
 }
 
-var mapDispatchToProps = function (dispatch) {
+var mapDispatchToProps=function (dispatch) {
     return {
         userRequest: function (data) {
             dispatch(userRequest(data));
@@ -383,10 +382,10 @@ var mapDispatchToProps = function (dispatch) {
     };
 }
 
-UsersTab.contextTypes = {
+UsersTab.contextTypes={
     intl: React.PropTypes.object.isRequired
 }
-UsersTab.PropTypes = {
+UsersTab.PropTypes={
     userFilter: React.PropTypes.string,
     userdetails: React.PropTypes.array,
     manager: React.PropTypes.array,

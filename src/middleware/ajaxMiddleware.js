@@ -1,4 +1,4 @@
-
+  
 import {AJAX_CALL,AUTH_LOGIN,PAUSE_OPERATION,RESUME_OPERATION,MASTER_FILE_UPLOAD} from '../constants/frontEndConstants';
 
 import {AjaxParse} from '../utilities/AjaxParser';
@@ -6,9 +6,9 @@ import {ShowError} from '../utilities/showError';
 import {endSession} from '../utilities/endSession';
 import {saveFile} from '../utilities/utils';
 
-const ajaxMiddleware = (function(){ 
+const ajaxMiddleware=(function(){ 
 
-  return store => next => action => {
+  return store=> next=> action=> {
     switch(action.type) {
 
        case AJAX_CALL:
@@ -16,43 +16,49 @@ const ajaxMiddleware = (function(){
        var params=action.params;
        var saltParams = action.params.saltParams ? action.params.saltParams : {};
        var formData = params.formdata || params || null,httpData;
+
        if(params.cause !== MASTER_FILE_UPLOAD){
-          httpData = params.formdata? JSON.stringify(params.formdata):null;
+          httpData=params.formdata? JSON.stringify(params.formdata):null;
        }
        else{
-          httpData = params.formdata;
+          httpData=params.formdata;
        }
        
        
-       var httpRequest = new XMLHttpRequest();
-       var authCause = [AUTH_LOGIN, PAUSE_OPERATION, RESUME_OPERATION];
+       var httpRequest=new XMLHttpRequest();
+       var authCause=[AUTH_LOGIN, PAUSE_OPERATION, RESUME_OPERATION];
        if (!httpRequest || !params.url) {
         return false;
         }
-      httpRequest.onreadystatechange = function(xhr){
-        if (httpRequest.readyState === XMLHttpRequest.DONE) {
-              if(httpRequest.status === 401 && authCause.indexOf(params.cause)==-1) {
+        if(params.responseType){
+          httpRequest.responseType=params.responseType;
+        }
+      httpRequest.onreadystatechange=function(xhr){
+        if (httpRequest.readyState=== XMLHttpRequest.DONE) {
+              if(httpRequest.status=== 401 && authCause.indexOf(params.cause)==-1) {
                 endSession(store);
               }
               else {
                  try
                  {
-                   if(httpRequest.getResponseHeader('Content-type') === "text/csv; charset=utf-8") {
+                   if(httpRequest.getResponseHeader('Content-type')=== "text/csv; charset=utf-8" || httpRequest.getResponseHeader('Content-type')=== "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
                     //get the file name from the content-disposition header
                     //and then save the file
-                    let fileName = 'Download.csv';
+                    let fileName;
                     if (this.getResponseHeader('Content-disposition')){
-                      let strName = this.getResponseHeader('Content-disposition').match(/(filename=.[^\s\n\t\r]+)/g);
-                      fileName = strName[0].slice(9);
+                      let strName=this.getResponseHeader('Content-disposition').match(/(filename=.[^\s\n\t\r]+)/g);
+                      fileName=strName[0].slice(10,strName.length-2);
                     }
 
                     saveFile(httpRequest.response,fileName);
                   }
-
-                   else {
-                    var response=JSON.parse(httpRequest.response,httpRequest.status);
+                   else{
+                    let  decodedString= httpRequest.responseType==="arraybuffer"? String.fromCharCode.apply(null, new Uint8Array(httpRequest.response)):httpRequest.response;
+                    var response=JSON.parse(decodedString,httpRequest.status);
                     AjaxParse(store,response,params.cause,httpRequest.status,saltParams);          
+
                   }
+                  
                  }
                  catch(e)
                  {
@@ -64,7 +70,7 @@ const ajaxMiddleware = (function(){
               }      
       }
     };
-    httpRequest.onerror = function (err){
+    httpRequest.onerror=function (err){
                ShowError(store,params.cause,httpRequest.status);
     }
 

@@ -1,5 +1,4 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 
 class UploadDownBar extends React.Component{

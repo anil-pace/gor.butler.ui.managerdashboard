@@ -1,18 +1,11 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
-import { FormattedMessage } from 'react-intl';
 import {SINGLE,ADD_TOKEN, ADD_DEFAULT,REMOVE_TOKEN} from '../../constants/frontEndConstants';
 
 
 class FilterToken extends React.Component{
-	constructor(props) 
-	{
-       super(props);
-   }
-
-
+	
    _handleTokenClick() {
-    var selectedToken = this.props.tokenSelected[this.props.tokenField],tokenFound = false;
+    var selectedToken=this.props.tokenSelected[this.props.tokenField],tokenFound=false;
     var selectedOption=this.props.selection;
     var tokenSelect=this.props.tokenLabel.value;
 
@@ -20,7 +13,7 @@ class FilterToken extends React.Component{
     {
         case SINGLE:
         if(selectedToken){
-            tokenSelect===selectedToken[0]? tokenFound=true:"";
+            tokenFound=(tokenSelect===selectedToken[0])?true:false;
             this.props.tokenCallBack(this.props.tokenField, selectedToken[0],REMOVE_TOKEN);
         }
         tokenFound?this.props.tokenCallBack(this.props.tokenField,selectedToken[0],ADD_TOKEN):this.props.tokenCallBack(this.props.tokenField,this.props.tokenLabel.value,ADD_TOKEN); 
@@ -28,10 +21,10 @@ class FilterToken extends React.Component{
 
         default:
         if(selectedToken){
-            for (var i = selectedToken.length - 1; i >= 0; i--) {
+            for (var i=selectedToken.length - 1; i >= 0; i--) {
                 if(selectedToken[i]===this.props.tokenLabel.value) {
                     this.props.tokenCallBack(this.props.tokenField,this.props.tokenLabel.value,REMOVE_TOKEN);
-                    tokenFound = true;
+                    tokenFound=true;
                     break;
                 }
             }
@@ -49,8 +42,8 @@ class FilterToken extends React.Component{
 
 
 render(){
-    var selectedToken = this.props.tokenSelected[this.props.tokenField];
-    var selectedState = (selectedToken?(selectedToken.indexOf(this.props.tokenLabel.value)>=0?true:false):false)
+    var selectedToken=this.props.tokenSelected[this.props.tokenField];
+    var selectedState=(selectedToken?(selectedToken.indexOf(this.props.tokenLabel.value)>=0?true:false):false)
     return (
      <div className="gor-filter-token-container">
      <span className={selectedState?"gor-filter-token-selected":"gor-filter-token-wrap"} onClick={this._handleTokenClick.bind(this)}>

@@ -40,7 +40,7 @@ import {overviewDetails} from './reducers/overviewReducer';
 import {configReducer} from './reducers/configReducer';
 import {notificationReducer} from './reducers/notificationReducer'
 
-const rootReducer = combineReducers({
+const rootReducer=combineReducers({
   intl:intlReducer,
   headerData,
   authLogin,

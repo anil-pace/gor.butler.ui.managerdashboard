@@ -6,7 +6,6 @@ export  function headerData(state={},action){
 	    return Object.assign({}, state, {
         "headerInfo":action.data
       })
-		break;
     	case RECEIVE_SHIFT_START_TIME:
             return Object.assign({}, state, {
 

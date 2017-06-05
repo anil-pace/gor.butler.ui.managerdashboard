@@ -1,12 +1,11 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
-import { FormattedMessage,FormattedPlural } from 'react-intl'; 
+import { FormattedMessage } from 'react-intl'; 
 import { connect } from 'react-redux';
 import {getAuditOrderLines,resolveAuditLines} from '../../actions/auditActions';
-import {GET,APP_JSON,AUDIT_RESOLVE_LINES,GOR_BREACHED_LINES,VIEW_AUDIT_ISSUES,APPROVE_AUDIT,GOR_USER_TABLE_HEADER_HEIGHT,GOR_AUDIT_RESOLVE_MIN_HEIGHT,GOR_AUDIT_RESOLVE_WIDTH, POST, AUDIT_RESOLVE_CONFIRMED,AUDIT_BY_PDFA} from '../../constants/frontEndConstants';
+import {GET,APP_JSON,AUDIT_RESOLVE_LINES,GOR_BREACHED_LINES,APPROVE_AUDIT,GOR_USER_TABLE_HEADER_HEIGHT,GOR_AUDIT_RESOLVE_MIN_HEIGHT,GOR_AUDIT_RESOLVE_WIDTH, POST, AUDIT_RESOLVE_CONFIRMED,AUDIT_BY_PDFA} from '../../constants/frontEndConstants';
 import {AUDIT_URL, PENDING_ORDERLINES, AUDIT_ANAMOLY} from '../../constants/configConstants';
-import {Table, Column, Cell} from 'fixed-data-table';
-import {tableRenderer,TextCell,DataListWrapper,ResolveCell} from '../../components/commonFunctionsDataTable';
+import {Table, Column} from 'fixed-data-table';
+import {tableRenderer,TextCell,ResolveCell} from '../../components/commonFunctionsDataTable';
 import {stringConfig} from '../../constants/backEndConstants';
 import Spinner from '../../components/spinner/Spinner';
 import {setResolveAuditSpinner} from '../../actions/spinnerAction';
@@ -14,10 +13,10 @@ class ResolveAudit extends React.Component{
   constructor(props) 
   {
       super(props); 
-      var data = this.props.auditLines.auditlines || [];
-      this._dataList = new tableRenderer(data ? data.length : 0);
+      var data=this.props.auditLines.auditlines || [];
+      this._dataList=new tableRenderer(data ? data.length : 0);
       this._dataList.newData=data;
-      this.state = {
+      this.state={
       auditDataList: this._dataList,
       checkedState: [],
       totalMismatch: 0,
@@ -26,11 +25,11 @@ class ResolveAudit extends React.Component{
 
   componentWillReceiveProps(nextProps){
 
-     var data = nextProps.auditLines.auditlines || [], processedData;
-      processedData = this._processData(data,nextProps);
-      this._dataList = new tableRenderer(data ? data.length : 0);
+     var data=nextProps.auditLines.auditlines || [], processedData;
+      processedData=this._processData(data,nextProps);
+      this._dataList=new tableRenderer(data ? data.length : 0);
       this._dataList.newData=processedData;
-      this.state = {
+      this.state={
       auditDataList: this._dataList,
       checkedState: [],
       totalMismatch: 0,
@@ -41,7 +40,7 @@ class ResolveAudit extends React.Component{
   }
 
   componentDidMount() {
-        let url = AUDIT_URL + "/" + this.props.auditId + PENDING_ORDERLINES; 
+        let url=AUDIT_URL + "/" + this.props.auditId + PENDING_ORDERLINES; 
         let paginationData={
          'url':url,
          'method':GET,
@@ -55,24 +54,24 @@ class ResolveAudit extends React.Component{
   
 
   _processData(auditLines,nProps) {
-    var data = auditLines, processedData = [], auditData = {}, totalMismatch = 0;
-    for (var i = data.length - 1; i >= 0; i--) {
-      auditData.actual_quantity = data[i].actual_quantity;
-      auditData.expected_quantity = data[i].expected_quantity;
-      totalMismatch = (data[i].expected_quantity-data[i].actual_quantity) + totalMismatch;
-      auditData.slot_id = data[i].slot_id;
-      auditData.auditLineId = data[i].auditline_id;
+    var data=auditLines, processedData=[], auditData={}, totalMismatch=0;
+    for (var i=data.length - 1; i >= 0; i--) {
+      auditData.actual_quantity=data[i].actual_quantity;
+      auditData.expected_quantity=data[i].expected_quantity;
+      totalMismatch=(data[i].expected_quantity-data[i].actual_quantity) + totalMismatch;
+      auditData.slot_id=data[i].slot_id;
+      auditData.auditLineId=data[i].auditline_id;
       if(this.context.intl.formatMessage(stringConfig[data[i].status])) {
-        auditData.status = this.context.intl.formatMessage(stringConfig[data[i].status]);
+        auditData.status=this.context.intl.formatMessage(stringConfig[data[i].status]);
       } 
       else{
-        auditData.status = data[i].status;
+        auditData.status=data[i].status;
       }
       if(data[i].pdfa_audit_attributes && auditLines[i].pdfa_audit_attributes[Object.keys(auditLines[0].pdfa_audit_attributes)]) {
-        auditData.attributeDetail = auditLines[i].pdfa_audit_attributes[Object.keys(auditLines[0].pdfa_audit_attributes)];  //assuming only one attributes is there as of now (kerry specific) 
+        auditData.attributeDetail=auditLines[i].pdfa_audit_attributes[Object.keys(auditLines[0].pdfa_audit_attributes)];  //assuming only one attributes is there as of now (kerry specific) 
       }
       processedData.push(auditData);
-      auditData =  {};
+      auditData={};
 
     }
     this.setState({totalMismatch:totalMismatch})
@@ -82,18 +81,18 @@ class ResolveAudit extends React.Component{
   _checkAuditStatus(rowIndex,state,auditLineId) {
     var newAuditLineId;
     if(this.props.auditMethod===AUDIT_BY_PDFA) {
-      var newAuditLineIndex = this.actualMapping[auditLineId]; //in case of pdfa rowindex wont work so using actual index
-      newAuditLineId = this.state.auditDataList.newData[newAuditLineIndex].auditLineId;
+      var newAuditLineIndex=this.actualMapping[auditLineId]; //in case of pdfa rowindex wont work so using actual index
+      newAuditLineId=this.state.auditDataList.newData[newAuditLineIndex].auditLineId;
     }
     else{
-      newAuditLineId = this.state.auditDataList.newData[rowIndex].auditLineId
+      newAuditLineId=this.state.auditDataList.newData[rowIndex].auditLineId
     }
-    var checkedAudit = {"response":state, "auditline_id":newAuditLineId}, auditIndexed = false;
-    var tempState = this.state.checkedState.slice();
-    for (var i = tempState.length - 1; i >= 0; i--) {
-      if(tempState[i].auditline_id === newAuditLineId) {
-        tempState[i].response = state;
-        auditIndexed = true;
+    var checkedAudit={"response":state, "auditline_id":newAuditLineId}, auditIndexed=false;
+    var tempState=this.state.checkedState.slice();
+    for (var i=tempState.length - 1; i >= 0; i--) {
+      if(tempState[i].auditline_id=== newAuditLineId) {
+        tempState[i].response=state;
+        auditIndexed=true;
         break;
       }
     }
@@ -105,8 +104,8 @@ class ResolveAudit extends React.Component{
 
   _confirmIssues() {
     
-    var auditConfirmDetail = {"data":this.state.checkedState};
-    var url = AUDIT_URL + AUDIT_ANAMOLY;
+    var auditConfirmDetail={"data":this.state.checkedState};
+    var url=AUDIT_URL + AUDIT_ANAMOLY;
      let paginationData={
          'url':url,
          'method':POST,
@@ -122,32 +121,32 @@ class ResolveAudit extends React.Component{
   }
 
   _resolveIssueByPdfa() {
-    var slotIdHashMap = {};
-    var auditDataLine = this.state.auditDataList.newData; 
+    var slotIdHashMap={};
+    var auditDataLine=this.state.auditDataList.newData; 
     var slotIdGrouping={}, slotIdData={slotId:"", slotIdDataLine:[]}, actualMapping={};
-    for (var i = auditDataLine.length - 1; i >= 0; i--) {
-      var columnSlotId = auditDataLine[i].slot_id;
+    for (var i=auditDataLine.length - 1; i >= 0; i--) {
+      var columnSlotId=auditDataLine[i].slot_id;
       if(slotIdHashMap[columnSlotId]>=0) {
         slotIdGrouping[columnSlotId].slotIdDataLine.push(auditDataLine[i]);
-        actualMapping[auditDataLine[i].auditLineId] = i;
+        actualMapping[auditDataLine[i].auditLineId]=i;
       }
 
       else {
-        slotIdHashMap[columnSlotId] = i;
-        slotIdData.slotId = auditDataLine[i].slot_id;
+        slotIdHashMap[columnSlotId]=i;
+        slotIdData.slotId=auditDataLine[i].slot_id;
         slotIdData.slotIdDataLine.push(auditDataLine[i]);
-        slotIdGrouping[columnSlotId] = slotIdData;
-        actualMapping[auditDataLine[i].auditLineId] = i;
+        slotIdGrouping[columnSlotId]=slotIdData;
+        actualMapping[auditDataLine[i].auditLineId]=i;
         slotIdData={slotId:"", slotIdDataLine:[]}
       }
     }
-    this.actualMapping = actualMapping; //due to grouping, actual mapping is lost. hence storing here
+    this.actualMapping=actualMapping; //due to grouping, actual mapping is lost. hence storing here
     return slotIdGrouping;
   }
 
   _renderPDFAtable(data) {
-    var pdfaResolveTable = [],resolveTable;
-    var pdfaHeader = <Table
+    var pdfaResolveTable=[],resolveTable;
+    var pdfaHeader=<Table
                       rowHeight={GOR_USER_TABLE_HEADER_HEIGHT}
                       rowsCount={0}
                       headerHeight={GOR_USER_TABLE_HEADER_HEIGHT}
@@ -155,30 +154,30 @@ class ResolveAudit extends React.Component{
                       height={GOR_USER_TABLE_HEADER_HEIGHT}
                       {...this.props}>
                       <Column header={<div className="gorAuditHeader">
-                                        <FormattedMessage id="resolveAudit.table.batchID" description="batch id Column" defaultMessage ="BOX ID."/> 
+                                        <FormattedMessage id="resolveAudit.table.batchID" description="batch id Column" defaultMessage="BOX ID."/> 
                                       </div>} width={220}/>
                       <Column header={<div className="gorAuditHeader">
-                                        <FormattedMessage id="resolveAudit.table.expectedItems" description="expectedItems Column" defaultMessage ="EXPECTED QUANTITY"/> 
+                                        <FormattedMessage id="resolveAudit.table.expectedItems" description="expectedItems Column" defaultMessage="EXPECTED QUANTITY"/> 
                                      </div>} width={220}/>
                       <Column header={<div className="gorAuditHeader">
-                                        <FormattedMessage id="resolveAudit.table.actualQuantity" description="actualQuantity Column" defaultMessage ="ACTUAL QUANTITY"/> 
+                                        <FormattedMessage id="resolveAudit.table.actualQuantity" description="actualQuantity Column" defaultMessage="ACTUAL QUANTITY"/> 
                                       </div>} width={220}/>
                       <Column header={<div className="gorAuditHeader">
-                                        <FormattedMessage id="resolveAudit.table.STATUS" description="status Column" defaultMessage ="STATUS"/> 
+                                        <FormattedMessage id="resolveAudit.table.STATUS" description="status Column" defaultMessage="STATUS"/> 
                                       </div>} width={220}/>
                       <Column header={<div className="gorAuditHeader">
-                                        <FormattedMessage id="resolveAudit.table.resolve" description="resolve Column" defaultMessage ="RESOLVE"/> 
+                                        <FormattedMessage id="resolveAudit.table.resolve" description="resolve Column" defaultMessage="RESOLVE"/> 
                                       </div>} width={220}/>
                     </Table> 
 
     pdfaResolveTable.push(pdfaHeader)                   
     for (var key in data) {
       if (data.hasOwnProperty(key)) {
-        var auditDataList = new tableRenderer(data[key].slotIdDataLine ? data[key].slotIdDataLine.length : 0);
-        var inSlot = <FormattedMessage id="audit.inSlot.text" defaultMessage='In slot '/> 
-        var containerHeight = (auditDataList.getSize())*GOR_USER_TABLE_HEADER_HEIGHT+2;
+        var auditDataList=new tableRenderer(data[key].slotIdDataLine ? data[key].slotIdDataLine.length : 0);
+        var inSlot=<FormattedMessage id="audit.inSlot.text" defaultMessage='In slot '/> 
+        var containerHeight=(auditDataList.getSize())*GOR_USER_TABLE_HEADER_HEIGHT+2;
         auditDataList.newData=data[key].slotIdDataLine;
-        resolveTable =<div> 
+        resolveTable=<div> 
                       <div className="gor-auditresolve-pdfa-slot-header">
                         <span>{inSlot} </span>
                         <span><b>{key}:</b></span>
@@ -205,12 +204,12 @@ class ResolveAudit extends React.Component{
   }
 
   _renderSkutable() {
-    var resolveTable = <div/>, headerHeight=GOR_USER_TABLE_HEADER_HEIGHT,minHeight = GOR_AUDIT_RESOLVE_MIN_HEIGHT;
-    var {auditDataList} = this.state 
-    var missingAudit = auditDataList.getSize();
-    var screenId = this.props.screenId
-    var containerHeight = (((missingAudit?missingAudit:0)*headerHeight + headerHeight)>minHeight?((missingAudit?missingAudit:0)*headerHeight + headerHeight):minHeight);
-    resolveTable = <div>
+    var resolveTable=<div/>, headerHeight=GOR_USER_TABLE_HEADER_HEIGHT,minHeight=GOR_AUDIT_RESOLVE_MIN_HEIGHT;
+    var {auditDataList}=this.state 
+    var missingAudit=auditDataList.getSize();
+    var screenId=this.props.screenId
+    var containerHeight=(((missingAudit?missingAudit:0)*headerHeight + headerHeight)>minHeight?((missingAudit?missingAudit:0)*headerHeight + headerHeight):minHeight);
+    resolveTable=<div>
                       <Table
                       rowHeight={headerHeight}
                       rowsCount={auditDataList.getSize()}
@@ -222,33 +221,33 @@ class ResolveAudit extends React.Component{
                       {...this.props}>
                       <Column
                         columnKey="slot_id"
-                        header={<div className="gorAuditHeader"> <FormattedMessage id="resolveAudit.table.slot" description="slot id Column" defaultMessage ="SLOT ID"/> </div>}
+                        header={<div className="gorAuditHeader"> <FormattedMessage id="resolveAudit.table.slot" description="slot id Column" defaultMessage="SLOT ID"/> </div>}
                         cell={  <TextCell data={auditDataList} />}
                         width={220}
                       />
                       <Column
                         columnKey="expected_quantity"
-                        header={<div className="gorAuditHeader"> <FormattedMessage id="resolveAudit.table.expectedItems" description="expectedItems Column" defaultMessage ="EXPECTED QUANTITY"/> </div>}
+                        header={<div className="gorAuditHeader"> <FormattedMessage id="resolveAudit.table.expectedItems" description="expectedItems Column" defaultMessage="EXPECTED QUANTITY"/> </div>}
                         cell={  <TextCell data={auditDataList} />}
                         width={220}
                       />
                       <Column
                         columnKey="actual_quantity"
-                        header={<div className="gorAuditHeader"><FormattedMessage id="resolveAudit.table.actualQuantity" description="actualQuantity Column" defaultMessage ="ACTUAL QUANTITY"/> </div>
+                        header={<div className="gorAuditHeader"><FormattedMessage id="resolveAudit.table.actualQuantity" description="actualQuantity Column" defaultMessage="ACTUAL QUANTITY"/> </div>
                         }
                         cell={  <TextCell data={auditDataList} setClass={GOR_BREACHED_LINES}> </TextCell>}
                         width={220}
                       />
                       <Column
                         columnKey="status"
-                        header={<div className="gorAuditHeader"><FormattedMessage id="resolveAudit.table.STATUS" description="status Column" defaultMessage ="STATUS"/> </div>}
+                        header={<div className="gorAuditHeader"><FormattedMessage id="resolveAudit.table.STATUS" description="status Column" defaultMessage="STATUS"/> </div>}
                         cell={  <TextCell data={auditDataList}> </TextCell>}
                         width={220}
                       />
 
                       <Column
                         columnKey="resolve"
-                        header={<div className="gorAuditHeader"> <FormattedMessage id="resolveAudit.table.resolve" description="resolve Column" defaultMessage ="RESOLVE"/> </div>}
+                        header={<div className="gorAuditHeader"> <FormattedMessage id="resolveAudit.table.resolve" description="resolve Column" defaultMessage="RESOLVE"/> </div>}
                         cell={  <ResolveCell data={auditDataList} checkStatus={this._checkAuditStatus.bind(this)} screenId={screenId}> </ResolveCell>}
                         width={220}
                       /> 
@@ -260,15 +259,15 @@ class ResolveAudit extends React.Component{
   
   render()
   {
-      var {auditDataList} = this.state, screenId = this.props.screenId, auditType = this.props.auditType, auditId = this.props.displayId;
-      var auditbysku= (this.props.auditMethod==="pdfa"?false:true), resolveTable = <div/>;
-      var totalLines = auditDataList.getSize()?auditDataList.getSize():0;
+      var {auditDataList}=this.state, screenId=this.props.screenId, auditType=this.props.auditType, auditId=this.props.displayId;
+      var auditbysku=(this.props.auditMethod==="pdfa"?false:true), resolveTable=<div/>;
+      var totalLines=auditDataList.getSize()?auditDataList.getSize():0;
       if(auditbysku) {
-        resolveTable = this._renderSkutable();
+        resolveTable=this._renderSkutable();
       }
       else {
-        var groupingBySlotId = this._resolveIssueByPdfa();
-        resolveTable = this._renderPDFAtable(groupingBySlotId);
+        var groupingBySlotId=this._resolveIssueByPdfa();
+        resolveTable=this._renderPDFAtable(groupingBySlotId);
         
       }
       
@@ -304,7 +303,7 @@ class ResolveAudit extends React.Component{
                       <div className="gor-auditResolve-btn-wrap">
                         <div className="gor-auditresolve-btn">                    
                           <button className="gor-refresh-btn" onClick={this._removeThisModal.bind(this)}>
-                            <FormattedMessage id="resolveAudit.cancelLabel" description="button label for cancel" defaultMessage ="Cancel" />
+                            <FormattedMessage id="resolveAudit.cancelLabel" description="button label for cancel" defaultMessage="Cancel" />
                           </button>
                         </div>
                         <div className="gor-auditresolve-btn">
@@ -315,7 +314,7 @@ class ResolveAudit extends React.Component{
                       </div> :
                       <div className="gor-auditIssue-btn-wrap">
                         <button className="gor-refresh-btn" onClick={this._removeThisModal.bind(this)}>
-                          <FormattedMessage id="resolveAudit.closeLabel" description="button label for close" defaultMessage ="Close" />
+                          <FormattedMessage id="resolveAudit.closeLabel" description="button label for close" defaultMessage="Close" />
                         </button> 
                       </div> 
                   }
@@ -336,7 +335,7 @@ class ResolveAudit extends React.Component{
   };
 }
 
-var mapDispatchToProps = function(dispatch){
+var mapDispatchToProps=function(dispatch){
   return {
     resolveAuditLines: function(data){dispatch(resolveAuditLines(data))},
     getAuditOrderLines: function(data){dispatch(getAuditOrderLines(data))},
@@ -344,7 +343,7 @@ var mapDispatchToProps = function(dispatch){
   }
 };
 
-ResolveAudit.contextTypes ={
+ResolveAudit.contextTypes={
  intl:React.PropTypes.object.isRequired
 }
 

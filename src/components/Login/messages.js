@@ -1,6 +1,6 @@
 import {defineMessages} from 'react-intl';
 
-export const messages = defineMessages({
+export const messages=defineMessages({
     placeholderUsr: {
         id: 'login.form.username',
         description: 'Placeholder text for username',

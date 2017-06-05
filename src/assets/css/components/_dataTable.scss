@@ -440,14 +440,14 @@ background-color: #FFFFFF;
 
 .not_fulfillable .public_fixedDataTableCell_cellContent{
 
-  background: #f99405;
+  background: #ffffff;
   border-radius: 15px;
+   border: 1px solid #f99405;
   text-align: center;
   width:90px;
-  color: #ffffff;
+  color: #f99405;
   font-size: 12px;
   max-height: 9px;
-
 }
 
 .on .public_fixedDataTableCell_cellContent{
@@ -592,24 +592,19 @@ background-color: #FFFFFF;
   border-radius: 15px;
   text-align: center;
   width:90px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #00a54f;
+  border: 1px solid #00a54f;
   color: #00a54f;
   font-size: 12px;
   max-height: 9px;
   background: #ffffff;
   text-transform: capitalize;
-
 }
 
 .cancelled .public_fixedDataTableCell_cellContent{
   border-radius: 15px;
   text-align: center;
   width:90px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #aaaaaa;
+  border:1px solid #aaaaaa;
   color: #aaaaaa;
   font-size: 12px;
   max-height: 9px;
@@ -621,9 +616,7 @@ background-color: #FFFFFF;
   border-radius: 15px;
   text-align: center;
   width:90px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #aaaaaa;
+  border:1px solid #aaaaaa;
   color: #aaaaaa;
   font-size: 12px;
   max-height: 9px;
@@ -632,14 +625,16 @@ background-color: #FFFFFF;
 }
 
 .temporary_unfulfillable .public_fixedDataTableCell_cellContent{
-  background: #f36f36;
+  background: #ffffff; ;
   border-radius: 15px;
+   border: 1px solid #f36f36;
   text-align: center;
   width:90px;
-  color: #ffffff;
+  color: #f36f36;
   font-size: 12px;
   max-height: 9px;
   text-transform: capitalize;
+
 }
 
 .in_progress {
@@ -661,9 +656,7 @@ border-radius: 15px;
   border-radius: 15px;
   text-align: center;
   width:90px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #00a54f;
+  border:1px solid #00a54f;
   color: #00a54f;
   font-size: 12px;
   max-height: 9px;

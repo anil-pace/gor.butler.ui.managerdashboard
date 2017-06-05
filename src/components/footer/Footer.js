@@ -1,5 +1,4 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import {getYear} from '../../utilities/processDate';
 class Footer extends React.Component{
@@ -11,7 +10,7 @@ class Footer extends React.Component{
 		return (
 		<div className="gor-footer">
 			<FormattedMessage id="footer.text" description="Footer description" 
-              			defaultMessage ="Copyright @ {dtYear} GreyOrange Pte Ltd"
+              			defaultMessage="Copyright @ {dtYear} GreyOrange Pte Ltd"
               			 values={{dtYear:getYear()}}/>
 		</div> 
 		);

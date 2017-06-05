@@ -1,5 +1,4 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import { connect } from 'react-redux';
 import {setRole} from '../../actions/userActions';
 import {BUTLER_SUPERVISOR,BUTLER_UI} from '../../constants/backEndConstants'
@@ -16,22 +15,22 @@ class RoleGroup extends React.Component{
     }
     _getChecked(roleName, currentRole){
         if(!roleName){
-            if(currentRole.name === BUTLER_UI)
+            if(currentRole.name=== BUTLER_UI)
             {
                 return true;
             }
         }
-        if(roleName == currentRole.name){
+        if(roleName== currentRole.name){
             return true;
         }
         return false;
     }
     _processRoles(){
         let roles=[] ,len, currentRole,item;
-        len = this.props.roleList.length;
+        len=this.props.roleList.length;
 
         for(let i=0; i<len; i++){
-           currentRole = this.props.roleList[i];
+           currentRole=this.props.roleList[i];
            if(stringConfig.hasOwnProperty(currentRole.name)){
             item=(<div key={i}>
                 <div className='gor-role'>
@@ -54,7 +53,7 @@ class RoleGroup extends React.Component{
         return roles;
     }
 	render(){
-        var roles = this._processRoles();
+        var roles=this._processRoles();
 		return (
             <div className='gor-usr-details'>
                 <div className='gor-usr-hdlg'><FormattedMessage id="users.add.roledetails.heading" description='Heading for role' 
@@ -75,7 +74,7 @@ function mapDispatchToProps(dispatch){
     setRole: function(data){ dispatch(setRole(data)); },        
     }
 }
-RoleGroup.contextTypes = {
+RoleGroup.contextTypes={
     intl: React.PropTypes.object.isRequired
 }
 

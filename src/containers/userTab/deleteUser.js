@@ -1,16 +1,11 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import { connect } from 'react-redux' ;
 import {userRequest} from '../../actions/userActions';
 import {DELETE_USER,APP_JSON,DELETE} from '../../constants/frontEndConstants';
 import {HEADER_URL} from '../../constants/configConstants';
-import { FormattedMessage,FormattedPlural } from 'react-intl';        
+import { FormattedMessage } from 'react-intl';        
 
 class DeleteUser extends React.Component{
-  constructor(props) 
-  {
-      super(props);  
-  }
   removeThisModal() {
       this.props.removeModal();
   }

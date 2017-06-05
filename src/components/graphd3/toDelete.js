@@ -3,7 +3,7 @@
 * [ { name : x-axis-bar-label, value : N }, ...]
 *
 *  Sample use:
-*  var bargraph = d3.select('#bargraph')
+*  var bargraph=d3.select('#bargraph')
 *    .append('svg')
 *    .chart('BarChart')
 *    .yFormat(d3.format("d"))
@@ -15,12 +15,12 @@
 d3.chart('BarChart', {
 
   initialize: function() {
-    var chart = this;
+    var chart=this;
 
     // chart margins to account for labels.
     // we may want to have setters for this.
     // not sure how necessary that is tbh.
-    chart.margins = {
+    chart.margins={
       top : 10,
       bottom : 15,
       left : 50,
@@ -29,17 +29,17 @@ d3.chart('BarChart', {
     };
 
     // default chart ranges
-    chart.x =  d3.scale.linear();
-    chart.y = d3.scale.linear();
+    chart.x= d3.scale.linear();
+    chart.y=d3.scale.linear();
 
     chart.base
       .classed('Barchart', true);
 
     // non data driven areas (as in not to be independatly drawn)
-    chart.areas = {};
+    chart.areas={};
 
     // cache for selections that are layer bases.
-    chart.layers = {};
+    chart.layers={};
 
     // make sections for labels and main area
     //  _________________
@@ -51,19 +51,19 @@ d3.chart('BarChart', {
     //   |      X       |
 
     // -- areas
-    chart.areas.ylabels = chart.base.append('g')
+    chart.areas.ylabels=chart.base.append('g')
       .classed('ylabels', true)
       .attr('width', chart.margins.left)
       .attr('transform',
         'translate('+(chart.margins.left-1)+','+(chart.margins.top + 1)+')');
 
     // -- actual layers
-    chart.layers.bars = chart.base.append('g')
+    chart.layers.bars=chart.base.append('g')
       .classed('bars', true)
       .attr('transform',
         'translate(' + chart.margins.left + ',' + (chart.margins.top + 1)+')');
 
-    chart.layers.xlabels = chart.base.append('g')
+    chart.layers.xlabels=chart.base.append('g')
       .classed('xlabels', true)
       .attr('height', chart.margins.bottom);
 
@@ -90,26 +90,26 @@ d3.chart('BarChart', {
       // [ { name : x-axis-bar-label, value : N }, ...]
       dataBind : function(data) {
 
-        chart.data = data;
+        chart.data=data;
 
         // how many bars?
-        chart.bars = data.length;
+        chart.bars=data.length;
 
         // compute box size
-        chart.bar_width = (chart.w - chart.margins.left - ((chart.bars - 1) *
+        chart.bar_width=(chart.w - chart.margins.left - ((chart.bars - 1) *
           chart.margins.padding)) / chart.bars;
 
         // adjust the x domain - the number of bars.
         chart.x.domain([0, chart.bars]);
 
         // adjust the y domain - find the max in the data.
-        chart.datamax = chart.usermax ||
+        chart.datamax=chart.usermax ||
           d3.extent(data, function(d) { return d.value; })[1];
 
         chart.y.domain([0, chart.datamax]);
 
         // draw yaxis
-        var yAxis = d3.svg.axis()
+        var yAxis=d3.svg.axis()
           .scale(chart.y)
           .orient('left')
           .ticks(5)
@@ -176,7 +176,7 @@ d3.chart('BarChart', {
 
     // on new/update data
     // render the bars.
-    var onEnter = function() {
+    var onEnter=function() {
       this.attr('x', function(d, i) {
             return chart.x(i) - 0.5;
           })
@@ -204,7 +204,7 @@ d3.chart('BarChart', {
       return this.usermax;
     }
 
-    this.usermax = datamax;
+    this.usermax=datamax;
 
     if (this.data) this.draw(this.data);
 
@@ -215,7 +215,7 @@ d3.chart('BarChart', {
     if (!arguments.length) {
       return this._yformat;
     }
-    this._yformat = format;
+    this._yformat=format;
     return this;
   },
 
@@ -224,7 +224,7 @@ d3.chart('BarChart', {
       return this.w;
     }
     // save new width
-    this.w = newWidth;
+    this.w=newWidth;
 
     // adjust the x scale range
     this.x.range([this.margins.left, this.w - this.margins.right]);
@@ -244,7 +244,7 @@ d3.chart('BarChart', {
     }
 
     // save new height
-    this.h = newHeight;
+    this.h=newHeight;
 
     // adjust the y scale
     this.y.range([this.h - this.margins.top, this.margins.bottom]);
@@ -258,14 +258,14 @@ d3.chart('BarChart', {
   }
 });
 
-var barchart = d3.select('#vis')
+var barchart=d3.select('#vis')
   .append('svg')
   .chart('BarChart') //**Moving transform position out of here**
   .yFormat(d3.format("d"))
   .height(400)
   .width(800);
 
-var data = [
+var data=[
   { month : 'January', temperature : 29 },
   { month : 'February', temperature : 32 },
   { month : 'March', temperature : 48 },
@@ -296,13 +296,13 @@ barchart.draw(transform(data));
   // the chart when the width/height values
   // are changed
   $("#width_box").on("change", function(e){
-    var newWidth = +($(e.target).val());
+    var newWidth=+($(e.target).val());
     barchart.width(newWidth);
     //barchart.draw(data);
   });
 
   $("#height_box").on("change", function(e){
-    var newHeight = +($(e.target).val());
+    var newHeight=+($(e.target).val());
     barchart.height(newHeight);
     //barchart.draw(data)
   });

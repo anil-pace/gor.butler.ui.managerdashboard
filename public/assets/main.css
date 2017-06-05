@@ -1404,7 +1404,8 @@ body {
   position: absolute;
   top: 105%;
   width: 100%;
-  -webkit-overflow-scrolling: touch;
+  overflow: auto;
+  max-height: 200px;
 }
 
 .gor-usr-dropdown .Dropdown-option {
@@ -2209,11 +2210,12 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 }
 
 .not_fulfillable .public_fixedDataTableCell_cellContent {
-  background: #f99405;
+  background: #ffffff;
   border-radius: 15px;
+  border: 1px solid #f99405;
   text-align: center;
   width: 90px;
-  color: #ffffff;
+  color: #f99405;
   font-size: 12px;
   max-height: 9px;
 }
@@ -2339,9 +2341,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   border-radius: 15px;
   text-align: center;
   width: 90px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #00a54f;
+  border: 1px solid #00a54f;
   color: #00a54f;
   font-size: 12px;
   max-height: 9px;
@@ -2353,9 +2353,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   border-radius: 15px;
   text-align: center;
   width: 90px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #aaaaaa;
+  border: 1px solid #aaaaaa;
   color: #aaaaaa;
   font-size: 12px;
   max-height: 9px;
@@ -2367,9 +2365,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   border-radius: 15px;
   text-align: center;
   width: 90px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #aaaaaa;
+  border: 1px solid #aaaaaa;
   color: #aaaaaa;
   font-size: 12px;
   max-height: 9px;
@@ -2378,11 +2374,12 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 }
 
 .temporary_unfulfillable .public_fixedDataTableCell_cellContent {
-  background: #f36f36;
+  background: #ffffff;
   border-radius: 15px;
+  border: 1px solid #f36f36;
   text-align: center;
   width: 90px;
-  color: #ffffff;
+  color: #f36f36;
   font-size: 12px;
   max-height: 9px;
   text-transform: capitalize;
@@ -2405,9 +2402,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   border-radius: 15px;
   text-align: center;
   width: 90px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #00a54f;
+  border: 1px solid #00a54f;
   color: #00a54f;
   font-size: 12px;
   max-height: 9px;
@@ -5354,7 +5349,6 @@ button:disabled {
 
 .gor-filterBtn-btn {
   font-family: 'Source Sans Pro Bold', sans-serif;
-  width: 125px;
   height: 35px;
   font-size: 14px;
   color: #666666;
@@ -6091,11 +6085,11 @@ button:disabled {
   position: absolute;
   display: none;
   z-index: 2;
-  left: -70px;
+  left: -71px;
   min-width: 315px;
   border-radius: 4px;
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2);
-  top: 34px;
+  top: 30px;
   min-height: 200px;
   background: #fff;
 }
@@ -6267,6 +6261,14 @@ button:disabled {
   width: 97%;
   margin-top: 20px;
   overflow: auto;
+}
+
+.gor-all-not-tbl .row .title {
+  font-weight: bold;
+}
+
+.gor-all-not-tbl .row .desc {
+  line-height: 35px;
 }
 
 .gor-all-not-tbl .table-row {

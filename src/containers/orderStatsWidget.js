@@ -11,42 +11,42 @@ class OrderStatsWidget extends React.Component{
 	
 	render(){
 		
-		let pickPerformance = <FormattedMessage id="pickPerformance.dropdown" description="pickPerformance dropdown label" 
-              defaultMessage ="PPS Pick Performance"/>
+		let pickPerformance=<FormattedMessage id="pickPerformance.dropdown" description="pickPerformance dropdown label" 
+              defaultMessage="PPS Pick Performance"/>
 
-         let putPerformance = <FormattedMessage id="putPerformance.dropdown" description="putPerformance dropdown label" 
-              defaultMessage ="PPS Put Performance"/>
+         let putPerformance=<FormattedMessage id="putPerformance.dropdown" description="putPerformance dropdown label" 
+              defaultMessage="PPS Put Performance"/>
               
-        let auditPerformance = <FormattedMessage id="auditPerformance.dropdown" description="auditPerformance dropdown label" 
-              defaultMessage ="PPS Audit Performance"/>
+        let auditPerformance=<FormattedMessage id="auditPerformance.dropdown" description="auditPerformance dropdown label" 
+              defaultMessage="PPS Audit Performance"/>
               
 
-		const item = [
+		const item=[
       { value: 'PPS_PICK_PERFORMANCE', label: pickPerformance },
       { value: 'PPS_PUT_PERFORMANCE', label: putPerformance },
       { value: 'PPS_AUDIT_PERFORMANCE', label: auditPerformance },
     ]
- 	var renderWidget = this.props.statsWidget.statsWidget, chartRender;
-    var index = 0;
+ 	var renderWidget=this.props.statsWidget.statsWidget, chartRender;
+    var index=0;
 		if(renderWidget !== undefined || renderWidget !== null) {
-			for (var i = 0; i < item.length; i++) {
-				if(item[i].value === renderWidget) {
-					index = i;
+			for (var i=0; i < item.length; i++) {
+				if(item[i].value=== renderWidget) {
+					index=i;
 				}
 			}
 		}
     
-    if(renderWidget === "PPS_PUT_PERFORMANCE" && this.props.histdata) {
-    	chartRender = <Chart tableData={this.props.histdata} type={"put"}/>
+    if(renderWidget=== "PPS_PUT_PERFORMANCE" && this.props.histdata) {
+    	chartRender=<Chart tableData={this.props.histdata} type={"put"}/>
     }
 
-    else if(renderWidget === "PPS_AUDIT_PERFORMANCE" && this.props.histdata) {
-    	chartRender = <Chart tableData={this.props.histdata} type={"audit"}/>
+    else if(renderWidget=== "PPS_AUDIT_PERFORMANCE" && this.props.histdata) {
+    	chartRender=<Chart tableData={this.props.histdata} type={"audit"}/>
     }
 
     else if(this.props.histdata){
 
-    	chartRender = <Chart tableData={this.props.histdata} type={"pick"}/>
+    	chartRender=<Chart tableData={this.props.histdata} type={"pick"}/>
     }
 
 	return (
@@ -71,7 +71,7 @@ function mapStateToProps(state, ownProps){
 	};
 }
 
-var mapDispatchToProps = function(dispatch){
+var mapDispatchToProps=function(dispatch){
 	return {
 		renderStatsWidget: function(data){ dispatch(renderStatsWidget(data)); }
 	}

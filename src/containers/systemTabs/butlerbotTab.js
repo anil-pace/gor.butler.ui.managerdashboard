@@ -3,7 +3,6 @@
  * This will be switched based on tab click
  */
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import ButlerBotTable from './butlerbotTable';
 import {connect} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
@@ -26,7 +25,7 @@ import {wsOverviewData} from './../../constants/initData.js';
 import ButlerBotFilter from './butlerBotFilter';
 import FilterSummary from '../../components/tableFilter/filterSummary'
 //Mesages for internationalization
-const messages = defineMessages({
+const messages=defineMessages({
     butlerPrefix: {
         id: "butlerDetail.name.prefix",
         description: "prefix for butler id",
@@ -99,11 +98,11 @@ class ButlerBot extends React.Component {
 
 
     _processButlersData() {
-        var nProps = this,
-            data = nProps.props.butlerDetail.butlerDetail;
-        var butlerData = [], butlerDetail = {};
+        var nProps=this,
+            data=nProps.props.butlerDetail.butlerDetail;
+        var butlerData=[], butlerDetail={};
 
-        var currentTask = {
+        var currentTask={
             0: nProps.context.intl.formatMessage(messages.pick),
             1: nProps.context.intl.formatMessage(messages.put),
             2: nProps.context.intl.formatMessage(messages.audit),
@@ -111,77 +110,77 @@ class ButlerBot extends React.Component {
             4: nProps.context.intl.formatMessage(messages.move)
         };
 
-        var currentSubtask = {
+        var currentSubtask={
             0: nProps.context.intl.formatMessage(messages.moving),
             1: nProps.context.intl.formatMessage(messages.movingMount),
             2: nProps.context.intl.formatMessage(messages.movingDismount),
             3: nProps.context.intl.formatMessage(messages.docked)
         };
 
-        var priStatus = {"online": 1, "offline": 2};
+        var priStatus={"online": 1, "offline": 2};
         let BOT, PPS, CS, MSU;
 
-        for (var i = data.length - 1; i >= 0; i--) {
-            var botId = data[i].butler_id, msuId = data[i].display_msu_id, csId = data[i].charger_id,
-                ppsId = data[i].pps_id;
-            BOT = nProps.context.intl.formatMessage(messages.butlerPrefix, {"botId": botId});
-            PPS = nProps.context.intl.formatMessage(messages.ppsPrefix, {"ppsId": ppsId});
-            CS = nProps.context.intl.formatMessage(messages.chargerPrefix, {"csId": csId});
-            MSU = nProps.context.intl.formatMessage(messages.msuPrefix, {"msuId": msuId});
-            butlerDetail = {};
-            butlerDetail.id = BOT;
-            butlerDetail.statusClass = data[i].state;
+        for (var i=data.length - 1; i >= 0; i--) {
+            var botId=data[i].butler_id, msuId=data[i].display_msu_id, csId=data[i].charger_id,
+                ppsId=data[i].pps_id;
+            BOT=nProps.context.intl.formatMessage(messages.butlerPrefix, {"botId": botId});
+            PPS=nProps.context.intl.formatMessage(messages.ppsPrefix, {"ppsId": ppsId});
+            CS=nProps.context.intl.formatMessage(messages.chargerPrefix, {"csId": csId});
+            MSU=nProps.context.intl.formatMessage(messages.msuPrefix, {"msuId": msuId});
+            butlerDetail={};
+            butlerDetail.id=BOT;
+            butlerDetail.statusClass=data[i].state;
             if (nProps.context.intl.formatMessage(stringConfig[data[i].state])) {
-                butlerDetail.status = nProps.context.intl.formatMessage(stringConfig[data[i].state]);
+                butlerDetail.status=nProps.context.intl.formatMessage(stringConfig[data[i].state]);
             }
 
             else {
-                butlerDetail.status = data[i].state;
+                butlerDetail.status=data[i].state;
             }
-            butlerDetail.statusPriority = priStatus[data[i].state];
+            butlerDetail.statusPriority=priStatus[data[i].state];
             if (data[i].location) {
-                butlerDetail.location = data[i].location;
+                butlerDetail.location=data[i].location;
             }
             else {
-                butlerDetail.location = "--";
+                butlerDetail.location="--";
             }
-            if (data[i].voltage || data[i].voltage === 0) {
-                butlerDetail.voltage = data[i].voltage + " V";
-            }
-            else {
-                butlerDetail.voltage = "--";
-            }
-            butlerDetail.butlerAvgVoltage = data[i].voltage;
-            butlerDetail.taskNum = currentTask[data[i].current_task];
-            butlerDetail.taskType = data[i].current_task;
-            if (data[i].display_msu_id === null) {
-                butlerDetail.msu = "--";
+            if (data[i].voltage || data[i].voltage=== 0) {
+                butlerDetail.voltage=data[i].voltage + " V";
             }
             else {
-                butlerDetail.msu = MSU;
+                butlerDetail.voltage="--";
+            }
+            butlerDetail.butlerAvgVoltage=data[i].voltage;
+            butlerDetail.taskNum=currentTask[data[i].current_task];
+            butlerDetail.taskType=data[i].current_task;
+            if (data[i].display_msu_id=== null) {
+                butlerDetail.msu="--";
+            }
+            else {
+                butlerDetail.msu=MSU;
             }
 
             if (data[i].current_task !== null) {
-                butlerDetail.current = currentTask[data[i].current_task];
+                butlerDetail.current=currentTask[data[i].current_task];
                 if (data[i].current_subtask !== null) {
-                    butlerDetail.current = butlerDetail.current + " - " + currentSubtask[data[i].current_subtask];
+                    butlerDetail.current=butlerDetail.current + " - " + currentSubtask[data[i].current_subtask];
                     if (data[i].charger_id !== null) {
-                        butlerDetail.current = butlerDetail.current + " CS " + data[i].charger_id;
+                        butlerDetail.current=butlerDetail.current + " CS " + data[i].charger_id;
                     }
 
                     else if (data[i].msu_id !== null) {
-                        butlerDetail.current = butlerDetail.current + " MSU " + data[i].msu_id;
+                        butlerDetail.current=butlerDetail.current + " MSU " + data[i].msu_id;
                     }
 
                     else {
-                        butlerDetail.current = butlerDetail.current + " " + PPS;
+                        butlerDetail.current=butlerDetail.current + " " + PPS;
                     }
                 }
 
 
             }
             else {
-                butlerDetail.current = "--";
+                butlerDetail.current="--";
             }
             butlerData.push(butlerDetail);
         }
@@ -219,18 +218,18 @@ class ButlerBot extends React.Component {
      */
     _refreshList(query) {
         this.props.setButlerSpinner(true)
-        let filterSubsData = {}
+        let filterSubsData={}
         if (query.location) {
-            filterSubsData["location"] = ['contains',query.location]
+            filterSubsData["location"]=['contains',query.location]
         }
         if (query.butler_id) {
-            filterSubsData["butler_id"] = ['=',query.butler_id]
+            filterSubsData["butler_id"]=['=',query.butler_id]
         }
         if (query.status) {
-            filterSubsData["state"] = ['in',query.status.constructor===Array?query.status:[query.status]]
+            filterSubsData["state"]=['in',query.status.constructor===Array?query.status:[query.status]]
         }
         if (query.current_task) {
-            filterSubsData["current_task"] = ['in',query.current_task.constructor===Array?query.current_task:[query.current_task]]
+            filterSubsData["current_task"]=['in',query.current_task.constructor===Array?query.current_task:[query.current_task]]
         }
 
         if (Object.keys(query).filter(function(el){return el!=='page'}).length !== 0) {
@@ -241,9 +240,9 @@ class ButlerBot extends React.Component {
             this.props.filterApplied(false);
         }
 
-        let updatedWsSubscription = this.props.wsSubscriptionData;
-        updatedWsSubscription["system"].data[0].details["filter_params"] = filterSubsData;
-        updatedWsSubscription["butlerbots"].data[0].details["filter_params"] = filterSubsData;
+        let updatedWsSubscription=this.props.wsSubscriptionData;
+        updatedWsSubscription["system"].data[0].details["filter_params"]=filterSubsData;
+        updatedWsSubscription["butlerbots"].data[0].details["filter_params"]=filterSubsData;
         this.props.initDataSentCall(updatedWsSubscription["butlerbots"])
         this.props.updateSubscriptionPacket(updatedWsSubscription);
         this.props.butlerfilterState({
@@ -265,27 +264,27 @@ class ButlerBot extends React.Component {
 
 
     _setFilter() {
-        var newState = !this.props.showFilter;
+        var newState=!this.props.showFilter;
         this.props.showTableFilter(newState)
     }
 
     render() {
-        var filterHeight = screen.height - 190 - 50;
-        let updateStatusIntl = "";
-        var itemNumber = 6;
-        var butlerData, avgVoltage = 0;
-        var taskDetail = {
+        var filterHeight=screen.height - 190 - 50;
+        let updateStatusIntl="";
+        var itemNumber=6;
+        var butlerData, avgVoltage=0;
+        var taskDetail={
             "Put": 0, "Pick": 0, "Charging": 0, "Idle": 0, "Audit": 0,
             "avgVoltage": 0, "msuMounted": 0, "location": 0, "online": 0,
             "offline": 0
         };
 
         if (this.props.butlerDetail.butlerDetail !== undefined) {
-            butlerData = this._processButlersData();
+            butlerData=this._processButlersData();
             if (butlerData && butlerData.length) {
-                for (var i = butlerData.length - 1; i >= 0; i--) {
-                    avgVoltage = butlerData[i].butlerAvgVoltage + avgVoltage;
-                    if (butlerData[i].taskNum === null || butlerData[i].taskNum === undefined) {
+                for (var i=butlerData.length - 1; i >= 0; i--) {
+                    avgVoltage=butlerData[i].butlerAvgVoltage + avgVoltage;
+                    if (butlerData[i].taskNum=== null || butlerData[i].taskNum=== undefined) {
                         taskDetail["Idle"]++;
                     }
                     else {
@@ -301,20 +300,20 @@ class ButlerBot extends React.Component {
                         taskDetail["location"]++;
                     }
 
-                    if (butlerData[i].status === GOR_PERIPHERAL_ONLINE) {
+                    if (butlerData[i].status=== GOR_PERIPHERAL_ONLINE) {
                         taskDetail["online"]++;
                     }
 
-                    if (butlerData[i].status === GOR_PERIPHERAL_OFFLINE) {
+                    if (butlerData[i].status=== GOR_PERIPHERAL_OFFLINE) {
                         taskDetail["offline"]++;
                     }
 
                 }
-                avgVoltage = ((avgVoltage / (butlerData.length)).toFixed(1));
-                taskDetail["avgVoltage"] = avgVoltage + "V";
+                avgVoltage=((avgVoltage / (butlerData.length)).toFixed(1));
+                taskDetail["avgVoltage"]=avgVoltage + "V";
             }
             else {
-                taskDetail = {
+                taskDetail={
                     "Put": "--",
                     "Pick": "--",
                     "Charging": "--",
@@ -357,7 +356,7 @@ class ButlerBot extends React.Component {
                             className={this.props.botFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
                             onClick={this._setFilter.bind(this)}>
                             <div className="gor-manage-task"/>
-                            <FormattedMessage id="order.table.filterLabel" description="button label for filter"
+                            <FormattedMessage id="gor.filter.filterLabel" description="button label for filter"
                             defaultMessage="Filter data"/>
                             </button>
                             </div>
@@ -419,7 +418,7 @@ function mapStateToProps(state, ownProps) {
 }
 
 
-var mapDispatchToProps = function (dispatch) {
+var mapDispatchToProps=function (dispatch) {
     return {
         butlerFilterDetail: function (data) {
             dispatch(butlerFilterDetail(data))
@@ -453,10 +452,10 @@ var mapDispatchToProps = function (dispatch) {
     };
 }
 
-ButlerBot.contextTypes = {
+ButlerBot.contextTypes={
     intl: React.PropTypes.object.isRequired
 }
-ButlerBot.PropTypes = {
+ButlerBot.PropTypes={
     butlerFilter: React.PropTypes.string,
     butlerSortHeader: React.PropTypes.string,
     butlerSortHeaderState: React.PropTypes.string,

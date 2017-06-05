@@ -18,5 +18,11 @@ class ResultPane extends React.Component{
 		);
 	}
 }
-
+ResultPane.propTypes={
+	display: React.PropTypes.bool.isRequired,
+	children: React.PropTypes.oneOfType([
+        React.PropTypes.arrayOf(React.PropTypes.node),
+        React.PropTypes.node
+    ])
+}
 export default ResultPane ;

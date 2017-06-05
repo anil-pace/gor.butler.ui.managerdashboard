@@ -8,10 +8,10 @@ export  function putInfo(state={},action) {
   switch (action.type) {
     case PUT_DATA:
           let putObj={},
-          res = action.data
+          res=action.data
           
           if(res.aggregate_data){
-            putObj.value = res.aggregate_data.items_put; 
+            putObj.value=res.aggregate_data.items_put; 
 
           }
           return Object.assign({}, state, {

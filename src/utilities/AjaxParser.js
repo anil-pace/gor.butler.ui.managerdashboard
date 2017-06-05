@@ -1,6 +1,6 @@
-import {receiveAuthData,setLoginSpinner,setTimeOffSetData,loginFail} from '../actions/loginAction';
+import {receiveAuthData,setLoginSpinner,setTimeOffSetData} from '../actions/loginAction';
 import {recieveOrdersData} from '../actions/paginationAction';
-import {recieveAuditData,setAuditRefresh,setAuditSpinner,setPendingAuditLines,auditValidatedAttributes,validatedSKUcode} from '../actions/auditActions';
+import {recieveAuditData,setAuditRefresh,setAuditSpinner,setPendingAuditLines,auditValidatedAttributes} from '../actions/auditActions';
 import {assignRole,recieveConfigurations} from '../actions/userActions';
 import {recieveHeaderInfo,recieveShiftStartTime} from '../actions/headerAction';
 import {getPPSAudit} from '../actions/auditActions';
@@ -17,9 +17,8 @@ MASTER_FILE_UPLOAD,GET_MAX_FILE_SIZE,GET_CONFIGS,
 UPLOAD_HISTORY,SEARCHED_NOTIFICATIONS_DATA,SEND_READ_INTIMATION,GET_ALL_NOTIFICATIONS,
 SEARCHED_NOTIFICATIONS_DATA_ALL} from '../constants/frontEndConstants';
 
-import {BUTLER_UI,CODE_UE002,BUTLER_SUPERVISOR,CODE_E027} from '../constants/backEndConstants'
-import {UE002,E028,E029,MODE_REQUESTED,TYPE_SUCCESS,AS001,ERR_API,ERR_USR,ERR_RES,ERR_AUDIT,AS00A,WRONG_CRED,
-E051,ES} from '../constants/messageConstants';
+import {BUTLER_UI,CODE_E027} from '../constants/backEndConstants'
+import {UE002,E028,E029,MODE_REQUESTED,TYPE_SUCCESS,AS001,AS00A,WRONG_CRED,ES} from '../constants/messageConstants';
 import {ShowError} from './showError';
 import {endSession} from './endSession';
 import {setResolveAuditSpinner,setSafetySpinner,setInventoryReportSpinner} from '../actions/spinnerAction';
@@ -59,7 +58,7 @@ export function AjaxParse(store,res,cause,status,saltParams)
 			store.dispatch(setAuditSpinner(false));
 			break;
 		case GET_ROLES:
-			let i,rolesArr = [];
+			let rolesArr=[];
 			if(res.roles){
 				rolesArr=res.roles;				
 			}
@@ -115,7 +114,7 @@ export function AjaxParse(store,res,cause,status,saltParams)
 		case CREATE_AUDIT:
 			if(res.alert_data)								
 		    {
-		    	if(res.alert_data[0].code === CODE_E027) {
+		    	if(res.alert_data[0].code=== CODE_E027) {
 		    		var skuInfo={ type:ERROR, msg:INVALID_SKUID};
 		    		store.dispatch(validateSKU(skuInfo));
 		    	}
@@ -187,7 +186,7 @@ export function AjaxParse(store,res,cause,status,saltParams)
         case AUDIT_RESOLVE_CONFIRMED:
         	if(res.successful.status)
 		    {
-		    	stringInfo = statusToString(res.successful)
+		    	stringInfo=statusToString(res.successful)
 		    	store.dispatch(notifySuccess(stringInfo.msg));
 		    }
 		    else {
@@ -243,21 +242,21 @@ export function AjaxParse(store,res,cause,status,saltParams)
 			store.dispatch(validatePassword(resumePwd));						
 			break;
 		case CHECK_SAFETY:
-			var safetyList = [], safetyResponse = res;
+			var safetyList=[], safetyResponse=res;
 			if(safetyResponse.data){
-				safetyList = safetyResponse.data;
+				safetyList=safetyResponse.data;
 			}
 			store.dispatch(getSafetyList(safetyList));
 			break;
 		case CONFIRM_SAFETY:
-			var rejectList = [], rejectResponse = res, modalFlag = true;
+			var rejectList=[], rejectResponse=res, modalFlag=true;
 			if(rejectResponse.data){
-				rejectList = rejectResponse.data;
+				rejectList=rejectResponse.data;
 				if(!rejectList.length){
 					store.dispatch(notifySuccess(ES));                          					
 				}
 				else{
-					modalFlag = false;
+					modalFlag=false;
 				}
 			}
 			else if(rejectResponse.alert_data){
@@ -270,8 +269,8 @@ export function AjaxParse(store,res,cause,status,saltParams)
 			break;
 
 		case ITEM_RECALLED:
-				res.status = ITEM_RECALLED_DATA;
-				stringInfo = statusToString(res)
+				res.status=ITEM_RECALLED_DATA;
+				stringInfo=statusToString(res)
 		    	store.dispatch(notifySuccess(stringInfo.msg));
 		break;
 
@@ -308,5 +307,6 @@ export function AjaxParse(store,res,cause,status,saltParams)
 			break;
 		default:
 			ShowError(store,cause,status);
+			break;
 	 }
 }  

@@ -15,7 +15,7 @@ class GorPaginateV2 extends React.Component {
         if(current_query.page){
             currentPage=+current_query.page
         }
-        this.state = {currentPage: currentPage, totalPage: props.totalPage, currentQuery: currentPage}
+        this.state={currentPage: currentPage, totalPage: props.totalPage, currentQuery: currentPage}
     }
 
     componentWillReceiveProps(nextProps) {
@@ -33,7 +33,7 @@ class GorPaginateV2 extends React.Component {
 
     submit(e) {
         e.preventDefault()
-        var regex = /^\d+$/; // used for validation of numeric key by user
+        var regex=/^\d+$/; // used for validation of numeric key by user
         if (regex.test(this.pageNum.value) && +this.pageNum.value > 0 && +this.pageNum.value <= this.state.totalPage) {
             this._navigateToPage(+this.pageNum.value)
 
@@ -44,8 +44,8 @@ class GorPaginateV2 extends React.Component {
     }
 
     _navigateToPage(page) {
-        let _query = this.props.location.query || {}
-        _query.page = page
+        let _query=this.props.location.query || {}
+        _query.page=page
        
         this.setState({currentQuery:page})
         hashHistory.push({pathname: this.props.location.pathname, query: _query})
@@ -54,9 +54,9 @@ class GorPaginateV2 extends React.Component {
 
 
     render() {
-        var paginateButton = {firstPg: "|<", lastPg: ">|", prevPg: "<", nextPg: ">"}
-        var currentPage = +this.state.currentQuery;
-        var totalPage = +this.state.totalPage;
+        var paginateButton={firstPg: "|<", lastPg: ">|", prevPg: "<", nextPg: ">"}
+        var currentPage=+this.state.currentQuery;
+        var totalPage=+this.state.totalPage;
         return (
             <div>
                 <div className="gor-paginate-wrap">
@@ -67,8 +67,8 @@ class GorPaginateV2 extends React.Component {
                                                   defaultMessage='Page'/>
                             </div>
                             <input className="gor-paginate-input-box" type="text" value={currentPage}
-                                   onChange={this._textSubmit.bind(this)} ref={node => {
-                                this.pageNum = node
+                                   onChange={this._textSubmit.bind(this)} ref={node=> {
+                                this.pageNum=node
                             }}/>
                             <div className="gor-paginate-text-wrap">
                                 <FormattedMessage id="paginate.page.pageNum" description='Heading for paginate pageNum'
@@ -77,7 +77,7 @@ class GorPaginateV2 extends React.Component {
                         </div>
                         <div className="gor-button-wrap">
                             <div
-                                className={currentPage ===1 ? "gor-paginate-left-btn gor-paginate-btn-disable" : "gor-paginate-left-btn"}
+                                className={currentPage===1 ? "gor-paginate-left-btn gor-paginate-btn-disable" : "gor-paginate-left-btn"}
                                 onClick={currentPage !== 1 ?this._navigateToPage.bind(this, 1):false}>
                                 <span className="gor-pagination-first"/>
                             </div>
@@ -87,12 +87,12 @@ class GorPaginateV2 extends React.Component {
                                 <span className="gor-pagination-previous"/>
                             </div>
                             <div
-                                className={(currentPage) === (totalPage) ? "gor-paginate-middle-right-btn gor-paginate-btn-disable" : "gor-paginate-middle-right-btn"}
+                                className={(currentPage)=== (totalPage) ? "gor-paginate-middle-right-btn gor-paginate-btn-disable" : "gor-paginate-middle-right-btn"}
                                 onClick={currentPage!==totalPage ? this._navigateToPage.bind(this, (currentPage + 1)) : false}>
                                 <span className="gor-pagination-next"/>
                             </div>
                             <div
-                                className={currentPage === totalPage ? "gor-paginate-right-btn gor-paginate-btn-disable" : "gor-paginate-right-btn"}
+                                className={currentPage=== totalPage ? "gor-paginate-right-btn gor-paginate-btn-disable" : "gor-paginate-right-btn"}
                                 onClick={currentPage !== totalPage?this._navigateToPage.bind(this, totalPage):false}>
                                 <span className="gor-pagination-last"/>
                             </div>

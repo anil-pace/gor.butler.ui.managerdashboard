@@ -24,19 +24,19 @@ class WavesTable extends React.Component {
     constructor(props) {
         super(props);
         if (this.props.items && this.props.items.length) {
-            this._dataList = new tableRenderer(this.props.items.length);
+            this._dataList=new tableRenderer(this.props.items.length);
         }
         else {
-            this._dataList = new tableRenderer(0);
+            this._dataList=new tableRenderer(0);
         }
-        this._defaultSortIndexes = [];
-        this._dataList.newData = this.props.items || [];
-        var size = this._dataList.getSize();
-        for (var index = 0; index < size; index++) {
+        this._defaultSortIndexes=[];
+        this._dataList.newData=this.props.items || [];
+        var size=this._dataList.getSize();
+        for (var index=0; index < size; index++) {
             this._defaultSortIndexes.push(index);
         }
-        var columnWidth = (this.props.containerWidth / this.props.itemNumber);
-        this.state = {
+        var columnWidth=(this.props.containerWidth / this.props.itemNumber);
+        this.state={
             sortedDataList: this._dataList,
             colSortDirs: {},
             columnWidths: {
@@ -49,9 +49,9 @@ class WavesTable extends React.Component {
                 totalOrders: columnWidth
             },
         };
-        this._onSortChange = this._onSortChange.bind(this);
-        this._onFilterChange = this._onFilterChange.bind(this);
-        this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+        this._onSortChange=this._onSortChange.bind(this);
+        this._onFilterChange=this._onFilterChange.bind(this);
+        this._onColumnResizeEndCallback=this._onColumnResizeEndCallback.bind(this);
     }
 
     shouldComponentUpdate(nextProps) {
@@ -64,19 +64,19 @@ class WavesTable extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.items && nextProps.items.length) {
-            this._dataList = new tableRenderer(nextProps.items.length);
+            this._dataList=new tableRenderer(nextProps.items.length);
         }
         else {
-            this._dataList = new tableRenderer(0);
+            this._dataList=new tableRenderer(0);
         }
-        this._defaultSortIndexes = [];
-        this._dataList.newData = nextProps.items;
-        var size = this._dataList.getSize();
-        for (var index = 0; index < size; index++) {
+        this._defaultSortIndexes=[];
+        this._dataList.newData=nextProps.items;
+        var size=this._dataList.getSize();
+        for (var index=0; index < size; index++) {
             this._defaultSortIndexes.push(index);
         }
-        var columnWidth = (nextProps.containerWidth / nextProps.itemNumber)
-        this.state = {
+        var columnWidth=(nextProps.containerWidth / nextProps.itemNumber)
+        this.state={
             sortedDataList: this._dataList,
             colSortDirs: {},
             columnWidths: {
@@ -89,15 +89,15 @@ class WavesTable extends React.Component {
                 totalOrders: columnWidth
             },
         };
-        this._onSortChange = this._onSortChange.bind(this);
-        this._onFilterChange = this._onFilterChange.bind(this);
-        this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+        this._onSortChange=this._onSortChange.bind(this);
+        this._onFilterChange=this._onFilterChange.bind(this);
+        this._onColumnResizeEndCallback=this._onColumnResizeEndCallback.bind(this);
         this._onFilterChange(nextProps.getWaveFilter);
 
     }
 
     _onColumnResizeEndCallback(newColumnWidth, columnKey) {
-        this.setState(({columnWidths}) => ({
+        this.setState(({columnWidths})=> ({
             columnWidths: {
                 ...columnWidths,
                 [columnKey]: newColumnWidth,
@@ -106,15 +106,15 @@ class WavesTable extends React.Component {
     }
 
     _onFilterChange(e) {
-        var filterField = ["startTime", "id", "status", "cutOffTime"], newData;
+        var filterField=["startTime", "id", "status", "cutOffTime"], newData;
         if (e.target && !e.target.value) {
             this.setState({
                 sortedDataList: this._dataList,
             });
         }
-        if (e.target && (e.target.value || e.target.value === "")) {
-            var captureValue = e.target.value;
-            newData = new DataListWrapper(filterIndex(e, this.state.sortedDataList, filterField), this._dataList)
+        if (e.target && (e.target.value || e.target.value=== "")) {
+            var captureValue=e.target.value;
+            newData=new DataListWrapper(filterIndex(e, this.state.sortedDataList, filterField), this._dataList)
 
             this.setState({
                 sortedDataList: newData
@@ -127,7 +127,7 @@ class WavesTable extends React.Component {
         }
 
         else {
-            newData = new DataListWrapper(filterIndex(e, this.state.sortedDataList, filterField), this._dataList);
+            newData=new DataListWrapper(filterIndex(e, this.state.sortedDataList, filterField), this._dataList);
             this.setState({
                 sortedDataList: newData
             }, function () {
@@ -139,12 +139,12 @@ class WavesTable extends React.Component {
     }
 
     _onSortChange(columnKey, sortDir) {
-        if (columnKey === GOR_STATUS) {
-            columnKey = GOR_STATUS_PRIORITY;
+        if (columnKey=== GOR_STATUS) {
+            columnKey=GOR_STATUS_PRIORITY;
         }
-        var sortIndexes = this._defaultSortIndexes.slice();
+        var sortIndexes=this._defaultSortIndexes.slice();
         if (this.state.sortedDataList._indexMap) {
-            sortIndexes = this.state.sortedDataList._indexMap.slice();
+            sortIndexes=this.state.sortedDataList._indexMap.slice();
         }
         this.setState({
             sortedDataList: new DataListWrapper(sortData(columnKey, sortDir, sortIndexes, this._dataList), this._dataList),
@@ -161,21 +161,21 @@ class WavesTable extends React.Component {
   render() {
 
 
-    var {sortedDataList, colSortDirs,columnWidths} = this.state;  
-    var heightRes = 500, totalwave = sortedDataList.getSize(), pendingWave = this.props.waveState.pendingWave, progressWave = this.props.waveState.progressWave, completedWaves = this.props.waveState.completedWaves ;
-    var orderRemaining = this.props.waveState.orderRemaining.toLocaleString(), totalOrders = this.props.waveState.totalOrders.toLocaleString(), headerAlert = <div/>;
+    var {sortedDataList, colSortDirs,columnWidths}=this.state;  
+    var heightRes=500, totalwave=sortedDataList.getSize(), pendingWave=this.props.waveState.pendingWave, progressWave=this.props.waveState.progressWave, completedWaves=this.props.waveState.completedWaves ;
+    var orderRemaining=this.props.waveState.orderRemaining.toLocaleString(), totalOrders=this.props.waveState.totalOrders.toLocaleString(), headerAlert=<div/>;
 
     if(this.props.containerHeight !== 0) {
-      heightRes = this.props.containerHeight;
+      heightRes=this.props.containerHeight;
     }
     if(this.props.waveState.alertNum && this.props.waveState.alertNum !== 0) {
-     headerAlert =  <div className="gorToolHeaderEl alertState"> <div className="table-subtab-alert-icon"/> <div className="gor-inline">{this.props.waveState.alertNum} Alerts </div> </div>
+     headerAlert= <div className="gorToolHeaderEl alertState"> <div className="table-subtab-alert-icon"/> <div className="gor-inline">{this.props.waveState.alertNum} Alerts </div> </div>
     }
-    var noData = <div/>;
-    if(totalwave === 0 || totalwave === undefined || totalwave === null) {
-     noData =  <div className="gor-no-data"> <FormattedMessage id="waves.table.noData" description="No data message for waves table" 
-        defaultMessage ="No Waves Found"/>  </div>
-     heightRes = GOR_TABLE_HEADER_HEIGHT;
+    var noData=<div/>;
+    if(totalwave=== 0 || totalwave=== undefined || totalwave=== null) {
+     noData= <div className="gor-no-data"> <FormattedMessage id="waves.table.noData" description="No data message for waves table" 
+        defaultMessage="No Waves Found"/>  </div>
+     heightRes=GOR_TABLE_HEADER_HEIGHT;
     }
     return (
       <div className="gorTableMainContainer">
@@ -352,7 +352,7 @@ class WavesTable extends React.Component {
         );
     }
 }
-WavesTable.PropTypes = {
+WavesTable.PropTypes={
     items: React.PropTypes.array,
     containerWidth: React.PropTypes.number,
     itemNumber: React.PropTypes.number,

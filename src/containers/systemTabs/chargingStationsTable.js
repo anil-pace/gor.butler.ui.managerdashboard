@@ -1,15 +1,12 @@
 import React from 'react';
-import {Table, Column, Cell} from 'fixed-data-table';
+import {Table, Column} from 'fixed-data-table';
 import Dimensions from 'react-dimensions'
 import {FormattedMessage} from 'react-intl';
-import {connect} from 'react-redux';
 import {currentTableState} from '../../actions/tableDataAction'
 import {
     SortHeaderCell,
     tableRenderer,
-    SortTypes,
     TextCell,
-    ComponentCell,
     StatusCell,
     filterIndex,
     DataListWrapper,
@@ -17,23 +14,18 @@ import {
 } from '../../components/commonFunctionsDataTable';
 import {GOR_STATUS, GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
 
-
-
-var tempGlobal = 0;
 class ChargingStationsTable extends React.Component {
     constructor(props) {
         super(props);
-        var items = this.props.items || [];
-        var temp = new Array(items ? items.length : 0).fill(false);
-        this._dataList = new tableRenderer(items ? items.length : 0);
-        this._defaultSortIndexes = [];
-        this._dataList.newData = items;
-        var size = this._dataList.getSize();
-        for (var index = 0; index < size; index++) {
+        var items=this.props.items || [];
+        this._dataList=new tableRenderer(items ? items.length : 0);
+        this._defaultSortIndexes=[];
+        this._dataList.newData=items;
+        var size=this._dataList.getSize();
+        for (var index=0; index < size; index++) {
             this._defaultSortIndexes.push(index);
         }
-        var columnWidth = (this.props.containerWidth / this.props.itemNumber);
-        this.state = {
+        this.state={
             sortedDataList: this._dataList,
             colSortDirs: {},
             columnWidths: {
@@ -43,23 +35,21 @@ class ChargingStationsTable extends React.Component {
                 dockedBots: this.props.containerWidth * 0.6
             },
         };
-        this._onSortChange = this._onSortChange.bind(this);
-        this._onFilterChange = this._onFilterChange.bind(this);
-        this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+        this._onSortChange=this._onSortChange.bind(this);
+        this._onFilterChange=this._onFilterChange.bind(this);
+        this._onColumnResizeEndCallback=this._onColumnResizeEndCallback.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
-        var items = nextProps.items || [];
-        var temp = new Array(items ? items.length : 0).fill(false);
-        this._dataList = new tableRenderer(items ? items.length : 0);
-        this._defaultSortIndexes = [];
-        this._dataList.newData = items;
-        var size = this._dataList.getSize();
-        for (var index = 0; index < size; index++) {
+        var items=nextProps.items || [];
+        this._dataList=new tableRenderer(items ? items.length : 0);
+        this._defaultSortIndexes=[];
+        this._dataList.newData=items;
+        var size=this._dataList.getSize();
+        for (var index=0; index < size; index++) {
             this._defaultSortIndexes.push(index);
         }
-        var columnWidth = (nextProps.containerWidth / nextProps.itemNumber)
-        this.state = {
+        this.state={
             sortedDataList: this._dataList,
             colSortDirs: {},
             columnWidths: {
@@ -69,21 +59,21 @@ class ChargingStationsTable extends React.Component {
                 dockedBots: nextProps.containerWidth * 0.6
             },
         };
-        this._onSortChange = this._onSortChange.bind(this);
-        this._onFilterChange = this._onFilterChange.bind(this);
-        this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+        this._onSortChange=this._onSortChange.bind(this);
+        this._onFilterChange=this._onFilterChange.bind(this);
+        this._onColumnResizeEndCallback=this._onColumnResizeEndCallback.bind(this);
         this._onFilterChange(nextProps.getCsFilter);
     }
 
     shouldComponentUpdate(nextProps) {
-        if (this.props.items && nextProps.items.length === 0) {
+        if (this.props.items && nextProps.items.length=== 0) {
             return false;
         }
         return true;
     }
 
     _onColumnResizeEndCallback(newColumnWidth, columnKey) {
-        this.setState(({columnWidths}) => ({
+        this.setState(({columnWidths})=> ({
             columnWidths: {
                 ...columnWidths,
                 [columnKey]: newColumnWidth,
@@ -92,15 +82,15 @@ class ChargingStationsTable extends React.Component {
     }
 
     _onFilterChange(e) {
-        var filterField = ["mode", "id", "status", "dockedBots"], newData;
+        var filterField=["mode", "id", "status", "dockedBots"], newData;
         if (e.target && !e.target.value) {
             this.setState({
                 sortedDataList: this._dataList,
             });
         }
-        if (e.target && (e.target.value || e.target.value === "")) {
-            var captureValue = e.target.value;
-            newData = new DataListWrapper(filterIndex(e, this.state.sortedDataList, filterField), this._dataList)
+        if (e.target && (e.target.value || e.target.value=== "")) {
+            var captureValue=e.target.value;
+            newData=new DataListWrapper(filterIndex(e, this.state.sortedDataList, filterField), this._dataList)
 
             this.setState({
                 sortedDataList: newData
@@ -113,7 +103,7 @@ class ChargingStationsTable extends React.Component {
         }
 
         else {
-            newData = new DataListWrapper(filterIndex(e, this.state.sortedDataList, filterField), this._dataList);
+            newData=new DataListWrapper(filterIndex(e, this.state.sortedDataList, filterField), this._dataList);
             this.setState({
                 sortedDataList: newData
             }, function () {
@@ -129,12 +119,12 @@ class ChargingStationsTable extends React.Component {
 
     _onSortChange(columnKey, sortDir) {
 
-        if (columnKey === GOR_STATUS) {
-            columnKey = GOR_STATUS_PRIORITY;
+        if (columnKey=== GOR_STATUS) {
+            columnKey=GOR_STATUS_PRIORITY;
         }
-        var sortIndexes = this._defaultSortIndexes.slice();
+        var sortIndexes=this._defaultSortIndexes.slice();
         if (this.state.sortedDataList._indexMap) {
-            sortIndexes = this.state.sortedDataList._indexMap.slice();
+            sortIndexes=this.state.sortedDataList._indexMap.slice();
         }
         this.setState({
             sortedDataList: new DataListWrapper(sortData(columnKey, sortDir, sortIndexes, this._dataList), this._dataList),
@@ -147,24 +137,22 @@ class ChargingStationsTable extends React.Component {
     }
 
     render() {
-        let updateStatusIntl = "";
-
-        var {sortedDataList, colSortDirs, columnWidths} = this.state;
-        var rowsCount = sortedDataList.getSize();
-        let manual = this.props.chargersState.manualMode;
-        let auto = this.props.chargersState.automaticMode;
-        let totalBots = this.props.chargersState.connectedBots;
-        let csConnected = this.props.chargersState.csConnected;
-        var containerHeight = this.props.containerHeight;
-        var noData = <div/>;
-        if (rowsCount === 0 || rowsCount === undefined || rowsCount === null) {
-            noData = <div className="gor-no-data"><FormattedMessage id="ChargingStations.table.noData"
+        var {sortedDataList, colSortDirs, columnWidths}=this.state;
+        var rowsCount=sortedDataList.getSize();
+        let manual=this.props.chargersState.manualMode;
+        let auto=this.props.chargersState.automaticMode;
+        let totalBots=this.props.chargersState.connectedBots;
+        let csConnected=this.props.chargersState.csConnected;
+        var containerHeight=this.props.containerHeight;
+        var noData=<div/>;
+        if (rowsCount=== 0 || rowsCount=== undefined || rowsCount=== null) {
+            noData=<div className="gor-no-data"><FormattedMessage id="ChargingStations.table.noData"
                                                                     description="No data message for ChargingStations table"
                                                                     defaultMessage="No Charging Stations Found"/></div>
-            containerHeight = GOR_TABLE_HEADER_HEIGHT;
+            containerHeight=GOR_TABLE_HEADER_HEIGHT;
         }
 
-        var tableRenderer = <div className="gorTableMainContainer">
+        var tableRenderer=<div className="gorTableMainContainer">
             <Table
                 rowHeight={50}
                 rowsCount={rowsCount}
@@ -284,7 +272,7 @@ class ChargingStationsTable extends React.Component {
     }
 }
 
-ChargingStationsTable.PropTypes = {
+ChargingStationsTable.PropTypes={
     items: React.PropTypes.array,
     containerWidth: React.PropTypes.number,
     itemNumber: React.PropTypes.number,

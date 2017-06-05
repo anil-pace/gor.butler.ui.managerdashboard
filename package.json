@@ -27,6 +27,7 @@
     "react-dropdown": "^1.2.0",
     "react-hot-loader": "^3.0.0-beta.5",
     "react-intl": "^2.1.5",
+    "react-intl-cra": "^0.2.0",
     "react-intl-redux": "^0.1.0",
     "react-intl-webpack-plugin": "0.0.3",
     "react-paginate": "^2.2.3",
@@ -49,10 +50,11 @@
     "start-js": "react-scripts start",
     "build-dev": " npm-run-all -p watch-css start-js",
     "build-prod": "npm run build-css && npm run post-css && react-scripts build",
-    "start": "REACT_APP_FILE_EXT= npm run build-dev",
-    "build": "REACT_APP_FILE_EXT=.min npm run build-prod",
+    "start": "npm run translate && REACT_APP_FILE_EXT= npm run build-dev",
+    "build": "npm run translate && REACT_APP_FILE_EXT=.min npm run build-prod",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "translate": "react-intl-cra './src/**/*.js' './src/translations/en-US.json'"
   },
   "homepage": "./"
 }

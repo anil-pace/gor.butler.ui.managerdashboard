@@ -1,5 +1,4 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
 import {showTableFilter, filterApplied,ppsfilterState,togglePPSFilter,setDefaultRange} from '../../actions/filterAction';
@@ -18,21 +17,21 @@ class PPSFilter extends React.Component{
   constructor(props) 
   {
       super(props);
-        this.state = {tokenSelected: {"STATUS":["all"], "MODE":["all"]}, searchQuery: {},
+        this.state={tokenSelected: {"STATUS":["all"], "MODE":["all"]}, searchQuery: {},
                       defaultToken: {"STATUS":["all"], "MODE":["all"]}, rangeSelected:{"minValue":["-1"],"maxValue":["500"]}}; 
     }
 
 
     _closeFilter() {
-        let filterState = !this.props.showFilter;
+        let filterState=!this.props.showFilter;
         this.props.showTableFilter(false);
     } 
 
      _processPPSSearchField(){
-        const filterInputFields = [{value:"PPS ID", label:<FormattedMessage id="pps.inputField.id" defaultMessage ="PPS ID"/>}, 
-                    {value:"OPERATOR ASSIGNED", label:<FormattedMessage id="pps.inputField.oprator" defaultMessage ="OPERATOR ASSIGNED"/>}];
-        let inputValue = this.state.searchQuery;
-        let inputField = <FilterInputFieldWrap inputText={filterInputFields} handleInputText={this._handleInputQuery.bind(this)} inputValue={inputValue}/>
+        const filterInputFields=[{value:"PPS ID", label:<FormattedMessage id="pps.inputField.id" defaultMessage="PPS ID"/>}, 
+                    {value:"OPERATOR ASSIGNED", label:<FormattedMessage id="pps.inputField.oprator" defaultMessage="OPERATOR ASSIGNED"/>}];
+        let inputValue=this.state.searchQuery;
+        let inputField=<FilterInputFieldWrap inputText={filterInputFields} handleInputText={this._handleInputQuery.bind(this)} inputValue={inputValue}/>
         return inputField;           
     }
 
@@ -56,24 +55,24 @@ class PPSFilter extends React.Component{
 
 
     _processFilterToken() {
-        let tokenField1 = {value:"STATUS", label:<FormattedMessage id="pps.token.status" defaultMessage ="STATUS"/>};
-        let tokenField2 = {value:"MODE", label:<FormattedMessage id="pps.token.timePeriod" defaultMessage ="MODE"/>}; 
-       let labelC1 = [
-                    { value: 'all', label: <FormattedMessage id="pps.STATUS.all" defaultMessage ="Any"/>},
-                    { value: 'on', label: <FormattedMessage id="pps.STATUS.stopped" defaultMessage ="On"/>},
-                    { value: 'off', label: <FormattedMessage id="pps.STATUS.error" defaultMessage ="Off"/>}
+        let tokenField1={value:"STATUS", label:<FormattedMessage id="pps.token.status" defaultMessage="STATUS"/>};
+        let tokenField2={value:"MODE", label:<FormattedMessage id="pps.token.timePeriod" defaultMessage="MODE"/>}; 
+       let labelC1=[
+                    { value: 'all', label: <FormattedMessage id="pps.STATUS.all" defaultMessage="Any"/>},
+                    { value: 'on', label: <FormattedMessage id="pps.STATUS.stopped" defaultMessage="On"/>},
+                    { value: 'off', label: <FormattedMessage id="pps.STATUS.error" defaultMessage="Off"/>}
                     ];
-        let labelC2 = [
-                    { value: 'all', label: <FormattedMessage id="pps.MODE.all" defaultMessage ="Any"/>},
-                    { value: 'pick', label: <FormattedMessage id="pps.MODE.pick" defaultMessage ="Pick"/>},
-                    { value: 'put', label: <FormattedMessage id="pps.MODE.put" defaultMessage ="Put"/>},
-                    { value: 'audit', label: <FormattedMessage id="pps.MODE.audit" defaultMessage ="Audit"/>},
-                    { value: 'notset', label: <FormattedMessage id="v.MODE.notset" defaultMessage ="Not set"/>}
+        let labelC2=[
+                    { value: 'all', label: <FormattedMessage id="pps.MODE.all" defaultMessage="Any"/>},
+                    { value: 'pick', label: <FormattedMessage id="pps.MODE.pick" defaultMessage="Pick"/>},
+                    { value: 'put', label: <FormattedMessage id="pps.MODE.put" defaultMessage="Put"/>},
+                    { value: 'audit', label: <FormattedMessage id="pps.MODE.audit" defaultMessage="Audit"/>},
+                    { value: 'notset', label: <FormattedMessage id="v.MODE.notset" defaultMessage="Not set"/>}
                     ]; 
-        let selectedToken =  this.state.tokenSelected;
-        let column1 = <FilterTokenWrap field={tokenField1} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC1} selectedToken={selectedToken}/>;
-        let column2 = <FilterTokenWrap field={tokenField2} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC2} selectedToken={selectedToken}/>;
-        let columnDetail = {column1token:column1, column2token:column2};
+        let selectedToken= this.state.tokenSelected;
+        let column1=<FilterTokenWrap field={tokenField1} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC1} selectedToken={selectedToken}/>;
+        let column2=<FilterTokenWrap field={tokenField2} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC2} selectedToken={selectedToken}/>;
+        let columnDetail={column1token:column1, column2token:column2};
         return columnDetail;
     }
 
@@ -108,26 +107,26 @@ class PPSFilter extends React.Component{
 
 
     _applyFilter() {
-        let filterState = this.state, _query = {};
+        let filterState=this.state, _query={};
         if (filterState.searchQuery) {
 
             if (filterState.searchQuery && filterState.searchQuery["OPERATOR ASSIGNED"]) {
-                _query.operator = filterState.searchQuery["OPERATOR ASSIGNED"]
+                _query.operator=filterState.searchQuery["OPERATOR ASSIGNED"]
             }
 
             if (filterState.searchQuery && filterState.searchQuery["PPS ID"]) {
-                _query.pps_id = filterState.searchQuery["PPS ID"]
+                _query.pps_id=filterState.searchQuery["PPS ID"]
             }
 
             if (filterState.rangeSelected && (filterState.rangeSelected["maxValue"] || filterState.rangeSelected["minValue"])) {
-                _query.minRange = filterState.rangeSelected["minValue"] || 0
-                _query.maxRange = filterState.rangeSelected["maxValue"]
+                _query.minRange=filterState.rangeSelected["minValue"] || 0
+                _query.maxRange=filterState.rangeSelected["maxValue"]
             }
             if (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !== "all") {
-                _query.status = filterState.tokenSelected["STATUS"]
+                _query.status=filterState.tokenSelected["STATUS"]
             }
             if (filterState.tokenSelected["MODE"] && filterState.tokenSelected["MODE"][0] !== "all") {
-                _query.mode = filterState.tokenSelected["MODE"]
+                _query.mode=filterState.tokenSelected["MODE"]
             }
             hashHistory.push({pathname: "/system/pps", query: _query})
         }
@@ -143,10 +142,10 @@ class PPSFilter extends React.Component{
     }
   render(){
     
-        var ppsDetail = this.props.PPSDetail;
-        var noOrder = ppsDetail.PPStypeDetail && ppsDetail.PPStypeDetail.length?false:true;
-        let ppsSearchField = this._processPPSSearchField();
-        let ppsFilterToken = this._processFilterToken();
+        var ppsDetail=this.props.PPSDetail;
+        var noOrder=ppsDetail.PPStypeDetail && ppsDetail.PPStypeDetail.length?false:true;
+        let ppsSearchField=this._processPPSSearchField();
+        let ppsFilterToken=this._processFilterToken();
         let rangeSlider=this._handleRangeSlider();
     return (
       <div>
@@ -184,7 +183,7 @@ function mapStateToProps(state, ownProps){
   };
 }
 
-var mapDispatchToProps = function(dispatch){
+var mapDispatchToProps=function(dispatch){
   return {
     showTableFilter: function(data){dispatch(showTableFilter(data));},
     filterApplied: function(data){dispatch(filterApplied(data));},

@@ -19,17 +19,17 @@ import {GOR_STATUS, GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT} from '../../co
 class ButlerBotTable extends React.Component {
     constructor(props) {
         super(props);
-        var items = this.props.items || [];
-        var temp = new Array(items ? items.length : 0).fill(false);
-        this._dataList = new tableRenderer(items ? items.length : 0);
-        this._defaultSortIndexes = [];
-        this._dataList.newData = items;
-        var size = this._dataList.getSize();
-        for (var index = 0; index < size; index++) {
+        var items=this.props.items || [];
+        var temp=new Array(items ? items.length : 0).fill(false);
+        this._dataList=new tableRenderer(items ? items.length : 0);
+        this._defaultSortIndexes=[];
+        this._dataList.newData=items;
+        var size=this._dataList.getSize();
+        for (var index=0; index < size; index++) {
             this._defaultSortIndexes.push(index);
         }
-        var columnWidth = (this.props.containerWidth / this.props.itemNumber);
-        this.state = {
+        var columnWidth=(this.props.containerWidth / this.props.itemNumber);
+        this.state={
             sortedDataList: this._dataList,
             colSortDirs: {},
             columnWidths: {
@@ -41,30 +41,30 @@ class ButlerBotTable extends React.Component {
                 voltage: this.props.containerWidth * 0.3
             },
         };
-        this._onSortChange = this._onSortChange.bind(this);
-        this._onFilterChange = this._onFilterChange.bind(this);
-        this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+        this._onSortChange=this._onSortChange.bind(this);
+        this._onFilterChange=this._onFilterChange.bind(this);
+        this._onColumnResizeEndCallback=this._onColumnResizeEndCallback.bind(this);
     }
 
     shouldComponentUpdate(nextProps) {
-        if (this.props.items && nextProps.items.length === 0) {
+        if (this.props.items && nextProps.items.length=== 0) {
             return false;
         }
         return true;
     }
 
     componentWillReceiveProps(nextProps) {
-        var items = nextProps.items || [];
-        var temp = new Array(items ? items.length : 0).fill(false);
-        this._dataList = new tableRenderer(items ? items.length : 0);
-        this._defaultSortIndexes = [];
-        this._dataList.newData = items;
-        var size = this._dataList.getSize();
-        for (var index = 0; index < size; index++) {
+        var items=nextProps.items || [];
+        var temp=new Array(items ? items.length : 0).fill(false);
+        this._dataList=new tableRenderer(items ? items.length : 0);
+        this._defaultSortIndexes=[];
+        this._dataList.newData=items;
+        var size=this._dataList.getSize();
+        for (var index=0; index < size; index++) {
             this._defaultSortIndexes.push(index);
         }
-        var columnWidth = (nextProps.containerWidth / nextProps.itemNumber)
-        this.state = {
+        var columnWidth=(nextProps.containerWidth / nextProps.itemNumber)
+        this.state={
             sortedDataList: this._dataList,
             colSortDirs: {},
             columnWidths: {
@@ -76,14 +76,14 @@ class ButlerBotTable extends React.Component {
                 voltage: nextProps.containerWidth * 0.35
             },
         };
-        this._onSortChange = this._onSortChange.bind(this);
-        this._onFilterChange = this._onFilterChange.bind(this);
-        this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+        this._onSortChange=this._onSortChange.bind(this);
+        this._onFilterChange=this._onFilterChange.bind(this);
+        this._onColumnResizeEndCallback=this._onColumnResizeEndCallback.bind(this);
         this._onFilterChange(nextProps.getButlerFilter);
     }
 
     _onColumnResizeEndCallback(newColumnWidth, columnKey) {
-        this.setState(({columnWidths}) => ({
+        this.setState(({columnWidths})=> ({
             columnWidths: {
                 ...columnWidths,
                 [columnKey]: newColumnWidth,
@@ -97,10 +97,10 @@ class ButlerBotTable extends React.Component {
                 sortedDataList: this._dataList,
             });
         }
-        var filterField = ["current", "id", "status", "msu", "location"], newData;
-        if (e.target && (e.target.value || e.target.value === "")) {
-            var captureValue = e.target.value;
-            newData = new DataListWrapper(filterIndex(e, this.state.sortedDataList, filterField), this._dataList)
+        var filterField=["current", "id", "status", "msu", "location"], newData;
+        if (e.target && (e.target.value || e.target.value=== "")) {
+            var captureValue=e.target.value;
+            newData=new DataListWrapper(filterIndex(e, this.state.sortedDataList, filterField), this._dataList)
 
             this.setState({
                 sortedDataList: newData
@@ -113,7 +113,7 @@ class ButlerBotTable extends React.Component {
         }
 
         else {
-            newData = new DataListWrapper(filterIndex(e, this.state.sortedDataList, filterField), this._dataList);
+            newData=new DataListWrapper(filterIndex(e, this.state.sortedDataList, filterField), this._dataList);
             this.setState({
                 sortedDataList: newData
             }, function () {
@@ -126,12 +126,12 @@ class ButlerBotTable extends React.Component {
 
 
     _onSortChange(columnKey, sortDir) {
-        if (columnKey === GOR_STATUS) {
-            columnKey = GOR_STATUS_PRIORITY;
+        if (columnKey=== GOR_STATUS) {
+            columnKey=GOR_STATUS_PRIORITY;
         }
-        var sortIndexes = this._defaultSortIndexes.slice();
+        var sortIndexes=this._defaultSortIndexes.slice();
         if (this.state.sortedDataList._indexMap) {
-            sortIndexes = this.state.sortedDataList._indexMap.slice();
+            sortIndexes=this.state.sortedDataList._indexMap.slice();
         }
         this.setState({
             sortedDataList: new DataListWrapper(sortData(columnKey, sortDir, sortIndexes, this._dataList), this._dataList),
@@ -146,24 +146,24 @@ class ButlerBotTable extends React.Component {
 
 
     render() {
-        var {sortedDataList, colSortDirs, columnWidths} = this.state;
-        var totalBot = sortedDataList.getSize();
-        let pick = this.props.parameters.Pick;
-        let put = this.props.parameters.Put;
-        let charging = this.props.parameters.Charging;
-        let idle = this.props.parameters.Idle;
-        let msuMounted = this.props.parameters.msuMounted;
-        let locations = this.props.parameters.location;
-        let voltage = this.props.parameters.avgVoltage;
-        let onlineBots = this.props.parameters.online;
-        var containerHeight = this.props.containerHeight;
-        var noData = <div/>;
+        var {sortedDataList, colSortDirs, columnWidths}=this.state;
+        var totalBot=sortedDataList.getSize();
+        let pick=this.props.parameters.Pick;
+        let put=this.props.parameters.Put;
+        let charging=this.props.parameters.Charging;
+        let idle=this.props.parameters.Idle;
+        let msuMounted=this.props.parameters.msuMounted;
+        let locations=this.props.parameters.location;
+        let voltage=this.props.parameters.avgVoltage;
+        let onlineBots=this.props.parameters.online;
+        var containerHeight=this.props.containerHeight;
+        var noData=<div/>;
 
-        if (totalBot === 0 || totalBot === undefined || totalBot === null) {
-            noData = <div className="gor-no-data"><FormattedMessage id="butlerbot.table.noData"
+        if (totalBot=== 0 || totalBot=== undefined || totalBot=== null) {
+            noData=<div className="gor-no-data"><FormattedMessage id="butlerbot.table.noData"
                                                                     description="No data message for butlerbot table"
                                                                     defaultMessage="No Butler Bot Found"/></div>
-            containerHeight = GOR_TABLE_HEADER_HEIGHT;
+            containerHeight=GOR_TABLE_HEADER_HEIGHT;
         }
 
         return (
@@ -327,7 +327,7 @@ class ButlerBotTable extends React.Component {
         );
     }
 }
-ButlerBotTable.PropTypes = {
+ButlerBotTable.PropTypes={
     items: React.PropTypes.array,
     containerWidth: React.PropTypes.number,
     itemNumber: React.PropTypes.number,

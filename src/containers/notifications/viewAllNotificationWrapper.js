@@ -15,7 +15,7 @@ import {GTableRow} from "../../components/gor-table-component/tableRow";
 import NotificationDescription from '../../components/notifications/notificationDescription';
 import Spinner from '../../components/spinner/Spinner';
 import {NOTIFICATIONS_URL} from "../../constants/configConstants";
-import {GET,GET_ALL_NOTIFICATIONS,APP_JSON,SEARCHED_NOTIFICATIONS_DATA_ALL} from "../../constants/frontEndConstants";
+import {GET,GET_ALL_NOTIFICATIONS,APP_JSON,SEARCHED_NOTIFICATIONS_DATA_ALL,DEFAULT_NOTIFICATION_ROW_LENGTH,DESC,ASC} from "../../constants/frontEndConstants";
 import {getNotificationData,
 	resetNotificationTableData,
 	setNotificationSpinner} from '../../actions/notificationAction';
@@ -65,7 +65,7 @@ class ViewAllNotificationWrapper extends React.Component{
                 'url':NOTIFICATIONS_URL+"?page="+this.state.page+"&size="
                 +this.state.size
                 +"&sort="+this.state.sort
-                +"&order="+(this.state.order ? "DESC" : "ASC")
+                +"&order="+(this.state.order ? DESC : ASC)
                 +(this.state.searchTerm ? "&searchTerm="+this.state.searchTerm : ""),
                 'method':GET,
                 'cause':GET_ALL_NOTIFICATIONS,
@@ -88,7 +88,7 @@ class ViewAllNotificationWrapper extends React.Component{
 			
 			for(let i =0 ; i < dataLen ; i++){
 				let tableRow = [];
-				let createDate = new Date(new Date(data[i].createTime).toLocaleString("en-US",{timeZone: "Asia/Kolkata"}))
+				let createDate = new Date(new Date(data[i].createTime).toLocaleString("en-US",{timeZone: this.props.timeOffset}))
 				tableRow.push(<NotificationDescription>
 								<p className="title">{data[i].title}</p>
 								<p className="desc">{data[i].description}</p>
@@ -101,11 +101,11 @@ class ViewAllNotificationWrapper extends React.Component{
 			
 
 		}
-		processedData.header = [{id:1,text: "Description", sortable: false},
-             			{id:2,text: "Time", sortable: true,defaultOrder:(this.state.order ? "DESC" : "ASC")}
+		processedData.header = [{id:1,text: <FormattedMessage id="notification.table.description" description='Table first head' defaultMessage='Description'/>, sortable: false},
+             			{id:2,text: <FormattedMessage id="notification.table.time" description='Table second head' defaultMessage='Time'/>, sortable: true,defaultOrder:(this.state.order ? DESC : ASC)}
              ];
         processedData.offset = 0;
-        processedData.max= tableRows.length || 15;
+        processedData.max= tableRows.length || DEFAULT_NOTIFICATION_ROW_LENGTH;
 		return processedData;
 	}
 
@@ -136,12 +136,7 @@ class ViewAllNotificationWrapper extends React.Component{
         	page:0,
         	searchTerm:value
         },function(){
-        	if(this.state.searchTerm){
         		this._fetchNotificationData({lazyData:false});
-        	}
-        	else{
-        		this.props.resetNotificationTableData(false);
-        	}
         })
 	}
 
@@ -163,7 +158,7 @@ class ViewAllNotificationWrapper extends React.Component{
 			<div className="gor-modal-content">
             <div className='gor-modal-head'>
             <span className="close" onClick={this._closeModal.bind(this)}>×</span>
-              <p className="modal-head-text">Notifications</p>
+              <p className="modal-head-text"><FormattedMessage id="notification.all.head" description='Notification head' defaultMessage='Notifications'/></p>
                <div className="modal-search-input">
                <div className="viewAllNotSearch">
                <form action="#" onSubmit={(e) => this._handleSubmit(e)}>
@@ -183,7 +178,7 @@ class ViewAllNotificationWrapper extends React.Component{
                     <GTableHeader>
                         {processedData.header.map(function (header, index) {
                             return <GTableHeaderCell key={index} header={header} onClick={header.sortable ? self._onSortChange.bind(self, header) : false}>
-                                	<span>{header.text}</span><span className="sortIcon">{header.sortable && header.defaultOrder === "DESC" ? '↑' : (header.sortable ? '↓' :'') }</span>
+                                	<span>{header.text}</span><span className="sortIcon">{header.sortable && header.defaultOrder === DESC ? '↑' : (header.sortable ? '↓' :'') }</span>
                                 </GTableHeaderCell>
 
                         })}
@@ -193,7 +188,7 @@ class ViewAllNotificationWrapper extends React.Component{
                             return (
                                 <GTableRow key={idx} index={idx} offset={processedData.offset} max={processedData.max} data={processedData.filteredData}>
                                     {row.map(function (text, index) {
-                                        return <div key={index} style={processedData.header[index].width?{flex:'1 0 '+processedData.header[index].width+"%"}:{}} className="cell" title={processedData.header[index].text}>
+                                        return <div key={index} style={processedData.header[index].width?{flex:'1 0 '+processedData.header[index].width+"%"}:{}} className="cell" >
                                             {text}
                                         </div>
                                     })}
@@ -220,7 +215,8 @@ function mapStateToProps(state, ownProps) {
         "isLoading":state.notificationReducer.isLoading,
         "searchedAllNotificationData":state.notificationReducer.searchedAllNotificationData,
         "searchAppliedAllNotifications":state.notificationReducer.searchAppliedAllNotifications,
-        "dataFound":state.notificationReducer.dataFound
+        "dataFound":state.notificationReducer.dataFound,
+        "timeOffset":state.authLogin.timeOffset
     }
 }
 function mapDispatchToProps(dispatch){

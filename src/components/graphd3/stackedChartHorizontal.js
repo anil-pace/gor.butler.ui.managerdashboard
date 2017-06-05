@@ -5,27 +5,25 @@ import {SCH_CONFIG} from '../../constants/frontEndConstants';
 import { defineMessages } from 'react-intl';
 
 //Mesages for internationalization
-const messages = defineMessages({
+const messages=defineMessages({
     invUsedSpace: {
         id: 'snapshot.inventory.usedSpace',
         description: 'Text for used space',
         defaultMessage: "{utilisedSpace}% space utilized",
     }
-
-
 });
 
 
 
 
-const RD3Component = rd3.Component;
+const RD3Component=rd3.Component;
 
 
 class StackedChartHorizontal extends React.Component{
   constructor(props) 
   {
      super(props);
-    this.state = {d3: ''}
+    this.state={d3: ''}
    }
 
 
@@ -44,26 +42,24 @@ class StackedChartHorizontal extends React.Component{
     
   }
 
- 
-   
   _processData(data,config){
-    var config = SCH_CONFIG;
-    var node = document.createElement('div');
-    var svg = d3.select(node).append('svg')
+    config=SCH_CONFIG;
+    var node=document.createElement('div');
+    var svg=d3.select(node).append('svg')
       .attr("width", config.svgInfo.width)
       .attr("height", config.svgInfo.height)
       .append("g")
       .attr("transform", "translate(" + config.svgInfo.x + "," + config.svgInfo.y + ")");
-    var totalSpaceUtilization = data ? data.warehouse_utilization : 0;
-    var totalSpaceInPx = (totalSpaceUtilization/100)*config.svgInfo.width;
-    var unusedSpace = data ? data.unusedSpace : 100;
-    var unusedColorCode = data ? data.colorCode : "#EEE";
-     data = data.category_data ? data.category_data : [];
-    var x = 0;//utilisedSpace=0;
+    var totalSpaceUtilization=data ? data.warehouse_utilization : 0;
+    var totalSpaceInPx=(totalSpaceUtilization/100)*config.svgInfo.width;
+    var unusedSpace=data ? data.unusedSpace : 100;
+    var unusedColorCode=data ? data.colorCode : "#EEE";
+     data=data.category_data ? data.category_data : [];
+    var x=0;//utilisedSpace=0;
     var values={"utilisedSpace":totalSpaceUtilization};
 
     if(unusedSpace){
-    for(let i = 0, l =data.length ; i< l ; i++){
+    for(let i=0, l=data.length ; i< l ; i++){
       
       svg.append("rect")
       .attr("x",x+"px")
@@ -90,10 +86,10 @@ class StackedChartHorizontal extends React.Component{
      if(totalSpaceUtilization){
       let textXPos=x-14;
       if(textXPos < 0){
-        textXPos = 0
+        textXPos=0
       }
       else if(textXPos >=config.svgInfo.width ){
-        textXPos = config.svgInfo.width - 170;
+        textXPos=config.svgInfo.width - 170;
       }
       svg.append("line")
       .attr("x1",totalSpaceInPx+"px")
@@ -131,7 +127,7 @@ StackedChartHorizontal.propTypes={
   snapshotData:React.PropTypes.object,
   hasDataChanged:React.PropTypes.bool
 }
-StackedChartHorizontal.contextTypes ={
+StackedChartHorizontal.contextTypes={
  intl:React.PropTypes.object.isRequired
 }
 

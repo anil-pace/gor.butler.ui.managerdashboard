@@ -1,16 +1,11 @@
 import React  from 'react';
-import ReactDOM  from 'react-dom';
 import { FormattedMessage,FormattedDate } from 'react-intl';
 
 class AccordianBar extends React.Component{
-	constructor(props)  
-	{
-    	super(props);
-    }
 	render(){
 		return (
 			<div> 
-			<div className={this.props.showPanel?"gor-utility-accordian-open":"gor-utility-updown-bar"}  onClick={() => this.props.handleAccordianState(this.props.index)}>
+			<div className={this.props.showPanel?"gor-utility-accordian-open":"gor-utility-updown-bar"}  onClick={()=> this.props.handleAccordianState(this.props.index)}>
 	    							<div className="gor-inline gor-utility-accordian-arrow-wrap">
 	    								<div className={this.props.showPanel?"gor-down-arrow":"gor-right-arrow"}/>
 	    							</div>
@@ -61,7 +56,7 @@ class AccordianBar extends React.Component{
 	    						  	<div className="gor-utility-master-arrordian-h1">
 	    						  		<div className="gor-inline gor-utility-accordian-h1"><FormattedMessage id="utility.uploadHist.resultFile" description='Result file' 
 	    						  		defaultMessage='Result File:' /></div>
-	    						  		<a href={this.props.data.response_file?this.props.data.response_file:"javascript:void(0)"} download className="gor-inline gor-utility-accordian-button gor-utility-accordian-h3">
+	    						  		<a href={this.props.data.response_file?this.props.data.response_file:"javascript:void(0)"} download className="gor-inline gor-utility-accordian-button gor-utility-accordian-h3"> 
 	    						  		<FormattedMessage id="utility.uploadHist.download" description='Download' 
 	    						  		defaultMessage='Download' />
 	    						  		</a>

@@ -1,9 +1,10 @@
 import {ERROR,SUCCESS} from '../constants/frontEndConstants';
-import {BUTLER_SUPERVISOR,BUTLER_UI} from '../constants/backEndConstants'
+import {BUTLER_SUPERVISOR} from '../constants/backEndConstants'
 import {EMPTY_PWD,TYPE_SUCCESS,EMPTY_NAME,INVALID_NAME,INVALID_PWD_OP,INVALID_PWD_MG,MATCH_PWD,INVALID_LOCID,INVALID_SKUID,INVALID_ID,INVALID_FORMAT} from '../constants/messageConstants';
 
 export function nameStatus(firstname,lastname){
-          let nameInfo, format=  /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+  // eslint-disable-next-line
+          let nameInfo, format=  /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/; 
           if(!firstname.length||!lastname.length||firstname.length>50||lastname.length>50)
           {
             nameInfo={
@@ -37,7 +38,7 @@ export function passwordStatus(pswd,confirmPswd,selectedRole){
               msg:EMPTY_PWD           
             };            
           }
-          else if(pswd!=confirmPswd)
+          else if(pswd!==confirmPswd)
           {
              passwordInfo={
               type:ERROR,
@@ -116,7 +117,7 @@ export function skuStatus(skuId)
       return skuInfo;
 }
 export function idStatus(userid)
-{
+{   // eslint-disable-next-line
     let idInfo,format=  /[!@#$%^&*()_+\-=\[\]{};':"\\|,<>\/?]/;
     if(userid.length<1||userid.length>30)
     {
