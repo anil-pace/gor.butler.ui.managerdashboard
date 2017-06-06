@@ -1,0 +1,32 @@
+.gor-modal-content{
+	&.pps-close{
+		.gor-modal-head{
+			position:relative;
+		}
+	}
+}
+.pps-close-wrap{
+	margin: auto;
+    width: 60%;
+    margin-top: 30px;
+    .pps-close-head{
+    	.left-sec{
+    		width: 50%;
+    		display: inline-block;
+    	}
+    	.right-sec{
+    		width: 50%;
+		    display: inline-block;
+		    text-align: right;
+    	}
+    	.close-all-link{
+    		padding: 0 10px;
+		    color: #2892BE;
+		    border-right: 1px solid #C0C0C0;
+    	}
+    	.fclose-all-link{
+    		padding: 0 10px;
+		    color: #2892BE;
+    	}
+    }
+}

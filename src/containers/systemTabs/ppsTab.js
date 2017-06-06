@@ -42,6 +42,9 @@ import DropdownTable from '../../components/dropdown/dropdownTable'
 import {PPS_MODE_CHANGE_URL, API_URL} from '../../constants/configConstants';
 import {PPS_MODE_CHANGE, APP_JSON, PUT} from '../../constants/frontEndConstants';
 
+import {modal} from 'react-redux-modal';
+import ClosePPSList from './closePPSList';
+
 //Mesages for internationalization
 const messages=defineMessages({
     namePrefix: {
@@ -218,6 +221,23 @@ class PPS extends React.Component {
         this.setState({sortedDataList:updatedList})
     }
 
+    /*handler for status change*/
+    handleStatusChange(selection){
+        console.log(this.props.checkedPps);
+        if(selection.value !== "open"){
+             modal.add(ClosePPSList, {
+                title: '',
+                heading:<FormattedMessage id="pps.close.heading"
+                       description='Heading for Close PPS'
+                       defaultMessage='Close PPS'/>,
+                size: 'large', // large, medium or small,
+                closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+                hideCloseButton: true,
+                checkedPPS: this.props.checkedPps
+            });
+        }
+    }
+
     handleModeChange(data) {
         var checkedPPS=[], j=0, mode=data.value, sortedIndex;
         for (var i=this.props.checkedPps.length - 1; i >= 0; i--) {
@@ -289,7 +309,7 @@ class PPS extends React.Component {
 
         }
 
-        let drop, selected=0
+        let drop, selected=0, statusDrop;
         let pickDrop=<FormattedMessage id="PPS.table.pickDrop" description="pick dropdown option for PPS"
                                          defaultMessage="Put"/>
         let putDrop=<FormattedMessage id="PPS.table.putDrop" description="put dropdown option for PPS"
@@ -301,15 +321,21 @@ class PPS extends React.Component {
             {value: 'pick', label: putDrop},
             {value: 'audit', label: auditDrop}
         ];
-        if (this.props.bDropRender=== true) {
-            drop=<DropdownTable styleClass={'gorDataTableDrop'}
-                                  placeholder={this.props.intlMessages["pps.dropdown.placeholder"]} items={modes}
+        const status = [
+            {value: 'open', label: "Open Selected PPS"},
+            {value: 'close', label: "Close Selected PPS"}
+        ];
+        //if (this.props.bDropRender=== true) {
+            drop=<DropdownTable disabled={!this.props.bDropRender} styleClass={'gorDataTableDrop'}
+                                  placeholder={this.props.intlMessages["pps.dropdown.placeholder"]}
+                                    items={modes}
                                   changeMode={this.handleModeChange.bind(this)}/>;
-        }
-
-        else {
-            drop=<div/>;
-        }
+        
+            statusDrop = <DropdownTable disabled={!this.props.bDropRender} styleClass={'gorDataTableDrop'}
+                                  placeholder={"Change PPS Status"}
+                                    items={status}
+                                  changeMode={this.handleStatusChange.bind(this)}/>;
+       
         if (this.props.checkedPps) {
             for (let i=this.props.checkedPps.length - 1; i >= 0; i--) {
                 if (this.props.checkedPps[i]=== true) {
@@ -340,12 +366,16 @@ class PPS extends React.Component {
                                                               values={{selected: selected ? selected : '0'}}/>
                                         </div>
                                     </div>
-                                    <div className="gorToolBarDropDown">
-                                        {drop}
-                                    </div>
+                                    
                                 </div>
 
                                 <div className="filterWrapper">
+                                <div className="gorToolBarDropDown pps">
+                                        {statusDrop}
+                                            </div>
+                                <div className="gorToolBarDropDown pps">
+                                        {drop}
+                                    </div>
                                     <div className="gorToolBarDropDown">
                                         <div className="gor-button-wrap">
                                             <div
@@ -359,6 +389,7 @@ class PPS extends React.Component {
                                             </button>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
 

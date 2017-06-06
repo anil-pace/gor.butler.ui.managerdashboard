@@ -165,7 +165,7 @@ body {
 .overview-tile-ontime-icon,
 .statusOl, .statusAl, .iStock, .iAudit, .iPick, .gor-login-user, .gor-login-password, .gor-login-error, .gor-tick, .gor-question, .gor-tick-white, .gor-remove-white, .gor-error-white, .gor-login-user-error, .gor-login-password-error, .gor-question-2, .gor-operation-tick, .gor-alert-lg,
 .gor-dropdown-open, .gor-dropdown-close, .gor-caution, .gor-delay-icon,
-.gor-emergency-dropdown-close, .gor-emergency-dropdown-open, .gor-info-icon, .gor-selected-icon, .Dropdown-arrow {
+.gor-emergency-dropdown-close, .gor-emergency-dropdown-open, .gor-info-icon, .gor-selected-icon {
   background-image: url(./images/icons.svg);
 }
 
@@ -3100,6 +3100,10 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   padding-left: 10px;
   display: inline-block;
   vertical-align: 8px;
+}
+
+.gorToolBarDropDown.pps {
+  vertical-align: middle;
 }
 
 .gorToolBarWrap {
@@ -6068,4 +6072,36 @@ button:disabled {
 .gor-csvUploadWrap .gor-csvUpload {
   opacity: 0;
   cursor: pointer;
+}
+
+.gor-modal-content.pps-close .gor-modal-head {
+  position: relative;
+}
+
+.pps-close-wrap {
+  margin: auto;
+  width: 60%;
+  margin-top: 30px;
+}
+
+.pps-close-wrap .pps-close-head .left-sec {
+  width: 50%;
+  display: inline-block;
+}
+
+.pps-close-wrap .pps-close-head .right-sec {
+  width: 50%;
+  display: inline-block;
+  text-align: right;
+}
+
+.pps-close-wrap .pps-close-head .close-all-link {
+  padding: 0 10px;
+  color: #2892BE;
+  border-right: 1px solid #C0C0C0;
+}
+
+.pps-close-wrap .pps-close-head .fclose-all-link {
+  padding: 0 10px;
+  color: #2892BE;
 }

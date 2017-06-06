@@ -1374,7 +1374,7 @@ padding-top: 6px;
   vertical-align: middle;
 }
 
-.gorToolBarElements {
+.gorToolBarElements{
   display: inline-block;
   vertical-align: sub;
   padding-right: 10px;
@@ -1384,6 +1384,9 @@ padding-top: 6px;
 padding-left: 10px;
   display: inline-block;
   vertical-align: 8px;
+  &.pps{
+    vertical-align: middle;
+  }
 }
 
 .gorToolBarWrap {
