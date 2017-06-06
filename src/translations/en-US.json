@@ -1267,6 +1267,11 @@
     "filepath": "./src/containers/auditTab.js"
   },
   {
+    "id": "auditdetail.auditCancelled.prefix",
+    "defaultMessage": "Cancelled",
+    "filepath": "./src/containers/auditTab.js"
+  },
+  {
     "id": "audit.table.heading",
     "description": "Heading for audit table",
     "defaultMessage": "Audit Tasks",
@@ -1398,6 +1403,12 @@
     "id": "audit.table.deleteRecord",
     "description": "deleteRecord option for audit",
     "defaultMessage": "Delete record",
+    "filepath": "./src/containers/auditTab/auditTable.js"
+  },
+  {
+    "id": "audit.table.cancelTask",
+    "description": "cancel option for task",
+    "defaultMessage": "Cancel Task",
     "filepath": "./src/containers/auditTab/auditTable.js"
   },
   {

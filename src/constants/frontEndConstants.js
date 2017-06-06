@@ -160,6 +160,7 @@ export const UPDATE_FILE_SIZE="UPDATE_FILE_SIZE";
 export const MASTER_FILE_FORMATS=[".csv"];
 
 export const AUDIT_RETRIEVE="AUDIT_RETRIEVE";
+export const CANCEL_AUDIT="CANCEL_AUDIT";
 export const RECIEVE_AUDIT_DATA="RECIEVE_AUDIT_DATA";
 export const CREATE_AUDIT='CREATE_AUDIT';
 export const DELETE_AUDIT='DELETE_AUDIT';
@@ -183,6 +184,7 @@ export const HIDE=3;
 export const DELETION=4;
 export const NOTIFY_PASS='NOTIFY_PASS';
 export const NOTIFY_DELETE='NOTIFY_DELETE';
+export const NOTIFY_CANCEL='NOTIFY_CANCEL';
 export const NOTIFY_FAIL='NOTIFY_FAIL';
 export const NOTIFY_INFO='NOTIFY_INFO';
 export const NOTIFY_HIDE='NOTIFY_HIDE';

@@ -85,6 +85,20 @@ export function sortData (columnKey, sortDir,sortIndexes,_dataList) {
 	 return sortIndexes;
 }
 
+
+function auditTaskActions(data, index,tasksList){
+    let taskList_copy=tasksList.slice()
+    if(data.newData && !data.newData[index].cancellable){
+        delete taskList_copy[2]
+    }
+
+    if(data.newData && !data.newData[index].deletable){
+        delete taskList_copy[1]
+    }
+
+    return taskList_copy
+}
+
 export class DataListWrapper {
   constructor(indexMap, data) {
     this._indexMap=indexMap;
@@ -199,6 +213,19 @@ export const StatusCell=({rowIndex, data, columnKey,statusKey, ...props})=> (
   </Cell>
 );
 
+export const AuditStatusCell=({rowIndex, data, columnKey,statusKey,descriptionKey, ...props})=> (
+  <Cell {...props}>
+      <Cell className={[data.getObjectAt(rowIndex)[statusKey]] } style={{padding:0}}>
+          <div>
+              {data.getObjectAt(rowIndex)[columnKey]}
+          </div>
+      </Cell>
+
+      {descriptionKey && data.getObjectAt(rowIndex)[descriptionKey]?<div className="cancellingText">{data.getObjectAt(rowIndex)[descriptionKey]}</div>:null}
+
+  </Cell>
+);
+
 export const ResolveCell=({rowIndex, data, columnKey, checkStatus, screenId, ...props})=> (
   <Cell {...props}>
   {screenId===VIEW_AUDIT_ISSUES?
@@ -239,7 +266,7 @@ export const ActionCellAudit=({rowIndex, data, columnKey, tasks, handleAudit,man
       </button>):''}
     </div>
     <div className="gor-audit-actions-drop" >
-      <DropdownTable  styleClass={'gorDataTableDrop'} placeholder={placeholderText} items={tasks} changeMode={manageAuditTask.bind(this,rowIndex)}/>
+      <DropdownTable  styleClass={'gorDataTableDrop'} placeholder={placeholderText} items={auditTaskActions(data,rowIndex,tasks)} changeMode={manageAuditTask.bind(this,rowIndex)}/>
     </div>
   </Cell>
 );
@@ -300,3 +327,97 @@ export class SortHeaderCell extends React.Component {
       );
   }
 }
+
+export const AuditIssuesTooltipCell = ({rowIndex, data, columnKey, setClass, callBack, resolved, unresolved, ...props}) => (
+    <Cell {...props}>
+
+
+        {data.getObjectAt(rowIndex)[unresolved] || data.getObjectAt(rowIndex).status==="Created" ?
+
+
+
+            <div  className="gor-tool-tip-hover" style={{fontSize:16,color:'black'}} onMouseEnter={callBack}>
+                {data.getObjectAt(rowIndex)[columnKey]} <span className="gor-info-icon"/>
+            </div>:data.getObjectAt(rowIndex)[columnKey]
+
+
+        }
+
+
+        {(data.getObjectAt(rowIndex)[resolved] && data.getObjectAt(rowIndex)[unresolved]) ?
+            <div className="gor-tooltip">
+                <div className="gor-tooltip-arrow"/>
+                <div className="gor-tooltip-text-wrap">
+                    <div className="gor-tooltip-heading">
+                        <FormattedMessage id="audit.resolveUnresolve"
+                                          description='resolveUnresolve issue for audit table'
+                                          defaultMessage='{resolvedCount} audit lines, {unresolvedCount} audit lines'
+                                          values={{
+                                              resolvedCount: data.getObjectAt(rowIndex)[resolved],
+                                              unresolvedCount: data.getObjectAt(rowIndex)[unresolved]
+                                          }}/>
+                    </div>
+                    <div className="gor-tooltip-datalines">
+                        <div>
+
+                            <FormattedMessage id="audit.resolveUnresolve.tooltip.content"
+                                              description='unresolve issue for audit table'
+                                              defaultMessage=' Approve or reject audit line with issues'
+                                              values={{unresolvedCount: data.getObjectAt(rowIndex)[unresolved] ? data.getObjectAt(rowIndex)[unresolved] : "0"}}/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            : ""
+        }
+
+        {(!data.getObjectAt(rowIndex)[resolved] && data.getObjectAt(rowIndex)[unresolved]) ?
+            <div className="gor-tooltip">
+                <div className="gor-tooltip-arrow"/>
+                <div className="gor-tooltip-text-wrap">
+                    <div className="gor-tooltip-heading">
+                        <FormattedMessage id="audit.unresolveIssues.tooltip.header"
+                                          description='unresolve issue for audit table'
+                                          defaultMessage='{unresolvedCount} {unresolvedCount,plural, one {unresolved audit line} other{unresolved audit lines}}'
+                                          values={{unresolvedCount: data.getObjectAt(rowIndex)[unresolved] ? data.getObjectAt(rowIndex)[unresolved] : "0"}}/>
+                    </div>
+                    <div className="gor-tooltip-datalines">
+                        <div>
+                            <FormattedMessage id="audit.unresolveIssues.tooltip.content"
+                                              description='unresolve issue for audit table'
+                                              defaultMessage=' Approve or reject audit line with issues'
+                                              values={{unresolvedCount: data.getObjectAt(rowIndex)[unresolved] ? data.getObjectAt(rowIndex)[unresolved] : "0"}}/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            : ""
+        }
+
+
+        {data.getObjectAt(rowIndex).status==="Created"?
+            <div className="gor-tooltip">
+                <div className="gor-tooltip-arrow"/>
+                <div className="gor-tooltip-text-wrap">
+                    <div className="gor-tooltip-heading">
+                        <FormattedMessage id="audit.created.tooltip.header"
+                                          description='resolveUnresolve issue for audit table'
+                                          defaultMessage='Assign PPS to start audit task'/>
+                    </div>
+                    <div className="gor-tooltip-datalines">
+                        <div>
+
+                            <FormattedMessage id="audit.created.tooltip.content"
+                                              description='unresolve issue for audit table'
+                                              defaultMessage=' Click on "Start Audit" to assign PPS'/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            :""
+        }
+
+    </Cell>
+);

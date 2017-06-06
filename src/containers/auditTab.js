@@ -1,13 +1,13 @@
 import React  from 'react';
 import Spinner from '../components/spinner/Spinner';
 import {connect} from 'react-redux';
-import { FILTER_AUDIT_ID} from '../constants/configConstants';
-import {getAuditData, setAuditRefresh,auditListRefreshed,setTextBoxStatus} from '../actions/auditActions';
+import { FILTER_AUDIT_ID,CANCEL_AUDIT_URL} from '../constants/configConstants';
+import {getAuditData, setAuditRefresh,auditListRefreshed,setTextBoxStatus,cancelAudit} from '../actions/auditActions';
 import AuditTable from './auditTab/auditTable';
 import {getPageData} from '../actions/paginationAction';
 import {
     AUDIT_RETRIEVE,
-    GET,
+    GET,PUT,
     APP_JSON,
     GOR_COMPLETED_STATUS,
     LOCATION,
@@ -28,7 +28,7 @@ import {
     sortAuditHead,
     sortOrder,
     ALL,
-    ANY,WS_ONSEND,toggleOrder
+    ANY,WS_ONSEND,toggleOrder,CANCEL_AUDIT
 } from '../constants/frontEndConstants';
 import {
     SEARCH_AUDIT_URL,
@@ -92,6 +92,14 @@ const messages=defineMessages({
     auditReAudited: {
         id: "auditdetail.auditReaudited.prefix",
         defaultMessage: "Re-audited"
+    },
+    auditCancelled: {
+        id: "auditdetail.auditCancelled.prefix",
+        defaultMessage: "Cancelled"
+    },
+    auditCancellingText: {
+        id: "auditdetail.auditCancellingText.text",
+        defaultMessage: "Cancelling..."
     },
 
 
@@ -239,6 +247,20 @@ class AuditTab extends React.Component {
     }
 
 
+    _cancelAudit(auditId) {
+        let url = CANCEL_AUDIT_URL + auditId
+        let cancelAuditData = {
+            'url': url,
+            'method': PUT,
+            'cause': CANCEL_AUDIT,
+            'token': this.props.auth_token,
+            'contentType': APP_JSON
+        }
+        this.props.setAuditSpinner(true);
+        this.props.cancelAudit(cancelAuditData)
+    }
+
+
     _processAuditData(data, nProps) {
         nProps=this;
         data=nProps.props.auditDetail;
@@ -252,7 +274,10 @@ class AuditTab extends React.Component {
         let rejected=nProps.context.intl.formatMessage(messages.auditRejected);
         let resolved=nProps.context.intl.formatMessage(messages.auditResolved);
         let reAudited=nProps.context.intl.formatMessage(messages.auditReAudited);
+        let auditCancelled=nProps.context.intl.formatMessage(messages.auditCancelled);
         var timeOffset=nProps.props.timeOffset || "";
+        // cancellable: audit_pending, audit_waiting, audit_conflicting,audit_accepted, audit_started, audit_tasked
+        //resolve issues first and then cancel: pending approval
         var auditStatus={
             "audit_created": created,
             "audit_pending": pending,
@@ -266,7 +291,8 @@ class AuditTab extends React.Component {
             "audit_pending_approval": pendingApp,
             "audit_resolved": resolved,
             audit_rejected: rejected,
-            audit_reaudited: reAudited
+            audit_reaudited: reAudited,
+            audit_cancelled: auditCancelled
         };
         var statusClass={
             "audit_created": "pending",
@@ -281,7 +307,8 @@ class AuditTab extends React.Component {
             "audit_pending_approval": "breached",
             "audit_resolved": "progress",
             audit_rejected: "breached",
-            audit_reaudited: "completed"
+            audit_reaudited: "completed",
+            audit_cancelled: "cancelled"
         };
         var auditType={"sku": sku, "location": location};
         var auditDetails=[], auditData={};
@@ -343,6 +370,11 @@ class AuditTab extends React.Component {
                 else {
                     auditData.viewIssues=false;
                 }
+                if(["audit_pending", "audit_waiting", "audit_conflicting","audit_accepted", "audit_started", "audit_tasked","audit_rejected"].indexOf(data[i].audit_status)>-1){
+                    auditData.cancellable=true
+                }else{
+                    auditData.cancellable=false
+                }
             }
 
             if (data[i].start_actual_time) {
@@ -381,7 +413,7 @@ class AuditTab extends React.Component {
 
             else {
                 auditData.progress=0;
-                if (data[i].audit_status=== "audit_completed") {
+                if (["audit_completed"].indexOf(data[i].audit_status)>-1) {
                     auditData.progress=100;
                 }
             }
@@ -414,6 +446,13 @@ class AuditTab extends React.Component {
             }
             else {
                 auditData.completedTime="--";
+            }
+
+            if(data[i].cancel_request==="requested"){
+                auditData.cancelling=nProps.context.intl.formatMessage(messages.auditCancellingText)
+            }
+            if(data[i].audit_status==='audit_created'){
+                auditData.deletable=true
             }
             auditData.resolvedTask=data[i].resolved;
             auditData.unresolvedTask=data[i].unresolved;
@@ -593,7 +632,7 @@ render() {
     isFilterApplied={this.props.isFilterApplied}
     auditFilterStatus={this.props.auditFilterStatus}
     responseFlag={this.props.auditSpinner}
-    onSortChange={this._refresh.bind(this)}/>
+    onSortChange={this._refresh.bind(this)} cancelAudit={this._cancelAudit.bind(this)}/>
 
     let toolbar=<div>
     <div className="gor-filter-wrap"
@@ -670,7 +709,7 @@ function mapStateToProps(state, ownProps) {
         auditSpinner: state.spinner.auditSpinner || false,
         auditDetail: state.recieveAuditDetail.auditDetail || [],
         totalPage: state.recieveAuditDetail.totalPage || 0,
-        auditRefresh: state.recieveAuditDetail.auditRefresh || false,
+        auditRefresh: state.recieveAuditDetail.auditRefresh || null,
         intlMessages: state.intl.messages,
         auth_token: state.authLogin.auth_token,
         timeOffset: state.authLogin.timeOffset,
@@ -730,6 +769,9 @@ var mapDispatchToProps=function (dispatch) {
         },
          setTextBoxStatus: function (data) {
             dispatch(setTextBoxStatus(data));
+        },
+        cancelAudit:function(data){
+            dispatch(cancelAudit(data))
         }
 
     }

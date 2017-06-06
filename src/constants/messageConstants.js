@@ -188,4 +188,12 @@ export const fileUploadMessages={
       defaultMessage='Records in file should not be greater than'/>);
 export const utility001=(<FormattedMessage id="masterdata.maxlimit.filesize" description='File size should not be greater than' 
       defaultMessage='File size should not be greater than'/>);*/
+export const g020=(<FormattedMessage id="audit.cancellation.error.g020" description='Internal server error while requesting for audit cancel'
+                                   defaultMessage='Internal server error while requesting for audit cancel'/>);
+export const g021=(<FormattedMessage id="audit.cancellation.error.g021" description='Audit Id already sent to core for cancellation'
+                                   defaultMessage='Audit Id already sent to core for cancellation'/>);
+export const g023=(<FormattedMessage id="audit.cancellation.error.g023" description='Audit Id already successfully cancelled'
+                                   defaultMessage='Audit Id already successfully cancelled'/>);
+export const g024=(<FormattedMessage id="audit.cancellation.error.g024" description='Audit Id cancellation request has been process and cannot be cancelled'
+                                   defaultMessage='Audit Id cancellation request has been process and cannot be cancelled'/>);
 
