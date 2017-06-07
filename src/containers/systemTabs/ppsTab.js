@@ -223,7 +223,19 @@ class PPS extends React.Component {
 
     /*handler for status change*/
     handleStatusChange(selection){
-        console.log(this.props.checkedPps);
+      var checkedPPS=[], j=0, sortedIndex;
+        for (var i=this.props.checkedPps.length - 1; i >= 0; i--) {
+            if (this.props.checkedPps[i]=== true) {
+                if (this.state.sortedDataList.newData !== undefined) {
+                    checkedPPS[j]=this.state.sortedDataList.newData[i].ppsId;
+                }
+                else {
+                    sortedIndex=this.state.sortedDataList._indexMap[i];
+                    checkedPPS[j]=this.state.sortedDataList._data.newData[sortedIndex].ppsId;
+                }
+                j++;
+            }
+        }
         if(selection.value !== "open"){
              modal.add(ClosePPSList, {
                 title: '',
@@ -233,7 +245,7 @@ class PPS extends React.Component {
                 size: 'large', // large, medium or small,
                 closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
                 hideCloseButton: true,
-                checkedPPS: this.props.checkedPps
+                checkedPPS: checkedPPS
             });
         }
     }

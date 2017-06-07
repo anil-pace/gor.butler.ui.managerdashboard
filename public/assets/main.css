@@ -6105,3 +6105,125 @@ button:disabled {
   padding: 0 10px;
   color: #2892BE;
 }
+
+.pps-close-wrap .table-container {
+  margin-top: 30px;
+}
+
+.pps-close-wrap .table-container .table-header .cell {
+  border-top: none;
+}
+
+.table-container {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.table-container .cell {
+  overflow: hidden;
+}
+
+.table-container .table-header .cell {
+  font-weight: bold;
+  border: none;
+  border-top: 1px solid #DCDCDC;
+  border-bottom: 1px solid #DCDCDC;
+  background-color: #fff;
+  padding: 20px 5px;
+  cursor: pointer;
+}
+
+.table-container .table-header .cell.asc:after {
+  content: ' ';
+  margin-left: 2px;
+  height: 100%;
+}
+
+.table-container .table-header .cell.desc:after {
+  content: ' ';
+  margin-left: 2px;
+  line-height: 100%;
+}
+
+.table-container {
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+}
+
+.table-container .row {
+  display: -webkit-flex;
+  flex-direction: row;
+  background-color: white;
+  clear: both;
+}
+
+.table-container .cell {
+  padding: 0.5em;
+  border-bottom: 1px solid lightgrey;
+  flex: 1;
+}
+
+.table-container .table-body {
+  max-height: 60vh;
+  overflow: auto;
+}
+
+.table-container .table-body .cell {
+  padding: 15px 5px;
+}
+
+.table-container.table-striped .table-body .row:nth-child(even) {
+  background-color: #FaFaFa;
+}
+
+.table-container.table-striped .table-body .row:nth-child(odd) {
+  background-color: white;
+}
+
+.table-container.table-hover .table-body .row:hover {
+  background-color: #F2F2F2;
+}
+
+@media all and (max-width: 43.125em) {
+  .table-container .header {
+    display: none;
+  }
+  .table-container .row .cell:before {
+    content: attr(title);
+    width: 75px;
+    display: block;
+    background: #222;
+    color: #fff;
+    padding: .25em .5em;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .table-container .row {
+    flex-direction: column;
+  }
+  .table-container .row .cell {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    position: relative;
+    padding: 3em 0 1em 1em;
+  }
+}
+
+/* Fallbacks */
+.no-flexbox .table-container {
+  display: table;
+}
+
+.no-flexbox .row {
+  display: table-row;
+}
+
+.no-flexbox .cell {
+  display: table-cell;
+}

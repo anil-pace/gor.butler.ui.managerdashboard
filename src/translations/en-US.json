@@ -2994,6 +2994,24 @@
     "filepath": "./src/containers/systemTabs/chargingStationsTable.js"
   },
   {
+    "id": "ppsclose.tblhead1.text",
+    "description": "Table first head",
+    "defaultMessage": "SLOT ID",
+    "filepath": "./src/containers/systemTabs/closePPSList.js"
+  },
+  {
+    "id": "ppsclose.tblhead2.text",
+    "description": "Table second head",
+    "defaultMessage": "MSU Pending",
+    "filepath": "./src/containers/systemTabs/closePPSList.js"
+  },
+  {
+    "id": "ppsclose.tblhead3.text",
+    "description": "Table third head",
+    "defaultMessage": "ACTION",
+    "filepath": "./src/containers/systemTabs/closePPSList.js"
+  },
+  {
     "id": "NotificationTable.table.heading",
     "description": "Heading for NotificationTable",
     "defaultMessage": "Notifications",
@@ -3099,6 +3117,12 @@
     "id": "ppsDetail.performance.prefix.items",
     "description": "prefix for pps id in ppsDetail",
     "defaultMessage": "{performance} items/hr",
+    "filepath": "./src/containers/systemTabs/ppsTab.js"
+  },
+  {
+    "id": "pps.close.heading",
+    "description": "Heading for Close PPS",
+    "defaultMessage": "Close PPS",
     "filepath": "./src/containers/systemTabs/ppsTab.js"
   },
   {
