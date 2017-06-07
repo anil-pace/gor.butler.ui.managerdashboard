@@ -332,7 +332,7 @@ export const AuditIssuesTooltipCell = ({rowIndex, data, columnKey, setClass, cal
     <Cell {...props}>
 
 
-        {data.getObjectAt(rowIndex)[unresolved] || data.getObjectAt(rowIndex).status==="Created" ?
+        {data.getObjectAt(rowIndex)[unresolved] || data.getObjectAt(rowIndex).infoIcon?
 
 
 
@@ -396,8 +396,31 @@ export const AuditIssuesTooltipCell = ({rowIndex, data, columnKey, setClass, cal
             : ""
         }
 
+        {(!data.getObjectAt(rowIndex)[unresolved] && data.getObjectAt(rowIndex).infoIcon==='rejected') ?
+            <div className="gor-tooltip">
+                <div className="gor-tooltip-arrow"/>
+                <div className="gor-tooltip-text-wrap">
+                    <div className="gor-tooltip-heading">
+                        <FormattedMessage id="audit.rejected.tooltip.header"
+                                          description='rejected issue for audit table'
+                                          defaultMessage='{rejected_lines}/{total_lines} {rejected_lines,plural, one {audit line} other{audit lines}} were rejected'
+                                          values={{total_lines: data.getObjectAt(rowIndex).auditInfo.total_lines,rejected_lines:data.getObjectAt(rowIndex).auditInfo.rejected_lines}}/>
+                    </div>
+                    <div className="gor-tooltip-datalines">
+                        <div>
+                            <FormattedMessage id="audit.rejected.tooltip.content"
+                                              description='Re-audit the rejected audit lines'
+                                              defaultMessage=' Re-audit the rejected audit lines'/>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        {data.getObjectAt(rowIndex).status==="Created"?
+            : ""
+        }
+
+
+        {data.getObjectAt(rowIndex).infoIcon==="created"?
             <div className="gor-tooltip">
                 <div className="gor-tooltip-arrow"/>
                 <div className="gor-tooltip-text-wrap">

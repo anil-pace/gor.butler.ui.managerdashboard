@@ -122,7 +122,7 @@ class AuditTab extends React.Component {
          */
          this.props.auditListRefreshed()
      }
-     componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps) {
         if (nextProps.socketAuthorized && nextProps.auditListRefreshed && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)) || nextProps.auditRefresh!==this.props.auditRefresh)) { //Changes to refresh the table after creating audit
             let obj={},selectedToken;
             selectedToken=[nextProps.location.query.auditType];
@@ -453,6 +453,15 @@ class AuditTab extends React.Component {
             }
             if(data[i].audit_status==='audit_created'){
                 auditData.deletable=true
+                auditData.infoIcon="created"
+            }
+            if(data[i].audit_status==="audit_rejected"){
+                let total_lines=data[i].audit_info.length||0
+                let rejected_lines=data[i].audit_info.filter(function(audit_line){
+                    return audit_line.audit_line_status==="audit_rejected"
+                }).length
+                auditData.auditInfo={total_lines:total_lines,rejected_lines:rejected_lines}
+                auditData.infoIcon="rejected"
             }
             auditData.resolvedTask=data[i].resolved;
             auditData.unresolvedTask=data[i].unresolved;
