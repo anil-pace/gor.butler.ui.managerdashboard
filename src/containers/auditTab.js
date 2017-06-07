@@ -276,7 +276,7 @@ class AuditTab extends React.Component {
         let reAudited=nProps.context.intl.formatMessage(messages.auditReAudited);
         let auditCancelled=nProps.context.intl.formatMessage(messages.auditCancelled);
         var timeOffset=nProps.props.timeOffset || "";
-        // cancellable: audit_pending, audit_waiting, audit_conflicting,audit_accepted, audit_started, audit_tasked
+        // cancellable: "audit_pending", "audit_waiting", "audit_conflicting","audit_accepted", "audit_started", "audit_tasked","audit_rejected"
         //resolve issues first and then cancel: pending approval
         var auditStatus={
             "audit_created": created,
