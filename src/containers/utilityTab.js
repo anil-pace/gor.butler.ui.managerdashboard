@@ -40,6 +40,7 @@ import FieldError from '../components/fielderror/fielderror';
 import {defineMessages} from 'react-intl';
 import {updateSubscriptionPacket, setWsAction} from './../actions/socketActions'
 import {wsOverviewData} from './../constants/initData.js';
+import {FormattedMessage} from 'react-intl'
 
 //Mesages for internationalization
 const messages=defineMessages({
@@ -62,6 +63,11 @@ const messages=defineMessages({
         id: "utility.goodsRcvdNotes.head",
         description: 'Download Goods Recieved Notes',
         defaultMessage: "Download Goods Recieved Notes"
+    },
+    stockLedgerHead: {
+        id: "utility.stockLedgerHead.head",
+        description: 'Inventory Stock Ledger',
+        defaultMessage: "Inventory Stock Ledger"
     },
     uploadBtnText: {
         id: "utility.uploadBtn.label",
@@ -92,6 +98,7 @@ class UtilityTab extends React.Component {
         this.state={
             reportState: {},
             grnState: {},
+            stockLedgerState:{category:'all',duration:{today:false,yesterday:false},sku:""},
             prodStatusCalledOnLoad: false,
             utilityTabRefreshed: null
         };
@@ -130,6 +137,44 @@ class UtilityTab extends React.Component {
             newState.invoiceId=e.target.value;
             this.setState({grnState: newState});
         }
+    }
+
+    _handleChangeSkuNumber(e) {
+        if (e.target) {
+            var newState=this.state.stockLedgerState;
+            newState.sku=e.target.value;
+            this.setState({stockLedgerState: newState});
+        }
+    }
+
+    _handleChangeStockLedgerCategory(e){
+        if (e.target.value) {
+            var newState=this.state.stockLedgerState;
+            newState.category=e.target.value;
+            if(newState.category==='all'){
+                newState.sku=""
+            }
+            this.setState({stockLedgerState: newState});
+        }
+    }
+    _handleChangeStockLedgerDuration(e){
+        if(e.target){
+            let newState=this.state.stockLedgerState;
+            newState.duration[e.target.value]=e.target.checked
+            this.setState({stockLedgerState: newState});
+        }
+        console.log(this.state.stockLedgerState)
+    }
+
+    _validateStockLedgerButton(){
+        let stock_ledger_state=this.state.stockLedgerState
+        let validated=false
+        if(stock_ledger_state.category==="all" && (stock_ledger_state.duration.today||stock_ledger_state.duration.yesterday)){
+         validated=true
+        }else if(stock_ledger_state.category==="sku" && stock_ledger_state.sku.trim().length!==0 && (stock_ledger_state.duration.today||stock_ledger_state.duration.yesterday)){
+            validated=true
+        }
+        return validated
     }
 
     _renderDownReportTile() {
@@ -184,6 +229,63 @@ class UtilityTab extends React.Component {
                                       placeHolderText="Select format" changeMode={this._changeGrnFileType.bind(this)}
                                       currentState={currentState}/>)
         return grnTile;
+    }
+
+    _renderStockLedgertile() {
+        let current_state=this.state.stockLedgerState
+        let tile=[];
+        const fileType=[{value: 'csv', label: "Comma separated values (csv)"}, {
+            value: 'xlsx',
+            label: "ExceL Spreadsheet (xlsx)"
+        }];
+        let checkbox=<div key="0">
+            <div className="gor-utility-sku-wrap" style={{marginTop:10,marginBottom:10,fontSize:13}}>
+                <div>
+                    <input checked={current_state.category==='all'} onChange={this._handleChangeStockLedgerCategory.bind(this)} type="radio" id="all" name="stock_ledger" value="all"/>
+                    <label><FormattedMessage id="utility.stockLedger.category.all"
+                                             description="all"
+                                             defaultMessage="All"/></label>
+
+                </div>
+                <div><input checked={current_state.category==='sku'} onChange={this._handleChangeStockLedgerCategory.bind(this)} type="radio" id="sku" name="stock_ledger" value="sku"/>
+                    <label><FormattedMessage id="utility.stockLedger.category.sku"
+                                             description="sku"
+                                             defaultMessage="Specific SKU"/></label></div>
+            </div>
+        </div>
+        tile.push(checkbox)
+        var invoiceInput=<div key="1">
+            <div className="gor-audit-input-wrap gor-utility-sku-wrap">
+                <input value={current_state.sku} disabled={this.state.stockLedgerState.category==='all'} className="gor-audit-input gor-input-ok" placeholder="Enter SKU Number" onChange={this._handleChangeSkuNumber.bind(this)}/>
+                {this.props.validatedStockLedgerSKU ? <div className="gor-login-error"/> : ""}
+            </div>
+            {this.props.validatedStockLedgerSKU ?
+                <div className="gor-sku-error gor-utility-error-invoice"><FormattedMessage id="utility.stockLedger.incorrectSku"
+                                                                                           description="Please enter correct SKU"
+                                                                                           defaultMessage="Please enter correct SKU"/></div> : ''}
+        </div>
+        tile.push(invoiceInput)
+        tile.push(<div key="2" style={{marginBottom:10,fontSize:13}}>
+            <div className="gor-utility-stock-ledger-duration-label"> <FormattedMessage id="utility.stockLedger.duration.label"
+                                                                                        description="Time Duration:"
+                                                                                        defaultMessage="Time Duration:"/></div>
+            <div className="gor-utility-duration-wrap">
+                <div style={{width:'50%',float:'left'}}>
+
+                    <input onChange={this._handleChangeStockLedgerDuration.bind(this)} defaultChecked={current_state.duration.today} type="checkbox" id="today" value="today"/>
+                    <label><FormattedMessage id="utility.stockLedger.duration.today"
+                                             description="Today"
+                                             defaultMessage="Today"/></label>
+                </div>
+                <div style={{width:'50%',float:'right'}}>
+                    <input onChange={this._handleChangeStockLedgerDuration.bind(this)} defaultChecked={current_state.duration.yesterday} type="checkbox" id="yesterday" value="yesterday"/>
+                    <label><FormattedMessage id="utility.stockLedger.duration.yesterday"
+                                             description="Yesterday"
+                                             defaultMessage="Yesterday"/></label>
+                </div>
+            </div>
+        </div>)
+        return tile;
     }
 
     /**
@@ -258,6 +360,25 @@ class UtilityTab extends React.Component {
         this.props.validateInvoiceID(false)
     }
 
+    _downloadStockLedger() {
+        /**
+         * TODO:
+         * URL need to be refactored
+         * @type {*}
+         */
+        var stock_ledger_state=this.state.stockLedgerState;
+        var url=GR_REPORT_URL + "/" + "2"+'?format='+"pdf";
+        let data={
+            'url': url,
+            'method': GET,
+            'token': this.props.auth_token,
+            'cause': GR_REPORT_RESPONSE,
+            'responseType':'arraybuffer'
+        }
+        this.props.getGRdata(data)
+        this.props.validateInvoiceID(false)
+    }
+
     _requestExpiredItems() {
 
         let data={
@@ -316,13 +437,16 @@ class UtilityTab extends React.Component {
         var uploadDataTile=this._renderUploadDataTile();
         var downloadReportTile=this._renderDownReportTile();
         var grnTile=this._renderGRNtile();
+        let stockLedgerTile=this._renderStockLedgertile()
         var masterUpload=this._renderMasterUpload();
         var activeReportDownButton=(this.state.reportState.fileType && this.state.reportState.category) ? true : false;
         var activeGRNDownButton=(this.state.grnState.fileType && this.state.grnState.invoiceId) ? true : false;
+        var activeStockLedgerButton=this._validateStockLedgerButton()
         let show_gr_report=false
         let show_masterdata_upload=false
         let show_inventory_report=false
         let show_item_recall_scripts=false
+        let show_stock_ledger_widget=true
         try{
             if(!this.props.config.utility_tab.enabled){
                 return null
@@ -353,6 +477,12 @@ class UtilityTab extends React.Component {
             //Do nothing
         }
 
+        try {
+            show_stock_ledger_widget=this.props.config.utility_tab.widgets.show_stock_ledger_widget.abcd;
+        } catch (ex) {
+            //Do nothing
+        }
+
         return (
             <div >
                 <div>
@@ -376,6 +506,12 @@ class UtilityTab extends React.Component {
                                      showFooter={true}
                                      tileBody={grnTile} footerAction={this._downloadGRN.bind(this)}
                                      enableButton={activeGRNDownButton}/> : null}
+                    {show_stock_ledger_widget ?
+                        <UtilityTile tileHead={this.context.intl.formatMessage(messages.stockLedgerHead)}
+                                     showFooter={true}
+                                     tileBody={stockLedgerTile} footerAction={this._downloadStockLedger.bind(this)}
+                                     enableButton={activeStockLedgerButton}/> : null}
+
                 </div>
             </div>
         );

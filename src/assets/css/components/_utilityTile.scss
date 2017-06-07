@@ -218,14 +218,14 @@
     padding-bottom: 10px;
   }
 
-  .gor-utility-invoice-wrap {
+  .gor-utility-invoice-wrap,.gor-utility-sku-wrap,.gor-utility-duration-wrap {
         margin-left: 34px;
     width: 76%;
     box-shadow: none;
     margin-top: 0px;
   }
 
-  .gor-utility-invoice-h1 {
+  .gor-utility-invoice-h1,.gor-utility-stock-ledger-duration-label {
         font-size: 16px;
     font-weight: 600;
     color: #000000;
@@ -252,5 +252,9 @@
       cursor: pointer;
     }
     
+  }
+
+  .gor-utility-duration-wrap input[type=checkbox]{
+    margin-right: 5px;
   }
   
