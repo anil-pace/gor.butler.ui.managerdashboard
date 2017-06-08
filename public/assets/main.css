@@ -6165,6 +6165,7 @@ button:disabled {
 
 .notificationWrap .searchResults .row {
   padding: 10px 5px;
+  border-bottom: 1px solid #F7F7F7;
 }
 
 .notificationWrap .searchResults .content {
@@ -6264,11 +6265,12 @@ button:disabled {
 }
 
 .gor-all-not-tbl .row .title {
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .gor-all-not-tbl .row .desc {
   line-height: 35px;
+  color: #383838;
 }
 
 .gor-all-not-tbl .table-row {

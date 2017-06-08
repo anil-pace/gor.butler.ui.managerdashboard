@@ -57,7 +57,8 @@ class Notification extends React.Component{
 			
 			<ResultPane display={this.state.displayResults}>
 				<NotificationSearchPanel onPaneSearch={this.props.onPaneSearch}/>
-				<div className="searchResults" >
+				<div className="searchResults" onScroll={(event) => this.props.onScrollHandler(event)}>
+				
 					{this.props.notificationData.length ? this.props.notificationData.map((tuple, index) => (
 				        <section className="row" key={index}>
 							<div className="content">
@@ -87,7 +88,8 @@ Notification.propTypes={
 	unreadCount: React.PropTypes.number,
 	onPaneSearch: React.PropTypes.func.isRequired,
 	notificationData:React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
-	handleViewAllLink:React.PropTypes.func.isRequired
+	handleViewAllLink:React.PropTypes.func.isRequired,
+	isLoading:React.PropTypes.bool
 }
 
 export default Notification ;

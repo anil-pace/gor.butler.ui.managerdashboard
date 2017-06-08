@@ -17,42 +17,49 @@ export  function notificationReducer(state={},action){
   switch (action.type) {
     case SEARCHED_NOTIFICATIONS_DATA:
           return Object.assign({}, state, { 
-            "searchedNotificationData" : action.data,
-            "searchApplied":true
+            "searchedNotificationData" : state.searchedNotificationData ? state.searchedNotificationData.concat(action.data) : [].concat(action.data),
+            "searchApplied":true,
+            "searchDataFound":action.data.length ? true : false
           })
           break;
     case WS_NOTIFICATIONS_DATA:
-          let wsNotificationData;// = state.wsNotificationData;
-          let isNotificationRead = state.unreadCount;
-          let readList=[];
-          if(action.data.length > 1){
-            wsNotificationData = action.data
+          let wsNotificationData;
+          let isNotificationRead = state.isNotificationRead;
+          let readList= [];
+          let responseData = action.data.splice(0);
+          let initRespLen = responseData.length
+          if(!isNotificationRead){
+            wsNotificationData = responseData;
           }
           else{
-            wsNotificationData = state.wsNotificationData ? state.wsNotificationData.splice().unshift(action.data[0]) : action.data ;
+            wsNotificationData = state.wsNotificationData ? responseData.concat(state.wsNotificationData.splice(0))  : responseData ;
           }
-          if(!isNotificationRead){
-            let len = wsNotificationData.length;
+          
+            
             let epochTime =  (new Date).getTime();
-            for(let i= 0 ;i < len ; i++){
+            for(let i= 0 ;i < initRespLen ; i++){
                 let tuple={};
-                tuple.id = wsNotificationData[i].id;
+                tuple.id = responseData[i].id ;
                 tuple.lastRead = epochTime;
                 readList.push(tuple.id);
             }
-          }
+          
           return Object.assign({}, state, { 
             "wsNotificationData" : wsNotificationData,
-            "unreadCount": !isNotificationRead ? wsNotificationData.length : 0,
-            "readNotificationList":readList
+            "unreadCount": initRespLen,
+            "readNotificationList":readList,
+            "isNotificationRead":false
           })  
     case SEND_READ_INTIMATION:
           return Object.assign({}, state, { 
-            "unreadCount": 0
+            "unreadCount": 0,
+            "isNotificationRead":true,
+            "readNotificationList":[]
           })
     case RESET_NOTIFICATION_DATA:
           return Object.assign({}, state, { 
-            "searchApplied":false
+            "searchApplied":false,
+            "searchedNotificationData":[]
           })
     case GET_ALL_NOTIFICATIONS: 
           let notificationData = action.saltParams.lazyData ? (state.completeNotificationData || []) : [];
