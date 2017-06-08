@@ -584,6 +584,14 @@ body {
   vertical-align: middle;
 }
 
+.gor-audit-info-icon {
+  background-position: -494px -77px;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .gor-selected-icon {
   background-position: -168px -97px;
   width: 10px;
