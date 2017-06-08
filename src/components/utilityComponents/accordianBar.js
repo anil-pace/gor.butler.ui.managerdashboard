@@ -1,8 +1,53 @@
 import React  from 'react';
-import { FormattedMessage,FormattedDate } from 'react-intl';
+import { FormattedMessage,FormattedDate, FormattedTime, FormattedRelative } from 'react-intl';
+import {getDaysDiff} from '../../utilities/getDaysDiff';
 
 class AccordianBar extends React.Component{
+
+
+	_getTimeUpload(create_time, timeOffset){
+		let timeUpload = {};
+
+		if (!create_time) {
+			timeUpload="--";
+		}
+		else {
+			if (getDaysDiff(create_time) < 2) {
+
+				timeUpload= (<div><FormattedRelative
+				             value={create_time}
+				             timeZone={timeOffset}
+				             units= 'day'
+				             />, <FormattedTime
+				             value={create_time}
+				             hour= "numeric"
+				             minute= "numeric"
+				             timeZone= {timeOffset}
+				             hour12= {false}
+				             /></div>
+				             );
+			}
+			else {
+				timeUpload= (<FormattedDate
+				             value={create_time}
+							 year= 'numeric'
+	                         month= 'short'
+	                         day= '2-digit'
+	                         hour= "2-digit"
+	                         minute= "2-digit"
+				             timeZone= {timeOffset}
+				             hour12= {false}
+				             />);
+			}
+		}
+
+
+		return timeUpload;
+
+	}
 	render(){
+
+		var timeUpload = this._getTimeUpload(this.props.data.create_time, this.props.timeOffset);
 		return (
 			<div> 
 			<div className={this.props.showPanel?"gor-utility-accordian-open":"gor-utility-updown-bar"}  onClick={()=> this.props.handleAccordianState(this.props.index)}>
