@@ -1,16 +1,11 @@
 import React  from 'react';
 import { FormattedMessage,FormattedDate, FormattedTime, FormattedRelative } from 'react-intl';
-import { connect } from 'react-redux' ;
 import {getDaysDiff} from '../../utilities/getDaysDiff';
 
 class AccordianBar extends React.Component{
 
 
 	_getTimeUpload(create_time, timeOffset){
-
-		if(!create_time){
-			return null;
-		}
 		let timeUpload = {};
 
 		if (!create_time) {
@@ -21,7 +16,8 @@ class AccordianBar extends React.Component{
 
 				timeUpload= (<div><FormattedRelative
 				             value={create_time}
-				             unit= "day"
+				             timeZone={timeOffset}
+				             units= 'day'
 				             />, <FormattedTime
 				             value={create_time}
 				             hour= "numeric"
@@ -34,8 +30,11 @@ class AccordianBar extends React.Component{
 			else {
 				timeUpload= (<FormattedDate
 				             value={create_time}
-				             hour= "numeric"
-				             minute= "numeric"
+							 year= 'numeric'
+	                         month= 'short'
+	                         day= '2-digit'
+	                         hour= "2-digit"
+	                         minute= "2-digit"
 				             timeZone= {timeOffset}
 				             hour12= {false}
 				             />);
@@ -106,18 +105,4 @@ class AccordianBar extends React.Component{
 }
 };
 
-function mapStateToProps(state, ownProps) {
-	return {
-		headerInfo: state.headerData.headerInfo,
-		shift_start_time: state.headerData.shiftStartTime,
-		authToken: state.authLogin.auth_token,
-		username: state.authLogin.username,
-		system_emergency: state.tabsData.system_emergency || null,
-		system_status: state.tabsData.status || null,
-		system_data: state.tabsData.system_data || null,
-		activeModalKey: state.appInfo.activeModalKey || 0,
-		timeOffset: state.authLogin.timeOffset
-	}
-}
-
-export default connect(mapStateToProps)(AccordianBar) ;
+export default AccordianBar;
