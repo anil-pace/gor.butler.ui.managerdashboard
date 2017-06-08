@@ -48,18 +48,19 @@ class AccordianBar extends React.Component{
 	    							</div>
 	    						  	<div className="gor-utility-master-arrordian-h1">
 	    						  		<div className="gor-inline gor-utility-accordian-h1"><FormattedMessage id="utility.uploadHist.uploadFile" description='Upload File' defaultMessage='Upload File:' /></div>
+	    						  		{this.props.data.request_file?
 	    						  		<a href={this.props.data.request_file} download className="gor-inline gor-utility-accordian-button gor-utility-accordian-h3">
 	    						  		<FormattedMessage id="utility.uploadHist.download" description='Download' 
 	    						  		defaultMessage='Download' />
-	    						  		</a>
+	    						  		</a>:""}
 	    						  	</div>
 	    						  	<div className="gor-utility-master-arrordian-h1">
 	    						  		<div className="gor-inline gor-utility-accordian-h1"><FormattedMessage id="utility.uploadHist.resultFile" description='Result file' 
 	    						  		defaultMessage='Result File:' /></div>
-	    						  		<a href={this.props.data.response_file?this.props.data.response_file:"javascript:void(0)"} download className="gor-inline gor-utility-accordian-button gor-utility-accordian-h3"> 
-	    						  		<FormattedMessage id="utility.uploadHist.download" description='Download' 
-	    						  		defaultMessage='Download' />
-	    						  		</a>
+	    						  		{this.props.data.response_file? 
+	    						  			<a href={this.props.data.response_file} download className="gor-inline gor-utility-accordian-button gor-utility-accordian-h3">
+	    						  			<FormattedMessage id="utility.uploadHist.download" description='Download' defaultMessage='Download' />
+	    						  			</a>: ""}
 	    						  	</div>
 	    						</div>:""}
     						 </div>
