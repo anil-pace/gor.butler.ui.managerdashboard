@@ -433,6 +433,7 @@ export const AUDIT_RESOLVED="audit_resolved";
 export const AUDIT_UNRESOLVED="Unresolved";
 export const AUDIT_LINE_REJECTED="audit_rejected";
 export const AUDIT_REJECTED_STATUS="Rejected";
+export const AUDIT_REAUDITED_STATUS="Re-audited";
 export const AUDIT_RESOLVED_STATUS="Resolved";
 export const AUDIT_PARAM_TYPE='audit_param_type';
 export const AUDIT_PARAM_VALUE='audit_param_value';

@@ -90,6 +90,18 @@
     "filepath": "./src/components/commonFunctionsDataTable.js"
   },
   {
+    "id": "audit.rejected.tooltip.header",
+    "description": "rejected issue for audit table",
+    "defaultMessage": "{rejected_lines}/{total_lines} {rejected_lines, plural, one {audit line} other {audit lines}} were rejected",
+    "filepath": "./src/components/commonFunctionsDataTable.js"
+  },
+  {
+    "id": "audit.rejected.tooltip.content",
+    "description": "Re-audit the rejected audit lines",
+    "defaultMessage": "Re-audit the rejected audit lines",
+    "filepath": "./src/components/commonFunctionsDataTable.js"
+  },
+  {
     "id": "audit.created.tooltip.header",
     "description": "resolveUnresolve issue for audit table",
     "defaultMessage": "Assign PPS to start audit task",

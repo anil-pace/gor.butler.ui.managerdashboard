@@ -363,7 +363,7 @@ class AuditTab extends React.Component {
                     auditData.resolveAudit=false;
                 }
 
-                if (data[i].audit_status=== AUDIT_RESOLVED || data[i].audit_status=== AUDIT_LINE_REJECTED || data[i].audit_status=== "audit_reaudited") {
+                if (data[i].audit_status=== AUDIT_RESOLVED || data[i].audit_status=== AUDIT_LINE_REJECTED || (data[i].audit_status=== "audit_reaudited" || data[i].audit_info.length>0 && data[i].unresolved===0)) {
                     auditData.viewIssues=true;
                 }
 
@@ -455,11 +455,11 @@ class AuditTab extends React.Component {
                 auditData.deletable=true
                 auditData.infoIcon="created"
             }
-            if(data[i].audit_status==="audit_rejected"){
+            let rejected_lines=data[i].audit_info.filter(function(audit_line){
+                return audit_line.audit_line_status==="audit_rejected"
+            }).length
+            if(data[i].audit_status==="audit_rejected" ||rejected_lines>0){
                 let total_lines=data[i].audit_info.length||0
-                let rejected_lines=data[i].audit_info.filter(function(audit_line){
-                    return audit_line.audit_line_status==="audit_rejected"
-                }).length
                 auditData.auditInfo={total_lines:total_lines,rejected_lines:rejected_lines}
                 auditData.infoIcon="rejected"
             }
