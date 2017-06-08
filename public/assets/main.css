@@ -6066,6 +6066,8 @@ button:disabled {
 }
 
 .gor-csvUploadWrap .gor-csvUpload {
+  min-width: 125px;
+  height: 35px;
   opacity: 0;
   cursor: pointer;
 }
