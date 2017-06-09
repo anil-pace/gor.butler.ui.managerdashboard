@@ -61,10 +61,10 @@ import {INVENTORY_DATA_HISTORY,INVENTORY_HISTORY_DAYS_COUNT,
   }
   else if(isHistory !== "inventoryDataToday"){
     dateToday=new Date(stateObj.dateTodayState) ;
-    for(let i=0; i < INVENTORY_HISTORY_DAYS_COUNT ; i++){
+    for(let i=0,k=0; k < INVENTORY_HISTORY_DAYS_COUNT ; k++){
       dateToday=new Date(dateToday.setDate(dateToday.getDate()-1));
       invObj=inventory[i] ? inventory[i] : {};
-      let emptyData=Object.keys(invObj).length ? false : true;
+      let emptyData=(new Date(invObj.date).getDate() === dateToday.getDate() ? false : true);//Object.keys(invObj).length ? false : true;
       let histDate=!emptyData ? Date.parse(invObj.date) : dateToday.getTime();
       invObj["current_stock"]=!emptyData ? (invObj["opening_stock"] + invObj["items_put"])-invObj["items_picked"] : 0;
       invObj.unusedSpace=!emptyData ? (100 - invObj["warehouse_utilization"]) : 100;
@@ -87,7 +87,8 @@ import {INVENTORY_DATA_HISTORY,INVENTORY_HISTORY_DAYS_COUNT,
         dataObj.customData=histDate ;
         recreatedData[histDate].graphInfo=dataObj;
         historyClosingStock+= invObj.current_stock 
-    
+        
+        !emptyData ? i++ : i
     }
     noData=historyClosingStock ? false : true;
   }
