@@ -70,7 +70,13 @@ class Notification extends React.Component{
 							</div>
 						</section>
 				    )):<section className="row" >
-							<p className="no-notification"> <FormattedMessage id="notifications.read.message" description='No unread notifications' defaultMessage='You have no unread Notifications'/> </p>
+							<p className="no-notification"> {!this.props.searchApplied ? 
+								<FormattedMessage id="notifications.read.message" 
+								description='No unread notifications' 
+								defaultMessage='You have no unread Notifications'
+								/> :<FormattedMessage id="notifications.read.noresult" 
+								description='No Result Found' 
+								defaultMessage='No Result Found'/>} </p>
 						</section>}
 				</div>
 				<div className="resultFooter">
@@ -89,7 +95,8 @@ Notification.propTypes={
 	onPaneSearch: React.PropTypes.func.isRequired,
 	notificationData:React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
 	handleViewAllLink:React.PropTypes.func.isRequired,
-	isLoading:React.PropTypes.bool
+	isLoading:React.PropTypes.bool,
+	searchApplied:React.PropTypes.bool
 }
 
 export default Notification ;

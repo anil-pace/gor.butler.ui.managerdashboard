@@ -2000,6 +2000,12 @@
     "filepath": "./src/containers/notifications/viewAllNotificationWrapper.js"
   },
   {
+    "id": "notification.infinite.message",
+    "description": "Infinite scroll message",
+    "defaultMessage": "Loading More",
+    "filepath": "./src/containers/notifications/viewAllNotificationWrapper.js"
+  },
+  {
     "id": "pickPerformance.dropdown",
     "description": "pickPerformance dropdown label",
     "defaultMessage": "PPS Pick Performance",

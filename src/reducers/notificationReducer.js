@@ -6,7 +6,8 @@ import {
   GET_ALL_NOTIFICATIONS,
   RESET_NOTIFICATION_TABLE_DATA,
   SET_NOTIFICATION_SPINNER,
-  SEARCHED_NOTIFICATIONS_DATA_ALL
+  SEARCHED_NOTIFICATIONS_DATA_ALL,
+  SET_INFINITE_SPINNER
 } from '../constants/frontEndConstants';
 /**
  * @param  {State Object}
@@ -67,6 +68,7 @@ export  function notificationReducer(state={},action){
             "completeNotificationData":notificationData.concat(action.data),
             "hasDataChanged":!state.hasDataChanged,
             "isLoading":false,
+            "isInfiniteLoading":false,
             "dataFound":(action.saltParams.lazyData && !action.data.length ? false : null)
           })  
     case RESET_NOTIFICATION_TABLE_DATA:
@@ -79,6 +81,10 @@ export  function notificationReducer(state={},action){
           return Object.assign({}, state, { 
             "isLoading":action.data
           })  
+    case SET_INFINITE_SPINNER:  
+          return Object.assign({}, state, { 
+            "isInfiniteLoading":action.data
+          }) 
     case SEARCHED_NOTIFICATIONS_DATA_ALL:
           return Object.assign({}, state, { 
             "searchedAllNotificationData":action.data,

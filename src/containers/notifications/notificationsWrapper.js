@@ -95,7 +95,15 @@ class NotificationsWrapper extends React.Component{
 		var notificationData = this.props.searchApplied ? this.props.searchedNotificationData : this.props.wsNotificationData ;
 		return (
 			<div className="notificationWrap">
-				<Notification onScrollHandler={this._onScrollHandler.bind(this)} unreadCount={this.props.unreadCount} onNotificationCountClick={this._onNotificationCountClick.bind(this)} notificationData={notificationData} onPaneSearch={this._onPaneSearch.bind(this)} handleViewAllLink = {this._viewAllLinkClick.bind(this)}/>
+				<Notification onScrollHandler={this._onScrollHandler.bind(this)} 
+                unreadCount={this.props.unreadCount} 
+                onNotificationCountClick={this._onNotificationCountClick.bind(this)} 
+                notificationData={notificationData} 
+                onPaneSearch={this._onPaneSearch.bind(this)} 
+                handleViewAllLink = {this._viewAllLinkClick.bind(this)}
+                searchApplied={this.props.searchApplied}
+                />
+               
 				
 			</div>
 		);

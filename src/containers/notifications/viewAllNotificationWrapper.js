@@ -18,7 +18,7 @@ import {NOTIFICATIONS_URL} from "../../constants/configConstants";
 import {GET,GET_ALL_NOTIFICATIONS,APP_JSON,SEARCHED_NOTIFICATIONS_DATA_ALL,DEFAULT_NOTIFICATION_ROW_LENGTH,DESC,ASC} from "../../constants/frontEndConstants";
 import {getNotificationData,
 	resetNotificationTableData,
-	setNotificationSpinner} from '../../actions/notificationAction';
+	setNotificationSpinner,setInfiniteSpinner} from '../../actions/notificationAction';
 
 
 
@@ -73,7 +73,13 @@ class ViewAllNotificationWrapper extends React.Component{
                 'saltParams':saltParams,
                 'accept':APP_JSON,
             }
-		this.props.setNotificationSpinner(true);
+		if(!saltParams.lazyData){
+			this.props.setNotificationSpinner(true);
+		}
+		else{
+			this.props.setInfiniteSpinner(true);
+		}
+		
         this.props.getNotificationData(params);
 	}
 
@@ -110,7 +116,10 @@ class ViewAllNotificationWrapper extends React.Component{
 	}
 
 	shouldComponentUpdate(nextProps){
-		if((nextProps.hasDataChanged !== this.props.hasDataChanged) || (nextProps.isLoading !==this.props.isLoading)){
+		if((nextProps.hasDataChanged !== this.props.hasDataChanged) || 
+			(nextProps.isLoading !==this.props.isLoading)||
+			(nextProps.isInfiniteLoading !==this.props.isInfiniteLoading)
+			){
 			return true;
 		}
 		return false
@@ -122,6 +131,7 @@ class ViewAllNotificationWrapper extends React.Component{
             this.setState({
 					page
 				},function(){
+					this.props.setInfiniteSpinner(true);
 					this._fetchNotificationData({lazyData:true});
 				})
 				
@@ -173,9 +183,12 @@ class ViewAllNotificationWrapper extends React.Component{
             <div className='gor-modal-body'>
 
            			<div className="gorTableMainContainer gor-all-not-tbl">
-      				
+      				<Spinner isLoading={this.props.isInfiniteLoading} utilClassNames={"infinite-scroll"}>
+                    	<div className="infinite-content"><p><FormattedMessage id="notification.infinite.message" description='Infinite scroll message' defaultMessage='Loading More'/></p></div>
+                    </Spinner>
                 <GTable options={['table-bordered']}>
                     <GTableHeader>
+
                         {processedData.header.map(function (header, index) {
                             return <GTableHeaderCell key={index} header={header} onClick={header.sortable ? self._onSortChange.bind(self, header) : false}>
                                 	<span>{header.text}</span><span className="sortIcon">{header.sortable && header.defaultOrder === DESC ? '↑' : (header.sortable ? '↓' :'') }</span>
@@ -184,6 +197,7 @@ class ViewAllNotificationWrapper extends React.Component{
                         })}
                     </GTableHeader>
                     <GTableBody data={processedData.filteredData} onScrollHandler={self._onScrollHandler.bind(this)}>
+                          
                         {processedData.filteredData ? processedData.filteredData.map(function (row, idx) {
                             return (
                                 <GTableRow key={idx} index={idx} offset={processedData.offset} max={processedData.max} data={processedData.filteredData}>
@@ -216,14 +230,16 @@ function mapStateToProps(state, ownProps) {
         "searchedAllNotificationData":state.notificationReducer.searchedAllNotificationData,
         "searchAppliedAllNotifications":state.notificationReducer.searchAppliedAllNotifications,
         "dataFound":state.notificationReducer.dataFound,
-        "timeOffset":state.authLogin.timeOffset
+        "timeOffset":state.authLogin.timeOffset,
+        "isInfiniteLoading":state.notificationReducer.isInfiniteLoading
     }
 }
 function mapDispatchToProps(dispatch){
 	return{
 		getNotificationData:function(params){dispatch(getNotificationData(params));},
 		resetNotificationTableData:function(data){dispatch(resetNotificationTableData(data));},
-		setNotificationSpinner:function(data){dispatch(setNotificationSpinner(data));}
+		setNotificationSpinner:function(data){dispatch(setNotificationSpinner(data));},
+		setInfiniteSpinner:function(data){dispatch(setInfiniteSpinner(data));}
 	}
 }
 

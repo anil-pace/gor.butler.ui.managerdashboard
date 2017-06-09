@@ -6,7 +6,8 @@ import {
     GET_ALL_NOTIFICATIONS,
     RESET_NOTIFICATION_TABLE_DATA,
     SET_NOTIFICATION_SPINNER,
-    SEARCHED_NOTIFICATIONS_DATA_ALL
+    SEARCHED_NOTIFICATIONS_DATA_ALL,
+    SET_INFINITE_SPINNER
 } from '../constants/frontEndConstants'
 
 
@@ -63,6 +64,12 @@ export function resetNotificationTableData(data){
 export function setNotificationSpinner(data){
     return {
         type: SET_NOTIFICATION_SPINNER,
+        data
+    }
+}
+export function setInfiniteSpinner(data){
+    return {
+        type: SET_INFINITE_SPINNER,
         data
     }
 }
