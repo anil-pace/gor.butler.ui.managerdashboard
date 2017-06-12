@@ -6114,6 +6114,16 @@ button:disabled {
   border-top: none;
 }
 
+.pps-table .requestedModeTxt {
+  display: inline-block;
+  width: 65px;
+  float: right;
+  margin-right: 45%;
+  font-size: 12px;
+  color: #27aae1;
+  vertical-align: middle;
+}
+
 .table-container {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -6226,4 +6236,47 @@ button:disabled {
 
 .no-flexbox .cell {
   display: table-cell;
+}
+
+.gor-dropdown {
+  background-image: url(/om/assets/images/ic-hamburger.svg);
+  background-repeat: no-repeat;
+  height: 40px;
+  width: 40px;
+  display: inline-block;
+  background-position: center top 5px;
+  cursor: pointer;
+}
+
+.gor-option-icon {
+  background-image: url(/om/assets/images/ic-arrow-down.svg);
+  background-repeat: no-repeat;
+  width: 12px;
+  height: 20px;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.gor-white-background {
+  background-color: #FFFFFF;
+}
+
+.gor-dropdown-wrapper {
+  margin-top: 40px;
+  position: absolute;
+  background-color: #fff;
+  min-width: 220px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  cursor: pointer;
+}
+
+.gor-dropdown-option {
+  padding: 16px 10px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 500;
+  color: #55565a;
 }

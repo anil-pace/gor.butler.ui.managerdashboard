@@ -38,7 +38,8 @@ import {updateSubscriptionPacket,setWsAction} from './../../actions/socketAction
 import {wsOverviewData} from './../../constants/initData.js';
 import PPSFilter from './ppsFilter';
 import FilterSummary from '../../components/tableFilter/filterSummary'
-import DropdownTable from '../../components/dropdown/dropdownTable'
+import DropdownTable from '../../components/dropdown/dropdownTable';
+import Dropdown from '../../components/gor-dropdown-component/dropdown';
 import {PPS_MODE_CHANGE_URL, API_URL} from '../../constants/configConstants';
 import {PPS_MODE_CHANGE, APP_JSON, PUT} from '../../constants/frontEndConstants';
 
@@ -284,7 +285,9 @@ class PPS extends React.Component {
         this.props.setCheckedPps(resetCheck);
 
     }
-
+    _handleSelectionChange(e){
+        console.log(e);
+    }
 
     render() {
         let filterHeight=screen.height - 190 - 50;
@@ -337,11 +340,18 @@ class PPS extends React.Component {
             {value: 'open', label: "Open Selected PPS"},
             {value: 'close', label: "Close Selected PPS"}
         ];
+        const modes_new=[ {value: 'put', disabled:false,label: pickDrop},
+            {value: 'pick',  disabled:true,label: putDrop},
+            {value: 'audit',  disabled:false,label: auditDrop}];
         //if (this.props.bDropRender=== true) {
-            drop=<DropdownTable disabled={!this.props.bDropRender} styleClass={'gorDataTableDrop'}
+           /* drop=<DropdownTable disabled={!this.props.bDropRender} styleClass={'gorDataTableDrop'}
                                   placeholder={this.props.intlMessages["pps.dropdown.placeholder"]}
                                     items={modes}
-                                  changeMode={this.handleModeChange.bind(this)}/>;
+                                  changeMode={this.handleModeChange.bind(this)}/>;*/
+            drop=<Dropdown className="modeDropdown"
+            options={modes_new} 
+            onSelectHandler={(e) => this._handleSelectionChange(e)}
+            placeholder={"Change PPS Mode"} />
         
             statusDrop = <DropdownTable disabled={!this.props.bDropRender} styleClass={'gorDataTableDrop'}
                                   placeholder={"Change PPS Status"}

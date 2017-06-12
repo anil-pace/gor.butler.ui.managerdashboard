@@ -260,7 +260,7 @@ class PPStable extends React.Component {
         }
 
         return (
-            <div className="gorTableMainContainer">
+            <div className="gorTableMainContainer pps-table">
                 <Table
                     rowHeight={50}
                     rowsCount={sortedDataList.getSize()}
@@ -335,7 +335,7 @@ class PPStable extends React.Component {
                                             sortDir={colSortDirs.operatingMode}>
                                 <div className="gorToolHeaderEl">
                                     <FormattedMessage id="PPS.table.operatingMode" description="operatingMode for PPS"
-                                                      defaultMessage="OPERATING MODE"/>
+                                                      defaultMessage="CURRENT MODE"/>
                                     <div className="gorToolHeaderSubText">
                                         <FormattedMessage id="PPStable.ppsState" description='pps state for PPStable'
                                                           defaultMessage='Pick ({pick}) . Put ({put}) . Audit ({audit}) . Not set ({notSet})'
@@ -345,7 +345,29 @@ class PPStable extends React.Component {
                                                               audit: audit ? audit : '0',
                                                               notSet: notSet ? notSet : '0'
                                                           }}/>
+
                                     </div>
+                                </div>
+                            </SortHeaderCell>
+                        }
+                        cell={<TextCell data={sortedDataList}  childrenClass="requestedModeTxt" childColumnKey="operatingMode" classKey={"operatingModeClass"}>
+                                <span ><FormattedMessage id="PPStable.requestedMode.text" description='PPStable.requestedMode.text'
+                                                          defaultMessage='Requested Mode: '
+                                                          /></span>
+                                </TextCell>}
+                        fixed={true}
+                        width={columnWidths.operatingMode}
+                        isResizable={true}
+                    />
+                     <Column
+                        columnKey="operatingMode"
+                        header={
+                            <SortHeaderCell onSortChange={this._onSortChange}
+                                            sortDir={colSortDirs.operatingMode}>
+                                <div className="gorToolHeaderEl">
+                                    <FormattedMessage id="PPS.table.requestedStatus" description="Requested status for PPS"
+                                                      defaultMessage="REQUESTED STATUS"/>
+                              
                                 </div>
                             </SortHeaderCell>
                         }

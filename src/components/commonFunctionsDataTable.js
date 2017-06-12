@@ -121,11 +121,18 @@ export const ActionCell=({rowIndex, data, columnKey,selEdit,selDel,mid, ...props
   </Cell>
 );
 
-export const TextCell=({rowIndex, data, columnKey,setClass, ...props})=> (
-  <Cell {...props} className={setClass}>
+export const TextCell=({rowIndex, data, columnKey,setClass, ...props})=>{ 
+  
+  const childrenCell =  React.Children.map(props.children, child => {
+      return (
+        <span className={props.childrenClass}>{child}{data.getObjectAt(rowIndex)[props.childColumnKey]}</span>
+      );
+    });
+  return(<Cell {...props}  className={setClass}>
     {data.getObjectAt(rowIndex)[columnKey]}
+    {childrenCell}
   </Cell>
-);
+)};
 
 export const ToolTipCell=({rowIndex, data, columnKey,setClass,callBack,tooltipData, ...props})=> (
   <Cell {...props} className={setClass}>

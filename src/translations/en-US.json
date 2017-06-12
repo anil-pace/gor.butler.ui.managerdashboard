@@ -3212,13 +3212,19 @@
   {
     "id": "PPS.table.operatingMode",
     "description": "operatingMode for PPS",
-    "defaultMessage": "OPERATING MODE",
+    "defaultMessage": "CURRENT MODE",
     "filepath": "./src/containers/systemTabs/PPStable.js"
   },
   {
     "id": "PPStable.ppsState",
     "description": "pps state for PPStable",
     "defaultMessage": "Pick ({pick}) . Put ({put}) . Audit ({audit}) . Not set ({notSet})",
+    "filepath": "./src/containers/systemTabs/PPStable.js"
+  },
+  {
+    "id": "PPS.table.requestedMode",
+    "description": "operatingMode for PPS",
+    "defaultMessage": "REQUESTED MODE",
     "filepath": "./src/containers/systemTabs/PPStable.js"
   },
   {
