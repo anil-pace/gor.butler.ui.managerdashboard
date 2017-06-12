@@ -1,11 +1,6 @@
 .gor-dropdown{
-    background-image: url(/om/assets/images/ic-hamburger.svg);
-    background-repeat: no-repeat;
-    height: 40px;
-    width: 40px;
-    display: inline-block;  
-    background-position: center top 5px; 
-    cursor:pointer;
+    cursor: pointer;
+    position:relative;
 }
 .gor-option-icon{
     background-image: url(/om/assets/images/ic-arrow-down.svg);
@@ -19,20 +14,66 @@
   background-color: #FFFFFF;
 }
 .gor-dropdown-wrapper{
-    margin-top: 40px;
-    position: absolute;
-    background-color: #fff;
-    min-width: 220px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,.2);
-    z-index: 1;
-    cursor: pointer;
+    border: 1px solid;
+    border-radius: 0.1875rem;
+    box-sizing: border-box;
+    cursor: default;
+    outline: none;
+    padding: 0.5rem 3.25rem 0.5rem 0.625rem;
+    transition: all 200ms ease;
+    border-color: #aaaaaa;
+    font-size: 14px;
+    font-weight: 100;
+    color: #aaaaaa;
+    position: relative;
+    .gor-dropdown-arrow{
+        border-color: #A6A7A9 transparent transparent;
+        border-style: solid;
+        border-width: 0.5rem 0.3125rem 0.125rem;
+        content: ' ';
+        display: block;
+        height: 0;
+        margin-top: -ceil(2.5);
+        position: absolute;
+        right: 0.9375rem;
+        top: 0.6875rem;
+        &.up{
+            width: 0px;
+            height: 0px;
+            border-width: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 9px solid #A6A7A9;
+            border-color: none; 
+            border-style: solid; 
+             
+        }
+    }
 }
 .gor-dropdown-option{
-    padding: 16px 10px;
     text-decoration: none;
     display: block;
     text-align: left;
     font-size: 16px;
     font-weight: 500;
-    color: #55565a;
+    box-sizing: border-box;
+    color: #A6A7A9;
+    cursor: pointer;
+    padding: 0.5rem 0.625rem;
+    &.disabled{
+        cursor: default;
+        color: #C8C8C8;
+    }
+}
+.gor-option-wrapper{
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    top: 30px;
+    background: #fff;
+    width: 100%;
+    border: 1px solid;
+    border-radius: 3px;
+    box-shadow: 0 0.0625rem 0 rgba(0, 0, 0, 0.06);
+    box-sizing: border-box;
 }

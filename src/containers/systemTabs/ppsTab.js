@@ -331,26 +331,20 @@ class PPS extends React.Component {
                                         defaultMessage="Pick"/>
         let auditDrop=<FormattedMessage id="PPS.table.auditDrop" description="audit dropdown option for PPS"
                                           defaultMessage="Audit"/>
-        const modes=[
-            {value: 'put', label: pickDrop},
-            {value: 'pick', label: putDrop},
-            {value: 'audit', label: auditDrop}
-        ];
+        
         const status = [
             {value: 'open', label: "Open Selected PPS"},
             {value: 'close', label: "Close Selected PPS"}
         ];
-        const modes_new=[ {value: 'put', disabled:false,label: pickDrop},
-            {value: 'pick',  disabled:true,label: putDrop},
+        const modes=[ {value: 'put', disabled:false,label: pickDrop},
+            {value: 'pick',  disabled:false,label: putDrop},
             {value: 'audit',  disabled:false,label: auditDrop}];
-        //if (this.props.bDropRender=== true) {
-           /* drop=<DropdownTable disabled={!this.props.bDropRender} styleClass={'gorDataTableDrop'}
-                                  placeholder={this.props.intlMessages["pps.dropdown.placeholder"]}
-                                    items={modes}
-                                  changeMode={this.handleModeChange.bind(this)}/>;*/
+       
             drop=<Dropdown className="modeDropdown"
-            options={modes_new} 
-            onSelectHandler={(e) => this._handleSelectionChange(e)}
+            options={modes} 
+            onSelectHandler={(e) => this.handleModeChange(e)}
+            disabled={!this.props.bDropRender}
+            resetOnSelect={true}
             placeholder={"Change PPS Mode"} />
         
             statusDrop = <DropdownTable disabled={!this.props.bDropRender} styleClass={'gorDataTableDrop'}

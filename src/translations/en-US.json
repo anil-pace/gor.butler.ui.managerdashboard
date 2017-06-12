@@ -3222,9 +3222,15 @@
     "filepath": "./src/containers/systemTabs/PPStable.js"
   },
   {
-    "id": "PPS.table.requestedMode",
-    "description": "operatingMode for PPS",
-    "defaultMessage": "REQUESTED MODE",
+    "id": "PPStable.requestedMode.text",
+    "description": "PPStable.requestedMode.text",
+    "defaultMessage": "Requested Mode:",
+    "filepath": "./src/containers/systemTabs/PPStable.js"
+  },
+  {
+    "id": "PPS.table.requestedStatus",
+    "description": "Requested status for PPS",
+    "defaultMessage": "REQUESTED STATUS",
     "filepath": "./src/containers/systemTabs/PPStable.js"
   },
   {
