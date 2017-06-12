@@ -3,6 +3,7 @@ import { Cell} from 'fixed-data-table';
 import { FormattedMessage } from 'react-intl';
 import DropdownTable from './dropdown/dropdownTable'
 import {AUDIT_APPROVED, AUDIT_REJECTED,VIEW_AUDIT_ISSUES,APPROVE_AUDIT,GOR_STATUS,AUDIT_UNRESOLVED,AUDIT_REJECTED_STATUS,AUDIT_RESOLVED_STATUS,AUDIT_REAUDITED_STATUS} from '../constants/frontEndConstants';
+import Dropdown from "./gor-dropdown-component/dropdown";
 export var SortTypes={
   ASC: 'ASC',
   DESC: 'DESC',
@@ -86,17 +87,27 @@ export function sortData (columnKey, sortDir,sortIndexes,_dataList) {
 }
 
 
-function auditTaskActions(data, index,tasksList){
-    let taskList_copy=tasksList.slice()
+function auditTaskActions(data, index){
+    debugger
+    var duplicateTask = <FormattedMessage id="audit.table.duplicateTask"
+                                          description="duplicateTask option for audit"
+                                          defaultMessage="Duplicate task"/>;
+    var deleteRecord = <FormattedMessage id="audit.table.deleteRecord" description="deleteRecord option for audit"
+                                         defaultMessage="Delete record"/>;
+    var cancelTask = <FormattedMessage id="audit.table.cancelTask" description="cancel option for task"
+                                       defaultMessage="Cancel Task"/>;
+    let taskList=[
+        {value: 'duplicateTask', label: duplicateTask,disabled:false},
+        {value: 'deleteRecord', label: deleteRecord,disabled:false},
+        {value:"cancelTask",label:cancelTask,disabled:false}
+    ]
     if(data.newData && !data.newData[index].cancellable){
-        delete taskList_copy[2]
+        taskList[2].disabled=true
     }
-
     if(data.newData && !data.newData[index].deletable){
-        delete taskList_copy[1]
+        taskList[1].disabled=true
     }
-
-    return taskList_copy
+    return taskList
 }
 
 export class DataListWrapper {
@@ -250,7 +261,7 @@ export const ResolveCell=({rowIndex, data, columnKey, checkStatus, screenId, ...
   </Cell>
 );
 
-export const ActionCellAudit=({rowIndex, data, columnKey, tasks, handleAudit,manageAuditTask, clickDropDown,showBox,placeholderText,resolveflag,resolveAudit,checkIssues, ...props})=> (
+export const ActionCellAudit=({rowIndex, data, columnKey, handleAudit,manageAuditTask, clickDropDown,showBox,placeholderText,resolveflag,resolveAudit,checkIssues, ...props})=> (
   <Cell {...props}>
     <div className="gor-audit-actions-button">
      {data.getObjectAt(rowIndex)[showBox]?(
@@ -267,8 +278,8 @@ export const ActionCellAudit=({rowIndex, data, columnKey, tasks, handleAudit,man
       </button>):''}
     </div>
     <div className="gor-audit-actions-drop" >
-      <DropdownTable  styleClass={'gorDataTableDrop'} placeholder={placeholderText} items={auditTaskActions(data,rowIndex,tasks)} changeMode={manageAuditTask.bind(this,rowIndex)}/>
-    </div>
+        <Dropdown placeholder={placeholderText} options={auditTaskActions(data,rowIndex)} onSelectHandler={manageAuditTask.bind(this,rowIndex)} resetOnSelect={true}/>
+      </div>
   </Cell>
 );
 

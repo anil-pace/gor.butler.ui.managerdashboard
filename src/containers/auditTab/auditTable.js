@@ -68,7 +68,7 @@ class AuditTable extends React.Component {
         var el=event.target;
         var elClassName=(el.className).trim(),
             parentEl, siblingEl, totalRowCount=this.props.items.length - 1;
-        if (elClassName !== "Dropdown-control" && elClassName !== "Dropdown-placeholder" && elClassName !== "Dropdown-arrow" && elClassName !== "gor-tool-tip-hover") {
+        if (elClassName !== "gor-dropdown-wrapper" && elClassName !== "gor-dropdown") {
             return;
         }
         parentEl=el.parentNode;
@@ -76,7 +76,7 @@ class AuditTable extends React.Component {
             if (parentEl.className=== "fixedDataTableRowLayout_rowWrapper") {
                 parentEl.style.zIndex="300";
                 if (index=== totalRowCount && totalRowCount !== 0) {
-                    if (elClassName !== "Dropdown-control") {
+                    if (elClassName !== "gor-dropdown-wrapper") {
                         siblingEl=el.parentNode.nextSibling;
                     }
                     else {
@@ -251,18 +251,6 @@ class AuditTable extends React.Component {
 
         </div>
 
-        var duplicateTask = <FormattedMessage id="audit.table.duplicateTask"
-                                              description="duplicateTask option for audit"
-                                              defaultMessage="Duplicate task"/>;
-        var deleteRecord = <FormattedMessage id="audit.table.deleteRecord" description="deleteRecord option for audit"
-                                             defaultMessage="Delete record"/>;
-        var cancelTask = <FormattedMessage id="audit.table.cancelTask" description="cancel option for task"
-                                             defaultMessage="Cancel Task"/>;
-        const tasks=[
-            {value: 'duplicateTask', label: duplicateTask},
-            {value: 'deleteRecord', label: deleteRecord},
-            {value:"cancelTask",label:cancelTask}
-        ];
         var noData=<div/>;
         if (rowsCount=== 0 || rowsCount=== undefined || rowsCount=== null) {
             noData=<div className="gor-no-data"><FormattedMessage id="audit.table.noData"
@@ -438,7 +426,7 @@ class AuditTable extends React.Component {
                             </div>
                         </div>
                     }
-                    cell={<ActionCellAudit data={sortedDataList} handleAudit={this.startAudit.bind(this)} tasks={tasks}
+                    cell={<ActionCellAudit data={sortedDataList} handleAudit={this.startAudit.bind(this)}
                                            manageAuditTask={this.manageAuditTask.bind(this)} showBox="startAudit"
 
                                            placeholderText={this.context.intl.formatMessage(messages.auditPlaceholder)}
