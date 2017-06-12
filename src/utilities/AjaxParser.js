@@ -14,7 +14,7 @@ import {ERROR,AUTH_LOGIN, ADD_USER, RECIEVE_TIME_OFFSET,CHECK_ID,DELETE_USER,GET
 	DELETE_AUDIT,AUDIT_RESOLVE_LINES,AUDIT_RESOLVE_CONFIRMED, VALIDATE_SKU_ID,PAUSE_OPERATION,
 	RESUME_OPERATION,CONFIRM_SAFETY,CHECK_SAFETY,RECEIVE_SHIFT_START_TIME,ITEM_RECALLED,GR_REPORT_RESPONSE,ITEM_RECALLED_DATA,
 MASTER_FILE_UPLOAD,GET_MAX_FILE_SIZE,GET_CONFIGS,
-UPLOAD_HISTORY} from '../constants/frontEndConstants';
+UPLOAD_HISTORY,DOWNLOAD_STOCK_LEDGER_REPORT} from '../constants/frontEndConstants';
 
 import {BUTLER_UI,CODE_E027} from '../constants/backEndConstants'
 import {UE002,E028,E029,MODE_REQUESTED,TYPE_SUCCESS,AS001,AS00A,WRONG_CRED,ES} from '../constants/messageConstants';
@@ -26,7 +26,7 @@ import {INVALID_SKUID} from '../constants/messageConstants';
 import {validateInvoiceID,
 	uploadMasterDataProcessing,
 	uploadMasterDataSuccess,
-uploadMasterDataHistory,updateMaxFileSize} from '../actions/utilityActions';
+uploadMasterDataHistory,updateMaxFileSize,validateStockLedgerSKU} from '../actions/utilityActions';
 export function AjaxParse(store,res,cause,status)
 {
 	let stringInfo={};
@@ -271,6 +271,10 @@ export function AjaxParse(store,res,cause,status)
 		case GR_REPORT_RESPONSE:
 			store.dispatch(setInventoryReportSpinner(false));
 			store.dispatch(validateInvoiceID(res));
+		break;
+		case DOWNLOAD_STOCK_LEDGER_REPORT:
+			store.dispatch(setInventoryReportSpinner(false));
+			store.dispatch(validateStockLedgerSKU(res));
 		break;
 		case MASTER_FILE_UPLOAD:
 			store.dispatch(uploadMasterDataProcessing(false));

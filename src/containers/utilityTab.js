@@ -19,7 +19,7 @@ import {
     getGRdata,
     validateInvoiceID,
     uploadMasterDataProcessing,
-    getUploadHistory, utilityTabRefreshed
+    getUploadHistory, utilityTabRefreshed,downloadStockLedgerReport,clearStockLedgerSKU
 } from "../actions/utilityActions";
 import {setInventoryReportSpinner} from '../actions/spinnerAction';
 import {
@@ -29,7 +29,7 @@ import {
   GR_REPORT_RESPONSE,
   POST,
   MASTER_FILE_FORMATS,
-  UPLOAD_HISTORY,GET_MAX_FILE_SIZE,WS_ONSEND
+  UPLOAD_HISTORY,GET_MAX_FILE_SIZE,WS_ONSEND,DOWNLOAD_STOCK_LEDGER_REPORT
 
 } from '../constants/frontEndConstants';
 import {
@@ -153,6 +153,7 @@ class UtilityTab extends React.Component {
             newState.category=e.target.value;
             if(newState.category==='all'){
                 newState.sku=""
+                this.props.clearStockLedgerSKU()
             }
             this.setState({stockLedgerState: newState});
         }
@@ -257,9 +258,9 @@ class UtilityTab extends React.Component {
         var invoiceInput=<div key="1">
             <div className="gor-audit-input-wrap gor-utility-sku-wrap">
                 <input value={current_state.sku} disabled={this.state.stockLedgerState.category==='all'} className="gor-audit-input gor-input-ok" placeholder="Enter SKU Number" onChange={this._handleChangeSkuNumber.bind(this)}/>
-                {this.props.validatedStockLedgerSKU ? <div className="gor-login-error"/> : ""}
+                {this.props.validatedStockLedgerSKU && this.state.stockLedgerState.category==='sku' ? <div className="gor-login-error"/> : ""}
             </div>
-            {this.props.validatedStockLedgerSKU ?
+            {this.props.validatedStockLedgerSKU && this.state.stockLedgerState.category==='sku' ?
                 <div className="gor-sku-error gor-utility-error-invoice"><FormattedMessage id="utility.stockLedger.incorrectSku"
                                                                                            description="Please enter correct SKU"
                                                                                            defaultMessage="Please enter correct SKU"/></div> : ''}
@@ -372,10 +373,10 @@ class UtilityTab extends React.Component {
             'url': url,
             'method': GET,
             'token': this.props.auth_token,
-            'cause': GR_REPORT_RESPONSE,
+            'cause': DOWNLOAD_STOCK_LEDGER_REPORT,
             'responseType':'arraybuffer'
         }
-        this.props.getGRdata(data)
+        this.props.downloadStockLedgerReport(data)
         this.props.validateInvoiceID(false)
     }
 
@@ -523,6 +524,7 @@ function mapStateToProps(state, ownProps) {
     return {
         auth_token: state.authLogin.auth_token,
         validatedInvoice: state.utilityValidations.invalidInvoice || false,
+        validatedStockLedgerSKU: state.utilityValidations.invalidStockLedgerSKU || false,
         inventorySpinner: state.spinner.inventoryReportSpinner || false,
         isMasterUploadProcessing: state.utilityValidations.isMasterUploadProcessing || false,
         newFileUploaded: state.utilityValidations.newFileUploaded,
@@ -549,6 +551,12 @@ var mapDispatchToProps=function (dispatch) {
         },
         getGRdata: function (data) {
             dispatch(getGRdata(data));
+        },
+        downloadStockLedgerReport: function (data) {
+            dispatch(downloadStockLedgerReport(data));
+        },
+        clearStockLedgerSKU: function (data) {
+            dispatch(clearStockLedgerSKU(data));
         },
         validateInvoiceID: function (data) {
             dispatch(validateInvoiceID(data));
