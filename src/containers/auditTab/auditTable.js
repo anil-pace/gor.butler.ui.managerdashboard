@@ -305,7 +305,6 @@ class AuditTable extends React.Component {
                             </div>
                         </SortHeaderCell>
                     }
-                    // cell={  <TextCell data={sortedDataList}/>}
                     cell={<AuditIssuesTooltipCell data={sortedDataList} callBack={this._handleOnClickDropdown.bind(this)} resolved="resolvedTask"
                                                   unresolved="unresolvedTask"/>}
                     fixed={true}
