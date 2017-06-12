@@ -221,7 +221,8 @@ export const AuditStatusCell=({rowIndex, data, columnKey,statusKey,descriptionKe
           </div>
       </Cell>
 
-      {descriptionKey && data.getObjectAt(rowIndex)[descriptionKey]?<div className="cancellingText">{data.getObjectAt(rowIndex)[descriptionKey]}</div>:null}
+      {descriptionKey && data.getObjectAt(rowIndex)[descriptionKey]?<div className="gor-audit-cancelling-text">{data.getObjectAt(rowIndex)[descriptionKey]}</div>:null}
+
 
   </Cell>
 );
