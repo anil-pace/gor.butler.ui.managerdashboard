@@ -88,7 +88,6 @@ export function sortData (columnKey, sortDir,sortIndexes,_dataList) {
 
 
 function auditTaskActions(data, index){
-    debugger
     var duplicateTask = <FormattedMessage id="audit.table.duplicateTask"
                                           description="duplicateTask option for audit"
                                           defaultMessage="Duplicate task"/>;
