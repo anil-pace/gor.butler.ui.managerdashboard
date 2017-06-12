@@ -248,6 +248,8 @@
     height: 32px;
     display: inline;
     .gor-csvUpload{
+      min-width: 125px;
+      height: 35px;
       opacity:0;
       cursor: pointer;
     }
