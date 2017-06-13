@@ -14,7 +14,7 @@ import {ERROR,AUTH_LOGIN, ADD_USER, RECIEVE_TIME_OFFSET,CHECK_ID,DELETE_USER,GET
 	DELETE_AUDIT,AUDIT_RESOLVE_LINES,AUDIT_RESOLVE_CONFIRMED, VALIDATE_SKU_ID,PAUSE_OPERATION,
 	RESUME_OPERATION,CONFIRM_SAFETY,CHECK_SAFETY,RECEIVE_SHIFT_START_TIME,ITEM_RECALLED,GR_REPORT_RESPONSE,ITEM_RECALLED_DATA,
 MASTER_FILE_UPLOAD,GET_MAX_FILE_SIZE,GET_CONFIGS,
-UPLOAD_HISTORY} from '../constants/frontEndConstants';
+UPLOAD_HISTORY,PPS_STATUS_CHANGE} from '../constants/frontEndConstants';
 
 import {BUTLER_UI,CODE_E027} from '../constants/backEndConstants'
 import {UE002,E028,E029,MODE_REQUESTED,TYPE_SUCCESS,AS001,AS00A,WRONG_CRED,ES} from '../constants/messageConstants';
@@ -287,7 +287,23 @@ export function AjaxParse(store,res,cause,status)
 		  case GET_CONFIGS:
 		  	store.dispatch(recieveConfigurations(res));
 		  	break;
-		  	
+		  case PPS_STATUS_CHANGE:
+		  	if(res.alert_data) {
+				switch(res.alert_data[0].code) {
+					case 'e028':
+					store.dispatch(notifySuccess(E028));
+		    		break;
+
+		    		case 'e029':
+		    		store.dispatch(notifyFail(E029));
+		    		break;	
+				}
+			}
+			else{
+					store.dispatch(notifySuccess(MODE_REQUESTED));
+			}
+			
+		  	break;
 		default:
 			ShowError(store,cause,status);
 			break;

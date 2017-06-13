@@ -25,14 +25,16 @@ import {
     INITIAL_HEADER_SORT,
     INITIAL_HEADER_ORDER,
     GOR_ON_STATUS,
-    GOR_FIRST_LAST,WS_ONSEND
+    GOR_FIRST_LAST,WS_ONSEND,
+    PPS_STATUS_CHANGE
 } from '../../constants/frontEndConstants';
 import {
     showTableFilter,
     filterApplied,
     ppsfilterState,
     togglePPSFilter,
-    setDefaultRange
+    setDefaultRange,
+    PPS_MODE_CHANGE, APP_JSON, PUT
 } from '../../actions/filterAction';
 import {updateSubscriptionPacket,setWsAction} from './../../actions/socketActions'
 import {wsOverviewData} from './../../constants/initData.js';
@@ -40,8 +42,8 @@ import PPSFilter from './ppsFilter';
 import FilterSummary from '../../components/tableFilter/filterSummary'
 import DropdownTable from '../../components/dropdown/dropdownTable';
 import Dropdown from '../../components/gor-dropdown-component/dropdown';
-import {PPS_MODE_CHANGE_URL, API_URL} from '../../constants/configConstants';
-import {PPS_MODE_CHANGE, APP_JSON, PUT} from '../../constants/frontEndConstants';
+import {PPS_MODE_CHANGE_URL,PPS_STATUS_CHANGE_URL} from '../../constants/configConstants';
+
 
 import {modal} from 'react-redux-modal';
 import ClosePPSList from './closePPSList';
@@ -158,7 +160,7 @@ class PPS extends React.Component {
         let audit=nProps.context.intl.formatMessage(stringConfig.audit);
         var currentTask={"pick": pick, "put": put, "audit": audit};
         var priStatus={"on": 1, "off": 2};
-
+        var checkedPPS = this.props.checkedPps || {}
         detail.totalOperator=0;
         for (var i=data.length - 1; i >= 0; i--) {
             detail={};
@@ -170,6 +172,7 @@ class PPS extends React.Component {
             PERFORMANCE=nProps.context.intl.formatMessage(messages.perfPrefix, {"performance": performance ? performance : "0"});
             detail.id=PPS;
             detail.ppsId=ppsId;
+            detail.isChecked = checkedPPS[data[i].pps_id] ? true :false;
             if (data[i].pps_status=== "on") {
                 detail.status=ON;
                 detail.statusPriority=priStatus[data[i].pps_status];
@@ -225,19 +228,14 @@ class PPS extends React.Component {
     /*handler for status change*/
     handleStatusChange(selection){
       var checkedPPS=[], j=0, sortedIndex;
-        for (var i=this.props.checkedPps.length - 1; i >= 0; i--) {
-            if (this.props.checkedPps[i]=== true) {
-                if (this.state.sortedDataList.newData !== undefined) {
-                    checkedPPS[j]=this.state.sortedDataList.newData[i].ppsId;
-                }
-                else {
-                    sortedIndex=this.state.sortedDataList._indexMap[i];
-                    checkedPPS[j]=this.state.sortedDataList._data.newData[sortedIndex].ppsId;
-                }
-                j++;
-            }
-        }
+        
         if(selection.value !== "open"){
+             let selectedPps = this.props.checkedPps,openPps={};
+             for(let k in selectedPps){
+                if(selectedPps[k].status !== "off"){
+                    openPps[k] = selectedPps[k];
+                }
+             }
              modal.add(ClosePPSList, {
                 title: '',
                 heading:<FormattedMessage id="pps.close.heading"
@@ -246,48 +244,52 @@ class PPS extends React.Component {
                 size: 'large', // large, medium or small,
                 closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
                 hideCloseButton: true,
-                checkedPPS: checkedPPS
+                checkedPPS: openPps
             });
+        }
+        else{
+            let formData={},checkedPps = this.props.checkedPps,selectedPps={}
+            for(let k in this.props.checkedPps){
+                selectedPps[k] = "open"
+            }
+            formData["requested_pps_status"] = selectedPps
+            let ppsStatusChange={
+                    'url': PPS_STATUS_CHANGE_URL,
+                    'formdata': formData,
+                    'method': PUT,
+                    'cause': PPS_STATUS_CHANGE,
+                    'token': sessionStorage.getItem('auth_token'),
+                    'contentType': APP_JSON
+                }
+
+        this.props.changePPSmode(ppsStatusChange);
+        this.props.setCheckAll(false);
+        this.props.setDropDisplay(false);
+        this.props.setCheckedPps({});
         }
     }
 
     handleModeChange(data) {
-        var checkedPPS=[], j=0, mode=data.value, sortedIndex;
-        for (var i=this.props.checkedPps.length - 1; i >= 0; i--) {
-            if (this.props.checkedPps[i]=== true) {
-                if (this.state.sortedDataList.newData !== undefined) {
-                    checkedPPS[j]=this.state.sortedDataList.newData[i].ppsId;
-                }
-                else {
-                    sortedIndex=this.state.sortedDataList._indexMap[i];
-                    checkedPPS[j]=this.state.sortedDataList._data.newData[sortedIndex].ppsId;
-                }
-                let formdata={
-                    "requested_pps_mode": mode
-                };
-                var url=API_URL + PPS_MODE_CHANGE_URL + checkedPPS[j] + "/pps_mode";
-                let ppsModeChange={
-                    'url': url,
-                    'formdata': formdata,
+        var checkedPPS=[], j=0, mode=data.value, sortedIndex,formData={};
+        checkedPPS =Object.keys(this.props.checkedPps);
+        formData["pps_id"] = checkedPPS
+        formData["requested_pps_mode"] =  mode;
+        var ppsModeChange={
+                    'url': PPS_MODE_CHANGE_URL,
+                    'formdata': formData,
                     'method': PUT,
                     'cause': PPS_MODE_CHANGE,
                     'token': sessionStorage.getItem('auth_token'),
                     'contentType': APP_JSON
                 }
 
-                this.props.changePPSmode(ppsModeChange);
-                j++;
-            }
-        }
-        var resetCheck=new Array(this.props.checkedPps.length).fill(false);
+        this.props.changePPSmode(ppsModeChange);
         this.props.setCheckAll(false);
         this.props.setDropDisplay(false);
-        this.props.setCheckedPps(resetCheck);
+        this.props.setCheckedPps({});
 
     }
-    _handleSelectionChange(e){
-        console.log(e);
-    }
+    
 
     render() {
         let filterHeight=screen.height - 190 - 50;
@@ -335,6 +337,15 @@ class PPS extends React.Component {
                                           defaultMessage="Open Selected PPS"/>
          let closeStatusLabel = <FormattedMessage id="PPS.table.closeStatusLabel" description="audit dropdown option for Status change"
                                           defaultMessage="Close Selected PPS"/>
+        var openCount=0,closeCount=0;
+        for(let k in this.props.checkedPps){
+            if(this.props.checkedPps[k].status === "off"){
+                closeCount++
+            }
+            else{
+                openCount++
+            }
+        }
         const status = [
             {value: 'open', disabled:false,label: openStatusLabel},
             {value: 'close', disabled:false,label: closeStatusLabel}
@@ -352,17 +363,14 @@ class PPS extends React.Component {
         
             statusDrop = <Dropdown 
                     options={status} 
-                    onSelectHandler={(e) => this.handleModeChange(e)}
+                    onSelectHandler={(e) => this.handleStatusChange(e)}
                     disabled={!this.props.bDropRender}
                     resetOnSelect={true}
                     placeholder={"Change PPS Status"} />
        
         if (this.props.checkedPps) {
-            for (let i=this.props.checkedPps.length - 1; i >= 0; i--) {
-                if (this.props.checkedPps[i]=== true) {
-                    selected=selected + 1;
-                }
-            }
+            
+            selected = Object.keys(this.props.checkedPps).length;
         }
 
         return (

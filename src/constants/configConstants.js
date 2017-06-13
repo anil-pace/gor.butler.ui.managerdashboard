@@ -7,7 +7,8 @@ export const LOGIN_URL=PROTOCOL+BASE_URL+"/api/auth/token"
 export const API_URL=PROTOCOL+BASE_URL+"/api";
 export const HEADER_URL=PROTOCOL+BASE_URL+"/api/user"
 export const ORDERS_URL="/orders/md"
-export const PPS_MODE_CHANGE_URL="/pps/";
+export const PPS_MODE_CHANGE_URL=API_URL+"/pps/change_mode";
+export const PPS_STATUS_CHANGE_URL = API_URL+"/pps/change_status";
 export const PAGE_SIZE_URL="&PAGE_SIZE=";
 export const ROLE_URL=HEADER_URL+'/role';
 export const CHECK_USER=HEADER_URL+'?username=';

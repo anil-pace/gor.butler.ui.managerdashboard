@@ -22,7 +22,7 @@ class ClosePPSList extends React.Component {
         this.state = initialState;
     }
     _getInitialState(){
-        var checkedPPS = this.props.checkedPPS;
+        var checkedPPS = Object.keys(this.props.checkedPPS);
         var len  = checkedPPS.length;
         var state = {};
         for(let i = 0 ; i < len ; i++){
@@ -61,7 +61,7 @@ class ClosePPSList extends React.Component {
     }
     _processData(){
         var processedData = {};
-        var checkedPPS = this.props.checkedPPS;
+        var checkedPPS = Object.keys(this.props.checkedPPS);
         var ppsLen = checkedPPS.length;
          processedData.header = [
             {id:1,text: <FormattedMessage id="ppsclose.tblhead1.text" description='Table first head' defaultMessage='SLOT ID'/>, sortable: false},
@@ -73,7 +73,7 @@ class ClosePPSList extends React.Component {
             let row = [];
             row.push("PPS "+checkedPPS[i]);
             row.push("66");
-            row.push(<div>
+            row.push(<div key={i}>
                 <label>
                 <input type='radio' value={close} name={'radio_pps_'+checkedPPS[i]} onChange={this._onRadioChange.bind(this,"pps_"+checkedPPS[i],close)} checked={this.state["pps_"+checkedPPS[i]].checkedValue ==="close"}/>Close</label>
                 <label><input type='radio' value={fclose} name={'radio_pps_'+checkedPPS[i]} onChange={this._onRadioChange.bind(this,"pps_"+checkedPPS[i],fclose)} checked={this.state["pps_"+checkedPPS[i]].checkedValue ==="fclose"}/>Force Close</label>

@@ -136,6 +136,7 @@ export const CHECK_ID='CHECK_ID';
 export const DELETE_USER='DELETE_USER';
 export const GET_ROLES='GET_ROLES';
 export const PPS_MODE_CHANGE='PPS_MODE_CHANGE';
+export const PPS_STATUS_CHANGE = "PPS_STATUS_CHANGE";
 export const GET_HEADER_INFO='GET_HEADER_INFO';
 export const EDIT_USER='EDIT_USER';
 export const DEBOUNCE_TIMER=1000;

@@ -199,7 +199,12 @@ export const ComponentCell=({rowIndex, data, columnKey,checkState,checked, ...pr
     {data.getObjectAt(rowIndex)[columnKey]}
   </Cell>
 );
-
+export const PPSComponentCell=({rowIndex, data, columnKey,checkState,checked, ...props})=> (
+  
+  <Cell {...props}> <input type="checkbox" checked={data.getObjectAt(rowIndex)["isChecked"]} onChange={checkState.bind(this,props.checkboxColumn,rowIndex)}/>
+    {data.getObjectAt(rowIndex)[columnKey]}
+  </Cell>
+);
 export const StatusCell=({rowIndex, data, columnKey,statusKey, ...props})=> (
   <Cell {...props} className={data.getObjectAt(rowIndex)[statusKey]}>
     {data.getObjectAt(rowIndex)[columnKey]}

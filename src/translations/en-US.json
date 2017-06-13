@@ -3144,6 +3144,18 @@
     "filepath": "./src/containers/systemTabs/ppsTab.js"
   },
   {
+    "id": "PPS.table.openStatusLabel",
+    "description": "audit dropdown option for Status change",
+    "defaultMessage": "Open Selected PPS",
+    "filepath": "./src/containers/systemTabs/ppsTab.js"
+  },
+  {
+    "id": "PPS.table.closeStatusLabel",
+    "description": "audit dropdown option for Status change",
+    "defaultMessage": "Close Selected PPS",
+    "filepath": "./src/containers/systemTabs/ppsTab.js"
+  },
+  {
     "id": "pps.table.heading",
     "description": "Heading for PPS",
     "defaultMessage": "Pick Put Stations",
