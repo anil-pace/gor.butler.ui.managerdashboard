@@ -39,11 +39,11 @@ import {INVENTORY_DATA_HISTORY,INVENTORY_HISTORY_DAYS_COUNT,
     }
 
     
-    let parseDtInMS ;
-
+    let parseDtInMS,invDate ;
+    invDate = new Date(invObj.date);
+    invObj.date=invDate.getFullYear() +"-"+(invDate.getMonth()+1)+"-"+("0" + invDate.getDate()).slice(-2);
     parsedDate=new Date(invObj.date);
-    invObj.date=parsedDate.getFullYear() +"-"+(parsedDate.getMonth()+1)+"-"+("0" + parsedDate.getDate()).slice(-2);
-    parseDtInMS=new Date(invObj.date).getTime();
+    parseDtInMS=parsedDate.getTime();
     recreatedData[parseDtInMS]={};
     recreatedData[parseDtInMS].otherInfo=invObj;
     dateToday=parsedDate;
@@ -60,12 +60,15 @@ import {INVENTORY_DATA_HISTORY,INVENTORY_HISTORY_DAYS_COUNT,
 
   }
   else if(isHistory !== "inventoryDataToday"){
-    dateToday=new Date(stateObj.dateTodayState) ;
+    dateToday = new Date(stateObj.dateTodayState) ;
+    dateToday=new Date(dateToday.getFullYear(),dateToday.getMonth(),dateToday.getDate()) ;
     for(let i=0,k=0; k < INVENTORY_HISTORY_DAYS_COUNT ; k++){
       dateToday=new Date(dateToday.setDate(dateToday.getDate()-1));
       invObj=inventory[i] ? inventory[i] : {};
-      let emptyData=(new Date(invObj.date).getDate() === dateToday.getDate() ? false : true);//Object.keys(invObj).length ? false : true;
-      let histDate=!emptyData ? Date.parse(invObj.date) : dateToday.getTime();
+      let invDate = new Date(invObj.date);
+      invDate = new Date(invDate.getFullYear(),invDate.getMonth(),invDate.getDate())
+      let emptyData=(invDate.getDate() === dateToday.getDate() ? false : true);//Object.keys(invObj).length ? false : true;
+      let histDate=!emptyData ? invDate.getTime() : dateToday.getTime();
       invObj["current_stock"]=!emptyData ? (invObj["opening_stock"] + invObj["items_put"])-invObj["items_picked"] : 0;
       invObj.unusedSpace=!emptyData ? (100 - invObj["warehouse_utilization"]) : 100;
       invObj.colorCode=CATEGORY_COLOR_MAP[CATEGORY_COLOR_MAP.length -1];
