@@ -209,7 +209,7 @@ class PPStable extends React.Component {
     }
 
     headerCheckChange() {
-        var checkedAllState=this.props.checkedPps, showDropdown, headerState=this.props.getCheckAll;
+        var checkedAllState=this.props.checkedPps.slice(0), showDropdown, headerState=this.props.getCheckAll;
         if (headerState=== false) {
             for (let i=checkedAllState.length - 1; i >= 0; i--) {
                 checkedAllState[i]=true;
