@@ -66,6 +66,54 @@
     "filepath": "./src/components/commonFunctionsDataTable.js"
   },
   {
+    "id": "audit.resolveUnresolve.tooltip.header",
+    "description": "resolveUnresolve issue for audit table",
+    "defaultMessage": "{resolvedCount} audit lines, {unresolvedCount} audit lines",
+    "filepath": "./src/components/commonFunctionsDataTable.js"
+  },
+  {
+    "id": "audit.resolveUnresolve.tooltip.content",
+    "description": "unresolve issue for audit table",
+    "defaultMessage": "Approve or reject audit line with issues",
+    "filepath": "./src/components/commonFunctionsDataTable.js"
+  },
+  {
+    "id": "audit.unresolveIssues.tooltip.header",
+    "description": "unresolve issue for audit table",
+    "defaultMessage": "{unresolvedCount} {unresolvedCount, plural, one {unresolved audit line} other {unresolved audit lines}}",
+    "filepath": "./src/components/commonFunctionsDataTable.js"
+  },
+  {
+    "id": "audit.unresolveIssues.tooltip.content",
+    "description": "unresolve issue for audit table",
+    "defaultMessage": "Approve or reject audit line with issues",
+    "filepath": "./src/components/commonFunctionsDataTable.js"
+  },
+  {
+    "id": "audit.rejected.tooltip.header",
+    "description": "rejected issue for audit table",
+    "defaultMessage": "{rejected_lines}/{total_lines} {rejected_lines, plural, one {audit line} other {audit lines}} were rejected",
+    "filepath": "./src/components/commonFunctionsDataTable.js"
+  },
+  {
+    "id": "audit.rejected.tooltip.content",
+    "description": "Re-audit the rejected audit lines",
+    "defaultMessage": "Re-audit the rejected audit lines",
+    "filepath": "./src/components/commonFunctionsDataTable.js"
+  },
+  {
+    "id": "audit.created.tooltip.header",
+    "description": "resolveUnresolve issue for audit table",
+    "defaultMessage": "Assign PPS to start audit task",
+    "filepath": "./src/components/commonFunctionsDataTable.js"
+  },
+  {
+    "id": "audit.created.tooltip.content",
+    "description": "unresolve issue for audit table",
+    "defaultMessage": "Click on \"Start Audit\" to assign PPS",
+    "filepath": "./src/components/commonFunctionsDataTable.js"
+  },
+  {
     "id": "utility.fileSize.message",
     "description": "Maximum File Size:  MB",
     "defaultMessage": "Maximum File Size: {maxSize}",
@@ -1181,6 +1229,30 @@
     "filepath": "./src/constants/messageConstants.js"
   },
   {
+    "id": "audit.cancellation.error.g020",
+    "description": "Internal server error while requesting for audit cancel",
+    "defaultMessage": "Internal server error while requesting for audit cancel",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "audit.cancellation.error.g021",
+    "description": "Audit Id already sent to core for cancellation",
+    "defaultMessage": "Audit Id already sent to core for cancellation",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "audit.cancellation.error.g023",
+    "description": "Audit Id already successfully cancelled",
+    "defaultMessage": "Audit Id already successfully cancelled",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "audit.cancellation.error.g024",
+    "description": "Audit Id cancellation request has been process and cannot be cancelled",
+    "defaultMessage": "Audit Id cancellation request has been process and cannot be cancelled",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
     "id": "widget.audit.heading.value",
     "description": "Total Items Audited",
     "defaultMessage": "None",
@@ -1264,6 +1336,16 @@
   {
     "id": "auditdetail.auditReaudited.prefix",
     "defaultMessage": "Re-audited",
+    "filepath": "./src/containers/auditTab.js"
+  },
+  {
+    "id": "auditdetail.auditCancelled.prefix",
+    "defaultMessage": "Cancelled",
+    "filepath": "./src/containers/auditTab.js"
+  },
+  {
+    "id": "auditdetail.auditCancellingText.text",
+    "defaultMessage": "Cancelling...",
     "filepath": "./src/containers/auditTab.js"
   },
   {
@@ -1398,6 +1480,12 @@
     "id": "audit.table.deleteRecord",
     "description": "deleteRecord option for audit",
     "defaultMessage": "Delete record",
+    "filepath": "./src/containers/auditTab/auditTable.js"
+  },
+  {
+    "id": "audit.table.cancelTask",
+    "description": "cancel option for task",
+    "defaultMessage": "Cancel Task",
     "filepath": "./src/containers/auditTab/auditTable.js"
   },
   {
