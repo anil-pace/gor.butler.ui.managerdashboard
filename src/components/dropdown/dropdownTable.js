@@ -18,7 +18,7 @@ class DropdownTable extends Component {
   }
 
   shouldComponentUpdate(nextProps,nextState){
-    if(JSON.stringify(this.props.currentState)!==JSON.stringify(nextProps.currentState)){
+    if(JSON.stringify(this.props.currentState)!==JSON.stringify(nextProps.currentState || this.props.items!==nextProps.items)){
       return true
     }
     return false

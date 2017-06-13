@@ -165,7 +165,7 @@ body {
 .overview-tile-ontime-icon,
 .statusOl, .statusAl, .iStock, .iAudit, .iPick, .gor-login-user, .gor-login-password, .gor-login-error, .gor-tick, .gor-question, .gor-tick-white, .gor-remove-white, .gor-error-white, .gor-login-user-error, .gor-login-password-error, .gor-question-2, .gor-operation-tick, .gor-alert-lg,
 .gor-dropdown-open, .gor-dropdown-close, .gor-caution, .gor-delay-icon,
-.gor-emergency-dropdown-close, .gor-emergency-dropdown-open, .gor-info-icon, .gor-selected-icon {
+.gor-emergency-dropdown-close, .gor-emergency-dropdown-open, .gor-info-icon, .gor-audit-info-icon, .gor-selected-icon {
   background-image: url(./images/icons.svg);
 }
 
@@ -578,6 +578,14 @@ body {
 
 .gor-info-icon {
   background-position: -460px -77px;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.gor-audit-info-icon {
+  background-position: -494px -77px;
   width: 16px;
   height: 16px;
   display: inline-block;
@@ -3524,6 +3532,14 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
+.gor-audit-cancelling-text {
+  font-size: 12px;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: red;
+}
+
 .gorSubTab.gorContainer {
   background-color: #F8F8F8;
   width: auto;
@@ -5869,7 +5885,7 @@ button:disabled {
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2);
   border-radius: 0.1875rem;
   display: inline-block;
-  min-height: 20rem;
+  min-height: 18.75rem;
   margin: 1% 0% 0% 1%;
   font-size: 0;
   width: 23.7%;
@@ -6033,14 +6049,14 @@ button:disabled {
   padding-bottom: 10px;
 }
 
-.gor-utility-invoice-wrap, .gor-utility-sku-wrap, .gor-utility-duration-wrap {
+.gor-utility-invoice-wrap {
   margin-left: 34px;
   width: 76%;
   box-shadow: none;
   margin-top: 0px;
 }
 
-.gor-utility-invoice-h1, .gor-utility-stock-ledger-duration-label {
+.gor-utility-invoice-h1 {
   font-size: 16px;
   font-weight: 600;
   color: #000000;
@@ -6072,6 +6088,89 @@ button:disabled {
   cursor: pointer;
 }
 
-.gor-utility-duration-wrap input[type=checkbox] {
-  margin-right: 5px;
+.gor-dropdown {
+  cursor: pointer;
+  position: relative;
+}
+
+.gor-option-icon {
+  background-image: url(/om/assets/images/ic-arrow-down.svg);
+  background-repeat: no-repeat;
+  width: 12px;
+  height: 20px;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.gor-white-background {
+  background-color: #FFFFFF;
+}
+
+.gor-dropdown-wrapper {
+  border: 1px solid;
+  border-radius: 0.1875rem;
+  box-sizing: border-box;
+  cursor: default;
+  outline: none;
+  padding: 0.5rem 3.25rem 0.5rem 0.625rem;
+  transition: all 200ms ease;
+  border-color: #aaaaaa;
+  font-size: 14px;
+  font-weight: 100;
+  color: #aaaaaa;
+  position: relative;
+}
+
+.gor-dropdown-wrapper .gor-dropdown-arrow {
+  border-color: #A6A7A9 transparent transparent;
+  border-style: solid;
+  border-width: 0.5rem 0.3125rem 0.125rem;
+  content: ' ';
+  display: block;
+  height: 0;
+  margin-top: -ceil(2.5);
+  position: absolute;
+  right: 0.9375rem;
+  top: 0.6875rem;
+}
+
+.gor-dropdown-wrapper .gor-dropdown-arrow.up {
+  width: 0px;
+  height: 0px;
+  border-width: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 9px solid #A6A7A9;
+  border-color: none;
+  border-style: solid;
+}
+
+.gor-dropdown-option {
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 500;
+  box-sizing: border-box;
+  color: #A6A7A9;
+  cursor: pointer;
+  padding: 0.5rem 0.625rem;
+}
+
+.gor-dropdown-option.disabled {
+  cursor: default;
+  color: #C8C8C8;
+}
+
+.gor-option-wrapper {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  top: 30px;
+  background: #fff;
+  width: 100%;
+  border: 1px solid;
+  border-radius: 3px;
+  box-shadow: 0 0.0625rem 0 rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
 }

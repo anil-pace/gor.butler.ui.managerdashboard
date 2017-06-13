@@ -161,6 +161,7 @@ export const UPDATE_FILE_SIZE="UPDATE_FILE_SIZE";
 export const MASTER_FILE_FORMATS=[".csv"];
 
 export const AUDIT_RETRIEVE="AUDIT_RETRIEVE";
+export const CANCEL_AUDIT="CANCEL_AUDIT";
 export const RECIEVE_AUDIT_DATA="RECIEVE_AUDIT_DATA";
 export const CREATE_AUDIT='CREATE_AUDIT';
 export const DELETE_AUDIT='DELETE_AUDIT';
@@ -434,6 +435,7 @@ export const AUDIT_RESOLVED="audit_resolved";
 export const AUDIT_UNRESOLVED="Unresolved";
 export const AUDIT_LINE_REJECTED="audit_rejected";
 export const AUDIT_REJECTED_STATUS="Rejected";
+export const AUDIT_REAUDITED_STATUS="Re-audited";
 export const AUDIT_RESOLVED_STATUS="Resolved";
 export const AUDIT_PARAM_TYPE='audit_param_type';
 export const AUDIT_PARAM_VALUE='audit_param_value';

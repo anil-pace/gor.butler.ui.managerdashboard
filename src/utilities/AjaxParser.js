@@ -13,11 +13,11 @@ import {ERROR,AUTH_LOGIN, ADD_USER, RECIEVE_TIME_OFFSET,CHECK_ID,DELETE_USER,GET
 	PPS_MODE_CHANGE,EDIT_USER,RECIEVE_HEADER,SUCCESS,CREATE_AUDIT,AUDIT_RETRIEVE,GET_PPSLIST,START_AUDIT,
 	DELETE_AUDIT,AUDIT_RESOLVE_LINES,AUDIT_RESOLVE_CONFIRMED, VALIDATE_SKU_ID,PAUSE_OPERATION,
 	RESUME_OPERATION,CONFIRM_SAFETY,CHECK_SAFETY,RECEIVE_SHIFT_START_TIME,ITEM_RECALLED,GR_REPORT_RESPONSE,ITEM_RECALLED_DATA,
-MASTER_FILE_UPLOAD,GET_MAX_FILE_SIZE,GET_CONFIGS,
-UPLOAD_HISTORY,DOWNLOAD_STOCK_LEDGER_REPORT} from '../constants/frontEndConstants';
+MASTER_FILE_UPLOAD,GET_MAX_FILE_SIZE,GET_CONFIGS,CANCEL_AUDIT,DOWNLOAD_STOCK_LEDGER_REPORT,
+UPLOAD_HISTORY} from '../constants/frontEndConstants';
 
 import {BUTLER_UI,CODE_E027} from '../constants/backEndConstants'
-import {UE002,E028,E029,MODE_REQUESTED,TYPE_SUCCESS,AS001,AS00A,WRONG_CRED,ES} from '../constants/messageConstants';
+import {UE002,E028,E029,MODE_REQUESTED,TYPE_SUCCESS,AS001,AS00A,WRONG_CRED,ES,g020,g021,g023,g024} from '../constants/messageConstants';
 import {ShowError} from './showError';
 import {endSession} from './endSession';
 import {setResolveAuditSpinner,setSafetySpinner,setInventoryReportSpinner} from '../actions/spinnerAction';
@@ -134,8 +134,44 @@ export function AjaxParse(store,res,cause,status)
 		    else
 		    {
 		    	store.dispatch(notifyFail(stringInfo.msg));	
-		    	store.dispatch(setAuditRefresh(false));//reset refresh flag			   			
+		    	store.dispatch(setAuditRefresh(false));//reset refresh flag
 		    }
+			break;
+		  case CANCEL_AUDIT:
+		    if(res.alert_data && res.alert_data.length>0)
+		    {
+		    	//ERROR
+                switch (res.alert_data[0].code) {
+                    case 'g020':
+                        store.dispatch(notifySuccess(g020))
+                        break;
+
+                    case 'g021':
+                        store.dispatch(notifySuccess(g021))
+                        break;
+
+                    case 'g023':
+                        store.dispatch(notifySuccess(g023))
+                        break;
+
+                    case 'g024':
+                        store.dispatch(notifySuccess(g024))
+                        break;
+
+                    default:
+                        store.dispatch(notifySuccess(res.alert_data[0].description))
+						break;
+
+
+                }
+
+		    }
+		    else
+		    {	//SUCCESS
+		    	store.dispatch(notifySuccess(res.data));
+		    }
+                store.dispatch(setAuditSpinner(false))
+                store.dispatch(setAuditRefresh(true))
 			break;
 		case GET_PPSLIST:
 			let auditpps=[];

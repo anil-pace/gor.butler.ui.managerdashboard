@@ -20,7 +20,7 @@ export  function recieveAuditDetail(state={},action){
             break;
         case REFRESH_AUDIT:
             return Object.assign({}, state, {
-                "auditRefresh" : action.data
+                "auditRefresh" : new Date()
             })
             break;
 
