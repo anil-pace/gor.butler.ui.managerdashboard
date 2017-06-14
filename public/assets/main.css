@@ -2217,7 +2217,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   max-height: 9px;
 }
 
-.on .public_fixedDataTableCell_cellContent {
+.on .public_fixedDataTableCell_cellContent, .open .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
   width: 90px;
@@ -2231,7 +2231,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   text-transform: capitalize;
 }
 
-.off .public_fixedDataTableCell_cellContent {
+.off .public_fixedDataTableCell_cellContent, .close .public_fixedDataTableCell_cellContent, .force_close .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
   width: 90px;
@@ -3589,6 +3589,11 @@ input[type="checkbox"] {
   color: #ffffff;
   border-radius: 3px;
   cursor: pointer;
+}
+
+.gor-add-btn.black {
+  background: #4D5055;
+  color: #fff;
 }
 
 .gor-select-field {
@@ -6084,6 +6089,14 @@ button:disabled {
   margin-top: 30px;
 }
 
+.pps-close-wrap.pps-submit-cont {
+  text-align: right;
+}
+
+.pps-close-wrap.pps-submit-cont .pps-close-cancel {
+  margin-right: 20px;
+}
+
 .pps-close-wrap .pps-close-head .left-sec {
   width: 50%;
   display: inline-block;
@@ -6122,6 +6135,13 @@ button:disabled {
   font-size: 12px;
   color: #27aae1;
   vertical-align: middle;
+}
+
+.pps-table .close {
+  float: none;
+  font-size: inherit;
+  color: inherit;
+  cursor: default;
 }
 
 .table-container {

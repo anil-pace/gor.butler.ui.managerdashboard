@@ -307,7 +307,7 @@ class PPStable extends React.Component {
                                     <div className="gor-subStatus-online">
                                         <div >
                                             <FormattedMessage id="PPStable.status" description='status for PPS table'
-                                                              defaultMessage='{ppsOnState} On'
+                                                              defaultMessage='{ppsOnState} Open'
                                                               values={{ppsOnState: ppsOnState ? ppsOnState : '0'}}/>
                                         </div>
                                     </div>
@@ -341,7 +341,7 @@ class PPStable extends React.Component {
                                 </div>
                             </SortHeaderCell>
                         }
-                        cell={<TextCell data={sortedDataList}  childrenClass="requestedModeTxt" childColumnKey="operatingMode" classKey={"operatingModeClass"}>
+                        cell={<TextCell data={sortedDataList}  childrenClass="requestedModeTxt" childColumnKey="pps_requested_mode" classKey={"operatingModeClass"}>
                                 <span ><FormattedMessage id="PPStable.requestedMode.text" description='PPStable.requestedMode.text'
                                                           defaultMessage='Requested Mode: '
                                                           /></span>
@@ -351,7 +351,7 @@ class PPStable extends React.Component {
                         isResizable={true}
                     />
                      <Column
-                        columnKey="operatingMode"
+                        columnKey="requested_status"
                         header={
                             <SortHeaderCell onSortChange={this._onSortChange}
                                             sortDir={colSortDirs.operatingMode}>

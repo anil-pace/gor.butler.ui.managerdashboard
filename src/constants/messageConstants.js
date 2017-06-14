@@ -184,8 +184,5 @@ export const fileUploadMessages={
       defaultMessage='File size should not be greater than'/>)
       
 }
-/*export const utility002=(<FormattedMessage id="masterdata.maxlimit.records" description='Records in file should not be greater than' 
-      defaultMessage='Records in file should not be greater than'/>);
-export const utility001=(<FormattedMessage id="masterdata.maxlimit.filesize" description='File size should not be greater than' 
-      defaultMessage='File size should not be greater than'/>);*/
+/*Message for status change notification*/
 

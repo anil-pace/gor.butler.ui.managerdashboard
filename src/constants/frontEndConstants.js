@@ -422,7 +422,7 @@ export const GOR_STATUS="status";
 export const GOR_STATUS_PRIORITY="statusPriority";
 export const GOR_PERIPHERAL_ONLINE="online";
 export const GOR_PERIPHERAL_OFFLINE="offline";
-export const GOR_ON_STATUS="on";
+export const GOR_ON_STATUS="open";
 export const GOR_CONNECTED_STATUS="Connected";
 export const GOR_COMPLETED_STATUS="Completed";
 export const GOR_BREACHED_LINES="gor-breached-lines";
@@ -554,3 +554,10 @@ export const SINGLE="Single"
 
 export const GET_CONFIGS="GET_CONFIGS"
 export const RECEIVE_CONFIGS="RECEIVE_CONFIGS"
+
+/*Constants for PPS Tab*/
+export const PPS_STATUS_CLOSE="close" ;
+export const PPS_STATUS_FCLOSE="force_close";
+export const PPS_STATUS_OPEN="open";
+export const GET_PENDING_MSU = "GET_PENDING_MSU";
+export const RESET_CHECKED_PPS = "RESET_CHECKED_PPS";

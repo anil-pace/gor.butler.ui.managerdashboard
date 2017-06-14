@@ -26,15 +26,19 @@ import {
     INITIAL_HEADER_ORDER,
     GOR_ON_STATUS,
     GOR_FIRST_LAST,WS_ONSEND,
-    PPS_STATUS_CHANGE
+    PPS_STATUS_CHANGE,
+    PPS_STATUS_CLOSE,
+    PPS_STATUS_FCLOSE,
+    PPS_STATUS_OPEN,
+    PPS_MODE_CHANGE, APP_JSON, PUT,
+    POST
 } from '../../constants/frontEndConstants';
 import {
     showTableFilter,
     filterApplied,
     ppsfilterState,
     togglePPSFilter,
-    setDefaultRange,
-    PPS_MODE_CHANGE, APP_JSON, PUT
+    setDefaultRange
 } from '../../actions/filterAction';
 import {updateSubscriptionPacket,setWsAction} from './../../actions/socketActions'
 import {wsOverviewData} from './../../constants/initData.js';
@@ -154,31 +158,49 @@ class PPS extends React.Component {
         var PPSData=[], detail={}, ppsId, performance, totalUser=0;
         var nProps=this;
         var data=nProps.props.PPSDetail.PPStypeDetail;
-        let PPS, ON, OFF, PERFORMANCE;
+        let PPS, OPEN, CLOSE,FCLOSE, PERFORMANCE;
         let pick=nProps.context.intl.formatMessage(stringConfig.pick);
         let put=nProps.context.intl.formatMessage(stringConfig.put);
         let audit=nProps.context.intl.formatMessage(stringConfig.audit);
         var currentTask={"pick": pick, "put": put, "audit": audit};
-        var priStatus={"on": 1, "off": 2};
-        var checkedPPS = this.props.checkedPps || {}
+        var priStatus={"open": 1, "close": 2,"force_close": 2};
+        var checkedPPS = this.props.checkedPps || {};
+        var requestedStatusText="--";
         detail.totalOperator=0;
         for (var i=data.length - 1; i >= 0; i--) {
             detail={};
             ppsId=data[i].pps_id;
             performance=(data[i].performance < 0 ? 0 : data[i].performance);
             PPS=nProps.context.intl.formatMessage(messages.namePrefix, {"ppsId": ppsId});
-            ON=nProps.context.intl.formatMessage(stringConfig.on);
-            OFF=nProps.context.intl.formatMessage(stringConfig.off);
+            OPEN=nProps.context.intl.formatMessage(stringConfig.open);
+            CLOSE=nProps.context.intl.formatMessage(stringConfig.close);
+            FCLOSE=nProps.context.intl.formatMessage(stringConfig.fclose);
             PERFORMANCE=nProps.context.intl.formatMessage(messages.perfPrefix, {"performance": performance ? performance : "0"});
+            if(data[i]["pps_requested_mode"] === "open"){
+                requestedStatusText = OPEN
+            }
+            else if(data[i]["pps_requested_mode"] === "close"){
+                requestedStatusText = CLOSE
+            }
+             else if(data[i]["pps_requested_mode"] === "force_close"){
+                requestedStatusText = FCLOSE
+            }
+            requestedStatusText
             detail.id=PPS;
             detail.ppsId=ppsId;
+            detail.requested_status=requestedStatusText ;
+            detail.pps_requested_mode=data[i]["pps_requested_mode"];
             detail.isChecked = checkedPPS[data[i].pps_id] ? true :false;
-            if (data[i].pps_status=== "on") {
-                detail.status=ON;
+            if (data[i].pps_status=== PPS_STATUS_OPEN) {
+                detail.status=OPEN;
                 detail.statusPriority=priStatus[data[i].pps_status];
             }
-            else {
-                detail.status=OFF;
+            else if(data[i].pps_status=== PPS_STATUS_CLOSE){
+                detail.status=CLOSE;
+                detail.statusPriority=1;
+            }
+            else{
+                detail.status=FCLOSE;
                 detail.statusPriority=1;
             }
             detail.statusClass=data[i].pps_status;
@@ -226,13 +248,14 @@ class PPS extends React.Component {
     }
 
     /*handler for status change*/
-    handleStatusChange(selection){
+    handleStatusChange(selection,requestObj){
       var checkedPPS=[], j=0, sortedIndex;
         
         if(selection.value !== "open"){
+             if(!requestObj){
              let selectedPps = this.props.checkedPps,openPps={};
              for(let k in selectedPps){
-                if(selectedPps[k].status !== "off"){
+                if(selectedPps[k].status.toLowerCase() === "open" /*PPS_STATUS_OPEN.toLowerCase()*/){
                     openPps[k] = selectedPps[k];
                 }
              }
@@ -244,8 +267,28 @@ class PPS extends React.Component {
                 size: 'large', // large, medium or small,
                 closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
                 hideCloseButton: true,
-                checkedPPS: openPps
+                checkedPPS: openPps,
+                handleStatusChange:this.handleStatusChange.bind(this),
+                changePPSmode:this.props.changePPSmode.bind(this)
             });
+         }
+         else{
+               let formData={}
+                formData = requestObj
+                let ppsStatusChange={
+                        'url': PPS_STATUS_CHANGE_URL,
+                        'formdata': formData,
+                        'method': POST,
+                        'cause': PPS_STATUS_CHANGE,
+                        'token': sessionStorage.getItem('auth_token'),
+                        'contentType': APP_JSON
+                    }
+
+            this.props.changePPSmode(ppsStatusChange);
+            this.props.setCheckAll(false);
+            this.props.setDropDisplay(false);
+            //this.props.setCheckedPps({});
+         }
         }
         else{
             let formData={},checkedPps = this.props.checkedPps,selectedPps={}
@@ -256,7 +299,7 @@ class PPS extends React.Component {
             let ppsStatusChange={
                     'url': PPS_STATUS_CHANGE_URL,
                     'formdata': formData,
-                    'method': PUT,
+                    'method': POST,
                     'cause': PPS_STATUS_CHANGE,
                     'token': sessionStorage.getItem('auth_token'),
                     'contentType': APP_JSON
@@ -265,7 +308,7 @@ class PPS extends React.Component {
         this.props.changePPSmode(ppsStatusChange);
         this.props.setCheckAll(false);
         this.props.setDropDisplay(false);
-        this.props.setCheckedPps({});
+        //this.props.setCheckedPps({});
         }
     }
 
@@ -277,7 +320,7 @@ class PPS extends React.Component {
         var ppsModeChange={
                     'url': PPS_MODE_CHANGE_URL,
                     'formdata': formData,
-                    'method': PUT,
+                    'method': POST,
                     'cause': PPS_MODE_CHANGE,
                     'token': sessionStorage.getItem('auth_token'),
                     'contentType': APP_JSON
@@ -286,7 +329,7 @@ class PPS extends React.Component {
         this.props.changePPSmode(ppsModeChange);
         this.props.setCheckAll(false);
         this.props.setDropDisplay(false);
-        this.props.setCheckedPps({});
+        //this.props.setCheckedPps({});
 
     }
     
@@ -311,7 +354,7 @@ class PPS extends React.Component {
                     operatorNum=data[i].totalUser
                 }
 
-                if (data[i].status=== GOR_ON_STATUS) {
+                if (data[i].status.toLowerCase()=== GOR_ON_STATUS.toLowerCase()) {
                     ppsOn++;
                 }
 
@@ -339,16 +382,17 @@ class PPS extends React.Component {
                                           defaultMessage="Close Selected PPS"/>
         var openCount=0,closeCount=0;
         for(let k in this.props.checkedPps){
-            if(this.props.checkedPps[k].status === "off"){
+            if(this.props.checkedPps[k].status.toLowerCase() === "close" || this.props.checkedPps[k].status.toLowerCase() === "force close"){
                 closeCount++
             }
             else{
                 openCount++
             }
         }
+
         const status = [
-            {value: 'open', disabled:false,label: openStatusLabel},
-            {value: 'close', disabled:false,label: closeStatusLabel}
+            {value: 'open', disabled:(closeCount  ? false : true),label: openStatusLabel},
+            {value: 'close', disabled:(openCount ? false : true),label: closeStatusLabel}
         ];
         const modes=[ {value: 'put', disabled:false,label: pickDrop},
             {value: 'pick',  disabled:false,label: putDrop},

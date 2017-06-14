@@ -8,12 +8,13 @@ import {GTableHeader,GTableHeaderCell} from '../../components/gor-table-componen
 import {GTableBody} from "../../components/gor-table-component/tableBody";
 import {GTableNoResult} from "../../components/gor-table-component/noResultFound";
 import {GTableRow} from "../../components/gor-table-component/tableRow";
-import {ERROR, GET_ROLES, EDIT_USER, SUCCESS, GET, APP_JSON, PUT} from '../../constants/frontEndConstants';
+import {POST, APP_JSON,GET_PENDING_MSU} from '../../constants/frontEndConstants';
+import {GET_PPS_MSU} from '../../constants/configConstants'
 
 const closeAll = "closeAll";
 const fcloseAll = "fcloseAll";
 const close = "close";
-const fclose = "fclose";
+const fclose = "force_close";
 class ClosePPSList extends React.Component {
 
     constructor(props) {
@@ -26,27 +27,47 @@ class ClosePPSList extends React.Component {
         var len  = checkedPPS.length;
         var state = {};
         for(let i = 0 ; i < len ; i++){
-            state["pps_"+checkedPPS[i]] = {};
-            state["pps_"+checkedPPS[i]].checkedValue="";
+            state[checkedPPS[i]] = {};
+            state[checkedPPS[i]].checkedValue="";
         }
         return state;
     }
 
     removeThisModal() {
-        //this.props.resetForm();
         this.props.removeModal();
     }
     _handleClosePPS(e) {
-        e.preventDefault()
+        e.preventDefault();
+        var selectedPPS = JSON.parse(JSON.stringify(this.state));
+        var requestJSON = {};
+        requestJSON["requested_pps_status"]={};
+        for(let k in selectedPPS){
+            requestJSON["requested_pps_status"][k] = selectedPPS[k].checkedValue
+        }
+        this.props.handleStatusChange({value:"close"},requestJSON);
+        this.props.removeModal();
+
     }
     componentDidMount(){
-        console.log(this.props.checkedPPS)
+        let formData = {};
+        formData.pps_id = Object.keys(this.props.checkedPPS)
+        let params={
+                'url': GET_PPS_MSU,
+                'formdata': formData,
+                'method': POST,
+                'cause': GET_PENDING_MSU,
+                'token': sessionStorage.getItem('auth_token'),
+                'contentType': APP_JSON
+            };
+            this.props.changePPSmode(params);
     }
     _onRadioChange(ppsId,value){
+       
         this.setState({
-            [ppsId]:{
+                [ppsId]:{
                 checkedValue:value
             }
+        
         })
     }
     _setAllStatus(selection){
@@ -57,12 +78,15 @@ class ClosePPSList extends React.Component {
                 state[k].checkedValue = radioSelection
             }
         }
+    
         this.setState(state);
     }
     _processData(){
         var processedData = {};
         var checkedPPS = Object.keys(this.props.checkedPPS);
         var ppsLen = checkedPPS.length;
+        var pendingMSU = this.props.pendingMSU || {};
+        var areAllSelected = true
          processedData.header = [
             {id:1,text: <FormattedMessage id="ppsclose.tblhead1.text" description='Table first head' defaultMessage='SLOT ID'/>, sortable: false},
             {id:2,text: <FormattedMessage id="ppsclose.tblhead2.text" description='Table second head' defaultMessage='MSU Pending'/>, sortable: false},
@@ -72,14 +96,18 @@ class ClosePPSList extends React.Component {
         for(let i=0 ;i < ppsLen ; i++){
             let row = [];
             row.push("PPS "+checkedPPS[i]);
-            row.push("66");
+            row.push(pendingMSU[checkedPPS[i]]);
             row.push(<div key={i}>
                 <label>
-                <input type='radio' value={close} name={'radio_pps_'+checkedPPS[i]} onChange={this._onRadioChange.bind(this,"pps_"+checkedPPS[i],close)} checked={this.state["pps_"+checkedPPS[i]].checkedValue ==="close"}/>Close</label>
-                <label><input type='radio' value={fclose} name={'radio_pps_'+checkedPPS[i]} onChange={this._onRadioChange.bind(this,"pps_"+checkedPPS[i],fclose)} checked={this.state["pps_"+checkedPPS[i]].checkedValue ==="fclose"}/>Force Close</label>
+                <input type='radio' value={close} name={'radio_pps_'+checkedPPS[i]} onChange={this._onRadioChange.bind(this,checkedPPS[i],close)} checked={this.state[checkedPPS[i]].checkedValue ===close}/>Close</label>
+                <label><input type='radio' value={fclose} name={'radio_pps_'+checkedPPS[i]} onChange={this._onRadioChange.bind(this,checkedPPS[i],fclose)} checked={this.state[checkedPPS[i]].checkedValue ===fclose}/>Force Close</label>
                 </div>);
              processedData.filteredData.push(row);
+             if(!this.state[checkedPPS[i]].checkedValue){
+                    areAllSelected = false;
+             }
         }
+        processedData.confirmDisable = !areAllSelected
         return processedData;
     }
 
@@ -135,6 +163,14 @@ class ClosePPSList extends React.Component {
                         </GTable>
                     </div>
                     </div>  
+                    <div className="pps-close-wrap pps-submit-cont">
+                         <button type="button" onClick = {this.props.removeModal} className="gor-add-btn black pps-close-cancel"><FormattedMessage
+                                        id="pps.close.cancel" description='Text for cancel close'
+                                        defaultMessage='CANCEL'/></button>
+                        <button type="submit" disabled={processedData.confirmDisable} className="gor-add-btn"><FormattedMessage
+                                        id="pps.close.confirm" description='Text for close confirm'
+                                        defaultMessage='CONFIRM'/></button>
+                    </div>
                         </form>
                     </div>
                 </div>
@@ -144,21 +180,10 @@ class ClosePPSList extends React.Component {
 }
 
 
-/*var mapDispatchToProps=function (dispatch) {
+function mapStateToProps(state, ownProps) {
     return {
-        userRequest: function (data) {
-            dispatch(userRequest(data));
-        },
-        validateName: function (data) {
-            dispatch(validateName(data));
-        },
-        validatePassword: function (data) {
-            dispatch(validatePassword(data));
-        },
-        resetForm: function () {
-            dispatch(resetForm());
-        }
-    }
-};*/
+        pendingMSU:state.ppsInfo.pendingMSU
+    };
+}
 
-export default connect(null, null)(ClosePPSList);
+export default connect(mapStateToProps, null)(ClosePPSList);

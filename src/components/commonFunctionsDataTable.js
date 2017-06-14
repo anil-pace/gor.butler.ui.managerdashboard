@@ -58,8 +58,8 @@ export function sortData (columnKey, sortDir,sortIndexes,_dataList) {
     var BInt=parseInt(valB, 10);
 
     if(isNaN(AInt) && isNaN(BInt)){
-        var aA=valA.replace(reA, "");
-        var bA=valB.replace(reA, "");
+        var aA= valA ? valA.replace(reA, "") : "";
+        var bA= valB ? valB.replace(reA, "") : "";
         if(aA=== bA) {
             var aN=parseInt(valA.replace(reN, ""), 10);
             var bN=parseInt(valB.replace(reN, ""), 10);
@@ -124,9 +124,10 @@ export const ActionCell=({rowIndex, data, columnKey,selEdit,selDel,mid, ...props
 export const TextCell=({rowIndex, data, columnKey,setClass, ...props})=>{ 
   
   const childrenCell =  React.Children.map(props.children, child => {
-      return (
+      
+       return data.getObjectAt(rowIndex)[props.childColumnKey] ?(
         <span className={props.childrenClass}>{child}{data.getObjectAt(rowIndex)[props.childColumnKey]}</span>
-      );
+      ):("");
     });
   return(<Cell {...props}  className={setClass}>
     {data.getObjectAt(rowIndex)[columnKey]}

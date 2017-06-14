@@ -200,13 +200,13 @@
   {
     "id": "healthTab.status.on",
     "description": "on status for healthtab",
-    "defaultMessage": "On",
+    "defaultMessage": "Open",
     "filepath": "./src/components/health/Health.js"
   },
   {
     "id": "healthTab.status.off",
     "description": "off status for healthtab",
-    "defaultMessage": "Off",
+    "defaultMessage": "Close",
     "filepath": "./src/components/health/Health.js"
   },
   {
@@ -497,15 +497,21 @@
     "filepath": "./src/components/utilityComponents/utilityTile.js"
   },
   {
-    "id": "stringConfig.on",
+    "id": "stringConfig.open",
     "description": "Text to display on",
-    "defaultMessage": "on",
+    "defaultMessage": "Open",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
     "id": "stringConfig.off",
     "description": "Text to show off",
-    "defaultMessage": "off",
+    "defaultMessage": "Close",
+    "filepath": "./src/constants/backEndConstants.js"
+  },
+  {
+    "id": "stringConfig.fclose",
+    "description": "Text to show off",
+    "defaultMessage": "Force Close",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
@@ -3012,6 +3018,18 @@
     "filepath": "./src/containers/systemTabs/closePPSList.js"
   },
   {
+    "id": "pps.close.cancel",
+    "description": "Text for cancel close",
+    "defaultMessage": "CANCEL",
+    "filepath": "./src/containers/systemTabs/closePPSList.js"
+  },
+  {
+    "id": "pps.close.confirm",
+    "description": "Text for close confirm",
+    "defaultMessage": "CONFIRM",
+    "filepath": "./src/containers/systemTabs/closePPSList.js"
+  },
+  {
     "id": "NotificationTable.table.heading",
     "description": "Heading for NotificationTable",
     "defaultMessage": "Notifications",
@@ -3218,7 +3236,7 @@
   {
     "id": "PPStable.status",
     "description": "status for PPS table",
-    "defaultMessage": "{ppsOnState} On",
+    "defaultMessage": "{ppsOnState} Open",
     "filepath": "./src/containers/systemTabs/PPStable.js"
   },
   {

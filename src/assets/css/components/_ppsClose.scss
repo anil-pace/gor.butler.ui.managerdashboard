@@ -9,6 +9,12 @@
 	margin: auto;
     width: 60%;
     margin-top: 30px;
+    &.pps-submit-cont{
+        text-align: right;
+        .pps-close-cancel{
+            margin-right:20px;
+        }
+    }
     .pps-close-head{
     	.left-sec{
     		width: 50%;
@@ -49,5 +55,11 @@
         font-size:12px;
         color:#27aae1;
         vertical-align: middle;
+    }
+    .close{
+        float: none;
+        font-size: inherit;
+        color: inherit;
+        cursor: default;
     }
 }

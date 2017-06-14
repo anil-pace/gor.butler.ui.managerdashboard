@@ -450,7 +450,7 @@ background-color: #FFFFFF;
   max-height: 9px;
 }
 
-.on .public_fixedDataTableCell_cellContent{
+.on .public_fixedDataTableCell_cellContent,.open .public_fixedDataTableCell_cellContent{
 
   
   border-radius: 15px;
@@ -467,7 +467,7 @@ background-color: #FFFFFF;
 
 }
 
-.off .public_fixedDataTableCell_cellContent{
+.off .public_fixedDataTableCell_cellContent,.close .public_fixedDataTableCell_cellContent,.force_close .public_fixedDataTableCell_cellContent{
 
   border-radius: 15px;
   text-align: center;
