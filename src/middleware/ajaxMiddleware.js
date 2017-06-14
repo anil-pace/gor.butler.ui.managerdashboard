@@ -2,9 +2,10 @@
 import {AJAX_CALL,AUTH_LOGIN,PAUSE_OPERATION,RESUME_OPERATION,MASTER_FILE_UPLOAD} from '../constants/frontEndConstants';
 
 import {AjaxParse} from '../utilities/AjaxParser';
+import {FileResponseParser} from '../utilities/fileResponseParser';
 import {ShowError} from '../utilities/showError';
 import {endSession} from '../utilities/endSession';
-import {saveFile} from '../utilities/utils';
+
 
 const ajaxMiddleware=(function(){ 
 
@@ -49,7 +50,7 @@ const ajaxMiddleware=(function(){
                       fileName=strName[0].slice(10,strName.length-2);
                     }
                     fileName=(!fileName)?(resContentType.match(/(text\/csv)/g)? "download.csv" : "download.xlsx"):fileName;
-                    saveFile(httpRequest.response,fileName);
+                    FileResponseParser(store,httpRequest.response,params.cause,fileName)
                   }
 
                    else{

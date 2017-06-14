@@ -557,6 +557,12 @@
     "filepath": "./src/components/utilityComponents/masterUploadTile.js"
   },
   {
+    "id": "utility.downDlabel",
+    "description": "label for download",
+    "defaultMessage": "DOWNLOAD",
+    "filepath": "./src/components/utilityComponents/utilityTile.js"
+  },
+  {
     "id": "stringConfig.on",
     "description": "Text to display on",
     "defaultMessage": "on",
