@@ -10,7 +10,7 @@ import {
   GR_REPORT_URL,
   MASTER_UPLOAD_URL,
   UPLOAD_HISTORY_URL,
-  GET_MAXSIZE_FILE_URL
+  GET_MAXSIZE_FILE_URL,STOCK_LEDGER_REPORT_DOWNLOAD_URL
 
 } from '../constants/configConstants';
 import {connect} from 'react-redux';
@@ -21,7 +21,7 @@ import {
     uploadMasterDataProcessing,
     getUploadHistory, utilityTabRefreshed,downloadStockLedgerReport,clearStockLedgerSKU
 } from "../actions/utilityActions";
-import {setInventoryReportSpinner} from '../actions/spinnerAction';
+import {setInventoryReportSpinner,setStockLedgerSpinner} from '../actions/spinnerAction';
 import {
   GET, 
   ITEM_RECALLED,
@@ -367,15 +367,28 @@ class UtilityTab extends React.Component {
          * URL need to be refactored
          * @type {*}
          */
-        var stock_ledger_state=this.state.stockLedgerState;
-        var url=GR_REPORT_URL + "/" + "2"+'?format='+"pdf";
+        let params=[]
+        if(this.state.stockLedgerState.sku){
+            params.push(["sku",this.state.stockLedgerState.sku].join("="))
+            params.push(["all","false"].join("="))
+        }else{
+            params.push(["all","true"].join("="))
+        }
+        params.push(["today",this.state.stockLedgerState.duration.today?'true':'false'].join("="))
+        params.push(["yesterday",this.state.stockLedgerState.duration.yesterday?'true':'false'].join("="))
+
+
+        var url=STOCK_LEDGER_REPORT_DOWNLOAD_URL
+        url=[url,params.join("&")].join("?")
         let data={
             'url': url,
             'method': GET,
             'token': this.props.auth_token,
             'cause': DOWNLOAD_STOCK_LEDGER_REPORT,
-            'responseType':'arraybuffer'
+            'responseType':'arraybuffer',
+            'accept':"text/csv"
         }
+        this.props.setStockLedgerSpinner(true)
         this.props.downloadStockLedgerReport(data)
         this.props.validateInvoiceID(false)
     }
@@ -487,11 +500,6 @@ class UtilityTab extends React.Component {
         return (
             <div >
                 <div>
-                    {show_masterdata_upload ?
-                        <UtilityTile tileHead={this.context.intl.formatMessage(messages.masterDataHead)}
-                                     showFooter={false}
-                                     tileBody={masterUpload} showHeaderIcon={true}
-                                     onRefresh={this._onRefresh.bind(this)}/> : null}
                     {show_item_recall_scripts ?
                         <UtilityTile tileHead={this.context.intl.formatMessage(messages.runScriptsHead)}
                                      showFooter={false}
@@ -507,11 +515,17 @@ class UtilityTab extends React.Component {
                                      showFooter={true}
                                      tileBody={grnTile} footerAction={this._downloadGRN.bind(this)}
                                      enableButton={activeGRNDownButton}/> : null}
+
                     {show_stock_ledger_widget ?
-                        <UtilityTile tileHead={this.context.intl.formatMessage(messages.stockLedgerHead)}
+                        <UtilityTile loading={this.props.stockLedgerSpinner} tileHead={this.context.intl.formatMessage(messages.stockLedgerHead)}
                                      showFooter={true}
                                      tileBody={stockLedgerTile} footerAction={this._downloadStockLedger.bind(this)}
                                      enableButton={activeStockLedgerButton}/> : null}
+                    {show_masterdata_upload ?
+                        <UtilityTile tileHead={this.context.intl.formatMessage(messages.masterDataHead)}
+                                     showFooter={false}
+                                     tileBody={masterUpload} showHeaderIcon={true}
+                                     onRefresh={this._onRefresh.bind(this)}/> : null}
 
                 </div>
             </div>
@@ -537,7 +551,8 @@ function mapStateToProps(state, ownProps) {
         maxfilesizelimit:state.utilityValidations.maxfilesizelimit ||0,
         errorCode:state.utilityValidations.errorCode,
         maxsize:state.utilityValidations.maxsize ||0,
-        timeOffset: state.authLogin.timeOffset
+        timeOffset: state.authLogin.timeOffset,
+        stockLedgerSpinner:state.spinner.stockLedgerSpinner||false
     };
 }
 
@@ -575,6 +590,9 @@ var mapDispatchToProps=function (dispatch) {
         },
         utilityTabRefreshed: function (data) {
             dispatch(utilityTabRefreshed(data))
+        },
+        setStockLedgerSpinner: function (data) {
+            dispatch(setStockLedgerSpinner(data))
         },
     }
 };

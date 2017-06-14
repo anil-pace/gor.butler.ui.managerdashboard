@@ -5387,6 +5387,20 @@ button:disabled {
   border: solid 1px #f36f36;
 }
 
+.gor-download-button {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  min-width: 125px;
+  height: 35px;
+  font-size: 14px;
+  background-color: #f36f36;
+  margin-left: 30px;
+  vertical-align: sub;
+  border-radius: 3px;
+  color: #ffffff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  border: solid 1px #f36f36;
+}
+
 .gor-filter-body-slider-wrap {
   width: 87%;
   float: left;
@@ -5885,7 +5899,7 @@ button:disabled {
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2);
   border-radius: 0.1875rem;
   display: inline-block;
-  min-height: 18.75rem;
+  min-height: 20rem;
   margin: 1% 0% 0% 1%;
   font-size: 0;
   width: 23.7%;
@@ -6049,14 +6063,14 @@ button:disabled {
   padding-bottom: 10px;
 }
 
-.gor-utility-invoice-wrap {
+.gor-utility-invoice-wrap, .gor-utility-sku-wrap, .gor-utility-duration-wrap {
   margin-left: 34px;
   width: 76%;
   box-shadow: none;
   margin-top: 0px;
 }
 
-.gor-utility-invoice-h1 {
+.gor-utility-invoice-h1, .gor-utility-stock-ledger-duration-label {
   font-size: 16px;
   font-weight: 600;
   color: #000000;
@@ -6086,6 +6100,10 @@ button:disabled {
   height: 35px;
   opacity: 0;
   cursor: pointer;
+}
+
+.gor-utility-duration-wrap input[type=checkbox] {
+  margin-right: 5px;
 }
 
 .gor-dropdown {

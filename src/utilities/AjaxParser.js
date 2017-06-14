@@ -20,7 +20,7 @@ import {BUTLER_UI,CODE_E027} from '../constants/backEndConstants'
 import {UE002,E028,E029,MODE_REQUESTED,TYPE_SUCCESS,AS001,AS00A,WRONG_CRED,ES,g020,g021,g023,g024} from '../constants/messageConstants';
 import {ShowError} from './showError';
 import {endSession} from './endSession';
-import {setResolveAuditSpinner,setSafetySpinner,setInventoryReportSpinner} from '../actions/spinnerAction';
+import {setResolveAuditSpinner,setSafetySpinner,setInventoryReportSpinner,setStockLedgerSpinner} from '../actions/spinnerAction';
 import {statusToString} from './statusToString';
 import {INVALID_SKUID} from '../constants/messageConstants';
 import {validateInvoiceID,
@@ -309,7 +309,7 @@ export function AjaxParse(store,res,cause,status)
 			store.dispatch(validateInvoiceID(res));
 		break;
 		case DOWNLOAD_STOCK_LEDGER_REPORT:
-			store.dispatch(setInventoryReportSpinner(false));
+			store.dispatch(setStockLedgerSpinner(false));
 			store.dispatch(validateStockLedgerSKU(res));
 		break;
 		case MASTER_FILE_UPLOAD:
