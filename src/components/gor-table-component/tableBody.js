@@ -10,8 +10,8 @@ export class GTableBody extends React.Component {
 
     render() {
         let data = this.props.data
-        return <div onScroll={(event) => this.props.onScrollHandler(event)} className={["table-body"].concat((this.props.options || [])).join(" ")}>
 
+        return <div onScroll={this.props.onScrollHandler ? (event) => this.props.onScrollHandler(event) : null} className={["table-body"].concat((this.props.options || [])).join(" ")}>
             {data && data.length < 1 ?
                 <GTableNoResult/> : this.props.children
             }

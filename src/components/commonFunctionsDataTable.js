@@ -2,7 +2,8 @@ import React from 'react';
 import { Cell} from 'fixed-data-table';
 import { FormattedMessage } from 'react-intl';
 import DropdownTable from './dropdown/dropdownTable'
-import {AUDIT_APPROVED, AUDIT_REJECTED,VIEW_AUDIT_ISSUES,APPROVE_AUDIT,GOR_STATUS,AUDIT_UNRESOLVED,AUDIT_REJECTED_STATUS,AUDIT_RESOLVED_STATUS} from '../constants/frontEndConstants';
+import {AUDIT_APPROVED, AUDIT_REJECTED,VIEW_AUDIT_ISSUES,APPROVE_AUDIT,GOR_STATUS,AUDIT_UNRESOLVED,AUDIT_REJECTED_STATUS,AUDIT_RESOLVED_STATUS,AUDIT_REAUDITED_STATUS} from '../constants/frontEndConstants';
+import Dropdown from "./gor-dropdown-component/dropdown";
 export var SortTypes={
   ASC: 'ASC',
   DESC: 'DESC',
@@ -58,8 +59,8 @@ export function sortData (columnKey, sortDir,sortIndexes,_dataList) {
     var BInt=parseInt(valB, 10);
 
     if(isNaN(AInt) && isNaN(BInt)){
-        var aA=valA.replace(reA, "");
-        var bA=valB.replace(reA, "");
+        var aA= valA ? valA.replace(reA, "") : "";
+        var bA= valB ? valB.replace(reA, "") : "";
         if(aA=== bA) {
             var aN=parseInt(valA.replace(reN, ""), 10);
             var bN=parseInt(valB.replace(reN, ""), 10);
@@ -83,6 +84,29 @@ export function sortData (columnKey, sortDir,sortIndexes,_dataList) {
     return sortVal;
     });
 	 return sortIndexes;
+}
+
+
+function auditTaskActions(data, index){
+    var duplicateTask = <FormattedMessage id="audit.table.duplicateTask"
+                                          description="duplicateTask option for audit"
+                                          defaultMessage="Duplicate task"/>;
+    var deleteRecord = <FormattedMessage id="audit.table.deleteRecord" description="deleteRecord option for audit"
+                                         defaultMessage="Delete record"/>;
+    var cancelTask = <FormattedMessage id="audit.table.cancelTask" description="cancel option for task"
+                                       defaultMessage="Cancel Task"/>;
+    let taskList=[
+        {value: 'duplicateTask', label: duplicateTask,disabled:false},
+        {value: 'deleteRecord', label: deleteRecord,disabled:false},
+        {value:"cancelTask",label:cancelTask,disabled:false}
+    ]
+    if(data.newData && !data.newData[index].cancellable){
+        taskList[2].disabled=true
+    }
+    if(data.newData && !data.newData[index].deletable){
+        taskList[1].disabled=true
+    }
+    return taskList
 }
 
 export class DataListWrapper {
@@ -121,11 +145,19 @@ export const ActionCell=({rowIndex, data, columnKey,selEdit,selDel,mid, ...props
   </Cell>
 );
 
-export const TextCell=({rowIndex, data, columnKey,setClass, ...props})=> (
-  <Cell {...props} className={setClass}>
+export const TextCell=({rowIndex, data, columnKey,setClass, ...props})=>{ 
+  
+  const childrenCell =  React.Children.map(props.children, child => {
+      
+       return data.getObjectAt(rowIndex)[props.childColumnKey] ?(
+        <span className={props.childrenClass}>{child}{data.getObjectAt(rowIndex)[props.childColumnKey]}</span>
+      ):("");
+    });
+  return(<Cell {...props}  className={setClass}>
     {data.getObjectAt(rowIndex)[columnKey]}
+    {childrenCell}
   </Cell>
-);
+)};
 
 export const ToolTipCell=({rowIndex, data, columnKey,setClass,callBack,tooltipData, ...props})=> (
   <Cell {...props} className={setClass}>
@@ -192,10 +224,29 @@ export const ComponentCell=({rowIndex, data, columnKey,checkState,checked, ...pr
     {data.getObjectAt(rowIndex)[columnKey]}
   </Cell>
 );
-
+export const PPSComponentCell=({rowIndex, data, columnKey,checkState,checked, ...props})=> (
+  
+  <Cell {...props}> <input type="checkbox" checked={data.getObjectAt(rowIndex)["isChecked"]} onChange={checkState.bind(this,props.checkboxColumn,rowIndex)}/>
+    {data.getObjectAt(rowIndex)[columnKey]}
+  </Cell>
+);
 export const StatusCell=({rowIndex, data, columnKey,statusKey, ...props})=> (
   <Cell {...props} className={data.getObjectAt(rowIndex)[statusKey]}>
     {data.getObjectAt(rowIndex)[columnKey]}
+  </Cell>
+);
+
+export const AuditStatusCell=({rowIndex, data, columnKey,statusKey,descriptionKey, ...props})=> (
+  <Cell {...props}>
+      <Cell className={[data.getObjectAt(rowIndex)[statusKey]] } style={{padding:0}}>
+          <div>
+              {data.getObjectAt(rowIndex)[columnKey]}
+          </div>
+      </Cell>
+
+      {descriptionKey && data.getObjectAt(rowIndex)[descriptionKey]?<div className="gor-audit-cancelling-text">{data.getObjectAt(rowIndex)[descriptionKey]}</div>:null}
+
+
   </Cell>
 );
 
@@ -207,7 +258,7 @@ export const ResolveCell=({rowIndex, data, columnKey, checkStatus, screenId, ...
              onChange={checkStatus.bind(this,rowIndex,AUDIT_APPROVED,data.getObjectAt(rowIndex)["auditLineId"])} checked={data.getObjectAt(rowIndex)[GOR_STATUS]===AUDIT_RESOLVED_STATUS?true:false}/>
         <FormattedMessage id="commonDataTable.resolveAudit.approve" description='resolve button' defaultMessage='Approve '/>
       <input type="radio"  name={data.getObjectAt(rowIndex)["auditLineId"]} disabled={data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED?true:false} 
-             onChange={checkStatus.bind(this,rowIndex,AUDIT_REJECTED,data.getObjectAt(rowIndex)["auditLineId"])} checked={data.getObjectAt(rowIndex)[GOR_STATUS]===AUDIT_REJECTED_STATUS?true:false}/>
+             onChange={checkStatus.bind(this,rowIndex,AUDIT_REJECTED,data.getObjectAt(rowIndex)["auditLineId"])} checked={data.getObjectAt(rowIndex)[GOR_STATUS]===AUDIT_REJECTED_STATUS|| data.getObjectAt(rowIndex)[GOR_STATUS]===AUDIT_REAUDITED_STATUS}/>
         <FormattedMessage id="commonDataTable.resolveAudit.reject" description='resolve button' defaultMessage='Reject'/>
     </div>:
     <div style={(screenId===VIEW_AUDIT_ISSUES || data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED)?{opacity: 0.5}:{opacity: 1}}>
@@ -222,7 +273,7 @@ export const ResolveCell=({rowIndex, data, columnKey, checkStatus, screenId, ...
   </Cell>
 );
 
-export const ActionCellAudit=({rowIndex, data, columnKey, tasks, handleAudit,manageAuditTask, clickDropDown,showBox,placeholderText,resolveflag,resolveAudit,checkIssues, ...props})=> (
+export const ActionCellAudit=({rowIndex, data, columnKey, handleAudit,manageAuditTask, clickDropDown,showBox,placeholderText,resolveflag,resolveAudit,checkIssues, ...props})=> (
   <Cell {...props}>
     <div className="gor-audit-actions-button">
      {data.getObjectAt(rowIndex)[showBox]?(
@@ -230,17 +281,17 @@ export const ActionCellAudit=({rowIndex, data, columnKey, tasks, handleAudit,man
           <FormattedMessage id="commonDataTable.startAudit.button" description='start button' defaultMessage='Start audit'/>
       </button>):''}
      {data.getObjectAt(rowIndex)[resolveflag]?(
-      <button className="gor-add-btn" onClick={resolveAudit.bind(this,columnKey,rowIndex,APPROVE_AUDIT)}>
+      <button className="gor-add-btn" onClick={resolveAudit.bind(this,columnKey,rowIndex,APPROVE_AUDIT,data)}>
           <FormattedMessage id="commonDataTable.resolveAudit.button" description='resolve button' defaultMessage='Resolve'/>
       </button>):''}
      {data.getObjectAt(rowIndex)[checkIssues]?(
-      <button className="gor-resolve-button" onClick={resolveAudit.bind(this,columnKey,rowIndex,VIEW_AUDIT_ISSUES)}>
+      <button className="gor-resolve-button" onClick={resolveAudit.bind(this,columnKey,rowIndex,VIEW_AUDIT_ISSUES,data)}>
           <FormattedMessage id="commonDataTable.viewIssues.button" description='viewIssues button' defaultMessage='View issues'/>
       </button>):''}
     </div>
     <div className="gor-audit-actions-drop" >
-      <DropdownTable  styleClass={'gorDataTableDrop'} placeholder={placeholderText} items={tasks} changeMode={manageAuditTask.bind(this,rowIndex)}/>
-    </div>
+        <Dropdown placeholder={placeholderText} options={auditTaskActions(data,rowIndex)} onSelectHandler={manageAuditTask.bind(this,rowIndex)} resetOnSelect={true}/>
+      </div>
   </Cell>
 );
 
@@ -300,3 +351,120 @@ export class SortHeaderCell extends React.Component {
       );
   }
 }
+
+export const AuditIssuesTooltipCell = ({rowIndex, data, columnKey, setClass, callBack, resolved, unresolved, ...props}) => (
+    <Cell {...props}>
+
+
+        {data.getObjectAt(rowIndex)[unresolved] || data.getObjectAt(rowIndex).infoIcon?
+
+
+
+            <div  className="gor-tool-tip-hover" style={{fontSize:16,color:'black'}} onMouseEnter={callBack}>
+                {data.getObjectAt(rowIndex)[columnKey]} <span className="gor-audit-info-icon"/>
+            </div>:data.getObjectAt(rowIndex)[columnKey]
+
+
+        }
+
+
+        {(data.getObjectAt(rowIndex)[resolved] && data.getObjectAt(rowIndex)[unresolved]) ?
+            <div className="gor-tooltip">
+                <div className="gor-tooltip-arrow"/>
+                <div className="gor-tooltip-text-wrap">
+                    <div className="gor-tooltip-heading">
+                        <FormattedMessage id="audit.resolveUnresolve.tooltip.header"
+                                          description='resolveUnresolve issue for audit table'
+                                          defaultMessage='{resolvedCount} audit lines, {unresolvedCount} audit lines'
+                                          values={{
+                                              resolvedCount: data.getObjectAt(rowIndex)[resolved],
+                                              unresolvedCount: data.getObjectAt(rowIndex)[unresolved]
+                                          }}/>
+                    </div>
+                    <div className="gor-tooltip-datalines">
+                        <div>
+
+                            <FormattedMessage id="audit.resolveUnresolve.tooltip.content"
+                                              description='unresolve issue for audit table'
+                                              defaultMessage=' Approve or reject audit line with issues'
+                                              values={{unresolvedCount: data.getObjectAt(rowIndex)[unresolved] ? data.getObjectAt(rowIndex)[unresolved] : "0"}}/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            : ""
+        }
+
+        {(!data.getObjectAt(rowIndex)[resolved] && data.getObjectAt(rowIndex)[unresolved]) ?
+            <div className="gor-tooltip">
+                <div className="gor-tooltip-arrow"/>
+                <div className="gor-tooltip-text-wrap">
+                    <div className="gor-tooltip-heading">
+                        <FormattedMessage id="audit.unresolveIssues.tooltip.header"
+                                          description='unresolve issue for audit table'
+                                          defaultMessage='{unresolvedCount} {unresolvedCount,plural, one {unresolved audit line} other{unresolved audit lines}}'
+                                          values={{unresolvedCount: data.getObjectAt(rowIndex)[unresolved] ? data.getObjectAt(rowIndex)[unresolved] : "0"}}/>
+                    </div>
+                    <div className="gor-tooltip-datalines">
+                        <div>
+                            <FormattedMessage id="audit.unresolveIssues.tooltip.content"
+                                              description='unresolve issue for audit table'
+                                              defaultMessage=' Approve or reject audit line with issues'
+                                              values={{unresolvedCount: data.getObjectAt(rowIndex)[unresolved] ? data.getObjectAt(rowIndex)[unresolved] : "0"}}/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            : ""
+        }
+
+        {(!data.getObjectAt(rowIndex)[unresolved] && data.getObjectAt(rowIndex).infoIcon==='rejected') ?
+            <div className="gor-tooltip">
+                <div className="gor-tooltip-arrow"/>
+                <div className="gor-tooltip-text-wrap">
+                    <div className="gor-tooltip-heading">
+                        <FormattedMessage id="audit.rejected.tooltip.header"
+                                          description='rejected issue for audit table'
+                                          defaultMessage='{rejected_lines}/{total_lines} {rejected_lines,plural, one {audit line} other{audit lines}} were rejected'
+                                          values={{total_lines: data.getObjectAt(rowIndex).auditInfo.total_lines,rejected_lines:data.getObjectAt(rowIndex).auditInfo.rejected_lines}}/>
+                    </div>
+                    <div className="gor-tooltip-datalines">
+                        <div>
+                            <FormattedMessage id="audit.rejected.tooltip.content"
+                                              description='Re-audit the rejected audit lines'
+                                              defaultMessage=' Re-audit the rejected audit lines'/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            : ""
+        }
+
+
+        {data.getObjectAt(rowIndex).infoIcon==="created"?
+            <div className="gor-tooltip">
+                <div className="gor-tooltip-arrow"/>
+                <div className="gor-tooltip-text-wrap">
+                    <div className="gor-tooltip-heading">
+                        <FormattedMessage id="audit.created.tooltip.header"
+                                          description='resolveUnresolve issue for audit table'
+                                          defaultMessage='Assign PPS to start audit task'/>
+                    </div>
+                    <div className="gor-tooltip-datalines">
+                        <div>
+
+                            <FormattedMessage id="audit.created.tooltip.content"
+                                              description='unresolve issue for audit table'
+                                              defaultMessage=' Click on "Start Audit" to assign PPS'/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            :""
+        }
+
+    </Cell>
+);

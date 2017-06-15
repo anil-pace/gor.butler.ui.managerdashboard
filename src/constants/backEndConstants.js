@@ -67,15 +67,20 @@ export const USER_ROLE_MAP={
 
 
 export const  stringConfig= defineMessages({
-    on: {
-        id: 'stringConfig.on',
+    open: {
+        id: 'stringConfig.open',
         description: 'Text to display on',
-        defaultMessage: 'on'
+        defaultMessage: 'Open'
     },
-    off: {
+    close: {
         id: 'stringConfig.off',
         description: 'Text to show off',
-        defaultMessage: "off"
+        defaultMessage: "Close"
+    },
+    fclose: {
+        id: 'stringConfig.fclose',
+        description: 'Text to show off',
+        defaultMessage: "Force Close"
     },
     per_hour:{
         id: 'stringConfig.per_hour',

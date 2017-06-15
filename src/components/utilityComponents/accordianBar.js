@@ -1,8 +1,53 @@
 import React  from 'react';
-import { FormattedMessage,FormattedDate } from 'react-intl';
+import { FormattedMessage,FormattedDate, FormattedTime, FormattedRelative } from 'react-intl';
+import {getDaysDiff} from '../../utilities/getDaysDiff';
 
 class AccordianBar extends React.Component{
+
+
+	_getTimeUpload(create_time, timeOffset){
+		let timeUpload = {};
+
+		if (!create_time) {
+			timeUpload="--";
+		}
+		else {
+			if (getDaysDiff(create_time) < 2) {
+
+				timeUpload= (<div><FormattedRelative
+				             value={create_time}
+				             timeZone={timeOffset}
+				             units= 'day'
+				             />, <FormattedTime
+				             value={create_time}
+				             hour= "numeric"
+				             minute= "numeric"
+				             timeZone= {timeOffset}
+				             hour12= {false}
+				             /></div>
+				             );
+			}
+			else {
+				timeUpload= (<FormattedDate
+				             value={create_time}
+							 year= 'numeric'
+	                         month= 'short'
+	                         day= '2-digit'
+	                         hour= "2-digit"
+	                         minute= "2-digit"
+				             timeZone= {timeOffset}
+				             hour12= {false}
+				             />);
+			}
+		}
+
+
+		return timeUpload;
+
+	}
 	render(){
+
+		var timeUpload = this._getTimeUpload(this.props.data.create_time, this.props.timeOffset);
 		return (
 			<div> 
 			<div className={this.props.showPanel?"gor-utility-accordian-open":"gor-utility-updown-bar"}  onClick={()=> this.props.handleAccordianState(this.props.index)}>
@@ -48,18 +93,19 @@ class AccordianBar extends React.Component{
 	    							</div>
 	    						  	<div className="gor-utility-master-arrordian-h1">
 	    						  		<div className="gor-inline gor-utility-accordian-h1"><FormattedMessage id="utility.uploadHist.uploadFile" description='Upload File' defaultMessage='Upload File:' /></div>
+	    						  		{this.props.data.request_file?
 	    						  		<a href={this.props.data.request_file} download className="gor-inline gor-utility-accordian-button gor-utility-accordian-h3">
 	    						  		<FormattedMessage id="utility.uploadHist.download" description='Download' 
 	    						  		defaultMessage='Download' />
-	    						  		</a>
+	    						  		</a>:""}
 	    						  	</div>
 	    						  	<div className="gor-utility-master-arrordian-h1">
 	    						  		<div className="gor-inline gor-utility-accordian-h1"><FormattedMessage id="utility.uploadHist.resultFile" description='Result file' 
 	    						  		defaultMessage='Result File:' /></div>
-	    						  		<a href={this.props.data.response_file?this.props.data.response_file:"javascript:void(0)"} download className="gor-inline gor-utility-accordian-button gor-utility-accordian-h3"> 
-	    						  		<FormattedMessage id="utility.uploadHist.download" description='Download' 
-	    						  		defaultMessage='Download' />
-	    						  		</a>
+	    						  		{this.props.data.response_file? 
+	    						  			<a href={this.props.data.response_file} download className="gor-inline gor-utility-accordian-button gor-utility-accordian-h3">
+	    						  			<FormattedMessage id="utility.uploadHist.download" description='Download' defaultMessage='Download' />
+	    						  			</a>: ""}
 	    						  	</div>
 	    						</div>:""}
     						 </div>

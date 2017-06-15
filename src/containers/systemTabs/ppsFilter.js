@@ -59,8 +59,9 @@ class PPSFilter extends React.Component{
         let tokenField2={value:"MODE", label:<FormattedMessage id="pps.token.timePeriod" defaultMessage="MODE"/>}; 
        let labelC1=[
                     { value: 'all', label: <FormattedMessage id="pps.STATUS.all" defaultMessage="Any"/>},
-                    { value: 'on', label: <FormattedMessage id="pps.STATUS.stopped" defaultMessage="On"/>},
-                    { value: 'off', label: <FormattedMessage id="pps.STATUS.error" defaultMessage="Off"/>}
+                    { value: 'open', label: <FormattedMessage id="pps.STATUS.stopped" defaultMessage="Open"/>},
+                    { value: 'close', label: <FormattedMessage id="pps.STATUS.error" defaultMessage="Close"/>},
+                    { value: 'force_close', label: <FormattedMessage id="pps.STATUS.fclose" defaultMessage="Force Close"/>}
                     ];
         let labelC2=[
                     { value: 'all', label: <FormattedMessage id="pps.MODE.all" defaultMessage="Any"/>},

@@ -450,7 +450,7 @@ background-color: #FFFFFF;
   max-height: 9px;
 }
 
-.on .public_fixedDataTableCell_cellContent{
+.on .public_fixedDataTableCell_cellContent,.open .public_fixedDataTableCell_cellContent{
 
   
   border-radius: 15px;
@@ -467,7 +467,7 @@ background-color: #FFFFFF;
 
 }
 
-.off .public_fixedDataTableCell_cellContent{
+.off .public_fixedDataTableCell_cellContent,.close .public_fixedDataTableCell_cellContent,.force_close .public_fixedDataTableCell_cellContent{
 
   border-radius: 15px;
   text-align: center;
@@ -1374,7 +1374,7 @@ padding-top: 6px;
   vertical-align: middle;
 }
 
-.gorToolBarElements {
+.gorToolBarElements{
   display: inline-block;
   vertical-align: sub;
   padding-right: 10px;
@@ -1384,6 +1384,9 @@ padding-top: 6px;
 padding-left: 10px;
   display: inline-block;
   vertical-align: 8px;
+  &.pps{
+    vertical-align: middle;
+  }
 }
 
 .gorToolBarWrap {
@@ -1805,4 +1808,12 @@ font-family: "source sans pro";
     padding-right: 14px;
     vertical-align: sub;
     cursor: pointer;
+}
+
+.gor-audit-cancelling-text{
+  font-size:12px;
+  text-align:center;
+  padding-top:5px;
+  padding-bottom:5px;
+  color:red;
 }

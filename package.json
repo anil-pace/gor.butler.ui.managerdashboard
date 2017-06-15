@@ -36,7 +36,6 @@
     "react-router": "^2.7.0",
     "react-router-redux": "^4.0.5",
     "react-scripts": "0.9.5",
-    "react-select": "^1.0.0-beta14",
     "redux": "^3.5.2",
     "redux-mock-store": "^1.2.2",
     "redux-router": "^2.1.2",
