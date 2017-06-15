@@ -304,9 +304,12 @@ class UtilityTab extends React.Component {
     _renderStockLedgerRawTransactionTile() {
         let tile=[];
         let checkbox=<div key="0">
-            <div className="gor-utility-sku-wrap" style={{marginTop:10,marginBottom:10,fontSize:13}}>
+            <div className="gor-utility-stock-ledger-duration-label"> <FormattedMessage id="utility.stockLedger.duration.label"
+                                                                                        description="Time Duration:"
+                                                                                        defaultMessage="Time Duration:"/></div>
+            <div className="gor-utility-duration-wrap" style={{marginBottom:10,fontSize:13}}>
                 <div>
-                    <input checked={true} disabled={true} type="radio" id="all" name="stock_ledger_raw_transaction_duration" value="all"/>
+                    <input checked={true} disabled={true} type="checkbox" id="all" name="stock_ledger_raw_transaction_duration" value="all"/>
                     <label><FormattedMessage id="utility.stockLedgerRawTransaction.duration.today"
                                              description="today"
                                              defaultMessage="Today"/></label>
