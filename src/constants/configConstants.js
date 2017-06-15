@@ -1,8 +1,8 @@
-export const BASE_URL='192.168.12.168:5000';
+export const BASE_URL='localhost';
 export const PORT='8888';
 export const PROTOCOL='https://';
 export const WS_PROTOCOL="ws://";
-export const WS_URL=WS_PROTOCOL+"192.168.12.168:8888"+"/manager_api/ws"
+export const WS_URL=WS_PROTOCOL+BASE_URL+"/manager_api/ws"
 export const LOGIN_URL=PROTOCOL+BASE_URL+"/api/auth/token"
 export const API_URL=PROTOCOL+BASE_URL+"/api";
 export const HEADER_URL=PROTOCOL+BASE_URL+"/api/user"
@@ -15,6 +15,7 @@ export const ROLE_URL=HEADER_URL+'/role';
 export const CHECK_USER=HEADER_URL+'?username=';
 export const AUDIT_URL=PROTOCOL+BASE_URL+"/api/audit";
 export const DELETE_AUDIT_URL=AUDIT_URL+'/delete/';
+export const CANCEL_AUDIT_URL=AUDIT_URL + "/cancel/";
 export const START_AUDIT_URL=AUDIT_URL+'/start';
 export const SEARCH_AUDIT_URL=AUDIT_URL + "/search?start_time=";
 export const PPSLIST_URL=API_URL+"/pps/pps_mode"
@@ -42,8 +43,11 @@ export const INVENTORY_REPORT_URL=API_URL + "/inventories/get_inventory_report_v
 export const GET_ITEM_RECALL=API_URL + "/orders/wrapper/generate_orders";
 export const GR_REPORT_URL=API_URL + "/components/generate_gr_report";
 export const MASTER_UPLOAD_URL=API_URL + "/products/csv";
+export const STOCK_LEDGER_REPORT_DOWNLOAD_URL=API_URL + "/downloadStockLedgerReport"; //Mapping needs to be there in ngnix config
+export const STOCK_LEDGER_REPORT_DOWNLOAD_RAW_TRANSACTIONS_URL=API_URL + "/downloadStockLedgerRawTransactionsReport"; //Mapping needs to be there in ngnix config
 export const UPLOAD_HISTORY_URL=API_URL+ "/components/mdm_info";
 export const GET_MD_CONFIG_URL=API_URL + "/components/get_md_config";
 export const GET_MAXSIZE_FILE_URL=API_URL + "/components/get_mdm_file_size";
+
 
 

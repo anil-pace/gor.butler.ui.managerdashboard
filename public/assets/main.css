@@ -165,7 +165,7 @@ body {
 .overview-tile-ontime-icon,
 .statusOl, .statusAl, .iStock, .iAudit, .iPick, .gor-login-user, .gor-login-password, .gor-login-error, .gor-tick, .gor-question, .gor-tick-white, .gor-remove-white, .gor-error-white, .gor-login-user-error, .gor-login-password-error, .gor-question-2, .gor-operation-tick, .gor-alert-lg,
 .gor-dropdown-open, .gor-dropdown-close, .gor-caution, .gor-delay-icon,
-.gor-emergency-dropdown-close, .gor-emergency-dropdown-open, .gor-info-icon, .gor-selected-icon {
+.gor-emergency-dropdown-close, .gor-emergency-dropdown-open, .gor-info-icon, .gor-selected-icon, .gor-audit-info-icon {
   background-image: url(./images/icons.svg);
 }
 
@@ -578,6 +578,14 @@ body {
 
 .gor-info-icon {
   background-position: -460px -77px;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.gor-audit-info-icon {
+  background-position: -494px -77px;
   width: 16px;
   height: 16px;
   display: inline-block;
@@ -3528,6 +3536,14 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
+.gor-audit-cancelling-text {
+  font-size: 12px;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: red;
+}
+
 .gorSubTab.gorContainer {
   background-color: #F8F8F8;
   width: auto;
@@ -5380,6 +5396,20 @@ button:disabled {
   border: solid 1px #f36f36;
 }
 
+.gor-download-button {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  min-width: 125px;
+  height: 35px;
+  font-size: 14px;
+  background-color: #f36f36;
+  margin-left: 30px;
+  vertical-align: sub;
+  border-radius: 3px;
+  color: #ffffff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  border: solid 1px #f36f36;
+}
+
 .gor-filter-body-slider-wrap {
   width: 87%;
   float: left;
@@ -5878,7 +5908,7 @@ button:disabled {
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2);
   border-radius: 0.1875rem;
   display: inline-block;
-  min-height: 18.75rem;
+  min-height: 20rem;
   margin: 1% 0% 0% 1%;
   font-size: 0;
   width: 23.7%;
@@ -6042,14 +6072,14 @@ button:disabled {
   padding-bottom: 10px;
 }
 
-.gor-utility-invoice-wrap {
+.gor-utility-invoice-wrap, .gor-utility-sku-wrap, .gor-utility-duration-wrap {
   margin-left: 34px;
   width: 76%;
   box-shadow: none;
   margin-top: 0px;
 }
 
-.gor-utility-invoice-h1 {
+.gor-utility-invoice-h1, .gor-utility-stock-ledger-duration-label {
   font-size: 16px;
   font-weight: 600;
   color: #000000;
@@ -6075,8 +6105,14 @@ button:disabled {
 }
 
 .gor-csvUploadWrap .gor-csvUpload {
+  min-width: 125px;
+  height: 35px;
   opacity: 0;
   cursor: pointer;
+}
+
+.gor-utility-duration-wrap input[type=checkbox] {
+  margin-right: 5px;
 }
 
 .gor-modal-content.pps-close .gor-modal-head {

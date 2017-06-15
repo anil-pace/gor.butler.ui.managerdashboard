@@ -16,13 +16,15 @@ class DropdownTable extends Component {
     this.props.changeMode(option);
   
   }
-//Need to rethink about this condition
- /* shouldComponentUpdate(nextProps,nextState){
-    if(JSON.stringify(this.props.currentState)!==JSON.stringify(nextProps.currentState)){
+
+
+  shouldComponentUpdate(nextProps,nextState){
+    if(JSON.stringify(this.props.currentState)!==JSON.stringify(nextProps.currentState || this.props.items!==nextProps.items)){
+
       return true
     }
     return false
-  }*/
+  }
 
   render () {
     const defaultOption=this.props.currentState?this.props.currentState:"";
