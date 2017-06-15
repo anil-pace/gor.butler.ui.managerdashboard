@@ -1,5 +1,5 @@
 import { AJAX_CALL,INVOICE_VALIDATION,MASTER_UPLOAD_PROCESSING,MASTER_UPLOAD_SUCCESS,
-UPLOAD_HISTORY,UPDATE_FILE_SIZE,UTILITY_TAB_REFRESHED} from '../constants/frontEndConstants'
+UPLOAD_HISTORY,UPDATE_FILE_SIZE,UTILITY_TAB_REFRESHED,STOCK_LEDGER_SKU_VALIDATION,CLEAR_STOCK_LEDGER_SKU_VALIDATION} from '../constants/frontEndConstants'
 
 
 export function getItemRecall(params){
@@ -16,9 +16,35 @@ export function getGRdata(params){
   }
 }
 
+export function downloadStockLedgerReport(params){
+	return {
+    type: AJAX_CALL,
+    params
+  }
+}
+export function downloadStockLedgerRawTransactionsReport(params){
+	return {
+    type: AJAX_CALL,
+    params
+  }
+}
+
 export function validateInvoiceID(data){
 	return {
     type: INVOICE_VALIDATION,
+    data
+  }
+}
+
+export function validateStockLedgerSKU(data){
+	return {
+    type: STOCK_LEDGER_SKU_VALIDATION,
+    data
+  }
+}
+export function clearStockLedgerSKU(data){
+	return {
+    type: CLEAR_STOCK_LEDGER_SKU_VALIDATION,
     data
   }
 }

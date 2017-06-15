@@ -23,8 +23,8 @@ class UtilityTile extends React.Component{
 			</div>
 			{this.props.showFooter?<div className="gor-utility-tile-footer">
 				<div className="got-utility-btn-wrap">
-					<button className={this.props.enableButton?"gor-filterBtn-applied":"gor-filterBtn-applied gor-disable-content"} onClick={this.props.footerAction}>
-          				<FormattedMessage id="utility.downDlabel" description="label for download" defaultMessage="DOWNLOAD"/>
+					<button className={this.props.enableButton?"gor-download-button":"gor-download-button gor-disable-content"} onClick={this.props.footerAction}>
+						{this.props.loading?<div className='spinnerImage'></div>:<FormattedMessage id="utility.downDlabel" description="label for download" defaultMessage="DOWNLOAD"/>}
          			</button>
          		</div>
 			</div>:""}

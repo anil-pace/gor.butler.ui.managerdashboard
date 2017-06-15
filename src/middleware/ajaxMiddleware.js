@@ -2,9 +2,10 @@
 import {AJAX_CALL,AUTH_LOGIN,PAUSE_OPERATION,RESUME_OPERATION,MASTER_FILE_UPLOAD} from '../constants/frontEndConstants';
 
 import {AjaxParse} from '../utilities/AjaxParser';
+import {FileResponseParser} from '../utilities/fileResponseParser';
 import {ShowError} from '../utilities/showError';
 import {endSession} from '../utilities/endSession';
-import {saveFile} from '../utilities/utils';
+
 
 const ajaxMiddleware=(function(){ 
 
@@ -39,7 +40,8 @@ const ajaxMiddleware=(function(){
               else {
                  try
                  {
-                   if(httpRequest.getResponseHeader('Content-type')=== "text/csv; charset=utf-8" || httpRequest.getResponseHeader('Content-type')=== "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
+                     let resContentType = httpRequest.getResponseHeader('Content-type');
+                   if(resContentType.match(/(text\/csv)/g) || resContentType.match(/(application\/vnd.openxmlformats-officedocument.spreadsheetml.sheet)/g)){
                     //get the file name from the content-disposition header
                     //and then save the file
                     let fileName;
@@ -47,8 +49,8 @@ const ajaxMiddleware=(function(){
                       let strName=this.getResponseHeader('Content-disposition').match(/(filename=.[^\s\n\t\r]+)/g);
                       fileName=strName[0].slice(10,strName.length-2);
                     }
-                    fileName=(!fileName)?(httpRequest.getResponseHeader('Content-type')=== "text/csv; charset=utf-8"? "download.csv" : "download.xlsx"):fileName;
-                    saveFile(httpRequest.response,fileName);
+                    fileName=(!fileName)?(resContentType.match(/(text\/csv)/g)? "download.csv" : "download.xlsx"):fileName;
+                    FileResponseParser(store,httpRequest.response,params.cause,fileName)
                   }
 
                    else{
