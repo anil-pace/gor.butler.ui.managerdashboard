@@ -29,7 +29,7 @@ import {INVENTORY_DATA_HISTORY,INVENTORY_HISTORY_DAYS_COUNT,
 
   if(isHistory=== "inventoryDataToday" ){
     invObj=inventory[0];
-    invObj["current_stock"]=(invObj["opening_stock"] + invObj["items_put"])-invObj["items_picked"]
+    iinvObj["current_stock"]=(invObj["opening_stock"] + invObj["items_put"])-invObj["items_picked"] - invObj["exception_qty"];
     invObj.unusedSpace=100 - invObj["warehouse_utilization"];
     invObj.colorCode=CATEGORY_COLOR_MAP[CATEGORY_COLOR_MAP.length -1];
     categoryData=invObj["category_data"];
