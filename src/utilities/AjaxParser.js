@@ -28,7 +28,8 @@ import {validateInvoiceID,
 	uploadMasterDataProcessing,
 	uploadMasterDataSuccess,
 uploadMasterDataHistory,updateMaxFileSize,validateStockLedgerSKU} from '../actions/utilityActions';
-import {recievePendingMSU,resetCheckedPPSList} from '../actions/ppsModeChangeAction'
+import {recievePendingMSU,resetCheckedPPSList} from '../actions/ppsModeChangeAction';
+import {getFormattedMessages} from '../utilities/getFormattedMessages'
 
 export function AjaxParse(store,res,cause,status)
 {
@@ -82,9 +83,11 @@ export function AjaxParse(store,res,cause,status)
 		case PPS_MODE_CHANGE:
 			var successCount = res.successful.length,
 		  	unsuccessfulCount = Object.keys(res.unsuccessful).length,
-		  	msg = unsuccessfulCount ? unsuccessfulCount+"/"
-		  			+(unsuccessfulCount+successCount)+
-		  			" mode change requests were rejected" : "Mode change request successful";
+		  	values={
+		  		unsuccessful:unsuccessfulCount,
+		  		totalCount:(successCount+unsuccessfulCount)
+		  	},
+		  	msg = getFormattedMessages('mode',values);
 		  	store.dispatch(notifySuccess(msg));
 		  	store.dispatch(resetCheckedPPSList(res.successful));
 			break;
@@ -329,8 +332,11 @@ export function AjaxParse(store,res,cause,status)
 		  case PPS_STATUS_CHANGE:
 		  	var successCount = res.successful.length,
 		  	unsuccessfulCount = Object.keys(res.unsuccessful).length,
-		  	msg = unsuccessfulCount ? unsuccessfulCount+"/"+(unsuccessfulCount+successCount)
-		  			+" status change request were rejected" : "Status change request successful";
+		  	values={
+		  		unsuccessful:unsuccessfulCount,
+		  		totalCount:(successCount+unsuccessfulCount)
+		  	},
+		  	msg = getFormattedMessages('status',values);
 		  	store.dispatch(notifySuccess(msg));
 		  	store.dispatch(resetCheckedPPSList(res.successful));
 		  	break;

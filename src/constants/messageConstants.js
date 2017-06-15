@@ -199,5 +199,9 @@ export const allStatusSuccess = (<FormattedMessage id="pps.statusChange.allStatu
 
 export const allModeSuccess =(<FormattedMessage id="pps.modeChange.allModeSuccess" description='Records in file should not be greater than' 
       defaultMessage='Mode change request successful'/>)
+export const ppsModeFailure = "{unsuccessful}/{totalCount} mode change requests rejected";
+export const ppsStatusFailure = "{unsuccessful}/{totalCount} status change requests rejected";
+export const ppsModeSuccess ="Mode change request successful";
+export const ppsStatusSuccess ="Status change request successful";
 
 

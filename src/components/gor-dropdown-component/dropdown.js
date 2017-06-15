@@ -10,6 +10,7 @@ class Dropdown extends Component {
       placeholder:this.props.placeholder,
       defaultPlaceHolder:this.props.placeholder
     };
+    this._handleDocumentClick =  this._handleDocumentClick.bind(this);
   }
   _toggleDropdown(){
     var currentVisibility = this.state.dropDownVisible;
@@ -34,11 +35,11 @@ class Dropdown extends Component {
 
 
   componentDidMount(){
-      document.addEventListener('click',this._handleDocumentClick.bind(this),false);
+      document.addEventListener('click',this._handleDocumentClick,false);
   }
 
   componentWillUnmount() {
-      document.removeEventListener("click", this._handleDocumentClick)
+      document.removeEventListener("click", this._handleDocumentClick,false)
   }
 
   render() {

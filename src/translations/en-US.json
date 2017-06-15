@@ -3279,6 +3279,18 @@
     "filepath": "./src/containers/systemTabs/ppsTab.js"
   },
   {
+    "id": "PPS.table.statusPlaceholder",
+    "description": "Placeholder for status dropdown",
+    "defaultMessage": "Change PPS Status",
+    "filepath": "./src/containers/systemTabs/ppsTab.js"
+  },
+  {
+    "id": "PPS.table.modePlaceholder",
+    "description": "Placeholder for mode dropdown",
+    "defaultMessage": "Change PPS Mode",
+    "filepath": "./src/containers/systemTabs/ppsTab.js"
+  },
+  {
     "id": "pps.table.heading",
     "description": "Heading for PPS",
     "defaultMessage": "Pick Put Stations",

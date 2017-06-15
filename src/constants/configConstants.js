@@ -1,8 +1,8 @@
 export const BASE_URL='localhost';
 export const PORT='8888';
 export const PROTOCOL='https://';
-export const WS_PROTOCOL="ws://";
-export const WS_URL=WS_PROTOCOL+BASE_URL+"/manager_api/ws"
+export const WS_PROTOCOL="wss://";
+export const WS_URL=WS_PROTOCOL+BASE_URL+"/manager_api/wss"
 export const LOGIN_URL=PROTOCOL+BASE_URL+"/api/auth/token"
 export const API_URL=PROTOCOL+BASE_URL+"/api";
 export const HEADER_URL=PROTOCOL+BASE_URL+"/api/user"
@@ -18,7 +18,7 @@ export const DELETE_AUDIT_URL=AUDIT_URL+'/delete/';
 export const CANCEL_AUDIT_URL=AUDIT_URL + "/cancel/";
 export const START_AUDIT_URL=AUDIT_URL+'/start';
 export const SEARCH_AUDIT_URL=AUDIT_URL + "/search?start_time=";
-export const PPSLIST_URL=API_URL+"/pps/pps_mode"
+export const PPSLIST_URL=API_URL+"/pps/available_pps"
 export const ORDER_PAGE="?page=";
 export const EXCEPTION_TRUE="exception";
 export const WAREHOUSE_STATUS="warehouse_status";
