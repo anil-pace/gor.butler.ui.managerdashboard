@@ -1187,6 +1187,18 @@
     "filepath": "./src/constants/messageConstants.js"
   },
   {
+    "id": "pps.statusChange.allStatusSuccess",
+    "description": "Records in file should not be greater than",
+    "defaultMessage": "Status change request successful",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "pps.modeChange.allModeSuccess",
+    "description": "Records in file should not be greater than",
+    "defaultMessage": "Mode change request successful",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
     "id": "widget.audit.heading.value",
     "description": "Total Items Audited",
     "defaultMessage": "None",
@@ -3964,6 +3976,18 @@
     "description": "prefix for msu id",
     "defaultMessage": "MSU - {msuId}",
     "filepath": "./src/reducers/butlerDetailReducer.js"
+  },
+  {
+    "id": "pps.modeChange.notification",
+    "description": "PPS is already in requested mode",
+    "defaultMessage": "{unsuccessfulCount}/{totalCount} mode change requests were rejected",
+    "filepath": "./src/utilities/AjaxParser.js"
+  },
+  {
+    "id": "pps.statusChange.notification",
+    "description": "PPS is already in requested mode",
+    "defaultMessage": "{unsuccessfulCount}/{totalCount} status change requests were rejected",
+    "filepath": "./src/utilities/AjaxParser.js"
   },
   {
     "id": "notify.success.add",

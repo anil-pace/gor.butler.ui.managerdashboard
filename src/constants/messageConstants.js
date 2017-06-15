@@ -185,4 +185,9 @@ export const fileUploadMessages={
       
 }
 /*Message for status change notification*/
+export const allStatusSuccess = (<FormattedMessage id="pps.statusChange.allStatusSuccess" description='Records in file should not be greater than' 
+      defaultMessage='Status change request successful'/>)
+
+export const allModeSuccess =(<FormattedMessage id="pps.modeChange.allModeSuccess" description='Records in file should not be greater than' 
+      defaultMessage='Mode change request successful'/>)
 

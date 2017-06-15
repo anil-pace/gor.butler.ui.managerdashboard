@@ -1,8 +1,8 @@
-export const BASE_URL='192.168.8.109';
+export const BASE_URL='192.168.12.171:5000';
 export const PORT='8888';
 export const PROTOCOL='https://';
-export const WS_PROTOCOL="wss://";
-export const WS_URL=WS_PROTOCOL+BASE_URL+"/manager_api/wss"
+export const WS_PROTOCOL="ws://";
+export const WS_URL=WS_PROTOCOL+"192.168.12.171:8888"+"/manager_api/ws"
 export const LOGIN_URL=PROTOCOL+BASE_URL+"/api/auth/token"
 export const API_URL=PROTOCOL+BASE_URL+"/api";
 export const HEADER_URL=PROTOCOL+BASE_URL+"/api/user"
