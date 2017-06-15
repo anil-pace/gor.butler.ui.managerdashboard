@@ -38,7 +38,9 @@
     "react-scripts": "0.9.5",
     "redux": "^3.5.2",
     "redux-mock-store": "^1.2.2",
-    "redux-router": "^2.1.2"
+    "redux-router": "^2.1.2",
+    "sockjs-client": "^1.1.4",
+    "webstomp-client": "^1.0.6"
   },
   "scripts": {
     "build-css": "node-sass src/assets/css/main.scss -o public/assets/ --output-style expanded ",

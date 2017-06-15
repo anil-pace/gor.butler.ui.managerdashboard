@@ -455,6 +455,24 @@
     "filepath": "./src/components/login/messages.js"
   },
   {
+    "id": "notifications.read.message",
+    "description": "No unread notifications",
+    "defaultMessage": "You have no unread Notifications",
+    "filepath": "./src/components/notifications/notifications.js"
+  },
+  {
+    "id": "notifications.read.noresult",
+    "description": "No Result Found",
+    "defaultMessage": "No Result Found",
+    "filepath": "./src/components/notifications/notifications.js"
+  },
+  {
+    "id": "notification.all.link",
+    "description": "View all notifications link",
+    "defaultMessage": "VIEW ALL NOTIFICATIONS",
+    "filepath": "./src/components/notifications/notifications.js"
+  },
+  {
     "id": "OrderSubTab.waves",
     "description": "waves tab for OrderSubTab",
     "defaultMessage": "Waves",
@@ -2074,6 +2092,30 @@
     "description": "Text for logout button",
     "defaultMessage": "Log out now",
     "filepath": "./src/containers/logoutTab.js"
+  },
+  {
+    "id": "notification.table.description",
+    "description": "Table first head",
+    "defaultMessage": "Description",
+    "filepath": "./src/containers/notifications/viewAllNotificationWrapper.js"
+  },
+  {
+    "id": "notification.table.time",
+    "description": "Table second head",
+    "defaultMessage": "Time",
+    "filepath": "./src/containers/notifications/viewAllNotificationWrapper.js"
+  },
+  {
+    "id": "notification.all.head",
+    "description": "Notification head",
+    "defaultMessage": "Notifications",
+    "filepath": "./src/containers/notifications/viewAllNotificationWrapper.js"
+  },
+  {
+    "id": "notification.infinite.message",
+    "description": "Infinite scroll message",
+    "defaultMessage": "Loading More",
+    "filepath": "./src/containers/notifications/viewAllNotificationWrapper.js"
   },
   {
     "id": "pickPerformance.dropdown",
@@ -4153,6 +4195,18 @@
     "description": "Text for successfull audit deletion",
     "defaultMessage": "Audit task {audit_id} has been deleted",
     "filepath": "./src/utilities/codeToString.js"
+  },
+  {
+    "id": "pps.mode.reject",
+    "description": "PPS mode change reject",
+    "defaultMessage": "{unsuccessful}/{totalCount} mode change request rejected",
+    "filepath": "./src/utilities/getFormattedMessages.js"
+  },
+  {
+    "id": "pps.status.reject",
+    "description": "PPS status change reject",
+    "defaultMessage": "{unsuccessful}/{totalCount} status change request rejected",
+    "filepath": "./src/utilities/getFormattedMessages.js"
   },
   {
     "id": "audit.resolve.success",

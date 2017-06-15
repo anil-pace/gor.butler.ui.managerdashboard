@@ -14,7 +14,9 @@ import {ERROR,AUTH_LOGIN, ADD_USER, RECIEVE_TIME_OFFSET,CHECK_ID,DELETE_USER,GET
 	DELETE_AUDIT,AUDIT_RESOLVE_LINES,AUDIT_RESOLVE_CONFIRMED, VALIDATE_SKU_ID,PAUSE_OPERATION,
 	RESUME_OPERATION,CONFIRM_SAFETY,CHECK_SAFETY,RECEIVE_SHIFT_START_TIME,ITEM_RECALLED,GR_REPORT_RESPONSE,ITEM_RECALLED_DATA,
 MASTER_FILE_UPLOAD,GET_MAX_FILE_SIZE,GET_CONFIGS,CANCEL_AUDIT,DOWNLOAD_STOCK_LEDGER_REPORT,DOWNLOAD_STOCK_LEDGER_RAW_TRANSACTIONS_REPORT,
-UPLOAD_HISTORY,PPS_STATUS_CHANGE,GET_PENDING_MSU} from '../constants/frontEndConstants';
+UPLOAD_HISTORY,PPS_STATUS_CHANGE,GET_PENDING_MSU,SEARCHED_NOTIFICATIONS_DATA,SEND_READ_INTIMATION,GET_ALL_NOTIFICATIONS,
+SEARCHED_NOTIFICATIONS_DATA_ALL} from '../constants/frontEndConstants';
+
 
 
 import {BUTLER_UI,CODE_E027} from '../constants/backEndConstants'
@@ -29,9 +31,13 @@ import {validateInvoiceID,
 	uploadMasterDataSuccess,
 uploadMasterDataHistory,updateMaxFileSize,validateStockLedgerSKU} from '../actions/utilityActions';
 import {recievePendingMSU,resetCheckedPPSList} from '../actions/ppsModeChangeAction';
-import {getFormattedMessages} from '../utilities/getFormattedMessages'
+import {getFormattedMessages} from '../utilities/getFormattedMessages';
+import {recieveNotificationData,
+	notificationReadIntimation,
+recieveAllNotifications,recieveAllSearchedNotifications} from '../actions/notificationAction'
 
-export function AjaxParse(store,res,cause,status)
+export function AjaxParse(store,res,cause,status,saltParams)
+
 {
 	let stringInfo={};
       switch(cause)
@@ -343,6 +349,19 @@ export function AjaxParse(store,res,cause,status)
 		  case GET_PENDING_MSU:
 		  	store.dispatch(recievePendingMSU(res));
 		  	break;
+		 case SEARCHED_NOTIFICATIONS_DATA:
+			store.dispatch(recieveNotificationData(res));
+			break;
+		case SEND_READ_INTIMATION:
+			store.dispatch(notificationReadIntimation(true));
+			break;
+		case GET_ALL_NOTIFICATIONS:
+			store.dispatch(recieveAllNotifications(res,saltParams));
+			break;
+		case SEARCHED_NOTIFICATIONS_DATA_ALL:
+			store.dispatch(recieveAllSearchedNotifications(res));
+			break;
+
 		default:
 			ShowError(store,cause,status);
 			break;

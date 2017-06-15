@@ -24,7 +24,9 @@ class Spinner extends React.Component{
   	 */
 	render(){
 		return (
-			<div className="loader" style={this.props.isLoading ? {display:'block'} : {display:'none'}}></div>
+			<div className={"loader "+(this.props.utilClassNames || "")} style={this.props.isLoading ? {display:'block'} : {display:'none'}}>
+        {this.props.children}
+      </div>
 		);
 	}
 };
@@ -32,5 +34,12 @@ class Spinner extends React.Component{
  * [Passing Router to component through context]
  * @type {Object}
  */
-
+Spinner.propTypes={
+      utilClassNames:React.PropTypes.string,
+      isLoading:React.PropTypes.bool,
+      children:React.PropTypes.oneOfType([
+        React.PropTypes.arrayOf(React.PropTypes.node),
+        React.PropTypes.node
+    ])
+    }
 export  default Spinner;

@@ -1,8 +1,9 @@
-export const BASE_URL='localhost';
-export const PORT='8888';
-export const PROTOCOL='https://';
-export const WS_PROTOCOL="wss://";
-export const WS_URL=WS_PROTOCOL+BASE_URL+"/manager_api/wss"
+
+export const BASE_URL = 'localhost';
+export const PORT = '8888';
+export const PROTOCOL = 'https://';
+export const WS_PROTOCOL ="wss://";
+export const WS_URL = WS_PROTOCOL+BASE_URL+"/manager_api/wss";
 export const LOGIN_URL=PROTOCOL+BASE_URL+"/api/auth/token"
 export const API_URL=PROTOCOL+BASE_URL+"/api";
 export const HEADER_URL=PROTOCOL+BASE_URL+"/api/user"
@@ -48,6 +49,12 @@ export const STOCK_LEDGER_REPORT_DOWNLOAD_RAW_TRANSACTIONS_URL=API_URL + "/downl
 export const UPLOAD_HISTORY_URL=API_URL+ "/components/mdm_info";
 export const GET_MD_CONFIG_URL=API_URL + "/components/get_md_config";
 export const GET_MAXSIZE_FILE_URL=API_URL + "/components/get_mdm_file_size";
+/*URLs for notification*/
+export const BASE_URL_NOTIFICATION = PROTOCOL + BASE_URL;
+export const NOTIFICATIONS_URL =  BASE_URL_NOTIFICATION+"/api-gateway/dashboard-service/platform-dashboard/event";
+export const WS_NOTIFICATION_URL =  BASE_URL_NOTIFICATION+"/platform-dashboard/dashboard-stomp";
+export const READ_MSG_URL = BASE_URL_NOTIFICATION+"/api-gateway/dashboard-service/platform-dashboard/event/mark-as-read";
+
 
 
 

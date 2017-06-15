@@ -12,8 +12,11 @@ import LogOut from '../../containers/logoutTab';
 import {FormattedMessage} from 'react-intl';
 import {connect} from 'react-redux';
 import HamBurger from '../hamburger/hamburger';
-import PauseOperation from '../../containers/emergencyProcess/pauseOperation';
-import ResumeOperation from '../../containers/emergencyProcess/resumeOperation';
+import NotificationsWrapper from '../../containers/notifications/notificationsWrapper';
+import PauseOperation from '../../containers/emergencyProcess/pauseOperation'; 
+import ResumeOperation from '../../containers/emergencyProcess/resumeOperation'; 
+import {switchModalKey} from '../../actions/validationActions';
+
 
 var dropdownFlag=0;
 var temp;
@@ -200,6 +203,8 @@ class Header extends React.Component {
         return menuObj;
     }
 
+
+
     render() {
         var headerInfo=this._processData()
         var menuDetails=this._processMenu(headerInfo);
@@ -214,6 +219,7 @@ class Header extends React.Component {
                     <div className="gor-border"/>
                 </div>
                 <div className="blockLeft">
+                <NotificationsWrapper />
                     <HamBurger data={menuDetails}/>
                     <div className="gor-border"/>
                     <div className="dropdown" id="profile">
@@ -253,6 +259,7 @@ class Header extends React.Component {
         );
     }
 }
+
 
 Header.contextTypes={
     intl: React.PropTypes.object.isRequired

@@ -5,8 +5,8 @@
 
 .gorHeader {
 	&.head{
-		overflow: hidden;
     	background:#fff;
+    	min-height: 45px;
 	}
 	.dropbtn{
 		background-color: #fff;
@@ -148,7 +148,7 @@
 				display: inline-block;
 				float:right;
 				cursor: pointer;
-				width: 37%;
+				width: 52%;
 			}
 			.upperTextClient {
 				padding:10px calculateRem(20px) calculateRem(6px) calculateRem(0px);

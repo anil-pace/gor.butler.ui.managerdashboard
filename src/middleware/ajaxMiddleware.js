@@ -15,7 +15,9 @@ const ajaxMiddleware=(function(){
        case AJAX_CALL:
 
        var params=action.params;
-       var formData=params.formdata || params || null,httpData;
+       var saltParams = action.params.saltParams ? action.params.saltParams : {};
+       var formData = params.formdata || params || null,httpData;
+
        if(params.cause !== MASTER_FILE_UPLOAD){
           httpData=params.formdata? JSON.stringify(params.formdata):null;
        }
@@ -52,11 +54,11 @@ const ajaxMiddleware=(function(){
                     fileName=(!fileName)?(resContentType.match(/(text\/csv)/g)? "download.csv" : "download.xlsx"):fileName;
                     FileResponseParser(store,httpRequest.response,params.cause,fileName)
                   }
-
                    else{
                     let  decodedString= httpRequest.responseType==="arraybuffer"? String.fromCharCode.apply(null, new Uint8Array(httpRequest.response)):httpRequest.response;
                     var response=JSON.parse(decodedString,httpRequest.status);
-                    AjaxParse(store,response,params.cause,httpRequest.status);          
+                    AjaxParse(store,response,params.cause,httpRequest.status,saltParams);          
+
                   }
                   
                  }
@@ -77,6 +79,9 @@ const ajaxMiddleware=(function(){
     httpRequest.open(params.method, params.url,!params.sync);
     if(params.contentType !== false){
       httpRequest.setRequestHeader('Content-Type', params.contentType || "text/html");
+    }
+    if(params.withCredentials){
+      httpRequest.withCredentials = true;
     }
     httpRequest.setRequestHeader('Accept', params.accept || "text/html");
     if(params.cause!==AUTH_LOGIN)
