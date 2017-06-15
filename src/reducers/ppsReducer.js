@@ -1,4 +1,4 @@
-import {PPS_DATA} from '../constants/frontEndConstants';
+import {PPS_DATA,GET_PENDING_MSU} from '../constants/frontEndConstants';
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -17,7 +17,11 @@ export  function ppsInfo(state={},action){
         return Object.assign({}, state, {
             "ppsData" : ppsData
         })
-
+    case GET_PENDING_MSU:
+        return Object.assign({}, state, {
+            "pendingMSU" : action.data ? action.data.successful : {}
+        })
+    
     default:
       return state
   }

@@ -9,6 +9,10 @@
     color:#ffffff;
     border-radius:3px;
     cursor:pointer;
+    &.black{
+        background:#4D5055;
+        color:#fff;
+    }
 }
 .gor-select-field{
     height: 35px;

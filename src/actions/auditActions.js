@@ -100,6 +100,11 @@ export function auditListRefreshed(params) {
         params
     }
 }
-
+export function cancelAudit(params) {
+    return {
+        type: AJAX_CALL,
+        params
+    }
+}
 
 

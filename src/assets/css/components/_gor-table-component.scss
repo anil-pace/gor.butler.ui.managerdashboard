@@ -19,13 +19,13 @@
 }
 
 .table-container .table-header .cell.asc:after {
-    content: 'â†‘';
+    content: ' ';
     margin-left: 2px;
     height: 100%;
 }
 
 .table-container .table-header .cell.desc:after {
-    content: 'â†“';
+    content: ' ';
     margin-left: 2px;
     line-height: 100%;
 }
