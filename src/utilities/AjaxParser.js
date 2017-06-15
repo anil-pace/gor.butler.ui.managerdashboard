@@ -14,7 +14,8 @@ import {ERROR,AUTH_LOGIN, ADD_USER, RECIEVE_TIME_OFFSET,CHECK_ID,DELETE_USER,GET
 	DELETE_AUDIT,AUDIT_RESOLVE_LINES,AUDIT_RESOLVE_CONFIRMED, VALIDATE_SKU_ID,PAUSE_OPERATION,
 	RESUME_OPERATION,CONFIRM_SAFETY,CHECK_SAFETY,RECEIVE_SHIFT_START_TIME,ITEM_RECALLED,GR_REPORT_RESPONSE,ITEM_RECALLED_DATA,
 MASTER_FILE_UPLOAD,GET_MAX_FILE_SIZE,GET_CONFIGS,CANCEL_AUDIT,DOWNLOAD_STOCK_LEDGER_REPORT,DOWNLOAD_STOCK_LEDGER_RAW_TRANSACTIONS_REPORT,
-UPLOAD_HISTORY} from '../constants/frontEndConstants';
+UPLOAD_HISTORY,PPS_STATUS_CHANGE,GET_PENDING_MSU} from '../constants/frontEndConstants';
+
 
 import {BUTLER_UI,CODE_E027} from '../constants/backEndConstants'
 import {UE002,E028,E029,MODE_REQUESTED,TYPE_SUCCESS,AS001,AS00A,WRONG_CRED,ES,g020,g021,g023,g024} from '../constants/messageConstants';
@@ -27,6 +28,9 @@ import {validateInvoiceID,
 	uploadMasterDataProcessing,
 	uploadMasterDataSuccess,
 uploadMasterDataHistory,updateMaxFileSize,validateStockLedgerSKU} from '../actions/utilityActions';
+import {recievePendingMSU,resetCheckedPPSList} from '../actions/ppsModeChangeAction';
+import {getFormattedMessages} from '../utilities/getFormattedMessages'
+
 export function AjaxParse(store,res,cause,status)
 {
 	let stringInfo={};
@@ -77,20 +81,15 @@ export function AjaxParse(store,res,cause,status)
 			store.dispatch(validateID(idExist));			
 			break;
 		case PPS_MODE_CHANGE:
-			if(res.alert_data) {
-				switch(res.alert_data[0].code) {
-					case 'e028':
-					store.dispatch(notifySuccess(E028));
-		    		break;
-
-		    		case 'e029':
-		    		store.dispatch(notifyFail(E029));
-		    		break;	
-				}
-			}
-			else{
-					store.dispatch(notifySuccess(MODE_REQUESTED));
-			}
+			var successCount = res.successful.length,
+		  	unsuccessfulCount = Object.keys(res.unsuccessful).length,
+		  	values={
+		  		unsuccessful:unsuccessfulCount,
+		  		totalCount:(successCount+unsuccessfulCount)
+		  	},
+		  	msg = getFormattedMessages('mode',values);
+		  	store.dispatch(notifySuccess(msg));
+		  	store.dispatch(resetCheckedPPSList(res.successful));
 			break;
 		case ADD_USER:
 		case DELETE_USER:
@@ -330,7 +329,20 @@ export function AjaxParse(store,res,cause,status)
 		  case GET_CONFIGS:
 		  	store.dispatch(recieveConfigurations(res));
 		  	break;
-		  	
+		  case PPS_STATUS_CHANGE:
+		  	var successCount = res.successful.length,
+		  	unsuccessfulCount = Object.keys(res.unsuccessful).length,
+		  	values={
+		  		unsuccessful:unsuccessfulCount,
+		  		totalCount:(successCount+unsuccessfulCount)
+		  	},
+		  	msg = getFormattedMessages('status',values);
+		  	store.dispatch(notifySuccess(msg));
+		  	store.dispatch(resetCheckedPPSList(res.successful));
+		  	break;
+		  case GET_PENDING_MSU:
+		  	store.dispatch(recievePendingMSU(res));
+		  	break;
 		default:
 			ShowError(store,cause,status);
 			break;

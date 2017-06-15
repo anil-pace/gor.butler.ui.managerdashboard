@@ -266,13 +266,13 @@
   {
     "id": "healthTab.status.on",
     "description": "on status for healthtab",
-    "defaultMessage": "On",
+    "defaultMessage": "Open",
     "filepath": "./src/components/health/Health.js"
   },
   {
     "id": "healthTab.status.off",
     "description": "off status for healthtab",
-    "defaultMessage": "Off",
+    "defaultMessage": "Close",
     "filepath": "./src/components/health/Health.js"
   },
   {
@@ -563,15 +563,21 @@
     "filepath": "./src/components/utilityComponents/utilityTile.js"
   },
   {
-    "id": "stringConfig.on",
+    "id": "stringConfig.open",
     "description": "Text to display on",
-    "defaultMessage": "on",
+    "defaultMessage": "Open",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
     "id": "stringConfig.off",
     "description": "Text to show off",
-    "defaultMessage": "off",
+    "defaultMessage": "Close",
+    "filepath": "./src/constants/backEndConstants.js"
+  },
+  {
+    "id": "stringConfig.fclose",
+    "description": "Text to show off",
+    "defaultMessage": "Force Close",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
@@ -1268,6 +1274,18 @@
     "id": "audit.cancellation.error.g024",
     "description": "Audit Id cancellation request has been process and cannot be cancelled",
     "defaultMessage": "Audit Id cancellation request has been process and cannot be cancelled",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "pps.statusChange.allStatusSuccess",
+    "description": "Records in file should not be greater than",
+    "defaultMessage": "Status change request successful",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "pps.modeChange.allModeSuccess",
+    "description": "Records in file should not be greater than",
+    "defaultMessage": "Mode change request successful",
     "filepath": "./src/constants/messageConstants.js"
   },
   {
@@ -3082,6 +3100,36 @@
     "filepath": "./src/containers/systemTabs/chargingStationsTable.js"
   },
   {
+    "id": "ppsclose.tblhead1.text",
+    "description": "Table first head",
+    "defaultMessage": "SLOT ID",
+    "filepath": "./src/containers/systemTabs/closePPSList.js"
+  },
+  {
+    "id": "ppsclose.tblhead2.text",
+    "description": "Table second head",
+    "defaultMessage": "MSU Pending",
+    "filepath": "./src/containers/systemTabs/closePPSList.js"
+  },
+  {
+    "id": "ppsclose.tblhead3.text",
+    "description": "Table third head",
+    "defaultMessage": "ACTION",
+    "filepath": "./src/containers/systemTabs/closePPSList.js"
+  },
+  {
+    "id": "pps.close.cancel",
+    "description": "Text for cancel close",
+    "defaultMessage": "CANCEL",
+    "filepath": "./src/containers/systemTabs/closePPSList.js"
+  },
+  {
+    "id": "pps.close.confirm",
+    "description": "Text for close confirm",
+    "defaultMessage": "CONFIRM",
+    "filepath": "./src/containers/systemTabs/closePPSList.js"
+  },
+  {
     "id": "NotificationTable.table.heading",
     "description": "Heading for NotificationTable",
     "defaultMessage": "Notifications",
@@ -3144,12 +3192,17 @@
   },
   {
     "id": "pps.STATUS.stopped",
-    "defaultMessage": "On",
+    "defaultMessage": "Open",
     "filepath": "./src/containers/systemTabs/ppsFilter.js"
   },
   {
     "id": "pps.STATUS.error",
-    "defaultMessage": "Off",
+    "defaultMessage": "Close",
+    "filepath": "./src/containers/systemTabs/ppsFilter.js"
+  },
+  {
+    "id": "pps.STATUS.fclose",
+    "defaultMessage": "Force Close",
     "filepath": "./src/containers/systemTabs/ppsFilter.js"
   },
   {
@@ -3190,6 +3243,12 @@
     "filepath": "./src/containers/systemTabs/ppsTab.js"
   },
   {
+    "id": "pps.close.heading",
+    "description": "Heading for Close PPS",
+    "defaultMessage": "Close PPS",
+    "filepath": "./src/containers/systemTabs/ppsTab.js"
+  },
+  {
     "id": "PPS.table.pickDrop",
     "description": "pick dropdown option for PPS",
     "defaultMessage": "Put",
@@ -3205,6 +3264,30 @@
     "id": "PPS.table.auditDrop",
     "description": "audit dropdown option for PPS",
     "defaultMessage": "Audit",
+    "filepath": "./src/containers/systemTabs/ppsTab.js"
+  },
+  {
+    "id": "PPS.table.openStatusLabel",
+    "description": "audit dropdown option for Status change",
+    "defaultMessage": "Open Selected PPS",
+    "filepath": "./src/containers/systemTabs/ppsTab.js"
+  },
+  {
+    "id": "PPS.table.closeStatusLabel",
+    "description": "audit dropdown option for Status change",
+    "defaultMessage": "Close Selected PPS",
+    "filepath": "./src/containers/systemTabs/ppsTab.js"
+  },
+  {
+    "id": "PPS.table.statusPlaceholder",
+    "description": "Placeholder for status dropdown",
+    "defaultMessage": "Change PPS Status",
+    "filepath": "./src/containers/systemTabs/ppsTab.js"
+  },
+  {
+    "id": "PPS.table.modePlaceholder",
+    "description": "Placeholder for mode dropdown",
+    "defaultMessage": "Change PPS Mode",
     "filepath": "./src/containers/systemTabs/ppsTab.js"
   },
   {
@@ -3270,19 +3353,31 @@
   {
     "id": "PPStable.status",
     "description": "status for PPS table",
-    "defaultMessage": "{ppsOnState} On",
+    "defaultMessage": "{ppsOnState} Open",
     "filepath": "./src/containers/systemTabs/PPStable.js"
   },
   {
     "id": "PPS.table.operatingMode",
     "description": "operatingMode for PPS",
-    "defaultMessage": "OPERATING MODE",
+    "defaultMessage": "CURRENT MODE",
     "filepath": "./src/containers/systemTabs/PPStable.js"
   },
   {
     "id": "PPStable.ppsState",
     "description": "pps state for PPStable",
     "defaultMessage": "Pick ({pick}) . Put ({put}) . Audit ({audit}) . Not set ({notSet})",
+    "filepath": "./src/containers/systemTabs/PPStable.js"
+  },
+  {
+    "id": "PPStable.requestedMode.text",
+    "description": "PPStable.requestedMode.text",
+    "defaultMessage": "Requested Mode:",
+    "filepath": "./src/containers/systemTabs/PPStable.js"
+  },
+  {
+    "id": "PPS.table.requestedStatus",
+    "description": "Requested status for PPS",
+    "defaultMessage": "REQUESTED STATUS",
     "filepath": "./src/containers/systemTabs/PPStable.js"
   },
   {
@@ -3934,6 +4029,12 @@
     "filepath": "./src/containers/utilityTab.js"
   },
   {
+    "id": "utility.stockLedgerRawTransactionHead.head",
+    "description": "Stock Ledger Raw Transactions",
+    "defaultMessage": "Stock Ledger Raw Transactions",
+    "filepath": "./src/containers/utilityTab.js"
+  },
+  {
     "id": "utility.uploadBtn.label",
     "description": "Upload Master Data",
     "defaultMessage": "Upload Master Data",
@@ -3991,6 +4092,12 @@
     "id": "utility.stockLedger.duration.yesterday",
     "description": "Yesterday",
     "defaultMessage": "Yesterday",
+    "filepath": "./src/containers/utilityTab.js"
+  },
+  {
+    "id": "utility.stockLedgerRawTransaction.duration.today",
+    "description": "today",
+    "defaultMessage": "Today",
     "filepath": "./src/containers/utilityTab.js"
   },
   {

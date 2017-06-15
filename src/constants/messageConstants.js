@@ -184,10 +184,7 @@ export const fileUploadMessages={
       defaultMessage='File size should not be greater than'/>)
       
 }
-/*export const utility002=(<FormattedMessage id="masterdata.maxlimit.records" description='Records in file should not be greater than' 
-      defaultMessage='Records in file should not be greater than'/>);
-export const utility001=(<FormattedMessage id="masterdata.maxlimit.filesize" description='File size should not be greater than' 
-      defaultMessage='File size should not be greater than'/>);*/
+
 export const g020=(<FormattedMessage id="audit.cancellation.error.g020" description='Internal server error while requesting for audit cancel'
                                    defaultMessage='Internal server error while requesting for audit cancel'/>);
 export const g021=(<FormattedMessage id="audit.cancellation.error.g021" description='Audit Id already sent to core for cancellation'
@@ -196,4 +193,15 @@ export const g023=(<FormattedMessage id="audit.cancellation.error.g023" descript
                                    defaultMessage='Audit Id already successfully cancelled'/>);
 export const g024=(<FormattedMessage id="audit.cancellation.error.g024" description='Audit Id cancellation request has been process and cannot be cancelled'
                                    defaultMessage='Audit Id cancellation request has been process and cannot be cancelled'/>);
+/*Message for status change notification*/
+export const allStatusSuccess = (<FormattedMessage id="pps.statusChange.allStatusSuccess" description='Records in file should not be greater than' 
+      defaultMessage='Status change request successful'/>)
+
+export const allModeSuccess =(<FormattedMessage id="pps.modeChange.allModeSuccess" description='Records in file should not be greater than' 
+      defaultMessage='Mode change request successful'/>)
+export const ppsModeFailure = "{unsuccessful}/{totalCount} mode change requests rejected";
+export const ppsStatusFailure = "{unsuccessful}/{totalCount} status change requests rejected";
+export const ppsModeSuccess ="Mode change request successful";
+export const ppsStatusSuccess ="Status change request successful";
+
 

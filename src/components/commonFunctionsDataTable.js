@@ -59,8 +59,8 @@ export function sortData (columnKey, sortDir,sortIndexes,_dataList) {
     var BInt=parseInt(valB, 10);
 
     if(isNaN(AInt) && isNaN(BInt)){
-        var aA=valA.replace(reA, "");
-        var bA=valB.replace(reA, "");
+        var aA= valA ? valA.replace(reA, "") : "";
+        var bA= valB ? valB.replace(reA, "") : "";
         if(aA=== bA) {
             var aN=parseInt(valA.replace(reN, ""), 10);
             var bN=parseInt(valB.replace(reN, ""), 10);
@@ -145,11 +145,19 @@ export const ActionCell=({rowIndex, data, columnKey,selEdit,selDel,mid, ...props
   </Cell>
 );
 
-export const TextCell=({rowIndex, data, columnKey,setClass, ...props})=> (
-  <Cell {...props} className={setClass}>
+export const TextCell=({rowIndex, data, columnKey,setClass, ...props})=>{ 
+  
+  const childrenCell =  React.Children.map(props.children, child => {
+      
+       return data.getObjectAt(rowIndex)[props.childColumnKey] ?(
+        <span className={props.childrenClass}>{child}{data.getObjectAt(rowIndex)[props.childColumnKey]}</span>
+      ):("");
+    });
+  return(<Cell {...props}  className={setClass}>
     {data.getObjectAt(rowIndex)[columnKey]}
+    {childrenCell}
   </Cell>
-);
+)};
 
 export const ToolTipCell=({rowIndex, data, columnKey,setClass,callBack,tooltipData, ...props})=> (
   <Cell {...props} className={setClass}>
@@ -216,7 +224,12 @@ export const ComponentCell=({rowIndex, data, columnKey,checkState,checked, ...pr
     {data.getObjectAt(rowIndex)[columnKey]}
   </Cell>
 );
-
+export const PPSComponentCell=({rowIndex, data, columnKey,checkState,checked, ...props})=> (
+  
+  <Cell {...props}> <input type="checkbox" checked={data.getObjectAt(rowIndex)["isChecked"]} onChange={checkState.bind(this,props.checkboxColumn,rowIndex)}/>
+    {data.getObjectAt(rowIndex)[columnKey]}
+  </Cell>
+);
 export const StatusCell=({rowIndex, data, columnKey,statusKey, ...props})=> (
   <Cell {...props} className={data.getObjectAt(rowIndex)[statusKey]}>
     {data.getObjectAt(rowIndex)[columnKey]}

@@ -17,18 +17,32 @@ class DropdownTable extends Component {
   
   }
 
+
   shouldComponentUpdate(nextProps,nextState){
     if(JSON.stringify(this.props.currentState)!==JSON.stringify(nextProps.currentState || this.props.items!==nextProps.items)){
+
       return true
     }
     return false
   }
 
   render () {
-    const defaultOption=this.props.currentState?this.props.currentState:this.props.placeholder;
+    const defaultOption=this.props.currentState?this.props.currentState:"";
+    var dDownProps = {
+      options : this.props.items,
+      onChange:this._onSelect,
+      placeholder:this.props.placeholder
+    }
+    if(defaultOption){
+      dDownProps.value = defaultOption;
+    }
+     
     return (
       <div className={this.props.styleClass}>
-        <Ddown options={this.props.items} onChange={this._onSelect} value={defaultOption} placeholder="Select an option" />
+      {this.props.disabled === true ? 
+        <Ddown disabled {...dDownProps} />
+        :<Ddown {...dDownProps} />
+      }
       </div>
     )
   }

@@ -2,10 +2,7 @@ import React  from 'react';
 import Health from './Health';
 
 class HealthTabs extends React.Component{
-	constructor(props) 
-	{
-    	super(props);
-    }	
+		
 	render(){
 		return (
 			<div>
