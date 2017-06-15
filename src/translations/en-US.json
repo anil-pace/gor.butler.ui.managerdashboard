@@ -395,6 +395,12 @@
     "filepath": "./src/components/notifications/notifications.js"
   },
   {
+    "id": "notifications.read.noresult",
+    "description": "No Result Found",
+    "defaultMessage": "No Result Found",
+    "filepath": "./src/components/notifications/notifications.js"
+  },
+  {
     "id": "notification.all.link",
     "description": "View all notifications link",
     "defaultMessage": "VIEW ALL NOTIFICATIONS",
