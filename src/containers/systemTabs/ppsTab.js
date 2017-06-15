@@ -176,16 +176,18 @@ class PPS extends React.Component {
             CLOSE=nProps.context.intl.formatMessage(stringConfig.close);
             FCLOSE=nProps.context.intl.formatMessage(stringConfig.fclose);
             PERFORMANCE=nProps.context.intl.formatMessage(messages.perfPrefix, {"performance": performance ? performance : "0"});
-            if(data[i]["pps_requested_mode"] === "open"){
+            if(data[i]["requested_status"] === "open"){
                 requestedStatusText = OPEN
             }
-            else if(data[i]["pps_requested_mode"] === "close"){
+            else if(data[i]["requested_status"] === "close"){
                 requestedStatusText = CLOSE
             }
-             else if(data[i]["pps_requested_mode"] === "force_close"){
+             else if(data[i]["requested_status"] === "force_close"){
                 requestedStatusText = FCLOSE
             }
-            requestedStatusText
+            else{
+                requestedStatusText = "--"
+            }
             detail.id=PPS;
             detail.ppsId=ppsId;
             detail.requested_status=requestedStatusText ;

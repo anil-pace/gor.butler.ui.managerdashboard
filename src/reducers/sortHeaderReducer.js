@@ -28,7 +28,8 @@ export  function sortHeaderState(state={},action){
 	  		delete checkedPps[successFulPPS[i]];
 	  	}
 	  	 return Object.assign({}, state, {
-	    	"checkedPps":checkedPps
+	    	"checkedPps":checkedPps,
+	    	"renderDropD": Object.keys(checkedPps).length ? true :false
       })
 
 	  case PPS_HEADER_SORT:

@@ -3104,12 +3104,17 @@
   },
   {
     "id": "pps.STATUS.stopped",
-    "defaultMessage": "On",
+    "defaultMessage": "Open",
     "filepath": "./src/containers/systemTabs/ppsFilter.js"
   },
   {
     "id": "pps.STATUS.error",
-    "defaultMessage": "Off",
+    "defaultMessage": "Close",
+    "filepath": "./src/containers/systemTabs/ppsFilter.js"
+  },
+  {
+    "id": "pps.STATUS.fclose",
+    "defaultMessage": "Force Close",
     "filepath": "./src/containers/systemTabs/ppsFilter.js"
   },
   {
@@ -3976,18 +3981,6 @@
     "description": "prefix for msu id",
     "defaultMessage": "MSU - {msuId}",
     "filepath": "./src/reducers/butlerDetailReducer.js"
-  },
-  {
-    "id": "pps.modeChange.notification",
-    "description": "PPS is already in requested mode",
-    "defaultMessage": "{unsuccessfulCount}/{totalCount} mode change requests were rejected",
-    "filepath": "./src/utilities/AjaxParser.js"
-  },
-  {
-    "id": "pps.statusChange.notification",
-    "description": "PPS is already in requested mode",
-    "defaultMessage": "{unsuccessfulCount}/{totalCount} status change requests were rejected",
-    "filepath": "./src/utilities/AjaxParser.js"
   },
   {
     "id": "notify.success.add",

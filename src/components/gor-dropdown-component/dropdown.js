@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import List from './list';
-//import './dropdown.css';
+import ReactDOM from 'react-dom';
+
 
 class Dropdown extends Component {
   constructor(props){
@@ -25,9 +26,23 @@ class Dropdown extends Component {
     })
     
   }
+  _handleDocumentClick() {
+     if (!ReactDOM.findDOMNode(this).contains(event.target)) {
+       this.setState({dropDownVisible: false});
+     }
+ }
+
+
+  componentDidMount(){
+      document.addEventListener('click',this._handleDocumentClick.bind(this),false);
+  }
+
+  componentWillUnmount() {
+      document.removeEventListener("click", this._handleDocumentClick)
+  }
 
   render() {
-    //var data=this._processOptions();
+    
     return (
           <div className="gor-dropdown-wrapper">
             <span className={'gor-dropdown '+(this.state.dropDownVisible?'gor-white-background':'')}  onClick={!this.props.disabled ? this._toggleDropdown.bind(this) : null} >{!this.props.resetOnSelect ? this.state.placeholder : this.state.defaultPlaceHolder}</span>
