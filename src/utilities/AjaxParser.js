@@ -13,14 +13,14 @@ import {ERROR,AUTH_LOGIN, ADD_USER, RECIEVE_TIME_OFFSET,CHECK_ID,DELETE_USER,GET
 	PPS_MODE_CHANGE,EDIT_USER,RECIEVE_HEADER,SUCCESS,CREATE_AUDIT,AUDIT_RETRIEVE,GET_PPSLIST,START_AUDIT,
 	DELETE_AUDIT,AUDIT_RESOLVE_LINES,AUDIT_RESOLVE_CONFIRMED, VALIDATE_SKU_ID,PAUSE_OPERATION,
 	RESUME_OPERATION,CONFIRM_SAFETY,CHECK_SAFETY,RECEIVE_SHIFT_START_TIME,ITEM_RECALLED,GR_REPORT_RESPONSE,ITEM_RECALLED_DATA,
-MASTER_FILE_UPLOAD,GET_MAX_FILE_SIZE,GET_CONFIGS,CANCEL_AUDIT,DOWNLOAD_STOCK_LEDGER_REPORT,
+MASTER_FILE_UPLOAD,GET_MAX_FILE_SIZE,GET_CONFIGS,CANCEL_AUDIT,DOWNLOAD_STOCK_LEDGER_REPORT,DOWNLOAD_STOCK_LEDGER_RAW_TRANSACTIONS_REPORT,
 UPLOAD_HISTORY} from '../constants/frontEndConstants';
 
 import {BUTLER_UI,CODE_E027} from '../constants/backEndConstants'
 import {UE002,E028,E029,MODE_REQUESTED,TYPE_SUCCESS,AS001,AS00A,WRONG_CRED,ES,g020,g021,g023,g024} from '../constants/messageConstants';
 import {ShowError} from './showError';
 import {endSession} from './endSession';
-import {setResolveAuditSpinner,setSafetySpinner,setInventoryReportSpinner,setStockLedgerSpinner} from '../actions/spinnerAction';
+import {setResolveAuditSpinner,setSafetySpinner,setInventoryReportSpinner,setStockLedgerSpinner,setStockLedgerRawTransactionsSpinner} from '../actions/spinnerAction';
 import {statusToString} from './statusToString';
 import {INVALID_SKUID} from '../constants/messageConstants';
 import {validateInvoiceID,
@@ -311,6 +311,9 @@ export function AjaxParse(store,res,cause,status)
 		case DOWNLOAD_STOCK_LEDGER_REPORT:
 			store.dispatch(setStockLedgerSpinner(false));
 			store.dispatch(validateStockLedgerSKU(res));
+		break;
+		case DOWNLOAD_STOCK_LEDGER_RAW_TRANSACTIONS_REPORT:
+			store.dispatch(setStockLedgerRawTransactionsSpinner(false));
 		break;
 		case MASTER_FILE_UPLOAD:
 			store.dispatch(uploadMasterDataProcessing(false));

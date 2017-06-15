@@ -22,6 +22,12 @@ export function downloadStockLedgerReport(params){
     params
   }
 }
+export function downloadStockLedgerRawTransactionsReport(params){
+	return {
+    type: AJAX_CALL,
+    params
+  }
+}
 
 export function validateInvoiceID(data){
 	return {

@@ -10,7 +10,7 @@ import {
   GR_REPORT_URL,
   MASTER_UPLOAD_URL,
   UPLOAD_HISTORY_URL,
-  GET_MAXSIZE_FILE_URL,STOCK_LEDGER_REPORT_DOWNLOAD_URL
+  GET_MAXSIZE_FILE_URL,STOCK_LEDGER_REPORT_DOWNLOAD_URL,STOCK_LEDGER_REPORT_DOWNLOAD_RAW_TRANSACTIONS_URL
 
 } from '../constants/configConstants';
 import {connect} from 'react-redux';
@@ -19,9 +19,9 @@ import {
     getGRdata,
     validateInvoiceID,
     uploadMasterDataProcessing,
-    getUploadHistory, utilityTabRefreshed,downloadStockLedgerReport,clearStockLedgerSKU
+    getUploadHistory, utilityTabRefreshed,downloadStockLedgerReport,clearStockLedgerSKU,downloadStockLedgerRawTransactionsReport
 } from "../actions/utilityActions";
-import {setInventoryReportSpinner,setStockLedgerSpinner} from '../actions/spinnerAction';
+import {setInventoryReportSpinner,setStockLedgerSpinner,setStockLedgerRawTransactionsSpinner} from '../actions/spinnerAction';
 import {
   GET, 
   ITEM_RECALLED,
@@ -29,7 +29,7 @@ import {
   GR_REPORT_RESPONSE,
   POST,
   MASTER_FILE_FORMATS,
-  UPLOAD_HISTORY,GET_MAX_FILE_SIZE,WS_ONSEND,DOWNLOAD_STOCK_LEDGER_REPORT
+  UPLOAD_HISTORY,GET_MAX_FILE_SIZE,WS_ONSEND,DOWNLOAD_STOCK_LEDGER_REPORT,DOWNLOAD_STOCK_LEDGER_RAW_TRANSACTIONS_REPORT
 
 } from '../constants/frontEndConstants';
 import {
@@ -68,6 +68,11 @@ const messages=defineMessages({
         id: "utility.stockLedgerHead.head",
         description: 'Inventory Stock Ledger',
         defaultMessage: "Inventory Stock Ledger"
+    },
+    stockLedgerRawTransactionHead: {
+        id: "utility.stockLedgerRawTransactionHead.head",
+        description: 'Stock Ledger Raw Transactions',
+        defaultMessage: "Stock Ledger Raw Transactions"
     },
     uploadBtnText: {
         id: "utility.uploadBtn.label",
@@ -290,6 +295,30 @@ class UtilityTab extends React.Component {
     }
 
     /**
+     * The method will render the widget which will
+     * enable the user to download raw transactions
+     * for today only.
+     * @returns {Array}
+     * @private
+     */
+    _renderStockLedgerRawTransactionTile() {
+        let tile=[];
+        let checkbox=<div key="0">
+            <div className="gor-utility-sku-wrap" style={{marginTop:10,marginBottom:10,fontSize:13}}>
+                <div>
+                    <input checked={true} disabled={true} type="radio" id="all" name="stock_ledger_raw_transaction_duration" value="all"/>
+                    <label><FormattedMessage id="utility.stockLedgerRawTransaction.duration.today"
+                                             description="today"
+                                             defaultMessage="Today"/></label>
+
+                </div>
+            </div>
+        </div>
+        tile.push(checkbox)
+        return tile;
+    }
+
+    /**
      * [_onMasterFileUpload callback for master data file upload]
      * @param  {[type]} fileObject [description]
      * @return {[type]}            [description]
@@ -361,12 +390,13 @@ class UtilityTab extends React.Component {
         this.props.validateInvoiceID(false)
     }
 
+    /**
+     * The method will download
+     * the aggregated stock ledger
+     * report.
+     * @private
+     */
     _downloadStockLedger() {
-        /**
-         * TODO:
-         * URL need to be refactored
-         * @type {*}
-         */
         let params=[]
         if(this.state.stockLedgerState.sku){
             params.push(["sku",this.state.stockLedgerState.sku].join("="))
@@ -391,6 +421,25 @@ class UtilityTab extends React.Component {
         this.props.setStockLedgerSpinner(true)
         this.props.downloadStockLedgerReport(data)
         this.props.validateInvoiceID(false)
+    }
+
+    /**
+     * The method will make the HTTP call to download
+     * raw transactions for today.
+     * @private
+     */
+    _downloadStockLedgerRawTransactions() {
+        let url=STOCK_LEDGER_REPORT_DOWNLOAD_RAW_TRANSACTIONS_URL
+        let data={
+            'url': url,
+            'method': GET,
+            'token': this.props.auth_token,
+            'cause': DOWNLOAD_STOCK_LEDGER_RAW_TRANSACTIONS_REPORT,
+            'responseType':'arraybuffer',
+            'accept':"text/csv"
+        }
+        this.props.setStockLedgerRawTransactionsSpinner(true)
+        this.props.downloadStockLedgerRawTransactionsReport(data)
     }
 
     _requestExpiredItems() {
@@ -452,6 +501,7 @@ class UtilityTab extends React.Component {
         var downloadReportTile=this._renderDownReportTile();
         var grnTile=this._renderGRNtile();
         let stockLedgerTile=this._renderStockLedgertile()
+        let stockLedgerRawTransactionTile=this._renderStockLedgerRawTransactionTile()
         var masterUpload=this._renderMasterUpload();
         var activeReportDownButton=(this.state.reportState.fileType && this.state.reportState.category) ? true : false;
         var activeGRNDownButton=(this.state.grnState.fileType && this.state.grnState.invoiceId) ? true : false;
@@ -460,7 +510,9 @@ class UtilityTab extends React.Component {
         let show_masterdata_upload=false
         let show_inventory_report=false
         let show_item_recall_scripts=false
-        let show_stock_ledger_widget=true
+        let show_stock_ledger_widget=false
+        let show_stock_ledger_raw_transaction_widget=false
+
         try{
             if(!this.props.config.utility_tab.enabled){
                 return null
@@ -492,7 +544,13 @@ class UtilityTab extends React.Component {
         }
 
         try {
-            show_stock_ledger_widget=this.props.config.utility_tab.widgets.show_stock_ledger_widget.abcd;
+            show_stock_ledger_widget=this.props.config.utility_tab.widgets.reports.stock_ledger_report;
+        } catch (ex) {
+            //Do nothing
+        }
+
+        try {
+            show_stock_ledger_raw_transaction_widget=this.props.config.utility_tab.widgets.reports.stock_ledger_raw_transactions_report;
         } catch (ex) {
             //Do nothing
         }
@@ -521,6 +579,11 @@ class UtilityTab extends React.Component {
                                      showFooter={true}
                                      tileBody={stockLedgerTile} footerAction={this._downloadStockLedger.bind(this)}
                                      enableButton={activeStockLedgerButton}/> : null}
+                    {show_stock_ledger_raw_transaction_widget ?
+                        <UtilityTile loading={this.props.stockLedgerRawTransactionsSpinner} tileHead={this.context.intl.formatMessage(messages.stockLedgerRawTransactionHead)}
+                                     showFooter={true}
+                                     tileBody={stockLedgerRawTransactionTile} footerAction={this._downloadStockLedgerRawTransactions.bind(this)}
+                                     enableButton={true}/> : null}
                     {show_masterdata_upload ?
                         <UtilityTile tileHead={this.context.intl.formatMessage(messages.masterDataHead)}
                                      showFooter={false}
@@ -552,7 +615,8 @@ function mapStateToProps(state, ownProps) {
         errorCode:state.utilityValidations.errorCode,
         maxsize:state.utilityValidations.maxsize ||0,
         timeOffset: state.authLogin.timeOffset,
-        stockLedgerSpinner:state.spinner.stockLedgerSpinner||false
+        stockLedgerSpinner:state.spinner.stockLedgerSpinner||false,
+        stockLedgerRawTransactionsSpinner:state.spinner.stockLedgerRawTransactionsSpinner||false
     };
 }
 
@@ -569,6 +633,9 @@ var mapDispatchToProps=function (dispatch) {
         },
         downloadStockLedgerReport: function (data) {
             dispatch(downloadStockLedgerReport(data));
+        },
+        downloadStockLedgerRawTransactionsReport: function (data) {
+            dispatch(downloadStockLedgerRawTransactionsReport(data));
         },
         clearStockLedgerSKU: function (data) {
             dispatch(clearStockLedgerSKU(data));
@@ -593,6 +660,9 @@ var mapDispatchToProps=function (dispatch) {
         },
         setStockLedgerSpinner: function (data) {
             dispatch(setStockLedgerSpinner(data))
+        },
+        setStockLedgerRawTransactionsSpinner: function (data) {
+            dispatch(setStockLedgerRawTransactionsSpinner(data))
         },
     }
 };

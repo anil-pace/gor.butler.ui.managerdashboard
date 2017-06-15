@@ -16,7 +16,7 @@ import {
     DISPLAY_WAVES_FILTER_SPINNER,
     DISPLAY_CHARGING_STATION_FILTER_SPINNER,
     DISPLAY_INVENTORY_REPORT_SPINNER,
-    DISPLAY_STOCK_LEDGER_SPINNER
+    DISPLAY_STOCK_LEDGER_SPINNER,DISPLAY_STOCK_LEDGER_RAW_TRANSACTIONS_SPINNER
 } from '../constants/frontEndConstants'
 
 /**
@@ -113,6 +113,11 @@ export function spinner(state = {}, action) {
         case DISPLAY_STOCK_LEDGER_SPINNER:
             return Object.assign({}, state, {
                 "stockLedgerSpinner": action.data
+            })
+
+        case DISPLAY_STOCK_LEDGER_RAW_TRANSACTIONS_SPINNER:
+            return Object.assign({}, state, {
+                "stockLedgerRawTransactionsSpinner": action.data
             })
 
 
