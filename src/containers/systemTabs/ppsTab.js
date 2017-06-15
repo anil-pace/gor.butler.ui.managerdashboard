@@ -176,13 +176,13 @@ class PPS extends React.Component {
             CLOSE=nProps.context.intl.formatMessage(stringConfig.close);
             FCLOSE=nProps.context.intl.formatMessage(stringConfig.fclose);
             PERFORMANCE=nProps.context.intl.formatMessage(messages.perfPrefix, {"performance": performance ? performance : "0"});
-            if(data[i]["requested_status"] === "open"){
+            if(data[i]["requested_status"] === PPS_STATUS_OPEN){
                 requestedStatusText = OPEN
             }
-            else if(data[i]["requested_status"] === "close"){
+            else if(data[i]["requested_status"] === PPS_STATUS_CLOSE){
                 requestedStatusText = CLOSE
             }
-             else if(data[i]["requested_status"] === "force_close"){
+             else if(data[i]["requested_status"] === PPS_STATUS_FCLOSE){
                 requestedStatusText = FCLOSE
             }
             else{
@@ -289,7 +289,7 @@ class PPS extends React.Component {
             this.props.changePPSmode(ppsStatusChange);
             this.props.setCheckAll(false);
             this.props.setDropDisplay(false);
-            //this.props.setCheckedPps({});
+            
          }
         }
         else{
@@ -310,7 +310,7 @@ class PPS extends React.Component {
         this.props.changePPSmode(ppsStatusChange);
         this.props.setCheckAll(false);
         this.props.setDropDisplay(false);
-        //this.props.setCheckedPps({});
+        
         }
     }
 
@@ -331,7 +331,7 @@ class PPS extends React.Component {
         this.props.changePPSmode(ppsModeChange);
         this.props.setCheckAll(false);
         this.props.setDropDisplay(false);
-        //this.props.setCheckedPps({});
+        
 
     }
     
@@ -382,6 +382,10 @@ class PPS extends React.Component {
                                           defaultMessage="Open Selected PPS"/>
          let closeStatusLabel = <FormattedMessage id="PPS.table.closeStatusLabel" description="audit dropdown option for Status change"
                                           defaultMessage="Close Selected PPS"/>
+        let statusDropPHolder = <FormattedMessage id="PPS.table.statusPlaceholder" description="Placeholder for status dropdown"
+                                          defaultMessage="Change PPS Status"/>
+        let modeDropPHolder = <FormattedMessage id="PPS.table.modePlaceholder" description="Placeholder for mode dropdown"
+                                          defaultMessage="Change PPS Mode"/>
         var openCount=0,closeCount=0;
         for(let k in this.props.checkedPps){
             if(this.props.checkedPps[k].status.toLowerCase() === "close" || this.props.checkedPps[k].status.toLowerCase() === "force close"){
@@ -405,14 +409,14 @@ class PPS extends React.Component {
                     onSelectHandler={(e) => this.handleModeChange(e)}
                     disabled={!this.props.bDropRender}
                     resetOnSelect={true}
-                    placeholder={"Change PPS Mode"} />
+                    placeholder={modeDropPHolder} />
         
             statusDrop = <Dropdown 
                     options={status} 
                     onSelectHandler={(e) => this.handleStatusChange(e)}
                     disabled={!this.props.bDropRender}
                     resetOnSelect={true}
-                    placeholder={"Change PPS Status"} />
+                    placeholder={statusDropPHolder} />
        
         if (this.props.checkedPps) {
             
