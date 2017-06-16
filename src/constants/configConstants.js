@@ -44,16 +44,16 @@ export const INVENTORY_REPORT_URL=API_URL + "/inventories/get_inventory_report_v
 export const GET_ITEM_RECALL=API_URL + "/orders/wrapper/generate_orders";
 export const GR_REPORT_URL=API_URL + "/components/generate_gr_report";
 export const MASTER_UPLOAD_URL=API_URL + "/products/csv";
-export const STOCK_LEDGER_REPORT_DOWNLOAD_URL=API_URL + "/downloadStockLedgerReport"; //Mapping needs to be there in ngnix config
-export const STOCK_LEDGER_REPORT_DOWNLOAD_RAW_TRANSACTIONS_URL=API_URL + "/downloadStockLedgerRawTransactionsReport"; //Mapping needs to be there in ngnix config
+export const STOCK_LEDGER_REPORT_DOWNLOAD_URL=API_URL + "/api-gateway/inventory-service/platform-inventory/report/agg-stock-ledger"; //Mapping needs to be there in ngnix config
+export const STOCK_LEDGER_REPORT_DOWNLOAD_RAW_TRANSACTIONS_URL=API_URL + "/api-gateway/inventory-service/platform-inventory/report/stock-ledger/"; //Mapping needs to be there in ngnix config
 export const UPLOAD_HISTORY_URL=API_URL+ "/components/mdm_info";
 export const GET_MD_CONFIG_URL=API_URL + "/components/get_md_config";
 export const GET_MAXSIZE_FILE_URL=API_URL + "/components/get_mdm_file_size";
 /*URLs for notification*/
 export const BASE_URL_NOTIFICATION = PROTOCOL + BASE_URL;
-export const NOTIFICATIONS_URL =  BASE_URL_NOTIFICATION+"/api-gateway/dashboard-service/platform-dashboard/event";
-export const WS_NOTIFICATION_URL =  BASE_URL_NOTIFICATION+"/platform-dashboard/dashboard-stomp";
-export const READ_MSG_URL = BASE_URL_NOTIFICATION+"/api-gateway/dashboard-service/platform-dashboard/event/mark-as-read";
+export const WS_NOTIFICATION_URL =  API_URL+"/platform-dashboard/dashboard-stomp";
+export const NOTIFICATIONS_URL =  API_URL+"/api-gateway/dashboard-service/platform-dashboard/event";
+export const READ_MSG_URL = API_URL+"/api-gateway/dashboard-service/platform-dashboard/event/mark-as-read";
 
 
 
