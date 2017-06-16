@@ -458,7 +458,7 @@ export const AUDIT_STATUS='audit_status';
 export const AUDIT_TYPE="AUDIT TYPE";
 export const SPECIFIC_SKU_ID='SPECIFIC SKU ID';
 export const SPECIFIC_LOCATION_ID='SPECIFIC LOCATION ID';
-export const ISSUE_FOUND='issueFound';
+export const ISSUE_FOUND='audit_pending_approval';
 //Icons
 export const PICK_ICON=' iPick';
 export const STOCK_ICON="iStock";
