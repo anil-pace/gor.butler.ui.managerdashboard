@@ -103,8 +103,16 @@ class ResolveAudit extends React.Component{
   }
 
   _confirmIssues() {
-    
-    var auditConfirmDetail={"data":this.state.checkedState};
+
+    // since we also need the username for the request generated.
+    // hence getting the username from session and then sending the same during 
+    // the request.
+    var userName=sessionStorage.getItem('username')?sessionStorage.getItem('username'):null; 
+    var auditConfirmDetail={data:{
+      username: userName,
+      auditlines:this.state.checkedState
+    }};
+
     var url=AUDIT_URL + AUDIT_ANAMOLY;
      let paginationData={
          'url':url,
