@@ -105,9 +105,10 @@ class ResolveAudit extends React.Component{
   _confirmIssues() {
 
     // since we also need the username for the request generated.
-    // hence getting the username from session and then sending the same during 
-    // the request.
-    var userName=sessionStorage.getItem('username')?sessionStorage.getItem('username'):null; 
+    // hence getting the username from the state and then sending 
+    // the same during the request.
+    
+    var userName=this.props.username||null; 
     var auditConfirmDetail={data:{
       username: userName,
       auditlines:this.state.checkedState
@@ -338,6 +339,7 @@ class ResolveAudit extends React.Component{
   function mapStateToProps(state, ownProps){
   return {
     auth_token:state.authLogin.auth_token,
+    username: state.authLogin.username,
     auditLines:state.recieveAuditDetail.auditPendingLines || [],
     auditResolveSpinner:state.spinner.auditResolveSpinner || false
   };
