@@ -13,6 +13,9 @@ SOFT_MANUAL,HARD,SOFT,UTILITIES} from '../constants/frontEndConstants';
 import { FormattedMessage,FormattedNumber } from 'react-intl';
 import OperationStop from '../containers/emergencyProcess/OperationStop';
 import EmergencyRelease from '../containers/emergencyProcess/emergencyRelease'; 
+import fireHazard from '../containers/emergencyProcess/fireHazard'; 
+import fireHazardNotification from '../containers/emergencyProcess/fireHazardNotification';
+
 
 class Tabs extends React.Component{
 
@@ -60,18 +63,26 @@ class Tabs extends React.Component{
       emergencyPress: stopFlag
       });
   }
-  _emergencyRelease(){
-      modal.add(EmergencyRelease, {
+  _emergencyReleas(){
+      modal.add(fireHazard, {
         title: '',
-        size: 'large', // large, medium or small,
+        size: 'large customColor', // large, medium or small,
       closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: false
       });    
   }
+  //  _emergencyReleas(){
+  //     modal.add(fireHazardNotification, {
+  //       title: '',
+  //       size: 'large', // large, medium or small,
+  //     closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+  //     hideCloseButton: false
+  //     });    
+  // }
   componentWillReceiveProps(nextProps){
     if(nextProps.system_data=== SOFT_MANUAL && (this.props.system_data=== HARD || !this.props.system_data))
     {
-      this._emergencyRelease();
+      this._emergencyReleas();
     }
     else if(nextProps.system_emergency && !this.props.system_emergency)
     {

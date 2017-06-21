@@ -283,6 +283,11 @@ export const  stringConfig= defineMessages({
         "description": "Text for safety checklist item 6",
         "defaultMessage": "All Zigbee boxes are online."
     },
+     md007 : {
+        "id": "stringConfig.md006",
+        "description": "Text for safety checklist item 7",
+        "defaultMessage": "No zonal emergencies are pressed."
+    },
     audit_reaudited: {
         "id": "stringConfig.audit_reaudited",
         "description": "Text for audit reaudited status",
