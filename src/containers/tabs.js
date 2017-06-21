@@ -14,7 +14,7 @@ import { FormattedMessage,FormattedNumber } from 'react-intl';
 import OperationStop from '../containers/emergencyProcess/OperationStop';
 import EmergencyRelease from '../containers/emergencyProcess/emergencyRelease'; 
 import fireHazard from '../containers/emergencyProcess/fireHazard'; 
-import fireHazardNotification from '../containers/emergencyProcess/fireHazardNotification';
+import GorToastify from '../components/gorToastify/gorToastify'
 
 
 class Tabs extends React.Component{
@@ -71,14 +71,6 @@ class Tabs extends React.Component{
       hideCloseButton: false
       });    
   }
-  //  _emergencyReleas(){
-  //     modal.add(fireHazardNotification, {
-  //       title: '',
-  //       size: 'large', // large, medium or small,
-  //     closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-  //     hideCloseButton: false
-  //     });    
-  // }
   componentWillReceiveProps(nextProps){
     if(nextProps.system_data=== SOFT_MANUAL && (this.props.system_data=== HARD || !this.props.system_data))
     {
@@ -228,7 +220,17 @@ class Tabs extends React.Component{
     {showUtilityTab?<Link to="/utilities" onClick={this.handleTabClick.bind(this,UTILITIES)}>
       <Tab items={{ tab: items.utilities, Status:'', currentState:'' }} changeClass={(this.props.tab.toUpperCase()=== UTILITIES ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
     </Link>:""}
-	</div>
+
+<GorToastify>
+ <div className="gor-toastify-content">
+            <div className="gor-toastify-body">
+              <div className="msg-content">Fire emergency triggered.Follow evacuation procedures immediately</div>
+            </div>
+              <div className="gor-toastify-details">VIEW DETAILS
+              </div>
+        </div>
+</GorToastify>
+  </div>
 		);
 	}
 }
