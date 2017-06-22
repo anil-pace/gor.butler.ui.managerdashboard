@@ -156,7 +156,10 @@ class AuditFilter extends React.Component {
     }
 
     _clearFilter() {
-        this.props.setTextBoxStatus({obj:AUDIT_TASK_ID});
+        this.props.auditfilterState({
+            tokenSelected: {"AUDIT TYPE": [ANY], "STATUS": [ALL]}, searchQuery: {},
+            defaultToken: {"AUDIT TYPE": [ANY], "STATUS": [ALL]}
+        })
         hashHistory.push({pathname: "/audit", query: {}});
     }
 

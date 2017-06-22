@@ -100,6 +100,13 @@ class OrderFilter extends React.Component{
     }
 
     _clearFilter() {
+        this.props.orderfilterState({
+            tokenSelected: {
+                "STATUS": ['all'],
+                "TIME PERIOD": ['allOrders']
+            },
+            searchQuery: {"ORDER ID":  ''},
+        });
         hashHistory.push({pathname: "/orders/orderlist", query: {}})
     }
 
