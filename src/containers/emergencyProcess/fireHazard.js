@@ -2,7 +2,7 @@ import React  from 'react';
 import { connect } from 'react-redux' ;
 import {modal} from 'react-redux-modal';
 import {userRequest} from '../../actions/userActions';
-import { FormattedMessage,FormattedPlural } from 'react-intl'; 
+import { FormattedMessage } from 'react-intl'; 
 import {AUTH_LOGIN,ERROR,TYPING,APP_JSON,POST,SUCCESS} from '../../constants/frontEndConstants';
 import ResumeOperation from './resumeOperation'; 
 

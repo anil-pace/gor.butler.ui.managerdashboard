@@ -15,10 +15,10 @@ export  function tabsData(state={},action){
       let system_data={},system_emergency=false;
       if(action.data.header_data)
       {      
-        system_emergency=action.data.header_data.emergency;
-        system_data=action.data.header_data.emergency_level;
-        // system_emergency=true;
-        // system_data="soft_manual";
+        // system_emergency=action.data.header_data.emergency;
+        // system_data=action.data.header_data.emergency_level;
+        system_emergency=true;
+        system_data="soft_manual";
       }
       return Object.assign({}, state, {
         "system_emergency":system_emergency,
