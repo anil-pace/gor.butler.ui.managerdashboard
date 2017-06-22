@@ -137,6 +137,8 @@ export const THROUGHPUT_DATA="THROUGHPUT_DATA";
 export const HISTOGRAM_DATA="HISTOGRAM_DATA";
 export const CHARGERS_DETAIL="CHARGERS_DETAIL";
 export const BUTLERS_DETAIL="BUTLERS_DETAIL";
+export const FIRE_EMERGENCY="FIRE_EMERGENCY";
+
 
 /*Constants for type of AJAX call*/
 export const AUTH_LOGIN="AUTH_LOGIN";
