@@ -8,17 +8,17 @@ var enTranslationMessages =require ('../translations/en-US.json');
 const MESSAGES_PATTERN='../translations/**/*.json';
 const LANG_DIR       ='../translations/';
 const MISSING_TRANS_DIR = LANG_DIR+'missing/';
-var aMissedTranslations=[];
 
 fs.readdir(LANG_DIR,(err, files)=>{
-	for (let i=0;i<files.length;i++){
-		console.log('Translation files found:'+files[i]);
+	for (let x=0;x<files.length;x++){
+		let aMissedTranslations=[];
+		console.log('Translation files found:'+files[x]);
 		console.log('Reading the translation files');
-		if (files[i].match(/.json/g) && !files[i].match(/en-US.json/g)){
-			fs.readFile(LANG_DIR+files[i], (err, data) => {
+		if (files[x].match(/.json/g) && !files[x].match(/en-US.json/g)){
+			fs.readFile(LANG_DIR+files[x], (err, data) => {
 				if (err) throw err;
-				 // since enTranslationMessages is the base for all translations
-				 // so comparing the others with the base and finding the difference
+				// since enTranslationMessages is the base for all translations
+				// so comparing the others with the base and finding the difference
 				let objTranslations = JSON.parse(data);
 				for (let i = 0 ; i< enTranslationMessages.length; i++){
 					let bMissingTranslation = true;
@@ -33,10 +33,11 @@ fs.readdir(LANG_DIR,(err, files)=>{
 					}
 				}
 				let fsText = '[\n'+aMissedTranslations.join (',\n')+'\n]';
-				fs.appendFile(MISSING_TRANS_DIR+'missing-'+files[i],fsText, (err) => {
+				console.log('Numbe of missing translations in '+files[x]+ aMissedTranslations.length);
+				fs.writeFile(MISSING_TRANS_DIR+'missing-'+files[x],fsText, (err) => {
 					if (err) throw err;
-					console.log('Missing Translations Saved for:'+files[i]+
-					            'in file: '+MISSING_TRANS_DIR+'missing-'+files[i] );
+					console.log('Missing Translations Saved for:'+files[x]+
+						'in file: '+MISSING_TRANS_DIR+'missing-'+files[x] );
 				});
 			});
 		}
