@@ -262,10 +262,12 @@ class OrderListTable extends React.Component {
                                     <FormattedMessage id="orderlist.table.pickBy" description="pick by for orderlist"
                                                       defaultMessage="PICK BY"/>
                                     <div className="gorToolHeaderSubText">
-                                        <FormattedMessage id="orderlist.pendingOrders"
+                                        <FormattedMessage id="orderlist.pendingOrder"
                                                           description='pendingOrders header ordertable'
-                                                          defaultMessage='{pendingOrders} orders pending'
-                                                          values={{pendingOrders: this.props.totalPendingOrder ? this.props.totalPendingOrder : '0'}}/>
+                                                          defaultMessage='{pendingOrders} {orders} pending'
+                                                          values={{pendingOrders: this.props.totalPendingOrder ? this.props.totalPendingOrder : '0', orders: this.props.totalPendingOrder <= 1 ? 'order':'orders'}}
+
+                                                          />
                                     </div>
                                 </div>
                             </SortHeaderCell>
@@ -304,10 +306,10 @@ class OrderListTable extends React.Component {
                                                       description="completedTime for orderlist"
                                                       defaultMessage="COMPLETED"/>
                                     <div className="gorToolHeaderSubText">
-                                        <FormattedMessage id="orderlist.totalCompletedOrder"
+                                        <FormattedMessage id="orderlist.totalCompletedOrders"
                                                           description='totalCompletedOrder header ordertable'
-                                                          defaultMessage='{totalCompletedOrder} orders completed'
-                                                          values={{totalCompletedOrder: this.props.totalCompletedOrder ? this.props.totalCompletedOrder : '0'}}/>
+                                                          defaultMessage='{totalCompletedOrder} {orders} completed'
+                                                          values={{totalCompletedOrder: this.props.totalCompletedOrder ? this.props.totalCompletedOrder : '0', orders: this.props.totalCompletedOrder <= 1 ? 'order':'orders'}}/>
                                     </div>
                                 </div>
                             </div>
@@ -326,10 +328,10 @@ class OrderListTable extends React.Component {
                                                       description="orderLine for orderlist"
                                                       defaultMessage="ORDER LINE"/>
                                     <div className="gorToolHeaderSubText">
-                                        <FormattedMessage id="orderlist.itemsPerOrder"
+                                        <FormattedMessage id="orderlist.itemsPerOrders"
                                                           description='itemsPerOrder header ordertable'
-                                                          defaultMessage='Avg {itemsPerOrder} items/order'
-                                                          values={{itemsPerOrder: this.props.itemsPerOrder ? this.props.itemsPerOrder.toFixed(2) : '0'}}/>
+                                                          defaultMessage='Avg {itemsPerOrder} {items}/order'
+                                                          values={{itemsPerOrder: this.props.itemsPerOrder ? this.props.itemsPerOrder.toFixed(2) : '0', items: this.props.itemsPerOrder && this.props.itemsPerOrder.toFixed(2) <= 1 ? 'item':'items'}}/>
                                     </div>
                                 </div>
                             </div>
