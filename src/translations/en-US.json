@@ -2391,7 +2391,7 @@
   {
     "id": "orderlist.pendingOrders",
     "description": "pendingOrders header ordertable",
-    "defaultMessage": "{pendingOrders} orders pending",
+    "defaultMessage": "{pendingOrders, number} {pendingOrders, plural, one {order} other {orders}} pending",
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
@@ -2409,7 +2409,7 @@
   {
     "id": "orderlist.totalCompletedOrder",
     "description": "totalCompletedOrder header ordertable",
-    "defaultMessage": "{totalCompletedOrder} orders completed",
+    "defaultMessage": "{totalCompletedOrder, number} {totalCompletedOrder, plural, one {order} other {orders}} completed",
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
@@ -2421,7 +2421,7 @@
   {
     "id": "orderlist.itemsPerOrder",
     "description": "itemsPerOrder header ordertable",
-    "defaultMessage": "Avg {itemsPerOrder} items/order",
+    "defaultMessage": "Avg {itemsPerOrder, number} {itemsPerOrder, plural, one {item} other {items}}/order",
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
@@ -2521,7 +2521,7 @@
   {
     "id": "WavesTable.pending.status",
     "description": "pending status for WavesTable",
-    "defaultMessage": "{pendingWave} waves pending",
+    "defaultMessage": "{pendingWave, number} {pendingWave, plural, one {wave} other {waves}} pending",
     "filepath": "./src/containers/orderTab/waveTable.js"
   },
   {
@@ -2533,7 +2533,7 @@
   {
     "id": "WavesTable.progress.status",
     "description": "progress status for WavesTable",
-    "defaultMessage": "{progressWave} waves in progress",
+    "defaultMessage": "{progressWave, number} {progressWave, plural, one {wave} other {waves}} in progress",
     "filepath": "./src/containers/orderTab/waveTable.js"
   },
   {
@@ -2557,7 +2557,7 @@
   {
     "id": "WavesTable.completed.status",
     "description": "completed status for WavesTable",
-    "defaultMessage": "{completedWaves} waves completed",
+    "defaultMessage": "{completedWaves, number} {completedWaves, plural, one {wave} other {waves}} completed",
     "filepath": "./src/containers/orderTab/waveTable.js"
   },
   {
@@ -2569,7 +2569,7 @@
   {
     "id": "WavesTable.totalOrders.status",
     "description": "totalOrders status for WavesTable",
-    "defaultMessage": "{totalOrders} orders",
+    "defaultMessage": "{totalOrders, number} {totalOrders, plural, one {order} other {orders}}",
     "filepath": "./src/containers/orderTab/waveTable.js"
   },
   {
