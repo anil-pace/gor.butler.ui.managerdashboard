@@ -503,6 +503,12 @@
     "filepath": "./src/components/subtab/subTabs.js"
   },
   {
+    "id": "ppsConfiguration.tab.heading",
+    "description": "pps configuration tab",
+    "defaultMessage": "PPS Configuration",
+    "filepath": "./src/components/subtab/subTabs.js"
+  },
+  {
     "id": "gor.filter.filterLabel",
     "description": "label for filter",
     "defaultMessage": "Filter data",

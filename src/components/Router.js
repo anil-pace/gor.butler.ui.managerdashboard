@@ -201,6 +201,14 @@ class Routes extends React.Component {
                                    }, "chargingStation");
                                }}
                         />
+
+                        <Route onEnter={this._handleNavigationChanges.bind(this)} name="configuration" path="/system/configuration"
+                               getComponent={(location, callback)=> {
+                                   require.ensure([], function (require) {
+                                       callback(null, require('../containers/systemTabs/ppsConfigurationTab').default);
+                                   }, "configuration");
+                               }}
+                        />
                     </Route>
 
                     <Route onEnter={this._handleNavigationChanges.bind(this)} name="orders" path="/orders"

@@ -10,7 +10,7 @@ import { FormattedMessage } from 'react-intl';
 import {setButlerSpinner, setPpsSpinner, setCsSpinner} from '../../actions/spinnerAction';
 import {subTabSelected} from '../../actions/tabSelectAction'
 import {NOTIFICATION,SYS_SUB_TAB_ROUTE_MAP} from '../../constants/frontEndConstants'
-import {BUTLERBOTS,PPS,CHARGING} from '../../constants/backEndConstants'
+import {BUTLERBOTS,PPS,CHARGING,PPS_CONFIGURATION} from '../../constants/backEndConstants'
 
 
 class SystemTab extends React.Component{
@@ -53,9 +53,11 @@ class SystemTab extends React.Component{
 
         let chargingStation=<FormattedMessage id="chargingstation.tab.heading" description="charging station tab" 
               defaultMessage="Charging Station"/>
+		let ppsConfiguration=<FormattedMessage id="ppsConfiguration.tab.heading" description="pps configuration tab"
+              defaultMessage="PPS Configuration"/>
 
 
-		var selectClass={notification:"gor-main-block", butlerbots:"gor-main-block", pps:"gor-main-block", chargingstation:"gor-main-block"};
+		var selectClass={notification:"gor-main-block", butlerbots:"gor-main-block", pps:"gor-main-block", chargingstation:"gor-main-block",configuration:'gor-main-block'};
 
 		if(this.props.subTab.length) {
 			selectClass[this.props.subTab]="gor-main-blockSelect";
@@ -77,6 +79,9 @@ class SystemTab extends React.Component{
 					</Link>
 					<Link to="/system/chargingstation" onClick={this.handleSysSubTabClick.bind(this,CHARGING)}>
 						<SubTab item={chargingStation} changeClass={selectClass[CHARGING]}/> 
+					</Link>
+					<Link to="/system/configuration" onClick={this.handleSysSubTabClick.bind(this,PPS_CONFIGURATION)}>
+						<SubTab item={ppsConfiguration} changeClass={selectClass[PPS_CONFIGURATION]}/>
 					</Link>
 				</div>
 			</div>

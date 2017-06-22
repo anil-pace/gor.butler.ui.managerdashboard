@@ -96,6 +96,7 @@ export const BUTLERBOTS_TAB="Butler Bots";
 export const CHARGING_TAB="Charging Station";
 export const PPS_TAB="Pick Put Stations";
 export const ORDER_LIST="Order List";
+export const PPS_CONFIGURATION="PPS Configuration";
 export const WAVES="Waves";
 export const BUTLERBOTS="butlerbots";
 export const CHARGING="chargingstation";
@@ -261,7 +262,8 @@ export const SYS_SUB_TAB_ROUTE_MAP={
 	[PPS]:"pps",
 	[CHARGING]:"chargingstation",
 	[WAVES]:"waves",
-	[ORDER_LIST]:"orderlist"
+	[ORDER_LIST]:"orderlist",
+	[PPS_CONFIGURATION]:"configuration"
 
 }
 export const SHOW_UTILITY_TAB=true;
@@ -564,6 +566,7 @@ export const OVERVIEW_REFRESHED="OVERVIEW_REFRESHED"
 export const BUTLERBOTS_REFRESHED="BUTLERBOTS_REFRESHED";
 export const PPS_LIST_REFRESHED="PPS_LIST_REFRESHED";
 export const CHARGING_STATION_LIST_REFRESHED="CHARGING_STATION_LIST_REFRESHED";
+export const PPS_CONFIGURATION_REFRESHED="PPS_CONFIGURATION_REFRESHED";
 export const INVENTORY_REFRESHED="INVENTORY_REFRESHED"
 export const AUDIT_LIST_REFRESHED="AUDIT_LIST_REFRESHED"
 export const ORDER_LIST_REFRESHED="ORDER_LIST_REFRESHED"
