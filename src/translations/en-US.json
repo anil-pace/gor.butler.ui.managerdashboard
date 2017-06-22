@@ -839,6 +839,12 @@
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
+    "id": "stringConfig.md007",
+    "description": "Text for safety checklist item 7",
+    "defaultMessage": "No zonal emergencies are pressed.",
+    "filepath": "./src/constants/backEndConstants.js"
+  },
+  {
     "id": "stringConfig.audit_reaudited",
     "description": "Text for audit reaudited status",
     "defaultMessage": "Re-audited",
@@ -1906,6 +1912,12 @@
     "description": "Text button to resume operation",
     "defaultMessage": "Resume operation",
     "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
+  },
+  {
+    "id": "operation.alert.release.button",
+    "description": "Text button to resume operation",
+    "defaultMessage": "RESUME OPERATION",
+    "filepath": "./src/containers/emergencyProcess/fireHazard.js"
   },
   {
     "id": "operation.alert.stop",

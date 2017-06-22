@@ -284,7 +284,7 @@ export const  stringConfig= defineMessages({
         "defaultMessage": "All Zigbee boxes are online."
     },
      md007 : {
-        "id": "stringConfig.md006",
+        "id": "stringConfig.md007",
         "description": "Text for safety checklist item 7",
         "defaultMessage": "No zonal emergencies are pressed."
     },

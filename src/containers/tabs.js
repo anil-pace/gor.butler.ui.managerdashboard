@@ -14,7 +14,7 @@ import { FormattedMessage,FormattedNumber } from 'react-intl';
 import OperationStop from '../containers/emergencyProcess/OperationStop';
 import EmergencyRelease from '../containers/emergencyProcess/emergencyRelease'; 
 import fireHazard from '../containers/emergencyProcess/fireHazard'; 
-import GorToastify from '../components/gorToastify/gorToastify'
+import GorToastify from '../components/gor-toastify/gor-toastify';
 
 
 class Tabs extends React.Component{
@@ -24,6 +24,10 @@ class Tabs extends React.Component{
      * @param  {[string]} selTab [Name of selected tab]
      * @return {[none]}        
      */
+
+    _openPopup(){
+      this._emergencyRelease();
+  }
     handleTabClick(selTab){
     	/**
          * Displaying loader currently for User tab
@@ -44,15 +48,6 @@ class Tabs extends React.Component{
           this.props.setButlerSpinner(false);
           
         }
-
-       
-        
-        
-        // this.props.tabSelected(TAB_ROUTE_MAP[selTab]);
-        // this.props.subTabSelected(null);
-        // sessionStorage.setItem('nextView', TAB_ROUTE_MAP[selTab]);
-        // sessionStorage.setItem('selTab', TAB_ROUTE_MAP[selTab]);
-        // sessionStorage.setItem('subTab', '');
     }
   _stopOperation(stopFlag) {
       modal.add(OperationStop, {
@@ -63,7 +58,7 @@ class Tabs extends React.Component{
       emergencyPress: stopFlag
       });
   }
-  _emergencyReleas(){
+  _emergencyRelease(){
       modal.add(fireHazard, {
         title: '',
         size: 'large customColor', // large, medium or small,
@@ -74,7 +69,8 @@ class Tabs extends React.Component{
   componentWillReceiveProps(nextProps){
     if(nextProps.system_data=== SOFT_MANUAL && (this.props.system_data=== HARD || !this.props.system_data))
     {
-      this._emergencyReleas();
+      this._emergencyRelease();
+
     }
     else if(nextProps.system_emergency && !this.props.system_emergency)
     {
@@ -187,7 +183,6 @@ class Tabs extends React.Component{
     return items;
   }
 	render(){
-
   let items=this._parseStatus();
   var showUtilityTab=this.props.config.utility_tab && this.props.config.utility_tab.enabled;
 		return (
@@ -221,15 +216,14 @@ class Tabs extends React.Component{
       <Tab items={{ tab: items.utilities, Status:'', currentState:'' }} changeClass={(this.props.tab.toUpperCase()=== UTILITIES ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
     </Link>:""}
 
-<GorToastify>
- <div className="gor-toastify-content">
-            <div className="gor-toastify-body">
-              <div className="msg-content">Fire emergency triggered.Follow evacuation procedures immediately</div>
-            </div>
-              <div className="gor-toastify-details">VIEW DETAILS
-              </div>
-        </div>
-</GorToastify>
+    <GorToastify onClick={this._openPopup.bind(this)}>
+     <div className="gor-toastify-content">
+                <div className="gor-toastify-body">
+                  <div className="msg-content">Fire emergency triggered.Follow evacuation procedures immediately</div>
+                </div>
+                  <div className="gor-toastify-details">VIEW DETAILS</div>
+     </div>
+    </GorToastify>
   </div>
 		);
 	}
