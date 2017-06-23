@@ -4,8 +4,12 @@ import {
     MASTER_UPLOAD_SUCCESS,
     UPLOAD_HISTORY,
     UPDATE_FILE_SIZE,
-    UTILITY_TAB_REFRESHED,STOCK_LEDGER_SKU_VALIDATION,CLEAR_STOCK_LEDGER_SKU_VALIDATION
-} from '../constants/frontEndConstants';
+    UTILITY_TAB_REFRESHED,
+    STOCK_LEDGER_SKU_VALIDATION,
+    CLEAR_STOCK_LEDGER_SKU_VALIDATION,
+    REPORTS_HISTORY,
+    GRN_HISTORY
+} from "../constants/frontEndConstants";
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -18,67 +22,73 @@ export function utilityValidations(state = {}, action) {
             var res = action.data;
             if (res.alert_data) {
                 return Object.assign({}, state, {
-                    "invalidInvoice": true
-                })
-            }
-
-            else {
+                    invalidInvoice: true
+                });
+            } else {
                 return Object.assign({}, state, {
-                    "invalidInvoice": false
-                })
+                    invalidInvoice: false
+                });
             }
         case MASTER_UPLOAD_PROCESSING:
             return Object.assign({}, state, {
-                "isMasterUploadProcessing": action.data
-            })
+                isMasterUploadProcessing: action.data
+            });
         case MASTER_UPLOAD_SUCCESS:
             if (action.data.alert_data) {
                 return Object.assign({}, state, {
-                    "masterDataUploadSuccess": false,
-                    "errorCode": action.data.alert_data[0].code,
-                    "maxsize": action.data.alert_data[0].details.max_size
-                })
+                    masterDataUploadSuccess: false,
+                    errorCode: action.data.alert_data[0].code,
+                    maxsize: action.data.alert_data[0].details.max_size
+                });
             } else {
                 let newFileUploaded = !state.newFileUploaded;
                 return Object.assign({}, state, {
-                    "masterDataUploadSuccess": action.data.data ? true : false,
-                    "newFileUploaded": newFileUploaded,
-                    "errorCode": "",
-                    "maxsize": ""
-                })
-
+                    masterDataUploadSuccess: action.data.data ? true : false,
+                    newFileUploaded: newFileUploaded,
+                    errorCode: "",
+                    maxsize: ""
+                });
             }
         case UPLOAD_HISTORY:
             var uploadHistChanged = !state.uploadHistChanged;
             return Object.assign({}, state, {
-                "uploadHistoryData": action.data.mdm_upload_info || [],
-                "uploadHistChanged": uploadHistChanged
-            })
+                uploadHistoryData: action.data.mdm_upload_info || [],
+                uploadHistChanged: uploadHistChanged
+            });
         case UPDATE_FILE_SIZE:
             return Object.assign({}, state, {
-                "maxfilesizelimit": action.data.file_content_length || []
-            })
+                maxfilesizelimit: action.data.file_content_length || []
+            });
         case UTILITY_TAB_REFRESHED:
             return Object.assign({}, state, {
-                "utilityTabRefreshed": new Date()
-            })
+                utilityTabRefreshed: new Date()
+            });
 
         case STOCK_LEDGER_SKU_VALIDATION:
             var res = action.data;
             if (res.alert_data) {
                 return Object.assign({}, state, {
-                    "invalidStockLedgerSKU": true
-                })
-            }else {
+                    invalidStockLedgerSKU: true
+                });
+            } else {
                 return Object.assign({}, state, {
-                    "invalidStockLedgerSKU": false
-                })
+                    invalidStockLedgerSKU: false
+                });
             }
 
         case CLEAR_STOCK_LEDGER_SKU_VALIDATION:
-            return Object.assign({},state,{
-                "invalidStockLedgerSKU":null
-            })
+            return Object.assign({}, state, {
+                invalidStockLedgerSKU: null
+            });
+
+        case REPORTS_HISTORY:
+            return Object.assign({}, state,{
+                reportsHistory: action.data.data || []
+            });
+        case GRN_HISTORY:
+            return Object.assign({}, state,{
+                grnHistory: action.data.data || []
+            });
 
         default:
             return state;

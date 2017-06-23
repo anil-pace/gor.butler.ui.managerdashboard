@@ -1,11 +1,8 @@
 import React  from 'react';
 import { FormattedMessage } from 'react-intl';
 
-class UploadDownBar extends React.Component{
-	constructor(props)  
-	{
-    	super(props);
-    }	
+class ScriptsRow extends React.Component{
+	
 	render(){
 		return (
 			<div className="gor-utility-updown-bar">
@@ -25,4 +22,4 @@ class UploadDownBar extends React.Component{
 	}
 };
 
-export default UploadDownBar ;
+export default ScriptsRow ;
