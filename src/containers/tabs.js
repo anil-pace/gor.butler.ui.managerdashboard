@@ -67,17 +67,24 @@ class Tabs extends React.Component{
       });    
   }
   componentWillReceiveProps(nextProps){
+
+
+
     if(nextProps.system_data=== SOFT_MANUAL && (this.props.system_data=== HARD || !this.props.system_data))
     {
       this._emergencyRelease();
-
     }
     else if(nextProps.system_emergency && !this.props.system_emergency)
     {
-      this._stopOperation(true);
+      //this._stopOperation(true);
+      this._emergencyRelease();
     }
     else if(nextProps.system_data=== SOFT && this.props.system_data=== SOFT_MANUAL){
       this._stopOperation(true);
+    }
+    else{
+    
+
     }
   }
   _parseStatus()

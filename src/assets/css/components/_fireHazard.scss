@@ -58,7 +58,13 @@
 	border: solid 1px #dbdbdb;
 	float: left;
     width: 100%;
-    margin: 30px 0px 20px;
+    margin: 30px 0px 10px;
+	}
+	.gor-shutter-section{		
+	float:left;
+	width:100%;
+	&.hidden{
+	display:none;
 	}
 	.gor-clearPath{
 		height:40px;
@@ -103,7 +109,18 @@
 	  			height:16px;
 	  			float:left;
 	  			background-image:url(./images/icons.svg);
-				background-position:-425px -77px
+
+				&.cleared{
+				background-position:-425px -77px;
+				}
+				&.failed{
+    					background-position:-493px -77px;
+    					}
+    			&.progress{
+    					background-image: url(images/91.gif);
+					    background-size: contain;
+    							
+	}
 			}
 			.gor-shutter-text-status{
 				float:left;
@@ -114,6 +131,7 @@
 			}
 		}
 
+	}
 	}
 	.gor-resume-btn{
      	  width: 220px;

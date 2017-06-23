@@ -44,6 +44,14 @@ class SafetyChecklist extends React.Component{
     }
   }
   componentDidMount(){
+  // var url;
+  //  if(this.props){
+  //     url=VALIDATION_LIST+"?emergency_type=fire";
+  //   }
+  //   else
+  //   {
+  //     url=VALIDATION_LIST+"?emergency_type=hard_soft";
+  //   }
         let userData={
                 'url':VALIDATION_LIST,
                 'method':GET,
@@ -73,6 +81,14 @@ class SafetyChecklist extends React.Component{
   }
   _handleSafetyConfirm(e)
   {
+  //var reqType;
+  //  if(this.props){
+  //     reqType="fire";
+  //   }
+  //   else
+  //   {
+  //    reqType="hard";     
+  //   }
     e.preventDefault();
     var formdata;
     formdata={'type':'stop'};
@@ -84,6 +100,7 @@ class SafetyChecklist extends React.Component{
                 'contentType':APP_JSON,
                 'accept':APP_JSON,
                 'token':this.props.auth_token
+                //'type':reqType
     }
     this.props.userRequest(userData);
     this.props.setSafetySpinner(true);

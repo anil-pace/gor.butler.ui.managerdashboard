@@ -4959,20 +4959,29 @@ button:disabled {
   border: solid 1px #dbdbdb;
   float: left;
   width: 100%;
-  margin: 30px 0px 20px;
+  margin: 30px 0px 10px;
 }
 
-.gor-firehazard .gor-clearPath {
+.gor-firehazard .gor-shutter-section {
+  float: left;
+  width: 100%;
+}
+
+.gor-firehazard .gor-shutter-section.hidden {
+  display: none;
+}
+
+.gor-firehazard .gor-shutter-section .gor-clearPath {
   height: 40px;
   display: table;
 }
 
-.gor-firehazard .gor-clearPath .gor-clearPath-wrapper {
+.gor-firehazard .gor-shutter-section .gor-clearPath .gor-clearPath-wrapper {
   display: table-cell;
   vertical-align: middle;
 }
 
-.gor-firehazard .gor-clearPath .gor-clearPath-wrapper .gor-image-status {
+.gor-firehazard .gor-shutter-section .gor-clearPath .gor-clearPath-wrapper .gor-image-status {
   width: 25px;
   height: 25px;
   float: left;
@@ -4980,7 +4989,7 @@ button:disabled {
   background-position: -226px -52px;
 }
 
-.gor-firehazard .gor-clearPath .gor-clearPath-wrapper .gor-status-text {
+.gor-firehazard .gor-shutter-section .gor-clearPath .gor-clearPath-wrapper .gor-status-text {
   width: 300px;
   font-size: 18px;
   font-weight: 600;
@@ -4989,7 +4998,7 @@ button:disabled {
   margin-left: 15px;
 }
 
-.gor-firehazard .gor-shutter-status {
+.gor-firehazard .gor-shutter-section .gor-shutter-status {
   width: 198px;
   height: 40px;
   padding: 10px;
@@ -5001,20 +5010,32 @@ button:disabled {
   box-sizing: border-box;
 }
 
-.gor-firehazard .gor-shutter-status .gor-shutter-wrapper {
+.gor-firehazard .gor-shutter-section .gor-shutter-status .gor-shutter-wrapper {
   display: table-cell;
   vertical-align: middle;
 }
 
-.gor-firehazard .gor-shutter-status .gor-shutter-wrapper .gor-shutter-image-status {
+.gor-firehazard .gor-shutter-section .gor-shutter-status .gor-shutter-wrapper .gor-shutter-image-status {
   width: 17px;
   height: 16px;
   float: left;
   background-image: url(./images/icons.svg);
+}
+
+.gor-firehazard .gor-shutter-section .gor-shutter-status .gor-shutter-wrapper .gor-shutter-image-status.cleared {
   background-position: -425px -77px;
 }
 
-.gor-firehazard .gor-shutter-status .gor-shutter-wrapper .gor-shutter-text-status {
+.gor-firehazard .gor-shutter-section .gor-shutter-status .gor-shutter-wrapper .gor-shutter-image-status.failed {
+  background-position: -493px -77px;
+}
+
+.gor-firehazard .gor-shutter-section .gor-shutter-status .gor-shutter-wrapper .gor-shutter-image-status.progress {
+  background-image: url(images/91.gif);
+  background-size: contain;
+}
+
+.gor-firehazard .gor-shutter-section .gor-shutter-status .gor-shutter-wrapper .gor-shutter-text-status {
   float: left;
   font-size: 16px;
   text-align: left;
