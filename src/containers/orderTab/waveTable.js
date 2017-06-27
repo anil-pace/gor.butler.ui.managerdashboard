@@ -246,7 +246,7 @@ class WavesTable extends React.Component {
                                     <div className="gorToolHeaderSubText">
                                         <FormattedMessage id="WavesTable.pending.status"
                                                           description='pending status for WavesTable'
-                                                          defaultMessage='{pendingWave} waves pending'
+                                                          defaultMessage='{pendingWave, number} {pendingWave, plural, one {wave} other {waves}} pending'
                                                           values={{pendingWave: pendingWave ? pendingWave : '0'}}/>
                                     </div>
                                 </div>
@@ -268,7 +268,7 @@ class WavesTable extends React.Component {
                                     <div className="gorToolHeaderSubText">
                                         <FormattedMessage id="WavesTable.progress.status"
                                                           description='progress status for WavesTable'
-                                                          defaultMessage='{progressWave} waves in progress'
+                                                          defaultMessage='{progressWave, number} {progressWave, plural, one {wave} other {waves}} in progress'
                                                           values={{progressWave: progressWave ? progressWave : '0'}}/>
                                     </div>
                                 </div>
@@ -313,7 +313,7 @@ class WavesTable extends React.Component {
                                     <div className="gorToolHeaderSubText">
                                         <FormattedMessage id="WavesTable.completed.status"
                                                           description='completed status for WavesTable'
-                                                          defaultMessage='{completedWaves} waves completed'
+                                                          defaultMessage='{completedWaves, number} {completedWaves, plural, one {wave} other {waves}} completed'
                                                           values={{completedWaves: completedWaves ? completedWaves : '0'}}/>
                                     </div>
                                 </div>
@@ -335,7 +335,7 @@ class WavesTable extends React.Component {
                                     <div className="gorToolHeaderSubText">
                                         <FormattedMessage id="WavesTable.totalOrders.status"
                                                           description='totalOrders status for WavesTable'
-                                                          defaultMessage='{totalOrders} orders'
+                                                          defaultMessage='{totalOrders, number} {totalOrders, plural, one {order} other {orders}}'
                                                           values={{totalOrders: totalOrders ? totalOrders : '0'}}/>
                                     </div>
                                 </div>

@@ -264,8 +264,10 @@ class OrderListTable extends React.Component {
                                     <div className="gorToolHeaderSubText">
                                         <FormattedMessage id="orderlist.pendingOrders"
                                                           description='pendingOrders header ordertable'
-                                                          defaultMessage='{pendingOrders} orders pending'
-                                                          values={{pendingOrders: this.props.totalPendingOrder ? this.props.totalPendingOrder : '0'}}/>
+                                                          defaultMessage='{pendingOrders, number} {pendingOrders, plural, one {order} other {orders}} pending'
+                                                          values={{pendingOrders: this.props.totalPendingOrder ? this.props.totalPendingOrder : '0'}}
+
+                                                          />
                                     </div>
                                 </div>
                             </SortHeaderCell>
@@ -306,7 +308,7 @@ class OrderListTable extends React.Component {
                                     <div className="gorToolHeaderSubText">
                                         <FormattedMessage id="orderlist.totalCompletedOrder"
                                                           description='totalCompletedOrder header ordertable'
-                                                          defaultMessage='{totalCompletedOrder} orders completed'
+                                                          defaultMessage='{totalCompletedOrder, number} {totalCompletedOrder, plural, one {order} other {orders}} completed'
                                                           values={{totalCompletedOrder: this.props.totalCompletedOrder ? this.props.totalCompletedOrder : '0'}}/>
                                     </div>
                                 </div>
@@ -328,8 +330,8 @@ class OrderListTable extends React.Component {
                                     <div className="gorToolHeaderSubText">
                                         <FormattedMessage id="orderlist.itemsPerOrder"
                                                           description='itemsPerOrder header ordertable'
-                                                          defaultMessage='Avg {itemsPerOrder} items/order'
-                                                          values={{itemsPerOrder: this.props.itemsPerOrder ? this.props.itemsPerOrder.toFixed(2) : '0'}}/>
+                                                          defaultMessage='Avg {itemsPerOrder, number} {itemsPerOrder, plural, one {item} other {items}}/order'
+                                                          values={{itemsPerOrder: this.props.itemsPerOrder ? (this.props.itemsPerOrder).toFixed(2) : '0'}}/>
                                     </div>
                                 </div>
                             </div>

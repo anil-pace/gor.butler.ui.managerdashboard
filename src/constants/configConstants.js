@@ -1,12 +1,10 @@
-
 export const BASE_URL = 'localhost';
-export const PORT = '8888';
 export const PROTOCOL = 'https://';
 export const WS_PROTOCOL ="wss://";
 export const WS_URL = WS_PROTOCOL+BASE_URL+"/manager_api/wss";
-export const LOGIN_URL=PROTOCOL+BASE_URL+"/api/auth/token"
 export const API_URL=PROTOCOL+BASE_URL+"/api";
-export const HEADER_URL=PROTOCOL+BASE_URL+"/api/user"
+export const LOGIN_URL=API_URL+"/auth/token"
+export const HEADER_URL=API_URL+"/user"
 export const ORDERS_URL="/orders/md"
 export const PPS_MODE_CHANGE_URL=API_URL+"/pps/change_mode";
 export const PPS_STATUS_CHANGE_URL = API_URL+"/pps/change_status";
@@ -14,7 +12,7 @@ export const GET_PPS_MSU = API_URL+"/pps/get_pending_msu";
 export const PAGE_SIZE_URL="&PAGE_SIZE=";
 export const ROLE_URL=HEADER_URL+'/role';
 export const CHECK_USER=HEADER_URL+'?username=';
-export const AUDIT_URL=PROTOCOL+BASE_URL+"/api/audit";
+export const AUDIT_URL=API_URL+"/audit";
 export const DELETE_AUDIT_URL=AUDIT_URL+'/delete/';
 export const CANCEL_AUDIT_URL=AUDIT_URL + "/cancel/";
 export const START_AUDIT_URL=AUDIT_URL+'/start';
@@ -28,7 +26,7 @@ export const UPDATE_TIME_HIGH='&update_time>=';
 export const UPDATE_TIME='update_time';
 export const PICK_BEFORE_ORDER_URL="&pick_before_time<=";
 export const BREACHED_URL="&breached=true&warehouse_status=['pending','fulfillable','temporary_unfulfillable','completed']";
-export const TIME_ZONE_URL=PROTOCOL+BASE_URL+"/api/components/get_time_zone"
+export const TIME_ZONE_URL=API_URL+"/components/get_time_zone"
 export const GIVEN_PAGE="page";
 export const GIVEN_PAGE_SIZE="PAGE_SIZE";
 export const FILTER_ORDER_ID= "&order_id~=";
@@ -50,7 +48,6 @@ export const UPLOAD_HISTORY_URL=API_URL+ "/components/mdm_info";
 export const GET_MD_CONFIG_URL=API_URL + "/components/get_md_config";
 export const GET_MAXSIZE_FILE_URL=API_URL + "/components/get_mdm_file_size";
 /*URLs for notification*/
-export const BASE_URL_NOTIFICATION = PROTOCOL + BASE_URL;
 export const WS_NOTIFICATION_URL =  API_URL+"/platform-dashboard/dashboard-stomp";
 export const NOTIFICATIONS_URL =  API_URL+"/api-gateway/dashboard-service/platform-dashboard/event";
 export const READ_MSG_URL = API_URL+"/api-gateway/dashboard-service/platform-dashboard/event/mark-as-read";
