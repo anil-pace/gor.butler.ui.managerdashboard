@@ -180,7 +180,7 @@ class UsersTab extends React.Component {
         if (query.status) {
             query.status=query.status.constructor=== Array ? query.status : [query.status]
             if (query.status.length !== 2) {
-                filterSubsData["logged_in"]=query.status[0]=== 'online' ? 'true' : 'false'
+                filterSubsData["logged_in"]=['is',query.status[0]=== 'online' ?'true' : 'false']
             }
 
         }
