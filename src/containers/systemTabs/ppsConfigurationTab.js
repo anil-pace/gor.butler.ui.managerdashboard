@@ -22,7 +22,7 @@ import PPSList from "./ppsConfigurationList";
 class PPSConfiguration extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {subscribed: false}
+        this.state = {subscribed: false,currentView:'tags'}
     }
 
     componentWillMount() {
@@ -39,6 +39,10 @@ class PPSConfiguration extends React.Component {
         if (nextProps.socketAuthorized && !this.state.subscribed) {
             this._refreshList()
         }
+    }
+
+    handleClickOnNavigation(currentView){
+        this.setState({currentView:currentView})
     }
 
     /**
@@ -58,30 +62,17 @@ class PPSConfiguration extends React.Component {
 
 
         return (
-            <div style={{boxSizing: 'border-box', background: 'white', overflow: 'auto'}}>
+            <div className="pps-configuration-container">
                 <PPSList/>
-                <div style={{
-                    float: 'right',
-                    width: '83%',
-                    borderTop: "1px solid #ccc",
-                    borderBottom: "1px solid #ccc",
-                    boxSizing: 'border-box',
-                    height: 500
-                }}>
-                    <div style={{
-                        padding: 21,
-                        borderBottom: "1px solid #ccc",
-                        boxSizing: 'border-box',
-                        fontWeight: "bold",
-                        fontSize: 16,
-                        color: '#999'
-                    }}>
-                        <span style={{padding: 20}}>Assign tags to bin</span>
-                        <span style={{padding: 20}}>Bin activate/deactivate</span>
-                        <span style={{padding: 20}}>Bin group enable/disable</span>
+                <div className="pps-configuration-details-container">
+                    <div className="pps-configuration-navigation-tabs">
+                        <div className={['navigation-tab',(this.state.currentView==='tags'?'active':'')].join(" ")} onClick={this.handleClickOnNavigation.bind(this,'tags')}>Assign tags to bin</div>
+                        <div className={['navigation-tab',(this.state.currentView==='bins'?'active':'')].join(" ")} onClick={this.handleClickOnNavigation.bind(this,'bins')}>Bin activate/deactivate</div>
+                        <div className={['navigation-tab',(this.state.currentView==='groups'?'active':'')].join(" ")} onClick={this.handleClickOnNavigation.bind(this,'groups')}>Bin group enable/disable</div>
                     </div>
-                    <Bins/>
-                    <Tags/>
+                    <Bins currentView={this.state.currentView}/> {/* "currentView" will bes used to set the width of bins*/}
+                    {this.state.currentView==='tags' && <Tags/>}
+
 
                 </div>
             </div>

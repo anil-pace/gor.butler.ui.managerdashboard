@@ -2,8 +2,8 @@
  * Created by gaurav.m on 6/21/17.
  */
 import React  from 'react';
-
-export default class Tags extends React.Component {
+import {connect} from 'react-redux'
+class Tags extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -60,66 +60,46 @@ export default class Tags extends React.Component {
 
     render() {
         let self=this
-        return <div style={{
-            float: 'right',
-            width: '20%',
-            borderLeft: "1px solid #ccc",
-            boxSizing: 'border-box',
-            height: 450
-        }}>
+        return <div className="pps-tags-container">
 
-            <div style={{
-                margin: 15,
-                borderBottom: "1px solid #ccc",
-                boxSizing: 'border-box',
-                fontWeight: "bold",
-                fontSize: 16,
-                color: '#999',
-                paddingBottom: 15
-            }}>Tags
-            </div>
-            <div style={{margin: 15, fontSize: 12}}>
+            <div className="pps-tags-header">Tags</div>
+            <div className="pps-searchbox-container">
                 <input type="text" onChange={this.searchTags.bind(this)}/>
             </div>
 
-            <div style={{margin: 15}}>{this.state.filter ? "Search Results" : "All Tags"}</div>
+            <div className="pps-searchresult-label">{this.state.filter ? "Search Results" : "All Tags"}</div>
             {this.state.filteredTags.map(function (tag) {
-                return <div key={tag.name} style={{
-                    marginLeft: 15,
-                    marginRight: 15,
-                    paddingBottom: 5,
-                    color: '#999',
-                    fontSize: 12,
-                    clear: 'both',
-                    overflow: 'auto'
-                }}>
-                    <span style={{
-                        padding: 5,
-                        border: "1px solid #ccc",
-                        borderRadius: 10,
-                        float: 'left'
+                return <div className="pps-tags-row" key={tag.name}>
+                    <span className="pps-tag-name" style={{
+
                     }}>{tag.name}</span>
-                    <span style={{float: "right"}}>
+                    <span className="pps-tag-selection">
                         <input checked={tag.checked} onClick={self.handleTagSelect.bind(self,tag)} type="checkbox"/>
                     </span>
                 </div>
             })}
-            {this.state.canAddTag?<div style={{
-                marginLeft: 15,
-                marginRight: 15,
-                paddingBottom: 5,
-                color: '#999',
-                fontSize: 12,
-                clear: 'both',
-                overflow: 'auto'
+            {this.state.canAddTag?<div className="pps-add-tag-container" style={{
+
             }}>
-                    <span style={{
-                        float: 'left'
-                    }}>{this.state.filter}</span>
-                <span onClick={this.addTag.bind(this)} style={{float: "right"}}>
+                    <span className="pps-add-tag-name">{this.state.filter}</span>
+                <span className="pps-add-tag-button" onClick={this.addTag.bind(this)}>
                         Add
                     </span>
             </div>:null}
         </div>
     }
 }
+function mapStateToProps(state, ownProps) {
+    return {
+        selectedProfile:state.ppsConfiguration.selectedProfile||{id:null},
+        selectedPPS:state.ppsConfiguration.selectedPPS||{id:null},
+
+    };
+}
+
+var mapDispatchToProps = function (dispatch) {
+    return {
+    }
+};
+
+export  default connect(mapStateToProps, mapDispatchToProps)(Tags);
