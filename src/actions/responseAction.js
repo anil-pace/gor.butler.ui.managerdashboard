@@ -110,3 +110,11 @@ export function recievefireHazardDetails(data){
 		data
 	}
 }
+export function notifyEmergencyEnd(data){	
+	return{
+		type:"NOTIFY_EMERGENCY_END",
+		data
+	}
+}
+ 
+

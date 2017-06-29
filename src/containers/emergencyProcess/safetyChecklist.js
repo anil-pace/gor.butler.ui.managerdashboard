@@ -28,6 +28,7 @@ class SafetyChecklist extends React.Component{
   componentWillReceiveProps(nextProps){
     if(!nextProps.auth_token||!nextProps.system_emergency)
     {
+         if(nextProps.system_emergency || !nextProps.fireHazard.emergency_type=="fire_emergency")
       this._removeThisModal();
     }
     if(nextProps.modalStatus && !this.props.modalStatus){
@@ -44,16 +45,16 @@ class SafetyChecklist extends React.Component{
     }
   }
   componentDidMount(){
-  // var url;
-  //  if(this.props){
-  //     url=VALIDATION_LIST+"?emergency_type=fire";
-  //   }
-  //   else
-  //   {
-  //     url=VALIDATION_LIST+"?emergency_type=hard_soft";
-  //   }
+   var url;
+    if(this.props.fireHazard.emergency_type==="fire_emergency"){
+       url=VALIDATION_LIST+"?emergency_type=fire_emergency";
+     }
+     else
+     {
+       url=VALIDATION_LIST+"?emergency_type=hard_soft";
+     }
         let userData={
-                'url':VALIDATION_LIST,
+                'url':url,
                 'method':GET,
                 'cause':CHECK_SAFETY,
                 'contentType':APP_JSON,
@@ -81,17 +82,17 @@ class SafetyChecklist extends React.Component{
   }
   _handleSafetyConfirm(e)
   {
-  //var reqType;
-  //  if(this.props){
-  //     reqType="fire";
-  //   }
-  //   else
-  //   {
-  //    reqType="hard";     
-  //   }
+  var reqType;
+   if(this.props.fireHazard.emergency_type==="fire_emergency"){
+      reqType="fire_emergency";
+    }
+    else
+    {
+     reqType="hard_emergency";     
+    }
     e.preventDefault();
     var formdata;
-    formdata={'type':'stop'};
+    formdata={'emergency_type':reqType};
     let userData={
                 'url':VALIDATE_SAFETY,
                 'method':POST,
@@ -100,7 +101,6 @@ class SafetyChecklist extends React.Component{
                 'contentType':APP_JSON,
                 'accept':APP_JSON,
                 'token':this.props.auth_token
-                //'type':reqType
     }
     this.props.userRequest(userData);
     this.props.setSafetySpinner(true);
@@ -223,7 +223,8 @@ function mapStateToProps(state, ownProps){
       modalStatus: state.emergency.hideModal || false,
       safetySpinner:state.spinner.safetySpinner || false,
       system_emergency:state.tabsData.system_emergency||false,
-      system_data:state.tabsData.system_data||null
+      system_data:state.tabsData.system_data||null,
+      fireHazard:state.fireHazardDetail
   };
 }
 var mapDispatchToProps=function(dispatch){

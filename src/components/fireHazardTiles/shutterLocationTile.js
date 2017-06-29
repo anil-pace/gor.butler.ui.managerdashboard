@@ -9,12 +9,12 @@ import React  from 'react';
 class ShutterLocationTile extends React.Component{	
 	render(){
 		return (
-		 <div className="gor-shutter-status">
-            <div className="gor-shutter-wrapper">
-              <div className={"gor-shutter-image-status " + this.props.shutterStatus}></div>
-              <div className="gor-shutter-text-status">{"Location"+this.props.shutterName}</div>
-            </div>
-         </div>
+		 <span className="gor-shutter-status">
+
+              <span className={"gor-shutter-image-status " + this.props.shutterStatus}></span>
+              <span className="gor-shutter-text-status">{"Location"+this.props.shutterName}</span>
+
+         </span>
 		);
 	}
 }

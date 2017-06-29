@@ -38,8 +38,9 @@ import {emergency} from './reducers/emergencyReducer';
 import {utilityValidations} from './reducers/utilityReducer';
 import {overviewDetails} from './reducers/overviewReducer';
 import {configReducer} from './reducers/configReducer';
-import {notificationReducer} from './reducers/notificationReducer'
-import {fireHazardDetail} from './reducers/fireHazardReducer'
+import {notificationReducer} from './reducers/notificationReducer';
+import {fireHazardDetail} from './reducers/fireHazardReducer';
+import {fireReducer} from './reducers/fireReducer'; 
 
 
 const rootReducer=combineReducers({
@@ -82,7 +83,8 @@ const rootReducer=combineReducers({
   utilityValidations,
   overviewDetails,config:configReducer,
   notificationReducer,
-  fireHazardDetail
+  fireHazardDetail,
+  fireReducer
    })
 
 export default rootReducer

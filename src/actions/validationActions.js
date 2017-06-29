@@ -51,6 +51,7 @@ export function notifySuccess(data){
 		data
 	}
 }
+
 export function notifyDelete(data){	
 	return{
 		type:NOTIFY_DELETE,

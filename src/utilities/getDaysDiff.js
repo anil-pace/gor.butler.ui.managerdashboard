@@ -6,3 +6,12 @@ export function getDaysDiff(dateObj){
  absDays=Math.abs(daysDiff);
  return absDays;
 }
+
+export function getSecondsDiff(dateObj){
+ var givenDate,today,diff,absSecond;
+ givenDate=new Date(dateObj);
+ today=new Date();
+ diff =(givenDate.getTime() - today.getTime()) / 1000;
+absSecond=Math.abs(Math.round(diff));
+ return absSecond;
+}

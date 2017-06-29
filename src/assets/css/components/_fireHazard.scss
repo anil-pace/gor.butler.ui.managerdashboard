@@ -10,12 +10,12 @@
 	.gor-firehazard-header{
 		width:100%;
 		padding: 2%;
-		border:	none;
 		font-size: 26px;
 		color:#666666;
 		margin-top:5%;
+		border-bottom: 2px solid #dbdbdb;
+    	box-sizing: border-box;
 		.gor-caution-image{
-		background-image:url(./images/icons.svg);
 			background-position:212px 284px;
 			background-size: 1407%;
 			width:128px;
@@ -40,7 +40,7 @@
 		    text-align: left;
 		    color: #383838;
 		    display: inline-block;
-		    width: 70%;
+		    width: 75%;
 		    height: 70px;
 		    .gor-bold-underline{
 		    	font-weight: bold
@@ -50,48 +50,49 @@
 	
 	}
 
-	.gor-line
-	{
-	border: solid 1px #dbdbdb;
-	}
-	.gor-footer-line{
-	border: solid 1px #dbdbdb;
-	float: left;
-    width: 100%;
-    margin: 30px 0px 10px;
-	}
 	.gor-shutter-section{		
 	float:left;
 	width:100%;
+	border-bottom: 2px solid #dbdbdb;
+    padding:10px;
+    box-sizing: border-box;
+    max-height: 200px;
+    overflow: scroll;
 	&.hidden{
 	display:none;
 	}
-	.gor-clearPath{
-		height:40px;
-		display:table;
-		.gor-clearPath-wrapper{
-			display:table-cell;
+
+	
 			vertical-align:middle;
 			.gor-image-status{
 				width:25px;
 				height:25px;
 	    		float: left;
-	    		background-image:url(./images/icons.svg);
-				background-position:-226px -52px
+				background-position:-226px -52px;
+				&.progress{
+						background-image: url(images/whiteSpinner.svg);
+					    background-size: contain;
+					    background-color:red;
+				}
+				&.failed{
+							background-position:626px -162px;
+    					    background-size: 2890%;
+				}
 	    		
 			}
 			.gor-status-text{
-				width:300px;
 		 		font-size: 18px;
 				font-weight: 600;
 				text-align: left;
 				color: #383838;
 				margin-left:15px;
 			}
-		}
-	}
+		
+	.gor-shutter-status-box{
+				float:left;
+				clear:both;
 	.gor-shutter-status{
-		width:198px;
+		width:190px;
 		height:40px;
 		padding:10px;
 		display:table;
@@ -100,24 +101,21 @@
 		margin-right:10px;
 		margin-top:10px;
 		box-sizing: border-box;
-		.gor-shutter-wrapper
-		{
-		display:table-cell;
-		vertical-align:middle;
+		
 			.gor-shutter-image-status{
 				width: 17px;
 	  			height:16px;
 	  			float:left;
-	  			background-image:url(./images/icons.svg);
 
 				&.cleared{
 				background-position:-425px -77px;
 				}
 				&.failed{
-    					background-position:-493px -77px;
+    					background-position:301px -81px;
+    					    background-size: 1490%;
     					}
     			&.progress{
-    					background-image: url(images/91.gif);
+    					background-image: url(images/whiteSpinner.svg);
 					    background-size: contain;
     							
 	}
@@ -129,8 +127,9 @@
 	  			color: #383838;
 	  			margin-left:15px;
 			}
-		}
+		
 
+	}
 	}
 	}
 	.gor-resume-btn{
@@ -142,8 +141,13 @@
     	  cursor:pointer;
     	  font-size: 18px;
     	  color:#ffffff;
-  			font-weight: 600;
-  			float:right;
+  		  font-weight: 600;
+  		  float:right;
+  		   margin-top: 10px;
+  		  &.disable{
+  		  	cursor: default;
+    		opacity: 0.3;
+  		  	}
 
   		
 }

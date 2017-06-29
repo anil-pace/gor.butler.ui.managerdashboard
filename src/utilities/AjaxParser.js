@@ -8,7 +8,7 @@ import {codeToString} from './codeToString';
 import {setOrderListSpinner} from '../actions/orderListActions';
 import {notifySuccess, notifyFail,validateID,notifyDelete,
 	validatePassword,loginError,validateSKU, validateSKUcodeSpinner,modalStatus,getSafetyList
-,getSafetyErrorList} from '../actions/validationActions';
+,getSafetyErrorList,} from '../actions/validationActions';
 import {ERROR,AUTH_LOGIN, ADD_USER, RECIEVE_TIME_OFFSET,CHECK_ID,DELETE_USER,GET_ROLES,ORDERS_RETRIEVE,
 	PPS_MODE_CHANGE,EDIT_USER,RECIEVE_HEADER,SUCCESS,CREATE_AUDIT,AUDIT_RETRIEVE,GET_PPSLIST,START_AUDIT,
 	DELETE_AUDIT,AUDIT_RESOLVE_LINES,AUDIT_RESOLVE_CONFIRMED, VALIDATE_SKU_ID,PAUSE_OPERATION,
@@ -16,6 +16,7 @@ import {ERROR,AUTH_LOGIN, ADD_USER, RECIEVE_TIME_OFFSET,CHECK_ID,DELETE_USER,GET
 MASTER_FILE_UPLOAD,GET_MAX_FILE_SIZE,GET_CONFIGS,CANCEL_AUDIT,DOWNLOAD_STOCK_LEDGER_REPORT,DOWNLOAD_STOCK_LEDGER_RAW_TRANSACTIONS_REPORT,
 UPLOAD_HISTORY,PPS_STATUS_CHANGE,GET_PENDING_MSU,SEARCHED_NOTIFICATIONS_DATA,SEND_READ_INTIMATION,GET_ALL_NOTIFICATIONS,
 SEARCHED_NOTIFICATIONS_DATA_ALL} from '../constants/frontEndConstants';
+import {notifyEmergencyEnd} from '../actions/responseAction';
 
 
 
@@ -297,6 +298,9 @@ export function AjaxParse(store,res,cause,status,saltParams)
 			else if(rejectResponse.alert_data){
 				stringInfo=codeToString(res.alert_data[0]);
 				store.dispatch(notifyFail(stringInfo.msg));
+			}
+			else if(rejectResponse.successful){
+				store.dispatch(notifyEmergencyEnd(rejectResponse.emergency_end_time));      
 			}
 			store.dispatch(modalStatus(modalFlag));                           
 			store.dispatch(setSafetySpinner(false));

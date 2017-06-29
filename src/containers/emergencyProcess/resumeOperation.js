@@ -29,8 +29,9 @@ class ResumeOperation extends React.Component{
           return loginPassInfo.type;    
   }
   componentWillReceiveProps(nextProps){
-    if(!nextProps.auth_token||!nextProps.system_emergency||nextProps.system_data !== this.props.system_data)
+    if(!nextProps.auth_token||!nextProps.system_emergency||nextProps.system_data !== this.props.system_data )
     {
+      if(nextProps.system_emergency || !nextProps.fireHazard.emergency_type==="fire_emergency")
       this._removeThisModal();
     }
     if(nextProps.modalStatus && !this.props.modalStatus){
@@ -110,7 +111,9 @@ class ResumeOperation extends React.Component{
       passwordCheck: state.appInfo.passwordInfo||{},
       modalStatus: state.emergency.hideModal || false,
       system_emergency:state.tabsData.system_emergency||false,
-      system_data:state.tabsData.system_data||null
+      system_data:state.tabsData.system_data||null,
+      fireHazard:state.fireHazardDetail,
+
     }
 } 
 function mapDispatchToProps(dispatch){

@@ -1,43 +1,5 @@
 .gor-tabs{
 
-	.gor-toastify{
-				    position: fixed;
-				    width: 400px;
-				    height: 83px;
-				    border-radius: 6px;
-				    background-color: #ec1c2d;
-				    box-shadow: 0 4px 14px 0 rgba(159, 0, 0, 0.3);
-				    right: 10px;
-				    top: 60px;
-				    padding:15px;
-				    box-sizing:border-box;
-				    z-index: 99;
-				    cursor:pointer;
-				    .gor-toastify-content{
-				        float: left;
-    					width: 100%;
-    					line-height: 1.38;
-    					 font-weight: 600;
-    					 color: #ffffff;
-				    
-				    .gor-toastify-body{
-				    	  width: 262px;
-						  height: 44px;
-						  font-size: 16px;
-						  text-align: left;
-						  float: left;
-				    }
-				    .gor-toastify-details{
-					      width: 70px;
-						  height: 50px;
-						  font-size: 14px;
-						  text-align: center;
-						   float: right;
-						   border-left: solid 1px rgba(255, 255, 255, 0.2);
-				    }
-				    }
-
-				}
 	.gorTab{
 		&.gorContainer{
 			background-color:#4d5055;

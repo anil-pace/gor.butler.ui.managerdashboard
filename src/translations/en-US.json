@@ -841,7 +841,37 @@
   {
     "id": "stringConfig.md007",
     "description": "Text for safety checklist item 7",
-    "defaultMessage": "No zonal emergencies are pressed.",
+    "defaultMessage": "[Manual] Peripherals status known.",
+    "filepath": "./src/constants/backEndConstants.js"
+  },
+  {
+    "id": "stringConfig.md008",
+    "description": "Text for safety checklist item 8",
+    "defaultMessage": "[Manual] Physical inventory verified.",
+    "filepath": "./src/constants/backEndConstants.js"
+  },
+  {
+    "id": "stringConfig.md009",
+    "description": "Text for safety checklist item 9",
+    "defaultMessage": "[Automatic] No Emergency buttons in 'pressed' state",
+    "filepath": "./src/constants/backEndConstants.js"
+  },
+  {
+    "id": "stringConfig.md010",
+    "description": "Text for safety checklist item 10",
+    "defaultMessage": "[Manual] All shutters open  in active zones.",
+    "filepath": "./src/constants/backEndConstants.js"
+  },
+  {
+    "id": "stringConfig.md011",
+    "description": "Text for safety checklist item 11",
+    "defaultMessage": "[Manual] No humans in operations area.",
+    "filepath": "./src/constants/backEndConstants.js"
+  },
+  {
+    "id": "stringConfig.md012",
+    "description": "Text for safety checklist item 12",
+    "defaultMessage": "[Manual] All paths cleared of any debris..",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
@@ -1912,6 +1942,36 @@
     "description": "Text button to resume operation",
     "defaultMessage": "Resume operation",
     "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
+  },
+  {
+    "id": "operation.fire.header",
+    "description": "Header Text FIRE EMERGENCY",
+    "defaultMessage": "FIRE EMERGENCY",
+    "filepath": "./src/containers/emergencyProcess/fireHazard.js"
+  },
+  {
+    "id": "operation.fire.cautionText",
+    "description": "Description Text FIRE EMERGENCY",
+    "defaultMessage": "Fire emergency has been triggered and system has started its safety measures.",
+    "filepath": "./src/containers/emergencyProcess/fireHazard.js"
+  },
+  {
+    "id": "operation.fire.evacuation",
+    "description": "Description Text evacuation",
+    "defaultMessage": "Please follow evacuation procedures immediately.",
+    "filepath": "./src/containers/emergencyProcess/fireHazard.js"
+  },
+  {
+    "id": "operation.fire.escape",
+    "description": "Description Text escape",
+    "defaultMessage": "Clearing escape path",
+    "filepath": "./src/containers/emergencyProcess/fireHazard.js"
+  },
+  {
+    "id": "operation.fire.shutter",
+    "description": "Description Text clear shutter",
+    "defaultMessage": "Clearing all shutters",
+    "filepath": "./src/containers/emergencyProcess/fireHazard.js"
   },
   {
     "id": "operation.alert.release.button",
@@ -3558,6 +3618,24 @@
     "id": "auditStatus.tab.alert.heading",
     "description": "audit Status alert",
     "defaultMessage": "{count} {count, plural, one {alert} other {alerts}}",
+    "filepath": "./src/containers/tabs.js"
+  },
+  {
+    "id": "operation.alert.resumed",
+    "description": "Text to resume operation",
+    "defaultMessage": "All operation has been resumed to normal state.",
+    "filepath": "./src/containers/tabs.js"
+  },
+  {
+    "id": "operation.alert.triggeremergency",
+    "description": "Text button to trigger emergency",
+    "defaultMessage": "Fire emergency triggered.Follow evacuation procedures immediately",
+    "filepath": "./src/containers/tabs.js"
+  },
+  {
+    "id": "operation.alert.toastifydetails",
+    "description": "Text button to viewdetails",
+    "defaultMessage": "VIEW DETAILS",
     "filepath": "./src/containers/tabs.js"
   },
   {

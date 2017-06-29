@@ -1,0 +1,42 @@
+.gor-toastify{
+                    position: fixed;
+                    box-shadow: 0 4px 14px 0 rgba(159, 0, 0, 0.3);
+                    right: 10px;
+                    top: 60px;
+                    box-sizing:border-box;
+                    z-index: 99;
+                    border-radius: 6px;
+                    cursor:pointer;
+                    .gor-toastify-content{
+                        line-height: 1.38;
+                         font-weight: 600;
+                         color: #ffffff;
+                          height: 44px;
+                          font-size: 16px;
+                          text-align: left;
+                          background-color: #ec1c2d;
+                          padding: 25px;
+                          border-radius: 6px;
+                          &.info{
+                          background-color: #3cb669;
+                          }
+                          .msg-content{
+                          width: 300px;
+                          display: inline-block;
+                          }
+                    
+                    .gor-toastify-details{
+                          width: 70px;
+                          height: 50px;
+                          font-size: 14px;
+                          text-align: center;
+                           float: right;
+                           border-left: solid 1px rgba(255, 255, 255, 0.2);
+                           &.closeButton{
+                               font-size: 24px;
+                           }
+
+                    }
+                    }
+
+                }
