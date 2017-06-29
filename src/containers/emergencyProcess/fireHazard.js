@@ -22,7 +22,7 @@ class FireHazard extends React.Component{
     var duration=(limit-getSecondsDiff(this.props.fireHazard.emergencyStartTime))*1000;
     setTimeout(function(){
       this.setState({buttonEnable:false})
-    }.bind(this),1000); 
+    }.bind(this),duration); 
   }
   componentDidMount(){
     if(this.props.checkingList){
