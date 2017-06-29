@@ -199,9 +199,11 @@ class Tabs extends React.Component{
    _processNotification(){
   
   var notificationWrap=[],singleNotification,time,timeText;
-  
-  var timeText= this.props.fireHazardNotifyTime? <FormattedRelative value={this.props.fireHazardNotifyTime}/> :<FormattedRelative value={this.props.fireHazardStartTime}/>;
-  
+  var convertDate=this.props.fireHazardNotifyTime? new Date(this.props.fireHazardNotifyTime): new Date(this.props.fireHazardStartTime);
+  convertDate.setMinutes(convertDate.getMinutes() - convertDate.getTimezoneOffset());
+  var convertDatetoMili=convertDate.getTime();
+  var timeText= <FormattedRelative value={convertDatetoMili}/>;
+
  if(this.props.fireHazardNotifyTime){
 singleNotification=<GorToastify onClick={this._openPopup.bind(this)}>
 <div className="gor-toastify-content info">
