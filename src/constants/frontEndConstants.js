@@ -138,6 +138,7 @@ export const HISTOGRAM_DATA="HISTOGRAM_DATA";
 export const CHARGERS_DETAIL="CHARGERS_DETAIL";
 export const BUTLERS_DETAIL="BUTLERS_DETAIL";
 export const FIRE_EMERGENCY="FIRE_EMERGENCY";
+export const EMERGENCY_FIRE="fire_emergency";
 export const EMERGENCY="emergency";
 
 

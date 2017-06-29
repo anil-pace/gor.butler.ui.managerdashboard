@@ -5,7 +5,7 @@ import {userRequest} from '../../actions/userActions';
 import {setSafetySpinner} from '../../actions/spinnerAction';
 import { connect } from 'react-redux';
 import { GET,APP_JSON,POST,CHECK_SAFETY,
-  CONFIRM_SAFETY} from '../../constants/frontEndConstants';
+  CONFIRM_SAFETY,EMERGENCY_FIRE} from '../../constants/frontEndConstants';
 import {  VALIDATION_LIST,VALIDATE_SAFETY } from '../../constants/configConstants';
 import {stringConfig} from '../../constants/backEndConstants';
 import Spinner from '../../components/spinner/Spinner';
@@ -28,7 +28,7 @@ class SafetyChecklist extends React.Component{
   componentWillReceiveProps(nextProps){
     if(!nextProps.auth_token||!nextProps.system_emergency)
     {
-         if(nextProps.system_emergency || !nextProps.fireHazard.emergency_type=="fire_emergency")
+         if(nextProps.system_emergency || !nextProps.fireHazard.emergency_type==EMERGENCY_FIRE)
       this._removeThisModal();
     }
     if(nextProps.modalStatus && !this.props.modalStatus){
@@ -46,7 +46,7 @@ class SafetyChecklist extends React.Component{
   }
   componentDidMount(){
    var url;
-    if(this.props.fireHazard.emergency_type==="fire_emergency"){
+    if(this.props.fireHazard.emergency_type===EMERGENCY_FIRE){
        url=VALIDATION_LIST+"?emergency_type=fire_emergency";
      }
      else
@@ -83,8 +83,8 @@ class SafetyChecklist extends React.Component{
   _handleSafetyConfirm(e)
   {
   var reqType;
-   if(this.props.fireHazard.emergency_type==="fire_emergency"){
-      reqType="fire_emergency";
+   if(this.props.fireHazard.emergency_type===EMERGENCY_FIRE){
+      reqType=EMERGENCY_FIRE;
     }
     else
     {

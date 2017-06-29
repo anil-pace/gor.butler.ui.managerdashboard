@@ -23,6 +23,7 @@
                           .msg-content{
                           width: 300px;
                           display: inline-block;
+                          margin-top: -10px;
                           }
                     
                     .gor-toastify-details{
@@ -35,6 +36,15 @@
                            &.closeButton{
                                font-size: 24px;
                            }
+
+                    }
+                    .gor-toastify-updated-time{
+                    opacity: 0.8;
+                    position: relative;
+                    display: block;
+                    font-size: 14px;
+                    font-weight: 600;
+                    color: #ffffff;
 
                     }
                     }

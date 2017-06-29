@@ -14,6 +14,7 @@ import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,
   import TopNotifications from './components/topnotify/topnotify';
   import { notifyInfo} from './actions/validationActions';
 import {userRequest} from './actions/userActions';
+import { FormattedMessage,FormattedNumber } from 'react-intl';
 
 
   class App extends React.Component{ 
@@ -95,7 +96,7 @@ import {userRequest} from './actions/userActions';
          * props instead of picking it from sessionStorage.
          * @type {string}
          */
-     // currTab=nextProps.subTab || nextProps.tab || null; //
+
      currTab=nextProps.location.pathname.substring(1, nextProps.location.pathname.length);
 
      if(!loginAuthorized){
@@ -178,6 +179,7 @@ import {userRequest} from './actions/userActions';
     prevTab:state.tabSelected.prevTab,
     wsSubscriptionData:state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
     isFilterApplied: state.filterInfo.isFilterApplied || false,
+
     
   }
 } 

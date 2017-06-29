@@ -15,14 +15,14 @@ class FireHazard extends React.Component{
   }
   _removeThisModal() {
     this.props.removeModal();
-    //this.props.setFireHazrdFlag(true);
+    this.props.setFireHazrdFlag(true);
    }
    componentWillMount(){
     var limit=(this.props.config.fire_emergency_enable_resume_after)*60;
     var duration=(limit-getSecondsDiff(this.props.fireHazard.emergencyStartTime))*1000;
     setTimeout(function(){
       this.setState({buttonEnable:false})
-    }.bind(this),duration); 
+    }.bind(this),1000); 
   }
   componentDidMount(){
     if(this.props.checkingList){
@@ -100,14 +100,6 @@ class FireHazard extends React.Component{
   }
   return marker;
 }
-
- // shouldComponentUpdate(nextProps) {
- //        if(nextProps.firehazadflag ===true) {
- //            return false;
- //        }
- //        else
- //        return true;
- //    }
 
 render()
 {   

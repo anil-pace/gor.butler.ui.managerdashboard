@@ -10,12 +10,13 @@ import {setAuditSpinner} from '../actions/auditActions';
 import {setButlerSpinner} from '../actions/spinnerAction';
 import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP,INVENTORY,AUDIT,
 FULFILLING_ORDERS,GOR_OFFLINE,GOR_ONLINE,GOR_NORMAL_TAB,GOR_FAIL,
-SOFT_MANUAL,HARD,SOFT,UTILITIES,FIRE_EMERGENCY_POPUP_FLAG} from '../constants/frontEndConstants';
+SOFT_MANUAL,HARD,SOFT,UTILITIES,FIRE_EMERGENCY_POPUP_FLAG,EMERGENCY_FIRE} from '../constants/frontEndConstants';
 import { FormattedMessage,FormattedNumber } from 'react-intl';
 import OperationStop from '../containers/emergencyProcess/OperationStop';
 import EmergencyRelease from '../containers/emergencyProcess/emergencyRelease'; 
 import fireHazard from '../containers/emergencyProcess/fireHazard'; 
 import GorToastify from '../components/gor-toastify/gor-toastify';
+import {getSecondsDiff} from '../utilities/getDaysDiff';
 
 
 class Tabs extends React.Component{
@@ -27,8 +28,7 @@ class Tabs extends React.Component{
      */
 
     _openPopup(){
-      this._FireEmergencyRelease();
-      //this.props.setFireHazrdFlag(false);
+      this.props.setFireHazrdFlag(false);
   }
 
     handleTabClick(selTab){
@@ -83,7 +83,7 @@ class Tabs extends React.Component{
     {
       this._emergencyRelease();
     }
-    else if(this.props.fireHazardType ==="fire_emergency")
+    else  if(nextProps.fireHazardType ===EMERGENCY_FIRE && nextProps.firehazadflag==false && !nextProps.fireHazardNotifyTime)
     {
       this._FireEmergencyRelease();
     }
@@ -196,18 +196,39 @@ class Tabs extends React.Component{
   }
    _processNotification(){
   
-  var notificationWrap=[],singleNotification;
+  var notificationWrap=[],singleNotification,time,timeText;
+  var timeDiff= this.props.fireHazardNotifyTime? getSecondsDiff(this.props.fireHazardNotifyTime):getSecondsDiff(this.props.fireHazardStartTime);
+    if(timeDiff>=3600){
+    time=Math.round(timeDiff/3600);
+    timeText=<FormattedMessage id='operation.alert.timeText' 
+                    defaultMessage='{time} hours ago' values={{time}}
+                            description="Text for time hours"/>;                        
+  }
+  else if(timeDiff>=60){
+    time=Math.round(timeDiff/60);
+    timeText=<FormattedMessage id='operation.alert.timeText' 
+                    defaultMessage='{time} minutes ago' values={{time}}
+                            description="Text for time minute"/>;                        
+  }else
+  {
+    timeText=<FormattedMessage id='operation.alert.timeTextsecond' 
+                    defaultMessage='{timeDiff} seconds ago' values={{timeDiff}}
+                            description="Text for time second"/>; 
+  }
   
-if(this.props.fireHazardNotifyTime){
+ if(this.props.fireHazardNotifyTime){
 singleNotification=<GorToastify onClick={this._openPopup.bind(this)}>
 <div className="gor-toastify-content info">
                   <p className="msg-content">
                    <FormattedMessage id='operation.alert.resumed' 
                     defaultMessage="All operation has been resumed to normal state."
                             description="Text to resume operation"/>
+                  <span className="gor-toastify-updated-time">{timeText}</span>
                   </p>
                   <span className="gor-toastify-details closeButton">×</span>
+
      </div>
+     
     </GorToastify>
 }else
 {
@@ -217,6 +238,7 @@ singleNotification=<GorToastify onClick={this._openPopup.bind(this)}>
                    <FormattedMessage id='operation.alert.triggeremergency' 
                     defaultMessage="Fire emergency triggered.Follow evacuation procedures immediately"
                             description="Text button to trigger emergency"/>
+                             <span className="gor-toastify-updated-time">{timeText}</span>
                   </p>
                   <span className="gor-toastify-details">
 
@@ -224,7 +246,7 @@ singleNotification=<GorToastify onClick={this._openPopup.bind(this)}>
                     defaultMessage="VIEW DETAILS"
                             description="Text button to viewdetails"/>
                   </span>
-                
+
      </div>
     </GorToastify>
 } 
@@ -233,7 +255,7 @@ singleNotification=<GorToastify onClick={this._openPopup.bind(this)}>
 }
 	render(){
   let items=this._parseStatus();
-   var showFireHazardPopup=this.props.firehazadflag;
+  var showFireHazardPopup=this.props.firehazadflag;
   let notificationWrap=this._processNotification();
   var showUtilityTab=this.props.config.utility_tab && this.props.config.utility_tab.enabled;
 		return (
@@ -288,6 +310,7 @@ function mapStateToProps(state, ownProps){
          config:state.config||{},
          firehazadflag:state.fireReducer.firehazadflag,
          fireHazardType:state.fireHazardDetail.emergency_type,
+         fireHazardStartTime:state.fireHazardDetail.emergencyStartTime,
          fireHazardNotifyTime:state.fireHazardDetail.notifyTime
 
     }

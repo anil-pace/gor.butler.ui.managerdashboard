@@ -9,7 +9,7 @@ export function fireHazardDetail(state={}, action) {
         case FIRE_EMERGENCY:
             var res;
             res=action.data;
-            if (!res.complete_data) {
+            if (!res.complete_data[0].emergency_data) {
                 /**
                  * Error handling
                  */

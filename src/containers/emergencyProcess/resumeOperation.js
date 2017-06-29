@@ -6,7 +6,7 @@ import {modal} from 'react-redux-modal';
 import {validatePassword, modalFormReset} from '../../actions/validationActions';
 import { emptyField } from '../../utilities/fieldCheck';
 import {LOGIN_URL} from '../../constants/configConstants';
-import {ERROR,TYPING,APP_JSON,POST,SUCCESS,RESUME_OPERATION} from '../../constants/frontEndConstants';
+import {ERROR,TYPING,APP_JSON,POST,SUCCESS,RESUME_OPERATION,EMERGENCY_FIRE} from '../../constants/frontEndConstants';
 import SafetyChecklist from './safetyChecklist';
 
 class ResumeOperation extends React.Component{
@@ -31,7 +31,7 @@ class ResumeOperation extends React.Component{
   componentWillReceiveProps(nextProps){
     if(!nextProps.auth_token||!nextProps.system_emergency||nextProps.system_data !== this.props.system_data )
     {
-      if(nextProps.system_emergency || !nextProps.fireHazard.emergency_type==="fire_emergency")
+      if(nextProps.system_emergency || !nextProps.fireHazard.emergency_type===EMERGENCY_FIRE)
       this._removeThisModal();
     }
     if(nextProps.modalStatus && !this.props.modalStatus){

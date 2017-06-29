@@ -1,6 +1,6 @@
 
 import {receivePpsData,receiveButlersData,receiveAuditData,receiveThroughputData,receivePutData,receiveChargersData,receiveOrdersData,initData,recieveHistogramData,recieveChargersDetail,recieveButlersDetail,recievePPSDetail,recievePPSperformance,recieveUserDetails,recievefireHazardDetails} from '../actions/responseAction';
-import {HISTOGRAM_DATA} from '../constants/frontEndConstants';
+import {HISTOGRAM_DATA,EMERGENCY_FIRE} from '../constants/frontEndConstants';
 import {SYSTEM_CHARGERS_DETAILS,USER_DATA,HISTOGRAM_DETAILS,PARSE_OVERVIEW,PARSE_SYSTEM,PARSE_STATUS,PPS_DETAIL,SYSTEM_PPS_DETAILS,SYSTEM_BUTLERS_DETAILS,PARSE_PPS,PARSE_BUTLERS,PARSE_CHARGERS,PARSE_INVENTORY_HISTORY,PARSE_INVENTORY_TODAY,PARSE_INVENTORY,PARSE_ORDERS,PARSE_PUT,PARSE_PICK,PARSE_PPA_THROUGHPUT,PARSE_AUDIT,PARSE_AUDIT_AGG,EMERGENCY} from '../constants/backEndConstants'
 import {wsOnMessageAction} from '../actions/socketActions';
 import {recieveOverviewStatus,recieveSystemStatus,recieveAuditStatus,recieveOrdersStatus,recieveUsersStatus,recieveInventoryStatus,recieveStatus,setFireHazrdFlag} from '../actions/tabActions';
@@ -131,39 +131,10 @@ export function ResponseParse(store,res)
 				store.dispatch(setWavesFilterSpinner(false));
 				break;	
 				
-			case 'emergency':
-// var	res={"complete_data": 
-// [
-// {"emergency_data": 
-// {"escape_path": "cleared", 
-// "shutters": 
-// {
-// 	"1": "cleared",
-// 	"2": "cleared",
-// 	"3": "cleared",
-// 	"4": "cleared",
-// 	"5": "cleared",
-// 	"6": "cleared",
-// 	"7": "cleared",
-// 	"8": "cleared",
-// 	"9": "cleared",
-// 	"10": "cleared",
-// 	"11": "cleared",
-// 	"12": "cleared",
-// 	"13": "cleared",
-// 	"14": "cleared",
-// 	"5": "cleared",
-// 	"16": "cleared",
-// 	"17": "cleared",
-// 	"18": "cleared"
-// }
-// }, "emergency_start_time": "2017-06-28T22:22:48.259011", 
-// 	"emergency_type": "fire_emergency"}
-// ], "resource_type": "emergency"
-
-// }										    	   
+			case 'emergency':								    	   
 				store.dispatch(recievefireHazardDetails(res));
-				store.dispatch(setFireHazrdFlag(true));
+				if(res.complete_data[0].emergency_type==EMERGENCY_FIRE)
+				store.dispatch(setFireHazrdFlag(false));
 				break;	   
 			default:
 				console.log("in Response Parser");
