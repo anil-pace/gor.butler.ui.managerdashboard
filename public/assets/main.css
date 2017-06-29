@@ -5913,7 +5913,7 @@ button:disabled {
   min-height: 20rem;
   margin: 1% 0% 0% 1%;
   font-size: 0;
-  width: 23.7%;
+  width: 24.7%;
   position: relative;
   vertical-align: top;
 }
@@ -6667,4 +6667,13 @@ button:disabled {
   border-radius: 3px;
   box-shadow: 0 0.0625rem 0 rgba(0, 0, 0, 0.06);
   box-sizing: border-box;
+}
+
+.gor-list-none {
+  margin-top: 0px;
+  font-family: inherit;
+  list-style: none;
+  border-bottom: solid 0.5px #cccccc;
+  height: 50px;
+  padding-left: 10px;
 }

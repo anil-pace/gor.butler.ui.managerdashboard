@@ -3,10 +3,7 @@ import ReactDOM  from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 
 class UtilityTile extends React.Component{
-	constructor(props) 
-	{
-    	super(props);
-    }	
+	
 	render(){
 		return (
 		<div className="gor-utility-tile">
@@ -19,7 +16,7 @@ class UtilityTile extends React.Component{
 				</div>:""}
 			</div>
 			<div className="gor-utility-tile-body">
-				{this.props.tileBody}
+				{this.props.children}
 			</div>
 			{this.props.showFooter?<div className="gor-utility-tile-footer">
 				<div className="got-utility-btn-wrap">
