@@ -31,7 +31,7 @@ class ResumeOperation extends React.Component{
   componentWillReceiveProps(nextProps){
     if(!nextProps.auth_token||!nextProps.system_emergency||nextProps.system_data !== this.props.system_data )
     {
-      if(nextProps.system_emergency || !nextProps.fireHazard.emergency_type===EMERGENCY_FIRE)
+      if(nextProps.system_emergency || nextProps.fireHazard.emergency_type!==EMERGENCY_FIRE)
       this._removeThisModal();
     }
     if(nextProps.modalStatus && !this.props.modalStatus){

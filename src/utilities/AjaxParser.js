@@ -8,7 +8,7 @@ import {codeToString} from './codeToString';
 import {setOrderListSpinner} from '../actions/orderListActions';
 import {notifySuccess, notifyFail,validateID,notifyDelete,
 	validatePassword,loginError,validateSKU, validateSKUcodeSpinner,modalStatus,getSafetyList
-,getSafetyErrorList,} from '../actions/validationActions';
+,getSafetyErrorList} from '../actions/validationActions';
 import {ERROR,AUTH_LOGIN, ADD_USER, RECIEVE_TIME_OFFSET,CHECK_ID,DELETE_USER,GET_ROLES,ORDERS_RETRIEVE,
 	PPS_MODE_CHANGE,EDIT_USER,RECIEVE_HEADER,SUCCESS,CREATE_AUDIT,AUDIT_RETRIEVE,GET_PPSLIST,START_AUDIT,
 	DELETE_AUDIT,AUDIT_RESOLVE_LINES,AUDIT_RESOLVE_CONFIRMED, VALIDATE_SKU_ID,PAUSE_OPERATION,

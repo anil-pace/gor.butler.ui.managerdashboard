@@ -140,6 +140,7 @@ export const BUTLERS_DETAIL="BUTLERS_DETAIL";
 export const FIRE_EMERGENCY="FIRE_EMERGENCY";
 export const EMERGENCY_FIRE="fire_emergency";
 export const EMERGENCY="emergency";
+export const NOTIFY_EMERGENCY_END="NOTIFY_EMERGENCY_END";
 
 
 /*Constants for type of AJAX call*/

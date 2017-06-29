@@ -11,12 +11,11 @@ import {setButlerSpinner} from '../actions/spinnerAction';
 import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP,INVENTORY,AUDIT,
 FULFILLING_ORDERS,GOR_OFFLINE,GOR_ONLINE,GOR_NORMAL_TAB,GOR_FAIL,
 SOFT_MANUAL,HARD,SOFT,UTILITIES,FIRE_EMERGENCY_POPUP_FLAG,EMERGENCY_FIRE} from '../constants/frontEndConstants';
-import { FormattedMessage,FormattedNumber } from 'react-intl';
+import { FormattedMessage,FormattedNumber,FormattedRelative } from 'react-intl';
 import OperationStop from '../containers/emergencyProcess/OperationStop';
 import EmergencyRelease from '../containers/emergencyProcess/emergencyRelease'; 
 import fireHazard from '../containers/emergencyProcess/fireHazard'; 
 import GorToastify from '../components/gor-toastify/gor-toastify';
-import {getSecondsDiff} from '../utilities/getDaysDiff';
 
 
 class Tabs extends React.Component{
@@ -83,14 +82,17 @@ class Tabs extends React.Component{
     {
       this._emergencyRelease();
     }
-    else  if(nextProps.fireHazardType ===EMERGENCY_FIRE && nextProps.firehazadflag==false && !nextProps.fireHazardNotifyTime)
+    else  if(nextProps.fireHazardType ===EMERGENCY_FIRE && !nextProps.firehazadflag && !nextProps.fireHazardNotifyTime)
     {
       this._FireEmergencyRelease();
+    }
+    else if(nextProps.system_emergency && !this.props.system_emergency)
+    {
+      this._stopOperation(true);
     }
     else if(nextProps.system_data=== SOFT && this.props.system_data=== SOFT_MANUAL){
       this._stopOperation(true);
     }
-  
   }
   _parseStatus()
   {
@@ -197,24 +199,8 @@ class Tabs extends React.Component{
    _processNotification(){
   
   var notificationWrap=[],singleNotification,time,timeText;
-  var timeDiff= this.props.fireHazardNotifyTime? getSecondsDiff(this.props.fireHazardNotifyTime):getSecondsDiff(this.props.fireHazardStartTime);
-    if(timeDiff>=3600){
-    time=Math.round(timeDiff/3600);
-    timeText=<FormattedMessage id='operation.alert.timeText' 
-                    defaultMessage='{time} hours ago' values={{time}}
-                            description="Text for time hours"/>;                        
-  }
-  else if(timeDiff>=60){
-    time=Math.round(timeDiff/60);
-    timeText=<FormattedMessage id='operation.alert.timeText' 
-                    defaultMessage='{time} minutes ago' values={{time}}
-                            description="Text for time minute"/>;                        
-  }else
-  {
-    timeText=<FormattedMessage id='operation.alert.timeTextsecond' 
-                    defaultMessage='{timeDiff} seconds ago' values={{timeDiff}}
-                            description="Text for time second"/>; 
-  }
+  
+  var timeText= this.props.fireHazardNotifyTime? <FormattedRelative value={this.props.fireHazardNotifyTime}/> :<FormattedRelative value={this.props.fireHazardStartTime}/>;
   
  if(this.props.fireHazardNotifyTime){
 singleNotification=<GorToastify onClick={this._openPopup.bind(this)}>
@@ -255,9 +241,9 @@ singleNotification=<GorToastify onClick={this._openPopup.bind(this)}>
 }
 	render(){
   let items=this._parseStatus();
-  var showFireHazardPopup=this.props.firehazadflag;
+  let showFireHazardPopup=this.props.firehazadflag;
   let notificationWrap=this._processNotification();
-  var showUtilityTab=this.props.config.utility_tab && this.props.config.utility_tab.enabled;
+  let showUtilityTab=this.props.config.utility_tab && this.props.config.utility_tab.enabled;
 		return (
 		<div className="gor-tabs gor-main-block">
 		<Link to="/overview" onClick={this.handleTabClick.bind(this,OVERVIEW)}>
@@ -308,7 +294,7 @@ function mapStateToProps(state, ownProps){
          system_status:state.tabsData.status||null,
          audit_alert: state.tabsData.audit_alert || 0,
          config:state.config||{},
-         firehazadflag:state.fireReducer.firehazadflag,
+         firehazadflag:state.fireReducer.firehazadflag || false,
          fireHazardType:state.fireHazardDetail.emergency_type,
          fireHazardStartTime:state.fireHazardDetail.emergencyStartTime,
          fireHazardNotifyTime:state.fireHazardDetail.notifyTime

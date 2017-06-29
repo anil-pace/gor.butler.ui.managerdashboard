@@ -1,4 +1,4 @@
-import {FIRE_EMERGENCY} from '../constants/frontEndConstants';
+import {FIRE_EMERGENCY,NOTIFY_EMERGENCY_END} from '../constants/frontEndConstants';
 import React  from 'react';
 import {FormattedMessage} from 'react-intl';
 
@@ -30,7 +30,7 @@ export function fireHazardDetail(state={}, action) {
                 })
             }
 
-       case "NOTIFY_EMERGENCY_END":
+       case NOTIFY_EMERGENCY_END:
          let notifyTime=action.data;
          return Object.assign({}, state, { 
             "notifyTime":notifyTime

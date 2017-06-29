@@ -105,7 +105,7 @@ render()
 {   
   var shutterFlag=escapePathFlag=false,location,escapePathFlag,marker;
   var  shutterNuber=Object.keys(this.props.fireHazard.shutters).length;
-  shutterFlag=shutterNuber===0?true:false;
+  shutterFlag=shutterNuber===0;
   escapePathFlag=(this.props.fireHazard.escapePath!=="not_found")?true:false;
   var shutterWrap=this._processData();
   var markerShutter=this.processShutterHeader(this.props.fireHazard.shutters);
