@@ -132,36 +132,36 @@ export function ResponseParse(store,res)
 				break;	
 				
 			case 'emergency':
-var	res={"complete_data": 
-[
-{"emergency_data": 
-{"escape_path": "in_progress", 
-"shutters": 
-{
-	"1": "cleared",
-	"2": "failed",
-	"3": "cleared",
-	"4": "cleared",
-	"5": "cleared",
-	"6": "failed",
-	"7": "cleared",
-	"8": "cleared",
-	"9": "failed",
-	"10": "cleared",
-	"11": "cleared",
-	"12": "failed",
-	"13": "cleared",
-	"14": "failed",
-	"5": "failed",
-	"16": "cleared",
-	"17": "failed",
-	"18": "in_progress"
-}
-}, "emergency_start_time": "2017-06-28T22:22:48.259011", 
-	"emergency_type": "fire_emergency"}
-], "resource_type": "emergency"
+// var	res={"complete_data": 
+// [
+// {"emergency_data": 
+// {"escape_path": "cleared", 
+// "shutters": 
+// {
+// 	"1": "cleared",
+// 	"2": "cleared",
+// 	"3": "cleared",
+// 	"4": "cleared",
+// 	"5": "cleared",
+// 	"6": "cleared",
+// 	"7": "cleared",
+// 	"8": "cleared",
+// 	"9": "cleared",
+// 	"10": "cleared",
+// 	"11": "cleared",
+// 	"12": "cleared",
+// 	"13": "cleared",
+// 	"14": "cleared",
+// 	"5": "cleared",
+// 	"16": "cleared",
+// 	"17": "cleared",
+// 	"18": "cleared"
+// }
+// }, "emergency_start_time": "2017-06-28T22:22:48.259011", 
+// 	"emergency_type": "fire_emergency"}
+// ], "resource_type": "emergency"
 
-}										    	   
+// }										    	   
 				store.dispatch(recievefireHazardDetails(res));
 				store.dispatch(setFireHazrdFlag(true));
 				break;	   

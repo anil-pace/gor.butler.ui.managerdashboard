@@ -4868,18 +4868,27 @@ button:disabled {
   display: flow-root;
 }
 
+.gor-firehazard .hazard-image {
+  background-image: url(./images/hazard-strip.svg);
+  width: 103%;
+  float: left;
+  margin-top: -20px;
+  height: 8px;
+  margin-left: -20px;
+}
+
 .gor-firehazard .gor-firehazard-header {
   width: 100%;
   padding: 2%;
   font-size: 26px;
   color: #666666;
-  margin-top: 5%;
+  margin-top: 3%;
   border-bottom: 2px solid #dbdbdb;
   box-sizing: border-box;
 }
 
 .gor-firehazard .gor-firehazard-header .gor-caution-image {
-  background-position: 212px 284px;
+  background-position: 131px 299px;
   background-size: 1407%;
   width: 128px;
   height: 128px;
@@ -4932,18 +4941,21 @@ button:disabled {
   width: 25px;
   height: 25px;
   float: left;
-  background-position: -226px -52px;
 }
 
 .gor-firehazard .gor-shutter-section .gor-image-status.progress {
-  background-image: url(images/whiteSpinner.svg);
+  background-image: url(images/loader.svg);
   background-size: contain;
-  background-color: red;
+  background-position: -225px -50px;
 }
 
 .gor-firehazard .gor-shutter-section .gor-image-status.failed {
-  background-position: 626px -162px;
+  background-position: 418px -172px;
   background-size: 2890%;
+}
+
+.gor-firehazard .gor-shutter-section .gor-image-status.cleared {
+  background-position: -225px -52px;
 }
 
 .gor-firehazard .gor-shutter-section .gor-status-text {
@@ -4972,22 +4984,22 @@ button:disabled {
 }
 
 .gor-firehazard .gor-shutter-section .gor-shutter-status-box .gor-shutter-status .gor-shutter-image-status {
-  width: 17px;
+  width: 16px;
   height: 16px;
   float: left;
 }
 
 .gor-firehazard .gor-shutter-section .gor-shutter-status-box .gor-shutter-status .gor-shutter-image-status.cleared {
-  background-position: -425px -77px;
+  background-position: -426px -77px;
 }
 
 .gor-firehazard .gor-shutter-section .gor-shutter-status-box .gor-shutter-status .gor-shutter-image-status.failed {
-  background-position: 301px -81px;
-  background-size: 1490%;
+  background-position: 251px -102px;
+  background-size: 2695%;
 }
 
 .gor-firehazard .gor-shutter-section .gor-shutter-status-box .gor-shutter-status .gor-shutter-image-status.progress {
-  background-image: url(images/whiteSpinner.svg);
+  background-image: url(images/loader.svg);
   background-size: contain;
 }
 

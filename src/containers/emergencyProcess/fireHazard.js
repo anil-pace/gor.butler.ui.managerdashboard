@@ -15,7 +15,7 @@ class FireHazard extends React.Component{
   }
   _removeThisModal() {
     this.props.removeModal();
-     //this.props.setFireHazrdFlag(true);
+    //this.props.setFireHazrdFlag(true);
    }
    componentWillMount(){
     var limit=(this.props.config.fire_emergency_enable_resume_after)*60;
@@ -101,6 +101,14 @@ class FireHazard extends React.Component{
   return marker;
 }
 
+ // shouldComponentUpdate(nextProps) {
+ //        if(nextProps.firehazadflag ===true) {
+ //            return false;
+ //        }
+ //        else
+ //        return true;
+ //    }
+
 render()
 {   
   var shutterFlag=escapePathFlag=false,location,escapePathFlag,marker;
@@ -112,6 +120,7 @@ render()
   return (
 
     <div className='gor-modal-content gor-firehazard'>
+    <span className='hazard-image'></span>
     <span className="close" onClick={this._removeThisModal.bind(this)}>×</span>
     <div className='gor-firehazard-header'>
     <span className='gor-caution-image'></span>
@@ -133,7 +142,7 @@ render()
     </span> 
     </div>
     <div className={escapePathFlag? "gor-shutter-section":"gor-shutter-section hidden"}>
-    <span className={this.props.fireHazard.escapePath!=="cleared"?(this.props.fireHazard.escapePath=="in_progress"? "gor-image-status progress":"gor-image-status failed"):"gor-image-status"}>
+    <span className={this.props.fireHazard.escapePath!=="cleared"?(this.props.fireHazard.escapePath=="in_progress"? "gor-image-status progress":"gor-image-status failed"):"gor-image-status cleared"}>
     </span>
     <span className="gor-status-text">
     <FormattedMessage id='operation.fire.escape' 

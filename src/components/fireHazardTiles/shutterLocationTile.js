@@ -12,7 +12,7 @@ class ShutterLocationTile extends React.Component{
 		 <span className="gor-shutter-status">
 
               <span className={"gor-shutter-image-status " + this.props.shutterStatus}></span>
-              <span className="gor-shutter-text-status">{"Location"+this.props.shutterName}</span>
+              <span className="gor-shutter-text-status">{this.props.shutterName}</span>
 
          </span>
 		);

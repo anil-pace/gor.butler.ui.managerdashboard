@@ -67,7 +67,8 @@ class Tabs extends React.Component{
         size: 'large', // large, medium or small,
       closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: false
-      });    
+      });  
+
   }
     _FireEmergencyRelease(){
       modal.add(fireHazard, {
@@ -75,7 +76,7 @@ class Tabs extends React.Component{
         size: 'large customColor', // large, medium or small,
       closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: false
-      });    
+      });     
   }
   componentWillReceiveProps(nextProps){
     if(nextProps.system_data=== SOFT_MANUAL && (this.props.system_data=== HARD || !this.props.system_data))
@@ -223,6 +224,7 @@ singleNotification=<GorToastify onClick={this._openPopup.bind(this)}>
                     defaultMessage="VIEW DETAILS"
                             description="Text button to viewdetails"/>
                   </span>
+                
      </div>
     </GorToastify>
 } 
