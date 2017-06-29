@@ -105,16 +105,16 @@ class DownloadGRNTile extends React.Component {
     }
     return result;
   }
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   if (
-  //     nextProps.reportsHistChanged !== this.props.reportsHistChanged ||
-  //     this.state.stateChanged !== nextState.stateChanged ||
-  //     nextProps.errorCode !== this.props.errorCode
-  //   ) {
-  //     return true;
-  //   }
-  //   return false;
-  // }
+  shouldComponentUpdate(nextProps, nextState) {
+    if (
+      JSON.stringify(this.props.reportsHistory) ===
+      JSON.stringify(nextProps.reportsHistory)
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   render() {
     const fileType = [
