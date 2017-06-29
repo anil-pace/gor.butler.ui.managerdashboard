@@ -3993,11 +3993,6 @@ input[type="checkbox"] {
   z-index: 0;
 }
 
-.react-redux-modal .rrm-holder .scroll .customColor {
-  background-color: rgba(250, 0, 0, 0.4);
-  min-height: 100vh;
-}
-
 .gor-logout {
   width: 40%;
   min-height: 16.25rem;
@@ -4858,6 +4853,11 @@ button:disabled {
   border-radius: 3px;
   border: 1px solid #AAAAAA;
   margin-left: 40%;
+}
+
+.customColor {
+  background-color: rgba(250, 0, 0, 0.4);
+  min-height: 100vh;
 }
 
 .gor-firehazard {
@@ -6851,7 +6851,7 @@ button:disabled {
   right: 10px;
   top: 60px;
   box-sizing: border-box;
-  z-index: 99;
+  z-index: 1;
   border-radius: 6px;
   cursor: pointer;
 }

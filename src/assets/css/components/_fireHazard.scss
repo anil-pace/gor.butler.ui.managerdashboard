@@ -1,5 +1,9 @@
 @import '../abstracts/functions';
 
+.customColor{
+	  background-color: rgba(250,0,0, 0.4);
+    min-height: 100vh;
+}
 .gor-firehazard{
 	width:65%;
 	min-height:calculateRem(250px);
