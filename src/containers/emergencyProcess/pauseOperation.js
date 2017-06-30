@@ -1,11 +1,11 @@
 import React  from 'react';
 import { connect } from 'react-redux' ;
 import {userRequest} from '../../actions/userActions';
-import { FormattedMessage,FormattedPlural } from 'react-intl'; 
+import { FormattedMessage } from 'react-intl'; 
 import {validatePassword, modalFormReset} from '../../actions/validationActions';
 import { emptyField } from '../../utilities/fieldCheck';
 import {LOGIN_URL} from '../../constants/configConstants';
-import {ERROR,APP_JSON,POST,SUCCESS,AUTH_USER,PAUSE_OPERATION} from '../../constants/frontEndConstants';
+import {ERROR,APP_JSON,POST,SUCCESS,PAUSE_OPERATION} from '../../constants/frontEndConstants';
 
 class PauseOperation extends React.Component{
  

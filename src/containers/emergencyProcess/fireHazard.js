@@ -3,7 +3,6 @@ import { connect } from 'react-redux' ;
 import {modal} from 'react-redux-modal';
 import { FormattedMessage } from 'react-intl'; 
 import {setFireHazrdFlag} from '../../actions/tabActions';
-import {AUTH_LOGIN,ERROR,TYPING,APP_JSON,POST,SUCCESS} from '../../constants/frontEndConstants';
 import ResumeOperation from './resumeOperation'; 
 import ShutterLocationTile from '../../components/fireHazardTiles/shutterLocationTile';
 import {getSecondsDiff} from '../../utilities/getDaysDiff';
@@ -17,21 +16,20 @@ class FireHazard extends React.Component{
     this.props.removeModal();
     this.props.setFireHazrdFlag(true);
    }
-   componentWillMount(){
-    var limit=(this.props.config.fire_emergency_enable_resume_after)*60;
+   
+  componentDidMount(){
+    if(this.props.checkingList){
+      this._removeThisModal();  //If manager is on safety checklist page, don't show the release modal      
+    }
+     var limit=(this.props.config.fire_emergency_enable_resume_after)*60;
     var duration=(limit-getSecondsDiff(this.props.fireHazard.emergencyStartTime))*1000;
     
-    if(this.state.buttonDisable)
+  if(this.state.buttonDisable)
     {
     setTimeout(function(){
       this.setState({buttonDisable:false})
     }.bind(this),duration); 
   }
-  }
-  componentDidMount(){
-    if(this.props.checkingList){
-      this._removeThisModal();  //If manager is on safety checklist page, don't show the release modal      
-    }
 
   }
   componentWillReceiveProps(nextProps){
@@ -58,7 +56,6 @@ class FireHazard extends React.Component{
     var shutterNuber=key.length;
     var Imageclass;
     var shutterWrap=[];
-    var emergencyStartTime=this.props.fireHazard.emergencyStartTime;
     for(var i=0;i<shutterNuber;i++){
       switch(shutters[key[i]]){
         case "failed": 
@@ -70,7 +67,7 @@ class FireHazard extends React.Component{
         default:
         Imageclass="progress"
       }
-      var singleShutter=<ShutterLocationTile shutterName={key[i]} shutterStatus={Imageclass}>
+      var singleShutter=<ShutterLocationTile key={i} shutterName={key[i]} shutterStatus={Imageclass}>
       </ShutterLocationTile>
       shutterWrap.push(singleShutter);
     }
@@ -98,7 +95,7 @@ class FireHazard extends React.Component{
   else if(f>0){
     marker="gor-image-status failed"
   }
-  else
+  else if(c>0)
   { 
     marker="gor-image-status cleared"
   }
@@ -107,7 +104,7 @@ class FireHazard extends React.Component{
 
 render()
 {   
-  var shutterFlag=escapePathFlag=false,location,escapePathFlag,marker;
+  var shutterFlag=false,escapePathFlag=false;
   var  shutterNuber=Object.keys(this.props.fireHazard.shutters).length;
   shutterFlag=shutterNuber===0;
   escapePathFlag=(this.props.fireHazard.escapePath!=="not_found")?true:false;
@@ -138,7 +135,7 @@ render()
     </span> 
     </div>
     <div className={escapePathFlag? "gor-shutter-section":"gor-shutter-section hidden"}>
-    <span className={this.props.fireHazard.escapePath!=="cleared"?(this.props.fireHazard.escapePath=="in_progress"? "gor-image-status progress":"gor-image-status failed"):"gor-image-status cleared"}>
+    <span className={this.props.fireHazard.escapePath!=="cleared"?(this.props.fireHazard.escapePath==="in_progress"? "gor-image-status progress":"gor-image-status failed"):"gor-image-status cleared"}>
     </span>
     <span className="gor-status-text">
     <FormattedMessage id='operation.fire.escape' 

@@ -1,19 +1,15 @@
 import React  from 'react';
 import { connect } from 'react-redux' ;
 import {userRequest} from '../../actions/userActions';
-import { FormattedMessage,FormattedPlural } from 'react-intl'; 
+import { FormattedMessage } from 'react-intl'; 
 import {modal} from 'react-redux-modal';
 import {validatePassword, modalFormReset} from '../../actions/validationActions';
 import { emptyField } from '../../utilities/fieldCheck';
 import {LOGIN_URL} from '../../constants/configConstants';
-import {ERROR,TYPING,APP_JSON,POST,SUCCESS,RESUME_OPERATION,EMERGENCY_FIRE} from '../../constants/frontEndConstants';
+import {ERROR,APP_JSON,POST,SUCCESS,RESUME_OPERATION,EMERGENCY_FIRE} from '../../constants/frontEndConstants';
 import SafetyChecklist from './safetyChecklist';
 
 class ResumeOperation extends React.Component{
-  constructor(props) 
-  {
-      super(props);  
-  }
   _removeThisModal() {
       this.props.resetForm();
       this.props.removeModal();
