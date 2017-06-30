@@ -25,6 +25,11 @@ class Tabs extends React.Component{
      * @param  {[string]} selTab [Name of selected tab]
      * @return {[none]}        
      */
+     constructor(props) 
+  {  
+    super(props);
+    this._openPopup =  this._openPopup.bind(this);
+  }
 
     _openPopup(){
       this.props.setFireHazrdFlag(false);
@@ -206,7 +211,7 @@ class Tabs extends React.Component{
   var timeText= <FormattedRelative value={convertDatetoMili}/>;
 
  if(this.props.fireHazardNotifyTime){
-singleNotification=<GorToastify key={1} onClick={this._openPopup.bind(this)}>
+singleNotification=<GorToastify key={1} onClick={this._openPopup}>
 <div className="gor-toastify-content info">
                   <p className="msg-content">
                    <FormattedMessage id='operation.alert.resumed' 
@@ -221,7 +226,7 @@ singleNotification=<GorToastify key={1} onClick={this._openPopup.bind(this)}>
     </GorToastify>
 }else
 {
-  singleNotification=<GorToastify key={2} onClick={this._openPopup.bind(this)}>
+  singleNotification=<GorToastify key={2} onClick={this._openPopup}>
    <div className="gor-toastify-content">
                   <p className="msg-content">
                    <FormattedMessage id='operation.alert.triggeremergency' 

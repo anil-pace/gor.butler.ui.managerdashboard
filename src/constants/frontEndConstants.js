@@ -24,6 +24,16 @@ export const DATA_SUBSCRIPTION_PACKET="DATA_SUBSCRIPTION_PACKET";
 export const SET_DEFAULT_RANGE="SET_DEFAULT_RANGE";
 export const TEXTBOX_STATUS="TEXTBOX_STATUS";
 export const HARD_EMERGENCY="hard_emergency";
+export const FAILED="failed";
+export const CLEARED="cleared";
+export const PROGRESS="progress";
+export const NOT_FOUND="not_found";
+export const IN_PROGRESS="in_progress";
+
+
+
+
+
 
 
 /*Constants for Notification Web Sockets*/
