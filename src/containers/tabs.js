@@ -28,6 +28,7 @@ class Tabs extends React.Component{
      constructor(props) 
   {  
     super(props);
+    this.state={timeZone:sessionStorage.timeOffset};
     this._openPopup =  this._openPopup.bind(this);
   }
 
@@ -205,10 +206,9 @@ class Tabs extends React.Component{
    _processNotification(){
   
   var notificationWrap=[],singleNotification,time,timeText;
-  var convertDate=this.props.fireHazardNotifyTime? new Date(this.props.fireHazardNotifyTime): new Date(this.props.fireHazardStartTime);
-  convertDate.setMinutes(convertDate.getMinutes() - convertDate.getTimezoneOffset());
-  var convertDatetoMili=convertDate.getTime();
-  var timeText= <FormattedRelative value={convertDatetoMili}/>;
+  var originalDate=this.props.fireHazardNotifyTime? new Date(this.props.fireHazardNotifyTime): new Date(this.props.fireHazardStartTime);
+  var convertedDate =  originalDate.getTime(); 
+  var timeText= <FormattedRelative value={convertedDate} timeZone={this.state.timeZone}/>;
 
  if(this.props.fireHazardNotifyTime){
 singleNotification=<GorToastify key={1} onClick={this._openPopup}>

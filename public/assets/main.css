@@ -4860,6 +4860,10 @@ button:disabled {
   min-height: 100vh;
 }
 
+.rr-title-actions {
+  display: none;
+}
+
 .gor-firehazard {
   width: 65%;
   min-height: 15.625rem;
