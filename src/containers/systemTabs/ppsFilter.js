@@ -134,6 +134,17 @@ class PPSFilter extends React.Component{
     }
 
     _clearFilter(){
+        this.props.ppsfilterState({
+            tokenSelected: {
+                "STATUS": ["all"],
+                "MODE": ["all"]
+            },
+            searchQuery: {
+                "PPS ID": '',
+                "OPERATOR ASSIGNED": ""
+            },
+            rangeSelected: {"minValue": ["-1"], "maxValue": ["500"]}
+        })
         hashHistory.push({pathname: "/system/pps", query: {}})
 
     } 

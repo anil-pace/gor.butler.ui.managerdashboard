@@ -1,4 +1,4 @@
-import { AJAX_CALL,INVOICE_VALIDATION,MASTER_UPLOAD_PROCESSING,MASTER_UPLOAD_SUCCESS,
+import { AJAX_CALL,INVOICE_VALIDATION,MASTER_UPLOAD_PROCESSING,MASTER_UPLOAD_SUCCESS,REPORTS_HISTORY, GRN_HISTORY,
 UPLOAD_HISTORY,UPDATE_FILE_SIZE,UTILITY_TAB_REFRESHED,STOCK_LEDGER_SKU_VALIDATION,CLEAR_STOCK_LEDGER_SKU_VALIDATION} from '../constants/frontEndConstants'
 
 
@@ -73,6 +73,7 @@ export function uploadMasterDataSuccess(data){
     data
   }
 }
+
 export function uploadMasterDataHistory(data){
   return {
     type: UPLOAD_HISTORY,
@@ -80,6 +81,18 @@ export function uploadMasterDataHistory(data){
   }
 }
 
+export function uploadReportHistory(data){
+  return {
+    type: REPORTS_HISTORY,
+    data
+  }
+}
+export function uploadGRNHistory(data){
+  return {
+    type: GRN_HISTORY,
+    data
+  }
+}
 export function updateMaxFileSize(data){
   return {
     type: UPDATE_FILE_SIZE,

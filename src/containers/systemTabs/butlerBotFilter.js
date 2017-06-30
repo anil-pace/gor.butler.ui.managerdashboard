@@ -109,6 +109,12 @@ class ButlerBotFilter extends React.Component{
     }
 
     _clearFilter() {
+        this.props.butlerfilterState({
+            tokenSelected: {"STATUS": ["any"], "MODE": ["any"]}, searchQuery: {
+                "SPECIFIC LOCATION/ZONE":null,
+                "BOT ID":null
+            },
+        });
         hashHistory.push({pathname: "/system/butlerbots", query: {}})
         
     }

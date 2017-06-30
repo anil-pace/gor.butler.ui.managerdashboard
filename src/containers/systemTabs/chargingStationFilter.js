@@ -118,6 +118,14 @@ class ChargingStationFilter extends React.Component {
     }
 
     _clearFilter() {
+        this.props.chargingstationfilterState({
+            tokenSelected: {
+                "DOCKING STATUS": ["all"],
+                "OPERATING MODE":["all"]
+            }, searchQuery: {
+                "CHARGING STATION ID": ''
+            }
+        });
         hashHistory.push({pathname: "/system/chargingstation", query: {}})
     }
 

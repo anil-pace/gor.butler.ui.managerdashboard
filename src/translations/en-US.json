@@ -569,10 +569,160 @@
     "filepath": "./src/components/utilityComponents/accordianBar.js"
   },
   {
+    "id": "utility.downloadGRN.status.heading",
+    "description": "GRN Status",
+    "defaultMessage": "GRN Status",
+    "filepath": "./src/components/utilityComponents/downloadGRTile.js"
+  },
+  {
+    "id": "utility.downloadGRN.stnPlaceholder",
+    "description": "Enter STN Number",
+    "defaultMessage": "Enter STN Number",
+    "filepath": "./src/components/utilityComponents/downloadGRTile.js"
+  },
+  {
+    "id": "utility.downloadGRN.formatPlaceholder",
+    "description": "Enter STN Number",
+    "defaultMessage": "Select File type",
+    "filepath": "./src/components/utilityComponents/downloadGRTile.js"
+  },
+  {
+    "id": "utility.reportsHistory.fileName",
+    "description": "file name",
+    "defaultMessage": "File:",
+    "filepath": "./src/components/utilityComponents/downloadGRTile.js"
+  },
+  {
+    "id": "utility.uploadHist.success",
+    "description": "Status",
+    "defaultMessage": "Status: {status}",
+    "filepath": "./src/components/utilityComponents/downloadGRTile.js"
+  },
+  {
+    "id": "utility.downloadGRN.label",
+    "description": "STN number:",
+    "defaultMessage": "STN number:",
+    "filepath": "./src/components/utilityComponents/downloadGRTile.js"
+  },
+  {
+    "id": "utility.downloadGRN.stnError",
+    "description": "Please enter correct STN number",
+    "defaultMessage": "Please enter correct STN number",
+    "filepath": "./src/components/utilityComponents/downloadGRTile.js"
+  },
+  {
+    "id": "utility.downloadGRN.head",
+    "description": "Generate Report",
+    "defaultMessage": "Generate Report",
+    "filepath": "./src/components/utilityComponents/downloadGRTile.js"
+  },
+  {
+    "id": "utility.downloadGRN.history",
+    "description": "Report History",
+    "defaultMessage": "Report History",
+    "filepath": "./src/components/utilityComponents/downloadGRTile.js"
+  },
+  {
+    "id": "utility.downloadReport.head",
+    "description": "Download Reports",
+    "defaultMessage": "Download Reports",
+    "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+  },
+  {
+    "id": "utility.downloadReport.Status.heading",
+    "description": "Reports Status",
+    "defaultMessage": "Reports Status",
+    "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+  },
+  {
+    "id": "utility.downloadRprts.CategoryLabel",
+    "description": "Category",
+    "defaultMessage": "Category",
+    "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+  },
+  {
+    "id": "utility.downloadRprts.CategoryPlchldr",
+    "description": "Select Category",
+    "defaultMessage": "Select Category",
+    "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+  },
+  {
+    "id": "utility.downloadRprts.CategoryInventory",
+    "description": "Inventory",
+    "defaultMessage": "Inventory",
+    "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+  },
+  {
+    "id": "utility.downloadRprts.FileFormatPlchldr",
+    "description": "Select File Format",
+    "defaultMessage": "Select File Format",
+    "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+  },
+  {
+    "id": "utility.downloadRprts.FileFormatLabel",
+    "description": "File Format",
+    "defaultMessage": "File Format",
+    "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+  },
+  {
+    "id": "utility.downloadRports.csvFormat",
+    "description": "Comma separated values (csv)",
+    "defaultMessage": "Comma separated values (csv)",
+    "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+  },
+  {
+    "id": "utiltiy.downloadRports.xlsFormat",
+    "description": "ExceL Spreadsheet (xlsx)",
+    "defaultMessage": "ExceL Spreadsheet (xlsx)",
+    "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+  },
+  {
+    "id": "utility.reportsHistory.clickToDownload",
+    "description": "file name",
+    "defaultMessage": "Click here to download",
+    "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+  },
+  {
+    "id": "utility.uploadHist.success",
+    "description": "Status",
+    "defaultMessage": "Status: {status}",
+    "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+  },
+  {
+    "id": "utility.downloadReports.head",
+    "description": "Generate Report",
+    "defaultMessage": "Generate Report",
+    "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+  },
+  {
+    "id": "utility.downloadReports.history",
+    "description": "Report History",
+    "defaultMessage": "Report History",
+    "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+  },
+  {
     "id": "utility.uploadHistory.head",
     "description": "Upload History",
     "defaultMessage": "Upload History",
     "filepath": "./src/components/utilityComponents/masterUploadTile.js"
+  },
+  {
+    "id": "utility.itemRecall.head",
+    "description": "Expired Items",
+    "defaultMessage": "Expired Items",
+    "filepath": "./src/components/utilityComponents/scriptsTile.js"
+  },
+  {
+    "id": "utility.itemRecall.subHead",
+    "description": "(Recall all the expired items)",
+    "defaultMessage": "(Recall all the expired items)",
+    "filepath": "./src/components/utilityComponents/scriptsTile.js"
+  },
+  {
+    "id": "utility.itemRecall.buttonText",
+    "description": "RECALL",
+    "defaultMessage": "RECALL",
+    "filepath": "./src/components/utilityComponents/scriptsTile.js"
   },
   {
     "id": "utility.downDlabel",
@@ -2463,7 +2613,7 @@
   {
     "id": "orderlist.pendingOrders",
     "description": "pendingOrders header ordertable",
-    "defaultMessage": "{pendingOrders} orders pending",
+    "defaultMessage": "{pendingOrders, number} {pendingOrders, plural, one {order} other {orders}} pending",
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
@@ -2481,7 +2631,7 @@
   {
     "id": "orderlist.totalCompletedOrder",
     "description": "totalCompletedOrder header ordertable",
-    "defaultMessage": "{totalCompletedOrder} orders completed",
+    "defaultMessage": "{totalCompletedOrder, number} {totalCompletedOrder, plural, one {order} other {orders}} completed",
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
@@ -2493,7 +2643,7 @@
   {
     "id": "orderlist.itemsPerOrder",
     "description": "itemsPerOrder header ordertable",
-    "defaultMessage": "Avg {itemsPerOrder} items/order",
+    "defaultMessage": "Avg {itemsPerOrder, number} {itemsPerOrder, plural, one {item} other {items}}/order",
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
@@ -2593,7 +2743,7 @@
   {
     "id": "WavesTable.pending.status",
     "description": "pending status for WavesTable",
-    "defaultMessage": "{pendingWave} waves pending",
+    "defaultMessage": "{pendingWave, number} {pendingWave, plural, one {wave} other {waves}} pending",
     "filepath": "./src/containers/orderTab/waveTable.js"
   },
   {
@@ -2605,7 +2755,7 @@
   {
     "id": "WavesTable.progress.status",
     "description": "progress status for WavesTable",
-    "defaultMessage": "{progressWave} waves in progress",
+    "defaultMessage": "{progressWave, number} {progressWave, plural, one {wave} other {waves}} in progress",
     "filepath": "./src/containers/orderTab/waveTable.js"
   },
   {
@@ -2629,7 +2779,7 @@
   {
     "id": "WavesTable.completed.status",
     "description": "completed status for WavesTable",
-    "defaultMessage": "{completedWaves} waves completed",
+    "defaultMessage": "{completedWaves, number} {completedWaves, plural, one {wave} other {waves}} completed",
     "filepath": "./src/containers/orderTab/waveTable.js"
   },
   {
@@ -2641,7 +2791,7 @@
   {
     "id": "WavesTable.totalOrders.status",
     "description": "totalOrders status for WavesTable",
-    "defaultMessage": "{totalOrders} orders",
+    "defaultMessage": "{totalOrders, number} {totalOrders, plural, one {order} other {orders}}",
     "filepath": "./src/containers/orderTab/waveTable.js"
   },
   {
@@ -4137,7 +4287,7 @@
     "filepath": "./src/containers/utilityTab.js"
   },
   {
-    "id": "utility.runScript.head",
+    "id": "utility.scriptsTile.head",
     "description": "Run Script",
     "defaultMessage": "Run Script",
     "filepath": "./src/containers/utilityTab.js"
@@ -4149,9 +4299,45 @@
     "filepath": "./src/containers/utilityTab.js"
   },
   {
+    "id": "utility.downloadRprts.CategoryLabel",
+    "description": "Category",
+    "defaultMessage": "Category",
+    "filepath": "./src/containers/utilityTab.js"
+  },
+  {
+    "id": "utility.downloadRprts.CategoryPlchldr",
+    "description": "Select Category",
+    "defaultMessage": "Select Category",
+    "filepath": "./src/containers/utilityTab.js"
+  },
+  {
+    "id": "utility.downloadRprts.FileFormatPlchldr",
+    "description": "Select File Format",
+    "defaultMessage": "Select File Format",
+    "filepath": "./src/containers/utilityTab.js"
+  },
+  {
+    "id": "utility.downloadRprts.FileFormatLabel",
+    "description": "File Format",
+    "defaultMessage": "File Format",
+    "filepath": "./src/containers/utilityTab.js"
+  },
+  {
+    "id": "utility.downloadRports.csvFormat",
+    "description": "Comma separated values (csv)",
+    "defaultMessage": "Comma separated values (csv)",
+    "filepath": "./src/containers/utilityTab.js"
+  },
+  {
+    "id": "utiltiy.downloadRports.xlsFormat",
+    "description": "ExceL Spreadsheet (xlsx)",
+    "defaultMessage": "ExceL Spreadsheet (xlsx)",
+    "filepath": "./src/containers/utilityTab.js"
+  },
+  {
     "id": "utility.goodsRcvdNotes.head",
-    "description": "Download Goods Recieved Notes",
-    "defaultMessage": "Download Goods Recieved Notes",
+    "description": "Goods Recieved Notes",
+    "defaultMessage": "Goods Recieved Notes",
     "filepath": "./src/containers/utilityTab.js"
   },
   {
@@ -4170,24 +4356,6 @@
     "id": "utility.uploadBtn.label",
     "description": "Upload Master Data",
     "defaultMessage": "Upload Master Data",
-    "filepath": "./src/containers/utilityTab.js"
-  },
-  {
-    "id": "utility.itemRecall.head",
-    "description": "Expired Items",
-    "defaultMessage": "Expired Items",
-    "filepath": "./src/containers/utilityTab.js"
-  },
-  {
-    "id": "utility.itemRecall.subHead",
-    "description": "(Recall all the expired items)",
-    "defaultMessage": "(Recall all the expired items)",
-    "filepath": "./src/containers/utilityTab.js"
-  },
-  {
-    "id": "utility.itemRecall.buttonText",
-    "description": "RECALL",
-    "defaultMessage": "RECALL",
     "filepath": "./src/containers/utilityTab.js"
   },
   {

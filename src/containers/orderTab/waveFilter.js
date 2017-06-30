@@ -92,6 +92,14 @@ class WaveFilter extends React.Component {
     }
 
     _clearFilter() {
+        this.props.wavefilterState({
+            tokenSelected: {
+                "STATUS": ["any"]
+            },
+            searchQuery: {
+                "WAVE ID": ''
+            }
+        });
         hashHistory.push({pathname: "/orders/waves", query: {}})
     }
 
