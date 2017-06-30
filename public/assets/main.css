@@ -2,6 +2,7 @@
 Reset Stylesheet v0.0.1
 Author: Himanshu Saraswat
 */
+@import url("../abstracts/functions");
 html, body, div, span, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 abbr, address,
@@ -163,11 +164,13 @@ body {
 .header-offline-icon,
 .user-icon,
 .overview-tile-ontime-icon,
+.gor-caution-image,
+.gor-image-status, .gor-shutter-image-status,
 .statusOl, .statusAl, .iStock, .iAudit, .iPick, .gor-login-user, .gor-login-password, .gor-login-error, .gor-tick, .gor-question, .gor-tick-white, .gor-remove-white, .gor-error-white, .gor-login-user-error, .gor-login-password-error, .gor-question-2, .gor-operation-tick, .gor-alert-lg,
 .gor-dropdown-open, .gor-dropdown-close, .gor-caution, .gor-delay-icon,
 .gor-emergency-dropdown-close, .gor-emergency-dropdown-open, .gor-info-icon, .gor-selected-icon, .not-bell, .searchIcon, .not-statusIcon,
 .calloutArr, .gor-audit-info-icon {
-  background-image: url(./images/icons-2.svg);
+  background-image: url(./images/icons.svg);
 }
 
 .fk-logo,
@@ -996,6 +999,17 @@ body {
 
 .gor-tabs .gorTab .gor-main-block .gor-normal-tab {
   background: #4d5055;
+}
+
+.gor-tabs .gorTab .gor-main-block .gor-toastify {
+  position: fixed;
+  width: 400px;
+  height: 83px;
+  border-radius: 6px;
+  background-color: #ec1c2d;
+  box-shadow: 0 4px 14px 0 rgba(159, 0, 0, 0.3);
+  right: 0;
+  top: 60px;
 }
 
 .gor-tabs .gorTab .gorInline {
@@ -4842,6 +4856,188 @@ button:disabled {
   margin-left: 40%;
 }
 
+.customColor {
+  background-color: rgba(250, 0, 0, 0.4);
+  min-height: 100vh;
+}
+
+.rr-title-actions {
+  display: none;
+}
+
+.gor-firehazard {
+  width: 65%;
+  min-height: 15.625rem;
+  border-radius: 1%;
+  text-align: left;
+  display: flow-root;
+}
+
+.gor-firehazard .gor-shutter-text-status {
+  font-size: 16px;
+  text-align: left;
+  color: #383838;
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-left: 20px;
+  overflow: hidden;
+}
+
+.gor-firehazard .gor-shutter-image-status {
+  width: 16px;
+  height: 16px;
+  float: left;
+}
+
+.gor-firehazard .gor-shutter-image-status.cleared {
+  background-position: -426px -77px;
+}
+
+.gor-firehazard .gor-shutter-image-status.failed {
+  background-position: 251px -102px;
+  background-size: 2695%;
+}
+
+.gor-firehazard .gor-shutter-image-status.progress {
+  background-image: url(images/loader.svg);
+  background-size: contain;
+}
+
+.gor-firehazard .gor-shutter-status-box {
+  float: left;
+  clear: both;
+}
+
+.gor-firehazard .gor-shutter-status-box .gor-shutter-status {
+  width: 190px;
+  height: 40px;
+  padding: 10px;
+  display: block;
+  background-color: #f2f2f2;
+  float: left;
+  margin-right: 10px;
+  margin-top: 10px;
+  box-sizing: border-box;
+}
+
+.gor-firehazard .gor-image-status {
+  width: 25px;
+  height: 25px;
+  float: left;
+}
+
+.gor-firehazard .gor-image-status.progress {
+  background-image: url(images/loader.svg);
+  background-size: contain;
+  background-position: -225px -50px;
+}
+
+.gor-firehazard .gor-image-status.failed {
+  background-position: 418px -172px;
+  background-size: 2890%;
+}
+
+.gor-firehazard .gor-image-status.cleared {
+  background-position: -225px -52px;
+}
+
+.gor-firehazard .hazard-image {
+  background-image: url(./images/hazard-strip.svg);
+  width: 103%;
+  float: left;
+  margin-top: -20px;
+  height: 8px;
+  margin-left: -20px;
+}
+
+.gor-firehazard .gor-firehazard-header {
+  width: 100%;
+  padding: 2%;
+  font-size: 26px;
+  color: #666666;
+  margin-top: 3%;
+  border-bottom: 2px solid #dbdbdb;
+  box-sizing: border-box;
+}
+
+.gor-firehazard .gor-firehazard-header .gor-caution-image {
+  background-position: 131px 299px;
+  background-size: 1407%;
+  width: 128px;
+  height: 128px;
+  float: left;
+}
+
+.gor-firehazard .gor-firehazard-header .gor-caution-text-header {
+  font-family: Source Sans Pro;
+  font-size: 36px;
+  font-weight: bold;
+  text-align: left;
+  color: #ef301e;
+  padding-left: 5%;
+  padding-bottom: 5px;
+}
+
+.gor-firehazard .gor-firehazard-header .gor-caution-text {
+  padding-left: 5%;
+  padding-top: 20px;
+  font-family: Source Sans Pro;
+  font-size: 80%;
+  line-height: 1.5;
+  text-align: left;
+  color: #383838;
+  display: inline-block;
+  width: 75%;
+  height: 70px;
+}
+
+.gor-firehazard .gor-firehazard-header .gor-caution-text .gor-bold-underline {
+  font-weight: bold;
+}
+
+.gor-firehazard .gor-shutter-section {
+  float: left;
+  width: 100%;
+  border-bottom: 2px solid #dbdbdb;
+  padding: 10px;
+  box-sizing: border-box;
+  max-height: 200px;
+  overflow: scroll;
+  vertical-align: middle;
+}
+
+.gor-firehazard .gor-shutter-section.hidden {
+  display: none;
+}
+
+.gor-firehazard .gor-shutter-section .gor-status-text {
+  font-size: 18px;
+  font-weight: 600;
+  text-align: left;
+  color: #383838;
+  margin-left: 15px;
+}
+
+.gor-firehazard .gor-resume-btn {
+  width: 220px;
+  height: 50px;
+  border-radius: 6px;
+  background-color: #ec1c2d;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  font-size: 18px;
+  color: #ffffff;
+  font-weight: 600;
+  float: right;
+  margin-top: 10px;
+}
+
+.gor-firehazard .gor-resume-btn.disable {
+  cursor: default;
+  opacity: 0.3;
+}
+
 .gor-audit-detail {
   font-family: 'Source Sans Pro', sans-serif;
   width: 80%;
@@ -6667,6 +6863,61 @@ button:disabled {
   border-radius: 3px;
   box-shadow: 0 0.0625rem 0 rgba(0, 0, 0, 0.06);
   box-sizing: border-box;
+}
+
+.gor-toastify {
+  position: fixed;
+  box-shadow: 0 4px 14px 0 rgba(159, 0, 0, 0.3);
+  right: 10px;
+  top: 60px;
+  box-sizing: border-box;
+  z-index: 2;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.gor-toastify .gor-toastify-content {
+  line-height: 1.38;
+  font-weight: 600;
+  color: #ffffff;
+  height: 44px;
+  font-size: 16px;
+  text-align: left;
+  background-color: #ec1c2d;
+  padding: 25px;
+  border-radius: 6px;
+}
+
+.gor-toastify .gor-toastify-content.info {
+  background-color: #3cb669;
+}
+
+.gor-toastify .gor-toastify-content .msg-content {
+  width: 300px;
+  display: inline-block;
+  margin-top: -10px;
+}
+
+.gor-toastify .gor-toastify-content .gor-toastify-details {
+  width: 70px;
+  height: 50px;
+  font-size: 14px;
+  text-align: center;
+  float: right;
+  border-left: solid 1px rgba(255, 255, 255, 0.2);
+}
+
+.gor-toastify .gor-toastify-content .gor-toastify-details.closeButton {
+  font-size: 24px;
+}
+
+.gor-toastify .gor-toastify-content .gor-toastify-updated-time {
+  opacity: 0.8;
+  position: relative;
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
 }
 
 .gor-list-none {

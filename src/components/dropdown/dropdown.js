@@ -24,6 +24,14 @@ class Dropdown extends Component {
     },0)
     
   }
+
+  shouldComponentUpdate(nextProps,nextState){
+    if (this.state.selected.value===nextState.selected.value)
+      {return false;}
+    else 
+      {return true;}
+  }
+
   render () {
     const defaultOption=this.state.selected
 

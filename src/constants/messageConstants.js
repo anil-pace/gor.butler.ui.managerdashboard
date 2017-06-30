@@ -173,6 +173,9 @@ export const E051=(<FormattedMessage id="emergency.resume.coreerror" description
       defaultMessage='Cannot connect to butler core'/>);
 export const E052=(<FormattedMessage id="emergency.resume.statuserror" description='Error while resuming operation' 
       defaultMessage='Emergency status not soft_manual'/>);
+export const E135=(<FormattedMessage id="emergency.resume.Softemergency" description='Soft emergency still there' 
+      defaultMessage='Soft emergency still there'/>);
+
 export const ES=(<FormattedMessage id="emergency.resume.success" description='Operations resumed' 
       defaultMessage='Operation resumed'/>);
 

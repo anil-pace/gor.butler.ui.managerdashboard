@@ -22,6 +22,7 @@ export  function tabsData(state={},action){
         "system_emergency":system_emergency,
         "system_data":system_data
       })
+                
       case GET_USERS:
       let users_online=0;
       if(action.data.header_data)

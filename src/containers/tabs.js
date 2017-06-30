@@ -3,16 +3,20 @@ import Tab from '../components/tabs/tab';
 import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
 import {tabSelected,subTabSelected} from '../actions/tabSelectAction';
+import {setFireHazrdFlag} from '../actions/tabActions';
 import {modal} from 'react-redux-modal';
 import {setInventorySpinner} from '../actions/inventoryActions';
 import {setAuditSpinner} from '../actions/auditActions';
 import {setButlerSpinner} from '../actions/spinnerAction';
 import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP,INVENTORY,AUDIT,
 FULFILLING_ORDERS,GOR_OFFLINE,GOR_ONLINE,GOR_NORMAL_TAB,GOR_FAIL,
-SOFT_MANUAL,HARD,SOFT,UTILITIES} from '../constants/frontEndConstants';
-import { FormattedMessage,FormattedNumber } from 'react-intl';
+SOFT_MANUAL,HARD,SOFT,UTILITIES,FIRE_EMERGENCY_POPUP_FLAG,EMERGENCY_FIRE} from '../constants/frontEndConstants';
+import { FormattedMessage,FormattedNumber,FormattedRelative } from 'react-intl';
 import OperationStop from '../containers/emergencyProcess/OperationStop';
 import EmergencyRelease from '../containers/emergencyProcess/emergencyRelease'; 
+import fireHazard from '../containers/emergencyProcess/fireHazard'; 
+import GorToastify from '../components/gor-toastify/gor-toastify';
+
 
 class Tabs extends React.Component{
 
@@ -21,6 +25,16 @@ class Tabs extends React.Component{
      * @param  {[string]} selTab [Name of selected tab]
      * @return {[none]}        
      */
+     constructor(props) 
+  {  
+    super(props);
+    this._openPopup =  this._openPopup.bind(this);
+  }
+
+    _openPopup(){
+      this.props.setFireHazrdFlag(false);
+  }
+
     handleTabClick(selTab){
     	/**
          * Displaying loader currently for User tab
@@ -41,15 +55,6 @@ class Tabs extends React.Component{
           this.props.setButlerSpinner(false);
           
         }
-
-       
-        
-        
-        // this.props.tabSelected(TAB_ROUTE_MAP[selTab]);
-        // this.props.subTabSelected(null);
-        // sessionStorage.setItem('nextView', TAB_ROUTE_MAP[selTab]);
-        // sessionStorage.setItem('selTab', TAB_ROUTE_MAP[selTab]);
-        // sessionStorage.setItem('subTab', '');
     }
   _stopOperation(stopFlag) {
       modal.add(OperationStop, {
@@ -66,12 +71,26 @@ class Tabs extends React.Component{
         size: 'large', // large, medium or small,
       closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: false
-      });    
+      });  
+
+  }
+    _FireEmergencyRelease(){
+      modal.add(fireHazard, {
+        title: '',
+        size: 'large customColor', // large, medium or small,
+      closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: false
+      });     
   }
   componentWillReceiveProps(nextProps){
+    var a=nextProps;
     if(nextProps.system_data=== SOFT_MANUAL && (this.props.system_data=== HARD || !this.props.system_data))
     {
       this._emergencyRelease();
+    }
+    else  if(nextProps.fireHazardType ===EMERGENCY_FIRE && !nextProps.firehazadflag && !nextProps.fireHazardNotifyTime)
+    {
+      this._FireEmergencyRelease();
     }
     else if(nextProps.system_emergency && !this.props.system_emergency)
     {
@@ -183,10 +202,55 @@ class Tabs extends React.Component{
 
     return items;
   }
-	render(){
+   _processNotification(){
+  
+  var notificationWrap=[],singleNotification,time,timeText;
+  var originalDate=this.props.fireHazardNotifyTime? new Date(this.props.fireHazardNotifyTime): new Date(this.props.fireHazardStartTime);
+  var convertedDate =  originalDate.getTime(); 
+  var timeText= <FormattedRelative value={convertedDate} timeZone={this.props.timeZone}/>;
 
+ if(this.props.fireHazardNotifyTime){
+singleNotification=<GorToastify key={1} onClick={this._openPopup}>
+<div className="gor-toastify-content info">
+                  <p className="msg-content">
+                   <FormattedMessage id='operation.alert.resumed' 
+                    defaultMessage="All operation has been resumed to normal state."
+                            description="Text to resume operation"/>
+                  <span className="gor-toastify-updated-time">{timeText}</span>
+                  </p>
+                  <span className="gor-toastify-details closeButton">×</span>
+
+     </div>
+     
+    </GorToastify>
+}else
+{
+  singleNotification=<GorToastify key={2} onClick={this._openPopup}>
+   <div className="gor-toastify-content">
+                  <p className="msg-content">
+                   <FormattedMessage id='operation.alert.triggeremergency' 
+                    defaultMessage="Fire emergency triggered.Follow evacuation procedures immediately"
+                            description="Text button to trigger emergency"/>
+                             <span className="gor-toastify-updated-time">{timeText}</span>
+                  </p>
+                  <span className="gor-toastify-details">
+
+<FormattedMessage id='operation.alert.toastifydetails' 
+                    defaultMessage="VIEW DETAILS"
+                            description="Text button to viewdetails"/>
+                  </span>
+
+     </div>
+    </GorToastify>
+} 
+    notificationWrap.push(singleNotification);
+  return notificationWrap;
+}
+	render(){
   let items=this._parseStatus();
-  var showUtilityTab=this.props.config.utility_tab && this.props.config.utility_tab.enabled;
+  let showFireHazardPopup=this.props.firehazadflag;
+  let notificationWrap=this._processNotification();
+  let showUtilityTab=this.props.config.utility_tab && this.props.config.utility_tab.enabled;
 		return (
 		<div className="gor-tabs gor-main-block">
 		<Link to="/overview" onClick={this.handleTabClick.bind(this,OVERVIEW)}>
@@ -217,7 +281,8 @@ class Tabs extends React.Component{
     {showUtilityTab?<Link to="/utilities" onClick={this.handleTabClick.bind(this,UTILITIES)}>
       <Tab items={{ tab: items.utilities, Status:'', currentState:'' }} changeClass={(this.props.tab.toUpperCase()=== UTILITIES ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
     </Link>:""}
-	</div>
+   {showFireHazardPopup?notificationWrap:""}
+  </div>
 		);
 	}
 }
@@ -235,7 +300,13 @@ function mapStateToProps(state, ownProps){
          orders_completed:state.tabsData.orders_completed||0,
          system_status:state.tabsData.status||null,
          audit_alert: state.tabsData.audit_alert || 0,
-         config:state.config||{}
+         config:state.config||{},
+         firehazadflag:state.fireReducer.firehazadflag || false,
+         fireHazardType:state.fireHazardDetail.emergency_type,
+         fireHazardStartTime:state.fireHazardDetail.emergencyStartTime,
+         fireHazardNotifyTime:state.fireHazardDetail.notifyTime,
+         timeZone:state.authLogin.timeOffset
+
     }
 }
 
@@ -246,6 +317,7 @@ var mapDispatchToProps=function(dispatch){
         setInventorySpinner:function(data){dispatch(setInventorySpinner(data));},
         setAuditSpinner:function(data){dispatch(setAuditSpinner(data));},
         setButlerSpinner:function(data){dispatch(setButlerSpinner(data))},
+        setFireHazrdFlag:function(data){dispatch(setFireHazrdFlag(data))}
 	}
 };
 

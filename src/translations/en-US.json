@@ -587,9 +587,9 @@
     "filepath": "./src/components/utilityComponents/downloadGRTile.js"
   },
   {
-    "id": "utility.reportsHistory.fileName",
+    "id": "utility.reportsHistory.clickToDownload",
     "description": "file name",
-    "defaultMessage": "File:",
+    "defaultMessage": "Click here to download",
     "filepath": "./src/components/utilityComponents/downloadGRTile.js"
   },
   {
@@ -677,7 +677,7 @@
     "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
   },
   {
-    "id": "utility.reportsHistory.clickToDownload",
+    "id": "utility.grnHistory.clickToDownload",
     "description": "file name",
     "defaultMessage": "Click here to download",
     "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
@@ -986,6 +986,42 @@
     "id": "stringConfig.md006",
     "description": "Text for safety checklist item 6",
     "defaultMessage": "All Zigbee boxes are online.",
+    "filepath": "./src/constants/backEndConstants.js"
+  },
+  {
+    "id": "stringConfig.md007",
+    "description": "Text for safety checklist item 7",
+    "defaultMessage": "[Manual] Peripherals status known.",
+    "filepath": "./src/constants/backEndConstants.js"
+  },
+  {
+    "id": "stringConfig.md008",
+    "description": "Text for safety checklist item 8",
+    "defaultMessage": "[Manual] Physical inventory verified.",
+    "filepath": "./src/constants/backEndConstants.js"
+  },
+  {
+    "id": "stringConfig.md009",
+    "description": "Text for safety checklist item 9",
+    "defaultMessage": "[Automatic] No Emergency buttons in 'pressed' state",
+    "filepath": "./src/constants/backEndConstants.js"
+  },
+  {
+    "id": "stringConfig.md010",
+    "description": "Text for safety checklist item 10",
+    "defaultMessage": "[Manual] All shutters open  in active zones.",
+    "filepath": "./src/constants/backEndConstants.js"
+  },
+  {
+    "id": "stringConfig.md011",
+    "description": "Text for safety checklist item 11",
+    "defaultMessage": "[Manual] No humans in operations area.",
+    "filepath": "./src/constants/backEndConstants.js"
+  },
+  {
+    "id": "stringConfig.md012",
+    "description": "Text for safety checklist item 12",
+    "defaultMessage": "[Manual] All paths cleared of any debris..",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
@@ -1403,6 +1439,12 @@
     "filepath": "./src/constants/messageConstants.js"
   },
   {
+    "id": "emergency.resume.Softemergency",
+    "description": "Soft emergency still there",
+    "defaultMessage": "Soft emergency still there",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
     "id": "emergency.resume.success",
     "description": "Operations resumed",
     "defaultMessage": "Operation resumed",
@@ -1428,8 +1470,8 @@
   },
   {
     "id": "audit.cancellation.error.g021",
-    "description": "Audit Id already sent to core for cancellation",
-    "defaultMessage": "Audit Id already sent to core for cancellation",
+    "description": "Audit Id already sent for cancellation",
+    "defaultMessage": "Audit Id already sent for cancellation",
     "filepath": "./src/constants/messageConstants.js"
   },
   {
@@ -2056,6 +2098,42 @@
     "description": "Text button to resume operation",
     "defaultMessage": "Resume operation",
     "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
+  },
+  {
+    "id": "operation.fire.header",
+    "description": "Header Text FIRE EMERGENCY",
+    "defaultMessage": "FIRE EMERGENCY",
+    "filepath": "./src/containers/emergencyProcess/fireHazard.js"
+  },
+  {
+    "id": "operation.fire.cautionText",
+    "description": "Description Text FIRE EMERGENCY",
+    "defaultMessage": "Fire emergency has been triggered and system has started its safety measures.",
+    "filepath": "./src/containers/emergencyProcess/fireHazard.js"
+  },
+  {
+    "id": "operation.fire.evacuation",
+    "description": "Description Text evacuation",
+    "defaultMessage": "Please follow evacuation procedures immediately.",
+    "filepath": "./src/containers/emergencyProcess/fireHazard.js"
+  },
+  {
+    "id": "operation.fire.escape",
+    "description": "Description Text escape",
+    "defaultMessage": "Clearing escape path",
+    "filepath": "./src/containers/emergencyProcess/fireHazard.js"
+  },
+  {
+    "id": "operation.fire.shutter",
+    "description": "Description Text clear shutter",
+    "defaultMessage": "Clearing all shutters",
+    "filepath": "./src/containers/emergencyProcess/fireHazard.js"
+  },
+  {
+    "id": "operation.alert.release.button",
+    "description": "Text button to resume operation",
+    "defaultMessage": "RESUME OPERATION",
+    "filepath": "./src/containers/emergencyProcess/fireHazard.js"
   },
   {
     "id": "operation.alert.stop",
@@ -3699,6 +3777,24 @@
     "filepath": "./src/containers/tabs.js"
   },
   {
+    "id": "operation.alert.resumed",
+    "description": "Text to resume operation",
+    "defaultMessage": "All operation has been resumed to normal state.",
+    "filepath": "./src/containers/tabs.js"
+  },
+  {
+    "id": "operation.alert.triggeremergency",
+    "description": "Text button to trigger emergency",
+    "defaultMessage": "Fire emergency triggered.Follow evacuation procedures immediately",
+    "filepath": "./src/containers/tabs.js"
+  },
+  {
+    "id": "operation.alert.toastifydetails",
+    "description": "Text button to viewdetails",
+    "defaultMessage": "VIEW DETAILS",
+    "filepath": "./src/containers/tabs.js"
+  },
+  {
     "id": "userDetails.operator",
     "defaultMessage": "Operator",
     "filepath": "./src/containers/usersTab.js"
@@ -4374,6 +4470,18 @@
     "id": "pps.status.reject",
     "description": "PPS status change reject",
     "defaultMessage": "{unsuccessful}/{totalCount} status change request rejected",
+    "filepath": "./src/utilities/getFormattedMessages.js"
+  },
+  {
+    "id": "utility.downloadGRN.generateSuccess",
+    "description": "GRN Request submitted successfully",
+    "defaultMessage": "GRN Request submitted successfully",
+    "filepath": "./src/utilities/getFormattedMessages.js"
+  },
+  {
+    "id": "utility.downloadInventory.generateSuccess",
+    "description": "Inventory Report Request submitted successfully",
+    "defaultMessage": "Inventory Report Request submitted successfully",
     "filepath": "./src/utilities/getFormattedMessages.js"
   },
   {

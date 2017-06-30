@@ -23,6 +23,18 @@ export const WS_MOCK="WS_MOCK";
 export const DATA_SUBSCRIPTION_PACKET="DATA_SUBSCRIPTION_PACKET";
 export const SET_DEFAULT_RANGE="SET_DEFAULT_RANGE";
 export const TEXTBOX_STATUS="TEXTBOX_STATUS";
+export const HARD_EMERGENCY="hard_emergency";
+export const FAILED="failed";
+export const CLEARED="cleared";
+export const PROGRESS="progress";
+export const NOT_FOUND="not_found";
+export const IN_PROGRESS="in_progress";
+
+
+
+
+
+
 
 /*Constants for Notification Web Sockets*/
 export const WS_NOTIFICATION_CONNECT = "WS_NOTIFICATION_CONNECT";
@@ -137,6 +149,11 @@ export const THROUGHPUT_DATA="THROUGHPUT_DATA";
 export const HISTOGRAM_DATA="HISTOGRAM_DATA";
 export const CHARGERS_DETAIL="CHARGERS_DETAIL";
 export const BUTLERS_DETAIL="BUTLERS_DETAIL";
+export const FIRE_EMERGENCY="FIRE_EMERGENCY";
+export const EMERGENCY_FIRE="fire_emergency";
+export const EMERGENCY="emergency";
+export const NOTIFY_EMERGENCY_END="NOTIFY_EMERGENCY_END";
+
 
 /*Constants for type of AJAX call*/
 export const AUTH_LOGIN="AUTH_LOGIN";
@@ -244,7 +261,7 @@ export const DISPLAY_CHARGING_STATION_FILTER_SPINNER="DISPLAY_CHARGING_STATION_F
 export const DISPLAY_INVENTORY_REPORT_SPINNER="DISPLAY_INVENTORY_REPORT_SPINNER";
 export const DISPLAY_STOCK_LEDGER_SPINNER="DISPLAY_STOCK_LEDGER_SPINNER";
 export const DISPLAY_STOCK_LEDGER_RAW_TRANSACTIONS_SPINNER="DISPLAY_STOCK_LEDGER_RAW_TRANSACTIONS_SPINNER";
-
+export const FIRE_EMERGENCY_POPUP_FLAG="FIRE_EMERGENCY_POPUP"
 
 
 
