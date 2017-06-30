@@ -45,6 +45,7 @@ function _getPPSdata(link) {
 	return pps_data;
 } 
 
+
 function _getButlerdata(link) {
 
 	let Component=<FormattedMessage id="health.Butler" description="Butler bots health" 
@@ -98,10 +99,7 @@ function _getChargingdata(link) {
 } 
 
 class PerformanceWidget extends React.Component{
-	constructor(props) 
-	{
-		super(props);
-	}	
+
 
 	componentWillReceiveProps(nextProps){
 		this.setState({renderState: nextProps.widget})
