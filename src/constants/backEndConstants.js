@@ -55,6 +55,7 @@ export const CODE_AE007='ae007';
 export const CODE_AE008='ae008';
 export const CODE_E051='e051';
 export const CODE_E052='e052';
+export const CODE_E135='e135';
 /*User roles map*/
 export const BUTLER_SUPERVISOR='butler_supervisor';
 export const BUTLER_UI='butler_ui';

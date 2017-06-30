@@ -11,7 +11,7 @@ export function getDaysDiff(dateObj){
 export function getSecondsDiff(dateObj){
  var givenDate,today,diff,absSecond;
  givenDate=new Date(dateObj);
-givenDate.setMinutes(givenDate.getMinutes() - givenDate.getTimezoneOffset());
+ givenDate.setMinutes(givenDate.getMinutes() - givenDate.getTimezoneOffset());
 today=new Date();
 diff =(givenDate.getTime() - today.getTime()) / 1000;
 absSecond=Math.abs(Math.round(diff));

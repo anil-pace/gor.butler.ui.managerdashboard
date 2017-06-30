@@ -351,6 +351,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
 				if(rejectResponse.emergency_end_time)
 				{
 				store.dispatch(notifyEmergencyEnd(rejectResponse.emergency_end_time)); 
+				
 				}
 				else 
 				{

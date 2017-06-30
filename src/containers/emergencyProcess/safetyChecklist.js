@@ -53,7 +53,7 @@ class SafetyChecklist extends React.Component{
      }
      else
      {
-       url=VALIDATION_LIST+"?emergency_type=hard_soft";
+       url=VALIDATION_LIST+"?emergency_type=hard_emergency";
      }
         let userData={
                 'url':url,
