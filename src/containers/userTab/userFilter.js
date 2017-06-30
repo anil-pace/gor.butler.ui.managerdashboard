@@ -196,6 +196,14 @@ class UserFilter extends React.Component {
     }
 
     _clearFilter() {
+        this.props.userfilterState({
+            tokenSelected: {
+                "STATUS": ["all"],
+                "ROLE": ['all'],
+                "WORK MODE": ['all'],
+                "LOCATION": ["all"]
+            }, searchQuery: {"USER NAME": null},
+        });
         hashHistory.push({pathname: "/users", query: {}})
     }
 
