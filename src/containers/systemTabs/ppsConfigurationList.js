@@ -5,6 +5,7 @@ import React  from 'react';
 import {connect} from 'react-redux';
 import {fetchPPSProfiles,selectPPSProfileForConfiguration} from './../../actions/ppsConfigurationActions'
 import {GET,FETCH_PPS_PROFILES,APP_JSON} from './../../constants/frontEndConstants'
+import {PPS_LIST_URL} from './../../constants/configConstants'
 
 class PPSList extends React.Component {
     constructor(props) {
@@ -16,8 +17,8 @@ class PPSList extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.ppsProfiles !== this.state.data) {
-            this.setState({data: nextProps.ppsProfiles,selectedProfile:nextProps.selectedProfile,selectedPPS:nextProps.selectedPPS})
+        if (nextProps.ppsList !== this.state.data) {
+            this.setState({data: nextProps.ppsList,selectedProfile:nextProps.selectedProfile,selectedPPS:nextProps.selectedPPS})
         }
     }
 
@@ -26,7 +27,7 @@ class PPSList extends React.Component {
          * Fetch PPS List
          */
         let userData={
-            'url': FETCH_PPS_PROFILES,
+            'url': PPS_LIST_URL,
             'method': GET,
             'cause': FETCH_PPS_PROFILES,
             'contentType': APP_JSON,
@@ -57,14 +58,14 @@ class PPSList extends React.Component {
                 </div>
                 <div className="pps-list">
                     {this.state.data.map(function (pps) {
-                        return <div className={['pps-list-item',pps.selected?'selected':null].join(" ")} key={pps.name} onClick={self.selectPPS.bind(self, {pps: pps})}>
+                        return <div className={['pps-list-item',pps.selected?'selected':null].join(" ")} key={pps.pps_id} onClick={self.selectPPS.bind(self, {pps: pps})}>
                             <div>
-                                {pps.name}
+                                {"PPS-"+pps.pps_id}
                             </div>
                             <div className="pps-list-item-profiles">
                                 {pps.selected && pps.profiles.map(function (profile) {
                                     return <div onClick={self.selectPPS.bind(self, {pps, profile})}
-                                                key={profile.name}>
+                                                key={profile.id}>
                                         {profile.name} {profile.applied ? "applied" : ''}
                                     </div>
 
@@ -89,9 +90,9 @@ class PPSList extends React.Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        ppsProfiles: state.ppsConfiguration.ppsProfiles,
+        ppsList: state.ppsConfiguration.ppsList||[],
         selectedProfile:state.ppsConfiguration.selectedProfile,
-        selectedPPS:state.ppsConfiguration.selectedPPS,
+        selectedPPS:state.ppsConfiguration.selectedPPS
 
     };
 }

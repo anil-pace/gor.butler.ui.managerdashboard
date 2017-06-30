@@ -51,6 +51,11 @@ export const GET_MAXSIZE_FILE_URL=API_URL + "/components/get_mdm_file_size";
 export const WS_NOTIFICATION_URL =  API_URL+"/platform-dashboard/dashboard-stomp";
 export const NOTIFICATIONS_URL =  API_URL+"/api-gateway/dashboard-service/platform-dashboard/event";
 export const READ_MSG_URL = API_URL+"/api-gateway/dashboard-service/platform-dashboard/event/mark-as-read";
+/**
+ * URLs or PPS Configurations
+ */
+
+export const PPS_LIST_URL="http://localhost:5000/api/pps"//TODO: URL need to be changed accrodingly
 
 
 

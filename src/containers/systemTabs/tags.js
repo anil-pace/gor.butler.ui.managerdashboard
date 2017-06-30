@@ -3,6 +3,7 @@
  */
 import React  from 'react';
 import {connect} from 'react-redux'
+import {addTagToBin} from './../../actions/ppsConfigurationActions'
 class Tags extends React.Component {
     constructor(props) {
         super(props)
@@ -34,6 +35,7 @@ class Tags extends React.Component {
     }
 
     handleTagSelect(selectedTag,e){
+        let self=this
         if(!e.target){
             return false
         }
@@ -41,7 +43,7 @@ class Tags extends React.Component {
         let tags=this.state.filteredTags
         tags.forEach(function(tag){
             if(tag.name===selectedTag.name){
-                tag.checked=e.target.checked
+                self.props.addTagToBin({tag:tag,bin:self.props.selectedPPSBin})
             }
         })
 
@@ -74,7 +76,7 @@ class Tags extends React.Component {
 
                     }}>{tag.name}</span>
                     <span className="pps-tag-selection">
-                        <input checked={tag.checked} onClick={self.handleTagSelect.bind(self,tag)} type="checkbox"/>
+                        {self.props.selectedPPSBin &&  <input checked={self.props.selectedPPSBin.tags.map(function(tag){return tag.name}).indexOf(tag.name)>-1} onClick={self.handleTagSelect.bind(self,tag)} type="checkbox"/>}
                     </span>
                 </div>
             })}
@@ -93,12 +95,16 @@ function mapStateToProps(state, ownProps) {
     return {
         selectedProfile:state.ppsConfiguration.selectedProfile||{id:null},
         selectedPPS:state.ppsConfiguration.selectedPPS||{id:null},
+        selectedPPSBin:state.ppsConfiguration.selectedPPSBin
 
     };
 }
 
 var mapDispatchToProps = function (dispatch) {
     return {
+        addTagToBin:function(data){
+            dispatch(addTagToBin(data))
+        }
     }
 };
 

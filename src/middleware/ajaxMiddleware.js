@@ -1,5 +1,5 @@
   
-import {AJAX_CALL,AUTH_LOGIN,PAUSE_OPERATION,RESUME_OPERATION,MASTER_FILE_UPLOAD} from '../constants/frontEndConstants';
+import {AJAX_CALL,AUTH_LOGIN,PAUSE_OPERATION,RESUME_OPERATION,MASTER_FILE_UPLOAD,FETCH_PPS_PROFILES} from '../constants/frontEndConstants';
 
 import {AjaxParse} from '../utilities/AjaxParser';
 import {FileResponseParser} from '../utilities/fileResponseParser';
@@ -12,7 +12,7 @@ const ajaxMiddleware=(function(){
   return store=> next=> action=> {
     switch(action.type) {
 
-       case AJAX_CALL:
+        case AJAX_CALL:
 
        var params=action.params;
        var saltParams = action.params.saltParams ? action.params.saltParams : {};
@@ -77,17 +77,21 @@ const ajaxMiddleware=(function(){
     }
 
     httpRequest.open(params.method, params.url,!params.sync);
-    if(params.contentType !== false){
-      httpRequest.setRequestHeader('Content-Type', params.contentType || "text/html");
+    //TODO: Need to refactor
+    if(params.cause!==FETCH_PPS_PROFILES){
+        if(params.contentType !== false){
+            httpRequest.setRequestHeader('Content-Type', params.contentType || "text/html");
+        }
+        if(params.withCredentials){
+            httpRequest.withCredentials = true;
+        }
+        httpRequest.setRequestHeader('Accept', params.accept || "text/html");
+        if(params.cause!==AUTH_LOGIN)
+        {
+            httpRequest.setRequestHeader('Authentication-Token', params.token);
+        }
     }
-    if(params.withCredentials){
-      httpRequest.withCredentials = true;
-    }
-    httpRequest.setRequestHeader('Accept', params.accept || "text/html");
-    if(params.cause!==AUTH_LOGIN)
-    {
-      httpRequest.setRequestHeader('Authentication-Token', params.token);
-    }
+
     httpRequest.send(httpData);
     break;
 

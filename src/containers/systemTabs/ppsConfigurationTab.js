@@ -58,6 +58,8 @@ class PPSConfiguration extends React.Component {
     }
 
 
+
+
     render() {
 
 
@@ -95,7 +97,10 @@ function mapStateToProps(state, ownProps) {
         chargingFilterStatus: state.filterInfo.chargingFilterStatus || false,
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
         ppsConfigurationTabRefreshed: state.ppsConfiguration.ppsConfigurationTabRefreshed,
-        socketAuthorized: state.recieveSocketActions.socketAuthorized
+        socketAuthorized: state.recieveSocketActions.socketAuthorized,
+        selectedProfile: state.ppsConfiguration.selectedProfile || {id: null},
+        selectedPPS: state.ppsConfiguration.selectedPPS,
+        selectedPPSBin:state.ppsConfiguration.selectedPPSBin
     };
 }
 

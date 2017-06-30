@@ -15,12 +15,7 @@ const mockMiddleware = (function () {
                 break;
             //This action is irrelevant to us, pass it on to the next middleware
 
-            /**
-             * The code need to be removed as a real API call will be hit
-             */
-            case FETCH_PPS_PROFILES:
-                store.dispatch(receivePPSProfiles({}))
-                break;
+
 
 
             default:
