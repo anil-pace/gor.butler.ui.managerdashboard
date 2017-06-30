@@ -23,6 +23,8 @@ export const WS_MOCK="WS_MOCK";
 export const DATA_SUBSCRIPTION_PACKET="DATA_SUBSCRIPTION_PACKET";
 export const SET_DEFAULT_RANGE="SET_DEFAULT_RANGE";
 export const TEXTBOX_STATUS="TEXTBOX_STATUS";
+export const HARD_EMERGENCY="hard_emergency";
+
 
 /*Constants for Notification Web Sockets*/
 export const WS_NOTIFICATION_CONNECT = "WS_NOTIFICATION_CONNECT";

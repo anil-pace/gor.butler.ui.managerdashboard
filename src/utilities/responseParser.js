@@ -1,7 +1,7 @@
 
 import {receivePpsData,receiveButlersData,receiveAuditData,receiveThroughputData,receivePutData,receiveChargersData,receiveOrdersData,initData,recieveHistogramData,recieveChargersDetail,recieveButlersDetail,recievePPSDetail,recievePPSperformance,recieveUserDetails,recievefireHazardDetails} from '../actions/responseAction';
-import {HISTOGRAM_DATA,EMERGENCY_FIRE} from '../constants/frontEndConstants';
-import {SYSTEM_CHARGERS_DETAILS,USER_DATA,HISTOGRAM_DETAILS,PARSE_OVERVIEW,PARSE_SYSTEM,PARSE_STATUS,PPS_DETAIL,SYSTEM_PPS_DETAILS,SYSTEM_BUTLERS_DETAILS,PARSE_PPS,PARSE_BUTLERS,PARSE_CHARGERS,PARSE_INVENTORY_HISTORY,PARSE_INVENTORY_TODAY,PARSE_INVENTORY,PARSE_ORDERS,PARSE_PUT,PARSE_PICK,PARSE_PPA_THROUGHPUT,PARSE_AUDIT,PARSE_AUDIT_AGG,EMERGENCY} from '../constants/backEndConstants'
+import {HISTOGRAM_DATA,EMERGENCY_FIRE,EMERGENCY} from '../constants/frontEndConstants';
+import {SYSTEM_CHARGERS_DETAILS,USER_DATA,HISTOGRAM_DETAILS,PARSE_OVERVIEW,PARSE_SYSTEM,PARSE_STATUS,PPS_DETAIL,SYSTEM_PPS_DETAILS,SYSTEM_BUTLERS_DETAILS,PARSE_PPS,PARSE_BUTLERS,PARSE_CHARGERS,PARSE_INVENTORY_HISTORY,PARSE_INVENTORY_TODAY,PARSE_INVENTORY,PARSE_ORDERS,PARSE_PUT,PARSE_PICK,PARSE_PPA_THROUGHPUT,PARSE_AUDIT,PARSE_AUDIT_AGG} from '../constants/backEndConstants'
 import {wsOnMessageAction} from '../actions/socketActions';
 import {recieveOverviewStatus,recieveSystemStatus,recieveAuditStatus,recieveOrdersStatus,recieveUsersStatus,recieveInventoryStatus,recieveStatus,setFireHazrdFlag} from '../actions/tabActions';
 import {userFilterApplySpinner} from '../actions/spinnerAction';
@@ -131,7 +131,7 @@ export function ResponseParse(store,res)
 				store.dispatch(setWavesFilterSpinner(false));
 				break;	
 				
-			case 'emergency':								    	   
+			case EMERGENCY:								    	   
 				store.dispatch(recievefireHazardDetails(res));
 				if(res.complete_data[0].emergency_type===EMERGENCY_FIRE)
 				store.dispatch(setFireHazrdFlag(false));

@@ -345,21 +345,33 @@ export function AjaxParse(store, res, cause, status, saltParams) {
 			var rejectList = [],
 				rejectResponse = res,
 				modalFlag = true;
-			if (rejectResponse.data) {
-				rejectList = rejectResponse.data;
-				if (!rejectList.length) {
-					store.dispatch(notifySuccess(ES));
-				} else {
-					modalFlag = false;
+
+			if(rejectResponse.successful){
+
+				if(rejectResponse.emergency_end_time)
+				{
+				store.dispatch(notifyEmergencyEnd(rejectResponse.emergency_end_time)); 
 				}
-			} else if (rejectResponse.alert_data) {
-				stringInfo = codeToString(res.alert_data[0]);
-				store.dispatch(notifyFail(stringInfo.msg));
+				else 
+				{
+				store.dispatch(notifySuccess(ES));
+				}
+				  
 			}
 
-			else if(rejectResponse.successful){
-				store.dispatch(notifyEmergencyEnd(rejectResponse.emergency_end_time));      
-			}
+			else if (rejectResponse.alert_data) {
+				if(rejectResponse.alert_data[0].details[0])
+				{
+				rejectList = rejectResponse.alert_data[0].details[0].failed_validations;
+				modalFlag = false;
+				}
+				else
+				{
+				stringInfo = codeToString(res.alert_data[0]);
+				store.dispatch(notifyFail(stringInfo.msg));
+				}
+
+			} 
 			store.dispatch(modalStatus(modalFlag));                           
 			store.dispatch(setSafetySpinner(false));
 			store.dispatch(getSafetyErrorList(rejectList));

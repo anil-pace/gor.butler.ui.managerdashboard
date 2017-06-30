@@ -11,7 +11,7 @@ class FireHazard extends React.Component{
   constructor(props) 
   {  
     super(props);
-    this.state={buttonEnable:true}
+    this.state={buttonDisable:true}
   }
   _removeThisModal() {
     this.props.removeModal();
@@ -20,9 +20,13 @@ class FireHazard extends React.Component{
    componentWillMount(){
     var limit=(this.props.config.fire_emergency_enable_resume_after)*60;
     var duration=(limit-getSecondsDiff(this.props.fireHazard.emergencyStartTime))*1000;
+    
+    if(this.state.buttonDisable)
+    {
     setTimeout(function(){
-      this.setState({buttonEnable:false})
+      this.setState({buttonDisable:false})
     }.bind(this),duration); 
+  }
   }
   componentDidMount(){
     if(this.props.checkingList){
@@ -153,7 +157,7 @@ render()
     {shutterWrap}
     </div>          
     </div>      
-    <button className='gor-resume-btn' disabled={this.state.buttonEnable} onClick={this._resumeOperation.bind(this)}>
+    <button className='gor-resume-btn' disabled={this.state.buttonDisable} onClick={this._resumeOperation.bind(this)}>
     <FormattedMessage id='operation.alert.release.button' 
     defaultMessage="RESUME OPERATION"
     description="Text button to resume operation"/></button>           
