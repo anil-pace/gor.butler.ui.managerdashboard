@@ -76,7 +76,7 @@ import {
 	SEARCHED_NOTIFICATIONS_DATA,
 	SEND_READ_INTIMATION,
 	GET_ALL_NOTIFICATIONS,
-	SEARCHED_NOTIFICATIONS_DATA_ALL
+	SEARCHED_NOTIFICATIONS_DATA_ALL,FETCH_PPS_PROFILES
 } from "../constants/frontEndConstants";
 
 import { BUTLER_UI, CODE_E027 } from "../constants/backEndConstants";
@@ -127,6 +127,7 @@ import {
 	recieveAllNotifications,
 	recieveAllSearchedNotifications
 } from "../actions/notificationAction";
+import {receivePPSProfiles} from './../actions/ppsConfigurationActions'
 
 export function AjaxParse(store, res, cause, status, saltParams) {
 	let stringInfo = {};
@@ -431,6 +432,9 @@ export function AjaxParse(store, res, cause, status, saltParams) {
 		case SEARCHED_NOTIFICATIONS_DATA_ALL:
 			store.dispatch(recieveAllSearchedNotifications(res));
 			break;
+        case FETCH_PPS_PROFILES:
+            store.dispatch(receivePPSProfiles(res))
+            break;
 
 		default:
 			ShowError(store, cause, status);

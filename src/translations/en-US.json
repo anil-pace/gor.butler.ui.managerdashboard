@@ -593,9 +593,9 @@
     "filepath": "./src/components/utilityComponents/downloadGRTile.js"
   },
   {
-    "id": "utility.reportsHistory.fileName",
+    "id": "utility.reportsHistory.clickToDownload",
     "description": "file name",
-    "defaultMessage": "File:",
+    "defaultMessage": "Click here to download",
     "filepath": "./src/components/utilityComponents/downloadGRTile.js"
   },
   {
@@ -683,7 +683,7 @@
     "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
   },
   {
-    "id": "utility.reportsHistory.clickToDownload",
+    "id": "utility.grnHistory.clickToDownload",
     "description": "file name",
     "defaultMessage": "Click here to download",
     "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
@@ -1434,8 +1434,8 @@
   },
   {
     "id": "audit.cancellation.error.g021",
-    "description": "Audit Id already sent to core for cancellation",
-    "defaultMessage": "Audit Id already sent to core for cancellation",
+    "description": "Audit Id already sent for cancellation",
+    "defaultMessage": "Audit Id already sent for cancellation",
     "filepath": "./src/constants/messageConstants.js"
   },
   {
@@ -4380,6 +4380,18 @@
     "id": "pps.status.reject",
     "description": "PPS status change reject",
     "defaultMessage": "{unsuccessful}/{totalCount} status change request rejected",
+    "filepath": "./src/utilities/getFormattedMessages.js"
+  },
+  {
+    "id": "utility.downloadGRN.generateSuccess",
+    "description": "GRN Request submitted successfully",
+    "defaultMessage": "GRN Request submitted successfully",
+    "filepath": "./src/utilities/getFormattedMessages.js"
+  },
+  {
+    "id": "utility.downloadInventory.generateSuccess",
+    "description": "Inventory Report Request submitted successfully",
+    "defaultMessage": "Inventory Report Request submitted successfully",
     "filepath": "./src/utilities/getFormattedMessages.js"
   },
   {
