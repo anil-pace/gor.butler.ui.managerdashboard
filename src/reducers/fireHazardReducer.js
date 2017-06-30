@@ -26,7 +26,8 @@ export function fireHazardDetail(state={}, action) {
                     "shutters":shutters,
                     "escapePath":escapePath,
                     "emergencyStartTime":emergencyStartTime,
-                    "emergency_type": res.complete_data[0].emergency_type
+                    "emergency_type": res.complete_data[0].emergency_type,
+                    "notifyTime":'' 
                 })
             }
 

@@ -25,7 +25,7 @@ class FireHazard extends React.Component{
     {
     setTimeout(function(){
       this.setState({buttonDisable:false})
-    }.bind(this),duration); 
+    }.bind(this),1000); 
   }
   }
   componentDidMount(){
