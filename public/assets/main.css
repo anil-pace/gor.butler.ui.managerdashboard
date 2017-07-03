@@ -6671,6 +6671,7 @@ button:disabled {
 
 .pps-configuration-navigation-tabs .active {
   border-bottom: 2px solid black;
+  color: black;
 }
 
 .pps-configuration-container {
@@ -6772,8 +6773,20 @@ button:disabled {
   cursor: pointer;
 }
 
-.pps-bin.selected {
+.pps-bin.disabled {
+  background: -webkit-gradient(linear, right bottom, left top, color-stop(0.49, white), color-stop(0.5, #000000), color-stop(0.51, white));
+}
+
+.selected .pps-bin {
   border: 2px solid blue;
+}
+
+.mouseover .pps-bin {
+  background-color: lightblue;
+}
+
+.mouseover .pps-bin.disabled {
+  background-image: -webkit-gradient(linear, right bottom, left top, color-stop(0.49, white), color-stop(0.5, #000000), color-stop(0.51, white));
 }
 
 .pps-bin-tag-info {
@@ -6782,17 +6795,32 @@ button:disabled {
   font-size: 14px;
 }
 
+.pps-bin-action {
+  width: 100%;
+  height: 20px;
+  display: inline-block;
+  position: relative;
+  top: 10px;
+}
+
+.pps-bin-action-button {
+  background-color: white;
+  color: black;
+  padding: 5px 10px;
+  z-index: 2;
+}
+
 .pps-bin-info {
   width: 100%;
   height: 20px;
   background-color: darkgrey;
   display: inline-block;
   position: relative;
-  top: 60px;
+  top: 40px;
   color: white;
 }
 
-.pps-bin-info.selected {
+.selected .pps-bin-info {
   background-color: blue;
 }
 
@@ -6842,6 +6870,10 @@ button:disabled {
 
 .pps-tag-selection {
   float: right;
+}
+
+.pps-tag-selection input[type=checkbox] {
+  margin: 0px;
 }
 
 .pps-add-tag-container {

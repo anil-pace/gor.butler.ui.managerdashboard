@@ -43,7 +43,7 @@ class Tags extends React.Component {
         let tags=this.state.filteredTags
         tags.forEach(function(tag){
             if(tag.name===selectedTag.name){
-                self.props.addTagToBin({tag:tag,bin:self.props.selectedPPSBin})
+                self.props.addTagToBin({tag:tag,bin:self.props.selectedPPSBin['tags']})
             }
         })
 
@@ -76,7 +76,7 @@ class Tags extends React.Component {
 
                     }}>{tag.name}</span>
                     <span className="pps-tag-selection">
-                        {self.props.selectedPPSBin &&  <input checked={self.props.selectedPPSBin.tags.map(function(tag){return tag.name}).indexOf(tag.name)>-1} onClick={self.handleTagSelect.bind(self,tag)} type="checkbox"/>}
+                        {self.props.selectedPPSBin && self.props.selectedPPSBin['tags'] &&  <input checked={self.props.selectedPPSBin['tags'].tags.map(function(tag){return tag.name}).indexOf(tag.name)>-1} onClick={self.handleTagSelect.bind(self,tag)} type="checkbox"/>}
                     </span>
                 </div>
             })}

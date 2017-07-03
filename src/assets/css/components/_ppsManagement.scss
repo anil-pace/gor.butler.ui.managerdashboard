@@ -1,5 +1,6 @@
 .pps-configuration-navigation-tabs .active {
   border-bottom: 2px solid black;
+  color: black;
 }
 
 .pps-configuration-container {
@@ -79,18 +80,19 @@
   height: 100%;
   width: 100%;
 }
+
 .pps-bins-container.include-tags {
-  width:80%
+  width: 80%
 }
 
-.pps-bin-row{
+.pps-bin-row {
   margin: 20px;
   text-align: center;
   clear: both;
   overflow: auto;
 }
 
-.pps-bin{
+.pps-bin {
   width: 100px;
   height: 100px;
   border: 2px solid darkgrey;
@@ -99,36 +101,85 @@
   display: inline-block;
   cursor: pointer;
 }
-.pps-bin.selected{
+
+.pps-bin.disabled {
+  background: -webkit-gradient(
+                  linear,
+                  right bottom,
+                  left top,
+                  color-stop(0.49, white),
+                  color-stop(0.5, #000000),
+                  color-stop(0.51, white)
+  );
+}
+
+.selected .pps-bin {
   border: 2px solid blue;
 }
-.pps-bin-tag-info{
+
+.mouseover .pps-bin {
+  background-color: lightblue;
+}
+
+.mouseover .pps-bin.disabled {
+  background-image: -webkit-gradient(
+                  linear,
+                  right bottom,
+                  left top,
+                  color-stop(0.49, white),
+                  color-stop(0.5, #000000),
+                  color-stop(0.51, white)
+  )
+}
+
+.pps-bin-tag-info {
   display: inline-block;
   height: 20px;
   font-size: 14px;
 }
 
-.pps-bin-info{
+.pps-bin-action {
+  width: 100%;
+  height: 20px;
+  display: inline-block;
+  position: relative;
+  top: 10px;
+}
+
+.pps-bin-action-button {
+  background-color: white;
+  color: black;
+  padding: 5px 10px;
+  z-index: 2;
+}
+
+.pps-bin-info {
   width: 100%;
   height: 20px;
   background-color: darkgrey;
   display: inline-block;
   position: relative;
-  top: 60px;
+  top: 40px;
   color: white;
 }
-.pps-bin-info.selected{
-  background-color:blue;
+
+.selected .pps-bin-info {
+  background-color: blue;
 }
 
-.pps-tags-container{
+.mouseover .pps-bin {
+  //opacity: 0.2;
+}
+
+.pps-tags-container {
   float: right;
   width: 20%;
   border-left: 1px solid #ccc;
   box-sizing: border-box;
   height: 450px;
 }
-.pps-tags-header{
+
+.pps-tags-header {
   margin: 15px;
   border-bottom: 1px solid #ccc;
   box-sizing: border-box;
@@ -138,15 +189,16 @@
   padding-bottom: 15px
 }
 
-.pps-searchbox-container{
+.pps-searchbox-container {
   margin: 15px;
   font-size: 12px
 }
-.pps-searchresult-label{
+
+.pps-searchresult-label {
   margin: 15px
 }
 
-.pps-tags-row{
+.pps-tags-row {
   margin-left: 15px;
   margin-right: 15px;
   padding-bottom: 5px;
@@ -156,17 +208,20 @@
   overflow: auto;
 }
 
-.pps-tag-name{
+.pps-tag-name {
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 10px;
   float: left;
 }
-.pps-tag-selection{
+
+.pps-tag-selection {
   float: right;
 }
-
-.pps-add-tag-container{
+.pps-tag-selection input[type=checkbox]{
+  margin: 0px;
+}
+.pps-add-tag-container {
   margin-left: 15px;
   margin-right: 15px;
   padding-bottom: 5px;
@@ -176,9 +231,10 @@
   overflow: auto;
 }
 
-.pps-add-tag-name{
+.pps-add-tag-name {
   float: left;
 }
-.pps-add-tag-button{
+
+.pps-add-tag-button {
   float: right;
 }
