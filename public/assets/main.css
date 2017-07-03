@@ -6342,7 +6342,7 @@ button:disabled {
   display: block;
   width: 16px;
   height: 16px;
-  background-position: -89px -92px;
+  background-position: -90px -93px;
   position: absolute;
   top: -12px;
   left: 162px;
@@ -6368,7 +6368,7 @@ button:disabled {
   float: right;
   height: 16px;
   width: 16px;
-  background-position: -304px -55px;
+  background-position: 0px -93px;
 }
 
 .notificationWrap .resultOverlay .searchBox {
@@ -6474,7 +6474,7 @@ button:disabled {
   position: relative;
   width: 20px;
   height: 22px;
-  background-position: -252px -52px;
+  background-position: -278px -52px;
 }
 
 .notificationWrap .not-icon-wrap .not-count {
@@ -6569,7 +6569,7 @@ button:disabled {
   display: inline-block;
   height: 16px;
   width: 16px;
-  background-position: 0px -92px;
+  background-position: -30px -93px;
 }
 
 .allNotificationWrap .allSearchInput {
