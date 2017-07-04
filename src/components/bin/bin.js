@@ -9,13 +9,12 @@ class Bin extends React.Component {
 
 
     render() {
-        return (<span className={["pps-bin",this.props.disabled?'disabled':''].join(" ")}>
+        return (<span className={["pps-bin", this.props.disabled ? 'disabled' : ''].join(" ")}>
                     <span className="pps-bin-tag-info"> 1 Tag</span>
-                        <span className="pps-bin-action">
-                            {this.props.children}
-                        </span>
 
-                    <span className="pps-bin-info">{this.props.binId}</span>
+            {this.props.children}
+
+            <span className="pps-bin-info">{this.props.binId}</span>
                 </span>)
     }
 }

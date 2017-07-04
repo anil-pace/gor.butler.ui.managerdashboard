@@ -100,17 +100,11 @@
   margin-right: 5px;
   display: inline-block;
   cursor: pointer;
+  position: relative;
 }
 
 .pps-bin.disabled {
-  background: -webkit-gradient(
-                  linear,
-                  right bottom,
-                  left top,
-                  color-stop(0.49, white),
-                  color-stop(0.5, #000000),
-                  color-stop(0.51, white)
-  );
+  background-image: linear-gradient(-45deg, transparent 25%, transparent 49.5%, black 49.5%, black 50.5%, transparent 50.5%, transparent 75%, transparent);
 }
 
 .selected .pps-bin {
@@ -118,18 +112,12 @@
 }
 
 .mouseover .pps-bin {
-  background-color: lightblue;
+  background: rgba(0, 0, 255, 0.5);
 }
 
 .mouseover .pps-bin.disabled {
-  background-image: -webkit-gradient(
-                  linear,
-                  right bottom,
-                  left top,
-                  color-stop(0.49, white),
-                  color-stop(0.5, #000000),
-                  color-stop(0.51, white)
-  )
+  background-image: linear-gradient(-45deg, transparent 25%, transparent 49.5%, black 49.5%, black 50.5%, transparent 50.5%, transparent 75%, transparent);
+
 }
 
 .pps-bin-tag-info {
@@ -140,17 +128,27 @@
 
 .pps-bin-action {
   width: 100%;
-  height: 20px;
+  height: 100%;
   display: inline-block;
-  position: relative;
-  top: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 255, 0.5);
+  z-index: 2;
 }
 
 .pps-bin-action-button {
   background-color: white;
   color: black;
-  padding: 5px 10px;
+  padding: 5px 0;
   z-index: 2;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  background: rgba(255, 255, 255, 1);
 }
 
 .pps-bin-info {
@@ -159,16 +157,12 @@
   background-color: darkgrey;
   display: inline-block;
   position: relative;
-  top: 40px;
+  top: 60px;
   color: white;
 }
 
 .selected .pps-bin-info {
   background-color: blue;
-}
-
-.mouseover .pps-bin {
-  //opacity: 0.2;
 }
 
 .pps-tags-container {
@@ -218,9 +212,11 @@
 .pps-tag-selection {
   float: right;
 }
-.pps-tag-selection input[type=checkbox]{
+
+.pps-tag-selection input[type=checkbox] {
   margin: 0px;
 }
+
 .pps-add-tag-container {
   margin-left: 15px;
   margin-right: 15px;
