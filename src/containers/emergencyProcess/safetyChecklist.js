@@ -5,7 +5,7 @@ import {userRequest} from '../../actions/userActions';
 import {setSafetySpinner} from '../../actions/spinnerAction';
 import { connect } from 'react-redux';
 import { GET,APP_JSON,POST,CHECK_SAFETY,
-  CONFIRM_SAFETY} from '../../constants/frontEndConstants';
+  CONFIRM_SAFETY,EMERGENCY_FIRE,HARD_EMERGENCY} from '../../constants/frontEndConstants';
 import {  VALIDATION_LIST,VALIDATE_SAFETY } from '../../constants/configConstants';
 import {stringConfig} from '../../constants/backEndConstants';
 import Spinner from '../../components/spinner/Spinner';
@@ -28,7 +28,10 @@ class SafetyChecklist extends React.Component{
   componentWillReceiveProps(nextProps){
     if(!nextProps.auth_token||!nextProps.system_emergency)
     {
+      if(nextProps.system_emergency || nextProps.fireHazard.emergency_type!==EMERGENCY_FIRE)
+      {
       this._removeThisModal();
+      }
     }
     if(nextProps.modalStatus && !this.props.modalStatus){
       this._removeThisModal();
@@ -44,8 +47,16 @@ class SafetyChecklist extends React.Component{
     }
   }
   componentDidMount(){
+   var url;
+    if(this.props.fireHazard.emergency_type===EMERGENCY_FIRE){
+       url=VALIDATION_LIST+"?emergency_type=fire_emergency";
+     }
+     else
+     {
+       url=VALIDATION_LIST+"?emergency_type=hard_emergency";
+     }
         let userData={
-                'url':VALIDATION_LIST,
+                'url':url,
                 'method':GET,
                 'cause':CHECK_SAFETY,
                 'contentType':APP_JSON,
@@ -73,9 +84,17 @@ class SafetyChecklist extends React.Component{
   }
   _handleSafetyConfirm(e)
   {
+  var reqType;
+   if(this.props.fireHazard.emergency_type===EMERGENCY_FIRE){
+      reqType=EMERGENCY_FIRE;
+    }
+    else
+    {
+     reqType=HARD_EMERGENCY;     
+    }
     e.preventDefault();
     var formdata;
-    formdata={'type':'stop'};
+    formdata={'emergency_type':reqType};
     let userData={
                 'url':VALIDATE_SAFETY,
                 'method':POST,
@@ -206,7 +225,8 @@ function mapStateToProps(state, ownProps){
       modalStatus: state.emergency.hideModal || false,
       safetySpinner:state.spinner.safetySpinner || false,
       system_emergency:state.tabsData.system_emergency||false,
-      system_data:state.tabsData.system_data||null
+      system_data:state.tabsData.system_data||null,
+      fireHazard:state.fireHazardDetail
   };
 }
 var mapDispatchToProps=function(dispatch){

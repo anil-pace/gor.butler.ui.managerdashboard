@@ -1,4 +1,5 @@
 .gor-tabs{
+
 	.gorTab{
 		&.gorContainer{
 			background-color:#4d5055;
@@ -24,6 +25,17 @@
 				{
 				 background: #4d5055;
 				}
+				.gor-toastify{
+				    position: fixed;
+				    width: 400px;
+				    height: 83px;
+				    border-radius: 6px;
+				    background-color: #ec1c2d;
+				    box-shadow: 0 4px 14px 0 rgba(159, 0, 0, 0.3);
+				    right: 0;
+				    top: 60px;
+				}	
+
 			}
 		.gorInline{
 			display: inline-block;

@@ -53,6 +53,8 @@ export  function appInfo(state={},action){
          return Object.assign({}, state, { 
             "notifyInfo":notifyPass
          })
+   
+
     case NOTIFY_DELETE:
          let notifyDel=action.data, notifyDelInfo;
          notifyDelInfo={

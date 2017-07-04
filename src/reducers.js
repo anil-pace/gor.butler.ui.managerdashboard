@@ -39,6 +39,8 @@ import {utilityValidations} from './reducers/utilityReducer';
 import {overviewDetails} from './reducers/overviewReducer';
 import {configReducer} from './reducers/configReducer';
 import {notificationReducer} from './reducers/notificationReducer'
+import {fireHazardDetail} from './reducers/fireHazardReducer';
+import {fireReducer} from './reducers/fireReducer';
 import {ppsConfiguration} from './reducers/ppsConfigurationReducer'
 
 const rootReducer=combineReducers({
@@ -80,7 +82,9 @@ const rootReducer=combineReducers({
   emergency,
   utilityValidations,
   overviewDetails,config:configReducer,
-  notificationReducer,ppsConfiguration
+  notificationReducer,
+  fireHazardDetail,
+  fireReducer,ppsConfiguration
    })
 
 export default rootReducer

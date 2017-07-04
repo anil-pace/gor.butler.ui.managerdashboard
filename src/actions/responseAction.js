@@ -1,8 +1,7 @@
 
-import {BUTLERS_DATA,PPS_DATA,PUT_DATA,AUDIT_DATA,INVENTORY_DATA_TODAY,INVENTORY_DATA,INVENTORY_DATA_HISTORY,ORDERS_DATA,CHARGERS_DATA,THROUGHPUT_DATA,HISTOGRAM_DATA,CHARGERS_DETAIL,BUTLERS_DETAIL,PPS_PERFORMANCE, USER_DETAILS} from '../constants/frontEndConstants'
+import {BUTLERS_DATA,PPS_DATA,PUT_DATA,AUDIT_DATA,INVENTORY_DATA_TODAY,INVENTORY_DATA,INVENTORY_DATA_HISTORY,ORDERS_DATA,CHARGERS_DATA,THROUGHPUT_DATA,HISTOGRAM_DATA,CHARGERS_DETAIL,BUTLERS_DETAIL,PPS_PERFORMANCE, USER_DETAILS,FIRE_EMERGENCY,NOTIFY_EMERGENCY_END} from '../constants/frontEndConstants'
 import {PPS_DETAIL,PARSE_PPS} from '../constants/backEndConstants'
 
-//import {getFetchData} from 'headerAction'
 
 export function receivePpsData(data){
 	return{
@@ -103,3 +102,18 @@ export function recieveInventoryDetails(data){
 		data
 	}
 }
+
+export function recievefireHazardDetails(data){
+	return {
+		type: FIRE_EMERGENCY,
+		data
+	}
+}
+export function notifyEmergencyEnd(data){	
+	return{
+		type:NOTIFY_EMERGENCY_END,
+		data
+	}
+}
+ 
+

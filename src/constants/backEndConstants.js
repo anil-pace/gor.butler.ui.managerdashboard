@@ -56,6 +56,7 @@ export const CODE_AE007='ae007';
 export const CODE_AE008='ae008';
 export const CODE_E051='e051';
 export const CODE_E052='e052';
+export const CODE_E135='e135';
 /*User roles map*/
 export const BUTLER_SUPERVISOR='butler_supervisor';
 export const BUTLER_UI='butler_ui';
@@ -284,6 +285,37 @@ export const  stringConfig= defineMessages({
         "description": "Text for safety checklist item 6",
         "defaultMessage": "All Zigbee boxes are online."
     },
+     md007 : {
+        "id": "stringConfig.md007",
+        "description": "Text for safety checklist item 7",
+        "defaultMessage": "[Manual] Peripherals status known."
+    },
+     md008 : {
+        "id": "stringConfig.md008",
+        "description": "Text for safety checklist item 8",
+        "defaultMessage": "[Manual] Physical inventory verified."
+    },
+     md009 : {
+        "id": "stringConfig.md009",
+        "description": "Text for safety checklist item 9",
+        "defaultMessage": "[Automatic] No Emergency buttons in 'pressed' state"
+    },
+     md010 : {
+        "id": "stringConfig.md010",
+        "description": "Text for safety checklist item 10",
+        "defaultMessage": "[Manual] All shutters open  in active zones."
+    },
+     md011 : {
+        "id": "stringConfig.md011",
+        "description": "Text for safety checklist item 11",
+        "defaultMessage": "[Manual] No humans in operations area."
+    },
+     md012 : {
+        "id": "stringConfig.md012",
+        "description": "Text for safety checklist item 12",
+        "defaultMessage": "[Manual] All paths cleared of any debris.."
+    },
+
     audit_reaudited: {
         "id": "stringConfig.audit_reaudited",
         "description": "Text for audit reaudited status",

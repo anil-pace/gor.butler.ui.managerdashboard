@@ -1,19 +1,15 @@
 import React  from 'react';
 import { connect } from 'react-redux' ;
 import {userRequest} from '../../actions/userActions';
-import { FormattedMessage,FormattedPlural } from 'react-intl'; 
+import { FormattedMessage } from 'react-intl'; 
 import {modal} from 'react-redux-modal';
 import {validatePassword, modalFormReset} from '../../actions/validationActions';
 import { emptyField } from '../../utilities/fieldCheck';
 import {LOGIN_URL} from '../../constants/configConstants';
-import {ERROR,TYPING,APP_JSON,POST,SUCCESS,RESUME_OPERATION} from '../../constants/frontEndConstants';
+import {ERROR,APP_JSON,POST,SUCCESS,RESUME_OPERATION,EMERGENCY_FIRE} from '../../constants/frontEndConstants';
 import SafetyChecklist from './safetyChecklist';
 
 class ResumeOperation extends React.Component{
-  constructor(props) 
-  {
-      super(props);  
-  }
   _removeThisModal() {
       this.props.resetForm();
       this.props.removeModal();
@@ -29,8 +25,9 @@ class ResumeOperation extends React.Component{
           return loginPassInfo.type;    
   }
   componentWillReceiveProps(nextProps){
-    if(!nextProps.auth_token||!nextProps.system_emergency||nextProps.system_data !== this.props.system_data)
+    if(!nextProps.auth_token||!nextProps.system_emergency||nextProps.system_data !== this.props.system_data )
     {
+      if(nextProps.system_emergency || nextProps.fireHazard.emergency_type!==EMERGENCY_FIRE)
       this._removeThisModal();
     }
     if(nextProps.modalStatus && !this.props.modalStatus){
@@ -110,7 +107,9 @@ class ResumeOperation extends React.Component{
       passwordCheck: state.appInfo.passwordInfo||{},
       modalStatus: state.emergency.hideModal || false,
       system_emergency:state.tabsData.system_emergency||false,
-      system_data:state.tabsData.system_data||null
+      system_data:state.tabsData.system_data||null,
+      fireHazard:state.fireHazardDetail,
+
     }
 } 
 function mapDispatchToProps(dispatch){

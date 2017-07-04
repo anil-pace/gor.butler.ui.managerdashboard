@@ -78,7 +78,7 @@ import {
 	GET_ALL_NOTIFICATIONS,
 	SEARCHED_NOTIFICATIONS_DATA_ALL,FETCH_PPS_PROFILES
 } from "../constants/frontEndConstants";
-
+import {notifyEmergencyEnd} from '../actions/responseAction';
 import { BUTLER_UI, CODE_E027 } from "../constants/backEndConstants";
 import {
 	UE002,
@@ -346,18 +346,35 @@ export function AjaxParse(store, res, cause, status, saltParams) {
 			var rejectList = [],
 				rejectResponse = res,
 				modalFlag = true;
-			if (rejectResponse.data) {
-				rejectList = rejectResponse.data;
-				if (!rejectList.length) {
-					store.dispatch(notifySuccess(ES));
-				} else {
-					modalFlag = false;
+
+			if(rejectResponse.successful){
+
+				if(rejectResponse.emergency_end_time)
+				{
+				store.dispatch(notifyEmergencyEnd(rejectResponse.emergency_end_time)); 
+				
 				}
-			} else if (rejectResponse.alert_data) {
+				else 
+				{
+				store.dispatch(notifySuccess(ES));
+				}
+				  
+			}
+
+			else if (rejectResponse.alert_data) {
+				if(rejectResponse.alert_data[0].details[0])
+				{
+				rejectList = rejectResponse.alert_data[0].details[0].failed_validations;
+				modalFlag = false;
+				}
+				else
+				{
 				stringInfo = codeToString(res.alert_data[0]);
 				store.dispatch(notifyFail(stringInfo.msg));
-			}
-			store.dispatch(modalStatus(modalFlag));
+				}
+
+			} 
+			store.dispatch(modalStatus(modalFlag));                           
 			store.dispatch(setSafetySpinner(false));
 			store.dispatch(getSafetyErrorList(rejectList));
 			break;

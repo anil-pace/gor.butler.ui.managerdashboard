@@ -108,6 +108,13 @@ export const wsOverviewData={
                     "data": "aggregate_v2",
                     "callback": []
                   }
+                },
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
                 }
         ]
 },
@@ -167,6 +174,13 @@ export const wsOverviewData={
                   "resource_id": "system",
                   "details": {
                     "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
                     "callback": []
                   }
                 }
@@ -230,6 +244,13 @@ export const wsOverviewData={
                     "data": "header",
                     "callback": []
                   }
+                },
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
                 }
           ]
 },
@@ -289,6 +310,13 @@ export const wsOverviewData={
                   "resource_id": "system",
                   "details": {
                     "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
                     "callback": []
                   }
                 }
@@ -352,6 +380,13 @@ export const wsOverviewData={
                     "data": "header",
                     "callback": []
                   }
+                },
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
                 }
 		]
 },
@@ -413,6 +448,13 @@ export const wsOverviewData={
                     "data": "header",
                     "callback": []
                   }
+                },
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
                 }
 		]
 },
@@ -472,6 +514,13 @@ export const wsOverviewData={
                   "resource_id": "system",
                   "details": {
                     "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
                     "callback": []
                   }
                 }
@@ -545,6 +594,13 @@ export const wsOverviewData={
                     "data": "header",
                     "callback": []
                   }
+                },
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
                 }
                 
           ]
@@ -607,6 +663,13 @@ export const wsOverviewData={
                     "data": "header",
                     "callback": []
                   }
+                },
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
                 }
           ]
 },
@@ -616,6 +679,74 @@ export const wsOverviewData={
           "data": [
                 {
                   "resource_id": "orders",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "audit",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "overview",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "waves",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "users",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "inventory_today",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "status",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "system",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
+                }
+          ]
+},
+"emergency":{
+          "type": "subscribe",
+          "data": [
+                {
+                  "resource_id": "emergency",
                   "details": {
                     "data": "complete_v2",
                     "callback": []
