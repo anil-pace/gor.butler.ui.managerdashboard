@@ -4,7 +4,7 @@
 import {
     PPS_CONFIGURATION_REFRESHED,
     RECEIVE_PPS_PROFILES,
-    SELECT_PPS_PROFILE_FOR_CONFIGURATION, SELECT_PPS_BIN, ADD_TAG_TO_BIN,CLEAR_SELECTION_PPS_BIN,TOGGLE_PPS_BIN_STATUS
+    SELECT_PPS_PROFILE_FOR_CONFIGURATION, SELECT_PPS_BIN, ADD_TAG_TO_BIN, CLEAR_SELECTION_PPS_BIN, TOGGLE_PPS_BIN_STATUS
 } from '../constants/frontEndConstants';
 /**
  * @param  {State Object}
@@ -58,7 +58,7 @@ export function ppsConfiguration(state = {}, action) {
             selected_bin = action.data.bin
             selected_bin.id = [state.selectedPPS.pps_id, selected_bin.pps_bin_id].join("-")
             return Object.assign({}, state, {
-                "selectedPPSBin": {[action.data.currentView]:selected_bin}
+                "selectedPPSBin": {[action.data.currentView]: selected_bin}
             })
 
         case CLEAR_SELECTION_PPS_BIN:
@@ -70,16 +70,16 @@ export function ppsConfiguration(state = {}, action) {
 
         case TOGGLE_PPS_BIN_STATUS:
             selected_bin = action.data.bin
-            selected_bin.enabled=!selected_bin.enabled
+            selected_bin.enabled = !selected_bin.enabled
             return Object.assign({}, state, {
-                "selectedPPSBin": {[action.data.currentView]:selected_bin}
+                "selectedPPSBin": {[action.data.currentView]: selected_bin}
             })
 
         case ADD_TAG_TO_BIN:
             selected_bin = action.data.bin
             selected_tag = action.data.tag
             if (!selected_bin.tags) {
-                selected_tag.tags = []
+                selected_bin.tags = []
             }
             if (selected_bin.tags.map(function (tag) {
                     return tag.name
@@ -92,7 +92,7 @@ export function ppsConfiguration(state = {}, action) {
             }
 
             return Object.assign({}, state, {
-                "selectedPPSBin": selected_bin
+                "selectedPPSBin": {"tags": selected_bin}
             })
 
 
