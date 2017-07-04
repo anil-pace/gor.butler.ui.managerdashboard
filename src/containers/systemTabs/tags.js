@@ -31,7 +31,7 @@ class Tags extends React.Component {
         }else{
             this.setState({canAddTag:false})
         }
-        this.setState({filteredTags: filteredTags, filter: e.target.value})
+        this.setState({filteredTags: filteredTags, filter: (e.target.value||"")})
     }
 
     handleTagSelect(selectedTag,e){
@@ -59,6 +59,10 @@ class Tags extends React.Component {
 
     }
 
+    clearSearch(e){
+        this.searchTags(e)
+    }
+
 
     render() {
         let self=this
@@ -66,7 +70,8 @@ class Tags extends React.Component {
 
             <div className="pps-tags-header">Tags</div>
             <div className="pps-searchbox-container">
-                <input type="text" onChange={this.searchTags.bind(this)}/>
+                <input type="text" onChange={this.searchTags.bind(this)} value={this.state.filter}/>
+                <span onClick={this.clearSearch.bind(this)} style={{marginLeft:-15,cursor:'pointer'}}>X</span>
             </div>
 
             <div className="pps-searchresult-label">{this.state.filter ? "Search Results" : "All Tags"}</div>
