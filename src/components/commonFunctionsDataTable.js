@@ -100,12 +100,16 @@ function auditTaskActions(data, index){
         {value: 'deleteRecord', label: deleteRecord,disabled:false},
         {value:"cancelTask",label:cancelTask,disabled:false}
     ]
-    if(data.newData && !data.newData[index].cancellable){
-        taskList[2].disabled=true
+    if(data.newData && !data.newData[index].duplicatable){
+        taskList[0].disabled=true
     }
     if(data.newData && !data.newData[index].deletable){
         taskList[1].disabled=true
     }
+    if(data.newData && !data.newData[index].cancellable){
+        taskList[2].disabled=true
+    }
+
     return taskList
 }
 
