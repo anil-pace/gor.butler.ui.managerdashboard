@@ -350,7 +350,7 @@ class AuditTab extends React.Component {
                 }
                 auditData.status=auditStatus[data[i].audit_status];
                 auditData.statusClass=statusClass[data[i].audit_status];
-                if (data[i].audit_status=== AUDIT_CREATED) {
+                if (data[i].audit_button_data && data[i].audit_button_data.audit_start_button==="enable") {
                     auditData.startAudit=true;
                 }
 
@@ -359,7 +359,7 @@ class AuditTab extends React.Component {
                 }
 
 
-                if (data[i].audit_status=== AUDIT_PENDING_APPROVAL) {
+                if (data[i].audit_button_data && data[i].audit_button_data.audit_resolve_button==="enable") {
                     auditData.resolveAudit=true;
                 }
 
@@ -367,18 +367,32 @@ class AuditTab extends React.Component {
                     auditData.resolveAudit=false;
                 }
 
-                if (data[i].audit_status=== AUDIT_RESOLVED || data[i].audit_status=== AUDIT_LINE_REJECTED || (data[i].audit_status=== "audit_reaudited" || total_lines>0 && data[i].unresolved===0)) {
+                if (data[i].audit_button_data && data[i].audit_button_data.audit_view_issues_button==="enable") {
                     auditData.viewIssues=true;
                 }
 
                 else {
                     auditData.viewIssues=false;
                 }
-                if(["audit_pending", "audit_waiting", "audit_conflicting","audit_accepted", "audit_started", "audit_tasked","audit_rejected"].indexOf(data[i].audit_status)>-1){
+                if(data[i].audit_button_data && data[i].audit_button_data.audit_cancel_button==="enable"){
                     auditData.cancellable=true
                 }else{
                     auditData.cancellable=false
                 }
+
+                if(data[i].audit_button_data && data[i].audit_button_data.audit_duplicate_button==="enable"){
+                    auditData.duplicatable=true
+                }else{
+                    auditData.duplicatable=false
+                }
+
+                if(data[i].audit_button_data && data[i].audit_button_data.audit_delete_button==="enable"){
+                    auditData.deletable=true
+                }else{
+                    auditData.deletable=false
+                }
+
+
             }
 
             if (data[i].start_actual_time) {
@@ -456,7 +470,6 @@ class AuditTab extends React.Component {
                 auditData.cancelling=nProps.context.intl.formatMessage(messages.auditCancellingText)
             }
             if(data[i].audit_status==='audit_created'){
-                auditData.deletable=true
                 auditData.infoIcon="created"
             }
             let rejected_lines=0
