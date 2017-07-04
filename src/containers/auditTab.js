@@ -359,7 +359,7 @@ class AuditTab extends React.Component {
                 }
 
 
-                if (data[i].audit_status=== AUDIT_PENDING_APPROVAL) {
+                if (data[i].audit_status=== AUDIT_PENDING_APPROVAL|| data[i].unresolved>0) {
                     auditData.resolveAudit=true;
                 }
 
