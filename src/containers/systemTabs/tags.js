@@ -71,7 +71,7 @@ class Tags extends React.Component {
             <div className="pps-tags-header">Tags</div>
             <div className="pps-searchbox-container">
                 <input type="text" onChange={this.searchTags.bind(this)} value={this.state.filter}/>
-                <span onClick={this.clearSearch.bind(this)} style={{marginLeft:-15,cursor:'pointer'}}>X</span>
+                {this.state.filter?<span onClick={this.clearSearch.bind(this)} style={{marginLeft:-15,cursor:'pointer'}}>X</span>:null}
             </div>
 
             <div className="pps-searchresult-label">{this.state.filter ? "Search Results" : "All Tags"}</div>
