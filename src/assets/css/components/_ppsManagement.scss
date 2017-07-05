@@ -37,6 +37,28 @@
   float: left;
   cursor: pointer
 }
+.pps-configuration-navigation-tabs .seat-description {
+  padding: 20px;
+  box-sizing: border-box;
+  width: 20%;
+  float: right;
+  font-weight: normal;
+}
+
+.pps-bin-action-button {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  width: 113px;
+  height: 35px;
+  font-size: 14px;
+  background: #fff;
+  border-radius: 3px;
+  border-color: #A6A7A9;
+  border-style: double;
+  border-width: 2px;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-right:10px
+}
 
 .pps-list-container {
   float: left;
@@ -135,20 +157,6 @@
   left: 0;
   background: rgba(0, 0, 255, 0.5);
   z-index: 2;
-}
-
-.pps-bin-action-button {
-  background-color: white;
-  color: black;
-  padding: 5px 0;
-  z-index: 2;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 100%;
-  display: inline-block;
-  position: absolute;
-  left: 0;
-  background: rgba(255, 255, 255, 1);
 }
 
 .pps-bin-info {

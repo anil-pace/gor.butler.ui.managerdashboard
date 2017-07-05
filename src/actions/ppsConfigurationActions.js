@@ -5,7 +5,7 @@ import {
     RECEIVE_PPS_PROFILES,
     SELECT_PPS_PROFILE_FOR_CONFIGURATION,
     AJAX_CALL,
-    SELECT_PPS_BIN,ADD_TAG_TO_BIN,CLEAR_SELECTION_PPS_BIN,TOGGLE_PPS_BIN_STATUS
+    SELECT_PPS_BIN,ADD_TAG_TO_BIN,CLEAR_SELECTION_PPS_BIN,CHANGE_PPS_BIN_STATUS
 } from './../constants/frontEndConstants'
 export function fetchPPSProfiles(params) {
     return {
@@ -40,9 +40,9 @@ export function clearSelectionPPSBin(data) {
         data
     }
 }
-export function togglePPSBinStatus(data) {
+export function changePPSBinStatus(data) {
     return {
-        type: TOGGLE_PPS_BIN_STATUS,
+        type: CHANGE_PPS_BIN_STATUS,
         data
     }
 }

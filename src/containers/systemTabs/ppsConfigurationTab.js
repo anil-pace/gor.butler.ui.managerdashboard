@@ -71,6 +71,7 @@ class PPSConfiguration extends React.Component {
                         <div className={['navigation-tab',(this.state.currentView==='tags'?'active':'')].join(" ")} onClick={this.handleClickOnNavigation.bind(this,'tags')}>Assign tags to bin</div>
                         <div className={['navigation-tab',(this.state.currentView==='bins'?'active':'')].join(" ")} onClick={this.handleClickOnNavigation.bind(this,'bins')}>Bin activate/deactivate</div>
                         <div className={['navigation-tab',(this.state.currentView==='groups'?'active':'')].join(" ")} onClick={this.handleClickOnNavigation.bind(this,'groups')}>Bin group enable/disable</div>
+                        <div className={['seat-description'].join(" ")}>Front View</div>
                     </div>
                     <Bins currentView={this.state.currentView}/> {/* "currentView" will bes used to set the width of bins*/}
                     {this.state.currentView==='tags' && <Tags/>}

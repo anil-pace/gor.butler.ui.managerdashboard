@@ -4,7 +4,7 @@
 import {
     PPS_CONFIGURATION_REFRESHED,
     RECEIVE_PPS_PROFILES,
-    SELECT_PPS_PROFILE_FOR_CONFIGURATION, SELECT_PPS_BIN, ADD_TAG_TO_BIN, CLEAR_SELECTION_PPS_BIN, TOGGLE_PPS_BIN_STATUS
+    SELECT_PPS_PROFILE_FOR_CONFIGURATION, SELECT_PPS_BIN, ADD_TAG_TO_BIN, CLEAR_SELECTION_PPS_BIN, CHANGE_PPS_BIN_STATUS
 } from '../constants/frontEndConstants';
 /**
  * @param  {State Object}
@@ -68,9 +68,9 @@ export function ppsConfiguration(state = {}, action) {
                 "selectedPPSBin": {[action.data.currentView]: null}
             })
 
-        case TOGGLE_PPS_BIN_STATUS:
+        case CHANGE_PPS_BIN_STATUS:
             selected_bin = action.data.bin
-            selected_bin.enabled = !selected_bin.enabled
+            selected_bin.enabled =action.data.enabled
             return Object.assign({}, state, {
                 "selectedPPSBin": {[action.data.currentView]: selected_bin}
             })

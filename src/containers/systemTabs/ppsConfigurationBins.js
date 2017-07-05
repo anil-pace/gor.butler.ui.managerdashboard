@@ -6,7 +6,7 @@
  */
 import React  from 'react';
 import {connect} from 'react-redux'
-import {selectPPSBin, clearSelectionPPSBin,togglePPSBinStatus} from './../../actions/ppsConfigurationActions'
+import {selectPPSBin, clearSelectionPPSBin, changePPSBinStatus} from './../../actions/ppsConfigurationActions'
 import Bin from './../../components/bin/bin'
 
 class Bins extends React.Component {
@@ -35,8 +35,8 @@ class Bins extends React.Component {
      * The method will toggle the
      * PPS Bin enable disable status
      */
-    togglePPSBinStatus(bin){
-        this.props.togglePPSBinStatus({bin,currentView:'bins'})
+    changePPSBinStatus(bin, status) {
+        this.props.changePPSBinStatus({bin, currentView: 'bins', enabled: status})
     }
 
     /**
@@ -75,19 +75,18 @@ class Bins extends React.Component {
                                     binId={bin_id}/></span>
                             } else if (self.props.currentView === 'bins') {
                                 return <span
-                                    onMouseEnter={self.selectBin.bind(self, self.props.selectedPPS.pps_bins[bin_indx], self.props.currentView)}
-                                    onMouseLeave={self.clearSelectionPPSBin.bind(self, self.props.selectedPPS.pps_bins[bin_indx], self.props.currentView)}
-                                    className={[(selected_bin ? 'mouseover' : null)].join(" ")}
+                                    onClick={self.selectBin.bind(self, self.props.selectedPPS.pps_bins[bin_indx], self.props.currentView)}
+                                    className={[(selected_bin ? 'selected' : null)].join(" ")}
                                     key={self.props.selectedPPS.pps_bins[bin_indx].pps_bin_id}>
                                     <Bin binId={bin_id} disabled={!self.props.selectedPPS.pps_bins[bin_indx].enabled}>
-                                        {selected_bin?<span className="pps-bin-action"><span onClick={self.togglePPSBinStatus.bind(self,self.props.selectedPPS.pps_bins[bin_indx])} className="pps-bin-action-button">{self.props.selectedPPS.pps_bins[bin_indx].enabled?'Disable':"Enable"}</span></span>:null}
+                                        {/*{selected_bin?<span className="pps-bin-action"><span onClick={self.togglePPSBinStatus.bind(self,self.props.selectedPPS.pps_bins[bin_indx])} className="pps-bin-action-button">{self.props.selectedPPS.pps_bins[bin_indx].enabled?'Disable':"Enable"}</span></span>:null}*/}
                                     </Bin>
                                 </span>
                             } else {
                                 //groups
                                 return <span
-                                    onMouseEnter={self.selectBin.bind(self, self.props.selectedPPS.pps_bins[bin_indx], self.props.currentView)}
-                                    className={[(selected_bin ? 'mouseover' : null)].join(" ")}
+                                    onClick={self.selectBin.bind(self, self.props.selectedPPS.pps_bins[bin_indx], self.props.currentView)}
+                                    className={[(selected_bin ? 'selected' : null)].join(" ")}
                                     key={self.props.selectedPPS.pps_bins[bin_indx].pps_bin_id}><Bin
                                     binId={bin_id}/></span>
                             }
@@ -95,6 +94,32 @@ class Bins extends React.Component {
                         })}
                     </div>)
                 })}
+
+                {self.props.currentView === 'bins' && <div className="pps-bin-actions pps-bin-row" style={{textAlign: 'center'}}>
+                    {self.props.selectedPPSBin && self.props.selectedPPSBin['bins'] ? (
+                        <button
+                            disabled={self.props.selectedPPSBin['bins'].enabled}
+                            className="pps-bin-action-button"
+                            onClick={self.changePPSBinStatus.bind(self, self.props.selectedPPSBin['bins'], true)}>
+                            ACTIVATE
+                        </button> ) : (<button
+                        disabled={true}
+                        className="pps-bin-action-button">
+                        ACTIVATE
+                    </button>)}
+
+                    {self.props.currentView === 'bins' && self.props.selectedPPSBin && self.props.selectedPPSBin['bins'] ? (
+                        <button
+                            disabled={!self.props.selectedPPSBin['bins'].enabled}
+                            className="pps-bin-action-button"
+                            onClick={self.changePPSBinStatus.bind(self, self.props.selectedPPSBin['bins'], false)}>
+                            DEACTIVATE
+                        </button> ) : (<button disabled={true}
+                                               className="pps-bin-action-button">
+                        DEACTIVATE
+                    </button>)}
+                </div>}
+
 
             </div>
             <div style={{clear: 'both', overflow: 'auto'}}>
@@ -121,8 +146,8 @@ var mapDispatchToProps = function (dispatch) {
         clearSelectionPPSBin: function (data) {
             dispatch(clearSelectionPPSBin(data));
         },
-        togglePPSBinStatus: function (data) {
-            dispatch(togglePPSBinStatus(data));
+        changePPSBinStatus: function (data) {
+            dispatch(changePPSBinStatus(data));
         },
     }
 };
