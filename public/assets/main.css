@@ -7010,8 +7010,7 @@ button:disabled {
 }
 
 .pps-list-item.selected {
-  background: #ccc;
-  color: white;
+  background: #f2f2f2;
 }
 
 .pps-list-item-profiles {
@@ -7053,11 +7052,7 @@ button:disabled {
 }
 
 .selected .pps-bin {
-  border: 2px solid blue;
-}
-
-.mouseover .pps-bin {
-  background: rgba(0, 0, 255, 0.5);
+  border: 2px solid #4990e2;
 }
 
 .mouseover .pps-bin.disabled {
@@ -7068,17 +7063,6 @@ button:disabled {
   display: inline-block;
   height: 20px;
   font-size: 14px;
-}
-
-.pps-bin-action {
-  width: 100%;
-  height: 100%;
-  display: inline-block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: rgba(0, 0, 255, 0.5);
-  z-index: 2;
 }
 
 .pps-bin-info {
@@ -7092,7 +7076,7 @@ button:disabled {
 }
 
 .selected .pps-bin-info {
-  background-color: blue;
+  background-color: #4990e2;
 }
 
 .pps-tags-container {
