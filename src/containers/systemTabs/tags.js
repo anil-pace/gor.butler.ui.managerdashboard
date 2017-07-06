@@ -97,8 +97,9 @@ class Tags extends React.Component {
             </div>
 
             <div className="pps-searchresult-label">{this.state.filter ? "Search Results" : "All Tags"}</div>
+            <div className="pps-tag-list" style={{maxHeight:420,overflow:'auto'}}>
             {this.state.filteredTags.map(function (tag) {
-                return <div className="pps-tags-row" key={tag.name}>
+                return <div className="pps-tags-row" key={tag.id}>
                     <span className="pps-tag-name" style={{
 
                     }}>{tag.name}</span>
@@ -107,6 +108,7 @@ class Tags extends React.Component {
                     </span>
                 </div>
             })}
+            </div>
             {this.state.canAddTag?<div className="pps-add-tag-container" style={{
 
             }}>
