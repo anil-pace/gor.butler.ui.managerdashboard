@@ -6966,6 +6966,7 @@ button:disabled {
   width: 20%;
   float: right;
   font-weight: normal;
+  text-align: right;
 }
 
 .pps-bin-action-button {
