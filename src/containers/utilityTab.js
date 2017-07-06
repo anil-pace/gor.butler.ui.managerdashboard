@@ -674,7 +674,7 @@ class UtilityTab extends React.Component {
 								)}
 								showFooter={false}
 							>
-								<ScriptsTile />
+								<ScriptsTile auth_token={this.props.auth_token}/>
 							</UtilityTile>
 						: null}
 					{show_stock_ledger_widget
