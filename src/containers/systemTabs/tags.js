@@ -3,7 +3,9 @@
  */
 import React  from 'react';
 import {connect} from 'react-redux'
-import {addTagToBin} from './../../actions/ppsConfigurationActions'
+import {addTagToBin,fetchTags} from './../../actions/ppsConfigurationActions'
+import {FETCH_TAGS_URL} from './../../constants/configConstants'
+import {GET,FETCH_TAGS,APP_JSON} from './../../constants/frontEndConstants'
 class Tags extends React.Component {
     constructor(props) {
         super(props)
@@ -16,8 +18,25 @@ class Tags extends React.Component {
 
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.tags !== this.state.tags) {
+            this.setState({tags: nextProps.tags,filteredTags: nextProps.tags})
+        }
+    }
+
     componentDidMount() {
-        this.setState({filteredTags: this.state.tags})
+        /**
+         * Fetch PPS List
+         */
+        let data={
+            'url': FETCH_TAGS_URL,
+            'method': GET,
+            'cause': FETCH_TAGS,
+            'contentType': APP_JSON,
+            'accept': APP_JSON,
+            'token': this.props.auth_token
+        }
+        this.props.fetchTags(data)
     }
 
     searchTags(e) {
@@ -66,6 +85,9 @@ class Tags extends React.Component {
 
     render() {
         let self=this
+        if(self.props.tags.length===0){
+            return null
+        }
         return <div className="pps-tags-container">
 
             <div className="pps-tags-header">Tags</div>
@@ -100,8 +122,8 @@ function mapStateToProps(state, ownProps) {
     return {
         selectedProfile:state.ppsConfiguration.selectedProfile||{id:null},
         selectedPPS:state.ppsConfiguration.selectedPPS||{id:null},
-        selectedPPSBin:state.ppsConfiguration.selectedPPSBin
-
+        selectedPPSBin:state.ppsConfiguration.selectedPPSBin,
+        tags:state.ppsConfiguration.tags||[],
     };
 }
 
@@ -109,6 +131,9 @@ var mapDispatchToProps = function (dispatch) {
     return {
         addTagToBin:function(data){
             dispatch(addTagToBin(data))
+        },
+        fetchTags:function(data){
+            dispatch(fetchTags(data))
         }
     }
 };

@@ -4,7 +4,7 @@
 import {
     PPS_CONFIGURATION_REFRESHED,
     RECEIVE_PPS_PROFILES,
-    SELECT_PPS_PROFILE_FOR_CONFIGURATION, SELECT_PPS_BIN, ADD_TAG_TO_BIN, CLEAR_SELECTION_PPS_BIN, CHANGE_PPS_BIN_STATUS
+    SELECT_PPS_PROFILE_FOR_CONFIGURATION, SELECT_PPS_BIN, ADD_TAG_TO_BIN, CLEAR_SELECTION_PPS_BIN, CHANGE_PPS_BIN_STATUS,RECEIVE_TAGS
 } from '../constants/frontEndConstants';
 /**
  * @param  {State Object}
@@ -25,6 +25,11 @@ export function ppsConfiguration(state = {}, action) {
                 ppsList: pps_list,
                 selectedProfile: pps_list[0].profiles[0],
                 selectedPPS: pps_list[0]
+            })
+
+        case RECEIVE_TAGS:
+            return Object.assign({}, state, {
+                tags: action.params.tags
             })
 
         case SELECT_PPS_PROFILE_FOR_CONFIGURATION:

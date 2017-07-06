@@ -5,7 +5,7 @@ import {
     RECEIVE_PPS_PROFILES,
     SELECT_PPS_PROFILE_FOR_CONFIGURATION,
     AJAX_CALL,
-    SELECT_PPS_BIN,ADD_TAG_TO_BIN,CLEAR_SELECTION_PPS_BIN,CHANGE_PPS_BIN_STATUS
+    SELECT_PPS_BIN,ADD_TAG_TO_BIN,CLEAR_SELECTION_PPS_BIN,CHANGE_PPS_BIN_STATUS,RECEIVE_TAGS
 } from './../constants/frontEndConstants'
 export function fetchPPSProfiles(params) {
     return {
@@ -51,5 +51,18 @@ export function addTagToBin(data) {
     return {
         type: ADD_TAG_TO_BIN,
         data
+    }
+}
+export function fetchTags(params) {
+    return {
+        type: AJAX_CALL,
+        params
+    }
+}
+
+export function receiveTags(params) {
+    return {
+        type: RECEIVE_TAGS,
+        params
     }
 }

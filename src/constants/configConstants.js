@@ -57,6 +57,7 @@ export const READ_MSG_URL = API_URL+"/api-gateway/dashboard-service/platform-das
  */
 
 export const PPS_LIST_URL="http://localhost:5000/api/pps"//TODO: URL need to be changed accrodingly
+export const FETCH_TAGS_URL="http://localhost:5000/api/tags"//TODO: URL need to be changed accrodingly
 
 
 

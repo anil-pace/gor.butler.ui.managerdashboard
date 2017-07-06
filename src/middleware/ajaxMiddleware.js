@@ -1,5 +1,5 @@
   
-import {AJAX_CALL,AUTH_LOGIN,PAUSE_OPERATION,RESUME_OPERATION,MASTER_FILE_UPLOAD,FETCH_PPS_PROFILES} from '../constants/frontEndConstants';
+import {AJAX_CALL,AUTH_LOGIN,PAUSE_OPERATION,RESUME_OPERATION,MASTER_FILE_UPLOAD,FETCH_PPS_PROFILES,FETCH_TAGS} from '../constants/frontEndConstants';
 
 import {AjaxParse} from '../utilities/AjaxParser';
 import {FileResponseParser} from '../utilities/fileResponseParser';
@@ -78,7 +78,7 @@ const ajaxMiddleware=(function(){
 
     httpRequest.open(params.method, params.url,!params.sync);
     //TODO: Need to refactor
-    if(params.cause!==FETCH_PPS_PROFILES){
+    if(params.cause!==FETCH_PPS_PROFILES && params.cause!==FETCH_TAGS){
         if(params.contentType !== false){
             httpRequest.setRequestHeader('Content-Type', params.contentType || "text/html");
         }
