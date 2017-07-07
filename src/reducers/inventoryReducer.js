@@ -61,7 +61,6 @@ import {INVENTORY_DATA_HISTORY,INVENTORY_HISTORY_DAYS_COUNT,
     dataObj.date=parsedDate;
     dataObj.customData=parseDtInMS;
     recreatedData[parseDtInMS].graphInfo=dataObj;
-    //noData=invObj.current_stock ? false : true;
     todayCurrentStock = invObj.current_stock;
 
   }
@@ -73,7 +72,7 @@ import {INVENTORY_DATA_HISTORY,INVENTORY_HISTORY_DAYS_COUNT,
       invObj=inventory[i] ? inventory[i] : {};
       let invDate = new Date(invObj.date);
       invDate = new Date(invDate.getFullYear(),invDate.getMonth(),invDate.getDate())
-      let emptyData=(invDate.getDate() === dateToday.getDate() ? false : true);//Object.keys(invObj).length ? false : true;
+      let emptyData=(invDate.getDate() === dateToday.getDate() ? false : true);
       let histDate=!emptyData ? invDate.getTime() : dateToday.getTime();
       invObj["current_stock"]=!emptyData ? (invObj["opening_stock"] + invObj["items_put"])-invObj["items_picked"] : 0;
       invObj.unusedSpace=!emptyData ? (100 - invObj["warehouse_utilization"]) : 100;
