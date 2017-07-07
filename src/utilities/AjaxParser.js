@@ -411,9 +411,11 @@ export function AjaxParse(store, res, cause, status, saltParams) {
 			break;
 		case REPORTS_HISTORY:
 			store.dispatch(uploadReportHistory(res));
+			store.dispatch(notifySuccess(getFormattedMessages("reprtsRefreshed",res.data)));
 			break;
 		case GRN_HISTORY:
 			store.dispatch(uploadGRNHistory(res));
+			store.dispatch(notifySuccess(getFormattedMessages("grnRefreshed",res.data)));
 			break;
 		case GET_MAX_FILE_SIZE:
 			store.dispatch(updateMaxFileSize(res));
