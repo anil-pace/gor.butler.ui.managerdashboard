@@ -4857,7 +4857,6 @@ button:disabled {
 }
 
 .customColor {
-  background-color: rgba(250, 0, 0, 0.4);
   min-height: 100vh;
 }
 
@@ -4865,12 +4864,20 @@ button:disabled {
   display: none;
 }
 
+.react-redux-modal .rrm-holder .rrm-shadow {
+  background-color: rgba(255, 0, 0, 0.4);
+}
+
+.rrm-body {
+  text-align: center;
+}
+
 .gor-firehazard {
   width: 65%;
   min-height: 15.625rem;
-  border-radius: 1%;
+  border-radius: 5px;
   text-align: left;
-  display: flow-root;
+  display: inline-block;
 }
 
 .gor-firehazard .gor-shutter-text-status {
