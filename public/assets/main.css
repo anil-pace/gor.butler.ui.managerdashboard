@@ -169,7 +169,7 @@ body {
 .statusOl, .statusAl, .iStock, .iAudit, .iPick, .gor-login-user, .gor-login-password, .gor-login-error, .gor-tick, .gor-question, .gor-tick-white, .gor-remove-white, .gor-error-white, .gor-login-user-error, .gor-login-password-error, .gor-question-2, .gor-operation-tick, .gor-alert-lg,
 .gor-dropdown-open, .gor-dropdown-close, .gor-caution, .gor-delay-icon,
 .gor-emergency-dropdown-close, .gor-emergency-dropdown-open, .gor-info-icon, .gor-selected-icon, .not-bell, .searchIcon, .not-statusIcon,
-.calloutArr, .gor-audit-info-icon {
+.calloutArr, .gor-audit-info-icon, .gor-tag-icon {
   background-image: url(./images/icons.svg);
 }
 
@@ -183,6 +183,14 @@ body {
   width: 16px;
   height: 16px;
   display: inline-block;
+}
+
+.gor-tag-icon {
+  background-position: -209px -94px;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .gor-login-user-error {

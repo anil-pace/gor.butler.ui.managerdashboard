@@ -90,7 +90,7 @@ class Tags extends React.Component {
         }
         return <div className="pps-tags-container">
 
-            <div className="pps-tags-header">Tags</div>
+            <div className="pps-tags-header"><span className="gor-tag-icon"/>Tags</div>
             <div className="pps-searchbox-container">
                 <input className="pps-searchbox-tags"type="text" onChange={this.searchTags.bind(this)} value={this.state.filter}/>
                 {this.state.filter?<span className="searchbox-cross-icon" onClick={this.clearSearch.bind(this)} style={{marginLeft:-25,cursor:'pointer'}}/>:null}
