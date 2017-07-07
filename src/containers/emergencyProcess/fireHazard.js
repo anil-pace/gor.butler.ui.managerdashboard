@@ -13,7 +13,7 @@ class FireHazard extends React.Component{
     super(props);
     this.state={buttonDisable:true};
     this._removeThisModal =  this._removeThisModal.bind(this);
-    this._resumeOperation=   this._resumeOperation.bind(this);
+    this._resumeOperation =  this._resumeOperation.bind(this);
   }
   _removeThisModal() {
     this.props.removeModal();

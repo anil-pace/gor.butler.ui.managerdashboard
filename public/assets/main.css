@@ -4856,20 +4856,14 @@ button:disabled {
   margin-left: 40%;
 }
 
-.customColor {
+.react-redux-modal .rrm-content.customColor {
   min-height: 100vh;
+  text-align: center;
+  background-color: rgba(255, 0, 0, 0.4);
 }
 
 .rr-title-actions {
   display: none;
-}
-
-.react-redux-modal .rrm-holder .rrm-shadow {
-  background-color: rgba(255, 0, 0, 0.4);
-}
-
-.rrm-body {
-  text-align: center;
 }
 
 .gor-firehazard {
