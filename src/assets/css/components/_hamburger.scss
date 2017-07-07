@@ -2,6 +2,7 @@
 	display: inline-block;
 	line-height: 22px;	
 	width: 38%;
+	position:relative;
 }
 .gor-menu-heading {
 	font-family: $gor-font-family;
@@ -35,7 +36,20 @@
     text-align: left;
     font-size: 12px;
     color: #666666;
-    max-height: 32px;
+    h1{
+    	font-size: 18px;
+	    font-weight: bold;
+	    color: #3C3F43;
+    }
+    button{
+    	background: #fff;
+	    border: 1px solid #525252;
+	    border-radius: 2px;
+	    padding: 8px 15px;
+	    font-size: 14px;
+	    font-weight: bold;
+	    color: #3C3F43;
+    }
 	&.gor-operation-normal{
 		font-size: 18px;
 		background: #10c469;
@@ -64,11 +78,20 @@
     position: absolute;
     background-color: #FFFFFF;
     width: 330px;
+    top: 42px;
+    right: -22px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-    font-size: 14px;
-    border: solid 1px #aaaaaa;
-    border-top: none;
+    border: solid 1px #EAEAEA;
+    border-radius: 5px;
+}
+.gor-sec-footer{
+	padding: 8px 15px;
+    border-top: 1px solid #eee;
+    .gor-footer-link{
+    	color: #77ACE9;
+    	font-size: 14px;
+    }
 }
 .gor-btn-small{
     font-family:'Source Sans Pro Bold', sans-serif;
