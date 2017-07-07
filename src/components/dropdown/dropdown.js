@@ -13,9 +13,9 @@ class Dropdown extends Component {
 	}
 
 	_onSelect (option) {
-		this.setState({selected: option})
-		this.props.optionDispatch(option.value);
-		var _this=this;
+		this.setState({selected: option}, function (){
+			this.props.optionDispatch(option.value);
+		})
 	}
 
 	shouldComponentUpdate(nextProps,nextState){
