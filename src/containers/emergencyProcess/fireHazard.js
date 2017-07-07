@@ -156,11 +156,11 @@ render()
     <div className="gor-shutter-status-box">
     {shutterWrap}
     </div>          
-    </div>      
+    </div>    
     <button className='gor-resume-btn' disabled={this.state.buttonDisable} onClick={this._resumeOperation}>
     <FormattedMessage id='operation.alert.release.button' 
     defaultMessage="RESUME OPERATION"
-    description="Text button to resume operation"/></button>           
+    description="Text button to resume operation"/></button>         
     </div>
     );
 }

@@ -1,17 +1,22 @@
 @import url('../abstracts/functions');
 .customColor {
-    background-color: rgba(250,0,0,0.4);
     min-height: 100vh;
 }
 .rr-title-actions {
     display: none;
 }
+.react-redux-modal .rrm-holder .rrm-shadow {
+    background-color: rgba(255,0,0,0.4);
+}
+.rrm-body{
+        text-align: center;
+}
 .gor-firehazard {
     width: 65%;
     min-height: calculateRem(250px);
-    border-radius: 1%;
+    border-radius: 5px;
     text-align: left;
-    display: table;
+    display: inline-block;
     .gor-shutter-text-status {
         font-size: 16px;
         text-align: left;
