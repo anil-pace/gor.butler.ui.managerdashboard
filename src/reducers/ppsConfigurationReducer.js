@@ -4,7 +4,12 @@
 import {
     PPS_CONFIGURATION_REFRESHED,
     RECEIVE_PPS_PROFILES,
-    SELECT_PPS_PROFILE_FOR_CONFIGURATION, SELECT_PPS_BIN, ADD_TAG_TO_BIN, CLEAR_SELECTION_PPS_BIN, CHANGE_PPS_BIN_STATUS,RECEIVE_TAGS
+    SELECT_PPS_PROFILE_FOR_CONFIGURATION,
+    SELECT_PPS_BIN,
+    ADD_TAG_TO_BIN,
+    CLEAR_SELECTION_PPS_BIN,
+    CHANGE_PPS_BIN_STATUS,
+    RECEIVE_TAGS
 } from '../constants/frontEndConstants';
 /**
  * @param  {State Object}
@@ -20,7 +25,16 @@ export function ppsConfiguration(state = {}, action) {
             })
         case RECEIVE_PPS_PROFILES:
             pps_list = action.params.pps
-            pps_list[0].selected = true
+            if (pps_list.length < 1 || pps_list[0].profiles.length < 1) {
+                /**
+                 * if empty list of pps or profile received, return with the original state
+                 */
+                return state
+            }
+            pps_list[0].selected = true                       // Mark the first PPS as selected by default.
+            pps_list[0].profiles.filter(function (prfl) {    // Mark the applied profile as selected by default.
+                return prfl.applied
+            })[0].selected = true
             return Object.assign({}, state, {
                 ppsList: pps_list,
                 selectedProfile: pps_list[0].profiles[0],
@@ -47,6 +61,11 @@ export function ppsConfiguration(state = {}, action) {
                                 prfl.selected = false
                             }
                         })
+                    } else {
+                        entry.profiles.filter(function (prfl) { // Mark the applied profile as selected by default.
+                            return prfl.applied
+                        })[0].selected = true
+
                     }
                 } else {
                     entry.selected = false
@@ -75,7 +94,7 @@ export function ppsConfiguration(state = {}, action) {
 
         case CHANGE_PPS_BIN_STATUS:
             selected_bin = action.data.bin
-            selected_bin.enabled =action.data.enabled
+            selected_bin.enabled = action.data.enabled
             return Object.assign({}, state, {
                 "selectedPPSBin": {[action.data.currentView]: selected_bin}
             })
