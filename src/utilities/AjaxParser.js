@@ -429,7 +429,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
 					unsuccessful: unsuccessfulCount,
 					totalCount: successCount + unsuccessfulCount
 				},
-				msg = getFormattedMessages("status", values);
+			msg = getFormattedMessages("status", values);
 			store.dispatch(notifySuccess(msg));
 			store.dispatch(resetCheckedPPSList(res.successful));
 			break;

@@ -6342,7 +6342,7 @@ button:disabled {
   display: block;
   width: 16px;
   height: 16px;
-  background-position: -89px -92px;
+  background-position: -89px -93px;
   position: absolute;
   top: -12px;
   left: 162px;
@@ -6368,7 +6368,7 @@ button:disabled {
   float: right;
   height: 16px;
   width: 16px;
-  background-position: -304px -55px;
+  background-position: -31px -93px;
 }
 
 .notificationWrap .resultOverlay .searchBox {
@@ -6473,8 +6473,8 @@ button:disabled {
   display: inline-block;
   position: relative;
   width: 20px;
-  height: 22px;
-  background-position: -252px -52px;
+  height: 23px;
+  background-position: -278px -52px;
 }
 
 .notificationWrap .not-icon-wrap .not-count {
@@ -6781,15 +6781,6 @@ button:disabled {
 .gor-dropdown {
   cursor: pointer;
   position: relative;
-}
-
-.gor-option-icon {
-  background-image: url(/om/assets/images/ic-arrow-down.svg);
-  background-repeat: no-repeat;
-  width: 12px;
-  height: 20px;
-  vertical-align: middle;
-  display: inline-block;
 }
 
 .gor-white-background {

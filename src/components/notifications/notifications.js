@@ -63,6 +63,7 @@ class Notification extends React.Component{
 				        <section className="row" key={index}>
 							<div className="content">
 								<p className="message">{tuple.description}</p>
+								<p className="message">{tuple.description}</p>
 								<p><span className="time"><FormattedRelative updateInterval={10000} value={new Date(tuple.createTime)}/></span></p>
 							</div>
 							<div className="status">
