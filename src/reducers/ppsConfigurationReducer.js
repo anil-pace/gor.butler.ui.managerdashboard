@@ -9,7 +9,7 @@ import {
     ADD_TAG_TO_BIN,
     CLEAR_SELECTION_PPS_BIN,
     CHANGE_PPS_BIN_STATUS,
-    RECEIVE_TAGS
+    RECEIVE_TAGS,CANCEL_PROFILE_CHANGES
 } from '../constants/frontEndConstants';
 /**
  * @param  {State Object}
@@ -17,7 +17,7 @@ import {
  * @return {[Object] updated state}
  */
 export function ppsConfiguration(state = {}, action) {
-    let selected_pps, selected_profile, current_list, pps_list, selected_bin, selected_tag
+    let selected_pps, selected_profile, current_list, pps_list, selected_bin, selected_tag,immutable_pps_list,pps_index,profile_index
     switch (action.type) {
         case PPS_CONFIGURATION_REFRESHED:
             return Object.assign({}, state, {
@@ -25,6 +25,7 @@ export function ppsConfiguration(state = {}, action) {
             })
         case RECEIVE_PPS_PROFILES:
             pps_list = action.params.pps
+            immutable_pps_list=JSON.parse(JSON.stringify(pps_list))
             if (pps_list.length < 1 || pps_list[0].profiles.length < 1) {
                 /**
                  * if empty list of pps or profile received, return with the original state
@@ -37,6 +38,7 @@ export function ppsConfiguration(state = {}, action) {
             })[0].selected = true
             return Object.assign({}, state, {
                 ppsList: pps_list,
+                immutablePPSList:immutable_pps_list, //Deep cloning of an Array of objects
                 selectedProfile: pps_list[0].profiles[0],
                 selectedPPS: pps_list[0]
             })
@@ -117,6 +119,29 @@ export function ppsConfiguration(state = {}, action) {
 
             return Object.assign({}, state, {
                 "selectedPPSBin": {"tags": selected_bin}
+            })
+
+
+        case CANCEL_PROFILE_CHANGES:
+            pps_list=state.immutablePPSList
+            state.immutablePPSList.forEach(function(pps,index){
+                if(pps.pps_id===action.data.pps.pps_id){
+                    pps_index=index
+                }
+            })
+            action.data.pps.profiles.forEach(function(profile,index){
+                if(profile.selected){
+                    profile_index=index
+                }
+            })
+            selected_pps=state.immutablePPSList[pps_index]
+            pps_list[pps_index].selected = true                       // Mark the first PPS as selected by default.
+            pps_list[pps_index].profiles[profile_index].selected = true
+            return Object.assign({}, state, {
+                ppsList: pps_list,
+                selectedProfile: selected_pps.profiles[profile_index], //If no profile is selected, select the default profile
+                selectedPPS: selected_pps || {},
+                selectedPPSBin: null
             })
 
 

@@ -7052,6 +7052,22 @@ button:disabled {
 .pps-profile-item {
   padding-top: 5px;
   padding-bottom: 5px;
+  clear: both;
+  overflow: auto;
+}
+
+.pps-profile-name {
+  float: left;
+  line-height: 20px;
+}
+
+.profile-applied-label {
+  float: right;
+  padding: 5px;
+  border-radius: 10px;
+  color: white;
+  background-color: #3cb669;
+  font-size: 12px;
 }
 
 .pps-bins-container {

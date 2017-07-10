@@ -6,7 +6,7 @@
  */
 import React  from 'react';
 import {connect} from 'react-redux'
-import {selectPPSBin, clearSelectionPPSBin, changePPSBinStatus} from './../../actions/ppsConfigurationActions'
+import {selectPPSBin, clearSelectionPPSBin, changePPSBinStatus,cancelProfileChanges} from './../../actions/ppsConfigurationActions'
 import Bin from './../../components/bin/bin'
 
 class Bins extends React.Component {
@@ -45,6 +45,16 @@ class Bins extends React.Component {
      */
     saveProfile() {
         console.log(this.props.selectedPPS)
+        console.log(this.props.ppsList)
+        console.log(this.props.immutablePPSList)
+    }
+
+    /**
+     * The method will send the selected PPS
+     * along with the updated profile to the server.
+     */
+    cancelProfileChanges() {
+        this.props.cancelProfileChanges({pps:this.props.selectedPPS})
     }
 
     render() {
@@ -123,6 +133,7 @@ class Bins extends React.Component {
 
             </div>
             <div style={{clear: 'both', overflow: 'auto'}}>
+                <button style={{float: 'right', right: 20}} onClick={this.cancelProfileChanges.bind(this)}>Cancel</button>
                 <button style={{float: 'right', right: 20}} onClick={this.saveProfile.bind(this)}>Save</button>
             </div>
             selectedProfile:{this.props.selectedProfile.name} selectedPPS:{this.props.selectedPPS.pps_id}
@@ -133,7 +144,9 @@ function mapStateToProps(state, ownProps) {
     return {
         selectedProfile: state.ppsConfiguration.selectedProfile || {id: null},
         selectedPPS: state.ppsConfiguration.selectedPPS,
-        selectedPPSBin: state.ppsConfiguration.selectedPPSBin
+        selectedPPSBin: state.ppsConfiguration.selectedPPSBin,
+        ppsList: state.ppsConfiguration.ppsList,
+        immutablePPSList: state.ppsConfiguration.immutablePPSList
 
     };
 }
@@ -148,6 +161,9 @@ var mapDispatchToProps = function (dispatch) {
         },
         changePPSBinStatus: function (data) {
             dispatch(changePPSBinStatus(data));
+        },
+        cancelProfileChanges: function (data) {
+            dispatch(cancelProfileChanges(data));
         },
     }
 };
