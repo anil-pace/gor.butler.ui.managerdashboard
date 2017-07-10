@@ -89,7 +89,6 @@ class Bins extends React.Component {
                                     className={[(selected_bin ? 'selected' : null)].join(" ")}
                                     key={self.props.selectedPPS.pps_bins[bin_indx].pps_bin_id}>
                                     <Bin binId={bin_id} disabled={!self.props.selectedPPS.pps_bins[bin_indx].enabled}>
-                                        {/*{selected_bin?<span className="pps-bin-action"><span onClick={self.togglePPSBinStatus.bind(self,self.props.selectedPPS.pps_bins[bin_indx])} className="pps-bin-action-button">{self.props.selectedPPS.pps_bins[bin_indx].enabled?'Disable':"Enable"}</span></span>:null}*/}
                                     </Bin>
                                 </span>
                             } else {
