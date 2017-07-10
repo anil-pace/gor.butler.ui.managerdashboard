@@ -64,9 +64,9 @@ class PPSList extends React.Component {
                             </div>
                             <div className="pps-list-item-profiles">
                                 {pps.selected && pps.profiles.map(function (profile) {
-                                    return <div onClick={self.selectPPS.bind(self, {pps, profile})}
+                                    return <div className="pps-profile-item" onClick={self.selectPPS.bind(self, {pps, profile})}
                                                 key={profile.id}>
-                                        {profile.name} {profile.applied ? "applied" : ''}
+                                        <span className={profile.selected?'selected':''}>{profile.name}</span> {profile.applied ? "applied" : ''}
                                     </div>
 
                                 })}

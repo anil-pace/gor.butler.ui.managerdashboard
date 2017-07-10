@@ -92,8 +92,17 @@
 }
 
 .pps-list-item-profiles {
-  font-size: 12px;
-  padding-top: 5px
+  padding-top: 5px;
+  cursor: pointer;
+}
+
+.pps-list-item-profiles .selected{
+  font-weight: bold;
+  color:black;
+}
+.pps-profile-item{
+  padding-top:5px;
+  padding-bottom: 5px;
 }
 
 .pps-bins-container {
@@ -230,5 +239,6 @@
 
 .pps-searchbox-tags{
   width:95%;
-  height:25px
+  height:25px;
+  padding-left:5px;
 }
