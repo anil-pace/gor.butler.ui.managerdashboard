@@ -7159,6 +7159,7 @@ button:disabled {
   border: 1px solid #ccc;
   border-radius: 10px;
   float: left;
+  max-width: 80%;
 }
 
 .pps-tag-selection {
@@ -7181,16 +7182,19 @@ button:disabled {
 
 .pps-add-tag-name {
   float: left;
+  max-width: 80%;
 }
 
 .pps-add-tag-button {
   float: right;
+  cursor: pointer;
 }
 
 .pps-searchbox-tags {
-  width: 95%;
+  width: 80%;
   height: 25px;
   padding-left: 5px;
+  padding-right: 25px;
 }
 
 .gor-list-none {
