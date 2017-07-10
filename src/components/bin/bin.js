@@ -10,7 +10,8 @@ class Bin extends React.Component {
 
     render() {
         return (<span className={["pps-bin", this.props.disabled ? 'disabled' : ''].join(" ")}>
-                    <span className="pps-bin-tag-info"> 1 Tag</span>
+            {/*Because only one tag would be there for each bin*/}
+                <span className="pps-bin-tag-info"><span className="gor-tag-icon-grey"/>1 Tag</span>
 
             {this.props.children}
 
