@@ -104,7 +104,7 @@ class Tags extends React.Component {
 
                     }}>{tag.name}</span>
                     <span className="pps-tag-selection">
-                        {self.props.selectedPPSBin && self.props.selectedPPSBin['tags'] &&  <input checked={self.props.selectedPPSBin['tags'].tags.map(function(tag){return tag.name}).indexOf(tag.name)>-1} onClick={self.handleTagSelect.bind(self,tag)} type="checkbox"/>}
+                        {self.props.selectedPPSBin && self.props.selectedPPSBin['tags'] &&  <input checked={self.props.selectedPPSBin['tags'].tags.map(function(tag){return tag.name}).indexOf(tag.name)>-1} onChange={self.handleTagSelect.bind(self,tag)} type="checkbox"/>}
                     </span>
                 </div>
             })}

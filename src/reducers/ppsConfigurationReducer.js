@@ -123,25 +123,30 @@ export function ppsConfiguration(state = {}, action) {
 
 
         case CANCEL_PROFILE_CHANGES:
+            immutable_pps_list=JSON.parse(JSON.stringify(state.immutablePPSList))
             pps_list=state.immutablePPSList
-            state.immutablePPSList.forEach(function(pps,index){
+            pps_list.forEach(function(pps,index){
                 if(pps.pps_id===action.data.pps.pps_id){
                     pps_index=index
                 }
             })
             action.data.pps.profiles.forEach(function(profile,index){
-                if(profile.selected){
+                if(profile.id===state.selectedProfile.id){
                     profile_index=index
                 }
             })
             selected_pps=state.immutablePPSList[pps_index]
             pps_list[pps_index].selected = true                       // Mark the first PPS as selected by default.
             pps_list[pps_index].profiles[profile_index].selected = true
+            selected_bin=null
+            selected_profile=selected_pps.profiles[profile_index]
             return Object.assign({}, state, {
                 ppsList: pps_list,
-                selectedProfile: selected_pps.profiles[profile_index], //If no profile is selected, select the default profile
+                selectedProfile: selected_profile, //If no profile is selected, select the default profile
                 selectedPPS: selected_pps || {},
-                selectedPPSBin: null
+                selectedPPSBin: selected_bin,
+                immutablePPSList:immutable_pps_list
+
             })
 
 
