@@ -13,7 +13,7 @@ class FireHazard extends React.Component{
     super(props);
     this.state={buttonDisable:true};
     this._removeThisModal =  this._removeThisModal.bind(this);
-    this._resumeOperation=   this._resumeOperation.bind(this);
+    this._resumeOperation =  this._resumeOperation.bind(this);
   }
   _removeThisModal() {
     this.props.removeModal();
@@ -156,11 +156,11 @@ render()
     <div className="gor-shutter-status-box">
     {shutterWrap}
     </div>          
-    </div>      
+    </div>    
     <button className='gor-resume-btn' disabled={this.state.buttonDisable} onClick={this._resumeOperation}>
     <FormattedMessage id='operation.alert.release.button' 
     defaultMessage="RESUME OPERATION"
-    description="Text button to resume operation"/></button>           
+    description="Text button to resume operation"/></button>         
     </div>
     );
 }
