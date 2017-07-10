@@ -208,6 +208,13 @@ class Header extends React.Component {
     render() {
         var headerInfo=this._processData()
         var menuDetails=this._processMenu(headerInfo);
+        var startTime = this.context.intl.formatTime(this.props.shift_start_time, {
+            hour: 'numeric',
+            minute: 'numeric',
+            timeZone: this.props.timeOffset,
+            timeZoneName: 'long',
+            hour12: false
+        })
         return (
             <header className="gorHeader head">
                 <div className="mainBlock">
@@ -216,11 +223,41 @@ class Header extends React.Component {
                             <div className="gor-logo logo"></div>
                         </div>
                     </div>
-                    <div className="gor-border"/>
+                    <div className="blockSystem">
+                        <div className={"gor-menu-heading "}>
+                            <FormattedMessage id="header.butler" description="Header description"
+                                         defaultMessage="Butler"/>
+                        </div>
+                        <div className={"gor-menu-subheading "}>
+                            <FormattedMessage id="header.start" description='Start time '
+                                            defaultMessage='Start time:{time} '
+                                            values={{
+                                                time: startTime
+                                            }}/>)          
+                        </div>
+                    </div>  
                 </div>
                 <div className="blockLeft">
                 <NotificationsWrapper />
-                    <HamBurger data={menuDetails}/>
+                    <HamBurger data={menuDetails}>
+                        {(instance) => (
+                            <div>
+                                <div className="blockSystem">
+                                    900/900 Zones
+                                </div>
+                            <div className='gor-hamburger-wrapper' style={(instance.state.menuVisible)?{display:'block'}:{display:'none'}}>
+                            <section className='gor-hamburger-option'  >
+                                <h1>SYSTEM NORMAL</h1>
+                                <p>900 zones in operation</p>
+                                <button className="gor-sys-btn"> Resume system</button>
+                            </section>
+                            <section className="gor-all-zone">
+                                <a href="javascript:void(0)">View system details<span className="right-arr"> ></span></a>
+                            </section>
+                            </div>
+                            </div> 
+                        )}
+                    </HamBurger>
                     <div className="gor-border"/>
                     <div className="dropdown" id="profile">
                         <div className="dropbtn" onClick={this.setDropdown} ref={(node)=> {

@@ -1,0 +1,48 @@
+.gor-menuWrap{
+	.gor-all-zone{
+		padding:15px;
+		border-top:1px solid #EAEAEA;
+		a{
+			color:#72A9E9;
+			font-size:14px;
+		}
+		.right-arr{
+			font-weight:bold;
+			vertical-align: middle;
+		}
+	}
+	.gor-sys-btn{
+		border: solid 1px #B9B9B9;
+		color: #525252;
+	}
+	
+}
+.gor-zone-wrapper{
+	background:#fff;
+	.gor-zone-header{
+		padding:20px 15px;
+	}
+	.gor-zone-tile{
+		width:18%;
+		background:#fff;
+		display:inline-block;
+		padding:8px;
+		margin-left:10px;
+		.left-content{
+			display:inline-block;
+			padding:5px;
+		}
+		.right-content{
+			display: inline-block;
+		    vertical-align: middle;
+		    padding: 5px;
+		}
+		.operating-status{
+			line-height:25px;
+		}
+	}
+	.gor-zt-wrap{
+		background:#EEEEEE;
+		padding:15px;
+	}
+}

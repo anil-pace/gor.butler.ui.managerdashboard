@@ -174,9 +174,16 @@ class Routes extends React.Component {
                         <IndexRoute
                             getComponent={(location, callback)=> {
                                 require.ensure([], function (require) {
-                                    callback(null, require('../containers/systemTabs/butlerbotTab').default);
-                                }, "indexButBot");
+                                    callback(null, require('../containers/systemTabs/sysOverview').default);
+                                }, "defaultSystem");
                             }}
+                        />
+                        <Route onEnter={this._handleNavigationChanges.bind(this)} name="sysOverview" path="/system/sysOverview"
+                               getComponent={(location, callback)=> {
+                                   require.ensure([], function (require) {
+                                       callback(null, require('../containers/systemTabs/sysOverview').default);
+                                   }, "sysOverview");
+                               }}
                         />
                         <Route onEnter={this._handleNavigationChanges.bind(this)} name="butlerbots" path="/system/butlerbots"
                                getComponent={(location, callback)=> {
@@ -199,6 +206,13 @@ class Routes extends React.Component {
                                    require.ensure([], function (require) {
                                        callback(null, require('../containers/systemTabs/chargingStationsTab').default);
                                    }, "chargingStation");
+                               }}
+                        />
+                        <Route onEnter={this._handleNavigationChanges.bind(this)} name="sysControllers" path="/system/sysControllers"
+                               getComponent={(location, callback)=> {
+                                   require.ensure([], function (require) {
+                                       callback(null, require('../containers/systemTabs/sysControllers').default);
+                                   }, "sysControllers");
                                }}
                         />
                     </Route>

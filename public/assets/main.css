@@ -938,7 +938,7 @@ body {
   display: inline-block;
   float: right;
   cursor: pointer;
-  width: 52%;
+  width: 38%;
 }
 
 .gorHeader .upperTextClient {
@@ -5720,12 +5720,12 @@ button:disabled {
   position: absolute;
   background-color: #FFFFFF;
   width: 330px;
-  top: 42px;
-  right: -22px;
+  top: 34px;
+  right: -47px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
-  border: solid 1px #EAEAEA;
-  border-radius: 5px;
+  border: solid 1px #B9B9B9;
+  border-radius: 3px;
 }
 
 .gor-sec-footer {
@@ -6810,15 +6810,6 @@ button:disabled {
   position: relative;
 }
 
-.gor-option-icon {
-  background-image: url(/om/assets/images/ic-arrow-down.svg);
-  background-repeat: no-repeat;
-  width: 12px;
-  height: 20px;
-  vertical-align: middle;
-  display: inline-block;
-}
-
 .gor-white-background {
   background-color: #FFFFFF;
 }
@@ -6954,4 +6945,60 @@ button:disabled {
   border-bottom: solid 0.5px #cccccc;
   height: 50px;
   padding-left: 10px;
+}
+
+.gor-menuWrap .gor-all-zone {
+  padding: 15px;
+  border-top: 1px solid #EAEAEA;
+}
+
+.gor-menuWrap .gor-all-zone a {
+  color: #72A9E9;
+  font-size: 14px;
+}
+
+.gor-menuWrap .gor-all-zone .right-arr {
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+.gor-menuWrap .gor-sys-btn {
+  border: solid 1px #B9B9B9;
+  color: #525252;
+}
+
+.gor-zone-wrapper {
+  background: #fff;
+}
+
+.gor-zone-wrapper .gor-zone-header {
+  padding: 20px 15px;
+}
+
+.gor-zone-wrapper .gor-zone-tile {
+  width: 18%;
+  background: #fff;
+  display: inline-block;
+  padding: 8px;
+  margin-left: 10px;
+}
+
+.gor-zone-wrapper .gor-zone-tile .left-content {
+  display: inline-block;
+  padding: 5px;
+}
+
+.gor-zone-wrapper .gor-zone-tile .right-content {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 5px;
+}
+
+.gor-zone-wrapper .gor-zone-tile .operating-status {
+  line-height: 25px;
+}
+
+.gor-zone-wrapper .gor-zt-wrap {
+  background: #EEEEEE;
+  padding: 15px;
 }

@@ -3,11 +3,7 @@
  * This will be switched based on tab click
  */
 import React  from 'react';
-import {connect} from 'react-redux';
-import {FormattedMessage} from 'react-intl';
-import Spinner from '../../components/spinner/Spinner';
 import Zone from '../../components/systemOverview/zoneTile.js'
-import {hashHistory} from 'react-router'
 
 
 class SystemOverview extends React.Component {
@@ -18,8 +14,14 @@ class SystemOverview extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="gor-zone-wrapper">
+            <div className="gor-zone-header">
+            <span>11/11 Operating Zones</span>
+            </div>
+            <div className="gor-zt-wrap">
                 <Zone />
+                <Zone />
+            </div>
             </div>
         );
     }
