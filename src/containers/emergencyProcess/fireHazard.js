@@ -4,9 +4,11 @@ import {modal} from 'react-redux-modal';
 import { FormattedMessage } from 'react-intl'; 
 import {setFireHazrdFlag} from '../../actions/tabActions';
 import ResumeOperation from './resumeOperation'; 
+import {userRequest} from '../../actions/userActions';  
 import ShutterLocationTile from '../../components/fireHazardTiles/shutterLocationTile';
 import {getSecondsDiff} from '../../utilities/getDaysDiff';
-import {FAILED,CLEARED,PROGRESS,NOT_FOUND,IN_PROGRESS} from '../../constants/frontEndConstants';
+import { VALIDATE_SAFETY } from '../../constants/configConstants';
+import {FAILED,CLEARED,EMERGENCY_FIRE,PROGRESS,NOT_FOUND,IN_PROGRESS,APP_JSON,POST,CONFIRM_SAFETY} from '../../constants/frontEndConstants';
 class FireHazard extends React.Component{
   constructor(props) 
   {  
@@ -19,10 +21,13 @@ class FireHazard extends React.Component{
     this.props.removeModal();
     this.props.setFireHazrdFlag(true);
    }
+   endFireHazard(){
+    this.props.removeModal();
+   }
    
   componentDidMount(){
     if(this.props.checkingList){
-      this._removeThisModal();  //If manager is on safety checklist page, don't show the release modal      
+      this.endFireHazard();  //If manager is on safety checklist page, don't show the release modal      
     }
      var limit=(this.props.config.fire_emergency_enable_resume_after)*60;
     var duration=(limit-getSecondsDiff(this.props.fireHazard.emergencyStartTime))*1000;
@@ -35,12 +40,26 @@ class FireHazard extends React.Component{
   }
 
   }
-  componentWillReceiveProps(nextProps){
-    if(!nextProps.auth_token||nextProps.fireHazard.emergency_type !== this.props.fireHazard.emergency_type)
+   componentWillReceiveProps(nextProps){
+    if(!nextProps.auth_token||!nextProps.fireHazard.emergencyStartTime)
     {
-      this._removeThisModal();
+    var reqType;
+    reqType=EMERGENCY_FIRE;
+    var formdata;
+    formdata={'emergency_type':reqType};
+    let userData={
+                'url':VALIDATE_SAFETY,
+                'method':POST,
+                'formdata':formdata,
+                'cause':CONFIRM_SAFETY,
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
+                'token':this.props.auth_token
     }
+    this.props.userRequest(userData);
+    this._removeThisModal();
   }
+}
 
   _resumeOperation(){
     this._removeThisModal();
@@ -177,7 +196,9 @@ function mapStateToProps(state, ownProps){
   } 
   function mapDispatchToProps(dispatch){
     return {
-      setFireHazrdFlag: function(data){ dispatch(setFireHazrdFlag(data)); }
+
+      setFireHazrdFlag: function(data){ dispatch(setFireHazrdFlag(data)); },
+      userRequest: function(data){ dispatch(userRequest(data)); }
     }
   };
 
