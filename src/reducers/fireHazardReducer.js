@@ -14,7 +14,7 @@ export function fireHazardDetail(state={}, action) {
                shutters=data.shutters || {};
                escapePath=data.escape_path|| '';
                emergencyStartTime=res.complete_data[0].emergency_start_time || '';
-               notifyTime=(!Object.keys(data).length)? new Date():'';
+               notifyTime=(!Object.keys(data).length)? new Date():null;
                 return Object.assign({}, state, {
                     "shutters":shutters,
                     "escapePath":escapePath,
