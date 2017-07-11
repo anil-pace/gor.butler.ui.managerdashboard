@@ -248,7 +248,16 @@ singleNotification=<GorToastify key={1} onClick={this._openPopup}>
 }
 	render(){
   let items=this._parseStatus();
-  let showFireHazardPopup= this.props.firehazadflag && (this.props.fireHazardNotifyTime || this.props.fireHazardStartTime)
+  let showFireHazardPopup;
+  if(this.props.firehazadflag && (this.props.fireHazardNotifyTime || this.props.fireHazardStartTime))
+  {
+  showFireHazardPopup=true;
+  }
+  else
+  {
+    showFireHazardPopup=false;
+  }
+  
   let notificationWrap=this._processNotification();
   let showUtilityTab=this.props.config.utility_tab && this.props.config.utility_tab.enabled;
 		return (
