@@ -43,20 +43,6 @@ class FireHazard extends React.Component{
    componentWillReceiveProps(nextProps){
     if(!nextProps.auth_token||!nextProps.fireHazard.emergencyStartTime)
     {
-    var reqType;
-    reqType=EMERGENCY_FIRE;
-    var formdata;
-    formdata={'emergency_type':reqType};
-    let userData={
-                'url':VALIDATE_SAFETY,
-                'method':POST,
-                'formdata':formdata,
-                'cause':CONFIRM_SAFETY,
-                'contentType':APP_JSON,
-                'accept':APP_JSON,
-                'token':this.props.auth_token
-    }
-    this.props.userRequest(userData);
     this._removeThisModal();
   }
 }
