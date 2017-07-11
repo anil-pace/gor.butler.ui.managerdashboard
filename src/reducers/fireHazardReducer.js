@@ -13,7 +13,7 @@ export function fireHazardDetail(state={}, action) {
                data=res.complete_data[0].emergency_data ||{};
                shutters=data.shutters || {};
                escapePath=data.escape_path|| '';
-               emergencyStartTime=res.complete_data[0].emergency_start_time || '';
+               emergencyStartTime=res.complete_data[0].emergency_start_time || null;
                notifyTime=(!Object.keys(data).length)? new Date():null;
                 return Object.assign({}, state, {
                     "shutters":shutters,
