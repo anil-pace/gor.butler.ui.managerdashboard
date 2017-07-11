@@ -78,7 +78,6 @@ import {
 	GET_ALL_NOTIFICATIONS,
 	SEARCHED_NOTIFICATIONS_DATA_ALL
 } from "../constants/frontEndConstants";
-import {notifyEmergencyEnd} from '../actions/responseAction';
 import { BUTLER_UI, CODE_E027 } from "../constants/backEndConstants";
 import {
 	UE002,
@@ -348,18 +347,12 @@ export function AjaxParse(store, res, cause, status, saltParams) {
 
 			if(rejectResponse.successful){
 
-				if(rejectResponse.emergency_end_time)
+				if(!rejectResponse.emergency_end_time)
 				{
-				store.dispatch(notifyEmergencyEnd(rejectResponse.emergency_end_time)); 
+				store.dispatch(notifySuccess(ES)); 
 				
-				}
-				else 
-				{
-				store.dispatch(notifySuccess(ES));
-				}
-				  
+				  }
 			}
-
 			else if (rejectResponse.alert_data) {
 				if(rejectResponse.alert_data[0].details[0])
 				{
