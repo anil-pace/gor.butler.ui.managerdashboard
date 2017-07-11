@@ -7089,11 +7089,10 @@ button:disabled {
 }
 
 .pps-bin {
-  width: 100px;
-  height: 100px;
+  width: 100%;
+  height: 100%;
   border: 2px solid darkgrey;
-  margin-left: 5px;
-  margin-right: 5px;
+  box-sizing: border-box;
   display: inline-block;
   cursor: pointer;
   position: relative;
@@ -7125,8 +7124,9 @@ button:disabled {
   background-color: darkgrey;
   display: inline-block;
   position: relative;
-  top: 54px;
+  top: 50%;
   color: white;
+  text-align: center;
 }
 
 .selected .pps-bin-info {

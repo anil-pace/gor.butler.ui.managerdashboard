@@ -6,7 +6,12 @@
  */
 import React  from 'react';
 import {connect} from 'react-redux'
-import {selectPPSBin, clearSelectionPPSBin, changePPSBinStatus,cancelProfileChanges} from './../../actions/ppsConfigurationActions'
+import {
+    selectPPSBin,
+    clearSelectionPPSBin,
+    changePPSBinStatus,
+    cancelProfileChanges
+} from './../../actions/ppsConfigurationActions'
 import Bin from './../../components/bin/bin'
 
 class Bins extends React.Component {
@@ -54,7 +59,7 @@ class Bins extends React.Component {
      * along with the updated profile to the server.
      */
     cancelProfileChanges() {
-        this.props.cancelProfileChanges({pps:this.props.selectedPPS})
+        this.props.cancelProfileChanges({pps: this.props.selectedPPS})
     }
 
     render() {
@@ -67,75 +72,131 @@ class Bins extends React.Component {
         if (!self.props.selectedPPS) {
             return false
         }
+        /**
+         * Finding the sorted array of x and y co-ordinates
+         */
+
+        let x_array = self.props.selectedPPS.pps_bins.map(function (bin) {
+            return bin.orig_cordinates ? bin.orig_cordinates[0] + bin.breadth : 0
+        }).sort(function (a, b) {
+            return a - b
+        });
+        let y_array = self.props.selectedPPS.pps_bins.map(function (bin) {
+            return bin.orig_cordinates ? bin.orig_cordinates[1] + bin.length : 0
+        }).sort(function (a, b) {
+            return a - b
+        });
+
+        /**
+         * Finding the maximum of x and y co-ordinate to calculate boundaries
+         */
+        let max_x = x_array[x_array.length - 1]
+        let max_y = y_array[y_array.length - 1]
+
+        /**
+         *Total virtual width of the container will include the padding with each bin
+         * so calculating the total width by considering a set of x distinct co-ordinates.
+         */
+
+        let total_x = new Set(x_array).size * 10 + max_x
+        let total_y = new Set(y_array).size * 10 + max_y
+
         return <div
             className={["pps-bins-container", this.props.currentView === 'tags' ? 'include-tags' : null].join(" ")}>
-            Select a bin to manage the tags
-            <div>
-                {Array.apply(null, Array(+self.props.selectedPPS.structure[0])).map(function (row, index) {
-                    return (<div key={index} className="pps-bin-row">
-                        {Array.apply(null, Array(+self.props.selectedPPS.structure[1])).map(function (bin, ind) {
-                            let bin_indx = ind + (index * self.props.selectedPPS.structure[1])
-                            let bin_id = [self.props.selectedPPS.pps_id, self.props.selectedPPS.pps_bins[bin_indx].pps_bin_id].join("-")
-                            let selected_bin = (self.props.selectedPPSBin && self.props.selectedPPSBin[self.props.currentView] && self.props.selectedPPSBin[self.props.currentView].id === bin_id)
-                            if (self.props.currentView === 'tags') {
-                                return <span
-                                    onClick={selected_bin ? self.clearSelectionPPSBin.bind(self, self.props.selectedPPS.pps_bins[bin_indx], self.props.currentView) : self.selectBin.bind(self, self.props.selectedPPS.pps_bins[bin_indx], self.props.currentView)}
-                                    className={[( selected_bin ? 'selected' : null)].join(" ")}
-                                    key={self.props.selectedPPS.pps_bins[bin_indx].pps_bin_id}><Bin
-                                    binId={bin_id}/></span>
-                            } else if (self.props.currentView === 'bins') {
-                                return <span
-                                    onClick={self.selectBin.bind(self, self.props.selectedPPS.pps_bins[bin_indx], self.props.currentView)}
-                                    className={[(selected_bin ? 'selected' : null)].join(" ")}
-                                    key={self.props.selectedPPS.pps_bins[bin_indx].pps_bin_id}>
-                                    <Bin binId={bin_id} disabled={!self.props.selectedPPS.pps_bins[bin_indx].enabled}>
-                                    </Bin>
-                                </span>
-                            } else {
-                                //groups
-                                return <span
-                                    onClick={self.selectBin.bind(self, self.props.selectedPPS.pps_bins[bin_indx], self.props.currentView)}
-                                    className={[(selected_bin ? 'selected' : null)].join(" ")}
-                                    key={self.props.selectedPPS.pps_bins[bin_indx].pps_bin_id}><Bin
-                                    binId={bin_id}/></span>
-                            }
+            <div style={{
+                width: 800,
+                margin: 'auto',
+                height: 500,
+                maxWidth: 800,
+                overflow: 'scroll',
+                maxHeight: 500,
+                position: 'relative'
+            }}>
+                {/*The co-ordinates need to be in proportion to the dimension of*/}
+                {/*the container.*/}
+                {self.props.selectedPPS.pps_bins.map(function (bin, index) {
+                    let bin_id = [self.props.selectedPPS.pps_id, bin.pps_bin_id].join("-")
+                    let selected_bin = (self.props.selectedPPSBin && self.props.selectedPPSBin[self.props.currentView] && self.props.selectedPPSBin[self.props.currentView].id === bin_id)
+                    return <div style={{
+                        display: 'inline-block',
+                        position: 'absolute',
+                        left: bin.orig_cordinates[0] * 800 / total_x,
+                        top: bin.orig_cordinates[1] * 500 / total_y,
+                        width: bin.breadth * 800 / total_x,
+                        height: bin.length * 500 / total_y,
+                    }}>
 
-                        })}
-                    </div>)
+                        {self.props.currentView === 'tags' && <div
+                            onClick={selected_bin ? self.clearSelectionPPSBin.bind(self, bin, self.props.currentView) : self.selectBin.bind(self, bin, self.props.currentView)}
+                            className={[( selected_bin ? 'selected' : null)].join(" ")}
+                            key={bin.pps_bin_id}
+
+                            style={{
+                                height: '100%',
+                                boxSizing: 'border-box',
+                                width: '100%',
+                                border: '10px solid white',
+                            }}>
+                            <span className={["pps-bin"].join(" ")}>
+                                <span className="pps-bin-tag-info">
+                                    <span className="gor-tag-icon-grey"/>1 Tag</span>
+                                <span className="pps-bin-info">{bin_id}</span>
+                            </span>
+                        </div>}
+
+                        {self.props.currentView === 'bins' && <div
+                            onClick={selected_bin ? self.clearSelectionPPSBin.bind(self, bin, self.props.currentView) : self.selectBin.bind(self, bin, self.props.currentView)}
+                            className={[( selected_bin ? 'selected' : null)].join(" ")}
+                            key={bin.pps_bin_id}
+
+                            style={{
+                                height: '100%',
+                                boxSizing: 'border-box',
+                                width: '100%',
+                                border: '10px solid white',
+                            }}>
+                            <span className={["pps-bin",(!bin.enabled?'disabled':'')].join(" ")}>
+                                <span className="pps-bin-tag-info">
+                                    <span style={{display:'inline-block',width:16,height:16}}/> </span>
+                                <span className="pps-bin-info">{bin_id}</span>
+                            </span>
+                        </div>}
+                    </div>
                 })}
-
-                {self.props.currentView === 'bins' && <div className="pps-bin-actions pps-bin-row" style={{textAlign: 'center'}}>
-                    {self.props.selectedPPSBin && self.props.selectedPPSBin['bins'] ? (
-                        <button
-                            disabled={self.props.selectedPPSBin['bins'].enabled}
-                            className="pps-bin-action-button"
-                            onClick={self.changePPSBinStatus.bind(self, self.props.selectedPPSBin['bins'], true)}>
-                            ACTIVATE
-                        </button> ) : (<button
-                        disabled={true}
-                        className="pps-bin-action-button">
-                        ACTIVATE
-                    </button>)}
-
-                    {self.props.currentView === 'bins' && self.props.selectedPPSBin && self.props.selectedPPSBin['bins'] ? (
-                        <button
-                            disabled={!self.props.selectedPPSBin['bins'].enabled}
-                            className="pps-bin-action-button"
-                            onClick={self.changePPSBinStatus.bind(self, self.props.selectedPPSBin['bins'], false)}>
-                            DEACTIVATE
-                        </button> ) : (<button disabled={true}
-                                               className="pps-bin-action-button">
-                        DEACTIVATE
-                    </button>)}
-                </div>}
-
-
             </div>
+
+            {/*Bin enable/disable action items*/}
+            {self.props.currentView === 'bins' &&
+            <div className="pps-bin-actions pps-bin-row" style={{textAlign: 'center'}}>
+                {self.props.selectedPPSBin && self.props.selectedPPSBin['bins'] ? (
+                    <button
+                        disabled={self.props.selectedPPSBin['bins'].enabled}
+                        className="pps-bin-action-button"
+                        onClick={self.changePPSBinStatus.bind(self, self.props.selectedPPSBin['bins'], true)}>
+                        ACTIVATE
+                    </button> ) : (<button
+                    disabled={true}
+                    className="pps-bin-action-button">
+                    ACTIVATE
+                </button>)}
+
+                {self.props.currentView === 'bins' && self.props.selectedPPSBin && self.props.selectedPPSBin['bins'] ? (
+                    <button
+                        disabled={!self.props.selectedPPSBin['bins'].enabled}
+                        className="pps-bin-action-button"
+                        onClick={self.changePPSBinStatus.bind(self, self.props.selectedPPSBin['bins'], false)}>
+                        DEACTIVATE
+                    </button> ) : (<button disabled={true}
+                                           className="pps-bin-action-button">
+                    DEACTIVATE
+                </button>)}
+            </div>}
+
             <div style={{clear: 'both', overflow: 'auto'}}>
-                <button style={{float: 'right', right: 20}} onClick={this.cancelProfileChanges.bind(this)}>Cancel</button>
+                <button style={{float: 'right', right: 20}} onClick={this.cancelProfileChanges.bind(this)}>Cancel
+                </button>
                 <button style={{float: 'right', right: 20}} onClick={this.saveProfile.bind(this)}>Save</button>
             </div>
-            selectedProfile:{this.props.selectedProfile.name} selectedPPS:{this.props.selectedPPS.pps_id}
         </div>
     }
 }
