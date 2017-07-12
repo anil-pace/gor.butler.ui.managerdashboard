@@ -176,7 +176,7 @@
   background-color: darkgrey;
   display: inline-block;
   position: absolute;
-  bottom: 0;
+  bottom: -2px; //Border is 2px wide.
   left:0;
   color: white;
   text-align: center;

@@ -7125,7 +7125,7 @@ button:disabled {
   background-color: darkgrey;
   display: inline-block;
   position: absolute;
-  bottom: 0;
+  bottom: -2px;
   left: 0;
   color: white;
   text-align: center;
