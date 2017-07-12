@@ -76,7 +76,7 @@ import {
     SEARCHED_NOTIFICATIONS_DATA,
     SEND_READ_INTIMATION,
     GET_ALL_NOTIFICATIONS,
-    SEARCHED_NOTIFICATIONS_DATA_ALL, FETCH_PPS_PROFILES,FETCH_TAGS
+    SEARCHED_NOTIFICATIONS_DATA_ALL, FETCH_PPS_PROFILES, FETCH_TAGS, FETCH_PROFILE_FOR_PPS
 } from "../constants/frontEndConstants";
 import {notifyEmergencyEnd} from '../actions/responseAction';
 import {BUTLER_UI, CODE_E027} from "../constants/backEndConstants";
@@ -127,7 +127,7 @@ import {
     recieveAllNotifications,
     recieveAllSearchedNotifications
 } from "../actions/notificationAction";
-import {receivePPSProfiles,receiveTags} from './../actions/ppsConfigurationActions'
+import {receivePPSProfiles, receiveTags,selectPPSProfileForConfiguration} from './../actions/ppsConfigurationActions'
 
 export function AjaxParse(store, res, cause, status, saltParams) {
     let stringInfo = {};
@@ -447,6 +447,10 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             break;
         case FETCH_PPS_PROFILES:
             store.dispatch(receivePPSProfiles(res))
+            break;
+
+        case FETCH_PROFILE_FOR_PPS:
+            store.dispatch(selectPPSProfileForConfiguration({profile:res}))
             break;
         case FETCH_TAGS:
             store.dispatch(receiveTags(res))

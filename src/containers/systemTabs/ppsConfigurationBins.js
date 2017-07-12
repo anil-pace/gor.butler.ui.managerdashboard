@@ -50,8 +50,7 @@ class Bins extends React.Component {
      */
     saveProfile() {
         console.log(this.props.selectedPPS)
-        console.log(this.props.ppsList)
-        console.log(this.props.immutablePPSList)
+        console.log(this.props.selectedProfile)
     }
 
     /**
@@ -76,12 +75,12 @@ class Bins extends React.Component {
          * Finding the sorted array of x and y co-ordinates
          */
 
-        let x_array = self.props.selectedPPS.pps_bins.map(function (bin) {
+        let x_array = self.props.selectedProfile.pps_bins.map(function (bin) {
             return bin.orig_cordinates ? bin.orig_cordinates[0] + bin.breadth : 0
         }).sort(function (a, b) {
             return a - b
         });
-        let y_array = self.props.selectedPPS.pps_bins.map(function (bin) {
+        let y_array = self.props.selectedProfile.pps_bins.map(function (bin) {
             return bin.orig_cordinates ? bin.orig_cordinates[1] + bin.length : 0
         }).sort(function (a, b) {
             return a - b
@@ -114,10 +113,10 @@ class Bins extends React.Component {
             }}>
                 {/*The co-ordinates need to be in proportion to the dimension of*/}
                 {/*the container.*/}
-                {self.props.selectedPPS.pps_bins.map(function (bin, index) {
+                {self.props.selectedProfile.pps_bins.map(function (bin, index) {
                     let bin_id = [self.props.selectedPPS.pps_id, bin.pps_bin_id].join("-")
                     let selected_bin = (self.props.selectedPPSBin && self.props.selectedPPSBin[self.props.currentView] && self.props.selectedPPSBin[self.props.currentView].id === bin_id)
-                    return <div style={{
+                    return <div key={bin.pps_bin_id} style={{
                         display: 'inline-block',
                         position: 'absolute',
                         left: bin.orig_cordinates[0] * 800 / total_x,
@@ -206,8 +205,6 @@ function mapStateToProps(state, ownProps) {
         selectedPPS: state.ppsConfiguration.selectedPPS,
         selectedPPSBin: state.ppsConfiguration.selectedPPSBin,
         ppsList: state.ppsConfiguration.ppsList,
-        immutablePPSList: state.ppsConfiguration.immutablePPSList
-
     };
 }
 

@@ -60,6 +60,13 @@ export function fetchTags(params) {
     }
 }
 
+export function fetchAndSelectPPSProfileForConfiguration(params) {
+    return {
+        type: AJAX_CALL,
+        params
+    }
+}
+
 export function receiveTags(params) {
     return {
         type: RECEIVE_TAGS,

@@ -3,9 +3,9 @@
  */
 import React  from 'react';
 import {connect} from 'react-redux';
-import {fetchPPSProfiles,selectPPSProfileForConfiguration} from './../../actions/ppsConfigurationActions'
-import {GET,FETCH_PPS_PROFILES,APP_JSON} from './../../constants/frontEndConstants'
-import {PPS_LIST_URL} from './../../constants/configConstants'
+import {fetchPPSProfiles,selectPPSProfileForConfiguration,fetchAndSelectPPSProfileForConfiguration} from './../../actions/ppsConfigurationActions'
+import {GET,FETCH_PPS_PROFILES,APP_JSON,FETCH_PROFILE_FOR_PPS} from './../../constants/frontEndConstants'
+import {PPS_LIST_URL,PPS_PROFILE_URL} from './../../constants/configConstants'
 
 class PPSList extends React.Component {
     constructor(props) {
@@ -37,14 +37,28 @@ class PPSList extends React.Component {
         this.props.fetchPPSProfiles(userData)
     }
 
-    selectPPS({pps, profile},event) {
-        if(profile){
+    selectPPSProfile({pps, profile}, event) {
+        if (profile) {
             /**
              * Otherwise onClick of PPS would also get called
              */
             event.stopPropagation()
+            let url=PPS_PROFILE_URL+profile.id
+            let data={
+                'url': url,
+                'method': GET,
+                'cause': FETCH_PROFILE_FOR_PPS,
+                'contentType': APP_JSON,
+                'accept': APP_JSON,
+                'token': this.props.auth_token
+            }
+            this.props.fetchAndSelectPPSProfileForConfiguration(data)
+        } else if(this.props.selectedPPS && pps.pps_id===this.props.selectedPPS.pps_id){
+            //Already Selected PPS, Do Nothing
+        } else {
+            this.props.selectPPSProfileForConfiguration({pps: pps})
         }
-        this.props.selectPPSProfileForConfiguration({pps:pps,profile:profile})
+
 
     }
 
@@ -58,19 +72,19 @@ class PPSList extends React.Component {
                 </div>
                 <div className="pps-list">
                     {this.state.data.map(function (pps) {
-                        return <div className={['pps-list-item',pps.selected?'selected':null].join(" ")} key={pps.pps_id} onClick={self.selectPPS.bind(self, {pps: pps})}>
+                        return <div className={['pps-list-item',pps.pps_id===self.props.selectedPPS.pps_id?'selected':null].join(" ")} key={pps.pps_id} onClick={self.selectPPSProfile.bind(self, {pps: pps})}>
                             <div>
                                 {"PPS-"+pps.pps_id}
                             </div>
                             <div className="pps-list-item-profiles">
-                                {pps.selected && pps.profiles.map(function (profile) {
-                                    return <div className="pps-profile-item" onClick={self.selectPPS.bind(self, {pps, profile})}
+                                {pps.pps_id===self.props.selectedPPS.pps_id && pps.profiles.map(function (profile) {
+                                    return <div className="pps-profile-item" onClick={self.selectPPSProfile.bind(self, {pps, profile})}
                                                 key={profile.id}>
-                                        <span className={[profile.selected?'selected':'','pps-profile-name'].join(" ")}>{profile.name}</span> {profile.applied && <span className="profile-applied-label">Applied</span>}
+                                        <span className={[profile.id===self.props.selectedProfile.id?'selected':'','pps-profile-name'].join(" ")}>{profile.name}</span> {profile.applied && <span className="profile-applied-label">Applied</span>}
                                     </div>
 
                                 })}
-                                {!pps.selected && pps.profiles.map(function (profile) {
+                                {pps.pps_id!==self.props.selectedPPS.pps_id && pps.profiles.map(function (profile) {
                                     return profile.applied ?
                                         <div key={profile.name}>{profile.name + " is applied"}</div> : null
                                 })}
@@ -91,8 +105,8 @@ class PPSList extends React.Component {
 function mapStateToProps(state, ownProps) {
     return {
         ppsList: state.ppsConfiguration.ppsList||[],
-        selectedProfile:state.ppsConfiguration.selectedProfile,
-        selectedPPS:state.ppsConfiguration.selectedPPS
+        selectedProfile:state.ppsConfiguration.selectedProfile||{},
+        selectedPPS:state.ppsConfiguration.selectedPPS||{}
 
     };
 }
@@ -104,6 +118,9 @@ var mapDispatchToProps = function (dispatch) {
         },
         selectPPSProfileForConfiguration: function (data) {
             dispatch(selectPPSProfileForConfiguration(data))
+        },
+        fetchAndSelectPPSProfileForConfiguration: function (data) {
+            dispatch(fetchAndSelectPPSProfileForConfiguration(data))
         },
     }
 };

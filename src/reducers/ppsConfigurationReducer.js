@@ -9,7 +9,7 @@ import {
     ADD_TAG_TO_BIN,
     CLEAR_SELECTION_PPS_BIN,
     CHANGE_PPS_BIN_STATUS,
-    RECEIVE_TAGS,CANCEL_PROFILE_CHANGES
+    RECEIVE_TAGS, CANCEL_PROFILE_CHANGES
 } from '../constants/frontEndConstants';
 /**
  * @param  {State Object}
@@ -17,7 +17,7 @@ import {
  * @return {[Object] updated state}
  */
 export function ppsConfiguration(state = {}, action) {
-    let selected_pps, selected_profile, current_list, pps_list, selected_bin, selected_tag,immutable_pps_list,pps_index,profile_index
+    let selected_pps, selected_profile, pps_list, selected_bin, selected_tag
     switch (action.type) {
         case PPS_CONFIGURATION_REFRESHED:
             return Object.assign({}, state, {
@@ -25,22 +25,36 @@ export function ppsConfiguration(state = {}, action) {
             })
         case RECEIVE_PPS_PROFILES:
             pps_list = action.params.pps
-            immutable_pps_list=JSON.parse(JSON.stringify(pps_list))
             if (pps_list.length < 1 || pps_list[0].profiles.length < 1) {
                 /**
                  * if empty list of pps or profile received, return with the original state
                  */
                 return state
             }
-            pps_list[0].selected = true                       // Mark the first PPS as selected by default.
-            pps_list[0].profiles.filter(function (prfl) {    // Mark the applied profile as selected by default.
-                return prfl.applied
-            })[0].selected = true
+
+            /**
+             * Create a copy of First PPS and select
+             * it by default.
+             */
+            selected_pps = JSON.parse(JSON.stringify(pps_list[0]))
+
+            /**
+             * Select the applied profile
+             * by default for the first PPS.
+             */
+            selected_pps.profiles.map(function (prfl, index) {
+                if (prfl.applied) {
+                    prfl.selected = true
+                    prfl.pps_bins = JSON.parse(JSON.stringify(selected_pps.pps_bins))
+                    selected_profile = JSON.parse(JSON.stringify(prfl))
+                }
+                return prfl
+            })
+
             return Object.assign({}, state, {
                 ppsList: pps_list,
-                immutablePPSList:immutable_pps_list, //Deep cloning of an Array of objects
-                selectedProfile: pps_list[0].profiles[0],
-                selectedPPS: pps_list[0]
+                selectedProfile: selected_profile,
+                selectedPPS: selected_pps
             })
 
         case RECEIVE_TAGS:
@@ -49,33 +63,32 @@ export function ppsConfiguration(state = {}, action) {
             })
 
         case SELECT_PPS_PROFILE_FOR_CONFIGURATION:
-            selected_pps = action.data.pps
+            /**
+             * Select a PPS or pps with a profile
+             */
+            selected_pps = JSON.parse(JSON.stringify(action.data.pps || state.selectedPPS))
             selected_profile = action.data.profile
-            current_list = state.ppsList.slice()
-            current_list.forEach(function (entry) {
-                if (entry.pps_id === selected_pps.pps_id) {
-                    entry.selected = true
-                    if (selected_profile) {
-                        entry.profiles.forEach(function (prfl) {
-                            if (selected_profile.id === prfl.id) {
-                                prfl.selected = true
-                            } else {
-                                prfl.selected = false
-                            }
-                        })
-                    } else {
-                        entry.profiles.filter(function (prfl) { // Mark the applied profile as selected by default.
-                            return prfl.applied
-                        })[0].selected = true
-
-                    }
+            if(!selected_profile){
+                selected_profile=selected_pps.profiles.filter(function(profile){return profile.applied})[0]
+                selected_profile.selected = true
+                selected_profile.pps_bins = JSON.parse(JSON.stringify(selected_pps.pps_bins))
+            }
+            /**
+             * Create a copy of selected PPS profile
+             * and selects it.
+             */
+            selected_pps.profiles = selected_pps.profiles.map(function (prfl) {
+                if (prfl.id === selected_profile.id) {
+                    prfl = JSON.parse(JSON.stringify(selected_profile))
+                    prfl.selected = true
                 } else {
-                    entry.selected = false
+                    prfl.selected = false
+
                 }
+                return prfl
             })
             return Object.assign({}, state, {
-                ppsList: current_list,
-                selectedProfile: selected_profile || selected_pps.profiles[0], //If no profile is selected, select the default profile
+                selectedProfile: selected_profile, //If no profile is selected, select the default profile
                 selectedPPS: selected_pps || {},
                 selectedPPSBin: null
             })
@@ -123,30 +136,19 @@ export function ppsConfiguration(state = {}, action) {
 
 
         case CANCEL_PROFILE_CHANGES:
-            immutable_pps_list=JSON.parse(JSON.stringify(state.immutablePPSList))
-            pps_list=state.immutablePPSList
-            pps_list.forEach(function(pps,index){
-                if(pps.pps_id===action.data.pps.pps_id){
-                    pps_index=index
-                }
-            })
-            action.data.pps.profiles.forEach(function(profile,index){
-                if(profile.id===state.selectedProfile.id){
-                    profile_index=index
-                }
-            })
-            selected_pps=state.immutablePPSList[pps_index]
-            pps_list[pps_index].selected = true                       // Mark the first PPS as selected by default.
-            pps_list[pps_index].profiles[profile_index].selected = true
-            selected_bin=null
-            selected_profile=selected_pps.profiles[profile_index]
+            /**
+             * Pick the profile stored in selectedPPS.profiles
+             * and selects that profile, discarding all the changes
+             * done in the profile to be cancelled.
+             * @type {*}
+             */
+            selected_pps = state.selectedPPS
+            selected_profile = JSON.parse(JSON.stringify(selected_pps.profiles.filter(function (profile) {
+                return profile.selected
+            })[0]))
             return Object.assign({}, state, {
-                ppsList: pps_list,
                 selectedProfile: selected_profile, //If no profile is selected, select the default profile
-                selectedPPS: selected_pps || {},
                 selectedPPSBin: selected_bin,
-                immutablePPSList:immutable_pps_list
-
             })
 
 
