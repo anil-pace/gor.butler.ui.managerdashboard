@@ -10,6 +10,7 @@ import {setAuditSpinner} from '../actions/auditActions';
 import {setButlerSpinner,setPpsSpinner,setCsSpinner,setWavesSpinner,setWavesFilterSpinner,setButlerFilterSpinner,setPpsFilterSpinner,setCsFilterSpinner} from '../actions/spinnerAction';
 import {receiveInventoryTodayData,receiveInventoryHistoryData} from '../actions/inventoryActions';
 import {endSession} from './endSession';
+import {modalStatus} from "../actions/validationActions";
 export function ResponseParse(store,res)
 {
 		if(res.alert_data)
@@ -134,6 +135,7 @@ export function ResponseParse(store,res)
 				store.dispatch(recievefireHazardDetails(res));
 				if(res.complete_data[0].emergency_type===EMERGENCY_FIRE)
 				store.dispatch(setFireHazrdFlag(false));
+			  	store.dispatch(modalStatus(false));
 				break;	   
 			default:
 				console.log("in Response Parser");

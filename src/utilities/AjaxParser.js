@@ -317,6 +317,8 @@ export function AjaxParse(store, res, cause, status, saltParams) {
 			break;
 		case RESUME_OPERATION:
 			var resumePwd;
+			console.log(res.auth_token);
+			console.log(res);
 			if (!res.auth_token) {
 				resumePwd = {
 					type: ERROR,
