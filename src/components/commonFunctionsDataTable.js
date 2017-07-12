@@ -152,10 +152,18 @@ export const ActionCell=({rowIndex, data, columnKey,selEdit,selDel,mid, ...props
 export const TextCell=({rowIndex, data, columnKey,setClass, ...props})=>{ 
   
   const childrenCell =  React.Children.map(props.children, child => {
-      
-       return data.getObjectAt(rowIndex)[props.childColumnKey] ?(
+      var el;
+      if(child.props.type === "checkbox"){
+        el = data.getObjectAt(rowIndex)[props.childColumnKey] ? React.cloneElement(child, {
+            value: data.getObjectAt(rowIndex)[props.childColumnKey]
+          }):("");
+      }
+      else{
+         el = data.getObjectAt(rowIndex)[props.childColumnKey] ?(
         <span className={props.childrenClass}>{child}{data.getObjectAt(rowIndex)[props.childColumnKey]}</span>
       ):("");
+      }
+       return el;
     });
   return(<Cell {...props}  className={setClass}>
     {data.getObjectAt(rowIndex)[columnKey]}

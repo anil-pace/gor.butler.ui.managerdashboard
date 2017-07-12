@@ -9,12 +9,15 @@ class Zone extends React.Component {
 
     render() {
         return (
-            <div className="gor-zone-tile">
+            <div className="gor-zone-tile" onClick={(e)=>{this.props.onZoneClick(this.props.id,this.props.status)}}>
                 <div className="left-content">
+                <div className={"gor-zone-status "+this.props.statusClass}>
+                    <span></span>
+                </div>
                 </div>
                 <div className="right-content">
-                <p className="zone-name">ZONE 1</p>
-                <p className="operating-status">OPERATING</p>
+                <p className="zone-name">{this.props.name}</p>
+                <p className="operating-status">{this.props.status}</p>
                 </div>
             </div>
         );
@@ -27,8 +30,9 @@ class Zone extends React.Component {
 
 
 Zone.PropTypes={
-    ppsFilter: React.PropTypes.string,
-    
+    status: React.PropTypes.object,
+    name:React.PropTypes.object,
+    statusClass:React.PropTypes.string
 }
 
 export default Zone ;

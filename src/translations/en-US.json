@@ -485,6 +485,12 @@
     "filepath": "./src/components/subtab/ordersTabs.js"
   },
   {
+    "id": "sysOverview.tab.heading",
+    "description": "Syatem overview Tab",
+    "defaultMessage": "Overview",
+    "filepath": "./src/components/subtab/subTabs.js"
+  },
+  {
     "id": "butlerBot.tab.heading",
     "description": "butler bot tab",
     "defaultMessage": "Butler Bots",
@@ -500,6 +506,12 @@
     "id": "chargingstation.tab.heading",
     "description": "charging station tab",
     "defaultMessage": "Charging Station",
+    "filepath": "./src/components/subtab/subTabs.js"
+  },
+  {
+    "id": "sysControllers.tab.heading",
+    "description": "Syatem controllers Tab",
+    "defaultMessage": "System Controllers",
     "filepath": "./src/components/subtab/subTabs.js"
   },
   {
