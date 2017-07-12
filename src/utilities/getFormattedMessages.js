@@ -19,6 +19,13 @@ export function getFormattedMessages(action,values){
 			case "invntryRptGenerated" :
 			return (<FormattedMessage id="utility.downloadInventory.generateSuccess" description='Inventory Report Request submitted successfully'
                                    defaultMessage='Inventory Report Request submitted successfully' />);
+			case "grnRefreshed":
+			return (<FormattedMessage id="utility.downloadGRN.refreshed" description='GRN History Refreshed!'
+                                   defaultMessage='GRN History Refreshed!' />);
+			case "reprtsRefreshed":
+			return (<FormattedMessage id="utility.downloadReprt.refreshed" description='Reports History Refreshed!'
+                                   defaultMessage='Reports History Refreshed!' />);
+			
 			default:
 			return null;
 		}

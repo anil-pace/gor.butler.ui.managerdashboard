@@ -4881,9 +4881,10 @@ button:disabled {
   margin-left: 40%;
 }
 
-.customColor {
-  background-color: rgba(250, 0, 0, 0.4);
+.react-redux-modal .rrm-content.customColor {
   min-height: 100vh;
+  text-align: center;
+  background-color: rgba(255, 0, 0, 0.4);
 }
 
 .rr-title-actions {
@@ -4893,9 +4894,9 @@ button:disabled {
 .gor-firehazard {
   width: 65%;
   min-height: 15.625rem;
-  border-radius: 1%;
+  border-radius: 5px;
   text-align: left;
-  display: flow-root;
+  display: inline-block;
 }
 
 .gor-firehazard .gor-shutter-text-status {

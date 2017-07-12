@@ -14,8 +14,11 @@ import {INVENTORY_DATA_HISTORY,INVENTORY_HISTORY_DAYS_COUNT,
  */
  function parseInvData(state,action){
   //Parsing logic goes here
-  var inventoryObj,invObj,parsedDate,historyClosingStock=0,dateToday,noData,dataObj={},inventory,dateTodayState,stateObj,hasDataChanged,isHistory,categoryData;
-  var recreatedData;
+  var inventoryObj,invObj,parsedDate,historyClosingStock,
+  dateToday,noData,todayCurrentStock,dataObj={},
+  inventory,dateTodayState,stateObj,hasDataChanged,
+  isHistory,categoryData,recreatedData;
+  
   isHistory=(action.type=== INVENTORY_DATA_HISTORY ? "inventoryDataHistory" : "inventoryDataToday")
   
   /*Cannot use object.assign as it does not support deep cloning*/
@@ -23,6 +26,8 @@ import {INVENTORY_DATA_HISTORY,INVENTORY_HISTORY_DAYS_COUNT,
   stateObj=JSON.parse(JSON.stringify(state));
   hasDataChanged=stateObj.hasDataChanged ? false : true;
   noData=stateObj.noData ;
+  historyClosingStock = stateObj.historyClosingStock || 0;
+  todayCurrentStock =  stateObj.todayCurrentStock || 0;
   recreatedData=stateObj.recreatedData?JSON.parse(JSON.stringify(stateObj.recreatedData)):{};
   dateTodayState=stateObj.dateTodayState || null;
   inventory=inventoryObj.complete_data;
@@ -39,11 +44,11 @@ import {INVENTORY_DATA_HISTORY,INVENTORY_HISTORY_DAYS_COUNT,
     }
 
     
-    let parseDtInMS ;
-
+    let parseDtInMS,invDate ;
+    invDate = new Date(invObj.date);
+    invObj.date=invDate.getFullYear() +"-"+(invDate.getMonth()+1)+"-"+("0" + invDate.getDate()).slice(-2);
     parsedDate=new Date(invObj.date);
-    invObj.date=parsedDate.getFullYear() +"-"+(parsedDate.getMonth()+1)+"-"+("0" + parsedDate.getDate()).slice(-2);
-    parseDtInMS=new Date(invObj.date).getTime();
+    parseDtInMS=parsedDate.getTime();
     recreatedData[parseDtInMS]={};
     recreatedData[parseDtInMS].otherInfo=invObj;
     dateToday=parsedDate;
@@ -56,16 +61,20 @@ import {INVENTORY_DATA_HISTORY,INVENTORY_HISTORY_DAYS_COUNT,
     dataObj.date=parsedDate;
     dataObj.customData=parseDtInMS;
     recreatedData[parseDtInMS].graphInfo=dataObj;
-    noData=invObj.current_stock ? false : true;
+    //noData=invObj.current_stock ? false : true;
+    todayCurrentStock = invObj.current_stock;
 
   }
   else if(isHistory !== "inventoryDataToday"){
-    dateToday=new Date(stateObj.dateTodayState) ;
-    for(let i=0; i < INVENTORY_HISTORY_DAYS_COUNT ; i++){
+    dateToday = new Date(stateObj.dateTodayState) ;
+    dateToday=new Date(dateToday.getFullYear(),dateToday.getMonth(),dateToday.getDate()) ;
+    for(let i=0,k=0; k < INVENTORY_HISTORY_DAYS_COUNT ; k++){
       dateToday=new Date(dateToday.setDate(dateToday.getDate()-1));
       invObj=inventory[i] ? inventory[i] : {};
-      let emptyData=Object.keys(invObj).length ? false : true;
-      let histDate=!emptyData ? Date.parse(invObj.date) : dateToday.getTime();
+      let invDate = new Date(invObj.date);
+      invDate = new Date(invDate.getFullYear(),invDate.getMonth(),invDate.getDate())
+      let emptyData=(invDate.getDate() === dateToday.getDate() ? false : true);//Object.keys(invObj).length ? false : true;
+      let histDate=!emptyData ? invDate.getTime() : dateToday.getTime();
       invObj["current_stock"]=!emptyData ? (invObj["opening_stock"] + invObj["items_put"])-invObj["items_picked"] : 0;
       invObj.unusedSpace=!emptyData ? (100 - invObj["warehouse_utilization"]) : 100;
       invObj.colorCode=CATEGORY_COLOR_MAP[CATEGORY_COLOR_MAP.length -1];
@@ -87,11 +96,12 @@ import {INVENTORY_DATA_HISTORY,INVENTORY_HISTORY_DAYS_COUNT,
         dataObj.customData=histDate ;
         recreatedData[histDate].graphInfo=dataObj;
         historyClosingStock+= invObj.current_stock 
-    
+        
+        !emptyData ? i++ : i
     }
-    noData=historyClosingStock ? false : true;
+    
   }
-
+  noData=((historyClosingStock + todayCurrentStock) > 0 ? false :true) ;
 
 
 
@@ -99,6 +109,8 @@ import {INVENTORY_DATA_HISTORY,INVENTORY_HISTORY_DAYS_COUNT,
     "recreatedData": recreatedData || null,
     "dateTodayState" : dateTodayState || null,
     "hasDataChanged":hasDataChanged,
+    historyClosingStock,
+    todayCurrentStock,
     noData
 
   })
@@ -107,7 +119,7 @@ import {INVENTORY_DATA_HISTORY,INVENTORY_HISTORY_DAYS_COUNT,
 function displayHistorySnapShot(state,action){
   var selectedData,hasDataChanged=state.hasDataChanged;
     selectedData=state.recreatedData[action.data] ? state.recreatedData[action.data].otherInfo : {};
-    hasDataChanged=state.hasDataChanged=== 0 ? 1 : 0;
+    hasDataChanged=state.hasDataChanged? false : true;
 
   return Object.assign({}, state, {
     "inventoryDataPrevious": selectedData || null,

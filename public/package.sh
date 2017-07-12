@@ -26,6 +26,7 @@ case "$1" in
 	ln -sf /opt/butler_md_alpha/bin/butler_md_alpha butler_md_alpha-$RELVSN/usr/local/bin/
 	ln -sf /opt/butler_md_alpha/log butler_md_alpha-$RELVSN/var/log/butler_md_alpha
 	chmod u+rw ./butler_md_alpha-$RELVSN
+	sed -i --follow-symlinks "s/Version:.*$/Version: $RELVSN/" butler_md_alpha-$RELVSN/DEBIAN/control
 	fakeroot dpkg-deb --build butler_md_alpha-$RELVSN
 	rm -rf ./butler_md_alpha-$RELVSN
 	;;

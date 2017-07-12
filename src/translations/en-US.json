@@ -4491,6 +4491,18 @@
     "filepath": "./src/utilities/getFormattedMessages.js"
   },
   {
+    "id": "utility.downloadGRN.refreshed",
+    "description": "GRN History Refreshed!",
+    "defaultMessage": "GRN History Refreshed!",
+    "filepath": "./src/utilities/getFormattedMessages.js"
+  },
+  {
+    "id": "utility.downloadReprt.refreshed",
+    "description": "Reports History Refreshed!",
+    "defaultMessage": "Reports History Refreshed!",
+    "filepath": "./src/utilities/getFormattedMessages.js"
+  },
+  {
     "id": "audit.resolve.success",
     "description": "Text for resolved audit lines",
     "defaultMessage": "Audit task {auditId} with {auditType} - {auditTypeValue} has been approved",
