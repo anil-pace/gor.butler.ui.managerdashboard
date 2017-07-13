@@ -17,6 +17,7 @@ import {hashHistory} from 'react-router'
 import Tags from './tags'
 import Bins from './ppsConfigurationBins'
 import PPSList from "./ppsConfigurationList";
+import {cancelProfileChanges} from './../../actions/ppsConfigurationActions'
 
 
 class PPSConfiguration extends React.Component {
@@ -57,12 +58,40 @@ class PPSConfiguration extends React.Component {
         this.props.updateSubscriptionPacket(updatedWsSubscription);
     }
 
+    handleClickOnNext(){
+        if(this.state.currentView==="tags"){
+            this.setState({currentView:'bins'})
+        }else if(this.state.currentView==='bins'){
+            this.setState({currentView:'groups'})
+        }else{
+            // Do Nothing
+        }
+    }
+
+    handleClickOnBack(){
+        if(this.state.currentView==="groups"){
+            this.setState({currentView:'bins'})
+        }else if(this.state.currentView==='bins'){
+            this.setState({currentView:'tags'})
+        }else{
+            // Do Nothing
+        }
+    }
+
+    /**
+     * The method will send the selected PPS
+     * along with the updated profile to the server.
+     */
+    cancelProfileChanges() {
+        this.props.cancelProfileChanges({pps: this.props.selectedPPS})
+    }
+
 
 
 
     render() {
 
-
+        let self=this
         return (
             <div className="pps-configuration-container">
                 <PPSList/>
@@ -78,6 +107,14 @@ class PPSConfiguration extends React.Component {
 
 
                 </div>
+                {this.props.selectedPPS && <div className="pps-configuration-actions-container">
+                    <button onClick={self.cancelProfileChanges.bind(self)} className="pps-bin-cancel-button">CANCEL</button>
+                    {this.state.currentView!=="groups" && <button onClick={self.handleClickOnNext.bind(self)} className="pps-bin-next-button">NEXT</button>}
+                    {this.state.currentView==="groups" && <button onClick={self.handleClickOnBack.bind(self)} className="pps-bin-save-apply-button">SAVE AND APPLY</button>}
+                    {this.state.currentView!=="tags" && <button onClick={self.handleClickOnBack.bind(self)} className="pps-bin-back-button">BACK</button>}
+                    {this.state.currentView==="groups" && <button onClick={self.handleClickOnBack.bind(self)} className="pps-bin-save-button">SAVE AS NEW PROFILE</button>}
+                    {this.state.currentView==="groups" && <button onClick={self.handleClickOnBack.bind(self)} className="pps-bin-save-button">SAVE</button>}
+                </div>}
             </div>
         );
     }
@@ -117,7 +154,11 @@ var mapDispatchToProps = function (dispatch) {
         },
         initDataSentCall: function (data) {
             dispatch(setWsAction({type: WS_ONSEND, data: data}));
-        }
+        },
+        cancelProfileChanges: function (data) {
+            dispatch(cancelProfileChanges(data));
+        },
+
 
     };
 }

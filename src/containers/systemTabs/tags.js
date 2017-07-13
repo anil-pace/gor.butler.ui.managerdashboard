@@ -93,25 +93,21 @@ class Tags extends React.Component {
             <div className="pps-tags-header"><span className="gor-tag-icon"/>Tags</div>
             <div className="pps-searchbox-container">
                 <input className="pps-searchbox-tags"type="text" onChange={this.searchTags.bind(this)} value={this.state.filter}/>
-                {this.state.filter?<span className="searchbox-cross-icon" onClick={this.clearSearch.bind(this)} style={{marginLeft:-25,cursor:'pointer'}}/>:null}
+                {this.state.filter?<span className="searchbox-cross-icon" onClick={this.clearSearch.bind(this)} />:null}
             </div>
 
             <div className="pps-searchresult-label">{this.state.filter ? "Search Results" : "All Tags"}</div>
-            <div className="pps-tag-list" style={{maxHeight:420,overflow:'auto'}}>
+            <div className="pps-tag-list">
             {this.state.filteredTags.map(function (tag) {
                 return <div className="pps-tags-row" key={tag.id}>
-                    <span className="pps-tag-name" style={{
-
-                    }}>{tag.name}</span>
+                    <span className="pps-tag-name">{tag.name}</span>
                     <span className="pps-tag-selection">
                         {self.props.selectedPPSBin && self.props.selectedPPSBin['tags'] &&  <input checked={self.props.selectedPPSBin['tags'].tags.map(function(tag){return tag.name}).indexOf(tag.name)>-1} onChange={self.handleTagSelect.bind(self,tag)} type="checkbox"/>}
                     </span>
                 </div>
             })}
             </div>
-            {this.state.canAddTag?<div className="pps-add-tag-container" style={{
-
-            }}>
+            {this.state.canAddTag?<div className="pps-add-tag-container">
                     <span className="pps-add-tag-name">{this.state.filter}</span>
                 <span className="pps-add-tag-button" onClick={this.addTag.bind(this)}>
                         Add

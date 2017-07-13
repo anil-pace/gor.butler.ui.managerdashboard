@@ -53,13 +53,7 @@ class Bins extends React.Component {
         console.log(this.props.selectedProfile)
     }
 
-    /**
-     * The method will send the selected PPS
-     * along with the updated profile to the server.
-     */
-    cancelProfileChanges() {
-        this.props.cancelProfileChanges({pps: this.props.selectedPPS})
-    }
+
 
     render() {
         /**
@@ -99,16 +93,18 @@ class Bins extends React.Component {
 
         let total_x = new Set(x_array).size * 10 + max_x
         let total_y = new Set(y_array).size * 10 + max_y
+        let container={x:900,y:500} //Container is 900*500
 
         return <div
             className={["pps-bins-container", this.props.currentView === 'tags' ? 'include-tags' : null].join(" ")}>
+            <div style={{padding:'2% 4%',color:'#ccc'}}>Select a bin to manage tags</div>
             <div style={{
-                width: 800,
+                width: container.x,
                 margin: 'auto',
-                height: 500,
-                maxWidth: 800,
+                height: container.y,
+                maxWidth: container.x,
                 overflow: 'scroll',
-                maxHeight: 500,
+                maxHeight: container.y,
                 position: 'relative'
             }}>
                 {/*The co-ordinates need to be in proportion to the dimension of*/}
@@ -119,10 +115,10 @@ class Bins extends React.Component {
                     return <div key={bin.pps_bin_id} style={{
                         display: 'inline-block',
                         position: 'absolute',
-                        left: bin.orig_cordinates[0] * 800 / total_x,
-                        top: bin.orig_cordinates[1] * 500 / total_y,
-                        width: bin.breadth * 800 / total_x,
-                        height: bin.length * 500 / total_y,
+                        left: bin.orig_cordinates[0] * container.x / total_x,
+                        top: bin.orig_cordinates[1] * container.y / total_y,
+                        width: bin.breadth * container.x / total_x,
+                        height: bin.length * container.y / total_y,
                     }}>
 
                         {self.props.currentView === 'tags' && <div
@@ -191,11 +187,6 @@ class Bins extends React.Component {
                 </button>)}
             </div>}
 
-            <div style={{clear: 'both', overflow: 'auto'}}>
-                <button style={{float: 'right', right: 20}} onClick={this.cancelProfileChanges.bind(this)}>Cancel
-                </button>
-                <button style={{float: 'right', right: 20}} onClick={this.saveProfile.bind(this)}>Save</button>
-            </div>
         </div>
     }
 }
@@ -219,9 +210,7 @@ var mapDispatchToProps = function (dispatch) {
         changePPSBinStatus: function (data) {
             dispatch(changePPSBinStatus(data));
         },
-        cancelProfileChanges: function (data) {
-            dispatch(cancelProfileChanges(data));
-        },
+
     }
 };
 

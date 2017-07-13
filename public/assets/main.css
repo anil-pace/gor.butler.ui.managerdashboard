@@ -329,6 +329,8 @@ body {
   height: 15px;
   display: inline-block;
   vertical-align: middle;
+  margin-left: -25px;
+  cursor: pointer;
 }
 
 .header-yellow-alert-icon {
@@ -6955,7 +6957,8 @@ button:disabled {
   box-sizing: border-box;
   background-color: white;
   overflow: auto;
-  height: 625px;
+  position: absolute;
+  width: 100%;
 }
 
 .pps-configuration-details-container {
@@ -6964,7 +6967,6 @@ button:disabled {
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
   box-sizing: border-box;
-  height: 100%;
 }
 
 .pps-configuration-navigation-tabs {
@@ -7010,12 +7012,80 @@ button:disabled {
   margin-right: 10px;
 }
 
+.pps-bin-next-button, .pps-bin-save-apply-button {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  width: auto;
+  height: 30px;
+  font-size: 14px;
+  background: #fff;
+  border-radius: 3px;
+  border-color: #A6A7A9;
+  border-style: double;
+  border-width: 2px;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+  float: right;
+}
+
+.pps-bin-next-button {
+  width: 113px;
+}
+
+.pps-bin-save-apply-button {
+  width: 150px;
+}
+
+.pps-bin-back-button {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  width: 113px;
+  height: 30px;
+  font-size: 14px;
+  background: #fff;
+  border-radius: 3px;
+  border-color: #A6A7A9;
+  border-style: double;
+  border-width: 2px;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+  float: right;
+}
+
+.pps-bin-cancel-button, .pps-bin-save-button {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  width: auto;
+  height: 30px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-right: 10px;
+  background: transparent;
+  margin-top: 10px;
+}
+
+.pps-bin-cancel-button {
+  width: 113px;
+  float: left;
+}
+
+.pps-bin-save-button {
+  float: right;
+}
+
+.pps-bin-cancel-button:focus, .pps-bin-save-button:focus {
+  outline: none;
+}
+
 .pps-list-container {
   float: left;
   width: 17%;
   border: 1px solid #ccc;
   box-sizing: border-box;
   height: 100%;
+  position: absolute;
 }
 
 .pps-list-header {
@@ -7140,7 +7210,7 @@ button:disabled {
   width: 20%;
   border-left: 1px solid #ccc;
   box-sizing: border-box;
-  height: 450px;
+  height: 520px;
 }
 
 .pps-tags-header {
@@ -7169,6 +7239,11 @@ button:disabled {
   color: #999;
   font-size: 12px;
   clear: both;
+  overflow: auto;
+}
+
+.pps-tag-list {
+  max-height: 400px;
   overflow: auto;
 }
 
@@ -7216,6 +7291,15 @@ button:disabled {
   border: 1px solid #ccc;
   border-radius: 15px;
   outline: none;
+}
+
+.pps-configuration-actions-container {
+  width: 83%;
+  float: right;
+  height: 50px;
+  clear: both;
+  overflow: auto;
+  padding: 10px 20px;
 }
 
 .gor-list-none {
