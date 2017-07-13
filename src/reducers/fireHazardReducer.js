@@ -1,4 +1,4 @@
-import {FIRE_EMERGENCY,NOTIFY_EMERGENCY_END} from '../constants/frontEndConstants';
+import {FIRE_EMERGENCY} from '../constants/frontEndConstants';
 import React  from 'react';
 import {FormattedMessage} from 'react-intl';
 
@@ -7,36 +7,22 @@ export function fireHazardDetail(state={}, action) {
 
     switch (action.type) {
         case FIRE_EMERGENCY:
-            var res;
+          var res;
             res=action.data;
-            if (!res.complete_data[0].emergency_data) {
-                /**
-                 * Error handling
-                 */
-                return state
-            }
-
-            else {
-                var data,shutters,escapePath,emergencyStartTime;
-                data=res.complete_data[0]
-                shutters=data.emergency_data.shutters;
-                escapePath=data.emergency_data.escape_path;
-                emergencyStartTime=data.emergency_start_time;
+              var data,shutters,escapePath,emergencyStartTime,notifyTime;
+               data=res.complete_data[0].emergency_data ||{};
+               shutters=data.shutters || {};
+               escapePath=data.escape_path|| '';
+               emergencyStartTime=res.complete_data[0].emergency_start_time || null;
+               notifyTime=(!Object.keys(data).length)? new Date():null;
                 return Object.assign({}, state, {
                     "shutters":shutters,
                     "escapePath":escapePath,
                     "emergencyStartTime":emergencyStartTime,
                     "emergency_type": res.complete_data[0].emergency_type,
-                    "notifyTime":'' 
+                    "notifyTime":notifyTime
                 })
-            }
-
-       case NOTIFY_EMERGENCY_END:
-         let notifyTime=action.data;
-         return Object.assign({}, state, { 
-            "notifyTime":notifyTime
-         })
-            
+            break; 
         default:
             return state
     }

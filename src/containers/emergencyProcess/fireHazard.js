@@ -4,25 +4,30 @@ import {modal} from 'react-redux-modal';
 import { FormattedMessage } from 'react-intl'; 
 import {setFireHazrdFlag} from '../../actions/tabActions';
 import ResumeOperation from './resumeOperation'; 
+import {userRequest} from '../../actions/userActions';  
 import ShutterLocationTile from '../../components/fireHazardTiles/shutterLocationTile';
 import {getSecondsDiff} from '../../utilities/getDaysDiff';
-import {FAILED,CLEARED,PROGRESS,NOT_FOUND,IN_PROGRESS} from '../../constants/frontEndConstants';
+import { VALIDATE_SAFETY } from '../../constants/configConstants';
+import {FAILED,CLEARED,EMERGENCY_FIRE,PROGRESS,NOT_FOUND,IN_PROGRESS,APP_JSON,POST,CONFIRM_SAFETY} from '../../constants/frontEndConstants';
 class FireHazard extends React.Component{
   constructor(props) 
   {  
     super(props);
     this.state={buttonDisable:true};
     this._removeThisModal =  this._removeThisModal.bind(this);
-    this._resumeOperation=   this._resumeOperation.bind(this);
+    this._resumeOperation =  this._resumeOperation.bind(this);
   }
   _removeThisModal() {
     this.props.removeModal();
     this.props.setFireHazrdFlag(true);
    }
+   endFireHazard(){
+    this.props.removeModal();
+   }
    
   componentDidMount(){
     if(this.props.checkingList){
-      this._removeThisModal();  //If manager is on safety checklist page, don't show the release modal      
+      this.endFireHazard();  //If manager is on safety checklist page, don't show the release modal      
     }
      var limit=(this.props.config.fire_emergency_enable_resume_after)*60;
     var duration=(limit-getSecondsDiff(this.props.fireHazard.emergencyStartTime))*1000;
@@ -35,12 +40,12 @@ class FireHazard extends React.Component{
   }
 
   }
-  componentWillReceiveProps(nextProps){
-    if(!nextProps.auth_token||nextProps.fireHazard.emergency_type !== this.props.fireHazard.emergency_type)
+   componentWillReceiveProps(nextProps){
+    if(!nextProps.auth_token||!nextProps.fireHazard.emergencyStartTime)
     {
-      this._removeThisModal();
-    }
+    this._removeThisModal();
   }
+}
 
   _resumeOperation(){
     this._removeThisModal();
@@ -156,11 +161,11 @@ render()
     <div className="gor-shutter-status-box">
     {shutterWrap}
     </div>          
-    </div>      
+    </div>    
     <button className='gor-resume-btn' disabled={this.state.buttonDisable} onClick={this._resumeOperation}>
     <FormattedMessage id='operation.alert.release.button' 
     defaultMessage="RESUME OPERATION"
-    description="Text button to resume operation"/></button>           
+    description="Text button to resume operation"/></button>         
     </div>
     );
 }
@@ -177,7 +182,9 @@ function mapStateToProps(state, ownProps){
   } 
   function mapDispatchToProps(dispatch){
     return {
-      setFireHazrdFlag: function(data){ dispatch(setFireHazrdFlag(data)); }
+
+      setFireHazrdFlag: function(data){ dispatch(setFireHazrdFlag(data)); },
+      userRequest: function(data){ dispatch(userRequest(data)); }
     }
   };
 
