@@ -2,14 +2,7 @@
     cursor: pointer;
     position:relative;
 }
-.gor-option-icon{
-    background-image: url(/om/assets/images/ic-arrow-down.svg);
-    background-repeat: no-repeat;
-    width: 12px;
-    height: 20px;
-    vertical-align: middle;
-    display: inline-block;
-}
+
 .gor-white-background{
   background-color: #FFFFFF;
 }
@@ -17,7 +10,7 @@
     border: 1px solid;
     border-radius: 0.1875rem;
     box-sizing: border-box;
-    cursor: default;
+    cursor: pointer;
     outline: none;
     padding: 0.5rem 3.25rem 0.5rem 0.625rem;
     transition: all 200ms ease;
