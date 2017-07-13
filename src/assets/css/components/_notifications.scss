@@ -22,7 +22,7 @@
 		    	display: block;
 			    width: 16px;
 			    height: 16px;
-			    background-position: -89px -92px;
+			    background-position: -89px -93px;
 			    position: absolute;
 			    top: -12px;
 			    left: 162px;
@@ -39,13 +39,14 @@
 		    .headerText{
 		    	font-size: 14px;
     			color: #4a4a4a;
+    			font-weight: bold;
 		    }
 		    .searchIcon{
 		    	display:inline-block;
 		    	float:right;
 		    	height:16px;
 		    	width:16px;
-		    	background-position: -304px -55px;
+		    	background-position: -31px -93px;
 		    }
 		    .searchBox{
 		    	padding: 10px 5px;
@@ -92,12 +93,22 @@
 		 }
 		 .time{
 		 	float:left;
+		 	color: #979797;
+    		line-height: 25px;
 		 }
 		 p{
 		 	&.message{
-		 		line-height: 35px;
-			    font-size: 14px;
+		 		line-height: 20px;
+			    font-size: 13px;
+			    font-weight: normal;
+			    margin-top: 10px;
+			    color: #535353;
+		 	}
+		 	&.title{
+		 		line-height: inherit;
 			    font-weight: bold;
+			    font-size: 14px;
+			    color: #535353;
 		 	}
 		 }
 		 span{
@@ -143,8 +154,8 @@
     		display: inline-block;
 		    position: relative;
 		    width: 20px;
-		    height: 22px;
-		    background-position: -252px -52px;
+		    height: 23px;
+		    background-position: -278px -52px;
     	}
     	.not-count{
     		position: absolute;
