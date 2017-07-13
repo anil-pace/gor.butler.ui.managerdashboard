@@ -6804,7 +6804,7 @@ button:disabled {
   border: 1px solid;
   border-radius: 0.1875rem;
   box-sizing: border-box;
-  cursor: default;
+  cursor: pointer;
   outline: none;
   padding: 0.5rem 3.25rem 0.5rem 0.625rem;
   transition: all 200ms ease;
