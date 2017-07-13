@@ -7175,6 +7175,15 @@ button:disabled {
 
 .selected .pps-bin {
   border: 2px solid #4990e2;
+  background-color: rgba(73, 144, 226, 0.3);
+}
+
+.selected .pps-bin .pps-bin-tag-info {
+  color: black;
+}
+
+.selected .pps-bin .pps-bin-tag-info .gor-tag-icon-grey {
+  background-position: -209px -94px;
 }
 
 .mouseover .pps-bin.disabled {
