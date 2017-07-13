@@ -66,22 +66,24 @@
   width: auto;
   height: 30px;
   font-size: 14px;
-  background: #fff;
   border-radius: 3px;
-  border-color: #A6A7A9;
-  border-style: double;
-  border-width: 2px;
   cursor: pointer;
   margin-left: 10px;
   margin-right:10px;
   margin-top:10px;
-  float:right
+  float:right;
+  background-color: #f36f36;
+  border: solid 1px #f36f36;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  color: #ffffff;
 }
+
 .pps-bin-next-button{
   width: 113px;
 }
 .pps-bin-save-apply-button{
-width:150px;
+  width:150px;
+
 }
 .pps-bin-back-button {
   font-family: 'Source Sans Pro Bold', sans-serif;
