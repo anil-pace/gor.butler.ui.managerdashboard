@@ -39,6 +39,7 @@
 		    .headerText{
 		    	font-size: 14px;
     			color: #4a4a4a;
+    			font-weight: bold;
 		    }
 		    .searchIcon{
 		    	display:inline-block;
@@ -92,12 +93,22 @@
 		 }
 		 .time{
 		 	float:left;
+		 	color: #979797;
+    		line-height: 25px;
 		 }
 		 p{
 		 	&.message{
-		 		line-height: 35px;
-			    font-size: 14px;
+		 		line-height: 20px;
+			    font-size: 13px;
+			    font-weight: normal;
+			    margin-top: 10px;
+			    color: #535353;
+		 	}
+		 	&.title{
+		 		line-height: inherit;
 			    font-weight: bold;
+			    font-size: 14px;
+			    color: #535353;
 		 	}
 		 }
 		 span{
