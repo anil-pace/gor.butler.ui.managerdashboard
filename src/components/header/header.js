@@ -133,8 +133,62 @@ class Header extends React.Component {
         var menuObj={}, heading, subHeading, optionList, optionOperation, optionAction, buttonText;
         optionList=[];
 
-        if (!this.props.system_emergency) {
-            heading=(<FormattedMessage id="header.butler" description="Header description"
+        if (this.props.system_emergency || this.props.fireHazardStartTime) {
+                    heading=(<FormattedMessage id="header.emergency.heading" description="Header description"
+                                         defaultMessage="Emergency"/>);
+            subHeading=(<FormattedMessage id="header.emergency.subheading" description='Start time '
+                                            defaultMessage='In Zone'
+            />);
+            optionOperation=(<FormattedMessage id="header.option.stopped" description='stopped operation'
+                                                 defaultMessage='Operation stopped'
+            />);
+            buttonText=(<FormattedMessage id="header.button.resume" description='Button text'
+                                            defaultMessage='Resume'
+            />);
+            optionList.push({
+                optionClass: 'gor-fail', icon: 'gor-error-white', optionText: optionOperation,
+                fnButton: '', buttonText: ''
+            });
+            if (this.props.system_data === SOFT_MANUAL) {
+               optionAction=(<FormattedMessage id="header.option.resume" description='resume operation option'
+                                                  defaultMessage='Enter password to resume operation.'/>);
+                optionList.push({
+                    optionClass: '', icon: '',
+                    optionText: optionAction,
+                    fnButton: this._showModal.bind(this, ResumeOperation), buttonText: buttonText
+                });
+            }
+            else if(this.props.fireHazardStartTime)
+            {
+                optionAction=(<FormattedMessage id="header.option.fireemergency" description='Fire Emergency message'
+                                                  defaultMessage='Fire emergency has been triggered. Follow evacuation procedures immediately'/>);
+                optionList.push({
+                    optionClass: '', icon: '',
+                    optionText: optionAction,
+                    fnButton: '', buttonText: buttonText
+                });
+            }
+            else {
+                
+
+ optionAction=(<FormattedMessage id="header.option.release" description='release operation option'
+                                                  defaultMessage='Release the Emergency Stop button from the Zigbee box in order
+                                to resume operation.'/>);
+                optionList.push({
+                    optionClass: '', icon: '', optionText: optionAction,
+                    fnButton: '', buttonText: buttonText
+                });
+
+            }
+            menuObj={
+                heading: heading, subHeading: subHeading, optionList: optionList,
+                menuStyle: 'gor-fail', headingStyle: 'gor-white-text', openIcon: 'gor-emergency-dropdown-open',
+                closeIcon: 'gor-emergency-dropdown-close'
+            };
+        }
+        else {
+
+    heading=(<FormattedMessage id="header.butler" description="Header description"
                                          defaultMessage="Butler"/>);
             subHeading=(<FormattedMessage id="header.start" description='Start time '
                                             defaultMessage='Start time:{time} '
@@ -158,46 +212,9 @@ class Header extends React.Component {
                 heading: heading, subHeading: subHeading, optionList: optionList,
                 menuStyle: '', headingStyle: '', openIcon: 'gor-dropdown-open', closeIcon: 'gor-dropdown-close'
             };
-        }
-        else {
-            heading=(<FormattedMessage id="header.emergency.heading" description="Header description"
-                                         defaultMessage="Emergency"/>);
-            subHeading=(<FormattedMessage id="header.emergency.subheading" description='Start time '
-                                            defaultMessage='In Zone'
-            />);
-            optionOperation=(<FormattedMessage id="header.option.stopped" description='stopped operation'
-                                                 defaultMessage='Operation stopped'
-            />);
-            buttonText=(<FormattedMessage id="header.button.resume" description='Button text'
-                                            defaultMessage='Resume'
-            />);
-            optionList.push({
-                optionClass: 'gor-fail', icon: 'gor-error-white', optionText: optionOperation,
-                fnButton: '', buttonText: ''
-            });
-            if (this.props.system_data !== SOFT_MANUAL) {
-                optionAction=(<FormattedMessage id="header.option.release" description='release operation option'
-                                                  defaultMessage='Release the Emergency Stop button from the Zigbee box in order
-        						to resume operation.'/>);
-                optionList.push({
-                    optionClass: '', icon: '', optionText: optionAction,
-                    fnButton: '', buttonText: buttonText
-                });
-            }
-            else {
-                optionAction=(<FormattedMessage id="header.option.resume" description='resume operation option'
-                                                  defaultMessage='Enter password to resume operation.'/>);
-                optionList.push({
-                    optionClass: '', icon: '',
-                    optionText: optionAction,
-                    fnButton: this._showModal.bind(this, ResumeOperation), buttonText: buttonText
-                });
-            }
-            menuObj={
-                heading: heading, subHeading: subHeading, optionList: optionList,
-                menuStyle: 'gor-fail', headingStyle: 'gor-white-text', openIcon: 'gor-emergency-dropdown-open',
-                closeIcon: 'gor-emergency-dropdown-close'
-            };
+
+
+
         }
 
         return menuObj;
@@ -278,7 +295,8 @@ function mapStateToProps(state, ownProps) {
         system_status: state.tabsData.status || null,
         system_data: state.tabsData.system_data || null,
         activeModalKey: state.appInfo.activeModalKey || 0,
-        timeOffset: state.authLogin.timeOffset
+        timeOffset: state.authLogin.timeOffset,
+        fireHazardStartTime:state.fireHazardDetail.emergencyStartTime
     }
 }
 /**

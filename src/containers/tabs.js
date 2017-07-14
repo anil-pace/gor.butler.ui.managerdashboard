@@ -129,7 +129,7 @@ class Tabs extends React.Component{
     utilities=<FormattedMessage id="utilities.tab.heading" description="audit tab" 
               defaultMessage="UTILITIES"/>;                     
 
-    if(!this.props.system_status)
+    if(!this.props.system_status || this.props.fireHazardStartTime)
     {
      overviewStatus=offline;
      systemStatus=offline;
