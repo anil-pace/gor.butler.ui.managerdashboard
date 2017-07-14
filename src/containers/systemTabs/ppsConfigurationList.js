@@ -43,7 +43,7 @@ class PPSList extends React.Component {
              * Otherwise onClick of PPS would also get called
              */
             event.stopPropagation()
-            let url=PPS_PROFILE_URL+profile.id
+            let url=PPS_PROFILE_URL+profile.name
             let data={
                 'url': url,
                 'method': GET,
@@ -79,8 +79,8 @@ class PPSList extends React.Component {
                             <div className="pps-list-item-profiles">
                                 {pps.pps_id===self.props.selectedPPS.pps_id && pps.profiles.map(function (profile) {
                                     return <div className="pps-profile-item" onClick={self.selectPPSProfile.bind(self, {pps, profile})}
-                                                key={profile.id}>
-                                        <span className={[profile.id===self.props.selectedProfile.id?'selected':'','pps-profile-name'].join(" ")}>{profile.name}</span> {profile.applied && <span className="profile-applied-label">Applied</span>}
+                                                key={profile.name}>
+                                        <span className={[profile.name===self.props.selectedProfile.name?'selected':'','pps-profile-name'].join(" ")}>{profile.name}</span> {profile.applied && <span className="profile-applied-label">Applied</span>}
                                     </div>
 
                                 })}

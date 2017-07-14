@@ -78,7 +78,7 @@ export function ppsConfiguration(state = {}, action) {
              * and selects it.
              */
             selected_pps.profiles = selected_pps.profiles.map(function (prfl) {
-                if (prfl.id === selected_profile.id) {
+                if (prfl.name === selected_profile.name) {
                     prfl = JSON.parse(JSON.stringify(selected_profile))
                     prfl.selected = true
                 } else {
