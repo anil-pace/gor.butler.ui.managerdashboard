@@ -44,17 +44,6 @@ class Bins extends React.Component {
         this.props.changePPSBinStatus({bin, currentView: 'bins', enabled: status})
     }
 
-    /**
-     * The method will send the selected PPS
-     * along with the updated profile to the server.
-     */
-    saveProfile() {
-        console.log(this.props.selectedPPS)
-        console.log(this.props.selectedProfile)
-    }
-
-
-
     render() {
         /**
          * As soon as PPS selection or the profile

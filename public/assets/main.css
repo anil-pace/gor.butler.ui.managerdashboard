@@ -7311,6 +7311,65 @@ button:disabled {
   padding: 10px 20px;
 }
 
+.gor-create-profile {
+  width: 40%;
+  min-height: 18.75rem;
+  background: #ffffff;
+  border-radius: 3px;
+  font-size: 20px;
+  margin: auto;
+  clear: both;
+}
+
+.gor-create-profile .gor-create-profile-header {
+  margin: auto;
+  padding: 1.875rem;
+  padding-bottom: 0;
+  min-height: 3.125rem;
+}
+
+.gor-create-profile .gor-create-profile-body {
+  font-size: 14px;
+  padding: 0px 1.875rem;
+  min-height: 9.375rem;
+  display: table;
+  width: 50%;
+}
+
+.gor-create-profile .gor-create-profile-action-button {
+  text-align: right;
+  margin-right: 1.25rem;
+}
+
+.gor-create-profile .gor-save-profile-btn {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  min-width: 7.0625rem;
+  height: 2.1875rem;
+  font-size: 14px;
+  background: #f36f36;
+  color: #ffffff;
+  border-radius: 3px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.gor-create-profile .gor-filter-input-text {
+  padding-top: 0;
+}
+
+.gor-cancel-btn {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  width: 7.0625rem;
+  height: 2.1875rem;
+  font-size: 14px;
+  background: #4D5055;
+  color: #ffffff;
+  border-radius: 3px;
+  margin-right: 0.625rem;
+  display: inline-block;
+  cursor: pointer;
+}
+
 .gor-list-none {
   margin-top: 0px;
   font-family: inherit;

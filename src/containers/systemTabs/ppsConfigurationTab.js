@@ -18,6 +18,8 @@ import Tags from './tags'
 import Bins from './ppsConfigurationBins'
 import PPSList from "./ppsConfigurationList";
 import {cancelProfileChanges} from './../../actions/ppsConfigurationActions'
+import {modal} from 'react-redux-modal'
+import CreateProfile from './createPPSProfile'
 
 
 class PPSConfiguration extends React.Component {
@@ -79,11 +81,33 @@ class PPSConfiguration extends React.Component {
     }
 
     /**
+     * The method will send the
+     * api call to save the profile
+     * @param profileName
+     */
+    saveNewProfile(profileName){
+        let newProfile=JSON.parse(JSON.stringify(this.props.selectedProfile))
+        newProfile.name=profileName
+
+    }
+
+    createProfile(){
+        let self=this
+        modal.add(CreateProfile, {
+            title: '',
+            size: 'large', // large, medium or small,
+            closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+            hideCloseButton: true, // (optional) if you don't wanna show the top right close button
+            saveNewProfile:self.saveNewProfile.bind(self)
+        });
+    }
+
+    /**
      * The method will send the selected PPS
      * along with the updated profile to the server.
      */
     cancelProfileChanges() {
-        this.props.cancelProfileChanges({pps: this.props.selectedPPS})
+        this.props.cancelProfileChanges({pps: this.props.selectedProfile})
     }
 
 
@@ -112,7 +136,7 @@ class PPSConfiguration extends React.Component {
                     {this.state.currentView!=="groups" && <button onClick={self.handleClickOnNext.bind(self)} className="pps-bin-next-button">NEXT</button>}
                     {this.state.currentView==="groups" && <button onClick={self.handleClickOnBack.bind(self)} className="pps-bin-save-apply-button">SAVE AND APPLY</button>}
                     {this.state.currentView!=="tags" && <button onClick={self.handleClickOnBack.bind(self)} className="pps-bin-back-button">BACK</button>}
-                    {this.state.currentView==="groups" && <button onClick={self.handleClickOnBack.bind(self)} className="pps-bin-save-button">SAVE AS NEW PROFILE</button>}
+                    {this.state.currentView==="groups" && <button onClick={self.createProfile.bind(self)} className="pps-bin-save-button">SAVE AS NEW PROFILE</button>}
                     {this.state.currentView==="groups" && <button onClick={self.handleClickOnBack.bind(self)} className="pps-bin-save-button">SAVE</button>}
                 </div>}
             </div>
@@ -136,7 +160,7 @@ function mapStateToProps(state, ownProps) {
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
         ppsConfigurationTabRefreshed: state.ppsConfiguration.ppsConfigurationTabRefreshed,
         socketAuthorized: state.recieveSocketActions.socketAuthorized,
-        selectedProfile: state.ppsConfiguration.selectedProfile || {id: null},
+        selectedProfile: state.ppsConfiguration.selectedProfile || {name: null},
         selectedPPS: state.ppsConfiguration.selectedPPS,
         selectedPPSBin:state.ppsConfiguration.selectedPPSBin
     };
