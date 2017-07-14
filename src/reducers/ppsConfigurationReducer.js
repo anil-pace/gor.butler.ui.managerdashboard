@@ -120,12 +120,8 @@ export function ppsConfiguration(state = {}, action) {
             if (!selected_bin.tags) {
                 selected_bin.tags = []
             }
-            if (selected_bin.tags.map(function (tag) {
-                    return tag.name
-                }).indexOf(selected_tag.name) > -1) {
-                selected_bin.tags.splice(selected_bin.tags.map(function (tag) {
-                    return tag.name
-                }).indexOf(selected_tag.name), 1)
+            if (selected_bin.tags.indexOf(selected_tag) > -1) {
+                selected_bin.tags.splice(selected_bin.tags.indexOf(selected_tag), 1)
             } else {
                 selected_bin.tags.push(selected_tag)
             }

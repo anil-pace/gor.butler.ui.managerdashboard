@@ -10,7 +10,7 @@ class Tags extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            tags: [{name: "Fragile"}, {name: "Cosmetics"}, {name: "Hangers"}, {name: "Food"}],
+            tags: [],
             filteredTags: [],
             filter: "",
             canAddTag:false
@@ -41,7 +41,10 @@ class Tags extends React.Component {
 
     searchTags(e) {
         let filteredTags = this.state.tags.filter(function (tag) {
-            if (!e.target || !e.target.value || tag.name.toLowerCase().indexOf(e.target.value.toLowerCase()) > -1) {
+            /**
+             * TODO: Search logic need to be refactored according to the requirements.
+             */
+            if (!e.target || !e.target.value || tag.toLowerCase().indexOf(e.target.value.toLowerCase()) > -1) {
                 return tag
             }
         })
@@ -61,7 +64,7 @@ class Tags extends React.Component {
 
         let tags=this.state.filteredTags
         tags.forEach(function(tag){
-            if(tag.name===selectedTag.name){
+            if(tag===selectedTag){
                 self.props.addTagToBin({tag:tag,bin:self.props.selectedPPSBin['tags']})
             }
         })
@@ -72,7 +75,7 @@ class Tags extends React.Component {
 
     addTag(e){
         let current_state=this.state.tags
-        current_state.push({name:this.state.filter})
+        current_state.push(this.state.filter)
         this.setState({tags:current_state})
         this.searchTags(e)
 
@@ -99,10 +102,10 @@ class Tags extends React.Component {
             <div className="pps-searchresult-label">{this.state.filter ? "Search Results" : "All Tags"}</div>
             <div className="pps-tag-list">
             {this.state.filteredTags.map(function (tag) {
-                return <div className="pps-tags-row" key={tag.id}>
-                    <span className="pps-tag-name">{tag.name}</span>
+                return <div className="pps-tags-row" key={tag}>
+                    <span className="pps-tag-name">{tag}</span>
                     <span className="pps-tag-selection">
-                        {self.props.selectedPPSBin && self.props.selectedPPSBin['tags'] &&  <input checked={self.props.selectedPPSBin['tags'].tags.map(function(tag){return tag.name}).indexOf(tag.name)>-1} onChange={self.handleTagSelect.bind(self,tag)} type="checkbox"/>}
+                        {self.props.selectedPPSBin && self.props.selectedPPSBin['tags'] &&  <input checked={self.props.selectedPPSBin['tags'].tags.map(function(tag){return tag}).indexOf(tag)>-1} onChange={self.handleTagSelect.bind(self,tag)} type="checkbox"/>}
                     </span>
                 </div>
             })}
