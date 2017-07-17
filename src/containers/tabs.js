@@ -35,6 +35,7 @@ class Tabs extends React.Component{
       this.props.setFireHazrdFlag(false);
   }
 
+
     handleTabClick(selTab){
     	/**
          * Displaying loader currently for User tab
@@ -64,6 +65,7 @@ class Tabs extends React.Component{
       hideCloseButton: false,
       emergencyPress: stopFlag
       });
+
   }
   _emergencyRelease(){
       modal.add(EmergencyRelease, {
@@ -88,7 +90,7 @@ class Tabs extends React.Component{
     {
       this._emergencyRelease();
     }
-    else  if(nextProps.fireHazardType ===EMERGENCY_FIRE && !nextProps.firehazadflag && !nextProps.fireHazardNotifyTime)
+    else  if(nextProps.fireHazardType ===EMERGENCY_FIRE && !nextProps.firehazadflag && !nextProps.fireHazardNotifyTime && (nextProps.firehazadflag!=this.props.firehazadflag))
     {
       this._FireEmergencyRelease();
     }
@@ -310,7 +312,7 @@ function mapStateToProps(state, ownProps){
          system_status:state.tabsData.status||null,
          audit_alert: state.tabsData.audit_alert || 0,
          config:state.config||{},
-         firehazadflag:state.fireReducer.firehazadflag || false,
+         firehazadflag:state.fireReducer.firehazadflag,
          fireHazardType:state.fireHazardDetail.emergency_type,
          fireHazardStartTime:state.fireHazardDetail.emergencyStartTime,
          fireHazardNotifyTime:state.fireHazardDetail.notifyTime,
