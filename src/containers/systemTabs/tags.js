@@ -41,12 +41,18 @@ class Tags extends React.Component {
 
     searchTags(e) {
         let filteredTags = this.state.tags.filter(function (tag) {
-            /**
-             * TODO: Search logic need to be refactored according to the requirements.
-             */
-            if (!e.target || !e.target.value || tag.toLowerCase().indexOf(e.target.value.toLowerCase()) > -1) {
-                return tag
+            let returnValue = false
+            if (!e.target || !e.target.value) {
+                returnValue = true
             }
+
+            !returnValue && e.target.value.split(" ").forEach(function (word) {
+                if (tag.toLowerCase().indexOf(word.toLowerCase())>-1) {
+                    returnValue = true
+                }
+            })
+
+            return returnValue
         })
         if(filteredTags.length===0){
             this.setState({canAddTag:true})
