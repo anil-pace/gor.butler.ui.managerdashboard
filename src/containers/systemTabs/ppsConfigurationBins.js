@@ -86,7 +86,8 @@ class Bins extends React.Component {
 
         return <div
             className={["pps-bins-container", this.props.currentView === 'tags' ? 'include-tags' : null].join(" ")}>
-            <div style={{padding:'2% 4%',color:'#ccc'}}>Select a bin to manage tags</div>
+            {this.props.currentView === 'tags' && <div style={{padding:'2% 4%',color:'#ccc'}}>Select a bin to manage tags</div>}
+            {this.props.currentView === 'bins' && <div style={{padding:'2% 4%',color:'#ccc'}}>Select a bin to activate or deactivate ({self.props.selectedProfile.pps_bins.filter(function(bin){return !bin.enabled}).length}/{self.props.selectedProfile.pps_bins.length} bins deactivated) </div>}
             <div style={{
                 width: container.x,
                 margin: 'auto',
