@@ -40,26 +40,27 @@ class Tags extends React.Component {
     }
 
     searchTags(e) {
+        let searchedText=(function(e){try{return e.target.value||""}catch(exception){return ""}})(e)
+        let exactMatch=false
         let filteredTags = this.state.tags.filter(function (tag) {
             let returnValue = false
-            if (!e.target || !e.target.value) {
+            if (!searchedText) {
+                exactMatch=true
                 returnValue = true
             }
 
-            !returnValue && e.target.value.split(" ").forEach(function (word) {
+            !returnValue && searchedText.split(" ").forEach(function (word) {
                 if (tag.toLowerCase().indexOf(word.toLowerCase())>-1) {
                     returnValue = true
                 }
             })
 
+            if(searchedText && searchedText.toLowerCase()===tag.toLowerCase()){
+                exactMatch=true
+            }
             return returnValue
         })
-        if(filteredTags.length===0){
-            this.setState({canAddTag:true})
-        }else{
-            this.setState({canAddTag:false})
-        }
-        this.setState({filteredTags: filteredTags, filter: (e.target.value||"")})
+        this.setState({canAddTag:!exactMatch,filteredTags: filteredTags, filter: searchedText})
     }
 
     handleTagSelect(selectedTag,e){
@@ -117,7 +118,7 @@ class Tags extends React.Component {
             })}
             </div>
             {this.state.canAddTag?<div className="pps-add-tag-container">
-                    <span className="pps-add-tag-name">{this.state.filter}</span>
+                    <span className="pps-add-tag-name">"{this.state.filter}"</span>
                 <span className="pps-add-tag-button" onClick={this.addTag.bind(this)}>
                         Add
                     </span>
