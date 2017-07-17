@@ -11,7 +11,7 @@ import { VALIDATE_SAFETY } from '../../constants/configConstants';
 import {FAILED,CLEARED,EMERGENCY_FIRE,PROGRESS,NOT_FOUND,IN_PROGRESS,APP_JSON,POST,CONFIRM_SAFETY} from '../../constants/frontEndConstants';
 class FireHazard extends React.Component{
   constructor(props) 
-  {  
+  { 
     super(props);
     this.state={buttonDisable:true};
     this._removeThisModal =  this._removeThisModal.bind(this);
@@ -24,7 +24,7 @@ class FireHazard extends React.Component{
    endFireHazard(){
     this.props.removeModal();
    }
-   
+  
   componentDidMount(){
     if(this.props.checkingList){
       this.endFireHazard();  //If manager is on safety checklist page, don't show the release modal      
@@ -176,7 +176,7 @@ function mapStateToProps(state, ownProps){
     auth_token:state.authLogin.auth_token,
     checkingList:state.emergency.checkingList||false,
     fireHazard:state.fireHazardDetail,
-    firehazadflag:state.fireReducer.firehazadflag,
+    firehazadflag:state.fireReducer.firehazadflag ||false,
     config:state.config||{}
     }
   } 

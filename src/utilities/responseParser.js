@@ -119,7 +119,7 @@ export function ResponseParse(store,res)
 				break;		    
 			case PARSE_SYSTEM:
 				store.dispatch(recieveSystemStatus(res));
-				break;		    
+				break;		
 			case PARSE_INVENTORY:
 				store.dispatch(recieveInventoryStatus(res));
 				break;	
@@ -133,6 +133,7 @@ export function ResponseParse(store,res)
 			case EMERGENCY:								    	   
 				store.dispatch(recievefireHazardDetails(res));
 				if(res.complete_data[0].emergency_type===EMERGENCY_FIRE)
+				if(store.getState().fireReducer.firehazadflag!=false)	
 				store.dispatch(setFireHazrdFlag(false));
 				break;	   
 			default:
