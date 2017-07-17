@@ -311,6 +311,10 @@
   max-width: 80%;
 }
 
+.pps-tag-name .highlight{
+  color:black
+}
+
 .pps-tag-selection {
   float: right;
 }
@@ -333,6 +337,7 @@
   float: left;
   max-width: 80%;
   padding:5px;
+  color:black;
 }
 
 .pps-add-tag-button {

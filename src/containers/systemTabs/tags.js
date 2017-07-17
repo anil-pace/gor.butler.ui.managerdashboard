@@ -50,7 +50,7 @@ class Tags extends React.Component {
             }
 
             !returnValue && searchedText.split(" ").forEach(function (word) {
-                if (tag.toLowerCase().indexOf(word.toLowerCase())>-1) {
+                if (word && tag.toLowerCase().indexOf(word.toLowerCase())>-1) {
                     returnValue = true
                 }
             })
@@ -92,6 +92,20 @@ class Tags extends React.Component {
         this.searchTags(e)
     }
 
+    highlightSearchedText(tag){
+        let innerHTML=tag
+        this.state.filter &&  this.state.filter.split(" ").forEach(function (word) {
+            let index_of_word=tag.toLowerCase().indexOf(word.toLowerCase())
+            if (word && index_of_word >= 0 )
+            {
+                let re = new RegExp(word,"gi");
+                innerHTML = tag.replace(re, ("<span class='highlight'>"+tag.substr(index_of_word,word.length)+"</span>"))
+            }
+        })
+
+        return innerHTML
+    }
+
 
     render() {
         let self=this
@@ -110,7 +124,7 @@ class Tags extends React.Component {
             <div className="pps-tag-list">
             {this.state.filteredTags.map(function (tag) {
                 return <div className="pps-tags-row" key={tag}>
-                    <span className="pps-tag-name">{tag}</span>
+                    <span className="pps-tag-name" dangerouslySetInnerHTML={{__html: self.highlightSearchedText.call(self,tag)}}/>
                     <span className="pps-tag-selection">
                         {self.props.selectedPPSBin && self.props.selectedPPSBin['tags'] &&  <input checked={self.props.selectedPPSBin['tags'].tags.map(function(tag){return tag}).indexOf(tag)>-1} onChange={self.handleTagSelect.bind(self,tag)} type="checkbox"/>}
                     </span>
