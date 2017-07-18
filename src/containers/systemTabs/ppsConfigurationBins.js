@@ -10,7 +10,7 @@ import {
     selectPPSBin,
     clearSelectionPPSBin,
     changePPSBinStatus,
-    cancelProfileChanges
+    cancelProfileChanges,changePPSBinGroupStatus,selectPPSBinGroup
 } from './../../actions/ppsConfigurationActions'
 import Bin from './../../components/bin/bin'
 
@@ -32,6 +32,11 @@ class Bins extends React.Component {
 
     }
 
+    /**
+     * The method will unselect the PPS Bin
+     * @param bin
+     * @param currentView
+     */
     clearSelectionPPSBin(bin, currentView) {
         this.props.clearSelectionPPSBin({bin, currentView})
     }
@@ -42,6 +47,47 @@ class Bins extends React.Component {
      */
     changePPSBinStatus(bin, status) {
         this.props.changePPSBinStatus({bin, currentView: 'bins', enabled: status})
+    }
+
+
+    /**
+     * The method will update the status of selected group
+     * @param status
+     */
+    changePPSBinGroupStatus(status){
+        this.props.changePPSBinGroupStatus({enabled: status})
+    }
+
+    /**
+     * The method will select the pps bin group
+     * that would lead to highlighten the
+     * selected group
+     * @param bin_group_id
+     */
+    selectPPSBinGroup(bin_group_id){
+        let group=this.props.selectedProfile.bin_group_details.filter(function(group){
+            return group.bin_group_id===bin_group_id
+        })[0]
+        if(this.props.selectedPPSBinGroup && this.props.selectedPPSBinGroup.bin_group_id===bin_group_id){
+            group=null
+        }
+       this.props.selectPPSBinGroup({group:group})
+    }
+
+    /**
+     * The method would check whether
+     * a particular group is disabled or not.
+     * @param bin_group_id
+     * @returns {boolean}
+     */
+    isDisabledGroup(bin_group_id){
+        let groups=this.props.selectedProfile.bin_group_details.filter(function(bin){
+            return bin.bin_group_id===bin_group_id
+        })
+        if(groups.length>0 && !groups[0].enabled){
+            return true
+        }
+        return false
     }
 
     render() {
@@ -88,6 +134,7 @@ class Bins extends React.Component {
             className={["pps-bins-container", this.props.currentView === 'tags' ? 'include-tags' : null].join(" ")}>
             {this.props.currentView === 'tags' && <div style={{padding:'2% 4%',color:'#ccc'}}>Select a bin to manage tags</div>}
             {this.props.currentView === 'bins' && <div style={{padding:'2% 4%',color:'#ccc'}}>Select a bin to activate or deactivate ({self.props.selectedProfile.pps_bins.filter(function(bin){return !bin.enabled}).length}/{self.props.selectedProfile.pps_bins.length} bins deactivated) </div>}
+            {this.props.currentView === 'groups' && <div style={{padding:'2% 4%',color:'#ccc'}}>Select a bin group to enable or disable ({self.props.selectedProfile.pps_bins.filter(function(bin){return !bin.enabled}).length}/{self.props.selectedProfile.pps_bins.length} bins deactivated) </div>}
             <div style={{
                 width: container.x,
                 margin: 'auto',
@@ -146,6 +193,22 @@ class Bins extends React.Component {
                                 <span className="pps-bin-info">{bin_id}</span>
                             </span>
                         </div>}
+
+                        {self.props.currentView === 'groups' && <div
+                            key={bin.pps_bin_id}
+                            onClick={self.selectPPSBinGroup.bind(self,bin.bin_group_id)}
+                            className={["pps-bin-group",( self.props.selectedPPSBinGroup.bin_group_id===bin.bin_group_id ? 'highlight' : null),self.isDisabledGroup.call(self,bin.bin_group_id)?'disabled':''].join(" ")}
+                            style={{
+                                height: '100%',
+                                boxSizing: 'border-box',
+                                width: '100%',
+                            }}>
+                            <span className={["pps-bin",(!bin.enabled?'disabled':'')].join(" ")}>
+                                <span className="pps-bin-tag-info">
+                                    <span style={{display:'inline-block',width:16,height:16}}/> </span>
+                                <span className="pps-bin-info">{bin_id}</span>
+                            </span>
+                        </div>}
                     </div>
                 })}
             </div>
@@ -177,6 +240,34 @@ class Bins extends React.Component {
                 </button>)}
             </div>}
 
+            {/*Bin enable/disable action items*/}
+            {self.props.currentView === 'groups' &&
+            <div className="pps-bin-actions pps-bin-row" style={{textAlign: 'center'}}>
+                {self.props.selectedPPSBinGroup.bin_group_id ? (
+                    <button
+                        disabled={self.props.selectedPPSBinGroup.enabled}
+                        className="pps-bin-action-button"
+                        onClick={self.changePPSBinGroupStatus.bind(self,true)}>
+                        ENABLE
+                    </button> ) : (<button
+                    disabled={true}
+                    className="pps-bin-action-button">
+                    ENABLE
+                </button>)}
+
+                {self.props.selectedPPSBinGroup.bin_group_id  ? (
+                    <button
+                        disabled={!self.props.selectedPPSBinGroup.enabled}
+                        className="pps-bin-action-button"
+                        onClick={self.changePPSBinGroupStatus.bind(self,false)}>
+                        DISABLE
+                    </button> ) : (<button disabled={true}
+                                           className="pps-bin-action-button">
+                    DISABLE
+                </button>)}
+            </div>}
+
+
         </div>
     }
 }
@@ -186,6 +277,7 @@ function mapStateToProps(state, ownProps) {
         selectedPPS: state.ppsConfiguration.selectedPPS,
         selectedPPSBin: state.ppsConfiguration.selectedPPSBin,
         ppsList: state.ppsConfiguration.ppsList,
+        selectedPPSBinGroup:state.ppsConfiguration.selectedPPSBinGroup||{}
     };
 }
 
@@ -199,6 +291,12 @@ var mapDispatchToProps = function (dispatch) {
         },
         changePPSBinStatus: function (data) {
             dispatch(changePPSBinStatus(data));
+        },
+        selectPPSBinGroup: function (data) {
+            dispatch(selectPPSBinGroup(data));
+        },
+        changePPSBinGroupStatus: function (data) {
+            dispatch(changePPSBinGroupStatus(data));
         },
 
     }

@@ -5,7 +5,7 @@ import {
     RECEIVE_PPS_PROFILES,
     SELECT_PPS_PROFILE_FOR_CONFIGURATION,
     AJAX_CALL,
-    SELECT_PPS_BIN,ADD_TAG_TO_BIN,CLEAR_SELECTION_PPS_BIN,CHANGE_PPS_BIN_STATUS,RECEIVE_TAGS,CANCEL_PROFILE_CHANGES
+    SELECT_PPS_BIN,ADD_TAG_TO_BIN,CLEAR_SELECTION_PPS_BIN,CHANGE_PPS_BIN_STATUS,RECEIVE_TAGS,CANCEL_PROFILE_CHANGES,CHANGE_PPS_BIN_GROUP_STATUS,SELECT_PPS_BIN_GROUP
 } from './../constants/frontEndConstants'
 export function fetchPPSProfiles(params) {
     return {
@@ -34,6 +34,12 @@ export function selectPPSBin(data) {
         data
     }
 }
+export function selectPPSBinGroup(data) {
+    return {
+        type: SELECT_PPS_BIN_GROUP,
+        data
+    }
+}
 export function clearSelectionPPSBin(data) {
     return {
         type: CLEAR_SELECTION_PPS_BIN,
@@ -43,6 +49,12 @@ export function clearSelectionPPSBin(data) {
 export function changePPSBinStatus(data) {
     return {
         type: CHANGE_PPS_BIN_STATUS,
+        data
+    }
+}
+export function changePPSBinGroupStatus(data) {
+    return {
+        type: CHANGE_PPS_BIN_GROUP_STATUS,
         data
     }
 }

@@ -9,7 +9,7 @@ import {
     ADD_TAG_TO_BIN,
     CLEAR_SELECTION_PPS_BIN,
     CHANGE_PPS_BIN_STATUS,
-    RECEIVE_TAGS, CANCEL_PROFILE_CHANGES
+    RECEIVE_TAGS, CANCEL_PROFILE_CHANGES,CHANGE_PPS_BIN_GROUP_STATUS,SELECT_PPS_BIN_GROUP
 } from '../constants/frontEndConstants';
 /**
  * @param  {State Object}
@@ -17,7 +17,7 @@ import {
  * @return {[Object] updated state}
  */
 export function ppsConfiguration(state = {}, action) {
-    let selected_pps, selected_profile, pps_list, selected_bin, selected_tag
+    let selected_pps, selected_profile, pps_list, selected_bin, selected_tag,selected_group
     switch (action.type) {
         case PPS_CONFIGURATION_REFRESHED:
             return Object.assign({}, state, {
@@ -46,6 +46,7 @@ export function ppsConfiguration(state = {}, action) {
                 if (prfl.applied) {
                     prfl.selected = true
                     prfl.pps_bins = JSON.parse(JSON.stringify(selected_pps.pps_bins))
+                    prfl.bin_group_details = JSON.parse(JSON.stringify(selected_pps.bin_group_details))
                     selected_profile = JSON.parse(JSON.stringify(prfl))
                 }
                 return prfl
@@ -72,6 +73,7 @@ export function ppsConfiguration(state = {}, action) {
                 selected_profile=selected_pps.profiles.filter(function(profile){return profile.applied})[0]
                 selected_profile.selected = true
                 selected_profile.pps_bins = JSON.parse(JSON.stringify(selected_pps.pps_bins))
+                selected_profile.bin_group_details = JSON.parse(JSON.stringify(selected_pps.bin_group_details))
             }
             /**
              * Create a copy of selected PPS profile
@@ -90,7 +92,8 @@ export function ppsConfiguration(state = {}, action) {
             return Object.assign({}, state, {
                 selectedProfile: selected_profile, //If no profile is selected, select the default profile
                 selectedPPS: selected_pps || {},
-                selectedPPSBin: null
+                selectedPPSBin: null,
+                selectedPPSBinGroup: null
             })
 
         case SELECT_PPS_BIN:
@@ -98,6 +101,12 @@ export function ppsConfiguration(state = {}, action) {
             selected_bin.id = [state.selectedPPS.pps_id, selected_bin.pps_bin_id].join("-")
             return Object.assign({}, state, {
                 "selectedPPSBin": {[action.data.currentView]: selected_bin}
+            })
+
+
+        case SELECT_PPS_BIN_GROUP:
+            return Object.assign({}, state, {
+                "selectedPPSBinGroup":action.data.group
             })
 
         case CLEAR_SELECTION_PPS_BIN:
@@ -112,6 +121,21 @@ export function ppsConfiguration(state = {}, action) {
             selected_bin.enabled = action.data.enabled
             return Object.assign({}, state, {
                 "selectedPPSBin": {[action.data.currentView]: selected_bin}
+            })
+
+        case CHANGE_PPS_BIN_GROUP_STATUS:
+            selected_group = JSON.parse(JSON.stringify(state.selectedPPSBinGroup))
+            selected_group.enabled = action.data.enabled
+            selected_profile = JSON.parse(JSON.stringify(state.selectedProfile))
+            selected_profile.bin_group_details=selected_profile.bin_group_details.map(function (group) {
+                if (group.bin_group_id === selected_group.bin_group_id) {
+                    group = selected_group
+                }
+                return group
+            })
+            return Object.assign({}, state, {
+                "selectedPPSBinGroup": selected_group,
+                "selectedProfile": selected_profile
             })
 
         case ADD_TAG_TO_BIN:
