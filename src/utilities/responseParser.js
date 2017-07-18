@@ -133,7 +133,6 @@ export function ResponseParse(store,res)
 			case EMERGENCY:								    	   
 				store.dispatch(recievefireHazardDetails(res));
 				if(res.complete_data[0].emergency_type===EMERGENCY_FIRE)
-				if(store.getState().fireReducer.firehazadflag!=false)	
 				store.dispatch(setFireHazrdFlag(false));
 				break;	   
 			default:
