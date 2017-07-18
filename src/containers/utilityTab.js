@@ -109,8 +109,8 @@ const messages = defineMessages({
 	},
 	goodsRcvdNotesHead: {
 		id: "utility.goodsRcvdNotes.head",
-		description: "Goods Recieved Notes",
-		defaultMessage: "Goods Recieved Notes"
+		description: "Goods Received Notes",
+		defaultMessage: "Goods Received Notes"
 	},
 	stockLedgerHead: {
 		id: "utility.stockLedgerHead.head",

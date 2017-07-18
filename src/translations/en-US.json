@@ -4342,8 +4342,8 @@
   },
   {
     "id": "utility.goodsRcvdNotes.head",
-    "description": "Goods Recieved Notes",
-    "defaultMessage": "Goods Recieved Notes",
+    "description": "Goods Received Notes",
+    "defaultMessage": "Goods Received Notes",
     "filepath": "./src/containers/utilityTab.js"
   },
   {
