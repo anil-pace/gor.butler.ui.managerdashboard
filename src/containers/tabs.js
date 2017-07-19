@@ -32,7 +32,12 @@ class Tabs extends React.Component{
   }
 
     _openPopup(){
-      this.props.setFireHazrdFlag(false);
+      
+      if(this.props.fireHazardNotifyTime){
+        this.props.setFireHazrdFlag(null);
+      }else{
+        this.props.setFireHazrdFlag(false);
+      }
   }
 
 
