@@ -92,3 +92,10 @@ export function cancelProfileChanges(data) {
         data
     }
 }
+
+export function createNewPPSProfile(params){
+    return {
+        type: AJAX_CALL,
+        params
+    }
+}

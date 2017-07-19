@@ -3,6 +3,7 @@
  */
 import React from 'react'
 import {connect} from 'react-redux'
+import {createNewPPSProfile} from './../../actions/ppsConfigurationActions'
 class CreateProfile extends React.Component {
     constructor(props) {
         super(props);
@@ -30,10 +31,26 @@ class CreateProfile extends React.Component {
                 </div>
                 <div className='gor-create-profile-action-button'>
                     <button className='gor-cancel-btn' onClick={this.props.removeModal.bind(this)}>Cancel</button>
-                    <button className='gor-save-profile-btn'>Save a new profile</button>
+                    <button onClick={this.createNewPPSProfile.bind(this)} className='gor-save-profile-btn'>Save a new profile</button>
                 </div>
             </div>
         </div>
     }
 }
-export  default connect(null, null)(CreateProfile);
+
+
+function mapStateToProps(state, ownProps) {
+
+    return {
+        selectedProfile: state.ppsConfiguration.selectedProfile,
+    };
+}
+var mapDispatchToProps = function (dispatch) {
+    return {
+        createNewPPSProfile: function (data) {
+            dispatch(createNewPPSProfile(data));
+        },
+    };
+}
+
+export  default connect(mapStateToProps, mapDispatchToProps)(CreateProfile);

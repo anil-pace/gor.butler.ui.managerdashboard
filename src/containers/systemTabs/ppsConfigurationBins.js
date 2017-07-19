@@ -134,7 +134,7 @@ class Bins extends React.Component {
             className={["pps-bins-container", this.props.currentView === 'tags' ? 'include-tags' : null].join(" ")}>
             {this.props.currentView === 'tags' && <div style={{padding:'2% 4%',color:'#ccc'}}>Select a bin to manage tags</div>}
             {this.props.currentView === 'bins' && <div style={{padding:'2% 4%',color:'#ccc'}}>Select a bin to activate or deactivate ({self.props.selectedProfile.pps_bins.filter(function(bin){return !bin.enabled}).length}/{self.props.selectedProfile.pps_bins.length} bins deactivated) </div>}
-            {this.props.currentView === 'groups' && <div style={{padding:'2% 4%',color:'#ccc'}}>Select a bin group to enable or disable ({self.props.selectedProfile.pps_bins.filter(function(bin){return !bin.enabled}).length}/{self.props.selectedProfile.pps_bins.length} bins deactivated) </div>}
+            {this.props.currentView === 'groups' && <div style={{padding:'2% 4%',color:'#ccc'}}>Select a bin group to enable or disable ({self.props.selectedProfile.bin_group_details.filter(function(group){return !group.enabled}).length}/{self.props.selectedProfile.bin_group_details.length} groups disabled) </div>}
             <div style={{
                 width: container.x,
                 margin: 'auto',
@@ -171,7 +171,7 @@ class Bins extends React.Component {
                             }}>
                             <span className={["pps-bin"].join(" ")}>
                                 <span className="pps-bin-tag-info">
-                                    <span className="gor-tag-icon-grey"/>1 Tag</span>
+                                    <span className="gor-tag-icon-grey"/>{bin.tags.length} Tag</span>
                                 <span className="pps-bin-info">{bin_id}</span>
                             </span>
                         </div>}
@@ -197,7 +197,7 @@ class Bins extends React.Component {
                         {self.props.currentView === 'groups' && <div
                             key={bin.pps_bin_id}
                             onClick={self.selectPPSBinGroup.bind(self,bin.bin_group_id)}
-                            className={["pps-bin-group",( self.props.selectedPPSBinGroup.bin_group_id===bin.bin_group_id ? 'highlight' : null),self.isDisabledGroup.call(self,bin.bin_group_id)?'disabled':''].join(" ")}
+                            className={["pps-bin-group","pps-bin-group-"+bin.bin_group_id,( self.props.selectedPPSBinGroup.bin_group_id===bin.bin_group_id ? 'highlight' : null),self.isDisabledGroup.call(self,bin.bin_group_id)?'disabled':''].join(" ")}
                             style={{
                                 height: '100%',
                                 boxSizing: 'border-box',

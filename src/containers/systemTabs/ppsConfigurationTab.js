@@ -109,9 +109,12 @@ class PPSConfiguration extends React.Component {
     cancelProfileChanges() {
         this.props.cancelProfileChanges({pps: this.props.selectedProfile})
     }
-
-
-
+    /**
+     *
+     */
+    saveAndApplyProfile(){
+        console.log(this.props.selectedProfile)
+    }
 
     render() {
 
@@ -134,10 +137,10 @@ class PPSConfiguration extends React.Component {
                 {this.props.selectedPPS && <div className="pps-configuration-actions-container">
                     <button onClick={self.cancelProfileChanges.bind(self)} className="pps-bin-cancel-button">CANCEL</button>
                     {this.state.currentView!=="groups" && <button onClick={self.handleClickOnNext.bind(self)} className="pps-bin-next-button">NEXT</button>}
-                    {this.state.currentView==="groups" && <button onClick={self.handleClickOnBack.bind(self)} className="pps-bin-save-apply-button">SAVE AND APPLY</button>}
+                    {this.state.currentView==="groups" && <button onClick={self.saveAndApplyProfile.bind(self)} className="pps-bin-save-apply-button">SAVE AND APPLY</button>}
                     {this.state.currentView!=="tags" && <button onClick={self.handleClickOnBack.bind(self)} className="pps-bin-back-button">BACK</button>}
                     {this.state.currentView==="groups" && <button onClick={self.createProfile.bind(self)} className="pps-bin-save-button">SAVE AS NEW PROFILE</button>}
-                    {this.state.currentView==="groups" && <button onClick={self.handleClickOnBack.bind(self)} className="pps-bin-save-button">SAVE</button>}
+                    {this.state.currentView==="groups" && <button onClick={self.saveAndApplyProfile.bind(self)} className="pps-bin-save-button">SAVE</button>}
                 </div>}
             </div>
         );
