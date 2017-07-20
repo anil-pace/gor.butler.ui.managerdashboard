@@ -1,5 +1,5 @@
   
-import {AJAX_CALL,AUTH_LOGIN,PAUSE_OPERATION,RESUME_OPERATION,MASTER_FILE_UPLOAD,FETCH_PPS_PROFILES,FETCH_TAGS,FETCH_PROFILE_FOR_PPS} from '../constants/frontEndConstants';
+import {AJAX_CALL,AUTH_LOGIN,PAUSE_OPERATION,RESUME_OPERATION,MASTER_FILE_UPLOAD,FETCH_PPS_PROFILES,FETCH_TAGS,FETCH_PROFILE_FOR_PPS,CREATE_NEW_PROFILE} from '../constants/frontEndConstants';
 
 import {AjaxParse} from '../utilities/AjaxParser';
 import {FileResponseParser} from '../utilities/fileResponseParser';
@@ -78,7 +78,7 @@ const ajaxMiddleware=(function(){
 
     httpRequest.open(params.method, params.url,!params.sync);
     //TODO: Need to refactor
-    if(params.cause!==FETCH_PPS_PROFILES && params.cause!==FETCH_TAGS && params.cause!==FETCH_PROFILE_FOR_PPS){
+    if(params.cause!==FETCH_PPS_PROFILES && params.cause!==FETCH_TAGS && params.cause!==FETCH_PROFILE_FOR_PPS && params.cause!==CREATE_NEW_PROFILE){
         if(params.contentType !== false){
             httpRequest.setRequestHeader('Content-Type', params.contentType || "text/html");
         }
@@ -91,6 +91,12 @@ const ajaxMiddleware=(function(){
             httpRequest.setRequestHeader('Authentication-Token', params.token);
         }
     }
+    //TODO: Need to be removed for real apis
+           if(params.cause===CREATE_NEW_PROFILE){
+               httpRequest.setRequestHeader('Accept', params.accept || "text/html");
+               httpRequest.setRequestHeader('Content-Type', params.contentType || "text/html");
+           }
+
 
     httpRequest.send(httpData);
     break;

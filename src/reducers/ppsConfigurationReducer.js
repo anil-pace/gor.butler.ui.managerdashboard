@@ -9,7 +9,7 @@ import {
     ADD_TAG_TO_BIN,
     CLEAR_SELECTION_PPS_BIN,
     CHANGE_PPS_BIN_STATUS,
-    RECEIVE_TAGS, CANCEL_PROFILE_CHANGES,CHANGE_PPS_BIN_GROUP_STATUS,SELECT_PPS_BIN_GROUP
+    RECEIVE_TAGS, CANCEL_PROFILE_CHANGES,CHANGE_PPS_BIN_GROUP_STATUS,SELECT_PPS_BIN_GROUP,PPS_PROFILE_CREATED
 } from '../constants/frontEndConstants';
 /**
  * @param  {State Object}
@@ -171,6 +171,24 @@ export function ppsConfiguration(state = {}, action) {
                 selectedPPSBin: selected_bin,
             })
 
+
+        case PPS_PROFILE_CREATED:
+            selected_pps= JSON.parse(JSON.stringify(state.selectedPPS))
+            pps_list=JSON.parse(JSON.stringify(state.ppsList))
+            selected_profile=action.data
+            pps_list=pps_list.map(function(pps){
+                if(pps.pps_id===selected_pps.pps_id){
+                    pps.profiles.push(selected_profile)
+                }
+                return pps
+            })
+            selected_pps.profiles.push(selected_profile)
+            return Object.assign({}, state, {
+                selectedProfile: selected_profile, //If no profile is selected, select the default profile
+                selectedPPS: selected_pps,
+                ppsList:pps_list,
+                profileCreatedAt:new Date().getTime()
+            })
 
         default:
             return state

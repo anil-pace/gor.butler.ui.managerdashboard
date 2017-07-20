@@ -108,7 +108,7 @@ class PPSConfiguration extends React.Component {
      * along with the updated profile to the server.
      */
     cancelProfileChanges() {
-        this.props.cancelProfileChanges({pps: this.props.selectedProfile})
+        this.props.cancelProfileChanges({})
     }
     /**
      *
