@@ -23,18 +23,111 @@
 		padding:20px 15px;
 	}
 	.gor-zone-tile{
-		width: 18%;
+		width: 23%;
 	    background: #fff;
 	    display: inline-block;
-	    padding: 5px 5px;
+	    padding: 0px 5px;
 	    margin-left: 10px;
 	    margin-top:10px;
 	    border: 1px solid #E1E1E1;
 	    cursor:pointer;
+	    &.operating{
+			&.stop{
+				background:#DE0010;
+				border: 4px solid #B40313;
+				p{
+					color:#fff;
+				}
+			}
+			.gor-zone-status{
+				border: 4px solid #00BB9A;
+				box-sizing:border-box;
+			}
+		}
+		&.emergencyStop{
+			border: 4px solid #EC1B2C;
+			box-sizing:border-box;
+			background:#DE0010;
+			color:#fff;
+			&.stop{
+				background:#DE0010;
+				border: 4px solid #B40313;
+				p{
+					color:#fff;
+				}
+			}
+			.gor-zone-status{
+				border: 4px solid #EC1B2C;
+				box-sizing:border-box;
+			}
+		}
+		&.emergencyPause{
+			border: 4px solid #B40313;
+			box-sizing:border-box;
+			background:#DE0010;
+			color:#fff;
+			&.stop{
+				background:#DE0010;
+				border: 4px solid #B40313;
+				p{
+					color:#fff;
+				}
+			}
+			.gor-zone-status{
+				border: 4px solid #B40313;
+				box-sizing:border-box;
+			}
+		}
+		&.zonePauseInit{
+			background:#F4E822;
+			box-sizing:border-box;
+			border: 4px solid #E7C606;
+			&.stop{
+				background:#DE0010;
+				border: 4px solid #B40313;
+				p{
+					color:#fff;
+				}
+			}
+			.gor-zone-status{
+				border: 4px solid #EC1B2C;
+				box-sizing:border-box;
+			}
+			.zone-name{
+				color:#515043;
+				font-weight: bold;
+			}
+			.operating-status{
+				color:#DF2611;
+				font-weight: bold;
+			}
+		}
+		&.zonePauseActive{
+			background:#F4E822;
+			box-sizing:border-box;
+			border: 4px solid #E7C606;
+			&.stop{
+				background:#DE0010;
+				border: 4px solid #B40313;
+				p{
+					color:#fff;
+				}
+			}
+			.gor-zone-status{
+				border: 4px solid #EC1B2C;
+				box-sizing:border-box;
+			}
+			.zone-name{
+				color:#515043;
+				font-weight: bold;
+			}
+			.operating-status{
+				color:#DF2611;
+				font-weight: bold;
+			}
+		}
 		.left-content{
 			display:inline-block;
-			padding:5px;
-			overflow: hidden;
     		vertical-align: middle;
     		width:20%;
 		}
@@ -43,19 +136,14 @@
 		    vertical-align: middle;
 		    width: 71%;
 		    padding: 5px;
-		    p{
-		    	color: #4F4F4F;
-    			font-weight: bold;
-		    }
+		    
 		}
 		.operating-status{
 			line-height:25px;
 		}
 		.gor-zone-status{
 			min-height: 42px;
-			&.operating{
-				border: 4px solid #00BB9A;
-			}
+			
     		
 		}
 	}

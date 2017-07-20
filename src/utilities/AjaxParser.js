@@ -78,7 +78,6 @@ import {
 	GET_ALL_NOTIFICATIONS,
 	SEARCHED_NOTIFICATIONS_DATA_ALL
 } from "../constants/frontEndConstants";
-import {notifyEmergencyEnd} from '../actions/responseAction';
 import { BUTLER_UI, CODE_E027 } from "../constants/backEndConstants";
 import {
 	UE002,
@@ -348,18 +347,12 @@ export function AjaxParse(store, res, cause, status, saltParams) {
 
 			if(rejectResponse.successful){
 
-				if(rejectResponse.emergency_end_time)
+				if(!rejectResponse.emergency_end_time)
 				{
-				store.dispatch(notifyEmergencyEnd(rejectResponse.emergency_end_time)); 
+				store.dispatch(notifySuccess(ES)); 
 				
-				}
-				else 
-				{
-				store.dispatch(notifySuccess(ES));
-				}
-				  
+				  }
 			}
-
 			else if (rejectResponse.alert_data) {
 				if(rejectResponse.alert_data[0].details[0])
 				{
@@ -411,9 +404,11 @@ export function AjaxParse(store, res, cause, status, saltParams) {
 			break;
 		case REPORTS_HISTORY:
 			store.dispatch(uploadReportHistory(res));
+			store.dispatch(notifySuccess(getFormattedMessages("reprtsRefreshed",res.data)));
 			break;
 		case GRN_HISTORY:
 			store.dispatch(uploadGRNHistory(res));
+			store.dispatch(notifySuccess(getFormattedMessages("grnRefreshed",res.data)));
 			break;
 		case GET_MAX_FILE_SIZE:
 			store.dispatch(updateMaxFileSize(res));
@@ -429,7 +424,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
 					unsuccessful: unsuccessfulCount,
 					totalCount: successCount + unsuccessfulCount
 				},
-				msg = getFormattedMessages("status", values);
+			msg = getFormattedMessages("status", values);
 			store.dispatch(notifySuccess(msg));
 			store.dispatch(resetCheckedPPSList(res.successful));
 			break;

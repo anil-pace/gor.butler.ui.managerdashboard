@@ -165,7 +165,7 @@ export const TextCell=({rowIndex, data, columnKey,setClass, ...props})=>{
       }
        return el;
     });
-  return(<Cell {...props}  className={setClass}>
+  return(<Cell {...props}  className={data.getObjectAt(rowIndex)[setClass]}>
     {data.getObjectAt(rowIndex)[columnKey]}
     {childrenCell}
   </Cell>
@@ -372,8 +372,8 @@ export const AuditIssuesTooltipCell = ({rowIndex, data, columnKey, setClass, cal
 
 
 
-            <div  className="gor-tool-tip-hover" style={{fontSize:16,color:'black'}} onMouseEnter={callBack}>
-                {data.getObjectAt(rowIndex)[columnKey]} <span className="gor-audit-info-icon"/>
+            <div  className="gor-tool-tip-hover" style={{fontSize:16,color:'black'}}>
+                {data.getObjectAt(rowIndex)[columnKey]} <span className="gor-audit-info-icon" onMouseEnter={callBack}/>
             </div>:data.getObjectAt(rowIndex)[columnKey]
 
 

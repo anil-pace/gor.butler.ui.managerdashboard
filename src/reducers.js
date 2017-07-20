@@ -41,6 +41,9 @@ import {configReducer} from './reducers/configReducer';
 import {notificationReducer} from './reducers/notificationReducer';
 import {fireHazardDetail} from './reducers/fireHazardReducer';
 import {fireReducer} from './reducers/fireReducer'; 
+import {sysOverviewReducer} from './reducers/sysOverviewReducer';
+import {zoningReducer} from './reducers/zoningReducer';
+import {sysControllersReducer} from './reducers/sysControllersReducer'
 
 
 const rootReducer=combineReducers({
@@ -84,7 +87,10 @@ const rootReducer=combineReducers({
   overviewDetails,config:configReducer,
   notificationReducer,
   fireHazardDetail,
-  fireReducer
+  fireReducer,
+  sysOverviewReducer,
+  zoningReducer,
+  sysControllersReducer
    })
 
 export default rootReducer

@@ -1511,6 +1511,60 @@
     "filepath": "./src/constants/messageConstants.js"
   },
   {
+    "id": "zoning.status.normal",
+    "description": "Status text for zone",
+    "defaultMessage": "OPERATING",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "zoning.status.pauseInit",
+    "description": "Status text for zone",
+    "defaultMessage": "PAUSE INITIATED",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "zoning.status.pauseActivated",
+    "description": "Status text for zone",
+    "defaultMessage": "PAUSE ACTIVATED",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "zoning.status.pauseDeactive",
+    "description": "Status text for zone",
+    "defaultMessage": "PAUSE DEACTIVATED",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "zoning.status.clearInit",
+    "description": "Status text for zone",
+    "defaultMessage": "CLEAR INITIATED",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "zoning.status.clearActive",
+    "description": "Status text for zone",
+    "defaultMessage": "CLEAR ACTIVATED",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "zoning.status.clearDeactivated",
+    "description": "Status text for zone",
+    "defaultMessage": "CLEAR DEACTIVATED",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "zoning.status.emergencyStop",
+    "description": "Status text for zone",
+    "defaultMessage": "EMERGENCY STOP",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "zoning.status.emergencyPause",
+    "description": "Status text for zone",
+    "defaultMessage": "PAUSED",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
     "id": "widget.audit.heading.value",
     "description": "Total Items Audited",
     "defaultMessage": "None",
@@ -3687,6 +3741,54 @@
     "filepath": "./src/containers/systemTabs/PPStable.js"
   },
   {
+    "id": "pps.dropdown.placeholder",
+    "description": "mode change for pps",
+    "defaultMessage": "Change PPS Mode",
+    "filepath": "./src/containers/systemTabs/sysControllers.js"
+  },
+  {
+    "id": "sysController.table.heading",
+    "description": "Heading for PPS",
+    "defaultMessage": "System Controllers",
+    "filepath": "./src/containers/systemTabs/sysControllers.js"
+  },
+  {
+    "id": "gor.filter.filterLabel",
+    "description": "button label for filter",
+    "defaultMessage": "Filter data",
+    "filepath": "./src/containers/systemTabs/sysControllers.js"
+  },
+  {
+    "id": "sysControllers.idColumn.heading",
+    "description": "CONTROLLER ID",
+    "defaultMessage": "CONTROLLER ID",
+    "filepath": "./src/containers/systemTabs/sysControllers.js"
+  },
+  {
+    "id": "sysController.table.status",
+    "description": "Status for PPS",
+    "defaultMessage": "STATUS",
+    "filepath": "./src/containers/systemTabs/sysControllers.js"
+  },
+  {
+    "id": "sysController.table.location",
+    "description": "Location",
+    "defaultMessage": "LOCATION",
+    "filepath": "./src/containers/systemTabs/sysControllers.js"
+  },
+  {
+    "id": "sysController.table.conDetails",
+    "description": "Status for PPS",
+    "defaultMessage": "CONNECTION DETAILS",
+    "filepath": "./src/containers/systemTabs/sysControllers.js"
+  },
+  {
+    "id": "sysController.table.operatingMode",
+    "description": "Status for PPS",
+    "defaultMessage": "OPERATING MODE",
+    "filepath": "./src/containers/systemTabs/sysControllers.js"
+  },
+  {
     "id": "tabs.offline",
     "description": "offline",
     "defaultMessage": "Offline",
@@ -4479,9 +4581,21 @@
     "filepath": "./src/utilities/getFormattedMessages.js"
   },
   {
+    "id": "pps.mode.success",
+    "description": "PPS mode change success",
+    "defaultMessage": "Mode change request successfull",
+    "filepath": "./src/utilities/getFormattedMessages.js"
+  },
+  {
     "id": "pps.status.reject",
     "description": "PPS status change reject",
     "defaultMessage": "{unsuccessful}/{totalCount} status change request rejected",
+    "filepath": "./src/utilities/getFormattedMessages.js"
+  },
+  {
+    "id": "pps.status.success",
+    "description": "PPS status change success",
+    "defaultMessage": "Status change request successfull",
     "filepath": "./src/utilities/getFormattedMessages.js"
   },
   {
@@ -4494,6 +4608,18 @@
     "id": "utility.downloadInventory.generateSuccess",
     "description": "Inventory Report Request submitted successfully",
     "defaultMessage": "Inventory Report Request submitted successfully",
+    "filepath": "./src/utilities/getFormattedMessages.js"
+  },
+  {
+    "id": "utility.downloadGRN.refreshed",
+    "description": "GRN History Refreshed!",
+    "defaultMessage": "GRN History Refreshed!",
+    "filepath": "./src/utilities/getFormattedMessages.js"
+  },
+  {
+    "id": "utility.downloadReprt.refreshed",
+    "description": "Reports History Refreshed!",
+    "defaultMessage": "Reports History Refreshed!",
     "filepath": "./src/utilities/getFormattedMessages.js"
   },
   {

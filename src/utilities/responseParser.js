@@ -1,7 +1,11 @@
 
-import {receivePpsData,receiveButlersData,receiveAuditData,receiveThroughputData,receivePutData,receiveChargersData,receiveOrdersData,initData,recieveHistogramData,recieveChargersDetail,recieveButlersDetail,recievePPSDetail,recievePPSperformance,recieveUserDetails,recievefireHazardDetails,notifyEmergencyEnd} from '../actions/responseAction';
+import {receivePpsData,receiveButlersData,receiveAuditData,receiveThroughputData,receivePutData,receiveChargersData,receiveOrdersData,initData,recieveHistogramData,recieveChargersDetail,recieveButlersDetail,recievePPSDetail,recievePPSperformance,recieveUserDetails,recievefireHazardDetails} from '../actions/responseAction';
 import {HISTOGRAM_DATA,EMERGENCY_FIRE,EMERGENCY} from '../constants/frontEndConstants';
-import {SYSTEM_CHARGERS_DETAILS,USER_DATA,HISTOGRAM_DETAILS,PARSE_OVERVIEW,PARSE_SYSTEM,PARSE_STATUS,PPS_DETAIL,SYSTEM_PPS_DETAILS,SYSTEM_BUTLERS_DETAILS,PARSE_PPS,PARSE_BUTLERS,PARSE_CHARGERS,PARSE_INVENTORY_HISTORY,PARSE_INVENTORY_TODAY,PARSE_INVENTORY,PARSE_ORDERS,PARSE_PUT,PARSE_PICK,PARSE_PPA_THROUGHPUT,PARSE_AUDIT,PARSE_AUDIT_AGG} from '../constants/backEndConstants'
+import {SYSTEM_CHARGERS_DETAILS,USER_DATA,HISTOGRAM_DETAILS,PARSE_OVERVIEW,PARSE_SYSTEM,
+	ARSE_STATUS,PPS_DETAIL,SYSTEM_PPS_DETAILS,SYSTEM_BUTLERS_DETAILS,PARSE_PPS,
+	PARSE_BUTLERS,PARSE_CHARGERS,PARSE_INVENTORY_HISTORY,PARSE_INVENTORY_TODAY,
+	PARSE_INVENTORY,PARSE_ORDERS,PARSE_PUT,PARSE_PICK,PARSE_PPA_THROUGHPUT,PARSE_AUDIT,
+PARSE_STATUS,PARSE_AUDIT_AGG,PARSE_ZONING} from '../constants/backEndConstants'
 import {wsOnMessageAction} from '../actions/socketActions';
 import {recieveOverviewStatus,recieveSystemStatus,recieveAuditStatus,recieveOrdersStatus,recieveUsersStatus,recieveInventoryStatus,recieveStatus,setFireHazrdFlag} from '../actions/tabActions';
 import {userFilterApplySpinner} from '../actions/spinnerAction';
@@ -9,7 +13,10 @@ import {setInventorySpinner} from '../actions/inventoryActions';
 import {setAuditSpinner} from '../actions/auditActions';
 import {setButlerSpinner,setPpsSpinner,setCsSpinner,setWavesSpinner,setWavesFilterSpinner,setButlerFilterSpinner,setPpsFilterSpinner,setCsFilterSpinner} from '../actions/spinnerAction';
 import {receiveInventoryTodayData,receiveInventoryHistoryData} from '../actions/inventoryActions';
+import {recieveSysOverViewData} from '../actions/sysOverViewActions'
 import {endSession} from './endSession';
+import {recieveZoningData} from '../actions/zoningActions';
+import {recieveControllerData} from '../actions/sysControllersActions'
 export function ResponseParse(store,res)
 {
 		if(res.alert_data)
@@ -36,6 +43,7 @@ export function ResponseParse(store,res)
 				break;
 			case PARSE_AUDIT:
 					store.dispatch(recieveAuditStatus(res));
+					store.dispatch(recieveZoningData(res));
 					break;
 			case PARSE_AUDIT_AGG:
 				 	store.dispatch(receiveAuditData(res));
@@ -60,6 +68,10 @@ export function ResponseParse(store,res)
 					store.dispatch(setInventorySpinner(false));
 					
 				}
+				break;
+			case PARSE_ZONING:
+				store.dispatch(recieveSysOverViewData(res));
+				store.dispatch(recieveControllerData(res));
 				break;
 			case PARSE_INVENTORY_TODAY:		
 				if(res.header_data)
@@ -134,7 +146,6 @@ export function ResponseParse(store,res)
 				store.dispatch(recievefireHazardDetails(res));
 				if(res.complete_data[0].emergency_type===EMERGENCY_FIRE)
 				store.dispatch(setFireHazrdFlag(false));
-				//store.dispatch(notifyEmergencyEnd(null));
 				break;	   
 			default:
 				console.log("in Response Parser");

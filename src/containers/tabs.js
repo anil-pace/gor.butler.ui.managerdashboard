@@ -205,7 +205,7 @@ class Tabs extends React.Component{
    _processNotification(){
   
   var notificationWrap=[],singleNotification,time,timeText;
-  var originalDate=this.props.fireHazardNotifyTime? new Date(this.props.fireHazardNotifyTime): new Date(this.props.fireHazardStartTime);
+  var originalDate=this.props.fireHazardNotifyTime? new Date(this.props.fireHazardNotifyTime): (this.props.fireHazardStartTime? new Date(this.props.fireHazardStartTime):new Date());
   var convertedDate =  originalDate.getTime(); 
   var timeText= <FormattedRelative value={convertedDate} timeZone={this.props.timeZone}/>;
 
@@ -248,7 +248,16 @@ singleNotification=<GorToastify key={1} onClick={this._openPopup}>
 }
 	render(){
   let items=this._parseStatus();
-  let showFireHazardPopup=this.props.firehazadflag;
+  let showFireHazardPopup;
+  if(this.props.firehazadflag && (this.props.fireHazardNotifyTime || this.props.fireHazardStartTime))
+  {
+  showFireHazardPopup=true;
+  }
+  else
+  {
+    showFireHazardPopup=false;
+  }
+  
   let notificationWrap=this._processNotification();
   let showUtilityTab=this.props.config.utility_tab && this.props.config.utility_tab.enabled;
 		return (

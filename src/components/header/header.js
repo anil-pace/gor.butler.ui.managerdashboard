@@ -315,6 +315,7 @@ function mapStateToProps(state, ownProps) {
         system_status: state.tabsData.status || null,
         system_data: state.tabsData.system_data || null,
         activeModalKey: state.appInfo.activeModalKey || 0,
+        zoneHeader:state.zoningReducer.zoneHeader || {},
         timeOffset: state.authLogin.timeOffset
     }
 }

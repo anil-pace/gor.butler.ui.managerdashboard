@@ -207,4 +207,27 @@ export const ppsStatusFailure = "{unsuccessful}/{totalCount} status change reque
 export const ppsModeSuccess ="Mode change request successful";
 export const ppsStatusSuccess ="Status change request successful";
 
+/*Zoning messages*/
+export const ZONE_STATUS_INTL_MESSAGE ={
+      operation_normal:(<FormattedMessage id="zoning.status.normal" description='Status text for zone' 
+      defaultMessage='OPERATING'/>),
+      zone_pause_initiated:(<FormattedMessage id="zoning.status.pauseInit" description='Status text for zone' 
+      defaultMessage='PAUSE INITIATED'/>),
+      zone_pause_activated:(<FormattedMessage id="zoning.status.pauseActivated" description='Status text for zone' 
+      defaultMessage='PAUSE ACTIVATED'/>),
+      zone_pause_deactivated:(<FormattedMessage id="zoning.status.pauseDeactive" description='Status text for zone' 
+      defaultMessage='PAUSE DEACTIVATED'/>),
+      zone_clear_initiated:(<FormattedMessage id="zoning.status.clearInit" description='Status text for zone' 
+      defaultMessage='CLEAR INITIATED'/>),
+      zone_clear_activated:(<FormattedMessage id="zoning.status.clearActive" description='Status text for zone' 
+      defaultMessage='CLEAR ACTIVATED'/>),
+      zone_clear_deactivated:(<FormattedMessage id="zoning.status.clearDeactivated" description='Status text for zone' 
+      defaultMessage='CLEAR DEACTIVATED'/>),
+      emergency_stop:(<FormattedMessage id="zoning.status.emergencyStop" description='Status text for zone' 
+      defaultMessage='EMERGENCY STOP'/>),
+      emergency_pause:(<FormattedMessage id="zoning.status.emergencyPause" description='Status text for zone' 
+      defaultMessage='PAUSED'/>)
+}
+
+
 
