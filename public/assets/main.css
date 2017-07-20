@@ -6877,7 +6877,6 @@ button:disabled {
   box-sizing: border-box;
   z-index: 2;
   border-radius: 6px;
-  cursor: pointer;
 }
 
 .gor-toastify .gor-toastify-content {
@@ -6909,6 +6908,7 @@ button:disabled {
   text-align: center;
   float: right;
   border-left: solid 1px rgba(255, 255, 255, 0.2);
+  cursor: pointer;
 }
 
 .gor-toastify .gor-toastify-content .gor-toastify-details.closeButton {
