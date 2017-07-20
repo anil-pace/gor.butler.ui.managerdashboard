@@ -12,7 +12,7 @@ import {
     changePPSBinStatus,
     cancelProfileChanges,changePPSBinGroupStatus,selectPPSBinGroup
 } from './../../actions/ppsConfigurationActions'
-import Bin from './../../components/bin/bin'
+import {FormattedMessage} from 'react-intl'
 
 class Bins extends React.Component {
     constructor(props) {
@@ -132,9 +132,17 @@ class Bins extends React.Component {
 
         return <div
             className={["pps-bins-container", this.props.currentView === 'tags' ? 'include-tags' : null].join(" ")}>
-            {this.props.currentView === 'tags' && <div style={{padding:'2% 4%',color:'#ccc'}}>Select a bin to manage tags</div>}
-            {this.props.currentView === 'bins' && <div style={{padding:'2% 4%',color:'#ccc'}}>Select a bin to activate or deactivate ({self.props.selectedProfile.pps_bins.filter(function(bin){return !bin.enabled}).length}/{self.props.selectedProfile.pps_bins.length} bins deactivated) </div>}
-            {this.props.currentView === 'groups' && <div style={{padding:'2% 4%',color:'#ccc'}}>Select a bin group to enable or disable ({self.props.selectedProfile.bin_group_details.filter(function(group){return !group.enabled}).length}/{self.props.selectedProfile.bin_group_details.length} groups disabled) </div>}
+            {this.props.currentView === 'tags' && <div style={{padding:'2% 4%',color:'#ccc'}}><FormattedMessage id="pps.configuration.bins.selection.label"
+                                                                                                                description="Select a bin to manage tags"
+                                                                                                                defaultMessage="Select a bin to manage tags"/></div>}
+            {this.props.currentView === 'bins' && <div style={{padding:'2% 4%',color:'#ccc'}}><FormattedMessage id="pps.configuration.bins.selection.count"
+                                                                                                                description='total users for filter search bar'
+                                                                                                                defaultMessage='Select a bin to activate or deactivate ({deactivated}/{total} bins deactivated)'
+                                                                                                                values={{deactivated: self.props.selectedProfile.pps_bins.filter(function(bin){return !bin.enabled}).length.toString(),total:self.props.selectedProfile.pps_bins.length}}/> </div>}
+            {this.props.currentView === 'groups' && <div style={{padding:'2% 4%',color:'#ccc'}}><FormattedMessage id="pps.configuration.bins.group.selection.count"
+                                                                                                                  description='total users for filter search bar'
+                                                                                                                  defaultMessage='Select a bin group to enable or disable ({disabled}/{total} groups disabled)'
+                                                                                                                  values={{disabled: self.props.selectedProfile.bin_group_details.filter(function(group){return !group.enabled}).length.toString(),total:self.props.selectedProfile.bin_group_details.length}}/> </div>}
             <div style={{
                 width: container.x,
                 margin: 'auto',
@@ -171,7 +179,9 @@ class Bins extends React.Component {
                             }}>
                             <span className={["pps-bin"].join(" ")}>
                                 <span className="pps-bin-tag-info">
-                                    <span className="gor-tag-icon-grey"/>{bin.tags.length} Tag</span>
+                                    <span className="gor-tag-icon-grey"/>{bin.tags.length} <FormattedMessage id="pps.configuration.bins.tagCount.text"
+                                                                                                             description="Tag"
+                                                                                                             defaultMessage="Tag"/></span>
                                 <span className="pps-bin-info">{bin_id}</span>
                             </span>
                         </div>}
@@ -221,11 +231,15 @@ class Bins extends React.Component {
                         disabled={self.props.selectedPPSBin['bins'].enabled}
                         className="pps-bin-action-button"
                         onClick={self.changePPSBinStatus.bind(self, self.props.selectedPPSBin['bins'], true)}>
-                        ACTIVATE
+                        <FormattedMessage id="pps.configuration.bins.activation.button.text"
+                                          description="ACTIVATE"
+                                          defaultMessage="ACTIVATE"/>
                     </button> ) : (<button
                     disabled={true}
                     className="pps-bin-action-button">
-                    ACTIVATE
+                    <FormattedMessage id="pps.configuration.bins.activation.button.text"
+                                      description="ACTIVATE"
+                                      defaultMessage="ACTIVATE"/>
                 </button>)}
 
                 {self.props.currentView === 'bins' && self.props.selectedPPSBin && self.props.selectedPPSBin['bins'] ? (
@@ -233,10 +247,14 @@ class Bins extends React.Component {
                         disabled={!self.props.selectedPPSBin['bins'].enabled}
                         className="pps-bin-action-button"
                         onClick={self.changePPSBinStatus.bind(self, self.props.selectedPPSBin['bins'], false)}>
-                        DEACTIVATE
+                        <FormattedMessage id="pps.configuration.bins.deactivation.button.text"
+                                          description="DEACTIVATE"
+                                          defaultMessage="DEACTIVATE"/>
                     </button> ) : (<button disabled={true}
                                            className="pps-bin-action-button">
-                    DEACTIVATE
+                    <FormattedMessage id="pps.configuration.bins.deactivation.button.text"
+                                      description="DEACTIVATE"
+                                      defaultMessage="DEACTIVATE"/>
                 </button>)}
             </div>}
 
@@ -248,11 +266,15 @@ class Bins extends React.Component {
                         disabled={self.props.selectedPPSBinGroup.enabled}
                         className="pps-bin-action-button"
                         onClick={self.changePPSBinGroupStatus.bind(self,true)}>
-                        ENABLE
+                        <FormattedMessage id="pps.configuration.bins.group.enable.button.text"
+                                          description="ENABLE"
+                                          defaultMessage="ENABLE"/>
                     </button> ) : (<button
                     disabled={true}
                     className="pps-bin-action-button">
-                    ENABLE
+                    <FormattedMessage id="pps.configuration.bins.group.enable.button.text"
+                                      description="ENABLE"
+                                      defaultMessage="ENABLE"/>
                 </button>)}
 
                 {self.props.selectedPPSBinGroup.bin_group_id  ? (
@@ -260,10 +282,14 @@ class Bins extends React.Component {
                         disabled={!self.props.selectedPPSBinGroup.enabled}
                         className="pps-bin-action-button"
                         onClick={self.changePPSBinGroupStatus.bind(self,false)}>
-                        DISABLE
+                        <FormattedMessage id="pps.configuration.bins.group.disable.button.text"
+                                          description="DISABLE"
+                                          defaultMessage="DISABLE"/>
                     </button> ) : (<button disabled={true}
                                            className="pps-bin-action-button">
-                    DISABLE
+                    <FormattedMessage id="pps.configuration.bins.group.disable.button.text"
+                                      description="DISABLE"
+                                      defaultMessage="DISABLE"/>
                 </button>)}
             </div>}
 

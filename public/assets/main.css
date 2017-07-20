@@ -7097,7 +7097,7 @@ button:disabled {
 
 .pps-list {
   color: #999;
-  height: 100%;
+  height: 39.0625rem;
   overflow-y: scroll;
 }
 
@@ -7316,6 +7316,7 @@ button:disabled {
   clear: both;
   overflow: auto;
   padding: 10px 20px;
+  border-bottom: 1px solid #ccc;
 }
 
 .gor-create-profile {
