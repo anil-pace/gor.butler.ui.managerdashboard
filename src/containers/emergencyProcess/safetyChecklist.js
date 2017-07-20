@@ -48,7 +48,7 @@ class SafetyChecklist extends React.Component{
   }
   componentDidMount(){
    var url;
-    if(this.props.fireHazard.emergency_type===EMERGENCY_FIRE){
+    if(this.props.emergency_type===EMERGENCY_FIRE){
        url=VALIDATION_LIST+"?emergency_type=fire_emergency";
      }
      else
@@ -85,7 +85,7 @@ class SafetyChecklist extends React.Component{
   _handleSafetyConfirm(e)
   {
   var reqType;
-   if(this.props.fireHazard.emergency_type===EMERGENCY_FIRE){
+   if(this.props.emergency_type===EMERGENCY_FIRE){
       reqType=EMERGENCY_FIRE;
     }
     else
@@ -166,7 +166,7 @@ class SafetyChecklist extends React.Component{
         <div className='gor-safetylist'>
           <div className="gor-modal-content">
             <div className='gor-modal-head'>
-          {this.props.fireHazard.emergency_type?   
+          {this.props.emergency_type===EMERGENCY_FIRE?   
               (<div className='gor-usr-add'><FormattedMessage id='operation.firesafety.heading' 
                     defaultMessage="Resume Checklist"
                             description="Text for safety heading"/>
@@ -202,7 +202,7 @@ class SafetyChecklist extends React.Component{
                   </ul>
                 </div> 
                 <div className='gor-margin-top'>
-                {this.props.fireHazard.emergency_type?
+                {this.props.emergency_type===EMERGENCY_FIRE?
                 (<button type="submit" className="gor-add-btn" disabled={(!this.state.allChecked)?true:false}
                   onClick={this._handleSafetyConfirm.bind(this)}><FormattedMessage id='operation.firesafety.confirm' 
                     defaultMessage="Resume Opeartion" description="Text for Resume Opeartion button"/>
