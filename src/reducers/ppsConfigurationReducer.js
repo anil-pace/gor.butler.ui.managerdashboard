@@ -147,7 +147,12 @@ export function ppsConfiguration(state = {}, action) {
             if (selected_bin.tags.indexOf(selected_tag) > -1) {
                 selected_bin.tags.splice(selected_bin.tags.indexOf(selected_tag), 1)
             } else {
-                selected_bin.tags.push(selected_tag)
+                /**
+                 * Only one tag is supported as of now.
+                 * @type {[*]}
+                 */
+                //  selected_bin.tags.push(selected_tag)
+                    selected_bin.tags=[selected_tag]
             }
 
             return Object.assign({}, state, {
