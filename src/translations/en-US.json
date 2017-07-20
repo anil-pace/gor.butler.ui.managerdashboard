@@ -991,37 +991,37 @@
   {
     "id": "stringConfig.md007",
     "description": "Text for safety checklist item 7",
-    "defaultMessage": "[Manual] Peripherals status known.",
+    "defaultMessage": "Peripherals status known.",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
     "id": "stringConfig.md008",
     "description": "Text for safety checklist item 8",
-    "defaultMessage": "[Manual] Physical inventory verified.",
+    "defaultMessage": "Physical inventory verified.",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
     "id": "stringConfig.md009",
     "description": "Text for safety checklist item 9",
-    "defaultMessage": "[Automatic] No Emergency buttons in 'Pressed' state.",
+    "defaultMessage": "No Emergency buttons in 'Pressed' state.",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
     "id": "stringConfig.md010",
     "description": "Text for safety checklist item 10",
-    "defaultMessage": "[Manual] All shutters open  in active zones.",
+    "defaultMessage": "All shutters open  in active zones.",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
     "id": "stringConfig.md011",
     "description": "Text for safety checklist item 11",
-    "defaultMessage": "[Manual] No humans in operations area.",
+    "defaultMessage": "No humans in operations area.",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
     "id": "stringConfig.md012",
     "description": "Text for safety checklist item 12",
-    "defaultMessage": "[Manual] All paths cleared of any debris.",
+    "defaultMessage": "All paths cleared of any debris.",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
