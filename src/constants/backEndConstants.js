@@ -297,7 +297,7 @@ export const  stringConfig= defineMessages({
      md009 : {
         "id": "stringConfig.md009",
         "description": "Text for safety checklist item 9",
-        "defaultMessage": "[Automatic] No Emergency buttons in 'pressed' state"
+        "defaultMessage": "[Automatic] No Emergency buttons in 'Pressed' state."
     },
      md010 : {
         "id": "stringConfig.md010",
@@ -312,7 +312,7 @@ export const  stringConfig= defineMessages({
      md012 : {
         "id": "stringConfig.md012",
         "description": "Text for safety checklist item 12",
-        "defaultMessage": "[Manual] All paths cleared of any debris.."
+        "defaultMessage": "[Manual] All paths cleared of any debris."
     },
 
     audit_reaudited: {

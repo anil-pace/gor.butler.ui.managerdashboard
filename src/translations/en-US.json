@@ -248,7 +248,7 @@
   {
     "id": "header.option.release",
     "description": "release operation option",
-    "defaultMessage": "Release the Emergency Stop button from the Zigbee box in order\n        \t\t\t\t\t\tto resume operation.",
+    "defaultMessage": "Release the Emergency Stop button from the Zigbee box in order\n                              to resume operation.",
     "filepath": "./src/components/header/header.js"
   },
   {
@@ -1003,7 +1003,7 @@
   {
     "id": "stringConfig.md009",
     "description": "Text for safety checklist item 9",
-    "defaultMessage": "[Automatic] No Emergency buttons in 'pressed' state",
+    "defaultMessage": "[Automatic] No Emergency buttons in 'Pressed' state.",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
@@ -1021,7 +1021,7 @@
   {
     "id": "stringConfig.md012",
     "description": "Text for safety checklist item 12",
-    "defaultMessage": "[Manual] All paths cleared of any debris..",
+    "defaultMessage": "[Manual] All paths cleared of any debris.",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
