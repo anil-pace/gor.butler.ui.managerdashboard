@@ -3442,6 +3442,78 @@
     "filepath": "./src/containers/systemTabs/notificationTable.js"
   },
   {
+    "id": "pps.configuration.header.text",
+    "description": "PPS Configurations",
+    "defaultMessage": "PPS Configurations",
+    "filepath": "./src/containers/systemTabs/ppsConfigurationList.js"
+  },
+  {
+    "id": "pps.configuration.issAplied.text",
+    "description": "is applied",
+    "defaultMessage": "is applied",
+    "filepath": "./src/containers/systemTabs/ppsConfigurationList.js"
+  },
+  {
+    "id": "pps.configuration.bins.tags.label",
+    "description": "Assign tags to bin",
+    "defaultMessage": "Assign tags to bin",
+    "filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
+  },
+  {
+    "id": "pps.configuration.bins.activation.label",
+    "description": "Bin activate/deactivate",
+    "defaultMessage": "Bin activate/deactivate",
+    "filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
+  },
+  {
+    "id": "pps.configuration.group.activation.label",
+    "description": "Bin group enable/disable",
+    "defaultMessage": "Bin group enable/disable",
+    "filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
+  },
+  {
+    "id": "pps.configuration.bins.frontView.label",
+    "description": "Front View",
+    "defaultMessage": "Front View",
+    "filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
+  },
+  {
+    "id": "pps.configuration.buttons.cancel.text",
+    "description": "CANCEL",
+    "defaultMessage": "CANCEL",
+    "filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
+  },
+  {
+    "id": "pps.configuration.buttons.next.text",
+    "description": "NEXT",
+    "defaultMessage": "NEXT",
+    "filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
+  },
+  {
+    "id": "pps.configuration.buttons.saveApply.text",
+    "description": "SAVE AND APPLY",
+    "defaultMessage": "SAVE AND APPLY",
+    "filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
+  },
+  {
+    "id": "pps.configuration.buttons.back.text",
+    "description": "BACK",
+    "defaultMessage": "BACK",
+    "filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
+  },
+  {
+    "id": "pps.configuration.buttons.saveNewProfile.text",
+    "description": "SAVE AS NEW PROFILE",
+    "defaultMessage": "SAVE AS NEW PROFILE",
+    "filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
+  },
+  {
+    "id": "pps.configuration.buttons.save.text",
+    "description": "SAVE",
+    "defaultMessage": "SAVE",
+    "filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
+  },
+  {
     "id": "pps.inputField.id",
     "defaultMessage": "PPS ID",
     "filepath": "./src/containers/systemTabs/ppsFilter.js"

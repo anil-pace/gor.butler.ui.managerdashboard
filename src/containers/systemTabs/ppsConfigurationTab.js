@@ -20,6 +20,7 @@ import PPSList from "./ppsConfigurationList";
 import {cancelProfileChanges} from './../../actions/ppsConfigurationActions'
 import {modal} from 'react-redux-modal'
 import CreateProfile from './createPPSProfile'
+import {FormattedMessage} from 'react-intl'
 
 
 class PPSConfiguration extends React.Component {
@@ -124,10 +125,18 @@ class PPSConfiguration extends React.Component {
                 <PPSList/>
                 <div className="pps-configuration-details-container">
                     <div className="pps-configuration-navigation-tabs">
-                        <div className={['navigation-tab',(this.state.currentView==='tags'?'active':'')].join(" ")} onClick={this.handleClickOnNavigation.bind(this,'tags')}>Assign tags to bin</div>
-                        <div className={['navigation-tab',(this.state.currentView==='bins'?'active':'')].join(" ")} onClick={this.handleClickOnNavigation.bind(this,'bins')}>Bin activate/deactivate</div>
-                        <div className={['navigation-tab',(this.state.currentView==='groups'?'active':'')].join(" ")} onClick={this.handleClickOnNavigation.bind(this,'groups')}>Bin group enable/disable</div>
-                        <div className={['seat-description'].join(" ")}>Front View</div>
+                        <div className={['navigation-tab',(this.state.currentView==='tags'?'active':'')].join(" ")} onClick={this.handleClickOnNavigation.bind(this,'tags')}><FormattedMessage id="pps.configuration.bins.tags.label"
+                                                                                                                                                                                               description="Assign tags to bin"
+                                                                                                                                                                                               defaultMessage="Assign tags to bin"/></div>
+                        <div className={['navigation-tab',(this.state.currentView==='bins'?'active':'')].join(" ")} onClick={this.handleClickOnNavigation.bind(this,'bins')}><FormattedMessage id="pps.configuration.bins.activation.label"
+                                                                                                                                                                                               description="Bin activate/deactivate"
+                                                                                                                                                                                               defaultMessage="Bin activate/deactivate"/></div>
+                        <div className={['navigation-tab',(this.state.currentView==='groups'?'active':'')].join(" ")} onClick={this.handleClickOnNavigation.bind(this,'groups')}><FormattedMessage id="pps.configuration.group.activation.label"
+                                                                                                                                                                                                   description="Bin group enable/disable"
+                                                                                                                                                                                                   defaultMessage="Bin group enable/disable"/></div>
+                        <div className={['seat-description'].join(" ")}><FormattedMessage id="pps.configuration.bins.frontView.label"
+                                                                                          description="Front View"
+                                                                                          defaultMessage="Front View"/></div>
                     </div>
                     <Bins currentView={this.state.currentView}/> {/* "currentView" will bes used to set the width of bins*/}
                     {this.state.currentView==='tags' && <Tags/>}
@@ -135,12 +144,24 @@ class PPSConfiguration extends React.Component {
 
                 </div>
                 {this.props.selectedPPS && <div className="pps-configuration-actions-container">
-                    <button onClick={self.cancelProfileChanges.bind(self)} className="pps-bin-cancel-button">CANCEL</button>
-                    {this.state.currentView!=="groups" && <button onClick={self.handleClickOnNext.bind(self)} className="pps-bin-next-button">NEXT</button>}
-                    {this.state.currentView==="groups" && <button onClick={self.saveAndApplyProfile.bind(self)} className="pps-bin-save-apply-button">SAVE AND APPLY</button>}
-                    {this.state.currentView!=="tags" && <button onClick={self.handleClickOnBack.bind(self)} className="pps-bin-back-button">BACK</button>}
-                    {this.state.currentView==="groups" && <button onClick={self.createProfile.bind(self)} className="pps-bin-save-button">SAVE AS NEW PROFILE</button>}
-                    {this.state.currentView==="groups" && <button onClick={self.saveAndApplyProfile.bind(self)} className="pps-bin-save-button">SAVE</button>}
+                    <button onClick={self.cancelProfileChanges.bind(self)} className="pps-bin-cancel-button"><FormattedMessage id="pps.configuration.buttons.cancel.text"
+                                                                                                                               description="CANCEL"
+                                                                                                                               defaultMessage="CANCEL"/></button>
+                    {this.state.currentView!=="groups" && <button onClick={self.handleClickOnNext.bind(self)} className="pps-bin-next-button"><FormattedMessage id="pps.configuration.buttons.next.text"
+                                                                                                                                                                description="NEXT"
+                                                                                                                                                                defaultMessage="NEXT"/></button>}
+                    {this.state.currentView==="groups" && <button onClick={self.saveAndApplyProfile.bind(self)} className="pps-bin-save-apply-button"><FormattedMessage id="pps.configuration.buttons.saveApply.text"
+                                                                                                                                                                        description="SAVE AND APPLY"
+                                                                                                                                                                        defaultMessage="SAVE AND APPLY"/></button>}
+                    {this.state.currentView!=="tags" && <button onClick={self.handleClickOnBack.bind(self)} className="pps-bin-back-button"><FormattedMessage id="pps.configuration.buttons.back.text"
+                                                                                                                                                              description="BACK"
+                                                                                                                                                              defaultMessage="BACK"/></button>}
+                    {this.state.currentView==="groups" && <button onClick={self.createProfile.bind(self)} className="pps-bin-save-button"><FormattedMessage id="pps.configuration.buttons.saveNewProfile.text"
+                                                                                                                                                            description="SAVE AS NEW PROFILE"
+                                                                                                                                                            defaultMessage="SAVE AS NEW PROFILE"/></button>}
+                    {this.state.currentView==="groups" && <button onClick={self.saveAndApplyProfile.bind(self)} className="pps-bin-save-button"><FormattedMessage id="pps.configuration.buttons.save.text"
+                                                                                                                                                                  description="SAVE"
+                                                                                                                                                                  defaultMessage="SAVE"/></button>}
                 </div>}
             </div>
         );

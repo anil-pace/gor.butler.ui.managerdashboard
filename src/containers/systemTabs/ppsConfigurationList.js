@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {fetchPPSProfiles,selectPPSProfileForConfiguration,fetchAndSelectPPSProfileForConfiguration} from './../../actions/ppsConfigurationActions'
 import {GET,FETCH_PPS_PROFILES,APP_JSON,FETCH_PROFILE_FOR_PPS} from './../../constants/frontEndConstants'
 import {PPS_LIST_URL,PPS_PROFILE_URL} from './../../constants/configConstants'
+import {FormattedMessage} from 'react-intl'
 
 class PPSList extends React.Component {
     constructor(props) {
@@ -68,7 +69,9 @@ class PPSList extends React.Component {
         return <div className="pps-list-container">
             <div>
                 <div className="pps-list-header">
-                    PPS Configurations
+                    <FormattedMessage id="pps.configuration.header.text"
+                                      description="PPS Configurations"
+                                      defaultMessage="PPS Configurations"/>
                 </div>
                 <div className="pps-list">
                     {this.state.data.map(function (pps) {
@@ -80,13 +83,17 @@ class PPSList extends React.Component {
                                 {pps.pps_id===self.props.selectedPPS.pps_id && pps.profiles.map(function (profile) {
                                     return <div className="pps-profile-item" onClick={self.selectPPSProfile.bind(self, {pps, profile})}
                                                 key={profile.name}>
-                                        <span className={[profile.name===self.props.selectedProfile.name?'selected':'','pps-profile-name'].join(" ")}>{profile.name}</span> {profile.applied && <span className="profile-applied-label">Applied</span>}
+                                        <span className={[profile.name===self.props.selectedProfile.name?'selected':'','pps-profile-name'].join(" ")}>{profile.name}</span> {profile.applied && <span className="profile-applied-label"><FormattedMessage id="pps.configuration.applied.text"
+                                                                                                                                                                                                                                                          description="Applied"
+                                                                                                                                                                                                                                                          defaultMessage="Applied"/></span>}
                                     </div>
 
                                 })}
                                 {pps.pps_id!==self.props.selectedPPS.pps_id && pps.profiles.map(function (profile) {
                                     return profile.applied ?
-                                        <div key={profile.name}>{profile.name + " is applied"}</div> : null
+                                        <div key={profile.name}>{profile.name} <FormattedMessage id="pps.configuration.profileAplied.text"
+                                                                                                                description=" profile applied"
+                                                                                                                defaultMessage=" profile applied"/></div> : null
                                 })}
 
                             </div>

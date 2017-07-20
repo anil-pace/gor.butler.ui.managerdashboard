@@ -6,6 +6,12 @@ import {connect} from 'react-redux'
 import {addTagToBin,fetchTags} from './../../actions/ppsConfigurationActions'
 import {FETCH_TAGS_URL} from './../../constants/configConstants'
 import {GET,FETCH_TAGS,APP_JSON} from './../../constants/frontEndConstants'
+import {FormattedMessage,defineMessages} from 'react-intl'
+const messages=defineMessages({
+    tagSearchPlaceholder: {
+        id: "pps.configuration.tag.search.placeholder",
+        defaultMessage: "Enter a tag..."
+    }})
 class Tags extends React.Component {
     constructor(props) {
         super(props)
@@ -17,6 +23,7 @@ class Tags extends React.Component {
         }
 
     }
+
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.tags !== this.state.tags) {
@@ -114,13 +121,19 @@ class Tags extends React.Component {
         }
         return <div className="pps-tags-container">
 
-            <div className="pps-tags-header"><span className="gor-tag-icon"/>Tags</div>
+            <div className="pps-tags-header"><span className="gor-tag-icon"/><FormattedMessage id="pps.configuration.tags.label"
+                                                                                               description="Tags"
+                                                                                               defaultMessage="Tags"/></div>
             <div className="pps-searchbox-container">
-                <input placeholder="Enter a tag..." className="pps-searchbox-tags"type="text" onChange={this.searchTags.bind(this)} value={this.state.filter}/>
+                <input placeholder={self.context.intl.formatMessage(messages.tagSearchPlaceholder)} className="pps-searchbox-tags"type="text" onChange={this.searchTags.bind(this)} value={this.state.filter}/>
                 {this.state.filter?<span className="searchbox-cross-icon" onClick={this.clearSearch.bind(this)} />:null}
             </div>
 
-            <div className="pps-searchresult-label">{this.state.filter ? "Search Results" : "All Tags"}</div>
+            <div className="pps-searchresult-label">{this.state.filter ? <FormattedMessage id="pps.configuration.tags.searchResults.text"
+                                                                                           description="Search Results"
+                                                                                           defaultMessage="Search Results"/> : <FormattedMessage id="pps.configuration.tags.all.text"
+                                                                                                                                                 description="All Tags"
+                                                                                                                                                 defaultMessage="All Tags"/>}</div>
             <div className="pps-tag-list">
             {this.state.filteredTags.map(function (tag) {
                 return <div className="pps-tags-row" key={tag}>
@@ -134,12 +147,19 @@ class Tags extends React.Component {
             {this.state.canAddTag?<div className="pps-add-tag-container">
                     <span className="pps-add-tag-name">"{this.state.filter}"</span>
                 <span className="pps-add-tag-button" onClick={this.addTag.bind(this)}>
-                        Add
+                        <FormattedMessage id="pps.configuration.tags.add.text"
+                                          description="Add"
+                                          defaultMessage="Add"/>
                     </span>
             </div>:null}
         </div>
     }
 }
+
+Tags.contextTypes={
+    intl: React.PropTypes.object.isRequired
+}
+
 function mapStateToProps(state, ownProps) {
     return {
         selectedProfile:state.ppsConfiguration.selectedProfile||{id:null},
