@@ -166,10 +166,15 @@ class SafetyChecklist extends React.Component{
         <div className='gor-safetylist'>
           <div className="gor-modal-content">
             <div className='gor-modal-head'>
-              <div className='gor-usr-add'><FormattedMessage id='operation.safety.heading' 
-                    defaultMessage="Safety checklist"
+          {this.props.fireHazard.emergency_type?   
+              (<div className='gor-usr-add'><FormattedMessage id='operation.firesafety.heading' 
+                    defaultMessage="Resume Checklist"
                             description="Text for safety heading"/>
-              </div>
+              </div>):
+              (<div className='gor-usr-add'><FormattedMessage id='operation.safety.heading' 
+                    defaultMessage="Safety Checklist"
+                            description="Text for fire safety heading"/>
+              </div>)}
               <span className="close" onClick={this._removeThisModal.bind(this)}>×</span>
             </div>
             <div className='gor-modal-body'>
@@ -197,11 +202,19 @@ class SafetyChecklist extends React.Component{
                   </ul>
                 </div> 
                 <div className='gor-margin-top'>
-                <button type="submit" className="gor-add-btn" disabled={(!this.state.allChecked)?true:false}
+                {this.props.fireHazard.emergency_type?
+                (<button type="submit" className="gor-add-btn" disabled={(!this.state.allChecked)?true:false}
+                  onClick={this._handleSafetyConfirm.bind(this)}><FormattedMessage id='operation.firesafety.confirm' 
+                    defaultMessage="Resume Opeartion" description="Text for Resume Opeartion button"/>
+                    <Spinner isLoading={this.props.safetySpinner} setSpinner={this.props.setSafetySpinner}/>
+                    </button>):
+                    (<button type="submit" className="gor-add-btn" disabled={(!this.state.allChecked)?true:false}
                   onClick={this._handleSafetyConfirm.bind(this)}><FormattedMessage id='operation.safety.confirm' 
                     defaultMessage="Confirm" description="Text for confirm button"/>
                     <Spinner isLoading={this.props.safetySpinner} setSpinner={this.props.setSafetySpinner}/>
-                    </button>
+                    </button>)}
+
+
                 </div>
               </div>
              </div>
