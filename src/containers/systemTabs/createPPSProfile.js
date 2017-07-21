@@ -4,7 +4,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {createNewPPSProfile,cancelProfileChanges} from './../../actions/ppsConfigurationActions'
-import {CREATE_PROFILE_URL} from './../../constants/configConstants'
+import {SAVE_PROFILE_URL} from './../../constants/configConstants'
 import {POST,CREATE_NEW_PROFILE,APP_JSON} from './../../constants/frontEndConstants'
 class CreateProfile extends React.Component {
     constructor(props) {
@@ -42,7 +42,7 @@ class CreateProfile extends React.Component {
          */
         let form_data=JSON.parse(JSON.stringify(this.props.selectedProfile))
         form_data.name=this.state.profileName
-        let url=CREATE_PROFILE_URL+this.props.selectedPPS.pps_id
+        let url=SAVE_PROFILE_URL+this.props.selectedPPS.pps_id
         let data={
             'url': url,
             'formdata':form_data ,
