@@ -44,7 +44,6 @@ export function ppsConfiguration(state = {}, action) {
              */
             selected_pps.profiles.map(function (prfl, index) {
                 if (prfl.applied) {
-                    prfl.selected = true
                     prfl.pps_bins = JSON.parse(JSON.stringify(selected_pps.pps_bins))
                     prfl.bin_group_details = JSON.parse(JSON.stringify(selected_pps.bin_group_details))
                     selected_profile = JSON.parse(JSON.stringify(prfl))
@@ -76,7 +75,6 @@ export function ppsConfiguration(state = {}, action) {
             selected_profile = action.data.profile
             if(!selected_profile){
                 selected_profile=selected_pps.profiles.filter(function(profile){return profile.applied})[0]
-                selected_profile.selected = true
                 selected_profile.pps_bins = JSON.parse(JSON.stringify(selected_pps.pps_bins))
                 selected_profile.bin_group_details = JSON.parse(JSON.stringify(selected_pps.bin_group_details))
             }
@@ -87,10 +85,6 @@ export function ppsConfiguration(state = {}, action) {
             selected_pps.profiles = selected_pps.profiles.map(function (prfl) {
                 if (prfl.name === selected_profile.name) {
                     prfl = JSON.parse(JSON.stringify(selected_profile))
-                    prfl.selected = true
-                } else {
-                    prfl.selected = false
-
                 }
                 return prfl
             })
@@ -187,7 +181,7 @@ export function ppsConfiguration(state = {}, action) {
              */
             selected_pps = state.selectedPPS
             selected_profile = JSON.parse(JSON.stringify(selected_pps.profiles.filter(function (profile) {
-                return profile.selected
+                return profile.name===state.selectedProfile.name
             })[0]))
             return Object.assign({}, state, {
                 selectedProfile: selected_profile, //If no profile is selected, select the default profile
