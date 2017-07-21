@@ -120,7 +120,6 @@ class PPSConfiguration extends React.Component {
          * API to save the existing Profile
          */
         let form_data=JSON.parse(JSON.stringify(this.props.selectedProfile))
-        delete form_data.applied //We don't need applied property to be send to the interface API
         form_data.requested=applyProfile
         let url=SAVE_PROFILE_URL+this.props.selectedPPS.pps_id
         let data={
