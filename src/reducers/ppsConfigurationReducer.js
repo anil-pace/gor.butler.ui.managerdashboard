@@ -9,7 +9,7 @@ import {
     ADD_TAG_TO_BIN,
     CLEAR_SELECTION_PPS_BIN,
     CHANGE_PPS_BIN_STATUS,
-    RECEIVE_TAGS, CANCEL_PROFILE_CHANGES,CHANGE_PPS_BIN_GROUP_STATUS,SELECT_PPS_BIN_GROUP,PPS_PROFILE_CREATED
+    RECEIVE_TAGS, CANCEL_PROFILE_CHANGES,CHANGE_PPS_BIN_GROUP_STATUS,SELECT_PPS_BIN_GROUP,PPS_PROFILE_CREATED,PPS_PROFILE_SAVED
 } from '../constants/frontEndConstants';
 /**
  * @param  {State Object}
@@ -178,6 +178,11 @@ export function ppsConfiguration(state = {}, action) {
 
 
         case PPS_PROFILE_CREATED:
+            /**
+             * The response need to be pushed into
+             * the array of profiles that is stored
+             * in PPS List and selected PPS.
+             */
             selected_pps= JSON.parse(JSON.stringify(state.selectedPPS))
             pps_list=JSON.parse(JSON.stringify(state.ppsList))
             selected_profile=action.data
@@ -188,6 +193,40 @@ export function ppsConfiguration(state = {}, action) {
                 return pps
             })
             selected_pps.profiles.push(selected_profile)
+            return Object.assign({}, state, {
+                selectedProfile: selected_profile, //If no profile is selected, select the default profile
+                selectedPPS: selected_pps,
+                ppsList:pps_list,
+                profileCreatedAt:new Date().getTime()
+            })
+
+        case PPS_PROFILE_SAVED:
+            /**
+             * The response need to replace
+             * the existing profile
+             * that is stored in PPS profile list
+             * and PPS List model.
+             */
+            selected_pps= JSON.parse(JSON.stringify(state.selectedPPS))
+            pps_list=JSON.parse(JSON.stringify(state.ppsList))
+            selected_profile=action.data
+            pps_list=pps_list.map(function(pps){
+                if(pps.pps_id===selected_pps.pps_id){
+                    pps.profiles=pps.profiles.map(function(profile){
+                        if(profile.name===selected_profile.name){
+                            profile=selected_profile
+                        }
+                        return profile
+                    })
+                }
+                return pps
+            })
+            selected_pps.profiles=selected_pps.profiles.map(function(profile){
+                if(profile.name===selected_profile.name){
+                    profile=selected_profile
+                }
+                return profile
+            })
             return Object.assign({}, state, {
                 selectedProfile: selected_profile, //If no profile is selected, select the default profile
                 selectedPPS: selected_pps,

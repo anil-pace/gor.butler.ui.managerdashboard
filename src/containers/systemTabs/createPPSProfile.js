@@ -42,8 +42,9 @@ class CreateProfile extends React.Component {
          */
         let form_data=JSON.parse(JSON.stringify(this.props.selectedProfile))
         form_data.name=this.state.profileName
+        let url=CREATE_PROFILE_URL+this.props.selectedPPS.pps_id
         let data={
-            'url': CREATE_PROFILE_URL,
+            'url': url,
             'formdata':form_data ,
             'method': POST,
             'cause': CREATE_NEW_PROFILE,

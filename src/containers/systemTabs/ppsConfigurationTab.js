@@ -17,10 +17,12 @@ import {hashHistory} from 'react-router'
 import Tags from './tags'
 import Bins from './ppsConfigurationBins'
 import PPSList from "./ppsConfigurationList";
-import {cancelProfileChanges} from './../../actions/ppsConfigurationActions'
+import {cancelProfileChanges,savePPSProfile} from './../../actions/ppsConfigurationActions'
 import {modal} from 'react-redux-modal'
 import CreateProfile from './createPPSProfile'
 import {FormattedMessage} from 'react-intl'
+import {PUT,APP_JSON,SAVE_PPS_PROFILE} from './../../constants/frontEndConstants'
+import {SAVE_PROFILE_URL} from './../../constants/configConstants'
 
 
 class PPSConfiguration extends React.Component {
@@ -113,8 +115,24 @@ class PPSConfiguration extends React.Component {
     /**
      *
      */
-    saveAndApplyProfile(){
-        console.log(this.props.selectedProfile)
+    saveProfile(applyProfile){
+        /**
+         * API to save the existing Profile
+         */
+        let form_data=JSON.parse(JSON.stringify(this.props.selectedProfile))
+        form_data.requested=applyProfile
+        form_data.applied=applyProfile
+        let url=SAVE_PROFILE_URL+this.props.selectedPPS.pps_id
+        let data={
+            'url': url,
+            'formdata':form_data ,
+            'method': PUT,
+            'cause': SAVE_PPS_PROFILE,
+            'contentType': APP_JSON,
+            'accept': APP_JSON,
+            'token': this.props.auth_token
+        }
+        this.props.savePPSProfile(data)
     }
 
     render() {
@@ -150,7 +168,7 @@ class PPSConfiguration extends React.Component {
                     {this.state.currentView!=="groups" && <button onClick={self.handleClickOnNext.bind(self)} className="pps-bin-next-button"><FormattedMessage id="pps.configuration.buttons.next.text"
                                                                                                                                                                 description="NEXT"
                                                                                                                                                                 defaultMessage="NEXT"/></button>}
-                    {this.state.currentView==="groups" && <button onClick={self.saveAndApplyProfile.bind(self)} className="pps-bin-save-apply-button"><FormattedMessage id="pps.configuration.buttons.saveApply.text"
+                    {this.state.currentView==="groups" && <button onClick={self.saveProfile.bind(self,true)} className="pps-bin-save-apply-button"><FormattedMessage id="pps.configuration.buttons.saveApply.text"
                                                                                                                                                                         description="SAVE AND APPLY"
                                                                                                                                                                         defaultMessage="SAVE AND APPLY"/></button>}
                     {this.state.currentView!=="tags" && <button onClick={self.handleClickOnBack.bind(self)} className="pps-bin-back-button"><FormattedMessage id="pps.configuration.buttons.back.text"
@@ -159,7 +177,7 @@ class PPSConfiguration extends React.Component {
                     {this.state.currentView==="groups" && <button onClick={self.createProfile.bind(self)} className="pps-bin-save-button"><FormattedMessage id="pps.configuration.buttons.saveNewProfile.text"
                                                                                                                                                             description="SAVE AS NEW PROFILE"
                                                                                                                                                             defaultMessage="SAVE AS NEW PROFILE"/></button>}
-                    {this.state.currentView==="groups" && <button onClick={self.saveAndApplyProfile.bind(self)} className="pps-bin-save-button"><FormattedMessage id="pps.configuration.buttons.save.text"
+                    {this.state.currentView==="groups" && <button onClick={self.saveProfile.bind(self,false)} className="pps-bin-save-button"><FormattedMessage id="pps.configuration.buttons.save.text"
                                                                                                                                                                   description="SAVE"
                                                                                                                                                                   defaultMessage="SAVE"/></button>}
                 </div>}
@@ -205,6 +223,9 @@ var mapDispatchToProps = function (dispatch) {
         },
         cancelProfileChanges: function (data) {
             dispatch(cancelProfileChanges(data));
+        },
+        savePPSProfile: function (data) {
+            dispatch(savePPSProfile(data));
         },
 
 
