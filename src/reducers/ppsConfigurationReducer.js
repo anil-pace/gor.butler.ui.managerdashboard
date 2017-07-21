@@ -89,11 +89,24 @@ export function ppsConfiguration(state = {}, action) {
                 }
                 return prfl
             })
+            pps_list=state.ppsList.map(function(pps){
+                if(pps.pps_id===selected_pps.pps_id){
+                    pps.profiles=pps.profiles.map(function(profile){
+                        if(profile.name===selected_profile.name){
+                            profile=selected_profile
+                        }
+                        return profile
+                    })
+                }
+                return pps
+            })
+
             return Object.assign({}, state, {
                 selectedProfile: selected_profile, //If no profile is selected, select the default profile
                 selectedPPS: selected_pps || {},
                 selectedPPSBin: null,
-                selectedPPSBinGroup: null
+                selectedPPSBinGroup: null,
+                ppsList:pps_list
             })
 
         case SELECT_PPS_BIN:

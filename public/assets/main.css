@@ -7142,6 +7142,15 @@ button:disabled {
   font-size: 12px;
 }
 
+.profile-requested-label {
+  float: right;
+  padding: 5px;
+  border-radius: 10px;
+  color: white;
+  background-color: orange;
+  font-size: 12px;
+}
+
 .pps-bins-container {
   float: left;
   box-sizing: border-box;

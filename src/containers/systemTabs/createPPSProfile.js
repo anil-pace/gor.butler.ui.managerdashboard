@@ -42,6 +42,13 @@ class CreateProfile extends React.Component {
          */
         let form_data=JSON.parse(JSON.stringify(this.props.selectedProfile))
         form_data.name=this.state.profileName
+        /**
+         * While creating a new profile
+         * we don't need applied and
+         * requested properties, so deleting it.
+         */
+        delete form_data.applied
+        delete form_data.requested
         let url=SAVE_PROFILE_URL+this.props.selectedPPS.pps_id
         let data={
             'url': url,
