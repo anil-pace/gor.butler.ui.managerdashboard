@@ -9,7 +9,7 @@ import {
     ADD_TAG_TO_BIN,
     CLEAR_SELECTION_PPS_BIN,
     CHANGE_PPS_BIN_STATUS,
-    RECEIVE_TAGS, CANCEL_PROFILE_CHANGES,CHANGE_PPS_BIN_GROUP_STATUS,SELECT_PPS_BIN_GROUP,PPS_PROFILE_CREATED,PPS_PROFILE_SAVED
+    RECEIVE_TAGS, CANCEL_PROFILE_CHANGES,CHANGE_PPS_BIN_GROUP_STATUS,SELECT_PPS_BIN_GROUP,PPS_PROFILE_CREATED,PPS_PROFILE_SAVED,TAG_ADDED_TO_LIST
 } from '../constants/frontEndConstants';
 /**
  * @param  {State Object}
@@ -60,7 +60,12 @@ export function ppsConfiguration(state = {}, action) {
 
         case RECEIVE_TAGS:
             return Object.assign({}, state, {
-                tags: action.params.tags
+                tags: action.params.pps_bin_tags
+            })
+
+        case TAG_ADDED_TO_LIST:
+            return Object.assign({}, state, {
+                tags: state.tags.concat(action.data)
             })
 
         case SELECT_PPS_PROFILE_FOR_CONFIGURATION:
