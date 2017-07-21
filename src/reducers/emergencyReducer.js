@@ -15,7 +15,19 @@ export  function emergency(state={},action){
           break;
     case SAFETY_MAP:
           return Object.assign({},state,{
-            "safetyList":action.data
+            //"safetyList":action.data
+            safetyList:['md007','md008','md009','md010','md011','md012'],
+            botList:[{
+              botid:"Bot1",
+              botDirection:"North",
+              rackid:"Rack02"
+            },
+            {
+              botid:"Bot13",
+              botDirection:"South",
+              rackid:"Rack03"
+            }
+            ]
           });
           break;
     case SAFETY_ERROR_MAP:
