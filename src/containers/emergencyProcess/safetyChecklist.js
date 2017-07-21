@@ -161,11 +161,11 @@ class SafetyChecklist extends React.Component{
   }
 
   _processTableList(){
-    var botCheckList=[],items=this.props.checkList, noItems, bots, msgCode;
-   var butlerDetails=this.props.checkList.butlerDetails;
+    var botCheckList=[],items=this.props.botList, noItems, bots, msgCode;
+   var butlerDetails=this.props.botList;
     for(let i=0;i<butlerDetails.length;i++){
-      bots=(<div className='Row'><div className='Cell'><p>butlerDetails[i].botid</p> </div>
-<div className='Cell'><p>butlerDetails[i].botDirection</p></div><div className='Cell'><p>butlerDetails[i].rackid</p></div></div>);
+      bots=(<div className='Row'><div className='Cell'><p>{butlerDetails[i].botid}</p> </div>
+<div className='Cell'><p>{butlerDetails[i].botDirection}</p></div><div className='Cell'><p>{butlerDetails[i].rackid}</p></div></div>);
      
       botCheckList.push(bots);    
     }
@@ -217,17 +217,17 @@ class SafetyChecklist extends React.Component{
                   </ul>
                   <div className="Table">
                   <div className="Title">
-                  <p>This is a Table</p>
+                  <p>Please Follow below instruction</p>
                   </div>
                   <div className="Heading">
                   <div className="Cell">
-                  <p>Heading 1</p>
+                  <p>Bot ID </p>
                   </div>
                   <div className="Cell">
-                  <p>Heading 2</p>
+                  <p>BOT Direction</p>
                   </div>
                   <div className="Cell">
-                  <p>Heading 3</p>
+                  <p>Rack ID</p>
                   </div>
                   </div>
                 {botchecklist}
@@ -265,6 +265,7 @@ SafetyChecklist.contextTypes={
 function mapStateToProps(state, ownProps){
   return {
       checkList: state.emergency.safetyList || [],
+      botList: state.emergency.botList || [],
       safetyErrorList: state.emergency.safetyErrorList || [],
       auth_token:state.authLogin.auth_token,
       modalStatus: state.emergency.hideModal || false,
