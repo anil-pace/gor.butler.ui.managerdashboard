@@ -13,10 +13,10 @@ class FilterSummary extends React.Component {
          * Don't display the filter summary if count=0
          * or previous number of results is same of updated list.
          */
-        if (this.props.total=== nextProps.total || nextProps.total=== 0) {
-            return false
+        if ((this.props.total!== nextProps.total || nextProps.total) || (this.props.isFilterApplied !== nextProps.isFilterApplied)) {
+            return true
         }
-        return true;
+        return false;
     }
 
     render() {

@@ -240,7 +240,7 @@
     "filepath": "./src/components/header/header.js"
   },
   {
-    "id": "header.button.resume",
+    "id": "header.button.resume1",
     "description": "Button text",
     "defaultMessage": "Resume",
     "filepath": "./src/components/header/header.js"
@@ -255,6 +255,42 @@
     "id": "header.option.resume",
     "description": "resume operation option",
     "defaultMessage": "Enter password to resume operation.",
+    "filepath": "./src/components/header/header.js"
+  },
+  {
+    "id": "header.zones.count",
+    "description": "Zone status count",
+    "defaultMessage": "{activeZones}/{totalZones} Zones",
+    "filepath": "./src/components/header/header.js"
+  },
+  {
+    "id": "header.zones.status",
+    "description": "Zone status",
+    "defaultMessage": "SYSTEM NORMAL",
+    "filepath": "./src/components/header/header.js"
+  },
+  {
+    "id": "header.zones.inOperation",
+    "description": "Zone in operation count",
+    "defaultMessage": "{totalZones} zones in operation",
+    "filepath": "./src/components/header/header.js"
+  },
+  {
+    "id": "header.zones.emergency",
+    "description": "System Emergency",
+    "defaultMessage": "SYSTEM EMERGENCY",
+    "filepath": "./src/components/header/header.js"
+  },
+  {
+    "id": "header.button.resume",
+    "description": "Button text",
+    "defaultMessage": "Resume System",
+    "filepath": "./src/components/header/header.js"
+  },
+  {
+    "id": "header.zones.viewAll",
+    "description": "View all system details",
+    "defaultMessage": "View system details",
     "filepath": "./src/components/header/header.js"
   },
   {
@@ -3753,9 +3789,9 @@
     "filepath": "./src/containers/systemTabs/sysControllers.js"
   },
   {
-    "id": "gor.filter.filterLabel",
-    "description": "button label for filter",
-    "defaultMessage": "Filter data",
+    "id": "ppsList.filter.search.bar.showall",
+    "description": "button label for show all",
+    "defaultMessage": "Show all Stations",
     "filepath": "./src/containers/systemTabs/sysControllers.js"
   },
   {
@@ -3777,6 +3813,12 @@
     "filepath": "./src/containers/systemTabs/sysControllers.js"
   },
   {
+    "id": "sysController.location.name",
+    "description": "PPStable.requestedMode.text",
+    "defaultMessage": "Zone:",
+    "filepath": "./src/containers/systemTabs/sysControllers.js"
+  },
+  {
     "id": "sysController.table.conDetails",
     "description": "Status for PPS",
     "defaultMessage": "CONNECTION DETAILS",
@@ -3787,6 +3829,18 @@
     "description": "Status for PPS",
     "defaultMessage": "OPERATING MODE",
     "filepath": "./src/containers/systemTabs/sysControllers.js"
+  },
+  {
+    "id": "sysOverView.zones.count",
+    "description": "Zone status count",
+    "defaultMessage": "{activeZones}/{totalZones} Operating Zones",
+    "filepath": "./src/containers/systemTabs/sysOverview.js"
+  },
+  {
+    "id": "sysOverView.zones.name",
+    "description": "Zone Name",
+    "defaultMessage": "ZONE {name}",
+    "filepath": "./src/containers/systemTabs/sysOverview.js"
   },
   {
     "id": "tabs.offline",

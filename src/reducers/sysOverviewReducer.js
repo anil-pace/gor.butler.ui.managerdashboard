@@ -6,14 +6,14 @@ import {ZONE_DATA} from '../constants/frontEndConstants';
  * @param  {Action object}
  * @return {[Object] updated state}
  */
-const resTypeZones = {
+/*const resTypeZones = {
   "complete_data": {
     "zones_data":{
     "1": {
       "zone_status": "zone_pause_activated" 
     },
     "2": {
-      "zone_status": "emergency_pause"
+      "zone_status": "emergency_stop"
     },
     "3":{
       "zone_status": "zone_pause_initiated"
@@ -21,15 +21,15 @@ const resTypeZones = {
   },
     "emergency_data":{
       "emergency_on": true,
-      "emergency_type":"stop"
+      "emergency_type":"pause"
     }
   },
   "resource_type": "zones"
-}
+}*/
 export  function sysOverviewReducer(state={},action){
   switch (action.type) {
     case ZONE_DATA:
-      var zoneData=resTypeZones["complete_data"]
+      var zoneData=action.data["complete_data"]
       return Object.assign({}, state, { 
             "zones" : zoneData,
             "hasDataChanged":!state.hasDataChanged,

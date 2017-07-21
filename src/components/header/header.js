@@ -1,5 +1,6 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
+import {Link} from 'react-router';
 import {
     RECIEVE_HEADER, HEADER_START_TIME, REQUEST_HEADER, RECIEVE, RECIEVE_ITEM_TO_STOCK,
     GET, SOFT_MANUAL, RECEIVE_SHIFT_START_TIME
@@ -30,6 +31,7 @@ class Header extends React.Component {
         this.setDropdown=this.setDropdown.bind(this);
         this.state={showDropdown: false};
         this._handleDocumentClick=this._handleDocumentClick.bind(this);
+        this._showModal = this._showModal.bind(this);
 
 
     }
@@ -99,8 +101,8 @@ class Header extends React.Component {
         });
     }
 
-    _showModal(modalComponent) {
-        modal.add(modalComponent, {
+    _showModal() {
+        modal.add(ResumeOperation, {
             title: '',
             size: 'large', // large, medium or small,
             closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
@@ -168,7 +170,7 @@ class Header extends React.Component {
             optionOperation=(<FormattedMessage id="header.option.stopped" description='stopped operation'
                                                  defaultMessage='Operation stopped'
             />);
-            buttonText=(<FormattedMessage id="header.button.resume" description='Button text'
+            buttonText=(<FormattedMessage id="header.button.resume1" description='Button text'
                                             defaultMessage='Resume'
             />);
             optionList.push({
@@ -207,7 +209,6 @@ class Header extends React.Component {
 
     render() {
         var headerInfo=this._processData()
-        var menuDetails=this._processMenu(headerInfo);
         var startTime = this.context.intl.formatTime(this.props.shift_start_time, {
             hour: 'numeric',
             minute: 'numeric',
@@ -239,20 +240,51 @@ class Header extends React.Component {
                 </div>
                 <div className="blockLeft">
                 <NotificationsWrapper />
-                    <HamBurger data={menuDetails}>
+                    <HamBurger>
                         {(instance) => (
                             <div>
                                 <div className="blockSystem">
-                                    900/900 Zones
+                                <span className="gor-sys-status"></span>
+                                <FormattedMessage id="header.zones.count" description='Zone status count '
+                                            defaultMessage='{activeZones}/{totalZones} Zones'
+                                            values={{
+                                                activeZones: this.props.zoneHeader.active_zones===0 ? (this.props.zoneHeader.active_zones).toString(): this.props.zoneHeader.active_zones,
+                                                totalZones: this.props.zoneHeader.total_zones===0 ? (this.props.zoneHeader.total_zones).toString():this.props.zoneHeader.total_zones
+                                            }}/>
+                                    
                                 </div>
                             <div className='gor-hamburger-wrapper' style={(instance.state.menuVisible)?{display:'block'}:{display:'none'}}>
-                            <section className='gor-hamburger-option'  >
-                                <h1>SYSTEM NORMAL</h1>
-                                <p>900 zones in operation</p>
-                                <button className="gor-sys-btn"> Resume system</button>
-                            </section>
+                            {!this.props.system_emergency ? 
+                                <section className='gor-hamburger-option'  >
+                                <h1><FormattedMessage id="header.zones.status" description='Zone status '
+                                            defaultMessage='SYSTEM NORMAL'
+                                           /></h1>
+                                <p><FormattedMessage id="header.zones.inOperation" description='Zone in operation count '
+                                            defaultMessage='{totalZones} zones in operation'
+                                            values={{
+                                                totalZones: this.props.zoneHeader.total_zones
+                                            }}/></p>
+                                
+                            </section> : <section className='gor-hamburger-option'  >
+                                <h1><FormattedMessage id="header.zones.emergency" description='System Emergency'
+                                            defaultMessage='SYSTEM EMERGENCY'
+                                           /></h1>
+                                <p><FormattedMessage id="header.zones.inOperation" description='Zone in operation count '
+                                            defaultMessage='{totalZones} zones in operation'
+                                            values={{
+                                                totalZones: this.props.zoneHeader.total_zones
+                                            }}/></p>
+                                <button onClick={this._showModal} className="gor-sys-btn"> <FormattedMessage id="header.button.resume" description='Button text'
+                                defaultMessage='Resume System'
+                                /></button>
+                            </section>}
                             <section className="gor-all-zone">
-                                <a href="javascript:void(0)">View system details<span className="right-arr"> ></span></a>
+                            <Link to="/system/sysOverview" >
+                            <FormattedMessage id="header.zones.viewAll" description='View all system details'
+                                            defaultMessage='View system details'
+                                           />
+                            </Link>
+                                
                             </section>
                             </div>
                             </div> 
@@ -312,6 +344,7 @@ function mapStateToProps(state, ownProps) {
         authToken: state.authLogin.auth_token,
         username: state.authLogin.username,
         system_emergency: state.tabsData.system_emergency || null,
+        emergencyData:state.zoningReducer.emergencyData || {},
         system_status: state.tabsData.status || null,
         system_data: state.tabsData.system_data || null,
         activeModalKey: state.appInfo.activeModalKey || 0,

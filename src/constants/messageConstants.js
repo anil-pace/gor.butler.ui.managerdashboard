@@ -226,6 +226,10 @@ export const ZONE_STATUS_INTL_MESSAGE ={
       emergency_stop:(<FormattedMessage id="zoning.status.emergencyStop" description='Status text for zone' 
       defaultMessage='EMERGENCY STOP'/>),
       emergency_pause:(<FormattedMessage id="zoning.status.emergencyPause" description='Status text for zone' 
+      defaultMessage='EMERGENCY PAUSE'/>),
+      stopped:(<FormattedMessage id="zoning.status.stopped" description='Status text for zone' 
+      defaultMessage='STOPPED'/>),
+      paused:(<FormattedMessage id="zoning.status.paused" description='Status text for zone' 
       defaultMessage='PAUSED'/>)
 }
 

@@ -5,7 +5,7 @@ import {SYSTEM_CHARGERS_DETAILS,USER_DATA,HISTOGRAM_DETAILS,PARSE_OVERVIEW,PARSE
 	ARSE_STATUS,PPS_DETAIL,SYSTEM_PPS_DETAILS,SYSTEM_BUTLERS_DETAILS,PARSE_PPS,
 	PARSE_BUTLERS,PARSE_CHARGERS,PARSE_INVENTORY_HISTORY,PARSE_INVENTORY_TODAY,
 	PARSE_INVENTORY,PARSE_ORDERS,PARSE_PUT,PARSE_PICK,PARSE_PPA_THROUGHPUT,PARSE_AUDIT,
-PARSE_STATUS,PARSE_AUDIT_AGG,PARSE_ZONING} from '../constants/backEndConstants'
+PARSE_STATUS,PARSE_AUDIT_AGG,PARSE_ZONING,PARSE_CONTROLLERS} from '../constants/backEndConstants'
 import {wsOnMessageAction} from '../actions/socketActions';
 import {recieveOverviewStatus,recieveSystemStatus,recieveAuditStatus,recieveOrdersStatus,recieveUsersStatus,recieveInventoryStatus,recieveStatus,setFireHazrdFlag} from '../actions/tabActions';
 import {userFilterApplySpinner} from '../actions/spinnerAction';
@@ -43,7 +43,7 @@ export function ResponseParse(store,res)
 				break;
 			case PARSE_AUDIT:
 					store.dispatch(recieveAuditStatus(res));
-					store.dispatch(recieveZoningData(res));
+					//store.dispatch(recieveZoningData(res));
 					break;
 			case PARSE_AUDIT_AGG:
 				 	store.dispatch(receiveAuditData(res));
@@ -70,7 +70,15 @@ export function ResponseParse(store,res)
 				}
 				break;
 			case PARSE_ZONING:
-				store.dispatch(recieveSysOverViewData(res));
+				if(res.header_data){
+					store.dispatch(recieveZoningData(res));
+				}
+				else{
+					store.dispatch(recieveSysOverViewData(res));
+				}
+				//store.dispatch(recieveControllerData(res));
+				break;
+			case PARSE_CONTROLLERS:
 				store.dispatch(recieveControllerData(res));
 				break;
 			case PARSE_INVENTORY_TODAY:		

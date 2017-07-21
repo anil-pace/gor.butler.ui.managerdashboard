@@ -15,8 +15,9 @@ import {
     sortData
 } from '../../components/commonFunctionsDataTable';
 import {defineMessages} from 'react-intl';
-import {hashHistory} from 'react-router'
-import {GOR_STATUS, GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
+import {hashHistory,withRouter} from 'react-router';
+import {GOR_STATUS, GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT,WS_ONSEND} from '../../constants/frontEndConstants';
+import {setWsAction} from '../../actions/socketActions'
 
 
 const messages=defineMessages({
@@ -37,55 +38,7 @@ class SystemControllers extends React.Component {
     }
 
     _getInitialState(){
-        var data=this.props.controllers.slice(0)/*[{
-            id:1,
-            status:"Operating",
-            location:"asdf",
-            connection_details:"asdf",
-            operating_mode:"Standard"
-        },{
-            id:1,
-            status:"Operating",
-            location:"asdf",
-            connection_details:"asdf",
-            operating_mode:"Standard"
-        },{
-            id:1,
-            status:"Operating",
-            location:"asdf",
-            connection_details:"asdf",
-            operating_mode:"Standard"
-        },{
-            id:1,
-            status:"Operating",
-            location:"asdf",
-            connection_details:"asdf",
-            operating_mode:"Standard"
-        },{
-            id:1,
-            status:"Operating",
-            location:"asdf",
-            connection_details:"asdf",
-            operating_mode:"Standard"
-        },{
-            id:1,
-            status:"Operating",
-            location:"asdf",
-            connection_details:"asdf",
-            operating_mode:"Standard"
-        },{
-            id:1,
-            status:"Operating",
-            location:"asdf",
-            connection_details:"asdf",
-            operating_mode:"Standard"
-        },{
-            id:1,
-            status:"Operating",
-            location:"asdf",
-            connection_details:"asdf",
-            operating_mode:"Standard"
-        }]*/
+        var data=this.props.controllers.slice(0)
         var dataList = new tableRenderer(data.length);
         dataList.newData=data;
         return {
@@ -97,19 +50,29 @@ class SystemControllers extends React.Component {
                 operatingMode: this.props.containerWidth * 0.4
             },
             dataList:dataList,
-            query:this.props.location.query
+            query:this.props.location.query,
+            subscribed:false,
+            queryApplied:Object.keys(this.props.location.query).length ? true :false
         }
     }
 
     _clearFilter() {
-        hashHistory.push({pathname: "/system/sysControllers", query: {}})
+        this.setState({
+            subscribed:false
+        },function(){
+            this.props.router.push({pathname: "/system/sysControllers"})
+        })
+        
     }
 
     _refreshList(query){
-        var filterSubsData = {}
-        if (query.zone) {
-            filterSubsData["zone"]=['=',query.zone]
+        var filterSubsData = {};
+        var updatedWsSubscription= JSON.parse(JSON.stringify(this.props.wsSubscriptionData));
+        if (query && query.zone_id) {
+            filterSubsData["zone_id"]=['=',query.zone_id]
         }
+        updatedWsSubscription["controllers"].data[0].details["filter_params"]=filterSubsData;
+        this.props.initDataSentCall(updatedWsSubscription["controllers"])
     }
 
     shouldComponentUpdate(nextProps) {
@@ -118,11 +81,36 @@ class SystemControllers extends React.Component {
 
 
     componentWillReceiveProps(nextProps) {
-      if (nextProps.socketAuthorized && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
-            this.setState({query: nextProps.location.query})
-            this._refreshList(nextProps.location.query)
+        if(nextProps.socketAuthorized && !this.state.subscribed){
+            this.setState({
+                subscribed:true,
+                queryApplied:Object.keys(this.props.location.query).length ? true :false
+            },function(){
+                this._refreshList(nextProps.location.query)
+            })
+        }
+        if(this.props.hasDataChanged !== nextProps.hasDataChanged){
+            let data = JSON.parse(JSON.stringify(nextProps.controllers || []));
+            let dataList = new tableRenderer(data.length)
+            dataList.newData=data;
+            this.setState({
+                dataList,
+                queryApplied:Object.keys(nextProps.location.query).length ? true :false
+            })
         }
     }
+    componentWillMount(){
+        if(this.props.socketAuthorized && !this.state.subscribed){
+            this.setState({
+                subscribed:true,
+                queryApplied:Object.keys(this.props.location.query).length ? true :false
+            },function(){
+                //this.props.initDataSentCall(wsOverviewData["controllers"])
+                this._refreshList(this.props.location.query)
+            })
+        }
+    }
+ 
    
 
     render() {
@@ -137,32 +125,9 @@ class SystemControllers extends React.Component {
                                                           defaultMessage="System Controllers"/>
                                         
                                     </div>
-                                    
-                                </div>
-
-                                <div className="filterWrapper">
-                                <div className="gorToolBarDropDown pps">
-                                        
-                                            </div>
-                                <div className="gorToolBarDropDown pps">
-                                        
-                                    </div>
-                                    <div className="gorToolBarDropDown">
-                                        <div className="gor-button-wrap">
-                                            <div
-                                                className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
-                                            <button
-                                                className={"gor-filterBtn-applied"}>
-                                                <div className="gor-manage-task"/>
-                                                <FormattedMessage id="gor.filter.filterLabel" description="button label for filter"
-                                                                  defaultMessage="Filter data"/>
-                                            </button>
-                                        </div>
-                                    </div>
-
                                 </div>
                             </div>
-                <FilterSummary total={dataList.getSize()||0} isFilterApplied={true} responseFlag={null}
+                <FilterSummary total={dataList.getSize()||0} isFilterApplied={this.state.queryApplied} responseFlag={null}
                                            refreshList={this._clearFilter}
                                            refreshText={<FormattedMessage id="ppsList.filter.search.bar.showall"
                                                                           description="button label for show all"
@@ -180,8 +145,8 @@ class SystemControllers extends React.Component {
                     <Column
                         columnKey="controller_id"
                         header={
-                            <div>
-                                <div className="gor-header-id">
+                            
+                                <div className="gor-header-ids">
                                     <SortHeaderCell onSortChange={null}
                                                     sortDir={"ASC"}>
                                         <div className="gorToolHeaderEl">
@@ -192,7 +157,7 @@ class SystemControllers extends React.Component {
                                         </div>
                                     </SortHeaderCell>
                                 </div>
-                            </div>
+                            
                         }
                         cell={<TextCell data={dataList} classKey={"id"} />}
                         fixed={true}
@@ -221,41 +186,32 @@ class SystemControllers extends React.Component {
                         isResizable={true}
                     />
                     <Column
-                        columnKey="zone_id"
+                        columnKey={null}
                         header={
-                            <SortHeaderCell onSortChange={null}
-
-                                            sortDir={"ASC"}>
-
                                 <div className="gorToolHeaderEl">
 
                                     <FormattedMessage id="sysController.table.location" description="Location"
                                                       defaultMessage="LOCATION"/>
-
-                                    
                                 </div>
-                            </SortHeaderCell>
+                            
                         }
-                        cell={<TextCell data={dataList} classKey={"location"}/>}
+                        cell={<TextCell data={dataList} classKey={"location"} childrenClass="location" childColumnKey="zone_id">
+                             <span ><FormattedMessage id="sysController.location.name" description='PPStable.requestedMode.text'
+                                                          defaultMessage='Zone: '
+                                                          /></span>
+                        </TextCell>}
                         fixed={true}
                         width={this.state.columnWidths.location}
                         isResizable={true}
                     />
                     <Column
-                        columnKey="connection_details"
+                        columnKey={null}
                         header={
-                            <SortHeaderCell onSortChange={null}
-
-                                            sortDir={"ASC"}>
-
                                 <div className="gorToolHeaderEl">
 
                                     <FormattedMessage id="sysController.table.conDetails" description="Status for PPS"
                                                       defaultMessage="CONNECTION DETAILS"/>
-
-                                    
                                 </div>
-                            </SortHeaderCell>
                         }
                         cell={<TextCell data={dataList} setClass={"sfs"} classKey={"connectionDetails"}/>}
                         fixed={true}
@@ -265,10 +221,6 @@ class SystemControllers extends React.Component {
                     <Column
                         columnKey="action_triggered"
                         header={
-                            <SortHeaderCell onSortChange={null}
-
-                                            sortDir={"ASC"}>
-
                                 <div className="gorToolHeaderEl">
 
                                     <FormattedMessage id="sysController.table.operatingMode" description="Status for PPS"
@@ -276,7 +228,6 @@ class SystemControllers extends React.Component {
 
                                   
                                 </div>
-                            </SortHeaderCell>
                         }
                         cell={<TextCell data={dataList} classKey={"operatingMode"}/>}
                         fixed={true}
@@ -294,10 +245,17 @@ function mapStateToProps(state, ownProps) {
     return {
         controllers:state.sysControllersReducer.controllers || [],
         hasDataChanged:state.sysControllersReducer.hasDataChanged,
-        socketAuthorized: state.recieveSocketActions.socketAuthorized
+        socketAuthorized: state.recieveSocketActions.socketAuthorized,
+        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket
     };
+}
+
+function mapDispatchToProps(dispatch){
+    return{
+        initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); }
+    }
 }
 
 
 
-export default connect(mapStateToProps, null)(Dimensions()(SystemControllers));
+export default connect(mapStateToProps, mapDispatchToProps)(Dimensions()(withRouter(SystemControllers)));

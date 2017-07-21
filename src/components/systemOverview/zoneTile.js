@@ -17,7 +17,6 @@ class Zone extends React.Component {
                 </div>
                 <div className="right-content">
                 <p className="zone-name">{this.props.name}</p>
-                {this.props.emergencyStatus?<p className="operating-status">{this.props.emergencyType}</p>:""}
                 <p className="operating-status">{this.props.statusText}</p>
                 </div>
             </div>

@@ -6,7 +6,7 @@ import {CONTROLLER_DATA} from '../constants/frontEndConstants';
  * @param  {Action object}
  * @return {[Object] updated state}
  */
-const resTypeControllers = {
+/*const resTypeControllers = {
   "complete_data": [{
       "controller_id": "10000",
       "zone_id": "1",
@@ -14,7 +14,7 @@ const resTypeControllers = {
       "ethernet_network": "disconnected",
       "zigbee_network": "disconnected",
       "sensor_activated": "none",
-      "action_triggered": "zone_pause" | "zone_clear" | "emergency_stop" | "emergency_pause" | "none"
+      "action_triggered": "zone_pause" 
     },
     {
       "controller_id": "20000",
@@ -23,16 +23,16 @@ const resTypeControllers = {
       "ethernet_network": "disconnected",
       "zigbee_network": "disconnected",
       "sensor_activated": "none",
-      "action_triggered": "zone_pause" | "zone_clear" | "emergency_stop" | "emergency_pause" | "none"
+      "action_triggered": "zone_pause" 
     }
   ],
   "resource_type": "controllers"
-}
+}*/
 
 export  function sysControllersReducer(state={},action){
   switch (action.type) {
     case CONTROLLER_DATA:
-      var controllerData=resTypeControllers["complete_data"]
+      var controllerData=action.data["complete_data"]
       return Object.assign({}, state, { 
             "controllers" : controllerData,
             "hasDataChanged":!state.hasDataChanged

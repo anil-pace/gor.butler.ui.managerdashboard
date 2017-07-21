@@ -6986,6 +6986,8 @@ button:disabled {
 
 .gor-zone-wrapper .gor-zone-header {
   padding: 20px 15px;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .gor-zone-wrapper .gor-zone-tile {
@@ -7008,9 +7010,218 @@ button:disabled {
   color: #fff;
 }
 
+.gor-zone-wrapper .gor-zone-tile.operating.stop .gor-zone-status {
+  border: 4px solid #B40313;
+  box-sizing: border-box;
+}
+
+.gor-zone-wrapper .gor-zone-tile.operating.pause {
+  background: #DE0010;
+  border: 4px solid #B40313;
+}
+
+.gor-zone-wrapper .gor-zone-tile.operating.pause p {
+  color: #fff;
+}
+
 .gor-zone-wrapper .gor-zone-tile.operating .gor-zone-status {
   border: 4px solid #00BB9A;
   box-sizing: border-box;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zonePauseActive {
+  background: #F4E822;
+  box-sizing: border-box;
+  border: 4px solid #E7C606;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zonePauseActive.stop {
+  background: #DE0010;
+  border: 4px solid #B40313;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zonePauseActive.stop p {
+  color: #fff;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zonePauseActive.pause {
+  background: #DE0010;
+  border: 4px solid #B40313;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zonePauseActive.pause p {
+  color: #fff;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zonePauseActive .gor-zone-status {
+  border: 4px solid #EC1B2C;
+  box-sizing: border-box;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zonePauseActive .zone-name {
+  color: #515043;
+  font-weight: bold;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zonePauseActive .operating-status {
+  color: #DF2611;
+  font-weight: bold;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zoneClearInit {
+  background: #F4E822;
+  box-sizing: border-box;
+  border: 4px solid #E7C606;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zoneClearInit.stop {
+  background: #DE0010;
+  border: 4px solid #B40313;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zoneClearInit.stop p {
+  color: #fff;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zoneClearInit.pause {
+  background: #DE0010;
+  border: 4px solid #B40313;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zoneClearInit.pause p {
+  color: #fff;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zoneClearInit .gor-zone-status {
+  border: 4px solid #EC1B2C;
+  box-sizing: border-box;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zoneClearInit .zone-name {
+  color: #515043;
+  font-weight: bold;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zoneClearInit .operating-status {
+  color: #DF2611;
+  font-weight: bold;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zoneClearActive {
+  background: #F4E822;
+  box-sizing: border-box;
+  border: 4px solid #E7C606;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zoneClearActive.stop {
+  background: #DE0010;
+  border: 4px solid #B40313;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zoneClearActive.stop p {
+  color: #fff;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zoneClearActive.pause {
+  background: #DE0010;
+  border: 4px solid #B40313;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zoneClearActive.pause p {
+  color: #fff;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zoneClearActive .gor-zone-status {
+  border: 4px solid #EC1B2C;
+  box-sizing: border-box;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zoneClearActive .zone-name {
+  color: #515043;
+  font-weight: bold;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zoneClearActive .operating-status {
+  color: #DF2611;
+  font-weight: bold;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zoneClearDeactivated {
+  background: #F4E822;
+  box-sizing: border-box;
+  border: 4px solid #E7C606;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zoneClearDeactivated.stop {
+  background: #DE0010;
+  border: 4px solid #B40313;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zoneClearDeactivated.stop p {
+  color: #fff;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zoneClearDeactivated.pause {
+  background: #DE0010;
+  border: 4px solid #B40313;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zoneClearDeactivated.pause p {
+  color: #fff;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zoneClearDeactivated .gor-zone-status {
+  border: 4px solid #EC1B2C;
+  box-sizing: border-box;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zoneClearDeactivated .zone-name {
+  color: #515043;
+  font-weight: bold;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zoneClearDeactivated .operating-status {
+  color: #DF2611;
+  font-weight: bold;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zonePauseDeactivated {
+  background: #F4E822;
+  box-sizing: border-box;
+  border: 4px solid #E7C606;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zonePauseDeactivated.stop {
+  background: #DE0010;
+  border: 4px solid #B40313;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zonePauseDeactivated.stop p {
+  color: #fff;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zonePauseDeactivated.pause {
+  background: #DE0010;
+  border: 4px solid #B40313;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zonePauseDeactivated.pause p {
+  color: #fff;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zonePauseDeactivated .gor-zone-status {
+  border: 4px solid #EC1B2C;
+  box-sizing: border-box;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zonePauseDeactivated .zone-name {
+  color: #515043;
+  font-weight: bold;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zonePauseDeactivated .operating-status {
+  color: #DF2611;
+  font-weight: bold;
 }
 
 .gor-zone-wrapper .gor-zone-tile.emergencyStop {
@@ -7026,6 +7237,15 @@ button:disabled {
 }
 
 .gor-zone-wrapper .gor-zone-tile.emergencyStop.stop p {
+  color: #fff;
+}
+
+.gor-zone-wrapper .gor-zone-tile.emergencyStop.pause {
+  background: #DE0010;
+  border: 4px solid #B40313;
+}
+
+.gor-zone-wrapper .gor-zone-tile.emergencyStop.pause p {
   color: #fff;
 }
 
@@ -7050,6 +7270,15 @@ button:disabled {
   color: #fff;
 }
 
+.gor-zone-wrapper .gor-zone-tile.emergencyPause.pause {
+  background: #DE0010;
+  border: 4px solid #B40313;
+}
+
+.gor-zone-wrapper .gor-zone-tile.emergencyPause.pause p {
+  color: #fff;
+}
+
 .gor-zone-wrapper .gor-zone-tile.emergencyPause .gor-zone-status {
   border: 4px solid #B40313;
   box-sizing: border-box;
@@ -7067,6 +7296,15 @@ button:disabled {
 }
 
 .gor-zone-wrapper .gor-zone-tile.zonePauseInit.stop p {
+  color: #fff;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zonePauseInit.pause {
+  background: #DE0010;
+  border: 4px solid #B40313;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zonePauseInit.pause p {
   color: #fff;
 }
 
@@ -7097,6 +7335,15 @@ button:disabled {
 }
 
 .gor-zone-wrapper .gor-zone-tile.zonePauseActive.stop p {
+  color: #fff;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zonePauseActive.pause {
+  background: #DE0010;
+  border: 4px solid #B40313;
+}
+
+.gor-zone-wrapper .gor-zone-tile.zonePauseActive.pause p {
   color: #fff;
 }
 
