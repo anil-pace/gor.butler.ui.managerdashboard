@@ -5,7 +5,7 @@ import React  from 'react';
 import {connect} from 'react-redux'
 import {addTagToBin, fetchTags, addTag} from './../../actions/ppsConfigurationActions'
 import {FETCH_TAGS_URL, SAVE_TAGS_URL} from './../../constants/configConstants'
-import {GET, FETCH_TAGS, APP_JSON, POST, ADD_TAG_TO_LIST} from './../../constants/frontEndConstants'
+import {GET, FETCH_TAGS, APP_JSON, PUT, ADD_TAG_TO_LIST} from './../../constants/frontEndConstants'
 import {FormattedMessage, defineMessages} from 'react-intl'
 const messages = defineMessages({
     tagSearchPlaceholder: {
@@ -105,7 +105,7 @@ class Tags extends React.Component {
          */
         let data = {
             'url': SAVE_TAGS_URL,
-            'method': POST,
+            'method': PUT,
             'cause': ADD_TAG_TO_LIST,
             'formdata': [this.state.filter],
             'contentType': APP_JSON,
