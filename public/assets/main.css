@@ -4658,11 +4658,11 @@ input[type="checkbox"] {
 }
 
 .gor-safetylist .gor-safetysub-head {
-  width: 70%;
+  width: 80%;
   font-family: 'Source Sans Pro Regular', sans-serif;
   font-size: 14px;
   color: #000000;
-  margin-top: 0.3125rem;
+  margin-top: 0.875rem;
 }
 
 .gor-safety-body {
