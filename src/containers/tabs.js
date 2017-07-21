@@ -86,11 +86,11 @@ class Tabs extends React.Component{
     var a=nextProps;
     if(nextProps.system_data=== SOFT_MANUAL && (this.props.system_data=== HARD || !this.props.system_data))
     {
-      this._emergencyRelease(true);
+      this._emergencyRelease();
     }
     else  if(nextProps.fireHazardType ===EMERGENCY_FIRE && !nextProps.firehazadflag && !nextProps.fireHazardNotifyTime)
     {
-      this._FireEmergencyRelease(true);
+      this._FireEmergencyRelease();
     }
     else if(nextProps.system_emergency && !this.props.system_emergency)
     {
