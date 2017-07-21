@@ -27,7 +27,7 @@ class EmergencyRelease extends React.Component{
       size: 'large', // large, medium or small,
       closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: true, // (optional) if you don't wanna show the top right close button
-      EmergencyReleased :true
+      emergencyReleased :true
       //.. all what you put in here you will get access in the modal props ;)
     });
   }
