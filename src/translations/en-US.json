@@ -2232,9 +2232,15 @@
     "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
   },
   {
-    "id": "operation.safety.heading",
+    "id": "operation.firesafety.heading",
     "description": "Text for safety heading",
-    "defaultMessage": "Safety checklist",
+    "defaultMessage": "Resume Checklist",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "operation.safety.heading",
+    "description": "Text for fire safety heading",
+    "defaultMessage": "Safety Checklist",
     "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
   },
   {
@@ -2253,6 +2259,12 @@
     "id": "operation.safety.errors",
     "description": "Text for safety error",
     "defaultMessage": "System has found some of these steps were not followed. \n                    Please check or contact service engineer for support",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "operation.firesafety.confirm",
+    "description": "Text for Resume Opeartion button",
+    "defaultMessage": "Resume Opeartion",
     "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
   },
   {

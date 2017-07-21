@@ -21,9 +21,20 @@
 .gor-safetylist{
 	.gor-usr-details{
 		width: 40%;
+		.gor-safety-hd{
+			font-family:'Source Sans Pro Semibold', sans-serif;
+            font-size:20px;
+            color:#000000;   
+            margin-top:25px; 
+		}
 	}
-	.gor-sub-head{
+	.gor-safetysub-head{
 		width: 70%;
+		font-family:'Source Sans Pro Regular', sans-serif;
+        font-size:14px;
+        color:#000000; 
+        margin-top:calculateRem(5px);  
+       
 	}
 }
 .gor-safety-body{
@@ -46,9 +57,10 @@
 }
 .gor-checklist-item{
 	font-size: 14px;
-	line-height: 1.43;
 	color: #666666;
 	margin-right: 10px;
+	font-family:'Source Sans Pro Regular';
+	letter-spacing: -0.3px
 }
 .gor-resume-operation{
 	width:50%;

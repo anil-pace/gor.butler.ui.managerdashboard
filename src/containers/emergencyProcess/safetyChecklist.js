@@ -181,10 +181,10 @@ class SafetyChecklist extends React.Component{
             <form action="#"  id="safetyForm">
              <div className='gor-usr-form'>
               <div className='gor-usr-details'>
-                <div className='gor-usr-hdsm'><FormattedMessage id='operation.safety.steps' 
+                <div className='gor-safety-hd'><FormattedMessage id='operation.safety.steps' 
                     defaultMessage="Check approval steps"
                             description="Text for approval steps"/></div>
-                <div className='gor-sub-head'><FormattedMessage id='operation.safety.text' 
+                <div className='gor-safetysub-head'><FormattedMessage id='operation.safety.text' 
                     defaultMessage="Tick every item to confirm that the system is safe to resume operation."
                             description="Text for ticking items"/></div>
                 <div className='gor-safety-body'>
