@@ -163,12 +163,15 @@ class PPStable extends React.Component {
 
     handleChange(columnKey, rowIndex, evt) {
         var checkedPPS = JSON.parse(JSON.stringify(this.props.checkedPps));
+        var sortedDataList = this.state.sortedDataList;
+        var selectedData =  sortedDataList._data ? 
+                                sortedDataList._data.newData[sortedDataList._indexMap[rowIndex]]:
+                                sortedDataList.newData[rowIndex];
         if(evt.target.checked){
-            
-            checkedPPS[this.props.items[rowIndex][columnKey]]=this.props.items[rowIndex];
+            checkedPPS[selectedData[columnKey]]=selectedData;
         }
         else{
-            delete checkedPPS[this.props.items[rowIndex][columnKey]];
+            delete checkedPPS[selectedData[columnKey]];
         }
 
        
@@ -178,7 +181,7 @@ class PPStable extends React.Component {
 
 
     _onSortChange(columnKey, sortDir) {
-        if (columnKey=== undefined) {
+        if (!columnKey) {
             columnKey="id"
         }
 

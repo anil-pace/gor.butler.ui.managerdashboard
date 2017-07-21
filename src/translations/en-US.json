@@ -4420,8 +4420,8 @@
   },
   {
     "id": "utility.goodsRcvdNotes.head",
-    "description": "Goods Recieved Notes",
-    "defaultMessage": "Goods Recieved Notes",
+    "description": "Goods Received Notes",
+    "defaultMessage": "Goods Received Notes",
     "filepath": "./src/containers/utilityTab.js"
   },
   {
@@ -4545,9 +4545,21 @@
     "filepath": "./src/utilities/getFormattedMessages.js"
   },
   {
+    "id": "pps.mode.success",
+    "description": "PPS mode change success",
+    "defaultMessage": "Mode change request successfull",
+    "filepath": "./src/utilities/getFormattedMessages.js"
+  },
+  {
     "id": "pps.status.reject",
     "description": "PPS status change reject",
     "defaultMessage": "{unsuccessful}/{totalCount} status change request rejected",
+    "filepath": "./src/utilities/getFormattedMessages.js"
+  },
+  {
+    "id": "pps.status.success",
+    "description": "PPS status change success",
+    "defaultMessage": "Status change request successfull",
     "filepath": "./src/utilities/getFormattedMessages.js"
   },
   {
