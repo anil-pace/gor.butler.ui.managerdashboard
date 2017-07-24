@@ -20,7 +20,7 @@
 }
 .gor-safetylist{
 	.gor-usr-details{
-		width: 40%;
+		width: 50%;
 		.gor-safety-hd{
 			font-family:'Source Sans Pro Semibold', sans-serif;
             font-size:20px;
@@ -43,6 +43,46 @@
 	.tab-alert-icon{
 		margin-right: 10px;
 	}
+	.gor-instruction-table
+    {
+        display: table;
+        margin-left: 40px;
+   
+    
+    .gor-instruction-heading
+    {
+       display: table-row;
+    font-weight: 500;
+    text-align: left;
+    line-height: 1.25;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.54);
+			    .gor-instruction-cell
+			    {
+			    	
+			        display: table-cell;
+			        text-align: left;
+			        padding: 15px;
+			        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+			    }
+    }
+    .gor-instruction-row
+    {
+    display: table-row;
+    font-size: 13px;
+    line-height: 1.15;
+    color: rgba(0, 0, 0, 0.87);
+			     .gor-instruction-cell
+			    {
+			    	
+			        display: table-cell;
+			        text-align: left;
+			        padding: 15px;
+			        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+			    }
+    }
+    
+ }
 }
 .gor-safety-error{
 	border-radius: 3px;
@@ -208,34 +248,4 @@ button:disabled{
 		margin-left:40%;
 	}
 }
-.Table
-    {
-        display: table;
-    }
-    .Title
-    {
-        display: table-caption;
-        text-align: center;
-        font-weight: bold;
-        font-size: larger;
-    }
-    .Heading
-    {
-        display: table-row;
-        font-weight: bold;
-        text-align: center;
-    }
-    .Row
-    {
-        display: table-row;
-    }
-    .Cell
-    {
-        display: table-cell;
-        border: solid;
-        border-width: thin;
-        padding-left: 5px;
-        padding-right: 5px;
-    }
-
 

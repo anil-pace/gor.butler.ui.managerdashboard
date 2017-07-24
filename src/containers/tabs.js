@@ -16,6 +16,7 @@ import OperationStop from '../containers/emergencyProcess/OperationStop';
 import EmergencyRelease from '../containers/emergencyProcess/emergencyRelease'; 
 import fireHazard from '../containers/emergencyProcess/fireHazard'; 
 import GorToastify from '../components/gor-toastify/gor-toastify';
+import SafetyChecklist from './emergencyProcess/safetyChecklist';
 
 
 class Tabs extends React.Component{
@@ -66,21 +67,37 @@ class Tabs extends React.Component{
       });
   }
   _emergencyRelease(){
-      modal.add(EmergencyRelease, {
-        title: '',
-        size: 'large', // large, medium or small,
+      // modal.add(EmergencyRelease, {
+      //   title: '',
+      //   size: 'large', // large, medium or small,
+      // closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      // hideCloseButton: false
+      // });  
+        modal.add(SafetyChecklist, {
+      title: '',
+      size: 'large', // large, medium or small,
       closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-      hideCloseButton: false
-      });  
+      hideCloseButton: true, // (optional) if you don't wanna show the top right close button
+      //emergency_type:typeFlag
+      //.. all what you put in here you will get access in the modal props ;)
+      });
 
   }
     _FireEmergencyRelease(){
-      modal.add(fireHazard, {
-        title: '',
-        size: 'large customColor', // large, medium or small,
+      // modal.add(fireHazard, {
+      //   title: '',
+      //   size: 'large customColor', // large, medium or small,
+      // closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      // hideCloseButton: false
+      // });  
+       modal.add(SafetyChecklist, {
+      title: '',
+      size: 'large', // large, medium or small,
       closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-      hideCloseButton: false
-      });     
+      hideCloseButton: true, // (optional) if you don't wanna show the top right close button
+      //emergency_type:typeFlag
+      //.. all what you put in here you will get access in the modal props ;)
+      });   
   }
   componentWillReceiveProps(nextProps){
     var a=nextProps;
@@ -99,6 +116,7 @@ class Tabs extends React.Component{
     else if(nextProps.system_data=== SOFT && this.props.system_data=== SOFT_MANUAL){
       this._stopOperation(true);
     }
+    
   }
   _parseStatus()
   {

@@ -14,18 +14,27 @@ export  function emergency(state={},action){
           })
           break;
     case SAFETY_MAP:
+    // if(action.data.botList.length>0){
+    //   safetyList=action.data.safetyList.push('md013');md014
+    // }
           return Object.assign({},state,{
             //"safetyList":action.data
-            safetyList:['md007','md008','md009','md010','md011','md012'],
+            safetyList:['md007','md008','md009','md010','md011','md012','md013'],
             botList:[{
-              botid:"Bot1",
-              botDirection:"North",
-              rackid:"Rack02"
+              bot_id:"Bot1",
+              rack_id:"Rack01",
+              rack_location:"North",
+              rack_face:"South",
+              pps_id:"PPS1",
+              pps_location:"Location1dsvdsfdsfsdsdfssfs"
             },
             {
-              botid:"Bot13",
-              botDirection:"South",
-              rackid:"Rack03"
+              bot_id:"Bot2",
+              rack_id:"Rack01",
+              rack_location:"South",
+              rack_face:"South",
+              pps_id:"PPS1",
+              pps_location:"Location2"
             }
             ]
           });

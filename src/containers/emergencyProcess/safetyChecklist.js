@@ -164,8 +164,14 @@ class SafetyChecklist extends React.Component{
     var botCheckList=[],items=this.props.botList, noItems, bots, msgCode;
    var butlerDetails=this.props.botList;
     for(let i=0;i<butlerDetails.length;i++){
-      bots=(<div className='Row'><div className='Cell'><p>{butlerDetails[i].botid}</p> </div>
-<div className='Cell'><p>{butlerDetails[i].botDirection}</p></div><div className='Cell'><p>{butlerDetails[i].rackid}</p></div></div>);
+      bots=(<div className='gor-instruction-row'>
+<div className='gor-instruction-cell'><p>{butlerDetails[i].bot_id}</p> </div>
+<div className='gor-instruction-cell'><p>{butlerDetails[i].rack_id}</p></div>
+<div className='gor-instruction-cell'><p>{butlerDetails[i].rack_location}</p></div>
+<div className='gor-instruction-cell'><p>{butlerDetails[i].rack_face}</p> </div>
+<div className='gor-instruction-cell'><p>{butlerDetails[i].pps_id}</p></div>
+<div className='gor-instruction-cell'><p>{butlerDetails[i].pps_location}</p></div>
+</div>);
      
       botCheckList.push(bots);    
     }
@@ -177,6 +183,7 @@ class SafetyChecklist extends React.Component{
   {
       var checkList=this._processList();
       var botchecklist=this._processTableList();
+      this.props.botList;
       return (
         <div className='gor-safetylist'>
           <div className="gor-modal-content">
@@ -206,32 +213,40 @@ class SafetyChecklist extends React.Component{
                  {this.state.safetyError && 
                   (<div className='gor-safety-error'>
                     <div className='tab-alert-icon'></div>
-                    <div className='gor-error-sm'><FormattedMessage id='operation.safety.errors' 
-                    defaultMessage="System has found some of these steps were not followed. 
-                    Please check or contact service engineer for support"
+                    <div className='gor-error-sm'><FormattedMessage id='operation.safetychecklist.errors' 
+                    defaultMessage="System has detected that one or more of the required conditions have not been fulfilled. 
+                    Please try again or contact service engineer for support"
                             description="Text for safety error"/></div>
                   </div>)
                   }
                   <ul>
                   {checkList.length>0?checkList:''}
                   </ul>
-                  <div className="Table">
-                  <div className="Title">
-                  <p>Please Follow below instruction</p>
+{this.props.botList.length>0?
+                  (<div className="gor-instruction-table">
+                  <div className="gor-instruction-heading">
+                  <div className="gor-instruction-cell">
+                  <p>Bot ID</p>
                   </div>
-                  <div className="Heading">
-                  <div className="Cell">
-                  <p>Bot ID </p>
-                  </div>
-                  <div className="Cell">
-                  <p>BOT Direction</p>
-                  </div>
-                  <div className="Cell">
+                  <div className="gor-instruction-cell">
                   <p>Rack ID</p>
+                  </div>
+                  <div className="gor-instruction-cell">
+                  <p>Rack location</p>
+                  </div>
+                  <div className="gor-instruction-cell">
+                  <p>Rack face</p>
+                  </div>
+                   <div className="gor-instruction-cell">
+                  <p>PPS ID</p>
+                  </div>
+                   <div className="gor-instruction-cell">
+                  <p>PPS location</p>
                   </div>
                   </div>
                 {botchecklist}
-                  </div>
+                  </div>):""
+}
                  </div>
                 <div className='gor-margin-top'>
                 {this.props.emergency_type===EMERGENCY_FIRE?
