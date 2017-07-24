@@ -218,7 +218,7 @@ singleNotification=<GorToastify key={1}>
                             description="Text to resume operation"/>
                   <span className="gor-toastify-updated-time">{timeText}</span>
                   </p>
-                  <span className="gor-toastify-closedetails">
+                  <span className="gor-toastify-details">
 <span className="closeButton"  onClick={this._openPopup}></span>
 </span>
      </div>
