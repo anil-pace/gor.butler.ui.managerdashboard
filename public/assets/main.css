@@ -6911,8 +6911,17 @@ button:disabled {
   cursor: pointer;
 }
 
-.gor-toastify .gor-toastify-content .gor-toastify-details.closeButton {
-  font-size: 24px;
+.gor-toastify .gor-toastify-content .gor-toastify-closedetails {
+  width: 60px;
+  height: 50px;
+  font-size: 14px;
+  text-align: center;
+  float: right;
+  border-left: solid 1px rgba(255, 255, 255, 0.2);
+}
+
+.gor-toastify .gor-toastify-content .gor-toastify-closedetails .closeButton {
+  background-image: url(./images/hazard-strip.svg);
 }
 
 .gor-toastify .gor-toastify-content .gor-toastify-updated-time {
