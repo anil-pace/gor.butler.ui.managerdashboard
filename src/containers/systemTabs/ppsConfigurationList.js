@@ -3,7 +3,7 @@
  */
 import React  from 'react';
 import {connect} from 'react-redux';
-import {fetchPPSProfiles,selectPPSProfileForConfiguration,fetchAndSelectPPSProfileForConfiguration} from './../../actions/ppsConfigurationActions'
+import {fetchPPSProfiles,selectPPSProfileForConfiguration,fetchAndSelectPPSProfileForConfiguration,setPPSConfigurationSpinner} from './../../actions/ppsConfigurationActions'
 import {GET,FETCH_PPS_PROFILES,APP_JSON,FETCH_PROFILE_FOR_PPS} from './../../constants/frontEndConstants'
 import {PPS_LIST_URL,PPS_PROFILE_URL} from './../../constants/configConstants'
 import {FormattedMessage} from 'react-intl'
@@ -35,6 +35,7 @@ class PPSList extends React.Component {
             'accept': APP_JSON,
             'token': this.props.auth_token
         }
+        this.props.setPPSConfigurationSpinner(true)
         this.props.fetchPPSProfiles(userData)
     }
 
@@ -53,6 +54,7 @@ class PPSList extends React.Component {
                 'accept': APP_JSON,
                 'token': this.props.auth_token
             }
+            this.props.setPPSConfigurationSpinner(true)
             this.props.fetchAndSelectPPSProfileForConfiguration(data)
         } else if(this.props.selectedPPS && pps.pps_id===this.props.selectedPPS.pps_id){
             //Already Selected PPS, Do Nothing
@@ -131,6 +133,9 @@ var mapDispatchToProps = function (dispatch) {
         },
         fetchAndSelectPPSProfileForConfiguration: function (data) {
             dispatch(fetchAndSelectPPSProfileForConfiguration(data))
+        },
+        setPPSConfigurationSpinner: function (data) {
+            dispatch(setPPSConfigurationSpinner(data))
         },
     }
 };

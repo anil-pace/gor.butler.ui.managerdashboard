@@ -126,7 +126,7 @@ import {
 	recieveAllNotifications,
 	recieveAllSearchedNotifications
 } from "../actions/notificationAction";
-import {receivePPSProfiles, receiveTags,selectPPSProfileForConfiguration,profileCreated,savedPPSProfile,tagAddedToList} from './../actions/ppsConfigurationActions'
+import {receivePPSProfiles, receiveTags,selectPPSProfileForConfiguration,profileCreated,savedPPSProfile,tagAddedToList,setPPSConfigurationSpinner} from './../actions/ppsConfigurationActions'
 
 export function AjaxParse(store, res, cause, status, saltParams) {
 	let stringInfo = {};
@@ -445,24 +445,30 @@ export function AjaxParse(store, res, cause, status, saltParams) {
 			store.dispatch(recieveAllSearchedNotifications(res));
 			break;
         case FETCH_PPS_PROFILES:
+        	store.dispatch(setPPSConfigurationSpinner(false))
             store.dispatch(receivePPSProfiles(res))
             break;
 
         case FETCH_PROFILE_FOR_PPS:
+            store.dispatch(setPPSConfigurationSpinner(false))
             store.dispatch(selectPPSProfileForConfiguration({profile:res}))
             break;
         case FETCH_TAGS:
+            store.dispatch(setPPSConfigurationSpinner(false))
             store.dispatch(receiveTags(res))
             break;
 		case CREATE_NEW_PROFILE:
+            store.dispatch(setPPSConfigurationSpinner(false))
             store.dispatch(profileCreated(res))
             break;
 
 		case SAVE_PPS_PROFILE:
+            store.dispatch(setPPSConfigurationSpinner(false))
 			store.dispatch(savedPPSProfile(res))
 			break;
 
         case ADD_TAG_TO_LIST:
+            store.dispatch(setPPSConfigurationSpinner(false))
             store.dispatch(tagAddedToList(res))
             break;
 

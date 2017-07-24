@@ -17,12 +17,13 @@ import {hashHistory} from 'react-router'
 import Tags from './tags'
 import Bins from './ppsConfigurationBins'
 import PPSList from "./ppsConfigurationList";
-import {cancelProfileChanges,savePPSProfile} from './../../actions/ppsConfigurationActions'
+import {cancelProfileChanges,savePPSProfile,setPPSConfigurationSpinner} from './../../actions/ppsConfigurationActions'
 import {modal} from 'react-redux-modal'
 import CreateProfile from './createPPSProfile'
 import {FormattedMessage} from 'react-intl'
 import {PUT,APP_JSON,SAVE_PPS_PROFILE} from './../../constants/frontEndConstants'
 import {SAVE_PROFILE_URL} from './../../constants/configConstants'
+import Spinner from './../../components/spinner/Spinner';
 
 
 class PPSConfiguration extends React.Component {
@@ -131,6 +132,7 @@ class PPSConfiguration extends React.Component {
             'accept': APP_JSON,
             'token': this.props.auth_token
         }
+        this.props.setPPSConfigurationSpinner(true)
         this.props.savePPSProfile(data)
     }
 
@@ -139,6 +141,7 @@ class PPSConfiguration extends React.Component {
         let self=this
         return (
             <div className="pps-configuration-container">
+                <Spinner isLoading={self.props.ppsConfigurationSpinner} setSpinner={self.props.setPPSConfigurationSpinner}/>
                 <PPSList/>
                 <div className="pps-configuration-details-container">
                     <div className="pps-configuration-navigation-tabs">
@@ -203,7 +206,8 @@ function mapStateToProps(state, ownProps) {
         socketAuthorized: state.recieveSocketActions.socketAuthorized,
         selectedProfile: state.ppsConfiguration.selectedProfile || {name: null},
         selectedPPS: state.ppsConfiguration.selectedPPS,
-        selectedPPSBin:state.ppsConfiguration.selectedPPSBin
+        selectedPPSBin:state.ppsConfiguration.selectedPPSBin,
+        ppsConfigurationSpinner:state.ppsConfiguration.ppsConfigurationSpinner
     };
 }
 
@@ -225,6 +229,9 @@ var mapDispatchToProps = function (dispatch) {
         },
         savePPSProfile: function (data) {
             dispatch(savePPSProfile(data));
+        },
+        setPPSConfigurationSpinner: function (data) {
+            dispatch(setPPSConfigurationSpinner(data))
         },
 
 

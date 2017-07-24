@@ -9,7 +9,7 @@ import {
     ADD_TAG_TO_BIN,
     CLEAR_SELECTION_PPS_BIN,
     CHANGE_PPS_BIN_STATUS,
-    RECEIVE_TAGS, CANCEL_PROFILE_CHANGES,CHANGE_PPS_BIN_GROUP_STATUS,SELECT_PPS_BIN_GROUP,PPS_PROFILE_CREATED,PPS_PROFILE_SAVED,TAG_ADDED_TO_LIST
+    RECEIVE_TAGS, CANCEL_PROFILE_CHANGES,CHANGE_PPS_BIN_GROUP_STATUS,SELECT_PPS_BIN_GROUP,PPS_PROFILE_CREATED,PPS_PROFILE_SAVED,TAG_ADDED_TO_LIST,DISPLAY_PPS_CONFIGURATION_SPINNER
 } from '../constants/frontEndConstants';
 /**
  * @param  {State Object}
@@ -244,6 +244,12 @@ export function ppsConfiguration(state = {}, action) {
                 selectedPPS: selected_pps,
                 ppsList:pps_list,
                 profileCreatedAt:new Date().getTime()
+            })
+
+        case DISPLAY_PPS_CONFIGURATION_SPINNER:
+            return Object.assign({}, state, {
+                ppsConfigurationSpinner: action.data
+
             })
 
         default:

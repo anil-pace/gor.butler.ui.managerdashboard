@@ -3,7 +3,7 @@
  */
 import React  from 'react';
 import {connect} from 'react-redux'
-import {addTagToBin, fetchTags, addTag} from './../../actions/ppsConfigurationActions'
+import {addTagToBin, fetchTags, addTag,setPPSConfigurationSpinner} from './../../actions/ppsConfigurationActions'
 import {FETCH_TAGS_URL, SAVE_TAGS_URL} from './../../constants/configConstants'
 import {GET, FETCH_TAGS, APP_JSON, PUT, ADD_TAG_TO_LIST} from './../../constants/frontEndConstants'
 import {FormattedMessage, defineMessages} from 'react-intl'
@@ -48,6 +48,7 @@ class Tags extends React.Component {
             'accept': APP_JSON,
             'token': this.props.auth_token
         }
+        this.props.setPPSConfigurationSpinner(true)
         this.props.fetchTags(data)
     }
 
@@ -112,6 +113,7 @@ class Tags extends React.Component {
             'accept': APP_JSON,
             'token': this.props.auth_token
         }
+        this.props.setPPSConfigurationSpinner(true)
         this.props.addTag(data)
 
     }
@@ -209,6 +211,9 @@ var mapDispatchToProps = function (dispatch) {
         },
         addTag: function (data) {
             dispatch(addTag(data))
+        },
+        setPPSConfigurationSpinner: function (data) {
+            dispatch(setPPSConfigurationSpinner(data))
         }
     }
 };
