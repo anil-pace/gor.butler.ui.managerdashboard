@@ -6,7 +6,7 @@ import {modal} from 'react-redux-modal';
 import {validatePassword, modalFormReset} from '../../actions/validationActions';
 import { emptyField } from '../../utilities/fieldCheck';
 import {LOGIN_URL} from '../../constants/configConstants';
-import {ERROR,APP_JSON,POST,SUCCESS,RESUME_OPERATION,EMERGENCY_FIRE} from '../../constants/frontEndConstants';
+import {ERROR,APP_JSON,POST,SUCCESS,RESUME_OPERATION,EMERGENCY_FIRE,SYSTEM_EMERGENCY} from '../../constants/frontEndConstants';
 import SafetyChecklist from './safetyChecklist';
 
 class ResumeOperation extends React.Component{
@@ -31,12 +31,14 @@ class ResumeOperation extends React.Component{
       this._removeThisModal();
     }
     if(nextProps.modalStatus && !this.props.modalStatus){
+      let typeFlag=this.props.fireHazardPressed?EMERGENCY_FIRE:SYSTEM_EMERGENCY
       this._removeThisModal();
       modal.add(SafetyChecklist, {
       title: '',
       size: 'large', // large, medium or small,
       closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: true, // (optional) if you don't wanna show the top right close button
+      emergency_type:typeFlag
       //.. all what you put in here you will get access in the modal props ;)
       });
     }
