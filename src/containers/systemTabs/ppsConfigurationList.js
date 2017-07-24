@@ -45,7 +45,7 @@ class PPSList extends React.Component {
              * Otherwise onClick of PPS would also get called
              */
             event.stopPropagation()
-            let url=PPS_PROFILE_URL+profile.name
+            let url=[PPS_PROFILE_URL,pps.pps_id,profile.name].join("/")
             let data={
                 'url': url,
                 'method': GET,
