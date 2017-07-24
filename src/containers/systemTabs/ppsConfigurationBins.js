@@ -182,7 +182,7 @@ class Bins extends React.Component {
                                     <span className="gor-tag-icon-grey"/>{bin.tags.length} <FormattedMessage id="pps.configuration.bins.tagCount.text"
                                                                                                              description="Tag"
                                                                                                              defaultMessage="Tag"/></span>
-                                <span className="pps-bin-info">{bin_id}</span>
+                                <span className="pps-bin-info">{bin.pps_bin_id}</span>
                             </span>
                         </div>}
 
@@ -200,7 +200,7 @@ class Bins extends React.Component {
                             <span className={["pps-bin",(!bin.enabled?'disabled':'')].join(" ")}>
                                 <span className="pps-bin-tag-info">
                                     <span style={{display:'inline-block',width:16,height:16}}/> </span>
-                                <span className="pps-bin-info">{bin_id}</span>
+                                <span className="pps-bin-info">{bin.pps_bin_id}</span>
                             </span>
                         </div>}
 
@@ -216,7 +216,7 @@ class Bins extends React.Component {
                             <span className={["pps-bin",(!bin.enabled?'disabled':'')].join(" ")}>
                                 <span className="pps-bin-tag-info">
                                     <span style={{display:'inline-block',width:16,height:16}}/> </span>
-                                <span className="pps-bin-info">{bin_id}</span>
+                                <span className="pps-bin-info">{bin.pps_bin_id}</span>
                             </span>
                         </div>}
                     </div>
