@@ -6877,6 +6877,7 @@ button:disabled {
   box-sizing: border-box;
   z-index: 2;
   border-radius: 6px;
+  width: 400px;
 }
 
 .gor-toastify .gor-toastify-content {
@@ -6887,7 +6888,7 @@ button:disabled {
   font-size: 16px;
   text-align: left;
   background-color: #ec1c2d;
-  padding: 25px;
+  padding: 20px;
   border-radius: 6px;
 }
 
@@ -6896,13 +6897,14 @@ button:disabled {
 }
 
 .gor-toastify .gor-toastify-content .msg-content {
-  width: 300px;
+  width: 275px;
   display: inline-block;
   margin-top: -10px;
 }
 
 .gor-toastify .gor-toastify-content .gor-toastify-details {
-  width: 70px;
+  max-width: 80px;
+  min-width: 50px;
   height: 50px;
   font-size: 14px;
   text-align: center;
@@ -6911,8 +6913,19 @@ button:disabled {
   cursor: pointer;
 }
 
+<<<<<<< HEAD
 .gor-toastify .gor-toastify-content .gor-toastify-details.closeButton {
   font-size: 24px;
+=======
+.gor-toastify .gor-toastify-content .gor-toastify-details .closeButton {
+  background-image: url(./images/close.png);
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  margin-top: 15px;
+  cursor: pointer;
+  margin-left: 10px;
+>>>>>>> 259304e... Added close icon and fixed  ui issues
 }
 
 .gor-toastify .gor-toastify-content .gor-toastify-updated-time {

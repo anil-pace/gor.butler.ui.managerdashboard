@@ -218,8 +218,14 @@ singleNotification=<GorToastify key={1}>
                             description="Text to resume operation"/>
                   <span className="gor-toastify-updated-time">{timeText}</span>
                   </p>
+<<<<<<< HEAD
                   <span className="gor-toastify-details closeButton"  onClick={this._openPopup}>×</span>
 
+=======
+                  <span className="gor-toastify-details">
+<span className="closeButton"  onClick={this._openPopup}></span>
+</span>
+>>>>>>> 259304e... Added close icon and fixed  ui issues
      </div>
      
     </GorToastify>
