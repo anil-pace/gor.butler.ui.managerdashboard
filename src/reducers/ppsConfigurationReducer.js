@@ -85,7 +85,7 @@ export function ppsConfiguration(state = {}, action) {
                     return pps
                 })
             }else{
-                selected_profile=selected_pps.pps_profiles.filter(function(profile){return profile.applied})[0]
+                selected_profile=selected_pps.pps_profiles.filter(function(profile){return profile.pps_bin_details})[0]
             }
 
             return Object.assign({}, state, {

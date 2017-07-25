@@ -28,7 +28,7 @@ class Bins extends React.Component {
              * Profile changed from left hand side pane
              */
 
-            if (nextProps.selectedProfile.pps_bin_details.filter(function (bin) {
+            if (nextProps.selectedProfile && nextProps.selectedProfile.pps_bin_details.filter(function (bin) {
                     return bin.direction !== 'center'
                 }).length !== 0) {
                 this.setBinDirection('left')
