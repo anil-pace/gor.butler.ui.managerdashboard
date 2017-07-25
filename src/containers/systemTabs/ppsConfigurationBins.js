@@ -167,7 +167,7 @@ class Bins extends React.Component {
                 </div>
                 {self.state.currentBinDirection && <div style={{width: '35%', 'float': 'right', fontSize: '14'}}>
                     <span style={{padding: '5px 10px', color: "#999"}}>Current PPS Selection</span>
-                    <span className="currentBinDirection" style={{padding: '5px 10px', border: '1px solid #ccc'}}>
+                    <span className="currentBinDirection" style={{padding: '5px 10px', border: '1px solid #ccc',borderRadius:20}}>
                         <span className={self.state.currentBinDirection === 'left' ? 'active' : null}
                               onClick={self.setBinDirection.bind(this, 'left')}
                               style={{padding: '5px 10px', cursor: 'pointer'}}>LEFT</span>
@@ -197,7 +197,7 @@ class Bins extends React.Component {
 
                 {self.state.currentBinDirection && <div style={{width: '35%', 'float': 'right', fontSize: '14'}}>
                     <span style={{padding: '5px 10px', color: "#999"}}>Current PPS Selection</span>
-                    <span className="currentBinDirection" style={{padding: '5px 10px', border: '1px solid #ccc'}}>
+                    <span className="currentBinDirection" style={{padding: '5px 10px', border: '1px solid #ccc',borderRadius:20}}>
                         <span className={self.state.currentBinDirection === 'left' ? 'active' : null}
                               onClick={self.setBinDirection.bind(this, 'left')}
                               style={{padding: '5px 10px', cursor: 'pointer'}}>LEFT</span>
@@ -226,7 +226,7 @@ class Bins extends React.Component {
 
                 {self.state.currentBinDirection && <div style={{width: '35%', 'float': 'right', fontSize: '14'}}>
                     <span style={{padding: '5px 10px', color: "#999"}}>Current PPS Selection</span>
-                    <span className="currentBinDirection" style={{padding: '5px 10px', border: '1px solid #ccc'}}>
+                    <span className="currentBinDirection" style={{padding: '5px 10px', border: '1px solid #ccc',borderRadius:20}}>
                         <span className={self.state.currentBinDirection === 'left' ? 'active' : null}
                               onClick={self.setBinDirection.bind(this, 'left')}
                               style={{padding: '5px 10px', cursor: 'pointer'}}>LEFT</span>
