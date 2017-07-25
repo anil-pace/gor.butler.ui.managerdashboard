@@ -3,9 +3,14 @@ import {SINGLE,ADD_TOKEN, ADD_DEFAULT,REMOVE_TOKEN} from '../../constants/frontE
 
 
 class FilterToken extends React.Component{
-	
+	constructor(props) {
+        super(props);
+        
+        
+    }
+
    _handleTokenClick() {
-    var selectedToken=this.props.tokenSelected[this.props.tokenField],tokenFound=false;
+    var selectedToken=this.props.tokenSelected ? this.props.tokenSelected[this.props.tokenField] : null,tokenFound=false;
     var selectedOption=this.props.selection;
     var tokenSelect=this.props.tokenLabel.value;
 
@@ -42,7 +47,7 @@ class FilterToken extends React.Component{
 
 
 render(){
-    var selectedToken=this.props.tokenSelected[this.props.tokenField];
+    var selectedToken= this.props.tokenSelected ? this.props.tokenSelected[this.props.tokenField] : null;
     var selectedState=(selectedToken?(selectedToken.indexOf(this.props.tokenLabel.value)>=0?true:false):false)
     return (
      <div className="gor-filter-token-container">

@@ -248,6 +248,36 @@ export const StatusCell=({rowIndex, data, columnKey,statusKey, ...props})=> (
   </Cell>
 );
 
+export const ConnectionDetailsCell=({rowIndex, data, columnKey,subColumnKey,setClass, ...props})=>{ 
+  
+ const children = React.Children.map(props.children, (child,idx) => {
+      return (
+        <div className="connectionDetails">{child}<span>{idx === 0 ? data.getObjectAt(rowIndex)[columnKey] : data.getObjectAt(rowIndex)[subColumnKey]}</span></div> 
+      );
+    });
+
+  return(<Cell {...props} >
+    {children}
+  </Cell>)
+};
+
+export const OperatingModeCell=({rowIndex, data, columnKey,subColumnKey,classKey,setClass, ...props})=>{ 
+  
+ const children = (<div className={"actionTriggered "+classKey}>
+    <div className="action-left">
+      <span className={"action-icon "+data.getObjectAt(rowIndex)[classKey]}></span>
+    </div>
+    <div className="action-right">
+      <p>{data.getObjectAt(rowIndex)[columnKey]}</p>
+      <p>{data.getObjectAt(rowIndex)[subColumnKey]}</p>
+    </div>
+  </div>)
+
+  return(<Cell {...props} >
+    {children}
+  </Cell>)
+};
+
 export const AuditStatusCell=({rowIndex, data, columnKey,statusKey,descriptionKey, ...props})=> (
   <Cell {...props}>
       <Cell className={[data.getObjectAt(rowIndex)[statusKey]] } style={{padding:0}}>

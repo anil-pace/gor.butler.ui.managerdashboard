@@ -6863,7 +6863,7 @@ button:disabled {
   border-right: 5px solid transparent;
   border-bottom: 9px solid #A6A7A9;
   border-color: none;
-  border-style: solid;
+  border-style: none;
 }
 
 .gor-dropdown-option {
@@ -6978,6 +6978,7 @@ button:disabled {
 .gor-menuWrap .gor-sys-btn {
   border: solid 1px #B9B9B9;
   color: #525252;
+  cursor: pointer;
 }
 
 .gor-zone-wrapper {
@@ -7386,4 +7387,16 @@ button:disabled {
 .gor-zone-wrapper .gor-zt-wrap {
   background: #EEEEEE;
   padding: 15px;
+}
+
+.connectionDetails {
+  line-height: 25px;
+}
+
+.connectionDetails span:first-child {
+  margin-right: 15px;
+}
+
+.connectionDetails span:nth-child(2) {
+  color: #49BE7E;
 }

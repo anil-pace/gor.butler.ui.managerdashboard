@@ -38,7 +38,7 @@ class OperationStop extends React.Component{
                 <div className='gor-alert-lg'></div>
                   <div className='gor-delete-line'>
                     <div className='gor-delete-query gor-error-lg'>{this.props.emergencyPress?(<FormattedMessage id='operation.alert.stop' 
-                    defaultMessage="Operation Stopped"
+                    defaultMessage="Butler System - Operation Stopped"
                             description="Text for operation stopped heading"/>):(<FormattedMessage id='operation.alert.pause' 
                     defaultMessage="Operation Paused"
                             description="Text for operation paused heading"/>)}
@@ -47,8 +47,12 @@ class OperationStop extends React.Component{
                   <div className='gor-margin-top'>
                     <div className='gor-error-md'>
                     {this.props.emergencyPress?(<FormattedMessage id='operation.alert.stop.text' 
-                    defaultMessage="Emergency Stop button has been pressed."
-                            description="Text for emergency button press"/>):(<FormattedMessage id='operation.alert.pause.text' 
+                    defaultMessage="Emergency-Stop activated via Conroller {controller} in {zone}."
+                            description="Text for emergency button press"
+                            values={{
+                              controller:this.props.controller,
+                              zone:this.props.zone
+                            }}/>):(<FormattedMessage id='operation.alert.pause.text' 
                     defaultMessage="Butler operation has been paused from the management dashboard"
                             description="Text for operation paused alert"/>)}
                     </div>

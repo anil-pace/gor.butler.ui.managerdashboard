@@ -3,7 +3,7 @@ import ReactDOM  from 'react-dom';
 import {Link} from 'react-router';
 import {
     RECIEVE_HEADER, HEADER_START_TIME, REQUEST_HEADER, RECIEVE, RECIEVE_ITEM_TO_STOCK,
-    GET, SOFT_MANUAL, RECEIVE_SHIFT_START_TIME
+    GET, SOFT_MANUAL, SOFT,HARD,RECEIVE_SHIFT_START_TIME
 } from '../../constants/frontEndConstants';
 import {stringConfig} from '../../constants/backEndConstants';
 import {HEADER_URL, GET_SHIFT_START_TIME_URL} from '../../constants/configConstants'
@@ -178,9 +178,9 @@ class Header extends React.Component {
                 fnButton: '', buttonText: ''
             });
             if (this.props.system_data !== SOFT_MANUAL) {
-                optionAction=(<FormattedMessage id="header.option.release" description='release operation option'
+               /* optionAction=(<FormattedMessage id="header.option.release" description='release operation option'
                                                   defaultMessage='Release the Emergency Stop button from the Zigbee box in order
-        						to resume operation.'/>);
+        						to resume operation.'/>);*/
                 optionList.push({
                     optionClass: '', icon: '', optionText: optionAction,
                     fnButton: '', buttonText: buttonText
@@ -216,6 +216,56 @@ class Header extends React.Component {
             timeZoneName: 'long',
             hour12: false
         })
+        var emergencyDropDown;
+        if(!this.props.system_emergency){
+            emergencyDropDown = (<section className='gor-hamburger-option'  >
+                                <h1><FormattedMessage id="header.zones.status" description='Zone status '
+                                            defaultMessage='SYSTEM NORMAL'
+                                           /></h1>
+                                <p><FormattedMessage id="header.zones.inOperation" description='Zone in operation count '
+                                            defaultMessage='{activeZones}/{totalZones} zones in operation'
+                                            values={{
+                                                activeZones: this.props.zoneHeader.active_zones,
+                                                totalZones:this.props.zoneHeader.total_zones
+                                            }}/></p>
+                                
+                            </section>)
+        }
+        else if(this.props.system_emergency && this.props.system_data === HARD){
+            emergencyDropDown =(<section className='gor-hamburger-option'  >
+                                <h1><FormattedMessage id="header.zones.emergency" description='System Emergency'
+                                            defaultMessage='SYSTEM EMERGENCY'
+                                           /></h1>
+                                <p>{this.props.zoneHeader.active_zones ? <FormattedMessage id="header.zones.inOperation1" description='Zone in operation count '
+                                            defaultMessage='{activeZones} zones in operation'
+                                            values={{
+                                                activeZones: this.props.zoneHeader.active_zones
+                                            }}/> : <FormattedMessage id="header.zones.noOperation" description='Zone in operation count '
+                                            defaultMessage='No zones in operation'
+                                            />}</p>
+                                <p><FormattedMessage id="header.option.release" description='release operation option'
+                              defaultMessage='Release the Emergency Stop button from the Zigbee box in order
+                              to resume operation.'/></p>
+                                
+                            </section>)
+        }
+        else if(this.props.system_emergency && (this.props.system_data === SOFT_MANUAL || this.props.system_data === SOFT)){
+            emergencyDropDown =(<section className='gor-hamburger-option'  >
+                                <h1><FormattedMessage id="header.zones.emergency" description='System Emergency'
+                                            defaultMessage='SYSTEM EMERGENCY'
+                                           /></h1>
+                                <p>{this.props.zoneHeader.active_zones ? <FormattedMessage id="header.zones.inOperation2" description='Zone in operation count '
+                                            defaultMessage='{activeZones} zones in operation'
+                                            values={{
+                                                activeZones: this.props.zoneHeader.active_zones
+                                            }}/> : <FormattedMessage id="header.zones.noOperation" description='Zone in operation count '
+                                            defaultMessage='No zones in operation'
+                                            />}</p>
+                                <button onClick={this._showModal} className="gor-sys-btn"> <FormattedMessage id="header.button.resume" description='Button text'
+                                defaultMessage='Resume System'
+                                /></button>
+                            </section>)
+        }
         return (
             <header className="gorHeader head">
                 <div className="mainBlock">
@@ -254,30 +304,7 @@ class Header extends React.Component {
                                     
                                 </div>
                             <div className='gor-hamburger-wrapper' style={(instance.state.menuVisible)?{display:'block'}:{display:'none'}}>
-                            {!this.props.system_emergency ? 
-                                <section className='gor-hamburger-option'  >
-                                <h1><FormattedMessage id="header.zones.status" description='Zone status '
-                                            defaultMessage='SYSTEM NORMAL'
-                                           /></h1>
-                                <p><FormattedMessage id="header.zones.inOperation" description='Zone in operation count '
-                                            defaultMessage='{totalZones} zones in operation'
-                                            values={{
-                                                totalZones: this.props.zoneHeader.total_zones
-                                            }}/></p>
-                                
-                            </section> : <section className='gor-hamburger-option'  >
-                                <h1><FormattedMessage id="header.zones.emergency" description='System Emergency'
-                                            defaultMessage='SYSTEM EMERGENCY'
-                                           /></h1>
-                                <p><FormattedMessage id="header.zones.inOperation" description='Zone in operation count '
-                                            defaultMessage='{totalZones} zones in operation'
-                                            values={{
-                                                totalZones: this.props.zoneHeader.total_zones
-                                            }}/></p>
-                                <button onClick={this._showModal} className="gor-sys-btn"> <FormattedMessage id="header.button.resume" description='Button text'
-                                defaultMessage='Resume System'
-                                /></button>
-                            </section>}
+                            {emergencyDropDown}
                             <section className="gor-all-zone">
                             <Link to="/system/sysOverview" >
                             <FormattedMessage id="header.zones.viewAll" description='View all system details'
@@ -344,8 +371,6 @@ function mapStateToProps(state, ownProps) {
         authToken: state.authLogin.auth_token,
         username: state.authLogin.username,
         system_emergency: state.tabsData.system_emergency || null,
-        emergencyData:state.zoningReducer.emergencyData || {},
-        system_status: state.tabsData.status || null,
         system_data: state.tabsData.system_data || null,
         activeModalKey: state.appInfo.activeModalKey || 0,
         zoneHeader:state.zoningReducer.zoneHeader || {},

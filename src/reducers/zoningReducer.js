@@ -10,7 +10,7 @@ import {RECIEVE_ZONE_DATA} from '../constants/frontEndConstants';
     "header_data": {
           "zones_data": {
             "total_zones": 20,
-            "active_zones": 13
+            "active_zones": 0
           },
           "emergency_data": {
             "emergency_on": true,

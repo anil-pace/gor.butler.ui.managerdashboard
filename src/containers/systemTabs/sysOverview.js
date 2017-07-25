@@ -87,11 +87,7 @@ class SystemOverview extends React.Component {
                         statusText = ZONE_STATUS_INTL_MESSAGE[zones[key]["zone_status"]]
                     }
                     return  <Zone 
-                    name={<FormattedMessage id="sysOverView.zones.name" description='Zone Name'
-                                            defaultMessage='ZONE {name}'
-                                            values={{
-                                                name: key
-                                            }}/>}
+                    name={key}
                     id={key}
                     key={idx}
                     emergencyStatus={emergencyData.emergency_on}

@@ -1,9 +1,9 @@
 import React from 'react';
-import {Table, Column} from 'fixed-data-table';
+import {Table, Column,Cell} from 'fixed-data-table';
 import Dimensions from 'react-dimensions'
 import {FormattedMessage} from 'react-intl';
 import {connect} from 'react-redux';
-import FilterSummary from '../../components/tableFilter/filterSummary'
+import FilterSummary from '../../components/tableFilter/filterSummary';
 import {
     SortHeaderCell,
     tableRenderer,
@@ -12,48 +12,123 @@ import {
     StatusCell,
     filterIndex,
     DataListWrapper,
-    sortData
+    sortData,
+    ConnectionDetailsCell,
+    OperatingModeCell
 } from '../../components/commonFunctionsDataTable';
 import {defineMessages} from 'react-intl';
 import {hashHistory,withRouter} from 'react-router';
+import {stringConfig} from '../../constants/backEndConstants';
 import {GOR_STATUS, GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT,WS_ONSEND} from '../../constants/frontEndConstants';
-import {setWsAction} from '../../actions/socketActions'
+import {setWsAction} from '../../actions/socketActions';
+import {CONTROLLER_SENSOR_TRIGGERED_MESSAGES,
+    CONTROLLER_ACTION_TRIGGERED_MESSAGES} from '../../constants/messageConstants';
+import Filter from '../../components/tableFilter/filter';
+import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
+import {
+    showTableFilter,
+    filterApplied
+} from '../../actions/filterAction';
 
 
-const messages=defineMessages({
-    ppsPlaceholder: {
-        id: 'pps.dropdown.placeholder',
-        description: 'mode change for pps',
-        defaultMessage: 'Change PPS Mode',
-    }
 
-
-});
 
 class SystemControllers extends React.Component {
-    constructor(props) {
-        super(props);
+    constructor(props,context) {
+        super(props,context);
         this.state=this._getInitialState();
         this._clearFilter =  this._clearFilter.bind(this);
+        this._sortTableData = this._sortTableData.bind(this);
+        this._setFilter = this._setFilter.bind(this);
+        this._hideFilter = this._hideFilter.bind(this);
+        this._applyFilter = this._applyFilter.bind(this);
+        this._handleTokenClick = this._handleTokenClick.bind(this);
     }
 
     _getInitialState(){
-        var data=this.props.controllers.slice(0)
+        var data=this._processData(this.props.controllers.slice(0));
         var dataList = new tableRenderer(data.length);
         dataList.newData=data;
         return {
             columnWidths: {
                 id: this.props.containerWidth * 0.15,
                 status: this.props.containerWidth * 0.1,
-                location: this.props.containerWidth * 0.17,
-                connectionDetails: this.props.containerWidth * 0.15,
+                location: this.props.containerWidth * 0.13,
+                connectionDetails: this.props.containerWidth * 0.2,
                 operatingMode: this.props.containerWidth * 0.4
+            },
+            sortOrder:{
+                controller_id: "ASC",
+                statusText: "ASC"
             },
             dataList:dataList,
             query:this.props.location.query,
+            locale:this.context.intl.locale,
             subscribed:false,
             queryApplied:Object.keys(this.props.location.query).length ? true :false
         }
+    }
+    _setFilter() {
+        this.props.showTableFilter(!this.props.showFilter);
+    }
+    _hideFilter(){
+        this.props.showTableFilter(false);
+    }
+
+    _processData(data){
+        //var data=this.props.controllers.slice(0);
+        var dataLen = data.length;
+        var processedData=[];
+        if(dataLen){
+            for(let i=0 ;i < dataLen ; i++){
+                let rowObj={};
+                rowObj = Object.assign({},data[i])
+                if(data[i].status === "connected"){
+                    rowObj.statusText = this.context.intl.formatMessage(stringConfig.connected)
+                }
+                else{
+                    rowObj.statusText = this.context.intl.formatMessage(stringConfig.disconnected)
+                }
+                if(data[i].zigbee_network === "connected"){
+                    rowObj.zigbeeText = this.context.intl.formatMessage(stringConfig.connected)
+                }
+                else{
+                    rowObj.zigbeeText = this.context.intl.formatMessage(stringConfig.disconnected)
+                }
+                if(data[i].ethernet_network === "connected"){
+                    rowObj.ethernetText = this.context.intl.formatMessage(stringConfig.connected)
+                }
+                else{
+                    rowObj.ethernetText = this.context.intl.formatMessage(stringConfig.disconnected)
+                }
+                rowObj.action_triggered_text = CONTROLLER_ACTION_TRIGGERED_MESSAGES[rowObj.action_triggered];
+                rowObj.sensor_activated_text = CONTROLLER_SENSOR_TRIGGERED_MESSAGES[rowObj.sensor_activated];
+                processedData.push(rowObj)
+            }
+        }
+        return processedData
+    }
+
+    _sortTableData(column,direction){
+        var _this = this;
+        var data = JSON.parse(JSON.stringify(_this.state.dataList.newData));
+        var dataList;
+        var sortOrder =JSON.parse(JSON.stringify(_this.state.sortOrder));
+
+         data.sort(function(current,next){
+            let result= direction === "ASC" ? next[column].toLowerCase().localeCompare(current[column].toLowerCase(),_this.state.locale)
+                        :current[column].toLowerCase().localeCompare(next[column].toLowerCase(),_this.state.locale);
+            return result <= 0 ? false : true;
+            
+        })
+        dataList = new tableRenderer(data.length);
+        dataList.newData=data;
+        sortOrder[column] = sortOrder[column] === "ASC" ? "DESC" : "ASC";
+        _this.setState({
+            dataList,
+            hasStateChanged:!_this.state.hasStateChanged,
+            sortOrder
+        })
     }
 
     _clearFilter() {
@@ -63,6 +138,12 @@ class SystemControllers extends React.Component {
             this.props.router.push({pathname: "/system/sysControllers"})
         })
         
+    }
+    _applyFilter(){
+
+    }
+    _handleTokenClick(){
+        console.log(arguments);
     }
 
     _refreshList(query){
@@ -75,8 +156,10 @@ class SystemControllers extends React.Component {
         this.props.initDataSentCall(updatedWsSubscription["controllers"])
     }
 
-    shouldComponentUpdate(nextProps) {
-        return nextProps.hasDataChanged !== this.props.hasDataChanged;
+    shouldComponentUpdate(nextProps,nextState) {
+        return ((nextProps.hasDataChanged !== this.props.hasDataChanged) || 
+            (nextState.hasStateChanged !== this.state.hasStateChanged)||
+            (nextProps.showFilter !== this.props.showFilter));
     }
 
 
@@ -90,7 +173,7 @@ class SystemControllers extends React.Component {
             })
         }
         if(this.props.hasDataChanged !== nextProps.hasDataChanged){
-            let data = JSON.parse(JSON.stringify(nextProps.controllers || []));
+            let data = this._processData(nextProps.controllers.slice(0));
             let dataList = new tableRenderer(data.length)
             dataList.newData=data;
             this.setState({
@@ -115,9 +198,28 @@ class SystemControllers extends React.Component {
 
     render() {
         var {dataList} = this.state;
-        console.log(this.props.controllers);
+        //console.log(this.props.controllers);
+        const zoneFilter=[
+                    { value: 'all', label: "sdf"},
+                    { value: 'open', label: "sfs"},
+                    { value: 'close', label: "gd"},
+                    { value: 'force_close', label: "etet"}
+                    ];
+        const header = {value:"zone_id", label:<FormattedMessage id="sysController.filter.zoneHead" defaultMessage="ZONE"/>};
+        const filterToken = <FilterTokenWrap field={header} tokenCallBack={this._handleTokenClick} label={zoneFilter} selectedToken={null}/>;
         return (
             <div  className="gorTableMainContainer gor-sys-controller">
+            <div className="gor-filter-wrap"
+                                 style={{'width': this.props.showFilter ? '350px' : '0px', height: '350px'}}>
+                                <Filter hideFilter={this._hideFilter}  // hiding filter wont disturb state
+                                     clearFilter={null} 
+                                     filterTokenC1={filterToken}
+                                     formSubmit={this._applyFilter} //passing function on submit
+                                     responseFlag={false} 
+                                     noDataFlag={this.props.controllers.length ? false : true}
+
+                                />  
+                            </div>
             <div className="gorToolBar">
                                 <div className="gorToolBarWrap">
                                     <div className="gorToolBarElements">
@@ -126,7 +228,23 @@ class SystemControllers extends React.Component {
                                         
                                     </div>
                                 </div>
-                            </div>
+                              <div className="filterWrapper">
+                                    <div className="gorToolBarDropDown">
+                                        <div className="gor-button-wrap">
+                                            <div
+                                                className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
+                                            <button
+                                                className={this.props.ppsFilterState ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
+                                                onClick={this._setFilter}>
+                                                <div className="gor-manage-task"/>
+                                                <FormattedMessage id="gor.filter.filterLabel" description="button label for filter"
+                                                                  defaultMessage="Filter data"/>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                </div>
                 <FilterSummary total={dataList.getSize()||0} isFilterApplied={this.state.queryApplied} responseFlag={null}
                                            refreshList={this._clearFilter}
                                            refreshText={<FormattedMessage id="ppsList.filter.search.bar.showall"
@@ -134,7 +252,7 @@ class SystemControllers extends React.Component {
                                                                           defaultMessage="Show all Stations"/>}/>
                 
                 <Table
-                    rowHeight={50}
+                    rowHeight={60}
                     rowsCount={dataList.getSize()}
                     headerHeight={70}
                     onColumnResizeEndCallback={null}
@@ -146,9 +264,9 @@ class SystemControllers extends React.Component {
                         columnKey="controller_id"
                         header={
                             
-                                <div className="gor-header-ids">
-                                    <SortHeaderCell onSortChange={null}
-                                                    sortDir={"ASC"}>
+                               
+                                    <SortHeaderCell onSortChange={()=>this._sortTableData("controller_id",this.state.sortOrder.controller_id)}
+                                                    sortDir={this.state.sortOrder.controller_id}>
                                         <div className="gorToolHeaderEl">
                                             <FormattedMessage id="sysControllers.idColumn.heading"
                                                               description='CONTROLLER ID'
@@ -156,7 +274,7 @@ class SystemControllers extends React.Component {
                                             
                                         </div>
                                     </SortHeaderCell>
-                                </div>
+                                
                             
                         }
                         cell={<TextCell data={dataList} classKey={"id"} />}
@@ -165,11 +283,11 @@ class SystemControllers extends React.Component {
                         isResizable={true}
                     />
                     <Column
-                        columnKey="status"
+                        columnKey="statusText"
                         header={
-                            <SortHeaderCell onSortChange={null}
+                            <SortHeaderCell onSortChange={()=>this._sortTableData("statusText",this.state.sortOrder.statusText)}
 
-                                            sortDir={"ASC"}>
+                                            sortDir={this.state.sortOrder.statusText}>
 
                                 <div className="gorToolHeaderEl">
 
@@ -188,12 +306,13 @@ class SystemControllers extends React.Component {
                     <Column
                         columnKey={null}
                         header={
+                                <Cell>
                                 <div className="gorToolHeaderEl">
 
                                     <FormattedMessage id="sysController.table.location" description="Location"
                                                       defaultMessage="LOCATION"/>
                                 </div>
-                            
+                            </Cell>
                         }
                         cell={<TextCell data={dataList} classKey={"location"} childrenClass="location" childColumnKey="zone_id">
                              <span ><FormattedMessage id="sysController.location.name" description='PPStable.requestedMode.text'
@@ -205,22 +324,34 @@ class SystemControllers extends React.Component {
                         isResizable={true}
                     />
                     <Column
-                        columnKey={null}
+                        columnKey={"ethernetText"}
+                        
                         header={
+                                <Cell>
                                 <div className="gorToolHeaderEl">
 
                                     <FormattedMessage id="sysController.table.conDetails" description="Status for PPS"
                                                       defaultMessage="CONNECTION DETAILS"/>
                                 </div>
+                                </Cell>
                         }
-                        cell={<TextCell data={dataList} setClass={"sfs"} classKey={"connectionDetails"}/>}
+                        cell={<ConnectionDetailsCell data={dataList} subColumnKey={"zigbeeText"} classKey={"connectionDetails"}>
+                                 <FormattedMessage id="sysController.table.ethernetStatus" description='sysController.table.ethernetStatus'
+                                                          defaultMessage='Ethernet Network: '
+                                                          />
+                                <FormattedMessage id="sysController.table.zigbeeStatus" description='sysController.table.zigbeeStatus'
+                                                          defaultMessage='Zigbee Network: '
+                                                          />
+
+                              </ConnectionDetailsCell>}
                         fixed={true}
                         width={this.state.columnWidths.connectionDetails}
                         isResizable={true}
                     />
                     <Column
-                        columnKey="action_triggered"
+                        columnKey="action_triggered_text"
                         header={
+                                <Cell>
                                 <div className="gorToolHeaderEl">
 
                                     <FormattedMessage id="sysController.table.operatingMode" description="Status for PPS"
@@ -228,8 +359,9 @@ class SystemControllers extends React.Component {
 
                                   
                                 </div>
+                                </Cell>
                         }
-                        cell={<TextCell data={dataList} classKey={"operatingMode"}/>}
+                        cell={<OperatingModeCell data={dataList} subColumnKey={"sensor_activated_text"} classKey={"action_triggered"} />}
                         fixed={true}
                         width={this.state.columnWidths.operatingMode}
                         isResizable={true}
@@ -241,18 +373,24 @@ class SystemControllers extends React.Component {
         );
     }
 }
+
+SystemControllers.contextTypes={
+    intl: React.PropTypes.object.isRequired
+}
 function mapStateToProps(state, ownProps) {
     return {
         controllers:state.sysControllersReducer.controllers || [],
         hasDataChanged:state.sysControllersReducer.hasDataChanged,
         socketAuthorized: state.recieveSocketActions.socketAuthorized,
-        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket
+        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket,
+        showFilter: state.filterInfo.filterState || false
     };
 }
 
 function mapDispatchToProps(dispatch){
     return{
-        initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); }
+        initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
+        showTableFilter: function (data) {dispatch(showTableFilter(data));}
     }
 }
 

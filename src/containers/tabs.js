@@ -56,13 +56,15 @@ class Tabs extends React.Component{
           
         }
     }
-  _stopOperation(stopFlag) {
+  _stopOperation(stopFlag,additionalProps) {
       modal.add(OperationStop, {
         title: '',
         size: 'large', // large, medium or small,
       closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: false,
-      emergencyPress: stopFlag
+      emergencyPress: stopFlag,
+      controller:additionalProps.controller_id,
+      zone:additionalProps.zone_id
       });
   }
   _emergencyRelease(){
@@ -94,7 +96,7 @@ class Tabs extends React.Component{
     }
     else if(nextProps.system_emergency && !this.props.system_emergency)
     {
-      this._stopOperation(true);
+      this._stopOperation(true,nextProps.zoneDetails);
     }
     else if(nextProps.system_data=== SOFT && this.props.system_data=== SOFT_MANUAL){
       this._stopOperation(true);
@@ -110,7 +112,7 @@ class Tabs extends React.Component{
               defaultMessage="Offline"/>;
 
     overview=<FormattedMessage id="overview.tab.heading" description="overview tab" 
-              defaultMessage="OVERVIEW"/>;
+              defaultMessage="DASHBOARD"/>;
 
     system=<FormattedMessage id="system.tab.heading" description="system tab" 
               defaultMessage="SYSTEM"/>;
@@ -153,13 +155,16 @@ class Tabs extends React.Component{
       }
       if(this.props.system_emergency)
       {
-        overviewStatus=<FormattedMessage id="overviewStatus.tab.stop" description="overview Status emergency" 
-              defaultMessage="Operation stopped"/>;  
-        overviewClass='gor-alert'
+        
+        systemClass = 'gor-alert';
+        systemStatus=<FormattedMessage id="overviewStatus.tab.stop" description="overview Status emergency" 
+              defaultMessage="STOPPED"/>; 
       }
+      else{
       systemStatus=<FormattedMessage id="systemStatus.tab.online" description="system Status online" 
               defaultMessage="Online"/>;  
       systemClass=GOR_ONLINE;
+    }
 
       ordersvalue=<FormattedNumber value={this.props.orders_completed}/>
       ordersStatus=<FormattedMessage id="ordersStatus.tab.heading" description="orders Status " 
@@ -314,7 +319,8 @@ function mapStateToProps(state, ownProps){
          fireHazardType:state.fireHazardDetail.emergency_type,
          fireHazardStartTime:state.fireHazardDetail.emergencyStartTime,
          fireHazardNotifyTime:state.fireHazardDetail.notifyTime,
-         timeZone:state.authLogin.timeOffset
+         timeZone:state.authLogin.timeOffset,
+          zoneDetails: state.tabsData.zoneDetails || {},
 
     }
 }

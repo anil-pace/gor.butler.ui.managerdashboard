@@ -74,6 +74,7 @@ export function ResponseParse(store,res)
 					store.dispatch(recieveZoningData(res));
 				}
 				else{
+					store.dispatch(recieveZoningData(res));
 					store.dispatch(recieveSysOverViewData(res));
 				}
 				//store.dispatch(recieveControllerData(res));

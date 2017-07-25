@@ -14,6 +14,7 @@
 	.gor-sys-btn{
 		border: solid 1px #B9B9B9;
 		color: #525252;
+		cursor:pointer;
 	}
 	
 }
@@ -346,5 +347,14 @@
 	.gor-zt-wrap{
 		background:#EEEEEE;
 		padding:15px;
+	}
+}
+.connectionDetails{
+	line-height:25px;
+	span:first-child{
+		margin-right:15px;
+	}
+	span:nth-child(2){
+		color:#49BE7E;
 	}
 }

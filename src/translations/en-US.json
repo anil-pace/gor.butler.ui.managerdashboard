@@ -246,21 +246,9 @@
     "filepath": "./src/components/header/header.js"
   },
   {
-    "id": "header.option.release",
-    "description": "release operation option",
-    "defaultMessage": "Release the Emergency Stop button from the Zigbee box in order\n        \t\t\t\t\t\tto resume operation.",
-    "filepath": "./src/components/header/header.js"
-  },
-  {
     "id": "header.option.resume",
     "description": "resume operation option",
     "defaultMessage": "Enter password to resume operation.",
-    "filepath": "./src/components/header/header.js"
-  },
-  {
-    "id": "header.zones.count",
-    "description": "Zone status count",
-    "defaultMessage": "{activeZones}/{totalZones} Zones",
     "filepath": "./src/components/header/header.js"
   },
   {
@@ -272,7 +260,7 @@
   {
     "id": "header.zones.inOperation",
     "description": "Zone in operation count",
-    "defaultMessage": "{totalZones} zones in operation",
+    "defaultMessage": "{activeZones}/{totalZones} zones in operation",
     "filepath": "./src/components/header/header.js"
   },
   {
@@ -282,9 +270,39 @@
     "filepath": "./src/components/header/header.js"
   },
   {
+    "id": "header.zones.inOperation1",
+    "description": "Zone in operation count",
+    "defaultMessage": "{activeZones} zones in operation",
+    "filepath": "./src/components/header/header.js"
+  },
+  {
+    "id": "header.zones.noOperation",
+    "description": "Zone in operation count",
+    "defaultMessage": "No zones in operation",
+    "filepath": "./src/components/header/header.js"
+  },
+  {
+    "id": "header.option.release",
+    "description": "release operation option",
+    "defaultMessage": "Release the Emergency Stop button from the Zigbee box in order\n                              to resume operation.",
+    "filepath": "./src/components/header/header.js"
+  },
+  {
+    "id": "header.zones.inOperation2",
+    "description": "Zone in operation count",
+    "defaultMessage": "{activeZones} zones in operation",
+    "filepath": "./src/components/header/header.js"
+  },
+  {
     "id": "header.button.resume",
     "description": "Button text",
     "defaultMessage": "Resume System",
+    "filepath": "./src/components/header/header.js"
+  },
+  {
+    "id": "header.zones.count",
+    "description": "Zone status count",
+    "defaultMessage": "{activeZones}/{totalZones} Zones",
     "filepath": "./src/components/header/header.js"
   },
   {
@@ -1597,7 +1615,73 @@
   {
     "id": "zoning.status.emergencyPause",
     "description": "Status text for zone",
+    "defaultMessage": "EMERGENCY PAUSE",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "zoning.status.stopped",
+    "description": "Status text for zone",
+    "defaultMessage": "STOPPED",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "zoning.status.paused",
+    "description": "Status text for zone",
     "defaultMessage": "PAUSED",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "zoning.action.zone_pause",
+    "description": "Status text for zone",
+    "defaultMessage": "Zone pause activated",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "zoning.action.zone_clear",
+    "description": "Status text for zone",
+    "defaultMessage": "Zone clear activated",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "zoning.action.emergency_stop",
+    "description": "Status text for zone",
+    "defaultMessage": "Emergency stop activated",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "zoning.action.emergency_pause",
+    "description": "Status text for zone",
+    "defaultMessage": "Emergency pause activated",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "zoning.action.none",
+    "description": "Status text for zone",
+    "defaultMessage": "Standard",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "zoning.action.button_press",
+    "description": "Status text for zone",
+    "defaultMessage": "Button pressed",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "zoning.action.latch_gate",
+    "description": "Status text for zone",
+    "defaultMessage": "Latch gate",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "zoning.action.light_curtain",
+    "description": "Status text for zone",
+    "defaultMessage": "Light curtains",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "zoning.action.noneSensor",
+    "description": "Status text for zone",
+    "defaultMessage": "Standard Sensor",
     "filepath": "./src/constants/messageConstants.js"
   },
   {
@@ -2180,13 +2264,13 @@
   {
     "id": "operation.alert.release",
     "description": "Text for emergency button release heading",
-    "defaultMessage": "Stop button released",
+    "defaultMessage": "All emergency-stop buttons released",
     "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
   },
   {
     "id": "operation.alert.release.text",
     "description": "Text for emergency stop button release",
-    "defaultMessage": "Emergency Stop button has been released.",
+    "defaultMessage": "All Emergency-stop buttons have been released.",
     "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
   },
   {
@@ -2240,7 +2324,7 @@
   {
     "id": "operation.alert.stop",
     "description": "Text for operation stopped heading",
-    "defaultMessage": "Operation Stopped",
+    "defaultMessage": "Butler System - Operation Stopped",
     "filepath": "./src/containers/emergencyProcess/OperationStop.js"
   },
   {
@@ -2252,7 +2336,7 @@
   {
     "id": "operation.alert.stop.text",
     "description": "Text for emergency button press",
-    "defaultMessage": "Emergency Stop button has been pressed.",
+    "defaultMessage": "Emergency-Stop activated via Conroller {controller} in {zone}.",
     "filepath": "./src/containers/emergencyProcess/OperationStop.js"
   },
   {
@@ -3777,12 +3861,6 @@
     "filepath": "./src/containers/systemTabs/PPStable.js"
   },
   {
-    "id": "pps.dropdown.placeholder",
-    "description": "mode change for pps",
-    "defaultMessage": "Change PPS Mode",
-    "filepath": "./src/containers/systemTabs/sysControllers.js"
-  },
-  {
     "id": "sysController.table.heading",
     "description": "Heading for PPS",
     "defaultMessage": "System Controllers",
@@ -3825,6 +3903,18 @@
     "filepath": "./src/containers/systemTabs/sysControllers.js"
   },
   {
+    "id": "sysController.table.ethernetStatus",
+    "description": "sysController.table.ethernetStatus",
+    "defaultMessage": "Ethernet Network:",
+    "filepath": "./src/containers/systemTabs/sysControllers.js"
+  },
+  {
+    "id": "sysController.table.zigbeeStatus",
+    "description": "sysController.table.zigbeeStatus",
+    "defaultMessage": "Zigbee Network:",
+    "filepath": "./src/containers/systemTabs/sysControllers.js"
+  },
+  {
     "id": "sysController.table.operatingMode",
     "description": "Status for PPS",
     "defaultMessage": "OPERATING MODE",
@@ -3837,12 +3927,6 @@
     "filepath": "./src/containers/systemTabs/sysOverview.js"
   },
   {
-    "id": "sysOverView.zones.name",
-    "description": "Zone Name",
-    "defaultMessage": "ZONE {name}",
-    "filepath": "./src/containers/systemTabs/sysOverview.js"
-  },
-  {
     "id": "tabs.offline",
     "description": "offline",
     "defaultMessage": "Offline",
@@ -3851,7 +3935,7 @@
   {
     "id": "overview.tab.heading",
     "description": "overview tab",
-    "defaultMessage": "OVERVIEW",
+    "defaultMessage": "DASHBOARD",
     "filepath": "./src/containers/tabs.js"
   },
   {
@@ -3905,7 +3989,7 @@
   {
     "id": "overviewStatus.tab.stop",
     "description": "overview Status emergency",
-    "defaultMessage": "Operation stopped",
+    "defaultMessage": "STOPPED",
     "filepath": "./src/containers/tabs.js"
   },
   {

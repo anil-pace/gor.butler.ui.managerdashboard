@@ -233,5 +233,28 @@ export const ZONE_STATUS_INTL_MESSAGE ={
       defaultMessage='PAUSED'/>)
 }
 
+export const CONTROLLER_ACTION_TRIGGERED_MESSAGES={
+      zone_pause:(<FormattedMessage id="zoning.action.zone_pause" description='Status text for zone' 
+      defaultMessage='Zone pause activated'/>),
+      zone_clear:(<FormattedMessage id="zoning.action.zone_clear" description='Status text for zone' 
+      defaultMessage='Zone clear activated'/>),
+      emergency_stop:(<FormattedMessage id="zoning.action.emergency_stop" description='Status text for zone' 
+      defaultMessage='Emergency stop activated'/>),
+      emergency_pause:(<FormattedMessage id="zoning.action.emergency_pause" description='Status text for zone' 
+      defaultMessage='Emergency pause activated'/>),
+      none:(<FormattedMessage id="zoning.action.none" description='Status text for zone' 
+      defaultMessage='Standard'/>)
+}
+export const CONTROLLER_SENSOR_TRIGGERED_MESSAGES={
+      button_press:(<FormattedMessage id="zoning.action.button_press" description='Status text for zone' 
+      defaultMessage='Button pressed'/>),
+      latch_gate:(<FormattedMessage id="zoning.action.latch_gate" description='Status text for zone' 
+      defaultMessage='Latch gate'/>),
+      light_curtain:(<FormattedMessage id="zoning.action.light_curtain" description='Status text for zone' 
+      defaultMessage='Light curtains'/>),
+      none:(<FormattedMessage id="zoning.action.noneSensor" description='Status text for zone' 
+      defaultMessage='Standard Sensor'/>)
+}
+
 
 
