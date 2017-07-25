@@ -997,37 +997,37 @@
   {
     "id": "stringConfig.md007",
     "description": "Text for safety checklist item 7",
-    "defaultMessage": "[Manual] Peripherals status known.",
+    "defaultMessage": "Peripherals status known.",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
     "id": "stringConfig.md008",
     "description": "Text for safety checklist item 8",
-    "defaultMessage": "[Manual] Physical inventory verified.",
+    "defaultMessage": "Physical inventory verified.",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
     "id": "stringConfig.md009",
     "description": "Text for safety checklist item 9",
-    "defaultMessage": "[Automatic] No Emergency buttons in 'pressed' state",
+    "defaultMessage": "No Emergency buttons in 'Pressed' state.",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
     "id": "stringConfig.md010",
     "description": "Text for safety checklist item 10",
-    "defaultMessage": "[Manual] All shutters open  in active zones.",
+    "defaultMessage": "All shutters open  in active zones.",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
     "id": "stringConfig.md011",
     "description": "Text for safety checklist item 11",
-    "defaultMessage": "[Manual] No humans in operations area.",
+    "defaultMessage": "No humans in operations area.",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
     "id": "stringConfig.md012",
     "description": "Text for safety checklist item 12",
-    "defaultMessage": "[Manual] All paths cleared of any debris..",
+    "defaultMessage": "All paths cleared of any debris.",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
@@ -2238,9 +2238,15 @@
     "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
   },
   {
-    "id": "operation.safety.heading",
+    "id": "operation.firesafety.heading",
     "description": "Text for safety heading",
-    "defaultMessage": "Safety checklist",
+    "defaultMessage": "Resume Checklist",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "operation.safety.heading",
+    "description": "Text for fire safety heading",
+    "defaultMessage": "Safety Checklist",
     "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
   },
   {
@@ -2259,6 +2265,12 @@
     "id": "operation.safety.errors",
     "description": "Text for safety error",
     "defaultMessage": "System has found some of these steps were not followed. \n                    Please check or contact service engineer for support",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "operation.firesafety.confirm",
+    "description": "Text for Resume Opeartion button",
+    "defaultMessage": "Resume Opeartion",
     "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
   },
   {

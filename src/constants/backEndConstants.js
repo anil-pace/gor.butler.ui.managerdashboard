@@ -288,32 +288,32 @@ export const  stringConfig= defineMessages({
      md007 : {
         "id": "stringConfig.md007",
         "description": "Text for safety checklist item 7",
-        "defaultMessage": "[Manual] Peripherals status known."
+        "defaultMessage": "Peripherals status known."
     },
      md008 : {
         "id": "stringConfig.md008",
         "description": "Text for safety checklist item 8",
-        "defaultMessage": "[Manual] Physical inventory verified."
+        "defaultMessage": "Physical inventory verified."
     },
      md009 : {
         "id": "stringConfig.md009",
         "description": "Text for safety checklist item 9",
-        "defaultMessage": "[Automatic] No Emergency buttons in 'pressed' state"
+        "defaultMessage": "No Emergency buttons in 'Pressed' state."
     },
      md010 : {
         "id": "stringConfig.md010",
         "description": "Text for safety checklist item 10",
-        "defaultMessage": "[Manual] All shutters open  in active zones."
+        "defaultMessage": "All shutters open  in active zones."
     },
      md011 : {
         "id": "stringConfig.md011",
         "description": "Text for safety checklist item 11",
-        "defaultMessage": "[Manual] No humans in operations area."
+        "defaultMessage": "No humans in operations area."
     },
      md012 : {
         "id": "stringConfig.md012",
         "description": "Text for safety checklist item 12",
-        "defaultMessage": "[Manual] All paths cleared of any debris.."
+        "defaultMessage": "All paths cleared of any debris."
     },
 
     audit_reaudited: {
