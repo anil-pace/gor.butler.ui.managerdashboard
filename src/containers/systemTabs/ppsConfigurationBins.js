@@ -104,12 +104,12 @@ class Bins extends React.Component {
          * Finding the sorted array of x and y co-ordinates
          */
 
-        let x_array = self.props.selectedProfile.pps_bins.map(function (bin) {
+        let x_array = self.props.selectedProfile.pps_bin_details.map(function (bin) {
             return bin.orig_cordinates ? bin.orig_cordinates[0] + bin.breadth : 0
         }).sort(function (a, b) {
             return a - b
         });
-        let y_array = self.props.selectedProfile.pps_bins.map(function (bin) {
+        let y_array = self.props.selectedProfile.pps_bin_details.map(function (bin) {
             return bin.orig_cordinates ? bin.orig_cordinates[1] + bin.length : 0
         }).sort(function (a, b) {
             return a - b
@@ -138,7 +138,7 @@ class Bins extends React.Component {
             {this.props.currentView === 'bins' && <div style={{padding:'2% 4%',color:'#ccc'}}><FormattedMessage id="pps.configuration.bins.selection.count"
                                                                                                                 description='total users for filter search bar'
                                                                                                                 defaultMessage='Select a bin to activate or deactivate ({deactivated}/{total} bins deactivated)'
-                                                                                                                values={{deactivated: self.props.selectedProfile.pps_bins.filter(function(bin){return !bin.enabled}).length.toString(),total:self.props.selectedProfile.pps_bins.length}}/> </div>}
+                                                                                                                values={{deactivated: self.props.selectedProfile.pps_bin_details.filter(function(bin){return !bin.enabled}).length.toString(),total:self.props.selectedProfile.pps_bin_details.length}}/> </div>}
             {this.props.currentView === 'groups' && <div style={{padding:'2% 4%',color:'#ccc'}}><FormattedMessage id="pps.configuration.bins.group.selection.count"
                                                                                                                   description='total users for filter search bar'
                                                                                                                   defaultMessage='Select a bin group to enable or disable ({disabled}/{total} groups disabled)'
@@ -154,7 +154,7 @@ class Bins extends React.Component {
             }}>
                 {/*The co-ordinates need to be in proportion to the dimension of*/}
                 {/*the container.*/}
-                {self.props.selectedProfile.pps_bins.map(function (bin, index) {
+                {self.props.selectedProfile.pps_bin_details.map(function (bin, index) {
                     let bin_id = [self.props.selectedPPS.pps_id, bin.pps_bin_id].join("-")
                     let selected_bin = (self.props.selectedPPSBin && self.props.selectedPPSBin[self.props.currentView] && self.props.selectedPPSBin[self.props.currentView].id === bin_id)
                     return <div key={bin.pps_bin_id} style={{
@@ -179,7 +179,7 @@ class Bins extends React.Component {
                             }}>
                             <span className={["pps-bin"].join(" ")}>
                                 <span className="pps-bin-tag-info">
-                                    <span className="gor-tag-icon-grey"/>{bin.tags.length} <FormattedMessage id="pps.configuration.bins.tagCount.text"
+                                    <span className="gor-tag-icon-grey"/>{bin.bin_tags.length} <FormattedMessage id="pps.configuration.bins.tagCount.text"
                                                                                                              description="Tag"
                                                                                                              defaultMessage="Tag"/></span>
                                 <span className="pps-bin-info">{bin.pps_bin_id}</span>

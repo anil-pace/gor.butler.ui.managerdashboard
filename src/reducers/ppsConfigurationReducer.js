@@ -25,7 +25,7 @@ export function ppsConfiguration(state = {}, action) {
             })
         case RECEIVE_PPS_PROFILES:
             pps_list = action.params.pps
-            if (pps_list.length < 1 || pps_list[0].profiles.length < 1) {
+            if (pps_list.length < 1 || pps_list[0].pps_profiles.length < 1) {
                 /**
                  * if empty list of pps or profile received, return with the original state
                  */
@@ -42,10 +42,8 @@ export function ppsConfiguration(state = {}, action) {
              * Select the applied profile
              * by default for the first PPS.
              */
-            selected_pps.profiles.map(function (prfl, index) {
+            selected_pps.pps_profiles.map(function (prfl, index) {
                 if (prfl.applied) {
-                    prfl.pps_bins = JSON.parse(JSON.stringify(selected_pps.pps_bins))
-                    prfl.bin_group_details = JSON.parse(JSON.stringify(selected_pps.bin_group_details))
                     selected_profile = JSON.parse(JSON.stringify(prfl))
                 }
                 return prfl
@@ -64,7 +62,7 @@ export function ppsConfiguration(state = {}, action) {
 
         case TAG_ADDED_TO_LIST:
             return Object.assign({}, state, {
-                tags: state.tags.concat(action.data)
+                tags: state.tags.concat(action.data.pps_bin_tags)
             })
 
         case SELECT_PPS_PROFILE_FOR_CONFIGURATION:
@@ -74,24 +72,22 @@ export function ppsConfiguration(state = {}, action) {
             selected_pps = JSON.parse(JSON.stringify(action.data.pps || state.selectedPPS))
             selected_profile = action.data.profile
             if(!selected_profile){
-                selected_profile=selected_pps.profiles.filter(function(profile){return profile.applied})[0]
-                selected_profile.pps_bins = JSON.parse(JSON.stringify(selected_pps.pps_bins))
-                selected_profile.bin_group_details = JSON.parse(JSON.stringify(selected_pps.bin_group_details))
+                selected_profile=selected_pps.pps_profiles.filter(function(profile){return profile.applied})[0]
             }
             /**
              * Create a copy of selected PPS profile
              * and selects it.
              */
-            selected_pps.profiles = selected_pps.profiles.map(function (prfl) {
-                if (prfl.name === selected_profile.name) {
+            selected_pps.pps_profiles = selected_pps.pps_profiles.map(function (prfl) {
+                if (prfl.profile_name === selected_profile.profile_name) {
                     prfl = JSON.parse(JSON.stringify(selected_profile))
                 }
                 return prfl
             })
             pps_list=state.ppsList.map(function(pps){
                 if(pps.pps_id===selected_pps.pps_id){
-                    pps.profiles=pps.profiles.map(function(profile){
-                        if(profile.name===selected_profile.name){
+                    pps.pps_profiles=pps.pps_profiles.map(function(profile){
+                        if(profile.profile_name===selected_profile.profile_name){
                             profile=selected_profile
                         }
                         return profile
@@ -153,18 +149,18 @@ export function ppsConfiguration(state = {}, action) {
         case ADD_TAG_TO_BIN:
             selected_bin = action.data.bin
             selected_tag = action.data.tag
-            if (!selected_bin.tags) {
-                selected_bin.tags = []
+            if (!selected_bin.bin_tags) {
+                selected_bin.bin_tags = []
             }
-            if (selected_bin.tags.indexOf(selected_tag) > -1) {
-                selected_bin.tags.splice(selected_bin.tags.indexOf(selected_tag), 1)
+            if (selected_bin.bin_tags.indexOf(selected_tag) > -1) {
+                selected_bin.bin_tags.splice(selected_bin.bin_tags.indexOf(selected_tag), 1)
             } else {
                 /**
                  * Only one tag is supported as of now.
                  * @type {[*]}
                  */
                 //  selected_bin.tags.push(selected_tag)
-                    selected_bin.tags=[selected_tag]
+                    selected_bin.bin_tags=[selected_tag]
             }
 
             return Object.assign({}, state, {
@@ -180,8 +176,8 @@ export function ppsConfiguration(state = {}, action) {
              * @type {*}
              */
             selected_pps = state.selectedPPS
-            selected_profile = JSON.parse(JSON.stringify(selected_pps.profiles.filter(function (profile) {
-                return profile.name===state.selectedProfile.name
+            selected_profile = JSON.parse(JSON.stringify(selected_pps.pps_profiles.filter(function (profile) {
+                return profile.profile_name===state.selectedProfile.profile_name
             })[0]))
             return Object.assign({}, state, {
                 selectedProfile: selected_profile, //If no profile is selected, select the default profile
@@ -200,11 +196,11 @@ export function ppsConfiguration(state = {}, action) {
             selected_profile=action.data
             pps_list=pps_list.map(function(pps){
                 if(pps.pps_id===selected_pps.pps_id){
-                    pps.profiles.push(selected_profile)
+                    pps.pps_profiles.push(selected_profile)
                 }
                 return pps
             })
-            selected_pps.profiles.push(selected_profile)
+            selected_pps.pps_profiles.push(selected_profile)
             return Object.assign({}, state, {
                 selectedProfile: selected_profile, //If no profile is selected, select the default profile
                 selectedPPS: selected_pps,
@@ -224,8 +220,8 @@ export function ppsConfiguration(state = {}, action) {
             selected_profile=action.data
             pps_list=pps_list.map(function(pps){
                 if(pps.pps_id===selected_pps.pps_id){
-                    pps.profiles=pps.profiles.map(function(profile){
-                        if(profile.name===selected_profile.name){
+                    pps.pps_profiles=pps.pps_profiles.map(function(profile){
+                        if(profile.profile_name===selected_profile.profile_name){
                             profile=selected_profile
                         }
                         return profile
@@ -233,8 +229,8 @@ export function ppsConfiguration(state = {}, action) {
                 }
                 return pps
             })
-            selected_pps.profiles=selected_pps.profiles.map(function(profile){
-                if(profile.name===selected_profile.name){
+            selected_pps.pps_profiles=selected_pps.pps_profiles.map(function(profile){
+                if(profile.profile_name===selected_profile.profile_name){
                     profile=selected_profile
                 }
                 return profile

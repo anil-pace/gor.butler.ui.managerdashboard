@@ -45,7 +45,7 @@ class PPSList extends React.Component {
              * Otherwise onClick of PPS would also get called
              */
             event.stopPropagation()
-            let url=[PPS_PROFILE_URL,pps.pps_id,profile.name].join("/")
+            let url=[PPS_PROFILE_URL,pps.pps_id,profile.profile_name].join("/")
             let data={
                 'url': url,
                 'method': GET,
@@ -82,10 +82,10 @@ class PPSList extends React.Component {
                                 {"PPS-"+pps.pps_id}
                             </div>
                             <div className="pps-list-item-profiles">
-                                {pps.pps_id===self.props.selectedPPS.pps_id && pps.profiles.map(function (profile) {
+                                {pps.pps_id===self.props.selectedPPS.pps_id && pps.pps_profiles.map(function (profile) {
                                     return <div className="pps-profile-item" onClick={self.selectPPSProfile.bind(self, {pps, profile})}
-                                                key={profile.name}>
-                                        <span className={[profile.name===self.props.selectedProfile.name?'selected':'','pps-profile-name'].join(" ")}>{profile.name}</span> {profile.applied && <span className="profile-applied-label"><FormattedMessage id="pps.configuration.applied.text"
+                                                key={profile.profile_name}>
+                                        <span className={[profile.profile_name===self.props.selectedProfile.profile_name?'selected':'','pps-profile-name'].join(" ")}>{profile.profile_name}</span> {profile.applied && <span className="profile-applied-label"><FormattedMessage id="pps.configuration.applied.text"
                                                                                                                                                                                                                                                           description="Applied"
                                                                                                                                                                                                                                                           defaultMessage="Applied"/></span>}
                                                                                                                                                                                                                                                           {profile.requested && <span className="profile-requested-label"><FormattedMessage id="pps.configuration.requested.text"
@@ -94,9 +94,9 @@ class PPSList extends React.Component {
                                     </div>
 
                                 })}
-                                {pps.pps_id!==self.props.selectedPPS.pps_id && pps.profiles.map(function (profile) {
+                                {pps.pps_id!==self.props.selectedPPS.pps_id && pps.pps_profiles.map(function (profile) {
                                     return profile.applied ?
-                                        <div key={profile.name}>{profile.name} <FormattedMessage id="pps.configuration.profileAplied.text"
+                                        <div key={profile.profile_name}>{profile.profile_name} <FormattedMessage id="pps.configuration.profileAplied.text"
                                                                                                                 description=" profile applied"
                                                                                                                 defaultMessage=" profile applied"/></div> : null
                                 })}
@@ -118,7 +118,8 @@ function mapStateToProps(state, ownProps) {
     return {
         ppsList: state.ppsConfiguration.ppsList||[],
         selectedProfile:state.ppsConfiguration.selectedProfile||{},
-        selectedPPS:state.ppsConfiguration.selectedPPS||{}
+        selectedPPS:state.ppsConfiguration.selectedPPS||{},
+        auth_token: state.authLogin.auth_token
 
     };
 }

@@ -122,6 +122,7 @@ class PPSConfiguration extends React.Component {
          */
         let form_data=JSON.parse(JSON.stringify(this.props.selectedProfile))
         form_data.requested=applyProfile
+        delete form_data.applied
         let url=SAVE_PROFILE_URL+this.props.selectedPPS.pps_id
         let data={
             'url': url,
@@ -170,7 +171,7 @@ class PPSConfiguration extends React.Component {
                     {this.state.currentView!=="groups" && <button onClick={self.handleClickOnNext.bind(self)} className="pps-bin-next-button"><FormattedMessage id="pps.configuration.buttons.next.text"
                                                                                                                                                                 description="NEXT"
                                                                                                                                                                 defaultMessage="NEXT"/></button>}
-                    {this.state.currentView==="groups" && <button disabled={self.props.selectedPPS.profiles.filter(function(profile){ return profile.requested}).length>0} onClick={self.saveProfile.bind(self,true)} className="pps-bin-save-apply-button"><FormattedMessage id="pps.configuration.buttons.saveApply.text"
+                    {this.state.currentView==="groups" && <button disabled={self.props.selectedPPS.pps_profiles.filter(function(profile){ return profile.requested}).length>0} onClick={self.saveProfile.bind(self,true)} className="pps-bin-save-apply-button"><FormattedMessage id="pps.configuration.buttons.saveApply.text"
                                                                                                                                                                         description="SAVE AND APPLY"
                                                                                                                                                                         defaultMessage="SAVE AND APPLY"/></button>}
                     {this.state.currentView!=="tags" && <button onClick={self.handleClickOnBack.bind(self)} className="pps-bin-back-button"><FormattedMessage id="pps.configuration.buttons.back.text"
@@ -207,7 +208,8 @@ function mapStateToProps(state, ownProps) {
         selectedProfile: state.ppsConfiguration.selectedProfile || {name: null},
         selectedPPS: state.ppsConfiguration.selectedPPS,
         selectedPPSBin:state.ppsConfiguration.selectedPPSBin,
-        ppsConfigurationSpinner:state.ppsConfiguration.ppsConfigurationSpinner
+        ppsConfigurationSpinner:state.ppsConfiguration.ppsConfigurationSpinner,
+        auth_token: state.authLogin.auth_token
     };
 }
 

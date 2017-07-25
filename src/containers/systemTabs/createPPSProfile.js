@@ -15,8 +15,8 @@ class CreateProfile extends React.Component {
     handleChangeInProfileName(e){
         if(e.target){
             this.setState({profileName:(e.target.value||"")})
-            if(!e.target.value || this.props.selectedPPS.profiles.filter(function (profile) {
-                    return profile.name===e.target.value
+            if(!e.target.value || this.props.selectedPPS.pps_profiles.filter(function (profile) {
+                    return profile.profile_name===e.target.value
                 }).length>0){
                 /**
                  * Only unique profile names will be
@@ -41,7 +41,7 @@ class CreateProfile extends React.Component {
          * API to create new profile
          */
         let form_data=JSON.parse(JSON.stringify(this.props.selectedProfile))
-        form_data.name=this.state.profileName
+        form_data.profile_name=this.state.profileName
         /**
          * While creating a new profile
          * we don't need applied and

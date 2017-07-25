@@ -104,11 +104,12 @@ class Tags extends React.Component {
          * The API will update the list
          * of tags.
          */
+        let form_data={"pps_bin_tags":[this.state.filter]}
         let data = {
             'url': SAVE_TAGS_URL,
             'method': PUT,
             'cause': ADD_TAG_TO_LIST,
-            'formdata': [this.state.filter],
+            'formdata':form_data,
             'contentType': APP_JSON,
             'accept': APP_JSON,
             'token': this.props.auth_token
@@ -169,7 +170,7 @@ class Tags extends React.Component {
                               dangerouslySetInnerHTML={{__html: self.highlightSearchedText.call(self, tag)}}/>
                         <span className="pps-tag-selection">
                         {self.props.selectedPPSBin && self.props.selectedPPSBin['tags'] &&
-                        <input checked={self.props.selectedPPSBin['tags'].tags.map(function (tag) {
+                        <input checked={self.props.selectedPPSBin['tags'].bin_tags.map(function (tag) {
                             return tag
                         }).indexOf(tag) > -1} onChange={self.handleTagSelect.bind(self, tag)} type="checkbox"/>}
                     </span>
@@ -198,6 +199,7 @@ function mapStateToProps(state, ownProps) {
         selectedPPS: state.ppsConfiguration.selectedPPS || {id: null},
         selectedPPSBin: state.ppsConfiguration.selectedPPSBin,
         tags: state.ppsConfiguration.tags || [],
+        auth_token: state.authLogin.auth_token
     };
 }
 
