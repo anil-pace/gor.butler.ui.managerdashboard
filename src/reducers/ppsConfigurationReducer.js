@@ -70,31 +70,23 @@ export function ppsConfiguration(state = {}, action) {
              * Select a PPS or pps with a profile
              */
             selected_pps = JSON.parse(JSON.stringify(action.data.pps || state.selectedPPS))
-            selected_profile = action.data.profile
-            if(!selected_profile){
+            pps_list=state.ppsList
+            if(action.data.pps_profiles){
+                /**
+                 * Create a copy of selected PPS profile
+                 * and selects it.
+                 */
+                selected_profile = action.data.pps_profiles ? action.data.pps_profiles.filter(function(profile){ return profile.pps_bin_details})[0]:null
+                selected_pps.pps_profiles = JSON.parse(JSON.stringify(action.data.pps_profiles))
+                pps_list=state.ppsList.map(function(pps){
+                    if(pps.pps_id===selected_pps.pps_id){
+                        pps.pps_profiles=JSON.parse(JSON.stringify(action.data.pps_profiles))
+                    }
+                    return pps
+                })
+            }else{
                 selected_profile=selected_pps.pps_profiles.filter(function(profile){return profile.applied})[0]
             }
-            /**
-             * Create a copy of selected PPS profile
-             * and selects it.
-             */
-            selected_pps.pps_profiles = selected_pps.pps_profiles.map(function (prfl) {
-                if (prfl.profile_name === selected_profile.profile_name) {
-                    prfl = JSON.parse(JSON.stringify(selected_profile))
-                }
-                return prfl
-            })
-            pps_list=state.ppsList.map(function(pps){
-                if(pps.pps_id===selected_pps.pps_id){
-                    pps.pps_profiles=pps.pps_profiles.map(function(profile){
-                        if(profile.profile_name===selected_profile.profile_name){
-                            profile=selected_profile
-                        }
-                        return profile
-                    })
-                }
-                return pps
-            })
 
             return Object.assign({}, state, {
                 selectedProfile: selected_profile, //If no profile is selected, select the default profile

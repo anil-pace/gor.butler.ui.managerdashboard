@@ -45,7 +45,7 @@ class PPSList extends React.Component {
              * Otherwise onClick of PPS would also get called
              */
             event.stopPropagation()
-            let url=[PPS_PROFILE_URL,pps.pps_id,profile.profile_name].join("/")
+            let url=PPS_PROFILE_URL+pps.pps_id+"?profile_name="+profile.profile_name
             let data={
                 'url': url,
                 'method': GET,
@@ -85,12 +85,12 @@ class PPSList extends React.Component {
                                 {pps.pps_id===self.props.selectedPPS.pps_id && pps.pps_profiles.map(function (profile) {
                                     return <div className="pps-profile-item" onClick={self.selectPPSProfile.bind(self, {pps, profile})}
                                                 key={profile.profile_name}>
-                                        <span className={[profile.profile_name===self.props.selectedProfile.profile_name?'selected':'','pps-profile-name'].join(" ")}>{profile.profile_name}</span> {profile.applied && <span className="profile-applied-label"><FormattedMessage id="pps.configuration.applied.text"
-                                                                                                                                                                                                                                                          description="Applied"
-                                                                                                                                                                                                                                                          defaultMessage="Applied"/></span>}
-                                                                                                                                                                                                                                                          {profile.requested && <span className="profile-requested-label"><FormattedMessage id="pps.configuration.requested.text"
-                                                                                                                                                                                                                                                          description="Requested"
-                                                                                                                                                                                                                                                          defaultMessage="Requested"/></span>}
+                                        <div className={[profile.profile_name===self.props.selectedProfile.profile_name?'selected':'','pps-profile-name'].join(" ")}>{profile.profile_name}</div>
+                                        <div className="profile-label-container">
+                                            {profile.applied && <span className="profile-applied-label"><FormattedMessage id="pps.configuration.applied.text" description="Applied" defaultMessage="Applied"/></span>}
+                                            {profile.requested && <span className="profile-requested-label"><FormattedMessage id="pps.configuration.requested.text" description="Requested" defaultMessage="Requested"/></span>}
+                                        </div>
+
                                     </div>
 
                                 })}

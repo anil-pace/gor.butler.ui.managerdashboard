@@ -180,7 +180,7 @@ class PPSConfiguration extends React.Component {
                     {this.state.currentView==="groups" && <button onClick={self.createProfile.bind(self)} className="pps-bin-save-button"><FormattedMessage id="pps.configuration.buttons.saveNewProfile.text"
                                                                                                                                                             description="SAVE AS NEW PROFILE"
                                                                                                                                                             defaultMessage="SAVE AS NEW PROFILE"/></button>}
-                    {this.state.currentView==="groups" && <button onClick={self.saveProfile.bind(self,false)} className="pps-bin-save-button"><FormattedMessage id="pps.configuration.buttons.save.text"
+                    {this.state.currentView==="groups" && <button disabled={self.props.selectedProfile.applied} onClick={self.saveProfile.bind(self,false)} className="pps-bin-save-button"><FormattedMessage id="pps.configuration.buttons.save.text"
                                                                                                                                                                   description="SAVE"
                                                                                                                                                                   defaultMessage="SAVE"/></button>}
                 </div>}

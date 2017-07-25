@@ -451,7 +451,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
 
         case FETCH_PROFILE_FOR_PPS:
             store.dispatch(setPPSConfigurationSpinner(false))
-            store.dispatch(selectPPSProfileForConfiguration({profile:res}))
+            store.dispatch(selectPPSProfileForConfiguration(res))
             break;
         case FETCH_TAGS:
             store.dispatch(setPPSConfigurationSpinner(false))

@@ -7134,6 +7134,7 @@ button:disabled {
 .pps-profile-name {
   float: left;
   line-height: 20px;
+  width: 70%;
 }
 
 .profile-applied-label {
@@ -7145,13 +7146,27 @@ button:disabled {
   font-size: 12px;
 }
 
-.profile-requested-label {
+.profile-label-container {
   float: right;
+  width: 30%;
+}
+
+.profile-requested-label {
   padding: 5px;
   border-radius: 10px;
   color: white;
   background-color: orange;
   font-size: 12px;
+}
+
+.currentBinDirection {
+  background-color: transparent;
+  color: #999;
+}
+
+.currentBinDirection .active {
+  background-color: #4990e2;
+  color: white;
 }
 
 .pps-bins-container {
