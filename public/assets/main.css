@@ -7134,7 +7134,7 @@ button:disabled {
 .pps-profile-name {
   float: left;
   line-height: 20px;
-  width: 70%;
+  width: 68%;
 }
 
 .profile-applied-label {
@@ -7148,7 +7148,7 @@ button:disabled {
 
 .profile-label-container {
   float: right;
-  width: 30%;
+  width: 32%;
 }
 
 .profile-requested-label {
