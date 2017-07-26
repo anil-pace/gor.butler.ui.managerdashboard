@@ -5,7 +5,7 @@ import {
     RECEIVE_PPS_PROFILES,
     SELECT_PPS_PROFILE_FOR_CONFIGURATION,
     AJAX_CALL,
-    SELECT_PPS_BIN,ADD_TAG_TO_BIN,CLEAR_SELECTION_PPS_BIN,CHANGE_PPS_BIN_STATUS,RECEIVE_TAGS,CANCEL_PROFILE_CHANGES,CHANGE_PPS_BIN_GROUP_STATUS,SELECT_PPS_BIN_GROUP,PPS_PROFILE_CREATED,PPS_PROFILE_SAVED,TAG_ADDED_TO_LIST,DISPLAY_PPS_CONFIGURATION_SPINNER
+    SELECT_PPS_BIN,ADD_TAG_TO_BIN,CLEAR_SELECTION_PPS_BIN,CHANGE_PPS_BIN_STATUS,RECEIVE_TAGS,CANCEL_PROFILE_CHANGES,CHANGE_PPS_BIN_GROUP_STATUS,SELECT_PPS_BIN_GROUP,PPS_PROFILE_CREATED,PPS_PROFILE_SAVED,TAG_ADDED_TO_LIST,DISPLAY_PPS_CONFIGURATION_SPINNER,PPS_PROFILE_REQUESTED
 } from './../constants/frontEndConstants'
 export function fetchPPSProfiles(params) {
     return {
@@ -79,6 +79,13 @@ export function fetchAndSelectPPSProfileForConfiguration(params) {
     }
 }
 
+export function changePPSProfile(params) {
+    return {
+        type: AJAX_CALL,
+        params
+    }
+}
+
 export function receiveTags(params) {
     return {
         type: RECEIVE_TAGS,
@@ -124,6 +131,13 @@ export function savedPPSProfile(data) {
 export function profileCreated(data) {
     return {
         type: PPS_PROFILE_CREATED,
+        data
+    }
+}
+
+export function profileRequested(data) {
+    return {
+        type: PPS_PROFILE_REQUESTED,
         data
     }
 }

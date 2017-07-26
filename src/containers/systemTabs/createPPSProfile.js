@@ -6,6 +6,7 @@ import {connect} from 'react-redux'
 import {createNewPPSProfile,cancelProfileChanges} from './../../actions/ppsConfigurationActions'
 import {SAVE_PROFILE_URL} from './../../constants/configConstants'
 import {POST,CREATE_NEW_PROFILE,APP_JSON} from './../../constants/frontEndConstants'
+import {FormattedMessage} from 'react-intl'
 class CreateProfile extends React.Component {
     constructor(props) {
         super(props);
@@ -67,17 +68,25 @@ class CreateProfile extends React.Component {
             <div className='gor-create-profile'>
                 <div className='gor-create-profile-header'>
                     <div className='gor-question gor-align-middle'></div>
-                    <span>Save a new profile</span>
+                    <span><FormattedMessage id="pps.configuration.create.profile.header"
+                                            description="Save a new profile"
+                                            defaultMessage="Save a new profile"/></span>
                 </div>
                 <div className="gor-create-profile-body">
                     <div style={{display:'table-cell',verticalAlign:'middle'}}>
-                    <div className="gor-filter-input-text">New Profile Name</div>
+                    <div className="gor-filter-input-text"><FormattedMessage id="pps.configuration.create.profile.name.label"
+                                                                             description="New Profile Name"
+                                                                             defaultMessage="New Profile Name"/></div>
                     <input onChange={this.handleChangeInProfileName.bind(this)} value={this.state.profileName} id="create-profile-name" name="create-profile-name" className="gor-filter-input-wrap" type="text"/>
                     </div>
                 </div>
                 <div className='gor-create-profile-action-button'>
-                    <button className='gor-cancel-btn' onClick={this.props.removeModal.bind(this)}>Cancel</button>
-                    <button disabled={!this.state.isValidProfileName} onClick={this.createNewPPSProfile.bind(this)} className='gor-save-profile-btn'>Save a new profile</button>
+                    <button className='gor-cancel-btn' onClick={this.props.removeModal.bind(this)}><FormattedMessage id="pps.configuration.create.profile.cancel"
+                                                                                                                     description="Cancel"
+                                                                                                                     defaultMessage="Cancel"/></button>
+                    <button disabled={!this.state.isValidProfileName} onClick={this.createNewPPSProfile.bind(this)} className='gor-save-profile-btn'><FormattedMessage id="pps.configuration.create.profile.button.text"
+                                                                                                                                                                       description="Save A New Profile"
+                                                                                                                                                                       defaultMessage="Save A New Profile"/></button>
                 </div>
             </div>
         </div>

@@ -113,6 +113,54 @@ function auditTaskActions(data, index){
     return taskList
 }
 
+/**
+ * The method will return
+ * the profile name of applied profile
+ * that need to be displayed
+ * as the placeholder of action dropdown.
+ * @param data
+ * @param index
+ * @returns {string}
+ */
+function ppsProfilePlaceHolder(data, index) {
+    let applied_profile=""
+    if (!data.newData || !data.newData[index]) {
+        return applied_profile
+    }
+    try{
+        applied_profile = data.newData[index].profiles.filter(function (profile) {
+            return profile.applied
+        })[0].profile_name
+    }catch(ex){
+
+    }
+
+
+
+    return applied_profile
+
+}
+
+/**
+ * The method will return
+ * the list of profiles
+ * need to be shown in the option
+ * of available profiles that can be
+ * applied.
+ * @param data
+ * @param index
+ */
+function availablePPSProfiles(data, index) {
+    let profiles=data.newData[index].profiles.map(function(profile){
+        profile.value = profile.profile_name
+        profile.label = profile.profile_name
+        return profile
+    })
+
+
+    return profiles
+}
+
 export class DataListWrapper {
   constructor(indexMap, data) {
     this._indexMap=indexMap;
@@ -298,6 +346,25 @@ export const ActionCellAudit=({rowIndex, data, columnKey, handleAudit,manageAudi
       </div>
   </Cell>
 );
+
+export const ActionCellPPS = ({rowIndex, data, columnKey, applyProfile,confirmApplyProfile, ...props}) => (
+        <Cell {...props}>
+            <div className="gor-audit-actions-drop">
+                <Dropdown noBorder={true} placeholder={ppsProfilePlaceHolder(data, rowIndex)} options={availablePPSProfiles(data, rowIndex)||[]}
+                                onSelectHandler={confirmApplyProfile.bind(this, data.getObjectAt(rowIndex)['ppsId'])} resetOnSelect={true}/>
+            </div>
+            {data.getObjectAt(rowIndex)[columnKey].filter(function(profile){return profile.requested}).length>0?
+                <span className="requestedProfileTxt"><FormattedMessage id="pps.configuration.profile.requestedText"
+                                                                        description='requested profile for PPS'
+                                                                        defaultMessage='Requested Profile: {requestedProfile}'
+                                                                        values={{
+                                                                            requestedProfile: data.getObjectAt(rowIndex)[columnKey].filter(function(profile){return profile.requested})[0].profile_name,
+                                                                        }}/></span>:null
+            }
+
+        </Cell>
+    )
+;
 
 export class tableRenderer {
   constructor(size){
