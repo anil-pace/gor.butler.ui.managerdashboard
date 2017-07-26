@@ -151,7 +151,7 @@ class Tabs extends React.Component{
         overviewStatus=<FormattedMessage id="overviewStatus.tab.default" description="default overview Status" 
               defaultMessage="None"/>;          
       }
-      if(this.props.system_emergency)
+      if(this.props.system_emergency || this.props.fireHazardStartTime)
       {
         overviewStatus=<FormattedMessage id="overviewStatus.tab.stop" description="overview Status emergency" 
               defaultMessage="Operation stopped"/>;  
