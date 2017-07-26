@@ -24,6 +24,7 @@ import {FormattedMessage} from 'react-intl'
 import {PUT,APP_JSON,SAVE_PPS_PROFILE} from './../../constants/frontEndConstants'
 import {SAVE_PROFILE_URL} from './../../constants/configConstants'
 import Spinner from './../../components/spinner/Spinner';
+import SaveApplyProfile from './saveApplyProfile'
 
 
 class PPSConfiguration extends React.Component {
@@ -137,6 +138,23 @@ class PPSConfiguration extends React.Component {
         this.props.savePPSProfile(data)
     }
 
+    /**
+     * The method will open
+     * the confirmation modal to
+     * save and apply the profile
+     * for a given PPS
+     */
+    saveAndApplyProfileConfirmation(){
+        let self=this
+        modal.add(SaveApplyProfile, {
+            title: '',
+            size: 'large', // large, medium or small,
+            closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+            hideCloseButton: true, // (optional) if you don't wanna show the top right close button
+            saveAndApplyProfile:self.saveProfile.bind(self)
+        });
+    }
+
     render() {
 
         let self=this
@@ -171,7 +189,7 @@ class PPSConfiguration extends React.Component {
                     {this.state.currentView!=="groups" && <button onClick={self.handleClickOnNext.bind(self)} className="pps-bin-next-button"><FormattedMessage id="pps.configuration.buttons.next.text"
                                                                                                                                                                 description="NEXT"
                                                                                                                                                                 defaultMessage="NEXT"/></button>}
-                    {this.state.currentView==="groups" && <button disabled={self.props.selectedPPS.pps_profiles.filter(function(profile){ return profile.requested}).length>0} onClick={self.saveProfile.bind(self,true)} className="pps-bin-save-apply-button"><FormattedMessage id="pps.configuration.buttons.saveApply.text"
+                    {this.state.currentView==="groups" && <button disabled={self.props.selectedPPS.pps_profiles.filter(function(profile){ return profile.requested}).length>0} onClick={self.saveAndApplyProfileConfirmation.bind(self)} className="pps-bin-save-apply-button"><FormattedMessage id="pps.configuration.buttons.saveApply.text"
                                                                                                                                                                         description="SAVE AND APPLY"
                                                                                                                                                                         defaultMessage="SAVE AND APPLY"/></button>}
                     {this.state.currentView!=="tags" && <button onClick={self.handleClickOnBack.bind(self)} className="pps-bin-back-button"><FormattedMessage id="pps.configuration.buttons.back.text"

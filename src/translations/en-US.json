@@ -84,6 +84,12 @@
     "filepath": "./src/components/commonFunctionsDataTable.js"
   },
   {
+    "id": "pps.configuration.profile.requestedText",
+    "description": "requested profile for PPS",
+    "defaultMessage": "Requested Profile: {requestedProfile}",
+    "filepath": "./src/components/commonFunctionsDataTable.js"
+  },
+  {
     "id": "audit.resolveUnresolve.tooltip.header",
     "description": "resolveUnresolve issue for audit table",
     "defaultMessage": "{resolvedCount} audit lines, {unresolvedCount} audit lines",
@@ -3418,6 +3424,48 @@
     "filepath": "./src/containers/systemTabs/closePPSList.js"
   },
   {
+    "id": "pps.configuration.confirm.apply.profile",
+    "description": "Apply Profile to PPS",
+    "defaultMessage": "Are you sure you want to change the profile?",
+    "filepath": "./src/containers/systemTabs/confirmApplyProfile.js"
+  },
+  {
+    "id": "pps.configuration.confirm.apply.cancel",
+    "description": "Cancel apply Profile to PPS",
+    "defaultMessage": "Cancel",
+    "filepath": "./src/containers/systemTabs/confirmApplyProfile.js"
+  },
+  {
+    "id": "pps.configuration.confirm.change.profile",
+    "description": "Change Profile to PPS",
+    "defaultMessage": "Change",
+    "filepath": "./src/containers/systemTabs/confirmApplyProfile.js"
+  },
+  {
+    "id": "pps.configuration.create.profile.header",
+    "description": "Save a new profile",
+    "defaultMessage": "Save a new profile",
+    "filepath": "./src/containers/systemTabs/createPPSProfile.js"
+  },
+  {
+    "id": "pps.configuration.create.profile.name.label",
+    "description": "New Profile Name",
+    "defaultMessage": "New Profile Name",
+    "filepath": "./src/containers/systemTabs/createPPSProfile.js"
+  },
+  {
+    "id": "pps.configuration.create.profile.cancel",
+    "description": "Cancel",
+    "defaultMessage": "Cancel",
+    "filepath": "./src/containers/systemTabs/createPPSProfile.js"
+  },
+  {
+    "id": "pps.configuration.create.profile.button.text",
+    "description": "Save A New Profile",
+    "defaultMessage": "Save A New Profile",
+    "filepath": "./src/containers/systemTabs/createPPSProfile.js"
+  },
+  {
     "id": "NotificationTable.table.heading",
     "description": "Heading for NotificationTable",
     "defaultMessage": "Notifications",
@@ -3823,6 +3871,30 @@
     "description": "totalOperator for PPStable",
     "defaultMessage": "{operatorNum} operators",
     "filepath": "./src/containers/systemTabs/PPStable.js"
+  },
+  {
+    "id": "PPS.table.profiles",
+    "description": "profiles for PPS",
+    "defaultMessage": "PROFILES USED",
+    "filepath": "./src/containers/systemTabs/PPStable.js"
+  },
+  {
+    "id": "pps.configuration.confirm.saveAndapply.profile",
+    "description": "Save and ppply Profile to PPS",
+    "defaultMessage": "Are you sure you want to save and apply the profile?",
+    "filepath": "./src/containers/systemTabs/saveApplyProfile.js"
+  },
+  {
+    "id": "pps.configuration.confirm.apply.cancel",
+    "description": "Cancel apply Profile to PPS",
+    "defaultMessage": "Cancel",
+    "filepath": "./src/containers/systemTabs/saveApplyProfile.js"
+  },
+  {
+    "id": "pps.configuration.confirm.saveAndApply.profile",
+    "description": "Save and Apply Profile to PPS",
+    "defaultMessage": "SAVE AND APPLY",
+    "filepath": "./src/containers/systemTabs/saveApplyProfile.js"
   },
   {
     "id": "pps.configuration.tag.search.placeholder",

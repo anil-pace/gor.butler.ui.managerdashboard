@@ -475,6 +475,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
 
         case SAVE_PPS_PROFILE:
             store.dispatch(setPPSConfigurationSpinner(false))
+            store.dispatch(profileRequested(res))
             store.dispatch(savedPPSProfile(res))
             break;
 
