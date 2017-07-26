@@ -154,7 +154,7 @@ class Header extends React.Component {
                 
                 if(this.props.fireHazardStartTime){
                   optionAction=(<FormattedMessage id="header.option.firerelease" description='release operation option for fire'
-                              defaultMessage='Operations are stopped as fire emergency is triggered. Resume fire emergency to start operations.'/>);
+                              defaultMessage='Operations stopped as Fire Emergency trigger was received. Click Resume to start operations.'/>);
                 }
                 else
                 {
