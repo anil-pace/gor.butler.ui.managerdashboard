@@ -171,14 +171,23 @@ class Bins extends React.Component {
                                       defaultMessage="Select a bin to manage tags"/>
                 </div>
                 {self.state.currentBinDirection && <div style={{width: '35%', 'float': 'right', fontSize: '14'}}>
-                    <span style={{padding: '5px 10px', color: "#666"}}>Current PPS Selection</span>
+                    <span style={{padding: '5px 10px', color: "#666"}}><FormattedMessage
+                        id="pps.configuration.bins.direction.label"
+                        description="Bin Direction"
+                        defaultMessage="Current PPS Selection"/></span>
                     <span className="currentBinDirection" style={{padding: '5px 10px', border: '1px solid #ccc',borderRadius:20}}>
                         <span className={self.state.currentBinDirection === 'left' ? 'active' : null}
                               onClick={self.setBinDirection.bind(this, 'left')}
-                              style={{padding: '5px 10px', cursor: 'pointer'}}>LEFT</span>
+                              style={{padding: '5px 10px', cursor: 'pointer'}}><FormattedMessage
+                            id="pps.configuration.bins.direction.left"
+                            description="Bin Direction LEFT"
+                            defaultMessage="LEFT"/></span>
                     <span className={self.state.currentBinDirection === 'right' ? 'active' : null}
                           onClick={self.setBinDirection.bind(this, 'right')}
-                          style={{padding: '5px 10px', cursor: 'pointer'}}>RIGHT</span>
+                          style={{padding: '5px 10px', cursor: 'pointer'}}><FormattedMessage
+                        id="pps.configuration.bins.direction.right"
+                        description="Bin Direction RIGHT"
+                        defaultMessage="RIGHT"/></span>
                     </span>
 
                 </div>}
@@ -201,14 +210,23 @@ class Bins extends React.Component {
 
 
                 {self.state.currentBinDirection && <div style={{width: '35%', 'float': 'right', fontSize: '14'}}>
-                    <span style={{padding: '5px 10px', color: "#666"}}>Current PPS Selection</span>
+                    <span style={{padding: '5px 10px', color: "#666"}}><FormattedMessage
+                        id="pps.configuration.bins.direction.label"
+                        description="Bin Direction"
+                        defaultMessage="Current PPS Selection"/></span>
                     <span className="currentBinDirection" style={{padding: '5px 10px', border: '1px solid #ccc',borderRadius:20}}>
                         <span className={self.state.currentBinDirection === 'left' ? 'active' : null}
                               onClick={self.setBinDirection.bind(this, 'left')}
-                              style={{padding: '5px 10px', cursor: 'pointer'}}>LEFT</span>
+                              style={{padding: '5px 10px', cursor: 'pointer'}}><FormattedMessage
+                            id="pps.configuration.bins.direction.left"
+                            description="Bin Direction LEFT"
+                            defaultMessage="LEFT"/></span>
                     <span className={self.state.currentBinDirection === 'right' ? 'active' : null}
                           onClick={self.setBinDirection.bind(this, 'right')}
-                          style={{padding: '5px 10px', cursor: 'pointer'}}>RIGHT</span>
+                          style={{padding: '5px 10px', cursor: 'pointer'}}><FormattedMessage
+                        id="pps.configuration.bins.direction.right"
+                        description="Bin Direction RIGHT"
+                        defaultMessage="RIGHT"/></span>
                     </span>
 
                 </div>}
@@ -230,14 +248,23 @@ class Bins extends React.Component {
                 </div>
 
                 {self.state.currentBinDirection && <div style={{width: '35%', 'float': 'right', fontSize: '14'}}>
-                    <span style={{padding: '5px 10px', color: "#666"}}>Current PPS Selection</span>
+                    <span style={{padding: '5px 10px', color: "#666"}}><FormattedMessage
+                        id="pps.configuration.bins.direction.label"
+                        description="Bin Direction"
+                        defaultMessage="Current PPS Selection"/></span>
                     <span className="currentBinDirection" style={{padding: '5px 10px', border: '1px solid #ccc',borderRadius:20}}>
                         <span className={self.state.currentBinDirection === 'left' ? 'active' : null}
                               onClick={self.setBinDirection.bind(this, 'left')}
-                              style={{padding: '5px 10px', cursor: 'pointer'}}>LEFT</span>
+                              style={{padding: '5px 10px', cursor: 'pointer'}}><FormattedMessage
+                            id="pps.configuration.bins.direction.left"
+                            description="Bin Direction LEFT"
+                            defaultMessage="LEFT"/></span>
                     <span className={self.state.currentBinDirection === 'right' ? 'active' : null}
                           onClick={self.setBinDirection.bind(this, 'right')}
-                          style={{padding: '5px 10px', cursor: 'pointer'}}>RIGHT</span>
+                          style={{padding: '5px 10px', cursor: 'pointer'}}><FormattedMessage
+                        id="pps.configuration.bins.direction.right"
+                        description="Bin Direction RIGHT"
+                        defaultMessage="RIGHT"/></span>
                     </span>
 
                 </div>}
