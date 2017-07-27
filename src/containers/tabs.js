@@ -90,11 +90,8 @@ class Tabs extends React.Component{
     {
       this._emergencyRelease();
     }
-   else  if(nextProps.fireHazardType ===EMERGENCY_FIRE && !nextProps.firehazadflag 
-      && !nextProps.fireHazardNotifyTime 
-      && nextProps.firehazadflag!==this.props.firehazadflag || 
-      ((this.props.firehazadflag!==undefined && this.props.firehazadflag!==true) && 
-        nextProps.fireHazardNotifyTime!=this.props.fireHazardNotifyTime))
+   else  if(nextProps.fireHazardType ===EMERGENCY_FIRE && !nextProps.firehazadflag && !nextProps.fireHazardNotifyTime && nextProps.firehazadflag!==this.props.firehazadflag || 
+      ((this.props.firehazadflag===false) && nextProps.fireHazardNotifyTime!==this.props.fireHazardNotifyTime))
     {
       this._FireEmergencyRelease();
     }

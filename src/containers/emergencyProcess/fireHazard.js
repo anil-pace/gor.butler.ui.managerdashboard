@@ -29,6 +29,8 @@ class FireHazard extends React.Component{
     if(this.props.checkingList){
       this.endFireHazard();  //If manager is on safety checklist page, don't show the release modal      
     }
+  }
+componentWillMount(){
      var limit=(this.props.config.fire_emergency_enable_resume_after)*60;
     var duration=(limit-getSecondsDiff(this.props.fireHazard.emergencyStartTime))*1000;
     
@@ -38,8 +40,8 @@ class FireHazard extends React.Component{
       this.setState({buttonDisable:false})
     }.bind(this),duration); 
   }
+}
 
-  }
    componentWillReceiveProps(nextProps){
     if(!nextProps.auth_token||!nextProps.fireHazard.emergencyStartTime)
     {
