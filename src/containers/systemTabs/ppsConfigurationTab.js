@@ -21,7 +21,7 @@ import {cancelProfileChanges,savePPSProfile,setPPSConfigurationSpinner} from './
 import {modal} from 'react-redux-modal'
 import CreateProfile from './createPPSProfile'
 import {FormattedMessage} from 'react-intl'
-import {PUT,APP_JSON,SAVE_PPS_PROFILE} from './../../constants/frontEndConstants'
+import {PUT,APP_JSON,SAVE_PPS_PROFILE,PPS_STATUS_FCLOSE} from './../../constants/frontEndConstants'
 import {SAVE_PROFILE_URL} from './../../constants/configConstants'
 import Spinner from './../../components/spinner/Spinner';
 import SaveApplyProfile from './saveApplyProfile'
@@ -189,7 +189,7 @@ class PPSConfiguration extends React.Component {
                     {this.state.currentView!=="groups" && <button onClick={self.handleClickOnNext.bind(self)} className="pps-bin-next-button"><FormattedMessage id="pps.configuration.buttons.next.text"
                                                                                                                                                                 description="NEXT"
                                                                                                                                                                 defaultMessage="NEXT"/></button>}
-                    {this.state.currentView==="groups" && <button disabled={self.props.selectedPPS.pps_profiles.filter(function(profile){ return profile.requested}).length>0} onClick={self.saveAndApplyProfileConfirmation.bind(self)} className="pps-bin-save-apply-button"><FormattedMessage id="pps.configuration.buttons.saveApply.text"
+                    {this.state.currentView==="groups" && <button disabled={self.props.selectedPPS.pps_profiles.filter(function(profile){ return profile.requested}).length>0 || self.props.selectedPPS.pps_status===PPS_STATUS_FCLOSE} onClick={self.saveAndApplyProfileConfirmation.bind(self)} className="pps-bin-save-apply-button"><FormattedMessage id="pps.configuration.buttons.saveApply.text"
                                                                                                                                                                         description="SAVE AND APPLY"
                                                                                                                                                                         defaultMessage="SAVE AND APPLY"/></button>}
                     {this.state.currentView!=="tags" && <button onClick={self.handleClickOnBack.bind(self)} className="pps-bin-back-button"><FormattedMessage id="pps.configuration.buttons.back.text"

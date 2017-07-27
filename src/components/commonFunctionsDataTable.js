@@ -2,7 +2,7 @@ import React from 'react';
 import { Cell} from 'fixed-data-table';
 import { FormattedMessage } from 'react-intl';
 import DropdownTable from './dropdown/dropdownTable'
-import {AUDIT_APPROVED, AUDIT_REJECTED,VIEW_AUDIT_ISSUES,APPROVE_AUDIT,GOR_STATUS,AUDIT_UNRESOLVED,AUDIT_REJECTED_STATUS,AUDIT_RESOLVED_STATUS,AUDIT_REAUDITED_STATUS} from '../constants/frontEndConstants';
+import {AUDIT_APPROVED, AUDIT_REJECTED,VIEW_AUDIT_ISSUES,APPROVE_AUDIT,GOR_STATUS,AUDIT_UNRESOLVED,AUDIT_REJECTED_STATUS,AUDIT_RESOLVED_STATUS,AUDIT_REAUDITED_STATUS,PPS_STATUS_FCLOSE} from '../constants/frontEndConstants';
 import Dropdown from "./gor-dropdown-component/dropdown";
 export var SortTypes={
   ASC: 'ASC',
@@ -410,12 +410,13 @@ export class ActionCellPPS extends React.Component {
         if (self.props.data.getObjectAt(self.props.rowIndex)) {
             let placeholder = self.ppsProfilePlaceHolder(self.props.data, self.props.rowIndex)
             let options = self.availablePPSProfiles(self.props.data, self.props.rowIndex)
+            let forced_close_pps=self.props.data.getObjectAt(self.props.rowIndex).statusClass===PPS_STATUS_FCLOSE
             let any_requested_profile = self.props.data.getObjectAt(self.props.rowIndex)[self.props.columnKey].filter(function (profile) {
                     return profile.requested
                 }).length > 0
             return <Cell>
                 <div className="gor-pps-profile-drop">
-                    <Dropdown disabled={any_requested_profile} noBorder={true} placeholder={placeholder} options={options}
+                    <Dropdown disabled={any_requested_profile ||forced_close_pps} noBorder={true} placeholder={placeholder} options={options}
                               onSelectHandler={self.props.confirmApplyProfile.bind(self, self.props.data.getObjectAt(self.props.rowIndex)['ppsId'])}
                               resetOnSelect={true}/>
                 </div>
