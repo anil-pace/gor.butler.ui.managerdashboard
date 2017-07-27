@@ -53,7 +53,8 @@ class FireHazard extends React.Component{
       title: '',
       size: 'large', // large, medium or small,
       closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-      hideCloseButton: true // (optional) if you don't wanna show the top right close button
+      hideCloseButton: true, // (optional) if you don't wanna show the top right close button
+      fireHazardPressed:true
       //.. all what you put in here you will get access in the modal props ;)
     });
   }

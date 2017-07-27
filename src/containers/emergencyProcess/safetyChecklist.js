@@ -48,7 +48,7 @@ class SafetyChecklist extends React.Component{
   }
   componentDidMount(){
    var url;
-    if(this.props.fireHazard.emergency_type===EMERGENCY_FIRE){
+    if(this.props.emergency_type===EMERGENCY_FIRE){
        url=VALIDATION_LIST+"?emergency_type=fire_emergency";
      }
      else
@@ -85,7 +85,7 @@ class SafetyChecklist extends React.Component{
   _handleSafetyConfirm(e)
   {
   var reqType;
-   if(this.props.fireHazard.emergency_type===EMERGENCY_FIRE){
+   if(this.props.emergency_type===EMERGENCY_FIRE){
       reqType=EMERGENCY_FIRE;
     }
     else
@@ -166,20 +166,25 @@ class SafetyChecklist extends React.Component{
         <div className='gor-safetylist'>
           <div className="gor-modal-content">
             <div className='gor-modal-head'>
-              <div className='gor-usr-add'><FormattedMessage id='operation.safety.heading' 
-                    defaultMessage="Safety checklist"
+          {this.props.emergency_type===EMERGENCY_FIRE?   
+              (<div className='gor-usr-add'><FormattedMessage id='operation.firesafety.heading' 
+                    defaultMessage="Resume Checklist"
                             description="Text for safety heading"/>
-              </div>
+              </div>):
+              (<div className='gor-usr-add'><FormattedMessage id='operation.safety.heading' 
+                    defaultMessage="Safety Checklist"
+                            description="Text for fire safety heading"/>
+              </div>)}
               <span className="close" onClick={this._removeThisModal.bind(this)}>×</span>
             </div>
             <div className='gor-modal-body'>
             <form action="#"  id="safetyForm">
              <div className='gor-usr-form'>
               <div className='gor-usr-details'>
-                <div className='gor-usr-hdsm'><FormattedMessage id='operation.safety.steps' 
+                <div className='gor-safety-hd'><FormattedMessage id='operation.safety.steps' 
                     defaultMessage="Check approval steps"
                             description="Text for approval steps"/></div>
-                <div className='gor-sub-head'><FormattedMessage id='operation.safety.text' 
+                <div className='gor-safetysub-head'><FormattedMessage id='operation.safety.text' 
                     defaultMessage="Tick every item to confirm that the system is safe to resume operation."
                             description="Text for ticking items"/></div>
                 <div className='gor-safety-body'>
@@ -197,11 +202,19 @@ class SafetyChecklist extends React.Component{
                   </ul>
                 </div> 
                 <div className='gor-margin-top'>
-                <button type="submit" className="gor-add-btn" disabled={(!this.state.allChecked)?true:false}
+                {this.props.emergency_type===EMERGENCY_FIRE?
+                (<button type="submit" className="gor-add-btn" disabled={(!this.state.allChecked)?true:false}
+                  onClick={this._handleSafetyConfirm.bind(this)}><FormattedMessage id='operation.firesafety.confirm' 
+                    defaultMessage="Resume Opeartion" description="Text for Resume Opeartion button"/>
+                    <Spinner isLoading={this.props.safetySpinner} setSpinner={this.props.setSafetySpinner}/>
+                    </button>):
+                    (<button type="submit" className="gor-add-btn" disabled={(!this.state.allChecked)?true:false}
                   onClick={this._handleSafetyConfirm.bind(this)}><FormattedMessage id='operation.safety.confirm' 
                     defaultMessage="Confirm" description="Text for confirm button"/>
                     <Spinner isLoading={this.props.safetySpinner} setSpinner={this.props.setSafetySpinner}/>
-                    </button>
+                    </button>)}
+
+
                 </div>
               </div>
              </div>

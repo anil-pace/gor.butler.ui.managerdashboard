@@ -216,7 +216,7 @@ class Tabs extends React.Component{
   var timeText= <FormattedRelative value={convertedDate} timeZone={this.props.timeZone}/>;
 
  if(this.props.fireHazardNotifyTime){
-singleNotification=<GorToastify key={1} onClick={this._openPopup}>
+singleNotification=<GorToastify key={1}>
 <div className="gor-toastify-content info">
                   <p className="msg-content">
                    <FormattedMessage id='operation.alert.resumed' 
@@ -224,14 +224,15 @@ singleNotification=<GorToastify key={1} onClick={this._openPopup}>
                             description="Text to resume operation"/>
                   <span className="gor-toastify-updated-time">{timeText}</span>
                   </p>
-                  <span className="gor-toastify-details closeButton">×</span>
-
+                  <span className="gor-toastify-details">
+<span className="closeButton"  onClick={this._openPopup}></span>
+</span>
      </div>
      
     </GorToastify>
 }else
 {
-  singleNotification=<GorToastify key={2} onClick={this._openPopup}>
+  singleNotification=<GorToastify key={2} >
    <div className="gor-toastify-content">
                   <p className="msg-content">
                    <FormattedMessage id='operation.alert.triggeremergency' 
@@ -239,7 +240,7 @@ singleNotification=<GorToastify key={1} onClick={this._openPopup}>
                             description="Text button to trigger emergency"/>
                              <span className="gor-toastify-updated-time">{timeText}</span>
                   </p>
-                  <span className="gor-toastify-details">
+                  <span className="gor-toastify-details" onClick={this._openPopup}>
 
 <FormattedMessage id='operation.alert.toastifydetails' 
                     defaultMessage="VIEW DETAILS"
@@ -261,7 +262,7 @@ singleNotification=<GorToastify key={1} onClick={this._openPopup}>
   }
   else
   {
-    showFireHazardPopup=false;
+  showFireHazardPopup=false;
   }
   
   let notificationWrap=this._processNotification();
