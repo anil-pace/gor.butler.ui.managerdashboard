@@ -107,6 +107,11 @@ class Bins extends React.Component {
         return false
     }
 
+    /**
+     * Displays the bins for
+     * a particular direction i.e, left/center/right
+     * @param dir
+     */
     setBinDirection(dir) {
         this.clearSelectionPPSBin({bin: this.props.selectedPPSBin, currentView: this.props.currentView})
         this.setState({currentBinDirection: dir || null})

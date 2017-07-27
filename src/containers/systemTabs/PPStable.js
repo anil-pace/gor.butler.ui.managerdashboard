@@ -1,5 +1,5 @@
 import React from 'react';
-import {Table, Column} from 'fixed-data-table';
+import {Table, Column,Cell} from 'fixed-data-table';
 import Dimensions from 'react-dimensions'
 import {FormattedMessage} from 'react-intl';
 import {
@@ -158,8 +158,11 @@ class PPStable extends React.Component {
                     else {
                         siblingEl=el.nextSibling;
                     }
-                    siblingEl.style.bottom='100%';
-                    siblingEl.style.top='initial';
+                    if(siblingEl){
+                        siblingEl.style.bottom='100%';
+                        siblingEl.style.top='initial';
+                    }
+
                 }
                 break;
             }
@@ -472,17 +475,16 @@ class PPStable extends React.Component {
                     <Column
                         columnKey="profiles"
                         header={
-                            <SortHeaderCell onSortChange={this._onSortChange}
-                                            sortDir={colSortDirs.profiles}>
-                                <div className="gorToolHeaderEl">
-                                    <FormattedMessage id="PPS.table.profiles"
-                                                      description="profiles for PPS"
-                                                      defaultMessage="PROFILES USED"/>
-                                    <div className="gorToolHeaderSubText">
+                            <Cell>
+                            <div className="gorToolHeaderEl">
+                            <FormattedMessage id="PPS.table.profiles"
+                            description="profiles for PPS"
+                            defaultMessage="PROFILES USED"/>
+                            <div className="gorToolHeaderSubText">
 
-                                    </div>
-                                </div>
-                            </SortHeaderCell>
+                            </div>
+                            </div>
+                            </Cell>
                         }
                         cell={<ActionCellPPS confirmApplyProfile={this.confirmApplyProfileChanges.bind(this)} data={sortedDataList}/>}
                         fixed={true}

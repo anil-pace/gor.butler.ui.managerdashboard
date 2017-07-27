@@ -484,3 +484,41 @@
   color:#27aae1;
   vertical-align: middle;
 }
+
+.pps-list-available-profile{
+  clear:both;
+  overflow:auto;
+  padding:2px;
+}
+
+.pps-list-available-profile .profile-name{
+  float:left
+}
+.pps-list-available-profile .applied-status{
+  float:right
+}
+
+.gor-pps-profile-drop .gor-dropdown-wrapper{
+  display: inline-block;
+  width: 150px;
+  color:black;
+}
+.gor-pps-profile-drop .gor-dropdown-option{
+  color:black;
+}
+
+.gor-pps-profile-drop .gor-dropdown-option:hover{
+  background-color: #F2F2F2;
+}
+
+.gor-pps-profile-drop .gor-option-wrapper{
+  border:1px solid #aaa;
+}
+
+.gor-pps-profile-drop .gor-dropdown-wrapper.disabled{
+  color:#aaa;
+}
+
+.gor-pps-profile-drop .gor-white-background{
+  background-color: transparent;
+}
