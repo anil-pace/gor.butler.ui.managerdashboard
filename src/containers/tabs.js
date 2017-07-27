@@ -32,12 +32,7 @@ class Tabs extends React.Component{
   }
 
     _openPopup(){
-      
-      if(this.props.fireHazardNotifyTime){
-        this.props.setFireHazrdFlag(null);
-      }else{
-        this.props.setFireHazrdFlag(false);
-      }
+        this.props.setFireHazrdFlag(false);      
   }
 
 
@@ -95,7 +90,11 @@ class Tabs extends React.Component{
     {
       this._emergencyRelease();
     }
-    else  if(nextProps.fireHazardType ===EMERGENCY_FIRE && !nextProps.firehazadflag && !nextProps.fireHazardNotifyTime && (nextProps.firehazadflag!=this.props.firehazadflag))
+   else  if(nextProps.fireHazardType ===EMERGENCY_FIRE && !nextProps.firehazadflag 
+      && !nextProps.fireHazardNotifyTime 
+      && nextProps.firehazadflag!==this.props.firehazadflag || 
+      ((this.props.firehazadflag!==undefined && this.props.firehazadflag!==true) && 
+        nextProps.fireHazardNotifyTime!=this.props.fireHazardNotifyTime))
     {
       this._FireEmergencyRelease();
     }
