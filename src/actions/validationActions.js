@@ -2,7 +2,7 @@ import {SKU_DATA,LOC_DATA,ID_DATA,NAME_DATA,PASSWORD_DATA,INFO_RESET,
 	ID_BACKEND,NOTIFY_PASS,NOTIFY_HIDE,NOTIFY_FAIL,NOTIFY_DELETE,
 	NOTIFY_INFO,LOGIN_ERROR,AJAX_CALL,VALIDATE_SKU_SPINNER,
 	VALIDATED_SKU_CODE,MODAL_STATUS,SAFETY_MAP,
-	SAFETY_ERROR_MAP,SET_MODAL_KEY,CHECKLIST,MODAL_RESET} from '../constants/frontEndConstants';
+	SAFETY_ERROR_MAP,SAFETY_ERROR_BOT,SET_MODAL_KEY,CHECKLIST,MODAL_RESET} from '../constants/frontEndConstants';
 
 
 export function validateID(data){
@@ -127,7 +127,7 @@ export function getSafetyErrorList(data){
 
 export function getErrorBotList(data){
 	return{
-		type:"SAFETY_ERROR_BOT",
+		type:SAFETY_ERROR_BOT,
 		data
 	}
 }

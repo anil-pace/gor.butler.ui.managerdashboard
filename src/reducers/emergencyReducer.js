@@ -1,5 +1,5 @@
 import {MODAL_STATUS,SAFETY_MAP,
-  SAFETY_ERROR_MAP,CHECKLIST,MODAL_RESET} from '../constants/frontEndConstants';
+  SAFETY_ERROR_MAP,SAFETY_ERROR_BOT,CHECKLIST,MODAL_RESET} from '../constants/frontEndConstants';
 
 /**
  * @param  {State Object}
@@ -29,7 +29,22 @@ export  function emergency(state={},action){
           return Object.assign({},state,{
             //"safetyList":action.data
             safetyList:['md007','md008','md009','md010','md011','md012','md013'],
-            botList:[]
+            botList:[{
+          "bot_id": "Bot1",
+          "rack_id": "Rack01",
+          "rack_location": "North",
+          "rack_face": "South",
+          "pps_id": "PPS1",
+          "pps_location": "Location1"
+        },
+        {
+          "bot_id": "Bot2",
+          "rack_id": "Rack01",
+          "rack_location": "South",
+          "rack_face": "South",
+          "pps_id": "PPS1",
+          "pps_location": "Location2"
+        }]
           });
           break;
     case SAFETY_ERROR_MAP:
@@ -37,7 +52,7 @@ export  function emergency(state={},action){
             "safetyErrorList":action.data
           });
           break;
-    case "SAFETY_ERROR_BOT":
+    case SAFETY_ERROR_BOT:
           return Object.assign({},state,{
             "safetyErrorBotList":action.data
           });
