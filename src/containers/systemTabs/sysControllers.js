@@ -39,10 +39,7 @@ class SystemControllers extends React.Component {
         this.state=this._getInitialState();
         this._clearFilter =  this._clearFilter.bind(this);
         this._sortTableData = this._sortTableData.bind(this);
-        this._setFilter = this._setFilter.bind(this);
-        this._hideFilter = this._hideFilter.bind(this);
-        this._applyFilter = this._applyFilter.bind(this);
-        this._handleTokenClick = this._handleTokenClick.bind(this);
+        
     }
 
     _getInitialState(){
@@ -68,12 +65,7 @@ class SystemControllers extends React.Component {
             queryApplied:Object.keys(this.props.location.query).length ? true :false
         }
     }
-    _setFilter() {
-        this.props.showTableFilter(!this.props.showFilter);
-    }
-    _hideFilter(){
-        this.props.showTableFilter(false);
-    }
+   
 
     _processData(data){
         //var data=this.props.controllers.slice(0);
@@ -101,8 +93,17 @@ class SystemControllers extends React.Component {
                 else{
                     rowObj.ethernetText = this.context.intl.formatMessage(stringConfig.disconnected)
                 }
+                if(rowObj.sensor_activated === "button_press"){
+                    rowObj.sensor_activated_text = CONTROLLER_SENSOR_TRIGGERED_MESSAGES[rowObj.sensor]
+                }
+                else if(rowObj.sensor_activated === "none"){
+                    rowObj.sensor_activated_text = "";
+                }
+                else{
+                    rowObj.sensor_activated_text = CONTROLLER_SENSOR_TRIGGERED_MESSAGES[rowObj.sensor_activated];
+                }
                 rowObj.action_triggered_text = CONTROLLER_ACTION_TRIGGERED_MESSAGES[rowObj.action_triggered];
-                rowObj.sensor_activated_text = CONTROLLER_SENSOR_TRIGGERED_MESSAGES[rowObj.sensor_activated];
+                
                 processedData.push(rowObj)
             }
         }
@@ -131,7 +132,8 @@ class SystemControllers extends React.Component {
         })
     }
 
-    _clearFilter() {
+    
+     _clearFilter() {
         this.setState({
             subscribed:false
         },function(){
@@ -139,12 +141,7 @@ class SystemControllers extends React.Component {
         })
         
     }
-    _applyFilter(){
-
-    }
-    _handleTokenClick(){
-        console.log(arguments);
-    }
+   
 
     _refreshList(query){
         var filterSubsData = {};
@@ -156,15 +153,16 @@ class SystemControllers extends React.Component {
         this.props.initDataSentCall(updatedWsSubscription["controllers"])
     }
 
+ 
+
     shouldComponentUpdate(nextProps,nextState) {
         return ((nextProps.hasDataChanged !== this.props.hasDataChanged) || 
-            (nextState.hasStateChanged !== this.state.hasStateChanged)||
-            (nextProps.showFilter !== this.props.showFilter));
+            (nextState.hasStateChanged !== this.state.hasStateChanged));
     }
 
 
     componentWillReceiveProps(nextProps) {
-        if(nextProps.socketAuthorized && !this.state.subscribed){
+        if((nextProps.socketAuthorized && !this.state.subscribed) || (JSON.stringify(this.props.location.query) !== JSON.stringify(nextProps.location.query))){
             this.setState({
                 subscribed:true,
                 queryApplied:Object.keys(this.props.location.query).length ? true :false
@@ -198,28 +196,11 @@ class SystemControllers extends React.Component {
 
     render() {
         var {dataList} = this.state;
-        //console.log(this.props.controllers);
-        const zoneFilter=[
-                    { value: 'all', label: "sdf"},
-                    { value: 'open', label: "sfs"},
-                    { value: 'close', label: "gd"},
-                    { value: 'force_close', label: "etet"}
-                    ];
-        const header = {value:"zone_id", label:<FormattedMessage id="sysController.filter.zoneHead" defaultMessage="ZONE"/>};
-        const filterToken = <FilterTokenWrap field={header} tokenCallBack={this._handleTokenClick} label={zoneFilter} selectedToken={null}/>;
+        var filterHeight=screen.height - 190 - 50;
+        
         return (
             <div  className="gorTableMainContainer gor-sys-controller">
-            <div className="gor-filter-wrap"
-                                 style={{'width': this.props.showFilter ? '350px' : '0px', height: '350px'}}>
-                                <Filter hideFilter={this._hideFilter}  // hiding filter wont disturb state
-                                     clearFilter={null} 
-                                     filterTokenC1={filterToken}
-                                     formSubmit={this._applyFilter} //passing function on submit
-                                     responseFlag={false} 
-                                     noDataFlag={this.props.controllers.length ? false : true}
-
-                                />  
-                            </div>
+            
             <div className="gorToolBar">
                                 <div className="gorToolBarWrap">
                                     <div className="gorToolBarElements">
@@ -247,12 +228,12 @@ class SystemControllers extends React.Component {
                 </div>
                 <FilterSummary total={dataList.getSize()||0} isFilterApplied={this.state.queryApplied} responseFlag={null}
                                            refreshList={this._clearFilter}
-                                           refreshText={<FormattedMessage id="ppsList.filter.search.bar.showall"
+                                           refreshText={<FormattedMessage id="sysController.summary.showall"
                                                                           description="button label for show all"
-                                                                          defaultMessage="Show all Stations"/>}/>
+                                                                          defaultMessage="Show all Zones"/>}/>
                 
                 <Table
-                    rowHeight={60}
+                    rowHeight={80}
                     rowsCount={dataList.getSize()}
                     headerHeight={70}
                     onColumnResizeEndCallback={null}
@@ -315,9 +296,7 @@ class SystemControllers extends React.Component {
                             </Cell>
                         }
                         cell={<TextCell data={dataList} classKey={"location"} childrenClass="location" childColumnKey="zone_id">
-                             <span ><FormattedMessage id="sysController.location.name" description='PPStable.requestedMode.text'
-                                                          defaultMessage='Zone: '
-                                                          /></span>
+                             <span ></span>
                         </TextCell>}
                         fixed={true}
                         width={this.state.columnWidths.location}
@@ -368,7 +347,9 @@ class SystemControllers extends React.Component {
                     />
                     
                 </Table>
-               
+               {!this.props.controllers.length && <div className="gor-no-data"><FormattedMessage id="sysControllers.table.noData"
+                                                                    description="No data message for PPStable"
+                                                                    defaultMessage="No Controllers Found"/></div>}
             </div>
         );
     }
@@ -382,15 +363,14 @@ function mapStateToProps(state, ownProps) {
         controllers:state.sysControllersReducer.controllers || [],
         hasDataChanged:state.sysControllersReducer.hasDataChanged,
         socketAuthorized: state.recieveSocketActions.socketAuthorized,
-        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket,
-        showFilter: state.filterInfo.filterState || false
+        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket
+        
     };
 }
 
 function mapDispatchToProps(dispatch){
     return{
-        initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
-        showTableFilter: function (data) {dispatch(showTableFilter(data));}
+        initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); }
     }
 }
 

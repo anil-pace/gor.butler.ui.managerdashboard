@@ -261,7 +261,9 @@ class Header extends React.Component {
                                             }}/> : <FormattedMessage id="header.zones.noOperation" description='Zone in operation count '
                                             defaultMessage='No zones in operation'
                                             />}</p>
-                                <button onClick={this._showModal} className="gor-sys-btn"> <FormattedMessage id="header.button.resume" description='Button text'
+                                <button onClick={this._showModal} className="gor-sys-btn">
+                                <span className="gor-resume-icon"></span>
+                                 <FormattedMessage id="header.button.resume" description='Button text'
                                 defaultMessage='Resume System'
                                 /></button>
                             </section>)

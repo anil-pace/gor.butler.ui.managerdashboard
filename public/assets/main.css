@@ -169,7 +169,7 @@ body {
 .statusOl, .statusAl, .iStock, .iAudit, .iPick, .gor-login-user, .gor-login-password, .gor-login-error, .gor-tick, .gor-question, .gor-tick-white, .gor-remove-white, .gor-error-white, .gor-login-user-error, .gor-login-password-error, .gor-question-2, .gor-operation-tick, .gor-alert-lg,
 .gor-dropdown-open, .gor-dropdown-close, .gor-caution, .gor-delay-icon,
 .gor-emergency-dropdown-close, .gor-emergency-dropdown-open, .gor-info-icon, .gor-selected-icon, .not-bell, .searchIcon, .not-statusIcon,
-.calloutArr, .gor-audit-info-icon {
+.calloutArr, .gor-audit-info-icon, .gor-resume-icon, .gor-zone-status, .action-icon {
   background-image: url(./images/icons.svg);
 }
 
@@ -600,6 +600,14 @@ body {
   background-position: -168px -97px;
   width: 10px;
   height: 8px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.gor-resume-icon {
+  background-position: -140px -366px;
+  width: 26px;
+  height: 26px;
   display: inline-block;
   vertical-align: middle;
 }
@@ -5683,7 +5691,7 @@ button:disabled {
   background: #fff;
   border: 1px solid #525252;
   border-radius: 2px;
-  padding: 8px 15px;
+  padding: 5px 10px;
   font-size: 14px;
   font-weight: bold;
   color: #3C3F43;
@@ -6995,11 +7003,15 @@ button:disabled {
   width: 23%;
   background: #fff;
   display: inline-block;
-  padding: 0px 5px;
+  padding: 5px 10px;
   margin-left: 10px;
   margin-top: 10px;
-  border: 1px solid #E1E1E1;
   cursor: pointer;
+}
+
+.gor-zone-wrapper .gor-zone-tile.operating {
+  box-sizing: border-box;
+  border: 4px solid #E1E1E1;
 }
 
 .gor-zone-wrapper .gor-zone-tile.operating.stop {
@@ -7012,8 +7024,11 @@ button:disabled {
 }
 
 .gor-zone-wrapper .gor-zone-tile.operating.stop .gor-zone-status {
-  border: 4px solid #B40313;
-  box-sizing: border-box;
+  background-position: -7px -304px;
+  width: 61px;
+  height: 61px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .gor-zone-wrapper .gor-zone-tile.operating.pause {
@@ -7026,8 +7041,19 @@ button:disabled {
 }
 
 .gor-zone-wrapper .gor-zone-tile.operating .gor-zone-status {
-  border: 4px solid #00BB9A;
-  box-sizing: border-box;
+  background-position: -7px -179px;
+  width: 61px;
+  height: 61px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.gor-zone-wrapper .gor-zone-tile.operating .zone-name {
+  font-weight: bold;
+}
+
+.gor-zone-wrapper .gor-zone-tile.operating .operating-status {
+  font-weight: bold;
 }
 
 .gor-zone-wrapper .gor-zone-tile.zonePauseActive {
@@ -7045,6 +7071,14 @@ button:disabled {
   color: #fff;
 }
 
+.gor-zone-wrapper .gor-zone-tile.zonePauseActive.stop .gor-zone-status {
+  background-position: -7px -304px;
+  width: 61px;
+  height: 61px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .gor-zone-wrapper .gor-zone-tile.zonePauseActive.pause {
   background: #DE0010;
   border: 4px solid #B40313;
@@ -7055,8 +7089,11 @@ button:disabled {
 }
 
 .gor-zone-wrapper .gor-zone-tile.zonePauseActive .gor-zone-status {
-  border: 4px solid #EC1B2C;
-  box-sizing: border-box;
+  background-position: -190px -240px;
+  width: 61px;
+  height: 61px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .gor-zone-wrapper .gor-zone-tile.zonePauseActive .zone-name {
@@ -7084,6 +7121,14 @@ button:disabled {
   color: #fff;
 }
 
+.gor-zone-wrapper .gor-zone-tile.zoneClearInit.stop .gor-zone-status {
+  background-position: -7px -304px;
+  width: 61px;
+  height: 61px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .gor-zone-wrapper .gor-zone-tile.zoneClearInit.pause {
   background: #DE0010;
   border: 4px solid #B40313;
@@ -7094,8 +7139,11 @@ button:disabled {
 }
 
 .gor-zone-wrapper .gor-zone-tile.zoneClearInit .gor-zone-status {
-  border: 4px solid #EC1B2C;
-  box-sizing: border-box;
+  background-position: -190px -240px;
+  width: 61px;
+  height: 61px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .gor-zone-wrapper .gor-zone-tile.zoneClearInit .zone-name {
@@ -7133,8 +7181,11 @@ button:disabled {
 }
 
 .gor-zone-wrapper .gor-zone-tile.zoneClearActive .gor-zone-status {
-  border: 4px solid #EC1B2C;
-  box-sizing: border-box;
+  background-position: -140px -366px;
+  width: 61px;
+  height: 61px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .gor-zone-wrapper .gor-zone-tile.zoneClearActive .zone-name {
@@ -7172,8 +7223,11 @@ button:disabled {
 }
 
 .gor-zone-wrapper .gor-zone-tile.zoneClearDeactivated .gor-zone-status {
-  border: 4px solid #EC1B2C;
-  box-sizing: border-box;
+  background-position: -140px -366px;
+  width: 61px;
+  height: 61px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .gor-zone-wrapper .gor-zone-tile.zoneClearDeactivated .zone-name {
@@ -7211,8 +7265,11 @@ button:disabled {
 }
 
 .gor-zone-wrapper .gor-zone-tile.zonePauseDeactivated .gor-zone-status {
-  border: 4px solid #EC1B2C;
-  box-sizing: border-box;
+  background-position: -140px -366px;
+  width: 61px;
+  height: 61px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .gor-zone-wrapper .gor-zone-tile.zonePauseDeactivated .zone-name {
@@ -7251,8 +7308,11 @@ button:disabled {
 }
 
 .gor-zone-wrapper .gor-zone-tile.emergencyStop .gor-zone-status {
-  border: 4px solid #EC1B2C;
-  box-sizing: border-box;
+  background-position: -190px -304px;
+  width: 61px;
+  height: 61px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .gor-zone-wrapper .gor-zone-tile.emergencyPause {
@@ -7281,8 +7341,11 @@ button:disabled {
 }
 
 .gor-zone-wrapper .gor-zone-tile.emergencyPause .gor-zone-status {
-  border: 4px solid #B40313;
-  box-sizing: border-box;
+  background-position: -140px -366px;
+  width: 61px;
+  height: 61px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .gor-zone-wrapper .gor-zone-tile.zonePauseInit {
@@ -7300,6 +7363,14 @@ button:disabled {
   color: #fff;
 }
 
+.gor-zone-wrapper .gor-zone-tile.zonePauseInit.stop .gor-zone-status {
+  background-position: -7px -304px;
+  width: 61px;
+  height: 61px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .gor-zone-wrapper .gor-zone-tile.zonePauseInit.pause {
   background: #DE0010;
   border: 4px solid #B40313;
@@ -7310,8 +7381,11 @@ button:disabled {
 }
 
 .gor-zone-wrapper .gor-zone-tile.zonePauseInit .gor-zone-status {
-  border: 4px solid #EC1B2C;
-  box-sizing: border-box;
+  background-position: -190px -240px;
+  width: 61px;
+  height: 61px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .gor-zone-wrapper .gor-zone-tile.zonePauseInit .zone-name {
@@ -7320,45 +7394,6 @@ button:disabled {
 }
 
 .gor-zone-wrapper .gor-zone-tile.zonePauseInit .operating-status {
-  color: #DF2611;
-  font-weight: bold;
-}
-
-.gor-zone-wrapper .gor-zone-tile.zonePauseActive {
-  background: #F4E822;
-  box-sizing: border-box;
-  border: 4px solid #E7C606;
-}
-
-.gor-zone-wrapper .gor-zone-tile.zonePauseActive.stop {
-  background: #DE0010;
-  border: 4px solid #B40313;
-}
-
-.gor-zone-wrapper .gor-zone-tile.zonePauseActive.stop p {
-  color: #fff;
-}
-
-.gor-zone-wrapper .gor-zone-tile.zonePauseActive.pause {
-  background: #DE0010;
-  border: 4px solid #B40313;
-}
-
-.gor-zone-wrapper .gor-zone-tile.zonePauseActive.pause p {
-  color: #fff;
-}
-
-.gor-zone-wrapper .gor-zone-tile.zonePauseActive .gor-zone-status {
-  border: 4px solid #EC1B2C;
-  box-sizing: border-box;
-}
-
-.gor-zone-wrapper .gor-zone-tile.zonePauseActive .zone-name {
-  color: #515043;
-  font-weight: bold;
-}
-
-.gor-zone-wrapper .gor-zone-tile.zonePauseActive .operating-status {
   color: #DF2611;
   font-weight: bold;
 }
@@ -7399,4 +7434,74 @@ button:disabled {
 
 .connectionDetails span:nth-child(2) {
   color: #49BE7E;
+}
+
+.actionTriggered .action-icon {
+  width: 61px;
+  height: 61px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.actionTriggered .action-left {
+  display: inline-block;
+  width: 12%;
+  vertical-align: middle;
+}
+
+.actionTriggered .action-right {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.actionTriggered.zone_pause .action-icon {
+  background-position: -190px -240px;
+}
+
+.actionTriggered.zone_pause .action-triggered {
+  color: #EC1B2C;
+  font-weight: bold;
+}
+
+.actionTriggered.zone_pause .sensor-triggered {
+  color: #EC1B2C;
+}
+
+.actionTriggered.emergency_pause .action-icon {
+  background-position: -190px -240px;
+}
+
+.actionTriggered.emergency_pause .action-triggered {
+  color: #EC1B2C;
+  font-weight: bold;
+}
+
+.actionTriggered.emergency_pause .sensor-triggered {
+  color: #EC1B2C;
+}
+
+.actionTriggered.emergency_stop .action-icon {
+  background-position: -190px -240px;
+}
+
+.actionTriggered.emergency_stop .action-triggered {
+  color: #EC1B2C;
+  font-weight: bold;
+}
+
+.actionTriggered.emergency_stop .sensor-triggered {
+  color: #EC1B2C;
+}
+
+.actionTriggered.none .action-icon {
+  background: none;
+}
+
+.actionTriggered.none .action-triggered {
+  color: #000000;
+  font-weight: bold;
+}
+
+.actionTriggered.none .sensor-triggered {
+  color: #000000;
 }

@@ -1667,21 +1667,33 @@
     "filepath": "./src/constants/messageConstants.js"
   },
   {
+    "id": "zoning.action.emergency_stop_button_press",
+    "description": "Status text for zone",
+    "defaultMessage": "Emergency stop button pressed",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "zoning.action.emergency_pause_button_press",
+    "description": "Status text for zone",
+    "defaultMessage": "Emergency pause button pressed",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
     "id": "zoning.action.latch_gate",
     "description": "Status text for zone",
-    "defaultMessage": "Latch gate",
+    "defaultMessage": "Entry gate breached",
     "filepath": "./src/constants/messageConstants.js"
   },
   {
     "id": "zoning.action.light_curtain",
     "description": "Status text for zone",
-    "defaultMessage": "Light curtains",
+    "defaultMessage": "Light curtains breached",
     "filepath": "./src/constants/messageConstants.js"
   },
   {
     "id": "zoning.action.noneSensor",
     "description": "Status text for zone",
-    "defaultMessage": "Standard Sensor",
+    "defaultMessage": "Standard",
     "filepath": "./src/constants/messageConstants.js"
   },
   {
@@ -2322,15 +2334,33 @@
     "filepath": "./src/containers/emergencyProcess/fireHazard.js"
   },
   {
+    "id": "operation.alert.pause",
+    "description": "Text for operation stopped heading",
+    "defaultMessage": "Butler System - Operation Paused",
+    "filepath": "./src/containers/emergencyProcess/OperationPause.js"
+  },
+  {
+    "id": "operation.alert.pause.text",
+    "description": "Text for emergency button press",
+    "defaultMessage": "Emergency-Pause activated via Controller {controller} in {zone}.",
+    "filepath": "./src/containers/emergencyProcess/OperationPause.js"
+  },
+  {
+    "id": "operation.alert.pause.nonPOE",
+    "description": "Text for operation stopped heading",
+    "defaultMessage": "Operation Paused",
+    "filepath": "./src/containers/emergencyProcess/OperationPause.js"
+  },
+  {
+    "id": "operation.alert.pause.subtext",
+    "description": "Subtext for pause alert",
+    "defaultMessage": "You must check the emergency situation and release the Emergency Pause button in order to resume the operation in warehouse",
+    "filepath": "./src/containers/emergencyProcess/OperationPause.js"
+  },
+  {
     "id": "operation.alert.stop",
     "description": "Text for operation stopped heading",
     "defaultMessage": "Butler System - Operation Stopped",
-    "filepath": "./src/containers/emergencyProcess/OperationStop.js"
-  },
-  {
-    "id": "operation.alert.pause",
-    "description": "Text for operation paused heading",
-    "defaultMessage": "Operation Paused",
     "filepath": "./src/containers/emergencyProcess/OperationStop.js"
   },
   {
@@ -2340,13 +2370,13 @@
     "filepath": "./src/containers/emergencyProcess/OperationStop.js"
   },
   {
-    "id": "operation.alert.pause.text",
-    "description": "Text for operation paused alert",
-    "defaultMessage": "Butler operation has been paused from the management dashboard",
+    "id": "operation.alert.stop.nonPOE",
+    "description": "Text for operation stopped heading",
+    "defaultMessage": "Operation Stopped",
     "filepath": "./src/containers/emergencyProcess/OperationStop.js"
   },
   {
-    "id": "operation.alert.pause.subtext",
+    "id": "operation.alert.stop.subtext",
     "description": "Subtext for pause alert",
     "defaultMessage": "You must check the emergency situation and release the Emergency Stop button in order to resume the operation in warehouse",
     "filepath": "./src/containers/emergencyProcess/OperationStop.js"
@@ -3867,9 +3897,15 @@
     "filepath": "./src/containers/systemTabs/sysControllers.js"
   },
   {
-    "id": "ppsList.filter.search.bar.showall",
+    "id": "gor.filter.filterLabel",
+    "description": "button label for filter",
+    "defaultMessage": "Filter data",
+    "filepath": "./src/containers/systemTabs/sysControllers.js"
+  },
+  {
+    "id": "sysController.summary.showall",
     "description": "button label for show all",
-    "defaultMessage": "Show all Stations",
+    "defaultMessage": "Show all Zones",
     "filepath": "./src/containers/systemTabs/sysControllers.js"
   },
   {
@@ -3888,12 +3924,6 @@
     "id": "sysController.table.location",
     "description": "Location",
     "defaultMessage": "LOCATION",
-    "filepath": "./src/containers/systemTabs/sysControllers.js"
-  },
-  {
-    "id": "sysController.location.name",
-    "description": "PPStable.requestedMode.text",
-    "defaultMessage": "Zone:",
     "filepath": "./src/containers/systemTabs/sysControllers.js"
   },
   {
@@ -3918,6 +3948,12 @@
     "id": "sysController.table.operatingMode",
     "description": "Status for PPS",
     "defaultMessage": "OPERATING MODE",
+    "filepath": "./src/containers/systemTabs/sysControllers.js"
+  },
+  {
+    "id": "sysControllers.table.noData",
+    "description": "No data message for PPStable",
+    "defaultMessage": "No Controllers Found",
     "filepath": "./src/containers/systemTabs/sysControllers.js"
   },
   {

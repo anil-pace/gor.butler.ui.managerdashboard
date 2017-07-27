@@ -29,12 +29,13 @@
 		width: 23%;
 	    background: #fff;
 	    display: inline-block;
-	    padding: 0px 5px;
+	    padding: 5px 10px;
 	    margin-left: 10px;
 	    margin-top:10px;
-	    border: 1px solid #E1E1E1;
 	    cursor:pointer;
 	    &.operating{
+	    	box-sizing:border-box;
+			border: 4px solid #E1E1E1;
 			&.stop{
 				background:#DE0010;
 				border: 4px solid #B40313;
@@ -42,8 +43,11 @@
 					color:#fff;
 				}
 				.gor-zone-status{
-				border: 4px solid #B40313;
-				box-sizing:border-box;
+				background-position: -7px -304px;
+			    width: 61px;
+			    height: 61px;
+			    display: inline-block;
+			    vertical-align: middle;
 			}
 			}
 			&.pause{
@@ -54,8 +58,17 @@
 				}
 			}
 			.gor-zone-status{
-				border: 4px solid #00BB9A;
-				box-sizing:border-box;
+				background-position: -7px -179px;
+			    width: 61px;
+			    height: 61px;
+			    display: inline-block;
+			    vertical-align: middle;
+			}
+			.zone-name{
+				font-weight: bold;
+			}
+			.operating-status{
+				font-weight: bold;
 			}
 		}
 		&.zonePauseActive{
@@ -68,6 +81,13 @@
 				p{
 					color:#fff;
 				}
+				.gor-zone-status{
+					background-position: -7px -304px;
+				    width: 61px;
+			    	height: 61px;
+				    display: inline-block;
+				    vertical-align: middle;
+				}
 			}
 			&.pause{
 				background:#DE0010;
@@ -77,8 +97,11 @@
 				}
 			}
 			.gor-zone-status{
-				border: 4px solid #EC1B2C;
-				box-sizing:border-box;
+				background-position: -190px -240px;
+			    width: 61px;
+			    height: 61px;
+			    display: inline-block;
+			    vertical-align: middle;
 			}
 			.zone-name{
 				color:#515043;
@@ -99,6 +122,13 @@
 				p{
 					color:#fff;
 				}
+				.gor-zone-status{
+					background-position: -7px -304px;
+				    width: 61px;
+			    	height: 61px;
+				    display: inline-block;
+				    vertical-align: middle;
+				}
 			}
 			&.pause{
 				background:#DE0010;
@@ -108,8 +138,11 @@
 				}
 			}
 			.gor-zone-status{
-				border: 4px solid #EC1B2C;
-				box-sizing:border-box;
+				background-position: -190px -240px;
+			   width: 61px;
+			    height: 61px;
+			    display: inline-block;
+			    vertical-align: middle;
 			}
 			.zone-name{
 				color:#515043;
@@ -139,8 +172,11 @@
 				}
 			}
 			.gor-zone-status{
-				border: 4px solid #EC1B2C;
-				box-sizing:border-box;
+				background-position: -140px -366px;
+			    width: 61px;
+			    height: 61px;
+			    display: inline-block;
+			    vertical-align: middle;
 			}
 			.zone-name{
 				color:#515043;
@@ -170,8 +206,11 @@
 				}
 			}
 			.gor-zone-status{
-				border: 4px solid #EC1B2C;
-				box-sizing:border-box;
+				background-position: -140px -366px;
+			    width: 61px;
+			    height: 61px;
+			    display: inline-block;
+			    vertical-align: middle;
 			}
 			.zone-name{
 				color:#515043;
@@ -201,8 +240,11 @@
 				}
 			}
 			.gor-zone-status{
-				border: 4px solid #EC1B2C;
-				box-sizing:border-box;
+				background-position: -140px -366px;
+			    width: 61px;
+			    height: 61px;
+			    display: inline-block;
+			    vertical-align: middle;
 			}
 			.zone-name{
 				color:#515043;
@@ -224,6 +266,8 @@
 				p{
 					color:#fff;
 				}
+				
+
 			}
 			&.pause{
 				background:#DE0010;
@@ -233,8 +277,11 @@
 				}
 			}
 			.gor-zone-status{
-				border: 4px solid #EC1B2C;
-				box-sizing:border-box;
+				background-position: -190px -304px;
+			   width: 61px;
+			    height: 61px;
+			    display: inline-block;
+			    vertical-align: middle;
 			}
 		}
 		&.emergencyPause{
@@ -257,8 +304,11 @@
 				}
 			}
 			.gor-zone-status{
-				border: 4px solid #B40313;
-				box-sizing:border-box;
+				background-position: -140px -366px;
+			    width: 61px;
+			    height: 61px;
+			    display: inline-block;
+			    vertical-align: middle;
 			}
 		}
 		&.zonePauseInit{
@@ -271,36 +321,12 @@
 				p{
 					color:#fff;
 				}
-			}
-			&.pause{
-				background:#DE0010;
-				border: 4px solid #B40313;
-				p{
-					color:#fff;
-				}
-			}
-			.gor-zone-status{
-				border: 4px solid #EC1B2C;
-				box-sizing:border-box;
-			}
-			.zone-name{
-				color:#515043;
-				font-weight: bold;
-			}
-			.operating-status{
-				color:#DF2611;
-				font-weight: bold;
-			}
-		}
-		&.zonePauseActive{
-			background:#F4E822;
-			box-sizing:border-box;
-			border: 4px solid #E7C606;
-			&.stop{
-				background:#DE0010;
-				border: 4px solid #B40313;
-				p{
-					color:#fff;
+				.gor-zone-status{
+					background-position: -7px -304px;
+				    width: 61px;
+			    	height: 61px;
+				    display: inline-block;
+				    vertical-align: middle;
 				}
 			}
 			&.pause{
@@ -311,8 +337,11 @@
 				}
 			}
 			.gor-zone-status{
-				border: 4px solid #EC1B2C;
-				box-sizing:border-box;
+				background-position: -190px -240px;
+			   	width: 61px;
+			    height: 61px;
+			    display: inline-block;
+			    vertical-align: middle;
 			}
 			.zone-name{
 				color:#515043;
@@ -323,6 +352,7 @@
 				font-weight: bold;
 			}
 		}
+		
 		.left-content{
 			display:inline-block;
     		vertical-align: middle;
@@ -356,5 +386,70 @@
 	}
 	span:nth-child(2){
 		color:#49BE7E;
+	}
+}
+.actionTriggered{
+	.action-icon{
+			   	width: 61px;
+			    height: 61px;
+			    display: inline-block;
+			    vertical-align: middle;
+	}
+	.action-left{
+		    display: inline-block;
+    		width: 12%;
+    		vertical-align: middle;
+	}
+	.action-right{
+		display: inline-block;
+		vertical-align: middle;
+	}
+	&.zone_pause{
+		.action-icon{
+			background-position: -190px -240px;
+		}
+		.action-triggered{
+			color:#EC1B2C;
+			font-weight:bold;
+		}
+		.sensor-triggered{
+			color:#EC1B2C;
+		}
+	}
+	&.emergency_pause{
+		.action-icon{
+			background-position: -190px -240px;
+		}
+		.action-triggered{
+			color:#EC1B2C;
+			font-weight:bold;
+		}
+		.sensor-triggered{
+			color:#EC1B2C;
+		}
+	}
+	&.emergency_stop{
+		.action-icon{
+			background-position: -190px -240px;
+		}
+		.action-triggered{
+			color:#EC1B2C;
+			font-weight:bold;
+		}
+		.sensor-triggered{
+			color:#EC1B2C;
+		}
+	}
+	&.none{
+		.action-icon{
+			background:none;
+		}
+		.action-triggered{
+			color:#000000;
+			font-weight:bold;
+		}
+		.sensor-triggered{
+			color:#000000;
+		}
 	}
 }

@@ -248,12 +248,16 @@ export const CONTROLLER_ACTION_TRIGGERED_MESSAGES={
 export const CONTROLLER_SENSOR_TRIGGERED_MESSAGES={
       button_press:(<FormattedMessage id="zoning.action.button_press" description='Status text for zone' 
       defaultMessage='Button pressed'/>),
+      emergency_stop_button_press:(<FormattedMessage id="zoning.action.emergency_stop_button_press" description='Status text for zone' 
+      defaultMessage='Emergency stop button pressed'/>),
+      emergency_pause_button_press:(<FormattedMessage id="zoning.action.emergency_pause_button_press" description='Status text for zone' 
+      defaultMessage='Emergency pause button pressed'/>),
       latch_gate:(<FormattedMessage id="zoning.action.latch_gate" description='Status text for zone' 
-      defaultMessage='Latch gate'/>),
+      defaultMessage='Entry gate breached'/>),
       light_curtain:(<FormattedMessage id="zoning.action.light_curtain" description='Status text for zone' 
-      defaultMessage='Light curtains'/>),
+      defaultMessage='Light curtains breached'/>),
       none:(<FormattedMessage id="zoning.action.noneSensor" description='Status text for zone' 
-      defaultMessage='Standard Sensor'/>)
+      defaultMessage='Standard'/>)
 }
 
 

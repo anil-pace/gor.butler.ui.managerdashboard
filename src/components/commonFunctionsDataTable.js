@@ -263,13 +263,13 @@ export const ConnectionDetailsCell=({rowIndex, data, columnKey,subColumnKey,setC
 
 export const OperatingModeCell=({rowIndex, data, columnKey,subColumnKey,classKey,setClass, ...props})=>{ 
   
- const children = (<div className={"actionTriggered "+classKey}>
+ const children = (<div className={"actionTriggered "+data.getObjectAt(rowIndex)[classKey]}>
     <div className="action-left">
-      <span className={"action-icon "+data.getObjectAt(rowIndex)[classKey]}></span>
+      <span className={"action-icon"}></span>
     </div>
     <div className="action-right">
-      <p>{data.getObjectAt(rowIndex)[columnKey]}</p>
-      <p>{data.getObjectAt(rowIndex)[subColumnKey]}</p>
+      <p className="action-triggered">{data.getObjectAt(rowIndex)[columnKey]}</p>
+      <p className="sensor-triggered">{data.getObjectAt(rowIndex)[subColumnKey]}</p>
     </div>
   </div>)
 
