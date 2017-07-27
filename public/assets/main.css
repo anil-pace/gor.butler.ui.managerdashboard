@@ -6989,7 +6989,7 @@ button:disabled {
   box-sizing: border-box;
   font-weight: bold;
   font-size: 16px;
-  color: #999;
+  color: #666;
   clear: both;
   overflow: auto;
   text-align: center;
@@ -7111,8 +7111,13 @@ button:disabled {
   font-size: 18px;
 }
 
+.selected .pps-list-item-name {
+  font-weight: bold;
+  color: black;
+}
+
 .pps-list {
-  color: #999;
+  color: #666;
   height: 39.0625rem;
   overflow-y: scroll;
 }
@@ -7202,7 +7207,7 @@ button:disabled {
 .pps-bin {
   width: 100%;
   height: 100%;
-  border: 2px solid darkgrey;
+  border: 2px solid #979797;
   box-sizing: border-box;
   display: inline-block;
   cursor: pointer;
@@ -7241,7 +7246,7 @@ button:disabled {
 .pps-bin-info {
   width: 100%;
   height: 20px;
-  background-color: darkgrey;
+  background-color: #979797;
   display: inline-block;
   position: absolute;
   bottom: -2px;
@@ -7268,7 +7273,7 @@ button:disabled {
   box-sizing: border-box;
   font-weight: bold;
   font-size: 16px;
-  color: #999;
+  color: #666;
   padding-bottom: 15px;
 }
 
@@ -7285,7 +7290,7 @@ button:disabled {
   margin-left: 15px;
   margin-right: 15px;
   padding-bottom: 5px;
-  color: #999;
+  color: #666;
   font-size: 12px;
   clear: both;
   overflow: auto;
@@ -7320,7 +7325,7 @@ button:disabled {
   margin-left: 15px;
   margin-right: 15px;
   padding-bottom: 5px;
-  color: #999;
+  color: #666;
   font-size: 12px;
   clear: both;
   overflow: auto;

@@ -78,7 +78,7 @@ class PPSList extends React.Component {
                 <div className="pps-list">
                     {this.state.data.map(function (pps) {
                         return <div className={['pps-list-item',pps.pps_id===self.props.selectedPPS.pps_id?'selected':null].join(" ")} key={pps.pps_id} onClick={self.selectPPSProfile.bind(self, {pps: pps})}>
-                            <div>
+                            <div className="pps-list-item-name">
                                 {"PPS-"+pps.pps_id}
                             </div>
                             <div className="pps-list-item-profiles">

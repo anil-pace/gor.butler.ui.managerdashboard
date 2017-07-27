@@ -164,14 +164,14 @@ class Bins extends React.Component {
         return <div
             className={["pps-bins-container", this.props.currentView === 'tags' ? 'include-tags' : null].join(" ")}>
             {this.props.currentView === 'tags' &&
-            <div style={{padding: '2% 4%', color: '#999', overflow: 'auto', clear: 'both'}}>
+            <div style={{padding: '2% 4%', color: '#666', overflow: 'auto', clear: 'both'}}>
                 <div style={{width: '65%', float: 'left'}}>
                     <FormattedMessage id="pps.configuration.bins.selection.label"
                                       description="Select a bin to manage tags"
                                       defaultMessage="Select a bin to manage tags"/>
                 </div>
                 {self.state.currentBinDirection && <div style={{width: '35%', 'float': 'right', fontSize: '14'}}>
-                    <span style={{padding: '5px 10px', color: "#999"}}>Current PPS Selection</span>
+                    <span style={{padding: '5px 10px', color: "#666"}}>Current PPS Selection</span>
                     <span className="currentBinDirection" style={{padding: '5px 10px', border: '1px solid #ccc',borderRadius:20}}>
                         <span className={self.state.currentBinDirection === 'left' ? 'active' : null}
                               onClick={self.setBinDirection.bind(this, 'left')}
@@ -186,7 +186,7 @@ class Bins extends React.Component {
 
             </div>}
             {this.props.currentView === 'bins' &&
-            <div style={{padding: '2% 4%', color: '#999', overflow: 'auto', clear: 'both'}}>
+            <div style={{padding: '2% 4%', color: '#666', overflow: 'auto', clear: 'both'}}>
                 <div style={{width: '65%', float: 'left'}}>
                     <FormattedMessage id="pps.configuration.bins.selection.count"
                                       description='total users for filter search bar'
@@ -201,7 +201,7 @@ class Bins extends React.Component {
 
 
                 {self.state.currentBinDirection && <div style={{width: '35%', 'float': 'right', fontSize: '14'}}>
-                    <span style={{padding: '5px 10px', color: "#999"}}>Current PPS Selection</span>
+                    <span style={{padding: '5px 10px', color: "#666"}}>Current PPS Selection</span>
                     <span className="currentBinDirection" style={{padding: '5px 10px', border: '1px solid #ccc',borderRadius:20}}>
                         <span className={self.state.currentBinDirection === 'left' ? 'active' : null}
                               onClick={self.setBinDirection.bind(this, 'left')}
@@ -215,7 +215,7 @@ class Bins extends React.Component {
 
             </div>}
             {this.props.currentView === 'groups' &&
-            <div style={{padding: '2% 4%', color: '#999', overflow: 'auto', clear: 'both'}}>
+            <div style={{padding: '2% 4%', color: '#666', overflow: 'auto', clear: 'both'}}>
 
                 <div style={{width: '65%', float: 'left'}}>
                     <FormattedMessage
@@ -230,7 +230,7 @@ class Bins extends React.Component {
                 </div>
 
                 {self.state.currentBinDirection && <div style={{width: '35%', 'float': 'right', fontSize: '14'}}>
-                    <span style={{padding: '5px 10px', color: "#999"}}>Current PPS Selection</span>
+                    <span style={{padding: '5px 10px', color: "#666"}}>Current PPS Selection</span>
                     <span className="currentBinDirection" style={{padding: '5px 10px', border: '1px solid #ccc',borderRadius:20}}>
                         <span className={self.state.currentBinDirection === 'left' ? 'active' : null}
                               onClick={self.setBinDirection.bind(this, 'left')}
