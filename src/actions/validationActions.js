@@ -125,6 +125,13 @@ export function getSafetyErrorList(data){
 	}
 }
 
+export function getErrorBotList(data){
+	return{
+		type:"SAFETY_ERROR_BOT",
+		data
+	}
+}
+
 export function validatingList(data){
 	return{
 		type: CHECKLIST,

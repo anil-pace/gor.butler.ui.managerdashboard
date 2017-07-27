@@ -30,7 +30,8 @@ import {
 	validateSKUcodeSpinner,
 	modalStatus,
 	getSafetyList,
-	getSafetyErrorList
+	getSafetyErrorList,
+	getErrorBotList
 } from "../actions/validationActions";
 import {
 	ERROR,
@@ -341,7 +342,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
 			store.dispatch(getSafetyList(safetyList));
 			break;
 		case CONFIRM_SAFETY:
-			var rejectList = [],
+			var rejectList = [],boteErrorList=[],
 				rejectResponse = res,
 				modalFlag = true;
 
@@ -358,7 +359,10 @@ export function AjaxParse(store, res, cause, status, saltParams) {
 				// if(rejectResponse.alert_data[0].details[0])
 				// {
 				//rejectList = rejectResponse.alert_data[0].details[0].failed_validations;
+				//boteErrorList=rejectResponse.alert_data[0].details[0].displaced_bots||[];
 				rejectList=['md013'];
+
+				boteErrorList=[];
 				modalFlag = false;
 				// }
 				// else
@@ -371,7 +375,10 @@ export function AjaxParse(store, res, cause, status, saltParams) {
 			} 
 			store.dispatch(modalStatus(modalFlag));                           
 			store.dispatch(setSafetySpinner(false));
+			store.dispatch(getErrorBotList(boteErrorList));
 			store.dispatch(getSafetyErrorList(rejectList));
+			
+
 			break;
 
 		case ITEM_RECALLED:

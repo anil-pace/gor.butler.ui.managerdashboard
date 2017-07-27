@@ -45,6 +45,11 @@ class SafetyChecklist extends React.Component{
         this._toggleSelection(errorList[i],noItems);           
       }      
     }
+//      if(nextProps.safetyErrorBotList.length)
+//     {
+//       var errorBotList=nextProps.safetyErrorBotList;
+// this._processTableList(errorBotList);
+//     }
   }
   componentDidMount(){
    var url;
@@ -160,9 +165,12 @@ class SafetyChecklist extends React.Component{
     return checkList;
   }
 
-  _processTableList(){
+  _processTableList(data){
     var botCheckList=[],items=this.props.botList, noItems, bots, msgCode;
-   var butlerDetails=this.props.botList;
+     var butlerDetails;//=this.props.botList;
+   if(data){
+    butlerDetails=data
+   }
     for(let i=0;i<butlerDetails.length;i++){
       bots=(<div className='gor-instruction-row'>
 <div className='gor-instruction-cell'><p>{butlerDetails[i].bot_id}</p> </div>
@@ -182,7 +190,8 @@ class SafetyChecklist extends React.Component{
   render()
   {
       var checkList=this._processList();
-      var botchecklist=this._processTableList();
+      var data=this.props.safetyErrorBotList.length>0?this.props.safetyErrorBotList:this.props.botList;
+      var botchecklist=this._processTableList(data);
       this.props.botList;
       return (
         <div className='gor-safetylist'>
@@ -282,6 +291,7 @@ function mapStateToProps(state, ownProps){
       checkList: state.emergency.safetyList || [],
       botList: state.emergency.botList || [],
       safetyErrorList: state.emergency.safetyErrorList || [],
+      safetyErrorBotList:state.emergency.safetyErrorBotList || [],
       auth_token:state.authLogin.auth_token,
       modalStatus: state.emergency.hideModal || false,
       safetySpinner:state.spinner.safetySpinner || false,
