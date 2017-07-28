@@ -33,8 +33,9 @@ class Tabs extends React.Component{
   }
 
     _openPopup(){
-      this.props.setFireHazrdFlag(false);
+        this.props.setFireHazrdFlag(false);      
   }
+
 
     handleTabClick(selTab){
     	/**
@@ -69,6 +70,7 @@ class Tabs extends React.Component{
       sensor:additionalProps.sensor_activated,
       poeEnabled:Object.keys(additionalProps).length ? true : false
       });
+
   }
   _emergencyRelease(){
       modal.add(EmergencyRelease, {
@@ -107,7 +109,9 @@ class Tabs extends React.Component{
     {
       this._emergencyRelease();
     }
-    else  if(nextProps.fireHazardType ===EMERGENCY_FIRE && !nextProps.firehazadflag && !nextProps.fireHazardNotifyTime && (nextProps.firehazadflag!==this.props.firehazadflag))
+   else  if(nextProps.fireHazardType ===EMERGENCY_FIRE && !nextProps.firehazadflag && !nextProps.fireHazardNotifyTime && nextProps.firehazadflag!==this.props.firehazadflag || 
+      ((this.props.firehazadflag===false) && nextProps.fireHazardNotifyTime!==this.props.fireHazardNotifyTime))
+
     {
       this._FireEmergencyRelease();
     }
