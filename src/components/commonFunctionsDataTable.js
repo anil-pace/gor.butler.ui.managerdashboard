@@ -113,53 +113,6 @@ function auditTaskActions(data, index){
     return taskList
 }
 
-/**
- * The method will return
- * the profile name of applied profile
- * that need to be displayed
- * as the placeholder of action dropdown.
- * @param data
- * @param index
- * @returns {string}
- */
-function ppsProfilePlaceHolder(data, index) {
-    let applied_profile=""
-    if (!data.newData || !data.newData[index]) {
-        return applied_profile
-    }
-    try{
-        applied_profile = data.newData[index].profiles.filter(function (profile) {
-            return profile.applied
-        })[0].profile_name
-    }catch(ex){
-
-    }
-
-
-
-    return applied_profile
-
-}
-
-/**
- * The method will return
- * the list of profiles
- * need to be shown in the option
- * of available profiles that can be
- * applied.
- * @param data
- * @param index
- */
-function availablePPSProfiles(data, index) {
-    let profiles=data.newData[index].profiles.map(function(profile){
-        profile.value = profile.profile_name
-        profile.label =profile.profile_name
-        return profile
-    })
-
-
-    return profiles
-}
 
 export class DataListWrapper {
   constructor(indexMap, data) {
