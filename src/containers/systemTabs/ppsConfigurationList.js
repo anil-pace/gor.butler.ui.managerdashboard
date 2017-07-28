@@ -21,9 +21,13 @@ class PPSList extends React.Component {
         if (nextProps.ppsList !== this.state.data) {
             this.setState({data: nextProps.ppsList,selectedProfile:nextProps.selectedProfile,selectedPPS:nextProps.selectedPPS})
         }
+        if(nextProps.profileCreatedAt && nextProps.profileCreatedAt!==this.state.profileCreatedAt){
+            this.setState({profileCreatedAt:nextProps.profileCreatedAt})
+            this.fetchPPSProfiles()
+        }
     }
 
-    componentDidMount() {
+    fetchPPSProfiles(){
         /**
          * Fetch PPS List
          */
@@ -37,6 +41,10 @@ class PPSList extends React.Component {
         }
         this.props.setPPSConfigurationSpinner(true)
         this.props.fetchPPSProfiles(userData)
+    }
+
+    componentDidMount() {
+        this.fetchPPSProfiles()
     }
 
     selectPPSProfile({pps, profile}, event) {
@@ -119,7 +127,8 @@ function mapStateToProps(state, ownProps) {
         ppsList: state.ppsConfiguration.ppsList||[],
         selectedProfile:state.ppsConfiguration.selectedProfile||{},
         selectedPPS:state.ppsConfiguration.selectedPPS||{},
-        auth_token: state.authLogin.auth_token
+        auth_token: state.authLogin.auth_token,
+        profileCreatedAt: state.ppsConfiguration.profileCreatedAt
 
     };
 }

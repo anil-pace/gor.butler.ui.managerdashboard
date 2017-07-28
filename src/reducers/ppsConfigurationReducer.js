@@ -35,15 +35,29 @@ export function ppsConfiguration(state = {}, action) {
             /**
              * Create a copy of First PPS and select
              * it by default.
+             * v-2: Checks for selected PPS and if found
+             * selects it, otherwise first PPS would be selected
              */
-            selected_pps = JSON.parse(JSON.stringify(pps_list[0]))
+            if(state.selectedPPS && state.selectedPPS.pps_id){
+                selected_pps=JSON.parse(JSON.stringify(pps_list.filter(function(pps){return pps.pps_id===state.selectedPPS.pps_id})[0]))
+            }else{
+                selected_pps = JSON.parse(JSON.stringify(pps_list[0]))
+            }
+
 
             /**
-             * Select the applied profile
+             * v-2: If any selected PPS Profile is found.
+             * Selects that, otherwise applied profile
+             * will be selected for selected PPS.
+             *
+             * v-1: Select the applied profile
              * by default for the first PPS.
              */
             selected_pps.pps_profiles.map(function (prfl, index) {
-                if (prfl.applied) {
+                if(state.selectedProfile && prfl.profile_name===state.selectedProfile.profile_name){
+                    selected_profile=JSON.parse(JSON.stringify(prfl))
+                }
+                else if(prfl.applied) {
                     selected_profile = JSON.parse(JSON.stringify(prfl))
                 }
                 return prfl
@@ -183,6 +197,12 @@ export function ppsConfiguration(state = {}, action) {
              * the array of profiles that is stored
              * in PPS List and selected PPS.
              */
+            /**
+             * v-2: As soon as profile is created,
+             * the pps list will be refreshed and we'll
+             * have to retain the selected pps as well as
+             * selected created profile.
+             */
             selected_pps= JSON.parse(JSON.stringify(state.selectedPPS))
             pps_list=JSON.parse(JSON.stringify(state.ppsList))
             selected_profile=action.data
@@ -206,6 +226,11 @@ export function ppsConfiguration(state = {}, action) {
              * the existing profile
              * that is stored in PPS profile list
              * and PPS List model.
+             */
+            /**
+             * v-2:As soon as the profile
+             * is saved, we'll have to refresh
+             * the pps list.
              */
             selected_pps= JSON.parse(JSON.stringify(state.selectedPPS))
             pps_list=JSON.parse(JSON.stringify(state.ppsList))
