@@ -119,7 +119,7 @@ export function ResponseParse(store,res)
 				break;		    
 			case PARSE_SYSTEM:
 				store.dispatch(recieveSystemStatus(res));
-				break;		    
+				break;		
 			case PARSE_INVENTORY:
 				store.dispatch(recieveInventoryStatus(res));
 				break;	

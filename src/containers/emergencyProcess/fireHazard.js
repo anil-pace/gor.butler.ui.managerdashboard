@@ -11,7 +11,7 @@ import { VALIDATE_SAFETY } from '../../constants/configConstants';
 import {FAILED,CLEARED,EMERGENCY_FIRE,PROGRESS,NOT_FOUND,IN_PROGRESS,APP_JSON,POST,CONFIRM_SAFETY} from '../../constants/frontEndConstants';
 class FireHazard extends React.Component{
   constructor(props) 
-  {  
+  { 
     super(props);
     this.state={buttonDisable:true};
     this._removeThisModal =  this._removeThisModal.bind(this);
@@ -24,11 +24,13 @@ class FireHazard extends React.Component{
    endFireHazard(){
     this.props.removeModal();
    }
-   
+  
   componentDidMount(){
     if(this.props.checkingList){
       this.endFireHazard();  //If manager is on safety checklist page, don't show the release modal      
     }
+  }
+componentWillMount(){
      var limit=(this.props.config.fire_emergency_enable_resume_after)*60;
     var duration=(limit-getSecondsDiff(this.props.fireHazard.emergencyStartTime))*1000;
     
@@ -38,8 +40,8 @@ class FireHazard extends React.Component{
       this.setState({buttonDisable:false})
     }.bind(this),duration); 
   }
+}
 
-  }
    componentWillReceiveProps(nextProps){
     if(!nextProps.auth_token||!nextProps.fireHazard.emergencyStartTime)
     {
@@ -163,7 +165,7 @@ render()
     {shutterWrap}
     </div>          
     </div>    
-    <button className='gor-resume-btn' disabled={this.state.buttonDisable} onClick={this._resumeOperation}>
+    <button className={this.state.buttonDisable?'gor-resume-btn disable':'gor-resume-btn'} disabled={this.state.buttonDisable} onClick={this._resumeOperation}>
     <FormattedMessage id='operation.alert.release.button' 
     defaultMessage="RESUME OPERATION"
     description="Text button to resume operation"/></button>         
@@ -177,7 +179,7 @@ function mapStateToProps(state, ownProps){
     auth_token:state.authLogin.auth_token,
     checkingList:state.emergency.checkingList||false,
     fireHazard:state.fireHazardDetail,
-    firehazadflag:state.fireReducer.firehazadflag,
+    firehazadflag:state.fireReducer.firehazadflag ||false,
     config:state.config||{}
     }
   } 

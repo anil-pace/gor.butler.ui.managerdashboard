@@ -4908,8 +4908,7 @@ button:disabled {
 }
 
 .gor-firehazard .gor-shutter-image-status.failed {
-  background-position: 251px -102px;
-  background-size: 2695%;
+  background-position: -562px -77px;
 }
 
 .gor-firehazard .gor-shutter-image-status.progress {
@@ -4947,8 +4946,7 @@ button:disabled {
 }
 
 .gor-firehazard .gor-image-status.failed {
-  background-position: 418px -172px;
-  background-size: 2890%;
+  background-position: -301px -52px;
 }
 
 .gor-firehazard .gor-image-status.cleared {
@@ -4975,8 +4973,7 @@ button:disabled {
 }
 
 .gor-firehazard .gor-firehazard-header .gor-caution-image {
-  background-position: 131px 299px;
-  background-size: 1407%;
+  background-position: -1px 305px;
   width: 128px;
   height: 128px;
   float: left;
