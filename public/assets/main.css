@@ -7172,6 +7172,7 @@ button:disabled {
 }
 
 .profile-requested-label {
+  float: right;
   padding: 5px;
   border-radius: 10px;
   color: white;
@@ -7312,6 +7313,7 @@ button:disabled {
   border-radius: 10px;
   float: left;
   max-width: 80%;
+  word-wrap: break-word;
 }
 
 .pps-tag-name .highlight {
@@ -7341,6 +7343,7 @@ button:disabled {
   max-width: 80%;
   padding: 5px;
   color: black;
+  word-wrap: break-word;
 }
 
 .pps-add-tag-button {
@@ -7483,6 +7486,10 @@ button:disabled {
 
 .pps-list-available-profile .applied-status {
   float: right;
+}
+
+.gor-pps-profile-drop {
+  display: inline-block;
 }
 
 .gor-pps-profile-drop .gor-dropdown-wrapper {
