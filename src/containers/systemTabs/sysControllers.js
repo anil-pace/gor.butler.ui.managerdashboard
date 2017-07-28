@@ -209,22 +209,7 @@ class SystemControllers extends React.Component {
                                         
                                     </div>
                                 </div>
-                              <div className="filterWrapper">
-                                    <div className="gorToolBarDropDown">
-                                        <div className="gor-button-wrap">
-                                            <div
-                                                className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
-                                            <button
-                                                className={this.props.ppsFilterState ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
-                                                onClick={this._setFilter}>
-                                                <div className="gor-manage-task"/>
-                                                <FormattedMessage id="gor.filter.filterLabel" description="button label for filter"
-                                                                  defaultMessage="Filter data"/>
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                </div>
+                        
                 </div>
                 <FilterSummary total={dataList.getSize()||0} isFilterApplied={this.state.queryApplied} responseFlag={null}
                                            refreshList={this._clearFilter}

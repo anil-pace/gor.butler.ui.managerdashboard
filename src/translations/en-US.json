@@ -192,66 +192,6 @@
     "filepath": "./src/components/graphd3/stackedChartHorizontal.js"
   },
   {
-    "id": "header.butler",
-    "description": "Header description",
-    "defaultMessage": "Butler",
-    "filepath": "./src/components/header/header.js"
-  },
-  {
-    "id": "header.start",
-    "description": "Start time",
-    "defaultMessage": "Start time:{time}",
-    "filepath": "./src/components/header/header.js"
-  },
-  {
-    "id": "header.option.normal",
-    "description": "normal operation",
-    "defaultMessage": "Operation normal",
-    "filepath": "./src/components/header/header.js"
-  },
-  {
-    "id": "header.option.pause",
-    "description": "pause operation option",
-    "defaultMessage": "Enter password to pause operation",
-    "filepath": "./src/components/header/header.js"
-  },
-  {
-    "id": "header.button.pause",
-    "description": "Button text",
-    "defaultMessage": "Pause",
-    "filepath": "./src/components/header/header.js"
-  },
-  {
-    "id": "header.emergency.heading",
-    "description": "Header description",
-    "defaultMessage": "Emergency",
-    "filepath": "./src/components/header/header.js"
-  },
-  {
-    "id": "header.emergency.subheading",
-    "description": "Start time",
-    "defaultMessage": "In Zone",
-    "filepath": "./src/components/header/header.js"
-  },
-  {
-    "id": "header.option.stopped",
-    "description": "stopped operation",
-    "defaultMessage": "Operation stopped",
-    "filepath": "./src/components/header/header.js"
-  },
-  {
-    "id": "header.button.resume1",
-    "description": "Button text",
-    "defaultMessage": "Resume",
-    "filepath": "./src/components/header/header.js"
-  },
-  {
-    "id": "header.option.resume",
-    "description": "resume operation option",
-    "defaultMessage": "Enter password to resume operation.",
-    "filepath": "./src/components/header/header.js"
-  },
-  {
     "id": "header.zones.status",
     "description": "Zone status",
     "defaultMessage": "SYSTEM NORMAL",
@@ -297,6 +237,18 @@
     "id": "header.button.resume",
     "description": "Button text",
     "defaultMessage": "Resume System",
+    "filepath": "./src/components/header/header.js"
+  },
+  {
+    "id": "header.butler",
+    "description": "Header description",
+    "defaultMessage": "Butler",
+    "filepath": "./src/components/header/header.js"
+  },
+  {
+    "id": "header.start",
+    "description": "Start time",
+    "defaultMessage": "Start time:{time}",
     "filepath": "./src/components/header/header.js"
   },
   {
@@ -1057,37 +1009,37 @@
   {
     "id": "stringConfig.md007",
     "description": "Text for safety checklist item 7",
-    "defaultMessage": "[Manual] Peripherals status known.",
+    "defaultMessage": "Peripherals status known.",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
     "id": "stringConfig.md008",
     "description": "Text for safety checklist item 8",
-    "defaultMessage": "[Manual] Physical inventory verified.",
+    "defaultMessage": "Physical inventory verified.",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
     "id": "stringConfig.md009",
     "description": "Text for safety checklist item 9",
-    "defaultMessage": "[Automatic] No Emergency buttons in 'pressed' state",
+    "defaultMessage": "No Emergency buttons in 'Pressed' state.",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
     "id": "stringConfig.md010",
     "description": "Text for safety checklist item 10",
-    "defaultMessage": "[Manual] All shutters open  in active zones.",
+    "defaultMessage": "All shutters open  in active zones.",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
     "id": "stringConfig.md011",
     "description": "Text for safety checklist item 11",
-    "defaultMessage": "[Manual] No humans in operations area.",
+    "defaultMessage": "No humans in operations area.",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
     "id": "stringConfig.md012",
     "description": "Text for safety checklist item 12",
-    "defaultMessage": "[Manual] All paths cleared of any debris..",
+    "defaultMessage": "All paths cleared of any debris.",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
@@ -2448,9 +2400,15 @@
     "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
   },
   {
-    "id": "operation.safety.heading",
+    "id": "operation.firesafety.heading",
     "description": "Text for safety heading",
-    "defaultMessage": "Safety checklist",
+    "defaultMessage": "Resume Checklist",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "operation.safety.heading",
+    "description": "Text for fire safety heading",
+    "defaultMessage": "Safety Checklist",
     "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
   },
   {
@@ -2469,6 +2427,12 @@
     "id": "operation.safety.errors",
     "description": "Text for safety error",
     "defaultMessage": "System has found some of these steps were not followed. \n                    Please check or contact service engineer for support",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "operation.firesafety.confirm",
+    "description": "Text for Resume Opeartion button",
+    "defaultMessage": "Resume Opeartion",
     "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
   },
   {
@@ -3897,12 +3861,6 @@
     "filepath": "./src/containers/systemTabs/sysControllers.js"
   },
   {
-    "id": "gor.filter.filterLabel",
-    "description": "button label for filter",
-    "defaultMessage": "Filter data",
-    "filepath": "./src/containers/systemTabs/sysControllers.js"
-  },
-  {
     "id": "sysController.summary.showall",
     "description": "button label for show all",
     "defaultMessage": "Show all Zones",
@@ -4630,8 +4588,8 @@
   },
   {
     "id": "utility.goodsRcvdNotes.head",
-    "description": "Goods Recieved Notes",
-    "defaultMessage": "Goods Recieved Notes",
+    "description": "Goods Received Notes",
+    "defaultMessage": "Goods Received Notes",
     "filepath": "./src/containers/utilityTab.js"
   },
   {

@@ -13,9 +13,8 @@ import {CONTROLLER_DATA} from '../constants/frontEndConstants';
       "status": "connected",
       "ethernet_network": "disconnected",
       "zigbee_network": "disconnected",
-      "sensor_activated": "button_press",
-      "action_triggered": "emergency_pause",
-      "sensor": "emergency_pause_button_press"
+      "sensor_activated": "latch_gate",
+      "action_triggered": "zone_pause"
     },
     {
       "controller_id": "20000",

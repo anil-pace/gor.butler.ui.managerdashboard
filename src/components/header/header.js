@@ -41,7 +41,7 @@ class Header extends React.Component {
      * to be displayed in the header.
      * @private
      */
-    _getShiftStartTime() {
+     _getShiftStartTime() {
         let headerData={
             'url': GET_SHIFT_START_TIME_URL,
             'method': GET,
@@ -60,9 +60,10 @@ class Header extends React.Component {
                 'cause': RECIEVE_HEADER,
                 'token': this.props.authToken
             }
+            this._getShiftStartTime()
             this.props.getHeaderInfo(headerData)
         }
-        this._getShiftStartTime()
+
     }
 
     componentWillMount() {
@@ -121,90 +122,17 @@ class Header extends React.Component {
          * Hard coded start time is replaced
          * with the time fetched in API.
          */
-        headerInfo.start=this.context.intl.formatTime(this.props.shift_start_time, {
+         headerInfo.start=this.context.intl.formatTime(this.props.shift_start_time, {
             hour: 'numeric',
             minute: 'numeric',
             timeZone: this.props.timeOffset,
             timeZoneName: 'long',
             hour12: false
         })
-        return headerInfo
-    }
+         return headerInfo
+     }
 
-    _processMenu(headerInfo) {
-        var menuObj={}, heading, subHeading, optionList, optionOperation, optionAction, buttonText;
-        optionList=[];
-
-        if (!this.props.system_emergency) {
-            heading=(<FormattedMessage id="header.butler" description="Header description"
-                                         defaultMessage="Butler"/>);
-            subHeading=(<FormattedMessage id="header.start" description='Start time '
-                                            defaultMessage='Start time:{time} '
-                                            values={{
-                                                time: headerInfo.start,
-                                            }}/>);
-            optionOperation=(<FormattedMessage id="header.option.normal" description='normal operation'
-                                                 defaultMessage='Operation normal'
-            />);
-            optionAction=(<FormattedMessage id="header.option.pause" description='pause operation option'
-                                              defaultMessage='Enter password to pause operation'
-            />);
-            buttonText=(<FormattedMessage id="header.button.pause" description='Button text'
-                                            defaultMessage='Pause'
-            />);
-            optionList.push({
-                optionClass: 'gor-operation-normal', icon: 'gor-operation-tick', optionText: optionOperation,
-                fnButton: '', buttonText: ''
-            });
-            menuObj={
-                heading: heading, subHeading: subHeading, optionList: optionList,
-                menuStyle: '', headingStyle: '', openIcon: 'gor-dropdown-open', closeIcon: 'gor-dropdown-close'
-            };
-        }
-        else {
-            heading=(<FormattedMessage id="header.emergency.heading" description="Header description"
-                                         defaultMessage="Emergency"/>);
-            subHeading=(<FormattedMessage id="header.emergency.subheading" description='Start time '
-                                            defaultMessage='In Zone'
-            />);
-            optionOperation=(<FormattedMessage id="header.option.stopped" description='stopped operation'
-                                                 defaultMessage='Operation stopped'
-            />);
-            buttonText=(<FormattedMessage id="header.button.resume1" description='Button text'
-                                            defaultMessage='Resume'
-            />);
-            optionList.push({
-                optionClass: 'gor-fail', icon: 'gor-error-white', optionText: optionOperation,
-                fnButton: '', buttonText: ''
-            });
-            if (this.props.system_data !== SOFT_MANUAL) {
-               /* optionAction=(<FormattedMessage id="header.option.release" description='release operation option'
-                                                  defaultMessage='Release the Emergency Stop button from the Zigbee box in order
-        						to resume operation.'/>);*/
-                optionList.push({
-                    optionClass: '', icon: '', optionText: optionAction,
-                    fnButton: '', buttonText: buttonText
-                });
-            }
-            else {
-                optionAction=(<FormattedMessage id="header.option.resume" description='resume operation option'
-                                                  defaultMessage='Enter password to resume operation.'/>);
-                optionList.push({
-                    optionClass: '', icon: '',
-                    optionText: optionAction,
-                    fnButton: this._showModal.bind(this, ResumeOperation), buttonText: buttonText
-                });
-            }
-            menuObj={
-                heading: heading, subHeading: subHeading, optionList: optionList,
-                menuStyle: 'gor-fail', headingStyle: 'gor-white-text', openIcon: 'gor-emergency-dropdown-open',
-                closeIcon: 'gor-emergency-dropdown-close'
-            };
-        }
-
-        return menuObj;
-    }
-
+     
 
 
     render() {
@@ -225,8 +153,8 @@ class Header extends React.Component {
                                 <p><FormattedMessage id="header.zones.inOperation" description='Zone in operation count '
                                             defaultMessage='{activeZones}/{totalZones} zones in operation'
                                             values={{
-                                                activeZones: this.props.zoneHeader.active_zones,
-                                                totalZones:this.props.zoneHeader.total_zones
+                                                activeZones: this.props.zoneHeader.active_zones===0 ? (this.props.zoneHeader.active_zones).toString(): this.props.zoneHeader.active_zones,
+                                                totalZones: this.props.zoneHeader.total_zones===0 ? (this.props.zoneHeader.total_zones).toString():this.props.zoneHeader.total_zones
                                             }}/></p>
                                 
                             </section>)
@@ -239,7 +167,7 @@ class Header extends React.Component {
                                 <p>{this.props.zoneHeader.active_zones ? <FormattedMessage id="header.zones.inOperation1" description='Zone in operation count '
                                             defaultMessage='{activeZones} zones in operation'
                                             values={{
-                                                activeZones: this.props.zoneHeader.active_zones
+                                                activeZones: this.props.zoneHeader.active_zones===0 ? (this.props.zoneHeader.active_zones).toString(): this.props.zoneHeader.active_zones
                                             }}/> : <FormattedMessage id="header.zones.noOperation" description='Zone in operation count '
                                             defaultMessage='No zones in operation'
                                             />}</p>
@@ -269,8 +197,9 @@ class Header extends React.Component {
                             </section>)
         }
         return (
-            <header className="gorHeader head">
+                <header className="gorHeader head">
                 <div className="mainBlock">
+
                     <div className="logoWrap">
                         <div>
                             <div className="gor-logo logo"></div>
@@ -306,6 +235,7 @@ class Header extends React.Component {
                                     
                                 </div>
                             <div className='gor-hamburger-wrapper' style={(instance.state.menuVisible)?{display:'block'}:{display:'none'}}>
+                            <span className='gor-up-arrow'></span>
                             {emergencyDropDown}
                             <section className="gor-all-zone">
                             <Link to="/system/sysOverview" >
@@ -336,25 +266,26 @@ class Header extends React.Component {
                             </div>
                             <div className="block user-icon">
 
-                            </div>
 
-
-                            {this.state.showDropdown ? <div className="dropdown-content" ref={(node)=> {
-                                this.dropdownValue=node;
-                            }} onClick={this.addModal.bind(this)}>
-                                <div className="horizontalDiv">
-                                </div>
-                                <div>
-                                    <a href="javascript:void(0)"><FormattedMessage id='header.logout'
-                                                                                   defaultMessage="Logout"
-                                                                                   description="Text for logout"/></a>
-                                </div>
-                            </div> : ""}
-                        </div>
-                    </div>
                 </div>
-            </header>
-        );
+
+
+                {this.state.showDropdown ? <div className="dropdown-content" ref={(node)=> {
+                    this.dropdownValue=node;
+                }} onClick={this.addModal.bind(this)}>
+                <div className="horizontalDiv">
+                </div>
+                <div>
+                <a href="javascript:void(0)"><FormattedMessage id='header.logout'
+                defaultMessage="Logout"
+                description="Text for logout"/></a>
+                </div>
+                </div> : ""}
+                </div>
+                </div>
+                </div>
+                </header>
+                );
     }
 }
 
@@ -366,7 +297,7 @@ Header.contextTypes={
  * Function to pass state values as props
  */
 
-function mapStateToProps(state, ownProps) {
+ function mapStateToProps(state, ownProps) {
     return {
         headerInfo: state.headerData.headerInfo,
         shift_start_time: state.headerData.shiftStartTime,
@@ -382,7 +313,7 @@ function mapStateToProps(state, ownProps) {
 /**
  * Function to dispatch action values as props
  */
-function mapDispatchToProps(dispatch) {
+ function mapDispatchToProps(dispatch) {
     return {
         getHeaderInfo: function (data) {
             dispatch(getHeaderInfo(data));

@@ -31,7 +31,7 @@ class HamBurger extends React.Component{
   	}    
 	render(){
 		return (
-				<div className={"gor-menuWrap"}
+				<div className="gor-menuWrap"
 				 onClick={this._toggleDropdown}>
 					{this.props.children(this)}									
 				</div>		

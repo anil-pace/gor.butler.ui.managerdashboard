@@ -13,10 +13,10 @@ import {ZONE_DATA} from '../constants/frontEndConstants';
       "zone_status": "operation_normal" 
     },
     "2": {
-      "zone_status": "emergency_stop"
+      "zone_status": "emergency_pause"
     },
     "3":{
-      "zone_status": "zone_pause_initiated"
+      "zone_status": "emergency_stop"
     },
     "4":{
       "zone_status": "zone_pause_activated"
@@ -28,15 +28,15 @@ import {ZONE_DATA} from '../constants/frontEndConstants';
       "zone_status": "zone_pause_initiated"
     },
     "7":{
-      "zone_status": "zone_pause_initiated"
+      "zone_status": "zone_clear_activated"
     },
     "8":{
-      "zone_status": "zone_pause_initiated"
+      "zone_status": "zone_clear_deactivated"
     }
   },
     "emergency_data":{
       "emergency_on": false,
-      "emergency_type":"pause"
+      "emergency_type":"stop"
     }
   },
   "resource_type": "zones"

@@ -153,6 +153,7 @@ export const FIRE_EMERGENCY="FIRE_EMERGENCY";
 export const EMERGENCY_FIRE="fire_emergency";
 export const EMERGENCY="emergency";
 export const NOTIFY_EMERGENCY_END="NOTIFY_EMERGENCY_END";
+export const SYSTEM_EMERGENCY="system_emergency";
 
 
 /*Constants for type of AJAX call*/
