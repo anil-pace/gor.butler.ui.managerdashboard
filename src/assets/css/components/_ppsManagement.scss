@@ -1,4 +1,5 @@
 @import '../abstracts/functions';
+
 .pps-configuration-navigation-tabs .active {
   border-bottom: 2px solid black;
   color: black;
@@ -38,6 +39,7 @@
   float: left;
   cursor: pointer
 }
+
 .pps-configuration-navigation-tabs .seat-description {
   padding: 20px;
   box-sizing: border-box;
@@ -59,10 +61,10 @@
   border-width: 2px;
   cursor: pointer;
   margin-left: 10px;
-  margin-right:10px
+  margin-right: 10px
 }
 
-.pps-bin-next-button,.pps-bin-save-apply-button {
+.pps-bin-next-button, .pps-bin-save-apply-button {
   font-family: 'Source Sans Pro Bold', sans-serif;
   width: auto;
   height: 30px;
@@ -70,22 +72,24 @@
   border-radius: 3px;
   cursor: pointer;
   margin-left: 10px;
-  margin-right:10px;
-  margin-top:10px;
-  float:right;
+  margin-right: 10px;
+  margin-top: 10px;
+  float: right;
   background-color: #f36f36;
   border: solid 1px #f36f36;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   color: #ffffff;
 }
 
-.pps-bin-next-button{
+.pps-bin-next-button {
   width: 113px;
 }
-.pps-bin-save-apply-button{
-  width:150px;
+
+.pps-bin-save-apply-button {
+  width: 150px;
 
 }
+
 .pps-bin-back-button {
   font-family: 'Source Sans Pro Bold', sans-serif;
   width: 113px;
@@ -98,31 +102,34 @@
   border-width: 2px;
   cursor: pointer;
   margin-left: 10px;
-  margin-right:10px;
-  margin-top:10px;
-  float:right
+  margin-right: 10px;
+  margin-top: 10px;
+  float: right
 }
 
-.pps-bin-cancel-button,.pps-bin-save-button {
+.pps-bin-cancel-button, .pps-bin-save-button {
   font-family: 'Source Sans Pro Bold', sans-serif;
   width: auto;
   height: 30px;
   font-size: 14px;
   cursor: pointer;
   margin-left: 10px;
-  margin-right:10px;
+  margin-right: 10px;
   background: transparent;
-  margin-top:10px;
-  color:rgb(73,144,226)
+  margin-top: 10px;
+  color: rgb(73, 144, 226)
 }
-.pps-bin-cancel-button{
+
+.pps-bin-cancel-button {
   width: 113px;
-  float:left
+  float: left
 }
-.pps-bin-save-button{
-  float:right
+
+.pps-bin-save-button {
+  float: right
 }
-.pps-bin-cancel-button:focus,.pps-bin-save-button:focus{
+
+.pps-bin-cancel-button:focus, .pps-bin-save-button:focus {
   outline: none;
 }
 
@@ -142,9 +149,12 @@
   font-size: 18px;
 }
 
-.selected .pps-list-item-name{
+.pps-list-item-name {
   font-weight: bold;
-  color:black;
+}
+
+.selected .pps-list-item-name {
+  color: black;
 }
 
 .pps-list {
@@ -167,53 +177,56 @@
   cursor: pointer;
 }
 
-.pps-list-item-profiles .selected{
+.pps-list-item-profiles .selected {
   font-weight: bold;
-  color:black;
-}
-.pps-profile-item{
-  padding-top:5px;
-  padding-bottom: 5px;
-  clear:both;
-  overflow:auto;
+  color: black;
 }
 
-.pps-profile-name{
-  float:left;
-  line-height: 20px;
-  width:68%
+.pps-profile-item {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  clear: both;
+  overflow: auto;
 }
-.profile-applied-label{
-  float:right;
-  padding:5px;
+
+.pps-profile-name {
+  float: left;
+  line-height: 20px;
+  width: 68%
+}
+
+.profile-applied-label {
+  float: right;
+  padding: 5px;
   border-radius: 10px;
-  color:white;
+  color: white;
   background-color: #3cb669;
   font-size: 12px;
 }
-.profile-label-container{
-  float:right;
-  width:32%
-}
-.profile-requested-label{
 
-  padding:5px;
+.profile-label-container {
+  float: right;
+  width: 32%
+}
+
+.profile-requested-label {
+
+  padding: 5px;
   border-radius: 10px;
-  color:white;
+  color: white;
   background-color: orange;
   font-size: 12px;
 }
 
-.currentBinDirection{
+.currentBinDirection {
   background-color: transparent;
-  color:#999;
+  color: #999;
 }
-.currentBinDirection .active{
+
+.currentBinDirection .active {
   background-color: #4990e2;
-  color:white;
+  color: white;
 }
-
-
 
 .pps-bins-container {
   float: left;
@@ -249,16 +262,16 @@
 
 .selected .pps-bin {
   border: 2px solid #4990e2;
-  background-color: rgba(73,144,226,0.3);
+  background-color: rgba(73, 144, 226, 0.3);
 
 }
 
-.selected .pps-bin .pps-bin-tag-info{
-  color:black;
+.selected .pps-bin .pps-bin-tag-info {
+  color: black;
 }
 
 .selected .pps-bin .pps-bin-tag-info .gor-tag-icon-grey {
-  background-position:-209px -94px;
+  background-position: -209px -94px;
 }
 
 .mouseover .pps-bin.disabled {
@@ -270,8 +283,10 @@
   display: inline-block;
   height: 20px;
   font-size: 14px;
-  color:#ccc;
+  color: #ccc;
   padding-top: 8px;
+  padding-left: 5px;
+  word-break: break-word;
 }
 
 .pps-bin-info {
@@ -281,7 +296,7 @@
   display: inline-block;
   position: absolute;
   bottom: -2px; //Border is 2px wide.
-  left:0;
+  left: 0;
   color: white;
   text-align: center;
 }
@@ -327,9 +342,9 @@
   overflow: auto;
 }
 
-.pps-tag-list{
-  max-height:400px;
-  overflow:auto;
+.pps-tag-list {
+  max-height: 400px;
+  overflow: auto;
 }
 
 .pps-tag-name {
@@ -340,8 +355,8 @@
   max-width: 80%;
 }
 
-.pps-tag-name .highlight{
-  color:black
+.pps-tag-name .highlight {
+  color: black
 }
 
 .pps-tag-selection {
@@ -365,8 +380,8 @@
 .pps-add-tag-name {
   float: left;
   max-width: 80%;
-  padding:5px;
-  color:black;
+  padding: 5px;
+  color: black;
 }
 
 .pps-add-tag-button {
@@ -375,155 +390,159 @@
   padding: 5px;
 }
 
-.pps-searchbox-tags{
-  width:80%;
-  height:25px;
-  padding-left:5px;
-  padding-right:25px;
-  border:1px solid #ccc;
+.pps-searchbox-tags {
+  width: 80%;
+  height: 25px;
+  padding-left: 5px;
+  padding-right: 25px;
+  border: 1px solid #ccc;
   border-radius: 15px;
   outline: none;
 }
-.pps-configuration-actions-container{
-  width:83%;
-  float:right;
-  height:50px;
-  clear:both;
-  overflow:auto;
-  padding:10px 20px;
+
+.pps-configuration-actions-container {
+  width: 83%;
+  float: right;
+  height: 50px;
+  clear: both;
+  overflow: auto;
+  padding: 10px 20px;
   border-bottom: 1px solid #ccc;
 }
 
-.gor-create-profile{
-  width:40%;
-  min-height:calculateRem(300px);
-  background:#ffffff;
-  border-radius:3px;
-  font-size:20px;
-  margin:auto;
-  clear:both;
-  .gor-create-profile-header{
-    margin:auto;
-    padding:calculateRem(30px);
+.gor-create-profile {
+  width: 40%;
+  min-height: calculateRem(300px);
+  background: #ffffff;
+  border-radius: 3px;
+  font-size: 20px;
+  margin: auto;
+  clear: both;
+  .gor-create-profile-header {
+    margin: auto;
+    padding: calculateRem(30px);
     padding-bottom: 0;
-    min-height:calculateRem(50px);
+    min-height: calculateRem(50px);
   }
-  .gor-create-profile-body{
-    font-size:14px;
-    padding:0px calculateRem(30px);
-    min-height:calculateRem(150px);
+  .gor-create-profile-body {
+    font-size: 14px;
+    padding: 0px calculateRem(30px);
+    min-height: calculateRem(150px);
     display: table;
     width: 50%;
   }
-  .gor-create-profile-action-button{
-    text-align:right;
-    margin-right:calculateRem(20px);
+  .gor-create-profile-action-button {
+    text-align: right;
+    margin-right: calculateRem(20px);
   }
-  .gor-save-profile-btn{
-    font-family:'Source Sans Pro Bold', sans-serif;
-    min-width:calculateRem(113px);
-    height:calculateRem(35px);
-    font-size:14px;
-    background:#f36f36;
-    color:#ffffff;
-    border-radius:3px;
-    display:inline-block;
-    cursor:pointer;
+  .gor-save-profile-btn {
+    font-family: 'Source Sans Pro Bold', sans-serif;
+    min-width: calculateRem(113px);
+    height: calculateRem(35px);
+    font-size: 14px;
+    background: #f36f36;
+    color: #ffffff;
+    border-radius: 3px;
+    display: inline-block;
+    cursor: pointer;
   }
-  .gor-filter-input-text{
-    padding-top:0
+  .gor-filter-input-text {
+    padding-top: 0
   }
-}
-.gor-cancel-btn{
-  font-family:'Source Sans Pro Bold', sans-serif;
-  width:calculateRem(113px);
-  height:calculateRem(35px);
-  font-size:14px;
-  background:#4D5055;
-  color:#ffffff;
-  border-radius:3px;
-  margin-right:calculateRem(10px);
-  display:inline-block;
-  cursor:pointer;
 }
 
-.pps-bin-group{
+.gor-cancel-btn {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  width: calculateRem(113px);
+  height: calculateRem(35px);
+  font-size: 14px;
+  background: #4D5055;
+  color: #ffffff;
+  border-radius: 3px;
+  margin-right: calculateRem(10px);
+  display: inline-block;
+  cursor: pointer;
+}
+
+.pps-bin-group {
   border: 10px solid white;
 }
 
-.pps-bin-group.highlight{
+.pps-bin-group.highlight {
   border-width: 10px;
   border-style: solid;
   border-color: transparent;
-  background-color: rgba(73,144,226,0.3);
+  background-color: rgba(73, 144, 226, 0.3);
 }
 
 .pps-bin-group.pps-bin-group-1 {
-  background-color: rgba(36,144,226,0.3);
+  background-color: rgba(36, 144, 226, 0.3);
 }
 
 .pps-bin-group.pps-bin-group-2 {
-  background-color: rgba(73,72,226,0.3);
+  background-color: rgba(73, 72, 226, 0.3);
 }
 
 .pps-bin-group.pps-bin-group-3 {
-  background-color: rgba(73,144,113,0.3);
+  background-color: rgba(73, 144, 113, 0.3);
 }
 
 .pps-bin-group.pps-bin-group-4 {
-  background-color: rgba(109,144,216,0.3);
+  background-color: rgba(109, 144, 216, 0.3);
 }
 
 .pps-bin-group.pps-bin-group-5 {
-  background-color: rgba(109,216,226,0.3);
+  background-color: rgba(109, 216, 226, 0.3);
 }
 
-.pps-bin-group.disabled{
+.pps-bin-group.disabled {
   opacity: 0.5;
 }
 
-.requestedProfileTxt{
-  display:inline-block;
-  width:65px;
-  font-size:12px;
-  color:#27aae1;
+.requestedProfileTxt {
+  display: inline-block;
+  width: 65px;
+  font-size: 12px;
+  color: #27aae1;
   vertical-align: middle;
 }
 
-.pps-list-available-profile{
-  clear:both;
-  overflow:auto;
-  padding:2px;
+.pps-list-available-profile {
+  clear: both;
+  overflow: auto;
+  padding: 2px;
 }
 
-.pps-list-available-profile .profile-name{
-  float:left
-}
-.pps-list-available-profile .applied-status{
-  float:right
+.pps-list-available-profile .profile-name {
+  float: left
 }
 
-.gor-pps-profile-drop .gor-dropdown-wrapper{
+.pps-list-available-profile .applied-status {
+  float: right
+}
+
+.gor-pps-profile-drop .gor-dropdown-wrapper {
   display: inline-block;
   width: 150px;
-  color:black;
-}
-.gor-pps-profile-drop .gor-dropdown-option{
-  color:black;
+  color: black;
 }
 
-.gor-pps-profile-drop .gor-dropdown-option:hover{
+.gor-pps-profile-drop .gor-dropdown-option {
+  color: black;
+}
+
+.gor-pps-profile-drop .gor-dropdown-option:hover {
   background-color: #F2F2F2;
 }
 
-.gor-pps-profile-drop .gor-option-wrapper{
-  border:1px solid #aaa;
+.gor-pps-profile-drop .gor-option-wrapper {
+  border: 1px solid #aaa;
 }
 
-.gor-pps-profile-drop .gor-dropdown-wrapper.disabled{
-  color:#aaa;
+.gor-pps-profile-drop .gor-dropdown-wrapper.disabled {
+  color: #aaa;
 }
 
-.gor-pps-profile-drop .gor-white-background{
+.gor-pps-profile-drop .gor-white-background {
   background-color: transparent;
 }
