@@ -165,7 +165,7 @@ render()
     {shutterWrap}
     </div>          
     </div>    
-    <button className='gor-resume-btn' disabled={this.state.buttonDisable} onClick={this._resumeOperation}>
+    <button className={this.state.buttonDisable?'gor-resume-btn disable':'gor-resume-btn'} disabled={this.state.buttonDisable} onClick={this._resumeOperation}>
     <FormattedMessage id='operation.alert.release.button' 
     defaultMessage="RESUME OPERATION"
     description="Text button to resume operation"/></button>         
