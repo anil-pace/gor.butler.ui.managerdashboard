@@ -202,11 +202,11 @@ class Routes extends React.Component {
                                }}
                         />
 
-                        <Route onEnter={this._handleNavigationChanges.bind(this)} name="configuration" path="/system/configuration"
+                        <Route onEnter={this._handleNavigationChanges.bind(this)} name="ppsConfiguration" path="/system/ppsConfiguration"
                                getComponent={(location, callback)=> {
                                    require.ensure([], function (require) {
                                        callback(null, require('../containers/systemTabs/ppsConfigurationTab').default);
-                                   }, "configuration");
+                                   }, "ppsConfiguration");
                                }}
                         />
                     </Route>

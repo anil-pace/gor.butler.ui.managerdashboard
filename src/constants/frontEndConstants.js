@@ -286,7 +286,7 @@ export const SYS_SUB_TAB_ROUTE_MAP={
 	[CHARGING]:"chargingstation",
 	[WAVES]:"waves",
 	[ORDER_LIST]:"orderlist",
-	[PPS_CONFIGURATION]:"configuration"
+	[PPS_CONFIGURATION]:"ppsConfiguration"
 
 }
 export const SHOW_UTILITY_TAB=true;

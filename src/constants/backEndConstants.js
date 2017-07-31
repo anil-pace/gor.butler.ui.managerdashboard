@@ -21,7 +21,7 @@ export const PARSE_STATUS="status";
 export const SYSTEM_CHARGERS_DETAILS="chargers";
 export const BUTLERBOTS="butlerbots";
 export const CHARGING="chargingstation";
-export const PPS_CONFIGURATION="configuration";
+export const PPS_CONFIGURATION="ppsConfiguration";
 export const PPS="pps";
 
 /*Constants for response type */

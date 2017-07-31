@@ -57,7 +57,7 @@ class SystemTab extends React.Component{
               defaultMessage="PPS Configuration"/>
 
 
-		var selectClass={notification:"gor-main-block", butlerbots:"gor-main-block", pps:"gor-main-block", chargingstation:"gor-main-block",configuration:'gor-main-block'};
+		var selectClass={notification:"gor-main-block", butlerbots:"gor-main-block", pps:"gor-main-block", chargingstation:"gor-main-block",ppsConfiguration:'gor-main-block'};
 
 		if(this.props.subTab.length) {
 			selectClass[this.props.subTab]="gor-main-blockSelect";
@@ -80,7 +80,7 @@ class SystemTab extends React.Component{
 					<Link to="/system/chargingstation" onClick={this.handleSysSubTabClick.bind(this,CHARGING)}>
 						<SubTab item={chargingStation} changeClass={selectClass[CHARGING]}/> 
 					</Link>
-					<Link to="/system/configuration" onClick={this.handleSysSubTabClick.bind(this,PPS_CONFIGURATION)}>
+					<Link to="/system/ppsConfiguration" onClick={this.handleSysSubTabClick.bind(this,PPS_CONFIGURATION)}>
 						<SubTab item={ppsConfiguration} changeClass={selectClass[PPS_CONFIGURATION]}/>
 					</Link>
 				</div>
