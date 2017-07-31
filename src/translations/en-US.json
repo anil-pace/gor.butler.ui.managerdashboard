@@ -3508,6 +3508,24 @@
     "filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
   },
   {
+    "id": "pps.configuration.bins.direction.label",
+    "description": "Bin Direction",
+    "defaultMessage": "Current PPS Selection",
+    "filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
+  },
+  {
+    "id": "pps.configuration.bins.direction.left",
+    "description": "Bin Direction LEFT",
+    "defaultMessage": "LEFT",
+    "filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
+  },
+  {
+    "id": "pps.configuration.bins.direction.right",
+    "description": "Bin Direction RIGHT",
+    "defaultMessage": "RIGHT",
+    "filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
+  },
+  {
     "id": "pps.configuration.bins.selection.count",
     "description": "total users for filter search bar",
     "defaultMessage": "Select a bin to activate or deactivate ({deactivated}/{total} bins deactivated)",

@@ -3,10 +3,11 @@
  */
 import React from 'react'
 import {connect} from 'react-redux'
-import {createNewPPSProfile,cancelProfileChanges} from './../../actions/ppsConfigurationActions'
+import {cancelProfileChanges} from './../../actions/ppsConfigurationActions'
 import {SAVE_PROFILE_URL} from './../../constants/configConstants'
 import {POST,CREATE_NEW_PROFILE,APP_JSON} from './../../constants/frontEndConstants'
 import {FormattedMessage} from 'react-intl'
+import {makeAjaxCall} from './../../actions/ajaxActions'
 class CreateProfile extends React.Component {
     constructor(props) {
         super(props);
@@ -60,7 +61,7 @@ class CreateProfile extends React.Component {
             'accept': APP_JSON,
             'token': this.props.auth_token
         }
-        this.props.createNewPPSProfile(data)
+        this.props.makeAjaxCall(data)
     }
 
     render() {
@@ -105,8 +106,8 @@ function mapStateToProps(state, ownProps) {
 }
 var mapDispatchToProps = function (dispatch) {
     return {
-        createNewPPSProfile: function (data) {
-            dispatch(createNewPPSProfile(data));
+        makeAjaxCall: function (data) {
+            dispatch(makeAjaxCall(data));
         },
         cancelProfileChanges: function (data) {
             dispatch(cancelProfileChanges(data));

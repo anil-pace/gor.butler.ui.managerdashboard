@@ -17,7 +17,7 @@ import {hashHistory} from 'react-router'
 import Tags from './tags'
 import Bins from './ppsConfigurationBins'
 import PPSList from "./ppsConfigurationList";
-import {cancelProfileChanges,savePPSProfile,setPPSConfigurationSpinner} from './../../actions/ppsConfigurationActions'
+import {cancelProfileChanges,setPPSConfigurationSpinner} from './../../actions/ppsConfigurationActions'
 import {modal} from 'react-redux-modal'
 import CreateProfile from './createPPSProfile'
 import {FormattedMessage} from 'react-intl'
@@ -25,6 +25,7 @@ import {PUT,APP_JSON,SAVE_PPS_PROFILE,PPS_STATUS_FCLOSE} from './../../constants
 import {SAVE_PROFILE_URL} from './../../constants/configConstants'
 import Spinner from './../../components/spinner/Spinner';
 import SaveApplyProfile from './saveApplyProfile'
+import {makeAjaxCall} from './../../actions/ajaxActions'
 
 
 class PPSConfiguration extends React.Component {
@@ -135,7 +136,7 @@ class PPSConfiguration extends React.Component {
             'token': this.props.auth_token
         }
         this.props.setPPSConfigurationSpinner(true)
-        this.props.savePPSProfile(data)
+        this.prop.makeAjaxCall(data)
     }
 
     /**
@@ -208,7 +209,7 @@ class PPSConfiguration extends React.Component {
 }
 
 
-function mapStateToProps(state, ownProps) {
+var  mapStateToProps=function(state, ownProps) {
 
     return {
         csFilter: state.sortHeaderState.csFilter || "",
@@ -247,11 +248,11 @@ var mapDispatchToProps = function (dispatch) {
         cancelProfileChanges: function (data) {
             dispatch(cancelProfileChanges(data));
         },
-        savePPSProfile: function (data) {
-            dispatch(savePPSProfile(data));
-        },
         setPPSConfigurationSpinner: function (data) {
             dispatch(setPPSConfigurationSpinner(data))
+        },
+        makeAjaxCall: function (data) {
+            dispatch(makeAjaxCall(data))
         },
 
 

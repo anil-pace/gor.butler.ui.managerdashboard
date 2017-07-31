@@ -13,6 +13,7 @@ import {
     cancelProfileChanges, changePPSBinGroupStatus, selectPPSBinGroup
 } from './../../actions/ppsConfigurationActions'
 import {FormattedMessage} from 'react-intl'
+import {makeAjaxCall} from './../../actions/ajaxActions'
 
 class Bins extends React.Component {
     constructor(props) {

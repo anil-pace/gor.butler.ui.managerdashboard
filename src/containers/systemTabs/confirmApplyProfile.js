@@ -3,7 +3,7 @@
  */
 import React from 'react'
 import {connect} from 'react-redux'
-import {changePPSProfile} from './../../actions/ppsConfigurationActions'
+import {makeAjaxCall} from './../../actions/ajaxActions'
 import {PPS_PROFILE_URL} from './../../constants/configConstants'
 import {POST, CHANGE_PPS_PROFILE, APP_JSON} from './../../constants/frontEndConstants'
 import {FormattedMessage} from 'react-intl'
@@ -22,7 +22,7 @@ class ConfirmApplyProfile extends React.Component {
             'accept': APP_JSON,
             'token': this.props.auth_token
         }
-        this.props.changePPSProfile(data)
+        this.props.makeAjaxCall(data)
     }
 
     componentWillReceiveProps(nextProps){
@@ -68,8 +68,8 @@ function mapStateToProps(state, ownProps) {
 }
 var mapDispatchToProps = function (dispatch) {
     return {
-        changePPSProfile: function (data) {
-            dispatch(changePPSProfile(data));
+        makeAjaxCall: function (data) {
+            dispatch(makeAjaxCall(data));
         },
     };
 }

@@ -3,10 +3,11 @@
  */
 import React  from 'react';
 import {connect} from 'react-redux'
-import {addTagToBin, fetchTags, addTag,setPPSConfigurationSpinner} from './../../actions/ppsConfigurationActions'
+import {addTagToBin, addTag,setPPSConfigurationSpinner} from './../../actions/ppsConfigurationActions'
 import {FETCH_TAGS_URL, SAVE_TAGS_URL} from './../../constants/configConstants'
 import {GET, FETCH_TAGS, APP_JSON, PUT, ADD_TAG_TO_LIST} from './../../constants/frontEndConstants'
 import {FormattedMessage, defineMessages} from 'react-intl'
+import {makeAjaxCall} from './../../actions/ajaxActions'
 const messages = defineMessages({
     tagSearchPlaceholder: {
         id: "pps.configuration.tag.search.placeholder",
@@ -49,7 +50,7 @@ class Tags extends React.Component {
             'token': this.props.auth_token
         }
         this.props.setPPSConfigurationSpinner(true)
-        this.props.fetchTags(data)
+        this.props.makeAjaxCall(data)
     }
 
     searchTags(e) {
@@ -115,7 +116,7 @@ class Tags extends React.Component {
             'token': this.props.auth_token
         }
         this.props.setPPSConfigurationSpinner(true)
-        this.props.addTag(data)
+        this.props.makeAjaxCall(data)
 
     }
 
@@ -208,11 +209,8 @@ var mapDispatchToProps = function (dispatch) {
         addTagToBin: function (data) {
             dispatch(addTagToBin(data))
         },
-        fetchTags: function (data) {
-            dispatch(fetchTags(data))
-        },
-        addTag: function (data) {
-            dispatch(addTag(data))
+        makeAjaxCall: function (data) {
+            dispatch(makeAjaxCall(data))
         },
         setPPSConfigurationSpinner: function (data) {
             dispatch(setPPSConfigurationSpinner(data))

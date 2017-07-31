@@ -3,10 +3,11 @@
  */
 import React  from 'react';
 import {connect} from 'react-redux';
-import {fetchPPSProfiles,selectPPSProfileForConfiguration,fetchAndSelectPPSProfileForConfiguration,setPPSConfigurationSpinner} from './../../actions/ppsConfigurationActions'
+import {selectPPSProfileForConfiguration,setPPSConfigurationSpinner} from './../../actions/ppsConfigurationActions'
 import {GET,FETCH_PPS_PROFILES,APP_JSON,FETCH_PROFILE_FOR_PPS} from './../../constants/frontEndConstants'
 import {PPS_LIST_URL,PPS_PROFILE_URL} from './../../constants/configConstants'
 import {FormattedMessage} from 'react-intl'
+import {makeAjaxCall} from './../../actions/ajaxActions'
 
 class PPSList extends React.Component {
     constructor(props) {
@@ -40,7 +41,7 @@ class PPSList extends React.Component {
             'token': this.props.auth_token
         }
         this.props.setPPSConfigurationSpinner(true)
-        this.props.fetchPPSProfiles(userData)
+        this.props.makeAjaxCall(userData)
     }
 
     componentDidMount() {
@@ -63,7 +64,7 @@ class PPSList extends React.Component {
                 'token': this.props.auth_token
             }
             this.props.setPPSConfigurationSpinner(true)
-            this.props.fetchAndSelectPPSProfileForConfiguration(data)
+            this.props.makeAjaxCall(data)
         } else if(this.props.selectedPPS && pps.pps_id===this.props.selectedPPS.pps_id){
             //Already Selected PPS, Do Nothing
         } else {
@@ -135,17 +136,14 @@ function mapStateToProps(state, ownProps) {
 
 var mapDispatchToProps = function (dispatch) {
     return {
-        fetchPPSProfiles: function (data) {
-            dispatch(fetchPPSProfiles(data))
-        },
         selectPPSProfileForConfiguration: function (data) {
             dispatch(selectPPSProfileForConfiguration(data))
         },
-        fetchAndSelectPPSProfileForConfiguration: function (data) {
-            dispatch(fetchAndSelectPPSProfileForConfiguration(data))
-        },
         setPPSConfigurationSpinner: function (data) {
             dispatch(setPPSConfigurationSpinner(data))
+        },
+        makeAjaxCall: function (data) {
+            dispatch(makeAjaxCall(data))
         },
     }
 };
