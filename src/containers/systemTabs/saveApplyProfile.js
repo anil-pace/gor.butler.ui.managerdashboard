@@ -56,10 +56,5 @@ function mapStateToProps(state, ownProps) {
 
     };
 }
-var mapDispatchToProps = function (dispatch) {
-    return {
 
-    };
-}
-
-export  default connect(mapStateToProps, mapDispatchToProps)(SaveApplyProfile);
+export  default connect(mapStateToProps, null)(SaveApplyProfile);
