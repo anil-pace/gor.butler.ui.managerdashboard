@@ -217,7 +217,6 @@ var  mapStateToProps=function(state, ownProps) {
         csSortHeaderState: state.sortHeaderState.csHeaderSortOrder || INITIAL_HEADER_ORDER,
         csSpinner: state.spinner.csSpinner || false,
         chargersDetail: state.chargersDetail || [],
-        intlMessages: state.intl.messages,
         showFilter: state.filterInfo.filterState || false,
         isFilterApplied: state.filterInfo.isFilterApplied || false,
         chargingFilterStatus: state.filterInfo.chargingFilterStatus || false,
@@ -259,9 +258,6 @@ var mapDispatchToProps = function (dispatch) {
     };
 }
 
-PPSConfiguration.contextTypes = {
-    intl: React.PropTypes.object.isRequired
-}
 PPSConfiguration.PropTypes = {
     wsSubscriptionData: React.PropTypes.object
 };
