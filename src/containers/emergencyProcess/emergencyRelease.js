@@ -39,12 +39,12 @@ class EmergencyRelease extends React.Component{
             <div className='gor-operation-head'>
               <div className='gor-caution'></div><span className='gor-operation-heading'>
               <FormattedMessage id='operation.alert.release' 
-                    defaultMessage="Stop button released"
+                    defaultMessage="All Emergency-stop buttons released"
                             description="Text for emergency button release heading"/></span>
             </div>
             <div className='gor-operation-body'>
               <div className='gor-text-bold'><FormattedMessage id='operation.alert.release.text' 
-                    defaultMessage="Emergency Stop button has been released."
+                    defaultMessage="All Emergency-stop buttons have been released."
                             description="Text for emergency stop button release"/>
               </div>
               <div className='gor-operation-text'><FormattedMessage id='operation.alert.release.subtext' 

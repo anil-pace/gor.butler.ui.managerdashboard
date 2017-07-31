@@ -615,3 +615,19 @@ export const SET_INFINITE_SPINNER = "SET_INFINITE_SPINNER";
 export const SEARCHED_NOTIFICATIONS_DATA_ALL = "SEARCHED_NOTIFICATIONS_DATA_ALL";
 export const DEFAULT_NOTIFICATION_ROW_LENGTH = 15;
 
+/*Zoning COnstants*/
+export const ZONE_DATA = "ZONE_DATA";
+export const RECIEVE_ZONE_DATA = "RECIEVE_ZONE_DATA";
+export const CONTROLLER_DATA= "CONTROLLER_DATA";
+export const ZONE_STATUS_CLASS={
+	operation_normal:"operating",
+	zone_pause_initiated:"zonePauseInit",
+	zone_pause_activated:"zonePauseActive",
+	zone_pause_deactivated:"zonePauseDeactivated",
+	zone_clear_initiated:"zoneClearInit",
+	zone_clear_activated:"zoneClearActive",
+	zone_clear_deactivated:"zoneClearDeactivated",
+	emergency_stop:"emergencyStop",
+	emergency_pause:"emergencyPause"
+}
+

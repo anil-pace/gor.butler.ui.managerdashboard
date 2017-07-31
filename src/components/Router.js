@@ -12,15 +12,12 @@ import {setAuditSpinner} from '../actions/auditActions';
 import {setOrderListSpinner} from '../actions/orderListActions';
 import {setWavesSpinner, setButlerSpinner, setPpsSpinner, setCsSpinner, setUserSpinner} from '../actions/spinnerAction';
 import {AUDIT, ORDERLIST, WAVES, BUTLERBOTS, PPS, CHARGING, USER} from '../constants/appConstants';
-import {OVERVIEW, TAB_ROUTE_MAP, INVENTORY, SHOW_UTILITY_TAB} from '../constants/frontEndConstants';
+import {OVERVIEW, TAB_ROUTE_MAP, INVENTORY} from '../constants/frontEndConstants';
 import {translationMessages} from '../utilities/i18n';
 import {updateIntl} from 'react-intl-redux';
 
 class Routes extends React.Component {
-    constructor(props) {
-        super(props);
-
-    }
+    
 
     _requireAuth(nextState, replace) {
         if (sessionStorage.getItem('auth_token')) {
@@ -174,9 +171,16 @@ class Routes extends React.Component {
                         <IndexRoute
                             getComponent={(location, callback)=> {
                                 require.ensure([], function (require) {
-                                    callback(null, require('../containers/systemTabs/butlerbotTab').default);
-                                }, "indexButBot");
+                                    callback(null, require('../containers/systemTabs/sysOverview').default);
+                                }, "defaultSystem");
                             }}
+                        />
+                        <Route onEnter={this._handleNavigationChanges.bind(this)} name="sysOverview" path="/system/sysOverview"
+                               getComponent={(location, callback)=> {
+                                   require.ensure([], function (require) {
+                                       callback(null, require('../containers/systemTabs/sysOverview').default);
+                                   }, "sysOverview");
+                               }}
                         />
                         <Route onEnter={this._handleNavigationChanges.bind(this)} name="butlerbots" path="/system/butlerbots"
                                getComponent={(location, callback)=> {
@@ -199,6 +203,13 @@ class Routes extends React.Component {
                                    require.ensure([], function (require) {
                                        callback(null, require('../containers/systemTabs/chargingStationsTab').default);
                                    }, "chargingStation");
+                               }}
+                        />
+                        <Route onEnter={this._handleNavigationChanges.bind(this)} name="sysControllers" path="/system/sysControllers"
+                               getComponent={(location, callback)=> {
+                                   require.ensure([], function (require) {
+                                       callback(null, require('../containers/systemTabs/sysControllers').default);
+                                   }, "sysControllers");
                                }}
                         />
                     </Route>

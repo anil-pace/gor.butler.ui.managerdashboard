@@ -1,7 +1,6 @@
 import React from 'react';
 import { Cell} from 'fixed-data-table';
 import { FormattedMessage } from 'react-intl';
-import DropdownTable from './dropdown/dropdownTable'
 import {AUDIT_APPROVED, AUDIT_REJECTED,VIEW_AUDIT_ISSUES,APPROVE_AUDIT,GOR_STATUS,AUDIT_UNRESOLVED,AUDIT_REJECTED_STATUS,AUDIT_RESOLVED_STATUS,AUDIT_REAUDITED_STATUS} from '../constants/frontEndConstants';
 import Dropdown from "./gor-dropdown-component/dropdown";
 export var SortTypes={
@@ -151,13 +150,13 @@ export const ActionCell=({rowIndex, data, columnKey,selEdit,selDel,mid, ...props
 
 export const TextCell=({rowIndex, data, columnKey,setClass, ...props})=>{ 
   
-  const childrenCell =  React.Children.map(props.children, child => {
+ const childrenCell =  React.Children.map(props.children, child => {
       
        return data.getObjectAt(rowIndex)[props.childColumnKey] ?(
         <span className={props.childrenClass}>{child}{data.getObjectAt(rowIndex)[props.childColumnKey]}</span>
       ):("");
     });
-  return(<Cell {...props}  className={setClass}>
+  return(<Cell {...props}  className={data.getObjectAt(rowIndex)[setClass]}>
     {data.getObjectAt(rowIndex)[columnKey]}
     {childrenCell}
   </Cell>
@@ -239,6 +238,36 @@ export const StatusCell=({rowIndex, data, columnKey,statusKey, ...props})=> (
     {data.getObjectAt(rowIndex)[columnKey]}
   </Cell>
 );
+
+export const ConnectionDetailsCell=({rowIndex, data, columnKey,subColumnKey,setClass, ...props})=>{ 
+  
+ const children = React.Children.map(props.children, (child,idx) => {
+      return (
+        <div className="connectionDetails">{child}<span>{idx === 0 ? data.getObjectAt(rowIndex)[columnKey] : data.getObjectAt(rowIndex)[subColumnKey]}</span></div> 
+      );
+    });
+
+  return(<Cell {...props} >
+    {children}
+  </Cell>)
+};
+
+export const OperatingModeCell=({rowIndex, data, columnKey,subColumnKey,classKey,setClass, ...props})=>{ 
+  
+ const children = (<div className={"actionTriggered "+data.getObjectAt(rowIndex)[classKey]}>
+    <div className="action-left">
+      <span className={"action-icon"}></span>
+    </div>
+    <div className="action-right">
+      <p className="action-triggered">{data.getObjectAt(rowIndex)[columnKey]}</p>
+      <p className="sensor-triggered">{data.getObjectAt(rowIndex)[subColumnKey]}</p>
+    </div>
+  </div>)
+
+  return(<Cell {...props} >
+    {children}
+  </Cell>)
+};
 
 export const AuditStatusCell=({rowIndex, data, columnKey,statusKey,descriptionKey, ...props})=> (
   <Cell {...props}>

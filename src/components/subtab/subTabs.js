@@ -10,7 +10,7 @@ import { FormattedMessage } from 'react-intl';
 import {setButlerSpinner, setPpsSpinner, setCsSpinner} from '../../actions/spinnerAction';
 import {subTabSelected} from '../../actions/tabSelectAction'
 import {NOTIFICATION,SYS_SUB_TAB_ROUTE_MAP} from '../../constants/frontEndConstants'
-import {BUTLERBOTS,PPS,CHARGING} from '../../constants/backEndConstants'
+import {BUTLERBOTS,PPS,CHARGING,SYS_OVERVIEW,SYS_CONTROLLERS} from '../../constants/backEndConstants'
 
 
 class SystemTab extends React.Component{
@@ -34,6 +34,9 @@ class SystemTab extends React.Component{
   					case CHARGING:
   					this.props.setCsSpinner(true);
   					break;
+
+  					case SYS_OVERVIEW:
+  					break;
   					
   					default:
   					this.props.setButlerSpinner(false);
@@ -43,7 +46,8 @@ class SystemTab extends React.Component{
     }
     
 	render(){
-
+		let sysOverview=<FormattedMessage id="sysOverview.tab.heading" description="System overview Tab" 
+              defaultMessage="Overview"/>
 
         let butlerBots=<FormattedMessage id="butlerBot.tab.heading" description="butler bot tab" 
               defaultMessage="Butler Bots"/>
@@ -54,21 +58,25 @@ class SystemTab extends React.Component{
         let chargingStation=<FormattedMessage id="chargingstation.tab.heading" description="charging station tab" 
               defaultMessage="Charging Station"/>
 
+        let sysControllers = <FormattedMessage id="sysControllers.tab.heading" description="Syatem controllers Tab" 
+              defaultMessage="System Controllers"/>
 
-		var selectClass={notification:"gor-main-block", butlerbots:"gor-main-block", pps:"gor-main-block", chargingstation:"gor-main-block"};
+		var selectClass={sysControllers:"gor-main-block",sysOverview : "gor-main-block" ,notification:"gor-main-block", butlerbots:"gor-main-block", pps:"gor-main-block", chargingstation:"gor-main-block"};
 
 		if(this.props.subTab.length) {
 			selectClass[this.props.subTab]="gor-main-blockSelect";
 		}
 
 		else {
-			selectClass["butlerbots"]="gor-main-blockSelect";
+			selectClass["sysOverview"]="gor-main-blockSelect";
 		}
 
 		return (
 			<div>
 				<div className="gorMainSubtab">
-				
+					<Link to="/system/sysOverview" onClick={this.handleSysSubTabClick.bind(this,SYS_OVERVIEW)}>
+						<SubTab item={sysOverview} changeClass={selectClass[SYS_OVERVIEW]}/> 
+					</Link>
 					<Link to="/system/butlerbots" onClick={this.handleSysSubTabClick.bind(this,BUTLERBOTS)}>
 						<SubTab item={butlerBots} changeClass={selectClass[BUTLERBOTS]}/> 
 					</Link>
@@ -77,6 +85,9 @@ class SystemTab extends React.Component{
 					</Link>
 					<Link to="/system/chargingstation" onClick={this.handleSysSubTabClick.bind(this,CHARGING)}>
 						<SubTab item={chargingStation} changeClass={selectClass[CHARGING]}/> 
+					</Link>
+					<Link to="/system/sysControllers" onClick={this.handleSysSubTabClick.bind(this,SYS_CONTROLLERS)}>
+						<SubTab item={sysControllers} changeClass={selectClass[SYS_CONTROLLERS]}/> 
 					</Link>
 				</div>
 			</div>
