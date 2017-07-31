@@ -56,11 +56,11 @@ export const READ_MSG_URL = API_URL+"/api-gateway/dashboard-service/platform-das
  * URLs or PPS Configurations
  */
 
-export const PPS_LIST_URL="http://localhost:5000/api/pps"//TODO: URL need to be changed accrodingly
-export const PPS_PROFILE_URL="http://localhost:5000/api/pps_profile/"//TODO: URL need to be changed accrodingly
-export const FETCH_TAGS_URL="http://localhost:5000/api/components/get_bin_tags"//TODO: URL need to be changed accrodingly
-export const SAVE_TAGS_URL="http://localhost:5000/api/components/add_bin_tags"//TODO: URL need to be changed accrodingly
-export const SAVE_PROFILE_URL="http://localhost:5000/api/pps_profiles/"//TODO: URL need to be changed accrodingly
+export const PPS_LIST_URL=API_URL+"/pps"//TODO: URL need to be changed accrodingly
+export const PPS_PROFILE_URL=API_URL+"/pps_profiles/"//TODO: URL need to be changed accrodingly
+export const FETCH_TAGS_URL=API_URL+"/components/get_bin_tags"//TODO: URL need to be changed accrodingly
+export const SAVE_TAGS_URL=API_URL+"/components/add_bin_tags"//TODO: URL need to be changed accrodingly
+export const SAVE_PROFILE_URL=API_URL+"/pps_profiles/"//TODO: URL need to be changed accrodingly
 
 
 
