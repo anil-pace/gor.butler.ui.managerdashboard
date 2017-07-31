@@ -335,8 +335,8 @@ export function AjaxParse(store, res, cause, status, saltParams) {
 		case CHECK_SAFETY:
 			var safetyList = [],
 				safetyResponse = res;
-			if (safetyResponse.data) {
-				safetyList = safetyResponse.data;
+			if (safetyResponse.check_list) {
+				safetyList = safetyResponse.check_list;
 			}
 			store.dispatch(getSafetyList(safetyList));
 			break;

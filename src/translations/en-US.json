@@ -206,7 +206,7 @@
   {
     "id": "header.zones.emergency",
     "description": "System Emergency",
-    "defaultMessage": "SYSTEM EMERGENCY",
+    "defaultMessage": "SYSTEM STOPPED",
     "filepath": "./src/components/header/header.js"
   },
   {
@@ -225,6 +225,18 @@
     "id": "header.option.release",
     "description": "release operation option",
     "defaultMessage": "Release the Emergency Stop button from the Zigbee box in order\n                              to resume operation.",
+    "filepath": "./src/components/header/header.js"
+  },
+  {
+    "id": "header.zones.emergency.stopped",
+    "description": "System Emergency",
+    "defaultMessage": "SYSTEM STOPPED",
+    "filepath": "./src/components/header/header.js"
+  },
+  {
+    "id": "header.zones.emergency.paused",
+    "description": "System Emergency",
+    "defaultMessage": "SYSTEM PAUSED",
     "filepath": "./src/components/header/header.js"
   },
   {
