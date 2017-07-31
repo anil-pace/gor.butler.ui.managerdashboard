@@ -7,8 +7,7 @@ import ResumeOperation from './resumeOperation';
 import {userRequest} from '../../actions/userActions';  
 import ShutterLocationTile from '../../components/fireHazardTiles/shutterLocationTile';
 import {getSecondsDiff} from '../../utilities/getDaysDiff';
-import { VALIDATE_SAFETY } from '../../constants/configConstants';
-import {FAILED,CLEARED,EMERGENCY_FIRE,PROGRESS,NOT_FOUND,IN_PROGRESS,APP_JSON,POST,CONFIRM_SAFETY} from '../../constants/frontEndConstants';
+import {FAILED,CLEARED,PROGRESS,NOT_FOUND,IN_PROGRESS} from '../../constants/frontEndConstants';
 class FireHazard extends React.Component{
   constructor(props) 
   { 

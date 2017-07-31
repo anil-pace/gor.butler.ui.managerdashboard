@@ -30,8 +30,7 @@ class UserDataTable extends React.Component {
         }
         this.state={
             colSortDirs: {},
-            sortedDataList: this._dataList,
-            ghdgsfh: ''
+            sortedDataList: this._dataList
         },
             this._onSortChange=this._onSortChange.bind(this);
         this._onFilterChange=this._onFilterChange.bind(this);

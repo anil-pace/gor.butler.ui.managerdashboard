@@ -18,11 +18,15 @@ export const PARSE_PPA_THROUGHPUT="put_pick_audit_throughput";
 export const PARSE_AUDIT="audit";
 export const PARSE_AUDIT_AGG="audit_agg";
 export const PARSE_STATUS="status";
+export const PARSE_ZONING="zones";
+export const PARSE_CONTROLLERS = "controllers";
 export const SYSTEM_CHARGERS_DETAILS="chargers";
 export const BUTLERBOTS="butlerbots";
 export const CHARGING="chargingstation";
 export const PPS_CONFIGURATION="ppsConfiguration";
 export const PPS="pps";
+export const SYS_OVERVIEW="sysOverview";
+export const SYS_CONTROLLERS = "sysControllers";
 
 /*Constants for response type */
 export const PPS_DETAIL="pps";

@@ -2,7 +2,7 @@ import React  from 'react';
 import { connect } from 'react-redux' ;
 import { FormattedMessage } from 'react-intl';        
 
-class OperationStop extends React.Component{
+class OperationPause extends React.Component{
   removeThisModal() {
       this.props.removeModal();
   }
@@ -22,26 +22,26 @@ class OperationStop extends React.Component{
               <div className='gor-delete-text'>  
                 <div className='gor-alert-lg'></div>
                   <div className='gor-delete-line'>
-                    <div className='gor-delete-query gor-error-lg'>{this.props.emergencyPress?(<FormattedMessage id='operation.alert.stop' 
-                    defaultMessage="Butler System - Operation Stopped"
+                    <div className='gor-delete-query gor-error-lg'>{this.props.emergencyPress?(<FormattedMessage id='operation.alert.pause' 
+                    defaultMessage="Butler System - Operation Paused"
                             description="Text for operation stopped heading"/>):""}
                     </div>
                   </div>
                   <div className='gor-margin-top'>
                     <div className='gor-error-md'>
-                    {this.props.poeEnabled?(<FormattedMessage id='operation.alert.stop.text' 
-                    defaultMessage="Emergency-Stop activated via Conroller {controller} in {zone}."
+                    {this.props.poeEnabled?(<FormattedMessage id='operation.alert.pause.text' 
+                    defaultMessage="Emergency-Pause activated via Controller {controller} in {zone}."
                             description="Text for emergency button press"
                             values={{
                               controller:this.props.controller,
                               zone:this.props.zone
-                            }}/>):(<FormattedMessage id='operation.alert.stop.nonPOE' 
-                    defaultMessage="Operation Stopped"
+                            }}/>):(<FormattedMessage id='operation.alert.pause.nonPOE' 
+                    defaultMessage="Operation Paused"
                             description="Text for operation stopped heading"/>)}
                     </div>
                       <span className='gor-text-sm'>
-                        <FormattedMessage id='operation.alert.stop.subtext' 
-                          defaultMessage='You must check the emergency situation and release the Emergency Stop button in order to resume the operation in warehouse'
+                        <FormattedMessage id='operation.alert.pause.subtext' 
+                          defaultMessage='You must check the emergency situation and release the Emergency Pause button in order to resume the operation in warehouse'
                             description="Subtext for pause alert"/>
                       </span>
                     </div>           
@@ -59,13 +59,12 @@ class OperationStop extends React.Component{
     }
 } 
 
-OperationStop.propTypes={
-      auth_token:React.PropTypes.string, 
-      userRequest:React.PropTypes.func,
+OperationPause.propTypes={
+      auth_token:React.PropTypes.string,
       emergencyPress:React.PropTypes.bool,
       system_emergency:React.PropTypes.bool,
       system_data:React.PropTypes.string
 }
 
 
-export default connect(mapStateToProps,null)(OperationStop);
+export default connect(mapStateToProps,null)(OperationPause);
