@@ -15,7 +15,7 @@ class SafetyChecklist extends React.Component{
   {
       super(props);  
       this.state={allChecked:false, checkedSet: new Set(), 
-        safetyError:false, errorList:[]};
+        safetyError:false, errorList:[],butlerdetails:{}};
   }
   componentWillUnmount()
   {
@@ -36,7 +36,7 @@ class SafetyChecklist extends React.Component{
     if(nextProps.modalStatus && !this.props.modalStatus){
       this._removeThisModal();
     }
-    if(nextProps.safetyErrorList.length)
+    if(nextProps.safetyErrorList.length && this.props.safetyErrorList!==nextProps.safetyErrorList)
     {
       var errorList=nextProps.safetyErrorList , noItems;
       this.setState({safetyError:true, errorList:errorList});
@@ -45,11 +45,6 @@ class SafetyChecklist extends React.Component{
         this._toggleSelection(errorList[i],noItems);           
       }      
     }
-//      if(nextProps.safetyErrorBotList.length)
-//     {
-//       var errorBotList=nextProps.safetyErrorBotList;
-// this._processTableList(errorBotList);
-//     }
   }
   componentDidMount(){
    var url;
@@ -167,9 +162,9 @@ class SafetyChecklist extends React.Component{
 
   _processTableList(data){
     var botCheckList=[],items=this.props.botList, noItems, bots, msgCode;
-     var butlerDetails;//=this.props.botList;
+     var butlerDetails;
    if(data){
-    butlerDetails=data
+    butlerDetails=data;
    }
     for(let i=0;i<butlerDetails.length;i++){
       bots=(<div className='gor-instruction-row'>
@@ -190,9 +185,11 @@ class SafetyChecklist extends React.Component{
   render()
   {
       var checkList=this._processList();
-      var data=this.props.safetyErrorBotList.length>0?this.props.safetyErrorBotList:this.props.botList;
-      var botchecklist=this._processTableList(data);
-      this.props.botList;
+
+      var butlerdetails=this.props.safetyErrorBotList.length>0?this.props.safetyErrorBotList:this.props.botList;
+
+      var botchecklist=this._processTableList(butlerdetails);
+
       return (
         <div className='gor-safetylist'>
           <div className="gor-modal-content">
@@ -231,7 +228,7 @@ class SafetyChecklist extends React.Component{
                   <ul>
                   {checkList.length>0?checkList:''}
                   </ul>
-{this.props.botList.length>0?
+{butlerdetails.length>0?
                   (<div className="gor-instruction-table">
                   <div className="gor-instruction-heading">
                   <div className="gor-instruction-cell">

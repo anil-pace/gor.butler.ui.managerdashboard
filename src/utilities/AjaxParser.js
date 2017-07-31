@@ -336,46 +336,41 @@ export function AjaxParse(store, res, cause, status, saltParams) {
 		case CHECK_SAFETY:
 			var safetyList = [],
 				safetyResponse = res;
-			if (safetyResponse.data) {
-				safetyList = safetyResponse.data;
+			if (safetyResponse) {
+				safetyList = safetyResponse;
 			}
 			store.dispatch(getSafetyList(safetyList));
 			break;
 		case CONFIRM_SAFETY:
-			var rejectList = [],boteErrorList=[],
+			var rejectList = [],botErrorList=[],
 				rejectResponse = res,
 				modalFlag = true;
 
-			if(rejectResponse.successful){
-
-				if(rejectResponse.emergency_end_time)
+			 if(rejectResponse.successful){
+				if(!rejectResponse.emergency_end_time)
 				{
 				store.dispatch(notifySuccess(ES)); 
-				
 				  }
-			//}
-			//else if (rejectResponse.alert_data) {
-				else if (true) {
-				// if(rejectResponse.alert_data[0].details[0])
-				// {
-				//rejectList = rejectResponse.alert_data[0].details[0].failed_validations;
-				//boteErrorList=rejectResponse.alert_data[0].details[0].displaced_bots||[];
-				rejectList=['md013'];
-
-				boteErrorList=[];
+			}
+			else if (rejectResponse.alert_data) {
+			
+				if(rejectResponse.alert_data[0].details[0])
+				{
+				rejectList = rejectResponse.alert_data[0].details[0].failed_validations;
+				botErrorList=rejectResponse.alert_data[0].details[0].displaced_bots||[];
 				modalFlag = false;
-				// }
-				// else
-				// {
-				// stringInfo = codeToString(res.alert_data[0]);
-				// store.dispatch(notifyFail(stringInfo.msg));
-				// }
+				}
+				else
+				{
+				stringInfo = codeToString(res.alert_data[0]);
+				store.dispatch(notifyFail(stringInfo.msg));
+				}
 
 			}
-			} 
+			 
 			store.dispatch(modalStatus(modalFlag));                           
 			store.dispatch(setSafetySpinner(false));
-			store.dispatch(getErrorBotList(boteErrorList));
+			store.dispatch(getErrorBotList(botErrorList));
 			store.dispatch(getSafetyErrorList(rejectList));
 			
 

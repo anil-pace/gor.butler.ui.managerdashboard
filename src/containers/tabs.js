@@ -67,37 +67,20 @@ class Tabs extends React.Component{
       });
   }
   _emergencyRelease(){
-      // modal.add(EmergencyRelease, {
-      //   title: '',
-      //   size: 'large', // large, medium or small,
-      // closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-      // hideCloseButton: false
-      // });  
-        modal.add(SafetyChecklist, {
-      title: '',
-      size: 'large', // large, medium or small,
+      modal.add(EmergencyRelease, {
+        title: '',
+        size: 'large', // large, medium or small,
       closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-      hideCloseButton: true, // (optional) if you don't wanna show the top right close button
-      //emergency_type:typeFlag
-      //.. all what you put in here you will get access in the modal props ;)
-      });
-
+      hideCloseButton: false
+      });  
   }
     _FireEmergencyRelease(){
-      // modal.add(fireHazard, {
-      //   title: '',
-      //   size: 'large customColor', // large, medium or small,
-      // closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-      // hideCloseButton: false
-      // });  
-       modal.add(SafetyChecklist, {
-      title: '',
-      size: 'large', // large, medium or small,
+      modal.add(fireHazard, {
+        title: '',
+        size: 'large customColor', // large, medium or small,
       closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-      hideCloseButton: true, // (optional) if you don't wanna show the top right close button
-      //emergency_type:typeFlag
-      //.. all what you put in here you will get access in the modal props ;)
-      });   
+      hideCloseButton: false
+      });  
   }
   componentWillReceiveProps(nextProps){
     var a=nextProps;
