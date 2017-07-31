@@ -162,10 +162,8 @@ export function ppsConfiguration(state = {}, action) {
             if (!selected_bin.bin_tags) {
                 selected_bin.bin_tags = []
             }
-            if (selected_bin.bin_tags.indexOf(selected_tag) > -1) {
-                selected_bin.bin_tags.splice(selected_bin.bin_tags.indexOf(selected_tag), 1)
-            } else {
-                /**
+            if (selected_bin.bin_tags.indexOf(selected_tag) < 0) {
+               /**
                  * Only one tag is supported as of now.
                  * @type {[*]}
                  */

@@ -45,7 +45,6 @@ import {sysOverviewReducer} from './reducers/sysOverviewReducer';
 import {zoningReducer} from './reducers/zoningReducer';
 import {sysControllersReducer} from './reducers/sysControllersReducer'
 
-import {fireReducer} from './reducers/fireReducer';
 import {ppsConfiguration} from './reducers/ppsConfigurationReducer'
 
 const rootReducer=combineReducers({
