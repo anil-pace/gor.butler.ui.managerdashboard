@@ -15,7 +15,7 @@ class SafetyChecklist extends React.Component{
   {
       super(props);  
       this.state={allChecked:false, checkedSet: new Set(), 
-        safetyError:false, errorList:[],butlerdetails:{}};
+        safetyError:false, errorList:[]};
   }
   componentWillUnmount()
   {

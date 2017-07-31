@@ -365,15 +365,11 @@ export function AjaxParse(store, res, cause, status, saltParams) {
 				stringInfo = codeToString(res.alert_data[0]);
 				store.dispatch(notifyFail(stringInfo.msg));
 				}
-
 			}
-			 
 			store.dispatch(modalStatus(modalFlag));                           
 			store.dispatch(setSafetySpinner(false));
 			store.dispatch(getErrorBotList(botErrorList));
 			store.dispatch(getSafetyErrorList(rejectList));
-			
-
 			break;
 
 		case ITEM_RECALLED:

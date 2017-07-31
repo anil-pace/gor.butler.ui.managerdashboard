@@ -16,7 +16,6 @@ import OperationStop from '../containers/emergencyProcess/OperationStop';
 import EmergencyRelease from '../containers/emergencyProcess/emergencyRelease'; 
 import fireHazard from '../containers/emergencyProcess/fireHazard'; 
 import GorToastify from '../components/gor-toastify/gor-toastify';
-import SafetyChecklist from './emergencyProcess/safetyChecklist';
 
 
 class Tabs extends React.Component{
