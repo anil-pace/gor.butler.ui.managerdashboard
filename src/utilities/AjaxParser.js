@@ -349,12 +349,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
 			store.dispatch(validatePassword(resumePwd));
 			break;
 		case CHECK_SAFETY:
-			var safetyList = [],
-				safetyResponse = res;
-			if (safetyResponse) {
-				safetyList = safetyResponse;
-			}
-			store.dispatch(getSafetyList(safetyList));
+			store.dispatch(getSafetyList(res || {}));
 			break;
 		case CONFIRM_SAFETY:
 			var rejectList = [],botErrorList=[],

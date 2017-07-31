@@ -152,7 +152,7 @@ class Header extends React.Component {
         else if(this.props.system_emergency && this.props.system_data === HARD){
             emergencyDropDown =(<section className='gor-hamburger-option'  >
                                 <h1><FormattedMessage id="header.zones.emergency" description='System Emergency'
-                                            defaultMessage='SYSTEM EMERGENCY'
+                                            defaultMessage='SYSTEM STOPPED'
                                            /></h1>
                                 <p>{this.props.zoneHeader.active_zones ? <FormattedMessage id="header.zones.inOperation1" description='Zone in operation count '
                                             defaultMessage='{activeZones} zones in operation'
@@ -167,10 +167,31 @@ class Header extends React.Component {
                                 
                             </section>)
         }
-        else if(this.props.system_emergency && (this.props.system_data === SOFT_MANUAL || this.props.system_data === SOFT)){
+        else if(this.props.system_emergency && this.props.system_data === SOFT_MANUAL ){
+            emergencyDropDown =( <section className='gor-hamburger-option'  >
+                                <h1>{this.props.lastEmergencyState === HARD ?<FormattedMessage id="header.zones.emergency.stopped" description='System Emergency'
+                                            defaultMessage='SYSTEM STOPPED'
+                                           />:<FormattedMessage id="header.zones.emergency.paused" description='System Emergency'
+                                            defaultMessage='SYSTEM PAUSED'
+                                           />}</h1>
+                                <p>{this.props.zoneHeader.active_zones ? <FormattedMessage id="header.zones.inOperation2" description='Zone in operation count '
+                                            defaultMessage='{activeZones} zones in operation'
+                                            values={{
+                                                activeZones: this.props.zoneHeader.active_zones
+                                            }}/> : <FormattedMessage id="header.zones.noOperation" description='Zone in operation count '
+                                            defaultMessage='No zones in operation'
+                                            />}</p>
+                                <button onClick={this._showModal} className="gor-sys-btn">
+                                <span className="gor-resume-icon"></span>
+                                 <FormattedMessage id="header.button.resume" description='Button text'
+                                defaultMessage='Resume System'
+                                /></button>
+                            </section>)
+        }
+        else if(this.props.system_emergency && this.props.system_data === SOFT){
             emergencyDropDown =(<section className='gor-hamburger-option'  >
-                                <h1><FormattedMessage id="header.zones.emergency" description='System Emergency'
-                                            defaultMessage='SYSTEM EMERGENCY'
+                                <h1><FormattedMessage id="header.zones.emergency.paused" description='System Emergency'
+                                            defaultMessage='SYSTEM PAUSED'
                                            /></h1>
                                 <p>{this.props.zoneHeader.active_zones ? <FormattedMessage id="header.zones.inOperation2" description='Zone in operation count '
                                             defaultMessage='{activeZones} zones in operation'
@@ -295,6 +316,7 @@ Header.contextTypes={
         username: state.authLogin.username,
         system_emergency: state.tabsData.system_emergency || null,
         system_data: state.tabsData.system_data || null,
+        lastEmergencyState:state.tabsData.lastEmergencyState || null,
         activeModalKey: state.appInfo.activeModalKey || 0,
         zoneHeader:state.zoningReducer.zoneHeader || {},
         timeOffset: state.authLogin.timeOffset
