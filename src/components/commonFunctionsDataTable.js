@@ -2,7 +2,7 @@ import React from 'react';
 import { Cell} from 'fixed-data-table';
 import { FormattedMessage } from 'react-intl';
 import DropdownTable from './dropdown/dropdownTable'
-import {AUDIT_APPROVED, AUDIT_REJECTED,VIEW_AUDIT_ISSUES,APPROVE_AUDIT,GOR_STATUS,AUDIT_UNRESOLVED,AUDIT_REJECTED_STATUS,AUDIT_RESOLVED_STATUS,AUDIT_REAUDITED_STATUS} from '../constants/frontEndConstants';
+import {AUDIT_APPROVED, AUDIT_REJECTED,VIEW_AUDIT_ISSUES,APPROVE_AUDIT,GOR_STATUS,AUDIT_UNRESOLVED,AUDIT_REJECTED_STATUS,AUDIT_RESOLVED_STATUS,AUDIT_REAUDITED_STATUS,PPS_STATUS_FCLOSE} from '../constants/frontEndConstants';
 import Dropdown from "./gor-dropdown-component/dropdown";
 export var SortTypes={
   ASC: 'ASC',
@@ -113,6 +113,7 @@ function auditTaskActions(data, index){
     return taskList
 }
 
+
 export class DataListWrapper {
   constructor(indexMap, data) {
     this._indexMap=indexMap;
@@ -129,7 +130,7 @@ export class DataListWrapper {
     );
   }
 }
- 
+
 export const ActionCell=({rowIndex, data, columnKey,selEdit,selDel,mid, ...props})=> (
   <Cell {...props}>
     <div className="gor-user-Logo-wrap">
@@ -145,19 +146,19 @@ export const ActionCell=({rowIndex, data, columnKey,selEdit,selDel,mid, ...props
         <div className="gor-del-icon" /><span><FormattedMessage id="commonDataTable.Delete.button" description='Delete button' defaultMessage='Delete'/></span>
 
       </button>
-    </div>  
+    </div>
   </Cell>
 );
 
-export const TextCell=({rowIndex, data, columnKey,setClass, ...props})=>{ 
-  
+export const TextCell=({rowIndex, data, columnKey,setClass, ...props})=>{
+
   const childrenCell =  React.Children.map(props.children, child => {
-      
+
        return data.getObjectAt(rowIndex)[props.childColumnKey] ?(
         <span className={props.childrenClass}>{child}{data.getObjectAt(rowIndex)[props.childColumnKey]}</span>
       ):("");
     });
-  return(<Cell {...props}  className={setClass}>
+  return(<Cell {...props}  className={data.getObjectAt(rowIndex)[setClass]}>
     {data.getObjectAt(rowIndex)[columnKey]}
     {childrenCell}
   </Cell>
@@ -173,7 +174,7 @@ export const ToolTipCell=({rowIndex, data, columnKey,setClass,callBack,tooltipDa
     </div>
     {data.getObjectAt(rowIndex)[tooltipData] && data.getObjectAt(rowIndex)[tooltipData][Object.keys(data.getObjectAt(rowIndex)[tooltipData])[0]]?
     <div className="gor-tooltip">
-      <div className="gor-tooltip-arrow"/> 
+      <div className="gor-tooltip-arrow"/>
       <div className="gor-tooltip-text-wrap">
         <div className="gor-tooltip-heading">
           <FormattedMessage id="commonDataTable.attributesType.heading" description='heading for attribute' defaultMessage='Box Id'/>
@@ -185,7 +186,7 @@ export const ToolTipCell=({rowIndex, data, columnKey,setClass,callBack,tooltipDa
                   :""}
             </div>
         </div>
-      </div> 
+      </div>
     </div>
     :""}
   </Cell>
@@ -217,19 +218,19 @@ export const ProgressCell=({rowIndex, data, columnKey, resolved, unresolved, ...
 
   </div>
     <div className="gorProgressBarLabel">
-      { data.getObjectAt(rowIndex)[columnKey]}% 
+      { data.getObjectAt(rowIndex)[columnKey]}%
     </div>
   </Cell>
 );
 
 export const ComponentCell=({rowIndex, data, columnKey,checkState,checked, ...props})=> (
-  
+
   <Cell {...props}> <input type="checkbox" checked={checked[rowIndex]?true:false} onChange={checkState.bind(this,columnKey,rowIndex,data.getObjectAt(rowIndex)[columnKey])}/>
     {data.getObjectAt(rowIndex)[columnKey]}
   </Cell>
 );
 export const PPSComponentCell=({rowIndex, data, columnKey,checkState,checked, ...props})=> (
-  
+
   <Cell {...props}> <input type="checkbox" checked={data.getObjectAt(rowIndex)["isChecked"]} onChange={checkState.bind(this,props.checkboxColumn,rowIndex)}/>
     {data.getObjectAt(rowIndex)[columnKey]}
   </Cell>
@@ -239,6 +240,36 @@ export const StatusCell=({rowIndex, data, columnKey,statusKey, ...props})=> (
     {data.getObjectAt(rowIndex)[columnKey]}
   </Cell>
 );
+
+export const ConnectionDetailsCell=({rowIndex, data, columnKey,subColumnKey,setClass, ...props})=>{
+
+ const children = React.Children.map(props.children, (child,idx) => {
+      return (
+        <div className="connectionDetails">{child}<span>{idx === 0 ? data.getObjectAt(rowIndex)[columnKey] : data.getObjectAt(rowIndex)[subColumnKey]}</span></div>
+      );
+    });
+
+  return(<Cell {...props} >
+    {children}
+  </Cell>)
+};
+
+export const OperatingModeCell=({rowIndex, data, columnKey,subColumnKey,classKey,setClass, ...props})=>{
+
+ const children = (<div className={"actionTriggered "+data.getObjectAt(rowIndex)[classKey]}>
+    <div className="action-left">
+      <span className={"action-icon"}></span>
+    </div>
+    <div className="action-right">
+      <p className="action-triggered">{data.getObjectAt(rowIndex)[columnKey]}</p>
+      <p className="sensor-triggered">{data.getObjectAt(rowIndex)[subColumnKey]}</p>
+    </div>
+  </div>)
+
+  return(<Cell {...props} >
+    {children}
+  </Cell>)
+};
 
 export const AuditStatusCell=({rowIndex, data, columnKey,statusKey,descriptionKey, ...props})=> (
   <Cell {...props}>
@@ -258,18 +289,18 @@ export const ResolveCell=({rowIndex, data, columnKey, checkStatus, screenId, ...
   <Cell {...props}>
   {screenId===VIEW_AUDIT_ISSUES?
     <div style={(screenId===VIEW_AUDIT_ISSUES || data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED)?{opacity: 0.5}:{opacity: 1}}>
-      <input type="radio"  name={data.getObjectAt(rowIndex)["auditLineId"]} disabled={data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED?true:false} 
+      <input type="radio"  name={data.getObjectAt(rowIndex)["auditLineId"]} disabled={data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED?true:false}
              onChange={checkStatus.bind(this,rowIndex,AUDIT_APPROVED,data.getObjectAt(rowIndex)["auditLineId"])} checked={data.getObjectAt(rowIndex)[GOR_STATUS]===AUDIT_RESOLVED_STATUS?true:false}/>
         <FormattedMessage id="commonDataTable.resolveAudit.approve" description='resolve button' defaultMessage='Approve '/>
-      <input type="radio"  name={data.getObjectAt(rowIndex)["auditLineId"]} disabled={data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED?true:false} 
+      <input type="radio"  name={data.getObjectAt(rowIndex)["auditLineId"]} disabled={data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED?true:false}
              onChange={checkStatus.bind(this,rowIndex,AUDIT_REJECTED,data.getObjectAt(rowIndex)["auditLineId"])} checked={data.getObjectAt(rowIndex)[GOR_STATUS]===AUDIT_REJECTED_STATUS|| data.getObjectAt(rowIndex)[GOR_STATUS]===AUDIT_REAUDITED_STATUS}/>
         <FormattedMessage id="commonDataTable.resolveAudit.reject" description='resolve button' defaultMessage='Reject'/>
     </div>:
     <div style={(screenId===VIEW_AUDIT_ISSUES || data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED)?{opacity: 0.5}:{opacity: 1}}>
-      <input type="radio"  name={data.getObjectAt(rowIndex)["auditLineId"]} disabled={data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED?true:false} 
+      <input type="radio"  name={data.getObjectAt(rowIndex)["auditLineId"]} disabled={data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED?true:false}
              onChange={checkStatus.bind(this,rowIndex,AUDIT_APPROVED,data.getObjectAt(rowIndex)["auditLineId"])} />
         <FormattedMessage id="commonDataTable.resolveAudit.approve" description='resolve button' defaultMessage='Approve '/>
-      <input type="radio"  name={data.getObjectAt(rowIndex)["auditLineId"]} disabled={data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED?true:false} 
+      <input type="radio"  name={data.getObjectAt(rowIndex)["auditLineId"]} disabled={data.getObjectAt(rowIndex)[GOR_STATUS]!==AUDIT_UNRESOLVED?true:false}
              onChange={checkStatus.bind(this,rowIndex,AUDIT_REJECTED,data.getObjectAt(rowIndex)["auditLineId"])}/>
         <FormattedMessage id="commonDataTable.resolveAudit.reject" description='resolve button' defaultMessage='Reject'/>
     </div>
@@ -298,6 +329,99 @@ export const ActionCellAudit=({rowIndex, data, columnKey, handleAudit,manageAudi
       </div>
   </Cell>
 );
+
+
+
+export class ActionCellPPS extends React.Component {
+    constructor(props){
+        super(props)
+    }
+    /**
+     * The method will return
+     * the profile name of applied profile
+     * that need to be displayed
+     * as the placeholder of action dropdown.
+     * @param data
+     * @param index
+     * @returns {string}
+     */
+    ppsProfilePlaceHolder(data, index) {
+    let applied_profile=""
+    if (!data.getObjectAt(index)) {
+        return applied_profile
+    }
+    try{
+        applied_profile = data.getObjectAt(index).profiles.filter(function (profile) {
+            return profile.applied
+        })[0].profile_name
+    }catch(ex){
+
+    }
+
+
+
+    return applied_profile
+
+}
+
+    /**
+     * The method will return
+     * the list of profiles
+     * need to be shown in the option
+     * of available profiles that can be
+     * applied.
+     * @param data
+     * @param index
+     */
+    availablePPSProfiles(data, index) {
+    let profiles=data.getObjectAt(index).profiles.map(function(profile){
+        profile.value = profile.profile_name
+        // profile.label = <div key={profile.profile_name} className="pps-list-available-profile">
+        //     <div className="profile-name">{profile.profile_name}</div>
+        //     {profile.applied && <div className="applied-status">V</div>}</div>
+
+        profile.label =profile.profile_name
+        return profile
+    })
+
+
+    return profiles
+}
+
+    render() {
+        let self = this
+        if (self.props.data.getObjectAt(self.props.rowIndex)) {
+            let placeholder = self.ppsProfilePlaceHolder(self.props.data, self.props.rowIndex)
+            let options = self.availablePPSProfiles(self.props.data, self.props.rowIndex)
+            let forced_close_pps=self.props.data.getObjectAt(self.props.rowIndex).statusClass===PPS_STATUS_FCLOSE
+            let any_requested_profile = self.props.data.getObjectAt(self.props.rowIndex)[self.props.columnKey].filter(function (profile) {
+                    return profile.requested
+                }).length > 0
+            return <Cell>
+                <div className="gor-pps-profile-drop">
+                    <Dropdown disabled={any_requested_profile ||forced_close_pps} noBorder={true} placeholder={placeholder} options={options}
+                              onSelectHandler={self.props.confirmApplyProfile.bind(self, self.props.data.getObjectAt(self.props.rowIndex)['ppsId'])}
+                              resetOnSelect={true}/>
+                </div>
+                {any_requested_profile &&
+                <span className="requestedProfileTxt"><FormattedMessage id="pps.configuration.profile.requestedText"
+                                                                        description='requested profile for PPS'
+                                                                        defaultMessage='Requested Profile: {requestedProfile}'
+                                                                        values={{
+                                                                            requestedProfile: self.props.data.getObjectAt(self.props.rowIndex)[self.props.columnKey].filter(function (profile) {
+                                                                                return profile.requested
+                                                                            })[0].profile_name,
+                                                                        }}/></span>
+                }
+
+            </Cell>
+        } else {
+            return null
+        }
+
+    }
+}
+
 
 export class tableRenderer {
   constructor(size){

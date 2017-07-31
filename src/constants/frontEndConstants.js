@@ -108,6 +108,7 @@ export const BUTLERBOTS_TAB="Butler Bots";
 export const CHARGING_TAB="Charging Station";
 export const PPS_TAB="Pick Put Stations";
 export const ORDER_LIST="Order List";
+export const PPS_CONFIGURATION="PPS Configuration";
 export const WAVES="Waves";
 export const BUTLERBOTS="butlerbots";
 export const CHARGING="chargingstation";
@@ -264,6 +265,7 @@ export const DISPLAY_INVENTORY_REPORT_SPINNER="DISPLAY_INVENTORY_REPORT_SPINNER"
 export const DISPLAY_STOCK_LEDGER_SPINNER="DISPLAY_STOCK_LEDGER_SPINNER";
 export const DISPLAY_STOCK_LEDGER_RAW_TRANSACTIONS_SPINNER="DISPLAY_STOCK_LEDGER_RAW_TRANSACTIONS_SPINNER";
 export const FIRE_EMERGENCY_POPUP_FLAG="FIRE_EMERGENCY_POPUP"
+export const DISPLAY_PPS_CONFIGURATION_SPINNER="DISPLAY_PPS_CONFIGURATION_SPINNER"
 
 
 
@@ -284,7 +286,8 @@ export const SYS_SUB_TAB_ROUTE_MAP={
 	[PPS]:"pps",
 	[CHARGING]:"chargingstation",
 	[WAVES]:"waves",
-	[ORDER_LIST]:"orderlist"
+	[ORDER_LIST]:"orderlist",
+	[PPS_CONFIGURATION]:"ppsConfiguration"
 
 }
 export const SHOW_UTILITY_TAB=true;
@@ -587,6 +590,7 @@ export const OVERVIEW_REFRESHED="OVERVIEW_REFRESHED"
 export const BUTLERBOTS_REFRESHED="BUTLERBOTS_REFRESHED";
 export const PPS_LIST_REFRESHED="PPS_LIST_REFRESHED";
 export const CHARGING_STATION_LIST_REFRESHED="CHARGING_STATION_LIST_REFRESHED";
+export const PPS_CONFIGURATION_REFRESHED="PPS_CONFIGURATION_REFRESHED";
 export const INVENTORY_REFRESHED="INVENTORY_REFRESHED"
 export const AUDIT_LIST_REFRESHED="AUDIT_LIST_REFRESHED"
 export const ORDER_LIST_REFRESHED="ORDER_LIST_REFRESHED"
@@ -615,4 +619,45 @@ export const SET_NOTIFICATION_SPINNER = "SET_NOTIFICATION_SPINNER";
 export const SET_INFINITE_SPINNER = "SET_INFINITE_SPINNER";
 export const SEARCHED_NOTIFICATIONS_DATA_ALL = "SEARCHED_NOTIFICATIONS_DATA_ALL";
 export const DEFAULT_NOTIFICATION_ROW_LENGTH = 15;
+
+/*Zoning COnstants*/
+export const ZONE_DATA = "ZONE_DATA";
+export const RECIEVE_ZONE_DATA = "RECIEVE_ZONE_DATA";
+export const CONTROLLER_DATA= "CONTROLLER_DATA";
+export const ZONE_STATUS_CLASS={
+	operation_normal:"operating",
+	zone_pause_initiated:"zonePauseInit",
+	zone_pause_activated:"zonePauseActive",
+	zone_pause_deactivated:"zonePauseDeactivated",
+	zone_clear_initiated:"zoneClearInit",
+	zone_clear_activated:"zoneClearActive",
+	zone_clear_deactivated:"zoneClearDeactivated",
+	emergency_stop:"emergencyStop",
+	emergency_pause:"emergencyPause"
+}
+
+/**
+ * Constants for PPS Configuration Tabs
+ */
+export const FETCH_PPS_PROFILES="FETCH_PPS_PROFILES"
+export const FETCH_PROFILE_FOR_PPS="FETCH_PROFILE_FOR_PPS"
+export const RECEIVE_PPS_PROFILES="RECEIVE_PPS_PROFILES"
+export const SELECT_PPS_PROFILE_FOR_CONFIGURATION="SELECT_PPS_PROFILE_FOR_CONFIGURATION"
+export const SELECT_PPS_BIN="SELECT_PPS_BIN"
+export const SELECT_PPS_BIN_GROUP="SELECT_PPS_BIN_GROUP"
+export const CLEAR_SELECTION_PPS_BIN="CLEAR_SELECTION_PPS_BIN"
+export const CHANGE_PPS_BIN_STATUS="CHANGE_PPS_BIN_STATUS"
+export const CHANGE_PPS_BIN_GROUP_STATUS="CHANGE_PPS_BIN_GROUP_STATUS"
+export const ADD_TAG_TO_BIN="ADD_TAG_TO_BIN"
+export const ADD_TAG_TO_LIST="ADD_TAG_TO_LIST"
+export const FETCH_TAGS="FETCH_TAGS"
+export const RECEIVE_TAGS="RECEIVE_TAGS"
+export const CANCEL_PROFILE_CHANGES="CANCEL_PROFILE_CHANGES"
+export const CREATE_NEW_PROFILE="CREATE_NEW_PROFILE"
+export const CHANGE_PPS_PROFILE="CHANGE_PPS_PROFILE"
+export const SAVE_PPS_PROFILE="SAVE_PPS_PROFILE"
+export const PPS_PROFILE_SAVED="PPS_PROFILE_SAVED"
+export const PPS_PROFILE_CREATED="PPS_PROFILE_CREATED"
+export const PPS_PROFILE_REQUESTED="PPS_PROFILE_REQUESTED"
+export const TAG_ADDED_TO_LIST="TAG_ADDED_TO_LIST"
 

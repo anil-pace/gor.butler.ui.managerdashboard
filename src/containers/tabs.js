@@ -13,6 +13,7 @@ FULFILLING_ORDERS,GOR_OFFLINE,GOR_ONLINE,GOR_NORMAL_TAB,GOR_FAIL,
 SOFT_MANUAL,HARD,SOFT,UTILITIES,FIRE_EMERGENCY_POPUP_FLAG,EMERGENCY_FIRE} from '../constants/frontEndConstants';
 import { FormattedMessage,FormattedNumber,FormattedRelative } from 'react-intl';
 import OperationStop from '../containers/emergencyProcess/OperationStop';
+import OperationPause from '../containers/emergencyProcess/OperationPause';
 import EmergencyRelease from '../containers/emergencyProcess/emergencyRelease'; 
 import fireHazard from '../containers/emergencyProcess/fireHazard'; 
 import GorToastify from '../components/gor-toastify/gor-toastify';
@@ -57,13 +58,17 @@ class Tabs extends React.Component{
           
         }
     }
-  _stopOperation(stopFlag) {
+  _stopOperation(stopFlag,additionalProps={}) {
       modal.add(OperationStop, {
         title: '',
         size: 'large', // large, medium or small,
       closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: false,
-      emergencyPress: stopFlag
+      emergencyPress: stopFlag,
+      controller:additionalProps.controller_id,
+      zone:additionalProps.zone_id,
+      sensor:additionalProps.sensor_activated,
+      poeEnabled:Object.keys(additionalProps).length ? true : false
       });
 
   }
@@ -75,6 +80,19 @@ class Tabs extends React.Component{
       hideCloseButton: false
       });  
   }
+  _pauseOperation(stopFlag,additionalProps){
+     modal.add(OperationPause, {
+        title: '',
+        size: 'large', // large, medium or small,
+      closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: false,
+      emergencyPress: stopFlag,
+      controller:additionalProps.controller_id,
+      zone:additionalProps.zone_id,
+      sensor:additionalProps.sensor_activated,
+      poeEnabled:Object.keys(additionalProps).length ? true : false
+      });
+  }
     _FireEmergencyRelease(){
       modal.add(fireHazard, {
         title: '',
@@ -83,23 +101,25 @@ class Tabs extends React.Component{
       hideCloseButton: false
       });  
   }
+  
   componentWillReceiveProps(nextProps){
-    var a=nextProps;
+
     if(nextProps.system_data=== SOFT_MANUAL && (this.props.system_data=== HARD || !this.props.system_data))
     {
       this._emergencyRelease();
     }
    else  if(nextProps.fireHazardType ===EMERGENCY_FIRE && !nextProps.firehazadflag && !nextProps.fireHazardNotifyTime && nextProps.firehazadflag!==this.props.firehazadflag || 
       ((this.props.firehazadflag===false) && nextProps.fireHazardNotifyTime!==this.props.fireHazardNotifyTime))
+
     {
       this._FireEmergencyRelease();
     }
-    else if(nextProps.system_emergency && !this.props.system_emergency)
+    else if(nextProps.system_emergency && !this.props.system_emergency && nextProps.system_data=== HARD)
     {
-      this._stopOperation(true);
+      this._stopOperation(true,nextProps.zoneDetails);
     }
-    else if(nextProps.system_data=== SOFT && this.props.system_data=== SOFT_MANUAL){
-      this._stopOperation(true);
+    else if(nextProps.system_data=== SOFT && (this.props.system_data!== nextProps.system_data)){
+      this._pauseOperation(true,nextProps.zoneDetails);
     }
     
   }
@@ -156,13 +176,16 @@ class Tabs extends React.Component{
       }
       if(this.props.system_emergency)
       {
-        overviewStatus=<FormattedMessage id="overviewStatus.tab.stop" description="overview Status emergency" 
-              defaultMessage="Operation stopped"/>;  
-        overviewClass='gor-alert'
+        
+        systemClass = 'gor-alert';
+        systemStatus=<FormattedMessage id="overviewStatus.tab.stop" description="overview Status emergency" 
+              defaultMessage="STOPPED"/>; 
       }
+      else{
       systemStatus=<FormattedMessage id="systemStatus.tab.online" description="system Status online" 
               defaultMessage="Online"/>;  
       systemClass=GOR_ONLINE;
+    }
 
       ordersvalue=<FormattedNumber value={this.props.orders_completed}/>
       ordersStatus=<FormattedMessage id="ordersStatus.tab.heading" description="orders Status " 
@@ -270,7 +293,7 @@ singleNotification=<GorToastify key={1}>
 			<Tab items={{ tab: items.overview, Status: items.overviewStatus, currentState:items.overviewClass }} changeClass={(this.props.tab.toUpperCase()=== OVERVIEW ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
 		</Link>
 
-		<Link to="/system/butlerbots" onClick={this.handleTabClick.bind(this,SYSTEM)}>
+		<Link to="/system/sysOverview" onClick={this.handleTabClick.bind(this,SYSTEM)}>
 			<Tab items={{ tab: items.system, Status: items.systemStatus, currentState:items.systemClass }} changeClass={(this.props.tab.toUpperCase()=== SYSTEM ? 'sel' :GOR_NORMAL_TAB)} subIcons={true}/>
 		</Link>
 
@@ -318,7 +341,8 @@ function mapStateToProps(state, ownProps){
          fireHazardType:state.fireHazardDetail.emergency_type,
          fireHazardStartTime:state.fireHazardDetail.emergencyStartTime,
          fireHazardNotifyTime:state.fireHazardDetail.notifyTime,
-         timeZone:state.authLogin.timeOffset
+         timeZone:state.authLogin.timeOffset,
+        zoneDetails: state.tabsData.zoneDetails || {},
 
     }
 }

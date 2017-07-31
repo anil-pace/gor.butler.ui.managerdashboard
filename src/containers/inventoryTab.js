@@ -38,8 +38,10 @@ class InventoryTab extends React.Component{
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.socketAuthorized && !this.state.subscribed) {
-            this.setState({subscribed: true})
-            this._subscribeData(nextProps)
+            this.setState({subscribed: true},function(){
+                this._subscribeData(nextProps)
+            })
+            
         }
     }
     componentWillUnmount(){
@@ -105,8 +107,7 @@ function mapStateToProps(state, ownProps) {
         "recreatedData": state.inventoryInfo.recreatedData || {},
         "noData": state.inventoryInfo.noData,
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
-        socketAuthorized: state.recieveSocketActions.socketAuthorized,
-        inventoryRefreshed:state.inventoryInfo.inventoryRefreshed
+        socketAuthorized: state.recieveSocketActions.socketAuthorized
     }
 }
     function mapDispatchToProps(dispatch){

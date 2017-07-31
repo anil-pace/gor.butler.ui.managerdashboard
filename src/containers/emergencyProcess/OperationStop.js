@@ -1,8 +1,5 @@
 import React  from 'react';
 import { connect } from 'react-redux' ;
-import {userRequest} from '../../actions/userActions';
-import {DELETE_USER,APP_JSON,DELETE} from '../../constants/frontEndConstants';
-import {HEADER_URL} from '../../constants/configConstants';
 import { FormattedMessage } from 'react-intl';        
 
 class OperationStop extends React.Component{
@@ -15,19 +12,7 @@ class OperationStop extends React.Component{
       this.removeThisModal();
     }
   }
-  userDelete() {
-    let delurl=HEADER_URL+'/'+(this.props.id?this.props.id:'');
-    let userData={
-                'url':delurl,
-                'method':DELETE,
-                'cause':DELETE_USER,
-                'contentType':APP_JSON,
-                'accept':APP_JSON,
-                'token':this.props.auth_token
-    }
-    this.props.userRequest(userData);
-    this.props.removeModal();
-  }  
+ 
   render()
   {
       return (
@@ -38,22 +23,24 @@ class OperationStop extends React.Component{
                 <div className='gor-alert-lg'></div>
                   <div className='gor-delete-line'>
                     <div className='gor-delete-query gor-error-lg'>{this.props.emergencyPress?(<FormattedMessage id='operation.alert.stop' 
-                    defaultMessage="Operation Stopped"
-                            description="Text for operation stopped heading"/>):(<FormattedMessage id='operation.alert.pause' 
-                    defaultMessage="Operation Paused"
-                            description="Text for operation paused heading"/>)}
+                    defaultMessage="Butler System - Operation Stopped"
+                            description="Text for operation stopped heading"/>):""}
                     </div>
                   </div>
                   <div className='gor-margin-top'>
                     <div className='gor-error-md'>
-                    {this.props.emergencyPress?(<FormattedMessage id='operation.alert.stop.text' 
-                    defaultMessage="Emergency Stop button has been pressed."
-                            description="Text for emergency button press"/>):(<FormattedMessage id='operation.alert.pause.text' 
-                    defaultMessage="Butler operation has been paused from the management dashboard"
-                            description="Text for operation paused alert"/>)}
+                    {this.props.poeEnabled?(<FormattedMessage id='operation.alert.stop.text' 
+                    defaultMessage="Emergency-Stop activated via Conroller {controller} in {zone}."
+                            description="Text for emergency button press"
+                            values={{
+                              controller:this.props.controller,
+                              zone:this.props.zone
+                            }}/>):(<FormattedMessage id='operation.alert.stop.nonPOE' 
+                    defaultMessage="Operation Stopped"
+                            description="Text for operation stopped heading"/>)}
                     </div>
                       <span className='gor-text-sm'>
-                        <FormattedMessage id='operation.alert.pause.subtext' 
+                        <FormattedMessage id='operation.alert.stop.subtext' 
                           defaultMessage='You must check the emergency situation and release the Emergency Stop button in order to resume the operation in warehouse'
                             description="Subtext for pause alert"/>
                       </span>
@@ -71,11 +58,7 @@ class OperationStop extends React.Component{
       system_data:state.tabsData.system_data||null  
     }
 } 
-function mapDispatchToProps(dispatch){
-    return {
-      userRequest: function(data){ dispatch(userRequest(data)); }
-    }
-};
+
 OperationStop.propTypes={
       auth_token:React.PropTypes.string, 
       userRequest:React.PropTypes.func,
@@ -85,4 +68,4 @@ OperationStop.propTypes={
 }
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(OperationStop);
+export default connect(mapStateToProps,null)(OperationStop);

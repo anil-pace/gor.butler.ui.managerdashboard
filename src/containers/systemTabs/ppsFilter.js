@@ -23,7 +23,6 @@ class PPSFilter extends React.Component{
 
 
     _closeFilter() {
-        let filterState=!this.props.showFilter;
         this.props.showTableFilter(false);
     } 
 
