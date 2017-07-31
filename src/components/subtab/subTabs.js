@@ -46,7 +46,7 @@ class SystemTab extends React.Component{
     }
     
 	render(){
-		let sysOverview=<FormattedMessage id="sysOverview.tab.heading" description="Syatem overview Tab" 
+		let sysOverview=<FormattedMessage id="sysOverview.tab.heading" description="System overview Tab" 
               defaultMessage="Overview"/>
 
         let butlerBots=<FormattedMessage id="butlerBot.tab.heading" description="butler bot tab" 

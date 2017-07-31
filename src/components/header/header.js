@@ -2,8 +2,7 @@ import React  from 'react';
 import ReactDOM  from 'react-dom';
 import {Link} from 'react-router';
 import {
-    RECIEVE_HEADER, HEADER_START_TIME, REQUEST_HEADER, RECIEVE, RECIEVE_ITEM_TO_STOCK,
-    GET, SOFT_MANUAL, SOFT,HARD,RECEIVE_SHIFT_START_TIME
+    RECIEVE_HEADER,GET, SOFT_MANUAL, SOFT,HARD,RECEIVE_SHIFT_START_TIME
 } from '../../constants/frontEndConstants';
 import {stringConfig} from '../../constants/backEndConstants';
 import {HEADER_URL, GET_SHIFT_START_TIME_URL} from '../../constants/configConstants'
@@ -14,20 +13,15 @@ import {FormattedMessage} from 'react-intl';
 import {connect} from 'react-redux';
 import HamBurger from '../hamburger/hamburger';
 import NotificationsWrapper from '../../containers/notifications/notificationsWrapper';
-import PauseOperation from '../../containers/emergencyProcess/pauseOperation'; 
 import ResumeOperation from '../../containers/emergencyProcess/resumeOperation'; 
-import {switchModalKey} from '../../actions/validationActions';
 
 
-var dropdownFlag=0;
-var temp;
+
 
 class Header extends React.Component {
     constructor(props) {
         super(props);
-        if (dropdownFlag=== 0) {
-            temp="dropdown-content";
-        }
+        
         this.setDropdown=this.setDropdown.bind(this);
         this.state={showDropdown: false};
         this._handleDocumentClick=this._handleDocumentClick.bind(this);
@@ -76,11 +70,7 @@ class Header extends React.Component {
         document.removeEventListener('touchend', this._handleDocumentClick, true);
     }
 
-    openDropdown() {
-        dropdownFlag=1;
-        temp="dropdown-content-afterClick";
-
-    }
+  
 
     setDropdown() {
         this.setState({showDropdown: !this.state.showDropdown});

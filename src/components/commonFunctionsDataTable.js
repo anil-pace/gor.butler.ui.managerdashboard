@@ -1,7 +1,6 @@
 import React from 'react';
 import { Cell} from 'fixed-data-table';
 import { FormattedMessage } from 'react-intl';
-import DropdownTable from './dropdown/dropdownTable'
 import {AUDIT_APPROVED, AUDIT_REJECTED,VIEW_AUDIT_ISSUES,APPROVE_AUDIT,GOR_STATUS,AUDIT_UNRESOLVED,AUDIT_REJECTED_STATUS,AUDIT_RESOLVED_STATUS,AUDIT_REAUDITED_STATUS} from '../constants/frontEndConstants';
 import Dropdown from "./gor-dropdown-component/dropdown";
 export var SortTypes={
@@ -151,19 +150,11 @@ export const ActionCell=({rowIndex, data, columnKey,selEdit,selDel,mid, ...props
 
 export const TextCell=({rowIndex, data, columnKey,setClass, ...props})=>{ 
   
-  const childrenCell =  React.Children.map(props.children, child => {
-      var el;
-      if(child.props.type === "checkbox"){
-        el = data.getObjectAt(rowIndex)[props.childColumnKey] ? React.cloneElement(child, {
-            value: data.getObjectAt(rowIndex)[props.childColumnKey]
-          }):("");
-      }
-      else{
-         el = data.getObjectAt(rowIndex)[props.childColumnKey] ?(
+ const childrenCell =  React.Children.map(props.children, child => {
+      
+       return data.getObjectAt(rowIndex)[props.childColumnKey] ?(
         <span className={props.childrenClass}>{child}{data.getObjectAt(rowIndex)[props.childColumnKey]}</span>
       ):("");
-      }
-       return el;
     });
   return(<Cell {...props}  className={data.getObjectAt(rowIndex)[setClass]}>
     {data.getObjectAt(rowIndex)[columnKey]}

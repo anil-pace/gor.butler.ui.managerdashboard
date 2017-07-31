@@ -2,11 +2,9 @@
  * Created by gaurav.m on 4/13/17.
  */
 import React  from 'react';
-import {FormattedMessage} from 'react-intl'
+
 class FilterSummary extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+    
 
     shouldComponentUpdate(nextProps) {
         /**

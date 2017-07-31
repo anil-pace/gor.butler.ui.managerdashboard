@@ -1,6 +1,5 @@
 /**
- * Container for Overview tab
- * This will be switched based on tab click
+ * Dumb component to display zones
  */
 import React  from 'react';
 

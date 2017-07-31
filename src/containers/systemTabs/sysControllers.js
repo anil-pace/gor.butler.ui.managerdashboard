@@ -17,7 +17,7 @@ import {
     OperatingModeCell
 } from '../../components/commonFunctionsDataTable';
 import {defineMessages} from 'react-intl';
-import {hashHistory,withRouter} from 'react-router';
+import {withRouter} from 'react-router';
 import {stringConfig} from '../../constants/backEndConstants';
 import {GOR_STATUS, GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT,WS_ONSEND} from '../../constants/frontEndConstants';
 import {setWsAction} from '../../actions/socketActions';

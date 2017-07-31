@@ -3,11 +3,7 @@ import {SINGLE,ADD_TOKEN, ADD_DEFAULT,REMOVE_TOKEN} from '../../constants/frontE
 
 
 class FilterToken extends React.Component{
-	constructor(props) {
-        super(props);
-        
-        
-    }
+	
 
    _handleTokenClick() {
     var selectedToken=this.props.tokenSelected ? this.props.tokenSelected[this.props.tokenField] : null,tokenFound=false;

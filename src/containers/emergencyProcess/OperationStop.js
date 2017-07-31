@@ -1,7 +1,5 @@
 import React  from 'react';
 import { connect } from 'react-redux' ;
-import {DELETE_USER,APP_JSON,DELETE} from '../../constants/frontEndConstants';
-import {HEADER_URL} from '../../constants/configConstants';
 import { FormattedMessage } from 'react-intl';        
 
 class OperationStop extends React.Component{

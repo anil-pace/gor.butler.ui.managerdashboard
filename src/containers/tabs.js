@@ -13,7 +13,7 @@ FULFILLING_ORDERS,GOR_OFFLINE,GOR_ONLINE,GOR_NORMAL_TAB,GOR_FAIL,
 SOFT_MANUAL,HARD,SOFT,UTILITIES,FIRE_EMERGENCY_POPUP_FLAG,EMERGENCY_FIRE} from '../constants/frontEndConstants';
 import { FormattedMessage,FormattedNumber,FormattedRelative } from 'react-intl';
 import OperationStop from '../containers/emergencyProcess/OperationStop';
-import OperationPause from '../containers/emergencyProcess/OperationPause';
+import OperationPause from '../containers/emergencyProcess/operationPause';
 import EmergencyRelease from '../containers/emergencyProcess/emergencyRelease'; 
 import fireHazard from '../containers/emergencyProcess/fireHazard'; 
 import GorToastify from '../components/gor-toastify/gor-toastify';
@@ -133,7 +133,7 @@ class Tabs extends React.Component{
               defaultMessage="Offline"/>;
 
     overview=<FormattedMessage id="overview.tab.heading" description="overview tab" 
-              defaultMessage="DASHBOARD"/>;
+              defaultMessage="OVERVIEW"/>;
 
     system=<FormattedMessage id="system.tab.heading" description="system tab" 
               defaultMessage="SYSTEM"/>;

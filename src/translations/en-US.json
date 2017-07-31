@@ -492,7 +492,7 @@
   },
   {
     "id": "sysOverview.tab.heading",
-    "description": "Syatem overview Tab",
+    "description": "System overview Tab",
     "defaultMessage": "Overview",
     "filepath": "./src/components/subtab/subTabs.js"
   },
@@ -2228,7 +2228,7 @@
   {
     "id": "operation.alert.release",
     "description": "Text for emergency button release heading",
-    "defaultMessage": "All emergency-stop buttons released",
+    "defaultMessage": "All Emergency-stop buttons released",
     "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
   },
   {
@@ -2289,25 +2289,25 @@
     "id": "operation.alert.pause",
     "description": "Text for operation stopped heading",
     "defaultMessage": "Butler System - Operation Paused",
-    "filepath": "./src/containers/emergencyProcess/OperationPause.js"
+    "filepath": "./src/containers/emergencyProcess/operationPause.js"
   },
   {
     "id": "operation.alert.pause.text",
     "description": "Text for emergency button press",
     "defaultMessage": "Emergency-Pause activated via Controller {controller} in {zone}.",
-    "filepath": "./src/containers/emergencyProcess/OperationPause.js"
+    "filepath": "./src/containers/emergencyProcess/operationPause.js"
   },
   {
     "id": "operation.alert.pause.nonPOE",
     "description": "Text for operation stopped heading",
     "defaultMessage": "Operation Paused",
-    "filepath": "./src/containers/emergencyProcess/OperationPause.js"
+    "filepath": "./src/containers/emergencyProcess/operationPause.js"
   },
   {
     "id": "operation.alert.pause.subtext",
     "description": "Subtext for pause alert",
     "defaultMessage": "You must check the emergency situation and release the Emergency Pause button in order to resume the operation in warehouse",
-    "filepath": "./src/containers/emergencyProcess/OperationPause.js"
+    "filepath": "./src/containers/emergencyProcess/operationPause.js"
   },
   {
     "id": "operation.alert.stop",
@@ -3929,7 +3929,7 @@
   {
     "id": "overview.tab.heading",
     "description": "overview tab",
-    "defaultMessage": "DASHBOARD",
+    "defaultMessage": "OVERVIEW",
     "filepath": "./src/containers/tabs.js"
   },
   {

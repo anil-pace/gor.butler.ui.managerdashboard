@@ -1,8 +1,5 @@
 import React  from 'react';
 import { connect } from 'react-redux' ;
-import {userRequest} from '../../actions/userActions';
-import {DELETE_USER,APP_JSON,DELETE} from '../../constants/frontEndConstants';
-import {HEADER_URL} from '../../constants/configConstants';
 import { FormattedMessage } from 'react-intl';        
 
 class OperationPause extends React.Component{
