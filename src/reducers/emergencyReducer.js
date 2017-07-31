@@ -1,5 +1,5 @@
 import {MODAL_STATUS,SAFETY_MAP,
-  SAFETY_ERROR_MAP,CHECKLIST,MODAL_RESET} from '../constants/frontEndConstants';
+  SAFETY_ERROR_MAP,SAFETY_ERROR_BOT,CHECKLIST,MODAL_RESET} from '../constants/frontEndConstants';
 
 /**
  * @param  {State Object}
@@ -14,13 +14,31 @@ export  function emergency(state={},action){
           })
           break;
     case SAFETY_MAP:
+    let applicable,safetyList=[],botList=[],list=[];
+    applicable= action.data.applicable || false;
+
+    if(applicable){
+        safetyList=action.data.check_list;
+        botList=action.data.displaced_bots;
+    }
+    else
+    {
+     safetyList=action.data.check_list;
+    }
+
           return Object.assign({},state,{
-            "safetyList":action.data
+            safetyList:safetyList,
+            botList:botList
           });
           break;
     case SAFETY_ERROR_MAP:
           return Object.assign({},state,{
             "safetyErrorList":action.data
+          });
+          break;
+    case SAFETY_ERROR_BOT:
+          return Object.assign({},state,{
+            "safetyErrorBotList":action.data
           });
           break;
     case CHECKLIST:

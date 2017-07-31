@@ -20,17 +20,18 @@ import {getPPSAudit} from "../actions/auditActions";
 import {codeToString} from "./codeToString";
 import {setOrderListSpinner} from "../actions/orderListActions";
 import {
-    notifySuccess,
-    notifyFail,
-    validateID,
-    notifyDelete,
-    validatePassword,
-    loginError,
-    validateSKU,
-    validateSKUcodeSpinner,
-    modalStatus,
-    getSafetyList,
-    getSafetyErrorList
+	notifySuccess,
+	notifyFail,
+	validateID,
+	notifyDelete,
+	validatePassword,
+	loginError,
+	validateSKU,
+	validateSKUcodeSpinner,
+	modalStatus,
+	getSafetyList,
+	getSafetyErrorList,
+	getErrorBotList
 } from "../actions/validationActions";
 import {
     ERROR,
@@ -313,75 +314,78 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             store.dispatch(validateSKUcodeSpinner(false));
             break;
 
-        case PAUSE_OPERATION:
-            var pausePwd;
-            if (!res.auth_token) {
-                pausePwd = {
-                    type: ERROR,
-                    msg: UE002
-                };
-            } else {
-                pausePwd = {
-                    type: SUCCESS,
-                    msg: TYPE_SUCCESS
-                };
-                //hit next api
-                store.dispatch(modalStatus(true));
-            }
-            store.dispatch(validatePassword(pausePwd));
-            break;
-        case RESUME_OPERATION:
-            var resumePwd;
-            if (!res.auth_token) {
-                resumePwd = {
-                    type: ERROR,
-                    msg: UE002
-                };
-            } else {
-                resumePwd = {
-                    type: SUCCESS,
-                    msg: TYPE_SUCCESS
-                };
-                //hit next api
-                store.dispatch(modalStatus(true));
-            }
-            store.dispatch(validatePassword(resumePwd));
-            break;
-        case CHECK_SAFETY:
-            var safetyList = [],
-                safetyResponse = res;
-            if (safetyResponse.data) {
-                safetyList = safetyResponse.data;
-            }
-            store.dispatch(getSafetyList(safetyList));
-            break;
-        case CONFIRM_SAFETY:
-            var rejectList = [],
-                rejectResponse = res,
-                modalFlag = true;
+		case PAUSE_OPERATION:
+			var pausePwd;
+			if (!res.auth_token) {
+				pausePwd = {
+					type: ERROR,
+					msg: UE002
+				};
+			} else {
+				pausePwd = {
+					type: SUCCESS,
+					msg: TYPE_SUCCESS
+				};
+				//hit next api
+				store.dispatch(modalStatus(true));
+			}
+			store.dispatch(validatePassword(pausePwd));
+			break;
+		case RESUME_OPERATION:
+			var resumePwd;
+			if (!res.auth_token) {
+				resumePwd = {
+					type: ERROR,
+					msg: UE002
+				};
+			} else {
+				resumePwd = {
+					type: SUCCESS,
+					msg: TYPE_SUCCESS
+				};
+				//hit next api
+				store.dispatch(modalStatus(true));
+			}
+			store.dispatch(validatePassword(resumePwd));
+			break;
+		case CHECK_SAFETY:
+			var safetyList = [],
+				safetyResponse = res;
+			if (safetyResponse) {
+				safetyList = safetyResponse;
+			}
+			store.dispatch(getSafetyList(safetyList));
+			break;
+		case CONFIRM_SAFETY:
+			var rejectList = [],botErrorList=[],
+				rejectResponse = res,
+				modalFlag = true;
 
-            if (rejectResponse.successful) {
+			 if(rejectResponse.successful){
+				if(!rejectResponse.emergency_end_time)
+				{
+				store.dispatch(notifySuccess(ES));
+				  }
+			}
+			else if (rejectResponse.alert_data) {
 
-                if (!rejectResponse.emergency_end_time) {
-                    store.dispatch(notifySuccess(ES));
-
-                }
-            }
-            else if (rejectResponse.alert_data) {
-                if (rejectResponse.alert_data[0].details[0]) {
-                    rejectList = rejectResponse.alert_data[0].details[0].failed_validations;
-                    modalFlag = false;
-                }
-                else {
-                    stringInfo = codeToString(res.alert_data[0]);
-                    store.dispatch(notifyFail(stringInfo.msg));
-                }
-
-            }
-            store.dispatch(modalStatus(modalFlag));
-            store.dispatch(setSafetySpinner(false));
-            store.dispatch(getSafetyErrorList(rejectList));
-            break;
+				if(rejectResponse.alert_data[0].details[0])
+				{
+				rejectList = rejectResponse.alert_data[0].details[0].failed_validations;
+				botErrorList=rejectResponse.alert_data[0].details[0].displaced_bots||[];
+				modalFlag = false;
+				}
+				else
+				{
+				stringInfo = codeToString(res.alert_data[0]);
+				store.dispatch(notifyFail(stringInfo.msg));
+				}
+			}
+			store.dispatch(modalStatus(modalFlag));
+			store.dispatch(setSafetySpinner(false));
+			store.dispatch(getErrorBotList(botErrorList));
+			store.dispatch(getSafetyErrorList(rejectList));
+			break;
 
         case ITEM_RECALLED:
             res.status = ITEM_RECALLED_DATA;

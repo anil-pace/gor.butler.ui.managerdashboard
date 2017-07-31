@@ -4697,7 +4697,7 @@ input[type="checkbox"] {
 }
 
 .gor-safetylist .gor-usr-details {
-  width: 40%;
+  width: 50%;
 }
 
 .gor-safetylist .gor-usr-details .gor-safety-hd {
@@ -4722,6 +4722,34 @@ input[type="checkbox"] {
 
 .gor-safety-body .tab-alert-icon {
   margin-right: 10px;
+}
+
+.gor-safety-body .gor-instruction-table {
+  display: table;
+  margin-left: 40px;
+}
+
+.gor-safety-body .gor-instruction-table .gor-instruction-heading {
+  display: table-row;
+  font-weight: 500;
+  text-align: left;
+  line-height: 1.25;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.gor-safety-body .gor-instruction-table .gor-instruction-row {
+  display: table-row;
+  font-size: 13px;
+  line-height: 1.15;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.gor-safety-body .gor-instruction-table .gor-instruction-cell {
+  display: table-cell;
+  text-align: left;
+  padding: 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 .gor-safety-error {

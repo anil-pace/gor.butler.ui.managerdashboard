@@ -79,7 +79,6 @@ class Tabs extends React.Component{
       closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: false
       });  
-
   }
   _pauseOperation(stopFlag,additionalProps){
      modal.add(OperationPause, {
@@ -100,7 +99,7 @@ class Tabs extends React.Component{
         size: 'large customColor', // large, medium or small,
       closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: false
-      });     
+      });  
   }
   
   componentWillReceiveProps(nextProps){
@@ -122,6 +121,7 @@ class Tabs extends React.Component{
     else if(nextProps.system_data=== SOFT && (this.props.system_data!== nextProps.system_data)){
       this._pauseOperation(true,nextProps.zoneDetails);
     }
+    
   }
   _parseStatus()
   {
