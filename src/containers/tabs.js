@@ -13,7 +13,7 @@ FULFILLING_ORDERS,GOR_OFFLINE,GOR_ONLINE,GOR_NORMAL_TAB,GOR_FAIL,
 SOFT_MANUAL,HARD,SOFT,UTILITIES,FIRE_EMERGENCY_POPUP_FLAG,EMERGENCY_FIRE} from '../constants/frontEndConstants';
 import { FormattedMessage,FormattedNumber,FormattedRelative } from 'react-intl';
 import OperationStop from '../containers/emergencyProcess/OperationStop';
-import OperationPause from '../containers/emergencyProcess/operationPause';
+import OperationPause from '../containers/emergencyProcess/OperationPause';
 import EmergencyRelease from '../containers/emergencyProcess/emergencyRelease'; 
 import fireHazard from '../containers/emergencyProcess/fireHazard'; 
 import GorToastify from '../components/gor-toastify/gor-toastify';

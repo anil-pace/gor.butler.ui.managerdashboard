@@ -17,7 +17,7 @@ import {translationMessages} from '../utilities/i18n';
 import {updateIntl} from 'react-intl-redux';
 
 class Routes extends React.Component {
-    
+
 
     _requireAuth(nextState, replace) {
         if (sessionStorage.getItem('auth_token')) {
@@ -210,6 +210,14 @@ class Routes extends React.Component {
                                    require.ensure([], function (require) {
                                        callback(null, require('../containers/systemTabs/sysControllers').default);
                                    }, "sysControllers");
+                               }}
+                        />
+
+                        <Route onEnter={this._handleNavigationChanges.bind(this)} name="ppsConfiguration" path="/system/ppsConfiguration"
+                               getComponent={(location, callback)=> {
+                                   require.ensure([], function (require) {
+                                       callback(null, require('../containers/systemTabs/ppsConfigurationTab').default);
+                                   }, "ppsConfiguration");
                                }}
                         />
                     </Route>

@@ -45,6 +45,7 @@ import {sysOverviewReducer} from './reducers/sysOverviewReducer';
 import {zoningReducer} from './reducers/zoningReducer';
 import {sysControllersReducer} from './reducers/sysControllersReducer'
 
+import {ppsConfiguration} from './reducers/ppsConfigurationReducer'
 
 const rootReducer=combineReducers({
   intl:intlReducer,
@@ -90,7 +91,7 @@ const rootReducer=combineReducers({
   fireReducer,
   sysOverviewReducer,
   zoningReducer,
-  sysControllersReducer
+  sysControllersReducer,ppsConfiguration
    })
 
 export default rootReducer

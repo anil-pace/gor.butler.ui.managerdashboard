@@ -234,6 +234,7 @@ class PPS extends React.Component {
 
             }
             detail.totalUser=totalUser;
+            detail.profiles=data[i].pps_profiles
             PPSData.push(detail);
         }
         return PPSData;

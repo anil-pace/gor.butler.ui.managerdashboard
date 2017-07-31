@@ -23,6 +23,7 @@ export const PARSE_CONTROLLERS = "controllers";
 export const SYSTEM_CHARGERS_DETAILS="chargers";
 export const BUTLERBOTS="butlerbots";
 export const CHARGING="chargingstation";
+export const PPS_CONFIGURATION="ppsConfiguration";
 export const PPS="pps";
 export const SYS_OVERVIEW="sysOverview";
 export const SYS_CONTROLLERS = "sysControllers";

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Table, Column} from 'fixed-data-table';
+import {Table, Column,Cell} from 'fixed-data-table';
 import Dimensions from 'react-dimensions'
 import {FormattedMessage} from 'react-intl';
 import {
@@ -10,12 +10,13 @@ import {
     StatusCell,
     filterIndex,
     DataListWrapper,
-    sortData
+    sortData,ActionCellPPS
 } from '../../components/commonFunctionsDataTable';
 import {defineMessages} from 'react-intl';
 import {GOR_STATUS, GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
 
-
+import {modal} from 'react-redux-modal';
+import ConfirmApplyProfile from './confirmApplyProfile'
 const messages=defineMessages({
     ppsPlaceholder: {
         id: 'pps.dropdown.placeholder',
@@ -48,11 +49,12 @@ class PPStable extends React.Component {
             sortedDataList: this._dataList,
             colSortDirs: {},
             columnWidths: {
-                id: this.props.containerWidth * 0.15,
+                id: this.props.containerWidth * 0.1,
                 status: this.props.containerWidth * 0.1,
-                operatingMode: this.props.containerWidth * 0.17,
-                performance: this.props.containerWidth * 0.15,
-                operatorAssigned: this.props.containerWidth * 0.6
+                operatingMode: this.props.containerWidth * 0.15,
+                performance: this.props.containerWidth * 0.1,
+                operatorAssigned: this.props.containerWidth * 0.2,
+                profiles: this.props.containerWidth * 0.35
             },
             headerChecked: false,
             isChecked: temp
@@ -68,6 +70,18 @@ class PPStable extends React.Component {
             return false;
         }
         return true;
+    }
+
+    confirmApplyProfileChanges(pps_id,profile_name){
+        modal.add(ConfirmApplyProfile, {
+            title: '',
+            size: 'large', // large, medium or small,
+            closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+            hideCloseButton: true, // (optional) if you don't wanna show the top right close button
+            //.. all what you put in here you will get access in the modal props ;)
+            pps_id:pps_id,
+            profile_name:profile_name.value
+        });
     }
 
 
@@ -96,11 +110,12 @@ class PPStable extends React.Component {
             colSortDirs: {},
             columnWidths: {
 
-                id: nextProps.containerWidth * 0.15,
+                id: nextProps.containerWidth * 0.1,
                 status: nextProps.containerWidth * 0.1,
-                operatingMode: nextProps.containerWidth * 0.17,
-                performance: nextProps.containerWidth * 0.15,
-                operatorAssigned: nextProps.containerWidth * 0.6
+                operatingMode: nextProps.containerWidth * 0.15,
+                performance: nextProps.containerWidth * 0.1,
+                operatorAssigned: nextProps.containerWidth * 0.2,
+                profiles: nextProps.containerWidth * 0.35
 
             },
             headerChecked: this.state.headerChecked,
@@ -114,6 +129,46 @@ class PPStable extends React.Component {
         this._onColumnResizeEndCallback=this._onColumnResizeEndCallback.bind(this);
         if (this.props.items && this.props.items.length) {
             this._onFilterChange(nextProps.getPpsFilter);
+        }
+    }
+
+    /**
+     * Hack for fixing the bug https://work.greyorange.com/jira/browse/BSS-656
+     * This has to be removed once we get rid of the fixedDataTable
+     * @param  {Number} rowIndex rowindex on which the click was initiated
+     */
+    _handleOnClickDropdown(event, index) {
+        var el=event.target;
+        var elClassName=(el.className).trim(),
+            parentEl, siblingEl, totalRowCount=this.props.items.length - 1;
+        if (elClassName !== "gor-dropdown-wrapper" && elClassName !== "gor-dropdown" && elClassName!=='gor-audit-info-icon') {
+            return;
+        }
+        parentEl=el.parentNode;
+        while (parentEl) {
+            if (parentEl.className=== "fixedDataTableRowLayout_rowWrapper") {
+                parentEl.parentNode.childNodes.forEach(function(node){
+                    node.style.zIndex="0";
+                })
+                parentEl.style.zIndex="300";
+                if (index=== totalRowCount && totalRowCount !== 0) {
+                    if (elClassName !== "gor-dropdown-wrapper") {
+                        siblingEl=el.parentNode.nextSibling;
+                    }
+                    else {
+                        siblingEl=el.nextSibling;
+                    }
+                    if(siblingEl){
+                        siblingEl.style.bottom='100%';
+                        siblingEl.style.top='initial';
+                    }
+
+                }
+                break;
+            }
+            else {
+                parentEl=parentEl.parentNode;
+            }
         }
     }
 
@@ -263,6 +318,7 @@ class PPStable extends React.Component {
                     isColumnResizing={false}
                     width={this.props.containerWidth}
                     height={containerHeight}
+                    onRowClick={this._handleOnClickDropdown.bind(this)}
                     {...this.props}>
                     <Column
                         columnKey="id"
@@ -414,6 +470,25 @@ class PPStable extends React.Component {
                         cell={<TextCell data={sortedDataList}/>}
                         fixed={true}
                         width={columnWidths.operatorAssigned}
+                        isResizable={true}
+                    />
+                    <Column
+                        columnKey="profiles"
+                        header={
+                            <Cell>
+                            <div className="gorToolHeaderEl">
+                            <FormattedMessage id="PPS.table.profiles"
+                            description="profiles for PPS"
+                            defaultMessage="PROFILES USED"/>
+                            <div className="gorToolHeaderSubText">
+
+                            </div>
+                            </div>
+                            </Cell>
+                        }
+                        cell={<ActionCellPPS confirmApplyProfile={this.confirmApplyProfileChanges.bind(this)} data={sortedDataList}/>}
+                        fixed={true}
+                        width={columnWidths.profiles}
                         isResizable={true}
                     />
                 </Table>
