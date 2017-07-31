@@ -13,7 +13,7 @@ FULFILLING_ORDERS,GOR_OFFLINE,GOR_ONLINE,GOR_NORMAL_TAB,GOR_FAIL,
 SOFT_MANUAL,HARD,SOFT,UTILITIES,FIRE_EMERGENCY_POPUP_FLAG,EMERGENCY_FIRE} from '../constants/frontEndConstants';
 import { FormattedMessage,FormattedNumber,FormattedRelative } from 'react-intl';
 import OperationStop from '../containers/emergencyProcess/OperationStop';
-import OperationPause from '../containers/emergencyProcess/operationPause';
+import OperationPause from '../containers/emergencyProcess/OperationPause';
 import EmergencyRelease from '../containers/emergencyProcess/emergencyRelease'; 
 import fireHazard from '../containers/emergencyProcess/fireHazard'; 
 import GorToastify from '../components/gor-toastify/gor-toastify';
@@ -79,7 +79,6 @@ class Tabs extends React.Component{
       closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: false
       });  
-
   }
   _pauseOperation(stopFlag,additionalProps){
      modal.add(OperationPause, {
@@ -100,7 +99,7 @@ class Tabs extends React.Component{
         size: 'large customColor', // large, medium or small,
       closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: false
-      });     
+      });  
   }
   
   componentWillReceiveProps(nextProps){
@@ -122,6 +121,7 @@ class Tabs extends React.Component{
     else if(nextProps.system_data=== SOFT && (this.props.system_data!== nextProps.system_data)){
       this._pauseOperation(true,nextProps.zoneDetails);
     }
+    
   }
   _parseStatus()
   {

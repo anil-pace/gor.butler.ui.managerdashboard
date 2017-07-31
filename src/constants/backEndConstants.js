@@ -23,6 +23,7 @@ export const PARSE_CONTROLLERS = "controllers";
 export const SYSTEM_CHARGERS_DETAILS="chargers";
 export const BUTLERBOTS="butlerbots";
 export const CHARGING="chargingstation";
+export const PPS_CONFIGURATION="ppsConfiguration";
 export const PPS="pps";
 export const SYS_OVERVIEW="sysOverview";
 export const SYS_CONTROLLERS = "sysControllers";
@@ -318,7 +319,16 @@ export const  stringConfig= defineMessages({
         "description": "Text for safety checklist item 12",
         "defaultMessage": "All paths cleared of any debris."
     },
-
+     md013 : {
+        "id": "stringConfig.md013",
+        "description": "Text for safety checklist item 13",
+        "defaultMessage": 'Move bots to the PPS location and do an "init" after all bots are moved.'
+    },
+    md014 : {
+        "id": "stringConfig.md014",
+        "description": "Text for safety checklist item 14",
+        "defaultMessage": "No bots require to be moved to PPS."
+    },
     audit_reaudited: {
         "id": "stringConfig.audit_reaudited",
         "description": "Text for audit reaudited status",

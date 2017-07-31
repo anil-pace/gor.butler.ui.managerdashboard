@@ -19,7 +19,7 @@ export  function tabsData(state={},action){
         system_data=action.data.header_data.emergency_level;
         lastEmergencyState = action.data.header_data.last_emergency_state;
         zoneDetails = action.data.header_data.zone_details
-        
+
       }
       return Object.assign({}, state, {
         "system_emergency":system_emergency,
