@@ -53,15 +53,19 @@ export function ppsConfiguration(state = {}, action) {
              * v-1: Select the applied profile
              * by default for the first PPS.
              */
-            selected_pps.pps_profiles.map(function (prfl, index) {
-                if(state.selectedProfile && prfl.profile_name===state.selectedProfile.profile_name){
-                    selected_profile=JSON.parse(JSON.stringify(prfl))
-                }
-                else if(prfl.applied) {
-                    selected_profile = JSON.parse(JSON.stringify(prfl))
-                }
-                return prfl
-            })
+            if(state.selectedProfile && state.selectedProfile.profile_name){
+                selected_pps.pps_profiles.forEach(function (prfl, index) {
+                    if(prfl.profile_name===state.selectedProfile.profile_name){
+                        selected_profile=JSON.parse(JSON.stringify(prfl))
+                    }
+                })
+            }else{
+                selected_pps.pps_profiles.forEach(function (prfl, index) {
+                    if(prfl.applied) {
+                        selected_profile = JSON.parse(JSON.stringify(prfl))
+                    }
+                })
+            }
 
             return Object.assign({}, state, {
                 ppsList: pps_list,
