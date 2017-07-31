@@ -136,7 +136,7 @@ class PPSConfiguration extends React.Component {
             'token': this.props.auth_token
         }
         this.props.setPPSConfigurationSpinner(true)
-        this.prop.makeAjaxCall(data)
+        this.props.makeAjaxCall(data)
     }
 
     /**
