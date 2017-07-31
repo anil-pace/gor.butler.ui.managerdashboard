@@ -322,10 +322,10 @@ export const  stringConfig= defineMessages({
      md013 : {
         "id": "stringConfig.md013",
         "description": "Text for safety checklist item 13",
-        "defaultMessage": "Move bots to the PPS location and do an “init” after all bots are moved."
+        "defaultMessage": 'Move bots to the PPS location and do an "init" after all bots are moved.'
     },
     md014 : {
-        "id": "stringConfig.md013",
+        "id": "stringConfig.md014",
         "description": "Text for safety checklist item 14",
         "defaultMessage": "No bots require to be moved to PPS."
     },
