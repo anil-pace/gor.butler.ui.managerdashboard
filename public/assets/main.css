@@ -7715,11 +7715,6 @@ button:disabled {
   color: #EC1B2C;
 }
 
-.pps-configuration-navigation-tabs .active {
-  border-bottom: 2px solid black;
-  color: black;
-}
-
 .pps-configuration-container {
   box-sizing: border-box;
   background-color: white;
@@ -7728,7 +7723,7 @@ button:disabled {
   width: 100%;
 }
 
-.pps-configuration-details-container {
+.pps-configuration-container .pps-configuration-details-container {
   float: right;
   width: 83%;
   border-top: 1px solid #ccc;
@@ -7736,7 +7731,7 @@ button:disabled {
   box-sizing: border-box;
 }
 
-.pps-configuration-navigation-tabs {
+.pps-configuration-container .pps-configuration-navigation-tabs {
   border-bottom: 1px solid #ccc;
   box-sizing: border-box;
   font-weight: bold;
@@ -7747,7 +7742,12 @@ button:disabled {
   text-align: center;
 }
 
-.pps-configuration-navigation-tabs .navigation-tab {
+.pps-configuration-container .pps-configuration-navigation-tabs .active {
+  border-bottom: 2px solid black;
+  color: black;
+}
+
+.pps-configuration-container .pps-configuration-navigation-tabs .navigation-tab {
   padding: 20px;
   box-sizing: border-box;
   width: 20%;
@@ -7755,7 +7755,7 @@ button:disabled {
   cursor: pointer;
 }
 
-.pps-configuration-navigation-tabs .seat-description {
+.pps-configuration-container .pps-configuration-navigation-tabs .seat-description {
   padding: 20px;
   box-sizing: border-box;
   width: 20%;
@@ -7764,7 +7764,7 @@ button:disabled {
   text-align: right;
 }
 
-.pps-bin-action-button {
+.pps-configuration-container .pps-bin-action-button {
   font-family: 'Source Sans Pro Bold', sans-serif;
   width: 113px;
   height: 35px;
@@ -7779,7 +7779,7 @@ button:disabled {
   margin-right: 10px;
 }
 
-.pps-bin-next-button, .pps-bin-save-apply-button {
+.pps-configuration-container .pps-bin-next-button, .pps-configuration-container .pps-bin-save-apply-button {
   font-family: 'Source Sans Pro Bold', sans-serif;
   width: auto;
   height: 30px;
@@ -7796,15 +7796,15 @@ button:disabled {
   color: #ffffff;
 }
 
-.pps-bin-next-button {
+.pps-configuration-container .pps-bin-next-button {
   width: 113px;
 }
 
-.pps-bin-save-apply-button {
+.pps-configuration-container .pps-bin-save-apply-button {
   width: 150px;
 }
 
-.pps-bin-back-button {
+.pps-configuration-container .pps-bin-back-button {
   font-family: 'Source Sans Pro Bold', sans-serif;
   width: 113px;
   height: 30px;
@@ -7821,7 +7821,7 @@ button:disabled {
   float: right;
 }
 
-.pps-bin-cancel-button, .pps-bin-save-button {
+.pps-configuration-container .pps-bin-cancel-button, .pps-configuration-container .pps-bin-save-button {
   font-family: 'Source Sans Pro Bold', sans-serif;
   width: auto;
   height: 30px;
@@ -7834,20 +7834,20 @@ button:disabled {
   color: #4990e2;
 }
 
-.pps-bin-cancel-button {
+.pps-configuration-container .pps-bin-cancel-button {
   width: 113px;
   float: left;
 }
 
-.pps-bin-save-button {
+.pps-configuration-container .pps-bin-save-button {
   float: right;
 }
 
-.pps-bin-cancel-button:focus, .pps-bin-save-button:focus {
+.pps-configuration-container .pps-bin-cancel-button:focus, .pps-configuration-container .pps-bin-save-button:focus {
   outline: none;
 }
 
-.pps-list-container {
+.pps-configuration-container .pps-list-container {
   float: left;
   width: 17%;
   border: 1px solid #ccc;
@@ -7856,60 +7856,60 @@ button:disabled {
   position: absolute;
 }
 
-.pps-list-header {
+.pps-configuration-container .pps-list-header {
   padding: 20px;
   border-bottom: 1px solid #ccc;
   font-weight: bold;
   font-size: 18px;
 }
 
-.pps-list-item-name {
+.pps-configuration-container .pps-list-item-name {
   font-weight: bold;
 }
 
-.selected .pps-list-item-name {
+.pps-configuration-container .selected .pps-list-item-name {
   color: black;
 }
 
-.pps-list {
+.pps-configuration-container .pps-list {
   color: #666;
   height: 39.0625rem;
   overflow-y: scroll;
 }
 
-.pps-list-item {
+.pps-configuration-container .pps-list-item {
   padding: 20px;
   border-bottom: 1px solid #ccc;
 }
 
-.pps-list-item.selected {
+.pps-configuration-container .pps-list-item.selected {
   background: #f2f2f2;
 }
 
-.pps-list-item-profiles {
+.pps-configuration-container .pps-list-item-profiles {
   padding-top: 5px;
   cursor: pointer;
 }
 
-.pps-list-item-profiles .selected {
+.pps-configuration-container .pps-list-item-profiles .selected {
   font-weight: bold;
   color: black;
 }
 
-.pps-profile-item {
+.pps-configuration-container .pps-profile-item {
   padding-top: 5px;
   padding-bottom: 5px;
   clear: both;
   overflow: auto;
 }
 
-.pps-profile-name {
+.pps-configuration-container .pps-profile-name {
   float: left;
   line-height: 20px;
   width: 68%;
 }
 
-.profile-applied-label {
+.pps-configuration-container .profile-applied-label {
   float: right;
   padding: 5px;
   border-radius: 10px;
@@ -7918,12 +7918,12 @@ button:disabled {
   font-size: 12px;
 }
 
-.profile-label-container {
+.pps-configuration-container .profile-label-container {
   float: right;
   width: 32%;
 }
 
-.profile-requested-label {
+.pps-configuration-container .profile-requested-label {
   float: right;
   padding: 5px;
   border-radius: 10px;
@@ -7932,35 +7932,35 @@ button:disabled {
   font-size: 12px;
 }
 
-.currentBinDirection {
+.pps-configuration-container .currentBinDirection {
   background-color: transparent;
   color: #999;
 }
 
-.currentBinDirection .active {
+.pps-configuration-container .currentBinDirection .active {
   background-color: #4990e2;
   color: white;
 }
 
-.pps-bins-container {
+.pps-configuration-container .pps-bins-container {
   float: left;
   box-sizing: border-box;
   height: 100%;
   width: 100%;
 }
 
-.pps-bins-container.include-tags {
+.pps-configuration-container .pps-bins-container.include-tags {
   width: 80%;
 }
 
-.pps-bin-row {
+.pps-configuration-container .pps-bin-row {
   margin: 20px;
   text-align: center;
   clear: both;
   overflow: auto;
 }
 
-.pps-bin {
+.pps-configuration-container .pps-bin {
   width: 100%;
   height: 100%;
   border: 2px solid #979797;
@@ -7970,29 +7970,29 @@ button:disabled {
   position: relative;
 }
 
-.pps-bin.disabled {
+.pps-configuration-container .pps-bin.disabled {
   opacity: 0.5;
   background-image: linear-gradient(-45deg, transparent 25%, transparent 49.5%, black 49.5%, black 50.5%, transparent 50.5%, transparent 75%, transparent);
 }
 
-.selected .pps-bin {
+.pps-configuration-container .selected .pps-bin {
   border: 2px solid #4990e2;
   background-color: rgba(73, 144, 226, 0.3);
 }
 
-.selected .pps-bin .pps-bin-tag-info {
+.pps-configuration-container .selected .pps-bin .pps-bin-tag-info {
   color: black;
 }
 
-.selected .pps-bin .pps-bin-tag-info .gor-tag-icon-grey {
+.pps-configuration-container .selected .pps-bin .pps-bin-tag-info .gor-tag-icon-grey {
   background-position: -209px -94px;
 }
 
-.mouseover .pps-bin.disabled {
+.pps-configuration-container .mouseover .pps-bin.disabled {
   background-image: linear-gradient(-45deg, transparent 25%, transparent 49.5%, black 49.5%, black 50.5%, transparent 50.5%, transparent 75%, transparent);
 }
 
-.pps-bin-tag-info {
+.pps-configuration-container .pps-bin-tag-info {
   display: inline-block;
   height: 20px;
   font-size: 14px;
@@ -8002,7 +8002,7 @@ button:disabled {
   word-wrap: break-word;
 }
 
-.pps-bin-info {
+.pps-configuration-container .pps-bin-info {
   width: 100%;
   height: 20px;
   background-color: #979797;
@@ -8014,11 +8014,11 @@ button:disabled {
   text-align: center;
 }
 
-.selected .pps-bin-info {
+.pps-configuration-container .selected .pps-bin-info {
   background-color: #4990e2;
 }
 
-.pps-tags-container {
+.pps-configuration-container .pps-tags-container {
   float: right;
   width: 20%;
   border-left: 1px solid #ccc;
@@ -8026,7 +8026,7 @@ button:disabled {
   height: 520px;
 }
 
-.pps-tags-header {
+.pps-configuration-container .pps-tags-header {
   margin: 15px;
   border-bottom: 1px solid #ccc;
   box-sizing: border-box;
@@ -8036,16 +8036,16 @@ button:disabled {
   padding-bottom: 15px;
 }
 
-.pps-searchbox-container {
+.pps-configuration-container .pps-searchbox-container {
   margin: 15px;
   font-size: 12px;
 }
 
-.pps-searchresult-label {
+.pps-configuration-container .pps-searchresult-label {
   margin: 15px;
 }
 
-.pps-tags-row {
+.pps-configuration-container .pps-tags-row {
   margin-left: 15px;
   margin-right: 15px;
   padding-bottom: 5px;
@@ -8055,12 +8055,12 @@ button:disabled {
   overflow: auto;
 }
 
-.pps-tag-list {
+.pps-configuration-container .pps-tag-list {
   max-height: 400px;
   overflow: auto;
 }
 
-.pps-tag-name {
+.pps-configuration-container .pps-tag-name {
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -8069,19 +8069,19 @@ button:disabled {
   word-wrap: break-word;
 }
 
-.pps-tag-name .highlight {
+.pps-configuration-container .pps-tag-name .highlight {
   color: black;
 }
 
-.pps-tag-selection {
+.pps-configuration-container .pps-tag-selection {
   float: right;
 }
 
-.pps-tag-selection input[type=checkbox] {
+.pps-configuration-container .pps-tag-selection input[type=checkbox] {
   margin: 0px;
 }
 
-.pps-add-tag-container {
+.pps-configuration-container .pps-add-tag-container {
   margin-left: 15px;
   margin-right: 15px;
   padding-bottom: 5px;
@@ -8091,7 +8091,7 @@ button:disabled {
   overflow: auto;
 }
 
-.pps-add-tag-name {
+.pps-configuration-container .pps-add-tag-name {
   float: left;
   max-width: 80%;
   padding: 5px;
@@ -8099,13 +8099,13 @@ button:disabled {
   word-wrap: break-word;
 }
 
-.pps-add-tag-button {
+.pps-configuration-container .pps-add-tag-button {
   float: right;
   cursor: pointer;
   padding: 5px;
 }
 
-.pps-searchbox-tags {
+.pps-configuration-container .pps-searchbox-tags {
   width: 80%;
   height: 25px;
   padding-left: 5px;
@@ -8115,7 +8115,7 @@ button:disabled {
   outline: none;
 }
 
-.pps-configuration-actions-container {
+.pps-configuration-container .pps-configuration-actions-container {
   width: 83%;
   float: right;
   height: 50px;
@@ -8123,6 +8123,61 @@ button:disabled {
   overflow: auto;
   padding: 10px 20px;
   border-bottom: 1px solid #ccc;
+}
+
+.pps-configuration-container .pps-bin-group {
+  border: 10px solid white;
+}
+
+.pps-configuration-container .pps-bin-group.highlight {
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent;
+  background-color: rgba(73, 144, 226, 0.3);
+}
+
+.pps-configuration-container .pps-bin-group.pps-bin-group-1 {
+  background-color: rgba(36, 144, 226, 0.3);
+}
+
+.pps-configuration-container .pps-bin-group.pps-bin-group-2 {
+  background-color: rgba(73, 72, 226, 0.3);
+}
+
+.pps-configuration-container .pps-bin-group.pps-bin-group-3 {
+  background-color: rgba(73, 144, 113, 0.3);
+}
+
+.pps-configuration-container .pps-bin-group.pps-bin-group-4 {
+  background-color: rgba(109, 144, 216, 0.3);
+}
+
+.pps-configuration-container .pps-bin-group.pps-bin-group-5 {
+  background-color: rgba(109, 216, 226, 0.3);
+}
+
+.pps-configuration-container .pps-bin-group.pps-bin-group-6 {
+  background-color: rgba(36, 144, 226, 0.3);
+}
+
+.pps-configuration-container .pps-bin-group.pps-bin-group-7 {
+  background-color: rgba(73, 72, 226, 0.3);
+}
+
+.pps-configuration-container .pps-bin-group.pps-bin-group-8 {
+  background-color: rgba(73, 144, 113, 0.3);
+}
+
+.pps-configuration-container .pps-bin-group.pps-bin-group-9 {
+  background-color: rgba(109, 144, 216, 0.3);
+}
+
+.pps-configuration-container .pps-bin-group.pps-bin-group-10 {
+  background-color: rgba(109, 216, 226, 0.3);
+}
+
+.pps-configuration-container .pps-bin-group.disabled {
+  opacity: 0.5;
 }
 
 .gor-create-profile {
@@ -8171,7 +8226,7 @@ button:disabled {
   padding-top: 0;
 }
 
-.gor-cancel-btn {
+.gor-create-profile .gor-cancel-btn {
   font-family: 'Source Sans Pro Bold', sans-serif;
   width: 7.0625rem;
   height: 2.1875rem;
@@ -8184,62 +8239,7 @@ button:disabled {
   cursor: pointer;
 }
 
-.pps-bin-group {
-  border: 10px solid white;
-}
-
-.pps-bin-group.highlight {
-  border-width: 10px;
-  border-style: solid;
-  border-color: transparent;
-  background-color: rgba(73, 144, 226, 0.3);
-}
-
-.pps-bin-group.pps-bin-group-1 {
-  background-color: rgba(36, 144, 226, 0.3);
-}
-
-.pps-bin-group.pps-bin-group-2 {
-  background-color: rgba(73, 72, 226, 0.3);
-}
-
-.pps-bin-group.pps-bin-group-3 {
-  background-color: rgba(73, 144, 113, 0.3);
-}
-
-.pps-bin-group.pps-bin-group-4 {
-  background-color: rgba(109, 144, 216, 0.3);
-}
-
-.pps-bin-group.pps-bin-group-5 {
-  background-color: rgba(109, 216, 226, 0.3);
-}
-
-.pps-bin-group.pps-bin-group-6 {
-  background-color: rgba(36, 144, 226, 0.3);
-}
-
-.pps-bin-group.pps-bin-group-7 {
-  background-color: rgba(73, 72, 226, 0.3);
-}
-
-.pps-bin-group.pps-bin-group-8 {
-  background-color: rgba(73, 144, 113, 0.3);
-}
-
-.pps-bin-group.pps-bin-group-9 {
-  background-color: rgba(109, 144, 216, 0.3);
-}
-
-.pps-bin-group.pps-bin-group-10 {
-  background-color: rgba(109, 216, 226, 0.3);
-}
-
-.pps-bin-group.disabled {
-  opacity: 0.5;
-}
-
-.requestedProfileTxt {
+.pps-table .requestedProfileTxt {
   display: inline-block;
   width: 65px;
   font-size: 12px;
@@ -8247,46 +8247,46 @@ button:disabled {
   vertical-align: middle;
 }
 
-.pps-list-available-profile {
+.pps-table .pps-list-available-profile {
   clear: both;
   overflow: auto;
   padding: 2px;
 }
 
-.pps-list-available-profile .profile-name {
+.pps-table .pps-list-available-profile .profile-name {
   float: left;
 }
 
-.pps-list-available-profile .applied-status {
+.pps-table .pps-list-available-profile .applied-status {
   float: right;
 }
 
-.gor-pps-profile-drop {
+.pps-table .gor-pps-profile-drop {
   display: inline-block;
 }
 
-.gor-pps-profile-drop .gor-dropdown-wrapper {
+.pps-table .gor-pps-profile-drop .gor-dropdown-wrapper {
   display: inline-block;
   width: 150px;
   color: black;
 }
 
-.gor-pps-profile-drop .gor-dropdown-option {
+.pps-table .gor-pps-profile-drop .gor-dropdown-option {
   color: black;
 }
 
-.gor-pps-profile-drop .gor-dropdown-option:hover {
+.pps-table .gor-pps-profile-drop .gor-dropdown-option:hover {
   background-color: #F2F2F2;
 }
 
-.gor-pps-profile-drop .gor-option-wrapper {
+.pps-table .gor-pps-profile-drop .gor-option-wrapper {
   border: 1px solid #aaa;
 }
 
-.gor-pps-profile-drop .gor-dropdown-wrapper.disabled {
+.pps-table .gor-pps-profile-drop .gor-dropdown-wrapper.disabled {
   color: #aaa;
 }
 
-.gor-pps-profile-drop .gor-white-background {
+.pps-table .gor-pps-profile-drop .gor-white-background {
   background-color: transparent;
 }
