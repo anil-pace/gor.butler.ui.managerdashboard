@@ -48,7 +48,7 @@ class UserRoles extends React.Component{
                 label:stringConfig[currentRole.name] ? this.context.intl.formatMessage(stringConfig[currentRole.name]):currentRole.name
             };
             label=(<div>
-                        <span className='gor-role-label'>{currentRole.name}</span>
+                        <span className='gor-role-label'>{stringConfig[currentRole.name] ? this.context.intl.formatMessage(stringConfig[currentRole.name]):currentRole.name}</span>
                         <span className='gor-selected-icon'></span>
                     </div>
                 )
