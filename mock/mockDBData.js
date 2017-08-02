@@ -1855,11 +1855,3 @@ export const resTypeSnapShotHistory={
 
 
 
-
-
-
-
-
-
-
-//export {resTypePPS,resTypeInventory1,resTypeButlersData,resTypeChargers,resTypeInventory2,resTypePick,resTypePut,resTypeUsers,resTypeButlers,resTypeOrders};

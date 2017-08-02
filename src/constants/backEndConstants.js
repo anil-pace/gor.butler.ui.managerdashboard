@@ -18,10 +18,15 @@ export const PARSE_PPA_THROUGHPUT="put_pick_audit_throughput";
 export const PARSE_AUDIT="audit";
 export const PARSE_AUDIT_AGG="audit_agg";
 export const PARSE_STATUS="status";
+export const PARSE_ZONING="zones";
+export const PARSE_CONTROLLERS = "controllers";
 export const SYSTEM_CHARGERS_DETAILS="chargers";
 export const BUTLERBOTS="butlerbots";
 export const CHARGING="chargingstation";
+export const PPS_CONFIGURATION="ppsConfiguration";
 export const PPS="pps";
+export const SYS_OVERVIEW="sysOverview";
+export const SYS_CONTROLLERS = "sysControllers";
 
 /*Constants for response type */
 export const PPS_DETAIL="pps";
@@ -287,34 +292,43 @@ export const  stringConfig= defineMessages({
      md007 : {
         "id": "stringConfig.md007",
         "description": "Text for safety checklist item 7",
-        "defaultMessage": "[Manual] Peripherals status known."
+        "defaultMessage": "Peripherals status known."
     },
      md008 : {
         "id": "stringConfig.md008",
         "description": "Text for safety checklist item 8",
-        "defaultMessage": "[Manual] Physical inventory verified."
+        "defaultMessage": "Physical inventory verified."
     },
      md009 : {
         "id": "stringConfig.md009",
         "description": "Text for safety checklist item 9",
-        "defaultMessage": "[Automatic] No Emergency buttons in 'pressed' state"
+        "defaultMessage": "No Emergency buttons in 'Pressed' state."
     },
      md010 : {
         "id": "stringConfig.md010",
         "description": "Text for safety checklist item 10",
-        "defaultMessage": "[Manual] All shutters open  in active zones."
+        "defaultMessage": "All shutters open  in active zones."
     },
      md011 : {
         "id": "stringConfig.md011",
         "description": "Text for safety checklist item 11",
-        "defaultMessage": "[Manual] No humans in operations area."
+        "defaultMessage": "No humans in operations area."
     },
      md012 : {
         "id": "stringConfig.md012",
         "description": "Text for safety checklist item 12",
-        "defaultMessage": "[Manual] All paths cleared of any debris.."
+        "defaultMessage": "All paths cleared of any debris."
     },
-
+     md013 : {
+        "id": "stringConfig.md013",
+        "description": "Text for safety checklist item 13",
+        "defaultMessage": 'Move bots to the PPS location and do an "init" after all bots are moved.'
+    },
+    md014 : {
+        "id": "stringConfig.md014",
+        "description": "Text for safety checklist item 14",
+        "defaultMessage": "No bots require to be moved to PPS."
+    },
     audit_reaudited: {
         "id": "stringConfig.audit_reaudited",
         "description": "Text for audit reaudited status",

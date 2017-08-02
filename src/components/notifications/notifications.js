@@ -62,6 +62,7 @@ class Notification extends React.Component{
 					{this.props.notificationData.length ? this.props.notificationData.map((tuple, index) => (
 				        <section className="row" key={index}>
 							<div className="content">
+								<p className="title">{tuple.title}</p>
 								<p className="message">{tuple.description}</p>
 								<p><span className="time"><FormattedRelative updateInterval={10000} value={new Date(tuple.createTime)}/></span></p>
 							</div>

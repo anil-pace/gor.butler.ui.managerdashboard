@@ -4,26 +4,32 @@ import {modal} from 'react-redux-modal';
 import { FormattedMessage } from 'react-intl'; 
 import {setFireHazrdFlag} from '../../actions/tabActions';
 import ResumeOperation from './resumeOperation'; 
+import {userRequest} from '../../actions/userActions';  
 import ShutterLocationTile from '../../components/fireHazardTiles/shutterLocationTile';
 import {getSecondsDiff} from '../../utilities/getDaysDiff';
 import {FAILED,CLEARED,PROGRESS,NOT_FOUND,IN_PROGRESS} from '../../constants/frontEndConstants';
 class FireHazard extends React.Component{
   constructor(props) 
-  {  
+  { 
     super(props);
     this.state={buttonDisable:true};
     this._removeThisModal =  this._removeThisModal.bind(this);
-    this._resumeOperation=   this._resumeOperation.bind(this);
+    this._resumeOperation =  this._resumeOperation.bind(this);
   }
   _removeThisModal() {
     this.props.removeModal();
     this.props.setFireHazrdFlag(true);
    }
-   
+   endFireHazard(){
+    this.props.removeModal();
+   }
+  
   componentDidMount(){
     if(this.props.checkingList){
-      this._removeThisModal();  //If manager is on safety checklist page, don't show the release modal      
+      this.endFireHazard();  //If manager is on safety checklist page, don't show the release modal      
     }
+  }
+componentWillMount(){
      var limit=(this.props.config.fire_emergency_enable_resume_after)*60;
     var duration=(limit-getSecondsDiff(this.props.fireHazard.emergencyStartTime))*1000;
     
@@ -33,14 +39,14 @@ class FireHazard extends React.Component{
       this.setState({buttonDisable:false})
     }.bind(this),duration); 
   }
+}
 
-  }
-  componentWillReceiveProps(nextProps){
-    if(!nextProps.auth_token||nextProps.fireHazard.emergency_type !== this.props.fireHazard.emergency_type)
+   componentWillReceiveProps(nextProps){
+    if(!nextProps.auth_token||!nextProps.fireHazard.emergencyStartTime)
     {
-      this._removeThisModal();
-    }
+    this._removeThisModal();
   }
+}
 
   _resumeOperation(){
     this._removeThisModal();
@@ -48,7 +54,8 @@ class FireHazard extends React.Component{
       title: '',
       size: 'large', // large, medium or small,
       closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-      hideCloseButton: true // (optional) if you don't wanna show the top right close button
+      hideCloseButton: true, // (optional) if you don't wanna show the top right close button
+      fireHazardPressed:true
       //.. all what you put in here you will get access in the modal props ;)
     });
   }
@@ -156,11 +163,11 @@ render()
     <div className="gor-shutter-status-box">
     {shutterWrap}
     </div>          
-    </div>      
-    <button className='gor-resume-btn' disabled={this.state.buttonDisable} onClick={this._resumeOperation}>
+    </div>    
+    <button className={this.state.buttonDisable?'gor-resume-btn disable':'gor-resume-btn'} disabled={this.state.buttonDisable} onClick={this._resumeOperation}>
     <FormattedMessage id='operation.alert.release.button' 
     defaultMessage="RESUME OPERATION"
-    description="Text button to resume operation"/></button>           
+    description="Text button to resume operation"/></button>         
     </div>
     );
 }
@@ -171,13 +178,15 @@ function mapStateToProps(state, ownProps){
     auth_token:state.authLogin.auth_token,
     checkingList:state.emergency.checkingList||false,
     fireHazard:state.fireHazardDetail,
-    firehazadflag:state.fireReducer.firehazadflag,
+    firehazadflag:state.fireReducer.firehazadflag ||false,
     config:state.config||{}
     }
   } 
   function mapDispatchToProps(dispatch){
     return {
-      setFireHazrdFlag: function(data){ dispatch(setFireHazrdFlag(data)); }
+
+      setFireHazrdFlag: function(data){ dispatch(setFireHazrdFlag(data)); },
+      userRequest: function(data){ dispatch(userRequest(data)); }
     }
   };
 

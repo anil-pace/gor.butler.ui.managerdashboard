@@ -2,21 +2,19 @@
  * Created by gaurav.m on 4/13/17.
  */
 import React  from 'react';
-import {FormattedMessage} from 'react-intl'
+
 class FilterSummary extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+    
 
     shouldComponentUpdate(nextProps) {
         /**
          * Don't display the filter summary if count=0
          * or previous number of results is same of updated list.
          */
-        if (this.props.total=== nextProps.total || nextProps.total=== 0) {
-            return false
+        if ((this.props.total!== nextProps.total || nextProps.total) || (this.props.isFilterApplied !== nextProps.isFilterApplied)) {
+            return true
         }
-        return true;
+        return false;
     }
 
     render() {

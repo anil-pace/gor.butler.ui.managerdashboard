@@ -4,18 +4,15 @@
  */
 import React  from 'react';
 import { connect } from 'react-redux';
-
-import Dimensions from 'react-dimensions';
-import {FormattedMessage, FormattedDate, FormattedRelative} from 'react-intl';
+import {FormattedMessage, FormattedRelative} from 'react-intl';
 import {GTable} from '../../components/gor-table-component/index'
 import {GTableHeader,GTableHeaderCell} from '../../components/gor-table-component/tableHeader';
 import {GTableBody} from "../../components/gor-table-component/tableBody";
-import {GTableNoResult} from "../../components/gor-table-component/noResultFound";
 import {GTableRow} from "../../components/gor-table-component/tableRow";
 import NotificationDescription from '../../components/notifications/notificationDescription';
 import Spinner from '../../components/spinner/Spinner';
 import {NOTIFICATIONS_URL} from "../../constants/configConstants";
-import {GET,GET_ALL_NOTIFICATIONS,APP_JSON,SEARCHED_NOTIFICATIONS_DATA_ALL,DEFAULT_NOTIFICATION_ROW_LENGTH,DESC,ASC} from "../../constants/frontEndConstants";
+import {GET,GET_ALL_NOTIFICATIONS,APP_JSON,DEFAULT_NOTIFICATION_ROW_LENGTH,DESC,ASC} from "../../constants/frontEndConstants";
 import {getNotificationData,
 	resetNotificationTableData,
 	setNotificationSpinner,setInfiniteSpinner} from '../../actions/notificationAction';

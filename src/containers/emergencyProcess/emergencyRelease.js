@@ -26,7 +26,8 @@ class EmergencyRelease extends React.Component{
       title: '',
       size: 'large', // large, medium or small,
       closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-      hideCloseButton: true // (optional) if you don't wanna show the top right close button
+      hideCloseButton: true, // (optional) if you don't wanna show the top right close button
+      emergencyReleased :true
       //.. all what you put in here you will get access in the modal props ;)
     });
   }
@@ -38,12 +39,12 @@ class EmergencyRelease extends React.Component{
             <div className='gor-operation-head'>
               <div className='gor-caution'></div><span className='gor-operation-heading'>
               <FormattedMessage id='operation.alert.release' 
-                    defaultMessage="Stop button released"
+                    defaultMessage="All Emergency-stop buttons released"
                             description="Text for emergency button release heading"/></span>
             </div>
             <div className='gor-operation-body'>
               <div className='gor-text-bold'><FormattedMessage id='operation.alert.release.text' 
-                    defaultMessage="Emergency Stop button has been released."
+                    defaultMessage="All Emergency-stop buttons have been released."
                             description="Text for emergency stop button release"/>
               </div>
               <div className='gor-operation-text'><FormattedMessage id='operation.alert.release.subtext' 

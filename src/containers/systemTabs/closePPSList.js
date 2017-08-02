@@ -1,12 +1,9 @@
 import React  from 'react';
 import {FormattedMessage} from 'react-intl';
 import {connect} from 'react-redux';
-
-import Dimensions from 'react-dimensions';
 import {GTable} from '../../components/gor-table-component/index'
 import {GTableHeader,GTableHeaderCell} from '../../components/gor-table-component/tableHeader';
 import {GTableBody} from "../../components/gor-table-component/tableBody";
-import {GTableNoResult} from "../../components/gor-table-component/noResultFound";
 import {GTableRow} from "../../components/gor-table-component/tableRow";
 import {POST, APP_JSON,GET_PENDING_MSU} from '../../constants/frontEndConstants';
 import {GET_PPS_MSU} from '../../constants/configConstants'

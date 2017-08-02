@@ -234,6 +234,7 @@ class PPS extends React.Component {
 
             }
             detail.totalUser=totalUser;
+            detail.profiles=data[i].pps_profiles
             PPSData.push(detail);
         }
         return PPSData;
@@ -253,7 +254,7 @@ class PPS extends React.Component {
     handleStatusChange(selection,requestObj){
       var checkedPPS=[], j=0, sortedIndex;
         
-        if(selection.value !== "open"){
+        if(selection.value === "close"){
              if(!requestObj){
              let selectedPps = this.props.checkedPps,openPps={};
              for(let k in selectedPps){
@@ -274,7 +275,7 @@ class PPS extends React.Component {
                 changePPSmode:this.props.changePPSmode.bind(this)
             });
          }
-         else{
+         else {
                let formData={}
                 formData = requestObj
                 let ppsStatusChange={
@@ -292,7 +293,7 @@ class PPS extends React.Component {
             
          }
         }
-        else{
+        else if(selection.value === "open"){
             let formData={},checkedPps = this.props.checkedPps,selectedPps={}
             for(let k in this.props.checkedPps){
                 selectedPps[k] = "open"

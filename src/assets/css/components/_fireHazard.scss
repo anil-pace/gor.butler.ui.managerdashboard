@@ -1,17 +1,24 @@
 @import url('../abstracts/functions');
-.customColor {
-    background-color: rgba(250,0,0,0.4);
-    min-height: 100vh;
+.react-redux-modal{
+    .rrm-content{
+            &.customColor {
+            min-height: 100vh;
+            text-align:center; 
+            background-color: rgba(255, 0, 0, 0.4);
+        }
+    }
 }
+
 .rr-title-actions {
     display: none;
 }
+
 .gor-firehazard {
     width: 65%;
     min-height: calculateRem(250px);
-    border-radius: 1%;
+    border-radius: 5px;
     text-align: left;
-    display: flow-root;
+    display: inline-block;
     .gor-shutter-text-status {
         font-size: 16px;
         text-align: left;
@@ -30,8 +37,8 @@
             background-position: -426px -77px;
         }
         &.failed {
-            background-position: 251px -102px;
-            background-size: 2695%;
+            background-position: -562px -77px;
+            
         }
         &.progress {
             background-image: url(images/loader.svg);
@@ -63,8 +70,7 @@
             background-position: -225px -50px;
         }
         &.failed {
-            background-position: 418px -172px;
-            background-size: 2890%;
+            background-position: -301px -52px
         }
         &.cleared {
             background-position: -225px -52px;
@@ -87,8 +93,7 @@
         border-bottom: 2px solid #dbdbdb;
         box-sizing: border-box;
         .gor-caution-image {
-            background-position: 131px 299px;
-            background-size: 1407%;
+            background-position: -1px 305px;
             width: 128px;
             height: 128px;
             float: left;

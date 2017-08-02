@@ -12,15 +12,20 @@ export  function tabsData(state={},action){
         "overview_status":overview_status
       })
       case GET_SYSTEM:
-      let system_data={},system_emergency=false;
+      let system_data,system_emergency=false,zoneDetails,lastEmergencyState;
       if(action.data.header_data)
       {      
         system_emergency=action.data.header_data.emergency;
         system_data=action.data.header_data.emergency_level;
+        lastEmergencyState = action.data.header_data.last_emergency_state;
+        zoneDetails = action.data.header_data.zone_details
+
       }
       return Object.assign({}, state, {
         "system_emergency":system_emergency,
-        "system_data":system_data
+        "system_data":system_data,
+        zoneDetails,
+        lastEmergencyState
       })
                 
       case GET_USERS:
