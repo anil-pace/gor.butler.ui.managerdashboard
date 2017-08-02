@@ -12,6 +12,7 @@
     "d3": "^3.5.6",
     "d3-time-format": "^2.0.2",
     "d3-tip": "^0.7.1",
+    "enzyme": "^2.9.1",
     "es6-symbol": "^3.1.0",
     "fixed-data-table": "^0.6.3",
     "node-sass": "^4.5.2",
@@ -36,8 +37,9 @@
     "react-router": "^2.7.0",
     "react-router-redux": "^4.0.5",
     "react-scripts": "0.9.5",
+    "react-test-renderer": "^15.6.1",
     "redux": "^3.5.2",
-    "redux-mock-store": "^1.2.2",
+    "redux-mock-store": "^1.2.3",
     "redux-router": "^2.1.2",
     "sockjs-client": "^1.1.4",
     "webstomp-client": "^1.0.6"

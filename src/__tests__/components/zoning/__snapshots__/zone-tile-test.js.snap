@@ -1,0 +1,24 @@
+exports[`test Result component should display data correctly 1`] = `
+<div
+  className="gor-zone-tile zoneClearInit hard"
+  onClick={[Function]}>
+  <div
+    className="left-content">
+    <div
+      className="gor-zone-status">
+      <span />
+    </div>
+  </div>
+  <div
+    className="right-content">
+    <p
+      className="zone-name">
+      Zone 1
+    </p>
+    <p
+      className="operating-status">
+      STOPPED
+    </p>
+  </div>
+</div>
+`;

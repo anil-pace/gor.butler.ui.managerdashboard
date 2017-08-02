@@ -13,7 +13,7 @@ import {FormattedMessage} from 'react-intl';
 import {withRouter} from 'react-router';
 
 
-class SystemOverview extends React.Component {
+export class SystemOverview extends React.Component {
     constructor(props) {
         super(props);
         this.state={
