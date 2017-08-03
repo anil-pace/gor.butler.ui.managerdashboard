@@ -1,0 +1,1121 @@
+[
+{
+	"id": "audit.table.cancelTask",
+	"description": "cancel option for task",
+	"defaultMessage": "Cancel Task",
+	"filepath": "./src/components/commonFunctionsDataTable.js"
+},
+{
+	"id": "audit.resolveUnresolve.tooltip.header",
+	"description": "resolveUnresolve issue for audit table",
+	"defaultMessage": "{resolvedCount} audit lines, {unresolvedCount} audit lines",
+	"filepath": "./src/components/commonFunctionsDataTable.js"
+},
+{
+	"id": "audit.resolveUnresolve.tooltip.content",
+	"description": "unresolve issue for audit table",
+	"defaultMessage": "Approve or reject audit line with issues",
+	"filepath": "./src/components/commonFunctionsDataTable.js"
+},
+{
+	"id": "audit.unresolveIssues.tooltip.header",
+	"description": "unresolve issue for audit table",
+	"defaultMessage": "{unresolvedCount} {unresolvedCount, plural, one {unresolved audit line} other {unresolved audit lines}}",
+	"filepath": "./src/components/commonFunctionsDataTable.js"
+},
+{
+	"id": "audit.unresolveIssues.tooltip.content",
+	"description": "unresolve issue for audit table",
+	"defaultMessage": "Approve or reject audit line with issues",
+	"filepath": "./src/components/commonFunctionsDataTable.js"
+},
+{
+	"id": "audit.rejected.tooltip.header",
+	"description": "rejected issue for audit table",
+	"defaultMessage": "{rejected_lines}/{total_lines} {rejected_lines, plural, one {audit line} other {audit lines}} were rejected",
+	"filepath": "./src/components/commonFunctionsDataTable.js"
+},
+{
+	"id": "audit.rejected.tooltip.content",
+	"description": "Re-audit the rejected audit lines",
+	"defaultMessage": "Re-audit the rejected audit lines",
+	"filepath": "./src/components/commonFunctionsDataTable.js"
+},
+{
+	"id": "audit.created.tooltip.header",
+	"description": "resolveUnresolve issue for audit table",
+	"defaultMessage": "Assign PPS to start audit task",
+	"filepath": "./src/components/commonFunctionsDataTable.js"
+},
+{
+	"id": "audit.created.tooltip.content",
+	"description": "unresolve issue for audit table",
+	"defaultMessage": "Click on \"Start Audit\" to assign PPS",
+	"filepath": "./src/components/commonFunctionsDataTable.js"
+},
+{
+	"id": "utility.fileSize.message",
+	"description": "Maximum File Size:  MB",
+	"defaultMessage": "Maximum File Size: {maxSize}",
+	"filepath": "./src/components/fileUpload/fileUpload.js"
+},
+{
+	"id": "utility.fileSize.errorline",
+	"description": "Line or size",
+	"defaultMessage": "{errorLine}",
+	"filepath": "./src/components/fileUpload/fileUpload.js"
+},
+{
+	"id": "footer.text",
+	"description": "Footer description",
+	"defaultMessage": "Copyright @ {dtYear} GreyOrange Pte Ltd",
+	"filepath": "./src/components/footer/Footer.js"
+},
+{
+	"id": "notifications.read.message",
+	"description": "No unread notifications",
+	"defaultMessage": "You have no unread Notifications",
+	"filepath": "./src/components/notifications/notifications.js"
+},
+{
+	"id": "notifications.read.noresult",
+	"description": "No Result Found",
+	"defaultMessage": "No Result Found",
+	"filepath": "./src/components/notifications/notifications.js"
+},
+{
+	"id": "notification.all.link",
+	"description": "View all notifications link",
+	"defaultMessage": "VIEW ALL NOTIFICATIONS",
+	"filepath": "./src/components/notifications/notifications.js"
+},
+{
+	"id": "utility.uploadHist.fileName",
+	"description": "Upload file name",
+	"defaultMessage": "File {fileName}",
+	"filepath": "./src/components/utilityComponents/accordianBar.js"
+},
+{
+	"id": "utility.uploadHist.success",
+	"description": "Status percent",
+	"defaultMessage": "Status: {status} % completed",
+	"filepath": "./src/components/utilityComponents/accordianBar.js"
+},
+{
+	"id": "utility.uploadHist.recAdded",
+	"description": "Record added",
+	"defaultMessage": "Records added",
+	"filepath": "./src/components/utilityComponents/accordianBar.js"
+},
+{
+	"id": "utility.uploadHist.recUpdated",
+	"description": "Record updated",
+	"defaultMessage": "Records updated",
+	"filepath": "./src/components/utilityComponents/accordianBar.js"
+},
+{
+	"id": "utility.uploadHist.recDeleted",
+	"description": "Record deleted",
+	"defaultMessage": "Records deleted",
+	"filepath": "./src/components/utilityComponents/accordianBar.js"
+},
+{
+	"id": "utility.uploadHist.errors",
+	"description": "Errors",
+	"defaultMessage": "Errors",
+	"filepath": "./src/components/utilityComponents/accordianBar.js"
+},
+{
+	"id": "utility.uploadHist.uploadFile",
+	"description": "Upload File",
+	"defaultMessage": "Upload File:",
+	"filepath": "./src/components/utilityComponents/accordianBar.js"
+},
+{
+	"id": "utility.uploadHist.download",
+	"description": "Download",
+	"defaultMessage": "Download",
+	"filepath": "./src/components/utilityComponents/accordianBar.js"
+},
+{
+	"id": "utility.uploadHist.resultFile",
+	"description": "Result file",
+	"defaultMessage": "Result File:",
+	"filepath": "./src/components/utilityComponents/accordianBar.js"
+},
+{
+	"id": "utility.downloadGRN.status.heading",
+	"description": "GRN Status",
+	"defaultMessage": "GRN Status",
+	"filepath": "./src/components/utilityComponents/downloadGRTile.js"
+},
+{
+	"id": "utility.downloadGRN.stnPlaceholder",
+	"description": "Enter STN Number",
+	"defaultMessage": "Enter STN Number",
+	"filepath": "./src/components/utilityComponents/downloadGRTile.js"
+},
+{
+	"id": "utility.downloadGRN.formatPlaceholder",
+	"description": "Enter STN Number",
+	"defaultMessage": "Select File type",
+	"filepath": "./src/components/utilityComponents/downloadGRTile.js"
+},
+{
+	"id": "utility.reportsHistory.clickToDownload",
+	"description": "file name",
+	"defaultMessage": "Click here to download",
+	"filepath": "./src/components/utilityComponents/downloadGRTile.js"
+},
+{
+	"id": "utility.uploadHist.success",
+	"description": "Status",
+	"defaultMessage": "Status: {status}",
+	"filepath": "./src/components/utilityComponents/downloadGRTile.js"
+},
+{
+	"id": "utility.downloadGRN.label",
+	"description": "STN number:",
+	"defaultMessage": "STN number:",
+	"filepath": "./src/components/utilityComponents/downloadGRTile.js"
+},
+{
+	"id": "utility.downloadGRN.stnError",
+	"description": "Please enter correct STN number",
+	"defaultMessage": "Please enter correct STN number",
+	"filepath": "./src/components/utilityComponents/downloadGRTile.js"
+},
+{
+	"id": "utility.downloadGRN.head",
+	"description": "Generate Report",
+	"defaultMessage": "Generate Report",
+	"filepath": "./src/components/utilityComponents/downloadGRTile.js"
+},
+{
+	"id": "utility.downloadGRN.history",
+	"description": "Report History",
+	"defaultMessage": "Report History",
+	"filepath": "./src/components/utilityComponents/downloadGRTile.js"
+},
+{
+	"id": "utility.downloadReport.head",
+	"description": "Download Reports",
+	"defaultMessage": "Download Reports",
+	"filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+},
+{
+	"id": "utility.downloadReport.Status.heading",
+	"description": "Reports Status",
+	"defaultMessage": "Reports Status",
+	"filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+},
+{
+	"id": "utility.downloadRprts.CategoryLabel",
+	"description": "Category",
+	"defaultMessage": "Category",
+	"filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+},
+{
+	"id": "utility.downloadRprts.CategoryPlchldr",
+	"description": "Select Category",
+	"defaultMessage": "Select Category",
+	"filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+},
+{
+	"id": "utility.downloadRprts.CategoryInventory",
+	"description": "Inventory",
+	"defaultMessage": "Inventory",
+	"filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+},
+{
+	"id": "utility.downloadRprts.FileFormatPlchldr",
+	"description": "Select File Format",
+	"defaultMessage": "Select File Format",
+	"filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+},
+{
+	"id": "utility.downloadRprts.FileFormatLabel",
+	"description": "File Format",
+	"defaultMessage": "File Format",
+	"filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+},
+{
+	"id": "utility.downloadRports.csvFormat",
+	"description": "Comma separated values (csv)",
+	"defaultMessage": "Comma separated values (csv)",
+	"filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+},
+{
+	"id": "utiltiy.downloadRports.xlsFormat",
+	"description": "ExceL Spreadsheet (xlsx)",
+	"defaultMessage": "ExceL Spreadsheet (xlsx)",
+	"filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+},
+{
+	"id": "utility.grnHistory.clickToDownload",
+	"description": "file name",
+	"defaultMessage": "Click here to download",
+	"filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+},
+{
+	"id": "utility.uploadHist.success",
+	"description": "Status",
+	"defaultMessage": "Status: {status}",
+	"filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+},
+{
+	"id": "utility.downloadReports.head",
+	"description": "Generate Report",
+	"defaultMessage": "Generate Report",
+	"filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+},
+{
+	"id": "utility.downloadReports.history",
+	"description": "Report History",
+	"defaultMessage": "Report History",
+	"filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+},
+{
+	"id": "utility.uploadHistory.head",
+	"description": "Upload History",
+	"defaultMessage": "Upload History",
+	"filepath": "./src/components/utilityComponents/masterUploadTile.js"
+},
+{
+	"id": "utility.itemRecall.head",
+	"description": "Expired Items",
+	"defaultMessage": "Expired Items",
+	"filepath": "./src/components/utilityComponents/scriptsTile.js"
+},
+{
+	"id": "utility.itemRecall.subHead",
+	"description": "(Recall all the expired items)",
+	"defaultMessage": "(Recall all the expired items)",
+	"filepath": "./src/components/utilityComponents/scriptsTile.js"
+},
+{
+	"id": "utility.itemRecall.buttonText",
+	"description": "RECALL",
+	"defaultMessage": "RECALL",
+	"filepath": "./src/components/utilityComponents/scriptsTile.js"
+},
+{
+	"id": "utility.downDlabel",
+	"description": "label for download",
+	"defaultMessage": "DOWNLOAD",
+	"filepath": "./src/components/utilityComponents/utilityTile.js"
+},
+{
+	"id": "stringConfig.open",
+	"description": "Text to display on",
+	"defaultMessage": "Open",
+	"filepath": "./src/constants/backEndConstants.js"
+},
+{
+	"id": "stringConfig.fclose",
+	"description": "Text to show off",
+	"defaultMessage": "Force Close",
+	"filepath": "./src/constants/backEndConstants.js"
+},
+{
+	"id": "stringConfig.md007",
+	"description": "Text for safety checklist item 7",
+	"defaultMessage": "Peripherals status known.",
+	"filepath": "./src/constants/backEndConstants.js"
+},
+{
+	"id": "stringConfig.md008",
+	"description": "Text for safety checklist item 8",
+	"defaultMessage": "Physical inventory verified.",
+	"filepath": "./src/constants/backEndConstants.js"
+},
+{
+	"id": "stringConfig.md009",
+	"description": "Text for safety checklist item 9",
+	"defaultMessage": "No Emergency buttons in 'Pressed' state.",
+	"filepath": "./src/constants/backEndConstants.js"
+},
+{
+	"id": "stringConfig.md010",
+	"description": "Text for safety checklist item 10",
+	"defaultMessage": "All shutters open  in active zones.",
+	"filepath": "./src/constants/backEndConstants.js"
+},
+{
+	"id": "stringConfig.md011",
+	"description": "Text for safety checklist item 11",
+	"defaultMessage": "No humans in operations area.",
+	"filepath": "./src/constants/backEndConstants.js"
+},
+{
+	"id": "stringConfig.md012",
+	"description": "Text for safety checklist item 12",
+	"defaultMessage": "All paths cleared of any debris.",
+	"filepath": "./src/constants/backEndConstants.js"
+},
+{
+	"id": "pwdDesc.butler_supervisor",
+	"description": "Text for password description of manager",
+	"defaultMessage": "A password of at least 8 alphanumeric characters will be required for logging into the Management Interface and Operator Interface.",
+	"filepath": "./src/constants/backEndConstants.js"
+},
+{
+	"id": "pwdDesc.butler_ui",
+	"description": "Text for password description of operator",
+	"defaultMessage": "A password of 6 digits will be required for logging into the Operator Interface.",
+	"filepath": "./src/constants/backEndConstants.js"
+},
+{
+	"id": "emergency.resume.Softemergency",
+	"description": "Soft emergency still there",
+	"defaultMessage": "Soft emergency still there",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
+	"id": "masterdata.maxlimit.records",
+	"description": "Records in file should not be greater than",
+	"defaultMessage": "Records in file should not be greater than",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
+	"id": "masterdata.maxlimit.filesize",
+	"description": "File size should not be greater than",
+	"defaultMessage": "File size should not be greater than",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
+	"id": "audit.cancellation.error.g020",
+	"description": "Internal server error while requesting for audit cancel",
+	"defaultMessage": "Internal server error while requesting for audit cancel",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
+	"id": "audit.cancellation.error.g021",
+	"description": "Audit Id already sent for cancellation",
+	"defaultMessage": "Audit Id already sent for cancellation",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
+	"id": "audit.cancellation.error.g023",
+	"description": "Audit Id already successfully cancelled",
+	"defaultMessage": "Audit Id already successfully cancelled",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
+	"id": "audit.cancellation.error.g024",
+	"description": "Audit Id cancellation request has been process and cannot be cancelled",
+	"defaultMessage": "Audit Id cancellation request has been process and cannot be cancelled",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
+	"id": "pps.statusChange.allStatusSuccess",
+	"description": "Records in file should not be greater than",
+	"defaultMessage": "Status change request successful",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
+	"id": "pps.modeChange.allModeSuccess",
+	"description": "Records in file should not be greater than",
+	"defaultMessage": "Mode change request successful",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
+	"id": "auditdetail.auditCancelled.prefix",
+	"defaultMessage": "Cancelled",
+	"filepath": "./src/containers/auditTab.js"
+},
+{
+	"id": "auditdetail.auditCancellingText.text",
+	"defaultMessage": "Cancelling...",
+	"filepath": "./src/containers/auditTab.js"
+},
+{
+	"id": "auditList.filter.search.bar",
+	"description": "total results for filter search bar",
+	"defaultMessage": "{total} results found",
+	"filepath": "./src/containers/auditTab.js"
+},
+{
+	"id": "auditList.filter.search.bar.showall",
+	"description": "button label for show all",
+	"defaultMessage": "Show all results",
+	"filepath": "./src/containers/auditTab.js"
+},
+{
+	"id": "audit.token2.created",
+	"defaultMessage": "Created",
+	"filepath": "./src/containers/auditTab/auditFilter.js"
+},
+{
+	"id": "audit.token2.completed",
+	"defaultMessage": "Completed",
+	"filepath": "./src/containers/auditTab/auditFilter.js"
+},
+{
+	"id": "operation.fire.header",
+	"description": "Header Text FIRE EMERGENCY",
+	"defaultMessage": "FIRE EMERGENCY",
+	"filepath": "./src/containers/emergencyProcess/fireHazard.js"
+},
+{
+	"id": "operation.fire.cautionText",
+	"description": "Description Text FIRE EMERGENCY",
+	"defaultMessage": "Fire emergency has been triggered and system has started its safety measures.",
+	"filepath": "./src/containers/emergencyProcess/fireHazard.js"
+},
+{
+	"id": "operation.fire.evacuation",
+	"description": "Description Text evacuation",
+	"defaultMessage": "Please follow evacuation procedures immediately.",
+	"filepath": "./src/containers/emergencyProcess/fireHazard.js"
+},
+{
+	"id": "operation.fire.escape",
+	"description": "Description Text escape",
+	"defaultMessage": "Clearing escape path",
+	"filepath": "./src/containers/emergencyProcess/fireHazard.js"
+},
+{
+	"id": "operation.fire.shutter",
+	"description": "Description Text clear shutter",
+	"defaultMessage": "Clearing all shutters",
+	"filepath": "./src/containers/emergencyProcess/fireHazard.js"
+},
+{
+	"id": "operation.firesafety.heading",
+	"description": "Text for safety heading",
+	"defaultMessage": "Resume Checklist",
+	"filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+},
+{
+	"id": "operation.firesafety.confirm",
+	"description": "Text for Resume Opeartion button",
+	"defaultMessage": "Resume Opeartion",
+	"filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+},
+{
+	"id": "notification.table.description",
+	"description": "Table first head",
+	"defaultMessage": "Description",
+	"filepath": "./src/containers/notifications/viewAllNotificationWrapper.js"
+},
+{
+	"id": "notification.table.time",
+	"description": "Table second head",
+	"defaultMessage": "Time",
+	"filepath": "./src/containers/notifications/viewAllNotificationWrapper.js"
+},
+{
+	"id": "notification.all.head",
+	"description": "Notification head",
+	"defaultMessage": "Notifications",
+	"filepath": "./src/containers/notifications/viewAllNotificationWrapper.js"
+},
+{
+	"id": "notification.infinite.message",
+	"description": "Infinite scroll message",
+	"defaultMessage": "Loading More",
+	"filepath": "./src/containers/notifications/viewAllNotificationWrapper.js"
+},
+{
+	"id": "order.STATUS.unfulfillable",
+	"defaultMessage": "Unfulfillable",
+	"filepath": "./src/containers/orderTab/orderFilter.js"
+},
+{
+	"id": "order.STATUS.onhold",
+	"defaultMessage": "On hold",
+	"filepath": "./src/containers/orderTab/orderFilter.js"
+},
+{
+	"id": "order.STATUS.cancelled",
+	"defaultMessage": "Cancelled",
+	"filepath": "./src/containers/orderTab/orderFilter.js"
+},
+{
+	"id": "order.STATUS.inprogress",
+	"defaultMessage": "In Progress",
+	"filepath": "./src/containers/orderTab/orderFilter.js"
+},
+{
+	"id": "wave.inputField.id",
+	"defaultMessage": "WAVE ID",
+	"filepath": "./src/containers/orderTab/waveFilter.js"
+},
+{
+	"id": "wave.token.status",
+	"defaultMessage": "STATUS",
+	"filepath": "./src/containers/orderTab/waveFilter.js"
+},
+{
+	"id": "wave.STATUS.all",
+	"defaultMessage": "All waves",
+	"filepath": "./src/containers/orderTab/waveFilter.js"
+},
+{
+	"id": "wave.STATUS.breach",
+	"defaultMessage": "Breached",
+	"filepath": "./src/containers/orderTab/waveFilter.js"
+},
+{
+	"id": "wave.STATUS.pending",
+	"defaultMessage": "Pending",
+	"filepath": "./src/containers/orderTab/waveFilter.js"
+},
+{
+	"id": "wave.STATUS.warning",
+	"defaultMessage": "Warning",
+	"filepath": "./src/containers/orderTab/waveFilter.js"
+},
+{
+	"id": "wave.STATUS.inprogress",
+	"defaultMessage": "In progress",
+	"filepath": "./src/containers/orderTab/waveFilter.js"
+},
+{
+	"id": "waveList.filter.search.bar",
+	"description": "total waves for filter search bar",
+	"defaultMessage": "{total} Waves found",
+	"filepath": "./src/containers/orderTab/waveTab.js"
+},
+{
+	"id": "waveList.filter.search.bar.showall",
+	"description": "button label for show all",
+	"defaultMessage": "Show all Waves",
+	"filepath": "./src/containers/orderTab/waveTab.js"
+},
+{
+	"id": "botList.filter.search.bar",
+	"description": "total bots for filter search bar",
+	"defaultMessage": "{total} Bots found",
+	"filepath": "./src/containers/systemTabs/butlerbotTab.js"
+},
+{
+	"id": "botList.filter.search.bar.showall",
+	"description": "button label for show all",
+	"defaultMessage": "Show all Bots",
+	"filepath": "./src/containers/systemTabs/butlerbotTab.js"
+},
+{
+	"id": "charging.inputField.id",
+	"defaultMessage": "CHARGING STATION ID",
+	"filepath": "./src/containers/systemTabs/chargingStationFilter.js"
+},
+{
+	"id": "charging.token.status",
+	"defaultMessage": "DOCKING STATUS",
+	"filepath": "./src/containers/systemTabs/chargingStationFilter.js"
+},
+{
+	"id": "charging.token.timePeriod",
+	"defaultMessage": "OPERATING MODE",
+	"filepath": "./src/containers/systemTabs/chargingStationFilter.js"
+},
+{
+	"id": "charging.STATUS.all",
+	"defaultMessage": "Any",
+	"filepath": "./src/containers/systemTabs/chargingStationFilter.js"
+},
+{
+	"id": "charging.STATUS.breach",
+	"defaultMessage": "Connected",
+	"filepath": "./src/containers/systemTabs/chargingStationFilter.js"
+},
+{
+	"id": "charging.STATUS.pending",
+	"defaultMessage": "Disconnected",
+	"filepath": "./src/containers/systemTabs/chargingStationFilter.js"
+},
+{
+	"id": "charging.timePeriod.all",
+	"defaultMessage": "Any",
+	"filepath": "./src/containers/systemTabs/chargingStationFilter.js"
+},
+{
+	"id": "charging.timePeriod.oneHr",
+	"defaultMessage": "Manual",
+	"filepath": "./src/containers/systemTabs/chargingStationFilter.js"
+},
+{
+	"id": "charging.timePeriod.twoHR",
+	"defaultMessage": "Auto",
+	"filepath": "./src/containers/systemTabs/chargingStationFilter.js"
+},
+{
+	"id": "ChargingStationsTable.filter.search.bar",
+	"description": "total stations for filter search bar",
+	"defaultMessage": "{total} Stations found",
+	"filepath": "./src/containers/systemTabs/chargingStationsTab.js"
+},
+{
+	"id": "ChargingStationsTable.filter.search.bar.showall",
+	"description": "button label for show all",
+	"defaultMessage": "Show all Stations",
+	"filepath": "./src/containers/systemTabs/chargingStationsTab.js"
+},
+{
+	"id": "ppsclose.tblhead1.text",
+	"description": "Table first head",
+	"defaultMessage": "SLOT ID",
+	"filepath": "./src/containers/systemTabs/closePPSList.js"
+},
+{
+	"id": "ppsclose.tblhead2.text",
+	"description": "Table second head",
+	"defaultMessage": "MSU Pending",
+	"filepath": "./src/containers/systemTabs/closePPSList.js"
+},
+{
+	"id": "ppsclose.tblhead3.text",
+	"description": "Table third head",
+	"defaultMessage": "ACTION",
+	"filepath": "./src/containers/systemTabs/closePPSList.js"
+},
+{
+	"id": "pps.close.cancel",
+	"description": "Text for cancel close",
+	"defaultMessage": "CANCEL",
+	"filepath": "./src/containers/systemTabs/closePPSList.js"
+},
+{
+	"id": "pps.close.confirm",
+	"description": "Text for close confirm",
+	"defaultMessage": "CONFIRM",
+	"filepath": "./src/containers/systemTabs/closePPSList.js"
+},
+{
+	"id": "pps.inputField.id",
+	"defaultMessage": "PPS ID",
+	"filepath": "./src/containers/systemTabs/ppsFilter.js"
+},
+{
+	"id": "pps.inputField.oprator",
+	"defaultMessage": "OPERATOR ASSIGNED",
+	"filepath": "./src/containers/systemTabs/ppsFilter.js"
+},
+{
+	"id": "pps.token.status",
+	"defaultMessage": "STATUS",
+	"filepath": "./src/containers/systemTabs/ppsFilter.js"
+},
+{
+	"id": "pps.token.timePeriod",
+	"defaultMessage": "MODE",
+	"filepath": "./src/containers/systemTabs/ppsFilter.js"
+},
+{
+	"id": "pps.STATUS.all",
+	"defaultMessage": "Any",
+	"filepath": "./src/containers/systemTabs/ppsFilter.js"
+},
+{
+	"id": "pps.STATUS.stopped",
+	"defaultMessage": "Open",
+	"filepath": "./src/containers/systemTabs/ppsFilter.js"
+},
+{
+	"id": "pps.STATUS.error",
+	"defaultMessage": "Close",
+	"filepath": "./src/containers/systemTabs/ppsFilter.js"
+},
+{
+	"id": "pps.STATUS.fclose",
+	"defaultMessage": "Force Close",
+	"filepath": "./src/containers/systemTabs/ppsFilter.js"
+},
+{
+	"id": "pps.MODE.all",
+	"defaultMessage": "Any",
+	"filepath": "./src/containers/systemTabs/ppsFilter.js"
+},
+{
+	"id": "pps.MODE.pick",
+	"defaultMessage": "Pick",
+	"filepath": "./src/containers/systemTabs/ppsFilter.js"
+},
+{
+	"id": "pps.MODE.put",
+	"defaultMessage": "Put",
+	"filepath": "./src/containers/systemTabs/ppsFilter.js"
+},
+{
+	"id": "pps.MODE.audit",
+	"defaultMessage": "Audit",
+	"filepath": "./src/containers/systemTabs/ppsFilter.js"
+},
+{
+	"id": "v.MODE.notset",
+	"defaultMessage": "Not set",
+	"filepath": "./src/containers/systemTabs/ppsFilter.js"
+},
+{
+	"id": "pps.close.heading",
+	"description": "Heading for Close PPS",
+	"defaultMessage": "Close PPS",
+	"filepath": "./src/containers/systemTabs/ppsTab.js"
+},
+{
+	"id": "PPS.table.openStatusLabel",
+	"description": "audit dropdown option for Status change",
+	"defaultMessage": "Open Selected PPS",
+	"filepath": "./src/containers/systemTabs/ppsTab.js"
+},
+{
+	"id": "PPS.table.closeStatusLabel",
+	"description": "audit dropdown option for Status change",
+	"defaultMessage": "Close Selected PPS",
+	"filepath": "./src/containers/systemTabs/ppsTab.js"
+},
+{
+	"id": "PPS.table.statusPlaceholder",
+	"description": "Placeholder for status dropdown",
+	"defaultMessage": "Change PPS Status",
+	"filepath": "./src/containers/systemTabs/ppsTab.js"
+},
+{
+	"id": "PPS.table.modePlaceholder",
+	"description": "Placeholder for mode dropdown",
+	"defaultMessage": "Change PPS Mode",
+	"filepath": "./src/containers/systemTabs/ppsTab.js"
+},
+{
+	"id": "ppsList.filter.search.bar",
+	"description": "total pps for filter search bar",
+	"defaultMessage": "{total} Stations found",
+	"filepath": "./src/containers/systemTabs/ppsTab.js"
+},
+{
+	"id": "ppsList.filter.search.bar.showall",
+	"description": "button label for show all",
+	"defaultMessage": "Show all Stations",
+	"filepath": "./src/containers/systemTabs/ppsTab.js"
+},
+{
+	"id": "PPStable.requestedMode.text",
+	"description": "PPStable.requestedMode.text",
+	"defaultMessage": "Requested Mode:",
+	"filepath": "./src/containers/systemTabs/PPStable.js"
+},
+{
+	"id": "PPS.table.requestedStatus",
+	"description": "Requested status for PPS",
+	"defaultMessage": "REQUESTED STATUS",
+	"filepath": "./src/containers/systemTabs/PPStable.js"
+},
+{
+	"id": "utilities.tab.heading",
+	"description": "audit tab",
+	"defaultMessage": "UTILITIES",
+	"filepath": "./src/containers/tabs.js"
+},
+{
+	"id": "operation.alert.resumed",
+	"description": "Text to resume operation",
+	"defaultMessage": "All operation has been resumed to normal state.",
+	"filepath": "./src/containers/tabs.js"
+},
+{
+	"id": "operation.alert.triggeremergency",
+	"description": "Text button to trigger emergency",
+	"defaultMessage": "Fire emergency triggered.Follow evacuation procedures immediately",
+	"filepath": "./src/containers/tabs.js"
+},
+{
+	"id": "operation.alert.toastifydetails",
+	"description": "Text button to viewdetails",
+	"defaultMessage": "VIEW DETAILS",
+	"filepath": "./src/containers/tabs.js"
+},
+{
+	"id": "user.inputField.id",
+	"defaultMessage": "USER NAME",
+	"filepath": "./src/containers/userTab/userFilter.js"
+},
+{
+	"id": "user.role.all",
+	"defaultMessage": "Any",
+	"filepath": "./src/containers/userTab/userFilter.js"
+},
+{
+	"id": "user.tokenfield.status",
+	"defaultMessage": "STATUS",
+	"filepath": "./src/containers/userTab/userFilter.js"
+},
+{
+	"id": "user.tokenfield.role",
+	"defaultMessage": "ROLE",
+	"filepath": "./src/containers/userTab/userFilter.js"
+},
+{
+	"id": "user.tokenfield.mode",
+	"defaultMessage": "WORK MODE",
+	"filepath": "./src/containers/userTab/userFilter.js"
+},
+{
+	"id": "user.tokenfield.location",
+	"defaultMessage": "LOCATION",
+	"filepath": "./src/containers/userTab/userFilter.js"
+},
+{
+	"id": "user.status.all",
+	"defaultMessage": "Any",
+	"filepath": "./src/containers/userTab/userFilter.js"
+},
+{
+	"id": "user.status.online",
+	"defaultMessage": "Online",
+	"filepath": "./src/containers/userTab/userFilter.js"
+},
+{
+	"id": "user.status.offline",
+	"defaultMessage": "Offline",
+	"filepath": "./src/containers/userTab/userFilter.js"
+},
+{
+	"id": "user.workmode.all",
+	"defaultMessage": "Any",
+	"filepath": "./src/containers/userTab/userFilter.js"
+},
+{
+	"id": "user.workmode.pickfront",
+	"defaultMessage": "Pick Front",
+	"filepath": "./src/containers/userTab/userFilter.js"
+},
+{
+	"id": "user.workmode.pickback",
+	"defaultMessage": "Pick Back",
+	"filepath": "./src/containers/userTab/userFilter.js"
+},
+{
+	"id": "user.workmode.putfront",
+	"defaultMessage": "Put Front",
+	"filepath": "./src/containers/userTab/userFilter.js"
+},
+{
+	"id": "user.workmode.putback",
+	"defaultMessage": "Put Back",
+	"filepath": "./src/containers/userTab/userFilter.js"
+},
+{
+	"id": "user.workmode.audit",
+	"defaultMessage": "Audit",
+	"filepath": "./src/containers/userTab/userFilter.js"
+},
+{
+	"id": "user.workmode.management",
+	"defaultMessage": "Management",
+	"filepath": "./src/containers/userTab/userFilter.js"
+},
+{
+	"id": "user.location.all",
+	"defaultMessage": "Any",
+	"filepath": "./src/containers/userTab/userFilter.js"
+},
+{
+	"id": "user.location.issueFound",
+	"defaultMessage": "Pick Put Station",
+	"filepath": "./src/containers/userTab/userFilter.js"
+},
+{
+	"id": "user.location.rejected",
+	"defaultMessage": "QC Station",
+	"filepath": "./src/containers/userTab/userFilter.js"
+},
+{
+	"id": "user.location.resolved",
+	"defaultMessage": "Head Office",
+	"filepath": "./src/containers/userTab/userFilter.js"
+},
+{
+	"id": "users.roles.info.heading",
+	"description": "Heading for roles description",
+	"defaultMessage": "Role definitions",
+	"filepath": "./src/containers/userTab/userRoles.js"
+},
+{
+	"id": "userList.filter.search.bar",
+	"description": "total users for filter search bar",
+	"defaultMessage": "{totalUsers} Users found",
+	"filepath": "./src/containers/userTab/usersTab.js"
+},
+{
+	"id": "userList.filter.search.bar.showall",
+	"description": "button label for show all",
+	"defaultMessage": "Show all Users",
+	"filepath": "./src/containers/userTab/usersTab.js"
+},
+{
+	"id": "utility.masterData.head",
+	"description": "Master data upload",
+	"defaultMessage": "Master data upload",
+	"filepath": "./src/containers/utilityTab.js"
+},
+{
+	"id": "utility.scriptsTile.head",
+	"description": "Run Script",
+	"defaultMessage": "Run Script",
+	"filepath": "./src/containers/utilityTab.js"
+},
+{
+	"id": "utility.downloadReport.head",
+	"description": "Download Reports",
+	"defaultMessage": "Download Reports",
+	"filepath": "./src/containers/utilityTab.js"
+},
+{
+	"id": "utility.downloadRprts.CategoryLabel",
+	"description": "Category",
+	"defaultMessage": "Category",
+	"filepath": "./src/containers/utilityTab.js"
+},
+{
+	"id": "utility.downloadRprts.CategoryPlchldr",
+	"description": "Select Category",
+	"defaultMessage": "Select Category",
+	"filepath": "./src/containers/utilityTab.js"
+},
+{
+	"id": "utility.downloadRprts.FileFormatPlchldr",
+	"description": "Select File Format",
+	"defaultMessage": "Select File Format",
+	"filepath": "./src/containers/utilityTab.js"
+},
+{
+	"id": "utility.downloadRprts.FileFormatLabel",
+	"description": "File Format",
+	"defaultMessage": "File Format",
+	"filepath": "./src/containers/utilityTab.js"
+},
+{
+	"id": "utility.downloadRports.csvFormat",
+	"description": "Comma separated values (csv)",
+	"defaultMessage": "Comma separated values (csv)",
+	"filepath": "./src/containers/utilityTab.js"
+},
+{
+	"id": "utiltiy.downloadRports.xlsFormat",
+	"description": "ExceL Spreadsheet (xlsx)",
+	"defaultMessage": "ExceL Spreadsheet (xlsx)",
+	"filepath": "./src/containers/utilityTab.js"
+},
+{
+	"id": "utility.goodsRcvdNotes.head",
+	"description": "Goods Recieved Notes",
+	"defaultMessage": "Goods Recieved Notes",
+	"filepath": "./src/containers/utilityTab.js"
+},
+{
+	"id": "utility.stockLedgerHead.head",
+	"description": "Inventory Stock Ledger",
+	"defaultMessage": "Inventory Stock Ledger",
+	"filepath": "./src/containers/utilityTab.js"
+},
+{
+	"id": "utility.stockLedgerRawTransactionHead.head",
+	"description": "Stock Ledger Raw Transactions",
+	"defaultMessage": "Stock Ledger Raw Transactions",
+	"filepath": "./src/containers/utilityTab.js"
+},
+{
+	"id": "utility.uploadBtn.label",
+	"description": "Upload Master Data",
+	"defaultMessage": "Upload Master Data",
+	"filepath": "./src/containers/utilityTab.js"
+},
+{
+	"id": "utility.stockLedger.category.all",
+	"description": "all",
+	"defaultMessage": "All",
+	"filepath": "./src/containers/utilityTab.js"
+},
+{
+	"id": "utility.stockLedger.category.sku",
+	"description": "sku",
+	"defaultMessage": "Specific SKU",
+	"filepath": "./src/containers/utilityTab.js"
+},
+{
+	"id": "utility.stockLedger.incorrectSku",
+	"description": "Please enter correct SKU",
+	"defaultMessage": "Please enter correct SKU",
+	"filepath": "./src/containers/utilityTab.js"
+},
+{
+	"id": "utility.stockLedger.duration.label",
+	"description": "Time Duration:",
+	"defaultMessage": "Time Duration:",
+	"filepath": "./src/containers/utilityTab.js"
+},
+{
+	"id": "utility.stockLedger.duration.today",
+	"description": "Today",
+	"defaultMessage": "Today",
+	"filepath": "./src/containers/utilityTab.js"
+},
+{
+	"id": "utility.stockLedger.duration.yesterday",
+	"description": "Yesterday",
+	"defaultMessage": "Yesterday",
+	"filepath": "./src/containers/utilityTab.js"
+},
+{
+	"id": "utility.stockLedgerRawTransaction.duration.today",
+	"description": "today",
+	"defaultMessage": "Today",
+	"filepath": "./src/containers/utilityTab.js"
+},
+{
+	"id": "pps.mode.reject",
+	"description": "PPS mode change reject",
+	"defaultMessage": "{unsuccessful}/{totalCount} mode change request rejected",
+	"filepath": "./src/utilities/getFormattedMessages.js"
+},
+{
+	"id": "pps.mode.success",
+	"description": "PPS mode change success",
+	"defaultMessage": "Mode change request successfull",
+	"filepath": "./src/utilities/getFormattedMessages.js"
+},
+{
+	"id": "pps.status.reject",
+	"description": "PPS status change reject",
+	"defaultMessage": "{unsuccessful}/{totalCount} status change request rejected",
+	"filepath": "./src/utilities/getFormattedMessages.js"
+},
+{
+	"id": "pps.status.success",
+	"description": "PPS status change success",
+	"defaultMessage": "Status change request successfull",
+	"filepath": "./src/utilities/getFormattedMessages.js"
+},
+{
+	"id": "utility.downloadGRN.generateSuccess",
+	"description": "GRN Request submitted successfully",
+	"defaultMessage": "GRN Request submitted successfully",
+	"filepath": "./src/utilities/getFormattedMessages.js"
+},
+{
+	"id": "utility.downloadInventory.generateSuccess",
+	"description": "Inventory Report Request submitted successfully",
+	"defaultMessage": "Inventory Report Request submitted successfully",
+	"filepath": "./src/utilities/getFormattedMessages.js"
+},
+{
+	"id": "utility.downloadGRN.refreshed",
+	"description": "GRN History Refreshed!",
+	"defaultMessage": "GRN History Refreshed!",
+	"filepath": "./src/utilities/getFormattedMessages.js"
+},
+{
+	"id": "utility.downloadReprt.refreshed",
+	"description": "Reports History Refreshed!",
+	"defaultMessage": "Reports History Refreshed!",
+	"filepath": "./src/utilities/getFormattedMessages.js"
+},
+{
+	"id": "utility.item.recall",
+	"description": "Item recall message",
+	"defaultMessage": "{itemCount} expired items recalled",
+	"filepath": "./src/utilities/statusToString.js"
+}
+]

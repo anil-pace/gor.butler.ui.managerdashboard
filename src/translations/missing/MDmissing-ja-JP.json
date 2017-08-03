@@ -1,0 +1,14 @@
+[
+{
+	"id": "operation.firesafety.heading",
+	"description": "Text for safety heading",
+	"defaultMessage": "Resume Checklist",
+	"filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+},
+{
+	"id": "operation.firesafety.confirm",
+	"description": "Text for Resume Opeartion button",
+	"defaultMessage": "Resume Opeartion",
+	"filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+}
+]
