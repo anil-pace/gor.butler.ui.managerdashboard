@@ -8,10 +8,10 @@ var enTranslationMessages =require ('../translations/en-US.json');
 const MESSAGES_PATTERN='../translations/**/*.json';
 const LANG_DIR       ='../translations/';
 const MISSING_TRANS_DIR = LANG_DIR+'missing/';
-var aMissedTranslations=[];
 
 fs.readdir(LANG_DIR,(err, files)=>{
 	for (let i=0;i<files.length;i++){
+		let aMissedTranslations=[];
 		console.log('Translation files found:'+files[i]);
 		console.log('Reading the translation files');
 		if (files[i].match(/.json/g) && !files[i].match(/en-US.json/g)){
@@ -32,8 +32,9 @@ fs.readdir(LANG_DIR,(err, files)=>{
 						aMissedTranslations.push(JSON.stringify(enTranslationMessages[i],null,'\t'));
 					}
 				}
-				let fsText = '[\n'+aMissedTranslations.join (',\n')+'\n]';
-				fs.appendFile(MISSING_TRANS_DIR+'missing-'+files[i],fsText, (err) => {
+				let fsText = null;
+				fsText ='[\n'+aMissedTranslations.join (',\n')+'\n]';
+				fs.writeFile(MISSING_TRANS_DIR+'missing-'+files[i],fsText, (err) => {
 					if (err) throw err;
 					console.log('Missing Translations Saved for:'+files[i]+
 					            'in file: '+MISSING_TRANS_DIR+'missing-'+files[i] );
