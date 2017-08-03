@@ -13,7 +13,6 @@ import {FormattedMessage} from 'react-intl';
 import {connect} from 'react-redux';
 import HamBurger from '../hamburger/hamburger';
 import NotificationsWrapper from '../../containers/notifications/notificationsWrapper';
-import PauseOperation from '../../containers/emergencyProcess/pauseOperation'; 
 import ResumeOperation from '../../containers/emergencyProcess/resumeOperation'; 
 import {switchModalKey} from '../../actions/validationActions';
 

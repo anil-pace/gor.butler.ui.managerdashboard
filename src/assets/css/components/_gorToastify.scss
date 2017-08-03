@@ -35,14 +35,7 @@
                           text-align: center;
                            float: right;
                            border-left: solid 1px rgba(255, 255, 255, 0.2);
-<<<<<<< HEAD
-                            cursor:pointer;
-                           &.closeButton{
-                               font-size: 24px;
-
-=======
                           cursor:pointer;
-
                             .closeButton{
                               background-image: url(./images/close.png);
                               width: 15px;
@@ -51,7 +44,6 @@
                               margin-top: 15px;
                               cursor: pointer;
                               margin-left: 10px;
->>>>>>> 259304e... Added close icon and fixed  ui issues
                            }
 
                     }

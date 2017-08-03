@@ -6913,10 +6913,6 @@ button:disabled {
   cursor: pointer;
 }
 
-<<<<<<< HEAD
-.gor-toastify .gor-toastify-content .gor-toastify-details.closeButton {
-  font-size: 24px;
-=======
 .gor-toastify .gor-toastify-content .gor-toastify-details .closeButton {
   background-image: url(./images/close.png);
   width: 15px;
@@ -6925,7 +6921,6 @@ button:disabled {
   margin-top: 15px;
   cursor: pointer;
   margin-left: 10px;
->>>>>>> 259304e... Added close icon and fixed  ui issues
 }
 
 .gor-toastify .gor-toastify-content .gor-toastify-updated-time {
