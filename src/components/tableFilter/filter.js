@@ -26,11 +26,13 @@ class Filter extends React.Component{
             defaultMessage="Filter data"/>
                     </div>
                     <div className="gor-filter-header-h2" onClick={this._closeFilter.bind(this)}>
-                        Hide
+                        <FormattedMessage id="gor.filter.hide" description="label for hide" 
+            defaultMessage="Hide"/>
                     </div>
                  </div>
                     <div>{this.props.noDataFlag?
-                            <div className="gor-no-result-filter">No results found, please try again</div>:""}
+                            <div className="gor-no-result-filter"><FormattedMessage id="gor.filter.noResult" description="label for hide" 
+            defaultMessage="No results found, please try again"/></div>:""}
                     </div>
                      <div className="gor-filter-body">
                          <div className="gor-filter-body-input-wrap"> 
@@ -59,7 +61,8 @@ class Filter extends React.Component{
                      </div>
                  <div className="gor-filter-footer"> 
                     <span className="gor-filter-footer-h2" onClick={this._resetFilter.bind(this)}>
-                        Reset
+                        <FormattedMessage id="gor.filter.reset" description="label for reset" 
+            defaultMessage="Reset"/>
                     </span>
                     <div className="gor-filter-btn-wrap">
                         <button className='gor-add-btn' onClick={this._submitFilterForm.bind(this)}>
