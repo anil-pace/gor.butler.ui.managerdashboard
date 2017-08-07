@@ -5,8 +5,6 @@ import {INVENTORY_DATA_HISTORY,INVENTORY_HISTORY_DAYS_COUNT,
   INVENTORY_REFRESHED} from '../constants/frontEndConstants';
 
 
-
-
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -45,7 +43,7 @@ import {INVENTORY_DATA_HISTORY,INVENTORY_HISTORY_DAYS_COUNT,
 
     
     let parseDtInMS,invDate ;
-    invDate = new Date(invObj.date);
+    invDate = new Date(new Date(invObj.date).toLocaleDateString("en-US",{timeZone:sessionStorage.getItem("timeOffset")}));
     invObj.date=invDate.getFullYear() +"-"+(invDate.getMonth()+1)+"-"+("0" + invDate.getDate()).slice(-2);
     parsedDate=new Date(invObj.date);
     parseDtInMS=parsedDate.getTime();
@@ -71,9 +69,9 @@ import {INVENTORY_DATA_HISTORY,INVENTORY_HISTORY_DAYS_COUNT,
     for(let i=0,k=0; k < INVENTORY_HISTORY_DAYS_COUNT ; k++){
       dateToday=new Date(dateToday.setDate(dateToday.getDate()-1));
       invObj=inventory[i] ? inventory[i] : {};
-      let invDate = new Date(invObj.date);
+      let invDate = new Date(new Date(invObj.date).toLocaleDateString("en-US",{timeZone:sessionStorage.getItem("timeOffset")}));
       invDate = new Date(invDate.getFullYear(),invDate.getMonth(),invDate.getDate())
-      let emptyData=(invDate.getDate() === dateToday.getDate() ? false : true);//Object.keys(invObj).length ? false : true;
+      let emptyData=(invDate.getDate() === dateToday.getDate() ? false : true);
       let histDate=!emptyData ? invDate.getTime() : dateToday.getTime();
       invObj["current_stock"]=!emptyData ? (invObj["opening_stock"] + invObj["items_put"])-invObj["items_picked"] : 0;
       invObj.unusedSpace=!emptyData ? (100 - invObj["warehouse_utilization"]) : 100;
