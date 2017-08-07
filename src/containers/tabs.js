@@ -205,18 +205,19 @@ class Tabs extends React.Component{
 
       inventoryvalue=<FormattedNumber value={this.props.space_utilized}/>
       inventoryStatus=<FormattedMessage id="inventoryStatus.tab.heading" description="inventory Status " 
-                                           defaultMessage="{count}% space utilized" values={{count:inventoryvalue}}/>;            
-      auditStatus=<FormattedMessage id="auditStatus.tab.heading" description="audit Status " 
+                                           defaultMessage="{count}% space utilized" values={{count:inventoryvalue}}/>;  
+      if(this.props.audit_count){
+        auditStatus=<FormattedMessage id="auditStatus.tab.heading" description="audit Status " 
                                      defaultMessage="{count} in progress" 
-                                     values={{count:this.props.audit_count?this.props.audit_count:'None'}}/>;          
-      if(this.props.audit_count)
-      {
+                                     values={{count:this.props.audit_count}}/>;
         auditClass=GOR_ONLINE;
       }
-      else
-      {
-        auditClass=GOR_OFFLINE;
-      }
+      else{          
+      auditStatus=<FormattedMessage id="auditStatus.tab.heading.none" description="audit Status " 
+                                     defaultMessage="None"/>; 
+      auditClass=GOR_OFFLINE;
+      }         
+    
       if(this.props.audit_alert) {
         auditClass=(this.props.audit_alert?'gor-alert':auditClass);
         auditStatus=<FormattedMessage id="auditStatus.tab.alert.heading" description="audit Status alert" 

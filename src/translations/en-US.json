@@ -551,6 +551,24 @@
     "filepath": "./src/components/tableFilter/filter.js"
   },
   {
+    "id": "gor.filter.hide",
+    "description": "label for hide",
+    "defaultMessage": "Hide",
+    "filepath": "./src/components/tableFilter/filter.js"
+  },
+  {
+    "id": "gor.filter.noResult",
+    "description": "label for hide",
+    "defaultMessage": "No results found, please try again",
+    "filepath": "./src/components/tableFilter/filter.js"
+  },
+  {
+    "id": "gor.filter.reset",
+    "description": "label for reset",
+    "defaultMessage": "Reset",
+    "filepath": "./src/components/tableFilter/filter.js"
+  },
+  {
     "id": "gor.filter.heading",
     "description": "filter heading",
     "defaultMessage": "Apply filter",
@@ -2370,36 +2388,6 @@
     "filepath": "./src/containers/emergencyProcess/OperationStop.js"
   },
   {
-    "id": "operation.pause.heading",
-    "description": "Text for pause operation heading",
-    "defaultMessage": "Pause Operation",
-    "filepath": "./src/containers/emergencyProcess/pauseOperation.js"
-  },
-  {
-    "id": "operation.pause.text",
-    "description": "Text for pause operation action",
-    "defaultMessage": "All Butler bots, PPS and other sysytem components will be paused once\n              completed the last action",
-    "filepath": "./src/containers/emergencyProcess/pauseOperation.js"
-  },
-  {
-    "id": "operation.pause.error",
-    "description": "Text for wrong password",
-    "defaultMessage": "The entered input does not match. Please try again.",
-    "filepath": "./src/containers/emergencyProcess/pauseOperation.js"
-  },
-  {
-    "id": "operation.pause.cancel",
-    "description": "Text for cancel button",
-    "defaultMessage": "Cancel",
-    "filepath": "./src/containers/emergencyProcess/pauseOperation.js"
-  },
-  {
-    "id": "operation.pause.button",
-    "description": "Text for pause button",
-    "defaultMessage": "Pause Operation",
-    "filepath": "./src/containers/emergencyProcess/pauseOperation.js"
-  },
-  {
     "id": "operation.resume.heading",
     "description": "Text for resume operation heading",
     "defaultMessage": "Resume Operation",
@@ -3676,6 +3664,30 @@
     "filepath": "./src/containers/systemTabs/closePPSList.js"
   },
   {
+    "id": "ppsclose.head.text",
+    "description": "Heading",
+    "defaultMessage": "Close or Force close PPS",
+    "filepath": "./src/containers/systemTabs/closePPSList.js"
+  },
+  {
+    "id": "ppsclose.closeAll",
+    "description": "Heading",
+    "defaultMessage": "CLOSE ALL",
+    "filepath": "./src/containers/systemTabs/closePPSList.js"
+  },
+  {
+    "id": "ppsclose.fcloseAll",
+    "description": "Heading",
+    "defaultMessage": "FORCE CLOSE ALL",
+    "filepath": "./src/containers/systemTabs/closePPSList.js"
+  },
+  {
+    "id": "ppsclose.table.noResult",
+    "description": "Heading",
+    "defaultMessage": "No Results Found",
+    "filepath": "./src/containers/systemTabs/closePPSList.js"
+  },
+  {
     "id": "pps.close.cancel",
     "description": "Text for cancel close",
     "defaultMessage": "CANCEL",
@@ -3984,6 +3996,11 @@
   {
     "id": "v.MODE.notset",
     "defaultMessage": "Not set",
+    "filepath": "./src/containers/systemTabs/ppsFilter.js"
+  },
+  {
+    "id": "pps.range.heading",
+    "defaultMessage": "PERFORMANCE RANGE",
     "filepath": "./src/containers/systemTabs/ppsFilter.js"
   },
   {
@@ -4379,6 +4396,12 @@
     "id": "auditStatus.tab.heading",
     "description": "audit Status",
     "defaultMessage": "{count} in progress",
+    "filepath": "./src/containers/tabs.js"
+  },
+  {
+    "id": "auditStatus.tab.heading.none",
+    "description": "audit Status",
+    "defaultMessage": "None",
     "filepath": "./src/containers/tabs.js"
   },
   {

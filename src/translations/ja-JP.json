@@ -1467,7 +1467,7 @@
  {
    "id": "widget.put.throughput",
    "description": "Throughput message",
-   "defaultMessage": "{pps_count} PPS 棚卸 {throughput} 商品/時間"
+   "defaultMessage": "{count} {pluralMsg} 棚卸 {throughput} 商品/時間"
  },
  {
    "id": "widget.put.offline",
@@ -2505,6 +2505,66 @@
     "id": "user.table.status",
     "description": "Users Status",
     "defaultMessage": "状態"
+  },
+  {
+   "id":"gor.filter.hide",
+   "description":"Filter Hide",
+   "defaultMessage":"隠す"
+  },
+  {
+   "id":"gor.filter.noResult",
+   "description":"No result filter",
+   "defaultMessage":"結果は見つかりませんでした。もう一度お試しください"
+  },
+  {
+   "id":"gor.filter.reset",
+   "description":"Filter reset",
+   "defaultMessage":"リセット"
+  },
+  {
+   "id":"pps.range.heading",
+   "description":"Slider Head",
+   "defaultMessage":"性能範囲"
+  },
+  {
+   "id":"auditStatus.tab.heading.none",
+   "description":"Audit tab header message",
+   "defaultMessage":"なし"
+  },
+  {
+   "id":"ppsclose.table.noResult",
+   "description":"PPS close modal no result",
+   "defaultMessage":"結果は見つかりません"
+  },
+  {
+   "id":"ppsclose.head.text",
+   "description":"PPS close modal header",
+   "defaultMessage":"閉じるまたは強制閉じるPPS"
+  },
+  {
+   "id":"ppsclose.closeAll",
+   "description":"PPS close all text",
+   "defaultMessage":"すべてを閉じる"
+  },
+  {
+   "id":"ppsclose.fcloseAll",
+   "description":"PPS force close all text",
+   "defaultMessage":"強制的にすべて閉じる"
+  },
+  {
+   "id":"ppsclose.close",
+   "description":"Text for close",
+   "defaultMessage":"閉じる"
+  },
+  {
+   "id":"ppsclose.fclose",
+   "description":"Text for close",
+   "defaultMessage":"強制終了"
+  },
+  {
+   "id":"horizontal.graph.fulfilling",
+   "description":"Text for fulfilling",
+   "defaultMessage":"達成された:{count}"
   },
   {
    "id": "audit.table.cancelTask",

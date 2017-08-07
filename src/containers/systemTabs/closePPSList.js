@@ -96,8 +96,8 @@ class ClosePPSList extends React.Component {
             row.push(pendingMSU[checkedPPS[i]]);
             row.push(<div key={i}>
                 <label>
-                <input type='radio' value={close} name={'radio_pps_'+checkedPPS[i]} onChange={this._onRadioChange.bind(this,checkedPPS[i],close)} checked={this.state[checkedPPS[i]].checkedValue ===close}/>Close</label>
-                <label><input type='radio' value={fclose} name={'radio_pps_'+checkedPPS[i]} onChange={this._onRadioChange.bind(this,checkedPPS[i],fclose)} checked={this.state[checkedPPS[i]].checkedValue ===fclose}/>Force Close</label>
+                <input type='radio' value={close} name={'radio_pps_'+checkedPPS[i]} onChange={this._onRadioChange.bind(this,checkedPPS[i],close)} checked={this.state[checkedPPS[i]].checkedValue ===close}/><FormattedMessage id="ppsclose.close" description='Heading' defaultMessage='Close'/></label>
+                <label><input type='radio' value={fclose} name={'radio_pps_'+checkedPPS[i]} onChange={this._onRadioChange.bind(this,checkedPPS[i],fclose)} checked={this.state[checkedPPS[i]].checkedValue ===fclose}/><FormattedMessage id="ppsclose.fclose" description='Heading' defaultMessage='Force Close'/></label>
                 </div>);
              processedData.filteredData.push(row);
              if(!this.state[checkedPPS[i]].checkedValue){
@@ -128,10 +128,10 @@ class ClosePPSList extends React.Component {
                               onSubmit={(e)=> this._handleClosePPS(e)}>
                     <div className="pps-close-wrap">
                     <div className="pps-close-head">
-                      <div className="left-sec"><label>Close or Force close PPS</label></div>
+                      <div className="left-sec"><label><FormattedMessage id="ppsclose.head.text" description='Heading' defaultMessage='Close or Force close PPS'/></label></div>
                       <div className="right-sec">
-                        <a href="javascript:void(0)" className="close-all-link" onClick={this._setAllStatus.bind(this,closeAll)}>CLOSE ALL</a>
-                        <a href="javascript:void(0)" className="fclose-all-link" onClick={this._setAllStatus.bind(this,fcloseAll)}>FORCE CLOSE ALL</a>
+                        <a href="javascript:void(0)" className="close-all-link" onClick={this._setAllStatus.bind(this,closeAll)}><FormattedMessage id="ppsclose.closeAll" description='Heading' defaultMessage='CLOSE ALL'/></a>
+                        <a href="javascript:void(0)" className="fclose-all-link" onClick={this._setAllStatus.bind(this,fcloseAll)}><FormattedMessage id="ppsclose.fcloseAll" description='Heading' defaultMessage='FORCE CLOSE ALL'/></a>
                       </div>
                     </div>
                     <div className="close-pps-table">
@@ -155,7 +155,7 @@ class ClosePPSList extends React.Component {
                                             })}
                                         </GTableRow>
                                     )
-                                }):""}
+                                }):<FormattedMessage id="ppsclose.table.noResult" description='Heading' defaultMessage='No Results Found'/>}
                             </GTableBody>
                         </GTable>
                     </div>
