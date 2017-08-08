@@ -4595,5 +4595,17 @@
    "description": "Item recall message",
    "defaultMessage": "{itemCount}満了された品目が呼び出されました",
    "filepath": "./src/utilities/statusToString.js"
+},
+{
+   "id": "operation.firesafety.heading",
+   "description": "Text for safety heading",
+   "defaultMessage": "チェックリストを続行します",
+   "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+},
+{
+   "id": "operation.firesafety.confirm",
+   "description": "Text for Resume Opeartion button",
+   "defaultMessage": "操作を続行します",
+   "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
 }
 ]
