@@ -39,7 +39,7 @@ class MasterUploadTile extends React.Component{
               stateChanged:stateChanged
             };
         }
-      for (let i=historyData.length - 1; i >= 0; i--) {
+      for (let i=0 ; i< historyData.length ; i++) {
         let status=((historyData[i].created + historyData[i].deleted + historyData[i].error +historyData[i].updated) / historyData[i].total)*100;
             
             masterUploadBar=<AccordianBar timeOffset={this.props.timeOffset}  completed={Math.ceil(status)} showPanel={this.state.showPanel[i]} data={historyData[i]} 

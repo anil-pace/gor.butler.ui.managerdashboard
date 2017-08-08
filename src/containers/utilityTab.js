@@ -533,7 +533,7 @@ class UtilityTab extends React.Component {
 
 	_onMDMRefresh() {
 		var params = {
-			url: UPLOAD_HISTORY_URL,
+			url: UPLOAD_HISTORY_URL+"?&order_by=create_time",
 			method: GET,
 			token: this.props.auth_token,
 			cause: UPLOAD_HISTORY
@@ -543,7 +543,7 @@ class UtilityTab extends React.Component {
 
 	_onInvRprtRefresh() {
 		var params = {
-			url: REPORTS_HISTORY_URL + "?component=inventory",
+			url: REPORTS_HISTORY_URL + "?component=inventory&order_by=create_time",
 			method: GET,
 			token: this.props.auth_token,
 			cause: REPORTS_HISTORY
@@ -553,7 +553,7 @@ class UtilityTab extends React.Component {
 
 	_onGRNRefresh() {
 		var params = {
-			url: REPORTS_HISTORY_URL + "?component=gr",
+			url: REPORTS_HISTORY_URL + "?component=gr&order_by=create_time",
 			method: GET,
 			token: this.props.auth_token,
 			cause: GRN_HISTORY
