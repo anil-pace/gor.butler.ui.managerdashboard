@@ -2567,6 +2567,12 @@
    "defaultMessage":"達成された:{count}"
   },
   {
+    "id": "horizontal.graph.fulfilling",
+    "description": "Fulfilling",
+    "defaultMessage": "完成品: {count}",
+    "filepath": "./src/components/graphd3/graphd3.js"
+  },
+  {
    "id": "audit.table.cancelTask",
    "description": "cancel option for task",
    "defaultMessage": "タスクをキャンセルします",

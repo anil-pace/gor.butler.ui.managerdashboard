@@ -186,6 +186,12 @@
     "filepath": "./src/components/graphd3/graphd3.js"
   },
   {
+    "id": "horizontal.graph.fulfilling",
+    "description": "Fulfilling",
+    "defaultMessage": "Fulfilled: {count}",
+    "filepath": "./src/components/graphd3/graphd3.js"
+  },
+  {
     "id": "snapshot.inventory.usedSpace",
     "description": "Text for used space",
     "defaultMessage": "{utilisedSpace}% space utilized",
@@ -3385,6 +3391,18 @@
     "id": "ppsclose.tblhead3.text",
     "description": "Table third head",
     "defaultMessage": "ACTION",
+    "filepath": "./src/containers/systemTabs/closePPSList.js"
+  },
+  {
+    "id": "ppsclose.close",
+    "description": "Heading",
+    "defaultMessage": "Close",
+    "filepath": "./src/containers/systemTabs/closePPSList.js"
+  },
+  {
+    "id": "ppsclose.fclose",
+    "description": "Heading",
+    "defaultMessage": "Force Close",
     "filepath": "./src/containers/systemTabs/closePPSList.js"
   },
   {

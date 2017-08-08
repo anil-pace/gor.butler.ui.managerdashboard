@@ -78,7 +78,10 @@ class InventoryTab extends React.Component{
 				linechartLabel={linechartLabel} 
 				isPrevDateSelected={this.props.isPrevDateSelected} 
 				inventoryDataPrevious={this.props.inventoryDataPrevious} 
-				snapshotData={snapshotData}/>
+				snapshotData={snapshotData}
+                timeOffset={this.props.timeOffset}
+                />
+
 			</div>
 		);
 	}
@@ -106,7 +109,8 @@ function mapStateToProps(state, ownProps) {
         "noData": state.inventoryInfo.noData,
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
         socketAuthorized: state.recieveSocketActions.socketAuthorized,
-        inventoryRefreshed:state.inventoryInfo.inventoryRefreshed
+        inventoryRefreshed:state.inventoryInfo.inventoryRefreshed,
+        timeOffset:state.authLogin.timeOffset
     }
 }
     function mapDispatchToProps(dispatch){
