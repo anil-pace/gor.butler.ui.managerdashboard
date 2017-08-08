@@ -2562,11 +2562,6 @@
    "defaultMessage":"強制終了"
   },
   {
-   "id":"horizontal.graph.fulfilling",
-   "description":"Text for fulfilling",
-   "defaultMessage":"達成された:{count}"
-  },
-  {
     "id": "horizontal.graph.fulfilling",
     "description": "Fulfilling",
     "defaultMessage": "完成品: {count}",
