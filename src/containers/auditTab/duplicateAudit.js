@@ -55,8 +55,10 @@ class DuplicateAudit extends React.Component{
               </div>
            </div>
               <div className='gor-delete-bottom'>
-                <button className='gor-cancel-btn' onClick={this._removeThisModal.bind(this)}>Close</button>
-                <button className='gor-delete-btn' onClick={this._userDup.bind(this)}>Duplicate audit task</button>
+                <button className='gor-cancel-btn' onClick={this._removeThisModal.bind(this)}><FormattedMessage id="audit.duplicate.close" description='Text for audit duplicate close' 
+            defaultMessage='Close' /></button>
+                <button className='gor-delete-btn' onClick={this._userDup.bind(this)}><FormattedMessage id="audit.duplicate.confirm" description='Text for audit duplicate confirm' 
+            defaultMessage='Duplicate audit task' /></button>
               </div> 
           </div>
         </div>

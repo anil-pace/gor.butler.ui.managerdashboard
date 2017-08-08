@@ -2562,6 +2562,26 @@
    "defaultMessage":"強制終了"
   },
   {
+   "id": "audit.delete.close",
+   "description": "close audit confirm",
+   "defaultMessage": "オフ"
+},
+{
+   "id": "audit.delete.confirm",
+   "description": "audit delete confirm",
+   "defaultMessage": "監査タスクの削除"
+},
+{
+   "id": "audit.duplicate.close",
+   "description": "close audit duplicate",
+   "defaultMessage": "オフ"
+},
+{
+   "id": "audit.duplicate.confirm",
+   "description": "close audit duplicate",
+   "defaultMessage": "重複する監査タスク"
+},
+  {
     "id": "horizontal.graph.fulfilling",
     "description": "Fulfilling",
     "defaultMessage": "完成品: {count}",
@@ -3794,19 +3814,19 @@
 {
    "id": "orderlist.pendingOrders",
    "description": "pendingOrders header ordertable",
-   "defaultMessage": "{pendingOrders, number} {pendingOrders, plural, one {order} other {orders}} 保留",
+   "defaultMessage": "{pendingOrders, number} {pendingOrders, plural, one {注文} other {注文}} 保留",
    "filepath": "./src/containers/orderTab/orderListTable.js"
 },
 {
    "id": "orderlist.totalCompletedOrder",
    "description": "totalCompletedOrder header ordertable",
-   "defaultMessage": "{totalCompletedOrder, number} {totalCompletedOrder, plural, one {order} other {orders}} 完了されました",
+   "defaultMessage": "{totalCompletedOrder, number} {totalCompletedOrder, plural, one {注文} other {注文}} 完了されました",
    "filepath": "./src/containers/orderTab/orderListTable.js"
 },
 {
    "id": "orderlist.itemsPerOrder",
    "description": "itemsPerOrder header ordertable",
-   "defaultMessage": "Avg {itemsPerOrder, number} {itemsPerOrder, plural, one {item} other {items}}/オーダー",
+   "defaultMessage": "平均 {itemsPerOrder, number} {itemsPerOrder, plural, one {項目} other {アイテム}}/オーダー",
    "filepath": "./src/containers/orderTab/orderListTable.js"
 },
 {
