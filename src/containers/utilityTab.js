@@ -722,6 +722,7 @@ class UtilityTab extends React.Component {
 										this
 									)}
 									reportsHistory={this.props.reportsHistory}
+									timeOffset={this.props.timeOffset}
 								/>
 							</UtilityTile>
 						: null}
@@ -739,6 +740,7 @@ class UtilityTab extends React.Component {
 									validatedInvoice={this.props.validatedInvoice}
 									generateReport={this._generateGRN.bind(this)}
 									grnHistory={this.props.grnHistory}
+									timeOffset={this.props.timeOffset}
 								/>
 							</UtilityTile>
 						: null}
@@ -773,6 +775,7 @@ class UtilityTab extends React.Component {
 									}
 									errorCode={this.props.errorCode}
 									maxSize={this.props.maxsize}
+									timeOffset={this.props.timeOffset}
 								/>
 							</UtilityTile>
 						: null}
