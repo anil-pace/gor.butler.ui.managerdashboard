@@ -9,9 +9,9 @@ import InventoryStacked from '../../containers/inventoryTab/inventoryStacked';
 import SnapShot from './snapShot';
 import InventoryHistogram from '../../containers/inventoryTab/inventoryHistogram';
 import ItemCategoryTable from './itemCategoryTable';
-import {LEGEND_ROUND,INV_LINE_LEGEND_IPICKED_COLOR,INV_LINE_LEGEND_CONFIG,INV_LINE_LEGEND_IPUT_COLOR,INV_HIST_LEGEND_COLOR,INV_HIST_LEGEND_CONFIG} from '../../constants/frontEndConstants'
+import {LEGEND_ROUND,INV_LINE_LEGEND_IPICKED_COLOR,INV_LINE_LEGEND_DATA,INV_LINE_LEGEND_CONFIG,INV_LINE_LEGEND_IPUT_COLOR,INV_HIST_LEGEND_DATA,INV_HIST_LEGEND_COLOR,INV_HIST_LEGEND_CONFIG} from '../../constants/frontEndConstants'
 import PickPutLineGraph from './pickPutLineGraph';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage ,FormattedDate} from 'react-intl';
 
  
 
@@ -87,7 +87,7 @@ import { FormattedMessage } from 'react-intl';
 					</div>
 					<div className="stkSnapSht">
 					<div className="snapShtWrap">
-						<SnapShot hasDataChanged={this.props.hasDataChanged} currentDate={this.props.currentDate} snapshotTabData={snapShotData || {}}/>
+						<SnapShot timeOffset = {this.props.timeOffset} hasDataChanged={this.props.hasDataChanged} currentDate={this.props.currentDate} snapshotTabData={snapShotData || {}}/>
 					<InventoryStacked hasDataChanged={this.props.hasDataChanged} snapshotData={snapShotData || {}}/>
 					<ItemCategoryTable hasDataChanged={this.props.hasDataChanged} snapshotData={snapShotData || {}}/>
 					</div>
@@ -111,7 +111,7 @@ Inventory.propTypes={
 	currentDate:React.PropTypes.number,
 	hasDataChanged : React.PropTypes.bool,
 	recreatedData: React.PropTypes.object,
-	noData:React.PropTypes.bool
+	noData:React.PropTypes.bool,
+	timeOffset:React.PropTypes.string
 }
 export default Inventory;
-

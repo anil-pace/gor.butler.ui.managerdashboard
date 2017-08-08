@@ -192,6 +192,12 @@
     "filepath": "./src/components/graphd3/graphd3.js"
   },
   {
+    "id": "horizontal.graph.fulfilling",
+    "description": "Fulfilling",
+    "defaultMessage": "Fulfilled: {count}",
+    "filepath": "./src/components/graphd3/graphd3.js"
+  },
+  {
     "id": "snapshot.inventory.usedSpace",
     "description": "Text for used space",
     "defaultMessage": "{utilisedSpace}% space utilized",
@@ -548,6 +554,24 @@
     "id": "gor.filter.filterLabel",
     "description": "label for filter",
     "defaultMessage": "Filter data",
+    "filepath": "./src/components/tableFilter/filter.js"
+  },
+  {
+    "id": "gor.filter.hide",
+    "description": "label for hide",
+    "defaultMessage": "Hide",
+    "filepath": "./src/components/tableFilter/filter.js"
+  },
+  {
+    "id": "gor.filter.noResult",
+    "description": "label for hide",
+    "defaultMessage": "No results found, please try again",
+    "filepath": "./src/components/tableFilter/filter.js"
+  },
+  {
+    "id": "gor.filter.reset",
+    "description": "label for reset",
+    "defaultMessage": "Reset",
     "filepath": "./src/components/tableFilter/filter.js"
   },
   {
@@ -1064,6 +1088,18 @@
     "id": "stringConfig.md012",
     "description": "Text for safety checklist item 12",
     "defaultMessage": "All paths cleared of any debris.",
+    "filepath": "./src/constants/backEndConstants.js"
+  },
+  {
+    "id": "stringConfig.md013",
+    "description": "Text for safety checklist item 13",
+    "defaultMessage": "Move bots to the PPS location and do an \"init\" after all bots are moved.",
+    "filepath": "./src/constants/backEndConstants.js"
+  },
+  {
+    "id": "stringConfig.md014",
+    "description": "Text for safety checklist item 14",
+    "defaultMessage": "No bots require to be moved to PPS.",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
@@ -2424,6 +2460,42 @@
     "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
   },
   {
+    "id": "misplaced.botId",
+    "description": "bot id",
+    "defaultMessage": "{botid}",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "misplaced.rackId",
+    "description": "rack id",
+    "defaultMessage": "{rackid}",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "misplaced.racklocation",
+    "description": "rack location",
+    "defaultMessage": "{racklocation}",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "misplaced.rackface",
+    "description": "rack face",
+    "defaultMessage": "{rackface}",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "misplaced.ppsid",
+    "description": "pps id",
+    "defaultMessage": "{ppsid}",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "misplaced.ppslocation",
+    "description": "pps location",
+    "defaultMessage": "{ppslocation}",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
     "id": "operation.firesafety.heading",
     "description": "Text for safety heading",
     "defaultMessage": "Resume Checklist",
@@ -2448,9 +2520,45 @@
     "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
   },
   {
-    "id": "operation.safety.errors",
+    "id": "operation.safetychecklist.errors",
     "description": "Text for safety error",
-    "defaultMessage": "System has found some of these steps were not followed. \n                    Please check or contact service engineer for support",
+    "defaultMessage": "System has detected that one or more of the required conditions have not been fulfilled. \n                    Please try again or contact service engineer for support",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "operation.safetychecklistTable.botid",
+    "description": "Bot ID",
+    "defaultMessage": "Bot ID",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "operation.safetychecklistTable.rockid",
+    "description": "Rack ID",
+    "defaultMessage": "Rack ID",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "operation.safetychecklistTable.rocklocation",
+    "description": "Rack location",
+    "defaultMessage": "Rack location",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "operation.safetychecklistTable.rackface",
+    "description": "Rack face",
+    "defaultMessage": "Rack face",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "operation.safetychecklistTable.ppsid",
+    "description": "PPS ID",
+    "defaultMessage": "PPS ID",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "operation.safetychecklistTable.ppslocation",
+    "description": "PPS location",
+    "defaultMessage": "PPS location",
     "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
   },
   {
@@ -3592,6 +3700,42 @@
     "filepath": "./src/containers/systemTabs/closePPSList.js"
   },
   {
+    "id": "ppsclose.close",
+    "description": "Heading",
+    "defaultMessage": "Close",
+    "filepath": "./src/containers/systemTabs/closePPSList.js"
+  },
+  {
+    "id": "ppsclose.fclose",
+    "description": "Heading",
+    "defaultMessage": "Force Close",
+    "filepath": "./src/containers/systemTabs/closePPSList.js"
+  },
+  {
+    "id": "ppsclose.head.text",
+    "description": "Heading",
+    "defaultMessage": "Close or Force close PPS",
+    "filepath": "./src/containers/systemTabs/closePPSList.js"
+  },
+  {
+    "id": "ppsclose.closeAll",
+    "description": "Heading",
+    "defaultMessage": "CLOSE ALL",
+    "filepath": "./src/containers/systemTabs/closePPSList.js"
+  },
+  {
+    "id": "ppsclose.fcloseAll",
+    "description": "Heading",
+    "defaultMessage": "FORCE CLOSE ALL",
+    "filepath": "./src/containers/systemTabs/closePPSList.js"
+  },
+  {
+    "id": "ppsclose.table.noResult",
+    "description": "Heading",
+    "defaultMessage": "No Results Found",
+    "filepath": "./src/containers/systemTabs/closePPSList.js"
+  },
+  {
     "id": "pps.close.cancel",
     "description": "Text for cancel close",
     "defaultMessage": "CANCEL",
@@ -3894,6 +4038,11 @@
   {
     "id": "v.MODE.notset",
     "defaultMessage": "Not set",
+    "filepath": "./src/containers/systemTabs/ppsFilter.js"
+  },
+  {
+    "id": "pps.range.heading",
+    "defaultMessage": "PERFORMANCE RANGE",
     "filepath": "./src/containers/systemTabs/ppsFilter.js"
   },
   {
@@ -4283,6 +4432,12 @@
     "id": "auditStatus.tab.heading",
     "description": "audit Status",
     "defaultMessage": "{count} in progress",
+    "filepath": "./src/containers/tabs.js"
+  },
+  {
+    "id": "auditStatus.tab.heading.none",
+    "description": "audit Status",
+    "defaultMessage": "None",
     "filepath": "./src/containers/tabs.js"
   },
   {

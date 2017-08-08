@@ -234,7 +234,6 @@ class PPS extends React.Component {
 
             }
             detail.totalUser=totalUser;
-            detail.profiles=data[i].pps_profiles
             PPSData.push(detail);
         }
         return PPSData;
@@ -251,14 +250,14 @@ class PPS extends React.Component {
     }
 
     /*handler for status change*/
-    handleStatusChange(selection,requestObj){
+handleStatusChange(selection,requestObj){
       var checkedPPS=[], j=0, sortedIndex;
         
         if(selection.value === "close"){
              if(!requestObj){
              let selectedPps = this.props.checkedPps,openPps={};
              for(let k in selectedPps){
-                if(selectedPps[k].status.toLowerCase() === "open" /*PPS_STATUS_OPEN.toLowerCase()*/){
+                if(selectedPps[k].statusClass.toLowerCase() === "open" /*PPS_STATUS_OPEN.toLowerCase()*/){
                     openPps[k] = selectedPps[k];
                 }
              }
@@ -389,7 +388,7 @@ class PPS extends React.Component {
                                           defaultMessage="Change PPS Mode"/>
         var openCount=0,closeCount=0;
         for(let k in this.props.checkedPps){
-            if(this.props.checkedPps[k].status.toLowerCase() === "close" || this.props.checkedPps[k].status.toLowerCase() === "force close"){
+            if(this.props.checkedPps[k].statusClass.toLowerCase() === "close" || this.props.checkedPps[k].statusClass.toLowerCase() === "force_close"){
                 closeCount++
             }
             else{
@@ -618,4 +617,3 @@ PPS.PropTypes={
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PPS) ;
-

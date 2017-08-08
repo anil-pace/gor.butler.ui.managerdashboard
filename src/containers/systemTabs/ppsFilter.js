@@ -23,6 +23,7 @@ class PPSFilter extends React.Component{
 
 
     _closeFilter() {
+        let filterState=!this.props.showFilter;
         this.props.showTableFilter(false);
     } 
 
@@ -79,7 +80,7 @@ class PPSFilter extends React.Component{
 
     _handleRangeSlider(){
       return <div>
-       <span className="sliderHeaderText">PERFORMANCE RANGE</span>
+       <span className="sliderHeaderText"><FormattedMessage id="pps.range.heading" defaultMessage="PERFORMANCE RANGE"/></span>
 
 
                              <RangeSlider.Range 
@@ -221,5 +222,4 @@ togglePPSFilter:React.PropTypes.func
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(PPSFilter) ;
-
 
