@@ -97,6 +97,7 @@ class DownloadGRNTile extends React.Component {
               day="2-digit"
               hour="2-digit"
               minute="2-digit"
+              timeZone={this.props.timeOffset}
             />
           </div>
         </ListItem>
