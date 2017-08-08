@@ -80,7 +80,7 @@ class PPSFilter extends React.Component{
 
     _handleRangeSlider(){
       return <div>
-       <span className="sliderHeaderText">PERFORMANCE RANGE</span>
+       <span className="sliderHeaderText"><FormattedMessage id="pps.range.heading" defaultMessage="PERFORMANCE RANGE"/></span>
 
 
                              <RangeSlider.Range 
