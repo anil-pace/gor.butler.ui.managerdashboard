@@ -98,7 +98,7 @@ class DownloadReportsTile extends React.Component {
       //no history of files present from the backend
       return result;
     }
-    for (let i = reportsHistory.length - 1; i >= 0; i--) {
+    for (let i = 0 ; i< reportsHistory.length; i++) {
       let listItem = (
         <ListItem
           index={i}
@@ -128,6 +128,7 @@ class DownloadReportsTile extends React.Component {
               day="2-digit"
               hour="2-digit"
               minute="2-digit"
+              timeZone={this.props.timeOffset}
             />
           </div>
         </ListItem>
