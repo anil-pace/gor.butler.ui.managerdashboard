@@ -87,7 +87,7 @@ import { FormattedMessage ,FormattedDate} from 'react-intl';
 					</div>
 					<div className="stkSnapSht">
 					<div className="snapShtWrap">
-						<SnapShot hasDataChanged={this.props.hasDataChanged} currentDate={this.props.currentDate} snapshotTabData={snapShotData || {}}/>
+						<SnapShot timeOffset = {this.props.timeOffset} hasDataChanged={this.props.hasDataChanged} currentDate={this.props.currentDate} snapshotTabData={snapShotData || {}}/>
 					<InventoryStacked hasDataChanged={this.props.hasDataChanged} snapshotData={snapShotData || {}}/>
 					<ItemCategoryTable hasDataChanged={this.props.hasDataChanged} snapshotData={snapShotData || {}}/>
 					</div>
@@ -111,7 +111,7 @@ Inventory.propTypes={
 	currentDate:React.PropTypes.number,
 	hasDataChanged : React.PropTypes.bool,
 	recreatedData: React.PropTypes.object,
-	noData:React.PropTypes.bool
+	noData:React.PropTypes.bool,
+	timeOffset:React.PropTypes.string
 }
 export default Inventory;
-
