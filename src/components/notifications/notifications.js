@@ -6,10 +6,24 @@ import React  from 'react';
 import ResultPane from './resultPane';
 import ReactDOM  from 'react-dom';
 import NotificationSearchPanel from './notificationSearchPanel';
-import { FormattedRelative , FormattedMessage} from 'react-intl';
+import { FormattedRelative , FormattedMessage,defineMessages} from 'react-intl';
 
 
+//Mesages for internationalization
+const messages=defineMessages({
+  notificationPlaceholder: {
+    id: 'notifications.search.placeholder',
+    description: 'Notification placeholder',
+    defaultMessage: "Search Notifications"
+  },
+  notificationButtonText: {
+    id: 'notifications.search.button',
+    description: 'Notification button',
+    defaultMessage: "SEARCH"
+  }
 
+
+});
 
 class Notification extends React.Component{
 	constructor(){
@@ -46,6 +60,12 @@ class Notification extends React.Component{
   	} 
 	
 	render(){
+		var notificationHeadText = <FormattedMessage id="notifications.search.head" 
+								description='Notification header message' 
+								defaultMessage='Notifications'
+								/>
+		var notificationPlaceholder = this.context.intl.formatMessage(messages.notificationPlaceholder)
+		var notificationButtonText = this.context.intl.formatMessage(messages.notificationButtonText)
 		return (
 			<div>
 			<div className="notificationBody" onClick={this._displayResults.bind(this,false)}>
@@ -56,7 +76,11 @@ class Notification extends React.Component{
 			</div>
 			
 			<ResultPane display={this.state.displayResults}>
-				<NotificationSearchPanel onPaneSearch={this.props.onPaneSearch}/>
+				<NotificationSearchPanel 
+				headerText={notificationHeadText} 
+				notificationPlaceholder={notificationPlaceholder}
+				notificationButtonText={notificationButtonText}
+				onPaneSearch={this.props.onPaneSearch}/>
 				<div className="searchResults" onScroll={(event) => this.props.onScrollHandler(event)}>
 				
 					{this.props.notificationData.length ? this.props.notificationData.map((tuple, index) => (
@@ -90,7 +114,9 @@ class Notification extends React.Component{
 		);
 	}
 }
-
+Notification.contextTypes={
+  intl: React.PropTypes.object.isRequired
+}
 Notification.propTypes={
 	unreadCount: React.PropTypes.number,
 	onPaneSearch: React.PropTypes.func.isRequired,

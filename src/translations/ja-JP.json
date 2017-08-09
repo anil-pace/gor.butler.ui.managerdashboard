@@ -1422,7 +1422,7 @@
  {
    "id": "widget.pick.throughput",
    "description": "Throughput message",
-   "defaultMessage": "{pps_count} PPS 棚卸 {throughput} 商品/時間"
+   "defaultMessage": "{count} PPS 棚卸 {throughput} 商品/時間"
  },
  {
    "id": "widget.pick.lowright",
@@ -1447,7 +1447,7 @@
  {
    "id": "widget.pick.statusleft.atrisk",
    "description": "Text for orders at risk",
-   "defaultMessage": "{count_risk} {count_risk、複数、１つの{order} その他 {orders}}のリスク"
+   "defaultMessage": "{count_risk} {count_risk, plural, one {注文} other {注文}} のリスク"
  },
  {
    "id": "widget.pick.offline",
@@ -2580,6 +2580,28 @@
    "id": "audit.duplicate.confirm",
    "description": "close audit duplicate",
    "defaultMessage": "重複する監査タスク"
+},
+{
+   "id": "notifications.search.head",
+   "description": "Notifications header text",
+   "defaultMessage": "通知"
+},
+{
+   "id":"audit.cancellation.success",
+   "description": "Audit cancellation success",
+   "defaultMessage": "監査のキャンセル要求が送信されました"
+},
+{
+   "id": "notifications.search.placeholder",
+   "description": "Notifications search placeholder",
+   "defaultMessage": "検索通知",
+   "filepath": "./src/components/notifications/notifications.js"
+},
+{
+   "id": "notifications.search.button",
+   "description": "Notifications search button",
+   "defaultMessage": "探す",
+    "filepath": "./src/components/notifications/notifications.js"
 },
   {
     "id": "horizontal.graph.fulfilling",
@@ -4262,7 +4284,7 @@
 {
    "id": "usersStatus.tab.heading#",
    "description": "users Status",
-   "defaultMessage":"{count} {count, plural, =0 {user} one {user} other {users}} オンライン",
+   "defaultMessage":"{count} {count, plural, =0 {ユーザー} one {ユーザー} other {ユーザー}} オンライン",
    "filepath": "./src/containers/tabs.js"
 },
 {
