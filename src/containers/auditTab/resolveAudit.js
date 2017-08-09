@@ -61,12 +61,20 @@ class ResolveAudit extends React.Component{
       totalMismatch=(data[i].expected_quantity-data[i].actual_quantity) + totalMismatch;
       auditData.slot_id=data[i].slot_id;
       auditData.auditLineId=data[i].auditline_id;
+        if(data[i].status){
+            /**
+             * Data from the backend for the comparison.
+             */
+            auditData.status_data=data[i].status
+        }
       if(this.context.intl.formatMessage(stringConfig[data[i].status])) {
         auditData.status=this.context.intl.formatMessage(stringConfig[data[i].status]);
       } 
       else{
         auditData.status=data[i].status;
       }
+
+
       if(data[i].pdfa_audit_attributes && auditLines[i].pdfa_audit_attributes[Object.keys(auditLines[0].pdfa_audit_attributes)]) {
         auditData.attributeDetail=auditLines[i].pdfa_audit_attributes[Object.keys(auditLines[0].pdfa_audit_attributes)];  //assuming only one attributes is there as of now (kerry specific) 
       }
