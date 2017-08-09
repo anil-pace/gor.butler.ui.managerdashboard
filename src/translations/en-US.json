@@ -461,6 +461,18 @@
     "filepath": "./src/components/login/messages.js"
   },
   {
+    "id": "notifications.search.placeholder",
+    "description": "Notification placeholder",
+    "defaultMessage": "Search Notifications",
+    "filepath": "./src/components/notifications/notifications.js"
+  },
+  {
+    "id": "notifications.search.button",
+    "description": "Notification button",
+    "defaultMessage": "SEARCH",
+    "filepath": "./src/components/notifications/notifications.js"
+  },
+  {
     "id": "notifications.search.head",
     "description": "Notification header message",
     "defaultMessage": "Notifications",
@@ -1514,6 +1526,12 @@
     "id": "audit.cancellation.error.g024",
     "description": "Audit Id cancellation request has been process and cannot be cancelled",
     "defaultMessage": "Audit Id cancellation request has been process and cannot be cancelled",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "audit.cancellation.success",
+    "description": "Audit Id cancellation is successful",
+    "defaultMessage": "Request sent for audit cancellation",
     "filepath": "./src/constants/messageConstants.js"
   },
   {
