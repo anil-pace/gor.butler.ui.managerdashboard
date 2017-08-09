@@ -2581,6 +2581,28 @@
    "description": "close audit duplicate",
    "defaultMessage": "重複する監査タスク"
 },
+{
+   "id": "notifications.search.head",
+   "description": "Notifications header text",
+   "defaultMessage": "通知"
+},
+{
+   "id":"audit.cancellation.success",
+   "description": "Audit cancellation success",
+   "defaultMessage": "監査のキャンセル要求が送信されました"
+},
+{
+   "id": "notifications.search.placeholder",
+   "description": "Notifications search placeholder",
+   "defaultMessage": "検索通知",
+   "filepath": "./src/components/notifications/notifications.js"
+},
+{
+   "id": "notifications.search.button",
+   "description": "Notifications search button",
+   "defaultMessage": "探す",
+    "filepath": "./src/components/notifications/notifications.js"
+},
   {
     "id": "horizontal.graph.fulfilling",
     "description": "Fulfilling",

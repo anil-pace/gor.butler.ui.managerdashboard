@@ -461,6 +461,12 @@
     "filepath": "./src/components/login/messages.js"
   },
   {
+    "id": "notifications.search.head",
+    "description": "Notification header message",
+    "defaultMessage": "Notifications",
+    "filepath": "./src/components/notifications/notifications.js"
+  },
+  {
     "id": "notifications.read.message",
     "description": "No unread notifications",
     "defaultMessage": "You have no unread Notifications",

@@ -92,7 +92,8 @@ import {
 	g020,
 	g021,
 	g023,
-	g024
+	g024,
+	CANCEL_SUCCESS
 } from "../constants/messageConstants";
 import { ShowError } from "./showError";
 import { endSession } from "./endSession";
@@ -242,7 +243,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
 				}
 			} else {
 				//SUCCESS
-				store.dispatch(notifySuccess(res.data));
+				store.dispatch(notifySuccess(CANCEL_SUCCESS));
 			}
 			store.dispatch(setAuditSpinner(false));
 			store.dispatch(setAuditRefresh(true));
