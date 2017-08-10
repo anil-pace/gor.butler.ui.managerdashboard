@@ -97,7 +97,7 @@ class PPSList extends React.Component {
                                         <div className={[profile.profile_name===self.props.selectedProfile.profile_name?'selected':'','pps-profile-name'].join(" ")}>{profile.profile_name}</div>
                                         <div className="profile-label-container">
                                             {profile.applied && <span className="profile-applied-label"><FormattedMessage id="pps.configuration.applied.text" description="Applied" defaultMessage="Applied"/></span>}
-                                            {profile.requested && <span className="profile-requested-label"><FormattedMessage id="pps.configuration.requested.text" description="Requested" defaultMessage="Requested"/></span>}
+                                            {profile.requested && !profile.applied && <span className="profile-requested-label"><FormattedMessage id="pps.configuration.requested.text" description="Requested" defaultMessage="Requested"/></span>}
                                         </div>
 
                                     </div>
