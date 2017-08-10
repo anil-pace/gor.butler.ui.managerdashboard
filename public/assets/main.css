@@ -8140,6 +8140,18 @@ button:disabled {
   padding: 1.875rem;
   padding-bottom: 0;
   min-height: 3.125rem;
+  clear: both;
+  overflow: auto;
+}
+
+.gor-create-profile .gor-create-profile-header .gor-question {
+  float: left;
+}
+
+.gor-create-profile .gor-create-profile-header .gor-create-profile-header-description {
+  font-size: 16px;
+  margin-top: 5px;
+  display: block;
 }
 
 .gor-create-profile .gor-create-profile-body {

@@ -426,6 +426,16 @@
     padding: calculateRem(30px);
     padding-bottom: 0;
     min-height: calculateRem(50px);
+    clear:both;
+    overflow: auto;
+    .gor-question{
+      float:left;
+    }
+    .gor-create-profile-header-description{
+      font-size: 16px;
+      margin-top:5px;
+      display: block;
+    }
   }
   .gor-create-profile-body {
     font-size: 14px;
