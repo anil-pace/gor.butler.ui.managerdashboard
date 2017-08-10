@@ -88,13 +88,13 @@ export function ppsConfiguration(state = {}, action) {
              * Select a PPS or pps with a profile
              */
             selected_pps = JSON.parse(JSON.stringify(action.data.pps || state.selectedPPS))
-            pps_list=state.ppsList
+            pps_list=JSON.parse(JSON.stringify(state.ppsList))
             if(action.data.pps_profiles){
                 /**
                  * Create a copy of selected PPS profile
                  * and selects it.
                  */
-                selected_profile = action.data.pps_profiles ? action.data.pps_profiles.filter(function(profile){ return profile.pps_bin_details})[0]:null
+                selected_profile = action.data.pps_profiles ? JSON.parse(JSON.stringify(action.data.pps_profiles.filter(function(profile){ return profile.pps_bin_details})[0])):null
                 selected_pps.pps_profiles = JSON.parse(JSON.stringify(action.data.pps_profiles))
                 pps_list=state.ppsList.map(function(pps){
                     if(pps.pps_id===selected_pps.pps_id){
@@ -103,7 +103,7 @@ export function ppsConfiguration(state = {}, action) {
                     return pps
                 })
             }else{
-                selected_profile=selected_pps.pps_profiles.filter(function(profile){return profile.pps_bin_details})[0]
+                selected_profile=JSON.parse(JSON.stringify(selected_pps.pps_profiles.filter(function(profile){return profile.pps_bin_details})[0]))
             }
 
             return Object.assign({}, state, {

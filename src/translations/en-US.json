@@ -1067,6 +1067,18 @@
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
+    "id": "stringConfig.md013",
+    "description": "Text for safety checklist item 13",
+    "defaultMessage": "Move bots to the PPS location and do an \"init\" after all bots are moved.",
+    "filepath": "./src/constants/backEndConstants.js"
+  },
+  {
+    "id": "stringConfig.md014",
+    "description": "Text for safety checklist item 14",
+    "defaultMessage": "No bots require to be moved to PPS.",
+    "filepath": "./src/constants/backEndConstants.js"
+  },
+  {
     "id": "stringConfig.audit_reaudited",
     "description": "Text for audit reaudited status",
     "defaultMessage": "Re-audited",
@@ -2424,6 +2436,42 @@
     "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
   },
   {
+    "id": "misplaced.botId",
+    "description": "bot id",
+    "defaultMessage": "{botid}",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "misplaced.rackId",
+    "description": "rack id",
+    "defaultMessage": "{rackid}",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "misplaced.racklocation",
+    "description": "rack location",
+    "defaultMessage": "{racklocation}",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "misplaced.rackface",
+    "description": "rack face",
+    "defaultMessage": "{rackface}",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "misplaced.ppsid",
+    "description": "pps id",
+    "defaultMessage": "{ppsid}",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "misplaced.ppslocation",
+    "description": "pps location",
+    "defaultMessage": "{ppslocation}",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
     "id": "operation.firesafety.heading",
     "description": "Text for safety heading",
     "defaultMessage": "Resume Checklist",
@@ -2448,9 +2496,45 @@
     "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
   },
   {
-    "id": "operation.safety.errors",
+    "id": "operation.safetychecklist.errors",
     "description": "Text for safety error",
-    "defaultMessage": "System has found some of these steps were not followed. \n                    Please check or contact service engineer for support",
+    "defaultMessage": "System has detected that one or more of the required conditions have not been fulfilled. \n                    Please try again or contact service engineer for support",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "operation.safetychecklistTable.botid",
+    "description": "Bot ID",
+    "defaultMessage": "Bot ID",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "operation.safetychecklistTable.rockid",
+    "description": "Rack ID",
+    "defaultMessage": "Rack ID",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "operation.safetychecklistTable.rocklocation",
+    "description": "Rack location",
+    "defaultMessage": "Rack location",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "operation.safetychecklistTable.rackface",
+    "description": "Rack face",
+    "defaultMessage": "Rack face",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "operation.safetychecklistTable.ppsid",
+    "description": "PPS ID",
+    "defaultMessage": "PPS ID",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "operation.safetychecklistTable.ppslocation",
+    "description": "PPS location",
+    "defaultMessage": "PPS location",
     "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
   },
   {
