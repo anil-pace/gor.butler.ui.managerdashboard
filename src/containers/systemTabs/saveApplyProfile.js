@@ -27,9 +27,14 @@ class SaveApplyProfile extends React.Component {
             <div className='gor-create-profile'>
                 <div className='gor-create-profile-header'>
                     <div className='gor-question gor-align-middle'></div>
-                    <span><FormattedMessage id="pps.configuration.confirm.saveAndapply.profile"
-                                            description="Save and ppply Profile to PPS"
-                                            defaultMessage="Are you sure you want to save and apply the profile?"/></span>
+                    <div><span><FormattedMessage id="pps.configuration.confirm.saveAndapply.profile"
+                                                                        description="Save and ppply Profile to PPS"
+                                                                        defaultMessage="Are you sure you want to save and apply the profile?"/></span>
+                        <span className="gor-create-profile-header-description"><span><FormattedMessage id="pps.configuration.confirm.saveAndapply.profile.description"
+                                                                                                        description="Profile will be applied after pending tasks are completed"
+                                                                                                        defaultMessage="Profile will be applied after pending tasks are completed"/></span></span></div>
+
+
                 </div>
                 <div className="gor-create-profile-body">
                     <div style={{display: 'table-cell', verticalAlign: 'middle'}}>
