@@ -61,6 +61,12 @@ class ResolveAudit extends React.Component{
       totalMismatch=(data[i].expected_quantity-data[i].actual_quantity) + totalMismatch;
       auditData.slot_id=data[i].slot_id;
       auditData.auditLineId=data[i].auditline_id;
+        if(data[i].status){
+            /**
+             * Data from the backend for the comparison.
+             */
+            auditData.status_data=data[i].status
+        }
       if(this.context.intl.formatMessage(stringConfig[data[i].status])) {
         auditData.status=this.context.intl.formatMessage(stringConfig[data[i].status]);
       } 
