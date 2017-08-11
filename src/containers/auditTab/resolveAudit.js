@@ -322,7 +322,7 @@ class ResolveAudit extends React.Component{
                           </button>
                         </div>
                         <div className="gor-auditresolve-btn">
-                          <button className="gor-add-btn" onClick={this._confirmIssues.bind(this)}>
+                          <button disabled={!this.state.checkedState || this.state.checkedState.length<1} className="gor-add-btn" onClick={this._confirmIssues.bind(this)}>
                             <FormattedMessage id="resolveAudit.confirmLabel" description='button label for confirm' defaultMessage='Confirm'/>
                           </button>
                         </div>   
