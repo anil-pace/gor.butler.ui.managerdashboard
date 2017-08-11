@@ -51,7 +51,9 @@
 		.gor-paginate-right-btn {
 			display: inline-block;
 	    	border-style: solid;
-	    	border-width: calculateRem(1px);
+	    	border-top-width: calculateRem(1px);
+	    	border-bottom-width: calculateRem(1px);
+	    	border-right-width: calculateRem(1px);
 	    	border-left-width: calculateRem(0px);
 	    	width: calculateRem(46px);
 	    	height: calculateRem(35px);
@@ -69,7 +71,9 @@
 		.gor-paginate-left-btn {
 			display: inline-block;
 	    	border-style: solid;
-	    	border-width: calculateRem(1px);
+	    	border-left-width: calculateRem(1px);
+	    	border-top-width: calculateRem(1px);
+	    	border-bottom-width: calculateRem(1px);
 	    	border-right-width: calculateRem(0px);
 	    	width: calculateRem(46px);
 	    	height: calculateRem(35px);
@@ -86,7 +90,9 @@
 		.gor-paginate-middle-left-btn {
 			display: inline-block;
 	    	border-style: solid;
-	    	border-width: calculateRem(1px);
+	    	border-top-width: calculateRem(1px);
+	    	border-bottom-width: calculateRem(1px);
+	    	border-left-width: calculateRem(1px);
 	    	border-right-width: calculateRem(0px);
 	    	width: calculateRem(46px);
 	    	height: calculateRem(35px);
