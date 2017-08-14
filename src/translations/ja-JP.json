@@ -92,7 +92,7 @@
  {
    "id": "inventory.linechart.legendPut",
    "description": "Inventory Linechart Legend for put",
-   "defaultMessage": "入荷済商品"
+   "defaultMessage": "入庫済商品"
  },
  {
    "id": "inventory.header",
@@ -117,7 +117,7 @@
  {
    "id": "inventory.linechart.toolTipPut",
    "description": "Text for put in tooltip",
-   "defaultMessage": "入荷"
+   "defaultMessage": "入庫"
  },
  {
    "id": "inventory.linechart.toolTipPick",
@@ -252,12 +252,12 @@
  {
    "id": "pps.tab.heading",
    "description": "pps tab",
-   "defaultMessage": "ピック入荷ステーション"
+   "defaultMessage": "入出庫ステーション"
  },
  {
    "id": "chargingstation.tab.heading",
    "description": "charging station tab",
-   "defaultMessage": "充電所"
+   "defaultMessage": "充電器"
  },
  {
    "id": "stringConfig.on",
@@ -282,7 +282,7 @@
  {
    "id": "stringConfig.put",
    "description": "Text to show put",
-   "defaultMessage": "入荷"
+   "defaultMessage": "入庫"
  },
  {
    "id": "stringConfig.audit",
@@ -347,7 +347,7 @@
  {
    "id": "stringConfig.abandoned",
    "description": "Text to show abandoned",
-   "defaultMessage": "放棄"
+   "defaultMessage": "中断"
  },
  {
    "id": "stringConfig.manual",
@@ -662,7 +662,7 @@
  {
    "id": "widget.audit.status.idle",
    "description": "Audit PPS idle message",
-   "defaultMessage": "{count} アイドル PPS (棚卸モード)"
+   "defaultMessage": "{count} 待機 PPS (棚卸モード)"
  },
  {
    "id": "widget.audit.throughput",
@@ -1127,17 +1127,17 @@
  {
    "id": "pickPerformance.dropdown",
    "description": "pickPerformance dropdown label",
-   "defaultMessage": "PPS - ピックパフォーマンス"
+   "defaultMessage": "PPS - ピック生産性"
  },
  {
    "id": "putPerformance.dropdown",
    "description": "putPerformance dropdown label",
-   "defaultMessage": "PPS - 入荷パフォーマンス"
+   "defaultMessage": "PPS - 入庫生産性"
  },
  {
    "id": "auditPerformance.dropdown",
    "description": "auditPerformance dropdown label",
-   "defaultMessage": "PPS - 棚卸パフォーマンス"
+   "defaultMessage": "PPS - 棚卸生産性"
  },
  {
    "id": "orderList.progress.status",
@@ -1187,7 +1187,7 @@
  {
    "id": "orderlist.table.breachedDrop",
    "description": "breached dropdown option for orderlist",
-   "defaultMessage": "注文破棄"
+   "defaultMessage": "注文未達成"
  },
  {
    "id": "pendingDrop.table.allDrop",
@@ -1272,7 +1272,7 @@
  {
    "id": "orderlist.table.operatingMode",
    "description": "recievedTime for Orders",
-   "defaultMessage": "受領時間"
+   "defaultMessage": "受信時間"
  },
  {
    "id": "orderlist.table.completedTime",
@@ -1382,22 +1382,22 @@
  {
    "id": "systemHealth.dropdown",
    "description": "systemHealth dropdown label",
-   "defaultMessage": "システムのヘルス"
+   "defaultMessage": "システム状態"
  },
  {
    "id": "PPSpickPerformance.dropdown",
    "description": "PPSpickPerformance dropdown label",
-   "defaultMessage": "PPS - ピックパフォーマンス"
+   "defaultMessage": "PPS - ピック生産性"
  },
  {
    "id": "PPSputPerformance.dropdown",
    "description": "PPSputPerformance dropdown label",
-   "defaultMessage": "PPS - 入荷パフォーマンス"
+   "defaultMessage": "PPS - 入庫生産性"
  },
  {
    "id": "PPSauditPerformance.dropdown",
    "description": "PPSauditPerformance dropdown label",
-   "defaultMessage": "PPS - 棚卸パフォーマンス"
+   "defaultMessage": "PPS - 棚卸生産性"
  },
  {
    "id": "health.noData",
@@ -1417,7 +1417,7 @@
  {
    "id": "widget.pick.idle",
    "description": "Pick PPS idle message",
-   "defaultMessage": "{count} アイドルPPS (ピックモード)"
+   "defaultMessage": "{count} 待機PPS (ピックモード)"
  },
  {
    "id": "widget.pick.throughput",
@@ -1462,7 +1462,7 @@
  {
    "id": "widget.put.status.idle",
    "description": "Put PPS idle message",
-   "defaultMessage": "{count} アイドル PPS (入荷モード)"
+   "defaultMessage": "{count} 待機 PPS (入庫モード)"
  },
  {
    "id": "widget.put.throughput",
@@ -1537,7 +1537,7 @@
  {
    "id": "butlerbot.table.noData",
    "description": "No data message for butlerbot table",
-   "defaultMessage": "バトラー・ボットは見つかりません"
+   "defaultMessage": "バトラーは見つかりません"
  },
  {
    "id": "butlerBot.table.heading",
@@ -1567,7 +1567,7 @@
  {
    "id": "ButlerBotTable.botState",
    "description": "bot state for ButlerBotTable",
-   "defaultMessage": "ピック ({pick}) . 入荷 ({put}) . 充電 ({charging}) . アイドル ({idle})"
+   "defaultMessage": "ピック ({pick}) . 入庫 ({put}) . 充電 ({charging}) . 待機 ({idle})"
  },
  {
    "id": "butlerBot.table.msu",
@@ -1602,7 +1602,7 @@
  {
    "id": "chargersDetail.name.prefix",
    "description": "prefix for cs id in chargersDetail",
-   "defaultMessage": "充電所 - {csId}"
+   "defaultMessage": "充電器 - {csId}"
  },
  {
    "id": "chargersDetail.butler.prefix",
@@ -1697,7 +1697,7 @@
  {
    "id": "PPS.table.pickDrop",
    "description": "pick dropdown option for PPS",
-   "defaultMessage": "入荷"
+   "defaultMessage": "入庫"
  },
  {
    "id": "PPS.table.putDrop",
@@ -1747,12 +1747,12 @@
  {
    "id": "PPStable.ppsState",
    "description": "pps state for PPStable",
-   "defaultMessage": "ピック ({pick}) . 入荷 ({put}) . 棚卸 ({audit}) . 未設定 ({notSet})"
+   "defaultMessage": "ピック ({pick}) . 入庫 ({put}) . 棚卸 ({audit}) . 未設定 ({notSet})"
  },
  {
    "id": "PPS.table.performance",
    "description": "performance Status for PPS",
-   "defaultMessage": "パフォーマンス"
+   "defaultMessage": "生産性"
  },
  {
    "id": "PPS.table.operatorAssigned",
@@ -1792,7 +1792,7 @@
  {
    "id": "inventory.tab.heading",
    "description": "inventory tab",
-   "defaultMessage": "目録"
+   "defaultMessage": "在庫"
  },
  {
    "id": "audit.tab.heading",
@@ -1867,7 +1867,7 @@
  {
    "id": "userDetails.put.status",
    "description": "",
-   "defaultMessage": "入荷"
+   "defaultMessage": "入庫"
  },
  {
    "id": "userDetails.audit.status",
@@ -1932,7 +1932,7 @@
  {
    "id": "users.add.userdetails.lastname",
    "description": "Text for last name",
-   "defaultMessage": "姓名"
+   "defaultMessage": "苗字"
  },
  {
    "id": "users.add.password.heading",
@@ -1997,7 +1997,7 @@
  {
    "id": "users.edit.userdetails.lastname",
    "description": "Text for last name",
-   "defaultMessage": "姓名"
+   "defaultMessage": "苗字"
  },
  {
    "id": "users.edit.changepassword.heading",
@@ -2052,7 +2052,7 @@
  {
    "id": "users.add.roledetails.operatortext",
    "description": "Subtext for operator",
-   "defaultMessage": "バトラーシステムの各ピック入荷ステーションのオペレータインターフェイスへのアクセスを許可する"
+   "defaultMessage": "バトラーシステムの各入出庫ステーションのオペレータインターフェイスへのアクセスを許可する"
  },
  {
    "id": "users.add.roledetails.manager",
@@ -2082,7 +2082,7 @@
  {
    "id": "users.add.roledetails.operatortext",
    "description": "Subtext for operator",
-   "defaultMessage": "バトラーシステムの各ピック入荷ステーションのオペレータインターフェイスへのアクセスを許可する"
+   "defaultMessage": "バトラーシステムの各入出庫ステーションのオペレータインターフェイスへのアクセスを許可する"
  },
  {
    "id": "users.add.roledetails.manager",
@@ -2202,7 +2202,7 @@
  {
    "id": "chargersDetail.name.prefix",
    "description": "prefix for cs id in chargersDetail",
-   "defaultMessage": "充電所 - {csId}"
+   "defaultMessage": "充電器 - {csId}"
  },
  {
    "id": "chargersDetail.butler.prefix",
@@ -2232,7 +2232,7 @@
  {
    "id": "ppsDetail.put.status",
    "description": "put status for pps",
-   "defaultMessage": "入荷"
+   "defaultMessage": "入庫"
  },
  {
    "id": "ppsDetail.audit.status",
@@ -2272,7 +2272,7 @@
  {
    "id": "userDetails.put.status",
    "description": "put status for userDetails",
-   "defaultMessage": "入荷"
+   "defaultMessage": "入庫"
  },
  {
    "id": "userDetails.audit.status",
@@ -2312,7 +2312,7 @@
  {
    "id": "waveDetail.breached.status",
    "description": "breached status for wave",
-   "defaultMessage": "破棄"
+   "defaultMessage": "未達成"
  },
  {
    "id": "waveDetail.pending.status",
@@ -2402,17 +2402,17 @@
   {
     "id": "audit.viewIssues.heading",
     "description": "Heading for view issues audit",
-    "defaultMessage": "問題を表示する"
+    "defaultMessage": "問題を表示"
   },
   {
     "id": "audit.viewIssues.heading",
     "description": "Heading for view issues audit",
-    "defaultMessage": "問題を表示する"
+    "defaultMessage": "問題を表示"
   },
   {
     "id": "commonDataTable.viewIssues.button",
     "description": "viewIssues button",
-    "defaultMessage": "問題を表示する"
+    "defaultMessage": "問題を表示"
   },
   {
     "id": "widget.audit.heading.value",
@@ -2978,7 +2978,7 @@
 {
    "id": "utility.downloadRprts.CategoryInventory",
    "description": "Inventory",
-   "defaultMessage": "目録",
+   "defaultMessage": "在庫",
    "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
 },
 {
