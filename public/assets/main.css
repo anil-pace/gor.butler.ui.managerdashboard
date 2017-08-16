@@ -2412,8 +2412,8 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   border-radius: 15px;
   text-align: center;
   width: 90px;
-  border: 1px solid #00a54f;
-  color: #00a54f;
+  border: 1px solid #aaaaaa;
+  color: #aaaaaa;
   font-size: 12px;
   max-height: 9px;
   background: #ffffff;
@@ -2425,10 +2425,10 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   text-align: center;
   width: 90px;
   border: 1px solid #aaaaaa;
-  color: #aaaaaa;
+  color: #ffffff;
   font-size: 12px;
   max-height: 9px;
-  background: #ffffff;
+  background: #aaaaaa;
   text-transform: capitalize;
 }
 

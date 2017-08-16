@@ -67,7 +67,7 @@ const messages=defineMessages({
     },
     auditCompletedStatus: {
         id: "auditdetail.completed.status",
-        defaultMessage: "Completed"
+        defaultMessage: "Audited"
     },
     auditSKU: {
         id: "auditdetail.sku.prefix",

@@ -1785,7 +1785,7 @@
   },
   {
     "id": "auditdetail.completed.status",
-    "defaultMessage": "Completed",
+    "defaultMessage": "Audited",
     "filepath": "./src/containers/auditTab.js"
   },
   {
@@ -4577,7 +4577,7 @@
   },
   {
     "id": "auditdetail.completed.status",
-    "defaultMessage": "Completed",
+    "defaultMessage": "Audited",
     "filepath": "./src/containers/usersTab.js"
   },
   {
@@ -4936,7 +4936,7 @@
   },
   {
     "id": "auditdetail.completed.status",
-    "defaultMessage": "Completed",
+    "defaultMessage": "Audited",
     "filepath": "./src/containers/userTab/usersTab.js"
   },
   {
