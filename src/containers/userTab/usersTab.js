@@ -33,7 +33,7 @@ const messages=defineMessages({
     },
     auditCompletedStatus: {
         id: "auditdetail.completed.status",
-        defaultMessage: "Completed"
+        defaultMessage: "Audited"
     },
     userPut: {
         id: "userDetails.put.status",

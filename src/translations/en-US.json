@@ -1737,7 +1737,7 @@
   },
   {
     "id": "auditdetail.completed.status",
-    "defaultMessage": "Completed",
+    "defaultMessage": "Audited",
     "filepath": "./src/containers/auditTab.js"
   },
   {
@@ -3694,6 +3694,12 @@
     "filepath": "./src/containers/systemTabs/confirmApplyProfile.js"
   },
   {
+    "id": "pps.configuration.confirm.apply.profile.description",
+    "description": "PPS Configuration will be changed",
+    "defaultMessage": "PPS Configuration will be changed",
+    "filepath": "./src/containers/systemTabs/confirmApplyProfile.js"
+  },
+  {
     "id": "pps.configuration.confirm.apply.cancel",
     "description": "Cancel apply Profile to PPS",
     "defaultMessage": "Cancel",
@@ -4167,6 +4173,12 @@
     "filepath": "./src/containers/systemTabs/saveApplyProfile.js"
   },
   {
+    "id": "pps.configuration.confirm.saveAndapply.profile.description",
+    "description": "Profile will be applied after pending tasks are completed",
+    "defaultMessage": "Profile will be applied after pending tasks are completed",
+    "filepath": "./src/containers/systemTabs/saveApplyProfile.js"
+  },
+  {
     "id": "pps.configuration.confirm.apply.cancel",
     "description": "Cancel apply Profile to PPS",
     "defaultMessage": "Cancel",
@@ -4410,7 +4422,7 @@
   },
   {
     "id": "auditdetail.completed.status",
-    "defaultMessage": "Completed",
+    "defaultMessage": "Audited",
     "filepath": "./src/containers/usersTab.js"
   },
   {
@@ -4769,7 +4781,7 @@
   },
   {
     "id": "auditdetail.completed.status",
-    "defaultMessage": "Completed",
+    "defaultMessage": "Audited",
     "filepath": "./src/containers/userTab/usersTab.js"
   },
   {
