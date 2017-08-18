@@ -68,7 +68,7 @@ class AuditTable extends React.Component {
         var el=event.target;
         var elClassName=(el.className).trim(),
             parentEl, siblingEl, totalRowCount=this.props.items.length - 1;
-        if (elClassName !== "gor-dropdown-wrapper" && elClassName !== "gor-dropdown" && elClassName!=='gor-audit-info-icon') {
+        if (elClassName !== "gor-dropdown-wrapper" && elClassName !== "gor-dropdown" && elClassName!=='gor-audit-info-icon'  && elClassName!=="gor-tool-tip-hover") {
             return;
         }
         parentEl=el.parentNode;
