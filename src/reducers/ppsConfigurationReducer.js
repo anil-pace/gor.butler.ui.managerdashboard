@@ -189,7 +189,8 @@ export function ppsConfiguration(state = {}, action) {
             })[0]))
             return Object.assign({}, state, {
                 selectedProfile: selected_profile, //If no profile is selected, select the default profile
-                selectedPPSBin: selected_bin,
+                selectedPPSBin: null,
+                selectedPPSBinGroup: null,
             })
 
 
