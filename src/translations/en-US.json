@@ -2300,7 +2300,7 @@
   {
     "id": "operation.fire.evacuation",
     "description": "Description Text evacuation",
-    "defaultMessage": "Please follow evacuation procedures immediately.",
+    "defaultMessage": " Please follow evacuation procedures immediately.",
     "filepath": "./src/containers/emergencyProcess/fireHazard.js"
   },
   {
@@ -4396,7 +4396,7 @@
   {
     "id": "operation.alert.triggeremergency",
     "description": "Text button to trigger emergency",
-    "defaultMessage": "Fire emergency triggered.Follow evacuation procedures immediately",
+    "defaultMessage": "Fire emergency triggered. Follow evacuation procedures immediately",
     "filepath": "./src/containers/tabs.js"
   },
   {
