@@ -14,7 +14,7 @@ export function getFormattedMessages(action,values){
 			}
 			else{
 				return 	(<FormattedMessage id="pps.mode.success" description='PPS mode change success'
-                                   defaultMessage='Mode change request successfull' />);
+                                   defaultMessage='Mode change request successful' />);
 			}
 			case "status":
 			if(values.unsuccessful){

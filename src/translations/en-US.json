@@ -5235,7 +5235,7 @@
   {
     "id": "pps.mode.success",
     "description": "PPS mode change success",
-    "defaultMessage": "Mode change request successfull",
+    "defaultMessage": "Mode change request successful",
     "filepath": "./src/utilities/getFormattedMessages.js"
   },
   {
