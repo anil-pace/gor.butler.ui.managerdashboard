@@ -155,7 +155,7 @@ render()
 
     <span className="gor-bold-underline">
     <FormattedMessage id='operation.fire.evacuation' 
-    defaultMessage="Please follow evacuation procedures immediately."
+    defaultMessage=" Please follow evacuation procedures immediately."
     description="Description Text evacuation"/>
     </span>
     </span> 

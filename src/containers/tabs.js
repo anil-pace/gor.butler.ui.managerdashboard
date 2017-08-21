@@ -272,7 +272,7 @@ singleNotification=<GorToastify key={1}>
    <div className="gor-toastify-content">
                   <p className="msg-content">
                    <FormattedMessage id='operation.alert.triggeremergency' 
-                    defaultMessage="Fire emergency triggered.Follow evacuation procedures immediately"
+                    defaultMessage="Fire emergency triggered. Follow evacuation procedures immediately"
                             description="Text button to trigger emergency"/>
                              <span className="gor-toastify-updated-time">{timeText}</span>
                   </p>
