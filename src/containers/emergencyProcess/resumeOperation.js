@@ -114,8 +114,7 @@ class ResumeOperation extends React.Component{
       modalStatus: state.emergency.hideModal || false,
       system_emergency:state.tabsData.system_emergency||false,
       system_data:state.tabsData.system_data||null,
-      fireHazard:state.fireHazardDetail,
-
+      fireHazard:state.fireHazardDetail
     }
 } 
 function mapDispatchToProps(dispatch){
