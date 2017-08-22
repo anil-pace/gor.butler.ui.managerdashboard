@@ -11,7 +11,7 @@ import SafetyChecklist from './safetyChecklist';
 
 class ResumeOperation extends React.Component{
   _removeThisModal() {
-      this.props.resetForm();
+      this.props.modalresetForm();
       this.props.removeModal();
   }
   _typing(){
@@ -25,7 +25,7 @@ class ResumeOperation extends React.Component{
           return loginPassInfo.type;    
   }
   componentWillMount() {
-     this.props.resetFormField();
+     this.props.resetForm();
   }
   componentWillReceiveProps(nextProps){
     if(!nextProps.auth_token||!nextProps.system_emergency||nextProps.system_data !== this.props.system_data )
@@ -121,8 +121,8 @@ function mapDispatchToProps(dispatch){
     return {
       userRequest: function(data){ dispatch(userRequest(data)); },
       validatePass: function(data){ dispatch(validatePassword(data)); }, 
-      resetForm:   function(){ dispatch(modalFormReset()); }, 
-      resetFormField:  function(){ dispatch(resetForm()); }
+      modalresetForm:   function(){ dispatch(modalFormReset()); }, 
+      resetForm:  function(){ dispatch(resetForm()); }
     }
 };
 ResumeOperation.propTypes={
@@ -133,9 +133,9 @@ ResumeOperation.propTypes={
       system_emergency:React.PropTypes.bool,
       userRequest:React.PropTypes.func,
       validatePass:React.PropTypes.func,
-      resetForm:React.PropTypes.func,
+      modalresetForm:React.PropTypes.func,
       system_data:React.PropTypes.string,
-      resetFormField:React.PropTypes.func
+      resetForm:React.PropTypes.func
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(ResumeOperation);
