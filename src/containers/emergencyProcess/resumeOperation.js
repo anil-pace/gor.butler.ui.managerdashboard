@@ -121,10 +121,9 @@ class ResumeOperation extends React.Component{
 function mapDispatchToProps(dispatch){
     return {
       userRequest: function(data){ dispatch(userRequest(data)); },
-      validatePass: function(data){ dispatch(validatePassword(data)); },  
-      modalresetForm:   function(){ dispatch(modalFormReset()); },
+      validatePass: function(data){ dispatch(validatePassword(data)); }, 
+      modalresetForm:   function(){ dispatch(modalFormReset()); }, 
       resetPasswordButton:  function(){ dispatch(resetPasswordButton()); }
-
     }
 };
 ResumeOperation.propTypes={

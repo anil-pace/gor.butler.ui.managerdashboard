@@ -30,7 +30,6 @@ export  function appInfo(state={},action){
             "nameInfo":action.data     
           })
     case PASSWORD_DATA:
-
           return Object.assign({}, state, { 
             "passwordInfo":action.data
           })
