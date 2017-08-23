@@ -25,7 +25,7 @@ class Tab extends React.Component{
 			icon=<div className="gor-error-white"/>
 		}
 		else {
-			icon=<div/>
+			icon=null
 		}
 		return (
 		<div className="gorTab gorContainer">
@@ -42,9 +42,9 @@ class Tab extends React.Component{
 				</div>
 			</div>
 			</div>
-			<div className="gorIconsInline">
+			{icon ?<div className="gorIconsInline">
 					{icon}
-			</div>
+			</div>:""}
 		</div>
 
 	</div>

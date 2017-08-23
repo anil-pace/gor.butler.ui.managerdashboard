@@ -102,6 +102,7 @@ export const ORDERS="ORDERS";
 export const INVENTORY="INVENTORY";
 export const USERS="USERS";
 export const AUDIT="AUDIT";
+export const REPORTS="REPORTS";
 export const UTILITIES="UTILITIES";
 export const NOTIFICATION_TAB="Notification";
 export const BUTLERBOTS_TAB="Butler Bots";
@@ -110,6 +111,7 @@ export const PPS_TAB="Pick Put Stations";
 export const ORDER_LIST="Order List";
 export const PPS_CONFIGURATION="PPS Configuration";
 export const WAVES="Waves";
+export const OPERATIONS_LOG="operationsLog"
 export const BUTLERBOTS="butlerbots";
 export const CHARGING="chargingstation";
 export const PPS="pps";
@@ -155,6 +157,7 @@ export const EMERGENCY_FIRE="fire_emergency";
 export const EMERGENCY="emergency";
 export const NOTIFY_EMERGENCY_END="NOTIFY_EMERGENCY_END";
 export const SYSTEM_EMERGENCY="system_emergency";
+export const SET_EMERGENCY_MODAL_STATUS = "SET_EMERGENCY_MODAL_STATUS"
 
 
 /*Constants for type of AJAX call*/
@@ -288,6 +291,10 @@ export const SYS_SUB_TAB_ROUTE_MAP={
 	[WAVES]:"waves",
 	[ORDER_LIST]:"orderlist",
 	[PPS_CONFIGURATION]:"ppsConfiguration"
+
+}
+export const REPORTS_SUB_TAB_ROUTE_MAP={
+	[OPERATIONS_LOG] : "operationsLog"
 
 }
 export const SHOW_UTILITY_TAB=true;
@@ -660,4 +667,9 @@ export const PPS_PROFILE_SAVED="PPS_PROFILE_SAVED"
 export const PPS_PROFILE_CREATED="PPS_PROFILE_CREATED"
 export const PPS_PROFILE_REQUESTED="PPS_PROFILE_REQUESTED"
 export const TAG_ADDED_TO_LIST="TAG_ADDED_TO_LIST"
+
+/**
+ * Constants for Operations log
+ */
+export const OPERATION_LOG_FETCH = "OPERATION_LOG_FETCH"
 

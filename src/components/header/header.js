@@ -126,14 +126,18 @@ class Header extends React.Component {
 
 
     render() {
-        var headerInfo=this._processData()
-        var startTime = this.context.intl.formatTime(this.props.shift_start_time, {
+        var headerInfo=this._processData(),
+        startTime
+        if(this.props.shift_start_time){
+            startTime = this.context.intl.formatTime(this.props.shift_start_time, {
             hour: 'numeric',
             minute: 'numeric',
             timeZone: this.props.timeOffset,
             timeZoneName: 'long',
             hour12: false
         })
+        }
+        
         var emergencyDropDown;
         if(!this.props.system_emergency){
             emergencyDropDown = (<section className='gor-hamburger-option'  >

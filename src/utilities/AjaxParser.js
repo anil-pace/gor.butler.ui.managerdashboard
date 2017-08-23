@@ -83,7 +83,8 @@ import {
     FETCH_PROFILE_FOR_PPS,
     CREATE_NEW_PROFILE,
     SAVE_PPS_PROFILE,
-    ADD_TAG_TO_LIST,CHANGE_PPS_PROFILE
+    ADD_TAG_TO_LIST,CHANGE_PPS_PROFILE,
+    OPERATION_LOG_FETCH
 } from "../constants/frontEndConstants";
 import {BUTLER_UI, CODE_E027} from "../constants/backEndConstants";
 import {
@@ -141,7 +142,9 @@ import {
     savedPPSProfile,
     tagAddedToList,
     setPPSConfigurationSpinner,profileRequested
-} from './../actions/ppsConfigurationActions'
+} from './../actions/ppsConfigurationActions';
+
+import {recieveOLData} from './../actions/operationsLogsActions'
 
 export function AjaxParse(store, res, cause, status, saltParams) {
     let stringInfo = {};
@@ -491,7 +494,9 @@ export function AjaxParse(store, res, cause, status, saltParams) {
              */
             store.dispatch(profileRequested(res))
             break;
-
+        case OPERATION_LOG_FETCH:
+            store.dispatch(recieveOLData(res.hits.hits))
+            break;
         default:
             ShowError(store, cause, status);
             break;

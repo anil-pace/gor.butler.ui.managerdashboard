@@ -2,13 +2,13 @@ import React  from 'react';
 import Tab from '../components/tabs/tab';
 import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
-import {tabSelected,subTabSelected} from '../actions/tabSelectAction';
 import {setFireHazrdFlag} from '../actions/tabActions';
 import {modal} from 'react-redux-modal';
 import {setInventorySpinner} from '../actions/inventoryActions';
 import {setAuditSpinner} from '../actions/auditActions';
 import {setButlerSpinner} from '../actions/spinnerAction';
-import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP,INVENTORY,AUDIT,
+import {setEmergencyModalStatus} from '../actions/tabActions'  
+import {OVERVIEW,SYSTEM,ORDERS,USERS,REPORTS,TAB_ROUTE_MAP,INVENTORY,AUDIT,
 FULFILLING_ORDERS,GOR_OFFLINE,GOR_ONLINE,GOR_NORMAL_TAB,GOR_FAIL,
 SOFT_MANUAL,HARD,SOFT,UTILITIES,FIRE_EMERGENCY_POPUP_FLAG,EMERGENCY_FIRE} from '../constants/frontEndConstants';
 import { FormattedMessage,FormattedNumber,FormattedRelative } from 'react-intl';
@@ -29,6 +29,9 @@ class Tabs extends React.Component{
      constructor(props) 
   {  
     super(props);
+    this.state={
+      isHardEmergencyOpen:this.props.isHardEmergencyOpen
+    }
     this._openPopup =  this._openPopup.bind(this);
   }
 
@@ -102,30 +105,41 @@ class Tabs extends React.Component{
       });  
   }
   
+  shouldComponentUpdate(){
+    return false
+  }
   componentWillReceiveProps(nextProps){
+  if(!nextProps.isEmergencyOpen){
 
-    if(nextProps.system_data=== SOFT_MANUAL && (this.props.system_data=== HARD || !this.props.system_data))
-    {
-      this._emergencyRelease();
-    }
-   else  if(nextProps.fireHazardType ===EMERGENCY_FIRE && !nextProps.firehazadflag && !nextProps.fireHazardNotifyTime && nextProps.firehazadflag!==this.props.firehazadflag || 
-      ((this.props.firehazadflag===false) && nextProps.fireHazardNotifyTime!==this.props.fireHazardNotifyTime))
+   /* if (nextProps.system_data === SOFT_MANUAL && (this.props.system_data === HARD || !this.props.system_data)) {
+            this._emergencyRelease();
+        } else if (nextProps.fireHazardType === EMERGENCY_FIRE && !nextProps.firehazadflag && !nextProps.fireHazardNotifyTime && nextProps.firehazadflag !== this.props.firehazadflag ||
+            ((this.props.firehazadflag === false) && nextProps.fireHazardNotifyTime !== this.props.fireHazardNotifyTime))
 
-    {
-      this._FireEmergencyRelease();
+        {
+            this._FireEmergencyRelease();
+        } */
+        if(this.props.isEmergencyOpen !== nextProps.isEmergencyOpen && nextProps.system_emergency  && nextProps.system_data === HARD){
+            this.props.setEmergencyModalStatus(true);
+            this._stopOperation(true, nextProps.zoneDetails);
+
+        }
+        else if(this.props.isEmergencyOpen !== nextProps.isEmergencyOpen && nextProps.system_data === SOFT){
+          this.props.setEmergencyModalStatus(true);
+          this._pauseOperation(true, nextProps.zoneDetails);
+        }
+        else if(this.props.isEmergencyOpen !== nextProps.isEmergencyOpen && 
+          nextProps.system_data === SOFT_MANUAL && 
+          nextProps.lastEmergencyState === HARD){
+           this.props.setEmergencyModalStatus(true);
+           this._emergencyRelease();
+        }
+     
     }
-    else if(nextProps.system_emergency && !this.props.system_emergency && nextProps.system_data=== HARD)
-    {
-      this._stopOperation(true,nextProps.zoneDetails);
-    }
-    else if(nextProps.system_data=== SOFT && (this.props.system_data!== nextProps.system_data)){
-      this._pauseOperation(true,nextProps.zoneDetails);
-    }
-    
   }
   _parseStatus()
   {
-    let overview,system,order,ordersvalue,users,usersvalue,inventoryvalue,overviewClass,
+    let overview,system,order,ordersvalue,users,reports,usersvalue,inventoryvalue,overviewClass,
         inventory,audit,overviewStatus,systemStatus,ordersStatus,usersStatus,auditStatus,inventoryStatus,
         offline,systemClass,ordersClass,auditClass,items={}, auditIcon=false,utilities;
 
@@ -150,7 +164,9 @@ class Tabs extends React.Component{
               defaultMessage="AUDIT"/>;  
 
     utilities=<FormattedMessage id="utilities.tab.heading" description="audit tab" 
-              defaultMessage="UTILITIES"/>;                     
+              defaultMessage="UTILITIES"/>;   
+    reports= <FormattedMessage id="reports.tab.heading" description="reports tab" 
+              defaultMessage="REPORTS"/>;                  
 
     if(!this.props.system_status)
     {
@@ -221,6 +237,7 @@ class Tabs extends React.Component{
 
     items={overview:overview,system:system,order:order,
            users:users,inventory:inventory,audit:audit,
+           reports:reports,
            overviewStatus:overviewStatus, overviewClass:overviewClass,systemStatus:systemStatus,ordersStatus:ordersStatus,
            auditStatus:auditStatus,usersStatus:usersStatus,inventoryStatus:inventoryStatus,
            systemClass:systemClass,ordersClass:ordersClass,auditClass:auditClass,
@@ -305,7 +322,9 @@ singleNotification=<GorToastify key={1}>
     <Link to="/audit" onClick={this.handleTabClick.bind(this,AUDIT)}>
       <Tab items={{ tab: items.audit, Status: items.auditStatus, currentState:items.auditClass}} changeClass={(this.props.tab.toUpperCase()=== AUDIT ? 'sel' :GOR_NORMAL_TAB)} subIcons={items.auditIcon}/>
       </Link>
-
+    <Link to="/reports/operationsLog" onClick={this.handleTabClick.bind(this,REPORTS)}>
+      <Tab items={{ tab: items.reports}} changeClass={(this.props.tab.toUpperCase()=== REPORTS ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
+    </Link>
     <Link to="/inventory" onClick={this.handleTabClick.bind(this,INVENTORY)}>
       <Tab items={{ tab: items.inventory, Status: items.inventoryStatus, currentState:'' }} changeClass={(this.props.tab.toUpperCase()=== INVENTORY ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
     </Link>
@@ -329,6 +348,7 @@ function mapStateToProps(state, ownProps){
          tab:state.tabSelected.tab || TAB_ROUTE_MAP[OVERVIEW],
          overview_status:state.tabsData.overview_status||null,
          system_emergency:state.tabsData.system_emergency||false,
+         lastEmergencyState:state.tabsData.lastEmergencyState || "none",
          system_data:state.tabsData.system_data||null,
          users_online:state.tabsData.users_online||0,
          audit_count:state.tabsData.audit_count||0,
@@ -343,18 +363,18 @@ function mapStateToProps(state, ownProps){
          fireHazardNotifyTime:state.fireHazardDetail.notifyTime,
          timeZone:state.authLogin.timeOffset,
         zoneDetails: state.tabsData.zoneDetails || {},
+        isEmergencyOpen:state.tabsData.isEmergencyOpen
 
     }
 }
 
 var mapDispatchToProps=function(dispatch){
 	return {
-		tabSelected: function(data){ dispatch(tabSelected(data)); },
-        subTabSelected: function(data){ dispatch(subTabSelected(data)); },
         setInventorySpinner:function(data){dispatch(setInventorySpinner(data));},
         setAuditSpinner:function(data){dispatch(setAuditSpinner(data));},
         setButlerSpinner:function(data){dispatch(setButlerSpinner(data))},
-        setFireHazrdFlag:function(data){dispatch(setFireHazrdFlag(data))}
+        setFireHazrdFlag:function(data){dispatch(setFireHazrdFlag(data))},
+        setEmergencyModalStatus:function(data){dispatch(setEmergencyModalStatus(data));}
 	}
 };
 

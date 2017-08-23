@@ -1024,13 +1024,12 @@ body {
 
 .gor-tabs .gorTab.gorContainer {
   background-color: #4d5055;
-  width: auto;
   display: inline-block;
   height: 60px;
 }
 
 .gor-tabs .gorTab .gor-main-block {
-  width: 150px;
+  width: 118px;
   padding-left: 20px;
   height: 62px;
   display: table-cell;
@@ -1129,11 +1128,12 @@ body {
 .gor-tabs .gorTab .gorIconsInline {
   display: inline-block;
   vertical-align: super;
+  padding-left: 18px;
 }
 
 .gor-tabs .gorTab .gorInlineDisplay {
   display: inline-block;
-  padding-right: 20px;
+  font-size: 13px;
 }
 
 body {
@@ -2319,7 +2319,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   text-transform: capitalize;
 }
 
-.online .public_fixedDataTableCell_cellContent {
+.online .public_fixedDataTableCell_cellContent, .success .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
   width: 90px;
@@ -2444,7 +2444,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   text-transform: capitalize;
 }
 
-.temporary_unfulfillable .public_fixedDataTableCell_cellContent {
+.temporary_unfulfillable .public_fixedDataTableCell_cellContent, .exception .public_fixedDataTableCell_cellContent {
   background: #ffffff;
   border-radius: 15px;
   border: 1px solid #f36f36;
@@ -5254,7 +5254,9 @@ button:disabled {
 .gor-paginate-wrap .gor-button-wrap .gor-paginate-right-btn {
   display: inline-block;
   border-style: solid;
-  border-width: 0.0625rem;
+  border-top-width: 0.0625rem;
+  border-bottom-width: 0.0625rem;
+  border-right-width: 0.0625rem;
   border-left-width: 0rem;
   width: 2.875rem;
   height: 2.1875rem;
@@ -5274,7 +5276,9 @@ button:disabled {
 .gor-paginate-wrap .gor-button-wrap .gor-paginate-left-btn {
   display: inline-block;
   border-style: solid;
-  border-width: 0.0625rem;
+  border-left-width: 0.0625rem;
+  border-top-width: 0.0625rem;
+  border-bottom-width: 0.0625rem;
   border-right-width: 0rem;
   width: 2.875rem;
   height: 2.1875rem;
@@ -5293,7 +5297,9 @@ button:disabled {
 .gor-paginate-wrap .gor-button-wrap .gor-paginate-middle-left-btn {
   display: inline-block;
   border-style: solid;
-  border-width: 0.0625rem;
+  border-top-width: 0.0625rem;
+  border-bottom-width: 0.0625rem;
+  border-left-width: 0.0625rem;
   border-right-width: 0rem;
   width: 2.875rem;
   height: 2.1875rem;
@@ -5565,7 +5571,7 @@ button:disabled {
   font-size: 14px;
   font-weight: 600;
   color: #666666;
-  padding-top: 30px;
+  padding-top: 15px;
   margin-left: 20px;
 }
 
@@ -5608,8 +5614,7 @@ button:disabled {
   padding-right: 20px;
   padding-bottom: 5px;
   padding-left: 20px;
-  float: left;
-  width: 100%;
+  width: 88%;
 }
 
 .gor-filter-token-section-h1 {
@@ -5666,6 +5671,7 @@ button:disabled {
   background-color: #ffffff;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   border: solid 1px #aaaaaa;
+  cursor: pointer;
 }
 
 .gor-filterBtn-applied {
