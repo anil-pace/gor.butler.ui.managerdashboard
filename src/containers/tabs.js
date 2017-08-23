@@ -106,7 +106,6 @@ class Tabs extends React.Component{
   componentWillReceiveProps(nextProps){
 
     if(!nextProps.isEmergencyOpen){
-
    /* if (nextProps.system_data === SOFT_MANUAL && (this.props.system_data === HARD || !this.props.system_data)) {
             this._emergencyRelease();
         } else if (nextProps.fireHazardType === EMERGENCY_FIRE && !nextProps.firehazadflag && !nextProps.fireHazardNotifyTime && nextProps.firehazadflag !== this.props.firehazadflag ||
@@ -129,9 +128,14 @@ class Tabs extends React.Component{
           nextProps.lastEmergencyState === HARD){
            this.props.setEmergencyModalStatus(true);
            this._emergencyRelease();
-        }
-     
+        }     
     }
+    //Raja Add
+     if (nextProps.fireHazardType === EMERGENCY_FIRE && !nextProps.firehazadflag && !nextProps.fireHazardNotifyTime && nextProps.firehazadflag !== this.props.firehazadflag 
+          || (nextProps.fireHazardType === EMERGENCY_FIRE && (this.props.firehazadflag === false) && nextProps.fireHazardNotifyTime !== this.props.fireHazardNotifyTime)){
+          console.log(nextProps.fireHazardType);
+            this._FireEmergencyRelease();
+        }
     
   }
   _parseStatus()
