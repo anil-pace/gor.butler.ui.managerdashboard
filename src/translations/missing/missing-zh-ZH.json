@@ -198,24 +198,6 @@
 	"filepath": "./src/components/subtab/subTabs.js"
 },
 {
-	"id": "gor.filter.hide",
-	"description": "label for hide",
-	"defaultMessage": "Hide",
-	"filepath": "./src/components/tableFilter/filter.js"
-},
-{
-	"id": "gor.filter.noResult",
-	"description": "label for hide",
-	"defaultMessage": "No results found, please try again",
-	"filepath": "./src/components/tableFilter/filter.js"
-},
-{
-	"id": "gor.filter.reset",
-	"description": "label for reset",
-	"defaultMessage": "Reset",
-	"filepath": "./src/components/tableFilter/filter.js"
-},
-{
 	"id": "utility.uploadHist.fileName",
 	"description": "Upload file name",
 	"defaultMessage": "File {fileName}",
@@ -1011,6 +993,119 @@
 	"filepath": "./src/containers/orderTab/waveTab.js"
 },
 {
+	"id": "operationsFilter.tokenHead.status",
+	"defaultMessage": "STATUS",
+	"filepath": "./src/containers/reportsTab/operationsFilter.js"
+},
+{
+	"id": "operationsFilter.tokenHead.timePeriod",
+	"defaultMessage": "TIME PERIOD",
+	"filepath": "./src/containers/reportsTab/operationsFilter.js"
+},
+{
+	"id": "operationsFilter.STATUS.any",
+	"defaultMessage": "Any",
+	"filepath": "./src/containers/reportsTab/operationsFilter.js"
+},
+{
+	"id": "operationsFilter.STATUS.success",
+	"defaultMessage": "Success",
+	"filepath": "./src/containers/reportsTab/operationsFilter.js"
+},
+{
+	"id": "operationsFilter.STATUS.exception",
+	"defaultMessage": "Exception",
+	"filepath": "./src/containers/reportsTab/operationsFilter.js"
+},
+{
+	"id": "operationsFilter.timePeriod.oneHour",
+	"defaultMessage": "Last 1 hour",
+	"filepath": "./src/containers/reportsTab/operationsFilter.js"
+},
+{
+	"id": "operationsFilter.timePeriod.twoHour",
+	"defaultMessage": "Last 2 hour",
+	"filepath": "./src/containers/reportsTab/operationsFilter.js"
+},
+{
+	"id": "gor.filter.hide",
+	"description": "label for hide",
+	"defaultMessage": "Hide",
+	"filepath": "./src/containers/reportsTab/operationsFilter.js"
+},
+{
+	"id": "gor.filter.noResult",
+	"description": "label for no result",
+	"defaultMessage": "No results found, please try again",
+	"filepath": "./src/containers/reportsTab/operationsFilter.js"
+},
+{
+	"id": "gor.filter.reset",
+	"description": "label for reset",
+	"defaultMessage": "Reset",
+	"filepath": "./src/containers/reportsTab/operationsFilter.js"
+},
+{
+	"id": "operationLog.table.heading",
+	"description": "Heading for PPS",
+	"defaultMessage": "Operations Log",
+	"filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+{
+	"id": "operationLog.table.operatingMode",
+	"description": "OPERATING MODE",
+	"defaultMessage": "OPERATING MODE",
+	"filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+{
+	"id": "operationLog.table.status",
+	"description": "STATUS",
+	"defaultMessage": "STATUS",
+	"filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+{
+	"id": "operationLog.table.requestId",
+	"description": "Request ID",
+	"defaultMessage": "REQUEST ID",
+	"filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+{
+	"id": "operationLog.table.skuId",
+	"description": "Status for PPS",
+	"defaultMessage": "SKU ID",
+	"filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+{
+	"id": "operationLog.table.sourceId",
+	"description": "Status for PPS",
+	"defaultMessage": "SOURCE ID",
+	"filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+{
+	"id": "operationLog.table.destinationId",
+	"description": "Status for PPS",
+	"defaultMessage": "DESTINATION ID",
+	"filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+{
+	"id": "operationLog.table.userId",
+	"description": "Status for PPS",
+	"defaultMessage": "USER ID",
+	"filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+{
+	"id": "operationLog.table.timestamp",
+	"description": "Status for PPS",
+	"defaultMessage": "TIMESTAMP",
+	"filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+{
+	"id": "reportsTab.operationsLog",
+	"description": "Operations Log tab for Reports tab",
+	"defaultMessage": "Operations Log",
+	"filepath": "./src/containers/reportsTab/reportsTab.js"
+},
+{
 	"id": "botList.filter.search.bar",
 	"description": "total bots for filter search bar",
 	"defaultMessage": "{total} Bots found",
@@ -1599,9 +1694,9 @@
 	"filepath": "./src/containers/tabs.js"
 },
 {
-	"id": "auditStatus.tab.heading.none",
-	"description": "audit Status",
-	"defaultMessage": "None",
+	"id": "reports.tab.heading",
+	"description": "reports tab",
+	"defaultMessage": "REPORTS",
 	"filepath": "./src/containers/tabs.js"
 },
 {
@@ -1613,7 +1708,7 @@
 {
 	"id": "operation.alert.triggeremergency",
 	"description": "Text button to trigger emergency",
-	"defaultMessage": "Fire emergency triggered.Follow evacuation procedures immediately",
+	"defaultMessage": "Fire emergency triggered. Follow evacuation procedures immediately",
 	"filepath": "./src/containers/tabs.js"
 },
 {
@@ -1869,7 +1964,7 @@
 {
 	"id": "pps.mode.success",
 	"description": "PPS mode change success",
-	"defaultMessage": "Mode change request successfull",
+	"defaultMessage": "Mode change request successful",
 	"filepath": "./src/utilities/getFormattedMessages.js"
 },
 {

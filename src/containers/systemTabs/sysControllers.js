@@ -186,7 +186,6 @@ class SystemControllers extends React.Component {
                 subscribed:true,
                 queryApplied:Object.keys(this.props.location.query).length ? true :false
             },function(){
-                //this.props.initDataSentCall(wsOverviewData["controllers"])
                 this._refreshList(this.props.location.query)
             })
         }

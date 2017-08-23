@@ -2,14 +2,13 @@ import React  from 'react';
 import Tab from '../components/tabs/tab';
 import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
-import {tabSelected,subTabSelected} from '../actions/tabSelectAction';
 import {setFireHazrdFlag} from '../actions/tabActions';
 import {modal} from 'react-redux-modal';
 import {setInventorySpinner} from '../actions/inventoryActions';
 import {setAuditSpinner} from '../actions/auditActions';
 import {setButlerSpinner} from '../actions/spinnerAction';
-import {setEmergencyModalStatus} from '../actions/tabActions';
-import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP,INVENTORY,AUDIT,
+import {setEmergencyModalStatus} from '../actions/tabActions'  
+import {OVERVIEW,SYSTEM,ORDERS,USERS,REPORTS,TAB_ROUTE_MAP,INVENTORY,AUDIT,
 FULFILLING_ORDERS,GOR_OFFLINE,GOR_ONLINE,GOR_NORMAL_TAB,GOR_FAIL,
 SOFT_MANUAL,HARD,SOFT,UTILITIES,FIRE_EMERGENCY_POPUP_FLAG,EMERGENCY_FIRE} from '../constants/frontEndConstants';
 import { FormattedMessage,FormattedNumber,FormattedRelative } from 'react-intl';
@@ -30,6 +29,9 @@ class Tabs extends React.Component{
      constructor(props) 
   {  
     super(props);
+    this.state={
+      isHardEmergencyOpen:this.props.isHardEmergencyOpen
+    }
     this._openPopup =  this._openPopup.bind(this);
   }
 
@@ -39,7 +41,7 @@ class Tabs extends React.Component{
 
 
     handleTabClick(selTab){
-    	/**
+      /**
          * Displaying loader currently for User tab
          * only
          */
@@ -104,8 +106,8 @@ class Tabs extends React.Component{
       });  
   }
   
+ 
   componentWillReceiveProps(nextProps){
-
     if(!nextProps.isEmergencyOpen){
         if( nextProps.system_emergency  && nextProps.system_data === HARD){
             this.props.setEmergencyModalStatus(true);
@@ -126,6 +128,7 @@ class Tabs extends React.Component{
             else if(nextProps.lastEmergencyState === SOFT){
               releaseState=SOFT
             }
+      
            this.props.setEmergencyModalStatus(true);
            this._emergencyRelease(releaseState);
         }     
@@ -133,14 +136,14 @@ class Tabs extends React.Component{
     
      if (nextProps.fireHazardType === EMERGENCY_FIRE && !nextProps.firehazadflag && !nextProps.fireHazardNotifyTime && nextProps.firehazadflag !== this.props.firehazadflag 
           || (nextProps.fireHazardType === EMERGENCY_FIRE && (this.props.firehazadflag === false) && nextProps.fireHazardNotifyTime !== this.props.fireHazardNotifyTime)){
-          
             this._FireEmergencyRelease();
         }
     
+
   }
   _parseStatus()
   {
-    let overview,system,order,ordersvalue,users,usersvalue,inventoryvalue,overviewClass,
+    let overview,system,order,ordersvalue,users,reports,usersvalue,inventoryvalue,overviewClass,
         inventory,audit,overviewStatus,systemStatus,ordersStatus,usersStatus,auditStatus,inventoryStatus,
         offline,systemClass,ordersClass,auditClass,items={}, auditIcon=false,utilities;
 
@@ -165,7 +168,9 @@ class Tabs extends React.Component{
               defaultMessage="AUDIT"/>;  
 
     utilities=<FormattedMessage id="utilities.tab.heading" description="audit tab" 
-              defaultMessage="UTILITIES"/>;                     
+              defaultMessage="UTILITIES"/>;   
+    reports= <FormattedMessage id="reports.tab.heading" description="reports tab" 
+              defaultMessage="REPORTS"/>;                  
 
     if(!this.props.system_status)
     {
@@ -213,19 +218,18 @@ class Tabs extends React.Component{
 
       inventoryvalue=<FormattedNumber value={this.props.space_utilized}/>
       inventoryStatus=<FormattedMessage id="inventoryStatus.tab.heading" description="inventory Status " 
-                                           defaultMessage="{count}% space utilized" values={{count:inventoryvalue}}/>;  
-      if(this.props.audit_count){
-        auditStatus=<FormattedMessage id="auditStatus.tab.heading" description="audit Status " 
+                                           defaultMessage="{count}% space utilized" values={{count:inventoryvalue}}/>;            
+      auditStatus=<FormattedMessage id="auditStatus.tab.heading" description="audit Status " 
                                      defaultMessage="{count} in progress" 
-                                     values={{count:this.props.audit_count}}/>;
+                                     values={{count:this.props.audit_count?this.props.audit_count:'None'}}/>;          
+      if(this.props.audit_count)
+      {
         auditClass=GOR_ONLINE;
       }
-      else{          
-      auditStatus=<FormattedMessage id="auditStatus.tab.heading.none" description="audit Status " 
-                                     defaultMessage="None"/>; 
-      auditClass=GOR_OFFLINE;
-      }         
-    
+      else
+      {
+        auditClass=GOR_OFFLINE;
+      }
       if(this.props.audit_alert) {
         auditClass=(this.props.audit_alert?'gor-alert':auditClass);
         auditStatus=<FormattedMessage id="auditStatus.tab.alert.heading" description="audit Status alert" 
@@ -237,6 +241,7 @@ class Tabs extends React.Component{
 
     items={overview:overview,system:system,order:order,
            users:users,inventory:inventory,audit:audit,
+           reports:reports,
            overviewStatus:overviewStatus, overviewClass:overviewClass,systemStatus:systemStatus,ordersStatus:ordersStatus,
            auditStatus:auditStatus,usersStatus:usersStatus,inventoryStatus:inventoryStatus,
            systemClass:systemClass,ordersClass:ordersClass,auditClass:auditClass,
@@ -289,7 +294,7 @@ singleNotification=<GorToastify key={1}>
     notificationWrap.push(singleNotification);
   return notificationWrap;
 }
-	render(){
+  render(){
   let items=this._parseStatus();
   let showFireHazardPopup;
   if(this.props.firehazadflag && (this.props.fireHazardNotifyTime || this.props.fireHazardStartTime))
@@ -303,40 +308,42 @@ singleNotification=<GorToastify key={1}>
   
   let notificationWrap=this._processNotification();
   let showUtilityTab=this.props.config.utility_tab && this.props.config.utility_tab.enabled;
-		return (
-		<div className="gor-tabs gor-main-block">
-		<Link to="/overview" onClick={this.handleTabClick.bind(this,OVERVIEW)}>
-			<Tab items={{ tab: items.overview, Status: items.overviewStatus, currentState:items.overviewClass }} changeClass={(this.props.tab.toUpperCase()=== OVERVIEW ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
-		</Link>
+    return (
+    <div className="gor-tabs gor-main-block">
+    <Link to="/overview" onClick={this.handleTabClick.bind(this,OVERVIEW)}>
+      <Tab items={{ tab: items.overview, Status: items.overviewStatus, currentState:items.overviewClass }} changeClass={(this.props.tab.toUpperCase()=== OVERVIEW ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
+    </Link>
 
-		<Link to="/system/sysOverview" onClick={this.handleTabClick.bind(this,SYSTEM)}>
-			<Tab items={{ tab: items.system, Status: items.systemStatus, currentState:items.systemClass }} changeClass={(this.props.tab.toUpperCase()=== SYSTEM ? 'sel' :GOR_NORMAL_TAB)} subIcons={true}/>
-		</Link>
+    <Link to="/system/sysOverview" onClick={this.handleTabClick.bind(this,SYSTEM)}>
+      <Tab items={{ tab: items.system, Status: items.systemStatus, currentState:items.systemClass }} changeClass={(this.props.tab.toUpperCase()=== SYSTEM ? 'sel' :GOR_NORMAL_TAB)} subIcons={true}/>
+    </Link>
 
-		<Link to="/orders/waves" onClick={this.handleTabClick.bind(this,ORDERS)}>
-			<Tab items={{ tab: items.order, Status: items.ordersStatus, currentState:items.ordersClass }} changeClass={(this.props.tab.toUpperCase()=== ORDERS ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
-		</Link>
+    <Link to="/orders/waves" onClick={this.handleTabClick.bind(this,ORDERS)}>
+      <Tab items={{ tab: items.order, Status: items.ordersStatus, currentState:items.ordersClass }} changeClass={(this.props.tab.toUpperCase()=== ORDERS ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
+    </Link>
 
 
     <Link to="/audit" onClick={this.handleTabClick.bind(this,AUDIT)}>
       <Tab items={{ tab: items.audit, Status: items.auditStatus, currentState:items.auditClass}} changeClass={(this.props.tab.toUpperCase()=== AUDIT ? 'sel' :GOR_NORMAL_TAB)} subIcons={items.auditIcon}/>
       </Link>
-
+    <Link to="/reports/operationsLog" onClick={this.handleTabClick.bind(this,REPORTS)}>
+      <Tab items={{ tab: items.reports}} changeClass={(this.props.tab.toUpperCase()=== REPORTS ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
+    </Link>
     <Link to="/inventory" onClick={this.handleTabClick.bind(this,INVENTORY)}>
       <Tab items={{ tab: items.inventory, Status: items.inventoryStatus, currentState:'' }} changeClass={(this.props.tab.toUpperCase()=== INVENTORY ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
     </Link>
-		
-		<Link to="/users" onClick={this.handleTabClick.bind(this,USERS)}>
-			<Tab items={{ tab: items.users, Status: items.usersStatus, currentState:'' }} changeClass={(this.props.tab.toUpperCase()=== USERS ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
-		</Link>
+    
+    <Link to="/users" onClick={this.handleTabClick.bind(this,USERS)}>
+      <Tab items={{ tab: items.users, Status: items.usersStatus, currentState:'' }} changeClass={(this.props.tab.toUpperCase()=== USERS ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
+    </Link>
 
     {showUtilityTab?<Link to="/utilities" onClick={this.handleTabClick.bind(this,UTILITIES)}>
       <Tab items={{ tab: items.utilities, Status:'', currentState:'' }} changeClass={(this.props.tab.toUpperCase()=== UTILITIES ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
     </Link>:""}
    {showFireHazardPopup?notificationWrap:""}
   </div>
-		);
-	}
+    );
+  }
 }
 
 function mapStateToProps(state, ownProps){
@@ -345,6 +352,7 @@ function mapStateToProps(state, ownProps){
          tab:state.tabSelected.tab || TAB_ROUTE_MAP[OVERVIEW],
          overview_status:state.tabsData.overview_status||null,
          system_emergency:state.tabsData.system_emergency||false,
+         lastEmergencyState:state.tabsData.lastEmergencyState || "none",
          system_data:state.tabsData.system_data||null,
          lastEmergencyState:state.tabsData.lastEmergencyState,
          users_online:state.tabsData.users_online||0,
@@ -366,15 +374,13 @@ function mapStateToProps(state, ownProps){
 }
 
 var mapDispatchToProps=function(dispatch){
-	return {
-		tabSelected: function(data){ dispatch(tabSelected(data)); },
-        subTabSelected: function(data){ dispatch(subTabSelected(data)); },
+  return {
         setInventorySpinner:function(data){dispatch(setInventorySpinner(data));},
         setAuditSpinner:function(data){dispatch(setAuditSpinner(data));},
         setButlerSpinner:function(data){dispatch(setButlerSpinner(data))},
         setFireHazrdFlag:function(data){dispatch(setFireHazrdFlag(data))},
         setEmergencyModalStatus:function(data){dispatch(setEmergencyModalStatus(data));}
-	}
+  }
 };
 
 

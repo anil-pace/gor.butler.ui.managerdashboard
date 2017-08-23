@@ -68,5 +68,3 @@ export function setEmergencyModalStatus(data) {
         data
     }
 }
-
-

@@ -1,32 +1,3 @@
 [
-{
-	"id": "operation.fire.failshutter",
-	"description": "Description Text fail to clear shutter",
-	"defaultMessage": "Failed to clear shutters",
-	"filepath": "./src/containers/emergencyProcess/fireHazard.js"
-},
-{
-	"id": "operation.fire.clearedshutter",
-	"description": "Description Text  cleared shutter",
-	"defaultMessage": "Cleared all shutters",
-	"filepath": "./src/containers/emergencyProcess/fireHazard.js"
-},
-{
-	"id": "operation.fire.escapecleared",
-	"description": "Description Text escape cleared",
-	"defaultMessage": "Cleared escape path",
-	"filepath": "./src/containers/emergencyProcess/fireHazard.js"
-},
-{
-	"id": "operation.fire.escapeprogress",
-	"description": "Description Text escape in progress",
-	"defaultMessage": "Clearing escape path",
-	"filepath": "./src/containers/emergencyProcess/fireHazard.js"
-},
-{
-	"id": "operation.fire.escapefail",
-	"description": "Description Text escape to fail",
-	"defaultMessage": "Failed to clear escape path",
-	"filepath": "./src/containers/emergencyProcess/fireHazard.js"
-}
+
 ]

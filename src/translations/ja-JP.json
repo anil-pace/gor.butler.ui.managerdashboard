@@ -5341,6 +5341,107 @@
    "description": "Description Text escape to fail",
    "defaultMessage": "エスケープパスをクリアできませんでした",
    "filepath": "./src/containers/emergencyProcess/fireHazard.js"
+},
+{
+   "id": "operationsFilter.tokenHead.status",
+   "defaultMessage": "状態",
+   "filepath": "./src/containers/reportsTab/operationsFilter.js"
+},
+{
+   "id": "operationsFilter.tokenHead.timePeriod",
+   "defaultMessage": "時間の経過",
+   "filepath": "./src/containers/reportsTab/operationsFilter.js"
+},
+{
+   "id": "operationsFilter.STATUS.any",
+   "defaultMessage": "どれか",
+   "filepath": "./src/containers/reportsTab/operationsFilter.js"
+},
+{
+   "id": "operationsFilter.STATUS.success",
+   "defaultMessage": "成功",
+   "filepath": "./src/containers/reportsTab/operationsFilter.js"
+},
+{
+   "id": "operationsFilter.STATUS.exception",
+   "defaultMessage": "例外",
+   "filepath": "./src/containers/reportsTab/operationsFilter.js"
+},
+{
+   "id": "operationsFilter.timePeriod.oneHour",
+   "defaultMessage": "過去1時間",
+   "filepath": "./src/containers/reportsTab/operationsFilter.js"
+},
+{
+   "id": "operationsFilter.timePeriod.twoHour",
+   "defaultMessage": "過去2時間",
+   "filepath": "./src/containers/reportsTab/operationsFilter.js"
+},
+{
+   "id": "operationLog.table.heading",
+   "description": "Heading for PPS",
+   "defaultMessage": "操作ログ",
+   "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+{
+   "id": "operationLog.table.operatingMode",
+   "description": "OPERATING MODE",
+   "defaultMessage": "動作モード",
+   "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+{
+   "id": "operationLog.table.status",
+   "description": "STATUS",
+   "defaultMessage": "状態",
+   "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+{
+   "id": "operationLog.table.requestId",
+   "description": "Request ID",
+   "defaultMessage": "要求ID",
+   "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+{
+   "id": "operationLog.table.skuId",
+   "description": "Status for PPS",
+   "defaultMessage": "SKU ID",
+   "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+{
+   "id": "operationLog.table.sourceId",
+   "description": "Status for PPS",
+   "defaultMessage": "ソースID",
+   "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+{
+   "id": "operationLog.table.destinationId",
+   "description": "Status for PPS",
+   "defaultMessage": "DESTINATION ID",
+   "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+{
+   "id": "operationLog.table.userId",
+   "description": "Status for PPS",
+   "defaultMessage": "ユーザーID",
+   "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+{
+   "id": "operationLog.table.timestamp",
+   "description": "Status for PPS",
+   "defaultMessage": "TIMESTAMP",
+   "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+{
+   "id": "reportsTab.operationsLog",
+   "description": "Operations Log tab for Reports tab",
+   "defaultMessage": "操作ログ",
+   "filepath": "./src/containers/reportsTab/reportsTab.js"
+},
+{
+   "id": "reports.tab.heading",
+   "description": "reports tab",
+   "defaultMessage": "レポート",
+   "filepath": "./src/containers/tabs.js"
 }
 
 ]

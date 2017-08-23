@@ -1,4 +1,4 @@
-export const BASE_URL = 'localhost';
+export const BASE_URL = '192.168.8.83';
 export const PROTOCOL = 'https://';
 export const WS_PROTOCOL ="wss://";
 export const WS_URL = WS_PROTOCOL+BASE_URL+"/manager_api/wss";
@@ -61,6 +61,12 @@ export const PPS_PROFILE_URL=API_URL+"/pps_profiles/"//TODO: URL need to be chan
 export const FETCH_TAGS_URL=API_URL+"/components/get_bin_tags"//TODO: URL need to be changed accrodingly
 export const SAVE_TAGS_URL=API_URL+"/components/add_bin_tags"//TODO: URL need to be changed accrodingly
 export const SAVE_PROFILE_URL=API_URL+"/pps_profiles/"//TODO: URL need to be changed accrodingly
+
+/**
+ * URLs for Operations Log Report
+ */
+
+export const OPERATIONS_LOG_URL =  "http://192.168.8.116:8080/api-gateway/dashboard-service/platform-dashboard/operator/logs/search"
 
 
 

@@ -569,36 +569,6 @@
     "filepath": "./src/components/subtab/subTabs.js"
   },
   {
-    "id": "gor.filter.filterLabel",
-    "description": "label for filter",
-    "defaultMessage": "Filter data",
-    "filepath": "./src/components/tableFilter/filter.js"
-  },
-  {
-    "id": "gor.filter.hide",
-    "description": "label for hide",
-    "defaultMessage": "Hide",
-    "filepath": "./src/components/tableFilter/filter.js"
-  },
-  {
-    "id": "gor.filter.noResult",
-    "description": "label for hide",
-    "defaultMessage": "No results found, please try again",
-    "filepath": "./src/components/tableFilter/filter.js"
-  },
-  {
-    "id": "gor.filter.reset",
-    "description": "label for reset",
-    "defaultMessage": "Reset",
-    "filepath": "./src/components/tableFilter/filter.js"
-  },
-  {
-    "id": "gor.filter.heading",
-    "description": "filter heading",
-    "defaultMessage": "Apply filter",
-    "filepath": "./src/components/tableFilter/filter.js"
-  },
-  {
     "id": "utility.uploadHist.fileName",
     "description": "Upload file name",
     "defaultMessage": "File {fileName}",
@@ -2420,7 +2390,7 @@
   {
     "id": "operation.fire.evacuation",
     "description": "Description Text evacuation",
-    "defaultMessage": " Please follow evacuation procedures immediately.",
+    "defaultMessage": "Please follow evacuation procedures immediately.",
     "filepath": "./src/containers/emergencyProcess/fireHazard.js"
   },
   {
@@ -3369,6 +3339,137 @@
     "description": "Put Item Heading",
     "defaultMessage": "Items stocked",
     "filepath": "./src/containers/putStatusWidget.js"
+  },
+  {
+    "id": "operationsFilter.tokenHead.status",
+    "defaultMessage": "STATUS",
+    "filepath": "./src/containers/reportsTab/operationsFilter.js"
+  },
+  {
+    "id": "operationsFilter.tokenHead.timePeriod",
+    "defaultMessage": "TIME PERIOD",
+    "filepath": "./src/containers/reportsTab/operationsFilter.js"
+  },
+  {
+    "id": "operationsFilter.STATUS.any",
+    "defaultMessage": "Any",
+    "filepath": "./src/containers/reportsTab/operationsFilter.js"
+  },
+  {
+    "id": "operationsFilter.STATUS.success",
+    "defaultMessage": "Success",
+    "filepath": "./src/containers/reportsTab/operationsFilter.js"
+  },
+  {
+    "id": "operationsFilter.STATUS.exception",
+    "defaultMessage": "Exception",
+    "filepath": "./src/containers/reportsTab/operationsFilter.js"
+  },
+  {
+    "id": "operationsFilter.timePeriod.oneHour",
+    "defaultMessage": "Last 1 hour",
+    "filepath": "./src/containers/reportsTab/operationsFilter.js"
+  },
+  {
+    "id": "operationsFilter.timePeriod.twoHour",
+    "defaultMessage": "Last 2 hour",
+    "filepath": "./src/containers/reportsTab/operationsFilter.js"
+  },
+  {
+    "id": "gor.filter.filterLabel",
+    "description": "label for filter",
+    "defaultMessage": "Filter data",
+    "filepath": "./src/containers/reportsTab/operationsFilter.js"
+  },
+  {
+    "id": "gor.filter.hide",
+    "description": "label for hide",
+    "defaultMessage": "Hide",
+    "filepath": "./src/containers/reportsTab/operationsFilter.js"
+  },
+  {
+    "id": "gor.filter.noResult",
+    "description": "label for no result",
+    "defaultMessage": "No results found, please try again",
+    "filepath": "./src/containers/reportsTab/operationsFilter.js"
+  },
+  {
+    "id": "gor.filter.reset",
+    "description": "label for reset",
+    "defaultMessage": "Reset",
+    "filepath": "./src/containers/reportsTab/operationsFilter.js"
+  },
+  {
+    "id": "gor.filter.heading",
+    "description": "filter heading",
+    "defaultMessage": "Apply filter",
+    "filepath": "./src/containers/reportsTab/operationsFilter.js"
+  },
+  {
+    "id": "operationLog.table.heading",
+    "description": "Heading for PPS",
+    "defaultMessage": "Operations Log",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
+    "id": "gor.filter.filterLabel",
+    "description": "button label for filter",
+    "defaultMessage": "Filter data",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
+    "id": "operationLog.table.operatingMode",
+    "description": "OPERATING MODE",
+    "defaultMessage": "OPERATING MODE",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
+    "id": "operationLog.table.status",
+    "description": "STATUS",
+    "defaultMessage": "STATUS",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
+    "id": "operationLog.table.requestId",
+    "description": "Request ID",
+    "defaultMessage": "REQUEST ID",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
+    "id": "operationLog.table.skuId",
+    "description": "Status for PPS",
+    "defaultMessage": "SKU ID",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
+    "id": "operationLog.table.sourceId",
+    "description": "Status for PPS",
+    "defaultMessage": "SOURCE ID",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
+    "id": "operationLog.table.destinationId",
+    "description": "Status for PPS",
+    "defaultMessage": "DESTINATION ID",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
+    "id": "operationLog.table.userId",
+    "description": "Status for PPS",
+    "defaultMessage": "USER ID",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
+    "id": "operationLog.table.timestamp",
+    "description": "Status for PPS",
+    "defaultMessage": "TIMESTAMP",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
+    "id": "reportsTab.operationsLog",
+    "description": "Operations Log tab for Reports tab",
+    "defaultMessage": "Operations Log",
+    "filepath": "./src/containers/reportsTab/reportsTab.js"
   },
   {
     "id": "butletbot.inputField.id",
@@ -4483,6 +4584,12 @@
     "filepath": "./src/containers/tabs.js"
   },
   {
+    "id": "reports.tab.heading",
+    "description": "reports tab",
+    "defaultMessage": "REPORTS",
+    "filepath": "./src/containers/tabs.js"
+  },
+  {
     "id": "overviewStatus.tab.fulfilling",
     "description": "overview Status fulfilling orders",
     "defaultMessage": "Fulfilling orders",
@@ -4528,12 +4635,6 @@
     "id": "auditStatus.tab.heading",
     "description": "audit Status",
     "defaultMessage": "{count} in progress",
-    "filepath": "./src/containers/tabs.js"
-  },
-  {
-    "id": "auditStatus.tab.heading.none",
-    "description": "audit Status",
-    "defaultMessage": "None",
     "filepath": "./src/containers/tabs.js"
   },
   {

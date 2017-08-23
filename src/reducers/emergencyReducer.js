@@ -1,5 +1,6 @@
 import {MODAL_STATUS,SAFETY_MAP,
-  SAFETY_ERROR_MAP,SAFETY_ERROR_BOT,CHECKLIST,MODAL_RESET} from '../constants/frontEndConstants';
+  SAFETY_ERROR_MAP,SAFETY_ERROR_BOT,CHECKLIST,
+  MODAL_RESET,SET_EMERGENCY_MODAL_STATUS} from '../constants/frontEndConstants';
 
 /**
  * @param  {State Object}
@@ -51,7 +52,8 @@ export  function emergency(state={},action){
             "hideModal":null,
             "safetyErrorList":[]
           })
-          break;   
+          break;
+       
     default:
     	  return state;
   }
