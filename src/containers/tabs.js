@@ -109,7 +109,7 @@ class Tabs extends React.Component{
       this._emergencyRelease();
     }
    else  if(nextProps.fireHazardType ===EMERGENCY_FIRE && !nextProps.firehazadflag && !nextProps.fireHazardNotifyTime && nextProps.firehazadflag!==this.props.firehazadflag || 
-      ((this.props.firehazadflag===false) && nextProps.fireHazardNotifyTime!==this.props.fireHazardNotifyTime))
+      (nextProps.fireHazardType ===EMERGENCY_FIRE && (this.props.firehazadflag===false) && nextProps.fireHazardNotifyTime!==this.props.fireHazardNotifyTime))
 
     {
       this._FireEmergencyRelease();
