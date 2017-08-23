@@ -2300,7 +2300,7 @@
   {
     "id": "operation.fire.evacuation",
     "description": "Description Text evacuation",
-    "defaultMessage": " Please follow evacuation procedures immediately.",
+    "defaultMessage": "Please follow evacuation procedures immediately.",
     "filepath": "./src/containers/emergencyProcess/fireHazard.js"
   },
   {

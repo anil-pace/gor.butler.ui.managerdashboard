@@ -64,7 +64,8 @@ OperationStop.propTypes={
       userRequest:React.PropTypes.func,
       emergencyPress:React.PropTypes.bool,
       system_emergency:React.PropTypes.bool,
-      system_data:React.PropTypes.string
+      system_data:React.PropTypes.string,
+      poeEnabled:React.PropTypes.bool
 }
 
 
