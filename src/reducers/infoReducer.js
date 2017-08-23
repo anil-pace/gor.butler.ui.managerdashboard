@@ -44,7 +44,7 @@ export  function appInfo(state={},action){
     case PASSWORD_BUTTON_RESET:
           return Object.assign({}, state, { 
             "passwordInfo":null
-          })       
+          })
     case NOTIFY_PASS:
          let notifyMsg=action.data, notifyPass;
          notifyPass={
