@@ -2,7 +2,7 @@ import {SKU_DATA,LOC_DATA,ID_DATA,NAME_DATA,PASSWORD_DATA,INFO_RESET,
 	ID_BACKEND,NOTIFY_PASS,NOTIFY_HIDE,NOTIFY_FAIL,NOTIFY_DELETE,
 	NOTIFY_INFO,LOGIN_ERROR,AJAX_CALL,VALIDATE_SKU_SPINNER,
 	VALIDATED_SKU_CODE,MODAL_STATUS,SAFETY_MAP,
-	SAFETY_ERROR_MAP,SET_MODAL_KEY,CHECKLIST,MODAL_RESET} from '../constants/frontEndConstants';
+	SAFETY_ERROR_MAP,SET_MODAL_KEY,CHECKLIST,MODAL_RESET,PASSWORD_BUTTON_RESET} from '../constants/frontEndConstants';
 
 
 export function validateID(data){
@@ -43,6 +43,11 @@ export function validatePassword(data){
 export function resetForm(){	
 	return{
 		type:INFO_RESET,
+	}
+}
+export function resetPasswordButton(){
+	return{
+		type:PASSWORD_BUTTON_RESET,
 	}
 }
 export function notifySuccess(data){	
