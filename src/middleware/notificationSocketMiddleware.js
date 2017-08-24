@@ -1,5 +1,6 @@
 import {wsNotificationResponseAction,wsNotificationEndConnection} from '../actions/notificationSocketActions'
-import {WS_NOTIFICATION_CONNECT,WS_NOTIFICATION_DISCONNECT,WS_NOTIFICATION_ONSEND} from '../constants/frontEndConstants'
+import {WS_NOTIFICATION_CONNECT,WS_NOTIFICATION_DISCONNECT,
+  WS_NOTIFICATION_ONSEND,WS_NOTIFICATION_SUBSCRIBE} from '../constants/frontEndConstants'
 import {WS_NOTIFICATION_URL,WS_URL} from '../constants/configConstants';
 import {NotificationResponseParse} from '../utilities/notificationResponseParser';
 import SockJS from 'sockjs-client';
@@ -20,7 +21,7 @@ const notificationSocketMiddleware = (function(){
     //Send a handshake, or authenticate with remote end
 
     //Tell the store we're connected
-    ws.subscribe('/dashboard/notification',onMessage(ws,store));
+    
     store.dispatch(wsNotificationResponseAction(evt.type));
 
   }
@@ -72,7 +73,9 @@ const notificationSocketMiddleware = (function(){
       case WS_NOTIFICATION_ONSEND:
         socket.send(JSON.stringify(action.data));
         break;
-
+      case WS_NOTIFICATION_SUBSCRIBE:
+        socket.subscribe(action.data,onMessage(socket,store));
+        break;
       //This action is irrelevant to us, pass it on to the next middleware
       default:
         return next(action);

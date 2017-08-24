@@ -4,7 +4,8 @@ import {WS_NOTIFICATION_CONNECT,
 	WS_NOTIFICATION_ONMESSAGE,
 	WS_NOTIFICATION_ONSEND,
 	WS_NOTIFICATION_END,
-	DATA_SUBSCRIPTION_PACKET} from '../constants/frontEndConstants'
+	DATA_SUBSCRIPTION_PACKET,
+WS_NOTIFICATION_SUBSCRIBE} from '../constants/frontEndConstants'
 
 
 
@@ -33,6 +34,13 @@ export function wsNotificationEndConnection()
 {
 	return {
 		type:WS_NOTIFICATION_END
+	}
+}
+export function wsNotificationSubscribe(data)
+{
+	return {
+		type:WS_NOTIFICATION_SUBSCRIBE,
+		data
 	}
 }
 
