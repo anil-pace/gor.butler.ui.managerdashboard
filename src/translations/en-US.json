@@ -1547,15 +1547,15 @@
     "filepath": "./src/constants/messageConstants.js"
   },
   {
-    "id": "audit.cancellation.error.g024",
-    "description": "Audit Id cancellation request has been process and cannot be cancelled",
-    "defaultMessage": "Audit Id cancellation request has been process and cannot be cancelled",
-    "filepath": "./src/constants/messageConstants.js"
-  },
-  {
     "id": "audit.cancellation.success",
     "description": "Audit Id cancellation is successful",
     "defaultMessage": "Request sent for audit cancellation",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "audit.cancellation.error.g024",
+    "description": "Audit cancellation request denied",
+    "defaultMessage": "Audit cancellation request denied",
     "filepath": "./src/constants/messageConstants.js"
   },
   {
