@@ -1536,8 +1536,8 @@
   },
   {
     "id": "audit.cancellation.error.g024",
-    "description": "Audit Id cancellation request has been process and cannot be cancelled",
-    "defaultMessage": "Audit Id cancellation request has been process and cannot be cancelled",
+    "description": "Audit cancellation request denied",
+    "defaultMessage": "Audit cancellation request denied",
     "filepath": "./src/constants/messageConstants.js"
   },
   {
@@ -2300,7 +2300,7 @@
   {
     "id": "operation.fire.evacuation",
     "description": "Description Text evacuation",
-    "defaultMessage": " Please follow evacuation procedures immediately.",
+    "defaultMessage": "Please follow evacuation procedures immediately.",
     "filepath": "./src/containers/emergencyProcess/fireHazard.js"
   },
   {
