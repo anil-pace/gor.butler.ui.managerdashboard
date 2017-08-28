@@ -1,4 +1,4 @@
-export const BASE_URL = '192.168.8.83';
+export const BASE_URL = '192.168.8.109';
 export const PROTOCOL = 'https://';
 export const WS_PROTOCOL ="wss://";
 export const WS_URL = WS_PROTOCOL+BASE_URL+"/manager_api/wss";
@@ -52,6 +52,7 @@ export const GET_MAXSIZE_FILE_URL=API_URL + "/components/get_mdm_file_size";
 export const WS_NOTIFICATION_URL =  API_URL+"/platform-dashboard/dashboard-stomp";
 export const NOTIFICATIONS_URL =  API_URL+"/api-gateway/dashboard-service/platform-dashboard/event";
 export const READ_MSG_URL = API_URL+"/api-gateway/dashboard-service/platform-dashboard/event/mark-as-read";
+export const WS_NOTIFICATION_SUBSCRIPTION = '/dashboard/notification';
 /**
  * URLs or PPS Configurations
  */

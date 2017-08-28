@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import Notification from '../../components/notifications/notifications';
 import {modal} from 'react-redux-modal';
 import ViewAllNotificationWrapper from './viewAllNotificationWrapper';
-import {NOTIFICATIONS_URL,READ_MSG_URL} from '../../constants/configConstants';
+import {NOTIFICATIONS_URL,READ_MSG_URL,WS_NOTIFICATION_SUBSCRIPTION} from '../../constants/configConstants';
 import {GET,POST,APP_JSON,SEARCHED_NOTIFICATIONS_DATA} from '../../constants/frontEndConstants';
 import {getNotificationData,resetNotificationData} from '../../actions/notificationAction';
 import {wsNotificationInit,wsNotificationSubscribe} from '../../actions/notificationSocketActions';
@@ -97,7 +97,7 @@ class NotificationsWrapper extends React.Component{
             this.setState({
                 subscriptionSent:true
             },function(){
-                this.props.wsNotificationSubscribe('/dashboard/notification');
+                this.props.wsNotificationSubscribe(WS_NOTIFICATION_SUBSCRIPTION);
             })
             
         }

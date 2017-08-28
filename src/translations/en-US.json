@@ -3341,41 +3341,6 @@
     "filepath": "./src/containers/putStatusWidget.js"
   },
   {
-    "id": "operationsFilter.tokenHead.status",
-    "defaultMessage": "STATUS",
-    "filepath": "./src/containers/reportsTab/operationsFilter.js"
-  },
-  {
-    "id": "operationsFilter.tokenHead.timePeriod",
-    "defaultMessage": "TIME PERIOD",
-    "filepath": "./src/containers/reportsTab/operationsFilter.js"
-  },
-  {
-    "id": "operationsFilter.STATUS.any",
-    "defaultMessage": "Any",
-    "filepath": "./src/containers/reportsTab/operationsFilter.js"
-  },
-  {
-    "id": "operationsFilter.STATUS.success",
-    "defaultMessage": "Success",
-    "filepath": "./src/containers/reportsTab/operationsFilter.js"
-  },
-  {
-    "id": "operationsFilter.STATUS.exception",
-    "defaultMessage": "Exception",
-    "filepath": "./src/containers/reportsTab/operationsFilter.js"
-  },
-  {
-    "id": "operationsFilter.timePeriod.oneHour",
-    "defaultMessage": "Last 1 hour",
-    "filepath": "./src/containers/reportsTab/operationsFilter.js"
-  },
-  {
-    "id": "operationsFilter.timePeriod.twoHour",
-    "defaultMessage": "Last 2 hour",
-    "filepath": "./src/containers/reportsTab/operationsFilter.js"
-  },
-  {
     "id": "gor.filter.filterLabel",
     "description": "label for filter",
     "defaultMessage": "Filter data",
