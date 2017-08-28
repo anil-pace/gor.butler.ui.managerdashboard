@@ -10,8 +10,10 @@ import { FormattedMessage} from 'react-intl';
 import { connect } from 'react-redux';
 import {wsOverviewData} from '../../constants/initData.js';
 import Dimensions from 'react-dimensions';
-import {updateSubscriptionPacket,setWsAction} from '../../actions/socketActions'
-import {WS_ONSEND,GET,OPERATION_LOG_FETCH} from '../../constants/frontEndConstants';
+import {updateSubscriptionPacket,setWsAction} from '../../actions/socketActions';
+import {applyOLFilterFlag} from '../../actions/operationsLogsActions';
+import {WS_ONSEND,POST,OPERATION_LOG_FETCH,
+    OPERATIONS_LOG_REQUEST_PARAMS,APP_JSON} from '../../constants/frontEndConstants';
 import GorPaginateV2 from '../../components/gorPaginate/gorPaginateV2';
 import {Table, Column,Cell} from 'fixed-data-table';
 import {
@@ -65,7 +67,9 @@ const dummyData = [{
     },
     "userId": "sudhir.m",
     "timestamp": ""
-}]
+}];
+
+
 class OperationsLogTab extends React.Component{
 	constructor(props,context) {
         super(props,context);
@@ -102,7 +106,7 @@ class OperationsLogTab extends React.Component{
     }
 
         _processData(data){
-        //var data=this.props.controllers.slice(0);
+        
         var dataLen = data.length;
         var processedData=[];
         if(dataLen){
@@ -126,7 +130,9 @@ class OperationsLogTab extends React.Component{
         return processedData
     }
     shouldComponentUpdate(nextProps,nextState){
-        return nextProps.hasDataChanged !== this.props.hasDataChanged;
+        var shouldUpdate = (nextProps.hasDataChanged !== this.props.hasDataChanged) || 
+        (nextProps.showFilter !== this.props.showFilter);
+        return shouldUpdate;
     }
     componentWillReceiveProps(nextProps) {
         if (nextProps.socketAuthorized && !this.state.subscribed) {
@@ -134,6 +140,9 @@ class OperationsLogTab extends React.Component{
                 this._subscribeData(nextProps.location.query)
             })
             
+        }
+        else if(nextProps.socketAuthorized && nextProps.filtersApplied){
+            this._getOperationsData(nextProps.location.query)
         }
         if(this.props.hasDataChanged !== nextProps.hasDataChanged){
             let data = this._processData(nextProps.olData.slice(0));
@@ -145,12 +154,15 @@ class OperationsLogTab extends React.Component{
         }
         
     }
+    componentDidMount(){
+        this._getOperationsData(this.props.location.query)
+    }
     /*Since componentWillRecieveProps is not called for the first time
     We need to put the subscription code in componentWillMount as well*/
     componentWillMount() {
         if (this.props.socketAuthorized && !this.state.subscribed) {
             this.setState({subscribed: true},function(){
-                this._subscribeData(this.props.location.query)
+                this._subscribeData()
             })
             
         }
@@ -163,19 +175,39 @@ class OperationsLogTab extends React.Component{
 		this.setState({subscribed: false})
 	}
 
-    _subscribeData(query){
+    _subscribeData(){
         this.props.initDataSentCall(wsOverviewData["default"]);
+	}
+    _getOperationsData(query){
         if(query.timeperiod !== "realtime"){
+            let filters = {};//JSON.parse(JSON.stringify(OPERATIONS_LOG_REQUEST_PARAMS));
+            if(Object.keys(query).length){
+                let currTime = new Date();
+                let toTime = new Date(currTime);
+                toTime.setMinutes(currTime.getMinutes() - parseInt(query.time_period));
+                filters.status = query.status;
+                filters.requestId = query.request_id;
+                filters.skuId = query.sku_id;
+                filters.userId = query.user_id;
+                filters.timeRange = {
+                    from: currTime.getTime(),//Need to add timeoffset
+                    to:toTime.getTime()
+                }
+            }
             let params={
-                'url':OPERATIONS_LOG_URL+"?q=*",
-                'method':GET,
+                'url':OPERATIONS_LOG_URL,
+                'method':POST,
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
+                'formdata':filters,
                 'cause':OPERATION_LOG_FETCH
             }
+
         //this.props.setLoginSpinner(true); TODO
+        this.props.applyOLFilterFlag(false);
         this.props.makeAjaxCall(params);
         }
-
-	}
+    }
     _setFilter(){
         this.props.showTableFilter(!this.props.showFilter);
     }
@@ -389,7 +421,8 @@ function mapStateToProps(state, ownProps) {
         socketAuthorized: state.recieveSocketActions.socketAuthorized,
         showFilter: state.filterInfo.filterState || false,
         olData:state.operationsLogsReducer.olData || [],
-        hasDataChanged:state.operationsLogsReducer.hasDataChanged
+        hasDataChanged:state.operationsLogsReducer.hasDataChanged,
+        filtersApplied:state.operationsLogsReducer.filtersApplied || false
 
     };
 }
@@ -400,7 +433,8 @@ function mapDispatchToProps(dispatch){
                 dispatch(updateSubscriptionPacket(data));
         },
         showTableFilter: function(data){dispatch(showTableFilter(data));},
-        makeAjaxCall: function(params){dispatch(makeAjaxCall(params));}
+        makeAjaxCall: function(params){dispatch(makeAjaxCall(params));},
+        applyOLFilterFlag:function(data){dispatch(applyOLFilterFlag(data))}
     }
 };
 

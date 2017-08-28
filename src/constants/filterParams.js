@@ -36,7 +36,6 @@ export const REPORTS_FILTER_PARAMS = [{
 	name:"timeperiod",
 	type:"token",
 	tokens:{
-		any:"Any",
 		realtime:"Real Time",
 		60:"Last 1 Hour",
 		120:"Last 2 Hour"

@@ -1,4 +1,4 @@
-import { OPERATION_LOG_FETCH } from '../constants/frontEndConstants'
+import { OPERATION_LOG_FETCH,APPLY_OL_FILTER_FLAG } from '../constants/frontEndConstants'
 
 export  function operationsLogsReducer(state={},action){
 	
@@ -10,6 +10,10 @@ export  function operationsLogsReducer(state={},action){
 	    return Object.assign({}, state, {
 	    	olData:action.data,
 	    	hasDataChanged:!state.hasDataChanged
+      })
+	  case APPLY_OL_FILTER_FLAG:
+	  	 return Object.assign({}, state, {
+	    	filtersApplied:action.data
       })
 	    
 	  default:
