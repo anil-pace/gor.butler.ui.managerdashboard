@@ -8,6 +8,7 @@ import {modal} from 'react-redux-modal';
 import {setInventorySpinner} from '../actions/inventoryActions';
 import {setAuditSpinner} from '../actions/auditActions';
 import {setButlerSpinner} from '../actions/spinnerAction';
+import {setEmergencyModalStatus} from '../actions/tabActions';
 import {OVERVIEW,SYSTEM,ORDERS,USERS,TAB_ROUTE_MAP,INVENTORY,AUDIT,
 FULFILLING_ORDERS,GOR_OFFLINE,GOR_ONLINE,GOR_NORMAL_TAB,GOR_FAIL,
 SOFT_MANUAL,HARD,SOFT,UTILITIES,FIRE_EMERGENCY_POPUP_FLAG,EMERGENCY_FIRE} from '../constants/frontEndConstants';
@@ -104,23 +105,29 @@ class Tabs extends React.Component{
   
   componentWillReceiveProps(nextProps){
 
-    if(nextProps.system_data=== SOFT_MANUAL && (this.props.system_data=== HARD || !this.props.system_data))
-    {
-      this._emergencyRelease();
-    }
-   else  if(nextProps.fireHazardType ===EMERGENCY_FIRE && !nextProps.firehazadflag && !nextProps.fireHazardNotifyTime && nextProps.firehazadflag!==this.props.firehazadflag || 
-      ((this.props.firehazadflag===false) && nextProps.fireHazardNotifyTime!==this.props.fireHazardNotifyTime))
+    if(!nextProps.isEmergencyOpen){
+        if( nextProps.system_emergency  && nextProps.system_data === HARD){
+            this.props.setEmergencyModalStatus(true);
+            this._stopOperation(true, nextProps.zoneDetails);
 
-    {
-      this._FireEmergencyRelease();
+        }
+        else if(  nextProps.system_data === SOFT){
+          this.props.setEmergencyModalStatus(true);
+          this._pauseOperation(true, nextProps.zoneDetails);
+        }
+        else if( 
+          nextProps.system_data === SOFT_MANUAL && 
+          (nextProps.lastEmergencyState === HARD || nextProps.lastEmergencyState === SOFT)){
+           this.props.setEmergencyModalStatus(true);
+           this._emergencyRelease();
+        }     
     }
-    else if(nextProps.system_emergency && !this.props.system_emergency && nextProps.system_data=== HARD)
-    {
-      this._stopOperation(true,nextProps.zoneDetails);
-    }
-    else if(nextProps.system_data=== SOFT && (this.props.system_data!== nextProps.system_data)){
-      this._pauseOperation(true,nextProps.zoneDetails);
-    }
+    
+     if (nextProps.fireHazardType === EMERGENCY_FIRE && !nextProps.firehazadflag && !nextProps.fireHazardNotifyTime && nextProps.firehazadflag !== this.props.firehazadflag 
+          || (nextProps.fireHazardType === EMERGENCY_FIRE && (this.props.firehazadflag === false) && nextProps.fireHazardNotifyTime !== this.props.fireHazardNotifyTime)){
+          console.log(nextProps.fireHazardType);
+            this._FireEmergencyRelease();
+        }
     
   }
   _parseStatus()
@@ -330,6 +337,7 @@ function mapStateToProps(state, ownProps){
          overview_status:state.tabsData.overview_status||null,
          system_emergency:state.tabsData.system_emergency||false,
          system_data:state.tabsData.system_data||null,
+         lastEmergencyState:state.tabsData.lastEmergencyState,
          users_online:state.tabsData.users_online||0,
          audit_count:state.tabsData.audit_count||0,
          space_utilized:state.tabsData.space_utilized||0,
@@ -343,6 +351,7 @@ function mapStateToProps(state, ownProps){
          fireHazardNotifyTime:state.fireHazardDetail.notifyTime,
          timeZone:state.authLogin.timeOffset,
         zoneDetails: state.tabsData.zoneDetails || {},
+        isEmergencyOpen:state.tabsData.isEmergencyOpen
 
     }
 }
@@ -354,7 +363,8 @@ var mapDispatchToProps=function(dispatch){
         setInventorySpinner:function(data){dispatch(setInventorySpinner(data));},
         setAuditSpinner:function(data){dispatch(setAuditSpinner(data));},
         setButlerSpinner:function(data){dispatch(setButlerSpinner(data))},
-        setFireHazrdFlag:function(data){dispatch(setFireHazrdFlag(data))}
+        setFireHazrdFlag:function(data){dispatch(setFireHazrdFlag(data))},
+        setEmergencyModalStatus:function(data){dispatch(setEmergencyModalStatus(data));}
 	}
 };
 

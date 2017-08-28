@@ -3694,6 +3694,12 @@
     "filepath": "./src/containers/systemTabs/confirmApplyProfile.js"
   },
   {
+    "id": "pps.configuration.confirm.apply.profile.description",
+    "description": "PPS Configuration will be changed",
+    "defaultMessage": "PPS Configuration will be changed",
+    "filepath": "./src/containers/systemTabs/confirmApplyProfile.js"
+  },
+  {
     "id": "pps.configuration.confirm.apply.cancel",
     "description": "Cancel apply Profile to PPS",
     "defaultMessage": "Cancel",
@@ -4164,6 +4170,12 @@
     "id": "pps.configuration.confirm.saveAndapply.profile",
     "description": "Save and ppply Profile to PPS",
     "defaultMessage": "Are you sure you want to save and apply the profile?",
+    "filepath": "./src/containers/systemTabs/saveApplyProfile.js"
+  },
+  {
+    "id": "pps.configuration.confirm.saveAndapply.profile.description",
+    "description": "Profile will be applied after pending tasks are completed",
+    "defaultMessage": "Profile will be applied after pending tasks are completed",
     "filepath": "./src/containers/systemTabs/saveApplyProfile.js"
   },
   {
