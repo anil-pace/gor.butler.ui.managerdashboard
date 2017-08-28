@@ -2,6 +2,7 @@ import React  from 'react';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
 import {showTableFilter, filterApplied,ppsfilterState,togglePPSFilter,setDefaultRange} from '../../actions/filterAction';
+import {applyOLFilterFlag} from '../../actions/operationsLogsActions';
 import { connect } from 'react-redux'; 
 import {updateSubscriptionPacket} from '../../actions/socketActions';
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
@@ -11,8 +12,8 @@ import {REPORTS_FILTER_PARAMS} from '../../constants/filterParams'
 import {setPpsFilterSpinner}  from '../../actions/spinnerAction';
 import {hashHistory} from 'react-router'
 
-const statusToken={value:"STATUS", label:<FormattedMessage id="operationsFilter.tokenHead.status" defaultMessage="STATUS"/>};
-const timePeriodToken={value:"TIME_PERIOD", label:<FormattedMessage id="operationsFilter.tokenHead.timePeriod" defaultMessage="TIME PERIOD"/>}; 
+//const statusToken={value:"STATUS", label:<FormattedMessage id="operationsFilter.tokenHead.status" defaultMessage="STATUS"/>};
+/*const timePeriodToken={value:"TIME_PERIOD", label:<FormattedMessage id="operationsFilter.tokenHead.timePeriod" defaultMessage="TIME PERIOD"/>}; 
 
 const statusLabels=[
                     { value: 'any', label: <FormattedMessage id="operationsFilter.STATUS.any" defaultMessage="Any"/>},
@@ -23,7 +24,7 @@ const statusLabels=[
 const timePeriodLabels=[
             { value: '60', label: <FormattedMessage id="operationsFilter.timePeriod.oneHour" defaultMessage="Last 1 hour"/>},
             { value: '120', label: <FormattedMessage id="operationsFilter.timePeriod.twoHour" defaultMessage="Last 2 hour"/>}
-            ]; 
+            ]; */
 
 
 class OperationsFilter extends React.Component{  
@@ -37,9 +38,9 @@ class OperationsFilter extends React.Component{
         }, 
         searchQuery: {
           "request_id":"",
-          "sku_id ":"",
-          "pps_id ":"",
-          "user_id ":""
+          "sku_id":"",
+          "pps_id":"",
+          "user_id":""
         },
         defaultToken: {
           "status":["any"],
@@ -155,23 +156,24 @@ class OperationsFilter extends React.Component{
                 _query.request_id=filterState.searchQuery["request_id"]
             }
 
-            if (filterState.searchQuery["pps_id "]) {
-                _query.pps_id=filterState.searchQuery["pps_id "]
+            if (filterState.searchQuery["pps_id"]) {
+                _query.pps_id=filterState.searchQuery["pps_id"]
             }
-            if (filterState.searchQuery["sku_id "]) {
-                _query.sku_id=filterState.searchQuery["sku_id "]
+            if (filterState.searchQuery["sku_id"]) {
+                _query.sku_id=filterState.searchQuery["sku_id"]
             }
-            if (filterState.searchQuery["user_id "]) {
-                _query.user_id=filterState.searchQuery["user_id "]
+            if (filterState.searchQuery["user_id"]) {
+                _query.user_id=filterState.searchQuery["user_id"]
             }
 
             
-            if (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !== "any") {
-                _query.status=filterState.tokenSelected["STATUS"]
+            if (filterState.tokenSelected["status"] && filterState.tokenSelected["status"][0] !== "any") {
+                _query.status=filterState.tokenSelected["status"]
             }
-            if (filterState.tokenSelected["TIME_PERIOD"]) {
-                _query.time_period=filterState.tokenSelected["TIME_PERIOD"]
+            if (filterState.tokenSelected["timeperiod"]) {
+                _query.time_period=filterState.tokenSelected["timeperiod"]
             }
+            this.props.applyOLFilterFlag(true);
             hashHistory.push({pathname: "/reports/operationsLog", query: _query})
         }
     }
@@ -179,14 +181,14 @@ class OperationsFilter extends React.Component{
     _clearFilter(){
         this.props.ppsfilterState({
             tokenSelected: {
-                "STATUS": ["any"],
-                "TIME_PERIOD": ["any"]
+                "status": ["any"],
+                "timeperiod": ["any"]
             },
             searchQuery: {
                 "request_id": "",
-                "sku_id ": "",
-                "pps_id ": "",
-                "user_id ": ""
+                "sku_id": "",
+                "pps_id": "",
+                "user_id": ""
             }
         })
         hashHistory.push({pathname: "/reports/operationsLog", query: {}})
@@ -195,9 +197,7 @@ class OperationsFilter extends React.Component{
 
    
   render(){
-    
-        //var ppsDetail=this.props.PPSDetail;
-        //var noOrder=ppsDetail.PPStypeDetail && ppsDetail.PPStypeDetail.length?false:true;
+        
         var filterParams = this._processFilterParams();
         let ppsSearchField=this._processPPSSearchField(filterParams.filterInputFields);
         let ppsFilterToken=this._processFilterToken(filterParams);
@@ -270,7 +270,8 @@ var mapDispatchToProps=function(dispatch){
   return {
     showTableFilter: function(data){dispatch(showTableFilter(data));},
     filterApplied: function(data){dispatch(filterApplied(data));},
-    updateSubscriptionPacket: function(data){dispatch(updateSubscriptionPacket(data));}
+    updateSubscriptionPacket: function(data){dispatch(updateSubscriptionPacket(data));},
+    applyOLFilterFlag:function(data){dispatch(applyOLFilterFlag(data))}
 
   }
 };

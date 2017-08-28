@@ -672,5 +672,29 @@ export const TAG_ADDED_TO_LIST="TAG_ADDED_TO_LIST"
 /**
  * Constants for Operations log
  */
-export const OPERATION_LOG_FETCH = "OPERATION_LOG_FETCH"
+export const OPERATION_LOG_FETCH = "OPERATION_LOG_FETCH";
+export const OPERATIONS_LOG_REQUEST_PARAMS=  {
+    "operatingMode": "",
+    "requestId": "",
+    "skuId": "",
+    "userId": "",
+    "page": {
+        "size": 10,
+        "from": 1
+    },
+    "timeRange": {
+        "from": "",
+        "to": ""
+    },
+    "source": {
+        "id": "",
+        "type": ""
+    },
+    "destination": {
+        "id": "",
+        "type": ""
+    }
+}
+
+export const APPLY_OL_FILTER_FLAG = "APPLY_OL_FILTER_FLAG";
 
