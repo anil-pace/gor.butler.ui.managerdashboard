@@ -1,10 +1,7 @@
-
 import {INVENTORY_DATA_HISTORY,INVENTORY_HISTORY_DAYS_COUNT,
   DISPLAY_INVENTORY_HISTORY,INVENTORY_DATA_TODAY,
   CATEGORY_COLOR_MAP,
   INVENTORY_REFRESHED} from '../constants/frontEndConstants';
-
-
 
 
 /**
@@ -34,7 +31,7 @@ import {INVENTORY_DATA_HISTORY,INVENTORY_HISTORY_DAYS_COUNT,
 
   if(isHistory=== "inventoryDataToday" ){
     invObj=inventory[0];
-    invObj["current_stock"]=(invObj["opening_stock"] + invObj["items_put"])-invObj["items_picked"] - invObj["exception_qty"];
+    invObj["current_stock"]=(invObj["opening_stock"] + invObj["items_put"])-invObj["items_picked"] - (invObj["exception_qty"] || 0);
     invObj.unusedSpace=100 - invObj["warehouse_utilization"];
     invObj.colorCode=CATEGORY_COLOR_MAP[CATEGORY_COLOR_MAP.length -1];
     categoryData=invObj["category_data"];
@@ -45,7 +42,7 @@ import {INVENTORY_DATA_HISTORY,INVENTORY_HISTORY_DAYS_COUNT,
 
     
     let parseDtInMS,invDate ;
-    invDate = new Date(invObj.date);
+    invDate = new Date(new Date(invObj.date).toLocaleDateString("en-US",{timeZone:sessionStorage.getItem("timeOffset")}));
     invObj.date=invDate.getFullYear() +"-"+(invDate.getMonth()+1)+"-"+("0" + invDate.getDate()).slice(-2);
     parsedDate=new Date(invObj.date);
     parseDtInMS=parsedDate.getTime();
@@ -61,7 +58,6 @@ import {INVENTORY_DATA_HISTORY,INVENTORY_HISTORY_DAYS_COUNT,
     dataObj.date=parsedDate;
     dataObj.customData=parseDtInMS;
     recreatedData[parseDtInMS].graphInfo=dataObj;
-    //noData=invObj.current_stock ? false : true;
     todayCurrentStock = invObj.current_stock;
 
   }
@@ -71,9 +67,9 @@ import {INVENTORY_DATA_HISTORY,INVENTORY_HISTORY_DAYS_COUNT,
     for(let i=0,k=0; k < INVENTORY_HISTORY_DAYS_COUNT ; k++){
       dateToday=new Date(dateToday.setDate(dateToday.getDate()-1));
       invObj=inventory[i] ? inventory[i] : {};
-      let invDate = new Date(invObj.date);
+      let invDate = new Date(new Date(invObj.date).toLocaleDateString("en-US",{timeZone:sessionStorage.getItem("timeOffset")}));
       invDate = new Date(invDate.getFullYear(),invDate.getMonth(),invDate.getDate())
-      let emptyData=(invDate.getDate() === dateToday.getDate() ? false : true);//Object.keys(invObj).length ? false : true;
+      let emptyData=(invDate.getDate() === dateToday.getDate() ? false : true);
       let histDate=!emptyData ? invDate.getTime() : dateToday.getTime();
       invObj["current_stock"]=!emptyData ? (invObj["opening_stock"] + invObj["items_put"])-invObj["items_picked"] : 0;
       invObj.unusedSpace=!emptyData ? (100 - invObj["warehouse_utilization"]) : 100;
