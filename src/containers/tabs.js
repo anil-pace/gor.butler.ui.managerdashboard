@@ -106,18 +106,18 @@ class Tabs extends React.Component{
   componentWillReceiveProps(nextProps){
 
     if(!nextProps.isEmergencyOpen){
-        if(this.props.isEmergencyOpen !== nextProps.isEmergencyOpen && nextProps.system_emergency  && nextProps.system_data === HARD){
+        if( nextProps.system_emergency  && nextProps.system_data === HARD){
             this.props.setEmergencyModalStatus(true);
             this._stopOperation(true, nextProps.zoneDetails);
 
         }
-        else if(this.props.isEmergencyOpen !== nextProps.isEmergencyOpen && nextProps.system_data === SOFT){
+        else if(  nextProps.system_data === SOFT){
           this.props.setEmergencyModalStatus(true);
           this._pauseOperation(true, nextProps.zoneDetails);
         }
-        else if(this.props.isEmergencyOpen !== nextProps.isEmergencyOpen && 
+        else if( 
           nextProps.system_data === SOFT_MANUAL && 
-          nextProps.lastEmergencyState === HARD){
+          (nextProps.lastEmergencyState === HARD || nextProps.lastEmergencyState === SOFT)){
            this.props.setEmergencyModalStatus(true);
            this._emergencyRelease();
         }     
