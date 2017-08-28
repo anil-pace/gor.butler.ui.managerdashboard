@@ -105,9 +105,7 @@ class Tabs extends React.Component{
       });  
   }
   
-  shouldComponentUpdate(){
-    return false
-  }
+ 
   componentWillReceiveProps(nextProps){
   if(!nextProps.isEmergencyOpen){
 
