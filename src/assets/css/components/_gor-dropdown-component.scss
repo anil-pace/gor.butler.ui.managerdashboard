@@ -1,6 +1,8 @@
 .gor-dropdown{
     cursor: pointer;
     position:relative;
+    float:right;
+    padding-left: 10px;
 }
 
 .gor-white-background{
@@ -12,13 +14,14 @@
     box-sizing: border-box;
     cursor: pointer;
     outline: none;
-    padding: 0.5rem 3.25rem 0.5rem 0.625rem;
+    padding: 0.5rem 2.25rem 0.5rem 0.625rem;
     transition: all 200ms ease;
     border-color: #aaaaaa;
     font-size: 14px;
     font-weight: 100;
     color: #aaaaaa;
     position: relative;
+    float:left;
     .gor-dropdown-arrow{
         border-color: #A6A7A9 transparent transparent;
         border-style: solid;
@@ -27,9 +30,9 @@
         display: block;
         height: 0;
         margin-top: -ceil(2.5);
-        position: absolute;
-        right: 0.9375rem;
-        top: 0.6875rem;
+        position: fixed;
+        right: 1.3rem;
+        top: 1.22rem;
         &.up{
             width: 0px;
             height: 0px;
@@ -41,6 +44,12 @@
             border-style: solid; 
              
         }
+    }
+    .gor-action-icon{
+            background-position: -358px -77px ;
+            float: left;
+            width: 16px;
+            height: 20px;
     }
 }
 .gor-dropdown-option{
@@ -61,12 +70,11 @@
 .gor-option-wrapper{
     position: absolute;
     z-index: 2;
-    left: 0;
+    left: -1px;
     top: 30px;
     background: #fff;
     width: 100%;
     border: 1px solid;
     border-radius: 3px;
     box-shadow: 0 0.0625rem 0 rgba(0, 0, 0, 0.06);
-    box-sizing: border-box;
 }
