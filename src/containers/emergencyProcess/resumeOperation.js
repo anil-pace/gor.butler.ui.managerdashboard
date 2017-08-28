@@ -26,6 +26,7 @@ class ResumeOperation extends React.Component{
   }
   componentWillMount() {
      this.props.resetPasswordButton();
+     this.props.modalresetForm();
   }
   componentWillReceiveProps(nextProps){
     if(!nextProps.auth_token||!nextProps.system_emergency||nextProps.system_data !== this.props.system_data )
