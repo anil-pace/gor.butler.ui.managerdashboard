@@ -1,6 +1,7 @@
 import {wsNotificationResponseAction,wsNotificationEndConnection} from '../actions/notificationSocketActions'
 import {WS_NOTIFICATION_CONNECT,WS_NOTIFICATION_DISCONNECT,
-  WS_NOTIFICATION_ONSEND,WS_NOTIFICATION_SUBSCRIBE} from '../constants/frontEndConstants'
+  WS_NOTIFICATION_ONSEND,WS_NOTIFICATION_SUBSCRIBE,
+  WS_OPERATOR_LOG_SUBSCRIBE,WS_OPERATOR_LOG_UNSUBSCRIBE} from '../constants/frontEndConstants'
 import {WS_NOTIFICATION_URL,WS_URL} from '../constants/configConstants';
 import {NotificationResponseParse} from '../utilities/notificationResponseParser';
 import SockJS from 'sockjs-client';
@@ -9,6 +10,7 @@ import webstomp from 'webstomp-client';
 
 const notificationSocketMiddleware = (function(){ 
   var socket = null;
+  var operatorLogWSClient = null;
 
   const onMessage = (ws,store) => frame => {
     //Parse the JSON message received on the websocket
@@ -75,6 +77,17 @@ const notificationSocketMiddleware = (function(){
         break;
       case WS_NOTIFICATION_SUBSCRIBE:
         socket.subscribe(action.data,onMessage(socket,store));
+        break;
+      case WS_OPERATOR_LOG_SUBSCRIBE:
+        if(socket){
+        operatorLogWSClient = socket.subscribe(action.data,onMessage(socket,store));
+      }
+        break;
+      case WS_OPERATOR_LOG_UNSUBSCRIBE:
+        if(operatorLogWSClient){
+          operatorLogWSClient.unsubscribe();
+          operatorLogWSClient= null;
+        }
         break;
       //This action is irrelevant to us, pass it on to the next middleware
       default:

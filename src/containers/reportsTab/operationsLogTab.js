@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import {wsOverviewData} from '../../constants/initData.js';
 import Dimensions from 'react-dimensions';
 import {updateSubscriptionPacket,setWsAction} from '../../actions/socketActions';
-import {applyOLFilterFlag} from '../../actions/operationsLogsActions';
+import {applyOLFilterFlag,wsOLSubscribe,wsOLUnSubscribe} from '../../actions/operationsLogsActions';
 import {WS_ONSEND,POST,OPERATION_LOG_FETCH,
     OPERATIONS_LOG_REQUEST_PARAMS,APP_JSON} from '../../constants/frontEndConstants';
 import GorPaginateV2 from '../../components/gorPaginate/gorPaginateV2';
@@ -26,7 +26,7 @@ import {
     filterApplied
 } from '../../actions/filterAction';
 import OperationsFilter from './operationsFilter';
-import {OPERATIONS_LOG_URL} from '../../constants/configConstants';
+import {OPERATIONS_LOG_URL,WS_NOTIFICATION_SUBSCRIPTION} from '../../constants/configConstants';
 import {makeAjaxCall} from '../../actions/ajaxActions'
 
 const dummyData = [{
@@ -179,7 +179,8 @@ class OperationsLogTab extends React.Component{
         this.props.initDataSentCall(wsOverviewData["default"]);
 	}
     _getOperationsData(query){
-        if(query.timeperiod !== "realtime"){
+        if(query.time_period !== "realtime"){
+            this.props.wsOLUnSubscribe();
             let filters = {};//JSON.parse(JSON.stringify(OPERATIONS_LOG_REQUEST_PARAMS));
             if(Object.keys(query).length){
                 let currTime = new Date();
@@ -206,6 +207,9 @@ class OperationsLogTab extends React.Component{
         //this.props.setLoginSpinner(true); TODO
         this.props.applyOLFilterFlag(false);
         this.props.makeAjaxCall(params);
+        }
+        else if(query.time_period && query.time_period === "realtime"){
+            this.props.wsOLSubscribe(WS_NOTIFICATION_SUBSCRIPTION);
         }
     }
     _setFilter(){
@@ -434,7 +438,9 @@ function mapDispatchToProps(dispatch){
         },
         showTableFilter: function(data){dispatch(showTableFilter(data));},
         makeAjaxCall: function(params){dispatch(makeAjaxCall(params));},
-        applyOLFilterFlag:function(data){dispatch(applyOLFilterFlag(data))}
+        applyOLFilterFlag:function(data){dispatch(applyOLFilterFlag(data))},
+        wsOLUnSubscribe:function(data){dispatch(wsOLUnSubscribe(data))},
+        wsOLSubscribe:function(data){dispatch(wsOLSubscribe(data))}
     }
 };
 
