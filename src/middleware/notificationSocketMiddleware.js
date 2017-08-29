@@ -79,8 +79,9 @@ const notificationSocketMiddleware = (function(){
         socket.subscribe(action.data,onMessage(socket,store));
         break;
       case WS_OPERATOR_LOG_SUBSCRIBE:
-        if(socket){
-        operatorLogWSClient = socket.subscribe(action.data,onMessage(socket,store));
+        if(socket && !operatorLogWSClient){
+        operatorLogWSClient = socket.subscribe(action.data.url,onMessage(socket,store));
+        socket.send(action.data.url,action.data.filters);
       }
         break;
       case WS_OPERATOR_LOG_UNSUBSCRIBE:

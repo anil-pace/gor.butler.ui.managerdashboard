@@ -8320,3 +8320,28 @@ button:disabled {
 .pps-table .gor-pps-profile-drop .gor-white-background {
   background-color: transparent;
 }
+
+.gor-ol-paginate-wrap {
+  width: 100%;
+}
+
+.gor-ol-paginate-wrap .gor-ol-paginate-left {
+  display: inline-block;
+  width: 50%;
+  vertical-align: middle;
+}
+
+.gor-ol-paginate-wrap .gor-ol-paginate-right {
+  display: inline-block;
+  width: 50%;
+  vertical-align: middle;
+}
+
+.gor-ol-paginate-wrap .gor-paginate-wrap {
+  float: right;
+}
+
+.gor-ol-paginate-wrap .gor-dropdown-wrapper {
+  width: 20%;
+  padding-left: 15px;
+}

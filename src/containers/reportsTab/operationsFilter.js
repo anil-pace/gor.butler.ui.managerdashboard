@@ -10,21 +10,9 @@ import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
 import {REPORTS_FILTER_PARAMS} from '../../constants/filterParams'
 import {setPpsFilterSpinner}  from '../../actions/spinnerAction';
-import {hashHistory} from 'react-router'
+import {hashHistory} from 'react-router';
 
-//const statusToken={value:"STATUS", label:<FormattedMessage id="operationsFilter.tokenHead.status" defaultMessage="STATUS"/>};
-/*const timePeriodToken={value:"TIME_PERIOD", label:<FormattedMessage id="operationsFilter.tokenHead.timePeriod" defaultMessage="TIME PERIOD"/>}; 
 
-const statusLabels=[
-                    { value: 'any', label: <FormattedMessage id="operationsFilter.STATUS.any" defaultMessage="Any"/>},
-                    { value: 'success', label: <FormattedMessage id="operationsFilter.STATUS.success" defaultMessage="Success"/>},
-                    { value: 'exception', label: <FormattedMessage id="operationsFilter.STATUS.exception" defaultMessage="Exception"/>},
-                    
-                    ];
-const timePeriodLabels=[
-            { value: '60', label: <FormattedMessage id="operationsFilter.timePeriod.oneHour" defaultMessage="Last 1 hour"/>},
-            { value: '120', label: <FormattedMessage id="operationsFilter.timePeriod.twoHour" defaultMessage="Last 2 hour"/>}
-            ]; */
 
 
 class OperationsFilter extends React.Component{  
@@ -68,14 +56,14 @@ class OperationsFilter extends React.Component{
          * It will update the state as soon as
          * filters are cleared.
          */
-        if(nextProps.filterState && JSON.stringify(this.state)!==JSON.stringify(nextProps.filterState)){
+        /*if(nextProps.filterState && JSON.stringify(this.state)!==JSON.stringify(nextProps.filterState)){
             this.setState(nextProps.filterState)
-        }
+        }*/
 
         /**
          * Hide the filter as soon as data in the list get updated.
          */
-        if(nextProps.data.length>0 && JSON.stringify(nextProps.data)!==JSON.stringify(this.props.data)){
+        if(!nextProps.hideLayer){
             this.props.showTableFilter(false);
         }
     }
@@ -173,6 +161,7 @@ class OperationsFilter extends React.Component{
             if (filterState.tokenSelected["timeperiod"]) {
                 _query.time_period=filterState.tokenSelected["timeperiod"]
             }
+            _query.pageSize = this.props.pageSize;
             this.props.applyOLFilterFlag(true);
             hashHistory.push({pathname: "/reports/operationsLog", query: _query})
         }
