@@ -1644,11 +1644,13 @@ input[type="checkbox"]{
 display:inline-block;
   padding-right: 20px;
   width: 110px;
+  float:left;
 }
 
 .gor-audit-actions-drop {
  display: inline-block;
- width: 150px; 
+ float:right;
+ width:10.625rem;
 }
 
 .gor-header-check {
