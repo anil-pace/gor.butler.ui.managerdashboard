@@ -10,6 +10,7 @@ import { FormattedMessage} from 'react-intl';
 import { connect } from 'react-redux';
 import {wsOverviewData} from '../../constants/initData.js';
 import Dimensions from 'react-dimensions';
+import {withRouter} from 'react-router';
 import {updateSubscriptionPacket,setWsAction} from '../../actions/socketActions';
 import {applyOLFilterFlag,wsOLSubscribe,wsOLUnSubscribe} from '../../actions/operationsLogsActions';
 import {WS_ONSEND,POST,OPERATION_LOG_FETCH,
@@ -26,49 +27,17 @@ import {
     filterApplied
 } from '../../actions/filterAction';
 import OperationsFilter from './operationsFilter';
-import {OPERATIONS_LOG_URL,WS_NOTIFICATION_SUBSCRIPTION} from '../../constants/configConstants';
+import Dropdown from '../../components/gor-dropdown-component/dropdown';
+import {OPERATIONS_LOG_URL,WS_OPERATIONS_LOG_SUBSCRIPTION} from '../../constants/configConstants';
 import {makeAjaxCall} from '../../actions/ajaxActions'
 
-const dummyData = [{
-    "operatingMode": "put back",
-    "status": "exception",
-    "requestId": "123",
-    "executionId": "3",
-    "skuId": "2001",
-    "quantity": 10,
-    "source": {
-        "type": "bin",
-        "id": "1",
-        "children": []
-    },
-    "destination": {
-        "type": "pps",
-        "id": 2,
-        "children": []
-    },
-    "userId": "sudhir.m",
-    "timestamp": ""
-},{
-    "operatingMode": "put back",
-    "status": "success",
-    "requestId": "123",
-    "executionId": "3",
-    "skuId": "2001",
-    "quantity": 10,
-    "source": {
-        "type": "bin",
-        "id": "1",
-        "children": []
-    },
-    "destination": {
-        "type": "pps",
-        "id": 2,
-        "children": []
-    },
-    "userId": "sudhir.m",
-    "timestamp": ""
-}];
 
+const pageSize = [ {value: "25", disabled:false,label: <FormattedMessage id="operationLog.page.twentyfive" description="Page size 25"
+                                                          defaultMessage="25"/>},
+            {value: "50",  disabled:false,label: <FormattedMessage id="operationLog.page.fifty" description="Page size 50"
+                                                          defaultMessage="50"/>},
+            {value: "100",  disabled:false,label: <FormattedMessage id="operationLog.page.hundred" description="Page size 100"
+                                                          defaultMessage="100"/>}];
 
 class OperationsLogTab extends React.Component{
 	constructor(props,context) {
@@ -77,6 +46,7 @@ class OperationsLogTab extends React.Component{
         /*this._clearFilter =  this._clearFilter.bind(this);
         this._sortTableData = this._sortTableData.bind(this);*/
         this._setFilter= this._setFilter.bind(this);
+        this._handlePageChange= this._handlePageChange.bind(this);
         
     }
 
@@ -101,6 +71,8 @@ class OperationsLogTab extends React.Component{
             dataList:dataList,
             query:this.props.location.query,
             subscribed:false,
+            realTimeSubSent:false,
+            pageSize:"25",
             queryApplied:Object.keys(this.props.location.query).length ? true :false
         }
     }
@@ -141,8 +113,8 @@ class OperationsLogTab extends React.Component{
             })
             
         }
-        else if(nextProps.socketAuthorized && nextProps.filtersApplied){
-            this._getOperationsData(nextProps.location.query)
+        else if(nextProps.socketAuthorized && (nextProps.filtersApplied || this.props.location.query.page !== nextProps.location.query.page)){
+            this._getOperationsData(nextProps)
         }
         if(this.props.hasDataChanged !== nextProps.hasDataChanged){
             let data = this._processData(nextProps.olData.slice(0));
@@ -155,7 +127,7 @@ class OperationsLogTab extends React.Component{
         
     }
     componentDidMount(){
-        this._getOperationsData(this.props.location.query)
+        this._getOperationsData(this.props)
     }
     /*Since componentWillRecieveProps is not called for the first time
     We need to put the subscription code in componentWillMount as well*/
@@ -173,28 +145,50 @@ class OperationsLogTab extends React.Component{
 		 * it should subscribe to the packet again.
 		 */
 		this.setState({subscribed: false})
+        this.props.wsOLUnSubscribe();
 	}
 
     _subscribeData(){
         this.props.initDataSentCall(wsOverviewData["default"]);
 	}
-    _getOperationsData(query){
-        if(query.time_period !== "realtime"){
-            this.props.wsOLUnSubscribe();
-            let filters = {};//JSON.parse(JSON.stringify(OPERATIONS_LOG_REQUEST_PARAMS));
+    _handlePageChange(e){
+        this.setState({
+            pageSize:e.value
+        },function(){
+            let _query =  Object.assign({},this.props.location.query);
+            _query.pageSize = this.state.pageSize;
+            _query.page = _query.page || 1;
+            this.props.router.push({pathname: "/reports/operationsLog",query: _query})
+            //this._getOperationsData(this.props,{pageSize:e.value});
+        })
+        
+    }
+    _getOperationsData(props){
+        var query = props.location.query,
+        isSocketConnected = props.notificationSocketConnected;
+        var filters = {};//JSON.parse(JSON.stringify(OPERATIONS_LOG_REQUEST_PARAMS));
             if(Object.keys(query).length){
                 let currTime = new Date();
                 let toTime = new Date(currTime);
                 toTime.setMinutes(currTime.getMinutes() - parseInt(query.time_period));
-                filters.status = query.status;
+                filters.status = {
+                    type:query.status
+                };
                 filters.requestId = query.request_id;
                 filters.skuId = query.sku_id;
                 filters.userId = query.user_id;
-                filters.timeRange = {
+                filters.page={
+                    size:query.pageSize ? parseInt(query.pageSize) : parseInt(this.state.pageSize),
+                    from:query.page ? parseInt(query.page) : 1
+                }
+                /*filters.timeRange = {
                     from: currTime.getTime(),//Need to add timeoffset
                     to:toTime.getTime()
-                }
+                }*/
             }
+        if(query.time_period !== "realtime"){
+            this.props.wsOLUnSubscribe();
+            
             let params={
                 'url':OPERATIONS_LOG_URL,
                 'method':POST,
@@ -207,9 +201,21 @@ class OperationsLogTab extends React.Component{
         //this.props.setLoginSpinner(true); TODO
         this.props.applyOLFilterFlag(false);
         this.props.makeAjaxCall(params);
+        this.setState({
+                realTimeSubSent:false
+            })
         }
-        else if(query.time_period && query.time_period === "realtime"){
-            this.props.wsOLSubscribe(WS_NOTIFICATION_SUBSCRIPTION);
+        else if(query.time_period && query.time_period === "realtime" 
+            && !this.state.realTimeSubSent && isSocketConnected){
+            let wsParams = {}
+            delete filters.timeRange;
+            delete filters.page;
+            wsParams.url = WS_OPERATIONS_LOG_SUBSCRIPTION;
+            wsParams.filters = JSON.stringify(filters);
+            this.props.wsOLSubscribe(wsParams);
+            this.setState({
+                realTimeSubSent:true
+            })
         }
     }
     _setFilter(){
@@ -219,12 +225,13 @@ class OperationsLogTab extends React.Component{
 	render(){
 		var {dataList} = this.state;
         var filterHeight=screen.height - 190 - 50;
+        var hideLayer = dataList.getSize() ? false : true;
 		return (
 			<div className="gorTesting wrapper gor-operations-log">
 
             <div className="gor-filter-wrap"
                                  style={{'width': this.props.showFilter ? '350px' : '0px', height: filterHeight}}>
-                                <OperationsFilter data={[]} responseFlag={true}/>
+                                <OperationsFilter hideLayer={hideLayer} pageSize={this.state.pageSize} responseFlag={true}/>
             </div>
              <div className="gorToolBar">
                                 <div className="gorToolBarWrap">
@@ -410,8 +417,17 @@ class OperationsLogTab extends React.Component{
                     />
                     
                 </Table>
-                <div className="gor-audit-paginate-wrap">
+                <div className="gor-ol-paginate-wrap">
+                <div className="gor-ol-paginate-left">
+                <Dropdown 
+                    options={pageSize} 
+                    onSelectHandler={(e) => this._handlePageChange(e)}
+                    disabled={false} 
+                    selectedOption={"25"}/>
+                </div>
+                <div className="gor-ol-paginate-right">
                 <GorPaginateV2 location={this.props.location} currentPage={this.state.query.page||1} totalPage={10}/>
+                </div>
                 </div>
 			</div>
 		);
@@ -426,7 +442,8 @@ function mapStateToProps(state, ownProps) {
         showFilter: state.filterInfo.filterState || false,
         olData:state.operationsLogsReducer.olData || [],
         hasDataChanged:state.operationsLogsReducer.hasDataChanged,
-        filtersApplied:state.operationsLogsReducer.filtersApplied || false
+        filtersApplied:state.operationsLogsReducer.filtersApplied || false,
+        notificationSocketConnected:state.notificationSocketReducer.notificationSocketConnected || false
 
     };
 }
@@ -445,6 +462,6 @@ function mapDispatchToProps(dispatch){
 };
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(Dimensions()(OperationsLogTab));
+export default connect(mapStateToProps,mapDispatchToProps)(Dimensions()(withRouter(OperationsLogTab)));
 
 

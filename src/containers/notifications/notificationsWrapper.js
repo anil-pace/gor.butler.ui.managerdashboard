@@ -139,7 +139,7 @@ function mapDispatchToProps(dispatch){
 		getNotificationData:function(params){dispatch(getNotificationData(params));},
 		wsNotificationInit:function(){dispatch(wsNotificationInit());},
 		resetNotificationData:function(){dispatch(resetNotificationData());},
-        wsNotificationSubscribe:function(){dispatch(wsNotificationSubscribe());}
+        wsNotificationSubscribe:function(data){dispatch(wsNotificationSubscribe(data));}
 	}
 }
 
