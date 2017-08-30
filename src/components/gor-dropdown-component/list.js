@@ -11,6 +11,7 @@ class List extends Component {
       
       optionList.push(<span className={data[index].disabled?"disabled gor-dropdown-option" : "gor-dropdown-option"}  key={index} onClick={!data[index].disabled ? this.props.optionAction.bind(null,data[index].value,null) : null} >
                         <span >{data[index].label}</span>
+                        <span className={this.props.tickMark && this.props.placeholder===data[index].label?"gor-tick-icon":"gor-action-icon-none"}></span>
                       </span>);
     }
     return optionList;
