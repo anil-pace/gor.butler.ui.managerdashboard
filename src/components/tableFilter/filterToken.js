@@ -9,6 +9,7 @@ class FilterToken extends React.Component{
     var selectedToken=this.props.tokenSelected ? this.props.tokenSelected[this.props.tokenField] : null,tokenFound=false;
     var selectedOption=this.props.selection;
     var tokenSelect=this.props.tokenLabel.value;
+    var _this = this;
 
     switch(selectedOption)
     {
@@ -17,7 +18,10 @@ class FilterToken extends React.Component{
             tokenFound=(tokenSelect===selectedToken[0])?true:false;
             this.props.tokenCallBack(this.props.tokenField, selectedToken[0],REMOVE_TOKEN);
         }
-        tokenFound?this.props.tokenCallBack(this.props.tokenField,selectedToken[0],ADD_TOKEN):this.props.tokenCallBack(this.props.tokenField,this.props.tokenLabel.value,ADD_TOKEN); 
+        setTimeout(function(){
+            tokenFound?_this.props.tokenCallBack(_this.props.tokenField,selectedToken[0],ADD_TOKEN):_this.props.tokenCallBack(_this.props.tokenField,_this.props.tokenLabel.value,ADD_TOKEN);
+        },0)
+         
         break; 
 
         default:

@@ -12,11 +12,20 @@ const notificationSocketMiddleware = (function(){
   var socket = null;
   var operatorLogWSClient = null;
 
-  const onMessage = (ws,store) => frame => {
+  const onMessage = (ws,store,module) => frame => {
     //Parse the JSON message received on the websocket
     
     var msg = JSON.parse(frame.body);
-      NotificationResponseParse(store,msg);    
+    switch(module){
+      case 'notifications':
+        NotificationResponseParse(store,msg);  
+        break;  
+      case 'operations':
+        console.log('ops called');
+        break; 
+        default:
+        //do nothing 
+    }
   }
 
   const onOpen = (ws,store,token) => evt => {
@@ -76,11 +85,11 @@ const notificationSocketMiddleware = (function(){
         socket.send(JSON.stringify(action.data));
         break;
       case WS_NOTIFICATION_SUBSCRIBE:
-        socket.subscribe(action.data,onMessage(socket,store));
+        socket.subscribe(action.data,onMessage(socket,store,'notifications'));
         break;
       case WS_OPERATOR_LOG_SUBSCRIBE:
         if(socket && !operatorLogWSClient){
-        operatorLogWSClient = socket.subscribe(action.data.url,onMessage(socket,store));
+        operatorLogWSClient = socket.subscribe(action.data.url,onMessage(socket,store,'operations'));
         socket.send(action.data.url,action.data.filters);
       }
         break;
