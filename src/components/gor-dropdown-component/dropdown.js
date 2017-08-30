@@ -84,9 +84,9 @@ class Dropdown extends Component {
 
         return (
             <div className={["gor-dropdown-wrapper " + (this.state.dropDownVisible ? 'gor-white-background' : ''), this.props.disabled ? 'disabled' : null].join(" ")}
-                 style={!this.state.dropDownVisible ? {border: 'none'} : {}}
+                 style={this.props.noBorder && !this.state.dropDownVisible ? {border: 'none'} : {}}
                  onClick={!this.props.disabled ? this._toggleDropdown.bind(this) : null}>
-                <div className={"gor-action-icon"}></div>
+                <div className={this.props.icon?"gor-action-icon":"gor-action-icon-none"}></div>
                 <span
                     className={'gor-dropdown '}>{!this.props.resetOnSelect ? this.state.placeholder : this.props.placeholder}</span>
                 <span className={this.state.dropDownVisible ? "gor-dropdown-arrow up" : "gor-dropdown-arrow"}></span>

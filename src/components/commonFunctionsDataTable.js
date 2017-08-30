@@ -324,7 +324,7 @@ export const ActionCellAudit=({rowIndex, data, columnKey, handleAudit,manageAudi
       </button>):''}
     </div>
     <div className="gor-audit-actions-drop" >
-        <Dropdown placeholder={placeholderText} options={auditTaskActions(data,rowIndex)} onSelectHandler={manageAuditTask.bind(this,rowIndex)} resetOnSelect={true}/>
+        <Dropdown placeholder={placeholderText} noBorder={true} icon={true}  options={auditTaskActions(data,rowIndex)} onSelectHandler={manageAuditTask.bind(this,rowIndex)} resetOnSelect={true}/>
       </div>
   </Cell>
 );
