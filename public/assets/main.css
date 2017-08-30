@@ -3445,8 +3445,8 @@ input[type="checkbox"] {
 
 .gor-audit-actions-drop {
   display: inline-block;
-  float: right;
   width: 10.625rem;
+  float: right;
 }
 
 .gor-header-check {
@@ -6917,8 +6917,6 @@ button:disabled {
 .gor-dropdown {
   cursor: pointer;
   position: relative;
-  float: right;
-  padding-left: 0.625rem;
 }
 
 .gor-white-background {
@@ -6949,9 +6947,9 @@ button:disabled {
   display: block;
   height: 0;
   margin-top: -ceil(2.5);
-  position: fixed;
-  right: 1.3rem;
-  top: 1.22rem;
+  position: absolute;
+  right: 0.9375rem;
+  top: 0.6875rem;
 }
 
 .gor-dropdown-wrapper .gor-dropdown-arrow.up {
@@ -6965,11 +6963,23 @@ button:disabled {
   border-style: solid;
 }
 
-.gor-dropdown-wrapper .gor-action-icon {
-  background-position: -358px -77px;
+.gor-dropdown-wrapper .gor-edit-icon {
   float: left;
   width: 1rem;
   height: 1.25rem;
+  margin-right: 0.5rem;
+}
+
+.gor-dropdown-wrapper .gor-action-audit-icon {
+  background-position: -358px -77px;
+}
+
+.gor-dropdown-wrapper .gor-action-pps-icon {
+  background-position: -239px -77px;
+}
+
+.gor-dropdown-wrapper .gor-action-icon-none {
+  display: none;
 }
 
 .gor-dropdown-option {
