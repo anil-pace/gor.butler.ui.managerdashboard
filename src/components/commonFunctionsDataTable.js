@@ -169,7 +169,7 @@ export const ToolTipCell=({rowIndex, data, columnKey,setClass,callBack,tooltipDa
     {data.getObjectAt(rowIndex)[columnKey]}
     <div className="gor-tool-tip-hover" onMouseEnter={callBack}>
       {data.getObjectAt(rowIndex)[tooltipData] && data.getObjectAt(rowIndex)[tooltipData][Object.keys(data.getObjectAt(rowIndex)[tooltipData])[0]]
-          ?data.getObjectAt(rowIndex)[tooltipData][Object.keys(data.getObjectAt(rowIndex)[tooltipData])[0]].length+" items selected"
+          ?<FormattedMessage id="commonDataTable.attributesType.itemSelectedText" description='heading for attribute' values={{count:data.getObjectAt(rowIndex)[tooltipData][Object.keys(data.getObjectAt(rowIndex)[tooltipData])[0]].length}} defaultMessage='{count} items selected'/>
           :""}
     </div>
     {data.getObjectAt(rowIndex)[tooltipData] && data.getObjectAt(rowIndex)[tooltipData][Object.keys(data.getObjectAt(rowIndex)[tooltipData])[0]]?
