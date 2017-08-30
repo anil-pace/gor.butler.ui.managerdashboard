@@ -3281,6 +3281,24 @@
     "filepath": "./src/containers/reportsTab/operationsFilter.js"
   },
   {
+    "id": "operationLog.page.twentyfive",
+    "description": "Page size 25",
+    "defaultMessage": "25",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
+    "id": "operationLog.page.fifty",
+    "description": "Page size 50",
+    "defaultMessage": "50",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
+    "id": "operationLog.page.hundred",
+    "description": "Page size 100",
+    "defaultMessage": "100",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
     "id": "operationLog.table.heading",
     "description": "Heading for PPS",
     "defaultMessage": "Operations Log",

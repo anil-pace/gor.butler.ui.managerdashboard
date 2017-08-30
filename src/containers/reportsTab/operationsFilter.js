@@ -1,16 +1,16 @@
 import React  from 'react';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
-import {showTableFilter, filterApplied,ppsfilterState,togglePPSFilter,setDefaultRange} from '../../actions/filterAction';
+import {showTableFilter, filterApplied,ppsfilterState} from '../../actions/filterAction';
 import {applyOLFilterFlag} from '../../actions/operationsLogsActions';
 import { connect } from 'react-redux'; 
 import {updateSubscriptionPacket} from '../../actions/socketActions';
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
-import {REPORTS_FILTER_PARAMS} from '../../constants/filterParams'
-import {setPpsFilterSpinner}  from '../../actions/spinnerAction';
+import {REPORTS_FILTER_PARAMS} from '../../constants/filterParams';
 import {hashHistory} from 'react-router';
+import {SINGLE} from '../../constants/frontEndConstants'
 
 
 
@@ -31,13 +31,17 @@ class OperationsFilter extends React.Component{
           "user_id":""
         },
         defaultToken: {
-          "status":["any"],
-          "timeperiod":["60"]
+          "status":["any"]
+        },
+        selection:{
+          "status":"multi",
+          "timeperiod":"Single"
         }
         }; 
       this._closeFilter = this._closeFilter.bind(this);
       this._clearFilter = this._clearFilter.bind(this);
       this._applyFilter = this._applyFilter.bind(this);
+      this._processSearchField= this._processSearchField.bind(this);
     }
 
 
@@ -45,7 +49,7 @@ class OperationsFilter extends React.Component{
         this.props.showTableFilter(false);
     } 
 
-     _processPPSSearchField(filterInputFields){
+     _processSearchField(filterInputFields){
         let inputValue=this.state.searchQuery;
         let inputField=<FilterInputFieldWrap inputText={filterInputFields} handleInputText={this._handleInputQuery.bind(this)} inputValue={inputValue}/>
         return inputField;           
@@ -63,9 +67,9 @@ class OperationsFilter extends React.Component{
         /**
          * Hide the filter as soon as data in the list get updated.
          */
-        if(!nextProps.hideLayer){
+        /*if(!nextProps.hideLayer){
             this.props.showTableFilter(false);
-        }
+        }*/
     }
 
     _processFilterParams(){
@@ -116,7 +120,7 @@ class OperationsFilter extends React.Component{
     _processFilterToken(filterParams) {
         let selectedToken= this.state.tokenSelected;
         let statusColumn=<FilterTokenWrap field={filterParams.statusToken} tokenCallBack={this._handelTokenClick.bind(this)} label={filterParams.statusLabels} selectedToken={selectedToken}/>;
-        let timePeriodColumn=<FilterTokenWrap field={filterParams.timePeriodToken} tokenCallBack={this._handelTokenClick.bind(this)} label={filterParams.timePeriodLabels} selectedToken={selectedToken}/>;
+        let timePeriodColumn=<FilterTokenWrap selection={SINGLE} field={filterParams.timePeriodToken} tokenCallBack={this._handelTokenClick.bind(this)} label={filterParams.timePeriodLabels} selectedToken={selectedToken}/>;
         let columnDetail={column1token:statusColumn, column2token:timePeriodColumn};
         return columnDetail;
     }
@@ -188,7 +192,7 @@ class OperationsFilter extends React.Component{
   render(){
         
         var filterParams = this._processFilterParams();
-        let ppsSearchField=this._processPPSSearchField(filterParams.filterInputFields);
+        let ppsSearchField=this._processSearchField(filterParams.filterInputFields);
         let ppsFilterToken=this._processFilterToken(filterParams);
     return (
       <div>

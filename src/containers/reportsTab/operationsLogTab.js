@@ -73,6 +73,7 @@ class OperationsLogTab extends React.Component{
             subscribed:false,
             realTimeSubSent:false,
             pageSize:"25",
+            dataFetchedOnLoad:false,
             queryApplied:Object.keys(this.props.location.query).length ? true :false
         }
     }
@@ -88,7 +89,7 @@ class OperationsLogTab extends React.Component{
                 rowObj.operatingMode = rowData.operatingMode;
                 rowObj.status = rowData.status.type
                 rowObj.requestId = rowData.requestId;
-                rowObj.skuId = rowData.skuId+"/"+rowData.quantity+"items";
+                rowObj.skuId = rowData.productInfo.type+" "+rowData.productInfo.id+"/"+rowData.productInfo.quantity+" items";
                 rowObj.sourceId = rowData.source.type+" "+rowData.source.id+"/"+
                                 rowData.source.children[0].type+"-"+rowData.source.children[0].id;
                 rowObj.destinationId = rowData.destination.type+" "+rowData.destination.id+"/"+
@@ -113,8 +114,13 @@ class OperationsLogTab extends React.Component{
             })
             
         }
-        else if(nextProps.socketAuthorized && (nextProps.filtersApplied || this.props.location.query.page !== nextProps.location.query.page)){
-            this._getOperationsData(nextProps)
+        else if(nextProps.socketAuthorized && nextProps.notificationSocketConnected && (!this.state.dataFetchedOnLoad || nextProps.filtersApplied)){
+            this.setState({
+                dataFetchedOnLoad:true
+            },function(){
+                this._getOperationsData(nextProps)
+            })
+            
         }
         if(this.props.hasDataChanged !== nextProps.hasDataChanged){
             let data = this._processData(nextProps.olData.slice(0));
@@ -152,6 +158,7 @@ class OperationsLogTab extends React.Component{
         this.props.initDataSentCall(wsOverviewData["default"]);
 	}
     _handlePageChange(e){
+        this.props.applyOLFilterFlag(true);
         this.setState({
             pageSize:e.value
         },function(){
@@ -207,11 +214,13 @@ class OperationsLogTab extends React.Component{
         }
         else if(query.time_period && query.time_period === "realtime" 
             && !this.state.realTimeSubSent && isSocketConnected){
+            this.props.wsOLUnSubscribe(false);
             let wsParams = {}
             delete filters.timeRange;
             delete filters.page;
             wsParams.url = WS_OPERATIONS_LOG_SUBSCRIPTION;
             wsParams.filters = JSON.stringify(filters);
+            this.props.applyOLFilterFlag(false);
             this.props.wsOLSubscribe(wsParams);
             this.setState({
                 realTimeSubSent:true
@@ -225,7 +234,9 @@ class OperationsLogTab extends React.Component{
 	render(){
 		var {dataList} = this.state;
         var filterHeight=screen.height - 190 - 50;
-        var hideLayer = dataList.getSize() ? false : true;
+        var dataSize = dataList.getSize();
+        var hideLayer = dataSize ? false : true;
+        var pageSizeDDDisabled = this.props.location.query.time_period === 'realtime' ;
 		return (
 			<div className="gorTesting wrapper gor-operations-log">
 
@@ -268,7 +279,7 @@ class OperationsLogTab extends React.Component{
                     onColumnResizeEndCallback={null}
                     isColumnResizing={false}
                     width={this.props.containerWidth}
-                    height={document.documentElement.clientHeight * 0.6}
+                    height={dataSize ? document.documentElement.clientHeight * 0.6 : 71}
                     {...this.props}>
                     <Column
                         columnKey="operatingMode"
@@ -417,12 +428,15 @@ class OperationsLogTab extends React.Component{
                     />
                     
                 </Table>
+                {!dataSize ? <div className="gor-no-data"><FormattedMessage id="operationsLog.table.noData"
+                                                                    description="No data message for operations logs"
+                                                                    defaultMessage="No Data Found"/></div>:""}
                 <div className="gor-ol-paginate-wrap">
                 <div className="gor-ol-paginate-left">
                 <Dropdown 
                     options={pageSize} 
                     onSelectHandler={(e) => this._handlePageChange(e)}
-                    disabled={false} 
+                    disabled={pageSizeDDDisabled} 
                     selectedOption={"25"}/>
                 </div>
                 <div className="gor-ol-paginate-right">

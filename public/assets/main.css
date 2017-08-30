@@ -8309,27 +8309,34 @@ button:disabled {
   background-color: transparent;
 }
 
-.gor-ol-paginate-wrap {
+.gor-operations-log .gor-ol-paginate-wrap {
   width: 100%;
 }
 
-.gor-ol-paginate-wrap .gor-ol-paginate-left {
+.gor-operations-log .gor-ol-paginate-wrap .gor-ol-paginate-left {
   display: inline-block;
   width: 50%;
   vertical-align: middle;
 }
 
-.gor-ol-paginate-wrap .gor-ol-paginate-right {
+.gor-operations-log .gor-ol-paginate-wrap .gor-ol-paginate-right {
   display: inline-block;
   width: 50%;
   vertical-align: middle;
 }
 
-.gor-ol-paginate-wrap .gor-paginate-wrap {
+.gor-operations-log .gor-ol-paginate-wrap .gor-paginate-wrap {
   float: right;
 }
 
-.gor-ol-paginate-wrap .gor-dropdown-wrapper {
-  width: 20%;
-  padding-left: 15px;
+.gor-operations-log .gor-ol-paginate-wrap .gor-dropdown-wrapper {
+  width: 10%;
+  margin-left: 4%;
+  background: #fff;
+  margin-top: 2rem;
+}
+
+.gor-operations-log .gor-no-data {
+  padding-top: 150px;
+  height: 8vw;
 }
