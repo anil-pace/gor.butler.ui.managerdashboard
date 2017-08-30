@@ -241,7 +241,7 @@ class SystemControllers extends React.Component {
                                                 <FormattedMessage id="sysControllers.totalControllers"
                                                                   description='total controllers'
                                                                   defaultMessage='Total:{count}'
-                                                                  values={{count: 1===1 ? '10' : '0'}}/>
+                                                                  values={{count: (dataList.getSize()||0)}}/>
 
                                             </div>
                                             
