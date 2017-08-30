@@ -90,7 +90,8 @@ class Dropdown extends Component {
                 <span
                     className={'gor-dropdown '}>{!this.props.resetOnSelect ? this.state.placeholder : this.props.placeholder}</span>
                 <span className={this.state.dropDownVisible ? "gor-dropdown-arrow up" : "gor-dropdown-arrow"}></span>
-                <List data={this.props.options} selectedOption={this.props.selectedOption}
+                <List data={this.props.options} placeholder={this.props.placeholder} tickMark={this.props.tickMark} selectedOption={this.props.selectedOption}
+                      
                       optionAction={this._onSelect.bind(this)}
                       dropDownVisible={this.state.dropDownVisible}/>
             </div>
