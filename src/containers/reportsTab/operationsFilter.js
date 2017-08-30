@@ -214,10 +214,7 @@ class OperationsFilter extends React.Component{
                             </div>:""}
                     </div>
                      <div className="gor-filter-body">
-                         <div className="gor-filter-body-input-wrap"> 
-                            {ppsSearchField}
-                         </div>
-                         <div className="gor-filter-body-filterToken-wrap"> 
+                      <div className="gor-filter-body-filterToken-wrap"> 
                             <div className="gor-filter-body-filterToken-section1">
                                 {ppsFilterToken.column1token}
                             </div>
@@ -227,6 +224,10 @@ class OperationsFilter extends React.Component{
                             
 
                          </div>
+                         <div className="gor-filter-body-input-wrap"> 
+                            {ppsSearchField}
+                         </div>
+                        
                          
                          
                      </div>

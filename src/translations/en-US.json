@@ -3455,6 +3455,12 @@
     "filepath": "./src/containers/reportsTab/operationsLogTab.js"
   },
   {
+    "id": "operationsLog.table.noData",
+    "description": "No data message for operations logs",
+    "defaultMessage": "No Data Found",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
     "id": "reportsTab.operationsLog",
     "description": "Operations Log tab for Reports tab",
     "defaultMessage": "Operations Log",

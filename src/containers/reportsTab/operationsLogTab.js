@@ -3,28 +3,24 @@
  * This will be switched based on tab click
  */
 import React  from 'react';
-
-
-import { setInventorySpinner ,inventoryRefreshed} from '../../actions/inventoryActions';
 import { FormattedMessage} from 'react-intl';
 import { connect } from 'react-redux';
 import {wsOverviewData} from '../../constants/initData.js';
 import Dimensions from 'react-dimensions';
 import {withRouter} from 'react-router';
 import {updateSubscriptionPacket,setWsAction} from '../../actions/socketActions';
-import {applyOLFilterFlag,wsOLSubscribe,wsOLUnSubscribe} from '../../actions/operationsLogsActions';
-import {WS_ONSEND,POST,OPERATION_LOG_FETCH,
-    OPERATIONS_LOG_REQUEST_PARAMS,APP_JSON} from '../../constants/frontEndConstants';
+import {applyOLFilterFlag,wsOLSubscribe,wsOLUnSubscribe,setReportsSpinner} from '../../actions/operationsLogsActions';
+import {WS_ONSEND,POST,OPERATION_LOG_FETCH
+    ,APP_JSON} from '../../constants/frontEndConstants';
 import GorPaginateV2 from '../../components/gorPaginate/gorPaginateV2';
+import Spinner from '../../components/spinner/Spinner';
 import {Table, Column,Cell} from 'fixed-data-table';
 import {
     tableRenderer,
-    SortHeaderCell,
     TextCell
 } from '../../components/commonFunctionsDataTable';
 import {
-    showTableFilter,
-    filterApplied
+    showTableFilter
 } from '../../actions/filterAction';
 import OperationsFilter from './operationsFilter';
 import Dropdown from '../../components/gor-dropdown-component/dropdown';
@@ -104,7 +100,7 @@ class OperationsLogTab extends React.Component{
     }
     shouldComponentUpdate(nextProps,nextState){
         var shouldUpdate = (nextProps.hasDataChanged !== this.props.hasDataChanged) || 
-        (nextProps.showFilter !== this.props.showFilter);
+        (nextProps.showFilter !== this.props.showFilter) || (nextProps.reportsSpinner !== this.props.reportsSpinner);
         return shouldUpdate;
     }
     componentWillReceiveProps(nextProps) {
@@ -174,6 +170,7 @@ class OperationsLogTab extends React.Component{
         var query = props.location.query,
         isSocketConnected = props.notificationSocketConnected;
         var filters = {};//JSON.parse(JSON.stringify(OPERATIONS_LOG_REQUEST_PARAMS));
+        this.props.setReportsSpinner(true);
             if(Object.keys(query).length){
                 let currTime = new Date();
                 let toTime = new Date(currTime);
@@ -239,7 +236,7 @@ class OperationsLogTab extends React.Component{
         var pageSizeDDDisabled = this.props.location.query.time_period === 'realtime' ;
 		return (
 			<div className="gorTesting wrapper gor-operations-log">
-
+                <Spinner isLoading={this.props.reportsSpinner} setSpinner={this.props.setReportsSpinner}/>
             <div className="gor-filter-wrap"
                                  style={{'width': this.props.showFilter ? '350px' : '0px', height: filterHeight}}>
                                 <OperationsFilter hideLayer={hideLayer} pageSize={this.state.pageSize} responseFlag={true}/>
@@ -457,7 +454,8 @@ function mapStateToProps(state, ownProps) {
         olData:state.operationsLogsReducer.olData || [],
         hasDataChanged:state.operationsLogsReducer.hasDataChanged,
         filtersApplied:state.operationsLogsReducer.filtersApplied || false,
-        notificationSocketConnected:state.notificationSocketReducer.notificationSocketConnected || false
+        notificationSocketConnected:state.notificationSocketReducer.notificationSocketConnected || false,
+        reportsSpinner:state.operationsLogsReducer.reportsSpinner || false
 
     };
 }
@@ -471,7 +469,8 @@ function mapDispatchToProps(dispatch){
         makeAjaxCall: function(params){dispatch(makeAjaxCall(params));},
         applyOLFilterFlag:function(data){dispatch(applyOLFilterFlag(data))},
         wsOLUnSubscribe:function(data){dispatch(wsOLUnSubscribe(data))},
-        wsOLSubscribe:function(data){dispatch(wsOLSubscribe(data))}
+        wsOLSubscribe:function(data){dispatch(wsOLSubscribe(data))},
+        setReportsSpinner:function(data){dispatch(setReportsSpinner(data))}
     }
 };
 
