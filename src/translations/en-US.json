@@ -30,6 +30,12 @@
     "filepath": "./src/components/commonFunctionsDataTable.js"
   },
   {
+    "id": "commonDataTable.attributesType.itemSelectedText",
+    "description": "heading for attribute",
+    "defaultMessage": "{count} items selected",
+    "filepath": "./src/components/commonFunctionsDataTable.js"
+  },
+  {
     "id": "commonDataTable.attributesType.heading",
     "description": "heading for attribute",
     "defaultMessage": "Box Id",
@@ -2300,7 +2306,7 @@
   {
     "id": "operation.fire.evacuation",
     "description": "Description Text evacuation",
-    "defaultMessage": " Please follow evacuation procedures immediately.",
+    "defaultMessage": "Please follow evacuation procedures immediately.",
     "filepath": "./src/containers/emergencyProcess/fireHazard.js"
   },
   {
@@ -4206,6 +4212,12 @@
     "id": "sysControllers.idColumn.heading",
     "description": "CONTROLLER ID",
     "defaultMessage": "CONTROLLER ID",
+    "filepath": "./src/containers/systemTabs/sysControllers.js"
+  },
+  {
+    "id": "sysControllers.totalControllers",
+    "description": "total controllers",
+    "defaultMessage": "Total:{count}",
     "filepath": "./src/containers/systemTabs/sysControllers.js"
   },
   {

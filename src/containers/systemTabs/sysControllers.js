@@ -237,8 +237,16 @@ class SystemControllers extends React.Component {
                                             <FormattedMessage id="sysControllers.idColumn.heading"
                                                               description='CONTROLLER ID'
                                                               defaultMessage='CONTROLLER ID'/>
+                                            <div className="gorToolHeaderSubText">
+                                                <FormattedMessage id="sysControllers.totalControllers"
+                                                                  description='total controllers'
+                                                                  defaultMessage='Total:{count}'
+                                                                  values={{count: 1===1 ? '10' : '0'}}/>
+
+                                            </div>
                                             
                                         </div>
+
                                     </SortHeaderCell>
                                 
                             
@@ -259,8 +267,7 @@ class SystemControllers extends React.Component {
 
                                     <FormattedMessage id="sysController.table.status" description="Status for PPS"
                                                       defaultMessage="STATUS"/>
-
-                                   
+                                    <div className="gorToolHeaderSubText"/>
                                 </div>
                             </SortHeaderCell>
                         }
@@ -277,6 +284,7 @@ class SystemControllers extends React.Component {
 
                                     <FormattedMessage id="sysController.table.location" description="Location"
                                                       defaultMessage="LOCATION"/>
+                                    <div className="gorToolHeaderSubText"/>
                                 </div>
                             </Cell>
                         }
@@ -296,6 +304,7 @@ class SystemControllers extends React.Component {
 
                                     <FormattedMessage id="sysController.table.conDetails" description="Status for PPS"
                                                       defaultMessage="CONNECTION DETAILS"/>
+                                    <div className="gorToolHeaderSubText"/>
                                 </div>
                                 </Cell>
                         }
@@ -320,6 +329,7 @@ class SystemControllers extends React.Component {
 
                                     <FormattedMessage id="sysController.table.operatingMode" description="Status for PPS"
                                                       defaultMessage="OPERATING MODE"/>
+                                    <div className="gorToolHeaderSubText"/>
 
                                   
                                 </div>
