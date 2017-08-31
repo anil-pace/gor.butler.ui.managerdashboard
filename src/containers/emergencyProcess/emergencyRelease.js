@@ -4,6 +4,7 @@ import {modal} from 'react-redux-modal';
 import {userRequest} from '../../actions/userActions';
 import { FormattedMessage } from 'react-intl'; 
 import ResumeOperation from './resumeOperation'; 
+import {HARD,SOFT} from '../../constants/frontEndConstants'
 
 class EmergencyRelease extends React.Component{
   _removeThisModal() {
@@ -38,14 +39,18 @@ class EmergencyRelease extends React.Component{
           <span className="close" onClick={this._removeThisModal.bind(this)}>×</span>
             <div className='gor-operation-head'>
               <div className='gor-caution'></div><span className='gor-operation-heading'>
-              <FormattedMessage id='operation.alert.release' 
+              {(!this.props.releaseState || this.props.releaseState === HARD)?<FormattedMessage id='operation.alert.release' 
                     defaultMessage="All Emergency-stop buttons released"
-                            description="Text for emergency button release heading"/></span>
+                            description="Text for emergency button release heading"/> : <FormattedMessage id='operation.alert.releaseSoft' 
+                    defaultMessage="All Emergency-pause buttons released"
+                            description="Text for emergency button release heading"/>}</span>
             </div>
             <div className='gor-operation-body'>
-              <div className='gor-text-bold'><FormattedMessage id='operation.alert.release.text' 
+              <div className='gor-text-bold'>{(!this.props.releaseState || this.props.releaseState === HARD)?<FormattedMessage id='operation.alert.release.text' 
                     defaultMessage="All Emergency-stop buttons have been released."
-                            description="Text for emergency stop button release"/>
+                            description="Text for emergency stop button release"/>:<FormattedMessage id='operation.alert.releaseSoft.text' 
+                    defaultMessage="All Emergency-pause buttons have been released."
+                            description="Text for emergency pause button release"/>}
               </div>
               <div className='gor-operation-text'><FormattedMessage id='operation.alert.release.subtext' 
                     defaultMessage="You will be required to enter your password in order to view the checklist.
