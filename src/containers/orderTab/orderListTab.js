@@ -146,7 +146,7 @@ class OrderListTab extends React.Component {
              statusList.splice(indexOfBreached, 1)
          }
          if (indexOfException > -1) {
-        (indexOfBreached> -1)? statusList.splice(indexOfException-1, 1):statusList.splice(indexOfException, 1);     
+        (indexOfBreached> -1)? statusList.splice(indexOfException-1, 1):statusList.splice(indexOfException, 1);
          _query_params.push([EXCEPTION_TRUE, "true"].join("="))
          }
 
@@ -178,7 +178,7 @@ class OrderListTab extends React.Component {
         let url=API_URL + ORDERS_URL
 
         _query_params.push([GIVEN_PAGE, query.page || 1].join("="))
-        _query_params.push([GIVEN_PAGE_SIZE, query.pageSize || 25].join("="));
+        _query_params.push([GIVEN_PAGE_SIZE, this.props.filterOptions.pageSize || 25].join("="));
         if(orderbyParam && orderbyParam.sortDir){
             orderbyParam? _query_params.push(['order',toggleOrder(orderbyParam.sortDir)].join("=")):"";
             orderbyUrl=orderbyParam? sortOrderHead[orderbyParam["columnKey"]]:"";
@@ -394,7 +394,7 @@ class OrderListTab extends React.Component {
     
     //To check where the object is empty or not
 
-    refresh=(data)=> {
+    refresh=(data,pageSize)=> {
         var locationQuery=this.props.location.query;
         if(locationQuery && Object.keys(locationQuery).length)
         {
@@ -482,12 +482,17 @@ class OrderListTab extends React.Component {
         data.url=API_URL + ORDERS_URL + ORDER_PAGE + (data.selected ? data.selected : 1);
 
         //appending page size filter
-        if (this.props.filterOptions.pageSize=== undefined) {
-            appendPageSize=PAGE_SIZE_URL + "25";
-        }
+        if(!pageSize) {
+            if (this.props.filterOptions.pageSize === undefined) {
+                appendPageSize = PAGE_SIZE_URL + "25";
+            }
 
-        else {
-            appendPageSize=PAGE_SIZE_URL + this.props.filterOptions.pageSize;
+            else {
+                appendPageSize = PAGE_SIZE_URL + this.props.filterOptions.pageSize;
+            }
+        }
+        else{
+            appendPageSize = PAGE_SIZE_URL + pageSize
         }
 
 
@@ -503,6 +508,10 @@ _setFilter() {
     var newState=!this.props.showFilter;
     this.props.showTableFilter(newState)
 }
+
+    onPageSizeChange(arg) {
+        this.refresh(null, arg);
+    }
 
 
 render() {
@@ -628,7 +637,7 @@ render() {
 
         <div className="gor-pageNum">
         <Dropdown styleClass={'gor-Page-Drop'} items={ordersByStatus} currentState={ordersByStatus[0]}
-        optionDispatch={this.props.getPageSizeOrders} refreshList={this.refresh.bind(this)}/>
+        optionDispatch={this.props.getPageSizeOrders} refreshList={this.onPageSizeChange.bind(this)}/>
         </div>
         <div className="gor-paginate">
         {this.state.query ?

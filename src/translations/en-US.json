@@ -3323,12 +3323,6 @@
     "filepath": "./src/containers/reportsTab/operationsLogTab.js"
   },
   {
-    "id": "gor.filter.filterLabel",
-    "description": "button label for filter",
-    "defaultMessage": "Filter data",
-    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
-  },
-  {
     "id": "operationLog.table.operatingMode",
     "description": "OPERATING MODE",
     "defaultMessage": "OPERATING MODE",
