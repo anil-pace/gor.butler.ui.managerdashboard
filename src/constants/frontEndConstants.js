@@ -158,7 +158,8 @@ export const EMERGENCY_FIRE="fire_emergency";
 export const EMERGENCY="emergency";
 export const NOTIFY_EMERGENCY_END="NOTIFY_EMERGENCY_END";
 export const SYSTEM_EMERGENCY="system_emergency";
-export const SET_EMERGENCY_MODAL_STATUS = "SET_EMERGENCY_MODAL_STATUS"
+export const SET_EMERGENCY_MODAL_STATUS = "SET_EMERGENCY_MODAL_STATUS";
+
 
 
 /*Constants for type of AJAX call*/
@@ -199,6 +200,7 @@ export const GRN_HISTORY="GRN_HISTORY";
 export const UPDATE_FILE_SIZE="UPDATE_FILE_SIZE";
 export const MASTER_FILE_FORMATS=[".csv"];
 export const REPORTS_HISTORY_UPDATE="REPORTS_HISTORY_UPDATE";
+export const PASSWORD_BUTTON_RESET ="PASSWORD_BUTTON_RESET";
 
 export const AUDIT_RETRIEVE="AUDIT_RETRIEVE";
 export const CANCEL_AUDIT="CANCEL_AUDIT";
@@ -471,6 +473,7 @@ export const GOR_PASS='gor-pass';
 export const GOR_FAIL='gor-fail';
 export const GOR_INFO='gor-info';
 export const GOR_STATUS="status";
+export const GOR_AUDIT_STATUS_DATA="status_data";
 export const GOR_STATUS_PRIORITY="statusPriority";
 export const GOR_PERIPHERAL_ONLINE="online";
 export const GOR_PERIPHERAL_OFFLINE="offline";
@@ -483,6 +486,7 @@ export const AUDIT_PENDING_APPROVAL="audit_pending_approval";
 export const AUDIT_RESOLVED="audit_resolved"; 
 export const AUDIT_UNRESOLVED="Unresolved";
 export const AUDIT_LINE_REJECTED="audit_rejected";
+export const AUDIT_LINE_REAUDITED="audit_reaudited";
 export const AUDIT_REJECTED_STATUS="Rejected";
 export const AUDIT_REAUDITED_STATUS="Re-audited";
 export const AUDIT_RESOLVED_STATUS="Resolved";

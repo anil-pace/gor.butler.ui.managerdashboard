@@ -587,13 +587,11 @@ background-color: #FFFFFF;
 }
 
 .pending .public_fixedDataTableCell_cellContent{
-
- 
   border-radius: 15px;
   text-align: center;
   width:90px;
-  border: 1px solid #00a54f;
-  color: #00a54f;
+  border:1px solid #aaaaaa;
+  color: #aaaaaa;
   font-size: 12px;
   max-height: 9px;
   background: #ffffff;
@@ -605,10 +603,10 @@ background-color: #FFFFFF;
   text-align: center;
   width:90px;
   border:1px solid #aaaaaa;
-  color: #aaaaaa;
+  color: #ffffff;
   font-size: 12px;
   max-height: 9px;
-  background: #ffffff;
+  background: #aaaaaa;
   text-transform: capitalize;
 }
 
@@ -1646,11 +1644,13 @@ input[type="checkbox"]{
 display:inline-block;
   padding-right: 20px;
   width: 110px;
+  float:left;
 }
 
 .gor-audit-actions-drop {
  display: inline-block;
- width: 150px; 
+  width: 10.625rem;
+  float:right;
 }
 
 .gor-header-check {

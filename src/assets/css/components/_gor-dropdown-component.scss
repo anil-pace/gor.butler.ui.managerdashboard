@@ -12,13 +12,14 @@
     box-sizing: border-box;
     cursor: pointer;
     outline: none;
-    padding: 0.5rem 3.25rem 0.5rem 0.625rem;
+    padding: 0.5rem 2.25rem 0.5rem 0.625rem;
     transition: all 200ms ease;
     border-color: #aaaaaa;
     font-size: 14px;
     font-weight: 100;
     color: #aaaaaa;
     position: relative;
+    float:left;
     .gor-dropdown-arrow{
         border-color: #A6A7A9 transparent transparent;
         border-style: solid;
@@ -42,6 +43,22 @@
              
         }
     }
+    .gor-edit-icon{
+            float: left;
+            width: 1rem;
+            height: 1.25rem;
+            margin-right:0.5rem;
+    }
+    .gor-action-audit-icon{
+            background-position: -358px -77px ;
+            
+    }
+    .gor-action-pps-icon{
+            background-position: -239px -77px ;
+    }
+    .gor-action-icon-none{
+    display:none;
+    }
 }
 .gor-dropdown-option{
     text-decoration: none;
@@ -61,12 +78,11 @@
 .gor-option-wrapper{
     position: absolute;
     z-index: 2;
-    left: 0;
+    left: -0.0625rem;
     top: 30px;
     background: #fff;
     width: 100%;
     border: 1px solid;
     border-radius: 3px;
     box-shadow: 0 0.0625rem 0 rgba(0, 0, 0, 0.06);
-    box-sizing: border-box;
 }

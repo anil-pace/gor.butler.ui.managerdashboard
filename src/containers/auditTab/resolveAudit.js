@@ -2,7 +2,7 @@ import React  from 'react';
 import { FormattedMessage } from 'react-intl'; 
 import { connect } from 'react-redux';
 import {getAuditOrderLines,resolveAuditLines} from '../../actions/auditActions';
-import {GET,APP_JSON,AUDIT_RESOLVE_LINES,GOR_BREACHED_LINES,APPROVE_AUDIT,GOR_USER_TABLE_HEADER_HEIGHT,GOR_AUDIT_RESOLVE_MIN_HEIGHT,GOR_AUDIT_RESOLVE_WIDTH, POST, AUDIT_RESOLVE_CONFIRMED,AUDIT_BY_PDFA} from '../../constants/frontEndConstants';
+import {GET,APP_JSON,AUDIT_RESOLVE_LINES,GOR_BREACHED_LINES,APPROVE_AUDIT,GOR_USER_TABLE_HEADER_HEIGHT,GOR_AUDIT_RESOLVE_MIN_HEIGHT,GOR_AUDIT_RESOLVE_WIDTH, POST, AUDIT_RESOLVE_CONFIRMED,AUDIT_BY_PDFA,GOR_AUDIT_STATUS_DATA} from '../../constants/frontEndConstants';
 import {AUDIT_URL, PENDING_ORDERLINES, AUDIT_ANAMOLY} from '../../constants/configConstants';
 import {Table, Column} from 'fixed-data-table';
 import {tableRenderer,TextCell,ResolveCell} from '../../components/commonFunctionsDataTable';
@@ -65,7 +65,7 @@ class ResolveAudit extends React.Component{
             /**
              * Data from the backend for the comparison.
              */
-            auditData.status_data=data[i].status
+            auditData[GOR_AUDIT_STATUS_DATA]=data[i].status
         }
       if(this.context.intl.formatMessage(stringConfig[data[i].status])) {
         auditData.status=this.context.intl.formatMessage(stringConfig[data[i].status]);

@@ -75,12 +75,13 @@ class Tabs extends React.Component{
       });
 
   }
-  _emergencyRelease(){
+  _emergencyRelease(releaseState){
       modal.add(EmergencyRelease, {
         title: '',
         size: 'large', // large, medium or small,
       closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-      hideCloseButton: false
+      hideCloseButton: false,
+      releaseState
       });  
   }
   _pauseOperation(stopFlag,additionalProps){
@@ -107,33 +108,38 @@ class Tabs extends React.Component{
   
  
   componentWillReceiveProps(nextProps){
-  if(!nextProps.isEmergencyOpen){
-
-   /* if (nextProps.system_data === SOFT_MANUAL && (this.props.system_data === HARD || !this.props.system_data)) {
-            this._emergencyRelease();
-        } else if (nextProps.fireHazardType === EMERGENCY_FIRE && !nextProps.firehazadflag && !nextProps.fireHazardNotifyTime && nextProps.firehazadflag !== this.props.firehazadflag ||
-            ((this.props.firehazadflag === false) && nextProps.fireHazardNotifyTime !== this.props.fireHazardNotifyTime))
-
-        {
-            this._FireEmergencyRelease();
-        } */
-        if(this.props.isEmergencyOpen !== nextProps.isEmergencyOpen && nextProps.system_emergency  && nextProps.system_data === HARD){
+    if(!nextProps.isEmergencyOpen){
+        if( nextProps.system_emergency  && nextProps.system_data === HARD){
             this.props.setEmergencyModalStatus(true);
             this._stopOperation(true, nextProps.zoneDetails);
 
         }
-        else if(this.props.isEmergencyOpen !== nextProps.isEmergencyOpen && nextProps.system_data === SOFT){
+        else if(  nextProps.system_data === SOFT){
           this.props.setEmergencyModalStatus(true);
           this._pauseOperation(true, nextProps.zoneDetails);
         }
-        else if(this.props.isEmergencyOpen !== nextProps.isEmergencyOpen && 
+        else if( 
           nextProps.system_data === SOFT_MANUAL && 
-          nextProps.lastEmergencyState === HARD){
+          (nextProps.lastEmergencyState === HARD || nextProps.lastEmergencyState === SOFT)){
+           let releaseState
+            if(nextProps.lastEmergencyState === HARD){
+              releaseState=HARD
+            }
+            else if(nextProps.lastEmergencyState === SOFT){
+              releaseState=SOFT
+            }
+      
            this.props.setEmergencyModalStatus(true);
-           this._emergencyRelease();
-        }
-     
+           this._emergencyRelease(releaseState);
+        }     
     }
+    
+     if (nextProps.fireHazardType === EMERGENCY_FIRE && !nextProps.firehazadflag && !nextProps.fireHazardNotifyTime && nextProps.firehazadflag !== this.props.firehazadflag 
+          || (nextProps.fireHazardType === EMERGENCY_FIRE && (this.props.firehazadflag === false) && nextProps.fireHazardNotifyTime !== this.props.fireHazardNotifyTime)){
+            this._FireEmergencyRelease();
+        }
+    
+
   }
   _parseStatus()
   {
@@ -271,7 +277,7 @@ singleNotification=<GorToastify key={1}>
    <div className="gor-toastify-content">
                   <p className="msg-content">
                    <FormattedMessage id='operation.alert.triggeremergency' 
-                    defaultMessage="Fire emergency triggered.Follow evacuation procedures immediately"
+                    defaultMessage="Fire emergency triggered. Follow evacuation procedures immediately"
                             description="Text button to trigger emergency"/>
                              <span className="gor-toastify-updated-time">{timeText}</span>
                   </p>
@@ -348,6 +354,7 @@ function mapStateToProps(state, ownProps){
          system_emergency:state.tabsData.system_emergency||false,
          lastEmergencyState:state.tabsData.lastEmergencyState || "none",
          system_data:state.tabsData.system_data||null,
+         lastEmergencyState:state.tabsData.lastEmergencyState,
          users_online:state.tabsData.users_online||0,
          audit_count:state.tabsData.audit_count||0,
          space_utilized:state.tabsData.space_utilized||0,

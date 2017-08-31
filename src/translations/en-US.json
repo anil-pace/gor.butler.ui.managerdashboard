@@ -30,6 +30,12 @@
     "filepath": "./src/components/commonFunctionsDataTable.js"
   },
   {
+    "id": "commonDataTable.attributesType.itemSelectedText",
+    "description": "heading for attribute",
+    "defaultMessage": "{count} items selected",
+    "filepath": "./src/components/commonFunctionsDataTable.js"
+  },
+  {
     "id": "commonDataTable.attributesType.heading",
     "description": "heading for attribute",
     "defaultMessage": "Box Id",
@@ -1524,8 +1530,8 @@
   },
   {
     "id": "audit.cancellation.error.g024",
-    "description": "Audit Id cancellation request has been process and cannot be cancelled",
-    "defaultMessage": "Audit Id cancellation request has been process and cannot be cancelled",
+    "description": "Audit cancellation request denied",
+    "defaultMessage": "Audit cancellation request denied",
     "filepath": "./src/constants/messageConstants.js"
   },
   {
@@ -1725,7 +1731,7 @@
   },
   {
     "id": "auditdetail.completed.status",
-    "defaultMessage": "Completed",
+    "defaultMessage": "Audited",
     "filepath": "./src/containers/auditTab.js"
   },
   {
@@ -2256,9 +2262,21 @@
     "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
   },
   {
+    "id": "operation.alert.releaseSoft",
+    "description": "Text for emergency button release heading",
+    "defaultMessage": "All Emergency-pause buttons released",
+    "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
+  },
+  {
     "id": "operation.alert.release.text",
     "description": "Text for emergency stop button release",
     "defaultMessage": "All Emergency-stop buttons have been released.",
+    "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
+  },
+  {
+    "id": "operation.alert.releaseSoft.text",
+    "description": "Text for emergency pause button release",
+    "defaultMessage": "All Emergency-pause buttons have been released.",
     "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
   },
   {
@@ -3451,6 +3469,36 @@
     "filepath": "./src/containers/systemTabs/butlerBotFilter.js"
   },
   {
+    "id": "gor.filter.filterLabel",
+    "description": "label for filter",
+    "defaultMessage": "Filter data",
+    "filepath": "./src/containers/systemTabs/butlerBotFilter.js"
+  },
+  {
+    "id": "gor.filter.hide",
+    "description": "label for hide",
+    "defaultMessage": "Hide",
+    "filepath": "./src/containers/systemTabs/butlerBotFilter.js"
+  },
+  {
+    "id": "gor.filter.noResult",
+    "description": "label for no result",
+    "defaultMessage": "No results found, please try again",
+    "filepath": "./src/containers/systemTabs/butlerBotFilter.js"
+  },
+  {
+    "id": "gor.filter.reset",
+    "description": "label for reset",
+    "defaultMessage": "Reset",
+    "filepath": "./src/containers/systemTabs/butlerBotFilter.js"
+  },
+  {
+    "id": "gor.filter.heading",
+    "description": "filter heading",
+    "defaultMessage": "Apply filter",
+    "filepath": "./src/containers/systemTabs/butlerBotFilter.js"
+  },
+  {
     "id": "butlerDetail.name.prefix",
     "description": "prefix for butler id",
     "defaultMessage": "BOT - {botId}",
@@ -3673,6 +3721,36 @@
   {
     "id": "charging.timePeriod.twoHR",
     "defaultMessage": "Auto",
+    "filepath": "./src/containers/systemTabs/chargingStationFilter.js"
+  },
+  {
+    "id": "gor.filter.filterLabel",
+    "description": "label for filter",
+    "defaultMessage": "Filter data",
+    "filepath": "./src/containers/systemTabs/chargingStationFilter.js"
+  },
+  {
+    "id": "gor.filter.hide",
+    "description": "label for hide",
+    "defaultMessage": "Hide",
+    "filepath": "./src/containers/systemTabs/chargingStationFilter.js"
+  },
+  {
+    "id": "gor.filter.noResult",
+    "description": "label for no result",
+    "defaultMessage": "No results found, please try again",
+    "filepath": "./src/containers/systemTabs/chargingStationFilter.js"
+  },
+  {
+    "id": "gor.filter.reset",
+    "description": "label for reset",
+    "defaultMessage": "Reset",
+    "filepath": "./src/containers/systemTabs/chargingStationFilter.js"
+  },
+  {
+    "id": "gor.filter.heading",
+    "description": "filter heading",
+    "defaultMessage": "Apply filter",
     "filepath": "./src/containers/systemTabs/chargingStationFilter.js"
   },
   {
@@ -4095,6 +4173,36 @@
     "filepath": "./src/containers/systemTabs/ppsFilter.js"
   },
   {
+    "id": "gor.filter.filterLabel",
+    "description": "label for filter",
+    "defaultMessage": "Filter data",
+    "filepath": "./src/containers/systemTabs/ppsFilter.js"
+  },
+  {
+    "id": "gor.filter.hide",
+    "description": "label for hide",
+    "defaultMessage": "Hide",
+    "filepath": "./src/containers/systemTabs/ppsFilter.js"
+  },
+  {
+    "id": "gor.filter.noResult",
+    "description": "label for no result",
+    "defaultMessage": "No results found, please try again",
+    "filepath": "./src/containers/systemTabs/ppsFilter.js"
+  },
+  {
+    "id": "gor.filter.reset",
+    "description": "label for reset",
+    "defaultMessage": "Reset",
+    "filepath": "./src/containers/systemTabs/ppsFilter.js"
+  },
+  {
+    "id": "gor.filter.heading",
+    "description": "filter heading",
+    "defaultMessage": "Apply filter",
+    "filepath": "./src/containers/systemTabs/ppsFilter.js"
+  },
+  {
     "id": "ppsDetail.name.prefix",
     "description": "prefix for pps id in ppsDetail",
     "defaultMessage": "PPS-{ppsId}",
@@ -4317,6 +4425,12 @@
     "filepath": "./src/containers/systemTabs/sysControllers.js"
   },
   {
+    "id": "sysControllers.totalControllers",
+    "description": "total controllers",
+    "defaultMessage": "Total:{count}",
+    "filepath": "./src/containers/systemTabs/sysControllers.js"
+  },
+  {
     "id": "sysController.table.status",
     "description": "Status for PPS",
     "defaultMessage": "STATUS",
@@ -4510,7 +4624,7 @@
   {
     "id": "operation.alert.triggeremergency",
     "description": "Text button to trigger emergency",
-    "defaultMessage": "Fire emergency triggered.Follow evacuation procedures immediately",
+    "defaultMessage": "Fire emergency triggered. Follow evacuation procedures immediately",
     "filepath": "./src/containers/tabs.js"
   },
   {
@@ -4536,7 +4650,7 @@
   },
   {
     "id": "auditdetail.completed.status",
-    "defaultMessage": "Completed",
+    "defaultMessage": "Audited",
     "filepath": "./src/containers/usersTab.js"
   },
   {
@@ -4895,7 +5009,7 @@
   },
   {
     "id": "auditdetail.completed.status",
-    "defaultMessage": "Completed",
+    "defaultMessage": "Audited",
     "filepath": "./src/containers/userTab/usersTab.js"
   },
   {
@@ -5194,7 +5308,7 @@
   {
     "id": "pps.mode.success",
     "description": "PPS mode change success",
-    "defaultMessage": "Mode change request successfull",
+    "defaultMessage": "Mode change request successful",
     "filepath": "./src/utilities/getFormattedMessages.js"
   },
   {

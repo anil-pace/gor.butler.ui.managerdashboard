@@ -80,6 +80,7 @@ class Dropdown extends Component {
       document.removeEventListener("click", this._handleDocumentClick,false)
   }
 
+
   render() {
     
     return (
@@ -92,6 +93,7 @@ class Dropdown extends Component {
           </div>
     );
   }
+
 }
 
 export default Dropdown;

@@ -165,6 +165,7 @@ body {
 .user-icon,
 .overview-tile-ontime-icon,
 .gor-caution-image,
+.gor-action-icon,
 .gor-image-status, .gor-shutter-image-status,
 .statusOl, .statusAl, .iStock, .iAudit, .iPick, .gor-login-user, .gor-login-password, .gor-login-error, .gor-tick, .gor-question, .gor-tick-white, .gor-remove-white, .gor-error-white, .gor-login-user-error, .gor-login-password-error, .gor-question-2, .gor-operation-tick, .gor-alert-lg,
 .gor-dropdown-open, .gor-dropdown-close, .gor-caution, .gor-delay-icon,
@@ -2412,8 +2413,8 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   border-radius: 15px;
   text-align: center;
   width: 90px;
-  border: 1px solid #00a54f;
-  color: #00a54f;
+  border: 1px solid #aaaaaa;
+  color: #aaaaaa;
   font-size: 12px;
   max-height: 9px;
   background: #ffffff;
@@ -2425,10 +2426,10 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   text-align: center;
   width: 90px;
   border: 1px solid #aaaaaa;
-  color: #aaaaaa;
+  color: #ffffff;
   font-size: 12px;
   max-height: 9px;
-  background: #ffffff;
+  background: #aaaaaa;
   text-transform: capitalize;
 }
 
@@ -3439,11 +3440,13 @@ input[type="checkbox"] {
   display: inline-block;
   padding-right: 20px;
   width: 110px;
+  float: left;
 }
 
 .gor-audit-actions-drop {
   display: inline-block;
-  width: 150px;
+  width: 10.625rem;
+  float: right;
 }
 
 .gor-header-check {
@@ -6926,13 +6929,14 @@ button:disabled {
   box-sizing: border-box;
   cursor: pointer;
   outline: none;
-  padding: 0.5rem 3.25rem 0.5rem 0.625rem;
+  padding: 0.5rem 2.25rem 0.5rem 0.625rem;
   transition: all 200ms ease;
   border-color: #aaaaaa;
   font-size: 14px;
   font-weight: 100;
   color: #aaaaaa;
   position: relative;
+  float: left;
 }
 
 .gor-dropdown-wrapper .gor-dropdown-arrow {
@@ -6959,6 +6963,25 @@ button:disabled {
   border-style: solid;
 }
 
+.gor-dropdown-wrapper .gor-edit-icon {
+  float: left;
+  width: 1rem;
+  height: 1.25rem;
+  margin-right: 0.5rem;
+}
+
+.gor-dropdown-wrapper .gor-action-audit-icon {
+  background-position: -358px -77px;
+}
+
+.gor-dropdown-wrapper .gor-action-pps-icon {
+  background-position: -239px -77px;
+}
+
+.gor-dropdown-wrapper .gor-action-icon-none {
+  display: none;
+}
+
 .gor-dropdown-option {
   text-decoration: none;
   display: block;
@@ -6979,14 +7002,13 @@ button:disabled {
 .gor-option-wrapper {
   position: absolute;
   z-index: 2;
-  left: 0;
+  left: -0.0625rem;
   top: 30px;
   background: #fff;
   width: 100%;
   border: 1px solid;
   border-radius: 3px;
   box-shadow: 0 0.0625rem 0 rgba(0, 0, 0, 0.06);
-  box-sizing: border-box;
 }
 
 .gor-toastify {

@@ -68,7 +68,7 @@ class OperationsLogTab extends React.Component{
             query:this.props.location.query,
             subscribed:false,
             realTimeSubSent:false,
-            pageSize:"25",
+            pageSize:this.props.location.query.pageSize || "25",
             dataFetchedOnLoad:false,
             queryApplied:Object.keys(this.props.location.query).length ? true :false
         }
@@ -110,7 +110,8 @@ class OperationsLogTab extends React.Component{
             })
             
         }
-        else if(nextProps.socketAuthorized && nextProps.notificationSocketConnected && (!this.state.dataFetchedOnLoad || nextProps.filtersApplied)){
+        else if(nextProps.socketAuthorized && nextProps.notificationSocketConnected 
+            && (!this.state.dataFetchedOnLoad || nextProps.filtersApplied || (this.props.location.query.page !== nextProps.location.query.page))){
             this.setState({
                 dataFetchedOnLoad:true
             },function(){
@@ -154,13 +155,14 @@ class OperationsLogTab extends React.Component{
         this.props.initDataSentCall(wsOverviewData["default"]);
 	}
     _handlePageChange(e){
-        this.props.applyOLFilterFlag(true);
+        
         this.setState({
             pageSize:e.value
         },function(){
             let _query =  Object.assign({},this.props.location.query);
             _query.pageSize = this.state.pageSize;
             _query.page = _query.page || 1;
+            this.props.applyOLFilterFlag(true);
             this.props.router.push({pathname: "/reports/operationsLog",query: _query})
             //this._getOperationsData(this.props,{pageSize:e.value});
         })
@@ -170,6 +172,8 @@ class OperationsLogTab extends React.Component{
         var query = props.location.query,
         isSocketConnected = props.notificationSocketConnected;
         var filters = {};//JSON.parse(JSON.stringify(OPERATIONS_LOG_REQUEST_PARAMS));
+        var pageSize = this.state.pageSize;
+        var frm = (query.page ? parseInt(query.page) : 1) -1;
         this.props.setReportsSpinner(true);
             if(Object.keys(query).length){
                 let currTime = new Date();
@@ -181,15 +185,13 @@ class OperationsLogTab extends React.Component{
                 filters.requestId = query.request_id;
                 filters.skuId = query.sku_id;
                 filters.userId = query.user_id;
-                filters.page={
-                    size:query.pageSize ? parseInt(query.pageSize) : parseInt(this.state.pageSize),
-                    from:query.page ? parseInt(query.page) : 1
-                }
-                /*filters.timeRange = {
-                    from: currTime.getTime(),//Need to add timeoffset
-                    to:toTime.getTime()
-                }*/
+               
             }
+            filters.page={
+                    size:parseInt(pageSize),
+                    from:frm
+                }
+
         if(query.time_period !== "realtime"){
             this.props.wsOLUnSubscribe();
             
@@ -237,10 +239,7 @@ class OperationsLogTab extends React.Component{
 		return (
 			<div className="gorTesting wrapper gor-operations-log">
                 <Spinner isLoading={this.props.reportsSpinner} setSpinner={this.props.setReportsSpinner}/>
-            <div className="gor-filter-wrap"
-                                 style={{'width': this.props.showFilter ? '350px' : '0px', height: filterHeight}}>
-                                <OperationsFilter hideLayer={hideLayer} pageSize={this.state.pageSize} responseFlag={true}/>
-            </div>
+            
              <div className="gorToolBar">
                                 <div className="gorToolBarWrap">
                                     <div className="gorToolBarElements">
@@ -249,22 +248,7 @@ class OperationsLogTab extends React.Component{
                                         
                                     </div>
                                 </div>
-                       <div className="filterWrapper">
-                            
-                                <div className="gorToolBarDropDown">
-                                    <div className="gor-button-wrap">
-                                  
-                                        <button
-                                            className={"gor-filterBtn-btn"}
-                                            onClick={this._setFilter}>
-                                            <div className="gor-manage-task"/>
-                                            <FormattedMessage id="gor.filter.filterLabel" description="button label for filter"
-                                                              defaultMessage="Filter data"/>
-                                        </button>
-                                    </div>
-                                </div>
-
-                            </div>
+                    
              </div>
      
                         
