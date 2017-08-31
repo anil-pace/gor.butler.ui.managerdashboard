@@ -1,7 +1,7 @@
 
+
 import {GET_OVERVIEW,GET_SYSTEM,GET_INVENTORY,GET_AUDIT,GET_USERS,GET_ORDERS,
   GET_STATUS,SET_EMERGENCY_MODAL_STATUS} from '../constants/frontEndConstants.js';
-
 
 export  function tabsData(state={},action){
   switch (action.type) {
@@ -80,11 +80,10 @@ export  function tabsData(state={},action){
         "status":status
       }) 
       case SET_EMERGENCY_MODAL_STATUS:
-          return Object.assign({}, state, { 
-            "isEmergencyOpen":action.data
-          })     
-
-    default:
-      return state
+        return Object.assign({}, state, { 
+          "isEmergencyOpen":action.data
+        })       
+	  default:
+	    return state
   }
 }
