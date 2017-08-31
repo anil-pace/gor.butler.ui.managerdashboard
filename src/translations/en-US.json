@@ -2274,9 +2274,21 @@
     "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
   },
   {
+    "id": "operation.alert.releaseSoft",
+    "description": "Text for emergency button release heading",
+    "defaultMessage": "All Emergency-pause buttons released",
+    "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
+  },
+  {
     "id": "operation.alert.release.text",
     "description": "Text for emergency stop button release",
     "defaultMessage": "All Emergency-stop buttons have been released.",
+    "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
+  },
+  {
+    "id": "operation.alert.releaseSoft.text",
+    "description": "Text for emergency pause button release",
+    "defaultMessage": "All Emergency-pause buttons have been released.",
     "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
   },
   {

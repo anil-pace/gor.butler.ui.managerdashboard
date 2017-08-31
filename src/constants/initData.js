@@ -828,6 +828,13 @@ export const wsOverviewData={
                   }
                 },
                 {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
+                },
+                {
                   "resource_id": "audit",
                   "details": {
                     "data": "header",
@@ -895,6 +902,13 @@ export const wsOverviewData={
                   "resource_id": "zones",
                   "details": {
                     "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
                     "callback": []
                   }
                 },
