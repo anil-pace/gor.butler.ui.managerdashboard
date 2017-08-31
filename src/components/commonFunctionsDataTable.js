@@ -324,7 +324,7 @@ export const ActionCellAudit=({rowIndex, data, columnKey, handleAudit,manageAudi
       </button>):''}
     </div>
     <div className="gor-audit-actions-drop" >
-        <Dropdown placeholder={placeholderText} noBorder={true} icon={"gor-action-audit-icon"}  options={auditTaskActions(data,rowIndex)} onSelectHandler={manageAuditTask.bind(this,rowIndex)} resetOnSelect={true}/>
+        <Dropdown placeholder={placeholderText} noBorder={true} labelIcon={"gor-action-audit-icon"}  options={auditTaskActions(data,rowIndex)} onSelectHandler={manageAuditTask.bind(this,rowIndex)} resetOnSelect={true}/>
       </div>
   </Cell>
 );
@@ -398,7 +398,7 @@ export class ActionCellPPS extends React.Component {
                 }).length > 0
             return <Cell>
                 <div className="gor-pps-profile-drop">
-                    <Dropdown disabled={any_requested_profile ||forced_close_pps} noBorder={true} icon={"gor-action-pps-icon"} placeholder={placeholder} options={options}
+                    <Dropdown disabled={any_requested_profile ||forced_close_pps} noBorder={true} labelIcon={"gor-action-pps-icon"} listItemIcon={"gor-tick-icon"} placeholder={placeholder} options={options}
                               onSelectHandler={self.props.confirmApplyProfile.bind(self, self.props.data.getObjectAt(self.props.rowIndex)['ppsId'])}
                               resetOnSelect={true}/>
                 </div>
