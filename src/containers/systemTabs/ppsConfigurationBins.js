@@ -31,8 +31,10 @@ class Bins extends React.Component {
 
             if (nextProps.selectedProfile && nextProps.selectedProfile.pps_bin_details.filter(function (bin) {
                     return bin.direction !== 'center'
-                }).length !== 0) {
+                }).length !== 0 && !this.state.currentBinDirection) {
                 this.setBinDirection('left')
+            }else if(this.state.currentBinDirection){
+                this.setBinDirection(this.state.currentBinDirection)
             } else {
                 this.setBinDirection()
             }
