@@ -2113,9 +2113,33 @@
     "filepath": "./src/containers/auditTab/deleteAudit.js"
   },
   {
+    "id": "audit.delete.close",
+    "description": "Text for audit delete close",
+    "defaultMessage": "Close",
+    "filepath": "./src/containers/auditTab/deleteAudit.js"
+  },
+  {
+    "id": "audit.delete.confirm",
+    "description": "Text for audit delete confirm",
+    "defaultMessage": "Delete audit task",
+    "filepath": "./src/containers/auditTab/deleteAudit.js"
+  },
+  {
     "id": "audit.duplicate.heading",
     "description": "Text for audit duplicate heading",
     "defaultMessage": "Are you sure you would like to duplicate audit task {task_name} ?",
+    "filepath": "./src/containers/auditTab/duplicateAudit.js"
+  },
+  {
+    "id": "audit.duplicate.close",
+    "description": "Text for audit duplicate close",
+    "defaultMessage": "Close",
+    "filepath": "./src/containers/auditTab/duplicateAudit.js"
+  },
+  {
+    "id": "audit.duplicate.confirm",
+    "description": "Text for audit duplicate confirm",
+    "defaultMessage": "Duplicate audit task",
     "filepath": "./src/containers/auditTab/duplicateAudit.js"
   },
   {

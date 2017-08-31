@@ -42,8 +42,10 @@ class DeleteAudit extends React.Component{
             </div>
             </div>
             <div className='gor-delete-bottom'>
-            <button className='gor-cancel-btn' onClick={this._removeThisModal.bind(this)}>Close</button>
-            <button className='gor-delete-btn' onClick={this._userDel.bind(this)}>Delete audit task</button>
+            <button className='gor-cancel-btn' onClick={this._removeThisModal.bind(this)}><FormattedMessage id="audit.delete.close" description='Text for audit delete close' 
+            defaultMessage='Close' /></button>
+            <button className='gor-delete-btn' onClick={this._userDel.bind(this)}><FormattedMessage id="audit.delete.confirm" description='Text for audit delete confirm' 
+            defaultMessage='Delete audit task' /></button>
             </div> 
             </div>
             </div>
