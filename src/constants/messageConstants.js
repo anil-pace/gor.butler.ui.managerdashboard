@@ -196,6 +196,8 @@ export const g023=(<FormattedMessage id="audit.cancellation.error.g023" descript
                                    defaultMessage='Audit Id already successfully cancelled'/>);
 export const g024=(<FormattedMessage id="audit.cancellation.error.g024" description='Audit Id cancellation request has been process and cannot be cancelled'
                                    defaultMessage='Audit Id cancellation request has been process and cannot be cancelled'/>);
+export const CANCEL_SUCCESS = (<FormattedMessage id="audit.cancellation.success" description='Audit Id cancellation is successful'
+                                   defaultMessage='Request sent for audit cancellation'/>);
 /*Message for status change notification*/
 export const allStatusSuccess = (<FormattedMessage id="pps.statusChange.allStatusSuccess" description='Records in file should not be greater than' 
       defaultMessage='Status change request successful'/>)
