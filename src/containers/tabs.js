@@ -73,12 +73,13 @@ class Tabs extends React.Component{
       });
 
   }
-  _emergencyRelease(){
+  _emergencyRelease(releaseState){
       modal.add(EmergencyRelease, {
         title: '',
         size: 'large', // large, medium or small,
       closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-      hideCloseButton: false
+      hideCloseButton: false,
+      releaseState
       });  
   }
   _pauseOperation(stopFlag,additionalProps){
@@ -118,14 +119,21 @@ class Tabs extends React.Component{
         else if( 
           nextProps.system_data === SOFT_MANUAL && 
           (nextProps.lastEmergencyState === HARD || nextProps.lastEmergencyState === SOFT)){
+           let releaseState
+            if(nextProps.lastEmergencyState === HARD){
+              releaseState=HARD
+            }
+            else if(nextProps.lastEmergencyState === SOFT){
+              releaseState=SOFT
+            }
            this.props.setEmergencyModalStatus(true);
-           this._emergencyRelease();
+           this._emergencyRelease(releaseState);
         }     
     }
     
      if (nextProps.fireHazardType === EMERGENCY_FIRE && !nextProps.firehazadflag && !nextProps.fireHazardNotifyTime && nextProps.firehazadflag !== this.props.firehazadflag 
           || (nextProps.fireHazardType === EMERGENCY_FIRE && (this.props.firehazadflag === false) && nextProps.fireHazardNotifyTime !== this.props.fireHazardNotifyTime)){
-          console.log(nextProps.fireHazardType);
+          
             this._FireEmergencyRelease();
         }
     
