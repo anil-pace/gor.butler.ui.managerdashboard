@@ -1027,13 +1027,12 @@ body {
 
 .gor-tabs .gorTab.gorContainer {
   background-color: #4d5055;
-  width: auto;
   display: inline-block;
   height: 60px;
 }
 
 .gor-tabs .gorTab .gor-main-block {
-  width: 150px;
+  width: 118px;
   padding-left: 20px;
   height: 62px;
   display: table-cell;
@@ -1132,11 +1131,12 @@ body {
 .gor-tabs .gorTab .gorIconsInline {
   display: inline-block;
   vertical-align: super;
+  padding-left: 18px;
 }
 
 .gor-tabs .gorTab .gorInlineDisplay {
   display: inline-block;
-  padding-right: 20px;
+  font-size: 13px;
 }
 
 body {
@@ -2322,7 +2322,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   text-transform: capitalize;
 }
 
-.online .public_fixedDataTableCell_cellContent {
+.online .public_fixedDataTableCell_cellContent, .success .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
   width: 90px;
@@ -2447,7 +2447,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   text-transform: capitalize;
 }
 
-.temporary_unfulfillable .public_fixedDataTableCell_cellContent {
+.temporary_unfulfillable .public_fixedDataTableCell_cellContent, .exception .public_fixedDataTableCell_cellContent {
   background: #ffffff;
   border-radius: 15px;
   border: 1px solid #f36f36;
@@ -5576,7 +5576,7 @@ button:disabled {
   font-size: 14px;
   font-weight: 600;
   color: #666666;
-  padding-top: 30px;
+  padding-top: 15px;
   margin-left: 20px;
 }
 
@@ -5619,8 +5619,7 @@ button:disabled {
   padding-right: 20px;
   padding-bottom: 5px;
   padding-left: 20px;
-  float: left;
-  width: 100%;
+  width: 88%;
 }
 
 .gor-filter-token-section-h1 {
@@ -5677,6 +5676,7 @@ button:disabled {
   background-color: #ffffff;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   border: solid 1px #aaaaaa;
+  cursor: pointer;
 }
 
 .gor-filterBtn-applied {
@@ -8338,4 +8338,36 @@ button:disabled {
 
 .pps-table .gor-pps-profile-drop .gor-white-background {
   background-color: transparent;
+}
+
+.gor-operations-log .gor-ol-paginate-wrap {
+  width: 100%;
+}
+
+.gor-operations-log .gor-ol-paginate-wrap .gor-ol-paginate-left {
+  display: inline-block;
+  width: 50%;
+  vertical-align: middle;
+}
+
+.gor-operations-log .gor-ol-paginate-wrap .gor-ol-paginate-right {
+  display: inline-block;
+  width: 50%;
+  vertical-align: middle;
+}
+
+.gor-operations-log .gor-ol-paginate-wrap .gor-paginate-wrap {
+  float: right;
+}
+
+.gor-operations-log .gor-ol-paginate-wrap .gor-dropdown-wrapper {
+  width: 10%;
+  margin-left: 4%;
+  background: #fff;
+  margin-top: 2rem;
+}
+
+.gor-operations-log .gor-no-data {
+  padding-top: 150px;
+  height: 8vw;
 }

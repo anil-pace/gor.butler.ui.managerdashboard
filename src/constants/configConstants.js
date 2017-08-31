@@ -52,6 +52,7 @@ export const GET_MAXSIZE_FILE_URL=API_URL + "/components/get_mdm_file_size";
 export const WS_NOTIFICATION_URL =  API_URL+"/platform-dashboard/dashboard-stomp";
 export const NOTIFICATIONS_URL =  API_URL+"/api-gateway/dashboard-service/platform-dashboard/event";
 export const READ_MSG_URL = API_URL+"/api-gateway/dashboard-service/platform-dashboard/event/mark-as-read";
+export const WS_NOTIFICATION_SUBSCRIPTION = '/dashboard/notification';
 /**
  * URLs or PPS Configurations
  */
@@ -61,6 +62,13 @@ export const PPS_PROFILE_URL=API_URL+"/pps_profiles/"//TODO: URL need to be chan
 export const FETCH_TAGS_URL=API_URL+"/components/get_bin_tags"//TODO: URL need to be changed accrodingly
 export const SAVE_TAGS_URL=API_URL+"/components/add_bin_tags"//TODO: URL need to be changed accrodingly
 export const SAVE_PROFILE_URL=API_URL+"/pps_profiles/"//TODO: URL need to be changed accrodingly
+
+/**
+ * URLs for Operations Log Report
+ */
+
+export const OPERATIONS_LOG_URL =  API_URL+"/api-gateway/dashboard-service/platform-dashboard/operator/logs/search";
+export const WS_OPERATIONS_LOG_SUBSCRIPTION =  "/operator/logs/live/25";
 
 
 

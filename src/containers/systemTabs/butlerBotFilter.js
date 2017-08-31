@@ -15,6 +15,9 @@ class ButlerBotFilter extends React.Component{
     	super(props);
         this.state={tokenSelected: {"STATUS":["any"], "MODE":["any"]}, searchQuery: {},
                       defaultToken: {"STATUS":["any"], "MODE":["any"]}}; 
+        this._closeFilter = this._closeFilter.bind(this);
+        this._applyFilter = this._applyFilter.bind(this);
+        this._clearFilter = this._clearFilter.bind(this);
     }
 
     componentWillMount(){
@@ -119,6 +122,12 @@ class ButlerBotFilter extends React.Component{
         
     }
 
+
+    
+    
+
+    
+
 	render(){
     let butlerDetails=this.props.butlerDetail;
          let noOrder=butlerDetails.butlerDetail && butlerDetails.butlerDetail.length?false:true;
@@ -126,15 +135,52 @@ class ButlerBotFilter extends React.Component{
         let butlerFilterToken=this._processFilterToken();
 		return (
 			<div>
-                 <Filter hideFilter={this._closeFilter.bind(this)} 
-                         clearFilter={this._clearFilter.bind(this)}
-                         searchField={butlerSearchField}
-                         filterTokenC1={butlerFilterToken.column1token}
-                         filterTokenC2={butlerFilterToken.column2token}
-                         formSubmit={this._applyFilter.bind(this)}
-                         noDataFlag={noOrder}
-                         responseFlag={this.props.butlerFilterSpinnerState}
-                         />
+                 <Filter>
+                <div className="gor-filter-header">
+                    <div className="gor-filter-header-h1">
+                         <FormattedMessage id="gor.filter.filterLabel" description="label for filter" 
+            defaultMessage="Filter data"/>
+                    </div>
+                    <div className="gor-filter-header-h2" onClick={this._closeFilter}>
+                        <FormattedMessage id="gor.filter.hide" description="label for hide" 
+                            defaultMessage="Hide"/>
+                    </div>
+                 </div>
+                    <div>{noOrder?
+                            <div className="gor-no-result-filter"><FormattedMessage id="gor.filter.noResult" description="label for no result" 
+                            defaultMessage="No results found, please try again"/></div>:""}
+                    </div>
+                     <div className="gor-filter-body">
+                         <div className="gor-filter-body-input-wrap"> 
+                            {butlerSearchField}
+                         </div>
+                         <div className="gor-filter-body-filterToken-wrap"> 
+                            <div className="gor-filter-body-filterToken-section1">
+                                {butlerFilterToken.column1token}
+                            </div>
+                            <div className="gor-filter-body-filterToken-section1">
+                                {butlerFilterToken.column2token}
+                            </div>
+                            
+
+                         </div>
+                         
+                         
+                     </div>
+                 <div className="gor-filter-footer"> 
+                    <span className="gor-filter-footer-h2" onClick={this._clearFilter}>
+                         <FormattedMessage id="gor.filter.reset" description="label for reset" 
+                            defaultMessage="Reset"/>
+                    </span>
+                    <div className="gor-filter-btn-wrap">
+                        <button className='gor-add-btn' onClick={this._applyFilter}>
+                            {!this.props.butlerFilterSpinnerState? <FormattedMessage id="gor.filter.heading" description="filter heading"  defaultMessage="Apply filter"/> :<div className='spinnerImage'></div>}
+                        </button>
+
+
+                    </div> 
+                 </div>
+                </Filter>
             </div>
 		);
 	}

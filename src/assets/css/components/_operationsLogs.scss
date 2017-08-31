@@ -1,0 +1,28 @@
+.gor-operations-log{
+	.gor-ol-paginate-wrap{
+		width:100%;
+		.gor-ol-paginate-left{
+			display:inline-block;
+			width:50%;
+			vertical-align: middle;
+		}
+		.gor-ol-paginate-right{
+			display:inline-block;
+			width:50%;
+			vertical-align: middle;
+		}
+		.gor-paginate-wrap{
+			float:right;
+		}
+		.gor-dropdown-wrapper{
+			width: 10%;
+		    margin-left: 4%;
+		    background: #fff;
+		    margin-top:2rem;
+		}
+	}
+	.gor-no-data{
+		padding-top: 150px;
+		height:8vw;
+	}
+}

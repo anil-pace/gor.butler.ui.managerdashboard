@@ -44,6 +44,7 @@ export const WS_NOTIFICATION_ONMESSAGE = "WS_NOTIFICATION_ONMESSAGE";
 export const WS_NOTIFICATION_ONSEND = "WS_NOTIFICATION_ONSEND";
 export const WS_NOTIFICATION_INIT = "WS_NOTIFICATION_INIT";
 export const WS_NOTIFICATION_END="WS_NOTIFICATION_END";
+export const WS_NOTIFICATION_SUBSCRIBE = "WS_NOTIFICATION_SUBSCRIBE";
 
 
 /* Header constants */
@@ -102,6 +103,7 @@ export const ORDERS="ORDERS";
 export const INVENTORY="INVENTORY";
 export const USERS="USERS";
 export const AUDIT="AUDIT";
+export const REPORTS="REPORTS";
 export const UTILITIES="UTILITIES";
 export const NOTIFICATION_TAB="Notification";
 export const BUTLERBOTS_TAB="Butler Bots";
@@ -110,6 +112,7 @@ export const PPS_TAB="Pick Put Stations";
 export const ORDER_LIST="Order List";
 export const PPS_CONFIGURATION="PPS Configuration";
 export const WAVES="Waves";
+export const OPERATIONS_LOG="operationsLog"
 export const BUTLERBOTS="butlerbots";
 export const CHARGING="chargingstation";
 export const PPS="pps";
@@ -156,6 +159,7 @@ export const EMERGENCY="emergency";
 export const NOTIFY_EMERGENCY_END="NOTIFY_EMERGENCY_END";
 export const SYSTEM_EMERGENCY="system_emergency";
 export const SET_EMERGENCY_MODAL_STATUS = "SET_EMERGENCY_MODAL_STATUS";
+
 
 
 /*Constants for type of AJAX call*/
@@ -290,6 +294,10 @@ export const SYS_SUB_TAB_ROUTE_MAP={
 	[WAVES]:"waves",
 	[ORDER_LIST]:"orderlist",
 	[PPS_CONFIGURATION]:"ppsConfiguration"
+
+}
+export const REPORTS_SUB_TAB_ROUTE_MAP={
+	[OPERATIONS_LOG] : "operationsLog"
 
 }
 export const SHOW_UTILITY_TAB=true;
@@ -664,4 +672,36 @@ export const PPS_PROFILE_SAVED="PPS_PROFILE_SAVED"
 export const PPS_PROFILE_CREATED="PPS_PROFILE_CREATED"
 export const PPS_PROFILE_REQUESTED="PPS_PROFILE_REQUESTED"
 export const TAG_ADDED_TO_LIST="TAG_ADDED_TO_LIST"
+
+/**
+ * Constants for Operations log
+ */
+export const OPERATION_LOG_FETCH = "OPERATION_LOG_FETCH";
+export const OPERATIONS_LOG_REQUEST_PARAMS=  {
+    "operatingMode": "",
+    "requestId": "",
+    "skuId": "",
+    "userId": "",
+    "page": {
+        "size": 10,
+        "from": 1
+    },
+    "timeRange": {
+        "from": "",
+        "to": ""
+    },
+    "source": {
+        "id": "",
+        "type": ""
+    },
+    "destination": {
+        "id": "",
+        "type": ""
+    }
+}
+
+export const APPLY_OL_FILTER_FLAG = "APPLY_OL_FILTER_FLAG";
+export const WS_OPERATOR_LOG_SUBSCRIBE = "WS_OPERATOR_LOG_SUBSCRIBE";
+export const WS_OPERATOR_LOG_UNSUBSCRIBE = "WS_OPERATOR_LOG_UNSUBSCRIBE";
+export const SET_REPORTS_SPINNER = "SET_REPORTS_SPINNER";
 

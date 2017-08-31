@@ -20,6 +20,7 @@ class SystemTab extends React.Component{
     }
    
     handleSysSubTabClick(tabName){
+      console.log(SYS_SUB_TAB_ROUTE_MAP[tabName]);
       this.props.subTabSelected(SYS_SUB_TAB_ROUTE_MAP[tabName]);
       sessionStorage.setItem("subTab",SYS_SUB_TAB_ROUTE_MAP[tabName])
       switch(tabName) {

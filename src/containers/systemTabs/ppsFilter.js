@@ -19,6 +19,9 @@ class PPSFilter extends React.Component{
       super(props);
         this.state={tokenSelected: {"STATUS":["all"], "MODE":["all"]}, searchQuery: {},
                       defaultToken: {"STATUS":["all"], "MODE":["all"]}, rangeSelected:{"minValue":["-1"],"maxValue":["500"]}}; 
+        this._closeFilter =  this._closeFilter.bind(this);
+        this._clearFilter =  this._clearFilter.bind(this);
+        this._applyFilter = this._applyFilter.bind(this);
     }
 
 
@@ -160,17 +163,54 @@ class PPSFilter extends React.Component{
         let rangeSlider=this._handleRangeSlider();
     return (
       <div>
-                 <Filter hideFilter={this._closeFilter.bind(this)}  // hiding filter wont disturb state
-                         clearFilter={this._clearFilter.bind(this)} // clearing sates of filter
-                         searchField={ppsSearchField}
-                         filterTokenC1={ppsFilterToken.column1token}
-                         filterTokenC2={ppsFilterToken.column2token}
-                         formSubmit={this._applyFilter.bind(this)} //passing function on submit
-                         responseFlag={this.props.ppsFilterSpinnerState} // used for spinner of button 
-                         noDataFlag={noOrder} //messg to show in case of no data
-                         slides={rangeSlider}
+                 <Filter> 
+                  <div className="gor-filter-header">
+                    <div className="gor-filter-header-h1">
+                         <FormattedMessage id="gor.filter.filterLabel" description="label for filter" 
+            defaultMessage="Filter data"/>
+                    </div>
+                    <div className="gor-filter-header-h2" onClick={this._closeFilter}>
+                        <FormattedMessage id="gor.filter.hide" description="label for hide" 
+                            defaultMessage="Hide"/>
+                    </div>
+                 </div>
+                    <div>{noOrder?
+                            <div className="gor-no-result-filter"><FormattedMessage id="gor.filter.noResult" description="label for no result" 
+                            defaultMessage="No results found, please try again"/></div>:""}
+                    </div>
+                     <div className="gor-filter-body">
+                         <div className="gor-filter-body-input-wrap"> 
+                            {ppsSearchField}
+                         </div>
+                         <div className="gor-filter-body-filterToken-wrap"> 
+                            <div className="gor-filter-body-filterToken-section1">
+                                {ppsFilterToken.column1token}
+                            </div>
+                            <div className="gor-filter-body-filterToken-section1">
+                                {ppsFilterToken.column2token}
+                            </div>
+                            
 
-                         />        
+                         </div>
+                         <div className="gor-filter-body-slider-wrap"> 
+                       {rangeSlider}
+                             </div>
+                         
+                     </div>
+                 <div className="gor-filter-footer"> 
+                    <span className="gor-filter-footer-h2" onClick={this._clearFilter}>
+                         <FormattedMessage id="gor.filter.reset" description="label for reset" 
+                            defaultMessage="Reset"/>
+                    </span>
+                    <div className="gor-filter-btn-wrap">
+                        <button className='gor-add-btn' onClick={this._applyFilter}>
+                            {!this.props.ppsFilterSpinnerState? <FormattedMessage id="gor.filter.heading" description="filter heading"  defaultMessage="Apply filter"/> :<div className='spinnerImage'></div>}
+                        </button>
+
+
+                    </div> 
+                 </div>
+                </Filter>       
       </div>
     );
   }

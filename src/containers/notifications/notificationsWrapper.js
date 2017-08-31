@@ -7,10 +7,10 @@ import { connect } from 'react-redux';
 import Notification from '../../components/notifications/notifications';
 import {modal} from 'react-redux-modal';
 import ViewAllNotificationWrapper from './viewAllNotificationWrapper';
-import {NOTIFICATIONS_URL,READ_MSG_URL} from '../../constants/configConstants';
+import {NOTIFICATIONS_URL,READ_MSG_URL,WS_NOTIFICATION_SUBSCRIPTION} from '../../constants/configConstants';
 import {GET,POST,APP_JSON,SEARCHED_NOTIFICATIONS_DATA} from '../../constants/frontEndConstants';
 import {getNotificationData,resetNotificationData} from '../../actions/notificationAction';
-import {wsNotificationInit} from '../../actions/notificationSocketActions';
+import {wsNotificationInit,wsNotificationSubscribe} from '../../actions/notificationSocketActions';
 
 
 
@@ -24,7 +24,8 @@ class NotificationsWrapper extends React.Component{
             size:15,
             sort:"createTime",
             order:"DESC",
-            value:""
+            value:"",
+            subscriptionSent:false
              
         }
     }
@@ -90,6 +91,17 @@ class NotificationsWrapper extends React.Component{
 	componentDidMount(){
 		this.props.wsNotificationInit();
 	}
+
+    componentWillReceiveProps(nextProps){
+        if(nextProps.notificationSocketConnected && !this.state.subscriptionSent){
+            this.setState({
+                subscriptionSent:true
+            },function(){
+                this.props.wsNotificationSubscribe(WS_NOTIFICATION_SUBSCRIPTION);
+            })
+            
+        }
+    }
 		
 	render(){
 		var notificationData = this.props.searchApplied ? this.props.searchedNotificationData : this.props.wsNotificationData ;
@@ -126,7 +138,8 @@ function mapDispatchToProps(dispatch){
 	return{
 		getNotificationData:function(params){dispatch(getNotificationData(params));},
 		wsNotificationInit:function(){dispatch(wsNotificationInit());},
-		resetNotificationData:function(){dispatch(resetNotificationData());}
+		resetNotificationData:function(){dispatch(resetNotificationData());},
+        wsNotificationSubscribe:function(data){dispatch(wsNotificationSubscribe(data));}
 	}
 }
 

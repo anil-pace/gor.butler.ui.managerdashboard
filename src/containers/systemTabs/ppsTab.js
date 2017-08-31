@@ -43,8 +43,7 @@ import {
 import {updateSubscriptionPacket,setWsAction} from './../../actions/socketActions'
 import {wsOverviewData} from './../../constants/initData.js';
 import PPSFilter from './ppsFilter';
-import FilterSummary from '../../components/tableFilter/filterSummary'
-import DropdownTable from '../../components/dropdown/dropdownTable';
+import FilterSummary from '../../components/tableFilter/filterSummary';
 import Dropdown from '../../components/gor-dropdown-component/dropdown';
 import {PPS_MODE_CHANGE_URL,PPS_STATUS_CHANGE_URL} from '../../constants/configConstants';
 
