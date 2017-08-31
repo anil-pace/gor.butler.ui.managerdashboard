@@ -42,7 +42,7 @@
  {
    "id": "commonDataTable.startAudit.button",
    "description": "edit button",
-   "defaultMessage": "編集"
+   "defaultMessage": "棚卸開始"
  },
  {
    "id": "footer.description",
@@ -87,7 +87,7 @@
  {
    "id": "inventory.linechart.legendPicked",
    "description": "Inventory Linechart Legend for picked",
-   "defaultMessage": "ピック済商品"
+   "defaultMessage": "出庫済商品"
  },
  {
    "id": "inventory.linechart.legendPut",
@@ -107,12 +107,12 @@
  {
    "id": "itemTable.cbmUsed.cbm",
    "description": "CBM Used field",
-   "defaultMessage": "使用されたCBM"
+   "defaultMessage": "使用済CBM"
  },
  {
    "id": "itemTable.daysInHand.count",
    "description": "Days in Hand",
-   "defaultMessage": "期日"
+   "defaultMessage": "保管日数"
  },
  {
    "id": "inventory.linechart.toolTipPut",
@@ -122,7 +122,7 @@
  {
    "id": "inventory.linechart.toolTipPick",
    "description": "Text for pick in tooltip",
-   "defaultMessage": "ピック"
+   "defaultMessage": "出庫"
  },
  {
    "id": "inventory.linechart.noDataText",
@@ -142,42 +142,42 @@
  {
    "id": "inventory.snaphot.openingStock",
    "description": "Snapshot table header",
-   "defaultMessage": "期初在庫"
+   "defaultMessage": "初期在庫"
  },
  {
    "id": "inventory.snaphot.closingStock",
    "description": "Snapshot table header",
-   "defaultMessage": "期初在庫"
+   "defaultMessage": "最終在庫"
  },
  {
    "id": "inventory.snaphot.header",
    "description": "Snapshot header",
-   "defaultMessage": "在庫スナップショット"
+   "defaultMessage": "在庫状況"
  },
  {
    "id": "inventory.snaphot.itemsPut",
    "description": "Snapshot table header",
-   "defaultMessage": "期初在庫"
+   "defaultMessage": "入庫数"
  },
  {
    "id": "inventory.snaphot.itemsPick",
    "description": "Snapshot table header",
-   "defaultMessage": "期初在庫"
+   "defaultMessage": "出庫数"
  },
  {
    "id": "inventory.snaphot.currentStock",
    "description": "Snapshot table header",
-   "defaultMessage": "期初在庫"
+   "defaultMessage": "在庫数"
  },
  {
    "id": "inventory.snaphot.sku",
    "description": "Snapshot table header",
-   "defaultMessage": "期初在庫"
+   "defaultMessage": "SKU数"
  },
  {
    "id": "inventory.snaphot.cbmUsed",
    "description": "Snapshot table header",
-   "defaultMessage": "期初在庫"
+   "defaultMessage": "CBM"
  },
  {
    "id": "login.butler.language",
@@ -202,7 +202,7 @@
  {
    "id": "login.butler.fail",
    "description": "Text for login failure",
-   "defaultMessage": "無効のユーザ名またはパスワード。"
+   "defaultMessage": "無効なユーザ名またはパスワード。"
  },
  {
    "id": "login.butler.connection.fail",
@@ -252,7 +252,7 @@
  {
    "id": "pps.tab.heading",
    "description": "pps tab",
-   "defaultMessage": "入出庫ステーション"
+   "defaultMessage": "PPS"
  },
  {
    "id": "chargingstation.tab.heading",
@@ -277,7 +277,7 @@
  {
    "id": "stringConfig.pick",
    "description": "Text to show pick",
-   "defaultMessage": "ピック"
+   "defaultMessage": "出庫"
  },
  {
    "id": "stringConfig.put",
@@ -337,12 +337,12 @@
  {
    "id": "stringConfig.breached",
    "description": "Text to show breached",
-   "defaultMessage": "破壊"
+   "defaultMessage": "未達成"
  },
  {
    "id": "stringConfig.fulfillable",
    "description": "Text to show fulfillable",
-   "defaultMessage": "処理中"
+   "defaultMessage": "引当可能"
  },
  {
    "id": "stringConfig.abandoned",
@@ -362,7 +362,7 @@
  {
    "id": "stringConfig.notFulfillable",
    "description": "Text to show In progress",
-   "defaultMessage": "処理中"
+   "defaultMessage": "引当不可"
  },
  {
    "id": "stringConfig.exception",
@@ -382,7 +382,7 @@
  {
    "id": "stringConfig.received",
    "description": "Text to show received",
-   "defaultMessage": "処理中"
+   "defaultMessage": "受信済"
  },
  {
    "id": "stringConfig.cancelled",
@@ -417,12 +417,12 @@
  {
    "id": "ppsDetail.modeChange.isAlreadyRequested",
    "description": "PPS is already in requested mode",
-   "defaultMessage": "PPSは既に要求モードです"
+   "defaultMessage": "PPSは既に要求されたモードです"
  },
  {
    "id": "ppsDetail.modeChange.tryLater",
    "description": "Previous Change request is pending",
-   "defaultMessage": "変更モードの前回要求が保留中のため、後で実施してください。"
+   "defaultMessage": "モード変更が保留中のため、後で実施してください。"
  },
  {
    "id": "notify.error.usernameExists",
@@ -542,17 +542,17 @@
  {
    "id": "notify.error.audit.AE002",
    "description": "Text for invalid PPS",
-   "defaultMessage": "棚卸用の有効なPPSは見つかりません"
+   "defaultMessage": "棚卸用の有効なPPSが見つかりません"
  },
  {
    "id": "notify.error.audit.AE004",
    "description": "Text for already processed location",
-   "defaultMessage": "ロケーションの棚卸は処理中です"
+   "defaultMessage": "ロケーションの棚卸が処理中です"
  },
  {
    "id": "notify.error.audit.AE005",
    "description": "Text for already processed sku",
-   "defaultMessage": "skuの棚卸は処理中です"
+   "defaultMessage": "SKUの棚卸が処理中です"
  },
  {
    "id": "notify.error.audit.AE006",
@@ -562,12 +562,12 @@
  {
    "id": "notify.create.audit.success",
    "description": "Text for successfull audit creation",
-   "defaultMessage": "新棚卸タスクが作成されました"
+   "defaultMessage": "棚卸タスクが作成されました"
  },
  {
    "id": "notify.start.audit.success",
    "description": "Text for successfull audit creation",
-   "defaultMessage": "新棚卸タスクが作成されました"
+   "defaultMessage": "棚卸タスクが開始されました"
  },
  {
    "id": "notify.delete.audit.processed",
@@ -577,17 +577,17 @@
  {
    "id": "notify.error.user.fail",
    "description": "Text for error in updating user",
-   "defaultMessage": "更新中のユーザにエラーが発生しました"
+   "defaultMessage": "ユーザの更新中にエラーが発生しました"
  },
  {
    "id": "notify.error.user.response",
    "description": "Text for error in response",
-   "defaultMessage": "応答にエラーが発生しました"
+   "defaultMessage": "エラーが発生しました"
  },
  {
    "id": "notify.error.audit.create",
    "description": "Text for error in creating audit",
-   "defaultMessage": "棚卸作成にエラーが発生しました"
+   "defaultMessage": "棚卸作成でエラーが発生しました"
  },
  {
    "id": "notify.error.api",
@@ -682,12 +682,12 @@
  {
    "id": "auditdetail.created.status",
    "description": "",
-   "defaultMessage": "作成済み"
+   "defaultMessage": "作成済"
  },
  {
    "id": "auditdetail.pending.status",
    "description": "",
-   "defaultMessage": "処理中"
+   "defaultMessage": "保留中"
  },
  {
    "id": "auditdetail.progress.status",
@@ -722,7 +722,7 @@
  {
    "id": "audit.table.noData",
    "description": "No data message for audit table",
-   "defaultMessage": "棚卸用のタスクは見つかりません"
+   "defaultMessage": "棚卸用のタスクが見つかりません"
  },
  {
    "id": "audit.table.heading",
@@ -777,12 +777,12 @@
  {
    "id": "audit.add.heading",
    "description": "Heading for add audit",
-   "defaultMessage": "新棚卸タスクを作成"
+   "defaultMessage": "棚卸タスクを作成"
  },
  {
    "id": "audit.add.subheading",
    "description": "Subheading for add audit",
-   "defaultMessage": "新棚卸タスクを作成するには以下の詳細を選択または入力してください"
+   "defaultMessage": "棚卸タスクを作成するには以下の詳細を選択または入力してください"
  },
  {
    "id": "audit.add.auditdetails.heading",
@@ -852,7 +852,7 @@
  {
    "id": "audit.add.tips.subheading",
    "description": "Subtext for tips",
-   "defaultMessage": "棚卸タスクが作成された後、棚卸リストの「Assign PPS」ボタンをクリックして棚卸タスクを開始してください。"
+   "defaultMessage": "棚卸タスクが作成された後、棚卸リストの「棚卸開始」ボタンをクリックして棚卸タスクを開始してください。"
  },
  {
    "id": "audits.add.password.button",
@@ -872,7 +872,7 @@
  {
    "id": "audit.start.auditdetails.subheading2",
    "description": "Text for audit details subheading when no pps",
-   "defaultMessage": "現在、棚卸モードにはPPSはありません。"
+   "defaultMessage": "現在、PPSが棚卸モードではありません。"
  },
  {
    "id": "audit.start.auditdetails.please",
@@ -882,12 +882,12 @@
  {
    "id": "audit.start.auditdetails.hyperlink",
    "description": "Text for hyperlink",
-   "defaultMessage": "PPSモードに遷移してください"
+   "defaultMessage": "PPSモード移動"
  },
  {
    "id": "audit.start.auditdetails.operations",
    "description": "Text change operation",
-   "defaultMessage": "PPSの操作を変更してください。"
+   "defaultMessage": "PPSを変更してください。"
  },
  {
    "id": "audit.start.ppscheckbox",
@@ -912,12 +912,12 @@
  {
    "id": "audit.start.auditdetails.subheading1",
    "description": "Text for audit details subheading when pps present",
-   "defaultMessage": "以下のすべてのPPSは現在棚卸モードになっています。"
+   "defaultMessage": "以下のPPSは現在棚卸モードになっています。"
  },
  {
    "id": "audit.start.button",
    "description": "Text for start audit button",
-   "defaultMessage": "タスクを開始してください"
+   "defaultMessage": "棚卸開始"
  },
  {
    "id": "audit.back.button",
@@ -927,12 +927,12 @@
  {
    "id": "audit.add.heading",
    "description": "Heading for add audit",
-   "defaultMessage": "新棚卸タスクを作成"
+   "defaultMessage": "棚卸タスクを作成"
  },
  {
    "id": "audit.add.subheading",
    "description": "Subheading for add audit",
-   "defaultMessage": "新棚卸タスクを作成するには以下の詳細を選択または入力してください"
+   "defaultMessage": "棚卸タスクを作成するには以下の詳細を選択または入力してください"
  },
  {
    "id": "audit.add.auditdetails.heading",
@@ -1002,7 +1002,7 @@
  {
    "id": "audit.add.tips.subheading",
    "description": "Subtext for tips",
-   "defaultMessage": "棚卸タスクが作成された後、棚卸リストの「Assign PPS」ボタンをクリックして棚卸タスクを開始してください。"
+   "defaultMessage": "棚卸タスクが作成された後、棚卸リストの「棚卸開始」ボタンをクリックして棚卸タスクを開始してください。"
  },
  {
    "id": "audits.add.password.button",
@@ -1082,12 +1082,12 @@
  {
    "id": "itemCat.CBM.heading",
    "description": "Item category table's column CBM heading",
-   "defaultMessage": "使用済みCBM"
+   "defaultMessage": "使用済CBM"
  },
  {
    "id": "itemCat.daysOnHand.heading",
    "description": "Item category table's column days On Hand heading",
-   "defaultMessage": "期日"
+   "defaultMessage": "保管日数"
  },
  {
    "id": "logout.question",
@@ -1117,17 +1117,17 @@
  {
    "id": "audit.start.auditdetails.noPPS2",
    "description": "Text hyperlink",
-   "defaultMessage": "PPSモードに遷移してください"
+   "defaultMessage": "PPSモードに移動"
  },
  {
    "id": "audit.start.auditdetails.noPPS3",
    "description": "Text change operation",
-   "defaultMessage": "PPSの操作を変更してください。"
+   "defaultMessage": "PPSの変更してください。"
  },
  {
    "id": "pickPerformance.dropdown",
    "description": "pickPerformance dropdown label",
-   "defaultMessage": "PPS - ピック生産性"
+   "defaultMessage": "PPS - 出庫生産性"
  },
  {
    "id": "putPerformance.dropdown",
@@ -1157,7 +1157,7 @@
  {
    "id": "orderList.Unfulfillable.status",
    "description": "'Unfulfillable' status",
-   "defaultMessage": "注文不可"
+   "defaultMessage": "引当不可"
  },
  {
    "id": "orderlist.Refreshed.at",
@@ -1237,7 +1237,7 @@
  {
    "id": "orderlist.table.noData",
    "description": "No data message for orderlist table",
-   "defaultMessage": "注文は見つかりません"
+   "defaultMessage": "注文が見つかりません"
  },
  {
    "id": "order.table.heading",
@@ -1267,7 +1267,7 @@
  {
    "id": "orderlist.table.pickBy",
    "description": "pick by for orderlist",
-   "defaultMessage": "選択者"
+   "defaultMessage": "作業者"
  },
  {
    "id": "orderlist.table.operatingMode",
@@ -1282,7 +1282,7 @@
  {
    "id": "orderlist.table.orderLine",
    "description": "orderLine for orderlist",
-   "defaultMessage": "注文ライン"
+   "defaultMessage": "注文行数"
  },
  {
    "id": "waveDetail.id.prefix",
@@ -1327,7 +1327,7 @@
  {
    "id": "waves.table.cutOffTime",
    "description": "cutOffTime for waves",
-   "defaultMessage": "切断時間"
+   "defaultMessage": "切離し時間"
  },
  {
    "id": "WavesTable.progress.status",
@@ -1377,7 +1377,7 @@
  {
    "id": "health.ChargingStation",
    "description": "Charging Stations health",
-   "defaultMessage": "Charging Stations"
+   "defaultMessage": "充電器"
  },
  {
    "id": "systemHealth.dropdown",
@@ -1387,7 +1387,7 @@
  {
    "id": "PPSpickPerformance.dropdown",
    "description": "PPSpickPerformance dropdown label",
-   "defaultMessage": "PPS - ピック生産性"
+   "defaultMessage": "PPS - 出庫生産性"
  },
  {
    "id": "PPSputPerformance.dropdown",
@@ -1417,7 +1417,7 @@
  {
    "id": "widget.pick.idle",
    "description": "Pick PPS idle message",
-   "defaultMessage": "{count} 待機PPS (ピックモード)"
+   "defaultMessage": "{count} 待機PPS (出庫モード)"
  },
  {
    "id": "widget.pick.throughput",
@@ -1432,7 +1432,7 @@
  {
    "id": "widget.pick.headingright",
    "description": "Heading for cut-off time",
-   "defaultMessage": "切断の時間"
+   "defaultMessage": "切離の時間"
  },
  {
    "id": "widget.pick.textright",
@@ -1507,7 +1507,7 @@
  {
    "id": "audit.start.button",
    "description": "Text for start audit button",
-   "defaultMessage": "タスクを開始してください"
+   "defaultMessage": "棚卸開始"
  },
  {
    "id": "audit.back.button",
@@ -1527,7 +1527,7 @@
  {
    "id": "charger.name.prefix",
    "description": "prefix for charger id",
-   "defaultMessage": "CS - {csId}"
+   "defaultMessage": "充電器 - {csId}"
  },
  {
    "id": "msu.name.prefix",
@@ -1567,7 +1567,7 @@
  {
    "id": "ButlerBotTable.botState",
    "description": "bot state for ButlerBotTable",
-   "defaultMessage": "ピック ({pick}) . 入庫 ({put}) . 充電 ({charging}) . 待機 ({idle})"
+   "defaultMessage": "出庫 ({pick}) . 入庫 ({put}) . 充電 ({charging}) . 待機 ({idle})"
  },
  {
    "id": "butlerBot.table.msu",
@@ -1577,7 +1577,7 @@
  {
    "id": "ButlerBotTable.mounted",
    "description": "msu mounted for ButlerBotTable",
-   "defaultMessage": "{msuMounted} マウント"
+   "defaultMessage": "{msuMounted} 搭載"
  },
  {
    "id": "butlerBot.table.location",
@@ -1612,17 +1612,17 @@
  {
    "id": "ChargingStations.table.noData",
    "description": "No data message for ChargingStations table",
-   "defaultMessage": "充電所が見つかりません"
+   "defaultMessage": "充電器が見つかりません"
  },
  {
    "id": "ChargingStations.table.heading",
    "description": "Heading for ChargingStations",
-   "defaultMessage": "Charging Stations"
+   "defaultMessage": "充電器"
  },
  {
    "id": "ChargingStationsTable.stationID.heading",
    "description": "StationID heading",
-   "defaultMessage": "ステーションID"
+   "defaultMessage": "充電器ID"
  },
  {
    "id": "ChargingStationsTable.SubstationID",
@@ -1647,12 +1647,12 @@
  {
    "id": "ChargingStations.table.connectedBots",
    "description": "connectedBots for ChargingStations",
-   "defaultMessage": "ボット接続"
+   "defaultMessage": "接続済"
  },
  {
    "id": "ChargingStationsTable.totalBots",
    "description": "total bots ChargingStationsTable",
-   "defaultMessage": "{totalBots} ボット接続"
+   "defaultMessage": "{totalBots} 接続済"
  },
  {
    "id": "NotificationTable.table.heading",
@@ -1662,7 +1662,7 @@
  {
    "id": "NotificationTable.table.component",
    "description": "component for NotificationTable",
-   "defaultMessage": "部品"
+   "defaultMessage": "単位"
  },
  {
    "id": "Notifications.table.status",
@@ -1702,7 +1702,7 @@
  {
    "id": "PPS.table.putDrop",
    "description": "put dropdown option for PPS",
-   "defaultMessage": "ピック"
+   "defaultMessage": "出庫"
  },
  {
    "id": "PPS.table.auditDrop",
@@ -1747,7 +1747,7 @@
  {
    "id": "PPStable.ppsState",
    "description": "pps state for PPStable",
-   "defaultMessage": "ピック ({pick}) . 入庫 ({put}) . 棚卸 ({audit}) . 未設定 ({notSet})"
+   "defaultMessage": "出庫 ({pick}) . 入庫 ({put}) . 棚卸 ({audit}) . 未設定 ({notSet})"
  },
  {
    "id": "PPS.table.performance",
@@ -1757,7 +1757,7 @@
  {
    "id": "PPS.table.operatorAssigned",
    "description": "operatorAssigned for PPS",
-   "defaultMessage": "配属オペレーター"
+   "defaultMessage": "配置オペレーター"
  },
  {
    "id": "PPStable.totalOperator",
@@ -1857,7 +1857,7 @@
  {
    "id": "userDetails.pick.status",
    "description": "",
-   "defaultMessage": "ピック"
+   "defaultMessage": "出庫"
  },
  {
    "id": "auditdetail.completed.status",
@@ -1902,7 +1902,7 @@
  {
    "id": "users.add.heading",
    "description": "Heading for Add new user",
-   "defaultMessage": "新ユーザを追加"
+   "defaultMessage": "ユーザを追加"
  },
  {
    "id": "users.add.subheading",
@@ -1952,7 +1952,7 @@
  {
    "id": "users.add.password.button",
    "description": "Text for add new user button",
-   "defaultMessage": "新ユーザを追加"
+   "defaultMessage": "ユーザを追加"
  },
  {
    "id": "users.delete.heading",
@@ -2042,7 +2042,7 @@
  {
    "id": "users.add.roledetails.subheading",
    "description": "Subheading for role",
-   "defaultMessage": "役割毎にユーザはバトラーシステムの特定レベルの制御が可能です。"
+   "defaultMessage": "役割毎にユーザをバトラーシステムに対して権限制御が可能です。"
  },
  {
    "id": "users.add.roledetails.operator",
@@ -2052,7 +2052,7 @@
  {
    "id": "users.add.roledetails.operatortext",
    "description": "Subtext for operator",
-   "defaultMessage": "バトラーシステムの各入出庫ステーションのオペレータインターフェイスへのアクセスを許可する"
+   "defaultMessage": "バトラーシステムの各PPSのオペレータ画面へのアクセスを許可する"
  },
  {
    "id": "users.add.roledetails.manager",
@@ -2072,7 +2072,7 @@
  {
    "id": "users.add.roledetails.subheading",
    "description": "Subheading for role",
-   "defaultMessage": "役割毎にユーザはバトラーシステムの特定レベルの制御が可能です。"
+   "defaultMessage": "役割毎にユーザをバトラーシステムに対して権限制御が可能です。"
  },
  {
    "id": "users.add.roledetails.operator",
@@ -2082,7 +2082,7 @@
  {
    "id": "users.add.roledetails.operatortext",
    "description": "Subtext for operator",
-   "defaultMessage": "バトラーシステムの各入出庫ステーションのオペレータインターフェイスへのアクセスを許可する"
+   "defaultMessage": "バトラーシステムの各PPSのオペレータ画面へのアクセスを許可する"
  },
  {
    "id": "users.add.roledetails.manager",
@@ -2107,7 +2107,7 @@
  {
    "id": "user.button.heading",
    "description": "button heading for users table",
-   "defaultMessage": "新ユーザを追加"
+   "defaultMessage": "ユーザを追加"
  },
  {
    "id": "user.table.users",
@@ -2172,7 +2172,7 @@
  {
    "id": "charger.name.prefix",
    "description": "prefix for charger id",
-   "defaultMessage": "CS - {csId}"
+   "defaultMessage": "充電器 - {csId}"
  },
  {
    "id": "msu.name.prefix",
@@ -2222,12 +2222,12 @@
  {
    "id": "orderList.Unfulfillable.status",
    "description": "Unfulfillable status for orderList",
-   "defaultMessage": "注文不可"
+   "defaultMessage": "引当不可"
  },
  {
    "id": "ppsDetail.pick.status",
    "description": "pick status for pps",
-   "defaultMessage": "ピック"
+   "defaultMessage": "出庫"
  },
  {
    "id": "ppsDetail.put.status",
@@ -2267,7 +2267,7 @@
  {
    "id": "userDetails.pick.status",
    "description": "pick status for userDetails",
-   "defaultMessage": "ピック"
+   "defaultMessage": "出庫"
  },
  {
    "id": "userDetails.put.status",
@@ -2317,7 +2317,7 @@
  {
    "id": "waveDetail.pending.status",
    "description": "pending status for wave",
-   "defaultMessage": "処理中"
+   "defaultMessage": "保留中"
  },
  {
    "id": "waveDetail.id.prefix",
@@ -2327,7 +2327,7 @@
  {
    "id": "notify.success.add",
    "description": "Text for successfull user addition",
-   "defaultMessage": "新ユーザ「{first} {last}」が追加されました"
+   "defaultMessage": "ユーザ「{first} {last}」が追加されました"
  },
  {
    "id": "notify.success.delete",
@@ -2372,17 +2372,17 @@
  {
    "id": "movingMount.task",
    "description": "movingMount task",
-   "defaultMessage": "マウントへ移動"
+   "defaultMessage": "搭載へ移動中"
  },
  {
    "id": "movingDismount.task",
    "description": "movingDismount task",
-   "defaultMessage": "ディスマウントへ移動"
+   "defaultMessage": "降しに移動中"
  },
  {
    "id": "docked.task",
    "description": "docked task",
-   "defaultMessage": "でドックされた"
+   "defaultMessage": "で接続済"
  },
  {
    "id": "auditdetail.auditPendingApp.prefix",
@@ -2392,12 +2392,12 @@
  {
     "id": "stringConfig.audit_reaudited",
     "description": "Text for audit reaudited status",
-    "defaultMessage": "再監査",
+    "defaultMessage": "再棚卸",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
     "id": "auditdetail.auditReaudited.prefix",
-    "defaultMessage": "再監査"
+    "defaultMessage": "再棚卸"
   },
   {
     "id": "audit.viewIssues.heading",
@@ -2524,7 +2524,7 @@
   {
    "id":"pps.range.heading",
    "description":"Slider Head",
-   "defaultMessage":"性能範囲"
+   "defaultMessage":"範囲"
   },
   {
    "id":"auditStatus.tab.heading.none",
@@ -2539,27 +2539,27 @@
   {
    "id":"ppsclose.head.text",
    "description":"PPS close modal header",
-   "defaultMessage":"閉じるまたは強制閉じるPPS"
+   "defaultMessage":"クローズまたは強制クローズPPS"
   },
   {
    "id":"ppsclose.closeAll",
    "description":"PPS close all text",
-   "defaultMessage":"すべてを閉じる"
+   "defaultMessage":"すべてをクローズ"
   },
   {
    "id":"ppsclose.fcloseAll",
    "description":"PPS force close all text",
-   "defaultMessage":"強制的にすべて閉じる"
+   "defaultMessage":"強制的にすべてクローズ"
   },
   {
    "id":"ppsclose.close",
    "description":"Text for close",
-   "defaultMessage":"閉じる"
+   "defaultMessage":"クローズ"
   },
   {
    "id":"ppsclose.fclose",
    "description":"Text for close",
-   "defaultMessage":"強制終了"
+   "defaultMessage":"強制クローズ"
   },
   {
    "id": "audit.delete.close",
@@ -2569,7 +2569,7 @@
 {
    "id": "audit.delete.confirm",
    "description": "audit delete confirm",
-   "defaultMessage": "監査タスクの削除"
+   "defaultMessage": "棚卸タスクの削除"
 },
 {
    "id": "audit.duplicate.close",
@@ -2579,7 +2579,7 @@
 {
    "id": "audit.duplicate.confirm",
    "description": "close audit duplicate",
-   "defaultMessage": "重複する監査タスク"
+   "defaultMessage": "重複する棚卸タスク"
 },
 {
    "id": "notifications.search.head",
@@ -2589,7 +2589,7 @@
 {
    "id":"audit.cancellation.success",
    "description": "Audit cancellation success",
-   "defaultMessage": "監査のキャンセル要求が送信されました"
+   "defaultMessage": "棚卸のキャンセル要求が送信されました"
 },
 {
    "id": "notifications.search.placeholder",
@@ -2606,7 +2606,7 @@
   {
     "id": "horizontal.graph.fulfilling",
     "description": "Fulfilling",
-    "defaultMessage": "完成品: {count}",
+    "defaultMessage": "引当済: {count}",
     "filepath": "./src/components/graphd3/graphd3.js"
   },
   {
@@ -2642,13 +2642,13 @@
 {
    "id": "commonDataTable.resolveAudit.approve",
    "description": "resolve button",
-   "defaultMessage": "許可",
+   "defaultMessage": "承認",
    "filepath": "./src/components/commonFunctionsDataTable.js"
 },
 {
    "id": "commonDataTable.resolveAudit.reject",
    "description": "resolve button",
-   "defaultMessage": "拒否",
+   "defaultMessage": "却下",
    "filepath": "./src/components/commonFunctionsDataTable.js"
 },
 {
@@ -2660,43 +2660,43 @@
 {
    "id": "audit.resolveUnresolve.tooltip.header",
    "description": "resolveUnresolve issue for audit table",
-   "defaultMessage": "{resolvedCount} 棚卸行, {unresolvedCount} 棚卸行",
+   "defaultMessage": "{resolvedCount} 解決, {unresolvedCount} 未解決",
    "filepath": "./src/components/commonFunctionsDataTable.js"
 },
 {
    "id": "audit.resolveUnresolve.tooltip.content",
    "description": "unresolve issue for audit table",
-   "defaultMessage": "問題がある棚卸行を許可、または、拒否します",
+   "defaultMessage": "問題がある棚卸を承認、または、却下します",
    "filepath": "./src/components/commonFunctionsDataTable.js"
 },
 {
    "id": "audit.unresolveIssues.tooltip.header",
    "description": "unresolve issue for audit table",
-   "defaultMessage": "{unresolvedCount} {unresolvedCount, plural, one {未監査の監査行} other {未監査の監査行}}",
+   "defaultMessage": "{unresolvedCount} {unresolvedCount, plural, one {未棚卸の棚卸行} other {未棚卸の棚卸行}}",
    "filepath": "./src/components/commonFunctionsDataTable.js"
 },
 {
    "id": "audit.unresolveIssues.tooltip.content",
    "description": "unresolve issue for audit table",
-   "defaultMessage": "問題がある棚卸行を許可、または、拒否します",
+   "defaultMessage": "問題がある棚卸結果を承認、または、却下します",
    "filepath": "./src/components/commonFunctionsDataTable.js"
 },
 {
    "id": "audit.rejected.tooltip.header",
    "description": "rejected issue for audit table",
-   "defaultMessage": "{rejected_lines}/{total_lines} {rejected_lines, plural, one {監査ライン} other {監査ライン}} が拒否されました",
+   "defaultMessage": "{rejected_lines}/{total_lines} {rejected_lines, plural, one {棚卸ライン} other {棚卸ライン}} が拒否されました",
    "filepath": "./src/components/commonFunctionsDataTable.js"
 },
 {
    "id": "audit.rejected.tooltip.content",
    "description": "Re-audit the rejected audit lines",
-   "defaultMessage": "拒否された棚卸行を再棚卸します",
+   "defaultMessage": "却下された棚卸を再棚卸します",
    "filepath": "./src/components/commonFunctionsDataTable.js"
 },
 {
    "id": "audit.created.tooltip.header",
    "description": "resolveUnresolve issue for audit table",
-   "defaultMessage": "棚卸タスクを開始するためにPPSを割り当ます",
+   "defaultMessage": "棚卸タスクを開始するためにPPSを割当",
    "filepath": "./src/components/commonFunctionsDataTable.js"
 },
 {
@@ -3038,13 +3038,13 @@
 {
    "id": "utility.itemRecall.head",
    "description": "Expired Items",
-   "defaultMessage": "満了された品目",
+   "defaultMessage": "期限切れ商品",
    "filepath": "./src/components/utilityComponents/scriptsTile.js"
 },
 {
    "id": "utility.itemRecall.subHead",
    "description": "(Recall all the expired items)",
-   "defaultMessage":"(満了されたぜん品目を呼び出す)",
+   "defaultMessage":"(期限切れ商品を呼び出す)",
    "filepath": "./src/components/utilityComponents/scriptsTile.js"
 },
 {
@@ -3092,7 +3092,7 @@
 {
    "id": "stringConfig.packing_operator",
    "description": "Text to show packing operator",
-   "defaultMessage":"放送オペレーター",
+   "defaultMessage":"梱包オペレーター",
    "filepath": "./src/constants/backEndConstants.js"
 },
 {
@@ -3116,19 +3116,19 @@
 {
    "id": "stringConfig.audit_rejected",
    "description": "Text for audit rejected status",
-   "defaultMessage": "拒否されました",
+   "defaultMessage": "却下されました",
    "filepath": "./src/constants/backEndConstants.js"
 },
 {
    "id": "stringConfig.md001",
    "description": "Text for safety checklist item 1",
-   "defaultMessage": "ノーマンゾーンには人員はいません。",
+   "defaultMessage": "ノーマンゾーンには人はいません。",
    "filepath": "./src/constants/backEndConstants.js"
 },
 {
    "id": "stringConfig.md002",
    "description": "Text for safety checklist item 2",
-   "defaultMessage": "全バトラーとMSU部位が修正されました。",
+   "defaultMessage": "全バトラーとMSUが確認されました。",
    "filepath": "./src/constants/backEndConstants.js"
 },
 {
@@ -3140,7 +3140,7 @@
 {
    "id": "stringConfig.md004",
    "description": "Text for safety checklist item 4",
-   "defaultMessage": "全てのノーマンゲートの制限スイッチは活性で動作しています。",
+   "defaultMessage": "全てのノーマンゲートの制限スイッチは動作しています。",
    "filepath": "./src/constants/backEndConstants.js"
 },
 {
@@ -3164,7 +3164,7 @@
 {
    "id": "stringConfig.md008",
    "description": "Text for safety checklist item 8",
-   "defaultMessage": "[手動] 現物の在庫が確認されました。",
+   "defaultMessage": "[手動] 在庫が確認されました。",
    "filepath": "./src/constants/backEndConstants.js"
 },
 {
@@ -3176,61 +3176,61 @@
 {
    "id": "stringConfig.md010",
    "description": "Text for safety checklist item 10",
-   "defaultMessage": "[手動] 活性域では全シャッターは解放されています。",
+   "defaultMessage": "[手動] 全シャッターは解放されています。",
    "filepath": "./src/constants/backEndConstants.js"
 },
 {
    "id": "stringConfig.md011",
    "description": "Text for safety checklist item 11",
-   "defaultMessage": "[手動] 操作領域に人員はいません。",
+   "defaultMessage": "[手動] 操作領域に人はいません。",
    "filepath": "./src/constants/backEndConstants.js"
 },
 {
    "id": "stringConfig.md012",
    "description": "Text for safety checklist item 12",
-   "defaultMessage": "[手動] 全パスのデブリを掃除されました。",
+   "defaultMessage": "[手動] 全パスの残留物は排除されました。",
    "filepath": "./src/constants/backEndConstants.js"
 },
 {
    "id": "roleDesc.butler_supervisor",
    "description": "Text for Manager description",
-   "defaultMessage": "全システムの管理インターフェイスとオペレーターインターフェイスにアクセスを許可します",
+   "defaultMessage": "全システムの管理インターフェイスとオペレーター画面にアクセスを許可します",
    "filepath": "./src/constants/backEndConstants.js"
 },
 {
    "id": "roleDesc.butler_ui",
    "description": "Text for Operator description",
-   "defaultMessage": "バトラーシステムの各ピックプットステーションでオペレーターインターフェイスにアクセスを許可します",
+   "defaultMessage": "バトラーシステムの各PPSでオペレーター画面にアクセスを許可します",
    "filepath": "./src/constants/backEndConstants.js"
 },
 {
    "id": "pwdDesc.butler_supervisor",
    "description": "Text for password description of manager",
-   "defaultMessage": "管理インターフェイスとオペレーターインターフェイスにログインするために８英数字以上のパスワードが必要です。",
+   "defaultMessage": "管理インターフェイスとオペレーター画面にログインするために８英数字以上のパスワードが必要です。",
    "filepath": "./src/constants/backEndConstants.js"
 },
 {
    "id": "pwdDesc.butler_ui",
    "description": "Text for password description of operator",
-   "defaultMessage": "オペレーターインターフェイスにログインするために６桁数以上のパスワードが必要です。",
+   "defaultMessage": "オペレーター画面にログインするために６桁数以上のパスワードが必要です。",
    "filepath": "./src/constants/backEndConstants.js"
 },
 {
    "id": "login.butler.unauthorized",
    "description": "Text for unauthorized login",
-   "defaultMessage": "公認されていません",
+   "defaultMessage": "許可されていません",
    "filepath": "./src/constants/messageConstants.js"
 },
 {
    "id": "notify.Location.audit.pending",
    "description": "Text for Location of audit pending for approval",
-   "defaultMessage": "監査の領域が許可のために保留しています。",
+   "defaultMessage": "棚卸が承認のために保留されています。",
    "filepath": "./src/constants/messageConstants.js"
 },
 {
    "id": "notify.Location.currently.processed",
    "description": "Text for Location of audit currently being processed",
-   "defaultMessage": "現在処理中にある監査の領域",
+   "defaultMessage": "現在処理中にある棚卸",
    "filepath": "./src/constants/messageConstants.js"
 },
 {
@@ -3242,13 +3242,13 @@
 {
    "id": "emergency.resume.statuserror",
    "description": "Error while resuming operation",
-   "defaultMessage": "緊急ステータスはソフトマニュールでないこと",
+   "defaultMessage": "緊急ステータスはソフトマニュアル状態でないこと",
    "filepath": "./src/constants/messageConstants.js"
 },
 {
    "id": "emergency.resume.Softemergency",
    "description": "Soft emergency still there",
-   "defaultMessage": "まだソフト緊急である",
+   "defaultMessage": "まだソフト緊急状態です",
    "filepath": "./src/constants/messageConstants.js"
 },
 {
@@ -3272,25 +3272,25 @@
 {
    "id": "audit.cancellation.error.g020",
    "description": "Internal server error while requesting for audit cancel",
-   "defaultMessage": "棚卸解除を要求するとき内部サーバーエラーがあります",
+   "defaultMessage": "棚卸解除を要求するときに内部サーバーエラーがあります",
    "filepath": "./src/constants/messageConstants.js"
 },
 {
    "id": "audit.cancellation.error.g021",
    "description": "Audit Id already sent for cancellation",
-   "defaultMessage": "棚卸Idは既に解除のために送信されました",
+   "defaultMessage": "棚卸Idは既にキャンセルとして送信されました",
    "filepath": "./src/constants/messageConstants.js"
 },
 {
    "id": "audit.cancellation.error.g023",
    "description": "Audit Id already successfully cancelled",
-   "defaultMessage": "棚卸Idが既に効果的に解除されました",
+   "defaultMessage": "棚卸Idが既にキャンセルされました",
    "filepath": "./src/constants/messageConstants.js"
 },
 {
    "id": "audit.cancellation.error.g024",
    "description": "Audit Id cancellation request has been process and cannot be cancelled",
-   "defaultMessage": "棚卸Idの解除要求が処理中で、解除ができません",
+   "defaultMessage": "棚卸Idのキャンセル要求が処理中で、解除ができません",
    "filepath": "./src/constants/messageConstants.js"
 },
 {
@@ -3313,7 +3313,7 @@
 },
 {
    "id": "auditdetail.auditRejected.prefix",
-   "defaultMessage": "拒否されました",
+   "defaultMessage": "却下されました",
    "filepath": "./src/containers/auditTab.js"
 },
 {
@@ -3365,7 +3365,7 @@
 },
 {
    "id": "audit.token1.all",
-   "defaultMessage": "どれでも",
+   "defaultMessage": "すべて",
    "filepath": "./src/containers/auditTab/auditFilter.js"
 },
 {
@@ -3380,22 +3380,22 @@
 },
 {
    "id": "audit.token2.all",
-   "defaultMessage": "どれでも",
+   "defaultMessage": "すべて",
    "filepath": "./src/containers/auditTab/auditFilter.js"
 },
 {
    "id": "audit.token2.issueFound",
-   "defaultMessage": "問題が見つかりました",
+   "defaultMessage": "問題あり",
    "filepath": "./src/containers/auditTab/auditFilter.js"
 },
 {
    "id": "audit.token2.rejected",
-   "defaultMessage": "拒否されました",
+   "defaultMessage": "却下",
    "filepath": "./src/containers/auditTab/auditFilter.js"
 },
 {
    "id": "audit.token2.resolved",
-   "defaultMessage": "解決されました",
+   "defaultMessage": "解決済",
    "filepath": "./src/containers/auditTab/auditFilter.js"
 },
 {
@@ -3410,12 +3410,12 @@
 },
 {
    "id": "audit.token2.created",
-   "defaultMessage": "作成されました",
+   "defaultMessage": "作成済",
    "filepath": "./src/containers/auditTab/auditFilter.js"
 },
 {
    "id": "audit.token2.completed",
-   "defaultMessage": "完了されました",
+   "defaultMessage": "完了",
    "filepath": "./src/containers/auditTab/auditFilter.js"
 },
 {
@@ -3463,13 +3463,13 @@
 {
    "id": "resolveAudit.table.expectedItems",
    "description": "expectedItems Column",
-   "defaultMessage": "予想数量",
+   "defaultMessage": "予定数",
    "filepath": "./src/containers/auditTab/resolveAudit.js"
 },
 {
    "id": "resolveAudit.table.actualQuantity",
    "description": "actualQuantity Column",
-   "defaultMessage": "実際の数量",
+   "defaultMessage": "実数",
    "filepath": "./src/containers/auditTab/resolveAudit.js"
 },
 {
@@ -3510,7 +3510,7 @@
 {
    "id": "resolveAudit.cancelLabel",
    "description": "button label for cancel",
-   "defaultMessage": "解除",
+   "defaultMessage": "キャンセル",
    "filepath": "./src/containers/auditTab/resolveAudit.js"
 },
 {
@@ -3540,7 +3540,7 @@
 {
    "id": "operation.alert.release.subtext",
    "description": "Text for next stop to resume operation",
-   "defaultMessage": "チェックリストをビューするためにパスワードの入力が必要です。\n            チェックリストにある全商品を許可すると、ウエアハウス操作が続行されます",
+   "defaultMessage": "チェックリストを見るするためにパスワードの入力が必要です。\n            チェックリストにある全項目を許可すると、操作が続行されます",
    "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
 },
 {
@@ -3558,7 +3558,7 @@
 {
    "id": "operation.fire.cautionText",
    "description": "Description Text FIRE EMERGENCY",
-   "defaultMessage": "火災緊急がトリガーされ、システムの安全性の処置が開始されました。",
+   "defaultMessage": "火災緊急が起動し、システムの安全性の処置が開始されました。",
    "filepath": "./src/containers/emergencyProcess/fireHazard.js"
 },
 {
@@ -3612,7 +3612,7 @@
 {
    "id": "operation.alert.pause.subtext",
    "description": "Subtext for pause alert",
-   "defaultMessage": "ウエアハウスの操作が続行されるために、緊急状態を確認して緊急停止ボタンを解放してください",
+   "defaultMessage": "操作が続行されるために、緊急状態を確認して緊急停止ボタンを解放してください",
    "filepath": "./src/containers/emergencyProcess/OperationStop.js"
 },
 {
@@ -3624,7 +3624,7 @@
 {
    "id": "operation.pause.text",
    "description": "Text for pause operation action",
-   "defaultMessage": "最後のアクションが完了されたあと全バトラーボット\n　　、PPS と他のシステムの部品が休止されます",
+   "defaultMessage": "最後のアクションが完了されたあと全バトラーボット\n　　、PPS と他システムが休止します",
    "filepath": "./src/containers/emergencyProcess/pauseOperation.js"
 },
 {
@@ -3636,7 +3636,7 @@
 {
    "id": "operation.pause.cancel",
    "description": "Text for cancel button",
-   "defaultMessage": "解除",
+   "defaultMessage": "キャンセル",
    "filepath": "./src/containers/emergencyProcess/pauseOperation.js"
 },
 {
@@ -3654,7 +3654,7 @@
 {
    "id": "operation.resume.text",
    "description": "Text for resume operation body",
-   "defaultMessage": "操作を続行するために、安全性のチェックリストを使って\n                バトラーシステムがレディーかどうかを確認しなければなりません。",
+   "defaultMessage": "操作を続行するために、安全チェックリストを使って\n                バトラーシステムがレディーかどうかを確認しなければなりません。",
    "filepath": "./src/containers/emergencyProcess/resumeOperation.js"
 },
 {
@@ -3666,7 +3666,7 @@
 {
    "id": "operation.cancel",
    "description": "Text for cancel",
-   "defaultMessage": "解除",
+   "defaultMessage": "キャンセル",
    "filepath": "./src/containers/emergencyProcess/resumeOperation.js"
 },
 {
@@ -3690,19 +3690,19 @@
 {
    "id": "operation.safety.steps",
    "description": "Text for approval steps",
-   "defaultMessage": "承認の手順を確認してください",
+   "defaultMessage": "承認手順を確認してください",
    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
 },
 {
    "id": "operation.safety.text",
    "description": "Text for ticking items",
-   "defaultMessage": "システムは操作を続行するために安全かどかを確認して全ての項目をチェックしてください。",
+   "defaultMessage": "システムは操作を続行するために安全かどうかを確認して全ての項目をチェックしてください。",
    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
 },
 {
    "id": "operation.safety.errors",
    "description": "Text for safety error",
-   "defaultMessage": "ある手順が守られていないことをシステムが見つかりました。\n                   確認し、または、サポートのためにサービスエンジニアに連絡してください",
+   "defaultMessage": "手順が守られていないことをシステムが見つかりました。\n                   確認し、または、サポートのためにサービスエンジニアに連絡してください",
    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
 },
 {
@@ -3732,7 +3732,7 @@
 {
    "id": "notification.infinite.message",
    "description": "Infinite scroll message",
-   "defaultMessage": "もっとロードしてます",
+   "defaultMessage": "さらに表示",
    "filepath": "./src/containers/notifications/viewAllNotificationWrapper.js"
 },
 {
@@ -3752,12 +3752,12 @@
 },
 {
    "id": "order.STATUS.breach",
-   "defaultMessage": "違反したオーダー",
+   "defaultMessage": "未達成オーダー",
    "filepath": "./src/containers/orderTab/orderFilter.js"
 },
 {
    "id": "order.STATUS.completed",
-   "defaultMessage": "完了したオーダー",
+   "defaultMessage": "完了オーダー",
    "filepath": "./src/containers/orderTab/orderFilter.js"
 },
 {
@@ -3767,7 +3767,7 @@
 },
 {
    "id": "order.STATUS.unfulfillable",
-   "defaultMessage": "満たせないもの",
+   "defaultMessage": "引当不可",
    "filepath": "./src/containers/orderTab/orderFilter.js"
 },
 {
@@ -3777,7 +3777,7 @@
 },
 {
    "id": "order.STATUS.cancelled",
-   "defaultMessage": "解除されました",
+   "defaultMessage": "キャンセル済",
    "filepath": "./src/containers/orderTab/orderFilter.js"
 },
 {
@@ -3787,7 +3787,7 @@
 },
 {
    "id": "order.timePeriod.all",
-   "defaultMessage": "どれでも",
+   "defaultMessage": "すべて",
    "filepath": "./src/containers/orderTab/orderFilter.js"
 },
 {
@@ -3868,7 +3868,7 @@
 },
 {
    "id": "wave.STATUS.breach",
-   "defaultMessage": "違反されました",
+   "defaultMessage": "未達成",
    "filepath": "./src/containers/orderTab/waveFilter.js"
 },
 {
@@ -3907,13 +3907,13 @@
 {
    "id": "widget.pick.statusleft.delay",
    "description": "Text for delay in orders",
-   "defaultMessage":"延滞されました",
+   "defaultMessage":"遅延",
    "filepath": "./src/containers/pickStatusWidget.js"
 },
 {
    "id": "widget.pick.lowright.emergency",
    "description": "Estimated time",
-   "defaultMessage":" --に完了されると予算しています",
+   "defaultMessage":" --に完了されると推測jしています",
    "filepath": "./src/containers/pickStatusWidget.js"
 },
 {
@@ -3939,7 +3939,7 @@
 },
 {
    "id": "butletbot.token1.all",
-   "defaultMessage": "どれでも",
+   "defaultMessage": "すべて",
    "filepath": "./src/containers/systemTabs/butlerBotFilter.js"
 },
 {
@@ -3969,50 +3969,50 @@
 },
 {
    "id": "butletbot.token2.any",
-   "defaultMessage": "どれでも",
+   "defaultMessage": "すべて",
    "filepath": "./src/containers/systemTabs/butlerBotFilter.js"
 },
 {
    "id": "butletbot.token2.pick",
-   "defaultMessage": "ピック",
+   "defaultMessage": "出庫",
    "filepath": "./src/containers/systemTabs/butlerBotFilter.js"
 },
 {
    "id": "butletbot.token2.put",
-   "defaultMessage": "プット",
+   "defaultMessage": "入庫",
    "filepath": "./src/containers/systemTabs/butlerBotFilter.js"
 },
 {
    "id": "butletbot.token2.audit",
-   "defaultMessage": "監査",
+   "defaultMessage": "棚卸",
    "filepath": "./src/containers/systemTabs/butlerBotFilter.js"
 },
 {
    "id": "butletbot.token2.charging",
-   "defaultMessage":"チャージング",
+   "defaultMessage":"充電",
    "filepath": "./src/containers/systemTabs/butlerBotFilter.js"
 },
 {
    "id": "butletbot.token2.notSet",
-   "defaultMessage":"設定されていません",
+   "defaultMessage":"未設定",
    "filepath": "./src/containers/systemTabs/butlerBotFilter.js"
 },
 {
    "id": "pick.name.prefix",
    "description": "prefix for Pick",
-   "defaultMessage": "ピック",
+   "defaultMessage": "出庫",
    "filepath": "./src/containers/systemTabs/butlerbotTab.js"
 },
 {
    "id": "Put.name.prefix",
    "description": "prefix for put",
-   "defaultMessage": "プット",
+   "defaultMessage": "入庫",
    "filepath": "./src/containers/systemTabs/butlerbotTab.js"
 },
 {
    "id": "Charging.name.prefix",
    "description": "prefix for Charging",
-   "defaultMessage": "チャージング",
+   "defaultMessage": "充電",
    "filepath": "./src/containers/systemTabs/butlerbotTab.js"
 },
 {
@@ -4041,12 +4041,12 @@
 },
 {
    "id": "charging.inputField.id",
-   "defaultMessage": "チャージステーションID",
+   "defaultMessage": "充電器ID",
    "filepath": "./src/containers/systemTabs/chargingStationFilter.js"
 },
 {
    "id": "charging.token.status",
-   "defaultMessage": "ドッキングステータス",
+   "defaultMessage": "接続ステータス",
    "filepath": "./src/containers/systemTabs/chargingStationFilter.js"
 },
 {
@@ -4056,7 +4056,7 @@
 },
 {
    "id": "charging.STATUS.all",
-   "defaultMessage": "どれでも",
+   "defaultMessage": "すべて",
    "filepath": "./src/containers/systemTabs/chargingStationFilter.js"
 },
 {
@@ -4071,7 +4071,7 @@
 },
 {
    "id": "charging.timePeriod.all",
-   "defaultMessage": "どれでも",
+   "defaultMessage": "すべて",
    "filepath": "./src/containers/systemTabs/chargingStationFilter.js"
 },
 {
@@ -4087,13 +4087,13 @@
 {
    "id": "ChargingStationsTable.filter.search.bar",
    "description": "total stations for filter search bar",
-   "defaultMessage": "{total} ステーションが見つかりました",
+   "defaultMessage": "{total} 充電器が見つかりました",
    "filepath": "./src/containers/systemTabs/chargingStationsTab.js"
 },
 {
    "id": "ChargingStationsTable.filter.search.bar.showall",
    "description": "button label for show all",
-   "defaultMessage": "全てのステーションを表示します",
+   "defaultMessage": "全ての充電器を表示します",
    "filepath": "./src/containers/systemTabs/chargingStationsTab.js"
 },
 {
@@ -4154,7 +4154,7 @@
 },
 {
    "id": "pps.STATUS.all",
-   "defaultMessage":"どれでも",
+   "defaultMessage":"すべて",
    "filepath": "./src/containers/systemTabs/ppsFilter.js"
 },
 {
@@ -4174,27 +4174,27 @@
 },
 {
    "id": "pps.MODE.all",
-   "defaultMessage":"どれでも",
+   "defaultMessage":"すべて",
    "filepath": "./src/containers/systemTabs/ppsFilter.js"
 },
 {
    "id": "pps.MODE.pick",
-   "defaultMessage":"ピック",
+   "defaultMessage":"出庫",
    "filepath": "./src/containers/systemTabs/ppsFilter.js"
 },
 {
    "id": "pps.MODE.put",
-   "defaultMessage":"プット",
+   "defaultMessage":"入庫",
    "filepath": "./src/containers/systemTabs/ppsFilter.js"
 },
 {
    "id": "pps.MODE.audit",
-   "defaultMessage":"監査",
+   "defaultMessage":"棚卸",
    "filepath": "./src/containers/systemTabs/ppsFilter.js"
 },
 {
    "id": "v.MODE.notset",
-   "defaultMessage":"設定されていません",
+   "defaultMessage":"未設定",
    "filepath": "./src/containers/systemTabs/ppsFilter.js"
 },
 {
@@ -4206,7 +4206,7 @@
 {
    "id": "pps.close.heading",
    "description": "Heading for Close PPS",
-   "defaultMessage":"PPSを閉じます",
+   "defaultMessage":"PPSをクローズ",
    "filepath": "./src/containers/systemTabs/ppsTab.js"
 },
 {
@@ -4218,13 +4218,13 @@
 {
    "id": "PPS.table.closeStatusLabel",
    "description": "audit dropdown option for Status change",
-   "defaultMessage":"選択したPPSを閉じます",
+   "defaultMessage":"選択したPPSをクローズします",
    "filepath": "./src/containers/systemTabs/ppsTab.js"
 },
 {
    "id": "PPS.table.statusPlaceholder",
    "description": "Placeholder for status dropdown",
-   "defaultMessage":"PPSのステータスを変更します",
+   "defaultMessage":"PPSの状態を変更します",
    "filepath": "./src/containers/systemTabs/ppsTab.js"
 },
 {
@@ -4236,13 +4236,13 @@
 {
    "id": "ppsList.filter.search.bar",
    "description": "total pps for filter search bar",
-   "defaultMessage":"{total} ステーションが見つかりました",
+   "defaultMessage":"{total} PPSが見つかりました",
    "filepath": "./src/containers/systemTabs/ppsTab.js"
 },
 {
    "id": "ppsList.filter.search.bar.showall",
    "description": "button label for show all",
-   "defaultMessage":"全てのステーションを表示します",
+   "defaultMessage":"全てのPPSを表示します",
    "filepath": "./src/containers/systemTabs/ppsTab.js"
 },
 {
@@ -4260,7 +4260,7 @@
 {
    "id": "PPS.table.requestedStatus",
    "description": "Requested status for PPS",
-   "defaultMessage":"要求されたステータス",
+   "defaultMessage":"要求された状態",
    "filepath": "./src/containers/systemTabs/PPStable.js"
 },
 {
@@ -4308,7 +4308,7 @@
 {
    "id": "operation.alert.toastifydetails",
    "description": "Text button to viewdetails",
-   "defaultMessage":"詳細をみます",
+   "defaultMessage":"詳細を表示",
    "filepath": "./src/containers/tabs.js"
 },
 {
@@ -4330,7 +4330,7 @@
 },
 {
    "id": "user.role.all",
-   "defaultMessage":"どれでも",
+   "defaultMessage":"すべて",
    "filepath": "./src/containers/userTab/userFilter.js"
 },
 {
@@ -4355,7 +4355,7 @@
 },
 {
    "id": "user.status.all",
-   "defaultMessage":"どれでも",
+   "defaultMessage":"すべて",
    "filepath": "./src/containers/userTab/userFilter.js"
 },
 {
@@ -4370,32 +4370,32 @@
 },
 {
    "id": "user.workmode.all",
-   "defaultMessage":"どれでも",
+   "defaultMessage":"すべて",
    "filepath": "./src/containers/userTab/userFilter.js"
 },
 {
    "id": "user.workmode.pickfront",
-   "defaultMessage":"ピックフロント",
+   "defaultMessage":"出庫フロント",
    "filepath": "./src/containers/userTab/userFilter.js"
 },
 {
    "id": "user.workmode.pickback",
-   "defaultMessage":"ピックバック",
+   "defaultMessage":"出庫バック",
    "filepath": "./src/containers/userTab/userFilter.js"
 },
 {
    "id": "user.workmode.putfront",
-   "defaultMessage":"プットフロント",
+   "defaultMessage":"入庫フロント",
    "filepath": "./src/containers/userTab/userFilter.js"
 },
 {
    "id": "user.workmode.putback",
-   "defaultMessage":"プットバック",
+   "defaultMessage":"入庫バック",
    "filepath": "./src/containers/userTab/userFilter.js"
 },
 {
    "id": "user.workmode.audit",
-   "defaultMessage":"監査",
+   "defaultMessage":"棚卸",
    "filepath": "./src/containers/userTab/userFilter.js"
 },
 {
@@ -4405,12 +4405,12 @@
 },
 {
    "id": "user.location.all",
-   "defaultMessage":"どれでも",
+   "defaultMessage":"すべて",
    "filepath": "./src/containers/userTab/userFilter.js"
 },
 {
    "id": "user.location.issueFound",
-   "defaultMessage":"ピックプットステーション",
+   "defaultMessage":"入出庫ステーション",
    "filepath": "./src/containers/userTab/userFilter.js"
 },
 {
@@ -4504,19 +4504,19 @@
 {
    "id": "utility.goodsRcvdNotes.head",
    "description": "Goods Received Notes",
-   "defaultMessage": "入庫のノート",
+   "defaultMessage": "入庫記録",
    "filepath": "./src/containers/utilityTab.js"
 },
 {
    "id": "utility.stockLedgerHead.head",
    "description": "Inventory Stock Ledger",
-   "defaultMessage": "在庫の台帳",
+   "defaultMessage": "在庫一覧",
    "filepath": "./src/containers/utilityTab.js"
 },
 {
    "id": "utility.stockLedgerRawTransactionHead.head",
    "description": "Stock Ledger Raw Transactions",
-   "defaultMessage":"在庫の台帳の生取引",
+   "defaultMessage":"受払一覧",
    "filepath": "./src/containers/utilityTab.js"
 },
 {
@@ -4618,19 +4618,19 @@
 {
    "id": "audit.resolve.success",
    "description": "Text for resolved audit lines",
-   "defaultMessage": "監査タスク{auditId}は{auditType} - {auditTypeValue}と許可されました",
+   "defaultMessage": "棚卸タスク{auditId}は{auditType} - {auditTypeValue}と承認されました",
    "filepath": "./src/utilities/statusToString.js"
 },
 {
    "id": "audit.resolve.rejected",
    "description": "Text for rejected audit lines",
-   "defaultMessage": "監査タスク{auditId}は{auditType} - {auditTypeValue}と拒否されました",
+   "defaultMessage": "棚卸タスク{auditId}は{auditType} - {auditTypeValue}と却下されました",
    "filepath": "./src/utilities/statusToString.js"
 },
 {
    "id": "utility.item.recall",
    "description": "Item recall message",
-   "defaultMessage": "{itemCount}満了された品目が呼び出されました",
+   "defaultMessage": "{itemCount}完了した商品が呼び出されました",
    "filepath": "./src/utilities/statusToString.js"
 },
 {
