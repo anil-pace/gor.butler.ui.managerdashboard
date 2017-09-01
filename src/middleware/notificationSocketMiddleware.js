@@ -51,7 +51,7 @@ const notificationSocketMiddleware = (function(){
       //The user wants us to connect
       case WS_NOTIFICATION_CONNECT:
         //Start a new connection to the server
-        if(socket !== null) {
+        if(socket && socket.connected) {
           socket.disconnect(function(){
             console.log("disconnected");
           });
