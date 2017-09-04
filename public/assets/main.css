@@ -8371,3 +8371,8 @@ button:disabled {
   padding-top: 150px;
   height: 8vw;
 }
+
+.gor-operations-log .gor-filter-body-filterToken-section1 {
+  float: none;
+  vertical-align: top;
+}

@@ -21,21 +21,20 @@ class OperationsFilter extends React.Component{
       super(props);
       this.state={
         tokenSelected: {
-          "status":["any"], 
-          "timeperiod":["60"]
+          "status":this.props.filters.status ? [this.props.filters.status]:["any"], 
+          "timeperiod":this.props.filters.time_period ? [this.props.filters.time_period]:["1_HOUR"],
+          "operatingMode":this.props.filters.operatingMode ? [this.props.filters.operatingMode]:["any"]
         }, 
         searchQuery: {
-          "request_id":"",
-          "sku_id":"",
-          "pps_id":"",
-          "user_id":""
+          "request_id":this.props.filters.request_id ? this.props.filters.request_id : "",
+          "sku_id":this.props.filters.sku_id ? this.props.filters.sku_id : "",
+          "pps_id":this.props.filters.pps_id ? this.props.filters.pps_id : "",
+          "user_id":this.props.filters.user_id ? this.props.filters.user_id : ""
         },
         defaultToken: {
-          "status":["any"]
-        },
-        selection:{
-          "status":"multi",
-          "timeperiod":"Single"
+          "status":["any"],
+          "operatingMode":["any"],
+          "timeperiod":["1_HOUR"]
         }
         }; 
       this._closeFilter = this._closeFilter.bind(this);
@@ -75,7 +74,7 @@ class OperationsFilter extends React.Component{
     _processFilterParams(){
       var filterParams = JSON.parse(JSON.stringify(REPORTS_FILTER_PARAMS));
       var filterInputFields = [],statusToken={},statusLabels=[],
-      timePeriodToken={},timePeriodLabels=[];
+      timePeriodToken={},timePeriodLabels=[],operatingModeToken={},operatingModeLabels=[];
       for(let i=0,len = filterParams.length; i < len ; i++){
           let filter = filterParams[i],textInput={},tokenInput;
           if(filter["type"] === "text"){
@@ -93,6 +92,10 @@ class OperationsFilter extends React.Component{
               timePeriodToken["value"] = filter["name"];
               timePeriodToken["label"] = filter["labelText"];
             }
+            else if(filter["name"] === "operatingMode"){
+              operatingModeToken["value"] = filter["name"];
+              operatingModeToken["label"] = filter["labelText"];
+            }
             for(let k in tokens){
               let token = {}
               token.value = k
@@ -102,6 +105,9 @@ class OperationsFilter extends React.Component{
               }
               else if(filter["name"] === "timeperiod"){
                 timePeriodLabels.push(token);
+              }
+              else if(filter["name"] === "operatingMode"){
+                operatingModeLabels.push(token);
               }
               
             }
@@ -113,7 +119,9 @@ class OperationsFilter extends React.Component{
         statusLabels,
         statusToken,
         timePeriodLabels,
-        timePeriodToken
+        timePeriodToken,
+        operatingModeToken,
+        operatingModeLabels
       }
     }
 
@@ -121,7 +129,12 @@ class OperationsFilter extends React.Component{
         let selectedToken= this.state.tokenSelected;
         let statusColumn=<FilterTokenWrap field={filterParams.statusToken} tokenCallBack={this._handelTokenClick.bind(this)} label={filterParams.statusLabels} selectedToken={selectedToken}/>;
         let timePeriodColumn=<FilterTokenWrap selection={SINGLE} field={filterParams.timePeriodToken} tokenCallBack={this._handelTokenClick.bind(this)} label={filterParams.timePeriodLabels} selectedToken={selectedToken}/>;
-        let columnDetail={column1token:statusColumn, column2token:timePeriodColumn};
+        let operatingModeColumn = <FilterTokenWrap  field={filterParams.operatingModeToken} tokenCallBack={this._handelTokenClick.bind(this)} label={filterParams.operatingModeLabels} selectedToken={selectedToken}/>;
+        let columnDetail={
+          column1token:statusColumn,
+         column2token:timePeriodColumn,
+         column3token:operatingModeColumn
+       };
         return columnDetail;
     }
 
@@ -165,6 +178,9 @@ class OperationsFilter extends React.Component{
             if (filterState.tokenSelected["timeperiod"]) {
                 _query.time_period=filterState.tokenSelected["timeperiod"]
             }
+            if (filterState.tokenSelected["operatingMode"] && filterState.tokenSelected["operatingMode"][0] !== "any") {
+                _query.operatingMode=filterState.tokenSelected["operatingMode"]
+            }
             _query.pageSize = this.props.pageSize;
             this.props.applyOLFilterFlag(true);
             hashHistory.push({pathname: "/reports/operationsLog", query: _query})
@@ -192,8 +208,9 @@ class OperationsFilter extends React.Component{
   render(){
         
         var filterParams = this._processFilterParams();
-        let ppsSearchField=this._processSearchField(filterParams.filterInputFields);
-        let ppsFilterToken=this._processFilterToken(filterParams);
+        let olSearchField=this._processSearchField(filterParams.filterInputFields);
+        let olFilterToken=this._processFilterToken(filterParams);
+        var noData = this.props.dataCount;
     return (
       <div>
                  <Filter>    
@@ -207,7 +224,7 @@ class OperationsFilter extends React.Component{
                             defaultMessage="Hide"/>
                     </div>
                  </div>
-                    <div>{null ?
+                    <div>{noData ?
                             <div className="gor-no-result-filter">
                             <FormattedMessage id="gor.filter.noResult" description="label for no result" 
                             defaultMessage="No results found, please try again"/>
@@ -216,16 +233,20 @@ class OperationsFilter extends React.Component{
                      <div className="gor-filter-body">
                       <div className="gor-filter-body-filterToken-wrap"> 
                             <div className="gor-filter-body-filterToken-section1">
-                                {ppsFilterToken.column1token}
+                                {olFilterToken.column1token}
+                                 <div>
+                                {olFilterToken.column3token}
+                            </div>
                             </div>
                             <div className="gor-filter-body-filterToken-section1">
-                                {ppsFilterToken.column2token}
+                                {olFilterToken.column2token}
                             </div>
+                            
                             
 
                          </div>
                          <div className="gor-filter-body-input-wrap"> 
-                            {ppsSearchField}
+                            {olSearchField}
                          </div>
                         
                          
@@ -238,7 +259,7 @@ class OperationsFilter extends React.Component{
                     </span>
                     <div className="gor-filter-btn-wrap">
                         <button className='gor-add-btn' onClick={this._applyFilter}>
-                            {true? <FormattedMessage id="gor.filter.heading" description="filter heading"  defaultMessage="Apply filter"/> :<div className='spinnerImage'></div>}
+                            {!this.props.responseFlag? <FormattedMessage id="gor.filter.heading" description="filter heading"  defaultMessage="Apply filter"/> :<div className='spinnerImage'></div>}
                         </button>
 
 

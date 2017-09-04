@@ -36,9 +36,28 @@ export const REPORTS_FILTER_PARAMS = [{
 	name:"timeperiod",
 	type:"token",
 	tokens:{
-		realtime:"Real Time",
-		60:"Last 1 Hour",
-		120:"Last 2 Hour"
+		"realtime":"Real Time",
+		"1_HOUR":"Last 1 Hour",
+		"2_HOUR":"Last 2 Hours",
+		"1_DAY":"Last 1 Day",
+		"2_DAY":"Last 2 Days",
+		"1_MONTH":"Last 1 Month",
+		"2_MONTH":"Last 2 Months",
+		"3_MONTH":"Last 2 Months"
+
 	},
 	labelText:"Time Period"
+},{
+	name:"operatingMode",
+	type:"token",
+	tokens:{
+		"any":"Any",
+		"pick front":"Pick Front",
+		"put front":"Put Front",
+		"pick back":"Pick Back",
+		"put back":"Put Back",
+		"audit":"Audit"
+
+	},
+	labelText:"Operating Mode"
 }]
