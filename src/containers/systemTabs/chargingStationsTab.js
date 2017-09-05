@@ -14,7 +14,7 @@ import {
     INITIAL_HEADER_SORT,
     INITIAL_HEADER_ORDER,
     GOR_CONNECTED_STATUS,
-    WS_ONSEND
+    WS_ONSEND,GOR_MANUAL_MODE
 } from '../../constants/frontEndConstants';
 import {csHeaderSort, csHeaderSortOrder, csFilterDetail} from '../../actions/sortHeaderActions';
 import {
@@ -173,13 +173,13 @@ class ChargingStations extends React.Component {
                         connectedBots++;
                     }
 
-                    if (chargersData[i].mode=== "Manual") {
+                    if (chargersData[i].modeClass=== GOR_MANUAL_MODE) {
                         manualMode++;
                     }
                     else {
                         automaticMode++;
                     }
-                    if (chargersData[i].status=== GOR_CONNECTED_STATUS) {
+                    if (chargersData[i].statusClass=== GOR_CONNECTED_STATUS) {
                         csConnected++;
                     }
 

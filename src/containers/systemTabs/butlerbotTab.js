@@ -109,6 +109,13 @@ class ButlerBot extends React.Component {
             3: nProps.context.intl.formatMessage(messages.charging),
             4: nProps.context.intl.formatMessage(messages.move)
         };
+        var currentTaskClass={
+            0: "Pick",
+            1: "Put",
+            2: "Audit",
+            3: "Charging",
+            4: "Move"
+        }
 
         var currentSubtask={
             0: nProps.context.intl.formatMessage(messages.moving),
@@ -152,6 +159,7 @@ class ButlerBot extends React.Component {
             }
             butlerDetail.butlerAvgVoltage=data[i].voltage;
             butlerDetail.taskNum=currentTask[data[i].current_task];
+            butlerDetail.taskNumClass=currentTaskClass[data[i].current_task];
             butlerDetail.taskType=data[i].current_task;
             if (data[i].display_msu_id=== null) {
                 butlerDetail.msu="--";
@@ -284,12 +292,12 @@ class ButlerBot extends React.Component {
             if (butlerData && butlerData.length) {
                 for (var i=butlerData.length - 1; i >= 0; i--) {
                     avgVoltage=butlerData[i].butlerAvgVoltage + avgVoltage;
-                    if (butlerData[i].taskNum=== null || butlerData[i].taskNum=== undefined) {
+                    if (butlerData[i].taskNumClass=== null || butlerData[i].taskNumClass=== undefined) {
                         taskDetail["Idle"]++;
                     }
                     else {
 
-                        taskDetail[butlerData[i].taskNum]++;
+                        taskDetail[butlerData[i].taskNumClass]++;
                     }
 
                     if (butlerData[i].msu !== "--") {
@@ -300,11 +308,11 @@ class ButlerBot extends React.Component {
                         taskDetail["location"]++;
                     }
 
-                    if (butlerData[i].status=== GOR_PERIPHERAL_ONLINE) {
+                    if (butlerData[i].statusClass=== GOR_PERIPHERAL_ONLINE) {
                         taskDetail["online"]++;
                     }
 
-                    if (butlerData[i].status=== GOR_PERIPHERAL_OFFLINE) {
+                    if (butlerData[i].statusClass=== GOR_PERIPHERAL_OFFLINE) {
                         taskDetail["offline"]++;
                     }
 
