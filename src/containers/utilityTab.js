@@ -602,14 +602,8 @@ class UtilityTab extends React.Component {
 	render() {
 		let stockLedgerTile = this._renderStockLedgertile();
 		let stockLedgerRawTransactionTile = this._renderStockLedgerRawTransactionTile();
-		var activeReportDownButton = this.state.reportState.fileType &&
-			this.state.reportState.category
-			? true
-			: false;
-		var activeGRNDownButton = this.state.grnState.fileType &&
-			this.state.grnState.invoiceId
-			? true
-			: false;
+		var activeReportDownButton = this.state.reportState.fileType && this.state.reportState.category
+		var activeGRNDownButton = this.state.grnState.fileType && this.state.grnState.invoiceId
 		var activeStockLedgerButton = this._validateStockLedgerButton();
 		let show_gr_report = false;
 		let show_masterdata_upload = false;
@@ -754,7 +748,6 @@ class UtilityTab extends React.Component {
 								onRefresh={this._onMDMRefresh.bind(this)}
 							>
 								<MasterUploadTile
-									timeOffset={this.props.timeOffset}
 									uploadHistChanged={
 										this.props.uploadHistChanged
 									}
