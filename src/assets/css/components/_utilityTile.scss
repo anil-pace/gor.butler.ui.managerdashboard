@@ -255,3 +255,12 @@
 .gor-utility-duration-wrap input[type=checkbox] {
   margin-right: 5px;
 }
+
+.gor-utility-history-container{
+  height: 155px;
+  max-height: 155px;
+  overflow-y: auto;
+  .gor-utility-no-history-found{
+    line-height: 30px;
+  }
+}

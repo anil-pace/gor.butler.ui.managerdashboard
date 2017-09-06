@@ -2,6 +2,7 @@ import React  from 'react';
 import { FormattedMessage } from 'react-intl';
 import AccordianBar from './accordianBar';
 import FileUpload from '../fileUpload/fileUpload';
+import ListItem from "../list/listItem";
 
 
 class MasterUploadTile extends React.Component{
@@ -46,6 +47,27 @@ class MasterUploadTile extends React.Component{
                         handleAccordianState={this._handlePanel.bind(this)} index={i} key={"acc"+i}/>
         result.push(masterUploadBar)
       }
+      if(result.length===0){
+          masterUploadBar= <ListItem index={0} key={"listItem" + 0}>
+              <div className="gor-inline">
+                  <div className="gor-utility-master-h1">
+                      <div className="gor-utility-no-history-found">
+                          <FormattedMessage
+                              id="utility.uploadHist.noresultfound"
+                              description="Status "
+                              defaultMessage="No Result Found"
+                          />
+                      </div>
+
+                  </div>
+                  <div className="gor-inline gor-utility-master-h2"/>
+
+              </div>
+              <div className="gor-inline gor-utility-master-h2"/>
+
+          </ListItem>
+          result.push(masterUploadBar)
+      }
       return result;
     }
      shouldComponentUpdate(nextProps, nextState){
@@ -65,7 +87,7 @@ class MasterUploadTile extends React.Component{
             <div className="gor-utility-body-header">
               <FormattedMessage id="utility.uploadHistory.head" description='Upload History' defaultMessage='Upload History'/> 
             </div>
-            <div>
+            <div className="gor-utility-history-container">
               {masterDataBody}
             </div>
       </div>
