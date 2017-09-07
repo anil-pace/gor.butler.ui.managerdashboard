@@ -635,6 +635,12 @@
     "filepath": "./src/components/utilityComponents/downloadGRTile.js"
   },
   {
+    "id": "utility.uploadHist.noresultfound",
+    "description": "Status",
+    "defaultMessage": "No Result Found",
+    "filepath": "./src/components/utilityComponents/downloadGRTile.js"
+  },
+  {
     "id": "utility.downloadGRN.label",
     "description": "STN number:",
     "defaultMessage": "STN number:",
@@ -725,6 +731,12 @@
     "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
   },
   {
+    "id": "utility.uploadHist.noresultfound",
+    "description": "Status",
+    "defaultMessage": "No Result Found",
+    "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+  },
+  {
     "id": "utility.downloadReports.head",
     "description": "Generate Report",
     "defaultMessage": "Generate Report",
@@ -735,6 +747,12 @@
     "description": "Report History",
     "defaultMessage": "Report History",
     "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+  },
+  {
+    "id": "utility.uploadHist.noresultfound",
+    "description": "Status",
+    "defaultMessage": "No Result Found",
+    "filepath": "./src/components/utilityComponents/masterUploadTile.js"
   },
   {
     "id": "utility.uploadHistory.head",

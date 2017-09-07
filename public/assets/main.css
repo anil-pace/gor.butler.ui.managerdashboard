@@ -6439,6 +6439,16 @@ button:disabled {
   margin-right: 5px;
 }
 
+.gor-utility-history-container {
+  height: 155px;
+  max-height: 155px;
+  overflow-y: auto;
+}
+
+.gor-utility-history-container .gor-utility-no-history-found {
+  line-height: 30px;
+}
+
 .notificationWrap {
   display: inline-block;
   vertical-align: middle;
