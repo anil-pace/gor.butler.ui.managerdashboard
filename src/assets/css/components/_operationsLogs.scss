@@ -1,3 +1,4 @@
+@import '../abstracts/functions';
 .gor-operations-log{
 	.gor-ol-paginate-wrap{
 		width:100%;
@@ -22,7 +23,7 @@
 		}
 	}
 	.gor-no-data{
-		padding-top: 150px;
+		padding-top: calculateRem(150px);
 		height:8vw;
 	}
 	.gor-filter-body-filterToken-section1{
@@ -30,17 +31,17 @@
 		vertical-align: top;
 	}
 	.gor-rpt-dwnld {
-	  height: 35px;
+	  height: calculateRem(35px);
 	  border-radius: 3px;
 	  background-color: #4d5055;
 	  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
 	  font-family: "source sans pro";
-	  font-size: 14px;
+	  font-size: calculateRem(14px);
 	  font-weight: 600;
 	  text-align: left;
 	  color: #ffffff;
-	  padding-left: 14px;
-	    padding-right: 14px;
+	  padding-left: calculateRem(14px);
+	    padding-right: calculateRem(14px);
 	    vertical-align: sub;
 	    cursor: pointer;
 	}

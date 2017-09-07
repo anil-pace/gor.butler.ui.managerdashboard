@@ -11,7 +11,8 @@ import {withRouter} from 'react-router';
 import {updateSubscriptionPacket,setWsAction} from '../../actions/socketActions';
 import {applyOLFilterFlag,wsOLSubscribe,wsOLUnSubscribe,setReportsSpinner} from '../../actions/operationsLogsActions';
 import {WS_ONSEND,POST,OPERATION_LOG_FETCH
-    ,APP_JSON,OPERATIONS_LOG_MODE_MAP} from '../../constants/frontEndConstants';
+    ,APP_JSON,OPERATIONS_LOG_MODE_MAP,
+    DEFAULT_PAGE_SIZE_OL,REALTIME} from '../../constants/frontEndConstants';
 import GorPaginateV2 from '../../components/gorPaginate/gorPaginateV2';
 import Spinner from '../../components/spinner/Spinner';
 import {Table, Column,Cell} from 'fixed-data-table';
@@ -68,7 +69,7 @@ class OperationsLogTab extends React.Component{
             query:this.props.location.query,
             subscribed:false,
             realTimeSubSent:false,
-            pageSize:this.props.location.query.pageSize || "25",
+            pageSize:this.props.location.query.pageSize || DEFAULT_PAGE_SIZE_OL,
             dataFetchedOnLoad:false,
             hideLayer:false,
             queryApplied:Object.keys(this.props.location.query).length ? true :false
@@ -118,7 +119,7 @@ class OperationsLogTab extends React.Component{
                 || (this.props.location.query.page !== nextProps.location.query.page)))){
             this.setState({
                 dataFetchedOnLoad:true,
-                realTimeSelected:nextProps.location.query.time_period === "realtime"
+                realTimeSelected:nextProps.location.query.time_period === REALTIME
             },function(){
                 this._getOperationsData(nextProps)
             })
@@ -231,7 +232,7 @@ class OperationsLogTab extends React.Component{
                     from:frm
                 }
 
-        if(query.time_period !== "realtime"){
+        if(query.time_period !== REALTIME){
             this.props.wsOLUnSubscribe();
             
             let params={
@@ -250,7 +251,7 @@ class OperationsLogTab extends React.Component{
                 realTimeSubSent:false
             })
         }
-        else if(query.time_period && query.time_period === "realtime" 
+        else if(query.time_period && query.time_period === REALTIME 
             && !this.state.realTimeSubSent && isSocketConnected){
             this.props.wsOLUnSubscribe(false);
             let wsParams = {}
@@ -275,8 +276,8 @@ class OperationsLogTab extends React.Component{
         var filterHeight=screen.height - 190 - 50;
         var dataSize = dataList.getSize();
         var timePeriod = this.props.location.query.time_period;
-        var noData = !dataSize && timePeriod !== "realtime";
-        var pageSizeDDDisabled = timePeriod === 'realtime' ;
+        var noData = !dataSize && timePeriod !== REALTIME;
+        var pageSizeDDDisabled = timePeriod === REALTIME ;
 		return (
 			<div className="gorTesting wrapper gor-operations-log">
                 <Spinner isLoading={this.props.reportsSpinner} setSpinner={this.props.setReportsSpinner}/>
@@ -320,7 +321,7 @@ class OperationsLogTab extends React.Component{
             
                     
              </div>
-             {this.props.location.query.time_period !== "realtime" ? 
+             {this.props.location.query.time_period !== REALTIME ? 
              <FilterSummary 
              total={dataSize} 
              isFilterApplied={this.props.filtersApplied}  
@@ -503,10 +504,10 @@ class OperationsLogTab extends React.Component{
                     options={pageSize} 
                     onSelectHandler={(e) => this._handlePageChange(e)}
                     disabled={pageSizeDDDisabled} 
-                    selectedOption={"25"}/>
+                    selectedOption={DEFAULT_PAGE_SIZE_OL}/>
                 </div>
                 <div className="gor-ol-paginate-right">
-                <GorPaginateV2 location={this.props.location} currentPage={this.state.query.page||1} totalPage={10}/>
+                <GorPaginateV2 disabled={pageSizeDDDisabled} location={this.props.location} currentPage={this.state.query.page||1} totalPage={10}/>
                 </div>
                 </div>
 			</div>
@@ -541,14 +542,14 @@ OperationsLogTab.defaultProps = {
 function mapStateToProps(state, ownProps) {
     return {
         socketAuthorized: state.recieveSocketActions.socketAuthorized,
-        showFilter: state.filterInfo.filterState || false,
-        olData:state.operationsLogsReducer.olData || [],
+        showFilter: state.filterInfo.filterState ,
+        olData:state.operationsLogsReducer.olData,
         hasDataChanged:state.operationsLogsReducer.hasDataChanged,
-        filtersApplied:state.operationsLogsReducer.filtersApplied || false,
-        filtersModified:state.operationsLogsReducer.filtersModified || false,
-        notificationSocketConnected:state.notificationSocketReducer.notificationSocketConnected || false,
-        reportsSpinner:state.operationsLogsReducer.reportsSpinner || false,
-        olWsData:state.operationsLogsReducer.olWsData || []
+        filtersApplied:state.operationsLogsReducer.filtersApplied,
+        filtersModified:state.operationsLogsReducer.filtersModified,
+        notificationSocketConnected:state.notificationSocketReducer.notificationSocketConnected,
+        reportsSpinner:state.operationsLogsReducer.reportsSpinner,
+        olWsData:state.operationsLogsReducer.olWsData
 
     };
 }

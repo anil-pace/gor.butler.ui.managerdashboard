@@ -16,6 +16,8 @@ class GorPaginateV2 extends React.Component {
             currentPage=+current_query.page
         }
         this.state={currentPage: currentPage, totalPage: props.totalPage, currentQuery: currentPage}
+        this.submit = this.submit.bind(this);
+        this._textSubmit = this._textSubmit.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -57,17 +59,18 @@ class GorPaginateV2 extends React.Component {
         var paginateButton={firstPg: "|<", lastPg: ">|", prevPg: "<", nextPg: ">"}
         var currentPage=+this.state.currentQuery;
         var totalPage=+this.state.totalPage;
+        var disabled = this.props.disabled;
         return (
             <div>
                 <div className="gor-paginate-wrap">
-                    <form onSubmit={this.submit.bind(this)}>
+                    <form onSubmit={!disabled ? this.submit : null}>
                         <div className="gor-paginate-input-box-wrap">
                             <div className="gor-paginate-text-wrap">
                                 <FormattedMessage id="paginate.page.heading" description='Heading for paginate page'
                                                   defaultMessage='Page'/>
                             </div>
-                            <input className="gor-paginate-input-box" type="text" value={currentPage}
-                                   onChange={this._textSubmit.bind(this)} ref={node=> {
+                            <input disabled={disabled} className="gor-paginate-input-box" type="text" value={currentPage}
+                                   onChange={!disabled ? this._textSubmit : null} ref={node=> {
                                 this.pageNum=node
                             }}/>
                             <div className="gor-paginate-text-wrap">
@@ -78,22 +81,22 @@ class GorPaginateV2 extends React.Component {
                         <div className="gor-button-wrap">
                             <div
                                 className={currentPage===1 ? "gor-paginate-left-btn gor-paginate-btn-disable" : "gor-paginate-left-btn"}
-                                onClick={currentPage !== 1 ?this._navigateToPage.bind(this, 1):false}>
+                                onClick={currentPage !== 1 && !disabled ?this._navigateToPage.bind(this, 1):null}>
                                 <span className="gor-pagination-first"/>
                             </div>
                             <div
                                 className={currentPage===1? "gor-paginate-middle-left-btn gor-paginate-btn-disable" : "gor-paginate-middle-left-btn"}
-                                onClick={(currentPage!==1)? this._navigateToPage.bind(this, currentPage - 1) : false}>
+                                onClick={currentPage!==1 && !disabled ? this._navigateToPage.bind(this, currentPage - 1) : null}>
                                 <span className="gor-pagination-previous"/>
                             </div>
                             <div
                                 className={(currentPage)=== (totalPage) ? "gor-paginate-middle-right-btn gor-paginate-btn-disable" : "gor-paginate-middle-right-btn"}
-                                onClick={currentPage!==totalPage ? this._navigateToPage.bind(this, (currentPage + 1)) : false}>
+                                onClick={currentPage!==totalPage && !disabled ? this._navigateToPage.bind(this, (currentPage + 1)) : null}>
                                 <span className="gor-pagination-next"/>
                             </div>
                             <div
                                 className={currentPage=== totalPage ? "gor-paginate-right-btn gor-paginate-btn-disable" : "gor-paginate-right-btn"}
-                                onClick={currentPage !== totalPage?this._navigateToPage.bind(this, totalPage):false}>
+                                onClick={currentPage !== totalPage && !disabled ?this._navigateToPage.bind(this, totalPage):null}>
                                 <span className="gor-pagination-last"/>
                             </div>
                         </div>
@@ -103,6 +106,8 @@ class GorPaginateV2 extends React.Component {
         );
     }
 }
-
+GorPaginateV2.defaultProps={
+    disabled:false
+}
 
 export  default GorPaginateV2;
