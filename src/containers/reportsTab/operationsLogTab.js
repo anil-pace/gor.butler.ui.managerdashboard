@@ -514,7 +514,29 @@ class OperationsLogTab extends React.Component{
 	}
 };
 
+OperationsLogTab.propTypes = {
+    olData: React.PropTypes.array,
+    socketAuthorized: React.PropTypes.bool,
+    showFilter: React.PropTypes.bool,
+    hasDataChanged: React.PropTypes.bool,
+    filtersApplied: React.PropTypes.bool,
+    filtersModified: React.PropTypes.bool,
+    notificationSocketConnected: React.PropTypes.bool,
+    reportsSpinner: React.PropTypes.bool,
+    olWsData: React.PropTypes.array
 
+}
+OperationsLogTab.defaultProps = {
+  olData: [],
+  socketAuthorized:false,
+  showFilter:false,
+  hasDataChanged:false,
+  filtersApplied:false,
+  filtersModified:false,
+  notificationSocketConnected:false,
+  reportsSpinner:true,
+  olWsData:[]
+}
 
 function mapStateToProps(state, ownProps) {
     return {

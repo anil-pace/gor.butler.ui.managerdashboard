@@ -1,10 +1,9 @@
 import React  from 'react';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
-import {showTableFilter, filterApplied,ppsfilterState} from '../../actions/filterAction';
+import {showTableFilter} from '../../actions/filterAction';
 import {applyOLFilterFlag} from '../../actions/operationsLogsActions';
 import { connect } from 'react-redux'; 
-import {updateSubscriptionPacket} from '../../actions/socketActions';
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
@@ -280,39 +279,31 @@ class OperationsFilter extends React.Component{
   }
 };
 
-
-function mapStateToProps(state, ownProps){
-  return {
-    
-    showFilter: state.filterInfo.filterState || false,
-    wsSubscriptionData:state.recieveSocketActions.socketDataSubscriptionPacket,
-    isFilterApplied: state.filterInfo.isFilterApplied || false
-  };
+OperationsFilter.propTypes={
+  filters:React.PropTypes.object,
+  noData: React.PropTypes.bool,
+  pageSize: React.PropTypes.string,
+  hideLayer:React.PropTypes.bool,
+  responseFlag: React.PropTypes.bool
 }
+OperationsFilter.defaultProps={
+  filters:{},
+  noData: false,
+  pageSize: "25",
+  hideLayer:true,
+  responseFlag: false
+}
+
 
 var mapDispatchToProps=function(dispatch){
   return {
     showTableFilter: function(data){dispatch(showTableFilter(data));},
-    filterApplied: function(data){dispatch(filterApplied(data));},
-    updateSubscriptionPacket: function(data){dispatch(updateSubscriptionPacket(data));},
     applyOLFilterFlag:function(data){dispatch(applyOLFilterFlag(data))}
 
   }
 };
-/*OperationsFilter.PropTypes={
-  PPSDetail:React.PropTypes.array,
- showFilter:React.PropTypes.bool,
- orderData:React.PropTypes.object,
- wsSubscriptionData:React.PropTypes.object,
- orderListSpinner:React.PropTypes.bool,
- isFilterApplied:React.PropTypes.bool,
- ppsFilterState:React.PropTypes.bool,
- showTableFilter:React.PropTypes.func,
-filterApplied: React.PropTypes.func,
-updateSubscriptionPacket:React.PropTypes.func,
-togglePPSFilter:React.PropTypes.func
-};*/
 
-export default connect(mapStateToProps,mapDispatchToProps,null,{withRef: true})(OperationsFilter) ;
+
+export default connect(null,mapDispatchToProps,null,{withRef: true})(OperationsFilter) ;
 
 

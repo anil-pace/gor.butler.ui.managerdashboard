@@ -3395,6 +3395,18 @@
     "filepath": "./src/containers/reportsTab/operationsLogTab.js"
   },
   {
+    "id": "operationsLog.filter.search.bar",
+    "description": "total waves for filter search bar",
+    "defaultMessage": "{total} Results found",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
+    "id": "operationsLog.filter.search.bar.showall",
+    "description": "button label for show all",
+    "defaultMessage": "Show all Operations",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
     "id": "operationLog.table.operatingMode",
     "description": "OPERATING MODE",
     "defaultMessage": "OPERATING MODE",
