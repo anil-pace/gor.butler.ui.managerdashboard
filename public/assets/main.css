@@ -8376,3 +8376,19 @@ button:disabled {
   float: none;
   vertical-align: top;
 }
+
+.gor-operations-log .gor-rpt-dwnld {
+  height: 35px;
+  border-radius: 3px;
+  background-color: #4d5055;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  font-family: "source sans pro";
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  color: #ffffff;
+  padding-left: 14px;
+  padding-right: 14px;
+  vertical-align: sub;
+  cursor: pointer;
+}

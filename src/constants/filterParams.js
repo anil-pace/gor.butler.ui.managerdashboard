@@ -52,10 +52,10 @@ export const REPORTS_FILTER_PARAMS = [{
 	type:"token",
 	tokens:{
 		"any":"Any",
-		"pick front":"Pick Front",
-		"put front":"Put Front",
-		"pick back":"Pick Back",
-		"put back":"Put Back",
+		"pick_front":"Pick Front",
+		"put_front":"Put Front",
+		"pick_back":"Pick Back",
+		"put_back":"Put Back",
 		"audit":"Audit"
 
 	},

@@ -66,9 +66,9 @@ class OperationsFilter extends React.Component{
         /**
          * Hide the filter as soon as data in the list get updated.
          */
-        /*if(!nextProps.hideLayer){
+        if(nextProps.hideLayer){
             this.props.showTableFilter(false);
-        }*/
+        }
     }
 
     _processFilterParams(){
@@ -188,19 +188,28 @@ class OperationsFilter extends React.Component{
     }
 
     _clearFilter(){
-        this.props.ppsfilterState({
-            tokenSelected: {
-                "status": ["any"],
-                "timeperiod": ["any"]
-            },
-            searchQuery: {
-                "request_id": "",
-                "sku_id": "",
-                "pps_id": "",
-                "user_id": ""
-            }
+        this.setState({
+        tokenSelected: {
+          "status":["any"], 
+          "timeperiod":["1_HOUR"],
+          "operatingMode":["any"]
+        }, 
+        searchQuery: {
+          "request_id": "",
+          "sku_id":"",
+          "pps_id": "",
+          "user_id":""
+        },
+        defaultToken: {
+          "status":["any"],
+          "operatingMode":["any"],
+          "timeperiod":["1_HOUR"]
+        }
+        },function(){
+          this.props.applyOLFilterFlag(false);
+          hashHistory.push({pathname: "/reports/operationsLog", query: {}})
         })
-        hashHistory.push({pathname: "/reports/operationsLog", query: {}})
+        
 
     } 
 
@@ -210,7 +219,7 @@ class OperationsFilter extends React.Component{
         var filterParams = this._processFilterParams();
         let olSearchField=this._processSearchField(filterParams.filterInputFields);
         let olFilterToken=this._processFilterToken(filterParams);
-        var noData = this.props.dataCount;
+        var noData = this.props.noData;
     return (
       <div>
                  <Filter>    
@@ -304,6 +313,6 @@ updateSubscriptionPacket:React.PropTypes.func,
 togglePPSFilter:React.PropTypes.func
 };*/
 
-export default connect(mapStateToProps,mapDispatchToProps)(OperationsFilter) ;
+export default connect(mapStateToProps,mapDispatchToProps,null,{withRef: true})(OperationsFilter) ;
 
 

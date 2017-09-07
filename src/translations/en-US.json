@@ -3383,6 +3383,12 @@
     "filepath": "./src/containers/reportsTab/operationsLogTab.js"
   },
   {
+    "id": "operationLog.table.downloadBtn",
+    "description": "button label for download report",
+    "defaultMessage": "Download Report",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
     "id": "gor.filter.filterLabel",
     "description": "button label for filter",
     "defaultMessage": "Filter data",

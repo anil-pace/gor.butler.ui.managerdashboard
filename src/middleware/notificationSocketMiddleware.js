@@ -22,7 +22,6 @@ const notificationSocketMiddleware = (function(){
         NotificationResponseParse(store,msg);  
         break;  
       case 'operations':
-        console.log('ops called');
         OLResponseParse(store,msg)
         break; 
         default:
@@ -87,7 +86,7 @@ const notificationSocketMiddleware = (function(){
         socket.send(JSON.stringify(action.data));
         break;
       case WS_NOTIFICATION_SUBSCRIBE:
-        //socket.subscribe(action.data,onMessage(socket,store,'notifications'));
+        socket.subscribe(action.data,onMessage(socket,store,'notifications'));
         break;
       case WS_OPERATOR_LOG_SUBSCRIBE:
         if(socket && !operatorLogWSClient){

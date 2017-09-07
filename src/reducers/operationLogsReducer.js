@@ -16,7 +16,8 @@ export  function operationsLogsReducer(state={},action){
       })
 	  case APPLY_OL_FILTER_FLAG:
 	  	 return Object.assign({}, state, {
-	    	filtersApplied:action.data
+	    	filtersApplied:action.data,
+	    	filtersModified: !state.filtersModified
       })
 	  case SET_REPORTS_SPINNER:
 	  	return Object.assign({}, state, {
