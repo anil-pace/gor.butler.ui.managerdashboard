@@ -4,6 +4,7 @@ import {WS_NOTIFICATION_CONNECT,WS_NOTIFICATION_DISCONNECT,
   WS_OPERATOR_LOG_SUBSCRIBE,WS_OPERATOR_LOG_UNSUBSCRIBE} from '../constants/frontEndConstants'
 import {WS_NOTIFICATION_URL,WS_URL} from '../constants/configConstants';
 import {NotificationResponseParse} from '../utilities/notificationResponseParser';
+import {OLResponseParse} from '../utilities/operationLogsResParser';
 import SockJS from 'sockjs-client';
 import webstomp from 'webstomp-client';
 
@@ -21,7 +22,7 @@ const notificationSocketMiddleware = (function(){
         NotificationResponseParse(store,msg);  
         break;  
       case 'operations':
-        console.log('ops called');
+        OLResponseParse(store,msg)
         break; 
         default:
         //do nothing 

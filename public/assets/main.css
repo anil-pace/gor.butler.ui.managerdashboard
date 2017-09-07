@@ -8378,6 +8378,27 @@ button:disabled {
 }
 
 .gor-operations-log .gor-no-data {
-  padding-top: 150px;
+  padding-top: 9.375rem;
   height: 8vw;
+}
+
+.gor-operations-log .gor-filter-body-filterToken-section1 {
+  float: none;
+  vertical-align: top;
+}
+
+.gor-operations-log .gor-rpt-dwnld {
+  height: 2.1875rem;
+  border-radius: 3px;
+  background-color: #4d5055;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  font-family: "source sans pro";
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-align: left;
+  color: #ffffff;
+  padding-left: 0.875rem;
+  padding-right: 0.875rem;
+  vertical-align: sub;
+  cursor: pointer;
 }

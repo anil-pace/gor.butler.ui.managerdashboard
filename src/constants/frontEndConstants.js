@@ -700,9 +700,20 @@ export const OPERATIONS_LOG_REQUEST_PARAMS=  {
         "type": ""
     }
 }
+export const OPERATIONS_LOG_MODE_MAP=  {
+    "put_front":"Put Front",
+    "pick_front":"Put Front",
+    "put_back":"Put Back",
+    "pick_back":"Pick Back",
+    "pick_back":"Pick Back",
+    "audit":"Audit"
+}
 
 export const APPLY_OL_FILTER_FLAG = "APPLY_OL_FILTER_FLAG";
 export const WS_OPERATOR_LOG_SUBSCRIBE = "WS_OPERATOR_LOG_SUBSCRIBE";
 export const WS_OPERATOR_LOG_UNSUBSCRIBE = "WS_OPERATOR_LOG_UNSUBSCRIBE";
 export const SET_REPORTS_SPINNER = "SET_REPORTS_SPINNER";
+export const RECIEVE_WS_OL_DATA="RECIEVE_WS_OL_DATA";
+export const DEFAULT_PAGE_SIZE_OL = "25";
+export const REALTIME = "realtime";
 
