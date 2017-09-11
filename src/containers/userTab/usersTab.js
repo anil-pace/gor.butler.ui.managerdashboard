@@ -322,7 +322,7 @@ class UsersTab extends React.Component {
                                        lastUpdatedText={updateStatusIntl}
                                        lastUpdated={updateStatusIntl}
                                        showFilter={this.props.showFilter}
-                                       setFilter={this.props.showTableFilter}/>
+                                       setFilter={this.props.showTableFilter} noResultFound={this.props.noResultFound}/>
                     </div>
                 </div>
             </div>
@@ -337,6 +337,7 @@ function mapStateToProps(state, ownProps) {
     return {
         userFilter: state.sortHeaderState.userFilter || "",
         userdetails: state.userDetails.userDetails || [],
+        noResultFound:state.userDetails.noResultFound,
         intlMessages: state.intl.messages,
         manager: state.headerData.headerInfo || [],
         userSortHeader: state.sortHeaderState.userHeaderSort || "role",

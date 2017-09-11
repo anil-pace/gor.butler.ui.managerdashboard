@@ -109,7 +109,7 @@ class WaveFilter extends React.Component {
 
     render() {
         var waveDetail=this.props.waveData;
-        var noOrder=waveDetail.waveData && waveDetail.waveData.length ? false : true;
+        var noOrder=this.props.noResultFound;
         let waveSearchField=this._processWaveSearchField();
         let waveFilterToken=this._processFilterToken();
         return (
@@ -172,7 +172,8 @@ function mapStateToProps(state, ownProps) {
         isFilterApplied: state.filterInfo.isFilterApplied || false,
         waveFilterStatus: state.filterInfo.waveFilterStatus || false,
         wavesSpinner: state.spinner.wavesSpinner || false,
-        waveFIlterSpinner: state.spinner.waveFIlterSpinner || false
+        waveFIlterSpinner: state.spinner.waveFIlterSpinner || false,
+        noResultFound: state.waveInfo.noResultFound,
 
     };
 }
