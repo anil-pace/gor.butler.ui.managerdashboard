@@ -34,7 +34,7 @@ import OrderListTable from './orderListTable';
 import Dropdown from '../../components/dropdown/dropdown'
 import {FormattedMessage, defineMessages, FormattedRelative} from 'react-intl';
 import Spinner from '../../components/spinner/Spinner';
-import {setOrderListSpinner, orderListRefreshed} from '../../actions/orderListActions';
+import {setOrderListSpinner, orderListRefreshed,setOrderQuery} from '../../actions/orderListActions';
 import {stringConfig} from '../../constants/backEndConstants';
 import {orderHeaderSortOrder, orderHeaderSort, orderFilterDetail} from '../../actions/sortHeaderActions';
 import {getDaysDiff} from '../../utilities/getDaysDiff';
@@ -218,7 +218,9 @@ class OrderListTab extends React.Component {
             searchQuery: {"ORDER ID": query.orderId || ''},
             "PAGE": query.page || 1
         });
+        this.props.setOrderQuery({query:query})
         this.props.getPageData(paginationData);
+
     }
 
     /**
@@ -395,10 +397,15 @@ class OrderListTab extends React.Component {
     //To check where the object is empty or not
 
     refresh=(data,pageSize)=> {
-        var locationQuery=this.props.location.query;
+        var locationQuery=this.props.orderData.successQuery;
         if(locationQuery && Object.keys(locationQuery).length)
         {
-            this._refreshList(this.props.location.query,data);
+            if(this.props.orderData.noResultFound){
+                hashHistory.push({pathname: "/orders/orderlist", query: locationQuery})
+            }else{
+                this._refreshList(locationQuery,data);
+            }
+
         }
         else
         {
@@ -727,6 +734,9 @@ var mapDispatchToProps=function (dispatch) {
         },
         initDataSentCall: function (data) {
             dispatch(setWsAction({type: WS_ONSEND, data: data}));
+        },
+        setOrderQuery: function (data) {
+            dispatch(setOrderQuery(data));
         },
 
 

@@ -26,6 +26,9 @@ class Dropdown extends Component {
   }
 
   _onSelect(value,isInternal){
+      if(!value){
+          return
+      }
     var options = this.props.options,
     selectedOption = {},
     matched = false,
