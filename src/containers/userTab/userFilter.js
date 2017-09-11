@@ -19,6 +19,9 @@ class UserFilter extends React.Component {
             searchQuery: {},
             defaultToken: {"STATUS": ["all"], "ROLE": ["all"], "WORK MODE": ["all"], "LOCATION": ["all"]}
         };
+         this._applyFilter =  this._applyFilter.bind(this);
+        this._closeFilter = this._closeFilter.bind(this);
+        this._clearFilter = this._clearFilter.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -215,17 +218,58 @@ class UserFilter extends React.Component {
         let userFilterToken=this._processFilterToken();
         return (
             <div>
-                <Filter hideFilter={this._closeFilter.bind(this)}
-                        clearFilter={this._clearFilter.bind(this)}
-                        searchField={userSearchField}
-                        filterTokenC1={userFilterToken.column1token}
-                        filterTokenC2={userFilterToken.column2token}
-                        filterTokenC3={userFilterToken.column3token}
-                        filterTokenC4={userFilterToken.column4token}
-                        formSubmit={this._applyFilter.bind(this)}
-                        responseFlag={this.props.isLoading}
-                        noDataFlag={noOrder}
-                />
+                <Filter>
+                <div className="gor-filter-header">
+                    <div className="gor-filter-header-h1">
+                         <FormattedMessage id="gor.filter.filterLabel" description="label for filter" 
+            defaultMessage="Filter data"/>
+                    </div>
+                    <div className="gor-filter-header-h2" onClick={this._closeFilter}>
+                        <FormattedMessage id="gor.filter.hide" description="label for hide" 
+                            defaultMessage="Hide"/>
+                    </div>
+                 </div>
+                    <div>{noOrder?
+                            <div className="gor-no-result-filter"><FormattedMessage id="gor.filter.noResult" description="label for no result" 
+                            defaultMessage="No results found, please try again"/></div>:""}
+                    </div>
+                     <div className="gor-filter-body">
+                         <div className="gor-filter-body-input-wrap"> 
+                            {userSearchField}
+                         </div>
+                         <div className="gor-filter-body-filterToken-wrap"> 
+                            <div className="gor-filter-body-filterToken-section1">
+                                {userFilterToken.column1token}
+                            </div>
+                            <div className="gor-filter-body-filterToken-section1">
+                                {userFilterToken.column2token}
+                            </div>
+                            <div className="gor-filter-body-filterToken-section1">
+                                {userFilterToken.column3token}
+                            </div>
+                            <div className="gor-filter-body-filterToken-section1">
+                                {userFilterToken.column4token}
+                            </div>
+                            
+
+                         </div>
+                        
+                         
+                     </div>
+                 <div className="gor-filter-footer"> 
+                    <span className="gor-filter-footer-h2" onClick={this._clearFilter}>
+                         <FormattedMessage id="gor.filter.reset" description="label for reset" 
+                            defaultMessage="Reset"/>
+                    </span>
+                    <div className="gor-filter-btn-wrap">
+                        <button className='gor-add-btn' onClick={this._applyFilter}>
+                            {!this.props.isLoading? <FormattedMessage id="gor.filter.heading" description="filter heading"  defaultMessage="Apply filter"/> :<div className='spinnerImage'></div>}
+                        </button>
+
+
+                    </div> 
+                 </div>
+                </Filter>
             </div>
         );
     }
