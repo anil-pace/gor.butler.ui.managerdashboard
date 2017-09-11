@@ -30,6 +30,9 @@ class AuditFilter extends React.Component {
             tokenSelected: {"AUDIT TYPE": [ANY], "STATUS": [ALL]}, searchQuery: {},
             defaultToken: {"AUDIT TYPE": [ANY], "STATUS": [ALL]}
         };
+         this._applyFilter =  this._applyFilter.bind(this);
+        this._closeFilter = this._closeFilter.bind(this);
+        this._clearFilter = this._clearFilter.bind(this);
     }
 
     _closeFilter() {
@@ -169,15 +172,52 @@ class AuditFilter extends React.Component {
         var auditFilterToken=this._processFilterToken();
         return (
             <div>
-                <Filter hideFilter={this._closeFilter.bind(this)}
-                        clearFilter={this._clearFilter.bind(this)}
-                        searchField={auditSearchField}
-                        filterTokenC1={auditFilterToken.column1token}
-                        filterTokenC2={auditFilterToken.column2token}
-                        formSubmit={this._applyFilter.bind(this)}
-                        responseFlag={this.props.auditSpinner}
-                        noDataFlag={noOrder}
-                />
+                <Filter>
+                                <div className="gor-filter-header">
+                    <div className="gor-filter-header-h1">
+                         <FormattedMessage id="gor.filter.filterLabel" description="label for filter" 
+            defaultMessage="Filter data"/>
+                    </div>
+                    <div className="gor-filter-header-h2" onClick={this._closeFilter}>
+                        <FormattedMessage id="gor.filter.hide" description="label for hide" 
+                            defaultMessage="Hide"/>
+                    </div>
+                 </div>
+                    <div>{noOrder?
+                            <div className="gor-no-result-filter"><FormattedMessage id="gor.filter.noResult" description="label for no result" 
+                            defaultMessage="No results found, please try again"/></div>:""}
+                    </div>
+                     <div className="gor-filter-body">
+                         <div className="gor-filter-body-input-wrap"> 
+                            {auditSearchField}
+                         </div>
+                         <div className="gor-filter-body-filterToken-wrap"> 
+                            <div className="gor-filter-body-filterToken-section1">
+                                {auditFilterToken.column1token}
+                            </div>
+                            <div className="gor-filter-body-filterToken-section1">
+                                {auditFilterToken.column2token}
+                            </div>
+                            
+
+                         </div>
+                        
+                         
+                     </div>
+                 <div className="gor-filter-footer"> 
+                    <span className="gor-filter-footer-h2" onClick={this._clearFilter}>
+                         <FormattedMessage id="gor.filter.reset" description="label for reset" 
+                            defaultMessage="Reset"/>
+                    </span>
+                    <div className="gor-filter-btn-wrap">
+                        <button className='gor-add-btn' onClick={this._applyFilter}>
+                            {!this.props.auditSpinner? <FormattedMessage id="gor.filter.heading" description="filter heading"  defaultMessage="Apply filter"/> :<div className='spinnerImage'></div>}
+                        </button>
+
+
+                    </div> 
+                 </div>
+                </Filter>
             </div>
         );
     }
