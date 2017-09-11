@@ -65,13 +65,6 @@ class PPStable extends React.Component {
 
     }
 
-    shouldComponentUpdate(nextProps) {
-        if (this.props.items && nextProps.items.length=== 0) {
-            return false;
-        }
-        return true;
-    }
-
     confirmApplyProfileChanges(pps_id,profile_name){
         modal.add(ConfirmApplyProfile, {
             title: '',
