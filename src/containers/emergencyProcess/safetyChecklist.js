@@ -258,7 +258,7 @@ class SafetyChecklist extends React.Component{
                 {this.props.emergency_type===EMERGENCY_FIRE?
                 (<button type="submit" className="gor-add-btn" disabled={(!this.state.allChecked)?true:false}
                   onClick={this._handleSafetyConfirm.bind(this)}><FormattedMessage id='operation.firesafety.confirm' 
-                    defaultMessage="Resume Opeartion" description="Text for Resume Opeartion button"/>
+                    defaultMessage="Resume Operation" description="Text for Resume Operation button"/>
                     <Spinner isLoading={this.props.safetySpinner} setSpinner={this.props.setSafetySpinner}/>
                     </button>):
                     (<button type="submit" className="gor-add-btn" disabled={(!this.state.allChecked)?true:false}

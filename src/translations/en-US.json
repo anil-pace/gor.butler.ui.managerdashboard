@@ -2593,8 +2593,8 @@
   },
   {
     "id": "operation.firesafety.confirm",
-    "description": "Text for Resume Opeartion button",
-    "defaultMessage": "Resume Opeartion",
+    "description": "Text for Resume Operation button",
+    "defaultMessage": "Resume Operation",
     "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
   },
   {
