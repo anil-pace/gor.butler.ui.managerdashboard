@@ -8,7 +8,7 @@ import SubTab from '../../components/subtab/subTab';
 import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
 import {subTabSelected} from '../../actions/tabSelectAction'
-import { OPERATIONS_LOG,REPORTS_SUB_TAB_ROUTE_MAP} from '../../constants/frontEndConstants';
+import { OPERATIONS_LOG,REPORTS_SUB_TAB_ROUTE_MAP,DOWNLOAD_REPORT} from '../../constants/frontEndConstants';
 import { FormattedMessage } from 'react-intl';
 
 
@@ -16,25 +16,19 @@ class ReportsTab extends React.Component{
 	constructor(props) 
 	{
     	super(props);
+
     }
 
     handleSysSubTabClick(tabName){
       this.props.subTabSelected(REPORTS_SUB_TAB_ROUTE_MAP[tabName]);
       sessionStorage.setItem("subTab",REPORTS_SUB_TAB_ROUTE_MAP[tabName])
-      switch((REPORTS_SUB_TAB_ROUTE_MAP[tabName]).toUpperCase()){
-  				case OPERATIONS_LOG:
-  				//this.props.setOrderListSpinner(true);
-  				break;
-
-  				default:
-  				
-  			}
     }
     
 	render(){
 		
 		
 		let operationsLog=<FormattedMessage id="reportsTab.operationsLog" description="Operations Log tab for Reports tab" defaultMessage="Operations Log"/> 
+		let downloadReport=<FormattedMessage id="reportsTab.downloadReport" description="Operations Log tab for Reports tab" defaultMessage="Download"/> 
     	
     
 		return (
@@ -43,6 +37,9 @@ class ReportsTab extends React.Component{
 					
 					<Link to="/reports/operationsLog" onClick={this.handleSysSubTabClick.bind(this,OPERATIONS_LOG)}>
 						<SubTab item={operationsLog} changeClass={"gor-main-blockSelect"}/> 
+					</Link>
+					<Link to="/reports/downloadReport" onClick={this.handleSysSubTabClick.bind(this,DOWNLOAD_REPORT)}>
+						<SubTab item={downloadReport} changeClass={"gor-main-blockSelect"}/> 
 					</Link>
 					{this.props.children}
 				</div>

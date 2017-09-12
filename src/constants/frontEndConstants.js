@@ -112,11 +112,12 @@ export const PPS_TAB="Pick Put Stations";
 export const ORDER_LIST="Order List";
 export const PPS_CONFIGURATION="PPS Configuration";
 export const WAVES="Waves";
-export const OPERATIONS_LOG="operationsLog"
+export const OPERATIONS_LOG="operationsLog";
 export const BUTLERBOTS="butlerbots";
 export const CHARGING="chargingstation";
 export const PPS="pps";
 export const ORDERLIST="ORDERLIST";
+export const DOWNLOAD_REPORT="downloadReport"
 export const TAB_CLASS={
 	overview:"gorMainBlock", 
 	system:"gorMainBlock",
@@ -297,7 +298,9 @@ export const SYS_SUB_TAB_ROUTE_MAP={
 
 }
 export const REPORTS_SUB_TAB_ROUTE_MAP={
-	[OPERATIONS_LOG] : "operationsLog"
+	[OPERATIONS_LOG] : "operationsLog",
+	[DOWNLOAD_REPORT]:"downloadReport"
+
 
 }
 export const SHOW_UTILITY_TAB=true;

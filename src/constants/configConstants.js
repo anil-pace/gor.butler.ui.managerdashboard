@@ -1,4 +1,4 @@
-export const BASE_URL = 'localhost';
+export const BASE_URL = '192.168.8.103';
 export const PROTOCOL = 'https://';
 export const WS_PROTOCOL ="wss://";
 export const WS_URL = WS_PROTOCOL+BASE_URL+"/manager_api/wss";
@@ -49,9 +49,9 @@ export const REPORTS_HISTORY_URL=API_URL+"/components/reports_info"
 export const GET_MD_CONFIG_URL=API_URL + "/components/get_md_config";
 export const GET_MAXSIZE_FILE_URL=API_URL + "/components/get_mdm_file_size";
 /*URLs for notification*/
-export const WS_NOTIFICATION_URL =  API_URL+"/platform-dashboard/dashboard-stomp";
-export const NOTIFICATIONS_URL =  API_URL+"/api-gateway/dashboard-service/platform-dashboard/event";
-export const READ_MSG_URL = API_URL+"/api-gateway/dashboard-service/platform-dashboard/event/mark-as-read";
+export const WS_NOTIFICATION_URL =  "http://192.168.8.116:8080"+"/platform-dashboard/dashboard-stomp";
+export const NOTIFICATIONS_URL =  "http://192.168.8.116:8080"+"/api-gateway/dashboard-service/platform-dashboard/event";
+export const READ_MSG_URL = "http://192.168.8.116:8080"+"/api-gateway/dashboard-service/platform-dashboard/event/mark-as-read";
 export const WS_NOTIFICATION_SUBSCRIPTION = '/dashboard/notification';
 /**
  * URLs or PPS Configurations
@@ -67,7 +67,7 @@ export const SAVE_PROFILE_URL=API_URL+"/pps_profiles/"//TODO: URL need to be cha
  * URLs for Operations Log Report
  */
 
-export const OPERATIONS_LOG_URL =  API_URL+"/api-gateway/dashboard-service/platform-dashboard/operator/logs/search";
+export const OPERATIONS_LOG_URL =  "http://192.168.8.116:8080"+"/api-gateway/dashboard-service/platform-dashboard/operator/logs/search";
 export const WS_OPERATIONS_LOG_SUBSCRIPTION =  "/dashboard/operator/logs/live/25";//An arbitrary count has to be passed in this API
 
 

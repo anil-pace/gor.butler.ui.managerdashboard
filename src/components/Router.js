@@ -329,6 +329,13 @@ class Routes extends React.Component {
                                    }, "operationsLogTab");
                                }}
                         />
+                         <Route onEnter={this._handleNavigationChanges.bind(this)} name="downloadReport" path="/reports/downloadReport"
+                               getComponent={(location, callback)=> {
+                                   require.ensure([], function (require) {
+                                       callback(null, require('../containers/reportsTab/downloadReportTab.js').default);
+                                   }, "downloadReportTab");
+                               }}
+                        />
 
                         
                     </Route>
