@@ -212,7 +212,7 @@ class UserFilter extends React.Component {
 
     render() {
         let userDetail=this.props.userDetails;
-        let noOrder=userDetail.userDetails && userDetail.userDetails.length ? false : true;
+        let noOrder=userDetail.noResultFound;
 
         let userSearchField=this._processUserSearchField();
         let userFilterToken=this._processFilterToken();

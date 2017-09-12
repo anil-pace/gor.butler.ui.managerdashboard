@@ -116,7 +116,7 @@ class OrderFilter extends React.Component{
 
 
     render(){
-        var noOrder=this.props.orderData.totalOrders?false:true;
+        var noOrder=this.props.orderData.noResultFound;
         var orderSearchField=this._processOrderSearchField();
         var orderFilterToken=this._processFilterToken();
         return (

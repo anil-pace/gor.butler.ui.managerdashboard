@@ -54,14 +54,6 @@ class WavesTable extends React.Component {
         this._onColumnResizeEndCallback=this._onColumnResizeEndCallback.bind(this);
     }
 
-    shouldComponentUpdate(nextProps) {
-        if(this.props.items  && nextProps.items.length===0) {
-            return false;
-        }
-        return true;
-    }
-
-
     componentWillReceiveProps(nextProps) {
         if (nextProps.items && nextProps.items.length) {
             this._dataList=new tableRenderer(nextProps.items.length);

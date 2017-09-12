@@ -130,7 +130,7 @@ class ButlerBotFilter extends React.Component{
 
 	render(){
     let butlerDetails=this.props.butlerDetail;
-         let noOrder=butlerDetails.butlerDetail && butlerDetails.butlerDetail.length?false:true;
+         let noOrder=this.props.noResultFound;
         let butlerSearchField=this._processButlerSearchField();
         let butlerFilterToken=this._processFilterToken();
 		return (
@@ -190,6 +190,7 @@ class ButlerBotFilter extends React.Component{
 function mapStateToProps(state, ownProps){
   return {
     butlerDetail: state.butlerDetail || [],
+    noResultFound: state.butlerDetail.noResultFound,
     showFilter: state.filterInfo.filterState || false,
     wsSubscriptionData:state.recieveSocketActions.socketDataSubscriptionPacket,
     filterState: state.filterInfo.butlerFilterState,

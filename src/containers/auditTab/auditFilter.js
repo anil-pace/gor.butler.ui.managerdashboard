@@ -69,8 +69,8 @@ class AuditFilter extends React.Component {
         var inputValue=this.state.searchQuery;
         var textboxStatus=this.props.textboxStatus || {};
         var inputField=<FilterInputFieldWrap inputText={filterInputFields}
-                                               handleInputText={this._handleInputQuery.bind(this)}
-                                               inputValue={inputValue} textboxStatus={textboxStatus}/>
+                                             handleInputText={this._handleInputQuery.bind(this)}
+                                             inputValue={inputValue} textboxStatus={textboxStatus}/>
         return inputField;
     }
 
@@ -101,9 +101,9 @@ class AuditFilter extends React.Component {
         ];
         var selectedToken=this.state.tokenSelected;
         var column1=<FilterTokenWrap field={tokenStatusField} tokenCallBack={this._handelTokenClick.bind(this)}
-                                       label={labelC2} selectedToken={selectedToken}/>;
+                                     label={labelC2} selectedToken={selectedToken}/>;
         var column2=<FilterTokenWrap field={tokenAuditTypeField} tokenCallBack={this._handelTokenClick.bind(this)}
-                                       label={labelC1} selectedToken={selectedToken} selection={SINGLE}/>;
+                                     label={labelC1} selectedToken={selectedToken} selection={SINGLE}/>;
         var columnDetail={column1token: column1, column2token: column2};
         return columnDetail;
     }
@@ -114,7 +114,7 @@ class AuditFilter extends React.Component {
         var selectedToken=this.state.tokenSelected['AUDIT TYPE'];
         var token=[value];
         this.setState({tokenSelected: handelTokenClick(field, value, state, this.state)});
-       
+
         if (state !== 'addDefault') {
             obj.name=mappingArray(selectedToken);
             tokentoRemove=mappingArray(token,selectedToken);
@@ -167,7 +167,7 @@ class AuditFilter extends React.Component {
     }
 
     render() {
-        var noOrder=this.props.totalAudits ? false : true;
+        var noOrder=this.props.noResultFound;
         var auditSearchField=this._processAuditSearchField();
         var auditFilterToken=this._processFilterToken();
         return (
@@ -230,6 +230,7 @@ function mapStateToProps(state, ownProps) {
         showFilter: state.filterInfo.filterState || false,
         auditSpinner: state.spinner.auditSpinner || false,
         totalAudits: state.recieveAuditDetail.totalAudits || 0,
+        noResultFound: state.recieveAuditDetail.noResultFound || 0,
         auditFilterState: state.filterInfo.auditFilterState,
         auditFilterStatus: state.filterInfo.auditFilterStatus,
         textboxStatus: state.auditInfo.textBoxStatus || {}

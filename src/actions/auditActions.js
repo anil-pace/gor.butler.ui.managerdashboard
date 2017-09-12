@@ -10,7 +10,7 @@ import {
     SET_AUDIT_ORDERLINES,
     VALIDATED_ATTIBUTES_DATA,
     TEXTBOX_STATUS,
-    AUDIT_LIST_REFRESHED
+    AUDIT_LIST_REFRESHED,SET_AUDIT_QUERY
 } from '../constants/frontEndConstants'
 
 export function getAuditData(params) {
@@ -104,6 +104,13 @@ export function cancelAudit(params) {
     return {
         type: AJAX_CALL,
         params
+    }
+}
+
+export function setAuditQuery(data){
+    return {
+        type:SET_AUDIT_QUERY,
+        data
     }
 }
 
