@@ -66,9 +66,8 @@ export const SAVE_PROFILE_URL=API_URL+"/pps_profiles/"//TODO: URL need to be cha
 /**
  * URLs for Operations Log Report
  */
-
-export const OPERATIONS_LOG_URL =  "http://192.168.8.116:8080/api-gateway/dashboard-service/platform-dashboard/operator/logs/search";
-export const WS_OPERATIONS_LOG_SUBSCRIPTION =  "/operator/logs/live/25";
+export const OPERATIONS_LOG_URL =  API_URL+"/api-gateway/dashboard-service/platform-dashboard/operator/logs/search";
+export const WS_OPERATIONS_LOG_SUBSCRIPTION =  "/dashboard/operator/logs/live/25";//An arbitrary count has to be passed in this API
 
 
 
