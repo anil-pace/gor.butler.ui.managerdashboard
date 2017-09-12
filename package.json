@@ -26,7 +26,7 @@
     "react-dom": "15.2.0",
     "react-dropdown": "1.2.0",
     "react-hot-loader": "3.0.0-beta.5",
-    "react-intl": "2.1.5",
+    "react-intl": "git+https://github.com/himanshuara/react-intl.git",
     "react-intl-cra": "0.2.0",
     "react-intl-redux": "0.1.0",
     "react-intl-webpack-plugin": "0.0.3",
