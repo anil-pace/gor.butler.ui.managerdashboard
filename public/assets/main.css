@@ -172,7 +172,8 @@ body {
 .statusOl, .statusAl, .iStock, .iAudit, .iPick, .gor-login-user, .gor-login-password, .gor-login-error, .gor-tick, .gor-question, .gor-tick-white, .gor-remove-white, .gor-error-white, .gor-login-user-error, .gor-login-password-error, .gor-question-2, .gor-operation-tick, .gor-alert-lg,
 .gor-dropdown-open, .gor-dropdown-close, .gor-caution, .gor-delay-icon,
 .gor-emergency-dropdown-close, .gor-emergency-dropdown-open, .gor-info-icon, .gor-selected-icon, .not-bell, .searchIcon, .not-statusIcon,
-.calloutArr, .gor-audit-info-icon, .gor-resume-icon, .gor-zone-status, .action-icon, .gor-up-arrow, .gor-tag-icon, .gor-tag-icon-grey {
+.calloutArr, .gor-audit-info-icon, .gor-resume-icon, .gor-zone-status, .action-icon, .gor-up-arrow, .gor-tag-icon, .gor-tag-icon-grey,
+.dwnload-rpt-ico {
   background-image: url(./images/icons.svg);
 }
 
@@ -8401,4 +8402,37 @@ button:disabled {
   padding-right: 0.875rem;
   vertical-align: sub;
   cursor: pointer;
+}
+
+.gor-download-rpts .gor-rpt-dwnld {
+  min-width: 60%;
+  border-radius: 3px;
+  background-color: #fff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  font-family: "source sans pro";
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: left;
+  color: #4d5055;
+  padding: 0.5rem 0.625rem;
+  cursor: pointer;
+  border: 1px solid #4d5055;
+}
+
+.gor-download-rpts .gor-rpt-dwnld .ico-wrap {
+  display: inline-block;
+  width: 20%;
+}
+
+.gor-download-rpts .gor-rpt-dwnld .ico-txt-wrp {
+  display: inline-block;
+  width: 80%;
+}
+
+.gor-download-rpts .gor-rpt-dwnld .dwnload-rpt-ico {
+  background-position: -373px -76px;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  vertical-align: middle;
 }

@@ -69,6 +69,8 @@ export const SAVE_PROFILE_URL=API_URL+"/pps_profiles/"//TODO: URL need to be cha
 
 export const OPERATIONS_LOG_URL =  "http://192.168.8.116:8080"+"/api-gateway/dashboard-service/platform-dashboard/operator/logs/search";
 export const WS_OPERATIONS_LOG_SUBSCRIPTION =  "/dashboard/operator/logs/live/25";//An arbitrary count has to be passed in this API
+export const REPORTS_URL = "http://192.168.8.116:8080"+"/api-gateway/dashboard-service/platform-dashboard/report/find-by-page";
+export const DOWNLOAD_REPORT = "http://192.168.8.116:8080"+"/api-gateway/dashboard-service/platform-dashboard/report/download/"
 
 
 

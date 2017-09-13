@@ -719,6 +719,10 @@ export const SET_REPORTS_SPINNER = "SET_REPORTS_SPINNER";
 export const RECIEVE_WS_OL_DATA="RECIEVE_WS_OL_DATA";
 export const DEFAULT_PAGE_SIZE_OL = "25";
 export const REALTIME = "realtime";
+export const REPORTS_FETCH = "REPORTS_FETCH";
+export const GET_REPORT = "GET_REPORT";
+
+/*COnstants for audit query*/
 export const SET_ORDER_QUERY = "SET_ORDER_QUERY";
 export const SET_AUDIT_QUERY = "SET_AUDIT_QUERY";
 
