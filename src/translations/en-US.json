@@ -264,6 +264,12 @@
     "filepath": "./src/components/header/header.js"
   },
   {
+    "id": "header.zones.inactiveZones",
+    "description": "Zone in operation count",
+    "defaultMessage": "{inactiveZones} {count, plural, =0 {zone} one {zone} other {zones}} paused",
+    "filepath": "./src/components/header/header.js"
+  },
+  {
     "id": "header.butler",
     "description": "Header description",
     "defaultMessage": "Butler",
@@ -3375,6 +3381,48 @@
     "description": "Put Item Heading",
     "defaultMessage": "Items stocked",
     "filepath": "./src/containers/putStatusWidget.js"
+  },
+  {
+    "id": "reportDownload.table.heading",
+    "description": "Heading for PPS",
+    "defaultMessage": "Download Reports",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "reportDownload.table.reportName",
+    "description": "report name",
+    "defaultMessage": "REPORT NAME",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "reportDownload.table.reportType",
+    "description": "REPORT TYPE",
+    "defaultMessage": "REPORT TYPE",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "reportDownload.table.requestId",
+    "description": "REQUESTED BY",
+    "defaultMessage": "REQUESTED BY",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "reportDownload.table.completionTime",
+    "description": "Status for PPS",
+    "defaultMessage": "COMPLETION TIME",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "reportDownload.table.progress",
+    "description": "GENERATION PROGRESS",
+    "defaultMessage": "GENERATION PROGRESS",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "operationsLog.table.noData",
+    "description": "No data message for operations logs",
+    "defaultMessage": "No Data Found",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
   },
   {
     "id": "gor.filter.filterLabel",

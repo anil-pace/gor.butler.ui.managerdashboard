@@ -171,7 +171,7 @@ class Header extends React.Component {
                                 
                             </section>)
         }
-        else if(this.props.system_emergency && this.props.system_data === SOFT_MANUAL ){
+        else if(this.props.system_emergency && this.props.system_data === SOFT_MANUAL  ){
             emergencyDropDown =( <section className='gor-hamburger-option'  >
                                 <h1>{this.props.lastEmergencyState === HARD ?<FormattedMessage id="header.zones.emergency.stopped" description='System Emergency'
                                             defaultMessage='SYSTEM STOPPED'
@@ -192,18 +192,20 @@ class Header extends React.Component {
                                 /></button>
                             </section>)
         }
-        else if(this.props.system_emergency && this.props.system_data === SOFT){
-            emergencyDropDown =(<section className='gor-hamburger-option'  >
-                                <h1><FormattedMessage id="header.zones.emergency.paused" description='System Emergency'
-                                            defaultMessage='SYSTEM PAUSED'
-                                           /></h1>
-                                <p>{this.props.zoneHeader.active_zones ? <FormattedMessage id="header.zones.inOperation2" description='Zone in operation count '
+        else if(this.props.system_emergency && this.props.breached){
+            emergencyDropDown =( <section className='gor-hamburger-option'  >
+                                <h1>{this.props.zoneHeader.active_zones ? <FormattedMessage id="header.zones.inOperation2" description='Zone in operation count '
                                             defaultMessage='{activeZones} zones in operation'
                                             values={{
                                                 activeZones: this.props.zoneHeader.active_zones
                                             }}/> : <FormattedMessage id="header.zones.noOperation" description='Zone in operation count '
                                             defaultMessage='No zones in operation'
-                                            />}</p>
+                                            />}</h1>
+                                <p><FormattedMessage id="header.zones.inactiveZones" description='Zone in operation count '
+                                            defaultMessage='{inactiveZones} {count,plural,=0 {zone} one {zone} other {zones}} paused'
+                                            values={{
+                                                inactiveZones: (this.props.zoneHeader.total_zones - this.props.zoneHeader.active_zones)
+                                            }}/> </p>
                                 <button onClick={this._showModal} className="gor-sys-btn">
                                 <span className="gor-resume-icon"></span>
                                  <FormattedMessage id="header.button.resume" description='Button text'
@@ -211,6 +213,7 @@ class Header extends React.Component {
                                 /></button>
                             </section>)
         }
+
         return (
                 <header className="gorHeader head">
                 <div className="mainBlock">
@@ -256,7 +259,7 @@ class Header extends React.Component {
                             <Link to="/system/sysOverview" >
                             <FormattedMessage id="header.zones.viewAll" description='View all system details'
                                             defaultMessage='View system details'
-                                           />
+                                           /> <bold>></bold>
                             </Link>
                                 
                             </section>
@@ -320,6 +323,7 @@ Header.contextTypes={
         username: state.authLogin.username,
         system_emergency: state.tabsData.system_emergency || null,
         system_data: state.tabsData.system_data || null,
+        breached: state.tabsData.breached,
         lastEmergencyState:state.tabsData.lastEmergencyState || null,
         activeModalKey: state.appInfo.activeModalKey || 0,
         zoneHeader:state.zoningReducer.zoneHeader || {},

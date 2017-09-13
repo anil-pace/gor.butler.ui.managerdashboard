@@ -194,12 +194,22 @@ class Tabs extends React.Component{
         overviewStatus=<FormattedMessage id="overviewStatus.tab.default" description="default overview Status" 
               defaultMessage="None"/>;          
       }
-      if(this.props.system_emergency)
+      if(this.props.system_emergency && (this.props.system_data === HARD || this.props.lastEmergencyState === HARD))
       {
         
         systemClass = 'gor-alert';
         systemStatus=<FormattedMessage id="overviewStatus.tab.stop" description="overview Status emergency" 
               defaultMessage="STOPPED"/>; 
+      }
+      else if(this.props.system_emergency && (this.props.system_data === SOFT || this.props.lastEmergencyState === SOFT)){
+        systemClass = 'gor-alert';
+        systemStatus=<FormattedMessage id="overviewStatus.tab.paused" description="overview Status emergency" 
+              defaultMessage="PAUSED"/>; 
+      }
+      else if(this.props.system_emergency && this.props.breached){
+        systemClass = 'gor-alert';
+        systemStatus=<FormattedMessage id="overviewStatus.tab.breached" description="overview Status emergency" 
+              defaultMessage="BREACHED"/>; 
       }
       else{
       systemStatus=<FormattedMessage id="systemStatus.tab.online" description="system Status online" 
