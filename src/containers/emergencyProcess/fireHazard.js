@@ -100,16 +100,31 @@ componentWillMount(){
     }
   }
   if(p>0){
-    marker="gor-image-status progress"
+    marker=(<div><span className='gor-image-status progress'></span> <span className='gor-status-text'> <FormattedMessage id='operation.fire.shutter'  defaultMessage='Clearing all shutters' description='Description Text clear shutter'/> </span></div>);
   }
   else if(f>0){
-    marker="gor-image-status failed"
+    marker=(<div><span className='gor-image-status failed'></span> <span className='gor-status-text'> <FormattedMessage id='operation.fire.failshutter'  defaultMessage='Failed to clear shutters' description='Description Text fail to clear shutter'/> </span></div>);
   }
   else if(c>0)
   { 
-    marker="gor-image-status cleared"
+   marker=(<div><span className='gor-image-status cleared'></span> <span className='gor-status-text'> <FormattedMessage id='operation.fire.clearedshutter'  defaultMessage='Cleared all shutters' description='Description Text  cleared shutter'/> </span></div>);
   }
   return marker;
+}
+
+processEscapePath(data){
+  var escapeMarker;
+  if(data===CLEARED)
+  {
+    escapeMarker=(<div><span className='gor-image-status cleared'></span><span className="gor-status-text"><FormattedMessage id='operation.fire.escapecleared' defaultMessage="Cleared escape path"description="Description Text escape cleared"/></span></div>)
+  }
+  else if(data===IN_PROGRESS){
+escapeMarker=(<div><span className='gor-image-status progress'></span><span className="gor-status-text"><FormattedMessage id='operation.fire.escapeprogress' defaultMessage="Clearing escape path"description="Description Text escape in progress"/></span></div>)
+  }
+  else{
+escapeMarker=(<div><span className='gor-image-status failed'></span><span className="gor-status-text"><FormattedMessage id='operation.fire.escapefail' defaultMessage="Failed to clear escape path"description="Description Text escape to fail"/></span></div>)
+  }
+return escapeMarker;
 }
 
 render()
@@ -120,6 +135,7 @@ render()
   escapePathFlag=(this.props.fireHazard.escapePath!==NOT_FOUND)?true:false;
   var shutterWrap=this._processData();
   var markerShutter=this.processShutterHeader(this.props.fireHazard.shutters);
+  var markerEscapePath=this.processEscapePath(this.props.fireHazard.escapePath);
   return (
 
     <div className='gor-modal-content gor-firehazard'>
@@ -145,21 +161,10 @@ render()
     </span> 
     </div>
     <div className={escapePathFlag? "gor-shutter-section":"gor-shutter-section hidden"}>
-    <span className={this.props.fireHazard.escapePath!==CLEARED?(this.props.fireHazard.escapePath===IN_PROGRESS? "gor-image-status progress":"gor-image-status failed"):"gor-image-status cleared"}>
-    </span>
-    <span className="gor-status-text">
-    <FormattedMessage id='operation.fire.escape' 
-    defaultMessage="Clearing escape path"
-    description="Description Text escape"/>
-    </span>
+   {markerEscapePath}
     </div>
     <div className={!shutterFlag? "gor-shutter-section":"gor-shutter-section hidden"}>
-    <span className={markerShutter}></span>
-    <span className="gor-status-text">
-    <FormattedMessage id='operation.fire.shutter' 
-    defaultMessage="Clearing all shutters"
-    description="Description Text clear shutter"/>
-    </span>
+    {markerShutter}
     <div className="gor-shutter-status-box">
     {shutterWrap}
     </div>          
