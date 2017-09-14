@@ -164,6 +164,68 @@ export const TextCell=({rowIndex, data, columnKey,setClass, ...props})=>{
   </Cell>
 )};
 
+export const AuditPackingSlotIdCell = ({rowIndex, data, columnKey, setClass, ...props}) => {
+
+    return (<Cell {...props} className={data.getObjectAt(rowIndex)[setClass]}>
+
+            <div>
+                <div className="gor-audit-resolve-packing-cell">{data.getObjectAt(rowIndex)[columnKey]}</div>
+                <div className="gor-audit-resolve-packing-cell"><FormattedMessage id="audit.table.pack.outer.label"
+                                                                            description="audit.table.pack.outer.label"
+                                                                            defaultMessage="Outer"/></div>
+                <div className="gor-audit-resolve-packing-cell"><FormattedMessage id="audit.table.pack.inner.label"
+                                                                            description="audit.table.pack.inner.label"
+                                                                            defaultMessage="Inner"/></div>
+            </div>
+        </Cell>
+    )
+};
+export const AuditPackingQuantityCell = ({rowIndex, data, columnKey, setClass,dataIndex,dataKey, ...props}) => {
+
+    const outer_pack=data.getObjectAt(rowIndex)[columnKey].filter(function(packing_info){return packing_info.type==="outer/pack"})
+    const inner_pack=data.getObjectAt(rowIndex)[columnKey].filter(function(packing_info){return packing_info.type==="inner/subpack"})
+
+
+    return (<Cell {...props} className={data.getObjectAt(rowIndex)[setClass]}>
+
+            <div>
+                <div className="gor-audit-resolve-packing-cell"/>
+                <div className="gor-audit-resolve-packing-cell">{outer_pack[0][dataKey]}</div>
+                <div className="gor-audit-resolve-packing-cell">{inner_pack[0][dataKey]}</div>
+            </div>
+        </Cell>
+    )
+};
+export const AuditPackingStatusCell = ({rowIndex, data, columnKey, setClass, ...props}) => {
+
+    return (<Cell {...props} className={data.getObjectAt(rowIndex)[setClass]}>
+
+            <div>
+                <div className="gor-audit-resolve-packing-cell">{data.getObjectAt(rowIndex)[columnKey]}</div>
+                <div className="gor-audit-resolve-packing-cell"/>
+                <div className="gor-audit-resolve-packing-cell"/>
+            </div>
+        </Cell>
+    )
+};
+export const AuditPackingResolveCell = ({rowIndex, data, columnKey, setClass, checkStatus, screenId, children, ...props}) => {
+    const childrenCell = React.Children.map(children,
+        (child) => React.cloneElement(child, {
+            rowIndex: rowIndex
+
+        })
+    );
+    return (<div>
+            <div style={{height: 30, paddingTop: 15}}>{childrenCell}</div>
+            <div style={{height: 30, paddingTop: 20}}/>
+            <div style={{height: 30, paddingTop: 20}}/>
+        </div>
+
+    )
+};
+
+
+
 export const ToolTipCell=({rowIndex, data, columnKey,setClass,callBack,tooltipData, ...props})=> (
   <Cell {...props} className={setClass}>
     {data.getObjectAt(rowIndex)[columnKey]}
