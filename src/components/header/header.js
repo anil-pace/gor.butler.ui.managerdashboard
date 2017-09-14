@@ -139,7 +139,28 @@ class Header extends React.Component {
         }
         
         var emergencyDropDown;
-        if(!this.props.system_emergency){
+         if( this.props.breached){
+            emergencyDropDown =( <section className='gor-hamburger-option'  >
+                                <h1>{this.props.zoneHeader.active_zones ? <FormattedMessage id="header.zones.inOperation2" description='Zone in operation count '
+                                            defaultMessage='{activeZones} zones in operation'
+                                            values={{
+                                                activeZones: this.props.zoneHeader.active_zones
+                                            }}/> : <FormattedMessage id="header.zones.noOperation" description='Zone in operation count '
+                                            defaultMessage='No zones in operation'
+                                            />}</h1>
+                                <p><FormattedMessage id="header.zones.inactiveZones" description='Zone in operation count '
+                                            defaultMessage='{inactiveZones} zones paused'
+                                            values={{
+                                                inactiveZones: (this.props.zoneHeader.total_zones - this.props.zoneHeader.active_zones)
+                                            }}/> </p>
+                                <button onClick={this._showModal} className="gor-sys-btn">
+                                <span className="gor-resume-icon"></span>
+                                 <FormattedMessage id="header.button.resume" description='Button text'
+                                defaultMessage='Resume System'
+                                /></button>
+                            </section>)
+        }
+        else if(!this.props.system_emergency){
             emergencyDropDown = (<section className='gor-hamburger-option'  >
                                 <h1><FormattedMessage id="header.zones.status" description='Zone status '
                                             defaultMessage='SYSTEM NORMAL'
@@ -192,27 +213,7 @@ class Header extends React.Component {
                                 /></button>
                             </section>)
         }
-        else if(this.props.system_emergency && this.props.breached){
-            emergencyDropDown =( <section className='gor-hamburger-option'  >
-                                <h1>{this.props.zoneHeader.active_zones ? <FormattedMessage id="header.zones.inOperation2" description='Zone in operation count '
-                                            defaultMessage='{activeZones} zones in operation'
-                                            values={{
-                                                activeZones: this.props.zoneHeader.active_zones
-                                            }}/> : <FormattedMessage id="header.zones.noOperation" description='Zone in operation count '
-                                            defaultMessage='No zones in operation'
-                                            />}</h1>
-                                <p><FormattedMessage id="header.zones.inactiveZones" description='Zone in operation count '
-                                            defaultMessage='{inactiveZones} {count,plural,=0 {zone} one {zone} other {zones}} paused'
-                                            values={{
-                                                inactiveZones: (this.props.zoneHeader.total_zones - this.props.zoneHeader.active_zones)
-                                            }}/> </p>
-                                <button onClick={this._showModal} className="gor-sys-btn">
-                                <span className="gor-resume-icon"></span>
-                                 <FormattedMessage id="header.button.resume" description='Button text'
-                                defaultMessage='Resume System'
-                                /></button>
-                            </section>)
-        }
+       
 
         return (
                 <header className="gorHeader head">

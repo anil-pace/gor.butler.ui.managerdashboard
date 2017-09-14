@@ -1,7 +1,7 @@
-export const BASE_URL = '192.168.8.121';
+export const BASE_URL = '192.168.12.168:5000';
 export const PROTOCOL = 'https://';
-export const WS_PROTOCOL ="wss://";
-export const WS_URL = WS_PROTOCOL+BASE_URL+"/manager_api/wss";
+export const WS_PROTOCOL ="ws://";
+export const WS_URL = WS_PROTOCOL+"192.168.12.168:8888"+"/manager_api/ws";
 export const API_URL=PROTOCOL+BASE_URL+"/api";
 export const LOGIN_URL=API_URL+"/auth/token"
 export const HEADER_URL=API_URL+"/user"

@@ -84,7 +84,7 @@ class Tabs extends React.Component{
       releaseState
       });  
   }
-  _pauseOperation(stopFlag,additionalProps){
+  _pauseOperation(stopFlag,additionalProps,breached){
      modal.add(OperationPause, {
         title: '',
         size: 'large', // large, medium or small,
@@ -94,7 +94,8 @@ class Tabs extends React.Component{
       controller:additionalProps.controller_id,
       zone:additionalProps.zone_id,
       sensor:additionalProps.sensor_activated,
-      poeEnabled:Object.keys(additionalProps).length ? true : false
+      poeEnabled:Object.keys(additionalProps).length ? true : false,
+      breached:breached
       });
   }
     _FireEmergencyRelease(){
@@ -116,7 +117,7 @@ class Tabs extends React.Component{
         }
         else if(  nextProps.system_data === SOFT){
           this.props.setEmergencyModalStatus(true);
-          this._pauseOperation(true, nextProps.zoneDetails);
+          this._pauseOperation(true, nextProps.zoneDetails,nextProps.breached);
         }
         else if( 
           nextProps.system_data === SOFT_MANUAL && 
@@ -206,7 +207,7 @@ class Tabs extends React.Component{
         systemStatus=<FormattedMessage id="overviewStatus.tab.paused" description="overview Status emergency" 
               defaultMessage="PAUSED"/>; 
       }
-      else if(this.props.system_emergency && this.props.breached){
+      else if(this.props.breached){
         systemClass = 'gor-alert';
         systemStatus=<FormattedMessage id="overviewStatus.tab.breached" description="overview Status emergency" 
               defaultMessage="BREACHED"/>; 
@@ -365,6 +366,7 @@ function mapStateToProps(state, ownProps){
          lastEmergencyState:state.tabsData.lastEmergencyState || "none",
          system_data:state.tabsData.system_data||null,
          lastEmergencyState:state.tabsData.lastEmergencyState,
+         breached: state.tabsData.breached,
          users_online:state.tabsData.users_online||0,
          audit_count:state.tabsData.audit_count||0,
          space_utilized:state.tabsData.space_utilized||0,
