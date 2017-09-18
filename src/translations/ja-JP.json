@@ -4589,5 +4589,725 @@
    "description": "Item recall message",
    "defaultMessage": "{itemCount}満了された品目が呼び出されました",
    "filepath": "./src/utilities/statusToString.js"
+},
+
+{
+   "id": "pps.configuration.profile.requestedText",
+   "description": "requested profile for PPS",
+   "デフォルト・メッセージ":　"依頼されたプロファイル:{requestedProfile}",
+   "filepath": "./src/components/commonFunctionsDataTable.js"
+},
+{
+   "id": "header.zones.status",
+   "description": "Zone status",
+   "デフォルト・メッセージ":　"システム正常",
+   "filepath": "./src/components/header/header.js"
+},
+{
+   "id": "header.zones.inOperation",
+   "description": "Zone in operation count",
+   "デフォルト・メッセージ":　"{activeZones}/{totalZones}操作中のゾーン",
+   "filepath": "./src/components/header/header.js"
+},
+{
+   "id": "header.zones.emergency",
+   "description": "System Emergency",
+   "デフォルト・メッセージ":　"システムが停止されました",
+   "filepath": "./src/components/header/header.js"
+},
+{
+   "id": "header.zones.inOperation1",
+   "description": "Zone in operation count",
+   "デフォルト・メッセージ": "{activeZones}操作中のゾーン",
+   "filepath": "./src/components/header/header.js"
+},
+{
+   "id": "header.zones.noOperation",
+   "description": "Zone in operation count",
+   "デフォルト・メッセージ":　"操作中のゾーンはありません",
+   "filepath": "./src/components/header/header.js"
+},
+{
+   "id": "header.zones.emergency.stopped",
+   "description": "System Emergency",
+   "デフォルト・メッセージ": "システムが停止されました",
+   "filepath": "./src/components/header/header.js"
+},
+{
+   "id": "header.zones.emergency.paused",
+   "description": "System Emergency",
+   "デフォルト・メッセージ": "システムが休止されました",
+   "filepath": "./src/components/header/header.js"
+},
+{
+   "id": "header.zones.inOperation2",
+   "description": "Zone in operation count",
+   "デフォルト・メッセージ":　"{activeZones}操作中のゾーン",
+   "filepath": "./src/components/header/header.js"
+},
+{
+   "id": "header.zones.count",
+   "description": "Zone status count",
+   "デフォルト・メッセージ":　"{activeZones}/{totalZones}ゾーン",
+   "filepath": "./src/components/header/header.js"
+},
+{
+   "id": "header.zones.viewAll",
+   "description": "View all system details",
+   "デフォルト・メッセージ": "システムの詳細を見る",
+   "filepath": "./src/components/header/header.js"
+},
+{
+   "id": "notifications.search.placeholder",
+   "description": "Notification placeholder",
+   "デフォルト・メッセージ": "検索通知",
+   "filepath": "./src/components/notifications/notifications.js"
+},
+{
+   "id": "notifications.search.button",
+   "description": "Notification button",
+   "デフォルト・メッセージ": "検索",
+   "filepath": "./src/components/notifications/notifications.js"
+},
+{
+   "id": "notifications.search.head",
+   "description": "Notification header message",
+   "デフォルト・メッセージ": "通知",
+   "filepath": "./src/components/notifications/notifications.js"
+},
+{
+   "id": "sysOverview.tab.heading",
+   "description": "System overview Tab",
+   "デフォルト・メッセージ": "概要",
+   "filepath": "./src/components/subtab/subTabs.js"
+},
+{
+   "id": "ppsConfiguration.tab.heading",
+   "description": "pps configuration tab",
+   "デフォルト・メッセージ": "PPS構成",
+   "filepath": "./src/components/subtab/subTabs.js"
+},
+{
+   "id": "sysControllers.tab.heading",
+   "description": "Syatem controllers Tab",
+   "デフォルト・メッセージ": "システムコントローラ",
+   "filepath": "./src/components/subtab/subTabs.js"
+},
+{
+   "id": "stringConfig.md013",
+   "description": "Text for safety checklist item 13",
+   "デフォルト・メッセージ": "PPSロケーションにボットを移動して、全ボットが移動された後\"init\"を行ってください。",
+   "filepath": "./src/constants/backEndConstants.js"
+},
+{
+   "id": "stringConfig.md014",
+   "description": "Text for safety checklist item 14",
+   "デフォルト・メッセージ": "PPSへボットを移動する必要はありません。",
+   "filepath": "./src/constants/backEndConstants.js"
+},
+{
+   "id": "audit.cancellation.success",
+   "description": "Audit Id cancellation is successful",
+   "デフォルト・メッセージ": "棚卸解除のために要求が送信されました",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "zoning.status.normal",
+   "description": "Status text for zone",
+   "デフォルト・メッセージ": "操作中",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "zoning.status.pauseInit",
+   "description": "Status text for zone",
+   "デフォルト・メッセージ": "休止が開始されました",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "zoning.status.pauseActivated",
+   "description": "Status text for zone",
+   "デフォルト・メッセージ": "休止が活性されました",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "zoning.status.pauseDeactive",
+   "description": "Status text for zone",
+   "デフォルト・メッセージ": "休止が不活性されました",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "zoning.status.clearInit",
+   "description": "Status text for zone",
+   "デフォルト・メッセージ": "クリアが開始されました",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "zoning.status.clearActive",
+   "description": "Status text for zone",
+   "デフォルト・メッセージ": "クリアが活性されました",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "zoning.status.clearDeactivated",
+   "description": "Status text for zone",
+   "デフォルト・メッセージ": "クリアが不活性されました",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "zoning.status.emergencyStop",
+   "description": "Status text for zone",
+   "デフォルト・メッセージ": "緊急停止",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "zoning.status.emergencyPause",
+   "description": "Status text for zone",
+   "デフォルト・メッセージ": "緊急休止",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "zoning.status.stopped",
+   "description": "Status text for zone",
+   "デフォルト・メッセージ": "停止されました",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "zoning.status.paused",
+   "description": "Status text for zone",
+   "デフォルト・メッセージ": "休止されました",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "zoning.action.zone_pause",
+   "description": "Status text for zone",
+   "デフォルト・メッセージ": "ゾーン休止が活性されました",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "zoning.action.zone_clear",
+   "description": "Status text for zone",
+   "デフォルト・メッセージ": "ゾーンクリアが活性されました",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "zoning.action.emergency_stop",
+   "description": "Status text for zone",
+   "デフォルト・メッセージ": "緊急停止が活性されました",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "zoning.action.emergency_pause",
+   "description": "Status text for zone",
+   "デフォルト・メッセージ": "緊急休止が活性されました",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "zoning.action.none",
+   "description": "Status text for zone",
+   "デフォルト・メッセージ": "基準",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "zoning.action.button_press",
+   "description": "Status text for zone",
+   "デフォルト・メッセージ": "ボタンが押されました",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "zoning.action.emergency_stop_button_press",
+   "description": "Status text for zone",
+   "デフォルト・メッセージ": "緊急停止ボタンが押されました",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "zoning.action.emergency_pause_button_press",
+   "description": "Status text for zone",
+   "デフォルト・メッセージ": "緊急休止ボタンが押されました",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "zoning.action.latch_gate",
+   "description": "Status text for zone",
+   "デフォルト・メッセージ": "入力の門が破壊されました",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "zoning.action.light_curtain",
+   "description": "Status text for zone",
+   "デフォルト・メッセージ": "ライトカーテン が破壊されました",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "zoning.action.noneSensor",
+   "description": "Status text for zone",
+   "デフォルト・メッセージ": "基準",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "audit.delete.close",
+   "description": "Text for audit delete close",
+   "デフォルト・メッセージ": "閉じる",
+   "filepath": "./src/containers/auditTab/deleteAudit.js"
+},
+{
+   "id": "audit.delete.confirm",
+   "description": "Text for audit delete confirm",
+   "デフォルト・メッセージ": "棚卸タスクを削除します",
+   "filepath": "./src/containers/auditTab/deleteAudit.js"
+},
+{
+   "id": "audit.duplicate.close",
+   "description": "Text for audit duplicate close",
+   "デフォルト・メッセージ": "閉じる",
+   "filepath": "./src/containers/auditTab/duplicateAudit.js"
+},
+{
+   "id": "audit.duplicate.confirm",
+   "description": "Text for audit duplicate confirm",
+   "デフォルト・メッセージ": "棚卸タスクを重複します",
+   "filepath": "./src/containers/auditTab/duplicateAudit.js"
+},
+{
+   "id": "operation.alert.releaseSoft",
+   "description": "Text for emergency button release heading",
+   "デフォルト・メッセージ": "全緊急休止ボタンが解放されました",
+   "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
+},
+{
+   "id": "operation.alert.releaseSoft.text",
+   "description": "Text for emergency pause button release",
+   "デフォルト・メッセージ": "全緊急休止ボタンが解放されました",
+   "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
+},
+{
+   "id": "operation.alert.pause.nonPOE",
+   "description": "Text for operation stopped heading",
+   "デフォルト・メッセージ": "操作が休止されました",
+   "filepath": "./src/containers/emergencyProcess/OperationPause.js"
+},
+{
+   "id": "operation.alert.stop.nonPOE",
+   "description": "Text for operation stopped heading",
+   "デフォルト・メッセージ": "操作が停止されました",
+   "filepath": "./src/containers/emergencyProcess/OperationStop.js"
+},
+{
+   "id": "operation.alert.stop.subtext",
+   "description": "Subtext for pause alert",
+   "デフォルト・メッセージ": "倉庫で作業を続行するために、緊急状態を確認して緊急停止ボタンを解放しなければなりません",
+   "filepath": "./src/containers/emergencyProcess/OperationStop.js"
+},
+{
+   "id": "misplaced.botId",
+   "description": "bot id",
+   "デフォルト・メッセージ": "{botid}",
+   "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+},
+{
+   "id": "misplaced.rackId",
+   "description": "rack id",
+   "デフォルト・メッセージ": "{rackid}",
+   "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+},
+{
+   "id": "misplaced.racklocation",
+   "description": "rack location",
+   "デフォルト・メッセージ": "{racklocation}",
+   "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+},
+{
+   "id": "misplaced.rackface",
+   "description": "rack face",
+   "デフォルト・メッセージ": "{rackface}",
+   "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+},
+{
+   "id": "misplaced.ppsid",
+   "description": "pps id",
+   "デフォルト・メッセージ": "{ppsid}",
+   "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+},
+{
+   "id": "misplaced.ppslocation",
+   "description": "pps location",
+   "デフォルト・メッセージ": "{ppslocation}",
+   "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+},
+{
+   "id": "operation.firesafety.heading",
+   "description": "Text for safety heading",
+   "デフォルト・メッセージ": "チェックリストを続行します",
+   "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+},
+{
+   "id": "operation.safetychecklist.errors",
+   "description": "Text for safety error",
+   "デフォルト・メッセージ": "一つ以上の要求の条件が満たされていないことをシステムが検出しました。\n                    再度してください、もしくは、サービスエンジニアを対応のために連絡してください。",
+   "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+},
+{
+   "id": "operation.safetychecklistTable.botid",
+   "description": "Bot ID",
+   "デフォルト・メッセージ": "ボットID",
+   "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+},
+{
+   "id": "operation.safetychecklistTable.rockid",
+   "description": "Rack ID",
+   "デフォルト・メッセージ": "ラックID",
+   "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+},
+{
+   "id": "operation.safetychecklistTable.rocklocation",
+   "description": "Rack location",
+   "デフォルト・メッセージ": "ラックロケーション",
+   "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+},
+{
+   "id": "operation.safetychecklistTable.rackface",
+   "description": "Rack face",
+   "デフォルト・メッセージ": "ラックフェイス",
+   "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+},
+{
+   "id": "operation.safetychecklistTable.ppsid",
+   "description": "PPS ID",
+   "デフォルト・メッセージ": "PPS ID",
+   "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+},
+{
+   "id": "operation.safetychecklistTable.ppslocation",
+   "description": "PPS location",
+   "デフォルト・メッセージ": "PPS ロケーション",
+   "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+},
+{
+   "id": "operation.firesafety.confirm",
+   "description": "Text for Resume Operation button",
+   "デフォルト・メッセージ": "操作を続行します",
+   "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+},
+{
+   "id": "pps.configuration.confirm.apply.profile",
+   "description": "Apply Profile to PPS",
+   "デフォルト・メッセージ": "プロファイルを変更してもよろしいですか",
+   "filepath": "./src/containers/systemTabs/confirmApplyProfile.js"
+},
+{
+   "id": "pps.configuration.confirm.apply.profile.description",
+   "description": "PPS Configuration will be changed",
+   "デフォルト・メッセージ": "PPS構成が変更されます",
+   "filepath": "./src/containers/systemTabs/confirmApplyProfile.js"
+},
+{
+   "id": "pps.configuration.confirm.apply.cancel",
+   "description": "Cancel apply Profile to PPS",
+   "デフォルト・メッセージ": "キャンセル",
+   "filepath": "./src/containers/systemTabs/confirmApplyProfile.js"
+},
+{
+   "id": "pps.configuration.confirm.change.profile",
+   "description": "Change Profile to PPS",
+   "デフォルト・メッセージ": "変更",
+   "filepath": "./src/containers/systemTabs/confirmApplyProfile.js"
+},
+{
+   "id": "pps.configuration.create.profile.header",
+   "description": "Save a new profile",
+   "デフォルト・メッセージ": "新規のプロファイルを保存します",
+   "filepath": "./src/containers/systemTabs/createPPSProfile.js"
+},
+{
+   "id": "pps.configuration.create.profile.name.label",
+   "description": "New Profile Name",
+   "デフォルト・メッセージ": "新規のプロファイル名",
+   "filepath": "./src/containers/systemTabs/createPPSProfile.js"
+},
+{
+   "id": "pps.configuration.create.profile.cancel",
+   "description": "Cancel",
+   "デフォルト・メッセージ": "キャンセル",
+   "filepath": "./src/containers/systemTabs/createPPSProfile.js"
+},
+{
+   "id": "pps.configuration.create.profile.button.text",
+   "description": "Save A New Profile",
+   "デフォルト・メッセージ": "新規のプロファイルを保存します",
+   "filepath": "./src/containers/systemTabs/createPPSProfile.js"
+},
+{
+   "id": "pps.configuration.bins.selection.label",
+   "description": "Select a bin to manage tags",
+   "デフォルト・メッセージ": "タグを管理するためにビンを選択します",
+   "filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
+},
+{
+   "id": "pps.configuration.bins.direction.label",
+   "description": "Bin Direction",
+   "デフォルト・メッセージ": "PPSの現在の選択",
+   "filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
+},
+{
+   "id": "pps.configuration.bins.direction.left",
+   "description": "Bin Direction LEFT",
+   "デフォルト・メッセージ": "左",
+   "filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
+},
+{
+   "id": "pps.configuration.bins.direction.right",
+   "description": "Bin Direction RIGHT",
+   "デフォルト・メッセージ": "右",
+   "filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
+},
+{
+   "id": "pps.configuration.bins.selection.count",
+   "description": "total users for filter search bar",
+   "デフォルト・メッセージ": "活性又は不活性のためにビンを選択します ({deactivated}/{total} ビンが不活性されました)",
+   "filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
+},
+{
+   "id": "pps.configuration.bins.group.selection.count",
+   "description": "total users for filter search bar",
+   "デフォルト・メッセージ": "有効にする又は無効にするためにビングループを選択します ({disabled}/{total}グループが無効されました)",
+   "filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
+},
+{
+   "id": "pps.configuration.bins.tagCount.text",
+   "description": "Tag",
+   "デフォルト・メッセージ": "タッグ",
+   "filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
+},
+{
+   "id": "pps.configuration.bins.activation.button.text",
+   "description": "ACTIVATE",
+   "デフォルト・メッセージ": "活性",
+   "filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
+},
+{
+   "id": "pps.configuration.bins.deactivation.button.text",
+   "description": "DEACTIVATE",
+   "デフォルト・メッセージ": "不活性",
+   "filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
+},
+{
+   "id": "pps.configuration.bins.group.enable.button.text",
+   "description": "ENABLE",
+   "デフォルト・メッセージ": "有効にする",
+   "filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
+},
+{
+   "id": "pps.configuration.bins.group.disable.button.text",
+   "description": "DISABLE",
+   "デフォルト・メッセージ": "無効にする",
+   "filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
+},
+{
+   "id": "pps.configuration.header.text",
+   "description": "PPS Configurations",
+   "デフォルト・メッセージ": "PPSの構成",
+   "filepath": "./src/containers/systemTabs/ppsConfigurationList.js"
+},
+{
+   "id": "pps.configuration.applied.text",
+   "description": "Applied",
+   "デフォルト・メッセージ": "適用されました",
+   "filepath": "./src/containers/systemTabs/ppsConfigurationList.js"
+},
+{
+   "id": "pps.configuration.requested.text",
+   "description": "Requested",
+   "デフォルト・メッセージ": "要求されました",
+   "filepath": "./src/containers/systemTabs/ppsConfigurationList.js"
+},
+{
+   "id": "pps.configuration.profileAplied.text",
+   "description": "profile applied",
+   "デフォルト・メッセージ": "プロファイルが適用されました",
+   "filepath": "./src/containers/systemTabs/ppsConfigurationList.js"
+},
+{
+   "id": "pps.configuration.bins.tags.label",
+   "description": "Assign tags to bin",
+   "デフォルト・メッセージ": "ビンにタッグを割り当てます",
+   "filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
+},
+{
+   "id": "pps.configuration.bins.activation.label",
+   "description": "Bin activate/deactivate",
+   "デフォルト・メッセージ": "ビン活性する/不活性する",
+   "filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
+},
+{
+   "id": "pps.configuration.group.activation.label",
+   "description": "Bin group enable/disable",
+   "デフォルト・メッセージ": "ビングループ有効にする/無効にする",
+   "filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
+},
+{
+   "id": "pps.configuration.bins.frontView.label",
+   "description": "Front View",
+   "デフォルト・メッセージ": "正面ビュー",
+   "filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
+},
+{
+   "id": "pps.configuration.buttons.cancel.text",
+   "description": "CANCEL",
+   "デフォルト・メッセージ": "キャンセル",
+   "filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
+},
+{
+   "id": "pps.configuration.buttons.next.text",
+   "description": "NEXT",
+   "デフォルト・メッセージ": "次",
+   "filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
+},
+{
+   "id": "pps.configuration.buttons.saveApply.text",
+   "description": "SAVE AND APPLY",
+   "デフォルト・メッセージ": "保存して適用",
+   "filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
+},
+{
+   "id": "pps.configuration.buttons.back.text",
+   "description": "BACK",
+   "デフォルト・メッセージ": "戻る",
+   "filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
+},
+{
+   "id": "pps.configuration.buttons.saveNewProfile.text",
+   "description": "SAVE AS NEW PROFILE",
+   "デフォルト・メッセージ": "新規プロファイルとして保存",
+   "filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
+},
+{
+   "id": "pps.configuration.buttons.save.text",
+   "description": "SAVE",
+   "デフォルト・メッセージ": "保存",
+   "filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
+},
+{
+   "id": "PPS.table.profiles",
+   "description": "profiles for PPS",
+   "デフォルト・メッセージ": "使用されているプロファイル",
+   "filepath": "./src/containers/systemTabs/PPStable.js"
+},
+{
+   "id": "pps.configuration.confirm.saveAndapply.profile",
+   "description": "Save and ppply Profile to PPS",
+   "デフォルト・メッセージ": "プロファイルを保存して適用してもいいですか。",
+   "filepath": "./src/containers/systemTabs/saveApplyProfile.js"
+},
+{
+   "id": "pps.configuration.confirm.saveAndapply.profile.description",
+   "description": "Profile will be applied after pending tasks are completed",
+   "デフォルト・メッセージ": "保留中のタスクが完了されたあとプロファイルが適用されます",
+   "filepath": "./src/containers/systemTabs/saveApplyProfile.js"
+},
+{
+   "id": "pps.configuration.confirm.apply.cancel",
+   "description": "Cancel apply Profile to PPS",
+   "デフォルト・メッセージ": "キャンセル",
+   "filepath": "./src/containers/systemTabs/saveApplyProfile.js"
+},
+{
+   "id": "pps.configuration.confirm.saveAndApply.profile",
+   "description": "Save and Apply Profile to PPS",
+   "デフォルト・メッセージ": "保存して適用",
+   "filepath": "./src/containers/systemTabs/saveApplyProfile.js"
+},
+{
+   "id": "sysController.table.heading",
+   "description": "Heading for PPS",
+   "デフォルト・メッセージ": "システムコントローラ",
+   "filepath": "./src/containers/systemTabs/sysControllers.js"
+},
+{
+   "id": "sysController.summary.showall",
+   "description": "button label for show all",
+   "デフォルト・メッセージ": "全てのゾーンを表示",
+   "filepath": "./src/containers/systemTabs/sysControllers.js"
+},
+{
+   "id": "sysControllers.idColumn.heading",
+   "description": "CONTROLLER ID",
+   "デフォルト・メッセージ": "コントローラID",
+   "filepath": "./src/containers/systemTabs/sysControllers.js"
+},
+{
+   "id": "sysController.table.status",
+   "description": "Status for PPS",
+   "デフォルト・メッセージ": "ステータス",
+   "filepath": "./src/containers/systemTabs/sysControllers.js"
+},
+{
+   "id": "sysController.table.location",
+   "description": "Location",
+   "デフォルト・メッセージ": "ロケーション",
+   "filepath": "./src/containers/systemTabs/sysControllers.js"
+},
+{
+   "id": "sysController.table.conDetails",
+   "description": "Status for PPS",
+   "デフォルト・メッセージ": "接続詳細",
+   "filepath": "./src/containers/systemTabs/sysControllers.js"
+},
+{
+   "id": "sysController.table.ethernetStatus",
+   "description": "sysController.table.ethernetStatus",
+   "デフォルト・メッセージ": "イーサネットネットワーク:",
+   "filepath": "./src/containers/systemTabs/sysControllers.js"
+},
+{
+   "id": "sysController.table.zigbeeStatus",
+   "description": "sysController.table.zigbeeStatus",
+   "デフォルト・メッセージ": "ジグビーネットワーク:",
+   "filepath": "./src/containers/systemTabs/sysControllers.js"
+},
+{
+   "id": "sysController.table.operatingMode",
+   "description": "Status for PPS",
+   "デフォルト・メッセージ": "操作モード",
+   "filepath": "./src/containers/systemTabs/sysControllers.js"
+},
+{
+   "id": "sysControllers.table.noData",
+   "description": "No data message for PPStable",
+   "デフォルト・メッセージ": "コントローラが見つかりません",
+   "filepath": "./src/containers/systemTabs/sysControllers.js"
+},
+{
+   "id": "sysOverView.zones.count",
+   "description": "Zone status count",
+   "デフォルト・メッセージ": "{activeZones}/{totalZones} 操作中のゾーン",
+   "filepath": "./src/containers/systemTabs/sysOverview.js"
+},
+{
+   "id": "pps.configuration.tag.search.placeholder",
+   "デフォルト・メッセージ": "タッグを入力してください。。。",
+   "filepath": "./src/containers/systemTabs/tags.js"
+},
+{
+   "id": "pps.configuration.tags.label",
+   "description": "Tags",
+   "デフォルト・メッセージ": "タッグ",
+   "filepath": "./src/containers/systemTabs/tags.js"
+},
+{
+   "id": "pps.configuration.tags.searchResults.text",
+   "description": "Search Results",
+   "デフォルト・メッセージ": "検索結果",
+   "filepath": "./src/containers/systemTabs/tags.js"
+},
+{
+   "id": "pps.configuration.tags.all.text",
+   "description": "All Tags",
+   "デフォルト・メッセージ": "全てのタッグ",
+   "filepath": "./src/containers/systemTabs/tags.js"
+},
+{
+   "id": "pps.configuration.tags.add.text",
+   "description": "Add",
+   "デフォルト・メッセージ": "追加",
+   "filepath": "./src/containers/systemTabs/tags.js"
 }
 ]
