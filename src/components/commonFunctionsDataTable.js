@@ -182,8 +182,8 @@ export const AuditPackingSlotIdCell = ({rowIndex, data, columnKey, setClass, ...
 };
 export const AuditPackingQuantityCell = ({rowIndex, data, columnKey, setClass,dataIndex,dataKey, ...props}) => {
 
-    const outer_pack=data.getObjectAt(rowIndex)[columnKey].filter(function(packing_info){return packing_info.type==="outer/pack"})
-    const inner_pack=data.getObjectAt(rowIndex)[columnKey].filter(function(packing_info){return packing_info.type==="inner/subpack"})
+    const outer_pack=data.getObjectAt(rowIndex)[columnKey].filter(function(packing_info){return packing_info.type==="container_level_1"})
+    const inner_pack=data.getObjectAt(rowIndex)[columnKey].filter(function(packing_info){return packing_info.type==="container_level_2"})
 
 
     return (<Cell {...props} className={data.getObjectAt(rowIndex)[setClass]}>
