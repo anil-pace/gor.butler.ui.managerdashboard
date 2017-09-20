@@ -16,7 +16,7 @@ import {
     SPECIFIC_SKU_ID,
     SPECIFIC_LOCATION_ID,
     AUDIT_TASK_ID,
-    AUDIT_TYPE,AUDIT_COMPLETED,AUDIT_CREATED,PENDING,INPROGRESS,
+    AUDIT_TYPE,AUDIT_COMPLETED,AUDIT_CANCELLED,AUDIT_CREATED,PENDING,INPROGRESS,
     AUDIT_RESOLVED,AUDIT_LINE_REJECTED,SINGLE
 }from '../../constants/frontEndConstants';
 import {hashHistory} from 'react-router'
@@ -96,7 +96,8 @@ class AuditFilter extends React.Component {
             {value: INPROGRESS, label: <FormattedMessage id="audit.token2.inProgress" defaultMessage="In progress"/>},
             {value: PENDING, label: <FormattedMessage id="audit.token2.pending" defaultMessage="Pending"/>},
             {value: AUDIT_CREATED, label: <FormattedMessage id="audit.token2.created" defaultMessage="Created"/>},
-            {value: AUDIT_COMPLETED, label: <FormattedMessage id="audit.token2.completed" defaultMessage="Completed"/>}
+            {value: AUDIT_COMPLETED, label: <FormattedMessage id="audit.token2.completed" defaultMessage="Completed"/>},
+            {value: AUDIT_CANCELLED, label: <FormattedMessage id="audit.token2.cancelled" defaultMessage="Cancelled"/>}
 
         ];
         var selectedToken=this.state.tokenSelected;
