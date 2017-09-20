@@ -41,16 +41,23 @@ class EmergencyRelease extends React.Component{
               <div className='gor-caution'></div><span className='gor-operation-heading'>
                {(!this.props.releaseState || this.props.releaseState === HARD)?<FormattedMessage id='operation.alert.release' 
                     defaultMessage="All Emergency-stop buttons released"
-                            description="Text for emergency button release heading"/> : <FormattedMessage id='operation.alert.releaseSoft' 
+                            description="Text for emergency button release heading"/> : (!this.props.breached ? <FormattedMessage id='operation.alert.releaseSoft' 
                     defaultMessage="All Emergency-pause buttons released"
-                            description="Text for emergency button release heading"/>}</span>
+                            description="Text for emergency button release heading"/>:<FormattedMessage id='operation.alert.releaseSoftBreached' 
+                    defaultMessage="Pause button released"
+                            description="Text for emergency button release heading"/>)}</span>
             </div>
             <div className='gor-operation-body'>
               <div className='gor-text-bold'>{(!this.props.releaseState || this.props.releaseState === HARD)?<FormattedMessage id='operation.alert.release.text' 
                     defaultMessage="All Emergency-stop buttons have been released."
-                            description="Text for emergency stop button release"/>:<FormattedMessage id='operation.alert.releaseSoft.text' 
+                            description="Text for emergency stop button release"/>:(!this.props.breached ? <FormattedMessage id='operation.alert.releaseSoft.text' 
                     defaultMessage="All Emergency-pause buttons have been released."
-                            description="Text for emergency pause button release"/>}
+                            description="Text for emergency pause button release"/> : <FormattedMessage id='operation.alert.releaseSoft.textBreached' 
+                    defaultMessage="Emergency pause button in {zone} has been released"
+                    description="Text for emergency pause button release"
+                    values={{
+                            zone:this.props.zone
+                    }}/>)}
               </div>
               <div className='gor-operation-text'><FormattedMessage id='operation.alert.release.subtext' 
                     defaultMessage="You will be required to enter your password in order to view the checklist.

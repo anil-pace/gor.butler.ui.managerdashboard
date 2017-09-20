@@ -149,7 +149,7 @@ class Header extends React.Component {
                                             defaultMessage='No zones in operation'
                                             />}</h1>
                                 <p><FormattedMessage id="header.zones.inactiveZones" description='Zone in operation count '
-                                            defaultMessage='{inactiveZones} zones paused'
+                                            defaultMessage='{inactiveZones} {inactiveZones,plural, one {zone} other {zones}} paused'
                                             values={{
                                                 inactiveZones: (this.props.zoneHeader.total_zones - this.props.zoneHeader.active_zones)
                                             }}/> </p>
