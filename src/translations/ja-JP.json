@@ -5309,5 +5309,38 @@
    "description": "Add",
    "defaultMessage": "追加",
    "filepath": "./src/containers/systemTabs/tags.js"
+},
+
+
+{
+   "id": "operation.fire.failshutter",
+   "description": "Description Text fail to clear shutter",
+   "defaultMessage": "シャッターをクリアできませんでした",
+   "filepath": "./src/containers/emergencyProcess/fireHazard.js"
+},
+{
+   "id": "operation.fire.clearedshutter",
+   "description": "Description Text  cleared shutter",
+   "defaultMessage": "すべてのシャッターをクリア",
+   "filepath": "./src/containers/emergencyProcess/fireHazard.js"
+},
+{
+   "id": "operation.fire.escapecleared",
+   "description": "Description Text escape cleared",
+   "defaultMessage": "エスケープパスをクリアしました",
+   "filepath": "./src/containers/emergencyProcess/fireHazard.js"
+},
+{
+   "id": "operation.fire.escapeprogress",
+   "description": "Description Text escape in progress",
+   "defaultMessage": "エスケープパスのクリア",
+   "filepath": "./src/containers/emergencyProcess/fireHazard.js"
+},
+{
+   "id": "operation.fire.escapefail",
+   "description": "Description Text escape to fail",
+   "defaultMessage": "エスケープパスをクリアできませんでした",
+   "filepath": "./src/containers/emergencyProcess/fireHazard.js"
 }
+
 ]

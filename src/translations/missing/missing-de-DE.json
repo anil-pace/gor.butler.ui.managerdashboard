@@ -1,4 +1,3 @@
-
 [
 {
 	"id": "audit.table.cancelTask",
@@ -52,6 +51,12 @@
 	"id": "commonDataTable.viewIssues.button",
 	"description": "viewIssues button",
 	"defaultMessage": "View issues",
+	"filepath": "./src/components/commonFunctionsDataTable.js"
+},
+{
+	"id": "pps.configuration.profile.requestedText",
+	"description": "requested profile for PPS",
+	"defaultMessage": "Requested Profile: {requestedProfile}",
 	"filepath": "./src/components/commonFunctionsDataTable.js"
 },
 {
@@ -145,6 +150,72 @@
 	"filepath": "./src/components/gorPaginate/gorPaginateV2.js"
 },
 {
+	"id": "horizontal.graph.fulfilling",
+	"description": "Fulfilling",
+	"defaultMessage": "Fulfilled: {count}",
+	"filepath": "./src/components/graphd3/graphd3.js"
+},
+{
+	"id": "header.zones.status",
+	"description": "Zone status",
+	"defaultMessage": "SYSTEM NORMAL",
+	"filepath": "./src/components/header/header.js"
+},
+{
+	"id": "header.zones.inOperation",
+	"description": "Zone in operation count",
+	"defaultMessage": "{activeZones}/{totalZones} zones in operation",
+	"filepath": "./src/components/header/header.js"
+},
+{
+	"id": "header.zones.emergency",
+	"description": "System Emergency",
+	"defaultMessage": "SYSTEM STOPPED",
+	"filepath": "./src/components/header/header.js"
+},
+{
+	"id": "header.zones.inOperation1",
+	"description": "Zone in operation count",
+	"defaultMessage": "{activeZones} zones in operation",
+	"filepath": "./src/components/header/header.js"
+},
+{
+	"id": "header.zones.noOperation",
+	"description": "Zone in operation count",
+	"defaultMessage": "No zones in operation",
+	"filepath": "./src/components/header/header.js"
+},
+{
+	"id": "header.option.release",
+	"description": "release operation option",
+	"defaultMessage": "Release the Emergency Stop button from the Zigbee box in order\n                              to resume operation.",
+	"filepath": "./src/components/header/header.js"
+},
+{
+	"id": "header.zones.emergency.stopped",
+	"description": "System Emergency",
+	"defaultMessage": "SYSTEM STOPPED",
+	"filepath": "./src/components/header/header.js"
+},
+{
+	"id": "header.zones.emergency.paused",
+	"description": "System Emergency",
+	"defaultMessage": "SYSTEM PAUSED",
+	"filepath": "./src/components/header/header.js"
+},
+{
+	"id": "header.zones.inOperation2",
+	"description": "Zone in operation count",
+	"defaultMessage": "{activeZones} zones in operation",
+	"filepath": "./src/components/header/header.js"
+},
+{
+	"id": "header.button.resume",
+	"description": "Button text",
+	"defaultMessage": "Resume System",
+	"filepath": "./src/components/header/header.js"
+},
+{
 	"id": "header.butler",
 	"description": "Header description",
 	"defaultMessage": "Butler",
@@ -157,57 +228,15 @@
 	"filepath": "./src/components/header/header.js"
 },
 {
-	"id": "header.option.normal",
-	"description": "normal operation",
-	"defaultMessage": "Operation normal",
+	"id": "header.zones.count",
+	"description": "Zone status count",
+	"defaultMessage": "{activeZones}/{totalZones} Zones",
 	"filepath": "./src/components/header/header.js"
 },
 {
-	"id": "header.option.pause",
-	"description": "pause operation option",
-	"defaultMessage": "Enter password to pause operation",
-	"filepath": "./src/components/header/header.js"
-},
-{
-	"id": "header.button.pause",
-	"description": "Button text",
-	"defaultMessage": "Pause",
-	"filepath": "./src/components/header/header.js"
-},
-{
-	"id": "header.emergency.heading",
-	"description": "Header description",
-	"defaultMessage": "Emergency",
-	"filepath": "./src/components/header/header.js"
-},
-{
-	"id": "header.emergency.subheading",
-	"description": "Start time",
-	"defaultMessage": "In Zone",
-	"filepath": "./src/components/header/header.js"
-},
-{
-	"id": "header.option.stopped",
-	"description": "stopped operation",
-	"defaultMessage": "Operation stopped",
-	"filepath": "./src/components/header/header.js"
-},
-{
-	"id": "header.button.resume",
-	"description": "Button text",
-	"defaultMessage": "Resume",
-	"filepath": "./src/components/header/header.js"
-},
-{
-	"id": "header.option.release",
-	"description": "release operation option",
-	"defaultMessage": "Release the Emergency Stop button from the Zigbee box in order\n        \t\t\t\t\t\tto resume operation.",
-	"filepath": "./src/components/header/header.js"
-},
-{
-	"id": "header.option.resume",
-	"description": "resume operation option",
-	"defaultMessage": "Enter password to resume operation.",
+	"id": "header.zones.viewAll",
+	"description": "View all system details",
+	"defaultMessage": "View system details",
 	"filepath": "./src/components/header/header.js"
 },
 {
@@ -215,6 +244,24 @@
 	"description": "Text inventory entity",
 	"defaultMessage": "Items",
 	"filepath": "./src/components/inventory/pickPutLineGraph.js"
+},
+{
+	"id": "notifications.search.placeholder",
+	"description": "Notification placeholder",
+	"defaultMessage": "Search Notifications",
+	"filepath": "./src/components/notifications/notifications.js"
+},
+{
+	"id": "notifications.search.button",
+	"description": "Notification button",
+	"defaultMessage": "SEARCH",
+	"filepath": "./src/components/notifications/notifications.js"
+},
+{
+	"id": "notifications.search.head",
+	"description": "Notification header message",
+	"defaultMessage": "Notifications",
+	"filepath": "./src/components/notifications/notifications.js"
 },
 {
 	"id": "notifications.read.message",
@@ -235,9 +282,45 @@
 	"filepath": "./src/components/notifications/notifications.js"
 },
 {
+	"id": "sysOverview.tab.heading",
+	"description": "System overview Tab",
+	"defaultMessage": "Overview",
+	"filepath": "./src/components/subtab/subTabs.js"
+},
+{
+	"id": "ppsConfiguration.tab.heading",
+	"description": "pps configuration tab",
+	"defaultMessage": "PPS Configuration",
+	"filepath": "./src/components/subtab/subTabs.js"
+},
+{
+	"id": "sysControllers.tab.heading",
+	"description": "Syatem controllers Tab",
+	"defaultMessage": "System Controllers",
+	"filepath": "./src/components/subtab/subTabs.js"
+},
+{
 	"id": "gor.filter.filterLabel",
 	"description": "label for filter",
 	"defaultMessage": "Filter data",
+	"filepath": "./src/components/tableFilter/filter.js"
+},
+{
+	"id": "gor.filter.hide",
+	"description": "label for hide",
+	"defaultMessage": "Hide",
+	"filepath": "./src/components/tableFilter/filter.js"
+},
+{
+	"id": "gor.filter.noResult",
+	"description": "label for hide",
+	"defaultMessage": "No results found, please try again",
+	"filepath": "./src/components/tableFilter/filter.js"
+},
+{
+	"id": "gor.filter.reset",
+	"description": "label for reset",
+	"defaultMessage": "Reset",
 	"filepath": "./src/components/tableFilter/filter.js"
 },
 {
@@ -301,10 +384,160 @@
 	"filepath": "./src/components/utilityComponents/accordianBar.js"
 },
 {
+	"id": "utility.downloadGRN.status.heading",
+	"description": "GRN Status",
+	"defaultMessage": "GRN Status",
+	"filepath": "./src/components/utilityComponents/downloadGRTile.js"
+},
+{
+	"id": "utility.downloadGRN.stnPlaceholder",
+	"description": "Enter STN Number",
+	"defaultMessage": "Enter STN Number",
+	"filepath": "./src/components/utilityComponents/downloadGRTile.js"
+},
+{
+	"id": "utility.downloadGRN.formatPlaceholder",
+	"description": "Enter STN Number",
+	"defaultMessage": "Select File type",
+	"filepath": "./src/components/utilityComponents/downloadGRTile.js"
+},
+{
+	"id": "utility.reportsHistory.clickToDownload",
+	"description": "file name",
+	"defaultMessage": "Click here to download",
+	"filepath": "./src/components/utilityComponents/downloadGRTile.js"
+},
+{
+	"id": "utility.uploadHist.success",
+	"description": "Status",
+	"defaultMessage": "Status: {status}",
+	"filepath": "./src/components/utilityComponents/downloadGRTile.js"
+},
+{
+	"id": "utility.downloadGRN.label",
+	"description": "STN number:",
+	"defaultMessage": "STN number:",
+	"filepath": "./src/components/utilityComponents/downloadGRTile.js"
+},
+{
+	"id": "utility.downloadGRN.stnError",
+	"description": "Please enter correct STN number",
+	"defaultMessage": "Please enter correct STN number",
+	"filepath": "./src/components/utilityComponents/downloadGRTile.js"
+},
+{
+	"id": "utility.downloadGRN.head",
+	"description": "Generate Report",
+	"defaultMessage": "Generate Report",
+	"filepath": "./src/components/utilityComponents/downloadGRTile.js"
+},
+{
+	"id": "utility.downloadGRN.history",
+	"description": "Report History",
+	"defaultMessage": "Report History",
+	"filepath": "./src/components/utilityComponents/downloadGRTile.js"
+},
+{
+	"id": "utility.downloadReport.head",
+	"description": "Download Reports",
+	"defaultMessage": "Download Reports",
+	"filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+},
+{
+	"id": "utility.downloadReport.Status.heading",
+	"description": "Reports Status",
+	"defaultMessage": "Reports Status",
+	"filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+},
+{
+	"id": "utility.downloadRprts.CategoryLabel",
+	"description": "Category",
+	"defaultMessage": "Category",
+	"filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+},
+{
+	"id": "utility.downloadRprts.CategoryPlchldr",
+	"description": "Select Category",
+	"defaultMessage": "Select Category",
+	"filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+},
+{
+	"id": "utility.downloadRprts.CategoryInventory",
+	"description": "Inventory",
+	"defaultMessage": "Inventory",
+	"filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+},
+{
+	"id": "utility.downloadRprts.FileFormatPlchldr",
+	"description": "Select File Format",
+	"defaultMessage": "Select File Format",
+	"filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+},
+{
+	"id": "utility.downloadRprts.FileFormatLabel",
+	"description": "File Format",
+	"defaultMessage": "File Format",
+	"filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+},
+{
+	"id": "utility.downloadRports.csvFormat",
+	"description": "Comma separated values (csv)",
+	"defaultMessage": "Comma separated values (csv)",
+	"filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+},
+{
+	"id": "utiltiy.downloadRports.xlsFormat",
+	"description": "ExceL Spreadsheet (xlsx)",
+	"defaultMessage": "ExceL Spreadsheet (xlsx)",
+	"filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+},
+{
+	"id": "utility.grnHistory.clickToDownload",
+	"description": "file name",
+	"defaultMessage": "Click here to download",
+	"filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+},
+{
+	"id": "utility.uploadHist.success",
+	"description": "Status",
+	"defaultMessage": "Status: {status}",
+	"filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+},
+{
+	"id": "utility.downloadReports.head",
+	"description": "Generate Report",
+	"defaultMessage": "Generate Report",
+	"filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+},
+{
+	"id": "utility.downloadReports.history",
+	"description": "Report History",
+	"defaultMessage": "Report History",
+	"filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+},
+{
 	"id": "utility.uploadHistory.head",
 	"description": "Upload History",
 	"defaultMessage": "Upload History",
 	"filepath": "./src/components/utilityComponents/masterUploadTile.js"
+},
+{
+	"id": "utility.itemRecall.head",
+	"description": "Expired Items",
+	"defaultMessage": "Expired Items",
+	"filepath": "./src/components/utilityComponents/scriptsTile.js"
+},
+{
+	"id": "utility.itemRecall.subHead",
+	"description": "(Recall all the expired items)",
+	"defaultMessage": "(Recall all the expired items)",
+	"filepath": "./src/components/utilityComponents/scriptsTile.js"
+},
+{
+	"id": "utility.itemRecall.buttonText",
+	"description": "RECALL",
+	"defaultMessage": "RECALL",
+	"filepath": "./src/components/utilityComponents/scriptsTile.js"
 },
 {
 	"id": "utility.downDlabel",
@@ -409,6 +642,54 @@
 	"filepath": "./src/constants/backEndConstants.js"
 },
 {
+	"id": "stringConfig.md007",
+	"description": "Text for safety checklist item 7",
+	"defaultMessage": "Peripherals status known.",
+	"filepath": "./src/constants/backEndConstants.js"
+},
+{
+	"id": "stringConfig.md008",
+	"description": "Text for safety checklist item 8",
+	"defaultMessage": "Physical inventory verified.",
+	"filepath": "./src/constants/backEndConstants.js"
+},
+{
+	"id": "stringConfig.md009",
+	"description": "Text for safety checklist item 9",
+	"defaultMessage": "No Emergency buttons in 'Pressed' state.",
+	"filepath": "./src/constants/backEndConstants.js"
+},
+{
+	"id": "stringConfig.md010",
+	"description": "Text for safety checklist item 10",
+	"defaultMessage": "All shutters open  in active zones.",
+	"filepath": "./src/constants/backEndConstants.js"
+},
+{
+	"id": "stringConfig.md011",
+	"description": "Text for safety checklist item 11",
+	"defaultMessage": "No humans in operations area.",
+	"filepath": "./src/constants/backEndConstants.js"
+},
+{
+	"id": "stringConfig.md012",
+	"description": "Text for safety checklist item 12",
+	"defaultMessage": "All paths cleared of any debris.",
+	"filepath": "./src/constants/backEndConstants.js"
+},
+{
+	"id": "stringConfig.md013",
+	"description": "Text for safety checklist item 13",
+	"defaultMessage": "Move bots to the PPS location and do an \"init\" after all bots are moved.",
+	"filepath": "./src/constants/backEndConstants.js"
+},
+{
+	"id": "stringConfig.md014",
+	"description": "Text for safety checklist item 14",
+	"defaultMessage": "No bots require to be moved to PPS.",
+	"filepath": "./src/constants/backEndConstants.js"
+},
+{
 	"id": "stringConfig.audit_reaudited",
 	"description": "Text for audit reaudited status",
 	"defaultMessage": "Re-audited",
@@ -469,6 +750,12 @@
 	"filepath": "./src/constants/messageConstants.js"
 },
 {
+	"id": "emergency.resume.Softemergency",
+	"description": "Soft emergency still there",
+	"defaultMessage": "Soft emergency still there",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
 	"id": "emergency.resume.success",
 	"description": "Operations resumed",
 	"defaultMessage": "Operation resumed",
@@ -494,8 +781,8 @@
 },
 {
 	"id": "audit.cancellation.error.g021",
-	"description": "Audit Id already sent to core for cancellation",
-	"defaultMessage": "Audit Id already sent to core for cancellation",
+	"description": "Audit Id already sent for cancellation",
+	"defaultMessage": "Audit Id already sent for cancellation",
 	"filepath": "./src/constants/messageConstants.js"
 },
 {
@@ -511,6 +798,12 @@
 	"filepath": "./src/constants/messageConstants.js"
 },
 {
+	"id": "audit.cancellation.success",
+	"description": "Audit Id cancellation is successful",
+	"defaultMessage": "Request sent for audit cancellation",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
 	"id": "pps.statusChange.allStatusSuccess",
 	"description": "Records in file should not be greater than",
 	"defaultMessage": "Status change request successful",
@@ -520,6 +813,138 @@
 	"id": "pps.modeChange.allModeSuccess",
 	"description": "Records in file should not be greater than",
 	"defaultMessage": "Mode change request successful",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
+	"id": "zoning.status.normal",
+	"description": "Status text for zone",
+	"defaultMessage": "OPERATING",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
+	"id": "zoning.status.pauseInit",
+	"description": "Status text for zone",
+	"defaultMessage": "PAUSE INITIATED",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
+	"id": "zoning.status.pauseActivated",
+	"description": "Status text for zone",
+	"defaultMessage": "PAUSE ACTIVATED",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
+	"id": "zoning.status.pauseDeactive",
+	"description": "Status text for zone",
+	"defaultMessage": "PAUSE DEACTIVATED",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
+	"id": "zoning.status.clearInit",
+	"description": "Status text for zone",
+	"defaultMessage": "CLEAR INITIATED",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
+	"id": "zoning.status.clearActive",
+	"description": "Status text for zone",
+	"defaultMessage": "CLEAR ACTIVATED",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
+	"id": "zoning.status.clearDeactivated",
+	"description": "Status text for zone",
+	"defaultMessage": "CLEAR DEACTIVATED",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
+	"id": "zoning.status.emergencyStop",
+	"description": "Status text for zone",
+	"defaultMessage": "EMERGENCY STOP",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
+	"id": "zoning.status.emergencyPause",
+	"description": "Status text for zone",
+	"defaultMessage": "EMERGENCY PAUSE",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
+	"id": "zoning.status.stopped",
+	"description": "Status text for zone",
+	"defaultMessage": "STOPPED",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
+	"id": "zoning.status.paused",
+	"description": "Status text for zone",
+	"defaultMessage": "PAUSED",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
+	"id": "zoning.action.zone_pause",
+	"description": "Status text for zone",
+	"defaultMessage": "Zone pause activated",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
+	"id": "zoning.action.zone_clear",
+	"description": "Status text for zone",
+	"defaultMessage": "Zone clear activated",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
+	"id": "zoning.action.emergency_stop",
+	"description": "Status text for zone",
+	"defaultMessage": "Emergency stop activated",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
+	"id": "zoning.action.emergency_pause",
+	"description": "Status text for zone",
+	"defaultMessage": "Emergency pause activated",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
+	"id": "zoning.action.none",
+	"description": "Status text for zone",
+	"defaultMessage": "Standard",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
+	"id": "zoning.action.button_press",
+	"description": "Status text for zone",
+	"defaultMessage": "Button pressed",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
+	"id": "zoning.action.emergency_stop_button_press",
+	"description": "Status text for zone",
+	"defaultMessage": "Emergency stop button pressed",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
+	"id": "zoning.action.emergency_pause_button_press",
+	"description": "Status text for zone",
+	"defaultMessage": "Emergency pause button pressed",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
+	"id": "zoning.action.latch_gate",
+	"description": "Status text for zone",
+	"defaultMessage": "Entry gate breached",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
+	"id": "zoning.action.light_curtain",
+	"description": "Status text for zone",
+	"defaultMessage": "Light curtains breached",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
+	"id": "zoning.action.noneSensor",
+	"description": "Status text for zone",
+	"defaultMessage": "Standard",
 	"filepath": "./src/constants/messageConstants.js"
 },
 {
@@ -700,6 +1125,30 @@
 	"filepath": "./src/containers/auditTab/createAudit.js"
 },
 {
+	"id": "audit.delete.close",
+	"description": "Text for audit delete close",
+	"defaultMessage": "Close",
+	"filepath": "./src/containers/auditTab/deleteAudit.js"
+},
+{
+	"id": "audit.delete.confirm",
+	"description": "Text for audit delete confirm",
+	"defaultMessage": "Delete audit task",
+	"filepath": "./src/containers/auditTab/deleteAudit.js"
+},
+{
+	"id": "audit.duplicate.close",
+	"description": "Text for audit duplicate close",
+	"defaultMessage": "Close",
+	"filepath": "./src/containers/auditTab/duplicateAudit.js"
+},
+{
+	"id": "audit.duplicate.confirm",
+	"description": "Text for audit duplicate confirm",
+	"defaultMessage": "Duplicate audit task",
+	"filepath": "./src/containers/auditTab/duplicateAudit.js"
+},
+{
 	"id": "resolveAudit.table.batchID",
 	"description": "batch id Column",
 	"defaultMessage": "BOX ID.",
@@ -785,13 +1234,25 @@
 {
 	"id": "operation.alert.release",
 	"description": "Text for emergency button release heading",
-	"defaultMessage": "Stop button released",
+	"defaultMessage": "All Emergency-stop buttons released",
+	"filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
+},
+{
+	"id": "operation.alert.releaseSoft",
+	"description": "Text for emergency button release heading",
+	"defaultMessage": "All Emergency-pause buttons released",
 	"filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
 },
 {
 	"id": "operation.alert.release.text",
 	"description": "Text for emergency stop button release",
-	"defaultMessage": "Emergency Stop button has been released.",
+	"defaultMessage": "All Emergency-stop buttons have been released.",
+	"filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
+},
+{
+	"id": "operation.alert.releaseSoft.text",
+	"description": "Text for emergency pause button release",
+	"defaultMessage": "All Emergency-pause buttons have been released.",
 	"filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
 },
 {
@@ -807,31 +1268,109 @@
 	"filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
 },
 {
-	"id": "operation.alert.stop",
-	"description": "Text for operation stopped heading",
-	"defaultMessage": "Operation Stopped",
-	"filepath": "./src/containers/emergencyProcess/OperationStop.js"
+	"id": "operation.fire.shutter",
+	"description": "Description Text clear shutter",
+	"defaultMessage": "Clearing all shutters",
+	"filepath": "./src/containers/emergencyProcess/fireHazard.js"
+},
+{
+	"id": "operation.fire.failshutter",
+	"description": "Description Text fail to clear shutter",
+	"defaultMessage": "Failed to clear shutters",
+	"filepath": "./src/containers/emergencyProcess/fireHazard.js"
+},
+{
+	"id": "operation.fire.clearedshutter",
+	"description": "Description Text  cleared shutter",
+	"defaultMessage": "Cleared all shutters",
+	"filepath": "./src/containers/emergencyProcess/fireHazard.js"
+},
+{
+	"id": "operation.fire.escapecleared",
+	"description": "Description Text escape cleared",
+	"defaultMessage": "Cleared escape path",
+	"filepath": "./src/containers/emergencyProcess/fireHazard.js"
+},
+{
+	"id": "operation.fire.escapeprogress",
+	"description": "Description Text escape in progress",
+	"defaultMessage": "Clearing escape path",
+	"filepath": "./src/containers/emergencyProcess/fireHazard.js"
+},
+{
+	"id": "operation.fire.escapefail",
+	"description": "Description Text escape to fail",
+	"defaultMessage": "Failed to clear escape path",
+	"filepath": "./src/containers/emergencyProcess/fireHazard.js"
+},
+{
+	"id": "operation.fire.header",
+	"description": "Header Text FIRE EMERGENCY",
+	"defaultMessage": "FIRE EMERGENCY",
+	"filepath": "./src/containers/emergencyProcess/fireHazard.js"
+},
+{
+	"id": "operation.fire.cautionText",
+	"description": "Description Text FIRE EMERGENCY",
+	"defaultMessage": "Fire emergency has been triggered and system has started its safety measures.",
+	"filepath": "./src/containers/emergencyProcess/fireHazard.js"
+},
+{
+	"id": "operation.fire.evacuation",
+	"description": "Description Text evacuation",
+	"defaultMessage": "Please follow evacuation procedures immediately.",
+	"filepath": "./src/containers/emergencyProcess/fireHazard.js"
+},
+{
+	"id": "operation.alert.release.button",
+	"description": "Text button to resume operation",
+	"defaultMessage": "RESUME OPERATION",
+	"filepath": "./src/containers/emergencyProcess/fireHazard.js"
 },
 {
 	"id": "operation.alert.pause",
-	"description": "Text for operation paused heading",
+	"description": "Text for operation stopped heading",
+	"defaultMessage": "Butler System - Operation Paused",
+	"filepath": "./src/containers/emergencyProcess/OperationPause.js"
+},
+{
+	"id": "operation.alert.pause.text",
+	"description": "Text for emergency button press",
+	"defaultMessage": "Emergency-Pause activated via Controller {controller} in {zone}.",
+	"filepath": "./src/containers/emergencyProcess/OperationPause.js"
+},
+{
+	"id": "operation.alert.pause.nonPOE",
+	"description": "Text for operation stopped heading",
 	"defaultMessage": "Operation Paused",
+	"filepath": "./src/containers/emergencyProcess/OperationPause.js"
+},
+{
+	"id": "operation.alert.pause.subtext",
+	"description": "Subtext for pause alert",
+	"defaultMessage": "You must check the emergency situation and release the Emergency Pause button in order to resume the operation in warehouse",
+	"filepath": "./src/containers/emergencyProcess/OperationPause.js"
+},
+{
+	"id": "operation.alert.stop",
+	"description": "Text for operation stopped heading",
+	"defaultMessage": "Butler System - Operation Stopped",
 	"filepath": "./src/containers/emergencyProcess/OperationStop.js"
 },
 {
 	"id": "operation.alert.stop.text",
 	"description": "Text for emergency button press",
-	"defaultMessage": "Emergency Stop button has been pressed.",
+	"defaultMessage": "Emergency-Stop activated via Conroller {controller} in {zone}.",
 	"filepath": "./src/containers/emergencyProcess/OperationStop.js"
 },
 {
-	"id": "operation.alert.pause.text",
-	"description": "Text for operation paused alert",
-	"defaultMessage": "Butler operation has been paused from the management dashboard",
+	"id": "operation.alert.stop.nonPOE",
+	"description": "Text for operation stopped heading",
+	"defaultMessage": "Operation Stopped",
 	"filepath": "./src/containers/emergencyProcess/OperationStop.js"
 },
 {
-	"id": "operation.alert.pause.subtext",
+	"id": "operation.alert.stop.subtext",
 	"description": "Subtext for pause alert",
 	"defaultMessage": "You must check the emergency situation and release the Emergency Stop button in order to resume the operation in warehouse",
 	"filepath": "./src/containers/emergencyProcess/OperationStop.js"
@@ -903,9 +1442,51 @@
 	"filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
 },
 {
-	"id": "operation.safety.heading",
+	"id": "misplaced.botId",
+	"description": "bot id",
+	"defaultMessage": "{botid}",
+	"filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+},
+{
+	"id": "misplaced.rackId",
+	"description": "rack id",
+	"defaultMessage": "{rackid}",
+	"filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+},
+{
+	"id": "misplaced.racklocation",
+	"description": "rack location",
+	"defaultMessage": "{racklocation}",
+	"filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+},
+{
+	"id": "misplaced.rackface",
+	"description": "rack face",
+	"defaultMessage": "{rackface}",
+	"filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+},
+{
+	"id": "misplaced.ppsid",
+	"description": "pps id",
+	"defaultMessage": "{ppsid}",
+	"filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+},
+{
+	"id": "misplaced.ppslocation",
+	"description": "pps location",
+	"defaultMessage": "{ppslocation}",
+	"filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+},
+{
+	"id": "operation.firesafety.heading",
 	"description": "Text for safety heading",
-	"defaultMessage": "Safety checklist",
+	"defaultMessage": "Resume Checklist",
+	"filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+},
+{
+	"id": "operation.safety.heading",
+	"description": "Text for fire safety heading",
+	"defaultMessage": "Safety Checklist",
 	"filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
 },
 {
@@ -921,9 +1502,51 @@
 	"filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
 },
 {
-	"id": "operation.safety.errors",
+	"id": "operation.safetychecklist.errors",
 	"description": "Text for safety error",
-	"defaultMessage": "System has found some of these steps were not followed. \n                    Please check or contact service engineer for support",
+	"defaultMessage": "System has detected that one or more of the required conditions have not been fulfilled. \n                    Please try again or contact service engineer for support",
+	"filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+},
+{
+	"id": "operation.safetychecklistTable.botid",
+	"description": "Bot ID",
+	"defaultMessage": "Bot ID",
+	"filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+},
+{
+	"id": "operation.safetychecklistTable.rockid",
+	"description": "Rack ID",
+	"defaultMessage": "Rack ID",
+	"filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+},
+{
+	"id": "operation.safetychecklistTable.rocklocation",
+	"description": "Rack location",
+	"defaultMessage": "Rack location",
+	"filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+},
+{
+	"id": "operation.safetychecklistTable.rackface",
+	"description": "Rack face",
+	"defaultMessage": "Rack face",
+	"filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+},
+{
+	"id": "operation.safetychecklistTable.ppsid",
+	"description": "PPS ID",
+	"defaultMessage": "PPS ID",
+	"filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+},
+{
+	"id": "operation.safetychecklistTable.ppslocation",
+	"description": "PPS location",
+	"defaultMessage": "PPS location",
+	"filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+},
+{
+	"id": "operation.firesafety.confirm",
+	"description": "Text for Resume Operation button",
+	"defaultMessage": "Resume Operation",
 	"filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
 },
 {
@@ -1068,19 +1691,19 @@
 {
 	"id": "orderlist.pendingOrders",
 	"description": "pendingOrders header ordertable",
-	"defaultMessage": "{pendingOrders} orders pending",
+	"defaultMessage": "{pendingOrders, number} {pendingOrders, plural, one {order} other {orders}} pending",
 	"filepath": "./src/containers/orderTab/orderListTable.js"
 },
 {
 	"id": "orderlist.totalCompletedOrder",
 	"description": "totalCompletedOrder header ordertable",
-	"defaultMessage": "{totalCompletedOrder} orders completed",
+	"defaultMessage": "{totalCompletedOrder, number} {totalCompletedOrder, plural, one {order} other {orders}} completed",
 	"filepath": "./src/containers/orderTab/orderListTable.js"
 },
 {
 	"id": "orderlist.itemsPerOrder",
 	"description": "itemsPerOrder header ordertable",
-	"defaultMessage": "Avg {itemsPerOrder} items/order",
+	"defaultMessage": "Avg {itemsPerOrder, number} {itemsPerOrder, plural, one {item} other {items}}/order",
 	"filepath": "./src/containers/orderTab/orderListTable.js"
 },
 {
@@ -1382,6 +2005,42 @@
 	"filepath": "./src/containers/systemTabs/closePPSList.js"
 },
 {
+	"id": "ppsclose.close",
+	"description": "Heading",
+	"defaultMessage": "Close",
+	"filepath": "./src/containers/systemTabs/closePPSList.js"
+},
+{
+	"id": "ppsclose.fclose",
+	"description": "Heading",
+	"defaultMessage": "Force Close",
+	"filepath": "./src/containers/systemTabs/closePPSList.js"
+},
+{
+	"id": "ppsclose.head.text",
+	"description": "Heading",
+	"defaultMessage": "Close or Force close PPS",
+	"filepath": "./src/containers/systemTabs/closePPSList.js"
+},
+{
+	"id": "ppsclose.closeAll",
+	"description": "Heading",
+	"defaultMessage": "CLOSE ALL",
+	"filepath": "./src/containers/systemTabs/closePPSList.js"
+},
+{
+	"id": "ppsclose.fcloseAll",
+	"description": "Heading",
+	"defaultMessage": "FORCE CLOSE ALL",
+	"filepath": "./src/containers/systemTabs/closePPSList.js"
+},
+{
+	"id": "ppsclose.table.noResult",
+	"description": "Heading",
+	"defaultMessage": "No Results Found",
+	"filepath": "./src/containers/systemTabs/closePPSList.js"
+},
+{
 	"id": "pps.close.cancel",
 	"description": "Text for cancel close",
 	"defaultMessage": "CANCEL",
@@ -1392,6 +2051,204 @@
 	"description": "Text for close confirm",
 	"defaultMessage": "CONFIRM",
 	"filepath": "./src/containers/systemTabs/closePPSList.js"
+},
+{
+	"id": "pps.configuration.confirm.apply.profile",
+	"description": "Apply Profile to PPS",
+	"defaultMessage": "Are you sure you want to change the profile?",
+	"filepath": "./src/containers/systemTabs/confirmApplyProfile.js"
+},
+{
+	"id": "pps.configuration.confirm.apply.profile.description",
+	"description": "PPS Configuration will be changed",
+	"defaultMessage": "PPS Configuration will be changed",
+	"filepath": "./src/containers/systemTabs/confirmApplyProfile.js"
+},
+{
+	"id": "pps.configuration.confirm.apply.cancel",
+	"description": "Cancel apply Profile to PPS",
+	"defaultMessage": "Cancel",
+	"filepath": "./src/containers/systemTabs/confirmApplyProfile.js"
+},
+{
+	"id": "pps.configuration.confirm.change.profile",
+	"description": "Change Profile to PPS",
+	"defaultMessage": "Change",
+	"filepath": "./src/containers/systemTabs/confirmApplyProfile.js"
+},
+{
+	"id": "pps.configuration.create.profile.header",
+	"description": "Save a new profile",
+	"defaultMessage": "Save a new profile",
+	"filepath": "./src/containers/systemTabs/createPPSProfile.js"
+},
+{
+	"id": "pps.configuration.create.profile.name.label",
+	"description": "New Profile Name",
+	"defaultMessage": "New Profile Name",
+	"filepath": "./src/containers/systemTabs/createPPSProfile.js"
+},
+{
+	"id": "pps.configuration.create.profile.cancel",
+	"description": "Cancel",
+	"defaultMessage": "Cancel",
+	"filepath": "./src/containers/systemTabs/createPPSProfile.js"
+},
+{
+	"id": "pps.configuration.create.profile.button.text",
+	"description": "Save A New Profile",
+	"defaultMessage": "Save A New Profile",
+	"filepath": "./src/containers/systemTabs/createPPSProfile.js"
+},
+{
+	"id": "pps.configuration.bins.selection.label",
+	"description": "Select a bin to manage tags",
+	"defaultMessage": "Select a bin to manage tags",
+	"filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
+},
+{
+	"id": "pps.configuration.bins.direction.label",
+	"description": "Bin Direction",
+	"defaultMessage": "Current PPS Selection",
+	"filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
+},
+{
+	"id": "pps.configuration.bins.direction.left",
+	"description": "Bin Direction LEFT",
+	"defaultMessage": "LEFT",
+	"filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
+},
+{
+	"id": "pps.configuration.bins.direction.right",
+	"description": "Bin Direction RIGHT",
+	"defaultMessage": "RIGHT",
+	"filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
+},
+{
+	"id": "pps.configuration.bins.selection.count",
+	"description": "total users for filter search bar",
+	"defaultMessage": "Select a bin to activate or deactivate ({deactivated}/{total} bins deactivated)",
+	"filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
+},
+{
+	"id": "pps.configuration.bins.group.selection.count",
+	"description": "total users for filter search bar",
+	"defaultMessage": "Select a bin group to enable or disable ({disabled}/{total} groups disabled)",
+	"filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
+},
+{
+	"id": "pps.configuration.bins.tagCount.text",
+	"description": "Tag",
+	"defaultMessage": "Tag",
+	"filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
+},
+{
+	"id": "pps.configuration.bins.activation.button.text",
+	"description": "ACTIVATE",
+	"defaultMessage": "ACTIVATE",
+	"filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
+},
+{
+	"id": "pps.configuration.bins.deactivation.button.text",
+	"description": "DEACTIVATE",
+	"defaultMessage": "DEACTIVATE",
+	"filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
+},
+{
+	"id": "pps.configuration.bins.group.enable.button.text",
+	"description": "ENABLE",
+	"defaultMessage": "ENABLE",
+	"filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
+},
+{
+	"id": "pps.configuration.bins.group.disable.button.text",
+	"description": "DISABLE",
+	"defaultMessage": "DISABLE",
+	"filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
+},
+{
+	"id": "pps.configuration.header.text",
+	"description": "PPS Configurations",
+	"defaultMessage": "PPS Configurations",
+	"filepath": "./src/containers/systemTabs/ppsConfigurationList.js"
+},
+{
+	"id": "pps.configuration.applied.text",
+	"description": "Applied",
+	"defaultMessage": "Applied",
+	"filepath": "./src/containers/systemTabs/ppsConfigurationList.js"
+},
+{
+	"id": "pps.configuration.requested.text",
+	"description": "Requested",
+	"defaultMessage": "Requested",
+	"filepath": "./src/containers/systemTabs/ppsConfigurationList.js"
+},
+{
+	"id": "pps.configuration.profileAplied.text",
+	"description": "profile applied",
+	"defaultMessage": "profile applied",
+	"filepath": "./src/containers/systemTabs/ppsConfigurationList.js"
+},
+{
+	"id": "pps.configuration.bins.tags.label",
+	"description": "Assign tags to bin",
+	"defaultMessage": "Assign tags to bin",
+	"filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
+},
+{
+	"id": "pps.configuration.bins.activation.label",
+	"description": "Bin activate/deactivate",
+	"defaultMessage": "Bin activate/deactivate",
+	"filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
+},
+{
+	"id": "pps.configuration.group.activation.label",
+	"description": "Bin group enable/disable",
+	"defaultMessage": "Bin group enable/disable",
+	"filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
+},
+{
+	"id": "pps.configuration.bins.frontView.label",
+	"description": "Front View",
+	"defaultMessage": "Front View",
+	"filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
+},
+{
+	"id": "pps.configuration.buttons.cancel.text",
+	"description": "CANCEL",
+	"defaultMessage": "CANCEL",
+	"filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
+},
+{
+	"id": "pps.configuration.buttons.next.text",
+	"description": "NEXT",
+	"defaultMessage": "NEXT",
+	"filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
+},
+{
+	"id": "pps.configuration.buttons.saveApply.text",
+	"description": "SAVE AND APPLY",
+	"defaultMessage": "SAVE AND APPLY",
+	"filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
+},
+{
+	"id": "pps.configuration.buttons.back.text",
+	"description": "BACK",
+	"defaultMessage": "BACK",
+	"filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
+},
+{
+	"id": "pps.configuration.buttons.saveNewProfile.text",
+	"description": "SAVE AS NEW PROFILE",
+	"defaultMessage": "SAVE AS NEW PROFILE",
+	"filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
+},
+{
+	"id": "pps.configuration.buttons.save.text",
+	"description": "SAVE",
+	"defaultMessage": "SAVE",
+	"filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
 },
 {
 	"id": "pps.inputField.id",
@@ -1456,6 +2313,11 @@
 {
 	"id": "v.MODE.notset",
 	"defaultMessage": "Not set",
+	"filepath": "./src/containers/systemTabs/ppsFilter.js"
+},
+{
+	"id": "pps.range.heading",
+	"defaultMessage": "PERFORMANCE RANGE",
 	"filepath": "./src/containers/systemTabs/ppsFilter.js"
 },
 {
@@ -1537,6 +2399,131 @@
 	"filepath": "./src/containers/systemTabs/PPStable.js"
 },
 {
+	"id": "PPS.table.profiles",
+	"description": "profiles for PPS",
+	"defaultMessage": "PROFILES USED",
+	"filepath": "./src/containers/systemTabs/PPStable.js"
+},
+{
+	"id": "pps.configuration.confirm.saveAndapply.profile",
+	"description": "Save and ppply Profile to PPS",
+	"defaultMessage": "Are you sure you want to save and apply the profile?",
+	"filepath": "./src/containers/systemTabs/saveApplyProfile.js"
+},
+{
+	"id": "pps.configuration.confirm.saveAndapply.profile.description",
+	"description": "Profile will be applied after pending tasks are completed",
+	"defaultMessage": "Profile will be applied after pending tasks are completed",
+	"filepath": "./src/containers/systemTabs/saveApplyProfile.js"
+},
+{
+	"id": "pps.configuration.confirm.apply.cancel",
+	"description": "Cancel apply Profile to PPS",
+	"defaultMessage": "Cancel",
+	"filepath": "./src/containers/systemTabs/saveApplyProfile.js"
+},
+{
+	"id": "pps.configuration.confirm.saveAndApply.profile",
+	"description": "Save and Apply Profile to PPS",
+	"defaultMessage": "SAVE AND APPLY",
+	"filepath": "./src/containers/systemTabs/saveApplyProfile.js"
+},
+{
+	"id": "sysController.table.heading",
+	"description": "Heading for PPS",
+	"defaultMessage": "System Controllers",
+	"filepath": "./src/containers/systemTabs/sysControllers.js"
+},
+{
+	"id": "sysController.summary.showall",
+	"description": "button label for show all",
+	"defaultMessage": "Show all Zones",
+	"filepath": "./src/containers/systemTabs/sysControllers.js"
+},
+{
+	"id": "sysControllers.idColumn.heading",
+	"description": "CONTROLLER ID",
+	"defaultMessage": "CONTROLLER ID",
+	"filepath": "./src/containers/systemTabs/sysControllers.js"
+},
+{
+	"id": "sysController.table.status",
+	"description": "Status for PPS",
+	"defaultMessage": "STATUS",
+	"filepath": "./src/containers/systemTabs/sysControllers.js"
+},
+{
+	"id": "sysController.table.location",
+	"description": "Location",
+	"defaultMessage": "LOCATION",
+	"filepath": "./src/containers/systemTabs/sysControllers.js"
+},
+{
+	"id": "sysController.table.conDetails",
+	"description": "Status for PPS",
+	"defaultMessage": "CONNECTION DETAILS",
+	"filepath": "./src/containers/systemTabs/sysControllers.js"
+},
+{
+	"id": "sysController.table.ethernetStatus",
+	"description": "sysController.table.ethernetStatus",
+	"defaultMessage": "Ethernet Network:",
+	"filepath": "./src/containers/systemTabs/sysControllers.js"
+},
+{
+	"id": "sysController.table.zigbeeStatus",
+	"description": "sysController.table.zigbeeStatus",
+	"defaultMessage": "Zigbee Network:",
+	"filepath": "./src/containers/systemTabs/sysControllers.js"
+},
+{
+	"id": "sysController.table.operatingMode",
+	"description": "Status for PPS",
+	"defaultMessage": "OPERATING MODE",
+	"filepath": "./src/containers/systemTabs/sysControllers.js"
+},
+{
+	"id": "sysControllers.table.noData",
+	"description": "No data message for PPStable",
+	"defaultMessage": "No Controllers Found",
+	"filepath": "./src/containers/systemTabs/sysControllers.js"
+},
+{
+	"id": "sysOverView.zones.count",
+	"description": "Zone status count",
+	"defaultMessage": "{activeZones}/{totalZones} Operating Zones",
+	"filepath": "./src/containers/systemTabs/sysOverview.js"
+},
+{
+	"id": "pps.configuration.tag.search.placeholder",
+	"defaultMessage": "Enter a tag...",
+	"filepath": "./src/containers/systemTabs/tags.js"
+},
+{
+	"id": "pps.configuration.tags.label",
+	"description": "Tags",
+	"defaultMessage": "Tags",
+	"filepath": "./src/containers/systemTabs/tags.js"
+},
+{
+	"id": "pps.configuration.tags.searchResults.text",
+	"description": "Search Results",
+	"defaultMessage": "Search Results",
+	"filepath": "./src/containers/systemTabs/tags.js"
+},
+{
+	"id": "pps.configuration.tags.all.text",
+	"description": "All Tags",
+	"defaultMessage": "All Tags",
+	"filepath": "./src/containers/systemTabs/tags.js"
+},
+{
+	"id": "pps.configuration.tags.add.text",
+	"description": "Add",
+	"defaultMessage": "Add",
+	"filepath": "./src/containers/systemTabs/tags.js"
+},
+{
 	"id": "utilities.tab.heading",
 	"description": "audit tab",
 	"defaultMessage": "UTILITIES",
@@ -1545,7 +2532,7 @@
 {
 	"id": "overviewStatus.tab.stop",
 	"description": "overview Status emergency",
-	"defaultMessage": "Operation stopped",
+	"defaultMessage": "STOPPED",
 	"filepath": "./src/containers/tabs.js"
 },
 {
@@ -1555,9 +2542,33 @@
 	"filepath": "./src/containers/tabs.js"
 },
 {
+	"id": "auditStatus.tab.heading.none",
+	"description": "audit Status",
+	"defaultMessage": "None",
+	"filepath": "./src/containers/tabs.js"
+},
+{
 	"id": "auditStatus.tab.alert.heading",
 	"description": "audit Status alert",
 	"defaultMessage": "{count} {count, plural, one {alert} other {alerts}}",
+	"filepath": "./src/containers/tabs.js"
+},
+{
+	"id": "operation.alert.resumed",
+	"description": "Text to resume operation",
+	"defaultMessage": "All operation has been resumed to normal state.",
+	"filepath": "./src/containers/tabs.js"
+},
+{
+	"id": "operation.alert.triggeremergency",
+	"description": "Text button to trigger emergency",
+	"defaultMessage": "Fire emergency triggered.Follow evacuation procedures immediately",
+	"filepath": "./src/containers/tabs.js"
+},
+{
+	"id": "operation.alert.toastifydetails",
+	"description": "Text button to viewdetails",
+	"defaultMessage": "VIEW DETAILS",
 	"filepath": "./src/containers/tabs.js"
 },
 {
@@ -1709,7 +2720,7 @@
 	"filepath": "./src/containers/utilityTab.js"
 },
 {
-	"id": "utility.runScript.head",
+	"id": "utility.scriptsTile.head",
 	"description": "Run Script",
 	"defaultMessage": "Run Script",
 	"filepath": "./src/containers/utilityTab.js"
@@ -1721,9 +2732,45 @@
 	"filepath": "./src/containers/utilityTab.js"
 },
 {
+	"id": "utility.downloadRprts.CategoryLabel",
+	"description": "Category",
+	"defaultMessage": "Category",
+	"filepath": "./src/containers/utilityTab.js"
+},
+{
+	"id": "utility.downloadRprts.CategoryPlchldr",
+	"description": "Select Category",
+	"defaultMessage": "Select Category",
+	"filepath": "./src/containers/utilityTab.js"
+},
+{
+	"id": "utility.downloadRprts.FileFormatPlchldr",
+	"description": "Select File Format",
+	"defaultMessage": "Select File Format",
+	"filepath": "./src/containers/utilityTab.js"
+},
+{
+	"id": "utility.downloadRprts.FileFormatLabel",
+	"description": "File Format",
+	"defaultMessage": "File Format",
+	"filepath": "./src/containers/utilityTab.js"
+},
+{
+	"id": "utility.downloadRports.csvFormat",
+	"description": "Comma separated values (csv)",
+	"defaultMessage": "Comma separated values (csv)",
+	"filepath": "./src/containers/utilityTab.js"
+},
+{
+	"id": "utiltiy.downloadRports.xlsFormat",
+	"description": "ExceL Spreadsheet (xlsx)",
+	"defaultMessage": "ExceL Spreadsheet (xlsx)",
+	"filepath": "./src/containers/utilityTab.js"
+},
+{
 	"id": "utility.goodsRcvdNotes.head",
-	"description": "Download Goods Received Notes",
-	"defaultMessage": "Download Goods Received Notes",
+	"description": "Goods Received Notes",
+	"defaultMessage": "Goods Received Notes",
 	"filepath": "./src/containers/utilityTab.js"
 },
 {
@@ -1742,24 +2789,6 @@
 	"id": "utility.uploadBtn.label",
 	"description": "Upload Master Data",
 	"defaultMessage": "Upload Master Data",
-	"filepath": "./src/containers/utilityTab.js"
-},
-{
-	"id": "utility.itemRecall.head",
-	"description": "Expired Items",
-	"defaultMessage": "Expired Items",
-	"filepath": "./src/containers/utilityTab.js"
-},
-{
-	"id": "utility.itemRecall.subHead",
-	"description": "(Recall all the expired items)",
-	"defaultMessage": "(Recall all the expired items)",
-	"filepath": "./src/containers/utilityTab.js"
-},
-{
-	"id": "utility.itemRecall.buttonText",
-	"description": "RECALL",
-	"defaultMessage": "RECALL",
 	"filepath": "./src/containers/utilityTab.js"
 },
 {
@@ -1811,9 +2840,45 @@
 	"filepath": "./src/utilities/getFormattedMessages.js"
 },
 {
+	"id": "pps.mode.success",
+	"description": "PPS mode change success",
+	"defaultMessage": "Mode change request successfull",
+	"filepath": "./src/utilities/getFormattedMessages.js"
+},
+{
 	"id": "pps.status.reject",
 	"description": "PPS status change reject",
 	"defaultMessage": "{unsuccessful}/{totalCount} status change request rejected",
+	"filepath": "./src/utilities/getFormattedMessages.js"
+},
+{
+	"id": "pps.status.success",
+	"description": "PPS status change success",
+	"defaultMessage": "Status change request successfull",
+	"filepath": "./src/utilities/getFormattedMessages.js"
+},
+{
+	"id": "utility.downloadGRN.generateSuccess",
+	"description": "GRN Request submitted successfully",
+	"defaultMessage": "GRN Request submitted successfully",
+	"filepath": "./src/utilities/getFormattedMessages.js"
+},
+{
+	"id": "utility.downloadInventory.generateSuccess",
+	"description": "Inventory Report Request submitted successfully",
+	"defaultMessage": "Inventory Report Request submitted successfully",
+	"filepath": "./src/utilities/getFormattedMessages.js"
+},
+{
+	"id": "utility.downloadGRN.refreshed",
+	"description": "GRN History Refreshed!",
+	"defaultMessage": "GRN History Refreshed!",
+	"filepath": "./src/utilities/getFormattedMessages.js"
+},
+{
+	"id": "utility.downloadReprt.refreshed",
+	"description": "Reports History Refreshed!",
+	"defaultMessage": "Reports History Refreshed!",
 	"filepath": "./src/utilities/getFormattedMessages.js"
 },
 {
