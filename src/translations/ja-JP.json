@@ -1422,7 +1422,7 @@
  {
    "id": "widget.pick.throughput",
    "description": "Throughput message",
-   "defaultMessage": "{pps_count} PPS 棚卸 {throughput} 商品/時間"
+   "defaultMessage": "{count} PPS 棚卸 {throughput} 商品/時間"
  },
  {
    "id": "widget.pick.lowright",
@@ -2593,7 +2593,7 @@
 {
    "id": "audit.unresolveIssues",
    "description": "unresolve issue for audit table",
-   "defaultMessage": "{unresolvedCount} {unresolvedCount, plural, one {unresolved issue} other {unresolved issues}}",
+   "defaultMessage": "{unresolvedCount} {unresolvedCount, plural, one {未解決の問題} other {未解決の問題}}",
    "filepath": "./src/components/commonFunctionsDataTable.js"
 },
 {
@@ -2629,7 +2629,7 @@
 {
    "id": "audit.unresolveIssues.tooltip.header",
    "description": "unresolve issue for audit table",
-   "defaultMessage": "{unresolvedCount} {unresolvedCount, plural, one {unresolved audit line} other {unresolved audit lines}}",
+   "defaultMessage": "{unresolvedCount} {unresolvedCount, plural, one {未監査の監査行} other {未解決の監査行}}",
    "filepath": "./src/components/commonFunctionsDataTable.js"
 },
 {
@@ -2641,7 +2641,7 @@
 {
    "id": "audit.rejected.tooltip.header",
    "description": "rejected issue for audit table",
-   "defaultMessage": "{rejected_lines}/{total_lines} {rejected_lines, plural, one {audit line} other {audit lines}} が拒否されました",
+   "defaultMessage": "{rejected_lines}/{total_lines} {rejected_lines, plural, one {監査ライン} other {監査行}} が拒否されました",
    "filepath": "./src/components/commonFunctionsDataTable.js"
 },
 {
@@ -3378,7 +3378,7 @@
 {
    "id": "auditList.alert.lable",
    "description": "audit list alert lable",
-   "defaultMessage": "{auditIssue} {auditIssue, plural, one {Alert} other {Alerts}}",
+   "defaultMessage": "{auditIssue} {auditIssue, plural, one {アラート} other {アラート}}",
    "filepath": "./src/containers/auditTab/auditTable.js"
 },
 {
@@ -3793,19 +3793,19 @@
 {
    "id": "orderlist.pendingOrders",
    "description": "pendingOrders header ordertable",
-   "defaultMessage": "{pendingOrders, number} {pendingOrders, plural, one {order} other {orders}} 保留",
+   "defaultMessage": "{pendingOrders, number} {pendingOrders, plural, one {注文} other {注文}} 保留",
    "filepath": "./src/containers/orderTab/orderListTable.js"
 },
 {
    "id": "orderlist.totalCompletedOrder",
    "description": "totalCompletedOrder header ordertable",
-   "defaultMessage": "{totalCompletedOrder, number} {totalCompletedOrder, plural, one {order} other {orders}} 完了されました",
+   "defaultMessage": "{totalCompletedOrder, number} {totalCompletedOrder, plural, one {注文} other {注文}} 完了されました",
    "filepath": "./src/containers/orderTab/orderListTable.js"
 },
 {
    "id": "orderlist.itemsPerOrder",
    "description": "itemsPerOrder header ordertable",
-   "defaultMessage": "Avg {itemsPerOrder, number} {itemsPerOrder, plural, one {item} other {items}}/オーダー",
+   "defaultMessage": "Avg {itemsPerOrder, number} {itemsPerOrder, plural, one {項目} other {項目}}/オーダー",
    "filepath": "./src/containers/orderTab/orderListTable.js"
 },
 {
@@ -4241,13 +4241,13 @@
 {
    "id": "usersStatus.tab.heading#",
    "description": "users Status",
-   "defaultMessage":"{count} {count, plural, =0 {user} one {user} other {users}} オンライン",
+   "defaultMessage":"{count} {count, plural, =0 {ユーザー} one {ユーザー} other {ユーザー}} オンライン",
    "filepath": "./src/containers/tabs.js"
 },
 {
    "id": "auditStatus.tab.alert.heading",
    "description": "audit Status alert",
-   "defaultMessage":"{count} {count, plural, one {alert} other {alerts}}",
+   "defaultMessage":"{count} {count, plural, one {アラート} other {アラート}}",
    "filepath": "./src/containers/tabs.js"
 },
 {
@@ -5442,6 +5442,42 @@
    "description": "reports tab",
    "defaultMessage": "レポート",
    "filepath": "./src/containers/tabs.js"
+},
+{
+   "id": "commonDataTable.attributesType.itemSelectedText",
+   "description": "heading for attribute",
+   "defaultMessage": "{count} 選択されたアイテム",
+   "filepath": "./src/components/commonFunctionsDataTable.js"
+},
+{
+   "id": "operationLog.page.twentyfive",
+   "description": "Page size 25",
+   "defaultMessage": "25",
+   "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+{
+   "id": "operationLog.page.fifty",
+   "description": "Page size 50",
+   "defaultMessage": "50",
+   "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+{
+   "id": "operationLog.page.hundred",
+   "description": "Page size 100",
+   "defaultMessage": "100",
+   "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+{
+   "id": "operationsLog.table.noData",
+   "description": "No data message for operations logs",
+   "defaultMessage": "何もデータが見つかりませんでした",
+   "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+{
+   "id": "sysControllers.totalControllers",
+   "description": "total controllers",
+   "defaultMessage": "合計:{count}",
+   "filepath": "./src/containers/systemTabs/sysControllers.js"
 }
 
 ]

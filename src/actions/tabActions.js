@@ -58,10 +58,6 @@ export function setFireHazrdFlag(data) {
         data
     }
 }
-<<<<<<< abd2fcc19ec8b3737dbf6a0e88f043cec1fdbfea
-=======
-
->>>>>>> https://work.greyorange.com/jira/browse/BSS-4468
 /**
  * [setEmergencyModalStatus flag to set if modal is open]
  * @param {[boolean]} data [true/false]
@@ -71,10 +67,5 @@ export function setEmergencyModalStatus(data) {
         type: SET_EMERGENCY_MODAL_STATUS,
         data
     }
-<<<<<<< abd2fcc19ec8b3737dbf6a0e88f043cec1fdbfea
-}
-=======
-}
 
-
->>>>>>> https://work.greyorange.com/jira/browse/BSS-4468
+}

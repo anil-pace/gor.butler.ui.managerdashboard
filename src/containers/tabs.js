@@ -7,6 +7,7 @@ import {modal} from 'react-redux-modal';
 import {setInventorySpinner} from '../actions/inventoryActions';
 import {setAuditSpinner} from '../actions/auditActions';
 import {setButlerSpinner} from '../actions/spinnerAction';
+import {setEmergencyModalStatus} from '../actions/tabActions'  
 import {OVERVIEW,SYSTEM,ORDERS,USERS,REPORTS,TAB_ROUTE_MAP,INVENTORY,AUDIT,
 FULFILLING_ORDERS,GOR_OFFLINE,GOR_ONLINE,GOR_NORMAL_TAB,GOR_FAIL,
 SOFT_MANUAL,HARD,SOFT,UTILITIES,FIRE_EMERGENCY_POPUP_FLAG,EMERGENCY_FIRE} from '../constants/frontEndConstants';
@@ -137,6 +138,8 @@ class Tabs extends React.Component{
           || (nextProps.fireHazardType === EMERGENCY_FIRE && (this.props.firehazadflag === false) && nextProps.fireHazardNotifyTime !== this.props.fireHazardNotifyTime)){
             this._FireEmergencyRelease();
         }
+    
+
   }
   _parseStatus()
   {
@@ -377,9 +380,7 @@ var mapDispatchToProps=function(dispatch){
         setButlerSpinner:function(data){dispatch(setButlerSpinner(data))},
         setFireHazrdFlag:function(data){dispatch(setFireHazrdFlag(data))},
         setEmergencyModalStatus:function(data){dispatch(setEmergencyModalStatus(data));}
+  }
 };
-
-
-
 
 export default connect(mapStateToProps,mapDispatchToProps)(Tabs) ;

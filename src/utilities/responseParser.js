@@ -16,7 +16,8 @@ import {receiveInventoryTodayData,receiveInventoryHistoryData} from '../actions/
 import {recieveSysOverViewData} from '../actions/sysOverViewActions'
 import {endSession} from './endSession';
 import {recieveZoningData} from '../actions/zoningActions';
-import {recieveControllerData} from '../actions/sysControllersActions'
+import {recieveControllerData} from '../actions/sysControllersActions';
+
 export function ResponseParse(store,res)
 {
 		if(res.alert_data)

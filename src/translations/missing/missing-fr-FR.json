@@ -6,6 +6,12 @@
 	"filepath": "./src/components/commonFunctionsDataTable.js"
 },
 {
+	"id": "commonDataTable.attributesType.itemSelectedText",
+	"description": "heading for attribute",
+	"defaultMessage": "{count} items selected",
+	"filepath": "./src/components/commonFunctionsDataTable.js"
+},
+{
 	"id": "commonDataTable.attributesType.heading",
 	"description": "heading for attribute",
 	"defaultMessage": "Box Id",
@@ -762,15 +768,15 @@
 	"filepath": "./src/constants/messageConstants.js"
 },
 {
-	"id": "audit.cancellation.error.g024",
-	"description": "Audit Id cancellation request has been process and cannot be cancelled",
-	"defaultMessage": "Audit Id cancellation request has been process and cannot be cancelled",
-	"filepath": "./src/constants/messageConstants.js"
-},
-{
 	"id": "audit.cancellation.success",
 	"description": "Audit Id cancellation is successful",
 	"defaultMessage": "Request sent for audit cancellation",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
+	"id": "audit.cancellation.error.g024",
+	"description": "Audit cancellation request denied",
+	"defaultMessage": "Audit cancellation request denied",
 	"filepath": "./src/constants/messageConstants.js"
 },
 {
@@ -1044,6 +1050,36 @@
 {
 	"id": "audit.token2.completed",
 	"defaultMessage": "Completed",
+	"filepath": "./src/containers/auditTab/auditFilter.js"
+},
+{
+	"id": "gor.filter.filterLabel",
+	"description": "label for filter",
+	"defaultMessage": "Filter data",
+	"filepath": "./src/containers/auditTab/auditFilter.js"
+},
+{
+	"id": "gor.filter.hide",
+	"description": "label for hide",
+	"defaultMessage": "Hide",
+	"filepath": "./src/containers/auditTab/auditFilter.js"
+},
+{
+	"id": "gor.filter.noResult",
+	"description": "label for no result",
+	"defaultMessage": "No results found, please try again",
+	"filepath": "./src/containers/auditTab/auditFilter.js"
+},
+{
+	"id": "gor.filter.reset",
+	"description": "label for reset",
+	"defaultMessage": "Reset",
+	"filepath": "./src/containers/auditTab/auditFilter.js"
+},
+{
+	"id": "gor.filter.heading",
+	"description": "filter heading",
+	"defaultMessage": "Apply filter",
 	"filepath": "./src/containers/auditTab/auditFilter.js"
 },
 {
@@ -1636,6 +1672,36 @@
 },
 {
 	"id": "gor.filter.filterLabel",
+	"description": "label for filter",
+	"defaultMessage": "Filter data",
+	"filepath": "./src/containers/orderTab/orderFilter.js"
+},
+{
+	"id": "gor.filter.hide",
+	"description": "label for hide",
+	"defaultMessage": "Hide",
+	"filepath": "./src/containers/orderTab/orderFilter.js"
+},
+{
+	"id": "gor.filter.noResult",
+	"description": "label for no result",
+	"defaultMessage": "No results found, please try again",
+	"filepath": "./src/containers/orderTab/orderFilter.js"
+},
+{
+	"id": "gor.filter.reset",
+	"description": "label for reset",
+	"defaultMessage": "Reset",
+	"filepath": "./src/containers/orderTab/orderFilter.js"
+},
+{
+	"id": "gor.filter.heading",
+	"description": "filter heading",
+	"defaultMessage": "Apply filter",
+	"filepath": "./src/containers/orderTab/orderFilter.js"
+},
+{
+	"id": "gor.filter.filterLabel",
 	"description": "button label for filter",
 	"defaultMessage": "Filter data",
 	"filepath": "./src/containers/orderTab/orderListTab.js"
@@ -1713,6 +1779,36 @@
 },
 {
 	"id": "gor.filter.filterLabel",
+	"description": "label for filter",
+	"defaultMessage": "Filter data",
+	"filepath": "./src/containers/orderTab/waveFilter.js"
+},
+{
+	"id": "gor.filter.hide",
+	"description": "label for hide",
+	"defaultMessage": "Hide",
+	"filepath": "./src/containers/orderTab/waveFilter.js"
+},
+{
+	"id": "gor.filter.noResult",
+	"description": "label for no result",
+	"defaultMessage": "No results found, please try again",
+	"filepath": "./src/containers/orderTab/waveFilter.js"
+},
+{
+	"id": "gor.filter.reset",
+	"description": "label for reset",
+	"defaultMessage": "Reset",
+	"filepath": "./src/containers/orderTab/waveFilter.js"
+},
+{
+	"id": "gor.filter.heading",
+	"description": "filter heading",
+	"defaultMessage": "Apply filter",
+	"filepath": "./src/containers/orderTab/waveFilter.js"
+},
+{
+	"id": "gor.filter.filterLabel",
 	"description": "button label for filter",
 	"defaultMessage": "Filter data",
 	"filepath": "./src/containers/orderTab/waveTab.js"
@@ -1760,41 +1856,6 @@
 	"filepath": "./src/containers/putStatusWidget.js"
 },
 {
-	"id": "operationsFilter.tokenHead.status",
-	"defaultMessage": "STATUS",
-	"filepath": "./src/containers/reportsTab/operationsFilter.js"
-},
-{
-	"id": "operationsFilter.tokenHead.timePeriod",
-	"defaultMessage": "TIME PERIOD",
-	"filepath": "./src/containers/reportsTab/operationsFilter.js"
-},
-{
-	"id": "operationsFilter.STATUS.any",
-	"defaultMessage": "Any",
-	"filepath": "./src/containers/reportsTab/operationsFilter.js"
-},
-{
-	"id": "operationsFilter.STATUS.success",
-	"defaultMessage": "Success",
-	"filepath": "./src/containers/reportsTab/operationsFilter.js"
-},
-{
-	"id": "operationsFilter.STATUS.exception",
-	"defaultMessage": "Exception",
-	"filepath": "./src/containers/reportsTab/operationsFilter.js"
-},
-{
-	"id": "operationsFilter.timePeriod.oneHour",
-	"defaultMessage": "Last 1 hour",
-	"filepath": "./src/containers/reportsTab/operationsFilter.js"
-},
-{
-	"id": "operationsFilter.timePeriod.twoHour",
-	"defaultMessage": "Last 2 hour",
-	"filepath": "./src/containers/reportsTab/operationsFilter.js"
-},
-{
 	"id": "gor.filter.filterLabel",
 	"description": "label for filter",
 	"defaultMessage": "Filter data",
@@ -1823,6 +1884,24 @@
 	"description": "filter heading",
 	"defaultMessage": "Apply filter",
 	"filepath": "./src/containers/reportsTab/operationsFilter.js"
+},
+{
+	"id": "operationLog.page.twentyfive",
+	"description": "Page size 25",
+	"defaultMessage": "25",
+	"filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+{
+	"id": "operationLog.page.fifty",
+	"description": "Page size 50",
+	"defaultMessage": "50",
+	"filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+{
+	"id": "operationLog.page.hundred",
+	"description": "Page size 100",
+	"defaultMessage": "100",
+	"filepath": "./src/containers/reportsTab/operationsLogTab.js"
 },
 {
 	"id": "operationLog.table.heading",
@@ -1882,6 +1961,12 @@
 	"id": "operationLog.table.timestamp",
 	"description": "Status for PPS",
 	"defaultMessage": "TIMESTAMP",
+	"filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+{
+	"id": "operationsLog.table.noData",
+	"description": "No data message for operations logs",
+	"defaultMessage": "No Data Found",
 	"filepath": "./src/containers/reportsTab/operationsLogTab.js"
 },
 {
@@ -1968,6 +2053,36 @@
 {
 	"id": "butletbot.token2.notSet",
 	"defaultMessage": "Not set",
+	"filepath": "./src/containers/systemTabs/butlerBotFilter.js"
+},
+{
+	"id": "gor.filter.filterLabel",
+	"description": "label for filter",
+	"defaultMessage": "Filter data",
+	"filepath": "./src/containers/systemTabs/butlerBotFilter.js"
+},
+{
+	"id": "gor.filter.hide",
+	"description": "label for hide",
+	"defaultMessage": "Hide",
+	"filepath": "./src/containers/systemTabs/butlerBotFilter.js"
+},
+{
+	"id": "gor.filter.noResult",
+	"description": "label for no result",
+	"defaultMessage": "No results found, please try again",
+	"filepath": "./src/containers/systemTabs/butlerBotFilter.js"
+},
+{
+	"id": "gor.filter.reset",
+	"description": "label for reset",
+	"defaultMessage": "Reset",
+	"filepath": "./src/containers/systemTabs/butlerBotFilter.js"
+},
+{
+	"id": "gor.filter.heading",
+	"description": "filter heading",
+	"defaultMessage": "Apply filter",
 	"filepath": "./src/containers/systemTabs/butlerBotFilter.js"
 },
 {
@@ -2061,6 +2176,36 @@
 {
 	"id": "charging.timePeriod.twoHR",
 	"defaultMessage": "Auto",
+	"filepath": "./src/containers/systemTabs/chargingStationFilter.js"
+},
+{
+	"id": "gor.filter.filterLabel",
+	"description": "label for filter",
+	"defaultMessage": "Filter data",
+	"filepath": "./src/containers/systemTabs/chargingStationFilter.js"
+},
+{
+	"id": "gor.filter.hide",
+	"description": "label for hide",
+	"defaultMessage": "Hide",
+	"filepath": "./src/containers/systemTabs/chargingStationFilter.js"
+},
+{
+	"id": "gor.filter.noResult",
+	"description": "label for no result",
+	"defaultMessage": "No results found, please try again",
+	"filepath": "./src/containers/systemTabs/chargingStationFilter.js"
+},
+{
+	"id": "gor.filter.reset",
+	"description": "label for reset",
+	"defaultMessage": "Reset",
+	"filepath": "./src/containers/systemTabs/chargingStationFilter.js"
+},
+{
+	"id": "gor.filter.heading",
+	"description": "filter heading",
+	"defaultMessage": "Apply filter",
 	"filepath": "./src/containers/systemTabs/chargingStationFilter.js"
 },
 {
@@ -2422,6 +2567,36 @@
 	"filepath": "./src/containers/systemTabs/ppsFilter.js"
 },
 {
+	"id": "gor.filter.filterLabel",
+	"description": "label for filter",
+	"defaultMessage": "Filter data",
+	"filepath": "./src/containers/systemTabs/ppsFilter.js"
+},
+{
+	"id": "gor.filter.hide",
+	"description": "label for hide",
+	"defaultMessage": "Hide",
+	"filepath": "./src/containers/systemTabs/ppsFilter.js"
+},
+{
+	"id": "gor.filter.noResult",
+	"description": "label for no result",
+	"defaultMessage": "No results found, please try again",
+	"filepath": "./src/containers/systemTabs/ppsFilter.js"
+},
+{
+	"id": "gor.filter.reset",
+	"description": "label for reset",
+	"defaultMessage": "Reset",
+	"filepath": "./src/containers/systemTabs/ppsFilter.js"
+},
+{
+	"id": "gor.filter.heading",
+	"description": "filter heading",
+	"defaultMessage": "Apply filter",
+	"filepath": "./src/containers/systemTabs/ppsFilter.js"
+},
+{
 	"id": "ppsDetail.performance.prefix.items",
 	"description": "prefix for pps id in ppsDetail",
 	"defaultMessage": "{performance} items/hr",
@@ -2545,6 +2720,12 @@
 	"id": "sysControllers.idColumn.heading",
 	"description": "CONTROLLER ID",
 	"defaultMessage": "CONTROLLER ID",
+	"filepath": "./src/containers/systemTabs/sysControllers.js"
+},
+{
+	"id": "sysControllers.totalControllers",
+	"description": "total controllers",
+	"defaultMessage": "Total:{count}",
 	"filepath": "./src/containers/systemTabs/sysControllers.js"
 },
 {
@@ -2782,6 +2963,36 @@
 {
 	"id": "user.location.resolved",
 	"defaultMessage": "Head Office",
+	"filepath": "./src/containers/userTab/userFilter.js"
+},
+{
+	"id": "gor.filter.filterLabel",
+	"description": "label for filter",
+	"defaultMessage": "Filter data",
+	"filepath": "./src/containers/userTab/userFilter.js"
+},
+{
+	"id": "gor.filter.hide",
+	"description": "label for hide",
+	"defaultMessage": "Hide",
+	"filepath": "./src/containers/userTab/userFilter.js"
+},
+{
+	"id": "gor.filter.noResult",
+	"description": "label for no result",
+	"defaultMessage": "No results found, please try again",
+	"filepath": "./src/containers/userTab/userFilter.js"
+},
+{
+	"id": "gor.filter.reset",
+	"description": "label for reset",
+	"defaultMessage": "Reset",
+	"filepath": "./src/containers/userTab/userFilter.js"
+},
+{
+	"id": "gor.filter.heading",
+	"description": "filter heading",
+	"defaultMessage": "Apply filter",
 	"filepath": "./src/containers/userTab/userFilter.js"
 },
 {
