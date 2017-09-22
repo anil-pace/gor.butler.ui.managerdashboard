@@ -1422,7 +1422,7 @@
  {
    "id": "widget.pick.throughput",
    "description": "Throughput message",
-   "defaultMessage": "{pps_count} PPS 棚卸 {throughput} 商品/時間"
+   "defaultMessage": "{count} PPS 棚卸 {throughput} 商品/時間"
  },
  {
    "id": "widget.pick.lowright",
@@ -1467,7 +1467,7 @@
  {
    "id": "widget.put.throughput",
    "description": "Throughput message",
-   "defaultMessage": "{pps_count} PPS 棚卸 {throughput} 商品/時間"
+   "defaultMessage": "{count} {pluralMsg} 棚卸 {throughput} 商品/時間"
  },
  {
    "id": "widget.put.offline",
@@ -2636,7 +2636,7 @@
 {
    "id": "audit.unresolveIssues",
    "description": "unresolve issue for audit table",
-   "defaultMessage": "{unresolvedCount} {unresolvedCount, plural, one {unresolved issue} other {unresolved issues}}",
+   "defaultMessage": "{unresolvedCount} {unresolvedCount, plural, one {未解決の問題} other {未解決の問題}}",
    "filepath": "./src/components/commonFunctionsDataTable.js"
 },
 {
@@ -3421,7 +3421,7 @@
 {
    "id": "auditList.alert.lable",
    "description": "audit list alert lable",
-   "defaultMessage": "{auditIssue} {auditIssue, plural, one {Alert} other {Alerts}}",
+   "defaultMessage": "{auditIssue} {auditIssue, plural, one {アラート} other {アラート}}",
    "filepath": "./src/containers/auditTab/auditTable.js"
 },
 {
@@ -3836,13 +3836,13 @@
 {
    "id": "orderlist.pendingOrders",
    "description": "pendingOrders header ordertable",
-   "defaultMessage": "{pendingOrders, number} {pendingOrders, plural, one {order} other {orders}} 保留",
+   "defaultMessage": "{pendingOrders, number} {pendingOrders, plural, one {注文} other {注文}} 保留",
    "filepath": "./src/containers/orderTab/orderListTable.js"
 },
 {
    "id": "orderlist.totalCompletedOrder",
    "description": "totalCompletedOrder header ordertable",
-   "defaultMessage": "{totalCompletedOrder, number} {totalCompletedOrder, plural, one {order} other {orders}} 完了されました",
+   "defaultMessage": "{totalCompletedOrder, number} {totalCompletedOrder, plural, one {注文} other {注文}} 完了されました",
    "filepath": "./src/containers/orderTab/orderListTable.js"
 },
 {
@@ -4284,13 +4284,13 @@
 {
    "id": "usersStatus.tab.heading#",
    "description": "users Status",
-   "defaultMessage":"{count} {count, plural, =0 {user} one {user} other {users}} オンライン",
+   "defaultMessage":"{count} {count, plural, =0 {ユーザー} one {ユーザー} other {ユーザー}} オンライン",
    "filepath": "./src/containers/tabs.js"
 },
 {
    "id": "auditStatus.tab.alert.heading",
    "description": "audit Status alert",
-   "defaultMessage":"{count} {count, plural, one {alert} other {alerts}}",
+   "defaultMessage":"{count} {count, plural, one {アラート} other {アラート}}",
    "filepath": "./src/containers/tabs.js"
 },
 {
@@ -5520,5 +5520,41 @@
    "description": "total controllers",
    "defaultMessage": "合計:{count}",
    "filepath": "./src/containers/systemTabs/sysControllers.js"
+},
+{
+   "id": "utility.uploadHist.noresultfound",
+   "description": "Status",
+   "defaultMessage": "結果が見つかりません",
+   "filepath": "./src/components/utilityComponents/downloadGRTile.js"
+},
+{
+   "id": "operationLog.table.downloadBtn",
+   "description": "button label for download report",
+   "defaultMessage": "ダウンロードレポート",
+   "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+{
+   "id": "operationsLog.filter.search.bar",
+   "description": "total waves for filter search bar",
+   "defaultMessage": "{total} 結果が見つかりました",
+   "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+{
+   "id": "operationsLog.filter.search.bar.showall",
+   "description": "button label for show all",
+   "defaultMessage": "すべての操作を表示",
+   "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+{
+   "id": "audit.table.pack.outer.label",
+   "description": "audit.table.pack.outer.label",
+   "defaultMessage": "外",
+   "filepath": "./src/components/commonFunctionsDataTable.js"
+},
+{
+   "id": "audit.table.pack.inner.label",
+   "description": "audit.table.pack.inner.label",
+   "defaultMessage": "インナー",
+   "filepath": "./src/components/commonFunctionsDataTable.js"
 }
 ]
