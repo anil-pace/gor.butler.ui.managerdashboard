@@ -39,8 +39,6 @@ class OperationsLogTab extends React.Component{
 	constructor(props,context) {
         super(props,context);
         this.state=this._getInitialState();
-        /*this._clearFilter =  this._clearFilter.bind(this);
-        this._sortTableData = this._sortTableData.bind(this);*/
         this._setFilter= this._setFilter.bind(this);
         this._handlePageChange= this._handlePageChange.bind(this);
         
@@ -81,15 +79,15 @@ class OperationsLogTab extends React.Component{
         if(dataLen){
             for(let i=0 ;i < dataLen ; i++){
                 let rowData = data[i]["_source"];
-                let rowObj = {};//Object.assign({},data[i]["_source"]);
+                let rowObj = {};
                 rowObj.operatingMode = rowData.operatingMode;
                 rowObj.status = rowData.status.type
                 rowObj.requestId = rowData.requestId;
                 rowObj.skuId = rowData.productInfo.type+" "+rowData.productInfo.id+"/"+rowData.productInfo.quantity+" items";
-                rowObj.sourceId = rowData.source.type+" "+rowData.source.id+"/"+
-                                rowData.source.children[0].type+"-"+rowData.source.children[0].id;
-                rowObj.destinationId = rowData.destination.type+" "+rowData.destination.id+"/"+
-                                rowData.destination.children[0].type+"-"+rowData.destination.children[0].id;
+                rowObj.sourceId = rowData.source.type+" "+rowData.source.id+(rowData.source.children ? "/"+
+                                rowData.source.children[0].type+"-"+rowData.source.children[0].id : "");
+                rowObj.destinationId = (rowData.destination.type || "--")+" "+(rowData.destination.id || "--")+(rowData.destination.children ? "/"+
+                                rowData.destination.children[0].type+"-"+rowData.destination.children[0].id:"");
                 rowObj.timestamp=rowData.timestamp;
                 rowObj.userId=rowData.userId;
 
@@ -162,7 +160,7 @@ class OperationsLogTab extends React.Component{
             _query.pageSize = this.state.pageSize;
             _query.page = _query.page || 1;
             this.props.router.push({pathname: "/reports/operationsLog",query: _query})
-            //this._getOperationsData(this.props,{pageSize:e.value});
+            
         })
         
     }
