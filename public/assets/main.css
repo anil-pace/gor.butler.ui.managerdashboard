@@ -8436,3 +8436,40 @@ button:disabled {
   display: inline-block;
   vertical-align: middle;
 }
+
+.gor-download-rpts .gor-filterBtn-btn .ico-wrap {
+  display: inline-block;
+  width: 20%;
+}
+
+.gor-download-rpts .gor-filterBtn-btn .ico-txt-wrp {
+  display: inline-block;
+  width: 80%;
+}
+
+.gor-download-rpts .gor-ol-paginate-wrap {
+  width: 95%;
+}
+
+.gor-download-rpts .gor-ol-paginate-wrap .gor-ol-paginate-left {
+  display: inline-block;
+  width: 50%;
+  vertical-align: middle;
+}
+
+.gor-download-rpts .gor-ol-paginate-wrap .gor-ol-paginate-right {
+  display: inline-block;
+  width: 50%;
+  vertical-align: middle;
+}
+
+.gor-download-rpts .gor-ol-paginate-wrap .gor-paginate-wrap {
+  float: right;
+}
+
+.gor-download-rpts .gor-ol-paginate-wrap .gor-dropdown-wrapper {
+  width: 10%;
+  margin-left: 4%;
+  background: #fff;
+  margin-top: 2rem;
+}

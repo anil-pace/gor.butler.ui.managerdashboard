@@ -26,9 +26,9 @@ class ReportsTab extends React.Component{
     
 	render(){
 		
-		
-		let operationsLog=<FormattedMessage id="reportsTab.operationsLog" description="Operations Log tab for Reports tab" defaultMessage="Operations Log"/> 
-		let downloadReport=<FormattedMessage id="reportsTab.downloadReport" description="Operations Log tab for Reports tab" defaultMessage="Download"/> 
+		var selectClass={};
+		var operationsLog=<FormattedMessage id="reportsTab.operationsLog" description="Operations Log tab for Reports tab" defaultMessage="Operations Log"/> 
+		var downloadReport=<FormattedMessage id="reportsTab.downloadReport" description="Operations Log tab for Reports tab" defaultMessage="Download"/> 
     	
     
 		return (
@@ -36,10 +36,10 @@ class ReportsTab extends React.Component{
 				<div className="gorMainSubtab">
 					
 					<Link to="/reports/operationsLog" onClick={this.handleSysSubTabClick.bind(this,OPERATIONS_LOG)}>
-						<SubTab item={operationsLog} changeClass={"gor-main-blockSelect"}/> 
+						<SubTab item={operationsLog} changeClass={this.props.subTab === OPERATIONS_LOG ? "gor-main-blockSelect" : "gor-main-block"}/> 
 					</Link>
 					<Link to="/reports/downloadReport" onClick={this.handleSysSubTabClick.bind(this,DOWNLOAD_REPORT)}>
-						<SubTab item={downloadReport} changeClass={"gor-main-blockSelect"}/> 
+						<SubTab item={downloadReport} changeClass={this.props.subTab === DOWNLOAD_REPORT ? "gor-main-blockSelect" : "gor-main-block"}/> 
 					</Link>
 					{this.props.children}
 				</div>
@@ -62,5 +62,5 @@ var mapDispatchToProps=function(dispatch){
 	}
 };
 
-export default connect(null,mapDispatchToProps)(ReportsTab) ;
+export default connect(mapStateToProps,mapDispatchToProps)(ReportsTab) ;
 

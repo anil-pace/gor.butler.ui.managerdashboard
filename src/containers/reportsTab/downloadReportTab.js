@@ -34,6 +34,9 @@ class DownloadReportTab extends React.Component{
 	constructor(props,context) {
         super(props,context);
         this.state=this._getInitialState();
+        this._refreshList = this._refreshList.bind(this);
+        this._handlePageChange = this._handlePageChange.bind(this);
+        this._subscribeData = this._subscribeData.bind(this);
         
     }
 
@@ -66,7 +69,6 @@ class DownloadReportTab extends React.Component{
         if(datalen){
             for(let i=0 ; i < datalen ; i++){
                 let dataTuple=Object.assign({},data[i]);
-                let completionDate = new Date(dataTuple.completionTime);
                 if(dataTuple.type === "OPERATOR_LOGS"){
                     dataTuple.typeText =  <FormattedMessage id="downloadReport.type.operationsLog" description="Heading for PPS"
                                               defaultMessage="Operations Logs"/>
@@ -74,9 +76,9 @@ class DownloadReportTab extends React.Component{
                 else{
                     dataTuple.typeText =  dataTuple.type
                 }
-                if(completionDate){
+                if(dataTuple.completionTime){
                     dataTuple.formattedCompletionDate = <FormattedDate 
-                                    value={completionDate}
+                                    value={new Date(dataTuple.completionTime)}
                                     year='numeric'
                                     month='long'
                                     day='2-digit'
@@ -84,6 +86,9 @@ class DownloadReportTab extends React.Component{
                                     minute='2-digit'
                                     timeZone={timeZone}
                                   />
+                }
+                else{
+                    dataTuple.formattedCompletionDate = "--"
                 }
                 if(dataTuple.status === "PENDING"){
                     dataTuple.statusText = <FormattedMessage id="downloadReport.status.pending" description="Heading for PPS"
@@ -152,9 +157,10 @@ class DownloadReportTab extends React.Component{
         this.props.makeAjaxCall(params);
    }
     _getReportsData(props){
-        var query = props.location.query;
+        var _props = props || this.props;
+        var query = _props.location.query;
         var pageSize = query.pageSize || 25;
-        var page = query.pageSize || 1;
+        var page = query.page || 1;
 
         var params={
                 'url':REPORTS_URL+"?page="+(parseInt(page) -1)+"&size="+pageSize,
@@ -163,7 +169,7 @@ class DownloadReportTab extends React.Component{
                 'accept':APP_JSON,
                 'cause':REPORTS_FETCH
             }
-        this.props.makeAjaxCall(params);
+        _props.makeAjaxCall(params);
         
     }
 
@@ -171,7 +177,16 @@ class DownloadReportTab extends React.Component{
         this.props.initDataSentCall(wsOverviewData["default"]);
 	}
 
+    _refreshList(){
+        this._getReportsData();
+    }
 
+    _handlePageChange(e){
+        var _query =  Object.assign({},this.props.location.query);
+            _query.pageSize = e.value;
+            _query.page = _query.page || 1;
+            this.props.router.push({pathname: "/reports/downloadReport",query: _query})
+    }
 
 
 	render(){
@@ -179,19 +194,7 @@ class DownloadReportTab extends React.Component{
         var _this = this;
         var dataSize = dataList.getSize();
         var noData = !dataSize ;
-        var pageSizeDDDisabled = false ;
-        /* <div className="gor-ol-paginate-wrap">
-                <div className="gor-ol-paginate-left">
-                <Dropdown 
-                    options={pageSize} 
-                    onSelectHandler={(e) => this._handlePageChange(e)}
-                    disabled={pageSizeDDDisabled} 
-                    selectedOption={DEFAULT_PAGE_SIZE_OL}/>
-                </div>
-                <div className="gor-ol-paginate-right">
-                <GorPaginateV2 disabled={pageSizeDDDisabled} location={this.props.location} currentPage={this.state.query.page||1} totalPage={10}/>
-                </div>
-                </div>*/
+        
 		return (
 			<div className="gorTesting wrapper gor-download-rpts">
                 
@@ -204,6 +207,23 @@ class DownloadReportTab extends React.Component{
                             
                         </div>
                     </div>
+                    <div className="filterWrapper">
+                            
+                                <div className="gorToolBarDropDown">
+                                    <div className="gor-button-wrap">
+                                       <button className="gor-filterBtn-btn" onClick={this._refreshList}>
+                                       <span className="ico-wrap"><i className="gor-refresh-icon"></i></span>
+                                       <span className="ico-txt-wrp">
+                                        <FormattedMessage id="downloadReport.table.refresh"
+                                        description="button label for download report"
+                                        defaultMessage="Refresh"/>
+                                        </span>
+                                        </button>
+                                       
+                                    </div>
+                                </div>
+
+                            </div>
              </div>    
                
 				<Table
@@ -212,7 +232,7 @@ class DownloadReportTab extends React.Component{
                     headerHeight={70}
                     isColumnResizing={false}
                     width={this.props.containerWidth}
-                    height={dataSize ? document.documentElement.clientHeight * 0.6 : 71}
+                    height={dataSize ? document.documentElement.clientHeight * 0.5 : 71}
                     {...this.props}>
                     <Column
                         columnKey="fileName"
@@ -311,7 +331,18 @@ class DownloadReportTab extends React.Component{
                 {!dataSize ? <div className="gor-no-data"><FormattedMessage id="operationsLog.table.noData"
                                                                     description="No data message for operations logs"
                                                                     defaultMessage="No Data Found"/></div>:""}
-               
+            <div className="gor-ol-paginate-wrap">
+                <div className="gor-ol-paginate-left">
+                <Dropdown 
+                    options={pageSize} 
+                    onSelectHandler={(e) => this._handlePageChange(e)}
+                    disabled={false} 
+                    selectedOption={DEFAULT_PAGE_SIZE_OL}/>
+                </div>
+                <div className="gor-ol-paginate-right">
+                <GorPaginateV2 disabled={false} location={this.props.location} currentPage={this.state.query.page||1} totalPage={10}/>
+                </div>
+                </div>   
 			</div>
 		);
 	}

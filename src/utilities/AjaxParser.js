@@ -84,7 +84,8 @@ import {
     CREATE_NEW_PROFILE,
     SAVE_PPS_PROFILE,
     ADD_TAG_TO_LIST,CHANGE_PPS_PROFILE,
-    OPERATION_LOG_FETCH,REPORTS_FETCH,GET_REPORT
+    OPERATION_LOG_FETCH,REPORTS_FETCH,GET_REPORT,
+    DOWNLOAD_REPORT_REQUEST
 } from "../constants/frontEndConstants";
 import {BUTLER_UI, CODE_E027} from "../constants/backEndConstants";
 import {
@@ -100,7 +101,10 @@ import {
     g020,
     g021,
     g023,
-    g024
+    g024,
+    REQUEST_REPORT_SUCCESS,
+    REQUEST_REPORT_FAILURE,
+    INVALID_SKUID
 } from "../constants/messageConstants";
 import {ShowError} from "./showError";
 import {endSession} from "./endSession";
@@ -112,7 +116,6 @@ import {
     setStockLedgerRawTransactionsSpinner
 } from "../actions/spinnerAction";
 import {statusToString} from "./statusToString";
-import {INVALID_SKUID} from "../constants/messageConstants";
 import {
     validateInvoiceID,
     uploadMasterDataProcessing,
@@ -503,6 +506,9 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             break;
         case GET_REPORT:
             store.dispatch(recieveReportsData(res))
+            break;
+        case DOWNLOAD_REPORT_REQUEST:
+            store.dispatch(notifySuccess(REQUEST_REPORT_SUCCESS));
             break;
         default:
             ShowError(store, cause, status);

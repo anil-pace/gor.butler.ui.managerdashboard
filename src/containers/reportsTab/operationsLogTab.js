@@ -3,7 +3,7 @@
  * This will be switched based on tab click
  */
 import React  from 'react';
-import { FormattedMessage} from 'react-intl';
+import { FormattedMessage,FormattedDate} from 'react-intl';
 import { connect } from 'react-redux';
 import {wsOverviewData} from '../../constants/initData.js';
 import Dimensions from 'react-dimensions';
@@ -12,7 +12,7 @@ import {updateSubscriptionPacket,setWsAction} from '../../actions/socketActions'
 import {applyOLFilterFlag,wsOLSubscribe,wsOLUnSubscribe,setReportsSpinner} from '../../actions/operationsLogsActions';
 import {WS_ONSEND,POST,OPERATION_LOG_FETCH
     ,APP_JSON,OPERATIONS_LOG_MODE_MAP,
-    DEFAULT_PAGE_SIZE_OL,REALTIME} from '../../constants/frontEndConstants';
+    DEFAULT_PAGE_SIZE_OL,REALTIME,DOWNLOAD_REPORT_REQUEST,REPORT_NAME_OPERATOR_LOGS} from '../../constants/frontEndConstants';
 import GorPaginateV2 from '../../components/gorPaginate/gorPaginateV2';
 import Spinner from '../../components/spinner/Spinner';
 import {Table, Column,Cell} from 'fixed-data-table';
@@ -26,7 +26,7 @@ import {
 import OperationsFilter from './operationsFilter';
 import FilterSummary from '../../components/tableFilter/filterSummary';
 import Dropdown from '../../components/gor-dropdown-component/dropdown';
-import {OPERATIONS_LOG_URL,WS_OPERATIONS_LOG_SUBSCRIPTION} from '../../constants/configConstants';
+import {OPERATIONS_LOG_URL,WS_OPERATIONS_LOG_SUBSCRIPTION,REQUEST_REPORT_DOWNLOAD} from '../../constants/configConstants';
 import {makeAjaxCall} from '../../actions/ajaxActions';
 
 
@@ -44,6 +44,7 @@ class OperationsLogTab extends React.Component{
         
         this._setFilter= this._setFilter.bind(this);
         this._handlePageChange= this._handlePageChange.bind(this);
+        this._requestReportDownload = this._requestReportDownload.bind(this);
         
     }
 
@@ -80,6 +81,7 @@ class OperationsLogTab extends React.Component{
         
         var dataLen = data.length;
         var processedData=[];
+        var timeZone = this.props.timeOffset;
         if(dataLen){
             for(let i=0 ;i < dataLen ; i++){
                 let rowData = data[i]["_source"];
@@ -88,11 +90,19 @@ class OperationsLogTab extends React.Component{
                 rowObj.status = rowData.status.type
                 rowObj.requestId = rowData.requestId;
                 rowObj.skuId = rowData.productInfo.type+" "+rowData.productInfo.id+"/"+rowData.productInfo.quantity+" items";
-                rowObj.sourceId = rowData.source.type+" "+rowData.source.id+"/"+
-                                rowData.source.children[0].type+"-"+rowData.source.children[0].id;
-                rowObj.destinationId = rowData.destination.type+" "+rowData.destination.id+"/"+
-                                rowData.destination.children[0].type+"-"+rowData.destination.children[0].id;
-                rowObj.timestamp=rowData.timestamp;
+                rowObj.sourceId = rowData.source.type+" "+rowData.source.id+(rowData.source.children ? "/"+
+                                rowData.source.children[0].type+"-"+rowData.source.children[0].id : "");
+                rowObj.destinationId = (rowData.destination.type || "--")+" "+(rowData.destination.id || "--")+(rowData.destination.children ? "/"+
+                                rowData.destination.children[0].type+"-"+rowData.destination.children[0].id:"");
+                rowObj.timestamp=<FormattedDate 
+                                    value={rowData.createdTime}
+                                    year='numeric'
+                                    month='long'
+                                    day='2-digit'
+                                    hour='2-digit'
+                                    minute='2-digit'
+                                    timeZone={timeZone}
+                                  />;
                 rowObj.userId=rowData.userId;
 
                 processedData.push(rowObj)
@@ -244,8 +254,7 @@ class OperationsLogTab extends React.Component{
                 'cause':OPERATION_LOG_FETCH
             }
 
-        //this.props.setLoginSpinner(true); TODO
-        //this.props.applyOLFilterFlag(false);
+        
         this.props.makeAjaxCall(params);
         this.setState({
                 realTimeSubSent:false
@@ -268,6 +277,26 @@ class OperationsLogTab extends React.Component{
     }
     _setFilter(){
         this.props.showTableFilter(!this.props.showFilter);
+    }
+    _requestReportDownload(){
+        var formData = {
+                "searchRequest": {}, 
+                "report": {
+                "requestedBy": this.props.username,
+                "type" : REPORT_NAME_OPERATOR_LOGS
+                }
+        }
+        var params={
+                'url':REQUEST_REPORT_DOWNLOAD,
+                'method':POST,
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
+                'formdata':formData,
+                'cause':DOWNLOAD_REPORT_REQUEST
+            }
+
+        
+        this.props.makeAjaxCall(params);
     }
 
 	render(){
@@ -302,7 +331,7 @@ class OperationsLogTab extends React.Component{
                             
                                 <div className="gorToolBarDropDown">
                                     <div className="gor-button-wrap">
-                                       <button className="gor-rpt-dwnld" onClick={null}>
+                                       <button className="gor-rpt-dwnld" onClick={this._requestReportDownload}>
                                         <FormattedMessage id="operationLog.table.downloadBtn"
                                         description="button label for download report"
                                         defaultMessage="Download Report"/>
@@ -549,7 +578,9 @@ function mapStateToProps(state, ownProps) {
         filtersModified:state.operationsLogsReducer.filtersModified,
         notificationSocketConnected:state.notificationSocketReducer.notificationSocketConnected,
         reportsSpinner:state.operationsLogsReducer.reportsSpinner,
-        olWsData:state.operationsLogsReducer.olWsData
+        olWsData:state.operationsLogsReducer.olWsData,
+        timeOffset: state.authLogin.timeOffset,
+        username: state.authLogin.username
 
     };
 }

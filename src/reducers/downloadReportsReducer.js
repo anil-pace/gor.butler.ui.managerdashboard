@@ -18,7 +18,7 @@ export  function downloadReportsReducer(state={},action){
 	  case REPORTS_FETCH:
 	  	
 	    return Object.assign({}, state, {
-	    	reportsData:dummyData,//action.data,
+	    	reportsData:action.data,
 	    	hasDataChanged:!state.hasDataChanged,
 	    	reportsSpinner:false
       })

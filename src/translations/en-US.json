@@ -1697,6 +1697,18 @@
     "filepath": "./src/constants/messageConstants.js"
   },
   {
+    "id": "operationsLog.reportRequest.success",
+    "description": "Status text for zone",
+    "defaultMessage": "Request successfully generated. Kindly check the Downloads Tab",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "operationsLog.reportRequest.failure",
+    "description": "Status text for zone",
+    "defaultMessage": "Error creating request",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
     "id": "widget.audit.heading.value",
     "description": "Total Items Audited",
     "defaultMessage": "None",
@@ -3375,6 +3387,96 @@
     "description": "Put Item Heading",
     "defaultMessage": "Items stocked",
     "filepath": "./src/containers/putStatusWidget.js"
+  },
+  {
+    "id": "operationLog.page.twentyfive",
+    "description": "Page size 25",
+    "defaultMessage": "25",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "operationLog.page.fifty",
+    "description": "Page size 50",
+    "defaultMessage": "50",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "operationLog.page.hundred",
+    "description": "Page size 100",
+    "defaultMessage": "100",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "downloadReport.type.operationsLog",
+    "description": "Heading for PPS",
+    "defaultMessage": "Operations Logs",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "downloadReport.status.pending",
+    "description": "Heading for PPS",
+    "defaultMessage": "Generating report...",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "downloadReport.status.failed",
+    "description": "Heading for PPS",
+    "defaultMessage": "Report failed!",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "downloadReport.status.completed",
+    "description": "button label for download report",
+    "defaultMessage": "DOWNLOAD",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "downloadReport.table.heading",
+    "description": "Heading for PPS",
+    "defaultMessage": "Download Report",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "downloadReport.table.refresh",
+    "description": "button label for download report",
+    "defaultMessage": "Refresh",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "downloadReport.table.reportName",
+    "description": "REPORT NAME",
+    "defaultMessage": "REPORT NAME",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "downloadReport.table.reportType",
+    "description": "REPORT TYPE",
+    "defaultMessage": "REPORT TYPE",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "downloadReport.table.requestedBy",
+    "description": "Request ID",
+    "defaultMessage": "REQUESTED BY",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "downloadReport.table.completionTime",
+    "description": "Status for PPS",
+    "defaultMessage": "COMPLETION TIME",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "downloadReport.table.status",
+    "description": "Status for PPS",
+    "defaultMessage": "GENERATION PROGRESS",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "operationsLog.table.noData",
+    "description": "No data message for operations logs",
+    "defaultMessage": "No Data Found",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
   },
   {
     "id": "gor.filter.filterLabel",
