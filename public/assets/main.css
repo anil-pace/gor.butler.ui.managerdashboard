@@ -5202,6 +5202,11 @@ button:disabled {
   width: 1088px;
 }
 
+.gor-audit-resolve-packing-cell {
+  height: 30px;
+  padding-top: 15px;
+}
+
 .gor-paginate-wrap {
   padding-top: 2rem;
   padding-bottom: 0.625rem;
