@@ -254,6 +254,19 @@ class OperationsLogTab extends React.Component{
 		return (
 			<div className="gorTesting wrapper gor-operations-log">
                 <Spinner isLoading={this.props.reportsSpinner} setSpinner={this.props.setReportsSpinner}/>
+          
+             <div className="gorToolBar">
+                                <div className="gorToolBarWrap">
+                                    <div className="gorToolBarElements">
+                                        <FormattedMessage id="operationLog.table.heading" description="Heading for PPS"
+                                                          defaultMessage="Operations Log"/>
+                                        
+                                    </div>
+                                </div>
+                      
+             </div>
+     
+                        
                
 				<Table
                     rowHeight={80}
