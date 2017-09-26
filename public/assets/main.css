@@ -1023,6 +1023,7 @@ body {
 
 .mainContainer {
   height: 100vh;
+  overflow: hidden;
 }
 
 .gor-tabs .gorTab.gorContainer {
