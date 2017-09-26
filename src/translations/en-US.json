@@ -3485,6 +3485,12 @@
     "filepath": "./src/containers/reportsTab/operationsLogTab.js"
   },
   {
+    "id": "operationLog.table.heading",
+    "description": "Heading for PPS",
+    "defaultMessage": "Operations Log",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
     "id": "operationLog.table.operatingMode",
     "description": "OPERATING MODE",
     "defaultMessage": "OPERATING MODE",
