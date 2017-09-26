@@ -3,7 +3,7 @@
  * This will be switched based on tab click
  */
 import React  from 'react';
-import { FormattedMessage} from 'react-intl';
+import { FormattedMessage,FormattedDate} from 'react-intl';
 import { connect } from 'react-redux';
 import {wsOverviewData} from '../../constants/initData.js';
 import Dimensions from 'react-dimensions';
@@ -11,7 +11,7 @@ import {withRouter} from 'react-router';
 import {updateSubscriptionPacket,setWsAction} from '../../actions/socketActions';
 import {applyOLFilterFlag,wsOLSubscribe,wsOLUnSubscribe,setReportsSpinner} from '../../actions/operationsLogsActions';
 import {WS_ONSEND,POST,OPERATION_LOG_FETCH
-    ,APP_JSON} from '../../constants/frontEndConstants';
+    ,APP_JSON,OPERATIONS_LOG_MODE_MAP} from '../../constants/frontEndConstants';
 import GorPaginateV2 from '../../components/gorPaginate/gorPaginateV2';
 import Spinner from '../../components/spinner/Spinner';
 import {Table, Column,Cell} from 'fixed-data-table';
@@ -50,7 +50,7 @@ class OperationsLogTab extends React.Component{
         dataList.newData=data;
         return {
             columnWidths: {
-                operatingMode: this.props.containerWidth * 0.15,
+                operatingMode: this.props.containerWidth * 0.1,
                 status: this.props.containerWidth * 0.1,
                 requestId: this.props.containerWidth * 0.13,
                 skuId: this.props.containerWidth * 0.1,
@@ -76,19 +76,29 @@ class OperationsLogTab extends React.Component{
         
         var dataLen = data.length;
         var processedData=[];
+        var timeZone = this.props.timeOffset;
         if(dataLen){
             for(let i=0 ;i < dataLen ; i++){
                 let rowData = data[i]["_source"];
                 let rowObj = {};
-                rowObj.operatingMode = rowData.operatingMode;
-                rowObj.status = rowData.status.type
+                rowObj.operatingMode = OPERATIONS_LOG_MODE_MAP[rowData.operatingMode] || rowData.operatingMode;
+                rowObj.status = rowData.status.type;
+                rowObj.statusText = rowData.status.type !== "success" ? (rowData.status.data || rowData.status.type) : rowData.status.type;
                 rowObj.requestId = rowData.requestId;
                 rowObj.skuId = rowData.productInfo.type+" "+rowData.productInfo.id+"/"+rowData.productInfo.quantity+" items";
                 rowObj.sourceId = rowData.source.type+" "+rowData.source.id+(rowData.source.children ? "/"+
                                 rowData.source.children[0].type+"-"+rowData.source.children[0].id : "");
                 rowObj.destinationId = (rowData.destination.type || "--")+" "+(rowData.destination.id || "--")+(rowData.destination.children ? "/"+
                                 rowData.destination.children[0].type+"-"+rowData.destination.children[0].id:"");
-                rowObj.timestamp=rowData.timestamp;
+                rowObj.timestamp=<FormattedDate 
+                                    value={rowData.createdTime}
+                                    year='numeric'
+                                    month='long'
+                                    day='2-digit'
+                                    hour='2-digit'
+                                    minute='2-digit'
+                                    timeZone={timeZone}
+                                  />;
                 rowObj.userId=rowData.userId;
 
                 processedData.push(rowObj)
@@ -108,7 +118,10 @@ class OperationsLogTab extends React.Component{
             })
             
         }
-        else if(nextProps.socketAuthorized && nextProps.notificationSocketConnected && (!this.state.dataFetchedOnLoad || nextProps.filtersApplied)){
+        else if(nextProps.socketAuthorized && nextProps.notificationSocketConnected && 
+            (!this.state.dataFetchedOnLoad  
+                || ((this.props.filtersModified !== nextProps.filtersModified)
+                || (this.props.location.query.page !== nextProps.location.query.page)))){
             this.setState({
                 dataFetchedOnLoad:true
             },function(){
@@ -167,7 +180,9 @@ class OperationsLogTab extends React.Component{
     _getOperationsData(props){
         var query = props.location.query,
         isSocketConnected = props.notificationSocketConnected;
-        var filters = {};//JSON.parse(JSON.stringify(OPERATIONS_LOG_REQUEST_PARAMS));
+        var filters = {};
+        var pageSize = this.state.pageSize;
+        var frm = ((query.page ? parseInt(query.page) : 1) -1) * pageSize;
         this.props.setReportsSpinner(true);
             if(Object.keys(query).length){
                 let currTime = new Date();
@@ -187,6 +202,10 @@ class OperationsLogTab extends React.Component{
                     from: currTime.getTime(),//Need to add timeoffset
                     to:toTime.getTime()
                 }*/
+            }
+            filters.page={
+                    size:parseInt(pageSize),
+                    from:frm
             }
         if(query.time_period !== "realtime"){
             this.props.wsOLUnSubscribe();
@@ -235,37 +254,6 @@ class OperationsLogTab extends React.Component{
 		return (
 			<div className="gorTesting wrapper gor-operations-log">
                 <Spinner isLoading={this.props.reportsSpinner} setSpinner={this.props.setReportsSpinner}/>
-            <div className="gor-filter-wrap"
-                                 style={{'width': this.props.showFilter ? '350px' : '0px', height: filterHeight}}>
-                                <OperationsFilter hideLayer={hideLayer} pageSize={this.state.pageSize} responseFlag={true}/>
-            </div>
-             <div className="gorToolBar">
-                                <div className="gorToolBarWrap">
-                                    <div className="gorToolBarElements">
-                                        <FormattedMessage id="operationLog.table.heading" description="Heading for PPS"
-                                                          defaultMessage="Operations Log"/>
-                                        
-                                    </div>
-                                </div>
-                       <div className="filterWrapper">
-                            
-                                <div className="gorToolBarDropDown">
-                                    <div className="gor-button-wrap">
-                                  
-                                        <button
-                                            className={"gor-filterBtn-btn"}
-                                            onClick={this._setFilter}>
-                                            <div className="gor-manage-task"/>
-                                            <FormattedMessage id="gor.filter.filterLabel" description="button label for filter"
-                                                              defaultMessage="Filter data"/>
-                                        </button>
-                                    </div>
-                                </div>
-
-                            </div>
-             </div>
-     
-                        
                
 				<Table
                     rowHeight={80}
@@ -298,7 +286,7 @@ class OperationsLogTab extends React.Component{
                         isResizable={true}
                     />
                     <Column
-                        columnKey="status"
+                        columnKey="statusText"
                         header={
                             <Cell >
 
@@ -453,7 +441,8 @@ function mapStateToProps(state, ownProps) {
         hasDataChanged:state.operationsLogsReducer.hasDataChanged,
         filtersApplied:state.operationsLogsReducer.filtersApplied || false,
         notificationSocketConnected:state.notificationSocketReducer.notificationSocketConnected || false,
-        reportsSpinner:state.operationsLogsReducer.reportsSpinner || false
+        reportsSpinner:state.operationsLogsReducer.reportsSpinner || false,
+        timeOffset: state.authLogin.timeOffset
 
     };
 }

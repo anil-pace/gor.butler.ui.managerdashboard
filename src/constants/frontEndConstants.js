@@ -696,6 +696,14 @@ export const OPERATIONS_LOG_REQUEST_PARAMS=  {
         "type": ""
     }
 }
+export const OPERATIONS_LOG_MODE_MAP=  {
+    "put_front":"Put Front",
+    "pick_front":"Put Front",
+    "put_back":"Put Back",
+    "pick_back":"Pick Back",
+    "pick_back":"Pick Back",
+    "audit":"Audit"
+}
 
 export const APPLY_OL_FILTER_FLAG = "APPLY_OL_FILTER_FLAG";
 export const WS_OPERATOR_LOG_SUBSCRIBE = "WS_OPERATOR_LOG_SUBSCRIBE";
