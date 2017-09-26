@@ -254,37 +254,6 @@ class OperationsLogTab extends React.Component{
 		return (
 			<div className="gorTesting wrapper gor-operations-log">
                 <Spinner isLoading={this.props.reportsSpinner} setSpinner={this.props.setReportsSpinner}/>
-            <div className="gor-filter-wrap"
-                                 style={{'width': this.props.showFilter ? '350px' : '0px', height: filterHeight}}>
-                                <OperationsFilter hideLayer={hideLayer} pageSize={this.state.pageSize} responseFlag={true}/>
-            </div>
-             <div className="gorToolBar">
-                                <div className="gorToolBarWrap">
-                                    <div className="gorToolBarElements">
-                                        <FormattedMessage id="operationLog.table.heading" description="Heading for PPS"
-                                                          defaultMessage="Operations Log"/>
-                                        
-                                    </div>
-                                </div>
-                       <div className="filterWrapper">
-                            
-                                <div className="gorToolBarDropDown">
-                                    <div className="gor-button-wrap">
-                                  
-                                        <button
-                                            className={"gor-filterBtn-btn"}
-                                            onClick={this._setFilter}>
-                                            <div className="gor-manage-task"/>
-                                            <FormattedMessage id="gor.filter.filterLabel" description="button label for filter"
-                                                              defaultMessage="Filter data"/>
-                                        </button>
-                                    </div>
-                                </div>
-
-                            </div>
-             </div>
-     
-                        
                
 				<Table
                     rowHeight={80}
