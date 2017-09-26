@@ -87,7 +87,8 @@ class OperationsLogTab extends React.Component{
                 let rowData = data[i]["_source"];
                 let rowObj = {};//Object.assign({},data[i]["_source"]);
                 rowObj.operatingMode = OPERATIONS_LOG_MODE_MAP[rowData.operatingMode] || rowData.operatingMode;
-                rowObj.status = rowData.status.type
+                rowObj.status = rowData.status.type;
+                rowObj.statusText = rowData.status.type !== "success" ? (rowData.status.data || rowData.status.type) : rowData.status.type
                 rowObj.requestId = rowData.requestId;
                 rowObj.skuId = rowData.productInfo.type+" "+rowData.productInfo.id+"/"+rowData.productInfo.quantity+" items";
                 rowObj.sourceId = rowData.source.type+" "+rowData.source.id+(rowData.source.children ? "/"+
@@ -268,7 +269,6 @@ class OperationsLogTab extends React.Component{
             delete filters.page;
             wsParams.url = WS_OPERATIONS_LOG_SUBSCRIPTION;
             wsParams.filters = JSON.stringify(filters);
-            //this.props.applyOLFilterFlag(false);
             this.props.wsOLSubscribe(wsParams);
             this.setState({
                 realTimeSubSent:true
@@ -399,7 +399,7 @@ class OperationsLogTab extends React.Component{
                         isResizable={true}
                     />
                     <Column
-                        columnKey="status"
+                        columnKey="statusText"
                         header={
                             <Cell >
 
