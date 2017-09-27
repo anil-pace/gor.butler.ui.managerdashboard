@@ -698,9 +698,8 @@ export const OPERATIONS_LOG_REQUEST_PARAMS=  {
 }
 export const OPERATIONS_LOG_MODE_MAP=  {
     "put_front":"Put Front",
-    "pick_front":"Put Front",
+    "pick_front":"Pick Front",
     "put_back":"Put Back",
-    "pick_back":"Pick Back",
     "pick_back":"Pick Back",
     "audit":"Audit"
 }
