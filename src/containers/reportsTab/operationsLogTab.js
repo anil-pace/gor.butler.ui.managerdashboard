@@ -81,7 +81,7 @@ class OperationsLogTab extends React.Component{
             for(let i=0 ;i < dataLen ; i++){
                 let rowData = data[i]["_source"];
                 let rowObj = {};
-                rowObj.operatingMode = OPERATIONS_LOG_MODE_MAP[rowData.operatingMode] || rowData.operatingMode;
+                rowObj.operatingMode = rowData.operatingMode || "--";
                 rowObj.status = rowData.status.type;
                 rowObj.statusText = rowData.status.type !== "success" ? (rowData.status.data || rowData.status.type) : rowData.status.type;
                 rowObj.requestId = rowData.requestId;
