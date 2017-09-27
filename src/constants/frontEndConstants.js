@@ -705,9 +705,8 @@ export const OPERATIONS_LOG_REQUEST_PARAMS=  {
 }
 export const OPERATIONS_LOG_MODE_MAP=  {
     "put_front":"Put Front",
-    "pick_front":"Put Front",
+    "pick_front":"Pick Front",
     "put_back":"Put Back",
-    "pick_back":"Pick Back",
     "pick_back":"Pick Back",
     "audit":"Audit"
 }
@@ -723,6 +722,7 @@ export const REALTIME = "realtime";
 export const REPORTS_FETCH = "REPORTS_FETCH";
 export const GET_REPORT = "GET_REPORT";
 export const DOWNLOAD_REPORT_REQUEST = "DOWNLOAD_REPORT_REQUEST";
+export const SET_DOWNLOAD_REPORT_SPINNER = "SET_DOWNLOAD_REPORT_SPINNER";
 /*COnstants for audit query*/
 export const SET_ORDER_QUERY = "SET_ORDER_QUERY";
 export const SET_AUDIT_QUERY = "SET_AUDIT_QUERY";

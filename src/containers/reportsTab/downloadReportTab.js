@@ -21,6 +21,7 @@ import {
 import Dropdown from '../../components/gor-dropdown-component/dropdown';
 import {REPORTS_URL,DOWNLOAD_REPORT} from '../../constants/configConstants';
 import {makeAjaxCall} from '../../actions/ajaxActions';
+import {setDownloadReportSpinner} from '../../actions/downloadReportsActions'
 
 
 const pageSize = [ {value: "25", disabled:false,label: <FormattedMessage id="operationLog.page.twentyfive" description="Page size 25"
@@ -146,14 +147,15 @@ class DownloadReportTab extends React.Component{
     }
    _downloadReport(id){
 
-
+    
         var params={
                 'url':DOWNLOAD_REPORT+id,
                 'method':GET,
-                'contentType':APP_JSON,
-                'accept':APP_JSON,
+                'responseType': "arraybuffer",
+                'accept': "text/csv",
                 'cause':GET_REPORT
             }
+        this.props.setDownloadReportSpinner(true);
         this.props.makeAjaxCall(params);
    }
     _getReportsData(props){
@@ -197,7 +199,7 @@ class DownloadReportTab extends React.Component{
         
 		return (
 			<div className="gorTesting wrapper gor-download-rpts">
-                
+               <Spinner isLoading={this.props.downloadReportsSpinner} setSpinner={this.props.setDownloadReportSpinner}/> 
        
              <div className="gorToolBar">
                     <div className="gorToolBarWrap">
@@ -358,7 +360,8 @@ DownloadReportTab.defaultProps = {
   reportsData: [],
   socketAuthorized:false,
   hasDataChanged:false,
-  timeOffset:""
+  timeOffset:"",
+  downloadReportsSpinner:true
 }
 
 function mapStateToProps(state, ownProps) {
@@ -366,7 +369,8 @@ function mapStateToProps(state, ownProps) {
         socketAuthorized: state.recieveSocketActions.socketAuthorized,
         reportsData:state.downloadReportsReducer.reportsData,
         hasDataChanged:state.downloadReportsReducer.hasDataChanged,
-        timeOffset: state.authLogin.timeOffset
+        timeOffset: state.authLogin.timeOffset,
+        downloadReportsSpinner:state.downloadReportsReducer.downloadReportsSpinner
 
     };
 }
@@ -374,6 +378,7 @@ function mapDispatchToProps(dispatch){
 	return {
         initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
         makeAjaxCall: function(params){dispatch(makeAjaxCall(params));},
+        setDownloadReportSpinner:function(data){dispatch(setDownloadReportSpinner(data));}
     }
 };
 

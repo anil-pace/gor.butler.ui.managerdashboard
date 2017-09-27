@@ -1,15 +1,5 @@
-import { REPORTS_FETCH,GET_REPORT} from '../constants/frontEndConstants'
-const dummyData = [{
-id: 1,
-fileName : "abc.csv",
-type : "OPERATOR_LOGS",
-requestedBy : "himanshu.s",
-requestedTime : "Dec 24, 2016 12:38",
-completionTime :"Dec 24, 2016 12:38",
-lastDownloaded : "Dec 24, 2016 12:38",
-status : "COMPLETED"
-}
-]
+import { REPORTS_FETCH,GET_REPORT,SET_DOWNLOAD_REPORT_SPINNER} from '../constants/frontEndConstants'
+
 export  function downloadReportsReducer(state={},action){
 	
 
@@ -20,12 +10,15 @@ export  function downloadReportsReducer(state={},action){
 	    return Object.assign({}, state, {
 	    	reportsData:action.data,
 	    	hasDataChanged:!state.hasDataChanged,
-	    	reportsSpinner:false
+	    	downloadReportsSpinner:false
       })
 	  case GET_REPORT:
 	  	console.log(action.data);
 	  	break
-	  
+	  case SET_DOWNLOAD_REPORT_SPINNER:
+	  	return Object.assign({}, state, {
+	    	downloadReportsSpinner:action.data
+      })
 	    
 	  default:
 	    return state
