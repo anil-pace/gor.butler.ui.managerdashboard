@@ -66,7 +66,7 @@ class OperationsLogTab extends React.Component{
             query:this.props.location.query,
             subscribed:false,
             realTimeSubSent:false,
-            pageSize:"25",
+            pageSize:this.props.location.query.pageSize || "25",
             dataFetchedOnLoad:false,
             queryApplied:Object.keys(this.props.location.query).length ? true :false
         }
