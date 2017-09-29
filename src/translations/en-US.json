@@ -30,6 +30,18 @@
     "filepath": "./src/components/commonFunctionsDataTable.js"
   },
   {
+    "id": "audit.table.pack.outer.label",
+    "description": "audit.table.pack.outer.label",
+    "defaultMessage": "Outer",
+    "filepath": "./src/components/commonFunctionsDataTable.js"
+  },
+  {
+    "id": "audit.table.pack.inner.label",
+    "description": "audit.table.pack.inner.label",
+    "defaultMessage": "Inner",
+    "filepath": "./src/components/commonFunctionsDataTable.js"
+  },
+  {
     "id": "commonDataTable.attributesType.itemSelectedText",
     "description": "heading for attribute",
     "defaultMessage": "{count} items selected",
@@ -204,6 +216,30 @@
     "filepath": "./src/components/graphd3/stackedChartHorizontal.js"
   },
   {
+    "id": "header.zones.inOperation2",
+    "description": "Zone in operation count",
+    "defaultMessage": "{activeZones} zones in operation",
+    "filepath": "./src/components/header/header.js"
+  },
+  {
+    "id": "header.zones.noOperation",
+    "description": "Zone in operation count",
+    "defaultMessage": "No zones in operation",
+    "filepath": "./src/components/header/header.js"
+  },
+  {
+    "id": "header.zones.inactiveZones",
+    "description": "Zone in operation count",
+    "defaultMessage": "{inactiveZones} {inactiveZones, plural, one {zone} other {zones}} paused",
+    "filepath": "./src/components/header/header.js"
+  },
+  {
+    "id": "header.button.resume",
+    "description": "Button text",
+    "defaultMessage": "Resume System",
+    "filepath": "./src/components/header/header.js"
+  },
+  {
     "id": "header.zones.status",
     "description": "Zone status",
     "defaultMessage": "SYSTEM NORMAL",
@@ -228,12 +264,6 @@
     "filepath": "./src/components/header/header.js"
   },
   {
-    "id": "header.zones.noOperation",
-    "description": "Zone in operation count",
-    "defaultMessage": "No zones in operation",
-    "filepath": "./src/components/header/header.js"
-  },
-  {
     "id": "header.option.release",
     "description": "release operation option",
     "defaultMessage": "Release the Emergency Stop button from the Zigbee box in order\n                              to resume operation.",
@@ -249,18 +279,6 @@
     "id": "header.zones.emergency.paused",
     "description": "System Emergency",
     "defaultMessage": "SYSTEM PAUSED",
-    "filepath": "./src/components/header/header.js"
-  },
-  {
-    "id": "header.zones.inOperation2",
-    "description": "Zone in operation count",
-    "defaultMessage": "{activeZones} zones in operation",
-    "filepath": "./src/components/header/header.js"
-  },
-  {
-    "id": "header.button.resume",
-    "description": "Button text",
-    "defaultMessage": "Resume System",
     "filepath": "./src/components/header/header.js"
   },
   {
@@ -1709,6 +1727,42 @@
     "filepath": "./src/constants/messageConstants.js"
   },
   {
+    "id": "zoning.substatus.action.zone_pause",
+    "description": "Status text for zone",
+    "defaultMessage": "Zone pause activated",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "zoning.substatus.action.zone_clear",
+    "description": "Status text for zone",
+    "defaultMessage": "Zone clear activated",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "zoning.substatus.action.emergency_stop",
+    "description": "Status text for zone",
+    "defaultMessage": "Emergency stop activated",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "zoning.substatus.action.emergency_pause",
+    "description": "Status text for zone",
+    "defaultMessage": "Emergency pause activated",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "zoning.entity.lightCurtains",
+    "description": "Status text for zone",
+    "defaultMessage": "Light Curtain",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "zoning.entity.latchGate",
+    "description": "Status text for zone",
+    "defaultMessage": "Latch Gate",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
     "id": "widget.audit.heading.value",
     "description": "Total Items Audited",
     "defaultMessage": "None",
@@ -1912,6 +1966,11 @@
   {
     "id": "audit.token2.completed",
     "defaultMessage": "Completed",
+    "filepath": "./src/containers/auditTab/auditFilter.js"
+  },
+  {
+    "id": "audit.token2.cancelled",
+    "defaultMessage": "Cancelled",
     "filepath": "./src/containers/auditTab/auditFilter.js"
   },
   {
@@ -2328,6 +2387,12 @@
     "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
   },
   {
+    "id": "operation.alert.releaseSoftBreached",
+    "description": "Text for emergency button release heading",
+    "defaultMessage": "Pause button released",
+    "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
+  },
+  {
     "id": "operation.alert.release.text",
     "description": "Text for emergency stop button release",
     "defaultMessage": "All Emergency-stop buttons have been released.",
@@ -2337,6 +2402,12 @@
     "id": "operation.alert.releaseSoft.text",
     "description": "Text for emergency pause button release",
     "defaultMessage": "All Emergency-pause buttons have been released.",
+    "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
+  },
+  {
+    "id": "operation.alert.releaseSoft.textBreached",
+    "description": "Text for emergency pause button release",
+    "defaultMessage": "Emergency pause button in {zone} has been released",
     "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
   },
   {
@@ -2350,6 +2421,42 @@
     "description": "Text button to resume operation",
     "defaultMessage": "Resume operation",
     "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
+  },
+  {
+    "id": "operation.fire.shutter",
+    "description": "Description Text clear shutter",
+    "defaultMessage": "Clearing all shutters",
+    "filepath": "./src/containers/emergencyProcess/fireHazard.js"
+  },
+  {
+    "id": "operation.fire.failshutter",
+    "description": "Description Text fail to clear shutter",
+    "defaultMessage": "Failed to clear shutters",
+    "filepath": "./src/containers/emergencyProcess/fireHazard.js"
+  },
+  {
+    "id": "operation.fire.clearedshutter",
+    "description": "Description Text  cleared shutter",
+    "defaultMessage": "Cleared all shutters",
+    "filepath": "./src/containers/emergencyProcess/fireHazard.js"
+  },
+  {
+    "id": "operation.fire.escapecleared",
+    "description": "Description Text escape cleared",
+    "defaultMessage": "Cleared escape path",
+    "filepath": "./src/containers/emergencyProcess/fireHazard.js"
+  },
+  {
+    "id": "operation.fire.escapeprogress",
+    "description": "Description Text escape in progress",
+    "defaultMessage": "Clearing escape path",
+    "filepath": "./src/containers/emergencyProcess/fireHazard.js"
+  },
+  {
+    "id": "operation.fire.escapefail",
+    "description": "Description Text escape to fail",
+    "defaultMessage": "Failed to clear escape path",
+    "filepath": "./src/containers/emergencyProcess/fireHazard.js"
   },
   {
     "id": "operation.fire.header",
@@ -2370,18 +2477,6 @@
     "filepath": "./src/containers/emergencyProcess/fireHazard.js"
   },
   {
-    "id": "operation.fire.escape",
-    "description": "Description Text escape",
-    "defaultMessage": "Clearing escape path",
-    "filepath": "./src/containers/emergencyProcess/fireHazard.js"
-  },
-  {
-    "id": "operation.fire.shutter",
-    "description": "Description Text clear shutter",
-    "defaultMessage": "Clearing all shutters",
-    "filepath": "./src/containers/emergencyProcess/fireHazard.js"
-  },
-  {
     "id": "operation.alert.release.button",
     "description": "Text button to resume operation",
     "defaultMessage": "RESUME OPERATION",
@@ -2391,6 +2486,12 @@
     "id": "operation.alert.pause",
     "description": "Text for operation stopped heading",
     "defaultMessage": "Butler System - Operation Paused",
+    "filepath": "./src/containers/emergencyProcess/OperationPause.js"
+  },
+  {
+    "id": "operation.alert.pause.breach.text",
+    "description": "Text for emergency button press",
+    "defaultMessage": "Emergency-Pause activated due to SOP breach via Controller {controller} in {zone}.",
     "filepath": "./src/containers/emergencyProcess/OperationPause.js"
   },
   {
@@ -4713,6 +4814,18 @@
     "filepath": "./src/containers/systemTabs/sysOverview.js"
   },
   {
+    "id": "sysOverView.zones.breached.subText",
+    "description": "Zone status subtext",
+    "defaultMessage": "{entityBreached} breached",
+    "filepath": "./src/containers/systemTabs/sysOverview.js"
+  },
+  {
+    "id": "sysOverView.zones.subText",
+    "description": "Zone status subtext",
+    "defaultMessage": "{subStatus} via Controller",
+    "filepath": "./src/containers/systemTabs/sysOverview.js"
+  },
+  {
     "id": "pps.configuration.tag.search.placeholder",
     "defaultMessage": "Enter a tag...",
     "filepath": "./src/containers/systemTabs/tags.js"
@@ -4811,6 +4924,18 @@
     "id": "overviewStatus.tab.stop",
     "description": "overview Status emergency",
     "defaultMessage": "STOPPED",
+    "filepath": "./src/containers/tabs.js"
+  },
+  {
+    "id": "overviewStatus.tab.paused",
+    "description": "overview Status emergency",
+    "defaultMessage": "PAUSED",
+    "filepath": "./src/containers/tabs.js"
+  },
+  {
+    "id": "overviewStatus.tab.breached",
+    "description": "overview Status emergency",
+    "defaultMessage": "BREACHED",
     "filepath": "./src/containers/tabs.js"
   },
   {

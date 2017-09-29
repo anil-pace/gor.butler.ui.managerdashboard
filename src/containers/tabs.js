@@ -75,26 +75,31 @@ class Tabs extends React.Component{
       });
 
   }
-  _emergencyRelease(releaseState){
+  _emergencyRelease(additionalProps){
       modal.add(EmergencyRelease, {
         title: '',
         size: 'large', // large, medium or small,
       closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: false,
-      releaseState
+      releaseState:additionalProps.releaseState,
+      breached:additionalProps.breached,
+      zone:additionalProps.zone
       });  
   }
   _pauseOperation(stopFlag,additionalProps){
+     var zoneDetails = additionalProps.zoneDetails || {},
+     breached = additionalProps.breached;
      modal.add(OperationPause, {
         title: '',
         size: 'large', // large, medium or small,
       closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: false,
       emergencyPress: stopFlag,
-      controller:additionalProps.controller_id,
-      zone:additionalProps.zone_id,
-      sensor:additionalProps.sensor_activated,
-      poeEnabled:Object.keys(additionalProps).length ? true : false
+      controller:zoneDetails.controller_id,
+      zone:zoneDetails.zone_id,
+      sensor:zoneDetails.sensor_activated,
+      poeEnabled:Object.keys(zoneDetails).length ? true : false,
+      breached:breached
       });
   }
     _FireEmergencyRelease(){
@@ -116,12 +121,13 @@ class Tabs extends React.Component{
         }
         else if(  nextProps.system_data === SOFT){
           this.props.setEmergencyModalStatus(true);
-          this._pauseOperation(true, nextProps.zoneDetails);
+          this._pauseOperation(true, nextProps);
         }
         else if( 
           nextProps.system_data === SOFT_MANUAL && 
           (nextProps.lastEmergencyState === HARD || nextProps.lastEmergencyState === SOFT)){
-           let releaseState
+           let releaseState,breached = nextProps.breached,
+            zone = nextProps.zoneDetails.zone_id;
             if(nextProps.lastEmergencyState === HARD){
               releaseState=HARD
             }
@@ -130,7 +136,7 @@ class Tabs extends React.Component{
             }
       
            this.props.setEmergencyModalStatus(true);
-           this._emergencyRelease(releaseState);
+           this._emergencyRelease({releaseState,breached,zone});
         }     
     }
     
@@ -194,12 +200,22 @@ class Tabs extends React.Component{
         overviewStatus=<FormattedMessage id="overviewStatus.tab.default" description="default overview Status" 
               defaultMessage="None"/>;          
       }
-      if(this.props.system_emergency)
+      if(this.props.system_emergency && (this.props.system_data === HARD || this.props.lastEmergencyState === HARD))
       {
         
         systemClass = 'gor-alert';
         systemStatus=<FormattedMessage id="overviewStatus.tab.stop" description="overview Status emergency" 
               defaultMessage="STOPPED"/>; 
+      }
+      else if(this.props.system_emergency && (this.props.system_data === SOFT || this.props.lastEmergencyState === SOFT)){
+        systemClass = 'gor-alert';
+        systemStatus=<FormattedMessage id="overviewStatus.tab.paused" description="overview Status emergency" 
+              defaultMessage="PAUSED"/>; 
+      }
+      else if(this.props.breached){
+        systemClass = 'gor-alert';
+        systemStatus=<FormattedMessage id="overviewStatus.tab.breached" description="overview Status emergency" 
+              defaultMessage="BREACHED"/>; 
       }
       else{
       systemStatus=<FormattedMessage id="systemStatus.tab.online" description="system Status online" 
@@ -355,6 +371,7 @@ function mapStateToProps(state, ownProps){
          lastEmergencyState:state.tabsData.lastEmergencyState || "none",
          system_data:state.tabsData.system_data||null,
          lastEmergencyState:state.tabsData.lastEmergencyState,
+         breached: state.tabsData.breached,
          users_online:state.tabsData.users_online||0,
          audit_count:state.tabsData.audit_count||0,
          space_utilized:state.tabsData.space_utilized||0,

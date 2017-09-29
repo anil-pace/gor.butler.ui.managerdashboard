@@ -105,6 +105,10 @@ input, select {
   top: 0px;
 }
 
+input:focus {
+  outline: none;
+}
+
 /*Default Fonts*/
 @font-face {
   font-family: 'Source Sans Pro';
@@ -5220,6 +5224,11 @@ button:disabled {
   width: 1088px;
 }
 
+.gor-audit-resolve-packing-cell {
+  height: 30px;
+  padding-top: 15px;
+}
+
 .gor-paginate-wrap {
   padding-top: 2rem;
   padding-bottom: 0.625rem;
@@ -6970,9 +6979,10 @@ button:disabled {
 }
 
 .gor-dropdown-wrapper .gor-dropdown-arrow {
-  border-color: #A6A7A9 transparent transparent;
-  border-style: solid;
-  border-width: 0.5rem 0.3125rem 0.125rem;
+  border-top: 0.5rem solid #A6A7A9;
+  border-left: 0.3125rem solid transparent;
+  border-right: 0.3125rem solid transparent;
+  border-bottom: 0.125rem solid transparent;
   content: ' ';
   display: block;
   height: 0;
@@ -6986,9 +6996,10 @@ button:disabled {
   width: 0px;
   height: 0px;
   border-width: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-bottom: 9px solid #A6A7A9;
+  border-top: 0.125rem solid transparent;
+  border-left: 0.3125rem solid transparent;
+  border-right: 0.3125rem solid transparent;
+  border-bottom: 0.5rem solid #A6A7A9;
   border-color: none;
   border-style: solid;
 }

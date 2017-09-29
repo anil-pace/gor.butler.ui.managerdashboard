@@ -32,7 +32,7 @@ const pageSize = [ {value: "25", disabled:false,label: <FormattedMessage id="ope
                                                           defaultMessage="100"/>}];
 
 class DownloadReportTab extends React.Component{
-	constructor(props,context) {
+    constructor(props,context) {
         super(props,context);
         this.state=this._getInitialState();
         this._refreshList = this._refreshList.bind(this);
@@ -179,7 +179,7 @@ class DownloadReportTab extends React.Component{
 
     _subscribeData(){
         this.props.initDataSentCall(wsOverviewData["default"]);
-	}
+    }
 
     _refreshList(){
         this._getReportsData();
@@ -199,14 +199,14 @@ class DownloadReportTab extends React.Component{
         return ""
     }
 
-	render(){
-		var {dataList} = this.state;
+    render(){
+        var {dataList} = this.state;
         var _this = this;
         var dataSize = dataList.getSize();
         var noData = !dataSize ;
         
-		return (
-			<div className="gorTesting wrapper gor-download-rpts">
+        return (
+            <div className="gorTesting wrapper gor-download-rpts">
                <Spinner isLoading={this.props.downloadReportsSpinner} setSpinner={this.props.setDownloadReportSpinner}/> 
        
              <div className="gorToolBar">
@@ -236,7 +236,7 @@ class DownloadReportTab extends React.Component{
                             </div>
              </div>    
                
-				<Table
+                <Table
                     rowHeight={80}
                     rowsCount={dataList.getSize()}
                     headerHeight={70}
@@ -354,9 +354,9 @@ class DownloadReportTab extends React.Component{
                 <GorPaginateV2 disabled={false} location={this.props.location} currentPage={this.state.query.page||1} totalPage={10}/>
                 </div>
                 </div>   
-			</div>
-		);
-	}
+            </div>
+        );
+    }
 };
 
 DownloadReportTab.propTypes = {
@@ -384,7 +384,7 @@ function mapStateToProps(state, ownProps) {
     };
 }
 function mapDispatchToProps(dispatch){
-	return {
+    return {
         initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
         makeAjaxCall: function(params){dispatch(makeAjaxCall(params));},
         setDownloadReportSpinner:function(data){dispatch(setDownloadReportSpinner(data));}
@@ -393,5 +393,4 @@ function mapDispatchToProps(dispatch){
 
 
 export default connect(mapStateToProps,mapDispatchToProps)(Dimensions()(withRouter(DownloadReportTab)));
-
 

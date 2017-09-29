@@ -313,6 +313,7 @@ export const RESET_AUDIT='RESET_AUDIT';
 export const SKU='sku';
 export const LOCATION='location';
 export const AUDIT_COMPLETED="audit_aborted__audit_reaudited__audit_completed";
+export const AUDIT_CANCELLED="audit_cancelled";
 export const SETAUDIT_PPS='SETAUDIT_PPS';
 export const REFRESH_AUDIT='REFRESH_AUDIT';
 export const APPROVE_AUDIT="APPROVE_AUDIT";

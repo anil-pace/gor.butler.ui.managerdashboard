@@ -26,7 +26,7 @@ class SafetyChecklist extends React.Component{
     this.props.removeModal();
   }
   componentWillReceiveProps(nextProps){
-    if(!nextProps.auth_token||!nextProps.system_emergency)
+    if(!nextProps.breached && (!nextProps.auth_token||!nextProps.system_emergency))
     {
       if(nextProps.system_emergency || nextProps.fireHazard.emergency_type!==EMERGENCY_FIRE)
       {
@@ -294,6 +294,7 @@ function mapStateToProps(state, ownProps){
       safetySpinner:state.spinner.safetySpinner || false,
       system_emergency:state.tabsData.system_emergency||false,
       system_data:state.tabsData.system_data||null,
+      breached: state.tabsData. breached,
       fireHazard:state.fireHazardDetail
   };
 }
