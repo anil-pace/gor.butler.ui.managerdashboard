@@ -2228,6 +2228,10 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   background-color: #f4f4f4;
 }
 
+.public_fixedDataTableRow_downloaded {
+  background: #eeeeee !important;
+}
+
 .fixedDataTableRowLayout_rowWrapper:hover .public_fixedDataTableCell_main {
   background-color: #e6e6e6;
 }
@@ -2556,6 +2560,14 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   background-color: #aaaaaa;
 }
 
+.FAILED .public_fixedDataTableCell_cellContent {
+  color: #EE434A;
+}
+
+.PENDING .public_fixedDataTableCell_cellContent {
+  color: #6FC4E8;
+}
+
 /**
  * Copyright (c) 2015, Facebook, Inc.
  * All rights reserved.
@@ -2594,6 +2606,11 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .public_fixedDataTableRow_highlighted,
 .public_fixedDataTableRow_highlighted .public_fixedDataTableCell_main {
   background-color: #ffffff;
+}
+
+.public_fixedDataTableRow_downloaded,
+.public_fixedDataTableRow_downloaded .public_fixedDataTableCell_main {
+  background-color: #eeeeee !important;
 }
 
 .public_fixedDataTableRow_fixedColumnsDivider {

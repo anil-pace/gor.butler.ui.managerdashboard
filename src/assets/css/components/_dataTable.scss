@@ -368,6 +368,9 @@ border-bottom-width: 0px;
 .public_fixedDataTableCell_highlighted {
   background-color: #f4f4f4;
 }
+.public_fixedDataTableRow_downloaded{
+  background: #eeeeee !important;
+}
 
 
 .fixedDataTableRowLayout_rowWrapper{
@@ -747,6 +750,16 @@ background: #f99405;
 .public_fixedDataTableCell_columnResizerKnob {
   background-color: #aaaaaa;
 }
+.FAILED{
+  .public_fixedDataTableCell_cellContent{
+      color:#EE434A;
+  }
+}
+.PENDING{
+   .public_fixedDataTableCell_cellContent{
+      color:#6FC4E8;
+  }
+}
 /**
  * Copyright (c) 2015, Facebook, Inc.
  * All rights reserved.
@@ -786,6 +799,10 @@ background: #f99405;
 .public_fixedDataTableRow_highlighted,
 .public_fixedDataTableRow_highlighted .public_fixedDataTableCell_main {
   background-color: #ffffff;
+}
+.public_fixedDataTableRow_downloaded,
+.public_fixedDataTableRow_downloaded .public_fixedDataTableCell_main {
+  background-color: #eeeeee !important;
 }
 
 

@@ -38,6 +38,7 @@ class DownloadReportTab extends React.Component{
         this._refreshList = this._refreshList.bind(this);
         this._handlePageChange = this._handlePageChange.bind(this);
         this._subscribeData = this._subscribeData.bind(this);
+        this._rowClassNameGetter = this._rowClassNameGetter.bind(this);
         
     }
 
@@ -77,6 +78,7 @@ class DownloadReportTab extends React.Component{
                 else{
                     dataTuple.typeText =  dataTuple.type
                 }
+
                 if(dataTuple.completionTime){
                     dataTuple.formattedCompletionDate = <FormattedDate 
                                     value={new Date(dataTuple.completionTime)}
@@ -189,7 +191,13 @@ class DownloadReportTab extends React.Component{
             _query.page = _query.page || 1;
             this.props.router.push({pathname: "/reports/downloadReport",query: _query})
     }
-
+    _rowClassNameGetter(index){
+        var {dataList} = this.state;
+        if(dataList.newData[index].lastDownloaded){
+            return "public_fixedDataTableRow_downloaded"
+        }
+        return ""
+    }
 
 	render(){
 		var {dataList} = this.state;
@@ -233,6 +241,7 @@ class DownloadReportTab extends React.Component{
                     rowsCount={dataList.getSize()}
                     headerHeight={70}
                     isColumnResizing={false}
+                    rowClassNameGetter={this._rowClassNameGetter}
                     width={this.props.containerWidth}
                     height={dataSize ? document.documentElement.clientHeight * 0.5 : 71}
                     {...this.props}>
