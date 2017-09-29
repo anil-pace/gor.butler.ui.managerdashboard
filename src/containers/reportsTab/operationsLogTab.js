@@ -307,6 +307,7 @@ class OperationsLogTab extends React.Component{
         var timePeriod = this.props.location.query.time_period;
         var noData = !dataSize && timePeriod !== REALTIME;
         var pageSizeDDDisabled = timePeriod === REALTIME ;
+        var location = JSON.parse(JSON.stringify(this.props.location))
 		return (
 			<div className="gorTesting wrapper gor-operations-log">
                 <Spinner isLoading={this.props.reportsSpinner} setSpinner={this.props.setReportsSpinner}/>
@@ -536,7 +537,7 @@ class OperationsLogTab extends React.Component{
                     selectedOption={DEFAULT_PAGE_SIZE_OL}/>
                 </div>
                 <div className="gor-ol-paginate-right">
-                <GorPaginateV2 disabled={pageSizeDDDisabled} location={this.props.location} currentPage={this.state.query.page||1} totalPage={10}/>
+                <GorPaginateV2 disabled={pageSizeDDDisabled} location={location} currentPage={this.state.query.page||1} totalPage={10}/>
                 </div>
                 </div>
 			</div>

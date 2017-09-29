@@ -47,7 +47,7 @@ class GorPaginateV2 extends React.Component {
 
     _navigateToPage(page) {
         let _query=this.props.location.query || {}
-        _query.page=page
+        _query.page=page.toString();
        
         this.setState({currentQuery:page})
         hashHistory.push({pathname: this.props.location.pathname, query: _query})
