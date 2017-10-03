@@ -38,11 +38,12 @@ class PutStatusWidget extends React.Component{
     		else{
     			value=<FormattedNumber value={value}/>
                 putThroughput=<FormattedNumber value={putThroughput}/>
-                pluralMsg=<FormattedPlural
-                            value={totalPut}
-                            one='PPS'
-                            other='PPS'
-                        />
+                
+                pluralMsg=<FormattedMessage id="widget.put.count" description='Total put count'
+                            defaultMessage="{count} {count,plural,one {PPS} other {PPS}}" 
+                            values={{count:totalPut}}
+                            />;  
+                
                 lowStr=<FormattedMessage id="widget.put.throughput" description='Throughput message' 
             					defaultMessage='{count} {pluralMsg} stocking {throughput} items/hr'
             					values={{
