@@ -4,10 +4,11 @@ import {HISTOGRAM_DATA} from '../constants/frontEndConstants';
  * @param  {Action object}
  * @return {[Object] updated state}
  */
+
 function processHistogramData(data) {
 var graphData=[],barData={},j=0;
-var startIndex=data[0].start_time;
-var endIndex=data[data.length - 1].end_time;
+var startIndex=parseInt(data[0].start_time);
+var endIndex=parseInt(data[data.length - 1].end_time);
 for (var i=0; i < startIndex; i++) {
   barData.timeInterval=(i)%24; barData.put=0; barData.pick=0; barData.audit=0;
   graphData.push(barData);

@@ -112,11 +112,12 @@ export const PPS_TAB="Pick Put Stations";
 export const ORDER_LIST="Order List";
 export const PPS_CONFIGURATION="PPS Configuration";
 export const WAVES="Waves";
-export const OPERATIONS_LOG="operationsLog"
+export const OPERATIONS_LOG="operationsLog";
 export const BUTLERBOTS="butlerbots";
 export const CHARGING="chargingstation";
 export const PPS="pps";
 export const ORDERLIST="ORDERLIST";
+export const DOWNLOAD_REPORT="downloadReport"
 export const TAB_CLASS={
 	overview:"gorMainBlock", 
 	system:"gorMainBlock",
@@ -297,7 +298,9 @@ export const SYS_SUB_TAB_ROUTE_MAP={
 
 }
 export const REPORTS_SUB_TAB_ROUTE_MAP={
-	[OPERATIONS_LOG] : "operationsLog"
+	[OPERATIONS_LOG] : "operationsLog",
+	[DOWNLOAD_REPORT]:"downloadReport"
+
 
 }
 export const SHOW_UTILITY_TAB=true;
@@ -310,6 +313,7 @@ export const RESET_AUDIT='RESET_AUDIT';
 export const SKU='sku';
 export const LOCATION='location';
 export const AUDIT_COMPLETED="audit_aborted__audit_reaudited__audit_completed";
+export const AUDIT_CANCELLED="audit_cancelled";
 export const SETAUDIT_PPS='SETAUDIT_PPS';
 export const REFRESH_AUDIT='REFRESH_AUDIT';
 export const APPROVE_AUDIT="APPROVE_AUDIT";
@@ -478,7 +482,8 @@ export const GOR_STATUS_PRIORITY="statusPriority";
 export const GOR_PERIPHERAL_ONLINE="online";
 export const GOR_PERIPHERAL_OFFLINE="offline";
 export const GOR_ON_STATUS="open";
-export const GOR_CONNECTED_STATUS="Connected";
+export const GOR_CONNECTED_STATUS="connected";
+export const GOR_MANUAL_MODE="manual";
 export const GOR_COMPLETED_STATUS="Completed";
 export const GOR_BREACHED_LINES="gor-breached-lines";
 export const AUDIT_CREATED="audit_created";
@@ -699,9 +704,27 @@ export const OPERATIONS_LOG_REQUEST_PARAMS=  {
         "type": ""
     }
 }
+export const OPERATIONS_LOG_MODE_MAP=  {
+    "put_front":"Put Front",
+    "pick_front":"Pick Front",
+    "put_back":"Put Back",
+    "pick_back":"Pick Back",
+    "audit":"Audit"
+}
 
 export const APPLY_OL_FILTER_FLAG = "APPLY_OL_FILTER_FLAG";
+export const REPORT_NAME_OPERATOR_LOGS = "OPERATOR_LOGS";
 export const WS_OPERATOR_LOG_SUBSCRIBE = "WS_OPERATOR_LOG_SUBSCRIBE";
 export const WS_OPERATOR_LOG_UNSUBSCRIBE = "WS_OPERATOR_LOG_UNSUBSCRIBE";
 export const SET_REPORTS_SPINNER = "SET_REPORTS_SPINNER";
+export const RECIEVE_WS_OL_DATA="RECIEVE_WS_OL_DATA";
+export const DEFAULT_PAGE_SIZE_OL = "25";
+export const REALTIME = "realtime";
+export const REPORTS_FETCH = "REPORTS_FETCH";
+export const GET_REPORT = "GET_REPORT";
+export const DOWNLOAD_REPORT_REQUEST = "DOWNLOAD_REPORT_REQUEST";
+export const SET_DOWNLOAD_REPORT_SPINNER = "SET_DOWNLOAD_REPORT_SPINNER";
+/*COnstants for audit query*/
+export const SET_ORDER_QUERY = "SET_ORDER_QUERY";
+export const SET_AUDIT_QUERY = "SET_AUDIT_QUERY";
 

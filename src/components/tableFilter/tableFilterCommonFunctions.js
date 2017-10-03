@@ -3,20 +3,17 @@ import {ADD_TOKEN, ADD_DEFAULT,SINGLE} from '../../constants/frontEndConstants';
 export function handelTokenClick(field,value,state,data) {
         var selectedToken=data.tokenSelected;
         var defaultToken=data.defaultToken[field];
-        var isSingleSelection;
-        if(data.selection && data.selection[field] === SINGLE){
-            isSingleSelection = true;
-        }
+        
          
         if(selectedToken[field]) {
             if(state=== ADD_TOKEN) {                           // when user select a token adds in state and remove default selected token
                 selectedToken[field].push(value);
-                if(!isSingleSelection){
+                
                 let removeDefaultFieldIndex=selectedToken[field].indexOf(defaultToken[0]);
                 if (removeDefaultFieldIndex >= 0) {
                     selectedToken[field].splice( removeDefaultFieldIndex, 1 );
                 }
-            }
+            
             }
             
             else if(state=== ADD_DEFAULT) {              // when user add the default token

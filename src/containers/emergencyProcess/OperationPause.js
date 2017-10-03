@@ -29,13 +29,21 @@ class OperationPause extends React.Component{
                   </div>
                   <div className='gor-margin-top'>
                     <div className='gor-error-md'>
-                    {this.props.poeEnabled?(<FormattedMessage id='operation.alert.pause.text' 
+                    {this.props.poeEnabled && this.props.breached && (<FormattedMessage id='operation.alert.pause.breach.text' 
+                    defaultMessage="Emergency-Pause activated due to SOP breach via Controller {controller} in {zone}."
+                            description="Text for emergency button press"
+                            values={{
+                              controller:this.props.controller,
+                              zone:this.props.zone
+                            }}/>)}
+                    {this.props.poeEnabled && !this.props.breached && (<FormattedMessage id='operation.alert.pause.text' 
                     defaultMessage="Emergency-Pause activated via Controller {controller} in {zone}."
                             description="Text for emergency button press"
                             values={{
                               controller:this.props.controller,
                               zone:this.props.zone
-                            }}/>):(<FormattedMessage id='operation.alert.pause.nonPOE' 
+                            }}/>)}
+                    {!this.props.poeEnabled && (<FormattedMessage id='operation.alert.pause.nonPOE' 
                     defaultMessage="Operation Paused"
                             description="Text for operation stopped heading"/>)}
                     </div>

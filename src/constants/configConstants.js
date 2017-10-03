@@ -68,7 +68,10 @@ export const SAVE_PROFILE_URL=API_URL+"/pps_profiles/"//TODO: URL need to be cha
  */
 
 export const OPERATIONS_LOG_URL =  API_URL+"/api-gateway/dashboard-service/platform-dashboard/operator/logs/search";
-export const WS_OPERATIONS_LOG_SUBSCRIPTION =  "/operator/logs/live/25";
+export const WS_OPERATIONS_LOG_SUBSCRIPTION =  "/dashboard/operator/logs/live";//An arbitrary count has to be passed in this API
+export const REPORTS_URL = API_URL+"/api-gateway/dashboard-service/platform-dashboard/report/find-by-page";
+export const DOWNLOAD_REPORT = API_URL+"/api-gateway/dashboard-service/platform-dashboard/report/download/";
+export const REQUEST_REPORT_DOWNLOAD = API_URL+"/api-gateway/dashboard-service/platform-dashboard/operator/logs/generate-report";
 
 
 

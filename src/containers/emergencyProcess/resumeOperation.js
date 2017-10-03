@@ -29,7 +29,7 @@ class ResumeOperation extends React.Component{
      this.props.modalresetForm();
   }
   componentWillReceiveProps(nextProps){
-    if(!nextProps.auth_token||!nextProps.system_emergency||nextProps.system_data !== this.props.system_data )
+    if(!nextProps.breached && (!nextProps.auth_token||!nextProps.system_emergency||nextProps.system_data !== this.props.system_data) )
     {
       if(nextProps.system_emergency || nextProps.fireHazard.emergency_type!==EMERGENCY_FIRE)
       this._removeThisModal();
@@ -113,6 +113,7 @@ class ResumeOperation extends React.Component{
       passwordCheck: state.appInfo.passwordInfo||{},
       modalStatus: state.emergency.hideModal || false,
       system_emergency:state.tabsData.system_emergency||false,
+      breached:state.tabsData.breached,
       system_data:state.tabsData.system_data||null,
       fireHazard:state.fireHazardDetail,
 

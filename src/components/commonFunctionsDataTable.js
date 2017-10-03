@@ -164,6 +164,68 @@ export const TextCell=({rowIndex, data, columnKey,setClass, ...props})=>{
   </Cell>
 )};
 
+export const AuditPackingSlotIdCell = ({rowIndex, data, columnKey, setClass, ...props}) => {
+
+    return (<Cell {...props} className={data.getObjectAt(rowIndex)[setClass]}>
+
+            <div>
+                <div className="gor-audit-resolve-packing-cell">{data.getObjectAt(rowIndex)[columnKey]}</div>
+                <div className="gor-audit-resolve-packing-cell"><FormattedMessage id="audit.table.pack.outer.label"
+                                                                            description="audit.table.pack.outer.label"
+                                                                            defaultMessage="Outer"/></div>
+                <div className="gor-audit-resolve-packing-cell"><FormattedMessage id="audit.table.pack.inner.label"
+                                                                            description="audit.table.pack.inner.label"
+                                                                            defaultMessage="Inner"/></div>
+            </div>
+        </Cell>
+    )
+};
+export const AuditPackingQuantityCell = ({rowIndex, data, columnKey, setClass,dataIndex,dataKey, ...props}) => {
+
+    const outer_pack=data.getObjectAt(rowIndex)[columnKey].filter(function(packing_info){return packing_info.type==="container_level_1"})
+    const inner_pack=data.getObjectAt(rowIndex)[columnKey].filter(function(packing_info){return packing_info.type==="container_level_2"})
+
+
+    return (<Cell {...props} className={data.getObjectAt(rowIndex)[setClass]}>
+
+            <div>
+                <div className="gor-audit-resolve-packing-cell"/>
+                <div className="gor-audit-resolve-packing-cell">{outer_pack[0][dataKey]}</div>
+                <div className="gor-audit-resolve-packing-cell">{inner_pack[0][dataKey]}</div>
+            </div>
+        </Cell>
+    )
+};
+export const AuditPackingStatusCell = ({rowIndex, data, columnKey, setClass, ...props}) => {
+
+    return (<Cell {...props} className={data.getObjectAt(rowIndex)[setClass]}>
+
+            <div>
+                <div className="gor-audit-resolve-packing-cell">{data.getObjectAt(rowIndex)[columnKey]}</div>
+                <div className="gor-audit-resolve-packing-cell"/>
+                <div className="gor-audit-resolve-packing-cell"/>
+            </div>
+        </Cell>
+    )
+};
+export const AuditPackingResolveCell = ({rowIndex, data, columnKey, setClass, checkStatus, screenId, children, ...props}) => {
+    const childrenCell = React.Children.map(children,
+        (child) => React.cloneElement(child, {
+            rowIndex: rowIndex
+
+        })
+    );
+    return (<div>
+            <div style={{height: 30, paddingTop: 15}}>{childrenCell}</div>
+            <div style={{height: 30, paddingTop: 20}}/>
+            <div style={{height: 30, paddingTop: 20}}/>
+        </div>
+
+    )
+};
+
+
+
 export const ToolTipCell=({rowIndex, data, columnKey,setClass,callBack,tooltipData, ...props})=> (
   <Cell {...props} className={setClass}>
     {data.getObjectAt(rowIndex)[columnKey]}
@@ -297,10 +359,10 @@ export const ResolveCell=({rowIndex, data, columnKey, checkStatus, screenId, ...
                 <FormattedMessage id="commonDataTable.resolveAudit.reject" description='resolve button' defaultMessage='Reject'/>
             </div>:
             <div style={(screenId===VIEW_AUDIT_ISSUES || data.getObjectAt(rowIndex)[GOR_AUDIT_STATUS_DATA]!==AUDIT_PENDING_APPROVAL)?{opacity: 0.5}:{opacity: 1}}>
-                <input type="radio"  name={data.getObjectAt(rowIndex)["auditLineId"]} checked={data.getObjectAt(rowIndex)[GOR_AUDIT_STATUS_DATA]===RESOLVED?true:false} disabled={data.getObjectAt(rowIndex)[GOR_AUDIT_STATUS_DATA]!==AUDIT_PENDING_APPROVAL?true:false}
+                <input type="radio"  name={data.getObjectAt(rowIndex)["auditLineId"]} defaultChecked={data.getObjectAt(rowIndex)[GOR_AUDIT_STATUS_DATA]===RESOLVED?true:false} disabled={data.getObjectAt(rowIndex)[GOR_AUDIT_STATUS_DATA]!==AUDIT_PENDING_APPROVAL?true:false}
                        onChange={checkStatus.bind(this,rowIndex,AUDIT_APPROVED,data.getObjectAt(rowIndex)["auditLineId"])} />
                 <FormattedMessage id="commonDataTable.resolveAudit.approve" description='resolve button' defaultMessage='Approve '/>
-                <input type="radio"  name={data.getObjectAt(rowIndex)["auditLineId"]} checked={data.getObjectAt(rowIndex)[GOR_AUDIT_STATUS_DATA]===REJECTED|| data.getObjectAt(rowIndex)[GOR_AUDIT_STATUS_DATA]===AUDIT_LINE_REAUDITED} disabled={data.getObjectAt(rowIndex)[GOR_AUDIT_STATUS_DATA]!==AUDIT_PENDING_APPROVAL?true:false}
+                <input type="radio"  name={data.getObjectAt(rowIndex)["auditLineId"]} defaultChecked={data.getObjectAt(rowIndex)[GOR_AUDIT_STATUS_DATA]===REJECTED|| data.getObjectAt(rowIndex)[GOR_AUDIT_STATUS_DATA]===AUDIT_LINE_REAUDITED} disabled={data.getObjectAt(rowIndex)[GOR_AUDIT_STATUS_DATA]!==AUDIT_PENDING_APPROVAL?true:false}
                        onChange={checkStatus.bind(this,rowIndex,AUDIT_REJECTED,data.getObjectAt(rowIndex)["auditLineId"])}/>
                 <FormattedMessage id="commonDataTable.resolveAudit.reject" description='resolve button' defaultMessage='Reject'/>
             </div>

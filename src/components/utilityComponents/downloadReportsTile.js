@@ -135,7 +135,28 @@ class DownloadReportsTile extends React.Component {
       );
       result.push(listItem);
     }
-    return result;
+      if(result.length===0){
+          let listItem=<ListItem index={0} key={"listItem" + 0}>
+            <div className="gor-inline">
+              <div className="gor-utility-master-h1">
+                <div className="gor-utility-no-history-found">
+                  <FormattedMessage
+                      id="utility.uploadHist.noresultfound"
+                      description="Status "
+                      defaultMessage="No Result Found"
+                  />
+                </div>
+
+              </div>
+              <div className="gor-inline gor-utility-master-h2"/>
+
+            </div>
+            <div className="gor-inline gor-utility-master-h2"/>
+
+          </ListItem>
+          result.push(listItem)
+      }
+    return <div className="gor-utility-history-container">{result}</div>;
   }
   shouldComponentUpdate(nextProps, nextState) {
     if (

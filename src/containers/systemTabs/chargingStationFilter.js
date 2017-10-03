@@ -135,7 +135,7 @@ class ChargingStationFilter extends React.Component {
 
     render() {
         let chargingDetails=this.props.chargerData;
-        let noOrder=chargingDetails.chargersDetail && chargingDetails.chargersDetail.length ? false : true;
+        let noOrder=chargingDetails.noResultFound
 
 
         let chargingSearchField=this._processChargingSearchField();

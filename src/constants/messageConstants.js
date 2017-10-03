@@ -259,6 +259,31 @@ export const CONTROLLER_SENSOR_TRIGGERED_MESSAGES={
       none:(<FormattedMessage id="zoning.action.noneSensor" description='Status text for zone' 
       defaultMessage='Standard'/>)
 }
+/*Messages for operations logs*/
+export const REQUEST_REPORT_SUCCESS = (<FormattedMessage id="operationsLog.reportRequest.success" description='Status text for zone' 
+      defaultMessage='Request successfully generated. Kindly check the Downloads Tab'/>)
+export const REQUEST_REPORT_FAILURE = (<FormattedMessage id="operationsLog.reportRequest.failure" description='Status text for zone' 
+      defaultMessage='Error creating request'/>)
+
+export const ZONE_SUB_STATUS_INTL_MESSAGE={
+      zone_pause:(<FormattedMessage id="zoning.substatus.action.zone_pause" description='Status text for zone' 
+      defaultMessage='Zone pause activated'/>),
+      zone_clear:(<FormattedMessage id="zoning.substatus.action.zone_clear" description='Status text for zone' 
+      defaultMessage='Zone clear activated'/>),
+      emergency_stop:(<FormattedMessage id="zoning.substatus.action.emergency_stop" description='Status text for zone' 
+      defaultMessage='Emergency stop activated'/>),
+      emergency_pause:(<FormattedMessage id="zoning.substatus.action.emergency_pause" description='Status text for zone' 
+      defaultMessage='Emergency pause activated'/>),
+}
+
+export const ENTITY_BREACHED = {
+      light_curtain:(<FormattedMessage id="zoning.entity.lightCurtains" description='Status text for zone' 
+      defaultMessage='Light Curtain'/>),
+      latch_gate:(<FormattedMessage id="zoning.entity.latchGate" description='Status text for zone' 
+      defaultMessage='Latch Gate'/>)
+}
+
+
 
 
 

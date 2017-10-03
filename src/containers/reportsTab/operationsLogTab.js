@@ -3,7 +3,7 @@
  * This will be switched based on tab click
  */
 import React  from 'react';
-import { FormattedMessage} from 'react-intl';
+import { FormattedMessage,FormattedDate} from 'react-intl';
 import { connect } from 'react-redux';
 import {wsOverviewData} from '../../constants/initData.js';
 import Dimensions from 'react-dimensions';
@@ -11,7 +11,8 @@ import {withRouter} from 'react-router';
 import {updateSubscriptionPacket,setWsAction} from '../../actions/socketActions';
 import {applyOLFilterFlag,wsOLSubscribe,wsOLUnSubscribe,setReportsSpinner} from '../../actions/operationsLogsActions';
 import {WS_ONSEND,POST,OPERATION_LOG_FETCH
-    ,APP_JSON} from '../../constants/frontEndConstants';
+    ,APP_JSON,OPERATIONS_LOG_MODE_MAP,
+    DEFAULT_PAGE_SIZE_OL,REALTIME,DOWNLOAD_REPORT_REQUEST,REPORT_NAME_OPERATOR_LOGS} from '../../constants/frontEndConstants';
 import GorPaginateV2 from '../../components/gorPaginate/gorPaginateV2';
 import Spinner from '../../components/spinner/Spinner';
 import {Table, Column,Cell} from 'fixed-data-table';
@@ -23,9 +24,10 @@ import {
     showTableFilter
 } from '../../actions/filterAction';
 import OperationsFilter from './operationsFilter';
+import FilterSummary from '../../components/tableFilter/filterSummary';
 import Dropdown from '../../components/gor-dropdown-component/dropdown';
-import {OPERATIONS_LOG_URL,WS_OPERATIONS_LOG_SUBSCRIPTION} from '../../constants/configConstants';
-import {makeAjaxCall} from '../../actions/ajaxActions'
+import {OPERATIONS_LOG_URL,WS_OPERATIONS_LOG_SUBSCRIPTION,REQUEST_REPORT_DOWNLOAD} from '../../constants/configConstants';
+import {makeAjaxCall} from '../../actions/ajaxActions';
 
 
 const pageSize = [ {value: "25", disabled:false,label: <FormattedMessage id="operationLog.page.twentyfive" description="Page size 25"
@@ -39,10 +41,10 @@ class OperationsLogTab extends React.Component{
 	constructor(props,context) {
         super(props,context);
         this.state=this._getInitialState();
-        /*this._clearFilter =  this._clearFilter.bind(this);
-        this._sortTableData = this._sortTableData.bind(this);*/
+        
         this._setFilter= this._setFilter.bind(this);
         this._handlePageChange= this._handlePageChange.bind(this);
+        this._requestReportDownload = this._requestReportDownload.bind(this);
         
     }
 
@@ -68,8 +70,9 @@ class OperationsLogTab extends React.Component{
             query:this.props.location.query,
             subscribed:false,
             realTimeSubSent:false,
-            pageSize:this.props.location.query.pageSize || "25",
+            pageSize:this.props.location.query.pageSize || DEFAULT_PAGE_SIZE_OL,
             dataFetchedOnLoad:false,
+            hideLayer:false,
             queryApplied:Object.keys(this.props.location.query).length ? true :false
         }
     }
@@ -78,19 +81,29 @@ class OperationsLogTab extends React.Component{
         
         var dataLen = data.length;
         var processedData=[];
+        var timeZone = this.props.timeOffset;
         if(dataLen){
             for(let i=0 ;i < dataLen ; i++){
                 let rowData = data[i]["_source"];
                 let rowObj = {};//Object.assign({},data[i]["_source"]);
-                rowObj.operatingMode = rowData.operatingMode;
-                rowObj.status = rowData.status.type
+                rowObj.operatingMode =  rowData.operatingMode || "--";
+                rowObj.status = rowData.status.type;
+                rowObj.statusText = rowData.status.type !== "success" ? (rowData.status.data || rowData.status.type) : rowData.status.type
                 rowObj.requestId = rowData.requestId;
                 rowObj.skuId = rowData.productInfo.type+" "+rowData.productInfo.id+"/"+rowData.productInfo.quantity+" items";
-                rowObj.sourceId = rowData.source.type+" "+rowData.source.id+"/"+
-                                rowData.source.children[0].type+"-"+rowData.source.children[0].id;
-                rowObj.destinationId = rowData.destination.type+" "+rowData.destination.id+"/"+
-                                rowData.destination.children[0].type+"-"+rowData.destination.children[0].id;
-                rowObj.timestamp=rowData.timestamp;
+                rowObj.sourceId = rowData.source.type+" "+rowData.source.id+(rowData.source.children ? "/"+
+                                rowData.source.children[0].type+"-"+rowData.source.children[0].id : "");
+                rowObj.destinationId = (rowData.destination.type || "--")+" "+(rowData.destination.id || "--")+(rowData.destination.children ? "/"+
+                                rowData.destination.children[0].type+"-"+rowData.destination.children[0].id:"");
+                rowObj.timestamp=<FormattedDate 
+                                    value={rowData.createdTime}
+                                    year='numeric'
+                                    month='long'
+                                    day='2-digit'
+                                    hour='2-digit'
+                                    minute='2-digit'
+                                    timeZone={timeZone}
+                                  />;
                 rowObj.userId=rowData.userId;
 
                 processedData.push(rowObj)
@@ -110,26 +123,48 @@ class OperationsLogTab extends React.Component{
             })
             
         }
+        
         else if(nextProps.socketAuthorized && nextProps.notificationSocketConnected 
-            && (!this.state.dataFetchedOnLoad || nextProps.filtersApplied || (this.props.location.query.page !== nextProps.location.query.page))){
+            && (!this.state.dataFetchedOnLoad  
+                || ((this.props.filtersModified !== nextProps.filtersModified)
+                || (this.props.location.query.page !== nextProps.location.query.page)))){
             this.setState({
-                dataFetchedOnLoad:true
+                dataFetchedOnLoad:true,
+                realTimeSelected:nextProps.location.query.time_period === REALTIME
             },function(){
                 this._getOperationsData(nextProps)
             })
             
         }
         if(this.props.hasDataChanged !== nextProps.hasDataChanged){
-            let data = this._processData(nextProps.olData.slice(0));
+            let rawData = this.state.realTimeSelected  ? 
+            nextProps.olWsData.slice(0) : nextProps.olData.slice(0);
+            let data = this._processData(rawData);
             let dataList = new tableRenderer(data.length)
             dataList.newData=data;
             this.setState({
                 dataList
             })
         }
-        
+        if((!nextProps.olData.length || !nextProps.olWsData.length) 
+            && (this.props.filtersModified !== nextProps.filtersModified)){
+            this.setState({
+                hideLayer:false
+            })
+        }
+        else if(this.props.filtersModified !== nextProps.filtersModified){
+            this.setState({
+                hideLayer:true
+            })
+        }
     }
     componentDidMount(){
+        var _query = JSON.parse(JSON.stringify(this.props.location.query))
+        delete _query.page;
+        delete _query.pageSize;
+        if(Object.keys(_query).length){
+            this.props.applyOLFilterFlag(true);
+        }
         this._getOperationsData(this.props)
     }
     /*Since componentWillRecieveProps is not called for the first time
@@ -157,12 +192,13 @@ class OperationsLogTab extends React.Component{
     _handlePageChange(e){
         
         this.setState({
-            pageSize:e.value
+            pageSize:e.value,
+            dataFetchedOnLoad:false
         },function(){
             let _query =  Object.assign({},this.props.location.query);
             _query.pageSize = this.state.pageSize;
             _query.page = _query.page || 1;
-            this.props.applyOLFilterFlag(true);
+            //this.props.applyOLFilterFlag(true);
             this.props.router.push({pathname: "/reports/operationsLog",query: _query})
             //this._getOperationsData(this.props,{pageSize:e.value});
         })
@@ -171,28 +207,43 @@ class OperationsLogTab extends React.Component{
     _getOperationsData(props){
         var query = props.location.query,
         isSocketConnected = props.notificationSocketConnected;
-        var filters = {};//JSON.parse(JSON.stringify(OPERATIONS_LOG_REQUEST_PARAMS));
+        var filters = {};
         var pageSize = this.state.pageSize;
-        var frm = (query.page ? parseInt(query.page) : 1) -1;
+        var frm = ((query.page ? parseInt(query.page) : 1) -1) * pageSize;
         this.props.setReportsSpinner(true);
             if(Object.keys(query).length){
-                let currTime = new Date();
-                let toTime = new Date(currTime);
-                toTime.setMinutes(currTime.getMinutes() - parseInt(query.time_period));
-                filters.status = {
-                    type:query.status
-                };
-                filters.requestId = query.request_id;
-                filters.skuId = query.sku_id;
-                filters.userId = query.user_id;
-               
+                let timeOffset = query.time_period ? query.time_period.split("_") : [];
+                if(query.status){
+                    filters.status = {
+                        type: (query.status.toString()).replace(/,/g," ") 
+                    };
+                }
+                if(query.request_id){
+                    filters.requestId = query.request_id;
+                }
+                if(query.sku_id){
+                    filters.skuId = query.sku_id;
+                }
+                if(query.user_id){
+                    filters.userId = query.user_id;
+                }
+                if(query.operatingMode){
+                    filters.operatingMode = (query.operatingMode.toString()).replace(/,/g," ");
+                }
+                
+                if(timeOffset.length === 2){
+                    filters.timeOffset={
+                        "unit" : timeOffset[1],
+                        "value": parseInt(timeOffset[0])
+                    }
+                }
             }
             filters.page={
                     size:parseInt(pageSize),
                     from:frm
                 }
 
-        if(query.time_period !== "realtime"){
+        if(query.time_period !== REALTIME){
             this.props.wsOLUnSubscribe();
             
             let params={
@@ -204,14 +255,13 @@ class OperationsLogTab extends React.Component{
                 'cause':OPERATION_LOG_FETCH
             }
 
-        //this.props.setLoginSpinner(true); TODO
-        this.props.applyOLFilterFlag(false);
+        
         this.props.makeAjaxCall(params);
         this.setState({
                 realTimeSubSent:false
             })
         }
-        else if(query.time_period && query.time_period === "realtime" 
+        else if(query.time_period && query.time_period === REALTIME 
             && !this.state.realTimeSubSent && isSocketConnected){
             this.props.wsOLUnSubscribe(false);
             let wsParams = {}
@@ -219,7 +269,6 @@ class OperationsLogTab extends React.Component{
             delete filters.page;
             wsParams.url = WS_OPERATIONS_LOG_SUBSCRIPTION;
             wsParams.filters = JSON.stringify(filters);
-            this.props.applyOLFilterFlag(false);
             this.props.wsOLSubscribe(wsParams);
             this.setState({
                 realTimeSubSent:true
@@ -229,17 +278,48 @@ class OperationsLogTab extends React.Component{
     _setFilter(){
         this.props.showTableFilter(!this.props.showFilter);
     }
+    _requestReportDownload(){
+        var formData = {
+                "searchRequest": {}, 
+                "report": {
+                "requestedBy": this.props.username,
+                "type" : REPORT_NAME_OPERATOR_LOGS
+                }
+        }
+        var params={
+                'url':REQUEST_REPORT_DOWNLOAD,
+                'method':POST,
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
+                'formdata':formData,
+                'cause':DOWNLOAD_REPORT_REQUEST
+            }
+
+        
+        this.props.makeAjaxCall(params);
+    }
 
 	render(){
 		var {dataList} = this.state;
+        var _this = this;
         var filterHeight=screen.height - 190 - 50;
         var dataSize = dataList.getSize();
-        var hideLayer = dataSize ? false : true;
-        var pageSizeDDDisabled = this.props.location.query.time_period === 'realtime' ;
+        var timePeriod = this.props.location.query.time_period;
+        var noData = !dataSize && timePeriod !== REALTIME;
+        var pageSizeDDDisabled = timePeriod === REALTIME ;
+        var location = JSON.parse(JSON.stringify(this.props.location))
 		return (
 			<div className="gorTesting wrapper gor-operations-log">
                 <Spinner isLoading={this.props.reportsSpinner} setSpinner={this.props.setReportsSpinner}/>
-            
+            <div className="gor-filter-wrap"
+                                 style={{'width': this.props.showFilter ? '350px' : '0px', height: filterHeight}}>
+                                <OperationsFilter ref={instance => { this.child = instance; }}
+                                filters = {this.props.location.query} 
+                                noData={noData} 
+                                pageSize={this.state.pageSize} 
+                                hideLayer={this.state.hideLayer}
+                                responseFlag={this.props.reportsSpinner}/>
+            </div>
              <div className="gorToolBar">
                                 <div className="gorToolBarWrap">
                                     <div className="gorToolBarElements">
@@ -248,9 +328,45 @@ class OperationsLogTab extends React.Component{
                                         
                                     </div>
                                 </div>
+                                  <div className="filterWrapper">
+                            
+                                <div className="gorToolBarDropDown">
+                                    <div className="gor-button-wrap">
+                                       <button className="gor-rpt-dwnld" onClick={this._requestReportDownload}>
+                                        <FormattedMessage id="operationLog.table.downloadBtn"
+                                        description="button label for download report"
+                                        defaultMessage="Download Report"/>
+                                        </button>
+                                        <button
+                                            className={this.props.filtersApplied ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
+                                            onClick={this._setFilter}>
+                                            <div className="gor-manage-task"/>
+                                            <FormattedMessage id="gor.filter.filterLabel" description="button label for filter"
+                                                              defaultMessage="Filter data"/>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+            
                     
              </div>
-     
+             {this.props.location.query.time_period !== REALTIME ? 
+             <FilterSummary 
+             total={dataSize} 
+             isFilterApplied={this.props.filtersApplied}  
+             filterText={<FormattedMessage id="operationsLog.filter.search.bar"
+                                     description='total waves for filter search bar'
+                                     defaultMessage='{total} Results found'
+                                     values={{total: dataSize.toString()}}/>}
+                                   refreshList={() => { 
+                                    _this.child.getWrappedInstance()._clearFilter();
+                                    }}
+                                   refreshText={<FormattedMessage id="operationsLog.filter.search.bar.showall"
+                                                                  description="button label for show all"
+                                                                  defaultMessage="Show all Operations"/>}/>
+                :null}
+                
                         
                
 				<Table
@@ -284,7 +400,7 @@ class OperationsLogTab extends React.Component{
                         isResizable={true}
                     />
                     <Column
-                        columnKey="status"
+                        columnKey="statusText"
                         header={
                             <Cell >
 
@@ -418,10 +534,10 @@ class OperationsLogTab extends React.Component{
                     options={pageSize} 
                     onSelectHandler={(e) => this._handlePageChange(e)}
                     disabled={pageSizeDDDisabled} 
-                    selectedOption={"25"}/>
+                    selectedOption={DEFAULT_PAGE_SIZE_OL}/>
                 </div>
                 <div className="gor-ol-paginate-right">
-                <GorPaginateV2 location={this.props.location} currentPage={this.state.query.page||1} totalPage={10}/>
+                <GorPaginateV2 disabled={pageSizeDDDisabled} location={location} currentPage={this.state.query.page||1} totalPage={10}/>
                 </div>
                 </div>
 			</div>
@@ -429,17 +545,43 @@ class OperationsLogTab extends React.Component{
 	}
 };
 
+OperationsLogTab.propTypes = {
+    olData: React.PropTypes.array,
+    socketAuthorized: React.PropTypes.bool,
+    showFilter: React.PropTypes.bool,
+    hasDataChanged: React.PropTypes.bool,
+    filtersApplied: React.PropTypes.bool,
+    filtersModified: React.PropTypes.bool,
+    notificationSocketConnected: React.PropTypes.bool,
+    reportsSpinner: React.PropTypes.bool,
+    olWsData: React.PropTypes.array
 
+}
+OperationsLogTab.defaultProps = {
+  olData: [],
+  socketAuthorized:false,
+  showFilter:false,
+  hasDataChanged:false,
+  filtersApplied:false,
+  filtersModified:false,
+  notificationSocketConnected:false,
+  reportsSpinner:true,
+  olWsData:[]
+}
 
 function mapStateToProps(state, ownProps) {
     return {
         socketAuthorized: state.recieveSocketActions.socketAuthorized,
-        showFilter: state.filterInfo.filterState || false,
-        olData:state.operationsLogsReducer.olData || [],
+        showFilter: state.filterInfo.filterState ,
+        olData:state.operationsLogsReducer.olData,
         hasDataChanged:state.operationsLogsReducer.hasDataChanged,
-        filtersApplied:state.operationsLogsReducer.filtersApplied || false,
-        notificationSocketConnected:state.notificationSocketReducer.notificationSocketConnected || false,
-        reportsSpinner:state.operationsLogsReducer.reportsSpinner || false
+        filtersApplied:state.operationsLogsReducer.filtersApplied,
+        filtersModified:state.operationsLogsReducer.filtersModified,
+        notificationSocketConnected:state.notificationSocketReducer.notificationSocketConnected,
+        reportsSpinner:state.operationsLogsReducer.reportsSpinner,
+        olWsData:state.operationsLogsReducer.olWsData,
+        timeOffset: state.authLogin.timeOffset,
+        username: state.authLogin.username
 
     };
 }

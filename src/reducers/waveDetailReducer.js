@@ -15,9 +15,10 @@ export  function waveInfo(state={},action){
           var res=action.data, waveData;
           if(res.complete_data){
 
-            return Object.assign({}, state, {
-            "waveData" : res.complete_data
-            })
+              return Object.assign({}, state, {
+                  "waveData": res.complete_data.length > 0 ? res.complete_data : state.waveData,
+                  "noResultFound": res.complete_data.length < 1,
+              })
           }
           return state
       case WAVES_REFRESHED:

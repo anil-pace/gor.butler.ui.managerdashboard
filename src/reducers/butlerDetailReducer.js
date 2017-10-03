@@ -84,7 +84,8 @@ export function butlerDetail(state={}, action) {
 
 
                 return Object.assign({}, state, {
-                    "butlerDetail": res.complete_data
+                    "butlerDetail": res.complete_data.length>0?res.complete_data:state.butlerDetail,
+                    "noResultFound":res.complete_data.length<1,
                 })
             }
             break;

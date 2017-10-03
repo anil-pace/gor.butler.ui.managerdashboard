@@ -46,7 +46,8 @@ import {zoningReducer} from './reducers/zoningReducer';
 import {sysControllersReducer} from './reducers/sysControllersReducer'
 
 import {ppsConfiguration} from './reducers/ppsConfigurationReducer'
-import {operationsLogsReducer} from './reducers/operationLogsReducer'
+import {operationsLogsReducer} from './reducers/operationLogsReducer';
+import {downloadReportsReducer} from './reducers/downloadReportsReducer'
 
 const rootReducer=combineReducers({
   intl:intlReducer,
@@ -94,7 +95,8 @@ const rootReducer=combineReducers({
   zoningReducer,
   sysControllersReducer,
   ppsConfiguration,
-  operationsLogsReducer
+  operationsLogsReducer,
+  downloadReportsReducer
    })
 
 export default rootReducer

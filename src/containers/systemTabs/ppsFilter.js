@@ -157,7 +157,7 @@ class PPSFilter extends React.Component{
   render(){
     
         var ppsDetail=this.props.PPSDetail;
-        var noOrder=ppsDetail.PPStypeDetail && ppsDetail.PPStypeDetail.length?false:true;
+        var noOrder=ppsDetail.PPStypeDetail.noResultFound;
         let ppsSearchField=this._processPPSSearchField();
         let ppsFilterToken=this._processFilterToken();
         let rangeSlider=this._handleRangeSlider();
