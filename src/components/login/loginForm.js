@@ -72,6 +72,7 @@ class LoginForm extends React.Component{
                 <div className='gor-login-mid'>
                 <div className='gor-upper-box'>
                     <div className='gor-login-head'>
+                   
                       <span className='gor-lg-txt'>Butler</span>
                        <sup>TM</sup>
                     </div>
