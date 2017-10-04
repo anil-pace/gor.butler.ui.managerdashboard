@@ -17,7 +17,8 @@ export  function chargersDetail(state={},action) {
             var chargers;
             if(res.complete_data){
                 return Object.assign({}, state, {
-                    "chargersDetail" : res.complete_data
+                    "chargersDetail" : res.complete_data.length>0?res.complete_data:state.chargersDetail,
+                    "noResultFound":res.complete_data.length<1,
                 })
             }
 

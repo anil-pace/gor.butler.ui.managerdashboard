@@ -194,8 +194,8 @@ export const g021=(<FormattedMessage id="audit.cancellation.error.g021" descript
                                    defaultMessage='Audit Id already sent for cancellation'/>);
 export const g023=(<FormattedMessage id="audit.cancellation.error.g023" description='Audit Id already successfully cancelled'
                                    defaultMessage='Audit Id already successfully cancelled'/>);
-export const g024=(<FormattedMessage id="audit.cancellation.error.g024" description='Audit Id cancellation request has been process and cannot be cancelled'
-                                   defaultMessage='Audit Id cancellation request has been process and cannot be cancelled'/>);
+export const g024=(<FormattedMessage id="audit.cancellation.error.g024" description='Audit cancellation request denied'
+                                   defaultMessage='Audit cancellation request denied'/>);
 /*Message for status change notification*/
 export const allStatusSuccess = (<FormattedMessage id="pps.statusChange.allStatusSuccess" description='Records in file should not be greater than' 
       defaultMessage='Status change request successful'/>)
@@ -259,6 +259,31 @@ export const CONTROLLER_SENSOR_TRIGGERED_MESSAGES={
       none:(<FormattedMessage id="zoning.action.noneSensor" description='Status text for zone' 
       defaultMessage='Standard'/>)
 }
+/*Messages for operations logs*/
+export const REQUEST_REPORT_SUCCESS = (<FormattedMessage id="operationsLog.reportRequest.success" description='Status text for zone' 
+      defaultMessage='Request successfully generated. Kindly check the Downloads Tab'/>)
+export const REQUEST_REPORT_FAILURE = (<FormattedMessage id="operationsLog.reportRequest.failure" description='Status text for zone' 
+      defaultMessage='Error creating request'/>)
+
+export const ZONE_SUB_STATUS_INTL_MESSAGE={
+      zone_pause:(<FormattedMessage id="zoning.substatus.action.zone_pause" description='Status text for zone' 
+      defaultMessage='Zone pause activated'/>),
+      zone_clear:(<FormattedMessage id="zoning.substatus.action.zone_clear" description='Status text for zone' 
+      defaultMessage='Zone clear activated'/>),
+      emergency_stop:(<FormattedMessage id="zoning.substatus.action.emergency_stop" description='Status text for zone' 
+      defaultMessage='Emergency stop activated'/>),
+      emergency_pause:(<FormattedMessage id="zoning.substatus.action.emergency_pause" description='Status text for zone' 
+      defaultMessage='Emergency pause activated'/>),
+}
+
+export const ENTITY_BREACHED = {
+      light_curtain:(<FormattedMessage id="zoning.entity.lightCurtains" description='Status text for zone' 
+      defaultMessage='Light Curtain'/>),
+      latch_gate:(<FormattedMessage id="zoning.entity.latchGate" description='Status text for zone' 
+      defaultMessage='Latch Gate'/>)
+}
+
+
 
 
 

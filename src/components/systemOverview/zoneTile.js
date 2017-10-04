@@ -17,6 +17,7 @@ export class Zone extends React.Component {
                 <div className="right-content">
                 <p className="zone-name">{this.props.name}</p>
                 <p className="operating-status">{this.props.statusText}</p>
+                <p>{this.props.zoneStatusText}</p>
                 </div>
             </div>
         );

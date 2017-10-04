@@ -6,11 +6,11 @@
 
 import React  from 'react'; 
 import ReactDOM  from 'react-dom';
-import { Provider,connect } from 'react-redux'; 
+import { Provider } from 'react-redux'; 
 
 
 import {IntlProvider} from 'react-intl-redux';
-import { Router, Route, hashHistory, IndexRoute} from 'react-router';
+
 
 // Import redux modal
 import ReduxModal from 'react-redux-modal';

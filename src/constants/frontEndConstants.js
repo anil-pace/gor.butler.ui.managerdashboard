@@ -44,6 +44,7 @@ export const WS_NOTIFICATION_ONMESSAGE = "WS_NOTIFICATION_ONMESSAGE";
 export const WS_NOTIFICATION_ONSEND = "WS_NOTIFICATION_ONSEND";
 export const WS_NOTIFICATION_INIT = "WS_NOTIFICATION_INIT";
 export const WS_NOTIFICATION_END="WS_NOTIFICATION_END";
+export const WS_NOTIFICATION_SUBSCRIBE = "WS_NOTIFICATION_SUBSCRIBE";
 
 
 /* Header constants */
@@ -102,6 +103,7 @@ export const ORDERS="ORDERS";
 export const INVENTORY="INVENTORY";
 export const USERS="USERS";
 export const AUDIT="AUDIT";
+export const REPORTS="REPORTS";
 export const UTILITIES="UTILITIES";
 export const NOTIFICATION_TAB="Notification";
 export const BUTLERBOTS_TAB="Butler Bots";
@@ -110,10 +112,12 @@ export const PPS_TAB="Pick Put Stations";
 export const ORDER_LIST="Order List";
 export const PPS_CONFIGURATION="PPS Configuration";
 export const WAVES="Waves";
+export const OPERATIONS_LOG="operationsLog";
 export const BUTLERBOTS="butlerbots";
 export const CHARGING="chargingstation";
 export const PPS="pps";
 export const ORDERLIST="ORDERLIST";
+export const DOWNLOAD_REPORT="downloadReport"
 export const TAB_CLASS={
 	overview:"gorMainBlock", 
 	system:"gorMainBlock",
@@ -155,6 +159,8 @@ export const EMERGENCY_FIRE="fire_emergency";
 export const EMERGENCY="emergency";
 export const NOTIFY_EMERGENCY_END="NOTIFY_EMERGENCY_END";
 export const SYSTEM_EMERGENCY="system_emergency";
+export const SET_EMERGENCY_MODAL_STATUS = "SET_EMERGENCY_MODAL_STATUS";
+
 
 
 /*Constants for type of AJAX call*/
@@ -195,6 +201,7 @@ export const GRN_HISTORY="GRN_HISTORY";
 export const UPDATE_FILE_SIZE="UPDATE_FILE_SIZE";
 export const MASTER_FILE_FORMATS=[".csv"];
 export const REPORTS_HISTORY_UPDATE="REPORTS_HISTORY_UPDATE";
+export const PASSWORD_BUTTON_RESET ="PASSWORD_BUTTON_RESET";
 
 export const AUDIT_RETRIEVE="AUDIT_RETRIEVE";
 export const CANCEL_AUDIT="CANCEL_AUDIT";
@@ -290,6 +297,12 @@ export const SYS_SUB_TAB_ROUTE_MAP={
 	[PPS_CONFIGURATION]:"ppsConfiguration"
 
 }
+export const REPORTS_SUB_TAB_ROUTE_MAP={
+	[OPERATIONS_LOG] : "operationsLog",
+	[DOWNLOAD_REPORT]:"downloadReport"
+
+
+}
 export const SHOW_UTILITY_TAB=true;
 /*Constant for time on header*/
 export const HEADER_START_TIME=' 09:00:15 (IST)'
@@ -300,6 +313,7 @@ export const RESET_AUDIT='RESET_AUDIT';
 export const SKU='sku';
 export const LOCATION='location';
 export const AUDIT_COMPLETED="audit_aborted__audit_reaudited__audit_completed";
+export const AUDIT_CANCELLED="audit_cancelled";
 export const SETAUDIT_PPS='SETAUDIT_PPS';
 export const REFRESH_AUDIT='REFRESH_AUDIT';
 export const APPROVE_AUDIT="APPROVE_AUDIT";
@@ -463,11 +477,13 @@ export const GOR_PASS='gor-pass';
 export const GOR_FAIL='gor-fail';
 export const GOR_INFO='gor-info';
 export const GOR_STATUS="status";
+export const GOR_AUDIT_STATUS_DATA="status_data";
 export const GOR_STATUS_PRIORITY="statusPriority";
 export const GOR_PERIPHERAL_ONLINE="online";
 export const GOR_PERIPHERAL_OFFLINE="offline";
 export const GOR_ON_STATUS="open";
-export const GOR_CONNECTED_STATUS="Connected";
+export const GOR_CONNECTED_STATUS="connected";
+export const GOR_MANUAL_MODE="manual";
 export const GOR_COMPLETED_STATUS="Completed";
 export const GOR_BREACHED_LINES="gor-breached-lines";
 export const AUDIT_CREATED="audit_created";
@@ -475,6 +491,7 @@ export const AUDIT_PENDING_APPROVAL="audit_pending_approval";
 export const AUDIT_RESOLVED="audit_resolved"; 
 export const AUDIT_UNRESOLVED="Unresolved";
 export const AUDIT_LINE_REJECTED="audit_rejected";
+export const AUDIT_LINE_REAUDITED="audit_reaudited";
 export const AUDIT_REJECTED_STATUS="Rejected";
 export const AUDIT_REAUDITED_STATUS="Re-audited";
 export const AUDIT_RESOLVED_STATUS="Resolved";
@@ -660,4 +677,54 @@ export const PPS_PROFILE_SAVED="PPS_PROFILE_SAVED"
 export const PPS_PROFILE_CREATED="PPS_PROFILE_CREATED"
 export const PPS_PROFILE_REQUESTED="PPS_PROFILE_REQUESTED"
 export const TAG_ADDED_TO_LIST="TAG_ADDED_TO_LIST"
+
+/**
+ * Constants for Operations log
+ */
+export const OPERATION_LOG_FETCH = "OPERATION_LOG_FETCH";
+export const OPERATIONS_LOG_REQUEST_PARAMS=  {
+    "operatingMode": "",
+    "requestId": "",
+    "skuId": "",
+    "userId": "",
+    "page": {
+        "size": 10,
+        "from": 1
+    },
+    "timeRange": {
+        "from": "",
+        "to": ""
+    },
+    "source": {
+        "id": "",
+        "type": ""
+    },
+    "destination": {
+        "id": "",
+        "type": ""
+    }
+}
+export const OPERATIONS_LOG_MODE_MAP=  {
+    "put_front":"Put Front",
+    "pick_front":"Pick Front",
+    "put_back":"Put Back",
+    "pick_back":"Pick Back",
+    "audit":"Audit"
+}
+
+export const APPLY_OL_FILTER_FLAG = "APPLY_OL_FILTER_FLAG";
+export const REPORT_NAME_OPERATOR_LOGS = "OPERATOR_LOGS";
+export const WS_OPERATOR_LOG_SUBSCRIBE = "WS_OPERATOR_LOG_SUBSCRIBE";
+export const WS_OPERATOR_LOG_UNSUBSCRIBE = "WS_OPERATOR_LOG_UNSUBSCRIBE";
+export const SET_REPORTS_SPINNER = "SET_REPORTS_SPINNER";
+export const RECIEVE_WS_OL_DATA="RECIEVE_WS_OL_DATA";
+export const DEFAULT_PAGE_SIZE_OL = "25";
+export const REALTIME = "realtime";
+export const REPORTS_FETCH = "REPORTS_FETCH";
+export const GET_REPORT = "GET_REPORT";
+export const DOWNLOAD_REPORT_REQUEST = "DOWNLOAD_REPORT_REQUEST";
+export const SET_DOWNLOAD_REPORT_SPINNER = "SET_DOWNLOAD_REPORT_SPINNER";
+/*COnstants for audit query*/
+export const SET_ORDER_QUERY = "SET_ORDER_QUERY";
+export const SET_AUDIT_QUERY = "SET_AUDIT_QUERY";
 

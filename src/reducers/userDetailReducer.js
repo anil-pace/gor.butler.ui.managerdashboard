@@ -11,7 +11,8 @@ export  function userDetails(state={},action){
             res=action.data;
             if(res.complete_data){
                 return Object.assign({}, state, {
-                    "userDetails" : res.complete_data
+                    "userDetails" : res.complete_data.length>0?res.complete_data:state.userDetails,
+                    "noResultFound":res.complete_data.length<1,
                 })
             }
 

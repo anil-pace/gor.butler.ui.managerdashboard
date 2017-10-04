@@ -14,6 +14,9 @@ class OrderFilter extends React.Component{
         super(props);
         this.state={tokenSelected: {"STATUS":["all"], "TIME PERIOD":["allOrders"]}, searchQuery: {},
                       defaultToken: {"STATUS":["all"], "TIME PERIOD":["allOrders"]}}; 
+        this._applyFilter =  this._applyFilter.bind(this);
+        this._closeFilter = this._closeFilter.bind(this);
+        this._clearFilter = this._clearFilter.bind(this);
     }
 
 
@@ -113,20 +116,57 @@ class OrderFilter extends React.Component{
 
 
     render(){
-        var noOrder=this.props.orderData.totalOrders?false:true;
+        var noOrder=this.props.orderData.noResultFound;
         var orderSearchField=this._processOrderSearchField();
         var orderFilterToken=this._processFilterToken();
         return (
             <div>
-                 <Filter hideFilter={this._closeFilter.bind(this)}  // hiding filter wont disturb state
-                         clearFilter={this._clearFilter.bind(this)} // clearing sates of filter
-                         searchField={orderSearchField}
-                         filterTokenC1={orderFilterToken.column1token}
-                         filterTokenC2={orderFilterToken.column2token}
-                         formSubmit={this._applyFilter.bind(this)} //passing function on submit
-                         responseFlag={this.props.orderListSpinner} // used for spinner of button 
-                         noDataFlag={noOrder} //messg to show in case of no data
-                         />
+                 <Filter>
+                <div className="gor-filter-header">
+                    <div className="gor-filter-header-h1">
+                         <FormattedMessage id="gor.filter.filterLabel" description="label for filter" 
+            defaultMessage="Filter data"/>
+                    </div>
+                    <div className="gor-filter-header-h2" onClick={this._closeFilter}>
+                        <FormattedMessage id="gor.filter.hide" description="label for hide" 
+                            defaultMessage="Hide"/>
+                    </div>
+                 </div>
+                    <div>{noOrder?
+                            <div className="gor-no-result-filter"><FormattedMessage id="gor.filter.noResult" description="label for no result" 
+                            defaultMessage="No results found, please try again"/></div>:""}
+                    </div>
+                     <div className="gor-filter-body">
+                         <div className="gor-filter-body-input-wrap"> 
+                            {orderSearchField}
+                         </div>
+                         <div className="gor-filter-body-filterToken-wrap"> 
+                            <div className="gor-filter-body-filterToken-section1">
+                                {orderFilterToken.column1token}
+                            </div>
+                            <div className="gor-filter-body-filterToken-section1">
+                                {orderFilterToken.column2token}
+                            </div>
+                            
+
+                         </div>
+                        
+                         
+                     </div>
+                 <div className="gor-filter-footer"> 
+                    <span className="gor-filter-footer-h2" onClick={this._clearFilter}>
+                         <FormattedMessage id="gor.filter.reset" description="label for reset" 
+                            defaultMessage="Reset"/>
+                    </span>
+                    <div className="gor-filter-btn-wrap">
+                        <button className='gor-add-btn' onClick={this._applyFilter}>
+                            {!this.props.orderListSpinner? <FormattedMessage id="gor.filter.heading" description="filter heading"  defaultMessage="Apply filter"/> :<div className='spinnerImage'></div>}
+                        </button>
+
+
+                    </div> 
+                 </div>
+                </Filter>
             </div>
         );
     }

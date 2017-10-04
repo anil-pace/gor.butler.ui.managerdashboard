@@ -48,7 +48,7 @@ const ajaxMiddleware=(function(){
                     //and then save the file
                     let fileName;
                     if (this.getResponseHeader('Content-disposition')){
-                      let strName=this.getResponseHeader('Content-disposition').match(/(filename=.[^\s\n\t\r]+)/g);
+                      let strName=this.getResponseHeader('Content-disposition').match(/filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/);
                       fileName=strName[0].slice(10,strName.length-2);
                     }
                     fileName=(!fileName)?(resContentType.match(/(text\/csv)/g)? "download.csv" : "download.xlsx"):fileName;

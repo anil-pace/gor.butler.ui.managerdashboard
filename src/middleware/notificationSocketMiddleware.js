@@ -1,26 +1,39 @@
 import {wsNotificationResponseAction,wsNotificationEndConnection} from '../actions/notificationSocketActions'
-import {WS_NOTIFICATION_CONNECT,WS_NOTIFICATION_DISCONNECT,WS_NOTIFICATION_ONSEND} from '../constants/frontEndConstants'
+import {WS_NOTIFICATION_CONNECT,WS_NOTIFICATION_DISCONNECT,
+  WS_NOTIFICATION_ONSEND,WS_NOTIFICATION_SUBSCRIBE,
+  WS_OPERATOR_LOG_SUBSCRIBE,WS_OPERATOR_LOG_UNSUBSCRIBE} from '../constants/frontEndConstants'
 import {WS_NOTIFICATION_URL,WS_URL} from '../constants/configConstants';
 import {NotificationResponseParse} from '../utilities/notificationResponseParser';
+import {OLResponseParse} from '../utilities/operationLogsResParser';
 import SockJS from 'sockjs-client';
 import webstomp from 'webstomp-client';
 
 
 const notificationSocketMiddleware = (function(){ 
   var socket = null;
+  var operatorLogWSClient = null;
 
-  const onMessage = (ws,store) => frame => {
+  const onMessage = (ws,store,module) => frame => {
     //Parse the JSON message received on the websocket
     
     var msg = JSON.parse(frame.body);
-      NotificationResponseParse(store,msg);    
+    switch(module){
+      case 'notifications':
+        NotificationResponseParse(store,msg);  
+        break;  
+      case 'operations':
+        OLResponseParse(store,msg)
+        break; 
+        default:
+        //do nothing 
+    }
   }
 
   const onOpen = (ws,store,token) => evt => {
     //Send a handshake, or authenticate with remote end
 
     //Tell the store we're connected
-    ws.subscribe('/dashboard/notification',onMessage(ws,store));
+    
     store.dispatch(wsNotificationResponseAction(evt.type));
 
   }
@@ -39,7 +52,7 @@ const notificationSocketMiddleware = (function(){
       //The user wants us to connect
       case WS_NOTIFICATION_CONNECT:
         //Start a new connection to the server
-        if(socket !== null) {
+        if(socket && socket.connected) {
           socket.disconnect(function(){
             console.log("disconnected");
           });
@@ -72,7 +85,21 @@ const notificationSocketMiddleware = (function(){
       case WS_NOTIFICATION_ONSEND:
         socket.send(JSON.stringify(action.data));
         break;
-
+      case WS_NOTIFICATION_SUBSCRIBE:
+        socket.subscribe(action.data,onMessage(socket,store,'notifications'));
+        break;
+      case WS_OPERATOR_LOG_SUBSCRIBE:
+        if(socket && !operatorLogWSClient){
+        operatorLogWSClient = socket.subscribe(action.data.url,onMessage(socket,store,'operations'));
+        socket.send(action.data.url,action.data.filters);
+      }
+        break;
+      case WS_OPERATOR_LOG_UNSUBSCRIBE:
+        if(operatorLogWSClient){
+          operatorLogWSClient.unsubscribe();
+          operatorLogWSClient= null;
+        }
+        break;
       //This action is irrelevant to us, pass it on to the next middleware
       default:
         return next(action);

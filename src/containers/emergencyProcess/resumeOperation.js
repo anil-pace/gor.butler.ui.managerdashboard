@@ -3,7 +3,7 @@ import { connect } from 'react-redux' ;
 import {userRequest} from '../../actions/userActions';
 import { FormattedMessage } from 'react-intl'; 
 import {modal} from 'react-redux-modal';
-import {validatePassword, modalFormReset} from '../../actions/validationActions';
+import {validatePassword, modalFormReset, resetPasswordButton} from '../../actions/validationActions';
 import { emptyField } from '../../utilities/fieldCheck';
 import {LOGIN_URL} from '../../constants/configConstants';
 import {ERROR,APP_JSON,POST,SUCCESS,RESUME_OPERATION,EMERGENCY_FIRE,SYSTEM_EMERGENCY} from '../../constants/frontEndConstants';
@@ -11,7 +11,7 @@ import SafetyChecklist from './safetyChecklist';
 
 class ResumeOperation extends React.Component{
   _removeThisModal() {
-      this.props.resetForm();
+      this.props.modalresetForm();
       this.props.removeModal();
   }
   _typing(){
@@ -24,8 +24,12 @@ class ResumeOperation extends React.Component{
           this.props.validatePass(loginPassInfo);
           return loginPassInfo.type;    
   }
+  componentWillMount() {
+     this.props.resetPasswordButton();
+     this.props.modalresetForm();
+  }
   componentWillReceiveProps(nextProps){
-    if(!nextProps.auth_token||!nextProps.system_emergency||nextProps.system_data !== this.props.system_data )
+    if(!nextProps.breached && (!nextProps.auth_token||!nextProps.system_emergency||nextProps.system_data !== this.props.system_data) )
     {
       if(nextProps.system_emergency || nextProps.fireHazard.emergency_type!==EMERGENCY_FIRE)
       this._removeThisModal();
@@ -109,6 +113,7 @@ class ResumeOperation extends React.Component{
       passwordCheck: state.appInfo.passwordInfo||{},
       modalStatus: state.emergency.hideModal || false,
       system_emergency:state.tabsData.system_emergency||false,
+      breached:state.tabsData.breached,
       system_data:state.tabsData.system_data||null,
       fireHazard:state.fireHazardDetail,
 
@@ -117,8 +122,9 @@ class ResumeOperation extends React.Component{
 function mapDispatchToProps(dispatch){
     return {
       userRequest: function(data){ dispatch(userRequest(data)); },
-      validatePass: function(data){ dispatch(validatePassword(data)); },  
-      resetForm:   function(){ dispatch(modalFormReset()); },
+      validatePass: function(data){ dispatch(validatePassword(data)); }, 
+      modalresetForm:   function(){ dispatch(modalFormReset()); }, 
+      resetPasswordButton:  function(){ dispatch(resetPasswordButton()); }
     }
 };
 ResumeOperation.propTypes={
@@ -129,8 +135,9 @@ ResumeOperation.propTypes={
       system_emergency:React.PropTypes.bool,
       userRequest:React.PropTypes.func,
       validatePass:React.PropTypes.func,
-      resetForm:React.PropTypes.func,
-      system_data:React.PropTypes.string
+      modalresetForm:React.PropTypes.func,
+      system_data:React.PropTypes.string,
+      resetPasswordButton:React.PropTypes.func
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(ResumeOperation);

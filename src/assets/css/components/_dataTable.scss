@@ -368,6 +368,9 @@ border-bottom-width: 0px;
 .public_fixedDataTableCell_highlighted {
   background-color: #f4f4f4;
 }
+.public_fixedDataTableRow_downloaded{
+  background: #eeeeee !important;
+}
 
 
 .fixedDataTableRowLayout_rowWrapper{
@@ -482,7 +485,7 @@ background-color: #FFFFFF;
   text-transform: capitalize;
 
 }
-.online .public_fixedDataTableCell_cellContent{
+.online .public_fixedDataTableCell_cellContent,.success .public_fixedDataTableCell_cellContent{
 
   
   border-radius: 15px;
@@ -587,13 +590,11 @@ background-color: #FFFFFF;
 }
 
 .pending .public_fixedDataTableCell_cellContent{
-
- 
   border-radius: 15px;
   text-align: center;
   width:90px;
-  border: 1px solid #00a54f;
-  color: #00a54f;
+  border:1px solid #aaaaaa;
+  color: #aaaaaa;
   font-size: 12px;
   max-height: 9px;
   background: #ffffff;
@@ -605,10 +606,10 @@ background-color: #FFFFFF;
   text-align: center;
   width:90px;
   border:1px solid #aaaaaa;
-  color: #aaaaaa;
+  color: #ffffff;
   font-size: 12px;
   max-height: 9px;
-  background: #ffffff;
+  background: #aaaaaa;
   text-transform: capitalize;
 }
 
@@ -624,7 +625,7 @@ background-color: #FFFFFF;
   text-transform: capitalize;
 }
 
-.temporary_unfulfillable .public_fixedDataTableCell_cellContent{
+.temporary_unfulfillable .public_fixedDataTableCell_cellContent,.exception .public_fixedDataTableCell_cellContent{
   background: #ffffff; ;
   border-radius: 15px;
    border: 1px solid #f36f36;
@@ -749,6 +750,16 @@ background: #f99405;
 .public_fixedDataTableCell_columnResizerKnob {
   background-color: #aaaaaa;
 }
+.FAILED{
+  .public_fixedDataTableCell_cellContent{
+      color:#EE434A;
+  }
+}
+.PENDING{
+   .public_fixedDataTableCell_cellContent{
+      color:#6FC4E8;
+  }
+}
 /**
  * Copyright (c) 2015, Facebook, Inc.
  * All rights reserved.
@@ -788,6 +799,10 @@ background: #f99405;
 .public_fixedDataTableRow_highlighted,
 .public_fixedDataTableRow_highlighted .public_fixedDataTableCell_main {
   background-color: #ffffff;
+}
+.public_fixedDataTableRow_downloaded,
+.public_fixedDataTableRow_downloaded .public_fixedDataTableCell_main {
+  background-color: #eeeeee !important;
 }
 
 
@@ -1646,11 +1661,13 @@ input[type="checkbox"]{
 display:inline-block;
   padding-right: 20px;
   width: 110px;
+  float:left;
 }
 
 .gor-audit-actions-drop {
  display: inline-block;
- width: 150px; 
+  width: 10.625rem;
+  float:right;
 }
 
 .gor-header-check {

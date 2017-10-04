@@ -64,14 +64,6 @@ class ChargingStationsTable extends React.Component {
         this._onColumnResizeEndCallback=this._onColumnResizeEndCallback.bind(this);
         this._onFilterChange(nextProps.getCsFilter);
     }
-
-    shouldComponentUpdate(nextProps) {
-        if (this.props.items && nextProps.items.length=== 0) {
-            return false;
-        }
-        return true;
-    }
-
     _onColumnResizeEndCallback(newColumnWidth, columnKey) {
         this.setState(({columnWidths})=> ({
             columnWidths: {

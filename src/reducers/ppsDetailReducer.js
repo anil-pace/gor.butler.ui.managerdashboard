@@ -9,7 +9,8 @@ export  function PPSDetail(state={},action) {
         if(res.complete_data !== undefined){
             var res, PPSDetail;
             return Object.assign({}, state, {
-                "PPStypeDetail" : res.complete_data
+                "PPStypeDetail" : res.complete_data.length>0?res.complete_data:state.PPStypeDetail,
+                "noResultFound":res.complete_data.length<1,
             })
         }
     return state;

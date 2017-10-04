@@ -1,4 +1,8 @@
-import {GET_OVERVIEW,GET_SYSTEM,GET_INVENTORY,GET_AUDIT,GET_USERS,GET_ORDERS,GET_STATUS,FIRE_EMERGENCY_POPUP_FLAG} from '../constants/frontEndConstants.js';
+
+import {GET_OVERVIEW,GET_SYSTEM,GET_INVENTORY,GET_AUDIT,GET_USERS,
+  GET_ORDERS,GET_STATUS,FIRE_EMERGENCY_POPUP_FLAG,
+SET_EMERGENCY_MODAL_STATUS} from '../constants/frontEndConstants.js';
+
 
 export function recieveOverviewStatus(data){
   return {
@@ -52,6 +56,19 @@ export function recieveStatus(data){
 export function setFireHazrdFlag(data) {
     return {
         type: FIRE_EMERGENCY_POPUP_FLAG,
+        data
+    }
+}
+
+
+/**
+ * [setEmergencyModalStatus flag to set if modal is open]
+ * @param {[boolean]} data [true/false]
+ */
+
+export function setEmergencyModalStatus(data) {
+    return {
+        type: SET_EMERGENCY_MODAL_STATUS,
         data
     }
 }

@@ -305,6 +305,41 @@ class Routes extends React.Component {
                                }, "overview");
                            }}
                     />
+
+
+                    <Route onEnter={this._handleNavigationChanges.bind(this)} name="reports" path="/reports"
+                           getComponent={(location, callback)=> {
+                               require.ensure([], function (require) {
+                                   callback(null, require('../containers/reportsTab/reportsTab.js').default);
+                               }, "reports");
+                           }}
+                    >
+                    <IndexRoute
+                            getComponent={(location, callback)=> {
+                                require.ensure([], function (require) {
+                                    callback(null, require('../containers/reportsTab/operationsLogTab.js').default);
+                                }, "defaultReports");
+                            }}
+                        />
+
+                        <Route onEnter={this._handleNavigationChanges.bind(this)} name="operationsLog" path="/reports/operationsLog"
+                               getComponent={(location, callback)=> {
+                                   require.ensure([], function (require) {
+                                       callback(null, require('../containers/reportsTab/operationsLogTab.js').default);
+                                   }, "operationsLogTab");
+                               }}
+                        />
+                         <Route onEnter={this._handleNavigationChanges.bind(this)} name="downloadReport" path="/reports/downloadReport"
+                               getComponent={(location, callback)=> {
+                                   require.ensure([], function (require) {
+                                       callback(null, require('../containers/reportsTab/downloadReportTab.js').default);
+                                   }, "downloadReportTab");
+                               }}
+                        />
+
+                        
+                    </Route>
+
                 </Route>
             </Router>
         )

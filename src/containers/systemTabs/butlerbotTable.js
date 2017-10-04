@@ -46,13 +46,6 @@ class ButlerBotTable extends React.Component {
         this._onColumnResizeEndCallback=this._onColumnResizeEndCallback.bind(this);
     }
 
-    shouldComponentUpdate(nextProps) {
-        if (this.props.items && nextProps.items.length=== 0) {
-            return false;
-        }
-        return true;
-    }
-
     componentWillReceiveProps(nextProps) {
         var items=nextProps.items || [];
         var temp=new Array(items ? items.length : 0).fill(false);

@@ -16,7 +16,7 @@ import {
     SPECIFIC_SKU_ID,
     SPECIFIC_LOCATION_ID,
     AUDIT_TASK_ID,
-    AUDIT_TYPE,AUDIT_COMPLETED,AUDIT_CREATED,PENDING,INPROGRESS,
+    AUDIT_TYPE,AUDIT_COMPLETED,AUDIT_CANCELLED,AUDIT_CREATED,PENDING,INPROGRESS,
     AUDIT_RESOLVED,AUDIT_LINE_REJECTED,SINGLE
 }from '../../constants/frontEndConstants';
 import {hashHistory} from 'react-router'
@@ -30,6 +30,9 @@ class AuditFilter extends React.Component {
             tokenSelected: {"AUDIT TYPE": [ANY], "STATUS": [ALL]}, searchQuery: {},
             defaultToken: {"AUDIT TYPE": [ANY], "STATUS": [ALL]}
         };
+         this._applyFilter =  this._applyFilter.bind(this);
+        this._closeFilter = this._closeFilter.bind(this);
+        this._clearFilter = this._clearFilter.bind(this);
     }
 
     _closeFilter() {
@@ -66,8 +69,8 @@ class AuditFilter extends React.Component {
         var inputValue=this.state.searchQuery;
         var textboxStatus=this.props.textboxStatus || {};
         var inputField=<FilterInputFieldWrap inputText={filterInputFields}
-                                               handleInputText={this._handleInputQuery.bind(this)}
-                                               inputValue={inputValue} textboxStatus={textboxStatus}/>
+                                             handleInputText={this._handleInputQuery.bind(this)}
+                                             inputValue={inputValue} textboxStatus={textboxStatus}/>
         return inputField;
     }
 
@@ -93,14 +96,15 @@ class AuditFilter extends React.Component {
             {value: INPROGRESS, label: <FormattedMessage id="audit.token2.inProgress" defaultMessage="In progress"/>},
             {value: PENDING, label: <FormattedMessage id="audit.token2.pending" defaultMessage="Pending"/>},
             {value: AUDIT_CREATED, label: <FormattedMessage id="audit.token2.created" defaultMessage="Created"/>},
-            {value: AUDIT_COMPLETED, label: <FormattedMessage id="audit.token2.completed" defaultMessage="Completed"/>}
+            {value: AUDIT_COMPLETED, label: <FormattedMessage id="audit.token2.completed" defaultMessage="Completed"/>},
+            {value: AUDIT_CANCELLED, label: <FormattedMessage id="audit.token2.cancelled" defaultMessage="Cancelled"/>}
 
         ];
         var selectedToken=this.state.tokenSelected;
         var column1=<FilterTokenWrap field={tokenStatusField} tokenCallBack={this._handelTokenClick.bind(this)}
-                                       label={labelC2} selectedToken={selectedToken}/>;
+                                     label={labelC2} selectedToken={selectedToken}/>;
         var column2=<FilterTokenWrap field={tokenAuditTypeField} tokenCallBack={this._handelTokenClick.bind(this)}
-                                       label={labelC1} selectedToken={selectedToken} selection={SINGLE}/>;
+                                     label={labelC1} selectedToken={selectedToken} selection={SINGLE}/>;
         var columnDetail={column1token: column1, column2token: column2};
         return columnDetail;
     }
@@ -111,13 +115,13 @@ class AuditFilter extends React.Component {
         var selectedToken=this.state.tokenSelected['AUDIT TYPE'];
         var token=[value];
         this.setState({tokenSelected: handelTokenClick(field, value, state, this.state)});
-       
+
         if (state !== 'addDefault') {
             obj.name=mappingArray(selectedToken);
             tokentoRemove=mappingArray(token,selectedToken);
             queryField= (selectedToken.toString()===ANY)?tokentoRemove:arrayDiff(tempArray,obj.name);
             if (queryField && queryField.length!==0){
-            	this.setState({searchQuery: handleInputQuery("", queryField, this.state)});
+                this.setState({searchQuery: handleInputQuery("", queryField, this.state)});
             }
 
             this.props.setTextBoxStatus(obj);
@@ -164,20 +168,57 @@ class AuditFilter extends React.Component {
     }
 
     render() {
-        var noOrder=this.props.totalAudits ? false : true;
+        var noOrder=this.props.noResultFound;
         var auditSearchField=this._processAuditSearchField();
         var auditFilterToken=this._processFilterToken();
         return (
             <div>
-                <Filter hideFilter={this._closeFilter.bind(this)}
-                        clearFilter={this._clearFilter.bind(this)}
-                        searchField={auditSearchField}
-                        filterTokenC1={auditFilterToken.column1token}
-                        filterTokenC2={auditFilterToken.column2token}
-                        formSubmit={this._applyFilter.bind(this)}
-                        responseFlag={this.props.auditSpinner}
-                        noDataFlag={noOrder}
-                />
+                <Filter>
+                                <div className="gor-filter-header">
+                    <div className="gor-filter-header-h1">
+                         <FormattedMessage id="gor.filter.filterLabel" description="label for filter" 
+            defaultMessage="Filter data"/>
+                    </div>
+                    <div className="gor-filter-header-h2" onClick={this._closeFilter}>
+                        <FormattedMessage id="gor.filter.hide" description="label for hide" 
+                            defaultMessage="Hide"/>
+                    </div>
+                 </div>
+                    <div>{noOrder?
+                            <div className="gor-no-result-filter"><FormattedMessage id="gor.filter.noResult" description="label for no result" 
+                            defaultMessage="No results found, please try again"/></div>:""}
+                    </div>
+                     <div className="gor-filter-body">
+                         <div className="gor-filter-body-input-wrap"> 
+                            {auditSearchField}
+                         </div>
+                         <div className="gor-filter-body-filterToken-wrap"> 
+                            <div className="gor-filter-body-filterToken-section1">
+                                {auditFilterToken.column1token}
+                            </div>
+                            <div className="gor-filter-body-filterToken-section1">
+                                {auditFilterToken.column2token}
+                            </div>
+                            
+
+                         </div>
+                        
+                         
+                     </div>
+                 <div className="gor-filter-footer"> 
+                    <span className="gor-filter-footer-h2" onClick={this._clearFilter}>
+                         <FormattedMessage id="gor.filter.reset" description="label for reset" 
+                            defaultMessage="Reset"/>
+                    </span>
+                    <div className="gor-filter-btn-wrap">
+                        <button className='gor-add-btn' onClick={this._applyFilter}>
+                            {!this.props.auditSpinner? <FormattedMessage id="gor.filter.heading" description="filter heading"  defaultMessage="Apply filter"/> :<div className='spinnerImage'></div>}
+                        </button>
+
+
+                    </div> 
+                 </div>
+                </Filter>
             </div>
         );
     }
@@ -190,6 +231,7 @@ function mapStateToProps(state, ownProps) {
         showFilter: state.filterInfo.filterState || false,
         auditSpinner: state.spinner.auditSpinner || false,
         totalAudits: state.recieveAuditDetail.totalAudits || 0,
+        noResultFound: state.recieveAuditDetail.noResultFound || 0,
         auditFilterState: state.filterInfo.auditFilterState,
         auditFilterStatus: state.filterInfo.auditFilterStatus,
         textboxStatus: state.auditInfo.textBoxStatus || {}

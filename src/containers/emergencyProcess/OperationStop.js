@@ -1,10 +1,12 @@
 import React  from 'react';
 import { connect } from 'react-redux' ;
-import { FormattedMessage } from 'react-intl';        
+import { FormattedMessage } from 'react-intl';    
+import {setEmergencyModalStatus} from '../../actions/tabActions'    
 
 class OperationStop extends React.Component{
   removeThisModal() {
       this.props.removeModal();
+      //this.props.setEmergencyModalStatus(false);
   }
   componentWillReceiveProps(nextProps){
     if(!nextProps.auth_token||!nextProps.system_emergency||nextProps.system_data !== this.props.system_data)
@@ -57,14 +59,20 @@ class OperationStop extends React.Component{
       system_emergency:state.tabsData.system_emergency||false,
       system_data:state.tabsData.system_data||null  
     }
-} 
+}
+/*function mapDispatchToProps(dispatch){
+  return{
+    setEmergencyModalStatus:function(data){dispatch(setEmergencyModalStatus(data));}
+  }
+} */
 
 OperationStop.propTypes={
       auth_token:React.PropTypes.string, 
       userRequest:React.PropTypes.func,
       emergencyPress:React.PropTypes.bool,
       system_emergency:React.PropTypes.bool,
-      system_data:React.PropTypes.string
+      system_data:React.PropTypes.string,
+      poeEnabled:React.PropTypes.bool
 }
 
 

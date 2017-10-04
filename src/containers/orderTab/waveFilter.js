@@ -16,6 +16,9 @@ class WaveFilter extends React.Component {
             tokenSelected: {"STATUS": ["any"]}, searchQuery: {},
             defaultToken: {"STATUS": ["any"]}
         };
+        this._applyFilter =  this._applyFilter.bind(this);
+        this._closeFilter = this._closeFilter.bind(this);
+        this._clearFilter = this._clearFilter.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -106,20 +109,52 @@ class WaveFilter extends React.Component {
 
     render() {
         var waveDetail=this.props.waveData;
-        var noOrder=waveDetail.waveData && waveDetail.waveData.length ? false : true;
+        var noOrder=this.props.noResultFound;
         let waveSearchField=this._processWaveSearchField();
         let waveFilterToken=this._processFilterToken();
         return (
             <div>
-                <Filter hideFilter={this._closeFilter.bind(this)}  // hiding filter wont disturb state
-                        clearFilter={this._clearFilter.bind(this)} // clearing sates of filter
-                        searchField={waveSearchField}
-                        filterTokenC1={waveFilterToken.column1token}
+                <Filter>
+                                <div className="gor-filter-header">
+                    <div className="gor-filter-header-h1">
+                         <FormattedMessage id="gor.filter.filterLabel" description="label for filter" 
+            defaultMessage="Filter data"/>
+                    </div>
+                    <div className="gor-filter-header-h2" onClick={this._closeFilter}>
+                        <FormattedMessage id="gor.filter.hide" description="label for hide" 
+                            defaultMessage="Hide"/>
+                    </div>
+                 </div>
+                    <div>{noOrder?
+                            <div className="gor-no-result-filter"><FormattedMessage id="gor.filter.noResult" description="label for no result" 
+                            defaultMessage="No results found, please try again"/></div>:""}
+                    </div>
+                     <div className="gor-filter-body">
+                         <div className="gor-filter-body-input-wrap"> 
+                            {waveSearchField}
+                         </div>
+                         <div className="gor-filter-body-filterToken-wrap"> 
+                            <div className="gor-filter-body-filterToken-section1">
+                                {waveFilterToken.column1token}
+                            </div>
+                         </div>
+                        
+                         
+                     </div>
+                 <div className="gor-filter-footer"> 
+                    <span className="gor-filter-footer-h2" onClick={this._clearFilter}>
+                         <FormattedMessage id="gor.filter.reset" description="label for reset" 
+                            defaultMessage="Reset"/>
+                    </span>
+                    <div className="gor-filter-btn-wrap">
+                        <button className='gor-add-btn' onClick={this._applyFilter}>
+                            {!this.props.waveFIlterSpinner? <FormattedMessage id="gor.filter.heading" description="filter heading"  defaultMessage="Apply filter"/> :<div className='spinnerImage'></div>}
+                        </button>
 
-                        formSubmit={this._applyFilter.bind(this)} //passing function on submit
-                        responseFlag={this.props.waveFIlterSpinner} // used for spinner of button
-                        noDataFlag={noOrder} //messg to show in case of no data
-                />
+
+                    </div> 
+                 </div>
+                </Filter>
             </div>
         );
     }
@@ -137,7 +172,8 @@ function mapStateToProps(state, ownProps) {
         isFilterApplied: state.filterInfo.isFilterApplied || false,
         waveFilterStatus: state.filterInfo.waveFilterStatus || false,
         wavesSpinner: state.spinner.wavesSpinner || false,
-        waveFIlterSpinner: state.spinner.waveFIlterSpinner || false
+        waveFIlterSpinner: state.spinner.waveFIlterSpinner || false,
+        noResultFound: state.waveInfo.noResultFound,
 
     };
 }

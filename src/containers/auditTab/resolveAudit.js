@@ -2,10 +2,10 @@ import React  from 'react';
 import { FormattedMessage } from 'react-intl'; 
 import { connect } from 'react-redux';
 import {getAuditOrderLines,resolveAuditLines} from '../../actions/auditActions';
-import {GET,APP_JSON,AUDIT_RESOLVE_LINES,GOR_BREACHED_LINES,APPROVE_AUDIT,GOR_USER_TABLE_HEADER_HEIGHT,GOR_AUDIT_RESOLVE_MIN_HEIGHT,GOR_AUDIT_RESOLVE_WIDTH, POST, AUDIT_RESOLVE_CONFIRMED,AUDIT_BY_PDFA} from '../../constants/frontEndConstants';
+import {GET,APP_JSON,AUDIT_RESOLVE_LINES,GOR_BREACHED_LINES,APPROVE_AUDIT,GOR_USER_TABLE_HEADER_HEIGHT,GOR_AUDIT_RESOLVE_MIN_HEIGHT,GOR_AUDIT_RESOLVE_WIDTH, POST, AUDIT_RESOLVE_CONFIRMED,AUDIT_BY_PDFA,GOR_AUDIT_STATUS_DATA} from '../../constants/frontEndConstants';
 import {AUDIT_URL, PENDING_ORDERLINES, AUDIT_ANAMOLY} from '../../constants/configConstants';
 import {Table, Column} from 'fixed-data-table';
-import {tableRenderer,TextCell,ResolveCell} from '../../components/commonFunctionsDataTable';
+import {tableRenderer,TextCell,ResolveCell,AuditPackingSlotIdCell,AuditPackingQuantityCell,AuditPackingStatusCell,AuditPackingResolveCell} from '../../components/commonFunctionsDataTable';
 import {stringConfig} from '../../constants/backEndConstants';
 import Spinner from '../../components/spinner/Spinner';
 import {setResolveAuditSpinner} from '../../actions/spinnerAction';
@@ -61,6 +61,12 @@ class ResolveAudit extends React.Component{
       totalMismatch=(data[i].expected_quantity-data[i].actual_quantity) + totalMismatch;
       auditData.slot_id=data[i].slot_id;
       auditData.auditLineId=data[i].auditline_id;
+        if(data[i].status){
+            /**
+             * Data from the backend for the comparison.
+             */
+            auditData[GOR_AUDIT_STATUS_DATA]=data[i].status
+        }
       if(this.context.intl.formatMessage(stringConfig[data[i].status])) {
         auditData.status=this.context.intl.formatMessage(stringConfig[data[i].status]);
       } 
@@ -69,6 +75,12 @@ class ResolveAudit extends React.Component{
       }
       if(data[i].pdfa_audit_attributes && auditLines[i].pdfa_audit_attributes[Object.keys(auditLines[0].pdfa_audit_attributes)]) {
         auditData.attributeDetail=auditLines[i].pdfa_audit_attributes[Object.keys(auditLines[0].pdfa_audit_attributes)];  //assuming only one attributes is there as of now (kerry specific) 
+      }
+      if(data[i].anamoly_info){
+            auditData.anamoly_info=data[i].anamoly_info
+      }
+      if(data[i].k_deep_audit){
+          auditData.k_deep_audit=data[i].k_deep_audit
       }
       processedData.push(auditData);
       auditData={};
@@ -218,50 +230,113 @@ class ResolveAudit extends React.Component{
     var missingAudit=auditDataList.getSize();
     var screenId=this.props.screenId
     var containerHeight=(((missingAudit?missingAudit:0)*headerHeight + headerHeight)>minHeight?((missingAudit?missingAudit:0)*headerHeight + headerHeight):minHeight);
-    resolveTable=<div>
-                      <Table
-                      rowHeight={headerHeight}
-                      rowsCount={auditDataList.getSize()}
-                      headerHeight={headerHeight}
-                      onColumnResizeEndCallback={this._onColumnResizeEndCallback}
-                      isColumnResizing={false}
-                      width={GOR_AUDIT_RESOLVE_WIDTH}
-                      height={containerHeight}
-                      {...this.props}>
-                      <Column
-                        columnKey="slot_id"
-                        header={<div className="gorAuditHeader"> <FormattedMessage id="resolveAudit.table.slot" description="slot id Column" defaultMessage="SLOT ID"/> </div>}
-                        cell={  <TextCell data={auditDataList} />}
-                        width={220}
-                      />
-                      <Column
-                        columnKey="expected_quantity"
-                        header={<div className="gorAuditHeader"> <FormattedMessage id="resolveAudit.table.expectedItems" description="expectedItems Column" defaultMessage="EXPECTED QUANTITY"/> </div>}
-                        cell={  <TextCell data={auditDataList} />}
-                        width={220}
-                      />
-                      <Column
-                        columnKey="actual_quantity"
-                        header={<div className="gorAuditHeader"><FormattedMessage id="resolveAudit.table.actualQuantity" description="actualQuantity Column" defaultMessage="ACTUAL QUANTITY"/> </div>
-                        }
-                        cell={  <TextCell data={auditDataList} setClass={GOR_BREACHED_LINES}> </TextCell>}
-                        width={220}
-                      />
-                      <Column
-                        columnKey="status"
-                        header={<div className="gorAuditHeader"><FormattedMessage id="resolveAudit.table.STATUS" description="status Column" defaultMessage="STATUS"/> </div>}
-                        cell={  <TextCell data={auditDataList}> </TextCell>}
-                        width={220}
-                      />
+    if(auditDataList.newData.length>0 && auditDataList.newData[0].k_deep_audit){
+        containerHeight=(((missingAudit?missingAudit:0)*3*headerHeight + headerHeight)>minHeight?((missingAudit?missingAudit:0)*3*headerHeight + headerHeight):minHeight);
+        resolveTable=<div>
+            <Table
+                rowHeight={3 * headerHeight}
+                rowsCount={auditDataList.getSize()}
+                headerHeight={headerHeight}
+                onColumnResizeEndCallback={this._onColumnResizeEndCallback}
+                isColumnResizing={false}
+                width={GOR_AUDIT_RESOLVE_WIDTH}
+                height={containerHeight}
+                {...this.props}>
+                <Column
+                    columnKey="slot_id"
+                    header={<div className="gorAuditHeader"><FormattedMessage id="resolveAudit.table.slot"
+                                                                              description="slot id Column"
+                                                                              defaultMessage="SLOT ID"/></div>}
+                    cell={  <AuditPackingSlotIdCell data={auditDataList}/>}
+                    width={220}
+                />
+                <Column
+                    columnKey="anamoly_info"
+                    header={<div className="gorAuditHeader"><FormattedMessage id="resolveAudit.table.expectedItems"
+                                                                              description="expectedItems Column"
+                                                                              defaultMessage="EXPECTED QUANTITY"/>
+                    </div>}
+                    cell={  <AuditPackingQuantityCell dataKey="expected_quantity" data={auditDataList}/>}
+                    width={220}
+                />
+                <Column
+                    columnKey="anamoly_info"
+                    header={<div className="gorAuditHeader"><FormattedMessage id="resolveAudit.table.actualQuantity"
+                                                                              description="actualQuantity Column"
+                                                                              defaultMessage="ACTUAL QUANTITY"/></div>
+                    }
+                    cell={ <AuditPackingQuantityCell dataKey="actual_quantity" data={auditDataList}/>}
+                    width={220}
+                />
+                <Column
+                    columnKey="status"
+                    header={<div className="gorAuditHeader"><FormattedMessage id="resolveAudit.table.STATUS"
+                                                                              description="status Column"
+                                                                              defaultMessage="STATUS"/></div>}
+                    cell={  <AuditPackingStatusCell data={auditDataList}/>}
+                    width={220}
+                />
 
-                      <Column
-                        columnKey="resolve"
-                        header={<div className="gorAuditHeader"> <FormattedMessage id="resolveAudit.table.resolve" description="resolve Column" defaultMessage="RESOLVE"/> </div>}
-                        cell={  <ResolveCell data={auditDataList} checkStatus={this._checkAuditStatus.bind(this)} screenId={screenId}> </ResolveCell>}
-                        width={220}
-                      /> 
-                    </Table>
-                    </div>
+                <Column
+                    columnKey="resolve"
+                    header={<div className="gorAuditHeader"><FormattedMessage id="resolveAudit.table.resolve"
+                                                                              description="resolve Column"
+                                                                              defaultMessage="RESOLVE"/></div>}
+                    cell={ <AuditPackingResolveCell data={auditDataList}><ResolveCell data={auditDataList}
+                                                                                      checkStatus={this._checkAuditStatus.bind(this)}
+                                                                                      screenId={screenId}/></AuditPackingResolveCell>}
+                    width={220}
+                />
+            </Table>
+            </div>
+
+    }else{
+        resolveTable=<div>
+            <Table
+                rowHeight={headerHeight}
+                rowsCount={auditDataList.getSize()}
+                headerHeight={headerHeight}
+                onColumnResizeEndCallback={this._onColumnResizeEndCallback}
+                isColumnResizing={false}
+                width={GOR_AUDIT_RESOLVE_WIDTH}
+                height={containerHeight}
+                {...this.props}>
+                <Column
+                    columnKey="slot_id"
+                    header={<div className="gorAuditHeader"> <FormattedMessage id="resolveAudit.table.slot" description="slot id Column" defaultMessage="SLOT ID"/> </div>}
+                    cell={  <TextCell data={auditDataList} />}
+                    width={220}
+                />
+                <Column
+                    columnKey="expected_quantity"
+                    header={<div className="gorAuditHeader"> <FormattedMessage id="resolveAudit.table.expectedItems" description="expectedItems Column" defaultMessage="EXPECTED QUANTITY"/> </div>}
+                    cell={  <TextCell data={auditDataList} />}
+                    width={220}
+                />
+                <Column
+                    columnKey="actual_quantity"
+                    header={<div className="gorAuditHeader"><FormattedMessage id="resolveAudit.table.actualQuantity" description="actualQuantity Column" defaultMessage="ACTUAL QUANTITY"/> </div>
+                    }
+                    cell={  <TextCell data={auditDataList} setClass={GOR_BREACHED_LINES}> </TextCell>}
+                    width={220}
+                />
+                <Column
+                    columnKey="status"
+                    header={<div className="gorAuditHeader"><FormattedMessage id="resolveAudit.table.STATUS" description="status Column" defaultMessage="STATUS"/> </div>}
+                    cell={  <TextCell data={auditDataList}> </TextCell>}
+                    width={220}
+                />
+
+                <Column
+                    columnKey="resolve"
+                    header={<div className="gorAuditHeader"> <FormattedMessage id="resolveAudit.table.resolve" description="resolve Column" defaultMessage="RESOLVE"/> </div>}
+                    cell={  <ResolveCell data={auditDataList} checkStatus={this._checkAuditStatus.bind(this)} screenId={screenId}> </ResolveCell>}
+                    width={220}
+                />
+            </Table>
+        </div>
+    }
+
    return resolveTable;                 
 
   }
@@ -316,7 +391,7 @@ class ResolveAudit extends React.Component{
                           </button>
                         </div>
                         <div className="gor-auditresolve-btn">
-                          <button className="gor-add-btn" onClick={this._confirmIssues.bind(this)}>
+                          <button disabled={!this.state.checkedState || this.state.checkedState.length<1} className="gor-add-btn" onClick={this._confirmIssues.bind(this)}>
                             <FormattedMessage id="resolveAudit.confirmLabel" description='button label for confirm' defaultMessage='Confirm'/>
                           </button>
                         </div>   

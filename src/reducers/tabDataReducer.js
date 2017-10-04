@@ -1,4 +1,7 @@
-import {GET_OVERVIEW,GET_SYSTEM,GET_INVENTORY,GET_AUDIT,GET_USERS,GET_ORDERS,GET_STATUS} from '../constants/frontEndConstants.js';
+
+import {GET_OVERVIEW,GET_SYSTEM,GET_INVENTORY,GET_AUDIT,GET_USERS,GET_ORDERS,
+  GET_STATUS,SET_EMERGENCY_MODAL_STATUS} from '../constants/frontEndConstants.js';
+
 
 export  function tabsData(state={},action){
 	switch (action.type) {
@@ -12,20 +15,23 @@ export  function tabsData(state={},action){
         "overview_status":overview_status
       })
       case GET_SYSTEM:
-      let system_data,system_emergency=false,zoneDetails,lastEmergencyState;
+      let system_data,system_emergency=false,zoneDetails,lastEmergencyState,breached;
       if(action.data.header_data)
       {      
         system_emergency=action.data.header_data.emergency;
         system_data=action.data.header_data.emergency_level;
         lastEmergencyState = action.data.header_data.last_emergency_state;
-        zoneDetails = action.data.header_data.zone_details
+        zoneDetails = action.data.header_data.zone_details;
+        breached = action.data.header_data.breached
 
       }
       return Object.assign({}, state, {
         "system_emergency":system_emergency,
         "system_data":system_data,
+        isEmergencyOpen:!system_emergency,
         zoneDetails,
-        lastEmergencyState
+        lastEmergencyState,
+        breached
       })
                 
       case GET_USERS:
@@ -74,7 +80,13 @@ export  function tabsData(state={},action){
       }
       return Object.assign({}, state, {
         "status":status
-      })      
+      }) 
+      case SET_EMERGENCY_MODAL_STATUS:
+
+          return Object.assign({}, state, { 
+            "isEmergencyOpen":action.data
+          })     
+
 	  default:
 	    return state
   }

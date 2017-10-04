@@ -83,7 +83,9 @@ import {
     FETCH_PROFILE_FOR_PPS,
     CREATE_NEW_PROFILE,
     SAVE_PPS_PROFILE,
-    ADD_TAG_TO_LIST,CHANGE_PPS_PROFILE
+    ADD_TAG_TO_LIST,CHANGE_PPS_PROFILE,
+    OPERATION_LOG_FETCH,REPORTS_FETCH,GET_REPORT,
+    DOWNLOAD_REPORT_REQUEST
 } from "../constants/frontEndConstants";
 import {BUTLER_UI, CODE_E027} from "../constants/backEndConstants";
 import {
@@ -99,7 +101,10 @@ import {
     g020,
     g021,
     g023,
-    g024
+    g024,
+    REQUEST_REPORT_SUCCESS,
+    REQUEST_REPORT_FAILURE,
+    INVALID_SKUID
 } from "../constants/messageConstants";
 import {ShowError} from "./showError";
 import {endSession} from "./endSession";
@@ -111,7 +116,6 @@ import {
     setStockLedgerRawTransactionsSpinner
 } from "../actions/spinnerAction";
 import {statusToString} from "./statusToString";
-import {INVALID_SKUID} from "../constants/messageConstants";
 import {
     validateInvoiceID,
     uploadMasterDataProcessing,
@@ -141,7 +145,10 @@ import {
     savedPPSProfile,
     tagAddedToList,
     setPPSConfigurationSpinner,profileRequested
-} from './../actions/ppsConfigurationActions'
+} from './../actions/ppsConfigurationActions';
+
+import {recieveOLData} from './../actions/operationsLogsActions';
+import {recieveReportsData} from './../actions/downloadReportsActions'
 
 export function AjaxParse(store, res, cause, status, saltParams) {
     let stringInfo = {};
@@ -491,7 +498,18 @@ export function AjaxParse(store, res, cause, status, saltParams) {
              */
             store.dispatch(profileRequested(res))
             break;
-
+        case OPERATION_LOG_FETCH:
+            store.dispatch(recieveOLData(res.hits.hits))
+            break;
+        case REPORTS_FETCH:
+            store.dispatch(recieveReportsData(res))
+            break;
+        case GET_REPORT:
+            store.dispatch(recieveReportsData(res))
+            break;
+        case DOWNLOAD_REPORT_REQUEST:
+            store.dispatch(notifySuccess(REQUEST_REPORT_SUCCESS));
+            break;
         default:
             ShowError(store, cause, status);
             break;

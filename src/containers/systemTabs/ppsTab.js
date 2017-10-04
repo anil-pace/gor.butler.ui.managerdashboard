@@ -43,8 +43,7 @@ import {
 import {updateSubscriptionPacket,setWsAction} from './../../actions/socketActions'
 import {wsOverviewData} from './../../constants/initData.js';
 import PPSFilter from './ppsFilter';
-import FilterSummary from '../../components/tableFilter/filterSummary'
-import DropdownTable from '../../components/dropdown/dropdownTable';
+import FilterSummary from '../../components/tableFilter/filterSummary';
 import Dropdown from '../../components/gor-dropdown-component/dropdown';
 import {PPS_MODE_CHANGE_URL,PPS_STATUS_CHANGE_URL} from '../../constants/configConstants';
 
@@ -345,8 +344,8 @@ class PPS extends React.Component {
         if (this.props.PPSDetail.PPStypeDetail !== undefined) {
             data=this._processPPSData();
             for (var i=data.length - 1; i >= 0; i--) {
-                if (data[i].operatingMode !== null) {
-                    operationMode[data[i].operatingMode]=operationMode[data[i].operatingMode] + 1;
+                if (data[i].operatingModeClass !== null) {
+                    operationMode[data[i].operatingModeClass]=operationMode[data[i].operatingModeClass] + 1;
                 }
                 else {
                     operationMode={"Pick": "--", "Put": "--", "Audit": "--", "NotSet": "--"};
@@ -357,7 +356,7 @@ class PPS extends React.Component {
                     operatorNum=data[i].totalUser
                 }
 
-                if (data[i].status.toLowerCase()=== GOR_ON_STATUS.toLowerCase()) {
+                if (data[i].statusClass.toLowerCase()=== GOR_ON_STATUS.toLowerCase()) {
                     ppsOn++;
                 }
 

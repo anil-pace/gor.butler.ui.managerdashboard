@@ -26,7 +26,7 @@ class SafetyChecklist extends React.Component{
     this.props.removeModal();
   }
   componentWillReceiveProps(nextProps){
-    if(!nextProps.auth_token||!nextProps.system_emergency)
+    if(!nextProps.breached && (!nextProps.auth_token||!nextProps.system_emergency))
     {
       if(nextProps.system_emergency || nextProps.fireHazard.emergency_type!==EMERGENCY_FIRE)
       {
@@ -258,7 +258,7 @@ class SafetyChecklist extends React.Component{
                 {this.props.emergency_type===EMERGENCY_FIRE?
                 (<button type="submit" className="gor-add-btn" disabled={(!this.state.allChecked)?true:false}
                   onClick={this._handleSafetyConfirm.bind(this)}><FormattedMessage id='operation.firesafety.confirm' 
-                    defaultMessage="Resume Opeartion" description="Text for Resume Opeartion button"/>
+                    defaultMessage="Resume Operation" description="Text for Resume Operation button"/>
                     <Spinner isLoading={this.props.safetySpinner} setSpinner={this.props.setSafetySpinner}/>
                     </button>):
                     (<button type="submit" className="gor-add-btn" disabled={(!this.state.allChecked)?true:false}
@@ -294,6 +294,7 @@ function mapStateToProps(state, ownProps){
       safetySpinner:state.spinner.safetySpinner || false,
       system_emergency:state.tabsData.system_emergency||false,
       system_data:state.tabsData.system_data||null,
+      breached: state.tabsData. breached,
       fireHazard:state.fireHazardDetail
   };
 }

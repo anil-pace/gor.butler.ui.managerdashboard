@@ -1,5 +1,5 @@
 import {DISPLAY_ORDER_LIST_SPINNER} from '../constants/appConstants'
-import {ORDER_LIST_REFRESHED,WAVES_REFRESHED} from './../constants/frontEndConstants'
+import {ORDER_LIST_REFRESHED,WAVES_REFRESHED,SET_ORDER_QUERY} from './../constants/frontEndConstants'
 
 export function setOrderListSpinner(data) {
     return {
@@ -22,4 +22,11 @@ export function wavesRefreshed(data) {
         data
     }
 
+}
+
+export function setOrderQuery(data){
+    return {
+        type:SET_ORDER_QUERY,
+        data
+    }
 }

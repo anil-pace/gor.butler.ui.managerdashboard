@@ -2,7 +2,7 @@ import React  from 'react';
 import Spinner from '../components/spinner/Spinner';
 import {connect} from 'react-redux';
 import { FILTER_AUDIT_ID,CANCEL_AUDIT_URL} from '../constants/configConstants';
-import {getAuditData, setAuditRefresh,auditListRefreshed,setTextBoxStatus,cancelAudit} from '../actions/auditActions';
+import {getAuditData, setAuditRefresh,auditListRefreshed,setTextBoxStatus,cancelAudit,setAuditQuery} from '../actions/auditActions';
 import AuditTable from './auditTab/auditTable';
 import {getPageData} from '../actions/paginationAction';
 import {
@@ -67,7 +67,7 @@ const messages=defineMessages({
     },
     auditCompletedStatus: {
         id: "auditdetail.completed.status",
-        defaultMessage: "Completed"
+        defaultMessage: "Audited"
     },
     auditSKU: {
         id: "auditdetail.sku.prefix",
@@ -141,7 +141,12 @@ class AuditTab extends React.Component {
         this.props.updateSubscriptionPacket(updatedWsSubscription);
     }
     _refresh(data){
-        this._refreshList(this.props.location.query,data);
+        if(this.props.noResultFound){
+            hashHistory.push({pathname: "/audit", query: this.props.successQuery})
+        }else{
+            this._refreshList(this.props.location.query,data);
+        }
+
   }
     /**
      * The method will update the subscription packet
@@ -237,6 +242,7 @@ class AuditTab extends React.Component {
             "PAGE": query.page || 1,
             defaultToken: {"AUDIT TYPE": [ANY], "STATUS": [ALL]}
         })
+        this.props.setAuditQuery({query:query})
         this.props.getPageData(paginationData);
     }
     /**
@@ -736,6 +742,8 @@ function mapStateToProps(state, ownProps) {
         totalAudits: state.recieveAuditDetail.totalAudits || 0,
         auditSpinner: state.spinner.auditSpinner || false,
         auditDetail: state.recieveAuditDetail.auditDetail || [],
+        noResultFound: state.recieveAuditDetail.noResultFound ,
+        successQuery: state.recieveAuditDetail.successQuery ,
         totalPage: state.recieveAuditDetail.totalPage || 0,
         auditRefresh: state.recieveAuditDetail.auditRefresh || null,
         intlMessages: state.intl.messages,
@@ -800,6 +808,9 @@ var mapDispatchToProps=function (dispatch) {
         },
         cancelAudit:function(data){
             dispatch(cancelAudit(data))
+        },
+        setAuditQuery:function(data){
+            dispatch(setAuditQuery(data))
         }
 
     }

@@ -30,6 +30,24 @@
     "filepath": "./src/components/commonFunctionsDataTable.js"
   },
   {
+    "id": "audit.table.pack.outer.label",
+    "description": "audit.table.pack.outer.label",
+    "defaultMessage": "Outer",
+    "filepath": "./src/components/commonFunctionsDataTable.js"
+  },
+  {
+    "id": "audit.table.pack.inner.label",
+    "description": "audit.table.pack.inner.label",
+    "defaultMessage": "Inner",
+    "filepath": "./src/components/commonFunctionsDataTable.js"
+  },
+  {
+    "id": "commonDataTable.attributesType.itemSelectedText",
+    "description": "heading for attribute",
+    "defaultMessage": "{count} items selected",
+    "filepath": "./src/components/commonFunctionsDataTable.js"
+  },
+  {
     "id": "commonDataTable.attributesType.heading",
     "description": "heading for attribute",
     "defaultMessage": "Box Id",
@@ -198,6 +216,30 @@
     "filepath": "./src/components/graphd3/stackedChartHorizontal.js"
   },
   {
+    "id": "header.zones.inOperation2",
+    "description": "Zone in operation count",
+    "defaultMessage": "{activeZones} zones in operation",
+    "filepath": "./src/components/header/header.js"
+  },
+  {
+    "id": "header.zones.noOperation",
+    "description": "Zone in operation count",
+    "defaultMessage": "No zones in operation",
+    "filepath": "./src/components/header/header.js"
+  },
+  {
+    "id": "header.zones.inactiveZones",
+    "description": "Zone in operation count",
+    "defaultMessage": "{inactiveZones} {inactiveZones, plural, one {zone} other {zones}} paused",
+    "filepath": "./src/components/header/header.js"
+  },
+  {
+    "id": "header.button.resume",
+    "description": "Button text",
+    "defaultMessage": "Resume System",
+    "filepath": "./src/components/header/header.js"
+  },
+  {
     "id": "header.zones.status",
     "description": "Zone status",
     "defaultMessage": "SYSTEM NORMAL",
@@ -222,12 +264,6 @@
     "filepath": "./src/components/header/header.js"
   },
   {
-    "id": "header.zones.noOperation",
-    "description": "Zone in operation count",
-    "defaultMessage": "No zones in operation",
-    "filepath": "./src/components/header/header.js"
-  },
-  {
     "id": "header.option.release",
     "description": "release operation option",
     "defaultMessage": "Release the Emergency Stop button from the Zigbee box in order\n                              to resume operation.",
@@ -243,18 +279,6 @@
     "id": "header.zones.emergency.paused",
     "description": "System Emergency",
     "defaultMessage": "SYSTEM PAUSED",
-    "filepath": "./src/components/header/header.js"
-  },
-  {
-    "id": "header.zones.inOperation2",
-    "description": "Zone in operation count",
-    "defaultMessage": "{activeZones} zones in operation",
-    "filepath": "./src/components/header/header.js"
-  },
-  {
-    "id": "header.button.resume",
-    "description": "Button text",
-    "defaultMessage": "Resume System",
     "filepath": "./src/components/header/header.js"
   },
   {
@@ -545,18 +569,6 @@
     "filepath": "./src/components/subtab/subTabs.js"
   },
   {
-    "id": "gor.filter.filterLabel",
-    "description": "label for filter",
-    "defaultMessage": "Filter data",
-    "filepath": "./src/components/tableFilter/filter.js"
-  },
-  {
-    "id": "gor.filter.heading",
-    "description": "filter heading",
-    "defaultMessage": "Apply filter",
-    "filepath": "./src/components/tableFilter/filter.js"
-  },
-  {
     "id": "utility.uploadHist.fileName",
     "description": "Upload file name",
     "defaultMessage": "File {fileName}",
@@ -638,6 +650,12 @@
     "id": "utility.uploadHist.success",
     "description": "Status",
     "defaultMessage": "Status: {status}",
+    "filepath": "./src/components/utilityComponents/downloadGRTile.js"
+  },
+  {
+    "id": "utility.uploadHist.noresultfound",
+    "description": "Status",
+    "defaultMessage": "No Result Found",
     "filepath": "./src/components/utilityComponents/downloadGRTile.js"
   },
   {
@@ -731,6 +749,12 @@
     "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
   },
   {
+    "id": "utility.uploadHist.noresultfound",
+    "description": "Status",
+    "defaultMessage": "No Result Found",
+    "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+  },
+  {
     "id": "utility.downloadReports.head",
     "description": "Generate Report",
     "defaultMessage": "Generate Report",
@@ -741,6 +765,12 @@
     "description": "Report History",
     "defaultMessage": "Report History",
     "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+  },
+  {
+    "id": "utility.uploadHist.noresultfound",
+    "description": "Status",
+    "defaultMessage": "No Result Found",
+    "filepath": "./src/components/utilityComponents/masterUploadTile.js"
   },
   {
     "id": "utility.uploadHistory.head",
@@ -1064,6 +1094,18 @@
     "id": "stringConfig.md012",
     "description": "Text for safety checklist item 12",
     "defaultMessage": "All paths cleared of any debris.",
+    "filepath": "./src/constants/backEndConstants.js"
+  },
+  {
+    "id": "stringConfig.md013",
+    "description": "Text for safety checklist item 13",
+    "defaultMessage": "Move bots to the PPS location and do an \"init\" after all bots are moved.",
+    "filepath": "./src/constants/backEndConstants.js"
+  },
+  {
+    "id": "stringConfig.md014",
+    "description": "Text for safety checklist item 14",
+    "defaultMessage": "No bots require to be moved to PPS.",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
@@ -1524,8 +1566,8 @@
   },
   {
     "id": "audit.cancellation.error.g024",
-    "description": "Audit Id cancellation request has been process and cannot be cancelled",
-    "defaultMessage": "Audit Id cancellation request has been process and cannot be cancelled",
+    "description": "Audit cancellation request denied",
+    "defaultMessage": "Audit cancellation request denied",
     "filepath": "./src/constants/messageConstants.js"
   },
   {
@@ -1673,6 +1715,54 @@
     "filepath": "./src/constants/messageConstants.js"
   },
   {
+    "id": "operationsLog.reportRequest.success",
+    "description": "Status text for zone",
+    "defaultMessage": "Request successfully generated. Kindly check the Downloads Tab",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "operationsLog.reportRequest.failure",
+    "description": "Status text for zone",
+    "defaultMessage": "Error creating request",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "zoning.substatus.action.zone_pause",
+    "description": "Status text for zone",
+    "defaultMessage": "Zone pause activated",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "zoning.substatus.action.zone_clear",
+    "description": "Status text for zone",
+    "defaultMessage": "Zone clear activated",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "zoning.substatus.action.emergency_stop",
+    "description": "Status text for zone",
+    "defaultMessage": "Emergency stop activated",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "zoning.substatus.action.emergency_pause",
+    "description": "Status text for zone",
+    "defaultMessage": "Emergency pause activated",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "zoning.entity.lightCurtains",
+    "description": "Status text for zone",
+    "defaultMessage": "Light Curtain",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "zoning.entity.latchGate",
+    "description": "Status text for zone",
+    "defaultMessage": "Latch Gate",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
     "id": "widget.audit.heading.value",
     "description": "Total Items Audited",
     "defaultMessage": "None",
@@ -1725,7 +1815,7 @@
   },
   {
     "id": "auditdetail.completed.status",
-    "defaultMessage": "Completed",
+    "defaultMessage": "Audited",
     "filepath": "./src/containers/auditTab.js"
   },
   {
@@ -1876,6 +1966,41 @@
   {
     "id": "audit.token2.completed",
     "defaultMessage": "Completed",
+    "filepath": "./src/containers/auditTab/auditFilter.js"
+  },
+  {
+    "id": "audit.token2.cancelled",
+    "defaultMessage": "Cancelled",
+    "filepath": "./src/containers/auditTab/auditFilter.js"
+  },
+  {
+    "id": "gor.filter.filterLabel",
+    "description": "label for filter",
+    "defaultMessage": "Filter data",
+    "filepath": "./src/containers/auditTab/auditFilter.js"
+  },
+  {
+    "id": "gor.filter.hide",
+    "description": "label for hide",
+    "defaultMessage": "Hide",
+    "filepath": "./src/containers/auditTab/auditFilter.js"
+  },
+  {
+    "id": "gor.filter.noResult",
+    "description": "label for no result",
+    "defaultMessage": "No results found, please try again",
+    "filepath": "./src/containers/auditTab/auditFilter.js"
+  },
+  {
+    "id": "gor.filter.reset",
+    "description": "label for reset",
+    "defaultMessage": "Reset",
+    "filepath": "./src/containers/auditTab/auditFilter.js"
+  },
+  {
+    "id": "gor.filter.heading",
+    "description": "filter heading",
+    "defaultMessage": "Apply filter",
     "filepath": "./src/containers/auditTab/auditFilter.js"
   },
   {
@@ -2256,9 +2381,33 @@
     "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
   },
   {
+    "id": "operation.alert.releaseSoft",
+    "description": "Text for emergency button release heading",
+    "defaultMessage": "All Emergency-pause buttons released",
+    "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
+  },
+  {
+    "id": "operation.alert.releaseSoftBreached",
+    "description": "Text for emergency button release heading",
+    "defaultMessage": "Pause button released",
+    "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
+  },
+  {
     "id": "operation.alert.release.text",
     "description": "Text for emergency stop button release",
     "defaultMessage": "All Emergency-stop buttons have been released.",
+    "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
+  },
+  {
+    "id": "operation.alert.releaseSoft.text",
+    "description": "Text for emergency pause button release",
+    "defaultMessage": "All Emergency-pause buttons have been released.",
+    "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
+  },
+  {
+    "id": "operation.alert.releaseSoft.textBreached",
+    "description": "Text for emergency pause button release",
+    "defaultMessage": "Emergency pause button in {zone} has been released",
     "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
   },
   {
@@ -2272,6 +2421,42 @@
     "description": "Text button to resume operation",
     "defaultMessage": "Resume operation",
     "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
+  },
+  {
+    "id": "operation.fire.shutter",
+    "description": "Description Text clear shutter",
+    "defaultMessage": "Clearing all shutters",
+    "filepath": "./src/containers/emergencyProcess/fireHazard.js"
+  },
+  {
+    "id": "operation.fire.failshutter",
+    "description": "Description Text fail to clear shutter",
+    "defaultMessage": "Failed to clear shutters",
+    "filepath": "./src/containers/emergencyProcess/fireHazard.js"
+  },
+  {
+    "id": "operation.fire.clearedshutter",
+    "description": "Description Text  cleared shutter",
+    "defaultMessage": "Cleared all shutters",
+    "filepath": "./src/containers/emergencyProcess/fireHazard.js"
+  },
+  {
+    "id": "operation.fire.escapecleared",
+    "description": "Description Text escape cleared",
+    "defaultMessage": "Cleared escape path",
+    "filepath": "./src/containers/emergencyProcess/fireHazard.js"
+  },
+  {
+    "id": "operation.fire.escapeprogress",
+    "description": "Description Text escape in progress",
+    "defaultMessage": "Clearing escape path",
+    "filepath": "./src/containers/emergencyProcess/fireHazard.js"
+  },
+  {
+    "id": "operation.fire.escapefail",
+    "description": "Description Text escape to fail",
+    "defaultMessage": "Failed to clear escape path",
+    "filepath": "./src/containers/emergencyProcess/fireHazard.js"
   },
   {
     "id": "operation.fire.header",
@@ -2292,18 +2477,6 @@
     "filepath": "./src/containers/emergencyProcess/fireHazard.js"
   },
   {
-    "id": "operation.fire.escape",
-    "description": "Description Text escape",
-    "defaultMessage": "Clearing escape path",
-    "filepath": "./src/containers/emergencyProcess/fireHazard.js"
-  },
-  {
-    "id": "operation.fire.shutter",
-    "description": "Description Text clear shutter",
-    "defaultMessage": "Clearing all shutters",
-    "filepath": "./src/containers/emergencyProcess/fireHazard.js"
-  },
-  {
     "id": "operation.alert.release.button",
     "description": "Text button to resume operation",
     "defaultMessage": "RESUME OPERATION",
@@ -2313,6 +2486,12 @@
     "id": "operation.alert.pause",
     "description": "Text for operation stopped heading",
     "defaultMessage": "Butler System - Operation Paused",
+    "filepath": "./src/containers/emergencyProcess/OperationPause.js"
+  },
+  {
+    "id": "operation.alert.pause.breach.text",
+    "description": "Text for emergency button press",
+    "defaultMessage": "Emergency-Pause activated due to SOP breach via Controller {controller} in {zone}.",
     "filepath": "./src/containers/emergencyProcess/OperationPause.js"
   },
   {
@@ -2424,6 +2603,42 @@
     "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
   },
   {
+    "id": "misplaced.botId",
+    "description": "bot id",
+    "defaultMessage": "{botid}",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "misplaced.rackId",
+    "description": "rack id",
+    "defaultMessage": "{rackid}",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "misplaced.racklocation",
+    "description": "rack location",
+    "defaultMessage": "{racklocation}",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "misplaced.rackface",
+    "description": "rack face",
+    "defaultMessage": "{rackface}",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "misplaced.ppsid",
+    "description": "pps id",
+    "defaultMessage": "{ppsid}",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "misplaced.ppslocation",
+    "description": "pps location",
+    "defaultMessage": "{ppslocation}",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
     "id": "operation.firesafety.heading",
     "description": "Text for safety heading",
     "defaultMessage": "Resume Checklist",
@@ -2448,15 +2663,51 @@
     "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
   },
   {
-    "id": "operation.safety.errors",
+    "id": "operation.safetychecklist.errors",
     "description": "Text for safety error",
-    "defaultMessage": "System has found some of these steps were not followed. \n                    Please check or contact service engineer for support",
+    "defaultMessage": "System has detected that one or more of the required conditions have not been fulfilled. \n                    Please try again or contact service engineer for support",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "operation.safetychecklistTable.botid",
+    "description": "Bot ID",
+    "defaultMessage": "Bot ID",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "operation.safetychecklistTable.rockid",
+    "description": "Rack ID",
+    "defaultMessage": "Rack ID",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "operation.safetychecklistTable.rocklocation",
+    "description": "Rack location",
+    "defaultMessage": "Rack location",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "operation.safetychecklistTable.rackface",
+    "description": "Rack face",
+    "defaultMessage": "Rack face",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "operation.safetychecklistTable.ppsid",
+    "description": "PPS ID",
+    "defaultMessage": "PPS ID",
+    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
+  },
+  {
+    "id": "operation.safetychecklistTable.ppslocation",
+    "description": "PPS location",
+    "defaultMessage": "PPS location",
     "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
   },
   {
     "id": "operation.firesafety.confirm",
-    "description": "Text for Resume Opeartion button",
-    "defaultMessage": "Resume Opeartion",
+    "description": "Text for Resume Operation button",
+    "defaultMessage": "Resume Operation",
     "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
   },
   {
@@ -2650,6 +2901,36 @@
   {
     "id": "order.timePeriod.oneday",
     "defaultMessage": "Last 1 day",
+    "filepath": "./src/containers/orderTab/orderFilter.js"
+  },
+  {
+    "id": "gor.filter.filterLabel",
+    "description": "label for filter",
+    "defaultMessage": "Filter data",
+    "filepath": "./src/containers/orderTab/orderFilter.js"
+  },
+  {
+    "id": "gor.filter.hide",
+    "description": "label for hide",
+    "defaultMessage": "Hide",
+    "filepath": "./src/containers/orderTab/orderFilter.js"
+  },
+  {
+    "id": "gor.filter.noResult",
+    "description": "label for no result",
+    "defaultMessage": "No results found, please try again",
+    "filepath": "./src/containers/orderTab/orderFilter.js"
+  },
+  {
+    "id": "gor.filter.reset",
+    "description": "label for reset",
+    "defaultMessage": "Reset",
+    "filepath": "./src/containers/orderTab/orderFilter.js"
+  },
+  {
+    "id": "gor.filter.heading",
+    "description": "filter heading",
+    "defaultMessage": "Apply filter",
     "filepath": "./src/containers/orderTab/orderFilter.js"
   },
   {
@@ -2889,6 +3170,36 @@
   {
     "id": "wave.STATUS.inprogress",
     "defaultMessage": "In progress",
+    "filepath": "./src/containers/orderTab/waveFilter.js"
+  },
+  {
+    "id": "gor.filter.filterLabel",
+    "description": "label for filter",
+    "defaultMessage": "Filter data",
+    "filepath": "./src/containers/orderTab/waveFilter.js"
+  },
+  {
+    "id": "gor.filter.hide",
+    "description": "label for hide",
+    "defaultMessage": "Hide",
+    "filepath": "./src/containers/orderTab/waveFilter.js"
+  },
+  {
+    "id": "gor.filter.noResult",
+    "description": "label for no result",
+    "defaultMessage": "No results found, please try again",
+    "filepath": "./src/containers/orderTab/waveFilter.js"
+  },
+  {
+    "id": "gor.filter.reset",
+    "description": "label for reset",
+    "defaultMessage": "Reset",
+    "filepath": "./src/containers/orderTab/waveFilter.js"
+  },
+  {
+    "id": "gor.filter.heading",
+    "description": "filter heading",
+    "defaultMessage": "Apply filter",
     "filepath": "./src/containers/orderTab/waveFilter.js"
   },
   {
@@ -3179,6 +3490,240 @@
     "filepath": "./src/containers/putStatusWidget.js"
   },
   {
+    "id": "operationLog.page.twentyfive",
+    "description": "Page size 25",
+    "defaultMessage": "25",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "operationLog.page.fifty",
+    "description": "Page size 50",
+    "defaultMessage": "50",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "operationLog.page.hundred",
+    "description": "Page size 100",
+    "defaultMessage": "100",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "downloadReport.type.operationsLog",
+    "description": "Heading for PPS",
+    "defaultMessage": "Operations Logs",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "downloadReport.status.pending",
+    "description": "Heading for PPS",
+    "defaultMessage": "Generating report...",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "downloadReport.status.failed",
+    "description": "Heading for PPS",
+    "defaultMessage": "Report failed!",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "downloadReport.status.completed",
+    "description": "button label for download report",
+    "defaultMessage": "DOWNLOAD",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "downloadReport.table.heading",
+    "description": "Heading for PPS",
+    "defaultMessage": "Download Report",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "downloadReport.table.refresh",
+    "description": "button label for download report",
+    "defaultMessage": "Refresh",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "downloadReport.table.reportName",
+    "description": "REPORT NAME",
+    "defaultMessage": "REPORT NAME",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "downloadReport.table.reportType",
+    "description": "REPORT TYPE",
+    "defaultMessage": "REPORT TYPE",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "downloadReport.table.requestedBy",
+    "description": "Request ID",
+    "defaultMessage": "REQUESTED BY",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "downloadReport.table.completionTime",
+    "description": "Status for PPS",
+    "defaultMessage": "COMPLETION TIME",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "downloadReport.table.status",
+    "description": "Status for PPS",
+    "defaultMessage": "GENERATION PROGRESS",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "operationsLog.table.noData",
+    "description": "No data message for operations logs",
+    "defaultMessage": "No Data Found",
+    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+  },
+  {
+    "id": "gor.filter.filterLabel",
+    "description": "label for filter",
+    "defaultMessage": "Filter data",
+    "filepath": "./src/containers/reportsTab/operationsFilter.js"
+  },
+  {
+    "id": "gor.filter.hide",
+    "description": "label for hide",
+    "defaultMessage": "Hide",
+    "filepath": "./src/containers/reportsTab/operationsFilter.js"
+  },
+  {
+    "id": "gor.filter.noResult",
+    "description": "label for no result",
+    "defaultMessage": "No results found, please try again",
+    "filepath": "./src/containers/reportsTab/operationsFilter.js"
+  },
+  {
+    "id": "gor.filter.reset",
+    "description": "label for reset",
+    "defaultMessage": "Reset",
+    "filepath": "./src/containers/reportsTab/operationsFilter.js"
+  },
+  {
+    "id": "gor.filter.heading",
+    "description": "filter heading",
+    "defaultMessage": "Apply filter",
+    "filepath": "./src/containers/reportsTab/operationsFilter.js"
+  },
+  {
+    "id": "operationLog.page.twentyfive",
+    "description": "Page size 25",
+    "defaultMessage": "25",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
+    "id": "operationLog.page.fifty",
+    "description": "Page size 50",
+    "defaultMessage": "50",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
+    "id": "operationLog.page.hundred",
+    "description": "Page size 100",
+    "defaultMessage": "100",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
+    "id": "operationLog.table.heading",
+    "description": "Heading for PPS",
+    "defaultMessage": "Operations Log",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
+    "id": "operationLog.table.downloadBtn",
+    "description": "button label for download report",
+    "defaultMessage": "Download Report",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
+    "id": "gor.filter.filterLabel",
+    "description": "button label for filter",
+    "defaultMessage": "Filter data",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
+    "id": "operationsLog.filter.search.bar",
+    "description": "total waves for filter search bar",
+    "defaultMessage": "{total} Results found",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
+    "id": "operationsLog.filter.search.bar.showall",
+    "description": "button label for show all",
+    "defaultMessage": "Show all Operations",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
+    "id": "operationLog.table.operatingMode",
+    "description": "OPERATING MODE",
+    "defaultMessage": "OPERATING MODE",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
+    "id": "operationLog.table.status",
+    "description": "STATUS",
+    "defaultMessage": "STATUS",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
+    "id": "operationLog.table.requestId",
+    "description": "Request ID",
+    "defaultMessage": "REQUEST ID",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
+    "id": "operationLog.table.skuId",
+    "description": "Status for PPS",
+    "defaultMessage": "SKU ID",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
+    "id": "operationLog.table.sourceId",
+    "description": "Status for PPS",
+    "defaultMessage": "SOURCE ID",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
+    "id": "operationLog.table.destinationId",
+    "description": "Status for PPS",
+    "defaultMessage": "DESTINATION ID",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
+    "id": "operationLog.table.userId",
+    "description": "Status for PPS",
+    "defaultMessage": "USER ID",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
+    "id": "operationLog.table.timestamp",
+    "description": "Status for PPS",
+    "defaultMessage": "TIMESTAMP",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
+    "id": "operationsLog.table.noData",
+    "description": "No data message for operations logs",
+    "defaultMessage": "No Data Found",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
+    "id": "reportsTab.operationsLog",
+    "description": "Operations Log tab for Reports tab",
+    "defaultMessage": "Operations Log",
+    "filepath": "./src/containers/reportsTab/reportsTab.js"
+  },
+  {
+    "id": "reportsTab.downloadReport",
+    "description": "Operations Log tab for Reports tab",
+    "defaultMessage": "Download",
+    "filepath": "./src/containers/reportsTab/reportsTab.js"
+  },
+  {
     "id": "butletbot.inputField.id",
     "defaultMessage": "BOT ID",
     "filepath": "./src/containers/systemTabs/butlerBotFilter.js"
@@ -3256,6 +3801,36 @@
   {
     "id": "butletbot.token2.notSet",
     "defaultMessage": "Not set",
+    "filepath": "./src/containers/systemTabs/butlerBotFilter.js"
+  },
+  {
+    "id": "gor.filter.filterLabel",
+    "description": "label for filter",
+    "defaultMessage": "Filter data",
+    "filepath": "./src/containers/systemTabs/butlerBotFilter.js"
+  },
+  {
+    "id": "gor.filter.hide",
+    "description": "label for hide",
+    "defaultMessage": "Hide",
+    "filepath": "./src/containers/systemTabs/butlerBotFilter.js"
+  },
+  {
+    "id": "gor.filter.noResult",
+    "description": "label for no result",
+    "defaultMessage": "No results found, please try again",
+    "filepath": "./src/containers/systemTabs/butlerBotFilter.js"
+  },
+  {
+    "id": "gor.filter.reset",
+    "description": "label for reset",
+    "defaultMessage": "Reset",
+    "filepath": "./src/containers/systemTabs/butlerBotFilter.js"
+  },
+  {
+    "id": "gor.filter.heading",
+    "description": "filter heading",
+    "defaultMessage": "Apply filter",
     "filepath": "./src/containers/systemTabs/butlerBotFilter.js"
   },
   {
@@ -3484,6 +4059,36 @@
     "filepath": "./src/containers/systemTabs/chargingStationFilter.js"
   },
   {
+    "id": "gor.filter.filterLabel",
+    "description": "label for filter",
+    "defaultMessage": "Filter data",
+    "filepath": "./src/containers/systemTabs/chargingStationFilter.js"
+  },
+  {
+    "id": "gor.filter.hide",
+    "description": "label for hide",
+    "defaultMessage": "Hide",
+    "filepath": "./src/containers/systemTabs/chargingStationFilter.js"
+  },
+  {
+    "id": "gor.filter.noResult",
+    "description": "label for no result",
+    "defaultMessage": "No results found, please try again",
+    "filepath": "./src/containers/systemTabs/chargingStationFilter.js"
+  },
+  {
+    "id": "gor.filter.reset",
+    "description": "label for reset",
+    "defaultMessage": "Reset",
+    "filepath": "./src/containers/systemTabs/chargingStationFilter.js"
+  },
+  {
+    "id": "gor.filter.heading",
+    "description": "filter heading",
+    "defaultMessage": "Apply filter",
+    "filepath": "./src/containers/systemTabs/chargingStationFilter.js"
+  },
+  {
     "id": "chargersDetail.name.prefix",
     "description": "prefix for cs id in chargersDetail",
     "defaultMessage": "Charging Stations - {csId}",
@@ -3607,6 +4212,12 @@
     "id": "pps.configuration.confirm.apply.profile",
     "description": "Apply Profile to PPS",
     "defaultMessage": "Are you sure you want to change the profile?",
+    "filepath": "./src/containers/systemTabs/confirmApplyProfile.js"
+  },
+  {
+    "id": "pps.configuration.confirm.apply.profile.description",
+    "description": "PPS Configuration will be changed",
+    "defaultMessage": "PPS Configuration will be changed",
     "filepath": "./src/containers/systemTabs/confirmApplyProfile.js"
   },
   {
@@ -3897,6 +4508,36 @@
     "filepath": "./src/containers/systemTabs/ppsFilter.js"
   },
   {
+    "id": "gor.filter.filterLabel",
+    "description": "label for filter",
+    "defaultMessage": "Filter data",
+    "filepath": "./src/containers/systemTabs/ppsFilter.js"
+  },
+  {
+    "id": "gor.filter.hide",
+    "description": "label for hide",
+    "defaultMessage": "Hide",
+    "filepath": "./src/containers/systemTabs/ppsFilter.js"
+  },
+  {
+    "id": "gor.filter.noResult",
+    "description": "label for no result",
+    "defaultMessage": "No results found, please try again",
+    "filepath": "./src/containers/systemTabs/ppsFilter.js"
+  },
+  {
+    "id": "gor.filter.reset",
+    "description": "label for reset",
+    "defaultMessage": "Reset",
+    "filepath": "./src/containers/systemTabs/ppsFilter.js"
+  },
+  {
+    "id": "gor.filter.heading",
+    "description": "filter heading",
+    "defaultMessage": "Apply filter",
+    "filepath": "./src/containers/systemTabs/ppsFilter.js"
+  },
+  {
     "id": "ppsDetail.name.prefix",
     "description": "prefix for pps id in ppsDetail",
     "defaultMessage": "PPS-{ppsId}",
@@ -4083,6 +4724,12 @@
     "filepath": "./src/containers/systemTabs/saveApplyProfile.js"
   },
   {
+    "id": "pps.configuration.confirm.saveAndapply.profile.description",
+    "description": "Profile will be applied after pending tasks are completed",
+    "defaultMessage": "Profile will be applied after pending tasks are completed",
+    "filepath": "./src/containers/systemTabs/saveApplyProfile.js"
+  },
+  {
     "id": "pps.configuration.confirm.apply.cancel",
     "description": "Cancel apply Profile to PPS",
     "defaultMessage": "Cancel",
@@ -4110,6 +4757,12 @@
     "id": "sysControllers.idColumn.heading",
     "description": "CONTROLLER ID",
     "defaultMessage": "CONTROLLER ID",
+    "filepath": "./src/containers/systemTabs/sysControllers.js"
+  },
+  {
+    "id": "sysControllers.totalControllers",
+    "description": "total controllers",
+    "defaultMessage": "Total:{count}",
     "filepath": "./src/containers/systemTabs/sysControllers.js"
   },
   {
@@ -4158,6 +4811,18 @@
     "id": "sysOverView.zones.count",
     "description": "Zone status count",
     "defaultMessage": "{activeZones}/{totalZones} Operating Zones",
+    "filepath": "./src/containers/systemTabs/sysOverview.js"
+  },
+  {
+    "id": "sysOverView.zones.breached.subText",
+    "description": "Zone status subtext",
+    "defaultMessage": "{entityBreached} breached",
+    "filepath": "./src/containers/systemTabs/sysOverview.js"
+  },
+  {
+    "id": "sysOverView.zones.subText",
+    "description": "Zone status subtext",
+    "defaultMessage": "{subStatus} via Controller",
     "filepath": "./src/containers/systemTabs/sysOverview.js"
   },
   {
@@ -4238,6 +4903,12 @@
     "filepath": "./src/containers/tabs.js"
   },
   {
+    "id": "reports.tab.heading",
+    "description": "reports tab",
+    "defaultMessage": "REPORTS",
+    "filepath": "./src/containers/tabs.js"
+  },
+  {
     "id": "overviewStatus.tab.fulfilling",
     "description": "overview Status fulfilling orders",
     "defaultMessage": "Fulfilling orders",
@@ -4253,6 +4924,18 @@
     "id": "overviewStatus.tab.stop",
     "description": "overview Status emergency",
     "defaultMessage": "STOPPED",
+    "filepath": "./src/containers/tabs.js"
+  },
+  {
+    "id": "overviewStatus.tab.paused",
+    "description": "overview Status emergency",
+    "defaultMessage": "PAUSED",
+    "filepath": "./src/containers/tabs.js"
+  },
+  {
+    "id": "overviewStatus.tab.breached",
+    "description": "overview Status emergency",
+    "defaultMessage": "BREACHED",
     "filepath": "./src/containers/tabs.js"
   },
   {
@@ -4300,7 +4983,7 @@
   {
     "id": "operation.alert.triggeremergency",
     "description": "Text button to trigger emergency",
-    "defaultMessage": "Fire emergency triggered.Follow evacuation procedures immediately",
+    "defaultMessage": "Fire emergency triggered. Follow evacuation procedures immediately",
     "filepath": "./src/containers/tabs.js"
   },
   {
@@ -4326,7 +5009,7 @@
   },
   {
     "id": "auditdetail.completed.status",
-    "defaultMessage": "Completed",
+    "defaultMessage": "Audited",
     "filepath": "./src/containers/usersTab.js"
   },
   {
@@ -4651,6 +5334,36 @@
     "filepath": "./src/containers/userTab/userFilter.js"
   },
   {
+    "id": "gor.filter.filterLabel",
+    "description": "label for filter",
+    "defaultMessage": "Filter data",
+    "filepath": "./src/containers/userTab/userFilter.js"
+  },
+  {
+    "id": "gor.filter.hide",
+    "description": "label for hide",
+    "defaultMessage": "Hide",
+    "filepath": "./src/containers/userTab/userFilter.js"
+  },
+  {
+    "id": "gor.filter.noResult",
+    "description": "label for no result",
+    "defaultMessage": "No results found, please try again",
+    "filepath": "./src/containers/userTab/userFilter.js"
+  },
+  {
+    "id": "gor.filter.reset",
+    "description": "label for reset",
+    "defaultMessage": "Reset",
+    "filepath": "./src/containers/userTab/userFilter.js"
+  },
+  {
+    "id": "gor.filter.heading",
+    "description": "filter heading",
+    "defaultMessage": "Apply filter",
+    "filepath": "./src/containers/userTab/userFilter.js"
+  },
+  {
     "id": "users.roles.info.heading",
     "description": "Heading for roles description",
     "defaultMessage": "Role definitions",
@@ -4685,7 +5398,7 @@
   },
   {
     "id": "auditdetail.completed.status",
-    "defaultMessage": "Completed",
+    "defaultMessage": "Audited",
     "filepath": "./src/containers/userTab/usersTab.js"
   },
   {
@@ -4984,7 +5697,7 @@
   {
     "id": "pps.mode.success",
     "description": "PPS mode change success",
-    "defaultMessage": "Mode change request successfull",
+    "defaultMessage": "Mode change request successful",
     "filepath": "./src/utilities/getFormattedMessages.js"
   },
   {
