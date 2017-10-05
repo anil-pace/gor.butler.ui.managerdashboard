@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/notifications/RowDataLoader.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/components/notifications</a> RowDataLoader.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/37</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/6</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/11</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/37</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+const LOADING_ROW_REQUEST = <span class="cstat-no" title="statement not covered" >{title: "Loading... (requesting)"};</span>
+&nbsp;
+const NUMBER_OF_ROWS_MAX = <span class="cstat-no" title="statement not covered" >1000;</span>
+const NUMBER_OF_ROWS_PER_REQUEST = <span class="cstat-no" title="statement not covered" >5;</span>
+&nbsp;
+class RowDataLoader {
+<span class="fstat-no" title="function not covered" >  co</span>nstructor(onDataLoad,fetchAction) {
+<span class="cstat-no" title="statement not covered" >    this._onDataLoad = onDataLoad;</span>
+<span class="cstat-no" title="statement not covered" >    this._queue = [];</span>
+<span class="cstat-no" title="statement not covered" >    this._data = {};</span>
+<span class="cstat-no" title="statement not covered" >    this._fetchAction = fetchAction</span>
+  }
+  
+<span class="fstat-no" title="function not covered" >  ge</span>tRowData(rowIndex) {
+<span class="cstat-no" title="statement not covered" >    if (!this._data[rowIndex]) {</span>
+<span class="cstat-no" title="statement not covered" >      this._queueRequestFor(rowIndex);</span>
+<span class="cstat-no" title="statement not covered" >      this._data[rowIndex] = LOADING_ROW_REQUEST;</span>
+    }
+    
+<span class="cstat-no" title="statement not covered" >    return this._data[rowIndex];</span>
+  }
+  
+<span class="fstat-no" title="function not covered" >  cl</span>earRowData(rowIndex) {
+<span class="cstat-no" title="statement not covered" >    delete this._data[rowIndex];</span>
+<span class="cstat-no" title="statement not covered" >    this._onDataLoad();</span>
+  }
+  
+<span class="fstat-no" title="function not covered" >  _q</span>ueueRequestFor(rowIndex) {
+<span class="cstat-no" title="statement not covered" >    this._queue.push(rowIndex);</span>
+    
+<span class="cstat-no" title="statement not covered" >    if (!this._queueFlushID) {</span>
+<span class="cstat-no" title="statement not covered" >      this._queueFlushID = setTimeout(this._flushRequestQueue.bind(this), 0);</span>
+    }
+  }
+  
+<span class="fstat-no" title="function not covered" >  _f</span>lushRequestQueue() {
+    var sectionsToLoad = <span class="cstat-no" title="statement not covered" >this._queue.reduce(<span class="fstat-no" title="function not covered" >(r</span>equestSections, rowIndex) =&gt; {</span>
+      var rowBase = <span class="cstat-no" title="statement not covered" >rowIndex - (rowIndex % NUMBER_OF_ROWS_PER_REQUEST</span>);
+<span class="cstat-no" title="statement not covered" >      if (requestSections.indexOf(rowBase) === -1) {</span>
+<span class="cstat-no" title="statement not covered" >        return requestSections.concat(rowBase);</span>
+      }
+      
+<span class="cstat-no" title="statement not covered" >      return requestSections;</span>
+    }, []);
+    
+<span class="cstat-no" title="statement not covered" >    sectionsToLoad.forEach(<span class="fstat-no" title="function not covered" >ro</span>wBase =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      this._loadDataRange(</span>
+        rowBase,
+        Math.min(rowBase + NUMBER_OF_ROWS_PER_REQUEST, NUMBER_OF_ROWS_MAX)
+      );    
+    });
+    
+<span class="cstat-no" title="statement not covered" >    this._queue = [];</span>
+<span class="cstat-no" title="statement not covered" >    this._queueFlushID = null;</span>
+  }
+    
+<span class="fstat-no" title="function not covered" >  _l</span>oadDataRange(rowStart, rowEnd) {
+<span class="cstat-no" title="statement not covered" >    makeFancyFakeRequest(rowStart, rowEnd, <span class="fstat-no" title="function not covered" >(d</span>ata) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      Object.assign(this._data, data);</span>
+<span class="cstat-no" title="statement not covered" >      this._onDataLoad();</span>
+    });
+  }
+}
+function <span class="fstat-no" title="function not covered" >makeFancyFakeRequest(</span>rowStart, rowEnd, onLoad) {
+  var FAKE_REQUEST_TIMEOUT = <span class="cstat-no" title="statement not covered" >3000;</span>
+  var FakeRows = <span class="cstat-no" title="statement not covered" >[</span>
+    {selected: false, title: "Citizen Kane", rank: "1", year: "1941"},
+    {selected: false, title: "The Shawshank Redemption", rank: "2", year: "1995"},
+    {selected: false, title: "The Godfather", rank: "3", year: "1971"}
+  ];
+  
+<span class="cstat-no" title="statement not covered" >  console.log('Making request', rowStart, rowEnd);</span>
+  
+<span class="cstat-no" title="statement not covered" >  setTimeout(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+    var data = <span class="cstat-no" title="statement not covered" >{};</span>
+<span class="cstat-no" title="statement not covered" >    for (var i = rowStart; i &lt;= rowEnd; i++) {</span>
+<span class="cstat-no" title="statement not covered" >      data[i] = FakeRows[i % FakeRows.length];</span>
+    }
+<span class="cstat-no" title="statement not covered" >    onLoad(data);</span>
+  }, FAKE_REQUEST_TIMEOUT);
+}
+&nbsp;
+export default RowDataLoader ;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Oct 05 2017 15:02:03 GMT+0530 (IST)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

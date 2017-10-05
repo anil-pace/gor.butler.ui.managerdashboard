@@ -1,0 +1,1616 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/utilities/AjaxParser.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">src/utilities</a> AjaxParser.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/212</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/104</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/1</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/210</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+    receiveAuthData,
+    setLoginSpinner,
+    setTimeOffSetData
+} from "../actions/loginAction";
+import {recieveOrdersData} from "../actions/paginationAction";
+import {
+    recieveAuditData,
+    setAuditRefresh,
+    setAuditSpinner,
+    setPendingAuditLines,
+    auditValidatedAttributes
+} from "../actions/auditActions";
+import {assignRole, recieveConfigurations} from "../actions/userActions";
+import {
+    recieveHeaderInfo,
+    recieveShiftStartTime
+} from "../actions/headerAction";
+import {getPPSAudit} from "../actions/auditActions";
+import {codeToString} from "./codeToString";
+import {setOrderListSpinner} from "../actions/orderListActions";
+import {
+	notifySuccess,
+	notifyFail,
+	validateID,
+	notifyDelete,
+	validatePassword,
+	loginError,
+	validateSKU,
+	validateSKUcodeSpinner,
+	modalStatus,
+	getSafetyList,
+	getSafetyErrorList,
+	getErrorBotList
+} from "../actions/validationActions";
+import {
+    ERROR,
+    AUTH_LOGIN,
+    ADD_USER,
+    RECIEVE_TIME_OFFSET,
+    CHECK_ID,
+    DELETE_USER,
+    GET_ROLES,
+    ORDERS_RETRIEVE,
+    PPS_MODE_CHANGE,
+    EDIT_USER,
+    RECIEVE_HEADER,
+    SUCCESS,
+    CREATE_AUDIT,
+    AUDIT_RETRIEVE,
+    GET_PPSLIST,
+    START_AUDIT,
+    DELETE_AUDIT,
+    AUDIT_RESOLVE_LINES,
+    AUDIT_RESOLVE_CONFIRMED,
+    VALIDATE_SKU_ID,
+    PAUSE_OPERATION,
+    RESUME_OPERATION,
+    CONFIRM_SAFETY,
+    CHECK_SAFETY,
+    RECEIVE_SHIFT_START_TIME,
+    ITEM_RECALLED,
+    GR_REPORT_RESPONSE,
+    INVENTORY_REPORT_RESPONSE,
+    ITEM_RECALLED_DATA,
+    MASTER_FILE_UPLOAD,
+    GET_MAX_FILE_SIZE,
+    GET_CONFIGS,
+    CANCEL_AUDIT,
+    DOWNLOAD_STOCK_LEDGER_REPORT,
+    DOWNLOAD_STOCK_LEDGER_RAW_TRANSACTIONS_REPORT,
+    UPLOAD_HISTORY,
+    REPORTS_HISTORY,
+    GRN_HISTORY,
+    PPS_STATUS_CHANGE,
+    GET_PENDING_MSU,
+    SEARCHED_NOTIFICATIONS_DATA,
+    SEND_READ_INTIMATION,
+    GET_ALL_NOTIFICATIONS,
+    SEARCHED_NOTIFICATIONS_DATA_ALL,
+    FETCH_PPS_PROFILES,
+    FETCH_TAGS,
+    FETCH_PROFILE_FOR_PPS,
+    CREATE_NEW_PROFILE,
+    SAVE_PPS_PROFILE,
+    ADD_TAG_TO_LIST,CHANGE_PPS_PROFILE,
+    OPERATION_LOG_FETCH,REPORTS_FETCH,GET_REPORT,
+    DOWNLOAD_REPORT_REQUEST
+} from "../constants/frontEndConstants";
+import {BUTLER_UI, CODE_E027} from "../constants/backEndConstants";
+import {
+    UE002,
+    E028,
+    E029,
+    MODE_REQUESTED,
+    TYPE_SUCCESS,
+    AS001,
+    AS00A,
+    WRONG_CRED,
+    ES,
+    g020,
+    g021,
+    g023,
+    g024,
+    REQUEST_REPORT_SUCCESS,
+    REQUEST_REPORT_FAILURE,
+    INVALID_SKUID
+} from "../constants/messageConstants";
+import {ShowError} from "./showError";
+import {endSession} from "./endSession";
+import {
+    setResolveAuditSpinner,
+    setSafetySpinner,
+    setInventoryReportSpinner,
+    setStockLedgerSpinner,
+    setStockLedgerRawTransactionsSpinner
+} from "../actions/spinnerAction";
+import {statusToString} from "./statusToString";
+import {
+    validateInvoiceID,
+    uploadMasterDataProcessing,
+    uploadMasterDataSuccess,
+    uploadMasterDataHistory,
+    updateMaxFileSize,
+    validateStockLedgerSKU,
+    uploadReportHistory,
+    uploadGRNHistory
+} from "../actions/utilityActions";
+import {
+    recievePendingMSU,
+    resetCheckedPPSList
+} from "../actions/ppsModeChangeAction";
+import {getFormattedMessages} from "../utilities/getFormattedMessages";
+import {
+    recieveNotificationData,
+    notificationReadIntimation,
+    recieveAllNotifications,
+    recieveAllSearchedNotifications
+} from "../actions/notificationAction";
+import {
+    receivePPSProfiles,
+    receiveTags,
+    selectPPSProfileForConfiguration,
+    profileCreated,
+    savedPPSProfile,
+    tagAddedToList,
+    setPPSConfigurationSpinner,profileRequested
+} from './../actions/ppsConfigurationActions';
+&nbsp;
+import {recieveOLData} from './../actions/operationsLogsActions';
+import {recieveReportsData} from './../actions/downloadReportsActions'
+&nbsp;
+export function AjaxParse(store, res, cause, status, saltParams) {<span class="fstat-no" title="function not covered" ></span>
+    let stringInfo = <span class="cstat-no" title="statement not covered" >{};</span>
+<span class="cstat-no" title="statement not covered" >    switch (cause) {</span>
+        case AUTH_LOGIN:
+<span class="cstat-no" title="statement not covered" >            if (res.auth_token) {</span>
+<span class="cstat-no" title="statement not covered" >                store.dispatch(receiveAuthData(res));</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >                store.dispatch(loginError(WRONG_CRED));</span>
+            }
+<span class="cstat-no" title="statement not covered" >            store.dispatch(setLoginSpinner(false));</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case ORDERS_RETRIEVE:
+<span class="cstat-no" title="statement not covered" >            store.dispatch(recieveOrdersData(res));</span>
+<span class="cstat-no" title="statement not covered" >            store.dispatch(setOrderListSpinner(false));</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case AUDIT_RETRIEVE:
+<span class="cstat-no" title="statement not covered" >            store.dispatch(recieveAuditData(res));</span>
+<span class="cstat-no" title="statement not covered" >            store.dispatch(setAuditSpinner(false));</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case GET_ROLES:
+            let rolesArr = <span class="cstat-no" title="statement not covered" >[];</span>
+<span class="cstat-no" title="statement not covered" >            if (res.roles) {</span>
+<span class="cstat-no" title="statement not covered" >                rolesArr = res.roles;</span>
+            }
+<span class="cstat-no" title="statement not covered" >            store.dispatch(assignRole(rolesArr));</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case CHECK_ID:
+            let idExist;
+<span class="cstat-no" title="statement not covered" >            if (res.users.length) {</span>
+<span class="cstat-no" title="statement not covered" >                idExist = {</span>
+                    type: ERROR,
+                    msg: UE002
+                };
+            } else {
+<span class="cstat-no" title="statement not covered" >                idExist = {</span>
+                    type: SUCCESS,
+                    msg: TYPE_SUCCESS
+                };
+            }
+<span class="cstat-no" title="statement not covered" >            store.dispatch(validateID(idExist));</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case PPS_MODE_CHANGE:
+            var successCount = <span class="cstat-no" title="statement not covered" >res.successful.length,</span>
+                unsuccessfulCoun<span class="cstat-no" title="statement not covered" >t = Object.keys(res.unsuccessful).len</span>gth,
+                value<span class="cstat-no" title="statement not covered" >s = {</span>
+                    unsuccessful: unsuccessfulCount,
+                    totalCount: successCount + unsuccessfulCount
+                },
+                msg = getFormattedMessages("<span class="cstat-no" title="statement not covered" >mode", values);</span>
+<span class="cstat-no" title="statement not covered" >            store.dispatch(notifySuccess(msg));</span>
+<span class="cstat-no" title="statement not covered" >            store.dispatch(resetCheckedPPSList(res.successful));</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case ADD_USER:
+        case DELETE_USER:
+        case EDIT_USER:
+<span class="cstat-no" title="statement not covered" >            stringInfo = codeToString(res.alert_data[0]);</span>
+<span class="cstat-no" title="statement not covered" >            if (stringInfo.type) {</span>
+<span class="cstat-no" title="statement not covered" >                store.dispatch(notifySuccess(stringInfo.msg));</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >                store.dispatch(notifyFail(stringInfo.msg));</span>
+            }
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case CREATE_AUDIT:
+<span class="cstat-no" title="statement not covered" >            if (res.alert_data) {</span>
+<span class="cstat-no" title="statement not covered" >                if (res.alert_data[0].code === CODE_E027) {</span>
+                    var skuInfo = <span class="cstat-no" title="statement not covered" >{type: ERROR, msg: INVALID_SKUID};</span>
+<span class="cstat-no" title="statement not covered" >                    store.dispatch(validateSKU(skuInfo));</span>
+                } else {
+<span class="cstat-no" title="statement not covered" >                    stringInfo = codeToString(res.alert_data[0]);</span>
+<span class="cstat-no" title="statement not covered" >                    store.dispatch(notifyFail(stringInfo.msg));</span>
+<span class="cstat-no" title="statement not covered" >                    store.dispatch(setAuditRefresh(false)); //reset refresh flag</span>
+                }
+            } else {
+<span class="cstat-no" title="statement not covered" >                store.dispatch(notifySuccess(AS001));</span>
+<span class="cstat-no" title="statement not covered" >                store.dispatch(setAuditRefresh(true)); //set refresh flag</span>
+            }
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case DELETE_AUDIT:
+<span class="cstat-no" title="statement not covered" >            stringInfo = codeToString(res.alert_data[0]);</span>
+<span class="cstat-no" title="statement not covered" >            if (stringInfo.type) {</span>
+<span class="cstat-no" title="statement not covered" >                store.dispatch(notifyDelete(stringInfo.msg));</span>
+<span class="cstat-no" title="statement not covered" >                store.dispatch(setAuditRefresh(true)); //set refresh flag</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >                store.dispatch(notifyFail(stringInfo.msg));</span>
+<span class="cstat-no" title="statement not covered" >                store.dispatch(setAuditRefresh(false)); //reset refresh flag</span>
+            }
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case CANCEL_AUDIT:
+<span class="cstat-no" title="statement not covered" >            if (res.alert_data &amp;&amp; res.alert_data.length &gt; 0) {</span>
+                //ERROR
+<span class="cstat-no" title="statement not covered" >                switch (res.alert_data[0].code) {</span>
+                    case "g020":
+<span class="cstat-no" title="statement not covered" >                        store.dispatch(notifySuccess(g020));</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+&nbsp;
+                    case "g021":
+<span class="cstat-no" title="statement not covered" >                        store.dispatch(notifySuccess(g021));</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+&nbsp;
+                    case "g023":
+<span class="cstat-no" title="statement not covered" >                        store.dispatch(notifySuccess(g023));</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+&nbsp;
+                    case "g024":
+<span class="cstat-no" title="statement not covered" >                        store.dispatch(notifySuccess(g024));</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+&nbsp;
+                    default:
+<span class="cstat-no" title="statement not covered" >                        store.dispatch(</span>
+                            notifySuccess(res.alert_data[0].description)
+                        );
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+                }
+            } else {
+                //SUCCESS
+<span class="cstat-no" title="statement not covered" >                store.dispatch(notifySuccess(res.data));</span>
+            }
+<span class="cstat-no" title="statement not covered" >            store.dispatch(setAuditSpinner(false));</span>
+<span class="cstat-no" title="statement not covered" >            store.dispatch(setAuditRefresh(true));</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case GET_PPSLIST:
+            let auditpps = <span class="cstat-no" title="statement not covered" >[];</span>
+<span class="cstat-no" title="statement not covered" >            if (res.data.audit) {</span>
+<span class="cstat-no" title="statement not covered" >                auditpps = res.data.audit;</span>
+            }
+<span class="cstat-no" title="statement not covered" >            store.dispatch(getPPSAudit(auditpps));</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case START_AUDIT:
+<span class="cstat-no" title="statement not covered" >            if (res.successful.length) {</span>
+<span class="cstat-no" title="statement not covered" >                store.dispatch(notifySuccess(AS00A));</span>
+<span class="cstat-no" title="statement not covered" >                store.dispatch(setAuditRefresh(true)); //set refresh flag</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >                stringInfo = codeToString(res.unsuccessful[0].alert_data[0]);</span>
+<span class="cstat-no" title="statement not covered" >                store.dispatch(notifyFail(stringInfo.msg));</span>
+<span class="cstat-no" title="statement not covered" >                store.dispatch(setAuditRefresh(false)); //reset refresh flag</span>
+            }
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case RECIEVE_HEADER:
+<span class="cstat-no" title="statement not covered" >            if (res.users[0].roles[0] == BUTLER_UI) {</span>
+                endSession(store);
+            }
+<span class="cstat-no" title="statement not covered" >            store.dispatch(recieveHeaderInfo(res));</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case RECEIVE_SHIFT_START_TIME:
+<span class="cstat-no" title="statement not covered" >            store.dispatch(recieveShiftStartTime(res));</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case RECIEVE_TIME_OFFSET:
+<span class="cstat-no" title="statement not covered" >            store.dispatch(setTimeOffSetData(res));</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+&nbsp;
+        case AUDIT_RESOLVE_LINES:
+<span class="cstat-no" title="statement not covered" >            store.dispatch(setResolveAuditSpinner(false));</span>
+<span class="cstat-no" title="statement not covered" >            store.dispatch(setPendingAuditLines(res));</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+&nbsp;
+        case AUDIT_RESOLVE_CONFIRMED:
+<span class="cstat-no" title="statement not covered" >            if (res.successful.status) {</span>
+<span class="cstat-no" title="statement not covered" >                stringInfo = statusToString(res.successful);</span>
+<span class="cstat-no" title="statement not covered" >                store.dispatch(notifySuccess(stringInfo.msg));</span>
+            } else {
+                ShowError(store, cause, status);
+            }
+<span class="cstat-no" title="statement not covered" >            break;</span>
+&nbsp;
+        case VALIDATE_SKU_ID:
+<span class="cstat-no" title="statement not covered" >            if (res.sku &amp;&amp; res.audit_attributes_values) {</span>
+<span class="cstat-no" title="statement not covered" >                store.dispatch(auditValidatedAttributes(res));</span>
+            }
+<span class="cstat-no" title="statement not covered" >            store.dispatch(validateSKUcodeSpinner(false));</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+&nbsp;
+		case PAUSE_OPERATION:
+			var pausePwd;
+			if (!res.<span class="cstat-no" title="statement not covered" >auth_token) {</span>
+				pausePwd = {<span class="cstat-no" title="statement not covered" ></span>
+					type: ERROR,
+					msg: UE002
+				};
+			} else {
+				pausePwd = {<span class="cstat-no" title="statement not covered" ></span>
+					type: SUCCESS,
+					msg: TYPE_SUCCESS
+				};
+				//hit next api
+				store.dispat<span class="cstat-no" title="statement not covered" >ch(modalStatus(true));</span>
+			}
+			store.dis<span class="cstat-no" title="statement not covered" >patch(validatePassword(pausePwd));</span>
+			break;<span class="cstat-no" title="statement not covered" ></span>
+		case RESUME_OPERATION:
+			var resumePwd;
+			if (!res.<span class="cstat-no" title="statement not covered" >auth_token) {</span>
+				resumePwd = <span class="cstat-no" title="statement not covered" >{</span>
+					type: ERROR,
+					msg: UE002
+				};
+			} else {
+				resumePwd = <span class="cstat-no" title="statement not covered" >{</span>
+					type: SUCCESS,
+					msg: TYPE_SUCCESS
+				};
+				//hit next api
+				store.dispat<span class="cstat-no" title="statement not covered" >ch(modalStatus(true));</span>
+			}
+			store.dis<span class="cstat-no" title="statement not covered" >patch(validatePassword(resumePwd));</span>
+			break;<span class="cstat-no" title="statement not covered" ></span>
+		case CHECK_SAFETY:
+			store.dis<span class="cstat-no" title="statement not covered" >patch(getSafetyList(res || {}));</span>
+			break;<span class="cstat-no" title="statement not covered" ></span>
+		case CONFIRM_SAFETY:
+			var rejectList = [],botErr<span class="cstat-no" title="statement not covered" >orL</span>ist=[],<span class="cstat-no" title="statement not covered" ></span>
+				rejectResponse = res,<span class="cstat-no" title="statement not covered" ></span>
+				modalFlag = true;<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+			 if(rejec<span class="cstat-no" title="statement not covered" >tResponse.successful){</span>
+				if(!rejectRe<span class="cstat-no" title="statement not covered" >sponse.emergency_end_time)</span>
+				{
+				store.dispatch(n<span class="cstat-no" title="statement not covered" >otifySuccess(ES));</span>
+				  }
+			}
+			else if (<span class="cstat-no" title="statement not covered" >rejectResponse.alert_data) {</span>
+&nbsp;
+				if(rejectRes<span class="cstat-no" title="statement not covered" >ponse.alert_data[0].details[0])</span>
+				{
+				rejectList = rej<span class="cstat-no" title="statement not covered" >ectResponse.alert_data[0].details[0].failed_validations;</span>
+				botErrorList=rej<span class="cstat-no" title="statement not covered" >ectResponse.alert_data[0].details[0].displaced_bots||[];</span>
+				modalFlag = fals<span class="cstat-no" title="statement not covered" >e;</span>
+				}
+				else
+				{
+				stringInfo = cod<span class="cstat-no" title="statement not covered" >eToString(res.alert_data[0]);</span>
+				store.dispatch(n<span class="cstat-no" title="statement not covered" >otifyFail(stringInfo.msg));</span>
+				}
+			}
+			store.dis<span class="cstat-no" title="statement not covered" >patch(modalStatus(modalFlag));</span>
+			store.dis<span class="cstat-no" title="statement not covered" >patch(setSafetySpinner(false));</span>
+			store.dis<span class="cstat-no" title="statement not covered" >patch(getErrorBotList(botErrorList));</span>
+			store.dis<span class="cstat-no" title="statement not covered" >patch(getSafetyErrorList(rejectList));</span>
+			break;<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+        case ITEM_RECALLED:
+<span class="cstat-no" title="statement not covered" >            res.status = ITEM_RECALLED_DATA;</span>
+<span class="cstat-no" title="statement not covered" >            stringInfo = statusToString(res);</span>
+<span class="cstat-no" title="statement not covered" >            store.dispatch(notifySuccess(stringInfo.msg));</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+&nbsp;
+        case GR_REPORT_RESPONSE:
+<span class="cstat-no" title="statement not covered" >            store.dispatch(setInventoryReportSpinner(false));</span>
+<span class="cstat-no" title="statement not covered" >            store.dispatch(validateInvoiceID(res));</span>
+<span class="cstat-no" title="statement not covered" >            store.dispatch(notifySuccess(getFormattedMessages("grnGenerated", res.data)));</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case INVENTORY_REPORT_RESPONSE:
+<span class="cstat-no" title="statement not covered" >            store.dispatch(setInventoryReportSpinner(false));</span>
+<span class="cstat-no" title="statement not covered" >            store.dispatch(validateInvoiceID(res));</span>
+<span class="cstat-no" title="statement not covered" >            store.dispatch(notifySuccess(getFormattedMessages("invntryRptGenerated", res.data)));</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case DOWNLOAD_STOCK_LEDGER_REPORT:
+<span class="cstat-no" title="statement not covered" >            store.dispatch(setStockLedgerSpinner(false));</span>
+<span class="cstat-no" title="statement not covered" >            store.dispatch(validateStockLedgerSKU(res));</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case DOWNLOAD_STOCK_LEDGER_RAW_TRANSACTIONS_REPORT:
+<span class="cstat-no" title="statement not covered" >            store.dispatch(setStockLedgerRawTransactionsSpinner(false));</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case MASTER_FILE_UPLOAD:
+<span class="cstat-no" title="statement not covered" >            store.dispatch(uploadMasterDataProcessing(false));</span>
+<span class="cstat-no" title="statement not covered" >            store.dispatch(uploadMasterDataSuccess(res));</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case UPLOAD_HISTORY:
+<span class="cstat-no" title="statement not covered" >            store.dispatch(uploadMasterDataHistory(res));</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case REPORTS_HISTORY:
+<span class="cstat-no" title="statement not covered" >            store.dispatch(uploadReportHistory(res));</span>
+<span class="cstat-no" title="statement not covered" >            store.dispatch(notifySuccess(getFormattedMessages("reprtsRefreshed", res.data)));</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case GRN_HISTORY:
+<span class="cstat-no" title="statement not covered" >            store.dispatch(uploadGRNHistory(res));</span>
+<span class="cstat-no" title="statement not covered" >            store.dispatch(notifySuccess(getFormattedMessages("grnRefreshed", res.data)));</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case GET_MAX_FILE_SIZE:
+<span class="cstat-no" title="statement not covered" >            store.dispatch(updateMaxFileSize(res));</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+&nbsp;
+        case GET_CONFIGS:
+<span class="cstat-no" title="statement not covered" >            store.dispatch(recieveConfigurations(res));</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case PPS_STATUS_CHANGE:
+            var successCount = <span class="cstat-no" title="statement not covered" >res.successful.length,</span>
+                unsuccessfulCoun<span class="cstat-no" title="statement not covered" >t = Object.keys(res.unsuccessful).len</span>gth,
+                value<span class="cstat-no" title="statement not covered" >s = {</span>
+                    unsuccessful: unsuccessfulCount,
+                    totalCount: successCount + unsuccessfulCount
+                },
+                msg = getFormattedMessages("<span class="cstat-no" title="statement not covered" >status", values);</span>
+<span class="cstat-no" title="statement not covered" >            store.dispatch(notifySuccess(msg));</span>
+<span class="cstat-no" title="statement not covered" >            store.dispatch(resetCheckedPPSList(res.successful));</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case GET_PENDING_MSU:
+<span class="cstat-no" title="statement not covered" >            store.dispatch(recievePendingMSU(res));</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case SEARCHED_NOTIFICATIONS_DATA:
+<span class="cstat-no" title="statement not covered" >            store.dispatch(recieveNotificationData(res));</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case SEND_READ_INTIMATION:
+<span class="cstat-no" title="statement not covered" >            store.dispatch(notificationReadIntimation(true));</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case GET_ALL_NOTIFICATIONS:
+<span class="cstat-no" title="statement not covered" >            store.dispatch(recieveAllNotifications(res, saltParams));</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case SEARCHED_NOTIFICATIONS_DATA_ALL:
+<span class="cstat-no" title="statement not covered" >            store.dispatch(recieveAllSearchedNotifications(res));</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case FETCH_PPS_PROFILES:
+<span class="cstat-no" title="statement not covered" >            store.dispatch(setPPSConfigurationSpinner(false))</span>
+<span class="cstat-no" title="statement not covered" >            store.dispatch(receivePPSProfiles(res))</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+&nbsp;
+        case FETCH_PROFILE_FOR_PPS:
+<span class="cstat-no" title="statement not covered" >            store.dispatch(setPPSConfigurationSpinner(false))</span>
+<span class="cstat-no" title="statement not covered" >            store.dispatch(selectPPSProfileForConfiguration(res))</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case FETCH_TAGS:
+<span class="cstat-no" title="statement not covered" >            store.dispatch(setPPSConfigurationSpinner(false))</span>
+<span class="cstat-no" title="statement not covered" >            store.dispatch(receiveTags(res))</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case CREATE_NEW_PROFILE:
+<span class="cstat-no" title="statement not covered" >            store.dispatch(setPPSConfigurationSpinner(false))</span>
+<span class="cstat-no" title="statement not covered" >            store.dispatch(profileCreated(res))</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+&nbsp;
+        case SAVE_PPS_PROFILE:
+<span class="cstat-no" title="statement not covered" >            store.dispatch(setPPSConfigurationSpinner(false))</span>
+<span class="cstat-no" title="statement not covered" >            store.dispatch(profileRequested(res))</span>
+<span class="cstat-no" title="statement not covered" >            store.dispatch(savedPPSProfile(res))</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+&nbsp;
+        case ADD_TAG_TO_LIST:
+<span class="cstat-no" title="statement not covered" >            store.dispatch(setPPSConfigurationSpinner(false))</span>
+<span class="cstat-no" title="statement not covered" >            store.dispatch(tagAddedToList(res))</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+&nbsp;
+        case CHANGE_PPS_PROFILE:
+            /**
+             * Do nothing as the websocket
+             * will update the UI
+             * We just need to hide the modal
+             */
+<span class="cstat-no" title="statement not covered" >            store.dispatch(profileRequested(res))</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case OPERATION_LOG_FETCH:
+<span class="cstat-no" title="statement not covered" >            store.dispatch(recieveOLData(res.hits.hits))</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case REPORTS_FETCH:
+<span class="cstat-no" title="statement not covered" >            store.dispatch(recieveReportsData(res))</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case GET_REPORT:
+<span class="cstat-no" title="statement not covered" >            store.dispatch(recieveReportsData(res))</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case DOWNLOAD_REPORT_REQUEST:
+<span class="cstat-no" title="statement not covered" >            store.dispatch(notifySuccess(REQUEST_REPORT_SUCCESS));</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        default:
+            ShowError(store, cause, status);
+<span class="cstat-no" title="statement not covered" >            break;</span>
+    }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Oct 05 2017 15:02:03 GMT+0530 (IST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

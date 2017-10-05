@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/containers/performanceWidget.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">src/containers</a> performanceWidget.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/80</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/60</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/8</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/72</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React  from 'react';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+import Health from '../components/health/healthTabs.js';
+import Dropdown from '../components/dropdown/dropdown.js';
+import ChartHorizontal from '../components/graphd3/graph_horizontal';
+import { connect } from 'react-redux';
+import {renderPerformanceWidget} from '../actions/performanceWidgetActions';
+import { FormattedMessage } from 'react-intl';
+import {GOR_ORDER_PICKED, GOR_ITEMS_PUT, GOR_ITEMS_AUDITED, PICK_PPS_PERFORMANCE, PUT_PPS_PERFORMANCE, AUDIT_PPS_PERFORMANCE} from '../constants/frontEndConstants';
+import { defineMessages } from 'react-intl';
+&nbsp;
+const messages=defineMessages({<span class="cstat-no" title="statement not covered" ></span>
+	performanceParam: {
+		id: 'performanceParam.graph',
+		description: 'Performance param graph',
+		defaultMessage: "items/hr",
+	}
+});
+&nbsp;
+function <span class="fstat-no" title="function not covered" >_getPPSdata(</span>link) {
+	
+	let Component=&lt;FormattedMessage id="health<span class="cstat-no" title="statement not covered" >.pps" description="pps health" </span>
+	defaultMessage="PPS"/&gt;
+	let ppsOn=0,<span class="cstat-no" title="statement not covered" > p</span>psOff=0, <span class="cstat-no" title="statement not covered" >pp</span>sTotal=0;<span class="cstat-no" title="statement not covered" ></span>
+	var pps_data=[<span class="cstat-no" title="statement not covered" ></span>
+	{ component:{componentNumber: ppsTotal, componentType: Component}, states:{offState: ppsOff, onState: ppsOn} }
+	]
+<span class="cstat-no" title="statement not covered" >	if(link.ppsPerformance) {</span>
+<span class="cstat-no" title="statement not covered" >		link=link.ppsPerformance.aggregate_data;</span>
+<span class="cstat-no" title="statement not covered" >		if(link !== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >			for (var i=link.length - 1; i &gt;= 0; i--) {</span>
+<span class="cstat-no" title="statement not covered" >				if(link[i].active=== false) {</span>
+<span class="cstat-no" title="statement not covered" >					ppsOff++;</span>
+				}
+&nbsp;
+				else {
+<span class="cstat-no" title="statement not covered" >					ppsOn++;</span>
+				}
+			}
+		}
+<span class="cstat-no" title="statement not covered" >		ppsTotal=ppsOn + ppsOff;</span>
+<span class="cstat-no" title="statement not covered" >		pps_data=[</span>
+		{ component:{componentNumber: ppsTotal, componentType: Component}, states:{offState: ppsOff, onState: ppsOn} }
+		]
+	}
+<span class="cstat-no" title="statement not covered" >	return pps_data;</span>
+} 
+&nbsp;
+&nbsp;
+function <span class="fstat-no" title="function not covered" >_getButlerdata(</span>link) {
+&nbsp;
+	let Component=&lt;FormattedMessage id="health<span class="cstat-no" title="statement not covered" >.Butler" description="Butler bots health" </span>
+	defaultMessage="Butler bots"/&gt;
+	let butlerTotal=0,<span class="cstat-no" title="statement not covered" > b</span>utlerOn=0, <span class="cstat-no" title="statement not covered" >bu</span>tlerOff=0;      <span class="cstat-no" title="statement not covered" ></span>
+	var butler_data=[<span class="cstat-no" title="statement not covered" ></span>
+	{ component:{componentNumber: butlerTotal, componentType: Component}, states:{offState: butlerOff, onState: butlerOn} }
+	]      
+&nbsp;
+<span class="cstat-no" title="statement not covered" >	if(link.butlersData) {</span>
+<span class="cstat-no" title="statement not covered" >		if(link.butlersData.active !== undefined &amp;&amp; link.butlersData.inactive !== null) {</span>
+<span class="cstat-no" title="statement not covered" >			butlerOn=link.butlersData.active;</span>
+		}
+		
+<span class="cstat-no" title="statement not covered" >		if(link.butlersData.active !== undefined &amp;&amp; link.butlersData.inactive !== null) {</span>
+<span class="cstat-no" title="statement not covered" >			butlerOff=link.butlersData.inactive;</span>
+		}
+<span class="cstat-no" title="statement not covered" >		butlerTotal=butlerOn + butlerOff;</span>
+<span class="cstat-no" title="statement not covered" >		butler_data=[</span>
+		{ component:{componentNumber: butlerTotal, componentType: Component}, states:{offState: butlerOff , onState: butlerOn} }
+		]
+	}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >	return butler_data;</span>
+} 
+&nbsp;
+function <span class="fstat-no" title="function not covered" >_getChargingdata(</span>link) {
+	let Component=&lt;FormattedMessage id="health<span class="cstat-no" title="statement not covered" >.ChargingStation" description="Charging Stations health" </span>
+	defaultMessage="Charging Stations"/&gt;
+&nbsp;
+	let connected=0,<span class="cstat-no" title="statement not covered" > d</span>isconnected=0, <span class="cstat-no" title="statement not covered" >to</span>talChargers=0;      <span class="cstat-no" title="statement not covered" ></span>
+	
+	var charging_data=[<span class="cstat-no" title="statement not covered" ></span>
+	{ component:{componentNumber: totalChargers, componentType: Component}, states:{offState: disconnected , onState: connected} }
+	]
+<span class="cstat-no" title="statement not covered" >	if(link.chargersData) {</span>
+<span class="cstat-no" title="statement not covered" >		if(link.chargersData.Connected !== undefined &amp;&amp; link.chargersData.Connected !== null) {</span>
+<span class="cstat-no" title="statement not covered" >			connected=link.chargersData.Connected;</span>
+		}
+		
+<span class="cstat-no" title="statement not covered" >		if(link.chargersData.Disconnected !== undefined &amp;&amp; link.chargersData.Disconnected !== null) {</span>
+<span class="cstat-no" title="statement not covered" >			disconnected=link.chargersData.Disconnected;</span>
+		}
+<span class="cstat-no" title="statement not covered" >		totalChargers=connected + disconnected;</span>
+<span class="cstat-no" title="statement not covered" >		charging_data=[</span>
+		{ component:{componentNumber: totalChargers, componentType: Component}, states:{offState: disconnected , onState: connected} }
+		]
+	}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >	return charging_data;</span>
+} 
+&nbsp;
+class PerformanceWidget extends React.Component{
+&nbsp;
+&nbsp;
+<span class="fstat-no" title="function not covered" >	co</span>mponentWillReceiveProps(nextProps){
+<span class="cstat-no" title="statement not covered" >		this.setState({renderState: nextProps.widget})</span>
+	}
+&nbsp;
+<span class="fstat-no" title="function not covered" >	re</span>nder(){
+		let systemHealth=&lt;FormattedMessage id="system<span class="cstat-no" title="statement not covered" >Health.dropdown" description="systemHealth dropdown label" </span>
+		defaultMessage="System Health"/&gt;
+&nbsp;
+		let pickPerformance=&lt;FormattedMessage id="PPSpic<span class="cstat-no" title="statement not covered" >kPerformance.dropdown" description="PPSpickPerformance dropdown label" </span>
+		defaultMessage="PPS Pick Performance"/&gt;
+&nbsp;
+		let putPerformance=&lt;FormattedMessage id="PPSput<span class="cstat-no" title="statement not covered" >Performance.dropdown" description="PPSputPerformance dropdown label" </span>
+		defaultMessage="PPS Put Performance"/&gt;
+&nbsp;
+		let auditPerformance=&lt;FormattedMessage id="PPSaud<span class="cstat-no" title="statement not covered" >itPerformance.dropdown" description="PPSauditPerformance dropdown label" </span>
+		defaultMessage="PPS Audit Performance"/&gt;      
+&nbsp;
+		const item=[<span class="cstat-no" title="statement not covered" ></span>
+		{ value: 'RENDER_SYSTEM_HEALTH', label: systemHealth },
+		{ value: 'PICK_PPS_PERFORMANCE', label: pickPerformance },
+		{ value: 'PUT_PPS_PERFORMANCE', label: putPerformance },
+		{ value: 'AUDIT_PPS_PERFORMANCE', label: auditPerformance }
+		]
+		var currentState=it<span class="cstat-no" title="statement not covered" >em[0], i</span>ndex=0;<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >		if(this.props.widget !== undefined || this.props.widget !== null) {</span>
+<span class="cstat-no" title="statement not covered" >			for (var i=0; i &lt; item.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >				if(item[i].value=== this.props.widget) {</span>
+<span class="cstat-no" title="statement not covered" >					index=i;</span>
+				}
+			}
+		}
+		var link=th<span class="cstat-no" title="statement not covered" >is;</span>
+		var pps_data=_g<span class="cstat-no" title="statement not covered" >etPPSdata(this.props.ppsPerformance);</span>
+		var butler_data=_g<span class="cstat-no" title="statement not covered" >etButlerdata(this.props.butlersData);</span>
+		var charging_data=_g<span class="cstat-no" title="statement not covered" >etChargingdata(this.props.chargersData);</span>
+		
+		var itemRender;	
+&nbsp;
+		var noData=&lt;FormattedMessage id="health<span class="cstat-no" title="statement not covered" >.noData" description="pps graph nodata" defaultMessage="No Data"/&gt;</span>
+<span class="cstat-no" title="statement not covered" >		if(this.props.widget=== PICK_PPS_PERFORMANCE){</span>
+<span class="cstat-no" title="statement not covered" >			if(this.props.ppsPerformance.ppsPerformance !== undefined &amp;&amp; this.props.ppsPerformance.ppsPerformance.aggregate_data !== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >				itemRender=&lt;ChartHorizontal data={this.props.ppsPerformance} type={GOR_ORDER_PICKED} performanceParam={this.context.intl.formatMessage(messages.performanceParam)}/&gt;</span>
+			}
+&nbsp;
+			else {
+<span class="cstat-no" title="statement not covered" >				itemRender=&lt;div className="gor-performance-noData"&gt; {noData} &lt;/div&gt; ;</span>
+			}
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		else if(this.props.widget=== PUT_PPS_PERFORMANCE){</span>
+			
+<span class="cstat-no" title="statement not covered" >			if(this.props.ppsPerformance.ppsPerformance !== undefined &amp;&amp; this.props.ppsPerformance.ppsPerformance.aggregate_data !== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >				itemRender=&lt;ChartHorizontal data={this.props.ppsPerformance} type={GOR_ITEMS_PUT} performanceParam={this.context.intl.formatMessage(messages.performanceParam)}/&gt;</span>
+			}
+&nbsp;
+			else {
+<span class="cstat-no" title="statement not covered" >				itemRender=&lt;div className="gor-performance-noData"&gt; {noData} &lt;/div&gt; ;</span>
+			}
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		else if(this.props.widget=== AUDIT_PPS_PERFORMANCE){</span>
+<span class="cstat-no" title="statement not covered" >			if(this.props.ppsPerformance.ppsPerformance !== undefined &amp;&amp; this.props.ppsPerformance.ppsPerformance.aggregate_data !== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >				itemRender=&lt;ChartHorizontal data={this.props.ppsPerformance} type={GOR_ITEMS_AUDITED} performanceParam={this.context.intl.formatMessage(messages.performanceParam)}/&gt;</span>
+			}
+&nbsp;
+			else {
+<span class="cstat-no" title="statement not covered" >				itemRender=&lt;div className="gor-performance-noData"&gt; {noData} &lt;/div&gt; ;</span>
+			}
+&nbsp;
+		}
+		else {
+<span class="cstat-no" title="statement not covered" >			itemRender=&lt;Health ppsData={pps_data} butlerData={butler_data} chargingData={charging_data}/&gt;</span>
+		}
+		
+<span class="cstat-no" title="statement not covered" >		return (</span>
+		        &lt;div className="gorPerformanceWidget"&gt;
+		        &lt;div className="gorDrop Performance-Widget-Drop"&gt;
+		        &lt;Dropdown optionDispatch={this.props.renderPerformanceWidget} items={item} styleClass={'ddown'} currentState={item[index]}/&gt;
+		        &lt;/div&gt;
+&nbsp;
+		        &lt;div id="performanceGraph"&gt;
+		        {itemRender}
+		        &lt;/div&gt; 
+		        &lt;/div&gt; 
+		        );
+		
+&nbsp;
+	}
+};
+&nbsp;
+function <span class="fstat-no" title="function not covered" >mapStateToProps(</span>state, ownProps){
+<span class="cstat-no" title="statement not covered" >	return {</span>
+		widget: state.performanceWidget.widget || {},
+		ppsData: state.recieveSocketActions.ppsData || {},
+		butlersData:state.butlersInfo || {},
+		chargersData:state.chargerInfo || {},
+		ppsPerformance: state.PPSperformance || {}
+	};
+}
+&nbsp;
+var mapDispatchToProps=fu<span class="cstat-no" title="statement not covered" >nction(di<span class="fstat-no" title="function not covered" >spatch){</span></span>
+<span class="cstat-no" title="statement not covered" >	return {</span>
+		renderPerformanceWidget: function(data){ dispatch(renderPerf<span class="fstat-no" title="function not covered" >ormanceWidget(data)); }<span class="cstat-no" title="statement not covered" ></span></span>
+	}
+};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >PerformanceWidget.contextTypes={</span>
+	intl:React.PropTypes.object.isRequired
+}
+&nbsp;
+export default connect(mapStateToProps,mapDispatchToProps)(PerformanceWidget) ;
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Oct 05 2017 15:02:03 GMT+0530 (IST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

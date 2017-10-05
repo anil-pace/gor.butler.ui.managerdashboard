@@ -1,0 +1,674 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/containers/emergencyProcess/fireHazard.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/containers/emergencyProcess</a> fireHazard.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/72</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/38</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/16</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/68</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React  from 'react';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+import { connect } from 'react-redux' ;
+import {modal} from 'react-redux-modal';
+import { FormattedMessage } from 'react-intl'; 
+import {setFireHazrdFlag} from '../../actions/tabActions';
+import ResumeOperation from './resumeOperation'; 
+import {userRequest} from '../../actions/userActions';  
+import ShutterLocationTile from '../../components/fireHazardTiles/shutterLocationTile';
+import {getSecondsDiff} from '../../utilities/getDaysDiff';
+import {FAILED,CLEARED,PROGRESS,NOT_FOUND,IN_PROGRESS} from '../../constants/frontEndConstants';
+class FireHazard extends React.Component{
+<span class="fstat-no" title="function not covered" >  co</span>nstructor(props) 
+  { 
+<span class="cstat-no" title="statement not covered" >    super(props);</span>
+<span class="cstat-no" title="statement not covered" >    this.state={buttonDisable:true};</span>
+<span class="cstat-no" title="statement not covered" >    this._removeThisModal =  this._removeThisModal.bind(this);</span>
+<span class="cstat-no" title="statement not covered" >    this._resumeOperation =  this._resumeOperation.bind(this);</span>
+  }
+<span class="fstat-no" title="function not covered" >  _r</span>emoveThisModal() {
+<span class="cstat-no" title="statement not covered" >    this.props.removeModal();</span>
+<span class="cstat-no" title="statement not covered" >    this.props.setFireHazrdFlag(true);</span>
+   }
+<span class="fstat-no" title="function not covered" >   e</span>ndFireHazard(){
+<span class="cstat-no" title="statement not covered" >    this.props.removeModal();</span>
+   }
+  
+<span class="fstat-no" title="function not covered" >  co</span>mponentDidMount(){
+<span class="cstat-no" title="statement not covered" >    if(this.props.checkingList){</span>
+<span class="cstat-no" title="statement not covered" >      this.endFireHazard(); </span> //If manager is on safety checklist page, don't show the release modal      
+    }
+  }
+co<span class="fstat-no" title="function not covered" >mp</span>onentWillMount(){
+     var limit=(<span class="cstat-no" title="statement not covered" >this.props.config.fire_emergency_enable_resume_after)*60;</span>
+    var duration=(l<span class="cstat-no" title="statement not covered" >imit-getSecondsDiff(this.props.fireHazard.emergencyStartTime))*1000;</span>
+    
+  if<span class="cstat-no" title="statement not covered" >(this.state.buttonDisable)</span>
+    {
+    se<span class="cstat-no" title="statement not covered" >tTimeout(fu<span class="fstat-no" title="function not covered" >nc</span>tion(){</span>
+      th<span class="cstat-no" title="statement not covered" >is.setState({buttonDisable:false})</span>
+    }.bind(this),duration); 
+  }
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >   c</span>omponentWillReceiveProps(nextProps){
+<span class="cstat-no" title="statement not covered" >    if(!nextProps.auth_token||!nextProps.fireHazard.emergencyStartTime)</span>
+    {
+    th<span class="cstat-no" title="statement not covered" >is._removeThisModal();</span>
+  }
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >  _r</span>esumeOperation(){
+<span class="cstat-no" title="statement not covered" >    this._removeThisModal();</span>
+    modal.add(ResumeOperation, {
+      title: '',
+      size: 'large', // large, medium or small,
+      closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: true, // (optional) if you don't wanna show the top right close button
+      fireHazardPressed:true
+      //.. all what you put in here you will get access in the modal props ;)
+    });
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  _p</span>rocessData(){
+    var shutters=th<span class="cstat-no" title="statement not covered" >is.props.fireHazard.shutters;</span>
+    var key=Ob<span class="cstat-no" title="statement not covered" >ject.keys(shutters);</span>
+    var shutterNuber=ke<span class="cstat-no" title="statement not covered" >y.length;</span>
+    var Imageclass;
+    var shutterWrap=[]<span class="cstat-no" title="statement not covered" >;</span>
+<span class="cstat-no" title="statement not covered" >    for(var i=0;i&lt;shutterNuber;i++){</span>
+<span class="cstat-no" title="statement not covered" >      switch(shutters[key[i]]){</span>
+        case FAILED: 
+        Im<span class="cstat-no" title="statement not covered" >ageclass=FAILED</span>
+        br<span class="cstat-no" title="statement not covered" >eak;</span>
+        case CLEARED:
+        Im<span class="cstat-no" title="statement not covered" >ageclass=CLEARED</span>
+        br<span class="cstat-no" title="statement not covered" >eak;</span>
+        default:
+        Im<span class="cstat-no" title="statement not covered" >ageclass=PROGRESS</span>
+      }
+      var singleShutter=&lt;ShutterLocationTile key={i}<span class="cstat-no" title="statement not covered" > shutterName={key[i]} shutterStatus={Imageclass}&gt;</span>
+      &lt;/ShutterLocationTile&gt;
+<span class="cstat-no" title="statement not covered" >      shutterWrap.push(singleShutter);</span>
+    }
+<span class="cstat-no" title="statement not covered" >    return shutterWrap;</span>
+  }
+<span class="fstat-no" title="function not covered" >  pr</span>ocessShutterHeader(data){
+    var  p=0<span class="cstat-no" title="statement not covered" >,f</span>=0,c<span class="cstat-no" title="statement not covered" >=0</span>,mar<span class="cstat-no" title="statement not covered" >ke</span>r;
+    var key=Ob<span class="cstat-no" title="statement not covered" >ject.keys(data);</span>
+    var shutterNuber=ke<span class="cstat-no" title="statement not covered" >y.length;</span>
+<span class="cstat-no" title="statement not covered" >    for(var i=0;i&lt;shutterNuber;i++){</span>
+     s<span class="cstat-no" title="statement not covered" >witch(data[key[i]]){</span>
+      case FAILED: 
+      f=1;<span class="cstat-no" title="statement not covered" ></span>
+      brea<span class="cstat-no" title="statement not covered" >k;</span>
+      case CLEARED:
+      c=1;<span class="cstat-no" title="statement not covered" ></span>
+      brea<span class="cstat-no" title="statement not covered" >k;</span>
+      default:
+      p=1;<span class="cstat-no" title="statement not covered" ></span>
+    }
+  }
+  if<span class="cstat-no" title="statement not covered" >(p&gt;0){</span>
+    ma<span class="cstat-no" title="statement not covered" >rker=(&lt;div&gt;&lt;span className='gor-image-status progress'&gt;&lt;/span&gt; &lt;span className='gor-status-text'&gt; &lt;FormattedMessage id='operation.fire.shutter'  defaultMessage='Clearing all shutters' description='Description Text clear shutter'/&gt; &lt;/span&gt;&lt;/div&gt;);</span>
+  }
+  el<span class="cstat-no" title="statement not covered" >se if(f&gt;0){</span>
+    ma<span class="cstat-no" title="statement not covered" >rker=(&lt;div&gt;&lt;span className='gor-image-status failed'&gt;&lt;/span&gt; &lt;span className='gor-status-text'&gt; &lt;FormattedMessage id='operation.fire.failshutter'  defaultMessage='Failed to clear shutters' description='Description Text fail to clear shutter'/&gt; &lt;/span&gt;&lt;/div&gt;);</span>
+  }
+  el<span class="cstat-no" title="statement not covered" >se if(c&gt;0)</span>
+  { 
+   mar<span class="cstat-no" title="statement not covered" >ker=(&lt;div&gt;&lt;span className='gor-image-status cleared'&gt;&lt;/span&gt; &lt;span className='gor-status-text'&gt; &lt;FormattedMessage id='operation.fire.clearedshutter'  defaultMessage='Cleared all shutters' description='Description Text  cleared shutter'/&gt; &lt;/span&gt;&lt;/div&gt;);</span>
+  }
+  re<span class="cstat-no" title="statement not covered" >turn marker;</span>
+}
+&nbsp;
+pr<span class="fstat-no" title="function not covered" >oc</span>essEscapePath(data){
+  var escapeMarker;
+  if<span class="cstat-no" title="statement not covered" >(data===CLEARED)</span>
+  {
+    es<span class="cstat-no" title="statement not covered" >capeMarker=(&lt;div&gt;&lt;span className='gor-image-status cleared'&gt;&lt;/span&gt;&lt;span className="gor-status-text"&gt;&lt;FormattedMessage id='operation.fire.escapecleared' defaultMessage="Cleared escape path"description="Description Text escape cleared"/&gt;&lt;/span&gt;&lt;/div&gt;)</span>
+  }
+  el<span class="cstat-no" title="statement not covered" >se if(data===IN_PROGRESS){</span>
+escape<span class="cstat-no" title="statement not covered" >Marker=(&lt;div&gt;&lt;span className='gor-image-status progress'&gt;&lt;/span&gt;&lt;span className="gor-status-text"&gt;&lt;FormattedMessage id='operation.fire.escapeprogress' defaultMessage="Clearing escape path"description="Description Text escape in progress"/&gt;&lt;/span&gt;&lt;/div&gt;)</span>
+  }
+  else{
+escape<span class="cstat-no" title="statement not covered" >Marker=(&lt;div&gt;&lt;span className='gor-image-status failed'&gt;&lt;/span&gt;&lt;span className="gor-status-text"&gt;&lt;FormattedMessage id='operation.fire.escapefail' defaultMessage="Failed to clear escape path"description="Description Text escape to fail"/&gt;&lt;/span&gt;&lt;/div&gt;)</span>
+  }
+retu<span class="cstat-no" title="statement not covered" >rn escapeMarker;</span>
+}
+&nbsp;
+re<span class="fstat-no" title="function not covered" >nd</span>er()
+{   
+  var shutterFlag=fals<span class="cstat-no" title="statement not covered" >e,esca</span>pePathFlag=false;<span class="cstat-no" title="statement not covered" ></span>
+  var  shutterNuber=Obj<span class="cstat-no" title="statement not covered" >ect.keys(this.props.fireHazard.shutters).length;</span>
+  sh<span class="cstat-no" title="statement not covered" >utterFlag=shutterNuber===0;</span>
+  es<span class="cstat-no" title="statement not covered" >capePathFlag=(this.props.fireHazard.escapePath!==NOT_FOUND)?true:false;</span>
+  var shutterWrap=this<span class="cstat-no" title="statement not covered" >._processData();</span>
+  var markerShutter=this<span class="cstat-no" title="statement not covered" >.processShutterHeader(this.props.fireHazard.shutters);</span>
+  var markerEscapePath=this<span class="cstat-no" title="statement not covered" >.processEscapePath(this.props.fireHazard.escapePath);</span>
+  re<span class="cstat-no" title="statement not covered" >turn (</span>
+&nbsp;
+    &lt;div className='gor-modal-content gor-firehazard'&gt;
+    &lt;span className='hazard-image'&gt;&lt;/span&gt;
+    &lt;span className="close" onClick={this._removeThisModal}&gt;×&lt;/span&gt;
+    &lt;div className='gor-firehazard-header'&gt;
+    &lt;span className='gor-caution-image'&gt;&lt;/span&gt;
+    &lt;span className="gor-caution-text-header"&gt;
+    &lt;FormattedMessage id='operation.fire.header' 
+    defaultMessage="FIRE EMERGENCY"
+    description="Header Text FIRE EMERGENCY"/&gt;
+    &lt;/span&gt;
+    &lt;span className="gor-caution-text"&gt;
+    &lt;FormattedMessage id='operation.fire.cautionText' 
+    defaultMessage="Fire emergency has been triggered and system has started its safety measures."
+    description="Description Text FIRE EMERGENCY"/&gt;
+&nbsp;
+    &lt;span className="gor-bold-underline"&gt;
+    &lt;FormattedMessage id='operation.fire.evacuation' 
+    defaultMessage=" Please follow evacuation procedures immediately."
+    description="Description Text evacuation"/&gt;
+    &lt;/span&gt;
+    &lt;/span&gt; 
+    &lt;/div&gt;
+    &lt;div className={escapePathFlag? "gor-shutter-section":"gor-shutter-section hidden"}&gt;
+   {markerEscapePath}
+    &lt;/div&gt;
+    &lt;div className={!shutterFlag? "gor-shutter-section":"gor-shutter-section hidden"}&gt;
+    {markerShutter}
+    &lt;div className="gor-shutter-status-box"&gt;
+    {shutterWrap}
+    &lt;/div&gt;          
+    &lt;/div&gt;    
+    &lt;button className={this.state.buttonDisable?'gor-resume-btn disable':'gor-resume-btn'} disabled={this.state.buttonDisable} onClick={this._resumeOperation}&gt;
+    &lt;FormattedMessage id='operation.alert.release.button' 
+    defaultMessage="RESUME OPERATION"
+    description="Text button to resume operation"/&gt;&lt;/button&gt;         
+    &lt;/div&gt;
+    );
+}
+&nbsp;
+};
+function <span class="fstat-no" title="function not covered" >mapStateToProps(</span>state, ownProps){
+<span class="cstat-no" title="statement not covered" >  return  {</span>
+    auth_token:state.authLogin.auth_token,
+    checkingList:state.emergency.checkingList||false,
+    fireHazard:state.fireHazardDetail,
+    firehazadflag:state.fireReducer.firehazadflag ||false,
+    config:state.config||{}
+    }
+  } 
+  functio<span class="fstat-no" title="function not covered" >n mapDispatchToProp</span>s(dispatch){
+<span class="cstat-no" title="statement not covered" >    return {</span>
+&nbsp;
+      setFireHazrdFlag: function(data){ dispatch(setFireH<span class="fstat-no" title="function not covered" >azrdFlag(data)); </span>},<span class="cstat-no" title="statement not covered" ></span>
+      userRequest: function(data){ dispatch(userRequ<span class="fstat-no" title="function not covered" >est(data)); </span>}<span class="cstat-no" title="statement not covered" ></span>
+    }
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  FireHazard.propTypes={</span>
+    auth_token:React.PropTypes.string,
+    checkingList:React.PropTypes.bool
+  }
+&nbsp;
+  export default connect(mapStateToProps,mapDispatchToProps)(FireHazard);
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Oct 05 2017 15:02:03 GMT+0530 (IST)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

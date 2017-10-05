@@ -1,0 +1,932 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/constants/messageConstants.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">src/constants</a> messageConstants.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>84/84</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>84/84</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React  from 'react';
+import { FormattedMessage,FormattedPlural } from 'react-intl'; 
+&nbsp;
+//Login page
+export const ENG=(&lt;FormattedMessage id='login.lang.english' defaultMessage="English (United States)" description="English option in the language drop down"/&gt;);
+export const JAP=(&lt;FormattedMessage id='login.lang.japanese' defaultMessage="日本語" description="Japanese option in the language drop down"/&gt;);
+export const SPANISH=(&lt;FormattedMessage id='login.lang.spanish' defaultMessage="Español" description="SPANISH option in the language drop down"/&gt;);
+export const CHINESE=(&lt;FormattedMessage id='login.lang.chinese' defaultMessage="中文" description="Chinese option in the language drop down"/&gt;);
+export const GERMAN=(&lt;FormattedMessage id='login.lang.german' defaultMessage="Deutsche" description="German option in the language drop down"/&gt;);
+export const FRENCH=(&lt;FormattedMessage id='login.lang.french' defaultMessage="Français" description="French option in the language drop down"/&gt;);
+&nbsp;
+&nbsp;
+export const AUTO_LOGOUT=(&lt;FormattedMessage id= 'login.autologout.message' defaultMessage="Due to session expiry, Auto Logout has been triggered!"
+      description="Auto logout message"/&gt;);
+export const WRONG_CRED=(&lt;FormattedMessage id='login.butler.fail' 
+                        defaultMessage="Invalid username and/or password, please try again" description="Text for login failure"/&gt;);
+export const NO_NET=(&lt;FormattedMessage id='login.butler.connection.fail' 
+                        defaultMessage="Connection failure" description="Text for connection failure"/&gt;);
+export const UNAUTH=(&lt;FormattedMessage id='login.butler.unauthorized' 
+                        defaultMessage="You are not authorized" description="Text for unauthorized login"/&gt;)
+//success codes related to user management
+&nbsp;
+export const US004=(&lt;FormattedMessage id="notify.success.edit" description='Text for successfully editing user' 
+      defaultMessage="User details updated successfully"/&gt;);
+//error codes related to user management
+&nbsp;
+//success realted to pps mode change
+export const MODE_REQUESTED=(&lt;FormattedMessage id="ppsDetail.modeChange.success" description="Success Message for PPS mode" 
+      defaultMessage="PPS Mode Change Request Processed"/&gt;);
+&nbsp;
+//error related to pps mode change
+export const E028=(&lt;FormattedMessage id="ppsDetail.modeChange.isAlreadyRequested" description="PPS is already in requested mode"
+      defaultMessage="PPS is already in requested mode"/&gt;);
+export const E029=(&lt;FormattedMessage id="ppsDetail.modeChange.tryLater" description="Previous Change request is pending"
+      defaultMessage="Previous request of changing mode is already pending, Please try later!"/&gt;);
+&nbsp;
+export const UE002=(&lt;FormattedMessage id="notify.error.usernameExists" description='Text for already registered username' 
+      defaultMessage="An account has already been created with this User ID"/&gt;);
+&nbsp;
+export const UE003= (&lt;FormattedMessage id="notify.error.passwordMissing" description='Text for passwords missing' 
+      defaultMessage="Password not provided!"/&gt;);
+&nbsp;
+export const UE004= (&lt;FormattedMessage id="notify.error.passwordMatch" description='Text for passwords not matching' 
+      defaultMessage="Passwords do not match!"/&gt;);
+&nbsp;
+export const UE005= (&lt;FormattedMessage id="notify.error.username" description='Text for missing username' 
+      defaultMessage="Username is a required field!"/&gt;);
+&nbsp;
+export const UE006= (&lt;FormattedMessage id="notify.error.role" description='Text for missing roles' 
+      defaultMessage="Role is a required field!"/&gt;);
+&nbsp;
+//errors for info reducer
+export const TYPE_SUCCESS= (&lt;FormattedMessage id="appInfo.success" description='Text for success' 
+      defaultMessage="Successfull"/&gt;);
+&nbsp;
+export const INVALID_ID= (&lt;FormattedMessage id="user.invalid.id" description='Text for invalid user ID' 
+      defaultMessage="Please enter a valid User ID"/&gt;);
+&nbsp;
+export const INVALID_FORMAT= (&lt;FormattedMessage id="user.invalid.format" description='Text for invalid user ID format' 
+      defaultMessage="Please use only letters (a-z), numbers, and periods"/&gt;);
+&nbsp;
+export const EMPTY_PWD= (&lt;FormattedMessage id="login.empty.password" description='Text for empty password' 
+      defaultMessage="Please enter a password"/&gt;);
+&nbsp;
+export const EMPTY_NAME= (&lt;FormattedMessage id="user.empty.name" description='Text for empty user name' 
+      defaultMessage="Please enter a user name"/&gt;);
+&nbsp;
+export const INVALID_NAME= (&lt;FormattedMessage id="user.invalid.name" description='Text for invalid user name' 
+      defaultMessage='Special characters like "~","@","%" are not allowed'/&gt;);
+&nbsp;
+export const INVALID_PWD_OP= (&lt;FormattedMessage id="user.invalid.password.operator" description='Text for invalid password for operator' 
+      defaultMessage="Please enter a password of at least 6 alphanumeric characters"/&gt;);
+&nbsp;
+export const INVALID_PWD_MG= (&lt;FormattedMessage id="user.invalid.password.manager" description='Text for invalid password for manager' 
+      defaultMessage="Please enter a password of at least 8 alphanumeric characters"/&gt;);
+&nbsp;
+export const MATCH_PWD= (&lt;FormattedMessage id="user.match.password" description='Text for passwords not matching' 
+      defaultMessage="Both password entered do not match. Please try again"/&gt;);
+&nbsp;
+&nbsp;
+&nbsp;
+export const MSU=(&lt;FormattedMessage id="msu.name.prefix" description='prefix for msu name' 
+      defaultMessage="MSU"/&gt;);
+&nbsp;
+export const CS=(&lt;FormattedMessage id="chargingStation.name.prefix" description='prefix for charging station name' 
+      defaultMessage="CS"/&gt;);
+&nbsp;
+export const PPS=(&lt;FormattedMessage id="pps.name.prefix" description='prefix for pps name' 
+      defaultMessage="PPS"/&gt;);
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+export const INVALID_SKUID= (&lt;FormattedMessage id="audit.invalid.sku" description='Text for invalid SKU ID' 
+      defaultMessage="Please enter a valid SKU Number"/&gt;);
+&nbsp;
+export const INVALID_LOCID= (&lt;FormattedMessage id="audit.invalid.location" description='Text for invalid location ID' 
+      defaultMessage="Please enter a valid location Number"/&gt;);
+&nbsp;
+&nbsp;
+&nbsp;
+// Codes for audit management
+export const E026=(&lt;FormattedMessage id="notify.error.audit.location" description='Text for invalid location' 
+      defaultMessage="Location does not exist"/&gt;);
+export const E027=(&lt;FormattedMessage id="notify.error.audit.sku" description='Text for invalid sku' 
+      defaultMessage="SKU does not exist"/&gt;);
+export const G016=(&lt;FormattedMessage id="notify.error.audit.g016" description='Text for unsuccessful audit deletion' 
+      defaultMessage="Given audit does not exists"/&gt;);
+export const AE001=(&lt;FormattedMessage id="notify.error.audit.AE001" description='Text for invalid audit ID' 
+      defaultMessage="Audit Id does not exists"/&gt;);
+export const AE002=(&lt;FormattedMessage id="notify.error.audit.AE002" description='Text for invalid PPS' 
+      defaultMessage="Valid PPS not found for Audit"/&gt;);
+export const AE004=(&lt;FormattedMessage id="notify.error.audit.AE004" description='Text for already processed location' 
+      defaultMessage="Audit of location already under process"/&gt;);
+export const AE005=(&lt;FormattedMessage id="notify.error.audit.AE005" description='Text for already processed sku' 
+      defaultMessage="Audit of sku already under process"/&gt;);
+export const AE006=(&lt;FormattedMessage id="notify.error.audit.AE006" description='Text for already processed audit' 
+      defaultMessage="Audit ID already processed"/&gt;);
+export const AS001=(&lt;FormattedMessage id="notify.create.audit.success" description='Text for successfull audit creation' 
+      defaultMessage="New audit task created successfully"/&gt;);
+export const AS00A=(&lt;FormattedMessage id="notify.start.audit.success" description='Text for successfull audit creation' 
+      defaultMessage="PPS assigned successfully. Audit task started"/&gt;);
+export const AS003=(&lt;FormattedMessage id="notify.delete.audit.processed" description='Text for already processed audit' 
+      defaultMessage="Audit already processed. Cannot delete"/&gt;);
+export const AE007=(&lt;FormattedMessage id="notify.Location.audit.pending" description='Text for Location of audit pending for approval' 
+      defaultMessage="Location of audit pending for approval"/&gt;);
+export const AE008=(&lt;FormattedMessage id="notify.Location.currently.processed" description='Text for Location of audit currently being processed' 
+      defaultMessage="Location of audit currently being processed"/&gt;);
+&nbsp;
+&nbsp;
+//Codes for Ajax Parser
+export const ERR_USR=(&lt;FormattedMessage id="notify.error.user.fail" description='Text for error in updating user' 
+      defaultMessage="Error in updating user"/&gt;);
+export const ERR_RES=(&lt;FormattedMessage id="notify.error.user.response" description='Text for error in response' 
+      defaultMessage="Error in response"/&gt;);
+export const ERR_AUDIT=(&lt;FormattedMessage id="notify.error.audit.create" description='Text for error in creating audit' 
+      defaultMessage="Error in creating audit"/&gt;);
+export const ERR_API=(&lt;FormattedMessage id="notify.error.api" description='Text for unregistered API response' 
+      defaultMessage="API response not registered"/&gt;);
+export const ERR_CONNECT=(&lt;FormattedMessage id="notify.error.connection" description='Text for connection refused' 
+      defaultMessage="Network Failure"/&gt;);
+&nbsp;
+export const ERR_400=(&lt;FormattedMessage id="notify.error.400" description='Text for bad request' 
+      defaultMessage="Network error: 400 Bad Request"/&gt;);
+export const ERR_401=(&lt;FormattedMessage id="notify.error.401" description='Text for Unauthorizedun' 
+      defaultMessage="Network error: 401 Unauthorized"/&gt;);
+export const ERR_403=(&lt;FormattedMessage id="notify.error.403" description='Text for Forbidden' 
+      defaultMessage="Network error: 403 Forbidden"/&gt;);
+export const ERR_405=(&lt;FormattedMessage id="notify.error.405" description='Text for method not allowed' 
+      defaultMessage="Network error: 405 Method Not Allowed"/&gt;);
+export const ERR_408=(&lt;FormattedMessage id="notify.error.408" description='Text for request timeout' 
+      defaultMessage="Network error: 408 Request Time-out"/&gt;);
+export const ERR_409=(&lt;FormattedMessage id="notify.error.409" description='Text for conflict' 
+      defaultMessage="Network error: 409 Conflict"/&gt;);
+export const ERR_500=(&lt;FormattedMessage id="notify.error.500" description='Text for internal server error' 
+      defaultMessage="Network error: 500 Internal Servor Error"/&gt;);
+export const ERR_502=(&lt;FormattedMessage id="notify.error.502" description='Text for bad gateway' 
+      defaultMessage="Network error: 502 Bad Gateway"/&gt;);
+//Inventory Tab messages
+export const HISTOGRAM_NO_DATA_TEXT=(&lt;FormattedMessage id="inventory.histogram.noDataText" description="Inventory Histogram No Data Text" 
+    defaultMessage="No Stock Found"/&gt;);
+&nbsp;
+&nbsp;
+//Messages for user forms
+export const MG_PWD=(&lt;FormattedMessage id="users.add.password.subheading.manager" description='Subheading for create password' 
+      defaultMessage='A password of at least 8 alphanumeric characters will be required for logging into the Management Interface and Operator Interface'/&gt;);
+export const OP_PWD=(&lt;FormattedMessage id="users.add.password.subheading.operator" description='Subheading for create password operator' 
+      defaultMessage='A password of 6 digits will be required for logging into the Operator Interface.'/&gt;);
+&nbsp;
+//Messages for emergency
+export const E051=(&lt;FormattedMessage id="emergency.resume.coreerror" description='Error while resuming operation' 
+      defaultMessage='Cannot connect to butler core'/&gt;);
+export const E052=(&lt;FormattedMessage id="emergency.resume.statuserror" description='Error while resuming operation' 
+      defaultMessage='Emergency status not soft_manual'/&gt;);
+export const E135=(&lt;FormattedMessage id="emergency.resume.Softemergency" description='Soft emergency still there' 
+      defaultMessage='Soft emergency still there'/&gt;);
+&nbsp;
+export const ES=(&lt;FormattedMessage id="emergency.resume.success" description='Operations resumed' 
+      defaultMessage='Operation resumed'/&gt;);
+&nbsp;
+//Message for Master File upload
+export const fileUploadMessages={
+      "utility002":(&lt;FormattedMessage id="masterdata.maxlimit.records" description='Records in file should not be greater than' 
+      defaultMessage='Records in file should not be greater than'/&gt;),
+      "utility001":(&lt;FormattedMessage id="masterdata.maxlimit.filesize" description='File size should not be greater than' 
+      defaultMessage='File size should not be greater than'/&gt;)
+      
+}
+&nbsp;
+export const g020=(&lt;FormattedMessage id="audit.cancellation.error.g020" description='Internal server error while requesting for audit cancel'
+                                   defaultMessage='Internal server error while requesting for audit cancel'/&gt;);
+export const g021=(&lt;FormattedMessage id="audit.cancellation.error.g021" description='Audit Id already sent for cancellation'
+                                   defaultMessage='Audit Id already sent for cancellation'/&gt;);
+export const g023=(&lt;FormattedMessage id="audit.cancellation.error.g023" description='Audit Id already successfully cancelled'
+                                   defaultMessage='Audit Id already successfully cancelled'/&gt;);
+export const g024=(&lt;FormattedMessage id="audit.cancellation.error.g024" description='Audit cancellation request denied'
+                                   defaultMessage='Audit cancellation request denied'/&gt;);
+/*Message for status change notification*/
+export const allStatusSuccess = (&lt;FormattedMessage id="pps.statusChange.allStatusSuccess" description='Records in file should not be greater than' 
+      defaultMessage='Status change request successful'/&gt;)
+&nbsp;
+export const allModeSuccess =(&lt;FormattedMessage id="pps.modeChange.allModeSuccess" description='Records in file should not be greater than' 
+      defaultMessage='Mode change request successful'/&gt;)
+export const ppsModeFailure = "{unsuccessful}/{totalCount} mode change requests rejected";
+export const ppsStatusFailure = "{unsuccessful}/{totalCount} status change requests rejected";
+export const ppsModeSuccess ="Mode change request successful";
+export const ppsStatusSuccess ="Status change request successful";
+&nbsp;
+/*Zoning messages*/
+export const ZONE_STATUS_INTL_MESSAGE ={
+      operation_normal:(&lt;FormattedMessage id="zoning.status.normal" description='Status text for zone' 
+      defaultMessage='OPERATING'/&gt;),
+      zone_pause_initiated:(&lt;FormattedMessage id="zoning.status.pauseInit" description='Status text for zone' 
+      defaultMessage='PAUSE INITIATED'/&gt;),
+      zone_pause_activated:(&lt;FormattedMessage id="zoning.status.pauseActivated" description='Status text for zone' 
+      defaultMessage='PAUSE ACTIVATED'/&gt;),
+      zone_pause_deactivated:(&lt;FormattedMessage id="zoning.status.pauseDeactive" description='Status text for zone' 
+      defaultMessage='PAUSE DEACTIVATED'/&gt;),
+      zone_clear_initiated:(&lt;FormattedMessage id="zoning.status.clearInit" description='Status text for zone' 
+      defaultMessage='CLEAR INITIATED'/&gt;),
+      zone_clear_activated:(&lt;FormattedMessage id="zoning.status.clearActive" description='Status text for zone' 
+      defaultMessage='CLEAR ACTIVATED'/&gt;),
+      zone_clear_deactivated:(&lt;FormattedMessage id="zoning.status.clearDeactivated" description='Status text for zone' 
+      defaultMessage='CLEAR DEACTIVATED'/&gt;),
+      emergency_stop:(&lt;FormattedMessage id="zoning.status.emergencyStop" description='Status text for zone' 
+      defaultMessage='EMERGENCY STOP'/&gt;),
+      emergency_pause:(&lt;FormattedMessage id="zoning.status.emergencyPause" description='Status text for zone' 
+      defaultMessage='EMERGENCY PAUSE'/&gt;),
+      stopped:(&lt;FormattedMessage id="zoning.status.stopped" description='Status text for zone' 
+      defaultMessage='STOPPED'/&gt;),
+      paused:(&lt;FormattedMessage id="zoning.status.paused" description='Status text for zone' 
+      defaultMessage='PAUSED'/&gt;)
+}
+&nbsp;
+export const CONTROLLER_ACTION_TRIGGERED_MESSAGES={
+      zone_pause:(&lt;FormattedMessage id="zoning.action.zone_pause" description='Status text for zone' 
+      defaultMessage='Zone pause activated'/&gt;),
+      zone_clear:(&lt;FormattedMessage id="zoning.action.zone_clear" description='Status text for zone' 
+      defaultMessage='Zone clear activated'/&gt;),
+      emergency_stop:(&lt;FormattedMessage id="zoning.action.emergency_stop" description='Status text for zone' 
+      defaultMessage='Emergency stop activated'/&gt;),
+      emergency_pause:(&lt;FormattedMessage id="zoning.action.emergency_pause" description='Status text for zone' 
+      defaultMessage='Emergency pause activated'/&gt;),
+      none:(&lt;FormattedMessage id="zoning.action.none" description='Status text for zone' 
+      defaultMessage='Standard'/&gt;)
+}
+export const CONTROLLER_SENSOR_TRIGGERED_MESSAGES={
+      button_press:(&lt;FormattedMessage id="zoning.action.button_press" description='Status text for zone' 
+      defaultMessage='Button pressed'/&gt;),
+      emergency_stop_button_press:(&lt;FormattedMessage id="zoning.action.emergency_stop_button_press" description='Status text for zone' 
+      defaultMessage='Emergency stop button pressed'/&gt;),
+      emergency_pause_button_press:(&lt;FormattedMessage id="zoning.action.emergency_pause_button_press" description='Status text for zone' 
+      defaultMessage='Emergency pause button pressed'/&gt;),
+      latch_gate:(&lt;FormattedMessage id="zoning.action.latch_gate" description='Status text for zone' 
+      defaultMessage='Entry gate breached'/&gt;),
+      light_curtain:(&lt;FormattedMessage id="zoning.action.light_curtain" description='Status text for zone' 
+      defaultMessage='Light curtains breached'/&gt;),
+      none:(&lt;FormattedMessage id="zoning.action.noneSensor" description='Status text for zone' 
+      defaultMessage='Standard'/&gt;)
+}
+/*Messages for operations logs*/
+export const REQUEST_REPORT_SUCCESS = (&lt;FormattedMessage id="operationsLog.reportRequest.success" description='Status text for zone' 
+      defaultMessage='Request successfully generated. Kindly check the Downloads Tab'/&gt;)
+export const REQUEST_REPORT_FAILURE = (&lt;FormattedMessage id="operationsLog.reportRequest.failure" description='Status text for zone' 
+      defaultMessage='Error creating request'/&gt;)
+&nbsp;
+export const ZONE_SUB_STATUS_INTL_MESSAGE={
+      zone_pause:(&lt;FormattedMessage id="zoning.substatus.action.zone_pause" description='Status text for zone' 
+      defaultMessage='Zone pause activated'/&gt;),
+      zone_clear:(&lt;FormattedMessage id="zoning.substatus.action.zone_clear" description='Status text for zone' 
+      defaultMessage='Zone clear activated'/&gt;),
+      emergency_stop:(&lt;FormattedMessage id="zoning.substatus.action.emergency_stop" description='Status text for zone' 
+      defaultMessage='Emergency stop activated'/&gt;),
+      emergency_pause:(&lt;FormattedMessage id="zoning.substatus.action.emergency_pause" description='Status text for zone' 
+      defaultMessage='Emergency pause activated'/&gt;),
+}
+&nbsp;
+export const ENTITY_BREACHED = {
+      light_curtain:(&lt;FormattedMessage id="zoning.entity.lightCurtains" description='Status text for zone' 
+      defaultMessage='Light Curtain'/&gt;),
+      latch_gate:(&lt;FormattedMessage id="zoning.entity.latchGate" description='Status text for zone' 
+      defaultMessage='Latch Gate'/&gt;)
+}
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Oct 05 2017 15:02:03 GMT+0530 (IST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>
