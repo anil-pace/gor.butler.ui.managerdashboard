@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/reducers/notificationReducer.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">src/reducers</a> notificationReducer.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/28</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/29</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/1</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/26</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+  SEARCHED_NOTIFICATIONS_DATA,
+  WS_NOTIFICATIONS_DATA,
+  SEND_READ_INTIMATION,
+  RESET_NOTIFICATION_DATA,
+  GET_ALL_NOTIFICATIONS,
+  RESET_NOTIFICATION_TABLE_DATA,
+  SET_NOTIFICATION_SPINNER,
+  SEARCHED_NOTIFICATIONS_DATA_ALL,
+  SET_INFINITE_SPINNER
+} from '../constants/frontEndConstants';
+/**
+ * @param  {State Object}
+ * @param  {Action object}
+ * @return {[Object] updated state}
+ */
+export  function notificationReducer(state={},action){
+  switch (action.type) {
+    case SEARCHED_NOTIFICATIONS_DATA:
+          return Object.assign({}, state, { 
+            "searchedNotificationData" : state.searchedNotificationData ? state.searchedNotificationData.concat(action.data) : [].concat(action.data<span class="fstat-no" title="function not covered" >),<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span></span></span>
+            "searchApplied":true,
+            "searchDataFound":action.data.length ? true : false
+          })
+<span class="cstat-no" title="statement not covered" >          bre</span>ak;
+    case WS_NOTIFICATIONS_DATA:
+          let wsNotificationData;
+          let isNotificationRea<span class="cstat-no" title="statement not covered" >d = state.isNotificationR</span>ead;
+          let readLis<span class="cstat-no" title="statement not covered" >t= </span>[];
+          let responseDat<span class="cstat-no" title="statement not covered" >a = action.data.splice</span>(0);
+          let initRespLe<span class="cstat-no" title="statement not covered" >n = responseData.len</span>gth
+<span class="cstat-no" title="statement not covered" >          if(!isNotificationRead){</span>
+<span class="cstat-no" title="statement not covered" >            wsNotificationData = responseDa</span>ta;
+          }
+          else{
+<span class="cstat-no" title="statement not covered" >            wsNotificationData = state.wsNotificationData ? responseData.concat(state.wsNotificationData.splice(0))  : responseD</span>ata ;
+          }
+          
+            
+            let epochT<span class="cstat-no" title="statement not covered" >ime =  (new Date).get</span>Time();
+<span class="cstat-no" title="statement not covered" >            for(let i= 0 ;i &lt; initRespLen ; i++){</span>
+                let <span class="cstat-no" title="statement not covered" >tup</span>le={};
+<span class="cstat-no" title="statement not covered" >                tuple.id = responseData</span>[i].id ;
+<span class="cstat-no" title="statement not covered" >                tuple.lastRead = epo</span>chTime;
+<span class="cstat-no" title="statement not covered" >                readList.push(tup</span>le.id);
+            }
+          
+<span class="cstat-no" title="statement not covered" >          return Object.assign({}, state, { </span>
+            "wsNotificationData" : wsNotificationData,
+            "unreadCount": initRespLen,
+            "readNotificationList":readList,
+            "isNotificationRead":false
+          })  
+    case SEND_READ_INTIMATION:
+<span class="cstat-no" title="statement not covered" >          return Object.assign({}, state, { </span>
+            "unreadCount": 0,
+            "isNotificationRead":true,
+            "readNotificationList":[]
+          })
+    case RESET_NOTIFICATION_DATA:
+<span class="cstat-no" title="statement not covered" >          return Object.assign({}, state, { </span>
+            "searchApplied":false,
+            "searchedNotificationData":[]
+          })
+    case GET_ALL_NOTIFICATIONS: 
+          let notificationDat<span class="cstat-no" title="statement not covered" >a = action.saltParams.lazyData ? (state.completeNotificationData || [])</span> : [];
+<span class="cstat-no" title="statement not covered" >          return Object.assign({}, state, { </span>
+            "completeNotificationData":notificationData.concat(action.data),
+            "hasDataChanged":!state.hasDataChanged,
+            "isLoading":false,
+            "isInfiniteLoading":false,
+            "dataFound":(action.saltParams.lazyData &amp;&amp; !action.data.length ? false : null)
+          })  
+    case RESET_NOTIFICATION_TABLE_DATA:
+<span class="cstat-no" title="statement not covered" >           return Object.assign({}, state, { </span>
+            "completeNotificationData":(action.data ? [] :state.completeNotificationData),
+            "hasDataChanged":!state.hasDataChanged,
+            "searchAppliedAllNotifications":false
+          }) 
+    case SET_NOTIFICATION_SPINNER:  
+<span class="cstat-no" title="statement not covered" >          return Object.assign({}, state, { </span>
+            "isLoading":action.data
+          })  
+    case SET_INFINITE_SPINNER:  
+<span class="cstat-no" title="statement not covered" >          return Object.assign({}, state, { </span>
+            "isInfiniteLoading":action.data
+          }) 
+    case SEARCHED_NOTIFICATIONS_DATA_ALL:
+<span class="cstat-no" title="statement not covered" >          return Object.assign({}, state, { </span>
+            "searchedAllNotificationData":action.data,
+            "isLoading":false,
+            "hasDataChanged":!state.hasDataChanged,
+            "searchAppliedAllNotifications":true
+          })
+&nbsp;
+    default:
+<span class="cstat-no" title="statement not covered" >      return state</span>
+  }
+}</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Oct 05 2017 12:18:53 GMT+0530 (IST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

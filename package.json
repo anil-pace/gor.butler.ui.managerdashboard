@@ -53,7 +53,7 @@
     "build-prod": "npm run build-css && npm run post-css && react-scripts build",
     "start": "npm run translate && REACT_APP_FILE_EXT= npm run build-dev",
     "build": "npm run translate && REACT_APP_FILE_EXT=.min npm run build-prod",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test --env=jsdom --coverage",
     "eject": "react-scripts eject",
     "translate": "react-intl-cra './src/**/*.js' './src/translations/en-US.json'"
   },

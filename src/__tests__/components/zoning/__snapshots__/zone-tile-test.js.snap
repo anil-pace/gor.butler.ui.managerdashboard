@@ -19,6 +19,7 @@ exports[`test Result component should display data correctly 1`] = `
       className="operating-status">
       STOPPED
     </p>
+    <p />
   </div>
 </div>
 `;

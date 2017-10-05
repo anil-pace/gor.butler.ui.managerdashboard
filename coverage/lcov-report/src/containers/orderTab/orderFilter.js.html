@@ -1,0 +1,680 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/containers/orderTab/orderFilter.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/containers/orderTab</a> orderFilter.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/50</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/27</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/17</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/48</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React  from 'react';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+import { FormattedMessage } from 'react-intl';
+import Filter from '../../components/tableFilter/filter';
+import {showTableFilter, filterApplied,orderfilterState,toggleOrderFilter} from '../../actions/filterAction';
+import { connect } from 'react-redux'; 
+import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
+import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
+import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
+import {hashHistory} from 'react-router'
+import {SINGLE,ORDER_INPROGRESS,ORDER_BREACHED,ORDER_COMPLETED,ORDER_EXCEPTION,ORDER_UNFULFILLABLE,ORDER_ONHOLD,ORDER_CANCELLED,ALL} from './../../constants/frontEndConstants'
+class OrderFilter extends React.Component{
+<span class="fstat-no" title="function not covered" >    co</span>nstructor(props) 
+    {
+<span class="cstat-no" title="statement not covered" >        super(props);</span>
+<span class="cstat-no" title="statement not covered" >        this.state={tokenSelected: {"STATUS":["all"], "TIME PERIOD":["allOrders"]}, searchQuery: {},</span>
+                      defaultToken: {"STATUS":["all"], "TIME PERIOD":["allOrders"]}}; 
+<span class="cstat-no" title="statement not covered" >        this._applyFilter =  this._applyFilter.bind(this);</span>
+<span class="cstat-no" title="statement not covered" >        this._closeFilter = this._closeFilter.bind(this);</span>
+<span class="cstat-no" title="statement not covered" >        this._clearFilter = this._clearFilter.bind(this);</span>
+    }
+&nbsp;
+&nbsp;
+<span class="fstat-no" title="function not covered" >    _c</span>loseFilter() {
+<span class="cstat-no" title="statement not covered" >        this.props.showTableFilter(false);</span>
+    }
+<span class="fstat-no" title="function not covered" >    co</span>mponentWillReceiveProps(nextProps){
+<span class="cstat-no" title="statement not covered" >        if(nextProps.orderFilterState &amp;&amp; JSON.stringify(this.state)!==JSON.stringify(nextProps.orderFilterState)){</span>
+<span class="cstat-no" title="statement not covered" >            this.setState(nextProps.orderFilterState)</span>
+        }
+&nbsp;
+        /**
+         * Hide the filter as soon as data in the list get updated.
+         */
+<span class="cstat-no" title="statement not covered" >        if(nextProps.ordersDetail.length&gt;0 &amp;&amp; JSON.stringify(nextProps.ordersDetail)!==JSON.stringify(this.props.ordersDetail)){</span>
+<span class="cstat-no" title="statement not covered" >            this.props.showTableFilter(false);</span>
+        }
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    _p</span>rocessOrderSearchField(){
+        var filterInputFields=[{<span class="cstat-no" title="statement not covered" >value:"ORDER ID", label:&lt;FormattedMessage id="order.inputField.id" defaultMessage="ORDER ID"/&gt;}];</span>
+        var inputValue=th<span class="cstat-no" title="statement not covered" >is.state.searchQuery;</span>
+        var inputField=&lt;FilterInputFieldWrap inputT<span class="cstat-no" title="statement not covered" >ext={filterInputFields} handleInputText={this._handleInputQuery.bind(this)} inputValue={inputValue}/&gt;</span>
+<span class="cstat-no" title="statement not covered" >        return inputField;           </span>
+&nbsp;
+    }
+&nbsp;
+  co<span class="fstat-no" title="function not covered" >mp</span>onentWillMount(){
+<span class="cstat-no" title="statement not covered" >        if(this.props.orderFilterState) {</span>
+<span class="cstat-no" title="statement not covered" >            this.setState(this.props.orderFilterState)</span>
+        }
+    }  
+<span class="fstat-no" title="function not covered" >    _p</span>rocessFilterToken() {
+        var tokenField1={v<span class="cstat-no" title="statement not covered" >alue:"STATUS", label:&lt;FormattedMessage id="order.token.status" defaultMessage="STATUS"/&gt;};</span>
+        var tokenField2={v<span class="cstat-no" title="statement not covered" >alue:"TIME PERIOD", label:&lt;FormattedMessage id="order.token.timePeriod" defaultMessage="TIME PERIOD"/&gt;}; </span>
+        var labelC1=[<span class="cstat-no" title="statement not covered" ></span>
+                    { value: ALL, label: &lt;FormattedMessage id="order.STATUS.all" defaultMessage="All orders"/&gt;},
+                    { value: ORDER_BREACHED, label: &lt;FormattedMessage id="order.STATUS.breach" defaultMessage="Breached orders"/&gt;},
+                    { value: ORDER_COMPLETED, label: &lt;FormattedMessage id="order.STATUS.completed" defaultMessage="Completed orders"/&gt;},
+                    { value: ORDER_EXCEPTION, label: &lt;FormattedMessage id="order.STATUS.exep" defaultMessage="Exception"/&gt;},
+                    { value: ORDER_UNFULFILLABLE, label: &lt;FormattedMessage id="order.STATUS.unfulfillable" defaultMessage="Unfulfillable"/&gt;},
+                    { value: ORDER_ONHOLD, label: &lt;FormattedMessage id="order.STATUS.onhold" defaultMessage="On hold"/&gt;},
+                    { value: ORDER_CANCELLED, label: &lt;FormattedMessage id="order.STATUS.cancelled" defaultMessage="Cancelled"/&gt;},  
+                    { value: ORDER_INPROGRESS, label: &lt;FormattedMessage id="order.STATUS.inprogress" defaultMessage="In Progress"/&gt;}
+&nbsp;
+                    ];
+        var labelC2=[<span class="cstat-no" title="statement not covered" ></span>
+                    { value: 'allOrders', label: &lt;FormattedMessage id="order.timePeriod.all" defaultMessage="All"/&gt;},
+                    { value: 'oneHourOrders', label: &lt;FormattedMessage id="order.timePeriod.oneHr" defaultMessage="Last 1 hours"/&gt;},
+                    { value: 'twoHourOrders', label: &lt;FormattedMessage id="order.timePeriod.twoHR" defaultMessage="Last 2 hours"/&gt;},
+                    { value: 'sixHourOrders', label: &lt;FormattedMessage id="order.timePeriod.sixHr" defaultMessage="Last 6 hours"/&gt;},
+                    { value: 'twelveHourOrders', label: &lt;FormattedMessage id="order.timePeriod.twoHr" defaultMessage="Last 12 hours"/&gt;},
+                    { value: 'oneDayOrders', label: &lt;FormattedMessage id="order.timePeriod.oneday" defaultMessage="Last 1 day"/&gt;}
+                    ];
+        var selectedToken= t<span class="cstat-no" title="statement not covered" >his.state.tokenSelected;</span>
+        var column1=&lt;FilterTokenWrap field={toke<span class="cstat-no" title="statement not covered" >nField1} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC1} selectedToken={selectedToken}/&gt;;</span>
+        var column2=&lt;FilterTokenWrap field={toke<span class="cstat-no" title="statement not covered" >nField2} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC2} selectedToken={selectedToken} selection={SINGLE}/&gt;;</span>
+        var columnDetail={c<span class="cstat-no" title="statement not covered" >olumn1token:column1, column2token:column2};</span>
+<span class="cstat-no" title="statement not covered" >        return columnDetail;</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    _h</span>andelTokenClick(field,value,state) {
+<span class="cstat-no" title="statement not covered" >        this.setState({tokenSelected:handelTokenClick(field,value,state,this.state)});</span>
+        
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    _h</span>andleInputQuery(inputQuery,queryField) {
+<span class="cstat-no" title="statement not covered" >        this.setState({searchQuery:handleInputQuery(inputQuery,queryField,this.state)})</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    _a</span>pplyFilter() {
+        var filterState=th<span class="cstat-no" title="statement not covered" >is.state, _</span>query={}<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        if (filterState.tokenSelected["STATUS"] &amp;&amp; filterState.tokenSelected["STATUS"][0] !== 'all') {</span>
+<span class="cstat-no" title="statement not covered" >            _query.status=filterState.tokenSelected["STATUS"]</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if (filterState.tokenSelected["TIME PERIOD"] &amp;&amp; filterState.tokenSelected["TIME PERIOD"][0] !== 'allOrders') {</span>
+<span class="cstat-no" title="statement not covered" >            _query.period=filterState.tokenSelected["TIME PERIOD"]</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (filterState.searchQuery["ORDER ID"]) {</span>
+<span class="cstat-no" title="statement not covered" >            _query.orderId=filterState.searchQuery["ORDER ID"]</span>
+        }
+       hashHistory.push({pathname: "/orders/orderlist", query: _query})
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    _c</span>learFilter() {
+<span class="cstat-no" title="statement not covered" >        this.props.orderfilterState({</span>
+            tokenSelected: {
+                "STATUS": ['all'],
+                "TIME PERIOD": ['allOrders']
+            },
+            searchQuery: {"ORDER ID":  ''},
+        });
+        hashHistory.push({pathname: "/orders/orderlist", query: {}})
+    }
+&nbsp;
+&nbsp;
+&nbsp;
+<span class="fstat-no" title="function not covered" >    re</span>nder(){
+        var noOrder=th<span class="cstat-no" title="statement not covered" >is.props.orderData.noResultFound;</span>
+        var orderSearchField=th<span class="cstat-no" title="statement not covered" >is._processOrderSearchField();</span>
+        var orderFilterToken=th<span class="cstat-no" title="statement not covered" >is._processFilterToken();</span>
+<span class="cstat-no" title="statement not covered" >        return (</span>
+            &lt;div&gt;
+                 &lt;Filter&gt;
+                &lt;div className="gor-filter-header"&gt;
+                    &lt;div className="gor-filter-header-h1"&gt;
+                         &lt;FormattedMessage id="gor.filter.filterLabel" description="label for filter" 
+            defaultMessage="Filter data"/&gt;
+                    &lt;/div&gt;
+                    &lt;div className="gor-filter-header-h2" onClick={this._closeFilter}&gt;
+                        &lt;FormattedMessage id="gor.filter.hide" description="label for hide" 
+                            defaultMessage="Hide"/&gt;
+                    &lt;/div&gt;
+                 &lt;/div&gt;
+                    &lt;div&gt;{noOrder?
+                            &lt;div className="gor-no-result-filter"&gt;&lt;FormattedMessage id="gor.filter.noResult" description="label for no result" 
+                            defaultMessage="No results found, please try again"/&gt;&lt;/div&gt;:""}<span class="branch-0 cbranch-no" title="branch not covered" ></span>
+                    &lt;/div&gt;
+                     &lt;div className="gor-filter-body"&gt;
+                         &lt;div className="gor-filter-body-input-wrap"&gt; 
+                            {orderSearchField}
+                         &lt;/div&gt;
+                         &lt;div className="gor-filter-body-filterToken-wrap"&gt; 
+                            &lt;div className="gor-filter-body-filterToken-section1"&gt;
+                                {orderFilterToken.column1token}
+                            &lt;/div&gt;
+                            &lt;div className="gor-filter-body-filterToken-section1"&gt;
+                                {orderFilterToken.column2token}
+                            &lt;/div&gt;
+                            
+&nbsp;
+                         &lt;/div&gt;
+                        
+                         
+                     &lt;/div&gt;
+                 &lt;div className="gor-filter-footer"&gt; 
+                    &lt;span className="gor-filter-footer-h2" onClick={this._clearFilter}&gt;
+                         &lt;FormattedMessage id="gor.filter.reset" description="label for reset" 
+                            defaultMessage="Reset"/&gt;
+                    &lt;/span&gt;
+                    &lt;div className="gor-filter-btn-wrap"&gt;
+                        &lt;button className='gor-add-btn' onClick={this._applyFilter}&gt;
+                            {!this.props.orderListSpinner? &lt;FormattedMessage id="gor.filter.heading" description="filter heading"  defaultMessage="Apply filter"/&gt; :&lt;div className='spinnerImage'&gt;&lt;/div&gt;}
+                        &lt;/button&gt;
+&nbsp;
+&nbsp;
+                    &lt;/div&gt; 
+                 &lt;/div&gt;
+                &lt;/Filter&gt;
+            &lt;/div&gt;
+        );
+    }
+};
+&nbsp;
+&nbsp;
+function <span class="fstat-no" title="function not covered" >mapStateToProps(</span>state, ownProps){
+  re<span class="cstat-no" title="statement not covered" >turn {</span>
+    showFilter: state.filterInfo.filterState || false,
+    orderData: state.getOrderDetail || {},
+    orderListSpinner: state.spinner.orderListSpinner || false,
+    orderFilterState: state.filterInfo.orderFilterState,
+  };
+}
+&nbsp;
+var mapDispatchToProps=fu<span class="cstat-no" title="statement not covered" >nction(di<span class="fstat-no" title="function not covered" >spatch){</span></span>
+  re<span class="cstat-no" title="statement not covered" >turn {</span>
+    showTableFilter: function(data){dispatch(showTableFilter<span class="fstat-no" title="function not covered" >(data));},<span class="cstat-no" title="statement not covered" ></span></span>
+    filterApplied: function(data){dispatch(filterApplied(d<span class="fstat-no" title="function not covered" >ata));},<span class="cstat-no" title="statement not covered" ></span></span>
+     orderfilterState: function(data){dispatch(orderfilterSta<span class="fstat-no" title="function not covered" >te(data));},<span class="cstat-no" title="statement not covered" ></span></span>
+     toggleOrderFilter: function(data){dispatch(toggleOrderFil<span class="fstat-no" title="function not covered" >ter(data));}<span class="cstat-no" title="statement not covered" ></span></span>
+  }
+};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >OrderFilter.PropTypes={</span>
+    showFilter:React.PropTypes.bool,
+    orderData:React.PropTypes.object,
+    orderListSpinner:React.PropTypes.bool,
+    showTableFilter:React.PropTypes.func,
+    filterApplied:React.PropTypes.func,
+    orderFilterState:React.PropTypes.bool,
+    toggleOrderFilter:React.PropTypes.func
+};
+&nbsp;
+&nbsp;
+&nbsp;
+export default connect(mapStateToProps,mapDispatchToProps)(OrderFilter) ;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Oct 05 2017 12:18:53 GMT+0530 (IST)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

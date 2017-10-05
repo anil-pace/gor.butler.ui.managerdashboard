@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/graphd3/stackedChartHorizontal.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/components/graphd3</a> stackedChartHorizontal.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/41</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/26</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/7</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/40</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React  from 'react';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+import rd3 from 'react-d3-library';
+import * as d3 from 'd3';
+import {SCH_CONFIG} from '../../constants/frontEndConstants';
+import { defineMessages } from 'react-intl';<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+&nbsp;
+//Mesages for internationalization
+const messages=defineMessages({<span class="cstat-no" title="statement not covered" ></span>
+    invUsedSpace: {
+        id: 'snapshot.inventory.usedSpace',
+        description: 'Text for used space',
+        defaultMessage: "{utilisedSpace}% space utilized",
+    }
+});
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+const RD3Component=rd3.Component;<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+&nbsp;
+class StackedChartHorizontal extends React.Component{
+<span class="fstat-no" title="function not covered" >  co</span>nstructor(props) 
+  {
+<span class="cstat-no" title="statement not covered" >     super(props);</span>
+<span class="cstat-no" title="statement not covered" >    this.state={d3: ''}</span>
+   }
+&nbsp;
+&nbsp;
+&nbsp;
+<span class="fstat-no" title="function not covered" >   c</span>omponentDidMount(){
+<span class="cstat-no" title="statement not covered" >    this._processData(this.props.snapshotData,this.props.config)</span>
+  }
+<span class="fstat-no" title="function not covered" >  co</span>mponentWillReceiveProps(nextProps){
+<span class="cstat-no" title="statement not covered" >    this._processData(nextProps.snapshotData,nextProps.config);</span>
+  }
+<span class="fstat-no" title="function not covered" >  sh</span>ouldComponentUpdate(nextProps, nextState){
+<span class="cstat-no" title="statement not covered" >    if(!Object.keys(nextProps.snapshotData).length){</span>
+<span class="cstat-no" title="statement not covered" >      return false;</span>
+    }
+<span class="cstat-no" title="statement not covered" >      return true</span>;
+    
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  _p</span>rocessData(data,config){
+<span class="cstat-no" title="statement not covered" >    config=SCH_CONFIG;</span>
+    var node=do<span class="cstat-no" title="statement not covered" >cument.createElement('div');</span>
+    var svg=d3<span class="cstat-no" title="statement not covered" >.select(node).append('svg')</span>
+      .attr("width", config.svgInfo.width)
+      .attr("height", config.svgInfo.height)
+      .append("g")
+      .attr("transform", "translate(" + config.svgInfo.x + "," + config.svgInfo.y + ")");
+    var totalSpaceUtilization=da<span class="cstat-no" title="statement not covered" >ta ? data.warehouse_utilization : 0;</span>
+    var totalSpaceInPx=(t<span class="cstat-no" title="statement not covered" >otalSpaceUtilization/100)*config.svgInfo.width;</span>
+    var unusedSpace=da<span class="cstat-no" title="statement not covered" >ta ? data.unusedSpace : 100;</span>
+    var unusedColorCode=da<span class="cstat-no" title="statement not covered" >ta ? data.colorCode : "#EEE";</span>
+<span class="cstat-no" title="statement not covered" >     data=data.category_data ? data.category_data : [];</span>
+    var x=0;<span class="cstat-no" title="statement not covered" >//</span>utilisedSpace=0;
+    var values={"<span class="cstat-no" title="statement not covered" >utilisedSpace":totalSpaceUtilization};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if(unusedSpace){</span>
+    fo<span class="cstat-no" title="statement not covered" >r(let i=0, l=data.length ; i&lt; l ; i++){</span>
+      
+      sv<span class="cstat-no" title="statement not covered" >g.append("rect")</span>
+      .attr("x",x+"px")
+      .attr("y",config.svgInfo.rectInfo.y)
+      .attr("width",""+(data[i].warehouse_utilization ? (data[i].warehouse_utilization/100)*totalSpaceInPx : 0)+"px")
+      .attr("height",config.svgInfo.rectInfo.height)
+      .style("fill",d3.rgb(data[i].colorCode))
+&nbsp;
+      x+<span class="cstat-no" title="statement not covered" >=(data[i].warehouse_utilization ? (data[i].warehouse_utilization/100)*totalSpaceInPx : 0)</span>
+    }
+    sv<span class="cstat-no" title="statement not covered" >g.append("rect")</span>
+      .attr("x",x+"px")
+      .attr("y",config.svgInfo.rectInfo.y)
+      .attr("width",""+(totalSpaceInPx-x)+"px")
+      .attr("height",config.svgInfo.rectInfo.height)
+      .style("fill",d3.rgb("#EEE"))
+    sv<span class="cstat-no" title="statement not covered" >g.append("rect")</span>
+      .attr("x",totalSpaceInPx+"px")
+      .attr("y",config.svgInfo.rectInfo.y)
+      .attr("width",""+((unusedSpace/100)*config.svgInfo.width)+"px")
+      .attr("height",config.svgInfo.rectInfo.height)
+      .style("fill",d3.rgb(unusedColorCode))
+  
+     i<span class="cstat-no" title="statement not covered" >f(totalSpaceUtilization){</span>
+      let textXPos=x-14<span class="cstat-no" title="statement not covered" >;</span>
+      if<span class="cstat-no" title="statement not covered" >(textXPos &lt; 0){</span>
+        te<span class="cstat-no" title="statement not covered" >xtXPos=0</span>
+      }
+      el<span class="cstat-no" title="statement not covered" >se if(textXPos &gt;=config.svgInfo.width ){</span>
+        te<span class="cstat-no" title="statement not covered" >xtXPos=config.svgInfo.width - 170;</span>
+      }
+      sv<span class="cstat-no" title="statement not covered" >g.append("line")</span>
+      .attr("x1",totalSpaceInPx+"px")
+      .attr("x2",totalSpaceInPx+"px")
+      .attr("y1",config.svgInfo.lineInfo.y1)
+      .attr("y2",config.svgInfo.lineInfo.y2)
+      .style("stroke",d3.rgb(config.svgInfo.lineInfo.stroke))
+      .style("stroke-width",config.svgInfo.lineInfo["stroke-width"])
+      sv<span class="cstat-no" title="statement not covered" >g.append("text")</span>
+      .attr("x",textXPos+"px")
+      .attr("y",config.svgInfo.textInfo.y)
+      .text(this.context.intl.formatMessage(messages.invUsedSpace,values))
+    }
+    else{
+      sv<span class="cstat-no" title="statement not covered" >g.append("text")</span>
+      .attr("x",(config.svgInfo.width/2)-44)
+      .attr("y",Number(config.svgInfo.height)/2)
+      .text(this.context.intl.formatMessage(messages.invUsedSpace,values))
+    }
+  }
+<span class="cstat-no" title="statement not covered" >    this.setState({d3: node});</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >   r</span>ender() {
+   
+   r<span class="cstat-no" title="statement not covered" >eturn (</span>
+     &lt;div&gt;
+       &lt;RD3Component data={this.state.d3} /&gt;
+     &lt;/div&gt;
+   )
+ }
+};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >StackedChartHorizontal.propTypes={</span>
+  snapshotData:React.PropTypes.object,
+  hasDataChanged:React.PropTypes.bool
+}
+<span class="cstat-no" title="statement not covered" >StackedChartHorizontal.contextTypes={</span>
+ intl:React.PropTypes.object.isRequired
+}
+&nbsp;
+&nbsp;
+export default StackedChartHorizontal ;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Oct 05 2017 12:18:53 GMT+0530 (IST)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

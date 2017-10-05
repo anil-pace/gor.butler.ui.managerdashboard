@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/utilityComponents/masterUploadTile.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/components/utilityComponents</a> masterUploadTile.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/31</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/18</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/6</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/29</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React  from 'react';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+import { FormattedMessage } from 'react-intl';
+import AccordianBar from './accordianBar';
+import FileUpload from '../fileUpload/fileUpload';
+import ListItem from "../list/listItem";<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+&nbsp;
+&nbsp;
+class MasterUploadTile extends React.Component{
+&nbsp;
+<span class="fstat-no" title="function not covered" >  co</span>nstructor(props)  
+  {
+<span class="cstat-no" title="statement not covered" >      super(props)</span>;
+<span class="cstat-no" title="statement not covered" >       this.state={</span>
+            showPanel: [],
+            stateChanged : false
+        }
+      
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" ></span>    _handlePanel(index) {
+        var accordianStat<span class="cstat-no" title="statement not covered" >e=this.state.showPane</span>l;
+        var currentStat<span class="cstat-no" title="statement not covered" >e=accordianState[index</span>];
+        var stateChange<span class="cstat-no" title="statement not covered" >d=!this.state.stateChange</span>d;
+<span class="cstat-no" title="statement not covered" >        accordianState=new Array(accordianState.length?accordianState.length:0).fill(false);</span>
+<span class="cstat-no" title="statement not covered" >        accordianState[index]=!currentState</span>;
+        
+<span class="cstat-no" title="statement not covered" >        this.setState({</span>
+          showPanel:accordianState,
+          stateChanged:stateChanged
+        });
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" ></span>    _renderMasterData() {
+      var result=<span class="cstat-no" title="statement not covered" >[],</span> masterUploadBar,historyData=t<span class="cstat-no" title="statement not covered" >his.props.historyData;</span>
+<span class="cstat-no" title="statement not covered" >        if(!this.state.showPanel.length){</span>
+            let accordianSt<span class="cstat-no" title="statement not covered" >ate=new Array(historyData.length?historyData.length:0).fill(false);</span>
+            let stateChan<span class="cstat-no" title="statement not covered" >ged=this.state.stateChan</span>ged;
+<span class="cstat-no" title="statement not covered" >            this.state={</span>
+              showPanel: accordianState,
+              stateChanged:stateChanged
+            };
+        }
+<span class="cstat-no" title="statement not covered" >      for (let i=0 ; i&lt; historyData.length ; i++) {</span>
+        let status=<span class="cstat-no" title="statement not covered" >((historyData[i].created + historyData[i].deleted + historyData[i].error +historyData[i].updated) / historyData[i].total)*100;</span>
+            
+<span class="cstat-no" title="statement not covered" >            masterUploadBar=&lt;AccordianBar timeOffset={this.props.timeOffset}  completed={Math.ceil(status)} showPanel={this.state.showPanel[i]} data={historyData[i]} </span>
+                        handleAccordianState={this._handlePanel.bind(this)} index={i} key={"acc"+i}/&gt;
+<span class="cstat-no" title="statement not covered" >        result.push(masterUploadBar)</span>
+      }
+<span class="cstat-no" title="statement not covered" >      if(result.length===0){</span>
+<span class="cstat-no" title="statement not covered" >          masterUploadBar= &lt;ListItem index={0} key={"listItem" + 0}&gt;</span>
+              &lt;div className="gor-inline"&gt;
+                  &lt;div className="gor-utility-master-h1"&gt;
+                      &lt;div className="gor-utility-no-history-found"&gt;
+                          &lt;FormattedMessage
+                              id="utility.uploadHist.noresultfound"
+                              description="Status "
+                              defaultMessage="No Result Found"
+                          /&gt;
+                      &lt;/div&gt;
+&nbsp;
+                  &lt;/div&gt;
+                  &lt;div className="gor-inline gor-utility-master-h2"/&gt;
+&nbsp;
+              &lt;/div&gt;
+              &lt;div className="gor-inline gor-utility-master-h2"/&gt;
+&nbsp;
+          &lt;/ListItem&gt;
+<span class="cstat-no" title="statement not covered" >          result.push(masterUploadBa</span>r)
+      }
+<span class="cstat-no" title="statement not covered" >      return result</span>;
+    }
+<span class="fstat-no" title="function not covered" ></span>     shouldComponentUpdate(nextProps, nextState){
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if((nextProps.uploadHistChanged !== this.props.uploadHistChanged) || (this.state.stateChanged !== nextState.stateChanged) ||(nextProps.maxFileSize !== this.props.maxFileSize)||(nextProps.errorCode !== this.props.errorCode)){</span>
+<span class="cstat-no" title="statement not covered" >          return tr</span>ue;
+        }
+<span class="cstat-no" title="statement not covered" >          return f</span>alse;
+        
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  re</span>nder(){
+    var masterDataBody=th<span class="cstat-no" title="statement not covered" >is._renderMasterData();</span>
+<span class="cstat-no" title="statement not covered" >    return (</span>
+      &lt;div&gt;
+        &lt;FileUpload uploadBtnText= {this.props.uploadBtnText} isProcessing={this.props.isMasterUploadProcessing} maxFileSize={this.props.maxFileSize}  acceptedFormats={this.props.acceptedFormats} onChange={this.props.onMasterFileUpload} errorCode={this.props.errorCode} maxSize={this.props.maxSize} errorList={this.props.errorList}/&gt;
+            &lt;div className="gor-utility-body-header"&gt;
+              &lt;FormattedMessage id="utility.uploadHistory.head" description='Upload History' defaultMessage='Upload History'/&gt; 
+            &lt;/div&gt;
+            &lt;div className="gor-utility-history-container"&gt;
+              {masterDataBody}
+            &lt;/div&gt;
+      &lt;/div&gt;
+    );
+  }
+};
+<span class="cstat-no" title="statement not covered" >MasterUploadTile.propTypes={</span>
+    onMasterFileUpload:React.PropTypes.func,
+    historyData:React.PropTypes.array,
+    acceptedFormats:React.PropTypes.array,
+    validationList:React.PropTypes.object,
+    maxFileSize :  React.PropTypes.number,
+    isMasterUploadProcessing: React.PropTypes.bool,
+    uploadBtnText:React.PropTypes.string,
+    uploadHistChanged:React.PropTypes.bool
+}
+&nbsp;
+export default MasterUploadTile ;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Oct 05 2017 12:18:53 GMT+0530 (IST)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

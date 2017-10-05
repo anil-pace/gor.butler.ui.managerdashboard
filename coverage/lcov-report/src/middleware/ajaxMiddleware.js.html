@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/middleware/ajaxMiddleware.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">src/middleware</a> ajaxMiddleware.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/44</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/47</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/6</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/42</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">  <span class="cstat-no" title="statement not covered" ></span>
+import {AJAX_CALL,AUTH_LOGIN,PAUSE_OPERATION,RESUME_OPERATION,MASTER_FILE_UPLOAD} from '../constants/frontEndConstants';
+&nbsp;
+import {AjaxParse} from '../utilities/AjaxParser';
+import {FileResponseParser} from '../utilities/fileResponseParser';
+import {ShowError} from '../utilities/showError';
+import {endSession} from '../utilities/endSession';
+&nbsp;
+&nbsp;
+const ajaxMiddleware=(f<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >un</span>ction(){ </span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return <span class="fstat-no" title="function not covered" >st</span>ore=&gt; n<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >ex</span>t=&gt; ac<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >ti</span>on=&gt; {</span></span></span>
+<span class="cstat-no" title="statement not covered" >    switch(action.type) {</span>
+&nbsp;
+        case AJAX_CALL:
+&nbsp;
+       var params=act<span class="cstat-no" title="statement not covered" >ion.params;</span>
+       var saltParams = a<span class="cstat-no" title="statement not covered" >ction.params.saltParams ? action.params.saltParams : {};</span>
+       var formData = p<span class="cstat-no" title="statement not covered" >arams.formdata || params || null,h</span>ttpData;
+&nbsp;
+       i<span class="cstat-no" title="statement not covered" >f(params.cause !== MASTER_FILE_UPLOAD){</span>
+<span class="cstat-no" title="statement not covered" >          httpData=params.formdata? JSON.stringify(params.formdata):null;</span>
+       }
+       else{
+<span class="cstat-no" title="statement not covered" >          httpData=params.formdata;</span>
+       }
+       
+       
+       var httpRequest=new<span class="cstat-no" title="statement not covered" > XMLHttpRequest();</span>
+       var authCause=[AU<span class="cstat-no" title="statement not covered" >TH_LOGIN, PAUSE_OPERATION, RESUME_OPERATION];</span>
+       i<span class="cstat-no" title="statement not covered" >f (!httpRequest || !params.url) {</span>
+        re<span class="cstat-no" title="statement not covered" >turn false;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if(params.responseType){</span>
+<span class="cstat-no" title="statement not covered" >          httpRequest.responseType=params.responseType;</span>
+        }
+      ht<span class="cstat-no" title="statement not covered" >tpRequest.onreadystatechange=func<span class="fstat-no" title="function not covered" >ti</span>on(xhr){</span>
+        if<span class="cstat-no" title="statement not covered" > (httpRequest.readyState=== XMLHttpRequest.DONE) {</span>
+<span class="cstat-no" title="statement not covered" >              if(httpRequest.status=== 401 &amp;&amp; authCause.indexOf(params.cause)==-1) {</span>
+                endSession(store);
+              }
+              else {
+<span class="cstat-no" title="statement not covered" >                 try</span>
+                 {
+                     let resContentTy<span class="cstat-no" title="statement not covered" >pe = httpRequest.getResponseHeader('Content-ty</span>pe');
+<span class="cstat-no" title="statement not covered" >                   if(resContentType.match(/(text\/csv)/g) || resContentType.match(/(application\/vnd.openxmlformats-officedocument.spreadsheetml.sheet)/g)){</span>
+                    //get the file name from the content-disposition header
+                    //and then save the file
+                    let fileName;
+<span class="cstat-no" title="statement not covered" >                    if (this.getResponseHeader('Content-disposition')){</span>
+                      let strName=<span class="cstat-no" title="statement not covered" >this.getResponseHeader('Content-disposition').match(/filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/);</span>
+<span class="cstat-no" title="statement not covered" >                      fileName=strName[0].slice(10,strName.length-2);</span>
+                    }
+<span class="cstat-no" title="statement not covered" >                    fileName=(!fileName)?(resContentType.match(/(text\/csv)/g)? "download.csv" : "download.xlsx"):fileName;</span>
+                    FileResponseParser(store,httpRequest.response,params.cause,fileName)
+                  }
+                   else{
+                    let  decodedString<span class="cstat-no" title="statement not covered" >= httpRequest.responseType==="arraybuffer"? String.fromCharCode.apply(null, new Uint8Array(httpRequest.response)):httpRequest.response;</span>
+                    var response=<span class="cstat-no" title="statement not covered" >JSON.parse(decodedString,httpRequest.status);</span>
+                    AjaxParse(store,response,params.cause,httpRequest.status,saltParams);          
+&nbsp;
+                  }
+                  
+                 }
+                 catch(e)
+                 {
+<span class="cstat-no" title="statement not covered" >                   if(!response){</span>
+                    ShowError(store,params.cause,httpRequest.status);
+                   }
+<span class="cstat-no" title="statement not covered" >                   throw </span>e;
+                 }
+              }      
+      }
+    };
+    http<span class="cstat-no" title="statement not covered" >Request.onerror=functi<span class="fstat-no" title="function not covered" >on</span> (err){</span>
+               ShowError(store,params.cause,httpRequest.status);
+    }
+&nbsp;
+    http<span class="cstat-no" title="statement not covered" >Request.open(params.method, params.url,!params.sync);</span>
+<span class="cstat-no" title="statement not covered" >        if(params.contentType !== false){</span>
+<span class="cstat-no" title="statement not covered" >            httpRequest.setRequestHeader('Content-Type', params.contentType || "text/html")</span>;
+        }
+<span class="cstat-no" title="statement not covered" >        if(params.withCredentials){</span>
+<span class="cstat-no" title="statement not covered" >            httpRequest.withCredentials = true</span>;
+        }
+<span class="cstat-no" title="statement not covered" >        httpRequest.setRequestHeader('Accept', params.accept || "text/html");</span>
+<span class="cstat-no" title="statement not covered" >        if(params.cause!==AUTH_LOGIN)</span>
+        {
+<span class="cstat-no" title="statement not covered" >            httpRequest.setRequestHeader('Authentication-Token', params.token)</span>;
+        }
+&nbsp;
+    http<span class="cstat-no" title="statement not covered" >Request.send(httpData);</span>
+    brea<span class="cstat-no" title="statement not covered" >k;</span>
+&nbsp;
+    default:
+    retu<span class="cstat-no" title="statement not covered" >rn next(action);</span>
+  }
+}
+&nbsp;
+})();
+&nbsp;
+export default ajaxMiddleware</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Oct 05 2017 12:18:53 GMT+0530 (IST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

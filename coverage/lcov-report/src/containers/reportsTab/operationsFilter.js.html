@@ -1,0 +1,992 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/containers/reportsTab/operationsFilter.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/containers/reportsTab</a> operationsFilter.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">3.23% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>3/93</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/56</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/15</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">3.49% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>3/86</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React  from 'react';
+import { FormattedMessage } from 'react-intl';
+import Filter from '../../components/tableFilter/filter';
+import {showTableFilter} from '../../actions/filterAction';
+import {applyOLFilterFlag} from '../../actions/operationsLogsActions';
+import { connect } from 'react-redux'; 
+import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
+import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
+import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
+import {REPORTS_FILTER_PARAMS} from '../../constants/filterParams';
+import {hashHistory} from 'react-router';
+import {SINGLE} from '../../constants/frontEndConstants'
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+class OperationsFilter extends React.Component{  
+<span class="fstat-no" title="function not covered" >  co</span>nstructor(props) 
+  {
+<span class="cstat-no" title="statement not covered" >      super(props);</span>
+<span class="cstat-no" title="statement not covered" >      this.state={</span>
+        tokenSelected: {
+          "status":this.props.filters.status ? [this.props.filters.status]:["any"], 
+          "timeperiod":this.props.filters.time_period ? [this.props.filters.time_period]:["1_HOUR"],
+          "operatingMode":this.props.filters.operatingMode ? [this.props.filters.operatingMode]:["any"]
+        }, 
+        searchQuery: {
+          "request_id":this.props.filters.request_id ? this.props.filters.request_id : "",
+          "sku_id":this.props.filters.sku_id ? this.props.filters.sku_id : "",
+          "pps_id":this.props.filters.pps_id ? this.props.filters.pps_id : "",
+          "user_id":this.props.filters.user_id ? this.props.filters.user_id : ""
+        },
+        defaultToken: {
+          "status":["any"],
+          "operatingMode":["any"],
+          "timeperiod":["1_HOUR"]
+        }
+        }; 
+<span class="cstat-no" title="statement not covered" >      this._closeFilter = this._closeFilter.bind(this);</span>
+<span class="cstat-no" title="statement not covered" >      this._clearFilter = this._clearFilter.bind(this);</span>
+<span class="cstat-no" title="statement not covered" >      this._applyFilter = this._applyFilter.bind(this);</span>
+<span class="cstat-no" title="statement not covered" >      this._processSearchField= this._processSearchField.bind(this);</span>
+    }
+&nbsp;
+&nbsp;
+<span class="fstat-no" title="function not covered" >    _c</span>loseFilter() {
+<span class="cstat-no" title="statement not covered" >        this.props.showTableFilter(false);</span>
+    } 
+&nbsp;
+<span class="fstat-no" title="function not covered" >     _p</span>rocessSearchField(filterInputFields){
+        let inputValue=<span class="cstat-no" title="statement not covered" >this.state.searchQuery;</span>
+        let inputField=<span class="cstat-no" title="statement not covered" >&lt;FilterInputFieldWrap inputText={filterInputFields} handleInputText={this._handleInputQuery.bind(this)} inputValue={inputValue}/&gt;</span>
+<span class="cstat-no" title="statement not covered" >        return inputField;           </span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    co</span>mponentWillReceiveProps(nextProps){
+        /**
+         * It will update the state as soon as
+         * filters are cleared.
+         */
+        /*if(nextProps.filterState &amp;&amp; JSON.stringify(this.state)!==JSON.stringify(nextProps.filterState)){
+            this.setState(nextProps.filterState)
+        }*/
+&nbsp;
+        /**
+         * Hide the filter as soon as data in the list get updated.
+         */
+<span class="cstat-no" title="statement not covered" >        if(nextProps.hideLayer){</span>
+<span class="cstat-no" title="statement not covered" >            this.props.showTableFilter(false);</span>
+        }
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    _p</span>rocessFilterParams(){
+      var filterParams = <span class="cstat-no" title="statement not covered" >JSON.parse(JSON.stringify(REPORTS_FILTER_PARAMS));</span>
+      var filterInputFields = <span class="cstat-no" title="statement not covered" >[],</span>statusToken=<span class="cstat-no" title="statement not covered" >{},</span>statusLabels=<span class="cstat-no" title="statement not covered" >[],</span>
+      timePeriodToken=<span class="cstat-no" title="statement not covered" >{},</span>timePeriodLabels=<span class="cstat-no" title="statement not covered" >[],</span>operatingModeToken=<span class="cstat-no" title="statement not covered" >{},</span>operatingModeLabels=<span class="cstat-no" title="statement not covered" >[];</span>
+<span class="cstat-no" title="statement not covered" >      for(let i=0,len = filterParams.length; i &lt; len ; i++){</span>
+          let filter = <span class="cstat-no" title="statement not covered" >filterParams[i],</span>textInput=<span class="cstat-no" title="statement not covered" >{},</span>tokenInput;
+<span class="cstat-no" title="statement not covered" >          if(filter["type"] === "text"){</span>
+<span class="cstat-no" title="statement not covered" >            textInput["value"] = filter.name;</span>
+<span class="cstat-no" title="statement not covered" >            textInput["label"] = filter.labelText;</span>
+<span class="cstat-no" title="statement not covered" >            filterInputFields.push(textInput)</span>
+          }
+          else <span class="cstat-no" title="statement not covered" >if(filter["type"] === "token"){</span>
+            let tokens = <span class="cstat-no" title="statement not covered" >filter["tokens"];</span>
+<span class="cstat-no" title="statement not covered" >            if(filter["name"] === "status"){</span>
+<span class="cstat-no" title="statement not covered" >              statusToken["value"] = filter["name"];</span>
+<span class="cstat-no" title="statement not covered" >              statusToken["label"] = filter["labelText"];</span>
+            }
+            else <span class="cstat-no" title="statement not covered" >if(filter["name"] === "timeperiod"){</span>
+<span class="cstat-no" title="statement not covered" >              timePeriodToken["value"] = filter["name"];</span>
+<span class="cstat-no" title="statement not covered" >              timePeriodToken["label"] = filter["labelText"];</span>
+            }
+            else <span class="cstat-no" title="statement not covered" >if(filter["name"] === "operatingMode"){</span>
+<span class="cstat-no" title="statement not covered" >              operatingModeToken["value"] = filter["name"];</span>
+<span class="cstat-no" title="statement not covered" >              operatingModeToken["label"] = filter["labelText"];</span>
+            }
+<span class="cstat-no" title="statement not covered" >            for(let k in tokens){</span>
+              let token = <span class="cstat-no" title="statement not covered" >{}</span>
+<span class="cstat-no" title="statement not covered" >              token.value = k</span>
+<span class="cstat-no" title="statement not covered" >              token.label = tokens[k];</span>
+<span class="cstat-no" title="statement not covered" >              if(filter["name"] === "status"){</span>
+<span class="cstat-no" title="statement not covered" >                statusLabels.push(token);</span>
+              }
+              else <span class="cstat-no" title="statement not covered" >if(filter["name"] === "timeperiod"){</span>
+<span class="cstat-no" title="statement not covered" >                timePeriodLabels.push(token);</span>
+              }
+              else <span class="cstat-no" title="statement not covered" >if(filter["name"] === "operatingMode"){</span>
+<span class="cstat-no" title="statement not covered" >                operatingModeLabels.push(token);</span>
+              }
+              
+            }
+          }
+&nbsp;
+      }
+<span class="cstat-no" title="statement not covered" >      return {</span>
+        filterInputFields,
+        statusLabels,
+        statusToken,
+        timePeriodLabels,
+        timePeriodToken,
+        operatingModeToken,
+        operatingModeLabels
+      }
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    _p</span>rocessFilterToken(filterParams) {
+        let selectedToken= <span class="cstat-no" title="statement not covered" >this.state.tokenSelected;</span>
+        let statusColumn=<span class="cstat-no" title="statement not covered" >&lt;FilterTokenWrap field={filterParams.statusToken} tokenCallBack={this._handelTokenClick.bind(this)} label={filterParams.statusLabels} selectedToken={selectedToken}/&gt;;</span>
+        let timePeriodColumn=<span class="cstat-no" title="statement not covered" >&lt;FilterTokenWrap selection={SINGLE} field={filterParams.timePeriodToken} tokenCallBack={this._handelTokenClick.bind(this)} label={filterParams.timePeriodLabels} selectedToken={selectedToken}/&gt;;</span>
+        let operatingModeColumn = <span class="cstat-no" title="statement not covered" >&lt;FilterTokenWrap  field={filterParams.operatingModeToken} tokenCallBack={this._handelTokenClick.bind(this)} label={filterParams.operatingModeLabels} selectedToken={selectedToken}/&gt;;</span>
+        let columnDetail=<span class="cstat-no" title="statement not covered" >{</span>
+          column1token:statusColumn,
+         column2token:timePeriodColumn,
+         column3token:operatingModeColumn
+       };
+<span class="cstat-no" title="statement not covered" >        return columnDetail;</span>
+    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+<span class="fstat-no" title="function not covered" >    _h</span>andelTokenClick(field,value,state) {
+        var stateObject = <span class="cstat-no" title="statement not covered" >JSON.parse(JSON.stringify(this.state))</span>
+<span class="cstat-no" title="statement not covered" >        this.setState({tokenSelected:handelTokenClick(field,value,state,stateObject)});</span>
+        
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    _h</span>andleInputQuery(inputQuery,queryField) {
+         var stateObject = <span class="cstat-no" title="statement not covered" >JSON.parse(JSON.stringify(this.state))</span>
+<span class="cstat-no" title="statement not covered" >        this.setState({searchQuery:handleInputQuery(inputQuery,queryField,stateObject)})</span>
+    }
+&nbsp;
+&nbsp;
+<span class="fstat-no" title="function not covered" >    _a</span>pplyFilter() {
+        let filterState=<span class="cstat-no" title="statement not covered" >this.state,</span> _query=<span class="cstat-no" title="statement not covered" >{};</span>
+<span class="cstat-no" title="statement not covered" >        if (filterState.searchQuery) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if ( filterState.searchQuery["request_id"]) {</span>
+<span class="cstat-no" title="statement not covered" >                _query.request_id=filterState.searchQuery["request_id"]</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (filterState.searchQuery["pps_id"]) {</span>
+<span class="cstat-no" title="statement not covered" >                _query.pps_id=filterState.searchQuery["pps_id"]</span>
+            }
+<span class="cstat-no" title="statement not covered" >            if (filterState.searchQuery["sku_id"]) {</span>
+<span class="cstat-no" title="statement not covered" >                _query.sku_id=filterState.searchQuery["sku_id"]</span>
+            }
+<span class="cstat-no" title="statement not covered" >            if (filterState.searchQuery["user_id"]) {</span>
+<span class="cstat-no" title="statement not covered" >                _query.user_id=filterState.searchQuery["user_id"]</span>
+            }
+&nbsp;
+            
+<span class="cstat-no" title="statement not covered" >            if (filterState.tokenSelected["status"] &amp;&amp; filterState.tokenSelected["status"][0] !== "any") {</span>
+<span class="cstat-no" title="statement not covered" >                _query.status=filterState.tokenSelected["status"]</span>
+            }
+<span class="cstat-no" title="statement not covered" >            if (filterState.tokenSelected["timeperiod"]) {</span>
+<span class="cstat-no" title="statement not covered" >                _query.time_period=filterState.tokenSelected["timeperiod"]</span>
+            }
+<span class="cstat-no" title="statement not covered" >            if (filterState.tokenSelected["operatingMode"] &amp;&amp; filterState.tokenSelected["operatingMode"][0] !== "any") {</span>
+<span class="cstat-no" title="statement not covered" >                _query.operatingMode=filterState.tokenSelected["operatingMode"]</span>
+            }
+<span class="cstat-no" title="statement not covered" >            _query.pageSize = this.props.pageSize;</span>
+<span class="cstat-no" title="statement not covered" >            this.props.applyOLFilterFlag(true);</span>
+<span class="cstat-no" title="statement not covered" >            hashHistory.push({pathname: "/reports/operationsLog", query: _query})</span>
+        }
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    _c</span>learFilter(){
+<span class="cstat-no" title="statement not covered" >        this.setState({</span>
+        tokenSelected: {
+          "status":["any"], 
+          "timeperiod":["1_HOUR"],
+          "operatingMode":["any"]
+        }, 
+        searchQuery: {
+          "request_id": "",
+          "sku_id":"",
+          "pps_id": "",
+          "user_id":""
+        },
+        defaultToken: {
+          "status":["any"],
+          "operatingMode":["any"],
+          "timeperiod":["1_HOUR"]
+        }
+        },<span class="fstat-no" title="function not covered" >fu</span>nction(){
+<span class="cstat-no" title="statement not covered" >          this.props.applyOLFilterFlag(false);</span>
+<span class="cstat-no" title="statement not covered" >          hashHistory.push({pathname: "/reports/operationsLog", query: {}})</span>
+        })
+        
+&nbsp;
+    } 
+&nbsp;
+   
+<span class="fstat-no" title="function not covered" >  re</span>nder(){
+        
+        var filterParams = <span class="cstat-no" title="statement not covered" >this._processFilterParams();</span>
+        let olSearchField=<span class="cstat-no" title="statement not covered" >this._processSearchField(filterParams.filterInputFields);</span>
+        let olFilterToken=<span class="cstat-no" title="statement not covered" >this._processFilterToken(filterParams);</span>
+        var noData = <span class="cstat-no" title="statement not covered" >this.props.noData;</span>
+<span class="cstat-no" title="statement not covered" >    return (</span>
+      &lt;div&gt;
+                 &lt;Filter&gt;    
+                  &lt;div className="gor-filter-header"&gt;
+                    &lt;div className="gor-filter-header-h1"&gt;
+                         &lt;FormattedMessage id="gor.filter.filterLabel" description="label for filter" 
+                            defaultMessage="Filter data"/&gt;
+                    &lt;/div&gt;
+                    &lt;div className="gor-filter-header-h2" onClick={this._closeFilter}&gt;
+                        &lt;FormattedMessage id="gor.filter.hide" description="label for hide" 
+                            defaultMessage="Hide"/&gt;
+                    &lt;/div&gt;
+                 &lt;/div&gt;
+                    &lt;div&gt;{noData ?
+                            &lt;div className="gor-no-result-filter"&gt;
+                            &lt;FormattedMessage id="gor.filter.noResult" description="label for no result" 
+                            defaultMessage="No results found, please try again"/&gt;
+                            &lt;/div&gt;:""}
+                    &lt;/div&gt;
+                     &lt;div className="gor-filter-body"&gt;
+                      &lt;div className="gor-filter-body-filterToken-wrap"&gt; 
+                            &lt;div className="gor-filter-body-filterToken-section1"&gt;
+                                {olFilterToken.column1token}
+                                 &lt;div&gt;
+                                {olFilterToken.column3token}
+                            &lt;/div&gt;
+                            &lt;/div&gt;
+                            &lt;div className="gor-filter-body-filterToken-section1"&gt;
+                                {olFilterToken.column2token}
+                            &lt;/div&gt;
+                            
+                            
+&nbsp;
+                         &lt;/div&gt;
+                         &lt;div className="gor-filter-body-input-wrap"&gt; 
+                            {olSearchField}
+                         &lt;/div&gt;
+                        
+                         
+                         
+                     &lt;/div&gt;
+                 &lt;div className="gor-filter-footer"&gt; 
+                    &lt;span className="gor-filter-footer-h2" onClick={this._clearFilter}&gt;
+                       &lt;FormattedMessage id="gor.filter.reset" description="label for reset" 
+                            defaultMessage="Reset"/&gt;
+                    &lt;/span&gt;
+                    &lt;div className="gor-filter-btn-wrap"&gt;
+                        &lt;button className='gor-add-btn' onClick={this._applyFilter}&gt;
+                            {!this.props.responseFlag? &lt;FormattedMessage id="gor.filter.heading" description="filter heading"  defaultMessage="Apply filter"/&gt; :&lt;div className='spinnerImage'&gt;&lt;/div&gt;}
+                        &lt;/button&gt;
+&nbsp;
+&nbsp;
+                    &lt;/div&gt; 
+                 &lt;/div&gt;  
+                &lt;/Filter&gt;     
+      &lt;/div&gt;
+    );
+  }
+};
+&nbsp;
+OperationsFilter.propTypes={
+  filters:React.PropTypes.object,
+  noData: React.PropTypes.bool,
+  pageSize: React.PropTypes.string,
+  hideLayer:React.PropTypes.bool,
+  responseFlag: React.PropTypes.bool
+}
+OperationsFilter.defaultProps={
+  filters:{},
+  noData: false,
+  pageSize: "25",
+  hideLayer:true,
+  responseFlag: false
+}
+&nbsp;
+&nbsp;
+var mapDispatchToProps=<span class="fstat-no" title="function not covered" >fu</span>nction(dispatch){
+<span class="cstat-no" title="statement not covered" >  return {</span>
+    showTableFilter: <span class="fstat-no" title="function not covered" >fu</span>nction(data){<span class="cstat-no" title="statement not covered" >dispatch(showTableFilter(data));}</span>,
+    applyOLFilterFlag:<span class="fstat-no" title="function not covered" >fu</span>nction(data){<span class="cstat-no" title="statement not covered" >dispatch(applyOLFilterFlag(data))}</span>
+&nbsp;
+  }
+};
+&nbsp;
+&nbsp;
+export default connect(null,mapDispatchToProps,null,{withRef: true})(OperationsFilter) ;
+&nbsp;
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Oct 05 2017 12:18:53 GMT+0530 (IST)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

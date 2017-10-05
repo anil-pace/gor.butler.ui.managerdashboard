@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/utilities/codeToString.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">src/utilities</a> codeToString.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/54</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/35</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/1</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/52</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React  from 'react';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span>
+import { FormattedMessage,FormattedPlural } from 'react-intl'; 
+import {ERROR,SUCCESS} from '../constants/frontEndConstants';
+import {CODE_US001,CODE_US002,CODE_US004,CODE_UE001,CODE_UE002,CODE_UE003,CODE_UE004,CODE_UE005,CODE_UE006,CODE_AS002,CODE_AS003,CODE_G016,CODE_AE001,CODE_AE002,
+  CODE_AE004,CODE_AE005,CODE_AE006,CODE_E026,CODE_E027,CODE_AE007,CODE_AE008,CODE_E052,CODE_E051,CODE_E135} from '../constants/backEndConstants'
+import {US004,UE001,UE002,UE003,UE004,UE005,UE006,AS003,G016,AE001,AE002,AE004,AE005,AE006,E026,E027,ERR_RES,AE007,AE008,E051,E052,E135} from '../constants/messageConstants';
+&nbsp;
+export function codeToString(res){<span class="fstat-no" title="function not covered" ></span>
+          let stringInfo;
+<span class="cstat-no" title="statement not covered" >          switch(res.code)</span>
+          {
+            case CODE_US001:
+<span class="cstat-no" title="statement not covered" >              stringInfo={</span>
+                type:SUCCESS,
+                msg:(&lt;FormattedMessage id="notify.success.add" description='Text for successfull user addition' 
+            defaultMessage='New user "{first} {last}" added successfully' values={{first:res.details[0]||"--",last:res.details[1]||"--"}}/&gt;)   //Make string for addition
+              }
+<span class="cstat-no" title="statement not covered" ></span>              break;
+            case CODE_US002:
+<span class="cstat-no" title="statement not covered" >              stringInfo={</span>
+                type:SUCCESS,
+                msg:(&lt;FormattedMessage id="notify.success.delete" description='Text for successfull user deletion' 
+            defaultMessage='User "{first} {last}" deleted successfully' values={{first:res.details[0]||"--",last:res.details[1]||"--"}}/&gt;)    //Make string for deletion
+              }
+<span class="cstat-no" title="statement not covered" ></span>              break;
+            case CODE_US004:
+<span class="cstat-no" title="statement not covered" >              stringInfo={</span>
+                type:SUCCESS,
+                msg:US004
+              }
+<span class="cstat-no" title="statement not covered" ></span>              break;
+            case CODE_AS002:
+<span class="cstat-no" title="statement not covered" >              stringInfo={</span>
+                type:SUCCESS,
+                msg:(&lt;FormattedMessage id="notify.delete.audit.success" description='Text for successfull audit deletion' 
+            defaultMessage="Audit task {audit_id} has been deleted" values={{audit_id:res.details["display_id"]||"--"}}/&gt;)
+              }
+<span class="cstat-no" title="statement not covered" ></span>              break;              
+            case CODE_UE001:
+<span class="cstat-no" title="statement not covered" >              stringInfo={</span>
+                type:ERROR,
+                msg:UE001
+              }
+<span class="cstat-no" title="statement not covered" ></span>              break;
+            case CODE_UE002:
+<span class="cstat-no" title="statement not covered" >              stringInfo={</span>
+                type:ERROR,
+                msg:UE002
+              }
+<span class="cstat-no" title="statement not covered" ></span>              break;
+            case CODE_UE003:
+<span class="cstat-no" title="statement not covered" >              stringInfo={</span>
+                type:ERROR,
+                msg:UE003
+              }
+<span class="cstat-no" title="statement not covered" ></span>              break;
+            case CODE_UE004:
+<span class="cstat-no" title="statement not covered" >              stringInfo={</span>
+                type:ERROR,
+                msg:UE004
+              }
+<span class="cstat-no" title="statement not covered" ></span>              break;
+            case CODE_UE005:
+<span class="cstat-no" title="statement not covered" >              stringInfo={</span>
+                type:ERROR,
+                msg:UE005
+              }
+<span class="cstat-no" title="statement not covered" ></span>              break;
+            case CODE_UE006:
+<span class="cstat-no" title="statement not covered" >              stringInfo={</span>
+                type:ERROR,
+                msg:UE006
+              }
+<span class="cstat-no" title="statement not covered" ></span>              break;
+            case CODE_AS003:
+<span class="cstat-no" title="statement not covered" >              stringInfo={</span>
+                type:ERROR,
+                msg:AS003
+              }
+<span class="cstat-no" title="statement not covered" ></span>              break;     
+            case CODE_G016:
+<span class="cstat-no" title="statement not covered" >              stringInfo={</span>
+                type:ERROR,
+                msg:G016
+              }
+<span class="cstat-no" title="statement not covered" ></span>              break;
+            case CODE_AE001:
+<span class="cstat-no" title="statement not covered" >              stringInfo={</span>
+                type:ERROR,
+                msg:AE001
+              }                     
+<span class="cstat-no" title="statement not covered" ></span>              break;
+            case CODE_AE002:
+<span class="cstat-no" title="statement not covered" >              stringInfo={</span>
+                type:ERROR,
+                msg:AE002
+              }                     
+<span class="cstat-no" title="statement not covered" ></span>              break;
+            case CODE_AE004:
+<span class="cstat-no" title="statement not covered" >              stringInfo={</span>
+                type:ERROR,
+                msg:AE004
+              }                     
+<span class="cstat-no" title="statement not covered" ></span>              break;
+            case CODE_AE005:
+<span class="cstat-no" title="statement not covered" >              stringInfo={</span>
+                type:ERROR,
+                msg:AE005
+              }                     
+<span class="cstat-no" title="statement not covered" ></span>              break;
+            case CODE_AE006:
+<span class="cstat-no" title="statement not covered" >              stringInfo={</span>
+                type:ERROR,
+                msg:AE006
+              }                     
+<span class="cstat-no" title="statement not covered" ></span>              break;      
+            case CODE_E026:
+<span class="cstat-no" title="statement not covered" >              stringInfo={</span>
+                type:ERROR,
+                msg:E026
+              }                     
+<span class="cstat-no" title="statement not covered" ></span>              break;                                    
+            case CODE_E027:
+<span class="cstat-no" title="statement not covered" >              stringInfo={</span>
+                type:ERROR,
+                msg:E027
+              }                     
+<span class="cstat-no" title="statement not covered" ></span>              break;
+            case CODE_AE008:
+<span class="cstat-no" title="statement not covered" >              stringInfo={</span>
+                type:SUCCESS,
+                msg:AE008
+              }                     
+<span class="cstat-no" title="statement not covered" ></span>              break;    
+            case CODE_AE007:
+<span class="cstat-no" title="statement not covered" >              stringInfo={</span>
+                type:SUCCESS,
+                msg:AE007
+              }                     
+<span class="cstat-no" title="statement not covered" ></span>              break;                                            
+            case CODE_E051:
+<span class="cstat-no" title="statement not covered" >              stringInfo={</span>
+                type:ERROR,
+                msg:E051
+              }     
+<span class="cstat-no" title="statement not covered" ></span>              break;                              
+            case CODE_E052:
+<span class="cstat-no" title="statement not covered" >              stringInfo={</span>
+                type:ERROR,
+                msg:E052
+              }                                   
+<span class="cstat-no" title="statement not covered" ></span>              break;
+              case CODE_E135:
+<span class="cstat-no" title="statement not covered" >              stringInfo={</span>
+                type:ERROR,
+                msg:E135
+              }                                   
+<span class="cstat-no" title="statement not covered" ></span>              break;
+&nbsp;
+              
+            default:
+<span class="cstat-no" title="statement not covered" >              stringInfo={</span>
+                type:ERROR,
+                msg:ERR_RES
+              }
+          }
+<span class="cstat-no" title="statement not covered" >          return stri</span>ngInfo;
+}</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Oct 05 2017 12:18:53 GMT+0530 (IST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

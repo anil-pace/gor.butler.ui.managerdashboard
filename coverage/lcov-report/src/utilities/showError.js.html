@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/utilities/showError.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">src/utilities</a> showError.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/32</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/19</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/1</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/31</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {setLoginSpinner} from '../actio<span class="cstat-no" title="statement not covered" >ns/loginAction';<span class="cstat-no" title="statement not covered" ></span></span>
+import {uploadMasterDataProcessing} from '../actions/utilityActions';
+import {AUTH_LOGIN,MASTER_FILE_UPLOAD,DOWNLOAD_STOCK_LEDGER_REPORT,DOWNLOAD_STOCK_LEDGER_RAW_TRANSACTIONS_REPORT,PPS_PROFILE_REQUESTED} from '../constants/frontEndConstants';
+import {ERR_CONNECT,ERR_400,ERR_401,ERR_403,ERR_405,ERR_408,ERR_409,ERR_500,ERR_502,NO_NET} from '../constants/messageConstants';
+import {notifyFail,loginError} from '../actions/validationActions';
+import {setStockLedgerSpinner,setStockLedgerRawTransactionsSpinner} from '../actions/spinnerAction'
+import {profileRequested} from './../actions/ppsConfigurationActions'
+&nbsp;
+export function ShowError(store,cause,status)<span class="fstat-no" title="function not covered" ></span>
+{
+<span class="cstat-no" title="statement not covered" >	console.log('In Error utility');</span>
+<span class="cstat-no" title="statement not covered" >	switch(status)</span>
+	{
+		case 400:
+<span class="cstat-no" title="statement not covered" >          	store.dispatch(notifyFail(ERR_400));</span>
+<span class="cstat-no" title="statement not covered" >			break;</span>
+		case 401:
+<span class="cstat-no" title="statement not covered" >			if(cause=== AUTH_LOGIN)</span>
+			{
+<span class="cstat-no" title="statement not covered" >				store.dispatch(setLoginSpinner(false));</span>
+<span class="cstat-no" title="statement not covered" >				store.dispatch(loginError(NO_NET));</span>
+			}
+			else
+			{
+<span class="cstat-no" title="statement not covered" >          		store.dispatch(notifyFail(ERR_401));</span>
+			}
+<span class="cstat-no" title="statement not covered" >			break;</span>
+		case 403:
+<span class="cstat-no" title="statement not covered" >          	store.dispatch(notifyFail(ERR_403));</span>
+<span class="cstat-no" title="statement not covered" >			break;</span>
+		case 405:
+<span class="cstat-no" title="statement not covered" >          	store.dispatch(notifyFail(ERR_405));</span>
+<span class="cstat-no" title="statement not covered" >			break;</span>
+		case 408:
+<span class="cstat-no" title="statement not covered" >          	store.dispatch(notifyFail(ERR_408));</span>
+<span class="cstat-no" title="statement not covered" >			break;</span>
+		case 409:
+<span class="cstat-no" title="statement not covered" >          	store.dispatch(notifyFail(ERR_409));</span>
+<span class="cstat-no" title="statement not covered" >			break;</span>
+		case 500:
+<span class="cstat-no" title="statement not covered" >          	store.dispatch(notifyFail(ERR_500));		</span>
+<span class="cstat-no" title="statement not covered" >			break;</span>
+		case 502:
+<span class="cstat-no" title="statement not covered" >          	store.dispatch(notifyFail(ERR_502));		</span>
+<span class="cstat-no" title="statement not covered" >			break;</span>
+		default:
+<span class="cstat-no" title="statement not covered" >          	store.dispatch(notifyFail(ERR_CONNECT));</span>
+	}
+<span class="cstat-no" title="statement not covered" >	if(cause=== MASTER_FILE_UPLOAD){</span>
+<span class="cstat-no" title="statement not covered" >		store.dispatch(uploadMasterDataProcessing(false));</span>
+	}
+<span class="cstat-no" title="statement not covered" >	if(cause===DOWNLOAD_STOCK_LEDGER_REPORT){</span>
+<span class="cstat-no" title="statement not covered" >		store.dispatch(setStockLedgerSpinner(false))</span>
+	}
+<span class="cstat-no" title="statement not covered" >	if(cause===DOWNLOAD_STOCK_LEDGER_RAW_TRANSACTIONS_REPORT){</span>
+<span class="cstat-no" title="statement not covered" >		store.dispatch(setStockLedgerRawTransactionsSpinner(false))</span>
+	}
+<span class="cstat-no" title="statement not covered" >	if(cause===PPS_PROFILE_REQUESTED){</span>
+<span class="cstat-no" title="statement not covered" >		store.dispatch(profileRequested({}))</span>
+	}
+}  </pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Oct 05 2017 12:18:53 GMT+0530 (IST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

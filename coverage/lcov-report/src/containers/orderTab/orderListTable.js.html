@@ -1,0 +1,1163 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/containers/orderTab/orderListTable.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/containers/orderTab</a> orderListTable.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/73</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/32</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/9</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/69</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+import {Table, Column} from 'fixed-data-table';
+import Dimensions from 'react-dimensions'
+import {FormattedMessage, defineMessages} from 'react-intl';
+import {
+    SortHeaderCell,
+    tableRenderer,
+    TextCell,
+    StatusCell
+} from '../../components/commonFunctionsDataTable';
+import {
+    GOR_TABLE_HEADER_HEIGHT,
+    DEBOUNCE_TIMER
+} from '../../constants/frontEndConstants';
+import {debounce} from '../../utilities/debounce';
+&nbsp;
+const messages=defineMessages({<span class="cstat-no" title="statement not covered" ></span>
+    filterPlaceholder: {
+        id: 'table.filter.placeholder',
+        description: 'placeholder for table filter',
+        defaultMessage: 'Filter by keywords',
+    }
+});
+&nbsp;
+&nbsp;
+class OrderListTable extends React.Component {
+&nbsp;
+&nbsp;
+<span class="fstat-no" title="function not covered" >    co</span>nstructor(props) {
+<span class="cstat-no" title="statement not covered" >        super(props);</span>
+<span class="cstat-no" title="statement not covered" >        if (this.props.items=== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >            this._dataList=new tableRenderer(0);</span>
+        }
+        else {
+<span class="cstat-no" title="statement not covered" >            this._dataList=new tableRenderer(this.props.items.length);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        this._defaultSortIndexes=[];</span>
+<span class="cstat-no" title="statement not covered" >        this._dataList.newData=this.props.items;</span>
+        var size=th<span class="cstat-no" title="statement not covered" >is._dataList.getSize();</span>
+<span class="cstat-no" title="statement not covered" >        for (var index=0; index &lt; size; index++) {</span>
+<span class="cstat-no" title="statement not covered" >            this._defaultSortIndexes.push(index);</span>
+        }
+        var columnWidth=(t<span class="cstat-no" title="statement not covered" >his.props.containerWidth / this.props.itemNumber)</span>
+<span class="cstat-no" title="statement not covered" >        this.state={</span>
+            sortedDataList: this._dataList,
+            colSortDirs: {status: "DESC"},
+            columnWidths: {
+                id: columnWidth,
+                status: columnWidth,
+                recievedTime: columnWidth,
+                completedTime: columnWidth,
+                pickBy: columnWidth,
+                orderLine: columnWidth
+            },
+        };
+<span class="cstat-no" title="statement not covered" >        this._onFilterChange=this._onFilterChange.bind(this);</span>
+<span class="cstat-no" title="statement not covered" >        this._onColumnResizeEndCallback=this._onColumnResizeEndCallback.bind(this);</span>
+<span class="cstat-no" title="statement not covered" >        this.backendSort=this.backendSort.bind(this);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    co</span>mponentWillReceiveProps(nextProps) {
+<span class="cstat-no" title="statement not covered" >        if (nextProps.items=== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >            this._dataList=new tableRenderer(0);</span>
+        }
+        else {
+<span class="cstat-no" title="statement not covered" >            this._dataList=new tableRenderer(nextProps.items.length);</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this._defaultSortIndexes=[];</span>
+<span class="cstat-no" title="statement not covered" >        this._dataList.newData=nextProps.items;</span>
+        var size=th<span class="cstat-no" title="statement not covered" >is._dataList.getSize();</span>
+<span class="cstat-no" title="statement not covered" >        for (var index=0; index &lt; size; index++) {</span>
+<span class="cstat-no" title="statement not covered" >            this._defaultSortIndexes.push(index);</span>
+        }
+        var columnWidth=(n<span class="cstat-no" title="statement not covered" >extProps.containerWidth / nextProps.itemNumber),</span> sortIndex={<span class="cstat-no" title="statement not covered" >status: "DESC"};</span>
+<span class="cstat-no" title="statement not covered" >        if (this.props.currentHeaderOrder.colSortDirs) {</span>
+<span class="cstat-no" title="statement not covered" >            sortIndex=this.props.currentHeaderOrder.colSortDirs;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        this.state={</span>
+            sortedDataList: this._dataList,
+            colSortDirs: sortIndex,
+            columnWidths: {
+                id: columnWidth,
+                status: columnWidth,
+                recievedTime: columnWidth,
+                completedTime: columnWidth,
+                pickBy: columnWidth,
+                orderLine: columnWidth
+            },
+        };
+<span class="cstat-no" title="statement not covered" >        this._onFilterChange=this._onFilterChange.bind(this);</span>
+<span class="cstat-no" title="statement not covered" >        this._onColumnResizeEndCallback=this._onColumnResizeEndCallback.bind(this);</span>
+<span class="cstat-no" title="statement not covered" >        this.backendSort=this.backendSort.bind(this);</span>
+    }
+&nbsp;
+&nbsp;
+<span class="fstat-no" title="function not covered" >    sh</span>ouldComponentUpdate(nextProps) {
+<span class="cstat-no" title="statement not covered" >        if (this.props.items &amp;&amp; nextProps.items.length=== 0) {</span>
+<span class="cstat-no" title="statement not covered" >            return false;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        return true;</span>
+    }
+&nbsp;
+&nbsp;
+<span class="fstat-no" title="function not covered" >    _o</span>nColumnResizeEndCallback(newColumnWidth, columnKey) {
+<span class="cstat-no" title="statement not covered" >        this.setState(<span class="fstat-no" title="function not covered" >({</span>columnWidths})=&gt; ({<span class="cstat-no" title="statement not covered" ></span></span>
+            columnWidths: {
+                ...columnWidths,
+                [columnKey]: newColumnWidth,
+            }
+        }));
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    _o</span>nFilterChange(e) {
+        var data={"<span class="cstat-no" title="statement not covered" >type": "searchOrder", "captureValue": "", "selected": 1}, deb</span>ounceFilter;
+<span class="cstat-no" title="statement not covered" >        if (e.target &amp;&amp; (e.target.value || e.target.value=== "")) {</span>
+<span class="cstat-no" title="statement not covered" >            data["captureValue"]=e.target.value;</span>
+<span class="cstat-no" title="statement not covered" >            this.props.setOrderFilter(e.target.value);</span>
+        }
+        else {
+<span class="cstat-no" title="statement not covered" >            data["captureValue"]=e;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        debounceFilter=debounce(this.props.refreshOption, DEBOUNCE_TIMER);</span>
+<span class="cstat-no" title="statement not covered" >        debounceFilter(data);</span>
+    }
+&nbsp;
+&nbsp;
+<span class="fstat-no" title="function not covered" >    ba</span>ckendSort(columnKey, sortDir) {
+        var data={"<span class="cstat-no" title="statement not covered" >columnKey": columnKey, "sortDir": sortDir, selected: this.props.pageNumber}</span>
+<span class="cstat-no" title="statement not covered" >        this.props.sortHeaderState(columnKey);</span>
+<span class="cstat-no" title="statement not covered" >        this.props.onSortChange(data);</span>
+<span class="cstat-no" title="statement not covered" >        this.props.sortHeaderOrder({</span>
+            colSortDirs: {[columnKey]: sortDir},
+        })
+    }
+&nbsp;
+&nbsp;
+&nbsp;
+<span class="fstat-no" title="function not covered" >    _s</span>howAllOrder() {
+<span class="cstat-no" title="statement not covered" >        this.props.refreshOption();</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    re</span>nder() {
+        var {sortedDataList, colSortDirs, columnWidths}=this.state;
+        var totalOrder=th<span class="cstat-no" title="statement not covered" >is.props.totalOrders, h</span>eaderAlert=&lt;div/&gt;, heightRes;<span class="cstat-no" title="statement not covered" ></span>
+        let allDrop=&lt;FormattedMessage id="orderl<span class="cstat-no" title="statement not covered" >ist.table.allDrop"</span>
+                                        description="allOrders dropdown option for orderlist"
+                                        defaultMessage="All orders"/&gt;
+        let breachedDrop=&lt;FormattedMessage id="orderl<span class="cstat-no" title="statement not covered" >ist.table.breachedDrop"</span>
+                                             description="breached dropdown option for orderlist"
+                                             defaultMessage="Breached orders"/&gt;
+        let pendingDrop=&lt;FormattedMessage id="pendin<span class="cstat-no" title="statement not covered" >gDrop.table.allDrop"</span>
+                                            description="pending dropdown option for orderlist"
+                                            defaultMessage="Pending orders"/&gt;
+        let completedDrop=&lt;FormattedMessage id="comple<span class="cstat-no" title="statement not covered" >tedDrop.table.allDrop"</span>
+                                              description="completed dropdown option for orderlist"
+                                              defaultMessage="Completed orders"/&gt;
+        let exception=&lt;FormattedMessage id="except<span class="cstat-no" title="statement not covered" >ionDrop.table" description="exception order dropdown for orderlist"</span>
+                                          defaultMessage="Exception"/&gt;
+&nbsp;
+        let allTimeDrop=&lt;FormattedMessage id="orderl<span class="cstat-no" title="statement not covered" >ist.table.allTimeDrop"</span>
+                                            description="allTime dropdown option for orderlist" defaultMessage="All"/&gt;
+        let oneHrDrop=&lt;FormattedMessage id="orderl<span class="cstat-no" title="statement not covered" >ist.table.oneHrDrop"</span>
+                                          description="oneHr dropdown option for orderlist"
+                                          defaultMessage="Last 1 hours"/&gt;
+        let twoHrDrop=&lt;FormattedMessage id="pendin<span class="cstat-no" title="statement not covered" >gDrop.table.twoHrDrop"</span>
+                                          description="twoHr dropdown option for orderlist"
+                                          defaultMessage="Last 2 hours"/&gt;
+        let sixHrDrop=&lt;FormattedMessage id="comple<span class="cstat-no" title="statement not covered" >tedDrop.table.sixHrDrop"</span>
+                                          description="sixHr dropdown option for orderlist"
+                                          defaultMessage="Last 6 hours"/&gt;
+        let twelveHrDrop=&lt;FormattedMessage id="pendin<span class="cstat-no" title="statement not covered" >gDrop.table.twelveHrDrop"</span>
+                                             description="twelveHr dropdown option for orderlist"
+                                             defaultMessage="Last 12 hours"/&gt;
+        let oneDayDrop=&lt;FormattedMessage id="comple<span class="cstat-no" title="statement not covered" >tedDrop.table.oneDayDrop"</span>
+                                           description="oneDay dropdown option for orderlist"
+                                           defaultMessage="Last 1 day"/&gt;
+<span class="cstat-no" title="statement not covered" >        if (this.props.alertNum !== 0) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            headerAlert=&lt;div className="gorToolHeaderEl alertState"&gt;</span>
+                &lt;div className="table-subtab-alert-icon"/&gt;
+                &lt;div className="gor-inline"&gt;{this.props.alertNum} Alerts&lt;/div&gt;
+            &lt;/div&gt;
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (this.props.containerHeight !== 0) {</span>
+<span class="cstat-no" title="statement not covered" >            heightRes=this.props.containerHeight;</span>
+        }
+        var noData=&lt;div/&gt;;<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        if (totalOrder=== 0 || totalOrder=== undefined || totalOrder=== null) {</span>
+<span class="cstat-no" title="statement not covered" >            noData=&lt;div className="gor-no-data"&gt;&lt;FormattedMessage id="orderlist.table.noData"</span>
+                                                                    description="No data message for orderlist table"
+                                                                    defaultMessage="No Orders Found"/&gt;&lt;/div&gt;
+<span class="cstat-no" title="statement not covered" >            heightRes=GOR_TABLE_HEADER_HEIGHT;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return (</span>
+            &lt;div className="gorTableMainContainer"&gt;
+                &lt;Table
+                    rowHeight={50}
+                    rowsCount={sortedDataList.getSize()}
+                    headerHeight={70}
+                    onColumnResizeEndCallback={this._onColumnResizeEndCallback}
+                    isColumnResizing={false}
+                    width={this.props.containerWidth}
+                    height={heightRes * 0.9}
+                    {...this.props}&gt;
+                    &lt;Column
+                        columnKey="id"
+                        header={
+                            &lt;SortHeaderCell onSortChange={this.backendSort}
+                                            sortDir={colSortDirs.id}&gt;
+                                &lt;div className="gorToolHeaderEl"&gt;
+                                    &lt;div className="gorToolHeaderEl"&gt;
+                                        &lt;FormattedMessage id="orderlist.order.headingText"
+                                                          description='Heading for order IDs in ordertable'
+                                                          defaultMessage='ORDER ID'/&gt;
+                                    &lt;/div&gt;
+                                    &lt;div className="gorToolHeaderSubText"&gt;
+                                        &lt;FormattedMessage id="orderlist.subTotalorder"
+                                                          description='subtotal order for ordertable'
+                                                          defaultMessage='Total:{totalOrder}'
+                                                          values={{totalOrder: totalOrder ? totalOrder : '0'}}/&gt;
+&nbsp;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/SortHeaderCell&gt;
+                        }
+                        cell={  &lt;TextCell data={sortedDataList}/&gt;}
+                        fixed={true}
+                        width={columnWidths.id}
+                        isResizable={true}
+                    /&gt;
+                    &lt;Column
+                        columnKey="status"
+                        header={
+                            &lt;SortHeaderCell onSortChange={this.backendSort} sortDir={colSortDirs.status}&gt;
+                                &lt;div className="gorToolHeaderEl"&gt;
+                                    &lt;div&gt;
+                                        &lt;FormattedMessage id="orderList.table.status" description="Status for orders"
+                                                          defaultMessage="STATUS"/&gt;
+                                    &lt;/div&gt;
+                                    &lt;div&gt;
+                                        &lt;div className="statuslogoWrap"&gt;
+                                            {headerAlert}
+                                        &lt;/div&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/SortHeaderCell&gt;
+                        }
+                        cell={&lt;StatusCell data={sortedDataList} statusKey="statusClass"&gt;&lt;/StatusCell&gt;}
+                        fixed={true}
+                        width={columnWidths.status}
+                        isResizable={true}
+                    /&gt;
+                    &lt;Column
+                        columnKey="pickBy"
+                        header={
+                            &lt;SortHeaderCell onSortChange={this.backendSort}
+                                            sortDir={colSortDirs.pickBy}&gt;
+                                &lt;div className="gorToolHeaderEl"&gt;
+                                    &lt;FormattedMessage id="orderlist.table.pickBy" description="pick by for orderlist"
+                                                      defaultMessage="PICK BY"/&gt;
+                                    &lt;div className="gorToolHeaderSubText"&gt;
+                                        &lt;FormattedMessage id="orderlist.pendingOrders"
+                                                          description='pendingOrders header ordertable'
+                                                          defaultMessage='{pendingOrders, number} {pendingOrders, plural, one {order} other {orders}} pending'
+                                                          values={{pendingOrders: this.props.totalPendingOrder ? this.props.totalPendingOrder : '0'}}
+&nbsp;
+                                                          /&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/SortHeaderCell&gt;
+                        }
+                        cell={&lt;TextCell style={{textTransform: 'capitalize'}} data={sortedDataList}/&gt;}
+                        fixed={true}
+                        width={columnWidths.pickBy}
+                        isResizable={true}
+                    /&gt;
+                    &lt;Column
+                        columnKey="recievedTime"
+                        header={
+                            &lt;SortHeaderCell onSortChange={this.backendSort}
+                                            sortDir={colSortDirs.recievedTime}&gt;
+                                &lt;div className="gorToolHeaderEl"&gt;
+                                    &lt;FormattedMessage id="orderlist.table.operatingMode"
+                                                      description="recievedTime for Orders"
+                                                      defaultMessage="RECIEVED TIME"/&gt;
+                                    &lt;div className="gorToolHeaderSubText"&gt;
+                                        {this.props.timeZoneString}
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/SortHeaderCell&gt;
+                        }
+                        cell={&lt;TextCell style={{textTransform: 'capitalize'}} data={sortedDataList}/&gt;}
+                        fixed={true}
+                        width={columnWidths.recievedTime}
+                        isResizable={true}
+                    /&gt;
+                    &lt;Column
+                        columnKey="completedTime"
+                        header={
+                            &lt;div className="gor-table-header"&gt;
+                                &lt;div className="gorToolHeaderEl"&gt;
+                                    &lt;FormattedMessage id="orderlist.table.completedTime"
+                                                      description="completedTime for orderlist"
+                                                      defaultMessage="COMPLETED"/&gt;
+                                    &lt;div className="gorToolHeaderSubText"&gt;
+                                        &lt;FormattedMessage id="orderlist.totalCompletedOrder"
+                                                          description='totalCompletedOrder header ordertable'
+                                                          defaultMessage='{totalCompletedOrder, number} {totalCompletedOrder, plural, one {order} other {orders}} completed'
+                                                          values={{totalCompletedOrder: this.props.totalCompletedOrder ? this.props.totalCompletedOrder : '0'}}/&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        }
+                        cell={&lt;TextCell style={{textTransform: 'capitalize'}} data={sortedDataList}/&gt;}
+                        fixed={true}
+                        width={columnWidths.completedTime}
+                        isResizable={true}
+                    /&gt;
+                    &lt;Column
+                        columnKey="orderLine"
+                        header={
+                            &lt;div className="gor-table-header"&gt;
+                                &lt;div className="gorToolHeaderEl"&gt;
+                                    &lt;FormattedMessage id="orderlist.table.orderLine"
+                                                      description="orderLine for orderlist"
+                                                      defaultMessage="ORDER LINE"/&gt;
+                                    &lt;div className="gorToolHeaderSubText"&gt;
+                                        &lt;FormattedMessage id="orderlist.itemsPerOrder"
+                                                          description='itemsPerOrder header ordertable'
+                                                          defaultMessage='Avg {itemsPerOrder, number} {itemsPerOrder, plural, one {item} other {items}}/order'
+                                                          values={{itemsPerOrder: this.props.itemsPerOrder ? (this.props.itemsPerOrder).toFixed(2) : '0'}}/&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        }
+                        cell={&lt;TextCell data={sortedDataList} align="left"/&gt;}
+                        fixed={true}
+                        width={columnWidths.orderLine}
+                        isResizable={true}
+                    /&gt;
+                &lt;/Table&gt;
+                &lt;div&gt; {noData} &lt;/div&gt;
+            &lt;/div&gt;
+        );
+    }
+}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >OrderListTable.PropTypes={</span>
+    items: React.PropTypes.array,
+    containerWidth: React.PropTypes.number,
+    itemNumber: React.PropTypes.number,
+    currentHeaderOrder: React.PropTypes.object,
+    setOrderFilter: React.PropTypes.func,
+    sortHeaderState: React.PropTypes.func,
+    refreshOption: React.PropTypes.func,
+    lastUpdatedText: React.PropTypes.string,
+    isFilterApplied: React.PropTypes.bool,
+    timeZoneString: React.PropTypes.string,
+    lastUpdated: React.PropTypes.string,
+    responseFlag: React.PropTypes.bool
+};
+&nbsp;
+export default Dimensions()(OrderListTable);
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Oct 05 2017 12:18:53 GMT+0530 (IST)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>
