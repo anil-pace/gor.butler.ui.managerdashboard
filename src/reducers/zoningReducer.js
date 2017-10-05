@@ -15,7 +15,7 @@ export  function zoningReducer(state={},action){
       return Object.assign({}, state, { 
             zoneHeader,
             emergencyData,
-            "hasDataChanged":!state.hasDataChanged
+            "hasDataChang":!state.hasDataChanged
           })
     break;
                      
