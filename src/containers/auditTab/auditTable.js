@@ -68,12 +68,15 @@ class AuditTable extends React.Component {
         var el=event.target;
         var elClassName=(el.className).trim(),
             parentEl, siblingEl, totalRowCount=this.props.items.length - 1;
-        if (elClassName !== "gor-dropdown-wrapper" && elClassName !== "gor-dropdown") {
+        if (elClassName !== "gor-dropdown-wrapper" && elClassName !== "gor-dropdown" && elClassName!=='gor-audit-info-icon') {
             return;
         }
         parentEl=el.parentNode;
         while (parentEl) {
             if (parentEl.className=== "fixedDataTableRowLayout_rowWrapper") {
+                parentEl.parentNode.childNodes.forEach(function(node){
+                    node.style.zIndex="0";
+                })
                 parentEl.style.zIndex="300";
                 if (index=== totalRowCount && totalRowCount !== 0) {
                     if (elClassName !== "gor-dropdown-wrapper") {
@@ -91,11 +94,6 @@ class AuditTable extends React.Component {
                 parentEl=parentEl.parentNode;
             }
         }
-        if (parentEl.nextSibling) {
-            parentEl.nextSibling.style.zIndex="2";
-        }
-
-
     }
 
     tableState(nProps, current) {

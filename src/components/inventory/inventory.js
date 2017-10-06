@@ -115,4 +115,3 @@ Inventory.propTypes={
 	timeOffset:React.PropTypes.string
 }
 export default Inventory;
-

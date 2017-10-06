@@ -4203,9 +4203,45 @@
     "filepath": "./src/utilities/getFormattedMessages.js"
   },
   {
+    "id": "pps.mode.success",
+    "description": "PPS mode change success",
+    "defaultMessage": "Mode change request successfull",
+    "filepath": "./src/utilities/getFormattedMessages.js"
+  },
+  {
     "id": "pps.status.reject",
     "description": "PPS status change reject",
     "defaultMessage": "{unsuccessful}/{totalCount} status change request rejected",
+    "filepath": "./src/utilities/getFormattedMessages.js"
+  },
+  {
+    "id": "pps.status.success",
+    "description": "PPS status change success",
+    "defaultMessage": "Status change request successfull",
+    "filepath": "./src/utilities/getFormattedMessages.js"
+  },
+  {
+    "id": "utility.downloadGRN.generateSuccess",
+    "description": "GRN Request submitted successfully",
+    "defaultMessage": "GRN Request submitted successfully",
+    "filepath": "./src/utilities/getFormattedMessages.js"
+  },
+  {
+    "id": "utility.downloadInventory.generateSuccess",
+    "description": "Inventory Report Request submitted successfully",
+    "defaultMessage": "Inventory Report Request submitted successfully",
+    "filepath": "./src/utilities/getFormattedMessages.js"
+  },
+  {
+    "id": "utility.downloadGRN.refreshed",
+    "description": "GRN History Refreshed!",
+    "defaultMessage": "GRN History Refreshed!",
+    "filepath": "./src/utilities/getFormattedMessages.js"
+  },
+  {
+    "id": "utility.downloadReprt.refreshed",
+    "description": "Reports History Refreshed!",
+    "defaultMessage": "Reports History Refreshed!",
     "filepath": "./src/utilities/getFormattedMessages.js"
   },
   {
