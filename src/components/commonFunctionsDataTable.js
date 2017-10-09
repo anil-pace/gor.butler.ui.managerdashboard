@@ -482,7 +482,7 @@ export class SortHeaderCell extends React.Component {
 export const AuditIssuesTooltipCell = ({rowIndex, data, columnKey, setClass, callBack, resolved, unresolved, ...props}) => (
     <Cell {...props}>
 
-
+<input type="checkbox" checked={data.getObjectAt(rowIndex)["isChecked"]}/>
         {data.getObjectAt(rowIndex)[unresolved] || data.getObjectAt(rowIndex).infoIcon?
 
 

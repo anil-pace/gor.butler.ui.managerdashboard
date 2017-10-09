@@ -120,6 +120,7 @@ class AuditTable extends React.Component {
                 completedTime: nProps.containerWidth * 0.13,
                 actions: nProps.containerWidth * 0.25
             },
+            headerChecked: false,
         };
     }
 
@@ -240,6 +241,7 @@ class AuditTable extends React.Component {
         var skuAudit=this.props.auditState.skuAudit;
         var totalProgress=this.props.auditState.totalProgress;
         var rowsCount=sortedDataList.getSize();
+        var headerChecked=false;
         var headerAlert=<div className="alertState">
             <div className="table-subtab-alert-icon"/>
             <div className="gor-inline"><FormattedMessage id="auditList.alert.lable"
@@ -276,6 +278,10 @@ class AuditTable extends React.Component {
                 <Column
                     columnKey="display_id"
                     header={
+                        <div>
+                        <div className="gor-header-check">
+                                    <input type="checkbox" checked={headerChecked}/>
+                                </div>
                         <SortHeaderCell onSortChange={this.backendSort}
                                         sortDir={colSortDirs.display_id}>
                             <div className="gorToolHeaderEl">
@@ -290,6 +296,7 @@ class AuditTable extends React.Component {
                                 </div>
                             </div>
                         </SortHeaderCell>
+                        </div>
                     }
                     cell={<AuditIssuesTooltipCell data={sortedDataList} callBack={this._handleOnClickDropdown.bind(this)} resolved="resolvedTask"
                                                   unresolved="unresolvedTask"/>}
