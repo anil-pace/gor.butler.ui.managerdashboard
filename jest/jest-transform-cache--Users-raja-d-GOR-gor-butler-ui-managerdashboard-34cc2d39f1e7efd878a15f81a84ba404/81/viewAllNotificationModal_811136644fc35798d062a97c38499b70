@@ -1,0 +1,58 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/components/notifications/viewAllNotificationModal.js'; /**
+                                                                                                                                                                                                                                      * Container for Notifications
+                                                                                                                                                                                                                                      * 
+                                                                                                                                                                                                                                      */
+
+//import {Table, Column, Cell} from 'fixed-data-table';
+var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_commonFunctionsDataTable = require('../commonFunctionsDataTable');
+
+
+
+
+
+
+
+
+
+
+
+
+
+var /* istanbul ignore next */_index = require('../gor-table-component/index'); /* istanbul ignore next */var _index2 = _interopRequireDefault(_index);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+class ViewAllNotifications extends /* istanbul ignore next */_react2.default.Component {
+
+  _closeModal() {
+    this.props.removeModal();
+  }
+
+
+
+  render() {
+
+    return (
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'allNotificationWrap', __source: { fileName: _jsxFileName, lineNumber: 34 }, __self: this },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-modal-content', __source: { fileName: _jsxFileName, lineNumber: 35 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-modal-head', __source: { fileName: _jsxFileName, lineNumber: 36 }, __self: this },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-usr-add', __source: { fileName: _jsxFileName, lineNumber: 37 }, __self: this },
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-sub-head', __source: { fileName: _jsxFileName, lineNumber: 38 }, __self: this })),
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'close', onClick: this._closeModal.bind(this), __source: { fileName: _jsxFileName, lineNumber: 40 }, __self: this }, /* istanbul ignore next */'\xD7')),
+
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-modal-body', __source: { fileName: _jsxFileName, lineNumber: 42 }, __self: this },
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorTableMainContainer gor-all-not-tbl', __source: { fileName: _jsxFileName, lineNumber: 44 }, __self: this },
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 45 }, __self: this }))))));
+
+
+
+
+
+
+
+
+
+  }} /* istanbul ignore next */exports.default =
+
+
+ViewAllNotifications;

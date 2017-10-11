@@ -1,0 +1,116 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/components/inventory/inventory.js'; /**
+                                                                                                                                                                                                                   * Container for Inventory tab
+                                                                                                                                                                                                                   * This will be switched based on tab click
+                                                                                                                                                                                                                   */
+
+var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_legend = require('../legend/legend'); /* istanbul ignore next */var _legend2 = _interopRequireDefault(_legend);
+var /* istanbul ignore next */_inventoryStacked = require('../../containers/inventoryTab/inventoryStacked'); /* istanbul ignore next */var _inventoryStacked2 = _interopRequireDefault(_inventoryStacked);
+var /* istanbul ignore next */_snapShot = require('./snapShot'); /* istanbul ignore next */var _snapShot2 = _interopRequireDefault(_snapShot);
+var /* istanbul ignore next */_inventoryHistogram = require('../../containers/inventoryTab/inventoryHistogram'); /* istanbul ignore next */var _inventoryHistogram2 = _interopRequireDefault(_inventoryHistogram);
+var /* istanbul ignore next */_itemCategoryTable = require('./itemCategoryTable'); /* istanbul ignore next */var _itemCategoryTable2 = _interopRequireDefault(_itemCategoryTable);
+var /* istanbul ignore next */_frontEndConstants = require('../../constants/frontEndConstants');
+var /* istanbul ignore next */_pickPutLineGraph = require('./pickPutLineGraph'); /* istanbul ignore next */var _pickPutLineGraph2 = _interopRequireDefault(_pickPutLineGraph);
+var /* istanbul ignore next */_reactIntl = require('react-intl'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+
+
+
+class Inventory extends /* istanbul ignore next */_react2.default.Component {
+
+	render() {
+
+		var snapShotData = this.props.isPrevDateSelected ? this.props.inventoryDataPrevious : this.props.snapshotData;
+
+
+		var histogramLegend = {
+			data: [{
+				color: /* istanbul ignore next */_frontEndConstants.INV_HIST_LEGEND_COLOR,
+				name: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'inventory.histogram.legend', description: 'Inventory Histogram Legend',
+						defaultMessage: 'Items Stocked', __source: { fileName: _jsxFileName, lineNumber: 30 }, __self: this },
+					message => /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'tspan', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 32 }, __self: this }, message)) }],
+
+
+			config: /* istanbul ignore next */_frontEndConstants.INV_HIST_LEGEND_CONFIG };
+
+		var lineChartLagend = {
+			data: [
+			{
+				color: /* istanbul ignore next */_frontEndConstants.INV_LINE_LEGEND_IPICKED_COLOR,
+				name: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'inventory.linechart.legendPicked', description: 'Inventory Linechart Legend for picked',
+						defaultMessage: 'Items Picked', __source: { fileName: _jsxFileName, lineNumber: 41 }, __self: this },
+					message => /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'tspan', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 43 }, __self: this }, message)) },
+
+
+			{
+				color: /* istanbul ignore next */_frontEndConstants.INV_LINE_LEGEND_IPUT_COLOR,
+				name: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'inventory.linechart.legendPut', description: 'Inventory Linechart Legend for put',
+						defaultMessage: 'Items Put', __source: { fileName: _jsxFileName, lineNumber: 48 }, __self: this },
+					message => /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'tspan', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 50 }, __self: this }, message)) }],
+
+
+
+			config: /* istanbul ignore next */_frontEndConstants.INV_LINE_LEGEND_CONFIG };
+
+
+		return (
+			/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 58 }, __self: this },
+				/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'head', __source: { fileName: _jsxFileName, lineNumber: 59 }, __self: this },
+
+					/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'labelCnt', __source: { fileName: _jsxFileName, lineNumber: 61 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 61 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'inventory.header', description: 'Inventory Header Message',
+								defaultMessage: 'Inventory', __source: { fileName: _jsxFileName, lineNumber: 61 }, __self: this }), /* istanbul ignore next */' '))),
+
+				/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 64 }, __self: this },
+					/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'histCnt', __source: { fileName: _jsxFileName, lineNumber: 65 }, __self: this },
+						/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 66 }, __self: this },
+							/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'histLbl', __source: { fileName: _jsxFileName, lineNumber: 67 }, __self: this },
+								/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 68 }, __self: this }, this.props.histogramLabel)),
+
+							/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'legendCnt', __source: { fileName: _jsxFileName, lineNumber: 70 }, __self: this },
+								/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_legend2.default, /* istanbul ignore next */{ hasDataChanged: this.props.hasDataChanged, legendData: histogramLegend, __source: { fileName: _jsxFileName, lineNumber: 71 }, __self: this })),
+
+							/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'histogram', __source: { fileName: _jsxFileName, lineNumber: 73 }, __self: this },
+								/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_inventoryHistogram2.default, /* istanbul ignore next */{ noData: this.props.noData, recreatedData: this.props.recreatedData, hasDataChanged: this.props.hasDataChanged, __source: { fileName: _jsxFileName, lineNumber: 74 }, __self: this })),
+
+							/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'histLbl', __source: { fileName: _jsxFileName, lineNumber: 76 }, __self: this },
+								/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 77 }, __self: this }, this.props.linechartLabel)),
+
+							/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'legendCnt', __source: { fileName: _jsxFileName, lineNumber: 79 }, __self: this },
+								/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_legend2.default, /* istanbul ignore next */{ hasDataChanged: this.props.hasDataChanged, legendData: lineChartLagend, legendType: /* istanbul ignore next */_frontEndConstants.LEGEND_ROUND, __source: { fileName: _jsxFileName, lineNumber: 80 }, __self: this })),
+
+							/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'lineGraph', __source: { fileName: _jsxFileName, lineNumber: 82 }, __self: this },
+								/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_pickPutLineGraph2.default, /* istanbul ignore next */{ noData: this.props.noData, recreatedData: this.props.recreatedData, hasDataChanged: this.props.hasDataChanged, __source: { fileName: _jsxFileName, lineNumber: 83 }, __self: this })))),
+
+
+
+
+					/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'stkSnapSht', __source: { fileName: _jsxFileName, lineNumber: 88 }, __self: this },
+						/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'snapShtWrap', __source: { fileName: _jsxFileName, lineNumber: 89 }, __self: this },
+							/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_snapShot2.default, /* istanbul ignore next */{ hasDataChanged: this.props.hasDataChanged, currentDate: this.props.currentDate, snapshotTabData: snapShotData || {}, __source: { fileName: _jsxFileName, lineNumber: 90 }, __self: this }),
+							/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_inventoryStacked2.default, /* istanbul ignore next */{ hasDataChanged: this.props.hasDataChanged, snapshotData: snapShotData || {}, __source: { fileName: _jsxFileName, lineNumber: 91 }, __self: this }),
+							/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_itemCategoryTable2.default, /* istanbul ignore next */{ hasDataChanged: this.props.hasDataChanged, snapshotData: snapShotData || {}, __source: { fileName: _jsxFileName, lineNumber: 92 }, __self: this }))))));
+
+
+
+
+
+
+
+	}}
+;
+
+Inventory.propTypes = {
+	data: /* istanbul ignore next */_react2.default.PropTypes.array,
+	histogramLabel: /* istanbul ignore next */_react2.default.PropTypes.object,
+	linechartLabel: /* istanbul ignore next */_react2.default.PropTypes.object,
+	snapshotData: /* istanbul ignore next */_react2.default.PropTypes.object,
+	inventoryData: /* istanbul ignore next */_react2.default.PropTypes.array,
+	inventoryDataPrevious: /* istanbul ignore next */_react2.default.PropTypes.object,
+	isPrevDateSelected: /* istanbul ignore next */_react2.default.PropTypes.bool,
+	currentDate: /* istanbul ignore next */_react2.default.PropTypes.number,
+	hasDataChanged: /* istanbul ignore next */_react2.default.PropTypes.bool,
+	recreatedData: /* istanbul ignore next */_react2.default.PropTypes.object,
+	noData: /* istanbul ignore next */_react2.default.PropTypes.bool }; /* istanbul ignore next */exports.default =
+
+Inventory;

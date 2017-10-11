@@ -1,0 +1,94 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/containers/putStatusWidget.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_Tilex = require('../components/tile1x/Tilex'); /* istanbul ignore next */var _Tilex2 = _interopRequireDefault(_Tilex);
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_frontEndConstants = require('../constants/frontEndConstants'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+class PutStatusWidget extends /* istanbul ignore next */_react2.default.Component {
+    /**
+                                                                                    * Called once before rendering of component,used to displatch fetch action
+                                                                                    * @return {[type]}
+                                                                                    */
+    constructor(props)
+    {
+        super(props);
+    }
+    /**
+       * [function to format display data coming from server/mock]
+       * @return {[void]} 
+       */
+    _formatContainerData() {
+        var lowStr,valueLeftStatus = '',totalPut = this.props.ppsData ? this.props.ppsData.totalPut : 0,
+        putData = Object.assign({}, this.props.putData),
+        putThroughput = this.props.throughputData ? this.props.throughputData.put_throughput : 0,
+        value = putData ? putData.value : 0,pluralMsg,
+        heading;
+        totalPut = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedNumber, /* istanbul ignore next */{ value: totalPut, __source: { fileName: _jsxFileName, lineNumber: 26 }, __self: this });
+        //Setting display values based on server values/mock
+        if (!value) {
+            value = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'widget.put.heading.value', description: 'Total Items Stocked',
+                defaultMessage: 'None', __source: { fileName: _jsxFileName, lineNumber: 29 }, __self: this });
+            valueLeftStatus = /* istanbul ignore next */_frontEndConstants.GOR_NONE;
+            lowStr = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'widget.put.status.idle', description: 'Put PPS idle message',
+                defaultMessage: '{count} idle PPS (Put mode)',
+                values: {
+                    count: totalPut }, __source: { fileName: _jsxFileName, lineNumber: 32 }, __self: this });
+
+        } else
+        {
+            value = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedNumber, /* istanbul ignore next */{ value: value, __source: { fileName: _jsxFileName, lineNumber: 39 }, __self: this });
+            putThroughput = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedNumber, /* istanbul ignore next */{ value: putThroughput, __source: { fileName: _jsxFileName, lineNumber: 40 }, __self: this });
+
+            pluralMsg = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'widget.put.count', description: 'Total put count',
+                defaultMessage: '{count} {count,plural,one {PPS} other {PPS}}',
+                values: { count: totalPut }, __source: { fileName: _jsxFileName, lineNumber: 42 }, __self: this });
+
+
+            lowStr = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'widget.put.throughput', description: 'Throughput message',
+                defaultMessage: '{count} {pluralMsg} stocking {throughput} items/hr',
+                values: {
+                    count: totalPut,
+                    pluralMsg: pluralMsg,
+                    throughput: putThroughput }, __source: { fileName: _jsxFileName, lineNumber: 47 }, __self: this });
+
+        }
+        if (!this.props.system_status)
+        {
+            lowStr = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'widget.put.offline', description: 'Message for system offline',
+                defaultMessage: 'Offline', __source: { fileName: _jsxFileName, lineNumber: 57 }, __self: this });
+        }
+        if (this.props.systemEmergency) {
+            lowStr = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'widget.put.emergency', description: 'Message for system in emergency state',
+                defaultMessage: '--', __source: { fileName: _jsxFileName, lineNumber: 61 }, __self: this });
+        }
+
+        putData.heading = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'widget.put.heading', description: 'Put Item Heading',
+            defaultMessage: 'Items stocked', __source: { fileName: _jsxFileName, lineNumber: 65 }, __self: this });
+        putData.value = value;
+        putData.low = lowStr;
+        putData.logo = /* istanbul ignore next */_frontEndConstants.STOCK_ICON;
+        putData.valueLeftStatus = valueLeftStatus;
+        return putData;
+
+    }
+
+    render()
+    {
+        var putData = this._formatContainerData();
+        return (
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Tilex2.default, /* istanbul ignore next */{ items: putData, __source: { fileName: _jsxFileName, lineNumber: 79 }, __self: this }));
+
+    }}
+
+
+function mapStateToProps(state, ownProps) {
+    return {
+        putData: state.putInfo.putData,
+        ppsData: state.ppsInfo.ppsData,
+        throughputData: state.throughputInfo.throughputData,
+        system_status: state.tabsData.status || null,
+        systemEmergency: state.tabsData.system_emergency || null };
+
+} /* istanbul ignore next */exports.default =
+
+/* istanbul ignore next */(0, _reactRedux.connect)(mapStateToProps)(PutStatusWidget);

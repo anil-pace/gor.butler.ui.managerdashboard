@@ -1,0 +1,139 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/containers/auditTab/startAudit.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_validationActions = require('../../actions/validationActions');
+var /* istanbul ignore next */_auditActions = require('../../actions/auditActions');
+var /* istanbul ignore next */_userActions = require('../../actions/userActions');
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_frontEndConstants = require('../../constants/frontEndConstants');
+var /* istanbul ignore next */_configConstants = require('../../constants/configConstants');
+var /* istanbul ignore next */_noPPS = require('./noPPS'); /* istanbul ignore next */var _noPPS2 = _interopRequireDefault(_noPPS);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+class StartAudit extends /* istanbul ignore next */_react2.default.Component {
+  constructor(props)
+  {
+    super(props);
+    this.state = { checked: [] };
+  }
+  componentWillUnmount()
+  {
+    this.props.resetAuditType();
+    this.props.resetForm();
+  }
+  _removeThisModal() {
+    this.props.removeModal();
+  }
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.auth_token)
+    {
+      this._removeThisModal();
+    }
+  }
+  componentDidMount() {
+    let userData = {
+      'url': /* istanbul ignore next */_configConstants.PPSLIST_URL,
+      'method': /* istanbul ignore next */_frontEndConstants.GET,
+      'cause': /* istanbul ignore next */_frontEndConstants.GET_PPSLIST,
+      'contentType': /* istanbul ignore next */_frontEndConstants.APP_JSON,
+      'accept': /* istanbul ignore next */_frontEndConstants.APP_JSON,
+      'token': sessionStorage.getItem('auth_token') };
+
+    this.props.userRequest(userData);
+  }
+  _handlestartaudit(e)
+  {
+    e.preventDefault();
+    let formdata;
+    formdata = {
+      audit_id_list: this.props.auditId,
+      pps_list: this.state.checked };
+
+    let userData = {
+      'url': /* istanbul ignore next */_configConstants.START_AUDIT_URL,
+      'formdata': formdata,
+      'method': /* istanbul ignore next */_frontEndConstants.POST,
+      'cause': /* istanbul ignore next */_frontEndConstants.START_AUDIT,
+      'contentType': /* istanbul ignore next */_frontEndConstants.APP_JSON,
+      'accept': /* istanbul ignore next */_frontEndConstants.APP_JSON,
+      'token': this.props.auth_token };
+
+    this.props.userRequest(userData);
+    this.props.removeModal();
+  }
+  _handleChange(event)
+  {
+    let val = event.target.value;
+    let checked = this.state.checked.slice();
+    if (checked.includes(val)) {
+      checked.splice(checked.indexOf(val), 1);
+    } else {
+      checked.push(val);
+    }
+    this.setState({ checked: checked });
+  }
+  render()
+  {
+    let checkList = [],items = this.props.ppsList;
+    for (let i = 0; i < items.length; i++)
+    {
+      checkList.push( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'li', /* istanbul ignore next */{ key: items[i], __source: { fileName: _jsxFileName, lineNumber: 79 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'input', /* istanbul ignore next */{ type: 'checkbox', value: items[i], onChange: this._handleChange.bind(this), __source: { fileName: _jsxFileName, lineNumber: 79 }, __self: this }), /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'audit.start.ppscheckbox', description: 'Text for PPS',
+          defaultMessage: 'PPS {eta}', values: { eta: items[i] }, __source: { fileName: _jsxFileName, lineNumber: 79 }, __self: this })));
+    }
+
+    return (
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 84 }, __self: this },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-modal-content', __source: { fileName: _jsxFileName, lineNumber: 85 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-modal-head', __source: { fileName: _jsxFileName, lineNumber: 86 }, __self: this },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-usr-add', __source: { fileName: _jsxFileName, lineNumber: 87 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'audit.start.heading', description: 'Heading for start audit',
+                defaultMessage: 'Start audit task', __source: { fileName: _jsxFileName, lineNumber: 87 }, __self: this }),
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-sub-head', __source: { fileName: _jsxFileName, lineNumber: 89 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'audit.start.subheading', description: 'Subheading for start audit',
+                  defaultMessage: 'Assign one or more PPS and start the audit task', __source: { fileName: _jsxFileName, lineNumber: 89 }, __self: this }))),
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'close', onClick: this._removeThisModal.bind(this), __source: { fileName: _jsxFileName, lineNumber: 92 }, __self: this }, /* istanbul ignore next */'\xD7')),
+
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-modal-body', __source: { fileName: _jsxFileName, lineNumber: 94 }, __self: this },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'form', /* istanbul ignore next */{ action: '#', id: 'startauditForm', ref: node => {this.startauditForm = node;},
+                onSubmit: e => this._handlestartaudit(e), __source: { fileName: _jsxFileName, lineNumber: 95 }, __self: this },
+
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-usr-form', __source: { fileName: _jsxFileName, lineNumber: 98 }, __self: this },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-usr-details', __source: { fileName: _jsxFileName, lineNumber: 99 }, __self: this },
+                  /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-usr-hdsm', __source: { fileName: _jsxFileName, lineNumber: 100 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'audit.start.auditdetails.heading', description: 'Text for audit details heading',
+                      defaultMessage: 'Assign PPS for {task}', values: { task: this.props.task ? this.props.task : '' }, __source: { fileName: _jsxFileName, lineNumber: 100 }, __self: this })),
+                  /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-sub-head', __source: { fileName: _jsxFileName, lineNumber: 102 }, __self: this }, checkList.length > 0 ? /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'audit.start.auditdetails.subheading1', description: 'Text for audit details subheading when pps present',
+                      defaultMessage: 'All PPS below are currently in the audit mode.', __source: { fileName: _jsxFileName, lineNumber: 102 }, __self: this }) : /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_noPPS2.default, /* istanbul ignore next */{ removeFn: this._removeThisModal.bind(this), __source: { fileName: _jsxFileName, lineNumber: 103 }, __self: this })),
+                  /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'ul', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 104 }, __self: this },
+                    checkList.length > 0 ? checkList : '')),
+
+
+
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */{ className: 'gor-submit', __source: { fileName: _jsxFileName, lineNumber: 110 }, __self: this },
+                  checkList.length > 0 ? /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ type: 'submit', className: 'gor-add-btn', disabled: !this.state.checked.length ? true : false, onClick: this._handlestartaudit.bind(this), __source: { fileName: _jsxFileName, lineNumber: 111 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'audit.start.button', description: 'Text for start audit button',
+                      defaultMessage: 'Start task now', __source: { fileName: _jsxFileName, lineNumber: 111 }, __self: this })) : /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ className: 'gor-add-btn', type: 'button', onClick: this._removeThisModal.bind(this), __source: { fileName: _jsxFileName, lineNumber: 112 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'audit.back.button', description: 'Text for go back button',
+                      defaultMessage: 'Go Back', __source: { fileName: _jsxFileName, lineNumber: 112 }, __self: this })))))))));
+
+
+
+
+
+
+
+  }}
+
+function mapStateToProps(state, ownProps) {
+  return {
+    auditType: state.auditInfo.auditType || {},
+    ppsList: state.auditInfo.ppsList || [],
+    auth_token: state.authLogin.auth_token };
+
+}
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    userRequest: function /* istanbul ignore next */userRequest(data) {dispatch( /* istanbul ignore next */(0, _userActions.userRequest)(data));},
+    resetAuditType: function /* istanbul ignore next */resetAuditType(data) {dispatch( /* istanbul ignore next */(0, _auditActions.resetAuditType)(data));},
+    resetForm: function /* istanbul ignore next */resetForm() {dispatch( /* istanbul ignore next */(0, _validationActions.resetForm)());} };
+
+}; /* istanbul ignore next */exports.default =
+
+/* istanbul ignore next */(0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(StartAudit);

@@ -1,0 +1,127 @@
+/* istanbul ignore next */"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+spinner = spinner;var /* istanbul ignore next */_frontEndConstants = require("../constants/frontEndConstants"); /**
+                                                                                                                 * [loader reducer function to set isLoading state]
+                                                                                                                 * @param  {Object} state  [state tree of the current reducer]
+                                                                                                                 * @param  {[type]} action [action that called the reducer]
+                                                                                                                 * @return {[object]}        [returns updated state object]
+                                                                                                                 */function spinner(state = {}, action) {switch (action.type) {case /* istanbul ignore next */_frontEndConstants.DISPLAY_SPINNER:return Object.assign({}, state, { "isLoading": action.data });
+
+        case /* istanbul ignore next */_frontEndConstants.DISPLAY_LOGIN_SPINNER:
+            return Object.assign({}, state, {
+                "loginSpinner": action.data });
+
+        case /* istanbul ignore next */_frontEndConstants.DISPLAY_INVENTORY_SPINNER:
+            return Object.assign({}, state, {
+                "inventorySpinner": action.data });
+
+        case /* istanbul ignore next */_frontEndConstants.DISPLAY_WAVES_FILTER_SPINNER:
+            return Object.assign({}, state, {
+                "waveFIlterSpinner": action.data });
+
+
+        case /* istanbul ignore next */_frontEndConstants.DISPLAY_BOT_FILTER_SPINNER:
+            return Object.assign({}, state, {
+                "butlerFilterSpinnerState": action.data });
+
+
+        case /* istanbul ignore next */_frontEndConstants.DISPLAY_PPS_FILTER_SPINNER:
+            return Object.assign({}, state, {
+                "ppsFilterSpinnerState": action.data });
+
+
+
+        case /* istanbul ignore next */_frontEndConstants.DISPLAY_CHARGING_STATION_FILTER_SPINNER:
+            return Object.assign({}, state, {
+                "csFilterSpinner": action.data });
+
+
+        case /* istanbul ignore next */_frontEndConstants.DISPLAY_AUDIT_SPINNER:
+            return Object.assign({}, state, {
+                "auditSpinner": action.data });
+
+
+        case /* istanbul ignore next */_frontEndConstants.DISPLAY_ORDER_LIST_SPINNER:
+            return Object.assign({}, state, {
+                "orderListSpinner": action.data });
+
+
+        case /* istanbul ignore next */_frontEndConstants.DISPLAY_WAVES_SPINNER:
+            return Object.assign({}, state, {
+                "wavesSpinner": action.data });
+
+
+        case /* istanbul ignore next */_frontEndConstants.DISPLAY_BUTLER_SPINNER:
+            return Object.assign({}, state, {
+                "butlerSpinner": action.data });
+
+
+        case /* istanbul ignore next */_frontEndConstants.DISPLAY_PPS_SPINNER:
+            return Object.assign({}, state, {
+                "ppsSpinner": action.data });
+
+
+        case /* istanbul ignore next */_frontEndConstants.DISPLAY_CHARGING_STATION_SPINNER:
+            return Object.assign({}, state, {
+                "csSpinner": action.data });
+
+
+        case /* istanbul ignore next */_frontEndConstants.DISPAY_RESOLVE_AUDIT_SPINNER:
+            return Object.assign({}, state, {
+                "auditResolveSpinner": action.data });
+
+
+        case /* istanbul ignore next */_frontEndConstants.DISPLAY_SAFETY_SPINNER:
+            return Object.assign({}, state, {
+                "safetySpinner": action.data });
+
+        case /* istanbul ignore next */_frontEndConstants.DISPAY_USER_SPINNER:
+            return Object.assign({}, state, {
+                "userSpinner": action.data });
+
+
+        case /* istanbul ignore next */_frontEndConstants.DISPLAY_INVENTORY_REPORT_SPINNER:
+            return Object.assign({}, state, {
+                "inventoryReportSpinner": action.data });
+
+
+        case /* istanbul ignore next */_frontEndConstants.DISPLAY_STOCK_LEDGER_SPINNER:
+            return Object.assign({}, state, {
+                "stockLedgerSpinner": action.data });
+
+
+        case /* istanbul ignore next */_frontEndConstants.DISPLAY_STOCK_LEDGER_RAW_TRANSACTIONS_SPINNER:
+            return Object.assign({}, state, {
+                "stockLedgerRawTransactionsSpinner": action.data });
+
+
+
+        default:
+            return state;}
+
+}

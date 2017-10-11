@@ -1,0 +1,38 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/components/topnotify/topnotify.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_validationActions = require('../../actions/validationActions');
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_frontEndConstants = require('../../constants/frontEndConstants'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+class TopNotifications extends /* istanbul ignore next */_react2.default.Component {
+  constructor(props)
+  {
+    super(props);
+  }
+  componentWillReceiveProps(nextProps) {
+    window.scrollTo(0, 0);
+    if (nextProps.notifyInfo) {
+      if (nextProps.notifyInfo.type !== /* istanbul ignore next */_frontEndConstants.HIDE)
+      {
+        setTimeout(this.props.notifyHide.bind(this), 5000);
+      }
+    }
+  }
+  render() {
+    return (
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: "gor-notify-top " + (this.props.notifyInfo ? this.props.notifyInfo.type : ''), style: this.props.notifyInfo ? this.props.notifyInfo.type !== /* istanbul ignore next */_frontEndConstants.HIDE ? { display: 'block' } : { display: 'none' } : { display: 'none' }, __source: { fileName: _jsxFileName, lineNumber: 22 }, __self: this },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: this.props.notifyInfo ? this.props.notifyInfo.icon : '', __source: { fileName: _jsxFileName, lineNumber: 23 }, __self: this }), /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 23 }, __self: this }, this.props.notifyInfo ? this.props.notifyInfo.msg : '')));
+
+
+  }}
+;
+function mapStateToProps(state, ownProps) {
+  return {
+    notifyInfo: state.appInfo.notifyInfo || null };
+
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    notifyHide: function /* istanbul ignore next */notifyHide() {dispatch( /* istanbul ignore next */(0, _validationActions.notifyHide)());} };
+
+} /* istanbul ignore next */exports.default =
+/* istanbul ignore next */(0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(TopNotifications);

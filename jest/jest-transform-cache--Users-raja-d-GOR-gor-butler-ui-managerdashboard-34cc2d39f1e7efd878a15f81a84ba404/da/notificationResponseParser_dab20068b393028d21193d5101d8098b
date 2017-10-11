@@ -1,0 +1,8 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+
+NotificationResponseParse = NotificationResponseParse;var /* istanbul ignore next */_notificationAction = require('../actions/notificationAction');function NotificationResponseParse(store, res)
+{
+		store.dispatch( /* istanbul ignore next */(0, _notificationAction.recieveWSNotification)(res));
+}

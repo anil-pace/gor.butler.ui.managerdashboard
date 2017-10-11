@@ -1,0 +1,348 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/components/header/header.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactDom = require('react-dom'); /* istanbul ignore next */var _reactDom2 = _interopRequireDefault(_reactDom);
+var /* istanbul ignore next */_reactRouter = require('react-router');
+var /* istanbul ignore next */_frontEndConstants = require('../../constants/frontEndConstants');
+
+
+var /* istanbul ignore next */_backEndConstants = require('../../constants/backEndConstants');
+var /* istanbul ignore next */_configConstants = require('../../constants/configConstants');
+var /* istanbul ignore next */_reactReduxModal = require('react-redux-modal');
+var /* istanbul ignore next */_headerAction = require('../../actions/headerAction');
+var /* istanbul ignore next */_logoutTab = require('../../containers/logoutTab'); /* istanbul ignore next */var _logoutTab2 = _interopRequireDefault(_logoutTab);
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_hamburger = require('../hamburger/hamburger'); /* istanbul ignore next */var _hamburger2 = _interopRequireDefault(_hamburger);
+var /* istanbul ignore next */_notificationsWrapper = require('../../containers/notifications/notificationsWrapper'); /* istanbul ignore next */var _notificationsWrapper2 = _interopRequireDefault(_notificationsWrapper);
+var /* istanbul ignore next */_resumeOperation = require('../../containers/emergencyProcess/resumeOperation'); /* istanbul ignore next */var _resumeOperation2 = _interopRequireDefault(_resumeOperation);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+
+
+class Header extends /* istanbul ignore next */_react2.default.Component {
+    constructor(props) {
+        super(props);
+
+        this.setDropdown = this.setDropdown.bind(this);
+        this.state = { showDropdown: false };
+        this._handleDocumentClick = this._handleDocumentClick.bind(this);
+        this._showModal = this._showModal.bind(this);
+
+
+    }
+
+    /**
+       * The function will fetch the start time
+       * to be displayed in the header.
+       * @private
+       */
+    _getShiftStartTime() {
+        let headerData = {
+            'url': /* istanbul ignore next */_configConstants.GET_SHIFT_START_TIME_URL,
+            'method': /* istanbul ignore next */_frontEndConstants.GET,
+            'cause': /* istanbul ignore next */_frontEndConstants.RECEIVE_SHIFT_START_TIME,
+            'token': this.props.authToken };
+
+        this.props.getShiftStartTime(headerData);
+    }
+
+    componentDidMount() {
+        var username = this.props.username;
+        if (username && this.props.authToken) {
+            let headerData = {
+                'url': /* istanbul ignore next */_configConstants.HEADER_URL + '?username=' + username,
+                'method': /* istanbul ignore next */_frontEndConstants.GET,
+                'cause': /* istanbul ignore next */_frontEndConstants.RECIEVE_HEADER,
+                'token': this.props.authToken };
+
+            this._getShiftStartTime();
+            this.props.getHeaderInfo(headerData);
+        }
+
+    }
+
+    componentWillMount() {
+        document.addEventListener('click', this._handleDocumentClick, true);
+        document.addEventListener('touchend', this._handleDocumentClick, true);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('click', this._handleDocumentClick, true);
+        document.removeEventListener('touchend', this._handleDocumentClick, true);
+    }
+
+
+
+    setDropdown() {
+        this.setState({ showDropdown: !this.state.showDropdown });
+    }
+
+    _handleDocumentClick() {
+        if (!( /* istanbul ignore next */_reactDom2.default.findDOMNode(this.dropdownNode).contains(event.target) || this.dropdownValue && /* istanbul ignore next */_reactDom2.default.findDOMNode(this.dropdownValue).contains(event.target))) {
+            this.setState({ showDropdown: false });
+        }
+    }
+
+    addModal() {
+        /* istanbul ignore next */_reactReduxModal.modal.add( /* istanbul ignore next */_logoutTab2.default, {
+            title: '',
+            size: 'large', // large, medium or small,
+            closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+            hideCloseButton: true // (optional) if you don't wanna show the top right close button
+            //.. all what you put in here you will get access in the modal props ;)
+        });
+    }
+
+    _showModal() {
+        /* istanbul ignore next */_reactReduxModal.modal.add( /* istanbul ignore next */_resumeOperation2.default, {
+            title: '',
+            size: 'large', // large, medium or small,
+            closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+            hideCloseButton: true });
+
+    }
+
+    _processData() {
+        var headerInfo = {};
+        if (this.props.headerInfo && this.props.headerInfo.users.length) {
+            headerInfo = Object.assign({}, this.props.headerInfo);
+            headerInfo.fullName = (headerInfo.users[0].first_name || '') + ' ' + (headerInfo.users[0].last_name || '');
+            headerInfo.designation = headerInfo.users[0].roles[0] || 'butler_ui';
+        }
+        /**
+           * Hard coded start time is replaced
+           * with the time fetched in API.
+           */
+        headerInfo.start = this.context.intl.formatTime(this.props.shift_start_time, {
+            hour: 'numeric',
+            minute: 'numeric',
+            timeZone: this.props.timeOffset,
+            timeZoneName: 'long',
+            hour12: false });
+
+        return headerInfo;
+    }
+
+
+
+
+    render() {
+        var headerInfo = this._processData(),
+        startTime;
+        if (this.props.shift_start_time) {
+            startTime = this.context.intl.formatTime(this.props.shift_start_time, {
+                hour: 'numeric',
+                minute: 'numeric',
+                timeZone: this.props.timeOffset,
+                timeZoneName: 'long',
+                hour12: false });
+
+        }
+
+        var emergencyDropDown;
+        if (this.props.breached) {
+            emergencyDropDown = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'section', /* istanbul ignore next */{ className: 'gor-hamburger-option', __source: { fileName: _jsxFileName, lineNumber: 143 }, __self: this },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'h1', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 144 }, __self: this }, this.props.zoneHeader.active_zones ? /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'header.zones.inOperation2', description: 'Zone in operation count ',
+                        defaultMessage: '{activeZones} zones in operation',
+                        values: {
+                            activeZones: this.props.zoneHeader.active_zones }, __source: { fileName: _jsxFileName, lineNumber: 144 }, __self: this }) :
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'header.zones.noOperation', description: 'Zone in operation count ',
+                        defaultMessage: 'No zones in operation', __source: { fileName: _jsxFileName, lineNumber: 148 }, __self: this })),
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 151 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'header.zones.inactiveZones', description: 'Zone in operation count ',
+                        defaultMessage: '{inactiveZones} {inactiveZones,plural, one {zone} other {zones}} paused',
+                        values: {
+                            inactiveZones: this.props.zoneHeader.total_zones - this.props.zoneHeader.active_zones }, __source: { fileName: _jsxFileName, lineNumber: 151 }, __self: this }), /* istanbul ignore next */' '),
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ onClick: this._showModal, className: 'gor-sys-btn', __source: { fileName: _jsxFileName, lineNumber: 156 }, __self: this },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'gor-resume-icon', __source: { fileName: _jsxFileName, lineNumber: 157 }, __self: this }),
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'header.button.resume', description: 'Button text',
+                        defaultMessage: 'Resume System', __source: { fileName: _jsxFileName, lineNumber: 158 }, __self: this })));
+
+
+        } else
+        if (!this.props.system_emergency) {
+            emergencyDropDown = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'section', /* istanbul ignore next */{ className: 'gor-hamburger-option', __source: { fileName: _jsxFileName, lineNumber: 164 }, __self: this },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'h1', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 165 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'header.zones.status', description: 'Zone status ',
+                        defaultMessage: 'SYSTEM NORMAL', __source: { fileName: _jsxFileName, lineNumber: 165 }, __self: this })),
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 168 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'header.zones.inOperation', description: 'Zone in operation count ',
+                        defaultMessage: '{activeZones}/{totalZones} zones in operation',
+                        values: {
+                            activeZones: this.props.zoneHeader.active_zones === 0 ? this.props.zoneHeader.active_zones.toString() : this.props.zoneHeader.active_zones,
+                            totalZones: this.props.zoneHeader.total_zones === 0 ? this.props.zoneHeader.total_zones.toString() : this.props.zoneHeader.total_zones }, __source: { fileName: _jsxFileName, lineNumber: 168 }, __self: this })));
+
+
+
+        } else
+        if (this.props.system_emergency && this.props.system_data === /* istanbul ignore next */_frontEndConstants.HARD) {
+            emergencyDropDown = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'section', /* istanbul ignore next */{ className: 'gor-hamburger-option', __source: { fileName: _jsxFileName, lineNumber: 178 }, __self: this },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'h1', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 179 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'header.zones.emergency', description: 'System Emergency',
+                        defaultMessage: 'SYSTEM STOPPED', __source: { fileName: _jsxFileName, lineNumber: 179 }, __self: this })),
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 182 }, __self: this }, this.props.zoneHeader.active_zones ? /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'header.zones.inOperation1', description: 'Zone in operation count ',
+                        defaultMessage: '{activeZones} zones in operation',
+                        values: {
+                            activeZones: this.props.zoneHeader.active_zones === 0 ? this.props.zoneHeader.active_zones.toString() : this.props.zoneHeader.active_zones }, __source: { fileName: _jsxFileName, lineNumber: 182 }, __self: this }) :
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'header.zones.noOperation', description: 'Zone in operation count ',
+                        defaultMessage: 'No zones in operation', __source: { fileName: _jsxFileName, lineNumber: 186 }, __self: this })),
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 189 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'header.option.release', description: 'release operation option',
+                        defaultMessage: 'Release the Emergency Stop button from the Zigbee box in order to resume operation.', __source: { fileName: _jsxFileName, lineNumber: 189 }, __self: this })));
+
+
+
+        } else
+        if (this.props.system_emergency && this.props.system_data === /* istanbul ignore next */_frontEndConstants.SOFT_MANUAL) {
+            emergencyDropDown = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'section', /* istanbul ignore next */{ className: 'gor-hamburger-option', __source: { fileName: _jsxFileName, lineNumber: 196 }, __self: this },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'h1', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 197 }, __self: this }, this.props.lastEmergencyState === /* istanbul ignore next */_frontEndConstants.HARD ? /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'header.zones.emergency.stopped', description: 'System Emergency',
+                        defaultMessage: 'SYSTEM STOPPED', __source: { fileName: _jsxFileName, lineNumber: 197 }, __self: this }) :
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'header.zones.emergency.paused', description: 'System Emergency',
+                        defaultMessage: 'SYSTEM PAUSED', __source: { fileName: _jsxFileName, lineNumber: 199 }, __self: this })),
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 202 }, __self: this }, this.props.zoneHeader.active_zones ? /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'header.zones.inOperation2', description: 'Zone in operation count ',
+                        defaultMessage: '{activeZones} zones in operation',
+                        values: {
+                            activeZones: this.props.zoneHeader.active_zones }, __source: { fileName: _jsxFileName, lineNumber: 202 }, __self: this }) :
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'header.zones.noOperation', description: 'Zone in operation count ',
+                        defaultMessage: 'No zones in operation', __source: { fileName: _jsxFileName, lineNumber: 206 }, __self: this })),
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ onClick: this._showModal, className: 'gor-sys-btn', __source: { fileName: _jsxFileName, lineNumber: 209 }, __self: this },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'gor-resume-icon', __source: { fileName: _jsxFileName, lineNumber: 210 }, __self: this }),
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'header.button.resume', description: 'Button text',
+                        defaultMessage: 'Resume System', __source: { fileName: _jsxFileName, lineNumber: 211 }, __self: this })));
+
+
+        }
+
+
+        return (
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'header', /* istanbul ignore next */{ className: 'gorHeader head', __source: { fileName: _jsxFileName, lineNumber: 219 }, __self: this },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'mainBlock', __source: { fileName: _jsxFileName, lineNumber: 220 }, __self: this },
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'logoWrap', __source: { fileName: _jsxFileName, lineNumber: 222 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 223 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-logo logo', __source: { fileName: _jsxFileName, lineNumber: 224 }, __self: this }))),
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'blockSystem', __source: { fileName: _jsxFileName, lineNumber: 227 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: "gor-menu-heading ", __source: { fileName: _jsxFileName, lineNumber: 228 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'header.butler', description: 'Header description',
+                                defaultMessage: 'Butler', __source: { fileName: _jsxFileName, lineNumber: 229 }, __self: this })),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: "gor-menu-subheading ", __source: { fileName: _jsxFileName, lineNumber: 232 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'header.start', description: 'Start time ',
+                                defaultMessage: 'Start time:{time} ',
+                                values: {
+                                    time: startTime }, __source: { fileName: _jsxFileName, lineNumber: 233 }, __self: this }), /* istanbul ignore next */')'))),
+
+
+
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'blockLeft', __source: { fileName: _jsxFileName, lineNumber: 241 }, __self: this },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_notificationsWrapper2.default, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 242 }, __self: this }),
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_hamburger2.default, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 243 }, __self: this },
+                        instance =>
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 245 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'blockSystem', __source: { fileName: _jsxFileName, lineNumber: 246 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'gor-sys-status', __source: { fileName: _jsxFileName, lineNumber: 247 }, __self: this }),
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'header.zones.count', description: 'Zone status count ',
+                                    defaultMessage: '{activeZones}/{totalZones} Zones',
+                                    values: {
+                                        activeZones: this.props.zoneHeader.active_zones === 0 ? this.props.zoneHeader.active_zones.toString() : this.props.zoneHeader.active_zones,
+                                        totalZones: this.props.zoneHeader.total_zones === 0 ? this.props.zoneHeader.total_zones.toString() : this.props.zoneHeader.total_zones }, __source: { fileName: _jsxFileName, lineNumber: 248 }, __self: this })),
+
+
+
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-hamburger-wrapper', style: instance.state.menuVisible ? { display: 'block' } : { display: 'none' }, __source: { fileName: _jsxFileName, lineNumber: 256 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'gor-up-arrow', __source: { fileName: _jsxFileName, lineNumber: 257 }, __self: this }),
+                                emergencyDropDown,
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'section', /* istanbul ignore next */{ className: 'gor-all-zone', __source: { fileName: _jsxFileName, lineNumber: 259 }, __self: this },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRouter.Link, /* istanbul ignore next */{ to: '/system/sysOverview', __source: { fileName: _jsxFileName, lineNumber: 260 }, __self: this },
+                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'header.zones.viewAll', description: 'View all system details',
+                                            defaultMessage: 'View system details', __source: { fileName: _jsxFileName, lineNumber: 261 }, __self: this }), /* istanbul ignore next */' ',
+                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'bold', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 263 }, __self: this }, /* istanbul ignore next */'>')))))),
+
+
+
+
+
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-border', __source: { fileName: _jsxFileName, lineNumber: 271 }, __self: this }),
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'dropdown', id: 'profile', __source: { fileName: _jsxFileName, lineNumber: 272 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'dropbtn', onClick: this.setDropdown, ref: node => {
+                                    this.dropdownNode = node;
+                                }, __source: { fileName: _jsxFileName, lineNumber: 273 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'block', __source: { fileName: _jsxFileName, lineNumber: 276 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'upperTextClient truncate', __source: { fileName: _jsxFileName, lineNumber: 277 }, __self: this },
+
+                                    headerInfo ? headerInfo.fullName : 'Fetching...'),
+
+
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'subTextClient', __source: { fileName: _jsxFileName, lineNumber: 282 }, __self: this },
+                                    headerInfo.designation ? this.context.intl.formatMessage( /* istanbul ignore next */_backEndConstants.stringConfig[headerInfo.designation]) : "--")),
+
+
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'block user-icon', __source: { fileName: _jsxFileName, lineNumber: 286 }, __self: this }),
+
+
+
+
+
+                            this.state.showDropdown ? /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'dropdown-content', ref: node => {
+                                        this.dropdownValue = node;
+                                    }, onClick: this.addModal.bind(this), __source: { fileName: _jsxFileName, lineNumber: 292 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'horizontalDiv', __source: { fileName: _jsxFileName, lineNumber: 295 }, __self: this }),
+
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 297 }, __self: this },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'a', /* istanbul ignore next */{ href: 'javascript:void(0)', __source: { fileName: _jsxFileName, lineNumber: 298 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'header.logout',
+                                            defaultMessage: 'Logout',
+                                            description: 'Text for logout', __source: { fileName: _jsxFileName, lineNumber: 298 }, __self: this })))) :
+
+                            "")))));
+
+
+
+
+
+    }}
+
+
+
+Header.contextTypes = {
+    intl: /* istanbul ignore next */_react2.default.PropTypes.object.isRequired
+
+    /**
+                                                                                 * Function to pass state values as props
+                                                                                 */ };
+
+function mapStateToProps(state, ownProps) {
+    return {
+        headerInfo: state.headerData.headerInfo,
+        shift_start_time: state.headerData.shiftStartTime,
+        authToken: state.authLogin.auth_token,
+        username: state.authLogin.username,
+        system_emergency: state.tabsData.system_emergency || null,
+        system_data: state.tabsData.system_data || null,
+        breached: state.tabsData.breached,
+        lastEmergencyState: state.tabsData.lastEmergencyState || null,
+        activeModalKey: state.appInfo.activeModalKey || 0,
+        zoneHeader: state.zoningReducer.zoneHeader || {},
+        timeOffset: state.authLogin.timeOffset };
+
+}
+/**
+   * Function to dispatch action values as props
+   */
+function mapDispatchToProps(dispatch) {
+    return {
+        getHeaderInfo: function /* istanbul ignore next */getHeaderInfo(data) {
+            dispatch( /* istanbul ignore next */(0, _headerAction.getHeaderInfo)(data));
+        },
+        getShiftStartTime: function /* istanbul ignore next */getShiftStartTime(data) {
+            dispatch( /* istanbul ignore next */(0, _headerAction.getShiftStartTime)(data));
+        } };
+
+} /* istanbul ignore next */exports.default =
+
+/* istanbul ignore next */(0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Header);

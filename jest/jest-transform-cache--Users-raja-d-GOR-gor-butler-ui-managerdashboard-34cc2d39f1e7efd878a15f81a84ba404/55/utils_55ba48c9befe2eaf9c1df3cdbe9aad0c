@@ -1,0 +1,72 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+isEventFromHandle = isEventFromHandle; /* istanbul ignore next */exports.
+
+
+
+
+isValueOutOfRange = isValueOutOfRange; /* istanbul ignore next */exports.
+
+
+
+isNotTouchEvent = isNotTouchEvent; /* istanbul ignore next */exports.
+
+
+
+
+getClosestPoint = getClosestPoint; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+
+
+getPrecision = getPrecision; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+getMousePosition = getMousePosition; /* istanbul ignore next */exports.
+
+
+
+getTouchPosition = getTouchPosition; /* istanbul ignore next */exports.
+
+
+
+getHandleCenterPosition = getHandleCenterPosition; /* istanbul ignore next */exports.
+
+
+
+
+
+
+ensureValueInRange = ensureValueInRange; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+
+ensureValuePrecision = ensureValuePrecision; /* istanbul ignore next */exports.
+
+
+
+
+
+
+pauseEvent = pauseEvent;var /* istanbul ignore next */_reactDom = require('react-dom');function isEventFromHandle(e, handles) {return Object.keys(handles).some(key => e.target === /* istanbul ignore next */(0, _reactDom.findDOMNode)(handles[key]));}function isValueOutOfRange(value, { min, max }) {return value < min || value > max;}function isNotTouchEvent(e) {return e.touches.length > 1 || e.type.toLowerCase() === 'touchend' && e.touches.length > 0;}function getClosestPoint(val, { marks, step, min }) {const points = Object.keys(marks).map(parseFloat);if (step !== null) {const closestStep = Math.round((val - min) / step) * step + min;points.push(closestStep);}const diffs = points.map(point => Math.abs(val - point));return points[diffs.indexOf(Math.min(...diffs))];}function getPrecision(step) {const stepString = step.toString();let precision = 0;if (stepString.indexOf('.') >= 0) {precision = stepString.length - stepString.indexOf('.') - 1;}return precision;}function getMousePosition(vertical, e) {return vertical ? e.clientY : e.pageX;}function getTouchPosition(vertical, e) {return vertical ? e.touches[0].clientY : e.touches[0].pageX;}function getHandleCenterPosition(vertical, handle) {const coords = handle.getBoundingClientRect();return vertical ? coords.top + coords.height * 0.5 : coords.left + coords.width * 0.5;}function ensureValueInRange(val, { max, min }) {if (val <= min) {return min;}if (val >= max) {return max;}return val;}function ensureValuePrecision(val, props) {/* istanbul ignore next */const step = props.step;const closestPoint = getClosestPoint(val, props);return step === null ? closestPoint : parseFloat(closestPoint.toFixed(getPrecision(step)));}function pauseEvent(e) {
+  e.stopPropagation();
+  e.preventDefault();
+}

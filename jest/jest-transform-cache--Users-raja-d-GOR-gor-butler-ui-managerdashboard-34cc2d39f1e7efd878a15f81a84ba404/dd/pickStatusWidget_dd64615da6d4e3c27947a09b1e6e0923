@@ -1,0 +1,148 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/containers/pickStatusWidget.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_Tile2x = require('../components/tile2x/Tile2x'); /* istanbul ignore next */var _Tile2x2 = _interopRequireDefault(_Tile2x);
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_frontEndConstants = require('../constants/frontEndConstants');
+var /* istanbul ignore next */_processTime = require('../utilities/processTime'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+class PickStatusWidget extends /* istanbul ignore next */_react2.default.Component {
+    /**
+                                                                                     * Called once before rendering of component,used to displatch fetch action
+                                                                                     * @return {[type]}
+                                                                                     */
+    constructor(props)
+    {
+        super(props);
+    }
+    _parseProps() {
+        var statusClass = '',
+        statusLogo,
+        headingLeft,
+        valueLeftStatus = '',
+        valueRightStatus = '',
+        textLeft,
+        headingRight,
+        textRight,
+        statusLeft,
+        statusRight,
+        lowLeft,
+        lowRight,
+        logo,
+        remTime = 0,
+        eta = 0,
+        items = {},
+        ordersData = Object.assign({}, this.props.ordersData),
+        ppsCount = this.props.ppsData ? this.props.ppsData.totalPick : 0,
+        pickThroughput = this.props.throughputData ? this.props.throughputData.pick_throughput : 0;
+
+        headingLeft = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'widget.pick.headingleft', description: 'Heading for pick status widget',
+            defaultMessage: 'Orders to fullfill', __source: { fileName: _jsxFileName, lineNumber: 38 }, __self: this });
+        logo = /* istanbul ignore next */_frontEndConstants.PICK_ICON;
+        textLeft = ordersData.count_pending;
+        ppsCount = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedNumber, /* istanbul ignore next */{ value: ppsCount, __source: { fileName: _jsxFileName, lineNumber: 42 }, __self: this });
+        if (!textLeft)
+        {
+            if (ordersData.count_total) {
+                valueLeftStatus = /* istanbul ignore next */_frontEndConstants.GOR_SUCCESS;
+                textLeft = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'widget.pick.completed', description: 'Text for completed',
+                    defaultMessage: 'COMPLETED', __source: { fileName: _jsxFileName, lineNumber: 47 }, __self: this });
+            } else
+            {
+                valueLeftStatus = /* istanbul ignore next */_frontEndConstants.GOR_NONE;
+                textLeft = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'widget.pick.none', description: 'Text for no orders',
+                    defaultMessage: 'None', __source: { fileName: _jsxFileName, lineNumber: 52 }, __self: this });
+            }
+            lowLeft = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'widget.pick.idle', description: 'Pick PPS idle message',
+                defaultMessage: '{count} idle PPS (Pick mode)',
+                values: {
+                    count: ppsCount }, __source: { fileName: _jsxFileName, lineNumber: 55 }, __self: this });
+
+        } else
+
+        {
+            textLeft = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedNumber, /* istanbul ignore next */{ id: 'widget.pick.textleft', value: ordersData.count_pending, __source: { fileName: _jsxFileName, lineNumber: 63 }, __self: this });
+            pickThroughput = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedNumber, /* istanbul ignore next */{ id: 'widget.pick.throughput', value: pickThroughput, __source: { fileName: _jsxFileName, lineNumber: 64 }, __self: this });
+            lowLeft = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'widget.pick.throughput', description: 'Throughput message',
+                defaultMessage: '{count} PPS fullfilling at {throughput} items/hr',
+                values: {
+                    count: ppsCount,
+                    throughput: pickThroughput }, __source: { fileName: _jsxFileName, lineNumber: 65 }, __self: this });
+
+
+            eta = /* istanbul ignore next */(0, _processTime.secondsToTime)(ordersData.eta);
+            lowRight = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'widget.pick.lowright', description: 'Estimated time',
+                defaultMessage: 'Estimated to complete in {eta}', values: { eta: eta }, __source: { fileName: _jsxFileName, lineNumber: 73 }, __self: this });
+            if (ordersData.wave_end) {
+                headingRight = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'widget.pick.headingright', description: 'Heading for cut-off time',
+                    defaultMessage: 'Time to cut-off', __source: { fileName: _jsxFileName, lineNumber: 76 }, __self: this });
+                remTime = /* istanbul ignore next */(0, _processTime.secondsToTime)(ordersData.cut_off);
+                textRight = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'widget.pick.textright', description: 'Time remaining',
+                    defaultMessage: '{cut_off}', values: { cut_off: remTime }, __source: { fileName: _jsxFileName, lineNumber: 79 }, __self: this });
+
+                statusRight = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedDate, /* istanbul ignore next */{ value: ordersData.wave_end,
+                    month: 'short',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    timeZoneName: 'short', __source: { fileName: _jsxFileName, lineNumber: 82 }, __self: this });
+
+
+
+                if (!ordersData.count_risk) {
+                    statusClass = /* istanbul ignore next */_frontEndConstants.GOR_SUCCESS;
+                    statusLogo = /* istanbul ignore next */_frontEndConstants.TILE_ONTIME;
+                    statusLeft = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'widget.pick.statusleft.onschedule', description: 'Text for on schedule',
+                        defaultMessage: 'On Schedule', __source: { fileName: _jsxFileName, lineNumber: 94 }, __self: this });
+                } else
+
+                {
+                    statusClass = /* istanbul ignore next */_frontEndConstants.GOR_RISK;
+                    statusLogo = /* istanbul ignore next */_frontEndConstants.TILE_ALERT;
+                    statusLeft = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'widget.pick.statusleft.atrisk', description: 'Text for orders at risk',
+                        defaultMessage: '{count_risk} {count_risk,plural, one {order} other {orders}} at risk',
+                        values: { count_risk: ordersData.count_risk }, __source: { fileName: _jsxFileName, lineNumber: 101 }, __self: this });
+                    valueLeftStatus = /* istanbul ignore next */_frontEndConstants.GOR_RISK;
+                }
+            }
+            if (this.props.systemEmergency) {
+                lowLeft = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'widget.pick.emergency', description: 'Message for system in emergency state',
+                    defaultMessage: '--', __source: { fileName: _jsxFileName, lineNumber: 108 }, __self: this });
+                statusClass = /* istanbul ignore next */_frontEndConstants.GOR_DELAY;
+                statusLogo = /* istanbul ignore next */_frontEndConstants.DELAY_ICON;
+                statusLeft = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'widget.pick.statusleft.delay', description: 'Text for delay in orders',
+                    defaultMessage: 'Delayed', __source: { fileName: _jsxFileName, lineNumber: 112 }, __self: this });
+                lowRight = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'widget.pick.lowright.emergency', description: 'Estimated time',
+                    defaultMessage: 'Estimated to complete in --', __source: { fileName: _jsxFileName, lineNumber: 114 }, __self: this });
+            }
+        }
+        if (!this.props.system_status)
+        {
+            lowLeft = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'widget.pick.offline', description: 'Message for system offline',
+                defaultMessage: 'Offline', __source: { fileName: _jsxFileName, lineNumber: 120 }, __self: this });
+        }
+        items = { headingleft: headingLeft, headingright: headingRight, textleft: textLeft,
+            valueLeftStatus: valueLeftStatus, valueRightStatus: valueRightStatus,
+            textright: textRight, statusleft: statusLeft, statusClass: statusClass,
+            statusLogo: statusLogo, statusright: statusRight, lowleft: lowLeft,
+            lowright: lowRight, logo: logo };
+        return items;
+    }
+    render()
+    {
+        var items = this._parseProps();
+        return (
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Tile2x2.default, /* istanbul ignore next */{ items: items, __source: { fileName: _jsxFileName, lineNumber: 134 }, __self: this }));
+
+    }}
+
+
+function mapStateToProps(state, ownProps) {
+    return {
+        ordersData: state.ordersInfo.ordersData,
+        ppsData: state.ppsInfo.ppsData,
+        throughputData: state.throughputInfo.throughputData,
+        system_status: state.tabsData.status || null,
+        systemEmergency: state.tabsData.system_emergency || null };
+
+} /* istanbul ignore next */exports.default =
+/* istanbul ignore next */(0, _reactRedux.connect)(mapStateToProps)(PickStatusWidget);

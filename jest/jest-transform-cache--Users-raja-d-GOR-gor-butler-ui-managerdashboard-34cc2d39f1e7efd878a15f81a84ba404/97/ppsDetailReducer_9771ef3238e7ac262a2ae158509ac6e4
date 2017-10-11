@@ -1,0 +1,24 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+
+PPSDetail = PPSDetail;var /* istanbul ignore next */_backEndConstants = require('../constants/backEndConstants');var /* istanbul ignore next */_frontEndConstants = require('./../constants/frontEndConstants');var /* istanbul ignore next */_reactIntl = require('react-intl');function PPSDetail(state = {}, action) {
+    switch (action.type) {
+        case /* istanbul ignore next */_backEndConstants.PPS_DETAIL:
+            res = action.data;
+            if (res.complete_data !== undefined) {
+                var res, PPSDetail;
+                return Object.assign({}, state, {
+                    "PPStypeDetail": res.complete_data.length > 0 ? res.complete_data : state.PPStypeDetail,
+                    "noResultFound": res.complete_data.length < 1 });
+
+            }
+            return state;
+        case /* istanbul ignore next */_frontEndConstants.PPS_LIST_REFRESHED:
+            return Object.assign({}, state, {
+                "ppsListRefreshed": new Date() });
+
+        default:
+            return state;}
+
+}

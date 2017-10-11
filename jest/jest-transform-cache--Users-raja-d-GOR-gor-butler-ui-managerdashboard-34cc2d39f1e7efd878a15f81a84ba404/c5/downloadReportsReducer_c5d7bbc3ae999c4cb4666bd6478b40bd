@@ -1,0 +1,26 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+downloadReportsReducer = downloadReportsReducer;var /* istanbul ignore next */_frontEndConstants = require('../constants/frontEndConstants');function downloadReportsReducer(state = {}, action) {
+
+
+					switch (action.type) {
+
+										case /* istanbul ignore next */_frontEndConstants.REPORTS_FETCH:
+
+															return Object.assign({}, state, {
+																				reportsData: action.data,
+																				hasDataChanged: !state.hasDataChanged,
+																				downloadReportsSpinner: false });
+
+										case /* istanbul ignore next */_frontEndConstants.GET_REPORT:
+															console.log(action.data);
+															break;
+										case /* istanbul ignore next */_frontEndConstants.SET_DOWNLOAD_REPORT_SPINNER:
+															return Object.assign({}, state, {
+																				downloadReportsSpinner: action.data });
+
+
+										default:
+															return state;}
+
+}

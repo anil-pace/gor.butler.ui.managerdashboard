@@ -1,0 +1,1076 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/containers/userTab/userFilter.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/containers/userTab</a> userFilter.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/86</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/66</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/22</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/83</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React  from 'react';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+import {FormattedMessage} from 'react-intl';
+import Filter from '../../components/tableFilter/filter';
+import {showTableFilter, filterApplied, userfilterState, toggleUserFilter} from '../../actions/filterAction';
+import {updateSubscriptionPacket} from '../../actions/socketActions';
+import {connect} from 'react-redux';
+import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
+import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
+import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
+import {stringConfig} from '../../constants/backEndConstants';
+import {userFilterApplySpinner}  from '../../actions/spinnerAction';
+import {hashHistory} from 'react-router'
+&nbsp;
+class UserFilter extends React.Component {
+<span class="fstat-no" title="function not covered" >    co</span>nstructor(props) {
+<span class="cstat-no" title="statement not covered" >        super(props);</span>
+<span class="cstat-no" title="statement not covered" >        this.state={</span>
+            tokenSelected: {"STATUS": ["all"], "ROLE": ["all"], "WORK MODE": ["all"], "LOCATION": ["all"]},
+            searchQuery: {},
+            defaultToken: {"STATUS": ["all"], "ROLE": ["all"], "WORK MODE": ["all"], "LOCATION": ["all"]}
+        };
+<span class="cstat-no" title="statement not covered" >         this._applyFilter =  this._applyFilter.bind(this)</span>;
+<span class="cstat-no" title="statement not covered" >        this._closeFilter = this._closeFilter.bind(this);</span>
+<span class="cstat-no" title="statement not covered" >        this._clearFilter = this._clearFilter.bind(this);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    co</span>mponentWillReceiveProps(nextProps) {
+<span class="cstat-no" title="statement not covered" >        if (nextProps.filterState &amp;&amp; JSON.stringify(this.state) !== JSON.stringify(nextProps.filterState)) {</span>
+<span class="cstat-no" title="statement not covered" >            this.setState(nextProps.filterState)</span>
+        }
+        /**
+         * Hide the filter as soon as data in the list get updated.
+         */
+<span class="cstat-no" title="statement not covered" >        if(nextProps.userData.length&gt;0 &amp;&amp; JSON.stringify(nextProps.userData)!==JSON.stringify(this.props.userData)){</span>
+<span class="cstat-no" title="statement not covered" >            this.props.showTableFilter(false);</span>
+        }
+&nbsp;
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    _c</span>loseFilter() {
+        let filterState=!t<span class="cstat-no" title="statement not covered" >his.props.showFilter;</span>
+<span class="cstat-no" title="statement not covered" >        this.props.showTableFilter(filterState);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    _p</span>rocessUserSearchField() {
+        const filterInputFields=[{<span class="cstat-no" title="statement not covered" ></span>
+            value: "USER NAME",
+            label: &lt;FormattedMessage id="user.inputField.id" defaultMessage="USER NAME"/&gt;
+        }];
+        let inputValue=th<span class="cstat-no" title="statement not covered" >is.state.searchQuery;</span>
+        let inputField=&lt;FilterInputFieldWrap inputT<span class="cstat-no" title="statement not covered" >ext={filterInputFields}</span>
+                                               handleInputText={this._handleInputQuery.bind(this)}
+                                               inputValue={inputValue}/&gt;
+<span class="cstat-no" title="statement not covered" >        return inputField;</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    _i</span>sMapped(config, item) {
+<span class="cstat-no" title="statement not covered" >        if (config.hasOwnProperty(item)) {</span>
+<span class="cstat-no" title="statement not covered" >            return true;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        return false;</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    _p</span>rocessUserRoll() {
+        let objRole=[{<span class="cstat-no" title="statement not covered" >value: 'all', label: &lt;FormattedMessage id="user.role.all" defaultMessage="Any"/&gt;}],</span>
+            roleDat<span class="cstat-no" title="statement not covered" >a={</span>}, currentRole;
+<span class="cstat-no" title="statement not covered" >        for (let i=0, len=this.props.roleList.length; i &lt; len; i++) {</span>
+<span class="cstat-no" title="statement not covered" >            currentRole=this.props.roleList[i];</span>
+<span class="cstat-no" title="statement not covered" >            if (!this._isMapped(stringConfig, currentRole.name)) {</span>
+<span class="cstat-no" title="statement not covered" >                continue;</span>
+            }
+<span class="cstat-no" title="statement not covered" >            roleData={</span>
+                value: currentRole.name,
+                label: this.context.intl.formatMessage(stringConfig[currentRole.name])
+            }
+<span class="cstat-no" title="statement not covered" >            objRole.push(roleData);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        return objRole;</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    _p</span>rocessFilterToken() {
+        let tokenStatus={<span class="cstat-no" title="statement not covered" ></span>
+            value: "STATUS",
+            label: &lt;FormattedMessage id="user.tokenfield.status" defaultMessage="STATUS"/&gt;
+        };
+        let tokenRole={v<span class="cstat-no" title="statement not covered" >alue: "ROLE", label: &lt;FormattedMessage id="user.tokenfield.role" defaultMessage="ROLE"/&gt;};</span>
+        let tokenWorkMode={<span class="cstat-no" title="statement not covered" ></span>
+            value: "WORK MODE",
+            label: &lt;FormattedMessage id="user.tokenfield.mode" defaultMessage="WORK MODE"/&gt;
+        };
+        let tokenLocation={<span class="cstat-no" title="statement not covered" ></span>
+            value: "LOCATION",
+            label: &lt;FormattedMessage id="user.tokenfield.location" defaultMessage="LOCATION"/&gt;
+        };
+        const labelC1=[<span class="cstat-no" title="statement not covered" ></span>
+            {value: 'all', label: &lt;FormattedMessage id="user.status.all" defaultMessage="Any"/&gt;},
+            {value: 'online', label: &lt;FormattedMessage id="user.status.online" defaultMessage="Online"/&gt;},
+            {value: 'offline', label: &lt;FormattedMessage id="user.status.offline" defaultMessage="Offline"/&gt;}
+        ];
+&nbsp;
+        const labelC2=th<span class="cstat-no" title="statement not covered" >is._processUserRoll();</span>
+        const labelC3=[<span class="cstat-no" title="statement not covered" ></span>
+            {value: 'all', label: &lt;FormattedMessage id="user.workmode.all" defaultMessage="Any"/&gt;},
+            {value: 'pick__front', label: &lt;FormattedMessage id="user.workmode.pickfront" defaultMessage="Pick Front"/&gt;},
+            {value: 'pick__back', label: &lt;FormattedMessage id="user.workmode.pickback" defaultMessage="Pick Back"/&gt;},
+            {value: 'put__front', label: &lt;FormattedMessage id="user.workmode.putfront" defaultMessage="Put Front"/&gt;},
+            {value: 'put__back', label: &lt;FormattedMessage id="user.workmode.putback" defaultMessage="Put Back"/&gt;},
+            {value: 'audit', label: &lt;FormattedMessage id="user.workmode.audit" defaultMessage="Audit"/&gt;},
+            {value: 'management', label: &lt;FormattedMessage id="user.workmode.management" defaultMessage="Management"/&gt;}
+        ];
+&nbsp;
+        const labelC4=[<span class="cstat-no" title="statement not covered" ></span>
+            {value: 'all', label: &lt;FormattedMessage id="user.location.all" defaultMessage="Any"/&gt;},
+            {
+                value: 'pickputstation',
+                label: &lt;FormattedMessage id="user.location.issueFound" defaultMessage="Pick Put Station"/&gt;
+            },
+            {value: 'qcstation', label: &lt;FormattedMessage id="user.location.rejected" defaultMessage="QC Station"/&gt;},
+            {value: 'headoffice', label: &lt;FormattedMessage id="user.location.resolved" defaultMessage="Head Office"/&gt;}
+        ];
+&nbsp;
+        let selectedToken=th<span class="cstat-no" title="statement not covered" >is.state.tokenSelected;</span>
+        let column1=&lt;FilterTokenWrap field={toke<span class="cstat-no" title="statement not covered" >nStatus} tokenCallBack={this._handelTokenClick.bind(this)}</span>
+                                       label={labelC1} selectedToken={selectedToken}/&gt;;
+        let column2=&lt;FilterTokenWrap field={toke<span class="cstat-no" title="statement not covered" >nRole} tokenCallBack={this._handelTokenClick.bind(this)}</span>
+                                       label={labelC2} selectedToken={selectedToken}/&gt;;
+        let column3=&lt;FilterTokenWrap field={toke<span class="cstat-no" title="statement not covered" >nWorkMode} tokenCallBack={this._handelTokenClick.bind(this)}</span>
+                                       label={labelC3} selectedToken={selectedToken}/&gt;;
+        let column4=&lt;FilterTokenWrap field={toke<span class="cstat-no" title="statement not covered" >nLocation} tokenCallBack={this._handelTokenClick.bind(this)}</span>
+                                       label={labelC4} selectedToken={selectedToken}/&gt;;
+&nbsp;
+        let columnDetail={c<span class="cstat-no" title="statement not covered" >olumn1token: column1, column2token: column2, column3token: column3, column4token: column4};</span>
+<span class="cstat-no" title="statement not covered" >        return columnDetail;</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    _h</span>andelTokenClick(field, value, state) {
+<span class="cstat-no" title="statement not covered" >        this.setState({tokenSelected: handelTokenClick(field, value, state, this.state)});</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    _h</span>andleInputQuery(inputQuery, queryField) {
+<span class="cstat-no" title="statement not covered" >        this.setState({searchQuery: handleInputQuery(inputQuery, queryField, this.state)});</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    _a</span>pplyFilter() {
+        let filterSubsData={}<span class="cstat-no" title="statement not covered" >, f</span>ilterState=thi<span class="cstat-no" title="statement not covered" >s.state, _q</span>uery={};<span class="cstat-no" title="statement not covered" ></span>
+        /** Gaurav Makkar:
+         * Changed query parameters for username filter
+         * Updated data to be sent to the socket
+         * if single word:
+         * {username:&lt;word&gt;}
+         * if multiple word:
+         * {username:[&lt;1&gt;,&lt;2&gt;]}
+         */
+<span class="cstat-no" title="statement not covered" >        if (filterState.searchQuery &amp;&amp; filterState.searchQuery["USER NAME"]) {</span>
+<span class="cstat-no" title="statement not covered" >            _query.username=filterState.searchQuery["USER NAME"]</span>
+            let name_query=fi<span class="cstat-no" title="statement not covered" >lterState.searchQuery["USER NAME"].split(" ")</span>
+<span class="cstat-no" title="statement not covered" >            name_query=name_query.filter(fu<span class="fstat-no" title="function not covered" >nc</span>tion (word) {</span>
+<span class="cstat-no" title="statement not covered" >                return !!word</span>
+            })
+<span class="cstat-no" title="statement not covered" >            filterSubsData["username"]=name_query.length &gt; 1 ? name_query : name_query.join("").trim();</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if (filterState.tokenSelected) {</span>
+<span class="cstat-no" title="statement not covered" >            (filterState.tokenSelected["STATUS"] &amp;&amp; filterState.tokenSelected["STATUS"][0] !== "all" &amp;&amp; filterState.tokenSelected["STATUS"].length !== 2 ? filterSubsData["logged_in"]=['is', (filterState.tokenSelected["STATUS"]=== "online") ? "true" : "false"] : "");</span>
+<span class="cstat-no" title="statement not covered" >            (filterState.tokenSelected["ROLE"] &amp;&amp; filterState.tokenSelected["ROLE"][0] !== "all" ? filterSubsData["role"]=['in', filterState.tokenSelected["ROLE"]] : "");</span>
+            /** Gaurav Makkar:
+             * Added double underscore as a separator for the pps mode
+             * and seat type of the Work Mode filter.
+             * Data format to be sent to the socket is
+             * {pps:["in",[{pps_mode:"put",seat_type:"front"}]]}
+             */
+<span class="cstat-no" title="statement not covered" >            if (filterState.tokenSelected["WORK MODE"] &amp;&amp; filterState.tokenSelected["WORK MODE"][0] !== "all") {</span>
+                let pps_list=[]<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >                filterState.tokenSelected["WORK MODE"].forEach(<span class="fstat-no" title="function not covered" >fu</span>nction (mode) {</span>
+<span class="cstat-no" title="statement not covered" >                    pps_list.push(mode.split("__").length &gt; 1 ? {</span>
+                        pps_mode: mode.split("__")[0],
+                        seat_type: mode.split("__")[1]
+                    } : {pps_mode: mode.split("__")[0]})
+                })
+<span class="cstat-no" title="statement not covered" >                filterSubsData["pps"]=['in', pps_list]</span>
+            }
+&nbsp;
+            // (filterState.tokenSelected["LOCATION"] &amp;&amp; filterState.tokenSelected["LOCATION"][0]!=="all"?filterSubsData["seat_type"]=['in',filterState.tokenSelected["LOCATION"]]:"");
+&nbsp;
+&nbsp;
+            /**
+             * for query generation
+             */
+<span class="cstat-no" title="statement not covered" >            if (filterState.tokenSelected["STATUS"] &amp;&amp; filterState.tokenSelected["STATUS"][0] !== 'all') {</span>
+<span class="cstat-no" title="statement not covered" >                _query.status=filterState.tokenSelected["STATUS"]</span>
+            }
+<span class="cstat-no" title="statement not covered" >            if (filterState.tokenSelected["ROLE"] &amp;&amp; filterState.tokenSelected["ROLE"][0] !== 'all') {</span>
+<span class="cstat-no" title="statement not covered" >                _query.role=filterState.tokenSelected["ROLE"]</span>
+            }
+<span class="cstat-no" title="statement not covered" >            if (filterState.tokenSelected["WORK MODE"] &amp;&amp; filterState.tokenSelected["WORK MODE"][0] !== 'all') {</span>
+<span class="cstat-no" title="statement not covered" >                _query.mode=filterState.tokenSelected["WORK MODE"]</span>
+            }
+        }
+        hashHistory.push({pathname: "/users", query: _query})
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    _c</span>learFilter() {
+<span class="cstat-no" title="statement not covered" >        this.props.userfilterState({</span>
+            tokenSelected: {
+                "STATUS": ["all"],
+                "ROLE": ['all'],
+                "WORK MODE": ['all'],
+                "LOCATION": ["all"]
+            }, searchQuery: {"USER NAME": null},
+        });
+        hashHistory.push({pathname: "/users", query: {}})
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    re</span>nder() {
+        let userDetail=th<span class="cstat-no" title="statement not covered" >is.props.userDetails;</span>
+        let noOrder=us<span class="cstat-no" title="statement not covered" >erDetail.noResultFound;</span>
+&nbsp;
+        let userSearchField=th<span class="cstat-no" title="statement not covered" >is._processUserSearchField();</span>
+        let userFilterToken=th<span class="cstat-no" title="statement not covered" >is._processFilterToken();</span>
+<span class="cstat-no" title="statement not covered" >        return (</span>
+            &lt;div&gt;
+                &lt;Filter&gt;
+                &lt;div className="gor-filter-header"&gt;
+                    &lt;div className="gor-filter-header-h1"&gt;
+                         &lt;FormattedMessage id="gor.filter.filterLabel" description="label for filter" 
+            defaultMessage="Filter data"/&gt;
+                    &lt;/div&gt;
+                    &lt;div className="gor-filter-header-h2" onClick={this._closeFilter}&gt;
+                        &lt;FormattedMessage id="gor.filter.hide" description="label for hide" 
+                            defaultMessage="Hide"/&gt;
+                    &lt;/div&gt;
+                 &lt;/div&gt;
+                    &lt;div&gt;{noOrder?
+                            &lt;div className="gor-no-result-filter"&gt;&lt;FormattedMessage id="gor.filter.noResult" description="label for no result" 
+                            defaultMessage="No results found, please try again"/&gt;&lt;/div&gt;:""}<span class="branch-0 cbranch-no" title="branch not covered" ></span>
+                    &lt;/div&gt;
+                     &lt;div className="gor-filter-body"&gt;
+                         &lt;div className="gor-filter-body-input-wrap"&gt; 
+                            {userSearchField}
+                         &lt;/div&gt;
+                         &lt;div className="gor-filter-body-filterToken-wrap"&gt; 
+                            &lt;div className="gor-filter-body-filterToken-section1"&gt;
+                                {userFilterToken.column1token}
+                            &lt;/div&gt;
+                            &lt;div className="gor-filter-body-filterToken-section1"&gt;
+                                {userFilterToken.column2token}
+                            &lt;/div&gt;
+                            &lt;div className="gor-filter-body-filterToken-section1"&gt;
+                                {userFilterToken.column3token}
+                            &lt;/div&gt;
+                            &lt;div className="gor-filter-body-filterToken-section1"&gt;
+                                {userFilterToken.column4token}
+                            &lt;/div&gt;
+                            
+&nbsp;
+                         &lt;/div&gt;
+                        
+                         
+                     &lt;/div&gt;
+                 &lt;div className="gor-filter-footer"&gt; 
+                    &lt;span className="gor-filter-footer-h2" onClick={this._clearFilter}&gt;
+                         &lt;FormattedMessage id="gor.filter.reset" description="label for reset" 
+                            defaultMessage="Reset"/&gt;
+                    &lt;/span&gt;
+                    &lt;div className="gor-filter-btn-wrap"&gt;
+                        &lt;button className='gor-add-btn' onClick={this._applyFilter}&gt;
+                            {!this.props.isLoading? &lt;FormattedMessage id="gor.filter.heading" description="filter heading"  defaultMessage="Apply filter"/&gt; :&lt;div className='spinnerImage'&gt;&lt;/div&gt;}
+                        &lt;/button&gt;
+&nbsp;
+&nbsp;
+                    &lt;/div&gt; 
+                 &lt;/div&gt;
+                &lt;/Filter&gt;
+            &lt;/div&gt;
+        );
+    }
+}
+;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >UserFilter.contextTypes={</span>
+    intl: React.PropTypes.object.isRequired
+}
+&nbsp;
+function <span class="fstat-no" title="function not covered" >mapStateToProps(</span>state, ownProps) {
+<span class="cstat-no" title="statement not covered" >    return {</span>
+        userDetails: state.userDetails || [],
+        showFilter: state.filterInfo.filterState || false,
+        auditSpinner: state.spinner.auditSpinner || false,
+        totalAudits: state.recieveAuditDetail.totalAudits || 0,
+        filterState: state.filterInfo.userfilterState,
+        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket,
+        isFilterApplied: state.filterInfo.isFilterApplied || false,
+        userFilterStatus: state.filterInfo.userFilterStatus || false,
+        roleList: state.appInfo.roleList || [],
+        isLoading: state.spinner.isLoading || false
+&nbsp;
+    };
+}
+&nbsp;
+var mapDispatchToProps=fu<span class="cstat-no" title="statement not covered" >nction (d<span class="fstat-no" title="function not covered" >ispatch) {</span></span>
+<span class="cstat-no" title="statement not covered" >    return {</span>
+        showTableFilter: function (data) {<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" >            dispatch(showTableFilter(data));</span>
+        },
+        filterApplied: function (data) {<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" >            dispatch(filterApplied(data));</span>
+        },
+        userfilterState: function (data) {<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" >            dispatch(userfilterState(data));</span>
+        },
+        updateSubscriptionPacket: function (data) {<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" >            dispatch(updateSubscriptionPacket(data));</span>
+        },
+        toggleUserFilter: function (data) {<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" >            dispatch(toggleUserFilter(data));</span>
+        },
+        userFilterApplySpinner: function (data) {<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" >            dispatch(userFilterApplySpinner(data));</span>
+        }
+    }
+};
+<span class="cstat-no" title="statement not covered" >UserFilter.PropTypes={</span>
+    userDetails: React.PropTypes.array,
+    showFilter: React.PropTypes.bool,
+    auditSpinner: React.PropTypes.bool,
+    totalAudits: React.PropTypes.number,
+    filterState: React.PropTypes.object,
+    wsSubscriptionData: React.PropTypes.object,
+    isFilterApplied: React.PropTypes.bool,
+    userFilterStatus: React.PropTypes.bool,
+    roleList: React.PropTypes.object,
+    showTableFilter: React.PropTypes.func,
+    filterApplied: React.PropTypes.func,
+    userfilterState: React.PropTypes.func,
+    updateSubscriptionPacket: React.PropTypes.func,
+    toggleUserFilter: React.PropTypes.func
+};
+&nbsp;
+export default connect(mapStateToProps, mapDispatchToProps)(UserFilter) ;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Oct 11 2017 16:54:25 GMT+0530 (IST)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

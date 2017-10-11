@@ -1,0 +1,338 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/containers/userTab/userFilter.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_filter = require('../../components/tableFilter/filter'); /* istanbul ignore next */var _filter2 = _interopRequireDefault(_filter);
+var /* istanbul ignore next */_filterAction = require('../../actions/filterAction');
+var /* istanbul ignore next */_socketActions = require('../../actions/socketActions');
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_filterInputFieldWrap = require('../../components/tableFilter/filterInputFieldWrap'); /* istanbul ignore next */var _filterInputFieldWrap2 = _interopRequireDefault(_filterInputFieldWrap);
+var /* istanbul ignore next */_filterTokenContainer = require('../../components/tableFilter/filterTokenContainer'); /* istanbul ignore next */var _filterTokenContainer2 = _interopRequireDefault(_filterTokenContainer);
+var /* istanbul ignore next */_tableFilterCommonFunctions = require('../../components/tableFilter/tableFilterCommonFunctions');
+var /* istanbul ignore next */_backEndConstants = require('../../constants/backEndConstants');
+var /* istanbul ignore next */_spinnerAction = require('../../actions/spinnerAction');
+var /* istanbul ignore next */_reactRouter = require('react-router'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+class UserFilter extends /* istanbul ignore next */_react2.default.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            tokenSelected: { "STATUS": ["all"], "ROLE": ["all"], "WORK MODE": ["all"], "LOCATION": ["all"] },
+            searchQuery: {},
+            defaultToken: { "STATUS": ["all"], "ROLE": ["all"], "WORK MODE": ["all"], "LOCATION": ["all"] } };
+
+        this._applyFilter = this._applyFilter.bind(this);
+        this._closeFilter = this._closeFilter.bind(this);
+        this._clearFilter = this._clearFilter.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.filterState && JSON.stringify(this.state) !== JSON.stringify(nextProps.filterState)) {
+            this.setState(nextProps.filterState);
+        }
+        /**
+           * Hide the filter as soon as data in the list get updated.
+           */
+        if (nextProps.userData.length > 0 && JSON.stringify(nextProps.userData) !== JSON.stringify(this.props.userData)) {
+            this.props.showTableFilter(false);
+        }
+
+    }
+
+    _closeFilter() {
+        let filterState = !this.props.showFilter;
+        this.props.showTableFilter(filterState);
+    }
+
+    _processUserSearchField() {
+        const filterInputFields = [{
+            value: "USER NAME",
+            label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'user.inputField.id', defaultMessage: 'USER NAME', __source: { fileName: _jsxFileName, lineNumber: 48 }, __self: this }) }];
+
+        let inputValue = this.state.searchQuery;
+        let inputField = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_filterInputFieldWrap2.default, /* istanbul ignore next */{ inputText: filterInputFields,
+            handleInputText: this._handleInputQuery.bind(this),
+            inputValue: inputValue, __source: { fileName: _jsxFileName, lineNumber: 51 }, __self: this });
+        return inputField;
+    }
+
+    _isMapped(config, item) {
+        if (config.hasOwnProperty(item)) {
+            return true;
+        }
+        return false;
+    }
+
+    _processUserRoll() {
+        let objRole = [{ value: 'all', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'user.role.all', defaultMessage: 'Any', __source: { fileName: _jsxFileName, lineNumber: 65 }, __self: this }) }],
+        roleData = {},currentRole;
+        for (let i = 0, len = this.props.roleList.length; i < len; i++) {
+            currentRole = this.props.roleList[i];
+            if (!this._isMapped( /* istanbul ignore next */_backEndConstants.stringConfig, currentRole.name)) {
+                continue;
+            }
+            roleData = {
+                value: currentRole.name,
+                label: this.context.intl.formatMessage( /* istanbul ignore next */_backEndConstants.stringConfig[currentRole.name]) };
+
+            objRole.push(roleData);
+        }
+        return objRole;
+    }
+
+    _processFilterToken() {
+        let tokenStatus = {
+            value: "STATUS",
+            label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'user.tokenfield.status', defaultMessage: 'STATUS', __source: { fileName: _jsxFileName, lineNumber: 84 }, __self: this }) };
+
+        let tokenRole = { value: "ROLE", label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'user.tokenfield.role', defaultMessage: 'ROLE', __source: { fileName: _jsxFileName, lineNumber: 86 }, __self: this }) };
+        let tokenWorkMode = {
+            value: "WORK MODE",
+            label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'user.tokenfield.mode', defaultMessage: 'WORK MODE', __source: { fileName: _jsxFileName, lineNumber: 89 }, __self: this }) };
+
+        let tokenLocation = {
+            value: "LOCATION",
+            label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'user.tokenfield.location', defaultMessage: 'LOCATION', __source: { fileName: _jsxFileName, lineNumber: 93 }, __self: this }) };
+
+        const labelC1 = [
+        { value: 'all', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'user.status.all', defaultMessage: 'Any', __source: { fileName: _jsxFileName, lineNumber: 96 }, __self: this }) },
+        { value: 'online', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'user.status.online', defaultMessage: 'Online', __source: { fileName: _jsxFileName, lineNumber: 97 }, __self: this }) },
+        { value: 'offline', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'user.status.offline', defaultMessage: 'Offline', __source: { fileName: _jsxFileName, lineNumber: 98 }, __self: this }) }];
+
+
+        const labelC2 = this._processUserRoll();
+        const labelC3 = [
+        { value: 'all', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'user.workmode.all', defaultMessage: 'Any', __source: { fileName: _jsxFileName, lineNumber: 103 }, __self: this }) },
+        { value: 'pick__front', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'user.workmode.pickfront', defaultMessage: 'Pick Front', __source: { fileName: _jsxFileName, lineNumber: 104 }, __self: this }) },
+        { value: 'pick__back', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'user.workmode.pickback', defaultMessage: 'Pick Back', __source: { fileName: _jsxFileName, lineNumber: 105 }, __self: this }) },
+        { value: 'put__front', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'user.workmode.putfront', defaultMessage: 'Put Front', __source: { fileName: _jsxFileName, lineNumber: 106 }, __self: this }) },
+        { value: 'put__back', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'user.workmode.putback', defaultMessage: 'Put Back', __source: { fileName: _jsxFileName, lineNumber: 107 }, __self: this }) },
+        { value: 'audit', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'user.workmode.audit', defaultMessage: 'Audit', __source: { fileName: _jsxFileName, lineNumber: 108 }, __self: this }) },
+        { value: 'management', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'user.workmode.management', defaultMessage: 'Management', __source: { fileName: _jsxFileName, lineNumber: 109 }, __self: this }) }];
+
+
+        const labelC4 = [
+        { value: 'all', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'user.location.all', defaultMessage: 'Any', __source: { fileName: _jsxFileName, lineNumber: 113 }, __self: this }) },
+        {
+            value: 'pickputstation',
+            label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'user.location.issueFound', defaultMessage: 'Pick Put Station', __source: { fileName: _jsxFileName, lineNumber: 116 }, __self: this }) },
+
+        { value: 'qcstation', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'user.location.rejected', defaultMessage: 'QC Station', __source: { fileName: _jsxFileName, lineNumber: 118 }, __self: this }) },
+        { value: 'headoffice', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'user.location.resolved', defaultMessage: 'Head Office', __source: { fileName: _jsxFileName, lineNumber: 119 }, __self: this }) }];
+
+
+        let selectedToken = this.state.tokenSelected;
+        let column1 = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_filterTokenContainer2.default, /* istanbul ignore next */{ field: tokenStatus, tokenCallBack: this._handelTokenClick.bind(this),
+            label: labelC1, selectedToken: selectedToken, __source: { fileName: _jsxFileName, lineNumber: 123 }, __self: this });
+        let column2 = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_filterTokenContainer2.default, /* istanbul ignore next */{ field: tokenRole, tokenCallBack: this._handelTokenClick.bind(this),
+            label: labelC2, selectedToken: selectedToken, __source: { fileName: _jsxFileName, lineNumber: 125 }, __self: this });
+        let column3 = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_filterTokenContainer2.default, /* istanbul ignore next */{ field: tokenWorkMode, tokenCallBack: this._handelTokenClick.bind(this),
+            label: labelC3, selectedToken: selectedToken, __source: { fileName: _jsxFileName, lineNumber: 127 }, __self: this });
+        let column4 = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_filterTokenContainer2.default, /* istanbul ignore next */{ field: tokenLocation, tokenCallBack: this._handelTokenClick.bind(this),
+            label: labelC4, selectedToken: selectedToken, __source: { fileName: _jsxFileName, lineNumber: 129 }, __self: this });
+
+        let columnDetail = { column1token: column1, column2token: column2, column3token: column3, column4token: column4 };
+        return columnDetail;
+    }
+
+    _handelTokenClick(field, value, state) {
+        this.setState({ tokenSelected: /* istanbul ignore next */(0, _tableFilterCommonFunctions.handelTokenClick)(field, value, state, this.state) });
+    }
+
+    _handleInputQuery(inputQuery, queryField) {
+        this.setState({ searchQuery: /* istanbul ignore next */(0, _tableFilterCommonFunctions.handleInputQuery)(inputQuery, queryField, this.state) });
+    }
+
+    _applyFilter() {
+        let filterSubsData = {},filterState = this.state,_query = {};
+        /** Gaurav Makkar:
+                                                                       * Changed query parameters for username filter
+                                                                       * Updated data to be sent to the socket
+                                                                       * if single word:
+                                                                       * {username:<word>}
+                                                                       * if multiple word:
+                                                                       * {username:[<1>,<2>]}
+                                                                       */
+        if (filterState.searchQuery && filterState.searchQuery["USER NAME"]) {
+            _query.username = filterState.searchQuery["USER NAME"];
+            let name_query = filterState.searchQuery["USER NAME"].split(" ");
+            name_query = name_query.filter(function (word) {
+                return !!word;
+            });
+            filterSubsData["username"] = name_query.length > 1 ? name_query : name_query.join("").trim();
+        }
+        if (filterState.tokenSelected) {
+            filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !== "all" && filterState.tokenSelected["STATUS"].length !== 2 ? filterSubsData["logged_in"] = ['is', filterState.tokenSelected["STATUS"] === "online" ? "true" : "false"] : "";
+            filterState.tokenSelected["ROLE"] && filterState.tokenSelected["ROLE"][0] !== "all" ? filterSubsData["role"] = ['in', filterState.tokenSelected["ROLE"]] : "";
+            /** Gaurav Makkar:
+                                                                                                                                                                            * Added double underscore as a separator for the pps mode
+                                                                                                                                                                            * and seat type of the Work Mode filter.
+                                                                                                                                                                            * Data format to be sent to the socket is
+                                                                                                                                                                            * {pps:["in",[{pps_mode:"put",seat_type:"front"}]]}
+                                                                                                                                                                            */
+            if (filterState.tokenSelected["WORK MODE"] && filterState.tokenSelected["WORK MODE"][0] !== "all") {
+                let pps_list = [];
+                filterState.tokenSelected["WORK MODE"].forEach(function (mode) {
+                    pps_list.push(mode.split("__").length > 1 ? {
+                        pps_mode: mode.split("__")[0],
+                        seat_type: mode.split("__")[1] } :
+                    { pps_mode: mode.split("__")[0] });
+                });
+                filterSubsData["pps"] = ['in', pps_list];
+            }
+
+            // (filterState.tokenSelected["LOCATION"] && filterState.tokenSelected["LOCATION"][0]!=="all"?filterSubsData["seat_type"]=['in',filterState.tokenSelected["LOCATION"]]:"");
+
+
+            /**
+             * for query generation
+             */
+            if (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !== 'all') {
+                _query.status = filterState.tokenSelected["STATUS"];
+            }
+            if (filterState.tokenSelected["ROLE"] && filterState.tokenSelected["ROLE"][0] !== 'all') {
+                _query.role = filterState.tokenSelected["ROLE"];
+            }
+            if (filterState.tokenSelected["WORK MODE"] && filterState.tokenSelected["WORK MODE"][0] !== 'all') {
+                _query.mode = filterState.tokenSelected["WORK MODE"];
+            }
+        }
+        /* istanbul ignore next */_reactRouter.hashHistory.push({ pathname: "/users", query: _query });
+    }
+
+    _clearFilter() {
+        this.props.userfilterState({
+            tokenSelected: {
+                "STATUS": ["all"],
+                "ROLE": ['all'],
+                "WORK MODE": ['all'],
+                "LOCATION": ["all"] },
+            searchQuery: { "USER NAME": null } });
+
+        /* istanbul ignore next */_reactRouter.hashHistory.push({ pathname: "/users", query: {} });
+    }
+
+    render() {
+        let userDetail = this.props.userDetails;
+        let noOrder = userDetail.noResultFound;
+
+        let userSearchField = this._processUserSearchField();
+        let userFilterToken = this._processFilterToken();
+        return (
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 220 }, __self: this },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_filter2.default, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 221 }, __self: this },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-header', __source: { fileName: _jsxFileName, lineNumber: 222 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-header-h1', __source: { fileName: _jsxFileName, lineNumber: 223 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'gor.filter.filterLabel', description: 'label for filter',
+                                defaultMessage: 'Filter data', __source: { fileName: _jsxFileName, lineNumber: 224 }, __self: this })),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-header-h2', onClick: this._closeFilter, __source: { fileName: _jsxFileName, lineNumber: 227 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'gor.filter.hide', description: 'label for hide',
+                                defaultMessage: 'Hide', __source: { fileName: _jsxFileName, lineNumber: 228 }, __self: this }))),
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 232 }, __self: this }, noOrder ?
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-no-result-filter', __source: { fileName: _jsxFileName, lineNumber: 233 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'gor.filter.noResult', description: 'label for no result',
+                                defaultMessage: 'No results found, please try again', __source: { fileName: _jsxFileName, lineNumber: 233 }, __self: this })) : ""),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-body', __source: { fileName: _jsxFileName, lineNumber: 236 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-body-input-wrap', __source: { fileName: _jsxFileName, lineNumber: 237 }, __self: this },
+                            userSearchField),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-body-filterToken-wrap', __source: { fileName: _jsxFileName, lineNumber: 240 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-body-filterToken-section1', __source: { fileName: _jsxFileName, lineNumber: 241 }, __self: this },
+                                userFilterToken.column1token),
+
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-body-filterToken-section1', __source: { fileName: _jsxFileName, lineNumber: 244 }, __self: this },
+                                userFilterToken.column2token),
+
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-body-filterToken-section1', __source: { fileName: _jsxFileName, lineNumber: 247 }, __self: this },
+                                userFilterToken.column3token),
+
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-body-filterToken-section1', __source: { fileName: _jsxFileName, lineNumber: 250 }, __self: this },
+                                userFilterToken.column4token))),
+
+
+
+
+
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-footer', __source: { fileName: _jsxFileName, lineNumber: 259 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'gor-filter-footer-h2', onClick: this._clearFilter, __source: { fileName: _jsxFileName, lineNumber: 260 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'gor.filter.reset', description: 'label for reset',
+                                defaultMessage: 'Reset', __source: { fileName: _jsxFileName, lineNumber: 261 }, __self: this })),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-btn-wrap', __source: { fileName: _jsxFileName, lineNumber: 264 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ className: 'gor-add-btn', onClick: this._applyFilter, __source: { fileName: _jsxFileName, lineNumber: 265 }, __self: this },
+                                !this.props.isLoading ? /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'gor.filter.heading', description: 'filter heading', defaultMessage: 'Apply filter', __source: { fileName: _jsxFileName, lineNumber: 266 }, __self: this }) : /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'spinnerImage', __source: { fileName: _jsxFileName, lineNumber: 266 }, __self: this })))))));
+
+
+
+
+
+
+
+
+    }}
+
+;
+
+UserFilter.contextTypes = {
+    intl: /* istanbul ignore next */_react2.default.PropTypes.object.isRequired };
+
+
+function mapStateToProps(state, ownProps) {
+    return {
+        userDetails: state.userDetails || [],
+        showFilter: state.filterInfo.filterState || false,
+        auditSpinner: state.spinner.auditSpinner || false,
+        totalAudits: state.recieveAuditDetail.totalAudits || 0,
+        filterState: state.filterInfo.userfilterState,
+        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket,
+        isFilterApplied: state.filterInfo.isFilterApplied || false,
+        userFilterStatus: state.filterInfo.userFilterStatus || false,
+        roleList: state.appInfo.roleList || [],
+        isLoading: state.spinner.isLoading || false };
+
+
+}
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+    return {
+        showTableFilter: function /* istanbul ignore next */showTableFilter(data) {
+            dispatch( /* istanbul ignore next */(0, _filterAction.showTableFilter)(data));
+        },
+        filterApplied: function /* istanbul ignore next */filterApplied(data) {
+            dispatch( /* istanbul ignore next */(0, _filterAction.filterApplied)(data));
+        },
+        userfilterState: function /* istanbul ignore next */userfilterState(data) {
+            dispatch( /* istanbul ignore next */(0, _filterAction.userfilterState)(data));
+        },
+        updateSubscriptionPacket: function /* istanbul ignore next */updateSubscriptionPacket(data) {
+            dispatch( /* istanbul ignore next */(0, _socketActions.updateSubscriptionPacket)(data));
+        },
+        toggleUserFilter: function /* istanbul ignore next */toggleUserFilter(data) {
+            dispatch( /* istanbul ignore next */(0, _filterAction.toggleUserFilter)(data));
+        },
+        userFilterApplySpinner: function /* istanbul ignore next */userFilterApplySpinner(data) {
+            dispatch( /* istanbul ignore next */(0, _spinnerAction.userFilterApplySpinner)(data));
+        } };
+
+};
+UserFilter.PropTypes = {
+    userDetails: /* istanbul ignore next */_react2.default.PropTypes.array,
+    showFilter: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    auditSpinner: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    totalAudits: /* istanbul ignore next */_react2.default.PropTypes.number,
+    filterState: /* istanbul ignore next */_react2.default.PropTypes.object,
+    wsSubscriptionData: /* istanbul ignore next */_react2.default.PropTypes.object,
+    isFilterApplied: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    userFilterStatus: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    roleList: /* istanbul ignore next */_react2.default.PropTypes.object,
+    showTableFilter: /* istanbul ignore next */_react2.default.PropTypes.func,
+    filterApplied: /* istanbul ignore next */_react2.default.PropTypes.func,
+    userfilterState: /* istanbul ignore next */_react2.default.PropTypes.func,
+    updateSubscriptionPacket: /* istanbul ignore next */_react2.default.PropTypes.func,
+    toggleUserFilter: /* istanbul ignore next */_react2.default.PropTypes.func }; /* istanbul ignore next */exports.default =
+
+
+/* istanbul ignore next */(0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(UserFilter);

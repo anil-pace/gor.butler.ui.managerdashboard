@@ -1,0 +1,604 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/containers/reportsTab/operationsLogTab.js'; /**
+                                                                                                                                                                                                                           * Container for Inventory tab
+                                                                                                                                                                                                                           * This will be switched based on tab click
+                                                                                                                                                                                                                           */
+var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_initData = require('../../constants/initData.js');
+var /* istanbul ignore next */_reactDimensions = require('react-dimensions'); /* istanbul ignore next */var _reactDimensions2 = _interopRequireDefault(_reactDimensions);
+var /* istanbul ignore next */_reactRouter = require('react-router');
+var /* istanbul ignore next */_socketActions = require('../../actions/socketActions');
+var /* istanbul ignore next */_operationsLogsActions = require('../../actions/operationsLogsActions');
+var /* istanbul ignore next */_frontEndConstants = require('../../constants/frontEndConstants');
+
+
+var /* istanbul ignore next */_gorPaginateV = require('../../components/gorPaginate/gorPaginateV2'); /* istanbul ignore next */var _gorPaginateV2 = _interopRequireDefault(_gorPaginateV);
+var /* istanbul ignore next */_Spinner = require('../../components/spinner/Spinner'); /* istanbul ignore next */var _Spinner2 = _interopRequireDefault(_Spinner);
+var /* istanbul ignore next */_fixedDataTable = require('fixed-data-table');
+var /* istanbul ignore next */_commonFunctionsDataTable = require('../../components/commonFunctionsDataTable');
+
+
+
+var /* istanbul ignore next */_filterAction = require('../../actions/filterAction');
+
+
+var /* istanbul ignore next */_operationsFilter = require('./operationsFilter'); /* istanbul ignore next */var _operationsFilter2 = _interopRequireDefault(_operationsFilter);
+var /* istanbul ignore next */_filterSummary = require('../../components/tableFilter/filterSummary'); /* istanbul ignore next */var _filterSummary2 = _interopRequireDefault(_filterSummary);
+var /* istanbul ignore next */_dropdown = require('../../components/gor-dropdown-component/dropdown'); /* istanbul ignore next */var _dropdown2 = _interopRequireDefault(_dropdown);
+var /* istanbul ignore next */_configConstants = require('../../constants/configConstants');
+var /* istanbul ignore next */_ajaxActions = require('../../actions/ajaxActions'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+const pageSize = [{ value: "25", disabled: false, label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'operationLog.page.twentyfive', description: 'Page size 25',
+        defaultMessage: '25', __source: { fileName: _jsxFileName, lineNumber: 33 }, __self: undefined }) },
+{ value: "50", disabled: false, label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'operationLog.page.fifty', description: 'Page size 50',
+        defaultMessage: '50', __source: { fileName: _jsxFileName, lineNumber: 35 }, __self: undefined }) },
+{ value: "100", disabled: false, label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'operationLog.page.hundred', description: 'Page size 100',
+        defaultMessage: '100', __source: { fileName: _jsxFileName, lineNumber: 37 }, __self: undefined }) }];
+
+class OperationsLogTab extends /* istanbul ignore next */_react2.default.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = this._getInitialState();
+
+        this._setFilter = this._setFilter.bind(this);
+        this._handlePageChange = this._handlePageChange.bind(this);
+        this._requestReportDownload = this._requestReportDownload.bind(this);
+
+    }
+
+    _getInitialState() {
+        var data = this._processData(this.props.olData.slice(0));
+        var dataList = new /* istanbul ignore next */_commonFunctionsDataTable.tableRenderer(data.length);
+        dataList.newData = data;
+        return {
+            columnWidths: {
+                operatingMode: this.props.containerWidth * 0.15,
+                status: this.props.containerWidth * 0.1,
+                requestId: this.props.containerWidth * 0.13,
+                skuId: this.props.containerWidth * 0.1,
+                sourceId: this.props.containerWidth * 0.1,
+                userId: this.props.containerWidth * 0.1,
+                timestamp: this.props.containerWidth * 0.1 },
+
+            sortOrder: {
+                controller_id: "ASC",
+                statusText: "ASC" },
+
+            dataList: dataList,
+            query: this.props.location.query,
+            subscribed: false,
+            realTimeSubSent: false,
+            pageSize: this.props.location.query.pageSize || /* istanbul ignore next */_frontEndConstants.DEFAULT_PAGE_SIZE_OL,
+            dataFetchedOnLoad: false,
+            hideLayer: false,
+            queryApplied: Object.keys(this.props.location.query).length ? true : false };
+
+    }
+
+    _processData(data) {
+
+        var dataLen = data.length;
+        var processedData = [];
+        var timeZone = this.props.timeOffset;
+        if (dataLen) {
+            for (let i = 0; i < dataLen; i++) {
+                let rowData = data[i]["_source"];
+                let rowObj = {}; //Object.assign({},data[i]["_source"]);
+                rowObj.operatingMode = rowData.operatingMode || "--";
+                rowObj.status = rowData.status.type;
+                rowObj.statusText = rowData.status.type !== "success" ? rowData.status.data || rowData.status.type : rowData.status.type;
+                rowObj.requestId = rowData.requestId;
+                rowObj.skuId = rowData.productInfo.type + " " + rowData.productInfo.id + "/" + rowData.productInfo.quantity + " items";
+                rowObj.sourceId = rowData.source.type + " " + rowData.source.id + (rowData.source.children ? "/" +
+                rowData.source.children[0].type + "-" + rowData.source.children[0].id : "");
+                rowObj.destinationId = (rowData.destination.type || "--") + " " + (rowData.destination.id || "--") + (rowData.destination.children ? "/" +
+                rowData.destination.children[0].type + "-" + rowData.destination.children[0].id : "");
+                rowObj.timestamp = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedDate, /* istanbul ignore next */{
+                    value: rowData.createdTime,
+                    year: 'numeric',
+                    month: 'long',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    timeZone: timeZone, __source: { fileName: _jsxFileName, lineNumber: 98 }, __self: this });
+
+                rowObj.userId = rowData.userId;
+
+                processedData.push(rowObj);
+            }
+        }
+        return processedData;
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        var shouldUpdate = nextProps.hasDataChanged !== this.props.hasDataChanged ||
+        nextProps.showFilter !== this.props.showFilter || nextProps.reportsSpinner !== this.props.reportsSpinner;
+        return shouldUpdate;
+    }
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.socketAuthorized && !this.state.subscribed) {
+            this.setState({ subscribed: true }, function () {
+                this._subscribeData(nextProps.location.query);
+            });
+
+        } else
+
+        if (nextProps.socketAuthorized && nextProps.notificationSocketConnected && (
+        !this.state.dataFetchedOnLoad ||
+        this.props.filtersModified !== nextProps.filtersModified ||
+        this.props.location.query.page !== nextProps.location.query.page)) {
+            this.setState({
+                dataFetchedOnLoad: true,
+                realTimeSelected: nextProps.location.query.time_period === /* istanbul ignore next */_frontEndConstants.REALTIME },
+            function () {
+                this._getOperationsData(nextProps);
+            });
+
+        }
+        if (this.props.hasDataChanged !== nextProps.hasDataChanged) {
+            let rawData = this.state.realTimeSelected ?
+            nextProps.olWsData.slice(0) : nextProps.olData.slice(0);
+            let data = this._processData(rawData);
+            let dataList = new /* istanbul ignore next */_commonFunctionsDataTable.tableRenderer(data.length);
+            dataList.newData = data;
+            this.setState({
+                dataList });
+
+        }
+        if ((!nextProps.olData.length || !nextProps.olWsData.length) &&
+        this.props.filtersModified !== nextProps.filtersModified) {
+            this.setState({
+                hideLayer: false });
+
+        } else
+        if (this.props.filtersModified !== nextProps.filtersModified) {
+            this.setState({
+                hideLayer: true });
+
+        }
+    }
+    componentDidMount() {
+        var _query = JSON.parse(JSON.stringify(this.props.location.query));
+        delete _query.page;
+        delete _query.pageSize;
+        if (Object.keys(_query).length) {
+            this.props.applyOLFilterFlag(true);
+        }
+        this._getOperationsData(this.props);
+    }
+    /*Since componentWillRecieveProps is not called for the first time
+      We need to put the subscription code in componentWillMount as well*/
+    componentWillMount() {
+        if (this.props.socketAuthorized && !this.state.subscribed) {
+            this.setState({ subscribed: true }, function () {
+                this._subscribeData();
+            });
+
+        }
+    }
+    componentWillUnmount() {
+        /**
+                            * If a user navigates back to the inventory page,
+                            * it should subscribe to the packet again.
+                            */
+        this.setState({ subscribed: false });
+        this.props.wsOLUnSubscribe();
+    }
+
+    _subscribeData() {
+        this.props.initDataSentCall( /* istanbul ignore next */_initData.wsOverviewData["default"]);
+    }
+    _handlePageChange(e) {
+
+        this.setState({
+            pageSize: e.value,
+            dataFetchedOnLoad: false },
+        function () {
+            let _query = Object.assign({}, this.props.location.query);
+            _query.pageSize = this.state.pageSize;
+            _query.page = _query.page || 1;
+            //this.props.applyOLFilterFlag(true);
+            this.props.router.push({ pathname: "/reports/operationsLog", query: _query });
+            //this._getOperationsData(this.props,{pageSize:e.value});
+        });
+
+    }
+    _getOperationsData(props) {
+        var query = props.location.query,
+        isSocketConnected = props.notificationSocketConnected;
+        var filters = {};
+        var pageSize = this.state.pageSize;
+        var frm = ((query.page ? parseInt(query.page) : 1) - 1) * pageSize;
+        this.props.setReportsSpinner(true);
+        if (Object.keys(query).length) {
+            let timeOffset = query.time_period ? query.time_period.split("_") : [];
+            if (query.status) {
+                filters.status = {
+                    type: query.status.toString().replace(/,/g, " ") };
+
+            }
+            if (query.request_id) {
+                filters.requestId = query.request_id;
+            }
+            if (query.sku_id) {
+                filters.skuId = query.sku_id;
+            }
+            if (query.user_id) {
+                filters.userId = query.user_id;
+            }
+            if (query.operatingMode) {
+                filters.operatingMode = query.operatingMode.toString().replace(/,/g, " ");
+            }
+
+            if (timeOffset.length === 2) {
+                filters.timeOffset = {
+                    "unit": timeOffset[1],
+                    "value": parseInt(timeOffset[0]) };
+
+            }
+        }
+        filters.page = {
+            size: parseInt(pageSize),
+            from: frm };
+
+
+        if (query.time_period !== /* istanbul ignore next */_frontEndConstants.REALTIME) {
+            this.props.wsOLUnSubscribe();
+
+            let params = {
+                'url': /* istanbul ignore next */_configConstants.OPERATIONS_LOG_URL,
+                'method': /* istanbul ignore next */_frontEndConstants.POST,
+                'contentType': /* istanbul ignore next */_frontEndConstants.APP_JSON,
+                'accept': /* istanbul ignore next */_frontEndConstants.APP_JSON,
+                'formdata': filters,
+                'cause': /* istanbul ignore next */_frontEndConstants.OPERATION_LOG_FETCH };
+
+
+
+            this.props.makeAjaxCall(params);
+            this.setState({
+                realTimeSubSent: false });
+
+        } else
+        if (query.time_period && query.time_period === /* istanbul ignore next */_frontEndConstants.REALTIME &&
+        !this.state.realTimeSubSent && isSocketConnected) {
+            this.props.wsOLUnSubscribe(false);
+            let wsParams = {};
+            delete filters.timeRange;
+            delete filters.page;
+            wsParams.url = /* istanbul ignore next */_configConstants.WS_OPERATIONS_LOG_SUBSCRIPTION;
+            wsParams.filters = JSON.stringify(filters);
+            this.props.wsOLSubscribe(wsParams);
+            this.setState({
+                realTimeSubSent: true });
+
+        }
+    }
+    _setFilter() {
+        this.props.showTableFilter(!this.props.showFilter);
+    }
+    _requestReportDownload() {
+        var formData = {
+            "searchRequest": {},
+            "report": {
+                "requestedBy": this.props.username,
+                "type": /* istanbul ignore next */_frontEndConstants.REPORT_NAME_OPERATOR_LOGS } };
+
+
+        var params = {
+            'url': /* istanbul ignore next */_configConstants.REQUEST_REPORT_DOWNLOAD,
+            'method': /* istanbul ignore next */_frontEndConstants.POST,
+            'contentType': /* istanbul ignore next */_frontEndConstants.APP_JSON,
+            'accept': /* istanbul ignore next */_frontEndConstants.APP_JSON,
+            'formdata': formData,
+            'cause': /* istanbul ignore next */_frontEndConstants.DOWNLOAD_REPORT_REQUEST };
+
+
+
+        this.props.makeAjaxCall(params);
+    }
+
+    render() {/* istanbul ignore next */var
+        dataList = this.state.dataList;
+        var _this = this;
+        var filterHeight = screen.height - 190 - 50;
+        var dataSize = dataList.getSize();
+        var timePeriod = this.props.location.query.time_period;
+        var noData = !dataSize && timePeriod !== /* istanbul ignore next */_frontEndConstants.REALTIME;
+        var pageSizeDDDisabled = timePeriod === /* istanbul ignore next */_frontEndConstants.REALTIME;
+        var location = JSON.parse(JSON.stringify(this.props.location));
+        return (
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorTesting wrapper gor-operations-log', __source: { fileName: _jsxFileName, lineNumber: 312 }, __self: this },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Spinner2.default, /* istanbul ignore next */{ isLoading: this.props.reportsSpinner, setSpinner: this.props.setReportsSpinner, __source: { fileName: _jsxFileName, lineNumber: 313 }, __self: this }),
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-wrap',
+                        style: { 'width': this.props.showFilter ? '350px' : '0px', height: filterHeight }, __source: { fileName: _jsxFileName, lineNumber: 314 }, __self: this },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_operationsFilter2.default, /* istanbul ignore next */{ ref: instance => {this.child = instance;},
+                        filters: this.props.location.query,
+                        noData: noData,
+                        pageSize: this.state.pageSize,
+                        hideLayer: this.state.hideLayer,
+                        responseFlag: this.props.reportsSpinner, __source: { fileName: _jsxFileName, lineNumber: 316 }, __self: this })),
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolBar', __source: { fileName: _jsxFileName, lineNumber: 323 }, __self: this },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolBarWrap', __source: { fileName: _jsxFileName, lineNumber: 324 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolBarElements', __source: { fileName: _jsxFileName, lineNumber: 325 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'operationLog.table.heading', description: 'Heading for PPS',
+                                defaultMessage: 'Operations Log', __source: { fileName: _jsxFileName, lineNumber: 326 }, __self: this }))),
+
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'filterWrapper', __source: { fileName: _jsxFileName, lineNumber: 331 }, __self: this },
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolBarDropDown', __source: { fileName: _jsxFileName, lineNumber: 333 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-button-wrap', __source: { fileName: _jsxFileName, lineNumber: 334 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ className: 'gor-rpt-dwnld', onClick: this._requestReportDownload, __source: { fileName: _jsxFileName, lineNumber: 335 }, __self: this },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'operationLog.table.downloadBtn',
+                                        description: 'button label for download report',
+                                        defaultMessage: 'Download Report', __source: { fileName: _jsxFileName, lineNumber: 336 }, __self: this })),
+
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{
+                                        className: this.props.filtersApplied ? "gor-filterBtn-applied" : "gor-filterBtn-btn",
+                                        onClick: this._setFilter, __source: { fileName: _jsxFileName, lineNumber: 340 }, __self: this },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-manage-task', __source: { fileName: _jsxFileName, lineNumber: 343 }, __self: this }),
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'gor.filter.filterLabel', description: 'button label for filter',
+                                        defaultMessage: 'Filter data', __source: { fileName: _jsxFileName, lineNumber: 344 }, __self: this })))))),
+
+
+
+
+
+
+
+
+                this.props.location.query.time_period !== /* istanbul ignore next */_frontEndConstants.REALTIME ?
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_filterSummary2.default, /* istanbul ignore next */{
+                    total: dataSize,
+                    isFilterApplied: this.props.filtersApplied,
+                    filterText: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'operationsLog.filter.search.bar',
+                        description: 'total waves for filter search bar',
+                        defaultMessage: '{total} Results found',
+                        values: { total: dataSize.toString() }, __source: { fileName: _jsxFileName, lineNumber: 358 }, __self: this }),
+                    refreshList: () => {
+                        _this.child.getWrappedInstance()._clearFilter();
+                    },
+                    refreshText: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'operationsLog.filter.search.bar.showall',
+                        description: 'button label for show all',
+                        defaultMessage: 'Show all Operations', __source: { fileName: _jsxFileName, lineNumber: 365 }, __self: this }), __source: { fileName: _jsxFileName, lineNumber: 355 }, __self: this }) :
+                null,
+
+
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Table, /* istanbul ignore next */Object.assign({
+                        rowHeight: 80,
+                        rowsCount: dataList.getSize(),
+                        headerHeight: 70,
+                        onColumnResizeEndCallback: null,
+                        isColumnResizing: false,
+                        width: this.props.containerWidth,
+                        height: dataSize ? document.documentElement.clientHeight * 0.6 : 71 },
+                    this.props, { __source: { fileName: _jsxFileName, lineNumber: 372 }, __self: this }),
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+                        columnKey: 'operatingMode',
+                        header:
+
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Cell, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 386 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 387 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'operationLog.table.operatingMode',
+                                    description: 'OPERATING MODE',
+                                    defaultMessage: 'OPERATING MODE', __source: { fileName: _jsxFileName, lineNumber: 388 }, __self: this }))),
+
+
+
+
+
+
+                        cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.TextCell, /* istanbul ignore next */{ data: dataList, classKey: "id", __source: { fileName: _jsxFileName, lineNumber: 397 }, __self: this }),
+                        fixed: true,
+                        width: this.state.columnWidths.operatingMode,
+                        isResizable: true, __source: { fileName: _jsxFileName, lineNumber: 381 }, __self: this }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+                        columnKey: 'statusText',
+                        header:
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Cell, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 405 }, __self: this },
+
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 407 }, __self: this },
+
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'operationLog.table.status', description: 'STATUS',
+                                    defaultMessage: 'STATUS', __source: { fileName: _jsxFileName, lineNumber: 409 }, __self: this }))),
+
+
+
+
+
+                        cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.TextCell, /* istanbul ignore next */{ data: dataList, setClass: "status", __source: { fileName: _jsxFileName, lineNumber: 416 }, __self: this }),
+                        fixed: true,
+                        width: this.state.columnWidths.status,
+                        isResizable: true, __source: { fileName: _jsxFileName, lineNumber: 402 }, __self: this }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+                        columnKey: 'requestId',
+                        header:
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Cell, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 424 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 425 }, __self: this },
+
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'operationLog.table.requestId', description: 'Request ID',
+                                    defaultMessage: 'REQUEST ID', __source: { fileName: _jsxFileName, lineNumber: 427 }, __self: this }))),
+
+
+
+                        cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.TextCell, /* istanbul ignore next */{ data: dataList, setClass: "requestId", __source: { fileName: _jsxFileName, lineNumber: 432 }, __self: this }),
+                        fixed: true,
+                        width: this.state.columnWidths.requestId,
+                        isResizable: true, __source: { fileName: _jsxFileName, lineNumber: 421 }, __self: this }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+                        columnKey: 'skuId',
+
+                        header:
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Cell, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 441 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 442 }, __self: this },
+
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'operationLog.table.skuId', description: 'Status for PPS',
+                                    defaultMessage: 'SKU ID', __source: { fileName: _jsxFileName, lineNumber: 444 }, __self: this }))),
+
+
+
+                        cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.TextCell, /* istanbul ignore next */{ data: dataList, setClass: "executionId", __source: { fileName: _jsxFileName, lineNumber: 449 }, __self: this }),
+                        fixed: true,
+                        width: this.state.columnWidths.requestId,
+                        isResizable: true, __source: { fileName: _jsxFileName, lineNumber: 437 }, __self: this }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+                        columnKey: 'sourceId',
+                        header:
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Cell, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 457 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 458 }, __self: this },
+
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'operationLog.table.sourceId', description: 'Status for PPS',
+                                    defaultMessage: 'SOURCE ID', __source: { fileName: _jsxFileName, lineNumber: 460 }, __self: this }))),
+
+
+
+
+
+                        cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.TextCell, /* istanbul ignore next */{ data: dataList, setClass: "skuId", __source: { fileName: _jsxFileName, lineNumber: 467 }, __self: this }),
+                        fixed: true,
+                        width: this.state.columnWidths.skuId,
+                        isResizable: true, __source: { fileName: _jsxFileName, lineNumber: 454 }, __self: this }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+                        columnKey: 'destinationId',
+                        header:
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Cell, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 475 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 476 }, __self: this },
+
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'operationLog.table.destinationId', description: 'Status for PPS',
+                                    defaultMessage: 'DESTINATION ID', __source: { fileName: _jsxFileName, lineNumber: 478 }, __self: this }))),
+
+
+
+
+
+                        cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.TextCell, /* istanbul ignore next */{ data: dataList, setClass: "destinationId", __source: { fileName: _jsxFileName, lineNumber: 485 }, __self: this }),
+                        fixed: true,
+                        width: this.state.columnWidths.skuId,
+                        isResizable: true, __source: { fileName: _jsxFileName, lineNumber: 472 }, __self: this }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+                        columnKey: 'userId',
+                        header:
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Cell, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 493 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 494 }, __self: this },
+
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'operationLog.table.userId', description: 'Status for PPS',
+                                    defaultMessage: 'USER ID', __source: { fileName: _jsxFileName, lineNumber: 496 }, __self: this }))),
+
+
+
+
+
+                        cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.TextCell, /* istanbul ignore next */{ data: dataList, setClass: "userId", __source: { fileName: _jsxFileName, lineNumber: 503 }, __self: this }),
+                        fixed: true,
+                        width: this.state.columnWidths.userId,
+                        isResizable: true, __source: { fileName: _jsxFileName, lineNumber: 490 }, __self: this }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+                        columnKey: 'timestamp',
+                        header:
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Cell, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 511 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 512 }, __self: this },
+
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'operationLog.table.timestamp', description: 'Status for PPS',
+                                    defaultMessage: 'TIMESTAMP', __source: { fileName: _jsxFileName, lineNumber: 514 }, __self: this }))),
+
+
+
+
+
+                        cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.TextCell, /* istanbul ignore next */{ data: dataList, setClass: "timestamp", __source: { fileName: _jsxFileName, lineNumber: 521 }, __self: this }),
+                        fixed: true,
+                        width: this.state.columnWidths.timestamp,
+                        isResizable: true, __source: { fileName: _jsxFileName, lineNumber: 508 }, __self: this })),
+
+
+
+                !dataSize ? /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-no-data', __source: { fileName: _jsxFileName, lineNumber: 528 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'operationsLog.table.noData',
+                        description: 'No data message for operations logs',
+                        defaultMessage: 'No Data Found', __source: { fileName: _jsxFileName, lineNumber: 528 }, __self: this })) : "",
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-ol-paginate-wrap', __source: { fileName: _jsxFileName, lineNumber: 531 }, __self: this },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-ol-paginate-left', __source: { fileName: _jsxFileName, lineNumber: 532 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_dropdown2.default, /* istanbul ignore next */{
+                            options: pageSize,
+                            onSelectHandler: e => this._handlePageChange(e),
+                            disabled: pageSizeDDDisabled,
+                            selectedOption: /* istanbul ignore next */_frontEndConstants.DEFAULT_PAGE_SIZE_OL, __source: { fileName: _jsxFileName, lineNumber: 533 }, __self: this })),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-ol-paginate-right', __source: { fileName: _jsxFileName, lineNumber: 539 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_gorPaginateV2.default, /* istanbul ignore next */{ disabled: pageSizeDDDisabled, location: location, currentPage: this.state.query.page || 1, totalPage: 10, __source: { fileName: _jsxFileName, lineNumber: 540 }, __self: this })))));
+
+
+
+
+    }}
+;
+
+OperationsLogTab.propTypes = {
+    olData: /* istanbul ignore next */_react2.default.PropTypes.array,
+    socketAuthorized: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    showFilter: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    hasDataChanged: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    filtersApplied: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    filtersModified: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    notificationSocketConnected: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    reportsSpinner: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    olWsData: /* istanbul ignore next */_react2.default.PropTypes.array };
+
+
+OperationsLogTab.defaultProps = {
+    olData: [],
+    socketAuthorized: false,
+    showFilter: false,
+    hasDataChanged: false,
+    filtersApplied: false,
+    filtersModified: false,
+    notificationSocketConnected: false,
+    reportsSpinner: true,
+    olWsData: [] };
+
+
+function mapStateToProps(state, ownProps) {
+    return {
+        socketAuthorized: state.recieveSocketActions.socketAuthorized,
+        showFilter: state.filterInfo.filterState,
+        olData: state.operationsLogsReducer.olData,
+        hasDataChanged: state.operationsLogsReducer.hasDataChanged,
+        filtersApplied: state.operationsLogsReducer.filtersApplied,
+        filtersModified: state.operationsLogsReducer.filtersModified,
+        notificationSocketConnected: state.notificationSocketReducer.notificationSocketConnected,
+        reportsSpinner: state.operationsLogsReducer.reportsSpinner,
+        olWsData: state.operationsLogsReducer.olWsData,
+        timeOffset: state.authLogin.timeOffset,
+        username: state.authLogin.username };
+
+
+}
+function mapDispatchToProps(dispatch) {
+    return {
+        initDataSentCall: function /* istanbul ignore next */initDataSentCall(data) {dispatch( /* istanbul ignore next */(0, _socketActions.setWsAction)({ type: /* istanbul ignore next */_frontEndConstants.WS_ONSEND, data: data }));},
+        updateSubscriptionPacket: function /* istanbul ignore next */updateSubscriptionPacket(data) {
+            dispatch( /* istanbul ignore next */(0, _socketActions.updateSubscriptionPacket)(data));
+        },
+        showTableFilter: function /* istanbul ignore next */showTableFilter(data) {dispatch( /* istanbul ignore next */(0, _filterAction.showTableFilter)(data));},
+        makeAjaxCall: function /* istanbul ignore next */makeAjaxCall(params) {dispatch( /* istanbul ignore next */(0, _ajaxActions.makeAjaxCall)(params));},
+        applyOLFilterFlag: function /* istanbul ignore next */applyOLFilterFlag(data) {dispatch( /* istanbul ignore next */(0, _operationsLogsActions.applyOLFilterFlag)(data));},
+        wsOLUnSubscribe: function /* istanbul ignore next */wsOLUnSubscribe(data) {dispatch( /* istanbul ignore next */(0, _operationsLogsActions.wsOLUnSubscribe)(data));},
+        wsOLSubscribe: function /* istanbul ignore next */wsOLSubscribe(data) {dispatch( /* istanbul ignore next */(0, _operationsLogsActions.wsOLSubscribe)(data));},
+        setReportsSpinner: function /* istanbul ignore next */setReportsSpinner(data) {dispatch( /* istanbul ignore next */(0, _operationsLogsActions.setReportsSpinner)(data));} };
+
+}; /* istanbul ignore next */exports.default =
+
+
+/* istanbul ignore next */(0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)( /* istanbul ignore next */(0, _reactDimensions2.default)()( /* istanbul ignore next */(0, _reactRouter.withRouter)(OperationsLogTab)));

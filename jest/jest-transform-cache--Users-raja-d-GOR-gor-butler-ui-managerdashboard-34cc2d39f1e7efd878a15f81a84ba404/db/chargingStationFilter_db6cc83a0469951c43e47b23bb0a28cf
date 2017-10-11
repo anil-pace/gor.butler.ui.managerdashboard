@@ -1,0 +1,251 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/containers/systemTabs/chargingStationFilter.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_filter = require('../../components/tableFilter/filter'); /* istanbul ignore next */var _filter2 = _interopRequireDefault(_filter);
+var /* istanbul ignore next */_filterAction = require('../../actions/filterAction');
+
+
+
+
+
+var /* istanbul ignore next */_socketActions = require('../../actions/socketActions');
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_filterInputFieldWrap = require('../../components/tableFilter/filterInputFieldWrap'); /* istanbul ignore next */var _filterInputFieldWrap2 = _interopRequireDefault(_filterInputFieldWrap);
+var /* istanbul ignore next */_filterTokenContainer = require('../../components/tableFilter/filterTokenContainer'); /* istanbul ignore next */var _filterTokenContainer2 = _interopRequireDefault(_filterTokenContainer);
+var /* istanbul ignore next */_tableFilterCommonFunctions = require('../../components/tableFilter/tableFilterCommonFunctions');
+var /* istanbul ignore next */_spinnerAction = require('../../actions/spinnerAction');
+var /* istanbul ignore next */_reactRouter = require('react-router'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+class ChargingStationFilter extends /* istanbul ignore next */_react2.default.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            tokenSelected: { "DOCKING STATUS": ["all"], "OPERATING MODE": ["all"] }, searchQuery: {},
+            defaultToken: { "DOCKING STATUS": ["all"], "OPERATING MODE": ["all"] } };
+
+        this._closeFilter = this._closeFilter.bind(this);
+        this._clearFilter = this._clearFilter.bind(this);
+        this._applyFilter = this._applyFilter.bind(this);
+    }
+
+
+    _closeFilter() {
+        let filterState = !this.props.showFilter;
+        this.props.showTableFilter(false);
+    }
+
+
+    componentWillReceiveProps(nextProps) {
+        /**
+                                           * It will update the state as soon as
+                                           * filters are cleared.
+                                           */
+        if (nextProps.filterState && JSON.stringify(this.state) !== JSON.stringify(nextProps.filterState)) {
+            this.setState(nextProps.filterState);
+        }
+
+        /**
+           * Hide the filter as soon as data in the list get updated.
+           */
+        if (nextProps.chargersData.length > 0 && JSON.stringify(nextProps.chargersData) !== JSON.stringify(this.props.chargersData)) {
+            this.props.showTableFilter(false);
+        }
+    }
+
+
+    _processChargingSearchField() {
+        var filterInputFields = [{
+            value: "CHARGING STATION ID",
+            label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'charging.inputField.id', defaultMessage: 'CHARGING STATION ID', __source: { fileName: _jsxFileName, lineNumber: 57 }, __self: this }) }];
+
+        var inputValue = this.state.searchQuery;
+        var inputField = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_filterInputFieldWrap2.default, /* istanbul ignore next */{ inputText: filterInputFields,
+            handleInputText: this._handleInputQuery.bind(this),
+            inputValue: inputValue, __source: { fileName: _jsxFileName, lineNumber: 60 }, __self: this });
+        return inputField;
+
+    }
+
+    _processFilterToken() {
+        let tokenField1 = {
+            value: "DOCKING STATUS",
+            label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'charging.token.status', defaultMessage: 'DOCKING STATUS', __source: { fileName: _jsxFileName, lineNumber: 70 }, __self: this }) };
+
+        let tokenField2 = {
+            value: "OPERATING MODE",
+            label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'charging.token.timePeriod', defaultMessage: 'OPERATING MODE', __source: { fileName: _jsxFileName, lineNumber: 74 }, __self: this }) };
+
+        let labelC1 = [
+        { value: 'all', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'charging.STATUS.all', defaultMessage: 'Any', __source: { fileName: _jsxFileName, lineNumber: 77 }, __self: this }) },
+        { value: 'connected', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'charging.STATUS.breach', defaultMessage: 'Connected', __source: { fileName: _jsxFileName, lineNumber: 78 }, __self: this }) },
+        {
+            value: 'disconnected',
+            label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'charging.STATUS.pending', defaultMessage: 'Disconnected', __source: { fileName: _jsxFileName, lineNumber: 81 }, __self: this }) }];
+
+
+        let labelC2 = [
+        { value: 'all', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'charging.timePeriod.all', defaultMessage: 'Any', __source: { fileName: _jsxFileName, lineNumber: 85 }, __self: this }) },
+        { value: 'manual', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'charging.timePeriod.oneHr', defaultMessage: 'Manual', __source: { fileName: _jsxFileName, lineNumber: 86 }, __self: this }) },
+        { value: 'auto', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'charging.timePeriod.twoHR', defaultMessage: 'Auto', __source: { fileName: _jsxFileName, lineNumber: 87 }, __self: this }) }];
+
+        let selectedToken = this.state.tokenSelected;
+        let column1 = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_filterTokenContainer2.default, /* istanbul ignore next */{ field: tokenField1, tokenCallBack: this._handelTokenClick.bind(this),
+            label: labelC1, selectedToken: selectedToken, __source: { fileName: _jsxFileName, lineNumber: 90 }, __self: this });
+        let column2 = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_filterTokenContainer2.default, /* istanbul ignore next */{ field: tokenField2, tokenCallBack: this._handelTokenClick.bind(this),
+            label: labelC2, selectedToken: selectedToken, __source: { fileName: _jsxFileName, lineNumber: 92 }, __self: this });
+        let columnDetail = { column1token: column1, column2token: column2 };
+        return columnDetail;
+    }
+
+    _handelTokenClick(field, value, state) {
+        this.setState({ tokenSelected: /* istanbul ignore next */(0, _tableFilterCommonFunctions.handelTokenClick)(field, value, state, this.state) });
+
+    }
+
+    _handleInputQuery(inputQuery, queryField) {
+        this.setState({ searchQuery: /* istanbul ignore next */(0, _tableFilterCommonFunctions.handleInputQuery)(inputQuery, queryField, this.state) });
+    }
+
+    _applyFilter() {
+        let filterState = this.state,_query = {};
+        if (filterState.searchQuery && filterState.searchQuery["CHARGING STATION ID"]) {
+            _query.charger_id = filterState.searchQuery["CHARGING STATION ID"];
+        }
+
+        if (filterState.tokenSelected["DOCKING STATUS"] && filterState.tokenSelected["DOCKING STATUS"][0] !== 'all') {
+            _query.charger_status = filterState.tokenSelected["DOCKING STATUS"];
+        }
+        if (filterState.tokenSelected["OPERATING MODE"] && filterState.tokenSelected["OPERATING MODE"][0] !== 'all') {
+            _query.charger_mode = filterState.tokenSelected["OPERATING MODE"];
+        }
+
+        /* istanbul ignore next */_reactRouter.hashHistory.push({ pathname: "/system/chargingstation", query: _query });
+    }
+
+    _clearFilter() {
+        this.props.chargingstationfilterState({
+            tokenSelected: {
+                "DOCKING STATUS": ["all"],
+                "OPERATING MODE": ["all"] },
+            searchQuery: {
+                "CHARGING STATION ID": '' } });
+
+
+        /* istanbul ignore next */_reactRouter.hashHistory.push({ pathname: "/system/chargingstation", query: {} });
+    }
+
+
+    render() {
+        let chargingDetails = this.props.chargerData;
+        let noOrder = chargingDetails.noResultFound;
+
+
+        let chargingSearchField = this._processChargingSearchField();
+        let chargingFilterToken = this._processFilterToken();
+        return (
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 144 }, __self: this },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_filter2.default, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 145 }, __self: this },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-header', __source: { fileName: _jsxFileName, lineNumber: 146 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-header-h1', __source: { fileName: _jsxFileName, lineNumber: 147 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'gor.filter.filterLabel', description: 'label for filter',
+                                defaultMessage: 'Filter data', __source: { fileName: _jsxFileName, lineNumber: 148 }, __self: this })),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-header-h2', onClick: this._closeFilter, __source: { fileName: _jsxFileName, lineNumber: 151 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'gor.filter.hide', description: 'label for hide',
+                                defaultMessage: 'Hide', __source: { fileName: _jsxFileName, lineNumber: 152 }, __self: this }))),
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 156 }, __self: this }, noOrder ?
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-no-result-filter', __source: { fileName: _jsxFileName, lineNumber: 157 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'gor.filter.noResult', description: 'label for no result',
+                                defaultMessage: 'No results found, please try again', __source: { fileName: _jsxFileName, lineNumber: 157 }, __self: this })) : ""),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-body', __source: { fileName: _jsxFileName, lineNumber: 160 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-body-input-wrap', __source: { fileName: _jsxFileName, lineNumber: 161 }, __self: this },
+                            chargingSearchField),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-body-filterToken-wrap', __source: { fileName: _jsxFileName, lineNumber: 164 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-body-filterToken-section1', __source: { fileName: _jsxFileName, lineNumber: 165 }, __self: this },
+                                chargingFilterToken.column1token),
+
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-body-filterToken-section1', __source: { fileName: _jsxFileName, lineNumber: 168 }, __self: this },
+                                chargingFilterToken.column2token))),
+
+
+
+
+
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-footer', __source: { fileName: _jsxFileName, lineNumber: 177 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'gor-filter-footer-h2', onClick: this._clearFilter, __source: { fileName: _jsxFileName, lineNumber: 178 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'gor.filter.reset', description: 'label for reset',
+                                defaultMessage: 'Reset', __source: { fileName: _jsxFileName, lineNumber: 179 }, __self: this })),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-btn-wrap', __source: { fileName: _jsxFileName, lineNumber: 182 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ className: 'gor-add-btn', onClick: this._applyFilter, __source: { fileName: _jsxFileName, lineNumber: 183 }, __self: this },
+                                !this.props.csFilterSpinner ? /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'gor.filter.heading', description: 'filter heading', defaultMessage: 'Apply filter', __source: { fileName: _jsxFileName, lineNumber: 184 }, __self: this }) : /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'spinnerImage', __source: { fileName: _jsxFileName, lineNumber: 184 }, __self: this })))))));
+
+
+
+
+
+
+
+
+    }}
+
+;
+
+
+function mapStateToProps(state, ownProps) {
+    return {
+        showFilter: state.filterInfo.filterState || false,
+        chargerData: state.chargersDetail || [],
+        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket,
+        orderListSpinner: state.spinner.orderListSpinner || false,
+        filterState: state.filterInfo.chargingstationfilterState,
+        isFilterApplied: state.filterInfo.isFilterApplied || false,
+        chargingFilterStatus: state.filterInfo.chargingFilterStatus || false,
+        csSpinner: state.spinner.csSpinner || false,
+        csFilterSpinner: state.spinner.csFilterSpinner || false };
+
+
+}
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+    return {
+        showTableFilter: function /* istanbul ignore next */showTableFilter(data) {
+            dispatch( /* istanbul ignore next */(0, _filterAction.showTableFilter)(data));
+        },
+        filterApplied: function /* istanbul ignore next */filterApplied(data) {
+            dispatch( /* istanbul ignore next */(0, _filterAction.filterApplied)(data));
+        },
+        updateSubscriptionPacket: function /* istanbul ignore next */updateSubscriptionPacket(data) {
+            dispatch( /* istanbul ignore next */(0, _socketActions.updateSubscriptionPacket)(data));
+        },
+        chargingstationfilterState: function /* istanbul ignore next */chargingstationfilterState(data) {
+            dispatch( /* istanbul ignore next */(0, _filterAction.chargingstationfilterState)(data));
+        },
+        toggleChargingFilter: function /* istanbul ignore next */toggleChargingFilter(data) {
+            dispatch( /* istanbul ignore next */(0, _filterAction.toggleChargingFilter)(data));
+        },
+        setCsFilterSpinner: function /* istanbul ignore next */setCsFilterSpinner(data) {
+            dispatch( /* istanbul ignore next */(0, _spinnerAction.setCsFilterSpinner)(data));
+        } };
+
+};
+
+ChargingStationFilter.PropTypes = {
+    showFilter: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    chargerData: /* istanbul ignore next */_react2.default.PropTypes.array,
+    wsSubscriptionData: /* istanbul ignore next */_react2.default.PropTypes.object,
+    orderListSpinner: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    filterState: /* istanbul ignore next */_react2.default.PropTypes.object,
+    isFilterApplied: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    chargingFilterStatus: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    showTableFilter: /* istanbul ignore next */_react2.default.PropTypes.func,
+    filterApplied: /* istanbul ignore next */_react2.default.PropTypes.func,
+    updateSubscriptionPacket: /* istanbul ignore next */_react2.default.PropTypes.func,
+    chargingstationfilterState: /* istanbul ignore next */_react2.default.PropTypes.func,
+    toggleChargingFilter: /* istanbul ignore next */_react2.default.PropTypes.func }; /* istanbul ignore next */exports.default =
+
+
+/* istanbul ignore next */(0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ChargingStationFilter);

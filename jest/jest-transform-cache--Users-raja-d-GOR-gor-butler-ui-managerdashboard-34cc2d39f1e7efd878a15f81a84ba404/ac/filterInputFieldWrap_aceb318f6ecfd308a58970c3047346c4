@@ -1,0 +1,34 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/components/tableFilter/filterInputFieldWrap.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_filterInputField = require('./filterInputField'); /* istanbul ignore next */var _filterInputField2 = _interopRequireDefault(_filterInputField);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+class FilterInputFieldWrap extends /* istanbul ignore next */_react2.default.Component {
+
+  _textSubmit(e) {
+    this.props.handleInputText(this.pageNum.value, this.props.inputText.value);
+  }
+  _processInputField() {
+    var totalInput = this.props.inputText,inputFieldWrap = [],flag = false;
+    var textboxStatus = this.props.textboxStatus || {};
+    var length = totalInput.length;
+    for (let i = 0; i < length; i++) {
+      if (textboxStatus.name) {
+
+        flag = textboxStatus.name.indexOf(totalInput[i].value) !== -1 ? false : true;
+      }
+      var inputValue = flag ? "" : this.props.inputValue[totalInput[i].value];
+      var inputField = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_filterInputField2.default, /* istanbul ignore next */{ key: i, inputText: totalInput[i], handleInputText: this.props.handleInputText, inputValue: inputValue, flag: flag, __source: { fileName: _jsxFileName, lineNumber: 19 }, __self: this });
+      inputFieldWrap.push(inputField);
+    }
+    return inputFieldWrap;
+  }
+  render() {
+    var inputFields = this._processInputField();
+    return (
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 27 }, __self: this },
+        inputFields));
+
+
+  }}
+; /* istanbul ignore next */exports.default =
+
+FilterInputFieldWrap;

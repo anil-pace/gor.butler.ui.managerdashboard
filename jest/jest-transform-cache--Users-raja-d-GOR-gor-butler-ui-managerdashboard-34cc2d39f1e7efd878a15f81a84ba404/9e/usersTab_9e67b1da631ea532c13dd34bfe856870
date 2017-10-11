@@ -1,0 +1,198 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/containers/usersTab.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactDom = require('react-dom'); /* istanbul ignore next */var _reactDom2 = _interopRequireDefault(_reactDom);
+var /* istanbul ignore next */_userTabTable = require('./userTab/userTabTable'); /* istanbul ignore next */var _userTabTable2 = _interopRequireDefault(_userTabTable);
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_backEndConstants = require('../constants/backEndConstants');
+var /* istanbul ignore next */_Spinner = require('../../components/spinner/Spinner'); /* istanbul ignore next */var _Spinner2 = _interopRequireDefault(_Spinner);
+var /* istanbul ignore next */_spinnerAction = require('../../actions/spinnerAction');
+var /* istanbul ignore next */_sortHeaderActions = require('../actions/sortHeaderActions');
+var /* istanbul ignore next */_frontEndConstants = require('../constants/frontEndConstants'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+//Mesages for internationalization
+const messages = /* istanbul ignore next */(0, _reactIntl.defineMessages)({
+  userOperator: {
+    id: "userDetails.operator",
+    defaultMessage: "Operator" },
+
+  userManager: {
+    id: "userDetails.manager",
+    defaultMessage: "Manager" },
+
+  userPick: {
+    id: "userDetails.pick.status",
+    defaultMessage: "Pick" },
+
+  auditCompletedStatus: {
+    id: "auditdetail.completed.status",
+    defaultMessage: "Audited" },
+
+  userPut: {
+    id: "userDetails.put.status",
+    defaultMessage: "Put" },
+
+  userAudit: {
+    id: "userDetails.audit.status",
+    defaultMessage: "Audit" },
+
+  userFront: {
+    id: "userDetails.front.status",
+    defaultMessage: "Front" },
+
+  userBack: {
+    id: "userDetails.back.status",
+    defaultMessage: "Back" },
+
+  userOnline: {
+    id: "userDetails.online.status",
+    defaultMessage: "Online" },
+
+  userOffline: {
+    id: "userDetails.offline.status",
+    defaultMessage: "Offline" },
+
+  userLocation: {
+    id: "userDetails.location",
+    defaultMessage: "PPS {ppsId}" } });
+
+
+
+
+
+
+class UsersTab extends /* istanbul ignore next */_react2.default.Component {
+  constructor(props)
+  {
+    super(props);
+  }
+  _processUserDetails() {
+    var nProps = this,
+    data = nProps.props.userdetails || {};
+    let operator = nProps.context.intl.formatMessage(messages.userOperator);
+    let manager = nProps.context.intl.formatMessage(messages.userManager);
+    let pick = nProps.context.intl.formatMessage( /* istanbul ignore next */_backEndConstants.stringConfig.pick);
+    let put = nProps.context.intl.formatMessage( /* istanbul ignore next */_backEndConstants.stringConfig.put);
+    let audit = nProps.context.intl.formatMessage( /* istanbul ignore next */_backEndConstants.stringConfig.audit);
+    let front = nProps.context.intl.formatMessage(messages.userFront);
+    let back = nProps.context.intl.formatMessage(messages.userBack);
+    let online = nProps.context.intl.formatMessage( /* istanbul ignore next */_backEndConstants.stringConfig.online);
+    let offline = nProps.context.intl.formatMessage( /* istanbul ignore next */_backEndConstants.stringConfig.offline);
+    var role = { "butler_ui": operator, "butler_supervisor": manager };
+    var work_mode = { "pick": pick, "put": put, "audit": audit };
+    var work_place = { "front": front, "back": back };
+
+
+    var userDetails = [],userData = {};
+    for (var i = data.length - 1; i >= 0; i--) {
+
+      userData.id = (data[i].first_name || "--") + " " + (data[i].last_name || "--");
+      if (data[i].logged_in) {
+        userData.status = online;
+        userData.statusClass = "online";
+        if (data[i].pps.pps_mode && data[i].pps.seat_type) {
+          userData.workMode = work_mode[data[i].pps.pps_mode] + " " + work_place[data[i].pps.seat_type];
+        } else
+
+        if (data[i].pps.pps_mode) {
+          userData.workMode = work_mode[data[i].pps.pps_mode];
+        }
+
+        userData.location = nProps.context.intl.formatMessage(messages.userLocation, { "ppsId": data[i].pps.pps_id });
+        userData.logInTime = nProps.context.intl.formatTime(data[i].login_time, { hour: 'numeric', minute: 'numeric', hour12: false }) +
+        " (" + nProps.context.intl.formatRelative(data[i].login_time) + ")";;
+
+      } else
+
+      {
+        userData.status = offline;
+        userData.statusClass = "offline";
+        userData.workMode = "--";
+        userData.location = "--";
+        userData.logInTime = "--";
+      }
+
+
+      userData.uid = data[i].user_id;
+      userData.userName = data[i].user_name;
+      userData.first = data[i].first_name;
+      userData.last = data[i].last_name;
+      userData.roleId = data[i].role;
+      if (role.hasOwnProperty(data[i].role)) {
+        userData.role = role[data[i].role];
+      } else
+      {
+        userData.role = data[i].role;
+      }
+      userDetails.push(userData);
+      userData = {};
+    }
+
+    return userDetails;
+  }
+  render() {
+    var itemNumber = 7,userData;
+    if (this.props.userdetails !== undefined) {
+      userData = this._processUserDetails();
+    }
+    return (
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 138 }, __self: this },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 139 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-User-Table', __source: { fileName: _jsxFileName, lineNumber: 140 }, __self: this },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Spinner2.default, /* istanbul ignore next */{ isLoading: this.props.userSpinner, setSpinner: this.props.setUserSpinner, __source: { fileName: _jsxFileName, lineNumber: 141 }, __self: this }),
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_userTabTable2.default, /* istanbul ignore next */{ items: userData, itemNumber: itemNumber, intlMessg: this.props.intlMessages,
+              mid: this.props.manager.users ? this.props.manager.users[0].id : '',
+              sortHeaderState: this.props.userHeaderSort, sortHeaderOrder: this.props.userHeaderSortOrder,
+              currentSortState: this.props.userSortHeader, currentHeaderOrder: this.props.userSortHeaderState,
+              setUserFilter: this.props.userFilterDetail,
+              getUserFilter: this.props.userFilter, __source: { fileName: _jsxFileName, lineNumber: 142 }, __self: this })))));
+
+
+
+
+  }}
+;
+
+
+function mapStateToProps(state, ownProps) {
+
+  return {
+    userFilter: state.sortHeaderState.userFilter || "",
+    userdetails: state.userDetails.userDetails || [],
+    intlMessages: state.intl.messages,
+    manager: state.headerData.headerInfo || [],
+    userSortHeader: state.sortHeaderState.userHeaderSort || "role",
+    userSortHeaderState: state.sortHeaderState.userHeaderSortOrder || /* istanbul ignore next */_frontEndConstants.INITIAL_HEADER_ORDER,
+    userSpinner: state.spinner.userSpinner || false };
+
+
+}
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    userFilterDetail: function /* istanbul ignore next */userFilterDetail(data) {dispatch( /* istanbul ignore next */(0, _sortHeaderActions.userFilterDetail)(data));},
+    userHeaderSort: function /* istanbul ignore next */userHeaderSort(data) {dispatch( /* istanbul ignore next */(0, _sortHeaderActions.userHeaderSort)(data));},
+    userHeaderSortOrder: function /* istanbul ignore next */userHeaderSortOrder(data) {dispatch( /* istanbul ignore next */(0, _sortHeaderActions.userHeaderSortOrder)(data));},
+    setUserSpinner: function /* istanbul ignore next */setUserSpinner(data) {dispatch( /* istanbul ignore next */(0, _spinnerAction.setUserSpinner)(data));} };
+
+};
+
+
+UsersTab.contextTypes = {
+  intl: /* istanbul ignore next */_react2.default.PropTypes.object.isRequired };
+
+
+UsersTab.PropTypes = {
+  userFilterDetail: /* istanbul ignore next */_react2.default.PropTypes.func,
+  userHeaderSort: /* istanbul ignore next */_react2.default.PropTypes.func,
+  userHeaderSortOrder: /* istanbul ignore next */_react2.default.PropTypes.func,
+  setUserSpinner: /* istanbul ignore next */_react2.default.PropTypes.func,
+  userFilter: /* istanbul ignore next */_react2.default.PropTypes.string,
+  userdetails: /* istanbul ignore next */_react2.default.PropTypes.array,
+  manager: /* istanbul ignore next */_react2.default.PropTypes.array,
+  userSortHeader: /* istanbul ignore next */_react2.default.PropTypes.string,
+  userSortHeaderState: /* istanbul ignore next */_react2.default.PropTypes.string,
+  userSpinner: /* istanbul ignore next */_react2.default.PropTypes.bool }; /* istanbul ignore next */exports.default =
+
+
+
+/* istanbul ignore next */(0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(UsersTab);

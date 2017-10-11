@@ -1,0 +1,361 @@
+/* istanbul ignore next */"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.pwdDesc = exports.roleDesc = exports.stringConfig = exports.USER_ROLE_MAP = exports.BUTLER_UI = exports.BUTLER_SUPERVISOR = exports.CODE_E135 = exports.CODE_E052 = exports.CODE_E051 = exports.CODE_AE008 = exports.CODE_AE007 = exports.CODE_G016 = exports.CODE_AS003 = exports.CODE_AS002 = exports.CODE_AE006 = exports.CODE_AE005 = exports.CODE_AE004 = exports.CODE_AE002 = exports.CODE_AE001 = exports.CODE_G015 = exports.CODE_E027 = exports.CODE_E026 = exports.CODE_UE006 = exports.CODE_UE005 = exports.CODE_UE004 = exports.CODE_UE003 = exports.CODE_UE002 = exports.CODE_UE001 = exports.CODE_US004 = exports.CODE_US002 = exports.CODE_US001 = exports.USER_DATA = exports.HISTOGRAM_DETAILS = exports.SYSTEM_BUTLERS_DETAILS = exports.SYSTEM_PPS_DETAILS = exports.PPS_DETAIL = exports.SYS_CONTROLLERS = exports.SYS_OVERVIEW = exports.PPS = exports.PPS_CONFIGURATION = exports.CHARGING = exports.BUTLERBOTS = exports.SYSTEM_CHARGERS_DETAILS = exports.PARSE_CONTROLLERS = exports.PARSE_ZONING = exports.PARSE_STATUS = exports.PARSE_AUDIT_AGG = exports.PARSE_AUDIT = exports.PARSE_PPA_THROUGHPUT = exports.PARSE_PICK = exports.PARSE_PUT = exports.PARSE_INVENTORY_HISTORY = exports.PARSE_INVENTORY_TODAY = exports.PARSE_INVENTORY = exports.PARSE_SYSTEM = exports.PARSE_OVERVIEW = exports.PARSE_ORDERS = exports.PARSE_CHARGERS = exports.PARSE_BUTLERS = exports.PARSE_PPS = exports.WS_SUCCESS = undefined;var /* istanbul ignore next */_reactIntl = require("react-intl");
+//WS constants
+const WS_SUCCESS = /* istanbul ignore next */exports.WS_SUCCESS = "Sucessfully logged in";
+
+/*Parsing Constants*/
+const PARSE_PPS = /* istanbul ignore next */exports.PARSE_PPS = "pps";
+const PARSE_BUTLERS = /* istanbul ignore next */exports.PARSE_BUTLERS = "butlers";
+const PARSE_CHARGERS = /* istanbul ignore next */exports.PARSE_CHARGERS = "chargers";
+const PARSE_ORDERS = /* istanbul ignore next */exports.PARSE_ORDERS = "orders";
+const PARSE_OVERVIEW = /* istanbul ignore next */exports.PARSE_OVERVIEW = "overview";
+const PARSE_SYSTEM = /* istanbul ignore next */exports.PARSE_SYSTEM = "system";
+const PARSE_INVENTORY = /* istanbul ignore next */exports.PARSE_INVENTORY = "inventory";
+const PARSE_INVENTORY_TODAY = /* istanbul ignore next */exports.PARSE_INVENTORY_TODAY = "inventory_today";
+const PARSE_INVENTORY_HISTORY = /* istanbul ignore next */exports.PARSE_INVENTORY_HISTORY = "inventory_history";
+const PARSE_PUT = /* istanbul ignore next */exports.PARSE_PUT = "put";
+const PARSE_PICK = /* istanbul ignore next */exports.PARSE_PICK = "pick";
+const PARSE_PPA_THROUGHPUT = /* istanbul ignore next */exports.PARSE_PPA_THROUGHPUT = "put_pick_audit_throughput";
+const PARSE_AUDIT = /* istanbul ignore next */exports.PARSE_AUDIT = "audit";
+const PARSE_AUDIT_AGG = /* istanbul ignore next */exports.PARSE_AUDIT_AGG = "audit_agg";
+const PARSE_STATUS = /* istanbul ignore next */exports.PARSE_STATUS = "status";
+const PARSE_ZONING = /* istanbul ignore next */exports.PARSE_ZONING = "zones";
+const PARSE_CONTROLLERS = /* istanbul ignore next */exports.PARSE_CONTROLLERS = "controllers";
+const SYSTEM_CHARGERS_DETAILS = /* istanbul ignore next */exports.SYSTEM_CHARGERS_DETAILS = "chargers";
+const BUTLERBOTS = /* istanbul ignore next */exports.BUTLERBOTS = "butlerbots";
+const CHARGING = /* istanbul ignore next */exports.CHARGING = "chargingstation";
+const PPS_CONFIGURATION = /* istanbul ignore next */exports.PPS_CONFIGURATION = "ppsConfiguration";
+const PPS = /* istanbul ignore next */exports.PPS = "pps";
+const SYS_OVERVIEW = /* istanbul ignore next */exports.SYS_OVERVIEW = "sysOverview";
+const SYS_CONTROLLERS = /* istanbul ignore next */exports.SYS_CONTROLLERS = "sysControllers";
+
+/*Constants for response type */
+const PPS_DETAIL = /* istanbul ignore next */exports.PPS_DETAIL = "pps";
+const SYSTEM_PPS_DETAILS = /* istanbul ignore next */exports.SYSTEM_PPS_DETAILS = "system_pps_details";
+const SYSTEM_BUTLERS_DETAILS = /* istanbul ignore next */exports.SYSTEM_BUTLERS_DETAILS = "butlers";
+const HISTOGRAM_DETAILS = /* istanbul ignore next */exports.HISTOGRAM_DETAILS = "histogram";
+const USER_DATA = /* istanbul ignore next */exports.USER_DATA = "users";
+
+/*Constants for api response codes*/
+const CODE_US001 = /* istanbul ignore next */exports.CODE_US001 = 'us001';
+const CODE_US002 = /* istanbul ignore next */exports.CODE_US002 = 'us002';
+const CODE_US004 = /* istanbul ignore next */exports.CODE_US004 = 'us004';
+const CODE_UE001 = /* istanbul ignore next */exports.CODE_UE001 = 'ue001';
+const CODE_UE002 = /* istanbul ignore next */exports.CODE_UE002 = 'ue002';
+const CODE_UE003 = /* istanbul ignore next */exports.CODE_UE003 = 'ue003';
+const CODE_UE004 = /* istanbul ignore next */exports.CODE_UE004 = 'ue004';
+const CODE_UE005 = /* istanbul ignore next */exports.CODE_UE005 = 'ue005';
+const CODE_UE006 = /* istanbul ignore next */exports.CODE_UE006 = 'ue006';
+const CODE_E026 = /* istanbul ignore next */exports.CODE_E026 = 'e026';
+const CODE_E027 = /* istanbul ignore next */exports.CODE_E027 = 'e027';
+const CODE_G015 = /* istanbul ignore next */exports.CODE_G015 = 'g015';
+const CODE_AE001 = /* istanbul ignore next */exports.CODE_AE001 = 'ae001';
+const CODE_AE002 = /* istanbul ignore next */exports.CODE_AE002 = 'ae002';
+const CODE_AE004 = /* istanbul ignore next */exports.CODE_AE004 = 'ae004';
+const CODE_AE005 = /* istanbul ignore next */exports.CODE_AE005 = 'ae005';
+const CODE_AE006 = /* istanbul ignore next */exports.CODE_AE006 = 'ae006';
+const CODE_AS002 = /* istanbul ignore next */exports.CODE_AS002 = 'as002';
+const CODE_AS003 = /* istanbul ignore next */exports.CODE_AS003 = 'as003';
+const CODE_G016 = /* istanbul ignore next */exports.CODE_G016 = 'g016';
+const CODE_AE007 = /* istanbul ignore next */exports.CODE_AE007 = 'ae007';
+const CODE_AE008 = /* istanbul ignore next */exports.CODE_AE008 = 'ae008';
+const CODE_E051 = /* istanbul ignore next */exports.CODE_E051 = 'e051';
+const CODE_E052 = /* istanbul ignore next */exports.CODE_E052 = 'e052';
+const CODE_E135 = /* istanbul ignore next */exports.CODE_E135 = 'e135';
+/*User roles map*/
+const BUTLER_SUPERVISOR = /* istanbul ignore next */exports.BUTLER_SUPERVISOR = 'butler_supervisor';
+const BUTLER_UI = /* istanbul ignore next */exports.BUTLER_UI = 'butler_ui';
+const USER_ROLE_MAP = /* istanbul ignore next */exports.USER_ROLE_MAP = {
+    [BUTLER_SUPERVISOR]: "Manager",
+    [BUTLER_UI]: "Operator"
+
+
+    /*String config codes*/ };
+
+
+const stringConfig = /* istanbul ignore next */exports.stringConfig = /* istanbul ignore next */(0, _reactIntl.defineMessages)({
+    open: {
+        id: 'stringConfig.open',
+        description: 'Text to display on',
+        defaultMessage: 'Open' },
+
+    close: {
+        id: 'stringConfig.off',
+        description: 'Text to show off',
+        defaultMessage: "Close" },
+
+    fclose: {
+        id: 'stringConfig.fclose',
+        description: 'Text to show off',
+        defaultMessage: "Force Close" },
+
+    per_hour: {
+        id: 'stringConfig.per_hour',
+        description: 'Text to show per_hour',
+        defaultMessage: "per_hour" },
+
+    pick: {
+        id: 'stringConfig.pick',
+        description: 'Text to show pick',
+        defaultMessage: "pick" },
+
+    put: {
+        id: 'stringConfig.put',
+        description: 'Text to show put',
+        defaultMessage: "put" },
+
+    audit: {
+        id: 'stringConfig.audit',
+        description: 'Text to show audit',
+        defaultMessage: "audit" },
+
+    soft: {
+        id: 'stringConfig.soft',
+        description: 'Text to show soft',
+        defaultMessage: "soft" },
+
+    hard: {
+        id: 'stringConfig.hard',
+        description: 'Text to show hard',
+        defaultMessage: "hard" },
+
+    soft_manual: {
+        id: 'stringConfig.soft_manual',
+        description: 'Text to show soft_manual',
+        defaultMessage: "soft_manual" },
+
+    pending: {
+        id: 'stringConfig.pending',
+        description: 'Text to show pending',
+        defaultMessage: "In Progress" },
+
+    wave_pending: {
+        id: 'stringConfig.wave.pending',
+        description: 'Text to show pending',
+        defaultMessage: "Pending" },
+
+    disconnected: {
+        id: 'stringConfig.disconnected',
+        description: 'Text to show disconnected',
+        defaultMessage: "Disconnected" },
+
+    connected: {
+        id: 'stringConfig.connected',
+        description: 'Text to show connected',
+        defaultMessage: "Connected" },
+
+    completed: {
+        id: 'stringConfig.completed',
+        description: 'Text to show completed',
+        defaultMessage: "Completed" },
+
+    Completed: {
+        id: 'stringConfig.Completed',
+        description: 'Text to show Completed',
+        defaultMessage: "completed" },
+
+    in_progress: {
+        id: 'stringConfig.in_progress',
+        description: 'Text to show In Progress',
+        defaultMessage: "In Progress" },
+
+    breached: {
+        id: 'stringConfig.breached',
+        description: 'Text to show breached',
+        defaultMessage: "Breached" },
+
+    fulfillable: {
+        id: 'stringConfig.fulfillable',
+        description: 'Text to show fulfillable',
+        defaultMessage: "In Progress" },
+
+    abandoned: {
+        id: 'stringConfig.abandoned',
+        description: 'Text to show abandoned',
+        defaultMessage: "Abandoned" },
+
+    manual: {
+        id: 'stringConfig.manual',
+        description: 'Text to show manual',
+        defaultMessage: "Manual" },
+
+    auto: {
+        id: 'stringConfig.auto',
+        description: 'Text to show auto',
+        defaultMessage: "Auto" },
+
+    not_fulfillable: {
+        id: 'stringConfig.notFulfillable',
+        description: 'Text to show In progress',
+        defaultMessage: "Unfulfillable" },
+
+    exception: {
+        id: 'stringConfig.exception',
+        description: 'Text to show exception',
+        defaultMessage: "Exception" },
+
+    online: {
+        id: 'stringConfig.online',
+        description: 'Text to show Online',
+        defaultMessage: "online" },
+
+    offline: {
+        id: 'stringConfig.offline',
+        description: 'Text to show Offline',
+        defaultMessage: "offline" },
+
+    received: {
+        id: 'stringConfig.received',
+        description: 'Text to show received',
+        defaultMessage: "In Progress" },
+
+    cancelled: {
+        id: 'stringConfig.cancelled',
+        description: 'Text to show cancelled',
+        defaultMessage: "Cancelled" },
+
+
+    butler_supervisor: {
+        id: 'stringConfig.butler_supervisor',
+        description: 'Text to show Manager',
+        defaultMessage: "Manager" },
+
+    butler_ui: {
+        id: 'stringConfig.butler_ui',
+        description: 'Text to show Operator',
+        defaultMessage: "Operator" },
+
+    admin: {
+        id: 'stringConfig.admin',
+        description: 'Text to show admin',
+        defaultMessage: "Admin" },
+
+    qc_operator: {
+        id: 'stringConfig.qc',
+        description: 'Text to show Qc operator',
+        defaultMessage: "QC Operator" },
+
+    packing_operator: {
+        id: 'stringConfig.packing_operator',
+        description: 'Text to show packing operator',
+        defaultMessage: "Packing Operator" },
+
+    temporary_unfulfillable: {
+        "id": "stringConfig.temporary_unfulfillable",
+        "description": "Text for temporary unfulfillable status",
+        "defaultMessage": "On hold" },
+
+    audit_resolved: {
+        "id": "stringConfig.audit_resolved",
+        "description": "Text for audit resolved status",
+        "defaultMessage": "Resolved" },
+
+    audit_pending_approval: {
+        "id": "stringConfig.audit_pending_approval",
+        "description": "Text for audit pending approval status",
+        "defaultMessage": "Unresolved" },
+
+    audit_rejected: {
+        "id": "stringConfig.audit_rejected",
+        "description": "Text for audit rejected status",
+        "defaultMessage": "Rejected" },
+
+    md001: {
+        "id": "stringConfig.md001",
+        "description": "Text for safety checklist item 1",
+        "defaultMessage": "No personnel are present in the no-man zone." },
+
+    md002: {
+        "id": "stringConfig.md002",
+        "description": "Text for safety checklist item 2",
+        "defaultMessage": "All Butler and MSU positions have been corrected." },
+
+    md003: {
+        "id": "stringConfig.md003",
+        "description": "Text for safety checklist item 3",
+        "defaultMessage": "All no-man zone gates are properly closed." },
+
+    md004: {
+        "id": "stringConfig.md004",
+        "description": "Text for safety checklist item 4",
+        "defaultMessage": "All no-man gate limit switches are active and working." },
+
+    md005: {
+        "id": "stringConfig.md005",
+        "description": "Text for safety checklist item 5",
+        "defaultMessage": "All Hard Emergency buttons are released." },
+
+    md006: {
+        "id": "stringConfig.md006",
+        "description": "Text for safety checklist item 6",
+        "defaultMessage": "All Zigbee boxes are online." },
+
+    md007: {
+        "id": "stringConfig.md007",
+        "description": "Text for safety checklist item 7",
+        "defaultMessage": "Peripherals status known." },
+
+    md008: {
+        "id": "stringConfig.md008",
+        "description": "Text for safety checklist item 8",
+        "defaultMessage": "Physical inventory verified." },
+
+    md009: {
+        "id": "stringConfig.md009",
+        "description": "Text for safety checklist item 9",
+        "defaultMessage": "No Emergency buttons in 'Pressed' state." },
+
+    md010: {
+        "id": "stringConfig.md010",
+        "description": "Text for safety checklist item 10",
+        "defaultMessage": "All shutters open  in active zones." },
+
+    md011: {
+        "id": "stringConfig.md011",
+        "description": "Text for safety checklist item 11",
+        "defaultMessage": "No humans in operations area." },
+
+    md012: {
+        "id": "stringConfig.md012",
+        "description": "Text for safety checklist item 12",
+        "defaultMessage": "All paths cleared of any debris." },
+
+    md013: {
+        "id": "stringConfig.md013",
+        "description": "Text for safety checklist item 13",
+        "defaultMessage": 'Move bots to the PPS location and do an "init" after all bots are moved.' },
+
+    md014: {
+        "id": "stringConfig.md014",
+        "description": "Text for safety checklist item 14",
+        "defaultMessage": "No bots require to be moved to PPS." },
+
+    audit_reaudited: {
+        "id": "stringConfig.audit_reaudited",
+        "description": "Text for audit reaudited status",
+        "defaultMessage": "Re-audited" } });
+
+
+const roleDesc = /* istanbul ignore next */exports.roleDesc = /* istanbul ignore next */(0, _reactIntl.defineMessages)({
+
+    butler_supervisor: {
+        id: 'roleDesc.butler_supervisor',
+        description: 'Text for Manager description',
+        defaultMessage: "Grant access to the Management Interface and Operator Interface to all systems" },
+
+    butler_ui: {
+        id: 'roleDesc.butler_ui',
+        description: 'Text for Operator description',
+        defaultMessage: "Grant access to the Operator Interface at each Pick Put Station in the Butler system" } });
+
+
+const pwdDesc = /* istanbul ignore next */exports.pwdDesc = /* istanbul ignore next */(0, _reactIntl.defineMessages)({
+
+    butler_supervisor: {
+        id: 'pwdDesc.butler_supervisor',
+        description: 'Text for password description of manager',
+        defaultMessage: "A password of at least 8 alphanumeric characters will be required for logging into the Management Interface and Operator Interface." },
+
+    butler_ui: {
+        id: 'pwdDesc.butler_ui',
+        description: 'Text for password description of operator',
+        defaultMessage: "A password of 6 digits will be required for logging into the Operator Interface." } });

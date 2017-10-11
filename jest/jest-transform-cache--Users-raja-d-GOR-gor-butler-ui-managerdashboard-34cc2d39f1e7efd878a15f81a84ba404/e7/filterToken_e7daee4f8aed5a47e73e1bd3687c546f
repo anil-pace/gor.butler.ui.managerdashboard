@@ -1,0 +1,64 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/components/tableFilter/filterToken.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_frontEndConstants = require('../../constants/frontEndConstants'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+class FilterToken extends /* istanbul ignore next */_react2.default.Component {
+
+
+    _handleTokenClick() {
+        var selectedToken = this.props.tokenSelected ? this.props.tokenSelected[this.props.tokenField] : null,tokenFound = false;
+        var selectedOption = this.props.selection;
+        var tokenSelect = this.props.tokenLabel.value;
+        var _this = this;
+
+        switch (selectedOption) {
+
+            case /* istanbul ignore next */_frontEndConstants.SINGLE:
+                if (selectedToken) {
+                    tokenFound = tokenSelect === selectedToken[0] ? true : false;
+                    this.props.tokenCallBack(this.props.tokenField, selectedToken[0], /* istanbul ignore next */_frontEndConstants.REMOVE_TOKEN);
+                }
+                setTimeout(function () {
+                    tokenFound ? _this.props.tokenCallBack(_this.props.tokenField, selectedToken[0], /* istanbul ignore next */_frontEndConstants.ADD_TOKEN) : _this.props.tokenCallBack(_this.props.tokenField, _this.props.tokenLabel.value, /* istanbul ignore next */_frontEndConstants.ADD_TOKEN);
+                }, 0);
+
+                break;
+
+            default:
+                if (selectedToken) {
+                    for (var i = selectedToken.length - 1; i >= 0; i--) {
+                        if (selectedToken[i] === this.props.tokenLabel.value) {
+                            this.props.tokenCallBack(this.props.tokenField, this.props.tokenLabel.value, /* istanbul ignore next */_frontEndConstants.REMOVE_TOKEN);
+                            tokenFound = true;
+                            break;
+                        }
+                    }
+                }
+                if (!tokenFound && !this.props.lastToken) {
+                    this.props.tokenCallBack(this.props.tokenField, this.props.tokenLabel.value, /* istanbul ignore next */_frontEndConstants.ADD_TOKEN);
+                } else
+                if (!tokenFound && this.props.lastToken) {
+                    this.props.tokenCallBack(this.props.tokenField, this.props.tokenLabel.value, /* istanbul ignore next */_frontEndConstants.ADD_DEFAULT);
+                }}
+
+
+
+    }
+
+
+    render() {
+        var selectedToken = this.props.tokenSelected ? this.props.tokenSelected[this.props.tokenField] : null;
+        var selectedState = selectedToken ? selectedToken.indexOf(this.props.tokenLabel.value) >= 0 ? true : false : false;
+        return (
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-token-container', __source: { fileName: _jsxFileName, lineNumber: 53 }, __self: this },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: selectedState ? "gor-filter-token-selected" : "gor-filter-token-wrap", onClick: this._handleTokenClick.bind(this), __source: { fileName: _jsxFileName, lineNumber: 54 }, __self: this },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'gor-filter-token-text', __source: { fileName: _jsxFileName, lineNumber: 55 }, __self: this }, this.props.tokenLabel.label),
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: selectedState ? "gor-filter-checked-token" : "gor-filter-add-token", __source: { fileName: _jsxFileName, lineNumber: 56 }, __self: this }))));
+
+
+
+    }}
+; /* istanbul ignore next */exports.default =
+
+
+FilterToken;

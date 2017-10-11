@@ -1,0 +1,32 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var cov_iy2l7cxq = function () {var path = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/components/tableFilter/filterTokenContainer.js',hash = '97674a6efc81c0e1f09d97f4eba5c062d04ac4ad',global = new Function('return this')(),gcv = '__coverage__',coverageData = { path: '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/components/tableFilter/filterTokenContainer.js', statementMap: { '0': { start: { line: 7, column: 16 }, end: { line: 7, column: 32 } }, '1': { start: { line: 7, column: 44 }, end: { line: 7, column: 46 } }, '2': { start: { line: 8, column: 26 }, end: { line: 8, column: 50 } }, '3': { start: { line: 9, column: 20 }, end: { line: 9, column: 33 } }, '4': { start: { line: 10, column: 5 }, end: { line: 15, column: 6 } }, '5': { start: { line: 11, column: 25 }, end: { line: 13, column: 103 } }, '6': { start: { line: 14, column: 6 }, end: { line: 14, column: 37 } }, '7': { start: { line: 16, column: 5 }, end: { line: 16, column: 22 } }, '8': { start: { line: 20, column: 16 }, end: { line: 20, column: 42 } }, '9': { start: { line: 21, column: 2 }, end: { line: 28, column: 4 } } }, fnMap: { '0': { name: '(anonymous_0)', decl: { start: { line: 6, column: 4 }, end: { line: 6, column: 5 } }, loc: { start: { line: 6, column: 26 }, end: { line: 17, column: 5 } }, line: 6 }, '1': { name: '(anonymous_1)', decl: { start: { line: 19, column: 1 }, end: { line: 19, column: 2 } }, loc: { start: { line: 19, column: 9 }, end: { line: 29, column: 2 } }, line: 19 } }, branchMap: { '0': { loc: { start: { line: 13, column: 87 }, end: { line: 13, column: 99 } }, type: 'cond-expr', locations: [{ start: { line: 13, column: 89 }, end: { line: 13, column: 94 } }, { start: { line: 13, column: 95 }, end: { line: 13, column: 99 } }], line: 13 } }, s: { '0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0, '8': 0, '9': 0 }, f: { '0': 0, '1': 0 }, b: { '0': [0, 0] }, _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c' },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/components/tableFilter/filterTokenContainer.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_filterToken = require('./filterToken'); /* istanbul ignore next */var _filterToken2 = _interopRequireDefault(_filterToken);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+class FilterTokenWrap extends /* istanbul ignore next */_react2.default.Component {
+
+  _processTokenFields() {/* istanbul ignore next */++cov_iy2l7cxq.f[0];
+    var tokens = /* istanbul ignore next */(++cov_iy2l7cxq.s[0], this.props.label),tokenWrap = /* istanbul ignore next */(++cov_iy2l7cxq.s[1], []);
+    var tokenSelected = /* istanbul ignore next */(++cov_iy2l7cxq.s[2], this.props.selectedToken);
+    var length = /* istanbul ignore next */(++cov_iy2l7cxq.s[3], tokens.length); /* istanbul ignore next */++cov_iy2l7cxq.s[4];
+    for (let i = 0; i < length; i++) {
+      var tokenComponent = /* istanbul ignore next */(++cov_iy2l7cxq.s[5], /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_filterToken2.default, /* istanbul ignore next */{ key: tokens[i] + i, tokenCallBack: this.props.tokenCallBack,
+        tokenField: this.props.field.value, tokenLabel: tokens[i], selection: this.props.selection,
+        tokenSelected: tokenSelected, lastToken: i ? /* istanbul ignore next */(++cov_iy2l7cxq.b[0][0], false) : /* istanbul ignore next */(++cov_iy2l7cxq.b[0][1], true), __source: { fileName: _jsxFileName, lineNumber: 11 }, __self: this })); /* istanbul ignore next */++cov_iy2l7cxq.s[6];
+      tokenWrap.push(tokenComponent);
+    } /* istanbul ignore next */++cov_iy2l7cxq.s[7];
+    return tokenWrap;
+  }
+
+  render() {/* istanbul ignore next */++cov_iy2l7cxq.f[1];
+    var tokenWrap = /* istanbul ignore next */(++cov_iy2l7cxq.s[8], this._processTokenFields()); /* istanbul ignore next */++cov_iy2l7cxq.s[9];
+    return (
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 22 }, __self: this },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-token-section-h1', __source: { fileName: _jsxFileName, lineNumber: 23 }, __self: this },
+          this.props.field.label),
+
+        tokenWrap));
+
+
+  }}
+; /* istanbul ignore next */exports.default =
+
+FilterTokenWrap;

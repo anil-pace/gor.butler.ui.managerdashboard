@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/inventory/pickPutLineGraph.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/components/inventory</a> pickPutLineGraph.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/23</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/6</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/21</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+ * Container for PickPutLineGraph 
+ * 
+ */
+ import React  from 'react';
+ import MultiLineGraph from '../graphd3/multiLineGraph';
+ import {INVENTORY_LINE_CONFIG} from  '../../constants/frontEndConstants'
+ import { defineMessages } from 'react-intl';
+&nbsp;
+//Mesages for internationalization
+const messages=defineMessages({<span class="cstat-no" title="statement not covered" ></span>
+  toolTipPut: {
+    id: 'inventory.linechart.toolTipPut',
+    description: 'Text for put in tooltip',
+    defaultMessage: "Put"
+  },
+  toolTipPick: {
+    id: 'inventory.linechart.toolTipPick',
+    description: 'Text for pick in tooltip',
+    defaultMessage: "Picked"
+  },
+  toolTipEntity:{
+    id: 'inventory.linechart.toolTipEntity',
+    description: 'Text inventory entity',
+    defaultMessage: "Items",
+  },
+  noDataText:{
+    id:"inventory.linechart.noDataText", 
+    defaultMessage: "No Item Movement"
+  },
+  lineChartTodayTxt: {
+    id: 'inventory.linechart.today',
+    description: 'Text to show today',
+    defaultMessage: "Today's"
+  }
+&nbsp;
+&nbsp;
+});
+&nbsp;
+&nbsp;
+class PickPutLineGraph extends React.Component{
+&nbsp;
+ _<span class="fstat-no" title="function not covered" >pr</span>ocessData(){
+  var recreatedData=JSON<span class="cstat-no" title="statement not covered" >.parse(JSON.stringify(this.props.recreatedData)),</span>
+  processedData=[];<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+  fo<span class="cstat-no" title="statement not covered" >r(let k in recreatedData){</span>
+    let dataObj=recr<span class="cstat-no" title="statement not covered" >eatedData[k].graphInfo;</span>
+    da<span class="cstat-no" title="statement not covered" >taObj.toolTipData={</span>
+      date:this.context.intl.formatDate(dataObj.date,
+      {
+        year:'numeric',
+        month:'short',
+        day:'2-digit'
+      }),
+      put:this.context.intl.formatMessage(messages.toolTipPut)+": "+dataObj.items_put+" "+this.context.intl.formatMessage(messages.toolTipEntity),
+      pick:this.context.intl.formatMessage(messages.toolTipPick)+": "+dataObj.items_picked+" "+this.context.intl.formatMessage(messages.toolTipEntity)
+    }
+    pr<span class="cstat-no" title="statement not covered" >ocessedData.push(dataObj)</span>
+  }
+&nbsp;
+  pr<span class="cstat-no" title="statement not covered" >ocessedData.sort(fu<span class="fstat-no" title="function not covered" >nc</span>tion(a, b) {</span>
+    var x=a["c<span class="cstat-no" title="statement not covered" >ustomData"]; var</span> y=b["cu<span class="cstat-no" title="statement not covered" >stomData"];</span>
+    re<span class="cstat-no" title="statement not covered" >turn ((x &lt; y) ? -1 : ((x &gt; y) ? 1 :</span> 0));
+  });
+&nbsp;
+&nbsp;
+  re<span class="cstat-no" title="statement not covered" >turn processedData;</span>
+}
+sh<span class="fstat-no" title="function not covered" >ou</span>ldComponentUpdate(nextProps){
+  re<span class="cstat-no" title="statement not covered" >turn this.props.hasDataChanged !== nextProps.hasDataChanged</span>
+}
+re<span class="fstat-no" title="function not covered" >nd</span>er(){
+  var processedData=this<span class="cstat-no" title="statement not covered" >._processData();</span>
+  var config=Obje<span class="cstat-no" title="statement not covered" >ct.assign({},INVENTORY_LINE_CONFIG);</span>
+  co<span class="cstat-no" title="statement not covered" >nfig.noDataText=this.context.intl.formatMessage(messages.noDataText);</span>
+  co<span class="cstat-no" title="statement not covered" >nfig.today=this.context.intl.formatMessage(messages.lineChartTodayTxt);</span>
+  co<span class="cstat-no" title="statement not covered" >nfig.breakMonth=this.context.intl.formatDate(Date.now(), {month: 'short'}); </span>
+  re<span class="cstat-no" title="statement not covered" >turn (</span>
+          &lt;div&gt;
+          &lt;MultiLineGraph hasDataChanged={this.props.hasDataChanged} config={config} inventoryData={processedData || []}/&gt;
+          &lt;/div&gt;
+          );
+}
+};
+<span class="cstat-no" title="statement not covered" >PickPutLineGraph.propTypes={</span>
+  inventoryData: React.PropTypes.array,
+  hasDataChanged:React.PropTypes.bool,
+  noData:React.PropTypes.bool
+}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >PickPutLineGraph.contextTypes={</span>
+  intl: React.PropTypes.object.isRequired
+}
+export default PickPutLineGraph;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Oct 11 2017 16:54:25 GMT+0530 (IST)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

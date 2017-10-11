@@ -1,0 +1,33 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/components/utilityComponents/utilityTile.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactDom = require('react-dom'); /* istanbul ignore next */var _reactDom2 = _interopRequireDefault(_reactDom);
+var /* istanbul ignore next */_reactIntl = require('react-intl'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+class UtilityTile extends /* istanbul ignore next */_react2.default.Component {
+
+	render() {
+		return (
+			/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-utility-tile', __source: { fileName: _jsxFileName, lineNumber: 9 }, __self: this },
+				/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-utility-tile-h1', __source: { fileName: _jsxFileName, lineNumber: 10 }, __self: this },
+					/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-utility-tile-heading', __source: { fileName: _jsxFileName, lineNumber: 11 }, __self: this },
+						this.props.tileHead),
+
+					this.props.showHeaderIcon ? /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-utility-tile-icon', __source: { fileName: _jsxFileName, lineNumber: 14 }, __self: this },
+						/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-refresh-icon', onClick: this.props.onRefresh, __source: { fileName: _jsxFileName, lineNumber: 15 }, __self: this })) :
+					""),
+
+				/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-utility-tile-body', __source: { fileName: _jsxFileName, lineNumber: 18 }, __self: this },
+					this.props.children),
+
+				this.props.showFooter ? /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-utility-tile-footer', __source: { fileName: _jsxFileName, lineNumber: 21 }, __self: this },
+					/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'got-utility-btn-wrap', __source: { fileName: _jsxFileName, lineNumber: 22 }, __self: this },
+						/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ className: this.props.enableButton ? "gor-download-button" : "gor-download-button gor-disable-content", onClick: this.props.footerAction, __source: { fileName: _jsxFileName, lineNumber: 23 }, __self: this },
+							this.props.loading ? /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'spinnerImage', __source: { fileName: _jsxFileName, lineNumber: 24 }, __self: this }) : /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'utility.downDlabel', description: 'label for download', defaultMessage: 'DOWNLOAD', __source: { fileName: _jsxFileName, lineNumber: 24 }, __self: this })))) :
+
+
+				""));
+
+
+	}}
+; /* istanbul ignore next */exports.default =
+
+UtilityTile;

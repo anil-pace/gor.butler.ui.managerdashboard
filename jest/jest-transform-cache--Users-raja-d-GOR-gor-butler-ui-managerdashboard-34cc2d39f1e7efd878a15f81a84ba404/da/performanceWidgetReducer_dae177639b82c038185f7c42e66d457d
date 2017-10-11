@@ -1,0 +1,14 @@
+/* istanbul ignore next */"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+performanceWidget = performanceWidget;var /* istanbul ignore next */_performanceWidgetActions = require("../actions/performanceWidgetActions");function performanceWidget(state = {}, action) {
+	switch (action.type) {
+
+		case "RENDER_WIDGET":
+			return Object.assign({}, state, {
+				"widget": action.data });
+
+
+		default:
+			return state;}
+
+}

@@ -1,0 +1,127 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/containers/inventoryTab.js'; /**
+                                                                                                                                                                                                            * Container for Inventory tab
+                                                                                                                                                                                                            * This will be switched based on tab click
+                                                                                                                                                                                                            */
+var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+
+var /* istanbul ignore next */_inventory = require('../components/inventory/inventory'); /* istanbul ignore next */var _inventory2 = _interopRequireDefault(_inventory);
+var /* istanbul ignore next */_Spinner = require('../components/spinner/Spinner'); /* istanbul ignore next */var _Spinner2 = _interopRequireDefault(_Spinner);
+var /* istanbul ignore next */_inventoryActions = require('../actions/inventoryActions');
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_initData = require('./../constants/initData.js');
+var /* istanbul ignore next */_socketActions = require('./../actions/socketActions');
+var /* istanbul ignore next */_frontEndConstants = require('./../constants/frontEndConstants'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+class InventoryTab extends /* istanbul ignore next */_react2.default.Component {
+    constructor(props)
+    {
+        super(props);
+        this.state = { subscribed: false };
+    }
+
+    componentWillMount() {
+        /**
+                           * It will update the last refreshed property of
+                           * overview details, so that updated subscription
+                           * packet can be sent to the server for data
+                           * update.
+                           */
+        this.props.inventoryRefreshed();
+    }
+
+    _setSpinner(bShow) {
+        var _bShow = bShow ? bShow : false;
+        this.props.setInventorySpinner(_bShow);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.socketAuthorized && !this.state.subscribed) {
+            this.setState({ subscribed: true }, function () {
+                this._subscribeData(nextProps);
+            });
+
+        }
+    }
+    componentWillUnmount() {
+        /**
+                            * If a user navigates back to the inventory page,
+                            * it should subscribe to the packet again.
+                            */
+        this.setState({ subscribed: false });
+    }
+
+    _subscribeData(nextProps) {
+        let updatedWsSubscription = this.props.wsSubscriptionData;
+        this.props.initDataSentCall(updatedWsSubscription["inventory"]);
+        this.props.updateSubscriptionPacket(updatedWsSubscription);
+    }
+
+    render() {
+        /**
+               * Need to remove these hardcoded variables
+               * 
+               */
+        var histogramLabel = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'inventory.histogram.header', description: 'Inventory Histogram Header Message',
+            defaultMessage: 'Stock level history', __source: { fileName: _jsxFileName, lineNumber: 66 }, __self: this }),
+        linechartLabel = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'inventory.linechart.header', description: 'Inventory Line Chart Header Message',
+            defaultMessage: 'Item Movements', __source: { fileName: _jsxFileName, lineNumber: 68 }, __self: this }),
+        dateTodayState = this.props.dateTodayState,
+        snapshotData = this.props.recreatedData[dateTodayState] ? this.props.recreatedData[dateTodayState].otherInfo : {};
+        return (
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorInventory wrapper', __source: { fileName: _jsxFileName, lineNumber: 73 }, __self: this },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Spinner2.default, /* istanbul ignore next */{ isLoading: this.props.inventorySpinner, setSpinner: this.props.setInventorySpinner, __source: { fileName: _jsxFileName, lineNumber: 74 }, __self: this }),
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_inventory2.default, /* istanbul ignore next */{ noData: this.props.noData,
+                    recreatedData: this.props.recreatedData,
+                    currentDate: this.props.dateTodayState,
+                    hasDataChanged: this.props.hasDataChanged,
+                    histogramLabel: histogramLabel,
+                    linechartLabel: linechartLabel,
+                    isPrevDateSelected: this.props.isPrevDateSelected,
+                    inventoryDataPrevious: this.props.inventoryDataPrevious,
+                    snapshotData: snapshotData, __source: { fileName: _jsxFileName, lineNumber: 75 }, __self: this })));
+
+
+    }}
+;
+
+InventoryTab.propTypes = {
+    inventorySpinner: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    isPrevDateSelected: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    inventoryDataPrevious: /* istanbul ignore next */_react2.default.PropTypes.object,
+    hasDataChanged: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    dateTodayState: /* istanbul ignore next */_react2.default.PropTypes.number,
+    recreatedData: /* istanbul ignore next */_react2.default.PropTypes.object,
+    noData: /* istanbul ignore next */_react2.default.PropTypes.bool };
+
+
+function mapStateToProps(state, ownProps) {
+    return {
+        "inventoryData": state.inventoryInfo.inventoryDataHistory || [],
+        "inventorySpinner": state.spinner.inventorySpinner || false,
+        "isPrevDateSelected": state.inventoryInfo.isPrevDateSelected || false,
+        "inventoryDataPrevious": state.inventoryInfo.inventoryDataPrevious || {},
+        "hasDataChanged": state.inventoryInfo.hasDataChanged,
+        "dateTodayState": state.inventoryInfo.dateTodayState,
+        "recreatedData": state.inventoryInfo.recreatedData || {},
+        "noData": state.inventoryInfo.noData,
+        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || /* istanbul ignore next */_initData.wsOverviewData,
+        socketAuthorized: state.recieveSocketActions.socketAuthorized };
+
+}
+function mapDispatchToProps(dispatch) {
+    return {
+        setInventorySpinner: function /* istanbul ignore next */setInventorySpinner(data) {dispatch( /* istanbul ignore next */(0, _inventoryActions.setInventorySpinner)(data));},
+        initDataSentCall: function /* istanbul ignore next */initDataSentCall(data) {dispatch( /* istanbul ignore next */(0, _socketActions.setWsAction)({ type: /* istanbul ignore next */_frontEndConstants.WS_ONSEND, data: data }));},
+        updateSubscriptionPacket: function /* istanbul ignore next */updateSubscriptionPacket(data) {
+            dispatch( /* istanbul ignore next */(0, _socketActions.updateSubscriptionPacket)(data));
+        },
+        inventoryRefreshed: function /* istanbul ignore next */inventoryRefreshed(data) {
+            dispatch( /* istanbul ignore next */(0, _inventoryActions.inventoryRefreshed)(data));
+        } };
+
+}; /* istanbul ignore next */exports.default =
+
+
+/* istanbul ignore next */(0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(InventoryTab);

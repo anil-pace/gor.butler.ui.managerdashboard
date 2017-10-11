@@ -1,0 +1,42 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/components/dropdown/dropdown.js'; //styleClass is the name of the css class to be used for styling, defsel is the index of the selected dropdown option.
+
+var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactDropdown = require('react-dropdown'); /* istanbul ignore next */var _reactDropdown2 = _interopRequireDefault(_reactDropdown);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+class Dropdown extends /* istanbul ignore next */_react.Component {
+	constructor(props) {
+		super(props);
+		this.state = { selected: { value: props.currentState.value, label: props.currentState.label } };
+
+		this._onSelect = this._onSelect.bind(this);
+	}
+
+	_onSelect(option) {
+		this.setState({ selected: option }, function () {
+			this.props.optionDispatch(option.value);
+			if (this.props.refreshList) {
+				this.props.refreshList(option.value);
+			}
+		});
+	}
+
+	shouldComponentUpdate(nextProps, nextState) {
+		if (this.state.selected.value === nextState.selected.value)
+		{return false;} else
+
+		{return true;}
+	}
+
+	render() {
+		const defaultOption = this.state.selected;
+
+		return (
+			/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: this.props.styleClass, __source: { fileName: _jsxFileName, lineNumber: 35 }, __self: this },
+				/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactDropdown2.default, /* istanbul ignore next */{ options: this.props.items, onChange: this._onSelect, value: defaultOption, __source: { fileName: _jsxFileName, lineNumber: 36 }, __self: this })));
+
+
+	}} /* istanbul ignore next */exports.default =
+
+
+Dropdown;

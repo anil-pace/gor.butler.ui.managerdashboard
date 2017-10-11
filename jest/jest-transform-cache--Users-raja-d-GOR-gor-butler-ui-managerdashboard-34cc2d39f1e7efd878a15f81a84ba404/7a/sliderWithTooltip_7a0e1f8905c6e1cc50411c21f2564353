@@ -1,0 +1,39 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/components/rangeSlider/sliderWithTooltip.js';exports.default =
+
+
+createSliderWithTooltip;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_handle = require('./handle'); /* istanbul ignore next */var _handle2 = _interopRequireDefault(_handle);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectWithoutProperties(obj, keys) {var target = {};for (var i in obj) {if (keys.indexOf(i) >= 0) continue;if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;target[i] = obj[i];}return target;}function createSliderWithTooltip(Component) {/* istanbul ignore next */var _class, _temp;
+  return (/* istanbul ignore next */_temp = _class = class ComponentWrapper extends /* istanbul ignore next */_react2.default.Component {
+
+
+
+
+
+
+      constructor(props) {
+        super(props); /* istanbul ignore next */this.
+
+
+        handleTooltipVisibleChange = (index, visible) => {
+          this.setState({
+            visibles: /* istanbul ignore next */Object.assign({},
+            this.state.visibles, {
+              [index]: visible }) });
+
+
+        }; /* istanbul ignore next */this.
+        handleWithTooltip = ( /* istanbul ignore next */_ref) => {/* istanbul ignore next */let value = _ref.value,dragging = _ref.dragging,index = _ref.index,disabled = _ref.disabled,restProps = _objectWithoutProperties(_ref, ['value', 'dragging', 'index', 'disabled']);
+          return (
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_handle2.default, /* istanbul ignore next */Object.assign({},
+            restProps, {
+              onMouseEnter: () => this.handleTooltipVisibleChange(index, true),
+              onMouseLeave: () => this.handleTooltipVisibleChange(index, false), __source: { fileName: _jsxFileName, lineNumber: 27 }, __self: this })));
+
+
+
+        };this.state = { visibles: {} };}
+      render() {
+        return (/* istanbul ignore next */_react2.default.createElement(Component, /* istanbul ignore next */Object.assign({}, this.props, { handle: this.handleWithTooltip, __source: { fileName: _jsxFileName, lineNumber: 36 }, __self: this })));
+      }}, _class.propTypes = { tipFormatter: /* istanbul ignore next */_react2.default.PropTypes.func }, _class.defaultProps = { tipFormatter(value) {return value;} }, _temp);
+
+}

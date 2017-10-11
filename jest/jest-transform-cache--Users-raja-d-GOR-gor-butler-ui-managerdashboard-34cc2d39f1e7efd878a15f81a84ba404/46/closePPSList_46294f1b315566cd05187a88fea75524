@@ -1,0 +1,186 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/containers/systemTabs/closePPSList.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_index = require('../../components/gor-table-component/index');
+var /* istanbul ignore next */_tableHeader = require('../../components/gor-table-component/tableHeader');
+var /* istanbul ignore next */_tableBody = require('../../components/gor-table-component/tableBody');
+var /* istanbul ignore next */_tableRow = require('../../components/gor-table-component/tableRow');
+var /* istanbul ignore next */_frontEndConstants = require('../../constants/frontEndConstants');
+var /* istanbul ignore next */_configConstants = require('../../constants/configConstants'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+const closeAll = "closeAll";
+const fcloseAll = "fcloseAll";
+const close = "close";
+const fclose = "force_close";
+class ClosePPSList extends /* istanbul ignore next */_react2.default.Component {
+
+    constructor(props) {
+        super(props);
+        var initialState = this._getInitialState();
+        this.state = initialState;
+    }
+    _getInitialState() {
+        var checkedPPS = Object.keys(this.props.checkedPPS);
+        var len = checkedPPS.length;
+        var state = {};
+        for (let i = 0; i < len; i++) {
+            state[checkedPPS[i]] = {};
+            state[checkedPPS[i]].checkedValue = "";
+        }
+        return state;
+    }
+
+    removeThisModal() {
+        this.props.removeModal();
+    }
+    _handleClosePPS(e) {
+        e.preventDefault();
+        var selectedPPS = JSON.parse(JSON.stringify(this.state));
+        var requestJSON = {};
+        requestJSON["requested_pps_status"] = {};
+        for (let k in selectedPPS) {
+            requestJSON["requested_pps_status"][k] = selectedPPS[k].checkedValue;
+        }
+        this.props.handleStatusChange({ value: "close" }, requestJSON);
+        this.props.removeModal();
+
+    }
+    componentDidMount() {
+        let formData = {};
+        formData.pps_id = Object.keys(this.props.checkedPPS);
+        let params = {
+            'url': /* istanbul ignore next */_configConstants.GET_PPS_MSU,
+            'formdata': formData,
+            'method': /* istanbul ignore next */_frontEndConstants.POST,
+            'cause': /* istanbul ignore next */_frontEndConstants.GET_PENDING_MSU,
+            'token': sessionStorage.getItem('auth_token'),
+            'contentType': /* istanbul ignore next */_frontEndConstants.APP_JSON };
+
+        this.props.changePPSmode(params);
+    }
+    _onRadioChange(ppsId, value) {
+
+        this.setState({
+            [ppsId]: {
+                checkedValue: value } });
+
+
+
+    }
+    _setAllStatus(selection) {
+        var radioSelection = selection === closeAll ? close : fclose;
+        var state = JSON.parse(JSON.stringify(this.state));
+        for (let k in state) {
+            if (state.hasOwnProperty(k)) {
+                state[k].checkedValue = radioSelection;
+            }
+        }
+
+        this.setState(state);
+    }
+    _processData() {
+        var processedData = {};
+        var checkedPPS = Object.keys(this.props.checkedPPS);
+        var ppsLen = checkedPPS.length;
+        var pendingMSU = this.props.pendingMSU || {};
+        var areAllSelected = true;
+        processedData.header = [
+        { id: 1, text: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'ppsclose.tblhead1.text', description: 'Table first head', defaultMessage: 'SLOT ID', __source: { fileName: _jsxFileName, lineNumber: 88 }, __self: this }), sortable: false },
+        { id: 2, text: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'ppsclose.tblhead2.text', description: 'Table second head', defaultMessage: 'MSU Pending', __source: { fileName: _jsxFileName, lineNumber: 89 }, __self: this }), sortable: false },
+        { id: 3, text: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'ppsclose.tblhead3.text', description: 'Table third head', defaultMessage: 'ACTION', __source: { fileName: _jsxFileName, lineNumber: 90 }, __self: this }), sortable: false }];
+
+        processedData.filteredData = [];
+        for (let i = 0; i < ppsLen; i++) {
+            let row = [];
+            row.push("PPS " + checkedPPS[i]);
+            row.push(pendingMSU[checkedPPS[i]]);
+            row.push( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ key: i, __source: { fileName: _jsxFileName, lineNumber: 97 }, __self: this },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'label', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 98 }, __self: this },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'input', /* istanbul ignore next */{ type: 'radio', value: close, name: 'radio_pps_' + checkedPPS[i], onChange: this._onRadioChange.bind(this, checkedPPS[i], close), checked: this.state[checkedPPS[i]].checkedValue === close, __source: { fileName: _jsxFileName, lineNumber: 99 }, __self: this }), /* istanbul ignore next */'Close'),
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'label', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 100 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'input', /* istanbul ignore next */{ type: 'radio', value: fclose, name: 'radio_pps_' + checkedPPS[i], onChange: this._onRadioChange.bind(this, checkedPPS[i], fclose), checked: this.state[checkedPPS[i]].checkedValue === fclose, __source: { fileName: _jsxFileName, lineNumber: 100 }, __self: this }), /* istanbul ignore next */'Force Close')));
+
+            processedData.filteredData.push(row);
+            if (!this.state[checkedPPS[i]].checkedValue) {
+                areAllSelected = false;
+            }
+        }
+        processedData.confirmDisable = !areAllSelected;
+        return processedData;
+    }
+
+    render() {
+        var processedData = this._processData();
+
+
+        return (
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 116 }, __self: this },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-modal-content pps-close', __source: { fileName: _jsxFileName, lineNumber: 117 }, __self: this },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-modal-head', __source: { fileName: _jsxFileName, lineNumber: 118 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-usr-add', __source: { fileName: _jsxFileName, lineNumber: 119 }, __self: this }, this.props.heading),
+
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'close', onClick: this.removeThisModal.bind(this), __source: { fileName: _jsxFileName, lineNumber: 122 }, __self: this }, /* istanbul ignore next */'\xD7')),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-modal-body', __source: { fileName: _jsxFileName, lineNumber: 124 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'form', /* istanbul ignore next */{ action: '#', id: 'editUserForm', ref: node => {
+                                    this.editUserForm = node;
+                                },
+                                onSubmit: e => this._handleClosePPS(e), __source: { fileName: _jsxFileName, lineNumber: 125 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'pps-close-wrap', __source: { fileName: _jsxFileName, lineNumber: 129 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'pps-close-head', __source: { fileName: _jsxFileName, lineNumber: 130 }, __self: this },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'left-sec', __source: { fileName: _jsxFileName, lineNumber: 131 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'label', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 131 }, __self: this }, /* istanbul ignore next */'Close or Force close PPS')),
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'right-sec', __source: { fileName: _jsxFileName, lineNumber: 132 }, __self: this },
+                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'a', /* istanbul ignore next */{ href: 'javascript:void(0)', className: 'close-all-link', onClick: this._setAllStatus.bind(this, closeAll), __source: { fileName: _jsxFileName, lineNumber: 133 }, __self: this }, /* istanbul ignore next */'CLOSE ALL'),
+                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'a', /* istanbul ignore next */{ href: 'javascript:void(0)', className: 'fclose-all-link', onClick: this._setAllStatus.bind(this, fcloseAll), __source: { fileName: _jsxFileName, lineNumber: 134 }, __self: this }, /* istanbul ignore next */'FORCE CLOSE ALL'))),
+
+
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'close-pps-table', __source: { fileName: _jsxFileName, lineNumber: 137 }, __self: this },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index.GTable, /* istanbul ignore next */{ options: ['table-bordered'], __source: { fileName: _jsxFileName, lineNumber: 138 }, __self: this },
+                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_tableHeader.GTableHeader, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 139 }, __self: this },
+                                            processedData.header.map(function (header, index) {
+                                                return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_tableHeader.GTableHeaderCell, /* istanbul ignore next */{ key: index, header: header, onClick: header.sortable ? self._onSortChange.bind(self, header) : false, __source: { fileName: _jsxFileName, lineNumber: 141 }, __self: this },
+                                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 142 }, __self: this }, header.text)));
+
+
+                                            })),
+
+                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_tableBody.GTableBody, /* istanbul ignore next */{ data: processedData.filteredData, __source: { fileName: _jsxFileName, lineNumber: 147 }, __self: this },
+                                            processedData.filteredData ? processedData.filteredData.map(function (row, idx) {
+                                                return (
+                                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_tableRow.GTableRow, /* istanbul ignore next */{ key: idx, index: idx, offset: processedData.offset, max: processedData.max, data: processedData.filteredData, __source: { fileName: _jsxFileName, lineNumber: 150 }, __self: this },
+                                                        row.map(function (text, index) {
+                                                            return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ key: index, style: processedData.header[index].width ? { flex: '1 0 ' + processedData.header[index].width + "%" } : {}, className: 'cell', __source: { fileName: _jsxFileName, lineNumber: 152 }, __self: this },
+                                                                    text));
+
+                                                        })));
+
+
+                                            }) : "")))),
+
+
+
+
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'pps-close-wrap pps-submit-cont', __source: { fileName: _jsxFileName, lineNumber: 163 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ type: 'button', onClick: this.props.removeModal, className: 'gor-add-btn black pps-close-cancel', __source: { fileName: _jsxFileName, lineNumber: 164 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{
+                                        id: 'pps.close.cancel', description: 'Text for cancel close',
+                                        defaultMessage: 'CANCEL', __source: { fileName: _jsxFileName, lineNumber: 164 }, __self: this })),
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ type: 'submit', disabled: processedData.confirmDisable, className: 'gor-add-btn', __source: { fileName: _jsxFileName, lineNumber: 167 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{
+                                        id: 'pps.close.confirm', description: 'Text for close confirm',
+                                        defaultMessage: 'CONFIRM', __source: { fileName: _jsxFileName, lineNumber: 167 }, __self: this }))))))));
+
+
+
+
+
+
+    }}
+
+
+
+function mapStateToProps(state, ownProps) {
+    return {
+        pendingMSU: state.ppsInfo.pendingMSU };
+
+} /* istanbul ignore next */exports.default =
+
+/* istanbul ignore next */(0, _reactRedux.connect)(mapStateToProps, null)(ClosePPSList);

@@ -1,0 +1,93 @@
+/* istanbul ignore next */"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+
+
+
+
+capitalize = capitalize; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+
+
+clamp = clamp; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+saveFile = saveFile; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+mappingArray = mappingArray; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+arrayDiff = arrayDiff;var /* istanbul ignore next */_frontEndConstants = require("../constants/frontEndConstants"); /**
+                                                                                                                     * Capitalize first letter of string
+                                                                                                                     * @private
+                                                                                                                     * @param  {string} - String
+                                                                                                                     * @return {string} - String with first letter capitalized
+                                                                                                                     */function capitalize(str) {return str.charAt(0).toUpperCase() + str.substr(1);} /**
+                                                                                                                                                                                                       * Clamp position between a range
+                                                                                                                                                                                                       * @param  {number} - Value to be clamped
+                                                                                                                                                                                                       * @param  {number} - Minimum value in range
+                                                                                                                                                                                                       * @param  {number} - Maximum value in range
+                                                                                                                                                                                                       * @return {number} - Clamped value
+                                                                                                                                                                                                       */function clamp(value, min, max) {return Math.min(Math.max(value, min), max);} /**
+                                                                                                                                                                                                                                                                                        * Save a blob object to a filename
+                                                                                                                                                                                                                                                                                        * @param  {Object} data     Data to be saved as file
+                                                                                                                                                                                                                                                                                        * @param  {String} fileName Name of the file to be saved
+                                                                                                                                                                                                                                                                                        */function saveFile(data, fileName) {var a = document.createElement("a");a.style = "display: none";document.body.appendChild(a);var ext = fileName.substring(fileName.lastIndexOf('.'), fileName.length);var type = ext.toLowerCase() === "csv" ? 'octet/stream' : 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';var blob = new Blob([data], { type: type }),url = window.URL.createObjectURL(blob);a.href = url;a.download = fileName;a.click();window.URL.revokeObjectURL(url);} /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * It will return the inputfield id based on selected token
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @param  {array} selectedToken   array of  token name
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @param  {string} flag Based on this flag Audit Task inputfield wil not return
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */function mappingArray(selectedToken, flag) {var mappingArray = [];selectedToken.map(function (value, i) {if (value === "sku") {mappingArray.push( /* istanbul ignore next */_frontEndConstants.SPECIFIC_SKU_ID);} else if (value === "location") {mappingArray.push( /* istanbul ignore next */_frontEndConstants.SPECIFIC_LOCATION_ID);}});if (!flag) {mappingArray.push( /* istanbul ignore next */_frontEndConstants.AUDIT_TASK_ID);}return mappingArray;} /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * Return the diff between two array
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @param  {array} mainArray Main array where to search
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @param  {array} arraytoSearch SubArray which contain what to search 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */function arrayDiff(mainArray, arraytoSearch) {return mainArray.filter(function (a) {return arraytoSearch.indexOf(a) == -1;});}

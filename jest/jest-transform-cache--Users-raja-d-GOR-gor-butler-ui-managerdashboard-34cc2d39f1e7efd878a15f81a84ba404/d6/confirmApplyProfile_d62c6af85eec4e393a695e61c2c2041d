@@ -1,0 +1,82 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/containers/systemTabs/confirmApplyProfile.js'; /**
+                                                                                                                                                                                                                              * Created by gaurav.m on 7/26/17.
+                                                                                                                                                                                                                              */
+var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_ajaxActions = require('./../../actions/ajaxActions');
+var /* istanbul ignore next */_configConstants = require('./../../constants/configConstants');
+var /* istanbul ignore next */_frontEndConstants = require('./../../constants/frontEndConstants');
+var /* istanbul ignore next */_reactIntl = require('react-intl'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+class ConfirmApplyProfile extends /* istanbul ignore next */_react2.default.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    changePPSProfile(pps_id, profile_name) {
+        let url = /* istanbul ignore next */_configConstants.PPS_PROFILE_URL + pps_id + "/" + profile_name + "/request";
+        let data = {
+            'url': url,
+            'method': /* istanbul ignore next */_frontEndConstants.POST,
+            'cause': /* istanbul ignore next */_frontEndConstants.CHANGE_PPS_PROFILE,
+            'contentType': /* istanbul ignore next */_frontEndConstants.APP_JSON,
+            'accept': /* istanbul ignore next */_frontEndConstants.APP_JSON,
+            'token': this.props.auth_token };
+
+        this.props.makeAjaxCall(data);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.profileRequestedAt !== this.props.profileRequestedAt) {
+            this.props.removeModal();
+        }
+    }
+
+    render() {
+        return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 35 }, __self: this },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-create-profile', __source: { fileName: _jsxFileName, lineNumber: 36 }, __self: this },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-create-profile-header', __source: { fileName: _jsxFileName, lineNumber: 37 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-question gor-align-middle', __source: { fileName: _jsxFileName, lineNumber: 38 }, __self: this }),
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 39 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 39 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'pps.configuration.confirm.apply.profile',
+                                    description: 'Apply Profile to PPS',
+                                    defaultMessage: 'Are you sure you want to change the profile?', __source: { fileName: _jsxFileName, lineNumber: 39 }, __self: this })),
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'gor-create-profile-header-description', __source: { fileName: _jsxFileName, lineNumber: 42 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 42 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'pps.configuration.confirm.apply.profile.description',
+                                        description: 'PPS Configuration will be changed',
+                                        defaultMessage: 'PPS Configuration will be changed', __source: { fileName: _jsxFileName, lineNumber: 42 }, __self: this }))))),
+
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-create-profile-body', __source: { fileName: _jsxFileName, lineNumber: 48 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: { display: 'table-cell', verticalAlign: 'middle' }, __source: { fileName: _jsxFileName, lineNumber: 49 }, __self: this })),
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-create-profile-action-button', __source: { fileName: _jsxFileName, lineNumber: 52 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ className: 'gor-cancel-btn', onClick: this.props.removeModal.bind(this), __source: { fileName: _jsxFileName, lineNumber: 53 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'pps.configuration.confirm.apply.cancel',
+                                description: 'Cancel apply Profile to PPS',
+                                defaultMessage: 'Cancel', __source: { fileName: _jsxFileName, lineNumber: 53 }, __self: this })),
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ onClick: this.changePPSProfile.bind(this, this.props.pps_id, this.props.profile_name), className: 'gor-save-profile-btn', __source: { fileName: _jsxFileName, lineNumber: 56 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'pps.configuration.confirm.change.profile',
+                                description: 'Change Profile to PPS',
+                                defaultMessage: 'Change', __source: { fileName: _jsxFileName, lineNumber: 56 }, __self: this }))))));
+
+
+
+    }}
+
+
+
+function mapStateToProps(state, ownProps) {
+
+    return {
+        auth_token: state.authLogin.auth_token,
+        profileRequestedAt: state.ppsConfiguration.profileRequestedAt || new Date().getTime() };
+
+
+}
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+    return {
+        makeAjaxCall: function /* istanbul ignore next */makeAjaxCall(data) {
+            dispatch( /* istanbul ignore next */(0, _ajaxActions.makeAjaxCall)(data));
+        } };
+
+}; /* istanbul ignore next */exports.default =
+
+/* istanbul ignore next */(0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ConfirmApplyProfile);

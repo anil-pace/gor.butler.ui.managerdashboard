@@ -1,0 +1,29 @@
+/* istanbul ignore next */"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.GTableHeaderCell = exports.GTableHeader = undefined;var _jsxFileName = "/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/components/gor-table-component/tableHeader.js"; /**
+                                                                                                                                                                                                                                                                                           * Created by gaurav.m on 5/26/17.
+                                                                                                                                                                                                                                                                                           */
+var /* istanbul ignore next */_react = require("react"); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+class GTableHeader extends /* istanbul ignore next */_react2.default.Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: ["table-header", "header"].concat(this.props.options || []).join(" "), __source: { fileName: _jsxFileName, lineNumber: 10 }, __self: this },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: "row", __source: { fileName: _jsxFileName, lineNumber: 11 }, __self: this },
+                    this.props.children)));
+
+
+    }} /* istanbul ignore next */exports.GTableHeader = GTableHeader;
+
+
+class GTableHeaderCell extends /* istanbul ignore next */_react2.default.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        let header = this.props.header;
+        return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */Object.assign({ style: header.width ? { flex: '1 0 ' + header.width + "%" } : {}, className: ["cell", header.sortDir || ""].join(" ") }, this.props, { __source: { fileName: _jsxFileName, lineNumber: 25 }, __self: this }),
+                this.props.children));
+
+
+    }} /* istanbul ignore next */exports.GTableHeaderCell = GTableHeaderCell;

@@ -1,0 +1,38 @@
+/* istanbul ignore next */"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.
+filterOptions = filterOptions;var /* istanbul ignore next */_frontEndConstants = require("../constants/frontEndConstants");function filterOptions(state = {}, action) {
+					switch (action.type) {
+
+										case /* istanbul ignore next */_frontEndConstants.STATUS_FILTER:
+															return Object.assign({}, state, {
+																				"statusFilter": action.data });
+
+
+										case /* istanbul ignore next */_frontEndConstants.TIME_FILTER:
+															return Object.assign({}, state, {
+																				"timeFilter": action.data });
+
+
+										case /* istanbul ignore next */_frontEndConstants.GET_PAGE_SIZE_ORDERS:
+															return Object.assign({}, state, {
+																				"pageSize": action.data });
+
+
+										case /* istanbul ignore next */_frontEndConstants.GET_CURRENT_PAGE_ORDERS:
+															return Object.assign({}, state, {
+																				"currentPage": action.data });
+
+
+										case /* istanbul ignore next */_frontEndConstants.GET_LAST_REFRESH_TIME:
+															return Object.assign({}, state, {
+																				"lastUpdatedOn": action.data });
+
+
+										case /* istanbul ignore next */_frontEndConstants.SET_CURRENT_PAGE:
+															return Object.assign({}, state, {
+																				"currentPageUrl": action.data });
+
+
+										default:
+															return state;}
+
+}

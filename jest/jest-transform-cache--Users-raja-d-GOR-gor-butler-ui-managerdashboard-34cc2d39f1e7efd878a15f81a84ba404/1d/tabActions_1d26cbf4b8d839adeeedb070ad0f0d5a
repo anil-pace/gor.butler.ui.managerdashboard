@@ -1,0 +1,74 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+
+
+
+recieveOverviewStatus = recieveOverviewStatus; /* istanbul ignore next */exports.
+
+
+
+
+
+
+recieveSystemStatus = recieveSystemStatus; /* istanbul ignore next */exports.
+
+
+
+
+
+
+recieveInventoryStatus = recieveInventoryStatus; /* istanbul ignore next */exports.
+
+
+
+
+
+
+recieveAuditStatus = recieveAuditStatus; /* istanbul ignore next */exports.
+
+
+
+
+
+
+recieveOrdersStatus = recieveOrdersStatus; /* istanbul ignore next */exports.
+
+
+
+
+
+
+recieveUsersStatus = recieveUsersStatus; /* istanbul ignore next */exports.
+
+
+
+
+
+
+recieveStatus = recieveStatus; /* istanbul ignore next */exports.
+
+
+
+
+
+
+setFireHazrdFlag = setFireHazrdFlag; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+
+
+
+
+setEmergencyModalStatus = setEmergencyModalStatus;var /* istanbul ignore next */_frontEndConstants = require('../constants/frontEndConstants.js');function recieveOverviewStatus(data) {return { type: /* istanbul ignore next */_frontEndConstants.GET_OVERVIEW, data };}function recieveSystemStatus(data) {return { type: /* istanbul ignore next */_frontEndConstants.GET_SYSTEM, data };}function recieveInventoryStatus(data) {return { type: /* istanbul ignore next */_frontEndConstants.GET_INVENTORY, data };}function recieveAuditStatus(data) {return { type: /* istanbul ignore next */_frontEndConstants.GET_AUDIT, data };}function recieveOrdersStatus(data) {return { type: /* istanbul ignore next */_frontEndConstants.GET_ORDERS, data };}function recieveUsersStatus(data) {return { type: /* istanbul ignore next */_frontEndConstants.GET_USERS, data };}function recieveStatus(data) {return { type: /* istanbul ignore next */_frontEndConstants.GET_STATUS, data };}function setFireHazrdFlag(data) {return { type: /* istanbul ignore next */_frontEndConstants.FIRE_EMERGENCY_POPUP_FLAG, data };} /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * [setEmergencyModalStatus flag to set if modal is open]
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @param {[boolean]} data [true/false]
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */function setEmergencyModalStatus(data) {return { type: /* istanbul ignore next */_frontEndConstants.SET_EMERGENCY_MODAL_STATUS, data };
+
+}

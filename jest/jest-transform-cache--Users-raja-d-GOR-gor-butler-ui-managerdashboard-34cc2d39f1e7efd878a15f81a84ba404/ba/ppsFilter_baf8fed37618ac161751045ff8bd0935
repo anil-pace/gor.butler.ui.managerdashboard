@@ -1,0 +1,263 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/containers/systemTabs/ppsFilter.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_filter = require('../../components/tableFilter/filter'); /* istanbul ignore next */var _filter2 = _interopRequireDefault(_filter);
+var /* istanbul ignore next */_filterAction = require('../../actions/filterAction');
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_socketActions = require('../../actions/socketActions');
+var /* istanbul ignore next */_filterInputFieldWrap = require('../../components/tableFilter/filterInputFieldWrap'); /* istanbul ignore next */var _filterInputFieldWrap2 = _interopRequireDefault(_filterInputFieldWrap);
+var /* istanbul ignore next */_filterTokenContainer = require('../../components/tableFilter/filterTokenContainer'); /* istanbul ignore next */var _filterTokenContainer2 = _interopRequireDefault(_filterTokenContainer);
+var /* istanbul ignore next */_tableFilterCommonFunctions = require('../../components/tableFilter/tableFilterCommonFunctions');
+var /* istanbul ignore next */_RangeSlider = require('../../components/rangeSlider/RangeSlider'); /* istanbul ignore next */var _RangeSlider2 = _interopRequireDefault(_RangeSlider);
+var /* istanbul ignore next */_frontEndConstants = require('../../constants/frontEndConstants');
+var /* istanbul ignore next */_spinnerAction = require('../../actions/spinnerAction');
+var /* istanbul ignore next */_reactRouter = require('react-router'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+class PPSFilter extends /* istanbul ignore next */_react2.default.Component {
+    constructor(props)
+    {
+        super(props);
+        this.state = { tokenSelected: { "STATUS": ["all"], "MODE": ["all"] }, searchQuery: {},
+            defaultToken: { "STATUS": ["all"], "MODE": ["all"] }, rangeSelected: { "minValue": ["-1"], "maxValue": ["500"] } };
+        this._closeFilter = this._closeFilter.bind(this);
+        this._clearFilter = this._clearFilter.bind(this);
+        this._applyFilter = this._applyFilter.bind(this);
+    }
+
+
+    _closeFilter() {
+        this.props.showTableFilter(false);
+    }
+
+    _processPPSSearchField() {
+        const filterInputFields = [{ value: "PPS ID", label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'pps.inputField.id', defaultMessage: 'PPS ID', __source: { fileName: _jsxFileName, lineNumber: 33 }, __self: this }) },
+        { value: "OPERATOR ASSIGNED", label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'pps.inputField.oprator', defaultMessage: 'OPERATOR ASSIGNED', __source: { fileName: _jsxFileName, lineNumber: 34 }, __self: this }) }];
+        let inputValue = this.state.searchQuery;
+        let inputField = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_filterInputFieldWrap2.default, /* istanbul ignore next */{ inputText: filterInputFields, handleInputText: this._handleInputQuery.bind(this), inputValue: inputValue, __source: { fileName: _jsxFileName, lineNumber: 36 }, __self: this });
+        return inputField;
+    }
+
+    componentWillReceiveProps(nextProps) {
+        /**
+                                           * It will update the state as soon as
+                                           * filters are cleared.
+                                           */
+        if (nextProps.filterState && JSON.stringify(this.state) !== JSON.stringify(nextProps.filterState)) {
+            this.setState(nextProps.filterState);
+        }
+
+        /**
+           * Hide the filter as soon as data in the list get updated.
+           */
+        if (nextProps.data.length > 0 && JSON.stringify(nextProps.data) !== JSON.stringify(this.props.data)) {
+            this.props.showTableFilter(false);
+        }
+    }
+
+
+
+    _processFilterToken() {
+        let tokenField1 = { value: "STATUS", label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'pps.token.status', defaultMessage: 'STATUS', __source: { fileName: _jsxFileName, lineNumber: 60 }, __self: this }) };
+        let tokenField2 = { value: "MODE", label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'pps.token.timePeriod', defaultMessage: 'MODE', __source: { fileName: _jsxFileName, lineNumber: 61 }, __self: this }) };
+        let labelC1 = [
+        { value: 'all', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'pps.STATUS.all', defaultMessage: 'Any', __source: { fileName: _jsxFileName, lineNumber: 63 }, __self: this }) },
+        { value: 'open', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'pps.STATUS.stopped', defaultMessage: 'Open', __source: { fileName: _jsxFileName, lineNumber: 64 }, __self: this }) },
+        { value: 'close', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'pps.STATUS.error', defaultMessage: 'Close', __source: { fileName: _jsxFileName, lineNumber: 65 }, __self: this }) },
+        { value: 'force_close', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'pps.STATUS.fclose', defaultMessage: 'Force Close', __source: { fileName: _jsxFileName, lineNumber: 66 }, __self: this }) }];
+
+        let labelC2 = [
+        { value: 'all', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'pps.MODE.all', defaultMessage: 'Any', __source: { fileName: _jsxFileName, lineNumber: 69 }, __self: this }) },
+        { value: 'pick', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'pps.MODE.pick', defaultMessage: 'Pick', __source: { fileName: _jsxFileName, lineNumber: 70 }, __self: this }) },
+        { value: 'put', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'pps.MODE.put', defaultMessage: 'Put', __source: { fileName: _jsxFileName, lineNumber: 71 }, __self: this }) },
+        { value: 'audit', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'pps.MODE.audit', defaultMessage: 'Audit', __source: { fileName: _jsxFileName, lineNumber: 72 }, __self: this }) },
+        { value: 'notset', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'v.MODE.notset', defaultMessage: 'Not set', __source: { fileName: _jsxFileName, lineNumber: 73 }, __self: this }) }];
+
+        let selectedToken = this.state.tokenSelected;
+        let column1 = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_filterTokenContainer2.default, /* istanbul ignore next */{ field: tokenField1, tokenCallBack: this._handelTokenClick.bind(this), label: labelC1, selectedToken: selectedToken, __source: { fileName: _jsxFileName, lineNumber: 76 }, __self: this });
+        let column2 = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_filterTokenContainer2.default, /* istanbul ignore next */{ field: tokenField2, tokenCallBack: this._handelTokenClick.bind(this), label: labelC2, selectedToken: selectedToken, __source: { fileName: _jsxFileName, lineNumber: 77 }, __self: this });
+        let columnDetail = { column1token: column1, column2token: column2 };
+        return columnDetail;
+    }
+
+
+    _handleRangeSlider() {
+        return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 84 }, __self: this },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'sliderHeaderText', __source: { fileName: _jsxFileName, lineNumber: 85 }, __self: this }, /* istanbul ignore next */'PERFORMANCE RANGE'),
+
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_RangeSlider2.default.Range, /* istanbul ignore next */{
+                    min: 0,
+                    max: 500,
+                    step: 100,
+                    marks: /* istanbul ignore next */_frontEndConstants.filterMarks,
+                    maxValue: 500,
+                    defaultValue: this.props.deaultSliderRange,
+                    allowCross: false,
+                    onChange: this._changeSliderRange.bind(this), __source: { fileName: _jsxFileName, lineNumber: 88 }, __self: this })));
+
+
+
+    }
+
+    _handelTokenClick(field, value, state) {
+        this.setState({ tokenSelected: /* istanbul ignore next */(0, _tableFilterCommonFunctions.handelTokenClick)(field, value, state, this.state) });
+
+    }
+
+    _handleInputQuery(inputQuery, queryField) {
+        this.setState({ searchQuery: /* istanbul ignore next */(0, _tableFilterCommonFunctions.handleInputQuery)(inputQuery, queryField, this.state) });
+    }
+
+
+    _applyFilter() {
+        let filterState = this.state,_query = {};
+        if (filterState.searchQuery) {
+
+            if (filterState.searchQuery && filterState.searchQuery["OPERATOR ASSIGNED"]) {
+                _query.operator = filterState.searchQuery["OPERATOR ASSIGNED"];
+            }
+
+            if (filterState.searchQuery && filterState.searchQuery["PPS ID"]) {
+                _query.pps_id = filterState.searchQuery["PPS ID"];
+            }
+
+            if (filterState.rangeSelected && (filterState.rangeSelected["maxValue"] || filterState.rangeSelected["minValue"])) {
+                _query.minRange = filterState.rangeSelected["minValue"] || 0;
+                _query.maxRange = filterState.rangeSelected["maxValue"];
+            }
+            if (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !== "all") {
+                _query.status = filterState.tokenSelected["STATUS"];
+            }
+            if (filterState.tokenSelected["MODE"] && filterState.tokenSelected["MODE"][0] !== "all") {
+                _query.mode = filterState.tokenSelected["MODE"];
+            }
+            /* istanbul ignore next */_reactRouter.hashHistory.push({ pathname: "/system/pps", query: _query });
+        }
+    }
+
+    _clearFilter() {
+        this.props.ppsfilterState({
+            tokenSelected: {
+                "STATUS": ["all"],
+                "MODE": ["all"] },
+
+            searchQuery: {
+                "PPS ID": '',
+                "OPERATOR ASSIGNED": "" },
+
+            rangeSelected: { "minValue": ["-1"], "maxValue": ["500"] } });
+
+        /* istanbul ignore next */_reactRouter.hashHistory.push({ pathname: "/system/pps", query: {} });
+
+    }
+
+    _changeSliderRange(sliderVal) {
+        this.setState({ rangeSelected: { minValue: sliderVal[0] ? sliderVal[0] : -1, maxValue: sliderVal[1] } });
+    }
+    render() {
+
+        var ppsDetail = this.props.PPSDetail;
+        var noOrder = ppsDetail.PPStypeDetail.noResultFound;
+        let ppsSearchField = this._processPPSSearchField();
+        let ppsFilterToken = this._processFilterToken();
+        let rangeSlider = this._handleRangeSlider();
+        return (
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 165 }, __self: this },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_filter2.default, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 166 }, __self: this },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-header', __source: { fileName: _jsxFileName, lineNumber: 167 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-header-h1', __source: { fileName: _jsxFileName, lineNumber: 168 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'gor.filter.filterLabel', description: 'label for filter',
+                                defaultMessage: 'Filter data', __source: { fileName: _jsxFileName, lineNumber: 169 }, __self: this })),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-header-h2', onClick: this._closeFilter, __source: { fileName: _jsxFileName, lineNumber: 172 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'gor.filter.hide', description: 'label for hide',
+                                defaultMessage: 'Hide', __source: { fileName: _jsxFileName, lineNumber: 173 }, __self: this }))),
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 177 }, __self: this }, noOrder ?
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-no-result-filter', __source: { fileName: _jsxFileName, lineNumber: 178 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'gor.filter.noResult', description: 'label for no result',
+                                defaultMessage: 'No results found, please try again', __source: { fileName: _jsxFileName, lineNumber: 178 }, __self: this })) : ""),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-body', __source: { fileName: _jsxFileName, lineNumber: 181 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-body-input-wrap', __source: { fileName: _jsxFileName, lineNumber: 182 }, __self: this },
+                            ppsSearchField),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-body-filterToken-wrap', __source: { fileName: _jsxFileName, lineNumber: 185 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-body-filterToken-section1', __source: { fileName: _jsxFileName, lineNumber: 186 }, __self: this },
+                                ppsFilterToken.column1token),
+
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-body-filterToken-section1', __source: { fileName: _jsxFileName, lineNumber: 189 }, __self: this },
+                                ppsFilterToken.column2token)),
+
+
+
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-body-slider-wrap', __source: { fileName: _jsxFileName, lineNumber: 195 }, __self: this },
+                            rangeSlider)),
+
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-footer', __source: { fileName: _jsxFileName, lineNumber: 200 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'gor-filter-footer-h2', onClick: this._clearFilter, __source: { fileName: _jsxFileName, lineNumber: 201 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'gor.filter.reset', description: 'label for reset',
+                                defaultMessage: 'Reset', __source: { fileName: _jsxFileName, lineNumber: 202 }, __self: this })),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-btn-wrap', __source: { fileName: _jsxFileName, lineNumber: 205 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ className: 'gor-add-btn', onClick: this._applyFilter, __source: { fileName: _jsxFileName, lineNumber: 206 }, __self: this },
+                                !this.props.ppsFilterSpinnerState ? /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'gor.filter.heading', description: 'filter heading', defaultMessage: 'Apply filter', __source: { fileName: _jsxFileName, lineNumber: 207 }, __self: this }) : /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'spinnerImage', __source: { fileName: _jsxFileName, lineNumber: 207 }, __self: this })))))));
+
+
+
+
+
+
+
+
+    }}
+;
+
+
+function mapStateToProps(state, ownProps) {
+    return {
+        PPSDetail: state.PPSDetail || [],
+        showFilter: state.filterInfo.filterState || false,
+        orderData: state.getOrderDetail || {},
+        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket,
+        orderListSpinner: state.spinner.orderListSpinner || false,
+        filterState: state.filterInfo.ppsfilterState,
+        isFilterApplied: state.filterInfo.isFilterApplied || false,
+        ppsFilterState: state.filterInfo.ppsFilterState || false,
+        ppsFilterSpinnerState: state.spinner.ppsFilterSpinnerState || false,
+        deaultSliderRange: state.filterInfo.deaultSliderRange || [0, 500] };
+
+
+
+}
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+    return {
+        showTableFilter: function /* istanbul ignore next */showTableFilter(data) {dispatch( /* istanbul ignore next */(0, _filterAction.showTableFilter)(data));},
+        filterApplied: function /* istanbul ignore next */filterApplied(data) {dispatch( /* istanbul ignore next */(0, _filterAction.filterApplied)(data));},
+        updateSubscriptionPacket: function /* istanbul ignore next */updateSubscriptionPacket(data) {dispatch( /* istanbul ignore next */(0, _socketActions.updateSubscriptionPacket)(data));},
+        ppsfilterState: function /* istanbul ignore next */ppsfilterState(data) {dispatch( /* istanbul ignore next */(0, _filterAction.ppsfilterState)(data));},
+        togglePPSFilter: function /* istanbul ignore next */togglePPSFilter(data) {dispatch( /* istanbul ignore next */(0, _filterAction.togglePPSFilter)(data));},
+        setPpsFilterSpinner: function /* istanbul ignore next */setPpsFilterSpinner(data) {dispatch( /* istanbul ignore next */(0, _spinnerAction.setPpsFilterSpinner)(data));},
+        setDefaultRange: function /* istanbul ignore next */setDefaultRange(data) {dispatch( /* istanbul ignore next */(0, _filterAction.setDefaultRange)(data));} };
+
+
+};
+PPSFilter.PropTypes = {
+    PPSDetail: /* istanbul ignore next */_react2.default.PropTypes.array,
+    showFilter: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    orderData: /* istanbul ignore next */_react2.default.PropTypes.object,
+    wsSubscriptionData: /* istanbul ignore next */_react2.default.PropTypes.object,
+    orderListSpinner: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    isFilterApplied: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    ppsFilterState: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    showTableFilter: /* istanbul ignore next */_react2.default.PropTypes.func,
+    filterApplied: /* istanbul ignore next */_react2.default.PropTypes.func,
+    updateSubscriptionPacket: /* istanbul ignore next */_react2.default.PropTypes.func,
+    togglePPSFilter: /* istanbul ignore next */_react2.default.PropTypes.func }; /* istanbul ignore next */exports.default =
+
+
+/* istanbul ignore next */(0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(PPSFilter);

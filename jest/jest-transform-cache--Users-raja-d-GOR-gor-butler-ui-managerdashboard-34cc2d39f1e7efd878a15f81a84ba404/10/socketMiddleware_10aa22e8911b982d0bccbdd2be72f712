@@ -1,0 +1,73 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_socketActions = require('../actions/socketActions');
+var /* istanbul ignore next */_frontEndConstants = require('../constants/frontEndConstants');
+var /* istanbul ignore next */_configConstants = require('../constants/configConstants');
+var /* istanbul ignore next */_responseParser = require('../utilities/responseParser');
+
+
+const socketMiddleware = function () {
+  var socket = null;
+
+  const onOpen = (ws, store, token) => evt => {
+    //Send a handshake, or authenticate with remote end
+
+    //Tell the store we're connected
+    store.dispatch( /* istanbul ignore next */(0, _socketActions.wsResponseAction)(evt.type));
+  };
+
+  const onClose = (ws, store) => evt => {
+    //Tell the store we've disconnected
+
+    store.dispatch( /* istanbul ignore next */(0, _socketActions.wsEndConnection)());
+  };
+
+  const onMessage = (ws, store) => evt => {
+    //Parse the JSON message received on the websocket
+    var msg = JSON.parse(evt.data);
+    /* istanbul ignore next */(0, _responseParser.ResponseParse)(store, msg);
+  };
+
+  return store => next => action => {
+    switch (action.type) {
+
+      //The user wants us to connect
+      case /* istanbul ignore next */_frontEndConstants.WS_CONNECT:
+        //Start a new connection to the server
+        if (socket !== null) {
+          socket.close();
+        }
+        //Send an action that shows a "connecting..." status for now
+        //store.dispatch(actions.connecting());
+
+        //Attempt to connect (we could send a 'failed' action on error)
+        socket = new WebSocket( /* istanbul ignore next */_configConstants.WS_URL);
+        socket.onmessage = onMessage(socket, store);
+        socket.onclose = onClose(socket, store);
+        socket.onopen = onOpen(socket, store, action.token);
+
+        break;
+
+      //The user wants us to disconnect
+      case /* istanbul ignore next */_frontEndConstants.WS_DISCONNECT:
+        if (socket !== null) {
+          socket.close();
+        }
+        socket = null;
+
+        //Set our state to disconnected
+
+        break;
+
+      //Send the 'SEND_MESSAGE' action down the websocket to the server
+      case /* istanbul ignore next */_frontEndConstants.WS_ONSEND:
+        socket.send(JSON.stringify(action.data));
+        break;
+
+      //This action is irrelevant to us, pass it on to the next middleware
+      default:
+        return next(action);}
+
+  };
+
+}(); /* istanbul ignore next */exports.default =
+
+socketMiddleware;

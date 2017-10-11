@@ -1,0 +1,18 @@
+/* istanbul ignore next */"use strict";Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = "/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/components/tableFilter/filterInputField.js";var /* istanbul ignore next */_react = require("react"); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+class FilterInputField extends /* istanbul ignore next */_react2.default.Component {
+
+  _textSubmit(e) {
+    this.props.handleInputText(this.pageNum.value, this.props.inputText.value);
+  }
+
+  render() {
+    return (
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 10 }, __self: this },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: "gor-filter-input-text", __source: { fileName: _jsxFileName, lineNumber: 11 }, __self: this }, /* istanbul ignore next */" ", this.props.inputText.label, /* istanbul ignore next */" "),
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"input", /* istanbul ignore next */{ className: !this.props.flag ? "gor-filter-input-wrap" : "gor-filter-input-wrap gor-filter-disable", disabled: this.props.flag, type: "text", onChange: this._textSubmit.bind(this), ref: node => {this.pageNum = node;}, value: this.props.inputValue || "", __source: { fileName: _jsxFileName, lineNumber: 12 }, __self: this })));
+
+
+  }}
+; /* istanbul ignore next */exports.default =
+
+FilterInputField;

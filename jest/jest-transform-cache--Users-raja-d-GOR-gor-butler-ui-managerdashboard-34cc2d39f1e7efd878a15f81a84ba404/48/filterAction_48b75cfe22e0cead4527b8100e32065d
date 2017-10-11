@@ -1,0 +1,215 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var cov_200nwbarpk = function () {var path = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/actions/filterAction.js',hash = '4a7f8e7b749c5ea5350427cd99dd41cb00c53f17',global = new Function('return this')(),gcv = '__coverage__',coverageData = { path: '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/actions/filterAction.js', statementMap: { '0': { start: { line: 9, column: 1 }, end: { line: 12, column: 4 } }, '1': { start: { line: 16, column: 1 }, end: { line: 19, column: 4 } }, '2': { start: { line: 23, column: 1 }, end: { line: 26, column: 4 } }, '3': { start: { line: 30, column: 1 }, end: { line: 33, column: 4 } }, '4': { start: { line: 37, column: 1 }, end: { line: 40, column: 4 } }, '5': { start: { line: 44, column: 1 }, end: { line: 47, column: 4 } }, '6': { start: { line: 51, column: 1 }, end: { line: 54, column: 4 } }, '7': { start: { line: 58, column: 1 }, end: { line: 61, column: 4 } }, '8': { start: { line: 66, column: 1 }, end: { line: 69, column: 4 } }, '9': { start: { line: 72, column: 1 }, end: { line: 75, column: 4 } }, '10': { start: { line: 81, column: 1 }, end: { line: 84, column: 4 } }, '11': { start: { line: 89, column: 1 }, end: { line: 92, column: 4 } }, '12': { start: { line: 96, column: 1 }, end: { line: 99, column: 4 } }, '13': { start: { line: 103, column: 1 }, end: { line: 106, column: 4 } }, '14': { start: { line: 111, column: 1 }, end: { line: 114, column: 4 } }, '15': { start: { line: 119, column: 1 }, end: { line: 122, column: 4 } }, '16': { start: { line: 127, column: 1 }, end: { line: 130, column: 4 } }, '17': { start: { line: 135, column: 1 }, end: { line: 138, column: 4 } }, '18': { start: { line: 142, column: 1 }, end: { line: 145, column: 4 } }, '19': { start: { line: 149, column: 1 }, end: { line: 152, column: 4 } }, '20': { start: { line: 157, column: 1 }, end: { line: 160, column: 4 } }, '21': { start: { line: 165, column: 1 }, end: { line: 168, column: 4 } }, '22': { start: { line: 174, column: 1 }, end: { line: 177, column: 4 } }, '23': { start: { line: 183, column: 1 }, end: { line: 186, column: 4 } }, '24': { start: { line: 192, column: 1 }, end: { line: 195, column: 4 } } }, fnMap: { '0': { name: 'showTableFilter', decl: { start: { line: 8, column: 16 }, end: { line: 8, column: 31 } }, loc: { start: { line: 8, column: 37 }, end: { line: 13, column: 1 } }, line: 8 }, '1': { name: 'BotFilterToggle', decl: { start: { line: 15, column: 16 }, end: { line: 15, column: 31 } }, loc: { start: { line: 15, column: 37 }, end: { line: 20, column: 1 } }, line: 15 }, '2': { name: 'PPSFilterToggle', decl: { start: { line: 22, column: 16 }, end: { line: 22, column: 31 } }, loc: { start: { line: 22, column: 37 }, end: { line: 27, column: 1 } }, line: 22 }, '3': { name: 'CSFilterToggle', decl: { start: { line: 29, column: 16 }, end: { line: 29, column: 30 } }, loc: { start: { line: 29, column: 36 }, end: { line: 34, column: 1 } }, line: 29 }, '4': { name: 'wavesFilterToggle', decl: { start: { line: 36, column: 16 }, end: { line: 36, column: 33 } }, loc: { start: { line: 36, column: 39 }, end: { line: 41, column: 1 } }, line: 36 }, '5': { name: 'ordersFilterToggle', decl: { start: { line: 43, column: 16 }, end: { line: 43, column: 34 } }, loc: { start: { line: 43, column: 40 }, end: { line: 48, column: 1 } }, line: 43 }, '6': { name: 'auditFilterToggle', decl: { start: { line: 50, column: 16 }, end: { line: 50, column: 33 } }, loc: { start: { line: 50, column: 39 }, end: { line: 55, column: 1 } }, line: 50 }, '7': { name: 'userFilterToggle', decl: { start: { line: 57, column: 16 }, end: { line: 57, column: 32 } }, loc: { start: { line: 57, column: 38 }, end: { line: 62, column: 1 } }, line: 57 }, '8': { name: 'filterApplied', decl: { start: { line: 65, column: 16 }, end: { line: 65, column: 29 } }, loc: { start: { line: 65, column: 35 }, end: { line: 70, column: 1 } }, line: 65 }, '9': { name: 'setDefaultRange', decl: { start: { line: 71, column: 16 }, end: { line: 71, column: 31 } }, loc: { start: { line: 71, column: 37 }, end: { line: 76, column: 1 } }, line: 71 }, '10': { name: 'toggleBotButton', decl: { start: { line: 80, column: 16 }, end: { line: 80, column: 31 } }, loc: { start: { line: 80, column: 37 }, end: { line: 85, column: 1 } }, line: 80 }, '11': { name: 'togglePPSFilter', decl: { start: { line: 88, column: 16 }, end: { line: 88, column: 31 } }, loc: { start: { line: 88, column: 37 }, end: { line: 93, column: 1 } }, line: 88 }, '12': { name: 'toggleAuditFilter', decl: { start: { line: 95, column: 16 }, end: { line: 95, column: 33 } }, loc: { start: { line: 95, column: 39 }, end: { line: 100, column: 1 } }, line: 95 }, '13': { name: 'toggleOrderFilter', decl: { start: { line: 102, column: 16 }, end: { line: 102, column: 33 } }, loc: { start: { line: 102, column: 39 }, end: { line: 107, column: 1 } }, line: 102 }, '14': { name: 'toggleWaveFilter', decl: { start: { line: 110, column: 16 }, end: { line: 110, column: 32 } }, loc: { start: { line: 110, column: 38 }, end: { line: 115, column: 1 } }, line: 110 }, '15': { name: 'toggleUserFilter', decl: { start: { line: 118, column: 16 }, end: { line: 118, column: 32 } }, loc: { start: { line: 118, column: 38 }, end: { line: 123, column: 1 } }, line: 118 }, '16': { name: 'toggleChargingFilter', decl: { start: { line: 126, column: 16 }, end: { line: 126, column: 36 } }, loc: { start: { line: 126, column: 42 }, end: { line: 131, column: 1 } }, line: 126 }, '17': { name: 'butlerfilterState', decl: { start: { line: 134, column: 16 }, end: { line: 134, column: 33 } }, loc: { start: { line: 134, column: 39 }, end: { line: 139, column: 1 } }, line: 134 }, '18': { name: 'auditfilterState', decl: { start: { line: 141, column: 16 }, end: { line: 141, column: 32 } }, loc: { start: { line: 141, column: 38 }, end: { line: 146, column: 1 } }, line: 141 }, '19': { name: 'orderfilterState', decl: { start: { line: 148, column: 16 }, end: { line: 148, column: 32 } }, loc: { start: { line: 148, column: 38 }, end: { line: 153, column: 1 } }, line: 148 }, '20': { name: 'chargingstationfilterState', decl: { start: { line: 156, column: 16 }, end: { line: 156, column: 42 } }, loc: { start: { line: 156, column: 48 }, end: { line: 161, column: 3 } }, line: 156 }, '21': { name: 'ppsfilterState', decl: { start: { line: 164, column: 16 }, end: { line: 164, column: 30 } }, loc: { start: { line: 164, column: 36 }, end: { line: 170, column: 1 } }, line: 164 }, '22': { name: 'wavefilterState', decl: { start: { line: 173, column: 16 }, end: { line: 173, column: 31 } }, loc: { start: { line: 173, column: 37 }, end: { line: 179, column: 1 } }, line: 173 }, '23': { name: 'userfilterState', decl: { start: { line: 182, column: 16 }, end: { line: 182, column: 31 } }, loc: { start: { line: 182, column: 37 }, end: { line: 188, column: 1 } }, line: 182 }, '24': { name: 'setFilterApplyFlag', decl: { start: { line: 191, column: 16 }, end: { line: 191, column: 34 } }, loc: { start: { line: 191, column: 40 }, end: { line: 197, column: 1 } }, line: 191 } }, branchMap: {}, s: { '0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0, '8': 0, '9': 0, '10': 0, '11': 0, '12': 0, '13': 0, '14': 0, '15': 0, '16': 0, '17': 0, '18': 0, '19': 0, '20': 0, '21': 0, '22': 0, '23': 0, '24': 0 }, f: { '0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0, '8': 0, '9': 0, '10': 0, '11': 0, '12': 0, '13': 0, '14': 0, '15': 0, '16': 0, '17': 0, '18': 0, '19': 0, '20': 0, '21': 0, '22': 0, '23': 0, '24': 0 }, b: {}, _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c' },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();exports.
+
+
+
+
+
+
+showTableFilter = showTableFilter; /* istanbul ignore next */exports.
+
+
+
+
+
+
+BotFilterToggle = BotFilterToggle; /* istanbul ignore next */exports.
+
+
+
+
+
+
+PPSFilterToggle = PPSFilterToggle; /* istanbul ignore next */exports.
+
+
+
+
+
+
+CSFilterToggle = CSFilterToggle; /* istanbul ignore next */exports.
+
+
+
+
+
+
+wavesFilterToggle = wavesFilterToggle; /* istanbul ignore next */exports.
+
+
+
+
+
+
+ordersFilterToggle = ordersFilterToggle; /* istanbul ignore next */exports.
+
+
+
+
+
+
+auditFilterToggle = auditFilterToggle; /* istanbul ignore next */exports.
+
+
+
+
+
+
+userFilterToggle = userFilterToggle; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+filterApplied = filterApplied; /* istanbul ignore next */exports.
+
+
+
+
+
+setDefaultRange = setDefaultRange; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+toggleBotButton = toggleBotButton; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+togglePPSFilter = togglePPSFilter; /* istanbul ignore next */exports.
+
+
+
+
+
+
+toggleAuditFilter = toggleAuditFilter; /* istanbul ignore next */exports.
+
+
+
+
+
+
+toggleOrderFilter = toggleOrderFilter; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+toggleWaveFilter = toggleWaveFilter; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+toggleUserFilter = toggleUserFilter; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+toggleChargingFilter = toggleChargingFilter; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+butlerfilterState = butlerfilterState; /* istanbul ignore next */exports.
+
+
+
+
+
+
+auditfilterState = auditfilterState; /* istanbul ignore next */exports.
+
+
+
+
+
+
+orderfilterState = orderfilterState; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+chargingstationfilterState = chargingstationfilterState; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+ppsfilterState = ppsfilterState; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+wavefilterState = wavefilterState; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+userfilterState = userfilterState; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+setFilterApplyFlag = setFilterApplyFlag;var /* istanbul ignore next */_frontEndConstants = require('../constants/frontEndConstants'); //This action is use to update the filter state
+function showTableFilter(data) {/* istanbul ignore next */++cov_200nwbarpk.f[0];++cov_200nwbarpk.s[0];return { type: /* istanbul ignore next */_frontEndConstants.SHOW_FILTER, data };} //Based on this action we show hide the filter for in ButlerBot tab
+function BotFilterToggle(data) {/* istanbul ignore next */++cov_200nwbarpk.f[1];++cov_200nwbarpk.s[1];return { type: /* istanbul ignore next */_frontEndConstants.BOT_TOGGLE_FILTER, data };} //Based on this action we show hide the filter for in PPS tab
+function PPSFilterToggle(data) {/* istanbul ignore next */++cov_200nwbarpk.f[2];++cov_200nwbarpk.s[2];return { type: /* istanbul ignore next */_frontEndConstants.PPS_TOGGLE_FILTER, data };} //Based on this action we show hide the filter for in ChargingStation tab
+function CSFilterToggle(data) {/* istanbul ignore next */++cov_200nwbarpk.f[3];++cov_200nwbarpk.s[3];return { type: /* istanbul ignore next */_frontEndConstants.CS_TOGGLE_FILTER, data };} //Based on this action we show hide the filter for in Waves tab
+function wavesFilterToggle(data) {/* istanbul ignore next */++cov_200nwbarpk.f[4];++cov_200nwbarpk.s[4];return { type: /* istanbul ignore next */_frontEndConstants.WAVES_TOGGLE_FILTER, data };} //Based on this action we show hide the filter for in Order tab
+function ordersFilterToggle(data) {/* istanbul ignore next */++cov_200nwbarpk.f[5];++cov_200nwbarpk.s[5];return { type: /* istanbul ignore next */_frontEndConstants.ORDERS_TOGGLE_FILTER, data };} //Based on this action we show hide the filter for in audit tab
+function auditFilterToggle(data) {/* istanbul ignore next */++cov_200nwbarpk.f[6];++cov_200nwbarpk.s[6];return { type: /* istanbul ignore next */_frontEndConstants.AUDIT_TOGGLE_FILTER, data };} //Based on this action we show hide the filter for in User tab
+function userFilterToggle(data) {/* istanbul ignore next */++cov_200nwbarpk.f[7];++cov_200nwbarpk.s[7];return { type: /* istanbul ignore next */_frontEndConstants.USER_TOGGLE_FILTER, data };} //This action is to update the props value so that componentWillReceiveProps in app.js can catch the changes
+function filterApplied(data) {/* istanbul ignore next */++cov_200nwbarpk.f[8];++cov_200nwbarpk.s[8];return { type: /* istanbul ignore next */_frontEndConstants.IS_FILTER_APPLIED, data };}function setDefaultRange(data) {/* istanbul ignore next */++cov_200nwbarpk.f[9];++cov_200nwbarpk.s[9];return { type: 'SET_DEFAULT_RANGE', data };} //This action is use to keep the updated flag value so that we can get to know the filter is applied for butletBot tab.
+function toggleBotButton(data) {/* istanbul ignore next */++cov_200nwbarpk.f[10];++cov_200nwbarpk.s[10];return { type: /* istanbul ignore next */_frontEndConstants.TOGGLE_BUTTON_BOT, data };} //This action is use to keep the updated flag value so that we can get to know the filter is applied for PPS tab
+function togglePPSFilter(data) {/* istanbul ignore next */++cov_200nwbarpk.f[11];++cov_200nwbarpk.s[11];return { type: /* istanbul ignore next */_frontEndConstants.PPS_FILTER_VALUE, data };} //This action is use to keep the updated flag value so that we can get to know the filter is applied for Audit tab
+function toggleAuditFilter(data) {/* istanbul ignore next */++cov_200nwbarpk.f[12];++cov_200nwbarpk.s[12];return { type: /* istanbul ignore next */_frontEndConstants.AUDIT_FILTER_VALUE, data };} //This action is use to keep the updated flag value so that we can get to know the filter is applied for Order tab
+function toggleOrderFilter(data) {/* istanbul ignore next */++cov_200nwbarpk.f[13];++cov_200nwbarpk.s[13];return { type: /* istanbul ignore next */_frontEndConstants.ORDER_FILTER_VALUE, data };} //This action is use to keep the updated flag value so that we can get to know the filter is applied for Wave tab
+function toggleWaveFilter(data) {/* istanbul ignore next */++cov_200nwbarpk.f[14];++cov_200nwbarpk.s[14];return { type: /* istanbul ignore next */_frontEndConstants.WAVE_FILTER_VALUE, data };} //This action is use to keep the updated flag value so that we can get to know the filter is applied for User tab
+function toggleUserFilter(data) {/* istanbul ignore next */++cov_200nwbarpk.f[15];++cov_200nwbarpk.s[15];return { type: /* istanbul ignore next */_frontEndConstants.USER_FILTER_VALUE, data };} //This action is use to keep the updated flag value so that we can get to know the filter is applied for Charging tab
+function toggleChargingFilter(data) {/* istanbul ignore next */++cov_200nwbarpk.f[16];++cov_200nwbarpk.s[16];return { type: /* istanbul ignore next */_frontEndConstants.CHARGING_FILTER_VALUE, data };} //This action is use to keep the current filter state for Butler tab
+function butlerfilterState(data) {/* istanbul ignore next */++cov_200nwbarpk.f[17];++cov_200nwbarpk.s[17];return { type: /* istanbul ignore next */_frontEndConstants.BUTLER_FILTER_STATE, data };} //This action is use to keep the current filter state for Audit tab
+function auditfilterState(data) {/* istanbul ignore next */++cov_200nwbarpk.f[18];++cov_200nwbarpk.s[18];return { type: /* istanbul ignore next */_frontEndConstants.AUDIT_FILTER_STATE, data };} //This action is use to keep the current filter state for Order tab
+function orderfilterState(data) {/* istanbul ignore next */++cov_200nwbarpk.f[19];++cov_200nwbarpk.s[19];return { type: /* istanbul ignore next */_frontEndConstants.ORDER_FILTER_STATE, data };} //This action is use to keep the current filter state for ChargingStation tab
+function chargingstationfilterState(data) {/* istanbul ignore next */++cov_200nwbarpk.f[20];++cov_200nwbarpk.s[20];return { type: /* istanbul ignore next */_frontEndConstants.CHARGINGSTATION_FILTER_STATE, data };} //This action is use to keep the current filter state for PPS tab
+function ppsfilterState(data) {/* istanbul ignore next */++cov_200nwbarpk.f[21];++cov_200nwbarpk.s[21];return { type: /* istanbul ignore next */_frontEndConstants.PPS_FILTER_STATE, data };} //This action is use to keep the current filter state for Wave tab
+function wavefilterState(data) {/* istanbul ignore next */++cov_200nwbarpk.f[22];++cov_200nwbarpk.s[22];return { type: /* istanbul ignore next */_frontEndConstants.WAVE_FILTER_STATE, data };} //This action is use to keep the current filter state for User tab
+function userfilterState(data) {/* istanbul ignore next */++cov_200nwbarpk.f[23];++cov_200nwbarpk.s[23];return { type: /* istanbul ignore next */_frontEndConstants.USER_FILTER_STATE, data };} //This action is use to set the bool value so that we can show/hide the filter after clicking on apply button (if data available)
+function setFilterApplyFlag(data) {/* istanbul ignore next */++cov_200nwbarpk.f[24];++cov_200nwbarpk.s[24];return { type: /* istanbul ignore next */_frontEndConstants.FILTER_APPLY_FLAG, data };}

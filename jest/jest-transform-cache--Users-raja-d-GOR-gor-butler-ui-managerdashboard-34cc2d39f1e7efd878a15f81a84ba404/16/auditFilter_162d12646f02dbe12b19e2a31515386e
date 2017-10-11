@@ -1,0 +1,276 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/containers/auditTab/auditFilter.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_filter = require('../../components/tableFilter/filter'); /* istanbul ignore next */var _filter2 = _interopRequireDefault(_filter);
+var /* istanbul ignore next */_filterAction = require('../../actions/filterAction');
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_filterInputFieldWrap = require('../../components/tableFilter/filterInputFieldWrap'); /* istanbul ignore next */var _filterInputFieldWrap2 = _interopRequireDefault(_filterInputFieldWrap);
+var /* istanbul ignore next */_filterTokenContainer = require('../../components/tableFilter/filterTokenContainer'); /* istanbul ignore next */var _filterTokenContainer2 = _interopRequireDefault(_filterTokenContainer);
+var /* istanbul ignore next */_auditActions = require('../../actions/auditActions');
+var /* istanbul ignore next */_tableFilterCommonFunctions = require('../../components/tableFilter/tableFilterCommonFunctions');
+var /* istanbul ignore next */_frontEndConstants = require('../../constants/frontEndConstants');
+
+
+
+
+
+
+
+
+
+
+
+var /* istanbul ignore next */_reactRouter = require('react-router');
+var /* istanbul ignore next */_auditActions2 = require('./../../actions/auditActions');
+var /* istanbul ignore next */_utils = require('../../utilities/utils'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+class AuditFilter extends /* istanbul ignore next */_react2.default.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            tokenSelected: { "AUDIT TYPE": [/* istanbul ignore next */_frontEndConstants.ANY], "STATUS": [/* istanbul ignore next */_frontEndConstants.ALL] }, searchQuery: {},
+            defaultToken: { "AUDIT TYPE": [/* istanbul ignore next */_frontEndConstants.ANY], "STATUS": [/* istanbul ignore next */_frontEndConstants.ALL] } };
+
+        this._applyFilter = this._applyFilter.bind(this);
+        this._closeFilter = this._closeFilter.bind(this);
+        this._clearFilter = this._clearFilter.bind(this);
+    }
+
+    _closeFilter() {
+        var filterState = !this.props.showFilter;
+        this.props.showTableFilter(filterState);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.auditFilterState && JSON.stringify(this.state) !== JSON.stringify(nextProps.auditFilterState)) {
+            this.setState(nextProps.auditFilterState);
+        }
+        /**
+           * Hide the filter as soon as data in the list get updated.
+           */
+        if (nextProps.auditDetail.length > 0 && JSON.stringify(nextProps.auditDetail) !== JSON.stringify(this.props.auditDetail)) {
+            this.props.showTableFilter(false);
+        }
+
+    }
+
+    _processAuditSearchField() {
+        const filterInputFields = [{
+            value: /* istanbul ignore next */_frontEndConstants.AUDIT_TASK_ID,
+            label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'audit.inputField.id', defaultMessage: 'AUDIT TASK ID', __source: { fileName: _jsxFileName, lineNumber: 59 }, __self: this }) },
+
+        {
+            value: /* istanbul ignore next */_frontEndConstants.SPECIFIC_SKU_ID,
+            label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'audit.inputField.sku', defaultMessage: 'SPECIFIC SKU ID', __source: { fileName: _jsxFileName, lineNumber: 63 }, __self: this }) },
+
+        {
+            value: /* istanbul ignore next */_frontEndConstants.SPECIFIC_LOCATION_ID,
+            label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'audit.inputField.location', defaultMessage: 'SPECIFIC LOCATION ID', __source: { fileName: _jsxFileName, lineNumber: 67 }, __self: this }) }];
+
+        var inputValue = this.state.searchQuery;
+        var textboxStatus = this.props.textboxStatus || {};
+        var inputField = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_filterInputFieldWrap2.default, /* istanbul ignore next */{ inputText: filterInputFields,
+            handleInputText: this._handleInputQuery.bind(this),
+            inputValue: inputValue, textboxStatus: textboxStatus, __source: { fileName: _jsxFileName, lineNumber: 71 }, __self: this });
+        return inputField;
+    }
+
+    _processFilterToken() {
+        var tokenAuditTypeField = {
+            value: "AUDIT TYPE",
+            label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'audit.tokenfield.typeAudit', defaultMessage: 'AUDIT TYPE', __source: { fileName: _jsxFileName, lineNumber: 80 }, __self: this }) };
+
+        var tokenStatusField = {
+            value: "STATUS",
+            label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'audit.tokenfield.STATUS', defaultMessage: 'STATUS', __source: { fileName: _jsxFileName, lineNumber: 84 }, __self: this }) };
+
+        const labelC1 = [
+        { value: /* istanbul ignore next */_frontEndConstants.ANY, label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'audit.token1.all', defaultMessage: 'Any', __source: { fileName: _jsxFileName, lineNumber: 87 }, __self: this }) },
+        { value: /* istanbul ignore next */_frontEndConstants.SKU, label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'audit.token1.sku', defaultMessage: 'SKU', __source: { fileName: _jsxFileName, lineNumber: 88 }, __self: this }) },
+        { value: /* istanbul ignore next */_frontEndConstants.LOCATION, label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'audit.token1.location', defaultMessage: 'Location', __source: { fileName: _jsxFileName, lineNumber: 89 }, __self: this }) }];
+
+        const labelC2 = [
+        { value: /* istanbul ignore next */_frontEndConstants.ALL, label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'audit.token2.all', defaultMessage: 'Any', __source: { fileName: _jsxFileName, lineNumber: 92 }, __self: this }) },
+        { value: /* istanbul ignore next */_frontEndConstants.ISSUE_FOUND, label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'audit.token2.issueFound', defaultMessage: 'Issue found', __source: { fileName: _jsxFileName, lineNumber: 93 }, __self: this }) },
+        { value: /* istanbul ignore next */_frontEndConstants.AUDIT_LINE_REJECTED, label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'audit.token2.rejected', defaultMessage: 'Rejected', __source: { fileName: _jsxFileName, lineNumber: 94 }, __self: this }) },
+        { value: /* istanbul ignore next */_frontEndConstants.AUDIT_RESOLVED, label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'audit.token2.resolved', defaultMessage: 'Resolved', __source: { fileName: _jsxFileName, lineNumber: 95 }, __self: this }) },
+        { value: /* istanbul ignore next */_frontEndConstants.INPROGRESS, label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'audit.token2.inProgress', defaultMessage: 'In progress', __source: { fileName: _jsxFileName, lineNumber: 96 }, __self: this }) },
+        { value: /* istanbul ignore next */_frontEndConstants.PENDING, label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'audit.token2.pending', defaultMessage: 'Pending', __source: { fileName: _jsxFileName, lineNumber: 97 }, __self: this }) },
+        { value: /* istanbul ignore next */_frontEndConstants.AUDIT_CREATED, label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'audit.token2.created', defaultMessage: 'Created', __source: { fileName: _jsxFileName, lineNumber: 98 }, __self: this }) },
+        { value: /* istanbul ignore next */_frontEndConstants.AUDIT_COMPLETED, label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'audit.token2.completed', defaultMessage: 'Completed', __source: { fileName: _jsxFileName, lineNumber: 99 }, __self: this }) },
+        { value: /* istanbul ignore next */_frontEndConstants.AUDIT_CANCELLED, label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'audit.token2.cancelled', defaultMessage: 'Cancelled', __source: { fileName: _jsxFileName, lineNumber: 100 }, __self: this }) }];
+
+
+        var selectedToken = this.state.tokenSelected;
+        var column1 = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_filterTokenContainer2.default, /* istanbul ignore next */{ field: tokenStatusField, tokenCallBack: this._handelTokenClick.bind(this),
+            label: labelC2, selectedToken: selectedToken, __source: { fileName: _jsxFileName, lineNumber: 104 }, __self: this });
+        var column2 = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_filterTokenContainer2.default, /* istanbul ignore next */{ field: tokenAuditTypeField, tokenCallBack: this._handelTokenClick.bind(this),
+            label: labelC1, selectedToken: selectedToken, selection: /* istanbul ignore next */_frontEndConstants.SINGLE, __source: { fileName: _jsxFileName, lineNumber: 106 }, __self: this });
+        var columnDetail = { column1token: column1, column2token: column2 };
+        return columnDetail;
+    }
+
+    _handelTokenClick(field, value, state) {
+        var tempArray = [/* istanbul ignore next */_frontEndConstants.SPECIFIC_SKU_ID, /* istanbul ignore next */_frontEndConstants.SPECIFIC_LOCATION_ID];
+        var obj = {},queryField,tokentoRemove;
+        var selectedToken = this.state.tokenSelected['AUDIT TYPE'];
+        var token = [value];
+        this.setState({ tokenSelected: /* istanbul ignore next */(0, _tableFilterCommonFunctions.handelTokenClick)(field, value, state, this.state) });
+
+        if (state !== 'addDefault') {
+            obj.name = /* istanbul ignore next */(0, _utils.mappingArray)(selectedToken);
+            tokentoRemove = /* istanbul ignore next */(0, _utils.mappingArray)(token, selectedToken);
+            queryField = selectedToken.toString() === /* istanbul ignore next */_frontEndConstants.ANY ? tokentoRemove : /* istanbul ignore next */(0, _utils.arrayDiff)(tempArray, obj.name);
+            if (queryField && queryField.length !== 0) {
+                this.setState({ searchQuery: /* istanbul ignore next */(0, _tableFilterCommonFunctions.handleInputQuery)("", queryField, this.state) });
+            }
+
+            this.props.setTextBoxStatus(obj);
+        } else
+        {
+            this.props.setTextBoxStatus(obj);
+        }
+    }
+
+    _handleInputQuery(inputQuery, queryField) {
+        this.setState({ searchQuery: /* istanbul ignore next */(0, _tableFilterCommonFunctions.handleInputQuery)(inputQuery, queryField, this.state) });
+
+    }
+
+    _applyFilter() {
+        var filterState = this.state,_query = {};
+
+        if (filterState.tokenSelected[/* istanbul ignore next */_frontEndConstants.AUDIT_TYPE] && filterState.tokenSelected[/* istanbul ignore next */_frontEndConstants.AUDIT_TYPE][0] !== /* istanbul ignore next */_frontEndConstants.ANY) {
+            _query.auditType = filterState.tokenSelected[/* istanbul ignore next */_frontEndConstants.AUDIT_TYPE];
+        }
+        if (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !== /* istanbul ignore next */_frontEndConstants.ALL) {
+            _query.status = filterState.tokenSelected["STATUS"];
+        }
+
+        if (filterState.searchQuery && filterState.searchQuery[/* istanbul ignore next */_frontEndConstants.AUDIT_TASK_ID]) {
+            _query.taskId = filterState.searchQuery[/* istanbul ignore next */_frontEndConstants.AUDIT_TASK_ID];
+        }
+        if (filterState.searchQuery && filterState.searchQuery[/* istanbul ignore next */_frontEndConstants.SPECIFIC_SKU_ID]) {
+            _query.skuId = filterState.searchQuery[/* istanbul ignore next */_frontEndConstants.SPECIFIC_SKU_ID];
+        }
+        if (filterState.searchQuery && filterState.searchQuery[/* istanbul ignore next */_frontEndConstants.SPECIFIC_LOCATION_ID]) {
+            _query.locationId = filterState.searchQuery[/* istanbul ignore next */_frontEndConstants.SPECIFIC_LOCATION_ID];
+        }
+
+        /* istanbul ignore next */_reactRouter.hashHistory.push({ pathname: "/audit", query: _query });
+    }
+
+    _clearFilter() {
+        this.props.auditfilterState({
+            tokenSelected: { "AUDIT TYPE": [/* istanbul ignore next */_frontEndConstants.ANY], "STATUS": [/* istanbul ignore next */_frontEndConstants.ALL] }, searchQuery: {},
+            defaultToken: { "AUDIT TYPE": [/* istanbul ignore next */_frontEndConstants.ANY], "STATUS": [/* istanbul ignore next */_frontEndConstants.ALL] } });
+
+        /* istanbul ignore next */_reactRouter.hashHistory.push({ pathname: "/audit", query: {} });
+    }
+
+    render() {
+        var noOrder = this.props.noResultFound;
+        var auditSearchField = this._processAuditSearchField();
+        var auditFilterToken = this._processFilterToken();
+        return (
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 175 }, __self: this },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_filter2.default, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 176 }, __self: this },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-header', __source: { fileName: _jsxFileName, lineNumber: 177 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-header-h1', __source: { fileName: _jsxFileName, lineNumber: 178 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'gor.filter.filterLabel', description: 'label for filter',
+                                defaultMessage: 'Filter data', __source: { fileName: _jsxFileName, lineNumber: 179 }, __self: this })),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-header-h2', onClick: this._closeFilter, __source: { fileName: _jsxFileName, lineNumber: 182 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'gor.filter.hide', description: 'label for hide',
+                                defaultMessage: 'Hide', __source: { fileName: _jsxFileName, lineNumber: 183 }, __self: this }))),
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 187 }, __self: this }, noOrder ?
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-no-result-filter', __source: { fileName: _jsxFileName, lineNumber: 188 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'gor.filter.noResult', description: 'label for no result',
+                                defaultMessage: 'No results found, please try again', __source: { fileName: _jsxFileName, lineNumber: 188 }, __self: this })) : ""),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-body', __source: { fileName: _jsxFileName, lineNumber: 191 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-body-input-wrap', __source: { fileName: _jsxFileName, lineNumber: 192 }, __self: this },
+                            auditSearchField),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-body-filterToken-wrap', __source: { fileName: _jsxFileName, lineNumber: 195 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-body-filterToken-section1', __source: { fileName: _jsxFileName, lineNumber: 196 }, __self: this },
+                                auditFilterToken.column1token),
+
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-body-filterToken-section1', __source: { fileName: _jsxFileName, lineNumber: 199 }, __self: this },
+                                auditFilterToken.column2token))),
+
+
+
+
+
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-footer', __source: { fileName: _jsxFileName, lineNumber: 208 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'gor-filter-footer-h2', onClick: this._clearFilter, __source: { fileName: _jsxFileName, lineNumber: 209 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'gor.filter.reset', description: 'label for reset',
+                                defaultMessage: 'Reset', __source: { fileName: _jsxFileName, lineNumber: 210 }, __self: this })),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-btn-wrap', __source: { fileName: _jsxFileName, lineNumber: 213 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ className: 'gor-add-btn', onClick: this._applyFilter, __source: { fileName: _jsxFileName, lineNumber: 214 }, __self: this },
+                                !this.props.auditSpinner ? /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'gor.filter.heading', description: 'filter heading', defaultMessage: 'Apply filter', __source: { fileName: _jsxFileName, lineNumber: 215 }, __self: this }) : /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'spinnerImage', __source: { fileName: _jsxFileName, lineNumber: 215 }, __self: this })))))));
+
+
+
+
+
+
+
+
+    }}
+
+;
+
+
+function mapStateToProps(state, ownProps) {
+    return {
+        showFilter: state.filterInfo.filterState || false,
+        auditSpinner: state.spinner.auditSpinner || false,
+        totalAudits: state.recieveAuditDetail.totalAudits || 0,
+        noResultFound: state.recieveAuditDetail.noResultFound || 0,
+        auditFilterState: state.filterInfo.auditFilterState,
+        auditFilterStatus: state.filterInfo.auditFilterStatus,
+        textboxStatus: state.auditInfo.textBoxStatus || {} };
+
+}
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+    return {
+        showTableFilter: function /* istanbul ignore next */showTableFilter(data) {
+            dispatch( /* istanbul ignore next */(0, _filterAction.showTableFilter)(data));
+        },
+        filterApplied: function /* istanbul ignore next */filterApplied(data) {
+            dispatch( /* istanbul ignore next */(0, _filterAction.filterApplied)(data));
+        },
+        setTextBoxStatus: function /* istanbul ignore next */setTextBoxStatus(data) {
+            dispatch( /* istanbul ignore next */(0, _auditActions.setTextBoxStatus)(data));
+        },
+        auditfilterState: function /* istanbul ignore next */auditfilterState(data) {
+            dispatch( /* istanbul ignore next */(0, _filterAction.auditfilterState)(data));
+        },
+        toggleAuditFilter: function /* istanbul ignore next */toggleAuditFilter(data) {
+            dispatch( /* istanbul ignore next */(0, _filterAction.toggleAuditFilter)(data));
+        },
+        setAuditSpinner: function /* istanbul ignore next */setAuditSpinner(data) {
+            dispatch( /* istanbul ignore next */(0, _auditActions2.setAuditSpinner)(data));
+        } };
+
+};
+
+AuditFilter.PropTypes = {
+    showFilter: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    auditSpinner: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    totalAudits: /* istanbul ignore next */_react2.default.PropTypes.number,
+    showTableFilter: /* istanbul ignore next */_react2.default.PropTypes.func,
+    filterApplied: /* istanbul ignore next */_react2.default.PropTypes.func,
+    auditFilterState: /* istanbul ignore next */_react2.default.PropTypes.object,
+    auditFilterStatus: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    setTextBoxStatus: /* istanbul ignore next */_react2.default.PropTypes.func }; /* istanbul ignore next */exports.default =
+
+
+
+/* istanbul ignore next */(0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(AuditFilter);

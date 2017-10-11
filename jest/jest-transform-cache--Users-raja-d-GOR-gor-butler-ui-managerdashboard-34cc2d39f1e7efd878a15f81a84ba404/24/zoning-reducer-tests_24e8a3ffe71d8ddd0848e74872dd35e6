@@ -1,0 +1,46 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_zoningReducer = require('../../../reducers/zoningReducer');
+var /* istanbul ignore next */_frontEndConstants = require('../../../constants/frontEndConstants'); /* istanbul ignore next */var CONSTANTS = _interopRequireWildcard(_frontEndConstants); /* istanbul ignore next */function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}
+
+describe('Zoning reducer', () => {
+
+  it('should handle ZONE_DATA true', () => {
+    const data = {
+      "header_data": {
+        "zones_data": {
+          "total_zones": 20,
+          "active_zones": 0 },
+
+        "emergency_data": {
+          "emergency_on": true,
+          "emergency_type": "stop" } },
+
+
+      "resource_type": "zones" };
+
+    const expectedZoneData = {
+      "total_zones": 20,
+      "active_zones": 0 };
+
+    const expectedEmergencyData = {
+      "emergency_on": true,
+      "emergency_type": "stop" };
+
+
+    expect(
+    /* istanbul ignore next */(0, _zoningReducer.zoningReducer)({
+      "hasDataChanged": false },
+    {
+      type: CONSTANTS.RECIEVE_ZONE_DATA,
+      data })).
+
+    toEqual(
+    {
+      "hasDataChanged": true,
+      "zoneHeader": expectedZoneData,
+      "emergencyData": expectedEmergencyData });
+
+
+
+
+  });
+});

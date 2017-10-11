@@ -1,0 +1,162 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ResponseParse = ResponseParse;var /* istanbul ignore next */_responseAction = require('../actions/responseAction');var /* istanbul ignore next */_frontEndConstants = require('../constants/frontEndConstants');var /* istanbul ignore next */_backEndConstants = require('../constants/backEndConstants');var /* istanbul ignore next */_socketActions = require('../actions/socketActions');var /* istanbul ignore next */_tabActions = require('../actions/tabActions');var /* istanbul ignore next */_spinnerAction = require('../actions/spinnerAction');var /* istanbul ignore next */_inventoryActions = require('../actions/inventoryActions');var /* istanbul ignore next */_auditActions = require('../actions/auditActions');var /* istanbul ignore next */_sysOverViewActions = require('../actions/sysOverViewActions');var /* istanbul ignore next */_endSession = require('./endSession');var /* istanbul ignore next */_zoningActions = require('../actions/zoningActions');var /* istanbul ignore next */_sysControllersActions = require('../actions/sysControllersActions');function ResponseParse(store, res)
+{
+	if (res.alert_data)
+	{
+		/* istanbul ignore next */(0, _endSession.endSession)(store);
+		return;
+	}
+	if (!res.resource_type) {
+		store.dispatch( /* istanbul ignore next */(0, _socketActions.wsOnMessageAction)(res));
+		return;
+	}
+	switch (res.resource_type) {
+
+
+		case /* istanbul ignore next */_backEndConstants.PARSE_PPS:
+			store.dispatch( /* istanbul ignore next */(0, _responseAction.recievePPSperformance)(res));
+			store.dispatch( /* istanbul ignore next */(0, _spinnerAction.setPpsSpinner)(false));
+			store.dispatch( /* istanbul ignore next */(0, _spinnerAction.setPpsFilterSpinner)(false));
+			break;
+		case /* istanbul ignore next */_backEndConstants.PARSE_BUTLERS:
+			store.dispatch( /* istanbul ignore next */(0, _spinnerAction.setButlerSpinner)(false));
+			store.dispatch( /* istanbul ignore next */(0, _spinnerAction.setButlerFilterSpinner)(false));
+			store.dispatch( /* istanbul ignore next */(0, _responseAction.receiveButlersData)(res));
+			break;
+		case /* istanbul ignore next */_backEndConstants.PARSE_AUDIT:
+			store.dispatch( /* istanbul ignore next */(0, _tabActions.recieveAuditStatus)(res));
+			//store.dispatch(recieveZoningData(res));
+			break;
+		case /* istanbul ignore next */_backEndConstants.PARSE_AUDIT_AGG:
+			store.dispatch( /* istanbul ignore next */(0, _responseAction.receiveAuditData)(res));
+			store.dispatch( /* istanbul ignore next */(0, _auditActions.setAuditSpinner)(false));
+			break;
+		case /* istanbul ignore next */_backEndConstants.PARSE_PUT:
+			store.dispatch( /* istanbul ignore next */(0, _responseAction.receivePutData)(res));
+			break;
+		case /* istanbul ignore next */_backEndConstants.PARSE_CHARGERS:
+			store.dispatch( /* istanbul ignore next */(0, _responseAction.receiveChargersData)(res));
+			store.dispatch( /* istanbul ignore next */(0, _spinnerAction.setCsSpinner)(false));
+			store.dispatch( /* istanbul ignore next */(0, _spinnerAction.setCsFilterSpinner)(false));
+			break;
+		case /* istanbul ignore next */_backEndConstants.PARSE_INVENTORY_HISTORY:
+			if (res.header_data)
+			{
+				store.dispatch( /* istanbul ignore next */(0, _tabActions.recieveInventoryStatus)(res));
+			} else
+
+			{
+				store.dispatch( /* istanbul ignore next */(0, _inventoryActions.receiveInventoryHistoryData)(res));
+				store.dispatch( /* istanbul ignore next */(0, _inventoryActions.setInventorySpinner)(false));
+
+			}
+			break;
+		case /* istanbul ignore next */_backEndConstants.PARSE_ZONING:
+			if (res.header_data) {
+				store.dispatch( /* istanbul ignore next */(0, _zoningActions.recieveZoningData)(res));
+			} else
+			{
+				store.dispatch( /* istanbul ignore next */(0, _zoningActions.recieveZoningData)(res));
+				store.dispatch( /* istanbul ignore next */(0, _sysOverViewActions.recieveSysOverViewData)(res));
+			}
+			//store.dispatch(recieveControllerData(res));
+			break;
+		case /* istanbul ignore next */_backEndConstants.PARSE_CONTROLLERS:
+			store.dispatch( /* istanbul ignore next */(0, _sysControllersActions.recieveControllerData)(res));
+			break;
+		case /* istanbul ignore next */_backEndConstants.PARSE_INVENTORY_TODAY:
+			if (res.header_data)
+			{
+				store.dispatch( /* istanbul ignore next */(0, _tabActions.recieveInventoryStatus)(res));
+			} else
+
+			{
+				store.dispatch( /* istanbul ignore next */(0, _inventoryActions.receiveInventoryTodayData)(res));
+				store.dispatch( /* istanbul ignore next */(0, _inventoryActions.setInventorySpinner)(false));
+
+			}
+			break;
+		case /* istanbul ignore next */_backEndConstants.PARSE_ORDERS:
+			if (res.header_data)
+			{
+				store.dispatch( /* istanbul ignore next */(0, _tabActions.recieveOrdersStatus)(res));
+			} else
+
+			{
+				store.dispatch( /* istanbul ignore next */(0, _spinnerAction.setWavesSpinner)(false));
+				store.dispatch( /* istanbul ignore next */(0, _responseAction.receiveOrdersData)(res));
+				store.dispatch( /* istanbul ignore next */(0, _spinnerAction.setWavesFilterSpinner)(false));
+			}
+			break;
+		case /* istanbul ignore next */_backEndConstants.PARSE_PPA_THROUGHPUT:
+			store.dispatch( /* istanbul ignore next */(0, _responseAction.receiveThroughputData)(res));
+			break;
+		case /* istanbul ignore next */_backEndConstants.HISTOGRAM_DETAILS:
+			store.dispatch( /* istanbul ignore next */(0, _responseAction.recieveHistogramData)(res));
+			break;
+		case /* istanbul ignore next */_backEndConstants.SYSTEM_CHARGERS_DETAILS:
+			store.dispatch( /* istanbul ignore next */(0, _responseAction.recieveChargersDetail)(res));
+			break;
+		case /* istanbul ignore next */_backEndConstants.SYSTEM_BUTLERS_DETAILS:
+			store.dispatch( /* istanbul ignore next */(0, _responseAction.recieveButlersDetail)(res));
+			break;
+		case /* istanbul ignore next */_backEndConstants.SYSTEM_PPS_DETAILS:
+			store.dispatch( /* istanbul ignore next */(0, _responseAction.recievePPSDetail)(res));
+			break;
+		case /* istanbul ignore next */_backEndConstants.PPS_DETAIL:
+			store.dispatch( /* istanbul ignore next */(0, _responseAction.recievePPSperformance)(res));
+			break;
+		case /* istanbul ignore next */_backEndConstants.USER_DATA:
+			if (res.header_data)
+			{
+				store.dispatch( /* istanbul ignore next */(0, _tabActions.recieveUsersStatus)(res));
+			} else
+
+			{
+				store.dispatch( /* istanbul ignore next */(0, _responseAction.recieveUserDetails)(res));
+				store.dispatch( /* istanbul ignore next */(0, _spinnerAction.userFilterApplySpinner)(false));
+			}
+			break;
+		case /* istanbul ignore next */_backEndConstants.PARSE_OVERVIEW:
+			store.dispatch( /* istanbul ignore next */(0, _tabActions.recieveOverviewStatus)(res));
+			break;
+		case /* istanbul ignore next */_backEndConstants.PARSE_SYSTEM:
+			store.dispatch( /* istanbul ignore next */(0, _tabActions.recieveSystemStatus)(res));
+			break;
+		case /* istanbul ignore next */_backEndConstants.PARSE_INVENTORY:
+			store.dispatch( /* istanbul ignore next */(0, _tabActions.recieveInventoryStatus)(res));
+			break;
+		case /* istanbul ignore next */_backEndConstants.PARSE_STATUS:
+			store.dispatch( /* istanbul ignore next */(0, _tabActions.recieveStatus)(res));
+			break;
+		case 'orders':
+			store.dispatch( /* istanbul ignore next */(0, _spinnerAction.setWavesFilterSpinner)(false));
+			break;
+
+		case /* istanbul ignore next */_frontEndConstants.EMERGENCY:
+			store.dispatch( /* istanbul ignore next */(0, _responseAction.recievefireHazardDetails)(res));
+			if (res.complete_data[0].emergency_type === /* istanbul ignore next */_frontEndConstants.EMERGENCY_FIRE)
+			store.dispatch( /* istanbul ignore next */(0, _tabActions.setFireHazrdFlag)(false));
+			break;
+		default:
+			console.log("in Response Parser");}
+
+}

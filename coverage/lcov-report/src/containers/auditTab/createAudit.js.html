@@ -1,0 +1,971 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/containers/auditTab/createAudit.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/containers/auditTab</a> createAudit.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/117</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/88</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/34</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/113</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React  from 'react';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+import { FormattedMessage } from 'react-intl'; 
+import { resetForm,validateSKU,validateLOC,validateSKUcode, validateSKUcodeSpinner } from '../../actions/validationActions'; 
+import {setAuditType,resetAuditType,auditValidatedAttributes} from '../../actions/auditActions';
+import {userRequest} from '../../actions/userActions';
+import { connect } from 'react-redux';
+import { ERROR,SKU,LOCATION,CREATE_AUDIT,APP_JSON,POST, GET, VALIDATE_SKU_ID, VALID_SKU, NO_ATTRIBUTE_SKU, SKU_NOT_EXISTS,NO_SKU_VALIDATION,WATING_FOR_VALIDATION } from '../../constants/frontEndConstants';
+import { AUDIT_URL ,SKU_VALIDATION_URL} from '../../constants/configConstants';
+import FieldError from '../../components/fielderror/fielderror';
+import { locationStatus, skuStatus } from '../../utilities/fieldCheck';
+import SearchDropdown from '../../components/dropdown/searchDropdown';<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+&nbsp;
+&nbsp;
+class CreateAudit extends React.Component{
+<span class="fstat-no" title="function not covered" >  co</span>nstructor(props) 
+  {
+<span class="cstat-no" title="statement not covered" >      super(props)</span>; 
+      var selectedList=<span class="cstat-no" title="statement not covered" >[]; </span>
+<span class="cstat-no" title="statement not covered" >      this.state={selected:selectedList,confirmedSku:null,currentSku:""}</span>
+  }
+<span class="fstat-no" title="function not covered" >  co</span>mponentWillUnmount()
+  {
+<span class="cstat-no" title="statement not covered" >    this.props.resetAuditType();</span>
+<span class="cstat-no" title="statement not covered" >    this.props.resetForm();            </span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  co</span>mponentWillMount() {
+&nbsp;
+    var initialSkuInfo={}<span class="cstat-no" title="statement not covered" >, i</span>nitialAttributes;
+    var selectedList=[]<span class="cstat-no" title="statement not covered" >; </span>
+<span class="cstat-no" title="statement not covered" >    this.state={selected:selectedList}</span>
+<span class="cstat-no" title="statement not covered" >    this.selectedList=[];</span>
+<span class="cstat-no" title="statement not covered" >    this.noSkuValidation=true;</span>
+<span class="cstat-no" title="statement not covered" >    this.props.validateSKU(initialSkuInfo);</span>
+<span class="cstat-no" title="statement not covered" >    this.props.validateSKUcodeSpinner(false);</span>
+<span class="cstat-no" title="statement not covered" >    this.props.auditValidatedAttributes(initialAttributes)</span>
+  }
+<span class="fstat-no" title="function not covered" >  _r</span>emoveThisModal() {
+<span class="cstat-no" title="statement not covered" >    this.props.removeModal();</span>
+  }
+<span class="fstat-no" title="function not covered" >  co</span>mponentWillReceiveProps(nextProps){
+<span class="cstat-no" title="statement not covered" >    if(!nextProps.auth_token)</span>
+    {
+<span class="cstat-no" title="statement not covered" >      this._removeThisModal();</span>
+    }
+  }
+<span class="fstat-no" title="function not covered" >  _s</span>electedAttributes(selectedList) {
+<span class="cstat-no" title="statement not covered" >    this.setState({selected:selectedList});</span>
+  }
+<span class="fstat-no" title="function not covered" >  _v</span>alidSku() {
+    var initialAttributes;
+    let urlData={<span class="cstat-no" title="statement not covered" ></span>
+         'url': SKU_VALIDATION_URL + this.skuId.value,
+         'method':GET,
+         'cause': VALIDATE_SKU_ID,
+         'token': this.props.auth_token,
+         'contentType':APP_JSON
+        }
+<span class="cstat-no" title="statement not covered" >      this.props.auditValidatedAttributes(initialAttributes)</span>
+<span class="cstat-no" title="statement not covered" >      this.props.validateSKUcodeSpinner(true)</span>;
+<span class="cstat-no" title="statement not covered" >      this.props.validateSKUcode(urlData)</span>;
+<span class="cstat-no" title="statement not covered" >      this.noSkuValidation=false;</span>
+<span class="cstat-no" title="statement not covered" >      this.setState({confirmedSku:this.skuId.value})</span>
+  }
+<span class="fstat-no" title="function not covered" >  _c</span>heckSku(skuId){
+    let skuInfo;
+<span class="cstat-no" title="statement not covered" >    skuInfo=skuStatus(skuId);</span>
+<span class="cstat-no" title="statement not covered" >    this.props.validateSKU(skuInfo);</span>
+<span class="cstat-no" title="statement not covered" >    return skuInfo.type;</span>
+   }  
+<span class="fstat-no" title="function not covered" >  _c</span>heckLocation(locId){
+    let locInfo;
+<span class="cstat-no" title="statement not covered" >    locInfo=locationStatus(locId);</span>
+<span class="cstat-no" title="statement not covered" >    this.props.validateLoc(locInfo);</span>
+<span class="cstat-no" title="statement not covered" >    return locInfo.type;</span>
+   }  
+<span class="fstat-no" title="function not covered" >  _c</span>heckType(){
+    let op,md;
+<span class="cstat-no" title="statement not covered" >    op=this.sku;</span>
+<span class="cstat-no" title="statement not covered" >    md=this.location;</span>
+<span class="cstat-no" title="statement not covered" >    if(op.checked)</span>
+    {
+<span class="cstat-no" title="statement not covered" >            this.props.setAuditType(op.va</span>lue);
+    }
+<span class="cstat-no" title="statement not covered" >    else if(md.checked)</span>
+    {
+<span class="cstat-no" title="statement not covered" >            this.props.setAuditType(md.va</span>lue);
+    }
+  }
+<span class="fstat-no" title="function not covered" >  _h</span>andleAddaudit(e)
+  {
+<span class="cstat-no" title="statement not covered" >    e.preventDefault();</span>
+    let op,md,sku,loc,formdata;
+<span class="cstat-no" title="statement not covered" >    op=this.sku;</span>
+<span class="cstat-no" title="statement not covered" >    md=this.location;</span>
+<span class="cstat-no" title="statement not covered" >    sku=this.skuId.value;</span>
+<span class="cstat-no" title="statement not covered" >    loc=this.locationId.value;</span>
+<span class="cstat-no" title="statement not covered" >    if((this.skuState=== NO_ATTRIBUTE_SKU || !this.state.selected.length) &amp;&amp; this.props.auditType!==LOCATION) //if sku has no attributes || sku has attributes but not </span>
+    {                                                                     //doing audit by pdfa
+      if<span class="cstat-no" title="statement not covered" >(!this._checkSku(sku))</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+      fo<span class="cstat-no" title="statement not covered" >rmdata={</span>
+         audit_param_type: op.value,
+         audit_param_value: sku 
+      };
+    }
+<span class="cstat-no" title="statement not covered" >    else if(this.skuState=== VALID_SKU &amp;&amp; this.state.selected.length) { //sku has attributes and doing audit by pdfa</span>
+<span class="cstat-no" title="statement not covered" >      formdata={}</span>
+<span class="cstat-no" title="statement not covered" >      formdata["audit_param_type"]="pdfa";</span>
+<span class="cstat-no" title="statement not covered" >      formdata["audit_param_value"]={}</span>
+<span class="cstat-no" title="statement not covered" >      formdata["audit_param_value"]["product_sku"]=sku;</span>
+<span class="cstat-no" title="statement not covered" >      formdata["audit_param_value"]["pdfa_values"]={}</span>
+<span class="cstat-no" title="statement not covered" >      formdata["audit_param_value"]["pdfa_values"][this.keys]=this.state.selected;</span>
+    } 
+    
+    else
+    {
+<span class="cstat-no" title="statement not covered" >      if(!this._checkLocation(loc))</span>
+<span class="cstat-no" title="statement not covered" >        return</span>;
+<span class="cstat-no" title="statement not covered" >      formdata={</span>
+         audit_param_type: md.value,
+         audit_param_value: loc
+      };
+    } 
+    let userData={<span class="cstat-no" title="statement not covered" ></span>
+                'url':AUDIT_URL,
+                'formdata':formdata,
+                'method':POST,
+                'cause':CREATE_AUDIT,
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
+                'token':this.props.auth_token
+    }
+<span class="cstat-no" title="statement not covered" >    this.props.userRequest(userData);</span>
+<span class="cstat-no" title="statement not covered" >    this.props.removeModal();</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  _c</span>laculateSkuState(processedSkuResponse) {
+    var skuState=(t<span class="cstat-no" title="statement not covered" >his.noSkuValidation?NO_SKU_VALIDATION:(!processedSkuResponse.isValid?SKU_NOT_EXISTS:(pro<span class="branch-0 cbranch-no" title="branch not covered" >cessedSkuResponse.hasAttribute?VALID_SKU:NO_ATTRIBUTE_SKU)));<span class="branch-0 cbranch-no" title="branch not covered" ></span></span></span>
+<span class="cstat-no" title="statement not covered" >    skuState=(this.props.skuValidationResponse?WATING_FOR_VALIDATION:skuState);<span class="branch-0 cbranch-no" title="branch not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" >    this.skuState=skuState;</span>
+<span class="cstat-no" title="statement not covered" >    return skuState;</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  _p</span>rocessSkuAttributes() {
+    
+    var keys=[]<span class="cstat-no" title="statement not covered" >, h</span>asAttribute=fal<span class="cstat-no" title="statement not covered" >se, is</span>Valid=fals<span class="cstat-no" title="statement not covered" >e;</span>
+    var skuAttributeData={k<span class="cstat-no" title="statement not covered" >eys:keys, hasAttribute: hasAttribute, isValid:isValid};</span>
+<span class="cstat-no" title="statement not covered" >    if(this.props.skuAttributes &amp;&amp; this.props.skuAttributes.audit_attributes_values) {</span>
+<span class="cstat-no" title="statement not covered" >        isValid=true;</span>
+<span class="cstat-no" title="statement not covered" >        for (var key in this.props.skuAttributes.audit_attributes_values) {</span>
+<span class="cstat-no" title="statement not covered" >          if (this.props.skuAttributes.audit_attributes_values.hasOwnProperty(key)) {</span>
+<span class="cstat-no" title="statement not covered" >            keys.push(key)</span>;
+<span class="cstat-no" title="statement not covered" >            if(this.props.skuAttributes.audit_attributes_values[key].length) {</span>
+<span class="cstat-no" title="statement not covered" >              hasAttribute=true;</span>
+            }
+          }
+        }
+    }
+<span class="cstat-no" title="statement not covered" >    skuAttributeData={keys:keys, hasAttribute: hasAttribute, isValid:isValid};</span>
+<span class="cstat-no" title="statement not covered" >    this.keys=keys[0]; //</span> harcoding since backend support only one entry
+<span class="cstat-no" title="statement not covered" >    return skuAttributeData;</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  _s</span>earchDropdownEntries(skuState,processedSkuResponse) {
+<span class="cstat-no" title="statement not covered" >    if(skuState=== VALID_SKU &amp;&amp; processedSkuResponse.keys){</span>
+      var key=pr<span class="cstat-no" title="statement not covered" >ocessedSkuResponse.keys[0]; /</span>/not generic need to change in version 2 of pdfa
+      var dropdownDataField={v<span class="cstat-no" title="statement not covered" >alue:""},dropd</span>ownData=[];<span class="cstat-no" title="statement not covered" ></span>
+      var skuAttributes=th<span class="cstat-no" title="statement not covered" >is.props.skuAttributes.audit_attributes_values[key];</span>
+<span class="cstat-no" title="statement not covered" >      for (var i=skuAttributes.length - 1; i &gt;= 0; i--) {</span>
+<span class="cstat-no" title="statement not covered" >        dropdownDataField.value=skuAttributes[i];</span>
+<span class="cstat-no" title="statement not covered" >        dropdownData.push(dropdownDataField);</span>
+<span class="cstat-no" title="statement not covered" >        dropdownDataField={value:""};</span>
+      }
+<span class="cstat-no" title="statement not covered" >      return dropdownData;</span>
+    }
+  }
+<span class="fstat-no" title="function not covered" >  _c</span>aptureQuery(e) {
+<span class="cstat-no" title="statement not covered" >    if(e.target.value) {</span>
+      var emptyList=[]<span class="cstat-no" title="statement not covered" >;</span>
+<span class="cstat-no" title="statement not covered" >      this.setState({currentSku:e.target.value,selected:emptyList})</span>
+    }
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  re</span>nder()
+  {
+      let validSkuMessg=&lt;FormattedMessage id="audi<span class="cstat-no" title="statement not covered" >t.valid.sku" description='text for valid sku' defaultMessage='SKU confirmed'/&gt;;</span>
+      let invalidSkuMessg=&lt;FormattedMessage id="audi<span class="cstat-no" title="statement not covered" >t.invalid.sku" description='text for invalid sku' defaultMessage='Please enter correct SKU number'/&gt;;</span>
+      let validSkuNoAtriMessg=&lt;FormattedMessage id="audi<span class="cstat-no" title="statement not covered" >t.noAtrributes.sku" description='text for valid sku with no attributed' defaultMessage='SKU confirmed but no Box Id found'/&gt;;</span>
+      var processedSkuResponse=<span class="cstat-no" title="statement not covered" >this._processSkuAttributes();</span>
+      var skuState=<span class="cstat-no" title="statement not covered" >this._claculateSkuState(processedSkuResponse);</span>
+      var dropdownData=<span class="cstat-no" title="statement not covered" >this._searchDropdownEntries(skuState,processedSkuResponse);</span>
+      var confirmedSkuNotChanged=<span class="cstat-no" title="statement not covered" >(this.state.confirmedSku===this.state.currentSku?true:false)</span>
+      
+<span class="cstat-no" title="statement not covered" >      return (</span>
+        &lt;div&gt;
+          &lt;div className="gor-modal-content"&gt;
+            &lt;div className='gor-modal-head'&gt;
+              &lt;div className='gor-usr-add'&gt;&lt;FormattedMessage id="audit.add.heading" description='Heading for add audit' 
+            defaultMessage='Create new audit task'/&gt;
+                          &lt;div className='gor-sub-head'&gt;&lt;FormattedMessage id="audit.add.subheading" description='Subheading for add audit' 
+            defaultMessage='Select and enter details below to create a new audit task'/&gt;&lt;/div&gt;
+              &lt;/div&gt;
+              &lt;span className="close" onClick={this._removeThisModal.bind(this)}&gt;×&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div className='gor-modal-body'&gt;
+            &lt;form action="#"  id="createauditForm" ref={node=&gt; { this.addauditForm=node }} <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+                onSubmit={<span class="fstat-no" title="function not covered" >(e</span>)=&gt;<span class="cstat-no" title="statement not covered" > this._handleAddaudit(e)</span>}&gt;
+&nbsp;
+            &lt;div className='gor-usr-form'&gt;
+            &lt;div className='gor-usr-details'&gt;
+            &lt;div className='gor-usr-hdlg'&gt;&lt;FormattedMessage id="audit.add.auditdetails.heading" description='Text for audit details heading' 
+            defaultMessage='Select audit type by'/&gt;&lt;/div&gt;
+              &lt;div className='gor-audit-field'&gt;              
+                
+              &lt;/div&gt;
+            
+                &lt;div className='gor-role'&gt;
+                &lt;input type="radio"  name='role' onChange={this._checkType.bind(this)} defaultChecked value={SKU} ref={node=&gt; { this.sku=node }} /&gt;&lt;span className='gor-usr-hdsm'&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+                &lt;FormattedMessage id="audit.add.typedetails.sku" description='Text for sku' 
+            defaultMessage='Audit by SKU code'/&gt; &lt;/span&gt;
+                &lt;/div&gt;
+                &lt;div className='gor-role'&gt;
+                &lt;input type="radio" value={LOCATION} onChange={this._checkType.bind(this)} name="role" ref={node=&gt; { this.location=node }} /&gt;&lt;span className='gor-usr-hdsm'&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+                &lt;FormattedMessage id="audit.add.typedetails.location" description='Text for location' 
+            defaultMessage='Audit by Location code'/&gt;&lt;/span&gt;
+                &lt;/div&gt;
+                
+            &lt;/div&gt;
+            
+            &lt;div className='gor-usr-details'&gt;
+            &lt;div style={{'display':this.props.auditType===LOCATION?'none':'block'}}&gt;
+             &lt;div className='gor-usr-hdsm'&gt;&lt;FormattedMessage id="audit.add.sku.heading" description='Text for SKU heading' 
+            defaultMessage='Enter SKU code'/&gt;&lt;/div&gt;
+              &lt;div className="gor-audit-input-wrap"&gt;
+                &lt;input className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} placeholder="e.g. 46978072" id="skuid"  ref={node=&gt; { this.skuId=node }} onChange={this._captureQuery.bind(this)}/&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+                &lt;div className={skuState===SKU_NOT_EXISTS?"gor-login-error":((skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU )&amp;&amp; confirmedSkuNotChanged?"gor-verified-icon":"")}/&gt;
+              &lt;/div&gt;
+              &lt;div className={"gor-sku-validation-btn-wrap" + (this.props.skuValidationResponse?" gor-disable-content":"")}&gt;
+                &lt;button className="gor-auditCreate-btn" type="button" onClick={this._validSku.bind(this)}&gt;&lt;FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
+                        defaultMessage='Validate'/&gt;&lt;/button&gt;
+              &lt;/div&gt;
+              &lt;div className={skuState===SKU_NOT_EXISTS?"gor-sku-error":"gor-sku-valid"}&gt;
+                {confirmedSkuNotChanged?(skuState===SKU_NOT_EXISTS?invalidSkuMessg:(skuState===VALID_SKU?validSkuMessg:(skuState===NO_ATTRIBUTE_SKU?validSkuNoAtriMessg:""))):""}
+              &lt;/div&gt;
+              {skuState===NO_ATTRIBUTE_SKU ?"":<span class="branch-0 cbranch-no" title="branch not covered" ></span>
+                &lt;div className={"gor-searchDropdown-audit-wrap" + (skuState!==VALID_SKU || !confirmedSkuNotChanged?" gor-disable-content":"")}&gt;
+                  &lt;div className='gor-usr-hdsm'&gt;&lt;FormattedMessage id="audit.dropdown.heading" description='Text for dropdown heading' 
+                       defaultMessage='Choose Box Id (Optional)'/&gt;&lt;/div&gt;
+                  &lt;SearchDropdown list={dropdownData} selectedItems={this._selectedAttributes.bind(this)}/&gt;
+                &lt;/div&gt;}
+            &lt;/div&gt;
+&nbsp;
+            &lt;div style={{'display':this.props.auditType===LOCATION?'block':'none'}}&gt;
+             &lt;div className='gor-usr-hdsm'&gt;&lt;FormattedMessage id="audit.add.location.heading" description='Text for location heading' 
+            defaultMessage='Enter Location'/&gt;&lt;/div&gt;
+              &lt;div className='gor-sub-head'&gt;&lt;FormattedMessage id="audit.add.location.subheading" description='Subtext for enter location' 
+            defaultMessage='Format: (XXX.X.X.XX)'/&gt;&lt;/div&gt;
+              &lt;input className={"gor-audit-fdlg"+(this.props.locCheck.type=== ERROR ? ' gor-input-error':' gor-input-ok')} placeholder="e.g. 132.0.A.47" id="locationid"  ref={node=&gt; { this.locationId=node }} /&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+              {this.props.locCheck.type===ERROR?&lt;FieldError txt={this.props.locCheck.msg} /&gt;:''}<span class="branch-0 cbranch-no" title="branch not covered" ></span>
+            &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;p className='gor-submit'&gt;
+             &lt;button className={"gor-add-btn" + ((processedSkuResponse.isValid &amp;&amp; confirmedSkuNotChanged)|| this.props.auditType===LOCATION?"":" gor-disable-content")}&gt;&lt;FormattedMessage id="audits.add.password.button" description='Text for add audit button' 
+            defaultMessage='Create audit'/&gt;&lt;/button&gt;
+            &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;/form&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      );
+    }
+  }
+&nbsp;
+function <span class="fstat-no" title="function not covered" >mapStateToProps(</span>state, ownProps){
+<span class="cstat-no" title="statement not covered" >  return {</span>
+      skuValidationResponse: state.auditInfo.skuValidationSpinner || false,
+      auditType:  state.auditInfo.auditType  || {},
+      skuCheck: state.appInfo.skuInfo || {},
+      locCheck: state.appInfo.locInfo || {},
+      auth_token:state.authLogin.auth_token,
+      skuAttributes: state.auditInfo.skuAttributes
+  };
+}
+&nbsp;
+var mapDispatchToProps=fu<span class="cstat-no" title="statement not covered" >nction(di<span class="fstat-no" title="function not covered" >spatch){</span></span>
+<span class="cstat-no" title="statement not covered" >  return {</span>
+    userRequest: function(data){ dispatch(userReques<span class="fstat-no" title="function not covered" >t(data)); },<span class="cstat-no" title="statement not covered" ></span></span>
+    setAuditType: function(data){ dispatch(setAuditTy<span class="fstat-no" title="function not covered" >pe(data)); },<span class="cstat-no" title="statement not covered" ></span></span>
+    resetAuditType: function(data){ dispatch(resetAudit<span class="fstat-no" title="function not covered" >Type(data)); },    <span class="cstat-no" title="statement not covered" ></span></span>
+    validateSKU: function(data){ dispatch(validateSK<span class="fstat-no" title="function not covered" >U(data)); },<span class="cstat-no" title="statement not covered" ></span></span>
+    validateLoc: function(data){ dispatch(validateLO<span class="fstat-no" title="function not covered" >C(data)); },            <span class="cstat-no" title="statement not covered" ></span></span>
+    resetForm:   function(){ dispatch(resetForm())<span class="fstat-no" title="function not covered" >; },<span class="cstat-no" title="statement not covered" ></span></span>
+    validateSKUcode: function(data){dispatch(validateSKU<span class="fstat-no" title="function not covered" >code(data));},<span class="cstat-no" title="statement not covered" ></span></span>
+    validateSKUcodeSpinner: function(data){dispatch(validateSKU<span class="fstat-no" title="function not covered" >codeSpinner(data));},<span class="cstat-no" title="statement not covered" ></span></span>
+    auditValidatedAttributes: function(data){dispatch(auditValida<span class="fstat-no" title="function not covered" >tedAttributes(data));}<span class="cstat-no" title="statement not covered" ></span></span>
+  }
+};
+&nbsp;
+export default connect(mapStateToProps,mapDispatchToProps)(CreateAudit);
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Oct 11 2017 16:54:25 GMT+0530 (IST)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

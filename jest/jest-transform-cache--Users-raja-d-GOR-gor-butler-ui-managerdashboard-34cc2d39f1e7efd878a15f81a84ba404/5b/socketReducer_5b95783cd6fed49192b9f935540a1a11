@@ -1,0 +1,38 @@
+/* istanbul ignore next */"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+
+
+
+recieveSocketActions = recieveSocketActions;var /* istanbul ignore next */_frontEndConstants = require("../constants/frontEndConstants"); /**
+                                                                                                                                           * @param  {State Object}
+                                                                                                                                           * @param  {Action object}
+                                                                                                                                           * @return {[Object] updated state}
+                                                                                                                                           */function recieveSocketActions(state = {}, action) {switch (action.type) {case /* istanbul ignore next */_frontEndConstants.WS_CONNECTED:return Object.assign({}, state, {
+        "socketConnected": true });
+
+
+
+    case /* istanbul ignore next */_frontEndConstants.WS_END:
+
+      return Object.assign({}, state, {
+        "socketConnected": false,
+        "socketAuthorized": false,
+        "initDataSent": false });
+
+
+    case /* istanbul ignore next */_frontEndConstants.WS_ONMESSAGE:
+      // Handshaking and login successful message.
+      return Object.assign({}, state, {
+        "socketAuthorized": true,
+        "initDataSent": true });
+
+
+    case /* istanbul ignore next */_frontEndConstants.DATA_SUBSCRIPTION_PACKET:
+      return Object.assign({}, state, {
+        "socketDataSubscriptionPacket": action.data });
+
+    default:
+      return state;}
+
+}

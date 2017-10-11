@@ -1,0 +1,37 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+
+operationsLogsReducer = operationsLogsReducer;var /* istanbul ignore next */_frontEndConstants = require('../constants/frontEndConstants');function operationsLogsReducer(state = {}, action) {
+
+
+					switch (action.type) {
+
+										case /* istanbul ignore next */_frontEndConstants.OPERATION_LOG_FETCH:
+
+															return Object.assign({}, state, {
+																				olData: action.data,
+																				hasDataChanged: !state.hasDataChanged,
+																				reportsSpinner: false });
+
+										case /* istanbul ignore next */_frontEndConstants.APPLY_OL_FILTER_FLAG:
+															return Object.assign({}, state, {
+																				filtersApplied: action.data,
+																				filtersModified: !state.filtersModified });
+
+										case /* istanbul ignore next */_frontEndConstants.SET_REPORTS_SPINNER:
+															return Object.assign({}, state, {
+																				reportsSpinner: action.data });
+
+										case /* istanbul ignore next */_frontEndConstants.RECIEVE_WS_OL_DATA:
+															let oldData = state.olWsData || [];
+															return Object.assign({}, state, {
+																				olWsData: oldData.concat(action.data.hits ? action.data.hits.hits : []),
+																				hasDataChanged: !state.hasDataChanged,
+																				reportsSpinner: false });
+
+
+										default:
+															return state;}
+
+}

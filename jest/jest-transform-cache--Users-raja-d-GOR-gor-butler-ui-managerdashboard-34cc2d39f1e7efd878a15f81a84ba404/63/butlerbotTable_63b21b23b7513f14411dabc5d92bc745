@@ -1,0 +1,340 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/containers/systemTabs/butlerbotTable.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_fixedDataTable = require('fixed-data-table');
+var /* istanbul ignore next */_reactDimensions = require('react-dimensions'); /* istanbul ignore next */var _reactDimensions2 = _interopRequireDefault(_reactDimensions);
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_commonFunctionsDataTable = require('../../components/commonFunctionsDataTable');
+
+
+
+
+
+
+
+
+
+
+var /* istanbul ignore next */_frontEndConstants = require('../../constants/frontEndConstants'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+class ButlerBotTable extends /* istanbul ignore next */_react2.default.Component {
+    constructor(props) {
+        super(props);
+        var items = this.props.items || [];
+        var temp = new Array(items ? items.length : 0).fill(false);
+        this._dataList = new /* istanbul ignore next */_commonFunctionsDataTable.tableRenderer(items ? items.length : 0);
+        this._defaultSortIndexes = [];
+        this._dataList.newData = items;
+        var size = this._dataList.getSize();
+        for (var index = 0; index < size; index++) {
+            this._defaultSortIndexes.push(index);
+        }
+        var columnWidth = this.props.containerWidth / this.props.itemNumber;
+        this.state = {
+            sortedDataList: this._dataList,
+            colSortDirs: {},
+            columnWidths: {
+                id: this.props.containerWidth * 0.15,
+                status: this.props.containerWidth * 0.1,
+                current: this.props.containerWidth * 0.25,
+                msu: this.props.containerWidth * 0.1,
+                location: this.props.containerWidth * 0.1,
+                voltage: this.props.containerWidth * 0.3 } };
+
+
+        this._onSortChange = this._onSortChange.bind(this);
+        this._onFilterChange = this._onFilterChange.bind(this);
+        this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        var items = nextProps.items || [];
+        var temp = new Array(items ? items.length : 0).fill(false);
+        this._dataList = new /* istanbul ignore next */_commonFunctionsDataTable.tableRenderer(items ? items.length : 0);
+        this._defaultSortIndexes = [];
+        this._dataList.newData = items;
+        var size = this._dataList.getSize();
+        for (var index = 0; index < size; index++) {
+            this._defaultSortIndexes.push(index);
+        }
+        var columnWidth = nextProps.containerWidth / nextProps.itemNumber;
+        this.state = {
+            sortedDataList: this._dataList,
+            colSortDirs: {},
+            columnWidths: {
+                id: nextProps.containerWidth * 0.1,
+                status: nextProps.containerWidth * 0.1,
+                current: nextProps.containerWidth * 0.25,
+                msu: nextProps.containerWidth * 0.1,
+                location: nextProps.containerWidth * 0.1,
+                voltage: nextProps.containerWidth * 0.35 } };
+
+
+        this._onSortChange = this._onSortChange.bind(this);
+        this._onFilterChange = this._onFilterChange.bind(this);
+        this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+        this._onFilterChange(nextProps.getButlerFilter);
+    }
+
+    _onColumnResizeEndCallback(newColumnWidth, columnKey) {
+        this.setState(({ columnWidths }) => ({
+            columnWidths: /* istanbul ignore next */Object.assign({},
+            columnWidths, {
+                [columnKey]: newColumnWidth }) }));
+
+
+    }
+
+    _onFilterChange(e) {
+        if (e.target && !e.target.value) {
+            this.setState({
+                sortedDataList: this._dataList });
+
+        }
+        var filterField = ["current", "id", "status", "msu", "location"],newData;
+        if (e.target && (e.target.value || e.target.value === "")) {
+            var captureValue = e.target.value;
+            newData = new /* istanbul ignore next */_commonFunctionsDataTable.DataListWrapper( /* istanbul ignore next */(0, _commonFunctionsDataTable.filterIndex)(e, this.state.sortedDataList, filterField), this._dataList);
+
+            this.setState({
+                sortedDataList: newData },
+            function () {
+                this.props.setButlerFilter(captureValue);
+                if (this.props.items && this.props.items.length) {
+                    this._onSortChange(this.props.currentSortState, this.props.currentHeaderOrder);
+                }
+            });
+        } else
+
+        {
+            newData = new /* istanbul ignore next */_commonFunctionsDataTable.DataListWrapper( /* istanbul ignore next */(0, _commonFunctionsDataTable.filterIndex)(e, this.state.sortedDataList, filterField), this._dataList);
+            this.setState({
+                sortedDataList: newData },
+            function () {
+                if (this.props.items && this.props.items.length) {
+                    this._onSortChange(this.props.currentSortState, this.props.currentHeaderOrder);
+                }
+            });
+        }
+    }
+
+
+    _onSortChange(columnKey, sortDir) {
+        if (columnKey === /* istanbul ignore next */_frontEndConstants.GOR_STATUS) {
+            columnKey = /* istanbul ignore next */_frontEndConstants.GOR_STATUS_PRIORITY;
+        }
+        var sortIndexes = this._defaultSortIndexes.slice();
+        if (this.state.sortedDataList._indexMap) {
+            sortIndexes = this.state.sortedDataList._indexMap.slice();
+        }
+        this.setState({
+            sortedDataList: new /* istanbul ignore next */_commonFunctionsDataTable.DataListWrapper( /* istanbul ignore next */(0, _commonFunctionsDataTable.sortData)(columnKey, sortDir, sortIndexes, this._dataList), this._dataList),
+            colSortDirs: {
+                [columnKey]: sortDir } });
+
+
+        this.props.sortHeaderOrder(sortDir);
+        this.props.sortHeaderState(columnKey);
+    }
+
+
+
+    render() {/* istanbul ignore next */var _state =
+        this.state,sortedDataList = _state.sortedDataList,colSortDirs = _state.colSortDirs,columnWidths = _state.columnWidths;
+        var totalBot = sortedDataList.getSize();
+        let pick = this.props.parameters.Pick;
+        let put = this.props.parameters.Put;
+        let charging = this.props.parameters.Charging;
+        let idle = this.props.parameters.Idle;
+        let msuMounted = this.props.parameters.msuMounted;
+        let locations = this.props.parameters.location;
+        let voltage = this.props.parameters.avgVoltage;
+        let onlineBots = this.props.parameters.online;
+        var containerHeight = this.props.containerHeight;
+        var noData = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 153 }, __self: this });
+
+        if (totalBot === 0 || totalBot === undefined || totalBot === null) {
+            noData = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-no-data', __source: { fileName: _jsxFileName, lineNumber: 156 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'butlerbot.table.noData',
+                    description: 'No data message for butlerbot table',
+                    defaultMessage: 'No Butler Bot Found', __source: { fileName: _jsxFileName, lineNumber: 156 }, __self: this }));
+            containerHeight = /* istanbul ignore next */_frontEndConstants.GOR_TABLE_HEADER_HEIGHT;
+        }
+
+        return (
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorTableMainContainer', __source: { fileName: _jsxFileName, lineNumber: 163 }, __self: this },
+
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Table, /* istanbul ignore next */Object.assign({
+                        rowHeight: 50,
+                        rowsCount: sortedDataList.getSize(),
+                        headerHeight: 70,
+                        onColumnResizeEndCallback: this._onColumnResizeEndCallback,
+                        isColumnResizing: false,
+                        width: this.props.containerWidth,
+                        height: containerHeight },
+                    this.props, { __source: { fileName: _jsxFileName, lineNumber: 166 }, __self: this }),
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+                        columnKey: 'id',
+                        header:
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.SortHeaderCell, /* istanbul ignore next */{ onSortChange: this._onSortChange,
+                                sortDir: colSortDirs.id, __source: { fileName: _jsxFileName, lineNumber: 178 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 180 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'ButlerBotTable.TotalBot',
+                                    description: 'Column name for the Bot id in bot table',
+                                    defaultMessage: 'BOTS', __source: { fileName: _jsxFileName, lineNumber: 181 }, __self: this }),
+
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderSubText', __source: { fileName: _jsxFileName, lineNumber: 185 }, __self: this },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'ButlerBotTable.subTotalBot',
+                                        description: 'sub text for totalbot ButlerBotTable',
+                                        defaultMessage: 'Total: {totalBot}',
+                                        values: { totalBot: totalBot ? totalBot : "0" }, __source: { fileName: _jsxFileName, lineNumber: 186 }, __self: this })))),
+
+
+
+
+                        cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.TextCell, /* istanbul ignore next */{ data: sortedDataList, __source: { fileName: _jsxFileName, lineNumber: 194 }, __self: this }),
+                        fixed: true,
+                        width: columnWidths.id,
+                        isResizable: true, __source: { fileName: _jsxFileName, lineNumber: 175 }, __self: this }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+                        columnKey: 'status',
+                        header:
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.SortHeaderCell, /* istanbul ignore next */{ onSortChange: this._onSortChange,
+                                sortDir: colSortDirs.statusPriority, __source: { fileName: _jsxFileName, lineNumber: 202 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 204 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'butlerBot.table.status', description: 'Status for butlerbot',
+                                    defaultMessage: 'STATUS', __source: { fileName: _jsxFileName, lineNumber: 205 }, __self: this }),
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-subStatus-online', __source: { fileName: _jsxFileName, lineNumber: 207 }, __self: this },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 208 }, __self: this },
+                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'ButlerBotTable.status',
+                                            description: 'status for ButlerBotTable',
+                                            defaultMessage: '{onlineBots} Online',
+                                            values: { onlineBots: onlineBots ? onlineBots : '0' }, __source: { fileName: _jsxFileName, lineNumber: 209 }, __self: this }))))),
+
+
+
+
+
+                        cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.StatusCell, /* istanbul ignore next */{ data: sortedDataList, statusKey: 'statusClass', __source: { fileName: _jsxFileName, lineNumber: 218 }, __self: this }),
+                        fixed: true,
+                        width: columnWidths.status,
+                        isResizable: true, __source: { fileName: _jsxFileName, lineNumber: 199 }, __self: this }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+                        columnKey: 'current',
+                        header:
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.SortHeaderCell, /* istanbul ignore next */{ onSortChange: this._onSortChange,
+                                sortDir: colSortDirs.current, __source: { fileName: _jsxFileName, lineNumber: 226 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 228 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'butlerBot.table.currentTask',
+                                    description: 'Current task for butlerbot',
+                                    defaultMessage: 'CURRENT TASK', __source: { fileName: _jsxFileName, lineNumber: 229 }, __self: this }),
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderSubText', __source: { fileName: _jsxFileName, lineNumber: 232 }, __self: this },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'ButlerBotTable.botState',
+                                        description: 'bot state for ButlerBotTable',
+                                        defaultMessage: 'Pick ({pick}) . Put ({put}) . Charging ({charging}) . Idle ({idle})',
+                                        values: {
+                                            pick: pick ? pick : '0',
+                                            put: put ? put : '0',
+                                            charging: charging ? charging : '0',
+                                            idle: idle ? idle : '0' }, __source: { fileName: _jsxFileName, lineNumber: 233 }, __self: this })))),
+
+
+
+
+
+                        cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.TextCell, /* istanbul ignore next */{ data: sortedDataList, __source: { fileName: _jsxFileName, lineNumber: 246 }, __self: this }),
+                        fixed: true,
+                        width: columnWidths.current,
+                        isResizable: true, __source: { fileName: _jsxFileName, lineNumber: 223 }, __self: this }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+                        columnKey: 'msu',
+                        header:
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.SortHeaderCell, /* istanbul ignore next */{ onSortChange: this._onSortChange,
+                                sortDir: colSortDirs.msu, __source: { fileName: _jsxFileName, lineNumber: 254 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 256 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'butlerBot.table.msu', description: 'MSU Status for butlerbot',
+                                    defaultMessage: 'MSU MOUNTED', __source: { fileName: _jsxFileName, lineNumber: 257 }, __self: this }),
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderSubText', __source: { fileName: _jsxFileName, lineNumber: 259 }, __self: this },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'ButlerBotTable.mounted',
+                                        description: 'msu mounted for ButlerBotTable',
+                                        defaultMessage: '{msuMounted} Mounted',
+                                        values: { msuMounted: msuMounted ? msuMounted : '0' }, __source: { fileName: _jsxFileName, lineNumber: 260 }, __self: this })))),
+
+
+
+
+                        cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.TextCell, /* istanbul ignore next */{ data: sortedDataList, __source: { fileName: _jsxFileName, lineNumber: 268 }, __self: this }),
+                        fixed: true,
+                        width: columnWidths.msu,
+                        isResizable: true, __source: { fileName: _jsxFileName, lineNumber: 251 }, __self: this }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+                        columnKey: 'location',
+                        header:
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.SortHeaderCell, /* istanbul ignore next */{ onSortChange: this._onSortChange,
+                                sortDir: colSortDirs.location, __source: { fileName: _jsxFileName, lineNumber: 276 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 278 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'butlerBot.table.location', description: 'Location for butlerbot',
+                                    defaultMessage: 'LOCATION', __source: { fileName: _jsxFileName, lineNumber: 279 }, __self: this }),
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderSubText', __source: { fileName: _jsxFileName, lineNumber: 281 }, __self: this },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'ButlerBotTable.locations',
+                                        description: 'msu Location for ButlerBotTable',
+                                        defaultMessage: '{locations} Locations',
+                                        values: { locations: locations ? locations : '0' }, __source: { fileName: _jsxFileName, lineNumber: 282 }, __self: this })))),
+
+
+
+
+                        cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.TextCell, /* istanbul ignore next */{ data: sortedDataList, __source: { fileName: _jsxFileName, lineNumber: 290 }, __self: this }),
+                        fixed: true,
+                        width: columnWidths.location,
+                        isResizable: true, __source: { fileName: _jsxFileName, lineNumber: 273 }, __self: this }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+                        columnKey: 'voltage',
+                        header:
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.SortHeaderCell, /* istanbul ignore next */{ onSortChange: this._onSortChange,
+                                sortDir: colSortDirs.voltage, __source: { fileName: _jsxFileName, lineNumber: 298 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 300 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'butlerBot.table.voltage', description: 'voltage for butlerbot',
+                                    defaultMessage: 'VOLTAGE', __source: { fileName: _jsxFileName, lineNumber: 301 }, __self: this }),
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderSubText', __source: { fileName: _jsxFileName, lineNumber: 303 }, __self: this },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'ButlerBotTable.avgVoltage',
+                                        description: 'avgVoltage for ButlerBotTable',
+                                        defaultMessage: 'Avg {voltage}',
+                                        values: { voltage: voltage ? voltage : "0 V" }, __source: { fileName: _jsxFileName, lineNumber: 304 }, __self: this })))),
+
+
+
+
+                        cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.TextCell, /* istanbul ignore next */{ data: sortedDataList, __source: { fileName: _jsxFileName, lineNumber: 312 }, __self: this }),
+                        fixed: true,
+                        width: columnWidths.voltage,
+                        isResizable: true, __source: { fileName: _jsxFileName, lineNumber: 295 }, __self: this })),
+
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 318 }, __self: this }, /* istanbul ignore next */' ', noData, /* istanbul ignore next */' ')));
+
+
+    }}
+
+ButlerBotTable.PropTypes = {
+    items: /* istanbul ignore next */_react2.default.PropTypes.array,
+    containerWidth: /* istanbul ignore next */_react2.default.PropTypes.number,
+    itemNumber: /* istanbul ignore next */_react2.default.PropTypes.number,
+    currentHeaderOrder: /* istanbul ignore next */_react2.default.PropTypes.object,
+    sortHeaderState: /* istanbul ignore next */_react2.default.PropTypes.func,
+    lastUpdatedText: /* istanbul ignore next */_react2.default.PropTypes.string,
+    showFilter: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    lastUpdated: /* istanbul ignore next */_react2.default.PropTypes.string,
+    setButlerFilter: /* istanbul ignore next */_react2.default.PropTypes.func,
+    setFilter: /* istanbul ignore next */_react2.default.PropTypes.func,
+    containerHeight: /* istanbul ignore next */_react2.default.PropTypes.number,
+    parameters: /* istanbul ignore next */_react2.default.PropTypes.object,
+    botFilterStatus: /* istanbul ignore next */_react2.default.PropTypes.bool }; /* istanbul ignore next */exports.default =
+
+
+
+/* istanbul ignore next */(0, _reactDimensions2.default)()(ButlerBotTable);

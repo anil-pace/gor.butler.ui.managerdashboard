@@ -1,0 +1,103 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/components/notifications/notifications.js'; /**
+                                                                                                                                                                                                                           * Container for Notifications
+                                                                                                                                                                                                                           * 
+                                                                                                                                                                                                                           */
+var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_resultPane = require('./resultPane'); /* istanbul ignore next */var _resultPane2 = _interopRequireDefault(_resultPane);
+var /* istanbul ignore next */_reactDom = require('react-dom'); /* istanbul ignore next */var _reactDom2 = _interopRequireDefault(_reactDom);
+var /* istanbul ignore next */_notificationSearchPanel = require('./notificationSearchPanel'); /* istanbul ignore next */var _notificationSearchPanel2 = _interopRequireDefault(_notificationSearchPanel);
+var /* istanbul ignore next */_reactIntl = require('react-intl'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+
+
+class Notification extends /* istanbul ignore next */_react2.default.Component {
+	constructor() {
+		super();
+		this.state = {
+			displayResults: false };
+
+		this._handleDocumentClick = this._handleDocumentClick.bind(this);
+	}
+
+	_displayResults(forceClose) {
+		var curState = forceClose ? false : !this.state.displayResults;
+		this.setState({
+			displayResults: curState });
+
+		if (this.props.unreadCount) {
+			this.props.onNotificationCountClick();
+		}
+	}
+	/*methods to bind and unbind handlers for document click*/
+	componentDidMount() {
+		document.addEventListener('click', this._handleDocumentClick, false);
+		document.addEventListener('touchend', this._handleDocumentClick, false);
+	}
+	componentWillUnmount() {
+		document.removeEventListener('click', this._handleDocumentClick, false);
+		document.removeEventListener('touchend', this._handleDocumentClick, false);
+	}
+
+	_handleDocumentClick() {
+		if (! /* istanbul ignore next */_reactDom2.default.findDOMNode(this).contains(event.target)) {
+			this._displayResults(true);
+		}
+	}
+
+	render() {
+		return (
+			/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 50 }, __self: this },
+				/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'notificationBody', onClick: this._displayResults.bind(this, false), __source: { fileName: _jsxFileName, lineNumber: 51 }, __self: this },
+					/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'not-icon-wrap', __source: { fileName: _jsxFileName, lineNumber: 52 }, __self: this },
+						/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'i', /* istanbul ignore next */{ className: 'not-bell', __source: { fileName: _jsxFileName, lineNumber: 53 }, __self: this }),
+						/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: this.props.unreadCount ? "not-count" : "not-count read", __source: { fileName: _jsxFileName, lineNumber: 54 }, __self: this }, this.props.unreadCount))),
+
+
+
+				/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_resultPane2.default, /* istanbul ignore next */{ display: this.state.displayResults, __source: { fileName: _jsxFileName, lineNumber: 58 }, __self: this },
+					/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_notificationSearchPanel2.default, /* istanbul ignore next */{ onPaneSearch: this.props.onPaneSearch, __source: { fileName: _jsxFileName, lineNumber: 59 }, __self: this }),
+					/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'searchResults', onScroll: event => this.props.onScrollHandler(event), __source: { fileName: _jsxFileName, lineNumber: 60 }, __self: this },
+
+						this.props.notificationData.length ? this.props.notificationData.map((tuple, index) =>
+						/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'section', /* istanbul ignore next */{ className: 'row', key: index, __source: { fileName: _jsxFileName, lineNumber: 63 }, __self: this },
+							/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'content', __source: { fileName: _jsxFileName, lineNumber: 64 }, __self: this },
+								/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */{ className: 'title', __source: { fileName: _jsxFileName, lineNumber: 65 }, __self: this }, tuple.title),
+								/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */{ className: 'message', __source: { fileName: _jsxFileName, lineNumber: 66 }, __self: this }, tuple.description),
+								/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 67 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'time', __source: { fileName: _jsxFileName, lineNumber: 67 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedRelative, /* istanbul ignore next */{ updateInterval: 10000, value: new Date(tuple.createTime), __source: { fileName: _jsxFileName, lineNumber: 67 }, __self: this })))),
+
+							/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'status', __source: { fileName: _jsxFileName, lineNumber: 69 }, __self: this }))) :
+
+
+
+						/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'section', /* istanbul ignore next */{ className: 'row', __source: { fileName: _jsxFileName, lineNumber: 73 }, __self: this },
+							/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */{ className: 'no-notification', __source: { fileName: _jsxFileName, lineNumber: 74 }, __self: this }, /* istanbul ignore next */' ', !this.props.searchApplied ?
+								/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'notifications.read.message',
+									description: 'No unread notifications',
+									defaultMessage: 'You have no unread Notifications', __source: { fileName: _jsxFileName, lineNumber: 75 }, __self: this }) :
+								/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'notifications.read.noresult',
+									description: 'No Result Found',
+									defaultMessage: 'No Result Found', __source: { fileName: _jsxFileName, lineNumber: 78 }, __self: this }), /* istanbul ignore next */' '))),
+
+
+					/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'resultFooter', __source: { fileName: _jsxFileName, lineNumber: 83 }, __self: this },
+						/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'section', /* istanbul ignore next */{ className: 'viewAllLink', __source: { fileName: _jsxFileName, lineNumber: 84 }, __self: this },
+							/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'a', /* istanbul ignore next */{ href: 'javascript:void(0)', onClick: this.props.handleViewAllLink, __source: { fileName: _jsxFileName, lineNumber: 85 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'notification.all.link', description: 'View all notifications link', defaultMessage: 'VIEW ALL NOTIFICATIONS', __source: { fileName: _jsxFileName, lineNumber: 85 }, __self: this }), /* istanbul ignore next */' '))))));
+
+
+
+
+
+	}}
+
+
+Notification.propTypes = {
+	unreadCount: /* istanbul ignore next */_react2.default.PropTypes.number,
+	onPaneSearch: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+	notificationData: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.object).isRequired,
+	handleViewAllLink: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+	isLoading: /* istanbul ignore next */_react2.default.PropTypes.bool,
+	searchApplied: /* istanbul ignore next */_react2.default.PropTypes.bool }; /* istanbul ignore next */exports.default =
+
+
+Notification;

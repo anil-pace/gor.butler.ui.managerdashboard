@@ -1,0 +1,111 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_notificationSocketActions = require('../actions/notificationSocketActions');
+var /* istanbul ignore next */_frontEndConstants = require('../constants/frontEndConstants');
+
+
+var /* istanbul ignore next */_configConstants = require('../constants/configConstants');
+var /* istanbul ignore next */_notificationResponseParser = require('../utilities/notificationResponseParser');
+var /* istanbul ignore next */_operationLogsResParser = require('../utilities/operationLogsResParser');
+var /* istanbul ignore next */_sockjsClient = require('sockjs-client'); /* istanbul ignore next */var _sockjsClient2 = _interopRequireDefault(_sockjsClient);
+var /* istanbul ignore next */_webstompClient = require('webstomp-client'); /* istanbul ignore next */var _webstompClient2 = _interopRequireDefault(_webstompClient);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+const notificationSocketMiddleware = function () {
+  var socket = null;
+  var operatorLogWSClient = null;
+
+  const onMessage = (ws, store, module) => frame => {
+    //Parse the JSON message received on the websocket
+
+    var msg = JSON.parse(frame.body);
+    switch (module) {
+      case 'notifications':
+        /* istanbul ignore next */(0, _notificationResponseParser.NotificationResponseParse)(store, msg);
+        break;
+      case 'operations':
+        /* istanbul ignore next */(0, _operationLogsResParser.OLResponseParse)(store, msg);
+        break;
+      default:
+      //do nothing 
+    }
+  };
+
+  const onOpen = (ws, store, token) => evt => {
+    //Send a handshake, or authenticate with remote end
+
+    //Tell the store we're connected
+
+    store.dispatch( /* istanbul ignore next */(0, _notificationSocketActions.wsNotificationResponseAction)(evt.type));
+
+  };
+
+  const onClose = (ws, store) => evt => {
+    //Tell the store we've disconnected
+
+    store.dispatch( /* istanbul ignore next */(0, _notificationSocketActions.wsNotificationEndConnection)());
+  };
+
+
+
+  return store => next => action => {
+    switch (action.type) {
+
+      //The user wants us to connect
+      case /* istanbul ignore next */_frontEndConstants.WS_NOTIFICATION_CONNECT:
+        //Start a new connection to the server
+        if (socket && socket.connected) {
+          socket.disconnect(function () {
+            console.log("disconnected");
+          });
+        }
+        //Send an action that shows a "connecting..." status for now
+        //store.dispatch(actions.connecting());
+
+        //Attempt to connect (we could send a 'failed' action on error)
+        socket = /* istanbul ignore next */_webstompClient2.default.over(new /* istanbul ignore next */_sockjsClient2.default( /* istanbul ignore next */_configConstants.WS_NOTIFICATION_URL));
+        //new WebSocket(WS_URL);
+        socket.connect('', '', onOpen(socket, store, action.token));
+        /*socket.onmessage = onMessage(socket,store);
+                                                                     socket.onclose = onClose(socket,store);
+                                                                     socket.onopen = onOpen(socket,store,action.token);*/
+
+        break;
+
+      //The user wants us to disconnect
+      case /* istanbul ignore next */_frontEndConstants.WS_NOTIFICATION_DISCONNECT:
+        if (socket !== null) {
+          socket.close();
+        }
+        socket = null;
+
+        //Set our state to disconnected
+
+        break;
+
+      //Send the 'SEND_MESSAGE' action down the websocket to the server
+      case /* istanbul ignore next */_frontEndConstants.WS_NOTIFICATION_ONSEND:
+        socket.send(JSON.stringify(action.data));
+        break;
+      case /* istanbul ignore next */_frontEndConstants.WS_NOTIFICATION_SUBSCRIBE:
+        socket.subscribe(action.data, onMessage(socket, store, 'notifications'));
+        break;
+      case /* istanbul ignore next */_frontEndConstants.WS_OPERATOR_LOG_SUBSCRIBE:
+        if (socket && !operatorLogWSClient) {
+          operatorLogWSClient = socket.subscribe(action.data.url, onMessage(socket, store, 'operations'));
+          socket.send(action.data.url, action.data.filters);
+        }
+        break;
+      case /* istanbul ignore next */_frontEndConstants.WS_OPERATOR_LOG_UNSUBSCRIBE:
+        if (operatorLogWSClient) {
+          operatorLogWSClient.unsubscribe();
+          operatorLogWSClient = null;
+        }
+        break;
+      //This action is irrelevant to us, pass it on to the next middleware
+      default:
+        return next(action);}
+
+  };
+
+}(); /* istanbul ignore next */exports.default =
+
+notificationSocketMiddleware;

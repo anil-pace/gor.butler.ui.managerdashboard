@@ -1,0 +1,93 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+
+
+
+
+
+
+loginRequest = loginRequest; /* istanbul ignore next */exports.
+
+
+
+
+
+logoutRequest = logoutRequest; /* istanbul ignore next */exports.
+
+
+
+
+
+loginRedirect = loginRedirect; /* istanbul ignore next */exports.
+
+
+
+
+
+
+receiveAuthData = receiveAuthData; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+
+
+authLoginData = authLoginData; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+
+
+setUsername = setUsername; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+setLoginSpinner = setLoginSpinner; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+getTimeOffSetData = getTimeOffSetData; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+
+
+setTimeOffSetData = setTimeOffSetData;var /* istanbul ignore next */_frontEndConstants = require('../constants/frontEndConstants'); /**
+                                                                                                                                     * Actions for Login request
+                                                                                                                                     */function loginRequest() {return { type: /* istanbul ignore next */_frontEndConstants.LOGIN_REQUEST };}function logoutRequest() {return { type: /* istanbul ignore next */_frontEndConstants.LOGOUT };}function loginRedirect(data) {return { type: /* istanbul ignore next */_frontEndConstants.LOGIN_REDIRECT, data };}function receiveAuthData(data) {return { type: /* istanbul ignore next */_frontEndConstants.LOGIN_SUCCESS, data };} /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    * function that sends ajax to authorize user
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    */function authLoginData(params) {return { type: /* istanbul ignore next */_frontEndConstants.AJAX_CALL, params };} /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * Action to set username that will be used to get role data
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         */function setUsername(data) {return { type: /* istanbul ignore next */_frontEndConstants.SET_USERNAME, data };} /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * Action to set login loader on/off
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           */function setLoginSpinner(data) {return { type: /* istanbul ignore next */_frontEndConstants.DISPLAY_LOGIN_SPINNER, data };} /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * Get time offset
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          */function getTimeOffSetData(params) {return { type: /* istanbul ignore next */_frontEndConstants.AJAX_CALL, params };} /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   * [setTimeOffSetData Sets the timeoffset value]
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   * @param {[type]} data [description]
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   */function setTimeOffSetData(data) {return { type: /* istanbul ignore next */_frontEndConstants.SET_TIME_OFFSET, data };}

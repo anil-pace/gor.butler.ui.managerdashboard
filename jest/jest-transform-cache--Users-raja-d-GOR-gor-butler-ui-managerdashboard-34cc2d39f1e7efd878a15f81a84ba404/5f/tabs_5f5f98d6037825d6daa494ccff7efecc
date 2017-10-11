@@ -1,0 +1,406 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/containers/tabs.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_tab = require('../components/tabs/tab'); /* istanbul ignore next */var _tab2 = _interopRequireDefault(_tab);
+var /* istanbul ignore next */_reactRouter = require('react-router');
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_tabActions = require('../actions/tabActions');
+var /* istanbul ignore next */_reactReduxModal = require('react-redux-modal');
+var /* istanbul ignore next */_inventoryActions = require('../actions/inventoryActions');
+var /* istanbul ignore next */_auditActions = require('../actions/auditActions');
+var /* istanbul ignore next */_spinnerAction = require('../actions/spinnerAction');
+
+var /* istanbul ignore next */_frontEndConstants = require('../constants/frontEndConstants');
+
+
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_OperationStop = require('../containers/emergencyProcess/OperationStop'); /* istanbul ignore next */var _OperationStop2 = _interopRequireDefault(_OperationStop);
+var /* istanbul ignore next */_OperationPause = require('../containers/emergencyProcess/OperationPause'); /* istanbul ignore next */var _OperationPause2 = _interopRequireDefault(_OperationPause);
+var /* istanbul ignore next */_emergencyRelease = require('../containers/emergencyProcess/emergencyRelease'); /* istanbul ignore next */var _emergencyRelease2 = _interopRequireDefault(_emergencyRelease);
+var /* istanbul ignore next */_fireHazard = require('../containers/emergencyProcess/fireHazard'); /* istanbul ignore next */var _fireHazard2 = _interopRequireDefault(_fireHazard);
+var /* istanbul ignore next */_gorToastify = require('../components/gor-toastify/gor-toastify'); /* istanbul ignore next */var _gorToastify2 = _interopRequireDefault(_gorToastify);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+class Tabs extends /* istanbul ignore next */_react2.default.Component {
+
+  /**
+                                                                         * [handleTabClick stores the selected tab]
+                                                                         * @param  {[string]} selTab [Name of selected tab]
+                                                                         * @return {[none]}        
+                                                                         */
+  constructor(props)
+  {
+    super(props);
+    this.state = {
+      isHardEmergencyOpen: this.props.isHardEmergencyOpen };
+
+    this._openPopup = this._openPopup.bind(this);
+  }
+
+  _openPopup() {
+    this.props.setFireHazrdFlag(false);
+  }
+
+
+  handleTabClick(selTab) {
+    /**
+                              * Displaying loader currently for User tab
+                              * only
+                              */
+    switch (selTab) {
+
+      case /* istanbul ignore next */_frontEndConstants.SYSTEM:
+        this.props.setButlerSpinner(true);
+        break;
+
+      case /* istanbul ignore next */_frontEndConstants.INVENTORY:
+        this.props.setInventorySpinner(true);
+        break;
+
+      default:
+        this.props.setInventorySpinner(false);
+        this.props.setButlerSpinner(false);}
+
+
+  }
+  _stopOperation(stopFlag, additionalProps = {}) {
+    /* istanbul ignore next */_reactReduxModal.modal.add( /* istanbul ignore next */_OperationStop2.default, {
+      title: '',
+      size: 'large', // large, medium or small,
+      closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: false,
+      emergencyPress: stopFlag,
+      controller: additionalProps.controller_id,
+      zone: additionalProps.zone_id,
+      sensor: additionalProps.sensor_activated,
+      poeEnabled: Object.keys(additionalProps).length ? true : false });
+
+
+  }
+  _emergencyRelease(additionalProps) {
+    /* istanbul ignore next */_reactReduxModal.modal.add( /* istanbul ignore next */_emergencyRelease2.default, {
+      title: '',
+      size: 'large', // large, medium or small,
+      closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: false,
+      releaseState: additionalProps.releaseState,
+      breached: additionalProps.breached,
+      zone: additionalProps.zone });
+
+  }
+  _pauseOperation(stopFlag, additionalProps) {
+    var zoneDetails = additionalProps.zoneDetails || {},
+    breached = additionalProps.breached;
+    /* istanbul ignore next */_reactReduxModal.modal.add( /* istanbul ignore next */_OperationPause2.default, {
+      title: '',
+      size: 'large', // large, medium or small,
+      closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: false,
+      emergencyPress: stopFlag,
+      controller: zoneDetails.controller_id,
+      zone: zoneDetails.zone_id,
+      sensor: zoneDetails.sensor_activated,
+      poeEnabled: Object.keys(zoneDetails).length ? true : false,
+      breached: breached });
+
+  }
+  _FireEmergencyRelease() {
+    /* istanbul ignore next */_reactReduxModal.modal.add( /* istanbul ignore next */_fireHazard2.default, {
+      title: '',
+      size: 'large customColor', // large, medium or small,
+      closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: false });
+
+  }
+
+
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.isEmergencyOpen) {
+      if (nextProps.system_emergency && nextProps.system_data === /* istanbul ignore next */_frontEndConstants.HARD) {
+        this.props.setEmergencyModalStatus(true);
+        this._stopOperation(true, nextProps.zoneDetails);
+
+      } else
+      if (nextProps.system_data === /* istanbul ignore next */_frontEndConstants.SOFT) {
+        this.props.setEmergencyModalStatus(true);
+        this._pauseOperation(true, nextProps);
+      } else
+      if (
+      nextProps.system_data === /* istanbul ignore next */_frontEndConstants.SOFT_MANUAL && (
+      nextProps.lastEmergencyState === /* istanbul ignore next */_frontEndConstants.HARD || nextProps.lastEmergencyState === /* istanbul ignore next */_frontEndConstants.SOFT)) {
+        let releaseState,breached = nextProps.breached,
+        zone = nextProps.zoneDetails.zone_id;
+        if (nextProps.lastEmergencyState === /* istanbul ignore next */_frontEndConstants.HARD) {
+          releaseState = /* istanbul ignore next */_frontEndConstants.HARD;
+        } else
+        if (nextProps.lastEmergencyState === /* istanbul ignore next */_frontEndConstants.SOFT) {
+          releaseState = /* istanbul ignore next */_frontEndConstants.SOFT;
+        }
+
+        this.props.setEmergencyModalStatus(true);
+        this._emergencyRelease({ releaseState, breached, zone });
+      }
+    }
+
+    if (nextProps.fireHazardType === /* istanbul ignore next */_frontEndConstants.EMERGENCY_FIRE && !nextProps.firehazadflag && !nextProps.fireHazardNotifyTime && nextProps.firehazadflag !== this.props.firehazadflag ||
+    nextProps.fireHazardType === /* istanbul ignore next */_frontEndConstants.EMERGENCY_FIRE && this.props.firehazadflag === false && nextProps.fireHazardNotifyTime !== this.props.fireHazardNotifyTime) {
+      this._FireEmergencyRelease();
+    }
+
+
+  }
+  _parseStatus()
+  {
+    let overview,system,order,ordersvalue,users,reports,usersvalue,inventoryvalue,overviewClass,
+    inventory,audit,overviewStatus,systemStatus,ordersStatus,usersStatus,auditStatus,inventoryStatus,
+    offline,systemClass,ordersClass,auditClass,items = {},auditIcon = false,utilities;
+
+    offline = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'tabs.offline', description: 'offline',
+      defaultMessage: 'Offline', __source: { fileName: _jsxFileName, lineNumber: 156 }, __self: this });
+
+    overview = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'overview.tab.heading', description: 'overview tab',
+      defaultMessage: 'OVERVIEW', __source: { fileName: _jsxFileName, lineNumber: 159 }, __self: this });
+
+    system = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'system.tab.heading', description: 'system tab',
+      defaultMessage: 'SYSTEM', __source: { fileName: _jsxFileName, lineNumber: 162 }, __self: this });
+
+    order = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'orders.tab.heading', description: 'orders tab',
+      defaultMessage: 'ORDERS', __source: { fileName: _jsxFileName, lineNumber: 165 }, __self: this });
+
+    users = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'users.tab.heading', description: 'users tab',
+      defaultMessage: 'USERS', __source: { fileName: _jsxFileName, lineNumber: 168 }, __self: this });
+    inventory = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'inventory.tab.heading', description: 'inventory tab',
+      defaultMessage: 'INVENTORY', __source: { fileName: _jsxFileName, lineNumber: 170 }, __self: this });
+
+    audit = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'audit.tab.heading', description: 'audit tab',
+      defaultMessage: 'AUDIT', __source: { fileName: _jsxFileName, lineNumber: 173 }, __self: this });
+
+    utilities = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'utilities.tab.heading', description: 'audit tab',
+      defaultMessage: 'UTILITIES', __source: { fileName: _jsxFileName, lineNumber: 176 }, __self: this });
+    reports = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'reports.tab.heading', description: 'reports tab',
+      defaultMessage: 'REPORTS', __source: { fileName: _jsxFileName, lineNumber: 178 }, __self: this });
+
+    if (!this.props.system_status)
+    {
+      overviewStatus = offline;
+      systemStatus = offline;
+      ordersStatus = offline;
+      usersStatus = offline;
+      inventoryStatus = offline;
+      auditStatus = offline;
+      systemClass = /* istanbul ignore next */_frontEndConstants.GOR_OFFLINE;
+    } else
+
+    {
+      if (this.props.overview_status === /* istanbul ignore next */_frontEndConstants.FULFILLING_ORDERS)
+      {
+        overviewStatus = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'overviewStatus.tab.fulfilling', description: 'overview Status fulfilling orders',
+          defaultMessage: 'Fulfilling orders', __source: { fileName: _jsxFileName, lineNumber: 195 }, __self: this });
+      } else
+
+      {
+        overviewStatus = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'overviewStatus.tab.default', description: 'default overview Status',
+          defaultMessage: 'None', __source: { fileName: _jsxFileName, lineNumber: 200 }, __self: this });
+      }
+      if (this.props.system_emergency && (this.props.system_data === /* istanbul ignore next */_frontEndConstants.HARD || this.props.lastEmergencyState === /* istanbul ignore next */_frontEndConstants.HARD))
+      {
+
+        systemClass = 'gor-alert';
+        systemStatus = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'overviewStatus.tab.stop', description: 'overview Status emergency',
+          defaultMessage: 'STOPPED', __source: { fileName: _jsxFileName, lineNumber: 207 }, __self: this });
+      } else
+      if (this.props.system_emergency && (this.props.system_data === /* istanbul ignore next */_frontEndConstants.SOFT || this.props.lastEmergencyState === /* istanbul ignore next */_frontEndConstants.SOFT)) {
+        systemClass = 'gor-alert';
+        systemStatus = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'overviewStatus.tab.paused', description: 'overview Status emergency',
+          defaultMessage: 'PAUSED', __source: { fileName: _jsxFileName, lineNumber: 212 }, __self: this });
+      } else
+      if (this.props.breached) {
+        systemClass = 'gor-alert';
+        systemStatus = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'overviewStatus.tab.breached', description: 'overview Status emergency',
+          defaultMessage: 'BREACHED', __source: { fileName: _jsxFileName, lineNumber: 217 }, __self: this });
+      } else
+      {
+        systemStatus = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'systemStatus.tab.online', description: 'system Status online',
+          defaultMessage: 'Online', __source: { fileName: _jsxFileName, lineNumber: 221 }, __self: this });
+        systemClass = /* istanbul ignore next */_frontEndConstants.GOR_ONLINE;
+      }
+
+      ordersvalue = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedNumber, /* istanbul ignore next */{ value: this.props.orders_completed, __source: { fileName: _jsxFileName, lineNumber: 226 }, __self: this });
+      ordersStatus = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'ordersStatus.tab.heading', description: 'orders Status ',
+        defaultMessage: '{count}% fulfilled', values: { count: ordersvalue }, __source: { fileName: _jsxFileName, lineNumber: 227 }, __self: this });
+      ordersClass = /* istanbul ignore next */_frontEndConstants.GOR_ONLINE;
+
+      usersvalue = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedNumber, /* istanbul ignore next */{ value: this.props.users_online, __source: { fileName: _jsxFileName, lineNumber: 231 }, __self: this });
+      usersStatus = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'usersStatus.tab.heading#', description: 'users Status ',
+        defaultMessage: '{count} {count,plural,=0 {user} one {user} other {users}} online', values: { count: this.props.users_online ? this.props.users_online : "0" }, __source: { fileName: _jsxFileName, lineNumber: 232 }, __self: this });
+
+      inventoryvalue = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedNumber, /* istanbul ignore next */{ value: this.props.space_utilized, __source: { fileName: _jsxFileName, lineNumber: 235 }, __self: this });
+      inventoryStatus = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'inventoryStatus.tab.heading', description: 'inventory Status ',
+        defaultMessage: '{count}% space utilized', values: { count: inventoryvalue }, __source: { fileName: _jsxFileName, lineNumber: 236 }, __self: this });
+      auditStatus = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'auditStatus.tab.heading', description: 'audit Status ',
+        defaultMessage: '{count} in progress',
+        values: { count: this.props.audit_count ? this.props.audit_count : 'None' }, __source: { fileName: _jsxFileName, lineNumber: 238 }, __self: this });
+      if (this.props.audit_count)
+      {
+        auditClass = /* istanbul ignore next */_frontEndConstants.GOR_ONLINE;
+      } else
+
+      {
+        auditClass = /* istanbul ignore next */_frontEndConstants.GOR_OFFLINE;
+      }
+      if (this.props.audit_alert) {
+        auditClass = this.props.audit_alert ? 'gor-alert' : auditClass;
+        auditStatus = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'auditStatus.tab.alert.heading', description: 'audit Status alert',
+          defaultMessage: '{count} {count,plural, one {alert} other {alerts}}',
+          values: { count: this.props.audit_alert ? this.props.audit_alert : "0" }, __source: { fileName: _jsxFileName, lineNumber: 251 }, __self: this });
+        auditIcon = true;
+      }
+    }
+
+    items = { overview: overview, system: system, order: order,
+      users: users, inventory: inventory, audit: audit,
+      reports: reports,
+      overviewStatus: overviewStatus, overviewClass: overviewClass, systemStatus: systemStatus, ordersStatus: ordersStatus,
+      auditStatus: auditStatus, usersStatus: usersStatus, inventoryStatus: inventoryStatus,
+      systemClass: systemClass, ordersClass: ordersClass, auditClass: auditClass,
+      auditIcon: auditIcon, utilities: utilities };
+
+    return items;
+  }
+  _processNotification() {
+
+    var notificationWrap = [],singleNotification,time,timeText;
+    var originalDate = this.props.fireHazardNotifyTime ? new Date(this.props.fireHazardNotifyTime) : this.props.fireHazardStartTime ? new Date(this.props.fireHazardStartTime) : new Date();
+    var convertedDate = originalDate.getTime();
+    var timeText = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedRelative, /* istanbul ignore next */{ value: convertedDate, timeZone: this.props.timeZone, __source: { fileName: _jsxFileName, lineNumber: 273 }, __self: this });
+
+    if (this.props.fireHazardNotifyTime) {
+      singleNotification = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_gorToastify2.default, /* istanbul ignore next */{ key: 1, __source: { fileName: _jsxFileName, lineNumber: 276 }, __self: this },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-toastify-content info', __source: { fileName: _jsxFileName, lineNumber: 277 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */{ className: 'msg-content', __source: { fileName: _jsxFileName, lineNumber: 278 }, __self: this },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'operation.alert.resumed',
+              defaultMessage: 'All operation has been resumed to normal state.',
+              description: 'Text to resume operation', __source: { fileName: _jsxFileName, lineNumber: 279 }, __self: this }),
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'gor-toastify-updated-time', __source: { fileName: _jsxFileName, lineNumber: 282 }, __self: this }, timeText)),
+
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'gor-toastify-details', __source: { fileName: _jsxFileName, lineNumber: 284 }, __self: this },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'closeButton', onClick: this._openPopup, __source: { fileName: _jsxFileName, lineNumber: 285 }, __self: this }))));
+
+
+
+
+    } else
+    {
+      singleNotification = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_gorToastify2.default, /* istanbul ignore next */{ key: 2, __source: { fileName: _jsxFileName, lineNumber: 292 }, __self: this },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-toastify-content', __source: { fileName: _jsxFileName, lineNumber: 293 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */{ className: 'msg-content', __source: { fileName: _jsxFileName, lineNumber: 294 }, __self: this },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'operation.alert.triggeremergency',
+              defaultMessage: 'Fire emergency triggered. Follow evacuation procedures immediately',
+              description: 'Text button to trigger emergency', __source: { fileName: _jsxFileName, lineNumber: 295 }, __self: this }),
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'gor-toastify-updated-time', __source: { fileName: _jsxFileName, lineNumber: 298 }, __self: this }, timeText)),
+
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'gor-toastify-details', onClick: this._openPopup, __source: { fileName: _jsxFileName, lineNumber: 300 }, __self: this },
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'operation.alert.toastifydetails',
+              defaultMessage: 'VIEW DETAILS',
+              description: 'Text button to viewdetails', __source: { fileName: _jsxFileName, lineNumber: 302 }, __self: this }))));
+
+
+
+
+    }
+    notificationWrap.push(singleNotification);
+    return notificationWrap;
+  }
+  render() {
+    let items = this._parseStatus();
+    let showFireHazardPopup;
+    if (this.props.firehazadflag && (this.props.fireHazardNotifyTime || this.props.fireHazardStartTime))
+    {
+      showFireHazardPopup = true;
+    } else
+
+    {
+      showFireHazardPopup = false;
+    }
+
+    let notificationWrap = this._processNotification();
+    let showUtilityTab = this.props.config.utility_tab && this.props.config.utility_tab.enabled;
+    return (
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-tabs gor-main-block', __source: { fileName: _jsxFileName, lineNumber: 328 }, __self: this },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRouter.Link, /* istanbul ignore next */{ to: '/overview', onClick: this.handleTabClick.bind(this, /* istanbul ignore next */_frontEndConstants.OVERVIEW), __source: { fileName: _jsxFileName, lineNumber: 329 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_tab2.default, /* istanbul ignore next */{ items: { tab: items.overview, Status: items.overviewStatus, currentState: items.overviewClass }, changeClass: this.props.tab.toUpperCase() === /* istanbul ignore next */_frontEndConstants.OVERVIEW ? 'sel' : /* istanbul ignore next */_frontEndConstants.GOR_NORMAL_TAB, subIcons: false, __source: { fileName: _jsxFileName, lineNumber: 330 }, __self: this })),
+
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRouter.Link, /* istanbul ignore next */{ to: '/system/sysOverview', onClick: this.handleTabClick.bind(this, /* istanbul ignore next */_frontEndConstants.SYSTEM), __source: { fileName: _jsxFileName, lineNumber: 333 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_tab2.default, /* istanbul ignore next */{ items: { tab: items.system, Status: items.systemStatus, currentState: items.systemClass }, changeClass: this.props.tab.toUpperCase() === /* istanbul ignore next */_frontEndConstants.SYSTEM ? 'sel' : /* istanbul ignore next */_frontEndConstants.GOR_NORMAL_TAB, subIcons: true, __source: { fileName: _jsxFileName, lineNumber: 334 }, __self: this })),
+
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRouter.Link, /* istanbul ignore next */{ to: '/orders/waves', onClick: this.handleTabClick.bind(this, /* istanbul ignore next */_frontEndConstants.ORDERS), __source: { fileName: _jsxFileName, lineNumber: 337 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_tab2.default, /* istanbul ignore next */{ items: { tab: items.order, Status: items.ordersStatus, currentState: items.ordersClass }, changeClass: this.props.tab.toUpperCase() === /* istanbul ignore next */_frontEndConstants.ORDERS ? 'sel' : /* istanbul ignore next */_frontEndConstants.GOR_NORMAL_TAB, subIcons: false, __source: { fileName: _jsxFileName, lineNumber: 338 }, __self: this })),
+
+
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRouter.Link, /* istanbul ignore next */{ to: '/audit', onClick: this.handleTabClick.bind(this, /* istanbul ignore next */_frontEndConstants.AUDIT), __source: { fileName: _jsxFileName, lineNumber: 342 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_tab2.default, /* istanbul ignore next */{ items: { tab: items.audit, Status: items.auditStatus, currentState: items.auditClass }, changeClass: this.props.tab.toUpperCase() === /* istanbul ignore next */_frontEndConstants.AUDIT ? 'sel' : /* istanbul ignore next */_frontEndConstants.GOR_NORMAL_TAB, subIcons: items.auditIcon, __source: { fileName: _jsxFileName, lineNumber: 343 }, __self: this })),
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRouter.Link, /* istanbul ignore next */{ to: '/reports/operationsLog', onClick: this.handleTabClick.bind(this, /* istanbul ignore next */_frontEndConstants.REPORTS), __source: { fileName: _jsxFileName, lineNumber: 345 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_tab2.default, /* istanbul ignore next */{ items: { tab: items.reports }, changeClass: this.props.tab.toUpperCase() === /* istanbul ignore next */_frontEndConstants.REPORTS ? 'sel' : /* istanbul ignore next */_frontEndConstants.GOR_NORMAL_TAB, subIcons: false, __source: { fileName: _jsxFileName, lineNumber: 346 }, __self: this })),
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRouter.Link, /* istanbul ignore next */{ to: '/inventory', onClick: this.handleTabClick.bind(this, /* istanbul ignore next */_frontEndConstants.INVENTORY), __source: { fileName: _jsxFileName, lineNumber: 348 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_tab2.default, /* istanbul ignore next */{ items: { tab: items.inventory, Status: items.inventoryStatus, currentState: '' }, changeClass: this.props.tab.toUpperCase() === /* istanbul ignore next */_frontEndConstants.INVENTORY ? 'sel' : /* istanbul ignore next */_frontEndConstants.GOR_NORMAL_TAB, subIcons: false, __source: { fileName: _jsxFileName, lineNumber: 349 }, __self: this })),
+
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRouter.Link, /* istanbul ignore next */{ to: '/users', onClick: this.handleTabClick.bind(this, /* istanbul ignore next */_frontEndConstants.USERS), __source: { fileName: _jsxFileName, lineNumber: 352 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_tab2.default, /* istanbul ignore next */{ items: { tab: items.users, Status: items.usersStatus, currentState: '' }, changeClass: this.props.tab.toUpperCase() === /* istanbul ignore next */_frontEndConstants.USERS ? 'sel' : /* istanbul ignore next */_frontEndConstants.GOR_NORMAL_TAB, subIcons: false, __source: { fileName: _jsxFileName, lineNumber: 353 }, __self: this })),
+
+
+        showUtilityTab ? /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRouter.Link, /* istanbul ignore next */{ to: '/utilities', onClick: this.handleTabClick.bind(this, /* istanbul ignore next */_frontEndConstants.UTILITIES), __source: { fileName: _jsxFileName, lineNumber: 356 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_tab2.default, /* istanbul ignore next */{ items: { tab: items.utilities, Status: '', currentState: '' }, changeClass: this.props.tab.toUpperCase() === /* istanbul ignore next */_frontEndConstants.UTILITIES ? 'sel' : /* istanbul ignore next */_frontEndConstants.GOR_NORMAL_TAB, subIcons: false, __source: { fileName: _jsxFileName, lineNumber: 357 }, __self: this })) :
+        "",
+        showFireHazardPopup ? notificationWrap : ""));
+
+
+  }}
+
+
+function mapStateToProps(state, ownProps) {
+
+  return {
+    tab: state.tabSelected.tab || /* istanbul ignore next */_frontEndConstants.TAB_ROUTE_MAP[/* istanbul ignore next */_frontEndConstants.OVERVIEW],
+    overview_status: state.tabsData.overview_status || null,
+    system_emergency: state.tabsData.system_emergency || false,
+    lastEmergencyState: state.tabsData.lastEmergencyState || "none",
+    system_data: state.tabsData.system_data || null,
+    lastEmergencyState: state.tabsData.lastEmergencyState,
+    breached: state.tabsData.breached,
+    users_online: state.tabsData.users_online || 0,
+    audit_count: state.tabsData.audit_count || 0,
+    space_utilized: state.tabsData.space_utilized || 0,
+    orders_completed: state.tabsData.orders_completed || 0,
+    system_status: state.tabsData.status || null,
+    audit_alert: state.tabsData.audit_alert || 0,
+    config: state.config || {},
+    firehazadflag: state.fireReducer.firehazadflag,
+    fireHazardType: state.fireHazardDetail.emergency_type,
+    fireHazardStartTime: state.fireHazardDetail.emergencyStartTime,
+    fireHazardNotifyTime: state.fireHazardDetail.notifyTime,
+    timeZone: state.authLogin.timeOffset,
+    zoneDetails: state.tabsData.zoneDetails || {},
+    isEmergencyOpen: state.tabsData.isEmergencyOpen };
+
+
+}
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    setInventorySpinner: function /* istanbul ignore next */setInventorySpinner(data) {dispatch( /* istanbul ignore next */(0, _inventoryActions.setInventorySpinner)(data));},
+    setAuditSpinner: function /* istanbul ignore next */setAuditSpinner(data) {dispatch( /* istanbul ignore next */(0, _auditActions.setAuditSpinner)(data));},
+    setButlerSpinner: function /* istanbul ignore next */setButlerSpinner(data) {dispatch( /* istanbul ignore next */(0, _spinnerAction.setButlerSpinner)(data));},
+    setFireHazrdFlag: function /* istanbul ignore next */setFireHazrdFlag(data) {dispatch( /* istanbul ignore next */(0, _tabActions.setFireHazrdFlag)(data));},
+    setEmergencyModalStatus: function /* istanbul ignore next */setEmergencyModalStatus(data) {dispatch( /* istanbul ignore next */(0, _tabActions.setEmergencyModalStatus)(data));} };
+
+}; /* istanbul ignore next */exports.default =
+
+
+
+
+/* istanbul ignore next */(0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Tabs);

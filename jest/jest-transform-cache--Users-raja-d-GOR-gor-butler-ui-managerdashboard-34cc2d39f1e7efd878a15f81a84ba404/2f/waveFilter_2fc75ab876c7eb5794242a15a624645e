@@ -1,0 +1,220 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/containers/orderTab/waveFilter.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_filter = require('../../components/tableFilter/filter'); /* istanbul ignore next */var _filter2 = _interopRequireDefault(_filter);
+var /* istanbul ignore next */_filterAction = require('../../actions/filterAction');
+var /* istanbul ignore next */_socketActions = require('../../actions/socketActions');
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_filterInputFieldWrap = require('../../components/tableFilter/filterInputFieldWrap'); /* istanbul ignore next */var _filterInputFieldWrap2 = _interopRequireDefault(_filterInputFieldWrap);
+var /* istanbul ignore next */_filterTokenContainer = require('../../components/tableFilter/filterTokenContainer'); /* istanbul ignore next */var _filterTokenContainer2 = _interopRequireDefault(_filterTokenContainer);
+var /* istanbul ignore next */_tableFilterCommonFunctions = require('../../components/tableFilter/tableFilterCommonFunctions');
+var /* istanbul ignore next */_spinnerAction = require('../../actions/spinnerAction');
+var /* istanbul ignore next */_reactRouter = require('react-router'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+class WaveFilter extends /* istanbul ignore next */_react2.default.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            tokenSelected: { "STATUS": ["any"] }, searchQuery: {},
+            defaultToken: { "STATUS": ["any"] } };
+
+        this._applyFilter = this._applyFilter.bind(this);
+        this._closeFilter = this._closeFilter.bind(this);
+        this._clearFilter = this._clearFilter.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        /**
+                                           * It will update the state as soon as
+                                           * filters are cleared.
+                                           */
+        if (nextProps.filterState && JSON.stringify(this.state) !== JSON.stringify(nextProps.filterState)) {
+            this.setState(nextProps.filterState);
+        }
+
+        /**
+           * Hide the filter as soon as data in the list get updated.
+           */
+        if (nextProps.waveData.length > 0 && JSON.stringify(nextProps.waveData) !== JSON.stringify(this.props.waveData)) {
+            this.props.showTableFilter(false);
+        }
+    }
+
+    _closeFilter() {
+        let filterState = !this.props.showFilter;
+        this.props.showTableFilter(false);
+    }
+
+    _processWaveSearchField() {
+        let filterInputFields = [{
+            value: "WAVE ID",
+            label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'wave.inputField.id', defaultMessage: 'WAVE ID', __source: { fileName: _jsxFileName, lineNumber: 49 }, __self: this }) }];
+
+        let inputValue = this.state.searchQuery;
+        let inputField = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_filterInputFieldWrap2.default, /* istanbul ignore next */{ inputText: filterInputFields,
+            handleInputText: this._handleInputQuery.bind(this),
+            inputValue: inputValue, __source: { fileName: _jsxFileName, lineNumber: 52 }, __self: this });
+        return inputField;
+    }
+
+    _processFilterToken() {
+        let tokenField1 = { value: "STATUS", label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'wave.token.status', defaultMessage: 'STATUS', __source: { fileName: _jsxFileName, lineNumber: 59 }, __self: this }) };
+        let labelC1 = [
+        { value: 'any', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'wave.STATUS.all', defaultMessage: 'All waves', __source: { fileName: _jsxFileName, lineNumber: 61 }, __self: this }) },
+        { value: 'breached', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'wave.STATUS.breach', defaultMessage: 'Breached', __source: { fileName: _jsxFileName, lineNumber: 62 }, __self: this }) },
+        { value: 'wave_pending', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'wave.STATUS.pending', defaultMessage: 'Pending', __source: { fileName: _jsxFileName, lineNumber: 63 }, __self: this }) },
+        { value: 'wave_warning', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'wave.STATUS.warning', defaultMessage: 'Warning', __source: { fileName: _jsxFileName, lineNumber: 64 }, __self: this }) },
+        { value: 'in_progress', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'wave.STATUS.inprogress', defaultMessage: 'In progress', __source: { fileName: _jsxFileName, lineNumber: 65 }, __self: this }) }];
+
+        let selectedToken = this.state.tokenSelected;
+        let column1 = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_filterTokenContainer2.default, /* istanbul ignore next */{ field: tokenField1, tokenCallBack: this._handelTokenClick.bind(this),
+            label: labelC1, selectedToken: selectedToken, __source: { fileName: _jsxFileName, lineNumber: 68 }, __self: this });
+
+        let columnDetail = { column1token: column1 };
+        return columnDetail;
+    }
+
+    _handelTokenClick(field, value, state) {
+        this.setState({ tokenSelected: /* istanbul ignore next */(0, _tableFilterCommonFunctions.handelTokenClick)(field, value, state, this.state) });
+
+    }
+
+    _handleInputQuery(inputQuery, queryField) {
+        this.setState({ searchQuery: /* istanbul ignore next */(0, _tableFilterCommonFunctions.handleInputQuery)(inputQuery, queryField, this.state) });
+    }
+
+    _applyFilter() {
+        let filterState = this.state,_query = {};
+        if (filterState.searchQuery["WAVE ID"]) {
+            _query.waveId = filterState.searchQuery["WAVE ID"];
+        }
+        if (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !== "any") {
+            _query.status = filterState.tokenSelected["STATUS"];
+        }
+        /* istanbul ignore next */_reactRouter.hashHistory.push({ pathname: "/orders/waves", query: _query });
+
+
+    }
+
+    _clearFilter() {
+        this.props.wavefilterState({
+            tokenSelected: {
+                "STATUS": ["any"] },
+
+            searchQuery: {
+                "WAVE ID": '' } });
+
+
+        /* istanbul ignore next */_reactRouter.hashHistory.push({ pathname: "/orders/waves", query: {} });
+    }
+
+
+    render() {
+        var waveDetail = this.props.waveData;
+        var noOrder = this.props.noResultFound;
+        let waveSearchField = this._processWaveSearchField();
+        let waveFilterToken = this._processFilterToken();
+        return (
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 116 }, __self: this },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_filter2.default, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 117 }, __self: this },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-header', __source: { fileName: _jsxFileName, lineNumber: 118 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-header-h1', __source: { fileName: _jsxFileName, lineNumber: 119 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'gor.filter.filterLabel', description: 'label for filter',
+                                defaultMessage: 'Filter data', __source: { fileName: _jsxFileName, lineNumber: 120 }, __self: this })),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-header-h2', onClick: this._closeFilter, __source: { fileName: _jsxFileName, lineNumber: 123 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'gor.filter.hide', description: 'label for hide',
+                                defaultMessage: 'Hide', __source: { fileName: _jsxFileName, lineNumber: 124 }, __self: this }))),
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 128 }, __self: this }, noOrder ?
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-no-result-filter', __source: { fileName: _jsxFileName, lineNumber: 129 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'gor.filter.noResult', description: 'label for no result',
+                                defaultMessage: 'No results found, please try again', __source: { fileName: _jsxFileName, lineNumber: 129 }, __self: this })) : ""),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-body', __source: { fileName: _jsxFileName, lineNumber: 132 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-body-input-wrap', __source: { fileName: _jsxFileName, lineNumber: 133 }, __self: this },
+                            waveSearchField),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-body-filterToken-wrap', __source: { fileName: _jsxFileName, lineNumber: 136 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-body-filterToken-section1', __source: { fileName: _jsxFileName, lineNumber: 137 }, __self: this },
+                                waveFilterToken.column1token))),
+
+
+
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-footer', __source: { fileName: _jsxFileName, lineNumber: 144 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'gor-filter-footer-h2', onClick: this._clearFilter, __source: { fileName: _jsxFileName, lineNumber: 145 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'gor.filter.reset', description: 'label for reset',
+                                defaultMessage: 'Reset', __source: { fileName: _jsxFileName, lineNumber: 146 }, __self: this })),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-btn-wrap', __source: { fileName: _jsxFileName, lineNumber: 149 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ className: 'gor-add-btn', onClick: this._applyFilter, __source: { fileName: _jsxFileName, lineNumber: 150 }, __self: this },
+                                !this.props.waveFIlterSpinner ? /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'gor.filter.heading', description: 'filter heading', defaultMessage: 'Apply filter', __source: { fileName: _jsxFileName, lineNumber: 151 }, __self: this }) : /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'spinnerImage', __source: { fileName: _jsxFileName, lineNumber: 151 }, __self: this })))))));
+
+
+
+
+
+
+
+
+    }}
+
+;
+
+
+function mapStateToProps(state, ownProps) {
+    return {
+        showFilter: state.filterInfo.filterState || false,
+        waveData: state.waveInfo || {},
+        orderListSpinner: state.spinner.orderListSpinner || false,
+        filterState: state.filterInfo.wavefilterState,
+        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket,
+        isFilterApplied: state.filterInfo.isFilterApplied || false,
+        waveFilterStatus: state.filterInfo.waveFilterStatus || false,
+        wavesSpinner: state.spinner.wavesSpinner || false,
+        waveFIlterSpinner: state.spinner.waveFIlterSpinner || false,
+        noResultFound: state.waveInfo.noResultFound };
+
+
+}
+
+let mapDispatchToProps = function mapDispatchToProps(dispatch) {
+    return {
+        showTableFilter: function /* istanbul ignore next */showTableFilter(data) {
+            dispatch( /* istanbul ignore next */(0, _filterAction.showTableFilter)(data));
+        },
+        filterApplied: function /* istanbul ignore next */filterApplied(data) {
+            dispatch( /* istanbul ignore next */(0, _filterAction.filterApplied)(data));
+        },
+        wavefilterState: function /* istanbul ignore next */wavefilterState(data) {
+            dispatch( /* istanbul ignore next */(0, _filterAction.wavefilterState)(data));
+        },
+        updateSubscriptionPacket: function /* istanbul ignore next */updateSubscriptionPacket(data) {
+            dispatch( /* istanbul ignore next */(0, _socketActions.updateSubscriptionPacket)(data));
+        },
+        toggleWaveFilter: function /* istanbul ignore next */toggleWaveFilter(data) {
+            dispatch( /* istanbul ignore next */(0, _filterAction.toggleWaveFilter)(data));
+        },
+        setWavesFilterSpinner: function /* istanbul ignore next */setWavesFilterSpinner(data) {
+            dispatch( /* istanbul ignore next */(0, _spinnerAction.setWavesFilterSpinner)(data));
+        } };
+
+
+};
+WaveFilter.PropTypes = {
+    showTableFilter: /* istanbul ignore next */_react2.default.PropTypes.func,
+    filterApplied: /* istanbul ignore next */_react2.default.PropTypes.func,
+    wavefilterState: /* istanbul ignore next */_react2.default.PropTypes.func,
+    updateSubscriptionPacket: /* istanbul ignore next */_react2.default.PropTypes.func,
+    toggleWaveFilter: /* istanbul ignore next */_react2.default.PropTypes.func,
+    showFilter: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    waveData: /* istanbul ignore next */_react2.default.PropTypes.object,
+    orderListSpinner: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    filterState: /* istanbul ignore next */_react2.default.PropTypes.object,
+    wsSubscriptionData: /* istanbul ignore next */_react2.default.PropTypes.object,
+    isFilterApplied: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    waveFilterStatus: /* istanbul ignore next */_react2.default.PropTypes.bool }; /* istanbul ignore next */exports.default =
+
+
+
+/* istanbul ignore next */(0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(WaveFilter);

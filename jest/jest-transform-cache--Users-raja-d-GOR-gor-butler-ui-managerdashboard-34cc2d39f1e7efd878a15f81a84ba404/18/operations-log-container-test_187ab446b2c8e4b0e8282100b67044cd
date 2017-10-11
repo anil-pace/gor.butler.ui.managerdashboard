@@ -1,0 +1,63 @@
+/* istanbul ignore next */'use strict';var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/__tests__/components/operationsLog/operations-log-container-test.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_operationsLogTab = require('../../../containers/reportsTab/operationsLogTab.js'); /* istanbul ignore next */var _operationsLogTab2 = _interopRequireDefault(_operationsLogTab);
+var /* istanbul ignore next */_mockIntlJson = require('../../../../mock/mock-intl-json.js');
+var /* istanbul ignore next */_reactIntlRedux = require('react-intl-redux');
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_reactTestRenderer = require('react-test-renderer'); /* istanbul ignore next */var _reactTestRenderer2 = _interopRequireDefault(_reactTestRenderer);
+var /* istanbul ignore next */_reduxMockStore = require('redux-mock-store'); /* istanbul ignore next */var _reduxMockStore2 = _interopRequireDefault(_reduxMockStore);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+const intl_messages = /* istanbul ignore next */_mockIntlJson.messages;
+
+
+describe('REACT-REDUX (Deep + passing the {store} using provider)', () => {
+
+  const initialState = {
+    recieveSocketActions: {
+      socketAuthorized: true },
+
+    filterInfo: {
+      "filterState": {} },
+
+    operationsLogsReducer: {
+      olData: [],
+      hasDataChanged: true,
+      reportsSpinner: false,
+      filtersApplied: false,
+      filtersModified: false,
+      olWsData: [] },
+
+    notificationSocketReducer: {
+      notificationSocketConnected: true },
+
+    authLogin: {
+      username: 'himanshu.s',
+      timeOffset: "Asia/Kolkata" },
+
+    intl: {
+      locale: "en-US" } };
+
+
+
+  const mockStore = /* istanbul ignore next */(0, _reduxMockStore2.default)();
+  let store, container;
+
+  beforeEach(() => {
+    store = mockStore(initialState);
+    container = /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRedux.Provider, /* istanbul ignore next */{ store: store, __source: { fileName: _jsxFileName, lineNumber: 47 }, __self: undefined },
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntlRedux.IntlProvider, /* istanbul ignore next */{ messages: intl_messages, locale: "en-US", __source: { fileName: _jsxFileName, lineNumber: 48 }, __self: undefined },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_operationsLogTab2.default, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 49 }, __self: undefined }))));
+
+    //shallow(<SystemOverview store={store} /> )  
+  });
+
+  it('+++ render the connected(SMART) component', () => {
+    expect(container.find( /* istanbul ignore next */_operationsLogTab2.default).length).toEqual(1);
+  });
+
+  /* it('+++ Checking count of zone tiles', () => {
+          expect(container.find(Zone).length).toEqual(8)
+       });*/
+
+
+});

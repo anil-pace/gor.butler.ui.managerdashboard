@@ -1,0 +1,27 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.messages = undefined;var /* istanbul ignore next */_reactIntl = require('react-intl');
+
+const messages = /* istanbul ignore next */exports.messages = /* istanbul ignore next */(0, _reactIntl.defineMessages)({
+    placeholderUsr: {
+        id: 'login.form.username',
+        description: 'Placeholder text for username',
+        defaultMessage: 'Username' },
+
+    placeholderPwd: {
+        id: 'login.form.password',
+        description: 'Placeholder text for password',
+        defaultMessage: 'Password' },
+
+    placeholderBtn: {
+        id: 'login.form.button',
+        description: 'Text for button',
+        defaultMessage: 'Login' },
+
+    placeholderDropDownPPS: {
+        id: 'pps.dropdown.placeholder',
+        description: 'placeholder for pps mode change',
+        defaultMessage: 'Change PPS mode' },
+
+    placeholderFilter: {
+        id: 'table.filter.placeholder',
+        description: 'placeholder for table filter',
+        defaultMessage: 'Filter by keywords' } });

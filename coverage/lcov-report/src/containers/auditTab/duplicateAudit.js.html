@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/containers/auditTab/duplicateAudit.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/containers/auditTab</a> duplicateAudit.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/19</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/6</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/7</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/18</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React  from 'react';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+import { connect } from 'react-redux' ;
+import {userRequest} from '../../actions/userActions';
+import { FormattedMessage } from 'react-intl';        
+import { CREATE_AUDIT,APP_JSON,POST } from '../../constants/frontEndConstants';
+import { AUDIT_URL } from '../../constants/configConstants';
+&nbsp;
+class DuplicateAudit extends React.Component{
+  
+<span class="fstat-no" title="function not covered" >  _r</span>emoveThisModal() {
+<span class="cstat-no" title="statement not covered" >      this.props.removeModal()</span>;
+  }
+<span class="fstat-no" title="function not covered" >  co</span>mponentWillReceiveProps(nextProps){
+<span class="cstat-no" title="statement not covered" >    if(!nextProps.auth_token)</span>
+    {
+<span class="cstat-no" title="statement not covered" >      this._removeThisModal();</span>
+    }
+  }
+<span class="fstat-no" title="function not covered" >  _u</span>serDup() {
+    let formdata={}<span class="cstat-no" title="statement not covered" >;</span>
+<span class="cstat-no" title="statement not covered" >    if(this.props.auditType==="pdfa") {</span>
+<span class="cstat-no" title="statement not covered" >      formdata.audit_param_type=this.props.auditType;</span>
+<span class="cstat-no" title="statement not covered" >      formdata.audit_param_value={};</span>
+<span class="cstat-no" title="statement not covered" >      formdata.audit_param_value.product_sku=this.props.auditTypeParam;</span>
+<span class="cstat-no" title="statement not covered" >      formdata.audit_param_value.pdfa_values=this.props.auditPdfaValue;</span>
+    }
+    else {
+    fo<span class="cstat-no" title="statement not covered" >rmdata={</span>
+         audit_param_type: this.props.auditType,
+         audit_param_value: this.props.auditTypeParam
+      }
+    }
+    let userData={<span class="cstat-no" title="statement not covered" ></span>
+                'url':AUDIT_URL,
+                'formdata':formdata,
+                'method':POST,
+                'cause':CREATE_AUDIT,
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
+                'token':this.props.auth_token
+    }
+<span class="cstat-no" title="statement not covered" >    this.props.userRequest(userData);</span>
+<span class="cstat-no" title="statement not covered" >    this._removeThisModal();</span>
+  }  
+<span class="fstat-no" title="function not covered" >  re</span>nder()
+  {
+<span class="cstat-no" title="statement not covered" >      return (</span>
+        &lt;div&gt;
+          &lt;div className='gor-delete gor-modal-content'&gt;
+            &lt;div className='gor-delete-text'&gt;
+              &lt;div className='gor-question gor-align-top'&gt;&lt;/div&gt;
+              &lt;div className='gor-delete-line'&gt;
+               &lt;div className='gor-delete-query'&gt;&lt;FormattedMessage id="audit.duplicate.heading" description='Text for audit duplicate heading' 
+            defaultMessage='Are you sure you would like to duplicate audit task {task_name} ?' values={{task_name:(this.props.auditComplete?this.props.auditComplete:'')}}/&gt;&lt;/div&gt;
+              &lt;/div&gt;
+           &lt;/div&gt;
+              &lt;div className='gor-delete-bottom'&gt;
+                &lt;button className='gor-cancel-btn' onClick={this._removeThisModal.bind(this)}&gt;Close&lt;/button&gt;
+                &lt;button className='gor-delete-btn' onClick={this._userDup.bind(this)}&gt;Duplicate audit task&lt;/button&gt;
+              &lt;/div&gt; 
+          &lt;/div&gt;
+        &lt;/div&gt;
+      );
+    }
+  };
+ function<span class="fstat-no" title="function not covered" > mapStateToProps</span>(state, ownProps){
+<span class="cstat-no" title="statement not covered" >  return  {</span>
+      auth_token:state.authLogin.auth_token
+    }
+} 
+function <span class="fstat-no" title="function not covered" >mapDispatchToProps(</span>dispatch){
+<span class="cstat-no" title="statement not covered" >    return {</span>
+      userRequest: function(data){ dispatch(userRequ<span class="fstat-no" title="function not covered" >est(data)); </span>}<span class="cstat-no" title="statement not covered" ></span>
+    }
+};
+&nbsp;
+export default connect(mapStateToProps,mapDispatchToProps)(DuplicateAudit);
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Oct 11 2017 16:54:25 GMT+0530 (IST)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

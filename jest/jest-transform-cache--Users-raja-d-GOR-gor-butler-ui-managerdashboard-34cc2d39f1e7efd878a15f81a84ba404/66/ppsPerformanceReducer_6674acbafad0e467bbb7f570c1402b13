@@ -1,0 +1,23 @@
+/* istanbul ignore next */"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+
+
+
+PPSperformance = PPSperformance;var /* istanbul ignore next */_backEndConstants = require("../constants/backEndConstants"); /**
+                                                                                                                             * @param  {State Object}
+                                                                                                                             * @param  {Action object}
+                                                                                                                             * @return {[Object] updated state}
+                                                                                                                             */function PPSperformance(state = {}, action) {switch (action.type) {case /* istanbul ignore next */_backEndConstants.PARSE_PPS:var res;res = action.data;
+      if (res.aggregate_data) {
+        return Object.assign({}, state, {
+          "ppsPerformance": action.data });
+
+
+
+      }
+      return state;
+    default:
+      return state;}
+
+}

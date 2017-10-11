@@ -1,0 +1,12 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+
+makeAjaxCall = makeAjaxCall;var /* istanbul ignore next */_frontEndConstants = require('./../constants/frontEndConstants');function makeAjaxCall(params) {
+    return {
+        type: /* istanbul ignore next */_frontEndConstants.AJAX_CALL,
+        params };
+
+} /**
+   * Created by gaurav.m on 7/28/17.
+   */

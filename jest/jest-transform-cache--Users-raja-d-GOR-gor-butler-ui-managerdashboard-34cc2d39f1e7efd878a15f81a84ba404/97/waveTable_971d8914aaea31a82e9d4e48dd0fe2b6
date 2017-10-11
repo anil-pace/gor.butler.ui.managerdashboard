@@ -1,0 +1,362 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/containers/orderTab/waveTable.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_fixedDataTable = require('fixed-data-table');
+var /* istanbul ignore next */_dropdown = require('../../components/dropdown/dropdown'); /* istanbul ignore next */var _dropdown2 = _interopRequireDefault(_dropdown);
+var /* istanbul ignore next */_reactDimensions = require('react-dimensions'); /* istanbul ignore next */var _reactDimensions2 = _interopRequireDefault(_reactDimensions);
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+
+var /* istanbul ignore next */_commonFunctionsDataTable = require('../../components/commonFunctionsDataTable');
+
+
+
+
+
+
+
+
+
+
+
+var /* istanbul ignore next */_frontEndConstants = require('../../constants/frontEndConstants'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+
+class WavesTable extends /* istanbul ignore next */_react2.default.Component {
+    constructor(props) {
+        super(props);
+        if (this.props.items && this.props.items.length) {
+            this._dataList = new /* istanbul ignore next */_commonFunctionsDataTable.tableRenderer(this.props.items.length);
+        } else
+        {
+            this._dataList = new /* istanbul ignore next */_commonFunctionsDataTable.tableRenderer(0);
+        }
+        this._defaultSortIndexes = [];
+        this._dataList.newData = this.props.items || [];
+        var size = this._dataList.getSize();
+        for (var index = 0; index < size; index++) {
+            this._defaultSortIndexes.push(index);
+        }
+        var columnWidth = this.props.containerWidth / this.props.itemNumber;
+        this.state = {
+            sortedDataList: this._dataList,
+            colSortDirs: {},
+            columnWidths: {
+                id: columnWidth,
+                status: columnWidth,
+                startTime: columnWidth,
+                cutOffTime: columnWidth,
+                ordersToFulfill: columnWidth,
+                progress: columnWidth,
+                totalOrders: columnWidth } };
+
+
+        this._onSortChange = this._onSortChange.bind(this);
+        this._onFilterChange = this._onFilterChange.bind(this);
+        this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.items && nextProps.items.length) {
+            this._dataList = new /* istanbul ignore next */_commonFunctionsDataTable.tableRenderer(nextProps.items.length);
+        } else
+        {
+            this._dataList = new /* istanbul ignore next */_commonFunctionsDataTable.tableRenderer(0);
+        }
+        this._defaultSortIndexes = [];
+        this._dataList.newData = nextProps.items;
+        var size = this._dataList.getSize();
+        for (var index = 0; index < size; index++) {
+            this._defaultSortIndexes.push(index);
+        }
+        var columnWidth = nextProps.containerWidth / nextProps.itemNumber;
+        this.state = {
+            sortedDataList: this._dataList,
+            colSortDirs: {},
+            columnWidths: {
+                id: columnWidth,
+                status: columnWidth,
+                startTime: columnWidth,
+                cutOffTime: columnWidth,
+                ordersToFulfill: columnWidth,
+                progress: columnWidth,
+                totalOrders: columnWidth } };
+
+
+        this._onSortChange = this._onSortChange.bind(this);
+        this._onFilterChange = this._onFilterChange.bind(this);
+        this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+        this._onFilterChange(nextProps.getWaveFilter);
+
+    }
+
+    _onColumnResizeEndCallback(newColumnWidth, columnKey) {
+        this.setState(({ columnWidths }) => ({
+            columnWidths: /* istanbul ignore next */Object.assign({},
+            columnWidths, {
+                [columnKey]: newColumnWidth }) }));
+
+
+    }
+
+    _onFilterChange(e) {
+        var filterField = ["startTime", "id", "status", "cutOffTime"],newData;
+        if (e.target && !e.target.value) {
+            this.setState({
+                sortedDataList: this._dataList });
+
+        }
+        if (e.target && (e.target.value || e.target.value === "")) {
+            var captureValue = e.target.value;
+            newData = new /* istanbul ignore next */_commonFunctionsDataTable.DataListWrapper( /* istanbul ignore next */(0, _commonFunctionsDataTable.filterIndex)(e, this.state.sortedDataList, filterField), this._dataList);
+
+            this.setState({
+                sortedDataList: newData },
+            function () {
+                this.props.setWaveFilter(captureValue);
+                if (this.props.items && this.props.items.length) {
+                    this._onSortChange(this.props.currentSortState, this.props.currentHeaderOrder);
+                }
+            });
+        } else
+
+        {
+            newData = new /* istanbul ignore next */_commonFunctionsDataTable.DataListWrapper( /* istanbul ignore next */(0, _commonFunctionsDataTable.filterIndex)(e, this.state.sortedDataList, filterField), this._dataList);
+            this.setState({
+                sortedDataList: newData },
+            function () {
+                if (this.props.items && this.props.items.length) {
+                    this._onSortChange(this.props.currentSortState, this.props.currentHeaderOrder);
+                }
+            });
+        }
+    }
+
+    _onSortChange(columnKey, sortDir) {
+        if (columnKey === /* istanbul ignore next */_frontEndConstants.GOR_STATUS) {
+            columnKey = /* istanbul ignore next */_frontEndConstants.GOR_STATUS_PRIORITY;
+        }
+        var sortIndexes = this._defaultSortIndexes.slice();
+        if (this.state.sortedDataList._indexMap) {
+            sortIndexes = this.state.sortedDataList._indexMap.slice();
+        }
+        this.setState({
+            sortedDataList: new /* istanbul ignore next */_commonFunctionsDataTable.DataListWrapper( /* istanbul ignore next */(0, _commonFunctionsDataTable.sortData)(columnKey, sortDir, sortIndexes, this._dataList), this._dataList),
+            colSortDirs: {
+                [columnKey]: sortDir } });
+
+
+        this.props.sortHeaderOrder(sortDir);
+        this.props.sortHeaderState(columnKey);
+    }
+
+
+
+    render() {/* istanbul ignore next */var _state =
+
+
+        this.state,sortedDataList = _state.sortedDataList,colSortDirs = _state.colSortDirs,columnWidths = _state.columnWidths;
+        var heightRes = 500,totalwave = sortedDataList.getSize(),pendingWave = this.props.waveState.pendingWave,progressWave = this.props.waveState.progressWave,completedWaves = this.props.waveState.completedWaves;
+        var orderRemaining = this.props.waveState.orderRemaining.toLocaleString(),totalOrders = this.props.waveState.totalOrders.toLocaleString(),headerAlert = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 158 }, __self: this });
+
+        if (this.props.containerHeight !== 0) {
+            heightRes = this.props.containerHeight;
+        }
+        if (this.props.waveState.alertNum && this.props.waveState.alertNum !== 0) {
+            headerAlert = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl alertState', __source: { fileName: _jsxFileName, lineNumber: 164 }, __self: this }, /* istanbul ignore next */' ', /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'table-subtab-alert-icon', __source: { fileName: _jsxFileName, lineNumber: 164 }, __self: this }), /* istanbul ignore next */' ', /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-inline', __source: { fileName: _jsxFileName, lineNumber: 164 }, __self: this }, this.props.waveState.alertNum, /* istanbul ignore next */' Alerts '), /* istanbul ignore next */' ');
+        }
+        var noData = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 166 }, __self: this });
+        if (totalwave === 0 || totalwave === undefined || totalwave === null) {
+            noData = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-no-data', __source: { fileName: _jsxFileName, lineNumber: 168 }, __self: this }, /* istanbul ignore next */' ', /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'waves.table.noData', description: 'No data message for waves table',
+                    defaultMessage: 'No Waves Found', __source: { fileName: _jsxFileName, lineNumber: 168 }, __self: this }), /* istanbul ignore next */'  ');
+            heightRes = /* istanbul ignore next */_frontEndConstants.GOR_TABLE_HEADER_HEIGHT;
+        }
+        return (
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorTableMainContainer', __source: { fileName: _jsxFileName, lineNumber: 173 }, __self: this },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Table, /* istanbul ignore next */Object.assign({
+                        rowHeight: 50,
+                        rowsCount: sortedDataList.getSize(),
+                        headerHeight: 70,
+                        onColumnResizeEndCallback: this._onColumnResizeEndCallback,
+                        isColumnResizing: false,
+                        width: this.props.containerWidth,
+                        height: heightRes },
+                    this.props, { __source: { fileName: _jsxFileName, lineNumber: 175 }, __self: this }),
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+                        columnKey: 'id',
+                        header:
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.SortHeaderCell, /* istanbul ignore next */{ onSortChange: this._onSortChange,
+                                sortDir: colSortDirs.id, __source: { fileName: _jsxFileName, lineNumber: 187 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 189 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'WavesTable.heading', description: 'heading for WavesTable',
+                                    defaultMessage: 'Waves', __source: { fileName: _jsxFileName, lineNumber: 190 }, __self: this }),
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderSubText', __source: { fileName: _jsxFileName, lineNumber: 192 }, __self: this },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'WavesTable.Totalwaves',
+                                        description: 'total waves for WavesTable',
+                                        defaultMessage: 'Total:{totalwave}',
+                                        values: { totalwave: totalwave ? totalwave : '0' }, __source: { fileName: _jsxFileName, lineNumber: 193 }, __self: this })))),
+
+
+
+
+
+                        cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.TextCell, /* istanbul ignore next */{ data: sortedDataList, __source: { fileName: _jsxFileName, lineNumber: 202 }, __self: this }),
+                        fixed: true,
+                        width: columnWidths.id,
+                        isResizable: true, __source: { fileName: _jsxFileName, lineNumber: 184 }, __self: this }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+                        columnKey: 'status',
+                        header:
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.SortHeaderCell, /* istanbul ignore next */{ onSortChange: this._onSortChange,
+                                sortDir: colSortDirs.statusPriority, __source: { fileName: _jsxFileName, lineNumber: 210 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 212 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'waves.table.status', description: 'Status for waves',
+                                    defaultMessage: 'STATUS', __source: { fileName: _jsxFileName, lineNumber: 213 }, __self: this }),
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 215 }, __self: this },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 216 }, __self: this },
+                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'statuslogoWrap', __source: { fileName: _jsxFileName, lineNumber: 217 }, __self: this },
+                                            headerAlert))))),
+
+
+
+
+
+
+                        cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.StatusCell, /* istanbul ignore next */{ data: sortedDataList, statusKey: 'statusClass', __source: { fileName: _jsxFileName, lineNumber: 225 }, __self: this }),
+                        fixed: true,
+                        width: columnWidths.status,
+                        isResizable: true, __source: { fileName: _jsxFileName, lineNumber: 207 }, __self: this }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+                        columnKey: 'startTime',
+                        header:
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.SortHeaderCell, /* istanbul ignore next */{ onSortChange: this._onSortChange,
+                                sortDir: colSortDirs.startTime, __source: { fileName: _jsxFileName, lineNumber: 233 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 235 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'waves.table.startTime', description: 'StartTime for butlerbot',
+                                    defaultMessage: 'START TIME', __source: { fileName: _jsxFileName, lineNumber: 236 }, __self: this }),
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderSubText', __source: { fileName: _jsxFileName, lineNumber: 238 }, __self: this },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'WavesTable.pending.status',
+                                        description: 'pending status for WavesTable',
+                                        defaultMessage: '{pendingWave, number} {pendingWave, plural, one {wave} other {waves}} pending',
+                                        values: { pendingWave: pendingWave ? pendingWave : '0' }, __source: { fileName: _jsxFileName, lineNumber: 239 }, __self: this })))),
+
+
+
+
+                        cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.TextCell, /* istanbul ignore next */{ style: { textTransform: 'capitalize' }, data: sortedDataList, __source: { fileName: _jsxFileName, lineNumber: 247 }, __self: this }),
+                        fixed: true,
+                        width: columnWidths.startTime,
+                        isResizable: true, __source: { fileName: _jsxFileName, lineNumber: 230 }, __self: this }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+                        columnKey: 'cutOffTime',
+                        header:
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.SortHeaderCell, /* istanbul ignore next */{ onSortChange: this._onSortChange,
+                                sortDir: colSortDirs.cutOffTime, __source: { fileName: _jsxFileName, lineNumber: 255 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 257 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'waves.table.cutOffTime', description: 'cutOffTime for waves',
+                                    defaultMessage: 'CUT-OFF TIME', __source: { fileName: _jsxFileName, lineNumber: 258 }, __self: this }),
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderSubText', __source: { fileName: _jsxFileName, lineNumber: 260 }, __self: this },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'WavesTable.progress.status',
+                                        description: 'progress status for WavesTable',
+                                        defaultMessage: '{progressWave, number} {progressWave, plural, one {wave} other {waves}} in progress',
+                                        values: { progressWave: progressWave ? progressWave : '0' }, __source: { fileName: _jsxFileName, lineNumber: 261 }, __self: this })))),
+
+
+
+
+                        cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.TextCell, /* istanbul ignore next */{ style: { textTransform: 'capitalize' }, data: sortedDataList, __source: { fileName: _jsxFileName, lineNumber: 269 }, __self: this }),
+                        fixed: true,
+                        width: columnWidths.cutOffTime,
+                        isResizable: true, __source: { fileName: _jsxFileName, lineNumber: 252 }, __self: this }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+                        columnKey: 'ordersToFulfill',
+                        header:
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.SortHeaderCell, /* istanbul ignore next */{ onSortChange: this._onSortChange,
+                                sortDir: colSortDirs.ordersToFulfill, __source: { fileName: _jsxFileName, lineNumber: 277 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 279 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'waves.table.ordersToFulfill',
+                                    description: 'orders to fulfill for waves',
+                                    defaultMessage: 'ORDERS TO FULFILL', __source: { fileName: _jsxFileName, lineNumber: 280 }, __self: this }),
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderSubText', __source: { fileName: _jsxFileName, lineNumber: 283 }, __self: this },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'WavesTable.orderRemaining.status',
+                                        description: 'orderRemaining status for WavesTable',
+                                        defaultMessage: '{orderRemaining} remaining',
+                                        values: { orderRemaining: orderRemaining ? orderRemaining : '0' }, __source: { fileName: _jsxFileName, lineNumber: 284 }, __self: this })))),
+
+
+
+
+                        cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.TextCell, /* istanbul ignore next */{ data: sortedDataList, __source: { fileName: _jsxFileName, lineNumber: 292 }, __self: this }),
+                        fixed: true,
+                        width: columnWidths.ordersToFulfill,
+                        isResizable: true, __source: { fileName: _jsxFileName, lineNumber: 274 }, __self: this }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+                        columnKey: 'progress',
+                        header:
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.SortHeaderCell, /* istanbul ignore next */{ onSortChange: this._onSortChange,
+                                sortDir: colSortDirs.progress, __source: { fileName: _jsxFileName, lineNumber: 300 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 302 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'waves.table.progress', description: 'progress for waves',
+                                    defaultMessage: 'PROGRESS(%)', __source: { fileName: _jsxFileName, lineNumber: 303 }, __self: this }),
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderSubText', __source: { fileName: _jsxFileName, lineNumber: 305 }, __self: this },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'WavesTable.completed.status',
+                                        description: 'completed status for WavesTable',
+                                        defaultMessage: '{completedWaves, number} {completedWaves, plural, one {wave} other {waves}} completed',
+                                        values: { completedWaves: completedWaves ? completedWaves : '0' }, __source: { fileName: _jsxFileName, lineNumber: 306 }, __self: this })))),
+
+
+
+
+                        cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.ProgressCell, /* istanbul ignore next */{ data: sortedDataList, __source: { fileName: _jsxFileName, lineNumber: 314 }, __self: this }),
+                        fixed: true,
+                        width: columnWidths.progress,
+                        isResizable: true, __source: { fileName: _jsxFileName, lineNumber: 297 }, __self: this }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+                        columnKey: 'totalOrders',
+                        header:
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.SortHeaderCell, /* istanbul ignore next */{ onSortChange: this._onSortChange,
+                                sortDir: colSortDirs.totalOrders, __source: { fileName: _jsxFileName, lineNumber: 322 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 324 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'waves.table.totalOrders', description: 'totalOrders for waves',
+                                    defaultMessage: 'TOTAL ORDERS', __source: { fileName: _jsxFileName, lineNumber: 325 }, __self: this }),
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderSubText', __source: { fileName: _jsxFileName, lineNumber: 327 }, __self: this },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'WavesTable.totalOrders.status',
+                                        description: 'totalOrders status for WavesTable',
+                                        defaultMessage: '{totalOrders, number} {totalOrders, plural, one {order} other {orders}}',
+                                        values: { totalOrders: totalOrders ? totalOrders : '0' }, __source: { fileName: _jsxFileName, lineNumber: 328 }, __self: this })))),
+
+
+
+
+                        cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.TextCell, /* istanbul ignore next */{ data: sortedDataList, __source: { fileName: _jsxFileName, lineNumber: 336 }, __self: this }),
+                        fixed: true,
+                        width: columnWidths.totalOrders,
+                        isResizable: true, __source: { fileName: _jsxFileName, lineNumber: 319 }, __self: this })),
+
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 342 }, __self: this }, /* istanbul ignore next */' ', noData, /* istanbul ignore next */' ')));
+
+
+    }}
+
+WavesTable.PropTypes = {
+    items: /* istanbul ignore next */_react2.default.PropTypes.array,
+    containerWidth: /* istanbul ignore next */_react2.default.PropTypes.number,
+    itemNumber: /* istanbul ignore next */_react2.default.PropTypes.number,
+    currentHeaderOrder: /* istanbul ignore next */_react2.default.PropTypes.object,
+    sortHeaderState: /* istanbul ignore next */_react2.default.PropTypes.func,
+    refreshOption: /* istanbul ignore next */_react2.default.PropTypes.func,
+    lastUpdatedText: /* istanbul ignore next */_react2.default.PropTypes.string,
+    showFilter: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    lastUpdated: /* istanbul ignore next */_react2.default.PropTypes.string,
+    responseFlag: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    setWaveFilter: /* istanbul ignore next */_react2.default.PropTypes.func,
+    setFilter: /* istanbul ignore next */_react2.default.PropTypes.func,
+    containerHeight: /* istanbul ignore next */_react2.default.PropTypes.number }; /* istanbul ignore next */exports.default =
+
+/* istanbul ignore next */(0, _reactDimensions2.default)()(WavesTable);

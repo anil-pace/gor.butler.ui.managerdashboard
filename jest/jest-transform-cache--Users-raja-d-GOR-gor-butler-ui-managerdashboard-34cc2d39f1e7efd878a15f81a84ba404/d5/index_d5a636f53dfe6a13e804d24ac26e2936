@@ -1,0 +1,29 @@
+/* istanbul ignore next */"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.GTable = undefined;var _jsxFileName = "/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/components/gor-table-component/index.js"; /**
+                                                                                                                                                                                                                                                    * Created by gaurav.m on 5/26/17.
+                                                                                                                                                                                                                                                    */
+
+/**
+                                                                                                                                                                                                                                                        * Options: table-bordered/table-striped
+                                                                                                                                                                                                                                                        * Header Will be in format: [{id:1,text: "SKU CODE", sortable: true}, {id:2,
+                                                                                                                                                                                                                                                                                       text: "NAME",
+                                                                                                                                                                                                                                                                                       sortable: true
+                                                                                                                                                                                                                                                                                       }, {id:3,text: "OPENING STOCK", searchable: false}, {id:4,text: "PURCHAGE QTY", searchable: false}, {id:5,
+                                                                                                                                                                                                                                                                                       text: "SALE QTY",
+                                                                                                                                                                                                                                                                                       sortable: true
+                                                                                                                                                                                                                                                                                   }, {id:6,
+                                                                                                                                                                                                                                                                                       text: "CLOSING STOCK",
+                                                                                                                                                                                                                                                                                       sortable: true
+                                                                                                                                                                                                                                                                                   }]
+                                                                                                                                                                                                                                                        */
+
+var /* istanbul ignore next */_react = require("react"); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+//require("./../../../library/table/css/table.css")
+class GTable extends /* istanbul ignore next */_react2.default.Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: ["table-container"].concat(this.props.options || []).join(" "), __source: { fileName: _jsxFileName, lineNumber: 26 }, __self: this },
+                this.props.children));
+
+    }} /* istanbul ignore next */exports.GTable = GTable;

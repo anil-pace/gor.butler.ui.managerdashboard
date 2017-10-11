@@ -1,0 +1,767 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/utilityComponents/downloadGRTile.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/components/utilityComponents</a> downloadGRTile.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/34</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/23</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/9</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/33</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from "react";<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+import { FormattedMessage, FormattedDate, defineMessages } from "react-intl";
+import UtilityDropDown from "./utilityDropdownWrap";
+import ListItem from "../list/listItem";
+import { GR_REPORT_URL } from "../../constants/configConstants";
+import { GET, GR_REPORT_RESPONSE } from "../../constants/frontEndConstants";
+&nbsp;
+const messages = defineMessages({<span class="cstat-no" title="statement not covered" ></span>
+  downloadRprtsStatusHead: {
+    id: "utility.downloadGRN.status.heading",
+    description: "GRN Status",
+    defaultMessage: "GRN Status"
+  },
+  downloadGrnStnPlaceHolder: {
+    id: "utility.downloadGRN.stnPlaceholder",
+    description: "Enter STN Number",
+    defaultMessage: "Enter STN Number"
+  },
+  downloadGrnSelectFormatPlaceHolder: {
+    id: "utility.downloadGRN.formatPlaceholder",
+    description: "Enter STN Number",
+    defaultMessage: "Select File type"
+  },
+  downloadGrnLink: {
+    id: "utility.reportsHistory.clickToDownload",
+    description: "file name",
+    defaultMessage: "Click here to download "
+  }
+});
+&nbsp;
+class DownloadGRNTile extends React.Component {
+<span class="fstat-no" title="function not covered" >  co</span>nstructor(props) {
+<span class="cstat-no" title="statement not covered" >    super(props);</span>
+<span class="cstat-no" title="statement not covered" >    this.state = {</span>
+      invoiceId: null,
+      fileType: null
+    };
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  _c</span>hangeGRNFileType(data) {
+<span class="cstat-no" title="statement not covered" >    this.setState({ fileType: data.value });</span>
+  }
+<span class="fstat-no" title="function not covered" >  _g</span>etCurrentDropDownState(fileType, currentValue) {
+<span class="cstat-no" title="statement not covered" >    for (var i = fileType.length - 1; i &gt;= 0; i--) {</span>
+<span class="cstat-no" title="statement not covered" >      if (fileType[i].value === currentValue) {</span>
+<span class="cstat-no" title="statement not covered" >        return fileType[i].label;</span>
+      }
+    }
+<span class="cstat-no" title="statement not covered" >    return null;</span>
+  }
+<span class="fstat-no" title="function not covered" >  _g</span>enerateGRN() {
+<span class="cstat-no" title="statement not covered" >    if (this.props.generateReport) {</span>
+<span class="cstat-no" title="statement not covered" >      this.props.generateReport(this.state.fileType, this.state.invoiceId);</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      throw new Error("Could not get the callback here!");</span>
+    }
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  _c</span>aptureQuery(e) {
+<span class="cstat-no" title="statement not covered" >    if (e.target.value) {</span>
+<span class="cstat-no" title="statement not covered" >      this.setState({ invoiceId: e.target.value });</span>
+    }
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  _r</span>enderDownloadGRN(reportsHistory) {
+    var result = <span class="cstat-no" title="statement not covered" >[];</span>
+&nbsp;
+    // pushing then the list items
+<span class="cstat-no" title="statement not covered" >    if (reportsHistory.constructor !== Array &amp;&amp; reportsHistory.length &lt; 0) {</span>
+      //no history of files present from the backend
+<span class="cstat-no" title="statement not covered" >      return result;</span>
+    }
+<span class="cstat-no" title="statement not covered" >    for (let i = 0; i&lt;reportsHistory.length ; i++) {</span>
+      let listItem = (
+        &lt;ListItem index={i} key=<span class="cstat-no" title="statement not covered" >{"listItem" + i}&gt;</span>
+          &lt;div className="gor-inline"&gt;
+            &lt;div className="gor-utility-master-h1"&gt;
+              {reportsHistory[i].file_url
+                ? &lt;a href={reportsHistory[i].file_url} download&gt;
+                    {this.context.intl.formatMessage(messages.downloadGrnLink)}
+                  &lt;/a&gt;
+<span class="branch-0 cbranch-no" title="branch not covered" ></span>                : ""}
+            &lt;/div&gt;
+            &lt;div className="gor-inline gor-utility-master-h2"&gt;
+              &lt;FormattedMessage
+                id="utility.uploadHist.success"
+                description="Status "
+                defaultMessage="Status: {status}"
+                values={{ status: reportsHistory[i].status }}
+              /&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className="gor-inline gor-utility-master-h2"&gt;
+            &lt;FormattedDate
+              value={new Date(reportsHistory[i].create_time)}
+              month="short"
+              day="2-digit"
+              hour="2-digit"
+              minute="2-digit"
+              timeZone={this.props.timeOffset}
+            /&gt;
+          &lt;/div&gt;
+        &lt;/ListItem&gt;
+      );
+<span class="cstat-no" title="statement not covered" >      result.push(listItem);</span>
+    }
+<span class="cstat-no" title="statement not covered" >    if(result.length===0){</span>
+      let listItem=&lt;ListItem index={0} key={"li<span class="cstat-no" title="statement not covered" >stItem" + 0}&gt;</span>
+        &lt;div className="gor-inline"&gt;
+          &lt;div className="gor-utility-master-h1"&gt;
+            &lt;div className="gor-utility-no-history-found"&gt;
+              &lt;FormattedMessage
+                  id="utility.uploadHist.noresultfound"
+                  description="Status "
+                  defaultMessage="No Result Found"
+              /&gt;
+            &lt;/div&gt;
+&nbsp;
+          &lt;/div&gt;
+          &lt;div className="gor-inline gor-utility-master-h2"/&gt;
+&nbsp;
+        &lt;/div&gt;
+        &lt;div className="gor-inline gor-utility-master-h2"/&gt;
+&nbsp;
+      &lt;/ListItem&gt;
+<span class="cstat-no" title="statement not covered" >        result.push(listItem)</span>
+    }
+<span class="cstat-no" title="statement not covered" >    return &lt;div className="gor-utility-history-container"&gt;{result}&lt;/div&gt;;</span>
+  }
+<span class="fstat-no" title="function not covered" >  sh</span>ouldComponentUpdate(nextProps, nextState) {
+<span class="cstat-no" title="statement not covered" >    if (</span>
+      JSON.stringify(this.props.reportsHistory) ===
+      JSON.stringify(nextProps.reportsHistory)
+    ) {
+<span class="cstat-no" title="statement not covered" >      return true;</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      return false;</span>
+    }
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  re</span>nder() {
+    const fileType = <span class="cstat-no" title="statement not covered" >[</span>
+      { value: "csv", label: "Comma separated values (csv)" },
+      {
+        value: "xlsx",
+        label: "ExceL Spreadsheet (xlsx)"
+      }
+    ];
+&nbsp;
+    let currenFileType = <span class="cstat-no" title="statement not covered" >this.state.fileType</span>
+      ? this._getCurrentDropDownState(fileType, this.state.fileType)
+      : null;
+    let reportsHistory = <span class="cstat-no" title="statement not covered" >this._renderDownloadGRN(this.props.grnHistory);</span>
+<span class="cstat-no" title="statement not covered" >    return (</span>
+      &lt;div&gt;
+        &lt;div className="gor-utility-invoice-h1"&gt;
+          &lt;FormattedMessage
+            id="utility.downloadGRN.label"
+            description="STN number:"
+            defaultMessage="STN number:"
+          /&gt;
+        &lt;/div&gt;
+        &lt;div className="gor-audit-input-wrap gor-utility-invoice-wrap"&gt;
+          &lt;input
+            className="gor-audit-input gor-input-ok"
+            placeholder={this.context.intl.formatMessage(
+              messages.downloadGrnStnPlaceHolder
+            )}
+            ref={<span class="fstat-no" title="function not covered" >no</span>de =&gt; {
+<span class="cstat-no" title="statement not covered" >              this.invoiceId = node;</span>
+            }}
+            onChange={this._captureQuery.bind(this)}
+          /&gt;
+          {this.props.validatedInvoice
+            ? &lt;div className="gor-login-error" /&gt;
+<span class="branch-0 cbranch-no" title="branch not covered" >            :</span> ""}
+        &lt;/div&gt;
+        {this.props.validatedInvoice
+          ? &lt;div className="gor-sku-error gor-utility-error-invoice"&gt;
+              &lt;FormattedMessage
+                id="utility.downloadGRN.stnError"
+                description="Please enter correct STN number"
+                defaultMessage="Please enter correct STN number"
+              /&gt;
+            &lt;/div&gt;
+<span class="branch-0 cbranch-no" title="branch not covered" >          :</span> ""}
+        &lt;UtilityDropDown
+          items={fileType}
+          dropdownLabel="File format"
+          placeHolderText={this.context.intl.formatMessage(
+            messages.downloadGrnSelectFormatPlaceHolder
+          )}
+          changeMode={this._changeGRNFileType.bind(this)}
+          currentState={currenFileType}
+        /&gt;
+        &lt;div className="gor-utility-btn-wrap"&gt;
+          &lt;button
+            onClick={this._generateGRN.bind(this)}
+            className={
+              this.state.invoiceId &amp;&amp; this.state.fileType
+                ? "gor-download-button"
+                : "gor-download-button gor-disable-content"
+            }
+          &gt;
+            &lt;label&gt;
+              &lt;FormattedMessage
+                id="utility.downloadGRN.head"
+                description="Generate Report"
+                defaultMessage="Generate Report"
+              /&gt;
+            &lt;/label&gt;
+          &lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div className="gor-utility-body-header"&gt;
+          &lt;FormattedMessage
+            id="utility.downloadGRN.history"
+            description="Report History"
+            defaultMessage="Report History"
+          /&gt;
+        &lt;/div&gt;
+        &lt;h1&gt;
+          {this.context.intl.formatMessage(messages.downloadRprtsStatusHead)}
+        &lt;/h1&gt;
+        {reportsHistory}
+      &lt;/div&gt;
+    );
+  }
+}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >DownloadGRNTile.contextTypes = {</span>
+  intl: React.PropTypes.object.isRequired
+};
+&nbsp;
+export default DownloadGRNTile;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Oct 11 2017 16:54:25 GMT+0530 (IST)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

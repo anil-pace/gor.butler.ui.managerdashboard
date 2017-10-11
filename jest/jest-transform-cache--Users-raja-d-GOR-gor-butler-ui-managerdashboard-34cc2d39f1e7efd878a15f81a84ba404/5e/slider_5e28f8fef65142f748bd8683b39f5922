@@ -1,0 +1,139 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/components/rangeSlider/slider.js'; /* eslint-disable react/prop-types */
+var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_track = require('./common/track'); /* istanbul ignore next */var _track2 = _interopRequireDefault(_track);
+var /* istanbul ignore next */_createSlider = require('./common/createSlider'); /* istanbul ignore next */var _createSlider2 = _interopRequireDefault(_createSlider);
+var /* istanbul ignore next */_utils = require('./utils'); /* istanbul ignore next */var utils = _interopRequireWildcard(_utils); /* istanbul ignore next */function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+class slider extends /* istanbul ignore next */_react2.default.Component {
+
+
+
+
+
+
+
+
+
+  constructor(props) {
+    super(props); /* istanbul ignore next */this.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    onEnd = () => {
+      this.setState({ dragging: false });
+      this.removeDocumentEvents();
+      this.props.onAfterChange(this.getValue());
+    };const defaultValue = props.defaultValue !== undefined ? props.defaultValue : props.min;const value = props.value !== undefined ? props.value : defaultValue;this.state = { value: this.trimAlignValue(value), dragging: false };}componentWillReceiveProps(nextProps) {if (!('value' in nextProps || 'min' in nextProps || 'max' in nextProps)) return;const prevValue = this.state.value;const value = nextProps.value !== undefined ? nextProps.value : prevValue;const nextValue = this.trimAlignValue(value, nextProps);if (nextValue === prevValue) return;this.setState({ value: nextValue });if (utils.isValueOutOfRange(value, nextProps)) {this.props.onChange(nextValue);}}onChange(state) {const props = this.props;const isNotControlled = !('value' in props);if (isNotControlled) {this.setState(state);}const changedValue = state.value;props.onChange(changedValue);}onStart(position) {this.setState({ dragging: true });const props = this.props;const prevValue = this.getValue();props.onBeforeChange(prevValue);const value = this.calcValueByPos(position);this.startValue = value;this.startPosition = position;if (value === prevValue) return;this.onChange({ value });}
+
+  onMove(e, position) {
+    utils.pauseEvent(e);
+    const state = this.state;
+    const value = this.calcValueByPos(position);
+    const oldValue = state.value;
+    if (value === oldValue) return;
+
+    this.onChange({ value });
+  }
+
+  getValue() {
+    return this.state.value;
+  }
+
+  getLowerBound() {
+    return this.props.min;
+  }
+
+  getUpperBound() {
+    return this.state.value;
+  }
+
+  trimAlignValue(v, nextProps = {}) {
+    const mergedProps = /* istanbul ignore next */Object.assign({}, this.props, nextProps);
+    const val = utils.ensureValueInRange(v, mergedProps);
+    return utils.ensureValuePrecision(val, mergedProps);
+  }
+
+  render() {/* istanbul ignore next */var _props =
+
+
+
+
+
+
+    this.props; /* istanbul ignore next */const prefixCls = _props.prefixCls,vertical = _props.vertical,included = _props.included,disabled = _props.disabled,handleGenerator = _props.handle; /* istanbul ignore next */var _state =
+    this.state; /* istanbul ignore next */const value = _state.value,dragging = _state.dragging;
+    const offset = this.calcOffset(value);
+    const handle = handleGenerator({
+      className: `${prefixCls}-handle`,
+      vertical,
+      offset,
+      value,
+      dragging,
+      disabled,
+      ref: h => this.saveHandle(0, h) });
+
+    const track =
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_track2.default, /* istanbul ignore next */{
+      className: `${prefixCls}-track`,
+      vertical: vertical,
+      included: included,
+      offset: 0,
+      length: offset, __source: { fileName: _jsxFileName, lineNumber: 126 }, __self: this });
+
+
+
+    return { tracks: track, handles: handle };
+  }} /* istanbul ignore next */slider.displayName = 'Slider'; /* istanbul ignore next */slider.propTypes = { defaultValue: /* istanbul ignore next */_react.PropTypes.number, value: /* istanbul ignore next */_react.PropTypes.number, disabled: /* istanbul ignore next */_react.PropTypes.bool }; /* istanbul ignore next */slider.defaultProps = {}; /* istanbul ignore next */exports.default =
+
+
+/* istanbul ignore next */(0, _createSlider2.default)(slider);

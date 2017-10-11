@@ -1,0 +1,29 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+
+
+
+
+
+
+
+
+chargersDetail = chargersDetail;var /* istanbul ignore next */_frontEndConstants = require('../constants/frontEndConstants');var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_reactIntl = require('react-intl'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        * @param  {State Object}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        * @param  {Action object}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        * @return {[Object] updated state}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        */function chargersDetail(state = {}, action) {switch (action.type) {case /* istanbul ignore next */_frontEndConstants.CHARGERS_DATA:var res;res = action.data;
+            var chargers;
+            if (res.complete_data) {
+                return Object.assign({}, state, {
+                    "chargersDetail": res.complete_data.length > 0 ? res.complete_data : state.chargersDetail,
+                    "noResultFound": res.complete_data.length < 1 });
+
+            }
+
+        default:
+            return state;}
+
+
+}
