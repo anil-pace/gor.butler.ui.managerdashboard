@@ -1,0 +1,108 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/components/utilityComponents/masterUploadTile.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_accordianBar = require('./accordianBar'); /* istanbul ignore next */var _accordianBar2 = _interopRequireDefault(_accordianBar);
+var /* istanbul ignore next */_fileUpload = require('../fileUpload/fileUpload'); /* istanbul ignore next */var _fileUpload2 = _interopRequireDefault(_fileUpload);
+var /* istanbul ignore next */_listItem = require('../list/listItem'); /* istanbul ignore next */var _listItem2 = _interopRequireDefault(_listItem);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+class MasterUploadTile extends /* istanbul ignore next */_react2.default.Component {
+
+  constructor(props)
+  {
+    super(props);
+    this.state = {
+      showPanel: [],
+      stateChanged: false };
+
+
+  }
+
+  _handlePanel(index) {
+    var accordianState = this.state.showPanel;
+    var currentState = accordianState[index];
+    var stateChanged = !this.state.stateChanged;
+    accordianState = new Array(accordianState.length ? accordianState.length : 0).fill(false);
+    accordianState[index] = !currentState;
+
+    this.setState({
+      showPanel: accordianState,
+      stateChanged: stateChanged });
+
+  }
+
+  _renderMasterData() {
+    var result = [],masterUploadBar,historyData = this.props.historyData;
+    if (!this.state.showPanel.length) {
+      let accordianState = new Array(historyData.length ? historyData.length : 0).fill(false);
+      let stateChanged = this.state.stateChanged;
+      this.state = {
+        showPanel: accordianState,
+        stateChanged: stateChanged };
+
+    }
+    for (let i = 0; i < historyData.length; i++) {
+      let status = (historyData[i].created + historyData[i].deleted + historyData[i].error + historyData[i].updated) / historyData[i].total * 100;
+
+      masterUploadBar = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_accordianBar2.default, /* istanbul ignore next */{ timeOffset: this.props.timeOffset, completed: Math.ceil(status), showPanel: this.state.showPanel[i], data: historyData[i],
+        handleAccordianState: this._handlePanel.bind(this), index: i, key: "acc" + i, __source: { fileName: _jsxFileName, lineNumber: 46 }, __self: this });
+      result.push(masterUploadBar);
+    }
+    if (result.length === 0) {
+      masterUploadBar = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_listItem2.default, /* istanbul ignore next */{ index: 0, key: "listItem" + 0, __source: { fileName: _jsxFileName, lineNumber: 51 }, __self: this },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-inline', __source: { fileName: _jsxFileName, lineNumber: 52 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-utility-master-h1', __source: { fileName: _jsxFileName, lineNumber: 53 }, __self: this },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-utility-no-history-found', __source: { fileName: _jsxFileName, lineNumber: 54 }, __self: this },
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{
+                id: 'utility.uploadHist.noresultfound',
+                description: 'Status ',
+                defaultMessage: 'No Result Found', __source: { fileName: _jsxFileName, lineNumber: 55 }, __self: this }))),
+
+
+
+
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-inline gor-utility-master-h2', __source: { fileName: _jsxFileName, lineNumber: 63 }, __self: this })),
+
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-inline gor-utility-master-h2', __source: { fileName: _jsxFileName, lineNumber: 66 }, __self: this }));
+
+
+      result.push(masterUploadBar);
+    }
+    return result;
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+
+    if (nextProps.uploadHistChanged !== this.props.uploadHistChanged || this.state.stateChanged !== nextState.stateChanged || nextProps.maxFileSize !== this.props.maxFileSize || nextProps.errorCode !== this.props.errorCode) {
+      return true;
+    }
+    return false;
+
+  }
+
+  render() {
+    var masterDataBody = this._renderMasterData();
+    return (
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 85 }, __self: this },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fileUpload2.default, /* istanbul ignore next */{ uploadBtnText: this.props.uploadBtnText, isProcessing: this.props.isMasterUploadProcessing, maxFileSize: this.props.maxFileSize, acceptedFormats: this.props.acceptedFormats, onChange: this.props.onMasterFileUpload, errorCode: this.props.errorCode, maxSize: this.props.maxSize, errorList: this.props.errorList, __source: { fileName: _jsxFileName, lineNumber: 86 }, __self: this }),
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-utility-body-header', __source: { fileName: _jsxFileName, lineNumber: 87 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'utility.uploadHistory.head', description: 'Upload History', defaultMessage: 'Upload History', __source: { fileName: _jsxFileName, lineNumber: 88 }, __self: this })),
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-utility-history-container', __source: { fileName: _jsxFileName, lineNumber: 90 }, __self: this },
+          masterDataBody)));
+
+
+
+  }}
+;
+MasterUploadTile.propTypes = {
+  onMasterFileUpload: /* istanbul ignore next */_react2.default.PropTypes.func,
+  historyData: /* istanbul ignore next */_react2.default.PropTypes.array,
+  acceptedFormats: /* istanbul ignore next */_react2.default.PropTypes.array,
+  validationList: /* istanbul ignore next */_react2.default.PropTypes.object,
+  maxFileSize: /* istanbul ignore next */_react2.default.PropTypes.number,
+  isMasterUploadProcessing: /* istanbul ignore next */_react2.default.PropTypes.bool,
+  uploadBtnText: /* istanbul ignore next */_react2.default.PropTypes.string,
+  uploadHistChanged: /* istanbul ignore next */_react2.default.PropTypes.bool }; /* istanbul ignore next */exports.default =
+
+
+MasterUploadTile;

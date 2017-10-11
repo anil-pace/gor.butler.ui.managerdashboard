@@ -1,0 +1,74 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var cov_1cjogcr63s = function () {var path = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/actions/tabActions.js',hash = '98f2cf052674cc2ef7b8fcffd8938197bb6ce5aa',global = new Function('return this')(),gcv = '__coverage__',coverageData = { path: '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/actions/tabActions.js', statementMap: { '0': { start: { line: 8, column: 2 }, end: { line: 11, column: 5 } }, '1': { start: { line: 15, column: 2 }, end: { line: 18, column: 5 } }, '2': { start: { line: 22, column: 2 }, end: { line: 25, column: 5 } }, '3': { start: { line: 29, column: 2 }, end: { line: 32, column: 5 } }, '4': { start: { line: 36, column: 2 }, end: { line: 39, column: 5 } }, '5': { start: { line: 43, column: 2 }, end: { line: 46, column: 5 } }, '6': { start: { line: 50, column: 2 }, end: { line: 53, column: 5 } }, '7': { start: { line: 57, column: 4 }, end: { line: 60, column: 5 } }, '8': { start: { line: 70, column: 4 }, end: { line: 73, column: 5 } } }, fnMap: { '0': { name: 'recieveOverviewStatus', decl: { start: { line: 7, column: 16 }, end: { line: 7, column: 37 } }, loc: { start: { line: 7, column: 43 }, end: { line: 12, column: 1 } }, line: 7 }, '1': { name: 'recieveSystemStatus', decl: { start: { line: 14, column: 16 }, end: { line: 14, column: 35 } }, loc: { start: { line: 14, column: 41 }, end: { line: 19, column: 1 } }, line: 14 }, '2': { name: 'recieveInventoryStatus', decl: { start: { line: 21, column: 16 }, end: { line: 21, column: 38 } }, loc: { start: { line: 21, column: 44 }, end: { line: 26, column: 1 } }, line: 21 }, '3': { name: 'recieveAuditStatus', decl: { start: { line: 28, column: 16 }, end: { line: 28, column: 34 } }, loc: { start: { line: 28, column: 40 }, end: { line: 33, column: 1 } }, line: 28 }, '4': { name: 'recieveOrdersStatus', decl: { start: { line: 35, column: 16 }, end: { line: 35, column: 35 } }, loc: { start: { line: 35, column: 41 }, end: { line: 40, column: 1 } }, line: 35 }, '5': { name: 'recieveUsersStatus', decl: { start: { line: 42, column: 16 }, end: { line: 42, column: 34 } }, loc: { start: { line: 42, column: 40 }, end: { line: 47, column: 1 } }, line: 42 }, '6': { name: 'recieveStatus', decl: { start: { line: 49, column: 16 }, end: { line: 49, column: 29 } }, loc: { start: { line: 49, column: 35 }, end: { line: 54, column: 1 } }, line: 49 }, '7': { name: 'setFireHazrdFlag', decl: { start: { line: 56, column: 16 }, end: { line: 56, column: 32 } }, loc: { start: { line: 56, column: 39 }, end: { line: 61, column: 1 } }, line: 56 }, '8': { name: 'setEmergencyModalStatus', decl: { start: { line: 69, column: 16 }, end: { line: 69, column: 39 } }, loc: { start: { line: 69, column: 46 }, end: { line: 74, column: 1 } }, line: 69 } }, branchMap: {}, s: { '0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0, '8': 0 }, f: { '0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0, '8': 0 }, b: {}, _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c' },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();exports.
+
+
+
+
+
+recieveOverviewStatus = recieveOverviewStatus; /* istanbul ignore next */exports.
+
+
+
+
+
+
+recieveSystemStatus = recieveSystemStatus; /* istanbul ignore next */exports.
+
+
+
+
+
+
+recieveInventoryStatus = recieveInventoryStatus; /* istanbul ignore next */exports.
+
+
+
+
+
+
+recieveAuditStatus = recieveAuditStatus; /* istanbul ignore next */exports.
+
+
+
+
+
+
+recieveOrdersStatus = recieveOrdersStatus; /* istanbul ignore next */exports.
+
+
+
+
+
+
+recieveUsersStatus = recieveUsersStatus; /* istanbul ignore next */exports.
+
+
+
+
+
+
+recieveStatus = recieveStatus; /* istanbul ignore next */exports.
+
+
+
+
+
+
+setFireHazrdFlag = setFireHazrdFlag; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+
+
+
+
+setEmergencyModalStatus = setEmergencyModalStatus;var /* istanbul ignore next */_frontEndConstants = require('../constants/frontEndConstants.js');function recieveOverviewStatus(data) {/* istanbul ignore next */++cov_1cjogcr63s.f[0];++cov_1cjogcr63s.s[0];return { type: /* istanbul ignore next */_frontEndConstants.GET_OVERVIEW, data };}function recieveSystemStatus(data) {/* istanbul ignore next */++cov_1cjogcr63s.f[1];++cov_1cjogcr63s.s[1];return { type: /* istanbul ignore next */_frontEndConstants.GET_SYSTEM, data };}function recieveInventoryStatus(data) {/* istanbul ignore next */++cov_1cjogcr63s.f[2];++cov_1cjogcr63s.s[2];return { type: /* istanbul ignore next */_frontEndConstants.GET_INVENTORY, data };}function recieveAuditStatus(data) {/* istanbul ignore next */++cov_1cjogcr63s.f[3];++cov_1cjogcr63s.s[3];return { type: /* istanbul ignore next */_frontEndConstants.GET_AUDIT, data };}function recieveOrdersStatus(data) {/* istanbul ignore next */++cov_1cjogcr63s.f[4];++cov_1cjogcr63s.s[4];return { type: /* istanbul ignore next */_frontEndConstants.GET_ORDERS, data };}function recieveUsersStatus(data) {/* istanbul ignore next */++cov_1cjogcr63s.f[5];++cov_1cjogcr63s.s[5];return { type: /* istanbul ignore next */_frontEndConstants.GET_USERS, data };}function recieveStatus(data) {/* istanbul ignore next */++cov_1cjogcr63s.f[6];++cov_1cjogcr63s.s[6];return { type: /* istanbul ignore next */_frontEndConstants.GET_STATUS, data };}function setFireHazrdFlag(data) {/* istanbul ignore next */++cov_1cjogcr63s.f[7];++cov_1cjogcr63s.s[7];return { type: /* istanbul ignore next */_frontEndConstants.FIRE_EMERGENCY_POPUP_FLAG, data };} /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * [setEmergencyModalStatus flag to set if modal is open]
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @param {[boolean]} data [true/false]
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */function setEmergencyModalStatus(data) {/* istanbul ignore next */++cov_1cjogcr63s.f[8];++cov_1cjogcr63s.s[8];return { type: /* istanbul ignore next */_frontEndConstants.SET_EMERGENCY_MODAL_STATUS, data };
+
+}

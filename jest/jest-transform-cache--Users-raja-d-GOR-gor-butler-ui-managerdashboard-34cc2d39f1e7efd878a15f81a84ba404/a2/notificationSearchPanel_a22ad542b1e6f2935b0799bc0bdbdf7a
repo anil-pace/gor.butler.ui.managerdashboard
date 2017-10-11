@@ -1,0 +1,53 @@
+/* istanbul ignore next */"use strict";Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = "/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/components/notifications/notificationSearchPanel.js"; /**
+                                                                                                                                                                                                                                     * Container for Notifications
+                                                                                                                                                                                                                                     * 
+                                                                                                                                                                                                                                     */
+var /* istanbul ignore next */_react = require("react"); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+
+class NotificationSearchPanel extends /* istanbul ignore next */_react2.default.Component {
+
+	constructor() {
+		super();
+		this.state = {
+			displaySearch: false };
+
+	}
+
+	_displaySearch() {
+		var curState = !this.state.displaySearch;
+		this.setState({ displaySearch: curState });
+	}
+	_handleSubmit(e) {
+		e.preventDefault();
+		this.props.onPaneSearch(this.searchInput.value.trim());
+	}
+	render() {
+		return (
+			/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: "paneWrap", __source: { fileName: _jsxFileName, lineNumber: 28 }, __self: this },
+				/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"span", /* istanbul ignore next */{ className: "calloutArr", __source: { fileName: _jsxFileName, lineNumber: 29 }, __self: this }),
+				/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: "paneHeader", __source: { fileName: _jsxFileName, lineNumber: 30 }, __self: this },
+					/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"section", /* istanbul ignore next */{ className: "paneHeader", __source: { fileName: _jsxFileName, lineNumber: 31 }, __self: this },
+						/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"span", /* istanbul ignore next */{ className: "headerText", __source: { fileName: _jsxFileName, lineNumber: 32 }, __self: this }, /* istanbul ignore next */"Notifications"),
+						/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"span", /* istanbul ignore next */{ className: "searchIcon", onClick: this._displaySearch.bind(this), __source: { fileName: _jsxFileName, lineNumber: 33 }, __self: this }))),
+
+
+				/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: "searchBoxWrap", style: { "display": this.state.displaySearch ? "block" : "none" }, __source: { fileName: _jsxFileName, lineNumber: 36 }, __self: this },
+					/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"form", /* istanbul ignore next */{ action: "#", onSubmit: e => this._handleSubmit(e), __source: { fileName: _jsxFileName, lineNumber: 37 }, __self: this },
+						/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"section", /* istanbul ignore next */{ className: "searchBoxCnt", __source: { fileName: _jsxFileName, lineNumber: 38 }, __self: this },
+							/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"input", /* istanbul ignore next */{ type: "text", className: "searchBox", ref: searchInput => this.searchInput = searchInput, placeholder: "Search Notifications", __source: { fileName: _jsxFileName, lineNumber: 39 }, __self: this }),
+							/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"input", /* istanbul ignore next */{ type: "submit", className: "paneSearch", value: "SEARCH", __source: { fileName: _jsxFileName, lineNumber: 40 }, __self: this }))))));
+
+
+
+
+
+	}}
+
+
+NotificationSearchPanel.propTypes = {}; /* istanbul ignore next */exports.default =
+
+
+
+NotificationSearchPanel;

@@ -1,0 +1,8 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var cov_f1513m93m = function () {var path = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/actions/sysControllersActions.js',hash = '4fc5cfaf8bedb1747b000c3f5bc70bd6ebe4baad',global = new Function('return this')(),gcv = '__coverage__',coverageData = { path: '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/actions/sysControllersActions.js', statementMap: { '0': { start: { line: 4, column: 1 }, end: { line: 7, column: 4 } } }, fnMap: { '0': { name: 'recieveControllerData', decl: { start: { line: 3, column: 16 }, end: { line: 3, column: 37 } }, loc: { start: { line: 3, column: 43 }, end: { line: 8, column: 1 } }, line: 3 } }, branchMap: {}, s: { '0': 0 }, f: { '0': 0 }, b: {}, _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c' },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();exports.
+
+recieveControllerData = recieveControllerData;var /* istanbul ignore next */_frontEndConstants = require('../constants/frontEndConstants');function recieveControllerData(data) {/* istanbul ignore next */++cov_f1513m93m.f[0];++cov_f1513m93m.s[0];
+	return {
+		type: /* istanbul ignore next */_frontEndConstants.CONTROLLER_DATA,
+		data };
+
+}

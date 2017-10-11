@@ -1,0 +1,15 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+
+
+configReducer = configReducer;var /* istanbul ignore next */_frontEndConstants = require('../constants/frontEndConstants.js');function configReducer(state = {}, action) {
+    switch (action.type) {
+        case /* istanbul ignore next */_frontEndConstants.RECEIVE_CONFIGS:
+            return Object.assign({}, state, action.data);
+        default:
+            return state;}
+
+} /**
+   * Created by gaurav.m on 5/17/17.
+   */

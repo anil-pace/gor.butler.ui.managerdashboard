@@ -541,19 +541,16 @@ export class SortHeaderCell extends React.Component {
   }
 }
 
-export const AuditIssuesTooltipCell = ({rowIndex, data, columnKey, setClass, callBack, resolved, unresolved, ...props}) => (
+export const AuditIssuesTooltipCell = ({rowIndex, data, columnKey, setClass, callBack, resolved, unresolved,checkState,checked, ...props}) => (
     <Cell {...props}>
 
-<input type="checkbox" checked={data.getObjectAt(rowIndex)["isChecked"]}/>
+<input type="checkbox" checked={data.getObjectAt(rowIndex)["isChecked"]} onChange={checkState.bind(this,props.checkboxColumn,rowIndex)}/>
+
         {data.getObjectAt(rowIndex)[unresolved] || data.getObjectAt(rowIndex).infoIcon?
-
-
 
             <div  className="gor-tool-tip-hover" style={{fontSize:16,color:'black'}}>
                 {data.getObjectAt(rowIndex)[columnKey]} <span className="gor-audit-info-icon" onMouseEnter={callBack}/>
             </div>:data.getObjectAt(rowIndex)[columnKey]
-
-
         }
 
 

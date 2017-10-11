@@ -1,0 +1,130 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/containers/userTab/userRoles.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_userActions = require('../../actions/userActions');
+var /* istanbul ignore next */_backEndConstants = require('../../constants/backEndConstants');
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+
+var /* istanbul ignore next */_dropdown = require('../../components/dropdown/dropdown'); /* istanbul ignore next */var _dropdown2 = _interopRequireDefault(_dropdown);
+var /* istanbul ignore next */_Information = require('../../components/Information/Information'); /* istanbul ignore next */var _Information2 = _interopRequireDefault(_Information);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+class UserRoles extends /* istanbul ignore next */_react2.default.Component {
+
+    _checkRole(value) {
+        this.props.setRole(value);
+    }
+    _getChecked(roleName, currentRole) {
+        if (!this.props.roleSet) {
+            if (!roleName) {
+                if (currentRole.name === /* istanbul ignore next */_backEndConstants.BUTLER_UI)
+                {
+                    return true;
+                }
+            } else
+            if (roleName === currentRole.name) {
+                return true;
+            }
+            return false;
+        }
+        if (this.props.roleSet === currentRole.name) {
+            return true;
+        }
+        return false;
+    }
+    _isMapped(config, item) {
+        if (config.hasOwnProperty(item)) {
+            return true;
+        }
+        return false;
+    }
+    _getList() {
+        let options = [],selected = {},len,objDropdown,currentRole,label;
+        len = this.props.roleList.length;
+        for (let i = 0; i < len; i++) {
+            currentRole = this.props.roleList[i];
+
+            if (this._getChecked(this.props.roleName, currentRole)) {
+                selected = {
+                    value: currentRole.name,
+                    label: /* istanbul ignore next */_backEndConstants.stringConfig[currentRole.name] ? this.context.intl.formatMessage( /* istanbul ignore next */_backEndConstants.stringConfig[currentRole.name]) : currentRole.name };
+
+                label = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 50 }, __self: this },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'gor-role-label', __source: { fileName: _jsxFileName, lineNumber: 51 }, __self: this }, /* istanbul ignore next */_backEndConstants.stringConfig[currentRole.name] ? this.context.intl.formatMessage( /* istanbul ignore next */_backEndConstants.stringConfig[currentRole.name]) : currentRole.name),
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'gor-selected-icon', __source: { fileName: _jsxFileName, lineNumber: 52 }, __self: this }));
+
+
+            } else
+            {
+                label = /* istanbul ignore next */_backEndConstants.stringConfig[currentRole.name] ? this.context.intl.formatMessage( /* istanbul ignore next */_backEndConstants.stringConfig[currentRole.name]) : currentRole.name;
+            }
+            objDropdown = {
+                value: currentRole.name,
+                label: label };
+
+            options.push(objDropdown);
+        }
+        return { options: options, selected: selected };
+    }
+    _getInfo() {
+        let infoGroup = [],info,len,currentRole;
+        len = this.props.roleList.length;
+        let infoHeading = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-role-heading', __source: { fileName: _jsxFileName, lineNumber: 70 }, __self: this },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'users.roles.info.heading', description: 'Heading for roles description',
+                defaultMessage: 'Role definitions', __source: { fileName: _jsxFileName, lineNumber: 71 }, __self: this }));
+
+
+        for (let i = 0; i < len; i++) {
+            currentRole = this.props.roleList[i];
+            if (!this._isMapped( /* istanbul ignore next */_backEndConstants.stringConfig, currentRole.name) || !this._isMapped( /* istanbul ignore next */_backEndConstants.roleDesc, currentRole.name)) {
+                continue;
+            }
+            info = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-role-details', __source: { fileName: _jsxFileName, lineNumber: 80 }, __self: this },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'gor-usr-hdsm', __source: { fileName: _jsxFileName, lineNumber: 81 }, __self: this },
+                    this.context.intl.formatMessage( /* istanbul ignore next */_backEndConstants.stringConfig[currentRole.name]), /* istanbul ignore next */':'),
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'gor-sub-head', __source: { fileName: _jsxFileName, lineNumber: 84 }, __self: this },
+                    this.context.intl.formatMessage( /* istanbul ignore next */_backEndConstants.roleDesc[currentRole.name])));
+
+
+            infoGroup.push(info);
+        }
+        return { text: infoGroup, heading: infoHeading };
+    }
+    render() {
+        var dataDropdown = this._getList();
+        var infoData = this._getInfo();
+        return (
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-usr-details', __source: { fileName: _jsxFileName, lineNumber: 96 }, __self: this },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-usr-hdlg', __source: { fileName: _jsxFileName, lineNumber: 97 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'users.add.roledetails.heading', description: 'Heading for role',
+                        defaultMessage: 'Choose a role', __source: { fileName: _jsxFileName, lineNumber: 97 }, __self: this })),
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-sub-head', __source: { fileName: _jsxFileName, lineNumber: 99 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'users.add.roledetails.subheading', description: 'Subheading for role',
+                        defaultMessage: 'User will be given a specific level of control over the Butler system depending on the designated role', __source: { fileName: _jsxFileName, lineNumber: 99 }, __self: this })),
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-role', __source: { fileName: _jsxFileName, lineNumber: 101 }, __self: this },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_dropdown2.default, /* istanbul ignore next */{ optionDispatch: e => this._checkRole(e), items: dataDropdown.options,
+                        styleClass: 'gor-usr-dropdown', currentState: dataDropdown.selected, __source: { fileName: _jsxFileName, lineNumber: 102 }, __self: this }),
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Information2.default, /* istanbul ignore next */{ data: infoData.text, heading: infoData.heading, __source: { fileName: _jsxFileName, lineNumber: 104 }, __self: this }))));
+
+
+
+    }}
+;
+function mapStateToProps(state, ownProps) {
+    return {
+        roleSet: state.appInfo.roleSet || null };
+
+}
+function mapDispatchToProps(dispatch) {
+    return {
+        setRole: function /* istanbul ignore next */setRole(data) {dispatch( /* istanbul ignore next */(0, _userActions.setRole)(data));} };
+
+}
+UserRoles.contextTypes = {
+    intl: /* istanbul ignore next */_react2.default.PropTypes.object.isRequired };
+
+UserRoles.propTypes = {
+    roleSet: /* istanbul ignore next */_react2.default.PropTypes.string,
+    roleName: /* istanbul ignore next */_react2.default.PropTypes.string,
+    setRole: /* istanbul ignore next */_react2.default.PropTypes.func,
+    roleList: /* istanbul ignore next */_react2.default.PropTypes.array }; /* istanbul ignore next */exports.default =
+
+
+/* istanbul ignore next */(0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(UserRoles);

@@ -1,0 +1,66 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/components/legend/legendElement.js'; /**
+                                                                                                                                                                                                                    * Component for creating graph legend 
+                                                                                                                                                                                                                    */
+var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_frontEndConstants = require('../../constants/frontEndConstants'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+
+class legendElement extends /* istanbul ignore next */_react2.default.Component {
+
+	_processData() {
+		var type = this.props.legendType,
+		structure,name;
+		var position = "translate(" + this.props.xpos + "," + this.props.ypos + ")";
+		switch (type) {
+			case /* istanbul ignore next */_frontEndConstants.LEGEND_ROUND:
+				name = this.props.name;
+				structure = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'g', /* istanbul ignore next */{ transform: position, __source: { fileName: _jsxFileName, lineNumber: 18 }, __self: this },
+					/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'circle', /* istanbul ignore next */{ cx: '20', cy: '20', r: '4', stroke: this.props.color, fill: this.props.color, style: { "strokeWidth": 5 }, __source: { fileName: _jsxFileName, lineNumber: 19 }, __self: this }),
+					/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'text', /* istanbul ignore next */{ x: '30', y: '25', __source: { fileName: _jsxFileName, lineNumber: 20 }, __self: this },
+						name));
+
+
+				break;
+			case /* istanbul ignore next */_frontEndConstants.LEGEND_RECT:
+				name = name = this.props.name;
+				structure = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'g', /* istanbul ignore next */{ transform: position, __source: { fileName: _jsxFileName, lineNumber: 27 }, __self: this },
+					/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'rect', /* istanbul ignore next */{ fill: this.props.color, width: '20', height: '20', __source: { fileName: _jsxFileName, lineNumber: 28 }, __self: this }),
+					/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'text', /* istanbul ignore next */{ x: this.props.xpos + 15, y: this.props.ypos - 5, __source: { fileName: _jsxFileName, lineNumber: 29 }, __self: this },
+						/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'foreignobject', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 30 }, __self: this }, /* istanbul ignore next */' ', name)));
+
+
+				break;
+			default:
+				name = name = this.props.name;
+				structure = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'g', /* istanbul ignore next */{ transform: position, __source: { fileName: _jsxFileName, lineNumber: 36 }, __self: this },
+					/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'rect', /* istanbul ignore next */{ fill: this.props.color, width: '20', height: '20', __source: { fileName: _jsxFileName, lineNumber: 37 }, __self: this }),
+					/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'text', /* istanbul ignore next */{ x: this.props.xpos + 25, y: this.props.ypos - 5, __source: { fileName: _jsxFileName, lineNumber: 38 }, __self: this },
+						name));}
+
+
+
+		return structure;
+	}
+
+
+	render() {
+
+
+		return (
+			this._processData());
+
+
+	}}
+;
+legendElement.propTypes = {
+	color: /* istanbul ignore next */_react2.default.PropTypes.string,
+	xpos: /* istanbul ignore next */_react2.default.PropTypes.number,
+	ypos: /* istanbul ignore next */_react2.default.PropTypes.number,
+	name: /* istanbul ignore next */_react2.default.PropTypes.object };
+
+legendElement.contextTypes = {
+	intl: /* istanbul ignore next */_react2.default.PropTypes.object.isRequired }; /* istanbul ignore next */exports.default =
+
+
+legendElement;

@@ -1,0 +1,22 @@
+/* istanbul ignore next */"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+tabSelected = tabSelected;var /* istanbul ignore next */_frontEndConstants = require("../constants/frontEndConstants");function tabSelected(state = {}, action) {
+					switch (action.type) {
+
+										case /* istanbul ignore next */_frontEndConstants.TAB_SELECTED:
+															return Object.assign({}, state, {
+																				"tab": action.data });
+
+										case /* istanbul ignore next */_frontEndConstants.PREV_TAB_SELECTED:
+															return Object.assign({}, state, {
+																				"prevTab": action.data });
+
+										case /* istanbul ignore next */_frontEndConstants.SUB_TAB_SELECTED:
+															return Object.assign({}, state, {
+																				"subTab": action.data });
+
+
+										default:
+															return state;}
+
+}

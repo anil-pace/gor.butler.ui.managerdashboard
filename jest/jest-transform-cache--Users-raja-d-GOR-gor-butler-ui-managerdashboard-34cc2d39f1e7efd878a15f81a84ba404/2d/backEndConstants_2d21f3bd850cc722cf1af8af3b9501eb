@@ -1,0 +1,361 @@
+/* istanbul ignore next */"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.pwdDesc = exports.roleDesc = exports.stringConfig = exports.USER_ROLE_MAP = exports.BUTLER_UI = exports.BUTLER_SUPERVISOR = exports.CODE_E135 = exports.CODE_E052 = exports.CODE_E051 = exports.CODE_AE008 = exports.CODE_AE007 = exports.CODE_G016 = exports.CODE_AS003 = exports.CODE_AS002 = exports.CODE_AE006 = exports.CODE_AE005 = exports.CODE_AE004 = exports.CODE_AE002 = exports.CODE_AE001 = exports.CODE_G015 = exports.CODE_E027 = exports.CODE_E026 = exports.CODE_UE006 = exports.CODE_UE005 = exports.CODE_UE004 = exports.CODE_UE003 = exports.CODE_UE002 = exports.CODE_UE001 = exports.CODE_US004 = exports.CODE_US002 = exports.CODE_US001 = exports.USER_DATA = exports.HISTOGRAM_DETAILS = exports.SYSTEM_BUTLERS_DETAILS = exports.SYSTEM_PPS_DETAILS = exports.PPS_DETAIL = exports.SYS_CONTROLLERS = exports.SYS_OVERVIEW = exports.PPS = exports.PPS_CONFIGURATION = exports.CHARGING = exports.BUTLERBOTS = exports.SYSTEM_CHARGERS_DETAILS = exports.PARSE_CONTROLLERS = exports.PARSE_ZONING = exports.PARSE_STATUS = exports.PARSE_AUDIT_AGG = exports.PARSE_AUDIT = exports.PARSE_PPA_THROUGHPUT = exports.PARSE_PICK = exports.PARSE_PUT = exports.PARSE_INVENTORY_HISTORY = exports.PARSE_INVENTORY_TODAY = exports.PARSE_INVENTORY = exports.PARSE_SYSTEM = exports.PARSE_OVERVIEW = exports.PARSE_ORDERS = exports.PARSE_CHARGERS = exports.PARSE_BUTLERS = exports.PARSE_PPS = exports.WS_SUCCESS = undefined;var cov_1nils3epel = function () {var path = "/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/constants/backEndConstants.js",hash = "6ba4d37f465f2074dbe6b354fc30af1b4aa66bcd",global = new Function('return this')(),gcv = "__coverage__",coverageData = { path: "/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/constants/backEndConstants.js", statementMap: { "0": { start: { line: 3, column: 24 }, end: { line: 3, column: 47 } }, "1": { start: { line: 6, column: 23 }, end: { line: 6, column: 28 } }, "2": { start: { line: 7, column: 27 }, end: { line: 7, column: 36 } }, "3": { start: { line: 8, column: 28 }, end: { line: 8, column: 38 } }, "4": { start: { line: 9, column: 26 }, end: { line: 9, column: 34 } }, "5": { start: { line: 10, column: 28 }, end: { line: 10, column: 38 } }, "6": { start: { line: 11, column: 26 }, end: { line: 11, column: 34 } }, "7": { start: { line: 12, column: 30 }, end: { line: 12, column: 41 } }, "8": { start: { line: 13, column: 35 }, end: { line: 13, column: 52 } }, "9": { start: { line: 14, column: 37 }, end: { line: 14, column: 56 } }, "10": { start: { line: 15, column: 23 }, end: { line: 15, column: 28 } }, "11": { start: { line: 16, column: 24 }, end: { line: 16, column: 30 } }, "12": { start: { line: 17, column: 34 }, end: { line: 17, column: 61 } }, "13": { start: { line: 18, column: 25 }, end: { line: 18, column: 32 } }, "14": { start: { line: 19, column: 29 }, end: { line: 19, column: 40 } }, "15": { start: { line: 20, column: 26 }, end: { line: 20, column: 34 } }, "16": { start: { line: 21, column: 26 }, end: { line: 21, column: 33 } }, "17": { start: { line: 22, column: 33 }, end: { line: 22, column: 46 } }, "18": { start: { line: 23, column: 37 }, end: { line: 23, column: 47 } }, "19": { start: { line: 24, column: 24 }, end: { line: 24, column: 36 } }, "20": { start: { line: 25, column: 22 }, end: { line: 25, column: 39 } }, "21": { start: { line: 26, column: 31 }, end: { line: 26, column: 49 } }, "22": { start: { line: 27, column: 17 }, end: { line: 27, column: 22 } }, "23": { start: { line: 28, column: 26 }, end: { line: 28, column: 39 } }, "24": { start: { line: 29, column: 31 }, end: { line: 29, column: 47 } }, "25": { start: { line: 32, column: 24 }, end: { line: 32, column: 29 } }, "26": { start: { line: 33, column: 32 }, end: { line: 33, column: 52 } }, "27": { start: { line: 34, column: 36 }, end: { line: 34, column: 45 } }, "28": { start: { line: 35, column: 31 }, end: { line: 35, column: 42 } }, "29": { start: { line: 36, column: 23 }, end: { line: 36, column: 30 } }, "30": { start: { line: 39, column: 24 }, end: { line: 39, column: 31 } }, "31": { start: { line: 40, column: 24 }, end: { line: 40, column: 31 } }, "32": { start: { line: 41, column: 24 }, end: { line: 41, column: 31 } }, "33": { start: { line: 42, column: 24 }, end: { line: 42, column: 31 } }, "34": { start: { line: 43, column: 24 }, end: { line: 43, column: 31 } }, "35": { start: { line: 44, column: 24 }, end: { line: 44, column: 31 } }, "36": { start: { line: 45, column: 24 }, end: { line: 45, column: 31 } }, "37": { start: { line: 46, column: 24 }, end: { line: 46, column: 31 } }, "38": { start: { line: 47, column: 24 }, end: { line: 47, column: 31 } }, "39": { start: { line: 48, column: 23 }, end: { line: 48, column: 29 } }, "40": { start: { line: 49, column: 23 }, end: { line: 49, column: 29 } }, "41": { start: { line: 50, column: 23 }, end: { line: 50, column: 29 } }, "42": { start: { line: 51, column: 24 }, end: { line: 51, column: 31 } }, "43": { start: { line: 52, column: 24 }, end: { line: 52, column: 31 } }, "44": { start: { line: 53, column: 24 }, end: { line: 53, column: 31 } }, "45": { start: { line: 54, column: 24 }, end: { line: 54, column: 31 } }, "46": { start: { line: 55, column: 24 }, end: { line: 55, column: 31 } }, "47": { start: { line: 56, column: 24 }, end: { line: 56, column: 31 } }, "48": { start: { line: 57, column: 24 }, end: { line: 57, column: 31 } }, "49": { start: { line: 58, column: 23 }, end: { line: 58, column: 29 } }, "50": { start: { line: 59, column: 24 }, end: { line: 59, column: 31 } }, "51": { start: { line: 60, column: 24 }, end: { line: 60, column: 31 } }, "52": { start: { line: 61, column: 23 }, end: { line: 61, column: 29 } }, "53": { start: { line: 62, column: 23 }, end: { line: 62, column: 29 } }, "54": { start: { line: 63, column: 23 }, end: { line: 63, column: 29 } }, "55": { start: { line: 65, column: 31 }, end: { line: 65, column: 50 } }, "56": { start: { line: 66, column: 23 }, end: { line: 66, column: 34 } }, "57": { start: { line: 67, column: 27 }, end: { line: 71, column: 1 } }, "58": { start: { line: 75, column: 28 }, end: { line: 337, column: 2 } }, "59": { start: { line: 338, column: 24 }, end: { line: 350, column: 2 } }, "60": { start: { line: 351, column: 23 }, end: { line: 363, column: 2 } } }, fnMap: {}, branchMap: {}, s: { "0": 0, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0, "7": 0, "8": 0, "9": 0, "10": 0, "11": 0, "12": 0, "13": 0, "14": 0, "15": 0, "16": 0, "17": 0, "18": 0, "19": 0, "20": 0, "21": 0, "22": 0, "23": 0, "24": 0, "25": 0, "26": 0, "27": 0, "28": 0, "29": 0, "30": 0, "31": 0, "32": 0, "33": 0, "34": 0, "35": 0, "36": 0, "37": 0, "38": 0, "39": 0, "40": 0, "41": 0, "42": 0, "43": 0, "44": 0, "45": 0, "46": 0, "47": 0, "48": 0, "49": 0, "50": 0, "51": 0, "52": 0, "53": 0, "54": 0, "55": 0, "56": 0, "57": 0, "58": 0, "59": 0, "60": 0 }, f: {}, b: {}, _coverageSchema: "332fd63041d2c1bcb487cc26dd0d5f7d97098a6c" },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();var /* istanbul ignore next */_reactIntl = require("react-intl");
+//WS constants
+const WS_SUCCESS = /* istanbul ignore next */exports.WS_SUCCESS = (++cov_1nils3epel.s[0], "Sucessfully logged in");
+
+/*Parsing Constants*/
+const PARSE_PPS = /* istanbul ignore next */exports.PARSE_PPS = (++cov_1nils3epel.s[1], "pps");
+const PARSE_BUTLERS = /* istanbul ignore next */exports.PARSE_BUTLERS = (++cov_1nils3epel.s[2], "butlers");
+const PARSE_CHARGERS = /* istanbul ignore next */exports.PARSE_CHARGERS = (++cov_1nils3epel.s[3], "chargers");
+const PARSE_ORDERS = /* istanbul ignore next */exports.PARSE_ORDERS = (++cov_1nils3epel.s[4], "orders");
+const PARSE_OVERVIEW = /* istanbul ignore next */exports.PARSE_OVERVIEW = (++cov_1nils3epel.s[5], "overview");
+const PARSE_SYSTEM = /* istanbul ignore next */exports.PARSE_SYSTEM = (++cov_1nils3epel.s[6], "system");
+const PARSE_INVENTORY = /* istanbul ignore next */exports.PARSE_INVENTORY = (++cov_1nils3epel.s[7], "inventory");
+const PARSE_INVENTORY_TODAY = /* istanbul ignore next */exports.PARSE_INVENTORY_TODAY = (++cov_1nils3epel.s[8], "inventory_today");
+const PARSE_INVENTORY_HISTORY = /* istanbul ignore next */exports.PARSE_INVENTORY_HISTORY = (++cov_1nils3epel.s[9], "inventory_history");
+const PARSE_PUT = /* istanbul ignore next */exports.PARSE_PUT = (++cov_1nils3epel.s[10], "put");
+const PARSE_PICK = /* istanbul ignore next */exports.PARSE_PICK = (++cov_1nils3epel.s[11], "pick");
+const PARSE_PPA_THROUGHPUT = /* istanbul ignore next */exports.PARSE_PPA_THROUGHPUT = (++cov_1nils3epel.s[12], "put_pick_audit_throughput");
+const PARSE_AUDIT = /* istanbul ignore next */exports.PARSE_AUDIT = (++cov_1nils3epel.s[13], "audit");
+const PARSE_AUDIT_AGG = /* istanbul ignore next */exports.PARSE_AUDIT_AGG = (++cov_1nils3epel.s[14], "audit_agg");
+const PARSE_STATUS = /* istanbul ignore next */exports.PARSE_STATUS = (++cov_1nils3epel.s[15], "status");
+const PARSE_ZONING = /* istanbul ignore next */exports.PARSE_ZONING = (++cov_1nils3epel.s[16], "zones");
+const PARSE_CONTROLLERS = /* istanbul ignore next */exports.PARSE_CONTROLLERS = (++cov_1nils3epel.s[17], "controllers");
+const SYSTEM_CHARGERS_DETAILS = /* istanbul ignore next */exports.SYSTEM_CHARGERS_DETAILS = (++cov_1nils3epel.s[18], "chargers");
+const BUTLERBOTS = /* istanbul ignore next */exports.BUTLERBOTS = (++cov_1nils3epel.s[19], "butlerbots");
+const CHARGING = /* istanbul ignore next */exports.CHARGING = (++cov_1nils3epel.s[20], "chargingstation");
+const PPS_CONFIGURATION = /* istanbul ignore next */exports.PPS_CONFIGURATION = (++cov_1nils3epel.s[21], "ppsConfiguration");
+const PPS = /* istanbul ignore next */exports.PPS = (++cov_1nils3epel.s[22], "pps");
+const SYS_OVERVIEW = /* istanbul ignore next */exports.SYS_OVERVIEW = (++cov_1nils3epel.s[23], "sysOverview");
+const SYS_CONTROLLERS = /* istanbul ignore next */exports.SYS_CONTROLLERS = (++cov_1nils3epel.s[24], "sysControllers");
+
+/*Constants for response type */
+const PPS_DETAIL = /* istanbul ignore next */exports.PPS_DETAIL = (++cov_1nils3epel.s[25], "pps");
+const SYSTEM_PPS_DETAILS = /* istanbul ignore next */exports.SYSTEM_PPS_DETAILS = (++cov_1nils3epel.s[26], "system_pps_details");
+const SYSTEM_BUTLERS_DETAILS = /* istanbul ignore next */exports.SYSTEM_BUTLERS_DETAILS = (++cov_1nils3epel.s[27], "butlers");
+const HISTOGRAM_DETAILS = /* istanbul ignore next */exports.HISTOGRAM_DETAILS = (++cov_1nils3epel.s[28], "histogram");
+const USER_DATA = /* istanbul ignore next */exports.USER_DATA = (++cov_1nils3epel.s[29], "users");
+
+/*Constants for api response codes*/
+const CODE_US001 = /* istanbul ignore next */exports.CODE_US001 = (++cov_1nils3epel.s[30], 'us001');
+const CODE_US002 = /* istanbul ignore next */exports.CODE_US002 = (++cov_1nils3epel.s[31], 'us002');
+const CODE_US004 = /* istanbul ignore next */exports.CODE_US004 = (++cov_1nils3epel.s[32], 'us004');
+const CODE_UE001 = /* istanbul ignore next */exports.CODE_UE001 = (++cov_1nils3epel.s[33], 'ue001');
+const CODE_UE002 = /* istanbul ignore next */exports.CODE_UE002 = (++cov_1nils3epel.s[34], 'ue002');
+const CODE_UE003 = /* istanbul ignore next */exports.CODE_UE003 = (++cov_1nils3epel.s[35], 'ue003');
+const CODE_UE004 = /* istanbul ignore next */exports.CODE_UE004 = (++cov_1nils3epel.s[36], 'ue004');
+const CODE_UE005 = /* istanbul ignore next */exports.CODE_UE005 = (++cov_1nils3epel.s[37], 'ue005');
+const CODE_UE006 = /* istanbul ignore next */exports.CODE_UE006 = (++cov_1nils3epel.s[38], 'ue006');
+const CODE_E026 = /* istanbul ignore next */exports.CODE_E026 = (++cov_1nils3epel.s[39], 'e026');
+const CODE_E027 = /* istanbul ignore next */exports.CODE_E027 = (++cov_1nils3epel.s[40], 'e027');
+const CODE_G015 = /* istanbul ignore next */exports.CODE_G015 = (++cov_1nils3epel.s[41], 'g015');
+const CODE_AE001 = /* istanbul ignore next */exports.CODE_AE001 = (++cov_1nils3epel.s[42], 'ae001');
+const CODE_AE002 = /* istanbul ignore next */exports.CODE_AE002 = (++cov_1nils3epel.s[43], 'ae002');
+const CODE_AE004 = /* istanbul ignore next */exports.CODE_AE004 = (++cov_1nils3epel.s[44], 'ae004');
+const CODE_AE005 = /* istanbul ignore next */exports.CODE_AE005 = (++cov_1nils3epel.s[45], 'ae005');
+const CODE_AE006 = /* istanbul ignore next */exports.CODE_AE006 = (++cov_1nils3epel.s[46], 'ae006');
+const CODE_AS002 = /* istanbul ignore next */exports.CODE_AS002 = (++cov_1nils3epel.s[47], 'as002');
+const CODE_AS003 = /* istanbul ignore next */exports.CODE_AS003 = (++cov_1nils3epel.s[48], 'as003');
+const CODE_G016 = /* istanbul ignore next */exports.CODE_G016 = (++cov_1nils3epel.s[49], 'g016');
+const CODE_AE007 = /* istanbul ignore next */exports.CODE_AE007 = (++cov_1nils3epel.s[50], 'ae007');
+const CODE_AE008 = /* istanbul ignore next */exports.CODE_AE008 = (++cov_1nils3epel.s[51], 'ae008');
+const CODE_E051 = /* istanbul ignore next */exports.CODE_E051 = (++cov_1nils3epel.s[52], 'e051');
+const CODE_E052 = /* istanbul ignore next */exports.CODE_E052 = (++cov_1nils3epel.s[53], 'e052');
+const CODE_E135 = /* istanbul ignore next */exports.CODE_E135 = (++cov_1nils3epel.s[54], 'e135');
+/*User roles map*/
+const BUTLER_SUPERVISOR = /* istanbul ignore next */exports.BUTLER_SUPERVISOR = (++cov_1nils3epel.s[55], 'butler_supervisor');
+const BUTLER_UI = /* istanbul ignore next */exports.BUTLER_UI = (++cov_1nils3epel.s[56], 'butler_ui');
+const USER_ROLE_MAP = /* istanbul ignore next */exports.USER_ROLE_MAP = (++cov_1nils3epel.s[57], {
+    [BUTLER_SUPERVISOR]: "Manager",
+    [BUTLER_UI]: "Operator"
+
+
+    /*String config codes*/ });
+
+
+const stringConfig = /* istanbul ignore next */exports.stringConfig = (++cov_1nils3epel.s[58], /* istanbul ignore next */(0, _reactIntl.defineMessages)({
+    open: {
+        id: 'stringConfig.open',
+        description: 'Text to display on',
+        defaultMessage: 'Open' },
+
+    close: {
+        id: 'stringConfig.off',
+        description: 'Text to show off',
+        defaultMessage: "Close" },
+
+    fclose: {
+        id: 'stringConfig.fclose',
+        description: 'Text to show off',
+        defaultMessage: "Force Close" },
+
+    per_hour: {
+        id: 'stringConfig.per_hour',
+        description: 'Text to show per_hour',
+        defaultMessage: "per_hour" },
+
+    pick: {
+        id: 'stringConfig.pick',
+        description: 'Text to show pick',
+        defaultMessage: "pick" },
+
+    put: {
+        id: 'stringConfig.put',
+        description: 'Text to show put',
+        defaultMessage: "put" },
+
+    audit: {
+        id: 'stringConfig.audit',
+        description: 'Text to show audit',
+        defaultMessage: "audit" },
+
+    soft: {
+        id: 'stringConfig.soft',
+        description: 'Text to show soft',
+        defaultMessage: "soft" },
+
+    hard: {
+        id: 'stringConfig.hard',
+        description: 'Text to show hard',
+        defaultMessage: "hard" },
+
+    soft_manual: {
+        id: 'stringConfig.soft_manual',
+        description: 'Text to show soft_manual',
+        defaultMessage: "soft_manual" },
+
+    pending: {
+        id: 'stringConfig.pending',
+        description: 'Text to show pending',
+        defaultMessage: "In Progress" },
+
+    wave_pending: {
+        id: 'stringConfig.wave.pending',
+        description: 'Text to show pending',
+        defaultMessage: "Pending" },
+
+    disconnected: {
+        id: 'stringConfig.disconnected',
+        description: 'Text to show disconnected',
+        defaultMessage: "Disconnected" },
+
+    connected: {
+        id: 'stringConfig.connected',
+        description: 'Text to show connected',
+        defaultMessage: "Connected" },
+
+    completed: {
+        id: 'stringConfig.completed',
+        description: 'Text to show completed',
+        defaultMessage: "Completed" },
+
+    Completed: {
+        id: 'stringConfig.Completed',
+        description: 'Text to show Completed',
+        defaultMessage: "completed" },
+
+    in_progress: {
+        id: 'stringConfig.in_progress',
+        description: 'Text to show In Progress',
+        defaultMessage: "In Progress" },
+
+    breached: {
+        id: 'stringConfig.breached',
+        description: 'Text to show breached',
+        defaultMessage: "Breached" },
+
+    fulfillable: {
+        id: 'stringConfig.fulfillable',
+        description: 'Text to show fulfillable',
+        defaultMessage: "In Progress" },
+
+    abandoned: {
+        id: 'stringConfig.abandoned',
+        description: 'Text to show abandoned',
+        defaultMessage: "Abandoned" },
+
+    manual: {
+        id: 'stringConfig.manual',
+        description: 'Text to show manual',
+        defaultMessage: "Manual" },
+
+    auto: {
+        id: 'stringConfig.auto',
+        description: 'Text to show auto',
+        defaultMessage: "Auto" },
+
+    not_fulfillable: {
+        id: 'stringConfig.notFulfillable',
+        description: 'Text to show In progress',
+        defaultMessage: "Unfulfillable" },
+
+    exception: {
+        id: 'stringConfig.exception',
+        description: 'Text to show exception',
+        defaultMessage: "Exception" },
+
+    online: {
+        id: 'stringConfig.online',
+        description: 'Text to show Online',
+        defaultMessage: "online" },
+
+    offline: {
+        id: 'stringConfig.offline',
+        description: 'Text to show Offline',
+        defaultMessage: "offline" },
+
+    received: {
+        id: 'stringConfig.received',
+        description: 'Text to show received',
+        defaultMessage: "In Progress" },
+
+    cancelled: {
+        id: 'stringConfig.cancelled',
+        description: 'Text to show cancelled',
+        defaultMessage: "Cancelled" },
+
+
+    butler_supervisor: {
+        id: 'stringConfig.butler_supervisor',
+        description: 'Text to show Manager',
+        defaultMessage: "Manager" },
+
+    butler_ui: {
+        id: 'stringConfig.butler_ui',
+        description: 'Text to show Operator',
+        defaultMessage: "Operator" },
+
+    admin: {
+        id: 'stringConfig.admin',
+        description: 'Text to show admin',
+        defaultMessage: "Admin" },
+
+    qc_operator: {
+        id: 'stringConfig.qc',
+        description: 'Text to show Qc operator',
+        defaultMessage: "QC Operator" },
+
+    packing_operator: {
+        id: 'stringConfig.packing_operator',
+        description: 'Text to show packing operator',
+        defaultMessage: "Packing Operator" },
+
+    temporary_unfulfillable: {
+        "id": "stringConfig.temporary_unfulfillable",
+        "description": "Text for temporary unfulfillable status",
+        "defaultMessage": "On hold" },
+
+    audit_resolved: {
+        "id": "stringConfig.audit_resolved",
+        "description": "Text for audit resolved status",
+        "defaultMessage": "Resolved" },
+
+    audit_pending_approval: {
+        "id": "stringConfig.audit_pending_approval",
+        "description": "Text for audit pending approval status",
+        "defaultMessage": "Unresolved" },
+
+    audit_rejected: {
+        "id": "stringConfig.audit_rejected",
+        "description": "Text for audit rejected status",
+        "defaultMessage": "Rejected" },
+
+    md001: {
+        "id": "stringConfig.md001",
+        "description": "Text for safety checklist item 1",
+        "defaultMessage": "No personnel are present in the no-man zone." },
+
+    md002: {
+        "id": "stringConfig.md002",
+        "description": "Text for safety checklist item 2",
+        "defaultMessage": "All Butler and MSU positions have been corrected." },
+
+    md003: {
+        "id": "stringConfig.md003",
+        "description": "Text for safety checklist item 3",
+        "defaultMessage": "All no-man zone gates are properly closed." },
+
+    md004: {
+        "id": "stringConfig.md004",
+        "description": "Text for safety checklist item 4",
+        "defaultMessage": "All no-man gate limit switches are active and working." },
+
+    md005: {
+        "id": "stringConfig.md005",
+        "description": "Text for safety checklist item 5",
+        "defaultMessage": "All Hard Emergency buttons are released." },
+
+    md006: {
+        "id": "stringConfig.md006",
+        "description": "Text for safety checklist item 6",
+        "defaultMessage": "All Zigbee boxes are online." },
+
+    md007: {
+        "id": "stringConfig.md007",
+        "description": "Text for safety checklist item 7",
+        "defaultMessage": "Peripherals status known." },
+
+    md008: {
+        "id": "stringConfig.md008",
+        "description": "Text for safety checklist item 8",
+        "defaultMessage": "Physical inventory verified." },
+
+    md009: {
+        "id": "stringConfig.md009",
+        "description": "Text for safety checklist item 9",
+        "defaultMessage": "No Emergency buttons in 'Pressed' state." },
+
+    md010: {
+        "id": "stringConfig.md010",
+        "description": "Text for safety checklist item 10",
+        "defaultMessage": "All shutters open  in active zones." },
+
+    md011: {
+        "id": "stringConfig.md011",
+        "description": "Text for safety checklist item 11",
+        "defaultMessage": "No humans in operations area." },
+
+    md012: {
+        "id": "stringConfig.md012",
+        "description": "Text for safety checklist item 12",
+        "defaultMessage": "All paths cleared of any debris." },
+
+    md013: {
+        "id": "stringConfig.md013",
+        "description": "Text for safety checklist item 13",
+        "defaultMessage": 'Move bots to the PPS location and do an "init" after all bots are moved.' },
+
+    md014: {
+        "id": "stringConfig.md014",
+        "description": "Text for safety checklist item 14",
+        "defaultMessage": "No bots require to be moved to PPS." },
+
+    audit_reaudited: {
+        "id": "stringConfig.audit_reaudited",
+        "description": "Text for audit reaudited status",
+        "defaultMessage": "Re-audited" } }));
+
+
+const roleDesc = /* istanbul ignore next */exports.roleDesc = (++cov_1nils3epel.s[59], /* istanbul ignore next */(0, _reactIntl.defineMessages)({
+
+    butler_supervisor: {
+        id: 'roleDesc.butler_supervisor',
+        description: 'Text for Manager description',
+        defaultMessage: "Grant access to the Management Interface and Operator Interface to all systems" },
+
+    butler_ui: {
+        id: 'roleDesc.butler_ui',
+        description: 'Text for Operator description',
+        defaultMessage: "Grant access to the Operator Interface at each Pick Put Station in the Butler system" } }));
+
+
+const pwdDesc = /* istanbul ignore next */exports.pwdDesc = (++cov_1nils3epel.s[60], /* istanbul ignore next */(0, _reactIntl.defineMessages)({
+
+    butler_supervisor: {
+        id: 'pwdDesc.butler_supervisor',
+        description: 'Text for password description of manager',
+        defaultMessage: "A password of at least 8 alphanumeric characters will be required for logging into the Management Interface and Operator Interface." },
+
+    butler_ui: {
+        id: 'pwdDesc.butler_ui',
+        description: 'Text for password description of operator',
+        defaultMessage: "A password of 6 digits will be required for logging into the Operator Interface." } }));

@@ -1,0 +1,32 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/components/tableFilter/filterTokenContainer.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_filterToken = require('./filterToken'); /* istanbul ignore next */var _filterToken2 = _interopRequireDefault(_filterToken);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+class FilterTokenWrap extends /* istanbul ignore next */_react2.default.Component {
+
+  _processTokenFields() {
+    var tokens = this.props.label,tokenWrap = [];
+    var tokenSelected = this.props.selectedToken;
+    var length = tokens.length;
+    for (let i = 0; i < length; i++) {
+      var tokenComponent = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_filterToken2.default, /* istanbul ignore next */{ key: tokens[i] + i, tokenCallBack: this.props.tokenCallBack,
+        tokenField: this.props.field.value, tokenLabel: tokens[i], selection: this.props.selection,
+        tokenSelected: tokenSelected, lastToken: i ? false : true, __source: { fileName: _jsxFileName, lineNumber: 11 }, __self: this });
+      tokenWrap.push(tokenComponent);
+    }
+    return tokenWrap;
+  }
+
+  render() {
+    var tokenWrap = this._processTokenFields();
+    return (
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 22 }, __self: this },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-token-section-h1', __source: { fileName: _jsxFileName, lineNumber: 23 }, __self: this },
+          this.props.field.label),
+
+        tokenWrap));
+
+
+  }}
+; /* istanbul ignore next */exports.default =
+
+FilterTokenWrap;

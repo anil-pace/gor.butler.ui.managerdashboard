@@ -1,0 +1,61 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/containers/logoutTab.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_loginAction = require('../actions/loginAction');
+var /* istanbul ignore next */_socketActions = require('../actions/socketActions');
+var /* istanbul ignore next */_reactIntl = require('react-intl'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+class LogOut extends /* istanbul ignore next */_react2.default.Component {
+  constructor(props)
+  {
+    super(props);
+  }
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.auth_token)
+    {
+      this.removeThisModal();
+    }
+  }
+  removeThisModal() {
+    this.props.removeModal();
+  }
+  appLogout() {
+    this.props.removeModal();
+    sessionStorage.clear();
+    this.props.userLogout();
+    this.props.endConnect();
+
+  }
+  render()
+  {
+    return (
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 31 }, __self: this },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-logout', __source: { fileName: _jsxFileName, lineNumber: 32 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-logout-text', __source: { fileName: _jsxFileName, lineNumber: 33 }, __self: this },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-question gor-align-middle', __source: { fileName: _jsxFileName, lineNumber: 34 }, __self: this }), /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 34 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'logout.question',
+                defaultMessage: 'Are you sure you would like to log out now?', description: 'Text for logout question', __source: { fileName: _jsxFileName, lineNumber: 34 }, __self: this }))),
+
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-logout-bottom', __source: { fileName: _jsxFileName, lineNumber: 37 }, __self: this },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ className: 'gor-cancel-btn', onClick: this.removeThisModal.bind(this), __source: { fileName: _jsxFileName, lineNumber: 38 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'logout.cancel',
+                defaultMessage: 'Cancel', description: 'Text for cancel', __source: { fileName: _jsxFileName, lineNumber: 38 }, __self: this })),
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ className: 'gor-logout-btn', onClick: this.appLogout.bind(this), __source: { fileName: _jsxFileName, lineNumber: 40 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'logout.done',
+                defaultMessage: 'Log out now', description: 'Text for logout button', __source: { fileName: _jsxFileName, lineNumber: 40 }, __self: this }))))));
+
+
+
+
+  }}
+;
+function mapStateToProps(state, ownProps) {
+  return {
+    auth_token: state.authLogin.auth_token };
+
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    endConnect: function /* istanbul ignore next */endConnect() {dispatch( /* istanbul ignore next */(0, _socketActions.endWsAction)());},
+    userLogout: function /* istanbul ignore next */userLogout() {dispatch( /* istanbul ignore next */(0, _loginAction.logoutRequest)());} };
+
+}; /* istanbul ignore next */exports.default =
+
+/* istanbul ignore next */(0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(LogOut);

@@ -1,0 +1,12 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var cov_2kzsn79yoj = function () {var path = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/actions/zoningActions.js',hash = '5e92fc36d9bf3f393069bd7dc9535376cd8c7407',global = new Function('return this')(),gcv = '__coverage__',coverageData = { path: '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/actions/zoningActions.js', statementMap: { '0': { start: { line: 8, column: 4 }, end: { line: 11, column: 5 } } }, fnMap: { '0': { name: 'recieveZoningData', decl: { start: { line: 7, column: 16 }, end: { line: 7, column: 33 } }, loc: { start: { line: 7, column: 40 }, end: { line: 12, column: 1 } }, line: 7 } }, branchMap: {}, s: { '0': 0 }, f: { '0': 0 }, b: {}, _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c' },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();exports.
+
+
+
+
+
+recieveZoningData = recieveZoningData;var /* istanbul ignore next */_frontEndConstants = require('../constants/frontEndConstants');function recieveZoningData(data) {/* istanbul ignore next */++cov_2kzsn79yoj.f[0];++cov_2kzsn79yoj.s[0];
+    return {
+        type: /* istanbul ignore next */_frontEndConstants.RECIEVE_ZONE_DATA,
+        data };
+
+}

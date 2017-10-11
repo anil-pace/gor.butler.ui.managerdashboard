@@ -1,0 +1,27 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_zoningActions = require('../../../actions/zoningActions'); /* istanbul ignore next */var actions = _interopRequireWildcard(_zoningActions);
+var /* istanbul ignore next */_frontEndConstants = require('../../../constants/frontEndConstants'); /* istanbul ignore next */var CONSTANTS = _interopRequireWildcard(_frontEndConstants); /* istanbul ignore next */function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}
+
+describe('actions', () => {
+  it('should create an action to recieve zoning header data', () => {
+    const data = {
+      "header_data": {
+        "zones_data": {
+          "total_zones": 20,
+          "active_zones": 0 },
+
+        "emergency_data": {
+          "emergency_on": true,
+          "emergency_type": "stop" } },
+
+
+      "resource_type": "zones" };
+
+    const expectedAction = {
+      type: CONSTANTS.RECIEVE_ZONE_DATA,
+      data };
+
+    expect(actions.recieveZoningData(data)).toEqual(expectedAction);
+  });
+
+
+});

@@ -1,0 +1,57 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+getPageData = getPageData; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+recieveOrdersData = recieveOrdersData; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+getStatusFilter = getStatusFilter; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+getTimeFilter = getTimeFilter; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+getPageSizeOrders = getPageSizeOrders; /* istanbul ignore next */exports.
+
+
+
+
+
+
+currentPageOrders = currentPageOrders; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+lastRefreshTime = lastRefreshTime;var /* istanbul ignore next */_frontEndConstants = require('../constants/frontEndConstants');function getPageData(params) {return { type: /* istanbul ignore next */_frontEndConstants.AJAX_CALL, params };}function recieveOrdersData(data) {return { type: /* istanbul ignore next */_frontEndConstants.ORDER_RECIEVED, data };}function getStatusFilter(data) {return { type: /* istanbul ignore next */_frontEndConstants.STATUS_FILTER, data };}function getTimeFilter(data) {return { type: /* istanbul ignore next */_frontEndConstants.TIME_FILTER, data };}function getPageSizeOrders(data) {return { type: /* istanbul ignore next */_frontEndConstants.GET_PAGE_SIZE_ORDERS, data };}function currentPageOrders(data) {return { type: /* istanbul ignore next */_frontEndConstants.GET_CURRENT_PAGE_ORDERS, data };}function lastRefreshTime(data) {
+  return {
+    type: /* istanbul ignore next */_frontEndConstants.GET_LAST_REFRESH_TIME,
+    data };
+
+}

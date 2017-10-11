@@ -1,0 +1,244 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/containers/notifications/viewAllNotificationWrapper.js'; /**
+                                                                                                                                                                                                                                        * Container for Notifications
+                                                                                                                                                                                                                                        * 
+                                                                                                                                                                                                                                        */
+var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_index = require('../../components/gor-table-component/index');
+var /* istanbul ignore next */_tableHeader = require('../../components/gor-table-component/tableHeader');
+var /* istanbul ignore next */_tableBody = require('../../components/gor-table-component/tableBody');
+var /* istanbul ignore next */_tableRow = require('../../components/gor-table-component/tableRow');
+var /* istanbul ignore next */_notificationDescription = require('../../components/notifications/notificationDescription'); /* istanbul ignore next */var _notificationDescription2 = _interopRequireDefault(_notificationDescription);
+var /* istanbul ignore next */_Spinner = require('../../components/spinner/Spinner'); /* istanbul ignore next */var _Spinner2 = _interopRequireDefault(_Spinner);
+var /* istanbul ignore next */_configConstants = require('../../constants/configConstants');
+var /* istanbul ignore next */_frontEndConstants = require('../../constants/frontEndConstants');
+var /* istanbul ignore next */_notificationAction = require('../../actions/notificationAction'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+
+
+
+class ViewAllNotificationWrapper extends /* istanbul ignore next */_react2.default.Component {
+
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			page: 0,
+			size: 15,
+			sort: "createTime",
+			order: 1 };
+
+
+	}
+
+
+
+	_closeModal() {
+		this.props.removeModal();
+		this.props.resetNotificationTableData(true);
+	}
+
+	_onSortChange() {
+		var currentOrder = this.state.order ? 0 : 1;
+		var _this = this;
+		_this.setState({
+			order: currentOrder,
+			page: 0 },
+		function () {
+			_this._fetchNotificationData({ lazyData: false });
+		});
+
+	}
+
+	componentDidMount() {
+
+		this._fetchNotificationData({ lazyData: false });
+	}
+
+	_fetchNotificationData(saltParams = {}) {
+		var params = {
+			'url': /* istanbul ignore next */_configConstants.NOTIFICATIONS_URL + "?page=" + this.state.page + "&size=" +
+			this.state.size +
+			"&sort=" + this.state.sort +
+			"&order=" + (this.state.order ? /* istanbul ignore next */_frontEndConstants.DESC : /* istanbul ignore next */_frontEndConstants.ASC) + (
+			this.state.searchTerm ? "&searchTerm=" + this.state.searchTerm : ""),
+			'method': /* istanbul ignore next */_frontEndConstants.GET,
+			'cause': /* istanbul ignore next */_frontEndConstants.GET_ALL_NOTIFICATIONS,
+			'contentType': /* istanbul ignore next */_frontEndConstants.APP_JSON,
+			'saltParams': saltParams,
+			'accept': /* istanbul ignore next */_frontEndConstants.APP_JSON };
+
+		if (!saltParams.lazyData) {
+			this.props.setNotificationSpinner(true);
+		} else
+		{
+			this.props.setInfiniteSpinner(true);
+		}
+
+		this.props.getNotificationData(params);
+	}
+
+
+
+	_processData() {
+		var data = this.props.searchAppliedAllNotifications ? this.props.searchedAllNotificationData : this.props.completeNotificationData;
+		var dataLen = data.length;
+		var tableRows = [];
+		var processedData = {};
+		if (dataLen) {
+
+			for (let i = 0; i < dataLen; i++) {
+				let tableRow = [];
+				let createDate = new Date(new Date(data[i].createTime).toLocaleString("en-US", { timeZone: this.props.timeOffset }));
+				tableRow.push( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_notificationDescription2.default, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 95 }, __self: this },
+					/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */{ className: 'title', __source: { fileName: _jsxFileName, lineNumber: 96 }, __self: this }, data[i].title),
+					/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */{ className: 'desc', __source: { fileName: _jsxFileName, lineNumber: 97 }, __self: this }, data[i].description)));
+
+				tableRow.push( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedRelative, /* istanbul ignore next */{ value: createDate, __source: { fileName: _jsxFileName, lineNumber: 99 }, __self: this }));
+				tableRows.push(tableRow);
+			}
+			processedData.data = tableRows;
+			processedData.filteredData = tableRows;
+
+
+		}
+		processedData.header = [{ id: 1, text: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'notification.table.description', description: 'Table first head', defaultMessage: 'Description', __source: { fileName: _jsxFileName, lineNumber: 107 }, __self: this }), sortable: false },
+		{ id: 2, text: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'notification.table.time', description: 'Table second head', defaultMessage: 'Time', __source: { fileName: _jsxFileName, lineNumber: 108 }, __self: this }), sortable: true, defaultOrder: this.state.order ? /* istanbul ignore next */_frontEndConstants.DESC : /* istanbul ignore next */_frontEndConstants.ASC }];
+
+		processedData.offset = 0;
+		processedData.max = tableRows.length || /* istanbul ignore next */_frontEndConstants.DEFAULT_NOTIFICATION_ROW_LENGTH;
+		return processedData;
+	}
+
+	shouldComponentUpdate(nextProps) {
+		if (nextProps.hasDataChanged !== this.props.hasDataChanged ||
+		nextProps.isLoading !== this.props.isLoading ||
+		nextProps.isInfiniteLoading !== this.props.isInfiniteLoading)
+		{
+			return true;
+		}
+		return false;
+	}
+	_onScrollHandler(event) {
+
+		if (event.target.scrollHeight - event.target.scrollTop === event.target.clientHeight) {
+			let page = this.state.dataFound === false ? this.state.page : this.state.page + 1;
+			this.setState({
+				page },
+			function () {
+				this.props.setInfiniteSpinner(true);
+				this._fetchNotificationData({ lazyData: true });
+			});
+
+
+		}
+
+	}
+	_handleSubmit(e) {
+		e.preventDefault();
+		var value = this.searchInput.value.trim();
+		this.setState({
+			page: 0,
+			searchTerm: value },
+		function () {
+			this._fetchNotificationData({ lazyData: false });
+		});
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.dataFound !== this.props.dataFound) {
+			this.setState({
+				dataFound: nextProps.dataFound });
+
+		}
+	}
+
+
+	render() {
+		var self = this;
+		var processedData = this._processData();
+		return (
+			/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'allNotificationWrap', __source: { fileName: _jsxFileName, lineNumber: 163 }, __self: this },
+				/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Spinner2.default, /* istanbul ignore next */{ isLoading: this.props.isLoading, __source: { fileName: _jsxFileName, lineNumber: 164 }, __self: this }),
+				/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-modal-content', __source: { fileName: _jsxFileName, lineNumber: 165 }, __self: this },
+					/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-modal-head', __source: { fileName: _jsxFileName, lineNumber: 166 }, __self: this },
+						/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'close', onClick: this._closeModal.bind(this), __source: { fileName: _jsxFileName, lineNumber: 167 }, __self: this }, /* istanbul ignore next */'\xD7'),
+						/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */{ className: 'modal-head-text', __source: { fileName: _jsxFileName, lineNumber: 168 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'notification.all.head', description: 'Notification head', defaultMessage: 'Notifications', __source: { fileName: _jsxFileName, lineNumber: 168 }, __self: this })),
+						/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'modal-search-input', __source: { fileName: _jsxFileName, lineNumber: 169 }, __self: this },
+							/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'viewAllNotSearch', __source: { fileName: _jsxFileName, lineNumber: 170 }, __self: this },
+								/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'form', /* istanbul ignore next */{ action: '#', onSubmit: e => this._handleSubmit(e), __source: { fileName: _jsxFileName, lineNumber: 171 }, __self: this },
+									/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'input', /* istanbul ignore next */{ type: 'text', placeholder: 'Search', className: 'allSearchInput', ref: searchInput => this.searchInput = searchInput, __source: { fileName: _jsxFileName, lineNumber: 172 }, __self: this }),
+									/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ className: 'notificationSearch', __source: { fileName: _jsxFileName, lineNumber: 173 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'searchIcon', __source: { fileName: _jsxFileName, lineNumber: 173 }, __self: this })))))),
+
+
+
+
+
+
+					/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-modal-body', __source: { fileName: _jsxFileName, lineNumber: 180 }, __self: this },
+
+						/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorTableMainContainer gor-all-not-tbl', __source: { fileName: _jsxFileName, lineNumber: 182 }, __self: this },
+							/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Spinner2.default, /* istanbul ignore next */{ isLoading: this.props.isInfiniteLoading, utilClassNames: "infinite-scroll", __source: { fileName: _jsxFileName, lineNumber: 183 }, __self: this },
+								/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'infinite-content', __source: { fileName: _jsxFileName, lineNumber: 184 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 184 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'notification.infinite.message', description: 'Infinite scroll message', defaultMessage: 'Loading More', __source: { fileName: _jsxFileName, lineNumber: 184 }, __self: this })))),
+
+							/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index.GTable, /* istanbul ignore next */{ options: ['table-bordered'], __source: { fileName: _jsxFileName, lineNumber: 186 }, __self: this },
+								/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_tableHeader.GTableHeader, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 187 }, __self: this },
+
+									processedData.header.map(function (header, index) {
+										return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_tableHeader.GTableHeaderCell, /* istanbul ignore next */{ key: index, header: header, onClick: header.sortable ? self._onSortChange.bind(self, header) : false, __source: { fileName: _jsxFileName, lineNumber: 190 }, __self: this },
+												/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 191 }, __self: this }, header.text), /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'sortIcon', __source: { fileName: _jsxFileName, lineNumber: 191 }, __self: this }, header.sortable && header.defaultOrder === /* istanbul ignore next */_frontEndConstants.DESC ? '↑' : header.sortable ? '↓' : '')));
+
+
+									})),
+
+								/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_tableBody.GTableBody, /* istanbul ignore next */{ data: processedData.filteredData, onScrollHandler: self._onScrollHandler.bind(this), __source: { fileName: _jsxFileName, lineNumber: 196 }, __self: this },
+
+									processedData.filteredData ? processedData.filteredData.map(function (row, idx) {
+										return (
+											/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_tableRow.GTableRow, /* istanbul ignore next */{ key: idx, index: idx, offset: processedData.offset, max: processedData.max, data: processedData.filteredData, __source: { fileName: _jsxFileName, lineNumber: 200 }, __self: this },
+												row.map(function (text, index) {
+													return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ key: index, style: processedData.header[index].width ? { flex: '1 0 ' + processedData.header[index].width + "%" } : {}, className: 'cell', __source: { fileName: _jsxFileName, lineNumber: 202 }, __self: this },
+															text));
+
+												})));
+
+
+									}) : "")))))));
+
+
+
+
+
+
+
+
+
+
+	}}
+
+
+function mapStateToProps(state, ownProps) {
+	return {
+		"completeNotificationData": state.notificationReducer.completeNotificationData || [],
+		"hasDataChanged": state.notificationReducer.hasDataChanged,
+		"isLoading": state.notificationReducer.isLoading,
+		"searchedAllNotificationData": state.notificationReducer.searchedAllNotificationData,
+		"searchAppliedAllNotifications": state.notificationReducer.searchAppliedAllNotifications,
+		"dataFound": state.notificationReducer.dataFound,
+		"timeOffset": state.authLogin.timeOffset,
+		"isInfiniteLoading": state.notificationReducer.isInfiniteLoading };
+
+}
+function mapDispatchToProps(dispatch) {
+	return {
+		getNotificationData: function /* istanbul ignore next */getNotificationData(params) {dispatch( /* istanbul ignore next */(0, _notificationAction.getNotificationData)(params));},
+		resetNotificationTableData: function /* istanbul ignore next */resetNotificationTableData(data) {dispatch( /* istanbul ignore next */(0, _notificationAction.resetNotificationTableData)(data));},
+		setNotificationSpinner: function /* istanbul ignore next */setNotificationSpinner(data) {dispatch( /* istanbul ignore next */(0, _notificationAction.setNotificationSpinner)(data));},
+		setInfiniteSpinner: function /* istanbul ignore next */setInfiniteSpinner(data) {dispatch( /* istanbul ignore next */(0, _notificationAction.setInfiniteSpinner)(data));} };
+
+} /* istanbul ignore next */exports.default =
+
+
+/* istanbul ignore next */(0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ViewAllNotificationWrapper);

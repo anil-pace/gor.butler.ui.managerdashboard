@@ -1,0 +1,87 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/containers/inventoryTab/inventoryHistogram.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_histogram = require('../../components/graphd3/histogram'); /* istanbul ignore next */var _histogram2 = _interopRequireDefault(_histogram);
+var /* istanbul ignore next */_inventoryActions = require('../../actions/inventoryActions');
+var /* istanbul ignore next */_frontEndConstants = require('../../constants/frontEndConstants');
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_reactIntl = require('react-intl'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+//Mesages for internationalization
+const messages = /* istanbul ignore next */(0, _reactIntl.defineMessages)({
+  invHistogramNoDataTxt: {
+    id: 'inventory.histogram.noDataText',
+    description: 'Text when there is no stock',
+    defaultMessage: 'No Stock Found' },
+
+  invHistogramTodayTxt: {
+    id: 'inventory.histogram.today',
+    description: 'Text to show today',
+    defaultMessage: "Today's" } });
+
+
+
+
+
+
+
+class InventoryHistogram extends /* istanbul ignore next */_react2.default.Component {
+
+  _processData() {
+    var recreatedData = JSON.parse(JSON.stringify(this.props.recreatedData)),
+    processedData = [];
+
+    for (var k in recreatedData) {
+      processedData.push(recreatedData[k].graphInfo);
+    }
+
+    processedData.sort(function (a, b) {
+      var x = a["customData"];var y = b["customData"];
+      return x < y ? -1 : x > y ? 1 : 0;
+    });
+
+
+    return processedData;
+  }
+  shouldComponentUpdate(nextProps) {
+    return this.props.hasDataChanged !== nextProps.hasDataChanged;
+  }
+  _onClickCallBack(data) {
+    this.props.setInventoryDate(data.customData);
+
+  }
+
+  render() {
+    var _this = this;
+    var histogramData = _this._processData();
+    var config = Object.assign({}, /* istanbul ignore next */_frontEndConstants.INVENTORY_HISTOGRAM_CONFIG);
+    config.noData = this.props.noData;
+    config.noDataText = _this.context.intl.formatMessage(messages.invHistogramNoDataTxt);
+    config.today = _this.context.intl.formatMessage(messages.invHistogramTodayTxt);
+    config.breakMonth = _this.context.intl.formatDate(Date.now(), { month: 'short' });
+    return (
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 61 }, __self: this },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_histogram2.default, /* istanbul ignore next */{ hasDataChanged: this.props.hasDataChanged, config: config, histogramData: histogramData, onClickCallBack: this._onClickCallBack.bind(this), __source: { fileName: _jsxFileName, lineNumber: 62 }, __self: this })));
+
+
+  }}
+;
+
+InventoryHistogram.propTypes = {
+  histogramData: /* istanbul ignore next */_react2.default.PropTypes.array,
+  currentDate: /* istanbul ignore next */_react2.default.PropTypes.number,
+  hasDataChanged: /* istanbul ignore next */_react2.default.PropTypes.bool,
+  recreatedData: /* istanbul ignore next */_react2.default.PropTypes.object,
+  noData: /* istanbul ignore next */_react2.default.PropTypes.bool };
+
+InventoryHistogram.contextTypes = {
+  intl: /* istanbul ignore next */_react2.default.PropTypes.object.isRequired };
+
+
+function mapDispatchToProps(dispatch) {
+
+  return {
+    setInventoryDate: function /* istanbul ignore next */setInventoryDate(data) {dispatch( /* istanbul ignore next */(0, _inventoryActions.setInventoryDate)(data));} };
+
+}; /* istanbul ignore next */exports.default =
+
+
+/* istanbul ignore next */(0, _reactRedux.connect)(null, mapDispatchToProps)(InventoryHistogram);

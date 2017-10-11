@@ -182,6 +182,24 @@ class AuditTable extends React.Component {
         });
     }
 
+      handleChange(columnKey, rowIndex, evt) {
+        var checkedPPS = JSON.parse(JSON.stringify(this.props.checkedPps));
+        var sortedDataList = this.state.sortedDataList;
+        var selectedData =  sortedDataList._data ? 
+                                sortedDataList._data.newData[sortedDataList._indexMap[rowIndex]]:
+                                sortedDataList.newData[rowIndex];
+        if(evt.target.checked){
+            checkedPPS[selectedData[columnKey]]=selectedData;
+        }
+        else{
+            delete checkedPPS[selectedData[columnKey]];
+        }
+
+       
+        this.props.setCheckedPps(checkedPPS)
+        this.props.renderDdrop(Object.keys(checkedPPS).length ? true :false);
+    }
+
     manageAuditTask(rowIndex, option) {
         if (option.value=== "duplicateTask") {
             var auditType, auditComplete, auditTypeParam, auditPdfaValue;
@@ -242,7 +260,13 @@ class AuditTable extends React.Component {
         var totalProgress=this.props.auditState.totalProgress;
         var rowsCount=sortedDataList.getSize();
         var headerChecked=false;
+        let checkState=this.handleChange.bind(this);
+        let checkedStatePps=[];
+        if (this.props.checkedPps) {
+            checkedStatePps=this.props.checkedPps;
+        }
         var headerAlert=<div className="alertState">
+
             <div className="table-subtab-alert-icon"/>
             <div className="gor-inline"><FormattedMessage id="auditList.alert.lable"
                                                           description='audit list alert lable'
@@ -298,8 +322,8 @@ class AuditTable extends React.Component {
                         </SortHeaderCell>
                         </div>
                     }
-                    cell={<AuditIssuesTooltipCell data={sortedDataList} callBack={this._handleOnClickDropdown.bind(this)} resolved="resolvedTask"
-                                                  unresolved="unresolvedTask"/>}
+                    cell={<AuditIssuesTooltipCell checkboxColumn={"auditId"} data={sortedDataList} callBack={this._handleOnClickDropdown.bind(this)} resolved="resolvedTask" data={sortedDataList} checkState={checkState}
+                                               checked={checkedStatePps} unresolved="unresolvedTask"/>}
                     fixed={true}
                     width={columnWidths.display_id}
                     isResizable={true}

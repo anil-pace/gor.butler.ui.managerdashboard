@@ -1,0 +1,44 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+
+
+recieveOLData = recieveOLData; /* istanbul ignore next */exports.
+
+
+
+
+
+
+applyOLFilterFlag = applyOLFilterFlag; /* istanbul ignore next */exports.
+
+
+
+
+
+
+wsOLSubscribe = wsOLSubscribe; /* istanbul ignore next */exports.
+
+
+
+
+
+wsOLUnSubscribe = wsOLUnSubscribe; /* istanbul ignore next */exports.
+
+
+
+
+
+setReportsSpinner = setReportsSpinner; /* istanbul ignore next */exports.
+
+
+
+
+
+
+recieveWSData = recieveWSData;var /* istanbul ignore next */_frontEndConstants = require('./../constants/frontEndConstants');function recieveOLData(data) {return { type: /* istanbul ignore next */_frontEndConstants.OPERATION_LOG_FETCH, data };}function applyOLFilterFlag(data) {return { type: /* istanbul ignore next */_frontEndConstants.APPLY_OL_FILTER_FLAG, data };}function wsOLSubscribe(data) {return { type: /* istanbul ignore next */_frontEndConstants.WS_OPERATOR_LOG_SUBSCRIBE, data };}function wsOLUnSubscribe(data) {return { type: /* istanbul ignore next */_frontEndConstants.WS_OPERATOR_LOG_UNSUBSCRIBE, data };}function setReportsSpinner(data) {return { type: /* istanbul ignore next */_frontEndConstants.SET_REPORTS_SPINNER, data };}function recieveWSData(data) {
+    return {
+        type: /* istanbul ignore next */_frontEndConstants.RECIEVE_WS_OL_DATA,
+        data };
+
+}

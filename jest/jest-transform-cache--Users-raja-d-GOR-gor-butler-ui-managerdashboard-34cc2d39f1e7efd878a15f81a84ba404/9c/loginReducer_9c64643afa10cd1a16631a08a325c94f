@@ -1,0 +1,62 @@
+/* istanbul ignore next */"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+
+
+
+
+authLogin = authLogin;var /* istanbul ignore next */_frontEndConstants = require("../constants/frontEndConstants"); /**
+                                                                                                                     * @param  {State Object}
+                                                                                                                     * @param  {Action object}
+                                                                                                                     * @return {[Object] updated state}
+                                                                                                                     */function authLogin(state = {}, action) {switch (action.type) {case /* istanbul ignore next */_frontEndConstants.LOGIN_REQUEST:return Object.assign({}, state, {
+                "loginAuthorized": true,
+                "connectionActive": true,
+                "auth_token": sessionStorage.getItem('auth_token'),
+                "username": sessionStorage.getItem('username') });
+
+
+        case /* istanbul ignore next */_frontEndConstants.LOGIN_REDIRECT:
+        case /* istanbul ignore next */_frontEndConstants.LOGIN_SUCCESS:
+            sessionStorage.setItem('auth_token', action.data.auth_token);
+
+            return Object.assign({}, state, {
+                "loginAuthorized": true,
+                "connectionActive": true,
+                "auth_token": action.data.auth_token,
+                "timeOutDuration": action.data.duration });
+
+
+        case /* istanbul ignore next */_frontEndConstants.LOGIN_FAILURE:
+            return Object.assign({}, state, {
+                "connectionActive": true,
+                "loginAuthorized": false });
+
+
+        case /* istanbul ignore next */_frontEndConstants.CONNECTION_FAILURE:
+            return Object.assign({}, state, {
+                "connectionActive": false,
+                "loginAuthorized": null });
+
+
+        case /* istanbul ignore next */_frontEndConstants.LOGOUT:
+            //sessionStorage.removeItem('auth_token');      
+            return Object.assign({}, state, {
+                "loginAuthorized": null,
+                "connectionActive": null,
+                "auth_token": null });
+
+        case /* istanbul ignore next */_frontEndConstants.SET_USERNAME:
+            sessionStorage.setItem('username', action.data);
+            return Object.assign({}, state, {
+                "username": action.data });
+
+        case /* istanbul ignore next */_frontEndConstants.SET_TIME_OFFSET:
+            sessionStorage.setItem('timeOffset', action.data.warehouse_time_zone || action.data);
+            return Object.assign({}, state, {
+                "timeOffset": action.data.warehouse_time_zone || action.data });
+
+        default:
+            return state;}
+
+}

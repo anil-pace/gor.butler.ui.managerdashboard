@@ -1,0 +1,17 @@
+/* istanbul ignore next */"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+headerData = headerData;var /* istanbul ignore next */_frontEndConstants = require("../constants/frontEndConstants.js");function headerData(state = {}, action) {
+  switch (action.type) {
+    case /* istanbul ignore next */_frontEndConstants.RECIEVE_HEADER:
+      return Object.assign({}, state, {
+        "headerInfo": action.data });
+
+    case /* istanbul ignore next */_frontEndConstants.RECEIVE_SHIFT_START_TIME:
+      return Object.assign({}, state, {
+
+        "shiftStartTime": new Date(action.data.data) });
+
+    default:
+      return state;}
+
+}

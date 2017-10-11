@@ -1,0 +1,8 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+currentTableState = currentTableState;var /* istanbul ignore next */_frontEndConstants = require('../constants/frontEndConstants');function currentTableState(data) {
+	return {
+		type: /* istanbul ignore next */_frontEndConstants.TABLE_STATE,
+		data };
+
+}

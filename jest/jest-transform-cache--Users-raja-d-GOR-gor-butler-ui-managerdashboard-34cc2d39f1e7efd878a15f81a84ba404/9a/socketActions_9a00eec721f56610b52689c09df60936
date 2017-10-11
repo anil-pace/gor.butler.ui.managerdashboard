@@ -1,0 +1,49 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+
+
+
+wsOnMessageAction = wsOnMessageAction; /* istanbul ignore next */exports.
+
+
+
+
+
+
+wsResponseAction = wsResponseAction; /* istanbul ignore next */exports.
+
+
+
+
+
+
+setWsAction = setWsAction; /* istanbul ignore next */exports.
+
+
+
+
+
+endWsAction = endWsAction; /* istanbul ignore next */exports.
+
+
+
+wsEndConnection = wsEndConnection; /* istanbul ignore next */exports.
+
+
+
+
+
+setMockAction = setMockAction; /* istanbul ignore next */exports.
+
+
+
+
+
+
+updateSubscriptionPacket = updateSubscriptionPacket;var /* istanbul ignore next */_frontEndConstants = require('../constants/frontEndConstants');var /* istanbul ignore next */_configConstants = require('../constants/configConstants');var /* istanbul ignore next */_socketMiddleware = require('../middleware/socketMiddleware');function wsOnMessageAction(data) {return { type: /* istanbul ignore next */_frontEndConstants.WS_ONMESSAGE, data };}function wsResponseAction(data) {return { type: /* istanbul ignore next */_frontEndConstants.WS_CONNECTED, data };}function setWsAction(params) {return { type: params.type, data: params.data };}function endWsAction() {return { type: /* istanbul ignore next */_frontEndConstants.WS_DISCONNECT };}function wsEndConnection() {return { type: /* istanbul ignore next */_frontEndConstants.WS_END };}function setMockAction(params) {return { type: params.type, data: params.data };}function updateSubscriptionPacket(data) {
+	return {
+		type: /* istanbul ignore next */_frontEndConstants.DATA_SUBSCRIPTION_PACKET,
+		data };
+
+}

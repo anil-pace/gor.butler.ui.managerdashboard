@@ -1,0 +1,25 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_frontEndConstants = require('../constants/frontEndConstants');
+var /* istanbul ignore next */_responseParser = require('../utilities/responseParser');
+var /* istanbul ignore next */_AjaxParser = require('../utilities/AjaxParser');
+var /* istanbul ignore next */_ppsConfigurationActions = require('./../actions/ppsConfigurationActions');
+
+
+const mockMiddleware = function () {
+    return store => next => action => {
+        switch (action.type) {
+
+            case /* istanbul ignore next */_frontEndConstants.WS_MOCK:
+                break;
+            //This action is irrelevant to us, pass it on to the next middleware
+
+
+
+
+            default:
+                return next(action);}
+
+    };
+
+}(); /* istanbul ignore next */exports.default =
+
+mockMiddleware;

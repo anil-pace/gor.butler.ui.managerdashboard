@@ -1,0 +1,206 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/containers/orderTab/orderFilter.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_filter = require('../../components/tableFilter/filter'); /* istanbul ignore next */var _filter2 = _interopRequireDefault(_filter);
+var /* istanbul ignore next */_filterAction = require('../../actions/filterAction');
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_filterInputFieldWrap = require('../../components/tableFilter/filterInputFieldWrap'); /* istanbul ignore next */var _filterInputFieldWrap2 = _interopRequireDefault(_filterInputFieldWrap);
+var /* istanbul ignore next */_filterTokenContainer = require('../../components/tableFilter/filterTokenContainer'); /* istanbul ignore next */var _filterTokenContainer2 = _interopRequireDefault(_filterTokenContainer);
+var /* istanbul ignore next */_tableFilterCommonFunctions = require('../../components/tableFilter/tableFilterCommonFunctions');
+var /* istanbul ignore next */_reactRouter = require('react-router');
+var /* istanbul ignore next */_frontEndConstants = require('./../../constants/frontEndConstants'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+class OrderFilter extends /* istanbul ignore next */_react2.default.Component {
+    constructor(props)
+    {
+        super(props);
+        this.state = { tokenSelected: { "STATUS": ["all"], "TIME PERIOD": ["allOrders"] }, searchQuery: {},
+            defaultToken: { "STATUS": ["all"], "TIME PERIOD": ["allOrders"] } };
+        this._applyFilter = this._applyFilter.bind(this);
+        this._closeFilter = this._closeFilter.bind(this);
+        this._clearFilter = this._clearFilter.bind(this);
+    }
+
+
+    _closeFilter() {
+        this.props.showTableFilter(false);
+    }
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.orderFilterState && JSON.stringify(this.state) !== JSON.stringify(nextProps.orderFilterState)) {
+            this.setState(nextProps.orderFilterState);
+        }
+
+        /**
+           * Hide the filter as soon as data in the list get updated.
+           */
+        if (nextProps.ordersDetail.length > 0 && JSON.stringify(nextProps.ordersDetail) !== JSON.stringify(this.props.ordersDetail)) {
+            this.props.showTableFilter(false);
+        }
+    }
+
+    _processOrderSearchField() {
+        var filterInputFields = [{ value: "ORDER ID", label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'order.inputField.id', defaultMessage: 'ORDER ID', __source: { fileName: _jsxFileName, lineNumber: 40 }, __self: this }) }];
+        var inputValue = this.state.searchQuery;
+        var inputField = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_filterInputFieldWrap2.default, /* istanbul ignore next */{ inputText: filterInputFields, handleInputText: this._handleInputQuery.bind(this), inputValue: inputValue, __source: { fileName: _jsxFileName, lineNumber: 42 }, __self: this });
+        return inputField;
+
+    }
+
+    componentWillMount() {
+        if (this.props.orderFilterState) {
+            this.setState(this.props.orderFilterState);
+        }
+    }
+    _processFilterToken() {
+        var tokenField1 = { value: "STATUS", label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'order.token.status', defaultMessage: 'STATUS', __source: { fileName: _jsxFileName, lineNumber: 53 }, __self: this }) };
+        var tokenField2 = { value: "TIME PERIOD", label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'order.token.timePeriod', defaultMessage: 'TIME PERIOD', __source: { fileName: _jsxFileName, lineNumber: 54 }, __self: this }) };
+        var labelC1 = [
+        { value: /* istanbul ignore next */_frontEndConstants.ALL, label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'order.STATUS.all', defaultMessage: 'All orders', __source: { fileName: _jsxFileName, lineNumber: 56 }, __self: this }) },
+        { value: /* istanbul ignore next */_frontEndConstants.ORDER_BREACHED, label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'order.STATUS.breach', defaultMessage: 'Breached orders', __source: { fileName: _jsxFileName, lineNumber: 57 }, __self: this }) },
+        { value: /* istanbul ignore next */_frontEndConstants.ORDER_COMPLETED, label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'order.STATUS.completed', defaultMessage: 'Completed orders', __source: { fileName: _jsxFileName, lineNumber: 58 }, __self: this }) },
+        { value: /* istanbul ignore next */_frontEndConstants.ORDER_EXCEPTION, label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'order.STATUS.exep', defaultMessage: 'Exception', __source: { fileName: _jsxFileName, lineNumber: 59 }, __self: this }) },
+        { value: /* istanbul ignore next */_frontEndConstants.ORDER_UNFULFILLABLE, label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'order.STATUS.unfulfillable', defaultMessage: 'Unfulfillable', __source: { fileName: _jsxFileName, lineNumber: 60 }, __self: this }) },
+        { value: /* istanbul ignore next */_frontEndConstants.ORDER_ONHOLD, label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'order.STATUS.onhold', defaultMessage: 'On hold', __source: { fileName: _jsxFileName, lineNumber: 61 }, __self: this }) },
+        { value: /* istanbul ignore next */_frontEndConstants.ORDER_CANCELLED, label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'order.STATUS.cancelled', defaultMessage: 'Cancelled', __source: { fileName: _jsxFileName, lineNumber: 62 }, __self: this }) },
+        { value: /* istanbul ignore next */_frontEndConstants.ORDER_INPROGRESS, label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'order.STATUS.inprogress', defaultMessage: 'In Progress', __source: { fileName: _jsxFileName, lineNumber: 63 }, __self: this }) }];
+
+
+        var labelC2 = [
+        { value: 'allOrders', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'order.timePeriod.all', defaultMessage: 'All', __source: { fileName: _jsxFileName, lineNumber: 67 }, __self: this }) },
+        { value: 'oneHourOrders', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'order.timePeriod.oneHr', defaultMessage: 'Last 1 hours', __source: { fileName: _jsxFileName, lineNumber: 68 }, __self: this }) },
+        { value: 'twoHourOrders', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'order.timePeriod.twoHR', defaultMessage: 'Last 2 hours', __source: { fileName: _jsxFileName, lineNumber: 69 }, __self: this }) },
+        { value: 'sixHourOrders', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'order.timePeriod.sixHr', defaultMessage: 'Last 6 hours', __source: { fileName: _jsxFileName, lineNumber: 70 }, __self: this }) },
+        { value: 'twelveHourOrders', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'order.timePeriod.twoHr', defaultMessage: 'Last 12 hours', __source: { fileName: _jsxFileName, lineNumber: 71 }, __self: this }) },
+        { value: 'oneDayOrders', label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'order.timePeriod.oneday', defaultMessage: 'Last 1 day', __source: { fileName: _jsxFileName, lineNumber: 72 }, __self: this }) }];
+
+        var selectedToken = this.state.tokenSelected;
+        var column1 = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_filterTokenContainer2.default, /* istanbul ignore next */{ field: tokenField1, tokenCallBack: this._handelTokenClick.bind(this), label: labelC1, selectedToken: selectedToken, __source: { fileName: _jsxFileName, lineNumber: 75 }, __self: this });
+        var column2 = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_filterTokenContainer2.default, /* istanbul ignore next */{ field: tokenField2, tokenCallBack: this._handelTokenClick.bind(this), label: labelC2, selectedToken: selectedToken, selection: /* istanbul ignore next */_frontEndConstants.SINGLE, __source: { fileName: _jsxFileName, lineNumber: 76 }, __self: this });
+        var columnDetail = { column1token: column1, column2token: column2 };
+        return columnDetail;
+    }
+
+    _handelTokenClick(field, value, state) {
+        this.setState({ tokenSelected: /* istanbul ignore next */(0, _tableFilterCommonFunctions.handelTokenClick)(field, value, state, this.state) });
+
+    }
+
+    _handleInputQuery(inputQuery, queryField) {
+        this.setState({ searchQuery: /* istanbul ignore next */(0, _tableFilterCommonFunctions.handleInputQuery)(inputQuery, queryField, this.state) });
+    }
+
+    _applyFilter() {
+        var filterState = this.state,_query = {};
+        if (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !== 'all') {
+            _query.status = filterState.tokenSelected["STATUS"];
+        }
+        if (filterState.tokenSelected["TIME PERIOD"] && filterState.tokenSelected["TIME PERIOD"][0] !== 'allOrders') {
+            _query.period = filterState.tokenSelected["TIME PERIOD"];
+        }
+
+        if (filterState.searchQuery["ORDER ID"]) {
+            _query.orderId = filterState.searchQuery["ORDER ID"];
+        }
+        /* istanbul ignore next */_reactRouter.hashHistory.push({ pathname: "/orders/orderlist", query: _query });
+    }
+
+    _clearFilter() {
+        this.props.orderfilterState({
+            tokenSelected: {
+                "STATUS": ['all'],
+                "TIME PERIOD": ['allOrders'] },
+
+            searchQuery: { "ORDER ID": '' } });
+
+        /* istanbul ignore next */_reactRouter.hashHistory.push({ pathname: "/orders/orderlist", query: {} });
+    }
+
+
+
+    render() {
+        var noOrder = this.props.orderData.noResultFound;
+        var orderSearchField = this._processOrderSearchField();
+        var orderFilterToken = this._processFilterToken();
+        return (
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 123 }, __self: this },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_filter2.default, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 124 }, __self: this },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-header', __source: { fileName: _jsxFileName, lineNumber: 125 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-header-h1', __source: { fileName: _jsxFileName, lineNumber: 126 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'gor.filter.filterLabel', description: 'label for filter',
+                                defaultMessage: 'Filter data', __source: { fileName: _jsxFileName, lineNumber: 127 }, __self: this })),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-header-h2', onClick: this._closeFilter, __source: { fileName: _jsxFileName, lineNumber: 130 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'gor.filter.hide', description: 'label for hide',
+                                defaultMessage: 'Hide', __source: { fileName: _jsxFileName, lineNumber: 131 }, __self: this }))),
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 135 }, __self: this }, noOrder ?
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-no-result-filter', __source: { fileName: _jsxFileName, lineNumber: 136 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'gor.filter.noResult', description: 'label for no result',
+                                defaultMessage: 'No results found, please try again', __source: { fileName: _jsxFileName, lineNumber: 136 }, __self: this })) : ""),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-body', __source: { fileName: _jsxFileName, lineNumber: 139 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-body-input-wrap', __source: { fileName: _jsxFileName, lineNumber: 140 }, __self: this },
+                            orderSearchField),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-body-filterToken-wrap', __source: { fileName: _jsxFileName, lineNumber: 143 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-body-filterToken-section1', __source: { fileName: _jsxFileName, lineNumber: 144 }, __self: this },
+                                orderFilterToken.column1token),
+
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-body-filterToken-section1', __source: { fileName: _jsxFileName, lineNumber: 147 }, __self: this },
+                                orderFilterToken.column2token))),
+
+
+
+
+
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-footer', __source: { fileName: _jsxFileName, lineNumber: 156 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'gor-filter-footer-h2', onClick: this._clearFilter, __source: { fileName: _jsxFileName, lineNumber: 157 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'gor.filter.reset', description: 'label for reset',
+                                defaultMessage: 'Reset', __source: { fileName: _jsxFileName, lineNumber: 158 }, __self: this })),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-btn-wrap', __source: { fileName: _jsxFileName, lineNumber: 161 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ className: 'gor-add-btn', onClick: this._applyFilter, __source: { fileName: _jsxFileName, lineNumber: 162 }, __self: this },
+                                !this.props.orderListSpinner ? /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'gor.filter.heading', description: 'filter heading', defaultMessage: 'Apply filter', __source: { fileName: _jsxFileName, lineNumber: 163 }, __self: this }) : /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'spinnerImage', __source: { fileName: _jsxFileName, lineNumber: 163 }, __self: this })))))));
+
+
+
+
+
+
+
+
+    }}
+;
+
+
+function mapStateToProps(state, ownProps) {
+    return {
+        showFilter: state.filterInfo.filterState || false,
+        orderData: state.getOrderDetail || {},
+        orderListSpinner: state.spinner.orderListSpinner || false,
+        orderFilterState: state.filterInfo.orderFilterState };
+
+}
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+    return {
+        showTableFilter: function /* istanbul ignore next */showTableFilter(data) {dispatch( /* istanbul ignore next */(0, _filterAction.showTableFilter)(data));},
+        filterApplied: function /* istanbul ignore next */filterApplied(data) {dispatch( /* istanbul ignore next */(0, _filterAction.filterApplied)(data));},
+        orderfilterState: function /* istanbul ignore next */orderfilterState(data) {dispatch( /* istanbul ignore next */(0, _filterAction.orderfilterState)(data));},
+        toggleOrderFilter: function /* istanbul ignore next */toggleOrderFilter(data) {dispatch( /* istanbul ignore next */(0, _filterAction.toggleOrderFilter)(data));} };
+
+};
+
+OrderFilter.PropTypes = {
+    showFilter: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    orderData: /* istanbul ignore next */_react2.default.PropTypes.object,
+    orderListSpinner: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    showTableFilter: /* istanbul ignore next */_react2.default.PropTypes.func,
+    filterApplied: /* istanbul ignore next */_react2.default.PropTypes.func,
+    orderFilterState: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    toggleOrderFilter: /* istanbul ignore next */_react2.default.PropTypes.func }; /* istanbul ignore next */exports.default =
+
+
+
+
+/* istanbul ignore next */(0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(OrderFilter);

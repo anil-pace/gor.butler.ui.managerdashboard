@@ -1,0 +1,20 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+secondsToTime = secondsToTime;var /* istanbul ignore next */_frontEndConstants = require('../constants/frontEndConstants');;function secondsToTime(secs) {
+   let hh = 0,mm = 0,ss = 0,mins,timestr = '';
+   hh = parseInt(secs / 3600, 10);
+   secs %= 3600;
+   mm = parseInt(secs / 60, 10);
+   ss = secs % 60;
+
+   if (hh)
+   {
+      timestr += hh + /* istanbul ignore next */_frontEndConstants.HR;
+   }
+   timestr += mm + /* istanbul ignore next */_frontEndConstants.MM;
+   if (ss)
+   {
+      timestr += ss + /* istanbul ignore next */_frontEndConstants.SS;
+   }
+   return timestr;
+}

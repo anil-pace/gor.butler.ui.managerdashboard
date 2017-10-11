@@ -1,0 +1,500 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var cov_6pxlre0ez = function () {var path = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/containers/auditTab/auditTable.js',hash = '89c053cf54d697c48d1000e7fa77e25616050bfe',global = new Function('return this')(),gcv = '__coverage__',coverageData = { path: '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/containers/auditTab/auditTable.js', statementMap: { '0': { start: { line: 29, column: 15 }, end: { line: 35, column: 2 } }, '1': { start: { line: 40, column: 8 }, end: { line: 40, column: 21 } }, '2': { start: { line: 41, column: 8 }, end: { line: 41, column: 42 } }, '3': { start: { line: 42, column: 8 }, end: { line: 42, column: 83 } }, '4': { start: { line: 43, column: 8 }, end: { line: 43, column: 53 } }, '5': { start: { line: 48, column: 8 }, end: { line: 48, column: 41 } }, '6': { start: { line: 53, column: 8 }, end: { line: 55, column: 9 } }, '7': { start: { line: 54, column: 12 }, end: { line: 54, column: 25 } }, '8': { start: { line: 56, column: 8 }, end: { line: 56, column: 20 } }, '9': { start: { line: 68, column: 15 }, end: { line: 68, column: 27 } }, '10': { start: { line: 69, column: 24 }, end: { line: 69, column: 45 } }, '11': { start: { line: 70, column: 47 }, end: { line: 70, column: 74 } }, '12': { start: { line: 71, column: 8 }, end: { line: 73, column: 9 } }, '13': { start: { line: 72, column: 12 }, end: { line: 72, column: 19 } }, '14': { start: { line: 74, column: 8 }, end: { line: 74, column: 31 } }, '15': { start: { line: 75, column: 8 }, end: { line: 96, column: 9 } }, '16': { start: { line: 76, column: 12 }, end: { line: 95, column: 13 } }, '17': { start: { line: 77, column: 16 }, end: { line: 79, column: 18 } }, '18': { start: { line: 78, column: 20 }, end: { line: 78, column: 42 } }, '19': { start: { line: 80, column: 16 }, end: { line: 80, column: 44 } }, '20': { start: { line: 81, column: 16 }, end: { line: 90, column: 17 } }, '21': { start: { line: 82, column: 20 }, end: { line: 87, column: 21 } }, '22': { start: { line: 83, column: 24 }, end: { line: 83, column: 60 } }, '23': { start: { line: 86, column: 24 }, end: { line: 86, column: 49 } }, '24': { start: { line: 88, column: 20 }, end: { line: 88, column: 50 } }, '25': { start: { line: 89, column: 20 }, end: { line: 89, column: 50 } }, '26': { start: { line: 91, column: 16 }, end: { line: 91, column: 22 } }, '27': { start: { line: 94, column: 16 }, end: { line: 94, column: 45 } }, '28': { start: { line: 100, column: 18 }, end: { line: 100, column: 36 } }, '29': { start: { line: 101, column: 8 }, end: { line: 101, column: 70 } }, '30': { start: { line: 102, column: 8 }, end: { line: 102, column: 39 } }, '31': { start: { line: 103, column: 8 }, end: { line: 103, column: 40 } }, '32': { start: { line: 104, column: 17 }, end: { line: 104, column: 44 } }, '33': { start: { line: 104, column: 56 }, end: { line: 104, column: 58 } }, '34': { start: { line: 105, column: 8 }, end: { line: 107, column: 9 } }, '35': { start: { line: 106, column: 12 }, end: { line: 106, column: 52 } }, '36': { start: { line: 108, column: 8 }, end: { line: 110, column: 9 } }, '37': { start: { line: 109, column: 12 }, end: { line: 109, column: 60 } }, '38': { start: { line: 111, column: 8 }, end: { line: 124, column: 10 } }, '39': { start: { line: 128, column: 8 }, end: { line: 133, column: 12 } }, '40': { start: { line: 128, column: 42 }, end: { line: 133, column: 9 } }, '41': { start: { line: 138, column: 17 }, end: { line: 138, column: 61 } }, '42': { start: { line: 139, column: 8 }, end: { line: 141, column: 10 } }, '43': { start: { line: 142, column: 8 }, end: { line: 142, column: 46 } }, '44': { start: { line: 143, column: 8 }, end: { line: 143, column: 38 } }, '45': { start: { line: 151, column: 20 }, end: { line: 151, column: 22 } }, '46': { start: { line: 152, column: 8 }, end: { line: 154, column: 9 } }, '47': { start: { line: 153, column: 12 }, end: { line: 153, column: 72 } }, '48': { start: { line: 155, column: 8 }, end: { line: 161, column: 11 } }, '49': { start: { line: 166, column: 8 }, end: { line: 171, column: 9 } }, '50': { start: { line: 167, column: 12 }, end: { line: 167, column: 67 } }, '51': { start: { line: 168, column: 12 }, end: { line: 168, column: 81 } }, '52': { start: { line: 169, column: 12 }, end: { line: 169, column: 77 } }, '53': { start: { line: 170, column: 12 }, end: { line: 170, column: 78 } }, '54': { start: { line: 172, column: 8 }, end: { line: 182, column: 11 } }, '55': { start: { line: 186, column: 25 }, end: { line: 186, column: 74 } }, '56': { start: { line: 187, column: 29 }, end: { line: 187, column: 54 } }, '57': { start: { line: 188, column: 28 }, end: { line: 190, column: 64 } }, '58': { start: { line: 191, column: 8 }, end: { line: 196, column: 9 } }, '59': { start: { line: 192, column: 12 }, end: { line: 192, column: 61 } }, '60': { start: { line: 195, column: 12 }, end: { line: 195, column: 55 } }, '61': { start: { line: 199, column: 8 }, end: { line: 199, column: 44 } }, '62': { start: { line: 200, column: 8 }, end: { line: 200, column: 77 } }, '63': { start: { line: 204, column: 8 }, end: { line: 243, column: 9 } }, '64': { start: { line: 206, column: 12 }, end: { line: 213, column: 13 } }, '65': { start: { line: 207, column: 16 }, end: { line: 207, column: 80 } }, '66': { start: { line: 208, column: 16 }, end: { line: 208, column: 86 } }, '67': { start: { line: 209, column: 16 }, end: { line: 209, column: 89 } }, '68': { start: { line: 210, column: 16 }, end: { line: 212, column: 17 } }, '69': { start: { line: 211, column: 20 }, end: { line: 211, column: 90 } }, '70': { start: { line: 215, column: 12 }, end: { line: 224, column: 15 } }, '71': { start: { line: 227, column: 13 }, end: { line: 243, column: 9 } }, '72': { start: { line: 229, column: 12 }, end: { line: 231, column: 13 } }, '73': { start: { line: 230, column: 16 }, end: { line: 230, column: 71 } }, '74': { start: { line: 232, column: 12 }, end: { line: 239, column: 15 } }, '75': { start: { line: 240, column: 14 }, end: { line: 243, column: 9 } }, '76': { start: { line: 241, column: 12 }, end: { line: 241, column: 82 } }, '77': { start: { line: 249, column: 24 }, end: { line: 249, column: 26 } }, '78': { start: { line: 250, column: 8 }, end: { line: 250, column: 44 } }, '79': { start: { line: 255, column: 56 }, end: { line: 255, column: 66 } }, '80': { start: { line: 256, column: 27 }, end: { line: 256, column: 63 } }, '81': { start: { line: 257, column: 23 }, end: { line: 257, column: 55 } }, '82': { start: { line: 258, column: 26 }, end: { line: 258, column: 61 } }, '83': { start: { line: 259, column: 21 }, end: { line: 259, column: 51 } }, '84': { start: { line: 260, column: 26 }, end: { line: 260, column: 61 } }, '85': { start: { line: 261, column: 22 }, end: { line: 261, column: 46 } }, '86': { start: { line: 262, column: 26 }, end: { line: 262, column: 31 } }, '87': { start: { line: 263, column: 23 }, end: { line: 263, column: 51 } }, '88': { start: { line: 264, column: 28 }, end: { line: 264, column: 30 } }, '89': { start: { line: 265, column: 8 }, end: { line: 267, column: 9 } }, '90': { start: { line: 266, column: 12 }, end: { line: 266, column: 50 } }, '91': { start: { line: 268, column: 24 }, end: { line: 276, column: 14 } }, '92': { start: { line: 278, column: 19 }, end: { line: 278, column: 25 } }, '93': { start: { line: 279, column: 8 }, end: { line: 287, column: 9 } }, '94': { start: { line: 280, column: 12 }, end: { line: 282, column: 112 } }, '95': { start: { line: 283, column: 12 }, end: { line: 283, column: 46 } }, '96': { start: { line: 286, column: 12 }, end: { line: 286, column: 160 } }, '97': { start: { line: 289, column: 26 }, end: { line: 289, column: 32 } }, '98': { start: { line: 290, column: 8 }, end: { line: 471, column: 14 } }, '99': { start: { line: 474, column: 8 }, end: { line: 476, column: 10 } }, '100': { start: { line: 481, column: 0 }, end: { line: 483, column: 1 } }, '101': { start: { line: 485, column: 0 }, end: { line: 497, column: 2 } } }, fnMap: { '0': { name: '(anonymous_0)', decl: { start: { line: 39, column: 4 }, end: { line: 39, column: 5 } }, loc: { start: { line: 39, column: 23 }, end: { line: 44, column: 5 } }, line: 39 }, '1': { name: '(anonymous_1)', decl: { start: { line: 46, column: 4 }, end: { line: 46, column: 5 } }, loc: { start: { line: 46, column: 41 }, end: { line: 49, column: 5 } }, line: 46 }, '2': { name: '(anonymous_2)', decl: { start: { line: 52, column: 4 }, end: { line: 52, column: 5 } }, loc: { start: { line: 52, column: 37 }, end: { line: 57, column: 5 } }, line: 52 }, '3': { name: '(anonymous_3)', decl: { start: { line: 67, column: 4 }, end: { line: 67, column: 5 } }, loc: { start: { line: 67, column: 41 }, end: { line: 97, column: 5 } }, line: 67 }, '4': { name: '(anonymous_4)', decl: { start: { line: 77, column: 55 }, end: { line: 77, column: 56 } }, loc: { start: { line: 77, column: 69 }, end: { line: 79, column: 17 } }, line: 77 }, '5': { name: '(anonymous_5)', decl: { start: { line: 99, column: 4 }, end: { line: 99, column: 5 } }, loc: { start: { line: 99, column: 32 }, end: { line: 125, column: 5 } }, line: 99 }, '6': { name: '(anonymous_6)', decl: { start: { line: 127, column: 4 }, end: { line: 127, column: 5 } }, loc: { start: { line: 127, column: 58 }, end: { line: 134, column: 5 } }, line: 127 }, '7': { name: '(anonymous_7)', decl: { start: { line: 128, column: 22 }, end: { line: 128, column: 23 } }, loc: { start: { line: 128, column: 42 }, end: { line: 133, column: 9 } }, line: 128 }, '8': { name: '(anonymous_8)', decl: { start: { line: 137, column: 4 }, end: { line: 137, column: 5 } }, loc: { start: { line: 137, column: 36 }, end: { line: 144, column: 5 } }, line: 137 }, '9': { name: '(anonymous_9)', decl: { start: { line: 150, column: 4 }, end: { line: 150, column: 5 } }, loc: { start: { line: 150, column: 36 }, end: { line: 162, column: 5 } }, line: 150 }, '10': { name: '(anonymous_10)', decl: { start: { line: 164, column: 4 }, end: { line: 164, column: 5 } }, loc: { start: { line: 164, column: 48 }, end: { line: 183, column: 5 } }, line: 164 }, '11': { name: '(anonymous_11)', decl: { start: { line: 185, column: 6 }, end: { line: 185, column: 7 } }, loc: { start: { line: 185, column: 45 }, end: { line: 201, column: 5 } }, line: 185 }, '12': { name: '(anonymous_12)', decl: { start: { line: 203, column: 4 }, end: { line: 203, column: 5 } }, loc: { start: { line: 203, column: 38 }, end: { line: 244, column: 5 } }, line: 203 }, '13': { name: '(anonymous_13)', decl: { start: { line: 248, column: 4 }, end: { line: 248, column: 5 } }, loc: { start: { line: 248, column: 20 }, end: { line: 251, column: 5 } }, line: 248 }, '14': { name: '(anonymous_14)', decl: { start: { line: 253, column: 4 }, end: { line: 253, column: 5 } }, loc: { start: { line: 253, column: 13 }, end: { line: 477, column: 5 } }, line: 253 } }, branchMap: { '0': { loc: { start: { line: 53, column: 8 }, end: { line: 55, column: 9 } }, type: 'if', locations: [{ start: { line: 53, column: 8 }, end: { line: 55, column: 9 } }, { start: { line: 53, column: 8 }, end: { line: 55, column: 9 } }], line: 53 }, '1': { loc: { start: { line: 53, column: 11 }, end: { line: 53, column: 58 } }, type: 'binary-expr', locations: [{ start: { line: 53, column: 11 }, end: { line: 53, column: 27 } }, { start: { line: 53, column: 32 }, end: { line: 53, column: 58 } }], line: 53 }, '2': { loc: { start: { line: 71, column: 8 }, end: { line: 73, column: 9 } }, type: 'if', locations: [{ start: { line: 71, column: 8 }, end: { line: 73, column: 9 } }, { start: { line: 71, column: 8 }, end: { line: 73, column: 9 } }], line: 71 }, '3': { loc: { start: { line: 71, column: 12 }, end: { line: 71, column: 162 } }, type: 'binary-expr', locations: [{ start: { line: 71, column: 12 }, end: { line: 71, column: 50 } }, { start: { line: 71, column: 54 }, end: { line: 71, column: 84 } }, { start: { line: 71, column: 88 }, end: { line: 71, column: 123 } }, { start: { line: 71, column: 128 }, end: { line: 71, column: 162 } }], line: 71 }, '4': { loc: { start: { line: 76, column: 12 }, end: { line: 95, column: 13 } }, type: 'if', locations: [{ start: { line: 76, column: 12 }, end: { line: 95, column: 13 } }, { start: { line: 76, column: 12 }, end: { line: 95, column: 13 } }], line: 76 }, '5': { loc: { start: { line: 81, column: 16 }, end: { line: 90, column: 17 } }, type: 'if', locations: [{ start: { line: 81, column: 16 }, end: { line: 90, column: 17 } }, { start: { line: 81, column: 16 }, end: { line: 90, column: 17 } }], line: 81 }, '6': { loc: { start: { line: 81, column: 20 }, end: { line: 81, column: 65 } }, type: 'binary-expr', locations: [{ start: { line: 81, column: 20 }, end: { line: 81, column: 42 } }, { start: { line: 81, column: 46 }, end: { line: 81, column: 65 } }], line: 81 }, '7': { loc: { start: { line: 82, column: 20 }, end: { line: 87, column: 21 } }, type: 'if', locations: [{ start: { line: 82, column: 20 }, end: { line: 87, column: 21 } }, { start: { line: 82, column: 20 }, end: { line: 87, column: 21 } }], line: 82 }, '8': { loc: { start: { line: 100, column: 18 }, end: { line: 100, column: 36 } }, type: 'binary-expr', locations: [{ start: { line: 100, column: 18 }, end: { line: 100, column: 30 } }, { start: { line: 100, column: 34 }, end: { line: 100, column: 36 } }], line: 100 }, '9': { loc: { start: { line: 101, column: 44 }, end: { line: 101, column: 68 } }, type: 'cond-expr', locations: [{ start: { line: 101, column: 52 }, end: { line: 101, column: 64 } }, { start: { line: 101, column: 67 }, end: { line: 101, column: 68 } }], line: 101 }, '10': { loc: { start: { line: 108, column: 8 }, end: { line: 110, column: 9 } }, type: 'if', locations: [{ start: { line: 108, column: 8 }, end: { line: 110, column: 9 } }, { start: { line: 108, column: 8 }, end: { line: 110, column: 9 } }], line: 108 }, '11': { loc: { start: { line: 152, column: 8 }, end: { line: 154, column: 9 } }, type: 'if', locations: [{ start: { line: 152, column: 8 }, end: { line: 154, column: 9 } }, { start: { line: 152, column: 8 }, end: { line: 154, column: 9 } }], line: 152 }, '12': { loc: { start: { line: 166, column: 8 }, end: { line: 171, column: 9 } }, type: 'if', locations: [{ start: { line: 166, column: 8 }, end: { line: 171, column: 9 } }, { start: { line: 166, column: 8 }, end: { line: 171, column: 9 } }], line: 166 }, '13': { loc: { start: { line: 188, column: 28 }, end: { line: 190, column: 64 } }, type: 'cond-expr', locations: [{ start: { line: 189, column: 32 }, end: { line: 189, column: 96 } }, { start: { line: 190, column: 32 }, end: { line: 190, column: 64 } }], line: 188 }, '14': { loc: { start: { line: 191, column: 8 }, end: { line: 196, column: 9 } }, type: 'if', locations: [{ start: { line: 191, column: 8 }, end: { line: 196, column: 9 } }, { start: { line: 191, column: 8 }, end: { line: 196, column: 9 } }], line: 191 }, '15': { loc: { start: { line: 200, column: 31 }, end: { line: 200, column: 75 } }, type: 'cond-expr', locations: [{ start: { line: 200, column: 64 }, end: { line: 200, column: 68 } }, { start: { line: 200, column: 70 }, end: { line: 200, column: 75 } }], line: 200 }, '16': { loc: { start: { line: 204, column: 8 }, end: { line: 243, column: 9 } }, type: 'if', locations: [{ start: { line: 204, column: 8 }, end: { line: 243, column: 9 } }, { start: { line: 204, column: 8 }, end: { line: 243, column: 9 } }], line: 204 }, '17': { loc: { start: { line: 206, column: 12 }, end: { line: 213, column: 13 } }, type: 'if', locations: [{ start: { line: 206, column: 12 }, end: { line: 213, column: 13 } }, { start: { line: 206, column: 12 }, end: { line: 213, column: 13 } }], line: 206 }, '18': { loc: { start: { line: 210, column: 16 }, end: { line: 212, column: 17 } }, type: 'if', locations: [{ start: { line: 210, column: 16 }, end: { line: 212, column: 17 } }, { start: { line: 210, column: 16 }, end: { line: 212, column: 17 } }], line: 210 }, '19': { loc: { start: { line: 227, column: 13 }, end: { line: 243, column: 9 } }, type: 'if', locations: [{ start: { line: 227, column: 13 }, end: { line: 243, column: 9 } }, { start: { line: 227, column: 13 }, end: { line: 243, column: 9 } }], line: 227 }, '20': { loc: { start: { line: 229, column: 12 }, end: { line: 231, column: 13 } }, type: 'if', locations: [{ start: { line: 229, column: 12 }, end: { line: 231, column: 13 } }, { start: { line: 229, column: 12 }, end: { line: 231, column: 13 } }], line: 229 }, '21': { loc: { start: { line: 240, column: 14 }, end: { line: 243, column: 9 } }, type: 'if', locations: [{ start: { line: 240, column: 14 }, end: { line: 243, column: 9 } }, { start: { line: 240, column: 14 }, end: { line: 243, column: 9 } }], line: 240 }, '22': { loc: { start: { line: 265, column: 8 }, end: { line: 267, column: 9 } }, type: 'if', locations: [{ start: { line: 265, column: 8 }, end: { line: 267, column: 9 } }, { start: { line: 265, column: 8 }, end: { line: 267, column: 9 } }], line: 265 }, '23': { loc: { start: { line: 274, column: 79 }, end: { line: 274, column: 108 } }, type: 'cond-expr', locations: [{ start: { line: 274, column: 92 }, end: { line: 274, column: 102 } }, { start: { line: 274, column: 105 }, end: { line: 274, column: 108 } }], line: 274 }, '24': { loc: { start: { line: 279, column: 8 }, end: { line: 287, column: 9 } }, type: 'if', locations: [{ start: { line: 279, column: 8 }, end: { line: 287, column: 9 } }, { start: { line: 279, column: 8 }, end: { line: 287, column: 9 } }], line: 279 }, '25': { loc: { start: { line: 279, column: 12 }, end: { line: 279, column: 73 } }, type: 'binary-expr', locations: [{ start: { line: 279, column: 12 }, end: { line: 279, column: 26 } }, { start: { line: 279, column: 30 }, end: { line: 279, column: 52 } }, { start: { line: 279, column: 56 }, end: { line: 279, column: 73 } }], line: 279 }, '26': { loc: { start: { line: 319, column: 74 }, end: { line: 319, column: 127 } }, type: 'cond-expr', locations: [{ start: { line: 319, column: 99 }, end: { line: 319, column: 121 } }, { start: { line: 319, column: 124 }, end: { line: 319, column: 127 } }], line: 319 }, '27': { loc: { start: { line: 345, column: 63 }, end: { line: 345, column: 88 } }, type: 'cond-expr', locations: [{ start: { line: 345, column: 74 }, end: { line: 345, column: 82 } }, { start: { line: 345, column: 85 }, end: { line: 345, column: 88 } }], line: 345 }, '28': { loc: { start: { line: 346, column: 68 }, end: { line: 346, column: 103 } }, type: 'cond-expr', locations: [{ start: { line: 346, column: 84 }, end: { line: 346, column: 97 } }, { start: { line: 346, column: 100 }, end: { line: 346, column: 103 } }], line: 346 }, '29': { loc: { start: { line: 367, column: 33 }, end: { line: 375, column: 42 } }, type: 'cond-expr', locations: [{ start: { line: 367, column: 46 }, end: { line: 367, column: 57 } }, { start: { line: 368, column: 36 }, end: { line: 375, column: 42 } }], line: 367 }, '30': { loc: { start: { line: 373, column: 87 }, end: { line: 373, column: 124 } }, type: 'cond-expr', locations: [{ start: { line: 373, column: 104 }, end: { line: 373, column: 118 } }, { start: { line: 373, column: 121 }, end: { line: 373, column: 124 } }], line: 373 }, '31': { loc: { start: { line: 415, column: 78 }, end: { line: 415, column: 135 } }, type: 'cond-expr', locations: [{ start: { line: 415, column: 105 }, end: { line: 415, column: 129 } }, { start: { line: 415, column: 132 }, end: { line: 415, column: 135 } }], line: 415 } }, s: { '0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0, '8': 0, '9': 0, '10': 0, '11': 0, '12': 0, '13': 0, '14': 0, '15': 0, '16': 0, '17': 0, '18': 0, '19': 0, '20': 0, '21': 0, '22': 0, '23': 0, '24': 0, '25': 0, '26': 0, '27': 0, '28': 0, '29': 0, '30': 0, '31': 0, '32': 0, '33': 0, '34': 0, '35': 0, '36': 0, '37': 0, '38': 0, '39': 0, '40': 0, '41': 0, '42': 0, '43': 0, '44': 0, '45': 0, '46': 0, '47': 0, '48': 0, '49': 0, '50': 0, '51': 0, '52': 0, '53': 0, '54': 0, '55': 0, '56': 0, '57': 0, '58': 0, '59': 0, '60': 0, '61': 0, '62': 0, '63': 0, '64': 0, '65': 0, '66': 0, '67': 0, '68': 0, '69': 0, '70': 0, '71': 0, '72': 0, '73': 0, '74': 0, '75': 0, '76': 0, '77': 0, '78': 0, '79': 0, '80': 0, '81': 0, '82': 0, '83': 0, '84': 0, '85': 0, '86': 0, '87': 0, '88': 0, '89': 0, '90': 0, '91': 0, '92': 0, '93': 0, '94': 0, '95': 0, '96': 0, '97': 0, '98': 0, '99': 0, '100': 0, '101': 0 }, f: { '0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0, '8': 0, '9': 0, '10': 0, '11': 0, '12': 0, '13': 0, '14': 0 }, b: { '0': [0, 0], '1': [0, 0], '2': [0, 0], '3': [0, 0, 0, 0], '4': [0, 0], '5': [0, 0], '6': [0, 0], '7': [0, 0], '8': [0, 0], '9': [0, 0], '10': [0, 0], '11': [0, 0], '12': [0, 0], '13': [0, 0], '14': [0, 0], '15': [0, 0], '16': [0, 0], '17': [0, 0], '18': [0, 0], '19': [0, 0], '20': [0, 0], '21': [0, 0], '22': [0, 0], '23': [0, 0], '24': [0, 0], '25': [0, 0, 0], '26': [0, 0], '27': [0, 0], '28': [0, 0], '29': [0, 0], '30': [0, 0], '31': [0, 0] }, _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c' },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/containers/auditTab/auditTable.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_fixedDataTable = require('fixed-data-table');
+var /* istanbul ignore next */_reactDimensions = require('react-dimensions'); /* istanbul ignore next */var _reactDimensions2 = _interopRequireDefault(_reactDimensions);
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+
+var /* istanbul ignore next */_commonFunctionsDataTable = require('../../components/commonFunctionsDataTable');
+
+
+
+
+
+
+
+
+var /* istanbul ignore next */_reactReduxModal = require('react-redux-modal');
+
+var /* istanbul ignore next */_startAudit = require('./startAudit'); /* istanbul ignore next */var _startAudit2 = _interopRequireDefault(_startAudit);
+var /* istanbul ignore next */_deleteAudit = require('./deleteAudit'); /* istanbul ignore next */var _deleteAudit2 = _interopRequireDefault(_deleteAudit);
+var /* istanbul ignore next */_duplicateAudit = require('./duplicateAudit'); /* istanbul ignore next */var _duplicateAudit2 = _interopRequireDefault(_duplicateAudit);
+var /* istanbul ignore next */_resolveAudit = require('./resolveAudit'); /* istanbul ignore next */var _resolveAudit2 = _interopRequireDefault(_resolveAudit);
+var /* istanbul ignore next */_frontEndConstants = require('../../constants/frontEndConstants'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+
+
+
+
+
+const messages = /* istanbul ignore next */(++cov_6pxlre0ez.s[0], /* istanbul ignore next */(0, _reactIntl.defineMessages)({
+    auditPlaceholder: {
+        id: 'audit.placeholder',
+        description: 'audit dropdown placeholder',
+        defaultMessage: "Manage Tasks" } }));
+
+
+
+
+class AuditTable extends /* istanbul ignore next */_react2.default.Component {
+    constructor(props) {/* istanbul ignore next */++cov_6pxlre0ez.f[0];++cov_6pxlre0ez.s[1];
+        super(props); /* istanbul ignore next */++cov_6pxlre0ez.s[2];
+        this.tableState(this.props, this); /* istanbul ignore next */++cov_6pxlre0ez.s[3];
+        this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this); /* istanbul ignore next */++cov_6pxlre0ez.s[4];
+        this.backendSort = this.backendSort.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {/* istanbul ignore next */++cov_6pxlre0ez.f[1];++cov_6pxlre0ez.s[5];
+
+        this.tableState(nextProps, this);
+    }
+
+
+    shouldComponentUpdate(nextProps) {/* istanbul ignore next */++cov_6pxlre0ez.f[2];++cov_6pxlre0ez.s[6];
+        if ( /* istanbul ignore next */(++cov_6pxlre0ez.b[1][0], this.props.items) && /* istanbul ignore next */(++cov_6pxlre0ez.b[1][1], nextProps.items.length === 0)) {/* istanbul ignore next */++cov_6pxlre0ez.b[0][0];++cov_6pxlre0ez.s[7];
+            return false;
+        } else /* istanbul ignore next */{++cov_6pxlre0ez.b[0][1];}++cov_6pxlre0ez.s[8];
+        return true;
+    }
+
+
+
+
+    /**
+       * Hack for fixing the bug https://work.greyorange.com/jira/browse/BSS-656
+       * This has to be removed once we get rid of the fixedDataTable
+       * @param  {Number} rowIndex rowindex on which the click was initiated
+       */
+    _handleOnClickDropdown(event, index) {/* istanbul ignore next */++cov_6pxlre0ez.f[3];
+        var el = /* istanbul ignore next */(++cov_6pxlre0ez.s[9], event.target);
+        var elClassName = /* istanbul ignore next */(++cov_6pxlre0ez.s[10], el.className.trim()),
+        parentEl,siblingEl,totalRowCount = /* istanbul ignore next */(++cov_6pxlre0ez.s[11], this.props.items.length - 1); /* istanbul ignore next */++cov_6pxlre0ez.s[12];
+        if ( /* istanbul ignore next */(++cov_6pxlre0ez.b[3][0], elClassName !== "gor-dropdown-wrapper") && /* istanbul ignore next */(++cov_6pxlre0ez.b[3][1], elClassName !== "gor-dropdown") && /* istanbul ignore next */(++cov_6pxlre0ez.b[3][2], elClassName !== 'gor-audit-info-icon') && /* istanbul ignore next */(++cov_6pxlre0ez.b[3][3], elClassName !== "gor-tool-tip-hover")) {/* istanbul ignore next */++cov_6pxlre0ez.b[2][0];++cov_6pxlre0ez.s[13];
+            return;
+        } else /* istanbul ignore next */{++cov_6pxlre0ez.b[2][1];}++cov_6pxlre0ez.s[14];
+        parentEl = el.parentNode; /* istanbul ignore next */++cov_6pxlre0ez.s[15];
+        while (parentEl) {/* istanbul ignore next */++cov_6pxlre0ez.s[16];
+            if (parentEl.className === "fixedDataTableRowLayout_rowWrapper") {/* istanbul ignore next */++cov_6pxlre0ez.b[4][0];++cov_6pxlre0ez.s[17];
+                parentEl.parentNode.childNodes.forEach(function (node) {/* istanbul ignore next */++cov_6pxlre0ez.f[4];++cov_6pxlre0ez.s[18];
+                    node.style.zIndex = "0";
+                }); /* istanbul ignore next */++cov_6pxlre0ez.s[19];
+                parentEl.style.zIndex = "300"; /* istanbul ignore next */++cov_6pxlre0ez.s[20];
+                if ( /* istanbul ignore next */(++cov_6pxlre0ez.b[6][0], index === totalRowCount) && /* istanbul ignore next */(++cov_6pxlre0ez.b[6][1], totalRowCount !== 0)) {/* istanbul ignore next */++cov_6pxlre0ez.b[5][0];++cov_6pxlre0ez.s[21];
+                    if (elClassName !== "gor-dropdown-wrapper") {/* istanbul ignore next */++cov_6pxlre0ez.b[7][0];++cov_6pxlre0ez.s[22];
+                        siblingEl = el.parentNode.nextSibling;
+                    } else
+                    {/* istanbul ignore next */++cov_6pxlre0ez.b[7][1];++cov_6pxlre0ez.s[23];
+                        siblingEl = el.nextSibling;
+                    } /* istanbul ignore next */++cov_6pxlre0ez.s[24];
+                    siblingEl.style.bottom = '100%'; /* istanbul ignore next */++cov_6pxlre0ez.s[25];
+                    siblingEl.style.top = 'initial';
+                } else /* istanbul ignore next */{++cov_6pxlre0ez.b[5][1];}++cov_6pxlre0ez.s[26];
+                break;
+            } else
+            {/* istanbul ignore next */++cov_6pxlre0ez.b[4][1];++cov_6pxlre0ez.s[27];
+                parentEl = parentEl.parentNode;
+            }
+        }
+    }
+
+    tableState(nProps, current) {/* istanbul ignore next */++cov_6pxlre0ez.f[5];
+        var items = /* istanbul ignore next */(++cov_6pxlre0ez.s[28], /* istanbul ignore next */(++cov_6pxlre0ez.b[8][0], nProps.items) || /* istanbul ignore next */(++cov_6pxlre0ez.b[8][1], [])); /* istanbul ignore next */++cov_6pxlre0ez.s[29];
+        current._dataList = new /* istanbul ignore next */_commonFunctionsDataTable.tableRenderer(items ? /* istanbul ignore next */(++cov_6pxlre0ez.b[9][0], items.length) : /* istanbul ignore next */(++cov_6pxlre0ez.b[9][1], 0)); /* istanbul ignore next */++cov_6pxlre0ez.s[30];
+        current._defaultSortIndexes = []; /* istanbul ignore next */++cov_6pxlre0ez.s[31];
+        current._dataList.newData = items;
+        var size = /* istanbul ignore next */(++cov_6pxlre0ez.s[32], current._dataList.getSize()),sortIndex = /* istanbul ignore next */(++cov_6pxlre0ez.s[33], {}); /* istanbul ignore next */++cov_6pxlre0ez.s[34];
+        for (var index = 0; index < size; index++) {/* istanbul ignore next */++cov_6pxlre0ez.s[35];
+            current._defaultSortIndexes.push(index);
+        } /* istanbul ignore next */++cov_6pxlre0ez.s[36];
+        if (nProps.currentHeaderOrder.colSortDirs) {/* istanbul ignore next */++cov_6pxlre0ez.b[10][0];++cov_6pxlre0ez.s[37];
+            sortIndex = nProps.currentHeaderOrder.colSortDirs;
+        } else /* istanbul ignore next */{++cov_6pxlre0ez.b[10][1];}++cov_6pxlre0ez.s[38];
+        current.state = {
+            sortedDataList: current._dataList,
+            colSortDirs: sortIndex,
+            columnWidths: {
+                display_id: nProps.containerWidth * 0.09,
+                auditTypeValue: nProps.containerWidth * 0.12,
+                status: nProps.containerWidth * 0.11,
+                startTime: nProps.containerWidth * 0.13,
+                progress: nProps.containerWidth * 0.17,
+                completedTime: nProps.containerWidth * 0.13,
+                actions: nProps.containerWidth * 0.25 },
+
+            headerChecked: false };
+
+    }
+
+    _onColumnResizeEndCallback(newColumnWidth, columnKey) {/* istanbul ignore next */++cov_6pxlre0ez.f[6];++cov_6pxlre0ez.s[39];
+        this.setState(({ columnWidths }) => {/* istanbul ignore next */++cov_6pxlre0ez.f[7];++cov_6pxlre0ez.s[40];return {
+                columnWidths: /* istanbul ignore next */Object.assign({},
+                columnWidths, {
+                    [columnKey]: newColumnWidth }) };
+
+        });
+    }
+
+
+    backendSort(columnKey, sortDir) {/* istanbul ignore next */++cov_6pxlre0ez.f[8];
+        var data = /* istanbul ignore next */(++cov_6pxlre0ez.s[41], { "columnKey": columnKey, "sortDir": sortDir }); /* istanbul ignore next */++cov_6pxlre0ez.s[42];
+        this.props.sortHeaderOrder({
+            colSortDirs: { [columnKey]: sortDir } }); /* istanbul ignore next */++cov_6pxlre0ez.s[43];
+
+        this.props.sortHeaderState(columnKey); /* istanbul ignore next */++cov_6pxlre0ez.s[44];
+        this.props.onSortChange(data);
+    }
+
+
+
+
+
+    startAudit(columnKey, rowIndex) {/* istanbul ignore next */++cov_6pxlre0ez.f[9];
+        var auditId = /* istanbul ignore next */(++cov_6pxlre0ez.s[45], []); /* istanbul ignore next */++cov_6pxlre0ez.s[46];
+        if (this.state.sortedDataList.newData[rowIndex]) {/* istanbul ignore next */++cov_6pxlre0ez.b[11][0];++cov_6pxlre0ez.s[47];
+            auditId.push(this.state.sortedDataList.newData[rowIndex].id);
+        } else /* istanbul ignore next */{++cov_6pxlre0ez.b[11][1];}++cov_6pxlre0ez.s[48];
+        /* istanbul ignore next */_reactReduxModal.modal.add( /* istanbul ignore next */_startAudit2.default, {
+            title: '',
+            size: 'large', // large, medium or small,
+            closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+            hideCloseButton: true,
+            auditId: auditId });
+
+    }
+
+    resolveAudit(columnKey, rowIndex, screenId) {/* istanbul ignore next */++cov_6pxlre0ez.f[10];
+        var auditId, auditType, displayId, auditMethod; /* istanbul ignore next */++cov_6pxlre0ez.s[49];
+        if (this.state.sortedDataList.newData[rowIndex]) {/* istanbul ignore next */++cov_6pxlre0ez.b[12][0];++cov_6pxlre0ez.s[50];
+            auditId = this.state.sortedDataList.newData[rowIndex].id; /* istanbul ignore next */++cov_6pxlre0ez.s[51];
+            auditType = this.state.sortedDataList.newData[rowIndex].auditTypeValue; /* istanbul ignore next */++cov_6pxlre0ez.s[52];
+            displayId = this.state.sortedDataList.newData[rowIndex].display_id; /* istanbul ignore next */++cov_6pxlre0ez.s[53];
+            auditMethod = this.state.sortedDataList.newData[rowIndex].auditType;
+        } else /* istanbul ignore next */{++cov_6pxlre0ez.b[12][1];}++cov_6pxlre0ez.s[54];
+        /* istanbul ignore next */_reactReduxModal.modal.add( /* istanbul ignore next */_resolveAudit2.default, {
+            title: '',
+            size: 'large', // large, medium or small,
+            closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+            hideCloseButton: true,
+            auditId: auditId,
+            screenId: screenId,
+            auditType: auditType,
+            displayId: displayId,
+            auditMethod: auditMethod });
+
+    }
+
+    handleChange(columnKey, rowIndex, evt) {/* istanbul ignore next */++cov_6pxlre0ez.f[11];
+        var checkedPPS = /* istanbul ignore next */(++cov_6pxlre0ez.s[55], JSON.parse(JSON.stringify(this.props.checkedPps)));
+        var sortedDataList = /* istanbul ignore next */(++cov_6pxlre0ez.s[56], this.state.sortedDataList);
+        var selectedData = /* istanbul ignore next */(++cov_6pxlre0ez.s[57], sortedDataList._data ? /* istanbul ignore next */(++cov_6pxlre0ez.b[13][0],
+        sortedDataList._data.newData[sortedDataList._indexMap[rowIndex]]) : /* istanbul ignore next */(++cov_6pxlre0ez.b[13][1],
+        sortedDataList.newData[rowIndex])); /* istanbul ignore next */++cov_6pxlre0ez.s[58];
+        if (evt.target.checked) {/* istanbul ignore next */++cov_6pxlre0ez.b[14][0];++cov_6pxlre0ez.s[59];
+            checkedPPS[selectedData[columnKey]] = selectedData;
+        } else
+        {/* istanbul ignore next */++cov_6pxlre0ez.b[14][1];++cov_6pxlre0ez.s[60];
+            delete checkedPPS[selectedData[columnKey]];
+        } /* istanbul ignore next */++cov_6pxlre0ez.s[61];
+
+
+        this.props.setCheckedPps(checkedPPS); /* istanbul ignore next */++cov_6pxlre0ez.s[62];
+        this.props.renderDdrop(Object.keys(checkedPPS).length ? /* istanbul ignore next */(++cov_6pxlre0ez.b[15][0], true) : /* istanbul ignore next */(++cov_6pxlre0ez.b[15][1], false));
+    }
+
+    manageAuditTask(rowIndex, option) {/* istanbul ignore next */++cov_6pxlre0ez.f[12];++cov_6pxlre0ez.s[63];
+        if (option.value === "duplicateTask") {/* istanbul ignore next */++cov_6pxlre0ez.b[16][0];
+            var auditType, auditComplete, auditTypeParam, auditPdfaValue; /* istanbul ignore next */++cov_6pxlre0ez.s[64];
+            if (this.state.sortedDataList.newData[rowIndex]) {/* istanbul ignore next */++cov_6pxlre0ez.b[17][0];++cov_6pxlre0ez.s[65];
+                auditType = this.state.sortedDataList.newData[rowIndex].auditType; /* istanbul ignore next */++cov_6pxlre0ez.s[66];
+                auditTypeParam = this.state.sortedDataList.newData[rowIndex].auditValue; /* istanbul ignore next */++cov_6pxlre0ez.s[67];
+                auditComplete = this.state.sortedDataList.newData[rowIndex].auditTypeValue; /* istanbul ignore next */++cov_6pxlre0ez.s[68];
+                if (this.state.sortedDataList.newData[rowIndex].pdfaValues) {/* istanbul ignore next */++cov_6pxlre0ez.b[18][0];++cov_6pxlre0ez.s[69];
+                    auditPdfaValue = this.state.sortedDataList.newData[rowIndex].pdfaValues;
+                } else /* istanbul ignore next */{++cov_6pxlre0ez.b[18][1];}
+            } else /* istanbul ignore next */{++cov_6pxlre0ez.b[17][1];}++cov_6pxlre0ez.s[70];
+
+            /* istanbul ignore next */_reactReduxModal.modal.add( /* istanbul ignore next */_duplicateAudit2.default, {
+                title: '',
+                size: 'large', // large, medium or small,
+                closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+                hideCloseButton: true,
+                auditType: auditType,
+                auditTypeParam: auditTypeParam,
+                auditComplete: auditComplete,
+                auditPdfaValue: auditPdfaValue });
+
+
+        } else
+            {/* istanbul ignore next */++cov_6pxlre0ez.b[16][1];++cov_6pxlre0ez.s[71];if (option.value === "deleteRecord") {/* istanbul ignore next */++cov_6pxlre0ez.b[19][0];
+                    var auditId; /* istanbul ignore next */++cov_6pxlre0ez.s[72];
+                    if (this.state.sortedDataList.newData[rowIndex]) {/* istanbul ignore next */++cov_6pxlre0ez.b[20][0];++cov_6pxlre0ez.s[73];
+                        auditId = this.state.sortedDataList.newData[rowIndex].id;
+                    } else /* istanbul ignore next */{++cov_6pxlre0ez.b[20][1];}++cov_6pxlre0ez.s[74];
+                    /* istanbul ignore next */_reactReduxModal.modal.add( /* istanbul ignore next */_deleteAudit2.default, {
+                        title: '',
+                        size: 'large', // large, medium or small,
+                        closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+                        hideCloseButton: true,
+                        auditId: auditId,
+                        auditComplete: auditComplete });
+
+                } else {/* istanbul ignore next */++cov_6pxlre0ez.b[19][1];++cov_6pxlre0ez.s[75];if (option.value === 'cancelTask') {/* istanbul ignore next */++cov_6pxlre0ez.b[21][0];++cov_6pxlre0ez.s[76];
+                            this.props.cancelAudit(this.state.sortedDataList.newData[rowIndex].id);
+
+                        } else /* istanbul ignore next */{++cov_6pxlre0ez.b[21][1];}}}
+    }
+
+
+
+    _showAllAudit() {/* istanbul ignore next */++cov_6pxlre0ez.f[13];
+        var clearFilter = /* istanbul ignore next */(++cov_6pxlre0ez.s[77], []); /* istanbul ignore next */++cov_6pxlre0ez.s[78];
+        this.props.refreshData(clearFilter);
+    }
+    //Render function for Audit Table
+    render() {/* istanbul ignore next */++cov_6pxlre0ez.f[14];var _ref = (++cov_6pxlre0ez.s[79],
+
+        this.state),sortedDataList = _ref.sortedDataList,colSortDirs = _ref.colSortDirs,columnWidths = _ref.columnWidths,heightRes;
+        var auditCompleted = /* istanbul ignore next */(++cov_6pxlre0ez.s[80], this.props.auditState.auditCompleted);
+        var auditIssue = /* istanbul ignore next */(++cov_6pxlre0ez.s[81], this.props.auditState.auditIssue);
+        var locationAudit = /* istanbul ignore next */(++cov_6pxlre0ez.s[82], this.props.auditState.locationAudit);
+        var skuAudit = /* istanbul ignore next */(++cov_6pxlre0ez.s[83], this.props.auditState.skuAudit);
+        var totalProgress = /* istanbul ignore next */(++cov_6pxlre0ez.s[84], this.props.auditState.totalProgress);
+        var rowsCount = /* istanbul ignore next */(++cov_6pxlre0ez.s[85], sortedDataList.getSize());
+        var headerChecked = /* istanbul ignore next */(++cov_6pxlre0ez.s[86], false);
+        let checkState = /* istanbul ignore next */(++cov_6pxlre0ez.s[87], this.handleChange.bind(this));
+        let checkedStatePps = /* istanbul ignore next */(++cov_6pxlre0ez.s[88], []); /* istanbul ignore next */++cov_6pxlre0ez.s[89];
+        if (this.props.checkedPps) {/* istanbul ignore next */++cov_6pxlre0ez.b[22][0];++cov_6pxlre0ez.s[90];
+            checkedStatePps = this.props.checkedPps;
+        } else /* istanbul ignore next */{++cov_6pxlre0ez.b[22][1];}
+        var headerAlert = /* istanbul ignore next */(++cov_6pxlre0ez.s[91], /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'alertState', __source: { fileName: _jsxFileName, lineNumber: 268 }, __self: this },
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'table-subtab-alert-icon', __source: { fileName: _jsxFileName, lineNumber: 270 }, __self: this }),
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-inline', __source: { fileName: _jsxFileName, lineNumber: 271 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'auditList.alert.lable',
+                    description: 'audit list alert lable',
+                    defaultMessage: '{auditIssue} {auditIssue,plural, one{Alert} other{Alerts}}',
+                    values: { auditIssue: auditIssue ? /* istanbul ignore next */(++cov_6pxlre0ez.b[23][0], auditIssue) : /* istanbul ignore next */(++cov_6pxlre0ez.b[23][1], '0') }, __source: { fileName: _jsxFileName, lineNumber: 271 }, __self: this }))));
+
+
+
+        var noData = /* istanbul ignore next */(++cov_6pxlre0ez.s[92], /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 278 }, __self: this })); /* istanbul ignore next */++cov_6pxlre0ez.s[93];
+        if ( /* istanbul ignore next */(++cov_6pxlre0ez.b[25][0], rowsCount === 0) || /* istanbul ignore next */(++cov_6pxlre0ez.b[25][1], rowsCount === undefined) || /* istanbul ignore next */(++cov_6pxlre0ez.b[25][2], rowsCount === null)) {/* istanbul ignore next */++cov_6pxlre0ez.b[24][0];++cov_6pxlre0ez.s[94];
+            noData = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-no-data', __source: { fileName: _jsxFileName, lineNumber: 280 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'audit.table.noData',
+                    description: 'No data message for audit table',
+                    defaultMessage: 'No Audit Task Found', __source: { fileName: _jsxFileName, lineNumber: 280 }, __self: this })); /* istanbul ignore next */++cov_6pxlre0ez.s[95];
+            heightRes = /* istanbul ignore next */_frontEndConstants.GOR_TABLE_HEADER_HEIGHT;
+        } else
+        {/* istanbul ignore next */++cov_6pxlre0ez.b[24][1];++cov_6pxlre0ez.s[96];
+            heightRes = Math.max( /* istanbul ignore next */_frontEndConstants.GOR_USER_TABLE_HEADER_HEIGHT * rowsCount + /* istanbul ignore next */_frontEndConstants.GOR_AUDIT_TABLE_HEIGHT_CORRECTION, screen.height - /* istanbul ignore next */_frontEndConstants.GOR_AUDIT_TABLE_HEIGHT_CORRECTION);
+        }
+
+        var tableRenderer = /* istanbul ignore next */(++cov_6pxlre0ez.s[97], /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 289 }, __self: this })); /* istanbul ignore next */++cov_6pxlre0ez.s[98];
+        tableRenderer = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorTableMainContainer', __source: { fileName: _jsxFileName, lineNumber: 290 }, __self: this },
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Table, /* istanbul ignore next */Object.assign({
+                    rowHeight: 50,
+                    rowsCount: rowsCount,
+                    headerHeight: 70,
+                    onRowClick: this._handleOnClickDropdown.bind(this),
+                    onColumnResizeEndCallback: this._onColumnResizeEndCallback,
+                    isColumnResizing: false,
+                    width: this.props.containerWidth,
+                    height: heightRes },
+                this.props, { __source: { fileName: _jsxFileName, lineNumber: 292 }, __self: this }),
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+                    columnKey: 'display_id',
+                    header:
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 305 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-header-check', __source: { fileName: _jsxFileName, lineNumber: 306 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'input', /* istanbul ignore next */{ type: 'checkbox', checked: headerChecked, __source: { fileName: _jsxFileName, lineNumber: 307 }, __self: this })),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.SortHeaderCell, /* istanbul ignore next */{ onSortChange: this.backendSort,
+                                sortDir: colSortDirs.display_id, __source: { fileName: _jsxFileName, lineNumber: 309 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 311 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'auditTable.stationID.heading',
+                                    description: 'Heading for audit ID for auditTable',
+                                    defaultMessage: 'AUDIT ID', __source: { fileName: _jsxFileName, lineNumber: 312 }, __self: this }),
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderSubText', __source: { fileName: _jsxFileName, lineNumber: 315 }, __self: this },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'auditTable.SubAuditID',
+                                        description: 'total Sub auditID for auditTable',
+                                        defaultMessage: 'Total:{rowsCount}',
+                                        values: { rowsCount: this.props.totalAudits ? /* istanbul ignore next */(++cov_6pxlre0ez.b[26][0], this.props.totalAudits) : /* istanbul ignore next */(++cov_6pxlre0ez.b[26][1], '0') }, __source: { fileName: _jsxFileName, lineNumber: 316 }, __self: this }))))),
+
+
+
+
+
+                    cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.AuditIssuesTooltipCell, /* istanbul ignore next */{ checkboxColumn: "auditId", data: sortedDataList, callBack: this._handleOnClickDropdown.bind(this), resolved: 'resolvedTask', data: sortedDataList, checkState: checkState,
+                        checked: checkedStatePps, unresolved: 'unresolvedTask', __source: { fileName: _jsxFileName, lineNumber: 325 }, __self: this }),
+                    fixed: true,
+                    width: columnWidths.display_id,
+                    isResizable: true, __source: { fileName: _jsxFileName, lineNumber: 302 }, __self: this }),
+
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+
+
+                    columnKey: 'auditTypeValue',
+                    header:
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-table-header', __source: { fileName: _jsxFileName, lineNumber: 337 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 338 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'audit.table.type', description: 'audit type for audit table',
+                                defaultMessage: 'AUDIT TYPE', __source: { fileName: _jsxFileName, lineNumber: 339 }, __self: this }),
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderSubText', __source: { fileName: _jsxFileName, lineNumber: 341 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'audit.auditType', description: 'audit type for audit table',
+                                    defaultMessage: 'SKU ({sku}) . Location ({location})',
+                                    values: {
+                                        sku: skuAudit ? /* istanbul ignore next */(++cov_6pxlre0ez.b[27][0], skuAudit) : /* istanbul ignore next */(++cov_6pxlre0ez.b[27][1], '0'),
+                                        location: locationAudit ? /* istanbul ignore next */(++cov_6pxlre0ez.b[28][0], locationAudit) : /* istanbul ignore next */(++cov_6pxlre0ez.b[28][1], '0') }, __source: { fileName: _jsxFileName, lineNumber: 342 }, __self: this })))),
+
+
+
+
+
+                    cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.ToolTipCell, /* istanbul ignore next */{ data: sortedDataList, callBack: this._handleOnClickDropdown.bind(this),
+                        tooltipData: 'pdfaValues', __source: { fileName: _jsxFileName, lineNumber: 352 }, __self: this }),
+                    fixed: true,
+                    width: columnWidths.auditTypeValue,
+                    isResizable: true, __source: { fileName: _jsxFileName, lineNumber: 332 }, __self: this }),
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+                    columnKey: 'status',
+                    header:
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.SortHeaderCell, /* istanbul ignore next */{ onSortChange: this.backendSort,
+                            sortDir: colSortDirs.status, __source: { fileName: _jsxFileName, lineNumber: 361 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 363 }, __self: this },
+
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'audit.table.STATUS', description: 'STATUS for audit',
+                                defaultMessage: 'STATUS', __source: { fileName: _jsxFileName, lineNumber: 365 }, __self: this }),
+                            auditIssue ? /* istanbul ignore next */(++cov_6pxlre0ez.b[29][0], headerAlert) : /* istanbul ignore next */(++cov_6pxlre0ez.b[29][1],
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-subStatus-online', __source: { fileName: _jsxFileName, lineNumber: 368 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 369 }, __self: this },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'auditTable.status',
+                                        description: 'status completed audit',
+                                        defaultMessage: '{auditCompleted} Completed',
+                                        values: { auditCompleted: auditCompleted ? /* istanbul ignore next */(++cov_6pxlre0ez.b[30][0], auditCompleted) : /* istanbul ignore next */(++cov_6pxlre0ez.b[30][1], '0') }, __source: { fileName: _jsxFileName, lineNumber: 370 }, __self: this })))))),
+
+
+
+
+
+                    cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.AuditStatusCell, /* istanbul ignore next */{ data: sortedDataList, statusKey: 'statusClass', descriptionKey: 'cancelling', __source: { fileName: _jsxFileName, lineNumber: 379 }, __self: this }),
+                    fixed: true,
+                    width: columnWidths.status,
+                    isResizable: true, __source: { fileName: _jsxFileName, lineNumber: 358 }, __self: this }),
+
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+                    columnKey: 'startTime',
+                    header:
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.SortHeaderCell, /* istanbul ignore next */{ onSortChange: this.backendSort,
+                            sortDir: colSortDirs.startTime, __source: { fileName: _jsxFileName, lineNumber: 388 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 390 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'audit.table.startTime', description: 'startTime for audit',
+                                defaultMessage: 'START TIME', __source: { fileName: _jsxFileName, lineNumber: 391 }, __self: this }),
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderSubText', __source: { fileName: _jsxFileName, lineNumber: 393 }, __self: this }))),
+
+
+
+
+
+                    cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.TextCell, /* istanbul ignore next */{ style: { textTransform: 'capitalize' }, data: sortedDataList, __source: { fileName: _jsxFileName, lineNumber: 399 }, __self: this }),
+                    fixed: true,
+                    width: columnWidths.startTime,
+                    isResizable: true, __source: { fileName: _jsxFileName, lineNumber: 385 }, __self: this }),
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+                    columnKey: 'progress',
+                    header:
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-table-header', __source: { fileName: _jsxFileName, lineNumber: 407 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 408 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'audit.table.progress', description: 'progress for audit task',
+                                defaultMessage: 'PROGRESS(%)', __source: { fileName: _jsxFileName, lineNumber: 409 }, __self: this }),
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderSubText', __source: { fileName: _jsxFileName, lineNumber: 411 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'audit.Totalprogress',
+                                    description: 'total progress for audit table',
+                                    defaultMessage: '{totalProgress}% Completed',
+                                    values: { totalProgress: totalProgress.toFixed(1) ? /* istanbul ignore next */(++cov_6pxlre0ez.b[31][0], totalProgress.toFixed(1)) : /* istanbul ignore next */(++cov_6pxlre0ez.b[31][1], '0') }, __source: { fileName: _jsxFileName, lineNumber: 412 }, __self: this })))),
+
+
+
+
+                    cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.ProgressCell, /* istanbul ignore next */{ data: sortedDataList, resolved: 'resolvedTask',
+                            unresolved: 'unresolvedTask', __source: { fileName: _jsxFileName, lineNumber: 420 }, __self: this }, /* istanbul ignore next */' '),
+                    fixed: true,
+                    width: columnWidths.progress,
+                    isResizable: true, __source: { fileName: _jsxFileName, lineNumber: 404 }, __self: this }),
+
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+                    columnKey: 'completedTime',
+                    header:
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.SortHeaderCell, /* istanbul ignore next */{ onSortChange: this.backendSort,
+                            sortDir: colSortDirs.completedTime, __source: { fileName: _jsxFileName, lineNumber: 430 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 432 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'audit.table.timeCompleted', description: 'timeCompleted for audit',
+                                defaultMessage: 'TIME COMPLETED', __source: { fileName: _jsxFileName, lineNumber: 433 }, __self: this }),
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderSubText', __source: { fileName: _jsxFileName, lineNumber: 435 }, __self: this },
+                                this.props.timeZoneString))),
+
+
+
+
+                    cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.TextCell, /* istanbul ignore next */{ style: { textTransform: 'capitalize' }, data: sortedDataList, __source: { fileName: _jsxFileName, lineNumber: 441 }, __self: this }),
+                    fixed: true,
+                    width: columnWidths.completedTime,
+                    isResizable: true, __source: { fileName: _jsxFileName, lineNumber: 427 }, __self: this }),
+
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+                    columnKey: 'actions',
+                    header:
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-table-header', __source: { fileName: _jsxFileName, lineNumber: 450 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 451 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'audit.table.action', description: 'action Column',
+                                defaultMessage: 'ACTIONS', __source: { fileName: _jsxFileName, lineNumber: 452 }, __self: this }),
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderSubText', __source: { fileName: _jsxFileName, lineNumber: 454 }, __self: this }))),
+
+
+
+                    cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.ActionCellAudit, /* istanbul ignore next */{ data: sortedDataList, handleAudit: this.startAudit.bind(this),
+                        manageAuditTask: this.manageAuditTask.bind(this), showBox: 'startAudit',
+
+                        placeholderText: this.context.intl.formatMessage(messages.auditPlaceholder),
+                        resolveflag: 'resolveAudit', resolveAudit: this.resolveAudit.bind(this),
+                        checkIssues: 'viewIssues', __source: { fileName: _jsxFileName, lineNumber: 458 }, __self: this }),
+
+                    width: columnWidths.actions, __source: { fileName: _jsxFileName, lineNumber: 447 }, __self: this })),
+
+
+
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 470 }, __self: this }, /* istanbul ignore next */' ', noData, /* istanbul ignore next */' ')); /* istanbul ignore next */++cov_6pxlre0ez.s[99];
+
+
+
+        return (
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 475 }, __self: this }, /* istanbul ignore next */' ', tableRenderer, /* istanbul ignore next */' '));
+
+    }} /* istanbul ignore next */++cov_6pxlre0ez.s[100];
+
+
+
+AuditTable.contextTypes = {
+    intl: /* istanbul ignore next */_react2.default.PropTypes.object.isRequired }; /* istanbul ignore next */++cov_6pxlre0ez.s[101];
+
+
+AuditTable.PropTypes = {
+    items: /* istanbul ignore next */_react2.default.PropTypes.array,
+    sortHeaderOrder: /* istanbul ignore next */_react2.default.PropTypes.func,
+    sortHeaderState: /* istanbul ignore next */_react2.default.PropTypes.func,
+    refreshData: /* istanbul ignore next */_react2.default.PropTypes.func,
+    setFilter: /* istanbul ignore next */_react2.default.PropTypes.func,
+    auditState: /* istanbul ignore next */_react2.default.PropTypes.object,
+    showFilter: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    isFilterApplied: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    responseFlag: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    containerWidth: /* istanbul ignore next */_react2.default.PropTypes.number,
+    totalAudits: /* istanbul ignore next */_react2.default.PropTypes.number }; /* istanbul ignore next */exports.default =
+
+
+
+/* istanbul ignore next */(0, _reactDimensions2.default)()(AuditTable);

@@ -1,0 +1,266 @@
+/* istanbul ignore next */"use strict";Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = "/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/components/utilityComponents/downloadReportsTile.js";var /* istanbul ignore next */_react = require("react"); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactIntl = require("react-intl");
+var /* istanbul ignore next */_utilityDropdownWrap = require("./utilityDropdownWrap"); /* istanbul ignore next */var _utilityDropdownWrap2 = _interopRequireDefault(_utilityDropdownWrap);
+var /* istanbul ignore next */_listItem = require("../list/listItem"); /* istanbul ignore next */var _listItem2 = _interopRequireDefault(_listItem);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+const messages = /* istanbul ignore next */(0, _reactIntl.defineMessages)({
+  downloadReportsHead: {
+    id: "utility.downloadReport.head",
+    description: "Download Reports",
+    defaultMessage: "Download Reports" },
+
+  downloadRprtsStatusHead: {
+    id: "utility.downloadReport.Status.heading",
+    description: "Reports Status",
+    defaultMessage: "Reports Status" },
+
+  downloadRprtsCategoryLabel: {
+    id: "utility.downloadRprts.CategoryLabel",
+    description: "Category",
+    defaultMessage: "Category" },
+
+  downloadRprtsCategoryPlchldr: {
+    id: "utility.downloadRprts.CategoryPlchldr",
+    description: "Select Category",
+    defaultMessage: "Select Category" },
+
+  downloadRprtsCategoryInventory: {
+    id: "utility.downloadRprts.CategoryInventory",
+    description: "Inventory",
+    defaultMessage: "Inventory" },
+
+  downloadFileFormatPlchldr: {
+    id: "utility.downloadRprts.FileFormatPlchldr",
+    description: "Select File Format",
+    defaultMessage: "Select File Format" },
+
+  downloadFileFormatLabel: {
+    id: "utility.downloadRprts.FileFormatLabel",
+    description: "File Format",
+    defaultMessage: "File Format" },
+
+  downloadFileFormatCsv: {
+    id: "utility.downloadRports.csvFormat",
+    description: "Comma separated values (csv)",
+    defaultMessage: "Comma separated values (csv)" },
+
+  downloadFileFormatXls: {
+    id: "utiltiy.downloadRports.xlsFormat",
+    description: "ExceL Spreadsheet (xlsx)",
+    defaultMessage: "ExceL Spreadsheet (xlsx)" },
+
+  downloadLink: {
+    id: "utility.grnHistory.clickToDownload",
+    description: "file name",
+    defaultMessage: "Click here to download " } });
+
+
+
+class DownloadReportsTile extends /* istanbul ignore next */_react2.default.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      category: null,
+      fileType: null };
+
+  }
+
+  _changeReportCategory(data) {
+    this.setState({ category: data.value });
+  }
+
+  _changeReportFileType(data) {
+    this.setState({ fileType: data.value });
+  }
+
+  _generateReport() {
+    if (this.props.generateReport) {
+      this.props.generateReport(this.state.fileType);
+    } else {
+      throw new Error("Method for generating report not found");
+    }
+  }
+
+  _getCurrentDropDownState(fileType, currentValue) {
+    for (var i = fileType.length - 1; i >= 0; i--) {
+      if (fileType[i].value === currentValue) {
+        return fileType[i].label;
+      }
+    }
+    return null;
+  }
+
+  _renderDownloadReports(reportsHistory) {
+    var result = [];
+
+    // pushing then the list items
+    if (reportsHistory.constructor !== Array && reportsHistory.length < 0) {
+      //no history of files present from the backend
+      return result;
+    }
+    for (let i = 0; i < reportsHistory.length; i++) {
+      let listItem =
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_listItem2.default, /* istanbul ignore next */{
+          index: i,
+          key: "listItem" + i, __source: { fileName: _jsxFileName, lineNumber: 103 }, __self: this },
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: "gor-inline", __source: { fileName: _jsxFileName, lineNumber: 107 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: "gor-utility-master-h1", __source: { fileName: _jsxFileName, lineNumber: 108 }, __self: this },
+            reportsHistory[i].file_url ?
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"a", /* istanbul ignore next */{ href: reportsHistory[i].file_url, download: /* istanbul ignore next */true, __source: { fileName: _jsxFileName, lineNumber: 110 }, __self: this },
+              this.context.intl.formatMessage(messages.downloadLink)) :
+
+            ""),
+
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: "gor-inline gor-utility-master-h2", __source: { fileName: _jsxFileName, lineNumber: 115 }, __self: this },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{
+              id: "utility.uploadHist.success",
+              description: "Status ",
+              defaultMessage: "Status: {status}",
+              values: { status: reportsHistory[i].status }, __source: { fileName: _jsxFileName, lineNumber: 116 }, __self: this }))),
+
+
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: "gor-inline gor-utility-master-h2", __source: { fileName: _jsxFileName, lineNumber: 124 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedDate, /* istanbul ignore next */{
+            value: new Date(reportsHistory[i].create_time),
+            month: "short",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            timeZone: this.props.timeOffset, __source: { fileName: _jsxFileName, lineNumber: 125 }, __self: this })));
+
+
+
+
+      result.push(listItem);
+    }
+    if (result.length === 0) {
+      let listItem = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_listItem2.default, /* istanbul ignore next */{ index: 0, key: "listItem" + 0, __source: { fileName: _jsxFileName, lineNumber: 139 }, __self: this },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: "gor-inline", __source: { fileName: _jsxFileName, lineNumber: 140 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: "gor-utility-master-h1", __source: { fileName: _jsxFileName, lineNumber: 141 }, __self: this },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: "gor-utility-no-history-found", __source: { fileName: _jsxFileName, lineNumber: 142 }, __self: this },
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{
+                id: "utility.uploadHist.noresultfound",
+                description: "Status ",
+                defaultMessage: "No Result Found", __source: { fileName: _jsxFileName, lineNumber: 143 }, __self: this }))),
+
+
+
+
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: "gor-inline gor-utility-master-h2", __source: { fileName: _jsxFileName, lineNumber: 151 }, __self: this })),
+
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: "gor-inline gor-utility-master-h2", __source: { fileName: _jsxFileName, lineNumber: 154 }, __self: this }));
+
+
+      result.push(listItem);
+    }
+    return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: "gor-utility-history-container", __source: { fileName: _jsxFileName, lineNumber: 159 }, __self: this }, result));
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    if (
+    JSON.stringify(this.props.reportsHistory) ===
+    JSON.stringify(nextProps.reportsHistory))
+    {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  render() {
+    const modes = [
+    {
+      value: "inventory",
+      label: this.context.intl.formatMessage(
+      messages.downloadRprtsCategoryInventory) }];
+
+
+
+    const fileType = [
+    {
+      value: "csv",
+      label: this.context.intl.formatMessage(messages.downloadFileFormatCsv) },
+
+    {
+      value: "xlsx",
+      label: this.context.intl.formatMessage(messages.downloadFileFormatXls) }];
+
+
+    let reportsHistory = this._renderDownloadReports(this.props.reportsHistory);
+
+    let currentFileState = this.state.fileType ?
+    this._getCurrentDropDownState(fileType, this.state.fileType) :
+    null;
+    let currentCategoryState = this.state.category ?
+    this._getCurrentDropDownState(modes, this.state.category) :
+    null;
+
+    return (
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 201 }, __self: this },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_utilityDropdownWrap2.default, /* istanbul ignore next */{
+          items: modes,
+          dropdownLabel: this.context.intl.formatMessage(
+          messages.downloadRprtsCategoryLabel),
+
+          placeHolderText: this.context.intl.formatMessage(
+          messages.downloadRprtsCategoryPlchldr),
+
+          changeMode: this._changeReportCategory.bind(this),
+          currentState: currentCategoryState, __source: { fileName: _jsxFileName, lineNumber: 202 }, __self: this }),
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_utilityDropdownWrap2.default, /* istanbul ignore next */{
+          items: fileType,
+          dropdownLabel: this.context.intl.formatMessage(
+          messages.downloadFileFormatLabel),
+
+          placeHolderText: this.context.intl.formatMessage(
+          messages.downloadFileFormatPlchldr),
+
+          changeMode: this._changeReportFileType.bind(this),
+          currentState: currentFileState, __source: { fileName: _jsxFileName, lineNumber: 213 }, __self: this }),
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: "gor-utility-btn-wrap", __source: { fileName: _jsxFileName, lineNumber: 224 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"button", /* istanbul ignore next */{
+              onClick: this._generateReport.bind(this),
+              className:
+              this.state.category && this.state.fileType ?
+              "gor-download-button" :
+              "gor-download-button gor-disable-content", __source: { fileName: _jsxFileName, lineNumber: 225 }, __self: this },
+
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"label", /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 233 }, __self: this },
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{
+                id: "utility.downloadReports.head",
+                description: "Generate Report",
+                defaultMessage: "Generate Report",
+                x: /* istanbul ignore next */true, __source: { fileName: _jsxFileName, lineNumber: 234 }, __self: this })))),
+
+
+
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: "gor-utility-body-header", __source: { fileName: _jsxFileName, lineNumber: 243 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{
+            id: "utility.downloadReports.history",
+            description: "Report History",
+            defaultMessage: "Report History", __source: { fileName: _jsxFileName, lineNumber: 244 }, __self: this })),
+
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"h1", /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 250 }, __self: this },
+          this.context.intl.formatMessage(messages.downloadRprtsStatusHead)),
+
+        reportsHistory));
+
+
+  }}
+
+DownloadReportsTile.propTypes = {
+  reportsHistChanged: /* istanbul ignore next */_react2.default.PropTypes.bool };
+
+
+DownloadReportsTile.contextTypes = {
+  intl: /* istanbul ignore next */_react2.default.PropTypes.object.isRequired }; /* istanbul ignore next */exports.default =
+
+
+DownloadReportsTile;

@@ -1,0 +1,55 @@
+/* istanbul ignore next */"use strict";Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = "/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/components/tabs/tab.js";var /* istanbul ignore next */_react = require("react"); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+class Tab extends /* istanbul ignore next */_react2.default.Component {
+	constructor(props)
+	{
+		super(props);
+	}
+	render() {
+		var icon = {};
+		if (this.props.subIcons === true && this.props.items.currentState === "gorError") {
+			icon = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: "tab-alert-icon", __source: { fileName: _jsxFileName, lineNumber: 12 }, __self: this });
+		} else
+		if (this.props.subIcons === true && this.props.items.currentState === "gor-online") {
+			icon = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: "tab-online-icon", __source: { fileName: _jsxFileName, lineNumber: 15 }, __self: this });
+		} else
+		if (this.props.subIcons === true && this.props.items.currentState === "gor-offline") {
+			icon = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: "tab-offline-icon", __source: { fileName: _jsxFileName, lineNumber: 18 }, __self: this });
+		} else
+		if (this.props.subIcons === true && this.props.items.currentState === "gor-alert") {
+			icon = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: "tab-alert-icon", __source: { fileName: _jsxFileName, lineNumber: 21 }, __self: this });
+		} else
+
+		if (this.props.subIcons === true && this.props.items.currentState === "gor-emergency-alert") {
+			icon = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: "gor-error-white", __source: { fileName: _jsxFileName, lineNumber: 25 }, __self: this });
+		} else
+		{
+			icon = null;
+		}
+		return (
+			/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: "gorTab gorContainer", __source: { fileName: _jsxFileName, lineNumber: 31 }, __self: this },
+				/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: this.props.changeClass + " gor-main-block", __source: { fileName: _jsxFileName, lineNumber: 32 }, __self: this },
+					/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: "gorInlineDisplay", __source: { fileName: _jsxFileName, lineNumber: 33 }, __self: this },
+						/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 34 }, __self: this },
+							/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: "gor-upperText", __source: { fileName: _jsxFileName, lineNumber: 35 }, __self: this },
+								this.props.items.tab)),
+
+
+						/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: "gor-offline", __source: { fileName: _jsxFileName, lineNumber: 39 }, __self: this },
+							/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: this.props.items.currentState, __source: { fileName: _jsxFileName, lineNumber: 40 }, __self: this },
+								this.props.items.Status))),
+
+
+
+					icon ? /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: "gorIconsInline", __source: { fileName: _jsxFileName, lineNumber: 45 }, __self: this },
+						icon) :
+					"")));
+
+
+
+
+	}} /* istanbul ignore next */exports.default =
+
+
+Tab;

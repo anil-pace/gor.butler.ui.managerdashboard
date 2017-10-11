@@ -1,0 +1,484 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/containers/systemTabs/butlerbotTab.js'; /**
+                                                                                                                                                                                                                       * Container for Overview tab
+                                                                                                                                                                                                                       * This will be switched based on tab click
+                                                                                                                                                                                                                       */
+var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_butlerbotTable = require('./butlerbotTable'); /* istanbul ignore next */var _butlerbotTable2 = _interopRequireDefault(_butlerbotTable);
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_backEndConstants = require('../../constants/backEndConstants');
+var /* istanbul ignore next */_systemActions = require('./../../actions/systemActions');
+var /* istanbul ignore next */_reactRouter = require('react-router');
+var /* istanbul ignore next */_frontEndConstants = require('../../constants/frontEndConstants');
+
+
+
+
+
+var /* istanbul ignore next */_Spinner = require('../../components/spinner/Spinner'); /* istanbul ignore next */var _Spinner2 = _interopRequireDefault(_Spinner);
+var /* istanbul ignore next */_spinnerAction = require('../../actions/spinnerAction');
+var /* istanbul ignore next */_sortHeaderActions = require('../../actions/sortHeaderActions');
+
+var /* istanbul ignore next */_filterAction = require('../../actions/filterAction');
+var /* istanbul ignore next */_socketActions = require('./../../actions/socketActions');
+var /* istanbul ignore next */_initData = require('./../../constants/initData.js');
+var /* istanbul ignore next */_butlerBotFilter = require('./butlerBotFilter'); /* istanbul ignore next */var _butlerBotFilter2 = _interopRequireDefault(_butlerBotFilter);
+var /* istanbul ignore next */_filterSummary = require('../../components/tableFilter/filterSummary'); /* istanbul ignore next */var _filterSummary2 = _interopRequireDefault(_filterSummary);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+//Mesages for internationalization
+const messages = /* istanbul ignore next */(0, _reactIntl.defineMessages)({
+    butlerPrefix: {
+        id: "butlerDetail.name.prefix",
+        description: "prefix for butler id",
+        defaultMessage: "BOT - {botId}" },
+
+    ppsPrefix: {
+        id: "pps.name.prefix",
+        description: "prefix for pps id",
+        defaultMessage: "PPS {ppsId}" },
+
+    chargerPrefix: {
+        id: "charger.name.prefix",
+        description: "prefix for charger id",
+        defaultMessage: "CS - {csId}" },
+
+    msuPrefix: {
+        id: "msu.name.prefix",
+        description: "prefix for msu id",
+        defaultMessage: "MSU - {msuId}" },
+
+    audit: {
+        id: "audit.name.prefix",
+        description: "prefix for audit",
+        defaultMessage: "Audit" },
+
+    pick: {
+        id: "pick.name.prefix",
+        description: "prefix for Pick",
+        defaultMessage: "Pick" },
+
+    put: {
+        id: "Put.name.prefix",
+        description: "prefix for put",
+        defaultMessage: "Put" },
+
+    charging: {
+        id: "Charging.name.prefix",
+        description: "prefix for Charging",
+        defaultMessage: "Charging" },
+
+    move: {
+        id: "Move.name.prefix",
+        description: "prefix for Charging",
+        defaultMessage: "Move" },
+
+    moving: {
+        id: "moving.task",
+        description: "moving task",
+        defaultMessage: "Moving to" },
+
+    movingMount: {
+        id: "movingMount.task",
+        description: "movingMount task",
+        defaultMessage: "Moving to mount" },
+
+    movingDismount: {
+        id: "movingDismount.task",
+        description: "movingDismount task",
+        defaultMessage: "Moving to dismount" },
+
+    docked: {
+        id: "docked.task",
+        description: "docked task",
+        defaultMessage: "Docked at" } });
+
+
+
+
+class ButlerBot extends /* istanbul ignore next */_react2.default.Component {
+
+
+    _processButlersData() {
+        var nProps = this,
+        data = nProps.props.butlerDetail.butlerDetail;
+        var butlerData = [],butlerDetail = {};
+
+        var currentTask = {
+            0: nProps.context.intl.formatMessage(messages.pick),
+            1: nProps.context.intl.formatMessage(messages.put),
+            2: nProps.context.intl.formatMessage(messages.audit),
+            3: nProps.context.intl.formatMessage(messages.charging),
+            4: nProps.context.intl.formatMessage(messages.move) };
+
+        var currentTaskClass = {
+            0: "Pick",
+            1: "Put",
+            2: "Audit",
+            3: "Charging",
+            4: "Move" };
+
+
+        var currentSubtask = {
+            0: nProps.context.intl.formatMessage(messages.moving),
+            1: nProps.context.intl.formatMessage(messages.movingMount),
+            2: nProps.context.intl.formatMessage(messages.movingDismount),
+            3: nProps.context.intl.formatMessage(messages.docked) };
+
+
+        var priStatus = { "online": 1, "offline": 2 };
+        let BOT, PPS, CS, MSU;
+
+        for (var i = data.length - 1; i >= 0; i--) {
+            var botId = data[i].butler_id,msuId = data[i].display_msu_id,csId = data[i].charger_id,
+            ppsId = data[i].pps_id;
+            BOT = nProps.context.intl.formatMessage(messages.butlerPrefix, { "botId": botId });
+            PPS = nProps.context.intl.formatMessage(messages.ppsPrefix, { "ppsId": ppsId });
+            CS = nProps.context.intl.formatMessage(messages.chargerPrefix, { "csId": csId });
+            MSU = nProps.context.intl.formatMessage(messages.msuPrefix, { "msuId": msuId });
+            butlerDetail = {};
+            butlerDetail.id = BOT;
+            butlerDetail.statusClass = data[i].state;
+            if (nProps.context.intl.formatMessage( /* istanbul ignore next */_backEndConstants.stringConfig[data[i].state])) {
+                butlerDetail.status = nProps.context.intl.formatMessage( /* istanbul ignore next */_backEndConstants.stringConfig[data[i].state]);
+            } else
+
+            {
+                butlerDetail.status = data[i].state;
+            }
+            butlerDetail.statusPriority = priStatus[data[i].state];
+            if (data[i].location) {
+                butlerDetail.location = data[i].location;
+            } else
+            {
+                butlerDetail.location = "--";
+            }
+            if (data[i].voltage || data[i].voltage === 0) {
+                butlerDetail.voltage = data[i].voltage + " V";
+            } else
+            {
+                butlerDetail.voltage = "--";
+            }
+            butlerDetail.butlerAvgVoltage = data[i].voltage;
+            butlerDetail.taskNum = currentTask[data[i].current_task];
+            butlerDetail.taskNumClass = currentTaskClass[data[i].current_task];
+            butlerDetail.taskType = data[i].current_task;
+            if (data[i].display_msu_id === null) {
+                butlerDetail.msu = "--";
+            } else
+            {
+                butlerDetail.msu = MSU;
+            }
+
+            if (data[i].current_task !== null) {
+                butlerDetail.current = currentTask[data[i].current_task];
+                if (data[i].current_subtask !== null) {
+                    butlerDetail.current = butlerDetail.current + " - " + currentSubtask[data[i].current_subtask];
+                    if (data[i].charger_id !== null) {
+                        butlerDetail.current = butlerDetail.current + " CS " + data[i].charger_id;
+                    } else
+
+                    if (data[i].msu_id !== null) {
+                        butlerDetail.current = butlerDetail.current + " MSU " + data[i].msu_id;
+                    } else
+
+                    {
+                        butlerDetail.current = butlerDetail.current + " " + PPS;
+                    }
+                }
+
+
+            } else
+            {
+                butlerDetail.current = "--";
+            }
+            butlerData.push(butlerDetail);
+        }
+
+        return butlerData;
+    }
+
+    constructor(props) {
+        super(props);
+        this.state = { query: null };
+    }
+
+    componentWillMount() {
+        /**
+                           * It will update the last refreshed property of
+                           * overview details, so that updated subscription
+                           * packet can be sent to the server for data
+                           * update.
+                           */
+        this.props.butlerBotsRefreshed();
+    }
+
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.socketAuthorized && nextProps.location.query && (!this.state.query || JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query))) {
+            this.setState({ query: nextProps.location.query });
+            this._refreshList(nextProps.location.query);
+        }
+    }
+
+    /**
+       * The method will update the subscription packet
+       * and will fetch the data from the socket.
+       * @private
+       */
+    _refreshList(query) {
+        this.props.setButlerSpinner(true);
+        let filterSubsData = {};
+        if (query.location) {
+            filterSubsData["location"] = ['contains', query.location];
+        }
+        if (query.butler_id) {
+            filterSubsData["butler_id"] = ['=', query.butler_id];
+        }
+        if (query.status) {
+            filterSubsData["state"] = ['in', query.status.constructor === Array ? query.status : [query.status]];
+        }
+        if (query.current_task) {
+            filterSubsData["current_task"] = ['in', query.current_task.constructor === Array ? query.current_task : [query.current_task]];
+        }
+
+        if (Object.keys(query).filter(function (el) {return el !== 'page';}).length !== 0) {
+            this.props.toggleBotButton(true);
+            this.props.filterApplied(true);
+        } else {
+            this.props.toggleBotButton(false);
+            this.props.filterApplied(false);
+        }
+
+        let updatedWsSubscription = this.props.wsSubscriptionData;
+        updatedWsSubscription["system"].data[0].details["filter_params"] = filterSubsData;
+        updatedWsSubscription["butlerbots"].data[0].details["filter_params"] = filterSubsData;
+        this.props.initDataSentCall(updatedWsSubscription["butlerbots"]);
+        this.props.updateSubscriptionPacket(updatedWsSubscription);
+        this.props.butlerfilterState({
+            tokenSelected: { "STATUS": query.status ? query.status.constructor === Array ? query.status : [query.status] : ["any"], "MODE": query.current_task ? query.current_task.constructor === Array ? query.current_task : [query.current_task] : ["any"] }, searchQuery: {
+                "SPECIFIC LOCATION/ZONE": query.location || null,
+                "BOT ID": query.butler_id || null },
+
+            defaultToken: { "STATUS": ["any"], "MODE": ["any"] } });
+
+    }
+
+
+    /**
+       *
+       */
+    _clearFilter() {
+        /* istanbul ignore next */_reactRouter.hashHistory.push({ pathname: "/system/butlerbots", query: {} });
+    }
+
+
+    _setFilter() {
+        var newState = !this.props.showFilter;
+        this.props.showTableFilter(newState);
+    }
+
+    render() {
+        var filterHeight = screen.height - 190 - 50;
+        let updateStatusIntl = "";
+        var itemNumber = 6;
+        var butlerData,avgVoltage = 0;
+        var taskDetail = {
+            "Put": 0, "Pick": 0, "Charging": 0, "Idle": 0, "Audit": 0,
+            "avgVoltage": 0, "msuMounted": 0, "location": 0, "online": 0,
+            "offline": 0 };
+
+
+        if (this.props.butlerDetail.butlerDetail !== undefined) {
+            butlerData = this._processButlersData();
+            if (butlerData && butlerData.length) {
+                for (var i = butlerData.length - 1; i >= 0; i--) {
+                    avgVoltage = butlerData[i].butlerAvgVoltage + avgVoltage;
+                    if (butlerData[i].taskNumClass === null || butlerData[i].taskNumClass === undefined) {
+                        taskDetail["Idle"]++;
+                    } else
+                    {
+
+                        taskDetail[butlerData[i].taskNumClass]++;
+                    }
+
+                    if (butlerData[i].msu !== "--") {
+                        taskDetail["msuMounted"]++;
+                    }
+
+                    if (butlerData[i].location !== null) {
+                        taskDetail["location"]++;
+                    }
+
+                    if (butlerData[i].statusClass === /* istanbul ignore next */_frontEndConstants.GOR_PERIPHERAL_ONLINE) {
+                        taskDetail["online"]++;
+                    }
+
+                    if (butlerData[i].statusClass === /* istanbul ignore next */_frontEndConstants.GOR_PERIPHERAL_OFFLINE) {
+                        taskDetail["offline"]++;
+                    }
+
+                }
+                avgVoltage = (avgVoltage / butlerData.length).toFixed(1);
+                taskDetail["avgVoltage"] = avgVoltage + "V";
+            } else
+            {
+                taskDetail = {
+                    "Put": "--",
+                    "Pick": "--",
+                    "Charging": "--",
+                    "Idle": "--",
+                    "Audit": "--",
+                    "avgVoltage": 0,
+                    "msuMounted": "--",
+                    "location": "--",
+                    "online": "--" };
+
+            }
+        }
+        return (
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 338 }, __self: this },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 339 }, __self: this },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorTesting', __source: { fileName: _jsxFileName, lineNumber: 340 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Spinner2.default, /* istanbul ignore next */{ isLoading: this.props.butlerSpinner, setSpinner: this.props.setButlerSpinner, __source: { fileName: _jsxFileName, lineNumber: 341 }, __self: this }),
+                        butlerData ? /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 342 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-filter-wrap',
+                                    style: { 'width': this.props.showFilter ? '350px' : '0px', height: filterHeight }, __source: { fileName: _jsxFileName, lineNumber: 342 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_butlerBotFilter2.default, /* istanbul ignore next */{ butlerData: butlerData, responseFlag: this.props.responseFlag, __source: { fileName: _jsxFileName, lineNumber: 344 }, __self: this })),
+
+
+
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolBar', __source: { fileName: _jsxFileName, lineNumber: 348 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolBarWrap', __source: { fileName: _jsxFileName, lineNumber: 349 }, __self: this },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolBarElements', __source: { fileName: _jsxFileName, lineNumber: 350 }, __self: this },
+                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'butlerBot.table.heading', description: 'Heading for butlerbot',
+                                            defaultMessage: 'Butler Bots', __source: { fileName: _jsxFileName, lineNumber: 351 }, __self: this }))),
+
+
+
+
+
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'filterWrapper', __source: { fileName: _jsxFileName, lineNumber: 358 }, __self: this },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolBarDropDown', __source: { fileName: _jsxFileName, lineNumber: 359 }, __self: this },
+                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-button-wrap', __source: { fileName: _jsxFileName, lineNumber: 360 }, __self: this },
+                                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{
+                                                    className: 'gor-button-sub-status', __source: { fileName: _jsxFileName, lineNumber: 361 }, __self: this }, updateStatusIntl, /* istanbul ignore next */' ', updateStatusIntl, /* istanbul ignore next */' '),
+                                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{
+                                                    className: this.props.botFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn",
+                                                    onClick: this._setFilter.bind(this), __source: { fileName: _jsxFileName, lineNumber: 363 }, __self: this },
+                                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-manage-task', __source: { fileName: _jsxFileName, lineNumber: 366 }, __self: this }),
+                                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'gor.filter.filterLabel', description: 'button label for filter',
+                                                    defaultMessage: 'Filter data', __source: { fileName: _jsxFileName, lineNumber: 367 }, __self: this })))))),
+
+
+
+
+
+
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_filterSummary2.default, /* istanbul ignore next */{ total: butlerData.length || 0, isFilterApplied: this.props.isFilterApplied, responseFlag: this.props.responseFlag,
+                                filterText: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'botList.filter.search.bar',
+                                    description: 'total bots for filter search bar',
+                                    defaultMessage: '{total} Bots found',
+                                    values: { total: butlerData.length || 0 }, __source: { fileName: _jsxFileName, lineNumber: 376 }, __self: this }),
+                                refreshList: this._clearFilter.bind(this),
+                                refreshText: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'botList.filter.search.bar.showall',
+                                    description: 'button label for show all',
+                                    defaultMessage: 'Show all Bots', __source: { fileName: _jsxFileName, lineNumber: 381 }, __self: this }), __source: { fileName: _jsxFileName, lineNumber: 375 }, __self: this })) : null,
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_butlerbotTable2.default, /* istanbul ignore next */{ items: butlerData, itemNumber: itemNumber, parameters: taskDetail,
+                            intlMessg: this.props.intlMessages,
+                            sortHeaderState: this.props.butlerHeaderSort,
+                            currentSortState: this.props.butlerSortHeader,
+                            sortHeaderOrder: this.props.butlerHeaderSortOrder,
+                            currentHeaderOrder: this.props.butlerSortHeaderState,
+                            setButlerFilter: this.props.butlerFilterDetail,
+                            getButlerFilter: this.props.butlerFilter,
+                            showFilter: this.props.showFilter,
+                            isFilterApplied: this.props.isFilterApplied,
+                            setFilter: this.props.showTableFilter,
+                            botFilterStatus: this.props.botFilterStatus,
+                            lastUpdatedText: updateStatusIntl,
+                            lastUpdated: updateStatusIntl,
+                            butlerState: this.props.filterState,
+                            refreshList: this._clearFilter.bind(this), __source: { fileName: _jsxFileName, lineNumber: 385 }, __self: this })))));
+
+
+
+
+
+    }}
+
+;
+
+function mapStateToProps(state, ownProps) {
+    return {
+        butlerFilter: state.sortHeaderState.butlerFilter || "",
+        butlerSortHeader: state.sortHeaderState.butlerHeaderSort || /* istanbul ignore next */_frontEndConstants.INITIAL_HEADER_SORT,
+        butlerSortHeaderState: state.sortHeaderState.butlerHeaderSortOrder || /* istanbul ignore next */_frontEndConstants.INITIAL_HEADER_ORDER,
+        butlerSpinner: state.spinner.butlerSpinner || false,
+        butlerDetail: state.butlerDetail || [],
+        intlMessages: state.intl.messages,
+        showFilter: state.filterInfo.filterState || false,
+        isFilterApplied: state.filterInfo.isFilterApplied || false,
+        botFilterStatus: state.filterInfo.botFilterStatus || false,
+        filterState: state.filterInfo.butlerFilterState,
+        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || /* istanbul ignore next */_initData.wsOverviewData,
+        socketAuthorized: state.recieveSocketActions.socketAuthorized,
+        butlerBotsRefreshed: state.butlersInfo.butlerBotsRefreshed };
+
+}
+
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+    return {
+        butlerFilterDetail: function /* istanbul ignore next */butlerFilterDetail(data) {
+            dispatch( /* istanbul ignore next */(0, _sortHeaderActions.butlerFilterDetail)(data));
+        },
+        setButlerSpinner: function /* istanbul ignore next */setButlerSpinner(data) {
+            dispatch( /* istanbul ignore next */(0, _spinnerAction.setButlerSpinner)(data));
+        },
+        butlerHeaderSort: function /* istanbul ignore next */butlerHeaderSort(data) {
+            dispatch( /* istanbul ignore next */(0, _sortHeaderActions.butlerHeaderSort)(data));
+        },
+        butlerHeaderSortOrder: function /* istanbul ignore next */butlerHeaderSortOrder(data) {
+            dispatch( /* istanbul ignore next */(0, _sortHeaderActions.butlerHeaderSortOrder)(data));
+        },
+        showTableFilter: function /* istanbul ignore next */showTableFilter(data) {
+            dispatch( /* istanbul ignore next */(0, _filterAction.showTableFilter)(data));
+        },
+        filterApplied: function /* istanbul ignore next */filterApplied(data) {
+            dispatch( /* istanbul ignore next */(0, _filterAction.filterApplied)(data));
+        },
+        updateSubscriptionPacket: function /* istanbul ignore next */updateSubscriptionPacket(data) {
+            dispatch( /* istanbul ignore next */(0, _socketActions.updateSubscriptionPacket)(data));
+        },
+        toggleBotButton: function /* istanbul ignore next */toggleBotButton(data) {
+            dispatch( /* istanbul ignore next */(0, _filterAction.toggleBotButton)(data));
+        },
+        butlerfilterState: function /* istanbul ignore next */butlerfilterState(data) {
+            dispatch( /* istanbul ignore next */(0, _filterAction.butlerfilterState)(data));
+        },
+        initDataSentCall: function /* istanbul ignore next */initDataSentCall(data) {dispatch( /* istanbul ignore next */(0, _socketActions.setWsAction)({ type: /* istanbul ignore next */_frontEndConstants.WS_ONSEND, data: data }));},
+        butlerBotsRefreshed: function /* istanbul ignore next */butlerBotsRefreshed(data) {dispatch( /* istanbul ignore next */(0, _systemActions.butlerBotsRefreshed)(data));} };
+
+};
+
+ButlerBot.contextTypes = {
+    intl: /* istanbul ignore next */_react2.default.PropTypes.object.isRequired };
+
+ButlerBot.PropTypes = {
+    butlerFilter: /* istanbul ignore next */_react2.default.PropTypes.string,
+    butlerSortHeader: /* istanbul ignore next */_react2.default.PropTypes.string,
+    butlerSortHeaderState: /* istanbul ignore next */_react2.default.PropTypes.string,
+    butlerSpinner: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    butlerDetail: /* istanbul ignore next */_react2.default.PropTypes.array,
+    showFilter: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    isFilterApplied: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    botFilterStatus: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    filterState: /* istanbul ignore next */_react2.default.PropTypes.object,
+    butlerFilterDetail: /* istanbul ignore next */_react2.default.PropTypes.func,
+    setButlerSpinner: /* istanbul ignore next */_react2.default.PropTypes.func,
+    butlerHeaderSort: /* istanbul ignore next */_react2.default.PropTypes.func,
+    butlerHeaderSortOrder: /* istanbul ignore next */_react2.default.PropTypes.func,
+    showTableFilter: /* istanbul ignore next */_react2.default.PropTypes.func,
+    filterApplied: /* istanbul ignore next */_react2.default.PropTypes.func }; /* istanbul ignore next */exports.default =
+
+
+/* istanbul ignore next */(0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ButlerBot);

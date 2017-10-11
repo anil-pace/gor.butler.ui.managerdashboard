@@ -1,0 +1,11 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.addDateOffSet = addDateOffSet; /* istanbul ignore next */exports.
+
+
+
+
+
+
+getYear = getYear;function addDateOffSet(dateObj, timeOffset) {var startDate = dateObj;startDate.setDate(startDate.getDate() + timeOffset);startDate = startDate.getFullYear() + '-' + (startDate.getMonth() + 1) + '-' + startDate.getDate();return startDate;}function getYear() {
+  var dtToday = new Date();
+  return dtToday.getFullYear();
+}

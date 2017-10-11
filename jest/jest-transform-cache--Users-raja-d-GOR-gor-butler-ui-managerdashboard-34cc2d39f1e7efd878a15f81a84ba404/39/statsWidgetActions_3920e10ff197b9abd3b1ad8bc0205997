@@ -1,0 +1,8 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+renderStatsWidget = renderStatsWidget;var /* istanbul ignore next */_frontEndConstants = require('../constants/frontEndConstants');function renderStatsWidget(data) {
+	return {
+		type: /* istanbul ignore next */_frontEndConstants.RENDER_STATSWIDGET,
+		data };
+
+}

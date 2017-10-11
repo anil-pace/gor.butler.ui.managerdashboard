@@ -1,0 +1,300 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/containers/userTab/addNewUser.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_validationActions = require('../../actions/validationActions');
+var /* istanbul ignore next */_userActions = require('../../actions/userActions');
+var /* istanbul ignore next */_frontEndConstants = require('../../constants/frontEndConstants');
+
+
+
+
+
+
+
+
+
+
+var /* istanbul ignore next */_backEndConstants = require('../../constants/backEndConstants');
+var /* istanbul ignore next */_configConstants = require('../../constants/configConstants');
+var /* istanbul ignore next */_messageConstants = require('../../constants/messageConstants');
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_fielderror = require('../../components/fielderror/fielderror'); /* istanbul ignore next */var _fielderror2 = _interopRequireDefault(_fielderror);
+var /* istanbul ignore next */_userRoles = require('./userRoles'); /* istanbul ignore next */var _userRoles2 = _interopRequireDefault(_userRoles);
+var /* istanbul ignore next */_fieldCheck = require('../../utilities/fieldCheck'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+class AddUser extends /* istanbul ignore next */_react2.default.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    removeThisModal() {
+        this.props.resetForm();
+        this.props.removeModal();
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (!nextProps.auth_token) {
+            this.removeThisModal();
+        }
+    }
+
+    componentDidMount() {
+        let userData = {
+            'url': /* istanbul ignore next */_configConstants.ROLE_URL,
+            'method': /* istanbul ignore next */_frontEndConstants.GET,
+            'cause': /* istanbul ignore next */_frontEndConstants.GET_ROLES,
+            'contentType': /* istanbul ignore next */_frontEndConstants.APP_JSON,
+            'accept': /* istanbul ignore next */_frontEndConstants.APP_JSON,
+            'token': this.props.auth_token };
+
+        if (!this.props.roleList) {
+            this.props.userRequest(userData);
+        }
+    }
+
+    _checkId() {
+        let userid = this.userId.value,idInfo;
+        idInfo = /* istanbul ignore next */(0, _fieldCheck.idStatus)(userid);
+        this.props.validateID(idInfo);
+        if (idInfo.type) {
+            let userData = {
+                'url': /* istanbul ignore next */_configConstants.CHECK_USER + userid,
+                'method': /* istanbul ignore next */_frontEndConstants.GET,
+                'cause': /* istanbul ignore next */_frontEndConstants.CHECK_ID,
+                'contentType': /* istanbul ignore next */_frontEndConstants.APP_JSON,
+                'accept': /* istanbul ignore next */_frontEndConstants.APP_JSON,
+                'token': this.props.auth_token };
+
+            this.props.userRequest(userData);
+        }
+    }
+
+    _checkName() {
+        let firstname = this.firstName.value,lastname = this.lastName.value,nameInfo;
+        nameInfo = /* istanbul ignore next */(0, _fieldCheck.nameStatus)(firstname, lastname);
+        this.props.validateName(nameInfo);
+        return nameInfo.type;
+    }
+
+    _checkPwd() {
+        let pswd = this.pswd.value,confirmPswd = this.confirmPswd.value,passwordInfo,
+        roleSelected = this.props.roleSet;
+        passwordInfo = /* istanbul ignore next */(0, _fieldCheck.passwordStatus)(pswd, confirmPswd, roleSelected);
+        this.props.validatePassword(passwordInfo);
+        return passwordInfo.type;
+    }
+
+    _handleAddUser(e) {
+        e.preventDefault();
+        let pswd, confirmPswd, role, opt, userid, firstname, lastname;
+
+        userid = this.userId.value;
+        firstname = this.firstName.value;
+        lastname = this.lastName.value;
+        pswd = this.pswd.value;
+        confirmPswd = this.confirmPswd.value;
+
+        if (!this.props.idCheck.type) {
+            this._checkId();
+            return;
+        }
+        if (!this.props.nameCheck.type) {
+            if (!this._checkName())
+            return;
+        }
+        if (!this._checkPwd())
+        return;
+
+        role = this.props.roleSet ? this._getId(this.props.roleSet) : this._getId( /* istanbul ignore next */_backEndConstants.BUTLER_UI);
+
+        let formdata = {
+            "first_name": firstname,
+            "last_name": lastname,
+            "username": userid,
+            "role_id": role,
+            "password": pswd,
+            "password_confirm": confirmPswd };
+
+
+        let userData = {
+            'url': /* istanbul ignore next */_configConstants.HEADER_URL,
+            'formdata': formdata,
+            'method': /* istanbul ignore next */_frontEndConstants.POST,
+            'cause': /* istanbul ignore next */_frontEndConstants.ADD_USER,
+            'contentType': /* istanbul ignore next */_frontEndConstants.APP_JSON,
+            'accept': /* istanbul ignore next */_frontEndConstants.APP_JSON,
+            'token': this.props.auth_token };
+
+        this.props.userRequest(userData);
+        this.removeThisModal();
+    }
+
+    _getId(role) {
+        let roles = this.props.roleList,len;
+        len = roles.length;
+        for (let i = 0; i < len; i++) {
+            if (roles[i].name == role) {
+                return roles[i].id;
+            }
+        }
+        return null;
+    }
+
+    render() {
+        let tick = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-tick', __source: { fileName: _jsxFileName, lineNumber: 143 }, __self: this });
+        return (
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 145 }, __self: this },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-modal-content', __source: { fileName: _jsxFileName, lineNumber: 146 }, __self: this },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-modal-head', __source: { fileName: _jsxFileName, lineNumber: 147 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-usr-add', __source: { fileName: _jsxFileName, lineNumber: 148 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'users.add.heading',
+                                description: 'Heading for Add new user',
+                                defaultMessage: 'Add new user', __source: { fileName: _jsxFileName, lineNumber: 148 }, __self: this }),
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-sub-head', __source: { fileName: _jsxFileName, lineNumber: 151 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'users.add.subheading',
+                                    description: 'Subheading for add new user',
+                                    defaultMessage: 'All the fields are mandatory', __source: { fileName: _jsxFileName, lineNumber: 151 }, __self: this }))),
+
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'close', onClick: this.removeThisModal.bind(this), __source: { fileName: _jsxFileName, lineNumber: 156 }, __self: this }, /* istanbul ignore next */'\xD7')),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-modal-body', __source: { fileName: _jsxFileName, lineNumber: 158 }, __self: this },
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'form', /* istanbul ignore next */{ action: '#', id: 'addUserForm', ref: node => {
+                                    this.addUserForm = node;
+                                },
+                                onSubmit: e => this._handleAddUser(e), __source: { fileName: _jsxFileName, lineNumber: 160 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-usr-form', __source: { fileName: _jsxFileName, lineNumber: 164 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-usr-details', __source: { fileName: _jsxFileName, lineNumber: 165 }, __self: this },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-usr-hdlg', __source: { fileName: _jsxFileName, lineNumber: 166 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'users.add.userdetails.heading',
+                                            description: 'Text for user details heading',
+                                            defaultMessage: 'Enter User details', __source: { fileName: _jsxFileName, lineNumber: 166 }, __self: this })),
+
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-sub-head', __source: { fileName: _jsxFileName, lineNumber: 170 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{
+                                            id: 'users.add.userdetails.subheading',
+                                            description: 'Text for user details subheading',
+                                            defaultMessage: 'A User ID will be required to log into the system', __source: { fileName: _jsxFileName, lineNumber: 170 }, __self: this })),
+
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-usr-hdsm', __source: { fileName: _jsxFileName, lineNumber: 175 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'users.add.userdetails.userid',
+                                            description: 'Text for user id',
+                                            defaultMessage: 'User ID', __source: { fileName: _jsxFileName, lineNumber: 175 }, __self: this })),
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'input', /* istanbul ignore next */{
+                                        className: "gor-usr-fdlg" + (this.props.idCheck.type === /* istanbul ignore next */_frontEndConstants.ERROR ? ' gor-input-error' : ' gor-input-ok'),
+                                        type: 'text', onBlur: this._checkId.bind(this), id: 'userid', ref: node => {
+                                            this.userId = node;
+                                        }, __source: { fileName: _jsxFileName, lineNumber: 178 }, __self: this }),
+                                    this.props.idCheck.type ? tick : this.props.idCheck.type === /* istanbul ignore next */_frontEndConstants.ERROR ?
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fielderror2.default, /* istanbul ignore next */{ txt: this.props.idCheck.msg, __source: { fileName: _jsxFileName, lineNumber: 184 }, __self: this }) : '',
+
+
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-usr-field', __source: { fileName: _jsxFileName, lineNumber: 187 }, __self: this },
+                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-usr-hdsm', __source: { fileName: _jsxFileName, lineNumber: 188 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{
+                                                id: 'users.add.userdetails.firstname', description: 'Text for first name',
+                                                defaultMessage: 'First Name', __source: { fileName: _jsxFileName, lineNumber: 188 }, __self: this })),
+                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'input', /* istanbul ignore next */{
+                                            className: "gor-usr-fdsm" + (this.props.nameCheck.type === /* istanbul ignore next */_frontEndConstants.ERROR ? ' gor-input-error' : ' gor-input-ok'),
+                                            onBlur: this.props.nameCheck.type === /* istanbul ignore next */_frontEndConstants.ERROR || this.props.nameCheck.type === /* istanbul ignore next */_frontEndConstants.SUCCESS ? this._checkName.bind(this) : '',
+                                            type: 'text', id: 'firstname', ref: node => {
+                                                this.firstName = node;
+                                            }, __source: { fileName: _jsxFileName, lineNumber: 191 }, __self: this })),
+
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-usr-field', __source: { fileName: _jsxFileName, lineNumber: 198 }, __self: this },
+                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-usr-hdsm', __source: { fileName: _jsxFileName, lineNumber: 199 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{
+                                                id: 'users.add.userdetails.lastname', description: 'Text for last name',
+                                                defaultMessage: 'Last Name', __source: { fileName: _jsxFileName, lineNumber: 199 }, __self: this })),
+                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'input', /* istanbul ignore next */{
+                                            className: "gor-usr-fdsm" + (this.props.nameCheck.type === /* istanbul ignore next */_frontEndConstants.ERROR ? ' gor-input-error' : ' gor-input-ok'),
+                                            onBlur: this._checkName.bind(this), type: 'text', id: 'lastname', ref: node => {
+                                                this.lastName = node;
+                                            }, __source: { fileName: _jsxFileName, lineNumber: 202 }, __self: this })),
+
+                                    this.props.nameCheck.type ? tick : this.props.nameCheck.type === /* istanbul ignore next */_frontEndConstants.ERROR ?
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fielderror2.default, /* istanbul ignore next */{ txt: this.props.nameCheck.msg, __source: { fileName: _jsxFileName, lineNumber: 209 }, __self: this }) : ''),
+
+
+
+                                this.props.roleList.length ? /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_userRoles2.default, /* istanbul ignore next */{ roleList: this.props.roleList, __source: { fileName: _jsxFileName, lineNumber: 213 }, __self: this }) : '',
+
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-usr-details', __source: { fileName: _jsxFileName, lineNumber: 215 }, __self: this },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-usr-hdlg', __source: { fileName: _jsxFileName, lineNumber: 216 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'users.add.password.heading',
+                                            description: 'Heading for create password',
+                                            defaultMessage: 'Create password', __source: { fileName: _jsxFileName, lineNumber: 216 }, __self: this })),
+
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-sub-head', __source: { fileName: _jsxFileName, lineNumber: 220 }, __self: this },
+                                        /* istanbul ignore next */_backEndConstants.pwdDesc.hasOwnProperty(this.props.roleSet) ?
+                                        this.context.intl.formatMessage( /* istanbul ignore next */_backEndConstants.pwdDesc[this.props.roleSet]) :
+                                        this.context.intl.formatMessage( /* istanbul ignore next */_backEndConstants.pwdDesc[/* istanbul ignore next */_backEndConstants.BUTLER_UI])),
+
+
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-usr-hdsm', __source: { fileName: _jsxFileName, lineNumber: 226 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'users.add.password.field1',
+                                            description: 'Text for password',
+                                            defaultMessage: 'Password', __source: { fileName: _jsxFileName, lineNumber: 226 }, __self: this })),
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'input', /* istanbul ignore next */{
+                                        className: "gor-usr-fdlg" + (this.props.passwordCheck.type === /* istanbul ignore next */_frontEndConstants.ERROR ? ' gor-input-error' : ' gor-input-ok'),
+                                        type: 'password', id: 'pswd',
+                                        onBlur: this.props.passwordCheck.type === /* istanbul ignore next */_frontEndConstants.ERROR || this.props.passwordCheck.type === /* istanbul ignore next */_frontEndConstants.SUCCESS ? this._checkPwd.bind(this) : '',
+                                        ref: node => {
+                                            this.pswd = node;
+                                        }, __source: { fileName: _jsxFileName, lineNumber: 229 }, __self: this }),
+                                    this.props.passwordCheck.type ? tick : '',
+
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-usr-hdsm', __source: { fileName: _jsxFileName, lineNumber: 238 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'users.add.password.field2',
+                                            description: 'Text for confirm password',
+                                            defaultMessage: 'Confirm Password', __source: { fileName: _jsxFileName, lineNumber: 238 }, __self: this })),
+
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'input', /* istanbul ignore next */{
+                                        className: "gor-usr-fdlg" + (this.props.passwordCheck.type === /* istanbul ignore next */_frontEndConstants.ERROR ? ' gor-input-error' : ' gor-input-ok'),
+                                        type: 'password', id: 'confirmPswd', onChange: this._checkPwd.bind(this),
+                                        ref: node => {
+                                            this.confirmPswd = node;
+                                        }, __source: { fileName: _jsxFileName, lineNumber: 242 }, __self: this }),
+                                    this.props.passwordCheck.type === /* istanbul ignore next */_frontEndConstants.SUCCESS ? tick : this.props.passwordCheck.type === /* istanbul ignore next */_frontEndConstants.ERROR ?
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fielderror2.default, /* istanbul ignore next */{ txt: this.props.passwordCheck.msg, __source: { fileName: _jsxFileName, lineNumber: 249 }, __self: this }) : ''),
+
+
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */{ className: 'gor-submit', __source: { fileName: _jsxFileName, lineNumber: 252 }, __self: this },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ type: 'submit', className: 'gor-add-btn', __source: { fileName: _jsxFileName, lineNumber: 253 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{
+                                            id: 'users.add.password.button', description: 'Text for add new user button',
+                                            defaultMessage: 'Add new user', __source: { fileName: _jsxFileName, lineNumber: 253 }, __self: this })))))))));
+
+
+
+
+
+
+
+
+    }}
+
+AddUser.contextTypes = {
+    intl: /* istanbul ignore next */_react2.default.PropTypes.object.isRequired };
+
+function mapStateToProps(state, ownProps) {
+    return {
+        idCheck: state.appInfo.idInfo || {},
+        nameCheck: state.appInfo.nameInfo || {},
+        passwordCheck: state.appInfo.passwordInfo || {},
+        roleList: state.appInfo.roleList || [],
+        roleSet: state.appInfo.roleSet || null,
+        auth_token: state.authLogin.auth_token };
+
+}
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+    return {
+        userRequest: function /* istanbul ignore next */userRequest(data) {
+            dispatch( /* istanbul ignore next */(0, _userActions.userRequest)(data));
+        },
+        validateID: function /* istanbul ignore next */validateID(data) {
+            dispatch( /* istanbul ignore next */(0, _validationActions.validateID)(data));
+        },
+        validateName: function /* istanbul ignore next */validateName(data) {
+            dispatch( /* istanbul ignore next */(0, _validationActions.validateName)(data));
+        },
+        validatePassword: function /* istanbul ignore next */validatePassword(data) {
+            dispatch( /* istanbul ignore next */(0, _validationActions.validatePassword)(data));
+        },
+        resetForm: function /* istanbul ignore next */resetForm() {
+            dispatch( /* istanbul ignore next */(0, _validationActions.resetForm)());
+        } };
+
+}; /* istanbul ignore next */exports.default =
+
+/* istanbul ignore next */(0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(AddUser);

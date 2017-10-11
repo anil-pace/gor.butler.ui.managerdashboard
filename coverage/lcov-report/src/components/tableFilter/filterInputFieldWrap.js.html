@@ -22,22 +22,22 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/15</span>
+        <span class='fraction'>0/18</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/8</span>
+        <span class='fraction'>0/12</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/3</span>
+        <span class='fraction'>0/4</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/13</span>
+        <span class='fraction'>0/15</span>
       </div>
     </div>
   </div>
@@ -80,8 +80,8 @@
 35
 36
 37
-38</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+38</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -117,32 +117,32 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React  from 'react';
-import FilterInputField from './filterInputField';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React  from 'react';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+import FilterInputField from './filterInputField';<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
 &nbsp;
 class FilterInputFieldWrap extends React.Component{
 	
-<span class="fstat-no" title="function not covered" > _t</span>extSubmit(e) {
-<span class="cstat-no" title="statement not covered" >   this.props.handleInputText(this.pageNum.value,this.props.inputText.value);</span>
+ _<span class="fstat-no" title="function not covered" >te</span>xtSubmit(e) {
+   t<span class="cstat-no" title="statement not covered" >his.props.handleInputText(this.pageNum.value,this.props.inputText.value);</span>
  }
-<span class="fstat-no" title="function not covered" > _p</span>rocessInputField() {
-  var totalInput=<span class="cstat-no" title="statement not covered" >this.props.inputText,</span> inputFieldWrap=<span class="cstat-no" title="statement not covered" >[],</span> flag=<span class="cstat-no" title="statement not covered" >false;</span>
-  var textboxStatus=<span class="cstat-no" title="statement not covered" >this.props.textboxStatus ||{};</span>
-  var length=<span class="cstat-no" title="statement not covered" >totalInput.length;</span>
-<span class="cstat-no" title="statement not covered" >  for (let i=0; i &lt; length; i++) {</span>
-<span class="cstat-no" title="statement not covered" >    if(textboxStatus.name){</span>
+ _<span class="fstat-no" title="function not covered" >pr</span>ocessInputField() {
+  var totalInput=this<span class="cstat-no" title="statement not covered" >.props.inputText, inp</span>utFieldWrap=[], f<span class="cstat-no" title="statement not covered" >lag</span>=false;<span class="cstat-no" title="statement not covered" ></span>
+  var textboxStatus=this<span class="cstat-no" title="statement not covered" >.props.textboxStatus ||{};</span>
+  var length=tota<span class="cstat-no" title="statement not covered" >lInput.length;</span>
+  fo<span class="cstat-no" title="statement not covered" >r (let i=0; i &lt; length; i++) {</span>
+    if<span class="cstat-no" title="statement not covered" >(textboxStatus.name){</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >     flag=((textboxStatus.name).indexOf(totalInput[i].value))!==-1?false:true;</span>
+     fla<span class="cstat-no" title="statement not covered" >g=((textboxStatus.name).indexOf(totalInput[i].value))!==-1?false:true;</span>
    }
-   var inputValue=(<span class="cstat-no" title="statement not covered" >flag?"":this.props.inputValue[totalInput[i].value])</span>;
-   var inputField=<span class="cstat-no" title="statement not covered" >&lt;FilterInputField key={i} inputText={totalInput[i]} handleInputText={this.props.handleInputText} inputValue={inputValue} flag={flag}/&gt;;</span>
-<span class="cstat-no" title="statement not covered" >   inputFieldWrap.push(inputField)</span>
+   var inputValue=(flag<span class="cstat-no" title="statement not covered" >?"":this.props.inputValue[totalInput[i].value]);</span>
+   var inputField=&lt;FilterInputField key={i} input<span class="cstat-no" title="statement not covered" >Text={totalInput[i]} handleInputText={this.props.handleInputText} inputValue={inputValue} flag={flag}/&gt;;</span>
+   inp<span class="cstat-no" title="statement not covered" >utFieldWrap.push(inputField)</span>
  }
-<span class="cstat-no" title="statement not covered" > return inputFieldWrap;</span>
+ ret<span class="cstat-no" title="statement not covered" >urn inputFieldWrap;</span>
 }
-<span class="fstat-no" title="function not covered" >re</span>nder(){
-  var inputFields=<span class="cstat-no" title="statement not covered" >this._processInputField()</span>
-<span class="cstat-no" title="statement not covered" >  return (</span>
+re<span class="fstat-no" title="function not covered" >nd</span>er(){
+  var inputFields=this<span class="cstat-no" title="statement not covered" >._processInputField()</span>
+  re<span class="cstat-no" title="statement not covered" >turn (</span>
           &lt;div&gt;
           {inputFields}
           &lt;/div&gt;
@@ -160,7 +160,7 @@ export default FilterInputFieldWrap;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Oct 05 2017 15:02:03 GMT+0530 (IST)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Oct 11 2017 16:54:25 GMT+0530 (IST)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

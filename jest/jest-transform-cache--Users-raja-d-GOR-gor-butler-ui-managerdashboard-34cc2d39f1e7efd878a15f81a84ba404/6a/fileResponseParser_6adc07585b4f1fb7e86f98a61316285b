@@ -1,0 +1,27 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+
+
+
+
+
+
+
+FileResponseParser = FileResponseParser;var /* istanbul ignore next */_frontEndConstants = require('../constants/frontEndConstants');var /* istanbul ignore next */_utils = require('../utilities/utils');var /* istanbul ignore next */_spinnerAction = require('../actions/spinnerAction');function FileResponseParser(store, res, cause, fileName) {
+    switch (cause) {
+        case /* istanbul ignore next */_frontEndConstants.DOWNLOAD_STOCK_LEDGER_REPORT:
+            /* istanbul ignore next */(0, _utils.saveFile)(res, fileName);
+            store.dispatch( /* istanbul ignore next */(0, _spinnerAction.setStockLedgerSpinner)(false));
+            break;
+        case /* istanbul ignore next */_frontEndConstants.DOWNLOAD_STOCK_LEDGER_RAW_TRANSACTIONS_REPORT:
+            /* istanbul ignore next */(0, _utils.saveFile)(res, fileName);
+            store.dispatch( /* istanbul ignore next */(0, _spinnerAction.setStockLedgerRawTransactionsSpinner)(false));
+            break;
+        default:
+            /* istanbul ignore next */(0, _utils.saveFile)(res, fileName);
+            break;}
+
+} /**
+   * Created by gaurav.m on 6/14/17.
+   */

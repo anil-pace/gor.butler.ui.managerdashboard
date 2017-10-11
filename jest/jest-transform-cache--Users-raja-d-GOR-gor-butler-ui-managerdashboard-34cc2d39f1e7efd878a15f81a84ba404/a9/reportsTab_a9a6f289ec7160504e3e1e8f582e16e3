@@ -1,0 +1,65 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/containers/reportsTab/reportsTab.js'; /**
+                                                                                                                                                                                                                     * Container for Overview tab
+                                                                                                                                                                                                                     * This will be switched based on tab click
+                                                                                                                                                                                                                     */
+
+var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_subTab = require('../../components/subtab/subTab'); /* istanbul ignore next */var _subTab2 = _interopRequireDefault(_subTab);
+var /* istanbul ignore next */_reactRouter = require('react-router');
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_tabSelectAction = require('../../actions/tabSelectAction');
+var /* istanbul ignore next */_frontEndConstants = require('../../constants/frontEndConstants');
+var /* istanbul ignore next */_reactIntl = require('react-intl'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+class ReportsTab extends /* istanbul ignore next */_react2.default.Component {
+	constructor(props)
+	{
+		super(props);
+
+	}
+
+	handleSysSubTabClick(tabName) {
+		this.props.subTabSelected( /* istanbul ignore next */_frontEndConstants.REPORTS_SUB_TAB_ROUTE_MAP[tabName]);
+		sessionStorage.setItem("subTab", /* istanbul ignore next */_frontEndConstants.REPORTS_SUB_TAB_ROUTE_MAP[tabName]);
+	}
+
+	render() {
+
+		var selectClass = {};
+		var operationsLog = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'reportsTab.operationsLog', description: 'Operations Log tab for Reports tab', defaultMessage: 'Operations Log', __source: { fileName: _jsxFileName, lineNumber: 30 }, __self: this });
+		var downloadReport = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'reportsTab.downloadReport', description: 'Operations Log tab for Reports tab', defaultMessage: 'Download', __source: { fileName: _jsxFileName, lineNumber: 31 }, __self: this });
+
+
+		return (
+			/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 35 }, __self: this },
+				/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorMainSubtab', __source: { fileName: _jsxFileName, lineNumber: 36 }, __self: this },
+
+					/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRouter.Link, /* istanbul ignore next */{ to: '/reports/operationsLog', onClick: this.handleSysSubTabClick.bind(this, /* istanbul ignore next */_frontEndConstants.OPERATIONS_LOG), __source: { fileName: _jsxFileName, lineNumber: 38 }, __self: this },
+						/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_subTab2.default, /* istanbul ignore next */{ item: operationsLog, changeClass: this.props.subTab === /* istanbul ignore next */_frontEndConstants.OPERATIONS_LOG ? "gor-main-blockSelect" : "gor-main-block", __source: { fileName: _jsxFileName, lineNumber: 39 }, __self: this })),
+
+					/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRouter.Link, /* istanbul ignore next */{ to: '/reports/downloadReport', onClick: this.handleSysSubTabClick.bind(this, /* istanbul ignore next */_frontEndConstants.DOWNLOAD_REPORT), __source: { fileName: _jsxFileName, lineNumber: 41 }, __self: this },
+						/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_subTab2.default, /* istanbul ignore next */{ item: downloadReport, changeClass: this.props.subTab === /* istanbul ignore next */_frontEndConstants.DOWNLOAD_REPORT ? "gor-main-blockSelect" : "gor-main-block", __source: { fileName: _jsxFileName, lineNumber: 42 }, __self: this })),
+
+					this.props.children)));
+
+
+
+	}}
+
+
+function mapStateToProps(state, ownProps) {
+	return {
+		subTab: state.tabSelected.subTab || {},
+		tab: state.tabSelected.tab };
+
+}
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	return {
+		subTabSelected: function /* istanbul ignore next */subTabSelected(data) {dispatch( /* istanbul ignore next */(0, _tabSelectAction.subTabSelected)(data));} };
+
+
+}; /* istanbul ignore next */exports.default =
+
+/* istanbul ignore next */(0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ReportsTab);

@@ -1,0 +1,97 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/containers/emergencyProcess/emergencyRelease.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_reactReduxModal = require('react-redux-modal');
+var /* istanbul ignore next */_userActions = require('../../actions/userActions');
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_resumeOperation = require('./resumeOperation'); /* istanbul ignore next */var _resumeOperation2 = _interopRequireDefault(_resumeOperation);
+var /* istanbul ignore next */_frontEndConstants = require('../../constants/frontEndConstants'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+class EmergencyRelease extends /* istanbul ignore next */_react2.default.Component {
+  _removeThisModal() {
+    this.props.removeModal();
+  }
+  componentDidMount() {
+    if (this.props.checkingList) {
+      this._removeThisModal(); //If manager is on safety checklist page, don't show the release modal      
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.auth_token || nextProps.system_data !== this.props.system_data)
+    {
+      this._removeThisModal();
+    }
+  }
+  _resumeOperation() {
+    this._removeThisModal();
+    /* istanbul ignore next */_reactReduxModal.modal.add( /* istanbul ignore next */_resumeOperation2.default, {
+      title: '',
+      size: 'large', // large, medium or small,
+      closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: true, // (optional) if you don't wanna show the top right close button
+      emergencyReleased: true
+      //.. all what you put in here you will get access in the modal props ;)
+    });
+  }
+  render()
+  {
+    return (
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-modal-content gor-resume-operation', __source: { fileName: _jsxFileName, lineNumber: 38 }, __self: this },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'close', onClick: this._removeThisModal.bind(this), __source: { fileName: _jsxFileName, lineNumber: 39 }, __self: this }, /* istanbul ignore next */'\xD7'),
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-operation-head', __source: { fileName: _jsxFileName, lineNumber: 40 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-caution', __source: { fileName: _jsxFileName, lineNumber: 41 }, __self: this }), /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'gor-operation-heading', __source: { fileName: _jsxFileName, lineNumber: 41 }, __self: this },
+            !this.props.releaseState || this.props.releaseState === /* istanbul ignore next */_frontEndConstants.HARD ? /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'operation.alert.release',
+              defaultMessage: 'All Emergency-stop buttons released',
+              description: 'Text for emergency button release heading', __source: { fileName: _jsxFileName, lineNumber: 42 }, __self: this }) : !this.props.breached ? /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'operation.alert.releaseSoft',
+              defaultMessage: 'All Emergency-pause buttons released',
+              description: 'Text for emergency button release heading', __source: { fileName: _jsxFileName, lineNumber: 44 }, __self: this }) : /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'operation.alert.releaseSoftBreached',
+              defaultMessage: 'Pause button released',
+              description: 'Text for emergency button release heading', __source: { fileName: _jsxFileName, lineNumber: 46 }, __self: this }))),
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-operation-body', __source: { fileName: _jsxFileName, lineNumber: 50 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-text-bold', __source: { fileName: _jsxFileName, lineNumber: 51 }, __self: this }, !this.props.releaseState || this.props.releaseState === /* istanbul ignore next */_frontEndConstants.HARD ? /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'operation.alert.release.text',
+              defaultMessage: 'All Emergency-stop buttons have been released.',
+              description: 'Text for emergency stop button release', __source: { fileName: _jsxFileName, lineNumber: 51 }, __self: this }) : !this.props.breached ? /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'operation.alert.releaseSoft.text',
+              defaultMessage: 'All Emergency-pause buttons have been released.',
+              description: 'Text for emergency pause button release', __source: { fileName: _jsxFileName, lineNumber: 53 }, __self: this }) : /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'operation.alert.releaseSoft.textBreached',
+              defaultMessage: 'Emergency pause button in {zone} has been released',
+              description: 'Text for emergency pause button release',
+              values: {
+                zone: this.props.zone }, __source: { fileName: _jsxFileName, lineNumber: 55 }, __self: this })),
+
+
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-operation-text', __source: { fileName: _jsxFileName, lineNumber: 62 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'operation.alert.release.subtext',
+              defaultMessage: 'You will be required to enter your password in order to view the checklist. Approving all the items on checklist will resume the warehouse operation',
+
+              description: 'Text for next stop to resume operation', __source: { fileName: _jsxFileName, lineNumber: 62 }, __self: this })),
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-margin-top gor-center-align', __source: { fileName: _jsxFileName, lineNumber: 66 }, __self: this },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ className: 'gor-add-btn', onClick: this._resumeOperation.bind(this), __source: { fileName: _jsxFileName, lineNumber: 67 }, __self: this },
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'operation.alert.release.button',
+                defaultMessage: 'Resume operation',
+                description: 'Text button to resume operation', __source: { fileName: _jsxFileName, lineNumber: 68 }, __self: this }))))));
+
+
+
+
+  }}
+;
+function mapStateToProps(state, ownProps) {
+  return {
+    auth_token: state.authLogin.auth_token,
+    system_data: state.tabsData.system_data || null,
+    checkingList: state.emergency.checkingList || false };
+
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    userRequest: function /* istanbul ignore next */userRequest(data) {dispatch( /* istanbul ignore next */(0, _userActions.userRequest)(data));} };
+
+};
+
+EmergencyRelease.propTypes = {
+  auth_token: /* istanbul ignore next */_react2.default.PropTypes.string,
+  userRequest: /* istanbul ignore next */_react2.default.PropTypes.func,
+  system_data: /* istanbul ignore next */_react2.default.PropTypes.string,
+  checkingList: /* istanbul ignore next */_react2.default.PropTypes.bool }; /* istanbul ignore next */exports.default =
+
+
+/* istanbul ignore next */(0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(EmergencyRelease);

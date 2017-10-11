@@ -1,0 +1,78 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/containers/emergencyProcess/OperationPause.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_reactIntl = require('react-intl'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+class OperationPause extends /* istanbul ignore next */_react2.default.Component {
+  removeThisModal() {
+    this.props.removeModal();
+  }
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.auth_token || !nextProps.system_emergency || nextProps.system_data !== this.props.system_data)
+    {
+      this.removeThisModal();
+    }
+  }
+
+  render()
+  {
+    return (
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-emergency-overlay', __source: { fileName: _jsxFileName, lineNumber: 19 }, __self: this },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-delete gor-modal-content gor-operation-stop', __source: { fileName: _jsxFileName, lineNumber: 20 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'close', onClick: this.removeThisModal.bind(this), __source: { fileName: _jsxFileName, lineNumber: 21 }, __self: this }, /* istanbul ignore next */'\xD7'),
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-delete-text', __source: { fileName: _jsxFileName, lineNumber: 22 }, __self: this },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-alert-lg', __source: { fileName: _jsxFileName, lineNumber: 23 }, __self: this }),
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-delete-line', __source: { fileName: _jsxFileName, lineNumber: 24 }, __self: this },
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-delete-query gor-error-lg', __source: { fileName: _jsxFileName, lineNumber: 25 }, __self: this }, this.props.emergencyPress ? /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'operation.alert.pause',
+                  defaultMessage: 'Butler System - Operation Paused',
+                  description: 'Text for operation stopped heading', __source: { fileName: _jsxFileName, lineNumber: 25 }, __self: this }) : "")),
+
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-margin-top', __source: { fileName: _jsxFileName, lineNumber: 30 }, __self: this },
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-error-md', __source: { fileName: _jsxFileName, lineNumber: 31 }, __self: this },
+                this.props.poeEnabled && this.props.breached && /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'operation.alert.pause.breach.text',
+                  defaultMessage: 'Emergency-Pause activated due to SOP breach via Controller {controller} in {zone}.',
+                  description: 'Text for emergency button press',
+                  values: {
+                    controller: this.props.controller,
+                    zone: this.props.zone }, __source: { fileName: _jsxFileName, lineNumber: 32 }, __self: this }),
+
+                this.props.poeEnabled && !this.props.breached && /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'operation.alert.pause.text',
+                  defaultMessage: 'Emergency-Pause activated via Controller {controller} in {zone}.',
+                  description: 'Text for emergency button press',
+                  values: {
+                    controller: this.props.controller,
+                    zone: this.props.zone }, __source: { fileName: _jsxFileName, lineNumber: 39 }, __self: this }),
+
+                !this.props.poeEnabled && /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'operation.alert.pause.nonPOE',
+                  defaultMessage: 'Operation Paused',
+                  description: 'Text for operation stopped heading', __source: { fileName: _jsxFileName, lineNumber: 46 }, __self: this })),
+
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'gor-text-sm', __source: { fileName: _jsxFileName, lineNumber: 50 }, __self: this },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'operation.alert.pause.subtext',
+                  defaultMessage: 'You must check the emergency situation and release the Emergency Pause button in order to resume the operation in warehouse',
+                  description: 'Subtext for pause alert', __source: { fileName: _jsxFileName, lineNumber: 51 }, __self: this })))))));
+
+
+
+
+
+
+  }}
+;
+function mapStateToProps(state, ownProps) {
+  return {
+    auth_token: state.authLogin.auth_token,
+    system_emergency: state.tabsData.system_emergency || false,
+    system_data: state.tabsData.system_data || null };
+
+}
+
+OperationPause.propTypes = {
+  auth_token: /* istanbul ignore next */_react2.default.PropTypes.string,
+  emergencyPress: /* istanbul ignore next */_react2.default.PropTypes.bool,
+  system_emergency: /* istanbul ignore next */_react2.default.PropTypes.bool,
+  system_data: /* istanbul ignore next */_react2.default.PropTypes.string }; /* istanbul ignore next */exports.default =
+
+
+
+/* istanbul ignore next */(0, _reactRedux.connect)(mapStateToProps, null)(OperationPause);

@@ -1,0 +1,49 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var cov_1wjwsofltz = function () {var path = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/actions/socketActions.js',hash = '21a139ae8a206fa3f9c87d10446fc5569e15ad23',global = new Function('return this')(),gcv = '__coverage__',coverageData = { path: '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/actions/socketActions.js', statementMap: { '0': { start: { line: 9, column: 1 }, end: { line: 12, column: 2 } }, '1': { start: { line: 16, column: 1 }, end: { line: 19, column: 2 } }, '2': { start: { line: 22, column: 1 }, end: { line: 25, column: 2 } }, '3': { start: { line: 29, column: 1 }, end: { line: 29, column: 31 } }, '4': { start: { line: 33, column: 1 }, end: { line: 35, column: 2 } }, '5': { start: { line: 38, column: 1 }, end: { line: 41, column: 2 } }, '6': { start: { line: 45, column: 1 }, end: { line: 48, column: 4 } } }, fnMap: { '0': { name: 'wsOnMessageAction', decl: { start: { line: 7, column: 16 }, end: { line: 7, column: 33 } }, loc: { start: { line: 7, column: 39 }, end: { line: 13, column: 1 } }, line: 7 }, '1': { name: 'wsResponseAction', decl: { start: { line: 14, column: 16 }, end: { line: 14, column: 32 } }, loc: { start: { line: 14, column: 38 }, end: { line: 20, column: 1 } }, line: 14 }, '2': { name: 'setWsAction', decl: { start: { line: 21, column: 16 }, end: { line: 21, column: 27 } }, loc: { start: { line: 21, column: 35 }, end: { line: 26, column: 1 } }, line: 21 }, '3': { name: 'endWsAction', decl: { start: { line: 27, column: 16 }, end: { line: 27, column: 27 } }, loc: { start: { line: 28, column: 0 }, end: { line: 30, column: 1 } }, line: 28 }, '4': { name: 'wsEndConnection', decl: { start: { line: 31, column: 16 }, end: { line: 31, column: 31 } }, loc: { start: { line: 32, column: 0 }, end: { line: 36, column: 1 } }, line: 32 }, '5': { name: 'setMockAction', decl: { start: { line: 37, column: 16 }, end: { line: 37, column: 29 } }, loc: { start: { line: 37, column: 37 }, end: { line: 42, column: 1 } }, line: 37 }, '6': { name: 'updateSubscriptionPacket', decl: { start: { line: 44, column: 16 }, end: { line: 44, column: 40 } }, loc: { start: { line: 44, column: 46 }, end: { line: 49, column: 1 } }, line: 44 } }, branchMap: {}, s: { '0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0 }, f: { '0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0 }, b: {}, _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c' },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();exports.
+
+
+
+
+
+wsOnMessageAction = wsOnMessageAction; /* istanbul ignore next */exports.
+
+
+
+
+
+
+wsResponseAction = wsResponseAction; /* istanbul ignore next */exports.
+
+
+
+
+
+
+setWsAction = setWsAction; /* istanbul ignore next */exports.
+
+
+
+
+
+endWsAction = endWsAction; /* istanbul ignore next */exports.
+
+
+
+wsEndConnection = wsEndConnection; /* istanbul ignore next */exports.
+
+
+
+
+
+setMockAction = setMockAction; /* istanbul ignore next */exports.
+
+
+
+
+
+
+updateSubscriptionPacket = updateSubscriptionPacket;var /* istanbul ignore next */_frontEndConstants = require('../constants/frontEndConstants');var /* istanbul ignore next */_configConstants = require('../constants/configConstants');var /* istanbul ignore next */_socketMiddleware = require('../middleware/socketMiddleware');function wsOnMessageAction(data) {/* istanbul ignore next */++cov_1wjwsofltz.f[0];++cov_1wjwsofltz.s[0];return { type: /* istanbul ignore next */_frontEndConstants.WS_ONMESSAGE, data };}function wsResponseAction(data) {/* istanbul ignore next */++cov_1wjwsofltz.f[1];++cov_1wjwsofltz.s[1];return { type: /* istanbul ignore next */_frontEndConstants.WS_CONNECTED, data };}function setWsAction(params) {/* istanbul ignore next */++cov_1wjwsofltz.f[2];++cov_1wjwsofltz.s[2];return { type: params.type, data: params.data };}function endWsAction() {/* istanbul ignore next */++cov_1wjwsofltz.f[3];++cov_1wjwsofltz.s[3];return { type: /* istanbul ignore next */_frontEndConstants.WS_DISCONNECT };}function wsEndConnection() {/* istanbul ignore next */++cov_1wjwsofltz.f[4];++cov_1wjwsofltz.s[4];return { type: /* istanbul ignore next */_frontEndConstants.WS_END };}function setMockAction(params) {/* istanbul ignore next */++cov_1wjwsofltz.f[5];++cov_1wjwsofltz.s[5];return { type: params.type, data: params.data };}function updateSubscriptionPacket(data) {/* istanbul ignore next */++cov_1wjwsofltz.f[6];++cov_1wjwsofltz.s[6];
+	return {
+		type: /* istanbul ignore next */_frontEndConstants.DATA_SUBSCRIPTION_PACKET,
+		data };
+
+}

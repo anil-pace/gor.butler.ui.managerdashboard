@@ -1,0 +1,29 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+
+
+fireHazardDetail = fireHazardDetail;var /* istanbul ignore next */_frontEndConstants = require('../constants/frontEndConstants');var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_reactIntl = require('react-intl'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function fireHazardDetail(state = {}, action) {
+
+    switch (action.type) {
+        case /* istanbul ignore next */_frontEndConstants.FIRE_EMERGENCY:
+            var res;
+            res = action.data;
+            var data, shutters, escapePath, emergencyStartTime, notifyTime;
+            data = res.complete_data[0].emergency_data || {};
+            shutters = data.shutters || {};
+            escapePath = data.escape_path || '';
+            emergencyStartTime = res.complete_data[0].emergency_start_time || null;
+            notifyTime = !Object.keys(data).length ? new Date() : null;
+            return Object.assign({}, state, {
+                "shutters": shutters,
+                "escapePath": escapePath,
+                "emergencyStartTime": emergencyStartTime,
+                "emergency_type": res.complete_data[0].emergency_type,
+                "notifyTime": notifyTime });
+
+            break;
+        default:
+            return state;}
+
+}

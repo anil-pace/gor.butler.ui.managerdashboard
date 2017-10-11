@@ -1,0 +1,45 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+
+
+
+
+
+
+
+
+
+wsNotificationOnMessageAction = wsNotificationOnMessageAction; /* istanbul ignore next */exports.
+
+
+
+
+
+
+wsNotificationResponseAction = wsNotificationResponseAction; /* istanbul ignore next */exports.
+
+
+
+
+
+
+wsNotificationInit = wsNotificationInit; /* istanbul ignore next */exports.
+
+
+
+
+
+wsNotificationEndConnection = wsNotificationEndConnection; /* istanbul ignore next */exports.
+
+
+
+
+
+wsNotificationSubscribe = wsNotificationSubscribe;var /* istanbul ignore next */_frontEndConstants = require('../constants/frontEndConstants');function wsNotificationOnMessageAction(data) {return { type: /* istanbul ignore next */_frontEndConstants.WS_NOTIFICATION_ONMESSAGE, data };}function wsNotificationResponseAction(data) {return { type: /* istanbul ignore next */_frontEndConstants.WS_NOTIFICATION_CONNECTED, data };}function wsNotificationInit() {return { type: /* istanbul ignore next */_frontEndConstants.WS_NOTIFICATION_CONNECT };}function wsNotificationEndConnection() {return { type: /* istanbul ignore next */_frontEndConstants.WS_NOTIFICATION_END };}function wsNotificationSubscribe(data)
+{
+	return {
+		type: /* istanbul ignore next */_frontEndConstants.WS_NOTIFICATION_SUBSCRIBE,
+		data };
+
+}

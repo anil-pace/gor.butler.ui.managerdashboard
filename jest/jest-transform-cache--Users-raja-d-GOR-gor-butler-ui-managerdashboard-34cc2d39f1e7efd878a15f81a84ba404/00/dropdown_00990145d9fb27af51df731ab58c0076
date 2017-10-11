@@ -1,0 +1,103 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/components/gor-dropdown-component/dropdown.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_list = require('./list'); /* istanbul ignore next */var _list2 = _interopRequireDefault(_list);
+var /* istanbul ignore next */_reactDom = require('react-dom'); /* istanbul ignore next */var _reactDom2 = _interopRequireDefault(_reactDom);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+class Dropdown extends /* istanbul ignore next */_react.Component {
+  constructor(props) {
+    super(props);
+    this._getInitialState = this._getInitialState.bind(this);
+    this._handleDocumentClick = this._handleDocumentClick.bind(this);
+    this.state = this._getInitialState();
+  }
+
+  _getInitialState() {
+    var state = {
+      dropDownVisible: false,
+      placeholder: this.props.placeholder,
+      defaultPlaceHolder: this.props.placeholder };
+
+    return state;
+  }
+
+  _toggleDropdown() {
+    var currentVisibility = this.state.dropDownVisible;
+    currentVisibility = !currentVisibility;
+    this.setState({ dropDownVisible: currentVisibility });
+  }
+
+  _onSelect(value, isInternal) {
+    if (!value) {
+      return;
+    }
+    var options = this.props.options,
+    selectedOption = {},
+    matched = false,
+    len = options.length;
+    for (let i = 0; i < len; i++) {
+      if (value.constructor === String && value === options[i].value) {
+        selectedOption = Object.assign({}, options[i]);
+        break;
+      } else
+      if (value.constructor === Object) {
+        for (let k in value) {
+          if (value[k] === options[i].value[k]) {
+            matched = true;
+          } else
+          {
+            matched = false;
+            break;
+          }
+        }
+        if (matched) {
+          selectedOption = Object.assign({}, options[i]);
+          break;
+        }
+      }
+    }
+    if (!selectedOption.value) {
+      selectedOption = Object.assign({}, options[0]);
+    }
+    this.setState({
+      dropDownVisible: !isInternal ? !this.state.dropDownVisible : this.state.dropDownVisible,
+      placeholder: selectedOption.label || this.state.defaultPlaceHolder },
+    function () {
+      if (selectedOption.value) {
+        this.props.onSelectHandler(selectedOption);
+      }
+    });
+
+  }
+
+  _handleDocumentClick() {
+    if (! /* istanbul ignore next */_reactDom2.default.findDOMNode(this).contains(event.target)) {
+      this.setState({ dropDownVisible: false });
+    }
+  }
+
+
+  componentDidMount() {
+    document.addEventListener('click', this._handleDocumentClick, false);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("click", this._handleDocumentClick, false);
+  }
+
+
+  render() {
+
+    return (
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-dropdown-wrapper', onClick: !this.props.disabled ? this._toggleDropdown.bind(this) : null, __source: { fileName: _jsxFileName, lineNumber: 90 }, __self: this },
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'gor-dropdown ' + (this.state.dropDownVisible ? 'gor-white-background' : ''), __source: { fileName: _jsxFileName, lineNumber: 92 }, __self: this }, !this.props.resetOnSelect ? this.state.placeholder : this.state.defaultPlaceHolder),
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: this.state.dropDownVisible ? "gor-dropdown-arrow up" : "gor-dropdown-arrow", __source: { fileName: _jsxFileName, lineNumber: 93 }, __self: this }),
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_list2.default, /* istanbul ignore next */{ data: this.props.options, selectedOption: this.props.selectedOption, optionAction: this._onSelect.bind(this),
+          dropDownVisible: this.state.dropDownVisible, __source: { fileName: _jsxFileName, lineNumber: 94 }, __self: this })));
+
+
+  }} /* istanbul ignore next */exports.default =
+
+
+
+
+Dropdown;

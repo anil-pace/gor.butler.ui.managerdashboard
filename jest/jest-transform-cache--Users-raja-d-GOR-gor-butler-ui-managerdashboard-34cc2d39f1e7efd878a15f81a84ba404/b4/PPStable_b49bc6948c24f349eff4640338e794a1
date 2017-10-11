@@ -1,0 +1,512 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/containers/systemTabs/PPStable.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_fixedDataTable = require('fixed-data-table');
+var /* istanbul ignore next */_reactDimensions = require('react-dimensions'); /* istanbul ignore next */var _reactDimensions2 = _interopRequireDefault(_reactDimensions);
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_commonFunctionsDataTable = require('../../components/commonFunctionsDataTable');
+
+
+
+
+
+
+
+
+
+
+var /* istanbul ignore next */_frontEndConstants = require('../../constants/frontEndConstants');
+
+var /* istanbul ignore next */_reactReduxModal = require('react-redux-modal');
+var /* istanbul ignore next */_confirmApplyProfile = require('./confirmApplyProfile'); /* istanbul ignore next */var _confirmApplyProfile2 = _interopRequireDefault(_confirmApplyProfile);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+const messages = /* istanbul ignore next */(0, _reactIntl.defineMessages)({
+    ppsPlaceholder: {
+        id: 'pps.dropdown.placeholder',
+        description: 'mode change for pps',
+        defaultMessage: 'Change PPS Mode' } });
+
+
+
+
+
+class PPStable extends /* istanbul ignore next */_react2.default.Component {
+    constructor(props) {
+        super(props);
+        var temp;
+        if (this.props.items === undefined) {
+            this._dataList = new /* istanbul ignore next */_commonFunctionsDataTable.tableRenderer(0);
+            temp = new Array(0).fill(false);
+        } else
+        {
+            this._dataList = new /* istanbul ignore next */_commonFunctionsDataTable.tableRenderer(this.props.items.length);
+            temp = new Array(this.props.items.length).fill(false);
+        }
+        this._defaultSortIndexes = [];
+        this._dataList.newData = this.props.items;
+        var size = this._dataList.getSize();
+        for (var index = 0; index < size; index++) {
+            this._defaultSortIndexes.push(index);
+        }
+        this.state = {
+            sortedDataList: this._dataList,
+            colSortDirs: {},
+            columnWidths: {
+                id: this.props.containerWidth * 0.12,
+                status: this.props.containerWidth * 0.1,
+                operatingMode: this.props.containerWidth * 0.15,
+                performance: this.props.containerWidth * 0.1,
+                operatorAssigned: this.props.containerWidth * 0.2,
+                profiles: this.props.containerWidth * 0.33 },
+
+            headerChecked: false,
+            isChecked: temp };
+
+        this._onSortChange = this._onSortChange.bind(this);
+        this._onFilterChange = this._onFilterChange.bind(this);
+        this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+
+    }
+
+    confirmApplyProfileChanges(pps_id, profile_name) {
+        /* istanbul ignore next */_reactReduxModal.modal.add( /* istanbul ignore next */_confirmApplyProfile2.default, {
+            title: '',
+            size: 'large', // large, medium or small,
+            closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+            hideCloseButton: true, // (optional) if you don't wanna show the top right close button
+            //.. all what you put in here you will get access in the modal props ;)
+            pps_id: pps_id,
+            profile_name: profile_name.value });
+
+    }
+
+
+    componentWillReceiveProps(nextProps) {
+        if (JSON.stringify(this.props.items) === JSON.stringify(nextProps.items)) {
+            return;
+        }
+        if (nextProps.items === undefined) {
+            this._dataList = new /* istanbul ignore next */_commonFunctionsDataTable.tableRenderer(0);
+        } else
+        {
+            this._dataList = new /* istanbul ignore next */_commonFunctionsDataTable.tableRenderer(nextProps.items.length);
+        }
+        this._defaultSortIndexes = [];
+        this._dataList.newData = nextProps.items;
+        var size = this._dataList.getSize();
+        for (var index = 0; index < size; index++) {
+            this._defaultSortIndexes.push(index);
+        }
+        if (!this.props.checkedPps && nextProps.items) {
+            //var initialCheckState=new Array(nextProps.items.length).fill(false);
+            this.props.setCheckedPps({});
+        }
+        this.state = {
+            sortedDataList: this._dataList,
+            colSortDirs: {},
+            columnWidths: {
+
+                id: nextProps.containerWidth * 0.12,
+                status: nextProps.containerWidth * 0.1,
+                operatingMode: nextProps.containerWidth * 0.15,
+                performance: nextProps.containerWidth * 0.1,
+                operatorAssigned: nextProps.containerWidth * 0.18,
+                profiles: nextProps.containerWidth * 0.33 },
+
+
+            headerChecked: this.state.headerChecked,
+            isChecked: this.props.checkedPps };
+
+        this.props.updateSortedDataList(this._dataList);
+
+
+        this._onSortChange = this._onSortChange.bind(this);
+        this._onFilterChange = this._onFilterChange.bind(this);
+        this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+        if (this.props.items && this.props.items.length) {
+            this._onFilterChange(nextProps.getPpsFilter);
+        }
+    }
+
+    /**
+       * Hack for fixing the bug https://work.greyorange.com/jira/browse/BSS-656
+       * This has to be removed once we get rid of the fixedDataTable
+       * @param  {Number} rowIndex rowindex on which the click was initiated
+       */
+    _handleOnClickDropdown(event, index) {
+        var el = event.target;
+        var elClassName = el.className.trim(),
+        parentEl,siblingEl,totalRowCount = this.props.items.length - 1;
+        if (elClassName !== "gor-dropdown-wrapper" && elClassName !== "gor-dropdown" && elClassName !== 'gor-audit-info-icon') {
+            return;
+        }
+        parentEl = el.parentNode;
+        while (parentEl) {
+            if (parentEl.className === "fixedDataTableRowLayout_rowWrapper") {
+                parentEl.parentNode.childNodes.forEach(function (node) {
+                    node.style.zIndex = "0";
+                });
+                parentEl.style.zIndex = "300";
+                if (index === totalRowCount && totalRowCount !== 0) {
+                    if (elClassName !== "gor-dropdown-wrapper") {
+                        siblingEl = el.parentNode.nextSibling;
+                    } else
+                    {
+                        siblingEl = el.nextSibling;
+                    }
+                    if (siblingEl) {
+                        siblingEl.style.bottom = '100%';
+                        siblingEl.style.top = 'initial';
+                    }
+
+                }
+                break;
+            } else
+            {
+                parentEl = parentEl.parentNode;
+            }
+        }
+    }
+
+    _onColumnResizeEndCallback(newColumnWidth, columnKey) {
+        this.setState(({ columnWidths }) => ({
+            columnWidths: /* istanbul ignore next */Object.assign({},
+            columnWidths, {
+                [columnKey]: newColumnWidth }) }));
+
+
+    }
+
+    _onFilterChange(e) {
+        var filterField = ["operatingMode", "id", "status", "performance", "operatorAssigned"],newData;
+        if (e.target && !e.target.value) {
+            this.props.updateSortedDataList(this._dataList);
+            this.setState({
+                sortedDataList: this._dataList });
+
+        }
+        if (e.target && (e.target.value || e.target.value === "")) {
+            var captureValue = e.target.value;
+            newData = new /* istanbul ignore next */_commonFunctionsDataTable.DataListWrapper( /* istanbul ignore next */(0, _commonFunctionsDataTable.filterIndex)(e, this.state.sortedDataList, filterField), this._dataList);
+            this.props.updateSortedDataList(newData);
+            this.setState({
+                sortedDataList: newData },
+            function () {
+                this.props.setPpsFilter(captureValue);
+                if (this.props.items && this.props.items.length) {
+                    this._onSortChange(this.props.currentSortState, this.props.currentHeaderOrder);
+                }
+            });
+        } else
+
+        {
+            newData = new /* istanbul ignore next */_commonFunctionsDataTable.DataListWrapper( /* istanbul ignore next */(0, _commonFunctionsDataTable.filterIndex)(e, this.state.sortedDataList, filterField), this._dataList);
+            this.props.updateSortedDataList(newData);
+            this.setState({
+                sortedDataList: newData },
+            function () {
+                if (this.props.items && this.props.items.length) {
+                    this._onSortChange(this.props.currentSortState, this.props.currentHeaderOrder);
+                }
+            });
+        }
+    }
+
+    handleChange(columnKey, rowIndex, evt) {
+        var checkedPPS = JSON.parse(JSON.stringify(this.props.checkedPps));
+        var sortedDataList = this.state.sortedDataList;
+        var selectedData = sortedDataList._data ?
+        sortedDataList._data.newData[sortedDataList._indexMap[rowIndex]] :
+        sortedDataList.newData[rowIndex];
+        if (evt.target.checked) {
+            checkedPPS[selectedData[columnKey]] = selectedData;
+        } else
+        {
+            delete checkedPPS[selectedData[columnKey]];
+        }
+
+
+        this.props.setCheckedPps(checkedPPS);
+        this.props.renderDdrop(Object.keys(checkedPPS).length ? true : false);
+    }
+
+
+    _onSortChange(columnKey, sortDir) {
+        if (!columnKey) {
+            columnKey = "id";
+        }
+
+        if (columnKey === /* istanbul ignore next */_frontEndConstants.GOR_STATUS) {
+            columnKey = /* istanbul ignore next */_frontEndConstants.GOR_STATUS_PRIORITY;
+        }
+        var sortIndexes = this._defaultSortIndexes.slice();
+        if (this.state.sortedDataList._indexMap) {
+            sortIndexes = this.state.sortedDataList._indexMap.slice();
+        }
+        this.props.updateSortedDataList(new /* istanbul ignore next */_commonFunctionsDataTable.DataListWrapper( /* istanbul ignore next */(0, _commonFunctionsDataTable.sortData)(columnKey, sortDir, sortIndexes, this._dataList), this._dataList));
+        this.setState({
+            sortedDataList: new /* istanbul ignore next */_commonFunctionsDataTable.DataListWrapper( /* istanbul ignore next */(0, _commonFunctionsDataTable.sortData)(columnKey, sortDir, sortIndexes, this._dataList), this._dataList),
+            colSortDirs: {
+                [columnKey]: sortDir } });
+
+
+        this.props.sortHeaderOrder(sortDir);
+        this.props.sortHeaderState(columnKey);
+    }
+
+    headerCheckChange(evt) {
+        var isChecked = evt.target.checked;
+        this.setState({
+            headerChecked: !this.state.headerChecked },
+        function () {
+            var checkedPPS = JSON.parse(JSON.stringify(this.props.checkedPps));
+            if (isChecked) {
+                for (let i = 0, len = this.props.items.length; i < len; i++) {
+                    checkedPPS[this.props.items[i]["ppsId"]] = this.props.items[i];
+                }
+
+            } else
+            {
+                checkedPPS = {};
+            }
+
+
+            this.props.setCheckedPps(checkedPPS);
+            this.props.renderDdrop(Object.keys(checkedPPS).length ? true : false);
+        });
+
+    }
+
+    render() {
+        let updateStatusIntl = ""; /* istanbul ignore next */var _state =
+        this.state; /* istanbul ignore next */let sortedDataList = _state.sortedDataList,colSortDirs = _state.colSortDirs,columnWidths = _state.columnWidths,headerChecked = _state.headerChecked,
+        checkedPPS = [];
+        let checkState = this.handleChange.bind(this);
+        let ppsTotal = sortedDataList.getSize();
+        let pick = this.props.operationMode.pick;
+        let put = this.props.operationMode.put;
+        let audit = this.props.operationMode.audit;
+        let notSet = this.props.operationMode.notSet;
+        let operatorNum = this.props.operatorNum,j = 1;
+        let ppsOnState = this.props.ppsOnState;
+        let avgThroughput = this.props.avgThroughput;
+        let containerHeight = this.props.containerHeight;
+        let noData = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 291 }, __self: this });
+        if (ppsTotal === 0 || ppsTotal === undefined || ppsTotal === null) {
+            noData = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-no-data', __source: { fileName: _jsxFileName, lineNumber: 293 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'PPStable.table.noData',
+                    description: 'No data message for PPStable',
+                    defaultMessage: 'No PPS Found', __source: { fileName: _jsxFileName, lineNumber: 293 }, __self: this }));
+            containerHeight = /* istanbul ignore next */_frontEndConstants.GOR_TABLE_HEADER_HEIGHT;
+        }
+
+        let checkedStatePps = [];
+        if (this.props.checkedPps) {
+            checkedStatePps = this.props.checkedPps;
+        }
+
+        return (
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorTableMainContainer pps-table', __source: { fileName: _jsxFileName, lineNumber: 305 }, __self: this },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Table, /* istanbul ignore next */Object.assign({
+                        rowHeight: 50,
+                        rowsCount: sortedDataList.getSize(),
+                        headerHeight: 70,
+                        onColumnResizeEndCallback: this._onColumnResizeEndCallback,
+                        isColumnResizing: false,
+                        width: this.props.containerWidth,
+                        height: containerHeight,
+                        onRowClick: this._handleOnClickDropdown.bind(this) },
+                    this.props, { __source: { fileName: _jsxFileName, lineNumber: 306 }, __self: this }),
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+                        columnKey: 'id',
+                        header:
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 319 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-header-check', __source: { fileName: _jsxFileName, lineNumber: 320 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'input', /* istanbul ignore next */{ type: 'checkbox', checked: headerChecked,
+                                    onChange: this.headerCheckChange.bind(this), __source: { fileName: _jsxFileName, lineNumber: 321 }, __self: this })),
+
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-header-id', __source: { fileName: _jsxFileName, lineNumber: 324 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.SortHeaderCell, /* istanbul ignore next */{ onSortChange: this._onSortChange,
+                                        sortDir: colSortDirs.id, __source: { fileName: _jsxFileName, lineNumber: 325 }, __self: this },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 327 }, __self: this },
+                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'PPStable.ppsColumn.heading',
+                                            description: 'PPS - column Heading',
+                                            defaultMessage: 'PPS', __source: { fileName: _jsxFileName, lineNumber: 328 }, __self: this }),
+                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderSubText', __source: { fileName: _jsxFileName, lineNumber: 331 }, __self: this },
+                                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'PPStable.Subpps', description: 'sub pps',
+                                                defaultMessage: 'Total: {ppsTotal}',
+                                                values: { ppsTotal: ppsTotal ? ppsTotal : '0' }, __source: { fileName: _jsxFileName, lineNumber: 332 }, __self: this })))))),
+
+
+
+
+
+
+                        cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.PPSComponentCell, /* istanbul ignore next */{ checkboxColumn: "ppsId", data: sortedDataList, checkState: checkState,
+                            checked: checkedStatePps, __source: { fileName: _jsxFileName, lineNumber: 341 }, __self: this }),
+                        fixed: true,
+                        width: columnWidths.id,
+                        isResizable: true, __source: { fileName: _jsxFileName, lineNumber: 316 }, __self: this }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+                        columnKey: 'status',
+                        header:
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.SortHeaderCell, /* istanbul ignore next */{ onSortChange: this._onSortChange,
+
+                                sortDir: colSortDirs.statusPriority, __source: { fileName: _jsxFileName, lineNumber: 350 }, __self: this },
+
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 354 }, __self: this },
+
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'PPS.table.status', description: 'Status for PPS',
+                                    defaultMessage: 'STATUS', __source: { fileName: _jsxFileName, lineNumber: 356 }, __self: this }),
+
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gor-subStatus-online', __source: { fileName: _jsxFileName, lineNumber: 359 }, __self: this },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 360 }, __self: this },
+                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'PPStable.status', description: 'status for PPS table',
+                                            defaultMessage: '{ppsOnState} Open',
+                                            values: { ppsOnState: ppsOnState ? ppsOnState : '0' }, __source: { fileName: _jsxFileName, lineNumber: 361 }, __self: this }))))),
+
+
+
+
+
+                        cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.StatusCell, /* istanbul ignore next */{ data: sortedDataList, statusKey: 'statusClass', __source: { fileName: _jsxFileName, lineNumber: 369 }, __self: this }),
+                        fixed: true,
+                        width: columnWidths.status,
+                        isResizable: true, __source: { fileName: _jsxFileName, lineNumber: 347 }, __self: this }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+                        columnKey: 'operatingMode',
+                        header:
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.SortHeaderCell, /* istanbul ignore next */{ onSortChange: this._onSortChange,
+                                sortDir: colSortDirs.operatingMode, __source: { fileName: _jsxFileName, lineNumber: 377 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 379 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'PPS.table.operatingMode', description: 'operatingMode for PPS',
+                                    defaultMessage: 'CURRENT MODE', __source: { fileName: _jsxFileName, lineNumber: 380 }, __self: this }),
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderSubText', __source: { fileName: _jsxFileName, lineNumber: 382 }, __self: this },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'PPStable.ppsState', description: 'pps state for PPStable',
+                                        defaultMessage: 'Pick ({pick}) . Put ({put}) . Audit ({audit}) . Not set ({notSet})',
+                                        values: {
+                                            pick: pick ? pick : '0',
+                                            put: put ? put : '0',
+                                            audit: audit ? audit : '0',
+                                            notSet: notSet ? notSet : '0' }, __source: { fileName: _jsxFileName, lineNumber: 383 }, __self: this })))),
+
+
+
+
+
+
+                        cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.TextCell, /* istanbul ignore next */{ data: sortedDataList, childrenClass: 'requestedModeTxt', childColumnKey: 'pps_requested_mode', classKey: "operatingModeClass", __source: { fileName: _jsxFileName, lineNumber: 396 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 397 }, __self: this }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'PPStable.requestedMode.text', description: 'PPStable.requestedMode.text',
+                                    defaultMessage: 'Requested Mode: ', __source: { fileName: _jsxFileName, lineNumber: 397 }, __self: this }))),
+
+
+                        fixed: true,
+                        width: columnWidths.operatingMode,
+                        isResizable: true, __source: { fileName: _jsxFileName, lineNumber: 374 }, __self: this }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+                        columnKey: 'requested_status',
+                        header:
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.SortHeaderCell, /* istanbul ignore next */{ onSortChange: this._onSortChange,
+                                sortDir: colSortDirs.operatingMode, __source: { fileName: _jsxFileName, lineNumber: 408 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 410 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'PPS.table.requestedStatus', description: 'Requested status for PPS',
+                                    defaultMessage: 'REQUESTED STATUS', __source: { fileName: _jsxFileName, lineNumber: 411 }, __self: this }))),
+
+
+
+
+                        cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.TextCell, /* istanbul ignore next */{ data: sortedDataList, classKey: "operatingModeClass", __source: { fileName: _jsxFileName, lineNumber: 417 }, __self: this }),
+                        fixed: true,
+                        width: columnWidths.operatingMode,
+                        isResizable: true, __source: { fileName: _jsxFileName, lineNumber: 405 }, __self: this }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+                        columnKey: 'performance',
+                        header:
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.SortHeaderCell, /* istanbul ignore next */{ onSortChange: this._onSortChange,
+                                sortDir: colSortDirs.performance, __source: { fileName: _jsxFileName, lineNumber: 425 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 427 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'PPS.table.performance',
+                                    description: 'performance Status for PPS',
+                                    defaultMessage: 'PERFORMANCE', __source: { fileName: _jsxFileName, lineNumber: 428 }, __self: this }),
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderSubText', __source: { fileName: _jsxFileName, lineNumber: 431 }, __self: this },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'PPStable.avgThroughput',
+                                        description: 'avgThroughput for PPStable',
+                                        defaultMessage: 'Avg {avgThroughput} items/hr',
+                                        values: { avgThroughput: avgThroughput ? avgThroughput : "0" }, __source: { fileName: _jsxFileName, lineNumber: 432 }, __self: this })))),
+
+
+
+
+                        cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.TextCell, /* istanbul ignore next */{ data: sortedDataList, __source: { fileName: _jsxFileName, lineNumber: 440 }, __self: this }),
+                        fixed: true,
+                        width: columnWidths.performance,
+                        isResizable: true, __source: { fileName: _jsxFileName, lineNumber: 422 }, __self: this }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+                        columnKey: 'operatorAssigned',
+                        header:
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.SortHeaderCell, /* istanbul ignore next */{ onSortChange: this._onSortChange,
+                                sortDir: colSortDirs.operatorAssigned, __source: { fileName: _jsxFileName, lineNumber: 448 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 450 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'PPS.table.operatorAssigned',
+                                    description: 'operatorAssigned for PPS',
+                                    defaultMessage: 'OPERATOR ASSIGNED', __source: { fileName: _jsxFileName, lineNumber: 451 }, __self: this }),
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderSubText', __source: { fileName: _jsxFileName, lineNumber: 454 }, __self: this },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'PPStable.totalOperator',
+                                        description: 'totalOperator for PPStable',
+                                        defaultMessage: '{operatorNum} operators',
+                                        values: { operatorNum: operatorNum ? operatorNum : '0' }, __source: { fileName: _jsxFileName, lineNumber: 455 }, __self: this })))),
+
+
+
+
+                        cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.TextCell, /* istanbul ignore next */{ data: sortedDataList, __source: { fileName: _jsxFileName, lineNumber: 463 }, __self: this }),
+                        fixed: true,
+                        width: columnWidths.operatorAssigned,
+                        isResizable: true, __source: { fileName: _jsxFileName, lineNumber: 445 }, __self: this }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Column, /* istanbul ignore next */{
+                        columnKey: 'profiles',
+                        header:
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_fixedDataTable.Cell, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 471 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderEl', __source: { fileName: _jsxFileName, lineNumber: 472 }, __self: this },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.FormattedMessage, /* istanbul ignore next */{ id: 'PPS.table.profiles',
+                                    description: 'profiles for PPS',
+                                    defaultMessage: 'PROFILES USED', __source: { fileName: _jsxFileName, lineNumber: 473 }, __self: this }),
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gorToolHeaderSubText', __source: { fileName: _jsxFileName, lineNumber: 476 }, __self: this }))),
+
+
+
+
+
+                        cell: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_commonFunctionsDataTable.ActionCellPPS, /* istanbul ignore next */{ confirmApplyProfile: this.confirmApplyProfileChanges.bind(this), data: sortedDataList, __source: { fileName: _jsxFileName, lineNumber: 482 }, __self: this }),
+                        fixed: true,
+                        width: columnWidths.profiles,
+                        isResizable: true, __source: { fileName: _jsxFileName, lineNumber: 468 }, __self: this })),
+
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 488 }, __self: this }, /* istanbul ignore next */' ', noData, /* istanbul ignore next */' ')));
+
+
+    }}
+
+
+PPStable.PropTypes = {
+    items: /* istanbul ignore next */_react2.default.PropTypes.array,
+    containerWidth: /* istanbul ignore next */_react2.default.PropTypes.number,
+    itemNumber: /* istanbul ignore next */_react2.default.PropTypes.number,
+    currentHeaderOrder: /* istanbul ignore next */_react2.default.PropTypes.object,
+    sortHeaderState: /* istanbul ignore next */_react2.default.PropTypes.func,
+    lastUpdatedText: /* istanbul ignore next */_react2.default.PropTypes.string,
+    showFilter: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    lastUpdated: /* istanbul ignore next */_react2.default.PropTypes.string,
+    ppsFilterState: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    setFilter: /* istanbul ignore next */_react2.default.PropTypes.func,
+    containerHeight: /* istanbul ignore next */_react2.default.PropTypes.number,
+    currentSortState: /* istanbul ignore next */_react2.default.PropTypes.string,
+    responseFlag: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    getCheckAll: /* istanbul ignore next */_react2.default.PropTypes.bool }; /* istanbul ignore next */exports.default =
+
+
+
+/* istanbul ignore next */(0, _reactDimensions2.default)()(PPStable);

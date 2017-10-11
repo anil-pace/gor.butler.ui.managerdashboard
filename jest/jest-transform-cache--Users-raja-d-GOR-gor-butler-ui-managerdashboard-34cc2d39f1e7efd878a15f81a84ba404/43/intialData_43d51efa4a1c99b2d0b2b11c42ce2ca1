@@ -1,0 +1,14 @@
+/* istanbul ignore next */"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.preloadedState = undefined;var /* istanbul ignore next */_i18n = require("./i18n");
+
+var brsrLocale = navigator.language;
+brsrLocale = brsrLocale.substring(0, 2);
+
+
+const preloadedState = /* istanbul ignore next */exports.preloadedState = {
+  "ordersInfo":
+  { "ordersData": { cut_off: null, count_pending: null, count_risk: null, eta: null, wave_end: null } },
+  "intl": {
+    "messages": /* istanbul ignore next */_i18n.translationMessages[brsrLocale] },
+
+  "appInfo": {
+    "notifyInfo": null } };

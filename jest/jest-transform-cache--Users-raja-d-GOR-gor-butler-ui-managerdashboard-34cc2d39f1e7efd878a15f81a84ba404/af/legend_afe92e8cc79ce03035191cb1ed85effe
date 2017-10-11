@@ -1,0 +1,42 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/components/legend/legend.js'; /**
+                                                                                                                                                                                                             * Component for creating graph legend 
+                                                                                                                                                                                                             */
+var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_legendElement = require('./legendElement'); /* istanbul ignore next */var _legendElement2 = _interopRequireDefault(_legendElement);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+
+class Legend extends /* istanbul ignore next */_react2.default.Component {
+
+  shouldComponentUpdate(nextProps) {
+    return this.props.hasDataChanged !== nextProps.hasDataChanged;
+  }
+
+  _processData() {
+    var _this = this;
+    var data = _this.props.legendData.data || [];
+    var config = _this.props.legendData.config || {};
+    var elements = data.map(function (item, i) {
+      return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_legendElement2.default, /* istanbul ignore next */{ legendType: _this.props.legendType, color: item.color, xpos: config.xpos + i * config.xIncrement, ypos: config.ypos, name: item.name, key: i, __source: { fileName: _jsxFileName, lineNumber: 21 }, __self: this }));
+
+    });
+    return elements;
+  }
+
+  render() {
+    var elements = this._processData();
+    return (
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'svg', /* istanbul ignore next */{ className: 'legend', width: this.props.legendData.config.containerWidth, height: this.props.legendData.config.containerHeight, style: { "float": "right" }, __source: { fileName: _jsxFileName, lineNumber: 30 }, __self: this },
+        elements));
+
+
+  }}
+;
+Legend.propTypes = {
+  legendData: /* istanbul ignore next */_react2.default.PropTypes.object };
+
+Legend.contextTypes = {
+  intl: /* istanbul ignore next */_react2.default.PropTypes.object.isRequired }; /* istanbul ignore next */exports.default =
+
+Legend;

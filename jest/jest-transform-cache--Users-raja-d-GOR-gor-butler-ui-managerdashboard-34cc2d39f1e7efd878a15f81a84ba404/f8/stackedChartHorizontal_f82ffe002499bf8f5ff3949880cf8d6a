@@ -1,0 +1,135 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/Users/raja.d/GOR/gor.butler.ui.managerdashboard/src/components/graphd3/stackedChartHorizontal.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactD3Library = require('react-d3-library'); /* istanbul ignore next */var _reactD3Library2 = _interopRequireDefault(_reactD3Library);
+var /* istanbul ignore next */_d = require('d3'); /* istanbul ignore next */var d3 = _interopRequireWildcard(_d);
+var /* istanbul ignore next */_frontEndConstants = require('../../constants/frontEndConstants');
+var /* istanbul ignore next */_reactIntl = require('react-intl'); /* istanbul ignore next */function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+//Mesages for internationalization
+const messages = /* istanbul ignore next */(0, _reactIntl.defineMessages)({
+  invUsedSpace: {
+    id: 'snapshot.inventory.usedSpace',
+    description: 'Text for used space',
+    defaultMessage: "{utilisedSpace}% space utilized" } });
+
+
+
+
+
+
+const RD3Component = /* istanbul ignore next */_reactD3Library2.default.Component;
+
+
+class StackedChartHorizontal extends /* istanbul ignore next */_react2.default.Component {
+  constructor(props)
+  {
+    super(props);
+    this.state = { d3: '' };
+  }
+
+
+
+  componentDidMount() {
+    this._processData(this.props.snapshotData, this.props.config);
+  }
+  componentWillReceiveProps(nextProps) {
+    this._processData(nextProps.snapshotData, nextProps.config);
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    if (!Object.keys(nextProps.snapshotData).length) {
+      return false;
+    }
+    return true;
+
+  }
+
+  _processData(data, config) {
+    config = /* istanbul ignore next */_frontEndConstants.SCH_CONFIG;
+    var node = document.createElement('div');
+    var svg = d3.select(node).append('svg').
+    attr("width", config.svgInfo.width).
+    attr("height", config.svgInfo.height).
+    append("g").
+    attr("transform", "translate(" + config.svgInfo.x + "," + config.svgInfo.y + ")");
+    var totalSpaceUtilization = data ? data.warehouse_utilization : 0;
+    var totalSpaceInPx = totalSpaceUtilization / 100 * config.svgInfo.width;
+    var unusedSpace = data ? data.unusedSpace : 100;
+    var unusedColorCode = data ? data.colorCode : "#EEE";
+    data = data.category_data ? data.category_data : [];
+    var x = 0; //utilisedSpace=0;
+    var values = { "utilisedSpace": totalSpaceUtilization };
+
+    if (unusedSpace) {
+      for (let i = 0, l = data.length; i < l; i++) {
+
+        svg.append("rect").
+        attr("x", x + "px").
+        attr("y", config.svgInfo.rectInfo.y).
+        attr("width", "" + (data[i].warehouse_utilization ? data[i].warehouse_utilization / 100 * totalSpaceInPx : 0) + "px").
+        attr("height", config.svgInfo.rectInfo.height).
+        style("fill", d3.rgb(data[i].colorCode));
+
+        x += data[i].warehouse_utilization ? data[i].warehouse_utilization / 100 * totalSpaceInPx : 0;
+      }
+      svg.append("rect").
+      attr("x", x + "px").
+      attr("y", config.svgInfo.rectInfo.y).
+      attr("width", "" + (totalSpaceInPx - x) + "px").
+      attr("height", config.svgInfo.rectInfo.height).
+      style("fill", d3.rgb("#EEE"));
+      svg.append("rect").
+      attr("x", totalSpaceInPx + "px").
+      attr("y", config.svgInfo.rectInfo.y).
+      attr("width", "" + unusedSpace / 100 * config.svgInfo.width + "px").
+      attr("height", config.svgInfo.rectInfo.height).
+      style("fill", d3.rgb(unusedColorCode));
+
+      if (totalSpaceUtilization) {
+        let textXPos = x - 14;
+        if (textXPos < 0) {
+          textXPos = 0;
+        } else
+        if (textXPos >= config.svgInfo.width) {
+          textXPos = config.svgInfo.width - 170;
+        }
+        svg.append("line").
+        attr("x1", totalSpaceInPx + "px").
+        attr("x2", totalSpaceInPx + "px").
+        attr("y1", config.svgInfo.lineInfo.y1).
+        attr("y2", config.svgInfo.lineInfo.y2).
+        style("stroke", d3.rgb(config.svgInfo.lineInfo.stroke)).
+        style("stroke-width", config.svgInfo.lineInfo["stroke-width"]);
+        svg.append("text").
+        attr("x", textXPos + "px").
+        attr("y", config.svgInfo.textInfo.y).
+        text(this.context.intl.formatMessage(messages.invUsedSpace, values));
+      } else
+      {
+        svg.append("text").
+        attr("x", config.svgInfo.width / 2 - 44).
+        attr("y", Number(config.svgInfo.height) / 2).
+        text(this.context.intl.formatMessage(messages.invUsedSpace, values));
+      }
+    }
+    this.setState({ d3: node });
+  }
+
+  render() {
+
+    return (
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 119 }, __self: this },
+        /* istanbul ignore next */_react2.default.createElement(RD3Component, /* istanbul ignore next */{ data: this.state.d3, __source: { fileName: _jsxFileName, lineNumber: 120 }, __self: this })));
+
+
+  }}
+;
+
+StackedChartHorizontal.propTypes = {
+  snapshotData: /* istanbul ignore next */_react2.default.PropTypes.object,
+  hasDataChanged: /* istanbul ignore next */_react2.default.PropTypes.bool };
+
+StackedChartHorizontal.contextTypes = {
+  intl: /* istanbul ignore next */_react2.default.PropTypes.object.isRequired }; /* istanbul ignore next */exports.default =
+
+
+
+StackedChartHorizontal;
