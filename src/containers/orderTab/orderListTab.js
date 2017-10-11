@@ -27,7 +27,8 @@ import {
     UPDATE_TIME_HIGH,
     UPDATE_TIME_LOW, UPDATE_TIME,
     EXCEPTION_TRUE,
-    WAREHOUSE_STATUS,
+    WAREHOUSE_STATUS_SINGLE,
+    WAREHOUSE_STATUS_MULTIPLE,
     FILTER_ORDER_ID, GIVEN_PAGE, GIVEN_PAGE_SIZE, ORDER_ID_FILTER_PARAM
 } from '../../constants/configConstants';
 import OrderListTable from './orderListTable';
@@ -118,6 +119,8 @@ class OrderListTab extends React.Component {
      * @private
      */
 
+
+
      _refreshList(query,orderbyParam) {
         var orderbyUrl;
         this.props.setOrderListSpinner(true);
@@ -149,7 +152,26 @@ class OrderListTab extends React.Component {
         (indexOfBreached> -1)? statusList.splice(indexOfException-1, 1):statusList.splice(indexOfException, 1);
          _query_params.push([EXCEPTION_TRUE, "true"].join("="))
          }
+         //Case 2 & Case 3:
+         if (statusList.length > 0) {
+            let _flattened_statuses=[]
+            statusList=statusList.constructor===Array?statusList:[statusList]
+            statusList.forEach(function (status) {
+                _flattened_statuses.push(status.split("__"))
+            })
+            statusList=[].concat.apply([], _flattened_statuses)
+            if(statusList.length==1){
+                _query_params.push([WAREHOUSE_STATUS_SINGLE,statusList.toString() ].join("=="))
+            }
+            else if(statusList.length>1){
+            _query_params.push([WAREHOUSE_STATUS_MULTIPLE,"("+statusList.toString()+")" ].join("="))
+        }
+         }
 
+
+
+
+/*//Original Code:
          if (statusList.length > 0) {
             let _flattened_statuses=[]
             statusList=statusList.constructor===Array?statusList:[statusList]
@@ -160,24 +182,32 @@ class OrderListTab extends React.Component {
             _query_params.push([WAREHOUSE_STATUS,"['"+statusList.join("','")+"']" ].join("="))
 
          }
+         */
 
      }
 
 
-        //appending filter for orders by time
+        //appending filter for orders by time(only time):
+        
+        
         if (query.period) {
             let timeOut=query.period.constructor=== Array ? query.period[0] : query.period
-            let currentTime=new Date();
-            let prevTime=new Date();
-            prevTime=new Date(prevTime.setHours(prevTime.getHours() - convertTime[timeOut]));
-            prevTime=prevTime.toISOString();
-            currentTime=currentTime.toISOString();
-            _query_params.push([UPDATE_TIME, currentTime].join("<="))
-            _query_params.push([UPDATE_TIME, prevTime].join(">="))
-        }
-        let url=API_URL + ORDERS_URL
+            
+            _query_params.push("time="+convertTime[timeOut]);
+            _query_params.push("timeUnit="+(timeOut.indexOf("day")!==-1  ? "days":"hours") );
+             
+            
 
-        _query_params.push([GIVEN_PAGE, query.page || 1].join("="))
+           
+
+        }
+
+
+        //let url=API_URL + ORDERS_URL
+
+        let url = ORDERS_URL;
+
+        _query_params.push([GIVEN_PAGE, query.page || 0].join("="))
         _query_params.push([GIVEN_PAGE_SIZE, this.props.filterOptions.pageSize || 25].join("="));
         if(orderbyParam && orderbyParam.sortDir){
             orderbyParam? _query_params.push(['order',toggleOrder(orderbyParam.sortDir)].join("=")):"";
@@ -198,7 +228,8 @@ class OrderListTab extends React.Component {
             'method': 'GET',
             'cause': ORDERS_RETRIEVE,
             'token': this.props.auth_token,
-            'contentType': 'application/json'
+            'contentType': 'application/json',
+            'accept':'application/json'
         }
         if (Object.keys(query).filter(function (el) {
             return el !== 'page'
@@ -375,6 +406,7 @@ class OrderListTab extends React.Component {
         var url;
         if (data.url=== undefined) {
             url=API_URL + ORDERS_URL + ORDER_PAGE + (data.selected) + "&PAGE_SIZE=25";
+            //url="http://192.168.8.116:8080/api-gateway/dashboard-service/platform-dashboard/api/orders?page=1&PAGE_SIZE=25"
         }
 
         else {
@@ -387,7 +419,8 @@ class OrderListTab extends React.Component {
             'method': 'GET',
             'cause': ORDERS_RETRIEVE,
             'token': this.props.auth_token,
-            'contentType': 'application/json'
+            'contentType': 'application/json',
+
         }
         this.props.setOrderListSpinner(true);
         this.props.currentPage(data.selected);
@@ -437,7 +470,7 @@ class OrderListTab extends React.Component {
          }
         //for backend sorting
         if (data.columnKey && data.sortDir) {
-            appendSortUrl=sortOrderHead[data.columnKey] + sortOrder[data.sortDir];
+            appendSortUrl= sortOrder[data.sortDir]+sortOrderHead[data.columnKey];
         }
         else if (this.props.orderSortHeaderState && this.props.orderSortHeader && this.props.orderSortHeaderState.colSortDirs) {
             appendSortUrl=sortOrderHead[this.props.orderSortHeader] + sortOrder[this.props.orderSortHeaderState.colSortDirs[this.props.orderSortHeader]]
@@ -465,7 +498,7 @@ class OrderListTab extends React.Component {
                 appendStatusUrl=EXCEPTION_TRUE;
             }
             else {
-                appendStatusUrl=status.length !== 0 ? (WAREHOUSE_STATUS + "['" + status + "']" + breachedtext) : breachedtext;
+                appendStatusUrl=status.length !== 0 ? (WAREHOUSE_STATUS_SINGLE + "['" + status + "']" + breachedtext) : breachedtext;
             }
             data.selected=1;
             filterApplied=true;
@@ -486,8 +519,8 @@ class OrderListTab extends React.Component {
 
         //generating api url by pagination page no.
         data.url="";
-        data.url=API_URL + ORDERS_URL + ORDER_PAGE + (data.selected ? data.selected : 1);
-
+        //data.url=API_URL + ORDERS_URL + ORDER_PAGE + (data.selected ? data.selected : 1);
+        data.url="http://192.168.8.116:8080/api-gateway/dashboard-service/platform-dashboard/api/orders?page=0";
         //appending page size filter
         if(!pageSize) {
             if (this.props.filterOptions.pageSize === undefined) {

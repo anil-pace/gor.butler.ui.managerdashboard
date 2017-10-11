@@ -143,15 +143,20 @@ export const  stringConfig= defineMessages({
         description: 'Text to show connected',
         defaultMessage: "Connected"
     },
-    completed:{
-        id: 'stringConfig.completed',
-        description: 'Text to show completed',
-        defaultMessage: "Completed"
-    },
-    Completed:{
-        id: 'stringConfig.Completed',
+    complete:{
+        id: 'stringConfig.complete',
         description: 'Text to show Completed',
         defaultMessage: "completed"
+    },
+    completed:{
+        id: 'stringConfig.completed',
+        description: 'Text to show Completed',
+        defaultMessage: "completed"
+    },
+    rejected: {
+        "id": "stringConfig.rejected",
+        "description": "Text to show rejected",
+        "defaultMessage": "Rejected"
     },
     in_progress:{
         id: 'stringConfig.in_progress',

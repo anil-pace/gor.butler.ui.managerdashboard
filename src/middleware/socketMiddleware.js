@@ -32,17 +32,19 @@ const socketMiddleware=(function(){
       //The user wants us to connect
       case WS_CONNECT:
         //Start a new connection to the server
-        if(socket !== null) {
+        if(socket !== null && socket.readyState === 4) {
           socket.close();
         }
         //Send an action that shows a "connecting..." status for now
         //store.dispatch(actions.connecting());
 
         //Attempt to connect (we could send a 'failed' action on error)
+        if(!socket){
         socket=new WebSocket(WS_URL);
         socket.onmessage=onMessage(socket,store);
         socket.onclose=onClose(socket,store);
         socket.onopen=onOpen(socket,store,action.token);
+      }
 
         break;
 
